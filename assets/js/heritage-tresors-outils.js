@@ -48,7 +48,7 @@
         const draw = () => {
             const picks = [...form.querySelectorAll('[name=c]:checked')].map(i => { const [q, r] = i.value.split(':').map(Number); return CLUES[q][1][r].slice(1); });
             const lo = Number(form.elements.lo.value), hi = Number(form.elements.hi.value); if (lo || hi) picks.push([lo || 1830, hi || lo || 2030]);
-            const rg = dateRange(picks); if (!rg) { out.innerHTML = '<p class="h-tr-muted">Coche au moins un indice.</p>'; return; }
+            const rg = dateRange(picks); if (!rg) { out.innerHTML = T.empty('Coche au moins un indice', {icon: '📷'}); return; }
             const age = form.elements.age.value === '' ? null : Number(form.elements.age.value), sex = form.elements.sex.value, where = form.elements.where.value.trim().toLowerCase(), mid = Math.round((rg.lo + rg.hi) / 2);
             let cands = [];
             if (age != null) cands = tr.people.filter(p => p.by && (!sex || p.gender === sex)).map(p => { const a0 = rg.lo - p.by, a1 = rg.hi - p.by; if (a1 < age - 6 || a0 > age + 6 || (p.dy && p.dy < rg.lo)) return null;
@@ -86,7 +86,8 @@
             <label>Le<input type="date" name="due" value="${isoIn(1)}"></label><label>Dans<select name="in"><option value="">—</option><option value="1">1 mois</option><option value="3">3 mois</option><option value="6">6 mois</option><option value="12">1 an</option></select></label>
             <label class="span-2">Notes<textarea name="notes" rows="4">${T.esc(notes)}</textarea></label></div>`,
             onOpen: d => d.querySelector('[name=in]').addEventListener('change', e => { if (e.target.value) d.querySelector('[name=due]').value = isoIn(Number(e.target.value)); }),
-            onSubmit: async form => { const v = k => form.elements[k].value.trim(); if (!v('title') || !v('due')) { T.toast('Il faut un texte et une date.', 'error'); return false; }
+            onSubmit: async form => { const v = k => form.elements[k].value.trim(); if (!v('title') || !v('due')) { const errs = [!v('title') && [form.elements.title, 'Écris le rappel.'], !v('due') && [form.elements.due, 'Choisis la date du rappel.']].filter(Boolean);
+                    if (window.LCNDA_UI?.formErrors) window.LCNDA_UI.formErrors(form, errs); else T.fail(errs[0][0], errs[0][1]); return false; }
                 await T.post('save_standalone_reminder', {title: v('title'), notes: v('notes'), reminder_mode: 'on', reminder_due_at: v('due'), reminder_category: 'chercher_acte'});
                 T.toast(`⏰ Rappel créé pour le ${T.dateFr(v('due'))} (Listes → Rappels).`, 'success'); }});
     }
@@ -98,8 +99,8 @@
         let rows = [];
         const draw = () => { rows = sleepingBranches(T, tr, Number(rootEl.value) || st?.id); const min = Number(minEl.value), vis = rows.filter(r => (r.months ?? 999) >= min);
             out.innerHTML = vis.length ? `<ul class="h-tr-list">${vis.map(r => `<li class="h-tr-item" data-rm-i="${rows.indexOf(r)}"><span class="h-tr-ic">${(r.months ?? 99) >= 12 ? '😴' : (r.months ?? 0) >= 3 ? '💤' : '🌱'}</span><div class="h-tr-grow"><b>${T.esc(r.label)}</b> <small>${r.count} personne${r.count > 1 ? 's' : ''}${r.names.length ? ' · ' + T.esc(r.names.join(', ')) : ''}</small><br>
-                ${r.touched ? `Pas touchée depuis <b>${r.months >= 12 ? `${Math.floor(r.months / 12)} an${r.months >= 24 ? 's' : ''}${r.months % 12 ? ` et ${r.months % 12} mois` : ''}` : `${r.months} mois`}</b> (${T.esc(T.dateFr(r.touched))})` : 'Jamais modifiée'}${r.todo.length ? ` · <b>${r.todo.length}</b> fiche${r.todo.length > 1 ? 's' : ''} à compléter : ${r.todo.slice(0, 4).map(x => `<button type="button" class="h-tr-link" data-rm-open="${x.p.id}">${T.esc(T.name(x.p))}</button> <small>(${T.esc(x.g.join(', '))})</small>`).join(', ')}${r.todo.length > 4 ? '…' : ''}` : ' · rien d’évident ne manque'}</div>
-                <button type="button" class="button small secondary" data-rm-add>⏰ Me le rappeler</button></li>`).join('')}</ul>` : '<p class="h-tr-muted">Aucune branche endormie depuis aussi longtemps : bravo !</p>'; };
+                ${r.touched ? `Pas touchée depuis <b>${r.months >= 12 ? `${Math.floor(r.months / 12)} an${r.months >= 24 ? 's' : ''}${r.months % 12 ? ` et ${r.months % 12} mois` : ''}` : `${r.months} mois`}</b> (${T.when(r.touched, {label: 'modifiée'})})` : 'Jamais modifiée'}${r.todo.length ? ` · <b>${r.todo.length}</b> fiche${r.todo.length > 1 ? 's' : ''} à compléter : ${r.todo.slice(0, 4).map(x => `<button type="button" class="h-tr-link" data-rm-open="${x.p.id}">${T.esc(T.name(x.p))}</button> <small>(${T.esc(x.g.join(', '))})</small>`).join(', ')}${r.todo.length > 4 ? '…' : ''}` : ' · rien d’évident ne manque'}</div>
+                <button type="button" class="button small secondary" data-rm-add>⏰ Me le rappeler</button></li>`).join('')}</ul>` : T.empty('Aucune branche endormie depuis aussi longtemps', {hint: 'Bravo !'}); };
         rootEl.addEventListener('change', draw); minEl.addEventListener('change', draw);
         out.addEventListener('click', e => { const o = e.target.closest('[data-rm-open]'); if (o) return T.openPerson(Number(o.dataset.rmOpen));
             const b = e.target.closest('[data-rm-add]'); if (!b) return; const r = rows[Number(b.closest('[data-rm-i]').dataset.rmI)];
@@ -110,13 +111,12 @@
 
     /* ── 🏛️ Les actes manquants (raccourci) : l'assistant existe déjà dans Recherche ── */
     async function renderGaps(host, T) {
-        host.innerHTML = '<p class="h-tr-muted">Je regarde ce qui manque…</p>';
+        host.innerHTML = window.LCNDA_UI?.spinner ? window.LCNDA_UI.spinner('Je regarde ce qui manque…') : '<p class="h-tr-muted">Je regarde ce qui manque…</p>';
         const d = await T.api('research_gaps', {gen: 6}).catch(() => null), items = d?.items || [];
         const by = new Map(); items.forEach(it => { const k = it.archive?.label || 'Archives à trouver'; by.set(k, (by.get(k) || 0) + 1); });
         host.innerHTML = `<div class="h-tr-panel"><p>L’assistant <b>« Que manque-t-il ? »</b> (onglet Recherche) liste les actes qui manquent à la lignée, rangés par service d’archives, avec la commune, les années et les séries à consulter (état civil, tables décennales, registres paroissiaux, notaires, recensements, registres matricules), et un lien vers FranceArchives.</p>
-            ${items.length ? `<p class="h-tr-big">${items.length} recherche${items.length > 1 ? 's' : ''} à faire sur 6 générations</p><ul>${[...by].sort((a, b) => b[1] - a[1]).slice(0, 8).map(([k, n]) => `<li>🏛️ ${T.esc(k)} : <b>${n}</b></li>`).join('')}</ul>` : '<p class="h-tr-muted">Rien ne manque sur 6 générations, ou l’assistant n’a pas pu être lu.</p>'}
-            <button type="button" class="button" data-gp-go>🔍 Ouvrir l’assistant « Que manque-t-il ? »</button></div>`;
-        host.querySelector('[data-gp-go]').addEventListener('click', () => { A().state.researchKind = 'gaps'; A().setModule('recherche'); });
+            ${items.length ? `<p class="h-tr-big">${items.length} recherche${items.length > 1 ? 's' : ''} à faire sur 6 générations</p><ul>${[...by].sort((a, b) => b[1] - a[1]).slice(0, 8).map(([k, n]) => `<li>🏛️ ${T.esc(k)} : <b>${n}</b></li>`).join('')}</ul>` : T.empty('Rien ne manque sur 6 générations, ou l’assistant n’a pas pu être lu')}</div>`;
+        T.actions(host, {primary: {label: '🔍 Ouvrir l’assistant', attrs: 'data-gp-go', title: 'L’assistant « Que manque-t-il ? » de l’onglet Recherche', run: () => { A().state.researchKind = 'gaps'; A().setModule('recherche'); }}});
     }
     F.push({key: 'actes-manquants', group: 'outils', icon: '🏛️', title: 'Les actes manquants', desc: 'Ce qui manque à la lignée, rangé par archives où chercher (l’assistant de l’onglet Recherche).', render: renderGaps});
 

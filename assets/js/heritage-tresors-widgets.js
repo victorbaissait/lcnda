@@ -230,10 +230,22 @@
         let tr; try { tr = await T().tree(); } catch (err) { if (ok()) ws.innerHTML = `<section class="page">${A().empty(err.message || 'L’arbre n’a pas pu être lu.')}</section>`; return; }
         if (!ok()) return;
         const rows = yearsOf(tr).map(y => ({y, g: ext.tresorGazette.gazette(T(), tr, y)})).filter(r => r.g.born.length + r.g.wed.length + r.g.dead.length + r.g.other.length).reverse();
-        ws.innerHTML = `<section class="page collection-page h-gz-list">${window.LCNDA_UI.pageHeader({icon: '📰', title: 'Gazettes', help: 'Une gazette pour chaque année où il s’est passé quelque chose dans la famille : le gros titre, les naissances, les mariages, les décès. « Lire » ouvre la une du journal, à imprimer.'})}
-            ${rows.length ? `<div class="data-table-wrap"><table class="data-table sortable-table" data-sortbar="gazette"><thead><tr>${['Année', 'Gros titre', 'Naissances', 'Mariages', 'Décès', 'Autres nouvelles'].map((h, i) => `<th><button data-sort-column="${i}">${h}</button></th>`).join('')}<th></th></tr></thead><tbody>
-                ${rows.map(({y, g}) => `<tr><td data-sort-value="${y}"><b>${y}</b></td><td>${esc(g.headline)}</td><td data-sort-value="${g.born.length}">${g.born.length || ''}</td><td data-sort-value="${g.wed.length}">${g.wed.length || ''}</td><td data-sort-value="${g.dead.length}">${g.dead.length || ''}</td><td data-sort-value="${g.other.length}">${g.other.length || ''}</td><td><button type="button" class="button small secondary" data-trw-gz="${y}">Lire</button></td></tr>`).join('')}</tbody></table></div>`
-                : A().emptyState({icon: '📰', text: 'Aucune gazette pour l’instant', hint: 'Il faut des dates dans l’arbre : une naissance, un mariage, un décès…'})}</section>`;
-        A().bindTableLinks?.();
+        const head = window.LCNDA_UI.pageHeader({icon: '📰', title: 'Gazettes', help: 'Une gazette pour chaque année où il s’est passé quelque chose dans la famille : le gros titre, les naissances, les mariages, les décès. « Lire » ouvre la une du journal, à imprimer.'});
+        const L = ext.tresorListBar, H = ext.tresorListHelpers;
+        if (!L || !H) { ws.innerHTML = `<section class="page collection-page h-gz-list">${head}${A().empty('La liste n’a pas pu se charger.')}</section>`; return; }
+        // H10 : 🔍 (année, gros titre, nom cité) · Filtrer ▾ (Il y a, Période) · Trier (par année, le plus de nouvelles) — pas de A → Z : une gazette, c'est une année
+        const nNews = r => r.g.born.length + r.g.wed.length + r.g.dead.length + r.g.other.length;
+        const names = r => [...r.g.born, ...r.g.dead].map(p => T().name(p)).concat(r.g.wed.map(f => [f.a, f.b].map(x => T().name(tr.byId.get(x))).join(' ')), r.g.other.map(x => T().name(x.p))).join(' ');
+        const HAS = {born: r => r.g.born.length, wed: r => r.g.wed.length, dead: r => r.g.dead.length}, year = v => Number(String(v || '').match(/\d{3,4}/)?.[0]) || 0;
+        L({ws, head, cls: 'h-gz-list', key: 'gazettes', items: rows, noun: ['gazette'], fem: true, noneText: 'Aucune gazette ne correspond',
+            search: {placeholder: 'Chercher… (année, gros titre, nom cité)', text: r => `${r.y} ${r.g.headline} ${names(r)}`},
+            filters: [{id: 'has', label: 'Il y a', type: 'check', options: H.counted(rows, [['born', 'des naissances', 'Des naissances'], ['wed', 'des mariages', 'Des mariages'], ['dead', 'des décès', 'Des décès']], (r, k) => HAS[k](r) > 0), test: (r, v) => v.some(k => HAS[k](r) > 0)},
+                {id: 'from', group: 'Période', label: 'À partir de', type: 'text', placeholder: '1850', chipPrefix: 'Depuis', test: (r, v) => !year(v) || r.y >= year(v)},
+                {id: 'to', group: 'Période', label: 'Jusqu’à', type: 'text', placeholder: '1920', chipPrefix: 'Jusqu’en', test: (r, v) => !year(v) || r.y <= year(v)}],
+            sorts: [['recent', 'Les plus récentes', (a, b) => b.y - a.y], ['old', 'Les plus anciennes', (a, b) => a.y - b.y], ['most', 'Le plus de nouvelles', (a, b) => nNews(b) - nNews(a) || b.y - a.y]],
+            cols: [{label: 'Année', key: 'y', val: r => r.y, num: true, sort: ['old', 'recent']}, {label: 'Gros titre', key: 'head', val: r => r.g.headline}, {label: 'Naissances', key: 'born', val: r => r.g.born.length, num: true},
+                {label: 'Mariages', key: 'wed', val: r => r.g.wed.length, num: true}, {label: 'Décès', key: 'dead', val: r => r.g.dead.length, num: true}, {label: 'Autres nouvelles', key: 'other', val: r => r.g.other.length, num: true}],
+            row: ({y, g}) => `<tr><td><b>${y}</b></td><td>${esc(g.headline)}</td><td>${g.born.length || ''}</td><td>${g.wed.length || ''}</td><td>${g.dead.length || ''}</td><td>${g.other.length || ''}</td><td><button type="button" class="button small secondary" data-trw-gz="${y}">Lire</button></td></tr>`,
+            empty: {icon: '📰', text: 'Aucune gazette pour l’instant', hint: 'Il faut des dates dans l’arbre : une naissance, un mariage, un décès…'}});
     };
 })();

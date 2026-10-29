@@ -33,6 +33,9 @@ function textdocs_schema(PDO $pdo): void
         label TEXT NOT NULL DEFAULT '', data_json TEXT NOT NULL DEFAULT '{}', words INTEGER NOT NULL DEFAULT 0, created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (doc_id) REFERENCES text_documents(id) ON DELETE CASCADE)");
     $pdo->exec('CREATE INDEX IF NOT EXISTS idx_text_document_versions_doc ON text_document_versions(doc_id, id)');
+    // L3 🕘 Versions : « automatique » (gardée toute seule, par ex. avant un retour en arrière) ou nommée
+    $cols = array_column($pdo->query('PRAGMA table_info(text_document_versions)')->fetchAll(), 'name');
+    if (!in_array('auto', $cols, true)) { $pdo->exec('ALTER TABLE text_document_versions ADD COLUMN auto INTEGER NOT NULL DEFAULT 0'); }
 }
 
 /** Retire d'un HTML ce qui pourrait s'exécuter : balises de script et d'objets, attributs on…, liens javascript:/data: hors images. */
@@ -238,8 +241,8 @@ function duplicate_textdoc(PDO $pdo, array $data): array
 function textdoc_versions(PDO $pdo, int $docId): array
 {
     textdoc_ready($pdo);
-    $s = $pdo->prepare('SELECT id, label, words, created_at FROM text_document_versions WHERE doc_id=? ORDER BY id DESC'); $s->execute([$docId]);
-    return array_map(static fn($r) => ['id' => (int) $r['id'], 'label' => (string) $r['label'], 'words' => (int) $r['words'], 'created_at' => $r['created_at']], $s->fetchAll());
+    $s = $pdo->prepare('SELECT id, label, words, auto, created_at FROM text_document_versions WHERE doc_id=? ORDER BY id DESC'); $s->execute([$docId]);
+    return array_map(static fn($r) => ['id' => (int) $r['id'], 'label' => (string) $r['label'], 'words' => (int) $r['words'], 'auto' => (int) $r['auto'], 'created_at' => $r['created_at']], $s->fetchAll());
 }
 
 function textdoc_version(PDO $pdo, int $id): array
@@ -247,7 +250,17 @@ function textdoc_version(PDO $pdo, int $id): array
     textdoc_ready($pdo);
     $s = $pdo->prepare('SELECT * FROM text_document_versions WHERE id=?'); $s->execute([$id]); $r = $s->fetch();
     if (!$r) { throw new RuntimeException('Version introuvable.'); }
-    return ['id' => (int) $r['id'], 'doc_id' => (int) $r['doc_id'], 'label' => (string) $r['label'], 'words' => (int) $r['words'], 'created_at' => $r['created_at'], 'data' => json_decode((string) $r['data_json'], true) ?: new stdClass()];
+    return ['id' => (int) $r['id'], 'doc_id' => (int) $r['doc_id'], 'label' => (string) $r['label'], 'words' => (int) $r['words'], 'auto' => (int) ($r['auto'] ?? 0), 'created_at' => $r['created_at'], 'data' => json_decode((string) $r['data_json'], true) ?: new stdClass()];
+}
+
+/** ↶ Annuler après « Supprimer une version » : la remettre sous son numéro et à sa date (si le numéro est libre) ; sinon une nouvelle */
+function versions_keep_identity(PDO $pdo, string $table, array $data): array
+{
+    if (!in_array($table, ['text_document_versions', 'website_versions'], true)) { return [null, null]; }
+    $id = safe_int($data['restore_id'] ?? 0); $at = (string) ($data['created_at'] ?? '');
+    $at = preg_match('/^\d{4}-\d{2}-\d{2}[ T]\d{2}:\d{2}(:\d{2})?$/', $at) ? str_replace('T', ' ', $at) : null;
+    if ($id > 0) { $u = $pdo->prepare("SELECT 1 FROM $table WHERE id=?"); $u->execute([$id]); if ($u->fetchColumn()) { $id = 0; } }
+    return [$id > 0 ? $id : null, $id > 0 ? $at : null];
 }
 
 function save_textdoc_version(PDO $pdo, array $data): array
@@ -259,11 +272,12 @@ function save_textdoc_version(PDO $pdo, array $data): array
     [$clean, $info] = textdoc_check($data['data'] ?? null);
     $json = json_encode($clean, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRESERVE_ZERO_FRACTION);
     if ($json === false || strlen($json) > TEXTDOC_MAX) { throw new LcndaBadInput('Version trop lourde.'); }
-    $label = mb_substr(safe_text($data['label'] ?? ''), 0, 120) ?: ('Version du ' . date('d/m/Y à H:i'));
-    $pdo->prepare('INSERT INTO text_document_versions(doc_id, label, data_json, words) VALUES(?,?,?,?)')->execute([$docId, $label, $json, $info['words']]);
+    $label = mb_substr(safe_text($data['label'] ?? ''), 0, 120) ?: (empty($data['auto']) ? 'Version du ' . date('d/m/Y à H:i') : 'Enregistrement automatique');
+    [$keepId, $keepAt] = versions_keep_identity($pdo, 'text_document_versions', $data);
+    $pdo->prepare('INSERT INTO text_document_versions(id, doc_id, label, data_json, words, auto, created_at) VALUES(?,?,?,?,?,?,COALESCE(?,CURRENT_TIMESTAMP))')->execute([$keepId, $docId, $label, $json, $info['words'], empty($data['auto']) ? 0 : 1, $keepAt]);
     $vid = (int) $pdo->lastInsertId();
     // pas plus de TEXTDOC_VERSIONS_MAX versions : les plus anciennes partent
-    $pdo->prepare('DELETE FROM text_document_versions WHERE doc_id=? AND id NOT IN (SELECT id FROM text_document_versions WHERE doc_id=? ORDER BY id DESC LIMIT ' . TEXTDOC_VERSIONS_MAX . ')')->execute([$docId, $docId]);
+    $pdo->prepare('DELETE FROM text_document_versions WHERE doc_id=? AND auto=1 AND id NOT IN (SELECT id FROM text_document_versions WHERE doc_id=? ORDER BY id DESC LIMIT ' . TEXTDOC_VERSIONS_MAX . ')')->execute([$docId, $docId]);
     return ['id' => $vid, 'label' => $label];
 }
 
@@ -279,7 +293,18 @@ function restore_textdoc_version(PDO $pdo, array $data): array
 {
     textdoc_ready($pdo);
     $v = is_array($data['version'] ?? null) ? $data['version'] : [];
-    return save_textdoc_version($pdo, ['doc_id' => $v['doc_id'] ?? 0, 'label' => $v['label'] ?? '', 'data' => $v['data'] ?? null]);
+    return save_textdoc_version($pdo, ['doc_id' => $v['doc_id'] ?? 0, 'label' => $v['label'] ?? '', 'data' => $v['data'] ?? null, 'auto' => !empty($v['auto']), 'restore_id' => $v['id'] ?? 0, 'created_at' => $v['created_at'] ?? null]);
+}
+
+/** L3 ✎ Renommer une version (elle devient « nommée ») */
+function rename_textdoc_version(PDO $pdo, array $data): array
+{
+    textdoc_ready($pdo);
+    $old = textdoc_version($pdo, safe_int($data['id'] ?? 0));
+    $label = mb_substr(trim(safe_text($data['label'] ?? '')), 0, 120);
+    if ($label === '') { throw new LcndaBadInput('Donne un nom à la version.'); }
+    $pdo->prepare('UPDATE text_document_versions SET label=?, auto=0 WHERE id=?')->execute([$label, $old['id']]);
+    return ['id' => $old['id'], 'label' => $label, 'before' => $old['label']];
 }
 
 /* ═════════ Les personnes citées : nom, naissance, décès (champs tenus à jour) et un petit arbre ═════════ */

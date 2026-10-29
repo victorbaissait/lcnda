@@ -127,7 +127,12 @@
                 photo_count: String(c.photo_count), event_count: String(c.event_count), accent: c.accent || ''};
             Object.keys(p).forEach(k => { if (p[k] === '') delete p[k]; });
             const kind = f.dataset.bookFormat;
-            if (kind === 'print') { const w = window.open(exportUrl('export_family_book', {...p, inline: '1'}), '_blank'); if (!w) A().toast('Fenêtre bloquée : autorise les fenêtres pour cette page.', 'error'); else A().toast('Le livre s’ouvre : bouton « Imprimer / enregistrer en PDF » en haut.'); return; }
+            if (kind === 'print') { // L1 : la fenêtre « Imprimer » commune (aperçu, pages), sans nouvel onglet
+                const UI = window.LCNDA_UI; if (!UI?.openPrintDialog) { A().toast('La fenêtre « Imprimer » n’est pas chargée.', 'error'); return; }
+                let html = ''; try { const r = await fetch(exportUrl('export_family_book', {...p, inline: '1'}), {credentials: 'same-origin'}); if (!r.ok) throw new Error(`erreur ${r.status}`); html = await r.text(); } catch (e) { A().toast(`Le livre n’a pas pu être préparé : ${e.message}`, 'error'); return; }
+                const base = location.href.replace(/[#?].*$/, '').replace(/[^/]*$/, '');
+                html = html.replace(/<script[\s\S]*?<\/script>/gi, '').replace(/<head>/i, `<head><base href="${base.replace(/"/g, '&quot;')}">`).replace(/<\/head>/i, '<style>.actions{display:none!important}</style></head>');
+                UI.openPrintDialog({title: c.title || 'Livre de famille', key: 'livre-famille', photos: true, margin: 12, ...(String(c.paper || '').toUpperCase() === 'A5' ? {paper: 'A5'} : {}), html}); return; }
             const a = document.createElement('a'); a.href = exportUrl('export_family_book', {...p, format: kind}); a.download = ''; document.body.appendChild(a); a.click(); a.remove();
             A().toast('Préparation du livre…');
         });

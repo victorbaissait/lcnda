@@ -286,13 +286,12 @@
         txt.value = it ? (it.free ? it.title : [it.name || it.title, it.county || it.state_name].filter(Boolean).join(', ')) : '';
     });
     ext.lists.parishes = async (token, edit = null) => {
-        const q = S().hParishQ || '';
-        const data = await api('parishes', {q});
+        const data = await api('parishes', {});
         if (!isCurrent(token)) return;
-        const rows = data.parishes || [];
+        const rows = data.parishes || [], UI = window.LCNDA_UI, KEY = 'listes:parishes';
         const e = edit ? (edit.id ? rows.find(r => Number(r.id) === Number(edit.id)) : {id: 0, until_year: 1790}) : null;
-        A().$('#workspace').innerHTML = `<section class="page collection-page">${header('LISTES', 'Paroisses d’Ancien Régime', 'Beaucoup de hameaux et de villages dépendaient de la paroisse d’à côté : les baptêmes, mariages et sépultures d’avant la Révolution sont alors dans les registres d’une autre commune. Note ces rattachements au fil de tes trouvailles : l’app l’indique sur les événements des fiches, dans les battues et dans les registres en ligne.')}
-            <div class="collection-toolbar"><input type="search" id="h-parish-q" value="${esc(q)}" placeholder="Chercher un lieu ou une paroisse…"><button type="button" class="button" data-h-parish-new>＋ Rattachement</button></div>
+        // K5 : « ＋ Rattachement » monte dans l’en-tête ; H10 : la barre commune au-dessus du tableau (cachée quand il n’y a rien)
+        A().$('#workspace').innerHTML = `<section class="page collection-page">${UI.pageHeader({title: 'Paroisses d’Ancien Régime', help: 'Beaucoup de hameaux et de villages dépendaient de la paroisse d’à côté : les baptêmes, mariages et sépultures d’avant la Révolution sont alors dans les registres d’une autre commune. Note ces rattachements au fil de tes trouvailles : l’app l’indique sur les événements des fiches, dans les battues et dans les registres en ligne.', primary: '<button type="button" class="button" data-h-parish-new>＋ Rattachement</button>'})}
             ${e ? `<form class="maintenance-panel collection-form" id="h-parish-form"><h3>${e.id ? 'Modifier le rattachement' : 'Nouveau rattachement'}</h3><div class="form-grid">
                 <div><span class="pk-lab">Lieu (hameau, village, commune actuelle)</span>${placePicker('place_id', e.place_id, e.place_name || e.place_text)}</div>
                 <div><span class="pk-lab">Dépendait de la paroisse de</span>${placePicker('parish_place_id', e.parish_place_id, e.parish_place_name || '')}</div>
@@ -300,12 +299,42 @@
                 <label>Jusqu’en<input type="number" name="until_year" value="${esc(e.until_year || 1790)}" min="1000" max="1900"></label><label>Depuis (si connu)<input type="number" name="from_year" value="${esc(e.from_year || '')}" placeholder="—"></label>
                 <label class="span-2">Note, source<input name="note" value="${esc(e.note || '')}" placeholder="Paroisse érigée en 1792 ; voir aussi la chapelle de…"></label></div>
                 ${LP('parish', e.labels)}<div class="page-actions action-zone"><button class="button" type="submit">Enregistrer</button><button class="button secondary" type="button" data-h-parish-cancel>Annuler</button>${e.id ? '<button class="button secondary danger" type="button" data-h-parish-delete>Supprimer</button>' : ''}</div></form>` : ''}
-            ${rows.length ? `<table class="data-table"><thead><tr><th>Lieu</th><th>Avant</th><th>Paroisse</th><th>Événements concernés</th><th>Note</th><th></th></tr></thead><tbody>${rows.map(r => `<tr><td><strong>${esc(r.place_name || r.place_text)}</strong>${LC(r.labels)}${r.place_county ? `<br><small>${esc(r.place_county)}</small>` : ''}</td><td>${r.from_year ? `${esc(r.from_year)}–` : ''}${esc(r.until_year)}</td><td>⛪ ${esc(r.parish_name)}</td><td>${r.old_event_count ? plural(Number(r.old_event_count), 'événement', 'événements') : '—'}</td><td><small>${esc(r.note)}</small></td><td><span class="inline-actions h-tools">${A().actionButton('edit', 'Modifier ce rattachement', `data-h-parish-edit="${r.id}"`)}${A().actionButton('delete', 'Supprimer ce rattachement', `data-h-parish-del="${r.id}"`)}</span></td></tr>`).join('')}</tbody></table>` : (e ? '' : A().emptyState({icon: '⛪', text: 'Aucun rattachement pour l’instant', hint: 'Note de quelle paroisse dépendait chaque hameau ou village avant la Révolution.', action: {label: '＋ Rattachement', attrs: 'data-h-parish-new'}}))}</section>`;
+            ${rows.length ? '<div data-h-parish-bar></div>' : ''}<div data-h-parish-list>${rows.length || e ? '' : A().emptyState({icon: '⛪', text: 'Aucun rattachement pour l’instant', hint: 'Note de quelle paroisse dépendait chaque hameau ou village avant la Révolution.', action: {label: '＋ Rattachement', attrs: 'data-h-parish-new'}})}</div></section>`;
         const ws = A().$('#workspace');
-        ws.querySelector('#h-parish-q').addEventListener('change', ev => { S().hParishQ = ev.target.value.trim(); rerender(); });
+        if (rows.length) {
+            const fold = t => String(t || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+            const counties = [...rows.reduce((m, r) => { if (r.place_county) m.set(r.place_county, (m.get(r.place_county) || 0) + 1); return m; }, new Map())].sort((x, y) => x[0].localeCompare(y[0], 'fr'));
+            const withEv = rows.filter(r => Number(r.old_event_count)).length;
+            const bar = UI.listBar({key: KEY, search: {placeholder: 'Chercher… (lieu, paroisse, note)', value: UI.listBarState?.(KEY) ? '' : (S().hParishQ || '')},
+                filters: [{id: 'parish', label: 'Paroisse', type: 'place', chipPrefix: 'Paroisse :'},
+                    ...(counties.length > 1 ? [{id: 'county', label: 'Département', type: 'check', options: counties.map(([k, n]) => [k, k, k, n])}] : []),
+                    {id: 'label', label: 'Étiquette', kind: 'label', allowFree: false, chipPrefix: 'Étiquette :'},
+                    {id: 'events', label: 'Événements', type: 'check', text: `Avec des événements concernés (${withEv})`, chipLabel: 'Avec des événements concernés'}],
+                sort: {options: [['recent', 'Les plus récents'], ['old', 'Les plus anciens'], ['az', 'A → Z'], ['za', 'Z → A'], ['events', 'Le plus d’événements'], ['until', 'Jusqu’en (année)']], value: 'az'},
+                onChange: () => paint()});
+            ws.querySelector('[data-h-parish-bar]').replaceWith(bar);
+            const box = ws.querySelector('[data-h-parish-list]'), name = r => r.place_name || r.place_text || '';
+            const az = (x, y) => name(x).localeCompare(name(y), 'fr', {sensitivity: 'base'});
+            const paint = () => {
+                const st = bar.state, f = st.filters, words = fold(st.q).split(/\s+/).filter(Boolean), pa = f.parish, lab = f.label;
+                const paId = pa && typeof pa === 'object' ? Number(pa.id) : 0, paTxt = fold(pa && typeof pa === 'object' ? pa.title : String(pa || '').replace(/^txt:/, '')).split(/[,(]/)[0].trim();
+                let list = rows.filter(r => (!words.length || words.every(w => fold(`${name(r)} ${r.place_county} ${r.parish_name} ${r.parish_place_name} ${r.note}`).includes(w)))
+                    && (!pa || (paId && Number(r.parish_place_id) === paId) || fold(r.parish_name).includes(paTxt) || fold(r.parish_place_name).split(/[,(]/)[0].trim() === paTxt)
+                    && (!(f.county || []).length || f.county.includes(r.place_county)) && (!f.events || Number(r.old_event_count))
+                    && (!lab || (r.labels || []).some(l => (lab.id ? Number(l.id) === Number(lab.id) : fold(l.name) === fold(String(lab).replace(/^txt:/, ''))))));
+                list = st.sort === 'events' ? list.sort((x, y) => Number(y.old_event_count) - Number(x.old_event_count) || az(x, y)) : st.sort === 'until' ? list.sort((x, y) => Number(x.until_year) - Number(y.until_year) || az(x, y)) : UI.sortItems(list, st.sort, {name, date: r => r.updated_at || r.created_at || ''});
+                bar.setCount(list.length === rows.length ? plural(rows.length, 'rattachement', 'rattachements') : `${plural(list.length, 'rattachement', 'rattachements')} sur ${rows.length}`);
+                box.innerHTML = list.length ? `<div class="data-table-wrap"><table class="data-table"><thead><tr><th>Lieu</th><th>Avant</th><th>Paroisse</th><th>Événements concernés</th><th>Note</th><th></th></tr></thead><tbody>${list.map(r => `<tr><td><strong>${esc(name(r))}</strong>${LC(r.labels)}${r.place_county ? `<br><small>${esc(r.place_county)}</small>` : ''}</td><td>${r.from_year ? `${esc(r.from_year)}–` : ''}${esc(r.until_year)}</td><td>⛪ ${esc(r.parish_name)}</td><td>${r.old_event_count ? plural(Number(r.old_event_count), 'événement', 'événements') : '—'}</td><td><small>${esc(r.note)}</small></td><td><span class="inline-actions h-tools">${A().actionButton('edit', 'Modifier ce rattachement', `data-h-parish-edit="${r.id}"`)}${A().actionButton('delete', 'Supprimer ce rattachement', `data-h-parish-del="${r.id}"`)}</span></td></tr>`).join('')}</tbody></table></div>`
+                    : A().emptyState({icon: '🔍', text: 'Aucun rattachement ne correspond', hint: 'Vérifie l’orthographe, ou retire un filtre.'});
+            };
+            paint();
+        }
         ws.querySelectorAll('[data-h-parish-new]').forEach(b => b.addEventListener('click', () => ext.lists.parishes(++S().workspaceToken, {id: 0})));
-        ws.querySelectorAll('[data-h-parish-del]').forEach(b => b.addEventListener('click', async () => { if (!await A().confirmBox('Supprimer ce rattachement ?', {title: 'Supprimer le rattachement', okLabel: 'Supprimer le rattachement'})) return; await api('delete_parish', {}, {method: 'POST', body: {id: b.dataset.hParishDel}}); await loadParishMap(); rerender(); }));
-        ws.querySelectorAll('[data-h-parish-edit]').forEach(b => b.addEventListener('click', () => ext.lists.parishes(++S().workspaceToken, {id: Number(b.dataset.hParishEdit)})));
+        ws.querySelector('[data-h-parish-list]').addEventListener('click', async ev => {
+            const del = ev.target.closest('[data-h-parish-del]'), ed = ev.target.closest('[data-h-parish-edit]');
+            if (ed) return ext.lists.parishes(++S().workspaceToken, {id: Number(ed.dataset.hParishEdit)});
+            if (del) { if (!await A().confirmBox('Supprimer ce rattachement ?', {title: 'Supprimer le rattachement', okLabel: 'Supprimer le rattachement'})) return; await api('delete_parish', {}, {method: 'POST', body: {id: del.dataset.hParishDel}}); await loadParishMap(); rerender(); }
+        });
         const form = ws.querySelector('#h-parish-form');
         if (!form) return;
         form.querySelectorAll('.h-place-pk .pk > input[type=hidden]').forEach(h => h.removeAttribute('name')); // seuls place_id / parish_place_id partent, comme avant
@@ -329,30 +358,78 @@
         if (view?.index) st.hCiteMedia = 0;
         if (st.hCiteMedia) return renderTranscriptionMarking(token, st.hCiteMedia);
         const tab = st.hCiteTab === 'transcriptions' ? 'transcriptions' : 'index';
-        const q = st.hCiteQ || '';
-        const data = tab === 'index' ? await api('cited_names', {q}) : await api('transcriptions_list', {q});
+        const UI = window.LCNDA_UI, KEY = `listes:cited_names:${tab}`, saved = UI.listBarState?.(KEY);
+        const oldQ = !saved && st.hCiteQ ? st.hCiteQ : ''; if (oldQ) st.hCiteQ = ''; // l’ancienne case est reprise une fois
+        const q = String(saved?.q ?? oldQ).trim();
+        // les transcriptions se cherchent dans tout leur texte, côté serveur ; l’index se filtre ici
+        const [data, whole] = tab === 'index' ? [await api('cited_names', {}), null] : await Promise.all([api('transcriptions_list', {q}), q ? api('transcriptions_list', {}) : null]);
         if (!isCurrent(token)) return;
-        const tabs = `<div class="segmented-filter">${[['index', 'Index des noms'], ['transcriptions', 'Marquer dans les transcriptions']].map(([k, l]) => `<button type="button" class="button small ${tab === k ? '' : 'secondary'}" data-h-cite-tab="${k}">${esc(l)}</button>`).join('')}</div>`;
-        let body;
-        if (tab === 'index') {
-            const groups = data.groups || [];
-            body = groups.length ? `<div class="h-cite-groups">${groups.map(g => `<article class="h-record"><header><div><strong>${esc(g.name)}</strong>${g.occupations.length ? `, ${esc(g.occupations.join(', '))}` : ''} — apparaît dans <strong>${plural(g.acts, 'acte', 'actes')}</strong>${g.from ? ` ${g.from === g.to ? `en ${g.from}` : `entre ${g.from} et ${g.to}`}` : ''}
-                ${g.roles.length ? `<div class="muted">${esc(g.roles.join(', '))}${g.places.length ? ' · ' + esc(g.places.join(', ')) : ''}</div>` : ''}${g.person_id ? `<div>Fiche : ${personLink(g.person_id, g.person_name)}</div>` : ''}</div></header>
-                <details><summary>Les ${g.items.length} mentions</summary><ul class="h-cite-items">${g.items.map(i => `<li>${LC(i.labels)}${esc(i.date_text || i.year || '')} ${i.role ? `<em>${esc(i.role)}</em>` : ''} ${i.media_id ? `<button type="button" class="link-button" data-h-cite-open="${i.media_id}">${esc(i.media_title || 'transcription')}</button>` : ''}${i.snippet ? `<br><small class="h-transcription">… ${esc(i.snippet)} …</small>` : ''} <button type="button" class="link-button" data-h-cite-del="${i.id}">retirer</button></li>`).join('')}</ul></details></article>`).join('')}</div>`
-                : A().emptyState({text: 'Aucun nom indexé pour l’instant', icon: '🏷️', hint: 'Ouvre « Marquer dans les transcriptions » : sélectionne un nom dans le texte d’un acte, ou accepte les noms repérés par l’app.'});
-        } else {
-            const media = data.media || [];
-            body = media.length ? `<table class="data-table"><thead><tr><th>Document</th><th>Début de la transcription</th><th>Noms marqués</th><th></th></tr></thead><tbody>${media.map(m => `<tr><td><strong>${esc(m.title || 'Sans titre')}</strong>${m.document_reference ? `<br><small>${esc(m.document_reference)}</small>` : ''}${m.date_text ? `<br><small>${esc(m.date_text)}</small>` : ''}</td><td><small>${esc(m.excerpt)}…</small></td><td>${Number(m.marked) || '—'}</td><td><button type="button" class="button small" data-h-cite-open="${m.id}">Ouvrir</button></td></tr>`).join('')}</tbody></table>`
-                : empty('Aucune transcription : transcris d’abord un acte (visionneuse des médias → transcription).');
-        }
+        // C5 : les deux onglets de page restent au-dessus ; H10 : une barre par onglet, chacune retenue
+        const tabs = `<div class="segmented h-cite-tabs" role="tablist">${[['index', 'Index des noms'], ['transcriptions', 'Marquer dans les transcriptions']].map(([k, l]) => `<button type="button" role="tab" class="${tab === k ? 'is-active' : ''}" aria-selected="${tab === k}" data-h-cite-tab="${k}">${esc(l)}</button>`).join('')}</div>`;
+        const all = tab === 'index' ? (data.groups || []) : (data.media || []), total = tab === 'index' ? all.length : (whole ? (whole.media || []).length : all.length);
         A().$('#workspace').innerHTML = `<section class="page collection-page">${header('LISTES', 'Le cercle autour des ancêtres', 'Les témoins, voisins, curés, parrains qui n’ont pas de fiche. Par exemple : « Pierre Martin, tisserand, apparaît dans 7 actes entre 1781 et 1803 ». Ce cercle (famille, amis, voisins) débloque souvent une recherche.')}
-            <div class="collection-toolbar">${tabs}<input type="search" id="h-cite-q" value="${esc(q)}" placeholder="${tab === 'index' ? 'Chercher un nom, un métier, un lieu…' : 'Chercher dans les transcriptions…'}"></div>${body}</section>`;
-        const ws = A().$('#workspace');
+            ${tabs}${total ? '<div data-h-cite-bar></div>' : ''}<div data-h-cite-list></div></section>`;
+        const ws = A().$('#workspace'), box = ws.querySelector('[data-h-cite-list]');
         A().bindTableLinks();
         ws.querySelectorAll('[data-h-cite-tab]').forEach(b => b.addEventListener('click', () => { st.hCiteTab = b.dataset.hCiteTab; rerender(); }));
-        ws.querySelector('#h-cite-q').addEventListener('change', ev => { st.hCiteQ = ev.target.value.trim(); rerender(); });
-        ws.querySelectorAll('[data-h-cite-open]').forEach(b => b.addEventListener('click', () => ext.lists.cited_names(++st.workspaceToken, {media: Number(b.dataset.hCiteOpen)})));
-        ws.querySelectorAll('[data-h-cite-del]').forEach(b => b.addEventListener('click', async () => { await api('delete_cited_name', {}, {method: 'POST', body: {id: b.dataset.hCiteDel}}); rerender(); }));
+        if (!total) {
+            box.innerHTML = tab === 'index' ? A().emptyState({text: 'Aucun nom indexé pour l’instant', icon: '🏷️', hint: 'Ouvre « Marquer dans les transcriptions » : sélectionne un nom dans le texte d’un acte, ou accepte les noms repérés par l’app.', action: {label: 'Marquer dans les transcriptions', attrs: 'data-empty-click="[data-h-cite-tab=transcriptions]"'}})
+                : A().emptyState({text: 'Aucune transcription pour l’instant', icon: '📜', hint: 'Transcris d’abord un acte : visionneuse des médias → transcription.'});
+            return;
+        }
+        const fold = t => String(t || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+        const yearOf = v => Number(String(v || '').match(/\d{3,4}/)?.[0]) || 0;
+        let bar;
+        if (tab === 'index') {
+            const roleN = new Map(); all.forEach(g => g.roles.forEach(r => roleN.set(r, (roleN.get(r) || 0) + 1)));
+            const roles = [...roleN].sort((x, y) => y[1] - x[1] || x[0].localeCompare(y[0], 'fr')).map(([r, n]) => [r, r, r, n]);
+            const withP = all.filter(g => g.person_id).length;
+            bar = UI.listBar({key: KEY, search: {placeholder: 'Chercher… (nom, métier, lieu)', value: oldQ},
+                filters: [...(roles.length ? [{id: 'role', label: 'Rôle', type: 'check', options: roles}] : []), {id: 'place', label: 'Lieu', type: 'place', chipPrefix: 'Lieu :'},
+                    {id: 'from', group: 'Période', label: 'De', type: 'date', placeholder: '« 1780 »', chipPrefix: 'Depuis'}, {id: 'to', group: 'Période', label: 'À', type: 'date', placeholder: '« 1810 »', chipPrefix: 'Jusqu’à'},
+                    {id: 'person', label: 'Fiche', type: 'radio', dflt: '', options: [['', 'Toutes'], ['yes', 'Avec une fiche', 'Avec une fiche', withP], ['no', 'Sans fiche', 'Sans fiche', all.length - withP]]}],
+                sort: {options: [['most', 'Le plus de mentions'], ['recent', 'Les plus récents'], ['old', 'Les plus anciens'], ['az', 'A → Z'], ['za', 'Z → A']], value: 'most'},
+                onChange: () => paint()});
+        } else {
+            const marked = (whole?.media || all).filter(m => Number(m.marked)).length, n = (whole?.media || all).length;
+            bar = UI.listBar({key: KEY, search: {placeholder: 'Chercher… (titre, texte, cote)', value: oldQ},
+                filters: [{id: 'marked', label: 'Noms marqués', type: 'radio', dflt: '', options: [['', 'Toutes'], ['none', 'Aucun nom marqué', 'Aucun nom marqué', n - marked], ['some', 'Au moins un nom marqué', 'Au moins un nom marqué', marked]]}],
+                view: {dflt: 'list', what: 'transcriptions'},
+                sort: {options: [['recent', 'Les plus récentes'], ['old', 'Les plus anciennes'], ['az', 'A → Z'], ['za', 'Z → A']], value: 'recent'},
+                onChange: (b, {what}) => { if (what === 'q' || (what === 'clear' && q)) { if (b.q.trim() !== q) rerender(); return; } paint(); }});
+        }
+        ws.querySelector('[data-h-cite-bar]').replaceWith(bar);
+        const latest = g => g.items.reduce((m, i) => (String(i.created_at || '') > m ? String(i.created_at || '') : m), '');
+        const paint = () => {
+            const s = bar.state, f = s.filters, words = fold(s.q).split(/\s+/).filter(Boolean);
+            let list, noun;
+            if (tab === 'index') {
+                const pl = f.place, plTxt = fold(pl && typeof pl === 'object' ? pl.title : String(pl || '').replace(/^txt:/, '')).split(/[,(]/)[0].trim(), y1 = yearOf(f.from), y2 = yearOf(f.to);
+                list = all.filter(g => (!words.length || words.every(w => fold(`${g.name} ${g.occupations.join(' ')} ${g.places.join(' ')}`).includes(w))) && (!(f.role || []).length || g.roles.some(r => f.role.includes(r)))
+                    && (!pl || g.places.some(p => fold(p).includes(plTxt))) && (!y1 || (g.to || 0) >= y1) && (!y2 || (g.from && g.from <= y2)) && (!f.person || (f.person === 'yes' ? !!g.person_id : !g.person_id)));
+                list = s.sort === 'most' ? list.sort((x, y) => y.acts - x.acts || x.key.localeCompare(y.key)) : UI.sortItems(list, s.sort, {name: g => g.name, date: latest});
+                noun = ['nom', 'noms'];
+                box.innerHTML = list.length ? `<div class="h-cite-groups">${list.map(g => `<article class="h-record"><header><div><strong>${esc(g.name)}</strong>${g.occupations.length ? `, ${esc(g.occupations.join(', '))}` : ''} — apparaît dans <strong>${plural(g.acts, 'acte', 'actes')}</strong>${g.from ? ` ${g.from === g.to ? `en ${g.from}` : `entre ${g.from} et ${g.to}`}` : ''}
+                ${g.roles.length ? `<div class="muted">${esc(g.roles.join(', '))}${g.places.length ? ' · ' + esc(g.places.join(', ')) : ''}</div>` : ''}${g.person_id ? `<div>Fiche : ${personLink(g.person_id, g.person_name)}</div>` : ''}</div></header>
+                <details><summary>Les ${g.items.length} mentions</summary><ul class="h-cite-items">${g.items.map(i => `<li>${LC(i.labels)}${esc(i.date_text || i.year || '')} ${i.role ? `<em>${esc(i.role)}</em>` : ''} ${i.media_id ? `<button type="button" class="link-button" data-h-cite-open="${i.media_id}">${esc(i.media_title || 'transcription')}</button>` : ''}${i.snippet ? `<br><small class="h-transcription">… ${esc(i.snippet)} …</small>` : ''} <button type="button" class="link-button" data-h-cite-del="${i.id}">retirer</button></li>`).join('')}</ul></details></article>`).join('')}</div>` : '';
+            } else {
+                list = all.filter(m => !f.marked || (f.marked === 'some' ? Number(m.marked) > 0 : !Number(m.marked)));
+                list = UI.sortItems(list, s.sort, {name: m => m.title, date: m => String(m.id).padStart(10, '0')});
+                noun = ['transcription', 'transcriptions'];
+                box.innerHTML = !list.length ? '' : s.view === 'cards' ? UI.cardsHtml(list.map(m => ({thumb: m.media_type === 'image' && m.filename ? `<img src="media/${encodeURIComponent(m.filename)}" alt="" loading="lazy">` : '<span class="ui-card-ico">📜</span>', name: m.title || 'Sans titre', open: `data-h-cite-open="${m.id}"`,
+                        lines: [[m.document_reference, m.date_text].filter(Boolean).join(' · '), `${m.excerpt}…`], badges: [Number(m.marked) ? {text: plural(Number(m.marked), 'nom marqué', 'noms marqués'), kind: 'blue'} : {text: 'aucun nom', kind: 'grey'}]})))
+                    : `<table class="data-table"><thead><tr><th>Document</th><th>Début de la transcription</th><th>Noms marqués</th><th></th></tr></thead><tbody>${list.map(m => `<tr><td><strong>${esc(m.title || 'Sans titre')}</strong>${m.document_reference ? `<br><small>${esc(m.document_reference)}</small>` : ''}${m.date_text ? `<br><small>${esc(m.date_text)}</small>` : ''}</td><td><small>${esc(m.excerpt)}…</small></td><td>${Number(m.marked) || '—'}</td><td><button type="button" class="button small" data-h-cite-open="${m.id}">Ouvrir</button></td></tr>`).join('')}</tbody></table>`;
+            }
+            bar.setCount(list.length === total ? plural(total, ...noun) : `${plural(list.length, ...noun)} sur ${total}`);
+            if (!list.length) box.innerHTML = A().emptyState({icon: '🔍', text: tab === 'index' ? 'Aucun nom ne correspond' : 'Aucune transcription ne correspond', hint: 'Vérifie l’orthographe, ou retire un filtre.'});
+            A().bindTableLinks();
+        };
+        paint();
+        box.addEventListener('click', async e => {
+            const o = e.target.closest('[data-h-cite-open]'), d = e.target.closest('[data-h-cite-del]');
+            if (o) return ext.lists.cited_names(++st.workspaceToken, {media: Number(o.dataset.hCiteOpen)});
+            if (d) { await api('delete_cited_name', {}, {method: 'POST', body: {id: d.dataset.hCiteDel}}); rerender(); }
+        });
     };
     async function renderTranscriptionMarking(token, mediaId) {
         let data;

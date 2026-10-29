@@ -393,7 +393,7 @@ function art_boot(PDO $pdo, int $personId): array
     art_ensure($pdo);
     $p = $pdo->prepare('SELECT id, first_name, last_name, gender, is_artist, artist_discipline, COALESCE(is_locked,0) AS is_locked FROM persons WHERE id=?'); $p->execute([$personId]);
     $person = $p->fetch(PDO::FETCH_ASSOC);
-    if (!$person) { throw new RuntimeException('Fiche introuvable.'); }
+    if (!$person) { throw new LcndaBadInput('Artiste introuvable : cette fiche n’existe pas, ou plus (supprimée ?).'); } // 422 avec une phrase, pas une erreur 500
     $person['is_locked'] = (int) $person['is_locked'];
     if (function_exists('kiosk_state') && !empty(kiosk_state()['on'])) { $person['is_locked'] = 1; $person['kiosk'] = 1; } // mode consultation : lecture seule
     $pp = $pdo->prepare('SELECT profile_key, item_id FROM person_profiles WHERE person_id=? ORDER BY sort_order, profile_key'); $pp->execute([$personId]);

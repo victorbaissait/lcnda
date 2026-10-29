@@ -376,7 +376,7 @@ function vault_export(PDO $pdo, array $data): never
         $pdo->prepare('INSERT INTO cousin_vault_sent(cousin, size) VALUES(?,?)')->execute([$cousin, (int) filesize($out)]);
     } catch (Throwable $e) {
         @unlink($tmp); @unlink($out);
-        json_response(['error' => $e->getMessage()], 500);
+        json_response(['error' => $e->getMessage()], $e instanceof LcndaBadInput ? 400 : 500); // un mauvais mot de passe n'est pas une panne
     }
     header('Content-Type: application/octet-stream');
     header('Content-Disposition: attachment; filename="copie-chiffree-' . date('Ymd') . '.lcnda-coffre"'); // pas de nom de famille dans le nom du fichier envoyé
@@ -1149,7 +1149,8 @@ function compare_people(PDO $pdo, int $a, int $b): array
         $names = static fn(array $ids) => array_values(array_map(static fn($x) => trim($x['first_name'] . ' ' . $x['last_name']) . ($x['birth_year'] ? ' (' . $x['birth_year'] . ')' : ''), collection_people($pdo, $ids)));
         $sp = $pdo->prepare('SELECT CASE WHEN partner1_id=? THEN partner2_id ELSE partner1_id END FROM families WHERE partner1_id=? OR partner2_id=?'); $sp->execute([$id, $id, $id]);
         $count = static fn(string $sql) => (int) $pdo->query($sql)->fetchColumn();
-        return ['person' => $p, 'events' => $ev->fetchAll(), 'parents' => $names(h_parents($pdo, $id)), 'spouses' => $names(array_filter(array_map('intval', $sp->fetchAll(PDO::FETCH_COLUMN)))), 'children' => $names(h_children($pdo, [$id])),
+        $pf = $pdo->prepare('SELECT DISTINCT family_id FROM family_children WHERE child_id=?'); $pf->execute([$id]); // familles de parents (avertissement avant fusion)
+        return ['person' => $p, 'events' => $ev->fetchAll(), 'parents' => $names(h_parents($pdo, $id)), 'parent_families' => array_map('intval', $pf->fetchAll(PDO::FETCH_COLUMN)), 'spouses' => $names(array_filter(array_map('intval', $sp->fetchAll(PDO::FETCH_COLUMN)))), 'children' => $names(h_children($pdo, [$id])),
             'sources' => $count("SELECT count(*) FROM source_links WHERE (entity_type='person' AND entity_id={$id}) OR (entity_type='event' AND entity_id IN (SELECT id FROM events WHERE person_id={$id} OR family_id IN (SELECT id FROM families WHERE partner1_id={$id} OR partner2_id={$id})))"),
             'media' => $count("SELECT count(*) FROM media_links WHERE entity_type='person' AND entity_id={$id}"), 'notes' => $count("SELECT count(*) FROM notes WHERE entity_type='person' AND entity_id={$id}")];
     };
@@ -1169,7 +1170,7 @@ function with_labels(PDO $pdo, string $type, array $rows, string $idKey = 'id'):
 }
 
 /** Formulaires de blocs : les étiquettes choisies (« pending_labels ») sont posées après l'enregistrement, même à la création. */
-const LABELED_SAVE_ACTIONS = ['save_voyage' => 'voyage', 'save_placement' => 'placement', 'save_coat_of_arms' => 'coat_of_arms', 'save_poilu' => 'poilu', 'save_field_trip' => 'field_trip',
+const LABELED_SAVE_ACTIONS = ['save_topic_sheet' => 'topic_sheet', 'save_voyage' => 'voyage', 'save_placement' => 'placement', 'save_coat_of_arms' => 'coat_of_arms', 'save_poilu' => 'poilu', 'save_field_trip' => 'field_trip',
     'save_family_paper' => 'family_paper', 'save_old_map' => 'old_map', 'save_probate_inventory' => 'probate_inventory', 'save_help_request' => 'help_request', 'save_parish' => 'parish',
     'save_cited_name' => 'cited_name', 'save_resistance' => 'resistance', 'save_custom_block_entry' => 'custom_block_entry', 'save_village_profile' => 'village', 'save_my_list' => 'custom_list', 'save_my_list_record' => 'custom_list_record', 'save_voter_cards' => 'voter', 'save_booklet' => 'family_booklet', 'save_pet' => 'pet'];
 

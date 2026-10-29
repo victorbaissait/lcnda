@@ -33,7 +33,7 @@
     const post = (action, body) => api(action, {}, {method: 'POST', body});
     const plural = (n, w) => (A()?.plural ? A().plural(n, w) : `${n} ${w}${n > 1 ? 's' : ''}`);
     const fmtN = n => (Number.isFinite(n) ? n.toLocaleString('fr-FR', {maximumFractionDigits: 2}) : '');
-    const DEF_W = 92, DEF_H = 24, HH = 24, RW = 46;
+    const DEF_W = 92, DEF_H = 24, HH = 24, RW = 46, ZMIN = 0.5, ZMAX = 3;
     const PREF_KEY = 'genealogie-tableur';
     const prefs = () => { try { const p = JSON.parse(localStorage.getItem(PREF_KEY) || '{}'); return p && typeof p === 'object' ? p : {}; } catch (_) { return {}; } };
     const setPrefs = p => { try { localStorage.setItem(PREF_KEY, JSON.stringify(p)); } catch (_) {} };
@@ -104,6 +104,7 @@
             this.calc = new (X().Calc)(this.wb);
             this.undoStack = []; this.redoStack = []; this.tx = null; this.dirty = !!o.data && !o.id && !o.back; this.savedAt = 0; // « Modifier les données » : rien de changé tant qu'on n'a rien tapé
             this.sel = {r0: 0, c0: 0, r1: 0, c1: 0}; this.act = [0, 0]; this.anchor = [0, 0];
+            this.zoom = Math.max(ZMIN, Math.min(ZMAX, Number(pref('zoom', 1)) || 1)); // K18 : le zoom commun, gardé d’une fois sur l’autre
             this.edit = null; this.refPick = null; this.clip = null; this.hiddenRows = new Map(); this.showFormulas = false;
             this.view = new Map(); this.win = null; this.geo = null;
         }
@@ -188,24 +189,47 @@
         ['Fichier', [M('new', '＋ Nouveau classeur'), M('template', '📋 Partir d’un modèle…'), '-', M('save', '💾 Enregistrer', '⌘S'), M('saveas', 'Enregistrer une copie…'), M('savetpl', 'Enregistrer comme modèle…'), '-', M('import', '⤒ Importer un tableau…', '⌘O'), M('export', '⤓ Exporter…', '⇧⌘E'), M('print', '🖨 Imprimer…', '⌘P'), '-', M('settings', '⚙️ Réglages du tableur…'), M('close', 'Fermer')]],
         ['Édition', [M('undo', '↶ Annuler', '⌘Z'), M('redo', '↷ Rétablir', '⇧⌘Z'), '-', M('cut', 'Couper', '⌘X'), M('copy', 'Copier', '⌘C'), M('paste', 'Coller', '⌘V'), M('pastevalues', 'Coller les valeurs seulement', '⇧⌘V'), '-', M('clear', 'Effacer le contenu', '⌫'), M('clearall', 'Effacer tout (contenu et mise en forme)'), M('selectall', 'Tout sélectionner', '⌘A'), '-', M('filldown', 'Recopier vers le bas', '⌘D'), M('fillright', 'Recopier vers la droite', '⌘R'), M('find', '🔍 Rechercher et remplacer…', '⌘F')]],
         ['Insertion', [M('rowabove', 'Ligne au-dessus'), M('rowbelow', 'Ligne en dessous'), M('colleft', 'Colonne à gauche'), M('colright', 'Colonne à droite'), M('newsheet', '＋ Nouvelle feuille'), '-', M('fn', 'ƒ Fonction…', '⇧F3'), M('autosum', 'Σ Somme automatique', '⌥='), M('today', '📅 Date du jour', '⌘;'), M('name', 'Nom pour la plage…'), M('comment', '💬 Note sur la cellule…'), '-', M('person', '👤 Une personne de la base', '⌘K'), M('place', '📍 Un lieu de la base'), '-', M('chart', '📊 Graphique depuis la sélection')]],
-        ['Format', [M('bold', 'Gras', '⌘B'), M('italic', 'Italique', '⌘I'), M('underline', 'Souligné', '⌘U'), M('strike', 'Barré'), '-', ...FORMATS.map(([k, l]) => M('fmt:' + k, l)), M('dec+', 'Une décimale de plus'), M('dec-', 'Une décimale de moins'), '-', M('wrap', '↵ Renvoi à la ligne'), M('merge', '⊞ Fusionner / séparer'), M('al:left', 'Aligner à gauche'), M('al:center', 'Centrer'), M('al:right', 'Aligner à droite'), '-', M('bd:all', '▦ Bordures : tout'), M('bd:out', '▭ Bordures : contour'), M('bd:bottom', '▁ Bordure du bas'), M('bd:none', 'Sans bordure'), '-', M('colwidth', 'Largeur de colonne…'), M('rowheight', 'Hauteur de ligne…'), M('autofit', 'Ajuster la largeur au contenu'), M('hiderows', 'Masquer les lignes'), M('hidecols', 'Masquer les colonnes'), M('showall', 'Tout remontrer'), '-', M('cf', 'Mise en forme conditionnelle…'), M('zebra', 'Une ligne sur deux'), M('clearfmt', 'Effacer la mise en forme')]],
+        ['Format', [M('bold', 'Gras', '⌘B'), M('italic', 'Italique', '⌘I'), M('underline', 'Souligné', '⌘U'), M('strike', 'Barré'), M('font', 'Aa Police…'), M('fontsize', 'Taille du texte…'), '-', ...FORMATS.map(([k, l]) => M('fmt:' + k, l)), M('dec+', 'Une décimale de plus'), M('dec-', 'Une décimale de moins'), '-', M('wrap', '↵ Renvoi à la ligne'), M('merge', '⊞ Fusionner / séparer'), M('al:left', 'Aligner à gauche'), M('al:center', 'Centrer'), M('al:right', 'Aligner à droite'), '-', M('bd:all', '▦ Bordures : tout'), M('bd:out', '▭ Bordures : contour'), M('bd:bottom', '▁ Bordure du bas'), M('bd:none', 'Sans bordure'), '-', M('colwidth', 'Largeur de colonne…'), M('rowheight', 'Hauteur de ligne…'), M('autofit', 'Ajuster la largeur au contenu'), M('hiderows', 'Masquer les lignes'), M('hidecols', 'Masquer les colonnes'), M('showall', 'Tout remontrer'), '-', M('cf', 'Mise en forme conditionnelle…'), M('zebra', 'Une ligne sur deux'), M('clearfmt', 'Effacer la mise en forme')]],
         ['Données', [M('sortaz', '↕ Trier A → Z'), M('sortza', '↕ Trier Z → A'), M('sort', 'Trier sur plusieurs colonnes…'), M('filter', '⚲ Filtrer', '⇧⌘L'), '-', M('dedupe', 'Supprimer les doublons…'), M('split', 'Convertir le texte en colonnes…'), M('validate', 'Validation des données…'), M('trim', 'Retirer les espaces en trop')]],
-        ['Affichage', [M('fz:row', 'Figer la 1re ligne'), M('fz:col', 'Figer la 1re colonne'), M('fz:here', 'Figer jusqu’à la cellule choisie'), M('fz:none', 'Libérer les volets'), '-', M('panel', 'Panneau de droite'), M('formulas', 'Montrer les formules', '⌘`'), M('gridlines', 'Quadrillage'), '-', M('keys', '⌨️ Raccourcis du tableur…'), M('help', '❓ Aide (FAQ)')]],
+        ['Affichage', [M('fz:row', 'Figer la 1re ligne'), M('fz:col', 'Figer la 1re colonne'), M('fz:here', 'Figer jusqu’à la cellule choisie'), M('fz:none', 'Libérer les volets'), '-', M('panel', 'Panneau de droite'), M('formulas', 'Montrer les formules', '⌘`'), M('gridlines', 'Quadrillage'), '-', M('zoom:fit', '⤢ Ajuster à la fenêtre', '⌘0'), M('zoom:100', '100 % (taille réelle)', '⌘1'), '-', M('keys', '⌨️ Raccourcis du tableur…'), M('help', '❓ Aide (FAQ)')]],
     ];
     // ext.sheetMenuExtra : [{menu: 'Données', cmd, label, key}] — des lignes ajoutées par d'autres fichiers (heritage-tableur-cibles.js…), leur commande dans ext.sheetCommands
     const menuItems = (title, base) => { const more = (ext.sheetMenuExtra || []).filter(x => x && x.menu === title && x.cmd); return more.length ? [...base, '-', ...more.map(x => M(x.cmd, x.label, x.key || ''))] : base; };
     const menusHtml = () => MENUS.map(([title, base]) => [title, menuItems(title, base)]).map(([title, items]) => `<details class="xl-menu" data-xl-menu="${esc(title)}"><summary>${esc(title)}</summary><div class="xl-menu-list" role="menu">${items.map(it => (it === '-' ? '<hr>' : `<button type="button" role="menuitem" data-xl-cmd="${esc(it.cmd)}"><span>${esc(it.label)}</span>${it.key ? `<kbd>${esc(kbd(it.key))}</kbd>` : ''}</button>`)).join('')}</div></details>`).join('');
     const toolsHtml = () => toolsHtml0().replace(/<span class="xl-g" data-tb="([\w-]+)" data-tb-label="([^"]*)"/g, (m, k, l) => `${m} data-tbg="xl-g-${k}" data-tbg-label="Barre d’outils · ${l}"`); // chaque bouton d'un groupe se range aussi un par un (⚙️ Personnaliser)
     const toolsHtml0 = () => `<div class="xl-tools" data-tbg="xl-tools" data-tbg-label="Barre d’outils">
-        <span class="xl-g" data-tb="text" data-tb-label="Police et gras"><button type="button" class="icon-button small" data-xl-cmd="bold" title="Gras" data-shortcut="⌘B"><b>G</b></button><button type="button" class="icon-button small" data-xl-cmd="italic" title="Italique" data-shortcut="⌘I"><i>I</i></button><button type="button" class="icon-button small" data-xl-cmd="underline" title="Souligné" data-shortcut="⌘U"><u>S</u></button><button type="button" class="icon-button small" data-xl-cmd="wrap" title="Renvoi à la ligne">↵</button><button type="button" class="icon-button small" data-xl-cmd="merge" title="Fusionner / séparer">⊞</button><button type="button" class="icon-button small" data-xl-cmd="al:left" title="Aligner à gauche">⟸</button><button type="button" class="icon-button small" data-xl-cmd="al:center" title="Centrer">≡</button><button type="button" class="icon-button small" data-xl-cmd="al:right" title="Aligner à droite">⟹</button></span>
+        <span class="xl-g" data-tb="text" data-tb-label="Police et gras"><button type="button" class="button small secondary xl-fontbtn" data-xl-cmd="font" title="Police (E5)" aria-label="Police">Police</button><input type="number" class="xl-fs" data-xl-fs data-unit="px" min="6" max="72" step="1" placeholder="13" aria-label="Taille du texte" title="Taille du texte"><button type="button" class="icon-button small" data-xl-cmd="bold" title="Gras" data-shortcut="⌘B"><b>G</b></button><button type="button" class="icon-button small" data-xl-cmd="italic" title="Italique" data-shortcut="⌘I"><i>I</i></button><button type="button" class="icon-button small" data-xl-cmd="underline" title="Souligné" data-shortcut="⌘U"><u>S</u></button><button type="button" class="icon-button small" data-xl-cmd="wrap" title="Renvoi à la ligne">↵</button><button type="button" class="icon-button small" data-xl-cmd="merge" title="Fusionner / séparer">⊞</button><button type="button" class="icon-button small" data-xl-cmd="al:left" title="Aligner à gauche">⟸</button><button type="button" class="icon-button small" data-xl-cmd="al:center" title="Centrer">≡</button><button type="button" class="icon-button small" data-xl-cmd="al:right" title="Aligner à droite">⟹</button></span>
         <span class="xl-g" data-tb="colors" data-tb-label="Couleurs (C2)"><button type="button" class="icon-button small xl-colbtn" data-xl-cmd="color:color" title="Couleur du texte"><b>A</b><i data-xl-sw="color"></i></button><button type="button" class="icon-button small xl-colbtn" data-xl-cmd="color:fill" title="Couleur du fond">◧<i data-xl-sw="fill"></i></button></span>
         <span class="xl-g" data-tb="format" data-tb-label="Format de cellule"><select data-xl-fmt aria-label="Format de la cellule" title="Format de la cellule">${FORMATS.map(([k, l]) => `<option value="${k}">${esc(l)}</option>`).join('')}</select><button type="button" class="icon-button small" data-xl-cmd="dec-" title="Une décimale de moins">.0</button><button type="button" class="icon-button small" data-xl-cmd="dec+" title="Une décimale de plus">.00</button></span>
         <span class="xl-g" data-tb="borders" data-tb-label="Bordures"><button type="button" class="icon-button small" data-xl-cmd="bd:all" title="Bordures : tout">▦</button><button type="button" class="icon-button small" data-xl-cmd="bd:out" title="Bordures : contour">▭</button><button type="button" class="icon-button small" data-xl-cmd="bd:bottom" title="Bordure du bas">▁</button><button type="button" class="icon-button small" data-xl-cmd="bd:none" title="Sans bordure">⊘</button></span>
-        <span class="xl-g" data-tb="data" data-tb-label="Trier, filtrer, Σ"><button type="button" class="button small secondary" data-xl-cmd="sortmenu" title="Trier la plage">↕ Trier ▾</button><button type="button" class="button small secondary" data-xl-cmd="filter" title="Filtrer (barre de recherche et filtres au-dessus)" data-shortcut="⇧⌘L">⚲ Filtrer</button><button type="button" class="button small secondary" data-xl-cmd="summenu" title="Somme, moyenne, nombre…">Σ ▾</button></span>
         <span class="xl-g" data-tb="chart" data-tb-label="Graphique"><button type="button" class="button small secondary" data-xl-cmd="chart" title="Un diagramme avec les chiffres de la sélection : les types conseillés pour cette plage">📊 Graphique ▾</button><button type="button" class="button small secondary" data-xl-cmd="fn" title="Choisir une fonction">ƒ Fonction</button></span>
     </div>`;
+    /** K19 : la colonne d’outils de 36 px — chercher et trier · calculer et mettre une fiche · voir (les mêmes commandes que les menus) ;
+     *  ↕ Trier, ⚲ Filtrer et Σ ont quitté la barre d’outils du haut pour elle (et restent dans le menu Données et le clic droit) */
+    const RAIL = [['find', '🔍', 'Rechercher et remplacer', '⌘F'], ['filter', '⚲', 'Filtrer (barre de recherche et filtres au-dessus)', '⇧⌘L'], ['sortmenu', '↕', 'Trier la plage'],
+        ['fn', 'ƒ', 'Choisir une fonction', '⇧F3'], ['summenu', 'Σ', 'Somme, moyenne, nombre…'], ['person', '👤', 'Une personne de la base dans la cellule', '⌘K'], ['place', '📍', 'Un lieu de la base dans la cellule'], ['comment', '💬', 'Note sur la cellule'],
+        ['chart', '📊', 'Graphique avec les chiffres de la sélection'], ['cf', '🎨', 'Mise en forme conditionnelle'], ['formulas', '=', 'Montrer les formules', '⌘`'], ['panel', '◫', 'Panneau de droite']];
+    const railHtml = () => `<nav class="xl-rail" data-xl-rail aria-label="Outils">${RAIL.map(([cmd, icon, title, key]) => `<button type="button" class="ed-tool" data-xl-cmd="${cmd}" title="${esc(title)}" aria-label="${esc(title)}"${key ? ` data-shortcut="${key}"` : ''}>${icon}</button>`).join('')}</nav>`;
+    const HELP_GRID = 'Tape pour écrire · = pour calculer · double-clic pour modifier · clic droit pour les actions · glisse le petit carré pour recopier';
+    const HELP_EDIT = 'Entrée valide · Tab : case à droite · Échap annule · pendant une formule, clique ou glisse sur des cellules pour les y mettre';
 
     Object.assign(Editor.prototype, {
+        /* ── K18 : le zoom commun [− 100 % ▾ +] (⌘0, ⌘1, ⌘+, ⌘−, ⌘ + molette) : la grille et sa case d’écriture grossissent ensemble ── */
+        setZoom(k, keep = true) {
+            const z = this.zoom = Math.max(ZMIN, Math.min(ZMAX, Math.round((Number(k) || 1) * 100) / 100));
+            if (this.wrap) this.wrap.style.zoom = z === 1 ? '' : String(z);
+            if (keep) setPrefs({...prefs(), zoom: z});
+            this.win = null; if (this.inner) { this.paint(true); if (this.edit && !this.edit.hiddenEd) this.placeEditor(); }
+            this.status?.sync();
+        },
+        /** « Ajuster à la fenêtre » : les colonnes remplies tiennent dans la largeur */
+        zoomFit() {
+            const u = this.calc.used(this.si), g = this.geometry(), need = RW + g.colX[Math.max(1, Math.min(u.c, g.nC))] + 4;
+            const w = (this.wrap.getBoundingClientRect().width || 800) / this.zq() * this.zoom;
+            this.setZoom(u.c ? Math.max(ZMIN, Math.min(2, w / need)) : 1);
+        },
+        /** écran → grille : la souris est en pixels de l’écran, la grille en pixels à 100 % */
+        zq() { const r = this.vp.getBoundingClientRect().width / (this.vp.offsetWidth || 1); return r > 0.05 ? r : 1; },
         open() {
             const U = UI(), dlg = this.dlg = document.createElement('dialog');
             dlg.className = 'modal xl-dlg'; dlg.dataset.ownClose = '1'; dlg.dataset.noFoot = '1'; dlg.setAttribute('data-no-foot', '');
@@ -216,15 +240,25 @@
             dlg.innerHTML = `<div class="xl">${top}${back}${toolsHtml()}
                 <div class="xl-fbar"><input class="xl-nbox" data-xl-nbox aria-label="Adresse (tape D12 ou un nom pour y aller)" title="Tape une adresse (D12, B2:C9) ou un nom pour y aller" spellcheck="false"><span class="xl-fxlab" aria-hidden="true">fx</span><textarea class="xl-fx" data-xl-fx rows="1" aria-label="Contenu ou formule de la cellule" spellcheck="false"></textarea></div>
                 <div class="xl-ac" data-xl-ac hidden role="listbox"></div>
-                <div class="xl-help" data-xl-help aria-live="polite"></div>
                 <div class="xl-filterbar" data-xl-filter hidden></div>
-                <div class="xl-body${pref('panel', true) && innerWidth > 760 ? '' : ' no-panel'}"><div class="xl-vpwrap"><div class="xl-vp" data-xl-vp data-ui-off data-ctx-off tabindex="-1" role="grid" aria-label="Feuille de calcul"><div class="xl-inner" data-xl-inner></div></div><textarea class="xl-kbd" data-xl-kbd aria-label="Feuille de calcul : tape pour écrire dans la cellule choisie" autocomplete="off" spellcheck="false"></textarea><textarea class="xl-ed" data-xl-ed hidden rows="1" spellcheck="false" aria-label="Écrire dans la cellule"></textarea></div>
+                <div class="xl-body${pref('panel', true) && innerWidth > 760 ? '' : ' no-panel'}">${railHtml()}<div class="xl-vpwrap" data-xl-wrap><div class="xl-vp" data-xl-vp data-ui-off data-ctx-off tabindex="-1" role="grid" aria-label="Feuille de calcul"><div class="xl-inner" data-xl-inner></div></div><textarea class="xl-kbd" data-xl-kbd aria-label="Feuille de calcul : tape pour écrire dans la cellule choisie" autocomplete="off" spellcheck="false"></textarea><textarea class="xl-ed" data-xl-ed hidden rows="1" spellcheck="false" aria-label="Écrire dans la cellule"></textarea></div>
+                    <div class="xl-help" data-xl-help aria-live="polite" hidden></div>
                     <aside class="xl-panel" data-xl-panel data-tbg="xl-panel" data-tbg-label="Panneau de droite"></aside></div>
-                <div class="xl-bottom"><div class="xl-tabs" data-xl-tabs role="tablist" aria-label="Feuilles"></div><div class="xl-status" data-xl-status title="Clique pour choisir ce qu’on y voit"></div></div></div>`;
+                <div class="xl-bottom"><div class="xl-tabs" data-xl-tabs role="tablist" aria-label="Feuilles"></div></div></div>`;
             document.body.appendChild(dlg);
             ext.fullInit?.(dlg, 'sheet', true);
             dlg.showModal();
             this.vp = this.$('[data-xl-vp]'); this.inner = this.$('[data-xl-inner]'); this.kb = this.$('[data-xl-kbd]'); this.ed = this.$('[data-xl-ed]'); this.fx = this.$('[data-xl-fx]'); this.ac = this.$('[data-xl-ac]'); this.help = this.$('[data-xl-help]');
+            this.wrap = this.$('[data-xl-wrap]');
+            // K19 : la colonne d’outils (36 px, groupes séparés) ; K18 : la barre du bas commune (où l’on est · l’aide · le zoom) ;
+            // K19 / E1 : les autres façons d’enregistrer dans « 💾 Enregistrer ▾ », seulement en haut
+            U.editorRail?.(this.$('[data-xl-rail]'), {breaks: ['[data-xl-cmd="fn"]', '[data-xl-cmd="chart"]']});
+            const where = document.createElement('button'); where.type = 'button'; where.className = 'xl-where'; where.setAttribute('data-xl-status', ''); where.title = 'Clique pour choisir ce qu’on y voit (somme, moyenne…)';
+            this.status = U.editorStatus({where, help: '', zoom: {get: () => this.zoom, set: k => this.setZoom(k), fit: () => this.zoomFit(), min: ZMIN, max: ZMAX}, wheel: this.wrap});
+            this.$('.xl').appendChild(this.status);
+            this.setZoom(this.zoom, false);
+            const saveBtn = this.$('.ui-topbar [data-xl-cmd="save"]:not([role="menuitem"])');
+            U.saveMenu?.(saveBtn, () => [{icon: '⧉', label: this.ctx.back ? 'Enregistrer une copie dans le Tableur…' : 'Enregistrer une copie…', run: () => this.run('saveas')}, {icon: '📋', label: 'Enregistrer comme modèle…', run: () => this.run('savetpl')}, '-', {icon: '⤓', label: 'Exporter (XLSX, ODS, CSV, PDF…)…', shortcut: '⇧⌘E', run: () => this.run('export')}]);
             this.buildPanel();
             this.bind();
             ext.tbApply?.(dlg, 'sheet');
@@ -424,7 +458,7 @@
         },
         /** où tombe la souris : coin, en-tête de colonne ou de ligne, case ; le bord d'une colonne (pour la largeur) */
         hit(e) {
-            const rc = this.vp.getBoundingClientRect(), x = e.clientX - rc.left, y = e.clientY - rc.top;
+            const rc = this.vp.getBoundingClientRect(), q = this.zq(), x = (e.clientX - rc.left) / q, y = (e.clientY - rc.top) / q;
             if (x < 0 || y < 0 || x > this.vp.clientWidth || y > this.vp.clientHeight) return null;
             const g = this.geometry(), gx = x - RW, gy = y - HH;
             const cx = gx < g.fcW ? gx : gx + this.vp.scrollLeft, cy = gy < g.frH ? gy : gy + this.vp.scrollTop;
@@ -470,6 +504,9 @@
             dlg.addEventListener('toggle', e => { const d = e.target; if (d.matches?.('.xl-menu[open]')) dlg.querySelectorAll('.xl-menu[open]').forEach(x => { if (x !== d) x.removeAttribute('open'); }); }, true);
             document.addEventListener('pointerdown', this.outside = e => { if (!dlg.isConnected) return document.removeEventListener('pointerdown', this.outside); if (!e.target.closest?.('.xl-menu')) dlg.querySelectorAll('.xl-menu[open]').forEach(x => x.removeAttribute('open')); });
             this.$('[data-xl-fmt]').addEventListener('change', e => this.run('fmt:' + e.target.value));
+            const fsIn = this.$('[data-xl-fs]');
+            fsIn?.addEventListener('change', () => { if (fsIn.value === '') return this.setFontSize(13); this.setFontSize(fsIn.value); });
+            fsIn?.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); fsIn.dispatchEvent(new Event('change')); this.focusGrid(); } else if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); this.syncTools(); this.focusGrid(); } });
             this.$('[data-xl-name]').addEventListener('change', e => { const n = e.target.value.trim().slice(0, 200) || 'Mon classeur'; if (n === this.name) return; this.name = n; this.touch(); });
             // les onglets des feuilles
             const tabs = this.$('[data-xl-tabs]');
@@ -494,6 +531,9 @@
             if ((h.zone === 'colh' || h.zone === 'rowh') && h.edge >= 0 && !touch) { e.preventDefault(); this.drag = {kind: h.zone === 'colh' ? 'colw' : 'rowh', i: h.edge, start: h.zone === 'colh' ? e.clientX : e.clientY, size: h.zone === 'colh' ? this.colW(h.edge) : this.rowH(h.edge)}; this.trackDrag(e); return; }
             // une formule en cours : un clic met la référence
             if (this.edit && this.canPoint()) { e.preventDefault(); if (h.zone === 'cell') { this.pointAt = [h.r, h.c]; this.pointAnchor = [h.r, h.c]; this.insertRef(h.r, h.c, h.r, h.c); this.drag = {kind: 'ref', a: [h.r, h.c]}; this.trackDrag(e); } return; }
+            // double-clic sur une case : écrire dedans (le premier clic redessine la grille, le « dblclick » du navigateur ne vient alors pas toujours)
+            const lc = this.lastDown, now = Date.now(); this.lastDown = h.zone === 'cell' ? {t: now, r: h.r, c: h.c} : null;
+            if (!touch && lc && h.zone === 'cell' && now - lc.t < 450 && lc.r === h.r && lc.c === h.c && !this.edit && !e.shiftKey) { e.preventDefault(); this.lastDown = null; this.select(h.r, h.c); this.startEdit(null); return; }
             if (touch) { this.touchStart = {x: e.clientX, y: e.clientY, h}; const up = ev => { window.removeEventListener('pointerup', up); if (Math.hypot(ev.clientX - this.touchStart.x, ev.clientY - this.touchStart.y) < 8) this.clickAt(this.touchStart.h, ev); }; window.addEventListener('pointerup', up); return; }
             e.preventDefault();
             this.clickAt(h, e);
@@ -510,15 +550,15 @@
         trackDrag(e0) {
             let lastE = e0;
             const step = () => { // défile tout seul près des bords
-                if (!this.drag) return; const rc = this.vp.getBoundingClientRect(), m = 24; let dx = 0, dy = 0;
-                if (lastE.clientY > rc.bottom - m) dy = 20; else if (lastE.clientY < rc.top + HH + 4 && this.drag.kind !== 'colw') dy = -20;
-                if (lastE.clientX > rc.right - m) dx = 20; else if (lastE.clientX < rc.left + RW + 4 && this.drag.kind !== 'rowh') dx = -20;
+                if (!this.drag) return; const rc = this.vp.getBoundingClientRect(), m = 24, q = this.zq(); let dx = 0, dy = 0;
+                if (lastE.clientY > rc.bottom - m) dy = 20; else if (lastE.clientY < rc.top + (HH + 4) * q && this.drag.kind !== 'colw') dy = -20;
+                if (lastE.clientX > rc.right - m) dx = 20; else if (lastE.clientX < rc.left + (RW + 4) * q && this.drag.kind !== 'rowh') dx = -20;
                 if (dx || dy) { this.vp.scrollLeft += dx; this.vp.scrollTop += dy; mv(lastE); }
                 this.dragTimer = setTimeout(step, 60);
             };
             const mv = ev => {
                 lastE = ev; const d = this.drag; if (!d) return;
-                if (d.kind === 'colw' || d.kind === 'rowh') { const v = Math.max(d.kind === 'colw' ? 24 : 14, Math.min(1200, d.size + (d.kind === 'colw' ? ev.clientX : ev.clientY) - d.start)); d.now = v; const sh = this.S(); const store = d.kind === 'colw' ? sh.cols : sh.rows, key = d.kind === 'colw' ? X().colName(d.i) : String(d.i + 1); d.orig = d.orig ?? JSON.stringify(store[key] || null); store[key] = {...(store[key] || {}), [d.kind === 'colw' ? 'w' : 'h']: Math.round(v)}; this.geo = null; this.render(); return; }
+                if (d.kind === 'colw' || d.kind === 'rowh') { const v = Math.max(d.kind === 'colw' ? 24 : 14, Math.min(1200, d.size + ((d.kind === 'colw' ? ev.clientX : ev.clientY) - d.start) / this.zq())); d.now = v; const sh = this.S(); const store = d.kind === 'colw' ? sh.cols : sh.rows, key = d.kind === 'colw' ? X().colName(d.i) : String(d.i + 1); d.orig = d.orig ?? JSON.stringify(store[key] || null); store[key] = {...(store[key] || {}), [d.kind === 'colw' ? 'w' : 'h']: Math.round(v)}; this.geo = null; this.render(); return; }
                 const h = this.hit(ev); if (!h) return; const g = this.geometry();
                 if (d.kind === 'sel') {
                     if (d.zone === 'colh') this.setSel(0, this.anchor[1], g.nR - 1, h.c); else if (d.zone === 'rowh') this.setSel(this.anchor[0], 0, h.r, g.nC - 1); else if (h.zone === 'cell') { this.cursor = [h.r, h.c]; this.setSel(this.anchor[0], this.anchor[1], h.r, h.c); }
@@ -546,7 +586,7 @@
             const plan = this.fillPlan(f, to), last = plan[plan.length - 1], rc = this.$('.xl-vpwrap').getBoundingClientRect();
             const v = last ? (typeof last.cell?.v === 'string' && last.cell.v[0] === '=' ? last.cell.v : X().formatValue(last.cell?.v ?? '', this.wb.styles[last.cell?.s] || {})) : '';
             tip.textContent = v === '' ? '' : `→ ${String(v).slice(0, 60)}`; tip.hidden = v === '';
-            tip.style.left = `${ev.clientX - rc.left + 14}px`; tip.style.top = `${ev.clientY - rc.top + 14}px`;
+            const q = this.zq(); tip.style.left = `${(ev.clientX - rc.left) / q + 14}px`; tip.style.top = `${(ev.clientY - rc.top) / q + 14}px`;
         },
         selectAll() { const u = this.calc.used(this.si); const g = this.geometry(); this.act = [0, 0]; this.anchor = [0, 0]; this.setSel(0, 0, Math.max(u.r - 1, g.nR - 1), Math.max(u.c - 1, g.nC - 1)); },
 
@@ -716,12 +756,13 @@
             this.showHelp('sig', 'ƒ Formule : clique ou glisse sur des cellules pour les mettre, ou tape le nom d’une fonction (en français ou en anglais). <kbd>F4</kbd> : $A$1.');
         },
         showHelp(kind = '', html = null) {
-            const h = this.help; h.className = `xl-help${kind ? ' is-' + kind : ''}`;
+            const h = this.help; h.className = `xl-help${kind ? ' is-' + kind : ''}`; h.hidden = false;
+            this.status?.setHelp(this.edit ? HELP_EDIT : HELP_GRID); // K18 : l’aide de l’outil au milieu de la barre du bas
             if (html !== null) { h.innerHTML = html; return; }
             const S = X(), [r, c] = this.act, v = this.calc.val(this.si, r, c);
             if (S.isErr(v)) { h.className = 'xl-help is-err'; h.innerHTML = `<b>⛔ ${esc(v.code)}</b> <span>→ ${esc(S.explain(v))}</span>${v.code === '#NOM?' && v.info?.sugg ? ` <button type="button" class="link-button" data-xl-cmd="fixname">Corriger en ${esc(v.info.sugg)}</button>` : ''}`; return; }
             if (this.calc.isApprox(this.si, r, c)) { h.className = 'xl-help is-sig'; h.innerHTML = '≈ <span>Résultat approché : une des dates est approximative (« vers », « avant », « an … » sans jour).</span>'; return; }
-            h.innerHTML = `<span>Astuce : tape <b>=</b> puis les premières lettres d’une fonction ; pendant une formule, clique ou glisse sur des cellules pour les y mettre. <kbd>Entrée</kbd> valide, <kbd>Échap</kbd> annule.</span>`;
+            h.innerHTML = ''; h.hidden = true; // rien à dire sur cette case : l’astuce est dans la barre du bas (K18)
         },
         /** la barre de formule et la case d'adresse suivent la case choisie */
         syncBar() {
@@ -806,6 +847,9 @@
                 case 'al': return this.styleSel(s => { if (st.h === arg) delete s.h; else s.h = arg; }, 'Alignement');
                 case 'bd': return this.styleSel((s, r, c, g) => { let b = s.bd || ''; if (arg === 'all') b = 'tblr'; else if (arg === 'none') b = ''; else if (arg === 'bottom') { if (r === g.r1) b += 'b'; } else if (arg === 'out') { if (r === g.r0) b += 't'; if (r === g.r1) b += 'b'; if (c === g.c0) b += 'l'; if (c === g.c1) b += 'r'; } b = [...new Set(b)].join(''); if (b) s.bd = b; else { delete s.bd; delete s.bs; } }, 'Bordures');
                 case 'color': return this.colorBox(arg, btn);
+                case 'font': return this.fontBox();
+                case 'fontsize': { const f = this.$('[data-xl-fs]'); if (f && f.offsetParent) { f.focus(); f.select?.(); return; } return A().askText({title: 'Taille du texte', message: 'En pixels (6 à 72) :', value: String(st.fs || 13), okLabel: 'Enregistrer'}).then(v => { if (v != null && String(v).trim() !== '') this.setFontSize(v); }); }
+                case 'zoom': return arg === 'fit' ? this.status?.zoom?.fit() : this.status?.zoom?.actual();
                 case 'merge': return this.toggleMerge();
                 case 'colwidth': case 'rowheight': return this.sizeDialog(p === 'colwidth');
                 case 'autofit': { const s = this.sel; this.begin('Largeur'); for (let c = s.c0; c <= Math.min(s.c1, s.c0 + 60); c++) this.autofit(c, true); this.commit(); return this.render(); }
@@ -837,6 +881,28 @@
             const S = X(), sh = this.S(), s = this.selClip(); this.begin(all ? 'Effacer tout' : 'Effacer');
             cellsOf(s).forEach(([r, c]) => { const k = S.addr(r, c), cell = sh.cells[k]; if (!cell) return; if (all) this.put(sh, k, null); else if (cell.v != null || cell.ref) { const n = {...cell, v: null}; delete n.ref; this.put(sh, k, n); } });
             const t = this.commit(); this.render(); return t;
+        },
+        /** E5 : la police des cellules choisies, par la liste unique des polices (UI.openFontPicker) */
+        async fontBox() {
+            const st = this.curStyle(), v = this.calc.val(this.si, ...this.act), sample = typeof v === 'string' && v.trim() ? v.trim().slice(0, 40) : 'Louise Borie, 1836';
+            const f = await UI().openFontPicker?.({value: st.font || '', sample, title: 'Police des cellules'});
+            if (!f) return this.focusGrid();
+            const name = String(f).replace(/["]/g, '').trim();
+            if (!/^[\w\s,'\-À-ÿ.]{1,60}$/.test(name)) return toast('Cette police a un nom que le tableur ne sait pas garder.', 'error');
+            this.styleSel(s => { s.font = name; }, 'Police'); this.focusGrid();
+        },
+        /** la taille du texte des cellules choisies (6 à 72 px ; 13 = la taille de départ) */
+        setFontSize(v) {
+            const n = Math.round(Number(String(v ?? '').replace(',', '.'))), fsIn = this.$('[data-xl-fs]'), shown = fsIn && fsIn.offsetParent;
+            if (!Number.isFinite(n) || n < 6 || n > 72) { // K1 : la phrase sous la case, la taille d'avant gardée (jamais un message par essai)
+                const st = this.curStyle();
+                if (fsIn) fsIn.value = st.fs ? String(st.fs) : '';
+                if (shown && UI()?.fieldError) UI().fieldError(fsIn, `Une taille entre 6 et 72 px (« ${String(v ?? '').trim().slice(0, 12)} » ne va pas).`, {toastIfMissing: false});
+                else toast('Une taille entre 6 et 72 px.', 'error');
+                return false;
+            }
+            if (fsIn) UI()?.clearFieldError?.(fsIn);
+            this.styleSel(s => { if (n === 13) delete s.fs; else s.fs = n; }, 'Taille du texte');
         },
         colorBox(kind, btn) {
             const st = this.curStyle();
@@ -895,14 +961,30 @@
             try { localStorage.setItem('genealogie-editor-shortcuts-tab', 'sheet'); } catch (_) {}
             ext.openDialog({eyebrow: 'TABLEUR', title: '⌨️ Raccourcis du tableur', wide: true, body: '<div data-xl-keys></div>', onOpen: d => { const box = d.querySelector('[data-xl-keys]'); if (ext.editorKeysPanel) ext.editorKeysPanel(box); else box.innerHTML = A().empty('Raccourcis indisponibles.'); }});
         },
+        /** K2 : les réglages du tableur sont gardés tout de suite (UI.autoSaveDialog) — pas de bouton « Enregistrer », « Fermer » seul,
+         *  « ✓ Enregistré » en haut, message H7 « ↶ Annuler », « ↺ Remettre comme au départ » sans question */
         settingsDialog() {
-            const p = prefs();
-            ext.openDialog({eyebrow: 'TABLEUR', title: '⚙️ Réglages du tableur', submitLabel: 'Enregistrer', body: `<label class="field">Après <kbd>Entrée</kbd>, aller<select name="enter"><option value="down"${p.enter !== 'right' ? ' selected' : ''}>vers le bas</option><option value="right"${p.enter === 'right' ? ' selected' : ''}>vers la droite (saisie de relevés en ligne)</option></select></label>
-                <label class="field">Séparateur des fichiers CSV<select name="csv"><option value=";"${(p.csv || ';') === ';' ? ' selected' : ''}>point-virgule « ; » (Excel en français)</option><option value=","${p.csv === ',' ? ' selected' : ''}>virgule « , »</option><option value="\t"${p.csv === '\t' ? ' selected' : ''}>tabulation</option></select></label>
-                <label class="field">Largeur des colonnes d’une feuille neuve<input type="number" data-unit="px" name="colw" min="40" max="300" value="${esc(p.colw || DEF_W)}"></label>
-                <label class="checkbox-line"><input type="checkbox" name="grid"${p.grid === false ? '' : ' checked'}> Quadrillage</label>
-                <label class="checkbox-line"><input type="checkbox" name="panel"${p.panel === false ? '' : ' checked'}> Panneau de droite ouvert</label>`,
-                onSubmit: f => { setPrefs({...prefs(), enter: f.elements.enter.value, csv: f.elements.csv.value, colw: Math.max(40, Math.min(300, Number(f.elements.colw.value) || DEF_W)), grid: f.elements.grid.checked, panel: f.elements.panel.checked}); this.$('.xl-body').classList.toggle('no-panel', !f.elements.panel.checked); this.render(); UI()?.savedStatus && toast('Réglages enregistrés.', 'success'); }});
+            const p = prefs(), want = p.status || ['sum', 'avg', 'count'];
+            const tog = (k, l, on) => UI().toggleHtml ? UI().toggleHtml(l, {checked: on, attrs: `name="${k}"`}) : `<label class="ui-toggle"><input type="checkbox" name="${k}"${on ? ' checked' : ''}><i></i>${esc(l)}</label>`;
+            ext.openDialog({eyebrow: 'TABLEUR', title: '⚙️ Réglages du tableur', submitLabel: 'Fermer', body: `<div class="xl-set-top"><button type="button" class="link-button" data-ui-reset>↺ Remettre comme au départ</button></div><div class="form-grid">
+                <label>Après la touche Entrée, aller<select name="enter"><option value="down"${p.enter !== 'right' ? ' selected' : ''}>vers le bas</option><option value="right"${p.enter === 'right' ? ' selected' : ''}>vers la droite (saisie de relevés en ligne)</option></select></label>
+                <label>Séparateur des fichiers CSV<select name="csv"><option value=";"${(p.csv || ';') === ';' ? ' selected' : ''}>point-virgule « ; » (Excel en français)</option><option value=","${p.csv === ',' ? ' selected' : ''}>virgule « , »</option><option value="\t"${p.csv === '\t' ? ' selected' : ''}>tabulation</option></select></label>
+                <label>Largeur des colonnes d’une feuille neuve<input type="number" data-unit="px" name="colw" min="40" max="300" value="${esc(p.colw || DEF_W)}"></label>
+                ${tog('grid', 'Quadrillage', p.grid !== false)}${tog('panel', 'Panneau de droite ouvert', p.panel !== false)}</div>
+                <fieldset class="xl-set-status"><legend>Dans la barre du bas, pour les cellules choisies</legend>${[['sum', 'Somme'], ['avg', 'Moyenne'], ['count', 'Nombre'], ['min', 'Minimum'], ['max', 'Maximum']].map(([k, l]) => `<label class="checkbox-line"><input type="checkbox" name="st_${k}"${want.includes(k) ? ' checked' : ''}> ${l}</label>`).join('')}</fieldset>`,
+                onOpen: d => {
+                    const save = () => { const f = d.querySelector('form'); if (!f) return; const q = {...prefs(), enter: f.elements.enter.value, csv: f.elements.csv.value, grid: f.elements.grid.checked, panel: f.elements.panel.checked, status: ['sum', 'avg', 'count', 'min', 'max'].filter(k => f.elements['st_' + k]?.checked)};
+                        const w = Number(f.elements.colw.value); if (Number.isFinite(w) && w >= 40 && w <= 300) q.colw = Math.round(w); setPrefs(q); };
+                    UI().autoSaveDialog?.(d, {keys: [PREF_KEY], save, label: 'Réglages du tableur', reload: () => { d.close(); this.settingsDialog(); },
+                        reset: () => { const z = prefs().zoom; setPrefs(z && z !== 1 ? {zoom: z} : {}); }, onChange: () => this.applyPrefs()});
+                },
+                onSubmit: () => {}});
+        },
+        /** après un réglage (ou son « ↶ Annuler ») : le panneau, le quadrillage et la barre du bas suivent */
+        applyPrefs() {
+            if (!this.dlg?.isConnected) return;
+            this.$('.xl-body').classList.toggle('no-panel', !(pref('panel', true) && innerWidth > 760));
+            this.render();
         },
 
         /* ── recopie (poignée, ⌘D, ⌘R) ── */
@@ -1076,7 +1158,7 @@
             if (dv.kind === 'person' || dv.kind === 'place') return this.openPicker(dv.kind, '', dv.allowFree !== false);
             if (dv.kind !== 'list') return;
             const rc = this.cellRect(...this.act), box = this.vp.getBoundingClientRect();
-            UI().menuAt({x: box.left + rc.x, y: box.top + rc.y + rc.h}, dv.list.map(v => ({label: v, run: () => { const sh = this.S(), k = S.addr(...this.act); this.begin('Choix'); this.put(sh, k, {...(sh.cells[k] || {}), v: S.parseInput(v).v}); this.commit(); this.render(); this.focusGrid(); }})), {title: 'Choisir'});
+            const q = this.zq(); UI().menuAt({x: box.left + rc.x * q, y: box.top + (rc.y + rc.h) * q}, dv.list.map(v => ({label: v, run: () => { const sh = this.S(), k = S.addr(...this.act); this.begin('Choix'); this.put(sh, k, {...(sh.cells[k] || {}), v: S.parseInput(v).v}); this.commit(); this.render(); this.focusGrid(); }})), {title: 'Choisir'});
         },
         cfDialog() {
             const S = X(), sh = this.S(), range = S.rangeStr(this.sel.r1 - this.sel.r0 > 100000 ? this.selClip() : this.sel);
@@ -1178,6 +1260,10 @@
             const st = this.curStyle(), on = (cmd, v) => this.dlg.querySelectorAll(`.xl-tools [data-xl-cmd="${cmd}"]`).forEach(b => b.classList.toggle('is-on', !!v));
             on('bold', st.b); on('italic', st.i); on('underline', st.u); on('wrap', st.wrap); on('al:left', st.h === 'left'); on('al:center', st.h === 'center'); on('al:right', st.h === 'right');
             on('merge', !!this.mergeOf(...this.act)); on('filter', !!this.S().filter);
+            const rail = (cmd, v) => { const b = this.$(`.xl-rail [data-xl-cmd="${cmd}"]`); if (b) { b.classList.toggle('is-active', !!v); b.setAttribute('aria-pressed', v ? 'true' : 'false'); } };
+            rail('filter', !!this.S().filter); rail('formulas', this.showFormulas); rail('panel', !this.$('.xl-body').classList.contains('no-panel'));
+            const fb = this.$('.xl-tools [data-xl-cmd="font"]'); if (fb) { fb.textContent = st.font || 'Police'; fb.style.fontFamily = st.font ? cssFont(st.font) : ''; fb.title = `Police (E5) : ${st.font || 'celle de départ'}`; }
+            const fs = this.$('[data-xl-fs]'); if (fs && document.activeElement !== fs) fs.value = st.fs ? String(st.fs) : '';
             const f = this.$('[data-xl-fmt]'); if (f) f.value = st.fmt || '';
             const sw = k => { const i = this.$(`[data-xl-sw="${k}"]`); if (i) i.style.background = X().safeCol(st[k]) || (k === 'color' ? '#000' : 'transparent'); }; sw('color'); sw('fill');
             const p = this.$('[data-xl-cmd="panel"]'); if (p) p.querySelector('span').textContent = this.$('.xl-body').classList.contains('no-panel') ? 'Panneau de droite : montrer' : 'Panneau de droite : cacher';
@@ -1232,7 +1318,7 @@
             const S = X(), s = this.sel, n = (s.r1 - s.r0 + 1) * (s.c1 - s.c0 + 1), want = pref('status', ['sum', 'avg', 'count']);
             let sum = 0, cnt = 0, min = Infinity, max = -Infinity, vals = 0; const g = n > 1 ? this.selClip() : s;
             if (n > 1 || true) for (let r = g.r0; r <= g.r1 && vals < 600000; r++) { if (this.hiddenRows.get(this.S().id)?.has(r)) continue; for (let c = g.c0; c <= g.c1; c++) { vals++; const v = this.calc.val(this.si, r, c); const x = typeof v === 'number' ? v : v instanceof S.SDate ? v.serial : null; if (x !== null) { sum += x; cnt++; if (x < min) min = x; if (x > max) max = x; } } }
-            const where = n > 1 ? `${S.rangeStr(s)} · ${plural(n, 'cellule')}` : `${S.addr(...this.act)} · 1 cellule`;
+            const where = `<b>${esc(this.S().name)} ! ${n > 1 ? S.rangeStr(s) : S.addr(...this.act)}</b>${n > 1 ? ` · ${plural(n, 'cellule')}` : ''}`; // K18 : à gauche, où l’on est (la feuille et la cellule)
             const parts = cnt ? [want.includes('sum') ? `Somme <b>${fmtN(sum)}</b>` : '', want.includes('avg') ? `Moyenne <b>${fmtN(sum / cnt)}</b>` : '', want.includes('count') ? `Nb <b>${cnt}</b>` : '', want.includes('min') ? `Min <b>${fmtN(min)}</b>` : '', want.includes('max') ? `Max <b>${fmtN(max)}</b>` : ''].filter(Boolean) : [];
             this.$('[data-xl-status]').innerHTML = [where, ...parts].join(' · ');
         },
@@ -1391,7 +1477,14 @@
         },
 
         /* ═════════ Enregistrer, fermer ═════════ */
-        async save({asNew = false, kind = this.kind, name = this.name, force = false} = {}) {
+        /** deux ⌘S rapides (ou double-clic sur 💾) : le second attend le premier et réutilise l'id créé (jamais deux classeurs) */
+        save(o = {}) {
+            if (o.asNew) return this._saveNow(o);
+            if (this._saving) return this._saving;
+            const p = this._saveNow(o), done = () => { if (this._saving === p) this._saving = null; };
+            this._saving = p; p.then(done, done); return p;
+        },
+        async _saveNow({asNew = false, kind = this.kind, name = this.name, force = false} = {}) {
             const S = X(); this.wb.active = this.si;
             // « ✓ Enregistrer et revenir » : les données repartent dans l'outil qui les a confiées (rien n'est rangé dans le Tableur, sauf « Enregistrer une copie… »)
             if (this.ctx.back && !asNew) {
@@ -1412,7 +1505,7 @@
                 UI()?.savedStatus?.(this.dlg, 'error');
                 if (e.conflict && !asNew) { // un autre onglet a enregistré ce classeur entre-temps
                     const choice = await (A().conflictBox?.({what: 'Ce classeur'}) ?? Promise.resolve(null));
-                    if (choice === 'overwrite') return this.save({asNew, kind, name, force: true});
+                    if (choice === 'overwrite') return this._saveNow({asNew, kind, name, force: true});
                     if (choice === 'reload') { const keep = this.id; this.dirty = false; this.dlg.close(); setTimeout(() => openWorkbook({...this.ctx, id: keep, data: undefined}), 50); }
                     return 0;
                 }

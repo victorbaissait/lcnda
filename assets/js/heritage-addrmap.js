@@ -47,7 +47,7 @@
     }, true);
 
     ext.addrMap = async (box, {insee = '', digestId = 0, year = 0} = {}) => {
-        box.innerHTML = '<p class="muted">Chargement du plan…</p>';
+        box.innerHTML = window.LCNDA_UI.spinner('Chargement du plan…');
         let D;
         try { D = await get('addr_map', {insee, digest_id: digestId || ''}); } catch (e) { box.innerHTML = `<p class="error">${esc(e.message)}</p>`; return; }
         if (!D.insee) { box.innerHTML = `<div class="maintenance-panel"><p>${esc(D.error || 'Commune inconnue.')}</p></div>`; return; }
@@ -70,7 +70,7 @@
 
         function shell() {
             const b = D.ban;
-            const banLine = b.count ? `🏛️ BAN : ${plural(b.count, 'adresse', 'adresses')} d’aujourd’hui pour ${esc(D.commune.name || D.insee)}${b.import?.imported_at ? ` <small class="muted">(lues le ${esc(new Date(b.import.imported_at.replace(' ', 'T')).toLocaleDateString('fr-FR'))})</small>` : ''} <button type="button" class="link-button" data-am-ban="reload" title="Retélécharger le fichier du département (adresses récentes)">↻ mettre à jour</button>`
+            const banLine = b.count ? `🏛️ BAN : ${plural(b.count, 'adresse', 'adresses')} d’aujourd’hui pour ${esc(D.commune.name || D.insee)}${b.import?.imported_at ? ` <small class="muted">(${window.LCNDA_UI?.when?.(b.import.imported_at, {label: 'lues'}) || 'lues le ' + esc(new Date(b.import.imported_at.replace(' ', 'T')).toLocaleDateString('fr-FR'))})</small>` : ''} <button type="button" class="link-button" data-am-ban="reload" title="Retélécharger le fichier du département (adresses récentes)">↻ mettre à jour</button>`
                 : b.file ? `🏛️ Le fichier des adresses du département ${esc(b.dept)} est là : <button type="button" class="button small" data-am-ban="import">Lire les adresses de ${esc(D.commune.name || D.insee)}</button>`
                 : `🏛️ Pour placer les adresses automatiquement, sans Internet ensuite : <button type="button" class="button small" data-am-ban="download">⤓ Télécharger les adresses du département ${esc(b.dept)} (BAN, une fois)</button>`;
             box.innerHTML = `<div class="h-am">

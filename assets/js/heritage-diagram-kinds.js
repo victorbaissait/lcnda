@@ -213,7 +213,7 @@
         const out = dg.querySelector('[data-dgi-wikires]'), url = dg.querySelector('[name=wiki]').value.trim();
         const m = url.match(/^https?:\/\/([a-z-]{2,12})\.(?:m\.)?wikipedia\.org\/wiki\/([^?#]+)/i);
         if (!m) { out.innerHTML = '<p class="error">Colle l’adresse d’une page Wikipédia (https://xx.wikipedia.org/wiki/…).</p>'; return; }
-        out.innerHTML = '<p class="muted">Lecture de la page…</p>';
+        out.innerHTML = window.LCNDA_UI.spinner('Lecture de la page…');
         try {
             const api = `https://${m[1].toLowerCase()}.wikipedia.org/w/api.php?action=parse&format=json&origin=*&prop=text|displaytitle&redirects=1&page=${encodeURIComponent(decodeURIComponent(m[2]))}`;
             const j = await (await fetch(api, {credentials: 'omit'})).json(); if (j.error) throw new Error(j.error.info || 'Page introuvable.');

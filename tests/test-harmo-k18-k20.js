@@ -31,6 +31,7 @@ const EDITORS = {
     'heritage-vector.js': 'Dessin (carte, arbre, faire-part, sceau)', 'heritage-layout.js': 'Mise en page', 'heritage-house.js': 'Maison',
     'heritage-retouch-simple.js': 'Retouche rapide', 'heritage-studio.js': 'Retouche', 'heritage-studio-av.js': 'Montage et Son',
     'heritage-transcribe.js': 'Transcription', 'heritage-slideshow.js': 'Diaporama', 'heritage-keynote.js': 'Présentation', 'heritage-boards.js': 'Tableaux',
+    'heritage-tableur.js': 'Tableur',
 };
 
 (async () => {

@@ -501,7 +501,7 @@
     const pChip = x => x?.id ? `<button type="button" class="ar-linkbtn" data-ar-person="${Number(x.id)}">${esc(pName(x))}</button>` : esc(pName(x));
     ART.pageSections.pf_identity = {icon: '👤', label: 'Identité, famille', w: '½', profile: 'common', render: C => {
         const st = C.store, d = st._pfDetail;
-        if (!d) { if (!st._pfLoading) { st._pfLoading = A().api('person', {id: st.pid}).then(r => { st._pfDetail = r || {}; if (C.S.view === 'page' && C.dlg.isConnected) C.paint(false); }).catch(() => { st._pfDetail = {}; }); } return {body: '<p class="muted"><span class="ui-spinner" aria-hidden="true"></span> Chargement…</p>'}; }
+        if (!d) { if (!st._pfLoading) { st._pfLoading = A().api('person', {id: st.pid}).then(r => { st._pfDetail = r || {}; if (C.S.view === 'page' && C.dlg.isConnected) C.paint(false); }).catch(() => { st._pfDetail = {}; }); } return {body: window.LCNDA_UI.spinner('Chargement de la fiche…')}; }
         const me = d.person || st.person, list = v => (Array.isArray(v) ? v : []).map(x => x.person || x.partner || x).filter(x => x && (x.first_name || x.last_name));
         const parents = list(d.parents), partners = list(d.partners), children = list(d.children), sibs = list(d.siblings);
         const parts = [parents.length && `${kin(me, 'Fils', 'Fille', 'Enfant')} de ${parents.map(pChip).join(' et ')}`,
@@ -520,7 +520,7 @@
         return null;
     };
     const PENDING = Symbol('…');
-    const LOADING = '<p class="muted"><span class="ui-spinner" aria-hidden="true"></span> Chargement…</p>';
+    const LOADING = window.LCNDA_UI?.spinner ? window.LCNDA_UI.spinner('Chargement…') : 'Chargement…';
     PF.loading = LOADING;
     ART.pageSections.pf_awards = {icon: '🏆', label: 'Concours et récompenses', w: '⅓', profile: 'common', render: C => {
         if (!ext.awards?.listFor) return {body: PF.muted('Bloc « 🏆 Concours et récompenses » de la fiche.'), empty: true};

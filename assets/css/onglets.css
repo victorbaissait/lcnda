@@ -1,0 +1,105 @@
+/* LCNDA — 📄 Documents et 🎨 Catalogue raisonné : les deux onglets du haut (heritage-onglets-documents.js, -catalogue.js).
+ * Couleurs par les variables de l'app (clair, sombre) ; la colonne réutilise .side-menu / .side-menu-item (K15). */
+
+/* ─── la colonne ─── */
+.ong-side { display: grid; gap: 10px; min-width: 0; }
+.ong-side .ui-listbar { margin: 0; }
+.ong-side .ui-listbar-row { flex-wrap: wrap; gap: 6px; }
+.ong-side .ui-listbar-search { flex: 1 1 100%; min-width: 0; }
+.ong-mode { display: flex; }
+.ong-mode button { flex: 1; }
+.ong-letters { display: flex; flex-wrap: wrap; gap: 2px; }
+.ong-letters button { min-width: 19px; padding: 2px 3px; border: 0; background: transparent; color: var(--blue); font: 700 11px var(--font-family); cursor: pointer; border-radius: 3px; }
+.ong-letters button:hover:not(:disabled) { background: var(--blue-soft); }
+.ong-letters button:disabled { opacity: .45; cursor: not-allowed; color: var(--muted); }
+.ong-list { display: grid; gap: 8px; min-width: 0; }
+.ong-menu, .ong-gbody { display: grid; gap: 6px; }
+.ong-lh { margin: 6px 0 0; scroll-margin-top: 8px; }
+.ong-row { display: grid; grid-template-columns: 40px minmax(0, 1fr) auto; gap: 9px; align-items: center; text-align: left; width: 100%; padding: 6px 8px; }
+.ong-row .ong-txt, .ong-gtitle .ong-txt { min-width: 0; display: grid; gap: 2px; }
+.ong-row strong, .ong-gtitle strong { font-size: 13px; line-height: 1.2; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ong-row small, .ong-gtitle small { font-size: 11px; color: var(--muted); font-weight: 400; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ong-row.is-active small, .ong-gtitle.is-active small { color: inherit; opacity: .85; }
+.ong-thumb, .ong-cov { width: 40px; height: 40px; display: grid; place-items: center; overflow: hidden; background: var(--blue-soft); border-radius: 3px; flex: none; }
+.ong-thumb img, img.ong-cov { width: 100%; height: 100%; object-fit: cover; display: block; }
+span.ong-cov.is-empty, .ong-ico { font-size: 20px; }
+.ong-kind { white-space: nowrap; }
+.ong-row.is-active .ui-badge, .ong-gtitle.is-active .ui-badge { color: inherit; border-color: currentColor; background: transparent; }
+.ong-loose-label { margin-top: 10px; }
+.ong-artist { display: grid; gap: 4px; }
+.ong-classer { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.ong-by { display: flex; gap: 6px; align-items: center; font-weight: 700; font-size: 12px; flex: 1 1 auto; min-width: 0; }
+.ong-by select { flex: 1; min-width: 0; }
+/* groupes (albums, périodes, techniques…) : comme les dossiers de Graphiques */
+.ong-grp { display: grid; gap: 6px; }
+.ong-gh { display: grid; grid-template-columns: 24px minmax(0, 1fr); gap: 4px; align-items: center; }
+.ong-car { border: 0; background: transparent; color: var(--ink); font-size: 14px; cursor: pointer; padding: 4px; }
+.ong-gtitle { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 8px; align-items: center; text-align: left; width: 100%; padding: 5px 8px; border: 1px solid var(--line-color); background: var(--card-bg); color: var(--ink); cursor: pointer; border-radius: 3px; font: inherit; }
+.ong-gtitle:not(:has(.ong-cov)) { grid-template-columns: minmax(0, 1fr) auto; }
+.ong-gtitle:hover { border-color: var(--blue); }
+.ong-gtitle.is-active { background: var(--blue); color: var(--white); border-color: var(--blue); }
+.ong-gbody { margin-left: 14px; padding-left: 10px; border-left: 3px solid var(--blue-soft); }
+.ong-side-h { margin: 4px 0 0; font-size: 10px; }
+.ong-track, .ong-app { display: grid; grid-template-columns: 34px minmax(0, 1fr) auto; gap: 6px; align-items: center; text-align: left; width: 100%; padding: 5px 8px; font-weight: 400; font-size: 12.5px; }
+.ong-app { border: 0; background: transparent; color: var(--ink); cursor: pointer; border-radius: 3px; font-family: inherit; }
+.ong-app:hover { background: var(--blue-soft); }
+.ong-pos { font-weight: 700; color: var(--blue); font-size: 11px; }
+.ong-track.is-active .ong-pos { color: inherit; }
+.ong-ttl { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+.ong-dur { font-variant-numeric: tabular-nums; color: var(--muted); font-size: 11.5px; }
+.ong-track.is-active .ong-dur { color: inherit; }
+.ong-song { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px; align-items: center; }
+.ong-song .ong-row { grid-template-columns: 26px minmax(0, 1fr); }
+.ong-apps { border: 1px solid var(--line-color); background: var(--card-bg); color: var(--blue); font: 700 11px var(--font-family); padding: 4px 6px; cursor: pointer; border-radius: 3px; white-space: nowrap; }
+.ong-applist { grid-column: 1 / -1; margin-left: 14px; padding-left: 8px; border-left: 3px solid var(--blue-soft); display: grid; }
+
+/* ─── la page de droite ─── */
+.ong-page .ong-cards { margin-top: 8px; }
+.ong-back { display: none; margin-bottom: 10px; }
+.ong-doc { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(260px, 1fr); gap: 18px; align-items: start; margin-bottom: 18px; }
+.ong-view { margin: 0; display: grid; gap: 6px; }
+.ong-big { display: grid; place-items: center; padding: 0; border: 1px solid var(--line-color); background: var(--card-head-bg); cursor: zoom-in; min-height: 220px; max-height: 70vh; overflow: hidden; border-radius: 3px; width: 100%; }
+.ong-big img { max-width: 100%; max-height: 70vh; object-fit: contain; display: block; }
+.ong-big.is-file { cursor: pointer; gap: 6px; color: var(--muted); font-size: 48px; }
+.ong-big.is-file small { font-size: 12px; }
+.ong-view figcaption { font-size: 12px; color: var(--muted); }
+.ong-page .card.ong-fields, .ong-page .card.ong-sec { padding: 14px 16px; }
+.ong-fields h3, .ong-sec h3 { margin: 0 0 10px; font-size: 15px; }
+.ong-fields dl { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 7px 14px; margin: 0; }
+.ong-fields dt { font-size: 12px; color: var(--muted); font-weight: 700; }
+.ong-fields dd { margin: 0; overflow-wrap: anywhere; }
+.ong-ok { display: block; color: var(--muted); font-size: 11.5px; margin-top: 2px; }
+.ong-sec { margin-bottom: 14px; }
+.ong-sh { display: flex; gap: 8px; align-items: center; margin-bottom: 8px; }
+.ong-sh h3 { margin: 0; }
+.ong-sh .spacer { flex: 1; }
+.ong-tr, .ong-pre { white-space: pre-wrap; font-family: Georgia, 'Times New Roman', serif; font-size: 14px; line-height: 1.55; margin: 0; max-height: 420px; overflow: auto; }
+.ong-people { display: flex; flex-wrap: wrap; gap: 8px; }
+.ong-person, .ong-app2 { display: inline-flex; gap: 8px; align-items: center; padding: 5px 10px 5px 5px; border: 1px solid var(--line-color); background: var(--card-bg); color: var(--ink); cursor: pointer; border-radius: 999px; font: inherit; text-align: left; }
+.ong-person:hover, .ong-app2:hover { border-color: var(--blue); }
+.ong-person span { display: grid; }
+.ong-person small, .ong-app2 small { color: var(--muted); font-size: 11px; }
+.ong-go { color: var(--blue); font-weight: 700; }
+.ong-av { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; font: 700 12px var(--font-family); background: var(--muted); color: var(--white); flex: none; }
+.ong-av.is-m { background: var(--blue); }
+.ong-av.is-f { background: #c2185b; }
+.ong-links { margin: 0; padding-left: 18px; display: grid; gap: 3px; }
+.ong-when { color: var(--muted); font-size: 12px; }
+.ong-apps-list { display: grid; gap: 8px; }
+.ong-app2 { border-radius: 4px; padding: 5px 10px 5px 5px; width: 100%; display: grid; grid-template-columns: 40px minmax(0, 1fr) auto; }
+.ong-app2 span { display: grid; min-width: 0; }
+.ong-arhost .ar-sheet { margin-top: 4px; }
+.ong-ro { margin: 0 0 8px; }
+
+@media (max-width: 900px) {
+    .ong-doc { grid-template-columns: 1fr; }
+}
+@media (max-width: 850px) {
+    .ong-back { display: inline-flex; }
+}
+@media (max-width: 560px) {
+    .ong-fields dl { grid-template-columns: 1fr; gap: 2px; }
+    .ong-fields dd { margin-bottom: 6px; }
+}
+/* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
+/* ═════ fin du mode sombre automatique ═════ */

@@ -30,15 +30,16 @@
             host.innerHTML = `<form class="h-tr-panel" data-hu-form><div class="form-grid"><label class="span-2">Le nom de la chasse<input name="title" value="La chasse au trésor de la famille ${T.esc(T.start(tr)?.last || '')}"></label>
                 <label class="span-2">Les cachettes, dans l’ordre (une par ligne ; la dernière est celle du trésor)<textarea name="spots" rows="6" placeholder="sous le paillasson\ndans la boîte aux lettres\nderrière l’horloge\nau fond du placard de l’entrée"></textarea></label>
                 <label class="span-2">Le trésor (ce qu’on trouve à la fin)<input name="treasure" placeholder="le gâteau d’anniversaire de Mamie"></label></div>
-                <p class="h-tr-row"><button class="button" type="submit">🗝️ Préparer la chasse</button><span class="h-tr-muted">Chaque énigme porte sur un ancêtre ; chaque réponse renvoie à une cachette : il faut la bonne réponse pour trouver la suite.</span></p></form>
-                ${hunts.length ? `<h3>Les chasses préparées</h3><ul class="h-tr-list">${hunts.map(h => `<li class="h-tr-item"><span class="h-tr-ic">🗝️</span><div class="h-tr-grow"><b>${T.esc(h.title)}</b><br><small>${(h.data?.spots || []).length} cachettes · ${T.esc(h.data?.treasure || '')}</small></div><button type="button" class="button small" data-hu-print="${h.id}">🖨 Les cartes</button><button type="button" class="h-tr-link" data-hu-del="${h.id}">Supprimer</button></li>`).join('')}</ul>` : ''}`;
+                <p class="h-tr-row"><span class="h-tr-muted">Chaque énigme porte sur un ancêtre ; chaque réponse renvoie à une cachette : il faut la bonne réponse pour trouver la suite.</span></p></form>
+                ${hunts.length ? `<h3>Les chasses préparées</h3><ul class="h-tr-list">${hunts.map(h => `<li class="h-tr-item"><span class="h-tr-ic">🗝️</span><div class="h-tr-grow"><b>${T.esc(h.title)}</b><br><small>${(h.data?.spots || []).length} cachettes · ${T.esc(h.data?.treasure || '')}</small></div><button type="button" class="button small secondary" data-hu-print="${h.id}" title="Les cartes des énigmes et la feuille de l’organisateur">🖨 Imprimer</button><button type="button" class="h-tr-link" data-hu-del="${h.id}">Supprimer</button></li>`).join('')}</ul>` : ''}`;
             host.querySelector('[data-hu-form]').addEventListener('submit', async ev => { ev.preventDefault(); const f = ev.target, spots = f.elements.spots.value.split('\n').map(s => s.trim()).filter(Boolean);
-                if (spots.length < 2) return T.toast('Donne au moins deux cachettes.', 'error');
-                const seed = Date.now() % 100000, plan = huntPlan(T, tr, spots, seed); if (plan.length < spots.length) return T.toast(`L’arbre ne donne que ${plan.length} énigme${plan.length > 1 ? 's' : ''} : enlève des cachettes.`, 'error');
+                if (spots.length < 2) return T.fail(f.elements.spots, 'Donne au moins deux cachettes.');
+                const seed = Date.now() % 100000, plan = huntPlan(T, tr, spots, seed); if (plan.length < spots.length) return T.fail(f.elements.spots, `L’arbre ne donne que ${plan.length} énigme${plan.length > 1 ? 's' : ''} : enlève des cachettes.`);
                 const r = await T.save({kind: 'hunt', title: f.elements.title.value.trim() || 'Chasse au trésor', data: {spots, treasure: f.elements.treasure.value.trim(), seed}}); T.toast('Chasse prête : imprime les cartes.', 'success'); await draw(); printHunt(T, tr, {title: f.elements.title.value, data: {spots, treasure: f.elements.treasure.value.trim(), seed}}); void r; });
         };
         host.addEventListener('click', async ev => { const p = ev.target.closest('[data-hu-print]'); if (p) { const h = (await T.items('hunt')).find(x => x.id === Number(p.dataset.huPrint)); if (h) printHunt(T, tr, h); }
             const d = ev.target.closest('[data-hu-del]'); if (d && await A().confirmBox('La chasse sera effacée.', {title: 'Supprimer ?', okLabel: 'Supprimer', danger: true})) { await T.remove(Number(d.dataset.huDel)); draw(); } });
+        T.actions(host, {primary: {label: '🗝️ Préparer la chasse', attrs: 'data-hu-go', run: () => host.querySelector('[data-hu-form]')?.requestSubmit()}});
         await draw();
     }
     const DECOYS = ['sous le lit', 'dans le four', 'derrière le canapé', 'dans la baignoire', 'sous l’évier', 'dans le panier à linge', 'derrière la porte du garage', 'dans la boîte à chaussures', 'sous le coussin', 'dans le pot de fleurs', 'au fond du frigo', 'sous la table de la cuisine'];
@@ -74,7 +75,7 @@
     function mysteryOf(T, tr, day) { const ps = pool(T, tr); if (!ps.length) return null; const r = T.rng(Number(day.replace(/-/g, '')) % 2147483646)(); return ps[Math.floor(r * ps.length)]; }
     async function renderMystery(host, T) {
         const tr = await T.tree(); let p = mysteryOf(T, tr, today()), shown = 1, over = false, tries = 0, mode = 'jour';
-        if (!p) { host.innerHTML = '<p class="h-tr-muted">Il faut quelques ancêtres avec une date, un lieu ou un métier.</p>'; return; }
+        if (!p) { host.innerHTML = T.empty('Il faut quelques ancêtres avec une date, un lieu ou un métier'); return; }
         const stats = () => { try { return JSON.parse(localStorage.getItem('lcnda-tr-mystery') || '{}'); } catch (_) { return {}; } };
         const draw = () => { const cl = clues(T, tr, p), st = stats();
             host.innerHTML = `<div class="h-tr-panel"><div class="h-tr-row" style="justify-content:space-between"><b>${mode === 'jour' ? `🕵️ L’ancêtre mystère du ${T.esc(T.dateFr(today()))}` : '🕵️ Un ancêtre mystère au hasard'}</b><span class="h-tr-muted">${st.games ? `${st.games} partie${st.games > 1 ? 's' : ''} · ${st.points} points` : ''}</span></div>
@@ -84,7 +85,7 @@
         const end = win => { over = win ? 'win' : 'lose'; const st = stats(); st.games = (st.games || 0) + 1; st.points = (st.points || 0) + (win ? Math.max(1, 11 - shown) : 0); try { localStorage.setItem('lcnda-tr-mystery', JSON.stringify(st)); } catch (_) {} draw(); };
         host.addEventListener('click', ev => {
             if (ev.target.closest('[data-my-more]')) { shown++; draw(); }
-            else if (ev.target.closest('[data-my-try]')) { const g = Number(host.querySelector('[name=guess]').value); if (!g) return T.toast('Choisis quelqu’un.', 'error'); if (g === p.id) end(true); else { tries++; shown = Math.min(clues(T, tr, p).length, shown + 1); T.toast('Non, ce n’est pas ça… un indice de plus.'); draw(); } }
+            else if (ev.target.closest('[data-my-try]')) { const g = Number(host.querySelector('[name=guess]').value); if (!g) return T.fail(host.querySelector('[name=guess]'), 'Choisis quelqu’un.'); if (g === p.id) end(true); else { tries++; shown = Math.min(clues(T, tr, p).length, shown + 1); T.toast('Non, ce n’est pas ça… un indice de plus.'); draw(); } }
             else if (ev.target.closest('[data-my-give]')) end(false);
             else if (ev.target.closest('[data-my-new]')) { const ps = pool(T, tr); p = ps[Math.floor(Math.random() * ps.length)]; shown = 1; over = false; tries = 0; mode = 'hasard'; draw(); }
             else if (ev.target.closest('[data-my-open]')) T.openPerson(p.id);
@@ -116,8 +117,8 @@
     }
     async function renderHero(host, T) {
         const tr = await T.tree(), cand = tr.people.filter(p => !p.living && p.by && (p.occ || (tr.fams.get(p.id) || []).length)), first = cand.find(p => p.occ && (tr.fams.get(p.id) || []).length) || cand[0];
-        if (!first) { host.innerHTML = '<p class="h-tr-muted">Il faut un ancêtre avec une date de naissance et un métier ou un mariage.</p>'; return; }
-        host.innerHTML = `<div class="h-tr-row h-tr-noprint"><div style="min-width:260px"><span class="pk-lab">Tu seras</span>${T.personField('hero', first.id)}</div><button type="button" class="button" data-he-go>📖 Commencer l’histoire</button></div><div data-he-out></div>`;
+        if (!first) { host.innerHTML = T.empty('Il faut un ancêtre avec une date de naissance et un métier ou un mariage'); return; }
+        host.innerHTML = `<div class="h-tr-row h-tr-noprint"><div style="min-width:260px"><span class="pk-lab">Tu seras</span>${T.personField('hero', first.id)}</div></div><div data-he-out></div>`;
         const out = host.querySelector('[data-he-out]');
         let ch = [], i = 0, same = 0, asked = 0, p = null, log = [];
         const draw = () => { const c = ch[i];
@@ -129,7 +130,9 @@
                 out.querySelector('[data-he-res]').innerHTML = `<p class="h-tr-he-res ${o.real ? 'ok' : ''}">${o.real ? '✨ Le même choix que ton ancêtre !' : '🌀 Une autre vie commence… mais revenons à la vraie.'} ${T.esc(c.real || '')}</p><button type="button" class="button" data-he-next>Tourner la page →</button>`; return; }
             if (ev.target.closest('[data-he-next]')) { i++; draw(); }
         });
-        host.addEventListener('click', ev => { if (ev.target.closest('[data-he-go]')) { p = tr.byId.get(Number(host.querySelector('[name=hero]').value)) || first; ch = chapters(T, tr, p); i = 0; same = 0; asked = 0; log = []; draw(); } });
+        const start = () => { p = tr.byId.get(Number(host.querySelector('[name=hero]').value)) || first; ch = chapters(T, tr, p); i = 0; same = 0; asked = 0; log = []; draw(); };
+        host.addEventListener('click', ev => { if (ev.target.closest('[data-he-go]')) start(); });
+        T.actions(host, {primary: {label: '📖 Commencer l’histoire', attrs: 'data-he-go', run: start}});
     }
     F.push({key: 'heros', group: 'jouer', icon: '📖', title: 'Le livre dont tu es le héros', desc: 'Vis la vie d’un ancêtre et fais ses choix — métier, mariage, départ — puis découvre ce qu’il a vraiment choisi.', render: renderHero});
     ext.tresorHero = {chapters};
@@ -157,7 +160,7 @@
     }
     async function renderCoinc(host, T) {
         const tr = await T.tree(), list = coincidences(T, tr);
-        host.innerHTML = list.length ? `<p class="h-tr-big">${list.length} coïncidence${list.length > 1 ? 's' : ''} dans l’arbre</p><ul class="h-tr-list">${list.map(c => `<li class="h-tr-item h-tr-print"><span class="h-tr-ic">${c.ic}</span><div class="h-tr-grow">${T.esc(c.text)}</div></li>`).join('')}</ul><p class="h-tr-muted">Plus l’arbre a de dates précises (jour et mois), plus il y en a.</p>` : '<p class="h-tr-muted">Aucune coïncidence trouvée : il faut des dates précises (jour et mois).</p>';
+        host.innerHTML = list.length ? `<p class="h-tr-big">${list.length} coïncidence${list.length > 1 ? 's' : ''} dans l’arbre</p><ul class="h-tr-list">${list.map(c => `<li class="h-tr-item h-tr-print"><span class="h-tr-ic">${c.ic}</span><div class="h-tr-grow">${T.esc(c.text)}</div></li>`).join('')}</ul><p class="h-tr-muted">Plus l’arbre a de dates précises (jour et mois), plus il y en a.</p>` : T.empty('Aucune coïncidence trouvée', {hint: 'Il faut des dates précises (jour et mois).'});
     }
     F.push({key: 'coincidences', group: 'decouvrir', icon: '🎯', title: 'Les coïncidences', desc: 'Nés le même jour, mort le jour de son anniversaire, mariés à cent ans d’écart jour pour jour : les hasards de l’arbre.', render: renderCoinc});
     ext.tresorCoinc = {coincidences};
@@ -179,7 +182,7 @@
             const f = tr.families.find(x => x.id === Number(host.querySelector('[data-wi-f]').value)), ids = isC ? (f ? [f.a, f.b] : []) : [Number(host.querySelector('[name=one]').value)].filter(Boolean);
             if (!ids.length) { out.innerHTML = ''; return; } const gone = whatIf(T, tr, ids), me = gone.find(p => p.id === st?.id), living = gone.filter(p => p.living).length, pct = Math.round(gone.length / Math.max(1, tr.people.length) * 100);
             out.innerHTML = gone.length ? `<div class="h-tr-panel h-tr-whatif"><p class="h-tr-big">🦋 ${gone.length} vie${gone.length > 1 ? 's' : ''} n’aurai${gone.length > 1 ? 'ent' : 't'} jamais existé</p><p>${pct} % de l’arbre${living ? `, dont ${living} personne${living > 1 ? 's' : ''} en vie aujourd’hui` : ''}.${me ? ` <b>Et ${T.esc(T.name(me))} non plus.</b>` : ''}</p>
-                <div class="h-tr-fade">${gone.map((p, i) => `<span class="h-tr-pill" style="animation-delay:${Math.min(i * 0.15, 6)}s">${T.esc(T.name(p))}${p.by ? ` (${p.by})` : ''}</span>`).join(' ')}</div></div>` : '<p class="h-tr-muted">Personne ne descend de ce choix dans l’arbre.</p>'; };
+                <div class="h-tr-fade">${gone.map((p, i) => `<span class="h-tr-pill" style="animation-delay:${Math.min(i * 0.15, 6)}s">${T.esc(T.name(p))}${p.by ? ` (${p.by})` : ''}</span>`).join(' ')}</div></div>` : T.empty('Personne ne descend de ce choix dans l’arbre', {icon: '🦋'}); };
         host.addEventListener('change', draw); draw();
     }
     F.push({key: 'et-si', group: 'decouvrir', icon: '🦋', title: '« Et si… »', desc: 'Et si ces deux-là ne s’étaient pas rencontrés ? Toutes les vies qui n’auraient jamais existé — peut-être la tienne.', render: renderWhatIf});

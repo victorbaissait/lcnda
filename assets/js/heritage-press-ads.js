@@ -174,7 +174,7 @@
 
     /* ─── Une annonce ─── */
     const TEMPLATES = [
-        ['🔎 Recherche de descendants', 'Recherche descendants de [Prénom NOM], né(e) en [année] à [commune], fils/fille de [parents]. Toute information bienvenue. Contact : [courriel / téléphone].'],
+        ['🔎 Recherche de descendants', 'Recherche descendants de [Prénom NOM], [né / née] en [année] à [commune], [fils / fille] de [parents]. Toute information bienvenue. Contact : [courriel / téléphone].'],
         ['📜 Recherche de renseignements', 'Cherche renseignements, photos ou documents sur la famille [NOM] de [commune / région], [période]. Merci de contacter [courriel].'],
         ['🖼️ Photo à identifier', 'Qui reconnaît ces personnes ? Photo prise vers [année] à [lieu], famille [NOM] probable. Réponse au journal ou [courriel].'],
         ['🎖️ Soldat, militaire', 'Recherche témoignages, lettres ou photos de [Prénom NOM], [grade] au [régiment], [mort / blessé] en [année] à [lieu]. Contact : [courriel].'],

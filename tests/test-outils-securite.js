@@ -122,7 +122,7 @@ const freePort = () => new Promise(res => { const s = net.createServer(); s.list
 
         /* 6. formes des avatars : SVG de 45 000 rectangles */
         await page.evaluate(() => { window.LCNDA_APP.state.maintenanceTab = 'design'; window.LCNDA_APP.setModule('maintenance'); });
-        await page.waitForSelector('[data-shp-new]'); await page.click('[data-shp-new]'); await page.click('.lc-shp-editor [data-tab="svg"]');
+        await page.waitForSelector('[data-shp-new]', {state: 'attached'}); await page.evaluate(() => document.querySelector('[data-shp-new]').click()); /* depuis la 0.9.0, le bouton est dans l'onglet « Le portrait », caché tant qu'on ne l'ouvre pas */ await page.click('.lc-shp-editor [data-tab="svg"]');
         await page.evaluate(() => { let s = '<svg xmlns="http://www.w3.org/2000/svg">'; for (let i = 0; i < 45000; i++) s += `<rect x="${i % 300}" y="${(i / 300) | 0}" width="1" height="1"/>`; document.querySelector('.lc-shp-editor [data-svg-text]').value = s + '</svg>'; });
         await page.waitForTimeout(1500);
         await page.evaluate(() => { window.__lt = 0; new PerformanceObserver(l => l.getEntries().forEach(e => { window.__lt = Math.max(window.__lt, e.duration); })).observe({ type: 'longtask' }); });

@@ -110,30 +110,47 @@
 
     /* ─────────── Listes → 🌍 Le monde autour ─────────── */
     ext.lists.world_events = async token => {
-        const st = ls('genealogie-world-list', {q: '', cat: '', own: false});
         let d; try { d = await api('world_events', {}); } catch (e) { A().$('#workspace').innerHTML = A().emptyState({icon: '⛔', text: e.message}); return; }
         if (token !== S().workspaceToken || S().module !== 'listes') return;
         CATS = d.cats || CATS;
-        const ws = A().$('#workspace');
+        const ws = A().$('#workspace'), KEY = 'listes:world_events';
+        if (!(d.events || []).length) { ws.innerHTML = `<section class="page collection-page h-world-page">${UI().pageHeader({title: '🌍 Le monde autour', help: 'Les grands événements de France et du monde et ton histoire locale.', actions: ['<button type="button" class="button" data-world-new="0">＋ Nouvel événement</button>']})}${A().emptyState({icon: '🌍', text: 'Aucun événement pour l’instant', hint: 'Une fête, une inondation, un incendie au village…', action: {label: '＋ Nouvel événement', attrs: 'data-empty-click="[data-world-new]"'}})}</section>`; return; }
+        // H10 : la barre commune ; les réglages d’avant (case, « Toutes les sortes », « Seulement les miens ») sont repris une fois
+        const old = UI().listBarState?.(KEY) ? null : ls('genealogie-world-list', null);
+        const fold = t => String(t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        const yearOf = v => { const m = String(v || '').match(/\b(\d{3,4})\b/); return m ? Number(m[1]) : 0; };
+        const reachOf = e => (e.own && e.reach === 'commune' ? 'commune' : /^(monde|europe)$/i.test(e.scope || '') ? 'monde' : /^france$/i.test(e.scope || '') ? 'france' : e.scope ? 'region' : 'commune');
+        const counts = {}, reachN = {}; d.events.forEach(e => { counts[e.cat] = (counts[e.cat] || 0) + 1; const r = reachOf(e); reachN[r] = (reachN[r] || 0) + 1; });
+        const n = (l, k) => `${l} (${k || 0})`;
         ws.innerHTML = `<section class="page collection-page h-world-page">${UI().pageHeader({title: '🌍 Le monde autour', help: 'Les grands événements de France et du monde (guerres, épidémies, lois, inventions, régimes) et ton histoire locale. Sur chaque fiche, le bloc « 🌍 Le monde autour » les met à côté de la vie de la personne, avec son âge.',
                 actions: ['<button type="button" class="button" data-world-new="0">＋ Nouvel événement</button>']})}
-            <div class="h-world-listbar"><label class="h-world-q"><span aria-hidden="true">🔍</span><input type="search" data-world-q value="${esc(st.q)}" placeholder="Chercher… (choléra, 1870, Corrèze)" aria-label="Chercher un événement"></label>
-                <select data-world-fcat aria-label="Sorte"><option value="">Toutes les sortes</option>${Object.entries(CATS).map(([k, c]) => `<option value="${esc(k)}" ${st.cat === k ? 'selected' : ''}>${c.icon} ${esc(c.label)}</option>`).join('')}</select>
-                <label class="ui-toggle"><input type="checkbox" data-world-own ${st.own ? 'checked' : ''}><i></i>Seulement les miens (${d.own})</label><span class="spacer"></span><span class="muted" data-world-count></span></div>
+            <div data-world-bar></div>
             <ol class="h-world-list" data-world-rows></ol>
             <section class="maintenance-panel"><h3>D’où viennent ces événements ?</h3><p>${esc(d.credit)}</p><p>Licence <a href="${esc(d.licence_url)}" target="_blank" rel="noopener noreferrer">${esc(d.licence)} ↗</a>. Chaque événement renvoie à sa source. Les « crises » servent aussi à la liste « Épidémies, guerres, hivers terribles ».</p></section></section>`;
-        const paint = () => {
-            const q = st.q.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
-            const rows = d.events.filter(e => (!st.own || e.own) && (!st.cat || e.cat === st.cat) && (!q || `${e.title} ${e.desc} ${e.scope} ${e.place || ''} ${e.from}`.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').includes(q)));
-            ws.querySelector('[data-world-count]').textContent = A().plural(rows.length, 'événement');
+        const bar = UI().listBar({key: KEY, search: {placeholder: 'Chercher… (choléra, 1870, Corrèze)', value: old?.q || ''},
+            filters: [
+                {id: 'cat', label: 'Sorte', type: 'check', value: old?.cat ? [old.cat] : [], options: Object.entries(CATS).filter(([k]) => counts[k]).map(([k, c]) => [k, `${c.icon} ${c.label}`, `${c.icon} ${c.label}`, counts[k]])},
+                {id: 'reach', label: 'Portée', type: 'check', options: [['monde', '🌍 Monde', '🌍 Monde', reachN.monde || 0], ['france', '🇫🇷 France', '🇫🇷 France', reachN.france || 0], ['region', '🗺 Région', '🗺 Région', reachN.region || 0], ['commune', '📍 Ma commune', '📍 Ma commune', reachN.commune || 0]]},
+                {id: 'own', label: 'Ajoutés par moi', type: 'check', value: !!old?.own, text: n('Ajoutés par moi', d.own)},
+                {id: 'from', group: 'Période', label: 'À partir de', type: 'date', placeholder: '1800', chipPrefix: 'Depuis'},
+                {id: 'to', group: 'Période', label: 'Jusqu’à', type: 'date', placeholder: '1914', chipPrefix: 'Jusqu’à'}],
+            sort: {options: [['old', 'Les plus anciens d’abord'], ['recent', 'Les plus récents d’abord'], ['az', 'A → Z'], ['za', 'Z → A']], value: 'old'},
+            onChange: () => paint()});
+        ws.querySelector('[data-world-bar]').replaceWith(bar);
+        function paint() {
+            const st = bar.state, f = st.filters, words = fold(st.q).split(/\s+/).filter(Boolean), from = yearOf(f.from), to = yearOf(f.to);
+            let rows = d.events.filter(e => (!f.own || e.own) && (!f.cat?.length || f.cat.includes(e.cat)) && (!f.reach?.length || f.reach.includes(reachOf(e)))
+                && (!from || e.to >= from) && (!to || e.from <= to)
+                && (!words.length || words.every(w => fold(`${e.title} ${e.desc} ${e.scope} ${e.place || ''} ${e.from} ${e.to}`).includes(w))));
+            const by = {old: (a, b) => a.from - b.from || a.to - b.to, recent: (a, b) => b.from - a.from || b.to - a.to,
+                az: (a, b) => String(a.title).localeCompare(String(b.title), 'fr', {sensitivity: 'base'}), za: (a, b) => String(b.title).localeCompare(String(a.title), 'fr', {sensitivity: 'base'})}[st.sort];
+            if (by) rows = [...rows].sort(by);
+            bar.setCount(`${A().plural(rows.length, 'événement')}${rows.length !== d.events.length ? ` sur ${d.events.length.toLocaleString('fr-FR')}` : ''}`);
             ws.querySelector('[data-world-rows]').innerHTML = rows.length ? rows.map(e => rowHtml({...e, hit: e.own && e.reach === 'commune' || (e.scope && !/^(france|monde|europe)$/i.test(e.scope)) ? 'local' : ''}, false)).join('')
-                : A().emptyState({icon: '🌍', text: st.own ? 'Tu n’as pas encore ajouté d’événement' : 'Aucun événement pour cette recherche', hint: 'Une fête, une inondation, un incendie au village…', action: {label: '＋ Nouvel événement', attrs: 'data-empty-click="[data-world-new]"'}});
-            lsSet('genealogie-world-list', st);
-        };
+                : f.own && !d.own ? A().emptyState({icon: '🌍', text: 'Tu n’as pas encore ajouté d’événement', hint: 'Une fête, une inondation, un incendie au village…', action: {label: '＋ Nouvel événement', attrs: 'data-empty-click="[data-world-new]"'}})
+                : A().emptyState({icon: '🔍', text: 'Aucun événement pour cette recherche', hint: 'Change les mots cherchés ou retire un filtre.'});
+        }
         paint();
-        ws.querySelector('[data-world-q]').addEventListener('input', e => { st.q = e.target.value; paint(); });
-        ws.querySelector('[data-world-fcat]').addEventListener('change', e => { st.cat = e.target.value; paint(); });
-        ws.querySelector('[data-world-own]').addEventListener('change', e => { st.own = e.target.checked; paint(); });
     };
     const relist = () => { if (S().module === 'listes' && S().listType === 'world_events') A().renderList?.(); else refreshBlocks(); };
 

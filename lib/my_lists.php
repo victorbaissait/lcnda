@@ -184,6 +184,7 @@ function save_my_list_row(PDO $pdo, array $data): array
     $exists = $pdo->prepare('SELECT 1 FROM custom_lists WHERE id=?'); $exists->execute([$listId]);
     if (!$exists->fetchColumn()) { throw new RuntimeException('Liste introuvable.'); }
     if ($key === 'f:new') { // nouvelle ligne écrite à la main
+        // une ligne supprimée reste marquée (included = -1) : son numéro n'est jamais redonné, « ↶ Annuler » la remet telle quelle
         $n = (int) $pdo->query("SELECT COALESCE(max(CAST(substr(row_key,3) AS INTEGER)),0)+1 FROM custom_list_rows WHERE list_id=" . $listId . " AND row_key LIKE 'f:%'")->fetchColumn();
         $key = 'f:' . $n;
         $pdo->prepare("INSERT INTO custom_list_rows(list_id, row_key, included, data_json) VALUES(?,?,1,'{}')")->execute([$listId, $key]);
@@ -193,14 +194,18 @@ function save_my_list_row(PDO $pdo, array $data): array
     $s = $pdo->prepare('SELECT * FROM custom_list_rows WHERE list_id=? AND row_key=?'); $s->execute([$listId, $key]);
     $row = $s->fetch() ?: ['included' => 0, 'data_json' => '{}'];
     $values = json_decode((string) $row['data_json'], true) ?: [];
+    $was = (int) $row['included'];
+    if (isset($data['values']) && is_array($data['values'])) { // ↶ Annuler (H7) : les cases d'une ligne écrite à la main reviennent
+        foreach (array_slice($data['values'], 0, 200, true) as $f => $v) { $f = preg_replace('/[^a-z0-9_]/', '', strtolower((string) $f)); if ($f !== '' && is_scalar($v)) { $values[$f] = mb_substr(safe_text((string) $v), 0, 2000); } }
+    }
     if (array_key_exists('included', $data)) { $row['included'] = max(-1, min(1, (int) $data['included'])); }
     if (isset($data['field'])) { $values[preg_replace('/[^a-z0-9_]/', '', strtolower((string) $data['field']))] = mb_substr(safe_text($data['value'] ?? ''), 0, 2000); }
-    if (str_starts_with($key, 'f:') && (int) $row['included'] === -1) { // ligne écrite à la main supprimée
-        $pdo->prepare('DELETE FROM custom_list_rows WHERE list_id=? AND row_key=?')->execute([$listId, $key]);
-        return ['ok' => true];
+    if (str_starts_with($key, 'f:') && (int) $row['included'] === -1) { // ligne écrite à la main supprimée : gardée cachée (numéro jamais redonné)
+        $pdo->prepare('INSERT OR REPLACE INTO custom_list_rows(list_id, row_key, included, data_json) VALUES(?,?,-1,?)')->execute([$listId, $key, json_encode($values, JSON_UNESCAPED_UNICODE)]);
+        return ['ok' => true, 'was' => $was, 'values' => $values];
     }
     $pdo->prepare('INSERT OR REPLACE INTO custom_list_rows(list_id, row_key, included, data_json) VALUES(?,?,?,?)')->execute([$listId, $key, (int) $row['included'], json_encode($values, JSON_UNESCAPED_UNICODE)]);
-    return ['ok' => true, 'row_key' => $key];
+    return ['ok' => true, 'row_key' => $key, 'was' => $was];
 }
 
 /** Les numéros Sosa de la personne de départ (si l'application sait les calculer). */

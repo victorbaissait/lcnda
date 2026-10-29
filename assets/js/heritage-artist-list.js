@@ -95,8 +95,18 @@
         const rows = L.fields.filter(f => f.on && f.type !== 'photos' && f.key !== 'title').map(f => { const t = ART.text(ctx, it, f); return t ? `<p><span class="k">${esc(f.short || f.label)}</span> ${esc(t)}</p>` : ''; }).join('');
         return `<article class="notice">${ph ? `<img src="${esc(absu(ph))}" alt="">` : ''}<div><h2>${esc(it.title)}${it.year ? ` <small>${esc(it.year)}</small>` : ''}</h2>${rows}</div></article>`;
     };
-    const printDoc = (title, inner) => { const w = window.open('', '_blank'); if (!w) { A().toast('La fenêtre d’impression est bloquée par le navigateur.', 'error'); return; }
-        w.document.write(`<!doctype html><meta charset="utf-8"><title>${esc(title)}</title><style>body{font:13px/1.45 Georgia,serif;margin:18px;color:#222}h1{font:700 22px system-ui}.notice{display:flex;gap:16px;border-bottom:1px solid #ccc;padding:10px 0;page-break-inside:avoid}.notice img{width:150px;max-height:190px;object-fit:contain}.notice h2{margin:0 0 4px;font-size:16px}.notice h2 small{color:#777;font-weight:400}.notice p{margin:2px 0}.k{font:700 9px system-ui;letter-spacing:.1em;text-transform:uppercase;color:#8a6a3a;margin-right:4px}@page{margin:14mm}</style><h1>${esc(title)}</h1>${inner}<script>onload=()=>setTimeout(()=>print(),300)<\/script>`); w.document.close(); };
+    /** L1 : la fenêtre « Imprimer » commune — notices ou tableau, une œuvre par page, page de titre, index (rows : le tableau) */
+    const printDoc = (title, store, list, rows = null) => {
+        const UI2 = window.LCNDA_UI; if (!UI2?.openPrintDialog) { A().toast('La fenêtre « Imprimer » n’est pas chargée.', 'error'); return; }
+        const many = list.length > 1, pm = c => c.what === 'notices' && c.one;
+        const table = () => { const r = (rows || (() => [['Titre', 'Année'], ...list.map(it => [it.title, it.year || ''])]))(); return `<table class="tb"><thead><tr>${r[0].map(h => `<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>${r.slice(1).map(l => `<tr>${l.map(v => `<td>${esc(v)}</td>`).join('')}</tr>`).join('')}</tbody></table>`; };
+        const notices = c => list.map(it => (pm(c) ? ART.noticeHtmlFor(store, it).replace('<article class="notice">', '<article class="notice one" data-k-page>') : ART.noticeHtmlFor(store, it))).join('');
+        const index = c => `<section class="ix"${pm(c) ? ' data-k-page' : ''}><h2>Index des œuvres</h2>${[...list].sort((x, y) => String(x.title).localeCompare(String(y.title), 'fr')).map(it => `<p>${esc(it.title)}${it.year ? ` — ${esc(it.year)}` : ''}</p>`).join('')}</section>`;
+        UI2.openPrintDialog({title, key: 'catalogue', zone: many ? 'Catalogue' : 'Notice', margin: 14,
+            options: many ? [{key: 'what', type: 'radio', value: 'notices', choices: [['notices', 'Notices complètes'], ['table', 'Liste en tableau']]},
+                {key: 'one', label: 'Une œuvre par page', checked: false, show: c => c.what === 'notices'}, {key: 'cover', label: 'Page de titre', checked: false}, {key: 'index', label: 'Index des œuvres', checked: false}] : [],
+            html: c => `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>${esc(title)}</title><style>body{font:13px/1.45 Georgia,serif;margin:0;color:#222}h1{font:700 22px system-ui}.cv{text-align:center;padding-top:30vh;break-after:page;page-break-after:always}.cv h1{font-size:34px}.notice{display:flex;gap:16px;border-bottom:1px solid #ccc;padding:10px 0;page-break-inside:avoid}.notice.one{break-after:page;page-break-after:always;border:0}.notice img{width:150px;max-height:190px;object-fit:contain}.notice h2{margin:0 0 4px;font-size:16px}.notice h2 small{color:#777;font-weight:400}.notice p{margin:2px 0}.k{font:700 9px system-ui;letter-spacing:.1em;text-transform:uppercase;color:#8a6a3a;margin-right:4px}.tb{width:100%;border-collapse:collapse;font-size:11px}.tb th,.tb td{border-bottom:1px solid #ccc;padding:3px 6px;text-align:left;vertical-align:top}.ix{break-before:page;page-break-before:always}.ix p{margin:2px 0}</style></head><body>${c.cover && many ? `<section class="cv"${pm(c) ? ' data-k-page' : ''}><h1>${esc(title)}</h1></section>` : pm(c) ? '' : `<h1>${esc(title)}</h1>`}${many && c.what === 'table' ? table() : notices(c)}${many && c.index ? index(c) : ''}</body></html>`});
+    };
     ART.exportList = (C, kind) => {
         const def = ART.defs[kind], store = C.store, ids = C.listIds ? C.listIds() : store.of(kind).map(i => i.id), list = ids.map(id => store.get(id)).filter(Boolean);
         const title = `${store.name} — ${def.many}`;
@@ -106,7 +116,7 @@
             const cellc = v => A().csvCell ? A().csvCell(v, {sep: ';', quote: 'always'}) : `"${String(v ?? '').replace(/"/g, '""')}"`;
             dl(new Blob(['﻿' + rows.map(r => r.map(cellc).join(';')).join('\r\n')], {type: 'text/csv;charset=utf-8'}), filename || `${fname(C, kind)}.csv`); };
         const file = filename => dl(new Blob([JSON.stringify({lcnda: 'artistes', version: 2, kind, exporte: new Date().toISOString(), items: list.map(it => ({kind: it.kind, data: it.data}))}, null, 1)], {type: 'application/json'}), filename || `${fname(C, kind)}.json`);
-        const print = () => printDoc(title, list.map(it => ART.noticeHtmlFor(store, it)).join(''));
+        const print = () => printDoc(title, store, list, tableRows);
         if (!UI().openExportDialog) return print();
         return UI().openExportDialog({title, defaultName: title, quality: false, info: U.plural(list.length, String(def.label).toLowerCase(), String(def.many).toLowerCase()), formats: [
             {id: 'pdf', hint: 'les notices illustrées (« Enregistrer en PDF »)', ext: '', run: async () => print()},
@@ -117,7 +127,7 @@
     };
     /* ═════════ Exporter (E3) : une fiche ═════════ */
     ART.exportItem = (C, it) => {
-        const title = it.title, print = () => printDoc(title, ART.noticeHtmlFor(C.store, it));
+        const title = it.title, print = () => printDoc(title, C.store, [it]);
         const file = filename => dl(new Blob([JSON.stringify({lcnda: 'artistes', version: 2, kind: it.kind, exporte: new Date().toISOString(), items: [{kind: it.kind, data: it.data}]}, null, 1)], {type: 'application/json'}), filename || `${fname(C, it.kind)}.json`);
         if (!UI().openExportDialog) return print();
         return UI().openExportDialog({title, defaultName: title, quality: false, info: 'les champs de l’onglet « L’export » (⚙️ Champs affichés)', formats: [

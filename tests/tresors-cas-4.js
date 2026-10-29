@@ -1,10 +1,12 @@
 'use strict';
 /** Les essais du lot 4 des Trésors (chasse au trésor, ancêtre mystère, livre dont tu es le héros, coïncidences, Et si) — appelés par tests/test-tresors.js */
+/** l'impression passe par la fenêtre « Imprimer » de l'app (K13) : on lit son aperçu */
+const printFrame = async page => { const fr = await (await page.waitForSelector('dialog.k-print[open] iframe', {timeout: 15000})).contentFrame(); return {waitForSelector: (...a) => fr.waitForSelector(...a), $$eval: (...a) => fr.$$eval(...a), content: () => fr.content(), close: () => page.click('dialog.k-print[open] [data-k-x]')}; };
 module.exports = async (t, {page, open, body}, assert) => {
     const T = fn => page.evaluate(`(() => { const {T} = window.LCNDA_EXT.tresors; return T.tree().then(tr => (${fn})(T, tr)); })()`);
     await t('🗝️ chasse au trésor : 3 cachettes, 3 énigmes ; la bonne réponse mène à la cachette suivante, les autres à des fausses pistes', async () => {
         await open('chasse'); await page.fill('[data-hu-form] [name="spots"]', 'sous le paillasson\nderrière l’horloge\ndans le grenier'); await page.fill('[data-hu-form] [name="treasure"]', 'le gâteau');
-        const pop = page.waitForEvent('popup'); await page.click('[data-hu-form] button[type="submit"]'); const w = await pop; await w.waitForSelector('.cd');
+        await page.click('[data-tr-page] .page-header [data-hu-go]'); const w = await printFrame(page); await w.waitForSelector('.cd');
         assert.equal(await w.$$eval('.cd', l => l.length), 3); const html = await w.content();
         assert.match(html, /Carte 2 <small>\(à cacher : sous le paillasson\)/); assert.match(html, /cherchez <u>derrière l’horloge<\/u>/); assert.match(html, /le gâteau/);
         const cards = await w.$$eval('.cd', l => l.map(c => c.textContent)); assert.ok(cards.every(c => (c.match(/cherchez/g) || []).length >= 3), 'chaque énigme a au moins trois pistes'); await w.close();

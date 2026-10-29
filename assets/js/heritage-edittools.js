@@ -70,11 +70,11 @@
     function arrangeTools(onDone) {
         const p = toolPrefs();
         ext.openDialog({eyebrow: 'OUTILS DE MODIFICATION', title: '⚙️ Ranger les outils', submitLabel: 'Enregistrer',
-            body: `<p class="muted">Range les onglets avec ↑ ↓ et décoche ceux que tu ne veux pas voir.</p><ol class="h-pet-layout" data-list>${orderedTools().map(t => `<li class="h-pet-lrow" data-k="${esc(t.key)}"><input type="checkbox" ${p.hidden.includes(t.key) ? '' : 'checked'} title="Montrer"><span>${t.icon} ${esc(t.label)}</span><button type="button" class="h-bt" data-up title="Monter">↑</button><button type="button" class="h-bt" data-down title="Descendre">↓</button></li>`).join('')}</ol><button type="button" class="button small secondary" data-reset>↺ Remettre comme au départ</button>`,
+            body: `<p class="muted">Range les onglets avec la poignée ⠿ (ou Alt + ↑ / ↓) et décoche ceux que tu ne veux pas voir.</p><ol class="h-pet-layout" data-list>${orderedTools().map(t => `<li class="h-pet-lrow" data-k="${esc(t.key)}"><input type="checkbox" ${p.hidden.includes(t.key) ? '' : 'checked'} title="Montrer"><span>${t.icon} ${esc(t.label)}</span><button type="button" class="h-bt" data-up title="Monter">↑</button><button type="button" class="h-bt" data-down title="Descendre">↓</button></li>`).join('')}</ol><button type="button" class="button small secondary" data-reset>↺ Remettre comme au départ</button>`,
             onOpen: dg => dg.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; const li = b.closest('[data-k]');
                 if (b.hasAttribute('data-up')) li.previousElementSibling?.before(li); else if (b.hasAttribute('data-down')) li.nextElementSibling?.after(li);
                 else if (b.hasAttribute('data-reset')) { try { localStorage.removeItem(ORDER_KEY); } catch (_) {} dg.close(); onDone?.(); } }),
-            onSubmit: f => { const li = [...f.querySelectorAll('[data-k]')], hidden = li.filter(x => !x.querySelector('input').checked).map(x => x.dataset.k); if (hidden.length >= li.length) { toast('Garde au moins un outil.', 'error'); return false; }
+            onSubmit: f => { const li = [...f.querySelectorAll('[data-k]')], hidden = li.filter(x => !x.querySelector('input').checked).map(x => x.dataset.k); if (hidden.length >= li.length) return UI()?.fail ? UI().fail(f.querySelector('[data-list]'), 'Garde au moins un outil : coche celui que tu veux voir.') : (toast('Garde au moins un outil.', 'error'), false); // K1 : sous la liste, la fenêtre reste ouverte
                 try { localStorage.setItem(ORDER_KEY, JSON.stringify({order: li.map(x => x.dataset.k), hidden})); } catch (_) {} onDone?.(); }});
     }
     ext.arrangeEditTools = arrangeTools;

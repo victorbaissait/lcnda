@@ -1616,6 +1616,46 @@
 :root[data-lc-density] .cw-q{padding:calc(8px * var(--lc-sp)) calc(10px * var(--lc-sp))}
 :root[data-lc-density] .cw-hist{gap:calc(2px * var(--lc-sp))}
 :root[data-lc-density] .cw-ft{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .lcf-lab{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .lcf-choices{gap:calc(12px * var(--lc-sp))}
+:root .lcf-ch:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root .lcf-th i:is([data-lc-sh="douces"], [data-lc-sh="douces"] *) {box-shadow:var(--lc-sh-m)}
+:root .lcf-th i:is([data-lc-sh="aucune"], [data-lc-sh="aucune"] *) {box-shadow:none}
+:root[data-lc-density] .lcf-ch b{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .lcf-ch b{padding:calc(7px * var(--lc-sp)) calc(9px * var(--lc-sp)) 0}
+:root[data-lc-density] .lcf-ch small{padding:calc(2px * var(--lc-sp)) calc(9px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+:root[data-lc-density] .lcf-pill{padding:1px calc(5px * var(--lc-sp))}
+:root .lcf-pill:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .lcf-grid{margin-top:calc(18px * var(--lc-sp))}
+:root[data-lc-density] .lcf-grid > div:first-child{padding-right:calc(22px * var(--lc-sp))}
+:root[data-lc-density] .lcf-grid > div + div{padding-left:calc(22px * var(--lc-sp))}
+:root[data-lc-density] .lcf-set{padding:calc(11px * var(--lc-sp)) 0}
+:root[data-lc-density] .lcf-k{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .lcf-colors{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .lcf-own{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .lcf-where{gap:calc(4px * var(--lc-sp)) calc(14px * var(--lc-sp))}
+:root[data-lc-density] .lcf-where label{gap:calc(7px * var(--lc-sp))}
+:root[data-lc-density] .lcf-row{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .lcf-actions{margin-top:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .lcf-pvh{margin-bottom:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .lcf-pvh{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .lcf-pvon{margin-top:calc(10px * var(--lc-sp))}
+:root .lcf-mini:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .lcf-top{gap:calc(12px * var(--lc-sp))}
+:root[data-lc-density] .lcf-top{padding:0 calc(10px * var(--lc-sp))}
+:root[data-lc-density] .lcf-top span.on{padding:calc(3px * var(--lc-sp)) calc(6px * var(--lc-sp))}
+:root[data-lc-density] .lcf-sd{padding:calc(10px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+:root[data-lc-density] .lcf-sd{gap:calc(6px * var(--lc-sp))}
+:root .lcf-sd i:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .lcf-content{padding:calc(14px * var(--lc-sp)) calc(16px * var(--lc-sp))}
+:root[data-lc-density] .lcf-content{gap:calc(12px * var(--lc-sp))}
+:root .lcf-c:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root .lcf-c:is([data-lc-sh="douces"], [data-lc-sh="douces"] *) {box-shadow:var(--lc-sh-m)}
+:root .lcf-c:is([data-lc-sh="aucune"], [data-lc-sh="aucune"] *) {box-shadow:none}
+:root[data-lc-density] .lcf-c{padding:calc(9px * var(--lc-sp))}
+@media (max-width: 900px){
+  :root[data-lc-density] .lcf-grid > div + div{margin-top:calc(14px * var(--lc-sp))}
+}
 /* picker.css */
 :root[data-lc-density] .pk-box{gap:calc(8px * var(--lc-sp))}
 :root .pk-box:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
@@ -4721,6 +4761,14 @@
 :root[data-lc-density] .jfn-veil{gap:calc(16px * var(--lc-sp))}
 :root[data-lc-density] .jfn-veil{padding:calc(60px * var(--lc-sp)) calc(20px * var(--lc-sp))}
 :root[data-lc-density] .jfc-grid{padding:calc(6px * var(--lc-sp))}
+/* jeux-patience.css */
+:root[data-lc-density] .jfp-backs{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .jfp-backs{margin-top:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .pc-count{padding:1px calc(5px * var(--lc-sp))}
+:root[data-lc-density] .jfp-tools{gap:calc(6px * var(--lc-sp))}
+@media (max-width: 600px){
+  :root .jfp .goose-board-wrap:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+}
 /* bunker.css */
 :root .bk-dlg:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
 :root[data-lc-density] .bk-start{padding:calc(22px * var(--lc-sp)) calc(26px * var(--lc-sp))}

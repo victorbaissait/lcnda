@@ -161,32 +161,36 @@
     /* ═════════════════ 2. Réglages : « Portraits et avatars » et « Colonne de gauche » ═════════════════ */
     const PHOTO = 'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c9b48a"/><stop offset="1" stop-color="#7d6440"/></linearGradient></defs><rect width="100" height="100" fill="url(#g)"/><circle cx="50" cy="40" r="19" fill="#5b4428"/><path d="M14 100c4-24 18-34 36-34s32 10 36 34z" fill="#3e2d1a"/><path d="M31 37c2-16 36-16 38 0c-6-8-32-8-38 0z" fill="#2c1f12"/></svg>').replace(/\(/g, '%28').replace(/\)/g, '%29');
     const PEOPLE = {
-        joseph: {first_name: 'Joseph', last_name: 'MARTIN', gender: 'male', y: '1952–2010', sosa: 1, meta: '° 25 mai 1952 Naves · † 24 avril 2010'},
-        louise: {first_name: 'Louise', last_name: 'BORIE', gender: 'female', y: '1922–1999', sosa: 3, photo: PHOTO, meta: '° 9 mars 1922 Tulle · † 9 déc. 1999'},
-        marie: {first_name: 'Marie', last_name: 'LEROY', gender: 'female', y: '1937–?', sosa: 2, meta: '° 20 juin 1937 Brive'},
-        camille: {first_name: 'Camille', last_name: 'DURAND', gender: '', y: '1871–?', meta: '° vers 1871'},
-        pompon: {first_name: 'Pompon', last_name: '', kind: 'animal', y: '2009–2021', meta: 'chat · 2009–2021'},
+        joseph: {first_name: 'Joseph', last_name: 'MARTIN', gender: 'male', y: '1952–2010', sosa: 1, meta: '° 25 mai 1952 Naves · † 24 avril 2010', short: '1952 – 2010', dates: '25 mai 1952 — 24 avril 2010', life: 'deceased'},
+        louise: {first_name: 'Louise', last_name: 'BORIE', gender: 'female', y: '1922–1999', sosa: 3, photo: PHOTO, meta: '° 9 mars 1922 Tulle · † 9 déc. 1999', short: '1922 – 1999', dates: '9 mars 1922 — 9 décembre 1999', life: 'deceased'},
+        marie: {first_name: 'Marie', last_name: 'LEROY', gender: 'female', y: '1937–?', sosa: 2, meta: '° 20 juin 1937 Brive', short: '1937', dates: '20 juin 1937 — ?', life: 'unknown'},
+        camille: {first_name: 'Camille', last_name: 'DURAND', gender: '', y: '1871–?', meta: '° vers 1871', short: '1871', dates: 'vers 1871 — ?', life: 'unknown'},
+        pompon: {first_name: 'Pompon', last_name: '', kind: 'animal', y: '2009–2021', meta: 'chat · 2009–2021', short: '2009 – 2021', dates: '2009 — 2021', life: 'deceased'},
     };
     const pname = p => esc(p.first_name) + (p.last_name ? ' ' + esc(p.last_name) : '');
     /** aperçu avec un réglage donné (variables posées sur le portrait lui-même) */
     const av = (k, size, S) => P().avatar({...PEOPLE[k], name: [PEOPLE[k].first_name, PEOPLE[k].last_name].join(' ')}, size, {settings: S});
-    /** « Comme avant » : le dessin d'aujourd'hui de chaque endroit */
+    /** « Comme avant » : le dessin d'aujourd'hui de chaque endroit — les vraies classes de ces endroits (aperçu = ce qu'on voit ensuite) */
     function avOld(k, place, big) {
         const p = PEOPLE[k], ini = p.kind === 'animal' ? '🐾' : (p.first_name[0] + (p.last_name ? p.last_name[0] : '')).toUpperCase(), g = p.kind === 'animal' ? 'a' : p.gender === 'male' ? 'm' : p.gender === 'female' ? 'f' : 'u';
         if (place === 'fiche') { const s = big || 88; return `<span class="lck-old lck-old-fiche" style="width:${s}px;height:${s}px;font-size:${Math.round(s * .32)}px${p.photo ? `;background-image:url('${esc(p.photo)}')` : ''}">${p.photo ? '' : esc(ini)}</span>`; }
-        if (place === 'liste') return `<span class="lck-old lck-old-liste is-${g}">${esc(ini)}</span>`;
-        if (place === 'picker') return `<span class="lck-old lck-old-picker is-${g}"${p.photo ? ` style="background-image:url('${esc(p.photo)}')"` : ''}>${p.photo ? '' : esc(ini)}</span>`;
-        if (place === 'pastille') return `<span class="lck-old lck-old-pastille">${esc(ini)}</span>`;
+        // la liste des personnes (colonne) : pas d'initiales, seulement la photo de la fiche quand elle existe (app.js, .person-thumb)
+        if (place === 'liste') return p.photo ? `<img class="person-thumb" src="${esc(p.photo)}" alt="">` : '';
+        // le menu de choix et ses pastilles : le rond d'initiales du menu (app-picker.js, .pk-av)
+        if (place === 'picker' || place === 'pastille') return `<span class="pk-av ${g}${p.photo ? ' photo' : ''}"${p.photo ? ` style="background-image:url('${esc(p.photo)}')"` : ''} aria-hidden="true">${esc(ini)}</span>`;
         return '';
     }
     function placesHtml(S, old) {
         const X = (k, size, place) => (old ? avOld(k, place) : av(k, size, S));
         const fiche = `<div class="lck-place"><span>Fiche · 88 px</span><div class="lck-f-hero">${X('joseph', 88, 'fiche')}<div style="min-width:0"><div class="lck-eb">FICHE INDIVIDUELLE · #1</div><h4>Joseph MARTIN</h4><p>25 mai 1952 — 24 avril 2010</p></div></div></div>`;
-        const liste = `<div class="lck-place"><span>Liste · 34 px</span><div class="lck-f-rows">${['joseph', 'louise', 'camille', 'pompon'].map(k => `<div class="lck-f-row">${X(k, 34, 'liste')}<b>${pname(PEOPLE[k])}</b><small>${PEOPLE[k].y}</small></div>`).join('')}</div></div>`;
-        const picker = `<div class="lck-place"><span>Menu de choix · 34 px</span><div class="lck-f-pick"><div class="lck-ph">3 fiches trouvées</div>${['louise', 'marie', 'joseph'].map((k, i) => { const p = PEOPLE[k]; return `<div class="lck-pi${i === 0 ? ' on' : ''}">${X(k, 34, 'picker')}<div><b>${pname(p)}</b><small>${esc(p.meta)}</small></div>${p.sosa ? `<span class="lck-sosa-b">Sosa ${p.sosa}</span>` : ''}</div>`; }).join('')}</div></div>`;
+        // la vraie ligne de la liste des personnes (app.js) : point de vie, portrait (ou photo), nom et dates
+        const liste = `<div class="lck-place"><span>Liste · 34 px</span><div class="lck-f-rows person-list">${['joseph', 'louise', 'camille', 'pompon'].map(k => { const p = PEOPLE[k], pic = X(k, 34, 'liste'); return `<div class="person-list-item ${old ? (pic ? 'has-thumb' : '') : 'has-lc-av'}">${p.kind === 'animal' ? '<span class="animal-mark" title="Animal">🐾</span>' : ''}<span class="life-dot ${p.life}"></span>${pic}<span class="person-list-copy"><strong>${pname(p)}</strong><small>${esc(p.dates)}</small></span></div>`; }).join('')}</div>${old ? '<span class="lck-none-note">Aujourd’hui, pas d’initiales dans la liste des personnes : seulement la photo, quand la fiche en a une.</span>' : ''}</div>`;
+        // le vrai menu de choix (app-picker.js) : en-tête, lignes, badge Sosa
+        const picker = `<div class="lck-place"><span>Menu de choix · 34 px</span><div class="pk"><div class="pk-list is-static"><div class="pk-head"><span>3 fiches trouvées</span><span>↑ ↓ Entrée</span></div><div class="pk-scroll">${['louise', 'marie', 'joseph'].map((k, i) => { const p = PEOPLE[k]; return `<div class="pk-item pk-row${i === 0 ? ' on' : ''}">${X(k, 34, 'picker')}<div class="pk-txt"><div class="pk-name">${pname(p)}</div><div class="pk-meta">${esc(p.meta)}</div></div>${p.sosa ? `<span class="pk-badge sosa">Sosa ${p.sosa}</span>` : ''}</div>`; }).join('')}</div></div></div></div>`;
         const tbox = k => { const p = PEOPLE[k]; return `<div class="lck-f-box">${old ? '' : av(k, 48, S)}<div><b>${pname(p)}</b><small>${p.y}</small></div></div>`; };
         const arbre = `<div class="lck-place"><span>Arbre · 48 px</span><div class="lck-f-tree"><div class="lck-lvl">${tbox('joseph')}</div><div class="lck-vline"></div><div class="lck-lvl">${tbox('marie')}${tbox('louise')}</div></div>${old ? '<span class="lck-none-note">Aujourd’hui, pas de portrait dans les cases de l’arbre.</span>' : ''}</div>`;
-        const pastille = `<div class="lck-place"><span>Pastille · 22 px</span><div class="lck-f-chips">${['joseph', 'louise', 'camille', 'pompon'].map(k => `<span class="lck-f-chip">${X(k, 22, 'pastille')}${pname(PEOPLE[k])} <small>${PEOPLE[k].y.split('–')[0]}</small><span class="lck-x">×</span></span>`).join('')}</div></div>`;
+        // les vraies pastilles du menu de choix (plusieurs personnes) : portrait, nom, années · Sosa, ×
+        const pastille = `<div class="lck-place"><span>Pastille · 22 px</span><div class="pk"><div class="pk-chips">${['joseph', 'louise', 'camille', 'pompon'].map(k => { const p = PEOPLE[k], info = [p.short, p.sosa ? `Sosa ${p.sosa}` : ''].filter(Boolean).join(' · '); return `<span class="pk-chip">${X(k, 22, 'pastille')}<b>${pname(p)}</b>${info ? `<small>${esc(info)}</small>` : ''}<span class="x" aria-hidden="true">×</span></span>`; }).join('')}</div></div></div>`;
         return fiche + liste + picker + arbre + pastille;
     }
     const P_CARDS = [

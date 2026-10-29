@@ -86,12 +86,13 @@
     const blurred = {src: '', blur: -1, url: '', busy: null};
     function makeBlurred(src, blur) {
         if (!src) { blurred.src = ''; blurred.url = ''; return Promise.resolve(''); }
-        if (blurred.src === src && blurred.blur === blur && blurred.url) return Promise.resolve(blurred.url);
+        if (blurred.src === src && blurred.blur === blur && (blurred.url || blurred.failed)) return Promise.resolve(blurred.url);
+        blurred.failed = false;
         return new Promise(res => { const img = new Image(); img.onload = () => {
             try { const k = Math.min(1, 1200 / Math.max(img.width, img.height)), c = document.createElement('canvas'); c.width = Math.round(img.width * k); c.height = Math.round(img.height * k);
                 const g = c.getContext('2d'); g.filter = blur ? `blur(${blur}px)` : 'none'; g.drawImage(img, -blur * 2, -blur * 2, c.width + blur * 4, c.height + blur * 4);
                 Object.assign(blurred, {src, blur, url: c.toDataURL('image/jpeg', .82)}); } catch (_) { Object.assign(blurred, {src, blur, url: src}); }
-            res(blurred.url); }; img.onerror = () => res(''); img.src = src; });
+            res(blurred.url); }; img.onerror = () => { Object.assign(blurred, {src, blur, url: '', failed: true}); res(''); }; img.src = src; }); // illisible : noté, pour ne pas réessayer sans fin
     }
 
     /** pose le fond sur <html> ; ctx = {dark, blue, line} (app.js applyDesign) */
@@ -105,6 +106,7 @@
         if (F.kind === 'photo') {
             const src = photo();
             if (!src) { clear(); root.setAttribute('data-lc-grid', 'off'); return F; } // pas de photo ici (autre ordinateur, défaut du site) : uni
+            if (blurred.src === src && blurred.blur === F.blur && blurred.failed) { clear(); root.setAttribute('data-lc-grid', 'off'); return F; } // photo abîmée : fond uni
             if (blurred.src !== src || blurred.blur !== F.blur || !blurred.url) { clear(); makeBlurred(src, F.blur).then(() => apply(readDesign(), lastCtx)); return F; }
         }
         if (F.kind === 'carreaux' && isDefault(F) && ctx.dark) { clear(); return F; } // le départ, en sombre : comme avant
@@ -155,7 +157,7 @@
         const cur = () => read(Object.fromEntries(FIELDS.map(n => [n, field(n).value])));
         const draw = () => {
             const F = cur(), ctx = ctxNow();
-            $('[data-lcf-choices]').innerHTML = KINDS.map(([k, t, s]) => `<button type="button" class="lcf-ch${F.kind === k ? ' is-on' : ''}" data-lcf-kind="${k}" aria-pressed="${F.kind === k}"><span class="lcf-th"><span class="lcf-bg" data-th="${k}"></span>${k === 'photo' ? '<span class="lcf-veil"></span>' : ''}<i></i><i></i></span><b>${t}${k === 'carreaux' ? ' <span class="lcf-pill is-def">Par défaut</span>' : k === 'uni' ? '' : ' <span class="lcf-pill">Nouveau</span>'}</b><small>${s}</small></button>`).join('');
+            $('[data-lcf-choices]').innerHTML = KINDS.map(([k, t, s]) => `<button type="button" class="lcf-ch${F.kind === k ? ' is-on' : ''}" data-lcf-kind="${k}" aria-pressed="${F.kind === k}" aria-label="Fond : ${t}"><span class="lcf-th"><span class="lcf-bg" data-th="${k}"></span>${k === 'photo' ? '<span class="lcf-veil"></span>' : ''}<i></i><i></i></span><b>${t}${k === 'carreaux' ? ' <span class="lcf-pill is-def">Par défaut</span>' : k === 'uni' ? '' : ' <span class="lcf-pill">Nouveau</span>'}</b><small>${s}</small></button>`).join('');
             box.querySelectorAll('[data-th]').forEach(el => { const b = bgOf(F, {...ctx, dark: false}, el.dataset.th, true); el.style.backgroundImage = b.img; el.style.backgroundSize = b.size; el.style.backgroundPosition = b.photo ? 'center' : '0 0'; if (b.photo) el.style.filter = 'blur(3px)'; });
             box.querySelectorAll('[data-lcf-seg="size"] button').forEach(b => b.classList.toggle('is-active', b.dataset.v === F.size));
             box.querySelectorAll('[data-lcf-seg="pvmode"] button').forEach(b => b.classList.toggle('is-active', (b.dataset.v === 'sombre') === pv.dark));

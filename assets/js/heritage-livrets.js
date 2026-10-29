@@ -226,15 +226,18 @@
     function slotEditor(prefix, s, label, people, {child = false, removable = false} = {}) {
         s = s || {};
         const p = people[s.person_id];
+        // ✍️ « Né le » / « Née le » : d'après la place dans le livret, le sexe noté ou la fiche reliée (app-accord.js)
+        const who = /mother$/.test(prefix) ? 'female' : /father$/.test(prefix) ? 'male' : s.sex === 'F' || prefix === 'wife' ? 'female' : s.sex === 'M' || prefix === 'husband' ? 'male' : (p?.gender || 'unknown');
+        const acc = (w, x) => (window.LCNDA_ACCORD?.accord || ((_, t) => t))(who, w, {x});
         return `<fieldset class="h-bk-slotedit" data-bk-slot="${prefix}"><legend>${esc(label)}</legend>
             ${removable ? `<span class="h-bk-slottools"><button type="button" class="icon-button small" data-bk-up aria-label="Monter">↑</button><button type="button" class="icon-button small" data-bk-down aria-label="Descendre">↓</button><button type="button" class="icon-button small" data-bk-remove aria-label="Retirer">✕</button></span>` : ''}
             <div class="form-grid">
                 ${field('written_name', 'Nom et prénoms (tels qu’écrits)', s.written_name, 'MARTIN Jean Baptiste')}
                 <div><span class="pk-lab">Fiche reliée</span>${window.LCNDA_PICKER.pickerField({name: 'bk_p_' + prefix.replace(/[^a-z0-9_]/gi, '_'), kind: 'person', value: p ? Number(p.id) : (Number(s.person_id) || null)})}<button type="button" class="link-button" data-bk-create>＋ créer la fiche avec ce qui est écrit</button></div>
                 ${child ? `<label>Sexe <select name="sex"><option value="">—</option><option value="M" ${s.sex === 'M' ? 'selected' : ''}>garçon</option><option value="F" ${s.sex === 'F' ? 'selected' : ''}>fille</option></select></label>` : ''}
-                ${field('birth_date', 'Né(e) le', s.birth_date, '12 mars 1888')}${field('birth_place', 'à', s.birth_place, 'Pernay')}
+                ${field('birth_date', acc('Né(e) le', 'Naissance le'), s.birth_date, '12 mars 1888')}${field('birth_place', 'à', s.birth_place, 'Pernay')}
                 ${field('occupation', 'Profession', s.occupation)}${field('residence', 'Domicile', s.residence)}
-                ${field('death_date', 'Décédé(e) le', s.death_date)}${field('death_place', 'à', s.death_place)}
+                ${field('death_date', acc('Décédé(e) le', 'Décès le'), s.death_date)}${field('death_place', 'à', s.death_place)}
                 ${child ? `${field('marriage_note', 'Mention de mariage', s.marriage_note, 'marié le … à … avec …', 'span-2')}${field('recognition', 'Reconnaissance, légitimation', s.recognition, '', 'span-2')}` : ''}
                 ${field('note', 'Note', s.note, '', 'span-2')}
             </div></fieldset>`;
@@ -338,7 +341,7 @@
             ${m.media?.[0] ? A().mediaThumbHtml(m.media[0]) : '<span class="h-bk-coverart small">LIVRET</span>'}
             <div><button type="button" class="table-link" data-bk-goto="${m.id}"><strong>${esc(m.title)}</strong></button>
             <p><span class="h-bk-role">${esc(m.role_label)}</span>${m.commune ? ` · ${esc(m.commune)}` : ''}${m.issued ? ` · délivré le ${esc(m.issued)}` : ''}</p>
-            <small class="muted">${esc([m.slot?.written_name && `écrit : « ${m.slot.written_name} »`, m.slot?.birth_date && `né(e) le ${m.slot.birth_date}${m.slot.birth_place ? ' à ' + m.slot.birth_place : ''}`, m.marriage && `mariage ${m.marriage}`, m.slot?.death_date && `décès ${m.slot.death_date}`].filter(Boolean).join(' · '))}</small></div></article>`).join('')}</div>`, 'span-12');
+            <small class="muted">${esc([m.slot?.written_name && `écrit : « ${m.slot.written_name} »`, m.slot?.birth_date && `${(window.LCNDA_ACCORD?.accord || ((_, t) => t))(detail.person, 'né(e) le', {x: 'naissance le'})} ${m.slot.birth_date}${m.slot.birth_place ? ' à ' + m.slot.birth_place : ''}`, m.marriage && `mariage ${m.marriage}`, m.slot?.death_date && `décès ${m.slot.death_date}`].filter(Boolean).join(' · '))}</small></div></article>`).join('')}</div>`, 'span-12');
     };
     document.addEventListener('click', e => {
         const g = e.target.closest?.('[data-bk-goto]'); if (!g) return;

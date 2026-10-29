@@ -139,8 +139,8 @@
             <label class="checkbox-line"><input type="checkbox" name="lines" checked> Les constellations</label><label class="checkbox-line"><input type="checkbox" name="names" checked> Les noms</label>
             <label class="checkbox-line"><input type="checkbox" name="milky"> La Voie lactée (évocation)</label><label class="checkbox-line"><input type="checkbox" name="grid"> Les repères (hauteur, directions)</label><label class="checkbox-line"><input type="checkbox" name="frame"> Un cadre</label>
             <details><summary>✏️ Les textes</summary><label>Titre<input name="tt" placeholder="(le nom)"></label><label>Sous-titre<input name="ts" placeholder="(le lieu et la date)"></label><label>Dernière ligne<input name="tf" placeholder="(la lune, les planètes)"></label></details>
-            <p class="h-tr-row"><button type="button" class="button" data-sk-png>⬇ Image PNG</button><button type="button" class="button secondary" data-sk-layout title="Ouvrir dans l’atelier de mise en page (façon InDesign) pour tout retravailler">📐 Mise en page</button><button type="button" class="button secondary" data-sk-keep>💾 Garder dans les médias</button></p><div data-sk-info class="h-tr-muted"></div></form>
-            <canvas class="h-tr-canvas" data-sk-c width="1200" height="1340" style="max-width:520px"></canvas></div>`;
+            <div data-sk-info class="h-tr-muted"></div></form>
+            <div class="h-tr-view"><canvas class="h-tr-canvas" data-sk-c width="1200" height="1340" style="max-width:min(520px, 100%)"></canvas></div></div>`;
         const form = host.querySelector('[data-sk]'), cv = host.querySelector('[data-sk-c]'), info = host.querySelector('[data-sk-info]');
         let cur = null;
         const draw = () => {
@@ -155,9 +155,9 @@
         };
         form.addEventListener('change', draw); form.addEventListener('input', e => { if (['h', 'tt', 'ts', 'tf'].includes(e.target.name)) draw(); });
         const fname = () => `ciel-de-naissance-${(cur?.p?.first || 'x').toLowerCase().normalize('NFD').replace(/[^a-z0-9]+/g, '-')}.png`;
-        host.querySelector('[data-sk-layout]').addEventListener('click', () => cur && T.toLayout(`Le ciel de naissance de ${T.name(cur.p)}`, cv.toDataURL('image/png'), {w: 210, h: Math.round(210 * cv.height / cv.width)}));
-        host.querySelector('[data-sk-png]').addEventListener('click', () => cur && cv.toBlob(b => b && T.download(fname(), b), 'image/png'));
-        host.querySelector('[data-sk-keep]').addEventListener('click', () => cur && cv.toBlob(async b => { try { const m = await T.upload(b, 'image', `Le ciel de naissance de ${T.name(cur.p)}`, fname()); await T.post('tresor_write', {op: 'link_media', media_id: m.media_id, person_id: cur.p.id}); T.toast('Image gardée dans les médias de la fiche.', 'success'); } catch (err) { T.toast(err.message, 'error'); } }, 'image/png'));
+        T.actions(host, {exports: [{icon: '🖼', label: 'Image PNG', name: fname, make: () => (cur ? T.canvasPng(cv) : null)}],
+            layout: () => cur && T.toLayout(`Le ciel de naissance de ${T.name(cur.p)}`, cv.toDataURL('image/png'), {w: 210, h: Math.round(210 * cv.height / cv.width)}),
+            media: {title: () => `Le ciel de naissance de ${T.name(cur?.p)}`, person: () => cur?.p?.id, help: 'Aussi rangée sur sa fiche', make: async () => (cur ? {blob: await T.canvasPng(cv), name: fname()} : null)}});
         draw();
     }
     F.push({key: 'ciel', group: 'decouvrir', icon: '🌌', title: 'Le ciel de naissance', desc: 'Les étoiles, la Lune et les planètes au-dessus du village, la nuit de la naissance : une image à garder ou à offrir.', render: renderSky});

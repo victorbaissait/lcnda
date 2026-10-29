@@ -1,7 +1,9 @@
 'use strict';
 /** Les essais du lot 2 des Trésors (souvenirs, recettes, chansons, entretien, veillée, prénoms, pouvoir d'achat, vieux mots, quiz,
  *  faire-part, signatures, film, rideau, promenade, rappels, actes manquants, thème d'époque, bloc de la fiche) — appelés par tests/test-tresors.js */
-module.exports = async (t, {page, open, body}, assert) => {
+/** l'impression passe par la fenêtre « Imprimer » de l'app (K13) : on lit son aperçu */
+const printFrame = async page => { const fr = await (await page.waitForSelector('dialog.k-print[open] iframe', {timeout: 15000})).contentFrame(); return {waitForSelector: (...a) => fr.waitForSelector(...a), $$eval: (...a) => fr.$$eval(...a), content: () => fr.content(), close: () => page.click('dialog.k-print[open] [data-k-x]')}; };
+module.exports = async (t, {page, open, body, pick: exportPick}, assert) => {
     const pick = async (name, label) => page.evaluate(([n, l]) => { const T = window.LCNDA_EXT.tresors.T; return T.tree().then(tr => { const p = tr.people.find(x => T.name(x) === l); const el = document.querySelector(`dialog[open] [name="${n}"]`); el.value = String(p.id); el.dispatchEvent(new Event('change', {bubbles: true})); }); }, [name, label]);
     await t('👃 souvenir des sens : noté, filtré par sens, retrouvé par un mot', async () => {
         await open('sens'); await page.click('[data-c-new]'); await page.waitForSelector('dialog[open] [name="title"]');
@@ -15,17 +17,17 @@ module.exports = async (t, {page, open, body}, assert) => {
     await t('🥘 livre de recettes : une recette, puis le livre imprimé (couverture, sommaire, page)', async () => {
         await page.evaluate(() => window.LCNDA_EXT.tresors.T.save({kind: 'recipe', title: 'Le clafoutis de Rose', body: 'Beurrer le plat, y mettre les cerises.', data: {from: 'txt:Rose', dish: 'dessert', serves: 'pour 6', ingredients: '500 g de cerises\n3 œufs', story: 'Le dimanche de juin.'}}));
         await open('recettes'); assert.match(await body(), /Le clafoutis de Rose[\s\S]*La recette de Rose[\s\S]*500 g de cerises/);
-        const pop = page.waitForEvent('popup'); await page.click('[data-c-book]'); const w = await pop; await w.waitForSelector('.pg');
+        await page.click('[data-c-book]'); const w = await printFrame(page); await w.waitForSelector('.pg');
         const html = await w.content(); assert.match(html, /Le livre de recettes/); assert.match(html, /Sommaire/); assert.match(html, /Desserts et gâteaux/); assert.match(html, /3 œufs/); await w.close();
     });
     await t('🎶 chansons : paroles, air, chantée par ; le carnet s’imprime', async () => {
         await page.evaluate(() => window.LCNDA_EXT.tresors.T.save({kind: 'song', title: 'Dodo, l’enfant do', body: 'Dodo, l’enfant do,\nL’enfant dormira bien vite', data: {from: 'txt:Mémé Berthe', occasion: 'berceuse', tune: 'traditionnel'}}));
         await open('chansons'); assert.match(await body(), /Chantée par Mémé Berthe, sur l’air de « traditionnel »/);
-        const pop = page.waitForEvent('popup'); await page.click('[data-c-book]'); const w = await pop; await w.waitForSelector('.pg'); assert.match(await w.content(), /Le carnet de chansons[\s\S]*Berceuses/); await w.close();
+        await page.click('[data-c-book]'); const w = await printFrame(page); await w.waitForSelector('.pg'); assert.match(await w.content(), /Le carnet de chansons[\s\S]*Berceuses/); await w.close();
     });
     await t('🎙️ entretien guidé : les questions défilent (sans micro), les repères et les notes sont gardés', async () => {
         await open('entretien'); await page.uncheck('[data-iv-form] [name="rec"]'); await page.uncheck('[data-iv-form] [name="speak"]');
-        await page.click('[data-iv-form] button[type="submit"]'); await page.waitForSelector('.h-tr-ivq');
+        await page.click('[data-tr-page] .page-header [data-iv-go]'); await page.waitForSelector('.h-tr-ivq');
         const q1 = await page.textContent('.h-tr-ivq'); assert.match(q1, /Où es-tu né/);
         await page.fill('[data-iv-note]', 'À Tulle, rue de la Barrière'); await page.click('[data-iv-next]'); await page.waitForTimeout(100);
         assert.notEqual(await page.textContent('.h-tr-ivq'), q1); await page.click('[data-iv-stop]'); await page.waitForSelector('[data-iv-item]');
@@ -35,7 +37,7 @@ module.exports = async (t, {page, open, body}, assert) => {
         const s = await page.evaluate(() => { const {T} = window.LCNDA_EXT.tresors; return T.tree().then(tr => window.LCNDA_EXT.tresorVeillee.slides(T, tr, T.start(tr).id, 'asc', 4).map(x => [x.title, x.text, x.sub || ''])); });
         assert.match(s[0][0], /La veillée de la famille MARTIN/); assert.equal(s[1][0], 'Pierre FAURE'); assert.match(s.find(x => x[0] === 'Antoine MARTIN')[1], /Il était sabotier\. Il a épousé Marie DURAND le 20 mai 1876 à Naves/);
         assert.match(s.find(x => x[0] === 'Antoine MARTIN')[2], /arrière-arrière-grand-père de Léa/);
-        await open('veillee'); await page.uncheck('[data-vl-form] [name="voice"]'); await page.uncheck('[data-vl-form] [name="music"]'); await page.click('[data-vl-form] button[type="submit"]');
+        await open('veillee'); await page.uncheck('[data-vl-form] [name="voice"]'); await page.uncheck('[data-vl-form] [name="music"]'); await page.click('[data-tr-page] .page-header [data-vl-go]');
         await page.waitForSelector('.h-tr-veillee h2'); assert.match(await page.textContent('.h-tr-veillee h2'), /La veillée/);
         await page.click('.h-tr-veillee [data-vl="next"]'); await page.waitForTimeout(100); assert.equal(await page.textContent('.h-tr-veillee h2'), 'Pierre FAURE');
         await page.click('.h-tr-veillee [data-vl="close"]'); await page.waitForTimeout(100); assert.equal(await page.$('.h-tr-veillee'), null);
@@ -58,7 +60,7 @@ module.exports = async (t, {page, open, body}, assert) => {
     await t('📺 quiz du repas : des questions de l’arbre, la réponse, les points des équipes', async () => {
         const qs = await page.evaluate(() => { const {T} = window.LCNDA_EXT.tresors; return T.tree().then(tr => window.LCNDA_EXT.tresorQuiz.quizQuestions(T, tr, 10, 42)); });
         assert.equal(qs.length, 10); qs.forEach(q => { assert.ok(q.options.length >= 2); assert.ok(q.answer >= 0 && q.answer < q.options.length); });
-        await open('quiz-tv'); await page.fill('[data-qz-form] [name="teams"]', 'Rouges, Bleus'); await page.fill('[data-qz-form] [name="sec"]', '0'); await page.click('[data-qz-form] button[type="submit"]');
+        await open('quiz-tv'); await page.fill('[data-qz-form] [name="teams"]', 'Rouges, Bleus'); await page.fill('[data-qz-form] [name="sec"]', '0'); await page.click('[data-tr-page] .page-header [data-qz-go]');
         await page.waitForSelector('.h-tr-qz h2'); await page.keyboard.press('Enter'); await page.waitForSelector('.h-tr-qz-opt.is-good');
         await page.keyboard.press('2'); await page.waitForTimeout(80); assert.match(await page.textContent('.h-tr-qz-score'), /Bleus 1/);
         await page.keyboard.press('Escape'); await page.waitForTimeout(80); assert.equal(await page.$('.h-tr-quiz'), null);
@@ -69,13 +71,13 @@ module.exports = async (t, {page, open, body}, assert) => {
         await page.selectOption('[data-fp] [name="ev"]', m); await page.waitForTimeout(100);
         const txt = await page.inputValue('[data-fp] [name="txt"]'); assert.match(txt, /Antoine MARTIN et Marie DURAND/); assert.match(txt, /Pierre FAURE et Jeanne BORIE/); assert.match(txt, /\* Jean & Louise/); assert.match(txt, /célébré le 15 juin 1903 à Paris/);
         assert.match(await page.$eval('[data-fp-out] svg', s => s.outerHTML), /Jean &amp; Louise/);
-        const dl = page.waitForEvent('download'); await page.click('[data-fp-png]'); const d = await dl; assert.match(d.suggestedFilename(), /faire-part-jean\.png/);
+        const dl = page.waitForEvent('download'); await exportPick('Image PNG'); const d = await dl; assert.match(d.suggestedFilename(), /faire-part-jean\.png/);
         // plus d'options : format carré, écriture, couleurs, photo ; puis 📐 la mise en page
         await page.selectOption('[data-fp] [name="st"]', 'royal'); await page.selectOption('[data-fp] [name="format"]', 'carre'); await page.selectOption('[data-fp] [name="font"]', 'script'); await page.selectOption('[data-fp] [name="align"]', 'gauche');
         let svg = await page.$eval('[data-fp-out] svg', s => s.outerHTML); assert.match(svg, /viewBox="0 0 720 720"/); assert.match(svg, /Brush Script/); assert.match(svg, /fill="#14244a"/); assert.match(svg, /text-anchor="start"/);
         await page.check('[data-fp] [name="colors"]'); await page.$eval('[data-fp] [name="bg"]', i => { i.value = '#ffeedd'; i.dispatchEvent(new Event('input', {bubbles: true})); }); assert.match(await page.$eval('[data-fp-out] svg', s => s.outerHTML), /fill="#ffeedd"/);
         await page.uncheck('[data-fp] [name="colors"]'); await page.selectOption('[data-fp] [name="format"]', 'a6'); await page.selectOption('[data-fp] [name="align"]', 'centre'); await page.selectOption('[data-fp] [name="font"]', 'style');
-        await page.click('[data-fp-layout]'); await page.waitForSelector('.ly-item.ly-frame', {timeout: 10000}); assert.ok(await page.$('.ly-item.ly-frame image, .ly-item.ly-frame img'), 'le faire-part dans un cadre de la mise en page');
+        await exportPick('mise en page'); await page.waitForSelector('.ly-item.ly-frame', {timeout: 10000}); assert.ok(await page.$('.ly-item.ly-frame image, .ly-item.ly-frame img'), 'le faire-part dans un cadre de la mise en page');
         await page.keyboard.press('Escape'); await page.waitForTimeout(300); const left = await page.$('dialog[open] .ly-item'); if (left) await page.evaluate(() => document.querySelectorAll('dialog[open]').forEach(d => d.close()));
         // un décès : « dans sa 71e année », « De la part de »
         const dz = await page.evaluate(() => { const {T} = window.LCNDA_EXT.tresors; return T.tree().then(tr => window.LCNDA_EXT.tresorCard.announce(T, tr, tr.people.find(p => T.name(p) === 'Antoine MARTIN'), 'd')); });

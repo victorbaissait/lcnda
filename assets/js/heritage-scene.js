@@ -85,7 +85,7 @@
     };
     // des personnes en pastilles sur une ligne (« Sur scène : 👤 chant, 👤 accordéon »), rangées comme un champ simple
     T.sc_people = {...T.people, block: false, read: (f, v, ctx) => ART.normPeople(v).map(r => U.personChip(r, r.role, ctx)).join(' ')};
-    // une case qui ne s'affiche que cochée (« Complet », « Non crédité(e) »…) : rien quand elle ne l'est pas
+    // une case qui ne s'affiche que cochée (« Complet », « Pas au générique »…) : rien quand elle ne l'est pas
     T.sc_flag = {...T.bool, empty: v => v !== true};
     SC.cut = (t, n = 300) => { t = String(t ?? ''); return t.length > n ? `${t.slice(0, n)}…` : t; };
     SC.gated('sc_people'); SC.gated('rows'); SC.gated('person'); SC.gated('longtext'); SC.gated('number'); SC.gated('item');
@@ -209,7 +209,7 @@
 
     /* ═════════ 🎤 La fiche d'un soir ═════════ */
     const VENUES = [['', '—'], ['salle', 'Salle de spectacle'], ['plein_air', 'Plein air'], ['eglise', 'Église, chapelle'], ['chapiteau', 'Chapiteau'], ['bal', 'Bal, salle des fêtes'], ['cafe', 'Café, cabaret'], ['theatre', 'Théâtre'], ['opera', 'Opéra'], ['festival', 'Scène de festival'], ['radio', 'Radio (en public)'], ['tele', 'Télévision'], ['prive', 'Soirée privée'], ['autre', 'Autre']];
-    const CAST_STATUS = [['titulaire', 'titulaire'], ['remplacant', 'remplaçant(e)'], ['doublure', 'doublure'], ['creation', 'création du rôle'], ['derniere', 'dernière fois']];
+    const CAST_STATUS = [['titulaire', 'titulaire'], ['remplacant', 'en remplacement'], ['doublure', 'doublure'], ['creation', 'création du rôle'], ['derniere', 'dernière fois']];
     SC.CAST_STATUS = CAST_STATUS;
     const gate = values => ({field: 'skind', values, dflt: 'concert'});
     const tourOf = (store, it) => { const r = U.ref(it?.data?.tour); return r?.iid ? store?.get?.(r.iid) || {id: r.iid, title: r.title, kind: 'tour', data: {}} : r?.txt ? {id: 0, title: r.txt, data: {}} : null; };
@@ -302,7 +302,7 @@
     SC.typeHtml = (store, list, max = 30) => { const rows = SC.typeSetlist(store, list).slice(0, max); if (!rows.length) return '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📅</span><span class="empty-line-text">Pas encore de setlist notée pour ces dates.</span></p>';
         return `<div class="ar-scroll"><table class="ar-t sc-type"><thead><tr><th>Pos.</th><th>Titre le plus souvent à cette place</th><th>Joué</th><th></th></tr></thead><tbody>${rows.map(r => `<tr><td class="n">${esc(r.pos)}</td><td>${r.ref ? U.refChip(r.ref, '🎵') : esc(r.title)}</td><td>${r.n} / ${r.of}</td><td class="sc-barcell"><span class="sc-bar${r.pos[0] === 'R' ? ' is-enc' : ''}" style="width:${Math.round(r.n / Math.max(1, r.of) * 100)}%"></span></td></tr>`).join('')}</tbody></table></div>`; };
     ART.views.sc_tour_type = {read: (ctx, it) => { const l = SC.tourDates(ctx.store, it.id); return l.length ? SC.typeHtml(ctx.store, l) : ''; }, meta: (ctx, it) => { const n = SC.tourDates(ctx.store, it.id).filter(c => SC.rowsOf(c).length).length; return n ? `d’après ${esc(plural(n, 'setlist'))}` : ''; }};
-    ART.views.sc_tour_map = {read: (ctx, it) => SC.tourDates(ctx.store, it.id).some(c => U.place(c.data.place)?.plid) ? `<div class="sc-map" data-sc-map="tour:${it.id}"><p class="muted">Carte…</p></div>` : '<p class="muted">Les lieux des dates (choisis dans ta base) s’affichent ici, reliés dans l’ordre.</p>'};
+    ART.views.sc_tour_map = {read: (ctx, it) => SC.tourDates(ctx.store, it.id).some(c => U.place(c.data.place)?.plid) ? `<div class="sc-map" data-sc-map="tour:${it.id}">${window.LCNDA_UI.spinner('Chargement de la carte…')}</div>` : '<p class="muted">Les lieux des dates (choisis dans ta base) s’affichent ici, reliés dans l’ordre.</p>'};
     ART.define({key: 'tour', icon: '🚌', label: 'Tournée', many: 'Tournées', fem: true, domain: 'scene',
         eyebrow: (it, store) => { const n = it.id ? SC.tourDates(store, it.id).length : 0; return ['Tournée', n && plural(n, 'date'), it.data?.dates].filter(Boolean).join(' · '); },
         cardLine: it => [it.data?.dates, it.data?.artist].filter(Boolean).join(' · '),

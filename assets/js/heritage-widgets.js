@@ -627,7 +627,7 @@
         if (d.kind === 'numbers') return `<div class="h-cw-numbers">${(d.counters || []).map((c, i) => { const x = datas[i] || {shown: []}; return `<div class="h-cw-number"><strong>${fmt(x.count ?? x.shown.length)}${x.count === undefined && x.truncated ? '+' : ''}</strong><span>${esc(c.label || 'Nombre')}</span></div>`; }).join('')}</div>`;
         if (d.kind === 'list') return listHtml(datas[0] || {rows: [], shown: []}, d);
         if (d.kind === 'chart') return chartHtml(datas[0] || {rows: [], shown: []}, d);
-        if (d.kind === 'appstat') return datas[0]?.appstat ? chartHtml(datas[0], d) : '<p class="muted">Calcul…</p>';
+        if (d.kind === 'appstat') return datas[0]?.appstat ? chartHtml(datas[0], d) : window.LCNDA_UI.spinner('Calcul…');
         if (d.kind === 'screen') { const sc = ext.appScreen; const c = {target: d.target || 'module:carte', sidebar: !!d.sidebar, layout: d.layout}; if (sc?.nested && sc.valid(c.target)) return sc.nestedLink(c.target, sc.label(c.target)); return sc && sc.valid(c.target) ? `<iframe class="h-ct-frame" src="${esc(sc.url(c))}" title="${esc(sc.label(c.target))}" loading="lazy" style="height:${Math.max(240, Math.min(2000, Number(d.height) || 560))}px"></iframe><p class="h-cw-more"><button type="button" class="link-button" data-ct-open-screen="${esc(c.target)}">↗ Ouvrir en grand</button></p>` : '<p class="muted">Choisis l’écran dans l’Éditeur de widgets.</p>'; }
         return '';
     }
@@ -915,7 +915,7 @@
                 case 'living': return not + ({living: 'vivants', deceased: 'décédés', unknown: 'statut à vérifier'}[r.value] || '');
                 case 'bookmarked': case 'has_media': return not + label.toLowerCase();
                 case 'sosa_generation': return `${not}génération Sosa ${range(r.from, r.to)}`;
-                case 'birth_month': return `${not}né(e) en ${(r.values || []).map(m => MONTHS[Number(m) - 1]).filter(Boolean).join(' ou ')}`;
+                case 'birth_month': return `${not}naissance en ${(r.values || []).map(m => MONTHS[Number(m) - 1]).filter(Boolean).join(' ou ')}`;
                 case 'source_count': return `${not}${range(r.from, r.to)} source${(r.to ?? r.from) > 1 ? 's' : ''}`;
                 case 'label': return `${not}étiquette : ${(meta?.labels || []).filter(t => (r.values || []).map(Number).includes(Number(t.id))).map(t => t.name).join(' ou ')}`;
                 case 'year': case 'death_year': return `${not}${label.toLowerCase()} ${range(r.from, r.to)}`.replace(' entre de ', ' de ');
@@ -1146,7 +1146,7 @@
         const preview = () => { clearTimeout(previewTimer); previewTimer = setTimeout(async () => {
             const box = ws.querySelector('[data-cw-preview]'); if (!box) return;
             if (root.kind === 'app') { box.innerHTML = ext.dressWidget(root, A().card('01', appCatalog().find(x => x[0] === root.base)?.[1] || root.base, '', '<p class="muted">Le contenu du widget de l’app s’affiche ici sur le tableau de bord.</p>', 'span-12')); return; }
-            box.innerHTML = '<p class="muted">Calcul…</p>';
+            box.innerHTML = window.LCNDA_UI.spinner('Calcul…');
             const seq = ++previewSeq;
             const datas = await loadData(root);
             if (seq === previewSeq && document.body.contains(box)) { box.innerHTML = widgetCard(root, '01', 'span-12', datas); A().bindTableLinks?.(); fillValueColors(partIndex >= 0 ? datas.parts?.[partIndex] : datas); }
@@ -1408,7 +1408,7 @@
     ext.renderCustomWidgetInto = async (el, id, ctx = {}) => {
         const d = defs().find(x => x.id === id);
         if (!d) { el.innerHTML = '<p class="muted">Ce widget n’existe plus.</p>'; return; }
-        el.innerHTML = '<p class="muted">Calcul…</p>';
+        el.innerHTML = window.LCNDA_UI.spinner('Calcul…');
         try { const datas = await loadData(d, ctx); el.innerHTML = widgetCard(d, '01', 'span-12', datas); A().bindTableLinks?.(); }
         catch (error) { el.innerHTML = `<p class="muted">${esc(error.message)}</p>`; }
     };
@@ -1474,7 +1474,7 @@
         const d = defs().find(x => x.id === id);
         const ws = A().$('#workspace');
         if (!d) { ws.innerHTML = `<section class="page">${header('MES GRAPHIQUES', 'Graphique introuvable', 'Il a peut-être été supprimé.')}</section>`; return; }
-        ws.innerHTML = `<section class="page">${header('MES GRAPHIQUES', `${d.icon ? d.icon + ' ' : ''}${d.name || 'Mon graphique'}`, d.note ? nl(d.note) : '', '<button type="button" class="button" data-cs-edit>✎ Modifier</button>' + (window.LCNDA_SIDE_FOLDERS && !kioskOn() ? window.LCNDA_SIDE_FOLDERS.rangeButtonHtml('graph', d.id, d.name || 'Mon graphique') : '') + '<span class="h-cs-export"><button type="button" class="button small secondary" data-cs-export="dialog" title="Image PNG ou JPG, PDF, impression, tableau CSV">⤓ Exporter</button></span><button type="button" class="button secondary" data-cs-dash>＋ Tableau de bord</button>')}<div class="card-grid"><p class="muted">Calcul…</p></div></section>`;
+        ws.innerHTML = `<section class="page">${header('MES GRAPHIQUES', `${d.icon ? d.icon + ' ' : ''}${d.name || 'Mon graphique'}`, d.note ? nl(d.note) : '', '<button type="button" class="button" data-cs-edit>✎ Modifier</button>' + (window.LCNDA_SIDE_FOLDERS && !kioskOn() ? window.LCNDA_SIDE_FOLDERS.rangeButtonHtml('graph', d.id, d.name || 'Mon graphique') : '') + '<span class="h-cs-export"><button type="button" class="button small secondary" data-cs-export="dialog" title="Image PNG ou JPG, PDF, impression, tableau CSV">⤓ Exporter</button></span><button type="button" class="button secondary" data-cs-dash>＋ Tableau de bord</button>')}<div class="card-grid">${window.LCNDA_UI.spinner('Calcul…')}</div></section>`;
         const datas = await loadData(d);
         if (token !== S().workspaceToken || S().module !== 'graphiques') return;
         // le titre et le texte sont déjà en haut de la page : la carte ne les répète pas

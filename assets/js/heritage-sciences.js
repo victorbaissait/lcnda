@@ -111,7 +111,7 @@
         let lat = Number(m[1]), lon = Number(m[3]); if (/s/i.test(m[2] || '')) lat = -Math.abs(lat); if (/[ow]/i.test(m[4] || '')) lon = -Math.abs(lon); return Number.isFinite(lat) && Number.isFinite(lon) && Math.abs(lat) <= 90 && Math.abs(lon) <= 180 ? [lat, lon] : null; };
     const COORDS = new Map();
     /** un emplacement de carte : groupes [{color, line, pts: [{plid, coords, label, n}]}] ; dessiné dès qu'il est dans la page */
-    SC.mapSlot = (groups, {height = 260, empty = 'Aucun lieu avec ses coordonnées.'} = {}) => `<div class="sci-map" data-sci-map="${esc(JSON.stringify({groups, height, empty}))}"><p class="muted">🗺 Carte…</p></div>`;
+    SC.mapSlot = (groups, {height = 260, empty = 'Aucun lieu avec ses coordonnées.'} = {}) => `<div class="sci-map" data-sci-map="${esc(JSON.stringify({groups, height, empty}))}">${window.LCNDA_UI.spinner('Chargement de la carte…')}</div>`;
     async function drawMap(el) {
         if (el.dataset.sciDone) return; el.dataset.sciDone = '1';
         let cfg; try { cfg = JSON.parse(el.dataset.sciMap); } catch (_) { el.innerHTML = ''; return; }

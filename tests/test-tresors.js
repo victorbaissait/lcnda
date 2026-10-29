@@ -37,7 +37,9 @@ const t = async (name, fn) => { if (only && !name.includes(only)) return; try { 
         await page.goto(base); await page.waitForFunction(() => window.LCNDA_APP?.state?.csrf && window.LCNDA_EXT?.tresors && window.LCNDA_EXT.tresorFeatures?.length, null, { timeout: 30000 });
         const open = async key => { await page.evaluate(k => window.LCNDA_EXT.tresors.open(k), key); await page.waitForSelector(`[data-tr-page="${key}"] [data-tr-body] > *`, { timeout: 15000 }); await page.waitForTimeout(250); };
         const body = () => page.$eval('[data-tr-body]', b => b.innerText);
-        const ctxT = { page, open, body, base, tmp };
+        /** ⤓ Exporter ▾ de la page (toujours à droite de l’en-tête), puis la ligne du menu qui porte ce mot */
+        const pick = async label => { await page.click('[data-tr-page] .page-header [data-tr-export]'); await page.click(`.ui-actmenu .ui-actmenu-i:has-text("${label}")`); };
+        const ctxT = { page, open, body, base, tmp, pick };
 
         await t('l’onglet ✨ Trésors : la page d’accueil et ses cartes, rangées par groupe', async () => {
             // caché au départ : on l'affiche comme le ferait « Menus, onglets et listes »

@@ -41,7 +41,14 @@
                 return {v: 1, page: d.page, sections: this.secs.map(s => ({html: cleanForSave(s.body), ...(s.page ? {page: s.page} : {})})), header: d.header, footer: d.footer, styles: d.styles, comments: d.comments.filter(c => this.docEl.querySelector(`.wp-cm[data-cm="${CSS.escape(c.id)}"]`)),
                     lang: d.lang, set: d.set, track: !!d.track, meta: d.meta, tab: d.tab, pages: this.totalPages || 1};
             },
-            async save({asNew = false, kind = this.kind, name = this.name, quiet = false, force = false} = {}) {
+            /** deux ⌘S rapides (ou double-clic sur 💾) : le second attend le premier et réutilise l'id créé (jamais deux documents) */
+            save(o = {}) {
+                if (o.asNew) return this._saveNow(o);
+                if (this._saving) return this._saving;
+                const p = this._saveNow(o), done = () => { if (this._saving === p) this._saving = null; };
+                this._saving = p; p.then(done, done); return p;
+            },
+            async _saveNow({asNew = false, kind = this.kind, name = this.name, quiet = false, force = false} = {}) {
                 if (this.typeT) this.commit();
                 UI()?.savedStatus?.(this.dlg, 'saving');
                 try {
@@ -52,13 +59,23 @@
                     return id;
                 } catch (e) {
                     UI()?.savedStatus?.(this.dlg, 'error');
-                    if (/modifié ailleurs/.test(e.message || '')) { if (await A().confirmBox('Une autre fenêtre a enregistré ce document entre-temps. Garder ta version effacera la sienne.', {title: 'Document modifié ailleurs', okLabel: 'Garder ma version', danger: true})) return this.save({asNew, kind, name, quiet, force: true}); return 0; }
+                    if (/modifié ailleurs/.test(e.message || '')) { if (await A().confirmBox('Une autre fenêtre a enregistré ce document entre-temps. Garder ta version effacera la sienne.', {title: 'Document modifié ailleurs', okLabel: 'Garder ma version', danger: true})) return this._saveNow({asNew, kind, name, quiet, force: true}); return 0; }
                     toast(`Impossible d’enregistrer : ${e.message}`, 'error', {retry: () => this.save({asNew, kind, name})}); return 0;
                 }
             },
             async close() {
                 if (this.typeT) this.commit();
-                if (this.dirty && !await A().confirmBox('Les changements faits depuis le dernier enregistrement seront perdus.', {title: 'Fermer sans enregistrer ?', okLabel: 'Fermer sans enregistrer', danger: true})) return;
+                // un enregistrement en cours (⌘S, 💾, automatique) : on attend sa fin avant de demander ; réussi → on ferme sans question
+                if (this._saving) { try { await this._saving; } catch (_) {} }
+                if (this.dirty) {
+                    const ask = A().confirmBox('Les changements faits depuis le dernier enregistrement seront perdus.', {title: 'Fermer sans enregistrer ?', okLabel: 'Fermer sans enregistrer', danger: true});
+                    // un enregistrement qui se termine bien pendant la question : elle disparaît et la fenêtre se ferme
+                    const box = [...document.querySelectorAll('dialog.confirm-box-dialog[open]')].pop();
+                    const watch = setInterval(() => { if (!this.dirty && box?.open) { clearInterval(watch); this._closeAfterSave = true; box.close(); } }, 250);
+                    const ok = await ask; clearInterval(watch);
+                    const saved = this._closeAfterSave; this._closeAfterSave = false;
+                    if (!ok && !saved) return;
+                }
                 this.dlg.close();
             },
             /** le document neutre (pour les fichiers et la mise en page) */
@@ -181,37 +198,31 @@
     async function saveVersion(ed, label = '') {
         if (!ed.id) { const id = await ed.save(); if (!id) return; }
         const name = label || await A().askText({title: '🕘 Nouvelle version', message: 'Un nom pour cette version (facultatif) :', value: `Version du ${new Date().toLocaleDateString('fr-FR')}`, okLabel: 'Enregistrer'}); if (name === null) return;
-        try { await post('save_textdoc_version', {doc_id: ed.id, label: String(name || '').trim().slice(0, 120), data: ed.docData()}); toast('Version enregistrée (Fichier → 🕘 Versions du document).'); } catch (e) { toast(e.message, 'error'); }
+        try { await post('save_textdoc_version', {doc_id: ed.id, label: String(name || '').trim().slice(0, 120), data: ed.docData()}); toast('Version enregistrée (Fichier → 🕘 Versions…).'); } catch (e) { toast(e.message, 'error'); }
     }
     const textOfData = data => { const d = document.createElement('div'); d.innerHTML = (data?.sections || []).map(s => K().cleanHtml(s.html || '').html).join(''); d.querySelectorAll('del, sup.wp-fn').forEach(x => x.remove()); d.querySelectorAll('p, h1, h2, h3, h4, h5, h6, li, tr').forEach(x => x.append('\n\n')); return d.textContent.replace(/\n{3,}/g, '\n\n').trim(); };
+    /** L3 — la fenêtre commune « 🕘 Versions » (app-versions.js) : liste, aperçu, comparaison mot à mot, revenir (l'actuelle gardée d'abord) */
     async function versionsDialog(ed) {
         if (!ed.id) return toast('Enregistre d’abord le document (💾) : ses versions seront gardées avec lui.');
-        let items = []; try { items = (await api('textdoc_versions', {doc_id: ed.id})).items || []; } catch (e) { return toast(e.message, 'error'); }
-        const dlg = ext.openDialog({eyebrow: 'DOCUMENT', title: '🕘 Versions du document', wide: true, submitLabel: 'Fermer', body: `<div class="wp-row"><button type="button" class="button" data-v-new>＋ Enregistrer la version actuelle</button><button type="button" class="button secondary" data-v-cmp>⇄ Comparer deux versions…</button></div><div data-v-list></div>`,
-            onOpen: d => {
-                const paint = () => { d.querySelector('[data-v-list]').innerHTML = items.length ? `<div class="data-table-wrap"><table class="data-table"><thead><tr><th>Version</th><th>Mots</th><th>Enregistrée</th><th></th></tr></thead><tbody>${items.map(v => `<tr><td>${esc(v.label)}</td><td>${v.words.toLocaleString('fr-FR')}</td><td>${UI().when ? UI().when(v.created_at) : esc(v.created_at)}</td><td><div class="wp-row"><button type="button" class="button small secondary" data-v-see="${v.id}">↗ Voir</button><button type="button" class="button small secondary" data-v-diff="${v.id}">⇄ Avec maintenant</button><button type="button" class="button small secondary" data-v-back="${v.id}">↺ Reprendre</button><button type="button" class="icon-button small" data-v-del="${v.id}" title="Supprimer la version" aria-label="Supprimer la version">🗑</button></div></td></tr>`).join('')}</tbody></table></div>` : A().empty('Pas encore de version : « ＋ Enregistrer la version actuelle » garde le texte tel qu’il est, pour y revenir ou comparer plus tard.', {icon: '🕘', action: {label: '＋ Enregistrer la version actuelle', attrs: 'data-v-new'}}); };
-                paint();
-                d.addEventListener('click', async e => { const b = e.target.closest('button'); if (!b) return;
-                    try {
-                        if (b.matches('[data-v-new]')) { await saveVersion(ed); items = (await api('textdoc_versions', {doc_id: ed.id})).items || []; return paint(); }
-                        if (b.matches('[data-v-cmp]')) { d.close(); return compareDialog(ed); }
-                        const vid = Number(b.dataset.vSee || b.dataset.vDiff || b.dataset.vBack || b.dataset.vDel); if (!vid) return; const v = await api('textdoc_version', {id: vid});
-                        if (b.dataset.vSee) return ext.openDialog({eyebrow: 'VERSION', title: v.label, wide: true, submitLabel: 'Fermer', body: `<div class="wp-diff">${esc(textOfData(v.data))}</div>`, onSubmit: () => {}});
-                        if (b.dataset.vDiff) return showDiff(`${v.label} → maintenant`, textOfData(v.data), textOfData(ed.docData()));
-                        if (b.dataset.vBack) { ed.commit(); ed.restoreData(v.data); ed.commit(); d.close(); return ed.undoable(`Version « ${v.label} » reprise`); }
-                        if (b.dataset.vDel) { const r = await post('delete_textdoc_version', {id: vid}); items = items.filter(x => x.id !== vid); paint(); A().undoToast?.(`Version « ${v.label} » supprimée`, {undo: async () => { await post('restore_textdoc_version', {version: (r.result || r).version}); items = (await api('textdoc_versions', {doc_id: ed.id})).items || []; if (d.isConnected) paint(); }}); }
-                    } catch (err) { toast(err.message, 'error'); } });
-            }, onSubmit: () => {}});
-        void dlg;
+        if (!UI()?.openVersions) return toast('La fenêtre des versions n’est pas chargée.', 'error');
+        const full = new Map(); const get = async id => { if (!full.has(id)) full.set(id, await api('textdoc_version', {id})); return full.get(id); };
+        const words = t => (String(t).match(/\S+/g) || []).length;
+        return UI().openVersions({title: ed.name || 'Document', tool: 'Traitement de texte', kind: 'text',
+            list: async () => ((await api('textdoc_versions', {doc_id: ed.id})).items || []).map(v => ({...v, auto: !!v.auto, info: plural(v.words || 0, 'mot')})),
+            now: () => ({info: plural(words(textOfData(ed.docData())), 'mot'), hint: 'le texte à l’écran'}),
+            preview: async v => ({text: textOfData(v ? (await get(v.id)).data : ed.docData())}),
+            keepNow: label => post('save_textdoc_version', {doc_id: ed.id, label, data: ed.docData(), auto: 1}),
+            restore: async v => { const x = await get(v.id); ed.commit(); const at0 = ed.hpos; ed.restoreData(x.data); ed.commit(); const at = ed.hpos;
+                return {undo: () => { if (ed.hpos !== at) throw new Error('d’autres changements ont suivi : utilise ↶ dans le document'); while (ed.hpos > at0) ed.undo(); }, redo: () => ed.redo()}; },
+            rename: (v, label) => post('rename_textdoc_version', {id: v.id, label}),
+            copy: async v => { const x = await get(v.id); const r = await post('save_textdoc', {name: `${ed.name} — ${v.label}`.slice(0, 200), kind: 'doc', data: x.data}); const id = Number((r.result || r).id || 0);
+                toast(`Copie enregistrée : « ${ed.name} — ${v.label} ».`, 'success', id ? {action: {label: '↗ Ouvrir', run: () => openDoc({id})}} : {}); },
+            exportOne: async v => { const x = await get(v.id); const base = A().safeExportFilename ? A().safeExportFilename(`${ed.name} — ${v.label}`, 'version') : 'version'; download(new Blob([JSON.stringify({format: 'lcnda-texte', version: 1, name: `${ed.name} — ${v.label}`, data: x.data})], {type: 'application/json'}), `${base}.lcnda-texte`); },
+            remove: async v => { const r = await post('delete_textdoc_version', {id: v.id}); full.delete(v.id); return {undo: () => post('restore_textdoc_version', {version: (r.result || r).version})}; },
+            saveNow: () => saveVersion(ed)});
     }
-    async function compareDialog(ed) {
-        if (!ed.id) return toast('Enregistre d’abord le document, puis ses versions (Fichier → 🕘 Enregistrer comme nouvelle version).');
-        const items = (await api('textdoc_versions', {doc_id: ed.id}).catch(() => ({items: []}))).items || [];
-        if (!items.length) return toast('Pas encore de version à comparer : Fichier → 🕘 Enregistrer comme nouvelle version.');
-        const opts = sel => `<option value="now" ${sel === 'now' ? 'selected' : ''}>Maintenant (le texte à l’écran)</option>${items.map((v, i) => `<option value="${v.id}" ${sel === i ? 'selected' : ''}>${esc(v.label)}</option>`).join('')}`;
-        ext.openDialog({eyebrow: 'DOCUMENT', title: '⇄ Comparer deux versions', submitLabel: 'Comparer', body: `<div class="form-grid"><label>Avant<select name="a">${opts(0)}</select></label><label>Après<select name="b">${opts('now')}</select></label></div><p class="muted">Les mots ajoutés sont en vert, ceux retirés en rouge barré.</p>`,
-            onSubmit: async f => { const get = async v => (v === 'now' ? {label: 'Maintenant', text: textOfData(ed.docData())} : (x => ({label: x.label, text: textOfData(x.data)}))(await api('textdoc_version', {id: v}))); const a = await get(f.elements.a.value), b = await get(f.elements.b.value); setTimeout(() => showDiff(`${a.label} → ${b.label}`, a.text, b.text), 30); }});
-    }
+    /** « ⇄ Comparer deux versions… » : la même fenêtre (coche deux versions) */
+    async function compareDialog(ed) { const d = await versionsDialog(ed); if (d) toast('Coche deux versions (ou « Maintenant ») pour les comparer.'); return d; }
     function showDiff(title, a, b) {
         const d = ext.biography?.diffHtml ? ext.biography.diffHtml(a, b) : {html: `<del>${esc(a)}</del><ins>${esc(b)}</ins>`};
         ext.openDialog({eyebrow: 'COMPARER', title: `⇄ ${title}`, wide: true, submitLabel: 'Fermer', body: `<p class="muted">${d.added != null ? `${plural(d.added, 'mot')} ajouté${d.added > 1 ? 's' : ''}, ${plural(d.removed || 0, 'mot')} retiré${d.removed > 1 ? 's' : ''}.` : ''}</p><div class="wp-diff">${d.html || d}</div>`, onSubmit: () => {}});

@@ -299,7 +299,9 @@ const ok = (msg) => console.log('  ✓ ' + msg);
         await page.click('[data-ms-tadd="note"]'); await page.waitForSelector('[data-ms-ttext]');
         await page.fill('[data-ms-ttext]', 'Bon anniversaire Mamie !'); await page.press('[data-ms-ttext]', 'Tab'); await page.waitForTimeout(400);
         await page.fill('[data-ms-tlabel]', 'Un mot pour toi'); await page.press('[data-ms-tlabel]', 'Tab'); await page.waitForTimeout(400);
-        await page.click('[data-ms-ticon][data-v="❤️"]'); await page.waitForTimeout(300);
+        // L4 : l'icône du cadre se choisit dans la grille d'icônes commune (case de recherche, Entrée)
+        await page.click('.ms-tile-row.is-open [data-ms-ticon-in] + .ui-icf-host [data-icf=change]'); await page.waitForSelector('.ui-ig .ui-ig-q');
+        await page.keyboard.type('coeur rouge'); await page.waitForTimeout(300); await page.keyboard.press('Enter'); await page.waitForTimeout(400);
         await page.click('[data-ms-tadd="person"]'); await page.waitForTimeout(400);
         await page.evaluate(id => { const M = window.LCNDA_EXT.modeSimple, s = M.settings(), k = s.tiles.find(t => s.tx[t[0]]?.kind === 'person')[0]; s.tx[k].pid = id; s.tx[k].color = '#f1e4ff'; M.write(s); }, ID.p2);
         await page.click('[data-ms-set="perRow"][data-v="3"]'); await page.waitForTimeout(300);

@@ -50,6 +50,7 @@
         'genealogie-village-maps', 'genealogie-transcription-layout',
         'genealogie-design-custom-presets', 'genealogie-avatar-shapes', 'genealogie-person-header', 'genealogie-topbar-buttons', // ✎ Mes thèmes, formes des avatars, en-tête des fiches (app-apparence.js)
         'genealogie-portraits', 'genealogie-left-column', // K7 portraits, K15 colonne de gauche (app-portraits.js, app-colonne.js)
+        'genealogie-accord', // ✍️ Accord des mots (app-accord.js)
         'genealogie-designs' // 🎨 Designs au choix A1–A8 (app-designs.js)
     ];
     const LAYOUT_PREFIXES = ['genealogie-tile-items-'];
@@ -77,6 +78,7 @@
         if (Object.keys(settings).some(k => /colors/.test(k))) parts.push('couleurs');
         if (settings['genealogie-portraits']) parts.push('portraits');
         if (settings['genealogie-left-column']) parts.push('colonne de gauche');
+        if (settings['genealogie-accord']) parts.push('accord des mots');
         if (settings['genealogie-designs']) parts.push('designs au choix');
         return parts.join(' · ') || 'réglages de départ';
     };
@@ -125,6 +127,7 @@
         'genealogie-designs': v => { const D = window.LCNDA_DESIGNS; if (D?.portable) return D.portable(v) || null; if (!D?.clean) return v; const g = D.clean(JSON.parse(v)); delete g.a5?.m; delete g.a5?.f; return JSON.stringify(g); }, // un ancien réglage (A7, A10…) revient à neuf
         'genealogie-portraits': v => window.LCNDA_PORTRAITS?.clean ? reparse(window.LCNDA_PORTRAITS.clean, v) : v,
         'genealogie-left-column': v => window.LCNDA_COLUMN?.clean ? reparse(window.LCNDA_COLUMN.clean, v) : v,
+        'genealogie-accord': v => window.LCNDA_ACCORD?.clean ? reparse(window.LCNDA_ACCORD.clean, v) : v,
         'genealogie-accessibilite': v => ext.access?.clean ? reparse(ext.access.clean, v) : v,
         'genealogie-mode-simple': v => ext.modeSimple?.portable ? reparse(ext.modeSimple.portable, v) : null,
     };
@@ -134,7 +137,7 @@
     const validProfile = p => p && typeof p === 'object' && typeof p.name === 'string' && p.settings && typeof p.settings === 'object';
     /** 💾 le cadre commun pour une liste {name, saved, settings, from…} (mises en page, ensembles de tous les réglages) */
     const profilesFrame = o => {
-        const UI = window.LCNDA_UI, day = p => p.saved || '';
+        const UI = window.LCNDA_UI, day = p => (p.saved && (UI.whenText?.(p.saved) || '')) || ''; // K4 : « aujourd’hui à 22 h 16 », jamais « 2026-10-28T22:16:42.578Z »
         const frame = UI.presetsFrame({id: o.id, what: o.what, quietApply: true,
             list: () => o.list().map(p => ({name: p.name, date: [o.summary(p.settings), day(p), p.from ? `${o.from} ${p.from}` : ''].filter(Boolean).join(' · ')})),
             apply: i => { const p = o.list()[i]; return p ? o.apply(p) : false; },
@@ -1583,6 +1586,7 @@
     const saveBlobAs = (blob, name) => { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); };
     /** 🖨 Imprimer une image (une page, centrée) sans quitter l'outil */
     const printBlob = (blob, title = 'Image') => new Promise(res => {
+        if (window.LCNDA_UI?.openPrintDialog) { const u = URL.createObjectURL(blob); setTimeout(() => URL.revokeObjectURL(u), 600000); window.LCNDA_UI.openPrintDialog({title, key: 'image', photos: false, margin: 10, html: `<!doctype html><title>${esc(title)}</title><style>html,body{margin:0}img{display:block;max-width:100%;max-height:96vh;margin:auto}</style><img alt="" src="${u}">`}); res(); return; } // L1 : la fenêtre « Imprimer » commune ; sinon, le secours ci-dessous
         const url = URL.createObjectURL(blob), f = document.createElement('iframe'); f.style.cssText = 'position:fixed;right:0;bottom:0;width:0;height:0;border:0'; document.body.appendChild(f);
         const doc = f.contentDocument; doc.open(); doc.write(`<!doctype html><title>${esc(title)}</title><style>@page{margin:10mm}html,body{margin:0}img{display:block;max-width:100%;max-height:96vh;margin:auto}</style><img alt="" src="${url}">`); doc.close();
         const im = doc.querySelector('img'), go = () => { try { f.contentWindow.focus(); f.contentWindow.print(); } catch (_) {} setTimeout(() => { f.remove(); URL.revokeObjectURL(url); res(); }, 1500); };
@@ -1893,7 +1897,7 @@
         const VTOOLS = [['move', '➤', 'Déplacer un élément d’un calque (V)', 'v'], ['marquee', '⬚', 'Sélection rectangle (M)', 'm'], ['ellipsesel', '◯', 'Sélection ellipse (⇧M)', ''], ['lasso', '➰', 'Lasso : entourer à main levée (L)', 'l'], ['polysel', '✒︎', 'Plume : sélection point par point (P) — double-clic ou Entrée pour fermer', 'p'], ['wand', '🪄', 'Sélection automatique (baguette magique) (W)', 'w'], ['crop', '⌗', 'Recadrer et redresser (C)', 'c'],
             ['heal', '🩹', 'Correcteur de taches (J)', 'j'], ['repair', '🪡', 'Réparer un pli ou une déchirure (R) : peins dessus, c’est refait d’après les alentours', 'r'], ['clone', '🧬', 'Tampon : un endroit, ou une zone sélectionnée (S)', 's'], ['brush', '🖌', 'Pinceau (B)', 'b'], ['eraser', '🧽', 'Gomme (E) : efface le calque choisi ; sur la photo, elle la cache avec un masque (rien n’est perdu)', 'e'], ['shape', '⬜', 'Formes : rectangle, ellipse, ligne, flèche (U)', 'u'], ['gradient', '▦', 'Dégradé (G) : glisse pour le tracer ; sur un masque, il fond le calque', 'g'], ['text', 'T', 'Texte (T)', 't'], ['hand', '✋', 'Main, ou barre d’espace (H)', 'h'], ['zoom', '🔍', 'Zoom (Z) — ⌥ pour reculer', 'z']];
         const MENUS = [
-            ['Fichier', [['proj:save', '💾 Enregistrer le projet (pour continuer plus tard)', '⌘S'], ['proj:saveas', 'Enregistrer le projet sous un autre nom…', '⇧⌘S'], ['proj:open', '📂 Ouvrir un projet…'], ['-'], ['save:show', 'Enregistrer et afficher cette version'], ['save:keep', 'Enregistrer sans l’afficher'], ['save:copy', 'Copie séparée'], ['-'], ['info', 'ℹ️ Informations…'], ['-'], ['export:image', '⤓ Exporter l’image (PNG, JPG, imprimer)…'], ['export:ba', '⤓ Exporter l’avant / après…'], ['psd:export', '🗂 Exporter en PSD (avec les calques)…'], ['psd:import', '🗂 Importer les calques d’un PSD…'], ['-'], ['actions', '⚡ Actions : réglages enregistrés, à refaire sur plusieurs photos…'], ['-'], ['simple', '⚡ Passer à la retouche rapide'], ['close', 'Fermer']]],
+            ['Fichier', [['proj:save', '💾 Enregistrer le projet (pour continuer plus tard)', '⌘S'], ['proj:saveas', 'Enregistrer le projet sous un autre nom…', '⇧⌘S'], ['proj:open', '📂 Ouvrir un projet…'], ['-'], ['save:show', 'Enregistrer et afficher cette version'], ['save:keep', 'Enregistrer sans l’afficher'], ['save:copy', 'Copie séparée'], ['versions', '🕘 Versions…'], ['-'], ['info', 'ℹ️ Informations…'], ['-'], ['export:image', '⤓ Exporter l’image (PNG, JPG, imprimer)…'], ['export:ba', '⤓ Exporter l’avant / après…'], ['psd:export', '🗂 Exporter en PSD (avec les calques)…'], ['psd:import', '🗂 Importer les calques d’un PSD…'], ['-'], ['actions', '⚡ Actions : réglages enregistrés, à refaire sur plusieurs photos…'], ['-'], ['simple', '⚡ Passer à la retouche rapide'], ['close', 'Fermer']]],
             ['Édition', [['undo', '↶ Annuler', '⌘Z'], ['redo', '↷ Rétablir', '⇧⌘Z'], ['tab:history', '🕘 Historique']]],
             ['Image', [['tab:adjust', '🎚 Réglages, niveaux et courbe'], ['hs:photo', '🎨 Teinte/Saturation…'], ['preset:0', 'Réglage automatique'], ['mode:crop', '⌗ Recadrer et redresser'], ['straighten:auto', '📐 Redresser automatiquement'], ['cropclear', 'Annuler le recadrage'], ['mode:persp', '⧈ Redresser la perspective (photo prise de biais)…'], ['persp:clear', 'Enlever la perspective'], ['-'], ['imgsize', '📏 Taille de l’image…'], ['canvassize', '⬚ Taille de la zone de travail…'],
                 ['>', '🔄 Rotation de l’image', [['rot:cw', '↻ 90° horaire'], ['rot:ccw', '↺ 90° antihoraire'], ['rot:180', '180°'], ['rot:angle', 'Angle…'], ['rot:level', '📐 Redresser l’horizon (tracer une ligne)…'], ['flip:h', '⇆ Symétrie horizontale de l’image'], ['flip:v', '⇅ Symétrie verticale de l’image']]], ['-'],
@@ -3529,13 +3533,13 @@
             if (!P()) return toast('La photo n’est plus dans les calques : « ↺ Remettre la photo » (onglet Calques).', 'error');
             if (lockedDeep(P())) return toast('La photo est verrouillée (🔒 dans Calques).', 'error');
             const pn = panel('h-rt-crease', `<header><b>🔍 Plis et rayures</b><small>Les lignes fines, claires ou sombres, sont repérées en rouge${selId ? ' (dans la sélection)' : ''}. Vérifie, puis « Réparer ces lignes ».</small></header>
-                <p data-cr-count class="muted">Recherche…</p>
+                <p data-cr-count class="muted">${window.LCNDA_UI.spinner('Recherche des plis…', {inline: true})}</p>
                 <label data-help="Plus haut : des lignes plus pâles ou plus courtes sont aussi prises. Trop haut, des détails de la photo (cheveux, écriture) peuvent l’être : regarde le rouge.">Sensibilité <input type="range" min="1" max="100" value="${Number(ls('genealogie-retouch-crease', 50))}" data-cr-sens data-unit="%"></label>
                 <label class="ui-toggle"><input type="checkbox" data-cr-grain checked><i></i><span>garder le grain autour</span></label>
                 <div class="h-rt-panelbtns"><button type="button" class="link-button" data-cr-hand>🪡 Plutôt à la main</button><span class="spacer"></span><button type="button" class="button small secondary" data-cr-cancel>Annuler</button><button type="button" class="button small" data-cr-ok disabled>✓ Réparer ces lignes</button></div>`);
             const count = pn.querySelector('[data-cr-count]'), ok = pn.querySelector('[data-cr-ok]');
             const run = async () => {
-                count.textContent = 'Recherche des plis…'; ok.disabled = true; await tick();
+                count.innerHTML = window.LCNDA_UI.spinner('Recherche des plis…', {inline: true}); ok.disabled = true; await tick();
                 const sens = Number(pn.querySelector('[data-cr-sens]').value), inside = selId ? rtMaskAlpha(masks.get(selId), pw, ph) : null, r = rtCreases(srcData, sens, inside);
                 if (!pn.isConnected) return;
                 creaseProp = {...r, canvas: r.lines ? rtMaskCanvas(r.mask, pw, ph, '#ff2020') : null}; draw();
@@ -3835,6 +3839,7 @@
             if (k === 'imgsize') return imageSizeDialog();
             if (k === 'canvassize') return canvasSizeDialog();
             if (k === 'info') return infoDialog();
+            if (k === 'versions') return openVersionsWin();
             if (k === 'idphoto') return openIdPhoto();
             if (k === 'idbatch') return idpBatchDialog();
             if (a === 'psd') { if (!ext.rtPsd) return toast('Le PSD n’est pas encore prêt : réessaie dans un instant.', 'error'); if (mode === 'crop') endCrop(true); return ext.rtPsd[b === 'import' ? 'import' : 'export'](plusCtx); }
@@ -4117,19 +4122,17 @@
         const drawVersions = () => {
             const box = $('[data-rt-versions]');
             if (fresh) { box.hidden = true; box.style.display = 'none'; return; } // un canevas vide ou une image importée n'a pas de versions
-            box.innerHTML = `<details ${versions.length > 1 && window.innerHeight > 900 ? 'open' : ''}><summary><h3>Versions de la photo (${versions.length || 1})</h3></summary><div class="h-rt-vlist">${versions.map(v => `<figure class="${v.shown ? 'is-shown' : ''} ${v.filename === from ? 'is-source' : ''}"><img src="media/${encodeURIComponent(v.filename)}" alt="" loading="lazy"><figcaption><strong>${esc(v.label)}</strong>${v.shown ? '<span class="h-rt-badge">affichée</span>' : (v.id ? `<button type="button" class="link-button" data-rt-vshow="${v.id}">Afficher par défaut</button>` : '')}
-                ${v.filename !== from ? `<button type="button" class="link-button" data-rt-vfrom="${esc(v.filename)}">Retoucher celle-ci</button>` : '<small>en cours de retouche</small>'}${!v.is_original && v.id ? `<button type="button" class="link-button danger" data-rt-vdel="${v.id}">Supprimer</button>` : ''}</figcaption></figure>`).join('')}</div></details>`;
-            box.querySelectorAll('[data-rt-vshow]').forEach(b => b.addEventListener('click', async () => {
-                try { const r = await api('retouch_show_version', {}, {method: 'POST', body: {media_id: item.id, version_id: b.dataset.rtVshow}}); versions = r.result.versions; applyShown(r.result.filename); drawVersions(); toast('Version affichée par défaut changée.'); }
-                catch (error) { toast(error.message, 'error'); }
-            }));
-            box.querySelectorAll('[data-rt-vdel]').forEach(b => b.addEventListener('click', async () => {
-                if (!await A().confirmBox('L’original et les autres versions restent.', {title: 'Supprimer cette version retouchée ?', okLabel: 'Supprimer la version'})) return;
-                try { const r = await api('retouch_delete_version', {}, {method: 'POST', body: {media_id: item.id, version_id: b.dataset.rtVdel}}); versions = r.result.versions; applyShown(r.result.filename); drawVersions(); toast('Version supprimée.'); }
-                catch (error) { toast(error.message, 'error'); }
-            }));
+            box.innerHTML = `<details ${versions.length > 1 && window.innerHeight > 900 ? 'open' : ''}><summary><h3>Versions de la photo (${versions.length || 1})</h3></summary><div class="h-rt-vlist">${versions.map(v => `<figure class="${v.shown ? 'is-shown' : ''} ${v.filename === from ? 'is-source' : ''}"><img src="media/${encodeURIComponent(v.filename)}" alt="" loading="lazy"><figcaption><strong>${esc(v.label)}</strong>${v.shown ? '<span class="h-rt-badge">affichée</span>' : ''}
+                ${v.filename !== from ? `<button type="button" class="link-button" data-rt-vfrom="${esc(v.filename)}">Retoucher celle-ci</button>` : '<small>en cours de retouche</small>'}</figcaption></figure>`).join('')}</div>${item.id ? '<p class="ui-vers-line"><button type="button" class="button small secondary" data-rt-vwin title="Voir, comparer, revenir, renommer, supprimer (L3)">🕘 Versions…</button><small>l’original est toujours gardé</small></p>' : ''}</details>`;
+            box.querySelector('[data-rt-vwin]')?.addEventListener('click', openVersionsWin);
             box.querySelectorAll('[data-rt-vfrom]').forEach(b => b.addEventListener('click', async () => { if (!saved && hpos > 0 && !await A().confirmBox('Les retouches en cours seront perdues.', {title: 'Quitter cette retouche sans l’enregistrer ?', okLabel: 'Quitter sans enregistrer', danger: true})) return; saved = true; dlg.close(); openRetouch(b.dataset.rtVfrom); }));
         };
+        /* L3 — la fenêtre commune « 🕘 Versions » (app-versions.js) : revenir = la montrer partout, ↶ Annuler, ✎, ⧉, ⤓, 🗑 */
+        function openVersionsWin() {
+            if (!item.id || fresh || !window.LCNDA_UI?.openMediaVersions) return toast('Pas de versions pour cette image.');
+            window.LCNDA_UI.openMediaVersions(item, {kind: 'image', tool: 'Retouche', onShown: (file, vs) => { versions = vs; applyShown(file); drawVersions(); },
+                actions: [{icon: '🖌', label: 'Retoucher celle-ci', when: v => v.filename !== from, run: async (v, w) => { if (!saved && hpos > 0 && !await A().confirmBox('Les retouches en cours seront perdues.', {title: 'Quitter cette retouche sans l’enregistrer ?', okLabel: 'Quitter sans enregistrer', danger: true})) return false; saved = true; w.close(); dlg.close(); openRetouch(v.filename); return 'close'; }}]});
+        }
         drawVersions();
         // ── L'image en pleine taille : la photo retouchée (corrections, réglages, filtres, masque), les calques visibles, puis le recadrage ──
         const hasAlpha = () => { const p = P(); if (st.board?.bg === 'transparent' && (st.board.w > 1 || st.board.h > 1)) return true; if (!st.crop && (st.docXf || []).some(x => x.bg === 'transparent')) return true; return !!(st.persp || st._persp0) && (st.persp || st._persp0).some(([x, y]) => x < 0 || y < 0 || x > 1 || y > 1) || !p || !p.visible || p.opacity < 1 || !!p.mask || layers[0] !== p || st.strokes.some(s => s.tool === 'clear'); };

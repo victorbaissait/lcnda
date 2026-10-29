@@ -30,15 +30,16 @@
     }
     async function renderStamps(host, T) {
         const tr = await T.tree(), pls = treePlaces(T, tr);
-        if (!pls.length) { host.innerHTML = '<p class="h-tr-muted">Aucun lieu dans l’arbre.</p>'; return; }
+        if (!pls.length) { host.innerHTML = T.empty('Aucun lieu dans l’arbre'); return; }
         const draw = async () => {
             const visits = new Map((await T.items('stamp')).map(v => [v.place_id, v])), n = pls.filter(p => visits.has(p.id)).length;
-            host.innerHTML = `<div class="h-tr-row h-tr-noprint"><span class="h-tr-big">${n} / ${pls.length} lieux visités</span><div class="h-tr-bar"><i style="width:${Math.round(n / pls.length * 100)}%"></i></div><button type="button" class="button secondary" data-st-print>🖨 Le carnet</button></div>
+            host.innerHTML = `<div class="h-tr-row h-tr-noprint"><span class="h-tr-big">${n} / ${pls.length} lieux visités</span><div class="h-tr-bar"><i style="width:${Math.round(n / pls.length * 100)}%"></i></div></div>
                 <p class="h-tr-muted h-tr-noprint">Chaque lieu de l’arbre a son tampon. Quand tu y vas — le village, l’église, la mairie, le cimetière —, clique dessus : « J’y suis allé ».</p>
                 <div class="h-tr-stamps">${pls.map(p => { const v = visits.get(p.id); return `<button type="button" class="h-tr-stampbtn" data-st="${p.id}" title="${T.esc(p.name)} : ${p.n} événement${p.n > 1 ? 's' : ''}">${stampSvg(T, p, v)}<span>${T.esc(p.name)}</span>${v?.data?.note ? `<small>${T.esc(v.data.note)}</small>` : ''}</button>`; }).join('')}</div>`;
         };
+        const printBook = async () => { const visits = new Map((await T.items('stamp')).map(v => [v.place_id, v])); ext.tresorPrint('Le passeport des lieux', '.bk{display:grid;grid-template-columns:repeat(3,1fr);gap:8mm;max-width:180mm;margin:8mm auto;background:#f4ecd8;padding:10mm;border:2px solid #8a6b3a;font-family:Georgia}.bk h1{grid-column:1/-1;text-align:center}.bk div{text-align:center;font-size:10pt}.bk svg{width:38mm;height:38mm}', `<div class="bk"><h1>Passeport des lieux de la famille ${T.esc(T.start(tr)?.last || '')}</h1>${pls.map(p => `<div>${stampSvg(T, p, visits.get(p.id))}<br>${T.esc(p.name)}</div>`).join('')}</div>`); };
+        T.actions(host, {print: {attrs: 'data-st-print', title: 'Le carnet des tampons, à imprimer', run: printBook}});
         host.addEventListener('click', async e => {
-            if (e.target.closest('[data-st-print]')) { const visits = new Map((await T.items('stamp')).map(v => [v.place_id, v])); ext.tresorPrint('Le passeport des lieux', '.bk{display:grid;grid-template-columns:repeat(3,1fr);gap:8mm;max-width:180mm;margin:8mm auto;background:#f4ecd8;padding:10mm;border:2px solid #8a6b3a;font-family:Georgia}.bk h1{grid-column:1/-1;text-align:center}.bk div{text-align:center;font-size:10pt}.bk svg{width:38mm;height:38mm}', `<div class="bk"><h1>Passeport des lieux de la famille ${T.esc(T.start(tr)?.last || '')}</h1>${pls.map(p => `<div>${stampSvg(T, p, visits.get(p.id))}<br>${T.esc(p.name)}</div>`).join('')}</div>`); return; }
             const b = e.target.closest('[data-st]'); if (!b) return; const pl = pls.find(p => p.id === Number(b.dataset.st)), v = (await T.items('stamp')).find(x => x.place_id === pl.id);
             ext.openDialog({eyebrow: 'PASSEPORT DES LIEUX', title: `📍 ${pl.name}`, submitLabel: v ? 'Enregistrer' : '✅ J’y suis allé', body: `<p>${[...pl.people].slice(0, 12).map(id => T.esc(T.name(tr.byId.get(id)))).join(', ')}${pl.people.size > 12 ? '…' : ''}</p><div class="form-grid"><label>Le<input type="date" name="date" value="${T.esc(v?.data?.date || new Date().toISOString().slice(0, 10))}"></label><label class="span-2">Un mot<input name="note" maxlength="200" value="${T.esc(v?.data?.note || '')}" placeholder="la tombe d’Antoine au fond du cimetière"></label>${v ? '<label class="checkbox-line span-2"><input type="checkbox" name="undo"> Retirer le tampon</label>' : ''}</div>`,
                 onSubmit: async form => { if (form.elements.undo?.checked) { await T.remove(v.id); } else await T.save({id: v?.id, kind: 'stamp', place_id: pl.id, title: pl.name, data: {date: form.elements.date.value, note: form.elements.note.value.trim()}}); draw(); }});
@@ -58,7 +59,7 @@
     }
     async function renderWorld(host, T) {
         const tr = await T.tree(), s = travelStats(T, tr);
-        if (!s.per.length) { host.innerHTML = '<p class="h-tr-muted">Il faut des lieux placés sur la carte et datés pour compter les kilomètres.</p>'; return; }
+        if (!s.per.length) { host.innerHTML = T.empty('Il faut des lieux placés sur la carte et datés pour compter les kilomètres'); return; }
         const tour = s.total / 40075, max = Math.max(...s.gen.map(g => g.avg), 1), lg = s.per.map(x => x.longest).filter(Boolean).sort((a, b) => b.km - a.km)[0], lgp = s.per.find(x => x.longest === lg);
         host.innerHTML = `<div class="h-tr-cards h-tr-money"><div class="h-tr-panel"><small>Tous ensemble</small><div class="h-tr-big">🌍 ${fmtKm(s.total)}</div><small>${tour >= 1 ? `${tour.toFixed(1).replace('.', ',')} fois le tour de la Terre` : `${Math.round(tour * 100)} % du tour de la Terre`} · ${(s.total / 384400 * 100).toFixed(1).replace('.', ',')} % du chemin vers la Lune</small></div>
             ${lg ? `<div class="h-tr-panel"><small>Le plus long voyage</small><div class="h-tr-big">🧳 ${fmtKm(lg.km)}</div><small>${T.esc(T.name(lgp.p))} : ${T.esc(lg.from)} → ${T.esc(lg.to)}${lg.y ? ` (${lg.y})` : ''}</small></div>` : ''}
@@ -79,7 +80,7 @@
     }
     async function renderHouses(host, T) {
         const tr = await T.tree(), cand = treePlaces(T, tr).map(p => ({...p, rows: dwellers(T, tr, p.id)})).filter(p => p.rows.length >= 2).map(p => ({...p, span: Math.max(...p.rows.map(r => r.to)) - Math.min(...p.rows.map(r => r.from))})).sort((a, b) => b.span - a.span);
-        if (!cand.length) { host.innerHTML = '<p class="h-tr-muted">Il faut au moins un lieu où deux personnes de l’arbre ont vécu.</p>'; return; }
+        if (!cand.length) { host.innerHTML = T.empty('Il faut au moins un lieu où deux personnes de l’arbre ont vécu'); return; }
         host.innerHTML = `<div class="h-tr-row h-tr-noprint"><label>Le lieu<select data-ho>${cand.map(p => `<option value="${p.id}">${T.esc(p.name)} — ${p.rows.length} personnes sur ${p.span} ans</option>`).join('')}</select></label></div><div data-ho-out></div>`;
         const out = host.querySelector('[data-ho-out]'), st = T.start(tr), anc = new Map(st ? T.ancestors(tr, st.id, 30).map(a => [a.id, a.gen]) : []);
         const draw = () => { const c = cand.find(x => x.id === Number(host.querySelector('[data-ho]').value)) || cand[0], y0 = Math.floor(Math.min(...c.rows.map(r => r.from)) / 10) * 10, y1 = Math.ceil(Math.max(...c.rows.map(r => r.to)) / 10) * 10 + 10, W = 900, L = 190, sx = (W - L - 20) / (y1 - y0), H = 50 + c.rows.length * 30;

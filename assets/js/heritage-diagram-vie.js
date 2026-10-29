@@ -332,7 +332,7 @@
     const GENS = (def, min, max) => `<label>Générations${sel('gens', Array.from({length: max - min + 1}, (_, i) => [min + i, `${min + i} générations`]), def)}</label>`;
     function bindApp(pane, run) {
         const btn = pane.querySelector('[data-dfa-go]'), msg = pane.querySelector('[data-dfa-msg]'); if (!btn) return;
-        btn.addEventListener('click', async () => { btn.disabled = true; if (msg) msg.innerHTML = '<span class="ui-spinner" aria-hidden="true"></span> Lecture de ta généalogie…';
+        btn.addEventListener('click', async () => { btn.disabled = true; if (msg) msg.innerHTML = window.LCNDA_UI.spinner('Lecture de ta généalogie…', {inline: true});
             try { const t = await run(); A().toast?.(t || 'Données prises dans ta base.'); if (msg?.isConnected) msg.textContent = ''; } catch (e) { if (msg) msg.textContent = '⚠️ ' + (e.message || e); } finally { btn.disabled = false; } });
     }
     const titleIf = (s, kind, t) => { s.o = s.o || {}; if (!s.o.title || s.o.title === K[kind].sample().o?.title) s.o.title = t; };

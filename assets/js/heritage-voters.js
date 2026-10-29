@@ -223,10 +223,7 @@
         const votes = people.reduce((n, r) => n + r.votes.length, 0);
         const regions = world ? [...new Set(world.suffrage.countries.map(c => c.region))].sort((a, b) => a.localeCompare(b, 'fr')) : [];
         A().$('#workspace').innerHTML = `<section class="page collection-page h-voters">${header('LISTES', 'Cartes d’électeur', 'Les électeurs de la famille, leurs cartes et les dates où ils ont voté. Pour en ajouter : fiche → Identité → « Blocs à afficher sur la fiche » → 🗳️ Cartes d’électeur.')}
-            ${people.length ? `<p class="muted">${plural(people.length, 'électeur', 'électeurs')} · ${plural(people.reduce((n, r) => n + r.cards.length, 0), 'carte', 'cartes')} · ${plural(votes, 'vote noté', 'votes notés')}</p>
-            <div class="data-table-wrap"><table class="data-table sortable-table" data-sortbar="électeur"><thead><tr>${['Personne', 'Commune(s)', 'Cartes', 'Votes', 'Premier vote ou carte', 'Dernier'].map((h, i) => `<th><button data-sort-column="${i}">${h}</button></th>`).join('')}<th>Photos</th></tr></thead><tbody>
-                ${people.map(r => `<tr><td data-sort-value="${esc(pname(r.person).toLowerCase())}">${personLink(r.person.id, pname(r.person))}${r.person.birth_year ? ` <small class="muted">(${esc(r.person.birth_year)}–${esc(r.person.death_year || '')})</small>` : ''}</td><td data-sort-value="${esc((r.communes[0] || '').toLowerCase())}">${esc(r.communes.join(', ') || '—')}</td><td data-sort-value="${r.cards.length}">${r.cards.length}</td><td data-sort-value="${r.votes.length}">${r.votes.length}</td><td data-sort-value="${r.first || 9999}">${r.first || '—'}</td><td data-sort-value="${r.last || 0}">${r.last || '—'}</td><td>${ext.thumbs ? ext.thumbs('voters-list-' + r.person.id, (r.media || []).slice(0, 4)) : ''}</td></tr>`).join('')}</tbody></table></div>`
-            : A().emptyState({icon: '🗳️', text: 'Aucune carte d’électeur pour l’instant', hint: 'Elles s’ajoutent sur la fiche d’une personne (bloc Cartes d’électeur).'})}
+            ${people.length ? '<div data-h-voters-bar></div><div data-h-voters-list></div>' : A().emptyState({icon: '🗳️', text: 'Aucune carte d’électeur pour l’instant', hint: 'Elles s’ajoutent sur la fiche d’une personne (bloc Cartes d’électeur).'})}
             ${world ? `<section class="maintenance-panel h-suffrage"><h3>🌍 Le droit de vote dans le monde</h3>
                 <div class="h-suffrage-controls"><div class="segmented">${[['women', '👩 Femmes'], ['men', '👨 Hommes'], ['gap', '↔ Écart']].map(([k, l]) => `<button type="button" data-h-suffrage-who="${k}" class="${st.hSuffrage.who === k ? 'is-active' : ''}">${l}</button>`).join('')}</div>
                     ${st.hSuffrage.who !== 'gap' ? `<label class="ui-toggle"><input type="checkbox" data-h-suffrage-at ${st.hSuffrage.atYear ? 'checked' : ''}><i></i>Voir qui pouvait voter en</label><input type="range" min="1840" max="2025" step="1" value="${st.hSuffrage.atYear || 1920}" data-h-suffrage-year ${st.hSuffrage.atYear ? '' : 'disabled'} aria-label="Année"><strong data-h-suffrage-yearlabel>${st.hSuffrage.atYear || ''}</strong>` : ''}</div>
@@ -237,9 +234,33 @@
                     <label>Région <select data-h-suffrage-region><option value="">Toutes</option>${regions.map(r => `<option ${st.hSuffrage.region === r ? 'selected' : ''}>${esc(r)}</option>`).join('')}</select></label></div>
                     <div data-h-suffrage-rows>${countryListHtml(world, st.hSuffrage.sort, st.hSuffrage.region)}</div></details>
                 <p class="muted"><small>${esc(world.suffrage.source)} Fond de carte : Natural Earth (domaine public) ; les tout petits pays ne sont que dans la liste.</small></p></section>` : '<p class="muted">La carte du droit de vote n’a pas pu être chargée.</p>'}</section>`;
+        const ws = A().$('#workspace');
+        // H10 : la barre commune au-dessus des électeurs (retenue pour cette liste) ; la carte du monde, dessous, ne bouge pas
+        const U = window.LCNDA_UI, LM = U?.listMatch, vbox = ws.querySelector('[data-h-voters-list]'), vslot = ws.querySelector('[data-h-voters-bar]');
+        if (vbox && vslot && U?.listBar) {
+            const added = r => String(Math.max(0, ...r.cards.map(c => Number(c.id) || 0), ...r.votes.map(v => Number(v.id) || 0))).padStart(12, '0');
+            const hasPh = r => !!(r.media || []).length, VSORTS = {votes: (a, b) => b.votes.length - a.votes.length, first: (a, b) => (a.first || 9999) - (b.first || 9999)};
+            const paint = bar => {
+                const {q, filters: f, sort} = bar.state;
+                let rows = people.filter(r => LM.text(q, pname(r.person), r.communes) && LM.pick(f.commune, [], r.communes) && LM.period(f.from, f.to, r.first || 0) && (!f.photo || (f.photo === 'yes') === hasPh(r)));
+                rows = VSORTS[sort] ? [...rows].sort(VSORTS[sort]) : U.sortItems(rows, sort, {name: r => `${r.person.last_name || ''} ${r.person.first_name || ''}`, date: added});
+                bar.setCount(rows.length === people.length ? `${plural(people.length, 'électeur', 'électeurs')} · ${plural(people.reduce((n, r) => n + r.cards.length, 0), 'carte', 'cartes')} · ${plural(votes, 'vote noté', 'votes notés')}` : `${plural(rows.length, 'électeur', 'électeurs')} sur ${fmt(people.length)}`);
+                vbox.innerHTML = rows.length ? `<div class="data-table-wrap"><table class="data-table"><thead><tr>${['Personne', 'Commune(s)', 'Cartes', 'Votes', 'Premier vote ou carte', 'Dernier'].map((h, i) => `<th><button data-sort-column="${i}" data-sort-key="${['name', '', '', 'votes', 'first', ''][i]}">${h}</button></th>`).join('')}<th>Photos</th></tr></thead><tbody>
+                ${rows.map(r => `<tr><td data-sort-value="${esc(pname(r.person).toLowerCase())}">${personLink(r.person.id, pname(r.person))}${r.person.birth_year ? ` <small class="muted">(${esc(r.person.birth_year)}–${esc(r.person.death_year || '')})</small>` : ''}</td><td data-sort-value="${esc((r.communes[0] || '').toLowerCase())}">${esc(r.communes.join(', ') || '—')}</td><td data-sort-value="${r.cards.length}">${r.cards.length}</td><td data-sort-value="${r.votes.length}">${r.votes.length}</td><td data-sort-value="${r.first || 9999}">${r.first || '—'}</td><td data-sort-value="${r.last || 0}">${r.last || '—'}</td><td>${ext.thumbs ? ext.thumbs('voters-list-' + r.person.id, (r.media || []).slice(0, 4)) : ''}</td></tr>`).join('')}</tbody></table></div>`
+                    : A().emptyState({icon: '🔍', text: 'Aucun électeur ne correspond', hint: 'Change les mots cherchés ou retire un filtre (« Tout effacer »).'});
+                bar.sortColumns(vbox.querySelector('table'), {name: ['az', 'za'], votes: [null, 'votes'], first: ['first']});
+                A().bindTableLinks();
+            };
+            const bar = U.listBar({key: 'listes:voter_cards', search: {placeholder: 'Chercher… (personne, commune)'},
+                filters: [{id: 'commune', label: 'Commune', type: 'place', chipPrefix: '📍'},
+                    {id: 'from', group: 'Période du premier vote', label: 'À partir de', type: 'date', placeholder: '« 1900 »', chipPrefix: 'Premier vote depuis'}, {id: 'to', group: 'Période du premier vote', label: 'Jusqu’à', type: 'date', placeholder: '« 1950 »', chipPrefix: 'Premier vote jusqu’à'},
+                    {id: 'photo', label: 'Photos', type: 'radio', dflt: '', options: [['', 'Tous'], ['yes', `Avec des photos (${people.filter(hasPh).length})`, '📷 Avec photos'], ['no', `Sans photo (${people.filter(r => !hasPh(r)).length})`, 'Sans photo']]}],
+                sort: {options: [['recent', 'Les plus récents'], ['old', 'Les plus anciens'], ['az', 'A → Z'], ['za', 'Z → A'], ['votes', 'Le plus de votes'], ['first', 'Premier vote']], value: 'first'},
+                onChange: () => paint(bar)});
+            vslot.replaceWith(bar); paint(bar);
+        }
         A().bindTableLinks();
         if (!world) return;
-        const ws = A().$('#workspace');
         const redrawMap = () => {
             ws.querySelector('[data-h-suffrage-map]').innerHTML = mapSvg(world, st.hSuffrage.who, st.hSuffrage.atYear, st.hSuffrage.open);
             ws.querySelector('[data-h-suffrage-legend]').innerHTML = legendHtml(st.hSuffrage.who, st.hSuffrage.atYear);

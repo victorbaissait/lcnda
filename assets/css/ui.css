@@ -167,6 +167,7 @@ button.ui-card-thumb { cursor: pointer; }
 .ui-card-act .ui-card-sp { flex: 1; }
 .ui-card-act .ui-card-open { min-height: 28px; padding: 3px 10px; font-size: 12px; text-decoration: none; }
 details.ui-card-more { position: relative; }
+details.ui-more.ui-card-more { display: inline-block; width: auto; border: 0 !important; padding: 0 !important; margin: 0 !important; background: none; } /* le ⋯ d'une fiche K9 n'est pas le bouton « Voir les N suivants » (.ui-more) */
 details.ui-card-more > summary { list-style: none; cursor: pointer; display: inline-grid; place-items: center; }
 details.ui-card-more > summary::-webkit-details-marker { display: none; }
 details.ui-card-more .ui-ph-menu { top: auto; bottom: calc(100% + 6px); right: 0; }
@@ -195,6 +196,8 @@ button.ui-row-thumb { cursor: pointer; }
 @keyframes ui-spin { to { transform: rotate(360deg); } }
 .ui-spin { width: 16px; height: 16px; box-sizing: border-box; border: 3px solid #cdd6e6; border-top-color: var(--ui-blue); border-radius: 50%; display: inline-block; vertical-align: -3px; margin-right: 8px; animation: ui-spin .8s linear infinite; flex: none; }
 .ui-spinner { display: flex; align-items: center; justify-content: center; gap: 0; padding: 14px; font-size: 13.5px; color: var(--ui-muted); }
+.ui-spinner.is-inline { display: inline-flex; justify-content: flex-start; padding: 0; font-size: inherit; vertical-align: middle; }
+.loading-screen > .ui-spinner { font-size: 15px; font-weight: 700; }
 .ui-skeleton { padding: 4px 0; }
 .ui-skel { height: 12px; margin: 8px 0; background: linear-gradient(90deg, #eceff3, #f7f8fa, #eceff3); background-size: 200% 100%; animation: ui-skel 1.4s ease-in-out infinite; }
 @keyframes ui-skel { from { background-position: 100% 0; } to { background-position: -100% 0; } }
@@ -352,6 +355,7 @@ button.secondary.is-busy .ui-spin, .button.secondary.is-busy .ui-spin { border-c
 .ui-listbar-in { border: 2px solid var(--ui-ink); padding: 5px 8px; font: 500 13px system-ui, sans-serif; background: var(--ui-bg); color: var(--ui-ink); min-height: 32px; }
 .ui-listbar-opt { display: flex !important; align-items: center; gap: 7px; padding: 3px 0; margin: 0; font-weight: 500; cursor: pointer; }
 .ui-listbar-opt > input { margin: 0; width: auto; min-height: 0; }
+.ui-listbar-on { margin-left: auto; padding-left: 8px; color: var(--ui-muted); font: 600 12px/1.3 system-ui, sans-serif; font-variant-numeric: tabular-nums; } /* le nombre trouvé, à droite d'un choix */
 .ui-listbar-pk .pk { width: 100%; }
 .ui-listbar-menu-foot { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 10px; padding-top: 8px; border-top: 1px solid var(--ui-line); }
 .ui-listbar-adopted { display: none !important; }

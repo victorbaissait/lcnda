@@ -80,10 +80,11 @@ function topic_sheets_list(PDO $pdo): array
     $rows = array_values(array_filter($pdo->query('SELECT id, title, subtitle, icon, color, data_json, updated_at FROM topic_sheets ORDER BY title COLLATE NOCASE, id')->fetchAll(),
         static fn($r) => empty((json_decode((string) $r['data_json'], true) ?: [])['template'])));
     $media = heritage_media($pdo, 'topic_sheet', array_column($rows, 'id'));
-    return array_map(static function ($r) use ($media) {
+    $labels = function_exists('collection_labels') ? collection_labels($pdo, 'topic_sheet', array_column($rows, 'id')) : []; // Listes › Fiches thématiques : Filtrer › Étiquette (H10)
+    return array_map(static function ($r) use ($media, $labels) {
         $d = json_decode((string) $r['data_json'], true) ?: [];
         return ['id' => (int) $r['id'], 'title' => $r['title'], 'subtitle' => $r['subtitle'], 'icon' => $r['icon'], 'color' => $r['color'],
-            'blocks' => count($d['blocks'] ?? []), 'cover' => topic_sheet_cover($media[(int) $r['id']] ?? []), 'updated_at' => $r['updated_at']];
+            'blocks' => count($d['blocks'] ?? []), 'cover' => topic_sheet_cover($media[(int) $r['id']] ?? []), 'labels' => $labels[(int) $r['id']] ?? [], 'updated_at' => $r['updated_at']];
     }, $rows);
 }
 
@@ -127,7 +128,8 @@ function topic_sheet_detail(PDO $pdo, int $id): array
             FROM persons p WHERE p.id IN ($in)") as $p) { $people[(int) $p['id']] = $p; }
     }
     return ['id' => (int) $r['id'], 'title' => $r['title'], 'subtitle' => $r['subtitle'], 'icon' => $r['icon'], 'color' => $r['color'],
-        'template' => !empty($d['template']), 'blocks' => $blocks, 'people' => $people, 'media' => heritage_media($pdo, 'topic_sheet', [$id])[$id] ?? [], 'created_at' => $r['created_at'], 'updated_at' => $r['updated_at']];
+        'template' => !empty($d['template']), 'blocks' => $blocks, 'people' => $people, 'media' => heritage_media($pdo, 'topic_sheet', [$id])[$id] ?? [],
+        'labels' => function_exists('collection_labels') ? (collection_labels($pdo, 'topic_sheet', [$id])[$id] ?? []) : [], 'created_at' => $r['created_at'], 'updated_at' => $r['updated_at']];
 }
 
 function save_topic_sheet(PDO $pdo, array $data): array
@@ -168,6 +170,7 @@ function delete_topic_sheet(PDO $pdo, array $data): array
     $title = $s->fetchColumn();
     if ($title === false) { throw new RuntimeException('Fiche introuvable.'); }
     heritage_delete_media_links($pdo, 'topic_sheet', $id);
+    $pdo->prepare("DELETE FROM label_links WHERE entity_type='topic_sheet' AND entity_id=?")->execute([$id]);
     $pdo->prepare('DELETE FROM topic_sheets WHERE id=?')->execute([$id]);
     log_change($pdo, 'meta', 0, 'delete', 'Fiche supprimée : ' . $title);
     return ['ok' => true];

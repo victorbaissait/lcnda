@@ -1156,7 +1156,9 @@
         /* ─── lire, enregistrer, fermer ─── */
         function play(start, presenter = false) { if (editing) stopEdit(); openPlayer(show, {start, presenter, name: $('[data-kn-name]').value, onExit: i => { if (!closed && Number.isInteger(i)) goSlide(i); }}); }
         const forSave = () => JSON.parse(JSON.stringify(show, (k, v) => k === '_editing' ? undefined : v));
-        async function save() {
+        let savingP = null; // deux ⌘S rapides : le second attend le premier et réutilise l'id créé
+        function save() { if (savingP) return savingP; savingP = saveNow().finally(() => { savingP = null; }); return savingP; }
+        async function saveNow() {
             if (editing) stopEdit();
             name = $('[data-kn-name]').value.trim() || 'Ma présentation'; status('Enregistrement…');
             try { const r = await post('save_slideshow', {id, name, show: forSave()}); id = r.result.id; dirty = false; status('✓ Enregistré'); ctx.onSaved?.(id); }
@@ -1171,6 +1173,7 @@
                 const n = normalize({...show, slides: list}).slides; if (adopt) { show.slides = n; cur = 0; } else { show.slides.splice(cur + 1, 0, ...n); cur = cur + n.length; } // la suite d'un import se range après
                 sel = new Set(); paintAll(); commit(); }};
         ext.keynoteCurrent = ctl; // l'éditeur ouvert (pour les essais et les autres outils)
+        window.LCNDA_UI?.onPrintKey?.(dlg, () => { if (editing) stopEdit(); exportPrint(show, ctl.name, false, cur); }); // L1 : ⌘P
         /* ─── E3 : une seule fenêtre d'export ─── */
         async function exportDialog() {
             if (editing) stopEdit();
@@ -1179,12 +1182,12 @@
             await UI().openExportDialog({title: n, defaultName: n, quality: false, saveCopy: true, info: `${A().plural(show.slides.length, 'diapositive')} · ${W} × ${H} points`,
                 preview: async () => (await slideCanvas(show, S(), Math.min(1, 480 / W))).toDataURL('image/jpeg', .85),
                 formats: [
-                    {id: 'pdf', hint: 'une diapositive par page (« Enregistrer en PDF »)', ext: '', run: async () => exportPrint(show, n, false)},
-                    {id: 'pdfnotes', label: '📝 PDF + notes', hint: 'avec les notes de l’orateur', ext: '', run: async () => exportPrint(show, n, true)},
+                    {id: 'pdf', hint: 'une diapositive par page (« Enregistrer en PDF »)', ext: '', run: async () => { exportPrint(show, n, false, cur); }},
+                    {id: 'pdfnotes', label: '📝 PDF + notes', hint: 'avec les notes de l’orateur', ext: '', run: async () => { exportPrint(show, n, true, cur); }},
                     {id: 'png', hint: 'cette diapositive', run: o => exportPng(show, n, [cur], {...o, direct: true})},
                     {id: 'zip', label: '🗂 Toutes en PNG', hint: 'un fichier .zip', ext: 'zip', run: o => exportPng(show, n, null, {...o, direct: true, saveCopy: false})},
                     {id: 'video', label: '🎬 Vidéo', hint: 'WebM, avec la musique', ext: 'webm', run: o => exportVideo(show, n, status, {...o, direct: true, alive: () => dlg.isConnected})},
-                    {id: 'print', hint: 'tout de suite', run: async () => exportPrint(show, n, false)},
+                    {id: 'print', hint: 'aperçu, pages, notes', run: async () => { exportPrint(show, n, false, cur); }},
                     {id: 'file', hint: 'pour la rouvrir ou la partager', ext: 'json', run: async o => download(new Blob([JSON.stringify({type: 'lcnda-presentation', version: 1, name: n, show: forSave()}, null, 1)], {type: 'application/json'}), o.filename)},
                 ]});
         }
@@ -1210,7 +1213,7 @@
                 case 'play': return play(0); case 'playhere': return play(cur); case 'presenter': return play(cur, true);
                 case 'save': return save(); case 'close': return close();
                 case 'import': return openImport(ctl);
-                case 'exp_pdf': return exportPrint(show, ctl.name, false); case 'exp_pdfnotes': return exportPrint(show, ctl.name, true);
+                case 'exp_pdf': return exportPrint(show, ctl.name, false, cur); case 'exp_pdfnotes': return exportPrint(show, ctl.name, true, cur);
                 case 'exp_png': return exportPng(show, ctl.name, [cur]); case 'exp_pngall': return exportPng(show, ctl.name, null);
                 case 'exp_json': return download(new Blob([JSON.stringify({type: 'lcnda-presentation', version: 1, name: ctl.name, show: forSave()}, null, 1)], {type: 'application/json'}), `${safeName(ctl.name)}.json`);
                 case 'exp_video': return exportVideo(show, ctl.name, status, {alive: () => dlg.isConnected});
@@ -1756,16 +1759,35 @@
 
     /* ═════════ Exporter : PDF / impression, PNG, vidéo ═════════ */
     const PRINT_CSS = '*{-webkit-print-color-adjust:exact;print-color-adjust:exact;box-sizing:border-box}ul{list-style:disc;padding-left:1.2em;margin:.15em 0}ol{padding-left:1.4em;margin:.15em 0}li{margin:.1em 0}';
-    function exportPrint(show, name, withNotes) {
-        const [W, H] = dims(show), list = show.slides.filter(s => !s.skip); if (!list.length) return toast('Aucune diapositive à imprimer.', 'error');
-        const w = window.open('', '_blank'); if (!w) return toast('Fenêtre bloquée : autorise les fenêtres surgissantes pour cette page.', 'error');
-        const base = location.href.replace(/[#?].*$/, '').replace(/[^/]*$/, ''), k = 700 / W;
-        const page = (s, i) => withNotes ? `<div class="pg n"><div class="nb">${i + 1}</div><div class="sl" style="width:${Math.round(W * k)}px;height:${Math.round(H * k)}px"><div style="width:${W}px;height:${H}px;transform:scale(${k});transform-origin:0 0">${renderBuilt(show, s, 'print')}</div></div><div class="notes">${s.notes ? esc(s.notes).replace(/\n/g, '<br>') : '<i>Pas de notes.</i>'}</div></div>` : `<div class="pg">${renderBuilt(show, s, 'print')}</div>`;
-        const css = withNotes ? '@page{size:A4 portrait;margin:14mm}body{margin:0;font:14px/1.5 Georgia,serif;color:#222}.pg{page-break-after:always;break-after:page;padding-top:4px}.sl{overflow:hidden;border:1px solid #bbb;margin:6px 0 14px}.nb{font:600 12px sans-serif;color:#888}'
-            : `@page{size:${W}px ${H}px;margin:0}html,body{margin:0;background:#fff}.pg{width:${W}px;height:${H}px;overflow:hidden;page-break-after:always;break-after:page;position:relative}`;
-        w.document.open(); w.document.write(`<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>${esc(name || 'Présentation')}</title><base href="${esc(base)}"><style>${PRINT_CSS}${css}</style></head><body>${list.map(page).join('')}</body></html>`); w.document.close();
-        const imgs = [...w.document.images], go = () => { try { w.focus(); w.print(); } catch (_) {} };
-        Promise.race([Promise.all(imgs.map(im => im.complete ? 0 : new Promise(r => { im.onload = im.onerror = r; }))), new Promise(r => setTimeout(r, 8000))]).then(() => setTimeout(go, 300));
+    /** L1 : la fenêtre « Imprimer » commune — diapositives, + notes, ou notes seules ; 1, 2, 4 ou 6 par page ; numéros ; masquées aussi */
+    function exportPrint(show, name, withNotes, at = 0) {
+        const [W, H] = dims(show); if (!show.slides.length) return toast('Aucune diapositive à imprimer.', 'error');
+        const UI2 = window.LCNDA_UI; if (!UI2?.openPrintDialog) return toast('La fenêtre « Imprimer » n’est pas chargée.', 'error');
+        const list = c => show.slides.map((s, i) => ({s, i})).filter(x => c.hidden || !x.s.skip);
+        const per = c => (c.what === 'notes' ? 1 : Number(c.per) || 1);
+        const html = c => {
+            const L = list(c), n = per(c), pages = [], MMp = 96 / 25.4, [pw, ph] = c.pageMm, pad = 10;
+            if (c.what === 'notes') {
+                const body = L.map(x => `<div class="kn-pn"><b>${c.nums ? `${x.i + 1}. ` : ''}${esc(x.s.title || x.s.section || 'Diapositive')}</b><div>${x.s.notes ? esc(x.s.notes).replace(/\n/g, '<br>') : '<i>Pas de notes.</i>'}</div></div>`).join('');
+                return `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>${esc(name || 'Présentation')}</title><style>body{margin:0;font:13px/1.5 Georgia,serif;color:#222}.kn-pn{break-inside:avoid;margin:0 0 5mm;padding-bottom:3mm;border-bottom:1px solid #ddd}.kn-pn b{font:700 12px system-ui,sans-serif;display:block;margin-bottom:2px}</style></head><body><h1 style="font:700 18px system-ui;margin:0 0 6mm">${esc(name || 'Présentation')} — notes</h1>${body}</body></html>`;
+            }
+            const notes = c.what === 'notes-slides', cols = n <= 2 ? 1 : n <= 4 ? 2 : (pw > ph ? 3 : 2), rows = Math.ceil(n / cols);
+            for (let k = 0; k < L.length; k += n) {
+                const grp = L.slice(k, k + n), cw = (pw - 2 * pad - (cols - 1) * 6) / cols, chh = (ph - 2 * pad - (rows - 1) * 6) / rows;
+                const cell = x => { const numH = c.nums ? 5 : 0, aw = (notes ? cw * 0.56 : cw) * MMp, ah = (chh - numH) * MMp, sc = Math.min(aw / W, ah / H); // avec les notes : la diapositive à gauche, ses notes à droite
+                    return `<div class="kn-pc" style="width:${cw}mm;height:${chh}mm">${c.nums ? `<span class="kn-pnum">${x.i + 1}${x.s.skip ? ' · masquée' : ''}</span>` : ''}<div class="kn-prow"><div class="kn-ps" style="width:${W * sc}px;height:${H * sc}px"><div style="width:${W}px;height:${H}px;transform:scale(${sc});transform-origin:0 0">${renderBuilt(show, x.s, 'print')}</div></div>${notes ? `<div class="kn-pnotes">${x.s.notes ? esc(x.s.notes).replace(/\n/g, '<br>') : '<i>Pas de notes.</i>'}</div>` : ''}</div></div>`; };
+                pages.push({html: `<div class="kn-pg" style="grid-template-columns:repeat(${cols},${cw}mm)">${grp.map(cell).join('')}</div>`, pad});
+            }
+            return UI2.printSheets({title: name || 'Présentation', choix: c, pages, css: `${PRINT_CSS}.kn-pg{display:grid;gap:6mm;align-content:start;justify-content:center;height:100%}.kn-pc{display:flex;flex-direction:column;gap:1mm;overflow:hidden}.kn-pnum{font:600 10px system-ui,sans-serif;color:#888}.kn-ps{overflow:hidden;border:1px solid #bbb;flex:none}.kn-prow{display:flex;gap:4mm;align-items:flex-start;min-height:0;flex:1}.kn-pnotes{flex:1;min-width:0;font:11px/1.45 Georgia,serif;color:#222;overflow:hidden;max-height:100%}`});
+        };
+        const land = W >= H;
+        UI2.openPrintDialog({title: `${name || 'Présentation'} — présentation`, key: 'presentation', zone: 'Présentation', photos: false, margin: 0, orientation: land ? 'landscape' : 'portrait',
+            options: [{key: 'what', type: 'radio', value: withNotes ? 'notes-slides' : 'slides', choices: [['slides', 'Les diapositives'], ['notes-slides', 'Les diapositives avec les notes du présentateur'], ['notes', 'Les notes seules (texte)']]},
+                {key: 'per', type: 'radio', label: 'Diapositives par page', tiles: true, value: '1', show: c => c.what !== 'notes', choices: [{value: '1', label: '1', cells: 1}, {value: '2', label: '2', cells: 2}, {value: '4', label: '4', cells: 4}, {value: '6', label: '6', cells: 6}]},
+                {key: 'nums', label: 'Numéros des diapositives', checked: true, show: c => c.what !== 'notes'},
+                {key: 'hidden', label: 'Les diapositives masquées aussi', checked: false}],
+            current: c => { const L = list(c), k = L.findIndex(x => x.i >= at); return Math.floor(Math.max(0, k) / per(c)) + 1; },
+            html});
     }
     /** o (fenêtre d'export) : {direct, filename, saveCopy} — direct : les erreurs remontent à la fenêtre */
     async function exportPng(show, name, which, o = {}) {

@@ -81,7 +81,7 @@
     ext.diagramFollowId = d => followId(d?.spec || d);
 
     /* ─── Les cases qui se remplissent seules : <div data-dg-embed="12"> ─── */
-    ext.diagramEmbedHtml = (id, {tools = true} = {}) => `<div class="h-dg-embed" data-dg-embed="${Number(id) || 0}"${tools ? '' : ' data-dg-notools'}><p class="muted">Diagramme…</p></div>`;
+    ext.diagramEmbedHtml = (id, {tools = true} = {}) => `<div class="h-dg-embed" data-dg-embed="${Number(id) || 0}"${tools ? '' : ' data-dg-notools'}>${window.LCNDA_UI.spinner('Chargement du diagramme…')}</div>`;
     async function fillEmbed(box) {
         box.dataset.dgDone = '1';
         const d = await get(box.dataset.dgEmbed).catch(() => null);
@@ -117,12 +117,22 @@
         const kind = R().KINDS[spec.kind]; if (!kind) return '';
         return kind.grids.map(g => { const cols = gridCols(g, spec); return [g.label, cols.map(c => c.label).join(';'), ...(spec[g.key] || []).map(r => cols.map(c => csvCell(r[c.k])).join(';'))].join('\n'); }).join('\n\n');
     }
+    /** L1 : titre et légende, tableau des données dessous, ajuster à la page ou taille réelle */
+    async function printSpec(name, spec) {
+        const UI = window.LCNDA_UI; if (!UI?.openPrintDialog) throw new Error('la fenêtre « Imprimer » n’est pas chargée');
+        const live = await resolveLive(spec), full = drawSpec(live), bare = drawSpec(live.kind === '_missing' ? live : {...live, o: {...(live.o || {}), title: '', subtitle: '', source: '', legend: 'none'}});
+        const table = () => { const kind = R().KINDS[live.kind]; if (!kind) return ''; return kind.grids.map(g => { const cols = gridCols(g, live), rows = live[g.key] || []; return rows.length ? `<table><caption>${esc(g.label)}</caption><thead><tr>${cols.map(c => `<th>${esc(c.label)}</th>`).join('')}</tr></thead><tbody>${rows.map(r => `<tr>${cols.map(c => `<td>${esc(r[c.k] ?? '')}</td>`).join('')}</tr>`).join('')}</tbody></table>` : ''; }).join(''); };
+        UI.openPrintDialog({title: name || 'Diagramme', key: 'diagramme', zone: 'Diagramme', photos: false, margin: 12, orientation: 'landscape',
+            options: [{key: 'legend', label: 'Titre et légende', checked: true}, {key: 'data', label: 'Tableau des données dessous', checked: false},
+                {key: 'size', type: 'radio', value: 'fit', choices: [['fit', 'Ajuster à la page'], ['real', 'Taille réelle']]}],
+            html: c => `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>${esc(name)}</title><style>body{margin:0;font:11px/1.4 system-ui,sans-serif;color:#111}.dg svg{display:block;margin:0 auto;${c.size === 'fit' ? `width:100%;height:auto;max-height:${Math.round((c.pageMm[1] - 24) * (c.data ? 0.62 : 0.97))}mm` : ''}}table{border-collapse:collapse;margin:6mm auto 0;break-inside:auto}caption{font-weight:700;text-align:left;padding:2px 0}th,td{border:1px solid #bbb;padding:2px 6px;text-align:left}th{background:#f2f3f5}</style></head><body><div class="dg">${c.legend ? full : bare}</div>${c.data ? table() : ''}</body></html>`});
+    }
     async function exportAs(fmt, name, spec, o = {}) {
         const svg = drawSpec(await resolveLive(spec));
         if (fmt === 'svg') return download(new Blob([svg], {type: 'image/svg+xml'}), o.filename || fileName(name) + '.svg');
         if (fmt === 'csv') return download(new Blob(['﻿' + specCsv(spec.live?.follow ? await resolveLive(spec) : spec)], {type: 'text/csv;charset=utf-8'}), o.filename || fileName(name) + '.csv');
         if (fmt === 'json') return download(new Blob([JSON.stringify({lcnda_diagram: 1, name, kind: spec.kind, spec}, null, 1)], {type: 'application/json'}), o.filename || fileName(name) + '.diagramme.json');
-        if (fmt === 'print') { const w = window.open('', '_blank'); if (!w) throw new Error('fenêtre bloquée par le navigateur'); w.document.write(`<!doctype html><meta charset="utf-8"><title>${esc(name)}</title><style>body{margin:0}svg{width:100%;height:auto}</style>${svg}<script>onload=()=>setTimeout(()=>print(),200)<\/script>`); w.document.close(); return; }
+        if (fmt === 'print') return printSpec(name, spec); // L1 : la fenêtre « Imprimer » commune
         const c = await svgToCanvas(svg, Math.max(0.5, Math.min(6, (Number(o.quality) || 192) / 96)), fmt === 'jpg' ? '#ffffff' : '');
         if (fmt === 'copy') { try { const b = await new Promise(r => c.toBlob(r, 'image/png')); await navigator.clipboard.write([new ClipboardItem({'image/png': b})]); toast('Image copiée : colle-la où tu veux (⌘V).'); } catch (_) { toast('Copie impossible ici : utilise « Image PNG ».', 'error'); } return; }
         const blob = await new Promise(r => c.toBlob(r, fmt === 'jpg' ? 'image/jpeg' : 'image/png', .92)); if (!blob) throw new Error('image trop grande : baisse la qualité');
@@ -457,7 +467,7 @@
                 } else {
                     spec.rows = [...(spec.rows || []), ...(p.birth ? [{date: y(p.birth), label: `Naissance de ${p.name}`}] : []), ...(p.death ? [{date: y(p.death), label: `Décès de ${p.name}`}] : [])];
                 }
-                later(); toast(`${p.name} ajouté${p.gender === 'female' ? 'e' : ''}.`); });
+                later(); toast(`${p.name} ${(window.LCNDA_ACCORD?.accord || ((_, t) => t.replace('(e)', '')))(p.gender, 'ajouté(e)', {before: 'ajouté'})}.`); });
         }
         /* rattacher à des personnes, enquêtes, parties d'enquête, projets de l'Atelier */
         const lchip = l => `<span class="h-pr-lchip" data-type="${esc(l.type)}" data-id="${Number(l.id)}">${LINK_IC[l.type] || '🔗'} ${esc(l.name)} <button type="button" data-dg-unlink aria-label="Retirer">×</button></span>`;
@@ -576,6 +586,7 @@
             dirty = true; paint(); draw();
         });
         dlg.querySelector('[data-dg-expdlg]').addEventListener('click', () => exportDialog(rec.name || spec.o?.title || 'Diagramme', () => spec));
+        window.LCNDA_UI?.onPrintKey?.(dlg, () => printSpec(rec.name || spec.o?.title || 'Diagramme', spec)); // L1 : ⌘P
         dlg.querySelector('[data-dg-save]').addEventListener('click', async () => {
             const btn = dlg.querySelector('[data-dg-save]'); btn.disabled = true;
             try {

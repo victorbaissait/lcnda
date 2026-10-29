@@ -292,7 +292,7 @@
             if (isType(e, ['BURI', 'CREM', 'FUNE'], ['inhumation', 'incineration', 'obseques', 'sepulture'])) {
                 if (!when && !where) return;
                 const kind = isType(e, ['CREM'], ['incineration']) ? 'Crémation' : isType(e, ['FUNE'], ['obseques']) ? 'Obsèques' : 'Sépulture';
-                const txt = kind === 'Sépulture' ? clean(`${where ? `${first} repose ${where}` : `${first} est inhumé${p.gender === 'female' ? 'e' : ''}`}${when ? ` (inhumation ${when})` : ''}.`) : clean(`${kind} ${when} ${where}.`), m = ph();
+                const txt = kind === 'Sépulture' ? clean(`${where ? `${first} repose ${where}` : `${first} est ${(window.LCNDA_ACCORD?.accord || ((_, t) => t.replace('(e)', '')))(p.gender, 'inhumé(e)', {before: 'inhumé'})}`}${when ? ` (inhumation ${when})` : ''}.`) : clean(`${kind} ${when} ${where}.`), m = ph();
                 add(key || 9999, 91, m ? photoSlide(m, txt, notes) : titleSlide(kind, txt, notes)); return;
             }
             if (isType(e, ['OCCU'], ['profession', 'metier'])) {
@@ -643,18 +643,36 @@
         }
         async function slideImage(i, type = 'image/png') { await eng.prepare(); const st = eng.starts(), s = show.slides[i]; eng.frame((st[i] || 0) + Math.min(Math.max(1, +s.dur || 5) * .6, Math.max(1, +s.dur || 5) - .05)); const url = canvas.toDataURL(type, .92); return url; }
         const dataBlob = url => fetch(url).then(r => r.blob());
+        /** L1 : la fenêtre « Imprimer » commune — une photo par page ou planche de 6, légendes, personnes sous chaque photo */
+        async function printShow() {
+            if (!show.slides.length) return toast('Le diaporama est vide : ajoute une diapositive d’abord.', 'error');
+            if (!ui.openPrintDialog) return toast('La fenêtre « Imprimer » n’est pas chargée.', 'error');
+            if (playing) play();
+            const n = curName(), here = t, urls = [];
+            for (let i = 0; i < show.slides.length; i++) { goBtn(`Préparation ${i + 1} / ${show.slides.length}…`); urls.push(await slideImage(i, 'image/jpeg')); }
+            goBtn(''); drawAt(here);
+            const people = new Map();
+            const peopleOf = async () => { await Promise.all(show.slides.map(async s2 => { if (!s2.filename || people.has(s2.filename)) return; try { const r = await api('image_pick', {q: s2.filename}); people.set(s2.filename, ((r.media || []).find(m => m.filename === s2.filename)?.people) || ''); } catch (_) { people.set(s2.filename, ''); } })); };
+            const [W, H] = ASPECTS[show.aspect] || ASPECTS['16:9'];
+            const cap = (s2, i, c) => { const txt = [s2.text || s2.title || '', s2.notes || ''].filter(Boolean).join('\n'), who = c.people ? people.get(s2.filename) || '' : '';
+                return c.captions || who ? `<figcaption>${c.captions ? `<b>${i + 1}.</b> ${esc(txt)}` : ''}${who ? `<span class="who">👤 ${esc(who)}</span>` : ''}</figcaption>` : ''; };
+            ui.openPrintDialog({title: `${n} — diaporama`, key: 'diaporama', zone: 'Diaporama', photos: false, margin: 0, orientation: W >= H ? 'landscape' : 'portrait', current: c => (c.layout === 'sheet' ? Math.floor(cur / 6) + 1 : cur + 1),
+                options: [{key: 'layout', type: 'radio', value: 'one', choices: [['one', 'Une photo par page'], ['sheet', 'Planche (6 par page)']]}, {key: 'captions', label: 'Légendes', checked: true}, {key: 'people', label: 'Personnes sous chaque photo', checked: false}],
+                html: async c => {
+                    if (c.people) await peopleOf();
+                    const fig = (i, big) => `<figure class="${big ? 'big' : ''}"><img src="${urls[i]}" alt="">${cap(show.slides[i], i, c)}</figure>`, pages = [];
+                    if (c.layout === 'sheet') for (let k = 0; k < urls.length; k += 6) pages.push({pad: 10, html: `<div class="grid" style="${c.pageMm[0] > c.pageMm[1] ? 'grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr)' : ''}">${urls.slice(k, k + 6).map((_, j) => fig(k + j, false)).join('')}</div>`});
+                    else urls.forEach((_, i) => pages.push({pad: 10, html: fig(i, true)}));
+                    return ui.printSheets({title: n, choix: c, pages, css: 'body{font:12px/1.4 Georgia,serif;color:#222}figure{margin:0;display:flex;flex-direction:column;gap:2mm;min-height:0}figure.big{flex:1;justify-content:center}figure img{display:block;max-width:100%;object-fit:contain;margin:0 auto}figure.big img{max-height:82%}figcaption{white-space:pre-line}.who{display:block;color:#555;font-size:11px;margin-top:1mm}.grid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(3,1fr);gap:5mm;height:100%}.grid figure img{max-height:42mm}'});
+                }});
+        }
+        ui.onPrintKey?.(dlg, () => printShow()); // L1 : ⌘P
         async function exportDialog() {
             if (!show.slides.length) return toast('Le diaporama est vide : ajoute une diapositive d’abord.', 'error');
             if (playing) play();
             const n = curName(), here = t;
             const imgRun = type => async o => { const url = await slideImage(cur, type === 'png' ? 'image/png' : 'image/jpeg'), blob = await dataBlob(url); download(blob, o.filename); if (o.saveCopy) await toMedia(blob, o.filename, 'image', `${n} — diapositive ${cur + 1}`); drawAt(here); };
-            const pagesRun = async () => {
-                const w = window.open('', '_blank'); if (!w) throw new Error('fenêtre bloquée par le navigateur');
-                const urls = []; for (let i = 0; i < show.slides.length; i++) { goBtn(`Préparation ${i + 1} / ${show.slides.length}…`); urls.push(await slideImage(i, 'image/jpeg')); }
-                const [W, H] = ASPECTS[show.aspect] || ASPECTS['16:9'];
-                w.document.write(`<!doctype html><meta charset="utf-8"><title>${esc(n)}</title><style>@page{size:${W > H ? 'landscape' : 'portrait'};margin:8mm}body{margin:0;font:12px Georgia,serif}figure{margin:0 0 6mm;page-break-after:always;text-align:center}img{max-width:100%;max-height:170mm}figcaption{color:#555;margin-top:2mm;white-space:pre-line;text-align:left}</style>${urls.map((u, i) => `<figure><img src="${u}" alt=""><figcaption>${i + 1}. ${esc(show.slides[i].notes || '')}</figcaption></figure>`).join('')}<script>onload=()=>setTimeout(()=>print(),400)<\/script>`);
-                w.document.close(); drawAt(here);
-            };
+            const pagesRun = async () => { printShow(); };
             await ui.openExportDialog({title: n, defaultName: n, quality: false, saveCopy: true, info: `${plural(show.slides.length, 'diapositive')} · ${fmt(eng.total())} · ${show.aspect}`,
                 preview: () => canvas.toDataURL('image/jpeg', .8),
                 formats: [
@@ -666,7 +684,9 @@
                     {id: 'file', hint: 'pour le rouvrir ailleurs', ext: 'json', run: async o => download(new Blob([JSON.stringify({type: 'lcnda-diaporama', version: 1, name: n, show}, null, 1)], {type: 'application/json'}), o.filename)},
                 ]});
         }
-        async function save() {
+        let savingP = null; // deux ⌘S rapides : le second attend le premier et réutilise l'id créé
+        function save() { if (savingP) return savingP; savingP = saveNow().finally(() => { savingP = null; }); return savingP; }
+        async function saveNow() {
             name = curName() || 'Mon diaporama'; state('saving');
             try { const r = await post('save_slideshow', {id, name, show}); id = r.result.id; dirty = false; state('saved'); ctx.onSaved?.(id); } catch (e) { state('error'); toast(e.message, 'error'); }
         }

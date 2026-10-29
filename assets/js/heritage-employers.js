@@ -151,7 +151,7 @@
             const lookup = async () => {
                 const box = form.querySelector('[data-emp-results]'), q = form.querySelector('[data-emp-q]').value.trim();
                 if (q.length < 3) { box.innerHTML = '<p class="muted">Au moins 3 lettres.</p>'; return; }
-                box.innerHTML = '<p class="muted">Recherche…</p>';
+                box.innerHTML = window.LCNDA_UI.spinner('Recherche…');
                 try { lookups = (await api('employer_lookup', {q})).results || []; } catch (error) { box.innerHTML = `<p class="h-offsite-sentence is-warn">${esc(error.message)}</p>`; return; }
                 box.innerHTML = lookups.length ? `<ul class="h-emp-hits">${lookups.map((h, i) => `<li><button type="button" data-emp-pick="${i}"><strong>${esc(h.name)}</strong><small>${esc([h.siren && 'SIREN ' + siren(h.siren), h.legal_form, [h.postcode, h.city].filter(Boolean).join(' '), h.founded && 'créée le ' + dateFr(h.founded), h.status === 'closed' ? 'fermée' : 'active'].filter(Boolean).join(' · '))}</small></button></li>`).join('')}</ul>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔍</span><span class="empty-line-text">Rien trouvé : l’entreprise est peut-être trop ancienne. Remplis la fiche à la main.</span></p>';
             };

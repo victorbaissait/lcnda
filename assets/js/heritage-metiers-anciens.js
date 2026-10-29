@@ -97,32 +97,35 @@
 
     /* ─────────── Listes → 🛠️ Métiers anciens ─────────── */
     ext.lists.old_trades = async token => {
-        const st = ls('genealogie-trades-list', {q: '', dom: '', mine: false});
         let d; try { d = await api('old_trades', {}); } catch (e) { A().$('#workspace').innerHTML = A().emptyState({icon: '⛔', text: e.message}); return; }
         if (token !== S().workspaceToken || S().module !== 'listes') return;
-        const ws = A().$('#workspace'), doms = d.domains || {};
-        const mineN = d.trades.filter(r => r.people).length;
-        ws.innerHTML = `<section class="page collection-page h-tr-page">${UI().pageHeader({title: '🛠️ Métiers anciens', help: `Ce que faisaient le tisserand, le sabotier, le brassier… ${A().plural(d.total, 'métier')}, avec leurs variantes d’orthographe, leurs outils et leurs mots anciens. Un clic ouvre la fiche du métier et les ancêtres qui l’exerçaient.`})}
-            <div class="h-world-listbar"><label class="h-world-q"><span aria-hidden="true">🔍</span><input type="search" data-tr-q value="${esc(st.q)}" placeholder="Chercher… (sabotier, toile, cuir)" aria-label="Chercher un métier"></label>
-                <select data-tr-dom aria-label="Domaine"><option value="">Tous les domaines</option>${Object.entries(doms).map(([k, v]) => `<option value="${k}" ${st.dom === k ? 'selected' : ''}>${v.icon} ${esc(v.label)}</option>`).join('')}<option value="perso" ${st.dom === 'perso' ? 'selected' : ''}>✎ Pas dans le dictionnaire</option></select>
-                <label class="ui-toggle"><input type="checkbox" data-tr-mine ${st.mine ? 'checked' : ''}><i></i>Ceux de ma famille (${mineN})</label><span class="spacer"></span><span class="muted" data-tr-count></span></div>
-            <ul class="h-tr-list" data-tr-rows></ul>
+        const ws = A().$('#workspace'), doms = d.domains || {}, U = UI(), KEY = 'listes:old_trades';
+        const mineN = d.trades.filter(r => r.people).length, nDom = k => d.trades.filter(r => r.domain === k).length;
+        ws.innerHTML = `<section class="page collection-page h-tr-page">${U.pageHeader({title: '🛠️ Métiers anciens', help: `Ce que faisaient le tisserand, le sabotier, le brassier… ${A().plural(d.total, 'métier')}, avec leurs variantes d’orthographe, leurs outils et leurs mots anciens. Un clic ouvre la fiche du métier et les ancêtres qui l’exerçaient.`})}
+            <div data-tr-bar></div><ul class="h-tr-list" data-tr-rows></ul>
             <section class="maintenance-panel"><h3>D’où vient ce dictionnaire ?</h3><p>${esc(d.credit)} Licence ${esc(d.licence)}.</p><ul>${(d.sources || []).map(([l, u]) => `<li><a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(l)} ↗</a></li>`).join('')}</ul></section></section>`;
-        const fold = s => String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
-        const paint = () => {
-            const q = fold(st.q);
-            const rows = d.trades.filter(r => (!st.mine || r.people) && (!st.dom || r.domain === st.dom) && (!q || fold(`${r.name} ${r.fem} ${r.variants.join(' ')} ${r.desc}`).includes(q)))
-                .sort((a, b) => (b.people > 0) - (a.people > 0) || a.name.localeCompare(b.name, 'fr'));
-            ws.querySelector('[data-tr-count]').textContent = A().plural(rows.length, 'métier');
-            ws.querySelector('[data-tr-rows]').innerHTML = rows.length ? rows.map(r => `<li><button type="button" class="h-tr-row" data-tr-key="${esc(r.key)}"><span class="h-tr-ico" aria-hidden="true">${(doms[r.domain] || {icon: '✎'}).icon}</span><span class="h-tr-main"><strong>${esc(r.name)}</strong>${r.fem ? ` <small>· ${esc(r.fem)}</small>` : ''}<small class="h-tr-line">${esc(r.desc)}</small></span>${r.people ? (UI().badge ? UI().badge(A().plural(r.people, 'ancêtre'), 'blue') : '') : ''}</button></li>`).join('')
-                : A().emptyState({icon: '🛠️', text: `Aucun métier pour « ${st.q} »`, hint: 'Vérifie l’orthographe, ou cherche un mot du métier (toile, bois, cuir…).'});
-            lsSet('genealogie-trades-list', st);
-        };
+        const fold = s => String(s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        // H10 : la barre commune ; l’ancien réglage (« genealogie-trades-list » : case, domaine, « Ceux de ma famille ») est repris une fois
+        const old = U.listBarState?.(KEY) ? null : ls('genealogie-trades-list', null);
+        const domOpts = [...Object.entries(doms).map(([k, v]) => [k, `${v.icon} ${v.label}`, `${v.icon} ${v.label}`, nDom(k)]), ['perso', '✎ Pas dans le dictionnaire', '✎ Pas dans le dictionnaire', nDom('perso')]];
+        const bar = U.listBar({key: KEY, search: {placeholder: 'Chercher… (sabotier, toile, cuir)', value: old?.q || ''},
+            filters: [{id: 'domain', label: 'Domaine', type: 'check', options: domOpts, value: old?.dom ? [old.dom] : []},
+                {id: 'mine', label: 'Ma famille', type: 'check', text: `Exercé par un ancêtre (${mineN})`, chipLabel: 'Exercé par un ancêtre', value: !!old?.mine}],
+            sort: {options: [['mine', 'Ma famille d’abord'], ['az', 'A → Z'], ['za', 'Z → A'], ['most', 'Le plus d’ancêtres']], value: 'mine'},
+            onChange: () => paint()});
+        ws.querySelector('[data-tr-bar]').replaceWith(bar);
+        const az = (a, b) => a.name.localeCompare(b.name, 'fr', {sensitivity: 'base'});
+        const SORTS = {mine: (a, b) => (b.people > 0) - (a.people > 0) || az(a, b), az, za: (a, b) => az(b, a), most: (a, b) => (b.people || 0) - (a.people || 0) || az(a, b)};
+        function paint() {
+            const st = bar.state, f = st.filters, words = fold(st.q).split(/\s+/).filter(Boolean), dom = f.domain || [];
+            const rows = d.trades.filter(r => (!f.mine || r.people) && (!dom.length || dom.includes(r.domain)) && (!words.length || words.every(w => fold(`${r.name} ${r.fem} ${r.variants.join(' ')} ${r.desc}`).includes(w))))
+                .sort(SORTS[st.sort] || SORTS.mine);
+            bar.setCount(rows.length === d.trades.length ? A().plural(rows.length, 'métier') : `${A().plural(rows.length, 'métier')} sur ${d.trades.length}`);
+            ws.querySelector('[data-tr-rows]').innerHTML = rows.length ? rows.map(r => `<li><button type="button" class="h-tr-row" data-tr-key="${esc(r.key)}"><span class="h-tr-ico" aria-hidden="true">${(doms[r.domain] || {icon: '✎'}).icon}</span><span class="h-tr-main"><strong>${esc(r.name)}</strong>${r.fem ? ` <small>· ${esc(r.fem)}</small>` : ''}<small class="h-tr-line">${esc(r.desc)}</small></span>${r.people ? (U.badge ? U.badge(A().plural(r.people, 'ancêtre'), 'blue') : '') : ''}</button></li>`).join('')
+                : A().emptyState({icon: '🛠️', text: st.q ? `Aucun métier pour « ${st.q} »` : 'Aucun métier ne correspond', hint: 'Vérifie l’orthographe, cherche un mot du métier (toile, bois, cuir…) ou retire un filtre.'});
+        }
         paint();
-        ws.querySelector('[data-tr-q]').addEventListener('input', e => { st.q = e.target.value; paint(); });
-        ws.querySelector('[data-tr-dom]').addEventListener('change', e => { st.dom = e.target.value; paint(); });
-        ws.querySelector('[data-tr-mine]').addEventListener('change', e => { st.mine = e.target.checked; paint(); });
-        ws.addEventListener('click', e => { const b = e.target.closest('[data-tr-key]'); if (b) open('', {key: b.dataset.trKey}); });
+        ws.addEventListener('click', e => { const b = e.target.closest('[data-tr-key]'); if (b) open('', {key: b.dataset.trKey}); }, {signal: A().listControllerSignal?.()});
     };
 
     /* ─────────── sur la fiche : le métier devient un lien ─────────── */

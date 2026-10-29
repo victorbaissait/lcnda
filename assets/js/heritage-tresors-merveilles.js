@@ -32,7 +32,7 @@
     function lightDialog(T, pid, after) {
         ext.openDialog({eyebrow: 'UNE BOUGIE', title: '🕯️ Allumer une bougie', submitLabel: '🕯️ Allumer', body: `<div class="form-grid"><div class="span-2"><span class="pk-lab">Pour</span>${T.personField('who', pid)}</div>
             <label class="span-2">Un mot (facultatif)<textarea name="msg" rows="3" maxlength="500" placeholder="On pense à toi."></textarea></label><label class="span-2">De la part de<input name="from" maxlength="120" placeholder="Léa"></label></div>`,
-            onSubmit: async form => { const id = Number(form.elements.who.value) || 0; if (!id) { T.toast('Choisis pour qui.', 'error'); return false; }
+            onSubmit: async form => { const id = Number(form.elements.who.value) || 0; if (!id) return T.fail(form.elements.who, 'Choisis pour qui.');
                 const tr = await T.tree(), p = tr.byId.get(id);
                 await T.save({kind: 'candle', person_id: id, title: `Pour ${T.name(p)}`, body: form.elements.msg.value.trim(), data: {from: form.elements.from.value.trim()}});
                 T.toast(`🕯️ Une bougie brûle pour ${T.name(p)} pendant ${LIT_DAYS} jours.`, 'success'); after?.(); }});
@@ -41,10 +41,10 @@
         const tr = await T.tree();
         const draw = async () => {
             const list = await T.items('candle'), lit = list.filter(c => ageDays(c.created_at) < LIT_DAYS), ann = anniversaries(T, tr, 30);
-            host.innerHTML = `<div class="h-tr-row h-tr-noprint"><button type="button" class="button" data-cd-new>🕯️ Allumer une bougie</button><span class="h-tr-muted">${lit.length} bougie${lit.length > 1 ? 's' : ''} allumée${lit.length > 1 ? 's' : ''} · ${list.length} au registre</span></div>
-                ${lit.length ? `<div class="h-tr-candles">${lit.map(c => { const p = tr.byId.get(c.person_id); return `<figure class="h-tr-cd">${flame(true, true)}<figcaption><b>${T.esc(p ? T.name(p) : c.title)}</b><small>${T.esc(p ? T.life(p) : '')}</small>${c.body ? `<q>${T.esc(c.body)}</q>` : ''}<small>${c.data?.from ? `de ${T.esc(c.data.from)} · ` : ''}encore ${Math.max(1, Math.ceil(LIT_DAYS - ageDays(c.created_at)))} j</small><button type="button" class="h-tr-link h-tr-noprint" data-cd-del="${c.id}" title="Éteindre et retirer cette bougie">🗑 Supprimer</button></figcaption></figure>`; }).join('')}</div>` : '<p class="h-tr-muted">Aucune bougie allumée en ce moment.</p>'}
+            host.innerHTML = `<div class="h-tr-row h-tr-noprint"><span class="h-tr-muted">${lit.length} bougie${lit.length > 1 ? 's' : ''} allumée${lit.length > 1 ? 's' : ''} · ${list.length} au registre</span></div>
+                ${lit.length ? `<div class="h-tr-candles">${lit.map(c => { const p = tr.byId.get(c.person_id); return `<figure class="h-tr-cd">${flame(true, true)}<figcaption><b>${T.esc(p ? T.name(p) : c.title)}</b><small>${T.esc(p ? T.life(p) : '')}</small>${c.body ? `<q>${T.esc(c.body)}</q>` : ''}<small>${c.data?.from ? `de ${T.esc(c.data.from)} · ` : ''}encore ${Math.max(1, Math.ceil(LIT_DAYS - ageDays(c.created_at)))} j</small><button type="button" class="h-tr-link h-tr-noprint" data-cd-del="${c.id}" title="Éteindre et retirer cette bougie">🗑 Supprimer</button></figcaption></figure>`; }).join('')}</div>` : T.empty('Aucune bougie allumée en ce moment')}
                 ${ann.length ? `<h3>📅 Dans les trente jours</h3><ul class="h-tr-list">${ann.map(a => `<li class="h-tr-item"><span class="h-tr-ic">${a.what === 'décès' ? '🕯️' : '🎂'}</span><div class="h-tr-grow"><b>${T.esc(T.name(a.p))}</b> — ${a.n === 0 ? 'aujourd’hui' : a.n === 1 ? 'demain' : `dans ${a.n} jours`} : ${a.years} ans de sa ${a.what} (${T.esc(T.dateFr(a.d))})</div><button type="button" class="button small secondary" data-cd-for="${a.p.id}">🕯️ Allumer</button></li>`).join('')}</ul>` : ''}
-                ${list.length > lit.length ? `<h3>📖 Le registre</h3><ul class="h-tr-list">${list.filter(c => !lit.includes(c)).map(c => { const p = tr.byId.get(c.person_id); return `<li class="h-tr-item">${flame(false)}<div class="h-tr-grow"><b>${T.esc(p ? T.name(p) : c.title)}</b> <small>· allumée le ${T.esc(T.dateFr(String(c.created_at).slice(0, 10)))}${c.data?.from ? ` par ${T.esc(c.data.from)}` : ''}</small>${c.body ? `<br><q>${T.esc(c.body)}</q>` : ''}</div><button type="button" class="h-tr-link" data-cd-for="${c.person_id || ''}">Rallumer</button><button type="button" class="h-tr-link" data-cd-del="${c.id}" title="Retirer du registre">🗑 Supprimer</button></li>`; }).join('')}</ul>` : ''}`;
+                ${list.length > lit.length ? `<h3>📖 Le registre</h3><ul class="h-tr-list">${list.filter(c => !lit.includes(c)).map(c => { const p = tr.byId.get(c.person_id); return `<li class="h-tr-item">${flame(false)}<div class="h-tr-grow"><b>${T.esc(p ? T.name(p) : c.title)}</b> <small>· ${T.when(c.created_at, {label: 'allumée'})}${c.data?.from ? ` par ${T.esc(c.data.from)}` : ''}</small>${c.body ? `<br><q>${T.esc(c.body)}</q>` : ''}</div><button type="button" class="h-tr-link" data-cd-for="${c.person_id || ''}">Rallumer</button><button type="button" class="h-tr-link" data-cd-del="${c.id}" title="Retirer du registre">🗑 Supprimer</button></li>`; }).join('')}</ul>` : ''}`;
         };
         host.addEventListener('click', async e => {
             // 🗑 supprimer une bougie (avec « ↶ Annuler » : elle est remise telle quelle)
@@ -52,7 +52,8 @@
             if (del) { const c = (await T.items('candle')).find(x => String(x.id) === del.dataset.cdDel); if (!c) return; await T.remove(c.id); await draw();
                 const back = async () => { await T.save({kind: 'candle', person_id: c.person_id, title: c.title, body: c.body, data: c.data}); await draw(); };
                 if (window.LCNDA_APP?.undoToast) window.LCNDA_APP.undoToast('Bougie supprimée', {undo: back}); else T.toast('Bougie supprimée.'); return; }
-            if (e.target.closest('[data-cd-new]')) lightDialog(T, null, draw); const f = e.target.closest('[data-cd-for]'); if (f) lightDialog(T, Number(f.dataset.cdFor) || null, draw); });
+            const f = e.target.closest('[data-cd-for]'); if (f) lightDialog(T, Number(f.dataset.cdFor) || null, draw); });
+        T.actions(host, {primary: {label: '🕯️ Allumer une bougie', attrs: 'data-cd-new', run: () => lightDialog(T, null, draw)}});
         await draw();
     }
     F.push({key: 'bougie', group: 'memoire', icon: '🕯️', title: 'Allumer une bougie', desc: 'Une bougie pour un ancêtre, avec un mot : elle brûle sept jours. Les anniversaires de naissance et de décès à venir.', render: renderCandles});
@@ -159,7 +160,7 @@
             <div class="h-tr-panel h-tr-row"><label>🔈 Volume<input type="range" min="0" max="100" value="80" data-am-vol></label>
                 <label>⏲️ S’arrêter après<select data-am-timer><option value="0">jamais</option><option value="5">5 min</option><option value="15">15 min</option><option value="30">30 min</option><option value="60">1 h</option></select></label>
                 <button type="button" class="button secondary" data-am-rand title="Un mélange au hasard de 3 à 5 couches">🎲 Au hasard</button><button type="button" class="button secondary" data-am-zero>Tout à zéro</button>
-                <label>⏺ Enregistrer<select data-am-reclen><option value="30">30 s</option><option value="60" selected>1 min</option><option value="180">3 min</option><option value="600">10 min</option></select></label><button type="button" class="button secondary" data-am-rec title="Un fichier son (WebM) à garder ou à mettre dans un montage">⏺ Fichier son</button></div>
+                <label>Durée du fichier son<select data-am-reclen><option value="30">30 s</option><option value="60" selected>1 min</option><option value="180">3 min</option><option value="600">10 min</option></select></label></div>
             <div class="h-tr-panel h-tr-row"><label>⭐ Mes ambiances<select data-am-mine><option value="">—</option></select></label><button type="button" class="button secondary" data-am-save>💾 Garder ce mélange</button><button type="button" class="button secondary" data-am-del>🗑 Supprimer</button></div>
             <div class="h-tr-panel"><p class="h-tr-muted">Tout est fabriqué par l’ordinateur, à partir de bruit et de sons purs : une évocation, pas un enregistrement. Règle chaque couche à ton goût (${Object.keys(LAYERS).length} couches).</p><input type="search" class="h-tr-am-find" data-am-find placeholder="Chercher une couche (cloches, eau, atelier…)" aria-label="Chercher une couche"><div class="h-tr-mixer" data-am-mix>${Object.entries(LAYERS).map(([k, [l]]) => `<label>${T.esc(l)}<input type="range" min="0" max="100" value="0" data-am-l="${k}"></label>`).join('')}</div></div>
             <details class="h-tr-panel h-tr-credits"><summary><b>© Crédits et droits des sons</b></summary>
@@ -196,14 +197,17 @@
             const l = mine(), [gone] = l.splice(Number(i), 1); try { localStorage.setItem(MKEY, JSON.stringify(l)); } catch (_) {} fillMine();
             A().undoToast(`« ${gone.name} » supprimé.`, {undo: () => { const k = mine(); k.splice(Number(i), 0, gone); try { localStorage.setItem(MKEY, JSON.stringify(k)); } catch (_) {} fillMine(i); }}); });
         // ⏺ un fichier son : ce qu'on entend, pendant la durée choisie
-        host.querySelector('[data-am-rec]').addEventListener('click', e => {
-            const btn = e.currentTarget; if (rec) { rec.stop(); return; }
-            if (!window.MediaRecorder) return T.toast('Ce navigateur ne sait pas enregistrer.', 'error');
-            if (!player && !play()) return;
+        const record = () => new Promise(res => {
+            if (rec) { rec.stop(); return res(null); } // déjà en route : on le finit plus tôt (le fichier arrive tout de suite)
+            if (!window.MediaRecorder) { T.toast('Ce navigateur ne sait pas enregistrer.', 'error'); return res(null); }
+            if (!player && !play()) return res(null);
             const dest = player.ac.createMediaStreamDestination(); player.master.connect(dest); const chunks = [], secs = Number(host.querySelector('[data-am-reclen]').value) || 60;
             rec = new MediaRecorder(dest.stream); rec.ondataavailable = ev => ev.data.size && chunks.push(ev.data);
-            rec.onstop = () => { clearTimeout(rec._t); rec = null; btn.textContent = '⏺ Fichier son'; try { player?.master.disconnect(dest); } catch (_) {} if (chunks.length) T.download(`ambiance-${host.querySelector('[data-am-s]').value}.webm`, new Blob(chunks, {type: 'audio/webm'})); };
-            rec.start(); rec._t = setTimeout(() => rec?.stop(), secs * 1000); btn.textContent = '⏹ Finir l’enregistrement'; T.toast(`Enregistrement de ${secs < 60 ? secs + ' s' : secs / 60 + ' min'} : le fichier arrive à la fin.`); });
+            rec.onstop = () => { clearTimeout(rec._t); rec = null; try { player?.master.disconnect(dest); } catch (_) {} res(chunks.length ? new Blob(chunks, {type: 'audio/webm'}) : null); };
+            rec.start(); rec._t = setTimeout(() => rec?.stop(), secs * 1000); T.toast(`Enregistrement de ${secs < 60 ? secs + ' s' : secs / 60 + ' min'} : le fichier arrive à la fin (⤓ Exporter → fichier son, de nouveau, pour finir plus tôt).`); });
+        const fname = () => `ambiance-${host.querySelector('[data-am-s]').value}.webm`;
+        T.actions(host, {exports: [{icon: '🎧', label: 'Fichier son (WebM)', help: 'Ce qu’on entend, pendant la durée choisie', name: fname, make: record}],
+            media: {title: () => `Ambiance — ${SCENES[host.querySelector('[data-am-s]').value]?.[0] || 'mélange'}`, kind: 'audio', make: async () => { const b = await record(); return b ? {blob: b, name: fname()} : null; }}});
         host.querySelector('[data-am-stop]').addEventListener('click', stop);
         const obs = new MutationObserver(() => { if (!host.isConnected) { stop(); obs.disconnect(); } }); obs.observe(document.getElementById('workspace') || document.body, {childList: true, subtree: true});
         setScene('veillee');
@@ -231,7 +235,7 @@
     }
     async function renderGrow(host, T) {
         const tr = await T.tree(), r0 = oldestRoot(T, tr);
-        if (!r0) { host.innerHTML = '<p class="h-tr-muted">L’arbre est vide.</p>'; return; }
+        if (!r0) { host.innerHTML = T.empty('L’arbre est vide'); return; }
         host.innerHTML = `<div class="h-tr-row h-tr-noprint"><div style="min-width:260px"><span class="pk-lab">À partir de</span>${T.personField('root', r0.id)}</div><button type="button" class="button" data-gr-play>▶ Faire pousser</button>
             <label>Vitesse<select data-gr-v><option value="4">lente</option><option value="8" selected>normale</option><option value="16">rapide</option></select></label><span class="h-tr-big" data-gr-y></span></div>
             <div class="h-tr-grow-box" data-gr-box></div><input type="range" data-gr-r style="width:100%" step="0.1">`;
@@ -285,7 +289,7 @@
         const tr = await T.tree(), st = T.start(tr);
         host.innerHTML = `<div class="h-tr-row h-tr-noprint"><div style="min-width:240px"><span class="pk-lab">Autour de</span>${T.personField('root', st?.id)}</div><label>Qui<select data-mu-s><option value="all">tout l’arbre</option><option value="anc">ses ancêtres</option><option value="desc">ses descendants</option></select></label>
             <label>Tempo<select data-mu-t><option value="0.3">lent</option><option value="0.18" selected>normal</option><option value="0.1">vif</option></select></label>
-            <button type="button" class="button" data-mu-play>▶ Écouter</button><button type="button" class="button secondary" data-mu-stop>⏹</button><button type="button" class="button secondary" data-mu-wav>⬇ Fichier son (WAV)</button></div>
+            <button type="button" class="button" data-mu-play>▶ Écouter</button><button type="button" class="button secondary" data-mu-stop title="Arrêter" aria-label="Arrêter">⏹</button></div>
             <p class="h-tr-muted">Chaque naissance est une note : plus aiguë pour les générations proches, plus longue pour une longue vie, au timbre plus doux pour les femmes ; chaque mariage, un accord ; chaque décès, une note grave.</p>
             <canvas class="h-tr-canvas" data-mu-c width="1200" height="320"></canvas><p class="h-tr-muted" data-mu-info></p>`;
         const cv = host.querySelector('[data-mu-c]'), x = cv.getContext('2d'), info = host.querySelector('[data-mu-info]');
@@ -301,9 +305,11 @@
         host.querySelector('[data-mu-play]').addEventListener('click', () => { if (!AC()) return T.toast('Ce navigateur ne sait pas jouer de sons.', 'error'); stop(); draw(); ac = new (AC())(); const out = ac.createGain(); out.gain.value = 0.8; out.connect(ac.destination); const t0 = ac.currentTime + 0.2, me = ac;
             S.notes.forEach(n => voice(ac, out, n, t0 + n.t)); const step = () => { if (ac !== me) return; const p = ac.currentTime - t0; draw(p); if (p < S.length) raf = requestAnimationFrame(step); else stop(); }; raf = requestAnimationFrame(step); });
         host.querySelector('[data-mu-stop]').addEventListener('click', stop);
-        host.querySelector('[data-mu-wav]').addEventListener('click', async () => { draw(); const OAC = window.OfflineAudioContext || window.webkitOfflineAudioContext; if (!OAC) return T.toast('Ce navigateur ne sait pas fabriquer de fichier son.', 'error');
+        const wavFile = async () => { draw(); const OAC = window.OfflineAudioContext || window.webkitOfflineAudioContext; if (!OAC) { T.toast('Ce navigateur ne sait pas fabriquer de fichier son.', 'error'); return null; }
             const sr = 22050, len = Math.min(600, S.length + 1), oc = new OAC(2, Math.ceil(sr * len), sr), out = oc.createGain(); out.gain.value = 0.8; out.connect(oc.destination); S.notes.filter(n => n.t < len).forEach(n => voice(oc, out, n, n.t));
-            info.textContent = 'Je fabrique le fichier son…'; const buf = await oc.startRendering(), blob = wav(buf); T.download('la-musique-de-l-arbre.wav', blob); draw(); ext.tresorMusic.last = blob.size; });
+            info.textContent = 'Je fabrique le fichier son…'; const buf = await oc.startRendering(), blob = wav(buf); draw(); ext.tresorMusic.last = blob.size; return blob; };
+        T.actions(host, {exports: [{icon: '🎧', label: 'Fichier son (WAV)', name: 'la-musique-de-l-arbre.wav', make: wavFile}],
+            media: {title: 'La musique de l’arbre', kind: 'audio', make: async () => { const b = await wavFile(); return b ? {blob: b, name: 'la-musique-de-l-arbre.wav'} : null; }}});
         host.querySelectorAll('[name=root],[data-mu-s],[data-mu-t]').forEach(el => el.addEventListener('change', () => { stop(); }));
         const obs = new MutationObserver(() => { if (!host.isConnected) { stop(); obs.disconnect(); } }); obs.observe(document.getElementById('workspace') || document.body, {childList: true, subtree: true});
         draw();

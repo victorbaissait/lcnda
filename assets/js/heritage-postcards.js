@@ -162,7 +162,7 @@
                     {id: 'place', label: 'Lieu montré', type: 'place', chipPrefix: 'À'},
                     {id: 'back', label: 'Texte du dos', type: 'radio', options: [['', 'Tout'], ['yes', 'Transcrit'], ['no', 'Pas encore transcrit']], dflt: ''}],
                 view: {dflt: 'cards', what: 'cartes', onChange: () => draw()},
-                sort: {options: [['recent', 'Les plus récentes'], ['old', 'Les plus anciennes'], ['sent', 'Par date d’envoi'], ['az', 'A → Z'], ['za', 'Z → A']], value: sort},
+                sort: {options: [['recent', 'Les plus récentes'], ['old', 'Les plus anciennes'], ['az', 'A → Z'], ['za', 'Z → A'], ['sent', 'Par date d’envoi']], value: sort},
                 onChange: (b, {what}) => { U.setSort?.(KEY, b.sort); if (what !== 'view') draw(); }});
             bar.setCount(`${A().plural(rows.length, 'carte postale', 'cartes postales')}${rows.length !== all.length ? ` sur ${all.length}` : ''}`);
             slot.replaceWith(bar);

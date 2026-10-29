@@ -254,7 +254,7 @@
             const k = K();
             return {
                 Fichier: () => [{icon: '＋', label: 'Nouveau site…', run: () => chooseTemplate(this.ctx)}, {icon: '📂', label: 'Ouvrir un dossier…', run: () => importFolder(this.ctx)}, {icon: '🗂', label: 'Mes sites…', run: () => this.sitesMenu(this.$('[data-sw-sites]') || this.$('.ui-topbar'))}, {icon: '💾', label: 'Enregistrer', shortcut: '⌘S', run: () => this.save()}, {icon: '⧉', label: 'Enregistrer une copie…', run: () => this.saveAs()},
-                    {icon: '🕘', label: 'Enregistrer comme nouvelle version', run: () => this.saveVersion()}, {icon: '🕘', label: 'Versions du site…', run: () => this.versions()}, '-',
+                    {icon: '🕘', label: 'Enregistrer comme nouvelle version', run: () => this.saveVersion()}, {icon: '🕘', label: 'Versions…', run: () => this.versions()}, '-',
                     {icon: '⤓', label: 'Exporter…', run: () => this.exportDialog()}, {icon: '📤', label: 'Publier en ligne…', run: () => this.publishDialog()}, {icon: '↗', label: 'Ouvrir l’aperçu dans le navigateur', run: () => this.openBrowser()}, '-', {icon: '×', label: 'Fermer', run: () => this.close()}],
                 Édition: () => [{icon: '↶', label: 'Annuler', shortcut: '⌘Z', disabled: !this.hist.canUndo(), run: () => this.undo()}, {icon: '↷', label: 'Rétablir', shortcut: '⇧⌘Z', disabled: !this.hist.canRedo(), run: () => this.redo()}, '-',
                     {icon: '↑', label: 'Monter l’élément', disabled: !this.sel, run: () => this.move(-1)}, {icon: '↓', label: 'Descendre l’élément', disabled: !this.sel, run: () => this.move(1)}, {icon: '⧉', label: 'Dupliquer l’élément', disabled: !this.sel, run: () => this.duplicate()},
@@ -1275,7 +1275,7 @@
         async sitesMenu(anchor) {
             let list = []; try { list = (await api('websites')).items || []; } catch (e) { return toast(e.message, 'error'); }
             const swap = async run => { if (this.dirty) { const ok = await A().confirmBox('Enregistrer ce site avant d’en ouvrir un autre ?', {title: 'Changer de site', okLabel: '💾 Enregistrer et changer', cancelLabel: 'Annuler'}); if (!ok) return; await this.save(); if (this.dirty) return; } this.dirty = false; await this.close(); if (this.closed) run(); };
-            UI().menuAt(anchor, [...list.slice(0, 30).map(x => ({icon: '🌐', label: x.name || 'Mon site', help: [x.info?.pages ? plural(x.info.pages, 'page') : '', x.updated_at ? `modifié le ${String(x.updated_at).slice(0, 10).split('-').reverse().join('/')}` : ''].filter(Boolean).join(' · '), checked: Number(x.id) === this.id, disabled: Number(x.id) === this.id, run: () => swap(() => openSite({...this.ctx, id: x.id}))})),
+            UI().menuAt(anchor, [...list.slice(0, 30).map(x => ({icon: '🌐', label: x.name || 'Mon site', help: [x.info?.pages ? plural(x.info.pages, 'page') : '', x.updated_at ? (window.LCNDA_UI?.whenText?.(x.updated_at, {label: 'Modifié'}) || `modifié le ${String(x.updated_at).slice(0, 10).split('-').reverse().join('/')}`) : ''].filter(Boolean).join(' · '), checked: Number(x.id) === this.id, disabled: Number(x.id) === this.id, run: () => swap(() => openSite({...this.ctx, id: x.id}))})),
                 ...(list.length ? ['-'] : []), {icon: '＋', label: 'Nouveau site…', run: () => swap(() => chooseTemplate(this.ctx))}, {icon: '📂', label: 'Ouvrir un dossier…', help: 'un site déjà fait : pages, CSS, JS, PHP, images', run: () => swap(() => importFolder(this.ctx))}], {title: `Mes sites (${list.length})`});
         }
         /** 🖼 une image du site : on la voit, son chemin à copier, la remplacer */
@@ -1575,7 +1575,14 @@
         afterRestore() { this.dirty = true; UI()?.savedStatus?.(this.dlg, 'dirty'); this.paintPages(); this.paintLeft(); this.paintPanel(); this.code.value = this.codeValue(); this.reload(); this.whereText(); }
 
         /* ── enregistrer, versions, exporter ── */
-        async save({asNew = false, name = this.name, quiet = false, force = false} = {}) {
+        /** deux ⌘S rapides : le second attend le premier et réutilise l'id créé (jamais deux sites) */
+        save(o = {}) {
+            if (o.asNew) return this._saveNow(o);
+            if (this._saving) return this._saving;
+            const p = this._saveNow(o), done = () => { if (this._saving === p) this._saving = null; };
+            this._saving = p; p.then(done, done); return p;
+        }
+        async _saveNow({asNew = false, name = this.name, quiet = false, force = false} = {}) {
             clearTimeout(this.histT); this.pruneFrozen();
             UI()?.savedStatus?.(this.dlg, 'saving');
             try {
@@ -1590,7 +1597,7 @@
                 return id;
             } catch (e) {
                 UI()?.savedStatus?.(this.dlg, 'error');
-                if (/modifié ailleurs/.test(e.message || '')) { if (await A().confirmBox('Une autre fenêtre a enregistré ce site entre-temps. Garder ta version effacera la sienne.', {title: 'Site modifié ailleurs', okLabel: 'Garder ma version', danger: true})) return this.save({asNew, name, quiet, force: true}); return 0; }
+                if (/modifié ailleurs/.test(e.message || '')) { if (await A().confirmBox('Une autre fenêtre a enregistré ce site entre-temps. Garder ta version effacera la sienne.', {title: 'Site modifié ailleurs', okLabel: 'Garder ma version', danger: true})) return this._saveNow({asNew, name, quiet, force: true}); return 0; }
                 toast(`Impossible d’enregistrer : ${e.message}`, 'error', {retry: () => this.save({asNew, name})}); return 0;
             }
         }
@@ -1599,23 +1606,28 @@
         async saveVersion() {
             if (!await this.ensureSaved()) return;
             const label = await A().askText({title: '🕘 Nouvelle version', message: 'Un nom pour cette version (facultatif) :', value: `Version du ${new Date().toLocaleDateString('fr-FR')}`, okLabel: 'Enregistrer'}); if (label === null) return;
-            try { await post('save_website_version', {site_id: this.id, label: String(label || '').trim().slice(0, 120), data: this.site}); toast('Version enregistrée (Fichier → 🕘 Versions du site).', 'success'); } catch (e) { toast(e.message, 'error'); }
+            try { await post('save_website_version', {site_id: this.id, label: String(label || '').trim().slice(0, 120), data: this.site}); toast('Version enregistrée (Fichier → 🕘 Versions…).', 'success'); } catch (e) { toast(e.message, 'error'); }
         }
+        /** L3 — la fenêtre commune « 🕘 Versions » (app-versions.js) : aperçu de l'accueil (page isolée, sans script), comparaison des textes */
         async versions() {
             if (!this.id) return toast('Enregistre d’abord le site (💾) : ses versions seront gardées avec lui.');
-            let items = []; try { items = (await api('website_versions', {site_id: this.id})).items || []; } catch (e) { return toast(e.message, 'error'); }
-            ext.openDialog({eyebrow: 'MON SITE WEB', title: '🕘 Versions du site', wide: true, submitLabel: 'Fermer', body: '<div class="sw-row"><button type="button" class="button" data-v-new>＋ Enregistrer la version actuelle</button></div><div data-v-list></div>',
-                onOpen: d => {
-                    const paint = () => { d.querySelector('[data-v-list]').innerHTML = items.length ? `<div class="data-table-wrap"><table class="data-table"><thead><tr><th>Version</th><th>Enregistrée</th><th></th></tr></thead><tbody>${items.map(v => `<tr><td>${esc(v.label)}</td><td>${UI()?.when ? UI().when(v.created_at) : esc(v.created_at)}</td><td><div class="sw-row"><button type="button" class="button small secondary" data-v-back="${v.id}">↺ Reprendre</button><button type="button" class="icon-button small" data-v-del="${v.id}" title="Supprimer la version" aria-label="Supprimer la version">🗑</button></div></td></tr>`).join('')}</tbody></table></div>` : A().empty('Pas encore de version : « ＋ Enregistrer la version actuelle » garde le site tel qu’il est, pour y revenir plus tard.', {icon: '🕘', action: {label: '＋ Enregistrer la version actuelle', attrs: 'data-v-new'}}); };
-                    paint();
-                    d.addEventListener('click', async e => { const b = e.target.closest('button'); if (!b) return;
-                        try {
-                            if (b.matches('[data-v-new]')) { await post('save_website_version', {site_id: this.id, label: `Version du ${new Date().toLocaleDateString('fr-FR')}`, data: this.site}); items = (await api('website_versions', {site_id: this.id})).items || []; return paint(); }
-                            const vid = Number(b.dataset.vBack || b.dataset.vDel); if (!vid) return;
-                            if (b.dataset.vBack) { const v = await api('website_version', {id: vid}); this.hist.commit(); this.site = normalizeSite(v.data); this.pageIdx = 0; this.sel = null; this.afterRestore(); this.hist.commit(); d.close(); return A().undoToast?.(`Version « ${v.label} » reprise`, {undo: () => this.undo()}); }
-                            if (b.dataset.vDel) { const r = await post('delete_website_version', {id: vid}); items = items.filter(x => x.id !== vid); paint(); A().undoToast?.('Version supprimée', {undo: async () => { await post('restore_website_version', {version: (r.result || r).version}); items = (await api('website_versions', {site_id: this.id})).items || []; if (d.isConnected) paint(); }}); }
-                        } catch (err) { toast(err.message, 'error'); } });
-                }, onSubmit: () => {}});
+            const U = UI(); if (!U?.openVersions) return toast('La fenêtre des versions n’est pas chargée.', 'error');
+            const full = new Map(), get = async id => { if (!full.has(id)) full.set(id, await api('website_version', {id})); return full.get(id); };
+            const look = d => { const site = normalizeSite(d), p0 = site.pages[0] || {html: ''};
+                const text = site.pages.map(p => { const doc = new DOMParser().parseFromString(String(p.html || ''), 'text/html'); doc.querySelectorAll('script, style, template').forEach(x => x.remove()); doc.querySelectorAll('h1, h2, h3, h4, h5, h6, p, li, tr, div, section, article, header, footer, br').forEach(x => x.append('\n')); return `${p.name}\n${(doc.body?.textContent || '').replace(/[ \t]+/g, ' ').replace(/\n\s*\n+/g, '\n').trim()}`; }).join('\n\n');
+                return {html: `<!doctype html><meta charset="utf-8"><base href="${esc(location.href.replace(/[#?].*$/, '').replace(/[^/]*$/, ''))}"><style>${String(site.css || '').replace(/<\/style/gi, '')}</style>${p0.html || ''}`, text, pages: site.pages.length}; };
+            const pagesOf = d => plural((normalizeSite(d).pages || []).length, 'page');
+            return U.openVersions({title: this.name || 'Mon site', tool: 'Mon site web', kind: 'site',
+                list: async () => ((await api('website_versions', {site_id: this.id})).items || []).map(v => ({...v, auto: !!v.auto, infoAsync: async () => pagesOf((await get(v.id)).data)})),
+                now: () => ({info: pagesOf(this.site), hint: 'le site à l’écran'}),
+                preview: async v => look(v ? (await get(v.id)).data : this.site),
+                keepNow: label => post('save_website_version', {site_id: this.id, label, data: this.site, auto: 1}),
+                restore: async v => { const x = await get(v.id); this.hist.commit(); this.site = normalizeSite(x.data); this.pageIdx = 0; this.sel = null; this.afterRestore(); this.hist.commit(); return {undo: () => this.undo(), redo: () => this.redo()}; },
+                rename: (v, label) => post('rename_website_version', {id: v.id, label}),
+                copy: async v => { const x = await get(v.id); const r = await post('save_website', {name: `${this.name} — ${v.label}`.slice(0, 200), data: x.data}); void r; toast(`Copie enregistrée : « ${this.name} — ${v.label} » (Mes sites…).`, 'success'); },
+                exportOne: async v => { const x = await get(v.id); const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify({format: 'lcnda-site', version: 1, name: `${this.name} — ${v.label}`, data: x.data})], {type: 'application/json'})); a.download = `${(A().safeExportFilename ? A().safeExportFilename(`${this.name} — ${v.label}`, 'site') : 'site')}.json`; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); },
+                remove: async v => { const r = await post('delete_website_version', {id: v.id}); full.delete(v.id); return {undo: () => post('restore_website_version', {version: (r.result || r).version})}; },
+                saveNow: () => this.saveVersion()});
         }
         async openBrowser() {
             if (!await this.ensureSaved()) return;

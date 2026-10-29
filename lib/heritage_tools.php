@@ -13,6 +13,32 @@ declare(strict_types=1);
 
 /* ─── 🔒 Mode consultation ───────────────────────────────────────────── */
 
+/**
+ * ✨ Les médias joints à une lettre aux descendants encore scellée (Trésors) : ils ne se montrent ni en mode consultation, ni en
+ * mode simple, avant le jour d'ouverture. [id => true]
+ */
+function sealed_letter_media_ids(PDO $pdo): array
+{
+    static $memo = null;
+    if ($memo !== null) { return $memo; }
+    $memo = [];
+    if (!$pdo->query("SELECT 1 FROM sqlite_master WHERE type='table' AND name='tresor_items'")->fetchColumn()) { return $memo; }
+    $st = $pdo->prepare("SELECT data_json FROM tresor_items WHERE kind='letter' AND open_at<>'' AND open_at>?"); $st->execute([date('Y-m-d')]);
+    foreach ($st->fetchAll(PDO::FETCH_COLUMN) as $j) {
+        $d = json_decode((string) $j, true);
+        foreach ((array) ($d['media'] ?? []) as $m) { $id = (int) (is_array($m) ? ($m['id'] ?? 0) : $m); if ($id > 0) { $memo[$id] = true; } }
+    }
+    return $memo;
+}
+
+/** « AND m.id NOT IN (…) » quand ces médias doivent rester cachés (consultation), sinon '' */
+function sealed_media_sql(PDO $pdo, string $col = 'm.id'): string
+{
+    if (!function_exists('kiosk_state') || empty(kiosk_state()['on'])) { return ''; }
+    $ids = array_keys(sealed_letter_media_ids($pdo));
+    return $ids ? " AND {$col} NOT IN (" . implode(',', array_map('intval', $ids)) . ')' : '';
+}
+
 function kiosk_path(): string { return DATA_DIR . '/consultation.json'; }
 
 function kiosk_state(): array

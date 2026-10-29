@@ -81,13 +81,13 @@
                 <label>Sa forme<select name="photoShape"><option value="rond">Rond</option><option value="ovale">Ovale</option><option value="carre">Carré</option></select></label>
                 <label>Couleurs de la photo<select name="photoFx"><option value="">D’origine</option><option value="nb">Noir et blanc</option></select></label></div></details>
             <label style="display:grid">Le texte (une ligne par ligne ; * devant une ligne = en grand)<textarea name="txt" rows="9"></textarea></label>
-            <p class="h-tr-row"><button type="button" class="button" data-fp-png>⬇ Image PNG</button><button type="button" class="button secondary" data-fp-svg>⬇ SVG</button><button type="button" class="button secondary" data-fp-print>🖨 Imprimer</button><button type="button" class="button secondary" data-fp-layout title="Ouvrir dans l’atelier de mise en page (façon InDesign) pour tout retravailler : textes, formes, images, plusieurs pages…">📐 Mise en page</button></p></form>
-            <div data-fp-out class="h-tr-fp-out"></div></div>`;
+</form>
+            <div data-fp-out class="h-tr-view h-tr-fp-out"></div></div>`;
         const form = host.querySelector('[data-fp]'), out = host.querySelector('[data-fp-out]'), el = n => form.elements[n];
         const parse = () => el('txt').value.split('\n').map(s => s.trim()).filter(Boolean).map(s => (s.startsWith('*') ? {t: s.slice(1).trim(), s: 'l'} : {t: s, s: s.length < 34 && /[A-ZÉ]{2,}/.test(s) ? 'm' : 's'}));
         let photoData = '', photoFor = 0;
         const loadPhoto = async () => { const p = tr.byId.get(Number(el('who').value)); if (!el('photo').checked || !p) { photoData = ''; return; } if (photoFor === p.id && photoData) return; photoFor = p.id; photoData = '';
-            const u = T.portraitUrl(p); if (!u) { T.toast('Pas de portrait sur cette fiche.', 'error'); return; }
+            const u = T.portraitUrl(p); if (!u) { T.fail(el('photo'), 'Pas de portrait sur cette fiche.'); return; }
             try { const b = await fetch(u).then(r => r.blob()); photoData = await new Promise(r => { const fr = new FileReader(); fr.onload = () => r(fr.result); fr.readAsDataURL(b); }); } catch (_) { photoData = ''; } };
         const opts = () => ({format: el('format').value, font: el('font').value, scale: el('scale').value, align: el('align').value, ornament: el('ornament').value, photo: el('photo').checked ? photoData : '', photoShape: el('photoShape').value, photoFx: el('photoFx').value,
             ...(el('colors').checked ? {bg: el('bg').value, ink: el('ink').value, accent: el('accent').value} : {})});
@@ -101,13 +101,11 @@
         form.addEventListener('change', async e => { const n = e.target.name; if (n === 'who' || n === 'ev') { await loadPhoto(); compose(); return; } if (n === 'st' || n === 'colors') syncColors(); if (n === 'photo' || n === 'who') await loadPhoto(); paint(); });
         el('txt').addEventListener('input', paint); form.addEventListener('input', e => { if (['scale', 'bg', 'ink', 'accent'].includes(e.target.name)) paint(); });
         const fname = () => `faire-part-${(tr.byId.get(Number(el('who').value))?.first || 'famille').toLowerCase().normalize('NFD').replace(/[^a-z0-9]+/g, '-')}`;
-        host.addEventListener('click', async e => {
-            const svg = () => cardSvg(T, parse(), el('st').value, opts());
-            if (e.target.closest('[data-fp-layout]')) { const [, w, h] = FP_FORMATS[el('format').value] || FP_FORMATS.a6, mmW = 148, mmH = Math.round(mmW * h / w); T.toLayout(`Faire-part — ${tr.byId.get(Number(el('who').value)) ? T.name(tr.byId.get(Number(el('who').value))) : 'famille'}`, 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg()), {w: mmW, h: mmH}); return; }
-            if (e.target.closest('[data-fp-svg]')) T.download(fname() + '.svg', new Blob([svg()], {type: 'image/svg+xml'}));
-            if (e.target.closest('[data-fp-png]')) { try { T.download(fname() + '.png', await svgToPng(svg())); } catch (err) { T.toast(err.message, 'error'); } }
-            if (e.target.closest('[data-fp-print]')) ext.tresorPrint('Faire-part', 'section{display:grid;place-items:center;padding:10mm}section svg{width:148mm;max-height:270mm;height:auto;background:#fff;box-shadow:0 2px 12px #0004}@media print{section svg{box-shadow:none}}', `<section>${svg()}</section>`);
-        });
+        const svg = () => cardSvg(T, parse(), el('st').value, opts()), who = () => tr.byId.get(Number(el('who').value));
+        T.actions(host, {exports: [{icon: '🖼', label: 'Image PNG', name: () => fname() + '.png', make: () => svgToPng(svg())}, {icon: '✒️', label: 'Dessin SVG', name: () => fname() + '.svg', make: () => svg()}],
+            layout: () => { const [, w, h] = FP_FORMATS[el('format').value] || FP_FORMATS.a6, mmW = 148, mmH = Math.round(mmW * h / w); return T.toLayout(`Faire-part — ${who() ? T.name(who()) : 'famille'}`, 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg()), {w: mmW, h: mmH}); },
+            media: {title: () => `Faire-part — ${who() ? T.name(who()) : 'famille'}`, person: () => who()?.id, make: async () => ({blob: await svgToPng(svg()), name: fname() + '.png'})},
+            print: {attrs: 'data-fp-print', run: () => ext.tresorPrint('Faire-part', 'section{display:grid;place-items:center;padding:10mm}section svg{width:148mm;max-height:270mm;height:auto;background:#fff;box-shadow:0 2px 12px #0004}@media print{section svg{box-shadow:none}}', `<section>${svg()}</section>`)}});
         compose();
     }
     F.push({key: 'faire-part', group: 'creer', icon: '💌', title: 'Le faire-part d’un événement', desc: 'Une naissance, un mariage ou un décès de l’arbre : le faire-part se compose tout seul, dans le style de l’époque.', render: renderCard});
@@ -119,20 +117,21 @@
     function cropTo(img, s, h = 90) { const sx = s.x / 100 * img.naturalWidth, sy = s.y / 100 * img.naturalHeight, sw = Math.max(1, s.w / 100 * img.naturalWidth), sh = Math.max(1, s.h / 100 * img.naturalHeight), c = document.createElement('canvas'); c.height = h; c.width = Math.round(Math.min(4, sw / sh) * h); c.getContext('2d').drawImage(img, sx, sy, sw, sh, 0, 0, c.width, c.height); return c; }
     async function renderSignatures(host, T) {
         const tr = await T.tree(), r = await T.api('tresor_signatures').catch(() => ({signatures: []})), sigs = (r.signatures || []).map(s => { const p = tr.byId.get(s.person_id); return {...s, p, yr: s.year || (p?.by ? p.by + 30 : null)}; }).sort((a, b) => (a.yr || 9999) - (b.yr || 9999));
-        if (!sigs.length) { host.innerHTML = '<div class="h-tr-panel"><p>Aucune signature repérée pour l’instant.</p><p class="h-tr-muted">Ouvre un acte dans la visionneuse des médias, puis « ＋ Identifier une signature » : encadre la signature et dis de qui elle est. Elle viendra se poser ici, rangée par époque.</p></div>'; return; }
-        host.innerHTML = `<div class="h-tr-row h-tr-noprint"><span class="h-tr-big">${sigs.length} signature${sigs.length > 1 ? 's' : ''}</span><button type="button" class="button" data-sg-poster>⬇ L’affiche (PNG)</button></div><div data-sg-wall></div>`;
+        if (!sigs.length) { host.innerHTML = T.empty('Aucune signature repérée pour l’instant', {icon: '✍️', hint: 'Ouvre un acte dans la visionneuse des médias, puis « ＋ Identifier une signature » : encadre la signature et dis de qui elle est. Elle viendra se poser ici, rangée par époque.'}); return; }
+        host.innerHTML = `<div class="h-tr-row h-tr-noprint"><span class="h-tr-big">${sigs.length} signature${sigs.length > 1 ? 's' : ''}</span></div><div data-sg-wall></div>`;
         const wall = host.querySelector('[data-sg-wall]'), imgs = new Map();
         for (const s of sigs) if (!imgs.has(s.filename)) imgs.set(s.filename, await loadImg(`media/${encodeURIComponent(s.filename)}`));
         PERIODS.forEach(([a, b, label]) => { const l = sigs.filter(s => s.yr != null && s.yr >= a && s.yr <= b); if (!l.length) return; wall.insertAdjacentHTML('beforeend', `<h3>${T.esc(label)}</h3><div class="h-tr-sigs" data-sg-p="${a}"></div>`);
             const box = wall.querySelector(`[data-sg-p="${a}"]`); l.forEach(s => { const img = imgs.get(s.filename), fig = document.createElement('figure'); fig.className = 'h-tr-sig'; if (img) fig.appendChild(cropTo(img, s)); fig.insertAdjacentHTML('beforeend', `<figcaption><b>${T.esc(s.p ? T.name(s.p) : '?')}</b>${s.yr ? ` · ${s.year ? '' : 'vers '}${s.yr}` : ''}</figcaption>`); box.appendChild(fig); }); });
         const undated = sigs.filter(s => s.yr == null); if (undated.length) { wall.insertAdjacentHTML('beforeend', '<h3>Sans date</h3><div class="h-tr-sigs" data-sg-p="x"></div>'); undated.forEach(s => { const img = imgs.get(s.filename), fig = document.createElement('figure'); fig.className = 'h-tr-sig'; if (img) fig.appendChild(cropTo(img, s)); fig.insertAdjacentHTML('beforeend', `<figcaption><b>${T.esc(s.p ? T.name(s.p) : '?')}</b></figcaption>`); wall.querySelector('[data-sg-p="x"]').appendChild(fig); }); }
-        host.querySelector('[data-sg-poster]').addEventListener('click', () => {
+        const poster = () => {
             const W = 1600, cols = 4, cw = W / cols, ch = 170, rows = Math.ceil(sigs.length / cols), c = document.createElement('canvas'); c.width = W; c.height = 160 + rows * ch + 40; const x = c.getContext('2d');
             x.fillStyle = '#fbf6ea'; x.fillRect(0, 0, c.width, c.height); x.fillStyle = '#3a2c1a'; x.textAlign = 'center'; x.font = 'italic 54px Georgia'; x.fillText(`Les signatures de la famille ${T.start(tr)?.last || ''}`.trim(), W / 2, 95);
             sigs.forEach((s, k) => { const cx = (k % cols) * cw, cy = 160 + Math.floor(k / cols) * ch, img = imgs.get(s.filename); if (img) { const cr = cropTo(img, s, 100), w = Math.min(cw - 30, cr.width); x.drawImage(cr, cx + (cw - w) / 2, cy, w, w / cr.width * 100); }
                 x.font = '22px Georgia'; x.fillText(`${s.p ? T.name(s.p) : '?'}${s.yr ? ` (${s.yr})` : ''}`, cx + cw / 2, cy + 135); });
-            c.toBlob(b => b && T.download('mur-des-signatures.png', b), 'image/png');
-        });
+            return T.canvasPng(c);
+        };
+        T.actions(host, {exports: [{icon: '🖼', label: 'L’affiche (image PNG)', name: 'mur-des-signatures.png', make: poster}], media: {title: 'Le mur des signatures', make: async () => ({blob: await poster(), name: 'mur-des-signatures.png'})}});
     }
     F.push({key: 'signatures', group: 'creer', icon: '✍️', title: 'Le mur des signatures', desc: 'Toutes les signatures repérées sur les actes, découpées et rangées par époque : l’écriture de chaque génération.', render: renderSignatures});
 })();

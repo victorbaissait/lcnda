@@ -561,8 +561,8 @@
         const shown = cfg.order.filter(k => !cfg.hidden.includes(k) && (k !== 'profils' || cfg.pf === 'button'));
         const pfBadge = !cfg.hidden.includes('profils') && cfg.pf === 'badges';
         if (cfg.frame === 'hide') return `<div class="lc-hh-prev is-off"><span>Cadre du haut masqué : la fiche commence par les parents, conjoints et enfants, puis les blocs.</span></div>`;
-        return `<div class="lc-hh-prev" aria-hidden="true"><div class="lc-hh-id"><span class="lc-hh-av">LB</span><span><small>FICHE INDIVIDUELLE · #3851</small><b>Louise Borie</b></span></div>
-            <div class="lc-hh-badges"><span class="lc-hh-b sosa">★ SOSA : 64</span><span class="lc-hh-b">À VÉRIFIER</span><span class="lc-hh-b out">HORS GÉNÉALOGIE</span><span class="lc-hh-b art">🎨 ARTISTE</span>${pfBadge ? '<span class="lc-hh-b pf">🧩 Cette personne était…</span>' : ''}</div>
+        return `<div class="lc-hh-prev" aria-hidden="true"><div class="lc-hh-id">${UI().avatarOn?.() && UI().avatar ? UI().avatar({first_name: 'Louise', last_name: 'BORIE', gender: 'female'}, 34, {noSosa: true}) : '<span class="lc-hh-av">LB</span>'}<span><small>FICHE INDIVIDUELLE · #3851</small><b>Louise BORIE</b></span></div>
+            <div class="lc-hh-badges"><span class="ui-badge is-sosa">Sosa 64</span><span class="ui-badge is-yellow">À vérifier</span><span class="ui-badge is-grey">Hors généalogie</span><span class="ui-badge artist-badge">🎨 Artiste</span>${pfBadge ? '<span class="lc-pf-link">🧩 Cette personne était…</span>' : ''}</div>
             <div class="lc-hh-btns${cfg.lay === 'c2' ? ' lc-cols-2' : cfg.lay === 'r2' ? ' lc-rows-2' : ''}">${shown.map(k => `<span class="lc-hh-btn${k === 'obs' ? ' is-obs' : ''}">${HEAD_BUTTONS.find(b => b[0] === k)[1]}</span>`).join('')}</div></div>`;
     }
     function headerPanelHtml() {

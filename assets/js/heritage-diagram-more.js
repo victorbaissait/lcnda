@@ -590,7 +590,7 @@
     const box = (title, intro, inner, go = 'Prendre dans ma base') => `<div class="h-dg-app dmo-app"><h4>${title}</h4><p class="muted">${intro}</p>${inner}<button type="button" class="button small" data-dm-go>${esc(go)}</button><p class="muted" data-dm-msg aria-live="polite"></p></div>`;
     function bindApp(pane, run) {
         const btn = pane.querySelector('[data-dm-go]'), msg = pane.querySelector('[data-dm-msg]'); if (!btn) return;
-        btn.addEventListener('click', async () => { btn.disabled = true; if (msg) msg.innerHTML = '<span class="ui-spinner" aria-hidden="true"></span> Lecture de ta généalogie…';
+        btn.addEventListener('click', async () => { btn.disabled = true; if (msg) msg.innerHTML = window.LCNDA_UI.spinner('Lecture de ta généalogie…', {inline: true});
             try { const t = await run(); A().toast?.(t || 'Données prises dans ta base.'); if (msg?.isConnected) msg.textContent = ''; } catch (e) { if (msg) msg.textContent = '⚠️ ' + (e.message || e); } finally { btn.disabled = false; } });
     }
     const clean = d => String(d || '').replace(/-00/g, '');

@@ -500,10 +500,10 @@
                 case 'folder': return `<div class="h-bi-card h-bi-folder" style="--fc:${it.fill || '#f5c542'}"><span class="h-bi-big">📁</span><strong>${esc(it.title || 'Dossier')}</strong><small>double-clic pour ouvrir</small></div>`;
                 case 'recueil': return `<div class="h-bi-card h-bi-recueil"><span class="h-bi-big">📚</span><strong>${esc(it.title || 'Recueil')}</strong><small>Recueil · double-clic pour l’ouvrir</small></div>`;
                 case 'person': return `<div class="h-bi-card h-bi-person" data-bd-person="${Number(it.person_id)}"><span class="h-bi-avatar">👤</span><span class="h-bi-pinfo"><strong>${esc(it.title || 'Fiche')}</strong><small></small></span></div>`;
-                case 'timeline': return `<div class="h-bi-timeline"><header>🗓 ${esc(it.title || 'Frise')}</header><div class="h-bi-tlbody" data-bd-tl><p class="muted">Chargement…</p></div></div>`;
-                case 'map': return `<div class="h-bi-mapbox"><header>🗺 ${esc(it.title || 'Carte')}</header><div class="h-bi-mapbody" data-bd-map><p class="muted">Chargement…</p></div></div>`;
+                case 'timeline': return `<div class="h-bi-timeline"><header>🗓 ${esc(it.title || 'Frise')}</header><div class="h-bi-tlbody" data-bd-tl>${window.LCNDA_UI.spinner('Chargement de la frise…')}</div></div>`;
+                case 'map': return `<div class="h-bi-mapbox"><header>🗺 ${esc(it.title || 'Carte')}</header><div class="h-bi-mapbody" data-bd-map>${window.LCNDA_UI.spinner('Chargement de la carte…')}</div></div>`;
                 case 'frame': return `<div class="h-bi-section${it.collapsed ? ' is-collapsed' : ''}" style="--fc:${it.fill || '#eef4ff'};--fb:${it.stroke || '#9fb7d9'}"><header><button type="button" class="h-bi-fold" data-bd-fold title="${it.collapsed ? 'Déplier' : 'Replier'}">${it.collapsed ? '▸' : '▾'}</button><span>${esc(it.title || 'Cadre')}</span>${it.collapsed ? `<small>${framed(it).length} élément${framed(it).length > 1 ? 's' : ''}</small>` : ''}</header></div>`;
-                case 'widget': return `<div class="h-bi-widget" data-bd-widget="${esc(it.target)}"><p class="muted">Widget…</p></div>`;
+                case 'widget': return `<div class="h-bi-widget" data-bd-widget="${esc(it.target)}">${window.LCNDA_UI.spinner('Chargement du widget…')}</div>`;
                 case 'link': case 'screen': {
                     const sc = ext.appScreen, label = it.title || sc?.label(it.target) || it.target;
                     if (it.preview && sc?.valid(it.target)) return `<div class="h-bi-screen"><header>📺 ${esc(label)}<button type="button" data-bd-openlink title="Ouvrir en grand">↗</button></header><iframe src="${esc(sc.url({target: it.target, sidebar: false, layout: it.layout}))}" title="${esc(label)}" loading="lazy"></iframe></div>`;
@@ -1672,28 +1672,25 @@
                 }});
         }
         // ── instantanés : figer l'état, y revenir, en faire un nouveau tableau ──
+        /** L3 — les instantanés dans la fenêtre commune « 🕘 Versions » (app-versions.js) : aperçu en image, trait à glisser pour comparer */
         async function snapsDialog() {
-            if (dirty) await save();
-            let list = []; try { list = (await api('board_snapshots', {board_id: b.id})).snapshots || []; } catch (error) { toast(error.message, 'error'); return; }
-            ext.openDialog({eyebrow: 'TABLEAU', title: '📸 Instantanés', wide: true, submitLabel: 'Fermer',
-                body: `<div class="h-bd-snaps"><div class="h-bd-snapnew"><input data-bd-snaplabel placeholder="Nom de l’instantané (ex. « avant la visite aux archives »)" maxlength="160"><button type="button" class="button small" data-bd-snaptake>📸 Prendre un instantané</button></div>
-                    <p class="muted">Un instantané fige le tableau tel qu’il est. Tu peux y revenir plus tard (l’état actuel est gardé en instantané avant), ou en faire un nouveau tableau à part.</p>
-                    <div class="h-bd-snaplist" data-bd-snaplist>${snapList(list)}</div></div>`, onSubmit: () => true,
-                onOpen: d => {
-                    d.querySelector('[data-bd-snaptake]').addEventListener('click', async () => {
-                        save.lastThumb = 0; await save();
-                        try { await api('save_board_snapshot', {}, {method: 'POST', body: {board_id: b.id, label: d.querySelector('[data-bd-snaplabel]').value.trim()}}); d.querySelector('[data-bd-snaplabel]').value = ''; list = (await api('board_snapshots', {board_id: b.id})).snapshots || []; d.querySelector('[data-bd-snaplist]').innerHTML = snapList(list); toast('Instantané pris.'); } catch (error) { toast(error.message, 'error'); }
-                    });
-                    d.querySelector('[data-bd-snaplist]').addEventListener('click', async e => {
-                        const bt = e.target.closest('[data-bd-snap]'); if (!bt) return;
-                        const sid = Number(bt.dataset.id), s0 = list.find(x => x.id === sid);
-                        try {
-                            if (bt.dataset.bdSnap === 'restore') { if (ro()) return; if (!await A().confirmBox(`Revenir à « ${s0?.label} » ? L’état actuel est gardé en instantané.`, {title: 'Revenir à cet instantané', okLabel: 'Revenir à l’instantané'})) return; clearTimeout(saveT); await api('restore_board_snapshot', {}, {method: 'POST', body: {id: sid}}); d.close(); dirty = false; toast('Tableau revenu à l’instantané.'); go(b.id); }
-                            if (bt.dataset.bdSnap === 'copy') { d.close(); copyDialog(sid, s0?.label); }
-                            if (bt.dataset.bdSnap === 'delete') { if (!await A().confirmBox(`Supprimer l’instantané « ${s0?.label} » ?`, {title: 'Supprimer l’instantané', okLabel: 'Supprimer l’instantané'})) return; await api('delete_board_snapshot', {}, {method: 'POST', body: {id: sid}}); list = list.filter(x => x.id !== sid); d.querySelector('[data-bd-snaplist]').innerHTML = snapList(list); }
-                        } catch (error) { toast(error.message, 'error'); }
-                    });
-                }});
+            save.lastThumb = 0; try { await save(); } catch (_) {}
+            const U = window.LCNDA_UI; if (!U?.openVersions) return toast('La fenêtre des versions n’est pas chargée.', 'error');
+            const isAuto = l => /^(⏱|Avant le retour à)/.test(String(l || ''));
+            const reopen = () => { dirty = false; go(b.id); };
+            U.openVersions({title: root.querySelector('[data-bd-title]')?.value.trim() || b.title || 'Tableau', tool: 'Tableaux', kind: 'board',
+                list: async () => ((await api('board_snapshots', {board_id: b.id})).snapshots || []).map(x => ({id: x.id, label: String(x.label || '').replace(/^⏱\uFE0F?\s*/u, '') || 'Instantané', created_at: x.created_at, auto: isAuto(x.label), info: `${fmt(x.item_count)} élément${x.item_count > 1 ? 's' : ''}`, thumb: x.thumb})),
+                now: {hint: 'le tableau à l’écran'},
+                preview: async v => { const t = v ? v.thumb : (await api('board', {id: b.id}).catch(() => ({}))).thumb; return t ? {src: t, kind: 'image'} : {text: ''}; },
+                restore: async v => { if (ro()) throw new Error('Tableau verrouillé : 🔒 en haut pour le déverrouiller.'); clearTimeout(saveT); await api('restore_board_snapshot', {}, {method: 'POST', body: {id: v.id}});
+                    const back = ((await api('board_snapshots', {board_id: b.id})).snapshots || []).find(x => x.label === `Avant le retour à « ${v.label} »` || x.label === `Avant le retour à « ⏱ ${v.label} »`);
+                    reopen(); return back ? {undo: async () => { await api('restore_board_snapshot', {}, {method: 'POST', body: {id: back.id}}); reopen(); }} : {}; },
+                rename: (v, label) => api('rename_board_snapshot', {}, {method: 'POST', body: {id: v.id, label}}),
+                copy: async v => { copyDialog(v.id, v.label); },
+                exportOne: async v => { if (!v.thumb) return toast('Pas d’image pour cet instantané.'); download(v.thumb, `${fileBase()} — ${v.label.replace(/[\\/:*?"<>|]+/g, '-')}.png`); },
+                remove: async v => ({undo: async () => {}, commit: () => api('delete_board_snapshot', {}, {method: 'POST', body: {id: v.id}})}),
+                saveNow: async () => { const label = await A().askText({title: '📸 Prendre un instantané', message: 'Un nom (facultatif) :', placeholder: 'avant la visite aux archives', okLabel: 'Enregistrer'}); if (label === null) return;
+                    save.lastThumb = 0; await save(); await api('save_board_snapshot', {}, {method: 'POST', body: {board_id: b.id, label: String(label).trim()}}); toast('Instantané pris.', 'success'); }});
         }
         const snapRows = list => list.length ? list.map(s0 => `<article class="h-bd-snap">${s0.thumb ? `<img src="${esc(s0.thumb)}" alt="">` : '<span class="h-bd-snapblank">🧩</span>'}<div><strong>${esc(s0.label)}</strong><small class="muted">${window.LCNDA_UI?.when?.(s0.created_at) || ''} · ${fmt(s0.item_count)} élément${s0.item_count > 1 ? 's' : ''}</small>
             <span class="h-bd-snapacts"><button type="button" class="button small secondary" data-bd-snap="restore" data-id="${s0.id}">↺ Revenir à cet état</button><button type="button" class="button small secondary" data-bd-snap="copy" data-id="${s0.id}">⧉ En faire un tableau</button><button type="button" class="button small secondary danger" data-bd-snap="delete" data-id="${s0.id}" aria-label="Supprimer">🗑</button></span></div></article>`).join('') : A().emptyState({icon: '📸', text: 'Aucun instantané pour l’instant'});
@@ -1768,6 +1765,7 @@
             catch (error) { toast('Copie dans les médias impossible : ' + error.message, 'error'); }
         }
         function printImage(url, img) {
+            if (window.LCNDA_UI?.openPrintDialog) { window.LCNDA_UI.openPrintDialog({title: fileBase(), key: 'tableau', photos: false, margin: 10, orientation: img.width > img.height ? 'landscape' : 'portrait', html: `<!doctype html><title>${esc(fileBase())}</title><style>html,body{margin:0}img{max-width:100%;max-height:96vh;display:block;margin:auto}</style><img src="${url}" alt="">`}); return; } // L1 : la fenêtre « Imprimer » commune ; sinon, le secours ci-dessous
             const fr = document.createElement('iframe'); fr.style.cssText = 'position:fixed;right:0;bottom:0;width:0;height:0;border:0'; document.body.appendChild(fr);
             fr.contentDocument.write(`<!doctype html><title>${esc(fileBase())}</title><style>@page{size:${img.width > img.height ? 'landscape' : 'portrait'};margin:10mm}html,body{margin:0}img{max-width:100%;max-height:100vh;display:block;margin:auto}</style><img src="${url}">`); fr.contentDocument.close();
             setTimeout(() => { fr.contentWindow.focus(); fr.contentWindow.print(); setTimeout(() => fr.remove(), 60000); }, 300);
@@ -2449,7 +2447,10 @@
         const groups = [...new Set(all.map(groupOf))];
         const old = st.bdListSort[kind];
         const ws = A().$('#workspace');
-        ws.innerHTML = `<section class="page"><header class="page-header"><div><span class="eyebrow">LISTES</span><h2>${esc(title)}</h2><p data-bd-count></p></div></header>
+        // K5 : l'en-tête commun (icône du menu, une phrase d'aide) ; le nombre va dans la barre H10
+        const HEAD = {boards_list: ['🧩', 'Tous les tableaux : ceux des enquêtes, des battues, des projets, et les tableaux libres.'], atelier_list: ['📚', 'Les projets de l’Atelier de recherche, avec leur état et leur échéance.'], investigations_list: ['🔍', 'Toutes les enquêtes, avec leurs pistes et leurs tableaux.'], battues_list: ['🧭', 'Toutes les battues, commune par commune.']}[kind] || ['📋', ''];
+        const NOUN = {boards_list: ['tableau', 'tableaux'], atelier_list: ['projet', 'projets'], investigations_list: ['enquête', 'enquêtes'], battues_list: ['battue', 'battues']}[kind] || ['ligne', 'lignes'];
+        ws.innerHTML = `<section class="page">${UI.pageHeader({icon: HEAD[0], title, help: `${HEAD[1]} Un clic sur un titre l’ouvre ; un clic sur une colonne trie.`.trim()})}
             ${all.length ? '<div data-bd-bar></div>' : ''}<div data-bd-body></div></section>`;
         const body = ws.querySelector('[data-bd-body]');
         const bar = all.length ? UI.listBar({key: KEY, search: {placeholder: kind === 'boards_list' ? 'Chercher un tableau… (titre, enquête, battue)' : kind === 'battues_list' ? 'Chercher une battue… (titre, commune, personne)' : kind === 'atelier_list' ? 'Chercher un projet… (titre, sorte)' : 'Chercher une enquête… (titre, personne)'},
@@ -2464,8 +2465,7 @@
             st.bdListSort[kind] = {i: si, dir: sd || 1};
             let list = all.filter(r => (!q || fold(cols.map(c => strip(c[1](r))).join(' ')).includes(q)) && (!want.length || want.includes(groupOf(r))));
             if (si >= 0 && cols[si]) { const f = cols[si][2]; list = [...list].sort((a, c) => { const x = f(a), y = f(c); return (typeof x === 'number' && typeof y === 'number' ? x - y : String(x ?? '').localeCompare(String(y ?? ''), 'fr')) * (sd || 1); }); }
-            ws.querySelector('[data-bd-count]').textContent = `${fmt(list.length)} ligne${list.length > 1 ? 's' : ''}${list.length !== all.length ? ` sur ${fmt(all.length)}` : ''}. Un clic sur un titre l’ouvre ; un clic sur une colonne trie.`;
-            bar?.setCount(list.length, 'ligne');
+            bar?.setCount(`${A().plural(list.length, NOUN[0], NOUN[1])}${list.length !== all.length ? ` sur ${fmt(all.length)}` : ''}`);
             body.innerHTML = list.length && b.view === 'cards' && UI?.cardsHtml ? UI.cardsHtml(list.map(item)) : list.length ? `<div class="data-table-wrap"><table class="data-table"><thead><tr>${cols.map(([h], i) => `<th><button type="button" data-bd-sort="${i}">${esc(h)}${si === i ? (sd > 0 ? ' ▲' : ' ▼') : ''}</button></th>`).join('')}</tr></thead><tbody>${list.map(r => `<tr>${cols.map(c => `<td>${c[1](r)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`
                 : all.length ? A().emptyState({icon: '🔍', text: 'Rien ne correspond à ta recherche', hint: 'Change les mots cherchés ou retire un filtre.'}) : A().emptyState({icon: '🧩', text: kind === 'boards_list' ? 'Aucun tableau pour l’instant' : 'Rien pour l’instant', hint: 'Les tableaux se créent dans Enquêtes → Tableaux.'});
             A().bindTableLinks?.();

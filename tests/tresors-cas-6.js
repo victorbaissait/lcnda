@@ -51,7 +51,7 @@ module.exports = async (t, {page, open, body, tmp}, assert) => {
     await t('🔗 partage temporaire : un fichier chiffré, sans les vivants ; le bon mot de passe l’ouvre, la date passée le ferme', async () => {
         await open('partage'); await page.fill('[data-sh] [name="pw"]', 'cousin2026'); await page.selectOption('[data-sh] [name="scope"]', 'asc');
         assert.match(await body(), /\d+ personnes partagées · 3 retirées/);
-        const dl = page.waitForEvent('download'); await page.click('[data-sh] button[type="submit"]'); assert.match((await dl).suggestedFilename(), /^partage-martin-jusqu-au-\d{4}-\d\d-\d\d\.html$/);
+        const dl = page.waitForEvent('download'); await page.click('[data-tr-page] .page-header [data-sh-go]'); assert.match((await dl).suggestedFilename(), /^partage-branche-jusqu-au-\d{4}-\d\d-\d\d\.html$/);
         const html = await page.evaluate(() => window.LCNDA_EXT.tresorShare.last); assert.ok(!/Antoine/.test(html), 'chiffré : aucun nom en clair');
         assert.ok(!/MARTIN/i.test(html), 'le titre (nom de famille) est chiffré lui aussi'); assert.match(html, /Content-Security-Policy[^>]*default-src 'none'/, 'le fichier ne se connecte à rien'); assert.match(html, /"it":600000/, 'PBKDF2 600 000 tours');
         const pw = await page.evaluate(() => window.LCNDA_EXT.tresorShare.makePassword()); assert.match(pw, /^[a-z-]+-\d\d$/); assert.equal(await page.evaluate(p => window.LCNDA_EXT.tresorShare.strength(p)[0], pw), 'solide');

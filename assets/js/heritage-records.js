@@ -117,7 +117,8 @@
             if (k === 'options') sf.options = el.value.split(',').map(o => o.trim()).filter(Boolean); else sf[k] = el.value; };
         box.addEventListener('click', async e => {
             const t = e.target;
-            if (t.closest('[data-rb-del]')) { const i = Number(t.closest('[data-rb-i]').dataset.rbI); if (d.fields[i].type === 'steps' && !await A().confirmBox('Retirer les étapes ? Celles déjà écrites dans les fiches ne seront plus affichées.', {title: 'Retirer les étapes', okLabel: 'Retirer les étapes'})) return; d.fields.splice(i, 1); again(); }
+            if (t.closest('[data-rb-del]')) { const i = Number(t.closest('[data-rb-i]').dataset.rbI); const [gone] = d.fields.splice(i, 1); again(); // H7 : pas de question, « ↶ Annuler »
+                A().undoToast(gone.type === 'steps' ? 'Étapes retirées.' : 'Champ retiré.', {undo: () => { if (!d.fields.includes(gone)) d.fields.splice(Math.min(i, d.fields.length), 0, gone); again(); }}); }
             else if (t.closest('[data-rb-move]')) { const i = Number(t.closest('[data-rb-i]').dataset.rbI), j = i + Number(t.closest('[data-rb-move]').dataset.rbMove); if (j >= 0 && j < d.fields.length) { [d.fields[i], d.fields[j]] = [d.fields[j], d.fields[i]]; again(); } }
             else if (t.closest('[data-rbs-add]')) { fieldAt(t).fields.push(f('text', '')); again(); }
             else if (t.closest('[data-rbs-del]')) { const x = fieldAt(t); x.fields.splice(Number(t.closest('[data-rb-sub]').dataset.rbSub), 1); again(); }
@@ -184,7 +185,8 @@
             if (addS) { const x = d.fields.find(y => y.key === addS.dataset.stepAdd), box = root.querySelector(`[data-steps="${x.key}"]`);
                 box.insertAdjacentHTML('beforeend', stepRow(x, {}, box.children.length, {})); renumber(box);
                 const last = box.lastElementChild; last.querySelector('input:not([type=checkbox]),textarea,select')?.focus(); return; }
-            if (t.closest('[data-step-del]')) { const row = t.closest('[data-step]'), box = row.parentElement; const hasText = [...row.querySelectorAll('input:not([type=hidden]):not([type=checkbox]),textarea')].some(i => i.value.trim()); if (hasText && !await A().confirmBox('Retirer cette ligne ?', {title: 'Retirer la ligne', okLabel: 'Retirer la ligne'})) return; row.remove(); renumber(box); return; }
+            if (t.closest('[data-step-del]')) { const row = t.closest('[data-step]'), box = row.parentElement; const hasText = [...row.querySelectorAll('input:not([type=hidden]):not([type=checkbox]),textarea')].some(i => i.value.trim()); const next = row.nextElementSibling; row.remove(); renumber(box);
+                if (hasText) A().undoToast('Ligne retirée.', {undo: () => { if (!box.isConnected || row.isConnected) return; box.insertBefore(row, next?.parentElement === box ? next : null); renumber(box); }}); return; } // H7 : pas de question
             const mv = t.closest('[data-step-move]');
             if (mv) { const row = t.closest('[data-step]'), box = row.parentElement; if (mv.dataset.stepMove === '-1' && row.previousElementSibling) box.insertBefore(row, row.previousElementSibling); else if (mv.dataset.stepMove === '1' && row.nextElementSibling) box.insertBefore(row.nextElementSibling, row); renumber(box); }
         });

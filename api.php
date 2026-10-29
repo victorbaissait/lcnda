@@ -57,6 +57,11 @@ try {
     $action = $_GET['action'] ?? 'bootstrap';
     $isWrite = $_SERVER['REQUEST_METHOD'] !== 'GET';
     $payload = $isWrite ? request_json() : [];
+    // Plusieurs généalogies : une fenêtre restée sur une autre généalogie (changée dans une autre fenêtre) ne lit pas celle-ci
+    $pageGenealogy = $_SERVER['HTTP_X_GENEALOGY'] ?? (isset($_GET['g']) && is_string($_GET['g']) ? $_GET['g'] : null); // ?g= : liens de téléchargement (exports)
+    if (is_string($pageGenealogy) && $pageGenealogy !== (GENEALOGY_ID === '' ? 'main' : GENEALOGY_ID)) {
+        json_response(['error' => 'Une autre généalogie a été ouverte dans une autre fenêtre : recharge la page.', 'genealogy_changed' => true], 409);
+    }
     if ($isWrite) {
         verify_csrf($payload);
     }
@@ -139,6 +144,17 @@ try {
         restore_package_upload($importFile);
     }
 
+    // Généalogie neuve encore vide (écran d'installation) : les lectures de fond répondent « rien » au lieu d'une erreur 500
+    if (!$isWrite && !is_file(DB_PATH)) {
+        $emptyRead = match ($action) {
+            'my_lists' => ['lists' => [], 'event_types' => [], 'labels' => [], 'columns' => function_exists('my_list_columns') ? my_list_columns() : [], 'sources' => function_exists('my_list_source_labels') ? my_list_source_labels() : []],
+            'diagrams' => ['diagrams' => []],
+            'scan_inbox_status' => ['dir' => '', 'enabled' => false, 'move_imported' => true, 'reachable' => false, 'pending' => 0, 'recent' => [], 'can_convert' => false, 'total' => 0],
+            'parish_map' => ['by_place' => [], 'by_insee' => []],
+            default => null,
+        };
+        if ($emptyRead !== null) json_response($emptyRead + ['ready' => false]);
+    }
     $pdo = db();
 
     // La structure de la base (tables, colonnes, types d’événements de base) est mise à jour une seule fois
@@ -152,7 +168,8 @@ try {
         if (kiosk_state()['on'] && (($payload['mode'] ?? '') !== 'auto' || normalize_backup_dir(safe_text($payload['dir'] ?? '')) !== normalize_backup_dir(''))) {
             json_response(['error' => 'Mode consultation : pas de copie de la base vers un autre dossier.', 'kiosk' => true], 423);
         }
-        backup_sqlite($pdo, $payload);
+        // un visiteur ne choisit ni le nombre de copies gardées ni le rythme : aucune copie effacée, une copie toutes les 30 min au plus
+        backup_sqlite($pdo, kiosk_state()['on'] ? ['mode' => 'auto', 'dir' => '', '_kiosk' => true] : $payload);
     }
     if ($isWrite && $action === 'clone_database') {
         clone_database($pdo, $payload);
@@ -544,6 +561,7 @@ try {
         'sciences' => json_response(sciences_api_get($pdo, $_GET)), // 🔬 coordonnées des lieux (lib/sciences.php)
         'blocs' => json_response(blocs_api_get($pdo, $_GET)), // 📰 🏆 🎓 blocs communs (lib/blocs.php)
         'creations' => (static function () use ($pdo) { require_once __DIR__ . '/lib/creations.php'; json_response(creations_api_get($pdo, $_GET)); })(), // 🎨 Listes « Créations et carrières » (lecture seule)
+        'onglets' => (static function () use ($pdo) { require_once __DIR__ . '/lib/onglets.php'; json_response(onglets_api_get($pdo, $_GET)); })(), // 📄 Documents et 🎨 Catalogue raisonné : onglets du haut (lecture seule, lib/onglets.php)
         'suivi' => json_response(suivi_get($pdo, $_GET)), // 🐾 Suivi des animaux (lib/suivi.php)
         'mode_simple_data' => (static function () use ($pdo) { require_once __DIR__ . '/lib/mode_simple.php'; json_response(mode_simple_data($pdo)); })(), // 🧓 Mode simple : personnes, unions, photos (lecture seule, lib/mode_simple.php)
         'meteo_status', 'meteo_about', 'meteo_events', 'meteo_event', 'meteo_person', 'meteo_point', 'meteo_time', 'meteo_today', 'meteo_place', 'meteo_altitude' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/meteo.php'; json_response(meteo_api_get($pdo, (string) $action, $_GET)); })(), // 🌦 Météo d'autrefois (lib/meteo.php) : fichiers à part, lecture seule
@@ -794,6 +812,7 @@ function site_defaults_allowed_keys(): array
         'genealogie-board-prefs-sets',
         'genealogie-portraits', // K7 : un seul portrait (app-portraits.js)
         'genealogie-left-column', // K15 : la colonne de gauche (app-colonne.js)
+        'genealogie-accord', // ✍️ Accord des mots pour les fiches ni homme ni femme (app-accord.js)
         'genealogie-designs', // 🎨 Designs au choix A1–A8 (app-designs.js)
         'genealogie-mode-simple', // 🧓 Mode simple : ses réglages (app-mode-simple.js)
         'genealogie-mode-simple-presets', // 🧓 Mode simple : réglages enregistrés
@@ -1048,7 +1067,7 @@ function dashboard_baptisms_without_sponsors(PDO $pdo): array
         JOIN event_types t ON t.id=e.event_type_id
         LEFT JOIN persons p ON p.id=e.person_id
         LEFT JOIN places pl ON pl.id=e.place_id
-        WHERE t.gedcom_tag IN ('CHR','BAPM') AND NOT EXISTS(SELECT 1 FROM event_witnesses ew JOIN persons wp ON wp.id=ew.person_id WHERE ew.event_id=e.id)
+        WHERE t.gedcom_tag IN ('CHR','BAPM') AND NOT EXISTS(SELECT 1 FROM event_witnesses ew WHERE ew.event_id=e.id AND ew.person_id IN (SELECT id FROM persons))
         ORDER BY COALESCE(e.updated_at,e.created_at) DESC,e.id DESC
         LIMIT 80")->fetchAll();
 }
@@ -2446,7 +2465,7 @@ function census_for_person(PDO $pdo, int $personId): array
     if($rows){
         $ids=array_values(array_unique(array_map(fn($row)=>(int)$row['id'],$rows)));
         $marks=implode(',',array_fill(0,count($ids),'?'));
-        $members=$pdo->prepare("SELECT cm.*,trim(COALESCE(p.first_name,'')||' '||COALESCE(p.last_name,'')) AS person_name,p.birth_year,p.death_year
+        $members=$pdo->prepare("SELECT cm.*,trim(COALESCE(p.first_name,'')||' '||COALESCE(p.last_name,'')) AS person_name,p.birth_year,p.death_year,p.gender AS person_gender
             FROM census_members cm
             LEFT JOIN (".person_select().") p ON p.id=cm.person_id
             WHERE cm.census_id IN ($marks)
@@ -3857,6 +3876,7 @@ function media_filtered_rows(PDO $pdo, string $like, string $scope, int $personI
 function media_list_rows(PDO $pdo, string $like, int $limit=500, int $offset=0, string $scope='', int $personId=0, string $city='', string $dateFrom='', string $dateTo=''): array
 {
     $rows = media_filtered_rows($pdo, $like, $scope, $personId, $city, $dateFrom, $dateTo);
+    if (sealed_media_sql($pdo) !== '') { $sealed = sealed_letter_media_ids($pdo); $rows = array_values(array_filter($rows, static fn($r) => !isset($sealed[(int) ($r['id'] ?? 0)]))); } // consultation : lettres scellées
     usort($rows, static function (array $a, array $b): int {
         $cmp = media_chronology_sort_key($a) <=> media_chronology_sort_key($b);
         if ($cmp !== 0) return $cmp;
@@ -6266,7 +6286,7 @@ function restore_last_delete(PDO $pdo,array $data): array
         $row=$change?(json_decode((string)($change['before_json']??''),true)?:[]):[];
         if(!$row||safe_int($row['id']??0)!==$id)throw new RuntimeException('Cette suppression n’a pas été trouvée dans le journal.');
         $exists=$pdo->prepare("SELECT 1 FROM {$table} WHERE id=?");$exists->execute([$id]);
-        if($exists->fetchColumn())throw new RuntimeException('Cet élément existe déjà.');
+        if($exists->fetchColumn())return ['entity_type'=>$type,'entity_id'=>$id,'already'=>true]; // un deuxième « ↶ Annuler » : déjà remis, pas une erreur
         $children=is_array($row['_children']??null)?$row['_children']:[];
         unset($row['_children']);
         insert_snapshot_row($pdo,$table,$row);
@@ -6283,6 +6303,11 @@ function restore_last_delete(PDO $pdo,array $data): array
     $stmt->execute([$type,$id]);
     $changeId=(int)$stmt->fetchColumn();
     if(!$changeId)throw new RuntimeException('Cette suppression n’a pas été trouvée dans le journal.');
+    // un deuxième « ↶ Annuler » de la même suppression : l'élément est déjà revenu → « Déjà remis » (pas une erreur)
+    $tables=['event'=>'events','note'=>'notes','source'=>'sources','media'=>'media','battue'=>'battues','battue_item'=>'battue_search_items','battue_alias'=>'battue_commune_aliases',
+        'investigation'=>'investigations','investigation_item'=>'investigation_items','investigation_media'=>'investigation_media','pet'=>'pets'];
+    $restored=$pdo->prepare("SELECT 1 FROM change_log WHERE action='restore' AND entity_type=? AND entity_id=? AND id>? LIMIT 1");$restored->execute([$type,$id,$changeId]);
+    if($restored->fetchColumn()||record_exists($pdo,$tables[$type],$id))return ['entity_type'=>$type,'entity_id'=>$id,'already'=>true];
     return restore_change($pdo,['id'=>$changeId]);
 }
 
@@ -6524,7 +6549,7 @@ function csv_row($out, array $fields): void
 {
     // Un texte qui commence par = + - @ serait lu comme une formule par Excel / Numbers / LibreOffice : on le protège par une apostrophe.
     $fields = array_map(static fn($v) => is_string($v) && $v !== '' && strpbrk($v[0], "=+-@\t\r") !== false && !is_numeric($v) ? "'" . $v : $v, $fields);
-    fputcsv($out, $fields, ',', '"', '\\');
+    fputcsv($out, $fields, ',', '"', ''); // pas de caractère d'échappement : « \" » dans un champ reste lisible par les tableurs
 }
 
 function export_csv(PDO $pdo): never
@@ -6917,6 +6942,15 @@ function backup_sqlite(PDO $pdo, array $data): never
         throw new RuntimeException('Fichier de base introuvable');
     }
 
+    $kiosk = !empty($data['_kiosk']); // mode consultation (api.php)
+    if ($kiosk) {
+        foreach (backup_files($dir) as $file) {
+            // une copie toutes les 30 min au plus, et aucune si la base n'a pas changé depuis la dernière copie automatique
+            if (str_ends_with($file['name'], '-auto.db') && is_file($file['path']) && (time() - filemtime($file['path']) < 1800 || filemtime($file['path']) >= (int) @filemtime(DB_PATH))) {
+                json_response(['ok' => true, 'skipped' => true, 'file' => $file['name'], 'dir' => $dir, 'deleted' => [], 'created_at' => date('c', filemtime($file['path']))]);
+            }
+        }
+    }
     $pdo->exec('PRAGMA wal_checkpoint(FULL)');
     $filename = 'genealogie-backup-' . date('Ymd-His') . '-' . bin2hex(random_bytes(2)) . '-' . $mode . '.db';
     $target = $dir . '/' . $filename;
@@ -6926,7 +6960,9 @@ function backup_sqlite(PDO $pdo, array $data): never
     $deleted = [];
     // Les copies faites avant une mise à jour de structure (« -migration- ») ou un nettoyage ne sont jamais supprimées ici.
     $rotating = array_values(array_filter($files, static fn($file) => !str_contains($file['name'], '-migration-') && !str_contains($file['name'], '-avant-nettoyage') && !str_contains($file['name'], '-avant-fusion')));
-    foreach (array_slice($rotating, $maxFiles) as $file) {
+    // en consultation : seules les copies automatiques tournent (10 gardées, réglé ici et non par le visiteur) ; les copies faites à la main restent
+    $toDelete = $kiosk ? array_slice(array_values(array_filter($rotating, static fn($f) => str_ends_with($f['name'], '-auto.db'))), 10) : array_slice($rotating, $maxFiles);
+    foreach ($toDelete as $file) {
         if (is_file($file['path']) && @unlink($file['path'])) {
             $deleted[] = $file['name'];
         }
@@ -7074,6 +7110,7 @@ function verify_gedcom(PDO $pdo): never
     $text=file_get_contents($file['tmp_name']);
     if($text===false){json_response(['error'=>'Lecture impossible'],500);}
     // Détection encodage
+    $encoding=gedcom_detect_encoding($text);
     $text=gedcom_text_to_utf8($text); // BOM, ANSEL, MS-DOS, Mac, UTF-16
     $lines=preg_split('/\r\n|\r|\n/',$text);
     // Version GEDCOM
@@ -7081,7 +7118,7 @@ function verify_gedcom(PDO $pdo): never
     foreach($lines as $l){if(preg_match('/^2 VERS (.+)/',$l,$m)){$version=trim($m[1]);break;}}
     $isGedcom7=version_compare(preg_replace('/[^0-9.]/','',$version),'7.0','>=');
 
-    $errors=[];$warnings=[];
+    $errors=[];$warnings=$encoding===GEDCOM_ANSEL_LATIN1?[GEDCOM_ANSEL_LATIN1_WARNING]:[];$dupDefs=[];
     $tagCounts=['INDI'=>0,'FAM'=>0,'NOTE'=>0,'SOUR'=>0,'REPO'=>0,'OBJE'=>0];
     $definedXrefs=[];$usedXrefs=[];
     $lineNum=0;
@@ -7094,7 +7131,7 @@ function verify_gedcom(PDO $pdo): never
             continue;
         }
         $level=(int)$m[1];$xref=trim($m[2]);$tag=$m[3];$rest=ltrim($m[4]);
-        if($xref)$definedXrefs[trim($xref,'@ ')]=$lineNum;
+        if($xref){$xk=trim($xref,'@ ');if($level===0&&isset($definedXrefs[$xk]))$dupDefs[$xk][]=$lineNum;else $definedXrefs[$xk]=$lineNum;}
         // Collect pointer usages
         if(preg_match('/@([^@]+)@/',$rest,$rx))$usedXrefs[trim($rx[1])]=$lineNum;
         if($level===0&&isset($tagCounts[$tag]))$tagCounts[$tag]++;
@@ -7106,6 +7143,8 @@ function verify_gedcom(PDO $pdo): never
             $warnings[]="Référence non définie : @$xref@ (utilisée ligne $ln)";
         }
     }
+    // deux fiches avec le même identifiant : l'import les garde toutes (lib/gedcom.php), les familles vont à la première
+    foreach(array_slice($dupDefs,0,20,true) as $xk=>$lns){$n=count($lns)+1;$warnings[]="$n fiches ont le même identifiant @$xk@ (lignes {$definedXrefs[$xk]}, ".implode(', ',array_slice($lns,0,3)).") : toutes seront gardées, chacune avec ses événements ; les familles qui citent @$xk@ seront reliées à la première.";}
     // HEAD obligatoire
     if(!preg_match('/^0 HEAD/m',$text))$errors[]='En-tête HEAD manquant.';
     if(!preg_match('/^0 TRLR/m',$text))$errors[]='Marqueur de fin TRLR manquant.';
@@ -7310,7 +7349,7 @@ function import_package(PDO $pdo, ?array $file): never
     try {
         if (in_array($ext, ['ged', 'gedcom'], true)) {
             // Fichier lu sur place : les médias cités par un chemin relatif sont cherchés à côté du .ged.
-            $stats = import_gedcom_into_db($pdo, $file['tmp_name'], !empty($file['local']) ? dirname($file['tmp_name']) : null);
+            $stats = import_gedcom_into_db($pdo, $file['tmp_name'], !empty($file['local']) ? dirname($file['tmp_name']) : null, !empty($file['local']));
         } elseif (in_array($ext, ['hmw', 'heredis'], true)) {
             $stats = heredis_import_into_db($pdo, $file['tmp_name']);
         } elseif ($ext === 'mftpkg') {
@@ -7343,8 +7382,8 @@ function gedimport_parse(string $text): array
     $root = [];
     $stack = [];
     foreach ($lines as $raw) {
-        $raw = rtrim($raw);
-        if ($raw === '') { continue; }
+        $raw = rtrim($raw, "\r\n"); // jamais les espaces de fin : une ligne CONC coupée juste avant une espace la garderait collée
+        if (trim($raw) === '') { continue; }
         if (!preg_match('/^(\d+)\s(@[^@]+@\s)?([A-Za-z0-9_]+)\s?(.*)$/', $raw, $m)) { continue; }
         $level = (int) $m[1];
         $node = new stdClass();
@@ -7590,6 +7629,7 @@ function import_zip_package_into_db(PDO $pdo, string $zipPath): array
         try {
             $za = new ZipArchive();
             $za->open($zipPath);
+            import_zip_guard($za, $tmpDir);
             $za->extractTo($tmpDir);
             $za->close();
             $found = null;
@@ -7604,6 +7644,21 @@ function import_zip_package_into_db(PDO $pdo, string $zipPath): array
     if ($hasGed) { return import_gedzip_into_db($pdo, $zipPath); }
     if ($hasDatabase) { return import_mftpkg_into_db($pdo, $zipPath); }
     throw new RuntimeException("Format d'archive non reconnu : ni fichier GEDCOM (.ged), ni base MacFamilyTree ('database'), ni fichier Hérédis (.heredis) dans le paquet.");
+}
+
+/** Avant d'ouvrir une archive reçue (GedZip, Hérédis, MacFamilyTree zippés) : pas de bombe zip ni d'archive démesurée */
+function import_zip_guard(ZipArchive $za, string $dest): void
+{
+    if ($za->numFiles > 20000) { throw new RuntimeException('Cette archive contient trop de fichiers : elle n’est pas ouverte.'); }
+    $total = 0;
+    for ($i = 0; $i < $za->numFiles; $i++) {
+        $st = $za->statIndex($i); if (!$st) { continue; }
+        $size = (int) ($st['size'] ?? 0); $packed = max(1, (int) ($st['comp_size'] ?? 0));
+        if ($size > 50 * 1048576 && $size / $packed > 100) { throw new RuntimeException('Cette archive contient un fichier anormal (« ' . basename((string) $st['name']) . ' ») : elle n’est pas ouverte.'); }
+        $total += $size;
+    }
+    $free = @disk_free_space(is_dir($dest) ? $dest : sys_get_temp_dir());
+    if ($total > 8 * 1073741824 || ($free !== false && $total > $free - 1073741824)) { throw new RuntimeException('Cette archive est trop grosse une fois ouverte pour la place libre de l’ordinateur.'); }
 }
 
 /**
@@ -7623,7 +7678,8 @@ function import_gedzip_into_db(PDO $pdo, string $zipPath): array
         if ($za->open($zipPath) !== true) {
             throw new RuntimeException("Impossible d'ouvrir l'archive GedZip (format inattendu)");
         }
-        $za->extractTo($tmpDir);
+        import_zip_guard($za, $tmpDir);
+            $za->extractTo($tmpDir);
         $za->close();
 
         $gedPath = null;
@@ -7663,6 +7719,7 @@ function import_mftpkg_into_db(PDO $dst, string $zipPath): array
             if ($za->open($zipPath) !== true) {
                 throw new RuntimeException("Impossible d'ouvrir le paquet .mftpkg (format inattendu)");
             }
+            import_zip_guard($za, $tmpDir);
             $za->extractTo($tmpDir);
             $za->close();
         }
@@ -8601,6 +8658,20 @@ function comparison_person(PDO $pdo,int $id): ?array
 function duplicate_candidates(PDO $pdo): never
 {
     $q=safe_text($_GET['q']??'');$params=[];
+    // 👥 Même liste que le « ✅ Contrôle de la base » (lib/controle.php, même règle, mêmes exceptions, jamais personne ↔ animal) :
+    // les deux écrans donnent le même nombre. Les animaux (que le Contrôle ne regarde pas) gardent leur recherche à part, plus bas.
+    if(function_exists('controle_state')){
+        $st=controle_state($pdo);$fold=static fn($v)=>mb_strtolower(ascii_fold((string)$v));$needle=$q!==''?$fold($q):'';$out=[];
+        foreach($st['alerts'] as $a){
+            if(($a['check']??'')!=='duplicate'||count($a['people']??[])<2)continue;
+            [$x,$y]=$a['people'];$px=$st['people'][$x]??null;$py=$st['people'][$y]??null;if(!$px||!$py)continue;
+            if($needle!==''&&!str_contains($fold($px['first_name'].' '.$px['last_name'].' '.$py['first_name'].' '.$py['last_name']),$needle))continue;
+            $out[]=['id1'=>$x,'id2'=>$y,'first1'=>$px['first_name'],'last1'=>$px['last_name'],'first2'=>$py['first_name'],'last2'=>$py['last_name'],'birth1'=>$px['birth_year'],'birth2'=>$py['birth_year'],'death1'=>$px['death_year'],'death2'=>$py['death_year'],'score'=>(int)($a['score']??0),'score_max'=>100];
+        }
+        usort($out,static fn($m,$n)=>[$n['score'],mb_strtolower((string)$m['last1']),mb_strtolower((string)$m['first1'])]<=>[$m['score'],mb_strtolower((string)$n['last1']),mb_strtolower((string)$n['first1'])]);
+        $hasKind=(bool)$pdo->query("SELECT 1 FROM pragma_table_info('persons') WHERE name='kind'")->fetchColumn();
+        $animalsOnly=$hasKind?" AND p1.kind='animal'":' AND 0';
+    }else{$out=null;$animalsOnly='';}
     $where=$q!==''?" AND (p1.first_name LIKE ? COLLATE NOCASE OR p1.last_name LIKE ? COLLATE NOCASE OR p2.first_name LIKE ? COLLATE NOCASE OR p2.last_name LIKE ? COLLATE NOCASE)":'';
     if($q!=='')$params=array_fill(0,4,'%'.$q.'%');
     // MATERIALIZED : les années sont calculées une fois par personne (sinon SQLite les recalculait pour chaque
@@ -8610,7 +8681,7 @@ function duplicate_candidates(PDO $pdo): never
         SELECT p.id,p.first_name,p.last_name,p.middle_name,
         (SELECT e.year FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag='BIRT' ORDER BY e.id LIMIT 1) birth_year,
         (SELECT e.year FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag='DEAT' ORDER BY e.id LIMIT 1) death_year,
-        lc_fold(p.last_name) AS last_key, substr(lc_fold(p.first_name),1,3) AS first_key, lc_fold(p.first_name) AS first_full
+        lc_fold(p.last_name) AS last_key, substr(lc_fold(p.first_name),1,3) AS first_key, lc_fold(p.first_name) AS first_full, COALESCE(p.kind,'human') AS kind
         FROM persons p WHERE trim(COALESCE(p.last_name,''))<>'' AND trim(COALESCE(p.first_name,''))<>''
     )
     SELECT p1.id id1,p2.id id2,p1.first_name first1,p1.last_name last1,p2.first_name first2,p2.last_name last2,p1.birth_year birth1,p2.birth_year birth2,p1.death_year death1,p2.death_year death2,
@@ -8618,12 +8689,14 @@ function duplicate_candidates(PDO $pdo): never
          CASE WHEN p1.last_key=p2.last_key THEN 35 ELSE 0 END+
          CASE WHEN p1.birth_year IS NOT NULL AND p2.birth_year IS NOT NULL AND abs(p1.birth_year-p2.birth_year)<=2 THEN 20 ELSE 0 END+
          CASE WHEN p1.death_year IS NOT NULL AND p2.death_year IS NOT NULL AND abs(p1.death_year-p2.death_year)<=2 THEN 15 ELSE 0 END) score
-    FROM person_years p1 JOIN person_years p2 ON p2.last_key=p1.last_key AND p2.first_key=p1.first_key AND p1.id<p2.id
+    FROM person_years p1 JOIN person_years p2 ON p2.last_key=p1.last_key AND p2.first_key=p1.first_key AND p1.id<p2.id AND p2.kind=p1.kind
     WHERE (p1.birth_year IS NULL OR p2.birth_year IS NULL OR abs(p1.birth_year-p2.birth_year)<=5)
     AND NOT EXISTS (SELECT 1 FROM dismissed_issues d WHERE d.issue_key='dup:'||p1.id||':'||p2.id) -- ✅ « Ce sont deux personnes différentes »
-    {$where}
+    {$where}{$animalsOnly}
     ORDER BY score DESC,lower(p1.last_name),lower(p1.first_name) LIMIT 120";
-    $stmt=$pdo->prepare($sql);$stmt->execute($params);json_response(['candidates'=>$stmt->fetchAll()]);
+    $stmt=$pdo->prepare($sql);$stmt->execute($params);$rows=$stmt->fetchAll();
+    if($out!==null)$rows=array_merge($out,array_map(static fn($r)=>$r+['animal'=>1],$rows));
+    json_response(['candidates'=>array_slice($rows,0,max(120,count($out??[])))]);
 }
 
 /**
@@ -9476,7 +9549,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
     try {
         assert_write_target_unlocked($pdo,$action,$data); // fiche verrouillée : rien de ce qui la touche ne change
         assert_person_name_lengths(array_intersect_key($data,['first_name'=>1,'middle_name'=>1,'last_name'=>1])); // tous les noms et prénoms (fiche, variante, recensement, relevé…) : 200 caractères au plus
-        assert_text_sizes($action,$data); // événements et notes : des tailles raisonnables (un collage de plusieurs Mo est refusé)
+        assert_text_sizes($action,$data); // événements, notes, étiquettes, lieux, sources, médias : des tailles raisonnables (un collage de plusieurs Mo est refusé)
         $result = match ($action) {
             'save_person' => save_person($pdo,$data),
             'set_person_lock' => set_person_lock($pdo,$data),
@@ -9675,6 +9748,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'duplicate_textdoc' => duplicate_textdoc($pdo,$data),
             'save_textdoc_version' => save_textdoc_version($pdo,$data),
             'delete_textdoc_version' => delete_textdoc_version($pdo,$data),
+            'rename_textdoc_version' => rename_textdoc_version($pdo,$data), // L3 🕘 Versions
             'restore_textdoc_version' => restore_textdoc_version($pdo,$data),
             'textdoc_to_media' => textdoc_to_media($pdo,$data),
             'save_website' => save_website($pdo,$data), // 🌐 Mon site web
@@ -9684,6 +9758,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'duplicate_website' => duplicate_website($pdo,$data),
             'save_website_version' => save_website_version($pdo,$data),
             'delete_website_version' => delete_website_version($pdo,$data),
+            'rename_website_version' => rename_website_version($pdo,$data), // L3 🕘 Versions
             'restore_website_version' => restore_website_version($pdo,$data),
             'save_cadastre_parcel' => save_cadastre_parcel($pdo,$data), // 🗺 Cadastre (lib/cadastre.php)
             'delete_cadastre_parcel' => delete_cadastre_parcel($pdo,$data),
@@ -9740,6 +9815,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'save_board_snapshot' => save_board_snapshot($pdo,$data),
             'restore_board_snapshot' => restore_board_snapshot($pdo,$data),
             'delete_board_snapshot' => delete_board_snapshot($pdo,$data),
+            'rename_board_snapshot' => rename_board_snapshot($pdo,$data), // L3 🕘 Versions
             'copy_board' => copy_board($pdo,$data),
             'delete_board' => delete_board($pdo,$data),
             'delete_booklet' => delete_booklet($pdo,$data),
@@ -9765,6 +9841,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'delete_recueil_page' => delete_recueil_page($pdo,$data),
             'update_recueil_image' => update_recueil_image($pdo,$data),
             'remove_recueil_image' => remove_recueil_image($pdo,$data),
+            'restore_recueil_image' => restore_recueil_image($pdo,$data),
             'save_recueil_link' => save_recueil_link($pdo,$data),
             'delete_recueil_link' => delete_recueil_link($pdo,$data),
             'move_recueil_link' => move_recueil_link($pdo,$data),
@@ -9782,6 +9859,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'set_my_list_record_step' => set_my_list_record_step($pdo,$data),
             'move_my_list_record' => move_my_list_record($pdo,$data),
             'retouch_show_version' => retouch_show_version($pdo,$data),
+            'retouch_rename_version' => retouch_rename_version($pdo,$data), // L3 🕘 Versions
             'save_museum' => museum_save($pdo,$data),
             'save_museum_room' => museum_save_room($pdo,$data),
             'delete_museum_room' => museum_delete_room($pdo,$data),
@@ -9918,7 +9996,7 @@ function readable_error_message(Throwable $e): string
 function allowed_label_entity_types(): array
 {
     return ['person','event','place','media','census','note','source','investigation','view','archive_visit','family_object','family_memory',
-        'voyage','placement','coat_of_arms','poilu','probate_inventory','family_paper','field_trip','old_map','parish','cited_name','help_request','resistance','custom_block_entry','village','custom_list','custom_list_record','voter','family_booklet','pet','periodical_periodical','periodical_issue','periodical_article','press_ad','diagram'];
+        'voyage','placement','coat_of_arms','poilu','probate_inventory','family_paper','field_trip','old_map','parish','cited_name','help_request','resistance','custom_block_entry','village','custom_list','custom_list_record','voter','family_booklet','pet','periodical_periodical','periodical_issue','periodical_article','press_ad','diagram','topic_sheet'];
 }
 
 function normalize_label_color(string $color): string
@@ -10356,6 +10434,7 @@ function add_relation(PDO $pdo,array $data): array
     if($personId===$relatedId)throw new RuntimeException('Une personne ne peut pas être liée à elle-même');
     if(!person_exists($pdo,$personId)||!person_exists($pdo,$relatedId))throw new RuntimeException('Personne introuvable');
     assert_person_unlocked($pdo,$personId);assert_person_unlocked($pdo,$relatedId);
+    if(person_kind_of($pdo,$personId)!==person_kind_of($pdo,$relatedId))throw new RuntimeException('Impossible : une personne et un animal ne peuvent pas être parents ou conjoints l’un de l’autre.');
     // Pas de boucle dans l'arbre : un parent ne peut pas être aussi un descendant de son enfant.
     [$parentId,$childId]=$type==='parent'?[$relatedId,$personId]:($type==='child'?[$personId,$relatedId]:[0,0]);
     if($parentId&&person_is_ancestor_of($pdo,$childId,$parentId))throw new RuntimeException('Impossible : cette personne serait à la fois l’ancêtre et le descendant de l’autre. Vérifie le sens du lien (parent ou enfant).');
@@ -10952,11 +11031,18 @@ function merge_duplicate_places(PDO $pdo,array $data): array
     return ['merged_groups'=>count($merges),'details'=>$merges];
 }
 
+/** « human » ou « animal » : une personne et un animal ne sont jamais doublons, ni parents ou conjoints l'un de l'autre */
+function person_kind_of(PDO $pdo,int $id): string
+{
+    $s=$pdo->prepare("SELECT COALESCE(kind,'human') FROM persons WHERE id=?");$s->execute([$id]);return (string)($s->fetchColumn()?:'human');
+}
+
 function merge_people(PDO $pdo,array $data): array
 {
     $target=safe_int($data['target_id']??0);$source=safe_int($data['source_id']??0);if(!$target||!$source||$target===$source)throw new RuntimeException('Fusion impossible');
     $a=summary_person($pdo,$target);$b=summary_person($pdo,$source);if(!$a||!$b)throw new RuntimeException('Fiche introuvable');
     assert_person_unlocked($pdo,$target);assert_person_unlocked($pdo,$source);
+    if(person_kind_of($pdo,$target)!==person_kind_of($pdo,$source))throw new RuntimeException('Fusion impossible : on ne fusionne pas une personne avec un animal.');
     // Deux fiches d'un même couple, ou un ancêtre et son descendant, ne sont pas des doublons : la fusion casserait l'arbre.
     $na=trim(full_name($a))?:'la fiche #'.$target;$nb=trim(full_name($b))?:'la fiche #'.$source;
     if(couple_family_id($pdo,$target,$source))throw new RuntimeException('Fusion impossible : '.$na.' et '.$nb.' forment un couple. Deux conjoints ne sont pas la même personne.');
@@ -12138,17 +12224,23 @@ function assert_text_sizes(string $action, array $data): void
 {
     $fmt = static fn(int $n) => number_format($n, 0, ',', ' ');
     $limits = match ($action) {
-        'add_event', 'save_event' => ['short' => 500, 'long' => 20000, 'shortKeys' => ['title', 'name', 'label', 'date_text', 'date_alternative'], 'what' => 'de l’événement'],
+        'add_event', 'save_event' => ['short' => 500, 'long' => 20000, 'shortKeys' => ['title', 'name', 'label', 'date_text', 'date_alternative', 'place_name'], 'what' => 'de l’événement'],
         'add_note', 'save_note', 'save_research_note' => ['short' => 500, 'long' => 200000, 'shortKeys' => ['title'], 'what' => 'de la note'],
+        // seulement les cases nommées (« keys » : case => taille au plus) ; les autres ne sont pas touchées
+        'save_label' => ['keys' => ['name' => 100, 'description' => 2000], 'what' => 'de l’étiquette'],
+        'picker_place_adopt' => ['keys' => ['name' => 200, 'country' => 100], 'what' => 'du lieu'],
+        'save_source', 'add_web_source' => ['keys' => ['title' => 500, 'author' => 500, 'agency' => 500, 'website' => 500, 'publication' => 500, 'accessed_at' => 200, 'url' => 2000, 'text' => 200000, 'note' => 20000, 'quality_note' => 20000], 'what' => 'de la source'],
+        'save_media' => ['keys' => ['title' => 500, 'description' => 20000, 'date_text' => 500, 'document_reference' => 500, 'document_title' => 500, 'document_url' => 2000, 'document_pages' => 200, 'transcription' => 200000], 'what' => 'du média'],
         default => null,
     };
     if (!$limits) return;
-    $names = ['title' => 'Le titre', 'body' => 'Le texte', 'description' => 'La description', 'notes' => 'La note', 'date_text' => 'La date', 'name' => 'Le nom', 'label' => 'Le nom'];
+    $names = ['title' => 'Le titre', 'body' => 'Le texte', 'description' => 'La description', 'notes' => 'La note', 'note' => 'La note', 'date_text' => 'La date', 'name' => 'Le nom', 'label' => 'Le nom', 'place_name' => 'Le lieu', 'country' => 'Le pays', 'author' => 'L’auteur', 'url' => 'L’adresse', 'text' => 'Le texte', 'transcription' => 'La transcription', 'document_reference' => 'La cote', 'document_title' => 'Le titre du document'];
     foreach ($data as $key => $value) {
         if (!is_string($key) || !is_string($value) || $key === 'csrf') continue;
-        $max = in_array($key, $limits['shortKeys'], true) ? $limits['short'] : $limits['long'];
+        if (isset($limits['keys'])) { if (!isset($limits['keys'][$key])) continue; $max = $limits['keys'][$key]; }
+        else $max = in_array($key, $limits['shortKeys'], true) ? $limits['short'] : $limits['long'];
         $len = mb_strlen($value);
-        if ($len > $max) throw new RuntimeException(($names[$key] ?? 'Un des textes') . ' ' . $limits['what'] . ' contient trop de texte (' . $fmt($len) . ' caractères) : ' . $fmt($max) . ' au plus. Coupe-le, ou range le document complet en média.');
+        if ($len > $max) throw new RuntimeException(($names[$key] ?? 'Un des textes') . ' ' . $limits['what'] . ' contient trop de texte (' . $fmt($len) . ' caractères) : ' . $fmt($max) . ' au plus. ' . ($max >= 20000 ? 'Coupe-le, ou range le document complet en média.' : 'Raccourcis-le.'));
     }
 }
 
@@ -12183,6 +12275,13 @@ function save_person(PDO $pdo,array $data): array
             if($norm($before[$field])!==$norm($was)&&$norm($data[$field])!==$norm($before[$field]))$changed[]=$field;
         }
         if($changed)throw new LcndaConflict('Cette fiche a été modifiée dans une autre fenêtre depuis que tu l’as ouverte : recharge-la pour voir les changements (tes modifications ne sont pas perdues : elles restent dans cette fenêtre ; copie-les avant de recharger, ou choisis « Enregistrer quand même » pour remplacer l’autre version).');
+    }
+    // « Enregistrer quand même » ne réécrit que ce que CETTE fenêtre a changé : une case laissée comme à l'ouverture garde
+    // la valeur actuelle de la base (le métier changé dans l'autre fenêtre n'est pas effacé)
+    if(!empty($data['_base'])){
+        $base=is_array($data['_base'])?$data['_base']:(json_decode((string)$data['_base'],true)?:[]);
+        $norm=static fn($v)=>trim((string)safe_text(is_scalar($v)?(string)$v:''));
+        foreach($base as $field=>$was){if(is_string($field)&&array_key_exists($field,$data)&&is_scalar($data[$field]??'')&&$norm($data[$field])===$norm($was))unset($data[$field]);}
     }
     // comme à la création : une fiche garde au moins un prénom ou un nom
     $firstAfter=array_key_exists('first_name',$data)?safe_text($data['first_name']):safe_text($before['first_name']??'');

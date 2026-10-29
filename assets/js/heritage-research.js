@@ -509,7 +509,7 @@
             case 'event': body = `<dl class="data-list">${row('Date', d.date)}${row('Jusqu’au', d.end)}${row('Lieu', d.place?.text)}${row('Personnes', (d.people || []).map(pid => people[pid] ? `<button type="button" class="table-link" data-h-person="${pid}">${esc(pname(people[pid]))}</button>` : '').join(', '), true)}</dl>`; break;
             case 'link': body = `<dl class="data-list">${row('Adresse', url(d.url), true)}${row('Site', d.site)}${row('Consulté le', d.accessed)}</dl>`; break;
             case 'app': body = `<div class="h-at-app"><p><b>${esc((APP_KINDS[d.kind] || ['🔗'])[0])} ${esc((APP_KINDS[d.kind] || [, 'Élément'])[1])}</b> — ${esc(d.label)}${d.extra ? ` <small class="muted">${esc(d.extra)}</small>` : ''}</p>
-                <button type="button" class="button small" data-at-appopen="${i.id}">↗ Ouvrir dans le logiciel</button><div class="h-at-apppreview" data-at-apppreview="${i.id}"><p class="muted">Chargement de l’aperçu…</p></div></div>`;
+                <button type="button" class="button small" data-at-appopen="${i.id}">↗ Ouvrir dans le logiciel</button><div class="h-at-apppreview" data-at-apppreview="${i.id}">${window.LCNDA_UI.spinner('Chargement de l’aperçu…')}</div></div>`;
                 setTimeout(() => fillAppPreview(i), 0); break;
             case 'task': body = `<label class="checkbox-line h-at-taskbig"><input type="checkbox" data-at-taskdone="${i.id}" ${Number(d.done) ? 'checked' : ''}> Fait</label><dl class="data-list">${row('Pour le', d.due ? new Date(d.due + 'T12:00:00').toLocaleDateString('fr-FR', {weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'}) : '')}${row('Priorité', d.priority)}</dl>`; break;
             case 'draft': { const w = (String(d.text || '').match(/[\p{L}\p{N}]+(?:[’'-][\p{L}\p{N}]+)*/gu) || []).length, t = Number(d.target);
@@ -1162,7 +1162,7 @@
         const again = () => ext.maintenance.atelier(S().workspaceToken);
         const putProfile = (name, settings, at = -1) => { const l = profiles(), i = l.findIndex(x => x.name === name), it = {name, saved: new Date().toISOString(), settings}; if (i >= 0) l[i] = it; else if (at >= 0) l.splice(at, 0, it); else l.push(it); saveProfiles(l); };
         const frame = window.LCNDA_UI.presetsFrame({id: 'atelier', what: 'tous ces réglages (menu, sortes d’éléments, dossiers, plans)', quietApply: true,
-            list: () => profiles().map(x => ({name: String(x?.name || 'Sans nom'), date: [x?.saved ? new Date(x.saved).toLocaleDateString('fr-FR') : '', x?.from ? `reçus de ${x.from}` : ''].filter(Boolean).join(' · ')})),
+            list: () => profiles().map(x => ({name: String(x?.name || 'Sans nom'), date: [x?.saved ? new Date(x.saved).toISOString() : '', x?.from ? `reçus de ${x.from}` : ''].filter(Boolean).join(' · ')})),
             apply: async i => { const x = profiles()[i]; if (!await A().confirmBox(`Appliquer les réglages « ${x.name} » ?\n\nLes réglages actuels de l’Atelier seront remplacés (enregistre-les avant si tu veux les garder). Tes projets ne changent pas.`, {title: 'Appliquer des réglages', okLabel: 'Appliquer les réglages'})) return false; applyCfg(x.settings); toast(`Réglages « ${x.name} » appliqués.`); again(); return false; },
             save: name => putProfile(name, cleanCfg(readCfg())),
             replace: i => { const l = profiles(); l[i] = {...l[i], saved: new Date().toISOString(), settings: cleanCfg(readCfg())}; saveProfiles(l); },

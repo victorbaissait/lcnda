@@ -873,6 +873,8 @@ html:root.lc-frame.lc-frame :is(.icon-action, .icon-button, .button.small, .stat
 :root.lc-frame .st-aeree .lck-c-list, :root .st-aeree .lck-c-list:is([data-lc-lines], [data-lc-lines] *) {border-width:0}
 :root.lc-frame .st-aeree .lck-c-item, :root .st-aeree .lck-c-item:is([data-lc-lines], [data-lc-lines] *) {border-bottom:0}
 :root.lc-frame .st-aeree .lck-c-sec, :root .st-aeree .lck-c-sec:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .lck-c-side.has-bw:not(.st-continue):not(.st-aeree) .lck-c-item, :root .lck-c-side.has-bw:not(.st-continue):not(.st-aeree) .lck-c-item:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .lck-c-side.has-bw .lck-c-tabs, :root .lck-c-side.has-bw .lck-c-tabs:is([data-lc-lines], [data-lc-lines] *) {border-width:max(1px, calc(2px * var(--pc-k)))}
+:root.lc-frame .lck-colprev .lck-c-side.has-bw, :root .lck-colprev .lck-c-side.has-bw:is([data-lc-lines], [data-lc-lines] *) {border-right-width:max(1px, calc(2px * var(--pc-k)))}
 :root.lc-frame .lck-c-lf, :root .lck-c-lf:is([data-lc-lines], [data-lc-lines] *) {border:2px solid #080808}
 :root.lc-frame .lck-c-lf span:first-child, :root .lck-c-lf span:first-child:is([data-lc-lines], [data-lc-lines] *) {border-right:2px solid #080808}
 :root.lc-frame .lck-h10, :root .lck-h10:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid #e3e5ea}
@@ -927,6 +929,21 @@ html:root.lc-frame.lc-frame :is(.icon-action, .icon-button, .button.small, .stat
 :root[data-theme="dark"].lc-frame .k-import-prev, :root[data-theme="dark"] .k-import-prev:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
 :root[data-theme="dark"].lc-frame .k-import-prev th, :root[data-theme="dark"] .k-import-prev th:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .k-import-prev td, :root[data-theme="dark"] .k-import-prev td:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
 :root[data-theme="dark"].lc-frame .k-import .modal-actions, :root[data-theme="dark"] .k-import .modal-actions:is([data-lc-lines], [data-lc-lines] *) {border-top-color:var(--lc-frame-color)}
+:root.lc-frame .lcf-ch, :root .lcf-ch:is([data-lc-lines], [data-lc-lines] *) {border:var(--line)}
+:root.lc-frame .lcf-th, :root .lcf-th:is([data-lc-lines], [data-lc-lines] *) {border-bottom:var(--line)}
+:root.lc-frame .lcf-th i, :root .lcf-th i:is([data-lc-lines], [data-lc-lines] *) {border:2px solid #111}
+:root.lc-frame .lcf-pill, :root .lcf-pill:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid currentColor}
+:root.lc-frame .lcf-grid, :root .lcf-grid:is([data-lc-lines], [data-lc-lines] *) {border-top:var(--line)}
+:root.lc-frame .lcf-grid > div + div, :root .lcf-grid > div + div:is([data-lc-lines], [data-lc-lines] *) {border-left:var(--line)}
+:root.lc-frame .lcf-set, :root .lcf-set:is([data-lc-lines], [data-lc-lines] *) {border-top:1px solid rgba(128,128,128,.25)}
+:root.lc-frame .lcf-sw, :root .lcf-sw:is([data-lc-lines], [data-lc-lines] *) {border:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root.lc-frame .lcf-mini, :root .lcf-mini:is([data-lc-lines], [data-lc-lines] *) {border:2px solid #111}
+:root.lc-frame .lcf-top, :root .lcf-top:is([data-lc-lines], [data-lc-lines] *) {border-bottom:2px solid var(--pl)}
+:root.lc-frame .lcf-sd, :root .lcf-sd:is([data-lc-lines], [data-lc-lines] *) {border-right:2px solid var(--pl)}
+:root.lc-frame .lcf-sd i, :root .lcf-sd i:is([data-lc-lines], [data-lc-lines] *) {border:2px solid var(--pl)}
+:root.lc-frame .lcf-sd i.on, :root .lcf-sd i.on:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--blue)}
+:root.lc-frame .lcf-c, :root .lcf-c:is([data-lc-lines], [data-lc-lines] *) {border:2px solid var(--pl)}
+:root.lc-frame .lcf-grid > div + div, :root .lcf-grid > div + div:is([data-lc-lines], [data-lc-lines] *) {border-left:0;border-top:var(--line)}
 :root[data-theme="dark"].lc-frame .person-list-item .life-dot.deceased, :root[data-theme="dark"] .person-list-item .life-dot.deceased:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
 :root[data-theme="dark"].lc-frame .person-list-item.is-active .outside-genealogy-mark, :root[data-theme="dark"] .person-list-item.is-active .outside-genealogy-mark:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
 :root[data-theme="dark"].lc-frame .data-row, :root[data-theme="dark"] .data-row:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid #4c4c4c}
@@ -2204,6 +2221,7 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root.lc-frame .isim-zone, :root .isim-zone:is([data-lc-lines], [data-lc-lines] *) {border:2.5px solid var(--ui-blue)}
 :root.lc-frame .isim-group, :root .isim-group:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--ui-line)}
 :root.lc-frame .isim-mini, :root .isim-mini:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--ui-line)}
+:root.lc-frame .h-world-q:has(.ui-search), :root .h-world-q:has(.ui-search):is([data-lc-lines], [data-lc-lines] *) {border:0 !important}
 :root[data-theme="dark"].lc-frame .h-pin, :root[data-theme="dark"] .h-pin:is([data-lc-lines], [data-lc-lines] *) {border:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}
 :root[data-theme="dark"].lc-frame .h-slippy-mark, :root[data-theme="dark"] .h-slippy-mark:is([data-lc-lines], [data-lc-lines] *) {border:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}
 :root[data-theme="dark"].lc-frame .h-question-homonyms, :root[data-theme="dark"] .h-question-homonyms:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #4c4c4c}
@@ -2557,6 +2575,17 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root.lc-frame .h-trw-cfg, :root .h-trw-cfg:is([data-lc-lines], [data-lc-lines] *) {border:0}
 :root.lc-frame .h-trw-day img, :root .h-trw-day img:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .h-trw-noimg, :root .h-trw-noimg:is([data-lc-lines], [data-lc-lines] *) {border:2px solid var(--ink, #111)}
 :root.lc-frame .h-trw-grow i, :root .h-trw-grow i:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #2f6b2a}
+:root.lc-frame .h-tr-quiz .h-tr-qz-time, :root .h-tr-quiz .h-tr-qz-time:is([data-lc-lines], [data-lc-lines] *) {border:var(--line, 2px solid #080808)}
+:root.lc-frame .h-tr-quiz .h-tr-qz-opt, :root .h-tr-quiz .h-tr-qz-opt:is([data-lc-lines], [data-lc-lines] *) {border:var(--line, 2px solid #080808)}
+:root.lc-frame .h-tr-quiz .h-tr-qz-opt b, :root .h-tr-quiz .h-tr-qz-opt b:is([data-lc-lines], [data-lc-lines] *) {border:2px solid var(--ink, #080808)}
+:root.lc-frame .h-tr-quiz .h-tr-vl-bar, :root .h-tr-quiz .h-tr-vl-bar:is([data-lc-lines], [data-lc-lines] *) {border-top:var(--line, 2px solid #080808)}
+:root.lc-frame .h-tr-quiz .h-tr-vl-bar button, :root .h-tr-quiz .h-tr-vl-bar button:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .h-tr-quiz .h-tr-qz-score button, :root .h-tr-quiz .h-tr-qz-score button:is([data-lc-lines], [data-lc-lines] *) {border:var(--line, 2px solid #080808)}
+:root.lc-frame .h-tr-quiz .h-tr-vl-ini, :root .h-tr-quiz .h-tr-vl-ini:is([data-lc-lines], [data-lc-lines] *) {border:var(--line, 2px solid #080808)}
+:root.lc-frame .h-tr-co-d span, :root .h-tr-co-d span:is([data-lc-lines], [data-lc-lines] *) {border:2px solid var(--line, #222)}
+:root.lc-frame .h-tr-co-d input:checked + span, :root .h-tr-co-d input:checked + span:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--blue, #2f6bff)}
+:root.lc-frame .h-tr-7-col input[type=color], :root .h-tr-7-col input[type=color]:is([data-lc-lines], [data-lc-lines] *) {border:2px solid var(--line, #222)}
+:root.lc-frame .h-tr-7ph-t, :root .h-tr-7ph-t:is([data-lc-lines], [data-lc-lines] *) {border:2px solid var(--line, #222)}
+:root.lc-frame .h-tr-7ph-crop, :root .h-tr-7ph-crop:is([data-lc-lines], [data-lc-lines] *) {border:2px solid var(--line, #222)}
 /* diagrams.css */
 :root.lc-frame .diagram-person, :root .diagram-person:is([data-lc-lines], [data-lc-lines] *) {border:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}
 :root.lc-frame .fractal .diagram-person.level-0, :root .fractal .diagram-person.level-0:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--blue)}
@@ -3008,6 +3037,11 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root[data-theme="dark"].lc-frame .jf-dot, :root[data-theme="dark"] .jf-dot:is([data-lc-lines], [data-lc-lines] *) {border:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}
 :root.lc-frame .jfn-cell, :root .jfn-cell:is([data-lc-lines], [data-lc-lines] *) {border:0}
 :root.lc-frame .jfc-cell, :root .jfc-cell:is([data-lc-lines], [data-lc-lines] *) {border:0}
+/* jeux-patience.css */
+:root.lc-frame .pc-slot, :root .pc-slot:is([data-lc-lines], [data-lc-lines] *) {border:calc(2px * var(--lc-frame-k)) dashed var(--lc-frame-color)}
+:root.lc-frame .pc-slot.pc-found, :root .pc-slot.pc-found:is([data-lc-lines], [data-lc-lines] *) {border-style:solid;border-color:color-mix(in srgb, var(--blue) 35%, transparent)}
+:root.lc-frame .pc-card, :root .pc-card:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid #222}
+:root.lc-frame .jfp .goose-board-wrap, :root .jfp .goose-board-wrap:is([data-lc-lines], [data-lc-lines] *) {border-width:calc(3px * var(--lc-frame-k))}
 /* bunker.css */
 :root.lc-frame .bk-dlg, :root .bk-dlg:is([data-lc-lines], [data-lc-lines] *) {border:var(--line)}
 :root.lc-frame .bk-hatch-ico, :root .bk-hatch-ico:is([data-lc-lines], [data-lc-lines] *) {border:var(--line)}
@@ -3039,12 +3073,47 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root.lc-frame .bk-plan, :root .bk-plan:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line-color)}
 :root.lc-frame .bk-plan.is-off, :root .bk-plan.is-off:is([data-lc-lines], [data-lc-lines] *) {border-style:dashed}
 :root.lc-frame .bk-map, :root .bk-map:is([data-lc-lines], [data-lc-lines] *) {border:var(--line)}
+:root.lc-frame .bk-map.has-bg .bk-cell, :root .bk-map.has-bg .bk-cell:is([data-lc-lines], [data-lc-lines] *) {border-color:rgba(60,55,40,.18)}
 :root.lc-frame .bk-cell, :root .bk-cell:is([data-lc-lines], [data-lc-lines] *) {border:0;border-right:1px solid #d8d5ca;border-bottom:1px solid #d8d5ca}
 :root.lc-frame .bk-placecard, :root .bk-placecard:is([data-lc-lines], [data-lc-lines] *) {border:var(--line)}
 :root.lc-frame .bk-log li, :root .bk-log li:is([data-lc-lines], [data-lc-lines] *) {border-left:3px solid var(--line-color)}
 :root.lc-frame .bk-log .is-radio, :root .bk-log .is-radio:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--blue)}
 :root.lc-frame .bk-log .is-alerte, :root .bk-log .is-alerte:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
 :root.lc-frame .bk-world, :root .bk-world:is([data-lc-lines], [data-lc-lines] *) {border-right:0;border-bottom:var(--line)}
+:root.lc-frame .bk-visit, :root .bk-visit:is([data-lc-lines], [data-lc-lines] *) {border-bottom:var(--line)}
+:root.lc-frame .bk-chip.is-bad, :root .bk-chip.is-bad:is([data-lc-lines], [data-lc-lines] *) {border-color:#e0102f}
+:root.lc-frame .bk-person .bk-chips .bk-chip, :root .bk-person .bk-chips .bk-chip:is([data-lc-lines], [data-lc-lines] *) {border-width:calc(1.5px * var(--lc-frame-k))}
+:root.lc-frame .bk-coffre-list, :root .bk-coffre-list:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line-color)}
+:root.lc-frame .bk-coffre-items li, :root .bk-coffre-items li:is([data-lc-lines], [data-lc-lines] *) {border:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root.lc-frame .bk-tree-row, :root .bk-tree-row:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line-color)}
+:root.lc-frame .bk-tree-kid, :root .bk-tree-kid:is([data-lc-lines], [data-lc-lines] *) {border:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root.lc-frame .bk-gz-paper, :root .bk-gz-paper:is([data-lc-lines], [data-lc-lines] *) {border:var(--line)}
+:root.lc-frame .bk-gz-mast h2, :root .bk-gz-mast h2:is([data-lc-lines], [data-lc-lines] *) {border-top:4px double #1a1a1a;border-bottom:4px double #1a1a1a}
+:root.lc-frame .bk-gz-cols h4, :root .bk-gz-cols h4:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid #1a1a1a}
+:root.lc-frame .bk-gz-cols blockquote, :root .bk-gz-cols blockquote:is([data-lc-lines], [data-lc-lines] *) {border-left:3px solid #1a1a1a}
+:root.lc-frame .bk-log .is-histoire, :root .bk-log .is-histoire:is([data-lc-lines], [data-lc-lines] *) {border-color:#e9a23b}
+:root.lc-frame .bk-log .is-visite, :root .bk-log .is-visite:is([data-lc-lines], [data-lc-lines] *) {border-color:#2f6bd6}
+:root.lc-frame .bk-plan.is-can, :root .bk-plan.is-can:is([data-lc-lines], [data-lc-lines] *) {border-color:#1f9d55}
+:root.lc-frame .bk-tag, :root .bk-tag:is([data-lc-lines], [data-lc-lines] *) {border:1px solid currentColor}
+:root.lc-frame .bk-autobar, :root .bk-autobar:is([data-lc-lines], [data-lc-lines] *) {border:1px dashed var(--line-color)}
+:root.lc-frame .bk-mapwrap.is-big, :root .bk-mapwrap.is-big:is([data-lc-lines], [data-lc-lines] *) {border:var(--line)}
+:root.lc-frame .bk-mapwrap.is-big .bk-map, :root .bk-mapwrap.is-big .bk-map:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .bk-route, :root .bk-route:is([data-lc-lines], [data-lc-lines] *) {border:var(--line)}
+:root.lc-frame .bk-take .bk-chip.is-on, :root .bk-take .bk-chip.is-on:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--blue)}
+:root.lc-frame .bk-known, :root .bk-known:is([data-lc-lines], [data-lc-lines] *) {border-left:3px solid var(--ink,#111)}
+:root.lc-frame .bk-slot.is-broken, :root .bk-slot.is-broken:is([data-lc-lines], [data-lc-lines] *) {border-color:#c0392b}
+:root.lc-frame .bk-tuto, :root .bk-tuto:is([data-lc-lines], [data-lc-lines] *) {border-bottom:var(--line)}
+:root.lc-frame .bk-diary li, :root .bk-diary li:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px dotted rgba(0,0,0,.15)}
+:root.lc-frame .bk-setup, :root .bk-setup:is([data-lc-lines], [data-lc-lines] *) {border:1px dashed var(--line-color,#999)}
+:root.lc-frame .bk-stat, :root .bk-stat:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line-color,#ccc)}
+:root.lc-frame .bk-table th, :root .bk-table th:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .bk-table td, :root .bk-table td:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid rgba(0,0,0,.1)}
+:root.lc-frame .bk-book h3, :root .bk-book h3:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid #1a1a1a}
+:root.lc-frame .bk-dlg.is-max, :root .bk-dlg.is-max:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .bk-floors.is-moving .bk-slot.is-empty, :root .bk-floors.is-moving .bk-slot.is-empty:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--blue)}
+:root.lc-frame .bk-movehint, :root .bk-movehint:is([data-lc-lines], [data-lc-lines] *) {border:2px solid var(--blue)}
+:root.lc-frame .bk-ville.is-full .bk-mapcol, :root .bk-ville.is-full .bk-mapcol:is([data-lc-lines], [data-lc-lines] *) {border-right:var(--line)}
+:root.lc-frame .bk-ville.is-full .bk-mapwrap, :root .bk-ville.is-full .bk-mapwrap:is([data-lc-lines], [data-lc-lines] *) {border:var(--line)}
+:root.lc-frame .bk-ville.is-full .bk-mapcol, :root .bk-ville.is-full .bk-mapcol:is([data-lc-lines], [data-lc-lines] *) {border-right:0;border-bottom:var(--line)}
 /* sections.css */
 :root.lc-frame .fsec-toggle, :root .fsec-toggle:is([data-lc-lines], [data-lc-lines] *) {border:0}
 :root.lc-frame .fsec-chev, :root .fsec-chev:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--line-color)}

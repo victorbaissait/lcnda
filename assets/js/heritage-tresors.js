@@ -112,10 +112,84 @@
                 masters: [{id: 'B', name: 'B-Sans folio', items: []}], pages: [{id: 'p1', master: 'B', items}], uid: 'd' + Date.now().toString(36), fn: {place: 'block', restart: 'none'}, notes: {}, review: {comments: []}};
             await K.openEditor({id: 0, name: name.slice(0, 160), doc}); return true;
         },
+        /** une image SVG (texte) → une image PNG (Blob), à la largeur voulue (en pixels) */
+        svgPng(svg, width = 2000) {
+            return new Promise((res, rej) => { const img = new Image(); img.onload = () => { const k = width / (img.naturalWidth || img.width || width), c = document.createElement('canvas'); c.width = Math.round((img.naturalWidth || width) * k); c.height = Math.round((img.naturalHeight || width) * k);
+                const x = c.getContext('2d'); x.fillStyle = '#fff'; x.fillRect(0, 0, c.width, c.height); x.drawImage(img, 0, 0, c.width, c.height); c.toBlob(b => (b ? res(b) : rej(new Error('image impossible'))), 'image/png'); };
+                img.onerror = () => rej(new Error('image impossible')); img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg); });
+        },
+        canvasPng: cv => new Promise((res, rej) => cv.toBlob(b => (b ? res(b) : rej(new Error('image impossible'))), 'image/png')),
+        /** 🖨 imprimer ce qui est à l'écran dans un élément (sans les boutons) : la fenêtre « Imprimer » de l'app (K13) */
+        printNode(title, el, css = '') {
+            const c = el.cloneNode(true); c.querySelectorAll('.h-tr-noprint, script, style:not([data-keep])').forEach(x => x.remove());
+            c.querySelectorAll('button').forEach(b => b.replaceWith(document.createTextNode(b.textContent)));
+            return ext.tresorPrint(title, `.pg{max-width:190mm;margin:10mm auto;padding:8mm;background:#fff;color:#111;font-family:Georgia,serif;line-height:1.45}.pg ul{list-style:none;padding:0}.pg li{margin:0 0 3mm;break-inside:avoid}.pg small,.h-tr-muted{color:#555}.h-tr-big{font-size:18pt;font-weight:800}.h-tr-ic{margin-right:2mm}.h-tr-pill{display:inline-block;padding:0 2mm;border:1px solid #ccc;border-radius:3mm;font-size:9pt}${css}`, `<main class="pg"><h1>${esc(title)}</h1>${c.innerHTML}</main>`);
+        },
+        /** ⤓ Exporter ▾ · 🖨 Imprimer · le bouton bleu : toujours au même endroit, à droite de l'en-tête de la page (voir actions plus bas) */
+        actions: (host, o) => pageActions(host, o),
+        /** K10 : la petite ligne « rien ici » (avec le bouton pour commencer quand c'est possible) */
+        empty: (text, o = {}) => A().empty(text, o),
+        /** K4 : une date de création ou de modification (« hier à 10 h 22 ») */
+        when: (d, o = {}) => (window.LCNDA_UI?.when ? window.LCNDA_UI.when(d, o) : esc(String(d || '').slice(0, 10))),
+        /** K1 : l'erreur sous le champ fautif (et le curseur dedans) → false */
+        fail: (field, msg) => { if (window.LCNDA_UI?.fail && field) return window.LCNDA_UI.fail(field, msg); A().toast(msg, 'error'); return false; },
         portraitUrl: p => (p?.portrait ? `media/${encodeURIComponent(p.portrait)}` : ''),
         openPerson: id => (A().openPersonById ? A().openPersonById(id) : A().selectPerson ? A().selectPerson(id) : (location.hash = `#personnes/${id}`)),
     };
     ext.tresors = {T, render, open: k => openFeature(k)};
+
+    /* ═════════ Les boutons d'une page : un seul modèle pour les 44 pages ═════════
+     * T.actions(host, {primary, exports, media, layout, print, more}) pose, à droite de l'en-tête (K5), dans cet ordre :
+     *   le bouton bleu (primary : {label, run, attrs, title}) · « ⤓ Exporter ▾ » · « 🖨 Imprimer » · le reste (more) dans « ⋯ ».
+     *   exports : [{icon, label, name, make, run}] — make() rend un Blob, un texte SVG ou {blob, name} : il est téléchargé sous name ;
+     *   media : true (copie de la première image exportée) ou {title, make, person, kind} → « 📁 Ranger une copie dans les médias » ;
+     *   layout : fonction → « 📐 Ouvrir dans la mise en page » ; print : fonction, {label, run, attrs} ou [{label, run}] (menu « 🖨 Imprimer ▾ »).
+     * Rappeler T.actions remplace les boutons de la page (une page qui se redessine). */
+    const blobOf = async (x, fallbackName) => {
+        let r = await x.make(); if (r == null) return null;
+        if (typeof r === 'string') r = new Blob([r], {type: /^\s*<svg/.test(r) ? 'image/svg+xml' : 'text/plain;charset=utf-8'});
+        if (r instanceof Blob) r = {blob: r, name: typeof x.name === 'function' ? x.name() : x.name || fallbackName};
+        return r;
+    };
+    async function pageActions(host, o = {}) {
+        const page = host?.closest?.('.h-tr-page'), acts = page?.querySelector('.page-header .page-actions'); if (!acts) return null;
+        page.querySelectorAll('.page-header [data-tr-act]').forEach(b => b.remove());
+        const UI = window.LCNDA_UI || {}, toast = (m, k) => A().toast(m, k), title = page.querySelector('.page-header h2')?.textContent.trim() || 'Trésor';
+        const btn = (cls, label, attrs = '', tip = '') => { const t = document.createElement('template'); t.innerHTML = `<button type="button" class="${cls}" data-tr-act ${attrs}${tip ? ` title="${esc(tip)}"` : ''}>${esc(label)}</button>`; return t.content.firstElementChild; };
+        const safe = fn => async () => { try { await fn(); } catch (err) { toast(err?.message || String(err), 'error'); } };
+        const out = [];
+        if (o.primary) { const b = btn('button', o.primary.label, o.primary.attrs || '', o.primary.title || ''); if (o.primary.run) b.addEventListener('click', safe(o.primary.run)); out.push(b); }
+        const exps = (o.exports || []).filter(Boolean), img = exps.find(x => x.make && x.media !== false);
+        const media = o.media === true ? (img ? {make: () => blobOf(img, 'image.png'), title} : null) : o.media || null;
+        const download = async x => { if (x.run) return x.run(); const r = await blobOf(x, 'tresor'); if (r) T.download(r.name, r.blob); };
+        const toMedia = async () => {
+            let r = media.make ? await (media.make.length ? media.make() : media.make()) : null; if (r && !r.blob && r instanceof Blob) r = {blob: r, name: 'tresor.png'}; if (!r?.blob) return;
+            let {blob, name} = r; if (/svg/.test(blob.type)) { blob = await T.svgPng(await blob.text()); name = String(name || 'image').replace(/\.svg$/i, '') + '.png'; }
+            const kind = media.kind || (/^video/.test(blob.type) ? 'video' : /^audio/.test(blob.type) ? 'audio' : 'image');
+            const tt = typeof media.title === 'function' ? media.title() : media.title || title, m = await T.upload(blob, kind, tt, name || 'tresor.png');
+            const pid = typeof media.person === 'function' ? media.person() : media.person; if (pid) await T.post('tresor_write', {op: 'link_media', media_id: m.media_id, person_id: pid}).catch(() => {});
+            toast(`Une copie est rangée dans les médias${pid ? ' (et sur la fiche)' : ''} : « ${tt} ».`, 'success');
+        };
+        if (exps.length || o.layout || media) {
+            const b = btn('button secondary h-tr-export', '⤓ Exporter ▾', 'data-tr-export aria-haspopup="menu"', 'Enregistrer un fichier sur l’ordinateur, ou ranger une copie dans les médias');
+            b.addEventListener('click', () => {
+                const items = [...exps.map(x => ({icon: x.icon || '⤓', label: x.label, help: x.help || '', run: safe(() => download(x))})),
+                    ...(o.layout ? ['-', {icon: '📐', label: 'Ouvrir dans la mise en page', help: 'Pour tout retravailler (textes, cadres, pages)', run: safe(o.layout)}] : []),
+                    ...(media ? ['-', {icon: '📁', label: 'Ranger une copie dans les médias', help: media.help || '', run: safe(toMedia)}] : [])];
+                if (UI.menuAt) UI.menuAt(b, items, {title: '⤓ Exporter'}); else items.find(i => i && i.run)?.run();
+            });
+            out.push(b);
+        }
+        const prints = [].concat(o.print || []).filter(Boolean).map(p => (typeof p === 'function' ? {run: p} : p));
+        if (prints.length === 1) { const p = prints[0], b = btn('button secondary h-tr-print', '🖨 Imprimer', `data-tr-print ${p.attrs || ''}`, p.title || p.label || 'Aperçu, A4 ou A5, ⤓ PDF'); b.addEventListener('click', safe(p.run)); out.push(b); }
+        else if (prints.length > 1) { const b = btn('button secondary h-tr-print', '🖨 Imprimer ▾', 'data-tr-print aria-haspopup="menu"'); b.addEventListener('click', () => UI.menuAt?.(b, prints.map(p => ({icon: '🖨', label: p.label, help: p.help || '', run: safe(p.run)})), {title: '🖨 Imprimer'})); out.push(b); }
+        (o.more || []).filter(Boolean).forEach(m => { const b = btn('button secondary', m.label, m.attrs || '', m.title || ''); if (m.run) b.addEventListener('click', safe(m.run)); out.push(b); });
+        const star = acts.querySelector(':scope > [data-sc-star]');
+        out.forEach(b => (star ? acts.insertBefore(b, star) : acts.appendChild(b)));
+        acts.classList.toggle('is-empty', !acts.children.length);
+        UI.harmonizePageHeader?.(page.querySelector('.page-header'));
+        return out;
+    }
 
     /* ═════════ L'onglet ═════════ */
     let pending = null; // une nouveauté demandée depuis un autre onglet (ext.tresors.open)
@@ -171,8 +245,9 @@
     function hub() {
         const {hidden} = prefs(), list = ordered().filter(f => !hidden.includes(f.key)), nHid = ext.tresorFeatures.filter(f => hidden.includes(f.key)).length;
         return `<section class="page h-tr">
-            <div class="page-header"><div><span class="eyebrow">✨ TRÉSORS DE FAMILLE</span><h1>Trésors de famille</h1><p class="muted">Pour s'émerveiller, jouer, créer et garder la mémoire, à partir de ton arbre.</p></div><div class="page-actions"><button type="button" class="button secondary" data-tr-settings title="Les dossiers des trésors (les renommer, en créer, en effacer, choisir ce qui va dedans), l’ordre, ce qui s’affiche${nHid ? ` (en ce moment : ${A().plural(nHid, 'trésor caché')})` : ''}">⚙️ Réglages</button></div></div>
-            ${folders().map(([label, fs]) => { void list; return !fs.length ? (label ? `<h2 class="h-tr-group">${esc(label)}</h2><p class="muted h-tr-empty">Dossier vide : ⚙️ Réglages pour y ranger des trésors (ou l’effacer).</p>` : '') : `${label ? `<h2 class="h-tr-group">${esc(label)}</h2>` : ''}<div class="h-tr-grid">${fs.map(f => `<button type="button" class="h-tr-card" data-tr-open="${esc(f.key)}"><span class="h-tr-ic" aria-hidden="true">${esc(f.icon)}</span><b>${esc(f.title)}</b><small>${esc(f.desc)}</small></button>`).join('')}</div>`; }).join('')}
+            ${window.LCNDA_UI?.pageHeader ? window.LCNDA_UI.pageHeader({where: 'Trésors', icon: '✨', title: 'Trésors de famille', help: 'Pour s’émerveiller, jouer, créer et garder la mémoire, à partir de ton arbre.', actions: [`<button type="button" class="button secondary" data-tr-settings title="Les dossiers des trésors (les renommer, en créer, en effacer, choisir ce qui va dedans), l’ordre, ce qui s’affiche${nHid ? ` (en ce moment : ${A().plural(nHid, 'trésor caché')})` : ''}">⚙️ Réglages</button>`]})
+                : `<div class="page-header"><div><span class="eyebrow">Trésors</span><h2>✨ Trésors de famille</h2></div><div class="page-actions"><button type="button" class="button secondary" data-tr-settings>⚙️ Réglages</button></div></div>`}
+            ${folders().map(([label, fs]) => { void list; return !fs.length ? (label ? `<h2 class="h-tr-group">${esc(label)}</h2>${A().empty('Dossier vide', {icon: '📂', hint: '⚙️ Réglages pour y ranger des trésors (ou l’effacer).'})}` : '') : `${label ? `<h2 class="h-tr-group">${esc(label)}</h2>` : ''}<div class="h-tr-grid">${fs.map(f => `<button type="button" class="h-tr-card" data-tr-open="${esc(f.key)}"><span class="h-tr-ic" aria-hidden="true">${esc(f.icon)}</span><b>${esc(f.title)}</b><small>${esc(f.desc)}</small></button>`).join('')}</div>`; }).join('')}
         </section>`;
     }
     async function render(token) {
@@ -185,11 +260,16 @@
         const f = ext.tresorFeatures.find(x => x.key === key), ws = A().$('#workspace'); if (!f || !ws) return;
         if (A().state.module !== 'tresors') { pending = key; return A().setModule('tresors'); }
         if (push && location.hash !== `#tresors/${key}`) history.pushState(null, '', `#tresors/${key}`);
-        ws.innerHTML = `<section class="page h-tr h-tr-page" data-tr-page="${esc(key)}"><div class="h-tr-top"><button type="button" class="button small secondary" data-tr-home>← Tous les trésors</button>${(ext.tresorRelated?.[key] || []).map(([l], i) => `<button type="button" class="button small secondary" data-tr-rel="${esc(key)}:${i}">${esc(l)}</button>`).join('')}</div>
-            <div class="page-header"><div><span class="eyebrow">✨ TRÉSORS · ${esc(GROUPS.find(g => g[0] === f.group)?.[1].replace(/^\S+\s/, '').toUpperCase() || '')}</span><h1>${esc(f.icon)} ${esc(f.title)}</h1><p class="muted">${esc(f.desc)}</p></div></div><div class="h-tr-body" data-tr-body></div></section>`;
+        // K5 : un seul en-tête pour toutes les pages des Trésors — « ← Tous les trésors » (et la liste qui va avec) au-dessus,
+        // sur-titre « Trésors · la famille du trésor », l'icône à part du nom, une phrase d'aide ; les boutons à droite (T.actions)
+        const fam = GROUPS.find(g => g[0] === f.group)?.[1].replace(/^\S+\s/, '') || '';
+        const back = `<nav class="h-tr-back" aria-label="Trésors"><button type="button" class="link-button" data-tr-home>← Tous les trésors</button>${(ext.tresorRelated?.[key] || []).map(([l], i) => `<button type="button" class="link-button" data-tr-rel="${esc(key)}:${i}">${esc(l)}</button>`).join('')}</nav>`;
+        const head = window.LCNDA_UI?.pageHeader ? window.LCNDA_UI.pageHeader({where: fam ? `Trésors · ${fam}` : 'Trésors', icon: f.icon, title: f.title, help: esc(f.desc), back, cls: 'h-tr-head', attrs: `data-tr-head="${esc(key)}"`})
+            : `<header class="page-header h-tr-head" data-tr-head="${esc(key)}"><div>${back}<span class="eyebrow">${esc(fam ? `Trésors · ${fam}` : 'Trésors')}</span><h2>${esc(f.icon)} ${esc(f.title)}</h2><p>${esc(f.desc)}</p></div><div class="page-actions"></div></header>`;
+        ws.innerHTML = `<section class="page h-tr h-tr-page" data-tr-page="${esc(key)}">${head}<div class="h-tr-body" data-tr-body></div></section>`;
         const host = ws.querySelector('[data-tr-body]');
         // l'arbre relu à chaque ouverture : les fiches changées ailleurs y sont
-        try { await T.tree(true); await f.render(host, T); } catch (err) { host.innerHTML = `<p class="ui-notice is-error">Impossible d'ouvrir : ${esc(err.message || err)}</p>`; console.error(err); }
+        try { await T.tree(true); await f.render(host, T); } catch (err) { host.innerHTML = A().empty(`Impossible d’ouvrir : ${err.message || err}`, {icon: '⛔'}); console.error(err); }
     }
     document.addEventListener('click', e => {
         const o = e.target.closest('[data-tr-open]'); if (o && o.closest('.h-tr')) { e.preventDefault(); openFeature(o.dataset.trOpen); return; }
@@ -203,12 +283,12 @@
     const readOnly = () => document.body.classList.contains('is-kiosk') || document.documentElement.classList.contains('base-readonly'); // consultation, base en lecture seule
     ext.personBlocks.tresors = (index, detail, opts = {}) => {
         const pid = Number(detail?.person?.id); if (!pid || detail.person.kind === 'animal') return '';
-        return A().card(index, '✨ Trésors', '', `<div class="h-tr-block" data-tr-block="${pid}"><p class="muted">…</p></div>`, 'span-12', readOnly() ? '' : `<button type="button" class="button small secondary" data-tr-open-k="sens">＋ Souvenir</button> <button type="button" class="button small secondary" data-tr-open-k="lettres">＋ Lettre</button>`);
+        return A().card(index, '✨ Trésors', '', `<div class="h-tr-block" data-tr-block="${pid}">${window.LCNDA_UI?.spinner ? window.LCNDA_UI.spinner('Lecture…') : '<p class="muted">…</p>'}</div>`, 'span-12', readOnly() ? '' : `<button type="button" class="button small secondary" data-tr-open-k="sens">＋ Souvenir</button> <button type="button" class="button small secondary" data-tr-open-k="lettres">＋ Lettre</button>`);
     };
     async function fillBlock(detail) {
         const pid = Number(detail?.person?.id), el = document.querySelector(`#workspace [data-tr-block="${pid}"]`); if (!el) return;
-        let items = []; try { const [a, b] = await Promise.all([T.items('', pid), T.api('tresor_memories', {person_id: pid}).then(r => r.items || []).catch(() => [])]); items = [...a, ...b]; } catch (_) { el.innerHTML = '<p class="muted">Les trésors n’ont pas pu être lus.</p>'; return; }
-        if (!items.length) { el.innerHTML = '<p class="muted">Rien encore : un souvenir (une odeur, un bruit), une recette, une chanson, une lettre pour plus tard, un entretien enregistré… tout se garde dans l’onglet ✨ Trésors.</p>'; return; }
+        let items = []; try { const [a, b] = await Promise.all([T.items('', pid), T.api('tresor_memories', {person_id: pid}).then(r => r.items || []).catch(() => [])]); items = [...a, ...b]; } catch (_) { el.innerHTML = A().empty('Les trésors n’ont pas pu être lus.', {icon: '⚠️'}); return; }
+        if (!items.length) { el.innerHTML = A().empty('Aucun trésor pour l’instant', {icon: '✨', hint: 'Un souvenir (une odeur, un bruit), une recette, une chanson, une lettre pour plus tard, un entretien enregistré… tout se garde dans l’onglet ✨ Trésors.'}); return; }
         const by = new Map(); items.forEach(x => { if (!by.has(x.kind)) by.set(x.kind, []); by.get(x.kind).push(x); });
         el.innerHTML = [...by].map(([k, l]) => { const [ic, label, key] = KIND_INFO[k] || ['✨', k, ''];
             return `<div class="h-tr-bk"><b>${ic} ${esc(label)}</b> ${l.map(x => `<span class="h-tr-pill">${x.sealed ? `🔒 ${esc(x.title)} — s’ouvre le ${esc(T.dateFr(x.open_at))}` : esc(x.title)}</span>`).join(' ')}${key ? ` <button type="button" class="h-tr-link" data-tr-open-k="${key}">Voir</button>` : ''}</div>`; }).join('');

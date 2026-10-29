@@ -20,7 +20,7 @@ declare(strict_types=1);
  * d'aujourd'hui, sans dates de création ni de fusion (il faudrait l'historique INSEE / Cassini comme nouveau référentiel).
  */
 
-const CONTROLE_VERSION = 3; // à monter quand un contrôle change : le cache est refait
+const CONTROLE_VERSION = 4; // à monter quand un contrôle change : le cache est refait
 const CONTROLE_SORTS = ['dates', 'ages', 'parents', 'doublons', 'lieux'];
 const CONTROLE_LEVELS = ['red', 'orange', 'yellow'];
 
@@ -163,9 +163,9 @@ function controle_run(PDO $pdo, bool $fresh = false): array
 function controle_compute(PDO $pdo, array $th): array
 {
     $hasKind = (bool) $pdo->query("SELECT 1 FROM pragma_table_info('persons') WHERE name='kind'")->fetchColumn();
-    $P = [];
+    $P = []; $animals = [];
     foreach ($pdo->query('SELECT id, first_name, last_name, gender' . ($hasKind ? ", COALESCE(kind,'') AS kind" : ", '' AS kind") . ' FROM persons') as $r) {
-        if ($r['kind'] === 'animal') { continue; }
+        if ($r['kind'] === 'animal') { $animals[(int) $r['id']] = trim($r['first_name'] . ' ' . $r['last_name']) ?: 'Animal #' . $r['id']; continue; }
         $P[(int) $r['id']] = ['fn' => (string) $r['first_name'], 'ln' => (string) $r['last_name'], 'g' => (string) $r['gender'], 'b' => null, 'bapt' => null, 'd' => null, 'buri' => null, 'bs' => [], 'ds' => [], 'bpl' => [], 'dpl' => []];
     }
     $name = static function (int $id) use (&$P): string {
@@ -229,6 +229,29 @@ function controle_compute(PDO $pdo, array $th): array
             'detail' => $r['label'] . ' le « ' . $r['date_text'] . ' » : ce jour n’existe pas dans le calendrier ' . ($julian ? 'julien' : 'grégorien') . '.', 'people' => $people,
             'dates' => [['label' => (string) $r['label'], 'text' => (string) $r['date_text'], 'y' => (int) $r['year'], 'j' => null, 'event_id' => (int) $r['id'], 'person_id' => $pid ?: (int) ($people[0] ?? 0)]],
             'fix' => ['event_id' => (int) $r['id'], 'person_id' => $pid ?: (int) ($people[0] ?? 0)], 'fp' => md5($r['id'] . '=' . $r['date_text'])]);
+    }
+    // 1 bis. dates mal écrites : bornes à l'envers (« entre 1900 et 1800 »), texte trop long (une note collée dans la date),
+    // « -5 » (un signe moins) lu comme l'an 5
+    foreach ($evRows as $r) {
+        $text = trim((string) $r['date_text']); if ($text === '') { continue; }
+        $pid = (int) $r['person_id']; $people = $pid ? [$pid] : array_filter($families[(int) $r['family_id']] ?? []);
+        if ($pid && !isset($P[$pid])) { continue; }
+        $one = ['label' => (string) $r['label'], 'text' => $text, 'y' => (int) $r['year'], 'j' => null, 'event_id' => (int) $r['id'], 'person_id' => $pid ?: (int) ($people[0] ?? 0)];
+        $fix = ['event_id' => (int) $r['id'], 'person_id' => $pid ?: (int) ($people[0] ?? 0)]; $fp = md5($r['id'] . '=' . $text);
+        $len = mb_strlen($text);
+        if ($len > 80) {
+            $add(['key' => "long-date:{$r['id']}", 'check' => 'long-date', 'sort' => 'dates', 'level' => 'orange', 'title' => 'Date trop longue (' . $len . ' signes)',
+                'detail' => $r['label'] . ' : « ' . mb_substr($text, 0, 60) . '… » — une note a sans doute été collée dans la case de la date.', 'people' => $people, 'dates' => [$one], 'fix' => $fix, 'fp' => $fp]);
+            continue;
+        }
+        if (preg_match('/\b(?:entre|between|bet\.?)\s+(?:.*?\D)?(\d{3,4})\b.*?\s(?:et|and)\s+(?:.*?\D)?(\d{3,4})\b/iu', $text, $m) && (int) $m[1] > (int) $m[2]) {
+            $add(['key' => "reversed-range:{$r['id']}", 'check' => 'reversed-range', 'sort' => 'dates', 'level' => 'orange', 'title' => 'Dates à l’envers : « ' . $text . ' »',
+                'detail' => $r['label'] . ' : la première année (' . $m[1] . ') vient après la seconde (' . $m[2] . '). Sans doute « entre ' . $m[2] . ' et ' . $m[1] . ' ».', 'people' => $people, 'dates' => [$one], 'fix' => $fix, 'fp' => $fp]);
+        }
+        if (preg_match('/^[-−–]\s*\d{1,4}$/u', $text)) {
+            $add(['key' => "negative-date:{$r['id']}", 'check' => 'negative-date', 'sort' => 'dates', 'level' => 'orange', 'title' => 'Date « ' . $text . ' » lue comme l’an ' . (int) preg_replace('/\D/', '', $text),
+                'detail' => $r['label'] . ' : un signe moins devant l’année. Pour une date avant Jésus-Christ, écris « 5 av. J.-C. » ; sinon corrige l’année.', 'people' => $people, 'dates' => [$one], 'fix' => $fix, 'fp' => $fp]);
+        }
     }
     foreach ($P as $id => $p) {
         $b = $p['b']; $d = $p['d'];
@@ -548,6 +571,47 @@ function controle_compute(PDO $pdo, array $th): array
         }
     }
 
+    // ═══ 👪 Mariage avec son ancêtre ou son descendant (une fiche rattachée à la mauvaise génération) ═══
+    $ancestorDepth = static function (int $from, int $target) use ($parentsOf): int {
+        $seen = [$from => true]; $level = [$from]; $depth = 0; $visits = 0;
+        while ($level && $depth < 12) { // 12 générations, 1 000 fiches au plus : rapide même sur une grande base
+            $depth++; $next = [];
+            foreach ($level as $x) { foreach ($parentsOf($x) as $par => $_) { if ($par === $target) { return $depth; } if (!isset($seen[$par])) { $seen[$par] = true; $next[] = $par; if (++$visits > 1000) { return 0; } } } }
+            $level = $next;
+        }
+        return 0;
+    };
+    $kin = static function (int $k, string $g, bool $up): string {
+        if ($up) { return $k === 1 ? ($g === 'female' ? 'sa mère' : ($g === 'male' ? 'son père' : 'son parent')) : ($k === 2 ? ($g === 'female' ? 'sa grand-mère' : ($g === 'male' ? 'son grand-père' : 'son grand-parent')) : 'son ancêtre (' . $k . ' générations)'); }
+        return $k === 1 ? ($g === 'female' ? 'sa fille' : ($g === 'male' ? 'son fils' : 'son enfant')) : ($k === 2 ? ($g === 'female' ? 'sa petite-fille' : ($g === 'male' ? 'son petit-fils' : 'son petit-enfant')) : 'son descendant (' . $k . ' générations)');
+    };
+    $kinChecks = 0;
+    foreach ($families as $fid => [$a, $b]) {
+        if (!$a || !$b || $a === $b || !isset($P[$a], $P[$b])) { continue; }
+        $k = $ancestorDepth($a, $b); $anc = $b; $desc = $a;
+        if (!$k) { $k = $ancestorDepth($b, $a); $anc = $a; $desc = $b; }
+        if (!$k) { continue; }
+        $add(['key' => "spouse-ancestor:$fid", 'check' => 'spouse-ancestor', 'sort' => 'parents', 'level' => 'red',
+            'title' => $name($anc) . ' ' . $g($anc, 'marié', 'mariée', 'marié(e)') . ' à ' . $kin($k, $P[$desc]['g'], false),
+            'detail' => $name($desc) . ' est ' . $kin($k, $P[$desc]['g'], false) . ' et aussi son conjoint (famille n° ' . $fid . ') : une fiche rattachée à la mauvaise génération, ou deux homonymes confondus.',
+            'people' => [$anc, $desc], 'fp' => md5("$fid:$a:$b:$k")]);
+        if (++$kinChecks >= 500) { break; }
+    }
+    // ═══ 🐾 Animal noté parent, enfant ou conjoint d'une personne (anciennes données) ═══
+    if ($animals) {
+        foreach ($families as $fid => [$a, $b]) {
+            $members = array_values(array_filter(array_merge([$a, $b], $kids[$fid] ?? [])));
+            $an = array_values(array_filter($members, static fn($x) => isset($animals[$x])));
+            $hu = array_values(array_filter($members, static fn($x) => isset($P[$x])));
+            if (!$an || !$hu) { continue; }
+            $partnerAnimal = isset($animals[$a]) || isset($animals[$b]);
+            $add(['key' => "animal-link:$fid", 'check' => 'animal-link', 'sort' => 'parents', 'level' => 'orange',
+                'title' => 'Animal noté ' . ($partnerAnimal ? ((($a && isset($P[$a])) || ($b && isset($P[$b]))) ? 'conjoint d’une personne' : 'parent d’une personne') : 'enfant d’une personne') . ' : ' . $animals[$an[0]],
+                'detail' => 'Famille n° ' . $fid . ' : ' . implode(', ', array_map(static fn($x) => '🐾 ' . $animals[$x], array_slice($an, 0, 3))) . ' avec ' . implode(', ', array_map($name, array_slice($hu, 0, 3))) . '. Un animal se relie à son maître dans sa fiche (Propriétaire), pas comme parent ou conjoint.',
+                'people' => $hu, 'fp' => md5(implode(',', $members))]);
+        }
+    }
+
     // ═══ 📍 LIEUX ═══
     // lieux mal placés (0, 0 ; hors du pays ; latitude et longitude inversées ; homonyme plus près de la famille)
     try {
@@ -703,7 +767,7 @@ function controle_sort_of_key(string $key): string
         in_array($k, ['dup'], true) => 'doublons',
         in_array($k, ['place', 'journey', 'baptism-far', 'conflicting-naissance-place', 'conflicting-décès-place'], true) => 'lieux',
         in_array($k, ['old-parent', 'young-marriage', 'old-marriage', 'sosa-gap'], true) => 'ages',
-        in_array($k, ['child-after-parent-death', 'close-births', 'same-year-siblings', 'before-marriage', 'sibling-span', 'multiple-parent-families', 'ghost-family', 'sosa-sex', 'young-parent'], true) => 'parents',
+        in_array($k, ['spouse-ancestor', 'animal-link', 'child-after-parent-death', 'close-births', 'same-year-siblings', 'before-marriage', 'sibling-span', 'multiple-parent-families', 'ghost-family', 'sosa-sex', 'young-parent'], true) => 'parents',
         default => 'dates',
     };
 }

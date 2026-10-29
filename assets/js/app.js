@@ -1,6 +1,36 @@
 (() => {
     'use strict';
 
+    /* 🗂 Plusieurs généalogies : TOUT envoi vers api.php / upload.php dit quelle généalogie la page a ouverte (X-Genealogy),
+     * aussi les fetch directs (imports, médias, réglages) ; le serveur refuse si une autre a été ouverte ailleurs. */
+    if(typeof window.LCNDA_GENEALOGY==='string'&&!window.fetch.__lcndaGen){
+        const origFetch=window.fetch;
+        const wrappedFetch=function(input,init){
+            try{
+                const raw=typeof input==='string'||input instanceof URL?String(input):input?.url||'';
+                const u=new URL(raw,location.href);
+                if(u.origin===location.origin&&/(?:^|\/)(?:api|upload)\.php$/.test(u.pathname)){
+                    if(input instanceof Request&&!init){const h=new Headers(input.headers);if(!h.has('X-Genealogy'))h.set('X-Genealogy',window.LCNDA_GENEALOGY);input=new Request(input,{headers:h});}
+                    else{const h=new Headers(init?.headers||(input instanceof Request?input.headers:undefined));if(!h.has('X-Genealogy'))h.set('X-Genealogy',window.LCNDA_GENEALOGY);init={...(init||{}),headers:h};}
+                }
+            }catch(_){}
+            return origFetch.call(this,input,init);
+        };
+        wrappedFetch.__lcndaGen=true;window.fetch=wrappedFetch;
+        // 🖼 Une image ou un son de « media/… » qui ne se charge pas (une <img> n'envoie pas X-Genealogy) : la première fois
+        // (puis au plus toutes les 30 s), un petit appel à api.php vérifie la généalogie ; s'il répond 409, api() affiche
+        // le message unique « … recharge la page » avec « ↻ Recharger ». Une seule fenêtre : l'appel répond normalement, rien ne change.
+        let mediaCheckAt=0;
+        document.addEventListener('error',e=>{
+            const el=e.target;if(!(el instanceof HTMLImageElement||el instanceof HTMLMediaElement||el instanceof HTMLSourceElement))return;
+            if(api.genealogyWarned||Date.now()-mediaCheckAt<30000)return;
+            try{const u=new URL(el.currentSrc||el.src||el.getAttribute('src')||'',location.href);if(u.origin!==location.origin||!/\/media\/|(?:^|\/)api\.php$/.test(u.pathname))return;}catch(_){return;}
+            mediaCheckAt=Date.now();
+            setTimeout(()=>{api('kiosk_state').catch(()=>{});},0);
+        },true);
+        document.addEventListener('click',e=>{const a=e.target.closest?.('a[href*="api.php"]');if(!a)return;try{const u=new URL(a.getAttribute('href'),location.href);if(u.origin===location.origin&&/(?:^|\/)api\.php$/.test(u.pathname)&&!u.searchParams.has('g')){u.searchParams.set('g',window.LCNDA_GENEALOGY);a.setAttribute('href',u.pathname.replace(/^.*\//,'')+u.search+u.hash);}}catch(_){}},true);
+    }
+
     /* 🛡 Un seul enregistrement à la fois dans une fenêtre (double-clic, clics répétés, Entrée répétée, réseau lent) :
      * le formulaire d'une <dialog> déjà en train d'enregistrer ignore les nouveaux envois ; son bouton principal est
      * désactivé (aspect C8) avec « Enregistrement… », et libéré dès que l'enregistrement est fini, réussi ou non
@@ -19,6 +49,15 @@
         };
         proto.removeEventListener=function(type,fn,opts){return origRemove.call(this,type,(type==='submit'&&typeof fn==='function'&&wrapped.get(fn))||fn,opts);};
         const busyLabel=b=>/enregistr|ajout|créer|conserv|rattach|valid|import|lier|envoy/i.test(b.textContent||'')?'Enregistrement…':'Un instant…';
+        /* ⏳ Pendant un enregistrement : « Annuler », × et Échap ne ferment pas la fenêtre (sinon elle disparaît alors que
+         * l'enregistrement se fait quand même) ; aspect désactivé C8 ; ils reviennent dès que c'est fini, réussi ou non.
+         * Un bouton qui arrête vraiment l'envoi garde la main : data-allow-cancel. */
+        const CLOSE_SEL='[data-h-close],[data-close],[data-cb-cancel],button[value="cancel"],.modal-close,button.icon-button[aria-label="Fermer"]';
+        const closeButtons=dlg=>[...dlg.querySelectorAll('button')].filter(b=>b.closest('dialog')===dlg&&b.type!=='submit'&&!b.hasAttribute('data-allow-cancel')&&(b.matches(CLOSE_SEL)||/^\s*(Annuler|Fermer|×)\s*$/.test(b.textContent||'')));
+        const lockClose=(dlg,on)=>{if(on){dlg.dataset.lcSaving='1';closeButtons(dlg).forEach(b=>{if(b.getAttribute('aria-disabled')==='true')return;b.dataset.lcSaveLock='1';b.setAttribute('aria-disabled','true');b.classList.add('is-save-locked');if(!b.title)b.dataset.lcSaveTitle='1',b.title='Enregistrement en cours : un instant…';});}
+            else{delete dlg.dataset.lcSaving;dlg.querySelectorAll('[data-lc-save-lock]').forEach(b=>{delete b.dataset.lcSaveLock;b.removeAttribute('aria-disabled');b.classList.remove('is-save-locked');if(b.dataset.lcSaveTitle){delete b.dataset.lcSaveTitle;b.removeAttribute('title');}});}};
+        origAdd.call(document,'cancel',ev=>{const d=ev.target;if(d instanceof HTMLDialogElement&&d.dataset.lcSaving==='1'){ev.preventDefault();ev.stopImmediatePropagation();}},true);
+        origAdd.call(document,'click',ev=>{const b=ev.target.closest?.('button');const d=b?.closest('dialog');if(d&&d.dataset.lcSaving==='1'&&b.dataset.lcSaveLock==='1'){ev.preventDefault();ev.stopImmediatePropagation();}},true);
         origAdd.call(document,'submit',ev=>{
             const form=ev.target;if(!(form instanceof HTMLFormElement))return;
             const dlg=form.closest('dialog');if(!dlg)return;
@@ -26,7 +65,7 @@
             form._lcBusy=true;form._lcPending=[];out.last={form,dialog:dlg};
             const wasDirty=dlg.dataset.dirty==='1',seq=out.failSeq,okSeq=out.okSeq,btn=ev.submitter||form.querySelector('button[type="submit"],button:not([type])');
             let touched=false,weDisabled=false,done=false;
-            const release=()=>{if(done)return;done=true;form._lcBusy=false;form._lcPending=null;dlg.removeEventListener('close',release);
+            const release=()=>{if(done)return;done=true;form._lcBusy=false;form._lcPending=null;dlg.removeEventListener('close',release);lockClose(dlg,false);
                 if(touched&&btn){btn.innerHTML=btn._lcHtml;if(weDisabled)btn.disabled=false;btn.classList.remove('is-busy');btn.removeAttribute('aria-busy');btn.removeAttribute('aria-disabled');}};
             dlg.addEventListener('close',release);
             // l'aspect tout de suite (avant le travail de la fenêtre) ; « disabled » seulement après (certaines fenêtres
@@ -36,6 +75,7 @@
                 if(done)return;const ps=form._lcPending||[];
                 if(!ps.length){release();return;}
                 if(touched&&btn.isConnected&&!btn.disabled){btn.disabled=true;weDisabled=true;}
+                lockClose(dlg,true);
                 Promise.allSettled(ps).then(()=>{if(wasDirty&&dlg.open&&(out.failSeq!==seq||out.okSeq===okSeq))dlg.dataset.dirty='1';release();}); // échec (ou rien d'enregistré) : la saisie reste « modifiée »
             },0);
         },true);
@@ -54,7 +94,8 @@
         const fromBase=window.LCNDA_SETTINGS;
         if(!window.GENEALOGY_READY||!fromBase||typeof fromBase!=='object')return;
         let store;try{store=window.localStorage;store.length;}catch(_){return;}
-        const LOCAL_ONLY=new Set(['genealogie-auto-backup-lock','genealogie-baissait-ui-v2','genealogie-last-route','genealogie-bg-photo']); // la photo du fond (app-fond.js) : lourde, elle reste sur cet ordinateur
+        const UNSENT='genealogie-settings-unsent'; // envoyé en partant (keepalive) : peut arriver après le nouveau index.php → la page suivante le renvoie au lieu de le recouvrir
+        const LOCAL_ONLY=new Set(['genealogie-auto-backup-lock','genealogie-baissait-ui-v2','genealogie-last-route','genealogie-bg-photo',UNSENT]); // la photo du fond (app-fond.js) : lourde, elle reste sur cet ordinateur
         const synced=key=>typeof key==='string'&&/^genealogie-[a-z0-9-]{1,80}$/.test(key)&&!LOCAL_ONLY.has(key);
         const proto=Object.getPrototypeOf(store);
         const originalSet=proto.setItem,originalRemove=proto.removeItem;
@@ -66,24 +107,30 @@
             if(!Object.keys(set).length&&!remove.length)return Promise.resolve();
             pending.set={};pending.remove.clear();
             const csrf=window.INSTALL_CSRF||'';
+            if(keepalive){try{const old=JSON.parse(store.getItem(UNSENT)||'{}')||{};const os=Object.fromEntries(Object.entries(old.set||{}).filter(([k])=>!remove.includes(k)));originalSet.call(store,UNSENT,JSON.stringify({set:{...os,...set},remove:[...new Set([...(old.remove||[]).filter(k=>!(k in set)),...remove])]}));}catch(_){}}
             return fetch('api.php?action=save_settings',{method:'POST',keepalive,headers:{'Content-Type':'application/json','X-CSRF-Token':csrf},body:JSON.stringify({set,remove,csrf})})
+                .then(r=>{if(r&&r.ok&&!keepalive){try{originalRemove.call(store,UNSENT);}catch(_){}}})
                 .catch(()=>{Object.assign(pending.set,set);remove.forEach(k=>pending.remove.add(k));});
         };
         // Changer de généalogie : les derniers réglages partent dans la base ouverte, puis la copie locale est vidée
         // (sans le dire à la base) ; la généalogie suivante démarre avec SES réglages, rien n'est mélangé.
         window.LCNDA_SETTINGS_DETACH=async()=>{await flush(false);detached=true;for(const key of Array.from({length:store.length},(_,i)=>store.key(i))){if(synced(key)){try{originalRemove.call(store,key);}catch(_){}}}};
         const schedule=()=>{if(!timer)timer=setTimeout(()=>flush(false),1000);};
-        const base=Array.isArray(fromBase)?{}:fromBase;
+        const base=Array.isArray(fromBase)?{}:{...fromBase};
         // Deuxième écran ou écran posé dans un onglet (?view=…) : la fenêtre principale tient déjà les réglages à jour.
         // Les recopier depuis la base effacerait ce qu'elle vient d'enregistrer et que la base n'a pas encore reçu.
         const secondary=(()=>{try{return new URLSearchParams(location.search).has('view');}catch(_){return false;}})();
+        const unsent=(()=>{try{const u=JSON.parse(store.getItem(UNSENT)||'null');return u&&typeof u==='object'?{set:u.set&&typeof u.set==='object'?u.set:{},remove:Array.isArray(u.remove)?u.remove:[]}:null;}catch(_){return null;}})();
         if(!secondary){
+            if(unsent){for(const [key,value] of Object.entries(unsent.set)){if(synced(key)&&typeof value==='string'){delete base[key];pending.set[key]=value;try{originalSet.call(store,key,value);}catch(_){}}}for(const key of unsent.remove){if(synced(key)){delete base[key];pending.remove.add(key);}}}
             for(const [key,value] of Object.entries(base)){if(synced(key)&&typeof value==='string'){try{originalSet.call(store,key,value);}catch(_){}}}
             for(let i=0;i<store.length;i++){const key=store.key(i);if(synced(key)&&!(key in base)){pending.set[key]=store.getItem(key);}}
         }
-        if(Object.keys(pending.set).length)schedule();
+        if(Object.keys(pending.set).length||pending.remove.size)schedule();
         proto.setItem=function(key,value){originalSet.call(this,key,value);if(this===store&&!detached&&synced(String(key))){pending.remove.delete(String(key));pending.set[String(key)]=String(value);schedule();}};
         proto.removeItem=function(key){originalRemove.call(this,key);if(this===store&&!detached&&synced(String(key))){delete pending.set[String(key)];pending.remove.add(String(key));schedule();}};
+        // Recharger juste après un changement : on envoie tout de suite (sans attendre la seconde), dès « beforeunload »
+        window.addEventListener('beforeunload',()=>{if(timer||Object.keys(pending.set).length||pending.remove.size)flush(true);});
         window.addEventListener('pagehide',()=>flush(true));
     })();
 
@@ -94,8 +141,12 @@
     const readDesignSettings = () => { try { const d = JSON.parse(localStorage.getItem('genealogie-design') || '{}'); return d && typeof d === 'object' && !Array.isArray(d) ? d : {}; } catch (_) { return {}; } };
     const safeUrl = (value = '') => /^(https?:|mailto:|tel:)/i.test(String(value).trim()) ? String(value).trim() : '#';
     const escapeHtml = (value = '') => String(value).replace(/[&<>'"]/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));
+    const waitHtml = text => window.LCNDA_UI?.spinner ? window.LCNDA_UI.spinner(text) : escapeHtml(text);   // C7 : un seul rond qui tourne + une phrase (UI.spinner ; texte seul avant que app-ui.js soit chargé)
     const formObject = form => Object.fromEntries(new FormData(form).entries());
-    const lifeText = status => ({living:'Vivante', deceased:'Décédée', unknown:'À vérifier'}[status] || 'À vérifier');
+    /** accordé avec la personne : « Décédé » pour un homme, « Décédée » pour une femme (et par défaut, comme « la personne ») */
+    // ✍️ accord avec la fiche (homme, femme, autre, non renseigné, animal) : une seule aide, app-accord.js (LCNDA_ACCORD)
+    const accord = (who, word, opts) => window.LCNDA_ACCORD ? window.LCNDA_ACCORD.accord(who, word, opts) : String(word?.m ?? word ?? '');
+    const lifeText = (status, gender) => { if (window.LCNDA_ACCORD) return window.LCNDA_ACCORD.life(status, gender); const m = gender === 'male'; return ({living: m ? 'Vivant' : 'Vivante', deceased: m ? 'Décédé' : 'Décédée', unknown: 'À vérifier'}[status] || 'À vérifier'); };
     const genderText = gender => ({male:'Masculin', female:'Féminin', nonbinary:'Autre / non binaire', unknown:'Non renseigné'}[gender] || 'Non renseigné');
     const personName = person => [person.prefix, person.first_name, person.middle_name, person.last_name, person.suffix].filter(Boolean).join(' ').replace(/\s+/g, ' ').trim() || 'Personne sans nom';
     const years = person => {
@@ -267,6 +318,7 @@
         'genealogie-mode-simple','genealogie-mode-simple-presets', // 🧓 Mode simple (app-mode-simple.js), sans son code de sortie ni qui regarde
         'genealogie-accessibilite', // ♿ Accessibilité (app-access.js)
         'genealogie-audio-quick-design','genealogie-audio-fx-presets', // 🎧 ⚡ Son rapide : le design choisi, et les réglages du son enregistrés (heritage-audio-quick.js)
+        'genealogie-accord', // ✍️ Accord des mots pour les fiches ni homme ni femme (app-accord.js)
         'genealogie-design-custom-presets','genealogie-avatar-shapes','genealogie-person-header','genealogie-topbar-buttons', // ✎ Mes thèmes (qu’un design peut choisir), formes des avatars, en-tête des fiches
     ];
     const DEFAULT_PERSON_BADGE_COLORS = {
@@ -402,7 +454,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     const modules = {
         jeu: ['JEU', 'Jeu de l’oie / Serpents et échelles / Petits chevaux / Puzzle / Labyrinthe'],
         dashboard: ['01 — PILOTER', 'Tableau de bord'],
-        personnes: ['02 — EXPLORER', 'Personnes'], animaux: ['02 — EXPLORER', 'Animaux'], suivi: ['02 — SUIVRE', 'Suivi des animaux'], graphiques: ['03 — VISUALISER', 'Graphiques'],
+        personnes: ['02 — EXPLORER', 'Personnes'], animaux: ['02 — EXPLORER', 'Animaux'], suivi: ['02 — SUIVRE', 'Suivi des animaux'], documents: ['02 — EXPLORER', 'Documents'], catalogue: ['02 — EXPLORER', 'Catalogue raisonné'], graphiques: ['03 — VISUALISER', 'Graphiques'],
         carte: ['04 — LOCALISER', 'Carte'], listes: ['05 — INVENTORIER', 'Listes'],
         chronologie: ['06 — RACONTER', 'Chronologie'], recherche: ['07 — RECHERCHER', 'Recherche'],
         enquetes: ['08 — ENQUÊTER', 'Enquêtes'], fiches: ['08 — DOCUMENTER', 'Fiches'], adn: ['08 — ADN', 'ADN'], comparaison: ['09 — COMPARER', 'Comparaison'], tresors: ['09 — S’ÉMERVEILLER', 'Trésors de famille'], maintenance: ['10 — VÉRIFIER', 'Réglages'],
@@ -542,9 +594,9 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         customTabs().forEach(t=>{const at=t.after&&defaults.includes(t.after)?defaults.indexOf(t.after)+1:defaults.indexOf('maintenance');defaults.splice(at<0?defaults.length:at,0,t.id);});
         return savedOrder('genealogie-menu-order',defaults);
     }
-    function dashboardWidgetCatalogHiddenKeys(){try{return JSON.parse(localStorage.getItem('genealogie-dashboard-widget-catalog-hidden')||'[]');}catch(_){return[];}}
+    function dashboardWidgetCatalogHiddenKeys(){try{const v=JSON.parse(localStorage.getItem('genealogie-dashboard-widget-catalog-hidden')||'[]');return Array.isArray(v)?v:[];}catch(_){return[];}}
     function orderedDashboardWidgetTypes(includeHidden=false){const keys=defaultDashboardBlocks.map(item=>item[0]);const order=savedOrder('genealogie-dashboard-widget-catalog-order',keys);const hidden=dashboardWidgetCatalogHiddenKeys();return order.filter(type=>includeHidden||!hidden.includes(type)).map((type,index)=>{const item=defaultDashboardBlocks.find(row=>row[0]===type)||[type,type];return [item[0],String(index+1).padStart(2,'0'),item[1]];});}
-    function listHiddenKeys(){try{return JSON.parse(localStorage.getItem('genealogie-list-hidden')||'[]');}catch(_){return[];}}
+    function listHiddenKeys(){try{const v=JSON.parse(localStorage.getItem('genealogie-list-hidden')||'[]');return Array.isArray(v)?v:[];}catch(_){return[];}}
     function orderedListTypes(includeHidden=false){const order=savedOrder('genealogie-list-order',defaultListTypes.map(item=>item[0]));const hidden=listHiddenKeys();let visibleIndex=0;return order.filter(value=>includeHidden||!hidden.includes(value)).map((value,index)=>{const item=defaultListTypes.find(row=>row[0]===value);return [item[0],String(includeHidden?index+1:++visibleIndex).padStart(2,'0'),item[2]];});}
     function dynamicMapTypes(){const tags=(state.bootstrap?.mapEventTags||[]);const extra=tags.map(t=>[t.gedcom_tag,t.label]);const all=[['all','Tous les événements'],...extra];return all;}function orderedMapTypes(includeHidden=false){const dynamic=dynamicMapTypes();const keys=dynamic.map(i=>i[0]);const order=savedOrder('genealogie-map-order',keys);const hidden=mapHiddenKeys();return order.filter(value=>includeHidden||value==='all'||!hidden.includes(value)).map((value,index)=>{const item=dynamic.find(r=>r[0]===value)||[value,value];return [item[0],String(index+1).padStart(2,'0'),item[1]];});}
     const defaultMaintenanceTabs=[['design','01','Apparence'],['look_theme','01','Thème et couleurs'],['look_portraits','01','Portraits et avatars'],['look_msgs','01','Notifications et boutons'],['look_layouts','01','Réglages enregistrés'],['nav_menus','01','Menus, colonne et listes'],['design_sheets','01c','Fiches personnes et animaux'],['design_maps','01e','Cartes et fonds de carte'],['accessibilite','01d','Accessibilité'],['controle','02','✅ Contrôle de la base'],['controle_seuils','02b','⚙️ Seuils du contrôle'],['duplicates','03','Fusion de doublons'],['branches','04','Branches'],['bulk','05','Modifications groupées'],['changes','06','Journal des modifications'],['export','07','Export propre'],['import','08','Import'],['labels','09','Étiquettes'],['event_types','10','Types d\'événements'],['calendar_measures','11','Calendrier / mesures'],['help','12','Glossaire'],['faq','12b','FAQ / tuto'],['infos','13','Infos'],['safety','14','Sécurité & comparaison'],['entretien','15','Entretien'],['fusion','16','Fusionner un arbre'],['raccourcis','17','Raccourcis clavier'],['scan_inbox','19','Dossier « Scans » surveillé'],['sync','20','Travail à deux'],['harmonize','22','Harmoniser les variantes'],['cousin_vault','24','Copie chez un cousin'],['block_editor','25','Éditeur de blocs'],['board_prefs','25e','Tableaux'],['pet_prefs','25f','Animaux'],['montage_prefs','25g','Montage, retouche, mise en page et son'],['meteo','25k','🌦 Météo d’autrefois'],['viewer_prefs','25i','Visionneuse d’images'],['widget_editor','25b','Éditeur de widgets'],['stats_editor','25c','Éditeur de graphiques'],['tabs_editor','25d','Éditeur d’onglets'],['htr','26','Reconnaissance d’écriture (HTR)'],['my_lists','27','Éditeur de listes'],['atelier','28','Atelier de recherche']];
@@ -837,7 +889,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     let blockKindPreview=null; // 🗂 l'aperçu d'une autre fiche (Réglages → Fiches) : sa sorte à elle, le temps de la dessiner
     const blockKindOf=personId=>blockKindPreview&&Number(personId)===blockKindPreview.id?blockKindPreview.kind:personId&&Number(personId)===Number(state.currentPersonId)&&state.currentPersonKind==='animal'?'animal':'human';
     const blockBaseKey=kind=>kind==='animal'?'genealogie-animal-blocks':'genealogie-person-blocks';
-    function personBlockSettings(personId=0,kind=blockKindOf(personId)){const baseKey=blockBaseKey(kind);const defaults=defaultPersonBlocks.map(item=>item[0]);let settings={order:defaults,hidden:[],hideEmptyIdentity:false,widths:{}};if(kind==='animal')settings={...settings,order:[...ANIMAL_BLOCKS0.order],hidden:[...ANIMAL_BLOCKS0.hidden],widths:{...ANIMAL_BLOCKS0.widths}};try{settings={...settings,...JSON.parse(localStorage.getItem(baseKey)||'{}')};}catch(_){}if(personId){try{settings={...settings,...JSON.parse(localStorage.getItem(`genealogie-person-blocks-${personId}`)||'{}')};}catch(_){}}settings.order=[...(settings.order||[]).filter(key=>defaults.includes(key)),...defaults.filter(key=>!(settings.order||[]).includes(key))];settings.hidden=(settings.hidden||[]).filter(key=>defaults.includes(key));
+    function personBlockSettings(personId=0,kind=blockKindOf(personId)){const baseKey=blockBaseKey(kind);const defaults=defaultPersonBlocks.map(item=>item[0]);let settings={order:defaults,hidden:[],hideEmptyIdentity:false,widths:{}};if(kind==='animal')settings={...settings,order:[...ANIMAL_BLOCKS0.order],hidden:[...ANIMAL_BLOCKS0.hidden],widths:{...ANIMAL_BLOCKS0.widths}};try{settings={...settings,...JSON.parse(localStorage.getItem(baseKey)||'{}')};}catch(_){}if(personId){try{settings={...settings,...JSON.parse(localStorage.getItem(`genealogie-person-blocks-${personId}`)||'{}')};}catch(_){}}if(!Array.isArray(settings.order))settings.order=[];if(!Array.isArray(settings.hidden))settings.hidden=[]; /* un réglage abîmé (« order » : "abc") ne doit pas casser les fiches */settings.order=[...(settings.order||[]).filter(key=>defaults.includes(key)),...defaults.filter(key=>!(settings.order||[]).includes(key))];settings.hidden=(settings.hidden||[]).filter(key=>defaults.includes(key));
         // Blocs ajoutés le 2026-10-08 : masqués tant qu'ils n'ont jamais été réglés dans Apparence
         let savedBlockOrder=[];try{savedBlockOrder=[...(JSON.parse(localStorage.getItem(baseKey)||'{}').order||[]),...(personId?(JSON.parse(localStorage.getItem(`genealogie-person-blocks-${personId}`)||'{}').order||[]):[])];}catch(_){}
         ['family_objects','family_memories'].forEach(key=>{if(!savedBlockOrder.includes(key)&&!settings.hidden.includes(key))settings.hidden.push(key);});
@@ -1142,13 +1194,13 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     }
     // l'onglet « Animaux » est caché tant qu'on ne l'a pas montré (Apparence → Ordre du menu principal)
     // « Animaux » et « Fiches » sont cachés tant que l'ordre du menu n'a pas été réglé une fois
-    function menuHiddenKeys(){let l=[];try{l=JSON.parse(localStorage.getItem('genealogie-menu-hidden')||'[]');if(!localStorage.getItem('genealogie-menu-animaux')&&!l.includes('animaux'))l.push('animaux');if(!localStorage.getItem('genealogie-menu-fiches')&&!l.includes('fiches'))l.push('fiches');if(!localStorage.getItem('genealogie-menu-adn')&&!l.includes('adn'))l.push('adn');if(!localStorage.getItem('genealogie-menu-suivi')&&!l.includes('suivi'))l.push('suivi');/* 🐾 Suivi des animaux : caché au départ */if(!localStorage.getItem('genealogie-menu-tresors')&&!l.includes('tresors'))l.push('tresors');/* ✨ Trésors : caché au départ */}catch(_){l=['animaux','fiches','adn','suivi','tresors'];}return l;}
+    function menuHiddenKeys(){let l=[];try{l=JSON.parse(localStorage.getItem('genealogie-menu-hidden')||'[]');if(!Array.isArray(l))l=[];if(!localStorage.getItem('genealogie-menu-animaux')&&!l.includes('animaux'))l.push('animaux');if(!localStorage.getItem('genealogie-menu-fiches')&&!l.includes('fiches'))l.push('fiches');if(!localStorage.getItem('genealogie-menu-adn')&&!l.includes('adn'))l.push('adn');if(!localStorage.getItem('genealogie-menu-suivi')&&!l.includes('suivi'))l.push('suivi');/* 🐾 Suivi des animaux : caché au départ */if(!localStorage.getItem('genealogie-menu-tresors')&&!l.includes('tresors'))l.push('tresors');/* ✨ Trésors : caché au départ */['documents','catalogue'].forEach(k=>{if(!localStorage.getItem(`genealogie-menu-${k}`)&&!l.includes(k))l.push(k);});/* 📄 Documents, 🎨 Catalogue raisonné : cachés au départ */}catch(_){l=['animaux','fiches','adn','suivi','tresors','documents','catalogue'];}return l;}
     // onglet « Animaux » montré : « Personnes » ne liste que les personnes, « Animaux » que les animaux (la même fiche, à part)
     const animalsTabOn=()=>!menuHiddenKeys().includes('animaux');
-    function mapHiddenKeys(){try{return JSON.parse(localStorage.getItem('genealogie-map-hidden')||'[]');}catch(_){return[];}}
-    function graphDiagramHiddenKeys(){try{return JSON.parse(localStorage.getItem('genealogie-graph-diagram-hidden')||'[]');}catch(_){return[];}}
-    function graphStatsHiddenKeys(){try{return JSON.parse(localStorage.getItem('genealogie-graph-stats-hidden')||'[]');}catch(_){return[];}}
-    function tileLayerHiddenKeys(){try{return JSON.parse(localStorage.getItem('genealogie-tile-hidden')||'[]');}catch(_){return[];}}
+    function mapHiddenKeys(){try{const v=JSON.parse(localStorage.getItem('genealogie-map-hidden')||'[]');return Array.isArray(v)?v:[];}catch(_){return[];}}
+    function graphDiagramHiddenKeys(){try{const v=JSON.parse(localStorage.getItem('genealogie-graph-diagram-hidden')||'[]');return Array.isArray(v)?v:[];}catch(_){return[];}}
+    function graphStatsHiddenKeys(){try{const v=JSON.parse(localStorage.getItem('genealogie-graph-stats-hidden')||'[]');return Array.isArray(v)?v:[];}catch(_){return[];}}
+    function tileLayerHiddenKeys(){try{const v=JSON.parse(localStorage.getItem('genealogie-tile-hidden')||'[]');return Array.isArray(v)?v:[];}catch(_){return[];}}
     const defaultGraphDiagramItems=[['ancestors','Arbre des ascendants'],['descendants','Arbre des descendants'],['hourglass','Sablier familial'],['fan','Éventail des générations'],['kinship','Liens de parenté'],['implexe','Implexe (ancêtres répétés)'],['lineage','Ascendants et descendants (liste)'],['social','Réseau : témoins et voisins'],['occupations','Transmission des métiers'],['migrations','Migrations d’une branche'],['household','Maisonnée et recensements'],['square','Carré'],['circular','Circulaire'],['symmetric','Symétrique'],['fractal','Arbre fractal'],['genogram','Génogramme détaillé'],['distribution','Distribution'],['place_monograph','Monographie de commune']];
     const defaultGraphStatsItems=[['surnames','Noms'],['firstnames','Prénoms'],['saint_names','Prénom et saint du jour'],['firstnames_france','Prénoms : la famille et la France'],['probate_wealth','Richesse d’après les inventaires après décès'],['heights','Taille des ancêtres'],['firstnames_by_generation','Distribution des prénoms par génération'],['birth_places','Lieux de naissance'],['marriage_places','Lieux de mariage'],['death_places','Lieux de décès'],['birth_countries','Pays de naissance'],['death_countries','Pays de décès'],['sex_distribution','Sexes'],['age_at_death','Âge au décès'],['genealogy_age_pyramid','Pyramide des âges complète'],['death_age_by_generation','Âge au décès par génération'],['life_expectancy_generation_century','Espérance de vie génération/siècle'],['life_expectancy_lineage_generation_century','Espérance de vie dans ta lignée'],['life_expectancy_century_branch','Espérance de vie siècle/branche'],['marriage_first_birth_age','Âge mariage / naissances'],['sibling_birth_interval','Intervalle des fratries'],['infant_mortality_period','Mortalité infantile par période'],['marital_patterns','Remariage, veuvage, célibat'],['death_causes','Causes de décès'],['completeness','Complétude des données'],['family_gravity_migration','Migration — centre familial'],['farthest_from_origin','Lieux les plus éloignés'],['residence_duration','Durée de résidence'],['mobility_by_generation','Mobilité par génération'],['birth_years','Années de naissance'],['death_years','Années de décès'],['children_per_family','Enfants par famille'],['occupation_timeline','Métiers dans le temps'],['occupation_by_generation','Métiers par génération'],['occupation_branch_evolution','Métiers par branche'],['endogamy_index','Endogamie / consanguinité']];
     function orderedGraphDiagramItems(includeHidden=false){const keys=defaultGraphDiagramItems.map(i=>i[0]);const order=savedOrder('genealogie-graph-diagram-order',keys);const hidden=graphDiagramHiddenKeys();return order.filter(v=>includeHidden||!hidden.includes(v)).map((v,idx)=>{const item=defaultGraphDiagramItems.find(r=>r[0]===v)||[v,v];return [item[0],String(idx+1).padStart(2,'0'),item[1]];});}
@@ -1182,7 +1234,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         {id:'nasa',label:'NASA (satellite)',items:[['nasa_landsat_weld','Landsat/WELD TrueColor (NASA, 2000)'],['nasa_modis','MODIS Terra TrueColor (NASA, 2024-06-01)']]},
         {id:'ign_es',label:'Espagne (IGN España)',items:[['ign_es_mtn50','MTN50 première édition (Espagne, 1910-1970)'],['ign_es_pnoa','Orthophotos PNOA actuelles (Espagne)']]},
     ];
-    function tileLayerHiddenCategories(){try{return JSON.parse(localStorage.getItem('genealogie-tile-hidden-cats')||'[]');}catch(_){return[];}}
+    function tileLayerHiddenCategories(){try{const v=JSON.parse(localStorage.getItem('genealogie-tile-hidden-cats')||'[]');return Array.isArray(v)?v:[];}catch(_){return[];}}
     function tileCustomCategories(){try{return JSON.parse(localStorage.getItem('genealogie-tile-custom-cats')||'null');}catch(_){return null;}}
     function orderedTileCategories(includeHidden=false){
         const custom=tileCustomCategories();
@@ -1245,6 +1297,23 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         });
         const idx=$('#sidebar-index');if(idx&&state.module&&modules[state.module]&&idx.textContent!=='MON ONGLET')idx.textContent=moduleIndexLabel(state.module);
     }
+    /** ‹ › Menu du haut trop long (onglets cachés remis, petit écran) : un dégradé et une flèche cliquable au bord qui déborde ;
+     *  rien quand tout tient. Posés par-dessus le menu (pas dedans : applyMenuOrder range ses boutons). */
+    function navOverflowHint(nav){
+        if(!nav||nav.dataset.ovHint)return;nav.dataset.ovHint='1';
+        const mk=side=>{const el=document.createElement('div');el.className=`nav-ov-hint is-${side}`;el.hidden=true;el.innerHTML=`<button type="button" class="nav-ov-btn" tabindex="-1" aria-label="${side==='left'?'Voir les onglets à gauche':'Voir les onglets à droite'}">${side==='left'?'‹':'›'}</button>`;
+            el.querySelector('button').addEventListener('click',()=>nav.scrollBy({left:(side==='left'?-1:1)*Math.max(160,nav.clientWidth*.7),behavior:'smooth'}));document.body.appendChild(el);return el;};
+        const L=mk('left'),R=mk('right');let raf=0;
+        const update=()=>{raf=0;const r=nav.getBoundingClientRect(),max=nav.scrollWidth-nav.clientWidth,shown=r.width>0&&r.height>0&&getComputedStyle(nav).display!=='none';
+            const bar=Math.max(0,nav.offsetHeight-nav.clientHeight),h=Math.max(0,r.height-bar);
+            for(const [el,on,x] of [[L,shown&&max>2&&nav.scrollLeft>2,r.left],[R,shown&&max>2&&nav.scrollLeft<max-2,r.right-40]]){el.hidden=!on;if(on){el.style.left=`${x}px`;el.style.top=`${r.top}px`;el.style.height=`${h}px`;}}};
+        const later=()=>{if(!raf)raf=requestAnimationFrame(update);};
+        nav.addEventListener('scroll',later,{passive:true});window.addEventListener('resize',later);window.addEventListener('scroll',later,{passive:true,capture:true});
+        try{new ResizeObserver(later).observe(nav);}catch(_){}
+        new MutationObserver(later).observe(nav,{childList:true,subtree:true,attributes:true,attributeFilter:['style','class','hidden']});
+        new MutationObserver(later).observe(document.documentElement,{attributes:true,attributeFilter:['class','style']});
+        later();
+    }
     /** Onglet raccourci : ouvre un écran de l'app (mêmes cibles que les raccourcis des widgets : module:, list:, maint:, graph:, stat:) */
     async function openCustomScreen(target){
         const [type,...rest]=String(target||'').split(':'),value=rest.join(':');
@@ -1267,7 +1336,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         const url = new URL('api.php', location.href);
         url.searchParams.set('action', action);
         Object.entries(params).forEach(([key, value]) => value !== undefined && url.searchParams.set(key, value));
-        const init = {headers: {'Accept':'application/json'}, ...options};
+        const init = {headers: {'Accept':'application/json', ...(typeof window.LCNDA_GENEALOGY === 'string' ? {'X-Genealogy': window.LCNDA_GENEALOGY} : {})}, ...options};
         if (options.method && options.method !== 'GET') {
             state.writeCount = (state.writeCount || 0) + 1; // une écriture : les données gardées en mémoire (pages du tableau de bord) sont à relire
             init.headers = {...init.headers, 'Content-Type':'application/json', 'X-CSRF-Token':state.csrf};
@@ -1279,6 +1348,8 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         try { response = await fetch(url, init); }
         catch (error) { if (error?.name === 'AbortError') throw error; if (writing) SUBMIT_GUARD.failSeq++; const e = new Error(NET_ERROR_MSG); e.network = true; e.cause = error; throw e; }
         const data = await response.json().catch(() => ({error:'Réponse illisible du serveur'}));
+        // une autre généalogie a été ouverte dans une autre fenêtre : on le dit une fois, avec « ↻ Recharger »
+        if (response.status === 409 && data.genealogy_changed && !api.genealogyWarned) { api.genealogyWarned = true; toast(data.error, 'error', {duration: 60000, action: {label: '↻ Recharger', run: () => location.reload()}}); }
         if (!response.ok || data.error) { if (writing) SUBMIT_GUARD.failSeq++; const e = new Error(data.error || `Erreur ${response.status}`); e.status = response.status; e.conflict = response.status === 409 || !!data.conflict; throw e; }
         // Après une modification, le nombre de personnes affiché est recompté (création, suppression, fusion,
         // ajout d'un parent… : il n'était calculé qu'à l'ouverture de l'application).
@@ -1490,8 +1561,9 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         const msg=String(message??'');
         const ic=icon??(/supprim|retir|effac|vid|détach/i.test(msg)&&!/^\s*[^\p{L}\p{N}\s«"'(]/u.test(msg)?'🗑':'');
         const doUndo=async()=>{
-            try{await undo?.();}
+            let r;try{r=await undo?.();}
             catch(error){toast(`Impossible d’annuler : ${error.message||error}`,'error',{retry:doUndo});return;}
+            if(r&&r.already){toast('Déjà remis : rien à annuler de plus.','',redo?{action:{label:'↷ Rétablir',run:doRedo}}:{});return;} // deuxième « ↶ Annuler » de la même chose
             const what=undoneText||msg.replace(/[.!]+$/,'');toast(/«/.test(what)?`↶ Annulé : ${what}`:`↶ Annulé : « ${what} »`,'',redo?{action:{label:'↷ Rétablir',run:doRedo}}:{});
         };
         const doRedo=async()=>{
@@ -1513,7 +1585,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
      *  undoDelete({type:'note', id, message, redo, after}) → « ↶ Annuler » remet l'élément en base (restore_last_delete), puis after(). */
     function undoDelete({type, id, message='Supprimé.', redo=null, after=null}={}){
         return undoToast(message,{
-            undo:async()=>{await api('restore_last_delete',{}, {method:'POST',body:{entity_type:type,entity_id:Number(id)}});await after?.('undo');},
+            undo:async()=>{const r=await api('restore_last_delete',{}, {method:'POST',body:{entity_type:type,entity_id:Number(id)}});await after?.('undo');return (r?.result||r)?.already?{already:true}:undefined;},
             redo:redo?async()=>{await redo();await after?.('redo');}:null,
         });
     }
@@ -1906,7 +1978,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
                 const warnHtml = warns.length ? `<div class="notice warning"><p>⚠️ À vérifier :</p><ul>${warns.map(w => `<li>${escapeHtml(w)}</li>`).join('')}</ul></div>` : '';
                 if (warns.length && !missing) { result.innerHTML = `<p>Import terminé : ${parts.join(', ')}.</p>${warnHtml}<button type="button" class="button" data-install-continue>Continuer</button>`; result.querySelector('[data-install-continue]').addEventListener('click', () => location.reload()); return; }
                 result.innerHTML = `<p>Import terminé : ${parts.join(', ')}.</p>${warnHtml}`
-                    + (missing ? `<p class="muted">${plural(missing,'fichier')} de média ${Number(missing)<2?'introuvable':'introuvables'} : les fiches existent, mais sans le fichier. Avec une base .db seule, utilise plutôt la « Sauvegarde complète (.zip) » (Réglages → Export), qui contient les médias.</p><p><button class="button" type="button" data-install-continue>Continuer</button></p>` : '<p class="muted">Rechargement…</p>');
+                    + (missing ? `<p class="muted">${plural(missing,'fichier')} de média ${Number(missing)<2?'introuvable':'introuvables'} : les fiches existent, mais sans le fichier. Avec une base .db seule, utilise plutôt la « Sauvegarde complète (.zip) » (Réglages → Export), qui contient les médias.</p><p><button class="button" type="button" data-install-continue>Continuer</button></p>` : waitHtml('Rechargement…'));
                 if (missing) result.querySelector('[data-install-continue]').addEventListener('click', () => location.reload());
                 else setTimeout(() => location.reload(), 900);
             };
@@ -1993,7 +2065,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
                 const data = formObject(personForm);
                 const result = $('#install-person-result');
                 if (!data.first_name?.trim() && !data.last_name?.trim()) return window.LCNDA_UI.fail(personForm.elements.first_name, 'Indique au moins un prénom ou un nom');
-                result.innerHTML = '<p class="muted">Création en cours…</p>';
+                result.innerHTML = waitHtml('Création en cours…');
                 try {
                     const resp = await fetch('api.php?action=save_person', {
                         method: 'POST',
@@ -2002,7 +2074,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
                     });
                     const created = await resp.json().catch(() => ({error: 'Réponse illisible'}));
                     if (!resp.ok || created.error) throw new Error(created.error || 'Erreur serveur');
-                    result.innerHTML = '<p>Première personne créée. Rechargement…</p>';
+                    result.innerHTML = waitHtml('Première personne créée. Rechargement…');
                     setTimeout(() => location.reload(), 700);
                 } catch (error) {
                     result.innerHTML = '';
@@ -2040,6 +2112,10 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     function presetStore(){try{const v=JSON.parse(localStorage.getItem(CUSTOM_PRESETS_KEY)||'{}');return {custom:v&&typeof v.custom==='object'&&v.custom&&!Array.isArray(v.custom)?v.custom:{},order:Array.isArray(v?.order)?v.order:[],hidden:Array.isArray(v?.hidden)?v.hidden:[]};}catch(_){return {custom:{},order:[],hidden:[]};}}
     function savePresetStore(st){try{localStorage.setItem(CUSTOM_PRESETS_KEY,JSON.stringify(st));}catch(_){toast('Enregistrement impossible (place du navigateur ?).','error');}}
     const isHex=c=>typeof c==='string'&&/^#[0-9a-f]{6}$/i.test(c);
+    /* lisibilité d'une couleur sur une autre (règle WCAG) : une seule fonction, pour « ✎ Mes thèmes » et l'avertissement sous « Couleur principale » */
+    const CONTRAST_MIN=4.5;
+    const contrastLum=c=>{const n=parseInt(String(c).slice(1),16),f=v=>{v/=255;return v<=.03928?v/12.92:((v+.055)/1.055)**2.4;};return .2126*f(n>>16)+.7152*f((n>>8)&255)+.0722*f(n&255);};
+    const contrastRatio=(a,b)=>{const x=contrastLum(a),y=contrastLum(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05);};
     function cleanPresetColors(p,base=BUILTIN_DESIGN_PRESETS.portfolio){const out={};PRESET_COLOR_KEYS.forEach(([k])=>{out[k]=isHex(p?.[k])?p[k].toLowerCase():(base[k]||presetInkDefault(!!p?.dark));});out.lineW=presetLineW(p?.lineW);out.dark=!!p?.dark;return out;}
     function allDesignPresets(){const st=presetStore();const out={...BUILTIN_DESIGN_PRESETS};Object.entries(st.custom).forEach(([id,p])=>{if(/^my_[a-z0-9]+$/.test(id))out[id]=cleanPresetColors(p);});return out;}
     window.LCNDA_ALL_DESIGN_PRESETS=()=>allDesignPresets(); // lu par app-apparence.js (couleur principale reprise du thème choisi)
@@ -2085,11 +2161,11 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
             <div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-x>Annuler</button><button type="submit" class="button">${own?'Enregistrer':'Créer le thème'}</button></div></form>`;
         document.body.appendChild(dlg);
         const q=sel=>dlg.querySelector(sel),read=()=>{const o={};PRESET_COLOR_KEYS.forEach(([k])=>{o[k]=q(`[data-c="${k}"]`).value;});o.lineW=presetLineW(q('[data-f="lineW"]').value);o.dark=q('[data-f="dark"]').checked;return o;};
-        // lisibilité : écart de luminosité entre le texte et les fonds (règle WCAG, 4,5 au moins)
-        const lum=c=>{const n=parseInt(String(c).slice(1),16),f=v=>{v/=255;return v<=.03928?v/12.92:((v+.055)/1.055)**2.4;};return .2126*f(n>>16)+.7152*f((n>>8)&255)+.0722*f(n&255);},ratio=(a,b)=>{const x=lum(a),y=lum(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05);};
+        // lisibilité : écart de luminosité entre le texte et les fonds (contrastRatio, règle WCAG, CONTRAST_MIN = 4,5 au moins)
+        const lum=contrastLum,ratio=contrastRatio;
         const paint=()=>{const o=read(),ink=o.ink,ln=`${o.lineW}px solid ${o.line}`;q('[data-prev]').style.cssText=`background:${o.bg};color:${ink};border:${ln};box-sizing:border-box;max-width:100%`;
             q('[data-prev]').innerHTML=`<div style="background:${o.paper};padding:8px;border:${ln}">Fond des panneaux · <a style="color:${o.blue}">un lien</a></div><div class="pv-card" style="background:${o.card};border:${ln}"><div class="pv-head" style="background:${o.cardHead};border-bottom:${ln}">En-tête d’une carte</div><div class="pv-body">Jean MARTIN, ° 1890<br><span class="pv-btn" style="background:${o.blue};border:${ln}">Bouton</span></div></div>`;
-            const bad=[['bg','le fond de la page'],['paper','le fond des panneaux'],['card','le fond des cartes']].filter(([k])=>ratio(ink,o[k])<4.5).map(([,t])=>t);
+            const bad=[['bg','le fond de la page'],['paper','le fond des panneaux'],['card','le fond des cartes']].filter(([k])=>ratio(ink,o[k])<CONTRAST_MIN).map(([,t])=>t);
             q('[data-contrast]').innerHTML=bad.length?(window.LCNDA_UI?.notice?window.LCNDA_UI.notice('warn',`Le texte se lit mal sur ${bad.join(', ')} : choisis un texte plus ${lum(ink)>.4?'foncé':'clair'}${!o.dark&&lum(o.bg)<.2?', ou coche « Thème sombre »':''}.`):''):'';};
         dlg.addEventListener('input',paint);dlg.addEventListener('change',e=>{if(e.target.matches('[data-f="dark"]')){const on=e.target.checked,was=presetInkDefault(!on);['ink','line'].forEach(k=>{const inp=q(`[data-c="${k}"]`);if(inp.value.toLowerCase()===was)inp.value=presetInkDefault(on);});}
             if(e.target.matches('[data-f="from"]')){const p=cleanPresetColors(allDesignPresets()[e.target.value]);PRESET_COLOR_KEYS.forEach(([k])=>{q(`[data-c="${k}"]`).value=p[k];});q('[data-f="lineW"]').value=String(p.lineW);q('[data-f="dark"]').checked=p.dark;const nm=q('[data-f="name"]');if(!nm.dataset.typed)nm.value=`${presetLabel(e.target.value)} (ma version)`;}paint();});
@@ -2145,12 +2221,8 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
             if(e.target.closest('[data-toast-reset]')){undoLocalChange('Messages remis comme au départ',[TOAST_PREFS],()=>{localStorage.removeItem(TOAST_PREFS);applyToastPrefs();},()=>{applyToastPrefs();if(state.module==='maintenance')renderDesignTools();});renderDesignTools();}});
         box.addEventListener('input',e=>{const el=e.target.closest('[data-toast-c]');if(!el)return;const [k,x]=el.dataset.toastC.split('.'),p=toastPrefs();p.colors[k][x]=el.value;save(p);const d=box.querySelector(`[data-toast-kind="${k}"] .toast-color-demo`);if(d){d.style.background=p.colors[k].bg;d.style.color=p.colors[k].fg;}});
         box.addEventListener('change',e=>{if(e.target.matches('[data-toast-ms]')){const p=toastPrefs();p.ms=Number(e.target.value);save(p);toast(`Les messages restent ${TOAST_DURATIONS.find(d=>d[0]===p.ms)[1].replace(/ \(.*\)/,'')}.`);return;}const el=e.target.closest('[data-toast-c]');if(el)tryKind(el.dataset.toastC.split('.')[0]);});}
-    function applyDesign(){
-        applyToastPrefs();
-        const design=readDesignSettings();
-        const presets=allDesignPresets();
-        const preset=(Object.hasOwn(presets,design.preset)&&presets[design.preset])||presets.portfolio; // « constructor », « toString »… ne sont pas des thèmes
-        document.documentElement.dataset.theme=preset.dark?'dark':'';
+    /** le fond des cartes : celui du thème, ou le « Fond des cartes » choisi ; en mode sombre, les fonds clairs (bleu, archive, vert…) donneraient du texte clair sur fond clair : on garde ceux du thème sombre */
+    function designCardBg(preset,cardBackground){
         const cardBackgrounds={
             white:{card:preset.card,cardHead:preset.cardHead},
             portfolio:{card:preset.card,cardHead:preset.cardHead},
@@ -2159,8 +2231,39 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
             archive:{card:'#fff7e5',cardHead:'#efe3c6'},
             green:{card:'#f0fbf4',cardHead:'#dff3e7'},
         };
-        // en mode sombre, les fonds de cartes clairs (bleu, archive, vert…) donneraient du texte clair sur fond clair : on garde ceux du design sombre
-        const cardBg=preset.dark?cardBackgrounds.white:(cardBackgrounds[design.cardBackground]||cardBackgrounds.white);
+        return preset.dark?cardBackgrounds.white:(Object.hasOwn(cardBackgrounds,cardBackground)&&cardBackgrounds[cardBackground]||cardBackgrounds.white);
+    }
+    /* ⚠️ sous « Couleur principale » : la couleur choisie se lit mal sur les fonds du thème (même règle que « ✎ Mes thèmes ») ; « Prendre la couleur du thème » remet celle du Preset (K2, ↶ Annuler) */
+    function mainColorContrast(form){
+        const val=n=>form?.querySelector(`[name="${n}"]`)?.value||'';
+        const presets=allDesignPresets(),pid=val('preset'),preset=(Object.hasOwn(presets,pid)&&presets[pid])||presets.portfolio,blue=String(val('blue')||preset.blue).toLowerCase();
+        if(!isHex(blue))return null;
+        const card=designCardBg(preset,val('cardBackground')).card,ratio=Math.min(...[preset.bg,preset.paper,card].filter(isHex).map(c=>contrastRatio(blue,c)));
+        return {ratio,ok:ratio>=CONTRAST_MIN,blue,themeBlue:isHex(preset.blue)?preset.blue.toLowerCase():''};
+    }
+    function refreshMainColorHint(form=$('#design-form')){
+        const input=form?.querySelector('[name="blue"]'),label=input?.closest('label');if(!label)return;
+        const c=mainColorContrast(form);let hint=label.querySelector('[data-blue-contrast]');
+        if(!c||c.ok){hint?.remove();return;}
+        const num=x=>(x<CONTRAST_MIN?Math.min(Math.round(x*10),Math.ceil(CONTRAST_MIN*10)-1)/10:x).toLocaleString('fr-FR',{minimumFractionDigits:1,maximumFractionDigits:1}); // jamais « 4,5 » pour une couleur qui n'y est pas
+        if(!hint){label.insertAdjacentHTML('beforeend','<small class="ui-hint is-warn" data-blue-contrast role="status"></small>');hint=label.querySelector('[data-blue-contrast]');
+            hint.addEventListener('click',e=>{e.preventDefault(); // un clic sur la phrase n'ouvre pas le choix de couleur (elle est dans le libellé)
+                if(!e.target.closest('[data-blue-theme]'))return;const c2=mainColorContrast(form);if(!c2?.themeBlue)return;
+                input.value=c2.themeBlue;input.dispatchEvent(new Event('input',{bubbles:true}));input.dispatchEvent(new Event('change',{bubbles:true}));});}
+        hint.innerHTML=`⚠️ Sur ce fond, cette couleur se lit mal (contraste ${num(c.ratio)} : il faut ${num(CONTRAST_MIN)}).${c.themeBlue&&c.themeBlue!==c.blue?' <button type="button" class="button small secondary" data-blue-theme>Prendre la couleur du thème</button>':''}`;
+    }
+    function bindMainColorHint(form=$('#design-form')){
+        if(!form)return;refreshMainColorHint(form);
+        const later=e=>{if(e.target?.matches?.('[name="blue"], [name="preset"], [name="cardBackground"]'))setTimeout(()=>refreshMainColorHint(form),0);};
+        form.addEventListener('input',later);form.addEventListener('change',later);
+    }
+    function applyDesign(){
+        applyToastPrefs();
+        const design=readDesignSettings();
+        const presets=allDesignPresets();
+        const preset=(Object.hasOwn(presets,design.preset)&&presets[design.preset])||presets.portfolio; // « constructor », « toString »… ne sont pas des thèmes
+        document.documentElement.dataset.theme=preset.dark?'dark':'';
+        const cardBg=designCardBg(preset,design.cardBackground);
         document.documentElement.style.setProperty('--blue',design.blue||preset.blue);
         document.documentElement.style.setProperty('--bg',preset.bg);
         document.documentElement.style.setProperty('--paper',preset.paper);
@@ -2181,7 +2284,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         document.documentElement.classList.toggle('brand-hidden',design.brandDisplay==='hide');
         const reopen=document.getElementById('sidebar-reopen');if(reopen)reopen.textContent=design.sidebarPosition==='right'?'← Liste':'Liste →';
         document.documentElement.dataset.mapBackground=mapBackgroundValue(design.mapBackground);
-        document.documentElement.style.fontSize=`${Math.round(Number(design.fontScale||1)*100)}%`;
+        {const k=Number(design.fontScale);document.documentElement.style.fontSize=`${Math.round((Number.isFinite(k)&&k>0?Math.min(2,Math.max(0.75,k)):1)*100)}%`;} // un réglage importé ou abîmé (« 40 », « 0 ») ne doit pas rendre l'app illisible : entre 75 % et 200 %, comme le menu
         document.documentElement.style.setProperty('--font-family',fontFamilyStack(design.fontFamily));
         const brandFirst=$('#brand-firstname'),brandLast=$('#brand-lastname');
         if(brandFirst)brandFirst.textContent=design.ownerFirst||'MA';
@@ -2204,6 +2307,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
             if (button.dataset.module === 'personnes' || button.dataset.module === 'animaux') state.scopeSwitch = true; // l'onglet cliqué : sa dernière fiche
             setModule(button.dataset.module);
         });
+        navOverflowHint($('.main-nav'));
         $('#sidebar-toggle').addEventListener('click', () => { $('#app').classList.add('sidebar-collapsed'); persistUiState(); });
         $('#sidebar-reopen').addEventListener('click', () => { $('#app').classList.remove('sidebar-collapsed'); persistUiState(); });
         // l'adresse change (lien, ← → du navigateur) : popstate et hashchange arrivent souvent tous les deux, une seule fois suffit
@@ -2211,6 +2315,8 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
             const href=location.href,now=Date.now();
             if(onRouteEvent.href===href&&now-onRouteEvent.at<250)return;
             onRouteEvent.href=href;onRouteEvent.at=now;
+            // 🧓 « #mode-simple » tapé ou cliqué pendant que l'app tourne : le mode simple s'ouvre (popstate arrive avant son écoute hashchange)
+            if(location.hash==='#mode-simple'){const ms=window.LCNDA_EXT?.modeSimple;if(ms?.open){if(!ms.isOpen?.())ms.open();return;}}
             const route=routeFromHash(location.hash);
             if(route?.maintenanceTab)state.maintenanceTab=route.maintenanceTab;
         if(route?.module==='dashboard')state.dashboardBoard=route.board||'';
@@ -2241,7 +2347,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         const code=['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
         let index=0;
         document.addEventListener('keydown',event=>{
-            if(event.target.matches?.('input,textarea,select')||$('#lightbox')?.open)return;
+            if(event.target.matches?.('input,textarea,select')||$('#lightbox')?.open||document.documentElement.classList.contains('ms-open'))return;
             const key=event.key.length===1?event.key.toLowerCase():event.key;
             index=key===code[index]?index+1:(key===code[0]?1:0);
             if(index===code.length){index=0;openArchiveRoom();}
@@ -2249,6 +2355,8 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     }
 
     var setModuleImpl=null; // var : peut servir avant cette ligne (démarrage)
+    // app.js (defer) s'exécute avant les autres fichiers ; DOMContentLoaded arrive quand ils sont tous passés
+    var pageScriptsReady=new Promise(ok=>{const end=()=>{pageScriptsReady.done=true;ok();};if(document.readyState==='complete')setTimeout(end);else{document.addEventListener('DOMContentLoaded',end,{once:true});window.addEventListener('load',end,{once:true});}});
     function setModule(module,pushHash=true){return setModuleImpl?setModuleImpl(module,pushHash):setModuleReal(module,pushHash);}
     async function setModuleReal(module, pushHash = true) {
         if(state.module==='carte'&&module!=='carte'){hideMapTooltip();const surnameBox=document.getElementById('map-surname-suggestions');if(surnameBox)surnameBox.hidden=true;}
@@ -2271,7 +2379,9 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         const ownTab = module === 'dashboard' ? currentCustomTab() : null;
         $('#sidebar-index').textContent = ownTab ? 'MON ONGLET' : moduleIndexLabel(module);
         $('#sidebar-title').textContent = ownTab ? menuLabel(ownTab.id, `${ownTab.icon ? ownTab.icon + ' ' : ''}${ownTab.name || 'Mon onglet'}`) : module === 'personnes' && state.peopleScope === 'animals' ? menuLabel('animaux', 'Animaux') : menuLabel(module, modules[module][1]);
-        $('#workspace').innerHTML = '<section class="loading-screen"><div class="loading-mark">VB</div><p>Préparation de la vue…</p></section>';
+        $('#workspace').innerHTML = '<section class="loading-screen">'+waitHtml('Préparation de la vue…')+'</section>';
+        // au démarrage, app.js passe avant les autres fichiers (heritage-*.js, defer) : on les attend, sinon un écran qui vient d'eux (Outils de modification, Tableaux, Audios, 📒 Fiches…) s'ouvre vide ou en « ERREUR … reading 'map' »
+        if(pageScriptsReady&&!pageScriptsReady.done){await pageScriptsReady;if(renderToken!==state.workspaceToken)return;}
         renderSidebar();
         try {
         if (module === 'dashboard') await renderDashboard(renderToken);
@@ -2286,6 +2396,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
             if (module === 'fiches') await window.LCNDA_EXT?.fiches?.render?.(renderToken);
             if (module === 'tresors') await window.LCNDA_EXT?.tresors?.render?.(renderToken); // ✨ trésors de famille (heritage-tresors.js)
             if (module === 'adn') await window.LCNDA_EXT?.adn?.render?.(renderToken);
+            if (module === 'documents' || module === 'catalogue') await window.LCNDA_EXT?.onglets?.[module]?.render?.(renderToken); // 📄 Documents, 🎨 Catalogue raisonné (heritage-onglets-*.js)
             if (module === 'suivi') await renderDashboard(renderToken); // 🐾 Suivi des animaux : le moteur des widgets du tableau de bord, ses pages à lui (heritage-suivi.js)
             if (module === 'comparaison') await renderComparison(renderToken);
             if (module === 'maintenance') await renderMaintenance(renderToken);
@@ -2311,12 +2422,12 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         if(raw.startsWith('{')){
             try{raw=String(JSON.parse(raw).hash||'').trim();}catch(_){}
         }
-        raw=decodeURIComponent(raw.replace(/^#/,'')).trim();
+        try{raw=decodeURIComponent(raw.replace(/^#/,'')).trim();}catch(_){return null;} // « #%E0%A4%A » (adresse abîmée) : on reste où l'on est
         raw=raw.replace(/^!?\//,'').replace(/^!/,'');
         if(!raw)return null;
         const parts=raw.split('/').map(part=>part.trim()).filter(Boolean);
         const module=parts[0]||'';
-        if(!modules[module])return null;
+        if(!Object.hasOwn(modules,module)||!modules[module])return null;
         // 🗂 « #personnes/12 » et « #personnes/12/famille » : la fiche et sa section (nom sans accents, ou identifiant stable)
         const sheet=module==='personnes'&&/^\d{1,10}$/.test(parts[1]||'')?{personId:Number(parts[1]),section:String(parts[2]||'').toLowerCase().replace(/[^a-z0-9_-]/g,'').slice(0,60)}:{personId:0,section:''};
         return {module,maintenanceTab:module==='maintenance'&&parts[1]?parts[1]:'',board:module==='dashboard'&&CUSTOM_TAB_ID.test(parts[1]||'')?parts[1]:'',...sheet};
@@ -2334,6 +2445,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     function moduleHash(module=state.module){
         if(module==='maintenance')return `#maintenance/${encodeURIComponent(state.maintenanceTab||'issues')}`;
         if(module==='dashboard'&&state.dashboardBoard)return `#dashboard/${encodeURIComponent(state.dashboardBoard)}`;
+        if(module==='documents'||module==='catalogue'){const h=window.LCNDA_EXT?.onglets?.[module]?.hash?.();if(h)return h;} // 📄 « #documents/12 », 🎨 « #catalogue/45/301 »
         if(module==='personnes'&&Number(state.currentPersonId)){const id=Number(state.currentPersonId),sh=state.sheetHash;return `#personnes/${id}${sh&&Number(sh.id)===id&&sh.slug?`/${encodeURIComponent(sh.slug)}`:''}`;}
         return `#${module}`;
     }
@@ -2415,7 +2527,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         setTimeout(()=>{['wheel','touchstart','keydown','pointerdown'].forEach(ev=>window.removeEventListener(ev,stop,{capture:true}));if(scrollRestoring&&scrollRestoring.mod===mod)scrollRestoring=null;},6100);
     }
 
-    const SIDEBAR_MODULES = ['dashboard', 'suivi', 'personnes', 'graphiques', 'jeu', 'carte', 'listes', 'chronologie', 'recherche', 'enquetes', 'fiches', 'adn', 'comparaison', 'maintenance'];
+    const SIDEBAR_MODULES = ['dashboard', 'suivi', 'documents', 'catalogue', 'personnes', 'graphiques', 'jeu', 'carte', 'listes', 'chronologie', 'recherche', 'enquetes', 'fiches', 'adn', 'comparaison', 'maintenance'];
     function renderSidebar() {
         sidebarController?.abort();sidebarController=new AbortController();
         const content = $('#sidebar-content');
@@ -2436,6 +2548,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         if (state.module === 'enquetes') renderInvestigationsSidebar(content, footer);
         if (state.module === 'fiches') window.LCNDA_EXT?.fiches?.sidebar?.(content, footer);
         if (state.module === 'adn') window.LCNDA_EXT?.adn?.sidebar?.(content, footer);
+        if (state.module === 'documents' || state.module === 'catalogue') window.LCNDA_EXT?.onglets?.[state.module]?.sidebar?.(content, footer);
         if (state.module === 'comparaison') renderComparisonSidebar(content, footer);
         if (state.module === 'maintenance') renderMaintenanceSidebar(content, footer);
     }
@@ -2706,7 +2819,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
             <small>Champs attendus (${record.year}) : ${(record.expected_fields||expectedCensusFields(record.year)).map(escapeHtml).join(', ')}</small>
             ${recordMedia.length?`<div class="census-media-strip">${recordMedia.slice(0,8).map((item,index)=>`<button data-view-census-media="${record.id}" title="${escapeHtml(item.title||item.filename)}">${normalizedMediaType(item)==='image'?`<img src="media/${encodeURIComponent(item.thumbnail||item.filename)}" alt="">`:`<span class="pdf-pill">${mediaTypeShortLabelWithIcon(item)}</span>`}</button>`).join('')}${recordMedia.length>8?`<small>+ ${recordMedia.length-8}</small>`:''}</div>`:''}
             ${recordMedia.some(mediaDocumentSummary)?`<div class="census-document-refs">${recordMedia.filter(mediaDocumentSummary).map(item=>`<span>${mediaDocumentLink(item)}</span>`).join('')}</div>`:''}
-            <div class="census-household">${(record.members||[]).map(member=>{const dates=member.person_id&&member.birth_year?(member.death_year?`${member.birth_year} — ${member.death_year}`:`${member.birth_year} — ?`):'';return `<span class="census-household-member">${member.person_id?`<button class="table-link" data-open-person="${member.person_id}">${escapeHtml(member.person_name||member.display_name)}</button>`:escapeHtml(member.display_name||'Personne non liée')}${dates?` <small class="census-member-dates">(${escapeHtml(dates)})</small>`:''}${member.household_position?` · ${escapeHtml(member.household_position)}`:''}${member.occupation?` · ${escapeHtml(member.occupation)}`:''}${member.employer?` · <button type="button" class="table-link" data-employer-open="${escapeHtml(member.employer)}" title="Fiche de l’employeur">🏢 ${escapeHtml(member.employer)}</button>`:''}${member.birth_place?` · né(e) à ${escapeHtml(member.birth_place)}`:''}${locked?'':`<span class="inline-actions">${actionButton('edit','Modifier ce membre',`data-edit-census-member="${member.id}"`)}${actionButton('delete','Retirer du foyer',`data-delete-census-member="${member.id}"`)}</span>`}</span>`;}).join('')}</div>
+            <div class="census-household">${(record.members||[]).map(member=>{const dates=member.person_id&&member.birth_year?(member.death_year?`${member.birth_year} — ${member.death_year}`:`${member.birth_year} — ?`):'';return `<span class="census-household-member">${member.person_id?`<button class="table-link" data-open-person="${member.person_id}">${escapeHtml(member.person_name||member.display_name)}</button>`:escapeHtml(member.display_name||'Personne non liée')}${dates?` <small class="census-member-dates">(${escapeHtml(dates)})</small>`:''}${member.household_position?` · ${escapeHtml(member.household_position)}`:''}${member.occupation?` · ${escapeHtml(member.occupation)}`:''}${member.employer?` · <button type="button" class="table-link" data-employer-open="${escapeHtml(member.employer)}" title="Fiche de l’employeur">🏢 ${escapeHtml(member.employer)}</button>`:''}${member.birth_place?` · ${accord({gender:member.person_gender},'né(e) à',{x:'naissance à'})} ${escapeHtml(member.birth_place)}`:''}${locked?'':`<span class="inline-actions">${actionButton('edit','Modifier ce membre',`data-edit-census-member="${member.id}"`)}${actionButton('delete','Retirer du foyer',`data-delete-census-member="${member.id}"`)}</span>`}</span>`;}).join('')}</div>
             ${locked?'':`<button class="button small secondary" data-add-census-member="${record.id}">＋ Membre du foyer</button>`}
         </article>`;}).join('');
         return card('08','Recensements',records.length,`<div class="census-intro">Les années grisées sont probablement impossibles d’après naissance/décès. 1916 et 1941 ne sont pas proposés car les recensements généraux n’ont pas eu lieu.</div><div class="census-years">${yearButtons}</div>${specialAdd}${detailToggle}${recordList&&detailsExpanded?`<div class="census-records">${recordList}</div>`:''}`,'span-12');
@@ -2827,7 +2940,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         const isLocked=Number(person.is_locked)===1;
         const editOnly=html=>isLocked?'':html;
         const orderedMedia = [...media].sort((a,b) => mediaChronologyKey(a) - mediaChronologyKey(b) || Number(a.link_position||0) - Number(b.link_position||0) || Number(a.id) - Number(b.id));
-        const portraitOld = person.portrait ? `<img class="portrait" src="media/${encodeURIComponent(person.portrait)}" alt="Portrait de ${escapeHtml(personName(person))}">` : `<div class="portrait portrait-placeholder">${escapeHtml((person.first_name?.[0] || '') + (person.last_name?.[0] || ''))}</div>`;
+        const portraitOld = person.portrait ? `<img class="portrait" src="media/${encodeURIComponent(person.portrait)}" alt="Portrait de ${escapeHtml(personName(person))}">` : `<div class="portrait portrait-placeholder">${escapeHtml(([...(person.first_name || '')][0] || '') + ([...(person.last_name || '')][0] || ''))}</div>`;
         // K7 : le portrait commun (88 px) si Apparence → Portraits n'est pas « Comme avant »
         const portrait = window.LCNDA_UI?.avatarOn?.() ? `<span class="portrait-lc" role="img" aria-label="Portrait de ${escapeHtml(personName(person))}">${window.LCNDA_UI.avatar({...person, name: personName(person), photo: person.portrait ? `media/${encodeURIComponent(person.portrait)}` : ''}, 88)}</span>` : portraitOld;
         const parishes=detail.heritage?.parishes||{};
@@ -2840,9 +2953,9 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         const evtFilter=eventsFilterSettings(person.id);
         const animalIdentity=person.kind==='animal'?window.LCNDA_EXT?.animalIdentityHtml?.(detail):'';
         const identityRows=animalIdentity||(person.kind==='animal'?[ // un animal : ses mots à lui (le reste est dans « Caractéristiques de l'animal »)
-            ['Nom',person.first_name],['Autres noms',person.middle_name],['Affixe',person.last_name],['Sexe',person.gender==='male'?'♂ mâle':person.gender==='female'?'♀ femelle':'?'],['Statut',{living:'En vie',deceased:'Mort(e)'}[person.living_status]||'À vérifier'],['Mode vérification',person.verify_status==='verify'?'À vérifier':'Normal'],['Rôle / travail',person.occupation],['Taille',person.height_text],['Description',person.physical_description],['Yeux',person.eye_color],['Référence',person.reference_number]
+            ['Nom',person.first_name],['Autres noms',person.middle_name],['Affixe',person.last_name],['Sexe',person.gender==='male'?'♂ mâle':person.gender==='female'?'♀ femelle':'?'],['Statut',{living:'En vie',deceased:accord(person,'Mort(e)',{x:'Mort'})}[person.living_status]||'À vérifier'],['Mode vérification',person.verify_status==='verify'?'À vérifier':'Normal'],['Rôle / travail',person.occupation],['Taille',person.height_text],['Description',person.physical_description],['Yeux',person.eye_color],['Référence',person.reference_number]
         ].filter(([,v],i)=>v||i<5) : [
-            ['Prénom',person.first_name],['Autres prénoms',person.middle_name],['Nom inscrit',person.last_name],['Titre / préfixe',[person.prefix,person.suffix].filter(Boolean).join(' ')],['Genre',genderText(person.gender)],['Statut',lifeText(person.living_status)],['Mode vérification',person.verify_status==='verify'?'À vérifier':'Normal'],['Métier / activité',person.occupation],['Taille',person.height_text],['Description physique',person.physical_description],['Yeux',person.eye_color],['Peau',person.skin_color],['Nationalité',person.nationality],['Origine / mention',person.ethnicity],...( person.mort_pour_la_france==='yes'?[['Mort Pour La France','Oui']]:[] ),['Référence',person.reference_number]
+            ['Prénom',person.first_name],['Autres prénoms',person.middle_name],['Nom inscrit',person.last_name],['Titre / préfixe',[person.prefix,person.suffix].filter(Boolean).join(' ')],['Genre',genderText(person.gender)],['Statut',lifeText(person.living_status, person.gender)],['Mode vérification',person.verify_status==='verify'?'À vérifier':'Normal'],['Métier / activité',person.occupation],['Taille',person.height_text],['Description physique',person.physical_description],['Yeux',person.eye_color],['Peau',person.skin_color],['Nationalité',person.nationality],['Origine / mention',person.ethnicity],...( person.mort_pour_la_france==='yes'?[['Mort Pour La France','Oui']]:[] ),['Référence',person.reference_number]
         ]).map(([label,value])=>identityDataRow(label,value,blockSettings)).join('');
         const personBlockRenderers={
             identity:index=>card(index,'Identité','',`<dl class="data-list">${identityRows}</dl>${personSaintHtml(saint)}${dateEstimatesHtml(estimates,person)}${identityVariantsHtml(events,census,person,orderedMedia,blockSettings)}${person.surname_group?`<div class="identity-variants identity-surname"><dl class="data-list">${dataRow('Famille / groupe',person.surname_group)}</dl></div>`:''}${onlineSheetsHtml(onlineSheets,person.id,isLocked)}<div class="identity-labels">${entityLabelsField('person',person.id,labels,isLocked)}</div>${person.kind==='animal'?identityEmptyBar(person.id,blockSettings):''}`,'span-4',editOnly(`${actionButton('edit','Modifier l’identité',`data-edit-person-inline="${person.id}"`)}`)),
@@ -2898,7 +3011,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
                 }).join('')}</div>`:'')+told:empty('Aucun témoignage ou souvenir pour l’instant',{icon:'🎙️',hint:askLabel?'Un enregistrement, ou les souvenirs d’un proche : « 💬 Poser des questions » prépare un questionnaire à lui envoyer.':'',action:isLocked?null:{label:'＋ Ajouter un témoignage',attrs:'data-empty-click="[data-add-memory-inline]"'}});
                 return card(index,'Témoignages / souvenirs',memoryItems.length+testimonies.length,body,'span-12',`${askLabel?editOnly(`<button type="button" class="button small secondary" data-qp-ask-person="${person.id}">${askLabel}</button>`):''}${editOnly(actionButton('add','Ajouter un témoignage / souvenir',`data-add-memory-inline="${person.id}"`))}`);
             },
-            signatures:index=>card(index,'Signatures',signatures.length,signatures.length?`<div class="list-card-grid person-signature-grid">${signatures.map(sig=>`<article class="list-card" data-open-media="${sig.media_id}"><span class="list-card-icon">${sig.thumbnail?`<img src="media/${encodeURIComponent(sig.thumbnail)}" alt="">`:'✍'}</span><div><small class="list-card-date">${escapeHtml(sig.date_text||sig.created_at||'Date inconnue')}</small><h3>${escapeHtml(sig.title||sig.document_title||sig.filename||'Signature')}</h3><p>${escapeHtml(sig.document_reference||sig.document_title||'Média lié')}</p>${sig.note?`<p class="list-card-place">${escapeHtml(sig.note)}</p>`:''}<div class="list-card-details"><small>${escapeHtml(confidenceLabel(sig.confidence))}</small></div></div></article>`).join('')}</div>`:empty('Aucune signature identifiée.',{icon:'✍️'}),'span-12'),
+            signatures:index=>card(index,'Signatures',signatures.length,signatures.length?`<div class="list-card-grid person-signature-grid">${signatures.map(sig=>`<article class="list-card" data-open-media="${sig.media_id}"><span class="list-card-icon">${sig.thumbnail?`<img src="media/${encodeURIComponent(sig.thumbnail)}" alt="">`:'✍'}</span><div><small class="list-card-date">${sig.date_text?escapeHtml(sig.date_text):sig.created_at?(window.LCNDA_UI?.when?.(sig.created_at,{label:'Repérée'})||escapeHtml(sig.created_at)):'Date inconnue'}</small><h3>${escapeHtml(sig.title||sig.document_title||sig.filename||'Signature')}</h3><p>${escapeHtml(sig.document_reference||sig.document_title||'Média lié')}</p>${sig.note?`<p class="list-card-place">${escapeHtml(sig.note)}</p>`:''}<div class="list-card-details"><small>${escapeHtml(confidenceLabel(sig.confidence))}</small></div></div></article>`).join('')}</div>`:empty('Aucune signature identifiée.',{icon:'✍️'}),'span-12'),
             notes:index=>card(index,'Notes',notes.length,notes.length ? notes.map(note => `<article class="note-item"><div class="item-title-row">${note.title ? `<strong>${escapeHtml(note.title)}</strong>`:'<strong>Note sans titre</strong>'}<span class="item-title-extra">${entityLabelsInline('note',note.id,note.labels,true)}${editOnly(`<span class="inline-actions">${actionButton('edit','Modifier',`data-edit-note="${note.id}"`)}${actionButton('delete','Supprimer',`data-delete-note="${note.id}"`)}</span>`)}</span></div><p>${linkify(note.body)}</p></article>`).join('') : empty('Aucune note pour l’instant',{icon:'📝',action:isLocked?null:{label:'＋ Ajouter une note',attrs:`data-add-note-inline="${person.id}"`}}),'span-4',editOnly(actionButton('add','Ajouter une note',`data-add-note-inline="${person.id}"`))),
             census:index=>renderCensusCard(person,census,orderedMedia,isLocked).replace('card-index">08<','card-index">'+index+'<'),
             sources:index=>card(index,'Sources & citations',sources.length,sources.length ? sources.map(source=>sourceItemHtml(source,events,isLocked)).join('') : empty('Aucune source pour l’instant',{icon:'📚',hint:'Note d’où vient chaque information : acte, registre, site…',action:isLocked?null:{label:'＋ Ajouter une source',attrs:`data-add-source-inline="${person.id}"`}}),'span-4',`${sources.length?`<button type="button" class="icon-button small" data-cite-person="${person.id}" title="❝ Toutes les citations de la fiche, prêtes à copier, exporter ou imprimer" aria-label="Toutes les citations">❝</button>`:''}${editOnly(actionButton('add','Ajouter une source',`data-add-source-inline="${person.id}"`))}`),
@@ -2997,8 +3110,8 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
                 return card(index,`Œuvres — ${escapeHtml(disciplineLabel)}`,artisticEvs.length,body,'span-12',editOnly(actionButton('add','Ajouter une œuvre / réalisation',`data-add-event-inline-artistic="${person.id}"`)));
             },
             web_search:index=>card(index,'Chercher sur internet','',webSearchPanelHtml(detail,webSearchSettings(person.id),`person-${person.id}`),'span-12'),
-            ascendants:index=>{const ls=lineageSettings(person.id);return card(index,'Ascendants','',`<div data-lineage-block="asc"><small class="muted">Chargement…</small></div>`,'span-6',lineageDepthSelect('asc',ls.asc));},
-            descendants:index=>{const ls=lineageSettings(person.id);return card(index,'Descendants','',`<div data-lineage-block="desc"><small class="muted">Chargement…</small></div>`,'span-6',lineageDepthSelect('desc',ls.desc));},
+            ascendants:index=>{const ls=lineageSettings(person.id);return card(index,'Ascendants','',`<div data-lineage-block="asc">${waitHtml('Chargement des ascendants…')}</div>`,'span-6',lineageDepthSelect('asc',ls.asc));},
+            descendants:index=>{const ls=lineageSettings(person.id);return card(index,'Descendants','',`<div data-lineage-block="desc">${waitHtml('Chargement des descendants…')}</div>`,'span-6',lineageDepthSelect('desc',ls.desc));},
             family_objects:index=>card(index,'Objets de famille',personObjects.length||'',personObjects.length?`<div class="collection-grid is-compact">${personObjects.map(o=>familyObjectCardHtml(o,true)).join('')}</div>`:empty('Aucun objet lié à cette personne.',{icon:'🏺'}),'span-12',`<button class="button small secondary" type="button" data-open-list="family_objects">Gérer les objets</button>`),
             family_memories:index=>{const kept=personMemories.filter(m=>m.kind!=='testimony');/* les témoignages sont dans « Témoignages / souvenirs » */return card(index,'Mémoire familiale',kept.length||'',kept.length?`<div class="collection-grid is-compact">${kept.map(m=>familyMemoryCardHtml(m,true)).join('')}</div>`:empty('Aucun souvenir lié à cette personne.',{icon:'💬'}),'span-12',`<button class="button small secondary" type="button" data-open-list="family_memories">Gérer la mémoire familiale</button>`);},
             person_exports:index=>{
@@ -3012,7 +3125,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         const pageHtml = `<article class="page person-page">
             <div class="person-hero">
                 ${portrait}<div><span class="eyebrow">${person.kind==='animal'?`🐾 FICHE ANIMAL${detail.heritage?.animal?.data?.species?' · '+escapeHtml(window.LCNDA_EXT?.speciesLabel?.(detail.heritage.animal.data.species)||(detail.heritage.animal.species||{})[detail.heritage.animal.data.species]||''):''}${detail.heritage?.animal?.data?.breed?' · '+escapeHtml(detail.heritage.animal.data.breed):''}`:'FICHE INDIVIDUELLE'} · #${person.id}</span><h2>${escapeHtml(personName(person))}</h2><div class="person-meta"><span>${escapeHtml(years(person))}</span><span>${person.kind==='animal'?`Sexe : <strong>${person.gender==='male'?'♂ mâle':person.gender==='female'?'♀ femelle':'?'}</strong>`:`Genre : <strong>${genderText(person.gender)}</strong>`}</span>${person.surname_group ? `<span>Groupe : <strong>${escapeHtml(person.surname_group)}</strong></span>`:''}</div></div>
-                <div class="person-hero-tools"><div class="person-hero-status">${sosaNumber?`<span class="ui-badge is-sosa" title="${sosaNumber.includes('&')?'Numéros Sosa (ancêtre présent plusieurs fois dans l’arbre)':'Numéro Sosa'} ${escapeHtml(sosaNumber)}">Sosa ${escapeHtml(String(sosaNumber))}</span>`:''}${dabovilleNumber?`<span class="ui-badge is-blue" title="Numéro d'Aboville ${escapeHtml(dabovilleNumber)}">d’Aboville ${escapeHtml(dabovilleNumber)}</span>`:''}<span class="ui-badge is-${({living:'green',deceased:'black'})[person.living_status]||'yellow'} status-badge ${person.living_status}">${person.living_status==='deceased'?'† ':''}${lifeText(person.living_status)}</span>${person.outside_genealogy?'<span class="ui-badge is-grey">Hors généalogie</span>':''}${Number(person.is_artist)?`<span class="ui-badge artist-badge" title="${escapeHtml({'photographe':'Photographe','peintre':'Peintre','ecrivain':'Écrivain','cineaste':'Cinéaste','sculpteur':'Sculpteur','dramaturge':'Dramaturge','poete':'Poète','videaste':'Vidéaste','plasticien':'Plasticien','danseur':'Danseur','acteur':'Acteur'}[person.artist_discipline||'']||'Artiste')}">🎨 Artiste</span>`:''}</div><div class="person-hero-actions">${actionButton(Number(person.is_bookmarked)?'bookmark-on':'bookmark',bookmarkButtonLabel(person),`data-toggle-bookmark="${person.id}"`)}${editOnly(actionButton('delete','Supprimer cette fiche',`data-delete-person="${person.id}"`))}${actionButton(isLocked?'lock':'unlock',isLocked?'Déverrouiller la fiche':'Verrouiller la fiche',`data-toggle-person-lock="${person.id}" data-lock-value="${isLocked?0:1}"`)}${actionButton('history','Historique de la fiche',`data-person-history="${person.id}"`)}</div></div>
+                <div class="person-hero-tools"><div class="person-hero-status">${sosaNumber?`<span class="ui-badge is-sosa" title="${sosaNumber.includes('&')?'Numéros Sosa (ancêtre présent plusieurs fois dans l’arbre)':'Numéro Sosa'} ${escapeHtml(sosaNumber)}">Sosa ${escapeHtml(String(sosaNumber))}</span>`:''}${dabovilleNumber?`<span class="ui-badge is-blue" title="Numéro d'Aboville ${escapeHtml(dabovilleNumber)}">d’Aboville ${escapeHtml(dabovilleNumber)}</span>`:''}<span class="ui-badge is-${({living:'green',deceased:'black'})[person.living_status]||'yellow'} status-badge ${person.living_status}">${person.living_status==='deceased'?'† ':''}${lifeText(person.living_status, person.gender)}</span>${person.outside_genealogy?'<span class="ui-badge is-grey">Hors généalogie</span>':''}${Number(person.is_artist)?`<span class="ui-badge artist-badge" title="${escapeHtml({'photographe':'Photographe','peintre':'Peintre','ecrivain':'Écrivain','cineaste':'Cinéaste','sculpteur':'Sculpteur','dramaturge':'Dramaturge','poete':'Poète','videaste':'Vidéaste','plasticien':'Plasticien','danseur':'Danseur','acteur':'Acteur'}[person.artist_discipline||'']||'Artiste')}">🎨 Artiste</span>`:''}</div><div class="person-hero-actions">${actionButton(Number(person.is_bookmarked)?'bookmark-on':'bookmark',bookmarkButtonLabel(person),`data-toggle-bookmark="${person.id}"${bookmarkShortcut()?` data-shortcut="${bookmarkShortcut()}"`:''}`)}${editOnly(actionButton('delete','Supprimer cette fiche',`data-delete-person="${person.id}"`))}${actionButton(isLocked?'lock':'unlock',isLocked?'Déverrouiller la fiche':'Verrouiller la fiche',`data-toggle-person-lock="${person.id}" data-lock-value="${isLocked?0:1}"`)}${actionButton('history','Historique de la fiche',`data-person-history="${person.id}"`)}</div></div>
             </div>
             <div class="relations-strip">${relationChips('Parents','parent',parents,'unknown',isLocked)}${relationChips('Conjoints','spouse',partners,person.spouse_status,isLocked)}${relationChips('Enfants','child',children,person.children_status,isLocked)}${siblingChips('Frères & sœurs',siblings)}</div>
             ${renderPersonBody(person.id,personBlockRenderers,htmlOnly)}
@@ -3847,7 +3960,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         return `<div class="stats-custom-grid">${groups.map((group,gIndex)=>{const groupRows=rows.filter(row=>(row.generation||'—')===group);return `<section class="stats-custom-panel"><h3>${escapeHtml(group)}</h3><div class="stats-chart compact">${groupRows.map((row,index)=>chartRow(row,max,index+gIndex,'',palette,who,rows.indexOf(row))).join('')}</div></section>`;}).join('')}</div>`;
         }
         if(data.kind==='metric_grid'){
-            return `<div class="stats-custom-grid">${groups.map(group=>{const groupRows=rows.filter(row=>(row.generation||'—')===group).slice(0,14);return `<section class="stats-custom-panel"><h3>${escapeHtml(group)}</h3>${groupRows.map((row,index)=>{const unit=row.unit||'ans';const countUnit=unit==='évènements'?'evt.':'pers.';return `<div class="stats-metric-row"><span>${escapeHtml(row.label)}</span><strong style="color:${palette[index%palette.length]}">${Number(row.value||0).toLocaleString('fr-FR')} ${escapeHtml(unit)}</strong><small>${Number(row.count||0).toLocaleString('fr-FR')} ${countUnit}</small></div>`;}).join('')}</section>`;}).join('')}</div>`;
+            return `<div class="stats-custom-grid">${groups.map(group=>{const groupRows=rows.filter(row=>(row.generation||'—')===group).slice(0,14);return `<section class="stats-custom-panel"><h3>${escapeHtml(group)}</h3>${groupRows.map((row,index)=>{const unit=row.unit||'ans';const countUnit=unit==='évènements'?'evt.':'pers.';return `<div class="stats-metric-row"><span>${escapeHtml(row.label)}</span><strong class="stats-ink" style="--stat-c:${palette[index%palette.length]}">${Number(row.value||0).toLocaleString('fr-FR')} ${escapeHtml(unit)}</strong><small>${Number(row.count||0).toLocaleString('fr-FR')} ${countUnit}</small></div>`;}).join('')}</section>`;}).join('')}</div>`;
         }
         if(data.kind==='timeline_bands'){
             return `<div class="stats-timeline-bands">${groups.map((group,gIndex)=>{const groupRows=rows.filter(row=>(row.generation||'—')===group).slice(0,10);return `<section><h3>${escapeHtml(group)}</h3><div>${groupRows.map((row,index)=>`<span class="stats-word-chip" style="--chip-color:${palette[(index+gIndex)%palette.length]};font-size:${Math.min(1.35,.82+Number(row.value||1)/max*.75).toFixed(2)}rem">${escapeHtml(row.label)} <small>${Number(row.value||0)}</small></span>`).join('')}</div></section>`;}).join('')}</div>`;
@@ -3856,7 +3969,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
             return `<div class="stats-word-cloud">${groups.map((group,gIndex)=>{const groupRows=rows.filter(row=>(row.generation||'—')===group).slice(0,18);return `<section><h3>${escapeHtml(group)}</h3><div>${groupRows.map((row,index)=>`<span class="stats-word-chip" style="--chip-color:${palette[(index+gIndex)%palette.length]};font-size:${Math.min(1.7,.8+Number(row.value||1)/max*1.25).toFixed(2)}rem">${escapeHtml(row.label)} <small>${Number(row.value||0)}</small></span>`).join('')}</div></section>`;}).join('')}</div>`;
         }
         if(data.kind==='indicator_grid'){
-            return `<div class="stats-indicator-grid">${rows.map((row,index)=>`<article class="stats-indicator-card"><span>${escapeHtml(row.label)}</span><strong style="color:${palette[index%palette.length]}">${Number(row.value||0).toLocaleString('fr-FR')}${row.unit==='%'?' %':''}</strong>${row.unit&&row.unit!=='%'?`<small>${escapeHtml(row.unit)}</small>`:''}</article>`).join('')}</div>`;
+            return `<div class="stats-indicator-grid">${rows.map((row,index)=>`<article class="stats-indicator-card"><span>${escapeHtml(row.label)}</span><strong class="stats-ink" style="--stat-c:${palette[index%palette.length]}">${Number(row.value||0).toLocaleString('fr-FR')}${row.unit==='%'?' %':''}</strong>${row.unit&&row.unit!=='%'?`<small>${escapeHtml(row.unit)}</small>`:''}</article>`).join('')}</div>`;
         }
         return `<div class="stats-chart">${rows.map((row,index)=>chartRow(row,max,index,data.type,palette)).join('')}</div>`;
     }
@@ -4112,7 +4225,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     const readingAbbreviations=[
         ['led., lad., lesd.','ledit, ladite, lesdits : la personne ou la chose déjà nommée plus haut'],
         ['dud., desd.','dudit, desdits'],
-        ['susd., sd.','susdit(e) : nommé(e) ci-dessus'],
+        ['susd., sd.','susdit, susdite : la personne nommée ci-dessus'],
         ['d., dit, dite','surnom ou nom de terre : « Jean Martin dit Lafleur »'],
         ['fils de feu, fille de feu','le père (ou la mère) est déjà mort au moment de l’acte'],
         ['fils de défunt, de deffunct','même sens que « fils de feu »'],
@@ -4140,8 +4253,8 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         ['&, &c','et, et cetera'],
         ['ledit jour et an que dessus','à la date déjà écrite en tête de l’acte'],
         ['en légitime mariage','enfant de parents mariés entre eux'],
-        ['fils naturel, fille naturelle','né(e) hors mariage'],
-        ['posthume','né(e) après la mort du père'],
+        ['fils naturel, fille naturelle','enfant né hors mariage'],
+        ['posthume','enfant né après la mort du père'],
         ['mineur','moins de 25 ans sous l’Ancien Régime, moins de 21 ans de 1792 à 1974'],
         ['an VI, 12 brumaire','date du calendrier républicain (convertisseur dans Calendrier / mesures)'],
         ['+, †, croix','décédé'],
@@ -4154,7 +4267,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         ['matrimonium contraxerunt','ils se sont mariés'],['matrimonio juncti','unis par le mariage'],['sponsus, sponsa','fiancé, fiancée ou époux, épouse'],
         ['proclamationibus factis, bannis','les bans ayant été publiés'],['dispensatio in tertio gradu consanguinitatis','dispense de parenté (cousins issus de germains)'],
         ['viduus, vidua','veuf, veuve'],['relicta','veuve de (« laissée par »)'],['quondam, q., defunctus, def.','feu, défunt'],
-        ['obiit','il (elle) est mort(e)'],['sepultus est, sepulta est','a été inhumé(e)'],['in coemeterio','au cimetière'],['in ecclesia','dans l’église'],
+        ['obiit','il est mort, elle est morte'],['sepultus est, sepulta est','il a été inhumé, elle a été inhumée'],['in coemeterio','au cimetière'],['in ecclesia','dans l’église'],
         ['annorum circiter quadraginta','âgé d’environ quarante ans'],['aetatis suae','de son âge'],['anno Domini','l’an du Seigneur'],
         ['die, mensis','le jour, du mois'],['ejusdem mensis','du même mois'],['hujus parochiae, ex hac parochia','de cette paroisse'],['parochianus','paroissien'],
         ['testes, praesentibus','témoins, en présence de'],['infrascriptus, subsignatus','soussigné'],['parochus, curatus, rector','curé'],['vicarius','vicaire'],
@@ -4449,6 +4562,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     }
     let shortcutCaptureHandler=null; // onglet Raccourcis : la prochaine touche est enregistrée au lieu d'agir
     document.addEventListener('keydown',event=>{
+        if(document.documentElement.classList.contains('ms-open'))return; // 🧓 mode simple : ses propres touches seulement (pas de fenêtre de l'app cachée derrière)
         if(shortcutCaptureHandler){event.preventDefault();event.stopPropagation();shortcutCaptureHandler(event);return;}
         if(event.isComposing||event.repeat&&!/Arrow/.test(event.key))return;
         const combo=eventCombo(event);if(!combo)return;
@@ -4569,12 +4683,13 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         bar.hidden=false;const input=$('input',bar);const sel=String(window.getSelection?.()||'').trim();if(sel&&sel.length<80)input.value=sel;input.focus();input.select();if(input.value)bar._refresh();
     }
 
-    function bookmarkButtonLabel(person){const keys=comboLabel(shortcutFor(SHORTCUT_DEFS.find(d=>d.id==='bookmark')));return `${Number(person.is_bookmarked)?'Retirer des signets':'Ajouter aux signets'}${keys&&keys!=='—'?` (${keys})`:''}`;}
+    function bookmarkButtonLabel(person){return Number(person.is_bookmarked)?'Retirer des signets':'Ajouter aux signets';}
+    const bookmarkShortcut=()=>{const c=shortcutFor(SHORTCUT_DEFS.find(d=>d.id==='bookmark'))||'';return /^[A-Za-z0-9+]{1,30}$/.test(c)?c:'';}; // K12 : la touche dans la bulle (data-shortcut), dessinée pour cet ordinateur
     async function togglePersonBookmark(){
         const p=state.currentPerson.person;const on=Number(p.is_bookmarked)?0:1;
         await api('set_person_bookmark',{},{method:'POST',body:{person_id:p.id,bookmarked:on}});
         p.is_bookmarked=on;const listed=(state.people||[]).find(x=>Number(x.id)===Number(p.id));if(listed)listed.is_bookmarked=on;
-        $$(`[data-toggle-bookmark="${p.id}"]`).forEach(button=>{button.classList.toggle('icon-bookmark-on',!!on);button.classList.toggle('icon-bookmark',!on);const label=bookmarkButtonLabel(p);button.title=label;button.setAttribute('aria-label',label);});
+        $$(`[data-toggle-bookmark="${p.id}"]`).forEach(button=>{button.classList.toggle('icon-bookmark-on',!!on);button.classList.toggle('icon-bookmark',!on);const label=bookmarkButtonLabel(p);button.title=label;button.setAttribute('aria-label',label);const sk=bookmarkShortcut();if(sk)button.dataset.shortcut=sk;else button.removeAttribute('data-shortcut');});
         $$(`.person-list-item[data-person-id="${p.id}"] strong`).forEach(strong=>{strong.querySelector('.bookmark-mark')?.remove();if(on)strong.insertAdjacentHTML('afterbegin','<span class="bookmark-mark" title="En signet" aria-label="En signet"></span>');});
         if(state.personTab==='bookmarked')loadPeople();
         toast(on?`${personName(p)} est dans les signets.`:`${personName(p)} n’est plus dans les signets.`);
@@ -4694,6 +4809,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     }
 
     async function backupNow(){
+        if(document.body.classList.contains('is-kiosk'))return toast('Mode consultation : rien ne peut être modifié.'); // 🔒 (le serveur refuse aussi)
         const settings=autoBackupSettings();toast('Sauvegarde en cours…');
         const result=await api('backup_sqlite',{}, {method:'POST',body:{dir:settings.dir,max_files:settings.maxFiles,mode:'manual'}});
         toast(`Sauvegarde faite : ${result.file||'fichier créé'}.`);
@@ -5018,17 +5134,41 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
             ${compact?'':`<div class="page-actions"><button type="button" class="button small secondary" data-edit-memory="${m.id}">Modifier</button></div>`}</div></article>`;
     }
     /** Listes → Objets de famille */
+    /* H10 : la barre commune des listes en cartes (Objets, Mémoire) — 🔍 · Filtrer ▾ · Liste | Fiches (Fiches au départ) · Trier ; vide = la grande boîte K10 seule */
+    function collectionListBar(slot,box,total,opts,paint,emptyHtml){
+        if(!total||!window.LCNDA_UI?.listBar){slot?.remove();box.innerHTML=emptyHtml;return null;}
+        const bar=window.LCNDA_UI.listBar({...opts,onChange:()=>paint(bar)});slot.replaceWith(bar);paint(bar);return bar;
+    }
+    const COLL_B4=[['recent','Les plus récents'],['old','Les plus anciens'],['az','A → Z'],['za','Z → A']];
+    const collWhen=r=>r.updated_at||r.created_at||'';
+    const collNoMatch=text=>emptyState({icon:'🔍',text,hint:'Change les mots cherchés ou retire un filtre (« Tout effacer »).'});
+    /** Listes → Objets de famille */
     async function renderFamilyObjectsList(token,editId=null){
-        const q=state.familyObjectsQuery||'';
-        const data=await api('family_objects',{q});if(token!==state.workspaceToken||state.module!=='listes')return;
+        const data=await api('family_objects');if(token!==state.workspaceToken||state.module!=='listes')return;
         const objects=data.objects||[];const editing=editId===0?{id:0,title:'',transfers:[],media:[]}:objects.find(o=>Number(o.id)===Number(editId));
-        $('#workspace').innerHTML=`<section class="page collection-page"><header class="page-header"><div><span class="eyebrow">LISTES</span><h2>Objets de famille</h2><p>La bague, l’horloge, le livre de messe… avec leur photo, de qui à qui ils sont passés, et qui les a aujourd’hui.</p></div></header>
-            <div class="collection-toolbar"><input type="search" id="objects-q" value="${escapeHtml(q)}" placeholder="Chercher un objet ou une étiquette…"><button type="button" class="button" id="object-add">＋ Objet</button></div>
-            ${editing?familyObjectFormHtml(editing):''}
-            <div class="collection-grid">${objects.map(o=>familyObjectCardHtml(o)).join('')||emptyState({text: 'Aucun objet pour l’instant', icon:'🏺',hint:'Horloge, bijou, outil… et à qui il a été transmis.',action:{label:'＋ Objet',attrs:'data-empty-click="#object-add"'}})}</div></section>`;
-        $('#objects-q').addEventListener('change',event=>{state.familyObjectsQuery=event.target.value.trim();renderFamilyObjectsList(++state.workspaceToken);});
+        const UI=window.LCNDA_UI;
+        $('#workspace').innerHTML=`<section class="page collection-page">${UI.pageHeader({title:'Objets de famille',help:'La bague, l’horloge, le livre de messe… avec leur photo, de qui à qui ils sont passés, et qui les a aujourd’hui.',primary:'<button type="button" class="button" id="object-add">＋ Objet</button>'})}
+            ${editing?familyObjectFormHtml(editing):''}<div data-objects-bar></div><div data-objects-list></div></section>`;
+        const box=$('[data-objects-list]'),LM=UI.listMatch,photo=o=>o.media?.find(m=>m.media_type==='image'),who=(p,t)=>p?personName(p):(t||'');
+        const passIds=o=>(o.transfers||[]).flatMap(t=>[t.from_person_id,t.to_person_id]).map(Number).filter(Boolean),passNames=o=>(o.transfers||[]).flatMap(t=>[t.from_text,t.to_text]).filter(Boolean);
+        const item=(o,view)=>({thumb:photo(o)?mediaThumbHtml(photo(o)):'<span class="ui-card-ico" aria-hidden="true">🏺</span>',name:o.title,open:`data-edit-object="${o.id}"`,
+            lines:[[o.kind,who(o.holder_person,o.holder_text)?`Aujourd’hui : ${who(o.holder_person,o.holder_text)}${o.location_text?` · ${o.location_text}`:''}`:''].filter(Boolean).join(' · '),(o.transfers||[]).map(t=>`${who(t.from_person,t.from_text)||'?'} → ${who(t.to_person,t.to_text)||'?'}${t.date_text?` (${t.date_text})`:''}`).join(' · ')||String(o.description||'').slice(0,140)],
+            badges:[collectionLabelChips(o.labels)].filter(Boolean),when:collWhen(o),whenLabel:'Modifié',
+            menu:[`<button type="button" data-edit-object="${o.id}">✎ Modifier</button>`],actions:view==='list'?`<button type="button" class="button small secondary" data-edit-object="${o.id}">Modifier</button>`:''});
+        const n=fn=>objects.filter(fn).length;
+        collectionListBar($('[data-objects-bar]'),box,objects.length,{key:'listes:family_objects',search:{placeholder:'Chercher… (objet, étiquette, personne)',value:state.familyObjectsQuery||''},
+            filters:[{id:'holder',label:'Qui l’a aujourd’hui',type:'person',chipPrefix:'👤 Chez'},{id:'passed',label:'Passé par',type:'person',chipPrefix:'👤 Passé par'},
+                {id:'photo',label:'Photo',type:'radio',dflt:'',options:[['','Tous'],['yes',`Avec une photo (${n(o=>photo(o))})`,'📷 Avec photo'],['no',`Sans photo (${n(o=>!photo(o))})`,'Sans photo']]},
+                {id:'label',label:'Étiquette',kind:'label',allowFree:false,chipPrefix:'🏷'}],
+            view:{dflt:'cards',what:'objets'},sort:{options:COLL_B4,value:'recent'}},bar=>{
+            const {q,filters:f,sort,view}=bar.state;
+            const rows=UI.sortItems(objects.filter(o=>LM.text(q,o.title,o.kind,o.description,o.holder_text,o.location_text,(o.labels||[]).map(l=>l.name),who(o.holder_person,''),(o.transfers||[]).map(t=>[who(t.from_person,t.from_text),who(t.to_person,t.to_text)]))
+                &&LM.pick(f.holder,[o.holder_person_id],[who(o.holder_person,o.holder_text)])&&LM.pick(f.passed,passIds(o),passNames(o))&&(!f.photo||(f.photo==='yes')===!!photo(o))&&LM.pick(f.label,(o.labels||[]).map(l=>l.id),(o.labels||[]).map(l=>l.name))),sort,{name:o=>o.title,date:collWhen});
+            bar.setCount(rows.length===objects.length?plural(objects.length,'objet'):`${plural(rows.length,'objet')} sur ${objects.length.toLocaleString('fr-FR')}`);
+            box.innerHTML=rows.length?UI.itemsHtml(view,rows.map(o=>item(o,view))):collNoMatch('Aucun objet ne correspond');
+        },editing?'':emptyState({text: 'Aucun objet pour l’instant', icon:'🏺',hint:'Horloge, bijou, outil… et à qui il a été transmis.',action:{label:'＋ Objet',attrs:'data-empty-click="#object-add"'}}));
         $('#object-add').addEventListener('click',()=>renderFamilyObjectsList(++state.workspaceToken,0));
-        $$('[data-edit-object]').forEach(b=>b.addEventListener('click',()=>renderFamilyObjectsList(++state.workspaceToken,Number(b.dataset.editObject))));
+        box.addEventListener('click',e=>{const b=e.target.closest('[data-edit-object]');if(b){e.preventDefault();renderFamilyObjectsList(++state.workspaceToken,Number(b.dataset.editObject));}});
         if(editing)bindFamilyObjectForm(editing);
         bindTableLinks();
     }
@@ -5064,17 +5204,28 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     }
     /** Listes → Mémoire familiale */
     async function renderFamilyMemoriesList(token,editId=null){
-        const q=state.familyMemoriesQuery||'',kind=state.familyMemoriesKind||'';
-        const data=await api('family_memories',{q,kind});if(token!==state.workspaceToken||state.module!=='listes')return;
+        const data=await api('family_memories');if(token!==state.workspaceToken||state.module!=='listes')return;
         const rows=data.memories||[],kinds=data.kinds||{};const editing=editId===0?{id:0,kind:'recipe',title:'',people:[],media:[]}:rows.find(m=>Number(m.id)===Number(editId));
-        $('#workspace').innerHTML=`<section class="page collection-page"><header class="page-header"><div><span class="eyebrow">LISTES</span><h2>Mémoire familiale</h2><p>Les recettes de grand-mère, les expressions, les chansons, les surnoms, les traditions, rattachés aux personnes qui les ont transmis.</p></div></header>
-            <div class="collection-toolbar"><input type="search" id="memories-q" value="${escapeHtml(q)}" placeholder="Chercher (texte ou étiquette)…"><select id="memories-kind"><option value="">Tout</option>${Object.entries(kinds).map(([k,l])=>`<option value="${k}" ${kind===k?'selected':''}>${escapeHtml(l)}</option>`).join('')}</select><button type="button" class="button" id="memory-add">＋ Souvenir</button></div>
-            ${editing?familyMemoryFormHtml(editing,kinds):''}
-            <div class="collection-grid">${rows.map(m=>familyMemoryCardHtml(m)).join('')||emptyState({text: 'Aucun souvenir pour l’instant', icon:'💬',hint:'Une recette, une expression, une chanson…',action:{label:'＋ Souvenir',attrs:'data-empty-click="#memory-add"'}})}</div></section>`;
-        $('#memories-q').addEventListener('change',event=>{state.familyMemoriesQuery=event.target.value.trim();renderFamilyMemoriesList(++state.workspaceToken);});
-        $('#memories-kind').addEventListener('change',event=>{state.familyMemoriesKind=event.target.value;renderFamilyMemoriesList(++state.workspaceToken);});
+        const UI=window.LCNDA_UI;
+        $('#workspace').innerHTML=`<section class="page collection-page">${UI.pageHeader({title:'Mémoire familiale',help:'Les recettes de grand-mère, les expressions, les chansons, les surnoms, les traditions, rattachés aux personnes qui les ont transmis.',primary:'<button type="button" class="button" id="memory-add">＋ Souvenir</button>'})}
+            ${editing?familyMemoryFormHtml(editing,kinds):''}<div data-memories-bar></div><div data-memories-list></div></section>`;
+        const box=$('[data-memories-list]'),LM=UI.listMatch,photo=m=>m.media?.find(x=>x.media_type==='image'),ROLE={transmitted:'l’a transmis',received:'l’a reçu',about:'concerné'};
+        const item=(m,view)=>({thumb:photo(m)?mediaThumbHtml(photo(m)):`<span class="ui-card-ico" aria-hidden="true">${{recipe:'🍲',expression:'💬',song:'🎵',nickname:'🏷',tradition:'🕯️',story:'📖',testimony:'🎙',sense:'👃'}[m.kind]||'💬'}</span>`,name:m.title,open:`data-edit-memory="${m.id}"`,
+            lines:[String(m.content||'').replace(/\s+/g,' ').slice(0,140),(m.people||[]).map(l=>`${personName(l.person)} (${ROLE[l.role]||''})`).join(' · ')||m.origin_text||''],
+            badges:[m.kind_label?{text:m.kind_label,kind:'grey'}:null,collectionLabelChips(m.labels)].filter(Boolean),when:collWhen(m),whenLabel:'Modifié',
+            menu:[`<button type="button" data-edit-memory="${m.id}">✎ Modifier</button>`],actions:view==='list'?`<button type="button" class="button small secondary" data-edit-memory="${m.id}">Modifier</button>`:''});
+        collectionListBar($('[data-memories-bar]'),box,rows.length,{key:'listes:family_memories',search:{placeholder:'Chercher… (texte, étiquette, personne)',value:state.familyMemoriesQuery||''},
+            filters:[{id:'kind',label:'Sorte',type:'check',value:state.familyMemoriesKind?[state.familyMemoriesKind]:[],options:Object.entries(kinds).map(([k,l])=>[k,`${l} (${rows.filter(m=>m.kind===k).length})`,l])},
+                {id:'by',label:'Transmis par',type:'person',chipPrefix:'👤 Transmis par'},{id:'label',label:'Étiquette',kind:'label',allowFree:false,chipPrefix:'🏷'}],
+            view:{dflt:'cards',what:'souvenirs'},sort:{options:COLL_B4,value:'recent'}},bar=>{
+            const {q,filters:f,sort,view}=bar.state,by=m=>(m.people||[]).filter(l=>l.role!=='received'&&l.role!=='about');
+            const list=UI.sortItems(rows.filter(m=>LM.text(q,m.title,m.content,m.origin_text,m.kind_label,(m.labels||[]).map(l=>l.name),(m.people||[]).map(l=>personName(l.person)))
+                &&(!(f.kind||[]).length||f.kind.includes(m.kind))&&LM.pick(f.by,by(m).map(l=>l.person?.id),by(m).map(l=>personName(l.person)))&&LM.pick(f.label,(m.labels||[]).map(l=>l.id),(m.labels||[]).map(l=>l.name))),sort,{name:m=>m.title,date:collWhen});
+            bar.setCount(list.length===rows.length?plural(rows.length,'souvenir'):`${plural(list.length,'souvenir')} sur ${rows.length.toLocaleString('fr-FR')}`);
+            box.innerHTML=list.length?UI.itemsHtml(view,list.map(m=>item(m,view))):collNoMatch('Aucun souvenir ne correspond');
+        },editing?'':emptyState({text: 'Aucun souvenir pour l’instant', icon:'💬',hint:'Une recette, une expression, une chanson…',action:{label:'＋ Souvenir',attrs:'data-empty-click="#memory-add"'}}));
         $('#memory-add').addEventListener('click',()=>renderFamilyMemoriesList(++state.workspaceToken,0));
-        $$('[data-edit-memory]').forEach(b=>b.addEventListener('click',()=>renderFamilyMemoriesList(++state.workspaceToken,Number(b.dataset.editMemory))));
+        box.addEventListener('click',e=>{const b=e.target.closest('[data-edit-memory]');if(b){e.preventDefault();renderFamilyMemoriesList(++state.workspaceToken,Number(b.dataset.editMemory));}});
         if(editing)bindFamilyMemoryForm(editing);
         bindTableLinks();
     }
@@ -5108,15 +5259,41 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     /** Listes → Lieux précis (adresse, ferme, maison) et leur fiche « en un coup d'œil » */
     async function renderPrecisePlacesList(token){
         if(state.precisePlaceKey)return renderPrecisePlace(token,state.precisePlaceKey);
-        const q=state.precisePlacesQuery||'',radius=Number(state.precisePlacesRadius)||30;
-        const data=await api('precise_places',{q,radius});if(token!==state.workspaceToken||state.module!=='listes')return;
-        const rows=data.places||[];
-        $('#workspace').innerHTML=`<section class="page collection-page"><header class="page-header"><div><span class="eyebrow">LISTES</span><h2>Lieux précis</h2><p>Une adresse, une ferme, une maison : tout ce que tu as sur ce lieu. Regroupe la même adresse dans la même commune (en ignorant les différences d’écriture) et les points GPS proches.</p></div></header>
-            <div class="collection-toolbar"><input type="search" id="pp-q" value="${escapeHtml(q)}" placeholder="Adresse ou commune…"><label>Points GPS regroupés à moins de <select id="pp-radius">${[10,30,100,300].map(r=>`<option value="${r}" ${radius===r?'selected':''}>${r} m</option>`).join('')}</select></label></div>
-            ${rows.length?`<table class="data-table precise-table"><thead><tr><th>Commune</th><th>Lieu précis</th><th>Événements</th><th>Recensements</th><th>Années</th></tr></thead><tbody>${rows.map(r=>`<tr data-pp-key="${escapeHtml(r.key)}" tabindex="0"><td>${escapeHtml(r.place||'—')}</td><td><strong>${escapeHtml(r.label)}</strong>${r.gps_only?' <small class="muted">(position GPS sans adresse)</small>':''}</td><td>${r.events}</td><td>${r.census}</td><td>${r.from?`${r.from}${r.to&&r.to!==r.from?`–${r.to}`:''}`:'—'}</td></tr>`).join('')}</tbody></table>`:empty('Aucun lieu précis : remplis la case « Adresse » des événements ou des recensements, ou place un point GPS précis.',{icon:'📍'})}</section>`;
-        $('#pp-q').addEventListener('change',event=>{state.precisePlacesQuery=event.target.value.trim();renderPrecisePlacesList(++state.workspaceToken);});
-        $('#pp-radius').addEventListener('change',event=>{state.precisePlacesRadius=Number(event.target.value);renderPrecisePlacesList(++state.workspaceToken);});
-        $$('[data-pp-key]').forEach(tr=>{const open=()=>{state.precisePlaceKey=tr.dataset.ppKey;renderPrecisePlacesList(++state.workspaceToken);};tr.addEventListener('click',open);tr.addEventListener('keydown',e=>{if(e.key==='Enter')open();});});
+        // H10 : la barre commune ; l’ancienne case et le menu « Points GPS regroupés » (state.precisePlacesQuery / Radius) sont repris une fois
+        const UI=window.LCNDA_UI,KEY='listes:precise_places',saved=UI.listBarState?.(KEY);
+        const radius=[10,30,100,300].includes(Number(saved?.f?.radius))?Number(saved.f.radius):(Number(state.precisePlacesRadius)||30);
+        state.precisePlacesRadius=radius;
+        const data=await api('precise_places',{radius});if(token!==state.workspaceToken||state.module!=='listes')return;
+        const all=data.places||[];
+        $('#workspace').innerHTML=`<section class="page collection-page">${UI.pageHeader({title:'Lieux précis',help:'Une adresse, une ferme, une maison : tout ce que tu as sur ce lieu. Regroupe la même adresse dans la même commune (en ignorant les différences d’écriture) et les points GPS proches.'})}
+            ${all.length?'<div data-pp-bar></div>':''}<div data-pp-list></div></section>`;
+        const box=$('[data-pp-list]');
+        if(!all.length){box.innerHTML=emptyState({icon:'📍',text:'Aucun lieu précis pour l’instant',hint:'Remplis la case « Adresse » des événements ou des recensements, ou place un point GPS précis.'});return;}
+        const fold=v=>String(v||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
+        const n=fn=>all.filter(fn).length;
+        const bar=UI.listBar({key:KEY,search:{placeholder:'Chercher… (adresse, commune)',value:saved?'':(state.precisePlacesQuery||'')},
+            filters:[{id:'commune',label:'Commune',type:'place',chipPrefix:'Commune :'},
+                {id:'kind',label:'Sorte',type:'radio',dflt:'',options:[['','Toutes'],['address','Avec une adresse','Avec une adresse',n(r=>!r.gps_only)],['gps','Point GPS seul','Point GPS seul',n(r=>r.gps_only)]]},
+                {id:'radius',label:'Regroupement des points GPS',type:'radio',dflt:'30',value:String(radius),options:[10,30,100,300].map(r=>[String(r),`à moins de ${r} m`,`Points GPS à moins de ${r} m`])}],
+            sort:{options:[['az','Commune : A → Z'],['za','Commune : Z → A'],['events','Le plus d’événements'],['old','Années : les plus anciens'],['recent','Années : les plus récents']],value:'az'},
+            onChange:(st,{what})=>{if(Number(st.filters.radius||30)!==radius){state.precisePlacesRadius=Number(st.filters.radius||30);return renderPrecisePlacesList(++state.workspaceToken);}paint();}});
+        $('[data-pp-bar]').replaceWith(bar);
+        const cmp=(a,b)=>String(a.place||'').localeCompare(String(b.place||''),'fr',{sensitivity:'base'})||String(a.label).localeCompare(String(b.label),'fr',{sensitivity:'base',numeric:true});
+        const SORTS={az:cmp,za:(a,b)=>cmp(b,a),events:(a,b)=>(b.events+b.census)-(a.events+a.census)||cmp(a,b),old:(a,b)=>(a.from||99999)-(b.from||99999)||cmp(a,b),recent:(a,b)=>(b.to||0)-(a.to||0)||cmp(a,b)};
+        function paint(){
+            const st=bar.state,f=st.filters,words=fold(st.q).split(/\s+/).filter(Boolean),c=f.commune;
+            const cId=c&&typeof c==='object'?Number(c.id):0,cTxt=fold(c&&typeof c==='object'?c.title:String(c||'').replace(/^txt:/,'')).split(/[,(]/)[0].trim();
+            const rows=all.filter(r=>(!words.length||words.every(w=>fold(`${r.address} ${r.place}`).includes(w)))
+                &&(!c||(cId&&(r.place_ids||[]).includes(cId))||fold(r.place)===cTxt)
+                &&(!f.kind||(f.kind==='gps'?r.gps_only:!r.gps_only))).sort(SORTS[st.sort]||cmp);
+            bar.setCount(rows.length===all.length?plural(all.length,'lieu précis','lieux précis'):`${plural(rows.length,'lieu précis','lieux précis')} sur ${all.length}`);
+            box.innerHTML=rows.length?`<div class="data-table-wrap"><table class="data-table precise-table"><thead><tr><th>Commune</th><th>Lieu précis</th><th>Événements</th><th>Recensements</th><th>Années</th></tr></thead><tbody>${rows.map(r=>`<tr data-pp-key="${escapeHtml(r.key)}" tabindex="0"><td>${escapeHtml(r.place||'—')}</td><td><strong>${escapeHtml(r.label)}</strong>${r.gps_only?' <small class="muted">(position GPS sans adresse)</small>':''}</td><td>${r.events}</td><td>${r.census}</td><td>${r.from?`${r.from}${r.to&&r.to!==r.from?`–${r.to}`:''}`:'—'}</td></tr>`).join('')}</tbody></table></div>`
+                :emptyState({icon:'🔍',text:'Aucun lieu précis ne correspond',hint:'Vérifie l’orthographe, ou retire un filtre.'});
+        }
+        paint();
+        const open=tr=>{state.precisePlaceKey=tr.dataset.ppKey;renderPrecisePlacesList(++state.workspaceToken);};
+        box.addEventListener('click',e=>{const tr=e.target.closest('[data-pp-key]');if(tr)open(tr);});
+        box.addEventListener('keydown',e=>{const tr=e.target.closest('[data-pp-key]');if(tr&&e.key==='Enter')open(tr);});
     }
     async function renderPrecisePlace(token,key){
         let data;try{data=await api('precise_place',{key,radius:Number(state.precisePlacesRadius)||30});}catch(error){state.precisePlaceKey='';toast(error.message,'error');return renderPrecisePlacesList(++state.workspaceToken);}
@@ -5239,18 +5416,40 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     async function renderFairsList(token,editId=null){
         const data=await api('genealogy_fairs');if(token!==state.workspaceToken||state.module!=='listes')return;
         const rows=data.fairs||[];const editing=editId===0?{id:0,kind:'Salon'}:rows.find(f=>Number(f.id)===Number(editId));
-        const today=new Date().toISOString().slice(0,10);const upcoming=rows.filter(f=>!f.date_start||(f.date_end||f.date_start)>=today),past=rows.filter(f=>f.date_start&&(f.date_end||f.date_start)<today);
-        // Les salons passés restent consultables, mais ne gênent pas : masqués tant qu'on ne les demande pas
-        const fairsFilter=['upcoming','past','all'].includes(state.fairsFilter)?state.fairsFilter:'upcoming';
-        $('#workspace').innerHTML=`<section class="page collection-page"><header class="page-header"><div><span class="eyebrow">LISTES</span><h2>Salons et événements</h2><p>Salons, forums, congrès, journées portes ouvertes des archives… avec la date, le lieu, comment y aller, que prévoir, les stands à voir et les liens utiles.</p></div></header>
-            <div class="collection-toolbar"><button type="button" class="button" id="fair-add">＋ Salon ou événement</button><div class="segmented-filter" role="group" aria-label="Afficher">${[['upcoming',`À venir (${upcoming.length})`],['past',`Passés (${past.length})`],['all',`Tous (${rows.length})`]].map(([value,label])=>`<button type="button" class="button small ${fairsFilter===value?'':'secondary'}" data-fairs-filter="${value}" aria-pressed="${fairsFilter===value}">${escapeHtml(label)}</button>`).join('')}</div></div>
+        const UIx=window.LCNDA_UI,today=new Date().toISOString().slice(0,10);
+        const isPast=f=>!!(f.date_start&&(f.date_end||f.date_start)<today);
+        $('#workspace').innerHTML=`<section class="page collection-page">${UIx.pageHeader({title:'Salons et événements',help:'Salons, forums, congrès, journées portes ouvertes des archives… avec la date, le lieu, comment y aller, que prévoir, les stands à voir et les liens utiles.',actions:['<button type="button" class="button" id="fair-add">＋ Salon ou événement</button>']})}
             ${editing?fairFormHtml(editing):''}
-            ${fairsFilter!=='past'?`<h3>À venir</h3><div class="fair-list">${upcoming.map(fairCardHtml).join('')||emptyState({text: 'Aucun salon à venir', icon:'🎪',action:{label:'＋ Salon ou événement',attrs:'data-empty-click="#fair-add"'}})}</div>`:''}
-            ${fairsFilter==='upcoming'&&past.length?`<p class="muted"><button type="button" class="link-button" data-fairs-filter="past">${past.length>1?`Voir les ${past.length} salons passés`:'Voir le salon passé'}</button></p>`:''}
-            ${fairsFilter!=='upcoming'?`<h3>Passés</h3><div class="fair-list">${past.map(fairCardHtml).join('')||empty('Aucun salon passé.',{icon:'🎪'})}</div>`:''}</section>`;
-        $$('[data-fairs-filter]').forEach(b=>b.addEventListener('click',()=>{state.fairsFilter=b.dataset.fairsFilter;renderFairsList(++state.workspaceToken);}));
+            ${rows.length?'<div data-h10-bar></div><div data-h10-rows></div>':editing?'':emptyState({text:'Aucun salon pour l’instant',icon:'🎪',hint:'Un salon, un forum, une journée portes ouvertes des archives : la date, le lieu, que prévoir.',action:{label:'＋ Salon ou événement',attrs:'data-empty-click="#fair-add"'}})}</section>`;
         $('#fair-add').addEventListener('click',()=>renderFairsList(++state.workspaceToken,0));
-        $$('[data-edit-fair]').forEach(b=>b.addEventListener('click',()=>renderFairsList(++state.workspaceToken,Number(b.dataset.editFair))));
+        if(rows.length){
+            // H10 : « À venir / Passés / Tous » devient la rubrique « Quand » (« À venir » au départ, visible en pastille)
+            const fold=t=>String(t||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+            const kinds={};rows.forEach(f=>{const k=String(f.kind||'Salon').trim()||'Salon';kinds[k]=(kinds[k]||0)+1;});
+            const nPast=rows.filter(isPast).length;
+            const bar=UIx.listBar({key:'listes:fairs',search:{placeholder:'Chercher… (nom, ville, stands)'},
+                filters:[{id:'when',label:'Quand',type:'check',value:state.fairsFilter==='past'?['past']:state.fairsFilter==='all'?[]:['upcoming'],options:[['upcoming','À venir','À venir',rows.length-nPast],['past','Passés','Passés',nPast]]},
+                    {id:'kind',label:'Sorte',type:'check',options:Object.keys(kinds).sort((x,y)=>x.localeCompare(y,'fr')).map(k=>[k,k,k,kinds[k]])},
+                    {id:'place',label:'Lieu',type:'place',chipPrefix:'À :'}],
+                view:{dflt:'cards',what:'salons'},
+                sort:{options:[['near','Le plus proche'],['recent','Les plus récents'],['old','Les plus anciens'],['az','A → Z'],['za','Z → A']],value:'near'},
+                onChange:()=>paint()});
+            $('[data-h10-bar]').replaceWith(bar);
+            const paint=()=>{
+                const st=bar.state,f=st.filters,words=fold(st.q).split(/\s+/).filter(Boolean),place=f.place?fold(typeof f.place==='object'?f.place.title:String(f.place).replace(/^txt:/,'')).split(/[,(]/)[0].trim():'';
+                let list=rows.filter(x=>(!f.when?.length||f.when.includes(isPast(x)?'past':'upcoming'))&&(!f.kind?.length||f.kind.includes(String(x.kind||'Salon').trim()||'Salon'))&&(!place||fold(`${x.place_text} ${x.address}`).includes(place))
+                    &&(!words.length||words.every(w=>fold([x.title,x.kind,x.place_text,x.address,x.stands_text].join(' ')).includes(w))));
+                // « Le plus proche » : les prochains d’abord (le plus tôt en premier), puis les passés (le plus récent en premier), sans date à la fin
+                const near=(x,y)=>{const rank=v=>!v.date_start?2:isPast(v)?1:0,r=rank(x)-rank(y);if(r)return r;return rank(x)===1?String(y.date_start).localeCompare(String(x.date_start)):String(x.date_start||'').localeCompare(String(y.date_start||''));};
+                list=st.sort==='near'?[...list].sort(near):UIx.sortItems(list,st.sort,{name:x=>x.title,date:x=>x.updated_at||x.created_at||''});
+                bar.setCount(`${plural(list.length,'salon')}${list.length!==rows.length?` sur ${rows.length}`:''}`);
+                $('[data-h10-rows]').innerHTML=!list.length?emptyState({icon:'🔍',text:'Aucun salon ne correspond',hint:'Change les mots cherchés ou retire un filtre (« Tout effacer » montre aussi les salons passés).'})
+                    :st.view==='cards'?`<div class="fair-list">${list.map(fairCardHtml).join('')}</div>`
+                    :UIx.rowsHtml(list.map(x=>({thumb:'<span class="ui-card-ico">🎪</span>',name:x.title,open:`data-edit-fair="${x.id}"`,lines:[fairDateText(x),[x.kind,x.place_text].filter(Boolean).join(' · ')],cls:isPast(x)?'is-past':''})));
+                $$('[data-h10-rows] [data-edit-fair]').forEach(b=>b.addEventListener('click',()=>renderFairsList(++state.workspaceToken,Number(b.dataset.editFair))));
+            };
+            paint();
+        }
         if(editing){const form=$('#fair-form');form.scrollIntoView({block:'start'});
             $('#fair-cancel').addEventListener('click',()=>renderFairsList(++state.workspaceToken));
             $('#fair-delete')?.addEventListener('click',async()=>{if(!await confirmBox('',{title:`Supprimer « ${editing.title} » ?`,okLabel:'Supprimer le salon'}))return;await api('delete_genealogy_fair',{}, {method:'POST',body:{id:editing.id}});toast('Supprimé.');renderFairsList(++state.workspaceToken);});
@@ -5346,7 +5545,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         const dialog=document.createElement('dialog');dialog.className='modal small-modal';
         dialog.innerHTML=`<form method="dialog" class="closed-branch-form"><div class="modal-head"><div><span class="eyebrow">BRANCHE FERMÉE</span><h2>${direction==='ascendance'?'Ascendance':'Descendance'} de ${escapeHtml(personName(detail.person))}</h2><p>${direction==='ascendance'?'Il n’y a plus d’ancêtres à trouver au-delà (enfant naturel, registres perdus…).':'La lignée s’arrête : plus de descendants à chercher.'}</p></div><button class="icon-button" type="button" data-cb-cancel aria-label="Fermer">×</button></div>
             <div class="form-grid one-column">
-            ${direction==='descendance'&&partners.length?`<label>Depuis<select name="partner_id"><option value="">${escapeHtml(personName(detail.person))} seul(e)</option>${partners.map(p=>`<option value="${p.id}" ${Number(existing?.partner_id)===Number(p.id)?'selected':''}>Le couple avec ${escapeHtml(personName(p))}</option>`).join('')}</select></label>`:''}
+            ${direction==='descendance'&&partners.length?`<label>Depuis<select name="partner_id"><option value="">${escapeHtml(personName(detail.person))} ${accord(detail.person,'seul(e)',{x:'uniquement'})}</option>${partners.map(p=>`<option value="${p.id}" ${Number(existing?.partner_id)===Number(p.id)?'selected':''}>Le couple avec ${escapeHtml(personName(p))}</option>`).join('')}</select></label>`:''}
             <label>Degré de certitude<select name="certainty">${Object.entries(branchCertainties).map(([k,l])=>`<option value="${k}" ${(existing?.certainty||'likely')===k?'selected':''}>${escapeHtml(l)}</option>`).join('')}</select></label>
             <label>Raison<select name="reason"><option value="">—</option>${Object.entries(branchReasons).filter(([k])=>direction==='ascendance'?!['extinct','no_children'].includes(k):!['unknown_father','foundling','no_more_records'].includes(k)).map(([k,l])=>`<option value="${k}" ${existing?.reason===k?'selected':''}>${escapeHtml(l)}</option>`).join('')}</select></label>
             <label>Note (ce qui a été cherché, où, quand)<textarea name="note" rows="4">${escapeHtml(existing?.note||'')}</textarea></label></div>
@@ -5362,16 +5561,36 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     /** Listes → Branches fermées */
     async function renderClosedBranchesList(token){
         const data=await api('closed_branches');if(token!==state.workspaceToken||state.module!=='listes')return;
-        const rows=(data.branches||[]).filter(r=>r.direction==='descendance');
-        $('#workspace').innerHTML=`<section class="page collection-page"><header class="page-header"><div><span class="eyebrow">LISTES</span><h2>Branches fermées</h2><p>Les lignées déclarées éteintes (plus de descendants à chercher), avec leur degré de certitude. Pour en ajouter une : sur la fiche, bloc « Descendants ».</p></div></header>
-            ${rows.length?`<table class="data-table"><thead><tr><th>Depuis</th><th>Certitude</th><th>Raison</th><th>Note</th></tr></thead><tbody>${rows.map(r=>`<tr><td>${personChip(r.person)}${r.partner?` et ${personChip(r.partner)}`:''}</td><td><span class="branch-closed-badge certainty-${escapeHtml(r.certainty)}">${escapeHtml(r.certainty_label)}</span></td><td>${escapeHtml(r.reason_label||'—')}</td><td><small>${escapeHtml(r.note||'')}</small></td></tr>`).join('')}</tbody></table>`:emptyState({text: 'Aucune branche fermée pour l’instant.', icon:'🌿',hint:'Une branche fermée est une lignée qu’on ne peut plus remonter (archives détruites, enfant trouvé…).'})}</section>`;
-        bindTableLinks();
+        const all=(data.branches||[]).filter(r=>r.direction==='descendance'),UI=window.LCNDA_UI;
+        $('#workspace').innerHTML=`<section class="page collection-page">${UI.pageHeader({title:'Branches fermées',help:'Les lignées déclarées éteintes (plus de descendants à chercher), avec leur degré de certitude. Pour en ajouter une : sur la fiche, bloc « Descendants ».'})}
+            ${all.length?'<div data-cb-bar></div>':''}<div data-cb-list></div></section>`;
+        const box=$('[data-cb-list]');
+        if(!all.length){box.innerHTML=emptyState({text:'Aucune branche fermée pour l’instant',icon:'🌿',hint:'Une branche fermée est une lignée qu’on ne peut plus remonter (archives détruites, enfant trouvé…). Pour en ajouter une : sur la fiche, bloc « Descendants ».'});return;}
+        // H10 : 🔍 nom, raison, note · Filtrer ▾ Certitude, Raison · Trier (les 4 de base)
+        const fold=v=>String(v||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
+        const who=r=>[r.person?personName(r.person):'',r.partner?personName(r.partner):''].join(' ');
+        const n=(k,v)=>all.filter(r=>r[k]===v).length;
+        const opts=(obj,k)=>Object.entries(obj||{}).filter(([v])=>n(k,v)).map(([v,l])=>[v,l,l,n(k,v)]);
+        const bar=UI.listBar({key:'listes:closed_branches',search:{placeholder:'Chercher… (nom, raison, note)'},
+            filters:[{id:'certainty',label:'Certitude',type:'check',options:opts(data.certainties,'certainty')},{id:'reason',label:'Raison',type:'check',options:opts(data.reasons,'reason')}].filter(f=>f.options.length),
+            sort:{options:[['recent','Les plus récentes'],['old','Les plus anciennes'],['az','A → Z'],['za','Z → A']],value:'recent'},onChange:()=>paint()});
+        $('[data-cb-bar]').replaceWith(bar);
+        function paint(){
+            const st=bar.state,f=st.filters,words=fold(st.q).split(/\s+/).filter(Boolean);
+            const rows=UI.sortItems(all.filter(r=>(!words.length||words.every(w=>fold(`${who(r)} ${r.reason_label} ${r.note}`).includes(w)))&&(!(f.certainty||[]).length||f.certainty.includes(r.certainty))&&(!(f.reason||[]).length||f.reason.includes(r.reason))),
+                st.sort,{name:r=>r.person?`${r.person.last_name||''} ${r.person.first_name||''}`:'',date:r=>r.updated_at||r.created_at||''});
+            bar.setCount(rows.length===all.length?plural(all.length,'branche fermée','branches fermées'):`${plural(rows.length,'branche fermée','branches fermées')} sur ${all.length}`);
+            box.innerHTML=rows.length?`<table class="data-table"><thead><tr><th>Depuis</th><th>Certitude</th><th>Raison</th><th>Note</th></tr></thead><tbody>${rows.map(r=>`<tr><td>${personChip(r.person)}${r.partner?` et ${personChip(r.partner)}`:''}</td><td><span class="branch-closed-badge certainty-${escapeHtml(r.certainty)}">${escapeHtml(r.certainty_label)}</span></td><td>${escapeHtml(r.reason_label||'—')}</td><td><small>${escapeHtml(r.note||'')}</small></td></tr>`).join('')}</tbody></table>`
+                :emptyState({icon:'🔍',text:'Aucune branche fermée ne correspond',hint:'Vérifie l’orthographe, ou retire un filtre.'});
+            bindTableLinks();
+        }
+        paint();
     }
     /** Widget « Ascendants / descendants » : personne choisie ou dernière fiche, sens et générations réglés au crayon. */
     function dashboardLineageCard(index,widget,spanClass,personId){
         const dir=widget.config?.lineageDirection||'desc';const title=dir==='asc'?'Ascendants':(dir==='both'?'Ascendants et descendants':'Descendants');
         if(!personId)return card(index,title,'',empty(widget.config?.personMode==='specific'?'Choisis une personne avec le crayon.':'Ouvre une fiche : elle apparaîtra ici.',{icon:'👤'}),spanClass);
-        return card(index,title,'',`<div data-lineage-widget="${escapeHtml(widget.id)}" data-person="${personId}" data-dir="${escapeHtml(dir)}" data-asc="${Number(widget.config?.lineageAsc)||3}" data-desc="${Number(widget.config?.lineageDesc)||2}"><small class="muted">Chargement…</small></div>`,spanClass);
+        return card(index,title,'',`<div data-lineage-widget="${escapeHtml(widget.id)}" data-person="${personId}" data-dir="${escapeHtml(dir)}" data-asc="${Number(widget.config?.lineageAsc)||3}" data-desc="${Number(widget.config?.lineageDesc)||2}">${waitHtml('Chargement de la lignée…')}</div>`,spanClass);
     }
     async function fillLineageWidgets(){
         for(const box of $$('[data-lineage-widget]')){
@@ -5812,7 +6031,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
   </form>
 </section>`;
     }
-    function renderExportTools(token=++state.workspaceToken){if(token!==state.workspaceToken||state.module!=='maintenance'||state.maintenanceTab!=='export')return;const privacy=exportPrivacySettings();const exportUrl=(action,params={})=>{const url=new URL('api.php',location.href);url.searchParams.set('action',action);Object.entries(params).forEach(([k,v])=>url.searchParams.set(k,v));if(privacy.enabled&&action!=='export_sqlite'&&action!=='export_full_backup'){url.searchParams.set('privacy','1');if(privacy.deathCutoffYear)url.searchParams.set('death_cutoff_year',privacy.deathCutoffYear);}return url.toString();};$('#workspace').innerHTML=`<section class="page"><header class="page-header"><div><span class="eyebrow">EXPORT</span><h2>Export des données</h2><p>Télécharge les données dans les formats disponibles.</p></div></header>
+    function renderExportTools(token=++state.workspaceToken){if(token!==state.workspaceToken||state.module!=='maintenance'||state.maintenanceTab!=='export')return;const privacy=exportPrivacySettings();const exportUrl=(action,params={})=>{const url=new URL('api.php',location.href);url.searchParams.set('action',action);if(typeof window.LCNDA_GENEALOGY==='string')url.searchParams.set('g',window.LCNDA_GENEALOGY);Object.entries(params).forEach(([k,v])=>url.searchParams.set(k,v));if(privacy.enabled&&action!=='export_sqlite'&&action!=='export_full_backup'){url.searchParams.set('privacy','1');if(privacy.deathCutoffYear)url.searchParams.set('death_cutoff_year',privacy.deathCutoffYear);}return url.toString();};$('#workspace').innerHTML=`<section class="page"><header class="page-header"><div><span class="eyebrow">EXPORT</span><h2>Export des données</h2><p>Télécharge les données dans les formats disponibles.</p></div></header>
 
 ${exportPrivacySectionHtml(privacy)}
 
@@ -6046,7 +6265,7 @@ ${backupSectionHtml()}
     }
     function designFieldsHtml(design){
         design=design||{};
-        return `<label>Preset<select name="preset">${presetSelectOptionsHtml(design.preset)}</select></label><label>Couleur principale<input type="color" name="blue" value="${escapeHtml(design.blue||'#0066cc')}"></label><label>Menu des onglets<select name="navPosition"><option value="top" ${design.navPosition!=='bottom'?'selected':''}>En haut (défaut)</option><option value="bottom" ${design.navPosition==='bottom'?'selected':''}>En bas de l’écran</option></select></label><label>Logo « ${escapeHtml(design.ownerFirst||'MA')} ${escapeHtml(design.ownerLast||'FAMILLE')} · GÉNÉALOGIE »<select name="brandDisplay"><option value="show" ${design.brandDisplay!=='hide'?'selected':''}>Afficher (défaut)</option><option value="hide" ${design.brandDisplay==='hide'?'selected':''}>Masquer (onglets plus larges)</option></select></label><label>Colonne latérale<select name="sidebarPosition"><option value="left" ${design.sidebarPosition!=='right'?'selected':''}>À gauche (défaut)</option><option value="right" ${design.sidebarPosition==='right'?'selected':''}>À droite</option></select></label><label>Taille typographique<select name="fontScale"><option value="0.82" ${design.fontScale==='0.82'?'selected':''}>Très compacte (13px)</option><option value="0.88" ${design.fontScale==='0.88'?'selected':''}>Compacte (14px)</option><option value="0.94" ${design.fontScale==='0.94'?'selected':''}>Resserrée (15px)</option><option value="1" ${(!design.fontScale||design.fontScale==='1')?'selected':''}>Normale (16px)</option><option value="1.06" ${design.fontScale==='1.06'?'selected':''}>Confortable (17px)</option><option value="1.13" ${design.fontScale==='1.13'?'selected':''}>Grande (18px)</option><option value="1.19" ${design.fontScale==='1.19'?'selected':''}>Très grande (19px)</option><option value="1.25" ${design.fontScale==='1.25'?'selected':''}>Large (20px)</option><option value="1.38" ${design.fontScale==='1.38'?'selected':''}>Très large (22px)</option><option value="1.5" ${design.fontScale==='1.5'?'selected':''}>Maximale (24px)</option><option value="1.63" ${design.fontScale==='1.63'?'selected':''}>Lecture facile (26px)</option><option value="1.75" ${design.fontScale==='1.75'?'selected':''}>Lecture facile + (28px)</option><option value="2" ${design.fontScale==='2'?'selected':''}>Très gros caractères (32px)</option></select></label><label>Police de caractères<select name="fontFamily" id="font-family-select" hidden>${fontFamilyOptions.map(([value,label])=>`<option value="${value}" ${fontFamilyValue(design.fontFamily)===value?'selected':''}>${escapeHtml(label)}</option>`).join('')}${(typeof design.fontFamily==='string'&&design.fontFamily.indexOf('local:')===0)?`<optgroup label="— Polices de votre ordinateur —"><option value="${escapeHtml(design.fontFamily)}" selected>${escapeHtml(design.fontFamily.slice(6))}</option></optgroup>`:''}</select><button type="button" class="button small secondary ui-fontbtn" id="detect-local-fonts" title="Choisir la police (celles de l’app et de l’ordinateur)">Aa <span data-font-cur>${escapeHtml((fontFamilyOptions.find(o=>o[0]===fontFamilyValue(design.fontFamily))||[])[1]||String(design.fontFamily||'').replace(/^local:/,'')||'Police de l’app')}</span> ▾</button></label><label>Fond des blocs de fiche<select name="cardBackground"><option value="white">Selon le preset</option><option value="blue" ${design.cardBackground==='blue'?'selected':''}>Couleur bleutée</option><option value="bw" ${design.cardBackground==='bw'?'selected':''}>Noir et blanc</option><option value="archive" ${design.cardBackground==='archive'?'selected':''}>Papier archive</option><option value="green" ${design.cardBackground==='green'?'selected':''}>Vert doux</option></select></label><label>Fond de carte géographique<select name="mapBackground"><option value="bw" ${mapBackgroundValue(design.mapBackground)==='bw'?'selected':''}>Noir &amp; blanc</option><option value="color" ${mapBackgroundValue(design.mapBackground)==='color'?'selected':''}>Couleur (OSM)</option><option value="light" ${mapBackgroundValue(design.mapBackground)==='light'?'selected':''}>Claire</option><option value="minimal" ${mapBackgroundValue(design.mapBackground)==='minimal'?'selected':''}>Minimaliste</option><option value="roads" ${mapBackgroundValue(design.mapBackground)==='roads'?'selected':''}>Routes seules</option><option value="dark" ${mapBackgroundValue(design.mapBackground)==='dark'?'selected':''}>Sombre</option><option value="osmfr" ${mapBackgroundValue(design.mapBackground)==='osmfr'?'selected':''}>OSM France</option><option value="relief" ${mapBackgroundValue(design.mapBackground)==='relief'?'selected':''}>Relief léger</option><option value="cyclosm" ${mapBackgroundValue(design.mapBackground)==='cyclosm'?'selected':''}>CyclOSM (relief + routes)</option><option value="wikimedia" ${mapBackgroundValue(design.mapBackground)==='wikimedia'?'selected':''}>Wikimedia Maps</option><option value="satellite" ${mapBackgroundValue(design.mapBackground)==='satellite'?'selected':''}>Satellite (Esri)</option><option value="esri_topo" ${mapBackgroundValue(design.mapBackground)==='esri_topo'?'selected':''}>Topographique (Esri)</option><option value="esri_street" ${mapBackgroundValue(design.mapBackground)==='esri_street'?'selected':''}>Rues couleur (Esri)</option><option value="voyager" ${mapBackgroundValue(design.mapBackground)==='voyager'?'selected':''}>Voyager (avec labels)</option><option value="osmde" ${mapBackgroundValue(design.mapBackground)==='osmde'?'selected':''}>OSM Allemagne</option><option value="cartoweb" ${mapBackgroundValue(design.mapBackground)==='cartoweb'?'selected':''}>CartoWeb.be (Belgique, IGN)</option><option value="swisstopo" ${mapBackgroundValue(design.mapBackground)==='swisstopo'?'selected':''}>Swisstopo (Suisse)</option><option value="grid" ${mapBackgroundValue(design.mapBackground)==='grid'?'selected':''}>Quadrillé</option><optgroup label="— Cartes historiques —"></optgroup><option value="ohm" ${mapBackgroundValue(design.mapBackground)==='ohm'?'selected':''}>OpenHistoricalMap</option><option value="cassini" ${mapBackgroundValue(design.mapBackground)==='cassini'?'selected':''}>Carte de Cassini (18e s.)</option><option value="etatmajor" ${mapBackgroundValue(design.mapBackground)==='etatmajor'?'selected':''}>État-Major (France, 19e s.)</option><option value="swisstopo_dufour" ${mapBackgroundValue(design.mapBackground)==='swisstopo_dufour'?'selected':''}>Swisstopo — Carte Dufour (Suisse, 1845-1865)</option><option value="swisstopo_siegfried" ${mapBackgroundValue(design.mapBackground)==='swisstopo_siegfried'?'selected':''}>Swisstopo — Carte Siegfried (Suisse, 1870-1949)</option><option value="nls_6inch" ${mapBackgroundValue(design.mapBackground)==='nls_6inch'?'selected':''}>OS 6-inch Écosse (1842-1882)</option><option value="nls_natgrid" ${mapBackgroundValue(design.mapBackground)==='nls_natgrid'?'selected':''}>OS National Grid UK (1940-1960)</option><option value="ferraris" ${mapBackgroundValue(design.mapBackground)==='ferraris'?'selected':''}>Carte de Ferraris (Belgique, 1777)</option><option value="vandermaelen" ${mapBackgroundValue(design.mapBackground)==='vandermaelen'?'selected':''}>Carte Vandermaelen (Belgique, 1846-1854)</option><option value="popp" ${mapBackgroundValue(design.mapBackground)==='popp'?'selected':''}>Atlas Popp (Belgique, 1842-1879)</option><option value="frickx" ${mapBackgroundValue(design.mapBackground)==='frickx'?'selected':''}>Carte Fricx (Belgique, 1744)</option><option value="buurtwegen" ${mapBackgroundValue(design.mapBackground)==='buurtwegen'?'selected':''}>Atlas der Buurtwegen (Flandre, ~1840)</option><optgroup label="— France IGN (Géoplateforme) —"></optgroup><option value="ign_ortho_1950" ${mapBackgroundValue(design.mapBackground)==='ign_ortho_1950'?'selected':''}>Photos aériennes historiques IGN (1950-1965)</option><option value="ign_scan50_1950" ${mapBackgroundValue(design.mapBackground)==='ign_scan50_1950'?'selected':''}>Scan50 1950 — carte papier IGN</option><option value="ign_hr_ortho" ${mapBackgroundValue(design.mapBackground)==='ign_hr_ortho'?'selected':''}>Orthophotos actuelles HD IGN</option><option value="ign_planv2" ${mapBackgroundValue(design.mapBackground)==='ign_planv2'?'selected':''}>Plan IGN v2 (actuel)</option><optgroup label="— Grande-Bretagne (NLS) —"></optgroup><option value="nls_25inch" ${mapBackgroundValue(design.mapBackground)==='nls_25inch'?'selected':''}>OS 25-inch Écosse (1892-1905)</option><option value="nls_1inch" ${mapBackgroundValue(design.mapBackground)==='nls_1inch'?'selected':''}>OS 1-inch GB (1885-1900)</option><option value="gsgs3906" ${mapBackgroundValue(design.mapBackground)==='gsgs3906'?'selected':''}>GSGS 3906 — War Office 1940-1943 (Écosse)</option><option value="london_1940s" ${mapBackgroundValue(design.mapBackground)==='london_1940s'?'selected':''}>Londres 1940s (1:1250/1:2500)</option><optgroup label="— États-Unis (USGS) —"></optgroup><option value="usgs_topo" ${mapBackgroundValue(design.mapBackground)==='usgs_topo'?'selected':''}>USGS Topo (USA, actuel)</option><option value="usgs_imagery" ${mapBackgroundValue(design.mapBackground)==='usgs_imagery'?'selected':''}>USGS Satellite (USA)</option><optgroup label="— Espagne (IGN España) —"></optgroup><option value="ign_es_mtn50" ${mapBackgroundValue(design.mapBackground)==='ign_es_mtn50'?'selected':''}>MTN50 première édition (Espagne, 1910-1970)</option><option value="ign_es_pnoa" ${mapBackgroundValue(design.mapBackground)==='ign_es_pnoa'?'selected':''}>Orthophotos PNOA actuelles (Espagne)</option></select></label><label>Détails des recensements<select name="censusDetailsDefault"><option value="collapsed" ${design.censusDetailsDefault!=='expanded'?'selected':''}>Masqués par défaut</option><option value="expanded" ${design.censusDetailsDefault==='expanded'?'selected':''}>Affichés par défaut</option></select></label><label>Ordre des recensements spéciaux<select name="censusSpecialOrder"><option value="official_first" ${design.censusSpecialOrder!=='chronological'?'selected':''}>Classiques puis spéciaux</option><option value="chronological" ${design.censusSpecialOrder==='chronological'?'selected':''}>Tout chronologique</option></select></label><label>Forme des avatars<select name="avatarShape"><option value="tilted" ${(design.avatarShape||'tilted')==='tilted'?'selected':''}>Carré penché (défaut)</option><option value="square" ${design.avatarShape==='square'?'selected':''}>Carré droit</option><option value="rounded" ${design.avatarShape==='rounded'?'selected':''}>Carré arrondi</option><option value="circle" ${design.avatarShape==='circle'?'selected':''}>Cercle</option><option value="pentagon" ${design.avatarShape==='pentagon'?'selected':''}>Pentagone</option><option value="hexagon" ${design.avatarShape==='hexagon'?'selected':''}>Hexagone</option><option value="diamond" ${design.avatarShape==='diamond'?'selected':''}>Losange</option>${/^shp_/.test(design.avatarShape||'')?`<option value="${escapeHtml(design.avatarShape)}" selected>Ma forme</option>`:''}</select></label><label>Affichage des événements<select name="eventDisplayMode"><option value="all_mixed" ${(design.eventDisplayMode||'all_mixed')==='all_mixed'?'selected':''}>Tous (mélangés)</option><option value="all_bottom" ${design.eventDisplayMode==='all_bottom'?'selected':''}>Tous (séparés)</option><option value="own_only" ${design.eventDisplayMode==='own_only'?'selected':''}>Mes événements</option><option value="witness_only" ${design.eventDisplayMode==='witness_only'?'selected':''}>Comme témoin</option></select></label><label>Position sur la carte (défaut)<select name="defaultMapLocationMode"><option value="city" ${(design.defaultMapLocationMode||'city')==='city'?'selected':''}>Ville</option><option value="combined" ${design.defaultMapLocationMode==='combined'?'selected':''}>Combiné</option><option value="precise" ${design.defaultMapLocationMode==='precise'?'selected':''}>Lieu précis</option></select></label><label>Variantes de nom<select name="identity_name_variants_display"><option value="always" ${getIdentityNameVariantsDisplay()==='always'?'selected':''}>Afficher</option><option value="never" ${getIdentityNameVariantsDisplay()==='never'?'selected':''}>Masquer</option><option value="if_filled" ${(getIdentityNameVariantsDisplay()||'if_filled')==='if_filled'?'selected':''}>Afficher seulement si renseigné</option></select></label><label>Enquêtes en secondaire<select name="showInvestigationsAsSecondary"><option value="show" ${(design.showInvestigationsAsSecondary||'show')==='show'?'selected':''}>Afficher dans la fiche</option><option value="hide" ${design.showInvestigationsAsSecondary==='hide'?'selected':''}>Masquer de la fiche</option></select></label><label>Mort Pour La France (défaut)<select name="defaultMortPourLaFrance"><option value="unknown" ${(design.defaultMortPourLaFrance||'unknown')==='unknown'?'selected':''}>Inconnu</option><option value="yes" ${design.defaultMortPourLaFrance==='yes'?'selected':''}>Oui</option><option value="no" ${design.defaultMortPourLaFrance==='no'?'selected':''}>Non</option><option value="na" ${design.defaultMortPourLaFrance==='na'?'selected':''}>Non applicable</option></select></label><label>Prénom affiché<input name="ownerFirst" value="${escapeHtml(design.ownerFirst||'')}" placeholder="Marie"></label><label>Nom affiché<input name="ownerLast" value="${escapeHtml(design.ownerLast||'')}" placeholder="Dupont"></label><label>Lecteur audio / vidéo : avancer et reculer de<input data-ui-duration="s" type="number" name="avSkipSeconds" min="1" max="3600" step="1" value="${escapeHtml(String(design.avSkipSeconds||15))}"></label>`;
+        return `<label>Preset<select name="preset">${presetSelectOptionsHtml(design.preset)}</select></label><label>Couleur principale<input type="color" name="blue" value="${escapeHtml(design.blue||'#0066cc')}"></label><label>Menu des onglets<select name="navPosition"><option value="top" ${design.navPosition!=='bottom'?'selected':''}>En haut (défaut)</option><option value="bottom" ${design.navPosition==='bottom'?'selected':''}>En bas de l’écran</option></select></label><label>Logo « ${escapeHtml(design.ownerFirst||'MA')} ${escapeHtml(design.ownerLast||'FAMILLE')} · GÉNÉALOGIE »<select name="brandDisplay"><option value="show" ${design.brandDisplay!=='hide'?'selected':''}>Afficher (défaut)</option><option value="hide" ${design.brandDisplay==='hide'?'selected':''}>Masquer (onglets plus larges)</option></select></label><label>Colonne latérale<select name="sidebarPosition"><option value="left" ${design.sidebarPosition!=='right'?'selected':''}>À gauche (défaut)</option><option value="right" ${design.sidebarPosition==='right'?'selected':''}>À droite</option></select></label><label>Taille typographique<select name="fontScale"><option value="0.82" ${design.fontScale==='0.82'?'selected':''}>Très compacte (13px)</option><option value="0.88" ${design.fontScale==='0.88'?'selected':''}>Compacte (14px)</option><option value="0.94" ${design.fontScale==='0.94'?'selected':''}>Resserrée (15px)</option><option value="1" ${!['0.82','0.88','0.94','1.06','1.13','1.19','1.25','1.38','1.5','1.63','1.75','2'].includes(design.fontScale)?'selected':''}>Normale (16px)</option><option value="1.06" ${design.fontScale==='1.06'?'selected':''}>Confortable (17px)</option><option value="1.13" ${design.fontScale==='1.13'?'selected':''}>Grande (18px)</option><option value="1.19" ${design.fontScale==='1.19'?'selected':''}>Très grande (19px)</option><option value="1.25" ${design.fontScale==='1.25'?'selected':''}>Large (20px)</option><option value="1.38" ${design.fontScale==='1.38'?'selected':''}>Très large (22px)</option><option value="1.5" ${design.fontScale==='1.5'?'selected':''}>Maximale (24px)</option><option value="1.63" ${design.fontScale==='1.63'?'selected':''}>Lecture facile (26px)</option><option value="1.75" ${design.fontScale==='1.75'?'selected':''}>Lecture facile + (28px)</option><option value="2" ${design.fontScale==='2'?'selected':''}>Très gros caractères (32px)</option></select></label><label>Police de caractères<select name="fontFamily" id="font-family-select" hidden>${fontFamilyOptions.map(([value,label])=>`<option value="${value}" ${fontFamilyValue(design.fontFamily)===value?'selected':''}>${escapeHtml(label)}</option>`).join('')}${(typeof design.fontFamily==='string'&&design.fontFamily.indexOf('local:')===0)?`<optgroup label="— Polices de votre ordinateur —"><option value="${escapeHtml(design.fontFamily)}" selected>${escapeHtml(design.fontFamily.slice(6))}</option></optgroup>`:''}</select><button type="button" class="button small secondary ui-fontbtn" id="detect-local-fonts" title="Choisir la police (celles de l’app et de l’ordinateur)">Aa <span data-font-cur>${escapeHtml((fontFamilyOptions.find(o=>o[0]===fontFamilyValue(design.fontFamily))||[])[1]||String(design.fontFamily||'').replace(/^local:/,'')||'Police de l’app')}</span> ▾</button></label><label>Fond des blocs de fiche<select name="cardBackground"><option value="white">Selon le preset</option><option value="blue" ${design.cardBackground==='blue'?'selected':''}>Couleur bleutée</option><option value="bw" ${design.cardBackground==='bw'?'selected':''}>Noir et blanc</option><option value="archive" ${design.cardBackground==='archive'?'selected':''}>Papier archive</option><option value="green" ${design.cardBackground==='green'?'selected':''}>Vert doux</option></select></label><label>Fond de carte géographique<select name="mapBackground"><option value="bw" ${mapBackgroundValue(design.mapBackground)==='bw'?'selected':''}>Noir &amp; blanc</option><option value="color" ${mapBackgroundValue(design.mapBackground)==='color'?'selected':''}>Couleur (OSM)</option><option value="light" ${mapBackgroundValue(design.mapBackground)==='light'?'selected':''}>Claire</option><option value="minimal" ${mapBackgroundValue(design.mapBackground)==='minimal'?'selected':''}>Minimaliste</option><option value="roads" ${mapBackgroundValue(design.mapBackground)==='roads'?'selected':''}>Routes seules</option><option value="dark" ${mapBackgroundValue(design.mapBackground)==='dark'?'selected':''}>Sombre</option><option value="osmfr" ${mapBackgroundValue(design.mapBackground)==='osmfr'?'selected':''}>OSM France</option><option value="relief" ${mapBackgroundValue(design.mapBackground)==='relief'?'selected':''}>Relief léger</option><option value="cyclosm" ${mapBackgroundValue(design.mapBackground)==='cyclosm'?'selected':''}>CyclOSM (relief + routes)</option><option value="wikimedia" ${mapBackgroundValue(design.mapBackground)==='wikimedia'?'selected':''}>Wikimedia Maps</option><option value="satellite" ${mapBackgroundValue(design.mapBackground)==='satellite'?'selected':''}>Satellite (Esri)</option><option value="esri_topo" ${mapBackgroundValue(design.mapBackground)==='esri_topo'?'selected':''}>Topographique (Esri)</option><option value="esri_street" ${mapBackgroundValue(design.mapBackground)==='esri_street'?'selected':''}>Rues couleur (Esri)</option><option value="voyager" ${mapBackgroundValue(design.mapBackground)==='voyager'?'selected':''}>Voyager (avec labels)</option><option value="osmde" ${mapBackgroundValue(design.mapBackground)==='osmde'?'selected':''}>OSM Allemagne</option><option value="cartoweb" ${mapBackgroundValue(design.mapBackground)==='cartoweb'?'selected':''}>CartoWeb.be (Belgique, IGN)</option><option value="swisstopo" ${mapBackgroundValue(design.mapBackground)==='swisstopo'?'selected':''}>Swisstopo (Suisse)</option><option value="grid" ${mapBackgroundValue(design.mapBackground)==='grid'?'selected':''}>Quadrillé</option><optgroup label="— Cartes historiques —"></optgroup><option value="ohm" ${mapBackgroundValue(design.mapBackground)==='ohm'?'selected':''}>OpenHistoricalMap</option><option value="cassini" ${mapBackgroundValue(design.mapBackground)==='cassini'?'selected':''}>Carte de Cassini (18e s.)</option><option value="etatmajor" ${mapBackgroundValue(design.mapBackground)==='etatmajor'?'selected':''}>État-Major (France, 19e s.)</option><option value="swisstopo_dufour" ${mapBackgroundValue(design.mapBackground)==='swisstopo_dufour'?'selected':''}>Swisstopo — Carte Dufour (Suisse, 1845-1865)</option><option value="swisstopo_siegfried" ${mapBackgroundValue(design.mapBackground)==='swisstopo_siegfried'?'selected':''}>Swisstopo — Carte Siegfried (Suisse, 1870-1949)</option><option value="nls_6inch" ${mapBackgroundValue(design.mapBackground)==='nls_6inch'?'selected':''}>OS 6-inch Écosse (1842-1882)</option><option value="nls_natgrid" ${mapBackgroundValue(design.mapBackground)==='nls_natgrid'?'selected':''}>OS National Grid UK (1940-1960)</option><option value="ferraris" ${mapBackgroundValue(design.mapBackground)==='ferraris'?'selected':''}>Carte de Ferraris (Belgique, 1777)</option><option value="vandermaelen" ${mapBackgroundValue(design.mapBackground)==='vandermaelen'?'selected':''}>Carte Vandermaelen (Belgique, 1846-1854)</option><option value="popp" ${mapBackgroundValue(design.mapBackground)==='popp'?'selected':''}>Atlas Popp (Belgique, 1842-1879)</option><option value="frickx" ${mapBackgroundValue(design.mapBackground)==='frickx'?'selected':''}>Carte Fricx (Belgique, 1744)</option><option value="buurtwegen" ${mapBackgroundValue(design.mapBackground)==='buurtwegen'?'selected':''}>Atlas der Buurtwegen (Flandre, ~1840)</option><optgroup label="— France IGN (Géoplateforme) —"></optgroup><option value="ign_ortho_1950" ${mapBackgroundValue(design.mapBackground)==='ign_ortho_1950'?'selected':''}>Photos aériennes historiques IGN (1950-1965)</option><option value="ign_scan50_1950" ${mapBackgroundValue(design.mapBackground)==='ign_scan50_1950'?'selected':''}>Scan50 1950 — carte papier IGN</option><option value="ign_hr_ortho" ${mapBackgroundValue(design.mapBackground)==='ign_hr_ortho'?'selected':''}>Orthophotos actuelles HD IGN</option><option value="ign_planv2" ${mapBackgroundValue(design.mapBackground)==='ign_planv2'?'selected':''}>Plan IGN v2 (actuel)</option><optgroup label="— Grande-Bretagne (NLS) —"></optgroup><option value="nls_25inch" ${mapBackgroundValue(design.mapBackground)==='nls_25inch'?'selected':''}>OS 25-inch Écosse (1892-1905)</option><option value="nls_1inch" ${mapBackgroundValue(design.mapBackground)==='nls_1inch'?'selected':''}>OS 1-inch GB (1885-1900)</option><option value="gsgs3906" ${mapBackgroundValue(design.mapBackground)==='gsgs3906'?'selected':''}>GSGS 3906 — War Office 1940-1943 (Écosse)</option><option value="london_1940s" ${mapBackgroundValue(design.mapBackground)==='london_1940s'?'selected':''}>Londres 1940s (1:1250/1:2500)</option><optgroup label="— États-Unis (USGS) —"></optgroup><option value="usgs_topo" ${mapBackgroundValue(design.mapBackground)==='usgs_topo'?'selected':''}>USGS Topo (USA, actuel)</option><option value="usgs_imagery" ${mapBackgroundValue(design.mapBackground)==='usgs_imagery'?'selected':''}>USGS Satellite (USA)</option><optgroup label="— Espagne (IGN España) —"></optgroup><option value="ign_es_mtn50" ${mapBackgroundValue(design.mapBackground)==='ign_es_mtn50'?'selected':''}>MTN50 première édition (Espagne, 1910-1970)</option><option value="ign_es_pnoa" ${mapBackgroundValue(design.mapBackground)==='ign_es_pnoa'?'selected':''}>Orthophotos PNOA actuelles (Espagne)</option></select></label><label>Détails des recensements<select name="censusDetailsDefault"><option value="collapsed" ${design.censusDetailsDefault!=='expanded'?'selected':''}>Masqués par défaut</option><option value="expanded" ${design.censusDetailsDefault==='expanded'?'selected':''}>Affichés par défaut</option></select></label><label>Ordre des recensements spéciaux<select name="censusSpecialOrder"><option value="official_first" ${design.censusSpecialOrder!=='chronological'?'selected':''}>Classiques puis spéciaux</option><option value="chronological" ${design.censusSpecialOrder==='chronological'?'selected':''}>Tout chronologique</option></select></label><label>Forme des avatars<select name="avatarShape"><option value="tilted" ${(design.avatarShape||'tilted')==='tilted'?'selected':''}>Carré penché (défaut)</option><option value="square" ${design.avatarShape==='square'?'selected':''}>Carré droit</option><option value="rounded" ${design.avatarShape==='rounded'?'selected':''}>Carré arrondi</option><option value="circle" ${design.avatarShape==='circle'?'selected':''}>Cercle</option><option value="pentagon" ${design.avatarShape==='pentagon'?'selected':''}>Pentagone</option><option value="hexagon" ${design.avatarShape==='hexagon'?'selected':''}>Hexagone</option><option value="diamond" ${design.avatarShape==='diamond'?'selected':''}>Losange</option>${/^shp_/.test(design.avatarShape||'')?`<option value="${escapeHtml(design.avatarShape)}" selected>Ma forme</option>`:''}</select></label><label>Affichage des événements<select name="eventDisplayMode"><option value="all_mixed" ${(design.eventDisplayMode||'all_mixed')==='all_mixed'?'selected':''}>Tous (mélangés)</option><option value="all_bottom" ${design.eventDisplayMode==='all_bottom'?'selected':''}>Tous (séparés)</option><option value="own_only" ${design.eventDisplayMode==='own_only'?'selected':''}>Mes événements</option><option value="witness_only" ${design.eventDisplayMode==='witness_only'?'selected':''}>Comme témoin</option></select></label><label>Position sur la carte (défaut)<select name="defaultMapLocationMode"><option value="city" ${(design.defaultMapLocationMode||'city')==='city'?'selected':''}>Ville</option><option value="combined" ${design.defaultMapLocationMode==='combined'?'selected':''}>Combiné</option><option value="precise" ${design.defaultMapLocationMode==='precise'?'selected':''}>Lieu précis</option></select></label><label>Variantes de nom<select name="identity_name_variants_display"><option value="always" ${getIdentityNameVariantsDisplay()==='always'?'selected':''}>Afficher</option><option value="never" ${getIdentityNameVariantsDisplay()==='never'?'selected':''}>Masquer</option><option value="if_filled" ${(getIdentityNameVariantsDisplay()||'if_filled')==='if_filled'?'selected':''}>Afficher seulement si renseigné</option></select></label><label>Enquêtes en secondaire<select name="showInvestigationsAsSecondary"><option value="show" ${(design.showInvestigationsAsSecondary||'show')==='show'?'selected':''}>Afficher dans la fiche</option><option value="hide" ${design.showInvestigationsAsSecondary==='hide'?'selected':''}>Masquer de la fiche</option></select></label><label>Mort Pour La France (défaut)<select name="defaultMortPourLaFrance"><option value="unknown" ${(design.defaultMortPourLaFrance||'unknown')==='unknown'?'selected':''}>Inconnu</option><option value="yes" ${design.defaultMortPourLaFrance==='yes'?'selected':''}>Oui</option><option value="no" ${design.defaultMortPourLaFrance==='no'?'selected':''}>Non</option><option value="na" ${design.defaultMortPourLaFrance==='na'?'selected':''}>Non applicable</option></select></label><label>Prénom affiché<input name="ownerFirst" value="${escapeHtml(design.ownerFirst||'')}" placeholder="Marie"></label><label>Nom affiché<input name="ownerLast" value="${escapeHtml(design.ownerLast||'')}" placeholder="Dupont"></label><label>Lecteur audio / vidéo : avancer et reculer de<input data-ui-duration="s" type="number" name="avSkipSeconds" min="1" max="3600" step="1" value="${escapeHtml(String(design.avSkipSeconds||15))}"></label>`;
     }
     function enhanceDesignFormOptions(design){
         const cardSelect=$('#design-form select[name="cardBackground"]');
@@ -6098,7 +6317,7 @@ ${backupSectionHtml()}
             ['outside_bg','Hors gén. fond'],['outside_text','Hors gén. texte'],
             ['artist_bg','Artiste fond'],['artist_text','Artiste texte'],
         ];
-        return `<section class="maintenance-panel order-editor compact person-badge-colors" id="person-badge-colors"><h3>Couleurs des badges</h3><div class="person-badge-preview"><span class="ui-badge is-sosa">Sosa 64</span><span class="ui-badge is-blue">d’Aboville 1.2.3</span><span class="ui-badge is-green">Vivant(e)</span><span class="ui-badge is-black">† Décédé(e)</span><span class="ui-badge is-yellow">À vérifier</span><span class="ui-badge is-grey">Hors généalogie</span><span class="ui-badge artist-badge">🎨 Artiste</span></div><div class="person-badge-color-grid">${rows.map(([key,label])=>`<label><span>${escapeHtml(label)}</span><input type="color" name="badge_${key}" value="${escapeHtml(colors[key]||DEFAULT_PERSON_BADGE_COLORS[key])}"></label>`).join('')}</div><div class="page-actions action-zone"><button class="button small" type="button" id="apply-person-badge-colors">Enregistrer</button><button class="button small secondary" type="button" id="reset-person-badge-colors">↺ Remettre comme au départ</button></div><div data-presets-slot="palette-badges"></div></section>`;
+        return `<section class="maintenance-panel order-editor compact person-badge-colors" id="person-badge-colors"><h3>Couleurs des badges</h3><div class="person-badge-preview"><span class="ui-badge is-sosa">Sosa 64</span><span class="ui-badge is-blue">d’Aboville 1.2.3</span><span class="ui-badge is-green">En vie</span><span class="ui-badge is-black">† Décès</span><span class="ui-badge is-yellow">À vérifier</span><span class="ui-badge is-grey">Hors généalogie</span><span class="ui-badge artist-badge">🎨 Artiste</span></div><div class="person-badge-color-grid">${rows.map(([key,label])=>`<label><span>${escapeHtml(label)}</span><input type="color" name="badge_${key}" value="${escapeHtml(colors[key]||DEFAULT_PERSON_BADGE_COLORS[key])}"></label>`).join('')}</div><div class="page-actions action-zone"><button class="button small" type="button" id="apply-person-badge-colors">Enregistrer</button><button class="button small secondary" type="button" id="reset-person-badge-colors">↺ Remettre comme au départ</button></div><div data-presets-slot="palette-badges"></div></section>`;
     }
     // Apparence en trois pages : l'apparence générale, le tableau de bord, les fiches des personnes et des animaux.
     // Une seule page est construite (tous les réglages restent branchés) ; chaque onglet n'en montre que sa part.
@@ -6122,7 +6341,7 @@ ${backupSectionHtml()}
         nav_menus:['Menus, colonne et listes','L’ordre, les noms et ce qui est caché ; et la colonne de gauche. Un onglet par sujet.'],
         design_sheets:['Fiches personnes et animaux','L’en-tête, les sections et les blocs, ce qu’on y voit, la numérotation, la recherche sur internet et les exceptions.']};
     const REGLAGES_A_PIECES={
-        look_theme:[[null,[['f','preset','blue','fontFamily','fontScale','cardBackground','ownerFirst','ownerLast','interfaceLanguage','defaultCalendar','avSkipSeconds'],['q','#lc-fond'],['q','#design-form .my-presets:not(.lc-shapes)'],['q','#design-form .design-actions'],['q','#design-form > .ui-presets']]]],
+        look_theme:[[null,[['f','preset','blue','fontFamily','fontScale','cardBackground','ownerFirst','ownerLast','interfaceLanguage','defaultCalendar','avSkipSeconds'],['q','#lc-fond'],['q','#lc-accord'],['q','#design-form .my-presets:not(.lc-shapes)'],['q','#design-form .design-actions'],['q','#design-form > .ui-presets']]]],
         look_portraits:[[null,[['q','#lc-avatar-shapes'],['t',/^Portraits et avatars/]]]],
         look_msgs:[[null,[['q','.toast-prefs'],['q','#lc-a6-host']]]],
         look_layouts:[[null,[['t',/Réglages enregistrés : l’Apparence/],['t',/Réglages enregistrés : toute l’app/]]]],
@@ -6218,13 +6437,14 @@ ${backupSectionHtml()}
             <div class="design-order-grid block-grid">${webSearchSitesEditor('web-search-global','Toutes les fiches',webSearchSettings())}${personId?webSearchSitesEditor('web-search-person',`Exception pour ${personName(current)}`,webSearchSettings(personId),{personId}):'<section class="maintenance-panel order-editor block-order-editor"><h3>Exception fiche actuelle</h3><p>Ouvre une personne pour lui donner ses propres sites.</p></section>'}${webSearchCustomSitesEditorHtml()}</div>
         </section>
         <section class="person-block-config"><header><span class="eyebrow">FICHES PERSONNES</span><h3>Fiches avec un réglage particulier</h3><p>Les fiches qui ont leurs propres blocs, filtres d’événements ou sites de recherche (au lieu du réglage de toutes les fiches).</p></header>
-            <div class="design-order-grid block-grid" id="person-exceptions-list"><p class="muted">Recherche des fiches…</p></div>
+            <div class="design-order-grid block-grid" id="person-exceptions-list">${waitHtml('Recherche des fiches…')}</div>
         </section>
         ${(window.LCNDA_EXT?.designPanelsEnd||[]).map(fn=>{try{return fn();}catch(error){console.error(error);return '';}}).join('')}
         </section>`;
         splitDesignPage();
         enhanceDesignFormOptions(design);
         reorderDesignPrimaryFields();
+        bindMainColorHint();
         bindToastPrefs($('#workspace'));
         // 🗺️ les réglages de carte vont dans leur page (Cartes et fonds de carte) ; ils restent enregistrés avec le reste de l'apparence
         {const box=$('[data-design-mapfields]');['mapBackground','defaultMapLocationMode'].forEach(n=>{const f=$(`#design-form [name="${n}"]`);if(!box||!f)return;f.setAttribute('form','design-form');box.appendChild(f.closest('label'));});}
@@ -6258,10 +6478,10 @@ ${backupSectionHtml()}
             if(sosaPendingId||dabovillePendingId)renderDesignTools();
         });
         // K2 : gardé tout de suite (sans relancer les numérotations Sosa / d’Aboville, qui ont leur bouton « Recalculer »)
-        window.LCNDA_UI?.autoSave?.($('#workspace'),{save:()=>{const f=$('#design-form');if(!f||!f.isConnected)return;const values=formObject(f),v=JSON.stringify(values);
+        window.LCNDA_UI?.autoSave?.($('#workspace'),{save:()=>{const f=$('#design-form');if(!f||!f.isConnected||f.dataset.k2Stale)return;const values=formObject(f),v=JSON.stringify(values);
             // mêmes valeurs dans un autre ordre (la forme et « Où ? » ont leurs boutons hors du formulaire) : rien n'a changé
             const same=(a,b)=>{const ka=Object.keys(a),kb=Object.keys(b);return ka.length===kb.length&&ka.every(k=>Object.hasOwn(b,k)&&String(a[k])===String(b[k]));};
-            if(v===localStorage.getItem('genealogie-design')||same(values,readDesignSettings()))return;localStorage.setItem('genealogie-design',v);saveIdentityNameVariantsDisplay(values.identity_name_variants_display||'if_filled');applyDesign();if(values.eventDisplayMode){state.eventDisplayMode=values.eventDisplayMode;persistUiState();}if(values.defaultMapLocationMode){state.mapLocationMode=values.defaultMapLocationMode;persistUiState();}},redraw:()=>{applyDesign();renderDesignTools();}});
+            if(v===localStorage.getItem('genealogie-design')||same(values,readDesignSettings()))return;localStorage.setItem('genealogie-design',v);saveIdentityNameVariantsDisplay(values.identity_name_variants_display||'if_filled');applyDesign();if(values.eventDisplayMode){state.eventDisplayMode=values.eventDisplayMode;persistUiState();}if(values.defaultMapLocationMode){state.mapLocationMode=values.defaultMapLocationMode;persistUiState();}},redraw:()=>{const f=$('#design-form');if(f)f.dataset.k2Stale='1';applyDesign();return renderDesignTools();}}); // ↶ Annuler : l'écran d'avant (pas encore redessiné) ne doit pas réécrire ce qu'on vient de remettre
         $('#reset-design').addEventListener('click',()=>{localStorage.removeItem('genealogie-design');applyDesign();renderDesignTools();});
         $('#save-site-defaults')?.addEventListener('click',async()=>{
             const designForm=$('#design-form');
@@ -6442,7 +6662,7 @@ ${backupSectionHtml()}
             }
             const list=$(`#${button.dataset.orderSave}`);if(!list)return;
             const rows=$$('.order-row',list),keys=rows.map(row=>row.dataset.orderKey);
-            if(button.dataset.orderSave==='menu-order'){const hidden=rows.filter(row=>!$('.order-visible input',row)?.checked).map(row=>row.dataset.orderKey);localStorage.setItem('genealogie-menu-order',JSON.stringify(keys));localStorage.setItem('genealogie-menu-hidden',JSON.stringify(hidden));const names={};rows.forEach(row=>{const v=($('[data-menu-name]',row)?.value||'').trim().slice(0,40);if(v)names[row.dataset.orderKey]=v;});localStorage.setItem('genealogie-menu-names',JSON.stringify(names));const icons={};rows.forEach(row=>{const inp=$('[data-menu-icon]',row);if(!inp)return;const v=cleanMenuIcon(inp.value),def=splitMenuIcon(($('[data-menu-name]',row)?.value||'').trim().slice(0,40)).icon||splitMenuIcon($('b',row)?.textContent||'').icon;if(v!==def)icons[row.dataset.orderKey]=v;});/* seuls les émojis changés sont gardés : celui d'origine (ou d'un onglet à soi) suit ses changements */localStorage.setItem('genealogie-menu-icons',JSON.stringify(icons));localStorage.setItem('genealogie-menu-animaux','1');localStorage.setItem('genealogie-menu-fiches','1');localStorage.setItem('genealogie-menu-adn','1');localStorage.setItem('genealogie-menu-suivi','1');localStorage.setItem('genealogie-menu-tresors','1');
+            if(button.dataset.orderSave==='menu-order'){const hidden=rows.filter(row=>!$('.order-visible input',row)?.checked).map(row=>row.dataset.orderKey);localStorage.setItem('genealogie-menu-order',JSON.stringify(keys));localStorage.setItem('genealogie-menu-hidden',JSON.stringify(hidden));const names={};rows.forEach(row=>{const v=($('[data-menu-name]',row)?.value||'').trim().slice(0,40);if(v)names[row.dataset.orderKey]=v;});localStorage.setItem('genealogie-menu-names',JSON.stringify(names));const icons={};rows.forEach(row=>{const inp=$('[data-menu-icon]',row);if(!inp)return;const v=cleanMenuIcon(inp.value),def=splitMenuIcon(($('[data-menu-name]',row)?.value||'').trim().slice(0,40)).icon||splitMenuIcon($('b',row)?.textContent||'').icon;if(v!==def)icons[row.dataset.orderKey]=v;});/* seuls les émojis changés sont gardés : celui d'origine (ou d'un onglet à soi) suit ses changements */localStorage.setItem('genealogie-menu-icons',JSON.stringify(icons));localStorage.setItem('genealogie-menu-animaux','1');localStorage.setItem('genealogie-menu-fiches','1');localStorage.setItem('genealogie-menu-adn','1');localStorage.setItem('genealogie-menu-suivi','1');localStorage.setItem('genealogie-menu-tresors','1');localStorage.setItem('genealogie-menu-documents','1');localStorage.setItem('genealogie-menu-catalogue','1');
                 const own=customTabs();if(own.some(t=>!!t.hidden!==hidden.includes(t.id))){own.forEach(t=>{t.hidden=hidden.includes(t.id);});try{localStorage.setItem('genealogie-custom-tabs',JSON.stringify(own));}catch(_){}}applyMenuOrder();renderDesignTools();orderToast('Ordre du menu enregistré.');return;}
             if(button.dataset.orderSave==='list-order'){const hidden=rows.filter(row=>!$('.order-visible input',row)?.checked).map(row=>row.dataset.orderKey);localStorage.setItem('genealogie-list-order',JSON.stringify(keys));localStorage.setItem('genealogie-list-hidden',JSON.stringify(hidden));renderSidebar();renderDesignTools();orderToast('Ordre des listes enregistré.');return;}
             if(button.dataset.orderSave==='dashboard-widget-catalog-order'){const hidden=rows.filter(row=>!$('.order-visible input',row)?.checked).map(row=>row.dataset.orderKey);localStorage.setItem('genealogie-dashboard-widget-catalog-order',JSON.stringify(keys));localStorage.setItem('genealogie-dashboard-widget-catalog-hidden',JSON.stringify(hidden));renderSidebar();renderDesignTools();orderToast('Bibliothèque de widgets enregistrée.');return;}
@@ -6583,7 +6803,7 @@ ${backupSectionHtml()}
         });
         $('#grave-person-form').addEventListener('submit',async event=>{event.preventDefault();try{const form=event.currentTarget;const personId=form.elements.selected_person_id.value;if(!Number(personId))return window.LCNDA_UI.fail(form.elements.selected_person_id,'Choisis une personne.');await api('add_grave_person',{},{method:'POST',body:{grave_id:form.elements.grave_id.value,person_id:personId}});$('#grave-person-dialog').close();toast('Personne ajoutée à la sépulture.');await selectPerson(state.currentPersonId);}catch(error){toast(error.message,'error');}});
         pkBindQuickCreate($('#grave-person-dialog')); // la personne : menu de choix unique (champ selected_person_id)
-        $('#event-form').addEventListener('submit',async event=>{event.preventDefault();if(event.currentTarget.elements.work_fields)event.currentTarget.elements.work_fields.value=collectEventWorkFields();const values=formObject(event.currentTarget);if(event.currentTarget.elements.date_uncertain)values.date_uncertain=event.currentTarget.elements.date_uncertain.checked?'1':'0';try{const result=await api(values.id?'save_event':'add_event',{}, {method:'POST',body:values});const savedId=Number(values.id||result?.result?.id||0);await applyLabelPickerAfterSave('#event-label-picker',savedId);if(savedId&&state.eventWitnesses!==undefined){try{const sponsors=isBaptismEventType(values.event_type_id)?(state.eventSponsors||[]):[];const linked=[...sponsors.map(s=>({person_id:s.person_id,note:sponsorNote(s)})),...state.eventWitnesses.map(w=>({person_id:w.person_id,note:w.note||'',signed:w.signed===''||w.signed==null?null:Number(w.signed)}))];await api('save_event_witnesses',{},{method:'POST',body:{event_id:savedId,witnesses:JSON.stringify(linked)}});}catch(_){}}$('#event-dialog').close();toast(values.id?'Événement modifié.':'Événement ajouté.');await selectPerson(state.currentPersonId);}catch(error){toast(error.message,'error');}});
+        $('#event-form').addEventListener('submit',async event=>{event.preventDefault();if(event.currentTarget.elements.work_fields)event.currentTarget.elements.work_fields.value=collectEventWorkFields();const values=formObject(event.currentTarget);if(event.currentTarget.elements.date_uncertain)values.date_uncertain=event.currentTarget.elements.date_uncertain.checked?'1':'0';try{const result=await api(values.id?'save_event':'add_event',{}, {method:'POST',body:values});const savedId=Number(values.id||result?.result?.id||0);await applyLabelPickerAfterSave('#event-label-picker',savedId);if(savedId&&state.eventWitnesses!==undefined){try{const sponsors=isBaptismEventType(values.event_type_id)?(state.eventSponsors||[]):[];const linked=[...sponsors.map(s=>({person_id:s.person_id,note:sponsorNote(s)})),...state.eventWitnesses.map(w=>({person_id:w.person_id,note:w.note||'',signed:w.signed===''||w.signed==null?null:Number(w.signed)}))];await api('save_event_witnesses',{},{method:'POST',body:{event_id:savedId,witnesses:JSON.stringify(linked)}});}catch(_){}}$('#event-dialog').close();const dateCheck=values.date_text&&window.LCNDA_UI?.readDate?window.LCNDA_UI.readDate(values.date_text):null;const dateWarn=dateCheck&&!dateCheck.ok&&/impossible/.test(dateCheck.text||'')?` — ⚠️ la date « ${String(values.date_text).trim()} » est impossible, vérifie-la.`:''; /* C4 : on n'empêche pas d'enregistrer, on prévient */toast(dateWarn?(values.id?'Événement modifié':'Événement ajouté')+dateWarn:(values.id?'Événement modifié.':'Événement ajouté.'));await selectPerson(state.currentPersonId);}catch(error){toast(error.message,'error');}});
         (()=>{const wrap=$('#event-form .date-text-wrap');if(!wrap)return;const textInput=wrap.querySelector('[name="date_text"]');const hiddenPicker=wrap.querySelector('.date-picker-hidden');const toggleBtn=wrap.querySelector('.date-picker-toggle');if(!textInput||!hiddenPicker||!toggleBtn)return;toggleBtn.addEventListener('click',()=>{hiddenPicker.valueAsDate=null;const iso=dateTextToIso(textInput.value);if(iso)hiddenPicker.value=iso;try{if(hiddenPicker.showPicker)hiddenPicker.showPicker();else hiddenPicker.click();}catch(_){hiddenPicker.click();}});hiddenPicker.addEventListener('change',()=>{if(hiddenPicker.value){textInput.value=isoToDateText(hiddenPicker.value);textInput.dispatchEvent(new Event('input'));}});bindEventDateAlternative();})();
         (()=>{const wrap=$('#media-form .date-text-wrap');if(!wrap)return;const textInput=wrap.querySelector('[name="date_text"]');const hiddenPicker=wrap.querySelector('.date-picker-hidden');const toggleBtn=wrap.querySelector('.date-picker-toggle');if(!textInput||!hiddenPicker||!toggleBtn)return;toggleBtn.addEventListener('click',()=>{hiddenPicker.valueAsDate=null;const iso=dateTextToIso(textInput.value);if(iso)hiddenPicker.value=iso;try{if(hiddenPicker.showPicker)hiddenPicker.showPicker();else hiddenPicker.click();}catch(_){hiddenPicker.click();}});hiddenPicker.addEventListener('change',()=>{if(hiddenPicker.value){textInput.value=isoToDateText(hiddenPicker.value);textInput.dispatchEvent(new Event('input'));}});})();
         (()=>{const textInput=$('#lightbox-date');const hiddenPicker=$('#lightbox-date-picker');const toggleBtn=$('#lightbox-date-toggle');if(!textInput||!hiddenPicker||!toggleBtn)return;toggleBtn.addEventListener('click',()=>{hiddenPicker.valueAsDate=null;const iso=dateTextToIso(textInput.value);if(iso)hiddenPicker.value=iso;try{if(hiddenPicker.showPicker)hiddenPicker.showPicker();else hiddenPicker.click();}catch(_){hiddenPicker.click();}});hiddenPicker.addEventListener('change',()=>{if(hiddenPicker.value){textInput.value=isoToDateText(hiddenPicker.value);textInput.dispatchEvent(new Event('input'));}});})();
@@ -6751,8 +6971,8 @@ ${backupSectionHtml()}
     }
 
     // un animal : « mâle / femelle », « en vie / mort » ; une personne : comme d'habitude
-    function personKindLabels(form,kind){kind=kind||form.querySelector('[name=kind]:checked')?.value||'human';const an=kind==='animal';const g=form.elements.gender;if(g){const t=an?{unknown:'?',male:'♂ Mâle',female:'♀ Femelle',nonbinary:'Autre'}:{unknown:'Non renseigné',male:'Masculin',female:'Féminin',nonbinary:'Autre / non binaire'};[...g.options].forEach(o=>{o.textContent=t[o.value]||o.textContent;});}const s=form.elements.living_status;if(s){const t=an?{unknown:'À vérifier',living:'En vie',deceased:'Mort(e)'}:{unknown:'À vérifier',living:'Vivante',deceased:'Décédée'};[...s.options].forEach(o=>{o.textContent=t[o.value]||o.textContent;});}const f=form.elements.first_name?.closest('label');if(f&&f.firstChild)f.firstChild.textContent=an?'Nom':'Prénom';const l=form.elements.last_name?.closest('label');if(l&&l.firstChild)l.firstChild.textContent=an?'Affixe (nom de l’élevage)':'Nom inscrit';$('#person-dialog-title').textContent=form.elements.id.value?(an?'Modifier l’animal':'Modifier la personne'):(an?'Nouvel animal':'Nouvelle personne');}
-    document.addEventListener('change',e=>{if(!e.target.matches?.('#person-form [name=kind]'))return;if(e.target.value==='animal'&&!e.target.form.elements.id.value&&window.LCNDA_EXT?.newAnimalFiche){$('#person-dialog').close();window.LCNDA_EXT.newAnimalFiche();return;}personKindLabels(e.target.form);});
+    function personKindLabels(form,kind){kind=kind||form.querySelector('[name=kind]:checked')?.value||'human';const an=kind==='animal';const g=form.elements.gender;if(g){const t=an?{unknown:'?',male:'♂ Mâle',female:'♀ Femelle',nonbinary:'Autre'}:{unknown:'Non renseigné',male:'Masculin',female:'Féminin',nonbinary:'Autre / non binaire'};[...g.options].forEach(o=>{o.textContent=t[o.value]||o.textContent;});}const s=form.elements.living_status;if(s){const gv=g?.value||'unknown',t=an?{unknown:'À vérifier',living:'En vie',deceased:accord(gv,'Mort(e)',{x:'Mort'})}:{unknown:'À vérifier',living:lifeText('living',gv),deceased:lifeText('deceased',gv)};[...s.options].forEach(o=>{o.textContent=t[o.value]||o.textContent;});}const f=form.elements.first_name?.closest('label');if(f&&f.firstChild)f.firstChild.textContent=an?'Nom':'Prénom';const l=form.elements.last_name?.closest('label');if(l&&l.firstChild)l.firstChild.textContent=an?'Affixe (nom de l’élevage)':'Nom inscrit';$('#person-dialog-title').textContent=form.elements.id.value?(an?'Modifier l’animal':'Modifier la personne'):(an?'Nouvel animal':'Nouvelle personne');}
+    document.addEventListener('change',e=>{if(e.target.matches?.('#person-form [name=gender]')){personKindLabels(e.target.form);return;}if(!e.target.matches?.('#person-form [name=kind]'))return;if(e.target.value==='animal'&&!e.target.form.elements.id.value&&window.LCNDA_EXT?.newAnimalFiche){$('#person-dialog').close();window.LCNDA_EXT.newAnimalFiche();return;}personKindLabels(e.target.form);});
     /** Deux onglets : la fiche a changé ailleurs depuis l'ouverture de la fenêtre. La saisie reste ouverte, avec un message
      *  (⚠️ attention, C7) et le choix « Enregistrer quand même » (remplace l'autre version) ; rien n'est perdu. */
     function showSaveConflict(form,message){
@@ -6809,7 +7029,7 @@ ${backupSectionHtml()}
         genderSel._militaryHandler=updateMilitaryToggle;
         genderSel.addEventListener('change',updateMilitaryToggle);
         $('#person-dialog').showModal();}
-    function openNewPersonDialog(){if((baseMode()==='breeding'||state.peopleScope==='animals'||state.personTab==='animals')&&window.LCNDA_EXT?.newAnimalFiche){window.LCNDA_EXT.newAnimalFiche();return;}const form=$('#person-form');form.reset();form._lcBase=null;form.querySelector('.lc-conflict')?.remove();form.elements.id.value='';{const ew=$('#person-identity-empty-wrap');if(ew)ew.innerHTML='';}$('#person-dialog-title').textContent='Nouvelle fiche';const kc=form.querySelector('[data-kind-choice]');if(kc){kc.hidden=false;const k=baseMode()==='breeding'||state.peopleScope==='animals'||state.personTab==='animals'?'animal':'human';form.querySelectorAll('[name=kind]').forEach(r=>{r.checked=r.value===k;});personKindLabels(form);}const groups=state.currentPerson?.surnameGroups||[];form.elements.surname_group_id.innerHTML='<option value="">Non classé</option>'+groups.map(group=>`<option value="${group.id}">${escapeHtml(group.name)}</option>`).join('');$('#person-dialog').showModal();}
+    function openNewPersonDialog(){if(document.body.classList.contains('is-kiosk'))return toast('Mode consultation : rien ne peut être modifié.');if((baseMode()==='breeding'||state.peopleScope==='animals'||state.personTab==='animals')&&window.LCNDA_EXT?.newAnimalFiche){window.LCNDA_EXT.newAnimalFiche();return;}const form=$('#person-form');form.reset();form._lcBase=null;form.querySelector('.lc-conflict')?.remove();form.elements.id.value='';{const ew=$('#person-identity-empty-wrap');if(ew)ew.innerHTML='';}$('#person-dialog-title').textContent='Nouvelle fiche';const kc=form.querySelector('[data-kind-choice]');if(kc){kc.hidden=false;const k=baseMode()==='breeding'||state.peopleScope==='animals'||state.personTab==='animals'?'animal':'human';form.querySelectorAll('[name=kind]').forEach(r=>{r.checked=r.value===k;});personKindLabels(form);}const groups=state.currentPerson?.surnameGroups||[];form.elements.surname_group_id.innerHTML='<option value="">Non classé</option>'+groups.map(group=>`<option value="${group.id}">${escapeHtml(group.name)}</option>`).join('');$('#person-dialog').showModal();}
 
     function openMilitaryDialog(detail){
         const form=$('#military-form');
@@ -7764,7 +7984,7 @@ ${backupSectionHtml()}
     async function uploadOnlineSheetShot(file){
         const form=$('#online-sheet-form'),personId=form.elements.person_id.value,openSeq=form.dataset.openSeq;
         if(!file||!/^image\//.test(file.type))return window.LCNDA_UI.fail(form.querySelector('input[type=file]'), 'Choisis une image (capture d’écran).');
-        const box=$('#online-sheet-shot');if(box)box.innerHTML='<p class="muted">Envoi de la capture…</p>';
+        const box=$('#online-sheet-shot');if(box)box.innerHTML=waitHtml('Envoi de la capture…');
         try{
             const fd=new FormData();fd.append('person_id',personId);fd.append('csrf',state.csrf);
             fd.append('title',`Capture de l’arbre — ${form.elements.label.value.trim()||form.elements.site.value.trim()||'fiche en ligne'}`);
@@ -8623,7 +8843,7 @@ ${backupSectionHtml()}
             else form.appendChild(container);
         }
         if(state.currentLabelsCache===null||state.currentLabelsCache===undefined){
-            container.innerHTML='<p style="font-size:.85em;color:var(--muted)">Chargement des étiquettes…</p>';
+            container.innerHTML=waitHtml('Chargement des étiquettes…');
             state.currentLabelsCache=false;
             api('labels').then(data=>{
                 state.currentLabelsCache=data.labels||[];
@@ -8710,7 +8930,7 @@ ${backupSectionHtml()}
     // Outils partagés avec assets/js/heritage.js (chargé juste après ce fichier)
     // type de base changé (Listes → Animaux) : compteur, liste de gauche
     function refreshBaseMode(){loadPeople.modeSet=false;state.personTab='all';setCountStatus($('#database-status'),personCountLabel(state.bootstrap.stats.personnes));if(state.module==='personnes'){renderSidebar();loadPeople();}}
-    window.LCNDA_APP={designTabs:()=>DESIGN_TABS,askDeleteSheet,openWidgetLibraryDialog,openGraphReorderDialog,personPageHtml,setSheetRoute,ics:{build:icsBuild,download:icsDownload,dateOf:icsDateOf,eventEntry:icsEventEntry,fold:icsFold,escape:icsEscape},openEventIcsDialog,addTableSortBar,sortTableBy,addMediaDialogFiles:files=>mediaDialogAddFiles?.(files),exportSettingFile,importSettingFile,settingExportButton,settingImportButton,freeDateToIso,isoToFreeDate,openGraphExportDialog,saveExportCopy,defaultListTypes,mapTileUrl,offlineTileUrl,openPersonById,battueTargetText,bindReminderButtons,investigationFolderPath,openBattueAliasDialog,openBattueDialog,openBattueLevelColorsDialog,openBattueMediaDialog,openBattueSearchDialog,openInvestigationDialog,openInvestigationItemDialog,openInvestigationItemEventDialog,openInvestigationMediaDialog,openInvestigationUploadDialog,bindWebSearchPanels,bindWebSearchSitesEditors,currentCustomTab,currentDashboardPage,dabovilleNumberFor,dashboardBaseType,dashboardGroupItem,dashboardLineageCard,dashboardNormalizeWidget,dashboardPages,dashboardRecentPeople,dashboardSaintCard,defaultDashboardBlockLimits,defaultDashboardBlockSpans,defaultDashboardBlocks,familyMemoryCardHtml,familyObjectCardHtml,fillLineageWidgets,generationLabel,mediaPreviewHtml,personBlockWidthChoices,personEventMap,readWebSearchSitesEditor,saveDashboardPages,sosaNumberFor,sosaNumbersText,webSearchPanelHtml,webSearchSitesEditor,archiveDigestOptionLabel,budgetCategories,budgetCategoryLabel,censusStatusText,confidenceLabel,courrierCopyFormatLabel,courrierCopyFormats,courrierFilters,courrierOrganismeLabel,courrierOrganismes,courrierStatutLabel,courrierStatuts,externalLinks,keepSosaOutsideClick,labelTextColor,lifeText,listControllerSignal,mediaChronologyKey,openListReorderDialog,openMediaDuplicatesDialog,openMediaFaceDetectionDialog,orderedListTypes,reminderCategories,reminderCategoryLabel,reminderIsPast,renderClosedBranchesList,renderFamilyMemoriesList,renderFamilyObjectsList,renderPrecisePlacesList,renewListController,renewSosaSearchController,saveExternalLinks,sosaRootId,sosaSearchSignal,syncCourrierCopyOrder,EVENT_ICON_GLYPHS,bengaliMonthDays,bengaliMonths,bengaliToJdn,bindLabelListToggles,bindReadingAids,burmeseYear,byzantineYear,calendarLabel,calendarYmdToJdn,confidenceText,copticMonths,copticToJdn,easterStyle,englishOldStyle,ethiopicMonths,ethiopicToJdn,eventIconOptionsHtml,formatCalendarDate,formatChineseLunar,formatFileSize,formatKoreanLunar,formatRepublicanDate,formatUmmAlQura,frenchMonthNames,hebrewDateFromJdn,hebrewLeap,hebrewMonthName,hebrewMonthNames,htrLanguageForModel,hypothesisStatus,indianMonthDays,indianMonths,indianToJdn,japaneseEras,jdnToBengali,jdnToCoptic,jdnToEthiopic,jdnToHebrew,jdnToIndian,jdnToIslamic,jdnToJapanese,jdnToJulian,jdnToPersian,jdnToRepublican,koreanLunarParts,labelChip,labelEntityTypesText,mayaLongCount,moduleHash,openSideReorderDialog,orderedMaintenanceTabs,reglagesA,setReglagesA,REGLAGES_A_PAGES,persianMonthDays,persianMonths,persianToJdn,readingAidsHtml,renderDesignTools,renderExportTools,renderMergeTool,renderShortcutSettings,renderUpkeep,republicanLeap,republicanMonths,republicanToJdn,restoreDoneText,romanDate,saveLastRoute,sexagenaryName,thaiMonths,thaiYear,updateBrowserRoute,importUpload,inseeAuto,inseeImportRemote,inseeSize,mediaTypeShortLabel,mediaTypeShortLabelWithIcon,onOutsideClick,researchProximityFieldsHtml,setupDragOrder,typeGlyph,webSearchAllSites,webSearchContext,webSearchGroups,webSearchLifeRange,webSearchParams,webSearchSettings,DEFAULT_GENDER_COLORS,applyGenderColorsToDocument,ascendantsTreeHtml,bindGraphExportControls,defaultGraphStatsItems,descendantsTreeHtml,getStatsColors,getTreeCardFields,graphExportToolbarHtml,loadLineage,openStatsColorsDialog,relationYears,renderGraphStats,safeUrl,saveGenderColors,sosaMap,orderedMapTypes,applyDesign,mapBackgroundSelectHtml,mapRouteColor,isUsableMapCoord,routePeopleSelection,openViewDialog,readDesignSettings,reloadBootstrap,savedView,setupMapRoutePersonControls,setupMapSurnameAutocomplete,setupSavedViewsDrag,sideButton,bindTableLinks,summaryFromState,dataRow,genderText,placeDisplay,debounce,setModule,renderSidebar,normalizedMediaType,mediaCompareThumb,mediaCompareLinkInfo,fetchMediaCompareInfo,persistUiState,sidebarSignal:()=>sidebarController?.signal,loadOcrEngine,refreshBaseMode,baseMode,graphExportCss,safeExportFilename,customTabs,saveCustomTabs,openCustomScreen,orderedGraphDiagramItems,orderedGraphStatsItems,dashboardWidgetLabel,defaultPersonBlocks,defaultPersonBlockSpans,personBlockSettings,savePersonBlockSettings,blockBaseKey,ANIMAL_BLOCKS,applyBlockWidth,rerenderPerson,formatCalendarByType,gregorianToJdn,jdnToGregorian,converterCalendarOptions,defaultCalendarValue,readDesignSettings,api,$,$$,escapeHtml,formObject,card,empty,toast,undoToast,undoDelete,undoLocalChange,deleteWithUndo,csvSafe,csvCell,refreshScreen,confirmBox,conflictBox,openNewPersonDialog,plural,emptyState,state,personName,years,personChip,mediaThumbHtml,parsedGenealogyDate,collectionPersonField,bindCollectionPersonFields,
+    window.LCNDA_APP={designTabs:()=>DESIGN_TABS,askDeleteSheet,openWidgetLibraryDialog,openGraphReorderDialog,personPageHtml,setSheetRoute,ics:{build:icsBuild,download:icsDownload,dateOf:icsDateOf,eventEntry:icsEventEntry,fold:icsFold,escape:icsEscape},openEventIcsDialog,addTableSortBar,sortTableBy,addMediaDialogFiles:files=>mediaDialogAddFiles?.(files),exportSettingFile,importSettingFile,settingExportButton,settingImportButton,freeDateToIso,isoToFreeDate,openGraphExportDialog,saveExportCopy,defaultListTypes,mapTileUrl,offlineTileUrl,openPersonById,battueTargetText,bindReminderButtons,investigationFolderPath,openBattueAliasDialog,openBattueDialog,openBattueLevelColorsDialog,openBattueMediaDialog,openBattueSearchDialog,openInvestigationDialog,openInvestigationItemDialog,openInvestigationItemEventDialog,openInvestigationMediaDialog,openInvestigationUploadDialog,bindWebSearchPanels,bindWebSearchSitesEditors,currentCustomTab,currentDashboardPage,dabovilleNumberFor,dashboardBaseType,dashboardGroupItem,dashboardLineageCard,dashboardNormalizeWidget,dashboardPages,dashboardRecentPeople,dashboardSaintCard,defaultDashboardBlockLimits,defaultDashboardBlockSpans,defaultDashboardBlocks,familyMemoryCardHtml,familyObjectCardHtml,fillLineageWidgets,generationLabel,mediaPreviewHtml,personBlockWidthChoices,personEventMap,readWebSearchSitesEditor,saveDashboardPages,sosaNumberFor,sosaNumbersText,webSearchPanelHtml,webSearchSitesEditor,archiveDigestOptionLabel,budgetCategories,budgetCategoryLabel,censusStatusText,confidenceLabel,courrierCopyFormatLabel,courrierCopyFormats,courrierFilters,courrierOrganismeLabel,courrierOrganismes,courrierStatutLabel,courrierStatuts,externalLinks,keepSosaOutsideClick,labelTextColor,lifeText,accord,listControllerSignal,mediaChronologyKey,openListReorderDialog,openMediaDuplicatesDialog,openMediaFaceDetectionDialog,orderedListTypes,reminderCategories,reminderCategoryLabel,reminderIsPast,renderClosedBranchesList,renderFamilyMemoriesList,renderFamilyObjectsList,renderPrecisePlacesList,renewListController,renewSosaSearchController,saveExternalLinks,sosaRootId,sosaSearchSignal,syncCourrierCopyOrder,EVENT_ICON_GLYPHS,bengaliMonthDays,bengaliMonths,bengaliToJdn,bindLabelListToggles,bindReadingAids,burmeseYear,byzantineYear,calendarLabel,calendarYmdToJdn,confidenceText,copticMonths,copticToJdn,easterStyle,englishOldStyle,ethiopicMonths,ethiopicToJdn,eventIconOptionsHtml,formatCalendarDate,formatChineseLunar,formatFileSize,formatKoreanLunar,formatRepublicanDate,formatUmmAlQura,frenchMonthNames,hebrewDateFromJdn,hebrewLeap,hebrewMonthName,hebrewMonthNames,htrLanguageForModel,hypothesisStatus,indianMonthDays,indianMonths,indianToJdn,japaneseEras,jdnToBengali,jdnToCoptic,jdnToEthiopic,jdnToHebrew,jdnToIndian,jdnToIslamic,jdnToJapanese,jdnToJulian,jdnToPersian,jdnToRepublican,koreanLunarParts,labelChip,labelEntityTypesText,mayaLongCount,moduleHash,openSideReorderDialog,orderedMaintenanceTabs,reglagesA,setReglagesA,REGLAGES_A_PAGES,persianMonthDays,persianMonths,persianToJdn,readingAidsHtml,renderDesignTools,renderExportTools,renderMergeTool,renderShortcutSettings,renderUpkeep,republicanLeap,republicanMonths,republicanToJdn,restoreDoneText,romanDate,saveLastRoute,sexagenaryName,thaiMonths,thaiYear,updateBrowserRoute,importUpload,inseeAuto,inseeImportRemote,inseeSize,mediaTypeShortLabel,mediaTypeShortLabelWithIcon,onOutsideClick,researchProximityFieldsHtml,setupDragOrder,typeGlyph,webSearchAllSites,webSearchContext,webSearchGroups,webSearchLifeRange,webSearchParams,webSearchSettings,DEFAULT_GENDER_COLORS,applyGenderColorsToDocument,ascendantsTreeHtml,bindGraphExportControls,defaultGraphStatsItems,descendantsTreeHtml,getStatsColors,getTreeCardFields,graphExportToolbarHtml,loadLineage,openStatsColorsDialog,relationYears,renderGraphStats,safeUrl,saveGenderColors,sosaMap,orderedMapTypes,applyDesign,mapBackgroundSelectHtml,mapRouteColor,isUsableMapCoord,routePeopleSelection,openViewDialog,readDesignSettings,reloadBootstrap,savedView,setupMapRoutePersonControls,setupMapSurnameAutocomplete,setupSavedViewsDrag,sideButton,bindTableLinks,summaryFromState,dataRow,genderText,placeDisplay,debounce,setModule,renderSidebar,normalizedMediaType,mediaCompareThumb,mediaCompareLinkInfo,fetchMediaCompareInfo,persistUiState,sidebarSignal:()=>sidebarController?.signal,loadOcrEngine,refreshBaseMode,baseMode,graphExportCss,safeExportFilename,customTabs,saveCustomTabs,openCustomScreen,orderedGraphDiagramItems,orderedGraphStatsItems,dashboardWidgetLabel,defaultPersonBlocks,defaultPersonBlockSpans,personBlockSettings,savePersonBlockSettings,blockBaseKey,ANIMAL_BLOCKS,applyBlockWidth,rerenderPerson,formatCalendarByType,gregorianToJdn,jdnToGregorian,converterCalendarOptions,defaultCalendarValue,readDesignSettings,api,$,$$,escapeHtml,formObject,card,empty,toast,undoToast,undoDelete,undoLocalChange,deleteWithUndo,csvSafe,csvCell,refreshScreen,confirmBox,conflictBox,openNewPersonDialog,plural,emptyState,state,personName,years,personChip,mediaThumbHtml,parsedGenealogyDate,collectionPersonField,bindCollectionPersonFields,
         uploadCollectionFiles,bindTableLinks,actionButton,openLightbox,showFaceSuggestionsOnLightbox,selectPerson,setModule,renderList,renderSidebar,lngToX,latToY,xToLng,yToLat,mapTileUrl,mapBackgroundValue,
         drawMap,renderMaintenance,renderLightboxItem,openArchiveRoom,journalierWageSols,entityLabelsField,bindEntityLabelsFields,renderFairsList,askText,appModules:modules,defaultListTypes,defaultMaintenanceTabs,syncCustomDashboardWidgets,renderDashboard,dashboardBlockSettings,saveDashboardBlockSettings,dashboardNewWidget,orderedDashboardWidgetTypes,dashboardWidgetInfo,dashboardSpace,dashboardSpaceDo,applyMenuOrder,menuHiddenKeys,/* l'ordre et les fonds cachés de Réglages → Cartes et fonds de carte, relus à chaque fois */get tileLayerCategories(){return orderedTileCategories(false);},orderedTileCategories,sortTileKeys};
 

@@ -102,6 +102,7 @@ function heritage_image_pick(PDO $pdo, string $q, string $filter = ''): array
     // aussi par personne rattachée (nom, prénom), titre du document, date ; filtre : sans / avec transcription, avec signature repérée
     $cond = match ($filter) { 'notr' => " AND trim(COALESCE(m.transcription,''))=''", 'tr' => " AND trim(COALESCE(m.transcription,''))<>''",
         'sig' => " AND EXISTS(SELECT 1 FROM media_tags t WHERE t.media_id=m.id AND COALESCE(t.tag_type,'person')='signature')", default => '' };
+    if (function_exists('sealed_media_sql')) { $cond .= sealed_media_sql($pdo); }
     $like = "%{$q}%";
     $stmt = $pdo->prepare("SELECT m.id, m.title, m.filename, m.thumbnail, m.media_type, m.date_text, COALESCE(m.document_reference,'') AS document_reference, CASE WHEN trim(COALESCE(m.transcription,''))<>'' THEN 1 ELSE 0 END AS has_tr, substr(COALESCE(m.transcription,''), 1, 20000) AS transcription,
             (SELECT group_concat(trim(COALESCE(p.first_name,'')||' '||COALESCE(p.last_name,'')), ', ') FROM (SELECT DISTINCT entity_id FROM media_links WHERE media_id=m.id AND entity_type='person' LIMIT 3) l JOIN persons p ON p.id=l.entity_id) AS people
@@ -634,12 +635,17 @@ function field_trips_data(PDO $pdo, string $status = 'todo'): array
     $where = match ($status) { 'done' => "WHERE t.status='done'", 'all' => '', default => "WHERE t.status<>'done'" };
     $rows = $pdo->query("SELECT t.*, (SELECT count(*) FROM field_trip_stops s WHERE s.trip_id=t.id) AS stop_count,
         (SELECT count(*) FROM field_trip_stops s WHERE s.trip_id=t.id AND s.done=1) AS done_count,
-        (SELECT max(day) FROM field_trip_stops s WHERE s.trip_id=t.id) AS day_count
+        (SELECT max(day) FROM field_trip_stops s WHERE s.trip_id=t.id) AS day_count,
+        (SELECT group_concat(s.title || ' ' || s.place_text || ' ' || s.people_text, ' ') FROM field_trip_stops s WHERE s.trip_id=t.id) AS stops_text
         FROM field_trips t {$where}
         ORDER BY CASE WHEN t.status='done' THEN 1 ELSE 0 END, CASE WHEN t.status='done' THEN COALESCE(NULLIF(t.done_at,''), t.date_start) END DESC,
         CASE WHEN t.date_start='' THEN 1 ELSE 0 END, t.date_start, t.id DESC")->fetchAll();
     $counts = $pdo->query("SELECT sum(CASE WHEN status='done' THEN 1 ELSE 0 END) AS done, sum(CASE WHEN status<>'done' THEN 1 ELSE 0 END) AS todo FROM field_trips")->fetch();
     foreach ($rows as &$r) { $r['people'] = h_json_list($r['people_json']); unset($r['people_json']); }
+    unset($r);
+    // noms des personnes du circuit, pour la recherche de la liste (H10)
+    $people = collection_people($pdo, array_merge([], ...array_map(static fn($r) => array_map(static fn($p) => (int) (is_array($p) ? ($p['id'] ?? 0) : $p), $r['people']), $rows ?: [['people' => []]])));
+    foreach ($rows as &$r) { $r['people_names'] = implode(', ', array_filter(array_map(static function ($p) use ($people) { $q = $people[(int) (is_array($p) ? ($p['id'] ?? 0) : $p)] ?? null; return $q ? trim($q['first_name'] . ' ' . $q['last_name']) : ''; }, $r['people']))); $r['stops_text'] = (string) ($r['stops_text'] ?? ''); }
     unset($r);
     return ['trips' => with_labels($pdo, 'field_trip', $rows), 'counts' => ['todo' => (int) ($counts['todo'] ?? 0), 'done' => (int) ($counts['done'] ?? 0)], 'kinds' => FIELD_TRIP_KINDS];
 }

@@ -514,6 +514,10 @@ function watchSitePreview(webContents, origin) {
   webContents.on('did-create-window', (child, { url }) => {
     if (!desk.isSitePreviewUrl(url, origin)) return;
     try { child.setFullScreenable(false); } catch (_) { /* pas sur tous les systèmes */ }
+    // l'aperçu reste sur le site prévisualisé : jamais une autre page de l'application (même origine, mais sans le pont ni le bac à sable du site)
+    const keep = (event, to) => { if (!desk.isSitePreviewUrl(to, origin)) event.preventDefault(); };
+    child.webContents.on('will-navigate', keep);
+    child.webContents.on('will-redirect', keep);
     child.webContents.on('before-input-event', (event, input) => {
       if (input.type !== 'keyDown') return;
       const k = String(input.key || '').toLowerCase();

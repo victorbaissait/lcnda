@@ -388,7 +388,7 @@
                 legendUsed.add(grp);
                 const lift = clamp(Math.abs(xb - xa) * .35, rowH * .18, rowH * .55), mx = (xa + xb) / 2, my = base - lift, op = g.other ? .35 : .8;
                 const ang = Math.atan2(base - my, xb - mx), hs = Math.max(4, fs * .4), ex = xb - Math.cos(ang) * nr(), ey = base - Math.sin(ang) * nr();
-                svg += `<g class="c2-gn">${tip(`${t.gp} (${t.role}${t.rel ? ', ' + t.rel : ''}${a.y !== null ? `, né${t.role === 'marraine' ? 'e' : ''} ${t.gpGuess ? 'vers ' : 'en '}${a.y}` : ''}) → ${t.gc}${b.y !== null ? `, né${t.gcG === 'female' ? 'e' : ''} en ${b.y}` : ''}${t.how === 'premier' ? ' : même premier prénom' : t.how === 'autre' ? ' : un autre de ses prénoms' : ' : prénom différent'}`)}<path d="M${r1(xa)} ${r1(base)}Q${r1(mx)} ${r1(my)} ${r1(ex)} ${r1(ey)}" fill="none" stroke="${c}" stroke-opacity="${op}" stroke-width="${t.how === 'premier' ? 2.2 : 1.4}"${t.how === 'autre' ? ' stroke-dasharray="4 3"' : ''}/>`
+                svg += `<g class="c2-gn">${tip(`${t.gp} (${t.role}${t.rel ? ', ' + t.rel : ''}${a.y !== null ? `, né${t.role === 'marraine' ? 'e' : ''} ${t.gpGuess ? 'vers ' : 'en '}${a.y}` : ''}) → ${t.gc}${b.y !== null ? `, ${(window.LCNDA_ACCORD?.accord || ((_, t) => t.replace('(e)', '')))(t.gcG, 'né(e)', {before: 'né'})} en ${b.y}` : ''}${t.how === 'premier' ? ' : même premier prénom' : t.how === 'autre' ? ' : un autre de ses prénoms' : ' : prénom différent'}`)}<path d="M${r1(xa)} ${r1(base)}Q${r1(mx)} ${r1(my)} ${r1(ex)} ${r1(ey)}" fill="none" stroke="${c}" stroke-opacity="${op}" stroke-width="${t.how === 'premier' ? 2.2 : 1.4}"${t.how === 'autre' ? ' stroke-dasharray="4 3"' : ''}/>`
                     + `<path d="M${r1(ex)} ${r1(ey)}l${r1(-Math.cos(ang - .45) * hs)} ${r1(-Math.sin(ang - .45) * hs)}l${r1(Math.cos(ang - .45) * hs - Math.cos(ang + .45) * hs)} ${r1(Math.sin(ang - .45) * hs - Math.sin(ang + .45) * hs)}Z" fill="${c}" fill-opacity="${op}"/></g>`;
             });
             const few = nodes.size <= Math.max(4, (x1 - x0) / (fs * 6)), placed = [];
@@ -539,7 +539,7 @@
         return new Map(Object.entries(places).map(([id, p]) => [Number(id), cnt.get(fold(p[0])) > 1 && (p[1] || p[2] || p[3]) ? `${p[0]} (${p[1] || p[2] || p[3]})` : p[0]])); };
     function bindGo(pane, run) {
         const btn = pane.querySelector('[data-c2-go]'), msg = pane.querySelector('[data-c2-msg]'); if (!btn) return;
-        btn.addEventListener('click', async () => { btn.disabled = true; if (msg) msg.innerHTML = '<span class="ui-spinner" aria-hidden="true"></span> Lecture de ta généalogie…';
+        btn.addEventListener('click', async () => { btn.disabled = true; if (msg) msg.innerHTML = window.LCNDA_UI.spinner('Lecture de ta généalogie…', {inline: true});
             try { const t = await run(); if (msg?.isConnected) msg.textContent = t ? '✓ ' + t : ''; A().toast?.(t || 'Données prises dans l’app.'); } catch (e) { if (msg) msg.textContent = '⚠️ ' + (e.message || e); } finally { btn.disabled = false; } });
     }
     const findBtn = '<button type="button" class="button small secondary" data-c2-find>🔎 Retrouver les lieux sans position</button>';
@@ -775,7 +775,7 @@
                 C('labels', 'Dans les cases', 'select', {choices: [['', 'Le nom et l’année'], ['size', 'Le nom et le nombre'], ['none', 'Rien']]}), C('sort', 'Ordre des enfants', 'select', {choices: [['', 'Comme dans le tableau'], ['size', 'Les plus grandes familles d’abord']]}), C('border', 'Traits blancs entre les cases', 'check', {def: true})],
             sample: () => ({o: {title: 'Descendance de Jean Martin', sizeBy: 'desc'}, rows: sampleIcicle()})},
         godnames: {icon: '🎀', label: 'Prénoms transmis (parrain, marraine → filleul)', group: 'Généalogie', render: godnames, legend: 'bottom', fromApp: godApp, afterDraw: keepApi,
-            grids: [{key: 'rows', label: 'Les parrains, marraines et filleuls', cols: [C('godparent', 'Parrain ou marraine (Prénom NOM)'), C('godchild', 'Filleul ou filleule (Prénom NOM)'), C('role', 'Rôle', 'select', {choices: [['parrain', 'Parrain'], ['marraine', 'Marraine']]}), C('rel', 'Lien (grand-père, oncle…)'), C('gpYear', 'Né(e) en (parrain)', 'number'), C('gcYear', 'Né(e) en (filleul)', 'number')]}],
+            grids: [{key: 'rows', label: 'Les parrains, marraines et filleuls', cols: [C('godparent', 'Parrain ou marraine (Prénom NOM)'), C('godchild', 'Filleul ou filleule (Prénom NOM)'), C('role', 'Rôle', 'select', {choices: [['parrain', 'Parrain'], ['marraine', 'Marraine']]}), C('rel', 'Lien (grand-père, oncle…)'), C('gpYear', 'Année de naissance (parrain)', 'number'), C('gcYear', 'Année de naissance (filleul)', 'number')]}],
             options: [C('show', 'Montrer', 'select', {choices: [['', 'Seulement les prénoms transmis'], ['all', 'Aussi les filleuls au prénom différent']]}), C('maxRows', 'Prénoms au plus (lignes)', 'range', {min: 1, max: 80, def: 15}),
                 C('rowHeight', 'Hauteur d’une ligne', 'range', {unit: 'px', min: 24, max: 120, def: 50}), C('dotSize', 'Taille des ronds', 'range', {min: .5, max: 2.5, step: .1, def: 1}), C('names', 'Noms sous les ronds', 'select', {choices: [['', 'Quand il y a la place'], ['all', 'Toujours (sans se chevaucher)'], ['off', 'Jamais']]})],
             sample: GOD_SAMPLE},

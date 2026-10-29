@@ -733,6 +733,9 @@
         }
         return `<label class="a11y-font-card ${P.font === k ? 'is-on' : ''} ${warn ? 'is-missing' : ''}"><input type="radio" name="a11y-font" value="${k}" ${P.font === k ? 'checked' : ''}><b style="${st}">${esc(f.label)}</b><span class="a11y-font-sample" style="${st}">Jean-Baptiste MARTIN, né en 1784 à Saint-Céré</span><small class="${warn ? 'is-warn' : ''}">${warn ? '⚠ ' : ''}${esc(note)}</small></label>`;
     };
+    /* l'aperçu des couleurs : les vrais messages de l'app (C7, UI.notice) et le vrai portrait (K7, sinon le rond du menu de choix) */
+    const demoMsg = (kind, text) => (window.LCNDA_UI?.notice ? window.LCNDA_UI.notice(kind, text) : `<div class="ui-notice ui-notice-${kind}"><span class="ui-notice-ico" aria-hidden="true">${{error: '⛔', ok: '✓', warn: '⚠️'}[kind]}</span><span>${esc(text)}</span></div>`);
+    const demoAv = (name, gender, g, ini) => { const old = `<span class="pk-av ${g}" aria-hidden="true">${ini}</span>`; const UI = window.LCNDA_UI; return UI?.avatarOr ? UI.avatarOr({name, gender}, 34, old) : old; };
     function pageHtml() {
         let pal = []; try { pal = A().getStatsColors?.() || []; } catch (_) {}
         if (!pal.length) pal = ['#e74c3c', '#3498db', '#2ecc71', '#f1c40f'];
@@ -751,8 +754,8 @@
             <p class="muted a11y-small">Les couleurs que tu as choisies toi-même (dessins, plans et maison 3D, tableaux, mises en page, photos) ne sont pas remplacées : c’est la correction (le curseur au-dessus) qui les rend plus faciles à distinguer, partout, y compris dans les outils de modification en plein écran.</p>
             ${toggle('shapes', 'Ajouter des formes en plus des couleurs', 'Symboles ✓ ⚠ ⛔ dans les messages, hachures sur les pastilles des légendes et les barres des graphiques, ronds et carrés pour femmes et hommes.')}</div>
             <div class="a11y-demo" aria-label="Aperçu"><span class="a11y-demo-title">Aperçu</span>
-                <div class="a11y-demo-msgs"><span class="a11y-demo-msg is-bad">Date impossible</span><span class="a11y-demo-msg is-good">Enregistré</span><span class="a11y-demo-msg is-warn">À vérifier</span></div>
-                <div class="a11y-demo-people"><span class="pk-av m">JM</span> Jean MARTIN <span class="pk-av f">LB</span> Louise BORIE</div>
+                <div class="a11y-demo-msgs">${demoMsg('error', 'Date impossible')}${demoMsg('ok', 'Enregistré')}${demoMsg('warn', 'À vérifier')}</div>
+                <div class="a11y-demo-people">${demoAv('Jean MARTIN', 'male', 'm', 'JM')} Jean MARTIN ${demoAv('Louise BORIE', 'female', 'f', 'LB')} Louise BORIE</div>
                 <div class="a11y-demo-chart stats-chart compact">${['Martin', 'Borie', 'Dupuy', 'Lacombe'].map((n, i) => `<div class="stats-chart-row"><span class="stats-chart-label">${n}</span><span class="stats-chart-track"><span class="stats-chart-bar" style="width:${[92, 70, 48, 30][i]}%;background:${esc(pal[i % pal.length])}"></span></span><strong class="stats-chart-value">${[23, 17, 12, 7][i]}</strong></div>`).join('')}</div>
                 <div class="a11y-demo-legend">${pal.slice(0, 4).map((c, i) => `<span><i style="background:${esc(c)}"></i>${['Naissances', 'Mariages', 'Décès', 'Autres'][i]}</span>`).join('')}</div></div>
             <div class="a11y-simbox"><h4>👁 Voir comme… <small>pour vérifier un faire-part, un livre ou un graphique</small></h4>

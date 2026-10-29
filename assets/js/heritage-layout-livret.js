@@ -18,25 +18,25 @@
         return out;
     }
     const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
-    /** la page HTML à imprimer (comme « PDF par l'impression ») */
-    function html(doc0, name) {
-        const K = ext.layoutKit, doc = K.resolveDoc(doc0), W = doc.page.w, H = doc.page.h, sides = order(doc.pages.length), r1 = v => Math.round(v * 10) / 10;
+    /** L1 — les feuilles du livret pour la fenêtre « Imprimer » commune : c = {fold (ordre du pliage), flip ('side' | 'top'), lines (traits de pli)} */
+    function sheets(doc0, name, c = {}) {
+        const K = ext.layoutKit, UI = root.LCNDA_UI, doc = K.resolveDoc(doc0), W = doc.page.w, H = doc.page.h, n = doc.pages.length;
+        const sides = c.fold === false ? Array.from({length: Math.ceil(n / 2)}, (_, k) => [2 * k, 2 * k + 1 < n ? 2 * k + 1 : -1]) : order(n);
         const page = i => i < 0 ? `<div class="lb-blank" style="width:${K.px(W)}px;height:${K.px(H)}px"></div>` : K.pageHtml(doc, i, {print: true, preview: true, keyPrefix: 'b' + i});
-        const body = sides.map((s, k) => `<div class="lb-side" data-side="${k % 2 ? 'verso' : 'recto'}"><div class="lb-half">${page(s[0])}</div><div class="lb-half">${page(s[1])}</div><span class="lb-mark">Feuille ${Math.floor(k / 2) + 1} · ${k % 2 ? 'verso' : 'recto'}</span></div>`).join('');
-        return `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>${esc(name)} — livret</title><base href="${esc(location.href.replace(/[^/]*$/, ''))}"><style>${K.BASE_CSS}${K.docCss(doc, 'body')}
-@page{size:${r1(2 * W)}mm ${r1(H)}mm;margin:0}html,body{margin:0;background:#888}body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-.lb-side{position:relative;display:flex;width:${K.px(2 * W)}px;height:${K.px(H)}px;margin:14px auto;background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.35);overflow:hidden}
-.lb-half{width:50%;height:100%;overflow:hidden}.lb-half .ly-page{margin:0;box-shadow:none}.lb-blank{background:#fff}
-.lb-side::after{content:"";position:absolute;left:50%;top:0;bottom:0;border-left:1px dashed rgba(0,0,0,.25)}
-.lb-mark{position:absolute;right:8px;bottom:4px;font:10px system-ui;color:#999}
-.lb-bar{position:sticky;top:0;z-index:9;display:flex;gap:10px;align-items:center;padding:10px 16px;background:#111;color:#fff;font:14px system-ui}.lb-bar button{font:inherit;padding:6px 14px;border-radius:6px;border:0;background:#2f6bff;color:#fff;cursor:pointer}
-@media print{html,body{background:none}.lb-bar,.lb-mark,.lb-side::after{display:none}.lb-side{margin:0;box-shadow:none;break-after:page;page-break-after:always}}</style></head><body>
-<div class="lb-bar"><b>📖 ${esc(name)}</b> · ${sides.length / 2} feuille${sides.length > 2 ? 's' : ''} pliée${sides.length > 2 ? 's' : ''} (${sides.length * 2} pages${sides.length * 2 > doc.pages.length ? `, dont ${sides.length * 2 - doc.pages.length} blanche${sides.length * 2 - doc.pages.length > 1 ? 's' : ''}` : ''}) · imprimer en <b>recto verso, retournement sur le petit côté</b>, puis plier et agrafer au milieu<span style="flex:1"></span><button onclick="print()">🖨 Imprimer / enregistrer en PDF</button></div>${body}</body></html>`;
+        const pages = sides.map((sd, k) => ({w: 2 * W, h: H, cls: `lb-side${c.fold !== false && c.flip === 'top' && k % 2 ? ' is-turned' : ''}${c.lines !== false ? ' has-fold' : ''}`, html: `<div class="lb-half">${page(sd[0])}</div><div class="lb-half">${page(sd[1])}</div>`}));
+        return UI.printSheets({title: `${name} — livret`, pages, css: `${K.BASE_CSS}${K.docCss(doc, 'body')}.lb-side{flex-direction:row!important}.lb-half{width:50%;height:100%;overflow:hidden}.lb-half .ly-page{margin:0;box-shadow:none}.lb-blank{background:#fff}.lb-side.is-turned{transform:rotate(180deg)}.lb-side.has-fold::after{content:"";position:absolute;left:50%;top:0;bottom:0;border-left:.3mm dashed rgba(0,0,0,.35)}`});
     }
+    const OPTIONS = [{key: 'fold', label: 'Pages remises dans l’ordre du pliage', checked: true},
+        {key: 'flip', type: 'radio', label: 'L’imprimante retourne la feuille', value: 'side', show: c => c.fold !== false, choices: [['side', 'Retourner sur le côté', '(petit côté, le plus courant)'], ['top', 'Retourner par le haut']]},
+        {key: 'lines', label: 'Traits de pli', checked: true}];
+    /** « 📖 Livret à plier » : la fenêtre « Imprimer » commune (recto verso, puis plier et agrafer au milieu) */
     function open(doc, name) {
-        const w = window.open('', '_blank'); if (!w) throw new Error('fenêtre bloquée : autorise les fenêtres pour cette page.');
-        w.document.open(); w.document.write(html(doc, name)); w.document.close();
+        const UI = root.LCNDA_UI, K = ext.layoutKit; if (!UI?.openPrintDialog) throw new Error('la fenêtre « Imprimer » n’est pas chargée');
+        const d = K.resolveDoc(doc), N = Math.max(4, Math.ceil(d.pages.length / 4) * 4);
+        UI.openPrintDialog({title: `${name} — livret`, key: 'livret', zone: 'Livret plié', photos: false, margin: 0, sizeLocked: true, ...UI.printPaper(2 * d.page.w, d.page.h),
+            info: `${N / 4} feuille${N > 4 ? 's' : ''} pliée${N > 4 ? 's' : ''} (${N} pages) : imprime en recto verso, puis plie et agrafe au milieu.`,
+            options: OPTIONS, html: c => sheets(doc, name, c)});
     }
-    ext.layoutBooklet = {order, html, open};
+    ext.layoutBooklet = {order, html: (doc, name) => sheets(doc, name, {}), open, sheets, OPTIONS};
     if (typeof module === 'object' && module.exports) module.exports = {order};
 })(typeof window !== 'undefined' ? window : globalThis);

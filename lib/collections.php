@@ -288,7 +288,7 @@ function precise_place_groups(PDO $pdo, int $radius = 30): array
         $lon = $gps ? array_sum(array_column($gps, 'lon')) / count($gps) : ($members[0]['place_lon'] ?? null);
         $years = array_filter(array_column($members, 'year'));
         $keys = array_column($members, 'k'); sort($keys);
-        $out[] = ['key' => $keys[0], 'address' => $address, 'place' => $place, 'label' => $address !== '' ? $address : 'Point GPS précis',
+        $out[] = ['key' => $keys[0], 'address' => $address, 'place' => $place, 'place_ids' => array_values(array_unique(array_filter(array_column($members, 'place_id')))), 'label' => $address !== '' ? $address : 'Point GPS précis',
             'lat' => $lat, 'lon' => $lon, 'gps_only' => $address === '', 'events' => count(array_filter($members, static fn($m) => $m['type'] === 'event')),
             'census' => count(array_filter($members, static fn($m) => $m['type'] === 'census')), 'from' => $years ? min($years) : null, 'to' => $years ? max($years) : null,
             'members' => array_map(static fn($m) => ['type' => $m['type'], 'id' => $m['id']], $members)];

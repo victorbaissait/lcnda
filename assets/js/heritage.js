@@ -443,7 +443,7 @@
         const f = k => esc(v[k] || '');
         openDialog({
             eyebrow: 'DÉPART', title: id ? 'Modifier le voyage' : 'Nouveau voyage', wide: true, labels: ['voyage', v.labels],
-            body: `<div class="form-grid">
+            body: `<div class="form-grid">${!id && !personId ? `<div class="span-2"><span class="pk-lab">Pour qui ?</span>${personPick('h_for_person', null, {placeholder: 'Qui part ? Nom, prénom…'})}</div>` : ''}
                 <label>Date de départ<input name="departure_date" data-ui-date value="${f('departure_date')}" placeholder="12 mai 1885"></label>
                 <label>Port de départ${placeField('departure_port', v.departure_port, v.dep_lat, v.dep_lon, 'Le Havre, Bordeaux, Marseille…')}</label>
                 <label>Nom du navire<input name="ship_name" value="${f('ship_name')}" placeholder="La Bretagne"></label>
@@ -469,6 +469,9 @@
             <label class="h-block-label">Notes<textarea name="notes" rows="2">${f('notes')}</textarea></label>
             <h4>Images</h4>${mediaEditorHtml('voyage', v.id, v.media, [['passagers', 'Liste de passagers (image)'], ['papiers', 'Papiers d’émigration'], ['naturalisation', 'Naturalisation'], ['', 'Photos (navire, départ, famille…)']])}`,
             onSubmit: async form => {
+                // H10 : « ＋ Voyage » de l’en-tête de la liste demande « Pour qui ? » ici
+                personId = v.person_id || personId || Number(form.querySelector('[name=h_for_person]')?.value) || 0;
+                if (!personId) return window.LCNDA_UI.fail(form.querySelector('[name=h_for_person]'), 'Choisis la personne qui part.');
                 const val = values(form);
                 const companion_people = [...form.querySelectorAll('.h-companion-row')].map(r => Object.fromEntries(['person_id', 'relation', 'naturalization_date', 'naturalization_place', 'naturalization_text'].map(k => [k, r.querySelector(`[name=c_${k}]`).value]))).filter(c => Number(c.person_id));
                 Object.keys(val).filter(k => k.startsWith('c_')).forEach(k => delete val[k]);
@@ -548,7 +551,7 @@
         const f = k => esc(r[k] || '');
         openDialog({
             eyebrow: 'ENFANT PLACÉ', title: id ? 'Modifier le placement' : 'Nouveau placement', wide: true, labels: ['placement', r.labels],
-            body: `<div class="form-grid">
+            body: `<div class="form-grid">${!id && !personId ? `<div class="span-2"><span class="pk-lab">Pour qui ?</span>${personPick('h_for_person', null, {placeholder: 'Quel enfant ? Nom, prénom…'})}</div>` : ''}
                 <label>Situation<select name="kind">${Object.entries(placementKinds).map(([k, l]) => `<option value="${k}" ${r.kind === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
                 <label>Institution<input name="institution" value="${f('institution')}" placeholder="Hospice des Enfants-Trouvés de Paris" list="h-institutions"><datalist id="h-institutions"><option>Hospice des Enfants-Trouvés de Paris</option><option>Assistance publique de Paris</option><option>Bureau des nourrices</option><option>Hospice civil</option><option>Hôtel-Dieu</option></datalist></label>
                 <label>N° matricule / registre<input name="matricule" value="${f('matricule')}" placeholder="n° 12345"></label>
@@ -564,6 +567,8 @@
                 <label class="span-2">Notes, histoire<textarea name="notes" rows="4">${f('notes')}</textarea></label></div>
                 <h4>Documents</h4>${mediaEditorHtml('placement', r.id, r.media, [['', 'Registre, collier, carnet, lettres, photos']])}`,
             onSubmit: async form => {
+                personId = personId || Number(form.querySelector('[name=h_for_person]')?.value) || 0; // « ＋ Placement » de l’en-tête de la liste (H10)
+                if (!personId) return window.LCNDA_UI.fail(form.querySelector('[name=h_for_person]'), 'Choisis l’enfant placé.');
                 const val = values(form);
                 const saved = await api('save_placement', {}, {method: 'POST', body: {...val, id: r.id || 0, person_id: personId, lat: val.place_text_lat, lon: val.place_text_lon, origin_lat: val.origin_text_lat, origin_lon: val.origin_text_lon, nurse_person_id: form.querySelector('[name=nurse_person_id]').value}});
                 await uploadMediaEditor(form, 'placement', saved.result.id);
@@ -788,59 +793,169 @@
         return window.LCNDA_UI.pageHeader({title, help: intro || '', detail: !/^(LISTES|RÉGLAGES|RECHERCHE|STATISTIQUES)$/.test(eyebrow), actions: actions ? [actions] : []}); // K5 : l’en-tête unique (app-pages.js)
     }
     const isCurrent = token => token === S().workspaceToken && S().module === 'listes';
-    function personPickerAdd(label, attr) {
-        return `<span class="h-person-add">${personPick('h_add_person', null, {placeholder: 'Pour qui ? Nom, prénom…'})}<button type="button" class="button" ${attr}>${esc(label)}</button></span>`;
-    }
-    function pickedPerson(button) { return Number(button.closest('.h-person-add')?.querySelector('[name=h_add_person]')?.value) || 0; }
+    /* H10 : petites aides communes aux listes Départs, Enfants placés et Poilus */
+    const h10Fold = t => String(t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    const h10Year = v => { const m = String(v || '').match(/\b(\d{4})\b/); return m ? Number(m[1]) : 0; };
+    const h10Words = q => h10Fold(q).split(/\s+/).filter(Boolean);
+    const h10Has = (words, text) => !words.length || words.every(w => h10Fold(text).includes(w));
+    const h10Period = (f, a, b) => { const from = h10Year(f.from), to = h10Year(f.to); if (!from && !to) return true; if (!a && !b) return false; return (!from || (b || a) >= from) && (!to || (a || b) <= to); };
+    const h10Count = (n, total, one, many) => `${plural(n, one, many)}${n !== total ? ` sur ${fmt(total)}` : ''}`;
+    const h10Cmp = (x, y) => String(x || '').localeCompare(String(y || ''), 'fr', {sensitivity: 'base', numeric: true});
+    const h10PeriodFilters = (ph1, ph2) => [{id: 'from', group: 'Période', label: 'À partir de', type: 'date', placeholder: ph1, chipPrefix: 'Depuis'}, {id: 'to', group: 'Période', label: 'Jusqu’à', type: 'date', placeholder: ph2, chipPrefix: 'Jusqu’à'}];
+    const h10NoMatch = what => A().emptyState({icon: '🔍', text: `Aucun ${what} ne correspond`, hint: 'Change les mots cherchés ou retire un filtre.'});
 
     /* ── Départs et émigration ── */
     ext.lists.voyages_list = async token => {
         const data = await api('voyages');
         if (!isCurrent(token)) return;
-        const rows = data.voyages || [];
+        const rows = data.voyages || [], UIx = window.LCNDA_UI, ws = A().$('#workspace');
+        const destOf = v => (v.destination || v.arrival_port || '?').split(',')[0].trim();
         const destinations = {};
-        rows.forEach(v => { const d = (v.destination || v.arrival_port || '?').split(',')[0].trim(); destinations[d] = (destinations[d] || 0) + 1; });
-        A().$('#workspace').innerHTML = `<section class="page collection-page">${pageHeader('LISTES', 'Départs et émigration', 'Les branches parties au Québec, aux États-Unis, en Argentine, en Algérie… Chaque voyage se remplit depuis le bloc « Départs / émigration » de la fiche (case à cocher dans IDENTITÉ → Modifier la personne).')}
-            <div class="collection-toolbar">${personPickerAdd('＋ Voyage', 'data-h-voyage-add-list')}</div>
-            ${rows.length ? `<p class="muted">${plural(rows.length, 'voyage', 'voyages')} · ${Object.entries(destinations).sort((a, b) => b[1] - a[1]).map(([d, n]) => `${esc(d)} (${n})`).join(' · ')}</p>${voyagePaths(rows)}<div class="h-records h-records-grid">${rows.map(v => voyageCardHtml(v, {withPerson: true})).join('')}</div>` : A().emptyState({text: 'Aucun voyage pour l’instant', icon: '🚢', hint: 'Coche « Départs / émigration » sur une fiche (IDENTITÉ → Modifier la personne), puis ajoute le voyage dans son bloc.'})}</section>`;
-        A().$('[data-h-voyage-add-list]').addEventListener('click', event => { const pid = pickedPerson(event.currentTarget); if (!pid) return window.LCNDA_UI.fail(event.currentTarget.closest('.h-person-add')?.querySelector('[name=h_add_person]'), 'Choisis d’abord la personne.'); openVoyageDialog(0, pid); });
+        rows.forEach(v => { const d = destOf(v); destinations[d] = (destinations[d] || 0) + 1; });
+        ws.innerHTML = `<section class="page collection-page">${pageHeader('LISTES', 'Départs et émigration', 'Les branches parties au Québec, aux États-Unis, en Argentine, en Algérie… Chaque voyage se remplit depuis le bloc « Départs / émigration » de la fiche (case à cocher dans IDENTITÉ → Modifier la personne).', '<button type="button" class="button" data-h-voyage-add-list>＋ Voyage</button>')}
+            ${rows.length ? '<div data-h10-bar></div><div data-h10-map></div><div data-h10-rows></div>' : A().emptyState({text: 'Aucun voyage pour l’instant', icon: '🚢', hint: 'Coche « Départs / émigration » sur une fiche (IDENTITÉ → Modifier la personne), puis ajoute le voyage dans son bloc.', action: {label: '＋ Voyage', attrs: 'data-empty-click="[data-h-voyage-add-list]"'}})}</section>`;
+        ws.querySelector('[data-h-voyage-add-list]').addEventListener('click', () => openVoyageDialog(0, 0).catch(error => toast(error.message, 'error')));
+        if (!rows.length) return;
+        // H10 : la ligne « Québec (3) · Argentine (2) » devient la rubrique Destination ; la carte suit les filtres
+        const bar = UIx.listBar({key: 'listes:voyages_list', search: {placeholder: 'Chercher… (personne, port, destination, navire)'},
+            filters: [{id: 'dest', label: 'Destination', type: 'check', options: Object.entries(destinations).sort((x, y) => y[1] - x[1] || h10Cmp(x[0], y[0])).map(([d, n]) => [d, d, d, n])},
+                {id: 'person', label: 'Personne', type: 'person', allowFree: false, chipPrefix: 'Voyageur :'}, ...h10PeriodFilters('1850', '1914')],
+            view: {dflt: 'cards', what: 'voyages'},
+            sort: {options: [['old', 'Les plus anciens (départ)'], ['recent', 'Les plus récents (départ)'], ['az', 'A → Z'], ['za', 'Z → A']], value: 'old'},
+            onChange: () => paint()});
+        ws.querySelector('[data-h10-bar]').replaceWith(bar);
+        function paint() {
+            const st = bar.state, f = st.filters, words = h10Words(st.q), pid = f.person && typeof f.person === 'object' ? Number(f.person.id) : 0;
+            let list = rows.filter(v => (!f.dest?.length || f.dest.includes(destOf(v))) && (!pid || Number(v.person_id) === pid || (v.companion_people || []).some(c => Number(c.person_id) === pid))
+                && h10Period(f, Number(v.departure_year) || h10Year(v.departure_date), h10Year(v.arrival_date) || Number(v.departure_year))
+                && h10Has(words, [v.person_name, v.departure_port, v.arrival_port, v.destination, v.ship_name, v.stopovers, v.reason, ...(v.companion_people || []).map(c => A().personName?.(c.person) || '')].join(' ')));
+            const yr = v => Number(v.departure_year) || h10Year(v.departure_date) || 0;
+            const by = {old: (x, y) => (yr(x) || 9999) - (yr(y) || 9999), recent: (x, y) => yr(y) - yr(x), az: (x, y) => h10Cmp(x.person_name, y.person_name), za: (x, y) => h10Cmp(y.person_name, x.person_name)}[st.sort];
+            if (by) list = [...list].sort(by);
+            bar.setCount(h10Count(list.length, rows.length, 'voyage', 'voyages'));
+            ws.querySelector('[data-h10-map]').innerHTML = list.length ? voyagePaths(list) : '';
+            ws.querySelector('[data-h10-rows]').innerHTML = !list.length ? h10NoMatch('voyage') : st.view === 'cards' ? `<div class="h-records h-records-grid">${list.map(v => voyageCardHtml(v, {withPerson: true})).join('')}</div>`
+                : UIx.rowsHtml(list.map(v => ({thumb: '<span class="ui-card-ico">🚢</span>', name: voyageTitle(v), open: `data-h-voyage-edit="${v.id}" data-h-voyage-person="${v.person_id}"`,
+                    lines: [v.person_name, v.ship_name ? `navire ${v.ship_name}` : '', destOf(v) !== '?' ? `vers ${destOf(v)}` : ''], actions: tools(`data-h-voyage-edit="${v.id}" data-h-voyage-person="${v.person_id}"`, `data-h-voyage-delete="${v.id}"`, 'ce voyage')})));
+            A().bindTableLinks?.();
+        }
+        paint();
     };
 
     /* ── Enfants placés ── */
     ext.lists.placements_list = async token => {
         const data = await api('placements');
         if (!isCurrent(token)) return;
-        const rows = data.placements || [];
-        const places = {};
-        rows.forEach(r => { const d = (r.place_text || '?').split(',')[0].trim(); places[d] = (places[d] || 0) + 1; });
-        A().$('#workspace').innerHTML = `<section class="page collection-page">${pageHeader('LISTES', 'Enfants placés', 'Enfants mis en nourrice, abandonnés ou recueillis par l’hospice : lieu et durée du placement. Beaucoup d’enfants de Paris partaient en nourrice dans le Morvan.')}
-            <div class="collection-toolbar">${personPickerAdd('＋ Placement', 'data-h-placement-add-list')}</div>
-            ${rows.length ? `<p class="muted">${plural(rows.length, 'placement', 'placements')} · ${Object.entries(places).sort((a, b) => b[1] - a[1]).map(([d, n]) => `${esc(d)} (${n})`).join(' · ')}</p>${placementMap(rows)}
-            <table class="data-table"><thead><tr><th>Enfant</th><th>Situation</th><th>Lieu</th><th>Période</th><th>Durée</th><th>Nourrice / institution</th><th></th></tr></thead><tbody>${rows.map(r => `<tr><td>${personLink(r.person_id, r.person_name)}</td><td>${esc(r.kind_label)}</td><td>${esc(r.place_text)}${r.origin_text ? `<br><small>depuis ${esc(r.origin_text)}</small>` : ''}</td><td>${esc([r.start_date, r.end_date].filter(Boolean).join(' → '))}</td><td>${esc(r.duration)}</td><td>${esc([r.nurse_person_name, r.nurse_name, r.institution].filter(Boolean).join(' · '))}</td><td>${tools(`data-h-placement-edit="${r.id}" data-h-placement-person="${r.person_id}"`, `data-h-placement-delete="${r.id}"`, 'ce placement')}</td></tr>`).join('')}</tbody></table>` : A().emptyState({text: 'Aucun placement pour l’instant', icon: '👶', hint: 'Coche « Enfant placé » sur une fiche (IDENTITÉ → Modifier la personne), puis ajoute le placement dans son bloc.'})}</section>`;
-        A().$('[data-h-placement-add-list]').addEventListener('click', event => { const pid = pickedPerson(event.currentTarget); if (!pid) return window.LCNDA_UI.fail(event.currentTarget.closest('.h-person-add')?.querySelector('[name=h_add_person]'), 'Choisis d’abord la personne.'); openPlacementDialog(0, pid); });
+        const rows = data.placements || [], UIx = window.LCNDA_UI, ws = A().$('#workspace');
+        ws.innerHTML = `<section class="page collection-page">${pageHeader('LISTES', 'Enfants placés', 'Enfants mis en nourrice, abandonnés ou recueillis par l’hospice : lieu et durée du placement. Beaucoup d’enfants de Paris partaient en nourrice dans le Morvan.', '<button type="button" class="button" data-h-placement-add-list>＋ Placement</button>')}
+            ${rows.length ? '<div data-h10-bar></div><div data-h10-map></div><div data-h10-rows></div>' : A().emptyState({text: 'Aucun placement pour l’instant', icon: '👶', hint: 'Coche « Enfant placé » sur une fiche (IDENTITÉ → Modifier la personne), puis ajoute le placement dans son bloc.', action: {label: '＋ Placement', attrs: 'data-empty-click="[data-h-placement-add-list]"'}})}</section>`;
+        ws.querySelector('[data-h-placement-add-list]').addEventListener('click', () => openPlacementDialog(0, 0).catch(error => toast(error.message, 'error')));
+        if (!rows.length) return;
+        const kinds = {}; rows.forEach(r => { kinds[r.kind] = (kinds[r.kind] || 0) + 1; });
+        const days = v => { const t = String(v || ''); const m = t.match(/^(\d{4})-(\d{2})-(\d{2})/); if (m) return Date.UTC(+m[1], +m[2] - 1, +m[3]) / 864e5; const d = t.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})/); if (d) return Date.UTC(+d[3], +d[2] - 1, +d[1]) / 864e5; const y = h10Year(t); return y ? Date.UTC(y, 0, 1) / 864e5 : null; };
+        const span = r => { const a = days(r.start_date) ?? (r.start_year ? Date.UTC(+r.start_year, 0, 1) / 864e5 : null), b = days(r.end_date) ?? (r.end_year ? Date.UTC(+r.end_year, 0, 1) / 864e5 : null); return a !== null && b !== null && b >= a ? b - a : -1; };
+        const bar = UIx.listBar({key: 'listes:placements_list', search: {placeholder: 'Chercher… (enfant, lieu, nourrice, institution)'},
+            filters: [{id: 'kind', label: 'Situation', type: 'check', options: Object.entries(placementKinds).filter(([k]) => kinds[k]).map(([k, l]) => [k, l, l, kinds[k]])},
+                {id: 'place', label: 'Lieu', type: 'place', chipPrefix: 'À :'}, ...h10PeriodFilters('1850', '1914')],
+            sort: {options: [['recent', 'Les plus récents'], ['old', 'Les plus anciens'], ['az', 'A → Z'], ['za', 'Z → A'], ['start', 'Date de début'], ['duration', 'Durée (les plus longs d’abord)']], value: 'start'},
+            onChange: () => paint()});
+        ws.querySelector('[data-h10-bar]').replaceWith(bar);
+        function paint() {
+            const st = bar.state, f = st.filters, words = h10Words(st.q), place = f.place ? h10Fold(typeof f.place === 'object' ? f.place.title : String(f.place).replace(/^txt:/, '')).split(/[,(]/)[0].trim() : '';
+            let list = rows.filter(r => (!f.kind?.length || f.kind.includes(r.kind)) && (!place || h10Fold(r.place_text).includes(place)) && h10Period(f, Number(r.start_year) || 0, Number(r.end_year) || 0)
+                && h10Has(words, [r.person_name, r.place_text, r.origin_text, r.nurse_name, r.nurse_person_name, r.institution, r.kind_label].join(' ')));
+            const upd = r => r.updated_at || r.created_at || '';
+            const by = {recent: (x, y) => h10Cmp(upd(y), upd(x)), old: (x, y) => h10Cmp(upd(x), upd(y)), az: (x, y) => h10Cmp(x.person_name, y.person_name), za: (x, y) => h10Cmp(y.person_name, x.person_name),
+                start: (x, y) => (Number(x.start_year) || 9999) - (Number(y.start_year) || 9999) || h10Cmp(x.start_date, y.start_date), duration: (x, y) => span(y) - span(x)}[st.sort];
+            if (by) list = [...list].sort(by);
+            bar.setCount(h10Count(list.length, rows.length, 'placement', 'placements'));
+            ws.querySelector('[data-h10-map]').innerHTML = list.length ? placementMap(list) : '';
+            ws.querySelector('[data-h10-rows]').innerHTML = list.length ? `<div class="data-table-wrap"><table class="data-table"><thead><tr><th><button data-sort-column="0" data-sort-key="child">Enfant</button></th><th><button data-sort-column="1">Situation</button></th><th><button data-sort-column="2">Lieu</button></th><th><button data-sort-column="3" data-sort-key="start">Période</button></th><th><button data-sort-column="4" data-sort-key="duration">Durée</button></th><th><button data-sort-column="5">Nourrice / institution</button></th><th></th></tr></thead><tbody>${list.map(r => `<tr><td>${personLink(r.person_id, r.person_name)}</td><td>${esc(r.kind_label)}</td><td>${esc(r.place_text)}${r.origin_text ? `<br><small>depuis ${esc(r.origin_text)}</small>` : ''}</td><td>${esc([r.start_date, r.end_date].filter(Boolean).join(' → '))}</td><td>${esc(r.duration)}</td><td>${esc([r.nurse_person_name, r.nurse_name, r.institution].filter(Boolean).join(' · '))}</td><td>${tools(`data-h-placement-edit="${r.id}" data-h-placement-person="${r.person_id}"`, `data-h-placement-delete="${r.id}"`, 'ce placement')}</td></tr>`).join('')}</tbody></table></div>` : h10NoMatch('placement');
+            bar.sortColumns?.(ws.querySelector('[data-h10-rows] table'), {child: ['az', 'za'], start: ['start'], duration: [null, 'duration']}); // cliquer un titre de colonne met « Trier » à jour
+        }
+        paint();
     };
 
     /* ── Armoiries ── */
+    /* H10 : la barre commune (🔍 · Filtrer ▾ · Liste | Fiches · Trier), retenue pour chaque liste ; une liste vide montre seulement la grande boîte K10 */
+    const UIx = () => window.LCNDA_UI, LM = () => window.LCNDA_UI.listMatch;
+    const labelIds = labels => (labels || []).map(l => Number(l.id));
+    const labelNames = labels => (labels || []).map(l => l.name);
+    const B4 = [['recent', 'Les plus récents'], ['old', 'Les plus anciens'], ['az', 'A → Z'], ['za', 'Z → A']];
+    const B4F = [['recent', 'Les plus récentes'], ['old', 'Les plus anciennes'], ['az', 'A → Z'], ['za', 'Z → A']];
+    const whenOf = r => r.updated_at || r.created_at || '';
+    /** pose la barre (ou la retire quand la liste est tout à fait vide) ; paint(bar) redessine seulement les lignes */
+    function h10Bar(slot, box, total, opts, paint, emptyHtml) {
+        if (!total) { slot?.remove(); box.innerHTML = emptyHtml; return null; }
+        const bar = UIx().listBar({...opts, onChange: () => paint(bar)});
+        slot.replaceWith(bar); paint(bar); return bar;
+    }
+    const noMatch = text => A().emptyState({icon: '🔍', text, hint: 'Change les mots cherchés ou retire un filtre (« Tout effacer »).'});
     ext.lists.coats_of_arms = async token => {
-        const q = S().hCoatsQuery || '';
-        const data = await api('coats_of_arms', {q});
+        const data = await api('coats_of_arms');
         if (!isCurrent(token)) return;
-        const rows = data.coats || [];
-        registerCoatMedia(rows);
-        A().$('#workspace').innerHTML = `<section class="page collection-page">${pageHeader('LISTES', 'Armoiries', 'Les blasons de ta famille : l’image, la description dans la langue des héraldistes (« d’azur à trois fleurs de lys d’or »), la devise et les personnes qui l’ont porté. Sur une fiche, coche « Noblesse / blason » pour l’afficher.')}
-            <div class="collection-toolbar"><input type="search" id="h-coats-q" value="${esc(q)}" placeholder="Chercher (nom, blasonnement, famille)…"><button type="button" class="button" data-h-coat-edit="0">＋ Armoiries</button></div>
-            <div class="h-coats h-coats-grid">${rows.map(c => coatCardHtml(c)).join('') || A().emptyState({text: 'Aucune armoirie pour l’instant', icon: '🛡️', hint: 'Image du blason, blasonnement, porteurs.', action: {label: '＋ Armoiries', attrs: 'data-h-coat-edit="0"'}})}</div></section>`;
-        A().$('#h-coats-q').addEventListener('change', event => { S().hCoatsQuery = event.target.value.trim(); A().renderList(); });
+        const all = data.coats || [];
+        registerCoatMedia(all);
+        const ws = A().$('#workspace');
+        ws.innerHTML = `<section class="page collection-page">${UIx().pageHeader({title: 'Armoiries', help: 'Les blasons de ta famille : l’image, la description dans la langue des héraldistes (« d’azur à trois fleurs de lys d’or »), la devise et les personnes qui l’ont porté. Sur une fiche, coche « Noblesse / blason » pour l’afficher.', primary: '<button type="button" class="button" data-h-coat-edit="0">＋ Armoiries</button>'})}
+            <div data-h-coats-bar></div><div data-h-coats-list></div></section>`;
+        const box = ws.querySelector('[data-h-coats-list]'), n = fn => all.filter(fn).length, hasImg = c => !!coatImage(c);
+        const item = (c, view) => { const img = coatImage(c), who = (c.people || []).map(l => A().personName(l.person));
+            return {thumb: img ? A().mediaThumbHtml(img) : '<span class="ui-card-ico" aria-hidden="true">🛡️</span>', name: c.title, open: `data-h-coat-edit="${c.id}"`,
+                lines: [c.blazon ? `« ${c.blazon} »` : 'Blasonnement à écrire', [c.motto ? `Devise : ${c.motto}` : '', who.length ? `Porté par ${who.join(', ')}` : ''].filter(Boolean).join(' · ')],
+                badges: [c.title_of_nobility ? {text: c.title_of_nobility, kind: 'grey'} : null, LC(c.labels)].filter(Boolean), when: whenOf(c), whenLabel: 'Modifié',
+                menu: [`<button type="button" data-h-coat-edit="${c.id}">✎ Modifier</button>`, `<button type="button" class="danger" data-h-coat-delete="${c.id}" data-h-coat-person="0">🗑 Supprimer</button>`],
+                actions: view === 'list' ? tools(`data-h-coat-edit="${c.id}"`, `data-h-coat-delete="${c.id}" data-h-coat-person="0"`, 'ces armoiries') : ''}; };
+        h10Bar(ws.querySelector('[data-h-coats-bar]'), box, all.length, {key: 'listes:coats_of_arms', search: {placeholder: 'Chercher… (nom, blasonnement, devise, famille)', value: S().hCoatsQuery || ''},
+            filters: [{id: 'person', label: 'Porteur', type: 'person', chipPrefix: '👤 Porté par', allowFree: false},
+                {id: 'img', label: 'Image', type: 'radio', dflt: '', options: [['', 'Toutes'], ['yes', `Avec l’image du blason (${n(hasImg)})`, '🖼 Avec image'], ['no', `Sans image (${n(c => !hasImg(c))})`, 'Sans image']]},
+                {id: 'label', label: 'Étiquette', kind: 'label', allowFree: false, chipPrefix: '🏷'}],
+            view: {dflt: 'cards', what: 'armoiries'}, sort: {options: B4F, value: 'az'}}, bar => {
+            const {q, filters: f, sort, view} = bar.state;
+            const rows = UIx().sortItems(all.filter(c => LM().text(q, c.title, c.blazon, c.motto, c.title_of_nobility, (c.people || []).map(l => A().personName(l.person)))
+                && LM().pick(f.person, (c.people || []).map(l => l.person.id), []) && (!f.img || (f.img === 'yes') === hasImg(c)) && LM().pick(f.label, labelIds(c.labels), labelNames(c.labels))), sort, {name: c => c.title, date: whenOf});
+            bar.setCount(rows.length === all.length ? plural(all.length, 'armoirie', 'armoiries') : `${plural(rows.length, 'armoirie', 'armoiries')} sur ${fmt(all.length)}`);
+            box.innerHTML = rows.length ? UIx().itemsHtml(view, rows.map(c => item(c, view))) : noMatch('Aucune armoirie ne correspond');
+        }, A().emptyState({text: 'Aucune armoirie pour l’instant', icon: '🛡️', hint: 'Image du blason, blasonnement, porteurs.', action: {label: '＋ Armoiries', attrs: 'data-h-coat-edit="0"'}}));
     };
 
     /* ── Poilus ── */
     ext.lists.poilus_list = async token => {
         const data = await api('poilus');
         if (!isCurrent(token)) return;
-        const rows = data.poilus || [];
-        A().$('#workspace').innerHTML = `<section class="page collection-page">${pageHeader('LISTES', 'Poilus 14-18', 'Les soldats de la Grande Guerre : leurs unités et, pour chaque date importante (blessure, disparition…), le lien vers le journal de marche de leur régiment ce jour-là.')}
-            ${rows.length ? rows.map(r => `<article class="h-record"><header><div>${chip(r.person)}${(r.person.mort_pour_la_france === 'yes') ? ' <span class="collection-kind">Mort pour la France</span>' : ''}</div>${tools(`data-h-poilu-edit="${r.person.id}"`, `data-h-poilu-clear="${r.person.id}"`, 'ce parcours')}</header>${poiluHtml(r, r.person)}</article>`).join('') : A().emptyState({text: 'Aucun poilu pour l’instant', icon: '🎖️', hint: 'Coche « Poilu 14-18 » dans IDENTITÉ → Modifier la personne, puis saisis son parcours.'})}</section>`;
-        A().bindTableLinks();
+        const rows = data.poilus || [], UIx = window.LCNDA_UI, ws = A().$('#workspace');
+        ws.innerHTML = `<section class="page collection-page">${pageHeader('LISTES', 'Poilus 14-18', 'Les soldats de la Grande Guerre : leurs unités et, pour chaque date importante (blessure, disparition…), le lien vers le journal de marche de leur régiment ce jour-là.')}
+            ${rows.length ? '<div data-h10-bar></div><div data-h10-rows></div>' : A().emptyState({text: 'Aucun poilu pour l’instant', icon: '🎖️', hint: 'Coche « Poilu 14-18 » dans IDENTITÉ → Modifier la personne, puis saisis son parcours.'})}</section>`;
+        if (!rows.length) return;
+        // H10 : chercher un nom, un régiment, un lieu ; filtrer par « Mort pour la France », unité, devenir
+        const mpf = r => r.person?.mort_pour_la_france === 'yes', unitsOf = r => [...new Set((r.units || []).map(u => String(u.unit_name || '').trim()).filter(Boolean))];
+        const FATES = [['blesse', 'Blessé'], ['disparu', 'Disparu'], ['prisonnier', 'Prisonnier']], hasKind = (r, k) => (r.events || []).some(e => e.kind === k);
+        const units = {}; rows.forEach(r => unitsOf(r).forEach(u => { units[u] = (units[u] || 0) + 1; }));
+        const bar = UIx.listBar({key: 'listes:poilus_list', search: {placeholder: 'Chercher… (nom, régiment, lieu)'},
+            filters: [{id: 'mpf', label: 'Mort pour la France', type: 'check', text: `Mort pour la France (${rows.filter(mpf).length})`},
+                {id: 'unit', label: 'Régiment, unité', type: 'check', options: Object.keys(units).sort(h10Cmp).map(u => [u, u, u, units[u]])},
+                {id: 'fate', label: 'Devenir', type: 'check', options: FATES.map(([k, l]) => [k, l, l, rows.filter(r => hasKind(r, k)).length])}],
+            view: {dflt: 'list', what: 'poilus'},
+            sort: {options: [['recent', 'Les plus récents'], ['old', 'Les plus anciens'], ['az', 'A → Z'], ['za', 'Z → A'], ['unit', 'Par régiment']], value: 'az'},
+            onChange: () => paint()});
+        ws.querySelector('[data-h10-bar]').replaceWith(bar);
+        const nm = r => `${r.person?.last_name || ''} ${r.person?.first_name || ''}`, upd = r => r.person?.updated_at || '';
+        const fateText = r => { const hurt = (r.events || []).find(e => ['tue', 'disparu', 'prisonnier', 'blesse', 'gaze'].includes(e.kind)); return mpf(r) ? 'Mort pour la France' : hurt ? `${hurt.kind_label || ''}${hurt.event_date ? ' le ' + dateFr(hurt.event_date) : ''}` : ''; };
+        function paint() {
+            const st = bar.state, f = st.filters, words = h10Words(st.q);
+            let list = rows.filter(r => (!f.mpf || mpf(r)) && (!f.unit?.length || unitsOf(r).some(u => f.unit.includes(u))) && (!f.fate?.length || f.fate.some(k => hasKind(r, k)))
+                && h10Has(words, [A().personName(r.person), ...unitsOf(r), ...(r.events || []).map(e => e.place_text || '')].join(' ')));
+            const by = {recent: (x, y) => h10Cmp(upd(y), upd(x)), old: (x, y) => h10Cmp(upd(x), upd(y)), az: (x, y) => h10Cmp(nm(x), nm(y)), za: (x, y) => h10Cmp(nm(y), nm(x)), unit: (x, y) => h10Cmp(unitsOf(x)[0] || '~', unitsOf(y)[0] || '~') || h10Cmp(nm(x), nm(y))}[st.sort];
+            if (by) list = [...list].sort(by);
+            bar.setCount(h10Count(list.length, rows.length, 'poilu', 'poilus'));
+            ws.querySelector('[data-h10-rows]').innerHTML = !list.length ? h10NoMatch('poilu') : st.view === 'cards'
+                ? UIx.cardsHtml(list.map(r => ({thumb: UIx.avatar ? UIx.avatar(r.person, 88) : '<span class="ui-card-ico">🎖️</span>', name: A().personName(r.person), open: `data-h-person="${r.person.id}"`,
+                    lines: [unitsOf(r).join(' · ') || 'Unité à saisir', fateText(r)], badges: mpf(r) ? [{text: 'Mort pour la France', kind: 'black'}] : [],
+                    menu: [`<button type="button" data-h-poilu-edit="${r.person.id}">✎ Modifier le parcours</button>`]})))
+                : list.map(r => `<article class="h-record"><header><div>${chip(r.person)}${mpf(r) ? ' <span class="collection-kind">Mort pour la France</span>' : ''}</div>${tools(`data-h-poilu-edit="${r.person.id}"`, `data-h-poilu-clear="${r.person.id}"`, 'ce parcours')}</header>${poiluHtml(r, r.person)}</article>`).join('');
+            A().bindTableLinks();
+        }
+        paint();
     };
 
     /* ── Inventaires après décès ── */
@@ -854,14 +969,31 @@
         let editing = null;
         if (edit) editing = edit.id ? rows.find(r => Number(r.id) === Number(edit.id)) : {id: 0, person_id: edit.personId || 0, currency: 'livre', items: [], media: []};
         if (editing && !editing.person && editing.person_id) { try { editing.person = (await api('person', {id: editing.person_id})).person; } catch (_) {} }
-        A().$('#workspace').innerHTML = `<section class="page collection-page">${pageHeader('LISTES', 'Inventaires après décès', 'Saisis un inventaire pièce par pièce (meubles, bétail, outils, linge…) avec la valeur de chaque objet. Le total est converti en journées de travail d’un journalier pour comparer la richesse d’une génération à l’autre (Graphiques → Statistiques → Richesse).')}
-            <div class="collection-toolbar"><button type="button" class="button" data-h-probate-new>＋ Inventaire</button><button type="button" class="button secondary" data-h-probate-compare>Comparer les générations</button></div>
-            ${editing ? probateFormHtml(editing) : ''}
-            ${rows.length ? `<table class="data-table"><thead><tr><th>Personne</th><th>Date</th><th>Notaire</th><th>Total</th><th>Net</th><th>Journées de travail</th><th></th></tr></thead><tbody>${rows.map(r => { const d = workDays(r.net, r.currency, r.year); return `<tr><td>${personLink(r.person_id, r.person_name)}${LC(r.labels)}</td><td>${esc(r.date_text)}</td><td>${esc(r.notary)}</td><td>${esc(moneyText(r.total, r.currency))}</td><td>${esc(moneyText(r.net, r.currency))}</td><td>${d ? fmt(d) : '—'}</td><td>${tools(`data-h-probate-edit="${r.id}"`, `data-h-probate-delete="${r.id}"`, 'cet inventaire')}</td></tr>`; }).join('')}</tbody></table>` : (editing ? '' : A().emptyState({text: 'Aucun inventaire après décès pour l’instant', icon: '📜', action: {label: '＋ Inventaire', attrs: 'data-h-probate-new'}}))}</section>`;
-        const ws = A().$('#workspace');
+        A().$('#workspace').innerHTML = `<section class="page collection-page">${UIx().pageHeader({title: 'Inventaires après décès', help: 'Saisis un inventaire pièce par pièce (meubles, bétail, outils, linge…) avec la valeur de chaque objet. Le total est converti en journées de travail d’un journalier pour comparer la richesse d’une génération à l’autre (Graphiques → Statistiques → Richesse).',
+                primary: '<button type="button" class="button" data-h-probate-new>＋ Inventaire</button>', more: ['<button type="button" class="button secondary" data-h-probate-compare>📊 Comparer les générations</button>']})}
+            ${editing ? probateFormHtml(editing) : ''}<div data-h-probate-bar></div><div data-h-probate-list></div></section>`;
+        const ws = A().$('#workspace'), box = ws.querySelector('[data-h-probate-list]');
+        const CUR = {livre: 'Livres tournois', franc: 'Francs', nf: 'Nouveaux francs'}, days = r => workDays(r.net, r.currency, r.year) || 0;
+        const SORTS = {date: (a, b) => (a.year || 9999) - (b.year || 9999), rich: (a, b) => Number(b.net || 0) - Number(a.net || 0), days: (a, b) => days(b) - days(a)};
+        h10Bar(ws.querySelector('[data-h-probate-bar]'), box, rows.length, {key: 'listes:probate', search: {placeholder: 'Chercher… (personne, notaire, lieu)'},
+            filters: [{id: 'person', label: 'Personne', type: 'person', chipPrefix: '👤', allowFree: false},
+                {id: 'place', label: 'Lieu', type: 'place', chipPrefix: '📍'},
+                {id: 'from', group: 'Période', label: 'À partir de', type: 'date', placeholder: '« 1750 »', chipPrefix: 'Depuis'}, {id: 'to', group: 'Période', label: 'Jusqu’à', type: 'date', placeholder: '« 1800 »', chipPrefix: 'Jusqu’à'},
+                {id: 'currency', label: 'Monnaie', type: 'check', options: Object.entries(CUR).filter(([k]) => rows.some(r => r.currency === k)).map(([k, l]) => [k, `${l} (${rows.filter(r => r.currency === k).length})`, l])},
+                {id: 'label', label: 'Étiquette', kind: 'label', allowFree: false, chipPrefix: '🏷'}],
+            sort: {options: [...B4, ['date', 'Date de l’acte'], ['rich', 'Le plus riche (net)'], ['days', 'Le plus de journées de travail']], value: 'date'}}, bar => {
+            const {q, filters: f, sort} = bar.state;
+            let list = rows.filter(r => LM().text(q, r.person_name, r.notary, r.place_text, r.reference) && LM().pick(f.person, [r.person_id], []) && LM().pick(f.place, [], [r.place_text])
+                && LM().period(f.from, f.to, r.year || r.date_text) && (!(f.currency || []).length || f.currency.includes(r.currency)) && LM().pick(f.label, labelIds(r.labels), labelNames(r.labels)));
+            list = SORTS[sort] ? [...list].sort(SORTS[sort]) : UIx().sortItems(list, sort, {name: r => r.person_name, date: whenOf});
+            bar.setCount(list.length === rows.length ? plural(rows.length, 'inventaire', 'inventaires') : `${plural(list.length, 'inventaire', 'inventaires')} sur ${fmt(rows.length)}`);
+            box.innerHTML = list.length ? `<div class="data-table-wrap"><table class="data-table"><thead><tr><th><button data-sort-column="0" data-sort-key="person">Personne</button></th><th><button data-sort-column="1" data-sort-key="date">Date</button></th><th><button data-sort-column="2">Notaire</button></th><th><button data-sort-column="3">Total</button></th><th><button data-sort-column="4" data-sort-key="net">Net</button></th><th><button data-sort-column="5" data-sort-key="days">Journées de travail</button></th><th></th></tr></thead><tbody>${list.map(r => { const d = days(r); return `<tr><td>${personLink(r.person_id, r.person_name)}${LC(r.labels)}</td><td data-sort-value="${r.year || 9999}">${esc(r.date_text)}</td><td>${esc(r.notary)}</td><td data-sort-value="${Number(r.total || 0)}">${esc(moneyText(r.total, r.currency))}</td><td data-sort-value="${Number(r.net || 0)}">${esc(moneyText(r.net, r.currency))}</td><td data-sort-value="${d}">${d ? fmt(d) : '—'}</td><td>${tools(`data-h-probate-edit="${r.id}"`, `data-h-probate-delete="${r.id}"`, 'cet inventaire')}</td></tr>`; }).join('')}</tbody></table></div>` : noMatch('Aucun inventaire ne correspond');
+            bar.sortColumns(box.querySelector('table'), {person: ['az', 'za'], date: ['date'], net: [null, 'rich'], days: [null, 'days']});
+            box.querySelectorAll('[data-h-probate-edit]').forEach(b => b.addEventListener('click', () => ext.lists.probate(++S().workspaceToken, {id: Number(b.dataset.hProbateEdit)})));
+            A().bindTableLinks();
+        }, editing ? '' : A().emptyState({text: 'Aucun inventaire après décès pour l’instant', icon: '📜', action: {label: '＋ Inventaire', attrs: 'data-h-probate-new'}}));
         ws.querySelectorAll('[data-h-probate-new]').forEach(b => b.addEventListener('click', () => ext.lists.probate(++S().workspaceToken, {id: 0})));
         ws.querySelector('[data-h-probate-compare]').addEventListener('click', () => { S().graphTab = 'stats'; S().graphStatsType = 'probate_wealth'; A().setModule('graphiques'); });
-        ws.querySelectorAll('[data-h-probate-edit]').forEach(b => b.addEventListener('click', () => ext.lists.probate(++S().workspaceToken, {id: Number(b.dataset.hProbateEdit)})));
         if (editing) bindProbateForm(editing);
     };
     function probateItemRow(it = {}) {
@@ -870,7 +1002,7 @@
     function probateFormHtml(inv) {
         const f = k => esc(inv[k] || '');
         return `<form class="maintenance-panel collection-form" id="h-probate-form"><h3>${inv.id ? 'Modifier l’inventaire' : 'Nouvel inventaire après décès'}</h3>
-            <div class="form-grid"><div><span class="pk-lab">Défunt(e)</span>${personPick('person_id', inv.person)}</div><label>Date<input name="date_text" data-ui-date value="${f('date_text')}" placeholder="12 mars 1782"></label>
+            <div class="form-grid"><div><span class="pk-lab">La personne décédée</span>${personPick('person_id', inv.person)}</div><label>Date<input name="date_text" data-ui-date value="${f('date_text')}" placeholder="12 mars 1782"></label>
             <label>Notaire<input name="notary" value="${f('notary')}" placeholder="Me Dubois, notaire à Tulle"></label><label>Lieu<input name="place_text" value="${f('place_text')}"></label>
             <label>Monnaie<select name="currency"><option value="livre" ${inv.currency === 'livre' ? 'selected' : ''}>Livres tournois (l, s, d)</option><option value="franc" ${inv.currency === 'franc' ? 'selected' : ''}>Francs</option><option value="nf" ${inv.currency === 'nf' ? 'selected' : ''}>Nouveaux francs (1960-2001)</option></select></label><label>Cote<input name="reference" value="${f('reference')}" placeholder="AD19, 3 E 1234"></label></div>
             <h4>Objets, pièce par pièce</h4><p class="muted">Valeur : « 12 l 5 s 3 d » (livres, sols, deniers), « 12 livres 5 sols », ou un nombre (« 152,50 »). La catégorie « Dettes » est déduite du total.</p>
@@ -913,27 +1045,56 @@
     /* ── Papiers de famille ── */
     const paperKinds = ['Livret de famille', 'Acte ancien', 'Acte notarié', 'Lettre', 'Carte postale', 'Photo papier', 'Diplôme', 'Livret militaire', 'Carte d’identité', 'Passeport', 'Faire-part', 'Image pieuse', 'Livre de comptes', 'Journal intime', 'Autre'];
     ext.lists.family_papers = async (token, editOverride = null) => {
-        const q = S().hPapersQuery || '';
-        const data = await api('family_papers', {q});
+        const data = await api('family_papers');
         if (!isCurrent(token)) return;
         const rows = data.papers || [];
         const editing = editOverride ? (editOverride.id ? rows.find(r => Number(r.id) === Number(editOverride.id)) : {id: 0, class_number: data.next_number, people: [], media: []}) : null;
         const locations = [...new Set(rows.map(r => r.storage_location).filter(Boolean))];
-        const groups = {};
-        rows.forEach(r => { (groups[r.storage_location || 'Rangement à préciser'] ||= []).push(r); });
-        A().$('#workspace').innerHTML = `<section class="page collection-page">${pageHeader('LISTES', 'Papiers de famille', 'L’inventaire de tes originaux papier (livrets de famille, actes anciens, lettres, photos papier) : où chacun est rangé, son numéro de classement, une étiquette à imprimer et à coller sur la chemise, et le lien vers son scan.')}
-            <div class="collection-toolbar"><input type="search" id="h-papers-q" value="${esc(q)}" placeholder="Chercher (titre, n°, rangement, chez qui)…"><button type="button" class="button" data-h-paper-new>＋ Document</button><button type="button" class="button secondary" data-h-paper-labels>Imprimer les étiquettes</button><button type="button" class="button secondary" data-h-paper-print>Imprimer l’inventaire</button></div>
-            ${editing ? paperFormHtml(editing, locations) : ''}
-            ${rows.length ? Object.entries(groups).map(([loc, list]) => `<h3>📦 ${esc(loc)} <small>(${list.length})</small></h3><table class="data-table h-papers"><thead><tr><th><input type="checkbox" data-h-paper-all title="Tout cocher"></th><th>N°</th><th>Document</th><th>Date</th><th>Chez</th><th>Personnes</th><th>Scan</th><th></th></tr></thead><tbody>${list.map(r => `<tr><td><input type="checkbox" data-h-paper-check="${r.id}"></td><td><span class="h-paper-number">${esc(r.class_number)}</span></td><td><strong>${esc(r.title)}</strong>${LC(r.labels)}${r.kind ? `<br><small>${esc(r.kind)}</small>` : ''}${r.condition_text ? `<br><small class="muted">État : ${esc(r.condition_text)}</small>` : ''}</td><td>${esc(r.date_text)}</td><td>${esc(r.holder_text)}</td><td>${(r.people || []).map(chip).join('<br>')}</td><td>${thumbs('paper-' + r.id, r.media, {emptyText: 'pas de scan'})}</td><td>${tools(`data-h-paper-edit="${r.id}"`, `data-h-paper-delete="${r.id}"`, 'ce document')}</td></tr>`).join('')}</tbody></table>`).join('') : (editing ? '' : A().emptyState({text: 'Aucun document pour l’instant', icon: '🗄️', hint: 'Actes, livrets, lettres, photos… et où ils sont rangés.', action: {label: '＋ Document', attrs: 'data-h-paper-new'}}))}</section>`;
-        const ws = A().$('#workspace');
-        A().bindTableLinks();
-        ws.querySelector('#h-papers-q').addEventListener('change', event => { S().hPapersQuery = event.target.value.trim(); A().renderList(); });
+        A().$('#workspace').innerHTML = `<section class="page collection-page">${UIx().pageHeader({title: 'Papiers de famille', help: 'L’inventaire de tes originaux papier (livrets de famille, actes anciens, lettres, photos papier) : où chacun est rangé, son numéro de classement, une étiquette à imprimer et à coller sur la chemise, et le lien vers son scan.',
+                primary: '<button type="button" class="button" data-h-paper-new>＋ Document</button>', actions: rows.length ? ['<button type="button" class="button secondary" data-h-paper-printmenu aria-haspopup="menu">🖨 Imprimer ▾</button>'] : []})}
+            ${editing ? paperFormHtml(editing, locations) : ''}<div data-h-papers-bar></div><div data-h-papers-list></div></section>`;
+        const ws = A().$('#workspace'), box = ws.querySelector('[data-h-papers-list]');
+        let shownRows = rows;
+        const opts = (get, empty) => { const c = new Map(); rows.forEach(r => { const k = get(r) || ''; c.set(k, (c.get(k) || 0) + 1); }); return [...c.entries()].sort((a, b) => (a[0] ? a[0] : '￿').localeCompare(b[0] ? b[0] : '￿', 'fr', {numeric: true})).map(([k, n]) => [k || '__none', `${k || empty} (${n})`, k || empty]); };
+        const hasScan = r => !!(r.media || []).length, numCmp = (a, b) => String(a.class_number || '').localeCompare(String(b.class_number || ''), 'fr', {numeric: true, sensitivity: 'base'});
+        const SORTS = {num: numCmp, date: (a, b) => (LM().year(a.date_text) || 9999) - (LM().year(b.date_text) || 9999) || numCmp(a, b)};
+        const head = `<thead><tr><th><input type="checkbox" data-h-paper-all title="Tout cocher"></th><th><button data-sort-column="1" data-sort-key="num">N°</button></th><th><button data-sort-column="2" data-sort-key="title">Document</button></th><th><button data-sort-column="3" data-sort-key="date">Date</button></th><th><button data-sort-column="4">Chez</button></th><th>Personnes</th><th>Scan</th><th></th></tr></thead>`;
+        const line = r => `<tr><td><input type="checkbox" data-h-paper-check="${r.id}"></td><td><span class="h-paper-number">${esc(r.class_number)}</span></td><td><strong>${esc(r.title)}</strong>${LC(r.labels)}${r.kind ? `<br><small>${esc(r.kind)}</small>` : ''}${r.condition_text ? `<br><small class="muted">État : ${esc(r.condition_text)}</small>` : ''}</td><td data-sort-value="${LM().year(r.date_text) || 9999}">${esc(r.date_text)}</td><td>${esc(r.holder_text)}</td><td>${(r.people || []).map(chip).join('<br>')}</td><td>${thumbs('paper-' + r.id, r.media, {emptyText: 'pas de scan'})}</td><td>${tools(`data-h-paper-edit="${r.id}"`, `data-h-paper-delete="${r.id}"`, 'ce document')}</td></tr>`;
+        const card = r => { const scan = (r.media || []).find(m => m.media_type === 'image');
+            return {thumb: scan ? A().mediaThumbHtml(scan) : '<span class="ui-card-ico" aria-hidden="true">📄</span>', name: r.title, open: `data-h-paper-edit="${r.id}"`,
+                lines: [[r.kind, r.date_text].filter(Boolean).join(' · '), [r.storage_location ? `📦 ${r.storage_location}` : '', r.holder_text ? `chez ${r.holder_text}` : ''].filter(Boolean).join(' · ')],
+                badges: [r.class_number ? {text: r.class_number, kind: 'grey'} : null, hasScan(r) ? null : {text: 'pas de scan', kind: 'yellow'}, LC(r.labels)].filter(Boolean), when: whenOf(r), whenLabel: 'Modifié',
+                menu: [`<button type="button" data-h-paper-edit="${r.id}">✎ Modifier</button>`, `<button type="button" class="danger" data-h-paper-delete="${r.id}">🗑 Supprimer</button>`]}; };
+        h10Bar(ws.querySelector('[data-h-papers-bar]'), box, rows.length, {key: 'listes:family_papers', search: {placeholder: 'Chercher… (titre, n°, rangement, chez qui)', value: S().hPapersQuery || ''},
+            filters: [{id: 'kind', label: 'Sorte', type: 'check', options: opts(r => r.kind, 'Sans sorte')},
+                {id: 'box', label: 'Rangement', type: 'check', options: opts(r => r.storage_location, 'Rangement à préciser').map(o => [o[0], o[1], `📦 ${o[2]}`])},
+                {id: 'holder', label: 'Chez qui', type: 'check', options: opts(r => r.holder_text, 'Pas précisé').map(o => [o[0], o[1], `Chez ${o[2]}`])},
+                {id: 'person', label: 'Personne', type: 'person', chipPrefix: '👤', allowFree: false},
+                {id: 'scan', label: 'Scan', type: 'radio', dflt: '', options: [['', 'Tous'], ['yes', `Avec un scan (${rows.filter(hasScan).length})`, '📄 Avec scan'], ['no', `Sans scan (${rows.filter(r => !hasScan(r)).length})`, 'Sans scan']]},
+                {id: 'label', label: 'Étiquette', kind: 'label', allowFree: false, chipPrefix: '🏷'}],
+            view: {dflt: 'list', what: 'documents'}, sort: {options: [['num', 'N° de classement'], ...B4, ['date', 'Date du document']], value: 'num'}}, bar => {
+            const {q, filters: f, sort, view} = bar.state, inSet = (sel, v) => !(sel || []).length || sel.includes(v || '__none');
+            let list = rows.filter(r => LM().text(q, r.title, r.class_number, r.storage_location, r.holder_text, r.kind) && inSet(f.kind, r.kind) && inSet(f.box, r.storage_location) && inSet(f.holder, r.holder_text)
+                && LM().pick(f.person, r.people_ids || (r.people || []).map(p => p.id), []) && (!f.scan || (f.scan === 'yes') === hasScan(r)) && LM().pick(f.label, labelIds(r.labels), labelNames(r.labels)));
+            list = SORTS[sort] ? [...list].sort(SORTS[sort]) : UIx().sortItems(list, sort, {name: r => r.title, date: whenOf});
+            shownRows = list;
+            bar.setCount(list.length === rows.length ? plural(rows.length, 'document', 'documents') : `${plural(list.length, 'document', 'documents')} sur ${fmt(rows.length)}`);
+            if (!list.length) { box.innerHTML = noMatch('Aucun document ne correspond'); return; }
+            if (view === 'cards') { box.innerHTML = UIx().cardsHtml(list.map(card)); return; }
+            // en Liste : un tableau par rangement (« 📦 Boîte 3 »), rangé comme dit « Trier »
+            const groups = new Map(); list.forEach(r => { const k = r.storage_location || 'Rangement à préciser'; if (!groups.has(k)) groups.set(k, []); groups.get(k).push(r); });
+            box.innerHTML = [...groups.entries()].map(([loc, g]) => `<h3>📦 ${esc(loc)} <small>(${g.length})</small></h3><div class="data-table-wrap"><table class="data-table h-papers">${head}<tbody>${g.map(line).join('')}</tbody></table></div>`).join('');
+            box.querySelectorAll('table').forEach(t => bar.sortColumns(t, {num: ['num'], title: ['az', 'za'], date: ['date']}));
+            box.querySelectorAll('[data-h-paper-all]').forEach(c => c.addEventListener('change', () => c.closest('table').querySelectorAll('[data-h-paper-check]').forEach(x => { x.checked = c.checked; })));
+            A().bindTableLinks();
+        }, editing ? '' : A().emptyState({text: 'Aucun document pour l’instant', icon: '🗄️', hint: 'Actes, livrets, lettres, photos… et où ils sont rangés.', action: {label: '＋ Document', attrs: 'data-h-paper-new'}}));
         ws.querySelectorAll('[data-h-paper-new]').forEach(b => b.addEventListener('click', () => ext.lists.family_papers(++S().workspaceToken, {id: 0})));
-        ws.querySelectorAll('[data-h-paper-edit]').forEach(b => b.addEventListener('click', () => ext.lists.family_papers(++S().workspaceToken, {id: Number(b.dataset.hPaperEdit)})));
-        ws.querySelectorAll('[data-h-paper-all]').forEach(c => c.addEventListener('change', () => c.closest('table').querySelectorAll('[data-h-paper-check]').forEach(x => { x.checked = c.checked; })));
-        const chosen = () => { const ids = [...ws.querySelectorAll('[data-h-paper-check]:checked')].map(c => Number(c.dataset.hPaperCheck)); return ids.length ? rows.filter(r => ids.includes(Number(r.id))) : rows; };
-        ws.querySelector('[data-h-paper-labels]').addEventListener('click', () => printPaperLabels(chosen()));
-        ws.querySelector('[data-h-paper-print]').addEventListener('click', () => printPaperInventory(chosen()));
+        box.addEventListener('click', e => { const b = e.target.closest('[data-h-paper-edit]'); if (b) { e.preventDefault(); ext.lists.family_papers(++S().workspaceToken, {id: Number(b.dataset.hPaperEdit)}); } });
+        // 🖨 Imprimer ▾ (L1) : les documents cochés, sinon ceux que la barre montre
+        const chosen = () => { const ids = [...ws.querySelectorAll('[data-h-paper-check]:checked')].map(c => Number(c.dataset.hPaperCheck)); return ids.length ? rows.filter(r => ids.includes(Number(r.id))) : shownRows; };
+        ws.querySelector('[data-h-paper-printmenu]')?.addEventListener('click', e => UIx().menuAt(e.currentTarget, [
+            {icon: '🏷', label: 'Les étiquettes à coller', help: 'planche de 24 étiquettes', run: () => printPaperLabels(chosen())},
+            {icon: '📋', label: 'L’inventaire', help: 'la liste des documents', run: () => printPaperInventory(chosen())}], {title: `${plural(chosen().length, 'document', 'documents')} (cochés, sinon ceux affichés)`}));
         if (editing) bindPaperForm(editing);
     };
     function paperFormHtml(p, locations) {
@@ -1015,24 +1176,54 @@
         if (view?.trip) st.hTripId = view.trip;
         if (view?.back) st.hTripId = 0;
         if (st.hTripId && !view?.edit) return renderTrip(token, st.hTripId);
-        const filter = ['todo', 'done', 'all'].includes(st.hTripFilter) ? st.hTripFilter : 'todo';
-        const data = await api('field_trips', {status: filter});
+        const data = await api('field_trips', {status: 'all'});
         if (!isCurrent(token)) return;
         const editing = view?.edit !== undefined ? (view.edit ? (await api('field_trip', {id: view.edit})).trip : {id: 0, stops_per_day: 6, people: [], people_rows: []}) : null;
         if (!isCurrent(token)) return; // on a changé d'écran pendant le chargement
-        const counts = data.counts || {todo: 0, done: 0};
-        A().$('#workspace').innerHTML = `<section class="page collection-page">${pageHeader('LISTES', 'Circuits sur le terrain', 'Un circuit « sur les traces de mes ancêtres » : choisis une branche ou quelques ancêtres, et l’app prépare la liste des lieux à voir (églises, maisons, tombes, mairies, archives), le trajet jour par jour à ouvrir dans Plans ou Google Maps, et un carnet de route à imprimer.')}
-            <div class="collection-toolbar"><button type="button" class="button" data-h-trip-new>＋ Circuit</button><div class="segmented-filter" role="group">${[['todo', `À faire (${counts.todo})`], ['done', `Faits (${counts.done})`], ['all', `Tous (${counts.todo + counts.done})`]].map(([k, l]) => `<button type="button" class="button small ${filter === k ? '' : 'secondary'}" data-h-trip-filter="${k}" aria-pressed="${filter === k}">${esc(l)}</button>`).join('')}</div></div>
+        const all = data.trips || [], counts = data.counts || {todo: 0, done: 0}, UI = window.LCNDA_UI, KEY = 'listes:field_trips';
+        // K5 : « ＋ Circuit » dans l’en-tête ; H10 : les boutons « À faire / Faits / Tous » deviennent la rubrique « État » de Filtrer
+        A().$('#workspace').innerHTML = `<section class="page collection-page">${UI.pageHeader({title: 'Circuits sur le terrain', help: 'Un circuit « sur les traces de mes ancêtres » : choisis une branche ou quelques ancêtres, et l’app prépare la liste des lieux à voir (églises, maisons, tombes, mairies, archives), le trajet jour par jour à ouvrir dans Plans ou Google Maps, et un carnet de route à imprimer.', primary: '<button type="button" class="button" data-h-trip-new>＋ Circuit</button>'})}
             ${editing ? tripFormHtml(editing) : ''}
-            <div class="h-trip-list">${(data.trips || []).map(t => `<article class="h-record h-trip ${t.status === 'done' ? 'is-done' : ''}"><header><div><strong>${t.status === 'done' ? '✅' : '🚗'} ${esc(t.title)}</strong>${LC(t.labels)}<div class="muted">${esc([t.date_start ? dateFr(t.date_start) : 'dates à fixer', t.date_end && t.date_end !== t.date_start ? '→ ' + dateFr(t.date_end) : ''].join(' '))}${t.start_place ? ` · départ de ${esc(t.start_place)}` : ''}</div>
+            ${all.length ? '<div data-h-trip-bar></div>' : ''}<div class="h-trip-list" data-h-trip-list>${all.length || editing ? '' : A().emptyState({text: 'Aucun circuit pour l’instant', icon: '🚗', hint: 'Choisis une branche ou quelques ancêtres : l’app prépare les lieux à voir et le trajet jour par jour.', action: {label: '＋ Circuit', attrs: 'data-h-trip-new'}})}</div></section>`;
+        const ws = A().$('#workspace'), box = ws.querySelector('[data-h-trip-list]');
+        if (all.length) {
+            const fold = t => String(t || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+            const oldF = st.hTripFilter === 'done' ? ['done'] : st.hTripFilter === 'all' ? [] : ['todo']; // l’ancien choix est repris une fois
+            const bar = UI.listBar({key: KEY, search: {placeholder: 'Chercher… (titre, lieu de départ, étape, personne)'},
+                filters: [{id: 'status', label: 'État', type: 'check', value: oldF, options: [['todo', 'À faire', 'À faire', counts.todo], ['done', 'Faits', 'Faits', counts.done]]},
+                    {id: 'person', label: 'Personne', type: 'person', allowFree: false, chipPrefix: 'Avec'}, {id: 'label', label: 'Étiquette', kind: 'label', allowFree: false, chipPrefix: 'Étiquette :'}],
+                view: {dflt: 'cards', what: 'circuits'},
+                sort: {options: [['near', 'Le départ le plus proche'], ['recent', 'Les plus récents'], ['old', 'Les plus anciens'], ['az', 'A → Z'], ['za', 'Z → A']], value: 'near'},
+                onChange: () => paint()});
+            ws.querySelector('[data-h-trip-bar]').replaceWith(bar);
+            const today = new Date().toISOString().slice(0, 10);
+            const near = (x, y) => { const g = t => (!t.date_start ? 2 : t.date_start >= today ? 0 : 1), gx = g(x), gy = g(y); return gx - gy || (gx === 0 ? x.date_start.localeCompare(y.date_start) : gx === 1 ? y.date_start.localeCompare(x.date_start) : 0) || Number(y.id) - Number(x.id); };
+            const pid = p => Number(p && typeof p === 'object' ? p.id : p) || 0;
+            const card = t => ({thumb: `<span class="ui-card-ico">${t.status === 'done' ? '✅' : '🚗'}</span>`, name: t.title || 'Sans titre', open: `data-h-trip-open="${t.id}"`,
+                lines: [[t.date_start ? dateFr(t.date_start) + (t.date_end && t.date_end !== t.date_start ? ' → ' + dateFr(t.date_end) : '') : 'dates à fixer', t.start_place ? `départ de ${t.start_place}` : ''].filter(Boolean).join(' · '), t.people_names || (t.notes || '').slice(0, 90)],
+                badges: [Number(t.stop_count) ? {text: `${fmt(t.done_count)} / ${plural(Number(t.stop_count), 'étape', 'étapes')}`, kind: t.status === 'done' || Number(t.done_count) === Number(t.stop_count) ? 'green' : 'blue'} : {text: 'sans étape', kind: 'grey'}, ...(t.labels || []).slice(0, 2).map(l => ({text: l.name, kind: 'grey'}))],
+                menu: [`<button type="button" data-h-trip-status="${t.id}" data-status="${t.status === 'done' ? 'todo' : 'done'}">${t.status === 'done' ? '↺ Remettre à faire' : '✓ Marquer fait'}</button>`]});
+            const paint = () => {
+                const s = bar.state, f = s.filters, words = fold(s.q).split(/\s+/).filter(Boolean), stt = f.status || [], per = f.person, lab = f.label;
+                let list = all.filter(t => (!stt.length || stt.includes(t.status === 'done' ? 'done' : 'todo')) && (!words.length || words.every(w => fold(`${t.title} ${t.start_place} ${t.stops_text} ${t.people_names} ${t.notes}`).includes(w)))
+                    && (!per || (per.id ? (t.people || []).some(p => pid(p) === Number(per.id)) : fold(t.people_names).includes(fold(String(per).replace(/^txt:/, '')))))
+                    && (!lab || (t.labels || []).some(l => (lab.id ? Number(l.id) === Number(lab.id) : fold(l.name) === fold(String(lab).replace(/^txt:/, ''))))));
+                list = s.sort === 'near' ? list.sort(near) : UI.sortItems(list, s.sort, {name: t => t.title, date: t => t.updated_at || t.created_at || ''});
+                bar.setCount(list.length === all.length ? plural(all.length, 'circuit', 'circuits') : `${plural(list.length, 'circuit', 'circuits')} sur ${all.length}`);
+                box.innerHTML = !list.length ? A().emptyState({icon: stt.length === 1 && stt[0] === 'done' ? '✅' : '🔍', text: stt.length === 1 && !words.length && !per && !lab ? (stt[0] === 'done' ? 'Aucun circuit fait pour l’instant' : 'Aucun circuit à faire pour l’instant') : 'Aucun circuit ne correspond', hint: 'Retire un filtre (la pastille bleue sous la barre), ou cherche autrement.'})
+                    : s.view === 'cards' ? UI.cardsHtml(list.map(card)) : list.map(t => `<article class="h-record h-trip ${t.status === 'done' ? 'is-done' : ''}"><header><div><strong>${t.status === 'done' ? '✅' : '🚗'} ${esc(t.title)}</strong>${LC(t.labels)}<div class="muted">${esc([t.date_start ? dateFr(t.date_start) : 'dates à fixer', t.date_end && t.date_end !== t.date_start ? '→ ' + dateFr(t.date_end) : ''].join(' '))}${t.start_place ? ` · départ de ${esc(t.start_place)}` : ''}</div>
                 <div>${plural(Number(t.stop_count), 'étape', 'étapes')}${Number(t.day_count) ? ` sur ${plural(Number(t.day_count), 'jour', 'jours')}` : ''}${Number(t.stop_count) ? ` · ${fmt(t.done_count)} faite${t.done_count > 1 ? 's' : ''}` : ''}${t.status === 'done' && t.done_at ? ` · fait le ${esc(dateFr(t.done_at))}` : ''}</div>
                 ${Number(t.stop_count) ? `<div class="h-progress"><span style="width:${Math.round(100 * t.done_count / t.stop_count)}%"></span></div>` : ''}</div>
-                <div class="page-actions compact"><button type="button" class="button small" data-h-trip-open="${t.id}">Ouvrir</button><button type="button" class="button small secondary" data-h-trip-status="${t.id}" data-status="${t.status === 'done' ? 'todo' : 'done'}">${t.status === 'done' ? 'Remettre à faire' : 'Marquer fait'}</button></div></header>${t.notes ? `<p class="muted">${nl(t.notes)}</p>` : ''}</article>`).join('') || (filter === 'done' ? empty('Aucun circuit fait pour l’instant', {icon: '✅'}) : A().emptyState({text: 'Aucun circuit à faire pour l’instant', icon: '🚗', action: {label: '＋ Circuit', attrs: 'data-h-trip-new'}}))}</div></section>`;
-        const ws = A().$('#workspace');
+                <div class="page-actions compact"><button type="button" class="button small" data-h-trip-open="${t.id}">Ouvrir</button><button type="button" class="button small secondary" data-h-trip-status="${t.id}" data-status="${t.status === 'done' ? 'todo' : 'done'}">${t.status === 'done' ? 'Remettre à faire' : 'Marquer fait'}</button></div></header>${t.notes ? `<p class="muted">${nl(t.notes)}</p>` : ''}</article>`).join('');
+            };
+            paint();
+        }
         ws.querySelectorAll('[data-h-trip-new]').forEach(b => b.addEventListener('click', () => ext.lists.field_trips(++S().workspaceToken, {edit: 0})));
-        ws.querySelectorAll('[data-h-trip-filter]').forEach(b => b.addEventListener('click', () => { S().hTripFilter = b.dataset.hTripFilter; A().renderList(); }));
-        ws.querySelectorAll('[data-h-trip-open]').forEach(b => b.addEventListener('click', () => ext.lists.field_trips(++S().workspaceToken, {trip: Number(b.dataset.hTripOpen)})));
-        ws.querySelectorAll('[data-h-trip-status]').forEach(b => b.addEventListener('click', async () => { await api('set_field_trip_status', {}, {method: 'POST', body: {id: b.dataset.hTripStatus, status: b.dataset.status}}); toast(b.dataset.status === 'done' ? 'Circuit marqué fait : il reste consultable dans « Faits ».' : 'Circuit remis à faire.'); A().renderList(); }));
+        box.addEventListener('click', async e => {
+            const o = e.target.closest('[data-h-trip-open]'), stb = e.target.closest('[data-h-trip-status]');
+            if (o) return ext.lists.field_trips(++S().workspaceToken, {trip: Number(o.dataset.hTripOpen)});
+            if (stb) { await api('set_field_trip_status', {}, {method: 'POST', body: {id: stb.dataset.hTripStatus, status: stb.dataset.status}}); toast(stb.dataset.status === 'done' ? 'Circuit marqué fait : il reste consultable dans « Faits ».' : 'Circuit remis à faire.'); A().renderList(); }
+        });
         if (editing) bindTripForm(editing);
     };
     function tripFormHtml(t) {
@@ -1301,14 +1492,50 @@
         const maps = await loadOldMaps(true);
         if (!isCurrent(token)) return;
         if (editId !== null) return renderOldMapEditor(token, editId ? maps.find(m => Number(m.id) === Number(editId)) : null);
-        A().$('#workspace').innerHTML = `<section class="page collection-page">${pageHeader('LISTES', 'Cartes anciennes', 'Pose ta propre carte ancienne sur la carte : un plan cadastral photographié aux archives, un vieux plan de village… Indique 3 points que tu reconnais (l’église, un carrefour, le moulin) et l’app la superpose exactement à la carte, avec un réglage de transparence. Places-y ensuite les maisons de tes ancêtres.')}
-            <div class="collection-toolbar"><button type="button" class="button" data-h-oldmap-new>＋ Carte ancienne</button></div>
-            <div class="collection-grid">${maps.map(m => `<article class="collection-card">${m.filename ? `<div class="collection-photo"><img src="media/${encodeURIComponent(m.filename)}" alt="" loading="lazy"></div>` : ''}<div class="collection-body"><strong>${esc(m.title)}</strong>${LC(m.labels)}${m.year_text ? ` <span class="collection-kind">${esc(m.year_text)}</span>` : ''}<p class="muted">${m.transform ? `✅ Calée (${m.control_points.length} points)` : `⚠ À caler : ${m.control_points.length}/2 points au moins`} · ${plural(m.markers.length, 'maison placée', 'maisons placées')}</p>
-                <div class="page-actions"><button type="button" class="button small" data-h-oldmap-edit="${m.id}">Caler / placer</button>${m.transform ? `<button type="button" class="button small secondary" data-h-oldmap-show="${m.id}">Voir sur la carte</button>` : ''}</div></div></article>`).join('') || A().emptyState({text: 'Aucune carte ancienne pour l’instant', icon: '🗺️', hint: 'Ajoute une photo de plan, puis cale-la sur la carte.', action: {label: '＋ Carte ancienne', attrs: 'data-h-oldmap-new'}})}</div></section>`;
-        const ws = A().$('#workspace');
+        const UI = window.LCNDA_UI, KEY = 'listes:old_maps';
+        // K5 : « ＋ Carte ancienne » dans l’en-tête ; H10 : la barre commune, « Fiches » au départ (K9)
+        A().$('#workspace').innerHTML = `<section class="page collection-page">${UI.pageHeader({title: 'Cartes anciennes', help: 'Pose ta propre carte ancienne sur la carte : un plan cadastral photographié aux archives, un vieux plan de village… Indique 3 points que tu reconnais (l’église, un carrefour, le moulin) et l’app la superpose exactement à la carte, avec un réglage de transparence. Places-y ensuite les maisons de tes ancêtres.', primary: '<button type="button" class="button" data-h-oldmap-new>＋ Carte ancienne</button>'})}
+            ${maps.length ? '<div data-h-oldmap-bar></div>' : ''}<div data-h-oldmap-list>${maps.length ? '' : A().emptyState({text: 'Aucune carte ancienne pour l’instant', icon: '🗺️', hint: 'Ajoute une photo de plan, puis cale-la sur la carte.', action: {label: '＋ Carte ancienne', attrs: 'data-h-oldmap-new'}})}</div></section>`;
+        const ws = A().$('#workspace'), box = ws.querySelector('[data-h-oldmap-list]');
+        if (maps.length) {
+            const fold = t => String(t || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+            const n = fn => maps.filter(fn).length;
+            const bar = UI.listBar({key: KEY, search: {placeholder: 'Chercher une carte… (titre, année, étiquette)'},
+                filters: [{id: 'state', label: 'État', type: 'check', options: [['ok', '✅ Calée', '✅ Calée', n(m => m.transform)], ['todo', '⚠ À caler', '⚠ À caler', n(m => !m.transform)]]},
+                    {id: 'houses', label: 'Maisons placées', type: 'radio', dflt: '', options: [['', 'Toutes'], ['yes', 'Avec des maisons', 'Avec des maisons', n(m => m.markers.length)], ['no', 'Sans maison', 'Sans maison', n(m => !m.markers.length)]]},
+                    {id: 'label', label: 'Étiquette', kind: 'label', allowFree: false, chipPrefix: 'Étiquette :'}],
+                view: {dflt: 'cards', what: 'cartes'},
+                sort: {options: [['recent', 'Les plus récentes'], ['old', 'Les plus anciennes'], ['az', 'A → Z'], ['za', 'Z → A'], ['year', 'Année de la carte']], value: 'recent'},
+                onChange: () => paint()});
+            ws.querySelector('[data-h-oldmap-bar]').replaceWith(bar);
+            const yearOf = m => Number(String(m.year_text || '').match(/\d{3,4}/)?.[0]) || 99999;
+            const state = m => (m.transform ? `Calée · ${plural(m.control_points.length, 'point', 'points')}` : `À caler · ${m.control_points.length}/2 points au moins`);
+            const thumb = (m, big) => (m.filename ? `<img src="media/${encodeURIComponent(m.filename)}" alt="" loading="lazy">` : `<span class="ui-card-ico">🗺️</span>`);
+            const show = m => (m.transform ? `<button type="button" class="button small secondary" data-h-oldmap-show="${m.id}">Voir sur la carte</button>` : '');
+            const paint = () => {
+                const s = bar.state, f = s.filters, words = fold(s.q).split(/\s+/).filter(Boolean), lab = f.label;
+                let list = maps.filter(m => (!words.length || words.every(w => fold(`${m.title} ${m.year_text} ${(m.labels || []).map(l => l.name).join(' ')}`).includes(w)))
+                    && (!(f.state || []).length || f.state.includes(m.transform ? 'ok' : 'todo')) && (!f.houses || (f.houses === 'yes' ? m.markers.length > 0 : !m.markers.length))
+                    && (!lab || (m.labels || []).some(l => (lab.id ? Number(l.id) === Number(lab.id) : fold(l.name) === fold(String(lab).replace(/^txt:/, ''))))));
+                list = s.sort === 'year' ? list.sort((x, y) => yearOf(x) - yearOf(y) || String(x.title).localeCompare(String(y.title), 'fr')) : UI.sortItems(list, s.sort, {name: m => m.title, date: m => m.updated_at || m.created_at || ''});
+                bar.setCount(list.length === maps.length ? plural(maps.length, 'carte', 'cartes') : `${plural(list.length, 'carte', 'cartes')} sur ${maps.length}`);
+                if (!list.length) { box.innerHTML = A().emptyState({icon: '🔍', text: 'Aucune carte ne correspond', hint: 'Vérifie l’orthographe, ou retire un filtre.'}); return; }
+                const items = list.map(m => ({thumb: thumb(m), name: m.title || 'Sans titre', open: `data-h-oldmap-edit="${m.id}"`, openLabel: 'Caler / placer',
+                    lines: [[m.year_text, state(m)].filter(Boolean).join(' · '), plural(m.markers.length, 'maison placée', 'maisons placées')],
+                    badges: [{text: m.transform ? 'Calée' : 'À caler', kind: m.transform ? 'green' : 'yellow'}, ...(m.labels || []).slice(0, 2).map(l => ({text: l.name, kind: 'grey'}))],
+                    when: m.updated_at, whenLabel: 'Modifié',
+                    menu: m.transform ? [`<button type="button" data-h-oldmap-show="${m.id}">🗺 Voir sur la carte</button>`] : [],
+                    actions: s.view === 'cards' ? '' : `<button type="button" class="button small" data-h-oldmap-edit="${m.id}">Caler / placer</button>${show(m)}`}));
+                box.innerHTML = s.view === 'cards' ? UI.cardsHtml(items.map(it => ({...it, actions: ''}))) : UI.rowsHtml(items);
+            };
+            paint();
+        }
         ws.querySelectorAll('[data-h-oldmap-new]').forEach(b => b.addEventListener('click', () => ext.lists.old_maps(++S().workspaceToken, 0)));
-        ws.querySelectorAll('[data-h-oldmap-edit]').forEach(b => b.addEventListener('click', () => ext.lists.old_maps(++S().workspaceToken, Number(b.dataset.hOldmapEdit))));
-        ws.querySelectorAll('[data-h-oldmap-show]').forEach(b => b.addEventListener('click', () => showOldMapOnMainMap(Number(b.dataset.hOldmapShow))));
+        box.addEventListener('click', e => {
+            const ed = e.target.closest('[data-h-oldmap-edit]'), sh = e.target.closest('[data-h-oldmap-show]');
+            if (sh) return showOldMapOnMainMap(Number(sh.dataset.hOldmapShow));
+            if (ed) ext.lists.old_maps(++S().workspaceToken, Number(ed.dataset.hOldmapEdit));
+        });
     };
     function showOldMapOnMainMap(id) {
         const m = (oldMapsCache || []).find(x => Number(x.id) === Number(id));
@@ -1483,7 +1710,7 @@
         const form = ws.querySelector('#h-search-form');
         const run = async (criteria, id = 0) => {
             const box = ws.querySelector('#h-search-results');
-            box.innerHTML = '<p class="muted">Recherche…</p>';
+            box.innerHTML = window.LCNDA_UI.spinner('Recherche…');
             try {
                 const r = await api('saved_search_results', {criteria: JSON.stringify(criteria), id});
                 const newOnes = r.people.filter(p => p.is_new).length;
@@ -1662,7 +1889,7 @@
     });
     ext.exportPanels.push(() => `<section class="maintenance-panel" id="h-offsite-panel"><h3>🛟 Copie hors de cet ordinateur</h3>
         <p>La sauvegarde automatique reste sur le même disque : si l’ordinateur est volé ou tombe en panne, tout part avec lui. Choisis un ou plusieurs dossiers <b>ailleurs</b> : disque externe, clé USB, dossier iCloud Drive, Dropbox, OneDrive… L’app y copie la base et te prévient quand la dernière copie devient trop ancienne.</p>
-        <div data-h-offsite-body><p class="muted">Chargement…</p></div></section>`);
+        <div data-h-offsite-body>${window.LCNDA_UI.spinner('Chargement…')}</div></section>`);
     ext.afterExport.push(async () => {
         const box = document.querySelector('[data-h-offsite-body]');
         if (!box) return;
@@ -1686,6 +1913,7 @@
     // Au démarrage : prévenir si la dernière copie hors de l'ordinateur est trop ancienne (une fois par jour)
     setTimeout(async () => {
         if (!S()?.csrf) return;
+        if (document.body.classList.contains('is-kiosk') || document.documentElement.classList.contains('base-readonly')) return; // consultation 🔒 : pas de rappel de copie
         let s;
         try { s = await api('offsite_status'); } catch (_) { return; }
         const key = 'lcnda-offsite-warned', day = today();
@@ -1727,6 +1955,7 @@
                 branch_spouses: form.elements.branch_spouses.checked ? '1' : '0', gedcom_version: form.elements.gedcom_version.value, share: form.elements.share.checked ? '1' : '0',
                 include_media: form.elements.include_media.checked ? '1' : '0', include_notes: form.elements.include_notes.checked ? '1' : '0', include_sources: form.elements.include_sources.checked ? '1' : '0', include_living: '1'};
             Object.entries(p).forEach(([k, v]) => v !== '' && url.searchParams.set(k, v));
+            if (typeof window.LCNDA_GENEALOGY === 'string') url.searchParams.set('g', window.LCNDA_GENEALOGY); // la généalogie de cette fenêtre (api.php refuse sinon)
             location.assign(url.toString());
         });
     });

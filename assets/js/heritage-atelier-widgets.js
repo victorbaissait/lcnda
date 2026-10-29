@@ -106,7 +106,7 @@
         if (w.type === 'reminders' || w.type === 'agenda') body += `<label>Sur combien de jours ?<input type="number" name="days" min="1" max="3650" value="${c.days}"></label><label>Combien au plus ?<input type="number" name="n" min="1" max="50" value="${c.n || 10}"></label>`;
         if (w.type === 'agenda') body += `<fieldset class="h-rc-modes"><legend>Quelles sortes ?</legend>${Object.entries(SRC).map(([k, l]) => `<label class="checkbox-line"><input type="checkbox" name="srcs" value="${k}" ${c.srcs.includes(k) ? 'checked' : ''}> ${esc(l)}</label>`).join('')}</fieldset>
             <label>Seulement ceux qui contiennent le mot <small class="muted">(facultatif)</small><input name="word" value="${esc(c.word)}" placeholder="optique, Bourges…"></label>
-            <fieldset class="h-rc-modes"><legend>📌 Épinglés à ce projet (toujours montrés)</legend><div data-atw-pins class="h-rc-results"><p class="muted">Chargement…</p></div></fieldset>`;
+            <fieldset class="h-rc-modes"><legend>📌 Épinglés à ce projet (toujours montrés)</legend><div data-atw-pins class="h-rc-results">${window.LCNDA_UI.spinner('Chargement…')}</div></fieldset>`;
         if (w.type === 'dash') body += `<label>Widget<select name="dtype">${dashChoices().map(([k, l]) => `<option value="${k}" ${c.type === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label><label>Nombre d’éléments<input type="number" name="limit" min="1" max="50" value="${c.limit || 8}"></label>`;
         ext.openDialog({eyebrow: 'WIDGET', title: TYPES[w.type][0] + ' ' + TYPES[w.type][1], submitLabel: 'Enregistrer', body,
             onOpen: async d => { const box = d.querySelector('[data-atw-pins]'); if (!box) return; const a = await agenda();
@@ -142,7 +142,8 @@
                 onOpen: d => d.querySelectorAll('[data-atw-new]').forEach(b => b.addEventListener('click', () => { const nw = {id: uid(), type: b.dataset.atwNew, cfg: {}}; list.push(nw); save(); d.close(); draw(); if (['dash', 'agenda'].includes(nw.type)) settingsDialog(nw, () => { save(); draw(); }, ctx); })), onSubmit: () => true});
             if (!w) { const it = e.target.closest('[data-atw-item]'); return; }
             const mv = e.target.closest('[data-atw-move]'); if (mv) { const i = list.indexOf(w), j = i + Number(mv.dataset.atwMove); if (j >= 0 && j < list.length) { [list[i], list[j]] = [list[j], list[i]]; save(); draw(); } return; }
-            if (e.target.closest('[data-atw-del]')) { if (await A().confirmBox('Retirer ce widget ?', {title: 'Retirer le widget', okLabel: 'Retirer'})) { list = list.filter(x => x !== w); setTimer(w.id, null); save(); draw(); } return; }
+            if (e.target.closest('[data-atw-del]')) { const at = list.indexOf(w); list = list.filter(x => x !== w); setTimer(w.id, null); save(); draw(); // H7 : « ↶ Annuler »
+                A().undoToast('Widget retiré.', {undo: () => { if (!list.includes(w)) list.splice(Math.min(at, list.length), 0, w); save(); draw(); }}); return; }
             if (e.target.closest('[data-atw-cfg]')) return settingsDialog(w, () => { save(); draw(); }, ctx);
             const item = e.target.closest('[data-atw-item]'); if (item) return ctx.openItem?.(Number(item.dataset.atwItem));
             const ag = e.target.closest('[data-atw-agenda]'); if (ag) { const [src, id] = ag.dataset.atwAgenda.split(':'); const it = agendaCache.data?.items.find(x => x.src === src && String(x.id) === id); if (it) ext.lists?.my_calendar_open?.(it); return; }

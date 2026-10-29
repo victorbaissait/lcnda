@@ -51,6 +51,11 @@
         'baptism-far': 'une commune homonyme d’un autre département.',
         'sosa-sex': 'le sexe de la fiche mal saisi, ou la personne mise à la mauvaise place dans l’arbre.',
         'burial-before-death': 'les deux dates inversées.',
+        'reversed-range': 'les deux années écrites dans le mauvais ordre : « entre 1800 et 1900 ».',
+        'long-date': 'une note ou une phrase de l’acte collée dans la case de la date : garde la date seule, mets le reste en note.',
+        'negative-date': 'un tiret tapé par erreur devant l’année.',
+        'spouse-ancestor': 'un homonyme pris pour le conjoint, ou une fiche rattachée une génération trop haut ou trop bas.',
+        'animal-link': 'un ancien import où l’animal était relié comme une personne : relie-le à son maître dans sa fiche (Propriétaire).',
     };
     /** Raisons proposées dans « Ce n'est pas une erreur », selon la sorte */
     const REASONS = {

@@ -1831,7 +1831,9 @@
         }, {signal: keyAc.signal});
 
         /* — enregistrer, exporter, fermer — */
-        async function save({copy: asCopy = false, design: asDesign = false, force = false} = {}) {
+        let savingP = null; // deux ⌘S rapides : le second attend le premier et réutilise l'id créé (les copies et designs passent toujours)
+        function save(o = {}) { if (o.copy || o.design || o.force) return saveNow(o); if (savingP) return savingP; savingP = saveNow(o).finally(() => { savingP = null; }); return savingP; }
+        async function saveNow({copy: asCopy = false, design: asDesign = false, force = false} = {}) {
             if (editingId) stopEditing();
             let name = String(docName || '').trim() || 'Sans titre';
             if (asCopy || asDesign) { const n = await ask(asDesign ? 'Nom du design (il sera proposé pour les prochains livres) :' : 'Nom de la copie :', asDesign ? `${name} (design)` : `${name} (copie)`); if (!n) return; name = n.trim().slice(0, 160); }
@@ -1846,7 +1848,7 @@
                 if (!asCopy && !asDesign) status('error');
                 if (!err.conflict || asCopy || asDesign) { toast(err.message, 'error'); return; }
                 const choice = await (A().conflictBox?.({what: 'Ce document'}) ?? Promise.resolve(null));
-                if (choice === 'overwrite') return save({force: true});
+                if (choice === 'overwrite') return saveNow({force: true});
                 if (choice === 'reload') { const keepId = docId; setDirty(false); keyAc.abort(); dl.close(); ext.openLayoutDoc?.(keepId, onSaved); }
             }
         }
@@ -1854,11 +1856,27 @@
         dl.addEventListener('cancel', e => { if (e.target !== dl) return; e.preventDefault(); const om = dl.querySelectorAll('details.ly-menu[open]'); if (om.length) { om.forEach(d => d.removeAttribute('open')); return; } if (editingId) { stopEditing(); return; } if (pen) { pen = null; render(); return; } close(); });
         dl.addEventListener('close', () => { keyAc.abort(); dl.remove(); onSaved?.(); });
         const docForExport = () => { if (editingId) stopEditing(); return D; };
-        function exportPrint(bleed = false, {annot = false, autoPrint = false} = {}) {
-            if (bleed && !D.page.bleed) toast('Le document n’a pas de fond perdu (Document → Fond perdu) : seuls les traits de coupe sont ajoutés.');
-            const html = printHtml(docForExport(), docName, true, {bleed, annot, autoPrint}); const w = window.open('', '_blank');
-            if (!w) throw new Error('fenêtre bloquée : autorise les fenêtres pour cette page.');
-            w.document.open(); w.document.write(html); w.document.close(); toast(autoPrint ? 'Le livre s’ouvre et l’impression se lance.' : 'Le livre s’ouvre : « Imprimer », puis « Enregistrer en PDF ».');
+        window.LCNDA_UI?.onPrintKey?.(dl, () => exportPrint(false)); // L1 : ⌘P ouvre la fenêtre « Imprimer »
+        /** L1 : la fenêtre « Imprimer » commune — pages simples, planches ou livret plié ; fond perdu (mm), traits de coupe, notes */
+        function exportPrint(bleed = false, {annot = false, mode = 'pages'} = {}) {
+            const UI2 = window.LCNDA_UI; if (!UI2?.openPrintDialog) throw new Error('la fenêtre « Imprimer » n’est pas chargée');
+            const d0 = docForExport(), W = d0.page.w, H = d0.page.h, BK = ext.layoutBooklet, open = (d0.review?.comments || []).length;
+            const spreadsHtml = (doc1, c) => { const V = resolveDoc(doc1), sp = spreads({...V, page: {...V.page, facing: true}});
+                return UI2.printSheets({title: docName || 'Mon livre', pages: sp.map((pair, k) => ({w: 2 * W, h: H, cls: 'ly-sp', html: (pair.length < 2 && k === 0 ? '<div class="ly-half"></div>' : '') + pair.map(i => `<div class="ly-half">${pageHtml(V, i, {print: true, preview: true, keyPrefix: 's' + i})}</div>`).join('')})), css: `${BASE_CSS}${docCss(V, 'body')}.ly-sp{flex-direction:row!important}.ly-half{width:50%;height:100%;overflow:hidden}.ly-half .ly-page{margin:0;box-shadow:none}`}); };
+            const html = c => {
+                const doc1 = {...d0, page: {...d0.page, bleed: c.bleedOn ? Math.max(0, Math.min(20, Number(c.bleedMm) || 0)) : 0}};
+                if (c.mode === 'booklet' && BK) return BK.sheets(doc1, docName || 'Mon livre', c);
+                if (c.mode === 'spreads') return spreadsHtml(doc1, c);
+                return printHtml(doc1, docName, false, {bleed: c.bleedOn || c.marks, marks: c.marks, annot: c.annot});
+            };
+            UI2.openPrintDialog({title: docName || 'Mon livre', key: 'mise-en-page', zone: 'Mise en page', photos: false, margin: 0, sizeLocked: true, ...UI2.printPaper(W, H),
+                info: `${A().plural(d0.pages.length, 'page')} · ${String(r1(W)).replace('.', ',')} × ${String(r1(H)).replace('.', ',')} mm. Dans la fenêtre du navigateur, garde « Taille réelle (100 %) ».`,
+                options: [{key: 'mode', type: 'radio', value: mode, choices: [['pages', 'Pages simples'], ['spreads', 'Planches (pages en vis-à-vis)'], ...(BK ? [['booklet', 'Livret plié', '(pages remises dans l’ordre, 2 par face)']] : [])]},
+                    ...(BK ? BK.OPTIONS.map(x => ({...x, show: c => c.mode === 'booklet' && (!x.show || x.show(c))})) : []),
+                    {key: 'bleedOn', label: 'Fond perdu', checked: !!bleed && !!d0.page.bleed, show: c => c.mode === 'pages'}, {key: 'bleedMm', type: 'number', label: 'Fond perdu', value: d0.page.bleed || 3, unit: 'mm', min: 0, max: 20, step: 0.5, show: c => c.mode === 'pages' && c.bleedOn},
+                    {key: 'marks', label: 'Traits de coupe', checked: !!bleed, show: c => c.mode === 'pages'}, {key: 'annot', label: open ? `Notes et commentaires (${open})` : 'Notes et commentaires', checked: !!annot, show: c => c.mode === 'pages'}],
+                current: c => (c.mode === 'pages' ? cur + 1 : 1),
+                html});
         }
         async function exportHtml(file) { msg('Préparation du fichier HTML (les images sont intégrées)…'); const html = await inlineImages(printHtml(docForExport(), docName, false)); download(file || `${slug(docName)}.html`, new Blob([html], {type: 'text/html'})); msg(''); }
         function exportJson(file) { download(file || `${slug(docName)}.json`, new Blob([JSON.stringify({type: 'lcnda-mise-en-page-livre', version: 1, name: docName, is_design: design ? 1 : 0, doc: docForExport()}, null, 1)], {type: 'application/json'})); }
@@ -1874,13 +1892,13 @@
                 info: `${A().plural(D.pages.length, 'page')} · ${String(r1(D.page.w)).replace('.', ',')} × ${String(r1(D.page.h)).replace('.', ',')} mm${D.page.bleed ? ` · fond perdu ${String(D.page.bleed).replace('.', ',')} mm` : ''}`,
                 preview: () => { const el = document.createElement('div'); el.className = 'ly-expprev'; el.innerHTML = coverHtml(D, 170); return el; },
                 formats: [
-                    {id: 'pdf', ext: '', hint: 'par l’impression', run: o => exportPrint(o.bleed)},
-                    {id: 'print', run: o => exportPrint(o.bleed, {autoPrint: true})},
-                    ...(ext.layoutBooklet ? [{id: 'booklet', label: '📖 Livret à plier', hint: 'pages remises dans l’ordre, 2 par face', ext: '', quality: false, run: () => { ext.layoutBooklet.open(docForExport(), docName || 'Mon livre'); toast('Le livret s’ouvre : imprime en recto verso (retournement sur le petit côté), plie, agrafe.'); }}] : []),
+                    {id: 'pdf', ext: '', hint: 'par l’impression', run: o => { exportPrint(o.bleed); }},
+                    {id: 'print', run: o => { exportPrint(o.bleed); }},
+                    ...(ext.layoutBooklet ? [{id: 'booklet', label: '📖 Livret à plier', hint: 'pages remises dans l’ordre, 2 par face', ext: '', quality: false, run: () => { exportPrint(false, {mode: 'booklet'}); }}] : []),
                     ...(ext.layoutPdfA ? [{id: 'pdfa', label: '🗄️ PDF/A', hint: 'archivage (ISO 19005), pages en image', ext: 'pdf', quality: false, run: o => exportPdfA(o.filename)}] : []),
                     {id: 'epub', label: '📱 ePub', hint: 'liseuse, téléphone, tablette', ext: 'epub', quality: false, run: o => exportEpub(o.filename)},
                     {id: 'html', label: '🌐 HTML', hint: 'une page, photos comprises', ext: 'html', quality: false, run: o => exportHtml(o.filename)},
-                    {id: 'annot', label: '📝 PDF annoté', hint: open ? `avec ${A().plural(open, 'commentaire')}` : 'avec les commentaires', ext: '', run: o => exportPrint(o.bleed, {annot: true})},
+                    {id: 'annot', label: '📝 PDF annoté', hint: open ? `avec ${A().plural(open, 'commentaire')}` : 'avec les commentaires', ext: '', run: o => { exportPrint(o.bleed, {annot: true}); }},
                     {id: 'review', label: '💬 Relecture', hint: 'à envoyer à un cousin', ext: 'json', quality: false, run: o => exportReview(o.filename)},
                     {id: 'file', hint: 'le document (.json)', ext: 'json', run: o => exportJson(o.filename)},
                 ]});
@@ -2591,7 +2609,7 @@ ${chFiles.map((c, k) => `<item id="ch${k + 1}" href="${c.file}" media-type="appl
     /* ═════════════ Exports ═════════════ */
     const slug = n => String(n || 'livre').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^\w-]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 80) || 'livre';
     const download = (name, blob) => { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000); };
-    function printHtml(doc0, name, withButton, {bleed = false, annot = false, autoPrint = false} = {}) {
+    function printHtml(doc0, name, withButton, {bleed = false, annot = false, autoPrint = false, marks: withMarks = bleed} = {}) {
         const doc = resolveDoc(doc0);
         // 📝 PDF annoté : les passages commentés surlignés, un numéro au bord de chaque objet commenté, la liste des commentaires à la fin
         const cms = annot ? (doc.review?.comments || []) : [], num = new Map(cms.map((c, k) => [c.id, k + 1]));
@@ -2599,9 +2617,9 @@ ${chFiles.map((c, k) => `<item id="ch${k + 1}" href="${c.file}" media-type="appl
         const annotMap = new Map(); cms.forEach(c => { if (c.item && !c.quote) { const l = annotMap.get(c.item) || []; l.push(num.get(c.id)); annotMap.set(c.item, l); } });
         const annotCss = annot ? `[data-cm]{background:#fff0a0;box-shadow:0 0 0 1px #f0c419}${cms.map(c => `[data-cm="${c.id}"]::after{content:"[${num.get(c.id)}]";color:#c4161c;font:700 8px/1 Arial,sans-serif;vertical-align:super}`).join('')}.ly-cmark{position:absolute;z-index:9;min-width:14px;height:14px;padding:0 3px;border-radius:7px;background:#c4161c;color:#fff;font:700 9px/14px Arial,sans-serif;text-align:center}
             .ly-annot{margin:12px auto;padding:14mm;background:#fff;box-sizing:border-box;font:11pt/1.45 Georgia,serif;color:#111;break-before:page;page-break-before:always}.ly-annot h1{font-size:18pt;margin:0 0 4mm}.ly-annot li{margin:0 0 3mm}.ly-annot .q{background:#fff0a0}.ly-annot small{color:#666}.ly-annot .s{color:#0b5cad}` : '';
-        const annotList = annot ? `<section class="ly-annot" style="width:${px(doc.page.w)}px"><h1>💬 Commentaires de relecture (${cms.length})</h1>${cms.length ? `<ol>${cms.map(c => { const pg = pageOfCm(c); return `<li><b>[${num.get(c.id)}]</b> ${pg >= 0 ? `<small>page ${pg + (doc.page.start || 1)} · </small>` : ''}<small>${esc(c.author)} · ${esc(new Date(c.at).toLocaleDateString('fr-FR'))}${c.resolved ? ` · ${c.status === 'accepted' ? 'acceptée' : c.status === 'refused' ? 'refusée' : 'résolu'}` : ''}</small><br>${c.quote ? `<span class="q">« ${esc(c.quote)} »</span><br>` : ''}${esc(c.text)}${c.suggest ? `<br><span class="s">✎ Remplacer « ${esc(c.suggest.from)} » par « ${esc(c.suggest.to)} »</span>` : ''}${c.replies.map(r => `<br>↳ <small>${esc(r.author)} :</small> ${esc(r.text)}`).join('')}</li>`; }).join('')}</ol>` : '<p>Aucun commentaire.</p>'}</section>` : '';
+        const annotList = annot ? `<section class="ly-annot" data-k-page style="width:${px(doc.page.w)}px"><h1>💬 Commentaires de relecture (${cms.length})</h1>${cms.length ? `<ol>${cms.map(c => { const pg = pageOfCm(c); return `<li><b>[${num.get(c.id)}]</b> ${pg >= 0 ? `<small>page ${pg + (doc.page.start || 1)} · </small>` : ''}<small>${esc(c.author)} · ${window.LCNDA_UI?.when?.(c.at) || esc(new Date(c.at).toLocaleDateString('fr-FR'))}${c.resolved ? ` · ${c.status === 'accepted' ? 'acceptée' : c.status === 'refused' ? 'refusée' : 'résolu'}` : ''}</small><br>${c.quote ? `<span class="q">« ${esc(c.quote)} »</span><br>` : ''}${esc(c.text)}${c.suggest ? `<br><span class="s">✎ Remplacer « ${esc(c.suggest.from)} » par « ${esc(c.suggest.to)} »</span>` : ''}${c.replies.map(r => `<br>↳ <small>${esc(r.author)} :</small> ${esc(r.text)}`).join('')}</li>`; }).join('')}</ol>` : '<p>Aucun commentaire.</p>'}</section>` : '';
         // avec fond perdu : la feuille est agrandie du fond perdu et d'une bande pour les traits de coupe (la ligne-bloc, sinon 8 mm)
-        const B = bleed ? doc.page.bleed || 0 : 0, M = bleed ? Math.max(8, doc.page.slug || 0) : 0, W = doc.page.w + 2 * (B + M), H = doc.page.h + 2 * (B + M);
+        const B = bleed ? doc.page.bleed || 0 : 0, M = bleed && withMarks ? Math.max(8, doc.page.slug || 0) : 0, W = doc.page.w + 2 * (B + M), H = doc.page.h + 2 * (B + M);
         // traits de coupe, repères de montage (cibles), gamme de couleurs et ligne d'informations, comme pour un imprimeur
         const marks = i => { const PS = pageSize(doc, i), W = PS.w + 2 * (B + M), H = PS.h + 2 * (B + M), pw = px(PS.w), ph = px(PS.h), o = px(B + M), L = px(Math.max(3, M - 2)), g = px(B + 1), mid = px(M / 2); const ln = (x1, y1, x2, y2) => `<line x1="${r1(x1)}" y1="${r1(y1)}" x2="${r1(x2)}" y2="${r1(y2)}"/>`;
             const reg = (cx, cy) => { const r = px(2.2); return `<circle cx="${r1(cx)}" cy="${r1(cy)}" r="${r1(r)}" fill="none"/><circle cx="${r1(cx)}" cy="${r1(cy)}" r="${r1(r / 2.2)}" fill="#000"/>${ln(cx - r * 1.6, cy, cx + r * 1.6, cy)}${ln(cx, cy - r * 1.6, cx, cy + r * 1.6)}`; };
@@ -2611,7 +2629,7 @@ ${chFiles.map((c, k) => `<item id="ch${k + 1}" href="${c.file}" media-type="appl
         // 📐 une page qui a sa propre taille s'imprime sur une feuille à sa taille (pages nommées @page)
         const sizes = [], sizeName = i => { const PS = pageSize(doc, i); if (PS.w === doc.page.w && PS.h === doc.page.h) return ''; let k = sizes.findIndex(z => z.w === PS.w && z.h === PS.h); if (k < 0) { sizes.push(PS); k = sizes.length - 1; } return 'lysz' + k; };
         const named = (html, i) => { const n = sizeName(i); return n ? html.replace(/^<div class="(ly-sheet|ly-page)/, `<div class="$1 ${n}`) : html; };
-        const pages = doc.pages.map((_, i) => { const PS = pageSize(doc, i), pg = pageHtml(doc, i, {print: true, preview: true, keyPrefix: 'p' + i, annot: annotMap}); return named(bleed ? `<div class="ly-sheet" style="width:${px(PS.w + 2 * (B + M))}px;height:${px(PS.h + 2 * (B + M))}px">${marks(i)}<div class="ly-bleedclip" style="left:${px(M)}px;top:${px(M)}px;width:${px(PS.w + 2 * B)}px;height:${px(PS.h + 2 * B)}px;background:${cssPaint(doc, doc.page.paper)}"><div style="position:absolute;left:${px(B)}px;top:${px(B)}px">${pg.replace('class="ly-page', 'class="ly-page is-bleed')}</div></div></div>` : pg, i); }).join('');
+        const pages = doc.pages.map((_, i) => { const PS = pageSize(doc, i), pg = pageHtml(doc, i, {print: true, preview: true, keyPrefix: 'p' + i, annot: annotMap}); return named(bleed ? `<div class="ly-sheet" data-k-page style="width:${px(PS.w + 2 * (B + M))}px;height:${px(PS.h + 2 * (B + M))}px">${M ? marks(i) : ''}<div class="ly-bleedclip" style="left:${px(M)}px;top:${px(M)}px;width:${px(PS.w + 2 * B)}px;height:${px(PS.h + 2 * B)}px;background:${cssPaint(doc, doc.page.paper)}"><div style="position:absolute;left:${px(B)}px;top:${px(B)}px">${pg.replace('class="ly-page', 'class="ly-page is-bleed')}</div></div></div>` : pg.replace(/^<div class="(ly-page[^"]*)"/, '<div class="$1" data-k-page'), i); }).join('');
         const sizeCss = sizes.map((z, k) => `@page lysz${k}{size:${r1(z.w + 2 * (B + M))}mm ${r1(z.h + 2 * (B + M))}mm;margin:0}.lysz${k}{page:lysz${k}}`).join('');
         // ℹ️ les informations du document : titre (le titre du PDF), auteur, sujet, mots-clés, langue
         const info = doc.info || {}, docTitle = info.title || name, lang = /^[a-z]{2,3}$/.test(info.lang || '') ? info.lang : 'fr';

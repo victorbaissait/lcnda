@@ -147,6 +147,7 @@ function mode_simple_data(PDO $pdo): array
             if (isset($av[$mid], $persons[$pid]) && !in_array($pid, $av[$mid]['people'], true)) { $av[$mid]['people'][] = $pid; }
         }
     }
+    if (function_exists('sealed_letter_media_ids')) { $sealed = sealed_letter_media_ids($pdo); $media = array_diff_key($media, $sealed); $av = array_diff_key($av, $sealed); } // lettres scellées : pas avant le jour
     $start = 0;
     foreach ($persons as $p) { if ($p['start']) { $start = $p['id']; break; } }
     return ['persons' => array_values($persons), 'families' => $families, 'media' => array_values($media), 'av' => array_values($av), 'start' => $start, 'today' => date('Y-m-d')];

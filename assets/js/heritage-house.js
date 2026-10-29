@@ -1104,7 +1104,7 @@
             view3d?.setSun?.(); return true;
         }
         let setsBox = null;
-        const setsPut = (name, v, at = -1) => { const l = setsList(), i = l.findIndex(x => x.name === name), row = {name, date: new Date().toLocaleDateString('fr-FR'), v}; if (i >= 0) l[i] = row; else if (at >= 0) l.splice(at, 0, row); else l.push(row); return setsSave(l); };
+        const setsPut = (name, v, at = -1) => { const l = setsList(), i = l.findIndex(x => x.name === name), row = {name, date: new Date().toISOString(), v}; if (i >= 0) l[i] = row; else if (at >= 0) l.splice(at, 0, row); else l.push(row); return setsSave(l); };
         const setsFrame = () => { const box = window.LCNDA_UI.presetsFrame({id: SETS_TOOL, what: 'les aimants, la grille, l’épaisseur des murs, la hauteur des yeux et la lumière', list: setsList, quietApply: true,
             apply: i => { const cur = setsList()[i]; applySet(cur.v); paintSnap(); commit(`Réglage « ${cur.name} » appliqué`); return false; },
             save: name => setsPut(name, setsData()),
@@ -1121,7 +1121,7 @@
             if (d.outil !== SETS_TOOL) { toast(`Ce réglage est celui d’un autre outil (« ${String(d.outil || '?').slice(0, 40)} ») : importe-le dans cet outil-là, pas dans la Maison.`, 'error'); return false; }
             const l = setsList(); let n = String(d.nom || 'Réglage importé').trim().slice(0, 60) || 'Réglage importé';
             while (l.some(x => x.name === n)) { const n2 = String(await A().askText({title: 'Ce nom est déjà pris', message: `Un réglage s’appelle déjà « ${n} ». Nom du réglage importé :`, value: window.LCNDA_UI.freeName(n, l.map(x => x.name)), okLabel: 'Importer'}) || '').trim().slice(0, 60); if (!n2) return false; n = n2; }
-            l.push({name: n, date: new Date().toLocaleDateString('fr-FR'), v: d.donnees}); if (!setsSave(l)) return false; setsBox?.refresh(); toast(`Réglage « ${n} » importé : « Appliquer » pour t’en servir.`);
+            l.push({name: n, date: new Date().toISOString(), v: d.donnees}); if (!setsSave(l)) return false; setsBox?.refresh(); toast(`Réglage « ${n} » importé : « Appliquer » pour t’en servir.`);
         }
 
         /* ─── ⤓ E3 : la fenêtre d'export unique ; 🏠 le fichier de la maison ─── */
@@ -1238,7 +1238,9 @@
         const download = (blob, fname) => { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = fname; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); };
         const fname = ext2 => `${A().safeExportFilename ? A().safeExportFilename(name, 'maison') : 'maison'}.${ext2}`;
         async function thumb(fl = null) { const s = planSvg(fl || H.floors.find(f => f.level === 0) || F()); if (!s) return ''; try { const b = await svgToPng(s.replace(/width="(\d+)" height="(\d+)"/, (m0, w, h) => { const k = 240 / Math.max(+w, +h); return `width="${Math.round(w * k)}" height="${Math.round(h * k)}"`; })); return await new Promise(ok => { const r = new FileReader(); r.onload = () => ok(r.result); r.readAsDataURL(b); }); } catch (_) { return ''; } }
-        async function save() {
+        let savingP = null; // deux ⌘S rapides : le second attend le premier et réutilise l'id créé (jamais deux maisons)
+        function save() { if (savingP) return savingP; savingP = saveNow().finally(() => { savingP = null; }); return savingP; }
+        async function saveNow() {
             name = $('[data-hs-name]').value.trim() || 'Maison de famille'; saving = true; savedSt('saving');
             try { const r = await post('save_house', {id, name, place_id: placeId, place_text: placeText, period, house: H, thumb: await thumb()}); id = r.result.id; dirty = false; saving = false; savedSt('saved'); status(''); ctx.onSaved?.(id); } catch (e) { saving = false; savedSt('error'); toast(e.message, 'error'); }
         }

@@ -393,13 +393,41 @@ function update_recueil_image(PDO $pdo, array $data): array
 function remove_recueil_image(PDO $pdo, array $data): array
 {
     $id = safe_int($data['id'] ?? 0);
-    $s = $pdo->prepare('SELECT recueil_id, media_id FROM recueil_images WHERE id=?'); $s->execute([$id]); $img = $s->fetch();
+    $s = $pdo->prepare('SELECT * FROM recueil_images WHERE id=?'); $s->execute([$id]); $img = $s->fetch();
     if (!$img) { throw new RuntimeException('Photo introuvable.'); }
+    $b = $pdo->prepare('SELECT id FROM recueil_pages WHERE best_image_id=?'); $b->execute([$id]);
+    $best = array_map('intval', $b->fetchAll(PDO::FETCH_COLUMN));
+    $fp = $pdo->prepare("SELECT position FROM family_collection_media WHERE collection_type='recueil' AND collection_id=? AND media_id=?"); $fp->execute([(int) $img['recueil_id'], (int) $img['media_id']]);
+    $fcmPos = $fp->fetchColumn();
     $pdo->prepare('UPDATE recueil_pages SET best_image_id=NULL WHERE best_image_id=?')->execute([$id]);
     $pdo->prepare('DELETE FROM recueil_images WHERE id=?')->execute([$id]);
     recueil_unlink_media($pdo, (int) $img['recueil_id'], [(int) $img['media_id']]);
     recueil_touch($pdo, (int) $img['recueil_id']);
-    return ['deleted' => true];
+    // ↶ Annuler (H7) : de quoi la remettre à sa place (restore_recueil_image)
+    $keep = array_intersect_key($img, array_flip(['id', 'recueil_id', 'version_id', 'page_id', 'media_id', 'role', 'position', 'note', 'tray', 'created_at']));
+    return ['deleted' => true, 'restore' => $keep + ['best_of' => $best, 'media_position' => $fcmPos === false ? 0 : (int) $fcmPos]];
+}
+
+/** ↶ Annuler après « Retirer la photo du recueil » : la remet (même page, même place, même photo choisie) ; tout est revérifié. */
+function restore_recueil_image(PDO $pdo, array $data): array
+{
+    $rid = safe_int($data['recueil_id'] ?? 0); recueil_row($pdo, $rid);
+    $vid = safe_int($data['version_id'] ?? 0); $mid = safe_int($data['media_id'] ?? 0); $pid = safe_int($data['page_id'] ?? 0);
+    $v = $pdo->prepare('SELECT 1 FROM recueil_versions WHERE id=? AND recueil_id=?'); $v->execute([$vid, $rid]);
+    if (!$v->fetchColumn()) { throw new RuntimeException('Version du recueil introuvable.'); }
+    $m = $pdo->prepare('SELECT 1 FROM media WHERE id=?'); $m->execute([$mid]);
+    if (!$m->fetchColumn()) { throw new RuntimeException('Le média n’existe plus.'); }
+    if ($pid && recueil_page_owner($pdo, $pid) !== $rid) { $pid = 0; }
+    $id = safe_int($data['id'] ?? 0);
+    if ($id) { $u = $pdo->prepare('SELECT 1 FROM recueil_images WHERE id=?'); $u->execute([$id]); if ($u->fetchColumn()) { $id = 0; } }
+    $row = [$rid, $vid, $pid ?: null, $mid, mb_substr(safe_text($data['role'] ?? 'page'), 0, 30) ?: 'page', (float) ($data['position'] ?? 0), mb_substr(safe_text($data['note'] ?? ''), 0, 4000), mb_substr(safe_text($data['tray'] ?? ''), 0, 60)];
+    if ($id) { $pdo->prepare('INSERT INTO recueil_images(id, recueil_id, version_id, page_id, media_id, role, position, note, tray) VALUES(?,?,?,?,?,?,?,?,?)')->execute(array_merge([$id], $row)); }
+    else { $pdo->prepare('INSERT INTO recueil_images(recueil_id, version_id, page_id, media_id, role, position, note, tray) VALUES(?,?,?,?,?,?,?,?)')->execute($row); $id = (int) $pdo->lastInsertId(); }
+    $pdo->prepare("INSERT INTO family_collection_media(collection_type, collection_id, media_id, position, role) SELECT 'recueil', ?, ?, ?, '' WHERE NOT EXISTS (SELECT 1 FROM family_collection_media WHERE collection_type='recueil' AND collection_id=? AND media_id=?)")->execute([$rid, $mid, max(0, safe_int($data['media_position'] ?? 0)), $rid, $mid]);
+    $best = $pdo->prepare('UPDATE recueil_pages SET best_image_id=? WHERE id=? AND recueil_id=? AND best_image_id IS NULL');
+    foreach ((array) ($data['best_of'] ?? []) as $bp) { $best->execute([$id, safe_int($bp), $rid]); }
+    recueil_touch($pdo, $rid);
+    return ['id' => $id];
 }
 
 /** Nom affiché de ce à quoi un recueil est rattaché. */
@@ -466,8 +494,10 @@ function save_recueil_link(PDO $pdo, array $data): array
 
 function delete_recueil_link(PDO $pdo, array $data): array
 {
+    $s = $pdo->prepare('SELECT recueil_id, entity_type, entity_key, page_from, page_to, label, note, folder_id FROM recueil_links WHERE id=?'); $s->execute([safe_int($data['id'] ?? 0)]);
+    $row = $s->fetch() ?: null;
     $pdo->prepare('DELETE FROM recueil_links WHERE id=?')->execute([safe_int($data['id'] ?? 0)]);
-    return ['deleted' => true];
+    return ['deleted' => true, 'restore' => $row]; // ↶ Annuler (H7) : save_recueil_link avec ces champs
 }
 
 /** Les recueils rattachés à une fiche, un village, une enquête, un projet… avec les pages concernées (vignettes). */
