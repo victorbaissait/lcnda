@@ -926,6 +926,7 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 /* chiffres écrits dans une couleur de la palette des stats (style="--stat-c:…") ; en sombre, le texte seul est éclairci pour rester lisible (≥ 4,5:1), les barres gardent la couleur choisie */
 .stats-ink { color: var(--stat-c, inherit); }
 @supports (color: oklch(from red l c h)) { :root[data-theme="dark"] .stats-ink { color: oklch(from var(--stat-c) max(l, .75) c h); } }
+@supports (color: oklch(from red l c h)) { :root:not([data-theme="dark"]) .stats-ink { color: oklch(from var(--stat-c) min(l, .53) c h); } } /* en clair : le chiffre foncé jusqu’à 4,5:1 sur blanc, la barre garde sa couleur */
 :root[data-theme="dark"] .stats-word-chip { background: color-mix(in srgb,var(--chip-color) 22%,var(--white)); }
 :root[data-theme="dark"] .stats-word-chip small { color: #c7c7c7; }
 
@@ -1751,6 +1752,7 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 :root[data-theme="dark"] .button.secondary { background: transparent; color: #bbb; border-color: #555; }
 :root[data-theme="dark"] .button:not(.secondary) { background: var(--blue); color: #fff; border-color: var(--blue); }
 :root[data-theme="dark"] .button:not(.secondary):hover { filter: brightness(1.15); }
+@supports (color: oklch(from red l c h)) { :root[data-theme="dark"] .button:not(.secondary):not(.danger) { color: oklch(from var(--blue) clamp(0, (.62 - l) * 1000, 1) 0 0); } } /* bleu clair (preset Sombre) → texte noir ; bleu foncé → blanc */
 
 /* Panneau principal (fond blanc du formulaire) */
 :root[data-theme="dark"] .maintenance-panel,

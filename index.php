@@ -28,7 +28,7 @@ header('X-Content-Type-Options: nosniff');
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light">
     <title>Carnet numérique des ancêtres</title>
-    <link rel="stylesheet" href="assets/css/app.css?v=277">
+    <link rel="stylesheet" href="assets/css/app.css?v=278">
     <link rel="stylesheet" href="assets/css/picker.css?v=7">
     <link rel="stylesheet" href="assets/css/heritage.css?v=256">
     <link rel="stylesheet" href="assets/css/heritage-diagram-genea.css?v=1">
@@ -1253,7 +1253,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-psd.js?v=1" defer></script>
 <script src="assets/js/heritage-tresors.js?v=10" defer></script>
 <script src="assets/js/heritage-bunker-moteur.js?v=16" defer></script>
-<script src="assets/js/heritage-bunker.js?v=24" defer></script>
+<script src="assets/js/heritage-bunker.js?v=25" defer></script>
 <script src="assets/js/heritage-tresors-memoire.js?v=7" defer></script>
 <script src="assets/js/heritage-tresors-decouvrir.js?v=3" defer></script>
 <script src="assets/js/heritage-tresors-jeux.js?v=7" defer></script>

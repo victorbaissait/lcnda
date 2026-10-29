@@ -10,7 +10,7 @@ process.env.GENEALOGY_SKIP_REFERENCE = process.env.GENEALOGY_SKIP_REFERENCE || '
  *       ↶ Annuler la remet, l'avertissement suit tout seul (Preset, couleur), un clic sur la phrase n'ouvre pas le choix de
  *       couleur, gardé après rechargement, 390 px sans débordement ;
  *     - Graphiques → Statistiques en sombre : les chiffres écrits dans une couleur de la palette ≥ 4,5:1 (les 40 couleurs de départ
- *       + des couleurs foncées au hasard), les barres gardent la couleur choisie, rien ne change en clair ; les étiquettes des
+ *       + des couleurs foncées au hasard), les barres gardent la couleur choisie, en clair le chiffre est foncé jusqu’à 4,5:1 ; les étiquettes des
  *       nuages de mots lisibles en sombre ;
  *     - aucune erreur (pageerror, console.error, réponse 4xx/5xx).
  */
@@ -160,14 +160,16 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             return {ink, chips};
         }, colors);
         const randomDark = Array.from({length: 40}, (_, i) => { const x = (i * 2654435761) >>> 0; return '#' + [x & 0x7f, (x >> 8) & 0x7f, (x >> 16) & 0x7f].map(v => v.toString(16).padStart(2, '0')).join(''); });
-        await t('Statistiques en sombre : les chiffres en couleur de palette ≥ 4,5:1, les barres gardent la couleur, rien ne change en clair', async () => {
+        await t('Statistiques en sombre : les chiffres en couleur de palette ≥ 4,5:1, les barres gardent la couleur, en clair aussi', async () => {
             const page = await open(1440, 'old');
             const pal = await page.evaluate(() => window.LCNDA_APP.getStatsColors().map(c => c.toLowerCase()));
             // en clair : exactement la couleur choisie (comme avant)
             await setDesign(page, {preset: 'portfolio', blue: '#0066cc'});
             const light = await probe(page, pal);
-            const changed = light.ink.filter(x => x.got !== x.c);
-            assert.deepEqual(changed.slice(0, 3), [], 'en clair, le texte garde la couleur de la palette');
+            // en clair aussi, le chiffre est assez foncé (≥ 4,5:1 sur blanc) ; une couleur déjà assez foncée ne bouge pas
+            const lightBad = light.ink.filter(x => x.r < 4.5).map(x => `${x.c} → ${x.got} : ${x.r.toFixed(2)}`);
+            assert.deepEqual(lightBad, [], lightBad.slice(0, 5).join('\n'));
+            assert.ok(light.ink.some(x => x.got === x.c), 'les couleurs déjà foncées restent telles quelles');
             // en sombre (preset « Sombre », avec #0066cc comme couleur principale : le cas signalé)
             await setDesign(page, {preset: 'dark', blue: '#0066cc'});
             const dark = await probe(page, [...pal, ...randomDark]);
@@ -193,6 +195,21 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             bars.forEach((b, i) => assert.equal(b, palRgb[i % palRgb.length], 'barre de la couleur choisie'));
             await page.screenshot({path: path.join(tmp, 'contraste-stats-sombre.png')});
             await page.close();
+        });
+        await t('Preset « Sombre » : le texte des boutons bleus se lit (noir sur bleu clair, blanc sur bleu foncé)', async () => {
+            const page = await open(1440, 'old');
+            for (const blue of ['#4d9fff', '#0066cc']) {
+                await setDesign(page, {preset: 'dark', blue});
+                const r = await page.evaluate(() => {
+                    const cv = document.createElement('canvas').getContext('2d', {willReadFrequently: true});
+                    const rgb = c => { cv.clearRect(0, 0, 1, 1); cv.fillStyle = '#000'; cv.fillStyle = c; cv.fillRect(0, 0, 1, 1); const d = cv.getImageData(0, 0, 1, 1).data; return [d[0], d[1], d[2]]; };
+                    const lum = ([r, g, b]) => { const f = v => { v /= 255; return v <= .03928 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4; }; return .2126 * f(r) + .7152 * f(g) + .0722 * f(b); };
+                    const b = document.createElement('button'); b.className = 'button'; b.textContent = 'Enregistrer'; document.body.appendChild(b);
+                    const cs = getComputedStyle(b), a = lum(rgb(cs.color)), c = lum(rgb(cs.backgroundColor)); b.remove();
+                    return (Math.max(a, c) + .05) / (Math.min(a, c) + .05);
+                });
+                assert.ok(r >= 4.5, `${blue} : contraste ${r.toFixed(2)}`);
+            }
         });
         await t('aucune erreur (pageerror, console.error, 4xx/5xx)', () => { assert.deepEqual(errs, []); });
     } finally {
