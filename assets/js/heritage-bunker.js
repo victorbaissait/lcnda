@@ -129,7 +129,7 @@
     /** un scénario historique : on cache « qui incarnes-tu », l'équipe et la ville ; on dit combien d'ancêtres y vivaient */
     function histUi(form) {
         const k = form.elements.bk_scen.value, H = B().HIST[k], S = B().SCENARIOS[k];
-        form.querySelector('[data-bk-scendesc]').textContent = S ? `${S[2]} Pour gagner : tenir ${B().SCEN_GOAL[k]} jours.` : '';
+        form.querySelector('[data-bk-scendesc]').textContent = S ? `${S[2]} Pour gagner : tenir ${B().SCEN_GOAL[k]} jours, puis la partie continue sans fin.` : '';
         form.querySelector('[data-bk-hist]').hidden = !H; form.querySelector('[data-bk-modern]').hidden = !!H;
         if (!H || !treeDone) return;
         const P0 = histOf(k), Y = H.date[0], n = P0.all.length, line = form.querySelector('[data-bk-histline]');
@@ -815,7 +815,7 @@
             ${opt('souvenirs', '🧓 Souvenirs des ancêtres', `— un ancêtre de ta base qui trouve un objet ou un lieu de sa vraie vie (son métier, son village, un lieu de sa fiche) raconte une anecdote tirée de sa fiche, dans le journal et en bulle. Jamais rien sur un vivant ni une fiche confidentielle.${G.people.some(p => p.mem) ? '' : ' (Aucun habitant de cette partie n’a de fiche à raconter.)'}`)}
             <h4>🔊 Sons</h4>${soundHtml()}
             <h4>Scénario</h4><p>${S[0]} <b>${esc(S[1])}</b> — ${esc(S[2])}</p>
-            <p>${G.won ? `🏆 Gagné le jour ${G.won} : tu peux continuer aussi longtemps que tu veux.` : `🏆 Pour gagner : tenir ${B().goalOf(G)} jours (encore ${plural(Math.max(0, B().goalOf(G) - (B().dayOf(G.t) - 1)), 'jour')}).`}</p>
+            <p>${G.won ? `🏆 Gagné le jour ${G.won} : tu peux continuer aussi longtemps que tu veux.` : `🏆 Pour gagner : tenir ${B().goalOf(G)} jours (encore ${plural(Math.max(0, B().goalOf(G) - (B().dayOf(G.t) - 1)), 'jour')}). Ensuite, la partie continue sans fin.`}</p>
             ${B().HIST[G.scen] ? `<p class="muted">📜 ${esc(B().dateOf(G))} · ${plural(G.people.filter(p => !p.inv && !p.baby).length, 'ancêtre')} de ta famille${G.people.some(p => p.inv) ? `, ${plural(G.people.filter(p => p.inv).length, 'habitant inventé', 'habitants inventés')} de l’époque` : ''}.</p>` : ''}
             ${G.event ? `<h4>En ce moment</h4><p>${B().EVENTS[G.event.k][0]} <b>${esc(B().EVENTS[G.event.k][1])}</b> : ${esc(B().EVENTS[G.event.k][2])} (encore ${Math.max(1, Math.round((G.event.until - G.t) / 60))} h).</p>` : ''}
             <h4>Pannes</h4><p class="muted">Les installations s’usent et tombent parfois en panne (🔧 sur le dessin). Clique dessus : « Réparer » (un quart de ce qu’elles ont coûté, puis du travail à l’atelier). Le même menu propose « Améliorer » (niveau 2 puis 3 : leurs effets comptent ×1,5 puis ×2).</p>
