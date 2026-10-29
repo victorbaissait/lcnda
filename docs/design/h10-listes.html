@@ -1,0 +1,475 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Barre H10 des listes</title>
+<style>
+:root{--bg:#f4f5f7;--card:#fff;--ink:#111;--muted:#666;--soft:#888;--line:#e3e5ea;--line2:#f0f1f4;--blue:#055dff;--blue-ink:#0a3fae;--blue-soft:#eaf1ff;--sh:rgba(5,93,255,.25);--sub:#fafbfc;--dash:#c9ccd3;
+ --red:#d62828;--red-ink:#8a1111;--red-soft:#fdecec;--green:#1aa34a;--green-ink:#14532d;--green-soft:#ecfaf0;--yel:#e1a500;--yel-ink:#6b4e00;--yel-soft:#fff8e1;--grey-soft:#f0f1f3;--grey:#8a8f99;--mark:#fff1a8;--kbd:#f4f5f7;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121419;--card:#1c1f26;--ink:#e9ebef;--muted:#a5abb6;--soft:#8c93a0;--line:#2f343e;--line2:#262a33;--blue:#4d8dff;--blue-ink:#a9c6ff;--blue-soft:#18284a;--sh:rgba(77,141,255,.28);--sub:#181b21;--dash:#3a404b;
+ --red:#ff6b6b;--red-ink:#ffb3b3;--red-soft:#3a1a1d;--green:#3ccf6e;--green-ink:#a6f0c0;--green-soft:#15301f;--yel:#f2c14e;--yel-ink:#ffe08a;--yel-soft:#33290f;--grey-soft:#262a33;--grey:#7d8592;--mark:#6b5a00;--kbd:#262a33;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#121419;--card:#1c1f26;--ink:#e9ebef;--muted:#a5abb6;--soft:#8c93a0;--line:#2f343e;--line2:#262a33;--blue:#4d8dff;--blue-ink:#a9c6ff;--blue-soft:#18284a;--sh:rgba(77,141,255,.28);--sub:#181b21;--dash:#3a404b;
+ --red:#ff6b6b;--red-ink:#ffb3b3;--red-soft:#3a1a1d;--green:#3ccf6e;--green-ink:#a6f0c0;--green-soft:#15301f;--yel:#f2c14e;--yel-ink:#ffe08a;--yel-soft:#33290f;--grey-soft:#262a33;--grey:#7d8592;--mark:#6b5a00;--kbd:#262a33;color-scheme:dark}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);margin:0;padding:28px;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.4}
+h1{font-size:22px;margin:0 0 4px}
+.sub{color:var(--muted);margin:0 0 22px;font-size:14px;max-width:1180px;line-height:1.5}
+.wrap{max-width:1180px}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px 16px;flex-wrap:wrap;max-width:1180px;margin-bottom:14px}
+.top>div:first-child{flex:1 1 560px;min-width:0}
+.top .sub{margin-bottom:0}
+.grid{display:grid;grid-template-columns:minmax(0,1fr);gap:30px;max-width:1180px}
+.case{background:var(--card);border:2px solid var(--ink);box-shadow:6px 6px 0 var(--sh);padding:18px 20px 22px;min-width:0}
+.case>.tag{font:700 11px/1 system-ui;letter-spacing:.12em;color:var(--blue);text-transform:uppercase}
+.case>h3{margin:6px 0 14px;font-size:17px}
+.num{display:inline-block;background:var(--blue);color:#fff;font:800 12px system-ui;padding:3px 7px;margin-right:6px;letter-spacing:0}
+.note{font-size:12.5px;color:var(--muted);margin-top:14px;line-height:1.5}
+.note ul{margin:6px 0 0;padding-left:18px}.note li{margin:3px 0}
+.note b,.note strong{color:var(--ink)}
+code{font:12px ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--grey-soft);padding:0 4px;word-break:break-word}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;align-items:start}
+.two>*{min-width:0}
+/* Avant / Proposé */
+.stage{display:flex;align-items:center;gap:10px;margin:18px 0 10px;font:800 12px system-ui;letter-spacing:.1em;text-transform:uppercase;flex-wrap:wrap}
+.stage:after{content:"";flex:1;border-top:2px solid var(--ink);min-width:20px}
+.stage .st{padding:4px 8px;border:2px solid var(--ink)}
+.stage.av .st{background:var(--red-soft);color:var(--red-ink);border-color:var(--red)}
+.stage.pr .st{background:var(--blue);color:#fff;border-color:var(--blue)}
+.stage small{font:600 12px system-ui;letter-spacing:0;text-transform:none;color:var(--muted)}
+.ex{border:1.5px dashed var(--dash);padding:12px;background:var(--sub);min-width:0}
+.ex>.cap{display:block;font:700 11px system-ui;color:var(--soft);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px}
+.ex>.why{display:block;font-size:12px;color:var(--red-ink);margin-top:10px;line-height:1.45}
+.ex>.good{display:block;font-size:12px;color:var(--green-ink);margin-top:10px;line-height:1.45}
+/* petits morceaux */
+.b{display:inline-flex;align-items:center;gap:4px;font:800 11px/1 system-ui;letter-spacing:.04em;text-transform:uppercase;border:1.5px solid;padding:4px 7px;white-space:nowrap;vertical-align:middle;color:var(--muted);background:var(--grey-soft);border-color:var(--grey)}
+.b.g{color:var(--green-ink);background:var(--green-soft);border-color:var(--green)}
+.b.y{color:var(--yel-ink);background:var(--yel-soft);border-color:var(--yel)}
+.b.r{color:var(--red-ink);background:var(--red-soft);border-color:var(--red)}
+.b.bl{color:var(--blue-ink);background:var(--blue-soft);border-color:var(--blue)}
+.b.sosa{color:#fff;background:var(--blue);border-color:var(--blue)}
+.btn{display:inline-flex;align-items:center;gap:5px;border:2px solid var(--ink);padding:7px 12px;font:700 13px system-ui;background:var(--card);color:var(--ink);box-shadow:3px 3px 0 var(--sh);white-space:nowrap;cursor:default}
+.btn.p{background:var(--blue);color:#fff;border-color:var(--blue)}
+.btn.s{padding:3px 8px;font-size:12px;box-shadow:none;border-width:1.5px}
+.ib{width:30px;height:30px;border:2px solid var(--ink);background:var(--card);display:inline-grid;place-items:center;font-size:14px;flex:none;color:var(--ink)}
+.seg{display:inline-flex;border:2px solid var(--ink);flex-wrap:nowrap;max-width:100%}
+.seg span{padding:6px 10px;font:700 12.5px system-ui;border-right:2px solid var(--ink);background:var(--card);white-space:nowrap}
+.seg span:last-child{border-right:0}.seg span.is-active{background:var(--blue);color:#fff}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{border:1.5px solid var(--dash);padding:4px 9px;font:700 12px system-ui;background:var(--card);white-space:nowrap;color:var(--ink)}
+.chip.is-active{background:var(--ink);color:var(--card);border-color:var(--ink)}
+kbd{border:1px solid var(--dash);border-bottom-width:2px;background:var(--kbd);padding:0 5px;font:700 11px system-ui;color:var(--muted);white-space:nowrap}
+mark{background:var(--mark);color:inherit;padding:0}
+.muted{color:var(--muted)}
+/* en-tête K5 */
+.ph{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.ph .t{min-width:0;flex:1 1 220px}
+.ph small{display:block;font:700 10.5px system-ui;letter-spacing:.08em;text-transform:uppercase;color:var(--soft)}
+.ph b{display:block;font-size:20px;margin:2px 0}
+.ph p{margin:0;font-size:12.5px;color:var(--muted);line-height:1.4}
+.ph .acts{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+/* la barre H10 */
+.lbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:9px}
+.srch{display:flex;align-items:center;gap:8px;border:2px solid var(--ink);padding:6px 9px;font-size:13px;color:var(--soft);background:var(--card);min-width:0;flex:1 1 210px}
+.srch.on{border-color:var(--blue);box-shadow:0 0 0 3px var(--sh);color:var(--ink)}
+.srch .q{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.srch .x{color:var(--soft);font-size:15px}
+.dd{display:inline-flex;align-items:center;gap:5px;border:2px solid var(--ink);padding:5px 9px;font:600 13px system-ui;background:var(--card);white-space:nowrap;color:var(--ink)}
+.dd .n{background:var(--blue);color:#fff;padding:0 6px;font:800 12px system-ui}
+.dd.sort{max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.meta{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin:8px 0 10px;font-size:12.5px;color:var(--muted)}
+.meta .cnt{color:var(--ink);font-weight:700;margin-right:4px}
+.fchip{background:var(--blue-soft);border:1.5px solid var(--blue);color:var(--blue-ink);padding:3px 8px;font:700 12px system-ui;white-space:nowrap}
+.clear{color:var(--muted);font:600 12px system-ui;text-decoration:underline;text-underline-offset:2px}
+/* le menu Filtrer ouvert */
+.ddm{border:2px solid var(--ink);background:var(--card);box-shadow:5px 5px 0 var(--sh);padding:8px 12px 10px;font-size:13px;max-width:290px;margin-top:8px}
+.ddm .rub{display:block;font:700 10.5px system-ui;letter-spacing:.08em;color:var(--soft);text-transform:uppercase;margin:8px 0 4px}
+.ck{display:flex;align-items:center;gap:7px;margin:3px 0}
+.ck i{width:15px;height:15px;border:2px solid var(--ink);display:inline-grid;place-items:center;font:900 10px/1 system-ui;font-style:normal;flex:none;background:var(--card)}
+.ck.on i{background:var(--blue);border-color:var(--blue);color:#fff}
+.ck.on i:after{content:"✓"}
+.ck small{color:var(--soft);margin-left:auto}
+.pkf{display:flex;align-items:center;gap:7px;border:2px solid var(--ink);padding:4px 8px;font-size:12.5px;color:var(--soft);background:var(--card)}
+.dates{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.dates span{border:2px solid var(--ink);padding:4px 7px;font-size:12px;color:var(--soft);background:var(--card)}
+/* mini tableaux et cartes */
+.scroll{overflow-x:auto;max-width:100%}
+.mt{width:100%;border-collapse:collapse;font-size:12.5px;background:var(--card)}
+.mt th{text-align:left;font:700 11.5px system-ui;color:var(--muted);border-bottom:2px solid var(--ink);padding:5px 6px;white-space:nowrap}
+.mt td{border-bottom:1px solid var(--line2);padding:5px 6px;vertical-align:top}
+.mt a{color:var(--blue);font-weight:700;text-decoration:none}
+.old-bar{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-bottom:8px}
+.old-in{border:1px solid var(--grey);padding:5px 8px;font-size:12.5px;color:var(--soft);background:var(--card);border-radius:4px;flex:1 1 160px;min-width:0}
+.old-sel{border:1px solid var(--grey);padding:5px 8px;font-size:12.5px;background:var(--card);border-radius:4px;white-space:nowrap}
+.old-tog{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;white-space:nowrap}
+.old-tog i{width:30px;height:17px;border-radius:10px;background:var(--grey);position:relative;flex:none}
+.old-tog i:after{content:"";position:absolute;left:2px;top:2px;width:13px;height:13px;border-radius:50%;background:#fff}
+.old-seg{display:inline-flex;gap:0;flex-wrap:wrap}
+.old-seg span{border:1px solid var(--grey);padding:4px 9px;font-size:12px;background:var(--card);margin-right:-1px;white-space:nowrap}
+.old-seg span.on{background:var(--ink);color:var(--card)}
+.old-btn{border:1px solid var(--grey);padding:4px 9px;font-size:12px;background:var(--card);border-radius:4px;white-space:nowrap}
+.old-btn.p{background:#2b6cb0;color:#fff;border-color:#2b6cb0}
+.wl{list-style:none;margin:0;padding:0;font-size:12.5px}
+.wl li{display:flex;gap:8px;padding:6px 0;border-bottom:1px solid var(--line2)}
+.wl .y{font-weight:800;min-width:42px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.kc{border:2px solid var(--ink);background:var(--card);display:flex;flex-direction:column;min-width:0}
+.kc .im{height:74px;background:linear-gradient(160deg,#fbf7ec,#e8dcc4);display:grid;place-items:center;font-size:26px;border-bottom:2px solid var(--ink)}
+.kc .bd{padding:7px 8px;font-size:12px;flex:1}
+.kc .bd b{display:block;font-size:13px;margin-bottom:2px}
+.kc .bd small{display:block;color:var(--muted)}
+.kc .ft{display:flex;justify-content:space-between;align-items:center;padding:5px 8px;border-top:1px solid var(--line)}
+/* tableau des listes */
+.tbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+.tbar .srch{max-width:420px}
+.chip[data-f]{cursor:pointer}
+.fam{margin:22px 0 6px;font-size:15px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.fam small{font:600 12px system-ui;color:var(--muted)}
+.lt{width:100%;border-collapse:collapse;font-size:12.5px;table-layout:fixed}
+.lt th{text-align:left;font:700 11px system-ui;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);border-bottom:2px solid var(--ink);padding:6px 7px;vertical-align:bottom}
+.lt td{border-bottom:1px solid var(--line);padding:8px 7px;vertical-align:top;line-height:1.45;overflow-wrap:anywhere}
+.lt td.nm b{display:block;font-size:13.5px}
+.lt td.nm .b{margin-top:5px}
+.lt td .today{color:var(--muted)}
+.lt td .nt{display:block;margin-top:4px;font-size:12px;color:var(--blue-ink)}
+.lt ul{margin:0;padding-left:15px}.lt li{margin:1px 0}
+.lt col.c1{width:15%}.lt col.c2{width:17%}.lt col.c3{width:15%}.lt col.c4{width:24%}.lt col.c5{width:19%}.lt col.c6{width:10%}
+.yes{font-weight:800;color:var(--green-ink)}.no{font-weight:700;color:var(--muted)}
+tr[hidden]{display:none}
+/* cas particuliers */
+.cal{border:2px solid var(--ink);background:var(--card)}
+.cal .hd{display:flex;gap:6px;flex-wrap:wrap;align-items:center;padding:8px;border-bottom:2px solid var(--ink)}
+.cal .gr{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));font-size:11px}
+.cal .gr span{border-right:1px solid var(--line);border-bottom:1px solid var(--line);min-height:38px;padding:3px}
+.cal .gr span:nth-child(7n){border-right:0}
+.cal .ev{display:block;background:var(--blue-soft);color:var(--blue-ink);font-weight:700;margin-top:2px;padding:0 3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cal .ev.r{background:var(--red-soft);color:var(--red-ink)}
+.opt{border:2px solid var(--ink);padding:10px 12px;background:var(--card);margin-top:10px}
+.opt>b{display:block;margin-bottom:4px}
+.opt.rec{border-color:var(--blue);box-shadow:4px 4px 0 var(--sh)}
+.opt .b{margin-left:4px}
+.menu{border:2px solid var(--ink);background:var(--card);box-shadow:5px 5px 0 var(--sh);font-size:13px;min-width:200px;max-width:260px;margin-top:6px}
+.menu div{padding:6px 10px;border-bottom:1px solid var(--line2);display:flex;gap:8px;align-items:center}
+.menu div:last-child{border-bottom:0}
+.menu .sep{border-top:1.5px solid var(--line);padding:0}
+/* validation */
+.val{list-style:none;margin:0;padding:0}
+.val li{border:2px solid var(--ink);background:var(--card);padding:10px 12px;margin:0 0 10px;display:flex;gap:10px;align-items:flex-start}
+.val li.ok{border-color:var(--green);box-shadow:3px 3px 0 rgba(26,163,74,.25)}
+.val input[type=checkbox]{width:20px;height:20px;accent-color:var(--blue);flex:none;margin:1px 0 0}
+.val .tx{flex:1;min-width:0;font-size:13.5px}
+.val .tx small{display:block;color:var(--muted);font-size:12.5px;margin-top:2px}
+.val .ch{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:6px;font-size:12.5px}
+.val .ch label{display:inline-flex;gap:5px;align-items:center}
+.val .ch input{accent-color:var(--blue)}
+.keep{columns:2;column-gap:30px;font-size:13px;margin:0;padding-left:18px}
+.keep li{break-inside:avoid;margin:0 0 6px}
+.sum{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0 0}
+.sum .bx{border:2px solid var(--ink);background:var(--card);padding:8px 12px;min-width:140px;flex:1 1 140px}
+.sum .bx b{display:block;font-size:24px}
+.sum .bx small{color:var(--muted);font-size:12px}
+.foot{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:6px}
+#copied{font-size:12.5px;color:var(--green-ink)}
+/* téléphone */
+@media (max-width:900px){.two{grid-template-columns:minmax(0,1fr)}.keep{columns:1}}
+@media (max-width:760px){
+ body{padding:16px}
+ .case{padding:14px 14px 18px;box-shadow:4px 4px 0 var(--sh)}
+ .lt,.lt tbody,.lt tr,.lt td{display:block;width:100%}
+ .lt colgroup,.lt thead{display:none}
+ .lt tr{border:2px solid var(--ink);background:var(--card);margin:0 0 10px;padding:4px 10px 8px}
+ .lt td{border-bottom:1px solid var(--line2);padding:6px 0}
+ .lt td:last-child{border-bottom:0}
+ .lt td[data-l]:before{content:attr(data-l);display:block;font:700 10.5px system-ui;letter-spacing:.06em;text-transform:uppercase;color:var(--soft);margin-bottom:2px}
+ .ph b{font-size:18px}
+ .srch{flex-basis:100%}
+ .tbar .srch{max-width:none}
+}
+</style></head><body>
+
+<div class="top">
+<div><h1>🔍 H10 sur toutes les listes — la même barre, partout</h1>
+<p class="sub">Les listes de <b>Listes</b> qui n’ont pas encore (ou pas toujours) la barre « 🔍 Chercher · Filtrer ▾ · Liste | Fiches · Trier ▾ » que tu as validée. Pour chacune : ce qu’elle montre aujourd’hui, ce que chercherait la case, les rubriques du menu Filtrer, les tris, et si « Fiches » a un sens. En bas, une case à cocher par point (versions « Proposé »).</p></div>
+<div class="seg" role="group" aria-label="Couleurs de la page" id="theme"><span data-t="auto" class="is-active">Auto</span><span data-t="light">☀️ Clair</span><span data-t="dark">🌙 Sombre</span></div>
+</div>
+
+<div class="grid">
+
+<!-- ════════ 1. Le principe ════════ -->
+<div class="case"><span class="tag"><span class="num">1</span>Le principe</span><h3>La même barre en haut de chaque liste — et rien d’autre ne change dans la liste</h3>
+<div class="ex"><span class="cap">La barre (H10), toujours dans cet ordre</span>
+ <div class="lbar"><div class="srch"><span>🔍</span><span class="q">Chercher… (ex. Borie, Tulle, 1922)</span><kbd>/</kbd></div><span class="dd">Filtrer ▾ <span class="n">2</span></span><div class="seg"><span class="is-active">Liste</span><span>Fiches</span></div><span class="dd sort">Trier : Les plus récents ▾</span></div>
+ <div class="meta"><span class="cnt">12 éléments</span><span class="fchip">Femmes ×</span><span class="fchip">À : Tulle ×</span><span class="clear">Tout effacer</span></div>
+</div>
+<div class="note"><ul>
+<li><b>Ce qui change</b> : seulement le haut de la liste. Les cases de recherche faites à la main, les petits menus (« Toutes les sortes »), les interrupteurs (« Seulement les miens »), les boutons « À faire / Faits / Tous » et les pastilles des Trésors deviennent <b>des rubriques du menu Filtrer</b>, avec leur nombre ; un filtre actif se voit en pastille bleue sous la barre.</li>
+<li><b>Ce qui ne change pas</b> : les lignes, les colonnes, les cartes, les boutons de chaque ligne, les liens, les cartes géographiques et les graphiques posés au-dessus. Cliquer le titre d’une colonne trie toujours (et met « Trier » à jour).</li>
+<li><b>Au passage (K5)</b> : quand la recherche quitte une « barre d’outils » faite main, les boutons qui y étaient (« ＋ Rattachement », « Imprimer l’inventaire »…) montent dans l’en-tête : le bouton principal bleu à droite, 2 boutons au plus, « ⋯ » pour le reste.</li>
+<li><b>Ce que j’ai trouvé</b> : sur les 45 listes relevées, <b>10 ont déjà la barre</b>, mais elle se cache quand la liste est vide (la base du tour des écrans était vide, d’où le relevé). <b>31 ne l’ont pas</b>, et <b>4 sont des cas particuliers</b> (les deux calendriers, « Langues de la famille », « Mes listes »).</li>
+</ul></div>
+<div class="sum"><div class="bx"><span class="b r">À ajouter</span><b>31</b><small>listes sans la barre</small></div><div class="bx"><span class="b g">Déjà là</span><b>10</b><small>cachée quand la liste est vide</small></div><div class="bx"><span class="b y">Cas particulier</span><b>4</b><small>proposition à part (point 3)</small></div></div>
+
+<!-- Passeports -->
+<h3 style="margin:26px 0 0;font-size:16px">🛂 Passeports <small class="muted" style="font-weight:500">— des boutons « Tous / Intérieurs / Étranger » et un bouton ＋ en bas</small></h3>
+<div class="two">
+<div><div class="stage av"><span class="st">Avant</span><small>aujourd’hui</small></div>
+<div class="ex"> <div class="ph"><div class="t"><small>Listes · Médias et documents</small><b>🛂 Passeports</b><p>Les passeports de la famille : intérieurs (jusque vers 1860) et pour l’étranger.</p></div></div>
+ <div class="old-seg" style="margin-bottom:8px"><span class="on">Tous 3</span><span>Passeports intérieurs 2</span><span>Passeports pour l’étranger 1</span></div>
+ <div class="scroll"><table class="mt"><tr><th>Voyageur ↕</th><th>Sorte ↕</th><th>Délivré ↕</th><th>Destination ↕</th></tr>
+ <tr><td><a>Jean BORIE</a></td><td>Intérieur</td><td>Tulle, 1823</td><td>Paris</td></tr>
+ <tr><td><a>Marie PEYRE</a></td><td>Intérieur</td><td>Brive, 1841</td><td>Lyon</td></tr>
+ <tr><td><a>Pierre BORIE</a></td><td>Étranger</td><td>Tulle, 1856</td><td>Buenos Aires</td></tr></table></div>
+ <div class="old-bar" style="margin:10px 0 0"><span class="old-btn p">＋ Nouveau passeport</span><span class="old-btn">🛂 Ouvrir les passeports dans ✨ Trésors</span></div>
+ <span class="why">Rien pour chercher un nom ; le filtre est une rangée de boutons à part ; le bouton pour créer est tout en bas, après la liste.</span></div></div>
+<div><div class="stage pr"><span class="st">Proposé</span><small>la barre H10 + l’en-tête K5</small></div>
+<div class="ex"> <div class="ph"><div class="t"><small>Listes · Médias et documents</small><b>🛂 Passeports</b><p>Les passeports de la famille : intérieurs (jusque vers 1860) et pour l’étranger.</p></div><div class="acts"><span class="btn p">＋ Nouveau passeport</span><span class="ib">⋯</span></div></div>
+ <div class="lbar"><div class="srch on"><span>🔍</span><span class="q"><mark>bor</mark></span><span class="x">×</span></div><span class="dd">Filtrer ▾ <span class="n">1</span></span><span class="dd sort">Trier : Les plus récents ▾</span></div>
+ <div class="meta"><span class="cnt">1 passeport sur 3</span><span class="fchip">Pour l’étranger ×</span><span class="clear">Tout effacer</span></div>
+ <div class="scroll"><table class="mt"><tr><th>Voyageur ↕</th><th>Sorte ↕</th><th>Délivré ↕</th><th>Destination ↕</th></tr>
+ <tr><td><a>Pierre <mark>BOR</mark>IE</a></td><td>Étranger</td><td>Tulle, 1856</td><td>Buenos Aires</td></tr></table></div>
+ <div class="ddm"><span class="rub">Sorte</span><span class="ck"><i></i>Passeport intérieur <small>2</small></span><span class="ck on"><i></i>Passeport pour l’étranger <small>1</small></span>
+ <span class="rub">Voyageur</span><span class="pkf">🔍 Nom, prénom… (2 lettres suffisent)</span>
+ <span class="rub">Délivré à</span><span class="pkf">📍 Une commune…</span>
+ <span class="rub">Période</span><div class="dates"><span>à partir de… « 1820 »</span><span>jusqu’à… « 1860 »</span></div></div>
+ <span class="good">Pas de « Liste | Fiches » ici : un passeport n’a pas d’image à montrer en grand. « 🛂 Ouvrir dans ✨ Trésors » va dans « ⋯ ».</span></div></div>
+</div>
+
+<!-- Mes listes -->
+<h3 style="margin:26px 0 0;font-size:16px">📋 Mes listes <small class="muted" style="font-weight:500">— des filtres ▾ cachés dans les titres de colonnes, « Exporter (CSV) » et « Imprimer » écrits à la main</small></h3>
+<div class="two">
+<div><div class="stage av"><span class="st">Avant</span><small>une liste faite dans l’Éditeur de listes</small></div>
+<div class="ex"> <div class="ph"><div class="t"><small>Listes</small><b>📋 Cousins de Corrèze</b><p>Les cousins nés en Corrèze.<br><strong>42 personnes</strong> affichées sur 120</p></div><div class="acts"><span class="old-btn">Exporter (CSV)</span><span class="old-btn">Imprimer</span><span class="old-btn">✎</span><span class="old-btn">🗑</span></div></div>
+ <div class="old-bar"><span>Filtres : <b>Ville : Tulle</b> ×</span><span class="clear">Tout enlever</span></div>
+ <p class="muted" style="font-size:12px;margin:0 0 6px">Clic sur le nom d’une colonne : trier · <b>▾</b> : ne garder que certaines valeurs</p>
+ <div class="old-seg" style="margin-bottom:8px"><span class="on">▦ Tableau</span><span>🗂 Fiches</span><span>📚 Par groupe</span><span>🧩 Colonnes à glisser</span><span>🕰 Frise</span><span>🖼 Galerie</span></div>
+ <div class="scroll"><table class="mt"><tr><th>Nom ▲ ▾</th><th>Naissance ▾</th><th>Ville ▾</th></tr>
+ <tr><td><a>Anne BORIE</a></td><td>1902</td><td>Tulle</td></tr><tr><td><a>Louis PEYRE</a></td><td>1898</td><td>Tulle</td></tr></table></div>
+ <span class="why">Pas de case pour chercher ; les filtres se trouvent en devinant le petit ▾ ; 6 manières d’afficher à part ; « Exporter (CSV) » et « Imprimer » sans symbole (K11) ; le nombre est dans la phrase d’aide.</span></div></div>
+<div><div class="stage pr"><span class="st">Proposé</span><small>H10 + ⤓ Exporter ▾ + 🖨 Imprimer (L1)</small></div>
+<div class="ex"> <div class="ph"><div class="t"><small>Listes · Mes listes</small><b>📋 Cousins de Corrèze</b><p>Les cousins nés en Corrèze.</p></div><div class="acts"><span class="btn">⤓ Exporter ▾</span><span class="btn">🖨 Imprimer</span><span class="ib">⋯</span></div></div>
+ <div class="lbar"><div class="srch"><span>🔍</span><span class="q">Chercher dans la liste… (nom, ville, année)</span><kbd>/</kbd></div><span class="dd">Filtrer ▾ <span class="n">1</span></span><div class="seg"><span class="is-active">Liste</span><span>Fiches</span></div><span class="dd">Plus ▾</span><span class="dd sort">Trier : Nom A → Z ▾</span></div>
+ <div class="meta"><span class="cnt">42 personnes sur 120</span><span class="fchip">Ville : Tulle ×</span><span class="clear">Tout effacer</span></div>
+ <div class="scroll"><table class="mt"><tr><th>Nom ▲</th><th>Naissance</th><th>Ville</th></tr>
+ <tr><td><a>Anne BORIE</a></td><td>1902</td><td>Tulle</td></tr><tr><td><a>Louis PEYRE</a></td><td>1898</td><td>Tulle</td></tr></table></div>
+ <div class="two" style="gap:10px;margin-top:6px">
+ <div class="ddm"><span class="rub">Ville</span><span class="ck on"><i></i>Tulle <small>42</small></span><span class="ck"><i></i>Brive <small>31</small></span><span class="ck"><i></i>(vide) <small>3</small></span>
+ <span class="rub">Naissance</span><div class="dates"><span>de… « 1880 »</span><span>à… « 1920 »</span></div>
+ <span class="rub">Nom</span><span class="pkf">contient… « Bor »</span></div>
+ <div><div class="menu"><div>📄 CSV (tableur, Excel)</div><div>🧮 Ouvrir dans le tableur</div><div>📊 Fichier Excel (.xlsx)</div></div>
+ <div class="menu"><div>📚 Par groupe</div><div>🧩 Colonnes à glisser</div><div>🕰 Frise</div><div>🖼 Galerie</div></div></div></div>
+ <span class="good">Une rubrique de Filtrer par colonne (les valeurs avec leur nombre, « contient… », une période pour les dates). Le ▾ d’une colonne ouvre Filtrer sur sa rubrique. « Plus ▾ » garde les 4 autres présentations (voir le point 3).</span></div></div>
+</div>
+
+<!-- Le monde autour -->
+<h3 style="margin:26px 0 0;font-size:16px">🌍 Le monde autour <small class="muted" style="font-weight:500">— une barre qui ressemble à H10 mais faite à la main (pareil pour 🛠️ Métiers anciens)</small></h3>
+<div class="two">
+<div><div class="stage av"><span class="st">Avant</span><small>case, menu, interrupteur, nombre à droite</small></div>
+<div class="ex"> <div class="ph"><div class="t"><small>Listes · Histoire</small><b>🌍 Le monde autour</b><p>Les grands événements de France et du monde, et ton histoire locale.</p></div><div class="acts"><span class="btn p">＋ Nouvel événement</span></div></div>
+ <div class="old-bar"><span class="old-in">🔍 Chercher… (choléra, 1870, Corrèze)</span><span class="old-sel">Toutes les sortes ▾</span><span class="old-tog"><i></i>Seulement les miens (3)</span><span class="muted" style="margin-left:auto;font-size:12px">412 événements</span></div>
+ <ul class="wl"><li><span class="y">1832</span><span>🦠 Choléra en France</span></li><li><span class="y">1870</span><span>⚔️ Guerre franco-prussienne</span></li><li><span class="y">1879</span><span>❄️ Hiver terrible</span></li></ul>
+ <span class="why">Elle ressemble à la barre, mais n’en est pas une : pas de menu Filtrer, pas de pastilles, pas de tri, réglages gardés à part.</span></div></div>
+<div><div class="stage pr"><span class="st">Proposé</span><small>la vraie barre, mêmes réglages repris</small></div>
+<div class="ex"> <div class="ph"><div class="t"><small>Listes · Histoire</small><b>🌍 Le monde autour</b><p>Les grands événements de France et du monde, et ton histoire locale.</p></div><div class="acts"><span class="btn p">＋ Nouvel événement</span></div></div>
+ <div class="lbar"><div class="srch"><span>🔍</span><span class="q">Chercher… (choléra, 1870, Corrèze)</span><kbd>/</kbd></div><span class="dd">Filtrer ▾ <span class="n">2</span></span><span class="dd sort">Trier : Les plus anciens d’abord ▾</span></div>
+ <div class="meta"><span class="cnt">2 événements sur 412</span><span class="fchip">🦠 Épidémies ×</span><span class="fchip">Ajoutés par moi ×</span><span class="clear">Tout effacer</span></div>
+ <ul class="wl"><li><span class="y">1854</span><span>🦠 Choléra à Tulle <span class="b bl">Ma commune</span></span></li><li><span class="y">1918</span><span>🦠 Grippe espagnole au village</span></li></ul>
+ <span class="good">« Toutes les sortes » → rubrique « Sorte » (cases avec icônes) ; « Seulement les miens » → case « Ajoutés par moi » ; en plus : Portée (Monde, France, Région, Ma commune) et Période. Le texte « D’où viennent ces événements ? » reste en bas.</span></div></div>
+</div>
+
+<div class="ex" style="margin-top:20px"><span class="cap">Déjà fait — le modèle à suivre : 🎧 Audios et 🎬 Vidéos</span>
+ <div class="lbar"><div class="srch"><span>🔍</span><span class="q">Chercher un titre, une fiche, une battue…</span><kbd>/</kbd></div><span class="dd">Filtrer ▾</span><div class="seg"><span class="is-active">Liste</span><span>Fiches</span></div><span class="dd sort">Trier : Les plus récents ▾</span></div>
+ <span class="good">Deux retouches seulement : l’en-tête passe par K5 (aujourd’hui il est écrit à la main), et les mots du tri suivent C6 (« Les plus récents » au lieu de « Ajout : récent → ancien »), les tris propres (durée, taille…) venant après.</span></div>
+</div>
+
+<!-- ════════ 2. Le tableau des listes ════════ -->
+<div class="case"><span class="tag"><span class="num">2</span>Liste par liste</span><h3>Ce que fait la barre dans chaque liste</h3>
+<p class="note" style="margin-top:0">Les tris : toujours d’abord <b>« Les plus récents · Les plus anciens · A → Z · Z → A »</b> (C6), puis ceux de la liste, écrits dans la colonne. Une liste sans date d’ajout (un dictionnaire, une année) garde A → Z / Z → A et ses tris propres. 👤 = le menu de choix des personnes, 📍 = celui des lieux, 🏷 = celui des étiquettes. « départ » = le choix mis au départ.</p>
+<div class="tbar"><div class="srch" id="tq-box"><span>🔍</span><input id="tq" type="search" placeholder="Chercher une liste… (ex. passeport, carte, Trésors)" aria-label="Chercher une liste" style="border:0;outline:0;background:transparent;color:var(--ink);font:inherit;font-size:13px;flex:1;min-width:0"></div>
+<div class="chips" id="tf"></div></div>
+<div id="tables"></div>
+</div>
+
+<!-- ════════ 3. Cas particuliers ════════ -->
+<div class="case"><span class="tag"><span class="num">3</span>Les cas particuliers</span><h3>Calendriers, pages qui ne sont pas vraiment des listes, Mes listes, Trésors</h3>
+
+<h4 style="margin:6px 0 6px">🗓️ Mon agenda et 📜 Calendrier de la famille</h4>
+<p class="note" style="margin-top:0">Ce sont des calendriers, pas des listes : la barre du haut choisit déjà la vue (Siècle · Décennie · Année · Mois · Semaine · Jour · Liste), « Aujourd’hui », et pour le Calendrier de la famille : une personne (👤), un lieu, « ⤓ Exporter les anniversaires (.ics) ». L’ordre, c’est le temps : un « Trier » n’a pas de sens, et « Liste | Fiches » ferait doublon avec les vues.</p>
+<div class="two">
+<div class="opt"><b>A. Rien ne change <span class="b">Comme avant</span></b><span class="note" style="display:block;margin:0">Les deux calendriers gardent leur barre. On les sort du relevé H10.</span></div>
+<div class="opt rec"><b>B. Seulement 🔍 et Filtrer, dans leur barre <span class="b bl">Proposé</span></b><span class="note" style="display:block;margin:0">On ajoute à leur barre la case 🔍 (elle garde les événements qui correspondent, dans toutes les vues) et « Filtrer ▾ » à rubriques avec les pastilles bleues : <b>Sorte</b> (naissances, mariages, décès, autres… / salons, visites, rappels, courriers…), <b>Personne</b> 👤, <b>Lieu</b> 📍 (à la place du champ de lieu actuel). Pas de Trier, pas de Liste | Fiches.</span></div>
+</div>
+<div class="ex" style="margin-top:10px"><span class="cap">Proposé B — Calendrier de la famille, vue Mois</span>
+<div class="cal"><div class="hd"><div class="seg"><span>Année</span><span class="is-active">Mois</span><span>Semaine</span><span>Liste</span></div><span class="btn s">Aujourd’hui</span><span class="ib">‹</span><b style="font-size:13px">mai 1925</b><span class="ib">›</span><div class="srch" style="flex:1 1 160px"><span>🔍</span><span class="q">Chercher… (Borie, mariage)</span></div><span class="dd">Filtrer ▾ <span class="n">1</span></span></div>
+<div class="meta" style="margin:6px 8px"><span class="fchip">👤 Jean BORIE ×</span><span class="clear">Tout effacer</span></div>
+<div class="gr"><span>lun.</span><span>mar.</span><span>mer.</span><span>jeu.</span><span>ven.</span><span>sam.</span><span>dim.</span><span>4</span><span>5</span><span>6</span><span>7<i class="ev">° Anne BORIE</i></span><span>8</span><span>9</span><span>10</span><span>11</span><span>12<i class="ev r">† Jean BORIE</i></span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span></div></div></div>
+
+<h4 style="margin:22px 0 6px">Les pages qui ne sont pas vraiment des listes</h4>
+<div class="scroll"><table class="mt" style="font-size:13px"><tr><th>Page</th><th>Ce qu’elle est</th><th>Proposé</th></tr>
+<tr><td><b>🗣️ Langues de la famille</b></td><td>Un résumé : légende, carte, un pli par langue (souvent 2 à 5), le tableau « Langue des actes ».</td><td><span class="b">Sans barre</span> — trop peu de lignes pour chercher ; à revoir si une langue dépasse une cinquantaine de personnes.</td></tr>
+<tr><td><b>☠️ Épidémies, guerres, hivers terribles</b></td><td>Un graphique des décès, « Années noires », puis la liste des crises (une centaine).</td><td><span class="b bl">Barre sur les crises seulement</span> — juste au-dessus d’elles ; le graphique et « Années noires » restent au-dessus, sans barre.</td></tr>
+<tr><td><b>🗳️ Cartes d’électeur</b>, <b>🚢 Départs</b>, <b>👶 Enfants placés</b>, <b>✊ Résistants</b></td><td>Une liste, avec une carte (ou la carte du droit de vote dans le monde) en plus.</td><td><span class="b g">Barre au-dessus de la liste</span> — la carte des voyages, des placements et des résistants suit les filtres ; celle du droit de vote dans le monde (dessous) ne bouge pas.</td></tr>
+<tr><td><b>Une seule fiche</b> : un village, un circuit, un lieu précis, une transcription à marquer, un site ou un groupe du Recensement</td><td>La page d’une chose, ouverte depuis la liste.</td><td><span class="b">Sans barre</span> — ce n’est pas une liste ; « ← Retour » ramène à la liste, avec ses réglages.</td></tr>
+</table></div>
+
+<h4 style="margin:22px 0 6px">📋 Mes listes</h4>
+<div class="note" style="margin-top:0"><ul>
+<li><b>« Exporter (CSV) » → « ⤓ Exporter ▾ »</b> (K11) : 📄 CSV, 🧮 Ouvrir dans le tableur, 📊 Fichier Excel (.xlsx) — ce qui est exporté, c’est ce qu’on voit (recherche et filtres compris), comme aujourd’hui.</li>
+<li><b>« Imprimer » → « 🖨 Imprimer »</b> : la fenêtre unique L1 (aperçu, A4 / A5, Portrait / Paysage) ; dans « Ce qu’on imprime » : « La vue affichée » ou « Toute la liste », et les colonnes à garder (cases).</li>
+<li><b>« ✎ » et « 🗑 »</b> vont dans « ⋯ » (✎ Modifier la liste, ⧉ Dupliquer, 🗑 Supprimer en rouge en bas) ; le nombre quitte la phrase d’aide pour la barre.</li>
+<li><b>Filtrer</b> : une rubrique par colonne, avec les réglages d’aujourd’hui (cocher des valeurs avec leur nombre, « contient… », une période). <b>Ils restent rangés dans la liste</b>, comme aujourd’hui : l’export, le widget et les autres appareils voient les mêmes filtres. La recherche 🔍, elle, est nouvelle et retenue sur cet appareil.</li>
+<li><b>Trier</b> : « Dans l’ordre de la liste » (départ), puis chaque colonne A → Z / Z → A (ou du plus petit au plus grand) ; cliquer un titre de colonne marche toujours.</li>
+<li><b>Les 6 présentations</b> : <b>A</b> (proposé) « Liste | Fiches » + « Plus ▾ » (📚 Par groupe, 🧩 Colonnes à glisser, 🕰 Frise, 🖼 Galerie ; celle qu’on choisit s’affiche dans le bouton) ; <b>B</b> les 6 dans le même bouton segmenté (icônes seules sur un téléphone).</li>
+<li>« ＋ Ajouter une ligne » (liste libre) et « Ajouter une personne à la main » (liste de personnes) restent sous la barre, comme aujourd’hui.</li>
+</ul></div>
+
+<h4 style="margin:22px 0 6px">✨ Trésors (Lettres, Bougies, Partages, Passeport des lieux, Actes manquants, Gazettes)</h4>
+<div class="two">
+<div class="ex"><span class="cap">Avant — 🕯️ Bougies</span><div class="old-seg"><span class="on">🕯️ Allumées 2</span><span>Tout le registre 9</span></div><span class="why">Des pastilles C5 faites pour chaque Trésor, pas de recherche, pas de tri (sauf en cliquant les colonnes).</span></div>
+<div class="ex"><span class="cap">Proposé — 🕯️ Bougies</span><div class="lbar"><div class="srch"><span>🔍</span><span class="q">Chercher… (pour qui, de la part de, le mot)</span></div><span class="dd">Filtrer ▾ <span class="n">1</span></span><span class="dd sort">Trier : Les plus récentes ▾</span></div><div class="meta"><span class="cnt">2 bougies sur 9</span><span class="fchip">🕯️ Allumées ×</span><span class="clear">Tout effacer</span></div><span class="good">Le choix de départ d’aujourd’hui (« Allumées », « En cours ») reste celui de départ, mais il se voit en pastille : un clic sur × montre tout le registre.</span></div>
+</div>
+<div class="note"><ul>
+<li>Les pastilles de chaque Trésor deviennent la rubrique « État » de Filtrer, avec le même nombre.</li>
+<li><b>Une lettre scellée</b> : la case 🔍 ne cherche que dans le titre, « De », « Pour » et la date — jamais dans son texte.</li>
+<li>« Ouvrir » sur chaque ligne mène toujours à la page du Trésor ; « 🔍 Ouvrir l’assistant « Que manque-t-il ? » » (Actes manquants) monte dans l’en-tête.</li>
+</ul></div>
+</div>
+
+<!-- ════════ 4. Ce qui ne change pas + validation ════════ -->
+<div class="case"><span class="tag"><span class="num">4</span>Ce qui ne change pas — et ce que tu valides</span><h3>Ce qui ne change pas</h3>
+<ul class="keep">
+<li>Le contenu de chaque liste : mêmes colonnes, mêmes cartes, mêmes boutons sur les lignes, mêmes liens vers les fiches.</li>
+<li>Les formulaires qui s’ouvrent dans la page (Paroisses, Inventaires, Papiers de famille, Circuits, Entraide, Salons) : tels quels.</li>
+<li>Les cartes géographiques, graphiques et résumés posés au-dessus d’une liste.</li>
+<li>Les pages d’une seule chose (un village, un circuit, un lieu précis…) : pas de barre.</li>
+<li>Les listes qui ont déjà la barre (Personnes, Événements, Médias, Maisons, Cadastre, Enquêtes…) et la barre elle-même (<code>UI.listBar</code>).</li>
+<li>La base : rien n’est écrit pour chercher, filtrer ou trier ; la barre marche aussi en consultation 🔒. Les réglages d’avant (« Ceux de ma famille », « À faire / Faits », la recherche d’Armoiries…) sont repris une fois dans la barre.</li>
+<li>Les widgets du tableau de bord et les Trésors eux-mêmes.</li>
+<li>Les petits menus à choix fixes dans les fenêtres (Portrait / Paysage…).</li>
+</ul>
+
+<h3 style="margin-top:22px">À valider <small class="muted" style="font-weight:500;font-size:13px">(versions « Proposé » ; tes coches restent sur cet appareil)</small></h3>
+<ul class="val" id="val">
+<li data-k="v1"><input type="checkbox" id="v1"><label class="tx" for="v1"><b>1. La barre H10 sur les 31 listes « À ajouter »</b>, avec la recherche, les rubriques de Filtrer, les tris et « Liste | Fiches » du tableau du point 2.</label></li>
+<li data-k="v2"><input type="checkbox" id="v2"><div class="tx"><label for="v2"><b>2. Quand une liste est tout à fait vide</b></label><small>Aujourd’hui les 10 listes qui ont la barre la cachent et montrent la grande boîte K10 avec son bouton.</small>
+ <div class="ch"><label><input type="radio" name="v2o" value="cachée" checked> Cachée, la grande boîte K10 seule (proposé, pour toutes)</label><label><input type="radio" name="v2o" value="toujours"> Toujours là, même vide</label></div></div></li>
+<li data-k="v3"><input type="checkbox" id="v3"><label class="tx" for="v3"><b>3. Ce qui part dans Filtrer</b> : cases de recherche faites main, menus « Toutes les sortes », interrupteurs « Seulement les miens », boutons « À faire / Faits / Tous », pastilles des Trésors et des Passeports — chacun devient une rubrique, avec son nombre et sa pastille bleue.</label></li>
+<li data-k="v4"><input type="checkbox" id="v4"><label class="tx" for="v4"><b>4. Les boutons des barres d’outils montent dans l’en-tête K5</b> (＋ bleu à droite, 2 boutons au plus, « ⋯ » pour le reste) ; « Imprimer l’inventaire / les étiquettes » → « 🖨 Imprimer ▾ » par L1 ; « Exporter en CSV » → « ⤓ Exporter ▾ ».</label></li>
+<li data-k="v5"><input type="checkbox" id="v5"><label class="tx" for="v5"><b>5. Les tris</b> : les 4 de C6 d’abord quand la liste a une date, sinon A → Z / Z → A, puis les tris propres ; mêmes mots dans Audios et Vidéos ; cliquer un titre de colonne trie toujours et met « Trier » à jour.</label></li>
+<li data-k="v6"><input type="checkbox" id="v6"><label class="tx" for="v6"><b>6. « Fiches » au départ</b> pour les listes déjà faites de cartes : Cartes anciennes, Armoiries, Objets de famille, Mémoire familiale, Salons, Départs, Circuits, Visites d’archives (« Liste » au départ partout ailleurs).</label></li>
+<li data-k="v7"><input type="checkbox" id="v7"><label class="tx" for="v7"><b>7. Cartes et graphiques au-dessus d’une liste</b> : ils restent, et la carte suit les filtres quand elle montre les mêmes choses (Départs, Enfants placés, Résistants).</label></li>
+<li data-k="v8"><input type="checkbox" id="v8"><div class="tx"><label for="v8"><b>8. Les deux calendriers</b></label>
+ <div class="ch"><label><input type="radio" name="v8o" value="B" checked> B : 🔍 et Filtrer dans leur barre (proposé)</label><label><input type="radio" name="v8o" value="A"> A : rien ne change</label></div></div></li>
+<li data-k="v9"><input type="checkbox" id="v9"><label class="tx" for="v9"><b>9. Sans barre</b> : « Langues de la famille » (un résumé) et les pages d’une seule chose ; <b>barre sur les crises seulement</b> dans « Épidémies, guerres, hivers terribles ».</label></li>
+<li data-k="v10"><input type="checkbox" id="v10"><div class="tx"><label for="v10"><b>10. Mes listes</b> : ⤓ Exporter ▾ et 🖨 Imprimer (L1) en haut, ✎ / 🗑 dans « ⋯ », Filtrer = une rubrique par colonne, filtres toujours rangés dans la liste, 🔍 retenue sur l’appareil.</label>
+ <div class="ch"><label><input type="radio" name="v10o" value="A" checked> A : Liste | Fiches + « Plus ▾ » (proposé)</label><label><input type="radio" name="v10o" value="B"> B : les 6 présentations dans le bouton segmenté</label></div></div></li>
+<li data-k="v11"><input type="checkbox" id="v11"><label class="tx" for="v11"><b>11. Trésors</b> : pastilles → rubrique « État » de Filtrer, le choix de départ (Allumées, En cours) visible en pastille ; jamais de recherche dans le texte d’une lettre scellée.</label></li>
+<li data-k="v12"><input type="checkbox" id="v12"><label class="tx" for="v12"><b>12. Les 10 listes « Déjà là »</b> : on n’y touche presque pas (en-tête K5 pour Audios / Vidéos, Tableaux et Projets de l’Atelier ; une rubrique de plus quand le tableau en propose une).</label></li>
+</ul>
+<div class="foot"><span class="btn p" id="copy" role="button" tabindex="0">📋 Copier mes choix</span><span id="copied"></span></div>
+</div>
+
+</div>
+
+<script>
+(() => {
+'use strict';
+/* thème : Auto / Clair / Sombre (gardé sur cet appareil) */
+const root = document.documentElement, seg = document.getElementById('theme');
+const store = {get(k){try{return localStorage.getItem(k);}catch(_){return null;}}, set(k,v){try{localStorage.setItem(k,v);}catch(_){}}};
+const setTheme = t => { if (t === 'light' || t === 'dark') root.setAttribute('data-theme', t); else root.removeAttribute('data-theme');
+  seg.querySelectorAll('span').forEach(s => s.classList.toggle('is-active', s.dataset.t === (t || 'auto'))); };
+setTheme(store.get('lcnda-maquette-h10-theme') || 'auto');
+seg.addEventListener('click', e => { const s = e.target.closest('[data-t]'); if (!s) return; setTheme(s.dataset.t); store.set('lcnda-maquette-h10-theme', s.dataset.t); });
+
+/* ── les listes : [famille, clé, nom, état, aujourd’hui, cherche, filtres[], tris, fiches, note] ── */
+const B4 = 'les 4 de base';
+const FAM = [
+ ['👥', 'Personnes et familles'], ['📍', 'Lieux et maisons'], ['🖼️', 'Médias et documents'], ['🏛️', 'Archives et sources'], ['📜', 'Histoire'],
+ ['🔎', 'Recherche et organisation'], ['✨', 'Trésors de famille'], ['🛠️', 'Créer et raconter'], ['🐾', 'Animaux'], ['📋', 'Mes listes']];
+const L = [
+ [0,'old_trades','🛠️ Métiers anciens','add','Barre faite main : 🔍, menu « Domaine », interrupteur « Ceux de ma famille », nombre à droite.','Nom, féminin, variantes d’orthographe, description (« sabotier, toile, cuir »).',['Domaine (cases, avec l’icône ; « ✎ Pas dans le dictionnaire »)','Ma famille : « Exercé par un ancêtre »'],'A → Z, Z → A ; « Ma famille d’abord » (départ), « Le plus d’ancêtres ». Pas de « récents » : c’est un dictionnaire.','Non','« D’où vient ce dictionnaire ? » reste en bas.'],
+ [0,'cited_names','🔎 Le cercle autour des ancêtres','add','Onglets « Index des noms | Marquer dans les transcriptions », une case qui cherche quand on valide.','Index : nom, métier, lieu. Transcriptions : titre, texte, cote.',['Rôle (témoin, parrain, marraine, voisin, curé… — cases)','Lieu 📍','Période (de… à…, dates C4)','Fiche : avec / sans fiche','Transcriptions : noms marqués (aucun / au moins un)'],B4+' ; « Le plus de mentions » (départ de l’index).','Non (index) · Oui (transcriptions : le document en vignette)','Les 2 onglets (C5, onglets de page) restent au-dessus ; une barre par onglet, chacune retenue.'],
+ [0,'languages','🗣️ Langues de la famille','special','Résumé : légende, carte, un pli par langue, tableau « Langue des actes ».','—',['—'],'—','Non','Sans barre (voir point 3).'],
+ [0,'closed_branches','🌿 Branches fermées','add','Un tableau seul (Depuis, Certitude, Raison, Note), rien pour chercher.','Nom, raison, note.',['Certitude (cases, les degrés de la fiche)','Raison (cases)'],B4+'.','Non',''],
+ [1,'precise_places','🏠 Lieux précis','add','Case « Adresse ou commune… » + menu « Points GPS regroupés à moins de 30 m ».','Adresse, commune.',['Commune 📍','Sorte : avec une adresse / point GPS seul','Regroupement des points GPS : 10, 30, 100, 300 m (choix ronds ; pas de pastille pour 30 m, le départ)'],'A → Z commune (départ), Z → A ; « Le plus d’événements », Années (plus anciens / plus récents).','Non',''],
+ [1,'villages','🏘️ Fiche d’un village','add','Case qui cherche en tapant + tableau trié en cliquant les colonnes.','Commune.',['Département (cases des départements présents)','Pays','Période (de… à…)'],'« Le plus de personnes » (départ), « Le plus d’événements », Période (plus anciens / plus récents), A → Z, Z → A.','Oui (repère 📍, département · période, personnes · événements)','La page d’un village reste sans barre.'],
+ [1,'parishes','⛪ Paroisses d’Ancien Régime','add','Case + « ＋ Rattachement », formulaire dans la page, tableau.','Lieu, paroisse, note.',['Paroisse 📍','Département','Étiquette 🏷','« Avec des événements concernés »'],B4+' ; « Le plus d’événements », « Jusqu’en » (année).','Non','« ＋ Rattachement » monte dans l’en-tête (K5).'],
+ [1,'old_maps','🗺️ Cartes anciennes','add','Une grille de cartes faites main + « ＋ Carte ancienne ».','Titre, année, étiquette.',['État : ✅ Calée / ⚠ À caler','Maisons placées : avec / sans','Étiquette 🏷'],B4+' ; « Année de la carte ».','Oui, au départ (K9 : l’image, « Calée · 3 points », « 2 maisons placées »)',''],
+ [1,'field_trips','🚗 Circuits sur le terrain','add','« ＋ Circuit » + boutons « À faire (2) / Faits (1) / Tous (3) », fiches faites main.','Titre, lieu de départ, étapes, personnes.',['État : À faire / Faits (remplace les 3 boutons, avec leur nombre)','Personne 👤','Étiquette 🏷'],'« Le départ le plus proche » (départ), '+B4+'.','Oui, au départ (avec « 3 / 8 étapes » en pastille)',''],
+ [2,'audios','🎧 Audios','done','La barre H10 (Rattaché à, Liste | Fiches, 11 tris) — cachée quand il n’y a aucun son ; en-tête écrit à la main.','Titre, fiche, battue (déjà).',['Rattaché à (déjà)'],'Déjà : ajout, nom, durée, date du document, rattaché à, taille — mots à aligner sur C6.','Oui (déjà)','En-tête K5 ; mots du tri C6.'],
+ [2,'videos','🎬 Vidéos','done','Comme Audios.','Titre, fiche, battue (déjà).',['Rattaché à (déjà)'],'Comme Audios.','Oui (déjà)','En-tête K5 ; mots du tri C6.'],
+ [2,'postcards','💌 Cartes postales','done','La barre H10 — cachée quand il n’y a aucune carte.','Titre, lieu, éditeur, texte du dos (déjà).',['Où j’en suis, Lieu montré 📍, Texte du dos (déjà)'],B4+' ; « Par date d’envoi » (déjà).','Oui, au départ (déjà)',''],
+ [2,'recueils','📚 Recueils','done','La barre H10 sans Filtrer — cachée quand il n’y a aucun recueil.','Titre, cote, lieu (déjà).',['À ajouter : Lieu 📍'],B4+' (déjà).','Oui, au départ (déjà)',''],
+ [2,'family_papers','📦 Papiers de famille','add','Case + « ＋ Document », « Imprimer les étiquettes », « Imprimer l’inventaire » ; un tableau par rangement, cases à cocher.','Titre, n°, rangement, chez qui.',['Sorte (livret de famille, acte ancien, lettre… — cases)','Rangement (les boîtes)','Chez qui','Personne 👤','Scan : avec / sans','Étiquette 🏷'],'« N° de classement » (départ), '+B4+', « Date du document ».','Oui (le scan en vignette)','Les groupes « 📦 Boîte… » restent en mode Liste ; « 🖨 Imprimer ▾ » (étiquettes, inventaire) par L1.'],
+ [2,'voter_cards','🗳️ Cartes d’électeur','add','Un tableau trié en cliquant les colonnes, puis la carte du droit de vote dans le monde.','Personne, commune.',['Commune 📍','Période du premier vote (de… à…)','Photos : avec / sans'],B4+' ; « Le plus de votes », « Premier vote ».','Non','La carte du monde, dessous, ne change pas.'],
+ [2,'passports','🛂 Passeports','add','Boutons « Tous / Intérieurs / Étranger », tableau, « ＋ Nouveau passeport » en bas.','Voyageur, destination, motif, profession.',['Sorte : intérieur / pour l’étranger','Voyageur 👤','Délivré à 📍','Période'],B4+' ; « Date de délivrance ».','Non','Voir l’avant / après en haut.'],
+ [2,'probate','⚖️ Inventaires après décès','add','« ＋ Inventaire », « Comparer les générations », formulaire dans la page, tableau.','Personne, notaire, lieu.',['Personne 👤','Lieu 📍','Période','Monnaie (livre, franc…)','Étiquette 🏷'],B4+' ; « Date de l’acte », « Le plus riche » (net), « Journées de travail ».','Non','« Comparer les générations » → « ⋯ ».'],
+ [2,'coats_of_arms','🛡️ Armoiries','add','Case « Chercher (nom, blasonnement, famille) » + « ＋ Armoiries », grille de blasons.','Nom, blasonnement, devise, famille.',['Porteur 👤','Image : avec / sans','Étiquette 🏷'],B4+'.','Oui, au départ (le blason en vignette)',''],
+ [2,'family_objects','🏺 Objets de famille','add','Case + « ＋ Objet », grille de cartes faites main.','Objet, étiquette, personnes.',['Qui l’a aujourd’hui 👤','Passé par 👤','Photo : avec / sans','Étiquette 🏷'],B4+'.','Oui, au départ',''],
+ [2,'family_memories','💬 Mémoire familiale','add','Case + menu « Tout / sorte » + « ＋ Souvenir », grille.','Texte, étiquette, personnes.',['Sorte : recette, expression, chanson, surnom, tradition (cases ; remplace le menu)','Transmis par 👤','Étiquette 🏷'],B4+'.','Oui, au départ',''],
+ [3,'census_households','🏠 Recensements : tous les foyers','add','Menus « Commune » et « Année » + case, plis par année, lien « Exporter en CSV ».','Nom, métier, adresse.',['Commune 📍 (remplace le menu)','Année (cases)','Où j’en suis (trouvé, à chercher, non trouvé…)','Recensement particulier'],'« Par année » (départ, garde les plis), A → Z commune, « Le plus de membres ».','Non','« Exporter en CSV » → « ⤓ Exporter ▾ » (CSV, 🧮 Ouvrir dans le tableur).'],
+ [3,'archive_visits','🏛️ Visites d’archives','add','Onglets « À venir / ✓ Visites faites / Passés / Tous », feuilles de mission en cartes.','Centre, cote, commune.',['État : à venir / faites / passées (remplace les onglets)','Centre d’archives (menu de choix)','Période'],'« La visite la plus proche » (départ), '+B4+'.','Oui, au départ (les feuilles de mission)','Le message « horaires à vérifier » reste au-dessus (C7 ℹ️).'],
+ [3,'press_ads','📰 Annonces dans la presse','done','La barre H10 — cachée quand il n’y a aucune annonce.','Titre, texte, journal (déjà).',['Sorte, Où j’en suis (déjà)'],B4+' (déjà).','Oui (déjà)',''],
+ [4,'world_events','🌍 Le monde autour','add','Barre faite main : 🔍, menu « Toutes les sortes », interrupteur « Seulement les miens ».','Titre, description, lieu, année (« choléra, 1870, Corrèze »).',['Sorte (cases avec icône)','Portée : Monde, France, Région, Ma commune','« Ajoutés par moi »','Période'],'« Les plus anciens d’abord » (départ, l’ordre du temps), « Les plus récents d’abord », A → Z, Z → A.','Non','Voir l’avant / après en haut.'],
+ [4,'historical_context','☠️ Épidémies, guerres, hivers terribles','add','Graphique des décès, « Années noires », puis les crises en fiches.','Crise, région.',['Sorte : épidémie, guerre, hiver, famine…','« Qui ont touché la famille »','Période'],'« Ordre du temps » (départ), « Le plus de décès dans la famille », « Mortalité la plus forte ».','Non','Barre au-dessus des crises seulement (point 3).'],
+ [4,'poilus_list','🎖️ Poilus 14-18','add','Un bloc par soldat, rien pour chercher.','Nom, régiment, lieu.',['« Mort pour la France »','Régiment / unité (cases)','Blessé, disparu, prisonnier (cases)'],'A → Z (départ), Z → A, plus récents / plus anciens (modifiés) ; « Par régiment ».','Oui (portrait K7, régiment, devenir)',''],
+ [4,'resistance_list','✊ Résistants','add','Carte des parcours + tableau.','Nom, nom de guerre, réseau, mouvement.',['Réseau / mouvement (cases)','Devenir : arrêté, déporté, mort','Étiquette 🏷'],B4+' ; « Date d’entrée ».','Non','La carte suit les filtres.'],
+ [4,'voyages_list','🚢 Départs et émigration','add','« Pour qui ? » + « ＋ Voyage », ligne « Québec (3) · Argentine (2) », carte, fiches.','Personne, port, destination.',['Destination (cases avec leur nombre ; remplace la ligne)','Personne 👤','Période'],'Date de départ (plus anciens / plus récents), A → Z, Z → A.','Oui, au départ','« ＋ Voyage » dans l’en-tête ; « Pour qui ? » se demande dans la fenêtre. La carte suit les filtres.'],
+ [4,'placements_list','👶 Enfants placés','add','« Pour qui ? » + « ＋ Placement », ligne des lieux, carte, tableau.','Enfant, lieu, nourrice, institution.',['Situation : en nourrice, abandonné, hospice… (cases)','Lieu 📍','Période'],B4+' ; « Date de début », « Durée ».','Non','Comme Départs.'],
+ [5,'my_calendar','🗓️ Mon agenda','special','Un calendrier (Siècle → Jour, Liste), « ＋ Nouveau ».','Titre, lieu (proposé B).',['Sorte : salons, visites, rappels, courriers, circuits, tâches… (proposé B)'],'— (l’ordre du temps)','— (les vues)','Voir point 3.'],
+ [5,'genea_calendar','📜 Calendrier de la famille','special','Un calendrier, une personne 👤, un lieu, « ⤓ Exporter les anniversaires (.ics) ».','Nom, sorte d’événement (proposé B).',['Sorte, Personne 👤, Lieu 📍 (proposé B)'],'— (l’ordre du temps)','— (les vues)','Voir point 3.'],
+ [5,'help_requests','🤝 Demandes d’entraide','add','« ＋ Demande » + boutons « En cours / Terminées / Toutes », fiches.','Personne, question, réponse, où c’est publié.',['État : brouillon, publiée, réponse reçue, résolue, abandonnée (cases)','Ce qu’on cherche : parents, naissance, mariage…','Personne 👤','Publiée sur (Geneanet, forum, Facebook…)'],B4+'.','Non',''],
+ [5,'fairs','🎪 Salons et événements','add','« ＋ Salon » + boutons « À venir / Passés / Tous », lien « Voir les salons passés ».','Nom, ville, stands.',['Quand : à venir / passés','Sorte : salon, forum, congrès, portes ouvertes…','Lieu 📍'],'« Le plus proche » (départ), '+B4+'.','Oui, au départ',''],
+ [6,'tr_letters','✉️ Lettres aux descendants','add','Pastilles « Toutes / 🔒 Scellées / À ouvrir cette année / 📬 Ouvertes », tableau.','Titre, De, Pour — jamais le texte d’une lettre scellée.',['État : scellées, ouvertes, à ouvrir cette année','De 👤','Pour 👤'],'« Date d’ouverture » (départ), '+B4+'.','Non',''],
+ [6,'tr_candles','🕯️ Bougies','add','Pastilles « 🕯️ Allumées / Tout le registre », tableau.','Pour qui, de la part de, le mot.',['État : allumées / éteintes (départ : allumées, en pastille)','Pour 👤'],B4+'.','Non',''],
+ [6,'tr_shares','🔗 Partages temporaires','add','Pastilles « En cours / Expirés / Tous », tableau.','Branche, personne.',['État : en cours / expirés (départ : en cours, en pastille)','Mot de passe : oui / non'],B4+' ; « Jusqu’au ».','Non',''],
+ [6,'tr_stamps','📍 Passeport des lieux','add','Pastilles « Tous / ✅ Visités / À visiter », tableau des lieux de l’arbre.','Lieu, note.',['Visite : visités / à visiter','Département'],'« Le plus de personnes de l’arbre » (départ), A → Z, Z → A, « Date de visite ».','Non',''],
+ [6,'tr_gaps','🏛️ Actes manquants','add','Bouton vers l’assistant + les 400 premières lignes.','Ancêtre, commune, archives.',['L’acte : naissance, mariage, décès','Commune 📍','Service d’archives'],'« Sosa » (départ), A → Z, Z → A, « Années ».','Non','L’assistant complet garde ses outils ; son bouton monte dans l’en-tête.'],
+ [6,'gazettes','📰 Gazettes','add','Un tableau, une ligne par année.','Année, gros titre, nom cité.',['Il y a : des naissances / des mariages / des décès','Période'],'« Les plus récentes » (départ, par année), « Les plus anciennes », « Le plus de nouvelles ». Pas de A → Z.','Non',''],
+ [7,'atelier_list','📚 Projets de l’Atelier','done','La barre H10 (État, tri par colonne) — cachée quand il n’y a aucun projet ; en-tête écrit à la main.','Titre, sorte (déjà).',['État (déjà)'],'Déjà, par colonne.','Oui (déjà)','En-tête K5.'],
+ [7,'boards_list','🧩 Tableaux','done','Comme les projets de l’Atelier.','Titre, enquête, battue (déjà).',['Rangé dans (déjà)'],'Déjà, par colonne.','Oui (déjà)','En-tête K5 ; le nombre quitte la phrase d’aide.'],
+ [7,'topic_sheets_list','🗂 Fiches thématiques','done','La barre H10 sans Filtrer — cachée quand il n’y a aucune fiche.','Titre, sous-titre (déjà).',['À ajouter : Étiquette 🏷'],B4+' (déjà).','Oui (déjà)',''],
+ [7,'layout_books','📐 Mise en page','done','La barre H10 (Sorte : livres / designs) — cachée quand il n’y a rien.','Nom (déjà).',['Sorte (déjà)'],B4+' (déjà).','Oui (déjà)',''],
+ [8,'recensement','🐾 Recensement','done','Onglets + la barre H10 ; les onglets Sites et Groupes n’ont pas de Filtrer.','Nom, code « 7K », bague, lieu (déjà).',['Espèce, Site, Année, Bague lue, Suivi (déjà)','À ajouter : Groupes → Espèce'],'Déjà.','Oui (déjà)',''],
+ [9,'mylist','📋 Chacune de Mes listes','special','Filtres ▾ dans les titres de colonnes, 6 présentations, « Exporter (CSV) », « Imprimer ».','Toutes les colonnes de la liste.',['Une rubrique par colonne : valeurs cochées avec leur nombre, « contient… », période'],'« Dans l’ordre de la liste » (départ), puis chaque colonne.','Oui (+ « Plus ▾ » : groupe, colonnes, frise, galerie)','Voir point 3.']];
+const ST = {add: ['r', 'À ajouter'], done: ['g', 'Déjà là'], special: ['y', 'Cas particulier']};
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
+const fold = s => String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+const yn = v => /^Oui/.test(v) ? `<span class="yes">${esc(v)}</span>` : `<span class="no">${esc(v)}</span>`;
+const row = r => `<tr data-st="${r[3]}" data-q="${esc(fold(r.join(' ')))}"><td class="nm" data-l="Liste"><b>${esc(r[2])}</b><code>${esc(r[1] === 'mylist' ? 'mylist:N' : r[1])}</code><br><span class="b ${ST[r[3]][0]}">${ST[r[3]][1]}</span></td>
+ <td data-l="Aujourd’hui"><span class="today">${esc(r[4])}</span></td>
+ <td data-l="🔍 La case cherche">${esc(r[5])}</td>
+ <td data-l="Filtrer ▾ — rubriques">${r[6][0] === '—' ? '—' : `<ul>${r[6].map(f => `<li>${esc(f)}</li>`).join('')}</ul>`}</td>
+ <td data-l="Trier">${esc(r[7])}</td>
+ <td data-l="Liste | Fiches">${yn(r[8])}${r[9] ? `<span class="nt">${esc(r[9])}</span>` : ''}</td></tr>`;
+const host = document.getElementById('tables');
+host.innerHTML = FAM.map((f, i) => { const rows = L.filter(r => r[0] === i); return `<section data-fam="${i}"><h4 class="fam">${f[0]} ${esc(f[1])} <small>${rows.length} ${rows.length > 1 ? 'listes' : 'liste'}</small></h4>
+ <table class="lt"><colgroup><col class="c1"><col class="c2"><col class="c3"><col class="c4"><col class="c5"><col class="c6"></colgroup><thead><tr><th>Liste</th><th>Aujourd’hui</th><th>🔍 La case cherche</th><th>Filtrer ▾ — rubriques</th><th>Trier (en plus)</th><th>Liste | Fiches</th></tr></thead><tbody>${rows.map(row).join('')}</tbody></table></section>`; }).join('')
+ + '<div id="tnone" hidden class="ex" style="margin-top:10px">🔍 Aucune liste pour cette recherche. Vérifie l’orthographe, ou efface la recherche.</div>';
+/* le petit filtre du tableau (C1 + C5) */
+const tf = document.getElementById('tf'), tq = document.getElementById('tq');
+let cur = 'all';
+const n = k => k === 'all' ? L.length : L.filter(r => r[3] === k).length;
+tf.innerHTML = [['all', 'Tout'], ['add', 'À ajouter'], ['done', 'Déjà là'], ['special', 'Cas particuliers']].map(([k, l]) => `<span class="chip${k === cur ? ' is-active' : ''}" data-f="${k}" role="button" tabindex="0">${l} (${n(k)})</span>`).join('');
+const apply = () => { const q = fold(tq.value.trim()); let any = 0;
+  host.querySelectorAll('section[data-fam]').forEach(sec => { let vis = 0; sec.querySelectorAll('tbody tr').forEach(tr => { const ok = (cur === 'all' || tr.dataset.st === cur) && (!q || tr.dataset.q.includes(q)); tr.hidden = !ok; if (ok) vis++; }); sec.hidden = !vis; any += vis; });
+  document.getElementById('tnone').hidden = !!any; document.getElementById('tq-box').classList.toggle('on', !!q); };
+tf.addEventListener('click', e => { const c = e.target.closest('[data-f]'); if (!c) return; cur = c.dataset.f; tf.querySelectorAll('.chip').forEach(x => x.classList.toggle('is-active', x === c)); apply(); });
+tf.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.target.click?.(); } });
+tq.addEventListener('input', apply);
+tq.addEventListener('keydown', e => { if (e.key === 'Escape') { tq.value = ''; apply(); } });
+document.addEventListener('keydown', e => { if (e.key === '/' && !/^(INPUT|TEXTAREA)$/.test(document.activeElement?.tagName)) { e.preventDefault(); tq.focus(); } });
+
+/* les cases à valider (gardées sur cet appareil) */
+const KEY = 'lcnda-maquette-h10-valid', val = document.getElementById('val');
+let saved = {}; try { saved = JSON.parse(store.get(KEY) || '{}') || {}; } catch (_) { saved = {}; }
+val.querySelectorAll('li').forEach(li => { const k = li.dataset.k, cb = li.querySelector('input[type=checkbox]');
+  cb.checked = !!saved[k]; li.classList.toggle('ok', cb.checked);
+  li.querySelectorAll('input[type=radio]').forEach(r => { if (saved[k + 'o']) r.checked = r.value === saved[k + 'o']; }); });
+const save = () => { const o = {}; val.querySelectorAll('li').forEach(li => { const k = li.dataset.k; o[k] = li.querySelector('input[type=checkbox]').checked; li.classList.toggle('ok', o[k]); const r = li.querySelector('input[type=radio]:checked'); if (r) o[k + 'o'] = r.value; }); store.set(KEY, JSON.stringify(o)); };
+val.addEventListener('change', save);
+const copy = document.getElementById('copy');
+const doCopy = async () => { const lines = ['H10 sur les listes — mes choix :']; val.querySelectorAll('li').forEach(li => { const t = li.querySelector('b').textContent.trim(), ok = li.querySelector('input[type=checkbox]').checked, r = li.querySelector('input[type=radio]:checked'); lines.push(`${ok ? '✓' : '·'} ${t}${r ? ' → ' + r.closest('label').textContent.trim() : ''}${ok ? '' : ' (pas encore validé)'}`); });
+  const txt = lines.join('\n'); let done = false; try { await navigator.clipboard.writeText(txt); done = true; } catch (_) {}
+  document.getElementById('copied').textContent = done ? '✓ Copié : colle-le dans la conversation.' : txt; };
+copy.addEventListener('click', doCopy); copy.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); doCopy(); } });
+})();
+</script>
+</body></html>
