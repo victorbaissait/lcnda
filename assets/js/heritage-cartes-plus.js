@@ -303,11 +303,11 @@
                 actions: ['<button type="button" class="button" data-cp-open-map>↗ Voir sur la Carte</button>']})}
             ${st.error ? UI().notice('error', st.error) : ''}
             <section class="maintenance-panel"><h3>🏚 Communes disparues ou fusionnées</h3>
-                <p>L’historique officiel des communes de l’INSEE (depuis 1943) : chaque commune disparue avec sa date et sa commune d’aujourd’hui. Téléchargé une seule fois, puis tout marche sans Internet. Les anciens noms aident aussi le menu de choix des lieux (« anc. « … » »).</p>
+                <p>L’historique officiel des communes de l’INSEE (depuis 1943) : chaque commune disparue avec sa date et sa commune d’aujourd’hui. Livré avec l’app (5,5 Mo, Licence Ouverte 2.0 de l’INSEE) : installé tout seul, sans Internet. Les anciens noms aident aussi le menu de choix des lieux (« anc. « … » »).</p>
                 <div class="cp-set-files">${rows}</div>
                 ${st.installed ? `<p>${A().plural(st.gone || 0, 'commune disparue', 'communes disparues')} · ${A().plural(st.renamed || 0, 'commune renommée', 'communes renommées')} · ${A().plural(st.located || 0, 'placée sur la carte', 'placées sur la carte')}.</p>` : ''}
                 <div class="page-actions">${st.installed ? '<button type="button" class="button secondary" data-cp-dl>⤓ Télécharger de nouveau (mise à jour)</button><button type="button" class="button secondary" data-cp-rm>🗑 Retirer</button>'
-                    : '<button type="button" class="button" data-cp-dl>⤓ Télécharger les frontières anciennes <span data-cp-size>(taille…)</span></button>'}</div>
+                    : '<button type="button" class="button" data-cp-dl>⤓ Installer les frontières anciennes <span data-cp-size>(taille…)</span></button>'}</div>
                 <p class="ui-hint" data-cp-remote></p>
                 <p class="ui-hint">${esc(st.licence || '')}. Rangé dans le ${esc(st.dir_label || 'dossier des données')}, commun à toutes tes généalogies.</p></section>
             <section class="maintenance-panel"><h3>🏛 Provinces (≈ 1789) et départements de 1790</h3>

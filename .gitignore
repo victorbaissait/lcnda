@@ -6,6 +6,7 @@
 !/data/reference/
 /data/reference/*
 !/data/reference/geo-fr.sqlite.gz
+!/data/reference/frontieres/
 !/data/reference/geo-be.sqlite.gz
 !/data/reference/geo-ch.sqlite.gz
 !/data/reference/geo-li.sqlite.gz

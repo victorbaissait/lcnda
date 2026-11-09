@@ -37,6 +37,21 @@ function cp_front_files(): array
     ];
 }
 
+/** 📦 les fichiers de l'INSEE livrés avec l'app (data/reference/frontieres, Licence Ouverte 2.0) : installés tout seuls, sans Internet */
+function cp_front_bundled(): ?array
+{
+    $d = APP_ROOT . '/data/reference/frontieres';
+    $sums = @file($d . '/SHA256SUMS', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    if (!$sums) { return null; }
+    $out = [];
+    foreach ($sums as $l) {
+        if (preg_match('/^([0-9a-f]{64})\s+\*?(mvt|com)\.csv$/', trim($l), $m) && is_file($d . '/' . $m[2] . '.csv')) {
+            $out[$m[2]] = ['url' => 'file://' . $d . '/' . $m[2] . '.csv', 'size' => (int) filesize($d . '/' . $m[2] . '.csv'), 'checksum' => ['type' => 'sha256', 'value' => $m[1]], 'from' => 'LCNDA (fichiers livrés avec l’app)'];
+        }
+    }
+    return isset($out['mvt'], $out['com']) ? $out : null;
+}
+
 function cp_front_dir(): string
 {
     $d = (string) (getenv('LCNDA_FRONTIERES_DIR') ?: SHARED_DATA_DIR . '/frontieres');
@@ -78,6 +93,7 @@ function cp_front_sources(bool $network = true): array
             return $out;
         }
     }
+    if ($b = cp_front_bundled()) { return $b; } // livrés avec l'app : rien à télécharger
     $out = [];
     if ($network) {
         $res = cp_http_get(CP_FRONT_DATASET, 3 * 1024 * 1024, 20);
@@ -134,6 +150,9 @@ function cp_http_get(string $url, int $max, int $timeout = 60, ?string $toFile =
 
 function cp_front_status(PDO $pdo): array
 {
+    if (!cp_front_installed() && !getenv('LCNDA_FRONTIERES_SOURCES') && cp_front_bundled() && !(glob(cp_front_dir() . '/.trash-*') ?: [])) {
+        try { cp_front_download($pdo, false); } catch (Throwable $_) {} // 📦 livrés avec l'app : prêts sans rien faire
+    }
     $m = cp_front_manifest(); $rec = cp_front_installed() ? cp_front_records() : ['records' => []];
     $files = [];
     foreach (cp_front_files() as $k => $f) {
@@ -311,7 +330,7 @@ function cp_front_apply(PDO $pdo, bool $remove = false): array
     } catch (Throwable $e) { if ($pdo->inTransaction()) { $pdo->rollBack(); } throw $e; }
 }
 
-function cp_front_download(PDO $pdo): array
+function cp_front_download(PDO $pdo, bool $apply = true): array
 {
     @set_time_limit(0);
     $dir = cp_front_dir();
@@ -342,7 +361,7 @@ function cp_front_download(PDO $pdo): array
         file_put_contents($dir . '/communes-anciennes.json', json_encode($build, JSON_UNESCAPED_UNICODE));
         file_put_contents($dir . '/manifest.json', json_encode($m, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
     } finally { foreach ($tmp as $p) { if (is_file($p)) { @unlink($p); } } }
-    $a = cp_front_apply($pdo);
+    $a = $apply ? cp_front_apply($pdo) : ['added' => 0];
     return ['ok' => true, 'files' => array_map(static fn($x) => ['size' => $x['size'], 'sha256' => $x['sha256'], 'checked' => $x['checked']], $got), 'gone' => count(array_filter($build['records'], static fn($r) => $r['k'] === 'gone')), 'names' => $a['added']];
 }
 
