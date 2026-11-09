@@ -112,7 +112,9 @@ const ROWS = [['MARTIN', 'Jean Pierre', '12 mars 1855'], ['DUPONT', 'Marie Louis
             assert.equal((await post('restore_last_delete', { entity_type: 'photo_comparison', entity_id: ids.c2 })).status, 200);
             const back = (await get('photo_comparison', { id: ids.c2 })).comparison;
             assert.equal(back.mode, 'curtain'); assert.deepEqual(back.people.map(p => p.id), [3]);
-            assert.equal((await post('restore_last_delete', { entity_type: 'photo_comparison', entity_id: ids.c2 })).status, 422, 'pas deux fois');
+            const again = await post('restore_last_delete', { entity_type: 'photo_comparison', entity_id: ids.c2 }); // un deuxième « ↶ Annuler » : « déjà remis », sans doublon
+            assert.equal(again.status, 200); assert.equal(again.body.result?.already, true, 'pas deux fois');
+            assert.equal((await get('photo_comparisons')).items.length, 2, 'aucun doublon');
         });
 
         let pw = null; try { pw = require('playwright'); } catch (_) { try { pw = require('/opt/node22/lib/node_modules/playwright'); } catch (_) { pw = null; } }

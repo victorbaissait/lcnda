@@ -1213,7 +1213,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-alphabets.js?v=3" defer></script>
 <script src="assets/js/heritage-calendar-more.js?v=5" defer></script>
 <script src="assets/js/heritage-links.js?v=21" defer></script>
-<script src="assets/js/heritage-more.js?v=272" defer></script>
+<script src="assets/js/heritage-more.js?v=273" defer></script>
 <script src="assets/js/heritage-controle.js?v=5" defer></script>
 <script src="assets/js/heritage-records.js?v=12" defer></script>
 <script src="assets/js/heritage-research.js?v=38" defer></script>
