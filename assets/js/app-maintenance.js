@@ -8,13 +8,13 @@
     const MG_KEY = 'genealogie-maintenance-groups';
     const MG_DEFAULT = [['g_look', '🎨', 'Apparence et affichage', ['design', 'design_sheets', 'design_maps', 'viewer_prefs', 'raccourcis', 'accessibilite']], ['g_tools', '🛠️', 'Outils', ['montage_prefs', 'board_prefs', 'pet_prefs', 'atelier', 'htr']],
         ['g_build', '🧱', 'Construire (éditeurs)', ['block_editor', 'widget_editor', 'stats_editor', 'tabs_editor', 'my_lists']], ['g_quality', '🧹', 'Qualité des données', ['controle', 'duplicates', 'harmonize', 'controle_seuils', 'bulk', 'branches']],
-        ['g_data', '📦', 'Données : import, export, sauvegarde', ['export', 'import', 'fusion', 'cousin_vault', 'scan_inbox', 'sync', 'safety', 'entretien', 'changes', 'meteo']], ['g_ref', '📚', 'Référentiels', ['labels', 'event_types', 'calendar_measures', 'help']], ['g_help', '❓', 'Aide', ['faq', 'infos']]];
+        ['g_data', '📦', 'Données : import, export, sauvegarde', ['export', 'import', 'fusion', 'cousin_vault', 'scan_inbox', 'sync', 'safety', 'entretien', 'changes', 'meteo']], ['g_ref', '📚', 'Référentiels', ['labels', 'event_types', 'calendar_measures', 'help']], ['g_help', '❓', 'Aide', ['faq', 'infos', 'mises_a_jour']]];
     /* même rangement que Listes (app-sidegroups.js) : en groupes ou en une seule liste, chaque façon garde ses réglages */
     /* « Chercher un réglage… » trouve aussi une page par ce qu'elle contient (préférences, types de recherche, fonds de carte…) */
     const MAINT_KEYWORDS = {design: 'préférences réglages boutons en haut à droite barre du haut calculette mode consultation nouvelle fenêtre écran en deux mes généalogies types de recherche type de recherche ordre du menu onglets ordre des listes couleurs des badges messages après une action police couleur principale réglages enregistrés',
         design_maps: 'préférences fonds de carte fonds de cartes ordre des fonds boutons plan des adresses village carte par défaut ordre des cartes',
         design_board: 'préférences widgets bibliothèque', design_sheets: 'préférences blocs de la fiche en-tête boutons profils style des fiches traits coins arrondis ombres designs au choix', raccourcis: 'touches clavier préférences',
-        diagram_kinds: 'diagrammes graphiques types', accessibilite: 'préférences mode simple contraste animations mouvement mouvements', board_prefs: 'réglages des tableaux formes pointes couleurs', pet_prefs: 'réglages des animaux espèces formulaire', meteo: 'météo temps pluie température neige climat ciel normale stations pack'};
+        diagram_kinds: 'diagrammes graphiques types', accessibilite: 'préférences mode simple contraste animations mouvement mouvements', board_prefs: 'réglages des tableaux formes pointes couleurs', pet_prefs: 'réglages des animaux espèces formulaire', meteo: 'météo temps pluie température neige climat ciel normale stations pack', mises_a_jour: 'mise à jour version nouvelle version télécharger installer github signaler un problème bug erreur e-mail'};
     const MO_KEY = 'genealogie-maintenance-order', A_ONLY = ['look_theme', 'look_portraits', 'look_msgs', 'look_layouts', 'nav_menus'];
     const mKeys = () => defaultMaintenanceTabs.map(t => t[0]).filter(k => (window.LCNDA_APP.reglagesA?.() ? k !== 'design' : !A_ONLY.includes(k)));
     /* présentation A : « Apparence et affichage » en trois groupes ; l'autre façon garde son propre rangement */
@@ -209,7 +209,7 @@
     }
     function renderSoftwareInfos(token=++state.workspaceToken){
         if(token!==state.workspaceToken||state.module!=='maintenance'||state.maintenanceTab!=='infos')return;
-        $('#workspace').innerHTML=`<section class="page software-info-page"><header class="page-header"><div><span class="eyebrow">INFOS</span><h2>À propos du logiciel</h2><p class="software-credit">Pensé et designé par Victor Baissait. Codé par Codex (ChatGPT) et Claude, sous la supervision de Victor Baissait.</p></div></header>
+        $('#workspace').innerHTML=`<section class="page software-info-page"><header class="page-header"><div><span class="eyebrow">INFOS</span><h2>À propos du logiciel</h2><p class="software-credit">Pensé et designé par Victor Baissait. Codé par Codex (ChatGPT) et Claude, sous la supervision de Victor Baissait.</p></div><div class="page-actions"><button type="button" class="button secondary" data-mj-goto>🔄 Mises à jour</button><button type="button" class="button secondary" data-report-problem>🐞 Signaler un problème</button></div></header>
         <div class="software-info-grid">
             <article class="maintenance-panel"><h3>Objectif</h3><p>Ce logiciel sert à construire une généalogie locale, documentée et exploitable : fiches personnes, événements, médias, sources, notes, enquêtes, battues, cartes et statistiques sont regroupés dans un même outil.</p></article>
             <article class="maintenance-panel"><h3>Fiches personnes</h3><p>Chaque fiche rassemble l’identité, les relations familiales, les événements, les médias, les recensements, les sources, les notes, les signatures, les enquêtes liées et les exports. Les blocs peuvent être réorganisés, masqués et adaptés en largeur.</p></article>
@@ -624,7 +624,43 @@
         $('#safety-compare-database')?.addEventListener('click',async()=>{const target=$('#safety-database-result');target.innerHTML=window.LCNDA_UI.spinner('Comparaison en cours…');try{const comparison=await api('compare_database',{source:$('#safety-database-source').value});await api('save_database_comparison_report',{}, {method:'POST',body:{source_name:comparison.source,summary:comparison.summary}});target.innerHTML=safetyComparisonHtml(comparison);}catch(error){target.innerHTML='';toast(error.message,'error');}});
         $('#safety-gedcom-compare')?.addEventListener('submit',async event=>{event.preventDefault();const form=event.currentTarget,a=form.elements.file_a.files[0],b=form.elements.file_b.files[0],target=$('#safety-gedcom-result');if(!a||!b)return;target.innerHTML=window.LCNDA_UI.spinner('Comparaison en cours…');const fd=new FormData();fd.append('file_a',a);fd.append('file_b',b);fd.append('csrf',state.csrf);try{const response=await fetch('api.php?action=compare_gedcom',{method:'POST',headers:{'X-CSRF-Token':state.csrf},body:fd});const data=await response.json();if(!response.ok||data.error)throw new Error(data.error||'Comparaison impossible');target.innerHTML=safetyComparisonHtml(data);}catch(error){target.innerHTML='';toast(error.message,'error');}});
     }
+    /** ⤒ Importer un arbre (K13) : 1. déposer · 2. « Voilà ce qui va entrer » (import_preview : nombres, logiciel d'origine, mises en garde ;
+     *  le fichier est gardé côté serveur) · 3. import_pending → message H7 avec « ↶ Annuler » (import_undo). Aussi : LCNDA_APP.importTree(files). */
+    function openTreeImport(files){
+        const UI=window.LCNDA_UI;if(!UI?.openImportDialog)return;
+        const n=(v,a,b)=>plural(Number(v)||0,a,b);
+        return UI.openImportDialog({title:'Importer un arbre',accept:'.ged,.gedcom,.gramps,.gpkg,.zip,.gdz,.heredis,.mftpkg,.rmtree,.rmgc,.ftm',what:'GEDCOM, Gramps, GedZip, Hérédis, MacFamilyTree, RootsMagic',noun:'personne',feminine:true,files,
+            intro:'GEDCOM (aussi d’Ancestry, MyHeritage, Geneanet, FamilySearch), Gramps (.gramps ou paquet .gpkg), GedZip, Hérédis, MacFamilyTree, RootsMagic (.rmtree, lu directement). Family Tree Maker et Généatique : leur export GEDCOM.',
+            analyze:async fs=>{
+                const d=await importUpload('import_preview',fs[0]);
+                const bits=[d.persons!=null?`<b>${escapeHtml(n(d.persons,'personne'))}</b>`:'',d.families?escapeHtml(n(d.families,'famille')):'',d.events?escapeHtml(n(d.events,'événement')):'',d.places?escapeHtml(n(d.places,'lieu','lieux')):'',d.sources?escapeHtml(n(d.sources,'source')):'',d.notes?escapeHtml(n(d.notes,'note')):'',d.media_local?escapeHtml(n(d.media_local,'média')):'',d.media_remote?escapeHtml(n(d.media_remote,'lien vers un média en ligne','liens vers des médias en ligne')):'',d.tags?escapeHtml(n(d.tags,'étiquette')):'',d.witnesses?escapeHtml(n(d.witnesses,'témoin, parrain ou marraine','témoins, parrains ou marraines')):''].filter(Boolean);
+                const from=d.producer_label?` — fichier venu de <b>${escapeHtml(d.producer_label)}</b>`:'';
+                const unknown=d.persons==null;
+                return {count:Number(d.persons)||0,allowEmpty:unknown,data:d,noun:'personne',feminine:true,
+                    summaryHtml:unknown?`le fichier <b>${escapeHtml(d.producer_label||d.format||'')}</b>${from?'':''} (le nombre de fiches se voit à la fin de l’import)`:`${bits.join(', ')}${from}`,
+                    notices:(d.notices||[]).map(x=>({kind:x.kind==='warn'?'warn':'info',text:x.text})),
+                    goLabel:unknown?'⤒ Importer':undefined};
+            },
+            run:async an=>{
+                const res=await api('import_pending',{},{method:'POST',body:{token:an.data.token}});
+                const st=res.stats||{};window.LCNDA_APP.clearLineageCache?.();await reloadBootstrap();
+                const warns=[...(Number(st.loops_skipped)?[`${n(st.loops_skipped,'lien familial impossible ignoré','liens familiaux impossibles ignorés')}`]:[]),...(Number(st.media_missing)?[`${n(st.media_missing,'média introuvable','médias introuvables')} (la fiche existe, sans le fichier)`]:[]),...(Array.isArray(st.warnings)?st.warnings.slice(0,8).map(String):[])];
+                const box=$('#import-tree-result');
+                if(box)box.innerHTML=`${UI.notice('ok',`Import de « ${an.data.name} » : ${[n(st.persons,'personne'),st.families?n(st.families,'famille'):'',st.events?n(st.events,'événement'):'',st.media?n(st.media,'média'):'',st.media_links?n(st.media_links,'média en ligne gardé comme lien','médias en ligne gardés comme liens'):'',st.witnesses?n(st.witnesses,'témoin relié','témoins reliés'):''].filter(Boolean).join(', ')}.`)}${warns.map(w=>UI.notice('warn',w)).join('')}`;
+                const msg=`${n(st.persons,'personne importée','personnes importées')}${st.producer_label?` (${st.producer_label})`:''}.`;
+                if(!res.undo)return {message:msg};
+                return {message:msg,undo:async()=>{await api('import_undo',{},{method:'POST',body:{token:res.undo}});window.LCNDA_APP.clearLineageCache?.();await reloadBootstrap();if(box)box.innerHTML=UI.notice('info',`Import de « ${an.data.name} » annulé : tout ce qu’il avait ajouté a été retiré.`);}};
+            }});
+    }
+    window.LCNDA_APP=window.LCNDA_APP||{};window.LCNDA_APP.importTree=openTreeImport;
     async function renderImportTools(token=++state.workspaceToken){const [data,dbProfiles]=await Promise.all([api('deed_preview'),api('database_profiles')]);if(token!==state.workspaceToken||state.module!=='maintenance'||state.maintenanceTab!=='import')return;$('#workspace').innerHTML=`<section class="page"><header class="page-header"><div><span class="eyebrow">IMPORT</span><h2>Importer des données</h2><p>Analyse et import depuis GEDCOM, JSON, CSV, SQLite. Chaque format est analysé avant toute modification de la base.</p></div></header>
+
+<section class="maintenance-panel" id="import-tree-panel">
+  <h3 data-help="Le fichier est d’abord lu : tu vois combien de personnes, familles, lieux et sources il va ajouter, et d’où il vient (Gramps, Ancestry, MyHeritage…). Tout est ajouté à côté de ta base ; juste après, « ↶ Annuler » retire tout. Pour l’arbre d’un cousin, « Fusionner un arbre » compare d’abord fiche par fiche." data-help-faq="importer un arbre Gramps">⤒ Importer un arbre</h3>
+  <p>GEDCOM (.ged, aussi ceux d’Ancestry, MyHeritage, Geneanet, FamilySearch), Gramps (.gramps, ou paquet .gpkg avec ses photos), GedZip (.zip), Hérédis, MacFamilyTree. Les photos en ligne d’Ancestry ou de MyHeritage restent des liens : rien n’est téléchargé.</p>
+  <div class="page-actions"><button class="button" type="button" data-import-tree>⤒ Importer un arbre…</button></div>
+  <div id="import-tree-result"></div>
+</section>
 
 <section class="maintenance-panel">
   <h3 data-help="Une « base » est un fichier qui contient toute une généalogie. Tu peux en avoir plusieurs (la tienne, celle d’un ami) et passer de l’une à l’autre ; rien n’est mélangé." data-help-faq="base">Changer de base SQLite</h3>
@@ -685,6 +721,8 @@
 </section>
 
 </section>`;
+
+    $('[data-import-tree]')?.addEventListener('click',()=>openTreeImport());
 
     // ── Vérificateur GEDCOM (serveur) ──
     $('#verify-gedcom-form').addEventListener('submit',async event=>{event.preventDefault();const file=event.currentTarget.elements.file.files[0];if(!file){toast('Sélectionne un fichier GEDCOM.','error');return;}const result=$('#verify-gedcom-result');result.innerHTML=window.LCNDA_UI.spinner('Vérification en cours…');try{const d=await importUpload('verify_gedcom',file);result.innerHTML=renderGedcomVerifyResult(d);}catch(err){result.innerHTML='';toast('Vérification impossible : '+err.message,'error');}});
@@ -822,7 +860,7 @@
         const dictionaryHtml=`<section class="maintenance-panel full-width help-intro"><h3>Dictionnaire personnel</h3><p>Conserve les abréviations, mots locaux, lieux-dits, surnoms et variantes utiles dans tes recherches.</p><form id="personal-dictionary-form" class="form-grid" style="grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem;margin-top:1rem"><input type="hidden" name="id"><label>Terme<input name="term" required placeholder="Ex. Le Grand Chemin"></label><label>Catégorie<select name="category">${Object.entries(categoryLabels).map(([key,label])=>`<option value="${key}">${label}</option>`).join('')}</select></label><label style="grid-column:1/-1">Définition<textarea name="definition" required placeholder="Sens local, source, contexte ou variante relevée..."></textarea></label><div class="page-actions" style="grid-column:1/-1"><button class="button" type="submit">Ajouter au dictionnaire</button><button class="button secondary" type="button" id="personal-dictionary-reset">↺ Remettre comme au départ</button></div></form>${entries.length?`<div class="data-table-wrap" style="margin-top:1rem"><table class="data-table"><thead><tr><th>Terme</th><th>Catégorie</th><th>Définition</th><th></th></tr></thead><tbody>${entries.map(entry=>`<tr><td>${escapeHtml(entry.term)}</td><td>${escapeHtml(categoryLabels[entry.category]||'Autre')}</td><td>${escapeHtml(entry.definition)}</td><td><button class="button small secondary" type="button" data-edit-personal-dictionary="${entry.id}">Modifier</button> <button class="button small danger" type="button" data-delete-personal-dictionary="${entry.id}">Supprimer</button></td></tr>`).join('')}</tbody></table></div>`:emptyState({text: 'Aucune définition personnelle pour l’instant', icon:'📖',action:{label:'＋ Ajouter une définition',attrs:'data-empty-focus="#personal-dictionary-form [name=term]"'}})}</section>`;
         // Deux pages : « FAQ / tuto » (repères et questions fréquentes) et « Glossaire » (vocabulaire, métiers anciens, aides à la lecture, dictionnaire personnel)
         if(state.maintenanceTab==='faq'){
-            $('#workspace').innerHTML=`<section class="page help-page"><header class="page-header"><div><span class="eyebrow">FAQ / TUTO</span><h2>Comment faire ?</h2><p>Repères rapides pour utiliser l’outil, et les questions fréquentes : pose ta question dans la recherche.</p></div><div class="page-actions"><button type="button" class="button secondary" data-help-goto="help">📖 Glossaire</button></div></header>
+            $('#workspace').innerHTML=`<section class="page help-page"><header class="page-header"><div><span class="eyebrow">FAQ / TUTO</span><h2>Comment faire ?</h2><p>Repères rapides pour utiliser l’outil, et les questions fréquentes : pose ta question dans la recherche.</p></div><div class="page-actions"><button type="button" class="button" data-tour-start>▶ Relancer la visite guidée</button><button type="button" class="button secondary" data-report-problem>🐞 Signaler un problème</button><button type="button" class="button secondary" data-help-goto="help">📖 Glossaire</button></div></header>
             <div class="help-guide-grid">${quickHelp.map(([title,text])=>`<article class="help-guide-card"><h3>${escapeHtml(title)}</h3><p>${escapeHtml(text)}</p></article>`).join('')}</div>
             ${window.LCNDA_EXT?.faqHtml?.()||''}</section>`;
             $('[data-help-goto]')?.addEventListener('click',()=>{state.maintenanceTab='help';renderSidebar();renderHelpGlossary();});

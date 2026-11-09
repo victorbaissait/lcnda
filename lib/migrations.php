@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 70;
+const SCHEMA_VERSION = 71;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -91,6 +91,7 @@ function migration_steps(): array
         68 => 'schema_v68',
         69 => 'schema_v69',
         70 => 'schema_v70',
+        71 => 'schema_v71',
     ];
 }
 
@@ -2378,5 +2379,39 @@ function schema_v70(PDO $pdo): void
     foreach (['text_document_versions', 'website_versions'] as $t) {
         if (!$pdo->query("SELECT 1 FROM sqlite_master WHERE type='table' AND name='$t'")->fetchColumn()) { continue; }
         if (!$pdo->query("SELECT 1 FROM pragma_table_info('$t') WHERE name='auto'")->fetchColumn()) { $pdo->exec("ALTER TABLE $t ADD COLUMN auto INTEGER NOT NULL DEFAULT 0"); }
+    }
+}
+
+/** 71 : index pour les très grosses bases (100 000 personnes, tests/test-grosse-base.js) : sources citées, notes et médias
+ *  d'une fiche, variantes de nom, journal… Sans eux, chaque fiche relisait toute la table (le tableau de bord ne finissait pas). */
+function schema_v71(PDO $pdo): void
+{
+    $want = [
+        'idx_source_links_entity' => ['source_links', 'entity_type, entity_id'],
+        'idx_source_links_source' => ['source_links', 'source_record_id'],
+        'idx_notes_entity' => ['notes', 'entity_type, entity_id'],
+        'idx_media_links_media' => ['media_links', 'media_id'],
+        'idx_name_variants_person' => ['name_variants', 'person_id'],
+        'idx_change_log_entity' => ['change_log', 'entity_type, entity_id'],
+        'idx_census_members_census' => ['census_members', 'census_id'],
+        'idx_investigation_items_inv' => ['investigation_items', 'investigation_id'],
+        'idx_investigation_persons_person' => ['investigation_persons', 'person_id'],
+        'idx_media_tags_media' => ['media_tags', 'media_id'],
+        'idx_media_tags_person' => ['media_tags', 'person_id'],
+        'idx_cited_names_person' => ['cited_names', 'person_id'],
+        'idx_cited_names_event' => ['cited_names', 'event_id'],
+        'idx_living_contacts_person' => ['living_contacts', 'person_id'],
+        // « dernières fiches modifiées sans source… » (tableau de bord) : lues dans l'ordre, on s'arrête aux 80 premières
+        'idx_persons_updated' => ['persons', 'updated_at'],
+        'idx_events_updated' => ['events', 'COALESCE(updated_at,created_at)'],
+        // Listes › Événements : rangés par année (sans année à la fin) — la première page sans trier 300 000 lignes
+        'idx_events_list_order' => ['events', 'COALESCE(year,9999), sort_date, id'],
+    ];
+    foreach ($want as $name => [$table, $cols]) {
+        if (!$pdo->query("SELECT 1 FROM sqlite_master WHERE type='table' AND name='$table'")->fetchColumn()) { continue; }
+        $have = array_column($pdo->query("PRAGMA table_info('$table')")->fetchAll(PDO::FETCH_ASSOC), 'name');
+        preg_match_all('/[a-z_]+/', str_replace('COALESCE', '', $cols), $m);
+        foreach ($m[0] as $c) { if (!in_array($c, $have, true)) { continue 2; } }
+        $pdo->exec("CREATE INDEX IF NOT EXISTS $name ON $table($cols)");
     }
 }

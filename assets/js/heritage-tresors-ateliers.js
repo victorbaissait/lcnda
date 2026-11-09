@@ -186,9 +186,18 @@
     ext.tresorFace = {lineage};
 
     /* ── 📰 La gazette de l'année ── */
+    // les naissances, décès, mariages et événements rangés par année, une fois par arbre (Listes › Gazettes en demande une par année :
+    // sur 100 000 fiches, relire tout l'arbre pour chaque année prenait plus de 10 s) — même ordre que l'arbre
+    const yearIndex = tr => tr._gzYears || (tr._gzYears = (() => {
+        const ix = {by: new Map(), dy: new Map(), my: new Map(), ev: new Map()}, add = (m, k, v) => { const l = m.get(k); if (l) l.push(v); else m.set(k, [v]); };
+        tr.people.forEach(p => { add(ix.by, p.by, p); add(ix.dy, p.dy, p); });
+        tr.families.forEach(f => add(ix.my, f.my, f)); tr.events.forEach(e => add(ix.ev, e.y, e));
+        return ix;
+    })());
     function gazette(T, tr, Y) {
-        const born = tr.people.filter(p => p.by === Y), dead = tr.people.filter(p => p.dy === Y), wed = tr.families.filter(f => f.my === Y), alive = tr.people.filter(p => p.by && p.by <= Y && (!p.dy || p.dy >= Y) && (p.dy || p.living || Y - p.by < 100));
-        const other = tr.events.filter(e => e.y === Y && e.p && !['BIRT', 'DEAT', 'CHR', 'BAPM'].includes(e.tag)).map(e => ({e, p: tr.byId.get(e.p)})).filter(x => x.p);
+        const ix = yearIndex(tr);
+        const born = [...(ix.by.get(Y) || [])], dead = [...(ix.dy.get(Y) || [])], wed = [...(ix.my.get(Y) || [])], alive = tr.people.filter(p => p.by && p.by <= Y && (!p.dy || p.dy >= Y) && (p.dy || p.living || Y - p.by < 100));
+        const other = (ix.ev.get(Y) || []).filter(e => e.p && !['BIRT', 'DEAT', 'CHR', 'BAPM'].includes(e.tag)).map(e => ({e, p: tr.byId.get(e.p)})).filter(x => x.p);
         const round = alive.filter(p => p.by && (Y - p.by) >= 20 && (Y - p.by) % 10 === 0), gold = tr.families.filter(f => f.my && [25, 50, 60].includes(Y - f.my) && [f.a, f.b].every(x => { const q = tr.byId.get(x); return q && (!q.dy || q.dy >= Y); }));
         const bread = ext.tresorMoney ? 1 / ext.tresorMoney.worth(1, 'livre', Y).bread : null, unit = Y < 1795 ? 'livre' : Y < 1960 ? 'franc' : Y < 2002 ? 'franc' : 'euro';
         const headline = wed[0] ? `${[wed[0].a, wed[0].b].map(x => tr.byId.get(x)?.first).filter(Boolean).join(' et ')} se sont dit oui !` : born[0] ? `Bienvenue à ${born[0].first} !` : dead[0] ? `Adieu à ${T.name(dead[0])}` : other[0] ? `${other[0].p.first} : ${other[0].e.label.toLowerCase()}` : `Une année tranquille`;

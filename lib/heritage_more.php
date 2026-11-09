@@ -21,21 +21,43 @@ declare(strict_types=1);
  */
 const ACT_KINDS = ['BIRT' => 'naissance', 'MARR' => 'mariage', 'DEAT' => 'décès'];
 
-function recent_acts(PDO $pdo): array
+function recent_acts(PDO $pdo, int $onlyEventId = 0, ?array $page = null, ?int &$total = null): array
 {
     $now = (int) date('Y');
+    // un seul acte (la lettre à la mairie) : seulement lui, pas les 100 000 actes d'une très grosse base
+    $one = $onlyEventId > 0 ? ' AND e.id=' . $onlyEventId : '';
     $rows = $pdo->query("SELECT e.id, e.date_text, e.year, e.person_id, e.family_id, t.gedcom_tag, t.label, pl.name AS place, pl.county, pl.country, pl.admin4_code,
             (SELECT count(*) FROM media_links ml WHERE ml.entity_type='event' AND ml.entity_id=e.id) AS media_count,
             (SELECT count(*) FROM source_links sl WHERE sl.entity_type='event' AND sl.entity_id=e.id) AS source_count,
             (SELECT c.id FROM courriers c WHERE c.event_id=e.id ORDER BY c.id DESC LIMIT 1) AS courrier_id,
             (SELECT c.statut FROM courriers c WHERE c.event_id=e.id ORDER BY c.id DESC LIMIT 1) AS courrier_statut
         FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN places pl ON pl.id=e.place_id
-        WHERE t.gedcom_tag IN ('BIRT','MARR','DEAT') AND e.year IS NOT NULL AND e.year > " . ($now - 100) . " AND e.year <= {$now}
+        WHERE t.gedcom_tag IN ('BIRT','MARR','DEAT') AND e.year IS NOT NULL AND e.year > " . ($now - 100) . " AND e.year <= {$now}{$one}
         ORDER BY e.year DESC")->fetchAll();
+    // les couples : lus en une fois (avant : deux requêtes par mariage)
+    $fams = [];
+    $famIds = array_values(array_unique(array_filter(array_map(static fn($r) => (int) $r['family_id'], $rows))));
+    foreach (array_chunk($famIds, 20000) as $chunk) {
+        foreach ($pdo->query('SELECT id, partner1_id, partner2_id FROM families WHERE id IN (' . implode(',', $chunk) . ')') as $f) { $fams[(int) $f['id']] = $f; }
+    }
+    if ($page !== null) { // une page (recent_acts_page) : on filtre et on compte sans lire les fiches, puis seulement celles de la page
+        $exists = array_fill_keys(array_map('intval', $pdo->query('SELECT id FROM persons')->fetchAll(PDO::FETCH_COLUMN)), true);
+        $kept = []; $total = 0;
+        foreach ($rows as $r) {
+            $f = $r['person_id'] ? null : ($fams[(int) $r['family_id']] ?? null);
+            $wid = $r['person_id'] ? [(int) $r['person_id']] : ($f ? [(int) $f['partner1_id'], (int) $f['partner2_id']] : []);
+            if (!array_filter($wid, static fn($id) => isset($exists[$id]))) { continue; }
+            if (!$page['all'] && (((int) $r['media_count'] + (int) $r['source_count']) > 0 || $r['courrier_id'])) { continue; }
+            if ($page['kind'] !== '' && ACT_KINDS[$r['gedcom_tag']] !== $page['kind']) { continue; }
+            $total++;
+            if (count($kept) < $page['limit']) { $kept[] = $r; }
+        }
+        $rows = $kept;
+    }
     $ids = [];
     foreach ($rows as $r) {
         if ($r['person_id']) { $ids[] = (int) $r['person_id']; }
-        if ($r['family_id']) { $f = $pdo->query('SELECT partner1_id, partner2_id FROM families WHERE id=' . (int) $r['family_id'])->fetch(); if ($f) { $ids[] = (int) $f['partner1_id']; $ids[] = (int) $f['partner2_id']; } }
+        if ($r['family_id']) { $f = $fams[(int) $r['family_id']] ?? null; if ($f) { $ids[] = (int) $f['partner1_id']; $ids[] = (int) $f['partner2_id']; } }
     }
     $people = collection_people($pdo, $ids);
     $out = [];
@@ -43,7 +65,7 @@ function recent_acts(PDO $pdo): array
         $tag = $r['gedcom_tag'];
         $who = [];
         if ($r['person_id']) { $who[] = $people[(int) $r['person_id']] ?? null; }
-        else { $f = $pdo->query('SELECT partner1_id, partner2_id FROM families WHERE id=' . (int) $r['family_id'])->fetch(); if ($f) { $who[] = $people[(int) $f['partner1_id']] ?? null; $who[] = $people[(int) $f['partner2_id']] ?? null; } }
+        else { $f = $fams[(int) $r['family_id']] ?? null; if ($f) { $who[] = $people[(int) $f['partner1_id']] ?? null; $who[] = $people[(int) $f['partner2_id']] ?? null; } }
         $who = array_values(array_filter($who));
         if (!$who) { continue; }
         $exact = function_exists('exact_date') ? exact_date((string) $r['date_text']) : null;
@@ -59,11 +81,23 @@ function recent_acts(PDO $pdo): array
     return $out;
 }
 
+/**
+ * GET recent_acts : avec ?limit=N, seulement les N premiers actes à montrer (filtres « all » et « kind » appliqués ici) et leur
+ * nombre — une très grosse base en a 100 000 (plus de 150 Mo envoyés au navigateur avant). Sans limit : tous, comme avant.
+ */
+function recent_acts_page(PDO $pdo, array $q): array
+{
+    if (!isset($q['limit'])) { return ['acts' => recent_acts($pdo)]; }
+    $total = 0;
+    $acts = recent_acts($pdo, 0, ['all' => ($q['all'] ?? '') === '1', 'kind' => (string) ($q['kind'] ?? ''), 'limit' => max(1, min(1000, (int) $q['limit']))], $total);
+    return ['acts' => $acts, 'total' => $total];
+}
+
 /** Lettre de demande prête à envoyer à la mairie (copie intégrale si possible, sinon extrait). */
 function act_request_letter(PDO $pdo, int $eventId, string $requester, string $relation): array
 {
     $act = null;
-    foreach (recent_acts($pdo) as $a) { if ($a['event_id'] === $eventId) { $act = $a; break; } }
+    foreach (recent_acts($pdo, $eventId) as $a) { if ($a['event_id'] === $eventId) { $act = $a; break; } }
     if (!$act) { throw new RuntimeException('Acte introuvable (ou de plus de 100 ans : il est sans doute en ligne aux archives).'); }
     $names = implode(' et ', array_map(static fn($p) => trim(($p['first_name'] ?? '') . ' ' . ($p['last_name'] ?? '')), $act['people']));
     $parents = '';

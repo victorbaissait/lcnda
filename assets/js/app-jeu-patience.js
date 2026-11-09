@@ -1,4 +1,4 @@
-/* LCNDA — 🂠 Patiences (Jeux de la famille, app-jeu-famille.js) : l'écran de jeu des 108 patiences.
+/* LCNDA — 🂠 Patiences (Jeux de la famille, app-jeu-famille.js) : l'écran de jeu des 131 patiences.
  * Les règles sont dans app-jeu-patience-regles.js (LCNDA_PATIENCES, sans écran) ; ici : la table, les cartes, la souris et le clavier.
  * Jouer : glisser une carte (ou une suite) sur une autre pile, ou cliquer la carte puis la pile où la poser ; double-clic : sur une
  * fondation ; clic sur la pioche : piocher. Jeux à paires (Pyramide, Onze, Monte-Carlo…) : cliquer les cartes qui vont ensemble.
@@ -123,7 +123,7 @@
                       <button type="button" class="button small secondary" data-jfp-undo ${hist.length ? '' : 'disabled'} title="Ctrl+Z">↶ Annuler</button>
                       ${S.won ? '' : `<button type="button" class="button small secondary" data-jfp-hint>💡 Un coup possible</button>`}
                       ${!S.won && !multi && !def.mode ? '<button type="button" class="button small secondary" data-jfp-auto>⬆ Tout monter</button>' : ''}
-                      ${!S.won && !pile('stock') && def.mode ? `<button type="button" class="button small" data-jfp-stock>${S.hand ? '🂠 Poser la carte en main' : '🂠 Retourner une carte'}</button>` : ''}
+                      ${!S.won && !pile('stock') && def.mode && !def.nostock ? `<button type="button" class="button small" data-jfp-stock>${S.hand ? '🂠 Poser la carte en main' : esc(def.stockLabel || '🂠 Retourner une carte')}</button>` : ''}
                       <button type="button" class="button small secondary" data-jfp-same title="Les mêmes cartes, depuis le début">⟲ Même donne</button>
                     </div>
                     <details class="jfp-rules"><summary>📖 Les règles de ${esc(def.name)}</summary><p class="jf-small">${esc(def.desc || '')}</p></details>

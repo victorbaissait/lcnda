@@ -1,0 +1,38 @@
+[
+  {
+    "file": "mccatmus-fr-en.mlmodel",
+    "title": "McCATMuS — écritures du XVIᵉ au XXIᵉ siècle",
+    "authors": "T. Clérice, A. Chagué et al. (Inria, École nationale des chartes)",
+    "source": "zenodo",
+    "record": "13788177",
+    "doi": "10.5281/zenodo.13788177",
+    "license": "cc-by-4.0",
+    "languages": "Français surtout, et d’autres langues en écriture latine (anglais, espagnol…)",
+    "period": "XVIᵉ – XXIᵉ siècle",
+    "uses": ["fr-17-19", "moderne"],
+    "best_for": "Registres paroissiaux et d’état civil français (XVIIᵉ – XIXᵉ), lettres, carnets, cartes postales ; marche aussi sur l’écriture d’aujourd’hui et le texte imprimé.",
+    "size_hint_mb": 20,
+    "recommended": true
+  },
+  {
+    "file": "catmus-medieval.mlmodel",
+    "title": "CATMuS Medieval — écritures anciennes",
+    "authors": "T. Clérice et al. (consortium CATMuS)",
+    "source": "zenodo",
+    "record": "12743230",
+    "doi": "10.5281/zenodo.12743230",
+    "license": "cc-by-4.0",
+    "languages": "Latin, ancien et moyen français, espagnol, italien…",
+    "period": "VIIIᵉ – XVIᵉ siècle",
+    "uses": ["latin"],
+    "best_for": "Le latin des registres et des actes anciens, les chartes. Pour un registre en latin du XVIIᵉ ou du XVIIIᵉ, essaie aussi McCATMuS.",
+    "size_hint_mb": 20,
+    "recommended": false
+  },
+  {"file": "rec-bohemica-german-19.mlmodel", "title": "Registres de Bohême (allemand, XIXᵉ)", "source": "manual", "languages": "Allemand, tchèque", "period": "XIXᵉ siècle", "uses": [], "best_for": "Registres germanophones du XIXᵉ siècle.", "license": ""},
+  {"file": "traprinq-portuguese-16-19.mlmodel", "title": "TraPrInq (portugais)", "source": "manual", "languages": "Portugais", "period": "XVIᵉ – XIXᵉ siècle", "uses": [], "best_for": "Manuscrits portugais.", "license": ""},
+  {"file": "old-cyrillic-11-16.mlmodel", "title": "Cyrillique ancien", "source": "manual", "languages": "Russe, serbe, ukrainien anciens", "period": "XIᵉ – XVIᵉ siècle", "uses": [], "best_for": "Écritures cyrilliques anciennes.", "license": ""},
+  {"file": "bifrost-old-norse.mlmodel", "title": "Bifrost (nordique ancien)", "source": "manual", "languages": "Danois, suédois, norvégien anciens", "period": "Moyen Âge", "uses": [], "best_for": "Manuscrits nordiques anciens.", "license": ""},
+  {"file": "greek-historical.mlmodel", "title": "Grec historique", "source": "manual", "languages": "Grec", "period": "—", "uses": [], "best_for": "Manuscrits grecs.", "license": ""},
+  {"file": "yiddish-hebrew.mlmodel", "title": "Yiddish (alphabet hébreu)", "source": "manual", "languages": "Yiddish, hébreu", "period": "—", "uses": [], "best_for": "Écriture hébraïque.", "license": ""}
+]

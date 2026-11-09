@@ -184,7 +184,7 @@
      * Une seule écoute sur #workspace dans les Réglages : après chaque changement fait dans la page (case, menu, curseur, glisser, bouton),
      * on lit les réglages gardés sur cet ordinateur ; s’ils ont changé : « ✓ Enregistré » à droite du titre + « ↶ Annuler » (H7).
      * Une page qui garde un brouillon (Réglages des tableaux, des animaux, Montage…, ADN) donne sa fonction save() avec UI.autoSave. */
-    const VOLATILE = /^(lcnda-listbar:|lcnda-sort:|lcnda-view:)|ui-sections|reglages-ouverts|last-route|-ui-v\d|ui-state|recent|-tab$|-open$|warned|dashboard-recent|-groups$|toolbar-sets/;
+    const VOLATILE = /^(lcnda-listbar:|lcnda-sort:|lcnda-view:|lcnda-journal-erreurs)|ui-sections|reglages-ouverts|last-route|-ui-v\d|ui-state|recent|-tab$|-open$|warned|dashboard-recent|-groups$|toolbar-sets/;
     const snap = () => { const o = {}; try { for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (k && !VOLATILE.test(k)) o[k] = localStorage.getItem(k); } } catch (_) {} return o; };
     const write = v => Object.entries(v).forEach(([k, x]) => { try { if (x == null) localStorage.removeItem(k); else localStorage.setItem(k, x); } catch (_) {} });
     let page = {token: -1, base: null, save: null, redraw: null, label: '', timer: 0};

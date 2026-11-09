@@ -87,7 +87,7 @@ function merge_gedcom_analyse(PDO $main, ?array $file): never
     @set_time_limit(0);
     if (!$file || ($file['error'] ?? 1) !== UPLOAD_ERR_OK) { json_response(['error' => 'Fichier non reçu.'], 422); }
     $ext = strtolower(pathinfo((string) ($file['name'] ?? ''), PATHINFO_EXTENSION));
-    if (!in_array($ext, ['ged', 'gedcom'], true)) { json_response(['error' => 'Choisis un fichier GEDCOM (.ged).'], 422); }
+    if (!in_array($ext, ['ged', 'gedcom', 'gramps', 'gpkg'], true)) { json_response(['error' => 'Choisis un fichier GEDCOM (.ged) ou Gramps (.gramps, .gpkg).'], 422); }
     $token = bin2hex(random_bytes(12));
     $path = merge_dir() . '/' . $token . '.sqlite';
     $tmp = new PDO('sqlite:' . $path, null, null, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]);
@@ -96,8 +96,16 @@ function merge_gedcom_analyse(PDO $main, ?array $file): never
     $tmp->exec(is_file($schemaPath) ? (string) file_get_contents($schemaPath) : default_schema_sql());
     $tmp->exec('PRAGMA foreign_keys = ON');
     migrate_database($tmp, $path);
-    try { $stats = import_gedcom_into_db($tmp, (string) $file['tmp_name'], null); }
-    catch (Throwable $e) { $tmp = null; @unlink($path); json_response(['error' => 'Fichier GEDCOM illisible : ' . $e->getMessage()], 422); }
+    $gedFile = (string) $file['tmp_name']; $gedTmp = null;
+    try {
+        if ($ext === 'gramps' || $ext === 'gpkg') { // Gramps : traduit en GEDCOM d'abord (lib/imports.php), sans les médias
+            [$gedText] = gramps_file_to_gedcom($gedFile, $ext === 'gpkg');
+            $gedTmp = merge_dir() . '/' . $token . '.ged'; file_put_contents($gedTmp, $gedText); $gedFile = $gedTmp;
+        }
+        $stats = import_gedcom_into_db($tmp, $gedFile, null);
+    }
+    catch (Throwable $e) { $tmp = null; @unlink($path); if ($gedTmp) { @unlink($gedTmp); } json_response(['error' => 'Fichier illisible : ' . $e->getMessage()], 422); }
+    if ($gedTmp) { @unlink($gedTmp); }
     $incoming = merge_person_profiles($tmp);
     $mine = merge_person_profiles($main);
     $byName = [];

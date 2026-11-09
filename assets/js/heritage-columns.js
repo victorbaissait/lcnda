@@ -144,6 +144,7 @@
             {icon: '🧾', label: 'Ouvrir dans le tableur', help: 'mêmes colonnes, mêmes filtres', run: () => ext.openRowsInSheet({name: listName(), rows: rows()})},
             {icon: '🧾', label: 'En CSV (Excel, LibreOffice…)', run: () => { const SH = window.LCNDA_SHEET, m = rows(); if (!SH || m.length < 2) return A().toast('Rien à exporter : la liste est vide.'); const name = (A().safeExportFilename ? A().safeExportFilename(listName(), 'liste') : 'liste') + '.csv';
                 const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([SH.toCSV(m, {sep: ';'})], {type: 'text/csv;charset=utf-8'})); a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 3000); }},
+            ...(ext.listExportExtras?.(S().listType) || []), // Lieux → KML, GeoJSON ; Répertoire des vivants → vCard (heritage-echanges.js)
         ], {title: `${Math.max(0, rows().length - 1)} lignes affichées`});
     }
     ext.listShownRows = shownRows; // pour les essais

@@ -146,7 +146,7 @@
         };
         // Widgets ajoutés par assets/js/heritage.js : chacun charge ses données une fois
         const extDashboard=window.LCNDA_EXT?.dashboard||{};const extData={};
-        await Promise.all([...new Set(settings.widgets.map(widget=>widget.type).filter(type=>extDashboard[type]))].map(async type=>{try{extData[type]=extDashboard[type].load?await extDashboard[type].load():null;}catch(_){extData[type]=null;}}));
+        await Promise.all([...new Set(settings.widgets.map(widget=>widget.type).filter(type=>extDashboard[type]))].map(async type=>{try{extData[type]=extDashboard[type].load?await extDashboard[type].load(settings.widgets.filter(widget=>widget.type===type)):null; /* les widgets de cette sorte (leurs réglages) : « Mon agenda » ne lit que les jours qu'il montre */}catch(_){extData[type]=null;}}));
         if(token!==state.workspaceToken||!isDashModule())return;
         Object.keys(extDashboard).forEach(type=>{blockRenderers[type]=widget=>extDashboard[type].render(String(index++).padStart(2,'0'),widget,span(widget),extData[type]);});
         const dress=(widget,html)=>widget.cwDef&&window.LCNDA_EXT?.dressWidget?window.LCNDA_EXT.dressWidget(customDefs[widget.cwDef],html):html;

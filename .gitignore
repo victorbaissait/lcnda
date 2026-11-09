@@ -117,3 +117,6 @@ Thumbs.db
 
 # Limites officielles espagnoles (CNIG), téléchargées par Victor : source de scripts/build-reference-europe.php
 /lineas_limite/
+
+# 🧪 photos dessinées de la base d’exemple (scripts/exemple-photos.php) : livrées avec l’app
+!assets/exemple/*.jpg

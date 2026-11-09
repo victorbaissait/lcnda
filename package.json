@@ -70,6 +70,7 @@
       "electron/preload.js",
       "electron/desk-widgets.js",
       "electron/browsers.js",
+      "electron/updates.js",
       "electron/loading.html"
     ],
     "extraResources": [

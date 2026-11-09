@@ -343,7 +343,7 @@ function local_import_file(array $payload): array
         } elseif ($ext !== 'mftpkg' || !is_file($real . '/database')) {
             json_response(['error' => 'Ce dossier n’est ni un paquet MacFamilyTree (.mftpkg), ni un fichier Hérédis (.hmw).'], 422);
         }
-    } elseif (!in_array($ext, ['ged', 'gedcom', 'mftpkg', 'zip', 'gdz', 'db', 'sqlite', 'heredis'], true)) {
+    } elseif (!in_array($ext, ['ged', 'gedcom', 'mftpkg', 'zip', 'gdz', 'db', 'sqlite', 'heredis', 'gramps', 'gpkg'], true)) {
         json_response(['error' => "Format non pris en charge : .{$ext}"], 422);
     }
     return ['name' => $name, 'tmp_name' => $real, 'error' => UPLOAD_ERR_OK, 'size' => is_file($real) ? (int) filesize($real) : 0, 'local' => true,

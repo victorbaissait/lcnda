@@ -295,34 +295,115 @@
         ['shared_matches', 'Correspondances en commun', ['shared matches', 'in common with', 'icw', 'matches en commun']], ['surnames', 'Noms de famille', ['ancestral surnames', 'surnames', 'noms', 'noms de famille', 'shared surnames']], ['places', 'Lieux', ['places', 'locations', 'lieux']],
         ['tree_size', 'Taille de l’arbre', ['tree size', 'family tree size', 'people in tree', 'arbre']], ['tree_url', 'Arbre (adresse)', ['tree url', 'tree link', 'linked tree']], ['contact', 'Contact', ['email', 'contact', 'e-mail']], ['x_cm', 'cM sur le X', ['x-match', 'x cm', 'x shared', 'x-dna']], ['country', 'Pays', ['country', 'pays', 'location']], ['notes', 'Notes', ['notes', 'note', 'comments']]];
     const normH = h => String(h || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[_\s]+/g, ' ').trim();
-    const autoMap = (head, fields) => Object.fromEntries(fields.map(([k, , al]) => { const i = head.findIndex(h => al.map(normH).includes(normH(h))); const j = i >= 0 ? i : head.findIndex(h => al.some(a => normH(h).includes(normH(a)) && normH(a).length > 3)); return [k, j]; }));
+    /* colonne de chaque information : le 1er nom connu qui existe gagne (« Match name » avant « Name »), une colonne ne sert qu'une fois */
+    const autoMap = (head, fields) => { const used = new Set(), H = head.map(normH), out = {};
+        fields.forEach(([k, , al]) => { let j = -1; for (const a of al.map(normH)) { j = H.findIndex((h, i) => h === a && !used.has(i)); if (j >= 0) break; }
+            if (j < 0) j = H.findIndex((h, i) => !used.has(i) && al.some(a => normH(a).length > 3 && h.includes(normH(a))));
+            if (j >= 0) used.add(j); out[k] = j; });
+        return out; };
     const sideOf = v => { const t = normH(v); return /mat|mere|mother/.test(t) && /pat|pere|father/.test(t) ? 'both' : /mat|mere|mother/.test(t) ? 'maternal' : /pat|pere|father/.test(t) ? 'paternal' : /both|deux/.test(t) ? 'both' : ''; };
     const parseCsv = t => ext.diagramsInternals?.parseTable ? ext.diagramsInternals.parseTable(t) : String(t).split(/\r?\n/).map(l => l.split(/[;,\t]/));
-    function mapDialog({title, fields, head, rows, intro, extra = '', onGo}) {
-        const map = autoMap(head, fields);
-        ext.openDialog({eyebrow: 'ADN · IMPORT', title, wide: true, submitLabel: `Importer ${plural(rows.length, 'ligne', 'lignes')}`,
-            body: `<p class="muted">${intro}</p>${extra}<div class="h-dna-map">${fields.map(([k, l]) => `<label>${esc(l)}<select name="m_${k}"><option value="-1">— ne pas prendre —</option>${head.map((h, i) => `<option value="${i}" ${map[k] === i ? 'selected' : ''}>${esc(h)}</option>`).join('')}</select></label>`).join('')}</div>
-                <p class="muted">Aperçu : ${esc(rows.slice(0, 3).map(r => r.slice(0, 6).join(' | ')).join(' ⏎ '))}</p>`,
-            onSubmit: async f => { const m = Object.fromEntries(fields.map(([k]) => [k, Number(f.querySelector(`[name=m_${k}]`).value)])); return onGo(m, f); }});
-    }
-    async function importDialog() {
+    /* ⤒ Import d'un export d'une société (K13) : correspondances et/ou segments, colonnes reconnues d'après les en-têtes
+     * (Ancestry via DNAGedcom, MyHeritage, 23andMe, FamilyTreeDNA, GEDmatch), modifiables ; « ↶ Annuler » après.
+     * Un fichier brut de SNP (génotypes) n'est jamais lu plus loin : refusé (vie privée, loi française). */
+    const RAW_MSG = 'C’est un fichier ADN brut (tes SNP, c’est-à-dire ton génome lettre par lettre) : il n’est jamais importé. Par prudence pour ta vie privée et celle de ta famille, et parce qu’en France un test génétique hors cadre médical ou de recherche est interdit, l’app ne garde que les listes de correspondances et de segments. Exporte plutôt depuis la société la liste des correspondances (matches) ou le navigateur de chromosomes.';
+    const isRawDna = text => { const h = String(text).slice(0, 20000).toLowerCase();
+        if (/^#.*(23andme|ancestrydna|myheritage dna raw|living ?dna|ftdna|family tree dna).*(raw|genotype|data)/m.test(h)) return true;
+        if (/^"?rsid"?\s*[\t,;]\s*"?chromosome"?\s*[\t,;]\s*"?position"?/m.test(h) || /^#\s*rsid\s+chromosome\s+position/m.test(h)) return true;
+        const lines = h.split(/\r?\n/).filter(l => l && l[0] !== '#').slice(0, 400); const snp = lines.filter(l => /^"?(rs|i|vg)\d+"?\s*[\t,;]\s*"?(\d{1,2}|x|y|xy|mt)"?\s*[\t,;]\s*"?\d+"?\s*[\t,;]\s*"?[acgtid\-0]{1,2}"?/.test(l)).length;
+        return lines.length >= 5 && snp >= Math.max(5, lines.length * 0.6); };
+    const FIELDS_PLUS = [['mrca', 'Ancêtre commun', ['common ancestors', 'commonancestors', 'common ancestor', 'mrca', 'shared ancestors', 'ancetre commun', 'ancetres communs', 'theory of family relativity']],
+        ['profile_url', 'Fiche sur le site (adresse)', ['link to profile page', 'profile url', 'match url', 'profile link', 'url']], ['company_id', 'Identifiant chez la société', ['dna match id', 'matchguid', 'match guid', 'kit', 'matchedkit', 'kit number', 'match kit']],
+        ['birth_year', 'Année de naissance', ['birth year', 'year of birth']], ['age_range', 'Âge', ['age range', 'age']], ['haplo_y', 'Haplogroupe Y', ['paternal haplogroup', 'y-dna haplogroup', 'y haplo', 'y haplogroup']],
+        ['haplo_mt', 'Haplogroupe mt', ['maternal haplogroup', 'mtdna haplogroup', 'mt haplo', 'mt haplogroup']], ['sex', 'Sexe', ['sex', 'gender', 'sexe']], ['percent', '% d’ADN partagé', ['percent dna shared', 'relative similarity', 'shared dna percentage', '% shared', 'percentage']]];
+    const MATCH_ALIASES = {name: ['full name', 'display name', 'match name', 'matchname', 'matchedname', 'name'], shared_cm: ['total cm shared', 'total cm', 'shared dna', 'shared cm', 'sharedcentimorgans', 'shared centimorgans'],
+        segments: ['number of shared segments', 'shared segments', 'sharedsegment', 'number of segments', '# segments'], longest_cm: ['largest segment (cm)', 'largest segment', 'longest block', 'longest segment', 'largest seg', 'longestsegment'],
+        relationship: ['estimated relationship', 'predicted relationship', 'predictedrelationship', 'relationship range', 'suggested relationship', 'relationship'], side: ['maternal / paternal', 'matching bucket', 'side', 'paternal/maternal'],
+        surnames: ['shared ancestral surnames', 'ancestral surnames', 'family surnames', 'shared surnames', 'surnames'], places: ['family locations', 'locations', 'places'], tree_size: ['tree size', 'treenodecount', 'family tree size', 'people in tree'],
+        tree_url: ['tree url', 'treeurl', 'tree link', 'linked tree'], contact: ['email', 'tree managed by', 'contact', 'e-mail'], x_cm: ['x-match', 'x match', 'x cm', 'x-dna']};
+    const MF = [...FIELDS.map(([k, l, al]) => [k, l, [...(MATCH_ALIASES[k] || []), ...al]]), ...FIELDS_PLUS];
+    const SEG_FIELDS = [['label', 'Nom de la correspondance', ['match name', 'matchname', 'matchedname', 'display name', 'name', 'nom']], ['chromosome', 'Chromosome', ['chromosome number', 'chromosome', 'chr', 'chrom']],
+        ['start', 'Début', ['chromosome start point', 'start location', 'start position', 'b37start', 'b37 start', 'start point', 'start', 'debut']], ['end', 'Fin', ['chromosome end point', 'end location', 'end position', 'b37end', 'b37 end', 'end point', 'end', 'fin']],
+        ['cm', 'cM', ['genetic distance', 'centimorgans', 'segment cm', 'length cm', 'cm']], ['snps', 'SNP', ['matching snps', '# snps', 'snps', 'snp']]];
+    const has = (head, ...names) => names.every(nm => head.some(h => normH(h) === normH(nm)));
+    /** la société et la sorte de fichier, d'après les en-têtes */
+    const DNA_FORMATS = [
+        {company: '23andMe', kind: 'both', test: h => has(h, 'chromosome start point') || (has(h, 'display name') && has(h, 'genetic distance'))},
+        {company: 'MyHeritage', kind: 'segments', test: h => has(h, 'start rsid') || (has(h, 'match name') && has(h, 'start location') && has(h, 'centimorgans') && !has(h, 'matching snps'))},
+        {company: 'MyHeritage', kind: 'matches', test: h => has(h, 'dna match id') || (has(h, 'shared dna') && has(h, 'shared segments') && has(h, 'largest segment'))},
+        {company: 'FamilyTreeDNA', kind: 'segments', test: h => has(h, 'matchname', 'matching snps') || has(h, 'match name', 'matching snps')},
+        {company: 'FamilyTreeDNA', kind: 'matches', test: h => has(h, 'longest block') || has(h, 'matching bucket') || (has(h, 'relationship range') && has(h, 'shared dna'))},
+        {company: 'GEDmatch', kind: 'segments', test: h => has(h, 'b37start') || has(h, 'b37 start') || has(h, 'matchedkit', 'chr')},
+        {company: 'GEDmatch', kind: 'matches', test: h => has(h, 'kit') && (has(h, 'largest seg') || has(h, 'total cm')) && (has(h, 'gen') || has(h, 'overlap'))},
+        {company: 'Ancestry', kind: 'matches', test: h => has(h, 'matchguid') || has(h, 'testguid') || has(h, 'sharedcentimorgans') || (has(h, 'shared centimorgans') && has(h, 'tree url'))}];
+    const sniffDna = head => { const f = DNA_FORMATS.find(x => x.test(head)); if (f) return f;
+        const seg = autoMap(head, SEG_FIELDS); if (seg.chromosome >= 0 && seg.start >= 0 && seg.end >= 0) return {company: '', kind: 'segments'};
+        const mm = autoMap(head, MF); if (mm.name >= 0 && mm.shared_cm >= 0) return {company: '', kind: 'matches'}; return null; };
+    /** nombre d'un fichier anglais (« 1,234.5 ») ou français (« 45,2 ») : la virgule des milliers est reconnue quand le fichier a des points décimaux */
+    const numClean = v => String(v ?? '').replace(/[\s  ]/g, '').replace(/cM.*$/i, '');
+    const numIn = (v, thousandsComma) => { let t = numClean(v); if (thousandsComma || /^\d{1,3}(,\d{3})+\.\d+$/.test(t)) t = t.replace(/,/g, ''); else t = t.replace(',', '.'); const n = parseFloat(t); return Number.isFinite(n) ? n : 0; };
+    const mapSelects = (fields, head, map, pre) => `<div class="h-dna-map">${fields.map(([k, l]) => `<label>${esc(l)}<select name="${pre}${k}"><option value="-1">— ne pas prendre —</option>${head.map((h, i) => `<option value="${i}" ${map[k] === i ? 'selected' : ''}>${esc(h)}</option>`).join('')}</select></label>`).join('')}</div>`;
+    function importDialog(files, hint = '') {
         if (!data.kits.length) { toast('Ajoute d’abord un test (« 🧬 Mes tests »).', 'error'); return go('kits'); }
-        const input = document.createElement('input'); input.type = 'file'; input.accept = '.csv,.tsv,.txt,text/csv';
-        input.onchange = async () => { const file = input.files?.[0]; if (!file) return; if (file.size > 40e6) return toast('Fichier trop gros (40 Mo au plus).', 'error');
-            const all = parseCsv(await file.text()).filter(r => r.some(c => String(c).trim())); if (all.length < 2) return toast('Fichier vide ou illisible.', 'error');
-            const head = all[0], rows = all.slice(1);
-            mapDialog({title: `Importer « ${file.name} »`, fields: FIELDS, head, rows, intro: 'Choisis le test, puis vérifie à quelle colonne correspond chaque information (elles sont devinées pour Ancestry, 23andMe, MyHeritage, FamilyTreeDNA, GEDmatch). Une correspondance déjà présente (même nom, même test) est mise à jour : tes notes, groupes, suivi et fiche liée sont gardés.',
-                extra: `<label>Test<select name="kit">${data.kits.map(k => `<option value="${k.id}" ${filt().kit === k.id ? 'selected' : ''}>${esc(kitName(k))}</option>`).join('')}</select></label>`,
-                onGo: async (m, f) => {
+        const UI = window.LCNDA_UI, SH = window.LCNDA_SHEET;
+        let undos = [];
+        return UI.openImportDialog({title: hint === 'segments' ? 'Importer des segments ADN' : 'Importer des correspondances ADN', accept: '.csv,.tsv,.txt,text/csv', what: 'CSV de la société', files,
+            intro: 'Le fichier CSV exporté par la société (Ancestry, MyHeritage, 23andMe, FamilyTreeDNA, GEDmatch) : la liste des correspondances ou les segments. Les colonnes sont reconnues toutes seules. Un fichier ADN brut (tes SNP) n’est jamais importé.',
+            analyze: async fs => {
+                const f = fs[0]; if (/\.(zip|gz|7z|rar)$/i.test(f.name)) throw new Error('Fichier compressé : ouvre-le d’abord sur l’ordinateur et choisis le fichier .csv qu’il contient. (Un fichier ADN brut, lui, ne s’importe jamais.)');
+                if (f.size > 40e6) throw new Error('Fichier trop gros (40 Mo au plus).');
+                const bytes = new Uint8Array(await f.arrayBuffer()); if (bytes[0] === 0x50 && bytes[1] === 0x4b) throw new Error('C’est un fichier compressé (.zip) : ouvre-le d’abord et choisis le .csv qu’il contient.');
+                const text = SH?.decodeBytes ? SH.decodeBytes(bytes).text : new TextDecoder().decode(bytes);
+                if (isRawDna(text)) throw new Error(RAW_MSG);
+                const all = (SH?.parseCSV ? SH.parseCSV(text.replace(/^(#[^\n]*\n)+/, '')) : parseCsv(text)).filter(r => r.some(c => String(c).trim()));
+                if (all.length < 2) throw new Error('Fichier vide ou illisible.');
+                const head = all[0].map(h => String(h).trim()), rows = all.slice(1);
+                const fmtd = sniffDna(head); if (!fmtd) throw new Error('Colonnes non reconnues : il faut au moins le nom et les cM (correspondances), ou le chromosome, le début et la fin (segments).');
+                const kind = fmtd.kind, mMap = autoMap(head, MF), sMap = autoMap(head, SEG_FIELDS);
+                const thousands = rows.slice(0, 200).some(r => r.some(c => /^\d{1,3}(,\d{3})+(\.\d+)?$|^\d+\.\d+$/.test(numClean(c))));
+                const names = new Set(); if (kind !== 'segments') rows.forEach(r => { const nm = mMap.name >= 0 ? String(r[mMap.name] || '').trim() : ''; if (nm) names.add(nm); });
+                const nMatch = kind === 'segments' ? 0 : names.size, nSeg = kind === 'matches' ? 0 : rows.length;
+                const what = [nMatch ? `<b>${esc(plural(nMatch, 'correspondance', 'correspondances'))}</b>` : '', nSeg ? `<b>${esc(plural(nSeg, 'segment', 'segments'))}</b>` : ''].filter(Boolean).join(' et ');
+                const prev = `<table><thead><tr>${head.slice(0, 7).map(h => `<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>${rows.slice(0, 3).map(r => `<tr>${r.slice(0, 7).map(c => `<td>${esc(c)}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+                return {count: nMatch + nSeg, noun: nMatch ? 'correspondance' : 'segment', feminine: !!nMatch, data: {head, rows, kind, thousands, company: fmtd.company},
+                    summaryHtml: `${what}${fmtd.company ? ` — fichier de <b>${esc(fmtd.company)}</b>` : ''}`, preview: prev,
+                    notices: [{kind: 'info', text: 'Une correspondance déjà présente (même nom, même test) est mise à jour : tes notes, groupes, suivi et fiche liée sont gardés.'}],
+                    goLabel: `⤒ Importer ${[nMatch ? plural(nMatch, 'correspondance', 'correspondances') : '', nSeg ? plural(nSeg, 'segment', 'segments') : ''].filter(Boolean).join(' et ')}`,
+                    extra: `<label class="h-dna-kitpick">Test<select name="kit">${data.kits.map(k => `<option value="${k.id}" ${filt().kit === k.id ? 'selected' : ''}>${esc(kitName(k))}</option>`).join('')}</select></label>
+                        ${kind !== 'matches' ? '<label class="checkbox-line"><input type="checkbox" name="replace"> Remplacer tous les segments de ce test</label>' : ''}
+                        <details class="h-dna-cols"><summary>Colonnes reconnues (à vérifier)</summary>${kind !== 'segments' ? mapSelects(MF, head, mMap, 'm_') : ''}${kind !== 'matches' ? `<h4>Segments</h4>${mapSelects(SEG_FIELDS, head, sMap, 's_')}` : ''}</details>`};
+            },
+            run: async (an, fs, body) => {
+                const {head, rows, kind, thousands, company} = an.data, kitId = Number(body.querySelector('[name=kit]').value);
+                const pick = (pre, fields) => Object.fromEntries(fields.map(([k]) => [k, Number(body.querySelector(`[name=${pre}${k}]`)?.value ?? -1)]));
+                const N = v => numIn(v, thousands);
+                let added = 0, updated = 0, segs = 0; undos = [];
+                if (kind !== 'segments') {
+                    const m = pick('m_', MF); if (m.name < 0) throw new Error('Choisis au moins la colonne du nom (« Colonnes reconnues »).');
                     const get = (r, k) => m[k] >= 0 ? String(r[m[k]] ?? '').trim() : '';
-                    if (m.name < 0) return window.LCNDA_UI.fail('[name=m_name]', 'Choisis au moins la colonne du nom.');
-                    const out = rows.map(r => ({name: get(r, 'name'), shared_cm: num(get(r, 'shared_cm')), segments: Math.round(num(get(r, 'segments'))), longest_cm: num(get(r, 'longest_cm')), relationship: get(r, 'relationship'), side: sideOf(get(r, 'side')),
-                        data: Object.fromEntries(['shared_matches', 'surnames', 'places', 'tree_size', 'tree_url', 'contact', 'x_cm', 'country', 'notes'].map(k => [k, get(r, k)]).filter(([, v]) => v !== ''))})).filter(r => r.name);
-                    try { let added = 0, updated = 0; for (let i = 0; i < out.length; i += 3000) { const res = await post('import_dna_matches', {kit_id: Number(f.querySelector('[name=kit]').value), rows: out.slice(i, i + 3000)}); added += res.result?.added || 0; updated += res.result?.updated || 0; }
-                        toast(`${plural(added, 'ajoutée', 'ajoutées')}, ${plural(updated, 'mise', 'mises')} à jour.`); await refresh(); } catch (e) { toast(e.message, 'error'); return false; }
-                }});
-        };
-        input.click();
+                    const by = new Map(), cmCol = autoMap(head, SEG_FIELDS).cm;
+                    rows.forEach(r => { let name = get(r, 'name'); const sur = head.findIndex(h => normH(h) === 'surname'); if (sur >= 0 && r[sur] && !name.includes(String(r[sur]).trim())) name = `${name} ${String(r[sur]).trim()}`.trim(); if (!name) return;
+                        const cur = by.get(name); const sm = kind === 'both' && cmCol >= 0 ? N(r[cmCol]) : 0;
+                        if (cur) { if (kind === 'both') { cur.shared_cm += sm; cur.segments++; cur.longest_cm = Math.max(cur.longest_cm, sm); } return; }
+                        let rel = get(r, 'relationship'); if (company === 'GEDmatch' && /^\d+(\.\d+)?$/.test(rel)) rel = `≈ ${rel} générations`;
+                        by.set(name, {name, shared_cm: kind === 'both' ? sm : N(get(r, 'shared_cm')), segments: kind === 'both' ? 1 : Math.round(N(get(r, 'segments'))), longest_cm: kind === 'both' ? sm : N(get(r, 'longest_cm')), relationship: rel, side: sideOf(get(r, 'side')),
+                            data: Object.fromEntries([['company', company], ...['shared_matches', 'surnames', 'places', 'tree_size', 'tree_url', 'contact', 'x_cm', 'country', 'notes', 'mrca', 'profile_url', 'company_id', 'birth_year', 'age_range', 'haplo_y', 'haplo_mt', 'sex', 'percent'].map(k => [k, get(r, k)])].filter(([k, v]) => v !== '' && (!/url$/.test(k) || /^https?:\/\//i.test(v))))}); });
+                    const out = [...by.values()];
+                    for (let i = 0; i < out.length; i += 3000) { const res = await post('import_dna_matches', {kit_id: kitId, rows: out.slice(i, i + 3000)}); added += res.result?.added || 0; updated += res.result?.updated || 0; if (res.result?.undo) undos.push(res.result.undo); }
+                }
+                if (kind !== 'matches') {
+                    const m = pick('s_', SEG_FIELDS); if (m.chromosome < 0 || m.start < 0 || m.end < 0) throw new Error('Choisis les colonnes du chromosome, du début et de la fin (« Colonnes reconnues »).');
+                    const get = (r, k) => m[k] >= 0 ? String(r[m[k]] ?? '').trim() : '';
+                    const sur = head.findIndex(h => normH(h) === 'surname');
+                    const segRows = rows.map(r => ({label: `${get(r, 'label')}${sur >= 0 && r[sur] && !get(r, 'label').includes(String(r[sur]).trim()) ? ' ' + String(r[sur]).trim() : ''}`.trim(), chromosome: get(r, 'chromosome'), start: N(get(r, 'start')), end: N(get(r, 'end')), cm: N(get(r, 'cm')), snps: Math.round(N(get(r, 'snps')))}));
+                    const replace = !!body.querySelector('[name=replace]')?.checked;
+                    for (let i = 0; i < segRows.length; i += 5000) { const res = await post('save_dna_segments', {kit_id: kitId, receipt: 1, replace: i === 0 && replace ? 1 : 0, rows: segRows.slice(i, i + 5000)}); segs += res.result?.n || 0; if (res.result?.undo) undos.push(res.result.undo); }
+                }
+                await refresh();
+                const msg = [kind !== 'segments' ? `${plural(added, 'correspondance ajoutée', 'correspondances ajoutées')}, ${plural(updated, 'mise à jour', 'mises à jour')}` : '', kind !== 'matches' ? plural(segs, 'segment importé', 'segments importés') : ''].filter(Boolean).join(' ; ') + '.';
+                const tokens = undos.slice();
+                return {message: msg, undo: tokens.length ? async () => { for (const t of tokens.reverse()) await post('undo_dna_import', {token: t}); await refresh(); } : null};
+            }});
     }
     function exportCsv(list) {
         const q = v => { let t = String(v ?? ''); if (/^[=+\-@\t\r]/.test(t)) t = "'" + t; return /[;"\n\r]/.test(t) ? `"${t.replace(/"/g, '""')}"` : t; };
@@ -550,15 +631,7 @@
             ext.openDialog({eyebrow: 'ADN', title: 'Nouveau segment', submitLabel: 'Ajouter', body: `<div class="form-grid"><label>Chromosome<select name="chromosome">${CHR.map(([c]) => `<option>${c}</option>`).join('')}</select></label><label>cM<input name="cm" inputmode="decimal"></label><label>Début (Mb ou paires de bases)<input name="start" inputmode="decimal" required></label><label>Fin<input name="end" inputmode="decimal" required></label>
                 <label>Correspondance<select name="match_id"><option value="0">—</option>${data.matches.filter(m => m.kit_id === kit()).slice(0, 3000).map(m => `<option value="${m.id}">${esc(m.name)}</option>`).join('')}</select></label><label>Ancêtre supposé<input name="ancestor"></label><label>Côté<select name="side">${SIDES.map(([v, l]) => `<option value="${v}">${esc(l)}</option>`).join('')}</select></label><label>Couleur<input type="color" name="color" value="#4e79a7"></label></div>`,
                 onSubmit: async fm => { const v = Object.fromEntries(new FormData(fm)); try { const r = await post('save_dna_segments', {kit_id: kit(), rows: [{...v, match_id: Number(v.match_id), start: num(v.start), end: num(v.end), cm: num(v.cm)}]}); if (!r.result?.n) { toast('Segment refusé : vérifie le chromosome, et que la fin est après le début.', 'error'); return false; } await refresh(); } catch (e) { toast(e.message, 'error'); return false; } }}); });
-        root.querySelector('[data-dna-segimport]').addEventListener('click', () => { if (!kit()) return toast('Ajoute d’abord un test.', 'error');
-            const input = document.createElement('input'); input.type = 'file'; input.accept = '.csv,.tsv,.txt,text/csv';
-            input.onchange = async () => { const file = input.files?.[0]; if (!file) return; if (file.size > 40e6) return toast('Fichier trop gros.', 'error'); const all = parseCsv(await file.text()).filter(r => r.some(c => String(c).trim())); if (all.length < 2) return toast('Fichier vide.', 'error');
-                const SF = [['label', 'Nom de la correspondance', ['match name', 'name', 'nom', 'display name', 'matchname']], ['chromosome', 'Chromosome', ['chromosome', 'chr', 'chrom']], ['start', 'Début', ['start location', 'start position', 'start', 'b37 start', 'debut', 'start point']], ['end', 'Fin', ['end location', 'end position', 'end', 'b37 end', 'fin', 'end point']], ['cm', 'cM', ['centimorgans', 'cm', 'segment cm', 'length cm', 'genetic distance']], ['snps', 'SNP', ['matching snps', 'snps', 'snp']]];
-                mapDialog({title: `Segments de « ${file.name} »`, fields: SF, head: all[0], rows: all.slice(1), intro: 'Les segments sont rattachés aux correspondances du même nom (dans ce test). Positions en paires de bases ou en Mb (GRCh37).', extra: '<label class="checkbox-line"><input type="checkbox" name="replace"> Remplacer tous les segments de ce test</label>',
-                    onGo: async (m, fm) => { const get = (r, k) => m[k] >= 0 ? String(r[m[k]] ?? '').trim() : '';
-                        const rows = all.slice(1).map(r => ({label: get(r, 'label'), chromosome: get(r, 'chromosome'), start: num(get(r, 'start')), end: num(get(r, 'end')), cm: num(get(r, 'cm')), snps: Math.round(num(get(r, 'snps')))}));
-                        try { let n = 0; for (let i = 0; i < rows.length; i += 5000) { const r = await post('save_dna_segments', {kit_id: kit(), replace: i === 0 && fm.querySelector('[name=replace]').checked ? 1 : 0, rows: rows.slice(i, i + 5000)}); n += r.result?.n || 0; } toast(`${plural(n, 'segment importé', 'segments importés')}.`); await refresh(); } catch (e) { toast(e.message, 'error'); return false; } }}); };
-            input.click(); });
+        root.querySelector('[data-dna-segimport]').addEventListener('click', () => { if (!kit()) return toast('Ajoute d’abord un test.', 'error'); importDialog(undefined, 'segments'); });
     }};
 
     /* ═════════ 📐 Calculateur ═════════ */

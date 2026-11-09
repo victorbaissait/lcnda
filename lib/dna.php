@@ -11,7 +11,8 @@ declare(strict_types=1);
 const DNA_TEST_TYPES = ['autosomal', 'y', 'mt', 'x', 'other'];
 const DNA_SIDES = ['', 'paternal', 'maternal', 'both', 'unknown'];
 const DNA_STATUSES = ['', 'todo', 'contacted', 'replied', 'no_reply', 'tree_shared', 'placed', 'ignore'];
-const DNA_MATCH_KEYS = ['shared_matches', 'surnames', 'places', 'contact', 'tree_url', 'tree_size', 'company_relationship', 'mrca', 'notes', 'stars', 'x_cm', 'birth_year', 'age_range', 'country'];
+const DNA_MATCH_KEYS = ['shared_matches', 'surnames', 'places', 'contact', 'tree_url', 'tree_size', 'company_relationship', 'mrca', 'notes', 'stars', 'x_cm', 'birth_year', 'age_range', 'country',
+    'profile_url', 'company', 'company_id', 'haplo_y', 'haplo_mt', 'sex', 'percent'];
 const DNA_KIT_KEYS = ['ethnicity', 'y_str', 'mt_mutations', 'notes', 'raw_file', 'chip', 'consent', 'manager', 'gedmatch', 'raw_date'];
 
 function dna_ensure(PDO $pdo): void
@@ -148,8 +149,11 @@ function import_dna_matches(PDO $pdo, array $d): array
 {
     dna_ensure($pdo);
     $kit = dna_kit_ok($pdo, $d['kit_id'] ?? 0); $rows = array_slice(is_array($d['rows'] ?? null) ? $d['rows'] : [], 0, 30000);
-    $groups = dna_group_ids($pdo); $added = 0; $updated = 0;
-    $find = $pdo->prepare('SELECT id, data_json, side, status, group_ids, person_id FROM dna_matches WHERE kit_id=? AND name=?');
+    // jamais un fichier brut de SNP (« rs12345 », génotypes) : vie privée et loi française
+    $snp = 0; foreach (array_slice($rows, 0, 200) as $r) { if (is_array($r) && preg_match('/^(rs|i)\d{3,}$/i', trim((string) ($r['name'] ?? '')))) { $snp++; } }
+    if ($rows && $snp >= max(3, (int) (min(200, count($rows)) * 0.5))) { throw new LcndaBadInput('Ce fichier ressemble à un fichier ADN brut (des SNP « rs… ») : il n’est jamais importé, par prudence pour la vie privée et la loi française. Importe plutôt la liste des correspondances ou des segments.'); }
+    $groups = dna_group_ids($pdo); $added = 0; $updated = 0; $addedIds = []; $oldRows = [];
+    $find = $pdo->prepare('SELECT * FROM dna_matches WHERE kit_id=? AND name=?');
     $own = !$pdo->inTransaction(); if ($own) { $pdo->beginTransaction(); }
     try {
         foreach ($rows as $r) {
@@ -157,6 +161,7 @@ function import_dna_matches(PDO $pdo, array $d): array
             $name = mb_substr(safe_text($r['name'] ?? ''), 0, 200); if ($name === '') { continue; }
             $find->execute([$kit, $name]); $old = $find->fetch();
             if ($old) {
+                if (!isset($oldRows[(int) $old['id']])) { $oldRows[(int) $old['id']] = $old; }
                 $data = array_merge(json_decode((string) $old['data_json'], true) ?: [], array_filter(is_array($r['data'] ?? null) ? $r['data'] : [], static fn($v) => $v !== '' && $v !== null && $v !== []));
                 $v = dna_match_vals($pdo, ['name' => $name, 'person_id' => $old['person_id'], 'shared_cm' => $r['shared_cm'] ?? 0, 'segments' => $r['segments'] ?? 0, 'longest_cm' => $r['longest_cm'] ?? 0, 'relationship' => $r['relationship'] ?? '',
                     'side' => ($r['side'] ?? '') ?: $old['side'], 'groups' => array_map('intval', explode(',', (string) $old['group_ids'])), 'status' => $old['status'], 'data' => $data], $groups);
@@ -164,12 +169,14 @@ function import_dna_matches(PDO $pdo, array $d): array
             } else {
                 $v = dna_match_vals($pdo, ['name' => $name] + $r, $groups);
                 $pdo->prepare('INSERT INTO dna_matches(name, person_id, shared_cm, segments, longest_cm, relationship, side, group_ids, status, data_json, kit_id) VALUES(?,?,?,?,?,?,?,?,?,?,?)')->execute([...$v, $kit]); $added++;
+                $addedIds[] = (int) $pdo->lastInsertId();
             }
         }
         if ($own) { $pdo->commit(); }
     } catch (Throwable $e) { if ($own) { $pdo->rollBack(); } throw $e; }
     log_change($pdo, 'meta', 0, 'update', "ADN : $added correspondance(s) importée(s), $updated mise(s) à jour");
-    return ['added' => $added, 'updated' => $updated];
+    $undo = function_exists('import_receipt_put') ? import_receipt_put('dna', ['matches_added' => $addedIds, 'matches_old' => array_values($oldRows)]) : '';
+    return ['added' => $added, 'updated' => $updated, 'undo' => $undo];
 }
 
 /** plusieurs correspondances d'un coup : groupe, côté, suivi */
@@ -211,8 +218,12 @@ function save_dna_segments(PDO $pdo, array $d): array
     $byName = []; $q = $pdo->prepare('SELECT id, name FROM dna_matches WHERE kit_id=?'); $q->execute([$kit]); foreach ($q->fetchAll() as $r) { $byName[mb_strtolower($r['name'])] = (int) $r['id']; }
     $ins = $pdo->prepare('INSERT INTO dna_segments(kit_id, match_id, label, chromosome, start_pos, end_pos, cm, snps, side, ancestor, color) VALUES(?,?,?,?,?,?,?,?,?,?,?)');
     $n = 0; $own = !$pdo->inTransaction(); if ($own) { $pdo->beginTransaction(); }
+    $receipt = !empty($d['receipt']); $removed = []; $before = (int) $pdo->query('SELECT COALESCE(MAX(id),0) FROM dna_segments')->fetchColumn();
     try {
-        if (!empty($d['replace'])) { $pdo->prepare('DELETE FROM dna_segments WHERE kit_id=?')->execute([$kit]); }
+        if (!empty($d['replace'])) {
+            if ($receipt) { $q = $pdo->prepare('SELECT * FROM dna_segments WHERE kit_id=?'); $q->execute([$kit]); $removed = $q->fetchAll(PDO::FETCH_ASSOC); }
+            $pdo->prepare('DELETE FROM dna_segments WHERE kit_id=?')->execute([$kit]);
+        }
         foreach (array_slice(is_array($d['rows'] ?? null) ? $d['rows'] : [], 0, 100000) as $r) {
             if (!is_array($r)) { continue; }
             $chr = dna_chromosome((string) ($r['chromosome'] ?? '')); $a = (float) ($r['start'] ?? 0); $b = (float) ($r['end'] ?? 0);
@@ -224,6 +235,31 @@ function save_dna_segments(PDO $pdo, array $d): array
         }
         if ($own) { $pdo->commit(); }
     } catch (Throwable $e) { if ($own) { $pdo->rollBack(); } throw $e; }
+    if ($receipt && function_exists('import_receipt_put')) {
+        $after = (int) $pdo->query('SELECT COALESCE(MAX(id),0) FROM dna_segments')->fetchColumn();
+        return ['n' => $n, 'undo' => import_receipt_put('dna', ['segments_range' => [$before, $after], 'segments_old' => $removed])];
+    }
+    return ['n' => $n];
+}
+
+/** ↶ Annuler un import ADN : retire les correspondances et segments ajoutés, remet les correspondances mises à jour comme avant. */
+function undo_dna_import(PDO $pdo, array $d): array
+{
+    dna_ensure($pdo);
+    $token = (string) ($d['token'] ?? '');
+    $r = import_receipt_load($token, 'dna');
+    $n = 0;
+    $ids = array_values(array_filter(array_map('intval', $r['matches_added'] ?? [])));
+    if ($ids) { $in = implode(',', $ids); $pdo->exec("DELETE FROM dna_segments WHERE match_id IN ($in)"); $n += (int) $pdo->exec("DELETE FROM dna_matches WHERE id IN ($in)"); }
+    $cols = ['name', 'person_id', 'shared_cm', 'segments', 'longest_cm', 'relationship', 'side', 'group_ids', 'status', 'data_json', 'updated_at'];
+    $up = $pdo->prepare('UPDATE dna_matches SET ' . implode(', ', array_map(static fn($c) => "$c=?", $cols)) . ' WHERE id=?');
+    foreach ($r['matches_old'] ?? [] as $o) { if (is_array($o) && isset($o['id'])) { $up->execute([...array_map(static fn($c) => $o[$c] ?? null, $cols), (int) $o['id']]); $n++; } }
+    if (isset($r['segments_range']) && is_array($r['segments_range'])) { $s = $pdo->prepare('DELETE FROM dna_segments WHERE id > ? AND id <= ?'); $s->execute([(int) $r['segments_range'][0], (int) $r['segments_range'][1]]); $n += $s->rowCount(); }
+    $segCols = ['id', 'kit_id', 'match_id', 'label', 'chromosome', 'start_pos', 'end_pos', 'cm', 'snps', 'side', 'ancestor', 'color'];
+    $ins = $pdo->prepare('INSERT OR IGNORE INTO dna_segments(' . implode(',', $segCols) . ') VALUES(' . implode(',', array_fill(0, count($segCols), '?')) . ')');
+    foreach ($r['segments_old'] ?? [] as $o) { if (is_array($o)) { $ins->execute(array_map(static fn($c) => $o[$c] ?? null, $segCols)); $n++; } }
+    @unlink(import_receipt_dir() . '/' . $token . '.json');
+    log_change($pdo, 'meta', 0, 'update', 'ADN : import annulé');
     return ['n' => $n];
 }
 

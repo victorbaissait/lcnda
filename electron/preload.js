@@ -3,7 +3,8 @@
  * Pont minimal entre la page et l'application de bureau (fenêtre isolée, sandbox). La page peut seulement :
  * ouvrir la fenêtre système de choix d'un fichier à importer, puis lancer l'import du fichier choisi ; télécharger les
  * communes d’un pays des battues (code pays seulement) ; poser, retirer ou régler un widget sur le bureau (sorte connue seulement) ;
- * lister les navigateurs installés et y ouvrir une page de l’application (aperçu en direct d’un site ; adresse vérifiée).
+ * lister les navigateurs installés et y ouvrir une page de l’application (aperçu en direct d’un site ; adresse vérifiée) ;
+ * regarder s’il existe une nouvelle version, la télécharger (vérifiée par empreinte) et l’ouvrir.
  * Elle ne voit jamais de chemin et ne peut pas en désigner un elle-même.
  */
 const { contextBridge, ipcRenderer } = require('electron');
@@ -35,4 +36,17 @@ contextBridge.exposeInMainWorld('lcnda', {
   /** Ouvre une page de l'application (http://127.0.0.1:port/… : l'aperçu en direct) dans ce navigateur ('default' : celui du système).
    *  @returns {Promise<{ok: boolean, error?: string}>} */
   openInBrowser: (id, url) => ipcRenderer.invoke('lcnda:open-in-browser', String(id || ''), String(url || '')),
+  /** 🔄 Mises à jour : regarder la dernière version (GitHub), télécharger l'installateur de cet ordinateur (vérifié par
+   *  empreinte) puis l'ouvrir ; la page ne donne ni adresse ni chemin. */
+  updates: {
+    info: () => ipcRenderer.invoke('lcnda:updates', 'info', {}),
+    check: (force) => ipcRenderer.invoke('lcnda:updates', 'check', { force: force === true }),
+    setPrefs: (p) => ipcRenderer.invoke('lcnda:updates', 'prefs', p && typeof p === 'object' ? { ...(typeof p.auto === 'boolean' ? { auto: p.auto } : {}), ...(typeof p.skip === 'string' ? { skip: p.skip.slice(0, 40) } : {}), ...(typeof p.later === 'boolean' ? { later: p.later } : {}) } : {}),
+    download: () => ipcRenderer.invoke('lcnda:updates', 'download', {}),
+    cancel: () => ipcRenderer.invoke('lcnda:updates', 'cancel', {}),
+    open: () => ipcRenderer.invoke('lcnda:updates', 'open', {}),
+    show: () => ipcRenderer.invoke('lcnda:updates', 'show', {}),
+    page: () => ipcRenderer.invoke('lcnda:updates', 'page', {}),
+    onProgress: (callback) => ipcRenderer.on('lcnda:update-progress', (_event, p) => callback({ received: Number(p && p.received) || 0, total: Number(p && p.total) || 0 })),
+  },
 });

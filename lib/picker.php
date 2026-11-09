@@ -219,13 +219,20 @@ function picker_kind(PDO $pdo, string $kind, string $q, int $offset, int $limit,
 /** Compte puis lit une tranche : $from = « FROM … WHERE … », $params liés aux deux requêtes. */
 function picker_page(PDO $pdo, string $select, string $from, string $order, array $params, int $offset, int $limit): array
 {
-    $c = $pdo->prepare($sql = 'SELECT count(*) ' . $from);
-    $c->execute(picker_params($sql, $params));
-    $total = (int) $c->fetchColumn();
-    if ($total <= $offset) { return [$total, []]; }
-    $s = $pdo->prepare($sql = $select . ' ' . $from . ' ORDER BY ' . $order . ' LIMIT ' . (int) $limit . ' OFFSET ' . (int) $offset);
+    // le nombre trouvé vient avec la page (count(*) OVER ()) : la recherche ne parcourt la base qu'une fois au lieu de deux
+    // (sur 100 000 fiches, chaque passage compare tous les noms sans accents)
+    $s = $pdo->prepare($sql = $select . ', count(*) OVER () AS picker_total_ ' . $from . ' ORDER BY ' . $order . ' LIMIT ' . (int) $limit . ' OFFSET ' . (int) $offset);
     $s->execute(picker_params($sql, $params));
-    return [$total, $s->fetchAll(PDO::FETCH_ASSOC)];
+    $rows = $s->fetchAll(PDO::FETCH_ASSOC);
+    if ($rows) {
+        $total = (int) $rows[0]['picker_total_'];
+        foreach ($rows as &$r) { unset($r['picker_total_']); }
+        unset($r);
+        return [$total, $rows];
+    }
+    $c = $pdo->prepare($sql = 'SELECT count(*) ' . $from); // plus loin que la fin : seulement le nombre
+    $c->execute(picker_params($sql, $params));
+    return [(int) $c->fetchColumn(), []];
 }
 
 /** Seulement les paramètres nommés présents dans la requête (SQLite refuse les autres). */
@@ -295,10 +302,14 @@ function picker_persons(PDO $pdo, string $q, int $offset, int $limit, array $opt
         $f = ":f{$i}";
         $params[$k] = picker_like($token);
         $params[$f] = '%' . picker_fold($token) . '%';
+        // les lieux dont le nom contient le mot : cherchés une fois (avant : le nom du lieu replié pour chaque naissance et chaque décès)
+        $pl = $pdo->prepare("SELECT pl.id FROM places pl WHERE pl.id IN (SELECT DISTINCT place_id FROM events WHERE place_id IS NOT NULL) AND picker_fold(pl.name) LIKE ?");
+        $pl->execute([$params[$f]]);
+        $params[$f . 'p'] = json_encode(array_map('intval', $pl->fetchAll(PDO::FETCH_COLUMN)));
         $variant = $hasVariants ? " OR EXISTS(SELECT 1 FROM name_variants nv WHERE nv.person_id=p.id AND (nv.first_name LIKE {$k} ESCAPE '\\' COLLATE NOCASE OR nv.middle_name LIKE {$k} ESCAPE '\\' COLLATE NOCASE OR nv.last_name LIKE {$k} ESCAPE '\\' COLLATE NOCASE OR picker_fold(COALESCE(nv.first_name,'')||' '||COALESCE(nv.last_name,'')) LIKE {$f}))" : '';
         $where[] = "(p.first_name LIKE {$k} ESCAPE '\\' COLLATE NOCASE OR p.middle_name LIKE {$k} ESCAPE '\\' COLLATE NOCASE OR p.last_name LIKE {$k} ESCAPE '\\' COLLATE NOCASE"
             . " OR picker_fold(COALESCE(p.first_name,'')||' '||COALESCE(p.middle_name,'')||' '||COALESCE(p.last_name,'')) LIKE {$f}"
-            . " OR EXISTS(SELECT 1 FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND e.place_id IS NOT NULL AND t.gedcom_tag IN ('BIRT','DEAT') AND picker_fold((SELECT pl.name FROM places pl WHERE pl.id=e.place_id)) LIKE {$f})"
+            . " OR EXISTS(SELECT 1 FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND e.place_id IS NOT NULL AND t.gedcom_tag IN ('BIRT','DEAT') AND e.place_id IN (SELECT value FROM json_each({$f}p)))"
             . $variant . ')';
     }
     $start = '';

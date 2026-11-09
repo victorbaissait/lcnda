@@ -137,7 +137,7 @@
         try{data=await api('list',params(),{signal:listControllerSignal()});}catch(error){if(error.name==='AbortError')return;throw error;}
         if(token!==state.workspaceToken||state.module!=='listes'||type!==state.listType)return;
         let rows=data.rows;
-        const paint=()=>{const remaining=data.remainingCount??(data.hasMore?'au moins 1':0);let displayRows=type==='media'?[...rows].sort((a,b)=>mediaChronologyKey(a)-mediaChronologyKey(b)||(Number(a.id)||0)-(Number(b.id)||0)):rows;if(type==='media'&&state.listMediaKind&&state.listMediaKind!=='all')displayRows=displayRows.filter(row=>normalizedMediaType(row)===state.listMediaKind);state.currentListRows=displayRows;$('#table-target').innerHTML=tableHtml(type,displayRows);setListCount(type==='media'&&state.listMediaKind&&state.listMediaKind!=='all'?`${plural(displayRows.length,'ligne affichée','lignes affichées')} sur ${plural(rows.length,'chargée')}${data.hasMore?` · ${typeof remaining==='number'?plural(remaining,'autre disponible','autres disponibles'):`${remaining} autre disponible`}`:''}`:`${plural(rows.length,'ligne chargée','lignes chargées')}${data.hasMore?` · ${typeof remaining==='number'?plural(remaining,'autre disponible','autres disponibles'):`${remaining} autre disponible`}`:''}`);if(type==='reminders')renderReminderSummary(data.reminder_summary||{});if(type==='research_budget')renderBudgetSummary(data.research_budget_summary||{});if(type==='courriers')renderCourrierSummary(data.courrier_summary||{});$('#list-more-wrap').innerHTML='';if(data.hasMore){const UI=window.LCNDA_UI;const more=UI?.moreButton?UI.moreButton({remaining:typeof remaining==='number'?remaining:80,step:80,feminine:true}):Object.assign(document.createElement('button'),{className:'button secondary',textContent:'Charger 80 lignes supplémentaires'});more.id='list-more';$('#list-more-wrap').appendChild(more);}bindTableLinks();placeListView(type,displayRows,paint,bar);if(type==='living_contacts')bindLivingContactButtons();if(type==='archives')bindArchiveRegistrationToggles();if(type==='occupations'||type==='employers')bindEntityLabelsFields();if(data.hasMore)$('#list-more').addEventListener('click',loadMore);};
+        const paint=()=>{const remaining=data.remainingCount??(data.hasMore?'au moins 1':0);let displayRows=type==='media'?[...rows].sort((a,b)=>mediaChronologyKey(a)-mediaChronologyKey(b)||(Number(a.id)||0)-(Number(b.id)||0)):rows;if(type==='media'&&state.listMediaKind&&state.listMediaKind!=='all')displayRows=displayRows.filter(row=>normalizedMediaType(row)===state.listMediaKind);state.currentListRows=displayRows;$('#table-target').innerHTML=tableHtml(type,displayRows);setListCount(type==='media'&&state.listMediaKind&&state.listMediaKind!=='all'?`${plural(displayRows.length,'ligne affichée','lignes affichées')} sur ${plural(rows.length,'chargée')}${data.hasMore?` · ${typeof remaining==='number'?plural(remaining,'autre disponible','autres disponibles'):`${remaining} autre disponible`}`:''}`:`${plural(rows.length,'ligne chargée','lignes chargées')}${data.hasMore?` · ${typeof remaining==='number'?plural(remaining,'autre disponible','autres disponibles'):`${remaining} autre disponible`}`:''}`);if(type==='reminders')renderReminderSummary(data.reminder_summary||{});if(type==='research_budget')renderBudgetSummary(data.research_budget_summary||{});if(type==='courriers')renderCourrierSummary(data.courrier_summary||{});$('#list-more-wrap').innerHTML='';if(data.hasMore){const UI=window.LCNDA_UI;const more=UI?.moreButton?UI.moreButton({remaining:typeof remaining==='number'?remaining:80,step:80,feminine:true}):Object.assign(document.createElement('button'),{className:'button secondary',textContent:'Charger 80 lignes supplémentaires'});more.id='list-more';$('#list-more-wrap').appendChild(more);}bindTableLinks();placeListView(type,displayRows,paint,bar);if(type==='living_contacts')bindLivingContactButtons();if(type==='archives')bindArchiveRegistrationToggles();if(type==='occupations'||type==='employers'){bindEntityLabelsFields();bindOccMore();}if(data.hasMore)$('#list-more').addEventListener('click',loadMore);};
         if(type==='labels'||type==='occupations'||type==='employers'){$('#label-list-show-all').addEventListener('click',()=>{$$('.label-list-body').forEach(body=>{body.hidden=false;});$$('.label-list-toggle').forEach(btn=>btn.textContent='Masquer les éléments');});$('#label-list-hide-all').addEventListener('click',()=>{$$('.label-list-body').forEach(body=>{body.hidden=true;});$$('.label-list-toggle').forEach(btn=>btn.textContent='Afficher les éléments');});}
         const loadMore=async()=>{const button=$('#list-more');if(button){button.disabled=true;button.textContent='Chargement…';}try{const next=await api('list',params({offset:rows.length}),{signal:listControllerSignal()});if(token!==state.workspaceToken||type!==state.listType)return;rows=rows.concat(next.rows);data=next;paint();}catch(error){if(error.name!=='AbortError')toast(error.message,'error');}};
         paint();
@@ -479,7 +479,10 @@
         function groupHtml(row){
             const people=row.people||[];
             const count=Number(row.person_count||people.length||0);
-            const cards=people.length?'<div class="occ-people-grid">'+people.map(personCard).join('')+'</div>'
+            // une très grosse base : des milliers de personnes par métier — les OCC_STEP premières, puis « Voir les N suivantes ↓ » (C6)
+            const key=`occ${occMoreSeq++}`;
+            if(people.length>OCC_STEP)occMore.set(key,{people,shown:OCC_STEP,personCard});
+            const cards=people.length?`<div class="occ-people-grid" data-occ-grid="${key}">`+people.slice(0,OCC_STEP).map(personCard).join('')+'</div>'+(people.length>OCC_STEP?`<div class="occ-more-wrap" data-occ-more="${key}"></div>`:'')
                 :'<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">👤</span><span class="empty-line-text">Aucune personne rattach\u00e9e.</span></p>';
             return `<article class="label-list-row">
                 <div class="label-list-head">
@@ -491,7 +494,20 @@
                 <div class="label-list-body">${cards}</div>
             </article>`;
         }
+        occMore.clear();
         return '<div class="label-list-grid">'+rows.map(groupHtml).join('')+'</div>';
+    }
+    const OCC_STEP=24,occMore=new Map();let occMoreSeq=0;
+    function bindOccMore(){
+        $$('[data-occ-more]').forEach(wrap=>{
+            const it=occMore.get(wrap.dataset.occMore);if(!it||wrap.firstChild||!window.LCNDA_UI?.moreButton)return;
+            const more=window.LCNDA_UI.moreButton({remaining:it.people.length-it.shown,step:OCC_STEP,feminine:true,onClick:b=>{
+                const grid=$(`[data-occ-grid="${wrap.dataset.occMore}"]`);if(!grid)return;
+                grid.insertAdjacentHTML('beforeend',it.people.slice(it.shown,it.shown+OCC_STEP).map(it.personCard).join(''));
+                it.shown+=OCC_STEP;b.update(it.people.length-it.shown);bindTableLinks();bindEntityLabelsFields();
+            }});
+            wrap.appendChild(more);
+        });
     }
 
     function formatBudgetAmount(row){

@@ -147,6 +147,9 @@ function controle_run(PDO $pdo, bool $fresh = false): array
         if (is_array($c) && ($c['sig'] ?? '') === $sig) { return $memo = $c; }
     }
     $t0 = microtime(true);
+    // une très grosse base (100 000 fiches) demande ≈ 750 Mo : on laisse de la marge au-delà du réglage habituel (1 Go)
+    if (function_exists('memory_at_least')) { memory_at_least(2048); }
+    @set_time_limit(300);
     $res = controle_compute($pdo, $th);
     $res['sig'] = $sig;
     $res['checked_at'] = gmdate('Y-m-d H:i:s');
@@ -178,11 +181,26 @@ function controle_compute(PDO $pdo, array $th): array
     // ── événements : une lecture ──
     $lifeTags = ['CHR', 'BAPM', 'CONF', 'FCOM', 'BARM', 'BASM', 'BLES', 'ADOP', 'GRAD', 'EDUC', 'OCCU', 'RETI', 'EMIG', 'IMMI', 'NATU', 'CENS', 'RESI', 'ORDN'];
     $famEv = []; $lifeEv = []; $allDated = [];
-    $evRows = $pdo->query("SELECT e.id, e.person_id, e.family_id, e.date_text, e.date_calendar, e.year, e.place_id, t.gedcom_tag AS tag, t.label
-        FROM events e JOIN event_types t ON t.id=e.event_type_id")->fetchAll();
-    foreach ($evRows as $r) {
+    // la sorte et son nom viennent d'une petite table : une seule chaîne partagée par sorte (beaucoup moins de mémoire sur 300 000 événements)
+    $types = [];
+    foreach ($pdo->query('SELECT id, gedcom_tag, label FROM event_types') as $t) { $types[(int) $t['id']] = [(string) $t['gedcom_tag'], (string) $t['label']]; }
+    // Une seule lecture des événements, sans tout garder : seules les lignes qui peuvent donner une alerte de date (1 et 1 bis
+    // plus bas, mêmes tests) sont mises de côté — 300 000 lignes gardées en entier dépassaient la mémoire de PHP.
+    $evRows = [];
+    $mayBeImpossible = static function (array $r): bool {
+        if (!function_exists('date_text_parts')) { return false; }
+        $dp = date_text_parts((string) $r['date_text']); if (!$dp) { return false; }
+        [$day, $month, $year] = $dp;
+        $julian = (string) $r['date_calendar'] === 'julian' || $year < 1583;
+        return !($month >= 1 && $month <= 12 && $day >= 1 && ($julian ? $day <= [31, ($year % 4 === 0 ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][$month - 1] : checkdate($month, $day, max(1, $year))));
+    };
+    foreach ($pdo->query('SELECT id, person_id, family_id, date_text, date_calendar, year, place_id, event_type_id FROM events') as $r) {
+        $ty = $types[(int) $r['event_type_id']] ?? null; if (!$ty) { continue; }
+        unset($r['event_type_id']); $r['tag'] = $ty[0]; $r['label'] = $ty[1];
         $tag = (string) $r['tag']; $pid = (int) $r['person_id']; $fid = (int) $r['family_id'];
-        if (preg_match('/\d/', (string) $r['date_text'])) { $allDated[] = $r; }
+        $text = trim((string) $r['date_text']);
+        if (preg_match('/\d/', (string) $r['date_text']) && in_array((string) ($r['date_calendar'] ?? ''), ['', 'gregorian', 'julian'], true) && $mayBeImpossible($r)) { $allDated[] = $r; }
+        if ($text !== '' && (mb_strlen($text) > 80 || preg_match('/\b(?:entre|between|bet\.?)\s/iu', $text) || preg_match('/^[-−–]/u', $text))) { $evRows[] = $r; }
         $d = controle_date($r);
         if ($pid && isset($P[$pid])) {
             if ($tag === 'BIRT') { if ($d) { $P[$pid]['bs'][$d['y']] = $d; } if ($r['place_id']) { $P[$pid]['bpl'][(int) $r['place_id']] = true; } if ($d && (!$P[$pid]['b'] || $d['e'] < $P[$pid]['b']['e'])) { $P[$pid]['b'] = $d; } elseif (!$d && $r['place_id'] && !$P[$pid]['b']) { /* lieu seul */ } }
@@ -250,9 +268,10 @@ function controle_compute(PDO $pdo, array $th): array
         }
         if (preg_match('/^[-−–]\s*\d{1,4}$/u', $text)) {
             $add(['key' => "negative-date:{$r['id']}", 'check' => 'negative-date', 'sort' => 'dates', 'level' => 'orange', 'title' => 'Date « ' . $text . ' » lue comme l’an ' . (int) preg_replace('/\D/', '', $text),
-                'detail' => $r['label'] . ' : un signe moins devant l’année. Pour une date avant Jésus-Christ, écris « 5 av. J.-C. » ; sinon corrige l’année.', 'people' => $people, 'dates' => [$one], 'fix' => $fix, 'fp' => $fp]);
+                'detail' => $r['label'] . ' : un signe moins devant l’année. Pour une date avant Jésus-Christ, écris « 5 av. J.-C. »; sinon corrige l’année.', 'people' => $people, 'dates' => [$one], 'fix' => $fix, 'fp' => $fp]);
         }
     }
+    unset($evRows, $allDated); // plus servis : la mémoire est rendue avant les autres contrôles
     foreach ($P as $id => $p) {
         $b = $p['b']; $d = $p['d'];
         // 2. décès avant la naissance
@@ -517,7 +536,8 @@ function controle_compute(PDO $pdo, array $th): array
         $P[$id]['lk'] = $ln; $P[$id]['fk'] = $fn;
         $groups[$ln . '|' . substr($fn, 0, 3)][] = $id;
     }
-    $parentsOf = static function (int $id) use ($parentFams, $families): array { $out = []; foreach ($parentFams[$id] ?? [] as $f) { foreach ($families[$f] ?? [] as $x) { if ($x) { $out[$x] = true; } } } return $out; };
+    $parentsMemo = []; // gardés : les doublons et les mariages entre ancêtre et descendant les redemandent des milliers de fois
+    $parentsOf = static function (int $id) use ($parentFams, $families, &$parentsMemo): array { if (isset($parentsMemo[$id])) { return $parentsMemo[$id]; } $out = []; foreach ($parentFams[$id] ?? [] as $f) { foreach ($families[$f] ?? [] as $x) { if ($x) { $out[$x] = true; } } } return $parentsMemo[$id] = $out; };
     $dupCount = 0;
     foreach ($groups as $ids) {
         $n = count($ids); if ($n < 2 || $n > 400) { continue; }

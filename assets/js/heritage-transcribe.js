@@ -152,7 +152,7 @@
                     <div class="h-tx-zonebar" data-tx-zonebar hidden></div>
                 </section>
                 <section class="h-tx-right">
-                    <div class="h-tx-tools"><button type="button" data-tx-cmd="ocr" title="Lire un texte imprimé ou tapé (pose aussi les zones ligne par ligne)">🔎 Lire (imprimé)</button><button type="button" data-tx-cmd="htr" title="Reconnaissance d’écriture manuscrite, si un modèle est installé (Réglages)" data-help="La lecture d’une écriture à la main (HTR) : elle demande un modèle installé dans les Réglages. Relis toujours : elle se trompe sur les noms." data-help-faq="transcription">✍️ Lire (manuscrit)</button>
+                    <div class="h-tx-tools"><button type="button" data-tx-cmd="ocr" title="Lire un texte imprimé ou tapé (pose aussi les zones ligne par ligne)">🔎 Lire (imprimé)</button><button type="button" data-tx-cmd="htr" title="Lire l’écriture à la main : toute la page, ou seulement la zone choisie (▭). Le texte est proposé ligne par ligne, à relire." data-help="La lecture d’une écriture à la main (HTR), sur cet ordinateur : le texte est proposé ligne par ligne à côté de l’image, les mots peu sûrs surlignés. Elle s’installe une fois dans les Réglages. Relis toujours : elle se trompe sur les noms." data-help-faq="Lire l’acte">✨ Lire l’acte</button><span class="h-tx-htrrun" data-tx-htrrun hidden><span class="ui-spinner is-inline" role="status"><span class="ui-spin" aria-hidden="true"></span><span data-tx-htrtxt></span></span><button type="button" class="button small secondary" data-tx-cmd="htrstop" title="Arrêter la lecture">■ Arrêter</button></span>
                         <select data-tx-lang title="Langue du texte"><option value="fra">Français</option><option value="lat">Latin</option><option value="fra+lat">Français + latin</option><option value="eng">Anglais</option><option value="deu">Allemand</option><option value="ita">Italien</option><option value="spa">Espagnol</option></select>
                         <button type="button" data-tx-cmd="template" title="Un modèle d’acte à compléter">📋 Modèle</button><button type="button" data-tx-cmd="detect" title="Repérer les noms, dates, lieux et métiers" data-help="Cherche dans le texte les noms (avec leur rôle : parrain, témoin…), les dates (même en toutes lettres ou au calendrier républicain), les lieux et les métiers, pour les relier aux fiches.">🧭 Repérer</button><span class="spacer"></span>
                         <details class="h-tx-more"><summary>Plus ▾</summary><div><button type="button" data-tx-cmd="tomedia">↪ Mettre le texte dans le média</button><button type="button" data-tx-cmd="copy">📋 Copier le texte</button><label class="ui-toggle h-tx-useenh" title="La lecture (imprimé et manuscrit) et l’export prennent l’image avec les réglages « Mieux voir » (contraste, netteté, canal, seuil…), sinon l’image d’origine"><input type="checkbox" data-tx-useenh ${useEnh() ? 'checked' : ''}><i></i>Lire et exporter l’image améliorée</label></div></details></div>
@@ -311,7 +311,7 @@
             const bar = $('[data-tx-zonebar]'), z = t.data.zones.find(q => q.id === selZone); bar.hidden = !z; if (!z) return;
             const linked = z.e > z.s;
             bar.innerHTML = `<b>Zone</b> ${linked ? `« ${esc(t.body.slice(z.s, z.e).slice(0, 60))}${z.e - z.s > 60 ? '…' : ''} »` : '<span class="muted">pas encore reliée au texte</span>'}
-                <button type="button" class="button small secondary" data-tx-zlink title="Relier cette zone au passage choisi dans le texte">🔗 Au passage choisi</button><input data-tx-znote placeholder="Note (mot illisible, signature…)" value="${esc(z.note || '')}" maxlength="300"><input type="color" data-tx-zcolor value="${esc(z.c || COLORS[t.data.zones.indexOf(z) % COLORS.length])}" title="Couleur"><button type="button" class="button small danger" data-tx-zdel title="Supprimer la zone (Suppr) — « ↶ Annuler » la remet">🗑</button>
+                <button type="button" class="button small secondary" data-tx-zlink title="Relier cette zone au passage choisi dans le texte">🔗 Au passage choisi</button><input data-tx-znote placeholder="Note (mot illisible, signature…)" value="${esc(z.note || '')}" maxlength="300"><input type="color" data-tx-zcolor value="${esc(z.c || COLORS[t.data.zones.indexOf(z) % COLORS.length])}" title="Couleur"><button type="button" class="button small secondary" data-tx-cmd="htrzone" title="Lire l’écriture à la main dans cette zone seulement">✨ Lire cette zone</button><button type="button" class="button small danger" data-tx-zdel title="Supprimer la zone (Suppr) — « ↶ Annuler » la remet">🗑</button>
                 <small class="muted h-tx-zkeys" title="Glisse la zone pour la déplacer, tire une des 8 poignées pour changer sa taille">↔ glisser · poignées · flèches · Maj + flèches · ⌘Z</small>`;
         }
         /* ─── ⌘Z / ⇧⌘Z pour les zones (le texte garde l'annulation de la case) ─── */
@@ -491,14 +491,85 @@
                 status(`${lines.length} ligne${lines.length > 1 ? 's' : ''} lue${lines.length > 1 ? 's' : ''} (à relire)`); toast('Texte lu et zones posées ligne par ligne : relis et corrige.'); void start;
             } catch (e) { status(''); toast(e.message || 'Lecture impossible.', 'error'); }
         }
-        async function runHtr() {
+        /* ─── ✨ Lire l'acte (écriture à la main) : en arrière-plan, puis le texte proposé ligne par ligne à relire ─── */
+        let htrJob = null; // {id, timer, t0}
+        const HTR_MODEL_KEY = 'genealogie-htr-model', UNSURE = .75;
+        const htrRunEl = () => $('[data-tx-htrrun]');
+        function htrBusy(on, text = '') { const el = htrRunEl(); if (!el) return; el.hidden = !on; if (on) el.querySelector('[data-tx-htrtxt]').textContent = text; $('[data-tx-cmd="htr"]').disabled = on; }
+        function htrStop(silent = false) { if (!htrJob) return; clearTimeout(htrJob.timer); const id = htrJob.id; htrJob = null; htrBusy(false); if (id) post('htr_read_cancel', {id}).catch(() => {}); if (!silent) status('Lecture arrêtée'); }
+        /** la zone choisie (en pixels de l'image), sinon toute la page */
+        const htrArea = () => { const z = t.data.zones.find(q => q.id === selZone); return z && z.w > 8 && z.h > 8 ? {x: Math.max(0, Math.round(z.x)), y: Math.max(0, Math.round(z.y)), w: Math.round(z.w), h: Math.round(z.h)} : null; };
+        async function runHtr({model = '', zone} = {}) {
             if (!t.media_id) return toast('Choisis d’abord l’image de l’acte.', 'error');
-            status('Reconnaissance de l’écriture…');
-            try { const body = {media_id: t.media_id, model: $('[data-tx-lang]').value.startsWith('fra') ? 'fr-actes' : 'en-handwritten'};
-                if (useEnh() && viewChanged()) { status('Préparation de l’image améliorée…'); const c = await filteredCanvas(); const b = await new Promise(r2 => c.toBlob(r2, 'image/jpeg', .92)); body.image_b64 = await new Promise(r2 => { const fr = new FileReader(); fr.onload = () => r2(String(fr.result).split(',')[1] || ''); fr.readAsDataURL(b); }); status('Reconnaissance de l’écriture…'); }
-                const r = await post('htr_recognize', body); const txt = String(r.result?.text || r.text || '').trim(); if (!txt) { status(''); return toast('Aucun texte reconnu.', 'error'); }
-                area.value += (area.value.trim() ? '\n\n— Lu automatiquement (à relire) —\n' : '') + txt; before = area.value; t.body = area.value; touch(); paintMirror(); status('Texte manuscrit ajouté (à relire)'); }
-            catch (e) { status(''); const m = e.message || 'Reconnaissance impossible.'; toast(/Réglages/.test(m) ? m : `${m} (Réglages → Reconnaissance d’écriture (HTR) pour installer un modèle)`, 'error'); } // le serveur dit déjà où l'installer : pas deux fois
+            if (htrJob) return toast('Une lecture est déjà en cours.', 'error');
+            let st; try { st = await api('htr_setup_status'); } catch (e) { return toast(e.message, 'error'); }
+            const installed = (st.models || []).filter(m => m.present);
+            if (!st.ready || !installed.length) return toast('La lecture d’écriture manuscrite n’est pas encore installée : Réglages → Reconnaissance d’écriture (HTR) (une seule fois, l’assistant explique tout).', 'error');
+            let pick = model; if (!pick) { try { pick = localStorage.getItem(HTR_MODEL_KEY) || ''; } catch (_) {} }
+            if (!installed.some(m => m.file === pick)) pick = (installed.find(m => m.recommended) || installed[0]).file;
+            const box = zone === undefined ? htrArea() : zone;
+            htrBusy(true, box ? 'Lecture de la zone…' : 'Lecture de l’acte…'); status('');
+            try {
+                const body = {media_id: t.media_id, model_file: pick, language: $('[data-tx-lang]').value};
+                if (box || (useEnh() && viewChanged())) { // la zone découpée, et/ou l'image améliorée (« Mieux voir »)
+                    const full = await filteredCanvas(); let c = full;
+                    if (box) { c = document.createElement('canvas'); c.width = Math.min(box.w, imgW - box.x); c.height = Math.min(box.h, imgH - box.y); c.getContext('2d').drawImage(full, box.x, box.y, c.width, c.height, 0, 0, c.width, c.height); }
+                    const b = await new Promise(r2 => c.toBlob(r2, 'image/png'));
+                    body.image_b64 = await new Promise(r2 => { const fr = new FileReader(); fr.onload = () => r2(String(fr.result).split(',')[1] || ''); fr.readAsDataURL(b); });
+                }
+                const r = await post('htr_read_start', body);
+                htrJob = {id: r.result.id, t0: Date.now(), timer: 0};
+                const poll = async () => {
+                    if (!htrJob || !dlg.isConnected) return;
+                    let j; try { j = await api('htr_read_job', {id: htrJob.id}); } catch (e) { htrJob = null; htrBusy(false); return toast(e.message, 'error'); }
+                    if (!htrJob) return;
+                    if (j.state === 'running') { htrBusy(true, `${box ? 'Lecture de la zone' : 'Lecture de l’acte'}… ${j.elapsed} s`); htrJob.timer = setTimeout(poll, 1200); return; }
+                    htrJob = null; htrBusy(false);
+                    if (j.state === 'error') return toast(j.error || 'La lecture n’a pas abouti.', 'error');
+                    if (j.state !== 'done') return;
+                    try { localStorage.setItem(HTR_MODEL_KEY, j.model_file || pick); } catch (_) {}
+                    if (!(j.lines || []).length) return toast('Aucune ligne d’écriture trouvée : essaie « 🎚️ Mieux voir » (contraste), ou une zone plus serrée.', 'error');
+                    htrReview(j.lines, box, j.model_file || pick, installed);
+                };
+                htrJob.timer = setTimeout(poll, 700);
+            } catch (e) { htrJob = null; htrBusy(false); toast(e.message || 'Lecture impossible.', 'error'); }
+        }
+        /** Les lignes lues, à côté de leur morceau d'image ; les mots peu sûrs surlignés ; on corrige, puis on met dans le texte */
+        async function htrReview(lines, box, modelFile, installed) {
+            const ox = box?.x || 0, oy = box?.y || 0;
+            let im = null; try { im = await new Promise((ok, ko) => { const i = new Image(); i.onload = () => ok(i); i.onerror = ko; i.src = origSrc(); }); } catch (_) {}
+            const crop = b => { if (!im || !b) return ''; const [x0, y0, x1, y1] = b, w = Math.max(1, x1 - x0), h = Math.max(1, y1 - y0), k = Math.min(1, 52 / h, 900 / w); const c = document.createElement('canvas'); c.width = Math.max(1, Math.round(w * k)); c.height = Math.max(1, Math.round(h * k)); c.getContext('2d').drawImage(im, x0 + ox, y0 + oy, w, h, 0, 0, c.width, c.height); try { return c.toDataURL('image/jpeg', .85); } catch (_) { return ''; } };
+            const pct = c => Math.round(c * 100);
+            const lineHtml = l => (l.words?.length ? l.words : String(l.text || '').split(/\s+/).map(w => ({t: w, c: null}))).filter(w => w.t).map(w => w.c != null && w.c < UNSURE ? `<mark class="h-htr-unsure" title="Sûr à ${pct(w.c)} % — clique pour le corriger">${esc(w.t)}</mark>` : esc(w.t)).join(' ');
+            const unsure = lines.reduce((n, l) => n + (l.words || []).filter(w => w.c != null && w.c < UNSURE).length, 0);
+            const name = f => installed.find(m => m.file === f)?.title || f;
+            const dlgR = ext.openDialog({eyebrow: 'LECTURE AUTOMATIQUE · À RELIRE', title: '✨ Le texte lu, ligne par ligne', wide: true, submitLabel: `✓ Mettre ${lines.length > 1 ? `les ${lines.length} lignes` : 'la ligne'} dans le texte`,
+                body: `<div class="h-htr-rev-head"><span>${A().plural ? A().plural(lines.length, 'ligne') : lines.length + ' lignes'} · ${unsure ? `<mark class="h-htr-unsure">${A().plural ? A().plural(unsure, 'mot peu sûr', 'mots peu sûrs') : unsure + ' mots peu sûrs'}</mark> (sûrs à moins de ${pct(UNSURE)} %)` : 'aucun mot peu sûr'}</span>
+                    <label class="h-htr-rev-model">Modèle <select data-htr-rmodel>${installed.map(m => `<option value="${esc(m.file)}" ${m.file === modelFile ? 'selected' : ''}>${esc(m.title)}</option>`).join('')}</select></label><button type="button" class="button small secondary" data-htr-reread>↻ Relire avec ce modèle</button></div>
+                    <ol class="h-htr-rev">${lines.map((l, i) => { const src = crop(l.bbox); return `<li data-i="${i}"><label class="checkbox-line h-htr-keep" title="Garder cette ligne"><input type="checkbox" data-htr-keep checked></label>
+                        <div class="h-htr-rev-body">${src ? `<img class="h-htr-crop" src="${src}" alt="Ligne ${i + 1} sur l’image">` : '<span class="h-htr-crop is-none">pas d’image pour cette ligne</span>'}
+                        <div class="h-htr-line" contenteditable="plaintext-only" spellcheck="false" role="textbox" aria-label="Ligne ${i + 1}" data-htr-line>${lineHtml(l)}</div></div>
+                        <small class="h-htr-conf ${l.conf != null && l.conf < UNSURE ? 'is-low' : ''}">${l.conf != null ? `${pct(l.conf)} %` : ''}</small></li>`; }).join('')}</ol>
+                    <p class="ui-hint">Corrige directement dans les lignes (clique un mot surligné pour le remplacer) · Entrée : ligne suivante · décoche une ligne pour la laisser de côté. Lu par « ${esc(name(modelFile))} », sur cet ordinateur. Ensuite, « 🧭 Repérer » cherche tout seul les noms, dates et lieux.</p>`,
+                onOpen: d => {
+                    d.querySelector('.h-htr-line')?.focus();
+                    d.addEventListener('click', e => { const mk = e.target.closest('.h-htr-unsure'); if (mk && mk.closest('[data-htr-line]')) { const r = document.createRange(); r.selectNodeContents(mk); const s = getSelection(); s.removeAllRanges(); s.addRange(r); } });
+                    d.addEventListener('input', e => { const ln = e.target.closest('[data-htr-line]'); if (!ln) return; const s = getSelection(), mk = s.anchorNode?.parentElement?.closest?.('.h-htr-unsure'); if (mk) mk.classList.add('is-fixed'); });
+                    d.addEventListener('paste', e => { const ln = e.target.closest('[data-htr-line]'); if (!ln) return; e.preventDefault(); document.execCommand('insertText', false, (e.clipboardData?.getData('text/plain') || '').replace(/\s+/g, ' ')); });
+                    d.addEventListener('keydown', e => { const ln = e.target.closest('[data-htr-line]'); if (!ln || e.key !== 'Enter') return; e.preventDefault(); const all = [...d.querySelectorAll('[data-htr-line]')], nx = all[all.indexOf(ln) + (e.shiftKey ? -1 : 1)]; if (nx) { nx.focus(); const r = document.createRange(); r.selectNodeContents(nx); r.collapse(false); const s = getSelection(); s.removeAllRanges(); s.addRange(r); } else d.querySelector('[type=submit]')?.focus(); });
+                    d.querySelector('[data-htr-reread]').addEventListener('click', () => { const m = d.querySelector('[data-htr-rmodel]').value; d.close(); runHtr({model: m, zone: box || null}); });
+                },
+                onSubmit: f => {
+                    const kept = [...f.querySelectorAll('.h-htr-rev > li')].filter(li => li.querySelector('[data-htr-keep]').checked).map(li => ({l: lines[Number(li.dataset.i)], text: li.querySelector('[data-htr-line]').textContent.replace(/\s+/g, ' ').trim()})).filter(k => k.text);
+                    if (!kept.length) { toast('Aucune ligne gardée.'); return; }
+                    let text = area.value; if (text.trim()) text += '\n\n';
+                    const made = [];
+                    kept.forEach(({l, text: line}) => { const s = text.length; text += line + '\n'; if (l.bbox) { const [x0, y0, x1, y1] = l.bbox; made.push({id: zid(), x: x0 + ox, y: y0 + oy, w: x1 - x0, h: y1 - y0, s, e: s + line.length, note: l.conf != null && l.conf < UNSURE ? `Lu automatiquement (sûr à ${pct(l.conf)} %)` : '', c: ''}); } });
+                    area.value = text; before = text; t.body = text; snap(); t.data.zones.push(...made); touch(); drawZones();
+                    status(`${A().plural ? A().plural(kept.length, 'ligne lue', 'lignes lues') : kept.length + ' lignes lues'} (à relire)`);
+                    runDetect().then(() => toast('Texte mis dans la transcription, zones posées ligne par ligne ; noms, dates et lieux repérés à droite.'));
+                }});
+            return dlgR;
         }
         /* ─── image : de la base ou de l'ordinateur ─── */
         async function pickImage() {
@@ -563,6 +634,8 @@
                 origin(); A().undoToast?.('Image remise d’origine', {undo: () => { t.data.view = TV.viewOf(before); syncControls(); geom({keepCenter: false}); applyFit(fitMode); applyImage(); touch(); }, redo: origin}); return; }
             if (k === 'ocr') return runOcr();
             if (k === 'htr') return runHtr();
+            if (k === 'htrstop') return htrStop();
+            if (k === 'htrzone') return runHtr({zone: htrArea()});
             if (k === 'detect') return runDetect();
             if (k === 'template') { const tp = TEMPLATES[$('[data-tx="kind"]').value]; if (!tp) return toast('Pas de modèle pour ce genre d’acte.', 'error'); if (area.value.trim() && !await A().confirmBox('Le texte déjà écrit est gardé.', {title: 'Ajouter le modèle à la fin du texte ?', okLabel: 'Ajouter le modèle'})) return; area.value += (area.value.trim() ? '\n\n' : '') + tp; area.dispatchEvent(new Event('input')); return; }
             if (k === 'txt') { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([area.value], {type: 'text/plain;charset=utf-8'})); a.download = `${(A().safeExportFilename ? A().safeExportFilename($('[data-tx="title"]').value || 'transcription', 'transcription') : 'transcription')}.txt`; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 3000); return; }
@@ -630,7 +703,7 @@
         const onKeyUp = e => { if (e.key === ' ') { space = false; stage.dataset.tool = tool; } };
         document.addEventListener('keydown', onKey, true); document.addEventListener('keyup', onKeyUp, true);
         /** l'outil s'en va (× ou Échap, ou « ↗ Fiche » d'une personne) : touches, worker « Mieux voir », observateurs, fenêtre */
-        function teardown() { if (!dlg.isConnected) return; document.removeEventListener('keydown', onKey, true); document.removeEventListener('keyup', onKeyUp, true); window.removeEventListener('lcnda-txbar-change', onBar); enh?.stop(); ro.disconnect(); roBar.disconnect(); dlg.close(); dlg.remove(); ctx.onClose?.(); }
+        function teardown() { if (!dlg.isConnected) return; htrStop(true); document.removeEventListener('keydown', onKey, true); document.removeEventListener('keyup', onKeyUp, true); window.removeEventListener('lcnda-txbar-change', onBar); enh?.stop(); ro.disconnect(); roBar.disconnect(); dlg.close(); dlg.remove(); ctx.onClose?.(); }
         async function close() { if (dirty && !await A().confirmBox('Les dernières modifications de la transcription seront perdues.', {title: 'Fermer sans enregistrer la transcription ?', okLabel: 'Fermer sans enregistrer', danger: true})) return; teardown(); }
         dlg.dataset.ownClose = '1'; // Échap : l'outil demande lui-même s'il faut (une seule question « Fermer sans enregistrer ? »)
         dlg.addEventListener('cancel', e => { e.preventDefault(); close(); });
@@ -650,7 +723,7 @@
         const cmdOf = k => () => { const b = document.createElement('button'); b.type = 'button'; b.hidden = true; b.dataset.txCmd = k; dlg.appendChild(b); b.click(); b.remove(); };
         UI.editorMenus?.($('[data-tx-menus]'), {
             Fichier: () => [{icon: '💾', label: 'Enregistrer', shortcut: '⌘S', run: cmdOf('save')}, {icon: '⤓', label: 'Exporter (texte, PDF, imprimer)…', run: cmdOf('export')}, '-', {icon: '🖼️', label: 'Image de l’acte…', run: cmdOf('image')}, {icon: '↪', label: 'Mettre le texte dans le média', run: cmdOf('tomedia')}, {icon: '📋', label: 'Copier le texte', run: cmdOf('copy')}, '-', {icon: '×', label: 'Fermer', run: cmdOf('close')}],
-            Édition: () => [{icon: '↶', label: 'Annuler', shortcut: '⌘Z', disabled: !HX?.canUndo(), run: () => undoZones(false)}, {icon: '↷', label: 'Rétablir', shortcut: '⇧⌘Z', disabled: !HX?.canRedo(), run: () => undoZones(true)}, '-', {icon: '📋', label: 'Modèle d’acte', run: cmdOf('template')}, {icon: '🧭', label: 'Repérer les noms, dates, lieux', run: cmdOf('detect')}, {icon: '🔎', label: 'Lire (imprimé)', run: cmdOf('ocr')}, {icon: '✍️', label: 'Lire (manuscrit)', run: cmdOf('htr')}],
+            Édition: () => [{icon: '↶', label: 'Annuler', shortcut: '⌘Z', disabled: !HX?.canUndo(), run: () => undoZones(false)}, {icon: '↷', label: 'Rétablir', shortcut: '⇧⌘Z', disabled: !HX?.canRedo(), run: () => undoZones(true)}, '-', {icon: '📋', label: 'Modèle d’acte', run: cmdOf('template')}, {icon: '🧭', label: 'Repérer les noms, dates, lieux', run: cmdOf('detect')}, {icon: '🔎', label: 'Lire (imprimé)', run: cmdOf('ocr')}, {icon: '✨', label: 'Lire l’acte (écriture à la main)', run: cmdOf('htr')}],
             Outils: () => [{icon: '✋', label: 'Déplacer l’image', shortcut: 'H', run: () => setTool('pan')}, {icon: '▭', label: 'Dessiner une zone', shortcut: 'Z', run: () => setTool('zone')}, {icon: '🔍', label: 'Loupe', shortcut: 'L', run: cmdOf('loupe')}],
             Affichage: () => [{icon: '⤢', label: 'Ajuster à la fenêtre', shortcut: '⌘0', run: () => txBar?.zoom.fit()}, {icon: '↔', label: 'Toute la largeur (pour lire)', run: () => imgW && applyFit('width')}, {label: '100 %', shortcut: '⌘1', run: () => txBar?.zoom.actual()}, {icon: '＋', label: 'Zoom avant', shortcut: '⌘+', run: () => txBar?.zoom.in()}, {icon: '−', label: 'Zoom arrière', shortcut: '⌘−', run: () => txBar?.zoom.out()}, '-', {icon: '⟳', label: 'Tourner de 90°', run: cmdOf('rot')}, {icon: '↺', label: 'Image d’origine', run: cmdOf('resetview')}]});
         UI.editorRail?.($('[data-tx-rail]'), {breaks: ['[data-tx-cmd="loupe"]', '[data-tx-cmd="image"]']});

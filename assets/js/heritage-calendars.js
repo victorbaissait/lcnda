@@ -245,47 +245,8 @@
     /** la personne choisie dans Filtrer › Personne (une fiche) : le serveur lit ses événements et ceux de ses couples. Un nom tapé filtre ici. */
     const geneaPerson = () => { const v = window.LCNDA_UI?.listBarState?.('listes:genea_calendar')?.f?.person; return v && typeof v === 'object' && Number(v.id) ? Number(v.id) : 0; };
     /* ─── ⤓ Exporter les anniversaires dans un fichier .ics (calendrier du téléphone, de l'ordinateur) ─── */
-    function icsExportDialog() {
-        const PK = window.LCNDA_PICKER;
-        ext.openDialog({eyebrow: 'CALENDRIER', title: '⤓ Exporter les anniversaires (.ics)', submitLabel: '⤓ Télécharger le fichier',
-            body: `<p class="muted">Un fichier à ouvrir dans ton calendrier (Apple, Google, Outlook…) : chaque anniversaire revient tous les ans. Le réimporter plus tard met à jour sans créer de doublon.</p>
-                <fieldset class="h-rc-modes"><legend>Les personnes</legend>
-                    <label class="checkbox-line"><input type="radio" name="who" value="sosa" checked> Mes ancêtres directs (numérotés Sosa)</label>
-                    <label class="checkbox-line"><input type="radio" name="who" value="all"> Toute la base</label>
-                    <label class="checkbox-line"><input type="radio" name="who" value="branch"> Une branche : une personne et tous ses descendants</label>
-                    <div data-ics-branch hidden>${PK.pickerField({name: 'ics_root', kind: 'person', allowCreate: false})}</div></fieldset>
-                <label class="checkbox-line"><input type="checkbox" name="living"> Seulement les personnes en vie (sans décès noté)</label>
-                <fieldset class="h-rc-modes"><legend>Les anniversaires</legend>
-                    <label class="checkbox-line"><input type="checkbox" name="g_birth" checked> 👶 Naissances, baptêmes</label>
-                    <label class="checkbox-line"><input type="checkbox" name="g_union" checked> 💍 Mariages</label>
-                    <label class="checkbox-line"><input type="checkbox" name="g_death"> ✝️ Décès</label></fieldset>
-                <label class="checkbox-line"><input type="checkbox" name="alarm" checked> Me le rappeler la veille</label>
-                <p class="muted" data-ics-note></p>`,
-            onOpen: dl => {
-                const sync = () => { dl.querySelector('[data-ics-branch]').hidden = dl.querySelector('[name=who]:checked').value !== 'branch'; };
-                dl.querySelectorAll('[name=who]').forEach(r => r.addEventListener('change', sync));
-            },
-            onSubmit: async form => {
-                const who = form.querySelector('[name=who]:checked').value, groups = ['birth', 'union', 'death'].filter(g => form.elements['g_' + g].checked);
-                if (!groups.length) return window.LCNDA_UI.fail(form.elements.g_birth, 'Coche au moins une sorte d’anniversaire.');
-                let ids = null;
-                if (who === 'sosa') { ids = new Set(Object.keys(A().sosaMap?.() || {}).map(Number)); if (!ids.size) { toast('Aucune personne numérotée Sosa : choisis le n°1 dans Réglages → Apparence.', 'error'); return false; } }
-                if (who === 'branch') { const root = Number(PK.pickerValue?.(form.querySelector('[data-ics-branch] .pk')) || form.querySelector('[name=ics_root]')?.value || 0); if (!root) return window.LCNDA_UI.fail(form.querySelector('[data-ics-branch] .pk'), 'Choisis la personne en haut de la branche.');
-                    const m = await A().api('daboville_map', {root_id: root}); ids = new Set([root, ...Object.keys(m.map || {}).map(Number)]); }
-                const data = await A().api('genea_calendar');
-                const dead = new Set(data.events.filter(e => e.group === 'death').flatMap(e => e.who.map(w => Number(w.id))));
-                const keep = e => groups.includes(e.group) && e.who.some(w => (!ids || ids.has(Number(w.id))) && (!form.elements.living.checked || !dead.has(Number(w.id))));
-                const chosen = data.events.filter(keep), ok = chosen.filter(e => e.d && e.m && !e.approx), skipped = chosen.length - ok.length;
-                if (!ok.length) { toast(chosen.length ? `Aucune date assez précise : ${A().plural(skipped, 'date n’a', 'dates n’ont')} que l’année ou une date approchée (vers, avant…), qu’un calendrier ne sait pas placer.` : 'Personne ne correspond à ce choix.', 'error'); return false; }
-                const LABEL = {birth: 'Anniversaire de naissance', union: 'Anniversaire de mariage', death: 'Anniversaire du décès'};
-                const entries = ok.map(e => { const names = e.who.map(w => w.name).join(' et '), g = e.who[0]?.gender === 'female';
-                    return {uid: `lcnda-anniv-${e.id}@lcnda.local`, date: {y: e.y, m: e.m, d: e.d}, yearly: true, alarm: form.elements.alarm.checked,
-                        summary: `${LABEL[e.group]} de ${names} (${e.group === 'birth' ? `${g ? 'née' : 'né'} en ${e.y}` : `${e.type.toLowerCase()} en ${e.y}`})`,
-                        description: `${e.type} : ${e.text}${e.place ? ` à ${e.place}` : ''}\nExporté depuis LCNDA (généalogie).`}; });
-                A().ics.download(`anniversaires-${who === 'sosa' ? 'ancetres' : who === 'all' ? 'famille' : 'branche'}.ics`, A().ics.build(entries, {name: 'Anniversaires de la famille'}));
-                toast(`${A().plural(entries.length, 'anniversaire exporté', 'anniversaires exportés')}${skipped ? ` · ${A().plural(skipped, 'date laissée de côté', 'dates laissées de côté')} (année seule ou date approchée : un calendrier a besoin du jour précis)` : ''}.`);
-            }});
-    }
+    /* même fenêtre que Réglages → Export → « 📅 Agenda des anniversaires » : le fichier est fait par le serveur (lib/echanges.php, RFC 5545), avec les fêtes du prénom */
+    function icsExportDialog() { ext.openIcsExport?.(); }
     ext.lists.genea_calendar = calendarScreen({
         key: 'genea', eyebrow: 'LISTES · CALENDRIERS', title: '📜 Calendrier de la famille',
         intro: 'Naissances, mariages, décès et tous les événements des fiches, au jour près quand la date le dit. Sous chaque jour, sa date dans les autres calendriers (julien, républicain…) : à choisir dans ⚙️ Réglages.',
@@ -404,7 +365,13 @@
             srcs: [...ed.querySelectorAll('[data-agw-src]:checked')].map(x => x.value)}),
     };
     ext.dashboard.agenda_widget = {
-        load: async () => { const [a, g] = await Promise.all([A().api('my_agenda'), A().api('genea_calendar').catch(() => ({events: []}))]); return {agenda: a, genea: g}; },
+        // les anniversaires : seulement les jours montrés (le plus grand réglage des widgets « Mon agenda » de la page), pas tous les événements de la base
+        load: async (widgets = []) => {
+            const cfgs = (widgets.length ? widgets : [{}]).map(wcfg).filter(c => c.anniv);
+            const days = cfgs.length ? Math.min(366, Math.max(...cfgs.map(c => Number(c.days) || 7))) : 0;
+            const [a, g] = await Promise.all([A().api('my_agenda'), days ? A().api('genea_calendar', {anniv_days: days}).catch(() => ({events: []})) : Promise.resolve({events: []})]);
+            return {agenda: a, genea: g};
+        },
         render: (index, widget, span, data) => {
             const c = wcfg(widget), limit = Number(widget.limit) || 10, [ty, tm, td] = todayArr(), today = iso(ty, tm, td), endDay = iso(...addDays(ty, tm, td, Math.max(0, c.days - 1)));
             const rows = [];

@@ -220,7 +220,9 @@
     function oldestRoot(T, tr) {
         const st = T.start(tr); if (!st) return null;
         const anc = T.ancestors(tr, st.id, 30); if (!anc.length) return st;
-        const top = Math.max(...anc.map(a => a.gen)); return anc.filter(a => a.gen === top).map(a => tr.byId.get(a.id)).sort((a, b) => T.descendants(tr, [b.id]).length - T.descendants(tr, [a.id]).length || (a.by || 9999) - (b.by || 9999))[0];
+        // le nombre de descendants de chaque candidat, compté une fois (le tri le redemandait à chaque comparaison : plusieurs secondes sur une très grosse base)
+        const nDesc = new Map(), n = p => { if (!nDesc.has(p.id)) nDesc.set(p.id, T.descendants(tr, [p.id]).length); return nDesc.get(p.id); };
+        const top = Math.max(...anc.map(a => a.gen)); return anc.filter(a => a.gen === top).map(a => tr.byId.get(a.id)).sort((a, b) => n(b) - n(a) || (a.by || 9999) - (b.by || 9999))[0];
     }
     /** la mise en place : chaque descendant, sa génération, sa place (x) ; les feuilles réparties, les parents au milieu de leurs enfants */
     function growLayout(T, tr, rootId) {

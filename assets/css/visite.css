@@ -1,0 +1,45 @@
+/* ▶ Visite guidée (assets/js/app-visite.js) : le reste assombri en 4 panneaux autour du vrai bouton,
+   un halo bleu autour de lui, la bulle qui le pointe. Couleurs de l'app (variables), sombre compris. */
+.vg-root { --vg-bg: var(--card-bg, #fff); --vg-ink: var(--ink, #080808); --vg-muted: var(--muted, #666); --vg-accent: var(--blue-bright, #055dff); --vg-dim: rgba(8, 12, 20, .42); }
+.vg-root[hidden] { display: none; }
+.vg-dim { position: fixed; z-index: 9800; background: var(--vg-dim); }
+.vg-halo { position: fixed; z-index: 9810; pointer-events: none; border-radius: 8px; box-shadow: 0 0 0 3px var(--vg-accent), 0 0 0 7px rgba(5, 93, 255, .28); animation: vg-pulse 1.8s ease-in-out infinite; }
+@keyframes vg-pulse { 0%, 100% { box-shadow: 0 0 0 3px var(--vg-accent), 0 0 0 7px rgba(5, 93, 255, .28); } 50% { box-shadow: 0 0 0 3px var(--vg-accent), 0 0 0 12px rgba(5, 93, 255, .12); } }
+.vg-bubble { position: fixed; z-index: 9820; box-sizing: border-box; max-width: calc(100vw - 32px); padding: 16px 18px 14px; background: var(--vg-bg); color: var(--vg-ink); border: 2px solid var(--vg-ink); box-shadow: var(--shadow, 6px 6px 0 rgba(5, 93, 255, .34)); font-size: 15px; line-height: 1.45; transition: left .2s ease, top .2s ease; }
+.vg-bubble:focus { outline: none; }
+.vg-bubble.is-nudge { animation: vg-nudge .35s ease; }
+@keyframes vg-nudge { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+.vg-arrow { position: absolute; width: 14px; height: 14px; background: var(--vg-bg); border: 2px solid var(--vg-ink); transform: rotate(45deg); }
+.vg-bubble[data-side="below"] .vg-arrow { top: -9px; margin-left: -7px; border-right: 0; border-bottom: 0; }
+.vg-bubble[data-side="above"] .vg-arrow { bottom: -9px; margin-left: -7px; border-left: 0; border-top: 0; }
+.vg-bubble[data-side="right"] .vg-arrow { left: -9px; margin-top: -7px; border-top: 0; border-right: 0; }
+.vg-bubble[data-side="left"] .vg-arrow { right: -9px; margin-top: -7px; border-bottom: 0; border-left: 0; }
+.vg-head { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.vg-ico { font-size: 20px; line-height: 1; }
+.vg-title { flex: 1; margin: 0; font-size: 18px; line-height: 1.25; font-weight: 700; }
+.vg-count { flex: none; font-size: 12.5px; font-weight: 700; color: var(--vg-muted); white-space: nowrap; }
+.vg-text { margin: 0 0 6px; }
+.vg-bubble .vg-hint { margin: 0 0 10px; }
+.vg-dots { display: flex; gap: 6px; margin: 0 0 12px; }
+.vg-dots i { width: 8px; height: 8px; border-radius: 50%; background: var(--line-color, #d6d6d6); }
+.vg-dots i.is-done { background: rgba(5, 93, 255, .45); }
+.vg-dots i.is-on { background: var(--vg-accent); width: 20px; border-radius: 4px; }
+.is-offer .vg-dots { display: none; }
+.vg-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.vg-spacer { flex: 1; }
+.vg-skip { background: none; border: 0; padding: 6px 0; color: var(--vg-muted); font: inherit; font-size: 13.5px; text-decoration: underline; cursor: pointer; }
+.vg-skip:hover, .vg-skip:focus-visible { color: var(--vg-ink); }
+.vg-actions .button:disabled { opacity: .45; cursor: not-allowed; }
+.vg-live { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+@media (max-width: 560px) {
+    .vg-bubble { padding: 14px 14px 12px; font-size: 15px; }
+    .vg-actions .vg-skip { order: 3; width: 100%; text-align: center; }
+    .vg-actions .vg-spacer { display: none; }
+    .vg-actions .button { flex: 1; }
+}
+:root[data-theme="dark"] .vg-root { --vg-dim: rgba(0, 0, 0, .58); }
+:root[data-theme="dark"] .vg-halo { box-shadow: 0 0 0 3px var(--vg-accent), 0 0 0 7px rgba(85, 153, 255, .3); }
+/* « Réduire les animations » (Accessibilité) et le réglage de l'ordinateur */
+html.a11y-calm .vg-halo, .vg-root.is-calm .vg-halo { animation: none; }
+html.a11y-calm .vg-bubble, .vg-root.is-calm .vg-bubble { transition: none; animation: none; }
+@media (prefers-reduced-motion: reduce) { .vg-halo, .vg-bubble { animation: none !important; transition: none !important; } }

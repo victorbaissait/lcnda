@@ -1,0 +1,4 @@
+Display Name,Surname,Chromosome Number,Chromosome Start Point,Chromosome End Point,Genetic Distance,# SNPs,Full IBD,Link to Profile Page,Sex,Birth Year,Set Relationship,Predicted Relationship,Relative Similarity,Maternal / Paternal,Maternal Haplogroup,Paternal Haplogroup,Family Surnames,Family Locations
+Émile,Exemple,2,10500000,52800000,48.3,7600,FALSE,https://you.23andme.com/profile/exemple-1/,Male,1950,,Second Cousin,1.92,Paternal,H1a,R1b-U106,Exemple; Delmas,Aveyron
+Émile,Exemple,15,60100000,88200000,32.1,5200,FALSE,https://you.23andme.com/profile/exemple-1/,Male,1950,,Second Cousin,1.92,Paternal,H1a,R1b-U106,Exemple; Delmas,Aveyron
+Rose,Modèle,X,20000000,41000000,25.0,3100,FALSE,https://you.23andme.com/profile/exemple-2/,Female,1975,,Third Cousin,0.41,Maternal,U5b,,Modèle,Bretagne

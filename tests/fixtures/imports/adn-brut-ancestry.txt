@@ -1,0 +1,8 @@
+#AncestryDNA raw data download
+#Données inventées pour les tests de LCNDA
+rsid	chromosome	position	allele1	allele2
+rs0000011	1	82154	A	A
+rs0000012	1	752566	A	G
+rs0000013	1	752721	G	G
+rs0000014	1	776546	A	A
+rs0000015	1	798959	A	G

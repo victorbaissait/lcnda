@@ -1286,6 +1286,15 @@ function ensure_schema(PDO $pdo): void
     $pdo->exec('CREATE INDEX IF NOT EXISTS idx_label_links_label ON label_links(label_id)');
 }
 
+/** Un travail lourd sur une très grosse base (contrôle, export) : au moins $mb Mo de mémoire pour PHP (« 1G », « 1024M »… ; -1 = sans limite). */
+function memory_at_least(int $mb): void
+{
+    $cur = trim((string) ini_get('memory_limit'));
+    if ($cur === '-1' || $cur === '') { return; }
+    $bytes = (int) $cur * match (strtoupper(substr($cur, -1))) { 'G' => 1 << 30, 'M' => 1 << 20, 'K' => 1 << 10, default => 1 };
+    if ($bytes < $mb * 1048576) { @ini_set('memory_limit', $mb . 'M'); }
+}
+
 function json_response(mixed $data, int $status = 200): never
 {
     http_response_code($status);

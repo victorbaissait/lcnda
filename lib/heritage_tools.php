@@ -68,7 +68,7 @@ function kiosk_blocks(string $action, bool $isWrite): bool
 {
     // backup_sqlite : seulement la sauvegarde automatique dans le dossier de l'app (vérifié dans api.php)
     $allowedWrites = ['kiosk_exit', 'save_settings', 'backup_sqlite', 'offsite_copy_now', 'museum_sign']; // le livre d'or du musée se signe aussi en consultation
-    $blockedReads = ['export_csv', 'export_csv_global', 'export_gedcom', 'export_json', 'export_sqlite', 'export_full_backup', 'export_research_report', 'export_family_book', 'sync_export', 'vault_download', 'museum_export', 'export_my_list', 'export_custom_block_def', 'family_share_preview', 'family_share_export', 'website_export', 'desk_widget_file'];
+    $blockedReads = ['export_csv', 'export_csv_global', 'export_gedcom', 'export_plus', 'export_json', 'export_sqlite', 'export_full_backup', 'export_research_report', 'export_family_book', 'sync_export', 'vault_download', 'museum_export', 'export_my_list', 'export_custom_block_def', 'family_share_preview', 'family_share_export', 'website_export', 'desk_widget_file'];
     return ($isWrite && !in_array($action, $allowedWrites, true)) || (!$isWrite && in_array($action, $blockedReads, true)) || in_array($action, ['switch_database', 'delete_database', 'clone_database'], true);
 }
 
@@ -443,27 +443,22 @@ function journey_speed(int $year): ?float
 
 function impossible_journeys(PDO $pdo, int $personId = 0): array
 {
-    $filter = $personId ? ' AND who.pid=' . $personId : '';
-    $rows = $pdo->query("SELECT who.pid, who.role, e.id AS event_id, e.date_text, e.year, e.date_calendar, t.label AS type_label,
+    // Lu dans l'ordre des personnes, une personne à la fois (une très grosse base ne tient plus en mémoire d'un bloc) ;
+    // pour une seule fiche, chaque branche ne lit que ses événements (index).
+    $pf = $personId ? ' AND %s=' . $personId : '';
+    $stmt = $pdo->query("SELECT who.pid, who.role, e.id AS event_id, e.date_text, e.year, e.date_calendar, t.label AS type_label,
             COALESCE(e.precise_lat, pl.latitude) AS lat, COALESCE(e.precise_lon, pl.longitude) AS lon, pl.name AS place_name,
-            COALESCE((SELECT trim(op.first_name||' '||op.last_name) FROM persons op WHERE op.id=e.person_id),'') AS owner_name
+            e.person_id AS owner_id
         FROM (
-            SELECT id AS eid, person_id AS pid, '' AS role FROM events WHERE person_id IS NOT NULL
-            UNION ALL SELECT e.id, f.partner1_id, '' FROM events e JOIN families f ON f.id=e.family_id WHERE f.partner1_id IS NOT NULL
-            UNION ALL SELECT e.id, f.partner2_id, '' FROM events e JOIN families f ON f.id=e.family_id WHERE f.partner2_id IS NOT NULL
-            UNION ALL SELECT w.event_id, w.person_id, COALESCE(NULLIF(w.note,''),'témoin') FROM event_witnesses w
+            SELECT id AS eid, person_id AS pid, '' AS role FROM events WHERE person_id IS NOT NULL" . sprintf($pf, 'person_id') . "
+            UNION ALL SELECT e.id, f.partner1_id, '' FROM events e JOIN families f ON f.id=e.family_id WHERE f.partner1_id IS NOT NULL" . sprintf($pf, 'f.partner1_id') . "
+            UNION ALL SELECT e.id, f.partner2_id, '' FROM events e JOIN families f ON f.id=e.family_id WHERE f.partner2_id IS NOT NULL" . sprintf($pf, 'f.partner2_id') . "
+            UNION ALL SELECT w.event_id, w.person_id, COALESCE(NULLIF(w.note,''),'témoin') FROM event_witnesses w WHERE 1" . sprintf($pf, 'w.person_id') . "
         ) who JOIN events e ON e.id=who.eid JOIN event_types t ON t.id=e.event_type_id JOIN places pl ON pl.id=e.place_id
-        WHERE COALESCE(e.precise_lat, pl.latitude) IS NOT NULL AND e.year IS NOT NULL AND e.year < 1930{$filter}")->fetchAll();
-    $byPerson = [];
-    foreach ($rows as $r) {
-        if (($r['date_calendar'] ?? 'gregorian') !== 'gregorian' && $r['date_calendar'] !== '') { continue; }
-        $d = exact_date((string) $r['date_text']);
-        if (!$d || ((float) $r['lat'] == 0.0 && (float) $r['lon'] == 0.0)) { continue; }
-        $r['date'] = $d;
-        $byPerson[(int) $r['pid']][$r['event_id'] . '|' . $r['role']] = $r;
-    }
+        WHERE COALESCE(e.precise_lat, pl.latitude) IS NOT NULL AND e.year IS NOT NULL AND e.year < 1930
+        ORDER BY who.pid");
     $alerts = [];
-    foreach ($byPerson as $pid => $events) {
+    $check = static function (int $pid, array $events) use (&$alerts): void {
         $events = array_values($events);
         usort($events, static fn($a, $b) => strcmp($a['date'], $b['date']));
         $n = count($events);
@@ -480,12 +475,33 @@ function impossible_journeys(PDO $pdo, int $personId = 0): array
                 $alerts[] = ['person_id' => $pid, 'km' => round($km), 'days' => (int) $days, 'speed_limit' => $speed, 'a' => $events[$i], 'b' => $events[$j], 'ratio' => round($km / $allowed, 1)];
             }
         }
+    };
+    $cur = null; $events = [];
+    foreach ($stmt as $r) {
+        $pid = (int) $r['pid'];
+        if ($pid !== $cur) { if ($cur !== null && count($events) > 1) { $check($cur, $events); } $cur = $pid; $events = []; }
+        if (($r['date_calendar'] ?? 'gregorian') !== 'gregorian' && $r['date_calendar'] !== '') { continue; }
+        $d = exact_date((string) $r['date_text']);
+        if (!$d || ((float) $r['lat'] == 0.0 && (float) $r['lon'] == 0.0)) { continue; }
+        $r['date'] = $d;
+        $events[$r['event_id'] . '|' . $r['role']] = $r;
     }
+    if ($cur !== null && count($events) > 1) { $check($cur, $events); }
     usort($alerts, static fn($x, $y) => $y['ratio'] <=> $x['ratio']);
+    $alerts = array_slice($alerts, 0, 300);
+    // le nom de la personne à qui appartient chaque événement (seulement pour les alertes gardées)
+    $owners = [];
+    foreach ($alerts as $a) { foreach (['a', 'b'] as $k) { if ($a[$k]['owner_id']) { $owners[(int) $a[$k]['owner_id']] = ''; } } }
+    if ($owners) {
+        foreach ($pdo->query('SELECT id, trim(first_name||\' \'||last_name) AS n FROM persons WHERE id IN (' . implode(',', array_keys($owners)) . ')') as $o) { $owners[(int) $o['id']] = (string) $o['n']; }
+    }
     $people = collection_people($pdo, array_column($alerts, 'person_id'));
-    foreach ($alerts as &$a) { $a['person'] = $people[$a['person_id']] ?? null; }
+    foreach ($alerts as &$a) {
+        foreach (['a', 'b'] as $k) { $a[$k]['owner_name'] = $owners[(int) $a[$k]['owner_id']] ?? ''; unset($a[$k]['owner_id']); }
+        $a['person'] = $people[$a['person_id']] ?? null;
+    }
     unset($a);
-    return array_slice($alerts, 0, 300);
+    return $alerts;
 }
 
 /* ─── 🤝 Travail à deux : paquets de modifications ───────────────────── */

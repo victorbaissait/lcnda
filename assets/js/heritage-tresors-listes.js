@@ -60,6 +60,8 @@
         const ws = o.ws, body = ws.querySelector('[data-trl-body]');
         const bar = UI.listBar({key: KEY, search: {placeholder: o.search.placeholder}, filters: defs, sort: {options, value: o.sorts[0][0]}, onChange: () => paint()});
         ws.querySelector('[data-trl-bar]').replaceWith(bar);
+        // o.page : une longue liste (une très grosse base) montre o.page lignes, puis « Voir les N suivants ↓ » (C6)
+        let shownN = o.page || 0, pageSig = '';
         function paint() {
             const st = bar.state, words = fold(st.q).split(/\s+/).filter(Boolean);
             let rows = o.items.filter(it => (!words.length || words.every(w => fold(o.search.text(it)).includes(w))) && o.filters.every(f => !isOn(f, st.filters[f.id]) || f.test(it, st.filters[f.id])));
@@ -68,10 +70,12 @@
             else if (col) rows = [...rows].sort((a, b) => { const r = cmpVal(col.val(a), col.val(b)); return m[2] === 'desc' && r && !(col.val(a) === '' || col.val(b) === '') ? -r : r; });
             const one = o.noun[0], many = o.noun[1] || '';
             bar.setCount(rows.length === total ? A().plural(total, one, many) : `${A().plural(rows.length, one, many)} sur ${total.toLocaleString('fr-FR')}`);
-            const shown = o.max ? rows.slice(0, o.max) : rows;
+            const sig = JSON.stringify([st.q, st.filters, st.sort]); if (sig !== pageSig) { pageSig = sig; shownN = o.page || 0; }
+            const shown = o.max ? rows.slice(0, o.max) : shownN ? rows.slice(0, shownN) : rows;
             const mark = c => { const [up, down] = colIds(c); return st.sort === up ? '<span class="sort-mark"> ↑</span>' : st.sort === down ? '<span class="sort-mark"> ↓</span>' : ''; };
             body.innerHTML = rows.length ? `<div class="data-table-wrap"><table class="data-table h-trl-table"><thead><tr>${o.cols.map(c => `<th><button type="button" data-trl-col="${esc(c.key)}" title="Trier par cette colonne">${esc(c.label)}${mark(c)}</button></th>`).join('')}<th></th></tr></thead><tbody>${shown.map(o.row).join('')}</tbody></table></div>${o.max && rows.length > o.max ? A().empty(`Les ${o.max} premières lignes sont montrées.`, {icon: 'ℹ️', hint: o.moreHint || ''}) : ''}`
                 : A().emptyState({icon: '🔍', text: o.noneText || 'Rien ne correspond', hint: 'Change les mots cherchés ou retire un filtre.', action: {label: 'Tout effacer', attrs: 'data-trl-clear'}});
+            if (shownN && rows.length > shownN && !o.max && UI.moreButton) { body.appendChild(UI.moreButton({remaining: rows.length - shownN, step: o.page, onClick: () => { shownN += o.page; paint(); }})); }
             A().bindTableLinks?.();
         }
         body.addEventListener('click', e => {
@@ -148,7 +152,7 @@
             async () => { const [tr, list] = await Promise.all([T().tree(), T().items('stamp')]); return {tr, list}; }); if (!r) return;
         const {tr, list} = r.data, pls = ext.tresorStamps?.treePlaces ? ext.tresorStamps.treePlaces(T(), tr) : [], visits = new Map(list.map(v => [v.place_id, v]));
         const dept = p => tr.places?.[p.id]?.county || '', depts = [...new Set(pls.map(dept).filter(Boolean))].sort(cmpTxt), npp = p => p.people?.size || 0;
-        barList({ws: r.ws, head: r.head, key: 'tr_stamps', items: pls, noun: ['lieu', 'lieux'], noneText: 'Aucun lieu ne correspond',
+        barList({ws: r.ws, head: r.head, key: 'tr_stamps', items: pls, noun: ['lieu', 'lieux'], noneText: 'Aucun lieu ne correspond', page: 200,
             search: {placeholder: 'Chercher un lieu… (nom, département, note)', text: p => [p.name, dept(p), visits.get(p.id)?.data?.note].join(' ')},
             filters: [{id: 'visit', label: 'Visite', type: 'check', options: counted(pls, [['visites', '✅ Visités'], ['avoir', 'À visiter']], (p, k) => (k === 'visites') === visits.has(p.id)), test: (p, v) => v.some(k => (k === 'visites') === visits.has(p.id))},
                 ...(depts.length ? [{id: 'dept', label: 'Département', type: 'check', options: counted(pls, depts.map(d => [d, d]), (p, d) => dept(p) === d), test: (p, v) => v.includes(dept(p))}] : [])],
