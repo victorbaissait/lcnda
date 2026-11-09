@@ -176,8 +176,9 @@
     async function openPet(id, view = '', tab = '') {
         const st = S(); id = Number(id) || 0; if (!id) return;
         if (view === 'pedigree') { st.hPet = id; st.hPetView = view; st.listType = 'pets'; if (st.module === 'listes') ext.lists.pets(++st.workspaceToken); else A().setModule('listes'); return; }
-        let pid = 0, pet = null;
+        let pid = 0, pet = null; const token = st.workspaceToken; // une autre page ouverte pendant l'attente (Recensement, groupe…) passe devant : on ne revient pas en arrière
         try { pet = await api('pet', {id}); pid = Number(pet.person_id) || 0; } catch (error) { toast(error.message, 'error'); return; }
+        if (token !== st.workspaceToken) return;
         // sa fiche complète a été supprimée (avant que l'animal parte avec elle) : on demande, on ne la refait plus en silence
         if (!pid) { if (document.body.classList.contains('is-kiosk')) { toast('Cette fiche ne peut pas s’ouvrir en mode consultation.'); return; } orphanPet(id, pet?.title || ''); return; }
         st.hPet = 0; st.hPetView = ''; st.sheetFocus = TAB_BLOCK[tab] || '';
