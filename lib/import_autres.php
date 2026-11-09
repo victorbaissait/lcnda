@@ -24,7 +24,31 @@ const FTM_MESSAGE = 'Family Tree Maker chiffre ses fichiers .ftm : aucun autre l
 function echanges_foreign_ext(string $name): string
 {
     $ext = strtolower(pathinfo($name, PATHINFO_EXTENSION));
-    return in_array($ext, ['rmtree', 'rmgc', 'rmbackup', 'ftm', 'ftmb', 'ftw'], true) ? $ext : '';
+    return in_array($ext, ['rmtree', 'rmgc', 'rmbackup', 'ftm', 'ftmb', 'ftw', 'gw', 'gwplus', 'json', 'xml', 'gedx', 'gno', 'gwb'], true) ? $ext : ''; // GeneWeb, GEDCOM-X, GenoPro : lib/import_geneweb.php, lib/import_gedcomx.php
+}
+
+/** GenoPro : son .gno (XML zippé) n'a pas de description publique fiable → refusé avec la marche à suivre. */
+const GENOPRO_MESSAGE = 'Le fichier .gno de GenoPro n’a pas de description publique fiable : il n’est pas lu, pour ne rien abîmer. Dans GenoPro, fais « Fichier → Exporter → GEDCOM », puis importe ici le fichier .ged : il est reconnu comme venant de GenoPro.';
+
+/**
+ * Un fichier GeneWeb ou GEDCOM-X → [texte GEDCOM, nombres, nom du logiciel] ; null si ce n'en est pas un (un .json ou .xml
+ * qui n'est pas du GEDCOM-X est laissé tel quel pour l'analyse habituelle).
+ */
+function echanges_translate_foreign(string $ext, string $path): ?array
+{
+    if ($ext === 'gw' || $ext === 'gwplus') {
+        require_once __DIR__ . '/import_geneweb.php';
+        [$ged, $c] = geneweb_to_gedcom((string) file_get_contents($path));
+        return [$ged, $c, 'geneweb'];
+    }
+    if ($ext === 'json' || $ext === 'xml') {
+        $h = @fopen($path, 'rb'); $head = $h ? (string) fread($h, 65536) : ''; if ($h) { fclose($h); }
+        require_once __DIR__ . '/import_gedcomx.php';
+        if (!gedcomx_sniff($head)) { return null; }
+        [$ged, $c] = gedcomx_to_gedcom((string) file_get_contents($path));
+        return [$ged, $c, 'gedcomx'];
+    }
+    return null;
 }
 
 /**
@@ -43,12 +67,23 @@ function echanges_intercept_upload(string $action, ?array &$importFile): void
         if ($ext === '') { continue; }
         if (in_array($ext, ['ftm', 'ftmb', 'ftw'], true)) { json_response(['error' => FTM_MESSAGE, 'format' => 'ftm'], 422); }
         if ($ext === 'rmbackup') { json_response(['error' => 'C’est une sauvegarde de RootsMagic (.rmbackup) : ouvre-la dans RootsMagic (Fichier → Restaurer), puis importe ici le fichier .rmtree.'], 422); }
-        try { [$ged] = rootsmagic_to_gedcom((string) $f['tmp_name']); }
-        catch (RuntimeException $e) { json_response(['error' => $e->getMessage(), 'format' => 'rootsmagic'], 422); }
+        if ($ext === 'gno') { json_response(['error' => GENOPRO_MESSAGE, 'format' => 'genopro'], 422); }
+        if ($ext === 'gwb') { json_response(['error' => 'C’est une base GeneWeb (.gwb), illisible hors de GeneWeb. Dans GeneWeb, fais « gwu » (ou exporte la base en .gw) puis importe ici le fichier .gw.', 'format' => 'geneweb'], 422); }
+        if ($ext === 'gedx') { json_response(['error' => 'Le paquet GEDCOM-X (.gedx) n’est pas encore lu : importe plutôt le fichier GEDCOM-X en JSON ou en XML (ou un GEDCOM).', 'format' => 'gedcomx'], 422); }
+        $from = 'rootsmagic'; $convWarn = [];
+        try {
+            if (in_array($ext, ['gw', 'gwplus', 'json', 'xml'], true)) {
+                $tr = echanges_translate_foreign($ext, (string) $f['tmp_name']);
+                if ($tr === null) { continue; } // un .json / .xml ordinaire : l'analyse habituelle s'en charge
+                [$ged, $trc, $from] = $tr;
+                $convWarn = array_slice(array_map('strval', (array) ($trc['warnings'] ?? [])), 0, 20);
+            } else { [$ged] = rootsmagic_to_gedcom((string) $f['tmp_name']); }
+        }
+        catch (RuntimeException $e) { json_response(['error' => $e->getMessage(), 'format' => $from], 422); }
         $out = tempnam(sys_get_temp_dir(), 'lcrm');
         file_put_contents($out, $ged);
         register_shutdown_function(static fn() => @unlink($out));
-        $conv = ['name' => preg_replace('/\.[^.]+$/', '', (string) $f['name']) . '.ged', 'tmp_name' => $out, 'error' => UPLOAD_ERR_OK, 'size' => strlen($ged), 'converted_from' => 'rootsmagic'] + array_diff_key($f, array_flip(['name', 'tmp_name', 'size', 'error', 'type']));
+        $conv = ['name' => preg_replace('/\.[^.]+$/', '', (string) $f['name']) . '.ged', 'tmp_name' => $out, 'error' => UPLOAD_ERR_OK, 'size' => strlen($ged), 'converted_from' => $from, 'converted_warnings' => $convWarn] + array_diff_key($f, array_flip(['name', 'tmp_name', 'size', 'error', 'type']));
         if ($t === 'files') { $_FILES['file'] = $conv + ['type' => 'text/plain']; } else { $importFile = $conv; }
     }
 }

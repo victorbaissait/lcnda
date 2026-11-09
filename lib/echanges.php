@@ -128,8 +128,10 @@ function echanges_dataset(PDO $pdo, bool $shareDefault = true): array
         $notes[$n['entity_type'] . ':' . (int) $n['entity_id']][] = $n;
     }
     $media = []; $mediaBy = [];
+    $privateMedia = $hidden ? echanges_media_touching($pdo, $hidden) : []; // une personne cachée y figure : la photo ne part pas
     foreach ($pdo->query('SELECT ml.entity_type, ml.entity_id, m.* FROM media_links ml JOIN media m ON m.id=ml.media_id ORDER BY ml.position, ml.id') as $m) {
         if (!$open((string) $m['entity_type'], (int) $m['entity_id'])) { continue; }
+        if (isset($privateMedia[(int) $m['id']])) { continue; }
         $mediaBy[$m['entity_type'] . ':' . (int) $m['entity_id']][(int) $m['id']] = true;
         $media[(int) $m['id']] = $m;
     }
@@ -152,6 +154,37 @@ function echanges_dataset(PDO $pdo, bool $shareDefault = true): array
     return ['share' => $share, 'mode' => $mode, 'persons' => $persons, 'hidden' => array_intersect_key($hidden, $persons), 'families' => $fams, 'children' => $children,
         'events' => $events, 'byPerson' => $byPerson, 'byFamily' => $byFamily, 'places' => $places, 'sources' => $sources, 'citations' => $citations,
         'notes' => $notes, 'media' => $media, 'mediaBy' => $mediaBy, 'labels' => $labels, 'labelList' => $labelList, 'variants' => $variants, 'witnesses' => $witnesses];
+}
+
+/**
+ * Médias où figure une personne cachée (vivante ou confidentielle) : reliés à elle, à un de ses événements, à sa famille,
+ * repérés sur la photo (media_tags) ou son portrait. Une seule personne cachée suffit : le média ne part pas (id => true).
+ */
+function echanges_media_touching(PDO $pdo, array $hidden): array
+{
+    if (!$hidden) { return []; }
+    $out = [];
+    $fam = [];
+    foreach ($pdo->query('SELECT id, partner1_id, partner2_id FROM families') as $f) { $fam[(int) $f['id']] = [(int) $f['partner1_id'], (int) $f['partner2_id']]; }
+    foreach ($pdo->query("SELECT ml.media_id, ml.entity_type, ml.entity_id, e.person_id AS ev_person, e.family_id AS ev_family FROM media_links ml LEFT JOIN events e ON ml.entity_type='event' AND e.id=ml.entity_id") as $l) {
+        $who = [];
+        $t = (string) $l['entity_type']; $eid = (int) $l['entity_id'];
+        if ($t === 'person') { $who[] = $eid; }
+        elseif ($t === 'event') { $who[] = (int) $l['ev_person']; foreach ($fam[(int) $l['ev_family']] ?? [] as $x) { $who[] = $x; } }
+        elseif ($t === 'family') { foreach ($fam[$eid] ?? [] as $x) { $who[] = $x; } }
+        foreach ($who as $pid) { if ($pid && isset($hidden[$pid])) { $out[(int) $l['media_id']] = true; break; } }
+    }
+    try { foreach ($pdo->query('SELECT media_id, person_id FROM media_tags WHERE person_id IS NOT NULL') as $t) { if (isset($hidden[(int) $t['person_id']])) { $out[(int) $t['media_id']] = true; } } } catch (Throwable) {}
+    foreach ($pdo->query('SELECT id, portrait_media_id FROM persons WHERE portrait_media_id IS NOT NULL') as $p) { if (isset($hidden[(int) $p['id']])) { $out[(int) $p['portrait_media_id']] = true; } }
+    return $out;
+}
+
+/** Type d'un fichier d'après son extension (GEDCOM 7, Gramps, paquets). */
+function echanges_mime(string $ext): string
+{
+    return match (strtolower($ext)) { 'jpg', 'jpeg' => 'image/jpeg', 'png' => 'image/png', 'gif' => 'image/gif', 'webp' => 'image/webp', 'tif', 'tiff' => 'image/tiff', 'bmp' => 'image/bmp',
+        'heic' => 'image/heic', 'pdf' => 'application/pdf', 'mp3' => 'audio/mpeg', 'm4a' => 'audio/mp4', 'wav' => 'audio/wav', 'ogg' => 'audio/ogg', 'aif', 'aiff' => 'audio/aiff',
+        'mp4' => 'video/mp4', 'mov' => 'video/quicktime', 'webm' => 'video/webm', 'txt' => 'text/plain', default => 'application/octet-stream' };
 }
 
 /** Nom complet d'un lieu « Commune, Département, Région, Pays » (sans répétition). */
@@ -257,6 +290,8 @@ function export_plus(PDO $pdo): never
             'ics' => export_ics($pdo),
             'vcard' => export_vcard($pdo),
             'kml', 'geojson' => export_places_geo($pdo, $format),
+            'gedzip', 'gpkg' => (static function () use ($pdo, $format) { require_once __DIR__ . '/export_paquets.php'; export_paquet($pdo, $format); })(), // avec les photos
+            'obsidian', 'graphml', 'dot' => (static function () use ($pdo, $format) { require_once __DIR__ . '/echanges_reseau.php'; ('export_' . $format)($pdo); })(), // 🗒 Obsidian, 🕸 réseau (lib/echanges_reseau.php)
             default => json_response(['error' => 'Format d’export inconnu.'], 422),
         };
     } catch (RuntimeException $e) {
@@ -381,6 +416,7 @@ function export_gedcomx(PDO $pdo): never
         if ($n = $notesOf('person:' . $pid)) { $person['notes'] = $n; }
         if ($s = $sourceRefs('person:' . $pid)) { $person['sources'] = $s; }
         if (trim((string) ($p['familysearch_id'] ?? '')) !== '') { $person['identifiers'] = ['http://gedcomx.org/Persistent' => ['https://www.familysearch.org/ark:/61903/4:1:' . trim((string) $p['familysearch_id'])]]; }
+        if (preg_match('/^Q\d{1,12}$/', trim((string) ($p['wikidata_id'] ?? '')))) { $person['identifiers']['http://gedcomx.org/Primary'][] = 'http://www.wikidata.org/entity/' . trim((string) $p['wikidata_id']); }
         $doc['persons'][] = $person;
     }
     $relType = static fn(string $r): ?string => match ($r) { 'adopted' => 'http://gedcomx.org/AdoptiveParent', 'foster' => 'http://gedcomx.org/FosterParent', 'step' => 'http://gedcomx.org/StepParent', 'biological' => 'http://gedcomx.org/BiologicalParent', default => null };

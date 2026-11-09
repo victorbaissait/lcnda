@@ -130,7 +130,7 @@
             const f = {author: names(['auteur', 'graveur', 'photographe', 'illustrateur', 'autre']), editor: names(['dir']), translator: names(['trad']), title: i.title,
                 [d.kind === 'article' || d.kind === 'presse' ? 'journal' : 'booktitle']: d.container, [d.kind === 'these' ? 'school' : 'publisher']: d.publisher, address: d.place, year: year(i), volume: d.volume, number: d.issue,
                 pages: (d.pages || '').replace(/\s*[–-]+\s*/, '--'), edition: d.edition, isbn: d.isbn, doi: d.doi, url: d.url, language: d.language, abstract: d.abstract, keywords: (i.tags || []).join(', '),
-                note: [d.archive, d.call_number].filter(Boolean).join(', ')};
+                date: d.date && String(d.date) !== String(year(i)) ? d.date : '', urldate: d.accessed, archive: d.archive, callnumber: d.call_number, note: d.notes}; // archive et cote à part : relus tels quels (lib/atelier.php)
             const texEsc = (k, v) => ['url', 'doi'].includes(k) ? String(v).replace(/[{}]/g, '') : String(v).replace(/[{}]/g, '').replace(/([&%#_$])/g, '\\$1');
             return `@${BIB_TYPES[d.kind] || 'misc'}{${key},\n${Object.entries(f).filter(([, v]) => v).map(([k, v]) => `  ${k} = {${texEsc(k, v)}}`).join(',\n')}\n}`;
         }).join('\n\n') + '\n';
@@ -140,7 +140,7 @@
             const d = i.data || {}, L = [['TY', RIS_TYPES[d.kind] || 'GEN'], ['TI', i.title]];
             creatorsOf(i).forEach(c => L.push([{dir: 'ED', trad: 'A4', editeur: 'A3'}[c.role] || 'AU', [c.last, c.first].filter(Boolean).join(', ')]));
             const [sp, ep] = String(d.pages || '').split(/\s*[–-]+\s*/);
-            [['PY', year(i)], ['T2', d.container], ['PB', d.publisher], ['CY', d.place], ['VL', d.volume], ['IS', d.issue], ['SP', sp], ['EP', ep], ['SN', d.isbn], ['DO', d.doi], ['UR', d.url], ['LA', d.language], ['AB', d.abstract], ['AV', d.archive], ['CN', d.call_number]].forEach(([k, v]) => { if (v) L.push([k, v]); });
+            [['PY', year(i)], ['DA', d.date && String(d.date) !== String(year(i)) ? d.date : ''], ['Y2', d.accessed], ['ET', d.edition], ['N1', d.notes], ['T2', d.container], ['PB', d.publisher], ['CY', d.place], ['VL', d.volume], ['IS', d.issue], ['SP', sp], ['EP', ep], ['SN', d.isbn], ['DO', d.doi], ['UR', d.url], ['LA', d.language], ['AB', d.abstract], ['AV', d.archive], ['CN', d.call_number]].forEach(([k, v]) => { if (v) L.push([k, v]); });
             (i.tags || []).forEach(t => L.push(['KW', t]));
             L.push(['ER', '']);
             return L.map(([k, v]) => `${k}  - ${String(v).replace(/\n/g, ' ')}`).join('\n');
@@ -169,7 +169,7 @@
     /* ═══════════ Les projets ═══════════ */
     const firstNode = () => CFG.nav.find(x => !x.hidden)?.key || 'all';
     /** Choisir un fichier : son nom et son texte (ou null). */
-    const pickNamedFile = accept => new Promise(resolve => { const input = Object.assign(document.createElement('input'), {type: 'file', accept}); input.addEventListener('change', async () => { const f = input.files[0]; resolve(f ? {name: f.name, text: await f.text()} : null); }); input.click(); });
+    const pickNamedFile = accept => new Promise(resolve => { const input = Object.assign(document.createElement('input'), {type: 'file', accept}); input.addEventListener('change', async () => { const f = input.files[0]; if (!f) return resolve(null); const SH = window.LCNDA_SHEET; resolve({name: f.name, text: SH?.decodeBytes ? SH.decodeBytes(new Uint8Array(await f.arrayBuffer())).text : await f.text()}); }); input.click(); }); // RIS d'un vieil EndNote en Windows-1252 : accents gardés
     const importSummary = r => [plural(r.count, 'référence', 'références'), r.notes ? plural(r.notes, 'note', 'notes') : '', r.links ? plural(r.links, 'lien', 'liens') : '', r.folders ? plural(r.folders, 'dossier', 'dossiers') : ''].filter(Boolean).join(', ') + ` (${r.format})` + (r.files_skipped ? ` — ${plural(r.files_skipped, 'fichier joint', 'fichiers joints')} (PDF…) à rajouter à la main` : '');
     const IMPORT_ACCEPT = '.rdf,.json,.xml,.bib,.ris,.txt,application/json,text/xml,application/rdf+xml';
     function importProjectDialog(kinds) {
@@ -191,6 +191,7 @@
             },
         });
     }
+    ext.atelierRefs = {toBibtex, toRis}; // pour les essais (aller-retour .bib / .ris : tests/test-imports-exports-3b.js)
     ext.atelier = async token => {
         CFG = loadCfg();
         const v = st();

@@ -152,22 +152,35 @@ function import_dna_matches(PDO $pdo, array $d): array
     // jamais un fichier brut de SNP (« rs12345 », génotypes) : vie privée et loi française
     $snp = 0; foreach (array_slice($rows, 0, 200) as $r) { if (is_array($r) && preg_match('/^(rs|i)\d{3,}$/i', trim((string) ($r['name'] ?? '')))) { $snp++; } }
     if ($rows && $snp >= max(3, (int) (min(200, count($rows)) * 0.5))) { throw new LcndaBadInput('Ce fichier ressemble à un fichier ADN brut (des SNP « rs… ») : il n’est jamais importé, par prudence pour la vie privée et la loi française. Importe plutôt la liste des correspondances ou des segments.'); }
-    $groups = dna_group_ids($pdo); $added = 0; $updated = 0; $addedIds = []; $oldRows = [];
+    $groups = dna_group_ids($pdo); $added = 0; $updated = 0; $addedIds = []; $oldRows = []; $groupsAdded = [];
     $find = $pdo->prepare('SELECT * FROM dna_matches WHERE kit_id=? AND name=?');
     $own = !$pdo->inTransaction(); if ($own) { $pdo->beginTransaction(); }
     try {
+        // grappes des fichiers de Genetic Affairs (AutoCluster, AutoTree) : un groupe par grappe, créé s'il n'existe pas (même nom)
+        $clusterGroup = static function (string $label) use ($pdo, &$groups, &$groupsAdded): int {
+            static $palette = ['#4e79a7', '#e15759', '#59a14f', '#f28e2b', '#b07aa1', '#76b7b2', '#edc948', '#ff9da7', '#9c755f', '#bab0ac', '#1f77b4', '#d62728'];
+            $s = $pdo->prepare('SELECT id FROM dna_groups WHERE name=?'); $s->execute([$label]);
+            if ($id = (int) $s->fetchColumn()) { return $id; }
+            if (count($groupsAdded) >= 500) { return 0; }
+            $n = (int) $pdo->query('SELECT count(*) FROM dna_groups')->fetchColumn();
+            $pdo->prepare('INSERT INTO dna_groups(name, color, notes, position) VALUES(?,?,?,?)')->execute([$label, $palette[$n % count($palette)], 'Créé à l’import d’un fichier de grappes (Genetic Affairs).', $n]);
+            $id = (int) $pdo->lastInsertId(); $groups[] = $id; $groupsAdded[] = $id;
+            return $id;
+        };
         foreach ($rows as $r) {
             if (!is_array($r)) { continue; }
             $name = mb_substr(safe_text($r['name'] ?? ''), 0, 200); if ($name === '') { continue; }
+            $cluster = mb_substr(safe_text($r['cluster'] ?? ''), 0, 80);
+            $gid = $cluster !== '' ? $clusterGroup($cluster) : 0;
             $find->execute([$kit, $name]); $old = $find->fetch();
             if ($old) {
                 if (!isset($oldRows[(int) $old['id']])) { $oldRows[(int) $old['id']] = $old; }
                 $data = array_merge(json_decode((string) $old['data_json'], true) ?: [], array_filter(is_array($r['data'] ?? null) ? $r['data'] : [], static fn($v) => $v !== '' && $v !== null && $v !== []));
                 $v = dna_match_vals($pdo, ['name' => $name, 'person_id' => $old['person_id'], 'shared_cm' => $r['shared_cm'] ?? 0, 'segments' => $r['segments'] ?? 0, 'longest_cm' => $r['longest_cm'] ?? 0, 'relationship' => $r['relationship'] ?? '',
-                    'side' => ($r['side'] ?? '') ?: $old['side'], 'groups' => array_map('intval', explode(',', (string) $old['group_ids'])), 'status' => $old['status'], 'data' => $data], $groups);
+                    'side' => ($r['side'] ?? '') ?: $old['side'], 'groups' => array_values(array_unique(array_filter([...array_map('intval', explode(',', (string) $old['group_ids'])), $gid]))), 'status' => $old['status'], 'data' => $data], $groups);
                 $pdo->prepare('UPDATE dna_matches SET name=?, person_id=?, shared_cm=?, segments=?, longest_cm=?, relationship=?, side=?, group_ids=?, status=?, data_json=?, updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([...$v, (int) $old['id']]); $updated++;
             } else {
-                $v = dna_match_vals($pdo, ['name' => $name] + $r, $groups);
+                $v = dna_match_vals($pdo, ['name' => $name] + ($gid ? ['groups' => [$gid]] : []) + $r, $groups);
                 $pdo->prepare('INSERT INTO dna_matches(name, person_id, shared_cm, segments, longest_cm, relationship, side, group_ids, status, data_json, kit_id) VALUES(?,?,?,?,?,?,?,?,?,?,?)')->execute([...$v, $kit]); $added++;
                 $addedIds[] = (int) $pdo->lastInsertId();
             }
@@ -175,8 +188,8 @@ function import_dna_matches(PDO $pdo, array $d): array
         if ($own) { $pdo->commit(); }
     } catch (Throwable $e) { if ($own) { $pdo->rollBack(); } throw $e; }
     log_change($pdo, 'meta', 0, 'update', "ADN : $added correspondance(s) importée(s), $updated mise(s) à jour");
-    $undo = function_exists('import_receipt_put') ? import_receipt_put('dna', ['matches_added' => $addedIds, 'matches_old' => array_values($oldRows)]) : '';
-    return ['added' => $added, 'updated' => $updated, 'undo' => $undo];
+    $undo = function_exists('import_receipt_put') ? import_receipt_put('dna', ['matches_added' => $addedIds, 'matches_old' => array_values($oldRows), 'groups_added' => $groupsAdded]) : '';
+    return ['added' => $added, 'updated' => $updated, 'groups_added' => count($groupsAdded), 'undo' => $undo];
 }
 
 /** plusieurs correspondances d'un coup : groupe, côté, suivi */
@@ -258,6 +271,15 @@ function undo_dna_import(PDO $pdo, array $d): array
     $segCols = ['id', 'kit_id', 'match_id', 'label', 'chromosome', 'start_pos', 'end_pos', 'cm', 'snps', 'side', 'ancestor', 'color'];
     $ins = $pdo->prepare('INSERT OR IGNORE INTO dna_segments(' . implode(',', $segCols) . ') VALUES(' . implode(',', array_fill(0, count($segCols), '?')) . ')');
     foreach ($r['segments_old'] ?? [] as $o) { if (is_array($o)) { $ins->execute(array_map(static fn($c) => $o[$c] ?? null, $segCols)); $n++; } }
+    $gids = array_values(array_filter(array_map('intval', $r['groups_added'] ?? []))); // groupes créés pour les grappes : retirés de toutes les correspondances
+    if ($gids) {
+        $up2 = $pdo->prepare('UPDATE dna_matches SET group_ids=? WHERE id=?');
+        foreach ($pdo->query('SELECT id, group_ids FROM dna_matches')->fetchAll() as $m) {
+            $l = array_values(array_filter(array_map('intval', explode(',', (string) $m['group_ids'])))); $keep = array_values(array_diff($l, $gids));
+            if (count($keep) !== count($l)) { $up2->execute([implode(',', $keep), (int) $m['id']]); }
+        }
+        $pdo->exec('DELETE FROM dna_groups WHERE id IN (' . implode(',', $gids) . ')'); $n += count($gids);
+    }
     @unlink(import_receipt_dir() . '/' . $token . '.json');
     log_change($pdo, 'meta', 0, 'update', 'ADN : import annulé');
     return ['n' => $n];

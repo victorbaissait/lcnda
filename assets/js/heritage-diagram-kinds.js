@@ -91,7 +91,7 @@
     ext.diagramHowtoHtml = () => HOWTO;
 
     /* ═════════ Les statistiques dessinées avec les types de diagrammes ═════════ */
-    const PAIR_KINDS = new Set(['columns', 'bars', 'stacked', 'stacked100', 'line', 'area', 'pie', 'donut', 'halfdonut', 'waffle', 'treemap', 'funnel', 'radar', 'pyramid', 'heatmap', 'parliament', 'wordcloud', 'pictogram', 'gauge', 'causesun']); // causesun : causes de décès en anneaux (heritage-diagram-cartes2.js)
+    const PAIR_KINDS = new Set(['columns', 'bars', 'stacked', 'stacked100', 'line', 'area', 'pie', 'donut', 'halfdonut', 'waffle', 'treemap', 'funnel', 'radar', 'pyramid', 'heatmap', 'parliament', 'wordcloud', 'pictogram', 'gauge', 'causesun', 'dplbarline', 'dpldiv', 'dplstep', 'dplhills']); // causesun : causes de décès en anneaux (heritage-diagram-cartes2.js) ; dpl… : barres + courbe, divergentes, escalier, collines (heritage-diagram-plus.js)
     const PEOPLE_TPL = new Set(['timeline:lives', 'chrono', 'sankey']);
     const fromPeople = t => (!t.o && !t.preset && typeof R()?.KINDS[t.kind]?.fromPeople === 'function'); // un type qui se remplit tout seul avec une liste de personnes (heritage-diagram-famille.js)
     const usable = t => (PAIR_KINDS.has(t.kind) && !t.preset) || PEOPLE_TPL.has(tplId(t)) || fromPeople(t);

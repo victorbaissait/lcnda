@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gedcomx xmlns="http://gedcomx.org/v1/">
+  <person id="P1">
+    <gender type="http://gedcomx.org/Male"/>
+    <name type="http://gedcomx.org/BirthName" preferred="true">
+      <nameForm><fullText>Antoine Garnier</fullText><part type="http://gedcomx.org/Given" value="Antoine"/><part type="http://gedcomx.org/Surname" value="Garnier"/></nameForm>
+    </name>
+    <name type="http://gedcomx.org/Nickname"><nameForm><fullText>Tonio</fullText><part type="http://gedcomx.org/Given" value="Tonio"/></nameForm></name>
+    <fact type="http://gedcomx.org/Birth"><date><original>14 juillet 1845</original><formal>+1845-07-14</formal></date><place description="#PL1"><original>Rouen, Seine-Maritime, France</original></place><source description="#SD1-1"/></fact>
+    <fact type="http://gedcomx.org/Occupation"><value>Charpentier de marine</value></fact>
+    <fact type="http://gedcomx.org/Death"><date><formal>A+1910</formal></date><qualifier name="http://gedcomx.org/Cause">pneumonie</qualifier><note><text>D'après le registre de l'hôpital.</text></note></fact>
+    <note><subject>Souvenir</subject><text>Il chantait en travaillant.</text></note>
+    <identifier type="http://gedcomx.org/Persistent">https://www.familysearch.org/ark:/61903/4:1:KWCB-QR7</identifier>
+  </person>
+  <person id="P2">
+    <gender type="http://gedcomx.org/Female"/>
+    <name preferred="true"><nameForm><fullText>Rosalie Leroy</fullText><part type="http://gedcomx.org/Given" value="Rosalie"/><part type="http://gedcomx.org/Surname" value="Leroy"/></nameForm></name>
+    <fact type="http://gedcomx.org/Birth"><date><formal>+1848/+1850</formal></date></fact>
+  </person>
+  <person id="P3">
+    <gender type="http://gedcomx.org/Male"/>
+    <name preferred="true"><nameForm><part type="http://gedcomx.org/Given" value="Émile"/><part type="http://gedcomx.org/Surname" value="Garnier"/></nameForm></name>
+    <fact type="http://gedcomx.org/Christening"><date><original>3 mars 1872</original></date><place><original>Le Havre</original></place></fact>
+    <fact type="data:,Conscription"><date><formal>+1892</formal></date></fact>
+  </person>
+  <person id="P4">
+    <gender type="http://gedcomx.org/Female"/>
+    <name preferred="true"><nameForm><part type="http://gedcomx.org/Given" value="Lina"/><part type="http://gedcomx.org/Surname" value="Garnier"/></nameForm></name>
+  </person>
+  <relationship type="http://gedcomx.org/Couple" id="R1">
+    <person1 resource="#P1"/><person2 resource="#P2"/>
+    <fact type="http://gedcomx.org/Marriage"><date><formal>+1870-05-02</formal></date><place description="#PL1"><original>Rouen, Seine-Maritime, France</original></place></fact>
+  </relationship>
+  <relationship type="http://gedcomx.org/ParentChild"><person1 resource="#P1"/><person2 resource="#P3"/></relationship>
+  <relationship type="http://gedcomx.org/ParentChild"><person1 resource="#P2"/><person2 resource="#P3"/></relationship>
+  <relationship type="http://gedcomx.org/ParentChild"><person1 resource="#P1"/><person2 resource="#P4"/><fact type="http://gedcomx.org/AdoptiveParent"/></relationship>
+  <relationship type="http://gedcomx.org/ParentChild"><person1 resource="#P2"/><person2 resource="#P4"/><fact type="http://gedcomx.org/AdoptiveParent"/></relationship>
+  <sourceDescription id="SD1"><title>Registres paroissiaux de Rouen</title><citation><value>AD76, Rouen, Saint-Maclou, BMS</value></citation></sourceDescription>
+  <sourceDescription id="SD1-1"><title>Registres paroissiaux de Rouen — vue 42</title><citation><value>AD76, vue 42</value></citation><componentOf description="#SD1"/></sourceDescription>
+  <place id="PL1"><name>Rouen, Seine-Maritime, France</name><latitude>49.4431</latitude><longitude>1.0993</longitude></place>
+</gedcomx>

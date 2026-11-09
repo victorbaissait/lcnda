@@ -888,7 +888,7 @@ function picker_media(PDO $pdo, string $q, int $offset, int $limit, array $opts 
     $pids = $links ? "(SELECT group_concat(entity_id) FROM (SELECT DISTINCT entity_id FROM media_links WHERE media_id=m.id AND entity_type='person' ORDER BY position, id LIMIT 8))" : "''";
     $ev = $links ? "(SELECT %s FROM media_links ml JOIN events e ON e.id=ml.entity_id LEFT JOIN places pl ON pl.id=e.place_id WHERE ml.media_id=m.id AND ml.entity_type='event' ORDER BY e.year IS NULL, e.year LIMIT 1)" : "''";
     $select = "SELECT m.id, m.title, m.filename, m.thumbnail, m.media_type, m.date_text, m.document_reference, m.created_at, {$people} AS n, {$pids} AS pids,
-        " . sprintf($ev, 'COALESCE(pl.name,\'\')') . ' AS place, ' . sprintf($ev, 'e.year') . ' AS ev_year, ' . picker_media_sort_sql($pdo) . ' AS sort, ' . picker_media_portrait_sql() . " AS portrait,
+        " . (isset(picker_media_cols($pdo)['place_id']) ? "COALESCE(NULLIF(" . sprintf($ev, 'COALESCE(pl.name,\'\')') . ", ''), (SELECT mp.name FROM places mp WHERE mp.id=m.place_id), '')" : sprintf($ev, 'COALESCE(pl.name,\'\')')) . ' AS place, ' . sprintf($ev, 'e.year') . ' AS ev_year, ' . picker_media_sort_sql($pdo) . ' AS sort, ' . picker_media_portrait_sql() . " AS portrait,
         CASE WHEN trim(COALESCE(m.transcription,''))<>'' THEN 1 ELSE 0 END AS has_tr, " . picker_media_col($pdo, 'duration_seconds', 'NULL') . ' AS duration, '
         . picker_media_col($pdo, 'media_subject_type') . ' AS subject, ' . picker_media_col($pdo, 'postcard_group') . ' AS postcard, ' . picker_media_col($pdo, 'correspondence_type') . ' AS corr'
         . (!empty($opts['with_text']) ? ", substr(COALESCE(m.transcription,''), 1, 20000) AS transcription, m.description" : '');

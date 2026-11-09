@@ -2253,6 +2253,18 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root.lc-frame .isim-mini, :root .isim-mini:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--ui-line)}
 :root.lc-frame .h-world-q:has(.ui-search), :root .h-world-q:has(.ui-search):is([data-lc-lines], [data-lc-lines] *) {border:0 !important}
 :root.lc-frame .ui-listbar-btn.h-lv-plus.is-active, :root .ui-listbar-btn.h-lv-plus.is-active:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--blue) !important}
+:root.lc-frame .h-phi-row, :root .h-phi-row:is([data-lc-lines], [data-lc-lines] *) {border-top:1px solid var(--line, #e3e6ea)}
+:root.lc-frame .h-phi-prev td, :root .h-phi-prev td:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid var(--line, #e3e6ea)}
+:root.lc-frame .ip-map th, :root .ip-map th:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .ip-links th, :root .ip-links th:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .ip-prev th, :root .ip-prev th:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid var(--line, #e3e6ea)}
+:root.lc-frame .ip-map td, :root .ip-map td:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .ip-links td, :root .ip-links td:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .ip-prev td, :root .ip-prev td:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid var(--line, #e3e6ea)}
+:root.lc-frame .ip-prev, :root .ip-prev:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line, #e3e6ea)}
+:root.lc-frame .ip-links-wrap, :root .ip-links-wrap:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line, #e3e6ea)}
+:root.lc-frame .cp-cmp-handle, :root .cp-cmp-handle:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .cp-cmp-handle i, :root .cp-cmp-handle i:is([data-lc-lines], [data-lc-lines] *) {border:2px solid var(--blue, #0066cc)}
+:root.lc-frame .cp-cmp-bar, :root .cp-cmp-bar:is([data-lc-lines], [data-lc-lines] *) {border:var(--line)}
+:root.lc-frame .cp-fr-menu, :root .cp-fr-menu:is([data-lc-lines], [data-lc-lines] *) {border:var(--line)}
+:root.lc-frame .cp-pop, :root .cp-pop:is([data-lc-lines], [data-lc-lines] *) {border:var(--line)}
+:root.lc-frame .cp-set-row, :root .cp-set-row:is([data-lc-lines], [data-lc-lines] *) {border:var(--line)}
 :root[data-theme="dark"].lc-frame .h-pin, :root[data-theme="dark"] .h-pin:is([data-lc-lines], [data-lc-lines] *) {border:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}
 :root[data-theme="dark"].lc-frame .h-slippy-mark, :root[data-theme="dark"] .h-slippy-mark:is([data-lc-lines], [data-lc-lines] *) {border:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}
 :root[data-theme="dark"].lc-frame .h-question-homonyms, :root[data-theme="dark"] .h-question-homonyms:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #4c4c4c}
@@ -2491,6 +2503,14 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root[data-theme="dark"].lc-frame .h-dgo .h-dgo-sub, :root[data-theme="dark"] .h-dgo .h-dgo-sub:is([data-lc-lines], [data-lc-lines] *) {border-left-color:#2c4a7a}
 :root[data-theme="dark"].lc-frame .h-dgo .h-lr-row, :root[data-theme="dark"] .h-dgo .h-lr-row:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
 :root[data-theme="dark"].lc-frame .h-dgg, :root[data-theme="dark"] .h-dgg:is([data-lc-lines], [data-lc-lines] *) {border-color:#2c4a7a}
+/* heritage-diagram-perso.css */
+:root.lc-frame .h-dgp-sec, :root .h-dgp-sec:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line,#d9dde3)}
+:root.lc-frame .h-dgp-card, :root .h-dgp-card:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--line,#d9dde3)}
+:root.lc-frame .h-dgp-card:hover, :root .h-dgp-card:hover:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--blue,#0066cc)}
+:root.lc-frame .h-dgp-card.is-active, :root .h-dgp-card.is-active:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--blue,#0066cc)}
+:root.lc-frame .h-dgp-sw i, :root .h-dgp-sw i:is([data-lc-lines], [data-lc-lines] *) {border:1px solid rgba(0,0,0,.12)}
+:root.lc-frame .h-dgp-note, :root .h-dgp-note:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line,#d9dde3)}
+:root.lc-frame .h-dgp-play, :root .h-dgp-play:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line,#d9dde3)}
 /* layout.css */
 :root.lc-frame .h-book-studio, :root .h-book-studio:is([data-lc-lines], [data-lc-lines] *) {border:2px solid var(--ink,#111)}
 :root.lc-frame .ly-editor, :root .ly-editor:is([data-lc-lines], [data-lc-lines] *) {border:0}
@@ -3649,6 +3669,22 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root[data-theme="dark"].lc-frame .cad-find, :root[data-theme="dark"] .cad-find:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .cad-daterow, :root[data-theme="dark"] .cad-daterow:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
 :root[data-theme="dark"].lc-frame .cad-hit, :root[data-theme="dark"] .cad-hit:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .cad-pop, :root[data-theme="dark"] .cad-pop:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .cad-mthumb, :root[data-theme="dark"] .cad-mthumb:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .cad-secbtn, :root[data-theme="dark"] .cad-secbtn:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .cad-map-zoom button, :root[data-theme="dark"] .cad-map-zoom button:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .cad-map-tog, :root[data-theme="dark"] .cad-map-tog:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
 :root[data-theme="dark"].lc-frame .cad-dl-row, :root[data-theme="dark"] .cad-dl-row:is([data-lc-lines], [data-lc-lines] *) {border-bottom-color:var(--lc-frame-color)}
+/* cartes-outils.css */
+:root.lc-frame .cpo-ctl .button.is-active, :root .cpo-ctl .button.is-active:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--blue-bright)}
+:root.lc-frame .cpo-phrase, :root .cpo-phrase:is([data-lc-lines], [data-lc-lines] *) {border-left:4px solid var(--blue-bright)}
+:root.lc-frame .cpo-settings, :root .cpo-settings:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--line-color)}
+:root.lc-frame .cpo-legs li, :root .cpo-legs li:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid var(--line-color)}
+:root.lc-frame .cpo-style, :root .cpo-style:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--line-color)}
+:root.lc-frame .cpo-style.is-active, :root .cpo-style.is-active:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--blue-bright)}
+:root.lc-frame .cpo-style i, :root .cpo-style i:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid}
+:root.lc-frame .cpo-relief-view, :root .cpo-relief-view:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--line-color)}
+:root.lc-frame .cpo-pin-label, :root .cpo-pin-label:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #333}
+:root.lc-frame .cpo-panel, :root .cpo-panel:is([data-lc-lines], [data-lc-lines] *) {border:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root.lc-frame .cpo-layer, :root .cpo-layer:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid transparent}
+:root.lc-frame .cpo-layer.is-cur, :root .cpo-layer.is-cur:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--blue-bright)}
+:root.lc-frame .cpo-swatch, :root .cpo-swatch:is([data-lc-lines], [data-lc-lines] *) {border:calc(1.5px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root.lc-frame .cpo-layer-name, :root .cpo-layer-name:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .cpo-pop, :root .cpo-pop:is([data-lc-lines], [data-lc-lines] *) {border:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}
 /* traitement-texte.css */
 :root.lc-frame dialog.modal.wp-dlg.is-full, :root dialog.modal.wp-dlg.is-full:is([data-lc-lines], [data-lc-lines] *) {border:0}
 :root.lc-frame .wp-menus summary, :root .wp-menus summary:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid transparent}

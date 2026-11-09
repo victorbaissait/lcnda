@@ -120,3 +120,6 @@ Thumbs.db
 
 # 🧪 photos dessinées de la base d’exemple (scripts/exemple-photos.php) : livrées avec l’app
 !assets/exemple/*.jpg
+
+# fichiers d’essai des tests (GEDCOM, zip, photos inventés) : toujours enregistrés
+!/tests/fixtures/**

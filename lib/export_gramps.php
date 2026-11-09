@@ -40,9 +40,11 @@ function gramps_out_role(string $note): string
     };
 }
 
-function export_gramps(PDO $pdo): never
+/** $capture (paquet .gpkg, lib/export_paquets.php) : ['media_prefix' => 'media/'] ; au retour ['xml', 'media', 'persons'] au lieu d'un envoi. */
+function export_gramps(PDO $pdo, ?array &$capture = null): void
 {
     $d = echanges_dataset($pdo, true);
+    $mediaPrefix = (string) ($capture['media_prefix'] ?? '');
     $w = new XMLWriter();
     $w->openMemory();
     $w->setIndent(true);
@@ -291,7 +293,7 @@ function export_gramps(PDO $pdo): never
     foreach ($d['media'] as $id => $m) {
         $file = trim((string) ($m['filename'] ?? ''));
         $url = trim((string) ($m['document_url'] ?? ''));
-        $src = $file !== '' ? $file : $url;
+        $src = $file !== '' ? ($mediaPrefix !== '' ? $mediaPrefix . basename($file) : $file) : $url;
         if ($src === '') { continue; }
         $ext = strtolower(pathinfo($src, PATHINFO_EXTENSION));
         $mime = match ($ext) { 'jpg', 'jpeg' => 'image/jpeg', 'png' => 'image/png', 'gif' => 'image/gif', 'webp' => 'image/webp', 'tif', 'tiff' => 'image/tiff', 'pdf' => 'application/pdf',
@@ -346,6 +348,7 @@ function export_gramps(PDO $pdo): never
         $tags = trim((string) preg_replace('/^<\?xml[^>]*\?>\s*/', '', $t->outputMemory()));
         $xml = preg_replace('#(</header>\s*)#', '$1' . str_replace(['\\', '$'], ['\\\\', '\\$'], $tags) . "\n  ", $xml, 1) ?? $xml;
     }
+    if ($capture !== null) { $capture['xml'] = $xml; $capture['media'] = $d['media']; $capture['persons'] = count($d['persons']); return; }
     $gz = gzencode($xml, 9);
     echanges_send('genealogie-' . date('Ymd-His') . '.gramps', 'application/x-gramps', (string) $gz, ['X-LCNDA-Count' => (string) count($d['persons'])]);
 }

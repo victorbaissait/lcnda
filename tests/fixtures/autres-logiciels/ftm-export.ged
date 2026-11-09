@@ -1,0 +1,54 @@
+0 HEAD
+1 SOUR FTM
+2 VERS 24.0
+2 NAME Family Tree Maker for Windows
+2 CORP Ancestry.com
+1 GEDC
+2 VERS 5.5.1
+2 FORM LINEAGE-LINKED
+1 CHAR UTF-8
+0 @I1@ INDI
+1 NAME Albert /RENAUD/
+1 SEX M
+1 BIRT
+2 DATE 14 Jul 1890
+2 PLAC Limoges, Haute-Vienne, Nouvelle-Aquitaine, France
+1 _MILT 1914-1918 : 63e régiment d'infanterie
+2 DATE FROM 1914 TO 1918
+1 _DEG Certificat d'études
+2 DATE 1902
+1 DEAT
+2 DATE 2 Mar 1962
+1 FAMS @F1@
+1 _PHOTO @M1@
+1 OBJE @M1@
+0 @I2@ INDI
+1 NAME Jeanne /PEYRAT/
+1 SEX F
+1 BIRT
+2 DATE Abt. 1893
+1 FAMS @F1@
+0 @I3@ INDI
+1 NAME René /RENAUD/
+1 SEX M
+1 BIRT
+2 DATE 1920
+1 FAMC @F1@
+2 _FREL Adopted
+2 _MREL Natural
+0 @F1@ FAM
+1 HUSB @I1@
+1 WIFE @I2@
+1 CHIL @I3@
+2 _FREL Adopted
+2 _MREL Natural
+1 MARR
+2 DATE 5 Oct 1919
+2 PLAC Limoges, Haute-Vienne, Nouvelle-Aquitaine, France
+1 _SEPR
+2 DATE 1935
+0 @M1@ OBJE
+1 FILE https://www.example.org/photos/albert.jpg
+2 FORM jpg
+2 TITL Albert en uniforme
+0 TRLR

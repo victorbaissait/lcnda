@@ -1,0 +1,2 @@
+# Données d’essai INVENTÉES (communes « …Essai… », fusions fictives), au format des fichiers de l’INSEE
+# (v_mvt_commune_AAAA.csv, v_commune_depuis_1943_AAAA.csv) : tests/test-cartes-plus-1.js. Ce ne sont pas des données réelles.

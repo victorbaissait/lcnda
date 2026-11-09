@@ -1,0 +1,41 @@
+0 HEAD
+1 SOUR ANCESTRIS
+2 VERS 12.0
+2 NAME Ancestris
+2 CORP Ancestris
+3 ADDR http://www.ancestris.org
+1 GEDC
+2 VERS 5.5.1
+2 FORM LINEAGE-LINKED
+1 CHAR UTF-8
+1 PLAC
+2 FORM Lieudit, Commune, Code_INSEE, Code_Postal, Département, Région, Pays
+0 @I1@ INDI
+1 NAME Jules /BONNET/
+1 SEX M
+1 _SOSA 1
+1 BIRT
+2 DATE 2 MAR 1888
+2 PLAC , Albi, 81004, 81000, Tarn, Occitanie, France
+1 OCCU Verrier
+1 FAMS @F1@
+1 CHAN
+2 DATE 4 OCT 2025
+3 TIME 10:12:05
+0 @I2@ INDI
+1 NAME Marthe /CROS/
+1 SEX F
+1 FAMS @F1@
+0 @I3@ INDI
+1 NAME Raymond /BONNET/
+1 SEX M
+1 _SOSA 2
+1 FAMC @F1@
+0 @F1@ FAM
+1 HUSB @I1@
+1 WIFE @I2@
+1 CHIL @I3@
+1 MARR
+2 DATE 1912
+2 PLAC , Carmaux, 81060, 81400, Tarn, Occitanie, France
+0 TRLR

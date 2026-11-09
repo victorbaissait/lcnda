@@ -1,0 +1,52 @@
+0 HEAD
+1 SOUR FAMILY_HISTORIAN
+2 VERS 7.0.12
+2 NAME Family Historian
+2 CORP Calico Pie Limited
+1 FILE C:\Users\Anne\Documents\Family Historian Projects\Lefebvre\Lefebvre.ged
+1 GEDC
+2 VERS 5.5
+2 FORM LINEAGE-LINKED
+1 CHAR UTF-8
+1 _ROOT @I1@
+0 @I1@ INDI
+1 NAME Henri /LEFEBVRE/
+1 SEX M
+1 BIRT
+2 DATE 3 FEB 1872
+2 PLAC Lille, Nord, France
+1 DEAT
+2 DATE 11 NOV 1918
+2 PLAC Verdun, Meuse, France
+2 CAUS Mort pour la France
+1 _ATTR Pêcheur à la ligne
+2 TYPE Loisir
+1 _FLGS
+2 __ANCESTRAL_INTEREST Ancestral Interest
+2 __PRIVATE Private
+1 _FSFTID LZ3K-9QW
+1 FAMS @F1@
+0 @I2@ INDI
+1 NAME Louise /CARON/
+1 SEX F
+1 BIRT
+2 DATE ABT 1875
+2 PLAC Roubaix, Nord, France
+1 _FLGS
+2 __LIVING Living
+1 FAMS @F1@
+0 @I3@ INDI
+1 NAME Paul /LEFEBVRE/
+1 SEX M
+1 BIRT
+2 DATE 1901
+1 _NAMS Paul Henri
+1 FAMC @F1@
+0 @F1@ FAM
+1 HUSB @I1@
+1 WIFE @I2@
+1 CHIL @I3@
+1 MARR
+2 DATE 14 MAY 1898
+2 PLAC Lille, Nord, France
+0 TRLR

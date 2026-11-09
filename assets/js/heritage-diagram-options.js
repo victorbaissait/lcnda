@@ -39,7 +39,7 @@
     const VALUE_L = {age_death: 'l’âge au décès', age_marriage: 'l’âge au mariage', kids: 'le nombre d’enfants', age_first_child: 'l’âge au premier enfant'};
     const POP = [['', 'Toute ma base'], ['anc', 'Mes ancêtres'], ['desc', 'Mes descendants'], ['pat', 'Branche paternelle (côté père)'], ['mat', 'Branche maternelle (côté mère)'],
         ['label', 'Une étiquette'], ['list', 'Une de mes listes'], ['search', 'Une recherche dans les noms'], ['people', 'Les personnes que je choisis']];
-    const SERIES = [['', 'Une seule série'], ['sex', 'Une série par sexe'], ['century', 'Une série par siècle']];
+    const SERIES = [['', 'Une seule série'], ['sex', 'Une série par sexe'], ['century', 'Une série par siècle'], ['branch', 'Une série par branche (côté père / mère)'], ['generation', 'Une série par génération'], ['county', 'Une série par département'], ['country', 'Une série par pays']];
     const SORT = [['', 'Automatique'], ['big', 'Du plus grand au plus petit'], ['small', 'Du plus petit au plus grand'], ['az', 'A → Z'], ['za', 'Z → A'], ['natural', 'Dans l’ordre (temps, âges…)']];
     const SORT_SUM = {big: 'du plus grand au plus petit', small: 'du plus petit au plus grand', az: 'de A à Z', za: 'de Z à A', natural: 'dans l’ordre'};
     const UNIT = [['count', 'Nombre'], ['pct', 'Part en %'], ['avg', 'Moyenne'], ['median', 'Médiane']];

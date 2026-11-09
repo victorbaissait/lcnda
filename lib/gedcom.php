@@ -39,7 +39,9 @@ const GEDCOM_STRUCTURAL_TAGS = ['NAME', 'SEX', 'FAMC', 'FAMS', 'NOTE', 'SOUR', '
     // Ancestry, MyHeritage, Gramps… : identifiants, photos, étiquettes, liens (lus à part, jamais comme des événements)
     '_APID', '_MTTAG', '_PHOTO', '_MARNM', '_CUTOUT', '_PERSONALPHOTO', '_PARENTPHOTO', '_PHOTO_RIN', '_PARENTRIN', '_FILESIZE',
     '_SDATE', '_PROJECT_GUID', '_EXPORTED_FROM_SITE_ID', '_OID', '_LINK', '_TMPLT', '_META', '_ALTN', '_URL', 'EMAIL', '_EMAIL',
-    'PHON', 'FAX', 'WWW', '_RNAME', '_AKA'];
+    'PHON', 'FAX', 'WWW', '_RNAME', '_AKA',
+    // identifiants externes et marques d'autres logiciels (Wikidata, Family Historian, Legacy, webtrees…) : lus à part
+    'EXID', '_WIKIDATA', '_FLGS', '_PRIV', '_PRIVATE', '_TODO', '_TAG', '_TAG2', '_TAG3', '_TAG4', '_TAG5', '_TAG6', '_TAG7', '_TAG8', '_TAG9'];
 
 /** Événements propres à Ancestry, MyHeritage, Family Tree Maker… (balises « _XXX ») : gardés même sans date ni lieu. */
 const GEDCOM_VENDOR_EVENT_TAGS = ['_MILT', '_MDCL', '_DCAUSE', '_DEG', '_ELEC', '_EMPLOY', '_HEIG', '_WEIG', '_FUN', '_EXCM',
@@ -425,17 +427,25 @@ function gedcom_conc_chunks(string $row, int $size): array
 
 // ─── Export ─────────────────────────────────────────────────────────────────────────────────
 
-function export_gedcom(PDO $pdo): never
+/**
+ * $sink (paquets avec les médias, lib/export_paquets.php) : ['stream' => ressource, 'version' => '7', 'media_prefix' => 'media/'] —
+ * le GEDCOM est écrit dans le flux au lieu d'être envoyé ; au retour, $sink['media'] = les médias écrits (id => ligne),
+ * $sink['media_private'] = combien de médias ont été laissés de côté parce qu'une personne cachée y figure.
+ */
+function export_gedcom(PDO $pdo, ?array &$sink = null): void
 {
-    $version = ($_GET['gedcom_version'] ?? '5.5.1') === '7' ? '7' : '5.5.1';
+    $version = $sink !== null ? (($sink['version'] ?? '7') === '7' ? '7' : '5.5.1') : (($_GET['gedcom_version'] ?? '5.5.1') === '7' ? '7' : '5.5.1');
     // « Pour Geneanet » (lib/echanges.php) : GEDCOM 5.5.1 en UTF-8, vivants cachés, lieux au format de Geneanet, médias en liens, sans balises propres à LCNDA
     $geneanet = function_exists('echanges_geneanet') && echanges_geneanet();
     if ($geneanet) { $version = '5.5.1'; }
     $filename = 'genealogie-' . ($geneanet ? 'geneanet-' : '') . (($_GET['branch_mode'] ?? '') !== '' ? 'branche-' : '') . date('Ymd-His') . '.ged';
-    header('Content-Type: text/plain; charset=utf-8');
-    header('Content-Disposition: attachment; filename="' . $filename . '"');
-    ob_start(null, 262144); // les lignes partent par paquets de 256 Ko (une écriture par ligne : 4 fois plus lent sur une très grosse base)
-    $out = fopen('php://output', 'w');
+    if ($sink === null) {
+        header('Content-Type: text/plain; charset=utf-8');
+        header('Content-Disposition: attachment; filename="' . $filename . '"');
+        ob_start(null, 262144); // les lignes partent par paquets de 256 Ko (une écriture par ligne : 4 fois plus lent sur une très grosse base)
+    }
+    $out = $sink['stream'] ?? fopen('php://output', 'w');
+    $mediaPrefix = (string) ($sink['media_prefix'] ?? '');
     $escape = static fn(string $v): string => str_starts_with($v, '@') && !preg_match('/^@[^@]+@$/', $v) && !str_starts_with($v, '@#D') ? '@' . $v : $v; // « @#DJULIAN@ » : escape de calendrier, gardé tel quel
     $line = static function (int $level, string $tag, string $value = '') use ($out, $escape, $geneanet): void {
         if ($geneanet && $tag[0] === '_') { return; } // Geneanet : pas de balise « _XXX » propre à LCNDA
@@ -563,8 +573,12 @@ function export_gedcom(PDO $pdo): never
             if ($type === 'source') { return isset($sources[$id]); }
             return false;
         };
+        // une photo où figure aussi une personne cachée (vivante ou confidentielle : reliée, repérée, portrait) ne part pas
+        $privateMedia = $hidden && function_exists('echanges_media_touching') ? echanges_media_touching($pdo, $hidden) : [];
+        $skippedPrivate = [];
         foreach ($pdo->query('SELECT ml.entity_type,ml.entity_id,ml.media_id,m.* FROM media_links ml JOIN media m ON m.id=ml.media_id ORDER BY ml.position,ml.id') as $m) {
             if ($secret((string) $m['entity_type'], (int) $m['entity_id']) || !$exported((string) $m['entity_type'], (int) $m['entity_id'])) { continue; }
+            if (isset($privateMedia[(int) $m['media_id']])) { $skippedPrivate[(int) $m['media_id']] = true; continue; }
             $mediaByTarget[$m['entity_type'] . ':' . (int) $m['entity_id']][] = (int) $m['media_id'];
             $media[(int) $m['media_id']] = $m;
         }
@@ -688,6 +702,10 @@ function export_gedcom(PDO $pdo): never
             if (trim((string) ($v['source_note'] ?? '')) !== '') { $line(2, 'NOTE', (string) $v['source_note']); }
         }
         $line(1, 'SEX', match ($p['gender'] ?? 'unknown') { 'male' => 'M', 'female' => 'F', default => 'U' });
+        if (preg_match('/^Q\d{1,12}$/', trim((string) ($p['wikidata_id'] ?? '')))) { // identifiant Wikidata : EXID en GEDCOM 7, _WIKIDATA en 5.5.1
+            if ($version === '7') { $line(1, 'EXID', trim((string) $p['wikidata_id'])); $line(2, 'TYPE', 'http://www.wikidata.org/entity/'); }
+            else { $line(1, '_WIKIDATA', trim((string) $p['wikidata_id'])); }
+        }
         if (($p['kind'] ?? 'human') === 'animal') { // fiche d'animal (balises LCNDA, relues à l'import) : l'espèce, la race, la puce… dans _PET
             $line(1, '_KIND', 'animal');
             try { $petStmt ??= $pdo->prepare('SELECT data_json FROM pets WHERE person_id=? ORDER BY id LIMIT 1'); $petStmt->execute([$pid]); $pj = (string) $petStmt->fetchColumn(); $petStmt->closeCursor(); }
@@ -758,9 +776,11 @@ function export_gedcom(PDO $pdo): never
         $line(0, '@M' . $id . '@', 'OBJE');
         $file = trim((string) ($m['filename'] ?? ''));
         if ($file !== '') {
-            $line(1, 'FILE', $file);
+            // paquet GedZip : chemin relatif dans l'archive (« media/… »), encodé comme une adresse
+            $line(1, 'FILE', $mediaPrefix !== '' ? $mediaPrefix . rawurlencode(basename($file)) : $file);
             $ext = strtolower(pathinfo($file, PATHINFO_EXTENSION));
-            if ($ext !== '') { $line(2, 'FORM', $ext); }
+            // GEDCOM 7 : FORM est le type du fichier (« image/jpeg ») ; 5.5.1 : l'extension
+            if ($ext !== '') { $line(2, 'FORM', $version === '7' && function_exists('echanges_mime') ? echanges_mime($ext) : $ext); }
         }
         $line(1, 'TITL', (string) ($m['title'] ?: ($m['document_title'] ?: 'Média')));
         if (trim((string) ($m['date_text'] ?? '')) !== '') { $line(1, 'DATE', gedcom_date_from_text((string) $m['date_text'])); }
@@ -768,6 +788,7 @@ function export_gedcom(PDO $pdo): never
         $writeNotes(1, 'media:' . $id);
     }
     $line(0, 'TRLR');
+    if ($sink !== null) { $sink['media'] = $geneanet ? [] : $media; $sink['media_private'] = count($skippedPrivate ?? []); $sink['persons'] = count($persons); return; }
     fclose($out);
     exit;
 }
@@ -839,7 +860,7 @@ function gedcom_detect_encoding(string $text): string
 {
     if (str_starts_with($text, "\xFF\xFE") || str_starts_with($text, "\xFE\xFF") || (strlen($text) > 3 && ($text[0] === "\0" || $text[1] === "\0"))) { return 'UTF-16'; }
     if (str_starts_with($text, "\xEF\xBB\xBF") || mb_check_encoding($text, 'UTF-8')) { return 'UTF-8'; }
-    $char = preg_match('/^1 CHAR (.+)/m', $text, $m) ? strtoupper(trim($m[1])) : '';
+    $char = preg_match('/(?:^|\r)1 CHAR ([^\r\n]+)/m', $text, $m) ? strtoupper(trim($m[1])) : ''; // aussi les fichiers Mac aux lignes finies par « \r » (Reunion)
     if ($char === 'ANSEL') { return gedcom_ansel_mismatch($text) ? GEDCOM_ANSEL_LATIN1 : 'ANSEL'; }
     if (in_array($char, ['IBMPC', 'MSDOS', 'IBM PC', 'CP850', 'DOS'], true)) { return 'MS-DOS (CP850)'; }
     if (in_array($char, ['MACINTOSH', 'MAC', 'MACROMAN'], true)) { return 'Mac Roman'; }
@@ -854,7 +875,7 @@ function gedcom_text_to_utf8(string $text): string
     }
     $text = preg_replace('/^\xEF\xBB\xBF/', '', $text) ?? $text;
     if (mb_check_encoding($text, 'UTF-8')) { return $text; }
-    $char = preg_match('/^1 CHAR (.+)/m', $text, $m) ? strtoupper(trim($m[1])) : '';
+    $char = preg_match('/(?:^|\r)1 CHAR ([^\r\n]+)/m', $text, $m) ? strtoupper(trim($m[1])) : ''; // aussi les fichiers Mac aux lignes finies par « \r » (Reunion)
     if ($char === 'ANSEL' && !gedcom_ansel_mismatch($text)) { return gedcom_ansel_to_utf8($text); }
     if (in_array($char, ['IBMPC', 'MSDOS', 'IBM PC', 'CP850', 'DOS'], true)) { $out = @mb_convert_encoding($text, 'UTF-8', 'CP850'); if (is_string($out)) { return $out; } }
     if (in_array($char, ['MACINTOSH', 'MAC', 'MACROMAN'], true) && function_exists('iconv')) { $out = @iconv('MACINTOSH', 'UTF-8//TRANSLIT', $text); if (is_string($out) && $out !== '') { return $out; } }
@@ -1078,7 +1099,7 @@ function import_gedcom_into_db(PDO $pdo, string $path, ?string $mediaBaseDir = n
             $name = basename($path);
             $allowed = (bool) preg_match('/\.(jpe?g|png|gif|webp|heic|tiff?|bmp|pdf|mp3|m4a|wav|aiff?|aifc|ogg|mp4|mov|webm)$/i', $name);
             if (preg_match('#^https?://#i', $raw)) { $allowed = false; } // en ligne : gardé comme lien, jamais téléchargé
-            if ($allowed && $mediaIndex) { $stored = gedimport_store_media($mediaIndex, $raw, $mediaBaseDir); }
+            if ($allowed && $mediaIndex) { $stored = gedimport_store_media($mediaIndex, $path, $mediaBaseDir); } // chemin décodé (« media/a%20b.jpg » d'un GedZip → « media/a b.jpg »)
             if (!$stored && $allowed && is_file(MEDIA_DIR . '/' . $name)) { $stored = $name; }          // déjà dans LCNDA
             // Fichier sur l'ordinateur : chemin complet Mac/Linux (« /Users/… ») ou Windows (« C:\Users\… », écrit par Hérédis PC).
             // Seulement pour un .ged ouvert depuis l'ordinateur (pas un fichier envoyé), et si le contenu est bien une image, un son, une vidéo ou un PDF.
@@ -1294,6 +1315,7 @@ function import_gedcom_into_db(PDO $pdo, string $path, ?string $mediaBaseDir = n
         $contact = [];
         foreach (['EMAIL' => 'Courriel', '_EMAIL' => 'Courriel', 'PHON' => 'Téléphone', 'WWW' => 'Site', '_URL' => 'Lien'] as $ct => $cl) { foreach (gedimport_children($rec, $ct) as $cn) { if (trim($cn->value) !== '') { $contact[] = $cl . ' : ' . trim($unescape($cn->value)); } } }
         if ($contact) { $insertNote->execute(['person', $pid, 'Coordonnées', implode("\n", $contact)]); $stats['notes']++; }
+        gedimport_vendor_extras($pdo, $rec, $pid, $stats, $applyLabels, $insertNote, $unescape, $isEventNode, $personTags);
         $cite($rec, 'person', $pid);
         $linkMedia($rec, 'person', $pid);
         $applyLabels($rec, 'person', $pid);
@@ -1415,6 +1437,49 @@ function import_gedcom_into_db(PDO $pdo, string $path, ?string $mediaBaseDir = n
     $pdo->exec("UPDATE persons SET living_status='deceased' WHERE living_status='unknown' AND id IN (SELECT e.person_id FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE t.gedcom_tag IN ('DEAT','BURI','CREM'))");
     gedimport_rebuild_search($pdo);
     return ['format' => 'gedcom'] + $stats;
+}
+
+/**
+ * Particularités des autres logiciels sur une fiche (tests/fixtures/autres-logiciels/*.ged) :
+ *  - Wikidata : « 1 _WIKIDATA Q42 » ou « 1 EXID Q42 / 2 TYPE http://www.wikidata.org/entity/ » → persons.wikidata_id ;
+ *  - fiche privée : « _PRIV Y » / « _PRIVATE » (Legacy, Ancestral Quest, Brother's Keeper, PAF) → confidentielle ;
+ *  - Family Historian « _FLGS » (__PRIVATE, __LIVING, autres drapeaux → étiquettes « Family Historian : … ») ;
+ *  - Legacy « _TAG » … « _TAG9 » → étiquettes « Legacy : marque n » ; webtrees « _TODO » → note « À faire » ;
+ *  - toute autre balise « _XXX » simple d'un de ces logiciels → gardée dans une note « Données propres à … ».
+ */
+function gedimport_vendor_extras(PDO $pdo, stdClass $rec, int $pid, array &$stats, callable $applyLabels, PDOStatement $insertNote, callable $unescape, callable $isEventNode, array $personTags): void
+{
+    $vendors = ['family_historian', 'ancestral_quest', 'reunion', 'legacy', 'genopro', 'wikitree', 'geni', 'ancestris', 'webtrees', 'brothers_keeper', 'paf', 'geneweb'];
+    $catchAll = in_array($stats['producer'] ?? '', $vendors, true);
+    $priv = false; $living = false; $labels = []; $todo = []; $extra = [];
+    $mk = static function (string $tag, string $value): stdClass { $n = new stdClass(); $n->tag = $tag; $n->value = $value; $n->children = []; $n->level = 1; $n->xref = null; return $n; };
+    foreach ($rec->children as $c) {
+        $t = $c->tag; $v = trim($unescape(gedimport_text($c)));
+        if ($t === '_WIKIDATA' || ($t === 'EXID' && ($ty = gedimport_child($c, 'TYPE')) && str_contains(strtolower($ty->value), 'wikidata'))) {
+            if (preg_match('/^(?:https?:\/\/www\.wikidata\.org\/(?:entity|wiki)\/)?(Q\d{1,12})$/', $v, $m)) { try { $pdo->prepare('UPDATE persons SET wikidata_id=? WHERE id=?')->execute([$m[1], $pid]); $stats['wikidata'] = ($stats['wikidata'] ?? 0) + 1; } catch (Throwable) {} }
+            continue;
+        }
+        if ($t === '_PRIV' || $t === '_PRIVATE') { if ($v === '' || preg_match('/^(y|yes|1|true|oui)$/i', $v)) { $priv = true; } continue; }
+        if ($t === '_FLGS') {
+            foreach ($c->children as $fl) {
+                $name = trim(str_replace('_', ' ', ltrim($fl->tag, '_')));
+                if (stripos($fl->tag, 'PRIVATE') !== false) { $priv = true; }
+                elseif (stripos($fl->tag, 'LIVING') !== false) { $living = true; }
+                elseif ($name !== '') { $labels[] = 'Family Historian : ' . mb_convert_case(mb_strtolower($name), MB_CASE_TITLE); }
+            }
+            continue;
+        }
+        if (preg_match('/^_TAG(\d?)$/', $t, $m)) { if ($v === '' || preg_match('/^(y|yes|1|true)$/i', $v)) { $labels[] = 'Legacy : marque ' . ($m[1] !== '' ? $m[1] : '1'); } continue; }
+        if ($t === '_TODO') { $todo[] = $v !== '' ? $v : 'À faire'; continue; }
+        if ($catchAll && $t !== '' && $t[0] === '_' && $v !== '' && !in_array($t, GEDCOM_STRUCTURAL_TAGS, true) && !in_array($t, GEDCOM_VENDOR_EVENT_TAGS, true) && !$isEventNode($c, $personTags)) {
+            $extra[] = $t . ' : ' . mb_substr($v, 0, 500);
+        }
+    }
+    if ($priv) { $pdo->prepare('UPDATE persons SET is_private=1 WHERE id=?')->execute([$pid]); $stats['private_marked'] = ($stats['private_marked'] ?? 0) + 1; }
+    if ($living) { $pdo->prepare("UPDATE persons SET living_status='living' WHERE id=?")->execute([$pid]); }
+    if ($labels) { $holder = $mk('_X', ''); foreach (array_unique($labels) as $l) { $holder->children[] = $mk('_LABEL', $l); } $applyLabels($holder, 'person', $pid); }
+    if ($todo) { $insertNote->execute(['person', $pid, 'À faire', implode("\n", $todo)]); $stats['notes']++; }
+    if ($extra) { $insertNote->execute(['person', $pid, 'Données propres à ' . (($stats['producer_label'] ?? '') ?: 'l’autre logiciel'), implode("\n", array_slice($extra, 0, 60))]); $stats['notes']++; $stats['vendor_notes'] = ($stats['vendor_notes'] ?? 0) + 1; }
 }
 
 /**

@@ -17,6 +17,8 @@
         sepia: ['#4b3621', '#6f4e37', '#8b6f47', '#a0826d', '#b5967a', '#c8ad8d', '#d9c3a5', '#704214', '#5c4033', '#987654', '#c19a6b', '#e0cda9'],
         gris: ['#222222', '#444444', '#666666', '#888888', '#aaaaaa', '#cccccc']};
     const FONT = 'Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif';
+    /** la police du dessin : celle d'un style (o.font, choisie avec la liste des polices E5), sinon celle de l'app ; rien qui puisse sortir de l'attribut */
+    const fontOf = o => { const f = String(o?.font || '').replace(/[^\p{L}\p{N} _\-]/gu, '').trim().slice(0, 60); return f ? `'${f}', ${FONT}` : FONT; };
 
     /* ─── Petits outils ─── */
     const num = v => { if (typeof v === 'number') return Number.isFinite(v) ? v : 0; const n = parseFloat(String(v ?? '').replace(/[\s  ]/g, '').replace(',', '.')); return Number.isFinite(n) ? n : 0; };
@@ -25,7 +27,9 @@
     const r2 = v => Math.round(v * 100) / 100;
     /** une couleur sûre (rien qui puisse sortir de l'attribut) */
     const color = (c, fb = '#888') => { const t = String(c || '').trim(); return /^#[0-9a-f]{3,8}$/i.test(t) || /^[a-z]{3,20}$/i.test(t) || /^(rgb|hsl)a?\([\d\s.,%]+\)$/i.test(t) ? t : fb; };
-    const pal = spec => PALETTES[spec.o?.palette] || PALETTE;
+    // ⚙️ Personnaliser (heritage-diagram-perso.js) : une palette à soi (o.colors, celle d'un style enregistré) passe devant les palettes nommées
+    const ownColors = spec => { const c = spec.o?.colors; if (!Array.isArray(c)) return null; const l = c.map(x => color(x, '')).filter(Boolean).slice(0, 24); return l.length ? l : null; };
+    const pal = spec => ownColors(spec) || PALETTES[spec.o?.palette] || PALETTE;
     const pick = (spec, i, c) => color(c, pal(spec)[i % pal(spec).length]);
     const textW = (s, fs) => [...String(s ?? '')].reduce((w, ch) => w + (/[ilI.,:;'!|]/.test(ch) ? .28 : /[mwMW@]/.test(ch) ? .85 : /[A-Z]/.test(ch) ? .66 : /\s/.test(ch) ? .3 : .55), 0) * fs;
     const contrast = c => { const m = String(c).match(/^#([0-9a-f]{6}|[0-9a-f]{3})\b/i); if (!m) return '#fff'; let h = m[1]; if (h.length === 3) h = h.replace(/./g, x => x + x); const [r, g, b] = [0, 2, 4].map(i => parseInt(h.slice(i, i + 2), 16)); return (r * 299 + g * 587 + b * 114) / 1000 > 150 ? '#1d1d1f' : '#fff'; };
@@ -73,6 +77,7 @@
     }
 
     /* ─── Assemblage : titre, sous-titre, dessin, légende, source ─── */
+    let styleSeq = 0;
     function compose(spec, kind, W) {
         const o = spec.o || {}, fs = 12 * clamp(num(o.scale) || 1, .5, 3), pad = 16;
         const fg = color(o.fg, '#1d1d1f'), bgv = o.bg === 'transparent' ? '' : color(o.bg === 'custom' ? o.bgColor : '#ffffff', '#ffffff');
@@ -95,7 +100,13 @@
         }
         if (o.source) { out += T(pad, bottom + fs * 1.3, o.source, {size: fs * .85, fill: fg, style: 'italic'}); bottom += fs * 2; }
         const H = Math.ceil(bottom + pad);
-        return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${Math.ceil(W)} ${H}" width="${Math.ceil(W)}" height="${H}" font-family="${FONT}" color="${fg}" style="color:${fg}" role="img" aria-label="${esc(o.title || kind.label || 'Diagramme')}">${o.subtitle || o.source || body.desc ? `<desc>${esc([o.subtitle, body.desc, o.source].filter(Boolean).join(' — '))}</desc>` : ''}${bgv ? `<rect width="100%" height="100%" fill="${bgv}"/>` : ''}${head}${out}</svg>`; // titre et description pour les lecteurs d'écran
+        // ⚙️ Personnaliser (heritage-diagram-perso.js) : les axes du dessin (lignes de repère, annotations à une date), puis ce qu'on pose dessus
+        const shift = a => a && {...a, x0: a.x0 + pad, y0: a.y0 + y, ...(Array.isArray(a.points) ? {points: a.points.map(([t, x]) => [t, x + pad])} : {})};
+        const R0 = ext.diagramRender, ctx = {W: Math.ceil(W), H, fs, pad, top: y, axis: shift(body.axis), time: shift(body.time)};
+        let deco = ''; if (typeof R0?.overlay === 'function') { try { deco = R0.overlay(spec, ctx) || ''; } catch (e) { console.error(e); } }
+        const scope = 'dgs' + (++styleSeq), css = typeof R0?.styleCss === 'function' ? R0.styleCss(o, scope) : '';
+        out += deco;
+        return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${Math.ceil(W)} ${H}" width="${Math.ceil(W)}" height="${H}" font-family="${fontOf(o)}"${css ? ` class="${scope}"` : ''} color="${fg}" style="color:${fg}" role="img" aria-label="${esc(o.title || kind.label || 'Diagramme')}">${o.subtitle || o.source || body.desc ? `<desc>${esc([o.subtitle, body.desc, o.source].filter(Boolean).join(' — '))}</desc>` : ''}${css ? `<style>${css}</style>` : ''}${bgv ? `<rect class="dg-bg" width="100%" height="100%" fill="${bgv}"/>` : ''}${head}${out}</svg>`; // titre et description pour les lecteurs d'écran
     }
 
     /* ═════════ 🏛️ Parlements ═════════ */
@@ -264,7 +275,7 @@
         const KL = {album: 'Album studio', live: 'Album live', single: 'Single', tour: 'Tournée', autre: 'Autre événement'};
         const legend = [...roles.filter(r => lines.some(l => l.stints.some(s => s.roles.includes(r)))).map(r => ({label: r.name, color: r.color})),
             ...[...new Set(evs.map(e => e.kind))].map(k => ({label: (o.kindLabels || {})[k] || KL[k] || k, color: (KIND[k] || KIND.autre)[0], type: (KIND[k] || KIND.autre)[2] ? 'dash' : 'line', width: 2}))];
-        return {h: y0 + plotH + fs * 1.8, svg, legend};
+        return {h: y0 + plotH + fs * 1.8, svg, legend, time: {x0, y0, w: pw, h: plotH, from, to}}; // time : l'axe des années (annotations à une date, heritage-diagram-perso.js)
     }
 
     /* ═════════ 📅 Frise chronologique ═════════ */
@@ -272,6 +283,7 @@
         const o = spec.o || {}, evs = rows(spec).map((e, i) => ({at: when(e.date, false), date: String(e.date || ''), label: String(e.label || ''), color: pick(spec, i, e.color)})).filter(e => e.at !== null).sort((a, b) => a.at - b.at);
         if (!evs.length) return {h: 60, svg: T(W / 2, 30, 'Ajoute des dates et ce qui s’est passé.', {anchor: 'middle', size: fs, fill: '#888'})};
         let from = evs[0].at, to = evs[evs.length - 1].at; if (to - from < 1) { from -= .5; to += .5; }
+        if (Number.isFinite(o.__t0) && Number.isFinite(o.__t1) && o.__t1 > o.__t0) { from = o.__t0; to = o.__t1; } // ▶ lecture dans le temps : la frise garde toute sa longueur
         const padX = Math.min(W * .12, 80), X = v => padX + (v - from) / (to - from) * (W - 2 * padX);
         const lanes = clamp(Math.round(num(o.lanes) || 3), 1, 8), laneH = fs * 3.2, mid = lanes * laneH + 10;
         let svg = `<line x1="0" y1="${mid}" x2="${W}" y2="${mid}" stroke="currentColor" stroke-width="2"/>`;
@@ -286,7 +298,7 @@
             svg += `<line x1="${r2(x)}" y1="${mid}" x2="${r2(x)}" y2="${r2(up ? ly - fs * .5 : ly + fs * 1.6)}" stroke="${e.color}" stroke-width="1.2"/><circle cx="${r2(x)}" cy="${mid}" r="5" fill="${e.color}"/>`;
             svg += T(x, ly, e.date, {size: fs * .85, anchor: 'middle', weight: 700, fill: e.color}) + T(x, ly + fs * 1.1, e.label, {size: fs, anchor: 'middle'});
         });
-        return {h: maxY - minY + 4, svg: `<g transform="translate(0 ${r2(4 - minY)})">${svg}</g>`};
+        return {h: maxY - minY + 4, svg: `<g transform="translate(0 ${r2(4 - minY)})">${svg}</g>`, time: {x0: padX, y0: 0, w: W - 2 * padX, h: maxY - minY + 4, from, to}};
     }
 
     /* ═════════ 📊 Tableaux de chiffres (catégories × séries) ═════════ */
@@ -294,62 +306,91 @@
         const series = (Array.isArray(spec.series) && spec.series.length ? spec.series : [{name: 'Valeur'}]).map((s, j) => ({name: String(s?.name || `Série ${j + 1}`), color: pick(spec, j, s?.color)}));
         // ids / ids0, ids1… : les personnes derrière une barre ou une part (« Compter dans ma base ») → un clic ouvre leur liste (heritage-diagram-famille.js)
         const idl = v => String(v ?? '').split(',').map(x => Math.floor(Number(x))).filter(x => x > 0 && x < 1e9).slice(0, 400);
-        const cats = rows(spec).map((r, i) => ({label: String(r.label ?? ''), color: pick(spec, i, r.color), v: series.map((_, j) => num(r['s' + j])), ids: series.map((_, j) => idl(r['ids' + j] ?? (j === 0 ? r.ids : '')))}));
+        // __off : une catégorie gardée à sa place mais pas encore dessinée (▶ lecture dans le temps, heritage-diagram-perso.js)
+        const cats = rows(spec).map((r, i) => ({label: String(r.label ?? ''), color: pick(spec, i, r.color), v: series.map((_, j) => num(r['s' + j])), ids: series.map((_, j) => idl(r['ids' + j] ?? (j === 0 ? r.ids : ''))), off: r.__off === true}));
         return {series, cats};
     }
     const pidAttr = (c, j, label) => (c.ids?.[j]?.length ? ` data-dfa-pids="${c.ids[j].join(',')}" data-dfa-t="${esc(label)}" style="cursor:pointer"` : '');
     const seriesLegend = (series, cats, single) => single ? cats.map(c => ({label: c.label, color: c.color})) : series.map(s => ({label: s.name, color: s.color}));
+    /** les repères d'une échelle logarithmique (puissances de 10, et 2 et 5 quand il y a peu de décades) */
+    function logTicks(lo, hi) {
+        const a = Math.floor(Math.log10(lo) + 1e-9), b = Math.ceil(Math.log10(hi) - 1e-9), out = [], few = b - a <= 2;
+        for (let e = a; e <= Math.max(b, a + 1) && out.length < 60; e++) [1, ...(few ? [2, 5] : [])].forEach(m => { const v = m * 10 ** e; if (v <= 10 ** Math.max(b, a + 1) + 1e-9) out.push(+v.toPrecision(12)); });
+        return {lo: 10 ** a, hi: 10 ** Math.max(b, a + 1), ticks: out};
+    }
     function cartesian(spec, W, fs, mode) {
         const o = spec.o || {}, {series, cats} = table(spec), horiz = mode === 'bars', stacked = mode === 'stacked' || mode === 'stacked100', pct = mode === 'stacked100';
         if (!cats.length) return {h: 60, svg: T(W / 2, 30, 'Ajoute des lignes de chiffres.', {anchor: 'middle', size: fs, fill: '#888'})};
         const single = series.length === 1 && !['line', 'area'].includes(mode);
         const vals = cats.map(c => pct ? c.v.map(v => { const t = c.v.reduce((a, b) => a + Math.max(0, b), 0) || 1; return Math.max(0, v) / t * 100; }) : c.v);
+        // ⚙️ deuxième axe (à droite) : une série dessinée en courbe, avec sa propre échelle (colonnes, courbe, aire)
+        const y2 = !horiz && !stacked && series.length > 1 && o.y2 !== undefined && o.y2 !== '' && o.y2 !== null && Number.isInteger(Number(o.y2)) ? clamp(Number(o.y2), 0, series.length - 1) : -1;
+        const main = (v, j) => j !== y2, live = cats.map(c => !c.off);
+        const flatMain = vals.flatMap((v, i) => live[i] ? v.filter((_, j) => main(v, j)) : []);
         const sums = vals.map(v => v.reduce((a, b) => a + Math.max(0, b), 0)), negs = vals.map(v => v.reduce((a, b) => a + Math.min(0, b), 0));
-        let lo = Math.min(0, ...(stacked ? negs : vals.flat())), hi = Math.max(0, ...(stacked ? sums : vals.flat()));
+        let lo = Math.min(0, ...(stacked ? negs : flatMain)), hi = Math.max(0, ...(stacked ? sums : flatMain));
         if (num(o.min) || o.min === '0') lo = num(o.min); if (o.max !== undefined && o.max !== '') hi = num(o.max) || hi;
+        // ⚙️ même échelle imposée (petits multiples, lecture dans le temps) : l'axe ne bouge pas d'un dessin à l'autre
+        if (Number.isFinite(o.__lo) && Number.isFinite(o.__hi) && o.__hi > o.__lo) { lo = o.__lo; hi = o.__hi; }
         if (pct) { lo = 0; hi = 100; }
-        const tk = ticks(lo, hi, 5); lo = tk.lo; hi = tk.hi;
+        // ⚙️ échelle logarithmique : seulement pour des valeurs toutes positives, sans empilement
+        const pos = flatMain.filter(v => v > 0), log = !!o.log && !stacked && !pct && pos.length > 0 && flatMain.every(v => v > 0);
+        const tk = log ? logTicks(Math.min(...pos, Number.isFinite(o.__lo) && o.__lo > 0 ? o.__lo : Infinity), Math.max(...pos, Number.isFinite(o.__hi) ? o.__hi : 0)) : ticks(lo, hi, 5); lo = tk.lo; hi = tk.hi;
         const unit = o.unit ? ' ' + o.unit : '', tl = v => fmt(v) + (pct ? ' %' : '');
+        const V = log ? v => (Math.log10(Math.max(v, lo)) - Math.log10(lo)) / (Math.log10(hi) - Math.log10(lo) || 1) : v => (v - lo) / (hi - lo || 1);
+        let tk2 = null, V2 = null;
+        if (y2 >= 0) { const v2 = vals.filter((_, i) => live[i]).map(v => v[y2]); tk2 = ticks(Math.min(0, ...v2), Math.max(0, ...v2), 5); V2 = v => (v - tk2.lo) / (tk2.hi - tk2.lo || 1); }
         const catLab = horiz ? Math.min(W * .32, Math.max(...cats.map(c => textW(c.label, fs))) + 10) : Math.max(...tk.ticks.map(v => textW(tl(v), fs * .85))) + 10;
-        const plotW = W - catLab - 6, n = cats.length;
+        const right = tk2 ? Math.max(...tk2.ticks.map(v => textW(fmt(v), fs * .85))) + 12 : 0;
+        const plotW = W - catLab - 6 - right, n = cats.length;
         const slot = (horiz ? 0 : plotW) / n;
         const rot = !horiz && Math.max(...cats.map(c => textW(c.label, fs * .9))) > slot * .95;
         const bottom = horiz ? fs * 1.6 : rot ? Math.min(140, Math.max(...cats.map(c => textW(c.label, fs * .9))) * .72 + fs) : fs * 1.8;
         const plotH = horiz ? n * clamp(fs * 2.2 * Math.max(1, stacked ? 1 : series.length * .7), 14, 80) : clamp(num(o.height) || W * .45, 120, 1600);
-        const x0 = catLab, y0 = 6, V = v => (v - lo) / (hi - lo || 1);
+        const x0 = catLab, y0 = 6, lw = clamp(num(o.lineW) || 2.5, .5, 12);
         let svg = '';
-        tk.ticks.forEach(v => { if (horiz) { const x = x0 + V(v) * plotW; svg += `<line x1="${r2(x)}" y1="${y0}" x2="${r2(x)}" y2="${r2(y0 + plotH)}" stroke="currentColor" stroke-opacity="${v === 0 ? .5 : .12}"/>` + T(x, y0 + plotH + fs, tl(v), {size: fs * .85, anchor: 'middle'}); }
-            else { const y = y0 + plotH - V(v) * plotH; svg += `<line x1="${x0}" y1="${r2(y)}" x2="${r2(x0 + plotW)}" y2="${r2(y)}" stroke="currentColor" stroke-opacity="${v === 0 ? .5 : .12}"/>` + T(x0 - 6, y, tl(v), {size: fs * .85, anchor: 'end'}); } });
+        tk.ticks.forEach(v => { const grid = v === 0 ? '' : ' class="dg-grid"'; if (horiz) { const x = x0 + V(v) * plotW; svg += `<line${grid} x1="${r2(x)}" y1="${y0}" x2="${r2(x)}" y2="${r2(y0 + plotH)}" stroke="currentColor" stroke-opacity="${v === 0 ? .5 : .12}"/>` + T(x, y0 + plotH + fs, tl(v), {size: fs * .85, anchor: 'middle'}); }
+            else { const y = y0 + plotH - V(v) * plotH; svg += `<line${grid} x1="${x0}" y1="${r2(y)}" x2="${r2(x0 + plotW)}" y2="${r2(y)}" stroke="currentColor" stroke-opacity="${v === 0 ? .5 : .12}"/>` + T(x0 - 6, y, tl(v), {size: fs * .85, anchor: 'end'}); } });
+        if (tk2) tk2.ticks.forEach(v => { const y = y0 + plotH - V2(v) * plotH; svg += T(x0 + plotW + 6, y, fmt(v), {size: fs * .85, fill: series[y2].color}); });
         const band = (horiz ? plotH : plotW) / n;
         const showV = o.values !== false;
-        if (mode === 'line' || mode === 'area') {
-            series.forEach((s, j) => {
-                const pts = cats.map((c, i) => [x0 + band * (i + .5), y0 + plotH - V(vals[i][j]) * plotH]);
-                const d = pts.map((p, i) => (i ? 'L' : 'M') + r2(p[0]) + ' ' + r2(p[1])).join(' ');
-                if (mode === 'area') svg += `<path d="${d} L${r2(pts[pts.length - 1][0])} ${r2(y0 + plotH - V(Math.max(lo, 0)) * plotH)} L${r2(pts[0][0])} ${r2(y0 + plotH - V(Math.max(lo, 0)) * plotH)} Z" fill="${s.color}" fill-opacity=".25"/>`;
-                svg += `<path d="${d}" fill="none" stroke="${s.color}" stroke-width="2.5" stroke-linejoin="round"/>`;
-                pts.forEach((p, i) => { svg += `<circle cx="${r2(p[0])}" cy="${r2(p[1])}" r="3.5" fill="${s.color}"${pidAttr(cats[i], j, cats[i].label)}><title>${esc(cats[i].label)} — ${esc(s.name)} : ${fmt(vals[i][j])}${esc(unit)}</title></circle>`; if (showV && n <= 24) svg += T(p[0], p[1] - fs * .8, fmt(vals[i][j]), {size: fs * .8, anchor: 'middle'}); });
-            });
-        } else {
+        const curve = (s, j, VV) => {
+            const pts = cats.map((c, i) => c.off ? null : [x0 + band * (i + .5), y0 + plotH - VV(vals[i][j]) * plotH]);
+            let d = '', pen = false; pts.forEach(p => { if (!p) { pen = false; return; } d += (pen ? 'L' : 'M') + r2(p[0]) + ' ' + r2(p[1]) + ' '; pen = true; });
+            const on = pts.filter(Boolean), base = r2(y0 + plotH - VV(Math.max(VV === V ? lo : tk2.lo, 0)) * plotH);
+            if (mode === 'area' && VV === V && on.length) svg += `<path d="${d}L${r2(on[on.length - 1][0])} ${base} L${r2(on[0][0])} ${base} Z" fill="${s.color}" fill-opacity=".25"/>`;
+            if (d) svg += `<path d="${d.trim()}" fill="none" stroke="${s.color}" stroke-width="${lw}" stroke-linejoin="round"${VV !== V ? ' stroke-dasharray="6 3"' : ''}/>`;
+            pts.forEach((p, i) => { if (!p) return; svg += `<circle cx="${r2(p[0])}" cy="${r2(p[1])}" r="3.5" fill="${s.color}"${pidAttr(cats[i], j, cats[i].label)}><title>${esc(cats[i].label)} — ${esc(s.name)} : ${fmt(vals[i][j])}${esc(unit)}</title></circle>`; if (showV && n <= 24) svg += T(p[0], p[1] - fs * .8, fmt(vals[i][j]), {size: fs * .8, anchor: 'middle'}); });
+        };
+        if (mode === 'line' || mode === 'area') series.forEach((s, j) => { if (j !== y2) curve(s, j, V); });
+        else {
+            const bars = series.map((s, j) => [s, j]).filter(([, j]) => j !== y2);
             cats.forEach((c, i) => {
+                if (c.off) return;
                 let accP = 0, accN = 0;
-                const gw = band * .78, bw = stacked ? gw : gw / series.length;
-                series.forEach((s, j) => {
+                const gw = band * .78, bw = stacked ? gw : gw / bars.length;
+                bars.forEach(([s, j], jj) => {
                     const v = vals[i][j]; let a, b;
                     if (stacked) { if (v >= 0) { a = accP; b = accP += v; } else { a = accN; b = accN += v; } } else { a = 0; b = v; }
                     const pa = V(Math.max(lo, Math.min(a, b))), pb = V(Math.min(hi, Math.max(a, b))), fill = single ? c.color : s.color;
                     const tip = `<title>${esc(c.label)}${single ? '' : ' — ' + esc(s.name)} : ${fmt(c.v[j])}${esc(unit)}${pct ? ` (${fmt(v, 1)} %)` : ''}</title>`;
-                    if (horiz) { const y = y0 + band * i + (band - gw) / 2 + (stacked ? 0 : j * bw); svg += `<rect x="${r2(x0 + pa * plotW)}" y="${r2(y)}" width="${r2(Math.max(0, (pb - pa) * plotW))}" height="${r2(bw * .92)}" fill="${fill}"${pidAttr(c, j, c.label)}>${tip}</rect>`;
+                    if (horiz) { const y = y0 + band * i + (band - gw) / 2 + (stacked ? 0 : jj * bw); svg += `<rect x="${r2(x0 + pa * plotW)}" y="${r2(y)}" width="${r2(Math.max(0, (pb - pa) * plotW))}" height="${r2(bw * .92)}" fill="${fill}"${pidAttr(c, j, c.label)}>${tip}</rect>`;
                         if (showV && !stacked && v) svg += T(x0 + pb * plotW + 4, y + bw * .46, fmt(v) + unit, {size: fs * .8}); }
-                    else { const x = x0 + band * i + (band - gw) / 2 + (stacked ? 0 : j * bw); svg += `<rect x="${r2(x)}" y="${r2(y0 + plotH - pb * plotH)}" width="${r2(bw * .92)}" height="${r2(Math.max(0, (pb - pa) * plotH))}" fill="${fill}"${pidAttr(c, j, c.label)}>${tip}</rect>`;
+                    else { const x = x0 + band * i + (band - gw) / 2 + (stacked ? 0 : jj * bw); svg += `<rect x="${r2(x)}" y="${r2(y0 + plotH - pb * plotH)}" width="${r2(bw * .92)}" height="${r2(Math.max(0, (pb - pa) * plotH))}" fill="${fill}"${pidAttr(c, j, c.label)}>${tip}</rect>`;
                         if (showV && v && (stacked ? (pb - pa) * plotH > fs * 1.2 : true) && bw > fs * 1.2) svg += stacked ? T(x + bw * .46, y0 + plotH - (pa + pb) / 2 * plotH, fmt(v, pct ? 0 : 2), {size: fs * .75, anchor: 'middle', fill: contrast(fill)}) : T(x + bw * .46, y0 + plotH - pb * plotH - fs * .6, fmt(v), {size: fs * .78, anchor: 'middle'}); }
                 });
             });
         }
+        if (y2 >= 0) curve(series[y2], y2, V2);
         cats.forEach((c, i) => { if (horiz) svg += T(x0 - 6, y0 + band * (i + .5), cut(c.label, catLab - 8, fs), {size: fs, anchor: 'end'});
             else svg += rot ? T(x0 + band * (i + .5), y0 + plotH + 8, cut(c.label, 130, fs * .9), {size: fs * .9, anchor: 'end', rotate: -40, baseline: 'hanging'}) : T(x0 + band * (i + .5), y0 + plotH + fs, cut(c.label, band, fs * .9), {size: fs * .9, anchor: 'middle'}); });
         if (o.yLabel) svg += T(horiz ? x0 + plotW / 2 : 2, horiz ? y0 + plotH + fs * 2.4 : y0 - 2, o.yLabel, {size: fs * .85, anchor: horiz ? 'middle' : 'start', weight: 600});
-        return {h: y0 + plotH + bottom + (o.yLabel && horiz ? fs * 1.4 : 0), svg, legend: single ? [] : seriesLegend(series, cats, false)};
+        // ⚙️ les axes, pour ce qu'on pose dessus (lignes de repère, annotations à une date) : heritage-diagram-perso.js
+        const perSeries = series.map((s, j) => ({name: s.name, color: s.color, values: vals.filter((_, i) => live[i]).map(v => v[j])}));
+        const axis = {dir: horiz ? 'x' : 'y', x0, y0, w: plotW, h: plotH, lo, hi, log, unit: pct ? '%' : o.unit || '', series: perSeries.map((s, j) => (j === y2 ? {...s, right: true} : s)), totals: stacked && !pct ? sums.filter((_, i) => live[i]) : null};
+        const yrs = horiz ? [] : cats.map((c, i) => (/^\s*-?\d{3,4}(?!\d)/.test(c.label) ? [when(c.label, false), x0 + band * (i + .5)] : null)).filter(p => p && p[0] !== null);
+        const time = yrs.length >= 2 && yrs.length === cats.length && yrs.every((p, i) => !i || p[0] > yrs[i - 1][0]) ? {x0, y0, w: plotW, h: plotH, points: yrs} : null;
+        return {h: y0 + plotH + bottom + (o.yLabel && horiz ? fs * 1.4 : 0), svg, legend: single ? [] : seriesLegend(series, cats, false).map((l, j) => j === y2 ? {...l, label: l.label + ' (axe de droite)', type: 'dash', width: 2} : l), axis, time};
     }
     function pie(spec, W, fs, mode) {
         const o = spec.o || {}, {cats} = table(spec), items = cats.filter(c => c.v[0] > 0), tot = items.reduce((a, c) => a + c.v[0], 0);
@@ -645,9 +686,11 @@
         C('bg', 'Fond', 'select', {choices: [['', 'Blanc'], ['transparent', 'Transparent'], ['custom', 'Couleur…']]}), C('bgColor', 'Couleur du fond', 'color', {def: '#fdf8ee', when: s => s.o?.bg === 'custom'}), C('fg', 'Couleur des textes', 'color', {def: '#1d1d1f'})];
 
     function svg(spec, width) {
-        const kind = KINDS[spec?.kind] || KINDS.columns, s = {...spec, o: {...(spec?.o || {})}};
+        let kind = KINDS[spec?.kind] || KINDS.columns, s = {...spec, o: {...(spec?.o || {})}};
         const W = clamp(num(width || s.o.width) || 900, 200, 4000);
+        // ⚙️ Personnaliser (heritage-diagram-perso.js) : le style par défaut, les petits multiples → prepare(spec, sorte, largeur) = {spec, kind} ou rien
+        const R0 = ext.diagramRender; if (typeof R0?.prepare === 'function') { try { const p = R0.prepare(s, kind, W); if (p) { s = p.spec || s; kind = p.kind || kind; } } catch (e) { console.error(e); } }
         try { return compose(s, kind, W); } catch (e) { console.error(e); return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} 60" width="${W}" height="60"><text x="10" y="35" font-size="14" fill="#c00">Dessin impossible : ${esc(e.message)}</text></svg>`; }
     }
-    ext.diagramRender = {svg, KINDS, COMMON, PALETTES, when, num, ticks, apportion, arcSeats, horseshoeSeats, squarify, color};
+    ext.diagramRender = {svg, KINDS, COMMON, PALETTES, when, num, ticks, logTicks, apportion, arcSeats, horseshoeSeats, squarify, color, textW, FONT};
 })();

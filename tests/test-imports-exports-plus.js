@@ -320,7 +320,7 @@ function checkVcf(text) {
             await page.goto(t.base + '/'); await page.waitForFunction(() => window.LCNDA_APP?.setModule && window.LCNDA_EXT?.openExportFormat && window.LCNDA_APP.state?.csrf, null, { timeout: 30000 });
             await page.evaluate(() => { const st = window.LCNDA_APP.state; st.maintenanceTab = 'export'; window.LCNDA_APP.setModule('maintenance'); });
             await page.waitForSelector('#h-export-plus [data-export-plus="gramps"]', { timeout: 15000 });
-            ok(await page.locator('#h-export-plus [data-export-plus]').count() === 7, 'écran : 7 formats dans Réglages → Export');
+            ok(await page.locator('#h-export-plus [data-export-plus]').count() >= 7, 'écran : au moins 7 formats dans Réglages → Export (d’autres s’ajoutent : Obsidian, réseau, paquets…)');
             if (SHOTS) { await page.locator('#h-export-plus').scrollIntoViewIfNeeded(); await page.screenshot({ path: path.join(SHOTS, 'echanges-1440.png') }); }
             const viaDialog = async (key, expectName) => {
                 await page.click(`#h-export-plus [data-export-plus="${key}"]`);

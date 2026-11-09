@@ -26,6 +26,7 @@ const LOT_TYPES = [
     'xlsx' => ['doc', 'document', 60], 'ods' => ['doc', 'document', 60], 'csv' => ['doc', 'document', 60],
     'mp3' => ['audio', 'audio', 400], 'wav' => ['audio', 'audio', 400], 'ogg' => ['audio', 'audio', 400], 'flac' => ['audio', 'audio', 400],
     'm4a' => ['audio', 'audio', 400], 'aiff' => ['audio', 'audio', 400],
+    'mp4' => ['video', 'video', 1024], 'mov' => ['video', 'video', 1024], // ⤒ Importer des photos : les vidéos d'un export Google Photos ou Apple Photos
 ];
 const LOT_MAX_ITEMS = 2000;
 
@@ -123,6 +124,7 @@ function lot_store_upload(?array $file, string $origName): array
         'flac' => str_starts_with($head, 'fLaC'),
         'm4a' => substr($head, 4, 4) === 'ftyp',
         'aiff' => str_starts_with($head, 'FORM') && in_array(substr($head, 8, 4), ['AIFF', 'AIFC'], true),
+        'mp4', 'mov' => in_array(substr($head, 4, 4), ['ftyp', 'moov', 'mdat', 'wide', 'free', 'skip'], true),
         default => false,
     };
     if (!$ok) { throw new LcndaBadInput('Le contenu du fichier ne correspond pas à son extension (.' . $ext . ').'); }
@@ -163,6 +165,9 @@ function lot_item(PDO $pdo, ?array $file, array $post): array
     $origName = lot_clean_name((string) ($post['name'] ?? ''));
     $labelIds = lot_ids($post['label_ids'] ?? '');
     $personId = safe_int($post['person_id'] ?? 0);
+    /* ⤒ Importer des photos (heritage-photos-import.js) : ce que disent les métadonnées, seulement pour un nouveau média.
+     * Les personnes arrivent déjà confirmées une à une dans la fenêtre (jamais reliées toutes seules). */
+    $meta = $mode === 'new' ? lot_photo_meta($pdo, $post) : null;
     $media = null;
     if ($id) {
         $s = $pdo->prepare('SELECT * FROM media WHERE id=?'); $s->execute([$id]);
@@ -228,6 +233,7 @@ function lot_item(PDO $pdo, ?array $file, array $post): array
             $t = $title !== '' ? $title : (preg_replace('/\.[^.]+$/', '', $origName) ?: 'Fichier');
             $pdo->prepare('INSERT INTO media(title, media_type, filename, thumbnail) VALUES(?, ?, ?, ?)')->execute([$t, $stored['media_type'], $stored['name'], $stored['family'] === 'image' ? $stored['name'] : '']);
             $mid = (int) $pdo->lastInsertId();
+            if ($meta) { lot_photo_apply($pdo, $mid, $stored['name'], $meta, $steps); }
             $steps[] = ['op' => 'create', 'media_id' => $mid, 'file' => $stored['name']];
             log_change($pdo, 'media', $mid, 'create', 'Traitement par lot : « ' . $t . ' » rangé dans les médias');
             $mode = 'new'; $title = '';
@@ -269,6 +275,60 @@ function lot_item(PDO $pdo, ?array $file, array $post): array
     return ['media_id' => $mid, 'mode' => $mode, 'filename' => (string) ($r['filename'] ?? ''), 'title' => (string) ($r['title'] ?? ''), 'steps' => count($steps)];
 }
 
+/** les métadonnées d'une photo importée (Google Photos, Apple Photos), relues et bornées ; null s'il n'y a rien */
+function lot_photo_meta(PDO $pdo, array $post): ?array
+{
+    $m = ['description' => mb_substr(safe_text($post['description'] ?? ''), 0, 20000), 'date_text' => mb_substr(safe_text($post['date_text'] ?? ''), 0, 120), 'place_id' => 0, 'persons' => [], 'labels' => [], 'lat' => null, 'lon' => null, 'taken' => ''];
+    $pl = safe_int($post['place_id'] ?? 0);
+    if ($pl) { $s = $pdo->prepare('SELECT 1 FROM places WHERE id=?'); $s->execute([$pl]); if ($s->fetchColumn()) { $m['place_id'] = $pl; } else { throw new LcndaBadInput('Lieu introuvable.'); } }
+    foreach (lot_ids($post['person_ids'] ?? '', 40) as $pid) {
+        if (!person_exists($pdo, $pid)) { throw new LcndaBadInput('Personne introuvable.'); }
+        if (!person_is_locked($pdo, $pid)) { $m['persons'][] = $pid; } // fiche verrouillée : on n'y relie rien
+    }
+    $names = is_array($post['label_names'] ?? null) ? $post['label_names'] : preg_split('/\s*\n\s*/', (string) ($post['label_names'] ?? ''));
+    foreach (array_slice($names ?: [], 0, 40) as $n) { $n = mb_substr(trim(safe_text((string) $n)), 0, 80); if ($n !== '') { $m['labels'][mb_strtolower($n)] ??= $n; } } // le premier écrit gagne : « communion » puis « COMMUNION » = une étiquette
+    $lat = $post['geo_lat'] ?? ''; $lon = $post['geo_lon'] ?? '';
+    if (is_numeric($lat) && is_numeric($lon) && abs((float) $lat) <= 90 && abs((float) $lon) <= 180 && !((float) $lat == 0.0 && (float) $lon == 0.0)) { $m['lat'] = round((float) $lat, 7); $m['lon'] = round((float) $lon, 7); }
+    $taken = (string) ($post['taken'] ?? '');
+    if (preg_match('/^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})(?::(\d{2}))?$/', $taken, $t) && checkdate((int) $t[2], (int) $t[3], (int) $t[1]) && (int) $t[1] >= 1826 && (int) $t[1] <= (int) date('Y') + 1) {
+        $m['taken'] = sprintf('%s-%s-%s %s:%s:%s', $t[1], $t[2], $t[3], $t[4], $t[5], $t[6] !== '' ? $t[6] : '00');
+    }
+    $empty = $m['description'] === '' && $m['date_text'] === '' && !$m['place_id'] && !$m['persons'] && !$m['labels'] && $m['lat'] === null && $m['taken'] === '';
+    return $empty ? null : $m;
+}
+
+/** pose sur le nouveau média : description, date, lieu, étiquettes (créées s'il le faut), personnes confirmées, position et heure de prise de vue */
+function lot_photo_apply(PDO $pdo, int $mid, string $file, array $m, array &$steps): void
+{
+    $hasPlace = (bool) $pdo->query("SELECT 1 FROM pragma_table_info('media') WHERE name='place_id'")->fetchColumn();
+    $pdo->prepare('UPDATE media SET description=?, date_text=?' . ($hasPlace ? ', place_id=?' : '') . ' WHERE id=?')
+        ->execute($hasPlace ? [$m['description'], $m['date_text'], $m['place_id'] ?: null, $mid] : [$m['description'], $m['date_text'], $mid]);
+    if ($m['labels']) {
+        $find = $pdo->prepare('SELECT id FROM labels WHERE name=? COLLATE NOCASE');
+        $link = $pdo->prepare("INSERT OR IGNORE INTO label_links(label_id, entity_type, entity_id) VALUES(?, 'media', ?)");
+        $created = [];
+        foreach ($m['labels'] as $name) {
+            $find->execute([$name]); $lid = (int) $find->fetchColumn();
+            if (!$lid) { $pdo->prepare('INSERT INTO labels(name, color) VALUES(?, ?)')->execute([$name, '#6c8ebf']); $lid = (int) $pdo->lastInsertId(); $created[] = $lid; }
+            $link->execute([$lid, $mid]);
+        }
+        if ($created) { array_unshift($steps, ['op' => 'labels_new', 'ids' => $created]); } // défait en dernier : après les liens
+    }
+    $pos = microtime(true);
+    foreach ($m['persons'] as $pid) { $pdo->prepare("INSERT INTO media_links(media_id, entity_type, entity_id, position) VALUES(?, 'person', ?, ?)")->execute([$mid, $pid, $pos++]); }
+    if (($m['lat'] !== null || $m['taken'] !== '') && !function_exists('pm_media_geo') && is_file(__DIR__ . '/photomaps.php')) { require_once __DIR__ . '/photomaps.php'; }
+    if (($m['lat'] !== null || $m['taken'] !== '') && function_exists('photomaps_ensure') && function_exists('pm_media_geo')) {
+        try { // Cartes de photos : ce que dit le fichier passe d'abord ; sinon ce que disait l'export (le .json de Google Photos)
+            photomaps_ensure($pdo);
+            $g = pm_media_geo($pdo, $mid, $file);
+            $lat = $g['lat'] ?? null; $lon = $g['lon'] ?? null; $taken = (string) ($g['taken_at'] ?? '');
+            if (($lat === null || $lon === null) && $m['lat'] !== null) { $lat = $m['lat']; $lon = $m['lon']; }
+            if ($taken === '' && $m['taken'] !== '') { $taken = $m['taken']; }
+            $pdo->prepare('UPDATE photo_media_geo SET lat=?, lon=?, taken_at=? WHERE media_id=?')->execute([$lat, $lon, $taken, $mid]);
+        } catch (Throwable $_) {}
+    }
+}
+
 /** un fichier de media/ part seulement s'il ne sert plus à rien */
 function lot_drop_file(PDO $pdo, string $file): void
 {
@@ -291,7 +351,9 @@ function lot_undo(PDO $pdo, array $data): array
     try {
         foreach ($steps as $s) {
             $op = (string) ($s['op'] ?? ''); $mid = safe_int($s['media_id'] ?? 0);
-            if ($op === 'links') { foreach (lot_ids($s['ids'] ?? [], 1000) as $lid) { $pdo->prepare("DELETE FROM media_links WHERE id=? AND entity_type='person'")->execute([$lid]); } }
+            if ($op === 'labels_new') { // étiquettes créées par l'import : retirées si plus rien ne les porte
+                foreach (lot_ids($s['ids'] ?? [], 1000) as $lid) { $u = $pdo->prepare('SELECT count(*) FROM label_links WHERE label_id=?'); $u->execute([$lid]); if (!(int) $u->fetchColumn()) { $pdo->prepare('DELETE FROM labels WHERE id=?')->execute([$lid]); } }
+            } elseif ($op === 'links') { foreach (lot_ids($s['ids'] ?? [], 1000) as $lid) { $pdo->prepare("DELETE FROM media_links WHERE id=? AND entity_type='person'")->execute([$lid]); } }
             elseif ($op === 'labels') { foreach (lot_ids($s['ids'] ?? [], 1000) as $lid) { $pdo->prepare("DELETE FROM label_links WHERE id=? AND entity_type='media'")->execute([$lid]); } }
             elseif ($op === 'title' && $mid) { $pdo->prepare('UPDATE media SET title=? WHERE id=?')->execute([mb_substr((string) ($s['prev'] ?? ''), 0, 300), $mid]); }
             elseif ($op === 'create' && $mid) {

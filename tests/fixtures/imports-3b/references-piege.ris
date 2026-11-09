@@ -1,0 +1,6 @@
+TY  - BOOK
+TI  - =HYPERLINK("http://evil.example";"clic")
+AU  - @SOMME(A1:A3)
+N1  - +CMD|' /C calc'!A0
+UR  - javascript:alert(1)
+ER  - 

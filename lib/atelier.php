@@ -431,7 +431,7 @@ function atelier_import(PDO $pdo, array $data): array
             $key = $r['_key'] ?? null; $attached = $r['_notes'] ?? []; $atts = $r['_links'] ?? [];
             $title = $r['title'] ?: 'Sans titre';
             $tags = $r['tags'] ?? [];
-            unset($r['title'], $r['tags'], $r['_key'], $r['_notes'], $r['_links']);
+            unset($r['title'], $r['tags'], $r['_key'], $r['_notes'], $r['_links'], $r['_ty'], $r['_bt'], $r['_st']);
             $fids = $foldersFor($key);
             $id = save_atelier_item($pdo, ['project_id' => $projectId, 'type' => 'reference', 'title' => $title, 'data' => $r, 'tags' => $tags, 'folder_ids' => $fids])['id'];
             $n++;
@@ -465,6 +465,8 @@ function atelier_parse_any(string $text): array
 {
     $t = ltrim($text);
     $empty = ['refs' => [], 'notes' => [], 'collections' => [], 'title' => '', 'format' => '', 'files' => 0];
+    // XML : jamais de DOCTYPE ni d'ENTITY (bombes d'entités, fichiers lus en douce) — un export Zotero ou EndNote n'en a pas
+    if (str_starts_with($t, '<') && preg_match('/<!DOCTYPE|<!ENTITY/i', $t)) { throw new RuntimeException('Fichier refusé : il contient des déclarations XML (DOCTYPE ou ENTITY) qu’un export de bibliographie n’utilise pas.'); }
     if (str_starts_with($t, '<') && str_contains($t, 'rdf:RDF')) { return ['format' => 'Zotero RDF'] + atelier_parse_zotero_rdf($text) + $empty; }
     if (str_starts_with($t, '<') && preg_match('/<records?\b/i', $t)) { return ['format' => 'EndNote XML', 'refs' => atelier_parse_endnote($text)] + $empty; }
     if (str_starts_with($t, '[') || str_starts_with($t, '{')) { return ['format' => 'CSL JSON', 'refs' => atelier_parse_csl($text)] + $empty; }
@@ -615,7 +617,7 @@ function atelier_unlatex(string $v): string
 function atelier_parse_bibtex(string $text): array
 {
     $out = [];
-    $kinds = ['book' => 'livre', 'article' => 'article', 'incollection' => 'chapitre', 'inbook' => 'chapitre', 'inproceedings' => 'chapitre', 'conference' => 'chapitre', 'proceedings' => 'livre', 'collection' => 'livre', 'phdthesis' => 'these', 'mastersthesis' => 'these', 'thesis' => 'these', 'online' => 'web', 'misc' => 'autre', 'manuscript' => 'archive', 'artwork' => 'image', 'image' => 'image', 'periodical' => 'presse'];
+    $kinds = ['book' => 'livre', 'article' => 'article', 'incollection' => 'chapitre', 'inbook' => 'chapitre', 'inproceedings' => 'chapitre', 'conference' => 'chapitre', 'proceedings' => 'livre', 'collection' => 'livre', 'phdthesis' => 'these', 'mastersthesis' => 'these', 'thesis' => 'these', 'online' => 'web', 'misc' => 'autre', 'manuscript' => 'archive', 'unpublished' => 'archive', 'artwork' => 'image', 'image' => 'image', 'periodical' => 'presse'];
     $text = preg_replace('/^\xEF\xBB\xBF/', '', $text);
     $len = strlen($text); $at = 0;
     while (preg_match('/@(\w+)\s*[{(]/u', $text, $m, PREG_OFFSET_CAPTURE, $at)) {
@@ -646,7 +648,8 @@ function atelier_parse_bibtex(string $text): array
             'container' => $f['journal'] ?? $f['journaltitle'] ?? $f['booktitle'] ?? '', 'publisher' => $f['publisher'] ?? $f['school'] ?? $f['institution'] ?? '', 'place' => $f['address'] ?? $f['location'] ?? '',
             'volume' => $f['volume'] ?? '', 'issue' => $f['number'] ?? $f['issue'] ?? '', 'pages' => $f['pages'] ?? '', 'isbn' => $f['isbn'] ?? '', 'doi' => $f['doi'] ?? '', 'url' => $f['url'] ?? '',
             'edition' => $f['edition'] ?? '', 'language' => $f['language'] ?? $f['langid'] ?? '', 'abstract' => $f['abstract'] ?? '', 'notes' => $f['note'] ?? $f['annote'] ?? '',
-            'tags' => !empty($f['keywords']) ? array_map('trim', preg_split('/[,;]/', $f['keywords'])) : []];
+            'tags' => !empty($f['keywords']) ? array_map('trim', preg_split('/[,;]/', $f['keywords'])) : [],
+            'archive' => $f['archive'] ?? $f['library'] ?? '', 'call_number' => $f['callnumber'] ?? $f['shelfmark'] ?? '', 'accessed' => $f['urldate'] ?? '', '_bt' => $type, '_st' => $f['sourcetype'] ?? ''];
     }
     return $out;
 }
@@ -654,11 +657,18 @@ function atelier_parse_bibtex(string $text): array
 function atelier_parse_ris(string $text): array
 {
     $kinds = ['BOOK' => 'livre', 'JOUR' => 'article', 'MGZN' => 'article', 'CHAP' => 'chapitre', 'THES' => 'these', 'ELEC' => 'web', 'WEB' => 'web', 'NEWS' => 'presse', 'ART' => 'image', 'MANSCPT' => 'archive', 'UNPB' => 'archive', 'MAP' => 'image'];
-    $out = []; $cur = null;
+    $out = []; $cur = null; $lastTag = '';
     foreach (preg_split('/\r\n|\r|\n/', $text) as $line) {
-        if (!preg_match('/^([A-Z][A-Z0-9])\s{2}-\s?(.*)$/', $line, $m)) { continue; }
-        [$tag, $val] = [$m[1], trim($m[2])];
-        if ($tag === 'TY') { $cur = ['title' => '', 'kind' => $kinds[$val] ?? 'autre', 'creators' => [], 'tags' => [], 'notes' => '']; continue; }
+        if (!preg_match('/^([A-Z][A-Z0-9])\s{2}-\s?(.*)$/', $line, $m)) {
+            // une ligne de suite (note ou résumé sur plusieurs lignes) : ajoutée au champ d'avant
+            if ($cur !== null && trim($line) !== '' && in_array($lastTag, ['N1', 'AB', 'N2'], true)) { $k = $lastTag === 'N1' ? 'notes' : 'abstract'; $cur[$k] = trim(($cur[$k] ?? '') . "\n" . trim($line)); }
+            continue;
+        }
+        [$tag, $val] = [$m[1], trim($m[2])]; $lastTag = $tag;
+        if ($tag === 'TY') { $cur = ['title' => '', 'kind' => $kinds[$val] ?? 'autre', 'creators' => [], 'tags' => [], 'notes' => '', '_ty' => $val]; continue; }
+        if ($cur !== null && $tag === 'DA') { $cur['date'] = preg_match('#^\d{4}(/\d{0,2}){0,3}/?$#', $val) ? rtrim(str_replace('/', '-', $val), '-') : $val; }
+        if ($cur !== null && $tag === 'Y2') { $cur['accessed'] = $val; }
+        if ($cur !== null && $tag === 'ET') { $cur['edition'] = $val; }
         if ($cur === null) { continue; }
         if ($tag === 'ER') { $out[] = $cur; $cur = null; continue; }
         match ($tag) {
@@ -672,7 +682,7 @@ function atelier_parse_ris(string $text): array
             'PB' => $cur['publisher'] = $val, 'CY' => $cur['place'] = $val, 'VL' => $cur['volume'] = $val, 'IS' => $cur['issue'] = $val,
             'SP' => $cur['pages'] = $val . ($cur['pages'] ?? ''), 'EP' => $cur['pages'] = ($cur['pages'] ?? '') . '–' . $val,
             'SN' => $cur['isbn'] = $val, 'DO' => $cur['doi'] = $val, 'UR' => $cur['url'] = $val, 'AB' => $cur['abstract'] = $val, 'LA' => $cur['language'] = $val,
-            'KW' => $cur['tags'][] = $val, 'N1' => $cur['notes'] = trim($cur['notes'] . "\n" . $val), 'AN', 'CN' => $cur['call_number'] = $val, 'AV' => $cur['archive'] = $val,
+            'KW' => $cur['tags'][] = $val, 'N1', 'N2' => $tag === 'N2' && ($cur['abstract'] ?? '') === '' ? $cur['abstract'] = $val : $cur['notes'] = trim($cur['notes'] . "\n" . $val), 'AN', 'CN' => $cur['call_number'] = $val, 'AV' => $cur['archive'] = $val,
             default => null,
         };
     }

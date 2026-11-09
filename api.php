@@ -7,6 +7,8 @@ require __DIR__ . '/lib/heredis.php';  // fichier Hérédis natif (.hmw / .hered
 require_once __DIR__ . '/lib/echanges.php'; // ⤓ exports en plus : Pour Geneanet, Gramps (lib/export_gramps.php), GEDCOM-X, .ics, vCard, KML, GeoJSON
 require_once __DIR__ . '/lib/import_autres.php'; // ⤒ RootsMagic (.rmtree, .rmgc) lu directement ; Family Tree Maker (.ftm) refusé avec une phrase claire
 require_once __DIR__ . '/lib/imports.php'; // ⤒ Gramps (.gramps, .gpkg), aperçu avant import, « ↶ Annuler » d'un import, fichiers ADN bruts refusés
+require_once __DIR__ . '/lib/wikidata.php'; // 🌐 identifiant Wikidata d'une fiche, « Compléter depuis Wikidata » à la demande (+ ↶ Annuler)
+require_once __DIR__ . '/lib/imports_plus.php'; // ⤒ relevés Nimègue / cercles, tableau de personnes, références RIS / BibTeX ↔ sources, lieux KML / GeoJSON
 require __DIR__ . '/lib/backup.php';   // sauvegarde complète (base + médias), ouverture d'une base .db
 require_once __DIR__ . '/lib/picker.php'; // 🔍 menu de choix unique (assets/js/app-picker.js, docs/PICKER.md)
 require_once __DIR__ . '/lib/suivi.php'; // 🐾 Suivi des animaux : marques, observations, GPS, santé, sites, groupes (sortes « pet », « tsite », « agroup » du menu de choix)
@@ -239,6 +241,10 @@ try {
         require_once __DIR__ . '/lib/puzzle.php';
         puzzle_dispatch($pdo, (string) $action, $isWrite, $payload);
     }
+    if ($action === 'cartes_outils' || $action === 'cartes_outils_write') { // 🧭 Carte : trajets, grande carte à imprimer, relief 3D, mes couches (lib/cartes_outils.php)
+        require_once __DIR__ . '/lib/cartes_outils.php';
+        cartes_outils_dispatch($pdo, (string) $action, $isWrite, $payload);
+    }
     if (in_array($action, ['photomaps', 'photomap', 'photomap_all', 'photomap_thumb', 'photomap_write', 'photomap_upload'], true)) { // 📸 cartes de photos (lib/photomaps.php)
         require_once __DIR__ . '/lib/photomaps.php';
         photomaps_dispatch($pdo, (string) $action, $isWrite, $payload);
@@ -360,6 +366,12 @@ try {
     // Sauvegarde complète protégée : le mot de passe arrive en POST (jamais dans l'adresse)
     if ($isWrite && $action === 'export_full_backup') {
         export_full_backup($pdo, (string) ($payload['password'] ?? ''));
+    }
+    // 🏛 Frontières anciennes : télécharger une fois l'historique des communes de l'INSEE, le retirer, le remettre (lib/cartes_plus.php)
+    if ($isWrite && in_array($action, ['frontieres_download', 'frontieres_remove', 'frontieres_restore', 'frontieres_apply'], true)) {
+        require_once __DIR__ . '/lib/cartes_plus.php';
+        try { json_response(cp_front_api_post($pdo, (string) $action)); }
+        catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); }
     }
     // 🌦 Météo d'autrefois : importer / retirer un pack (fichiers à part, rien n'est écrit dans la généalogie : lib/meteo.php)
     if ($isWrite && str_starts_with((string) $action, 'meteo_pack_')) {
@@ -517,6 +529,7 @@ try {
         'diagram_geo' => (static function () use ($pdo) { require_once __DIR__ . '/lib/diagram_cartes.php'; json_response(diagram_geo_data($pdo, $_GET)); })(), // 🗺️ diagrammes « Cartes » : lieux de l'arbre et leurs coordonnées (lib/diagram_cartes.php)
         'diagram_vie' => (static function () use ($pdo) { require_once __DIR__ . '/lib/diagram_vie.php'; json_response(diagram_vie_data($pdo, $_GET)); })(), // 📊 D23–D38 : mortalité des enfants, fratries, saisons, veuvage, durée des mariages, âge des parents, conceptions, écart d'âge, loin du berceau, savoir signer, ce que tu as prouvé, registres consultés (lib/diagram_vie.php)
         'diagram_famille' => (static function () use ($pdo) { require_once __DIR__ . '/lib/diagram_famille.php'; json_response(diagram_famille_data($pdo, $_GET)); })(), // 📊 D1–D8 : qui a connu qui, survie, métiers, rayon des mariages, implexe, mois, naissances, lieux de vie (lib/diagram_famille.php)
+        'diagram_plus' => (static function () use ($pdo) { require_once __DIR__ . '/lib/diagram_plus.php'; json_response(diagram_plus_data($pdo, $_GET)); })(), // 📊 douze de plus : chemin de parenté, centre de gravité, générations, complétude, ahnentafel, roue de l'année, chiffres (lib/diagram_plus.php)
         'diagram_adn_numbers' => (static function () use ($pdo) { require_once __DIR__ . '/lib/diagram_adn_chiffres.php'; json_response(diagram_adn_numbers($pdo, $_GET)); })(), // 📊 diagrammes ADN et Chiffres (mobilité, mois, âges moyens) : lib/diagram_adn_chiffres.php
         'diagram_app_count' => (static function () use ($pdo) { require_once __DIR__ . '/lib/diagram_appcount.php'; json_response(diagram_app_count($pdo, $_GET)); })(), // 📊 « Depuis l'app → Graphique » : compter dans ma base, avec les options communes (lib/diagram_appcount.php, lib/diagram_options.php)
         'person_names' => json_response(person_names($pdo)),
@@ -595,6 +608,10 @@ try {
         'report_info' => (static function () use ($pdo) { require_once __DIR__ . '/lib/signaler.php'; json_response(report_info($pdo)); })(), // 🐞 Signaler un problème : version, système, nombres seulement (lib/signaler.php)
         'mode_simple_data' => (static function () use ($pdo) { require_once __DIR__ . '/lib/mode_simple.php'; json_response(mode_simple_data($pdo)); })(), // 🧓 Mode simple : personnes, unions, photos (lecture seule, lib/mode_simple.php)
         'meteo_status', 'meteo_about', 'meteo_events', 'meteo_event', 'meteo_person', 'meteo_point', 'meteo_time', 'meteo_today', 'meteo_place', 'meteo_altitude' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/meteo.php'; json_response(meteo_api_get($pdo, (string) $action, $_GET)); })(), // 🌦 Météo d'autrefois (lib/meteo.php) : fichiers à part, lecture seule
+        'frontieres_status' => (static function () use ($pdo) { require_once __DIR__ . '/lib/cartes_plus.php'; json_response(cp_front_status($pdo)); })(), // 🏛 Frontières anciennes : installé ? tailles, empreintes
+        'frontieres_remote' => (static function () { require_once __DIR__ . '/lib/cartes_plus.php'; try { json_response(cp_front_remote()); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🏛 adresses et tailles annoncées
+        'frontieres_communes' => (static function () { require_once __DIR__ . '/lib/cartes_plus.php'; json_response(cp_front_communes($_GET)); })(), // 🏛 communes disparues d'un cadre de la carte
+        'cartes_plus' => (static function () use ($pdo) { require_once __DIR__ . '/lib/cartes_plus.php'; try { json_response(cp_data($pdo, $_GET)); } catch (RuntimeException $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🗺️ cartes des patronymes, ADN, recherches, chaleur (lib/cartes_plus.php)
         'quick_search' => json_response(quick_search_data($pdo, safe_text($_GET['q'] ?? ''))),
         'implexe' => json_response(implexe_data($pdo, safe_int($_GET['id'] ?? 0) ?: (int) $pdo->query('SELECT id FROM persons WHERE is_start=1 LIMIT 1')->fetchColumn())),
         'online_registers' => json_response(online_registers($pdo, (string) ($_GET['code'] ?? ''), trim((string) ($_GET['name'] ?? '')))),
@@ -647,6 +664,7 @@ try {
         'export_csv_global' => export_csv_global($pdo),
         'export_gedcom' => export_gedcom($pdo),
         'export_plus' => export_plus($pdo), // ⤓ Gramps, GEDCOM-X, .ics, vCard, KML, GeoJSON (lib/echanges.php)
+        'sources_export' => sources_export($pdo), // ⤓ toutes les sources en RIS ou BibTeX (lib/imports_plus.php)
         'export_json' => export_json($pdo),
         'export_sqlite' => export_sqlite($pdo),
         'export_full_backup' => export_full_backup($pdo),
@@ -7753,6 +7771,9 @@ function import_zip_guard(ZipArchive $za, string $dest): void
     for ($i = 0; $i < $za->numFiles; $i++) {
         $st = $za->statIndex($i); if (!$st) { continue; }
         $size = (int) ($st['size'] ?? 0); $packed = max(1, (int) ($st['comp_size'] ?? 0));
+        // chemin qui sortirait de l'archive (« ../ », absolu, « C: ») : refusé proprement, rien n'est ouvert
+        $nm = str_replace('\\', '/', (string) ($st['name'] ?? ''));
+        if ($nm !== '' && (str_starts_with($nm, '/') || preg_match('#(^|/)\.\.(/|$)#', $nm) || preg_match('#^[A-Za-z]:#', $nm) || str_contains($nm, "\0"))) { throw new RuntimeException('Cette archive contient un chemin interdit (« ' . mb_substr($nm, 0, 80) . ' ») : elle n’est pas ouverte.'); }
         if ($size > 50 * 1048576 && $size / $packed > 100) { throw new RuntimeException('Cette archive contient un fichier anormal (« ' . basename((string) $st['name']) . ' ») : elle n’est pas ouverte.'); }
         $total += $size;
     }
@@ -9869,6 +9890,18 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'import_dna_matches' => import_dna_matches($pdo,$data),
             'undo_dna_import' => undo_dna_import($pdo,$data), // ↶ Annuler un import de correspondances ou de segments
             'import_undo' => import_undo($pdo,$data), // ↶ Annuler un import d'arbre (lib/imports.php)
+            'person_wikidata_set' => person_wikidata_set($pdo,$data), // 🌐 Wikidata (lib/wikidata.php)
+            'wikidata_apply' => wikidata_apply($pdo,$data),
+            'wikidata_undo' => wikidata_undo($pdo,$data),
+            'releves_check' => releves_check($pdo,$data), // ⤒ relevés Nimègue / cercles : ce qui va entrer (lib/imports_plus.php)
+            'releves_import' => releves_import($pdo,$data),
+            'releves_undo' => releves_undo($pdo,$data),
+            'people_table_check' => people_table_check($pdo,$data), // ⤒ tableau de personnes → fiches et familles
+            'people_table_import' => people_table_import($pdo,$data),
+            'sources_refs_import' => sources_refs_import($pdo,$data), // ⤒ références RIS / BibTeX → sources
+            'places_geo_analyse' => places_geo_analyse($pdo,$data), // ⤒ lieux KML / GeoJSON
+            'places_geo_apply' => places_geo_apply($pdo,$data),
+            'places_geo_undo' => places_geo_undo($pdo,$data),
             'bulk_dna_matches' => bulk_dna_matches($pdo,$data),
             'delete_dna_match' => delete_dna_match($pdo,$data),
             'save_dna_segments' => save_dna_segments($pdo,$data),

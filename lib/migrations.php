@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 71;
+const SCHEMA_VERSION = 74;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -92,6 +92,9 @@ function migration_steps(): array
         69 => 'schema_v69',
         70 => 'schema_v70',
         71 => 'schema_v71',
+        72 => 'schema_v72',
+        73 => 'schema_v73',
+        74 => 'schema_v74',
     ];
 }
 
@@ -2414,4 +2417,26 @@ function schema_v71(PDO $pdo): void
         foreach ($m[0] as $c) { if (!in_array($c, $have, true)) { continue 2; } }
         $pdo->exec("CREATE INDEX IF NOT EXISTS $name ON $table($cols)");
     }
+}
+
+/** 72 : le lieu d'une photo (media.place_id) — repris à l'import des photos (Google Photos, Apple Photos : ⤒ Importer des photos). */
+function schema_v72(PDO $pdo): void
+{
+    if (!$pdo->query("SELECT 1 FROM sqlite_master WHERE type='table' AND name='media'")->fetchColumn()) { return; }
+    if (!$pdo->query("SELECT 1 FROM pragma_table_info('media') WHERE name='place_id'")->fetchColumn()) { $pdo->exec('ALTER TABLE media ADD COLUMN place_id INTEGER'); }
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_media_place ON media(place_id)');
+}
+
+/** 73 : identifiant Wikidata d'une fiche (« Q42 ») : lien ↗ dans « Références externes », « Compléter depuis Wikidata » à la demande,
+ *  relu et écrit par les imports / exports GEDCOM (_WIKIDATA, EXID en GEDCOM 7) et GEDCOM-X. */
+function schema_v73(PDO $pdo): void
+{
+    if (!$pdo->query("SELECT 1 FROM pragma_table_info('persons') WHERE name='wikidata_id'")->fetchColumn()) { $pdo->exec("ALTER TABLE persons ADD COLUMN wikidata_id TEXT DEFAULT ''"); }
+}
+
+/** 74 : 🧭 « Mes couches » de la Carte (zones, itinéraires, points, notes dessinés à la main ; GeoJSON / KML) — lib/cartes_outils.php. */
+function schema_v74(PDO $pdo): void
+{
+    if (!function_exists('cartes_outils_schema')) { require_once __DIR__ . '/cartes_outils.php'; }
+    cartes_outils_schema($pdo);
 }

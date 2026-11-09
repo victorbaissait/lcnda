@@ -1195,10 +1195,10 @@
         return new Blob(zipParts(entries), {type});
     }
     /** lire un ZIP (xlsx, ods, pptx, odp) avec garde-fous : nombre d'éléments, tailles, bombe de compression */
-    async function unzip(buf, {maxTotal = LIMITS.unzipBytes, maxEntry = LIMITS.unzipEntry, maxEntries = LIMITS.zipEntries} = {}) {
+    async function unzip(buf, {maxTotal = LIMITS.unzipBytes, maxEntry = LIMITS.unzipEntry, maxEntries = LIMITS.zipEntries, maxFile = LIMITS.fileBytes} = {}) { // maxFile : ⤒ Importer des photos (export Google Photos)
         const ab = buf instanceof ArrayBuffer ? buf : buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength);
         const u8 = new Uint8Array(ab), dv = new DataView(ab); let e = -1;
-        if (u8.length > LIMITS.fileBytes) throw new Error(`fichier trop gros (plus de ${Math.round(LIMITS.fileBytes / 1048576)} Mo)`);
+        if (u8.length > maxFile) throw new Error(`fichier trop gros (plus de ${Math.round(maxFile / 1048576)} Mo)`);
         for (let i = u8.length - 22; i >= Math.max(0, u8.length - 65600); i--) if (dv.getUint32(i, true) === 0x06054b50) { e = i; break; }
         if (e < 0) throw new Error('ce n’est pas un fichier zip valide');
         const n = dv.getUint16(e + 10, true); let p = dv.getUint32(e + 16, true);

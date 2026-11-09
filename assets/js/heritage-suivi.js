@@ -157,6 +157,7 @@
             ${o.bgPicker !== false && app.mapBackgroundSelectHtml ? `<label class="sv-map-bgsel" title="Fond de la carte">🗺 <select data-sv-mapbg aria-label="Fond de la carte">${app.mapBackgroundSelectHtml(o.bg || defaultBg())}</select></label>` : ''}
             <div class="sv-map-pop" hidden></div></div>`;
         const root = host.firstElementChild, tilesEl = root.querySelector('.sv-map-tiles'), svg = root.querySelector('svg'), pop = root.querySelector('.sv-map-pop');
+        let cmp = null; // ⇆ Comparer deux époques (heritage-cartes-plus.js), posé une fois les variables prêtes, plus bas
         let series = o.series || [], polygons = o.polygons || [], bg = o.bg || defaultBg(), z = 12, cx = 0, cy = 0, T = null;
         const W = () => root.clientWidth || 600, H = () => root.clientHeight || 300;
         const all = () => [...series.flatMap(s => s.points), ...polygons.flatMap(p => p.coords.map(c => ({lat: c[0], lon: c[1]}))), ...(o.home ? [o.home] : [])].filter(p => Number.isFinite(p.lat) && Number.isFinite(p.lon));
@@ -177,6 +178,7 @@
                 tiles += `<img alt="" draggable="false" referrerpolicy="no-referrer" src="${esc(app.mapTileUrl(bg, z, ((tx % world) + world) % world, ty))}" style="left:${Math.round(tx * 256 - left)}px;top:${Math.round(ty * 256 - top)}px">`;
             }
             tilesEl.innerHTML = tiles;
+            cmp?.draw({left, top, z, width: w, height: h});
             svg.setAttribute('viewBox', `0 0 ${w} ${h}`); svg.setAttribute('width', w); svg.setAttribute('height', h);
             let out = '';
             polygons.forEach(pg => { if (pg.coords.length < 2) return; const pts = pg.coords.map(c => px(c[0], c[1]).map(v => v.toFixed(1)).join(',')).join(' '); out += `<polygon points="${pts}" fill="${esc(pg.color || '#1a8a3a')}" fill-opacity=".14" stroke="${esc(pg.color || '#1a8a3a')}" stroke-width="2" stroke-dasharray="${pg.dashed === false ? '' : '6 4'}"><title>${esc(pg.label || '')}</title></polygon>`; });
@@ -207,6 +209,7 @@
         });
         function zoomBy(d, ax, ay) { const nz = Math.max(2, Math.min(19, z + d)); if (nz === z) return; const k = 2 ** (nz - z); const wx = cx - W() / 2 + ax, wy = cy - H() / 2 + ay; cx = wx * k - ax + W() / 2; cy = wy * k - ay + H() / 2; z = nz; }
         let drag = null, moved = false;
+        if (o.compare !== false) cmp = window.LCNDA_EXT?.mapCompare?.mount(root, {key: 'lcnda-map-compare-suivi', bar: root.querySelector('.sv-map-zoom'), after: tilesEl, baseBg: () => bg, redraw: () => draw()}) || null;
         root.addEventListener('pointerdown', e => { if (e.target.closest('button, select, label, .sv-map-pt, .sv-map-pop')) return; drag = {x: e.clientX, y: e.clientY, cx, cy}; moved = false; });
         window.addEventListener('pointermove', e => { if (!drag) return; const dx = e.clientX - drag.x, dy = e.clientY - drag.y; if (Math.abs(dx) + Math.abs(dy) > 3) moved = true; cx = drag.cx - dx; cy = drag.cy - dy; requestAnimationFrame(draw); });
         window.addEventListener('pointerup', () => { drag = null; setTimeout(() => { moved = false; }, 0); });

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2"><Document><name>Mes villages</name>
+<Folder><name>Corrèze</name>
+<Placemark><name>Brive-la-Gaillarde</name><description>Brive-la-Gaillarde, Corrèze, Nouvelle-Aquitaine, France</description><Point><coordinates>1.5332,45.1588,0</coordinates></Point></Placemark>
+<Placemark><name>Naves</name><ExtendedData><Data name="departement"><value>Corrèze</value></Data></ExtendedData><Point><coordinates>1.7716,45.3093</coordinates></Point></Placemark>
+<Placemark><name>Le moulin de Lachaud</name><Point><coordinates>1.7351,45.2961,312</coordinates></Point></Placemark>
+<Placemark><name>Zone sans point</name><Polygon><outerBoundaryIs><LinearRing><coordinates>1,45 2,45 2,46 1,45</coordinates></LinearRing></outerBoundaryIs></Polygon></Placemark>
+</Folder></Document></kml>

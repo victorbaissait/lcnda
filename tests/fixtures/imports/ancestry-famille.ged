@@ -1,0 +1,113 @@
+0 HEAD
+1 SOUR Ancestry.com Family Trees
+2 NAME Ancestry.com Member Trees
+2 VERS 2025.10
+2 _TREE Famille Delmas (exemple inventé)
+3 RIN 987654321
+3 _ENCODING_VERSION 1
+2 CORP Ancestry.com
+1 DEST GED55
+1 DATE 2 Oct 2026
+1 GEDC
+2 VERS 5.5.1
+2 FORM LINEAGE-LINKED
+1 CHAR UTF-8
+0 @T1@ _MTTAG
+1 NAME Ancêtre direct
+0 @T2@ _MTTAG
+1 NAME Militaire
+0 @I101@ INDI
+1 NAME Baptiste /Delmas/
+2 GIVN Baptiste
+2 SURN Delmas
+1 SEX M
+1 _UID 4F2A9C1E7B3D4E5F8A6B9C0D1E2F3A4B
+1 BIRT
+2 DATE Abt. 1840
+2 PLAC Rodez, Aveyron, Occitanie, France
+1 DEAT
+2 DATE 12 Mar. 1911
+2 PLAC Rodez, Aveyron, Occitanie, France
+2 SOUR @S201@
+3 PAGE Décès 1911, acte 87
+3 _APID 1,61092::123456789
+1 OCCU Tailleur de pierre
+2 DATE Bet. 1870 and 1890
+1 _MILT 
+2 DATE 1860-1867
+2 PLAC Toulon, Var, Provence-Alpes-Côte d'Azur, France
+2 NOTE 3e régiment de zouaves
+1 _DCAUSE Pneumonie
+1 _MTTAG @T1@
+1 _MTTAG @T2@
+1 OBJE @M301@
+1 FAMS @F401@
+1 RIN 101
+1 _UPD 3 OCT 2026 10:12:44 GMT -0500
+0 @I102@ INDI
+1 NAME Rosalie /Carrié/
+2 _MARNM Delmas
+1 SEX F
+1 BIRT
+2 DATE Mar 4, 1845
+2 PLAC Espalion, Aveyron, Occitanie, France
+1 DEAT
+2 DATE Before 1920
+1 _MTTAG @T1@
+1 FAMS @F401@
+1 OBJE @M302@
+0 @I103@ INDI
+1 NAME Pierre /Delmas/
+1 SEX M
+1 BIRT
+2 DATE 1870-06-02
+2 PLAC Rodez, Aveyron, Occitanie, France
+1 BAPM
+2 DATE 3 Jun 1870
+2 PLAC Rodez, Aveyron, Occitanie, France
+2 ASSO @I104@
+3 RELA Godfather
+1 FAMC @F401@
+0 @I104@ INDI
+1 NAME Jean /Carrié/
+1 SEX M
+1 EMAIL ancien.cousin@exemple.invalid
+0 @I105@ INDI
+1 NAME Louise /Delmas/
+1 SEX F
+1 BIRT
+2 DATE 1873
+2 PLAC Rodez, Aveyron, Occitanie, France
+1 FAMC @F401@
+0 @F401@ FAM
+1 HUSB @I101@
+1 WIFE @I102@
+1 CHIL @I103@
+2 _FREL Natural
+2 _MREL Natural
+1 CHIL @I105@
+2 _FREL Adopted
+2 _MREL Natural
+1 MARR
+2 DATE 15 Feb 1868
+2 PLAC Espalion, Aveyron, Occitanie, France
+0 @S201@ SOUR
+1 TITL Registres d'état civil de l'Aveyron (exemple)
+1 AUTH Ancestry.com
+1 PUBL Ancestry.com Operations, Inc.
+1 REPO @R501@
+1 _APID 1,61092::0
+0 @R501@ REPO
+1 NAME Ancestry.com
+0 @M301@ OBJE
+1 FILE https://mediasvc.ancestry.com/v2/image/namespaces/1093/media/0a1b2c3d-exemple.jpg?client=Trees
+2 FORM jpg
+3 TYPE photo
+2 TITL Baptiste Delmas en uniforme
+1 _PRIM Y
+1 _TYPE PHOTO
+0 @M302@ OBJE
+1 FILE https://mediasvc.ancestry.com/v2/image/namespaces/1093/media/4e5f6a7b-exemple.jpg?client=Trees
+2 FORM jpg
+2 TITL Acte de naissance de Rosalie
+0 TRLR

@@ -599,7 +599,8 @@ function gramps_file_to_gedcom(string $path, bool $package): array
 function gedcom_producer(string $text): array
 {
     $head = '';
-    if (preg_match('/^\s*0\s+HEAD\b(.*?)(?=^\s*0\s)/ms', substr($text, 0, 20000), $m)) { $head = $m[1]; }
+    $start = str_replace(["\r\n", "\r"], "\n", substr($text, 0, 20000)); // Reunion (Mac) : lignes finies par « \r » seul
+    if (preg_match('/^\s*0\s+HEAD\b(.*?)(?=^\s*0\s)/ms', $start, $m)) { $head = $m[1]; }
     $sour = preg_match('/^\s*1\s+SOUR\s+(.*)$/mi', $head, $m) ? trim($m[1]) : '';
     $all = strtolower($head);
     $known = [
@@ -607,14 +608,25 @@ function gedcom_producer(string $text): array
         'familysearch' => ['FamilySearch', '/familysearch/'], 'geneanet' => ['Geneanet', '/geneanet/'], 'heredis' => ['Hérédis', '/heredis/'],
         'rootsmagic' => ['RootsMagic', '/rootsmagic/'], 'legacy' => ['Legacy', '/\blegacy\b/'], 'ftm' => ['Family Tree Maker', '/family tree maker|\bftm\b/'],
         'macfamilytree' => ['MacFamilyTree', '/macfamilytree|mac family tree/'], 'geneatique' => ['Généatique', '/geneatique|généatique/'], 'lcnda' => ['LCNDA', '/lcnda/'],
+        // autres logiciels (tests/fixtures/autres-logiciels/*.ged) ; GeneWeb et GEDCOM-X : traduits par lib/import_geneweb.php, lib/import_gedcomx.php
+        'family_historian' => ['Family Historian', '/family[_ ]historian|calico pie/'], 'ancestral_quest' => ['Ancestral Quest', '/ancestral quest|ancestquest|incline software/'],
+        'reunion' => ['Reunion', '/\breunion\b|leister/'], 'genopro' => ['GenoPro', '/genopro/'], 'wikitree' => ['WikiTree', '/wikitree/'], 'geni' => ['Geni', '/\bgeni(\.com)?\b/'],
+        'ancestris' => ['Ancestris', '/ancestris/'], 'webtrees' => ['webtrees', '/webtrees/'], 'brothers_keeper' => ['Brother’s Keeper', '/brother.?s keeper|broskeep/'],
+        'paf' => ['PAF (Personal Ancestral File)', '/\bpaf\b|personal ancestral file/'], 'geneweb' => ['GeneWeb', '/geneweb/'], 'gedcomx' => ['GEDCOM-X', '/gedcom-x/'],
     ];
-    foreach ($known as $k => [$label, $rx]) { if (preg_match($rx, $all)) { return ['producer' => $k, 'producer_label' => $label, 'sour' => $sour]; } }
+    // d'abord le logiciel nommé par « 1 SOUR » (et son NAME / CORP), puis tout l'en-tête (« 1 DEST ANCESTRY » ne doit pas tromper)
+    $sourBlock = preg_match('/^\s*1\s+SOUR\b.*?(?=^\s*1\s|\z)/msi', $head, $sm) ? strtolower($sm[0]) : '';
+    foreach ([strtolower($sour), $sourBlock, $all] as $hay) {
+        if ($hay === '') { continue; }
+        foreach ($known as $k => [$label, $rx]) { if (preg_match($rx, $hay)) { return ['producer' => $k, 'producer_label' => $label, 'sour' => $sour]; } }
+    }
     return ['producer' => '', 'producer_label' => $sour, 'sour' => $sour];
 }
 
 /** Ce qu'un GEDCOM va faire entrer (sans rien écrire) : nombres, logiciel, médias en ligne, avertissements. */
 function gedcom_preview_counts(string $text): array
 {
+    $text = str_replace(["\r\n", "\r"], "\n", $text);
     $p = gedcom_producer($text);
     $text = preg_replace('/^\s*0\s+HEAD\b.*?(?=^\s*0\s)/ms', '', $text, 1) ?? $text; // l'en-tête (son « 1 FILE » est le nom du .ged)
     $c = static fn(string $rx): int => preg_match_all($rx, $text);
@@ -668,6 +680,7 @@ function import_preview(PDO $pdo, ?array $file): never
             if (function_exists('is_restore_upload') && is_restore_upload(['name' => 'x.zip', 'tmp_name' => $file['tmp_name']])) { throw new RuntimeException('C’est une sauvegarde complète de LCNDA : elle remplacerait toute ta base. Ouvre-la plutôt depuis Réglages → Sauvegarde.'); }
             $za = new ZipArchive();
             if ($za->open($file['tmp_name']) !== true) { throw new RuntimeException('Cette archive .zip est abîmée.'); }
+            if (function_exists('import_zip_guard')) { import_zip_guard($za, sys_get_temp_dir()); } // bombe zip, chemins « ../ » : refusés dès l'aperçu
             $ged = null; $media = 0; $kind = '';
             for ($i = 0; $i < $za->numFiles; $i++) {
                 $st = $za->statIndex($i); $nm = (string) ($st['name'] ?? '');
@@ -685,6 +698,9 @@ function import_preview(PDO $pdo, ?array $file): never
         }
     } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); }
     if (($out['media_remote'] ?? 0) > 0) { $out['notices'][] = ['kind' => 'info', 'text' => imports_plural((int) $out['media_remote'], 'photo ou document en ligne', 'photos ou documents en ligne') . ' (' . ($out['producer_label'] ?: 'site') . ') : gardés comme liens dans une note de la fiche, jamais téléchargés.']; }
+    foreach ((array) ($file['converted_warnings'] ?? []) as $w) { $out['notices'][] = ['kind' => 'warn', 'text' => (string) $w]; } // GeneWeb : blocs illisibles laissés de côté
+    if (($out['producer'] ?? '') === 'geneweb') { $out['notices'][] = ['kind' => 'info', 'text' => 'Fichier GeneWeb (.gw) : familles, événements (pevt, fevt), témoins, parrains, notes et sources sont repris ; les notes générales de la base vont dans une note de la première fiche.']; }
+    if (($out['producer'] ?? '') === 'gedcomx') { $out['notices'][] = ['kind' => 'info', 'text' => 'Fichier GEDCOM-X (FamilySearch) : personnes, couples, filiations (avec adoption), faits datés et placés, lieux avec coordonnées, sources et notes sont repris.']; }
     if (($out['producer'] ?? '') === 'ancestry') { $out['notices'][] = ['kind' => 'info', 'text' => 'Fichier d’Ancestry : les liens vers les fiches d’Ancestry (_APID) sont gardés dans les citations, les étiquettes (_MTTAG) deviennent des étiquettes.']; }
     if (($out['producer'] ?? '') === 'myheritage') { $out['notices'][] = ['kind' => 'info', 'text' => 'Fichier de MyHeritage : noms d’épouse (_MARNM), photo principale (_PHOTO, _PRIM) et liens vers les documents sont gardés.']; }
     $existing = (int) $pdo->query('SELECT count(*) FROM persons')->fetchColumn();

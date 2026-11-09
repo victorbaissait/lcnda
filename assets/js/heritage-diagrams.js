@@ -86,7 +86,9 @@
         box.dataset.dgDone = '1';
         const d = await get(box.dataset.dgEmbed).catch(() => null);
         if (!d) { box.innerHTML = '<p class="muted">Diagramme introuvable (supprimé ?).</p>'; return; }
-        box.innerHTML = `<div class="h-dg-svg">${await svgOf(d)}</div>${box.hasAttribute('data-dg-notools') ? '' : `<div class="h-dg-embedtools"><button type="button" class="link-button" data-dg-open="${d.id}" title="L’ouvrir en grand dans Graphiques">↗ Ouvrir</button><button type="button" class="link-button" data-dg-edit="${d.id}">✎ Modifier</button></div>`}`;
+        const shown = await resolveLive(specOf(d));
+        box.innerHTML = `<div class="h-dg-svg">${drawSpec(shown)}</div>${box.hasAttribute('data-dg-notools') ? '' : `<div class="h-dg-embedtools"><button type="button" class="link-button" data-dg-open="${d.id}" title="L’ouvrir en grand dans Graphiques">↗ Ouvrir</button><button type="button" class="link-button" data-dg-edit="${d.id}">✎ Modifier</button></div>`}`;
+        ext.diagramPerso?.mount(box.querySelector('.h-dg-svg'), shown); // ▶ curseur des années, si le diagramme le demande
     }
     const fillAll = () => document.querySelectorAll('[data-dg-embed]:not([data-dg-done])').forEach(b => fillEmbed(b).catch(() => {}));
     function refreshEmbeds(id) { document.querySelectorAll(`[data-dg-embed="${Number(id)}"]`).forEach(b => { delete b.dataset.dgDone; }); fillAll(); }
@@ -306,16 +308,16 @@
         dlg.innerHTML = `<div class="h-dg-shell">
             <header class="h-dg-top"><span class="ui-topbar-icon" aria-hidden="true">📊</span><input class="h-dg-name" data-dg-name value="${esc(rec.name)}" maxlength="200" aria-label="Nom du diagramme"><button type="button" class="button small secondary" data-dg-type title="Changer de type de diagramme"></button>
                 <span class="h-dg-spacer"></span><span class="ui-status" data-ui-status></span><button type="button" class="button small secondary" data-dg-expdlg title="PNG, JPG, SVG, PDF, impression, CSV, fichier du diagramme">⤓ Exporter ▾</button><button type="button" class="button small" data-dg-save data-shortcut="⌘S" title="Enregistrer">💾 Enregistrer</button><button type="button" class="icon-button" data-dg-close title="Fermer" aria-label="Fermer">×</button></header>
-            <div class="h-dg-body"><aside class="h-dg-side"><nav class="segmented h-dg-tabs"><button type="button" data-dg-tab="data">Données</button><button type="button" data-dg-tab="opts">Réglages</button><button type="button" data-dg-tab="app">Depuis l’app</button><button type="button" data-dg-tab="links">Relier</button></nav><div class="h-dg-pane"></div></aside>
+            <div class="h-dg-body"><aside class="h-dg-side"><nav class="segmented h-dg-tabs"><button type="button" data-dg-tab="data">Données</button><button type="button" data-dg-tab="opts">Réglages</button><button type="button" data-dg-tab="perso" title="Style, annotations, lignes de repère, petits multiples, lecture dans le temps">⚙️ Personnaliser</button><button type="button" data-dg-tab="app">Depuis l’app</button><button type="button" data-dg-tab="links">Relier</button></nav><div class="h-dg-pane"></div></aside>
                 <main class="h-dg-preview"><p class="h-dg-sum" data-dg-sum aria-live="polite" hidden></p><div class="h-dg-svg" data-dg-preview></div></main></div></div>`;
         document.body.appendChild(dlg);
         const pane = dlg.querySelector('.h-dg-pane'), prev = dlg.querySelector('[data-dg-preview]');
         // « ✓ Enregistré » / « • modifié » au même endroit, sans toast (E1)
         const showStatus = () => window.LCNDA_UI?.savedStatus?.(dlg.querySelector('[data-ui-status]'), dirty ? 'dirty' : 'saved');
-        const draw = async () => { showStatus(); const s = await resolveLive(spec); prev.innerHTML = R().svg(s); kindOf().afterDraw?.(prev, kindApi); };
+        const draw = async () => { showStatus(); const s = await resolveLive(spec); prev.innerHTML = R().svg(s); kindOf().afterDraw?.(prev, kindApi); ext.diagramPerso?.afterDraw(prev, s, kindApi); }; // ⚙️ Personnaliser : annotations à glisser, curseur ▶ des années (heritage-diagram-perso.js)
         // kind.afterDraw(aperçu, api) : une sorte qui se règle aussi dans l'aperçu (cadrage d'une carte à la souris) ; api.set({réglages}) change spec.o
         // kind.dataPane(onglet, api) : une sorte qui enrichit son tableau (champ « Zone » des cartes) ; api.changed() : spec modifié à la main, redessiner
-        const kindApi = {spec: () => spec, set: patch => { spec.o = {...(spec.o || {}), ...patch}; later(); if (tab === 'opts') { const y = pane.scrollTop; paint(); pane.scrollTop = y; } }, changed: () => later()};
+        const kindApi = {spec: () => spec, redraw: () => draw(), set: patch => { spec.o = {...(spec.o || {}), ...patch}; later(); if (tab === 'opts') { const y = pane.scrollTop; paint(); pane.scrollTop = y; } }, changed: () => later()};
         const later = () => { dirty = true; clearTimeout(timer); timer = setTimeout(draw, 90); };
         const paint = () => {
             dlg.querySelector('[data-dg-type]').textContent = `${kindOf().icon} ${kindOf().label} ▾`;
@@ -323,6 +325,7 @@
             if (tab === 'data') pane.innerHTML = (spec.live?.sheet && ext.sheetLink ? ext.sheetLink.bannerHtml(spec) : spec.live ? `<p class="h-dg-live">🔄 Chiffres tenus à jour depuis « ${esc(spec.live.label || 'l’app')} » : ils sont relus à chaque affichage. <button type="button" class="link-button" data-dg-unlive>Les figer (les modifier à la main)</button></p>` : ext.openSheetEditor && !kindOf().noSheet ? '<div class="h-dg-sheetbar"><button type="button" class="button small secondary" data-dg-sheet title="Le tableur en grand, préparé avec les colonnes de ce diagramme : formules, tri, coller depuis Excel… puis « ✓ Enregistrer et revenir »">🧾 Modifier les données</button><small class="muted">dans le tableur (formules, tri, Excel…)</small></div>' : '') + kindOf().grids.map((g, gi) => gridHtml(g, gi, spec, shownRows[gi] || GRID_SHOWN)).join('');
             else if (tab === 'opts') pane.innerHTML = `<div class="h-dg-opts"><h4>${esc(kindOf().label)}</h4>${kindOf().options.map(o => optHtml(o, spec)).join('') || '<p class="muted">Pas de réglage particulier.</p>'}<h4>Présentation</h4>${R().COMMON.map(o => optHtml(o, spec)).join('')}</div>`;
             else if (tab === 'app') pane.innerHTML = appPaneHtml();
+            else if (tab === 'perso') { pane.innerHTML = ''; if (ext.diagramPerso) ext.diagramPerso.pane(pane, kindApi); else pane.innerHTML = '<p class="muted">Personnaliser n’est pas chargé.</p>'; }
             else pane.innerHTML = linksHtml();
             showSum(tab === 'app' ? lastSum : spec.live?.sum || appSum); // la phrase du réglage au-dessus de l'aperçu (options de « Depuis l'app ») : celle des chiffres pris, tant qu'on ne les retouche pas
             if (tab === 'app') bindAppPane(); if (tab === 'links') bindLinks();
@@ -502,6 +505,7 @@
             if (el.dataset.dgSercolor !== undefined) { spec.series = spec.series || []; const j = Number(el.dataset.dgSercolor); spec.series[j] = {...(spec.series[j] || {}), color: el.value}; return later(); }
             if (el.dataset.opt) { const o = [...kindOf().options, ...R().COMMON].find(x => x.k === el.dataset.opt); spec.o = spec.o || {};
                 spec.o[o.k] = o.type === 'check' ? el.checked : ['number', 'range'].includes(o.type) ? (el.value === '' ? '' : Number(el.value)) : el.value;
+                if (o.k === 'palette') delete spec.o.colors; // une palette nommée remplace celle d'un style (⚙️ Personnaliser)
                 if (o.type === 'range') el.previousElementSibling.textContent = el.value;
                 if (o.type === 'select' || o.type === 'check') { const y = pane.scrollTop; paint(); pane.scrollTop = y; }
                 return later(); }
@@ -676,15 +680,17 @@
         const ws = A().$('#workspace');
         if (!id) { await list(); id = cache?.[0]?.id; }
         const d = id ? await get(id) : null;
+        const shown = d ? await resolveLive(specOf(d)) : null;
         if (token !== S().workspaceToken || S().module !== 'graphiques') return;
         if (!d) { ws.innerHTML = `<section class="page"><header class="page-header"><div><span class="eyebrow">MES DIAGRAMMES</span><h2>Créer un diagramme</h2><p>Hémicycle d’une assemblée, fer à cheval, frise des membres d’un groupe de musique façon Wikipédia, frise de vies, camembert, flux de migrations, organigramme, nuage de noms… avec tes propres chiffres ou ceux de l’app. Ils se posent ensuite partout : tableau de bord, fiches, fiche d’une personne, enquêtes, Atelier, mise en page.</p></div><div class="page-actions"><button type="button" class="button" data-dg-new>＋ Nouveau diagramme</button><label class="button secondary h-dg-file">⤒ Importer un fichier<input type="file" accept=".json,application/json" data-dg-import hidden></label></div></header></section>`; bindPage(ws, null); return; }
         ws.innerHTML = `<section class="page h-dg-page"><header class="page-header"><div><span class="eyebrow">MES DIAGRAMMES · ${esc(R().KINDS[d.kind]?.label || '')}</span><h2>${esc(d.name)}</h2>${followId(d.spec) ? `<p>📈 Ce diagramme montre ton graphique « ${esc(d.name)} » (Éditeur de graphiques) : son dessin et ses chiffres le suivent, partout où il est posé.</p>` : d.spec?.live?.sheet ? `<p>🔗 Données : ${esc(d.spec.live.label || 'un classeur du Tableur')} · tenu à jour.</p>` : d.spec?.live ? `<p>🔄 Chiffres tenus à jour depuis « ${esc(d.spec.live.label || 'l’app')} ».</p>` : ''}</div>
             <div class="page-actions"><button type="button" class="button" data-dg-edit="${d.id}">${followId(d.spec) ? '✎ Modifier le graphique' : '✎ Modifier'}</button><button type="button" class="button secondary" data-dg-dup title="${followId(d.spec) ? 'Une copie figée, à retoucher comme un diagramme' : 'Une copie à modifier'}">⧉ Dupliquer</button>${window.LCNDA_SIDE_FOLDERS && !document.body.classList.contains('is-kiosk') ? window.LCNDA_SIDE_FOLDERS.rangeButtonHtml('diagram', d.id, d.name) : ''}<button type="button" class="button secondary" data-dg-dash title="Le poser sur le tableau de bord, comme un widget">＋ Tableau de bord</button><button type="button" class="button danger" data-dg-del>Supprimer</button></div></header>
             <div class="h-dg-pagetools"><button type="button" class="button small secondary" data-dg-pexpdlg title="PNG, JPG, SVG, PDF, impression, CSV, fichier du diagramme">⤓ Exporter</button></div>
-            <div class="card h-dg-big"><div class="h-dg-svg">${await svgOf(d)}</div></div>
+            <div class="card h-dg-big"><div class="h-dg-svg" data-dg-pagesvg>${drawSpec(shown)}</div></div>
             ${d.links?.length ? `<div class="h-dg-linked"><span class="section-label">Rattaché à</span>${d.links.map(l => `<button type="button" class="h-pr-lchip" data-dg-golink="${esc(l.type)}:${l.id}:${l.inv || 0}">${LINK_IC[l.type] || '🔗'} ${esc(l.name)}</button>`).join('')}</div>` : ''}
             <p class="muted h-dg-where">Pour le poser ailleurs : <b>Réglages → Éditeur de widgets</b> (partie « Diagramme ») pour le tableau de bord ou un onglet, un bloc « 📊 Diagramme » dans une <b>Fiche</b>, « Relier » (onglet de l’éditeur) pour la fiche d’une personne, une enquête ou un projet de l’Atelier, et « Insérer → Diagramme » dans la <b>mise en page</b>. Tous tes graphiques et diagrammes : <b>Listes → Graphiques et diagrammes</b>.</p></section>`;
         bindPage(ws, d);
+        ext.diagramPerso?.mount(ws.querySelector('[data-dg-pagesvg]'), shown); // ▶ curseur des années (⚙️ Personnaliser → Lecture dans le temps)
     };
     function bindPage(ws, d) {
         ws.querySelector('[data-dg-new]')?.addEventListener('click', () => openEditor(null));

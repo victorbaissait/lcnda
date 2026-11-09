@@ -1,0 +1,89 @@
+0 HEAD
+1 SOUR MYHERITAGE
+2 NAME MyHeritage Family Tree Builder
+2 VERS 5.5.1
+2 _RTLSAVE RTL
+2 CORP MyHeritage.com
+1 DEST MYHERITAGE
+1 DATE 2 OCT 2026
+1 GEDC
+2 VERS 5.5.1
+2 FORM LINEAGE-LINKED
+1 CHAR UTF-8
+1 LANG French
+1 _PROJECT_GUID 9B1C2D3E-0000-4000-8000-ABCDEF012345
+1 _EXPORTED_FROM_SITE_ID 123456789
+0 @I1@ INDI
+1 _UPD 2 OCT 2026 08:15:03 GMT -0500
+1 NAME Gaston /Fabre/
+2 GIVN Gaston
+2 SURN Fabre
+1 SEX M
+1 BIRT
+2 DATE ABT 1888
+2 PLAC Montauban, Tarn-et-Garonne, France
+1 DEAT
+2 DATE 7 DEC 1951
+2 PLAC Toulouse, Haute-Garonne, France
+1 EVEN Combattant de la Grande Guerre
+2 TYPE Service militaire
+2 DATE FROM 1914 TO 1918
+1 OBJE
+2 FORM jpg
+2 FILE https://sites-cf.mhcache.com/t/1/2/3/exemple/gaston-portrait.jpg
+2 TITL Gaston Fabre
+2 _FILESIZE 152034
+2 _PHOTO_RIN MH:P1
+2 _PRIM Y
+2 _CUTOUT Y
+2 _PERSONALPHOTO Y
+1 _UID 5F3B1A2C-ABCD-4E5F-9A8B-0C1D2E3F4A5B
+1 RIN MH:I1
+1 FAMS @F1@
+0 @I2@ INDI
+1 _UPD 2 OCT 2026 08:15:03 GMT -0500
+1 NAME Albertine /Roques/
+2 GIVN Albertine
+2 SURN Roques
+2 _MARNM Fabre
+1 SEX F
+1 BIRT
+2 DATE BET 1890 AND 1892
+2 PLAC Montauban, Tarn-et-Garonne, France
+1 _UID 6A4C2B3D-ABCD-4E5F-9A8B-0C1D2E3F4A5B
+1 RIN MH:I2
+1 FAMS @F1@
+0 @I3@ INDI
+1 NAME Henri /Fabre/
+1 SEX M
+1 BIRT
+2 DATE 3 MAY 1920
+2 PLAC Toulouse, Haute-Garonne, France
+2 SOUR @S1@
+3 PAGE Naissance n° 412
+3 DATA
+4 DATE 3 MAY 1920
+4 TEXT Henri, fils de Gaston Fabre, cultivateur
+3 _LINK https://www.myheritage.fr/research/collection-1/exemple?itemId=999
+1 DEAT
+2 DATE 1999
+1 FAMC @F1@
+2 PEDI birth
+1 RESN privacy
+1 _UID 7B5D3C4E-ABCD-4E5F-9A8B-0C1D2E3F4A5B
+1 RIN MH:I3
+0 @F1@ FAM
+1 _UPD 2 OCT 2026 08:15:03 GMT -0500
+1 HUSB @I1@
+1 WIFE @I2@
+1 CHIL @I3@
+1 MARR
+2 DATE 22 APR 1912
+2 PLAC Montauban, Tarn-et-Garonne, France
+1 RIN MH:F1
+1 _UID 8C6E4D5F-ABCD-4E5F-9A8B-0C1D2E3F4A5B
+0 @S1@ SOUR
+1 _UPD 2 OCT 2026 08:15:03 GMT -0500
+1 TITL Registres d'état civil de France (exemple)
+1 RIN MH:S1
+0 TRLR
