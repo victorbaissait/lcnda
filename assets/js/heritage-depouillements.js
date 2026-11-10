@@ -13,6 +13,7 @@
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     ext.lists = ext.lists || {};
     const esc = value => A().escapeHtml(value ?? '');
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const S = () => A().state;
     const toast = (...a) => A().toast(...a);
     const get = (action, params = {}) => A().api(action, params);
@@ -97,7 +98,7 @@
         const group = list => view === 'list' && UI?.rowsHtml ? UI.rowsHtml(list.map(line)) : UI.cardsHtml(list.map(card));
         ws.innerHTML = `<section class="page collection-page h-rc h-dp">
             <header class="page-header"><div><span class="eyebrow">LISTES · ARCHIVES</span><h2>📜 Dépouillements</h2>
-                <p>Tes dépouillements d’archive page par page : les photos de chaque page, les personnes relevées rangées par foyer, la transcription. <b>Ce sont les mêmes que dans Recherche › Dépouillement d’archive</b> : ce que tu saisis ici y est aussitôt, et inversement.</p></div>
+                <p>${i18n('Tes dépouillements d’archive page par page : les photos de chaque page, les personnes relevées rangées par foyer, la transcription. <b>Ce sont les mêmes que dans Recherche › Dépouillement d’archive</b> : ce que tu saisis ici y est aussitôt, et inversement.')}</p></div>
                 <div class="page-actions"><button type="button" class="button secondary" data-dp-research>↗ Ouvrir dans Recherche</button><button type="button" class="button secondary" data-import-plus="releves" title="Nimègue (v2, v3), CSV d’un cercle, Excel, LibreOffice : les actes relevés, avec leurs personnes">⤒ Importer des relevés</button><button type="button" class="button secondary" data-dp-decennale title="La photo d’une table décennale : l’app lit les noms, les dates et les sortes d’actes, tu relis, puis le dépouillement est créé">📑 Lire une table décennale</button><button type="button" class="button" data-dp-new>＋ Nouveau dépouillement</button></div></header>
             <div data-dp-bar></div>
             ${rows.length ? [...groups.entries()].map(([c, list]) => `<h3 class="h-dp-city">🏘️ ${esc(c)} <small class="muted">${list.length}</small></h3>${group(list)}`).join('')

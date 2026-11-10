@@ -24,6 +24,7 @@
     const api = (...a) => A().api(...a);
     const post = async (action, body) => { const r = await api(action, {}, {method: 'POST', body}); return r?.result || r; };
     const plural = (n, w, pl) => (A()?.plural ? A().plural(n, w, pl) : `${n} ${n > 1 ? (pl || w + 's') : w}`);
+    const i18n = (text, vars) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(text, vars) : String(text ?? '')); // 🌐 app-i18n.js
     const lsGet = (k, d) => { try { return localStorage.getItem(k) ?? d; } catch (_) { return d; } };
     const lsSet = (k, v) => { try { localStorage.setItem(k, v); } catch (_) {} };
     const lsJson = k => { try { const v = JSON.parse(localStorage.getItem(k) || 'null'); return v && typeof v === 'object' ? v : null; } catch (_) { return null; } };
@@ -91,14 +92,14 @@
 
     /** les adresses des Archives des départements de sa vie (une proposition par département) */
     function deptSites(ctx) {
-        return ctx.depts.slice(0, 4).map(d => ({key: `ouc_ad_${d.code}`, icon: '🏛', label: `${d.service || 'Archives du département'} — état civil et registres paroissiaux`, group: 'Archives',
+        return ctx.depts.slice(0, 4).map(d => ({key: `ouc_ad_${d.code}`, icon: '🏛', label: i18n('{service} — état civil et registres paroissiaux', {service: d.service || i18n('Archives du département')}), group: 'Archives',
             url: () => d.url || `https://www.google.com/search?q=${encodeURIComponent(`${d.service || 'archives départementales ' + d.name} état civil registres paroissiaux en ligne ${d.place || ''}`.trim())}`,
             rel: {countries: ['fr'], base: 1.6, missing: ['birth', 'death', 'marriage', 'parents', 'father', 'mother'], why: c => {
                 const at = d.place ? `${d.place} (${d.name})` : d.name;
-                if (c.missing.has('birth')) return `Naissance inconnue : les registres de ${at}, en ligne${c.by ? `, autour de ${c.by}` : ''}`;
-                if (c.missing.has('parents') || c.missing.has('father') || c.missing.has('mother')) return `Parents inconnus : son acte de ${c.tags.has('MARR') ? 'mariage' : 'naissance'} à ${at} donne le nom de ses parents`;
-                if (c.missing.has('death')) return `Décès inconnu : les registres de ${at}`;
-                return `${c.female ? 'Elle a vécu' : 'Il a vécu'} à ${at} : l’état civil et les registres paroissiaux en ligne`;
+                if (c.missing.has('birth')) return c.by ? i18n('Naissance inconnue : les registres de {place}, en ligne, autour de {year}', {place: at, year: c.by}) : i18n('Naissance inconnue : les registres de {place}, en ligne', {place: at});
+                if (c.missing.has('parents') || c.missing.has('father') || c.missing.has('mother')) return i18n(c.tags.has('MARR') ? 'Parents inconnus : son acte de mariage à {place} donne le nom de ses parents' : 'Parents inconnus : son acte de naissance à {place} donne le nom de ses parents', {place: at});
+                if (c.missing.has('death')) return i18n('Décès inconnu : les registres de {place}', {place: at});
+                return i18n(c.female ? 'Elle a vécu à {place} : l’état civil et les registres paroissiaux en ligne' : 'Il a vécu à {place} : l’état civil et les registres paroissiaux en ligne', {place: at});
             }}}));
     }
 
@@ -171,7 +172,7 @@
         } catch (e) { A().toast(e.message, 'error', {retry: () => markSearched(view, x, result)}); return; }
         await refreshView(view);
         const label = {found: 'Trouvé', none: 'Rien trouvé', review: 'À revoir'}[result];
-        A().undoToast(`✓ ${label} sur ${x.site.label} : noté dans le Journal des recherches`, {undo: async () => { if (id) await post('delete_archive_digest', {id}); await refreshView(view); }});
+        A().undoToast(i18n('✓ {result} sur {site} : noté dans le Journal des recherches', {result: i18n(label), site: x.site.label}), {undo: async () => { if (id) await post('delete_archive_digest', {id}); await refreshView(view); }});
     }
     async function makeLead(view, x) {
         const ctx = view.res.ctx;
@@ -179,7 +180,7 @@
         try { r = await post('ou_chercher_piste', {person_id: view.pid, title: `Chercher sur ${x.site.label}`.slice(0, 200), url: x.site.href, notes: `${x.reasons.join('. ')}. — proposé par « 🌍 Où chercher ? » pour ${ctx.name}.`}); }
         catch (e) { A().toast(e.message, 'error'); return; }
         await refreshView(view);
-        A().undoToast(`＋ Piste ajoutée : « Chercher sur ${x.site.label} »${r.created ? ' (nouvelle enquête « Où chercher ? »)' : ''}`, {undo: async () => {
+        A().undoToast(i18n(r.created ? '＋ Piste ajoutée : « Chercher sur {site} » (nouvelle enquête « Où chercher ? »)' : '＋ Piste ajoutée : « Chercher sur {site} »', {site: x.site.label}), {undo: async () => {
             if (r.item_id) await post('delete_investigation_item', {id: r.item_id});
             if (r.created && r.investigation_id) await post('delete_investigation', {id: r.investigation_id});
             await refreshView(view);
@@ -188,7 +189,7 @@
     async function copyIfNeeded(x) {
         const s = x.site; if (!s.copy || !s.lot?.copyText) return;
         const t = s.lot.copyText(s.raw, x.p || {}); if (!t) return;
-        try { await navigator.clipboard.writeText(t); A().toast(`« ${t} » est copié : colle-le dans la case de recherche du site (${A().keys?.text ? A().keys.text('⌘V') : '⌘V'}).`, 'success'); } catch (_) {}
+        try { await navigator.clipboard.writeText(t); A().toast(i18n('« {text} » est copié : colle-le dans la case de recherche du site ({key}).', {text: t, key: A().keys?.text ? A().keys.text('⌘V') : '⌘V'}), 'success'); } catch (_) {}
     }
     document.addEventListener('click', e => {
         const t = e.target; const row = t.closest?.('[data-ouc-key]'); if (!row) return;
@@ -244,9 +245,9 @@
             view.res = suggest(view.data);
             const top = view.res.list.slice(0, BLOCK_N);
             const n = view.res.list.length, done = view.res.searched.length;
-            box.innerHTML = `<p class="ouc-intro">Les sites les plus utiles pour ${esc(view.res.ctx.name)}, d’après ses lieux, ses dates et ce qui manque. Chaque site s’ouvre dans ton navigateur, son nom déjà rempli.</p>
+            box.innerHTML = `<p class="ouc-intro">${i18n('Les sites les plus utiles pour {name}, d’après ses lieux, ses dates et ce qui manque. Chaque site s’ouvre dans ton navigateur, son nom déjà rempli.', {name: esc(view.res.ctx.name)})}</p>
                 ${freeToggle()}${top.length ? listHtml(top, {compact: true}) : A().empty('Aucun site à proposer pour cette fiche.', {icon: '🌍', hint: 'Ajoute un lieu ou une date : les propositions s’affinent.'})}
-                <p class="ouc-foot">${n > BLOCK_N ? `<button type="button" class="link-button" data-ouc-page="${pid}">Voir les ${n - BLOCK_N} autres propositions ↓</button>` : ''}${done ? ` <span class="muted">· ✓ ${plural(done, 'site déjà cherché', 'sites déjà cherchés')}</span>` : ''}${view.res.hidden ? ` <span class="muted">· ${plural(view.res.hidden, 'site payant caché', 'sites payants cachés')}</span>` : ''}</p>`;
+                <p class="ouc-foot">${n > BLOCK_N ? `<button type="button" class="link-button" data-ouc-page="${pid}">${i18n('Voir les {n} autres propositions ↓', {n: n - BLOCK_N})}</button>` : ''}${done ? ` <span class="muted">· ✓ ${plural(done, 'site déjà cherché', 'sites déjà cherchés')}</span>` : ''}${view.res.hidden ? ` <span class="muted">· ${plural(view.res.hidden, 'site payant caché', 'sites payants cachés')}</span>` : ''}</p>`;
         };
         // le bloc grandit une fois rempli : si on est plus bas dans la fiche (adresse #personnes/1/documents…), rien ne bouge à l'écran
         const keep = fn => {
@@ -298,16 +299,16 @@
             const res = view.res = suggest(view.data);
             const ctx = res.ctx, todo = res.list, done = res.searched;
             const facts = [ctx.by ? `${C().lifeText(ctx)}` : '', ...[...ctx.countries.keys()].map(c => C().COUNTRY_NAME[c] || c), ...ctx.depts.map(d => d.name), ...[...ctx.profiles].filter(k => C().PROFILES[k]).map(k => `${C().PROFILES[k][0]} ${C().PROFILES[k][1]}`), ...[...ctx.missing].map(m => `❓ ${C().MISSING[m]}`)].filter(Boolean);
-            const tabs = [['todo', `Proposés (${todo.length})`], ['done', `✓ Déjà cherchés (${done.length})`], ['out', `Écartés (${res.out.length})`]];
+            const tabs = [['todo', i18n('Proposés ({n})', {n: todo.length})], ['done', i18n('✓ Déjà cherchés ({n})', {n: done.length})], ['out', i18n('Écartés ({n})', {n: res.out.length})]];
             const rows = view.tab === 'done' ? done : view.tab === 'out' ? [] : todo;
             body.innerHTML = `<div class="ouc-facts" aria-label="Ce qui compte pour choisir">${facts.map(f => `<span class="ouc-fact">${esc(f)}</span>`).join('')}</div>
                 <div class="ouc-bar"><div class="ui-filters" role="tablist">${tabs.map(([k, l]) => `<button type="button" class="${view.tab === k ? 'is-active' : ''}" data-ouc-tab="${k}">${esc(l)}</button>`).join('')}</div>${freeToggle()}
                 <button type="button" class="button small secondary" data-ouc-open-person="${view.pid}">↗ Fiche</button><button type="button" class="button small secondary" data-ouc-wall-toggle>${view.data.raw.wall?.manual ? '🧱 Ne plus bloquer ici' : '🧱 Je bloque ici'}</button></div>
                 ${view.tab === 'out' ? (res.out.length ? `<ul class="ouc-out">${res.out.slice(0, 200).map(o => `<li><b>${esc(o.site.label)}</b> <span class="muted">— ${esc(o.why)}</span></li>`).join('')}</ul>` : A().empty('Aucun site écarté.', {icon: '🌍'}))
-                    : rows.length ? listHtml(rows.slice(0, view.shown)) + (rows.length > view.shown ? `<button type="button" class="ui-more" data-ouc-more-rows>${rows.length - view.shown === 1 ? 'Voir le suivant ↓' : `Voir les ${Math.min(15, rows.length - view.shown)} suivants ↓`}</button>` : '')
+                    : rows.length ? listHtml(rows.slice(0, view.shown)) + (rows.length > view.shown ? `<button type="button" class="ui-more" data-ouc-more-rows>${rows.length - view.shown === 1 ? i18n('Voir le suivant ↓') : i18n('Voir les {n} suivants ↓', {n: Math.min(15, rows.length - view.shown)})}</button>` : '')
                     : view.tab === 'done' ? A().empty('Rien n’a encore été noté pour cette personne.', {icon: '✓', hint: 'Après une recherche, « ✓ Déjà cherché » la note dans le Journal des recherches.'})
-                    : A().empty('Aucun site à proposer.', {icon: '🌍', hint: res.hidden ? `${plural(res.hidden, 'site payant est caché', 'sites payants sont cachés')} : décoche « Gratuites seulement ».` : 'Ajoute un lieu ou une date sur la fiche.'})}
-                ${view.tab === 'todo' && res.hidden ? `<p class="ui-hint">${plural(res.hidden, 'site payant caché', 'sites payants cachés')} par « Gratuites seulement ».</p>` : ''}
+                    : A().empty('Aucun site à proposer.', {icon: '🌍', hint: res.hidden ? i18n('{n} : décoche « Gratuites seulement ».', {n: plural(res.hidden, 'site payant est caché', 'sites payants sont cachés')}) : 'Ajoute un lieu ou une date sur la fiche.'})}
+                ${view.tab === 'todo' && res.hidden ? `<p class="ui-hint">${i18n('{n} par « Gratuites seulement ».', {n: plural(res.hidden, 'site payant caché', 'sites payants cachés')})}</p>` : ''}
                 ${view.data.raw.leads?.length ? `<details class="ouc-leads"><summary>📌 ${plural(view.data.raw.leads.length, 'piste d’enquête', 'pistes d’enquête')}</summary><ul>${view.data.raw.leads.slice(0, 20).map(l => `<li>${esc(l.title)} <small class="muted">· ${esc(l.investigation)}</small> <button type="button" class="link-button" data-ouc-inv="${l.investigation_id}">↗ Ouvrir</button></li>`).join('')}</ul></details>` : ''}`;
         };
         body.addEventListener('click', async e => {
@@ -330,13 +331,13 @@
     async function wallSave(pid, body) { return post('mur_save', {person_id: pid, ...body}); }
     async function toggleManual(pid, name, on) {
         let r; try { r = await wallSave(pid, {manual: on ? 1 : 0}); } catch (e) { A().toast(e.message, 'error'); return null; }
-        A().undoToast(on ? `🧱 ${name || 'Cette personne'} : ajoutée aux murs de brique` : `🧱 ${name || 'Cette personne'} : ne bloque plus ici`, {undo: async () => { await post('mur_restore', {person_id: pid, prev: r.prev}); refreshWalls(); }});
+        A().undoToast(i18n(on ? '🧱 {name} : ajoutée aux murs de brique' : '🧱 {name} : ne bloque plus ici', {name: name || i18n('Cette personne')}), {undo: async () => { await post('mur_restore', {person_id: pid, prev: r.prev}); refreshWalls(); }});
         refreshWalls(); return r;
     }
     async function setStatus(pid, name, status, after) {
         let r; try { r = await wallSave(pid, {status}); } catch (e) { A().toast(e.message, 'error'); return; }
         const undo = async () => { await post('mur_restore', {person_id: pid, prev: r.prev}); await after?.(); refreshWalls(); };
-        if (status === 'solved') A().undoToast(`🎉 Bravo ! Le mur de ${name} est tombé : une génération de plus à découvrir.`, {undo, icon: '🎉'});
+        if (status === 'solved') A().undoToast(i18n('🎉 Bravo ! Le mur de {name} est tombé : une génération de plus à découvrir.', {name}), {undo, icon: '🎉'});
         else A().undoToast(`🧩 ${name} : ${STATUS[status][0].toLowerCase()}`, {undo});
         await after?.(); refreshWalls();
     }
@@ -344,7 +345,7 @@
     async function loadWalls() { wallsState.data = await api('murs_de_brique'); congratulate(wallsState.data); return wallsState.data; }
     /** un mur tombé tout seul (ses parents sont maintenant dans la base) : félicitations, une seule fois */
     function congratulate(d) {
-        (d?.newly_solved || []).forEach(w => A().undoToast?.(`🎉 Bravo ! Le mur de ${w.name} est tombé : ses parents sont maintenant dans ta base.`, {icon: '🎉'}));
+        (d?.newly_solved || []).forEach(w => A().undoToast?.(i18n('🎉 Bravo ! Le mur de {name} est tombé : ses parents sont maintenant dans ta base.', {name: w.name}), {icon: '🎉'}));
     }
     function refreshWalls() {
         if (S()?.module === 'recherche' && S().researchKind === 'murs' && document.querySelector('#workspace .ouc-walls')) wallsPaint?.();
@@ -376,7 +377,7 @@
             filters: [{id: 'status', label: 'Statut', type: 'check', options: Object.entries(STATUS).map(([k, v]) => [k, v[0], v[0], d.counts[k] || 0]), value: ['open', 'progress']},
                 {id: 'miss', label: 'Ce qui manque', type: 'check', options: [['both', 'Les deux parents', 'Deux parents', d.counts.both || 0], ['father', 'Le père', 'Père', d.counts.father || 0], ['mother', 'La mère', 'Mère', d.counts.mother || 0]]},
                 {id: 'manual', label: 'Marqués à la main', chipLabel: '🧱 À la main', type: 'check'},
-                {id: 'gen', label: 'Génération', type: 'radio', options: [['', 'Toutes'], ...gens.map(g => [String(g), `Génération ${g}`])], dflt: ''}],
+                {id: 'gen', label: 'Génération', type: 'radio', options: [['', 'Toutes'], ...gens.map(g => [String(g), i18n('Génération {n}', {n: g})])], dflt: ''}],
             view: {dflt: 'list', what: 'fiches'},
             sort: {options: [['gen', 'Génération, puis Sosa'], ['az', 'A → Z'], ['za', 'Z → A'], ['recent', 'Plus récents']], value: 'gen'},
             onChange: () => { shown = 40; paint(); }});
@@ -454,7 +455,7 @@
                   <section><h4>🔍 Déjà cherché <small>${journal.length + leads.length + (det.courriers || []).length}</small></h4>
                     ${journal.length || leads.length || det.courriers?.length ? `<ul class="ouc-mini">${journal.slice(0, 12).map(j => `<li>${j.result && RESULT[j.result] ? badge(RESULT[j.result][0], RESULT[j.result][1]) + ' ' : ''}${esc(j.title)} <small class="muted">${when(j.date)}</small></li>`).join('')}
                       ${(det.courriers || []).map(c => `<li>✉️ ${esc(c.objet)} — ${esc(c.destinataire)} <small class="muted">${esc(c.statut)}</small></li>`).join('')}
-                      ${leads.map(l => `<li>📌 ${esc(l.title)} <small class="muted">· ${esc({to_explore_priority: 'à explorer en priorité', to_explore: 'à explorer', promising: 'prometteuse', explored: 'explorée', closed: 'fermée'}[l.status] || l.status)}</small> <button type="button" class="link-button" data-ouc-inv="${l.investigation_id}">↗</button></li>`).join('')}</ul>`
+                      ${leads.map(l => `<li>📌 ${esc(l.title)} <small class="muted">· ${esc(i18n({to_explore_priority: 'à explorer en priorité', to_explore: 'à explorer', promising: 'prometteuse', explored: 'explorée', closed: 'fermée'}[l.status] || l.status))}</small> <button type="button" class="link-button" data-ouc-inv="${l.investigation_id}">↗</button></li>`).join('')}</ul>`
                       : A().empty('Rien de noté pour l’instant.', {icon: '🔍'})}
                     ${det.hypotheses?.length ? `<p class="muted">⚖️ ${plural(det.hypotheses.length, 'hypothèse')} : ${det.hypotheses.slice(0, 3).map(x => esc(x.title)).join(' · ')}</p>` : ''}</section>
                   <section><h4>🌍 À essayer <small>${res.list.length}</small></h4>${todo.length ? listHtml(todo, {compact: true}) : A().empty('Tous les sites proposés ont été cherchés.', {icon: '✓'})}
@@ -490,10 +491,10 @@
         if (!d) return A().empty('Les murs de brique n’ont pas pu être lus.', {icon: '⛔'});
         const open = d.items.filter(w => w.status === 'open' || w.status === 'progress');
         const c = d.counts || {};
-        const pills = [c.open ? badge(`${c.open} à chercher`, 'yellow') : '', c.progress ? badge(`${c.progress} en cours`, 'blue') : '', c.solved ? badge(`🎉 ${c.solved} résolu${c.solved > 1 ? 's' : ''}`, 'green') : ''].join(' ');
+        const pills = [c.open ? badge(i18n('{n} à chercher', {n: c.open}), 'yellow') : '', c.progress ? badge(i18n('{n} en cours', {n: c.progress}), 'blue') : '', c.solved ? badge('🎉 ' + plural(c.solved, 'résolu', 'résolus'), 'green') : ''].join(' ');
         if (!open.length) return `${pills ? `<div class="ouc-w-counts">${pills}</div>` : ''}${A().empty(c.solved ? 'Tous tes murs sont tombés, bravo !' : 'Aucun mur de brique : tes ancêtres connus ont leurs parents.', {icon: '🎉'})}`;
         return `<div class="ouc-w-counts">${pills}</div><ul class="ouc-w-list">${open.slice(0, limit).map(w => `<li><button type="button" class="ouc-w-row" data-ouc-wall-open="${w.person_id}">${avatar(w)}<span><b>${esc(w.name)}</b><small class="muted">${esc([w.sosa ? `Sosa ${w.sosa}` : '', `manque ${MISS[w.missing] ?? ''}`].filter(Boolean).join(' · '))}</small></span>${statusBadge(w)}</button></li>`).join('')}</ul>
-            ${open.length > limit ? `<button type="button" class="link-button" data-ouc-walls-all>Voir les ${open.length - limit} autres ↓</button>` : ''}`;
+            ${open.length > limit ? `<button type="button" class="link-button" data-ouc-walls-all>${i18n('Voir les {n} autres ↓', {n: open.length - limit})}</button>` : ''}`;
     }
     function paintWidget(el) {
         api('murs_de_brique').then(d => { wallsState.data = d; el.innerHTML = widgetBody(d, Number(el.dataset.limit) || 5); }).catch(() => {});

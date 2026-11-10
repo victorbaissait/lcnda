@@ -25,6 +25,7 @@
     const toast = (...a) => A().toast(...a);
     const plural = (n, w, many) => (A().plural ? A().plural(n, w, many) : `${n} ${w}`);
     const kiosk = () => document.body?.classList.contains('is-kiosk');
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const store = {get(k, d) { try { const v = JSON.parse(localStorage.getItem(k) || 'null'); return v ?? d; } catch (_) { return d; } }, set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (_) {} }};
     const ANSWERS = [['', 'Sans réponse', 'grey'], ['yes', 'Oui', 'green'], ['maybe', 'Peut-être', 'yellow'], ['no', 'Non', 'red']];
     const answerOf = v => ANSWERS.find(a => a[0] === (v || '')) || ANSWERS[0];
@@ -64,7 +65,7 @@
                 thumb: r.cover ? `<img src="media/${encodeURIComponent(r.cover)}" alt="" loading="lazy">` : '<span class="ui-card-ico" aria-hidden="true">🎉</span>',
                 name: r.title, open: `data-cous-open="${r.id}"`, attrs: `data-cous-row="${r.id}" data-ctx-menu`,
                 lines: [r.ancestor ? `Descendants de ${r.ancestor}${r.ancestor2 ? ' et ' + r.ancestor2 : ''}` : '', [r.date_text, r.place_text].filter(Boolean).join(' · ')].filter(Boolean),
-                badges: [{text: plural(r.invited, 'invité'), kind: 'blue'}, r.yes ? {text: `${r.yes} oui`, kind: 'green'} : null, r.waiting ? {text: `${r.waiting} sans réponse`, kind: 'yellow'} : null].filter(Boolean),
+                badges: [{text: plural(r.invited, 'invité'), kind: 'blue'}, r.yes ? {text: i18n('{n} oui', {n: r.yes}), kind: 'green'} : null, r.waiting ? {text: i18n('{n} sans réponse', {n: r.waiting}), kind: 'yellow'} : null].filter(Boolean),
                 when: r.updated_at, whenLabel: 'Modifié',
                 menu: kiosk() ? [] : [`<button type="button" data-cous-ren="${r.id}">✎ Renommer</button>`, `<button type="button" class="danger" data-cous-del="${r.id}">🗑 Supprimer</button>`]}))) : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔍</span><span class="empty-line-text">Aucune cousinade ne correspond.</span></p>';
         }
@@ -84,7 +85,7 @@
         try { await post({op: 'delete', id: Number(id)}); } catch (e) { toast(e.message, 'error'); return; }
         if (cur.id === Number(id)) { cur.id = 0; cur.data = null; }
         (after || (() => ext.lists[LIST]()))();
-        A().undoToast(`Cousinade supprimée : « ${r?.title || ''} »`, {undo: async () => { await post({op: 'restore', id: Number(id)}); (after || (() => ext.lists[LIST]()))(); }, redo: async () => { await post({op: 'delete', id: Number(id)}); (after || (() => ext.lists[LIST]()))(); }});
+        A().undoToast(i18n('Cousinade supprimée : « {name} »', {name: r?.title || ''}), {undo: async () => { await post({op: 'restore', id: Number(id)}); (after || (() => ext.lists[LIST]()))(); }, redo: async () => { await post({op: 'delete', id: Number(id)}); (after || (() => ext.lists[LIST]()))(); }});
     }
 
     /* ═════ ＋ Nouvelle cousinade / ✎ Modifier ═════ */
@@ -111,7 +112,7 @@
                     if (!a) { prev.innerHTML = A().empty('Choisis l’ancêtre : l’app cherche ses descendants vivants.', {icon: '🌳'}); return; }
                     prev.innerHTML = UI().spinner('Recherche des descendants vivants…', {inline: true});
                     try { const r = await get('preview', {ancestor_id: a, ancestor2_id: b, spouses: f.querySelector('[name=include_spouses]')?.checked ? 1 : 0}); if (my !== seq) return;
-                        prev.innerHTML = UI().notice(r.descendants ? 'info' : 'warn', `${plural(r.descendants, 'descendant vivant', 'descendants vivants')} dans ${plural(r.branches, 'branche')}${r.found > r.descendants ? `, et ${plural(r.found - r.descendants, 'conjoint')}` : ''}.${r.doubt ? ` ${plural(r.doubt, 'personne')} sans décès noté, née il y a moins de 100 ans : marquée « vivant ? ».` : ''}${r.private ? ` ${plural(r.private, 'fiche confidentielle')} laissée${r.private > 1 ? 's' : ''} de côté.` : ''}`);
+                        prev.innerHTML = UI().notice(r.descendants ? 'info' : 'warn', (r.found > r.descendants ? i18n('{who} dans {branches}, et {spouses}.', {who: plural(r.descendants, 'descendant vivant', 'descendants vivants'), branches: plural(r.branches, 'branche'), spouses: plural(r.found - r.descendants, 'conjoint')}) : i18n('{who} dans {branches}.', {who: plural(r.descendants, 'descendant vivant', 'descendants vivants'), branches: plural(r.branches, 'branche')})) + (r.doubt ? ' ' + i18n('{n} sans décès noté, née il y a moins de 100 ans : marquée « vivant ? ».', {n: plural(r.doubt, 'personne')}) : '') + (r.private ? ' ' + i18n(r.private > 1 ? '{n} laissées de côté.' : '{n} laissée de côté.', {n: plural(r.private, 'fiche confidentielle')}) : ''));
                     } catch (e) { if (my === seq) prev.innerHTML = UI().notice('error', e.message); }
                 };
                 f.addEventListener('picker-change', e => { if (e.target.closest('.pk')?.querySelector('[name=ancestor_id],[name=ancestor2_id]') || /ancestor/.test(e.target.closest('.pk')?.querySelector('input[type=hidden]')?.name || '')) refresh(); });
@@ -126,8 +127,8 @@
                     include_spouses: form.querySelector('[name=include_spouses]')?.checked ? 1 : 0, place_text: ''};
                 let r; try { r = await post(body); } catch (e) { toast(e.message, 'error'); return false; }
                 const res = r.result || r, added = res.fill?.added?.length || 0;
-                if (!d.id) toast(`Cousinade créée : ${plural(added, 'invité trouvé', 'invités trouvés')}.`, 'success');
-                else if (res.fill) A().undoToast(`Cousinade enregistrée : ${plural(added, 'nouvel invité', 'nouveaux invités')}.`, {undo: async () => { await post({op: 'guests_purge', cousinade_id: res.id, ids: res.fill.added}); reload(); }});
+                if (!d.id) toast(i18n('Cousinade créée : {n}.', {n: plural(added, 'invité trouvé', 'invités trouvés')}), 'success');
+                else if (res.fill) A().undoToast(i18n('Cousinade enregistrée : {n}.', {n: plural(added, 'nouvel invité', 'nouveaux invités')}), {undo: async () => { await post({op: 'guests_purge', cousinade_id: res.id, ids: res.fill.added}); reload(); }});
                 else toast('Cousinade enregistrée.', 'success');
                 openList(res.id);
             }});
@@ -153,7 +154,7 @@
             actions: kiosk() ? [] : ['<button type="button" class="button secondary" data-cous-edit>✎ Modifier</button>'],
             more: kiosk() ? [] : ['<button type="button" data-cous-rescan>↻ Chercher les nouveaux descendants</button>', `<button type="button" data-cous-ren="${d.id}">✎ Renommer</button>`, d.ancestor_id ? `<button type="button" data-h-person="${d.ancestor_id}">↗ Fiche de l’ancêtre</button>` : '', `<button type="button" class="danger" data-cous-del="${d.id}">🗑 Supprimer</button>`]})}
             <div class="segmented cous-tabs" role="tablist">${TABS.map(([k, l]) => `<button type="button" role="tab" data-cous-tab="${k}" class="${cur.tab === k ? 'is-active' : ''}" aria-selected="${cur.tab === k}">${l}</button>`).join('')}</div>
-            ${d.hidden ? UI().notice('info', `${plural(d.hidden, 'invité')} n’${d.hidden > 1 ? 'apparaissent' : 'apparaît'} plus : sa fiche est devenue confidentielle (ou a été supprimée).`) : ''}
+            ${d.hidden ? UI().notice('info', i18n(d.hidden > 1 ? '{n} n’apparaissent plus : sa fiche est devenue confidentielle (ou a été supprimée).' : '{n} n’apparaît plus : sa fiche est devenue confidentielle (ou a été supprimée).', {n: plural(d.hidden, 'invité')})) : ''}
             <div data-cous-tabbody></div></section>`;
         const body = w.querySelector('[data-cous-tabbody]');
         ({guests: tabGuests, invit: tabInvit, badges: tabBadges, tree: tabTree, day: tabDay, stats: tabStats})[cur.tab](body, d);
@@ -173,7 +174,7 @@
     const kinLines = (d, g) => {
         const ref = d.ref, out = [];
         if (g.kin_ancestor) out.push(`${g.kin_ancestor} de ${d.ancestor_name}`);
-        if (ref && g.kin_ref) out.push(g.kin_ref === 'self' ? 'la personne de référence' : `${g.kin_ref} de ${ref.first || ref.name}`);
+        if (ref && g.kin_ref) out.push(g.kin_ref === 'self' ? i18n('la personne de référence') : i18n('{x} de {who} (lien)', {x: g.kin_ref, who: ref.first || ref.name}));
         return out;
     };
 
@@ -209,7 +210,7 @@
                 && (!f.branch?.length || f.branch.includes(String(g.branch_id))) && (!f.answer?.length || f.answer.includes(g.answer || 'none'))
                 && (!f.inv || (f.inv === 'on' ? g.invited : !g.invited)) && (!f.miss?.includes('addr') || !(g.address || g.city)) && (!f.miss?.includes('mail') || !g.email) && (!f.doubt || g.doubt)), st.sort);
             const inv = list.filter(g => g.invited).length;
-            bar.setCount(`${plural(shown.length, 'personne')} · ${plural(inv, 'invitée', 'invitées')} en tout`);
+            bar.setCount(i18n('{n} · {inv} en tout', {n: plural(shown.length, 'personne'), inv: plural(inv, 'invitée', 'invitées')}));
             const out = box.querySelector('[data-cous-glist]');
             if (!shown.length) { out.innerHTML = '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔍</span><span class="empty-line-text">Aucun invité ne correspond.</span></p>'; return; }
             if (st.view === 'cards') {
@@ -232,8 +233,8 @@
         body.addEventListener('change', async e => {
             const t = e.target, gid = Number(t.dataset.cousInv || t.dataset.cousAns || t.dataset.cousNb || t.dataset.cousDiet || 0); if (!gid) return;
             const g = list.find(x => x.id === gid); if (!g) return;
-            if (t.dataset.cousInv) return setField([gid], 'invited', t.checked ? 1 : 0, t.checked ? `${C().fullName(g)} est invité${g.gender === 'female' ? 'e' : ''}.` : `${C().fullName(g)} n’est plus invité${g.gender === 'female' ? 'e' : ''}.`);
-            if (t.dataset.cousAns) return setField([gid], 'answer', t.value, `Réponse de ${C().fullName(g)} : ${answerOf(t.value)[1]}.`);
+            if (t.dataset.cousInv) return setField([gid], 'invited', t.checked ? 1 : 0, i18n(t.checked ? (g.gender === 'female' ? '{name} est invitée.' : '{name} est invité.') : (g.gender === 'female' ? '{name} n’est plus invitée.' : '{name} n’est plus invité.'), {name: C().fullName(g)}));
+            if (t.dataset.cousAns) return setField([gid], 'answer', t.value, i18n('Réponse de {name} : {answer}.', {name: C().fullName(g), answer: i18n(answerOf(t.value)[1])}));
             const patch = t.dataset.cousNb ? {people_count: t.value === '' ? '' : Number(t.value)} : {diet: t.value};
             try { await post({op: 'guest_save', cousinade_id: d.id, id: gid, ...patch}); Object.assign(g, t.dataset.cousNb ? {people_count: t.value === '' ? null : Number(t.value)} : {diet: t.value}); toast('✓ Enregistré', 'success'); }
             catch (er) { if (t.dataset.cousNb && UI().fail) UI().fail(t, er.message); else toast(er.message, 'error'); }
@@ -241,14 +242,14 @@
         body.addEventListener('click', e => {
             const m = e.target.closest('[data-cous-gmenu]'); if (m) { const g = list.find(x => x.id === Number(m.dataset.cousGmenu)); if (g) UI().menuAt(m, guestMenu(g)); return; }
             if (e.target.closest('[data-cous-gmore]')) { UI().menuAt(e.target.closest('[data-cous-gmore]'), [
-                {icon: '✓', label: `Inviter les ${plural(shown.length, 'personne')} affichées`, run: () => setField(shown.map(g => g.id), 'invited', 1, `${plural(shown.length, 'personne')} invitée${shown.length > 1 ? 's' : ''}.`)},
-                {icon: '○', label: 'Ne plus inviter les personnes affichées', run: () => setField(shown.map(g => g.id), 'invited', 0, `${plural(shown.length, 'personne')} retirée${shown.length > 1 ? 's' : ''} des invitations.`)},
+                {icon: '✓', label: i18n('Inviter les {n} affichées', {n: plural(shown.length, 'personne')}), run: () => setField(shown.map(g => g.id), 'invited', 1, i18n(shown.length > 1 ? '{n} invitées.' : '{n} invitée.', {n: plural(shown.length, 'personne')}))},
+                {icon: '○', label: 'Ne plus inviter les personnes affichées', run: () => setField(shown.map(g => g.id), 'invited', 0, i18n(shown.length > 1 ? '{n} retirées des invitations.' : '{n} retirée des invitations.', {n: plural(shown.length, 'personne')}))},
                 '-', {icon: '↻', label: 'Chercher les nouveaux descendants', run: rescan}]); return; }
             if (e.target.closest('[data-cous-export]')) { UI().menuAt(e.target.closest('[data-cous-export]'), [{icon: '⤓', label: 'Tableau des invités (CSV)…', run: () => exportCsv(d)}, {icon: '🖨', label: 'Imprimer la liste des invités…', run: () => printGuests(d)}]); }
         });
     }
     const guestMenu = g => [{icon: '✎', label: 'Modifier', run: () => editGuest(g)}, ...(g.person_id ? [{icon: '↗', label: 'Ouvrir la fiche', run: () => { A().state.currentPersonId = g.person_id; A().setModule('personnes'); }}] : []),
-        ...(g.email ? [{icon: '✉️', label: 'Écrire un courriel', run: () => { location.href = C().mailto([g.email], cur.data.title, ''); }}] : []), '-', {icon: '🗑', label: 'Retirer de la liste', danger: true, run: () => removeGuests([g.id], `${C().fullName(g)} retiré${g.gender === 'female' ? 'e' : ''} de la liste.`)}];
+        ...(g.email ? [{icon: '✉️', label: 'Écrire un courriel', run: () => { location.href = C().mailto([g.email], cur.data.title, ''); }}] : []), '-', {icon: '🗑', label: 'Retirer de la liste', danger: true, run: () => removeGuests([g.id], i18n(g.gender === 'female' ? '{name} retirée de la liste.' : '{name} retiré de la liste.', {name: C().fullName(g)}))}];
     const guestMenuHtml = g => kiosk() ? [] : [`<button type="button" data-cous-gedit="${g.id}">✎ Modifier</button>`, g.person_id ? `<button type="button" data-h-person="${g.person_id}">↗ Ouvrir la fiche</button>` : '', `<button type="button" class="danger" data-cous-gdel="${g.id}">🗑 Retirer de la liste</button>`].filter(Boolean);
     async function setField(ids, field, value, msg) {
         const d = cur.data; if (!ids.length) return;
@@ -270,7 +271,7 @@
         const res = r.result || r, n = res.added?.length || 0;
         await reload();
         if (!n) return toast('Aucun nouveau descendant vivant : la liste est à jour.');
-        A().undoToast(`${plural(n, 'nouvel invité', 'nouveaux invités')} ajouté${n > 1 ? 's' : ''}.`, {undo: async () => { await post({op: 'guests_purge', cousinade_id: d.id, ids: res.added}); reload(); }});
+        A().undoToast(i18n(n > 1 ? '{n} ajoutés.' : '{n} ajouté.', {n: plural(n, 'nouvel invité', 'nouveaux invités')}), {undo: async () => { await post({op: 'guests_purge', cousinade_id: d.id, ids: res.added}); reload(); }});
     }
     /** ✎ un invité : coordonnées propres au projet (la fiche ne change pas, sauf la case) */
     function editGuest(g = null) {
@@ -293,7 +294,7 @@
                 <label>Note<textarea name="note" rows="2" maxlength="2000">${esc(row.note || '')}</textarea></label>
                 ${UI().checkHtml('Invité', {checked: isNew || !!row.invited, attrs: 'name="invited"'})}
                 ${row.person_id || isNew ? UI().checkHtml('Mettre aussi l’adresse, le courriel et le téléphone dans le répertoire des vivants (sa fiche)', {checked: false, attrs: 'name="to_contacts"', sub: 'Décoché : seulement dans cette cousinade.'}) : ''}</div>`,
-            onDelete: isNew ? null : async () => { await removeGuests([row.id], `${C().fullName(row)} retiré${row.gender === 'female' ? 'e' : ''} de la liste.`); },
+            onDelete: isNew ? null : async () => { await removeGuests([row.id], i18n(row.gender === 'female' ? '{name} retirée de la liste.' : '{name} retiré de la liste.', {name: C().fullName(row)})); },
             onSubmit: async form => {
                 const v = n => form.querySelector(`[name=${n}]`)?.value ?? '';
                 const pid = isNew ? Number(v('person_id')) || 0 : 0;
@@ -325,8 +326,8 @@
                 if (!res.guests.length) throw new Error('Je ne trouve ni prénom ni nom : la première ligne doit donner les titres des colonnes (Prénom, Nom, Courriel…).');
                 const have = new Set(d.guests.map(g => C().fold(`${g.first_name} ${g.last_name}`)));
                 const upd = res.guests.filter(g => have.has(C().fold(`${g.first_name || ''} ${g.last_name || ''}`))).length;
-                return {count: res.guests.length, summaryHtml: `<b>${esc(plural(res.guests.length - upd, 'nouvel invité', 'nouveaux invités'))}</b>${upd ? `, ${esc(plural(upd, 'invité déjà là', 'invités déjà là'))} (coordonnées et réponse complétées)` : ''}`,
-                    notices: res.unknown ? [{kind: 'info', text: `${plural(res.unknown, 'colonne')} non reconnue${res.unknown > 1 ? 's' : ''} : laissée${res.unknown > 1 ? 's' : ''} de côté.`}] : [],
+                return {count: res.guests.length, summaryHtml: `<b>${esc(plural(res.guests.length - upd, 'nouvel invité', 'nouveaux invités'))}</b>${upd ? ', ' + esc(i18n('{n} (coordonnées et réponse complétées)', {n: plural(upd, 'invité déjà là', 'invités déjà là')})) : ''}`,
+                    notices: res.unknown ? [{kind: 'info', text: i18n(res.unknown > 1 ? '{n} non reconnues : laissées de côté.' : '{n} non reconnue : laissée de côté.', {n: plural(res.unknown, 'colonne')})}] : [],
                     preview: `<table class="data-table"><thead><tr><th>Prénom</th><th>Nom</th><th>Ville</th><th>Réponse</th></tr></thead><tbody>${res.guests.slice(0, 8).map(g => `<tr><td>${esc(g.first_name || '')}</td><td>${esc(g.last_name || '')}</td><td>${esc(g.city || '')}</td><td>${esc(answerOf(g.answer)[1])}</td></tr>`).join('')}</tbody></table>`, data: res.guests};
             },
             run: async an => {
@@ -358,7 +359,7 @@
     }
     const printCss = `body{font-family:Georgia,'Times New Roman',serif;color:#111}table{border-collapse:collapse;width:100%;font-size:10.5pt}th,td{border:1px solid #999;padding:4px 6px;text-align:left;vertical-align:top}th{background:#eef2f8}.box{display:inline-block;width:14px;height:14px;border:1.5px solid #333;vertical-align:middle}.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:middle}h1{font-size:17pt;margin:0 0 4px}p.sub{margin:0 0 10px;color:#555;font-size:10pt}`;
     function printGuests(d) {
-        UI().openPrintDialog({title: `Invités — ${d.title}`, key: 'cousinade-invites', zone: 'Liste des invités', photos: false, margin: 12,
+        UI().openPrintDialog({title: i18n('Invités — {name}', {name: d.title}), key: 'cousinade-invites', zone: 'Liste des invités', photos: false, margin: 12,
             options: [{key: 'who', type: 'radio', value: 'inv', choices: [['inv', 'Les invités cochés'], ['yes', 'Ceux qui viennent'], ['all', 'Tout le monde']]}, {key: 'contacts', label: 'Avec les coordonnées', checked: false}],
             html: c => { const list = bySort(d, d.guests.filter(g => c.who === 'all' || (c.who === 'yes' ? g.invited && g.answer === 'yes' : g.invited)), 'branch');
                 return `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>${esc(d.title)}</title><style>${printCss}</style></head><body><h1>🎉 ${esc(d.title)}</h1><p class="sub">${esc([d.ancestor_name && 'Descendants de ' + d.ancestor_name, d.date_text, d.place_text].filter(Boolean).join(' · '))} · ${esc(plural(list.length, 'personne'))}</p>
@@ -381,7 +382,7 @@
                 <div class="cous-invit-acts"><button type="button" class="button" data-cous-print-inv>🖨 Imprimer les invitations…</button><button type="button" class="button secondary" data-cous-wp>📝 Dans le traitement de texte</button>
                     <button type="button" class="button secondary" data-cous-card>📰 Faire-part (dessin)</button><button type="button" class="button secondary" data-cous-media>📁 Copie dans les médias</button></div></div>
             <div class="cous-invit-side"><h3 class="section-label">Aperçu</h3><div class="cous-letter" data-cous-letter>${fs.length ? esc(letterOf(d, fs[0])).replace(/\n/g, '<br>') : ''}</div></div></div>
-            <h3 class="section-label">${esc(plural(fs.length, 'foyer'))} à inviter · ${esc(plural(withAddr.length, 'avec adresse', 'avec adresse'))} · ${esc(plural(withMail.length, 'avec courriel', 'avec courriel'))}</h3>
+            <h3 class="section-label">${esc(i18n('{n} à inviter', {n: plural(fs.length, 'foyer')}))} · ${esc(plural(withAddr.length, 'avec adresse', 'avec adresse'))} · ${esc(plural(withMail.length, 'avec courriel', 'avec courriel'))}</h3>
             ${withMail.length ? `<p><a class="button secondary" href="${esc(C().mailto(withMail.flatMap(f => f.emails), o.subject, C().fill(o.text, {...C().foyerValues({name: 'famille', members: []}, d), foyer: 'famille', prenoms: ''}), {bcc: true}))}" data-cous-mailall>✉️ Un courriel à tous (en copie cachée)</a> <small class="muted">Ta messagerie s’ouvre avec le texte prêt : rien n’est envoyé par l’app.</small></p>` : ''}
             ${fs.length ? UI().rowsHtml(fs.map(f => ({thumb: `<span class="cous-foyer-ico">${dot(d, f.branch_id)}🏠</span>`, name: f.name,
                 lines: [f.address.length ? f.address.join(', ') : '', f.emails.join(', ')].filter(Boolean).length ? [f.address.join(', '), f.emails.join(', ')].filter(Boolean) : ['Ni adresse ni courriel'],
@@ -420,8 +421,8 @@
         const CI = ext.cardInternals;
         if (!CI?.build || !ext.openVectorEditor) return toast('Les faire-part ne sont pas chargés.', 'error');
         const o = invOpt(d), K = CI.KINDS.cousinade;
-        const vals = {intro: d.title || 'Grande cousinade', name: `famille ${d.ancestor?.last ? d.ancestor.last.toLocaleUpperCase('fr-FR') : ''}`.trim(), date: [d.date_text, d.place_text && `à ${d.place_text}`].filter(Boolean).join(' '), detail: d.ancestor_name ? `Tous les descendants de ${d.ancestor_name}` : '',
-            family: [o.answerBy && `Réponse avant le ${o.answerBy}`, o.contact].filter(Boolean).join(' · ')};
+        const vals = {intro: d.title || 'Grande cousinade', name: `famille ${d.ancestor?.last ? d.ancestor.last.toLocaleUpperCase('fr-FR') : ''}`.trim(), date: [d.date_text, d.place_text && `à ${d.place_text}`].filter(Boolean).join(' '), detail: d.ancestor_name ? i18n('Tous les descendants de {name}', {name: d.ancestor_name}) : '',
+            family: [o.answerBy && i18n('Réponse avant le {date}', {date: o.answerBy}), o.contact].filter(Boolean).join(' · ')};
         const fields = K.fields.map(([key, label, value]) => ({key, role: key, label, value: vals[key] ?? value, hidden: false}));
         try { const doc = await CI.build({kind: 'cousinade', style: K.style, format: 'c10', orient: 'port', fold: 'single', fields});
             ext.openVectorEditor({doc, name: `Cousinade — ${d.title}`}); } catch (e) { toast(e.message, 'error'); }
@@ -437,7 +438,7 @@
         let y = 320; for (const para of text.split('\n')) { let line = ''; for (const word of para.split(' ')) { const t = line ? line + ' ' + word : word; if (g.measureText(t).width > W - 240 && line) { g.fillText(line, 120, y); y += 52; line = word; } else line = t; } g.fillText(line, 120, y); y += 52; if (y > H - 120) break; }
         const blob = await new Promise(ok => cv.toBlob(ok, 'image/png'));
         try { await pk.importMediaFile(new File([blob], `${(A().safeExportFilename ? A().safeExportFilename(d.title, 'cousinade') : 'cousinade')}-invitation.png`, {type: 'image/png'}), ['image']); toast('Une copie de l’invitation est rangée dans les médias.', 'success'); }
-        catch (e) { toast(`Copie non rangée dans les médias : ${e.message}`, 'error'); }
+        catch (e) { toast(i18n('Copie non rangée dans les médias : {err}', {err: e.message}), 'error'); }
     }
 
     /* ── 🏷 Badges ── */
@@ -488,7 +489,7 @@
         if (!TI) { body.innerHTML = UI().notice('error', 'L’arbre décoratif n’est pas chargé.'); return; }
         const fmts = TI.formats(true), ths = TI.themes(true);
         body.innerHTML = `<div class="cous-tree"><div class="cous-form">
-            <p>Toute la descendance de ${esc(d.ancestor_name || 'l’ancêtre')}, en grand, une couleur par branche, à afficher le jour de la cousinade. Le dessin s’ouvre ensuite pour tout retoucher, puis « ⤓ Exporter » (PDF pour l’imprimeur, avec fond perdu et traits de coupe, PNG, SVG…).</p>
+            <p>${i18n('Toute la descendance de {name}, en grand, une couleur par branche, à afficher le jour de la cousinade. Le dessin s’ouvre ensuite pour tout retoucher, puis « ⤓ Exporter » (PDF pour l’imprimeur, avec fond perdu et traits de coupe, PNG, SVG…).', {name: esc(d.ancestor_name || i18n('l’ancêtre'))})}</p>
             <label>Titre<input data-cous-topt="title" maxlength="120" value="${esc(o.title)}"></label>
             <div class="cous-2"><label>Format<select data-cous-topt="format">${fmts.map(f => `<option value="${esc(f[0])}"${f[0] === o.format ? ' selected' : ''}>${esc(f[1])}</option>`).join('')}</select></label>
                 <label>Style<select data-cous-topt="theme">${ths.map(([k, t]) => `<option value="${esc(k)}"${k === o.theme ? ' selected' : ''}>${esc(t.label)}</option>`).join('')}</select></label></div>
@@ -568,11 +569,11 @@
     }
     function dayPresence(sb, d) {
         const ro = kiosk(), list = bySort(d, d.guests.filter(g => g.invited && g.answer !== 'no'), 'branch'), here = list.filter(g => g.present).length, expected = list.filter(g => g.answer === 'yes').length;
-        sb.innerHTML = `<div class="cous-daybar"><p class="cous-big">${UI().badge(`${here} présent${here > 1 ? 's' : ''}`, 'green')} sur ${esc(plural(expected, 'personne attendue', 'personnes attendues'))}</p><button type="button" class="button secondary" data-cous-ppr>🖨 Imprimer la liste de présence…</button></div>
+        sb.innerHTML = `<div class="cous-daybar"><p class="cous-big">${i18n('{here} sur {n}', {here: UI().badge(plural(here, 'présent', 'présents'), 'green'), n: esc(plural(expected, 'personne attendue', 'personnes attendues'))})}</p><button type="button" class="button secondary" data-cous-ppr>🖨 Imprimer la liste de présence…</button></div>
             ${list.length ? `<div class="cous-presence">${list.map(g => `<label class="cous-pres${g.present ? ' is-on' : ''}"><input type="checkbox" data-cous-pres="${g.id}"${g.present ? ' checked' : ''}${ro ? ' disabled' : ''}>${avatar(g, 34)}<span><b>${dot(d, g.branch_id)}${esc(C().fullName(g))}</b><small class="muted">${esc(answerOf(g.answer)[1])}${g.people_count ? ` · ${g.people_count} pers.` : ''}${g.table_no ? ` · table ${g.table_no}` : ''}</small></span></label>`).join('')}</div>` : A().empty('Personne n’a encore dit oui : les réponses se notent dans « 👥 Invités ».', {icon: '✅'})}`;
-        sb.addEventListener('change', e => { const id = Number(e.target.dataset.cousPres); if (!id) return; const g = d.guests.find(x => x.id === id); e.target.closest('.cous-pres')?.classList.toggle('is-on', e.target.checked); setField([id], 'present', e.target.checked ? 1 : 0, e.target.checked ? `${C().fullName(g)} est là.` : `${C().fullName(g)} n’est plus noté${g.gender === 'female' ? 'e' : ''} présent${g.gender === 'female' ? 'e' : ''}.`); });
-        sb.querySelector('[data-cous-ppr]').addEventListener('click', () => UI().openPrintDialog({title: `Présence — ${d.title}`, key: 'cousinade-presence', zone: 'Liste de présence', photos: false, margin: 12,
-            html: () => `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>${esc(d.title)}</title><style>${printCss}</style></head><body><h1>✅ ${esc(d.title)} — présence</h1><p class="sub">${esc([d.date_text, d.place_text].filter(Boolean).join(' · '))}</p>
+        sb.addEventListener('change', e => { const id = Number(e.target.dataset.cousPres); if (!id) return; const g = d.guests.find(x => x.id === id); e.target.closest('.cous-pres')?.classList.toggle('is-on', e.target.checked); setField([id], 'present', e.target.checked ? 1 : 0, i18n(e.target.checked ? '{name} est là.' : (g.gender === 'female' ? '{name} n’est plus notée présente.' : '{name} n’est plus noté présent.'), {name: C().fullName(g)})); });
+        sb.querySelector('[data-cous-ppr]').addEventListener('click', () => UI().openPrintDialog({title: i18n('Présence — {name}', {name: d.title}), key: 'cousinade-presence', zone: 'Liste de présence', photos: false, margin: 12,
+            html: () => `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>${esc(d.title)}</title><style>${printCss}</style></head><body><h1>✅ ${esc(i18n('{name} — présence', {name: d.title}))}</h1><p class="sub">${esc([d.date_text, d.place_text].filter(Boolean).join(' · '))}</p>
                 <table><thead><tr><th style="width:24px">✓</th><th>Personne</th><th>Branche</th><th>Table</th><th style="width:30%">Signature</th></tr></thead><tbody>${list.map(g => { const b = branchOf(d, g.branch_id); return `<tr><td><span class="box"></span></td><td>${esc(C().fullName(g))}</td><td>${b ? `<span class="dot" style="background:${esc(b.color)}"></span>${esc(b.first || b.name)}` : ''}</td><td>${g.table_no ?? ''}</td><td></td></tr>`; }).join('')}</tbody></table></body></html>`}));
     }
     function dayTables(sb, d) {
@@ -588,7 +589,7 @@
                 : A().empty('Pas encore de plan de table : note les réponses, puis « ✨ Faire le plan par branche ».', {icon: '🍽'})}`;
         const opts = () => ({size: Number(sb.querySelector('[data-cous-tsize]').value) || 8, maybe: !!sb.querySelector('[data-cous-tmaybe]')?.checked, mix: !!sb.querySelector('[data-cous-tmix]')?.checked});
         sb.addEventListener('change', async e => {
-            const id = Number(e.target.dataset.cousTno); if (id) { const g = d.guests.find(x => x.id === id); return setField([id], 'table_no', e.target.value, `${C().fullName(g)} va à la table ${e.target.value}.`); }
+            const id = Number(e.target.dataset.cousTno); if (id) { const g = d.guests.find(x => x.id === id); return setField([id], 'table_no', e.target.value, i18n('{name} va à la table {no}.', {name: C().fullName(g), no: String(e.target.value)})); }
             if (!ro && e.target.closest('[data-cous-tsize],[data-cous-tmaybe],[data-cous-tmix]')) saveOptions({tables: opts()}, {quiet: true});
         });
         sb.querySelector('[data-cous-plan]')?.addEventListener('click', async () => {
@@ -615,7 +616,7 @@
                 const prev = album.map(m => m.id), next = [...new Set([...prev, ...items.map(m => m.id)])];
                 const r = await saveOptions({album: next}, {quiet: true}); if (!r) return;
                 tabDay(sb.parentElement, d);
-                A().undoToast(`${plural(next.length - prev.length, 'photo ajoutée', 'photos ajoutées')} à l’album.`, {undo: async () => { await saveOptions({album: prev}, {quiet: true}); reload(); }});
+                A().undoToast(i18n('{n} à l’album.', {n: plural(next.length - prev.length, 'photo ajoutée', 'photos ajoutées')}), {undo: async () => { await saveOptions({album: prev}, {quiet: true}); reload(); }});
                 return;
             }
             const x = e.target.closest('[data-cous-adel]'); if (x) {
@@ -634,14 +635,14 @@
         const s = C().stats(d.guests, branchesOf(d)), t = s.total, ro = kiosk();
         const tile = (n, l, k) => `<div class="cous-tile is-${k}"><b>${n}</b><span>${esc(l)}</span></div>`;
         const max = Math.max(1, ...s.rows.map(r => r.invited));
-        body.innerHTML = `<div class="cous-tiles">${tile(t.invited, 'invités', 'blue')}${tile(t.yes, 'oui', 'green')}${tile(t.maybe, 'peut-être', 'yellow')}${tile(t.no, 'non', 'red')}${tile(t.wait, 'sans réponse', 'grey')}${tile(t.people, 'personnes attendues', 'blue')}</div>
+        body.innerHTML = `<div class="cous-tiles">${tile(t.invited, i18n('invités'), 'blue')}${tile(t.yes, i18n('oui'), 'green')}${tile(t.maybe, i18n('peut-être'), 'yellow')}${tile(t.no, i18n('non'), 'red')}${tile(t.wait, i18n('sans réponse'), 'grey')}${tile(t.people, i18n('personnes attendues'), 'blue')}</div>
             <h3 class="section-label">Par branche</h3>
             <div class="cous-tablewrap"><table class="data-table cous-stats" data-cols-off><thead><tr><th scope="col">Branche</th><th scope="col">Couleur</th><th scope="col">Invités</th><th scope="col">Réponses</th><th scope="col">Oui</th><th scope="col">Non</th><th scope="col">Peut-être</th><th scope="col">Sans réponse</th><th scope="col">Personnes</th></tr></thead><tbody>
-            ${s.rows.map(r => `<tr><td>${esc(r.name)}</td><td>${r.id && !ro ? `<input type="color" value="${esc(r.color)}" data-cous-bcolor="${r.id}" aria-label="Couleur de la branche ${esc(r.name)}">` : `<span class="cous-dot" style="--cous-c:${esc(r.color)}"></span>`}</td><td>${r.invited}</td>
-                <td><div class="cous-bar" title="${r.yes} oui, ${r.maybe} peut-être, ${r.no} non, ${r.wait} sans réponse" style="width:${Math.round(100 * r.invited / max)}%">${['yes', 'maybe', 'no', 'wait'].map(k => r[k] ? `<i class="is-${k}" style="flex:${r[k]}"></i>` : '').join('')}</div></td>
+            ${s.rows.map(r => `<tr><td>${esc(r.name)}</td><td>${r.id && !ro ? `<input type="color" value="${esc(r.color)}" data-cous-bcolor="${r.id}" aria-label="${esc(i18n('Couleur de la branche {name}', {name: r.name}))}">` : `<span class="cous-dot" style="--cous-c:${esc(r.color)}"></span>`}</td><td>${r.invited}</td>
+                <td><div class="cous-bar" title="${esc(i18n('{yes} oui, {maybe} peut-être, {no} non, {wait} sans réponse', {yes: r.yes, maybe: r.maybe, no: r.no, wait: r.wait}))}" style="width:${Math.round(100 * r.invited / max)}%">${['yes', 'maybe', 'no', 'wait'].map(k => r[k] ? `<i class="is-${k}" style="flex:${r[k]}"></i>` : '').join('')}</div></td>
                 <td>${r.yes}</td><td>${r.no}</td><td>${r.maybe}</td><td>${r.wait}</td><td>${r.people}</td></tr>`).join('')}</tbody></table></div>
             ${s.diets.length ? `<h3 class="section-label">Régimes et allergies (de ceux qui viennent)</h3><p>${s.diets.map(x => `<span class="ui-chip">${esc(x.label)} <small>${x.n}</small></span>`).join(' ')}</p>` : ''}
-            ${t.present ? `<p class="muted">Le jour J : ${esc(plural(t.present, 'personne présente', 'personnes présentes'))}.</p>` : ''}`;
+            ${t.present ? `<p class="muted">${esc(i18n('Le jour J : {n}.', {n: plural(t.present, 'personne présente', 'personnes présentes')}))}</p>` : ''}`;
         body.addEventListener('change', async e => {
             const id = e.target.dataset.cousBcolor; if (!id) return;
             const prev = {...(d.options?.branchColors || {})}, next = {...prev, [id]: e.target.value};
@@ -663,7 +664,7 @@
         if (t.closest?.('[data-cous-gadd]')) { editGuest(null); return; }
         if (t.closest?.('[data-cous-import]')) { importList(); return; }
         const ge = t.closest?.('[data-cous-gedit]'); if (ge && cur.data) { ge.closest('details')?.removeAttribute('open'); const g = cur.data.guests.find(x => x.id === Number(ge.dataset.cousGedit)); if (g) editGuest(g); return; }
-        const gd = t.closest?.('[data-cous-gdel]'); if (gd && cur.data) { gd.closest('details')?.removeAttribute('open'); const g = cur.data.guests.find(x => x.id === Number(gd.dataset.cousGdel)); if (g) removeGuests([g.id], `${C().fullName(g)} retiré${g.gender === 'female' ? 'e' : ''} de la liste.`); }
+        const gd = t.closest?.('[data-cous-gdel]'); if (gd && cur.data) { gd.closest('details')?.removeAttribute('open'); const g = cur.data.guests.find(x => x.id === Number(gd.dataset.cousGdel)); if (g) removeGuests([g.id], i18n(g.gender === 'female' ? '{name} retirée de la liste.' : '{name} retiré de la liste.', {name: C().fullName(g)})); }
     });
     // K14 : clic droit sur une ligne = le menu de son ⋯
     document.addEventListener('contextmenu', e => {
@@ -680,7 +681,7 @@
     // Listes → Outils de modification
     ext.editToolsExtra = ext.editToolsExtra || [];
     ext.editToolsExtra.push({key: 'cousinade', icon: '🎉', label: 'Cousinades', what: 'cousinade',
-        load: async () => ((await get('list')).items || []).map(r => ({id: r.id, name: r.title, date: r.updated_at, thumb: r.cover ? `<img src="media/${encodeURIComponent(r.cover)}" alt="">` : '<span class="h-et-ico">🎉</span>', info: r.ancestor ? `Descendants de ${r.ancestor} · ${plural(r.invited, 'invité')}` : plural(r.invited, 'invité')})),
+        load: async () => ((await get('list')).items || []).map(r => ({id: r.id, name: r.title, date: r.updated_at, thumb: r.cover ? `<img src="media/${encodeURIComponent(r.cover)}" alt="">` : '<span class="h-et-ico">🎉</span>', info: r.ancestor ? i18n('Descendants de {name} · {n}', {name: r.ancestor, n: plural(r.invited, 'invité')}) : plural(r.invited, 'invité')})),
         open: id => openList(Number(id)), create: () => openProjectDialog(),
         rename: (id, name) => post({op: 'save', id, title: name}),
         remove: id => post({op: 'delete', id}), createLabel: '＋ Nouvelle cousinade'});

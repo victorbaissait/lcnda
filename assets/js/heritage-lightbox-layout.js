@@ -6,6 +6,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : s); // 🌐 docs/I18N.md
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const A = () => window.LCNDA_APP;
     const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
@@ -85,11 +86,11 @@
                     const f = inp.files?.[0]; inp.remove(); if (!f) return;
                     let data; try { data = JSON.parse(await f.text()); } catch (_) { toast('Ce fichier n’est pas un réglage LCNDA (il n’est pas lisible).', 'error'); return; }
                     if (data?.lcnda !== 'reglage' || !data.donnees || typeof data.donnees !== 'object') { toast('Ce fichier n’est pas un réglage LCNDA.', 'error'); return; }
-                    if (data.outil !== 'visionneuse') { toast(`Ce réglage vient d’un autre outil (« ${String(data.outil || '?').slice(0, 40)} ») : il ne va pas dans la visionneuse.`, 'error'); return; }
+                    if (data.outil !== 'visionneuse') { toast(i18n('Ce réglage vient d’un autre outil (« {name} ») : il ne va pas dans la visionneuse.', {name: String(data.outil || '?').slice(0, 40)}), 'error'); return; }
                     const ok = v => v && Array.isArray(v.order) ? {order: v.order.map(String).slice(0, 80), hidden: (Array.isArray(v.hidden) ? v.hidden : []).map(String).slice(0, 80)} : null;
                     const sec = ok(data.donnees.sections), cal = ok(data.donnees.calendars);
                     if (!sec && !cal) { toast('Ce réglage est vide.', 'error'); return; }
-                    if (sec) write(SKEY, sec); if (cal) write(CKEY, cal); applySections(); applyCalendars(); ext.maintenance.viewer_prefs(S.workspaceToken); toast(`Réglage « ${String(data.nom || '').slice(0, 60)} » mis.`);
+                    if (sec) write(SKEY, sec); if (cal) write(CKEY, cal); applySections(); applyCalendars(); ext.maintenance.viewer_prefs(S.workspaceToken); toast(i18n('Réglage « {name} » mis.', {name: String(data.nom || '').slice(0, 60)}));
                 });
                 inp.click(); return;
             }

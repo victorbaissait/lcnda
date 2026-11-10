@@ -13,6 +13,8 @@
     const api = (...a) => A().api(...a);
     const toast = (...a) => A().toast(...a);
     const fmt = n => Number(n || 0).toLocaleString('fr-FR');
+    const i18n = (text, vars) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(text, vars) : String(text ?? '')); // 🌐 app-i18n.js
+    const plural = (n, one, many) => (A().plural ? A().plural(n, one, many) : `${fmt(n)} ${n > 1 ? many : one}`);
     const ls = (k, d) => { try { return localStorage.getItem(k) ?? d; } catch (_) { return d; } };
     const lsSet = (k, v) => { try { localStorage.setItem(k, v); } catch (_) {} };
 
@@ -34,7 +36,7 @@
         return `<article class="h-gap" data-gap-i="${it._i}">
             <div class="h-gap-head"><span class="h-gap-kind" title="${esc(label)}">${ico}</span>
                 <div class="h-gap-who">${opts.noPerson ? '' : `<button type="button" class="table-link" data-h-person="${Number(it.person_id)}">${esc(it.name)}</button> <small class="muted">Sosa ${fmt(it.sosa)} · génération ${it.generation}</small>`}
-                    <div><b>${esc(label)}</b>${it.place ? ` à <b>${esc(it.place)}</b>` : ' <span class="muted">(lieu inconnu)</span>'}${years(it) ? `, <b>${esc(years(it))}</b>` : ''} <small class="muted">— ${esc(it.why)}</small></div>
+                    <div><b>${esc(label)}</b>${it.place ? ' ' + i18n('à {place}', {place: `<b>${esc(it.place)}</b>`}) : ` <span class="muted">${i18n('(lieu inconnu)')}</span>`}${years(it) ? `, <b>${esc(years(it))}</b>` : ''} <small class="muted">— ${esc(it.why)}</small></div>
                     ${opts.noArchive ? '' : `<div class="h-gap-arch">🏛️ ${esc(it.archive?.label || '')}</div>`}</div>
                 <div class="h-gap-act">${it.kind === 'socface' ? `<button type="button" class="button small secondary" data-gap-sf="found" title="Noté dans le Journal des recherches ; importe ensuite le CSV pour avoir le foyer">✓ Trouvé</button><button type="button" class="button small secondary" data-gap-sf="none" title="Noté dans le Journal des recherches : « Rien trouvé »">Pas trouvé</button><button type="button" class="button small secondary" data-sf-import="${Number(it.person_id)}">⤒ Importer…</button>` : '<button type="button" class="button small secondary" data-gap-add title="Ajouter une ligne « à faire » dans Recherche → Dépouillement d’archive">📌 Au suivi</button>' + (ext.openActLetter && {birth: 'naissance', marriage: 'mariage', death: 'deces'}[it.kind] ? `<button type="button" class="button small secondary" data-cl-ask="${Number(it.person_id)}" data-cl-act="${({birth: 'naissance', marriage: 'mariage', death: 'deces'})[it.kind]}" data-cl-what="${it.from != null && it.from < new Date().getFullYear() - 100 ? 'recherche' : 'integrale'}" title="Une lettre toute prête pour demander cet acte (mairie, archives…)">📮 Demander l’acte</button>` : '')}</div></div>
             ${it.decennial?.length ? `<p class="h-gap-td">📇 Tables décennales : ${it.decennial.map(t => `<span>${esc(t)}</span>`).join('')}</p>` : ''}
@@ -73,8 +75,8 @@
             ws.querySelector('[data-gaps-count]').textContent = `${fmt(vis.length)} recherche${vis.length > 1 ? 's' : ''}${vis.length !== items.length ? ` sur ${fmt(items.length)}` : ''}`;
         };
         const counts = d.counts || {};
-        ws.innerHTML = `<section class="page h-gaps"><header class="page-header"><div><span class="eyebrow">RECHERCHE · QUE MANQUE-T-IL ?</span><h2>Les actes à chercher${d.root_name ? ` pour la lignée de ${esc(d.root_name)}` : ''}</h2>
-                <p class="muted">${fmt(d.total)} recherche${d.total > 1 ? 's' : ''} pour ${fmt(d.ancestors)} ancêtres sur ${d.generations} générations, chez ${fmt((d.archives || []).length)} service${(d.archives || []).length > 1 ? 's' : ''} d’archives. Les plus proches générations d’abord : leurs actes sont les plus faciles à trouver, et chacun ouvre la porte du suivant.</p></div>
+        ws.innerHTML = `<section class="page h-gaps"><header class="page-header"><div><span class="eyebrow">RECHERCHE · QUE MANQUE-T-IL ?</span><h2>${d.root_name ? i18n('Les actes à chercher pour la lignée de {name}', {name: esc(d.root_name)}) : i18n('Les actes à chercher')}</h2>
+                <p class="muted">${i18n('{searches} pour {ancestors} ancêtres sur {gens} générations, chez {services}.', {searches: plural(d.total, 'recherche', 'recherches'), ancestors: Number(d.ancestors || 0), gens: Number(d.generations || 0), services: plural((d.archives || []).length, 'service d’archives', 'services d’archives')})} ${i18n('Les plus proches générations d’abord : leurs actes sont les plus faciles à trouver, et chacun ouvre la porte du suivant.')}</p></div>
                 <div class="page-actions"><button type="button" class="button secondary" data-gaps-print>🖨 Imprimer pour aller aux archives</button></div></header>
             <div class="h-gaps-bar"><label>Générations<select data-gaps-gen>${[3, 4, 5, 6, 7, 8, 9, 10, 12].map(n => `<option value="${n}" ${n === v.gen ? 'selected' : ''}>${n}</option>`).join('')}</select></label>
                 <label>Ranger par<select data-gaps-group>${[['archives', 'Service d’archives'], ['commune', 'Commune'], ['person', 'Ancêtre'], ['kind', 'Sorte d’acte']].map(([k, l]) => `<option value="${k}" ${k === v.group ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
@@ -100,7 +102,7 @@
                         searched: `Recensement de ${it.from} à ${it.place} : ${it.name} (Sosa ${it.sosa}) — base de noms SocFace (transcription automatique, peut contenir des erreurs)`, sought_ids: [it.person_id]}});
                     const id = Number(r?.result?.id || r?.id || 0);
                     const idx = items.indexOf(it); items.splice(idx, 1); draw();
-                    A().undoToast?.(res === 'found' ? `Trouvé : recensement de ${it.from} noté dans le Journal des recherches` : `Pas trouvé : noté dans le Journal des recherches`, {undo: async () => { if (id) await api('delete_archive_digest', {}, {method: 'POST', body: {id}}); items.splice(idx, 0, it); draw(); }});
+                    A().undoToast?.(res === 'found' ? i18n('Trouvé : recensement de {year} noté dans le Journal des recherches', {year: String(it.from)}) : i18n('Pas trouvé : noté dans le Journal des recherches'), {undo: async () => { if (id) await api('delete_archive_digest', {}, {method: 'POST', body: {id}}); items.splice(idx, 0, it); draw(); }});
                 } catch (err) { sfb.disabled = false; toast(err.message, 'error'); }
                 return;
             }

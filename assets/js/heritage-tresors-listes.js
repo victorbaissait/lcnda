@@ -9,6 +9,7 @@
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     ext.lists = ext.lists || {};
     const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const T = () => ext.tresors?.T;
     const LISTS = [['tr_letters', '37d', '✉️ Lettres aux descendants'], ['tr_candles', '37e', '🕯️ Bougies'], ['tr_shares', '37f', '🔗 Partages temporaires'], ['tr_stamps', '37g', '📍 Passeport des lieux'], ['tr_gaps', '37h', '🏛️ Actes manquants']];
     function register() {
@@ -167,7 +168,7 @@
 
     /* ═════════ 🏛️ Actes manquants : l'assistant « Que manque-t-il ? » (Recherche), en liste ═════════ */
     ext.lists.tr_gaps = async token => {
-        const r = await page(token, 'Actes manquants', '🏛️', d => `Les actes qui manquent à la lignée (5 générations)${d.root_name ? ` de ${esc(d.root_name)}` : ''}, avec la commune, les années et le service d’archives. L’assistant complet range, filtre, imprime et ajoute au suivi.`,
+        const r = await page(token, 'Actes manquants', '🏛️', d => d.root_name ? i18n('Les actes qui manquent à la lignée (5 générations) de {name}, avec la commune, les années et le service d’archives. L’assistant complet range, filtre, imprime et ajoute au suivi.', {name: esc(d.root_name)}) : i18n('Les actes qui manquent à la lignée (5 générations), avec la commune, les années et le service d’archives. L’assistant complet range, filtre, imprime et ajoute au suivi.'),
             () => A().api('research_gaps', {gen: 5}), {primary: '<button type="button" class="button" data-trl-gaps>🔍 Ouvrir l’assistant « Que manque-t-il ? »</button>'}); if (!r) return;
         const d = r.data, items = d.items || [], KIND = {birth: 'Naissance', marriage: 'Mariage', death: 'Décès'};
         const kindOf = it => KIND[it.kind] || it.what || it.kind || '', arch = it => it.archive?.label || '', archs = [...new Set(items.map(arch).filter(Boolean))].sort(cmpTxt);

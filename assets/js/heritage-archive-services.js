@@ -21,6 +21,7 @@
     const S = () => A().state;
     const KEY = 'listes:archive_services';
     const plural = (n, w, many) => (A().plural ? A().plural(n, w, many) : `${n} ${w}`);
+    const i18n = (text, vars) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(text, vars) : String(text ?? '')); // 🌐 app-i18n.js
     const fold = s => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
     const safeUrl = u => (/^https?:\/\//i.test(String(u || '')) ? String(u) : '');
     const post = (action, body) => A().api(action, {}, {method: 'POST', body});
@@ -41,7 +42,7 @@
         const opt = (list, v) => list.map(([k, l]) => `<option value="${esc(k)}"${String(k) === String(v ?? '') ? ' selected' : ''}>${esc(l)}</option>`).join('');
         return new Promise(resolve => {
             let saved = null;
-            const dlg = ext.openDialog({eyebrow: 'SERVICE D’ARCHIVES', title: row ? `Modifier « ${row.name} »` : 'Nouveau service d’archives', wide: true,
+            const dlg = ext.openDialog({eyebrow: 'SERVICE D’ARCHIVES', title: row ? i18n('Modifier « {name} »', {name: row.name}) : 'Nouveau service d’archives', wide: true,
                 body: `${row ? '' : `<label class="h-asv-from">Partir des Archives départementales de… <small>(facultatif : remplit le nom, le sigle et le site)</small><select name="from_dept"><option value="">— choisir un département —</option>${DEPTS.map(d => `<option value="${esc(d.code)}">${esc(d.code)} · ${esc(d.department)}</option>`).join('')}</select></label>`}
                     <div class="form-grid">
                         <label class="span-2">Nom du service<input name="name" required maxlength="200" value="${esc(r.name)}" placeholder="Archives départementales de la Corrèze" data-error="Donne le nom du service d’archives."></label>
@@ -77,14 +78,14 @@
                     if (!String(v.name || '').trim()) return UI().fail(f.elements.name, 'Donne le nom du service d’archives.');
                     const res = await post('save_archive_service', v);
                     saved = res.result || res;
-                    A().toast(row ? 'Enregistré' : `Service « ${saved.name} » créé.`, row ? 'success' : '');
+                    A().toast(row ? i18n('Enregistré') : i18n('Service « {name} » créé.', {name: saved.name}), row ? 'success' : '');
                 }});
             if (!dlg) resolve(null);
         });
     }
     async function removeService(row, after = null) {
         await post('delete_archive_service', {id: row.id});
-        A().undoToast(`Service « ${row.name} » supprimé`, {undo: async () => { await post('restore_archive_service', {id: row.id}); await (after || refresh)(); }, redo: async () => { await post('delete_archive_service', {id: row.id}); await (after || refresh)(); }});
+        A().undoToast(i18n('Service « {name} » supprimé', {name: row.name}), {undo: async () => { await post('restore_archive_service', {id: row.id}); await (after || refresh)(); }, redo: async () => { await post('delete_archive_service', {id: row.id}); await (after || refresh)(); }});
         if (Number(S().archiveServiceId) === Number(row.id)) S().archiveServiceId = 0;
         await (after || refresh)();
     }
@@ -93,7 +94,7 @@
     /* ─────────── La liste ─────────── */
     function itemOf(s, view) {
         const lines = [[s.kind_label, s.city, s.short_name].filter(Boolean).join(' · '),
-            s.consulted_count ? `✓ ${plural(s.consulted_count, 'recherche faite', 'recherches faites')} chez eux${s.found_count ? ` · ${plural(s.found_count, 'trouvée', 'trouvées')}` : ''}` : 'Rien de consulté pour l’instant'];
+            s.consulted_count ? `✓ ${i18n('{n} chez eux', {n: plural(s.consulted_count, 'recherche faite', 'recherches faites')})}${s.found_count ? ` · ${plural(s.found_count, 'trouvée', 'trouvées')}` : ''}` : i18n('Rien de consulté pour l’instant')];
         if (view === 'list') lines.push(`${plural(s.sources_count, 'source')} · ${plural(s.media_count, 'média')}${s.visits_count ? ` · ${plural(s.visits_count, 'visite')}` : ''}`);
         return {thumb: '<span class="ui-card-ico" aria-hidden="true">🏛</span>', name: s.name, open: `data-as-open="${s.id}"`, lines,
             badges: view === 'list' ? [] : [s.consulted_count ? {text: plural(s.consulted_count, 'recherche'), kind: s.found_count ? 'green' : 'grey'} : null, s.sources_count ? {text: plural(s.sources_count, 'source'), kind: 'blue'} : null].filter(Boolean),
@@ -116,12 +117,12 @@
         KINDS = data.kinds || KINDS; DEPTS = data.departments || DEPTS;
         const all = data.services || [];
         const um = data.unmatched || [];
-        if (um.length) ws.querySelector('[data-as-unmatched]').innerHTML = `<div class="ui-notice ui-notice-info h-asv-unmatched" role="status"><span class="ui-notice-ico" aria-hidden="true">ℹ️</span><span><b>${um.length > 1 ? 'Ces services sont écrits' : 'Ce service est écrit'} dans tes recherches sans avoir encore de fiche :</b> ${um.map(u => `<button type="button" class="button small secondary" data-as-new-name="${esc(u.name)}">＋ ${esc(u.name)} <small>(${esc(plural(u.count, 'recherche'))})</small></button>`).join(' ')}</span></div>`;
+        if (um.length) ws.querySelector('[data-as-unmatched]').innerHTML = `<div class="ui-notice ui-notice-info h-asv-unmatched" role="status"><span class="ui-notice-ico" aria-hidden="true">ℹ️</span><span><b>${i18n(um.length > 1 ? 'Ces services sont écrits dans tes recherches sans avoir encore de fiche :' : 'Ce service est écrit dans tes recherches sans avoir encore de fiche :')}</b> ${um.map(u => `<button type="button" class="button small secondary" data-as-new-name="${esc(u.name)}">＋ ${esc(u.name)} <small>(${esc(plural(u.count, 'recherche'))})</small></button>`).join(' ')}</span></div>`;
         const count = fn => all.filter(fn).length;
         let bar = null, shown = 60;
         bar = UI().listBar({key: KEY, search: {placeholder: 'Chercher… (nom, sigle, ville, série)'},
             filters: [{id: 'kind', label: 'Sorte', type: 'check', options: Object.entries(KINDS).filter(([k]) => count(s => s.kind === k)).map(([k, l]) => [k, `${l} (${count(s => s.kind === k)})`, l])},
-                {id: 'consulted', label: 'Déjà consulté', type: 'radio', dflt: '', options: [['', 'Tous'], ['yes', `Déjà consultés (${count(s => s.consulted_count)})`, 'Déjà consultés'], ['no', `Rien de consulté (${count(s => !s.consulted_count)})`, 'Rien de consulté']]}],
+                {id: 'consulted', label: 'Déjà consulté', type: 'radio', dflt: '', options: [['', 'Tous'], ['yes', i18n('Déjà consultés ({n})', {n: count(s => s.consulted_count)}), 'Déjà consultés'], ['no', i18n('Rien de consulté ({n})', {n: count(s => !s.consulted_count)}), 'Rien de consulté']]}],
             view: {dflt: 'list', what: 'services'}, sort: {options: [['az', 'A → Z'], ['za', 'Z → A'], ['recent', 'Consultés le plus récemment'], ['most', 'Les plus consultés']], value: 'az'},
             onChange: () => { shown = 60; if (bar) paint(); }});
         ws.querySelector('[data-as-bar]').replaceWith(bar);
@@ -181,24 +182,24 @@
                     ${infoRow('Adresse', nl(s.address)) + infoRow('Horaires', nl(s.opening_hours)) + infoRow('Site', link(s.website_url, 'Site du service')) + infoRow('Recherche en ligne', link(s.search_url, 'Registres et fonds en ligne'))
                     + infoRow('Téléphone', esc(s.phone)) + infoRow('E-mail', s.email ? `<a href="mailto:${esc(s.email)}">${esc(s.email)}</a>` : '') + infoRow('Autres noms', esc(s.aliases)) + infoRow('Notes', nl(s.notes))
                     || A().empty('Rien de noté : ajoute l’adresse, les horaires et le site.', {icon: '📍', action: {label: '✎ Modifier', attrs: 'data-empty-click="[data-as-edit-me]"'}})}</dl></div></section>
-                <section class="card h-asv-card"><header class="card-head"><div class="card-title"><h3>🗂 Séries</h3></div></header><div class="card-body">${series.length ? `<div class="h-asv-tablewrap"><table class="data-table h-asv-series"><thead><tr><th>Série</th><th>Ce que c’est</th><th>Consulté</th><th>Sources</th><th>Médias</th></tr></thead><tbody>${series.map(r => `<tr${r.code ? ` data-as-serie="${esc(r.code)}"` : ''}><td><strong>${esc(r.code || 'Sans série')}</strong></td><td>${esc(r.label || (r.declared ? '' : r.code ? 'vue dans une cote' : 'cote sans série reconnue'))}</td><td>${r.consulted ? `${r.consulted}${r.found ? ` <small>(${r.found} trouvé${r.found > 1 ? 's' : ''})</small>` : ''}` : '—'}</td><td>${r.sources || '—'}</td><td>${r.media || '—'}</td></tr>`).join('')}</tbody></table></div>` : A().empty('Aucune série notée : écris-les sur la fiche (« 3 E — Notaires »), ou elles viendront des cotes de tes recherches.', {icon: '🗂'})}</div></section>
+                <section class="card h-asv-card"><header class="card-head"><div class="card-title"><h3>🗂 Séries</h3></div></header><div class="card-body">${series.length ? `<div class="h-asv-tablewrap"><table class="data-table h-asv-series"><thead><tr><th>Série</th><th>Ce que c’est</th><th>Consulté</th><th>Sources</th><th>Médias</th></tr></thead><tbody>${series.map(r => `<tr${r.code ? ` data-as-serie="${esc(r.code)}"` : ''}><td><strong>${esc(r.code || 'Sans série')}</strong></td><td>${esc(r.label || (r.declared ? '' : r.code ? i18n('vue dans une cote') : i18n('cote sans série reconnue')))}</td><td>${r.consulted ? `${r.consulted}${r.found ? ` <small>(${plural(r.found, 'trouvé', 'trouvés')})</small>` : ''}` : '—'}</td><td>${r.sources || '—'}</td><td>${r.media || '—'}</td></tr>`).join('')}</tbody></table></div>` : A().empty('Aucune série notée : écris-les sur la fiche (« 3 E — Notaires »), ou elles viendront des cotes de tes recherches.', {icon: '🗂'})}</div></section>
             </div>
             <section class="card h-asv-card"><header class="card-head"><div class="card-title"><h3>✓ Déjà consulté chez eux <small>(${consulted.length})</small></h3></div></header><div class="card-body"><div data-as-filters></div><div data-as-consulted></div></div></section>
             <div class="h-asv-grid">
-                <section class="card h-asv-card"><header class="card-head"><div class="card-title"><h3>📚 Sources <small>(${d.sources.length})</small></h3></div></header><div class="card-body">${d.sources.length ? UI().rowsHtml(d.sources.map(x => ({thumb: '<span class="ui-card-ico" aria-hidden="true">📚</span>', name: x.title, lines: [[x.series && `série ${x.series}`, x.cote && `cote ${x.cote}`, plural(x.citations, 'citation')].filter(Boolean).join(' · ')], actions: x.linked ? '' : UI().badge('nom écrit', 'yellow')}))) : A().empty('Aucune source reliée : choisis ce service dans la fenêtre d’une source (« 🏛 Service d’archives »).', {icon: '📚'})}</div></section>
-                <section class="card h-asv-card"><header class="card-head"><div class="card-title"><h3>🖼 Médias <small>(${d.media.length})</small></h3></div></header><div class="card-body">${d.media.length ? UI().rowsHtml(d.media.map(m => ({thumb: m.media_type === 'image' && (m.thumbnail || m.filename) ? `<img src="media/${encodeURIComponent(m.thumbnail || m.filename)}" alt="" loading="lazy">` : '<span class="ui-card-ico" aria-hidden="true">📄</span>', name: m.title, lines: [[m.series && `série ${m.series}`, m.cote && `cote ${m.cote}`, m.date_text].filter(Boolean).join(' · ')], actions: `<button type="button" class="button small secondary" data-open-media="${m.id}">↗ Ouvrir</button>`}))) : A().empty('Aucun média relié : choisis ce service dans la fenêtre d’un média.', {icon: '🖼'})}</div></section>
+                <section class="card h-asv-card"><header class="card-head"><div class="card-title"><h3>📚 Sources <small>(${d.sources.length})</small></h3></div></header><div class="card-body">${d.sources.length ? UI().rowsHtml(d.sources.map(x => ({thumb: '<span class="ui-card-ico" aria-hidden="true">📚</span>', name: x.title, lines: [[x.series && i18n('série {s}', {s: x.series}), x.cote && i18n('cote {c}', {c: x.cote}), plural(x.citations, 'citation')].filter(Boolean).join(' · ')], actions: x.linked ? '' : UI().badge('nom écrit', 'yellow')}))) : A().empty('Aucune source reliée : choisis ce service dans la fenêtre d’une source (« 🏛 Service d’archives »).', {icon: '📚'})}</div></section>
+                <section class="card h-asv-card"><header class="card-head"><div class="card-title"><h3>🖼 Médias <small>(${d.media.length})</small></h3></div></header><div class="card-body">${d.media.length ? UI().rowsHtml(d.media.map(m => ({thumb: m.media_type === 'image' && (m.thumbnail || m.filename) ? `<img src="media/${encodeURIComponent(m.thumbnail || m.filename)}" alt="" loading="lazy">` : '<span class="ui-card-ico" aria-hidden="true">📄</span>', name: m.title, lines: [[m.series && i18n('série {s}', {s: m.series}), m.cote && i18n('cote {c}', {c: m.cote}), m.date_text].filter(Boolean).join(' · ')], actions: `<button type="button" class="button small secondary" data-open-media="${m.id}">↗ Ouvrir</button>`}))) : A().empty('Aucun média relié : choisis ce service dans la fenêtre d’un média.', {icon: '🖼'})}</div></section>
             </div>
-            <section class="card h-asv-card"><header class="card-head"><div class="card-title"><h3>🗄️ Visites <small>(${d.visits.length})</small></h3></div></header><div class="card-body">${d.visits.length ? UI().rowsHtml(d.visits.map(v => ({thumb: '<span class="ui-card-ico" aria-hidden="true">🗄️</span>', name: v.title, open: openAttr({kind: 'visit', id: v.id}), lines: [[v.visit_date && `prévue le ${v.visit_date}`, plural(v.items, 'cote')].filter(Boolean).join(' · ')], actions: v.done_at ? UI().badge('Faite', 'green') : UI().badge('À faire', 'blue')}))) : A().empty('Aucune visite préparée chez eux.', {icon: '🗄️', action: {label: '🗄️ Visites d’archives', attrs: 'data-as-visits-go'}})}</div></section>
+            <section class="card h-asv-card"><header class="card-head"><div class="card-title"><h3>🗄️ Visites <small>(${d.visits.length})</small></h3></div></header><div class="card-body">${d.visits.length ? UI().rowsHtml(d.visits.map(v => ({thumb: '<span class="ui-card-ico" aria-hidden="true">🗄️</span>', name: v.title, open: openAttr({kind: 'visit', id: v.id}), lines: [[v.visit_date && i18n('prévue le {date}', {date: v.visit_date}), plural(v.items, 'cote')].filter(Boolean).join(' · ')], actions: v.done_at ? UI().badge('Faite', 'green') : UI().badge('À faire', 'blue')}))) : A().empty('Aucune visite préparée chez eux.', {icon: '🗄️', action: {label: '🗄️ Visites d’archives', attrs: 'data-as-visits-go'}})}</div></section>
         </section>`;
         const box = ws.querySelector('[data-as-consulted]'), fbox = ws.querySelector('[data-as-filters]');
         const seriesCodes = [...new Set(consulted.map(c => c.series || ''))];
         function paintConsulted() {
             const rows = consulted.filter(c => serieFilter === '' || (serieFilter === '_' ? !c.series : c.series === serieFilter));
-            fbox.innerHTML = seriesCodes.length > 1 || (seriesCodes.length === 1 && seriesCodes[0]) ? `<div class="ui-filters" role="group" aria-label="Séries">${[['', `Tout (${consulted.length})`], ...seriesCodes.filter(Boolean).sort().map(c => [c, `${c} (${consulted.filter(x => x.series === c).length})`]), ...(seriesCodes.includes('') ? [['_', `Sans série (${consulted.filter(x => !x.series).length})`]] : [])].map(([k, l]) => `<button type="button" class="${k === serieFilter ? 'is-active' : ''}" data-as-f="${esc(k)}">${esc(l)}</button>`).join('')}</div>` : '';
+            fbox.innerHTML = seriesCodes.length > 1 || (seriesCodes.length === 1 && seriesCodes[0]) ? `<div class="ui-filters" role="group" aria-label="Séries">${[['', i18n('Tout ({n})', {n: consulted.length})], ...seriesCodes.filter(Boolean).sort().map(c => [c, `${c} (${consulted.filter(x => x.series === c).length})`]), ...(seriesCodes.includes('') ? [['_', i18n('Sans série ({n})', {n: consulted.filter(x => !x.series).length})]] : [])].map(([k, l]) => `<button type="button" class="${k === serieFilter ? 'is-active' : ''}" data-as-f="${esc(k)}">${esc(l)}</button>`).join('')}</div>` : '';
             box.innerHTML = rows.length ? UI().rowsHtml(rows.map(r => ({thumb: `<span class="ui-card-ico" aria-hidden="true">${kindIco(r.kind)}</span>`, name: r.title, open: openAttr(r.open),
-                lines: [[r.series && `série ${r.series}`, r.cote && `cote ${r.cote}`, r.commune, r.years].filter(Boolean).join(' · ') || r.status_label, (r.people || []).map(p => p.title).slice(0, 3).join(', ')],
+                lines: [[r.series && i18n('série {s}', {s: r.series}), r.cote && i18n('cote {c}', {c: r.cote}), r.commune, r.years].filter(Boolean).join(' · ') || r.status_label, (r.people || []).map(p => p.title).slice(0, 3).join(', ')],
                 when: r.date, whenLabel: r.date_label || '', actions: `${resBadge(r.result)}<button type="button" class="button small secondary" ${openAttr(r.open)}>↗ Ouvrir</button>`})))
-                : A().empty(consulted.length ? 'Rien dans cette série.' : `Rien de consulté chez eux pour l’instant. Les dépouillements, visites faites et demandes dont le service est « ${s.short_name || s.name} » (ou un de ses autres noms) s’affichent ici.`, {icon: '✓', action: consulted.length ? null : {label: '＋ Nouveau dépouillement', attrs: 'data-empty-click="[data-as-new-digest]"'}});
+                : A().empty(consulted.length ? 'Rien dans cette série.' : i18n('Rien de consulté chez eux pour l’instant. Les dépouillements, visites faites et demandes dont le service est « {name} » (ou un de ses autres noms) s’affichent ici.', {name: s.short_name || s.name}), {icon: '✓', action: consulted.length ? null : {label: '＋ Nouveau dépouillement', attrs: 'data-empty-click="[data-as-new-digest]"'}});
         }
         paintConsulted();
         fbox.addEventListener('click', e => { const b = e.target.closest('[data-as-f]'); if (!b) return; serieFilter = b.dataset.asF; paintConsulted(); });

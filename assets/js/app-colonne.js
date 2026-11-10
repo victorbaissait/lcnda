@@ -15,6 +15,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : s); // 🌐 docs/I18N.md
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const A = () => window.LCNDA_APP || {};
     const UI = () => window.LCNDA_UI || {};
@@ -354,11 +355,11 @@
         const shapeName = id => (AP()?.orderedShapes().find(s => s.id === id)?.name || id).replace(/\s*\(défaut\)$/, '');
         box.addEventListener('click', e => {
             const sh = e.target.closest('[data-lck-shape]');
-            if (sh) { const id = sh.dataset.lckShape; if (id === (P().designShape() || 'tilted')) return; undoP(`Forme : « ${shapeName(id)} »`, () => P().setShape(id), 's'); return; }
+            if (sh) { const id = sh.dataset.lckShape; if (id === (P().designShape() || 'tilted')) return; undoP(i18n('Forme : « {name} »', {name: i18n(shapeName(id))}), () => P().setShape(id), 's'); return; }
             if (e.target.closest('[data-lck-shape-new]')) { AP()?.openShapeEditor?.({onSaved: sid => undoP('Nouvelle forme choisie', () => P().setShape(sid), 's')}); return; }
             const pm = e.target.closest('[data-lck-pmode]');
             if (pm) { const k = pm.dataset.lckPmode; if (k === P().read().mode) return; const c = P_CARDS.find(x => x.k === k);
-                undoP(`Portraits : « ${c.t} »`, () => { if (k === 'avant') { P().write({...P().read(), mode: 'avant'}); return; } P().write({mode: k, ...P().PRESETS[k]}); P().setShape(P().TO_AV[P().PRESETS[k].shape]); }); return; }
+                undoP(i18n('Portraits : « {name} »', {name: i18n(c.t)}), () => { if (k === 'avant') { P().write({...P().read(), mode: 'avant'}); return; } P().write({mode: k, ...P().PRESETS[k]}); P().setShape(P().TO_AV[P().PRESETS[k].shape]); }); return; }
             if (e.target.closest('#lck-p-reset')) { undoP('Portraits remis comme au départ', () => P().write({mode: 'avant'})); }
         });
         const onRange = (id, fn) => $('#' + id).addEventListener('input', e => fn(Number(e.target.value)));
@@ -405,7 +406,7 @@
                 else { patchDesign('sidebarPosition', v); done(); }
                 return; }
             const cm = e.target.closest('[data-lck-cmode]');
-            if (cm) { const k = cm.dataset.lckCmode, c = C_CARDS.find(x => x.k === k); undoC(`Colonne de gauche : partir de « ${c.t} »`, () => write({mode: k, ...PRESETS[k]})); return; }
+            if (cm) { const k = cm.dataset.lckCmode, c = C_CARDS.find(x => x.k === k); undoC(i18n('Colonne de gauche : partir de « {name} »', {name: i18n(c.t)}), () => write({mode: k, ...PRESETS[k]})); return; }
             const ch = e.target.closest('[data-lck-c]');
             if (ch) { const g = ch.dataset.lckC, v = ch.dataset.v; setC(g === 'nums' ? (v === 'aucun' ? {nums: false} : {nums: true, numstyle: v}) : {[g]: v}); return; }
             const tl = e.target.closest('[data-tool]'); if (tl) { tool = tl.dataset.tool; renderC(); return; }

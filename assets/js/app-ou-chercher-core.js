@@ -34,6 +34,9 @@
     'use strict';
     const fold = s => String(s ?? '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[’']/g, "'").replace(/[-_.]/g, ' ').replace(/\s+/g, ' ').trim();
     const NOW = new Date().getFullYear();
+    /* 🌐 traduction (app-i18n.js) : dans Node ou en français, le texte d'avant tel quel */
+    const I18 = () => (typeof window !== 'undefined' && window.LCNDA_I18N && window.LCNDA_I18N.lang !== 'fr' ? window.LCNDA_I18N : null);
+    const T = (s, v0) => { const v = v0 && Object.fromEntries(Object.entries(v0).map(([k, x]) => [k, typeof x === 'number' ? String(x) : x])); const I = I18(); return I ? I.t(s, v) : String(s).replace(/\{([a-z_]+)\}/gi, (m, k) => (v && k in v ? String(v[k]) : m)); };
 
     /* ═════ pays : un code pour chaque façon de l'écrire ═════ */
     const COUNTRY_WORDS = {
@@ -72,8 +75,8 @@
         for (const [w, c] of WORD_TO_CODE) if (w.length > 4 && f.includes(w)) return c;
         return '';
     }
-    const C_NAME = c => COUNTRY_NAME[c] || c;
-    const deOf = w => (/^[aeiouyhàâéèêîôû]/i.test(w) ? `d’${w}` : `de ${w}`);
+    const C_NAME = c => T(COUNTRY_NAME[c] || c);
+    const deOf = w => (I18() ? T('de {place}', {place: w}) : /^[aeiouyhàâéèêîôû]/i.test(w) ? `d’${w}` : `de ${w}`);
     const OVERSEAS = ['dz', 'ma', 'tn', 'sn', 'vn', 'nc', 'gf', 're', 'gp', 'mq', 'mg'];
 
     /* ═════ profils (ce que la fiche dit de sa vie) et manques ═════ */
@@ -116,32 +119,33 @@
     const alive = (ctx, a, b) => ctx.by && ctx.dy ? ctx.dy >= a && ctx.by <= b : null; // null : on ne sait pas
     const ne = ctx => (ctx.female ? 'Née' : 'Né');
     const il = ctx => (ctx.female ? 'elle' : 'il');
-    const deptText = d => (d ? (/^[aeiouyhé]/i.test(d.name) ? `dans l’${d.name}` : `en ${d.name}`) : '');
+    const deptText = d => (d ? (I18() ? T('en {dept}', {dept: d.name}) : /^[aeiouyhé]/i.test(d.name) ? `dans l’${d.name}` : `en ${d.name}`) : '');
     /** « Né en 1890 en Corrèze » (ce qu'on sait de la naissance) */
     function bornText(ctx) {
         if (!ctx.by) return '';
-        const where = ctx.birthDept ? ` ${deptText(ctx.birthDept)}` : ctx.birthPlace ? ` à ${ctx.birthPlace}` : '';
+        const where = ctx.birthDept ? ` ${deptText(ctx.birthDept)}` : ctx.birthPlace ? ` ${T('à {place}', {place: ctx.birthPlace})}` : '';
+        if (I18()) return T(ctx.estimated && !ctx.birthKnown ? (ctx.female ? 'Née vers {year}' : 'Né vers {year}') : (ctx.female ? 'Née en {year}' : 'Né en {year}'), {year: ctx.by}) + where;
         return `${ne(ctx)} ${ctx.estimated && !ctx.birthKnown ? 'vers' : 'en'} ${ctx.by}${where}`;
     }
-    const lifeText = ctx => (ctx.by ? `${ctx.estimated && !ctx.birthKnown ? 'vers ' : ''}${ctx.by}–${ctx.deathKnown ? ctx.dy : '?'}` : '');
-    const countryIn = (ctx, c) => { const n = COUNTRY_NAME[c] || c; return ['Algérie', 'Indochine', 'Italie', 'Espagne', 'Allemagne', 'Irlande', 'Australie', 'Argentine', 'Autriche', 'Ukraine', 'Écosse'].includes(n) ? `en ${n}` : /^[AEIOUÉ]/.test(n) ? `en ${n}` : n === 'États-Unis' || n === 'Pays-Bas' ? `aux ${n}` : `en ${n}`; };
+    const lifeText = ctx => (ctx.by ? `${ctx.estimated && !ctx.birthKnown ? T('vers') + ' ' : ''}${ctx.by}–${ctx.deathKnown ? ctx.dy : '?'}` : '');
+    const countryIn = (ctx, c) => { const n = COUNTRY_NAME[c] || c; if (I18()) return T('en {country}', {country: T(n)}); return ['Algérie', 'Indochine', 'Italie', 'Espagne', 'Allemagne', 'Irlande', 'Australie', 'Argentine', 'Autriche', 'Ukraine', 'Écosse'].includes(n) ? `en ${n}` : /^[AEIOUÉ]/.test(n) ? `en ${n}` : n === 'États-Unis' || n === 'Pays-Bas' ? `aux ${n}` : `en ${n}`; };
 
     /* ═════ les règles des sites qu'on connaît (clés de « Chercher sur internet » et des lots) ═════ */
     const S = (o) => o;
-    const war14 = ctx => (ctx.profiles.has('soldier') || ctx.profiles.has('mpf') ? `${bornText(ctx)} : ${il(ctx)} a fait la guerre de 14` : `${bornText(ctx)} : ${il(ctx)} a sans doute fait la guerre de 14`);
-    const war39 = ctx => `${bornText(ctx)} : ${il(ctx)} avait l’âge d’être mobilisé en 1939-1945`;
+    const war14 = ctx => T(ctx.profiles.has('soldier') || ctx.profiles.has('mpf') ? (ctx.female ? '{born} : elle a fait la guerre de 14' : '{born} : il a fait la guerre de 14') : (ctx.female ? '{born} : elle a sans doute fait la guerre de 14' : '{born} : il a sans doute fait la guerre de 14'), {born: bornText(ctx)});
+    const war39 = ctx => T(ctx.female ? '{born} : elle avait l’âge d’être mobilisé en 1939-1945' : '{born} : il avait l’âge d’être mobilisé en 1939-1945', {born: bornText(ctx)});
     const RULES = {
         // moteurs de recherche : jamais en tête
         google: S({base: 0.5}), bing: S({base: 0.1}), duckduckgo: S({base: 0.2}), qwant: S({base: 0.2}), ecosia: S({base: 0}), brave: S({base: 0}), startpage: S({base: 0}), yahoo: S({base: 0}), yandex: S({base: 0}), baidu: S({base: 0}), mojeek: S({base: 0}),
         // grands sites de généalogie
-        geneanet: S({base: 2.2, missing: ['birth', 'parents', 'father', 'mother', 'marriage', 'death'], why: ctx => ctx.countries.has('fr') ? 'Les arbres et relevés des généalogistes français : quelqu’un a peut-être déjà trouvé ses parents' : 'Des millions d’arbres et de relevés : quelqu’un a peut-être déjà cherché'}),
-        familysearch: S({base: 2, missing: ['birth', 'parents', 'father', 'mother', 'marriage', 'death'], why: ctx => [...ctx.countries.keys()].some(c => c !== 'fr') ? `Actes indexés du monde entier, gratuits (${[...ctx.countries.keys()].filter(c => c !== 'fr').map(c => COUNTRY_NAME[c] || c).join(', ')})` : 'Actes indexés gratuits (un compte gratuit est demandé)'}),
+        geneanet: S({base: 2.2, missing: ['birth', 'parents', 'father', 'mother', 'marriage', 'death'], why: ctx => T(ctx.countries.has('fr') ? 'Les arbres et relevés des généalogistes français : quelqu’un a peut-être déjà trouvé ses parents' : 'Des millions d’arbres et de relevés : quelqu’un a peut-être déjà cherché')}),
+        familysearch: S({base: 2, missing: ['birth', 'parents', 'father', 'mother', 'marriage', 'death'], why: ctx => [...ctx.countries.keys()].some(c => c !== 'fr') ? T('Actes indexés du monde entier, gratuits ({list})', {list: [...ctx.countries.keys()].filter(c => c !== 'fr').map(c => C_NAME(c)).join(', ')}) : T('Actes indexés gratuits (un compte gratuit est demandé)')}),
         so5_fs_records: S({base: 1.6, missing: ['birth', 'parents', 'marriage', 'death']}),
-        so5_fs_catalog: S({base: 1, missing: ['birth', 'parents', 'father', 'mother', 'marriage'], why: ctx => `Les registres filmés ${ctx.places[0] ? deOf(ctx.places[0]) : 'de ses communes'} (catalogue FamilySearch)`}),
+        so5_fs_catalog: S({base: 1, missing: ['birth', 'parents', 'father', 'mother', 'marriage'], why: ctx => (ctx.places[0] ? T('Les registres filmés {of} (catalogue FamilySearch)', {of: deOf(ctx.places[0])}) : T('Les registres filmés de ses communes (catalogue FamilySearch)'))}),
         wikitree: S({base: 0.8}), geni: S({base: 0.6}), filae: S({base: 1.2, countries: ['fr'], paid: true}), myheritage: S({base: 1, paid: true}), ancestry: S({base: 1, paid: true}), findmypast: S({base: 0.6, countries: ['gb', 'ie', 'us'], paid: true}),
         // décès
-        matchid: S({countries: ['fr'], from: 1970, to: NOW, missing: ['death'], base: 1, why: ctx => (ctx.deathKnown ? `Décès en ${ctx.dy} : le fichier des décès de l’INSEE (depuis 1970)` : `${bornText(ctx)} : ${ctx.female ? 'si elle est morte' : 's’il est mort'} après 1970, son décès est dans le fichier de l’INSEE`)}),
-        findagrave: S({base: 0.6, missing: ['death'], why: () => 'Tombes photographiées par des bénévoles'}), billiongraves: S({base: 0.4, missing: ['death']}),
+        matchid: S({countries: ['fr'], from: 1970, to: NOW, missing: ['death'], base: 1, why: ctx => (ctx.deathKnown ? T('Décès en {year} : le fichier des décès de l’INSEE (depuis 1970)', {year: ctx.dy}) : T(ctx.female ? '{born} : si elle est morte après 1970, son décès est dans le fichier de l’INSEE' : '{born} : s’il est mort après 1970, son décès est dans le fichier de l’INSEE', {born: bornText(ctx)}))}),
+        findagrave: S({base: 0.6, missing: ['death'], why: () => T('Tombes photographiées par des bénévoles')}), billiongraves: S({base: 0.4, missing: ['death']}),
         // militaires
         memoiredeshommes: S({countries: ['fr'], born: [1865, 1901], sex: 'male', profiles: ['soldier', 'mpf', 'pow'], base: 1.2, why: war14}),
         so_mdh_mpf1418: S({countries: ['fr'], born: [1865, 1901], sex: 'male', profiles: ['soldier', 'mpf'], base: 1, why: war14}),
@@ -149,43 +153,43 @@
         so_mdh_sepultures: S({countries: ['fr'], born: [1865, 1927], sex: 'male', profiles: ['soldier', 'mpf'], missing: ['death'], base: 0.4}),
         so_mdh_hors_mpf: S({countries: ['fr'], born: [1850, 1927], sex: 'male', profiles: ['soldier'], require: ['profile'], base: 0.4}),
         so_mdh_marins: S({countries: ['fr'], born: [1850, 1927], profiles: ['sailor'], require: ['profile'], base: 0.5}),
-        so_mdh_jmo: S({countries: ['fr'], born: [1865, 1901], sex: 'male', profiles: ['soldier'], require: ['profile'], base: 0.5, why: () => 'Le journal de marche de son régiment : où il était, jour après jour'}),
-        so_matricules_ad: S({countries: ['fr'], born: [1847, 1921], sex: 'male', base: 0.9, profiles: ['soldier'], why: ctx => `${bornText(ctx)} : sa fiche matricule (classe ${ctx.by + 20}) dit sa taille, son métier, ses adresses et ses parents`}),
+        so_mdh_jmo: S({countries: ['fr'], born: [1865, 1901], sex: 'male', profiles: ['soldier'], require: ['profile'], base: 0.5, why: () => T('Le journal de marche de son régiment : où il était, jour après jour')}),
+        so_matricules_ad: S({countries: ['fr'], born: [1847, 1921], sex: 'male', base: 0.9, profiles: ['soldier'], why: ctx => T('{born} : sa fiche matricule (classe {year}) dit sa taille, son métier, ses adresses et ses parents', {born: bornText(ctx), year: ctx.by + 20})}),
         so_francearchives_noms: S({countries: ['fr'], born: [1847, 1921], sex: 'male', base: 1}),
         so_grand_memorial: S({countries: ['fr'], born: [1847, 1921], sex: 'male', base: 0.5}),
         so3_cicr_pg: S({born: [1860, 1902], sex: 'male', profiles: ['pow', 'soldier'], base: 0.3}),
-        leonore: S({countries: ['fr'], profiles: ['soldier', 'elected', 'doctor', 'inventor', 'artist'], base: 0.5, to: 1977, why: () => 'Les dossiers de la Légion d’honneur (morts avant 1977)'}),
+        leonore: S({countries: ['fr'], profiles: ['soldier', 'elected', 'doctor', 'inventor', 'artist'], base: 0.5, to: 1977, why: () => T('Les dossiers de la Légion d’honneur (morts avant 1977)')}),
         so_leonore: S({countries: ['fr'], profiles: ['soldier', 'elected'], base: 0.3, to: 1977}),
-        so5_sainte_helene: S({countries: ['fr'], born: [1765, 1800], sex: 'male', profiles: ['soldier'], base: 0.5, why: ctx => `${bornText(ctx)} : un soldat de Napoléon a peut-être reçu la médaille de Sainte-Hélène`}),
-        so4_morts_1870: S({countries: ['fr'], born: [1835, 1853], sex: 'male', base: 0.6, why: ctx => `${bornText(ctx)} : ${il(ctx)} avait l’âge de faire la guerre de 1870`}),
+        so5_sainte_helene: S({countries: ['fr'], born: [1765, 1800], sex: 'male', profiles: ['soldier'], base: 0.5, why: ctx => T('{born} : un soldat de Napoléon a peut-être reçu la médaille de Sainte-Hélène', {born: bornText(ctx)})}),
+        so4_morts_1870: S({countries: ['fr'], born: [1835, 1853], sex: 'male', base: 0.6, why: ctx => T(ctx.female ? '{born} : elle avait l’âge de faire la guerre de 1870' : '{born} : il avait l’âge de faire la guerre de 1870', {born: bornText(ctx)})}),
         so4_memorialgenweb: S({countries: ['fr'], born: [1840, 1927], sex: 'male', profiles: ['soldier', 'mpf'], base: 0.4}),
         so2_shd_officiers: S({countries: ['fr'], profiles: ['soldier'], require: ['profile'], base: 0.4}),
         // gens de mer
-        so2_shd_marins: S({countries: ['fr'], profiles: ['sailor'], require: ['profile'], base: 1, why: () => 'Un marin : l’inscription maritime suit chaque embarquement'}),
-        so6_marins_shd: S({countries: ['fr'], profiles: ['sailor'], require: ['profile'], base: 1, why: () => 'Un marin : l’inscription maritime de son port (quartier maritime)'}),
+        so2_shd_marins: S({countries: ['fr'], profiles: ['sailor'], require: ['profile'], base: 1, why: () => T('Un marin : l’inscription maritime suit chaque embarquement')}),
+        so6_marins_shd: S({countries: ['fr'], profiles: ['sailor'], require: ['profile'], base: 1, why: () => T('Un marin : l’inscription maritime de son port (quartier maritime)')}),
         so4_roles_equipage: S({countries: ['fr'], profiles: ['sailor'], require: ['profile'], base: 0.8}),
         // émigration
-        so2_ellis: S({profiles: ['emigrant'], events: ['EMIG', 'IMMI', 'NATU'], countries: ['us'], from: 1892, to: 1924, base: 0.5, why: ctx => (ctx.profiles.has('emigrant') ? `Parti${ctx.female ? 'e' : ''} en Amérique : les listes de passagers d’Ellis Island (1892-1924)` : `${ctx.female ? 'Elle a vécu' : 'Il a vécu'} aux États-Unis : les arrivées à Ellis Island (1892-1924)`)}),
-        so5_castle_garden: S({profiles: ['emigrant'], events: ['EMIG', 'IMMI', 'NATU'], countries: ['us'], from: 1820, to: 1892, base: 0.5, why: () => 'Arrivées à New York avant Ellis Island (1820-1892)'}),
-        so2_an_naturalisation: S({profiles: ['emigrant'], events: ['NATU', 'IMMI'], countries: ['fr'], from: 1883, to: 1930, base: 0.3, why: () => 'Venu d’ailleurs : les décrets de naturalisation (1883-1930)'}),
+        so2_ellis: S({profiles: ['emigrant'], events: ['EMIG', 'IMMI', 'NATU'], countries: ['us'], from: 1892, to: 1924, base: 0.5, why: ctx => T(ctx.profiles.has('emigrant') ? (ctx.female ? 'Partie en Amérique : les listes de passagers d’Ellis Island (1892-1924)' : 'Parti en Amérique : les listes de passagers d’Ellis Island (1892-1924)') : (ctx.female ? 'Elle a vécu aux États-Unis : les arrivées à Ellis Island (1892-1924)' : 'Il a vécu aux États-Unis : les arrivées à Ellis Island (1892-1924)'))}),
+        so5_castle_garden: S({profiles: ['emigrant'], events: ['EMIG', 'IMMI', 'NATU'], countries: ['us'], from: 1820, to: 1892, base: 0.5, why: () => T('Arrivées à New York avant Ellis Island (1820-1892)')}),
+        so2_an_naturalisation: S({profiles: ['emigrant'], events: ['NATU', 'IMMI'], countries: ['fr'], from: 1883, to: 1930, base: 0.3, why: () => T('Venu d’ailleurs : les décrets de naturalisation (1883-1930)')}),
         so5_fichier_origine: S({countries: ['ca'], profiles: ['emigrant'], base: 0.5}), so5_cea_acadie: S({countries: ['ca'], base: 0.5}),
         // notaires et héritages
-        so2_an_minutier: S({profiles: ['notary', 'inheritance'], events: ['WILL', 'PROB', 'DEED', 'MARC'], place: /\bparis\b/, missing: ['marriage'], base: 0.3, why: ctx => (ctx.places.some(x => /paris/i.test(x)) ? 'Il a vécu à Paris : les actes de ses notaires (contrats de mariage, inventaires, testaments)' : 'Un héritage, un testament : le Minutier central des notaires de Paris')}),
+        so2_an_minutier: S({profiles: ['notary', 'inheritance'], events: ['WILL', 'PROB', 'DEED', 'MARC'], place: /\bparis\b/, missing: ['marriage'], base: 0.3, why: ctx => T(ctx.places.some(x => /paris/i.test(x)) ? 'Il a vécu à Paris : les actes de ses notaires (contrats de mariage, inventaires, testaments)' : 'Un héritage, un testament : le Minutier central des notaires de Paris')}),
         so6_minutier: S({profiles: ['notary', 'inheritance'], events: ['WILL', 'PROB', 'DEED', 'MARC'], place: /\bparis\b/, base: 0.3}),
         so2_an_siv: S({profiles: ['notary', 'inheritance'], base: 0.2}),
         // déportation, répression : ton sobre
-        yadvashem: S({profiles: ['deported', 'jewish'], require: ['profile'], from: 1933, to: 1945, base: 0.3, why: () => 'Sa fiche dit une déportation : les noms des victimes de la Shoah'}),
-        arolsen: S({profiles: ['deported', 'pow', 'resistant'], require: ['profile'], from: 1933, to: 1950, base: 0.3, why: () => 'Les archives des persécutions nazies (déportés, travailleurs forcés, personnes déplacées)'}),
-        so2_shoah_memorial: S({profiles: ['deported', 'jewish'], require: ['profile'], from: 1939, to: 1945, countries: ['fr'], base: 0.3, why: () => 'Le Mémorial de la Shoah : les noms des déportés de France'}),
-        so2_fmd_livre: S({profiles: ['deported', 'resistant'], require: ['profile'], from: 1939, to: 1945, countries: ['fr'], base: 0.3, why: () => 'Le livre-mémorial des déportés de France'}),
-        so2_maitron_fusilles: S({profiles: ['shot', 'resistant'], require: ['profile'], from: 1939, to: 1945, countries: ['fr'], base: 0.3, why: () => 'Le Maitron des fusillés et exécutés (1940-1944)'}),
+        yadvashem: S({profiles: ['deported', 'jewish'], require: ['profile'], from: 1933, to: 1945, base: 0.3, why: () => T('Sa fiche dit une déportation : les noms des victimes de la Shoah')}),
+        arolsen: S({profiles: ['deported', 'pow', 'resistant'], require: ['profile'], from: 1933, to: 1950, base: 0.3, why: () => T('Les archives des persécutions nazies (déportés, travailleurs forcés, personnes déplacées)')}),
+        so2_shoah_memorial: S({profiles: ['deported', 'jewish'], require: ['profile'], from: 1939, to: 1945, countries: ['fr'], base: 0.3, why: () => T('Le Mémorial de la Shoah : les noms des déportés de France')}),
+        so2_fmd_livre: S({profiles: ['deported', 'resistant'], require: ['profile'], from: 1939, to: 1945, countries: ['fr'], base: 0.3, why: () => T('Le livre-mémorial des déportés de France')}),
+        so2_maitron_fusilles: S({profiles: ['shot', 'resistant'], require: ['profile'], from: 1939, to: 1945, countries: ['fr'], base: 0.3, why: () => T('Le Maitron des fusillés et exécutés (1940-1944)')}),
         so7_cfyv_justes: S({profiles: ['resistant'], require: ['profile'], from: 1939, to: 1945, countries: ['fr'], base: 0.1}),
         // enfants placés, colonies, protestants, Paris
         so7_ap_paris: S({profiles: ['placed'], require: ['profile'], place: /\bparis\b/, base: 0.6}), so7_enfants_fa: S({profiles: ['placed'], require: ['profile'], base: 0.6}),
-        so2_anom_ec: S({countries: OVERSEAS, base: 1.5, why: ctx => `${ctx.female ? 'Elle a vécu' : 'Il a vécu'} ${countryIn(ctx, [...ctx.countries.keys()].find(c => OVERSEAS.includes(c)))} : l’état civil des anciennes colonies (ANOM)`}),
+        so2_anom_ec: S({countries: OVERSEAS, base: 1.5, why: ctx => T(ctx.female ? 'Elle a vécu {where} : l’état civil des anciennes colonies (ANOM)' : 'Il a vécu {where} : l’état civil des anciennes colonies (ANOM)', {where: countryIn(ctx, [...ctx.countries.keys()].find(c => OVERSEAS.includes(c)))})}),
         so2_anom_bagnards: S({countries: ['gf', 'nc'], base: 0.2}),
-        so4_huguenots: S({profiles: ['protestant'], require: ['profile'], base: 0.8, why: () => 'Une famille protestante : les registres des réfugiés huguenots'}),
-        so3_paris_ec: S({place: /\bparis\b/, missing: ['birth', 'marriage', 'death', 'parents'], base: 0.6, why: () => 'Il a vécu à Paris : l’état civil reconstitué (avant 1860)'}),
+        so4_huguenots: S({profiles: ['protestant'], require: ['profile'], base: 0.8, why: () => T('Une famille protestante : les registres des réfugiés huguenots')}),
+        so3_paris_ec: S({place: /\bparis\b/, missing: ['birth', 'marriage', 'death', 'parents'], base: 0.6, why: () => T('Il a vécu à Paris : l’état civil reconstitué (avant 1860)')}),
         // métiers
         so5_memorial_cheminots: S({profiles: ['railway'], require: ['profile'], base: 0.6}), so5_memorial_gendarmes: S({profiles: ['police'], require: ['profile'], base: 0.6}), so5_memorial_policiers: S({profiles: ['police'], require: ['profile'], base: 0.6}),
         so5_maitron: S({profiles: ['worker', 'railway', 'elected', 'resistant'], base: 0.2}), so5_anmt: S({profiles: ['worker', 'railway'], base: 0.2}),
@@ -193,13 +197,13 @@
         so3_biusante_bio: S({profiles: ['doctor'], require: ['profile'], base: 0.6}), so3_biusante_theses: S({profiles: ['doctor'], require: ['profile'], base: 0.5}),
         so5_daguerre: S({profiles: ['photographer'], require: ['profile'], base: 0.6}), so5_portraitsepia: S({profiles: ['photographer'], require: ['profile'], base: 0.5}),
         // recensements et presse
-        socface: S({countries: ['fr'], from: 1836, to: 1936, base: 1.3, why: ctx => `${ctx.female ? 'Elle a vécu' : 'Il a vécu'} en France entre 1836 et 1936 : les recensements nominatifs (SocFace)`}),
+        socface: S({countries: ['fr'], from: 1836, to: 1936, base: 1.3, why: ctx => T(ctx.female ? 'Elle a vécu en France entre 1836 et 1936 : les recensements nominatifs (SocFace)' : 'Il a vécu en France entre 1836 et 1936 : les recensements nominatifs (SocFace)')}),
         gallica: S({base: 0.8, countries: ['fr'], to: 1950}), retronews: S({base: 0.6, countries: ['fr'], from: 1780, to: 1950, paid: 'partiel'}), francearchives: S({base: 0.7, countries: ['fr']}),
         chroniclingamerica: S({countries: ['us'], to: 1963, base: 0.5}), trove: S({countries: ['au'], base: 0.5}), delpher: S({countries: ['nl'], base: 0.5}), anno: S({countries: ['at'], base: 0.5}),
         so4_trove: S({countries: ['au'], base: 0.5}), so4_paperspast: S({countries: ['nz'], base: 0.5}), so4_delpher: S({countries: ['nl'], base: 0.5}), so4_chroniclingamerica: S({countries: ['us'], base: 0.5}),
         newspapers: S({countries: ['us'], base: 0.4, paid: true}),
         // pays : l'état civil et les registres
-        so3_antenati_nom: S({countries: ['it'], missing: ['birth', 'parents', 'father', 'mother', 'marriage', 'death'], base: 2, why: ctx => `${ctx.female ? 'Elle a vécu' : 'Il a vécu'} en Italie : l’état civil italien numérisé (Antenati)`}),
+        so3_antenati_nom: S({countries: ['it'], missing: ['birth', 'parents', 'father', 'mother', 'marriage', 'death'], base: 2, why: ctx => T(ctx.female ? 'Elle a vécu en Italie : l’état civil italien numérisé (Antenati)' : 'Il a vécu en Italie : l’état civil italien numérisé (Antenati)')}),
         so3_pares: S({countries: ['es'], base: 1.2}), so3_torre_tombo: S({countries: ['pt'], base: 1.2}), so3_geneteka: S({countries: ['pl'], base: 1.5}), so3_openarchives: S({countries: ['nl', 'be'], base: 1.5}),
         so3_freebmd: S({countries: ['gb'], from: 1837, to: 1990, base: 1.5}), so3_freecen: S({countries: ['gb'], from: 1841, to: 1911, base: 1}), so3_banq: S({countries: ['ca'], base: 1.5}), so3_bac_lac: S({countries: ['ca'], base: 1}), so3_nara: S({countries: ['us'], base: 1}),
         so2_be_arch: S({countries: ['be'], base: 1.5}), so2_ch_canton: S({countries: ['ch'], base: 1.5}),
@@ -208,9 +212,9 @@
         so6_hiski: S({countries: ['fi'], base: 1.5}), so6_scotlandspeople: S({countries: ['gb'], base: 0.8, paid: true}), so6_oldbailey: S({countries: ['gb'], from: 1674, to: 1913, base: 0.2}),
         so7_ape: S({countries: ['de', 'it', 'es', 'be', 'nl', 'pl', 'cz', 'at', 'hu', 'pt', 'ch', 'lu', 'dk', 'se', 'no', 'fi', 'ie', 'gb'], base: 0.8}),
         so7_compgen_ofb: S({countries: ['de'], base: 1}), so7_archion: S({countries: ['de'], profiles: ['protestant'], base: 0.8, paid: true}), so7_archivni_mapy: S({countries: ['cz'], base: 0.5}), so7_mapire: S({countries: ['at', 'hu', 'cz'], base: 0.4}),
-        so7_cercle_dept: S({countries: ['fr'], missing: ['birth', 'parents', 'father', 'mother', 'marriage', 'death'], base: 1.4, why: ctx => `Les bénévoles du cercle généalogique ${ctx.depts[0] ? deptText(ctx.depts[0]).replace(/^en |^dans l’/, 'de ') : 'du département'} relèvent les actes de leurs communes`}),
-        so7_fs_wiki: S({base: 0.5, why: () => 'Le mode d’emploi des archives du pays ou de la région (FamilySearch Wiki)'}),
-        so5_geneawiki: S({countries: ['fr'], base: 0.4}), so4_geopatronyme: S({countries: ['fr'], missing: ['parents', 'father', 'mother'], base: 0.4, why: ctx => `Où vivaient les ${ctx.last || 'gens de ce nom'} entre 1891 et 1990 : pour trouver d’où vient la famille`}),
+        so7_cercle_dept: S({countries: ['fr'], missing: ['birth', 'parents', 'father', 'mother', 'marriage', 'death'], base: 1.4, why: ctx => (I18() ? (ctx.depts[0] ? T('Les bénévoles du cercle généalogique {of} relèvent les actes de leurs communes', {of: T('de {place}', {place: ctx.depts[0].name})}) : T('Les bénévoles du cercle généalogique du département relèvent les actes de leurs communes')) : `Les bénévoles du cercle généalogique ${ctx.depts[0] ? deptText(ctx.depts[0]).replace(/^en |^dans l’/, 'de ') : 'du département'} relèvent les actes de leurs communes`)}),
+        so7_fs_wiki: S({base: 0.5, why: () => T('Le mode d’emploi des archives du pays ou de la région (FamilySearch Wiki)')}),
+        so5_geneawiki: S({countries: ['fr'], base: 0.4}), so4_geopatronyme: S({countries: ['fr'], missing: ['parents', 'father', 'mother'], base: 0.4, why: ctx => (ctx.last ? T('Où vivaient les {name} entre 1891 et 1990 : pour trouver d’où vient la famille', {name: ctx.last}) : T('Où vivaient les gens de ce nom entre 1891 et 1990 : pour trouver d’où vient la famille'))}),
         so4_cassini: S({countries: ['fr'], base: 0.1}), so4_geneanet_releves: S({countries: ['fr'], missing: ['death'], base: 0.6}), so4_cimetieres_de_france: S({countries: ['fr'], missing: ['death'], base: 0.5}),
         so3_cths: S({profiles: ['inventor', 'artist', 'doctor', 'elected'], base: 0.2}), so3_polytechnique: S({profiles: ['inventor', 'soldier'], require: ['profile'], born: [1775, 1925], sex: 'male', base: 0.1}),
     };
@@ -247,8 +251,8 @@
         let countryMiss = '';
         if (want.length) {
             const hit = want.find(c => ctx.countries.has(c));
-            if (hit) { s += hit === 'fr' ? 1 : 4; strong = strong || hit !== 'fr'; if (hit !== 'fr' && !r.why) reasons.push(`${ctx.female ? 'Elle a vécu' : 'Il a vécu'} ${countryIn(ctx, hit)}`); }
-            else if (ctx.countries.size) countryMiss = `pas de lieu ${want.length === 1 ? countryIn(ctx, want[0]) : 'dans ces pays'}`;
+            if (hit) { s += hit === 'fr' ? 1 : 4; strong = strong || hit !== 'fr'; if (hit !== 'fr' && !r.why) reasons.push(T(ctx.female ? 'Elle a vécu {where}' : 'Il a vécu {where}', {where: countryIn(ctx, hit)})); }
+            else if (ctx.countries.size) countryMiss = want.length === 1 ? T('pas de lieu {where}', {where: countryIn(ctx, want[0])}) : T('pas de lieu dans ces pays');
             else s -= 1; // aucun lieu connu : on ne peut pas dire
         }
         // époque couverte
@@ -256,47 +260,47 @@
         const from = Number(r.from ?? yrs?.[0]) || 0, to = Number(r.to ?? yrs?.[1]) || 0;
         if ((from || to) && ctx.by) {
             const a = alive(ctx, from || -9999, to || 9999);
-            if (a === false) out = out || `sa vie (${lifeText(ctx)}) n’est pas dans les années du site (${from || '…'}–${to || '…'})`;
-            else if (from && to && to - from < 120) { s += 1; reasons.push(`Ses années (${lifeText(ctx)}) sont dans celles du site (${from}–${to})`); }
+            if (a === false) out = out || T('sa vie ({life}) n’est pas dans les années du site ({from}–{to})', {life: lifeText(ctx), from: from || '…', to: to || '…'});
+            else if (from && to && to - from < 120) { s += 1; reasons.push(T('Ses années ({life}) sont dans celles du site ({from}–{to})', {life: lifeText(ctx), from, to})); }
         }
         // né dans la bonne tranche (soldats…)
         if (Array.isArray(r.born) && ctx.by) {
             if (ctx.by >= r.born[0] && ctx.by <= r.born[1]) { s += 3; strong = true; }
-            else out = out || `${ne(ctx).toLowerCase()} en ${ctx.by}, hors des années ${r.born[0]}–${r.born[1]}`;
+            else out = out || T(ctx.female ? 'née en {year}, hors des années {from}–{to}' : 'né en {year}, hors des années {from}–{to}', {year: ctx.by, from: r.born[0], to: r.born[1]});
         } else if (Array.isArray(r.born) && !ctx.by) s -= 1;
-        if (r.sex && ((r.sex === 'male' && ctx.female) || (r.sex === 'female' && ctx.male))) out = out || (ctx.female ? 'pour les hommes' : 'pour les femmes');
+        if (r.sex && ((r.sex === 'male' && ctx.female) || (r.sex === 'female' && ctx.male))) out = out || T(ctx.female ? 'pour les hommes' : 'pour les femmes');
         // profils (règle, ou « where / on » des lots)
         const whereList = [...(Array.isArray(site.where) ? site.where : []), ...(Array.isArray(site.on) ? site.on : [])];
         const fromWhere = whereList.map(w => WHERE_PROFILE[w]).filter(Boolean);
         const profs = [...new Set([...(r.profiles || []), ...fromWhere])];
         const onlyFor = (r.require || []).includes('profile') || (whereList.length && !whereList.some(w => GENERIC_WHERE.includes(w)) && fromWhere.length);
         const ph = profs.find(k => ctx.profiles.has(k));
-        if (ph) { s += 5; strong = true; reasons.push(`Sa fiche dit : ${PROFILES[ph]?.[1] || ph}`); }
-        else if (onlyFor && profs.length) out = out || `seulement ${profs.slice(0, 2).map(k => `« ${PROFILES[k]?.[1] || k} »`).join(' ou ')}`;
+        if (ph) { s += 5; strong = true; reasons.push(T('Sa fiche dit : {what}', {what: T(PROFILES[ph]?.[1] || ph)})); }
+        else if (onlyFor && profs.length) out = out || T('seulement {list}', {list: profs.slice(0, 2).map(k => `« ${T(PROFILES[k]?.[1] || k)} »`).join(' ' + T('ou') + ' ')});
         // événements
         const evh = (r.events || []).find(t => ctx.tags.has(t));
-        if (evh) { s += 4; strong = true; if (!ph) reasons.push({EMIG: 'Sa fiche a une émigration', IMMI: 'Sa fiche a une immigration', NATU: 'Sa fiche a une naturalisation', WILL: 'Sa fiche a un testament', PROB: 'Sa fiche a une succession', DEED: 'Sa fiche a un acte notarié', MARC: 'Sa fiche a un contrat de mariage'}[evh] || `Sa fiche a l’événement ${evh}`); }
+        if (evh) { s += 4; strong = true; if (!ph) reasons.push(T({EMIG: 'Sa fiche a une émigration', IMMI: 'Sa fiche a une immigration', NATU: 'Sa fiche a une naturalisation', WILL: 'Sa fiche a un testament', PROB: 'Sa fiche a une succession', DEED: 'Sa fiche a un acte notarié', MARC: 'Sa fiche a un contrat de mariage'}[evh] || 'Sa fiche a l’événement {tag}', {tag: evh})); }
         // un site fait pour un profil ou un événement que la fiche n'a pas : en bas, et sans sa phrase (« Venu d'ailleurs… » pour un Corrézien)
         const offTopic = (profs.length || (r.events || []).length) && !ph && !evh && !(r.place instanceof RegExp && ctx.places.some(x => r.place.test(fold(x)))) && !(Array.isArray(r.born) && ctx.by >= r.born[0] && ctx.by <= r.born[1]);
         if (offTopic) { s -= 1.5; if (!Array.isArray(r.born)) reasons.length = 0; }
         // un pays qui ne va pas : écarté, sauf si son profil ou un événement le rend utile (un émigré sans lieu en Amérique)
         if (countryMiss && !ph && !evh) out = out || countryMiss;
         // un registre français par âge (soldats, matricules) : pas pour quelqu'un né à l'étranger, sauf si sa fiche le dit
-        if (Array.isArray(r.born) && want.includes('fr') && ctx.birthCountry && ctx.birthCountry !== 'fr' && !ph) out = out || `${ne(ctx).toLowerCase()} hors de France (${C_NAME(ctx.birthCountry)})`;
+        if (Array.isArray(r.born) && want.includes('fr') && ctx.birthCountry && ctx.birthCountry !== 'fr' && !ph) out = out || T(ctx.female ? 'née hors de France ({country})' : 'né hors de France ({country})', {country: C_NAME(ctx.birthCountry)});
         // lieu précis (Paris…)
         const placeRe = r.place instanceof RegExp ? r.place : site.place instanceof RegExp ? site.place : null;
-        if (placeRe) { if (ctx.places.some(x => placeRe.test(fold(x)) || placeRe.test(String(x).toLowerCase()))) { s += 3; strong = true; } else if (!ph && !evh) out = out || 'pas de lieu qui convient'; }
+        if (placeRe) { if (ctx.places.some(x => placeRe.test(fold(x)) || placeRe.test(String(x).toLowerCase()))) { s += 3; strong = true; } else if (!ph && !evh) out = out || T('pas de lieu qui convient'); }
         // région (bibliothèques régionales du lot 6)
-        if (site.region) { if (ctx.regions?.includes(site.region)) { s += 2.5; reasons.push('Une bibliothèque de sa région'); } else out = out || 'pas dans sa région'; }
+        if (site.region) { if (ctx.regions?.includes(site.region)) { s += 2.5; reasons.push(T('Une bibliothèque de sa région')); } else out = out || T('pas dans sa région'); }
         // ce qui manque
         const miss = (r.missing || []).filter(m => ctx.missing.has(m));
-        if (miss.length) { s += 1.5 + miss.length * 0.5; reasons.push(`${MISSING[miss[0]].replace(/^./, c => c.toUpperCase())}${miss.length > 1 ? ` (et ${miss.slice(1).map(m => MISSING[m]).join(', ')})` : ''}`); }
+        if (miss.length) { s += 1.5 + miss.length * 0.5; reasons.push(`${T(MISSING[miss[0]]).replace(/^./, c => c.toUpperCase())}${miss.length > 1 ? ' ' + T('(et {list})', {list: miss.slice(1).map(m => T(MISSING[m])).join(', ')}) : ''}`); }
         // la phrase du pourquoi (en premier)
         const sayWhy = !out && !(offTopic && !Array.isArray(r.born));
         if (typeof r.why === 'function' && sayWhy) { try { const w = r.why(ctx); if (w) reasons.unshift(w); } catch (_) {} }
-        else if (typeof r.why === 'string' && sayWhy) reasons.unshift(r.why);
+        else if (typeof r.why === 'string' && sayWhy) reasons.unshift(T(r.why));
         if (Array.isArray(r.born) && !out && typeof r.why !== 'function') reasons.unshift(bornText(ctx));
-        if (!reasons.length && !out) reasons.push(offTopic ? `Utile surtout pour ${profs.length ? profs.slice(0, 2).map(k => `« ${PROFILES[k]?.[1] || k} »`).join(' ou ') : 'un autre cas'}` : site.note ? String(site.note).split(/(?<=[.!?])\s/)[0] : 'Un site général, à essayer');
+        if (!reasons.length && !out) reasons.push(offTopic ? (profs.length ? T('Utile surtout pour {list}', {list: profs.slice(0, 2).map(k => `« ${T(PROFILES[k]?.[1] || k)} »`).join(' ' + T('ou') + ' ')}) : T('Utile surtout pour un autre cas')) : site.note ? String(site.note).split(/(?<=[.!?])\s/)[0] : T('Un site général, à essayer'));
         const paid = isPaid({...site, paid: site.paid ?? r.paid});
         if (paid === 'paid') s -= 2; else if (paid === 'library') s -= 1.5; else if (paid === 'partly') s -= 0.3;
         return {score: Math.round(s * 10) / 10, reasons: [...new Set(reasons.filter(Boolean))].slice(0, 3), out, strong, paid};
@@ -318,7 +322,7 @@
             const prev = ctx.searched?.[site.key] || null;
             const row = {site, score: sc.score, reasons: sc.reasons, paid: sc.paid, strong: sc.strong, searched: prev};
             if (prev && prev.status !== 'review') { done.push(row); return; }
-            if (sc.score < minScore && !sc.strong) { out.push({site, why: 'peu utile pour cette fiche'}); return; }
+            if (sc.score < minScore && !sc.strong) { out.push({site, why: T('peu utile pour cette fiche')}); return; }
             list.push(row);
         });
         list.sort((a, b) => b.score - a.score || String(a.site.label).localeCompare(String(b.site.label), 'fr'));

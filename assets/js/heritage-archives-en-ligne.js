@@ -27,6 +27,7 @@
     const lsJson = (k, d) => { try { const v = JSON.parse(lsGet(k, '')); return v ?? d; } catch (_) { return d; } };
     const badge = (t, k, o) => (UI()?.badge ? UI().badge(t, k, o) : `<span class="ui-badge is-${esc(k)}">${esc(t)}</span>`);
     const plural = (n, one, many) => (A()?.plural ? A().plural(n, one, many) : `${n} ${n > 1 ? many || one + 's' : one}`);
+    const i18n = (text, vars) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(text, vars) : String(text ?? '')); // 🌐 app-i18n.js
     const pickerField = o => (window.LCNDA_PICKER || A()).pickerField(o);
     const regs = () => AR().registries(window);
     const lotUi = n => (n === 'socface' ? ext.socface : ext[AR().LOTS[n]?.ui]);
@@ -88,17 +89,17 @@
         let google = ''; try { google = ok && e.verified === 'non' && G?.googleUrl && !AR().hasCustom(e, LS) ? G.googleUrl(e.key, p) : ''; } catch (_) { google = ''; }
         let data = ''; try { data = ok && e.data && G?.dataUrl ? G.dataUrl(e.key, p) : ''; } catch (_) { data = ''; }
         const also = ok ? e.also.map(a => { const x = view.raw.get(a.id); const au = x ? urlOf(x, p) : ''; return au ? `<a href="${esc(au)}" target="_blank" rel="noopener noreferrer" data-ael-go="${esc(a.id)}">${esc(a.label)} ↗</a>` : ''; }).filter(Boolean) : [];
-        const go = ok ? `<a class="button small${e.paid === 'oui' ? ' secondary' : ''}" href="${esc(u)}" target="_blank" rel="noopener noreferrer" data-ael-go="${esc(e.id)}"${copy ? ` data-ael-copy="${esc(copy)}" title="« ${esc(copy)} » est copié : colle-le dans la case du site"` : ''}>${copy ? '📋 Copier le nom et ouvrir' : '↗ Ouvrir'}</a>`
+        const go = ok ? `<a class="button small${e.paid === 'oui' ? ' secondary' : ''}" href="${esc(u)}" target="_blank" rel="noopener noreferrer" data-ael-go="${esc(e.id)}"${copy ? ` data-ael-copy="${esc(copy)}" title="${i18n('« {text} » est copié : colle-le dans la case du site', {text: esc(copy)})}"` : ''}>${copy ? '📋 Copier le nom et ouvrir' : '↗ Ouvrir'}</a>`
             : `<button type="button" class="button small" disabled title="${esc(whyNot(e, u))}">↗ Ouvrir</button>`;
-        const imp = !view.ro && (e.kind || e.lot === 'socface') && !e.mine ? `<button type="button" class="icon-button small ael-imp" data-ael-import="${esc(e.id)}" title="⤒ Importer ce que tu as trouvé sur ce site" aria-label="Importer ce que tu as trouvé sur ${esc(e.label)}">⤒</button>` : '';
+        const imp = !view.ro && (e.kind || e.lot === 'socface') && !e.mine ? `<button type="button" class="icon-button small ael-imp" data-ael-import="${esc(e.id)}" title="⤒ Importer ce que tu as trouvé sur ce site" aria-label="${i18n('Importer ce que tu as trouvé sur {site}', {site: esc(e.label)})}">⤒</button>` : '';
         return `<li class="so-link ael-site${e.paid === 'oui' || e.paid === 'bibliotheque' ? ' is-paid' : ''}" data-ael-site="${esc(e.id)}" data-lot="${esc(e.lot)}" data-key="${esc(e.key)}">
             <span class="so-link-ico" aria-hidden="true">${esc(e.icon)}</span>
             <span class="so-link-main"><b>${esc(e.label)}</b> <span class="ael-badges">${badgesOf(e, {mine: view.region.has(e.id)})}</span>
                 ${ok ? `<code class="so-url" data-ael-url="${esc(e.id)}">${esc(u)}</code>` : `<small class="ui-hint">${esc(whyNot(e, u))}</small>`}
                 ${e.note ? `<small class="ui-hint">${esc(e.note)}</small>` : ''}${extra}
                 ${also.length ? `<small class="ui-hint ael-also">Aussi : ${also.join(' · ')}</small>` : ''}
-                ${google ? `<small class="ui-hint">Si la page ne trouve rien : <a href="${esc(google)}" target="_blank" rel="noopener noreferrer" data-ael-google="${esc(e.id)}">chercher avec Google dans ce site ↗</a></small>` : ''}
-                ${data ? `<small class="ui-hint">Données ouvertes : <a href="${esc(data)}" target="_blank" rel="noopener noreferrer" data-ael-data>⤓ les résultats en JSON</a> — enregistre le fichier, puis « ⤒ Importer ce que tu as trouvé ».</small>` : ''}</span>
+                ${google ? `<small class="ui-hint">${i18n('Si la page ne trouve rien :')} <a href="${esc(google)}" target="_blank" rel="noopener noreferrer" data-ael-google="${esc(e.id)}">${i18n('chercher avec Google dans ce site ↗')}</a></small>` : ''}
+                ${data ? `<small class="ui-hint">${i18n('Données ouvertes :')} <a href="${esc(data)}" target="_blank" rel="noopener noreferrer" data-ael-data>${i18n('⤓ les résultats en JSON')}</a> ${i18n('— enregistre le fichier, puis « ⤒ Importer ce que tu as trouvé ».')}</small>` : ''}</span>
             <span class="ael-acts">${go}${imp}</span></li>`;
     }
 
@@ -167,13 +168,13 @@
             // pastilles : 🎯 focus · Tout · zones ; pays de la zone ; thèmes
             const zones = body.querySelector('[data-ael-zones]');
             if (zones) zones.innerHTML = [fx ? `<button type="button" class="ael-focus${st.useFocus ? ' is-active' : ''}" aria-pressed="${st.useFocus}" data-ael-focus="1">${esc(fx.label)} (${AR().filter(all, {...f, focus: fx.ids}).length})</button>` : '',
-                `<button type="button" class="${!st.zone && !(fx && st.useFocus) ? 'is-active' : ''}" data-ael-zone="">Tout (${cz.all})</button>`,
+                `<button type="button" class="${!st.zone && !(fx && st.useFocus) ? 'is-active' : ''}" data-ael-zone="">${i18n('Tout ({n})', {n: cz.all})}</button>`,
                 pills('ael-zone', AR().ZONES.filter(z => cz.zone[z.id]).map(z => [z.id, `${z.icon} ${z.label}`, cz.zone[z.id]]), fx && st.useFocus ? '' : st.zone)].join('');
             const ctry = body.querySelector('[data-ael-countries]');
             const cs = Object.keys(c.country).filter(k => !st.zone || AR().COUNTRIES[k][0] === st.zone);
-            if (ctry) { ctry.hidden = !st.zone || cs.length < 2; ctry.innerHTML = `<button type="button" class="${st.country ? '' : 'is-active'}" data-ael-country="">Tous les pays (${cs.reduce((a, k) => a + c.country[k], 0)})</button>${pills('ael-country', Object.keys(AR().COUNTRIES).filter(k => cs.includes(k)).map(k => [k, `${AR().COUNTRIES[k][1]} ${k}`, c.country[k]]), st.country)}`; }
+            if (ctry) { ctry.hidden = !st.zone || cs.length < 2; ctry.innerHTML = `<button type="button" class="${st.country ? '' : 'is-active'}" data-ael-country="">${i18n('Tous les pays ({n})', {n: cs.reduce((a, k) => a + c.country[k], 0)})}</button>${pills('ael-country', Object.keys(AR().COUNTRIES).filter(k => cs.includes(k)).map(k => [k, `${AR().COUNTRIES[k][1]} ${k}`, c.country[k]]), st.country)}`; }
             const th = body.querySelector('[data-ael-themes]');
-            if (th) th.innerHTML = `<button type="button" class="${st.theme ? '' : 'is-active'}" data-ael-theme="">Tous les thèmes (${AR().filter(all, {...f, zone: st.zone, country: st.country}).length})</button>${pills('ael-theme', AR().THEMES.filter(t => c2.theme[t.id]).map(t => [t.id, `${t.icon} ${t.label}`, c2.theme[t.id]]), st.theme)}`;
+            if (th) th.innerHTML = `<button type="button" class="${st.theme ? '' : 'is-active'}" data-ael-theme="">${i18n('Tous les thèmes ({n})', {n: AR().filter(all, {...f, zone: st.zone, country: st.country}).length})}</button>${pills('ael-theme', AR().THEMES.filter(t => c2.theme[t.id]).map(t => [t.id, `${t.icon} ${t.label}`, c2.theme[t.id]]), st.theme)}`;
             // les rubriques
             const view = {all, raw: new Map(AR().collectAll(regs()).map(e => [e.id, e])), ctx, ro: readOnly(), region};
             const secs = AR().sections(list, {first: [...region]});
@@ -183,13 +184,13 @@
                 ${s.theme.respect && regs()[2]?.GROUPS?.memoire?.text ? `<div class="so2-respect ael-respect"><span aria-hidden="true">🕯</span><p>${esc(regs()[2].GROUPS.memoire.text)}</p></div>` : ''}
                 ${s.list.some(e => e.paid === 'oui') ? `<p class="ui-hint ael-paid-hint">Les sites payants demandent un abonnement ou des crédits : la recherche y est souvent possible sans payer, pas la lecture des documents. Essaie d’abord les sites gratuits.</p>` : ''}
                 <ul class="so-links">${s.list.map(e => rowHtml(e, p, view)).join('')}</ul></section>`).join('')
-                : (A()?.empty ? A().empty(q ? `Aucun site pour « ${q} ».` : 'Aucun site ici.', {icon: '🔍', hint: q ? 'Vérifie l’orthographe, ou choisis « Tout ».' : 'Choisis « Tout », ou décoche « Gratuites seulement ».'}) : `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔍</span><span class="empty-line-text">Aucun site${q ? ` pour « ${esc(q)} »` : ''}.</span></p>`);
+                : (A()?.empty ? A().empty(q ? i18n('Aucun site pour « {q} ».', {q}) : 'Aucun site ici.', {icon: '🔍', hint: q ? 'Vérifie l’orthographe, ou choisis « Tout ».' : 'Choisis « Tout », ou décoche « Gratuites seulement ».'}) : `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔍</span><span class="empty-line-text">${q ? i18n('Aucun site pour « {q} ».', {q: esc(q)}) : i18n('Aucun site.')}</span></p>`);
             // ce qui est caché
             const old = AR().filter(all, {...f, zone: st.zone, country: st.country, theme: st.theme, p: null}).filter(e => AR().outOfTime(e, p));
             const paidHidden = f.free ? AR().filter(all, {...f, free: false, zone: st.zone, country: st.country, theme: st.theme}).filter(e => e.paid === 'oui' || e.paid === 'bibliotheque').length : 0;
             const hid = body.querySelector('[data-ael-hidden]');
             if (hid) hid.innerHTML = [old.length && !st.showOld ? `${plural(old.length, 'site hors de son époque', 'sites hors de son époque')} <button type="button" class="button small secondary" data-ael-old>Les montrer</button>` : st.showOld ? `<button type="button" class="button small secondary" data-ael-old>Cacher les sites hors de son époque</button>` : '',
-                paidHidden ? `<span class="so6-hidden-paid">${plural(paidHidden, 'site payant caché', 'sites payants cachés')} par « Gratuites seulement ».</span>` : ''].filter(Boolean).join(' · ');
+                paidHidden ? `<span class="so6-hidden-paid">${i18n('{n} par « Gratuites seulement ».', {n: plural(paidHidden, 'site payant caché', 'sites payants cachés')})}</span>` : ''].filter(Boolean).join(' · ');
             const cnt = body.querySelector('[data-ael-count]'); if (cnt) cnt.textContent = plural(list.length, 'site');
             const cl = body.querySelector('[data-ael-classe]'); const SO = regs()[1];
             if (cl) { const show = SO?.classOf && (st.theme === 'soldats' || (fx && st.useFocus)) && list.some(e => e.lot === 1 && e.group === 'matricules'); cl.hidden = !show; if (show) { const k = SO.classOf(p.birthYear); cl.innerHTML = k.classe ? `<b>Classe ${esc(k.classe)}</b> — ${esc(k.text)}` : esc(k.text); } }
@@ -201,7 +202,7 @@
             const living = ctx?.person && SO?.livingRisk?.(ctx.person);
             const fx = focusOf(o, entries(), p);
             const needMore = !!fx && entries().some(e => fx.ids.has(e.id) && (e.needs || e.byPhotographer || e.key === 'anmt' || (e.lot === 1 && e.group === 'matricules')));
-            const forHtml = target ? `<p class="ael-target so2-target so7-target">${esc({place: '📍', house: '🏠', object: '🏺'}[target.type] || '📍')} Pour <b>${esc(target.name || '')}</b>${target.county || target.place ? ` · ${esc(target.county || target.place)}` : ''}</p>`
+            const forHtml = target ? `<p class="ael-target so2-target so7-target">${esc({place: '📍', house: '🏠', object: '🏺'}[target.type] || '📍')} ${i18n('Pour {name}', {name: `<b>${esc(target.name || '')}</b>`})}${target.county || target.place ? ` · ${esc(target.county || target.place)}` : ''}</p>`
                 : `<div class="ael-who"><span class="pk-lab">Pour :</span>${pickerField({name: 'ael_pid', kind: 'person', value: pid || null})}${pid && ext.ouChercher?.openPerson ? '<button type="button" class="button small secondary" data-ael-ouc>🌍 Où chercher ?</button>' : ''}</div>`;
             body.innerHTML = `${forHtml}
                 ${living ? UI().notice('warn', 'Cette personne est peut-être vivante : ces recherches restent dans ton navigateur, rien n’est partagé. Pense à sa vie privée.') : ''}
@@ -255,7 +256,7 @@
             const t = e.target.closest('[data-ael-theme]'); if (t) { st.theme = t.dataset.aelTheme; update(); return; }
             if (e.target.closest('[data-ael-old]')) { st.showOld = !st.showOld; update(); return; }
             const go = e.target.closest('[data-ael-go][data-ael-copy]');
-            if (go) { const txt = go.dataset.aelCopy; try { navigator.clipboard?.writeText(txt).then(() => toast(`« ${txt} » est copié : colle-le dans la case du site.`), () => toast(`Écris « ${txt} » dans la case du site.`)); } catch (_) { /* presse-papiers refusé */ } }
+            if (go) { const txt = go.dataset.aelCopy; try { navigator.clipboard?.writeText(txt).then(() => toast(i18n('« {text} » est copié : colle-le dans la case du site.', {text: txt})), () => toast(i18n('Écris « {text} » dans la case du site.', {text: txt}))); } catch (_) { /* presse-papiers refusé */ } }
             const im = e.target.closest('[data-ael-import]'); if (im) { const en = all.find(x => x.id === im.dataset.aelImport); if (en) { dlg.close(); importFor(en, {personId: pid, place: o.place, target, placeId: o.placeId}); } return; }
             if (e.target.closest('[data-ael-settings]')) { openSettings({lot: o.lot, onChange: () => update()}); return; }
             if (e.target.closest('[data-ael-ouc]')) { dlg.close(); ext.ouChercher.openPerson(pid); return; }
@@ -343,13 +344,13 @@
                 return `<details class="ael-rub so3-rub" data-ael-rub="${esc(s.id)}" ${(lotOpen ? lotOpen.has(s.id) : open.includes(s.id)) ? 'open' : ''}><summary><b>${esc(s.flag)} ${esc(s.country)} · ${esc(s.theme.icon)} ${esc(s.theme.label)}</b> <small class="muted">${plural(s.list.length, 'site')}${n ? ` · ${plural(n, 'adresse à toi', 'adresses à toi')}` : ''}</small></summary>
                 ${s.list.map(e => { const G = R[e.lot]; let ph = ''; try { ph = sampleUrl(G.url(e.key, SAMPLE, {})); } catch (_) { ph = ''; } const cu = AR().custom(e.lot, LS)[e.key]; const hid = hidden.has(e.id) || (e.lot === 7 && hidden.has(e.key));
                     return `<div class="so-set-row ael-set-row${e.paid === 'oui' ? ' is-paid' : ''}" data-ael-text="${esc(e.text)}"><div class="ael-set-head"><label class="ui-toggle" title="Montrer ce site dans la fenêtre de recherche"><input type="checkbox" data-ael-show="${esc(e.id)}" ${hid ? '' : 'checked'}><i></i><b>${esc(e.icon)} ${esc(e.mergedInto ? AR().MERGED[e.id].also : e.label)}</b></label> <span class="ael-badges">${badgesOf(e)}</span></div>
-                    <label class="ael-set-url"><span class="sr-only">Adresse à toi pour ${esc(e.label)}</span><input name="${esc(e.id)}" data-ael-lot="${esc(e.lot)}" data-ael-key="${esc(e.key)}" value="${esc(typeof cu === 'string' ? cu : '')}" placeholder="${esc(ph.slice(0, 300))}" autocomplete="off" spellcheck="false"></label></div>`; }).join('')}</details>`; }).join('');
+                    <label class="ael-set-url"><span class="sr-only">${i18n('Adresse à toi pour {site}', {site: esc(e.label)})}</span><input name="${esc(e.id)}" data-ael-lot="${esc(e.lot)}" data-ael-key="${esc(e.key)}" value="${esc(typeof cu === 'string' ? cu : '')}" placeholder="${esc(ph.slice(0, 300))}" autocomplete="off" spellcheck="false"></label></div>`; }).join('')}</details>`; }).join('');
             const cer = Object.entries(AR().store(7, LS).cercles || {});
             const cercles = R[7] ? `<details class="ael-rub so3-rub" data-ael-rub="cercles" ${open.includes('cercles') ? 'open' : ''}><summary><b>📒 Mon cercle généalogique, par département</b> <small class="muted">${cer.length ? plural(cer.length, 'département') : 'aucun'}</small></summary><p class="ui-hint">Le n° du département puis l’adresse du site de son cercle (ses relevés). Une ligne par département.</p>
                 <div data-ael-cercles>${[...cer, ['', '']].map(([d, u]) => `<div class="so7-cercle"><label>Département<input data-ael-cdep value="${esc(d)}" placeholder="32" maxlength="3" autocomplete="off"></label><label>Adresse du cercle<input data-ael-curl value="${esc(u)}" inputmode="url" placeholder="https://…" autocomplete="off"></label></div>`).join('')}</div></details>` : '';
             const mine = AR().mineSites(LS);
-            const mines = `<details class="ael-rub so3-rub" data-ael-rub="mine" ${open.includes('mine') || opt.mine ? 'open' : ''}><summary><b>⭐ Mes sites</b> <small class="muted">${mine.length ? plural(mine.length, 'site') : 'aucun'} · aussi dans « Chercher sur internet »</small></summary>
-                ${mine.length ? `<ul class="so6-mine ael-mine">${mine.map(s => `<li><b>${esc(s.label)}</b> <code>${esc(s.url)}</code> <button type="button" class="icon-button small" data-ael-mine-del="${esc(s.from)}:${esc(s.key)}" aria-label="Retirer ${esc(s.label)}" title="Retirer">✕</button></li>`).join('')}</ul>`
+            const mines = `<details class="ael-rub so3-rub" data-ael-rub="mine" ${open.includes('mine') || opt.mine ? 'open' : ''}><summary><b>⭐ Mes sites</b> <small class="muted">${mine.length ? plural(mine.length, 'site') : i18n('aucun')} · ${i18n('aussi dans « Chercher sur internet »')}</small></summary>
+                ${mine.length ? `<ul class="so6-mine ael-mine">${mine.map(s => `<li><b>${esc(s.label)}</b> <code>${esc(s.url)}</code> <button type="button" class="icon-button small" data-ael-mine-del="${esc(s.from)}:${esc(s.key)}" aria-label="${i18n('Retirer {name}', {name: esc(s.label)})}" title="Retirer">✕</button></li>`).join('')}</ul>`
                     : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">⭐</span><span class="empty-line-text">Ajoute ici le site d’une association, d’une bibliothèque ou d’un relevé que tu connais.</span></p>'}
                 <div class="form-grid so6-mine-form"><label>Nom du site<input data-ael-mine-label placeholder="Cercle généalogique du Finistère" autocomplete="off"></label>
                     <label class="so-span-2">Adresse de recherche<input data-ael-mine-url placeholder="https://exemple.fr/recherche?nom={nom}&prenom={prénom}" autocomplete="off" spellcheck="false"></label>
@@ -369,7 +370,7 @@
         const filter = () => {
             const q = AR().fold(dlg.querySelector('[data-ael-sq]').value); let n = 0;
             box.querySelectorAll('details.ael-rub').forEach(d => { const rows = d.querySelectorAll('.so-set-row'); if (!rows.length) { d.hidden = !!q; return; } let k = 0; rows.forEach(r => { const ok = !q || q.split(' ').every(w => r.dataset.aelText.includes(w)); r.hidden = !ok; if (ok) k++; }); d.hidden = !k; if (q && k) d.open = true; n += k; });
-            dlg.querySelector('[data-ael-scount]').textContent = q ? (n ? `${plural(n, 'site trouvé', 'sites trouvés')}` : `Aucun site pour « ${dlg.querySelector('[data-ael-sq]').value} ».`) : '';
+            dlg.querySelector('[data-ael-scount]').textContent = q ? (n ? `${plural(n, 'site trouvé', 'sites trouvés')}` : i18n('Aucun site pour « {q} ».', {q: dlg.querySelector('[data-ael-sq]').value})) : '';
         };
         const save = () => {
             const R = regs(), by = {}, shownKeys = {};
@@ -412,7 +413,7 @@
                 if (errs.length) { if (UI().formErrors) UI().formErrors(dlg.querySelector('form'), errs); else UI().fail?.(errs[0][0], errs[0][1]); return; }
                 const l = lsJson(AR().CUSTOM_KEY, []); const list = Array.isArray(l) ? l : [];
                 list.push({key: `custom-${Date.now().toString(36)}`, label: lab.value.trim().slice(0, 80), url: url.value.trim().slice(0, 500)}); lsSet(AR().CUSTOM_KEY, JSON.stringify(list)); redrawMine();
-                toast(`Site « ${lab.value.trim()} » ajouté : il est aussi dans « Chercher sur internet ».`, 'success');
+                toast(i18n('Site « {name} » ajouté : il est aussi dans « Chercher sur internet ».', {name: lab.value.trim()}), 'success');
                 return;
             }
             const del = e.target.closest('[data-ael-mine-del]');

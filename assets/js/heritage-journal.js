@@ -17,6 +17,7 @@
     for (const k of ['personBlocks', 'lists']) ext[k] = ext[k] || {};
     const esc = v => A().escapeHtml(v ?? '');
     const S = () => A().state;
+    const i18n = (text, vars) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(text, vars) : String(text ?? '')); // 🌐 app-i18n.js
     const KEY = 'listes:research_journal';
     const RESULTS = {found: ['Trouvé', 'green'], none: ['Rien trouvé', 'grey'], partial: ['En partie', 'yellow'], not_consulted: ['Pas consulté', 'grey']};
     const KINDS = {digest: ['📜', 'Dépouillement', 'Dépouillements'], visit: ['🗄️', 'Visite faite', 'Visites faites'], lead: ['🔍', 'Piste d’enquête', 'Pistes d’enquête'], battue: ['🧭', 'Battue', 'Battues'], request: ['📮', 'Demande', 'Demandes']};
@@ -97,7 +98,7 @@
         const blob = new Blob(['﻿' + lines.join('\r\n')], {type: 'text/csv;charset=utf-8'});
         const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `${A().safeExportFilename ? A().safeExportFilename('journal-des-recherches') : 'journal-des-recherches'}.csv`;
         document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
-        A().toast(`${A().plural ? A().plural(rows.length, 'ligne') : rows.length + ' lignes'} exportée${rows.length > 1 ? 's' : ''} en CSV.`);
+        A().toast(A().plural ? A().plural(rows.length, 'ligne exportée en CSV.', 'lignes exportées en CSV.') : `${rows.length} lignes exportées en CSV.`);
     }
 
     /* ─────────── La page ─────────── */
@@ -119,7 +120,7 @@
         const services = uniq('service'), communes = uniq('commune');
         const filters = [
             {id: 'kind', label: 'Sorte', type: 'check', options: Object.entries(KINDS).map(([k, v]) => [k, `${v[0]} ${v[2]} (${count(r => r.kind === k)})`, `${v[0]} ${v[2]}`])},
-            {id: 'result', label: 'Résultat', type: 'check', options: [...Object.entries(RESULTS).map(([k, v]) => [k, `${v[0]} (${count(r => r.result === k)})`, v[0]]), ['-', `Pas encore noté (${count(r => !r.result)})`, 'Résultat pas noté']]},
+            {id: 'result', label: 'Résultat', type: 'check', options: [...Object.entries(RESULTS).map(([k, v]) => [k, `${i18n(v[0])} (${count(r => r.result === k)})`, v[0]]), ['-', i18n('Pas encore noté ({n})', {n: count(r => !r.result)}), 'Résultat pas noté']]},
             {id: 'person', label: 'Personne', type: 'person', allowFree: false, chipPrefix: 'Pour'},
             {id: 'service', label: 'Service d’archives', type: 'select', dflt: '', options: [['', 'Tous les services'], ...services.map(s => [s, s, `Service : ${s}`])]},
             {id: 'commune', label: 'Commune', type: 'select', dflt: '', options: [['', 'Toutes les communes'], ...communes.map(s => [s, s, `Commune : ${s}`])]},
@@ -178,10 +179,10 @@
         if (!rows.length) { el.innerHTML = A().empty('Rien de cherché pour cette personne pour l’instant.', {icon: '🔍', action: {label: '＋ Nouveau dépouillement', attrs: `data-rj-new-digest data-rj-person-id="${pid}"`}}); return; }
         const me = p => (p.people || []).find(x => Number(x.id) === pid);
         el.innerHTML = UI().rowsHtml(rows.slice(0, 12).map(r => ({thumb: `<span class="ui-card-ico" aria-hidden="true">${KINDS[r.kind]?.[0] || '•'}</span>`, name: r.title, open: openAttr(r.open),
-            lines: [whereText(r) || r.status_label || '', `${KINDS[r.kind]?.[1] || ''}${me(r)?.role === 'found' ? ' · relevée dans ce registre' : ' · cherchée'}`],
+            lines: [whereText(r) || r.status_label || '', `${i18n(KINDS[r.kind]?.[1] || '')}${me(r)?.role === 'found' ? ' · ' + i18n('relevée dans ce registre') : ' · ' + i18n('cherchée')}`],
             when: r.date, whenLabel: r.date_label || '',
             actions: `${badge(r.result)}<button type="button" class="button small secondary" ${openAttr(r.open)}>↗ Ouvrir</button>`})))
-            + (rows.length > 12 ? `<p class="h-rj-more"><button type="button" class="button small secondary" data-rj-person-journal="${pid}">Voir les ${rows.length} recherches dans le journal →</button></p>` : '');
+            + (rows.length > 12 ? `<p class="h-rj-more"><button type="button" class="button small secondary" data-rj-person-journal="${pid}">${i18n('Voir les {n} recherches dans le journal →', {n: rows.length})}</button></p>` : '');
     }
     document.addEventListener('click', e => {
         const b = e.target.closest?.('[data-rj-person-journal]'); if (!b) return;

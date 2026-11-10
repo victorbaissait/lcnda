@@ -8,10 +8,12 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : s); // 🌐 docs/I18N.md
     const A = () => window.LCNDA_APP;
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const esc = v => A().escapeHtml(v ?? '');
     const toast = (...a) => A().toast(...a);
+    const plural = (n, one, many) => (A()?.plural ? A().plural(n, one, many) : `${n} ${n > 1 ? (many || one + "s") : one}`);
     const kit = () => A()?.shortcutKit;
     const KEY = 'genealogie-editor-shortcuts', CMDS = 'genealogie-editor-cmds', TAB = 'genealogie-editor-shortcuts-tab';
     const EDITORS = [['montage', '🎬', 'Montage vidéo'], ['audio', '🎧', 'Son'], ['audio-quick', '⚡', 'Son rapide'], ['audio-studio', '🎚️', 'Studio son'], ['retouch', '🎚️', 'Retouche des photos'], ['layout', '📐', 'Mise en page'], ['vector', '✒️', 'Dessin vectoriel'], ['house', '🏠', 'Maison (plan et 3D)'], ['decortree', '🌳', 'Arbre décoratif'], ['keynote', '🎤', 'Présentation (Keynote)'], ['sheet', '🧾', 'Tableur'], ['textdoc', '📝', 'Traitement de texte']];
@@ -172,14 +174,14 @@
     function conflicts(kind, id, combo) {
         const K = kit(), out = {block: [], warn: [], info: []};
         if (!combo) return out;
-        const os = K.osConflict(combo); if (os) out.block.push(`Déjà pris par ${K.platformName} ou le menu de l’application : « ${os} ».`);
-        const app = K.appConflict(combo); if (app.length) out.block.push(`Déjà pris par l’app (même quand un outil est ouvert) : « ${app.join(' », « ')} ». Change-le d’abord dans Raccourcis clavier si tu veux cette touche.`);
-        const own = BUILTIN[kind]?.[combo]; if (own) out.warn.push(`Dans cet outil, cette touche sert déjà à « ${own} » : ton raccourci passera avant.`);
-        const moved = MOVES[kind]?.[id]; if (moved && combo !== moved) out.info.push(`La touche de départ (${K.comboLabel(moved)}) ne fera plus cette action : elle est libre pour autre chose.`);
+        const os = K.osConflict(combo); if (os) out.block.push(i18n('Déjà pris par {os} ou le menu de l’application : « {what} ».', {os: K.platformName, what: i18n(os)}));
+        const app = K.appConflict(combo); if (app.length) out.block.push(i18n('Déjà pris par l’app (même quand un outil est ouvert) : « {what} ». Change-le d’abord dans Raccourcis clavier si tu veux cette touche.', {what: app.map(x => i18n(x)).join(' », « ')}));
+        const own = BUILTIN[kind]?.[combo]; if (own) out.warn.push(i18n('Dans cet outil, cette touche sert déjà à « {what} » : ton raccourci passera avant.', {what: i18n(own)}));
+        const moved = MOVES[kind]?.[id]; if (moved && combo !== moved) out.info.push(i18n('La touche de départ ({key}) ne fera plus cette action : elle est libre pour autre chose.', {key: K.comboLabel(moved)}));
         const p = prefs()[kind], other = Object.keys(p).filter(k => k !== id && p[k] === combo).map(k => cmds(kind).find(r => r[0] === k)?.[1] || k);
-        if (other.length) out.warn.push(`Déjà donné à « ${other.join(' », « ')} » : il lui sera retiré.`);
+        if (other.length) out.warn.push(i18n('Déjà donné à « {what} » : il lui sera retiré.', {what: other.map(x => i18n(x)).join(' », « ')}));
         const note = K.osNote(combo); if (note) out.info.push(note);
-        if (!K.hasMod(combo) && !K.isFKey(combo)) out.info.push(`Sans ${K.IS_MAC ? '⌘' : 'Ctrl'}, il ne marchera qu’en dehors des cases de texte.`);
+        if (!K.hasMod(combo) && !K.isFKey(combo)) out.info.push(i18n('Sans {key}, il ne marchera qu’en dehors des cases de texte.', {key: K.IS_MAC ? '⌘' : 'Ctrl'}));
         if (K.IS_MAC && /^Alt\+(Shift\+)?[A-Z0-9]$/.test(combo)) out.info.push('Sur Mac, ⌥ + lettre écrit un caractère spécial dans les cases : il ne marchera qu’en dehors des cases.');
         if (!K.IS_MAC && /^Alt\+[A-Z]$/.test(combo)) out.info.push('Sous Windows, Alt + lettre peut aussi ouvrir un menu.');
         return out;
@@ -188,7 +190,7 @@
         const K = kit(); if (!K) return toast('Raccourcis indisponibles.', 'error');
         const cur = prefs()[kind][id] || '';
         const dlg = document.createElement('dialog'); dlg.className = 'modal small-modal shortcut-capture';
-        dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">${esc(EDITORS.find(x => x[0] === kind)?.[2] || '')} · NOUVEAU RACCOURCI</span><h2>${esc(label)}</h2><p>Appuie maintenant sur la combinaison voulue.<br>Échap : annuler · Retour arrière : aucun raccourci.</p></div></div><div class="shortcut-capture-key">${K.kbd(cur)}</div><div class="shortcut-capture-warning" aria-live="polite"></div><div class="modal-actions"><span class="spacer"></span><button class="button secondary" type="button" data-cancel>Annuler</button><button class="button" type="button" data-ok disabled>Utiliser ce raccourci</button></div>`;
+        dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">${esc(i18n(EDITORS.find(x => x[0] === kind)?.[2] || ''))} · ${i18n('NOUVEAU RACCOURCI')}</span><h2>${esc(label)}</h2><p>Appuie maintenant sur la combinaison voulue.<br>Échap : annuler · Retour arrière : aucun raccourci.</p></div></div><div class="shortcut-capture-key">${K.kbd(cur)}</div><div class="shortcut-capture-warning" aria-live="polite"></div><div class="modal-actions"><span class="spacer"></span><button class="button secondary" type="button" data-cancel>Annuler</button><button class="button" type="button" data-ok disabled>Utiliser ce raccourci</button></div>`;
         document.body.append(dlg);
         let combo = null;
         const done = () => { capturing = null; if (dlg.open) dlg.close(); dlg.remove(); };
@@ -200,7 +202,7 @@
             const p = prefs(), m = p[kind];
             Object.keys(m).forEach(k => { if (k !== id && m[k] === combo && combo) delete m[k]; });
             if (combo) m[id] = combo; else delete m[id];
-            savePrefs(p); done(); toast(combo ? `Nouveau raccourci : ${K.comboLabel(combo)}` : 'Raccourci retiré.'); onDone?.();
+            savePrefs(p); done(); toast(combo ? i18n('Nouveau raccourci : {key}', {key: K.comboLabel(combo)}) : 'Raccourci retiré.'); onDone?.();
         });
         capturing = e => {
             if (e.target.closest?.('[data-cancel],[data-ok]') && (e.key === 'Enter' || e.key === ' ')) { e.target.click(); return; }
@@ -230,8 +232,8 @@
             const groups = [...new Set(rows.map(r => r[2]))];
             const mine = Object.keys(p).length;
             box.innerHTML = `<div class="segmented enquetes-tab-toggle h-et-tabs h-ek-tabs">${EDITORS.map(([k, ic, l]) => `<button type="button" class="${k === kind ? 'is-active ' : ''}enquetes-tab-btn" data-ek-tab="${k}"><span class="enquetes-tab-icon" aria-hidden="true">${ic}</span><span>${esc(l)}${Object.keys(prefs()[k]).length ? ` <small>(${Object.keys(prefs()[k]).length})</small>` : ''}</span></button>`).join('')}</div>
-                <p class="muted">Donne une touche à n’importe quelle commande de l’outil (ses menus, ses outils, ses boutons). ${esc(K.platformName)} et le menu de l’application passent avant : une touche qu’ils prennent est refusée. Ton raccourci passe avant la touche de l’outil. Sans ${K.IS_MAC ? '⌘' : 'Ctrl'}, il ne marche qu’en dehors des cases de texte.</p>
-                <div class="h-ek-bar"><input type="search" data-ek-q placeholder="Chercher une commande…" value="${esc(q)}"><span class="muted">${mine} raccourci${mine > 1 ? 's' : ''} à toi</span><span class="spacer"></span>${mine ? '<button type="button" class="button small secondary" data-ek-clear>Tout retirer pour cet outil</button>' : ''}</div>
+                <p class="muted">${i18n('Donne une touche à n’importe quelle commande de l’outil (ses menus, ses outils, ses boutons). {os} et le menu de l’application passent avant : une touche qu’ils prennent est refusée. Ton raccourci passe avant la touche de l’outil. Sans {key}, il ne marche qu’en dehors des cases de texte.', {os: esc(K.platformName), key: K.IS_MAC ? '⌘' : 'Ctrl'})}</p>
+                <div class="h-ek-bar"><input type="search" data-ek-q placeholder="Chercher une commande…" value="${esc(q)}"><span class="muted">${i18n('{n} à toi', {n: plural(mine, 'raccourci')})}</span><span class="spacer"></span>${mine ? '<button type="button" class="button small secondary" data-ek-clear>Tout retirer pour cet outil</button>' : ''}</div>
                 ${list.length ? (rows.length ? `<div class="data-table-wrap"><table class="data-table shortcut-table is-editable h-ek-table"><thead><tr><th>Commande</th><th>Touche de l’outil</th><th>Mon raccourci</th><th></th></tr></thead>${groups.map(g => `<tbody class="shortcut-group"><tr><th colspan="4">${esc(g)}</th></tr>${rows.filter(r => r[2] === g).map(r => `<tr><td>${esc(r[1])}</td><td>${r[3] ? `${A().keys ? A().keys.html(r[3]).replace('class="k-keys"', 'class="shortcut-kbd k-keys"') : `<kbd class="shortcut-kbd">${esc(glyphs(r[3]))}</kbd>`}` : '<span class="muted">—</span>'}</td><td>${p[r[0]] ? K.kbd(p[r[0]]) : '<span class="muted">—</span>'}</td><td class="h-ek-act"><button type="button" class="button small secondary" data-ek-set="${esc(r[0])}">${p[r[0]] ? 'Changer' : 'Choisir'}</button>${p[r[0]] ? `<button type="button" class="button small secondary" data-ek-del="${esc(r[0])}" title="Retirer ce raccourci">✕</button>` : ''}</td></tr>`).join('')}</tbody>`).join('')}</table></div>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔍</span><span class="empty-line-text">Aucune commande ne correspond.</span></p>')
                     : '<p class="muted">Ouvre une fois cet outil pour que ses commandes apparaissent ici.</p>'}
                 <details class="h-ek-builtin"><summary>Touches déjà prévues dans cet outil</summary><p>${Object.entries(BUILTIN[kind] || {}).map(([c, l]) => `${K.kbd(c)} ${esc(l)}`).join(' · ')}</p></details>`;

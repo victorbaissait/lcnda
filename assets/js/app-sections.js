@@ -30,6 +30,8 @@
     const lsSet = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch (_) { return false; } };
     const isObj = v => !!v && typeof v === 'object' && !Array.isArray(v);
     const plural = (n, w, p) => (A().plural ? A().plural(n, w, p) : `${n} ${w}${n > 1 ? 's' : ''}`);
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && k in v ? v[k] : m))); // 🌐 docs/I18N.md
+    const tn = s => i18n(s); // un nom de section ou de bloc d'origine (« Identité ») se traduit ; un nom choisi reste tel quel
     const toast = (m, k) => A().toast?.(m, k);
     const RO = () => document.body.classList.contains('is-kiosk') || document.documentElement.classList.contains('base-readonly');
 
@@ -186,7 +188,7 @@
             } catch (error) {
                 console.error(`Erreur dans le bloc personne "${key}"`, error);
                 const label = defaults.find(row => row[0] === key)?.[1] || key;
-                return A().applyBlockWidth(A().card(index, label, '', `<div class="empty-card">Ce bloc a été isolé car il provoquait une erreur : ${esc(error.message || 'erreur JavaScript')}</div>`), m.widths?.[key]);
+                return A().applyBlockWidth(A().card(index, label, '', `<div class="empty-card">${i18n('Ce bloc a été isolé car il provoquait une erreur : {err}', {err: esc(error.message || i18n('erreur JavaScript'))})}</div>`), m.widths?.[key]);
             }
         };
         const blocksOf = (keys, prefix) => { let j = 0; return keys.filter(k => !m.hidden.includes(k) && renderers[k]).map(k => { const idx = prefix ? `${prefix}.${j + 1}` : String(counter).padStart(2, '0'); const h = one(k, idx); if (h) { j++; counter++; } return h; }).filter(Boolean); };
@@ -210,7 +212,7 @@
             const num = o.nums ? `<span class="fsec-num">${esc(numText(x.no, o.numW))}</span>` : '';
             return `<section class="fsec${empty ? ' is-empty' : ''}${folded ? ' is-folded' : ''}" data-fsec="${esc(x.sec.id)}"${hide ? ' hidden' : ''}>
                 <header class="fsec-head"><button type="button" class="fsec-toggle" data-fsec-fold aria-expanded="${!folded}"${o.fold && !tabs ? '' : ' disabled'}>${num}${x.sec.icon ? `<span class="fsec-ic" aria-hidden="true">${esc(x.sec.icon)}</span>` : ''}<span class="fsec-name">${esc(x.sec.name)}</span><span class="fsec-meta">· ${empty ? 'vide' : esc(plural(x.items.length, 'bloc'))}</span></button>
-                <span class="fsec-tools">${ro ? '' : `<button type="button" class="icon-button small fsec-more" data-fsec-more title="Plus d’actions sur la section" aria-label="Plus d’actions sur la section « ${esc(x.sec.name)} »">⋯</button>`}${o.fold && !tabs ? `<span class="fsec-chev" aria-hidden="true">▾</span>` : ''}</span></header>
+                <span class="fsec-tools">${ro ? '' : `<button type="button" class="icon-button small fsec-more" data-fsec-more title="Plus d’actions sur la section" aria-label="${i18n('Plus d’actions sur la section « {name} »', {name: esc(tn(x.sec.name))})}">⋯</button>`}${o.fold && !tabs ? `<span class="fsec-chev" aria-hidden="true">▾</span>` : ''}</span></header>
                 <div class="card-grid fsec-body"${folded ? ' hidden' : ''}>${x.items.join('') || (A().empty ? A().empty('Rien dans cette section pour l’instant.', {icon: x.sec.icon || '📭'}) : '')}</div></section>`;
         };
         const own = m.personId && hasException(m.personId) && !ro ? `<p class="fsec-own"><span class="fsec-own-dot" aria-hidden="true"></span>Rangement propre à cette fiche <button type="button" class="link-button" data-fsec-unown>↺ Reprendre celui de toutes les fiches</button></p>` : '';
@@ -278,11 +280,11 @@
         const o = opts(), keys = keysOf(m);
         const run = (label, fn) => () => { A().undoLocalChange ? A().undoLocalChange(label, keys, () => { fn(m); save(m); }, rerender) : (fn(m), save(m)); rerender(); };
         UI().menuAt?.(btn, [
-            {icon: '✎', label: 'Renommer', run: async () => { const v = cleanText(await A().askText?.({title: 'Renommer la section', value: s.name, okLabel: 'Renommer'}), 60); if (v) run(`Section renommée : « ${v} »`, mm => { mm.sections[i].name = v; })(); }},
-            {icon: '🙂', label: 'Changer l’icône', run: () => pickIcon(btn, s.icon, ic => run(`Icône de la section « ${s.name} » changée`, mm => { mm.sections[i].icon = ic; })())},
+            {icon: '✎', label: 'Renommer', run: async () => { const v = cleanText(await A().askText?.({title: 'Renommer la section', value: s.name, okLabel: 'Renommer'}), 60); if (v) run(i18n('Section renommée : « {nm} »', {nm: v}), mm => { mm.sections[i].name = v; })(); }},
+            {icon: '🙂', label: 'Changer l’icône', run: () => pickIcon(btn, s.icon, ic => run(i18n('Icône de la section « {name} » changée', {name: tn(s.name)}), mm => { mm.sections[i].icon = ic; })())},
             '-',
-            {icon: '↑', label: 'Monter', shortcut: 'Alt+ArrowUp', disabled: i === 0, run: run(`Section « ${s.name} » montée`, mm => { mm.sections.splice(i - 1, 0, mm.sections.splice(i, 1)[0]); })},
-            {icon: '↓', label: 'Descendre', shortcut: 'Alt+ArrowDown', disabled: i === m.sections.length - 1, run: run(`Section « ${s.name} » descendue`, mm => { mm.sections.splice(i + 1, 0, mm.sections.splice(i, 1)[0]); })},
+            {icon: '↑', label: 'Monter', shortcut: 'Alt+ArrowUp', disabled: i === 0, run: run(i18n('Section « {nm} » montée', {nm: tn(s.name)}), mm => { mm.sections.splice(i - 1, 0, mm.sections.splice(i, 1)[0]); })},
+            {icon: '↓', label: 'Descendre', shortcut: 'Alt+ArrowDown', disabled: i === m.sections.length - 1, run: run(i18n('Section « {nm} » descendue', {nm: tn(s.name)}), mm => { mm.sections.splice(i + 1, 0, mm.sections.splice(i, 1)[0]); })},
             o.fold && !wrap.classList.contains('is-tabs') ? {icon: sec.classList.contains('is-folded') ? '▾' : '▸', label: sec.classList.contains('is-folded') ? 'Déplier' : 'Replier', run: () => fold(sec, !sec.classList.contains('is-folded'))} : null,
             '-',
             {icon: '⚙️', label: 'Ranger les sections…', run: () => openArrangeDialog()},
@@ -294,7 +296,7 @@
     function deleteSection(m, id, after) {
         const s = m.sections.find(x => x.id === id); if (!s) return;
         const n = m.order.filter(k => m.assign[k] === id).length;
-        const msg = `Section « ${s.name} » supprimée${n ? ` · ${n > 1 ? `ses ${n} blocs vont` : 'son bloc va'} dans « Sans section »` : ''}`;
+        const msg = `${i18n('Section « {nm} » supprimée', {nm: tn(s.name)})}${n ? ` · ${n > 1 ? i18n('ses {n} blocs vont dans « Sans section »', {n}) : i18n('son bloc va dans « Sans section »')}` : ''}`;
         const change = () => { m.sections = m.sections.filter(x => x.id !== id); Object.keys(m.assign).forEach(k => { if (m.assign[k] === id) delete m.assign[k]; }); save(m); };
         if (A().undoLocalChange) A().undoLocalChange(msg, keysOf(m), change, async () => { await after?.(); }); else change();
         after?.();
@@ -339,18 +341,19 @@
         let n = 0;
         const widthBtns = (key) => `<div class="block-widths fsed-widths" role="group" aria-label="Largeur du bloc">${WIDTHS.map(([v, nu, avant]) => `<button type="button" data-fsed-width="${v}" aria-pressed="${String(m.widths[key] || W[key] || '12') === v}" title="Largeur ${avant}">${look === 'new' ? nu : avant}</button>`).join('')}</div>`;
         const eye = (on, what, attr) => (look === 'new'
-            ? `<button type="button" class="icon-button small fsed-eye${on ? '' : ' is-off'}" ${attr} aria-pressed="${on}" title="${on ? `Cacher ${what}` : `Montrer ${what}`}" aria-label="${on ? `Cacher ${what}` : `Montrer ${what}`}">${on ? '👁' : '🙈'}</button>`
-            : `<label class="order-visible fsed-check" title="${on ? `Cacher ${what}` : `Montrer ${what}`}"><input type="checkbox" ${attr} ${on ? 'checked' : ''} aria-label="Montrer ${what}"></label>`);
+            ? `<button type="button" class="icon-button small fsed-eye${on ? '' : ' is-off'}" ${attr} aria-pressed="${on}" title="${on ? tx('Cacher', what) : tx('Montrer', what)}" aria-label="${on ? tx('Cacher', what) : tx('Montrer', what)}">${on ? '👁' : '🙈'}</button>`
+            : `<label class="order-visible fsed-check" title="${on ? tx('Cacher', what) : tx('Montrer', what)}"><input type="checkbox" ${attr} ${on ? 'checked' : ''} aria-label="${tx('Montrer', what)}"></label>`);
+        function tx(verb, what) { return i18n(`${verb} ${what[0]} « {nm} »`, {nm: what[1]}); }
         const brow = key => { const vis = !m.hidden.includes(key); if (vis) n++; const lab = blockLabel(key, m.kind);
-            return `<div class="order-row has-visibility fsed-brow${vis ? '' : ' is-hidden'}" data-fsed-block="${esc(key)}" data-order-key="${esc(key)}"><span class="order-grip fsed-grip" data-fsed-grip tabindex="0" role="button" aria-label="Déplacer « ${esc(lab)} » : glisse, ou Alt + ↑ / ↓">⠿</span><span class="order-number">${vis ? String(n).padStart(2, '0') : '—'}</span><b>${esc(lab)}</b>${widthBtns(key)}${eye(vis, `le bloc « ${lab} »`, 'data-fsed-bshow')}${ro ? '' : `<button type="button" class="icon-button small fsed-more" data-fsed-bmore title="Plus d’actions" aria-label="Plus d’actions sur « ${esc(lab)} »">⋯</button>`}</div>`; };
+            return `<div class="order-row has-visibility fsed-brow${vis ? '' : ' is-hidden'}" data-fsed-block="${esc(key)}" data-order-key="${esc(key)}"><span class="order-grip fsed-grip" data-fsed-grip tabindex="0" role="button" aria-label="${i18n('Déplacer « {name} » : glisse, ou Alt + ↑ / ↓', {name: esc(lab)})}">⠿</span><span class="order-number">${vis ? String(n).padStart(2, '0') : '—'}</span><b>${esc(lab)}</b>${widthBtns(key)}${eye(vis, ['le bloc', lab], 'data-fsed-bshow')}${ro ? '' : `<button type="button" class="icon-button small fsed-more" data-fsed-bmore title="Plus d’actions" aria-label="${i18n('Plus d’actions sur « {nm} »', {nm: esc(lab)})}">⋯</button>`}</div>`; };
         const secs = g.secs.map((s, i) => { const vis = !s.hidden;
-            return `<div class="fsed-sec${vis ? '' : ' is-hidden'}" data-fsed-sec="${esc(s.id)}"><div class="order-row fsed-secrow"><span class="order-grip fsed-grip" data-fsed-grip tabindex="0" role="button" aria-label="Déplacer la section « ${esc(s.name)} » : glisse, ou Alt + ↑ / ↓">⠿</span><span class="order-number fsed-secno">${String(i + 1).padStart(2, '0')}</span><span class="fsed-ic" aria-hidden="true">${esc(s.icon || '▢')}</span><b class="fsed-name" data-fsed-rename title="Double-clic pour renommer">${esc(s.name)}</b><small class="fsed-count">${esc(plural(s.keys.length, 'bloc'))}${vis ? '' : ' · cachée'}${s.folded ? ' · repliée au départ' : ''}</small>${eye(vis, `la section « ${s.name} »`, 'data-fsed-sshow')}${ro ? '' : `<button type="button" class="icon-button small fsed-more" data-fsed-smore title="Plus d’actions" aria-label="Plus d’actions sur la section « ${esc(s.name)} »">⋯</button>`}</div>
+            return `<div class="fsed-sec${vis ? '' : ' is-hidden'}" data-fsed-sec="${esc(s.id)}"><div class="order-row fsed-secrow"><span class="order-grip fsed-grip" data-fsed-grip tabindex="0" role="button" aria-label="${i18n('Déplacer la section « {name} » : glisse, ou Alt + ↑ / ↓', {name: esc(tn(s.name))})}">⠿</span><span class="order-number fsed-secno">${String(i + 1).padStart(2, '0')}</span><span class="fsed-ic" aria-hidden="true">${esc(s.icon || '▢')}</span><b class="fsed-name" data-fsed-rename title="Double-clic pour renommer">${esc(s.name)}</b><small class="fsed-count">${esc(plural(s.keys.length, 'bloc'))}${vis ? '' : ` · ${i18n('cachée')}`}${s.folded ? ` · ${i18n('repliée au départ')}` : ''}</small>${eye(vis, ['la section', tn(s.name)], 'data-fsed-sshow')}${ro ? '' : `<button type="button" class="icon-button small fsed-more" data-fsed-smore title="Plus d’actions" aria-label="${i18n('Plus d’actions sur la section « {name} »', {name: esc(tn(s.name))})}">⋯</button>`}</div>
                 <div class="fsed-blocks" data-fsed-list="${esc(s.id)}">${s.keys.map(brow).join('') || '<p class="fsed-empty">Vide : glisse des blocs ici.</p>'}</div></div>`; }).join('');
         const loose = `<div class="fsed-sec is-loose" data-fsed-sec="__loose"><div class="fsed-secrow is-loose"><span class="fsed-ic" aria-hidden="true">▢</span><b>Sans section</b><small class="fsed-count">${g.loose.length ? 's’affichent à la fin de la fiche' : 'vide'}</small></div><div class="fsed-blocks" data-fsed-list="__loose">${g.loose.map(brow).join('')}</div></div>`;
         return `<div class="fsed is-${look}" data-fsed data-fsed-kind="${m.kind}" data-fsed-person="${m.personId}" data-fsed-look="${look}">
             <div class="fsed-list order-list block-order-list">${secs}${loose}</div>
             ${ro ? '' : `<div class="fsed-add" data-fsed-addbox><button type="button" class="${look === 'new' ? 'link-button' : 'button small'} fsed-addbtn" data-fsed-add>＋ Nouvelle section</button><div class="fsed-addform" hidden><button type="button" class="icon-button fsed-addic" data-fsed-addic title="Choisir une icône" aria-label="Choisir une icône">🧩</button><input type="text" maxlength="60" data-fsed-addname placeholder="Nom de la section (« Suivi », « Métier »…)" aria-label="Nom de la nouvelle section"><button type="button" class="button small" data-fsed-addok>Créer la section</button><button type="button" class="button small secondary" data-fsed-addcancel>Annuler</button></div></div>`}
-            <p class="fsed-help muted">Au clavier : Tab jusqu’à ⠿ puis ${keyHtml('Alt+ArrowUp')} / ${keyHtml('Alt+ArrowDown')} · ⋯ d’une section : Renommer, Changer l’icône, Monter, Descendre, Supprimer (↶ Annuler).</p>
+            <p class="fsed-help muted">${i18n('Au clavier : Tab jusqu’à ⠿ puis {a} / {b}', {a: keyHtml('Alt+ArrowUp'), b: keyHtml('Alt+ArrowDown')})} · ${i18n('⋯ d’une section : Renommer, Changer l’icône, Monter, Descendre, Supprimer (↶ Annuler).')}</p>
             ${UI().toggleHtml ? UI().toggleHtml('Masquer les lignes vides (pas remplies) du bloc Identité', {checked: m.hideEmptyIdentity, attrs: 'data-fsed-hideempty'}) : ''}</div>`;
     }
     const keyHtml = combo => (A().keys?.html ? A().keys.html(combo) : esc(combo.replace('ArrowUp', '↑').replace('ArrowDown', '↓')));
@@ -407,7 +410,7 @@
             const inp = box.querySelector('[data-fsed-addname]'), name = cleanText(inp.value, 60);
             if (!name) { UI().fail ? UI().fail(inp, 'Donne un nom à la section.') : inp.focus(); return; }
             const icon = cleanText(box.querySelector('[data-fsed-addic]').textContent, 8);
-            commit(host, m => { m.sections.push({id: uid(), name, icon, hidden: false, folded: false}); }, {label: `Section « ${name} » créée`, undo: true});
+            commit(host, m => { m.sections.push({id: uid(), name, icon, hidden: false, folded: false}); }, {label: i18n('Section « {nm} » créée', {nm: name}), undo: true});
         }
     }
     function renameInline(host, nameEl) {
@@ -436,8 +439,8 @@
         UI().menuAt?.(btn, [
             {icon: '↑', label: 'Monter', shortcut: 'Alt+ArrowUp', disabled: i <= 0, run: () => commit(host, mm => moveBlock(mm, key, here, list[i - 1]))},
             {icon: '↓', label: 'Descendre', shortcut: 'Alt+ArrowDown', disabled: i >= list.length - 1, run: () => commit(host, mm => moveBlock(mm, key, here, list[i + 2] || null))},
-            {icon: '➜', label: 'Déplacer vers ▸', run: () => subMenu(btn, [...m.sections.map(s => ({icon: s.icon || '▢', label: `${s.name}${s.id === here ? ' · ici' : ''}`, disabled: s.id === here, run: () => commit(host, mm => moveBlock(mm, key, s.id), {label: `« ${lab} » va dans « ${s.name} »`, undo: true})})), {icon: '▢', label: 'Sans section', disabled: here === '__loose', run: () => commit(host, mm => moveBlock(mm, key, '__loose'))}, '-',
-                {icon: '＋', label: 'Nouvelle section…', run: async () => { const name = cleanText(await A().askText?.({title: 'Nouvelle section', message: `« ${lab} » y sera rangé.`, okLabel: 'Créer la section'}), 60); if (name) commit(host, mm => { const id = uid(); mm.sections.push({id, name, icon: '🧩', hidden: false, folded: false}); moveBlock(mm, key, id); }, {label: `Section « ${name} » créée`, undo: true}); }}], {title: 'Déplacer vers'})},
+            {icon: '➜', label: 'Déplacer vers ▸', run: () => subMenu(btn, [...m.sections.map(s => ({icon: s.icon || '▢', label: `${tn(s.name)}${s.id === here ? ` · ${i18n('ici')}` : ''}`, disabled: s.id === here, run: () => commit(host, mm => moveBlock(mm, key, s.id), {label: i18n('« {a} » va dans « {b} »', {a: lab, b: tn(s.name)}), undo: true})})), {icon: '▢', label: 'Sans section', disabled: here === '__loose', run: () => commit(host, mm => moveBlock(mm, key, '__loose'))}, '-',
+                {icon: '＋', label: 'Nouvelle section…', run: async () => { const name = cleanText(await A().askText?.({title: 'Nouvelle section', message: i18n('« {nm} » y sera rangé.', {nm: lab}), okLabel: 'Créer la section'}), 60); if (name) commit(host, mm => { const id = uid(); mm.sections.push({id, name, icon: '🧩', hidden: false, folded: false}); moveBlock(mm, key, id); }, {label: i18n('Section « {nm} » créée', {nm: name}), undo: true}); }}], {title: 'Déplacer vers'})},
             {icon: '↔', label: 'Largeur ▸', run: () => subMenu(btn, WIDTHS.map(([v, nu]) => ({icon: String(m.widths[key] || '12') === v ? '✓' : '', label: nu, run: () => commit(host, mm => { mm.widths[key] = v; })})), {title: 'Largeur'})},
             {icon: m.hidden.includes(key) ? '👁' : '🙈', label: m.hidden.includes(key) ? 'Montrer le bloc' : 'Cacher le bloc', run: () => commit(host, mm => { mm.hidden = mm.hidden.includes(key) ? mm.hidden.filter(x => x !== key) : [...mm.hidden, key]; })},
         ], {title: `« ${lab} »`});
@@ -448,7 +451,7 @@
         UI().menuAt?.(btn, [
             {icon: '✎', label: 'Renommer', run: () => { const n = host.querySelector(`[data-fsed-sec="${CSS.escape(id)}"] [data-fsed-rename]`); if (n) renameInline(host, n); }},
             {icon: '🙂', label: 'Changer l’icône', run: () => pickIcon(btn, s.icon, ic => commit(host, mm => { const x = mm.sections.find(y => y.id === id); if (x) x.icon = ic; }))},
-            {icon: '⧉', label: 'Dupliquer', run: () => commit(host, mm => { mm.sections.splice(i + 1, 0, {...s, id: uid(), name: cleanText(`${s.name} (copie)`, 60)}); }, {label: `Section « ${s.name} » dupliquée (vide)`, undo: true})},
+            {icon: '⧉', label: 'Dupliquer', run: () => commit(host, mm => { mm.sections.splice(i + 1, 0, {...s, id: uid(), name: cleanText(i18n('{nm} (copie)', {nm: tn(s.name)}), 60)}); }, {label: i18n('Section « {name} » dupliquée (vide)', {name: tn(s.name)}), undo: true})},
             {icon: s.folded ? '▾' : '▸', label: s.folded ? 'Ouverte au départ' : 'Repliée au départ', run: () => commit(host, mm => { const x = mm.sections.find(y => y.id === id); if (x) x.folded = !x.folded; })},
             {icon: '↑', label: 'Monter', shortcut: 'Alt+ArrowUp', disabled: i === 0, run: () => commit(host, mm => { mm.sections.splice(i - 1, 0, mm.sections.splice(i, 1)[0]); })},
             {icon: '↓', label: 'Descendre', shortcut: 'Alt+ArrowDown', disabled: i === m.sections.length - 1, run: () => commit(host, mm => { mm.sections.splice(i + 1, 0, mm.sections.splice(i, 1)[0]); })},
@@ -512,12 +515,12 @@
             else if (up && li > 0) commit(host, mm => moveBlock(mm, key, lists[li - 1][0])); // en haut de sa section : à la fin de la section du dessus
             else if (!up && li < lists.length - 1) commit(host, mm => moveBlock(mm, key, lists[li + 1][0], lists[li + 1][1][0] || null)); // en bas : au début de celle du dessous
             else return;
-            say(host, `${blockLabel(key, m.kind)} déplacé`);
+            say(host, i18n('{nm} déplacé', {nm: blockLabel(key, m.kind)}));
         } else {
             const id = grip.closest('[data-fsed-sec]')?.dataset.fsedSec, i = m.sections.findIndex(s => s.id === id); if (i < 0) return;
             const j = up ? i - 1 : i + 1; if (j < 0 || j >= m.sections.length) return;
             commit(host, mm => { mm.sections.splice(j, 0, mm.sections.splice(i, 1)[0]); });
-            say(host, `« ${m.sections[i].name} » est maintenant ${j + 1}ᵉ sur ${m.sections.length}`);
+            say(host, i18n('« {name} » est maintenant {i}ᵉ sur {n}', {name: tn(m.sections[i].name), i: j + 1, n: m.sections.length}));
         }
     }, true);
     const say = (host, msg) => { let live = host.querySelector('.fsed-live'); if (!live) { live = document.createElement('span'); live.className = 'fsed-live visually-hidden'; live.setAttribute('aria-live', 'polite'); host.appendChild(live); } live.textContent = msg; };
@@ -535,7 +538,7 @@
     function designsNoteHtml() {
         const D = window.LCNDA_DESIGNS; let txt = '';
         try { const G = D?.read?.(); const nm = id => { const v = D.DEFS[id].variants.find(x => x.k === G[id].v); return v ? v.t : ''; }; if (G) txt = `traits, coins et ombres (<b>${esc(nm('a1'))}</b>)`; } catch (_) {}
-        return `<div class="ui-notice ui-notice-info fsec-designs-link" id="fsec-designs-link"><span class="ui-notice-ic" aria-hidden="true">🎨</span><span>Le style des fiches : ${txt || 'traits, coins, ombres'}. Il se règle avec la forme de l’en-tête, plus bas sur cette page. <button type="button" class="link-button" data-fsec-go-designs>Style des fiches ↓</button></span></div>`;
+        return `<div class="ui-notice ui-notice-info fsec-designs-link" id="fsec-designs-link"><span class="ui-notice-ic" aria-hidden="true">🎨</span><span>${i18n('Le style des fiches : {x}. Il se règle avec la forme de l’en-tête, plus bas sur cette page.', {x: txt || i18n('traits, coins, ombres')})} <button type="button" class="link-button" data-fsec-go-designs>Style des fiches ↓</button></span></div>`;
     }
     function sectionsPanelHtml() {
         const o = opts(), kind = editKind();
@@ -566,7 +569,7 @@
         const word = kind === 'animal' ? 'FICHES ANIMAUX' : 'FICHES PERSONNES';
         return `<section class="person-block-config" id="fsec-blocks"><header><span class="eyebrow">${word}</span><h3>Ordre et visibilité des blocs</h3><p>Glisse les sections et les blocs pour changer leur ordre. Décoche une section ou un bloc pour le masquer.</p><p class="person-exception-summary" data-exception-summary="person-blocks"></p></header>
             <div class="design-order-grid block-grid fsec-blocks-grid"><section class="maintenance-panel order-editor block-order-editor fsec-ed-panel"><div class="item-title-row"><h3>${kind === 'animal' ? 'Toutes les fiches d’animaux' : 'Toutes les fiches'}</h3></div>${kind === 'animal' && !opts().animalOwn ? '<p class="fsec-offnote">Les animaux prennent les sections des personnes (« Sections propres aux animaux » est éteint) : créer, renommer ou ranger une section change aussi celles des personnes.</p>' : ''}<div data-fsec-editor="0"></div></section>
-            ${pid ? `<section class="maintenance-panel order-editor block-order-editor fsec-ed-panel"><div class="item-title-row"><h3>Exception pour ${esc(name || `la fiche n°${pid}`)}</h3>${hasException(pid) ? `<button class="button small secondary" type="button" data-fsec-reset-ex="${pid}">Annuler l’exception</button>` : ''}</div>${curKind !== kind ? `<p class="block-editor-offnote">La fiche ouverte (${esc(name)}) est ${curKind === 'animal' ? 'un animal : son exception se règle avec « 🐾 Animaux »' : 'une personne : son exception se règle avec « 👤 Personnes »'}, en haut des Sections.</p>` : `<div data-fsec-editor="${pid}"></div>`}</section>`
+            ${pid ? `<section class="maintenance-panel order-editor block-order-editor fsec-ed-panel"><div class="item-title-row"><h3>${i18n('Exception pour {nm}', {nm: esc(name || i18n('la fiche n°{n}', {n: String(pid)}))})}</h3>${hasException(pid) ? `<button class="button small secondary" type="button" data-fsec-reset-ex="${pid}">Annuler l’exception</button>` : ''}</div>${curKind !== kind ? `<p class="block-editor-offnote">${curKind === 'animal' ? i18n('La fiche ouverte ({name}) est un animal : son exception se règle avec « 🐾 Animaux », en haut des Sections.', {name: esc(name)}) : i18n('La fiche ouverte ({name}) est une personne : son exception se règle avec « 👤 Personnes », en haut des Sections.', {name: esc(name)})}</p>` : `<div data-fsec-editor="${pid}"></div>`}</section>`
                 : `<section class="maintenance-panel order-editor block-order-editor"><h3>Exception fiche actuelle</h3><p>Ouvre ${kind === 'animal' ? 'un animal' : 'une personne'} pour créer une exception propre à sa fiche.</p></section>`}</div></section>`;
     }
     /* ── 👁 l'aperçu : la VRAIE fiche, en petit et en direct (lecture seule, rien n'est envoyé ni changé) ──
@@ -707,7 +710,7 @@
         const st = A().state || {}, det = st.currentPerson, p = det?.person; if (!p || !ext.openDialog) return;
         const kind = p.kind === 'animal' ? 'animal' : 'human', pid = Number(p.id);
         let scope = hasException(pid) ? 'one' : 'all';
-        const dlg = ext.openDialog({eyebrow: kind === 'animal' ? '🗂 FICHE ANIMAL' : '🗂 FICHE', title: `Ranger les sections — fiche de ${A().personName?.(p) || ''}`, wide: true, submitLabel: 'Fermer', onSubmit: () => true,
+        const dlg = ext.openDialog({eyebrow: kind === 'animal' ? '🗂 FICHE ANIMAL' : '🗂 FICHE', title: i18n('Ranger les sections — fiche de {name}', {name: A().personName?.(p) || ''}), wide: true, submitLabel: 'Fermer', onSubmit: () => true,
             body: `<div class="fsec-dlg-top"><div class="segmented fsec-seg" role="radiogroup" data-fsec-scope>${[['one', 'Pour cette fiche seulement'], ['all', kind === 'animal' ? 'Pour toutes les fiches d’animaux' : 'Pour toutes les fiches']].map(([v, l]) => `<button type="button" role="radio" data-v="${v}" class="${scope === v ? 'is-active' : ''}" aria-checked="${scope === v}">${l}</button>`).join('')}</div><button type="button" class="link-button" data-fsec-allsettings>Tous les réglages des fiches ↗</button></div><div data-fsec-dlg-ed></div>`});
         const host = dlg.querySelector('[data-fsec-dlg-ed]');
         const mount = () => mountEditor(host, {kind, personId: scope === 'one' ? pid : 0, look: opts().editor});

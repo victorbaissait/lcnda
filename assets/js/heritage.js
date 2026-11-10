@@ -27,7 +27,8 @@
     const card = (...args) => A().card(...args);
     const S = () => A().state;
     const fmt = (n, d = 0) => Number(n || 0).toLocaleString('fr-FR', {maximumFractionDigits: d});
-    const plural = (n, one, many) => `${fmt(n)} ${n > 1 ? many : one}`;
+    const plural = (n, one, many) => (window.LCNDA_I18N && window.LCNDA_I18N.lang !== 'fr' ? window.LCNDA_I18N.plural(n, one, many) : `${fmt(n)} ${n > 1 ? many : one}`);
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && k in v ? v[k] : m))); // 🌐 docs/I18N.md
     const personLink = (id, name, extra = '') => id ? `<button type="button" class="table-link" data-h-person="${Number(id)}">${esc(name || 'Personne')}</button>${extra ? ` <small>${esc(extra)}</small>` : ''}` : esc(name || '');
     const chip = person => person ? A().personChip(person) : '';
     // 🔍 Menu de choix unique (assets/js/app-picker.js, docs/PICKER.md) : personnes, lieux, médias…
@@ -118,7 +119,7 @@
                 const dt = new DataTransfer(), seen = new Set();
                 [...(input.files || []), ...files].forEach(f => { const k = f.name + '|' + f.size; if (!seen.has(k)) { seen.add(k); dt.items.add(f); } });
                 input.files = dt.files; input.dispatchEvent(new Event('change', {bubbles: true}));
-                toast(`${A().plural(files.length, 'fichier ajouté', 'fichiers ajoutés')} : ${A().plural(dt.files.length, 'fichier partira', 'fichiers partiront')} à l’enregistrement.`);
+                toast(i18n('{a} : {b} à l’enregistrement.', {a: A().plural(files.length, 'fichier ajouté', 'fichiers ajoutés'), b: A().plural(dt.files.length, 'fichier partira', 'fichiers partiront')}));
             }, {accept: input.getAttribute('accept') || ''});
         });
         box.addEventListener('click', async event => {
@@ -134,7 +135,7 @@
             if (!it?.id || !field) return;
             try {
                 await api('link_collection_media', {}, {method: 'POST', body: {collection_type: type, collection_id: id, media_id: it.id, role: box.querySelector('[data-h-media-link-role]').value}});
-                toast(`« ${it.title} » lié. Il apparaîtra après l’enregistrement.`);
+                toast(i18n('« {name} » lié. Il apparaîtra après l’enregistrement.', {name: it.title}));
                 if (field.matches('[data-media-field]')) window.LCNDA_PICKER.mediaSet(field, null); else PK().pickerSet(field, null);
             } catch (error) { toast(error.message, 'error'); }
         });
@@ -503,11 +504,11 @@
                 if (!coat) return;
                 const personId = Number(d.hCoatPerson) || 0, others = (coat.people || []).filter(l => Number(l.person.id) !== personId);
                 if (personId && others.length) {
-                    if (!await A().confirmBox(`Les armoiries restent pour ${others.length > 1 ? `les ${others.length} autres porteurs` : 'l’autre porteur'}.`, {title: `Retirer « ${coat.title} » de cette fiche ?`, okLabel: 'Retirer'})) return;
+                    if (!await A().confirmBox(others.length > 1 ? i18n('Les armoiries restent pour les {n} autres porteurs.', {n: others.length}) : i18n('Les armoiries restent pour l’autre porteur.'), {title: i18n('Retirer « {name} » de cette fiche ?', {name: coat.title}), okLabel: i18n('Retirer')})) return;
                     await api('save_coat_of_arms', {}, {method: 'POST', body: {...coat, people: others.map(l => ({person_id: l.person.id, note: l.note}))}});
                     toast('Armoiries retirées de cette fiche.');
                 } else {
-                    if (!await A().confirmBox('', {title: `Supprimer les armoiries « ${coat.title} » ?`, okLabel: 'Supprimer les armoiries'})) return;
+                    if (!await A().confirmBox('', {title: i18n('Supprimer les armoiries « {name} » ?', {name: coat.title}), okLabel: i18n('Supprimer les armoiries')})) return;
                     await api('delete_coat_of_arms', {}, {method: 'POST', body: {id: coat.id}}); toast('Armoiries supprimées.');
                 }
             }
@@ -525,7 +526,7 @@
         const points = [], paths = [];
         rows.forEach(r => {
             if (finite(r.lat)) points.push({lat: +r.lat, lon: +r.lon, label: `${r.place_text}${r.person_name ? ' — ' + r.person_name : ''}`, color: '#cc4700', showLabel: rows.length < 4});
-            if (finite(r.origin_lat)) points.push({lat: +r.origin_lat, lon: +r.origin_lon, label: `${r.origin_text} (départ)`, color: '#0066cc', showLabel: rows.length < 4});
+            if (finite(r.origin_lat)) points.push({lat: +r.origin_lat, lon: +r.origin_lon, label: i18n('{nm} (départ)', {nm: r.origin_text}), color: '#0066cc', showLabel: rows.length < 4});
             if (finite(r.lat) && finite(r.origin_lat)) paths.push({coords: [[+r.origin_lat, +r.origin_lon], [+r.lat, +r.lon]], color: '#cc4700', dashed: true});
         });
         return miniMap(points, paths, {emptyText: 'Choisis le lieu du placement dans les suggestions pour le voir sur la carte.'});
@@ -630,7 +631,7 @@
                 await uploadMediaEditor(form, 'coat_of_arms', saved.result.id);
                 toast('Armoiries enregistrées.'); await refreshView();
             },
-            onDelete: c.id ? async () => { if (!await A().confirmBox('', {title: `Supprimer les armoiries « ${c.title} » ?`, okLabel: 'Supprimer les armoiries'})) return false; await api('delete_coat_of_arms', {}, {method: 'POST', body: {id: c.id}}); toast('Supprimé.'); await refreshView(); } : null,
+            onDelete: c.id ? async () => { if (!await A().confirmBox('', {title: i18n('Supprimer les armoiries « {name} » ?', {name: c.title}), okLabel: i18n('Supprimer les armoiries')})) return false; await api('delete_coat_of_arms', {}, {method: 'POST', body: {id: c.id}}); toast('Supprimé.'); await refreshView(); } : null,
             onOpen: dialog => {
                 dialog.addEventListener('click', event => {
                     if (event.target.closest('[data-h-coat-vector]')) {
@@ -705,7 +706,7 @@
         const eventRows = events.map(e => {
             const u = unitAt(units, e.event_date);
             return `<li class="h-poilu-event is-${esc(e.kind)}"><strong>${esc(dateFr(e.event_date) || 'Date ?')}</strong> — ${esc(e.kind_label || poiluKinds[e.kind] || '')}${e.place_text ? ` à ${esc(e.place_text)}` : ''}${e.note ? ` <small>(${esc(e.note)})</small>` : ''}
-                ${u ? `<div class="h-poilu-where">Ce jour-là, ${esc(person ? A().personName(person) : 'il')} était au <strong>${esc(u.unit_name)}</strong>. ${jmoLinks(u, e.event_date)}</div>` : (units.length ? '<div class="empty-line"><span class="empty-line-ico" aria-hidden="true">📅</span><span class="empty-line-text">Aucune unité saisie à cette date.</span></div>' : '')}</li>`;
+                ${u ? `<div class="h-poilu-where">${i18n('Ce jour-là, {name} était au <strong>{unit}</strong>.', {name: esc(person ? A().personName(person) : i18n('il')), unit: esc(u.unit_name)})} ${jmoLinks(u, e.event_date)}</div>` : (units.length ? '<div class="empty-line"><span class="empty-line-ico" aria-hidden="true">📅</span><span class="empty-line-text">Aucune unité saisie à cette date.</span></div>' : '')}</li>`;
         }).join('');
         return `${LC(data.labels)}${units.length ? `<table class="data-table h-poilu-units"><thead><tr><th>Unité</th><th>Période</th><th>Journaux de marche et opérations</th></tr></thead><tbody>${unitRows}</tbody></table>` : '<p class="muted">Ajoute son régiment (ex. « 152e régiment d’infanterie ») et ses dates : le lien vers les journaux de marche apparaîtra.</p>'}
             ${events.length ? `<ol class="h-poilu-events">${eventRows}</ol>` : ''}
@@ -771,7 +772,7 @@
         const days = workDays(inv.net, inv.currency, inv.year);
         const cats = Object.entries(inv.by_category || {}).sort((a, b) => b[1] - a[1]).slice(0, 4);
         return `<article class="h-record"><header><div><strong>📜 Inventaire ${inv.date_text ? 'du ' + esc(inv.date_text) : ''}</strong>${LC(inv.labels)}${inv.notary ? ` <small>— ${esc(inv.notary)}</small>` : ''}${inv.person_name ? `<div>${personLink(inv.person_id, inv.person_name)}</div>` : ''}</div>${tools(`data-h-open-list="probate" data-h-edit="${inv.id}"`, `data-h-probate-delete="${inv.id}"`, 'cet inventaire')}</header>
-            <p class="h-probate-total">Total : <strong>${esc(moneyText(inv.total, inv.currency))}</strong>${inv.debts ? ` · dettes ${esc(moneyText(inv.debts, inv.currency))} · net <strong>${esc(moneyText(inv.net, inv.currency))}</strong>` : ''}${days ? ` · ≈ <strong>${fmt(days)} journées de travail</strong> d’un journalier (${fmt(days / 250, 1)} années)` : ''}</p>
+            <p class="h-probate-total">${i18n('Total : <strong>{x}</strong>', {x: esc(moneyText(inv.total, inv.currency))})}${inv.debts ? ` · ${i18n('dettes {x}', {x: esc(moneyText(inv.debts, inv.currency))})} · ${i18n('net <strong>{x}</strong>', {x: esc(moneyText(inv.net, inv.currency))})}` : ''}${days ? ` · ${i18n('≈ <strong>{n} journées de travail</strong> d’un journalier ({y} années)', {n: fmt(days), y: fmt(days / 250, 1)})}` : ''}</p>
             ${cats.length ? `<p class="muted">${cats.map(([k, v]) => `${esc(probateCategories[k] || k)} : ${esc(moneyText(v, inv.currency))}`).join(' · ')}</p>` : ''}${thumbs('probate-' + inv.id, inv.media)}</article>`;
     }
     ext.personBlocks.probate = (index, detail) => {
@@ -903,13 +904,13 @@
         const box = ws.querySelector('[data-h-coats-list]'), n = fn => all.filter(fn).length, hasImg = c => !!coatImage(c);
         const item = (c, view) => { const img = coatImage(c), who = (c.people || []).map(l => A().personName(l.person));
             return {thumb: img ? A().mediaThumbHtml(img) : '<span class="ui-card-ico" aria-hidden="true">🛡️</span>', name: c.title, open: `data-h-coat-edit="${c.id}"`,
-                lines: [c.blazon ? `« ${c.blazon} »` : 'Blasonnement à écrire', [c.motto ? `Devise : ${c.motto}` : '', who.length ? `Porté par ${who.join(', ')}` : ''].filter(Boolean).join(' · ')],
+                lines: [c.blazon ? `« ${c.blazon} »` : i18n('Blasonnement à écrire'), [c.motto ? i18n('Devise : {x}', {x: c.motto}) : '', who.length ? i18n('Porté par {list}', {list: who.join(', ')}) : ''].filter(Boolean).join(' · ')],
                 badges: [c.title_of_nobility ? {text: c.title_of_nobility, kind: 'grey'} : null, LC(c.labels)].filter(Boolean), when: whenOf(c), whenLabel: 'Modifié',
                 menu: [`<button type="button" data-h-coat-edit="${c.id}">✎ Modifier</button>`, `<button type="button" class="danger" data-h-coat-delete="${c.id}" data-h-coat-person="0">🗑 Supprimer</button>`],
                 actions: view === 'list' ? tools(`data-h-coat-edit="${c.id}"`, `data-h-coat-delete="${c.id}" data-h-coat-person="0"`, 'ces armoiries') : ''}; };
         h10Bar(ws.querySelector('[data-h-coats-bar]'), box, all.length, {key: 'listes:coats_of_arms', search: {placeholder: 'Chercher… (nom, blasonnement, devise, famille)', value: S().hCoatsQuery || ''},
             filters: [{id: 'person', label: 'Porteur', type: 'person', chipPrefix: '👤 Porté par', allowFree: false},
-                {id: 'img', label: 'Image', type: 'radio', dflt: '', options: [['', 'Toutes'], ['yes', `Avec l’image du blason (${n(hasImg)})`, '🖼 Avec image'], ['no', `Sans image (${n(c => !hasImg(c))})`, 'Sans image']]},
+                {id: 'img', label: 'Image', type: 'radio', dflt: '', options: [['', 'Toutes'], ['yes', i18n('Avec l’image du blason ({n})', {n: n(hasImg)}), '🖼 Avec image'], ['no', i18n('Sans image ({n})', {n: n(c => !hasImg(c))}), 'Sans image']]},
                 {id: 'label', label: 'Étiquette', kind: 'label', allowFree: false, chipPrefix: '🏷'}],
             view: {dflt: 'cards', what: 'armoiries'}, sort: {options: B4F, value: 'az'}}, bar => {
             const {q, filters: f, sort, view} = bar.state;
@@ -933,7 +934,7 @@
         const FATES = [['blesse', 'Blessé'], ['disparu', 'Disparu'], ['prisonnier', 'Prisonnier']], hasKind = (r, k) => (r.events || []).some(e => e.kind === k);
         const units = {}; rows.forEach(r => unitsOf(r).forEach(u => { units[u] = (units[u] || 0) + 1; }));
         const bar = UIx.listBar({key: 'listes:poilus_list', search: {placeholder: 'Chercher… (nom, régiment, lieu)'},
-            filters: [{id: 'mpf', label: 'Mort pour la France', type: 'check', text: `Mort pour la France (${rows.filter(mpf).length})`},
+            filters: [{id: 'mpf', label: 'Mort pour la France', type: 'check', text: i18n('Mort pour la France ({n})', {n: rows.filter(mpf).length})},
                 {id: 'unit', label: 'Régiment, unité', type: 'check', options: Object.keys(units).sort(h10Cmp).map(u => [u, u, u, units[u]])},
                 {id: 'fate', label: 'Devenir', type: 'check', options: FATES.map(([k, l]) => [k, l, l, rows.filter(r => hasKind(r, k)).length])}],
             view: {dflt: 'list', what: 'poilus'},
@@ -1021,7 +1022,7 @@
             const cur = form.elements.currency.value; let total = 0, debts = 0;
             form.querySelectorAll('.h-item-row').forEach(r => { const v = parseAmount(r.querySelector('[name=value_text]').value) || 0; if (r.querySelector('[name=category]').value === 'dettes') debts += v; else total += v; });
             const year = yearOf(form.elements.date_text.value), days = workDays(total - debts, cur, year);
-            form.querySelector('.h-probate-live').textContent = `Total ${moneyText(total, cur)}${debts ? ` − dettes ${moneyText(debts, cur)} = ${moneyText(total - debts, cur)}` : ''}${days ? ` ≈ ${fmt(days)} journées de travail` : ''}`;
+            form.querySelector('.h-probate-live').textContent = `${i18n('Total {x}', {x: moneyText(total, cur)})}${debts ? ` − ${i18n('dettes {x}', {x: moneyText(debts, cur)})} = ${moneyText(total - debts, cur)}` : ''}${days ? ` ≈ ${i18n('{n} journées de travail', {n: fmt(days)})}` : ''}`;
         };
         form.addEventListener('input', live); live();
         form.querySelector('[data-h-item-add]').addEventListener('click', () => { form.querySelector('[data-h-rows=items]').insertAdjacentHTML('beforeend', probateItemRow()); });
@@ -1060,7 +1061,7 @@
         const hasScan = r => !!(r.media || []).length, numCmp = (a, b) => String(a.class_number || '').localeCompare(String(b.class_number || ''), 'fr', {numeric: true, sensitivity: 'base'});
         const SORTS = {num: numCmp, date: (a, b) => (LM().year(a.date_text) || 9999) - (LM().year(b.date_text) || 9999) || numCmp(a, b)};
         const head = `<thead><tr><th><input type="checkbox" data-h-paper-all title="Tout cocher"></th><th><button data-sort-column="1" data-sort-key="num">N°</button></th><th><button data-sort-column="2" data-sort-key="title">Document</button></th><th><button data-sort-column="3" data-sort-key="date">Date</button></th><th><button data-sort-column="4">Chez</button></th><th>Personnes</th><th>Scan</th><th></th></tr></thead>`;
-        const line = r => `<tr><td><input type="checkbox" data-h-paper-check="${r.id}"></td><td><span class="h-paper-number">${esc(r.class_number)}</span></td><td><strong>${esc(r.title)}</strong>${LC(r.labels)}${r.kind ? `<br><small>${esc(r.kind)}</small>` : ''}${r.condition_text ? `<br><small class="muted">État : ${esc(r.condition_text)}</small>` : ''}</td><td data-sort-value="${LM().year(r.date_text) || 9999}">${esc(r.date_text)}</td><td>${esc(r.holder_text)}</td><td>${(r.people || []).map(chip).join('<br>')}</td><td>${thumbs('paper-' + r.id, r.media, {emptyText: 'pas de scan'})}</td><td>${tools(`data-h-paper-edit="${r.id}"`, `data-h-paper-delete="${r.id}"`, 'ce document')}</td></tr>`;
+        const line = r => `<tr><td><input type="checkbox" data-h-paper-check="${r.id}"></td><td><span class="h-paper-number">${esc(r.class_number)}</span></td><td><strong>${esc(r.title)}</strong>${LC(r.labels)}${r.kind ? `<br><small>${esc(r.kind)}</small>` : ''}${r.condition_text ? `<br><small class="muted">${i18n('État : {x}', {x: esc(r.condition_text)})}</small>` : ''}</td><td data-sort-value="${LM().year(r.date_text) || 9999}">${esc(r.date_text)}</td><td>${esc(r.holder_text)}</td><td>${(r.people || []).map(chip).join('<br>')}</td><td>${thumbs('paper-' + r.id, r.media, {emptyText: 'pas de scan'})}</td><td>${tools(`data-h-paper-edit="${r.id}"`, `data-h-paper-delete="${r.id}"`, 'ce document')}</td></tr>`;
         const card = r => { const scan = (r.media || []).find(m => m.media_type === 'image');
             return {thumb: scan ? A().mediaThumbHtml(scan) : '<span class="ui-card-ico" aria-hidden="true">📄</span>', name: r.title, open: `data-h-paper-edit="${r.id}"`,
                 lines: [[r.kind, r.date_text].filter(Boolean).join(' · '), [r.storage_location ? `📦 ${r.storage_location}` : '', r.holder_text ? `chez ${r.holder_text}` : ''].filter(Boolean).join(' · ')],
@@ -1071,7 +1072,7 @@
                 {id: 'box', label: 'Rangement', type: 'check', options: opts(r => r.storage_location, 'Rangement à préciser').map(o => [o[0], o[1], `📦 ${o[2]}`])},
                 {id: 'holder', label: 'Chez qui', type: 'check', options: opts(r => r.holder_text, 'Pas précisé').map(o => [o[0], o[1], `Chez ${o[2]}`])},
                 {id: 'person', label: 'Personne', type: 'person', chipPrefix: '👤', allowFree: false},
-                {id: 'scan', label: 'Scan', type: 'radio', dflt: '', options: [['', 'Tous'], ['yes', `Avec un scan (${rows.filter(hasScan).length})`, '📄 Avec scan'], ['no', `Sans scan (${rows.filter(r => !hasScan(r)).length})`, 'Sans scan']]},
+                {id: 'scan', label: 'Scan', type: 'radio', dflt: '', options: [['', 'Tous'], ['yes', i18n('Avec un scan ({n})', {n: rows.filter(hasScan).length}), '📄 Avec scan'], ['no', i18n('Sans scan ({n})', {n: rows.filter(r => !hasScan(r)).length}), 'Sans scan']]},
                 {id: 'label', label: 'Étiquette', kind: 'label', allowFree: false, chipPrefix: '🏷'}],
             view: {dflt: 'list', what: 'documents'}, sort: {options: [['num', 'N° de classement'], ...B4, ['date', 'Date du document']], value: 'num'}}, bar => {
             const {q, filters: f, sort, view} = bar.state, inSet = (sel, v) => !(sel || []).length || sel.includes(v || '__none');
@@ -1095,7 +1096,7 @@
         const chosen = () => { const ids = [...ws.querySelectorAll('[data-h-paper-check]:checked')].map(c => Number(c.dataset.hPaperCheck)); return ids.length ? rows.filter(r => ids.includes(Number(r.id))) : shownRows; };
         ws.querySelector('[data-h-paper-printmenu]')?.addEventListener('click', e => UIx().menuAt(e.currentTarget, [
             {icon: '🏷', label: 'Les étiquettes à coller', help: 'planche de 24 étiquettes', run: () => printPaperLabels(chosen())},
-            {icon: '📋', label: 'L’inventaire', help: 'la liste des documents', run: () => printPaperInventory(chosen())}], {title: `${plural(chosen().length, 'document', 'documents')} (cochés, sinon ceux affichés)`}));
+            {icon: '📋', label: 'L’inventaire', help: 'la liste des documents', run: () => printPaperInventory(chosen())}], {title: i18n('{what} (cochés, sinon ceux affichés)', {what: plural(chosen().length, 'document', 'documents')})}));
         if (editing) bindPaperForm(editing);
     };
     function paperFormHtml(p, locations) {
@@ -1122,7 +1123,7 @@
             try {
                 const saved = await api('save_family_paper', {}, {method: 'POST', body: {...v, id: p.id, people}});
                 const n = await uploadMediaEditor(form, 'family_paper', saved.result.id);
-                toast(`Document ${saved.result.class_number} enregistré${n ? ' avec son scan' : ''}.`); A().renderList();
+                toast(n ? i18n('Document {num} enregistré avec son scan.', {num: saved.result.class_number}) : i18n('Document {no} enregistré.', {no: saved.result.class_number})); A().renderList();
             } catch (error) { toast(error.message, 'error'); }
         });
     }
@@ -1201,7 +1202,7 @@
             const near = (x, y) => { const g = t => (!t.date_start ? 2 : t.date_start >= today ? 0 : 1), gx = g(x), gy = g(y); return gx - gy || (gx === 0 ? x.date_start.localeCompare(y.date_start) : gx === 1 ? y.date_start.localeCompare(x.date_start) : 0) || Number(y.id) - Number(x.id); };
             const pid = p => Number(p && typeof p === 'object' ? p.id : p) || 0;
             const card = t => ({thumb: `<span class="ui-card-ico">${t.status === 'done' ? '✅' : '🚗'}</span>`, name: t.title || 'Sans titre', open: `data-h-trip-open="${t.id}"`,
-                lines: [[t.date_start ? dateFr(t.date_start) + (t.date_end && t.date_end !== t.date_start ? ' → ' + dateFr(t.date_end) : '') : 'dates à fixer', t.start_place ? `départ de ${t.start_place}` : ''].filter(Boolean).join(' · '), t.people_names || (t.notes || '').slice(0, 90)],
+                lines: [[t.date_start ? dateFr(t.date_start) + (t.date_end && t.date_end !== t.date_start ? ' → ' + dateFr(t.date_end) : '') : i18n('dates à fixer'), t.start_place ? i18n('départ de {nm}', {nm: t.start_place}) : ''].filter(Boolean).join(' · '), t.people_names || (t.notes || '').slice(0, 90)],
                 badges: [Number(t.stop_count) ? {text: `${fmt(t.done_count)} / ${plural(Number(t.stop_count), 'étape', 'étapes')}`, kind: t.status === 'done' || Number(t.done_count) === Number(t.stop_count) ? 'green' : 'blue'} : {text: 'sans étape', kind: 'grey'}, ...(t.labels || []).slice(0, 2).map(l => ({text: l.name, kind: 'grey'}))],
                 menu: [`<button type="button" data-h-trip-status="${t.id}" data-status="${t.status === 'done' ? 'todo' : 'done'}">${t.status === 'done' ? '↺ Remettre à faire' : '✓ Marquer fait'}</button>`]});
             const paint = () => {
@@ -1212,8 +1213,8 @@
                 list = s.sort === 'near' ? list.sort(near) : UI.sortItems(list, s.sort, {name: t => t.title, date: t => t.updated_at || t.created_at || ''});
                 bar.setCount(list.length === all.length ? plural(all.length, 'circuit', 'circuits') : `${plural(list.length, 'circuit', 'circuits')} sur ${all.length}`);
                 box.innerHTML = !list.length ? A().emptyState({icon: stt.length === 1 && stt[0] === 'done' ? '✅' : '🔍', text: stt.length === 1 && !words.length && !per && !lab ? (stt[0] === 'done' ? 'Aucun circuit fait pour l’instant' : 'Aucun circuit à faire pour l’instant') : 'Aucun circuit ne correspond', hint: 'Retire un filtre (la pastille bleue sous la barre), ou cherche autrement.'})
-                    : s.view === 'cards' ? UI.cardsHtml(list.map(card)) : list.map(t => `<article class="h-record h-trip ${t.status === 'done' ? 'is-done' : ''}"><header><div><strong>${t.status === 'done' ? '✅' : '🚗'} ${esc(t.title)}</strong>${LC(t.labels)}<div class="muted">${esc([t.date_start ? dateFr(t.date_start) : 'dates à fixer', t.date_end && t.date_end !== t.date_start ? '→ ' + dateFr(t.date_end) : ''].join(' '))}${t.start_place ? ` · départ de ${esc(t.start_place)}` : ''}</div>
-                <div>${plural(Number(t.stop_count), 'étape', 'étapes')}${Number(t.day_count) ? ` sur ${plural(Number(t.day_count), 'jour', 'jours')}` : ''}${Number(t.stop_count) ? ` · ${fmt(t.done_count)} faite${t.done_count > 1 ? 's' : ''}` : ''}${t.status === 'done' && t.done_at ? ` · fait le ${esc(dateFr(t.done_at))}` : ''}</div>
+                    : s.view === 'cards' ? UI.cardsHtml(list.map(card)) : list.map(t => `<article class="h-record h-trip ${t.status === 'done' ? 'is-done' : ''}"><header><div><strong>${t.status === 'done' ? '✅' : '🚗'} ${esc(t.title)}</strong>${LC(t.labels)}<div class="muted">${esc([t.date_start ? dateFr(t.date_start) : 'dates à fixer', t.date_end && t.date_end !== t.date_start ? '→ ' + dateFr(t.date_end) : ''].join(' '))}${t.start_place ? ` · ${i18n('départ de {nm}', {nm: esc(t.start_place)})}` : ''}</div>
+                <div>${Number(t.day_count) ? i18n('{a} sur {b}', {a: plural(Number(t.stop_count), 'étape', 'étapes'), b: plural(Number(t.day_count), 'jour', 'jours')}) : plural(Number(t.stop_count), 'étape', 'étapes')}${Number(t.stop_count) ? ` · ${plural(Number(t.done_count), 'faite', 'faites')}` : ''}${t.status === 'done' && t.done_at ? ` · ${i18n('fait le {dt}', {dt: esc(dateFr(t.done_at))})}` : ''}</div>
                 ${Number(t.stop_count) ? `<div class="h-progress"><span style="width:${Math.round(100 * t.done_count / t.stop_count)}%"></span></div>` : ''}</div>
                 <div class="page-actions compact"><button type="button" class="button small" data-h-trip-open="${t.id}">Ouvrir</button><button type="button" class="button small secondary" data-h-trip-status="${t.id}" data-status="${t.status === 'done' ? 'todo' : 'done'}">${t.status === 'done' ? 'Remettre à faire' : 'Marquer fait'}</button></div></header>${t.notes ? `<p class="muted">${nl(t.notes)}</p>` : ''}</article>`).join('');
             };
@@ -1356,7 +1357,7 @@
             <div class="h-stop-body"><strong>${tripIcons[s.kind] || '📍'} ${esc(s.title || tripKinds[s.kind])}</strong> <small class="muted">${esc(s.place_text)}${s.address ? ' · ' + esc(s.address) : ''}${finite(s.lat) ? '' : ' · ⚠ pas de coordonnées'}</small>
             ${s.people_text ? `<div class="h-stop-people">${nl(s.people_text)}</div>` : ''}${s.to_photograph ? `<div class="h-stop-photo">📷 ${nl(s.to_photograph)}</div>` : ''}${s.opening_hours ? `<div class="h-stop-hours">🕘 ${nl(s.opening_hours)}</div>` : ''}${stopExtraHtml(s)}${s.notes ? `<div class="muted">${nl(s.notes)}</div>` : ''}</div>
             <div class="h-stop-tools"><button type="button" class="icon-button" data-h-stop-move="${s.id}" data-dir="-1" title="Monter">↑</button><button type="button" class="icon-button" data-h-stop-move="${s.id}" data-dir="1" title="Descendre">↓</button><select data-h-stop-day="${s.id}" title="Jour">${[...dayNums, maxDay + 1].map(d => `<option value="${d}" ${d === Number(s.day) ? 'selected' : ''}>Jour ${d}</option>`).join('')}</select>${tools(`data-h-stop-edit="${s.id}"`, `data-h-stop-delete="${s.id}"`, 'cette étape')}</div></li>`; };
-        A().$('#workspace').innerHTML = `<section class="page collection-page h-trip-page">${pageHeader(t.status === 'done' ? 'CIRCUIT FAIT' : 'CIRCUIT', t.title, `${esc([t.date_start ? dateFr(t.date_start) : '', t.date_end && t.date_end !== t.date_start ? '→ ' + dateFr(t.date_end) : ''].join(' '))}${t.start_place ? ` · départ de ${esc(t.start_place)}` : ''} · ${plural(t.stops.length, 'étape', 'étapes')} sur ${plural(dayNums.length, 'jour', 'jours')} · pour ${(t.people_rows || []).map(p => esc(A().personName(p))).join(', ') || '—'}`,
+        A().$('#workspace').innerHTML = `<section class="page collection-page h-trip-page">${pageHeader(t.status === 'done' ? 'CIRCUIT FAIT' : 'CIRCUIT', t.title, `${esc([t.date_start ? dateFr(t.date_start) : '', t.date_end && t.date_end !== t.date_start ? '→ ' + dateFr(t.date_end) : ''].join(' '))}${t.start_place ? ` · ${i18n('départ de {nm}', {nm: esc(t.start_place)})}` : ''} · ${i18n('{a} sur {b}', {a: plural(t.stops.length, 'étape', 'étapes'), b: plural(dayNums.length, 'jour', 'jours')})} · ${i18n('pour {list}', {list: (t.people_rows || []).map(p => esc(A().personName(p))).join(', ') || '—'})}`,
             `<button type="button" class="button secondary" data-h-trip-back>← Tous les circuits</button><button type="button" class="button secondary" data-h-trip-edit>Modifier</button><button type="button" class="button secondary" data-h-trip-regen>Préparer à nouveau</button><button type="button" class="button" data-h-trip-print>Carnet de route à imprimer</button><button type="button" class="button secondary" data-h-trip-done>${t.status === 'done' ? 'Remettre à faire' : 'Marquer fait'}</button><button type="button" class="button secondary danger" data-h-trip-delete>Supprimer</button>`)}
             ${t.stops.length ? miniMap(points, paths) : ''}
             ${dayNums.map((d, i) => `<section class="h-day"><header class="h-day-head"><h3><span class="h-day-dot" style="background:${dayColors[i % dayColors.length]}"></span>Jour ${d}${dayDate(d) ? ` — ${esc(dayDate(d))}` : ''}</h3>${dayRouteLinks(days[d], i === 0 ? t.start_place : '')}</header><ol class="h-stops">${days[d].map(stopHtml).join('')}</ol></section>`).join('') || A().emptyState({text: 'Aucune étape pour l’instant', icon: '📍', hint: '« Préparer à nouveau » (il faut des événements avec un lieu), ou ajoute une étape à la main.', action: {label: '＋ Étape', attrs: 'data-h-stop-edit="0"'}})}
@@ -1411,7 +1412,7 @@
         let k = 0;
         const graves = t.stops.filter(s => s.kind === 'tombe');
         const archives = t.stops.filter(s => s.kind === 'archives');
-        const html = `<main><header><h1>${esc(t.title)}</h1><p>${esc([t.date_start ? dateFr(t.date_start) : '', t.date_end && t.date_end !== t.date_start ? '→ ' + dateFr(t.date_end) : ''].join(' '))}${t.start_place ? ` · départ de ${esc(t.start_place)}` : ''}</p><p>Sur les traces de : ${(t.people_rows || []).map(p => esc(A().personName(p))).join(', ')}</p></header>
+        const html = `<main><header><h1>${esc(t.title)}</h1><p>${esc([t.date_start ? dateFr(t.date_start) : '', t.date_end && t.date_end !== t.date_start ? '→ ' + dateFr(t.date_end) : ''].join(' '))}${t.start_place ? ` · ${i18n('départ de {nm}', {nm: esc(t.start_place)})}` : ''}</p><p>${i18n('Sur les traces de : {list}', {list: (t.people_rows || []).map(p => esc(A().personName(p))).join(', ')})}</p></header>
             ${graves.length ? `<h2>Tombes à chercher</h2><ul>${graves.map(s => `<li><b>${esc(s.title)}</b> — ${nl(s.people_text)}</li>`).join('')}</ul>` : ''}
             ${archives.length ? `<h2>Archives : horaires</h2><ul>${archives.map(s => `<li><b>${esc(s.title)}</b>${s.address ? ` — ${esc(s.address)}` : ''}<br>${nl(s.opening_hours || 'Horaires à vérifier')}</li>`).join('')}</ul>` : ''}
             ${dayNums.map(d => `<section class="day"><h2>Jour ${d}${dayDate(d) ? ` — ${esc(dayDate(d))}` : ''}</h2>${days[d].map(s => { k++; return `<div class="stop"><span class="box"></span><div><h3>${k}. ${esc(s.title)}</h3><p class="place">${esc(s.place_text)}${s.address ? ' · ' + esc(s.address) : ''}</p>${s.people_text ? `<p><b>Pourquoi :</b> ${nl(s.people_text)}</p>` : ''}${printStopExtra(s.extra || {})}${s.to_photograph ? `<p><b>À photographier :</b> ${nl(s.to_photograph)}</p>` : ''}${s.opening_hours ? `<p><b>Horaires :</b> ${nl(s.opening_hours)}</p>` : ''}${s.notes ? `<p>${nl(s.notes)}</p>` : ''}<div class="lines"><span></span><span></span></div></div></div>`; }).join('')}</section>`).join('')}
@@ -1510,7 +1511,7 @@
                 onChange: () => paint()});
             ws.querySelector('[data-h-oldmap-bar]').replaceWith(bar);
             const yearOf = m => Number(String(m.year_text || '').match(/\d{3,4}/)?.[0]) || 99999;
-            const state = m => (m.transform ? `Calée · ${plural(m.control_points.length, 'point', 'points')}` : `À caler · ${m.control_points.length}/2 points au moins`);
+            const state = m => (m.transform ? `${i18n('Calée')} · ${plural(m.control_points.length, 'point', 'points')}` : `${i18n('À caler')} · ${i18n('{n}/2 points au moins', {n: m.control_points.length})}`);
             const thumb = (m, big) => (m.filename ? `<img src="media/${encodeURIComponent(m.filename)}" alt="" loading="lazy">` : `<span class="ui-card-ico">🗺️</span>`);
             const show = m => (m.transform ? `<button type="button" class="button small secondary" data-h-oldmap-show="${m.id}">Voir sur la carte</button>` : '');
             const paint = () => {
@@ -1572,7 +1573,7 @@
             if (!img || !img.isConnected) return;
             const pts = ed.control_points, t = computeTransform(pts);
             ws.querySelector('[data-h-calib-points]').innerHTML = pts.map((p, i) => `<button type="button" class="button small ${i === active && !houseMode ? '' : 'secondary'}" data-h-calib-pick="${i}">${i + 1}. ${esc(p.label || 'Point')} ${finite(p.u) ? '🖼' : '·'}${finite(p.lat) ? '🌍' : '·'}</button>`).join('');
-            ws.querySelector('[data-h-calib-quality]').textContent = t ? `Calée : écart moyen ${fmt(transformError(t, pts))} m${pts.filter(p => finite(p.u) && finite(p.lat)).length === 3 ? ' (3 points : ajoute-en un 4e pour vérifier)' : ''}` : 'Pas encore calée (2 points complets au moins ; 3 ou plus, c’est mieux).';
+            ws.querySelector('[data-h-calib-quality]').textContent = t ? `${i18n('Calée : écart moyen {n} m', {n: fmt(transformError(t, pts))})}${pts.filter(p => finite(p.u) && finite(p.lat)).length === 3 ? ` ${i18n('(3 points : ajoute-en un 4e pour vérifier)')}` : ''}` : i18n('Pas encore calée (2 points complets au moins ; 3 ou plus, c’est mieux).');
             const k = img.clientWidth / (img.naturalWidth || 1);
             ws.querySelector('.h-calib-pins').innerHTML = pts.map((p, i) => finite(p.u) ? `<span class="h-pin ${i === active ? 'is-active' : ''}" style="left:${p.u * k}px;top:${p.v * k}px">${i + 1}</span>` : '').join('') + ed.markers.map(mk => `<span class="h-pin is-house" style="left:${mk.u * k}px;top:${mk.v * k}px" title="${esc(mk.label)}">🏠</span>`).join('');
             ws.querySelector('.h-houses').innerHTML = ed.markers.map((mk, i) => `<li>🏠 ${esc(mk.label || 'Maison')}${mk.person_id ? ` — ${personLink(mk.person_id, mk.person_name || 'fiche')}` : ''} <button type="button" class="link-button" data-h-house-remove="${i}">retirer</button></li>`).join('') || '<li class="empty-line"><span class="empty-line-ico" aria-hidden="true">📭</span><span class="empty-line-text">Aucune maison placée.</span></li>';
@@ -1693,7 +1694,7 @@
             <label>Métier<input name="occupation" value="${v('occupation')}" placeholder="tisserand"></label>
             <label>Statut<select name="living"><option value="">Tous</option><option value="deceased" ${c.living === 'deceased' ? 'selected' : ''}>Décédés</option><option value="living" ${c.living === 'living' ? 'selected' : ''}>Vivants</option><option value="unknown" ${c.living === 'unknown' ? 'selected' : ''}>À vérifier</option></select></label></div>
             ${c.relation && c.relation_of ? `<input type="hidden" name="relation" value="${v('relation')}"><input type="hidden" name="relation_of" value="${v('relation_of')}">` : ''}${c.ancestors ? '<input type="hidden" name="ancestors" value="1">' : ''}
-            ${c.relation && c.relation_of || c.ancestors ? `<p class="h-understood">Venue d’une question : seulement ${c.relation ? 'les proches de la fiche #' + v('relation_of') : 'les ancêtres de la personne de départ'}. <button type="button" class="link-button" data-h-search-unscope>retirer cette limite</button></p>` : ''}
+            ${c.relation && c.relation_of || c.ancestors ? `<p class="h-understood">${c.relation ? i18n('Venue d’une question : seulement les proches de la fiche #{n}.', {n: v('relation_of')}) : i18n('Venue d’une question : seulement les ancêtres de la personne de départ.')} <button type="button" class="link-button" data-h-search-unscope>retirer cette limite</button></p>` : ''}
             <p class="muted">Exemple : nom « Dupont », événement « Naissance ou baptême », lieu « Nord », année « à 1800 » = tous les Dupont nés dans le Nord avant 1800.</p>
             <div class="page-actions"><button class="button" type="submit">Chercher</button><button class="button secondary" type="button" data-h-search-save>Enregistrer cette recherche</button></div></form>`;
     }
@@ -1716,7 +1717,7 @@
                 const r = await api('saved_search_results', {criteria: JSON.stringify(criteria), id});
                 const newOnes = r.people.filter(p => p.is_new).length;
                 box.innerHTML = `<h3>${plural(r.count, 'fiche trouvée', 'fiches trouvées')}${newOnes ? ` <span class="h-new-badge">${newOnes} nouvelle${newOnes > 1 ? 's' : ''}</span>` : ''}</h3><p class="muted">${esc(r.description)}</p>
-                    ${r.people.length ? `<table class="data-table"><thead><tr><th>Personne</th><th>Naissance</th><th>Décès</th><th></th></tr></thead><tbody>${r.people.map(p => `<tr class="${p.is_new ? 'is-new' : ''}"><td>${personLink(p.id, A().personName(p))}</td><td>${esc(p.birth_date || p.birth_year || '')}</td><td>${esc(p.death_date || p.death_year || '')}</td><td>${p.is_new ? '<span class="h-new-badge">nouvelle</span>' : ''}</td></tr>`).join('')}</tbody></table>${r.count > r.people.length ? `<p class="muted">Seules les ${r.people.length} premières sont affichées.</p>` : ''}` : empty('Aucune fiche ne répond à ces critères.')}`;
+                    ${r.people.length ? `<table class="data-table"><thead><tr><th>Personne</th><th>Naissance</th><th>Décès</th><th></th></tr></thead><tbody>${r.people.map(p => `<tr class="${p.is_new ? 'is-new' : ''}"><td>${personLink(p.id, A().personName(p))}</td><td>${esc(p.birth_date || p.birth_year || '')}</td><td>${esc(p.death_date || p.death_year || '')}</td><td>${p.is_new ? '<span class="h-new-badge">nouvelle</span>' : ''}</td></tr>`).join('')}</tbody></table>${r.count > r.people.length ? `<p class="muted">${i18n('Seules les {n} premières sont affichées.', {n: r.people.length})}</p>` : ''}` : empty('Aucune fiche ne répond à ces critères.')}`;
             } catch (error) { box.innerHTML = empty(error.message); }
         };
         form.addEventListener('submit', event => { event.preventDefault(); st.hSearch = {criteria: criteriaOf(form), id: 0, name: ''}; run(st.hSearch.criteria); });
@@ -1724,7 +1725,7 @@
         ws.querySelector('[data-h-search-save]').addEventListener('click', async () => {
             const name = (await A().askText({title: 'Enregistrer la recherche', message: 'Nom de cette recherche :', value: st.hSearch.name || '', okLabel: 'Enregistrer'}))?.trim();
             if (!name) return;
-            try { const r = await api('save_saved_search', {}, {method: 'POST', body: {id: st.hSearch.name === name ? st.hSearch.id : 0, name, criteria: criteriaOf(form)}}); st.hSearch = {criteria: criteriaOf(form), id: r.result.id, name}; toast(`Recherche enregistrée (${plural(r.result.count, 'fiche', 'fiches')}).`); ext.research(++S().workspaceToken); }
+            try { const r = await api('save_saved_search', {}, {method: 'POST', body: {id: st.hSearch.name === name ? st.hSearch.id : 0, name, criteria: criteriaOf(form)}}); st.hSearch = {criteria: criteriaOf(form), id: r.result.id, name}; toast(i18n('Recherche enregistrée ({what}).', {what: plural(r.result.count, 'fiche', 'fiches')})); ext.research(++S().workspaceToken); }
             catch (error) { toast(error.message, 'error'); }
         });
         ws.querySelectorAll('[data-h-saved-run]').forEach(b => b.addEventListener('click', async () => {
@@ -1776,15 +1777,15 @@
         const phrase = r => {
             if (!meta) return '';
             if (!r.peak_year) return `<em>${esc(r.name)}</em> : prénom très rare en France (moins de 3 naissances par an), absent du fichier.`;
-            const given = r.family_years.map(y => { const diff = y - r.peak_year; return `${y}${Math.abs(diff) <= 2 ? ' (en pleine mode)' : diff < 0 ? ` (${-diff} ans avant le pic : en avance)` : ` (${diff} ans après le pic)`}`; });
-            return `<strong>${esc(r.name)}</strong> : au sommet en France vers <strong>${r.peak_year}</strong> (${fmt(r.peak_count)} bébés). Ta famille l’a donné en ${given.join(', ')}.`;
+            const given = r.family_years.map(y => { const diff = y - r.peak_year; return `${y} ${Math.abs(diff) <= 2 ? i18n('(en pleine mode)') : diff < 0 ? i18n('({n} ans avant le pic : en avance)', {n: -diff}) : i18n('({n} ans après le pic)', {n: diff})}`; });
+            return i18n('<strong>{name}</strong> : au sommet en France vers <strong>{year}</strong> ({n} bébés). Ta famille l’a donné en {list}.', {name: esc(r.name), year: String(r.peak_year), n: fmt(r.peak_count), list: given.join(', ')});
         };
         A().$('#workspace').innerHTML = `<section class="page">${pageHeader('STATISTIQUES', 'Prénoms : la famille et la France', 'La mode des prénoms de ta famille comparée à la France entière, d’après le fichier public des prénoms de l’INSEE (naissances depuis 1900 : il n’y a pas de données avant).')}
-            <section class="maintenance-panel"><h3>Fichier des prénoms de l’INSEE</h3>${meta ? `<p>✅ ${fmt(meta.rows)} lignes importées, de ${meta.from} à ${meta.to}${meta.file ? ` (${esc(meta.file)})` : ''}.</p>` : '<p>Pas encore importé. Télécharge le « Fichier des prénoms — France » (CSV, quelques Mo) sur le site de l’INSEE, puis importe-le ici. Il reste sur ton ordinateur.</p>'}
+            <section class="maintenance-panel"><h3>Fichier des prénoms de l’INSEE</h3>${meta ? `<p>✅ ${i18n('{n} lignes importées, de {a} à {b}', {n: fmt(meta.rows), a: String(meta.from), b: String(meta.to)})}${meta.file ? ` (${esc(meta.file)})` : ''}.</p>` : '<p>Pas encore importé. Télécharge le « Fichier des prénoms — France » (CSV, quelques Mo) sur le site de l’INSEE, puis importe-le ici. Il reste sur ton ordinateur.</p>'}
                 <p><a href="https://www.insee.fr/fr/statistiques/2540004" target="_blank" rel="noopener noreferrer">Fichier des prénoms sur insee.fr ↗</a> · <a href="https://www.data.gouv.fr/fr/datasets/fichier-des-prenoms-depuis-1900/" target="_blank" rel="noopener noreferrer">sur data.gouv.fr ↗</a></p>
                 <form id="h-prenoms-import" class="page-actions"><input type="file" name="file" accept=".csv,.txt,.zip" required><button class="button small" type="submit">${meta ? 'Remplacer' : 'Importer'}</button><span class="muted" data-h-import-status></span></form>
                 <label class="h-inline">Prénoms donnés à partir de <select id="h-names-min">${[1900, 1920, 1945, 1970].map(y => `<option value="${y}" ${minYear === y ? 'selected' : ''}>${y}</option>`).join('')}</select></label></section>
-            ${rows.length ? `<div class="data-table-wrap"><table class="data-table h-names-table"><thead><tr><th>Prénom</th><th>Dans la famille</th><th>En France (${from}–${to})</th><th>Comparaison</th></tr></thead><tbody>${rows.map(r => `<tr><td><strong>${esc(r.name)}</strong> <small>${r.sex === 2 ? '♀' : r.sex === 1 ? '♂' : ''}</small></td><td>${r.people.slice(0, 6).map(p => `${personLink(p.id, p.name)} <small>${p.year}</small>`).join('<br>')}${r.people.length > 6 ? `<span data-h-names-more hidden><br>${r.people.slice(6).map(p => `${personLink(p.id, p.name)} <small>${p.year}</small>`).join('<br>')}</span><br><button type="button" class="link-button" data-h-names-toggle data-more="${r.people.length - 6}" aria-expanded="false">+ ${r.people.length - 6} personne${r.people.length - 6 > 1 ? 's' : ''}</button>` : ''}</td><td>${meta && r.peak_year ? sparkline(r.series, r.family_years, from, to, r.peak_year) : '—'}</td><td>${phrase(r)}</td></tr>`).join('')}</tbody></table></div><p class="muted">Courbe : nombre de naissances en France chaque année ; trait pointillé : l’année du pic ; points orange : les années où ta famille l’a donné.</p>` : empty(`Aucune naissance datée depuis ${minYear} dans ta base.`)}</section>`;
+            ${rows.length ? `<div class="data-table-wrap"><table class="data-table h-names-table"><thead><tr><th>Prénom</th><th>Dans la famille</th><th>${i18n('En France ({a}–{b})', {a: String(from), b: String(to)})}</th><th>Comparaison</th></tr></thead><tbody>${rows.map(r => `<tr><td><strong>${esc(r.name)}</strong> <small>${r.sex === 2 ? '♀' : r.sex === 1 ? '♂' : ''}</small></td><td>${r.people.slice(0, 6).map(p => `${personLink(p.id, p.name)} <small>${p.year}</small>`).join('<br>')}${r.people.length > 6 ? `<span data-h-names-more hidden><br>${r.people.slice(6).map(p => `${personLink(p.id, p.name)} <small>${p.year}</small>`).join('<br>')}</span><br><button type="button" class="link-button" data-h-names-toggle data-more="${r.people.length - 6}" aria-expanded="false">+ ${r.people.length - 6} personne${r.people.length - 6 > 1 ? 's' : ''}</button>` : ''}</td><td>${meta && r.peak_year ? sparkline(r.series, r.family_years, from, to, r.peak_year) : '—'}</td><td>${phrase(r)}</td></tr>`).join('')}</tbody></table></div><p class="muted">Courbe : nombre de naissances en France chaque année ; trait pointillé : l’année du pic ; points orange : les années où ta famille l’a donné.</p>` : empty(i18n('Aucune naissance datée depuis {year} dans ta base.', {year: String(minYear)}))}</section>`;
         // « ＋ 12 personnes » : déplie (ou replie) le reste de la liste
         A().$('#workspace > section').addEventListener('click', event => {
             const button = event.target.closest('[data-h-names-toggle]'); if (!button) return;
@@ -1803,7 +1804,7 @@
                 const response = await fetch('api.php?action=insee_prenoms_import', {method: 'POST', body: fd, headers: {'X-CSRF-Token': st.csrf}});
                 const r = await response.json();
                 if (!response.ok || r.error) throw new Error(r.error || 'Import impossible');
-                toast(`Prénoms importés : ${fmt(r.rows)} lignes (${r.from}–${r.to}).`);
+                toast(i18n('Prénoms importés : {n} lignes ({a}–{b}).', {n: fmt(r.rows), a: String(r.from), b: String(r.to)}));
                 ext.graphStats.firstnames_france(++st.workspaceToken);
             } catch (error) { status.textContent = ''; toast(error.message, 'error'); }
         });
@@ -1870,7 +1871,7 @@
         const sentence = !s.dirs.length ? '⚠ Aucun dossier hors de cet ordinateur n’est réglé : si le Mac est volé ou tombe en panne, tout part avec lui.'
             : s.days === null ? '⚠ Aucune copie hors de cet ordinateur pour l’instant.'
             : s.days === 0 ? '✅ Ta dernière copie hors de cet ordinateur date d’aujourd’hui.'
-            : `${s.days >= s.warn_days ? '⚠' : '✅'} Ta dernière copie hors de cet ordinateur date de ${plural(s.days, 'jour', 'jours')}.`;
+            : `${s.days >= s.warn_days ? '⚠' : '✅'} ${i18n('Ta dernière copie hors de cet ordinateur date de {what}.', {what: plural(s.days, 'jour', 'jours')})}`;
         return `<p class="h-offsite-sentence ${s.warn ? 'is-warn' : 'is-ok'}">${esc(sentence)}</p>${s.last ? `<small class="muted">${esc(s.last.file || '')} — ${esc(s.last.dir || '')}</small>` : ''}
             ${compact ? `<div class="page-actions">${s.dirs.length ? '<button type="button" class="button small" data-h-offsite-copy>Copier maintenant</button>' : ''}<button type="button" class="button small secondary" data-h-offsite-settings>Régler</button></div>` : ''}`;
     }
@@ -1878,7 +1879,7 @@
         if (button) button.disabled = true;
         try {
             const r = await api('offsite_copy_now', {}, {method: 'POST', body: {with_media: withMedia ? 1 : 0}});
-            (r.done || []).forEach(d => toast(`Copie faite : ${d.dir}${d.media_copied ? ` (+ ${d.media_copied} médias)` : ''}`));
+            (r.done || []).forEach(d => toast(d.media_copied ? i18n('Copie faite : {file} (+ {n} médias)', {file: d.dir, n: d.media_copied}) : i18n('Copie faite : {fi}', {fi: d.dir})));
             (r.errors || []).forEach(e => toast(`${e.dir} : ${e.error}`, 'error'));
             return r;
         } catch (error) { toast(error.message, 'error'); } finally { if (button) button.disabled = false; }
@@ -1896,7 +1897,7 @@
         if (!box) return;
         const render = s => {
             box.innerHTML = `${offsiteSummaryHtml(s)}
-                <ul class="h-offsite-dirs">${s.dirs.map((d, i) => `<li><code>${esc(d.path)}</code> ${d.reachable ? (d.cloud ? '<span class="collection-kind">synchronisé en ligne</span>' : d.same_disk ? '<span class="collection-kind is-warn">⚠ même disque que la base : ne protège pas d’un vol ou d’une panne</span>' : '<span class="collection-kind">branché</span>') : '<span class="collection-kind is-warn">débranché ou introuvable</span>'}${d.last_file ? ` <small>dernière copie : ${new Date(d.last_file.mtime * 1000).toLocaleDateString('fr-FR')}</small>` : ''} <button type="button" class="link-button" data-h-offsite-remove="${i}">retirer</button></li>`).join('') || '<li class="empty-line"><span class="empty-line-ico" aria-hidden="true">🗂️</span><span class="empty-line-text">Aucun dossier.</span></li>'}</ul>
+                <ul class="h-offsite-dirs">${s.dirs.map((d, i) => `<li><code>${esc(d.path)}</code> ${d.reachable ? (d.cloud ? '<span class="collection-kind">synchronisé en ligne</span>' : d.same_disk ? '<span class="collection-kind is-warn">⚠ même disque que la base : ne protège pas d’un vol ou d’une panne</span>' : '<span class="collection-kind">branché</span>') : '<span class="collection-kind is-warn">débranché ou introuvable</span>'}${d.last_file ? ` <small>${i18n('dernière copie : {dt}', {dt: window.LCNDA_I18N && window.LCNDA_I18N.lang !== 'fr' ? window.LCNDA_I18N.fmtDate(new Date(d.last_file.mtime * 1000), {}) : new Date(d.last_file.mtime * 1000).toLocaleDateString('fr-FR')})}</small>` : ''} <button type="button" class="link-button" data-h-offsite-remove="${i}">retirer</button></li>`).join('') || '<li class="empty-line"><span class="empty-line-ico" aria-hidden="true">🗂️</span><span class="empty-line-text">Aucun dossier.</span></li>'}</ul>
                 <div class="form-grid"><label class="span-2">Ajouter un dossier<input type="text" data-h-offsite-new placeholder="/Volumes/MaCle/LCNDA  ou  ~/Library/Mobile Documents/com~apple~CloudDocs/LCNDA" list="h-offsite-suggest"><datalist id="h-offsite-suggest">${(s.suggestions || []).map(x => `<option value="${esc(x.path)}">${esc(x.label)}</option>`).join('')}</datalist></label>
                 ${(s.suggestions || []).length ? `<div class="span-2 h-offsite-suggestions">${s.suggestions.map(x => `<button type="button" class="button small secondary" data-h-offsite-suggest="${esc(x.path)}">${esc(x.label)}</button>`).join('')}</div>` : ''}
                 <label>Prévenir quand la dernière copie a plus de<span class="h-inline"><input data-unit="jours" type="number" data-h-offsite-days min="1" max="365" value="${s.warn_days}" class="h-narrow"></span></label></div>
@@ -1921,7 +1922,7 @@
         let last = '';
         try { last = localStorage.getItem(key) || ''; } catch (_) {}
         if (last === day) return;
-        if (s.warn === 'old') toast(s.days === null ? '🛟 Aucune copie hors de cet ordinateur pour l’instant (Réglages → Export propre).' : `🛟 Ta dernière copie hors de cet ordinateur date de ${plural(s.days, 'jour', 'jours')}.`);
+        if (s.warn === 'old') toast(s.days === null ? '🛟 Aucune copie hors de cet ordinateur pour l’instant (Réglages → Export propre).' : `🛟 ${i18n('Ta dernière copie hors de cet ordinateur date de {what}.', {what: plural(s.days, 'jour', 'jours')})}`);
         else if (s.warn === 'none' && (!last || Date.now() - new Date(last).getTime() > 7 * 86400000)) toast('🛟 Pense à une copie hors de cet ordinateur (disque externe, clé, iCloud, Dropbox) : Réglages → Export propre.');
         else return;
         try { localStorage.setItem(key, day); } catch (_) {}

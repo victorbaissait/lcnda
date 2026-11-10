@@ -23,6 +23,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : s); // 🌐 docs/I18N.md
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const A = () => window.LCNDA_APP || {};
     const UI = () => window.LCNDA_UI || {};
@@ -887,13 +888,13 @@
         const o = G[id];
         host.innerHTML = DEFS[id].settings.map((s, i) => {
             const off = s.only && !s.only.includes(o.v);
-            const onlyNames = s.only ? s.only.map(k => `« ${V(id, k).t} »`).join(' ou ') : '';
+            const onlyNames = s.only ? s.only.map(k => `« ${i18n(V(id, k).t)} »`).join(i18n(' ou ')) : '';
             let ctl = '';
             const key = Array.isArray(s.k) ? s.k.join('-') : s.k;
             if (s.type === 'select') ctl = `<select data-lcd-k="${s.k}" aria-label="${esc(s.label)}"${off ? ' disabled' : ''}>${s.options.map(([v, t]) => `<option value="${v}"${o[s.k] === v ? ' selected' : ''}>${esc(t)}</option>`).join('')}</select>`;
             if (s.type === 'toggle') ctl = `<label class="ui-toggle"><input type="checkbox" data-lcd-k="${s.k}"${o[s.k] ? ' checked' : ''}${off ? ' disabled' : ''}><i></i><span>${esc(s.text)}</span></label>`;
             if (s.type === 'range' || s.type === 'colors') ctl = `<span class="lcd-slot" data-lcd-slot="${key}"></span>`;
-            return `<div class="lcd-set${off ? ' is-off' : ''}" data-lcd-row="${key}"><div class="lcd-set-row"><span class="lcd-lab">${esc(s.label)}</span><div class="lcd-ctl">${ctl}</div></div>${off ? `<span class="lcd-offnote">Seulement avec ${esc(onlyNames)}.</span>` : ''}<p class="lcd-why"><b>Pourquoi ?</b> ${esc(s.why)}</p></div>`;
+            return `<div class="lcd-set${off ? ' is-off' : ''}" data-lcd-row="${key}"><div class="lcd-set-row"><span class="lcd-lab">${esc(s.label)}</span><div class="lcd-ctl">${ctl}</div></div>${off ? `<span class="lcd-offnote">${i18n('Seulement avec {what}.', {what: esc(onlyNames)})}</span>` : ''}<p class="lcd-why"><b>Pourquoi ?</b> ${esc(s.why)}</p></div>`;
         }).join('');
         DEFS[id].settings.forEach(s => {
             const off = s.only && !s.only.includes(o.v);
@@ -933,7 +934,7 @@
     function fillEmbedded(id = 'a4') {
         const E = embOf(id); if (!E) { delete EMBS[id]; return; }
         const G = cur(), body = E.box.querySelector('[data-lcd-body]');
-        E.box.querySelector('[data-lcd-sum]').innerHTML = `— ${esc(V(id, G[id].v).t)}${isModified(G, id) ? ' <span class="lcd-tag is-mod">retouché</span>' : ''}`;
+        E.box.querySelector('[data-lcd-sum]').innerHTML = `— ${esc(i18n(V(id, G[id].v).t))}${isModified(G, id) ? ' <span class="lcd-tag is-mod">retouché</span>' : ''}`;
         if (!body.firstElementChild) body.innerHTML = bodyHtml(id, G);
         choicesFill(body, id, G, E.data); settingsFill(body, id, G); previewFill(body, id, G, E.data);
     }
@@ -1015,7 +1016,7 @@
             const go = e.target.closest('[data-lcd-go]');
             if (go) { const sec = box.querySelector(`[data-lcd-sec="${go.dataset.lcdGo}"]`); if (sec) { if (!sec.open) sec.open = true; sec.scrollIntoView({behavior: document.documentElement.classList.contains('a11y-calm') ? 'auto' : 'smooth', block: 'start'}); sec.querySelector('summary')?.focus({preventScroll: true}); } return; }
             const rs = e.target.closest('[data-lcd-reset]');
-            if (rs) { const id = rs.dataset.lcdReset, G = cur(); if (id === 'all') { if (PAGE_IDS.every(i => !isOn(G, i))) return; const N = defaults(G.a5); N.a5 = clone(G.a5); N.a4 = clone(G.a4); N.a6 = clone(G.a6); commit(N, 'Designs remis comme au départ', null); return; } /* A5 (cases des arbres) a sa place ailleurs : il ne bouge pas */ if (!isOn(G, id)) return; const N = clone(G); N[id] = {...defOf(id, 'avant'), ...(id === 'a5' ? {m: G.a5.m, f: G.a5.f} : {})}; commit(N, `${DEFS[id].n} ${DEFS[id].title} remis comme au départ`, id); return; }
+            if (rs) { const id = rs.dataset.lcdReset, G = cur(); if (id === 'all') { if (PAGE_IDS.every(i => !isOn(G, i))) return; const N = defaults(G.a5); N.a5 = clone(G.a5); N.a4 = clone(G.a4); N.a6 = clone(G.a6); commit(N, 'Designs remis comme au départ', null); return; } /* A5 (cases des arbres) a sa place ailleurs : il ne bouge pas */ if (!isOn(G, id)) return; const N = clone(G); N[id] = {...defOf(id, 'avant'), ...(id === 'a5' ? {m: G.a5.m, f: G.a5.f} : {})}; commit(N, i18n('{what} remis comme au départ', {what: `${DEFS[id].n} ${i18n(DEFS[id].title)}`}), id); return; }
             const ch = e.target.closest('[data-lcd-v]'); if (ch) { pickVariant(ch); return; }
             const md = e.target.closest('[data-lcd-mode] button');
             if (md) { const id = md.closest('[data-lcd-mode]').dataset.lcdMode, p = prevPrefs(); p[id] = md.dataset.m; lsSet(PREV_KEY, p); const sec = box.querySelector(`[data-lcd-sec="${id}"]`) || box; if (sec) previewFill(sec, id, cur(), ctxOf(box)?.data || {}); }
@@ -1040,9 +1041,9 @@
             if (s.type === 'colors' && !HEX.test(val)) return;
             if (N[id][k] === val) return;
             N[id][k] = val;
-            const shown = s.type === 'toggle' ? (val ? 'activé' : 'désactivé') : s.type === 'select' ? (s.options.find(o => o[0] === val) || [0, val])[1] : s.type === 'range' ? `${String(val).replace('.', ',')} ${s.unit}` : val;
+            const shown = s.type === 'toggle' ? i18n(val ? 'activé' : 'désactivé') : s.type === 'select' ? i18n((s.options.find(o => o[0] === val) || [0, val])[1]) : s.type === 'range' ? `${String(val).replace('.', ',')} ${s.unit}` : val;
             const lab = s.labels ? s.labels[s.k.indexOf(k)] : s.label;
-            commit(N, `${DEFS[id].title} : ${lab} — ${shown}`, id);
+            commit(N, `${i18n(DEFS[id].title)} : ${i18n(lab)} — ${shown}`, id);
         });
     }
     function pickVariant(c) {
@@ -1125,7 +1126,7 @@
     /** le cadre « Forme de l'en-tête » (A4) dans Réglages → Apparence → Fiches personnes et animaux : 4 cartes 👍 / 👎, Réglages en plus, aperçu réel */
     async function embedFrame(host, id, title, note) {
         if (!host) return;
-        host.innerHTML = `<div class="lcd-embed" data-lcd-sec="${id}" id="lcd-${id}-emb"><div class="lcd-embed-head"><h4><span aria-hidden="true">${DEFS[id].icon}</span> ${title} <span class="lcd-embed-sum" data-lcd-sum></span></h4><span class="lcd-saved" data-lcd-saved role="status"></span></div><p class="muted">${note}.</p><div class="lcd-body" data-lcd-body></div></div>`;
+        host.innerHTML = `<div class="lcd-embed" data-lcd-sec="${id}" id="lcd-${id}-emb"><div class="lcd-embed-head"><h4><span aria-hidden="true">${DEFS[id].icon}</span> ${i18n(title)} <span class="lcd-embed-sum" data-lcd-sum></span></h4><span class="lcd-saved" data-lcd-saved role="status"></span></div><p class="muted">${i18n(note)}.</p><div class="lcd-body" data-lcd-body></div></div>`;
         const box = host.querySelector('.lcd-embed');
         const st = A().state;
         EMBS[id] = {box, data: {stats: st?.bootstrap?.stats || {}, people: st?.people || []}};
@@ -1153,7 +1154,7 @@
      * Le petit cadre en haut d'Apparence le dit, avec le lien et les designs changés. */
     const goDesigns = () => { const st = A().state; if (st) st.maintenanceTab = 'design_sheets'; A().setModule?.('maintenance'); };
     function apparenceNoteHtml(G) {
-        const on = isOn(G, 'a1') ? `<small class="lcd-link-on">${esc(`Style des fiches : ${V('a1', G.a1.v).t}${isModified(G, 'a1') ? ' (retouché)' : ''}.`)}</small>` : '';
+        const on = isOn(G, 'a1') ? `<small class="lcd-link-on">${esc(i18n(isModified(G, 'a1') ? 'Style des fiches : {name} (retouché).' : 'Style des fiches : {name}.', {name: i18n(V('a1', G.a1.v).t)}))}</small>` : '';
         return `<div class="ui-notice ui-notice-info lcd-link" id="lcd-apparence-link"><span class="ui-notice-ic" aria-hidden="true">ℹ️</span><span>La forme des éléments est rangée là où on s’en sert : <button type="button" class="link-button" data-lcd-go-designs>🎨 le style des fiches</button> (traits, coins, ombres) dans Fiches personnes et animaux ; la colonne, la densité, les icônes et les listes dans Menus, colonne et listes ; les boutons dans Notifications et boutons ; les mouvements dans Accessibilité. La police, la taille et les couleurs se règlent ici. ${on}</span></div>`;
     }
     ext.afterDesign = ext.afterDesign || [];

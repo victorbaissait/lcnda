@@ -10,6 +10,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : s); // 🌐 docs/I18N.md
     const A = () => window.LCNDA_APP;
     const UI = () => window.LCNDA_UI || {};
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
@@ -48,28 +49,28 @@
     /* ═══════════ 🗓 Sauvegarde automatique : la page ═══════════ */
     const FREQ = [['off', 'Jamais tout seul (seulement à la main)'], ['hours', 'Toutes les … heures'], ['day', 'Chaque jour'], ['week', 'Chaque semaine']];
     const KIND = {auto: 'Automatique', fermeture: 'À la fermeture', manual: 'À la main', migration: 'Avant une mise à jour', avant: 'Avant une restauration ou une fusion', autre: 'Autre'};
-    const FREQ_TEXT = s => s.freq === 'hours' ? `toutes les ${plural(s.every_hours, 'heure', 'heures')}` : s.freq === 'day' ? 'chaque jour' : s.freq === 'week' ? 'chaque semaine' : '';
+    const FREQ_TEXT = s => s.freq === 'hours' ? i18n('toutes les {n}', {n: plural(s.every_hours, 'heure', 'heures')}) : s.freq === 'day' ? i18n('chaque jour') : s.freq === 'week' ? i18n('chaque semaine') : '';
 
     function lastLine(st) {
         const last = st.last, err = st.last_error;
         const t = st.last_ok_time;
-        let line = t ? `Dernière sauvegarde : <b>${when(t)}</b>` : 'Dernière sauvegarde : <b>jamais</b>';
+        let line = t ? i18n('Dernière sauvegarde : <b>{when}</b>', {when: when(t)}) : i18n('Dernière sauvegarde : <b>jamais</b>');
         let b = t ? badge('Vérifiée', 'green') : badge('Aucune', 'grey');
         if (st.missing) b = badge('Dossier absent', 'yellow');
         else if (err && (!t || new Date(err.time * 1000) > new Date(t))) b = badge('Échec', 'red');
         const files = last?.files || [];
-        const extra = files.length ? ` · ${files.map(f => `${esc(f.genealogy)} (${size(f.size)}${f.media_copied ? `, + ${plural(f.media_copied, 'média', 'médias')}` : ''})`).join(', ')}` : last?.skipped?.length ? ' · rien n’avait changé' : '';
+        const extra = files.length ? ` · ${files.map(f => `${esc(f.genealogy)} (${size(f.size)}${f.media_copied ? `, + ${plural(f.media_copied, 'média', 'médias')}` : ''})`).join(', ')}` : last?.skipped?.length ? ` · ${i18n('rien n’avait changé')}` : '';
         return `${line} ${b}<small class="muted">${extra}</small>`;
     }
     function statusHtml(st) {
         const s = st.settings;
         const parts = [`<p class="sa-last" data-sa-last>${lastLine(st)}</p>`];
-        if (s.freq !== 'off' && st.next) parts.push(`<p class="muted">Prochaine : ${new Date(st.next) <= new Date() ? 'dès maintenant' : when(st.next)} (${esc(FREQ_TEXT(s))}${s.on_close ? ', et à la fermeture' : ''}).</p>`);
+        if (s.freq !== 'off' && st.next) parts.push(`<p class="muted">${i18n(s.on_close ? 'Prochaine : {when} ({freq}, et à la fermeture).' : 'Prochaine : {when} ({freq}).', {when: new Date(st.next) <= new Date() ? i18n('dès maintenant') : when(st.next), freq: esc(FREQ_TEXT(s))})}</p>`);
         else if (s.on_close) parts.push('<p class="muted">Prochaine : à la fermeture de l’app (si quelque chose a changé).</p>');
         else parts.push(msg('info', 'La sauvegarde automatique est éteinte : choisis « Chaque jour » ci-dessous.'));
-        if (st.missing) parts.push(msg('warn', `${esc(st.dir_error)} Rien n’est bloqué : continue à travailler.`));
+        if (st.missing) parts.push(msg('warn', `${esc(i18n(st.dir_error))} ${i18n('Rien n’est bloqué : continue à travailler.')}`));
         else if (st.dir_error) parts.push(msg('error', esc(st.dir_error)));
-        else if (st.last_error && (!st.last_ok_time || st.last_error.time * 1000 > new Date(st.last_ok_time).getTime())) parts.push(msg('error', `Dernier essai raté : ${esc(st.last_error.error)}`));
+        else if (st.last_error && (!st.last_ok_time || st.last_error.time * 1000 > new Date(st.last_ok_time).getTime())) parts.push(msg('error', i18n('Dernier essai raté : {error}', {error: esc(i18n(st.last_error.error))})));
         if (st.same_disk) parts.push(msg('warn', 'Ce dossier est sur le même disque que ta généalogie : il ne la protège pas d’une panne ou d’un vol. Prends plutôt une clé, un disque externe ou un dossier iCloud Drive, Dropbox, OneDrive…'));
         return parts.join('');
     }
@@ -98,7 +99,7 @@
             ${hint('Au-delà, la plus ancienne copie automatique est effacée. Les copies faites avant une mise à jour ou une restauration ne sont jamais effacées.')}
             <label class="ui-toggle"><input type="checkbox" data-sa-field="media"${s.media ? ' checked' : ''}><i></i>Avec les médias (photos, actes, sons…)</label>
             ${hint('Recopiés une seule fois dans « media » à côté des copies : ensuite, seulement les nouveaux.')}
-            ${st.genealogies > 1 ? `<label class="ui-toggle"><input type="checkbox" data-sa-field="all"${s.all ? ' checked' : ''}><i></i>Toutes mes généalogies (${st.genealogies})</label>${hint('Chacune dans son sous-dossier, pour qu’elles ne s’effacent pas l’une l’autre.')}` : ''}</section>`;
+            ${st.genealogies > 1 ? `<label class="ui-toggle"><input type="checkbox" data-sa-field="all"${s.all ? ' checked' : ''}><i></i>${i18n('Toutes mes généalogies ({n})', {n: st.genealogies})}</label>${hint('Chacune dans son sous-dossier, pour qu’elles ne s’effacent pas l’une l’autre.')}` : ''}</section>`;
     }
     function readForm(root) {
         const v = k => root.querySelector(`[data-sa-field="${k}"]`);
@@ -114,7 +115,7 @@
         try {
             const st = await post('autobackup_settings', next);
             UI().pageSaved?.('saved');
-            if (prev) A().undoToast?.(`Réglage changé : « ${label} »`, {undo: async () => { await post('autobackup_settings', prev); refresh(); }, redo: async () => { await post('autobackup_settings', next); refresh(); }});
+            if (prev) A().undoToast?.(i18n('Réglage changé : « {what} »', {what: i18n(label)}), {undo: async () => { await post('autobackup_settings', prev); refresh(); }, redo: async () => { await post('autobackup_settings', next); refresh(); }});
             return st;
         } catch (e) { UI().pageSaved?.('error'); toast(e.message, 'error', {retry: () => saveSettings(next, prev, label)}); return null; }
     }
@@ -167,13 +168,13 @@
         });
     };
     async function restore(name, whenTxt) {
-        const ok = await A().confirmBox(`Remettre ta généalogie comme dans la copie choisie${whenTxt ? ` (${whenTxt})` : ''} ? Tout ce que tu as fait depuis sera remplacé. Ta base actuelle est d’abord gardée dans les sauvegardes (« avant restauration »), pour pouvoir y revenir.`,
+        const ok = await A().confirmBox(i18n(whenTxt ? 'Remettre ta généalogie comme dans la copie choisie ({when}) ? Tout ce que tu as fait depuis sera remplacé. Ta base actuelle est d’abord gardée dans les sauvegardes (« avant restauration »), pour pouvoir y revenir.' : 'Remettre ta généalogie comme dans la copie choisie ? Tout ce que tu as fait depuis sera remplacé. Ta base actuelle est d’abord gardée dans les sauvegardes (« avant restauration »), pour pouvoir y revenir.', {when: whenTxt}),
             {title: 'Revenir à cette copie', okLabel: '↺ Revenir à cette copie', danger: true});
         if (!ok) return;
         toast('Restauration en cours…');
         try {
             const r = await post('autobackup_restore', {name});
-            toast(`✓ Généalogie remise comme dans la copie (${plural(Number(r.persons) || 0, 'personne', 'personnes')}). L’ancienne est gardée : ${r.safety}.`, 'success');
+            toast(i18n('✓ Généalogie remise comme dans la copie ({n}). L’ancienne est gardée : {file}.', {n: plural(Number(r.persons) || 0, 'personne', 'personnes'), file: r.safety}), 'success');
             setTimeout(() => location.reload(), 1500);
         } catch (e) { toast(e.message, 'error'); }
     }
@@ -184,7 +185,7 @@
         try {
             const r = await post('autobackup_now');
             const f = (r.files || [])[0];
-            if (r.ok && f) toast(`✓ Sauvegarde faite et vérifiée${(r.files || []).length > 1 ? ` (${plural(r.files.length, 'généalogie', 'généalogies')})` : ''} : ${size(f.size)}.`, 'success');
+            if (r.ok && f) toast((r.files || []).length > 1 ? i18n('✓ Sauvegarde faite et vérifiée ({n}) : {size}.', {n: plural(r.files.length, 'généalogie', 'généalogies'), size: size(f.size)}) : i18n('✓ Sauvegarde faite et vérifiée : {size}.', {size: size(f.size)}), 'success');
             else toast(r.error || 'Sauvegarde impossible.', 'error', {retry: () => backupNow()});
         } catch (e) { toast(e.message, 'error', {retry: () => backupNow()}); }
         finally { if (btn) btn.disabled = false; }
@@ -271,11 +272,11 @@
     const shown = v => v === null || v === undefined || v === '' ? '<span class="muted">—</span>' : esc(typeof v === 'object' ? JSON.stringify(v) : v);
     function conflictHtml(c) {
         const other = c.machine_label || c.author || 'l’autre ordinateur';
-        const rows = !c.mine_exists ? `<tr><td colspan="3">Supprimée sur cet ordinateur, modifiée sur « ${esc(other)} ».</td></tr>`
-            : !c.theirs_exists ? `<tr><td colspan="3">Modifiée ici, supprimée sur « ${esc(other)} ».</td></tr>`
+        const rows = !c.mine_exists ? `<tr><td colspan="3">${i18n('Supprimée sur cet ordinateur, modifiée sur « {name} ».', {name: esc(other)})}</td></tr>`
+            : !c.theirs_exists ? `<tr><td colspan="3">${i18n('Modifiée ici, supprimée sur « {name} ».', {name: esc(other)})}</td></tr>`
             : c.fields.map(f => `<tr><th scope="row">${esc(FIELD[f.field] || f.field)}</th><td class="sd-mine">${shown(f.mine)}</td><td class="sd-theirs">${shown(f.theirs)}</td></tr>`).join('');
-        return `<article class="sd-conflict" data-sd-conflict="${c.id}"><header><strong>${esc(c.label || 'Fiche')}</strong> ${badge('À choisir', 'yellow')}<small class="muted"> · modifiée des deux côtés · ${when(c.created_at)}</small></header>
-            <div class="sa-table-wrap"><table class="data-table sd-side"><thead><tr><th></th><th>Sur cet ordinateur</th><th>Sur « ${esc(other)} »${c.author && c.author !== other ? ` <small>(${esc(c.author)})</small>` : ''}</th></tr></thead><tbody>${rows}</tbody></table></div>
+        return `<article class="sd-conflict" data-sd-conflict="${c.id}"><header><strong>${esc(c.label || 'Fiche')}</strong> ${badge('À choisir', 'yellow')}<small class="muted"> · ${i18n('modifiée des deux côtés')} · ${when(c.created_at)}</small></header>
+            <div class="sa-table-wrap"><table class="data-table sd-side"><thead><tr><th></th><th>Sur cet ordinateur</th><th>${i18n('Sur « {name} »', {name: esc(other)})}${c.author && c.author !== other ? ` <small>(${esc(c.author)})</small>` : ''}</th></tr></thead><tbody>${rows}</tbody></table></div>
             <div class="page-actions"><button type="button" class="button small secondary" data-sd-choice="mine">Garder la mienne</button><button type="button" class="button small secondary" data-sd-choice="theirs">Prendre l’autre</button>${c.can_both ? '<button type="button" class="button small secondary" data-sd-choice="both">Garder les deux</button>' : ''}</div></article>`;
     }
     function panelHtml(st) {
@@ -293,23 +294,23 @@
         return `<h3>🔄 Deux ordinateurs ${st.reachable ? badge('Dossier branché', 'green') : badge('Dossier absent', 'yellow')}</h3>
             <p class="sd-line"><span>📁 <code>${esc(st.folder)}</code></span><span>💻 Cet ordinateur : <b>${esc(st.machine)}</b></span>${other ? `<span>💻 L’autre : <b>${esc(other.label)}</b>${other.seen_at ? ` · vu ${when(other.seen_at)}` : ''}</span>` : '<span class="muted">L’autre ordinateur n’est pas encore passé par ce dossier.</span>'}</p>
             ${st.reachable ? '' : msg('warn', 'Dossier introuvable pour l’instant (clé débranchée ?). Rien n’est perdu : tes changements partiront la prochaine fois.')}
-            <p class="sd-line"><span>${st.pending ? `<b>${plural(st.pending, 'changement', 'changements')}</b> à envoyer` : 'Rien à envoyer'}</span><span>${st.incoming ? `<b>${plural(st.incoming, 'paquet', 'paquets')}</b> à recevoir` : 'Rien à recevoir'}</span><span>Dernière synchronisation : ${st.last_sync ? when(st.last_sync) : 'jamais'}</span></p>
+            <p class="sd-line"><span>${st.pending ? i18n('<b>{n}</b> à envoyer', {n: plural(st.pending, 'changement', 'changements')}) : i18n('Rien à envoyer')}</span><span>${st.incoming ? i18n('<b>{n}</b> à recevoir', {n: plural(st.incoming, 'paquet', 'paquets')}) : i18n('Rien à recevoir')}</span><span>${i18n('Dernière synchronisation : {when}', {when: st.last_sync ? when(st.last_sync) : i18n('jamais')})}</span></p>
             <div class="page-actions"><button type="button" class="button" data-sd-sync>🔄 Synchroniser</button><button type="button" class="button secondary" data-sd-forget>Changer de dossier</button></div>
             <label class="ui-toggle"><input type="checkbox" data-sd-auto${st.auto ? ' checked' : ''}><i></i>Synchroniser tout seul à l’ouverture (puis toutes les 15 minutes)</label>
-            ${conf.length ? `<h4 class="sd-h">⚠️ ${plural(conf.length, 'chose changée des deux côtés', 'choses changées des deux côtés')} : choisis</h4>${hint('Ces fiches attendent ton choix ; tout le reste a déjà été fusionné. « Garder la mienne » renvoie ta version à l’autre ordinateur ; « Prendre l’autre » la remplace ici.')}<div class="sd-conflicts">${conf.map(conflictHtml).join('')}</div>` : ''}
+            ${conf.length ? `<h4 class="sd-h">${i18n('⚠️ {n} : choisis', {n: plural(conf.length, 'chose changée des deux côtés', 'choses changées des deux côtés')})}</h4>${hint('Ces fiches attendent ton choix ; tout le reste a déjà été fusionné. « Garder la mienne » renvoie ta version à l’autre ordinateur ; « Prendre l’autre » la remplace ici.')}<div class="sd-conflicts">${conf.map(conflictHtml).join('')}</div>` : ''}
             ${(st.held || []).length ? `<h4 class="sd-h">Paquets mis de côté</h4><ul class="sd-held">${st.held.map(h => `<li>${esc(h.machine_label || h.author)} · ${when(h.created_at)} · ${plural(h.count, 'changement', 'changements')} <button type="button" class="button small secondary" data-sd-review="${esc(h.package_uid)}">Revoir</button></li>`).join('')}</ul>${hint('Tu as annulé leur fusion : ils ne sont plus repris tout seuls. « Revoir » pour choisir changement par changement.')}` : ''}
-            ${(st.merges || []).length ? `<details class="sd-merges"><summary>Dernières fusions</summary><ul>${st.merges.map(m => `<li>${when(m.created_at)} · ${m.applied ? esc(m.summary || plural(m.applied, 'changement', 'changements')) : 'rien de nouveau'}${m.undone_at ? ` ${badge('Annulée', 'grey')}` : m.applied ? ` <button type="button" class="button small secondary" data-sd-undo="${m.id}">↶ Annuler</button>` : ''}</li>`).join('')}</ul></details>` : ''}`;
+            ${(st.merges || []).length ? `<details class="sd-merges"><summary>Dernières fusions</summary><ul>${st.merges.map(m => `<li>${when(m.created_at)} · ${m.applied ? esc(m.summary || plural(m.applied, 'changement', 'changements')) : i18n('rien de nouveau')}${m.undone_at ? ` ${badge('Annulée', 'grey')}` : m.applied ? ` <button type="button" class="button small secondary" data-sd-undo="${m.id}">↶ Annuler</button>` : ''}</li>`).join('')}</ul></details>` : ''}`;
     }
     function syncToast(r) {
         if (!r.ok) { toast(`🔄 ${r.error}`, 'error', {retry: () => doSync()}); return; }
         const from = (r.from || []).join(', ');
         const parts = [];
-        if (r.applied) parts.push(`${plural(r.applied, 'changement reçu', 'changements reçus')}${from ? ` de « ${from} »` : ''}`);
+        if (r.applied) parts.push(from ? i18n('{n} de « {from} »', {n: plural(r.applied, 'changement reçu', 'changements reçus'), from}) : plural(r.applied, 'changement reçu', 'changements reçus'));
         if (r.sent) parts.push(`${plural(r.sent, 'changement envoyé', 'changements envoyés')}`);
-        const text = `🔄 ${parts.join(' · ') || 'Déjà à jour'}`;
+        const text = `🔄 ${parts.join(' · ') || i18n('Déjà à jour')}`;
         if (r.applied && r.merge_id) A().undoToast?.(text, {undo: async () => { await post('sd_undo', {merge_id: r.merge_id}); redrawSync(); }, redo: async () => { await post('sd_redo', {merge_id: r.merge_id}); redrawSync(); }});
         else toast(text, 'success');
-        if (r.conflicts) toast(`⚠️ ${plural(r.conflicts, 'chose changée des deux côtés', 'choses changées des deux côtés')} : à toi de choisir.`, '', {action: {label: 'Voir', run: () => goPage('sync')}});
+        if (r.conflicts) toast(i18n('⚠️ {n} : à toi de choisir.', {n: plural(r.conflicts, 'chose changée des deux côtés', 'choses changées des deux côtés')}), '', {action: {label: 'Voir', run: () => goPage('sync')}});
     }
     function redrawSync() { if (S().module === 'maintenance' && S().maintenanceTab === 'sync') ext.maintenance.sync?.(++S().workspaceToken); }
     async function doSync(btn) {
@@ -386,7 +387,7 @@
         box.className = 'sa-lock';
         box.setAttribute('data-open-lock', '');
         box.innerHTML = `<div class="sa-lock-card" role="alertdialog" aria-modal="true" aria-labelledby="sa-lock-title"><h2 id="sa-lock-title">🔒 Généalogie ouverte ailleurs</h2>
-            <p>Cette généalogie est déjà ouverte sur l’ordinateur <b>« ${esc(info.label)} »</b>${info.since ? ` (depuis ${esc(whenText(info.since))})` : ''}.</p>
+            <p>${i18n(info.since ? 'Cette généalogie est déjà ouverte sur l’ordinateur <b>« {name} »</b> (depuis {when}).' : 'Cette généalogie est déjà ouverte sur l’ordinateur <b>« {name} »</b>.', {name: esc(info.label), when: esc(whenText(info.since))})}</p>
             <p>Ferme-la là-bas d’abord, puis « ↻ Réessayer ». Deux ordinateurs qui écrivent en même temps dans le même fichier peuvent l’abîmer.</p>
             ${hint('Pour travailler sur deux ordinateurs, utilise plutôt Réglages → Travail à deux → 🔄 Deux ordinateurs : chacun garde sa base, les changements passent par un dossier partagé.')}
             <div class="modal-actions"><button type="button" class="button danger" data-lock-force>Ouvrir quand même</button><button type="button" class="button" data-lock-retry>↻ Réessayer</button></div></div>`;
@@ -394,7 +395,7 @@
         box.querySelector('[data-lock-retry]').focus();
         box.querySelector('[data-lock-retry]').addEventListener('click', () => location.reload());
         box.querySelector('[data-lock-force]').addEventListener('click', async () => {
-            const ok = A()?.confirmBox ? await A().confirmBox(`Ouvrir quand même ? Fais-le seulement si « ${info.label} » est éteint ou si l’app y est fermée (sinon le fichier peut s’abîmer).`, {title: 'Ouvrir quand même', okLabel: 'Ouvrir quand même', danger: true}) : true;
+            const ok = A()?.confirmBox ? await A().confirmBox(i18n('Ouvrir quand même ? Fais-le seulement si « {name} » est éteint ou si l’app y est fermée (sinon le fichier peut s’abîmer).', {name: info.label}), {title: 'Ouvrir quand même', okLabel: 'Ouvrir quand même', danger: true}) : true;
             if (!ok) return;
             const csrf = S()?.csrf || window.INSTALL_CSRF || '';
             await fetch('api.php?action=open_lock_take', {method: 'POST', headers: {'Content-Type': 'application/json', 'X-CSRF-Token': csrf}, body: JSON.stringify({csrf})}).catch(() => {});

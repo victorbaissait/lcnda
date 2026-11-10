@@ -10,6 +10,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : s); // 🌐 docs/I18N.md
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const A = () => window.LCNDA_APP || {};
     const KEY = 'genealogie-accessibilite';
@@ -415,7 +416,7 @@
     const fileLike = t => !t || (/\.[a-z0-9]{2,5}$/i.test(t) && !/\s/.test(t)) || /^[0-9a-f]{16,}/i.test(t);
     const GENERIC = /^(image|images|photo|photographie|aper[çc]u|vignette|miniature|portrait|m[ée]dia|document|capture|img|picture|thumbnail|thumb|fichier|illustration|logo|icon|ic[ôo]ne)$/i;
     const goodAlt = a => { const t = String(a || '').trim(); return t.length >= 4 && !fileLike(t) && !GENERIC.test(t); };
-    const joinFr = l => (l.length < 2 ? l.join('') : `${l.slice(0, -1).join(', ')} et ${l.at(-1)}`);
+    const joinFr = l => { const I = window.LCNDA_I18N; if (I && I.lang !== 'fr' && typeof Intl !== 'undefined' && Intl.ListFormat) { try { return new Intl.ListFormat(I.locale ? I.locale() : I.lang, {type: 'conjunction'}).format(l); } catch (_) {} } return l.length < 2 ? l.join('') : `${l.slice(0, -1).join(', ')} et ${l.at(-1)}`; }; // 🌐 « a, b and c » selon la langue
     const firstSentence = t => { const x = String(t || '').replace(/\s+/g, ' ').trim(); const m = x.match(/^.{20,200}?[.!?…](\s|$)/); return (m ? m[0] : x.slice(0, 200)).trim(); };
     /** Le texte lu pour un média (null tant que ses infos ne sont pas arrivées). */
     function altFor(id) {
@@ -427,7 +428,7 @@
         const when = m.date_text || String(m.year || ''), extra = [when && !title.includes(when) ? when : '', m.place && !title.includes(m.place) ? m.place : ''].filter(Boolean);
         if (extra.length) s += ` (${extra.join(', ')})`;
         const who = m.people.map(i => names.get(i)).filter(Boolean).filter(n => !title.includes(n));
-        if (who.length) s += ` — ${who.length > 4 ? `${who.slice(0, 3).join(', ')} et ${who.length - 3} autres personnes` : joinFr(who)}`;
+        if (who.length) s += ` — ${who.length > 4 ? i18n('{a} et {n} autres personnes', {a: who.slice(0, 3).join(', '), n: who.length - 3}) : joinFr(who)}`;
         if (!title && m.description) s += `. ${firstSentence(m.description)}`;
         return s;
     }
@@ -525,7 +526,7 @@
             if (!byId.has(Number(item.id))) remember({id: Number(item.id), title: item.title, filename: item.filename, thumbnail: item.thumbnail, media_type: item.media_type, date_text: item.date_text}, false);
         }
         const auto = (() => { const own = readAlts()[item.id]; if (!own) return altFor(item.id); const keep = altCache; altCache = {...keep}; delete altCache[item.id]; const a = altFor(item.id); altCache = keep; return a; })();
-        ta.placeholder = auto ? `Sinon, on lira : « ${auto} »` : 'Ce qu’on voit : « Joseph et Louise devant la ferme, en habits de fête »';
+        ta.placeholder = auto ? i18n('Sinon, on lira : « {text} »', {text: auto}) : 'Ce qu’on voit : « Joseph et Louise devant la ferme, en habits de fête »';
     }
     /* un seul observateur pour les images et les vidéos ajoutées ou changées */
     let mediaQueue = new Set(), mediaTimer = 0;
@@ -632,7 +633,7 @@
     function micButton() {
         if (mic) return mic;
         mic = document.createElement('button'); mic.type = 'button'; mic.className = 'a11y-mic'; mic.textContent = '🎤';
-        mic.setAttribute('aria-label', `Dicter dans ce champ (${DICT_KEY_LABEL})`); mic.title = `Dicter : parle, le texte s’écrit au curseur (${DICT_KEY_LABEL}, Échap pour arrêter)`;
+        mic.setAttribute('aria-label', i18n('Dicter dans ce champ ({key})', {key: DICT_KEY_LABEL})); mic.title = i18n('Dicter : parle, le texte s’écrit au curseur ({key}, Échap pour arrêter)', {key: DICT_KEY_LABEL});
         mic.addEventListener('mousedown', e => e.preventDefault()); // le champ garde le curseur
         mic.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); if (rec) dictStop(); else if (micFor) dictStart(micFor); });
         return mic;
@@ -935,7 +936,7 @@
             if (b.dataset.a11yToastx) { P.toastX = Number(b.dataset.a11yToastx); save(); apply(); page.querySelectorAll('[data-a11y-toastx]').forEach(x => { const on = x === b; x.classList.toggle('is-active', on); x.setAttribute('aria-pressed', String(on)); }); return; }
             if (b.hasAttribute('data-a11y-go-theme')) { const st = A().state; if (st) st.maintenanceTab = 'look_theme'; await A().setModule?.('maintenance');
                 const f = document.querySelector('#design-form [name="fontScale"]'); if (f) { f.scrollIntoView({block: 'center'}); f.focus({preventScroll: true}); } return; }
-            if (b.hasAttribute('data-a11y-trytoast')) { toast(`Voici un message : il reste ${P.toastX === 1 ? '6' : P.toastX === 2 ? '12' : '18'} secondes environ.`); return; }
+            if (b.hasAttribute('data-a11y-trytoast')) { toast(i18n('Voici un message : il reste {n} secondes environ.', {n: P.toastX === 1 ? 6 : P.toastX === 2 ? 12 : 18})); return; }
             if (b.hasAttribute('data-a11y-try')) { speak('Bonjour ! Voici la voix qui lira tes textes. Jean-Baptiste Martin, né le 7 mai 1784 à Figeac, dans le Lot.'); return; }
             if (b.hasAttribute('data-a11y-stop')) { stop(); return; }
             if (b.hasAttribute('data-a11y-dys')) { P.lh = 1.5; P.ls = 0.12; P.ws = 0.16; save(); apply(); refreshPage(); toast('Espacements conseillés appliqués.'); return; }

@@ -86,3 +86,57 @@ pl : *ty* ; nl : *je*). Phrases courtes et simples, comme en français.
 - Guillemets de chaque langue : en “…”, de „…“, pl „…”, nl ‘…’, es / it / pt «…» (sans espaces).
 - Touches : on écrit la touche Mac (« ⌘S ») ; elle est redessinée pour l’ordinateur (K12).
 - Les nombres et les dates passent par `fmtNumber` / `fmtDate` ; jamais « 1 234 » écrit à la main dans une traduction.
+
+## Zone « Réglages » (pages des Réglages, mode simple)
+
+| Français | English | Español | Deutsch | Italiano | Português | Polski | Nederlands |
+|---|---|---|---|---|---|---|---|
+| Contrôle de la base | Database check | Control de la base | Prüfung der Datenbank | Controllo della base | Verificação da base | Kontrola bazy | Controle van de database |
+| Ce n’est pas une erreur (exception) | This is not a mistake | No es un error | Das ist kein Fehler | Non è un errore | Não é um erro | To nie błąd | Dit is geen fout |
+| écartée (alerte) | set aside | descartada | zurückgestellt | scartata | posta de lado | odłożona | opzijgezet |
+| Sauvegarde (copie de la base) | backup | copia de seguridad | Sicherung | backup | cópia de segurança | kopia zapasowa | back-up |
+| Travail à deux / Deux ordinateurs | Working together / Two computers | Trabajo a dos / Dos ordenadores | Zu zweit arbeiten / Zwei Computer | Lavoro in due / Due computer | Trabalho a dois / Dois computadores | Praca we dwoje / Dwa komputery | Samenwerken / Twee computers |
+| dossier partagé | shared folder | carpeta compartida | gemeinsamer Ordner | cartella condivisa | pasta partilhada | folder współdzielony | gedeelde map |
+| Designs au choix | Designs to choose from | Diseños a elegir | Designs zur Auswahl | Design a scelta | Designs à escolha | Wzory do wyboru | Ontwerpen naar keuze |
+| retouché (réglage) | adjusted | retocado | angepasst | ritoccato | retocado | zmienione | aangepast |
+| Comme avant | As before | Como antes | Wie bisher | Come prima | Como antes | Jak dotąd | Zoals voorheen |
+| Forme des avatars | Avatar shape | Forma de los avatares | Form der Avatare | Forma degli avatar | Forma dos avatares | Kształt awatarów | Vorm van de avatars |
+| Densité | Density | Densidad | Dichte | Densità | Densidade | Gęstość | Dichtheid |
+| gros bouton / cadre (mode simple) | big button / tile | botón grande / recuadro | großer Knopf / Kachel | pulsante grande / riquadro | botão grande / quadro | duży przycisk / kafelek | grote knop / tegel |
+| Qui regarde ? | Who’s watching? | ¿Quién mira? | Wer schaut? | Chi guarda? | Quem está a ver? | Kto ogląda? | Wie kijkt er? |
+| Ce jour-là | On this day | Ese día | An diesem Tag | Quel giorno | Nesse dia | Tego dnia | Op deze dag |
+| appui long | long press | pulsación larga | langes Drücken | pressione lunga | toque longo | długie przytrzymanie | lang indrukken |
+| daltonisme | colour blindness | daltonismo | Farbenblindheit | daltonismo | daltonismo | daltonizm | kleurenblindheid |
+| Dictée vocale | Voice dictation | Dictado por voz | Spracheingabe | Dettatura vocale | Ditado por voz | Dyktowanie głosowe | Spraakdictee |
+| Raccourci (touche) | shortcut | atajo | Tastenkürzel | scorciatoia | atalho | skrót | sneltoets |
+| ta mère / ton grand-père (mode simple) | your mother / your grandfather | tu madre / tu abuelo | deine Mutter / dein Großvater | tua madre / tuo nonno | a tua mãe / o teu avô | twoja mama / twój dziadek | je moeder / je grootvader |
+
+Clés réservées aux autres langues (jamais affichées en français, suffixe entre parenthèses pour que le filet de la page
+ne les prenne pas pour des modèles) : « le {date} (jour) », « en {date} (mois) », « en {date} (année) », « vers {y} (date) »,
+« à {place} (lieu) », « ton {x} (lien) », « ta {x} (lien) », « le {x} (lien) », « la {x} (lien) », « {x} de {who} (lien) ».
+Les listes « a, b et c » passent par `Intl.ListFormat`, sans clé.
+
+## Zone « Listes » (Listes, Recherche, Enquêtes, Atelier, Où chercher, Archives en ligne)
+
+| Français | English | Español | Deutsch | Italiano | Português | Polski | Nederlands |
+|---|---|---|---|---|---|---|---|
+| dépouillement (suivi d’un registre) | record index | vaciado | Auszug | spoglio | levantamento | wypis | indexering |
+| cote consultée | shelfmark consulted | signatura consultada | eingesehene Signatur | segnatura consultata | cota consultada | przejrzana sygnatura | geraadpleegde signatuur |
+| feuille de mission (visite d’archives) | mission sheet | hoja de misión | Einsatzblatt | foglio di missione | folha de missão | karta wyjazdu | bezoekblad |
+| service d’archives | archive service | servicio de archivos | Archivdienst | servizio d’archivio | serviço de arquivo | archiwum | archiefdienst |
+| Journal des recherches | Research log | Diario de investigación | Forschungstagebuch | Diario delle ricerche | Diário de pesquisa | Dziennik poszukiwań | Onderzoekslogboek |
+| piste (d’enquête) | lead | pista | Spur | pista | pista | trop | spoor |
+| table décennale | ten-year index | índice decenal | Zehnjahrestabelle | indice decennale | índice decenal | indeks dziesięcioletni | tienjarentafel |
+| Que manque-t-il ? | What’s missing? | ¿Qué falta? | Was fehlt? | Cosa manca? | O que falta? | Czego brakuje? | Wat ontbreekt er? |
+| Où chercher ? | Where to look? | ¿Dónde buscar? | Wo suchen? | Dove cercare? | Onde procurar? | Gdzie szukać? | Waar zoeken? |
+| Je bloque ici (mur de brique) | I’m stuck here | Me atasco aquí | Hier stecke ich fest | Sono bloccato qui | Estou bloqueado aqui | Utknąłem tutaj | Hier zit ik vast |
+| Atelier (de recherche) | Workshop | Taller | Werkstatt | Laboratorio | Oficina | Warsztat | Atelier |
+| sorte d’élément (Atelier) | item type | tipo de elemento | Elementart | tipo di elemento | tipo de elemento | rodzaj elementu | soort item |
+| plan de départ | starting outline | esquema inicial | Ausgangsgliederung | schema iniziale | plano inicial | plan wyjściowy | beginopzet |
+| Archives en ligne | Online archives | Archivos en línea | Online-Archive | Archivi online | Arquivos online | Archiwa w sieci | Online archieven |
+| Gratuites seulement | Free only | Solo gratuitos | Nur kostenlose | Solo gratuiti | Só gratuitos | Tylko bezpłatne | Alleen gratis |
+| Ma semaine de recherche | My research week | Mi semana de investigación | Meine Forschungswoche | La mia settimana di ricerca | A minha semana de pesquisa | Mój tydzień poszukiwań | Mijn onderzoeksweek |
+| Reporter (à demain…) | Postpone | Aplazar | Verschieben | Rimanda | Adiar | Odłóż | Uitstellen |
+
+Années et numéros (« Personne #12 », « né en 1890 ») : passer la valeur en texte (`String(…)`) dans `i18n()`, sinon elle est écrite
+comme un nombre (« 1,890 »).

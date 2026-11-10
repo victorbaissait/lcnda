@@ -21,7 +21,8 @@
     };
     const ORDER = Object.keys(SORTS);
     const URG = {late: ['🔴', 'En retard', 'red'], today: ['📌', 'Aujourd’hui', 'blue'], week: ['🗓', 'Cette semaine', 'yellow'], later: ['⏳', 'Quand tu as le temps', 'grey'], done: ['✓', 'Fait cette semaine', 'green']};
-    const plural = (n, w) => A().plural ? A().plural(n, w) : `${n} ${w}${n > 1 ? 's' : ''}`;
+    const plural = (n, w, many = '') => A().plural ? A().plural(n, w, many) : `${n} ${n > 1 ? (many || w + 's') : w}`;
+    const i18n = (text, vars) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(text, vars) : String(text ?? '')); // 🌐 app-i18n.js
 
     /** les réglages d'un widget, complétés */
     function cfgOf(w) {
@@ -56,7 +57,7 @@
             <div class="msr-main"><div class="msr-title">${esc(it.title)}</div><div class="msr-sub">${badges}${esc(it.detail || '')}${when ? ` · ${when}` : ''}</div></div>
             <div class="msr-acts">${sf ? `<a class="button small secondary msr-ext" href="${esc(sf)}" target="_blank" rel="noopener noreferrer">🔍 SocFace ↗</a>` : url ? `<a class="icon-button small msr-ext" href="${esc(url)}" target="_blank" rel="noopener noreferrer" title="Ouvrir le lien" aria-label="Ouvrir le lien">🔗</a>` : ''}${it.open ? `<button type="button" class="icon-button small" data-msr-open title="Ouvrir" aria-label="Ouvrir">↗</button>` : ''}${done ? '' : `<button type="button" class="icon-button small msr-done" data-msr-done title="✓ ${esc(it.done_label || 'Fait')}" aria-label="${esc(it.done_label || 'Fait')}">✓</button><button type="button" class="icon-button small" data-msr-snooze title="Reporter à demain ou à la semaine prochaine" aria-label="Reporter">⏭</button>`}</div></li>`;
     }
-    const moreLabel = n => n === 1 ? 'Voir le suivant ↓' : `Voir les ${n} suivants ↓`; // C6
+    const moreLabel = n => n === 1 ? i18n('Voir le suivant ↓') : i18n('Voir les {n} suivants ↓', {n}); // C6
     function sectionHtml(id, icon, label, rows, cfg, big) {
         if (!rows.length) return '';
         const lim = big ? Infinity : cfg.limit;
@@ -66,7 +67,7 @@
     }
     function countersHtml(items, done) {
         const c = {late: 0, today: 0, week: 0, later: 0}; items.forEach(i => { c[i.urgency] = (c[i.urgency] || 0) + 1; });
-        const pills = [['late', `${plural(c.late, 'chose')} en retard`], ['today', `${c.today} aujourd’hui`], ['week', `${c.week} cette semaine`], ['later', `${c.later} quand tu as le temps`]]
+        const pills = [['late', i18n('{n} en retard', {n: plural(c.late, 'chose')})], ['today', i18n('{n} aujourd’hui', {n: c.today})], ['week', i18n('{n} cette semaine', {n: c.week})], ['later', i18n('{n} quand tu as le temps', {n: c.later})]]
             .filter(([k]) => c[k]).map(([k, t]) => UI().badge?.(`${URG[k][0]} ${t}`, URG[k][2], {cls: 'msr-count'}) || '');
         if (done.length) pills.push(UI().badge?.(`✓ ${plural(done.length, 'chose')} faite${done.length > 1 ? 's' : ''}`, 'green', {cls: 'msr-count'}) || '');
         return pills.length ? `<div class="msr-counts">${pills.join('')}</div>` : '';
@@ -104,7 +105,7 @@
             secs += sectionHtml('done', '✓', URG.done[1], done, cfg, big);
         }
         const nothing = !items.length;
-        return `<div class="sw${big ? ' is-big' : ''}">${countersHtml(items, done)}${nothing ? doneOrEmpty(done, true) : ''}${secs}${data.counts?.snoozed ? `<p class="msr-snoozed">⏭ ${plural(data.counts.snoozed, 'chose reportée', 'choses reportées')} : elles reviendront le jour dit.</p>` : ''}</div>`;
+        return `<div class="sw${big ? ' is-big' : ''}">${countersHtml(items, done)}${nothing ? doneOrEmpty(done, true) : ''}${secs}${data.counts?.snoozed ? `<p class="msr-snoozed">${i18n('⏭ {n} : elles reviendront le jour dit.', {n: plural(data.counts.snoozed, 'chose reportée', 'choses reportées')})}</p>` : ''}</div>`;
     }
 
     ext.dashboard[TYPE] = {
@@ -236,7 +237,7 @@
         await refresh();
         let prev = r.prev;
         A().undoToast(`✓ ${r.label || it.done_label || 'Fait'} : « ${it.title} »`, {
-            undoneText: `« ${it.title} » remis à faire`,
+            undoneText: i18n('« {title} » remis à faire', {title: it.title}),
             undo: async () => { await post({op: 'restore', key: it.key, prev}); await refresh(); },
             redo: async () => { const r2 = await post({op: 'done', key: it.key, title: it.title, open: it.open || null}); prev = r2.prev; await refresh(); },
         });
@@ -247,8 +248,8 @@
         await refresh();
         let prev = r.prev;
         const when = until === 'tomorrow' ? 'à demain' : 'à la semaine prochaine';
-        A().undoToast(`⏭ Reporté ${when} : « ${it.title} »`, {
-            undoneText: `« ${it.title} » n’est plus reporté`,
+        A().undoToast(i18n(until === 'tomorrow' ? '⏭ Reporté à demain : « {title} »' : '⏭ Reporté à la semaine prochaine : « {title} »', {title: it.title}), {
+            undoneText: i18n('« {title} » n’est plus reporté', {title: it.title}),
             undo: async () => { await post({op: 'restore', key: it.key, prev}); await refresh(); },
             redo: async () => { const r2 = await post({op: 'snooze', key: it.key, until, title: it.title}); prev = r2.prev; await refresh(); },
         });

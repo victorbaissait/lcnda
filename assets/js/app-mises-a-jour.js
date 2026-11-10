@@ -12,6 +12,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : s); // 🌐 docs/I18N.md
     const A = () => window.LCNDA_APP;
     const UI = () => window.LCNDA_UI;
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
@@ -33,7 +34,7 @@
     async function download(info = last) {
         const u = U(); if (!u || !info?.asset) return;
         let doneFile = null;
-        const d = ext.openDialog({eyebrow: 'MISE À JOUR', title: `Télécharger LCNDA ${info.latest}`, body: `<div class="mj-dl">
+        const d = ext.openDialog({eyebrow: 'MISE À JOUR', title: i18n('Télécharger LCNDA {v}', {v: info.latest}), body: `<div class="mj-dl">
                 <p><b>${esc(info.asset.name)}</b>${info.asset.size ? ` · ${mb(info.asset.size)}` : ''}</p>
                 <progress class="mj-progress" max="100" value="0" data-mj-bar></progress>
                 <p class="ui-hint" data-mj-state>Téléchargement dans ton dossier « Téléchargements »…</p>
@@ -42,7 +43,7 @@
                 dlg.querySelector('.modal-actions').innerHTML = '<span class="spacer"></span><button type="button" class="button secondary" data-mj-stop>Annuler</button><button type="button" class="button secondary" data-mj-show hidden>📁 Afficher dans le dossier</button><button type="button" class="button" data-mj-open hidden>↗ Ouvrir</button>';
             }});
         const bar = d.querySelector('[data-mj-bar]'), state = d.querySelector('[data-mj-state]');
-        onProg = ({received, total}) => { if (!d.isConnected) return; if (total) bar.value = Math.min(100, received / total * 100); else bar.removeAttribute('value'); state.textContent = `${mb(received)}${total ? ` sur ${mb(total)}` : ''}…`; };
+        onProg = ({received, total}) => { if (!d.isConnected) return; if (total) bar.value = Math.min(100, received / total * 100); else bar.removeAttribute('value'); state.textContent = total ? i18n('{a} sur {b}…', {a: mb(received), b: mb(total)}) : `${mb(received)}…`; };
         if (!progressBound) { progressBound = true; u.onProgress?.(p => onProg?.(p)); }
         d.querySelector('[data-mj-stop]').addEventListener('click', () => { if (!doneFile) u.cancel?.(); d.close(); });
         d.querySelector('[data-mj-show]').addEventListener('click', async () => { const r = await u.show(); if (!r?.ok) A().toast(r?.error || 'Impossible d’ouvrir le dossier.', 'error'); });
@@ -67,7 +68,7 @@
     async function skip(info) {
         const u = U(); if (!u) return;
         await u.setPrefs({skip: info.latest});
-        A().undoToast(`Plus de message pour la version ${info.latest}`, {icon: '', undo: async () => { await u.setPrefs({skip: ''}); redrawIfOpen(); }, redo: async () => { await u.setPrefs({skip: info.latest}); redrawIfOpen(); }});
+        A().undoToast(i18n('Plus de message pour la version {v}', {v: info.latest}), {icon: '', undo: async () => { await u.setPrefs({skip: ''}); redrawIfOpen(); }, redo: async () => { await u.setPrefs({skip: info.latest}); redrawIfOpen(); }});
         redrawIfOpen();
     }
 
@@ -75,7 +76,7 @@
     function notify(info) {
         const u = U();
         u.setPrefs({later: true}); // montré : pas de deuxième message avant demain
-        const item = A().toast(`🔄 Une nouvelle version ${info.latest} est disponible.`, '', {actions: [
+        const item = A().toast(i18n('🔄 Une nouvelle version {v} est disponible.', {v: info.latest}), '', {actions: [
             ...(info.asset ? [{label: '⤓ Télécharger', run: () => download(info)}] : []),
             {label: 'Voir les nouveautés', run: seeNotes},
             {label: 'Plus tard', run: () => u.setPrefs({later: true})},
@@ -101,16 +102,16 @@
     const redrawIfOpen = () => { const st = A()?.state; if (st?.module === 'maintenance' && st.maintenanceTab === 'mises_a_jour') ext.maintenance.mises_a_jour(); };
     function statusHtml(info, desk) {
         if (busy) return UI().spinner('Recherche de la dernière version…', {inline: true});
-        if (!info) return `<p class="ui-hint">${desk.prefs?.lastCheck ? '' : 'Pas encore regardé sur cet ordinateur. '}« 🔍 Rechercher une mise à jour » regarde tout de suite.</p>`;
+        if (!info) return `<p class="ui-hint">${i18n(desk.prefs?.lastCheck ? '« 🔍 Rechercher une mise à jour » regarde tout de suite.' : 'Pas encore regardé sur cet ordinateur. « 🔍 Rechercher une mise à jour » regarde tout de suite.')}</p>`;
         if (!info.ok) return UI().notice('warn', info.error || 'La recherche n’a pas abouti.');
-        const when = desk.prefs?.lastCheck ? ` · regardé ${UI().when ? UI().when(new Date(desk.prefs.lastCheck).toISOString()) : ''}` : '';
-        if (!info.newer) return `<p class="mj-line">${UI().badge('À jour', 'green')} <span>Tu as la dernière version publiée (${esc(info.latest)})${when}.</span></p>`;
+        const when = desk.prefs?.lastCheck ? ` · ${i18n('regardé {when}', {when: UI().when ? UI().when(new Date(desk.prefs.lastCheck).toISOString()) : ''})}` : '';
+        if (!info.newer) return `<p class="mj-line">${UI().badge('À jour', 'green')} <span>${i18n('Tu as la dernière version publiée ({v}){when}.', {v: esc(info.latest), when})}</span></p>`;
         const skipped = desk.prefs?.skip && desk.prefs.skip === info.latest;
-        return `<div class="mj-new">${UI().notice('info', `Une nouvelle version ${info.latest} est disponible (tu as la ${info.current}).`)}
+        return `<div class="mj-new">${UI().notice('info', i18n('Une nouvelle version {v} est disponible (tu as la {cur}).', {v: info.latest, cur: info.current}))}
             <div class="mj-acts">${info.asset ? `<button type="button" class="button" data-mj-download>⤓ Télécharger <small>${esc(info.asset.name)}${info.asset.size ? ` · ${mb(info.asset.size)}` : ''}</small></button>` : `<span class="ui-hint">Pas d’installateur pour cet ordinateur dans cette version : regarde la page des nouveautés.</span>`}
             <button type="button" class="button secondary" data-mj-notes>↗ Voir les nouveautés</button>
             ${skipped ? '<button type="button" class="button secondary" data-mj-unskip>↺ Me prévenir de nouveau pour cette version</button>' : '<button type="button" class="button secondary" data-mj-skip>Ne plus me prévenir pour cette version</button>'}</div>
-            ${skipped ? `<p class="ui-hint">Tu as choisi de ne plus être prévenu pour la ${esc(info.latest)}${when}.</p>` : `<p class="ui-hint">Le fichier va dans ton dossier « Téléchargements », son empreinte est vérifiée, puis tu l’ouvres pour installer. Ta généalogie ne bouge pas.</p>`}</div>`;
+            ${skipped ? `<p class="ui-hint">${i18n('Tu as choisi de ne plus être prévenu pour la {v}{when}.', {v: esc(info.latest), when})}</p>` : `<p class="ui-hint">Le fichier va dans ton dossier « Téléchargements », son empreinte est vérifiée, puis tu l’ouvres pour installer. Ta généalogie ne bouge pas.</p>`}</div>`;
     }
     ext.maintenance = ext.maintenance || {};
     ext.maintenance.mises_a_jour = async token => {

@@ -19,6 +19,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : s); // 🌐 docs/I18N.md
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const A = () => window.LCNDA_APP || {};
     const UI = () => window.LCNDA_UI || {};
@@ -173,14 +174,14 @@
     const CHECKS = [['ink', 'bg', 'Le texte sur le fond'], ['onBtn', 'btn', 'Le texte des boutons principaux'], ['ink', 'tree', 'Le texte sur « L’arbre »'], ['ink', 'photo', 'Le texte sur « Les photos »'], ['ink', 'people', 'Le texte sur « Les personnes »'], ['ink', 'day', 'Le texte sur « Ce jour-là »']];
     /** + les cadres ajoutés qui ont leur propre couleur (le texte des cadres est celui de la page) */
     const contrastRows = (pal, st = null) => [...CHECKS.map(([a, b, label]) => ({a, b, label, r: ratio(pal[a], pal[b])})),
-        ...(st && !eff(st).contrast ? st.tiles.filter(t => isCustom(t[0]) && st.tx[t[0]]?.color).map(([k]) => ({a: 'ink', b: k, bg: st.tx[k].color, label: `Le texte sur « ${tileName(st, k)} »`, r: ratio(pal.ink, st.tx[k].color)})) : [])];
+        ...(st && !eff(st).contrast ? st.tiles.filter(t => isCustom(t[0]) && st.tx[t[0]]?.color).map(([k]) => ({a: 'ink', b: k, bg: st.tx[k].color, label: i18n('Le texte sur « {name} »', {name: tileName(st, k)}), r: ratio(pal.ink, st.tx[k].color)})) : [])];
     /** le nom d'un cadre (réglages, aperçu) : le sien, sinon celui de départ */
     function tileName(st, k) {
         const x = st.tx?.[k] || {}; if (x.label) return x.label;
         if (!isCustom(k)) return TILE[k][1];
         const p = x.pid && D ? D.P.get(Number(x.pid)) : null;
         if (x.kind === 'person' && p) return `${p.first || ''} ${titleCase(p.last || '')}`.trim();
-        if (x.kind === 'album' && p) return `Les photos de ${p.first || titleCase(p.last || '')}`;
+        if (x.kind === 'album' && p) return i18n('Les photos de {name}', {name: p.first || titleCase(p.last || '')});
         if (x.kind === 'place' && x.place) return x.place;
         return CUSTOM_KINDS[x.kind]?.[1] || 'Un cadre';
     }
@@ -278,14 +279,17 @@
         return c; // générations décalées : « ta cousine », plus simple à entendre que « à la mode de Bretagne »
     }
     const startsVowel = n => /^[aeiouyéèêâîôûœh]/i.test(n);
-    const pos = (n, f) => (startsVowel(n) || !f ? 'ton ' : 'ta ') + n;
-    const art = (n, f) => (startsVowel(n) ? 'l’' : f ? 'la ' : 'le ') + n;
+    /* 🌐 dans une autre langue que le français : les mêmes liens, mot à mot traduits (clés « lien|… » de reglages2.tsv) */
+    const LNG = () => (window.LCNDA_I18N && window.LCNDA_I18N.lang) || 'fr';
+    const kinT = raw => { const m = String(raw).match(/^((?:arrière-)*)(.*)$/), n = m[1].length / 8; const deep = 'arrière-'.repeat(2) + m[2]; return n <= 2 ? i18n(raw, {ctx: 'lien'}) : `${i18n(deep, {ctx: 'lien'})} (+${n - 2})`; };
+    const pos = (n, f) => (LNG() !== 'fr' ? i18n(f ? 'ta {x} (lien)' : 'ton {x} (lien)', {x: kinT(n)}) : (startsVowel(n) || !f ? 'ton ' : 'ta ') + n);
+    const art = (n, f) => (LNG() !== 'fr' ? i18n(f ? 'la {x} (lien)' : 'le {x} (lien)', {x: kinT(n)}) : (startsVowel(n) ? 'l’' : f ? 'la ' : 'le ') + n);
     const blood = (v, t) => { const s = bloodSteps(v, t); return s ? kinNoun(s[0], s[1], P(t).g) : null; };
     /** le lien en clair, pour la personne qui regarde : « ta grand-mère », « ton beau-père », « le mari de ta petite-fille Émilie » */
     function relFor(v, t) {
         if (!v || !P(v) || !P(t)) return '';
         if (t === v) return 'toi';
-        const k = v + ':' + t; if (D.rel.has(k)) return D.rel.get(k);
+        const L = LNG() !== 'fr', k = (L ? LNG() + ':' : '') + v + ':' + t; if (D.rel.has(k)) return D.rel.get(k);
         const f = P(t).g === 'f', out = (() => {
             if (spousesOf(v).includes(t)) return pos(f ? 'femme' : P(t).g === 'm' ? 'mari' : 'conjoint', f);
             const b = blood(v, t); if (b) return pos(b, f);
@@ -294,6 +298,7 @@
                 if (/^(père|mère|parent)$/.test(bs)) return pos(f ? 'belle-mère' : 'beau-père', f);
                 if (/^(fils|fille|enfant)$/.test(bs)) return pos(f ? 'belle-fille' : 'gendre', f);
                 if (/^(frère|sœur)$/.test(bs)) return pos(f ? 'belle-sœur' : 'beau-frère', f);
+                if (L) return i18n(f ? 'la femme de {who} {name} (lien)' : P(t).g === 'm' ? 'le mari de {who} {name} (lien)' : 'le conjoint de {who} {name} (lien)', {who: pos(bs, P(s).g === 'f'), name: P(s).first});
                 return `${f ? 'la femme de ' : P(t).g === 'm' ? 'le mari de ' : 'le conjoint de '}${pos(bs, P(s).g === 'f')} ${P(s).first}`;
             }
             for (const sp of spousesOf(v)) {
@@ -301,6 +306,7 @@
                 if (/^(père|mère|parent)$/.test(bs)) return pos(f ? 'belle-mère' : 'beau-père', f);
                 if (/^(frère|sœur)$/.test(bs)) return pos(f ? 'belle-sœur' : 'beau-frère', f);
                 if (/^(fils|fille|enfant)$/.test(bs)) return pos(f ? 'belle-fille' : 'beau-fils', f);
+                if (L) return i18n('{x} de {who} (lien)', {x: art(bs, f), who: pos(P(sp).g === 'f' ? 'femme' : 'mari', P(sp).g === 'f')});
                 return `${art(bs, f)} de ${pos(P(sp).g === 'f' ? 'femme' : 'mari', P(sp).g === 'f')}`;
             }
             return '';
@@ -310,11 +316,17 @@
 
     /* ═════════════════════════ Dates et phrases ═════════════════════════ */
     const day1 = d => (d === 1 ? '1er' : String(d));
-    function fmtD(x) { if (!x) return ''; if (!x.m) return String(x.y); if (!x.d) return `${MOIS[x.m - 1]} ${x.y}`; return `${day1(x.d)} ${MOIS[x.m - 1]} ${x.y}`; }
-    function leD(x) { if (!x) return ''; if (x.about) return `vers ${x.y}`; return x.d ? `le ${fmtD(x)}` : `en ${fmtD(x)}`; }
+    const fmtL = (d, o) => window.LCNDA_I18N.fmtDate(d, o); // 🌐 une date écrite dans la langue choisie
+    function fmtD(x) { if (!x) return ''; if (!x.m) return String(x.y);
+        if (LNG() !== 'fr' && window.LCNDA_I18N?.fmtDate) { const d = new Date(x.y, x.m - 1, x.d || 1); d.setFullYear(x.y); return fmtL(d, x.d ? {day: 'numeric', month: 'long', year: 'numeric'} : {month: 'long', year: 'numeric'}); } if (!x.d) return `${MOIS[x.m - 1]} ${x.y}`; return `${day1(x.d)} ${MOIS[x.m - 1]} ${x.y}`; }
+    function leD(x) { if (!x) return '';
+        if (LNG() !== 'fr') return x.about ? i18n('vers {y} (date)', {y: String(x.y)}) : x.d ? i18n('le {date} (jour)', {date: fmtD(x)}) : x.m ? i18n('en {date} (mois)', {date: fmtD(x)}) : i18n('en {date} (année)', {date: String(x.y)});
+        if (x.about) return `vers ${x.y}`; return x.d ? `le ${fmtD(x)}` : `en ${fmtD(x)}`; }
     function ageAt(b, at) { if (!b || !at) return null; let a = at.y - b.y; if (at.m && b.m && (at.m < b.m || (at.m === b.m && at.d && b.d && at.d < b.d))) a--; return a; }
     const todayD = {y: TY, m: TM, d: TD};
-    const joinFr = a => (a.length < 2 ? a.join('') : a.slice(0, -1).join(', ') + ' et ' + a[a.length - 1]);
+    // 🌐 dans une autre langue : « a, b and c » selon la langue (Intl.ListFormat), sans texte à traduire
+    const listJoin = a => { const I = window.LCNDA_I18N; if (I && I.lang !== 'fr' && typeof Intl !== 'undefined' && Intl.ListFormat) { try { return new Intl.ListFormat(I.locale ? I.locale() : I.lang, {type: 'conjunction'}).format(a); } catch (_) {} } return a.length < 2 ? a.join('') : a.slice(0, -1).join(', ') + ' et ' + a[a.length - 1]; };
+    const joinFr = listJoin;
     const titleCase = s => String(s || '').toLowerCase().replace(/(^|[\s'’-])(\p{L})/gu, (m, a, b) => a + b.toUpperCase());
 
     /* ═════════════════════════ Voix ═════════════════════════ */
@@ -387,11 +399,12 @@
         const nameH = p => (firstOnly(p) || !p.last ? esc(p.first || 'Sans prénom') : `${esc(p.first || '')} <span class="ms-ln">${esc(lastShown(p))}</span>`);
         const nameT = p => (firstOnly(p) || !p.last ? (p.first || 'Sans prénom') : `${p.first} ${titleCase(p.last)}`); // à lire : sans capitales (la voix les épellerait)
         const by = p => (p.birth?.date || p.bapt?.date)?.y, dy = p => p.death?.date?.y;
-        function years(p) { if (firstOnly(p)) return ''; const b = by(p), d = dy(p); if (p.living) return b ? `${p.g === 'f' ? 'née' : 'né'} en ${b}` : ''; if (b && d) return `${b} – ${d}`; if (b) return `${p.g === 'f' ? 'née' : 'né'} en ${b}`; if (d) return `${p.g === 'f' ? 'morte' : 'mort'} en ${d}`; return ''; }
-        function yearsSpoken(p) { if (firstOnly(p)) return ''; const b = by(p), d = dy(p); if (p.living) return b ? `${p.g === 'f' ? 'née' : 'né'} en ${b}` : ''; if (b && d) return `de ${b} à ${d}`; return years(p); }
+        const bornIn = (p, b) => i18n(p.g === 'f' ? 'née en {y}' : 'né en {y}', {y: String(b)});
+        function years(p) { if (firstOnly(p)) return ''; const b = by(p), d = dy(p); if (p.living) return b ? bornIn(p, b) : ''; if (b && d) return `${b} – ${d}`; if (b) return bornIn(p, b); if (d) return i18n(p.g === 'f' ? 'morte en {y}' : 'mort en {y}', {y: String(d)}); return ''; }
+        function yearsSpoken(p) { if (firstOnly(p)) return ''; const b = by(p), d = dy(p); if (p.living) return b ? bornIn(p, b) : ''; if (b && d) return i18n('de {a} à {b}', {a: String(b), b: String(d)}); return years(p); }
         const rel = t => relFor(viewerId(), t);
         const nb = t => esc(t).replace(/-/g, '‑');
-        const relLabel = id => { const r = rel(id); return r ? `<span class="ms-rel">${r === 'toi' ? 'C’est toi' : nb(r)}</span>` : ''; };
+        const relLabel = id => { const r = rel(id); return r ? `<span class="ms-rel">${r === 'toi' ? i18n('C’est toi') : nb(r)}</span>` : ''; };
         /* ── portraits : la photo de la fiche, sinon le portrait K7 (UI.avatar) en grand ── */
         function ph(id, px = 80, cls = '') {
             const p = P(id); if (!p) return '';
@@ -432,7 +445,7 @@
         /* ── barre du haut : « ← Retour » à gauche, « 🏠 Accueil » à droite ; sur l'accueil : la date et « 🔊 Écouter » ── */
         function bar() {
             if (V.screen === 'home') {
-                const d = `${JOURS[TODAY.getDay()]} ${day1(TD)} ${MOIS[TM - 1]}`;
+                const d = LNG() !== 'fr' && window.LCNDA_I18N?.fmtDate ? fmtL(TODAY, {weekday: 'long', day: 'numeric', month: 'long'}) : `${JOURS[TODAY.getDay()]} ${day1(TD)} ${MOIS[TM - 1]}`;
                 BAR.innerHTML = `<span class="ms-date">📅 ${esc(d.charAt(0).toUpperCase() + d.slice(1))}</span><span></span>${speakBtn(homeSpeech(), 'Écouter') || '<span></span>'}`; return;
             }
             if (V.screen === 'loading' || V.screen === 'error') { BAR.innerHTML = `<span></span><h1 class="ms-title" tabindex="-1">${esc(TITLES[V.screen][1])}</h1><span></span>`; return; }
@@ -491,7 +504,7 @@
             const K = CUSTOM_KINDS[x.kind]; if (!K) return null;
             const p = x.pid && D ? P(x.pid) : null, okP = p && vis(p.id);
             const ph2 = okP ? visPhotos().filter(m => !m.doc && m.people.includes(p.id)) : [];
-            const label = x.label || (x.kind === 'person' && okP ? nameT(p) : x.kind === 'album' && okP ? `Les photos de ${p.first || nameT(p)}` : K[1]);
+            const label = x.label || (x.kind === 'person' && okP ? nameT(p) : x.kind === 'album' && okP ? i18n('Les photos de {name}', {name: p.first || nameT(p)}) : i18n(K[1]));
             const sub = x.sub || (x.kind === 'person' && okP ? (rel(p.id) ? (rel(p.id) === 'toi' ? 'C’est toi' : rel(p.id).charAt(0).toUpperCase() + rel(p.id).slice(1)) : years(p) || K[2]) : x.kind === 'album' ? plural(ph2.length, 'photo') : x.kind === 'note' && x.text ? x.text.slice(0, 70) + (x.text.length > 70 ? '…' : '') : K[2]);
             const base = {k, kind: x.kind, base: K[3], icon: x.icon || K[0], label: x.label || tileName(S, k), color: E.contrast ? null : (x.color || null)};
             if (x.kind === 'house') return {...base, sub: x.sub || K[2], hid: Number(x.hid) || 0, ready: !!x.hid};
@@ -508,21 +521,21 @@
             return {k, kind: x.kind, base: K[3], icon: x.icon || K[0], label, sub, color: E.contrast ? null : (x.color || null), pid: okP ? p.id : 0, text: x.text || '', photos: ph2, ready};
         }
         const homeTiles = () => S.tiles.filter(t => t[1]).map(t => tileOf(t[0])).filter(t => t && (!isCustom(t.k) || t.ready || !live)); // l'aperçu montre aussi un cadre à compléter (en pointillés)
-        const homeSpeech = () => { const n = viewerFirst(), t = homeTiles().map(x => x.label.replace(/^(L’|Les |Ce |Un |Une )/, m => m.toLowerCase())); return `Bonjour${n ? ' ' + n : ''}. Touche un gros bouton : ${joinFr(t)}.`; };
+        const homeSpeech = () => { const n = viewerFirst(), t = homeTiles().map(x => x.label.replace(/^(L’|Les |Ce |Un |Une )/, m => m.toLowerCase())); return i18n(n ? 'Bonjour {name}. Touche un gros bouton : {list}.' : 'Bonjour. Touche un gros bouton : {list}.', {name: n, list: joinFr(t)}); };
         function rHome() {
             const n = viewerFirst(), cnt = dayData().today.length, tiles = homeTiles();
             const sub = t => (isCustom(t.k) || t.sub ? t.sub : t.k === 'photo' ? `${plural(visPhotos().length, 'photo')} de famille` : t.k === 'day' ? (cnt ? 'Il se passe quelque chose aujourd’hui !' : 'Anniversaires et souvenirs') : TILE[t.k][2]);
-            MAIN.innerHTML = `<div class="ms-home"><div class="ms-hello"><div><h1 tabindex="-1">Bonjour${n ? ' ' + esc(n) : ''} !</h1><p>Touche un gros bouton pour commencer.</p></div></div>
-                <div class="ms-tiles" data-n="${tiles.length}">${tiles.map(t => `<button type="button" class="ms-tile k-${t.base}${isCustom(t.k) ? ' is-added' : ''}${isCustom(t.k) && !t.ready ? ' is-todo' : ''}" data-act="tile" data-to="${t.k}"${t.color ? ` style="background:${t.color}"` : ''}><span class="ms-big" aria-hidden="true">${esc(t.icon)}</span><span><b>${esc(t.label)}</b><small>${esc(isCustom(t.k) && !t.ready ? '⚠️ ' + (tileNeed(S.tx[t.k] || {}) || 'Rien à montrer pour l’instant') + ' (caché sur la tablette)' : sub(t))}</small>${t.k === 'day' && cnt ? `<span class="ms-badge">${plural(cnt, 'souvenir')} aujourd’hui</span>` : ''}</span></button>`).join('')}</div>
-                <div class="ms-foot"><button type="button" class="ms-btn" data-act="who"><span class="ms-ico" aria-hidden="true">👋</span><span>${n ? 'Ce n’est pas ' + esc(n) + ' ?' : 'Qui regarde ?'}</span></button>
-                <button type="button" class="ms-btn ms-hold" data-act="hold" aria-label="Quitter le mode simple : garde le doigt appuyé ${String(S.holdSec).replace('.', ',')} secondes, ou garde la touche Entrée enfoncée"><span class="ms-fill" aria-hidden="true"></span><span class="ms-ico" aria-hidden="true">🔒</span><span class="ms-hold-t">Quitter le mode simple<br><span class="ms-hint">garde le doigt appuyé ${String(S.holdSec).replace('.', ',')} s</span></span></button></div></div>`;
+            MAIN.innerHTML = `<div class="ms-home"><div class="ms-hello"><div><h1 tabindex="-1">${n ? i18n('Bonjour {name} !', {name: esc(n)}) : i18n('Bonjour !')}</h1><p>Touche un gros bouton pour commencer.</p></div></div>
+                <div class="ms-tiles" data-n="${tiles.length}">${tiles.map(t => `<button type="button" class="ms-tile k-${t.base}${isCustom(t.k) ? ' is-added' : ''}${isCustom(t.k) && !t.ready ? ' is-todo' : ''}" data-act="tile" data-to="${t.k}"${t.color ? ` style="background:${t.color}"` : ''}><span class="ms-big" aria-hidden="true">${esc(t.icon)}</span><span><b>${esc(t.label)}</b><small>${esc(isCustom(t.k) && !t.ready ? i18n('⚠️ {what} (caché sur la tablette)', {what: i18n(tileNeed(S.tx[t.k] || {}) || 'Rien à montrer pour l’instant')}) : i18n(sub(t)))}</small>${t.k === 'day' && cnt ? `<span class="ms-badge">${i18n('{n} aujourd’hui', {n: plural(cnt, 'souvenir')})}</span>` : ''}</span></button>`).join('')}</div>
+                <div class="ms-foot"><button type="button" class="ms-btn" data-act="who"><span class="ms-ico" aria-hidden="true">👋</span><span>${n ? i18n('Ce n’est pas {name} ?', {name: esc(n)}) : 'Qui regarde ?'}</span></button>
+                <button type="button" class="ms-btn ms-hold" data-act="hold" aria-label="${i18n('Quitter le mode simple : garde le doigt appuyé {n} secondes, ou garde la touche Entrée enfoncée', {n: S.holdSec})}"><span class="ms-fill" aria-hidden="true"></span><span class="ms-ico" aria-hidden="true">🔒</span><span class="ms-hold-t">Quitter le mode simple<br><span class="ms-hint">${i18n('garde le doigt appuyé {n} s', {n: S.holdSec})}</span></span></button></div></div>`;
             if (live) bindHold();
         }
         function bindHold() {
             const b = $('.ms-hold', MAIN); if (!b) return; let t0 = 0, raf = 0, done = false; const DUR = S.holdSec * 1000, fill = $('.ms-fill', b), hint = $('.ms-hint', b);
             const step = () => { const k = Math.min(1, (performance.now() - t0) / DUR); fill.style.width = (k * 100) + '%'; if (k >= 1) { done = true; stop(true); afterHold(); } else raf = requestAnimationFrame(step); };
             const start = () => { if (t0) return; done = false; t0 = performance.now(); raf = requestAnimationFrame(step); hint.textContent = 'Continue… encore un peu'; };
-            const stop = ok => { cancelAnimationFrame(raf); const el = performance.now() - t0; t0 = 0; fill.style.width = '0'; if (!ok && !done && el > 0 && hint.isConnected) hint.textContent = `Garde le doigt appuyé ${String(S.holdSec).replace('.', ',')} secondes`; };
+            const stop = ok => { cancelAnimationFrame(raf); const el = performance.now() - t0; t0 = 0; fill.style.width = '0'; if (!ok && !done && el > 0 && hint.isConnected) hint.textContent = i18n('Garde le doigt appuyé {n} secondes', {n: S.holdSec}); };
             b.addEventListener('pointerdown', e => { e.preventDefault(); b.setPointerCapture?.(e.pointerId); start(); });
             ['pointerup', 'pointercancel', 'pointerleave'].forEach(ev => b.addEventListener(ev, () => t0 && stop(false)));
             b.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); if (!e.repeat) start(); } });
@@ -543,7 +556,7 @@
         /* ── Arbre : la personne au milieu ── */
         function card(id, kind, act = 'center') {
             const p = P(id), r = rel(id), small = kind === 'v' && V.zoom === 1;
-            const say = `${nameT(p)}${r ? ', ' + (r === 'toi' ? 'c’est toi' : r) : ''}${yearsSpoken(p) ? ', ' + yearsSpoken(p) : ''}. ${act === 'center' ? 'Toucher pour la mettre au milieu.' : 'Toucher pour voir sa fiche.'}`;
+            const say = `${nameT(p)}${r ? ', ' + (r === 'toi' ? i18n('c’est toi') : r) : ''}${yearsSpoken(p) ? ', ' + yearsSpoken(p) : ''}. ${i18n(act === 'center' ? 'Toucher pour la mettre au milieu.' : 'Toucher pour voir sa fiche.')}`;
             return `<button type="button" class="ms-card ${kind}" data-act="${act}" data-id="${id}" data-pid="${id}" aria-label="${esc(say)}">${ph(id, kind === 'v' ? Math.round(E.caseS * (V.zoom === 1 ? 0.7 : 0.85)) : E.caseS)}<span class="ms-tx">${kind !== 'v' || V.zoom > 1 ? relLabel(id) : ''}<span class="ms-nm">${small ? esc(p.first) : nameH(p)}</span>${small ? '' : `<span class="ms-yr">${esc(years(p))}</span>`}</span></button>`;
         }
         function treeRows() {
@@ -570,7 +583,7 @@
             const upTxt = ps.length ? joinFr(ps.map(x => P(x).first)) : '', d1 = ch[0];
             const spW = Math.min(cardSizes(3, 2).cw, 300);
             MAIN.innerHTML = `<div class="ms-tree"><div class="ms-tcol">
-                ${ps.length ? `<button type="button" class="ms-btn ms-arrow" data-act="up"><span class="ms-ico" aria-hidden="true">▲</span><span>Vers les parents · ${esc(upTxt)}</span></button>` : '<div class="ms-arrow-none">On ne connaît pas encore ses parents</div>'}
+                ${ps.length ? `<button type="button" class="ms-btn ms-arrow" data-act="up"><span class="ms-ico" aria-hidden="true">▲</span><span>${i18n('Vers les parents')} · ${esc(upTxt)}</span></button>` : '<div class="ms-arrow-none">On ne connaît pas encore ses parents</div>'}
                 <div class="ms-canvas"><svg class="ms-lines" aria-hidden="true"></svg>
                 ${ups.map(r => row(r)).join('')}
                 <div class="ms-tcenter" style="margin-bottom:${downs.length ? 'var(--gap)' : '0'}">
@@ -580,7 +593,7 @@
                 </div>
                 ${downs.map(r => row(r, true)).join('')}
                 </div>
-                ${d1 ? `<button type="button" class="ms-btn ms-arrow" data-act="down"><span class="ms-ico" aria-hidden="true">▼</span><span>Vers les enfants · ${esc(P(d1).first)}${ch.length > 1 ? ` (l’aîné${P(d1).g === 'f' ? 'e' : ''})` : ''}</span></button>` : '<div class="ms-arrow-none">Pas d’enfants connus</div>'}
+                ${d1 ? `<button type="button" class="ms-btn ms-arrow" data-act="down"><span class="ms-ico" aria-hidden="true">▼</span><span>${i18n('Vers les enfants')} · ${esc(P(d1).first)}${ch.length > 1 ? ` (${i18n(P(d1).g === 'f' ? 'l’aînée' : 'l’aîné')})` : ''}</span></button>` : '<div class="ms-arrow-none">Pas d’enfants connus</div>'}
                 </div>
                 <div class="ms-zoom">
                     <button type="button" class="ms-btn" data-act="zin" aria-label="Plus gros"><span class="ms-ico" aria-hidden="true">＋</span><span>Plus gros</span></button>
@@ -606,14 +619,14 @@
             const all = visPhotos(), v = viewerId(), mine = v ? all.filter(m => m.people.includes(v)).length : 0, l = photoList();
             if (!all.length) { MAIN.innerHTML = `<div class="ms-center"><h1 class="ms-h2" tabindex="-1">Les photos</h1><p class="ms-lead">Il n’y a pas encore de photo à regarder.</p></div>`; return; }
             MAIN.innerHTML = `<div><h1 class="ms-sr" tabindex="-1">Les photos</h1><div class="ms-ph-top">
-                <button type="button" class="ms-btn primary" data-act="slideshow"><span class="ms-ico" aria-hidden="true">▶</span><span>Regarder les ${plural(l.length, 'photo')}</span></button>
-                ${v && mine ? `<div class="ms-seg" role="group" aria-label="Quelles photos"><button type="button" class="${V.photoFilter === 'all' ? 'is-active' : ''}" data-act="pfilter" data-v="all" aria-pressed="${V.photoFilter === 'all'}">Toutes (${all.length})</button><button type="button" class="${V.photoFilter === 'me' ? 'is-active' : ''}" data-act="pfilter" data-v="me" aria-pressed="${V.photoFilter === 'me'}">Avec toi (${mine})</button></div>` : ''}
+                <button type="button" class="ms-btn primary" data-act="slideshow"><span class="ms-ico" aria-hidden="true">▶</span><span>${i18n('Regarder les {n}', {n: plural(l.length, 'photo')})}</span></button>
+                ${v && mine ? `<div class="ms-seg" role="group" aria-label="Quelles photos"><button type="button" class="${V.photoFilter === 'all' ? 'is-active' : ''}" data-act="pfilter" data-v="all" aria-pressed="${V.photoFilter === 'all'}">${i18n('Toutes ({n})', {n: all.length})}</button><button type="button" class="${V.photoFilter === 'me' ? 'is-active' : ''}" data-act="pfilter" data-v="me" aria-pressed="${V.photoFilter === 'me'}">${i18n('Avec toi ({n})', {n: mine})}</button></div>` : ''}
                 </div><div class="ms-ph-grid">${l.map((m, i) => `<button type="button" class="ms-ph-tile" data-act="openslide" data-i="${i}"><span class="ms-thumb">${img(m)}</span><span class="ms-cap"><b>${esc(m.title || 'Photo')}</b><span>${esc(photoCap(m))}</span></span></button>`).join('')}</div></div>`;
         }
         const slides = () => (V.slideList || photoList().map(m => m.id)).filter(id => D.M.get(id) && (V.slideAny ? !S.hiddenPhotos.includes(id) : photoOk(D.M.get(id)))); // une photo choisie pour un gros bouton se montre même si c'est un document
         function slideSpeech(m) {
             const ppl = m.people.filter(vis).map(id => { const r = rel(id); return nameT(P(id)) + (r ? ', ' + (r === 'toi' ? 'toi' : r) : ''); });
-            const w = photoWhen(m); return `${m.title || 'Photo'}.${w ? ' ' + w.charAt(0).toUpperCase() + w.slice(1) + (m.place ? ', à ' + m.place : '') + '.' : m.place ? ' À ' + m.place + '.' : ''}${ppl.length ? ' Sur la photo : ' + joinFr(ppl) + '.' : ''}`;
+            const w = photoWhen(m); return `${m.title || 'Photo'}.${w ? ' ' + w.charAt(0).toUpperCase() + w.slice(1) + (m.place ? ', à ' + m.place : '') + '.' : m.place ? ' À ' + m.place + '.' : ''}${ppl.length ? ' ' + i18n('Sur la photo : {names}.', {names: joinFr(ppl)}) : ''}`;
         }
         function rSlides() {
             const ids = slides(); if (!ids.length) { MAIN.innerHTML = '<div class="ms-center"><p class="ms-lead">Il n’y a pas de photo à montrer.</p></div>'; return; }
@@ -628,7 +641,7 @@
                 <div class="ms-sbtns">${speakBtn(slideSpeech(m))}
                 ${ppl.length ? `<button type="button" class="ms-btn ${V.slideTags ? 'is-on' : ''}" data-act="tags" aria-pressed="${V.slideTags}"><span class="ms-ico" aria-hidden="true">👥</span><span>${V.slideTags ? 'Cacher les noms' : 'Qui est là ?'}</span></button>` : '<span class="ms-noone">Personne n’est nommé sur cette photo</span>'}
                 ${ids.length > 1 ? `<button type="button" class="ms-btn ${auto ? 'is-on' : ''}" data-act="auto" aria-pressed="${auto}"><span class="ms-ico" aria-hidden="true">${auto ? '⏸' : '▶'}</span><span>${auto ? 'Arrêter le défilement' : 'Défilement tout seul'}</span></button>` : ''}
-                <span class="ms-count">${V.slide + 1} sur ${ids.length}</span></div>
+                <span class="ms-count">${i18n('{a} sur {b}', {a: V.slide + 1, b: ids.length})}</span></div>
                 ${V.slideTags && ppl.length ? `<div class="ms-faces">${ppl.map((id, k) => `<button type="button" class="ms-chip" data-act="person" data-id="${id}">${ppl.length > 3 && faces.length ? `<span class="ms-numb" aria-hidden="true">${k + 1}</span>` : ''}${ph(id, 56)}<span class="ms-cx"><span>${nameH(P(id))}</span>${rel(id) ? `<span class="ms-rel">${rel(id) === 'toi' ? 'toi' : esc(rel(id))}</span>` : ''}</span></button>`).join('')}</div>` : ''}
                 </div></div>`;
             const im = $('.ms-pbox img', MAIN); const fit = () => fitPhoto(); if (im.complete) fit(); else im.addEventListener('load', fit, {once: true});
@@ -646,7 +659,35 @@
         function stopSlide() { if (V.slideTimer) cancelAnimationFrame(V.slideTimer); V.slideTimer = 0; }
 
         /* ── Fiche simplifiée : son histoire en phrases ── */
+        /** 🌐 la même histoire dans une autre langue : une phrase entière par clé (reglages2.tsv), au féminin ou au masculin */
+        function bioI(id) {
+            const I = window.LCNDA_I18N, p = P(id), f = p.g === 'f', out = [], G = (fr, mr) => (f ? fr : mr);
+            const dt = x => { if (!x) return ''; if (x.about) return i18n('vers {y} (date)', {y: String(x.y)}); if (!x.m) return i18n('en {date} (année)', {date: String(x.y)});
+                const d = new Date(x.y, x.m - 1, x.d || 1); d.setFullYear(x.y);
+                return x.d ? i18n('le {date} (jour)', {date: I.fmtDate(d, {day: 'numeric', month: 'long', year: 'numeric'})}) : i18n('en {date} (mois)', {date: I.fmtDate(d, {month: 'long', year: 'numeric'})}); };
+            const det = e => [e?.date ? dt(e.date) : '', e?.place ? i18n('à {place} (lieu)', {place: e.place}) : ''].filter(Boolean).join(' ');
+            const joinI = a => listJoin(a);
+            if (firstOnly(p)) return [i18n('{name} fait partie de la famille.', {name: p.first})];
+            const nm = nameT(p), b = p.birth, bp = p.bapt, il = i18n(G('Elle', 'Il'));
+            if (b?.date || b?.place) out.push(i18n(G('{name} est née {details}.', '{name} est né {details}.'), {name: nm, details: det(b)}));
+            if (bp?.date || bp?.place) out.push(i18n(G('{name} a été baptisée {details}.', '{name} a été baptisé {details}.'), {name: b?.date || b?.place ? il : nm, details: det(bp)}));
+            if (!out.length) out.push(i18n('{name} fait partie de la famille.', {name: nm}));
+            const ps = visA(parentsOf(id)); if (ps.length) out.push(i18n(f ? 'C’est la fille de {names}.' : p.g === 'm' ? 'C’est le fils de {names}.' : 'C’est l’enfant de {names}.', {names: joinI(ps.map(x => nameT(P(x))))}));
+            if (p.job) { const job = p.job.charAt(0).toLowerCase() + p.job.slice(1); const age = ageAt(b?.date, todayD); out.push(i18n(!p.living ? G('Elle était {job}.', 'Il était {job}.') : age !== null && age >= 65 ? G('Elle a été {job}.', 'Il a été {job}.') : G('Elle est {job}.', 'Il est {job}.'), {job})); }
+            famsOf(id).forEach(fm => {
+                const sp = fm.a === id ? fm.b : fm.a; if (!sp || !vis(sp)) return; const spn = nameT(P(sp));
+                if (fm.marr && (fm.marr.date || fm.marr.place)) out.push(i18n(G('Elle s’est mariée avec {name} {details}.', 'Il s’est marié avec {name} {details}.'), {name: spn, details: det(fm.marr)}));
+                else if (fm.marr) out.push(i18n(G('Elle s’est mariée avec {name}.', 'Il s’est marié avec {name}.'), {name: spn}));
+                else out.push(i18n(G('Elle a vécu avec {name}.', 'Il a vécu avec {name}.'), {name: spn}));
+                const ch = visA(fm.c); if (ch.length) out.push(ch.length === 1 ? i18n(P(ch[0]).g === 'f' ? 'Ils ont eu une fille, {name}.' : P(ch[0]).g === 'm' ? 'Ils ont eu un fils, {name}.' : 'Ils ont eu un enfant, {name}.', {name: P(ch[0]).first}) : i18n('Ils ont eu {n} enfants : {names}.', {n: ch.length, names: joinI(ch.map(x => P(x).first))}));
+            });
+            if (p.living) { const a = ageAt(b?.date || bp?.date, todayD); if (a !== null && a >= 0) out.push(i18n(G('Aujourd’hui, elle a {age}.', 'Aujourd’hui, il a {age}.'), {age: plural(a, 'an')})); }
+            else if (p.death?.date || p.death?.place) { const a = ageAt(b?.date || bp?.date, p.death.date), withAge = a !== null && a >= 0 && !p.death.date?.about && !(b?.date || bp?.date)?.about;
+                out.push(withAge ? i18n(G('Elle est décédée {details}, à {age}.', 'Il est décédé {details}, à {age}.'), {details: det(p.death), age: plural(a, 'an')}) : i18n(G('Elle est décédée {details}.', 'Il est décédé {details}.'), {details: det(p.death)})); }
+            return out;
+        }
         function bio(id) {
+            if (LNG() !== 'fr' && window.LCNDA_I18N?.fmtDate) return bioI(id);
             const p = P(id), f = p.g === 'f', E2 = f ? 'e' : '', il = f ? 'Elle' : 'Il', elle = f ? 'elle' : 'il', out = [];
             if (firstOnly(p)) return [`${p.first} fait partie de la famille.`];
             const nm = nameT(p), b = p.birth, bp = p.bapt;
@@ -671,14 +712,14 @@
             const b = bio(id), r = rel(id), ps = visA(parentsOf(id)), sps = visA(spousesOf(id)), ch = visA(childrenOf(id)), sib = visA(siblingsOf(id)).filter(x => x !== id), f = p.g === 'f';
             const phs = visPhotos().filter(m => !m.doc && m.people.includes(id));
             const grp = (t, ids) => (ids.length ? `<div class="ms-sec"><h2>${t}</h2><div class="ms-fam">${ids.map(x => card(x, 'h', 'person')).join('')}</div></div>` : '');
-            const relS = r ? (r === 'toi' ? 'C’est toi !' : `C’est ${r}.`) : '';
+            const relS = r ? (r === 'toi' ? i18n('C’est toi !') : i18n('C’est {rel}.', {rel: r})) : '';
             const spT = sps.length ? (f ? (sps.length > 1 ? 'Ses maris' : 'Son mari') : p.g === 'm' ? (sps.length > 1 ? 'Ses femmes' : 'Sa femme') : 'Son conjoint') : '';
             const sibT = sib.length > 1 ? 'Ses frères et sœurs' : sib[0] && P(sib[0]).g === 'f' ? 'Sa sœur' : 'Son frère';
             MAIN.innerHTML = `<div class="ms-fiche"><div class="ms-fleft">${ph(id, 300, 'big')}${relLabel(id)}<h1 tabindex="-1">${nameH(p)}</h1><span class="ms-yr">${esc(years(p))}</span>
                 ${speakBtn((relS ? nameT(p) + '. ' + relS + ' ' : '') + b.join(' '), 'Écouter son histoire')}
                 <button type="button" class="ms-btn" data-act="totree" data-id="${id}"><span class="ms-ico" aria-hidden="true">🌳</span><span>Voir dans l’arbre</span></button></div>
                 <div><p class="ms-bio">${b.map(esc).join(' ')}</p>
-                ${phs.length ? `<div class="ms-sec"><h2><span aria-hidden="true">📷</span> Ses photos (${phs.length})</h2><div class="ms-mini">${phs.map(m => `<button type="button" class="ms-ph-tile" data-act="personslide" data-ph="${m.id}" data-id="${id}"><span class="ms-thumb">${img(m)}</span><span class="ms-cap"><b>${esc(m.title || 'Photo')}</b><span>${esc(photoWhen(m))}</span></span></button>`).join('')}</div></div>` : ''}
+                ${phs.length ? `<div class="ms-sec"><h2><span aria-hidden="true">📷</span> ${i18n('Ses photos ({n})', {n: phs.length})}</h2><div class="ms-mini">${phs.map(m => `<button type="button" class="ms-ph-tile" data-act="personslide" data-ph="${m.id}" data-id="${id}"><span class="ms-thumb">${img(m)}</span><span class="ms-cap"><b>${esc(m.title || 'Photo')}</b><span>${esc(photoWhen(m))}</span></span></button>`).join('')}</div></div>` : ''}
                 ${grp(ps.length > 1 ? 'Ses parents' : 'Son parent', ps)}${grp(spT, sps)}${grp(ch.length > 1 ? 'Ses enfants' : 'Son enfant', ch)}${grp(sibT, sib)}
                 </div></div>`;
         }
@@ -696,7 +737,7 @@
                 const all = sorted();
                 if (!V.letter) { const L = {}; all.forEach(p => { const l = (norm(p.first)[0] || '?').toUpperCase(); L[l] = (L[l] || 0) + 1; });
                     body = `<p class="ms-lead">Touche la première lettre du prénom.</p><div class="ms-letters">${Object.keys(L).sort().map(l => `<button type="button" class="ms-btn" data-act="letter" data-l="${esc(l)}" aria-label="Lettre ${esc(l)}, ${plural(L[l], 'personne')}">${esc(l)}<small>${L[l]}</small></button>`).join('')}</div>`; }
-                else body = `<h2 class="ms-h2">Les prénoms en « ${esc(V.letter)} »</h2>` + all.filter(p => (norm(p.first)[0] || '?').toUpperCase() === V.letter).map(pRow).join('');
+                else body = `<h2 class="ms-h2">${i18n('Les prénoms en « {x} »', {x: esc(V.letter)})}</h2>` + all.filter(p => (norm(p.first)[0] || '?').toUpperCase() === V.letter).map(pRow).join('');
             } else body = searchHTML();
             MAIN.innerHTML = `<div class="${V.peopleTab === 'search' ? 'ms-search' : ''}"><h1 class="ms-sr" tabindex="-1">Les personnes</h1>${V.choosing ? '<p class="ms-lead ms-strong">Touche la personne qui regarde.</p>' : ''}<div class="ms-seg ms-ptabs" role="tablist">${tabs.map(([k, i, t]) => `<button type="button" role="tab" aria-selected="${V.peopleTab === k}" class="${V.peopleTab === k ? 'is-active' : ''}" data-act="ptab" data-v="${k}"><span class="ms-em" aria-hidden="true">${i} </span>${t}</button>`).join('')}</div>${body}</div>`;
             if (live && V.peopleTab === 'search') setTimeout(() => { const i = $('.ms-q', MAIN); try { i?.focus({preventScroll: true}); i?.setSelectionRange(i.value.length, i.value.length); } catch (_) {} }, 30);
@@ -713,7 +754,7 @@
         function searchResults() {
             const q = norm(V.query).trim(); if (!q) return '<p class="ms-sempty">Tape les premières lettres, ou touche 🎤 Dicter et dis le prénom.</p>';
             const words = q.split(/\s+/), r = sorted().filter(p => { const h = norm(nameT(p)); return words.every(w => h.split(/[\s-]+/).some(x => x.startsWith(w))); });
-            if (!r.length) return `<p class="ms-sempty">Personne ne s’appelle « ${esc(V.query.trim())} ». Vérifie l’orthographe.</p>`;
+            if (!r.length) return `<p class="ms-sempty">${i18n('Personne ne s’appelle « {q} ». Vérifie l’orthographe.', {q: esc(V.query.trim())})}</p>`;
             return `<p class="ms-sempty ms-n">${plural(r.length, 'personne trouvée', 'personnes trouvées')}</p>` + r.slice(0, 60).map(pRow).join('');
         }
         function updSearch() { const r = $('.ms-sres', MAIN); if (r) r.innerHTML = searchResults(); const i = $('.ms-q', MAIN); if (i && i.value !== V.query) i.value = V.query; }
@@ -743,21 +784,23 @@
             return {today, soon, photos};
         }
         const placeTxt = pl => (pl ? ` à ${esc(pl)}` : '');
+        /** « le 3 mai 1897 à Arnac » (🌐 dans la langue choisie : la date et le lieu par leurs clés) */
+        const leLieu = (date, pl) => (LNG() !== 'fr' ? [date ? i18n('le {date} (jour)', {date: esc(fmtD(date))}) : '', pl ? i18n('à {place} (lieu)', {place: esc(pl)}) : ''].filter(Boolean).join(' ') : `le ${esc(fmtD(date))}${placeTxt(pl)}`);
         function rDay() {
-            const {today, soon, photos} = dayData(), dd = `${day1(TD)} ${MOIS[TM - 1]}`;
+            const {today, soon, photos} = dayData(), dd = LNG() !== 'fr' && window.LCNDA_I18N?.fmtDate ? fmtL(TODAY, {day: 'numeric', month: 'long'}) : `${day1(TD)} ${MOIS[TM - 1]}`;
             const weddingPhoto = f => visPhotos().find(m => !m.doc && m.date && f.marr?.date && m.date.y === f.marr.date.y && m.date.m === f.marr.date.m && m.people.includes(f.a) && m.people.includes(f.b));
             const c1 = e => {
-                if (e.k === 'bday') { const p = e.p, r = rel(p.id); return `<div class="ms-dcard big">${ph(p.id, 150)}<div class="ms-tx"><b>🎂 ${r === 'toi' ? 'C’est ton anniversaire' : esc(p.first) + ' a ' + e.yrs + ' ans aujourd’hui'} !</b><span class="ms-when">${r && r !== 'toi' ? 'C’est ' + esc(r) + '. ' : ''}${p.g === 'f' ? 'Elle est née' : 'Il est né'} le ${esc(fmtD(p.birth.date))}${placeTxt(p.birth.place)}.</span><button type="button" class="ms-btn primary" data-act="person" data-id="${p.id}"><span class="ms-ico" aria-hidden="true">📖</span><span>Voir sa fiche</span></button></div></div>`; }
-                if (e.k === 'wed') { const a = P(e.f.a), b = P(e.f.b), m = weddingPhoto(e.f); return `<div class="ms-dcard">${m ? `<span class="ms-dthumb">${img(m)}</span>` : ph(a.id, 110)}<div class="ms-tx"><b>💍 ${esc(a.first)} et ${esc(b.first)} se sont mariés il y a ${e.yrs} ans</b><span class="ms-when">Le ${esc(fmtD(e.f.marr.date))}${e.f.marr.place ? ', à ' + esc(e.f.marr.place) : ''}.</span>${m ? `<button type="button" class="ms-btn" data-act="personslide" data-ph="${m.id}" data-id="0"><span class="ms-ico" aria-hidden="true">📷</span><span>Voir la photo</span></button>` : ''}</div></div>`; }
-                if (e.k === 'born') { const p = e.p, r = rel(p.id); return `<div class="ms-dcard">${ph(p.id, 110)}<div class="ms-tx"><b>🎂 ${esc(p.first)} aurait eu ${e.yrs} ans aujourd’hui</b><span class="ms-when">${r ? 'C’est ' + esc(r) + '. ' : ''}${p.g === 'f' ? 'Elle est née' : 'Il est né'} le ${esc(fmtD(p.birth.date))}${placeTxt(p.birth.place)}.</span><button type="button" class="ms-btn" data-act="person" data-id="${p.id}"><span class="ms-ico" aria-hidden="true">📖</span><span>Sa fiche</span></button></div></div>`; }
-                const p = e.p; return `<div class="ms-dcard">${ph(p.id, 110)}<div class="ms-tx"><b>🕊 On se souvient de ${esc(p.first)}</b><span class="ms-when">${p.g === 'f' ? 'Elle nous a quittés' : 'Il nous a quittés'} le ${esc(fmtD(p.death.date))}, il y a ${e.yrs} ans.</span><button type="button" class="ms-btn" data-act="person" data-id="${p.id}"><span class="ms-ico" aria-hidden="true">📖</span><span>Sa fiche</span></button></div></div>`;
+                if (e.k === 'bday') { const p = e.p, r = rel(p.id); return `<div class="ms-dcard big">${ph(p.id, 150)}<div class="ms-tx"><b>🎂 ${r === 'toi' ? i18n('C’est ton anniversaire !') : i18n('{name} a {n} ans aujourd’hui !', {name: esc(p.first), n: e.yrs})}</b><span class="ms-when">${r && r !== 'toi' ? i18n('C’est {rel}.', {rel: esc(r)}) + ' ' : ''}${i18n(p.g === 'f' ? 'Elle est née {details}.' : 'Il est né {details}.', {details: leLieu(p.birth.date, p.birth.place)})}</span><button type="button" class="ms-btn primary" data-act="person" data-id="${p.id}"><span class="ms-ico" aria-hidden="true">📖</span><span>Voir sa fiche</span></button></div></div>`; }
+                if (e.k === 'wed') { const a = P(e.f.a), b = P(e.f.b), m = weddingPhoto(e.f); return `<div class="ms-dcard">${m ? `<span class="ms-dthumb">${img(m)}</span>` : ph(a.id, 110)}<div class="ms-tx"><b>💍 ${i18n('{a} et {b} se sont mariés il y a {n} ans', {a: esc(a.first), b: esc(b.first), n: e.yrs})}</b><span class="ms-when">${LNG() !== 'fr' ? leLieu(e.f.marr.date, e.f.marr.place) + '.' : `Le ${esc(fmtD(e.f.marr.date))}${e.f.marr.place ? ', à ' + esc(e.f.marr.place) : ''}.`}</span>${m ? `<button type="button" class="ms-btn" data-act="personslide" data-ph="${m.id}" data-id="0"><span class="ms-ico" aria-hidden="true">📷</span><span>Voir la photo</span></button>` : ''}</div></div>`; }
+                if (e.k === 'born') { const p = e.p, r = rel(p.id); return `<div class="ms-dcard">${ph(p.id, 110)}<div class="ms-tx"><b>🎂 ${i18n('{name} aurait eu {n} ans aujourd’hui', {name: esc(p.first), n: e.yrs})}</b><span class="ms-when">${r ? i18n('C’est {rel}.', {rel: esc(r)}) + ' ' : ''}${i18n(p.g === 'f' ? 'Elle est née {details}.' : 'Il est né {details}.', {details: leLieu(p.birth.date, p.birth.place)})}</span><button type="button" class="ms-btn" data-act="person" data-id="${p.id}"><span class="ms-ico" aria-hidden="true">📖</span><span>Sa fiche</span></button></div></div>`; }
+                const p = e.p; return `<div class="ms-dcard">${ph(p.id, 110)}<div class="ms-tx"><b>🕊 ${i18n('On se souvient de {name}', {name: esc(p.first)})}</b><span class="ms-when">${i18n(p.g === 'f' ? 'Elle nous a quittés {details}, il y a {n} ans.' : 'Il nous a quittés {details}, il y a {n} ans.', {details: leLieu(p.death.date, ''), n: e.yrs})}</span><button type="button" class="ms-btn" data-act="person" data-id="${p.id}"><span class="ms-ico" aria-hidden="true">📖</span><span>Sa fiche</span></button></div></div>`;
             };
             const soonRow = s => { if (s.k === 'wed') { const a = P(s.f.a), b = P(s.f.b); return `<button type="button" class="ms-prow" data-act="person" data-id="${a.id}">${ph(a.id, 76)}<span class="ms-tx"><span class="ms-nm">${s.days === 1 ? 'Demain' : 'Dans ' + s.days + ' jours'} : ${esc(a.first)} et ${esc(b.first)}</span><span class="ms-yr">${s.age} ans de mariage</span></span><span class="ms-go" aria-hidden="true">›</span></button>`; }
                 const r = rel(s.p.id), me = r === 'toi', f = s.p.g === 'f';
-                return `<button type="button" class="ms-prow" data-act="person" data-id="${s.p.id}">${ph(s.p.id, 76)}<span class="ms-tx"><span class="ms-nm">${s.days === 1 ? 'Demain' : 'Dans ' + s.days + ' jours'} : ${me ? 'ton anniversaire' : esc(s.p.first)}</span><span class="ms-yr">${s.k === 'born' ? `${f ? 'Elle' : 'Il'} aurait eu ${s.age} ans` : `${me ? 'Tu auras' : f ? 'Elle aura' : 'Il aura'} ${s.age} ans`}${r && !me ? ' · ' + esc(r) : ''}</span></span><span class="ms-go" aria-hidden="true">›</span></button>`; };
+                return `<button type="button" class="ms-prow" data-act="person" data-id="${s.p.id}">${ph(s.p.id, 76)}<span class="ms-tx"><span class="ms-nm">${s.days === 1 ? i18n('Demain') : i18n('Dans {n} jours', {n: s.days})} : ${me ? i18n('ton anniversaire') : esc(s.p.first)}</span><span class="ms-yr">${s.k === 'born' ? i18n(f ? 'Elle aurait eu {n} ans' : 'Il aurait eu {n} ans', {n: s.age}) : i18n(me ? 'Tu auras {n} ans' : f ? 'Elle aura {n} ans' : 'Il aura {n} ans', {n: s.age})}${r && !me ? ' · ' + esc(r) : ''}</span></span><span class="ms-go" aria-hidden="true">›</span></button>`; };
             MAIN.innerHTML = `<div><h1 class="ms-h2" tabindex="-1">Aujourd’hui, ${dd}</h1>
-                ${today.length ? `<div class="ms-dlist">${today.map(c1).join('')}</div>` : `<p class="ms-lead">Pas d’anniversaire aujourd’hui.${soon.length ? ' Voici ce qui arrive bientôt.' : ''}</p>`}
-                ${photos.length ? `<h2 class="ms-h2 ms-mt">📷 Des photos prises en ${MOIS[TM - 1]}</h2><div class="ms-mini">${photos.map(m => `<button type="button" class="ms-ph-tile" data-act="personslide" data-ph="${m.id}" data-id="0"><span class="ms-thumb">${img(m)}</span><span class="ms-cap"><b>${esc(m.title || 'Photo')}</b><span>${esc(photoWhen(m))}${m.date ? ' · il y a ' + (TY - m.date.y) + ' ans' : ''}</span></span></button>`).join('')}</div>` : ''}
+                ${today.length ? `<div class="ms-dlist">${today.map(c1).join('')}</div>` : `<p class="ms-lead">${i18n(soon.length ? 'Pas d’anniversaire aujourd’hui. Voici ce qui arrive bientôt.' : 'Pas d’anniversaire aujourd’hui.')}</p>`}
+                ${photos.length ? `<h2 class="ms-h2 ms-mt">${i18n('📷 Des photos prises en {month}', {month: LNG() !== 'fr' && window.LCNDA_I18N?.fmtDate ? fmtL(TODAY, {month: 'long'}) : MOIS[TM - 1]})}</h2><div class="ms-mini">${photos.map(m => `<button type="button" class="ms-ph-tile" data-act="personslide" data-ph="${m.id}" data-id="0"><span class="ms-thumb">${img(m)}</span><span class="ms-cap"><b>${esc(m.title || 'Photo')}</b><span>${esc(photoWhen(m))}${m.date ? ' · il y a ' + (TY - m.date.y) + ' ans' : ''}</span></span></button>`).join('')}</div>` : ''}
                 ${soon.length ? `<h2 class="ms-h2 ms-mt">🎈 Bientôt</h2><div class="ms-soon">${soon.slice(0, 8).map(soonRow).join('')}</div>` : ''}</div>`;
         }
 
@@ -768,7 +811,7 @@
             const gp = [...new Set(visA(parentsOf(v)).flatMap(x => visA(parentsOf(x))))], sib = visA(siblingsOf(v)).filter(x => x !== v), sp = visA(spousesOf(v));
             const grp = (t, l) => (l.length ? `<section class="ms-grp"><h2>${t} · ${l.length}</h2>${l.map(id => pRow(P(id))).join('')}</section>` : '');
             const f = id => P(id)?.g === 'f';
-            MAIN.innerHTML = `<div><h1 class="ms-h2" tabindex="-1">La famille de ${esc(P(v).first)}</h1>
+            MAIN.innerHTML = `<div><h1 class="ms-h2" tabindex="-1">${i18n('La famille de {name}', {name: esc(P(v).first)})}</h1>
                 ${grp(sp.length > 1 ? 'Tes conjoints' : f(sp[0]) ? 'Ta femme' : 'Ton mari', sp)}${grp('Tes parents', visA(parentsOf(v)))}${grp('Tes grands-parents', gp)}${grp('Tes frères et sœurs', sib)}
                 ${grp('Tes enfants', ch)}${grp('Tes petits-enfants', gch)}${grp('Tes arrière-petits-enfants', ggch)}
                 ${!sp.length && !ch.length && !sib.length && !parentsOf(v).length ? '<p class="ms-lead">Personne n’est encore relié dans l’arbre.</p>' : ''}</div>`;
@@ -780,7 +823,7 @@
             return out.sort((a, b) => a.days - b.days);
         }
         function rBdays() {
-            const l = bdayList().slice(0, 40), when = d => (d === 0 ? 'Aujourd’hui !' : d === 1 ? 'Demain' : `Dans ${d} jours`);
+            const l = bdayList().slice(0, 40), when = d => (d === 0 ? i18n('Aujourd’hui !') : d === 1 ? i18n('Demain') : i18n('Dans {n} jours', {n: d}));
             const row = e => { const r = rel(e.p.id), me = r === 'toi', fm = e.p.g === 'f'; return `<button type="button" class="ms-prow${e.days === 0 ? ' is-today' : ''}" data-act="person" data-id="${e.p.id}">${ph(e.p.id, 76)}<span class="ms-tx"><span class="ms-nm">${e.days === 0 ? '🎂 ' : ''}${me ? 'Ton anniversaire' : nameH(e.p)}</span><span class="ms-yr">${esc(e.days < 60 ? when(e.days) : `Le ${day1(e.b.d)} ${MOIS[e.b.m - 1]}`)}${e.age ? ` · ${me ? 'tu auras' : fm ? 'elle aura' : 'il aura'} ${e.age} ans` : ''}${r && !me ? ' · ' + esc(r) : ''}</span></span><span class="ms-go" aria-hidden="true">›</span></button>`; };
             const say = l.slice(0, 5).map(e => `${e.days === 0 ? 'aujourd’hui' : e.days === 1 ? 'demain' : 'dans ' + e.days + ' jours'}, ${nameT(e.p)}${e.age ? ', ' + e.age + ' ans' : ''}`).join('. ');
             MAIN.innerHTML = `<div><h1 class="ms-h2" tabindex="-1">Les anniversaires qui arrivent</h1>${l.length ? `<div class="ms-row">${speakBtn('Les prochains anniversaires : ' + say + '.', 'Écouter')}</div><div class="ms-soon">${l.map(row).join('')}</div>` : '<p class="ms-lead">Pas de date de naissance connue pour l’instant.</p>'}</div>`;
@@ -798,7 +841,7 @@
             const grp = (h, l) => (l.length ? `<section class="ms-grp"><h2>${h} · ${l.length}</h2>${l.sort((a, b) => byBirth(a.id, b.id)).map(pRow).join('')}</section>` : '');
             MAIN.innerHTML = `<div><h1 class="ms-h2" tabindex="-1">📍 ${esc(x.place)}</h1>
                 ${d.photos.length ? `<div class="ms-row"><button type="button" class="ms-btn primary" data-act="personslide" data-ph="${d.photos[0].id}" data-id="0"><span class="ms-ico" aria-hidden="true">▶</span><span>Voir les photos</span></button></div><div class="ms-mini">${d.photos.slice(0, 24).map(m => `<button type="button" class="ms-ph-tile" data-act="personslide" data-ph="${m.id}" data-id="0"><span class="ms-thumb">${img(m)}</span><span class="ms-cap"><b>${esc(m.title || 'Photo')}</b><span>${esc(photoWhen(m))}</span></span></button>`).join('')}</div>` : ''}
-                ${grp('Né·es ici', d.born)}${d.wed.length ? `<section class="ms-grp"><h2>Mariés ici · ${d.wed.length}</h2>${d.wed.map(f => `<button type="button" class="ms-prow" data-act="person" data-id="${f.a}">${ph(f.a, 76)}<span class="ms-tx"><span class="ms-nm">${esc(P(f.a).first)} et ${esc(P(f.b).first)}</span><span class="ms-yr">${esc(f.marr.date ? leD(f.marr.date) : '')}</span></span><span class="ms-go" aria-hidden="true">›</span></button>`).join('')}</section>` : ''}${grp('Mort·es ici', d.died)}</div>`;
+                ${grp('Né·es ici', d.born)}${d.wed.length ? `<section class="ms-grp"><h2>${i18n('Mariés ici')} · ${d.wed.length}</h2>${d.wed.map(f => `<button type="button" class="ms-prow" data-act="person" data-id="${f.a}">${ph(f.a, 76)}<span class="ms-tx"><span class="ms-nm">${listJoin([esc(P(f.a).first), esc(P(f.b).first)])}</span><span class="ms-yr">${esc(f.marr.date ? leD(f.marr.date) : '')}</span></span><span class="ms-go" aria-hidden="true">›</span></button>`).join('')}</section>` : ''}${grp('Mort·es ici', d.died)}</div>`;
         }
         /* ── ❓ Qui est-ce ? Un portrait, trois prénoms ── */
         const quizPool = () => (D ? [...D.P.values()].filter(p => p.photo && vis(p.id) && p.first && p.id !== viewerId()) : []);
@@ -807,16 +850,16 @@
             if (!V.quiz) { const tg = pool[Math.floor(Math.random() * pool.length)], others = pool.filter(p => p.id !== tg.id && p.first !== tg.first).sort(() => Math.random() - .5).slice(0, 2); V.quiz = {t: tg.id, opts: [tg.id, ...others.map(p => p.id)].sort(() => Math.random() - .5), wrong: [], done: false}; }
             const q = V.quiz, p = P(q.t), r = rel(q.t);
             MAIN.innerHTML = `<div class="ms-quiz"><h1 class="ms-h2" tabindex="-1">Qui est-ce ?</h1><div class="ms-quiz-ph">${ph(q.t, 260, 'big')}</div>
-                ${q.done ? `<p class="ms-lead ms-strong">Bravo ! C’est ${nameH(p)}${r ? ` (${r === 'toi' ? 'toi' : esc(r)})` : ''}.</p><div class="ms-row">${speakBtn(`C’est ${nameT(p)}${r ? ', ' + r : ''}.`, 'Écouter')}<button type="button" class="ms-btn" data-act="person" data-id="${q.t}"><span class="ms-ico" aria-hidden="true">📖</span><span>Sa fiche</span></button><button type="button" class="ms-btn primary" data-act="qnext"><span class="ms-ico" aria-hidden="true">➡</span><span>Un autre portrait</span></button></div>`
+                ${q.done ? `<p class="ms-lead ms-strong">${r ? i18n('Bravo ! C’est {name} ({rel}).', {name: nameH(p), rel: r === 'toi' ? i18n('toi') : esc(r)}) : i18n('Bravo ! C’est {name}.', {name: nameH(p)})}</p><div class="ms-row">${speakBtn(`C’est ${nameT(p)}${r ? ', ' + r : ''}.`, 'Écouter')}<button type="button" class="ms-btn" data-act="person" data-id="${q.t}"><span class="ms-ico" aria-hidden="true">📖</span><span>Sa fiche</span></button><button type="button" class="ms-btn primary" data-act="qnext"><span class="ms-ico" aria-hidden="true">➡</span><span>Un autre portrait</span></button></div>`
                 : `<div class="ms-quiz-opts">${q.opts.map(id => `<button type="button" class="ms-btn${q.wrong.includes(id) ? ' is-wrong' : ''}" data-act="qans" data-id="${id}" ${q.wrong.includes(id) ? 'disabled' : ''}><span>${esc(P(id).first)}</span></button>`).join('')}</div>`}
-                ${V.quizN ? `<p class="ms-hint">${plural(V.quizN, 'bonne réponse')} depuis le début</p>` : ''}</div>`;
+                ${V.quizN ? `<p class="ms-hint">${i18n('{n} depuis le début', {n: plural(V.quizN, 'bonne réponse')})}</p>` : ''}</div>`;
         }
-        function quizAnswer(id) { const q = V.quiz; if (!q || q.done) return; if (id === q.t) { q.done = true; V.quizN++; } else { q.wrong.push(id); msg(`Ce n’est pas ${P(id)?.first || 'ça'}. Essaie encore !`); } rQuiz(); }
+        function quizAnswer(id) { const q = V.quiz; if (!q || q.done) return; if (id === q.t) { q.done = true; V.quizN++; } else { q.wrong.push(id); msg(P(id)?.first ? i18n('Ce n’est pas {name}. Essaie encore !', {name: P(id).first}) : i18n('Ce n’est pas ça. Essaie encore !')); } rQuiz(); }
         /* ── 🕰 L'heure et la date, en très grand ── */
         let clockT = 0;
         function rClock() {
-            clearInterval(clockT); const paint = () => { const el = $('[data-ms-clock]', MAIN); if (!el || V.screen !== 'clock') { clearInterval(clockT); return; } const n = new Date(), h = n.getHours(), mi = String(n.getMinutes()).padStart(2, '0'), dd = `${JOURS[n.getDay()]} ${day1(n.getDate())} ${MOIS[n.getMonth()]} ${n.getFullYear()}`, part = h < 12 ? 'le matin' : h < 18 ? 'l’après-midi' : 'le soir';
-                el.innerHTML = `<div class="ms-clock-t">${h}<span>:</span>${mi}</div><div class="ms-clock-d">${esc(dd.charAt(0).toUpperCase() + dd.slice(1))}</div><div class="ms-clock-p">C’est ${part}</div>`;
+            clearInterval(clockT); const paint = () => { const el = $('[data-ms-clock]', MAIN); if (!el || V.screen !== 'clock') { clearInterval(clockT); return; } const n = new Date(), h = n.getHours(), mi = String(n.getMinutes()).padStart(2, '0'), dd = LNG() !== 'fr' && window.LCNDA_I18N?.fmtDate ? fmtL(n, {weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'}) : `${JOURS[n.getDay()]} ${day1(n.getDate())} ${MOIS[n.getMonth()]} ${n.getFullYear()}`, part = i18n(h < 12 ? 'le matin' : h < 18 ? 'l’après-midi' : 'le soir');
+                el.innerHTML = `<div class="ms-clock-t">${h}<span>:</span>${mi}</div><div class="ms-clock-d">${esc(dd.charAt(0).toUpperCase() + dd.slice(1))}</div><div class="ms-clock-p">${i18n('C’est {part}', {part})}</div>`;
                 const sb = $('[data-act=speak]', MAIN); if (sb && !sb.classList.contains('is-on')) sb.dataset.text = `Nous sommes ${dd}. Il est ${h} heure${h > 1 ? 's' : ''} ${Number(mi) ? Number(mi) : ''}, ${part}.`; };
             MAIN.innerHTML = `<div class="ms-clock"><h1 class="ms-sr" tabindex="-1">L’heure et la date</h1><div data-ms-clock></div><div class="ms-row">${speakBtn('', 'Écouter l’heure')}</div></div>`;
             paint(); if (live) clockT = setInterval(paint, 15000);
@@ -842,7 +885,7 @@
         /* ── Code de sortie ── */
         function rCode() {
             MAIN.innerHTML = `<div class="ms-code"><h1 tabindex="-1">Tape le code pour quitter</h1><p>C’est la personne qui a préparé l’app qui le connaît. Ce n’est pas une protection : il évite seulement de sortir par erreur.</p>
-                <div class="ms-dots" aria-live="polite" aria-label="${V.code.length} chiffre${V.code.length > 1 ? 's' : ''} tapé${V.code.length > 1 ? 's' : ''} sur 4">${[0, 1, 2, 3].map(i => `<i>${V.code[i] ? '●' : ''}</i>`).join('')}</div>
+                <div class="ms-dots" aria-live="polite" aria-label="${i18n('{n} sur 4', {n: plural(V.code.length, 'chiffre tapé', 'chiffres tapés')})}">${[0, 1, 2, 3].map(i => `<i>${V.code[i] ? '●' : ''}</i>`).join('')}</div>
                 <div class="ms-pad">${['1', '2', '3', '4', '5', '6', '7', '8', '9'].map(k => `<button type="button" class="ms-btn" data-act="digit" data-k="${k}">${k}</button>`).join('')}<button type="button" class="ms-btn txt" data-act="digit" data-k="⌫">⌫ Effacer</button><button type="button" class="ms-btn" data-act="digit" data-k="0">0</button><button type="button" class="ms-btn txt" data-act="home">Rester</button></div></div>`;
             if (live) setTimeout(() => $('.ms-pad .ms-btn', MAIN)?.focus({preventScroll: true}), 30);
         }
@@ -901,7 +944,7 @@
             case 'wup': case 'wdown': houseView?.goFloor?.(a === 'wup' ? 1 : -1); paintHouseBtns(); break;
             case 'wstop': houseView?.stopWalk?.(); paintHouseBtns(); break;
             case 'who': go('who'); break;
-            case 'setviewer': V.viewer = id && P(id) ? id : 0; if (full) setDev({viewer: V.viewer || undefined}); nearCache = null; V.choosing = false; V.stack = []; V.screen = 'home'; V.center = 0; render(true); msg(V.viewer ? `Bonjour ${P(V.viewer).first} ! L’app dira « ta mère », « ton petit-fils »…` : 'D’accord. L’app ne dira pas les liens de famille.'); break;
+            case 'setviewer': V.viewer = id && P(id) ? id : 0; if (full) setDev({viewer: V.viewer || undefined}); nearCache = null; V.choosing = false; V.stack = []; V.screen = 'home'; V.center = 0; render(true); msg(V.viewer ? i18n('Bonjour {name} ! L’app dira « ta mère », « ton petit-fils »…', {name: P(V.viewer).first}) : 'D’accord. L’app ne dira pas les liens de famille.'); break;
             case 'chooseother': V.choosing = true; go('people', {state: {peopleTab: 'family', letter: null}}); break;
             case 'center': if (id === V.center) return; V.stack.push(snapshot()); V.center = id; rTree(); focusMain(); break;
             case 'up': { const ps = visA(parentsOf(V.center)); if (ps.length) { V.stack.push(snapshot()); V.center = ps.find(x => P(x).g === 'm') || ps[0]; rTree(); focusMain(); } break; }
@@ -927,7 +970,7 @@
             case 'key': { const k = b.dataset.k; if (k === '⌫') V.query = V.query.slice(0, -1); else if (k === 'clear') V.query = ''; else V.query += V.query ? k.toLowerCase() : k; updSearch(); break; }
             case 'dictate': dictate(b); break;
             case 'digit': digit(b.dataset.k); break;
-            case 'hold': if (b.matches('.ms-hold')) { const h = $('.ms-hint', b); if (h) h.textContent = `Garde le doigt appuyé ${String(S.holdSec).replace('.', ',')} secondes`; } break;
+            case 'hold': if (b.matches('.ms-hold')) { const h = $('.ms-hint', b); if (h) h.textContent = i18n('Garde le doigt appuyé {n} secondes', {n: S.holdSec}); } break;
             default: break;
             }
         }
@@ -1104,7 +1147,7 @@
             const x = s.tx[k] || {}, cu = isCustom(k), K = cu ? CUSTOM_KINDS[x.kind] : null, icon = x.icon || (cu ? K[0] : TILE[k][0]), name = tileName(s, k), open = openTile === k;
             const pickLbl = x.kind === 'album' ? 'Les photos de' : x.kind === 'house' ? 'La maison' : 'La personne';
             const noPh = cu && x.kind === 'album' && x.pid && D && !D.media.some(m => !m.doc && m.people.includes(Number(x.pid)));
-            const need = cu ? tileNeed(x) : '', warn = need ? `<small class="ms-tr-warn">⚠️ ${esc(need)} pour qu’il apparaisse</small>` : noPh ? '<small class="ms-tr-warn">⚠️ Pas encore de photo de cette personne : le cadre est caché</small>' : '';
+            const need = cu ? tileNeed(x) : '', warn = need ? `<small class="ms-tr-warn">${i18n('⚠️ {what} pour qu’il apparaisse', {what: esc(i18n(need))})}</small>` : noPh ? '<small class="ms-tr-warn">⚠️ Pas encore de photo de cette personne : le cadre est caché</small>' : '';
             const edit = open ? `<div class="ms-tile-edit">
                 <label class="ms-tf"><span>Nom</span><input type="text" maxlength="40" data-ms-tlabel="${k}" value="${esc(x.label || '')}" placeholder="${esc(cu ? (x.label ? K[1] : name) : TILE[k][1])}"></label>
                 <label class="ms-tf"><span>Petite phrase</span><input type="text" maxlength="90" data-ms-tsub="${k}" value="${esc(x.sub || '')}" placeholder="${esc(cu ? K[2] : TILE[k][2] || 'Écrite toute seule (nombre de photos, souvenirs du jour)')}"></label>
@@ -1115,12 +1158,12 @@
                 <div class="ms-tf"><span>Couleur</span>${cu ? `<span data-ms-tcolor-slot="${k}" data-v="${esc(x.color || pal[K[3]])}"></span><small class="ms-cv">${x.color ? 'Ta couleur · ' + esc(x.color.toUpperCase()) : 'Celle du thème'}</small>` : `<span data-ms-color-slot="${k}" data-v="${esc(s.colors[k] || pal[k])}"></span><small class="ms-cv">${s.colors[k] ? 'Ta couleur · ' + esc(s.colors[k].toUpperCase()) : 'Celle du thème'}</small>`}</div>
                 <p><button type="button" class="button small secondary" data-ms-treset="${k}">↺ Remettre ce cadre comme au départ</button></p></div>` : '';
             return `<div class="ms-tile-row${open ? ' is-open' : ''}${on ? '' : ' is-off'}" data-k="${k}"><span class="ms-tr-ico" aria-hidden="true">${esc(icon)}</span><span class="ms-tr-t"><b>${esc(name)}</b>${cu ? `<small>${esc(K[1])}</small>` : ''}${warn}</span><span class="ms-sp"></span>
-                <button type="button" class="icon-button small" data-ms-tedit="${k}" aria-expanded="${open}" title="Modifier ce cadre" aria-label="Modifier « ${esc(name)} »">✎</button>
-                ${cu ? `<button type="button" class="icon-button small" data-ms-tdup="${k}" ${nCustom >= MAX_CUSTOM ? 'disabled' : ''} title="Dupliquer" aria-label="Dupliquer « ${esc(name)} »">⧉</button><button type="button" class="icon-button small" data-ms-tdel="${k}" title="Retirer ce cadre" aria-label="Retirer « ${esc(name)} »">×</button>` : ''}
-                <button type="button" class="icon-button small" data-ms-tile-up="${k}" ${i === 0 ? 'disabled' : ''} aria-label="Monter « ${esc(name)} »" title="Monter">↑</button><button type="button" class="icon-button small" data-ms-tile-down="${k}" ${i === s.tiles.length - 1 ? 'disabled' : ''} aria-label="Descendre « ${esc(name)} »" title="Descendre">↓</button>
-                <label class="ui-toggle ms-tg"><input type="checkbox" data-ms-tile="${k}" ${on ? 'checked' : ''} aria-label="Montrer « ${esc(name)} »"><i></i></label>${edit}</div>`;
+                <button type="button" class="icon-button small" data-ms-tedit="${k}" aria-expanded="${open}" title="Modifier ce cadre" aria-label="${i18n('Modifier « {name} »', {name: esc(name)})}">✎</button>
+                ${cu ? `<button type="button" class="icon-button small" data-ms-tdup="${k}" ${nCustom >= MAX_CUSTOM ? 'disabled' : ''} title="Dupliquer" aria-label="${i18n('Dupliquer « {name} »', {name: esc(name)})}">⧉</button><button type="button" class="icon-button small" data-ms-tdel="${k}" title="Retirer ce cadre" aria-label="${i18n('Retirer « {name} »', {name: esc(name)})}">×</button>` : ''}
+                <button type="button" class="icon-button small" data-ms-tile-up="${k}" ${i === 0 ? 'disabled' : ''} aria-label="${i18n('Monter « {name} »', {name: esc(name)})}" title="Monter">↑</button><button type="button" class="icon-button small" data-ms-tile-down="${k}" ${i === s.tiles.length - 1 ? 'disabled' : ''} aria-label="${i18n('Descendre « {name} »', {name: esc(name)})}" title="Descendre">↓</button>
+                <label class="ui-toggle ms-tg"><input type="checkbox" data-ms-tile="${k}" ${on ? 'checked' : ''} aria-label="${i18n('Montrer « {name} »', {name: esc(name)})}"><i></i></label>${edit}</div>`;
         }).join('');
-        const add = `<div class="ms-tadd"><span class="ms-sl">＋ Ajouter un cadre</span>${KIND_GROUPS.map(([g, kinds]) => `<div class="ms-tadd-g"><small class="ms-tadd-h">${esc(g)}</small>${kinds.map(kd => { const [ic, lb, sb] = CUSTOM_KINDS[kd]; return `<button type="button" class="button small secondary" data-ms-tadd="${kd}" title="${esc(sb)}" ${nCustom >= MAX_CUSTOM ? 'disabled' : ''}><span aria-hidden="true">${ic}</span> ${lb}</button>`; }).join('')}</div>`).join('')}${nCustom >= MAX_CUSTOM ? `<small class="ms-help">${MAX_CUSTOM} cadres ajoutés au plus.</small>` : ''}</div>`;
+        const add = `<div class="ms-tadd"><span class="ms-sl">＋ Ajouter un cadre</span>${KIND_GROUPS.map(([g, kinds]) => `<div class="ms-tadd-g"><small class="ms-tadd-h">${esc(g)}</small>${kinds.map(kd => { const [ic, lb, sb] = CUSTOM_KINDS[kd]; return `<button type="button" class="button small secondary" data-ms-tadd="${kd}" title="${esc(sb)}" ${nCustom >= MAX_CUSTOM ? 'disabled' : ''}><span aria-hidden="true">${ic}</span> ${lb}</button>`; }).join('')}</div>`).join('')}${nCustom >= MAX_CUSTOM ? `<small class="ms-help">${MAX_CUSTOM} ${i18n('cadres ajoutés au plus.')}</small>` : ''}</div>`;
         return `<div class="ms-tiles-set" data-ms-tiles>${rows}</div>${add}`;
     }
     /** les champs propres à une sorte de cadre ajouté : la photo, le film, le lieu, le numéro… */
@@ -1207,8 +1250,8 @@
                 ${s.perRow || s.tileH || s.tileGap || s.tileTitle ? '<p><button type="button" class="link-button" data-ms-lay-reset>↺ Remettre la disposition comme au départ</button></p>' : ''}
                 ${why('Un cadre par ligne se vise sans peine sur une tablette ; trois ou quatre par ligne montrent tout d’un coup sur un grand écran. Sur un téléphone, il n’y en a jamais plus de deux.')}`)}
             ${line('Personnes vivantes', `${segH('living', s.living, [['show', 'Tout montrer'], ['first', 'Prénom seulement'], ['hide', 'Cacher']])}${privacyOn() && s.living === 'show' ? '<p class="ms-help">ℹ️ Le « mode confidentialité » de l’app est allumé : les vivants sont montrés par leur prénom seulement.</p>' : ''}<p class="ms-help">Les fiches marquées « confidentielles » ne sont jamais montrées.</p>${why('Pour montrer l’arbre à un voisin ou à l’école sans dévoiler les vivants.')}`)}
-            ${line('Branches', `${branches.length ? `<div class="ms-branches">${branches.map(b => `<label class="ms-branch"><input type="checkbox" data-ms-branch="${esc(b.key)}" ${s.branchesOff.includes(b.key) ? '' : 'checked'}><b>Côté ${esc(b.name)}</b> <small>${plural(b.n, 'personne')}</small></label>`).join('')}</div>` : '<p class="ms-help">Les branches apparaîtront quand l’arbre sera lu.</p>'}${why('La personne qui regarde, sa famille proche et ses descendants restent toujours visibles.')}`)}
-            ${line('Photos retirées', `<div class="ms-hidden-ph">${hidden.map(m => `<span class="ms-hph"><img src="${esc(m.thumb)}" alt=""><b>${esc(m.title || 'Photo')}</b> <small>${esc(m.date ? String(m.date.y) : '')}</small><button type="button" class="ms-hph-x" data-ms-unhide="${m.id}" aria-label="Remettre « ${esc(m.title || 'Photo')} » dans le mode simple" title="Remettre dans le mode simple">×</button></span>`).join('')}</div>
+            ${line('Branches', `${branches.length ? `<div class="ms-branches">${branches.map(b => `<label class="ms-branch"><input type="checkbox" data-ms-branch="${esc(b.key)}" ${s.branchesOff.includes(b.key) ? '' : 'checked'}><b>${i18n('Côté {branch}', {branch: esc(b.name)})}</b> <small>${plural(b.n, 'personne')}</small></label>`).join('')}</div>` : '<p class="ms-help">Les branches apparaîtront quand l’arbre sera lu.</p>'}${why('La personne qui regarde, sa famille proche et ses descendants restent toujours visibles.')}`)}
+            ${line('Photos retirées', `<div class="ms-hidden-ph">${hidden.map(m => `<span class="ms-hph"><img src="${esc(m.thumb)}" alt=""><b>${esc(m.title || 'Photo')}</b> <small>${esc(m.date ? String(m.date.y) : '')}</small><button type="button" class="ms-hph-x" data-ms-unhide="${m.id}" aria-label="${i18n('Remettre « {name} » dans le mode simple', {name: esc(m.title || i18n('Photo'))})}" title="Remettre dans le mode simple">×</button></span>`).join('')}</div>
                 <button type="button" class="button secondary" data-ms-pick-hidden>🖼 Choisir les photos à retirer…</button>${why('« Retirer » cache la photo du mode simple seulement : elle reste dans tes médias.')}`)}
             ${line('Actes et documents', `${tg('data-ms-bool="docs"', s.docs, 'Montrer aussi les actes et documents', 'Souvent difficiles à lire.')}${why('Une écriture ancienne ou une page dense découragent ; les photos parlent à tout le monde.')}`)}`,
             `${plural(s.tiles.filter(t => t[1]).length, 'gros bouton')} · ${plural(D ? D.media.filter(m => !s.hiddenPhotos.includes(m.id) && (s.docs || !m.doc)).length : 0, 'photo')}`)}
@@ -1216,10 +1259,10 @@
         ${sec('slides', 7, `${line('Durée de chaque photo', `${rangeH('slideSec', 'Durée de chaque photo', s.slideSec, 3, 30, 1, 's', 8)}${why('Le temps de regarder, et de dire « Oh, c’est ta tante ! ».')}`)}
             ${line('Défilement', tg('data-ms-bool="slideAuto"', s.slideAuto, 'Faire défiler tout seul en ouvrant le diaporama'))}
             ${line('Cadre photo', `${tg('data-ms-bool="idleFrame"', s.idleFrame, 'Quand personne ne touche, lancer le diaporama')}${rangeH('idleMin', 'Minutes sans toucher', s.idleMin, 1, 60, 1, 'min', 5).replace('<input', s.idleFrame ? '<input' : '<input disabled')}${why('La tablette posée sur le buffet devient un cadre photo de famille.')}`)}`,
-            `${s.slideSec} s par photo · ${s.idleFrame ? `cadre après ${s.idleMin} min` : 'sans cadre photo'}`)}
+            `${i18n('{n} s par photo', {n: s.slideSec})} · ${s.idleFrame ? i18n('cadre après {n} min', {n: s.idleMin}) : i18n('sans cadre photo')}`)}
 
         ${sec('exit', 8, `${line('Pour quitter', `${rangeH('holdSec', 'Durée de l’appui long', s.holdSec, 1, 10, 0.5, 's', 3)}<p class="ms-help">Garder le doigt sur « 🔒 Quitter le mode simple » (sur l’accueil seulement).</p>${why('Un appui long ne se fait pas par hasard : on ne sort pas par erreur.')}`)}
-            ${line('Code à 4 chiffres', `${tg('data-ms-bool="useCode"', s.useCode, 'Demander aussi un code')}<div class="ms-codein" data-ms-codein>${[0, 1, 2, 3].map(i => `<input type="password" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="Chiffre ${i + 1} du code" data-ui-off ${s.useCode || !s.codeHash ? '' : ''}>`).join('')}</div>
+            ${line('Code à 4 chiffres', `${tg('data-ms-bool="useCode"', s.useCode, 'Demander aussi un code')}<div class="ms-codein" data-ms-codein>${[0, 1, 2, 3].map(i => `<input type="password" inputmode="numeric" maxlength="1" autocomplete="off" aria-label="${i18n('Chiffre {n} du code', {n: i + 1})}" data-ui-off ${s.useCode || !s.codeHash ? '' : ''}>`).join('')}</div>
                 <p class="ms-help">${s.codeHash ? '🔒 Un code est enregistré (il est gardé caché, même pour l’app). Tape 4 chiffres pour le changer.' : 'Tape 4 chiffres : le code est gardé caché, jamais en clair.'}</p>${why('Utile quand un petit-enfant joue aussi avec la tablette. Ce n’est pas une vraie protection : il évite seulement de sortir par erreur.')}`)}
             ${line('Sur cet appareil', `${tg('data-ms-dev="start"', !!dev().start, 'Ouvrir l’app directement en mode simple')}<div class="ms-addr"><code>…/#mode-simple</code><button type="button" class="button small secondary" data-ms-copy>📋 Copier</button></div>${why('Sur la tablette de Mamie, l’app s’ouvre toute seule sur les gros boutons. Ajoute l’adresse à l’écran d’accueil de la tablette.')}`)}
             <h4 class="ms-forall">Pour tout le monde</h4>
@@ -1231,7 +1274,7 @@
             <div class="ms-tablet"><div class="ms-tablet-in" data-ms-pv-host></div></div>
             <p class="ms-pv-meta">Texte <b>${e.fs} px</b> · boutons <b>${e.btnH} px</b> · police <b>${esc(fontLabel(s.font).replace(/ \(.*\)$/, ''))}</b></p>
             <p class="ms-pv-badges">${Object.values(s.link).every(Boolean) ? (UI().badge ? UI().badge('Suit l’accessibilité de l’app', 'blue') : '') : ''}${bad.length && UI().badge ? UI().badge('Contraste à corriger', 'yellow') : ''}</p>
-            <p class="muted ms-small">Ce que verra ${vp && !s.notInTree ? esc(vp.first) : 'la personne'} sur une tablette. Le mode simple ne permet <b>ni de modifier, ni de supprimer</b> : ni menu caché, ni clic droit.</p></aside>
+            <p class="muted ms-small">${vp && !s.notInTree ? i18n('Ce que verra {name} sur une tablette. Le mode simple ne permet <b>ni de modifier, ni de supprimer</b> : ni menu caché, ni clic droit.', {name: esc(vp.first)}) : i18n('Ce que verra la personne sur une tablette. Le mode simple ne permet <b>ni de modifier, ni de supprimer</b> : ni menu caché, ni clic droit.')}</p></aside>
         <button type="button" class="button ms-pv-jump" data-ms-pv-jump aria-label="Voir l’aperçu">👁 Aperçu</button>
         </div>`;
     }
@@ -1276,18 +1319,18 @@
         if (slot && UIx.presetsFrame) {
             const today = () => new Date().toISOString();
             const frame = UIx.presetsFrame({id: 'mode-simple', what: 'les réglages du mode simple (couleurs, tailles, police, voix, ce qu’on montre)', list: presets, quietApply: true,
-                apply: i => { const x = presets()[i]; if (!x) return false; change(st => Object.assign(st, clean({...x.data, ready: st.ready, codeHash: st.codeHash, viewer: st.viewer, notInTree: st.notInTree})), true); toast(`Réglages « ${x.name} » appliqués.`); return false; },
+                apply: i => { const x = presets()[i]; if (!x) return false; change(st => Object.assign(st, clean({...x.data, ready: st.ready, codeHash: st.codeHash, viewer: st.viewer, notInTree: st.notInTree})), true); toast(i18n('Réglages « {name} » appliqués.', {name: x.name})); return false; },
                 save: name => { const l = presets(), it = {name, date: today(), data: strip(read())}, i = l.findIndex(x => x.name === name); if (i >= 0) l[i] = it; else l.push(it); savePresets(l); },
                 replace: i => { const l = presets(); if (!l[i]) return false; l[i] = {...l[i], date: today(), data: strip(read())}; savePresets(l); },
                 rename: (i, name) => { const l = presets(); if (!l[i]) return false; l[i].name = name; savePresets(l); },
                 duplicate: i => { const l = presets(), x = l[i]; if (!x) return false; const nm = UIx.freeName ? UIx.freeName(x.name, l.map(y => y.name)) : x.name + ' (copie)'; l.splice(i + 1, 0, {name: nm, date: today(), data: clone(x.data)}); savePresets(l); },
                 exportOne: i => { const x = presets()[i]; if (x) A().exportSettingFile?.('mode-simple', x.name, {data: x.data}); return false; },
-                remove: i => { const l = presets(), x = l[i]; if (!x) return false; A().undoLocalChange ? A().undoLocalChange(`Réglage « ${x.name} » supprimé`, [PKEY], () => { l.splice(i, 1); savePresets(l); }, () => { if (frame.isConnected) frame.refresh(); }) : (l.splice(i, 1), savePresets(l)); },
+                remove: i => { const l = presets(), x = l[i]; if (!x) return false; A().undoLocalChange ? A().undoLocalChange(i18n('Réglage « {name} » supprimé', {name: x.name}), [PKEY], () => { l.splice(i, 1); savePresets(l); }, () => { if (frame.isConnected) frame.refresh(); }) : (l.splice(i, 1), savePresets(l)); },
                 importOne: async () => {
                     const got = await A().importSettingFile?.('mode-simple', {names: presets().map(x => x.name), check: d => d && typeof d.data === 'object' && d.data && !Array.isArray(d.data)});
                     if (!got) return false;
                     const l = presets(); l.push({name: got.nom, date: today(), data: strip(clean(got.donnees.data))}); savePresets(l);
-                    toast(`Réglage « ${got.nom} » importé : clique « Appliquer » pour t’en servir.`);
+                    toast(i18n('Réglage « {name} » importé : clique « Appliquer » pour t’en servir.', {name: got.nom}));
                 },
             });
             slot.replaceWith(frame);
@@ -1341,7 +1384,7 @@
             if (b.dataset.msFix) { const k = b.dataset.msFix; change(st => { const pal = eff(st).pal; st.colors[k] = fixColor(pal[k], b.dataset.against); }, true); return; }
             if (b.dataset.msTedit) { openTile = openTile === b.dataset.msTedit ? null : b.dataset.msTedit; renderSettings(box); if (openTile) setTimeout(() => $(`[data-ms-tlabel="${CSS.escape(openTile)}"]`, box)?.focus({preventScroll: false}), 0); return; }
             if (b.dataset.msTadd) { const kd = b.dataset.msTadd; let id = ''; change(st => { if (st.tiles.filter(t => isCustom(t[0])).length >= MAX_CUSTOM) return; let n = 1; while (st.tx['c' + n] || st.tiles.some(t => t[0] === 'c' + n)) n++; id = 'c' + n; st.tiles.push([id, true]); st.tx[id] = {kind: kd}; }); openTile = id || openTile; renderSettings(box);
-                if (kd === 'house' && id) apiGet('houses').then(r => { const l = r?.items || []; if (l.length === 1 && !read().tx[id]?.hid) { change(st => { if (st.tx[id]) st.tx[id].hid = Number(l[0].id); }, true); toast(`Maison choisie : « ${l[0].name || 'Maison'} ».`); } }).catch(() => {});
+                if (kd === 'house' && id) apiGet('houses').then(r => { const l = r?.items || []; if (l.length === 1 && !read().tx[id]?.hid) { change(st => { if (st.tx[id]) st.tx[id].hid = Number(l[0].id); }, true); toast(i18n('Maison choisie : « {name} ».', {name: l[0].name || i18n('Maison')})); } }).catch(() => {});
                 return; }
             if (b.dataset.msTdup) { const k = b.dataset.msTdup; let id = ''; change(st => { if (st.tiles.filter(t => isCustom(t[0])).length >= MAX_CUSTOM) return; let n = 1; while (st.tx['c' + n] || st.tiles.some(t => t[0] === 'c' + n)) n++; id = 'c' + n; const i = st.tiles.findIndex(t => t[0] === k); st.tiles.splice(i + 1, 0, [id, true]); st.tx[id] = clone(st.tx[k] || {}); }); openTile = id || openTile; renderSettings(box); return; }
             if (b.dataset.msTdel) { const k = b.dataset.msTdel; if (openTile === k) openTile = null; change(st => { st.tiles = st.tiles.filter(t => t[0] !== k); delete st.tx[k]; }, true); return; } // H7 : « ↶ Annuler » en bas à gauche (K2)
@@ -1370,7 +1413,7 @@
             if (b.hasAttribute('data-ms-font')) { const s0 = read(); const f = await UIx().openFontPicker?.({value: s0.font || 'Inter', sample: 'Louise CHASTANG, ta mère', title: 'La police du mode simple', top: ['Atkinson Hyperlegible', 'Luciole', 'OpenDyslexic']}); if (f) { UIx().rememberFont?.(f); change(st => { st.font = f === 'Inter' ? '' : f; }, true); } return; }
             if (b.hasAttribute('data-ms-say')) { const s0 = read(), e0 = eff(s0); try { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance('Bonjour ! Voici Louise Chastang, ta mère. Elle est née le 3 mai 1897 à Arnac-la-Poste.'); u.lang = 'fr-FR'; u.rate = e0.rate / 100; const v = frVoices().find(x => x.voiceURI === e0.voiceName); if (v) u.voice = v; speechSynthesis.speak(u); } catch (_) {} return; }
             if (b.hasAttribute('data-ms-hush')) { try { speechSynthesis.cancel(); } catch (_) {} return; }
-            if (b.hasAttribute('data-ms-copy')) { const url = location.origin + location.pathname + '#mode-simple'; try { await navigator.clipboard.writeText(url); toast('Adresse copiée : ' + url); } catch (_) { toast(url); } return; }
+            if (b.hasAttribute('data-ms-copy')) { const url = location.origin + location.pathname + '#mode-simple'; try { await navigator.clipboard.writeText(url); toast(i18n('Adresse copiée : {url}', {url})); } catch (_) { toast(url); } return; }
         });
         const UIx = UI;
         page.addEventListener('change', e => {
