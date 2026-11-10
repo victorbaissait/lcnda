@@ -7,6 +7,8 @@
  */
 (() => {
     'use strict';
+    const i18n = (text, vars) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(text, vars) : String(text ?? '')); // 🌐 app-i18n.js
+    const i18nFr = () => !window.LCNDA_I18N || window.LCNDA_I18N.lang === 'fr';
     const A = () => window.LCNDA_APP || {};
     const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
     const fold = s => String(s ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
@@ -346,22 +348,23 @@
         if (!q) { if (canCreate && !mixed && K[kind]?.createEmpty) out.push({act: 'create', kind, text: '', html: `＋ ${esc(K[kind].createEmpty)}`}); return out; }
         if (canCreate && !mixed) {
             const text = kind === 'person' ? q.charAt(0).toUpperCase() + q.slice(1) : q;
-            out.push({act: 'create', kind, text, html: `＋ ${esc(K[kind]?.create || 'Créer')} « ${esc(text)} »`});
+            out.push({act: 'create', kind, text, html: `＋ ${esc(i18n(K[kind]?.create || 'Créer'))} « ${esc(text)} »`});
         }
-        if (c.opts.allowFree) out.push({act: 'free', kind, text: q, muted: true, html: `✎ Garder le texte « ${esc(q)} » sans fiche`});
-        if (kind === 'place' && !mixed) out.push({act: 'map', kind, text: q, muted: true, html: '🗺 Choisir sur la carte'});
+        if (c.opts.allowFree) out.push({act: 'free', kind, text: q, muted: true, html: i18n('✎ Garder le texte « {q} » sans fiche', {q: esc(q)})});
+        if (kind === 'place' && !mixed) out.push({act: 'map', kind, text: q, muted: true, html: i18n('🗺 Choisir sur la carte')});
         return out;
     }
     function headText(c, s) {
         const st = S(s), kind = st.kind.includes(',') ? '' : st.kind;
         if (kind === 'place') {
             const g = Object.fromEntries(st.groups.map(x => [x.key, x])), parts = [];
-            if (g.base?.total) parts.push(`${plural(g.base.total, 'lieu', 'lieux')} de ta base`);
-            if (g.fr?.total) parts.push(plural(g.fr.total, 'commune') + ' de France');
-            if (g.world?.total) parts.push(g.world.total >= 300 ? '300 villes du monde et plus' : plural(g.world.total, 'ville') + ' du monde');
+            if (g.base?.total) parts.push(i18n('{what} de ta base', {what: plural(g.base.total, 'lieu', 'lieux')}));
+            if (g.fr?.total) parts.push(i18n('{what} de France', {what: plural(g.fr.total, 'commune')}));
+            if (g.world?.total) parts.push(g.world.total >= 300 ? i18n('300 villes du monde et plus') : i18n('{what} du monde', {what: plural(g.world.total, 'ville')}));
             return parts.join(' · ');
         }
         const k = K[kind] || K.person, n = st.groups.reduce((a, g) => a + (g.total || 0), 0);
+        if (!i18nFr()) return i18n('{what} trouvés', {what: plural(n, k.one, k.many), n}); // 🌐 « 3 records found »
         return `${plural(n, k.one, k.many)} ${k.fem ? (n > 1 ? 'trouvées' : 'trouvée') : (n > 1 ? 'trouvés' : 'trouvé')}`;
     }
     function renderList(c, s, keepScroll) {
@@ -392,7 +395,8 @@
             head = `<div class="pk-head"><span>${esc(headText(c, s))}</span><span>↑ ↓ Entrée</span></div>`;
         }
         const kindNow = st.kind.includes(',') ? '' : st.kind;
-        const empty = !flat.length ? (q ? `<div class="pk-empty">${esc(kindNow ? K[kindNow]?.none || 'Rien' : 'Rien')} pour « ${esc(q)} ». Vérifie l’orthographe${acts.length ? ', ou :' : '.'}</div>` : `<div class="pk-empty">${esc(kindNow ? K[kindNow]?.none || 'Rien' : 'Rien')} pour l’instant${acts.length ? ' :' : '.'}</div>`) : '';
+        const noneW = esc(i18n(kindNow ? K[kindNow]?.none || 'Rien' : 'Rien'));
+        const empty = !flat.length ? (q ? `<div class="pk-empty">${i18n('{none} pour « {q} ». Vérifie l’orthographe', {none: noneW, q: esc(q)})}${acts.length ? i18n(', ou :') : '.'}</div>` : `<div class="pk-empty">${i18n('{none} pour l’instant', {none: noneW})}${acts.length ? ' :' : '.'}</div>`) : '';
         let ai = flat.length;
         const foot = acts.length ? `<div class="pk-foot">${acts.map(a => { const h = `<div class="pk-act pk-row${a.muted ? ' muted' : ''}${ai === st.active ? ' on' : ''}" role="option" data-row="${ai}">${a.html}</div>`; ai++; return h; }).join('')}</div>` : '';
         list.innerHTML = head + (flat.length ? `<div class="pk-scroll">${body}</div>` : empty) + foot;

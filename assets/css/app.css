@@ -4868,6 +4868,21 @@ dialog .is-save-locked, dialog .is-save-locked:hover { opacity: .45; cursor: not
 .toast.ui-toast.mj-toast .ui-toast-text{flex:1 1 calc(100% - 40px)}
 .toast.ui-toast.mj-toast .ui-toast-acts{flex:1 1 100%;flex-wrap:wrap;margin-left:0}
 .toast.ui-toast.mj-toast .ui-toast-btn{white-space:normal}
+/* ═════ 🌐 Langue de l'app (app-i18n.js) : le bandeau « Traduction faite par une IA » et le choix de la langue ═════ */
+.lc-i18n-banner{position:fixed;right:16px;bottom:16px;z-index:60;display:flex;align-items:center;gap:8px;max-width:min(520px,calc(100vw - 32px));padding:8px 8px 8px 12px;background:var(--paper,#fff);color:var(--ink,#111);border:1.5px solid var(--blue,#0066cc);box-shadow:0 4px 18px rgba(0,0,0,.14);font-size:13px;line-height:1.35}
+.lc-i18n-banner-ico{font-size:16px;flex:none}
+.lc-i18n-banner-t{flex:1 1 auto;min-width:0;overflow-wrap:anywhere}
+.lc-i18n-banner-btn{flex:none;border:1.5px solid var(--blue,#0066cc);background:transparent;color:var(--blue,#0066cc);font:inherit;font-weight:700;padding:4px 8px;cursor:pointer;white-space:nowrap}
+.lc-i18n-banner-btn:hover{background:var(--blue,#0066cc);color:#fff}
+.lc-i18n-banner-x{flex:none;width:26px;height:26px;border:0;background:transparent;color:inherit;font-size:18px;line-height:1;cursor:pointer}
+@media (max-width:640px){.lc-i18n-banner{left:16px;right:16px;bottom:12px;flex-wrap:wrap;font-size:12.5px}.lc-i18n-banner-t{flex-basis:calc(100% - 60px)}}
+html:not([lang="fr"]) .dashboard-widget-catalog-item strong{min-width:0}
+html.ms-open .lc-i18n-banner{display:none} /* 🧓 mode simple : pas de petite croix ni de bandeau par-dessus */
+.lc-lang-field select{font-size:15px}
+.install-lang{display:flex;align-items:center;gap:8px;justify-content:flex-end;margin:0 0 12px;font-weight:700}
+.install-lang select{font:inherit;font-weight:400;padding:4px 6px}
+/* les mots longs (allemand, néerlandais, polonais) se coupent au lieu de déborder */
+html:not([lang="fr"]) .dashboard-widget-catalog-item strong,html:not([lang="fr"]) #sidebar-content button,html:not([lang="fr"]) .main-nav .nav-item,html:not([lang="fr"]) .page-header h2,html:not([lang="fr"]) .sidebar-top h1,html:not([lang="fr"]) .ui-listbar,html:not([lang="fr"]) .card h3,html:not([lang="fr"]) .dashboard-widget h3{overflow-wrap:anywhere;hyphens:auto}
 /* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
 :root[data-theme="dark"] .install-card .import-form label{color:#c7c7c7}
 :root[data-theme="dark"] .person-list-item .life-dot.deceased{border-color:#4c4c4c}

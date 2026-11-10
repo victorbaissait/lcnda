@@ -83,7 +83,7 @@
         origAdd.call(window,'beforeunload',ev=>{if(document.querySelector('dialog[open][data-dirty="1"]:not(#lightbox)')){ev.preventDefault();ev.returnValue='';return '';}});
         return out;
     })();
-    const NET_ERROR_MSG='Pas de connexion avec LCNDA : rien n’est perdu, réessaie.';
+    const NET_ERROR_MSG=window.LCNDA_I18N?window.LCNDA_I18N.t('Pas de connexion avec LCNDA : rien n’est perdu, réessaie.'):'Pas de connexion avec LCNDA : rien n’est perdu, réessaie.';
 
     // ── Réglages de l'interface rangés aussi dans la base (structure n°4, lib/settings.php) ──
     // Les réglages restent lus dans le localStorage (rapide, comme avant) ; la base en garde une copie pour qu'ils
@@ -135,6 +135,8 @@
     })();
 
     const $ = (selector, root = document) => root.querySelector(selector);
+    /** 🌐 i18n('Texte français', {vars}) : le texte dans la langue choisie (assets/js/app-i18n.js) ; en français, le texte tel quel */
+    const i18n = (text, vars) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(text, vars) : String(text ?? ''));
     const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
     /** Adresse web d'un lien : seulement http(s), mailto ou tel (une adresse « javascript: » importée ne doit pas s'exécuter). */
     /** Réglages d'apparence ; un réglage abîmé (import, édition à la main) ne doit pas empêcher l'app de démarrer. */
@@ -1350,7 +1352,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         const url = new URL('api.php', location.href);
         url.searchParams.set('action', action);
         Object.entries(params).forEach(([key, value]) => value !== undefined && url.searchParams.set(key, value));
-        const init = {headers: {'Accept':'application/json', ...(typeof window.LCNDA_GENEALOGY === 'string' ? {'X-Genealogy': window.LCNDA_GENEALOGY} : {})}, ...options};
+        const init = {headers: {'Accept':'application/json', ...(typeof window.LCNDA_GENEALOGY === 'string' ? {'X-Genealogy': window.LCNDA_GENEALOGY} : {}), ...(window.LCNDA_I18N && window.LCNDA_I18N.lang !== 'fr' ? {'X-LCNDA-Lang': window.LCNDA_I18N.lang} : {})}, ...options}; // 🌐 messages d'erreur du serveur dans la langue choisie (lib/i18n.php)
         if (options.method && options.method !== 'GET') {
             state.writeCount = (state.writeCount || 0) + 1; // une écriture : les données gardées en mémoire (pages du tableau de bord) sont à relire
             init.headers = {...init.headers, 'Content-Type':'application/json', 'X-CSRF-Token':state.csrf};
@@ -1379,7 +1381,8 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     function setCountStatus(el, label) { if (!el) return; el.innerHTML = String(label).split(' · ').map(part => `<span class="db-count-line">${escapeHtml(part)}</span>`).join(''); el.title = String(label); }
     function personCountLabel(count, animals = state.bootstrap?.stats?.animaux) {
         const n = Number(count) || 0, a = Number(animals) || 0, mode = baseMode();
-        const ppl = `${n.toLocaleString('fr-FR')} personne${n > 1 ? 's' : ''}`, ani = `${a.toLocaleString('fr-FR')} anima${a > 1 ? 'ux' : 'l'}`;
+        const fr = !window.LCNDA_I18N || window.LCNDA_I18N.lang === 'fr';
+        const ppl = fr ? `${n.toLocaleString('fr-FR')} personne${n > 1 ? 's' : ''}` : plural(n, 'personne'), ani = fr ? `${a.toLocaleString('fr-FR')} anima${a > 1 ? 'ux' : 'l'}` : plural(a, 'animal', 'animaux');
         if (mode === 'breeding') return n ? `${ani} · ${ppl}` : ani;
         return a ? `${ppl} · ${ani}` : ppl;
     }
@@ -1447,11 +1450,11 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     function confirmBox(message='', {title='', okLabel='', cancelLabel='Annuler', danger=null}={}){
         if(typeof message==='object'&&message){({message='',title='',okLabel='',cancelLabel='Annuler',danger=null}=message);}
         const isDanger=danger===null?/supprim|effac|retir|vider|écras|remplac|détach|oubli|perd|annul|réinitialis|définitiv/i.test(`${title} ${message} ${okLabel}`):!!danger;
-        const ok=okLabel||(isDanger?(/supprim/i.test(`${title} ${message}`)?'Supprimer':'Continuer'):'Continuer');
+        const ok=okLabel||i18n(isDanger?(/supprim/i.test(`${title} ${message}`)?'Supprimer':'Continuer'):'Continuer');
         return new Promise(resolve=>{
             const dialog=document.createElement('dialog');
             dialog.className='modal small-modal confirm-box-dialog';
-            dialog.innerHTML=`<form method="dialog"><div class="modal-head"><div><span class="eyebrow">${isDanger?'⚠️ ATTENTION':'CONFIRMER'}</span><h2>${escapeHtml(title||(isDanger?'Es-tu sûr ?':'Confirmer'))}</h2></div><button class="icon-button" type="button" data-cb-cancel aria-label="Fermer">×</button></div>${message?`<p class="confirm-box-text">${escapeHtml(message)}</p>`:''}<div class="modal-actions"><span class="spacer"></span><button class="button secondary" type="button" data-cb-cancel>${escapeHtml(cancelLabel)}</button><button class="button${isDanger?' danger':''}" type="submit" data-cb-ok>${escapeHtml(ok)}</button></div></form>`;
+            dialog.innerHTML=`<form method="dialog"><div class="modal-head"><div><span class="eyebrow">${i18n(isDanger?'⚠️ ATTENTION':'CONFIRMER')}</span><h2>${escapeHtml(title||i18n(isDanger?'Es-tu sûr ?':'Confirmer'))}</h2></div><button class="icon-button" type="button" data-cb-cancel aria-label="${escapeHtml(i18n('Fermer'))}">×</button></div>${message?`<p class="confirm-box-text">${escapeHtml(message)}</p>`:''}<div class="modal-actions"><span class="spacer"></span><button class="button secondary" type="button" data-cb-cancel>${escapeHtml(i18n(cancelLabel))}</button><button class="button${isDanger?' danger':''}" type="submit" data-cb-ok>${escapeHtml(ok)}</button></div></form>`;
             document.body.appendChild(dialog);
             let answer=false;
             dialog.querySelector('form').addEventListener('submit',e=>{e.preventDefault();answer=true;dialog.close();});
@@ -1478,11 +1481,11 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         });
     }
     /** Pluriels : plural(1,'personne') → « 1 personne », plural(3,'personne') → « 3 personnes », plural(2,'cheval','chevaux') ; 0 et 1 au singulier */
-    function plural(n,one,many=''){const v=Number(n)||0;return `${v.toLocaleString('fr-FR')} ${Math.abs(v)<2?one:(many||(/[sxz]$/.test(one)?one:`${one}s`))}`;}
+    function plural(n,one,many=''){if(window.LCNDA_I18N&&window.LCNDA_I18N.lang!=='fr')return window.LCNDA_I18N.plural(n,one,many);const v=Number(n)||0;return `${v.toLocaleString('fr-FR')} ${Math.abs(v)<2?one:(many||(/[sxz]$/.test(one)?one:`${one}s`))}`;} // 🌐 dans une autre langue : Intl.PluralRules (app-i18n.js)
     /** 📭 K10 « Rien ici » : deux tailles, toujours avec le bouton pour commencer quand c'est possible (docs/UI.md).
      *  Grande boîte (une page ou une liste vide) : emptyState({icon:'📚', text:'Aucun livre pour l’instant', hint:'…', action:{label:'＋ Nouveau livre', attrs:'data-x'}})
      *  Petite ligne (dans un bloc ou un panneau) : emptyState({text: texte, icon, action}) = emptyState({…, size:'small'}) */
-    function emptyState({icon='📭',text='Rien pour l’instant',hint='',action=null,size='big'}={}){
+    function emptyState({icon='📭',text=i18n('Rien pour l’instant'),hint='',action=null,size='big'}={}){
         const btn=action?`<button type="button" class="button small${size==='small'?' secondary':''}" ${action.attrs||''}>${escapeHtml(action.label)}</button>`:'';
         if(size==='small')return `<div class="empty-line"><span class="empty-line-ico" aria-hidden="true">${escapeHtml(icon)}</span><span class="empty-line-text">${escapeHtml(text)}${hint?` <small>${escapeHtml(hint)}</small>`:''}</span>${btn}</div>`;
         return `<div class="empty-box empty-card"><span class="empty-box-ico" aria-hidden="true">${escapeHtml(icon)}</span><b>${escapeHtml(text)}</b>${hint?`<small>${escapeHtml(hint)}</small>`:''}${btn}</div>`;
@@ -1546,7 +1549,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         if(opts.action&&opts.action.label)buttons.push(opts.action);
         // pas de connexion pendant un enregistrement : « Réessayer » renvoie la fenêtre restée ouverte
         if(kind==='error'&&typeof opts.retry!=='function'&&text===NET_ERROR_MSG){const last=SUBMIT_GUARD.last;if(last&&last.dialog.open&&last.form.isConnected)opts={...opts,retry:()=>{if(last.dialog.open)last.form.requestSubmit();}};}
-        if(kind==='error'&&typeof opts.retry==='function')buttons.push({label:'Réessayer',run:opts.retry});
+        if(kind==='error'&&typeof opts.retry==='function')buttons.push({label:i18n('Réessayer'),run:opts.retry});
         (opts.actions||[]).forEach(a=>a&&a.label&&buttons.push(a));
         buttons.forEach(a=>{const b=document.createElement('button');b.type='button';b.className='ui-toast-btn';b.textContent=a.label;if(a.title)b.title=a.title;b.addEventListener('click',async e=>{e.stopPropagation();if(b.disabled)return;b.disabled=true;if(a.close!==false)close();try{await a.run?.(e);}catch(error){console.error(error);}});acts.appendChild(b);});
         if(!buttons.length)acts.remove();
@@ -1577,16 +1580,16 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         const ic=icon??(/supprim|retir|effac|vid|détach/i.test(msg)&&!/^\s*[^\p{L}\p{N}\s«"'(]/u.test(msg)?'🗑':'');
         const doUndo=async()=>{
             let r;try{r=await undo?.();}
-            catch(error){toast(`Impossible d’annuler : ${error.message||error}`,'error',{retry:doUndo});return;}
-            if(r&&r.already){toast('Déjà remis : rien à annuler de plus.','',redo?{action:{label:'↷ Rétablir',run:doRedo}}:{});return;} // deuxième « ↶ Annuler » de la même chose
-            const what=undoneText||msg.replace(/[.!]+$/,'');toast(/«/.test(what)?`↶ Annulé : ${what}`:`↶ Annulé : « ${what} »`,'',redo?{action:{label:'↷ Rétablir',run:doRedo}}:{});
+            catch(error){toast(i18n('Impossible d’annuler : {err}',{err:error.message||error}),'error',{retry:doUndo});return;}
+            if(r&&r.already){toast(i18n('Déjà remis : rien à annuler de plus.'),'',redo?{action:{label:i18n('↷ Rétablir'),run:doRedo}}:{});return;} // deuxième « ↶ Annuler » de la même chose
+            const what=undoneText||msg.replace(/[.!]+$/,'');toast(/«/.test(what)?i18n('↶ Annulé : {what}',{what}):i18n('↶ Annulé : « {what} »',{what}),'',redo?{action:{label:i18n('↷ Rétablir'),run:doRedo}}:{});
         };
         const doRedo=async()=>{
             try{await redo?.();}
-            catch(error){toast(`Impossible de rétablir : ${error.message||error}`,'error',{retry:doRedo});return;}
+            catch(error){toast(i18n('Impossible de rétablir : {err}',{err:error.message||error}),'error',{retry:doRedo});return;}
             undoToast(message,{undo,redo,icon,undoneText});
         };
-        return toast(`${ic?`${ic} `:''}${msg}`,'',undo?{kind:'undo',action:{label:'↶ Annuler',run:doUndo}}:{});
+        return toast(`${ic?`${ic} `:''}${msg}`,'',undo?{kind:'undo',action:{label:i18n('↶ Annuler'),run:doUndo}}:{});
     }
     /** ↶ Défaire une suppression gardée sur cet ordinateur (localStorage) : les clés sont relues avant et après change(),
      *  « ↶ Annuler » remet l'avant, « ↷ Rétablir » l'après ; after('undo'|'redo') redessine l'écran. */
@@ -2289,6 +2292,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         form.addEventListener('input',later);form.addEventListener('change',later);
     }
     function applyDesign(){
+        try{const I=window.LCNDA_I18N;if(I&&I.storedLang&&I.storedLang()!==I.lang)I.setLang(I.storedLang(),{persist:false});}catch(_){} // 🌐 ↶ Annuler K2 remet aussi la langue
         applyToastPrefs();
         const design=readDesignSettings();
         const presets=allDesignPresets();
@@ -2304,7 +2308,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         {const root=document.documentElement,mine=!Object.hasOwn(BUILTIN_DESIGN_PRESETS,design.preset)&&Object.hasOwn(presets,design.preset)?preset:null,frame=!!mine&&(mine.line!==mine.ink||mine.lineW!==2);
             if(mine)root.style.setProperty('--ink',mine.ink);else root.style.removeProperty('--ink');
             root.classList.toggle('lc-frame',frame);if(frame){root.style.setProperty('--lc-frame-color',mine.line);root.style.setProperty('--lc-frame-k',String(mine.lineW/2));const sheet=document.getElementById('lc-frame-css');if(sheet)sheet.media='all';}}
-        document.documentElement.lang='fr';
+        document.documentElement.lang=window.LCNDA_I18N?window.LCNDA_I18N.lang:'fr'; // 🌐 la langue choisie (app-i18n.js)
         // Agencement : menu des onglets en haut ou en bas, colonne latérale à gauche ou à droite
         // 🧩 Fond des pages (app-fond.js) : le motif, sa couleur, les pages concernées ; « grid » = 'off' (Uni) pour les anciens réglages
         {const own=!Object.hasOwn(BUILTIN_DESIGN_PRESETS,design.preset)&&Object.hasOwn(presets,design.preset)?preset:null;
@@ -6239,12 +6243,15 @@ ${backupSectionHtml()}
         if(cardSelect)cardSelect.value=design?.cardBackground||'white';
         const mapSelect=$('#design-form select[name="mapBackground"]');
         if(mapSelect)mapSelect.innerHTML=mapBackgroundSelectHtml(mapBackgroundValue(design?.mapBackground));
-        if(cardSelect&&!$('#design-form select[name="interfaceLanguage"]')){
-            const languages=[['fr','Français',true],['en','English',false],['es','Español',false],['de','Deutsch',false],['it','Italiano',false],['nl','Nederlands',false],['pt','Português',false],['pl','Polski',false],['da','Dansk',false],['no','Norsk',false],['sv','Svenska',false],['fi','Suomi',false],['cs','Čeština',false],['hu','Magyar',false],['sk','Slovenčina',false],['et','Eesti',false],['lv','Latviešu',false],['lt','Lietuvių',false]];
-            const selected=languages.some(([value,,enabled])=>enabled&&value===design?.interfaceLanguage)?design.interfaceLanguage:'fr';
-            cardSelect.closest('label')?.insertAdjacentHTML('afterend',`<label>Langue de l'interface<select name="interfaceLanguage">${languages.map(([value,label,enabled])=>`<option value="${value}" ${selected===value?'selected':''} ${enabled?'':'disabled'}>${label}${enabled?'':' — à traduire'}</option>`).join('')}</select></label>`);
+        // 🌐 Langue de l'app : tout en haut du premier cadre (8 langues, le nom dans sa langue) ; gardée sur cet ordinateur (app-i18n.js)
+        if(cardSelect&&!$('#design-form select[name="interfaceLanguage"]')&&window.LCNDA_I18N){
+            const I=window.LCNDA_I18N,grid=cardSelect.closest('.design-primary-grid')||cardSelect.closest('label')?.parentElement;
+            grid?.insertAdjacentHTML('afterbegin',`<label class="lc-lang-field" data-lc-lang-field>${escapeHtml(i18n('🌐 Langue de l’app'))}${I.selectHtml('name="interfaceLanguage" data-lc-lang')}<small class="ui-hint">${escapeHtml(i18n('Les traductions sont faites par une IA : le français reste la langue de référence.'))}${I.lang!=='fr'?` <button type="button" class="button small secondary" data-lc-lang-banner>${escapeHtml(i18n('Remontrer le bandeau'))}</button>`:''}</small></label>`);
+            const sel=$('#design-form select[data-lc-lang]');
+            sel?.addEventListener('change',()=>{I.setLang(sel.value);});
+            $('#design-form [data-lc-lang-banner]')?.addEventListener('click',()=>I.setBannerClosed(false));
         }
-        const languageSelect=$('#design-form select[name="interfaceLanguage"]');
+        const languageSelect=cardSelect; // 🌐 le calendrier reste juste après « Fond des blocs » (la langue est montée tout en haut)
         if(languageSelect&&!$('#design-form select[name="defaultCalendar"]')){
             const selectedCalendar=defaultCalendarValue(design);
             languageSelect.closest('label')?.insertAdjacentHTML('afterend',`<label>Calendrier par défaut<select name="defaultCalendar">${converterCalendarOptions.map(([key,label])=>`<option value="${key}" ${selectedCalendar===key?'selected':''}>${label}</option>`).join('')}</select></label>`);
@@ -6329,7 +6336,8 @@ ${backupSectionHtml()}
         // ce que les autres pages A prennent déjà (pour « Thème et couleurs » qui reçoit le reste de la partie Apparence)
         Object.entries(REGLAGES_A_PIECES).forEach(([k,tabs])=>tabs.forEach(([,pcs])=>pcs.filter(pc=>pc[0]!=='p').forEach(pc=>pick(pc).forEach(el=>claimed.add(el)))));
         // « Langue, dates et lecteur » vit dans « Thème et couleurs », juste après « Nom affiché »
-        if(tab==='look_theme'){let at=page.querySelector('.design-primary-grid > label [name="ownerLast"]')?.closest('label');['interfaceLanguage','defaultCalendar','avSkipSeconds'].forEach(n=>{const l=page.querySelector(`.design-primary-grid > label [name="${n}"]`)?.closest('label');if(l&&at&&l!==at){at.after(l);at=l;}});}
+        if(tab==='look_theme'){let at=page.querySelector('.design-primary-grid > label [name="ownerLast"]')?.closest('label');['defaultCalendar','avSkipSeconds'].forEach(n=>{const l=page.querySelector(`.design-primary-grid > label [name="${n}"]`)?.closest('label');if(l&&at&&l!==at){at.after(l);at=l;}});}
+        if(tab==='look_theme'){const l=page.querySelector('.design-primary-grid > label [name="interfaceLanguage"]')?.closest('label');l?.parentElement?.prepend(l);} // 🌐 la langue tout en haut
         const plan=REGLAGES_A_PIECES[tab].map(([label,pcs,full])=>[label,[...new Set(pcs.flatMap(pick))],full]);
         if(tab==='look_theme'){const rest=[...frames.filter(el=>!claimed.has(el)&&!el.contains(page.querySelector('.design-primary-grid'))&&(el.parentElement===page?partOf(el)==='design':el.closest('.page > *')&&partOf(el.closest('.page > *'))==='design')&&!el.matches('.ui-notice')&&!(form&&el.parentElement===form&&el.matches('.design-primary-grid'))),...fields.filter(l=>!claimed.has(l))];plan[0][1].push(...rest.filter(el=>!plan[0][1].includes(el)));}
         if(tab==='design_sheets'){const used=new Set(plan.slice(0,-1).flatMap(([,els])=>els));plan[plan.length-1][1]=plan[plan.length-1][1].filter(el=>!used.has(el));}
@@ -8891,6 +8899,8 @@ ${backupSectionHtml()}
     // Outils partagés avec assets/js/heritage.js (chargé juste après ce fichier)
     // type de base changé (Listes → Animaux) : compteur, liste de gauche
     function refreshBaseMode(){loadPeople.modeSet=false;state.personTab='all';setCountStatus($('#database-status'),personCountLabel(state.bootstrap.stats.personnes));if(state.module==='personnes'){renderSidebar();loadPeople();}}
+    // 🌐 langue changée (Réglages → Apparence, premier lancement, ↶ Annuler) : la colonne et l'écran sont redessinés dans la nouvelle langue
+    window.addEventListener('lcnda:lang',async()=>{try{if(!window.GENEALOGY_READY)return;renderSidebar();await refreshScreen();if(state.module!=='maintenance')return;const tab=state.maintenanceTab;for(let i=0;i<30&&state.module==='maintenance'&&state.maintenanceTab===tab;i++){await new Promise(r=>setTimeout(r,100));const h=document.querySelector('#workspace .page-header .page-actions');if(h&&!h.querySelector('.ui-ph-saved'))window.LCNDA_UI?.pageSaved?.('saved');}}catch(error){console.error(error);}}); // K2 : la langue est gardée tout de suite, « ✓ Enregistré » reste à droite du titre redessiné
     window.LCNDA_APP={designTabs:()=>DESIGN_TABS,askDeleteSheet,openWidgetLibraryDialog,openGraphReorderDialog,personPageHtml,setSheetRoute,ics:{build:icsBuild,download:icsDownload,dateOf:icsDateOf,eventEntry:icsEventEntry,fold:icsFold,escape:icsEscape},openEventIcsDialog,addTableSortBar,sortTableBy,addMediaDialogFiles:files=>mediaDialogAddFiles?.(files),exportSettingFile,importSettingFile,settingExportButton,settingImportButton,freeDateToIso,isoToFreeDate,openGraphExportDialog,saveExportCopy,defaultListTypes,mapTileUrl,offlineTileUrl,openPersonById,battueTargetText,bindReminderButtons,investigationFolderPath,openBattueAliasDialog,openBattueDialog,openBattueLevelColorsDialog,openBattueMediaDialog,openBattueSearchDialog,openInvestigationDialog,openInvestigationItemDialog,openInvestigationItemEventDialog,openInvestigationMediaDialog,openInvestigationUploadDialog,bindWebSearchPanels,bindWebSearchSitesEditors,currentCustomTab,currentDashboardPage,dabovilleNumberFor,dashboardBaseType,dashboardGroupItem,dashboardLineageCard,dashboardNormalizeWidget,dashboardPages,dashboardRecentPeople,dashboardSaintCard,defaultDashboardBlockLimits,defaultDashboardBlockSpans,defaultDashboardBlocks,familyMemoryCardHtml,familyObjectCardHtml,fillLineageWidgets,generationLabel,mediaPreviewHtml,personBlockWidthChoices,personEventMap,readWebSearchSitesEditor,saveDashboardPages,sosaNumberFor,sosaNumbersText,webSearchPanelHtml,webSearchSitesEditor,archiveDigestOptionLabel,budgetCategories,budgetCategoryLabel,censusStatusText,confidenceLabel,courrierCopyFormatLabel,courrierCopyFormats,courrierFilters,courrierOrganismeLabel,courrierOrganismes,courrierStatutLabel,courrierStatuts,externalLinks,keepSosaOutsideClick,labelTextColor,lifeText,accord,listControllerSignal,mediaChronologyKey,openListReorderDialog,openMediaDuplicatesDialog,openMediaFaceDetectionDialog,orderedListTypes,reminderCategories,reminderCategoryLabel,reminderIsPast,renderClosedBranchesList,renderFamilyMemoriesList,renderFamilyObjectsList,renderPrecisePlacesList,renewListController,renewSosaSearchController,saveExternalLinks,sosaRootId,sosaSearchSignal,syncCourrierCopyOrder,EVENT_ICON_GLYPHS,bengaliMonthDays,bengaliMonths,bengaliToJdn,bindLabelListToggles,bindReadingAids,burmeseYear,byzantineYear,calendarLabel,calendarYmdToJdn,confidenceText,copticMonths,copticToJdn,easterStyle,englishOldStyle,ethiopicMonths,ethiopicToJdn,eventIconOptionsHtml,formatCalendarDate,formatChineseLunar,formatFileSize,formatKoreanLunar,formatRepublicanDate,formatUmmAlQura,frenchMonthNames,hebrewDateFromJdn,hebrewLeap,hebrewMonthName,hebrewMonthNames,htrLanguageForModel,hypothesisStatus,indianMonthDays,indianMonths,indianToJdn,japaneseEras,jdnToBengali,jdnToCoptic,jdnToEthiopic,jdnToHebrew,jdnToIndian,jdnToIslamic,jdnToJapanese,jdnToJulian,jdnToPersian,jdnToRepublican,koreanLunarParts,labelChip,labelEntityTypesText,mayaLongCount,moduleHash,openSideReorderDialog,orderedMaintenanceTabs,reglagesA,setReglagesA,REGLAGES_A_PAGES,persianMonthDays,persianMonths,persianToJdn,readingAidsHtml,renderDesignTools,renderExportTools,renderMergeTool,renderShortcutSettings,renderUpkeep,republicanLeap,republicanMonths,republicanToJdn,restoreDoneText,romanDate,saveLastRoute,sexagenaryName,thaiMonths,thaiYear,updateBrowserRoute,importUpload,inseeAuto,inseeImportRemote,inseeSize,mediaTypeShortLabel,mediaTypeShortLabelWithIcon,onOutsideClick,researchProximityFieldsHtml,setupDragOrder,typeGlyph,webSearchAllSites,webSearchContext,webSearchGroups,webSearchLifeRange,webSearchParams,webSearchSettings,DEFAULT_GENDER_COLORS,applyGenderColorsToDocument,ascendantsTreeHtml,bindGraphExportControls,defaultGraphStatsItems,descendantsTreeHtml,getStatsColors,getTreeCardFields,graphExportToolbarHtml,loadLineage,openStatsColorsDialog,relationYears,renderGraphStats,safeUrl,saveGenderColors,sosaMap,orderedMapTypes,applyDesign,mapBackgroundSelectHtml,mapRouteColor,isUsableMapCoord,routePeopleSelection,openViewDialog,readDesignSettings,reloadBootstrap,savedView,setupMapRoutePersonControls,setupMapSurnameAutocomplete,setupSavedViewsDrag,sideButton,bindTableLinks,summaryFromState,dataRow,genderText,placeDisplay,debounce,setModule,renderSidebar,normalizedMediaType,mediaCompareThumb,mediaCompareLinkInfo,fetchMediaCompareInfo,persistUiState,sidebarSignal:()=>sidebarController?.signal,loadOcrEngine,refreshBaseMode,baseMode,graphExportCss,safeExportFilename,customTabs,saveCustomTabs,openCustomScreen,orderedGraphDiagramItems,orderedGraphStatsItems,dashboardWidgetLabel,defaultPersonBlocks,defaultPersonBlockSpans,personBlockSettings,savePersonBlockSettings,blockBaseKey,ANIMAL_BLOCKS,applyBlockWidth,rerenderPerson,formatCalendarByType,gregorianToJdn,jdnToGregorian,converterCalendarOptions,defaultCalendarValue,readDesignSettings,api,$,$$,escapeHtml,formObject,card,empty,toast,undoToast,undoDelete,undoLocalChange,deleteWithUndo,csvSafe,csvCell,refreshScreen,confirmBox,conflictBox,openNewPersonDialog,plural,emptyState,state,personName,years,personChip,mediaThumbHtml,parsedGenealogyDate,collectionPersonField,bindCollectionPersonFields,
         uploadCollectionFiles,bindTableLinks,actionButton,openLightbox,showFaceSuggestionsOnLightbox,selectPerson,setModule,renderList,renderSidebar,lngToX,latToY,xToLng,yToLat,mapTileUrl,mapBackgroundValue,
         drawMap,renderMaintenance,renderLightboxItem,openArchiveRoom,journalierWageSols,entityLabelsField,bindEntityLabelsFields,renderFairsList,askText,appModules:modules,defaultListTypes,defaultMaintenanceTabs,syncCustomDashboardWidgets,renderDashboard,dashboardBlockSettings,saveDashboardBlockSettings,dashboardNewWidget,orderedDashboardWidgetTypes,dashboardWidgetInfo,dashboardSpace,dashboardSpaceDo,applyMenuOrder,menuHiddenKeys,/* l'ordre et les fonds cachés de Réglages → Cartes et fonds de carte, relus à chaque fois */get tileLayerCategories(){return orderedTileCategories(false);},orderedTileCategories,sortTileKeys};

@@ -21,6 +21,7 @@ require_once __DIR__ . '/host_guard.php'; // noms d'hôte locaux seulement (auss
 if (!lcnda_host_guard()) exit;
 require_once __DIR__ . '/paths.php';   // APP_ROOT, DATA_DIR, MEDIA_DIR
 require_once __DIR__ . '/text.php';    // ascii_fold()
+require_once __DIR__ . '/i18n.php';    // 🌐 i18n_t() : messages d'erreur dans la langue de la page
 require_once __DIR__ . '/migrations.php'; // migrate_database(), SCHEMA_VERSION
 require_once __DIR__ . '/reference.php';
 require_once __DIR__ . '/registers.php';
@@ -1315,6 +1316,8 @@ function json_response(mixed $data, int $status = 200): never
     header('Content-Type: application/json; charset=utf-8');
     header('Cache-Control: no-store, private');
     header('X-Content-Type-Options: nosniff');
+    // 🌐 un message d'erreur connu part dans la langue de la page (lib/i18n.php) ; en français rien ne change
+    if (is_array($data) && isset($data['error']) && is_string($data['error']) && function_exists('i18n_t') && i18n_lang() !== 'fr') { $data['error'] = i18n_t($data['error']); }
     echo json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR);
     exit;
 }

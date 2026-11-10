@@ -1596,3 +1596,26 @@ Complète « 📮 Actes à demander » (lib/heritage_more.php) et le Registre de
 - `cl_write {op: build}` (lecture seule) : `cl_context` (personne, acte même absent, lieu, département, parents, conjoint, lien deviné depuis la personne de départ), `cl_legal` (décès libre ; naissance / mariage libres 75 ans après, sinon copie intégrale réservée à la famille directe → extrait sans filiation ; plus de 100 ans → sans doute en ligne aux AD), `cl_recipients` (mairie, AD tirées de « Services d’archives » si la fiche existe, SCEC Nantes, archives diocésaines, autre), modèles à repères `{personne}`… (`cl_default_templates`, modèles retouchés envoyés par la page).
 - `file` : une ligne du Registre (statut « En attente », relance) → aussi dans 🗓 Ma semaine de recherche ; rappel « libre d’accès » facultatif ; `unfile` (↶ Annuler) ne touche qu’un courrier fait par l’outil.
 - Réglages : `genealogie-courriers-lettres` (expéditeur, délai, modèles ; K2 par `UI.autoSaveDialog`) et `genealogie-courriers-lettres-presets` (💾 Réglages enregistrés). Sorties : `ext.openTextDoc`, `UI.openPrintDialog` (L1, PDF), `mailto:`, `textdoc_to_media` (.docx par `LCNDA_TEXT`).
+
+## 🌐 Langue de l’app (app-i18n.js, lib/i18n.php, assets/i18n/)
+
+Mode d’emploi complet : `docs/I18N.md` ; glossaire : `docs/i18n-glossaire.md` ; test : `tests/test-i18n.js`.
+- **8 langues** : français (référence, rien ne change), English, Español, Deutsch, Italiano, Português, Polski, Nederlands.
+  Choix : Réglages → Apparence → « Thème et couleurs », tout en haut (« 🌐 Langue de l’app », menu simple : drapeau, nom dans
+  sa langue, code) et l’écran du premier lancement (`<span data-lc-lang-slot>` ; tout `select[data-lc-lang-pick]`).
+  Gardé tout de suite (K2, « ↶ Annuler » remet aussi la langue) dans `lcnda-langue` (cet ordinateur, pas la base ni le
+  défaut du site : chacun lit l’app dans sa langue) + cookie `lcnda_lang` (le serveur écrit `<html lang>` et le
+  dictionnaire dans la page, sans rien aller chercher).
+- **Bandeau IA** (`#lc-i18n-banner`, en bas à droite) quand la langue n’est pas le français : « Traduction faite par une IA,
+  pas par une personne — tu as vu une erreur ? » + « Signaler une erreur » (`LCNDA_I18N.report()` : « 🐞 Signaler un
+  problème » pré-rempli `[traduction · langue]` et l’écran) ; × le referme (pour cette langue), « Remontrer le bandeau »
+  sous le choix de la langue le rouvre.
+- **Code** : `t('Texte français', {vars, ctx})` (repli sur le français), `plural(n, 'mot')` (Intl.PluralRules dans les
+  autres langues ; `LCNDA_APP.plural` le prend tout seul), `fmtNumber`, `fmtDate`, `fmtTime` (K4 `UI.when` les utilise
+  dans une autre langue). Les dates généalogiques et la lecture C4 ne changent pas.
+- **Filet de la page** : dans une autre langue, les textes exactement connus du HTML écrit en dur sont remplacés (avec ou
+  sans symbole devant ; modèles `{x}` ; « a · b ») ; jamais dans `[data-i18n-off]`, les champs, `contenteditable`.
+- **Serveur** : `api()` envoie `X-LCNDA-Lang` ; `json_response()` traduit le message `error` connu (`i18n_t()`).
+- **Fait (vague 1)** : le cadre — menu des onglets, boutons en haut à droite, colonnes de gauche, en-têtes K5, barre H10,
+  menu de choix, K10, H7, confirmBox, openDialog, K1, L1, K13, E3, C4 (libellés), mots K3, premier lancement, visite
+  guidée, tableau de bord (titres des widgets), Réglages (groupes, pages, en-têtes, premier cadre de l’Apparence).

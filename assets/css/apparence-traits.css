@@ -967,6 +967,9 @@ html:root.lc-frame.lc-frame :is(.icon-action, .icon-button, .button.small, .stat
 :root.lc-frame .ui-l6, :root .ui-l6:is([data-lc-lines], [data-lc-lines] *) {border:0}
 :root.lc-frame .ui-l6-rest, :root .ui-l6-rest:is([data-lc-lines], [data-lc-lines] *) {border:2px solid var(--ui-ink)}
 :root.lc-frame .nav-ov-btn, :root .nav-ov-btn:is([data-lc-lines], [data-lc-lines] *) {border:2px solid var(--blue)}
+:root.lc-frame .lc-i18n-banner, :root .lc-i18n-banner:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--blue,#0066cc)}
+:root.lc-frame .lc-i18n-banner-btn, :root .lc-i18n-banner-btn:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--blue,#0066cc)}
+:root.lc-frame .lc-i18n-banner-x, :root .lc-i18n-banner-x:is([data-lc-lines], [data-lc-lines] *) {border:0}
 :root[data-theme="dark"].lc-frame .person-list-item .life-dot.deceased, :root[data-theme="dark"] .person-list-item .life-dot.deceased:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
 :root[data-theme="dark"].lc-frame .person-list-item.is-active .outside-genealogy-mark, :root[data-theme="dark"] .person-list-item.is-active .outside-genealogy-mark:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
 :root[data-theme="dark"].lc-frame .data-row, :root[data-theme="dark"] .data-row:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid #4c4c4c}

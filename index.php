@@ -2,6 +2,7 @@
 declare(strict_types=1);
 require __DIR__ . '/lib/bootstrap.php';
 require_once __DIR__ . '/lib/premier.php';
+require_once __DIR__ . '/lib/i18n.php'; // 🌐 langue de l'app (cookie lcnda_lang ; assets/js/app-i18n.js)
 // Le fichier peut exister sans contenir de généalogie : une simple analyse de
 // fichier sur l'écran d'installation (ou un import qui a échoué en cours de route)
 // crée déjà le fichier SQLite vide. Dans ce cas on doit rester sur l'écran
@@ -16,13 +17,13 @@ header("Content-Security-Policy: frame-ancestors 'self'");
 header('X-Content-Type-Options: nosniff');
 ?>
 <!doctype html>
-<html lang="fr">
+<html lang="<?= htmlspecialchars(i18n_page_lang(), ENT_QUOTES) ?>">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light">
     <title>Carnet numérique des ancêtres</title>
-    <link rel="stylesheet" href="assets/css/app.css?v=280">
+    <link rel="stylesheet" href="assets/css/app.css?v=283">
     <link rel="stylesheet" href="assets/css/picker.css?v=7">
     <link rel="stylesheet" href="assets/css/heritage.css?v=266">
     <link rel="stylesheet" href="assets/css/heritage-diagram-genea.css?v=1">
@@ -153,6 +154,7 @@ header('X-Content-Type-Options: nosniff');
     <main class="workspace" id="workspace" tabindex="-1">
         <?php if (!$ready): ?>
             <section class="empty-state install-screen" id="install-screen">
+                <label class="install-lang" data-i18n-off>🌐 <span data-lc-lang-slot aria-label="Langue · Language"></span></label>
                 <span class="eyebrow">INSTALLATION</span>
                 <h2>La base généalogique doit être importée.</h2>
                 <p>Choisis comment démarrer : importer un fichier existant, ou créer une première personne pour partir d'une base vide.</p>
@@ -1155,12 +1157,14 @@ header('X-Content-Type-Options: nosniff');
 
 <script>window.LCNDA_FIRST_HASH=location.hash;</script>
 <script src="assets/js/app-journal.js?v=1"></script>
+<?= i18n_page_script() ?>
+<script src="assets/js/app-i18n.js?v=1"></script>
 <script>window.LCNDA_GENEALOGY = <?= json_encode(GENEALOGY_ID === '' ? 'main' : GENEALOGY_ID) ?>;window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;window.LCNDA_GRAPHS = <?php require_once __DIR__ . '/lib/graphs.php'; echo json_encode($ready ? graphs_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_INVALID_UTF8_SUBSTITUTE); ?>;</script>
 <script src="assets/js/app-fond.js?v=9" defer></script>
 <script src="assets/js/app-accord.js?v=1" defer></script>
-<script src="assets/js/app.js?v=549" defer></script>
-<script src="assets/js/app-indicateurs.js?v=1" defer></script>
-<script src="assets/js/app-picker.js?v=26" defer></script>
+<script src="assets/js/app.js?v=552" defer></script>
+<script src="assets/js/app-indicateurs.js?v=2" defer></script>
+<script src="assets/js/app-picker.js?v=27" defer></script>
 <script src="assets/js/app-media-picker.js?v=3" defer></script>
 <script src="assets/js/app-piece-archives.js?v=10" defer></script>
 <script src="assets/js/app-puzzle.js?v=8" defer></script>
@@ -1194,7 +1198,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-enquetes.js?v=11" defer></script>
 <script src="assets/js/app-tableau-de-bord.js?v=20" defer></script>
 <script src="assets/js/app-harmony.js?v=10" defer></script>
-<script src="assets/js/app-ui.js?v=29" defer></script>
+<script src="assets/js/app-ui.js?v=30" defer></script>
 <script src="assets/js/app-tableur-engine.js?v=10" defer></script>
 <script src="assets/js/app-aide-lecture.js?v=2" defer></script>
 <!-- aide-langues : une langue = un fichier (assets/js/aide-langues/README-format.md) -->
@@ -1237,16 +1241,16 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-saisies.js?v=2" defer></script>
 <script src="assets/js/app-icones.js?v=1" defer></script>
 <script src="assets/js/app-reglages-recherche.js?v=1" defer></script>
-<script src="assets/js/app-forms.js?v=3" defer></script>
-<script src="assets/js/app-mots.js?v=1" defer></script>
+<script src="assets/js/app-forms.js?v=4" defer></script>
+<script src="assets/js/app-mots.js?v=2" defer></script>
 <script src="assets/js/app-portraits.js?v=4" defer></script>
 <script src="assets/js/app-colonne.js?v=7" defer></script>
 <script src="assets/js/app-tips.js?v=1" defer></script>
-<script src="assets/js/app-actions.js?v=9" defer></script>
+<script src="assets/js/app-actions.js?v=10" defer></script>
 <script src="assets/js/app-editeurs.js?v=3" defer></script>
 <script src="assets/js/app-versions.js?v=4" defer></script>
 <script src="assets/js/app-formats.js?v=1" defer></script>
-<script src="assets/js/app-pages.js?v=11" defer></script>
+<script src="assets/js/app-pages.js?v=12" defer></script>
 <script src="assets/js/app-access.js?v=17" defer></script>
 <script src="assets/js/app-mode-simple.js?v=15" defer></script>
 <script src="assets/js/app-sidegroups.js?v=12" defer></script>
@@ -1265,7 +1269,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-calendar-more.js?v=5" defer></script>
 <script src="assets/js/heritage-lecture-autrefois.js?v=4" defer></script>
 <script src="assets/js/heritage-links.js?v=22" defer></script>
-<script src="assets/js/heritage-more.js?v=308" defer></script>
+<script src="assets/js/heritage-more.js?v=309" defer></script>
 <script src="assets/js/heritage-controle.js?v=7" defer></script>
 <script src="assets/js/heritage-records.js?v=12" defer></script>
 <script src="assets/js/heritage-research.js?v=39" defer></script>
@@ -1435,7 +1439,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-onglets-documents.js?v=2" defer></script>
 <script src="assets/js/heritage-onglets-catalogue.js?v=2" defer></script>
 <script src="assets/js/heritage-transcribe-view.js?v=7" defer></script>
-<script src="assets/js/heritage-transcribe.js?v=27" defer></script>
+<script src="assets/js/heritage-transcribe.js?v=28" defer></script>
 <script src="assets/js/heritage-photomaps-time.js?v=2" defer></script>
 <script src="assets/js/heritage-photomaps.js?v=14" defer></script>
 <script src="assets/js/heritage-transcribe-list.js?v=3" defer></script>
@@ -1511,7 +1515,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-designs.js?v=22" defer></script>
 <script src="assets/js/app-sections.js?v=7" defer></script>
 <script src="assets/js/app-premier.js?v=3" defer></script>
-<script src="assets/js/app-visite.js?v=1" defer></script>
+<script src="assets/js/app-visite.js?v=2" defer></script>
 <script>
 (function () {
     var toggle = document.getElementById('lightbox-tag-toggle');

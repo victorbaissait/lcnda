@@ -22,6 +22,7 @@
  */
 (function () {
     'use strict';
+    const i18n = (text, vars) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(text, vars) : String(text ?? '')); // 🌐 app-i18n.js
     const KEY = 'genealogie-visite-guidee';
     const A = () => window.LCNDA_APP || {};
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
@@ -175,14 +176,14 @@
         root.querySelector('.vg-title').textContent = s.title;
         root.querySelector('.vg-text').textContent = fr(s.text);
         root.querySelector('.vg-count').textContent = `${i + 1} / ${STEPS.length}`;
-        root.querySelector('.vg-count').setAttribute('aria-label', `Étape ${i + 1} sur ${STEPS.length}`);
+        root.querySelector('.vg-count').setAttribute('aria-label', i18n('Étape {i} sur {n}', {i: i + 1, n: STEPS.length}));
         root.querySelector('.vg-hint').hidden = false;
         root.querySelectorAll('.vg-dots i').forEach((d, k) => { d.className = k < i ? 'is-done' : k === i ? 'is-on' : ''; });
         const prevB = root.querySelector('[data-vg="prev"]'), nextB = root.querySelector('[data-vg="next"]');
         prevB.hidden = false; prevB.disabled = i <= firstAvailable(); nextB.dataset.vg = 'next';
         nextB.textContent = isLast(i) ? '✓ Terminer' : 'Suivant →';
         root.querySelector('[data-vg="skip"]').hidden = false;
-        root.querySelector('.vg-live').textContent = `Visite guidée, étape ${i + 1} sur ${STEPS.length} : ${s.title}. ${s.text}`;
+        root.querySelector('.vg-live').textContent = i18n('Visite guidée, étape {i} sur {n} : {what}', {i: i + 1, n: STEPS.length, what: `${i18n(s.title)}. ${i18n(s.text)}`});
         root.hidden = false;
         place();
         nextB.focus({preventScroll: true});
@@ -292,7 +293,7 @@
         const root = T.root; root.classList.add('is-offer');
         root.querySelector('.vg-ico').textContent = '▶';
         root.querySelector('.vg-title').textContent = 'Une petite visite ?';
-        root.querySelector('.vg-text').textContent = fr(`En ${STEPS.length} étapes, l’app te montre où créer une fiche, ajouter un parent, une photo, un événement, faire une sauvegarde et trouver l’aide. Ça prend deux minutes.`);
+        root.querySelector('.vg-text').textContent = window.LCNDA_I18N && window.LCNDA_I18N.lang !== 'fr' ? i18n('En {n} étapes, l’app te montre où créer une fiche, ajouter un parent, une photo, un événement, faire une sauvegarde et trouver l’aide. Ça prend deux minutes.', {n: STEPS.length}) : fr(`En ${STEPS.length} étapes, l’app te montre où créer une fiche, ajouter un parent, une photo, un événement, faire une sauvegarde et trouver l’aide. Ça prend deux minutes.`);
         root.querySelector('.vg-count').textContent = '';
         root.querySelector('.vg-hint').hidden = true;
         root.querySelectorAll('.vg-dots i').forEach(d => { d.className = ''; });

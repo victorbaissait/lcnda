@@ -120,7 +120,7 @@
             const head = host.querySelector(':scope > .modal-head');
             if (head) head.after(s); else host.prepend(s);
         }
-        s.innerHTML = `<span class="ui-notice-ico" aria-hidden="true">⛔</span><span><b>${plural(n, 'chose', 'choses')} à corriger</b> avant d’enregistrer.</span>`;
+        s.innerHTML = `<span class="ui-notice-ico" aria-hidden="true">⛔</span><span>${(window.LCNDA_I18N ? window.LCNDA_I18N.t : x => x)('<b>{what} à corriger</b> avant d’enregistrer.', {what: plural(n, 'chose', 'choses')})}</span>`;
     }
 
     /** Curseur dans le premier champ fautif du formulaire (ordre de la page). */
@@ -152,6 +152,7 @@
     }
 
     /* ── règles du navigateur, dites en français simple ── */
+    const i18n = (text, vars) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(text, vars) : String(text ?? '')); // 🌐 app-i18n.js
     function nativeMessage(el) {
         if (el.dataset?.error) return el.dataset.error;
         const v = el.validity; if (!v) return 'À corriger.';
@@ -166,11 +167,11 @@
         }
         if (v.badInput) return t === 'number' ? 'Écris un nombre (par exemple 12 ou 3,5).' : 'Ce n’est pas compris : vérifie ce qui est écrit.';
         if (v.typeMismatch) return t === 'email' ? 'Écris une adresse e-mail complète (nom@exemple.fr).' : t === 'url' ? 'Écris une adresse web complète (https://…).' : 'Ce n’est pas au bon format.';
-        if (v.rangeUnderflow) return `Au moins ${n(el.min)}.`;
-        if (v.rangeOverflow) return `Au plus ${n(el.max)}.`;
+        if (v.rangeUnderflow) return i18n('Au moins {x}.', {x: n(el.min)});
+        if (v.rangeOverflow) return i18n('Au plus {x}.', {x: n(el.max)});
         if (v.stepMismatch) return 'Cette valeur n’est pas permise ici : prends un nombre rond.';
-        if (v.tooShort) return `Au moins ${plural(Number(el.minLength), 'caractère', 'caractères')} (là : ${String(el.value).length}).`;
-        if (v.tooLong) return `Au plus ${plural(Number(el.maxLength), 'caractère', 'caractères')}.`;
+        if (v.tooShort) return i18n('Au moins {x} (là : {y}).', {x: plural(Number(el.minLength), 'caractère', 'caractères'), y: String(String(el.value).length)});
+        if (v.tooLong) return i18n('Au plus {x}.', {x: plural(Number(el.maxLength), 'caractère', 'caractères')});
         if (v.patternMismatch) return el.title ? el.title : 'Ce n’est pas au bon format.';
         return el.validationMessage || 'À corriger.';
     }

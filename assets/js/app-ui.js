@@ -5,6 +5,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (text, vars) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(text, vars) : String(text ?? '')); // 🌐 app-i18n.js
     const UI = window.LCNDA_UI = window.LCNDA_UI || {};
     const A = () => window.LCNDA_APP || {};
     const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
@@ -286,12 +287,12 @@
         const run = async (fn, ...a) => { try { const r = await fn(...a); if (r !== false) draw(); return r; } catch (err) { toast(err?.message || String(err), 'error'); return false; } };
         const confirmName = async () => { const inp = box.querySelector('[data-ps-name]'); if (!inp) return; const name = inp.value.trim().slice(0, 60); if (!name) return window.LCNDA_UI.fail(inp, 'Donne un nom à ces réglages.');
             const l = list();
-            if (renaming >= 0) { const it = l[renaming]; if (!it) { renaming = -1; return draw(); } if (name !== it.name && l.some(x => x.name === name)) { toast(`Un réglage « ${name} » existe déjà.`, 'error'); inp.focus(); return; } const i = renaming; renaming = -1; if (name === it.name) return draw(); await run(o.rename, i, name); return; }
-            if (l.some(x => x.name === name) && !await A().confirmBox(`Un réglage « ${name} » existe déjà.`, {title: 'Le remplacer ?', okLabel: 'Remplacer'})) return;
-            mode = ''; if (await run(o.save, name) !== false) toast(`Réglages gardés sous « ${name} ».`); };
+            if (renaming >= 0) { const it = l[renaming]; if (!it) { renaming = -1; return draw(); } if (name !== it.name && l.some(x => x.name === name)) { toast(i18n('Un réglage « {name} » existe déjà.', {name}), 'error'); inp.focus(); return; } const i = renaming; renaming = -1; if (name === it.name) return draw(); await run(o.rename, i, name); return; }
+            if (l.some(x => x.name === name) && !await A().confirmBox(i18n('Un réglage « {name} » existe déjà.', {name}), {title: i18n('Le remplacer ?'), okLabel: i18n('Remplacer')})) return;
+            mode = ''; if (await run(o.save, name) !== false) toast(i18n('Réglages gardés sous « {name} ».', {name})); };
         const menuFor = (btn, i) => { const it = list()[i]; if (!it) return;
             const items = [
-                o.replace && {icon: '↻', label: 'Remplacer par les réglages actuels', help: 'Ce réglage prend ce qui est à l’écran maintenant.', run: async () => { if (!await A().confirmBox('L’ancienne version de ce réglage ne sera plus gardée.', {title: `Remplacer « ${it.name} » par les réglages actuels ?`, okLabel: 'Remplacer'})) return; if (await run(o.replace, i) !== false) toast('Réglage mis à jour.'); }},
+                o.replace && {icon: '↻', label: 'Remplacer par les réglages actuels', help: 'Ce réglage prend ce qui est à l’écran maintenant.', run: async () => { if (!await A().confirmBox('L’ancienne version de ce réglage ne sera plus gardée.', {title: i18n('Remplacer « {name} » par les réglages actuels ?', {name: it.name}), okLabel: i18n('Remplacer')})) return; if (await run(o.replace, i) !== false) toast(i18n('Réglage mis à jour.')); }},
                 o.rename && {icon: '✎', label: 'Renommer', help: 'Le nom devient modifiable sur la ligne.', run: () => { renaming = i; mode = ''; draw(); }},
                 o.duplicate && {icon: '⧉', label: 'Dupliquer', help: 'Une copie, à modifier sans toucher à l’original.', run: () => run(o.duplicate, i)},
                 o.exportOne && {icon: '⤓', label: 'Exporter (fichier .json)', help: 'Pour le garder, ou l’ouvrir sur un autre ordinateur.', run: () => run(o.exportOne, i)},
@@ -307,7 +308,7 @@
             if (b.matches('[data-ps-ok]')) return confirmName();
             if (b.matches('[data-ps-import]')) return run(o.importOne);
             if (b.matches('[data-ps-more]')) return menuFor(b, i);
-            if (b.matches('[data-ps-apply]') && it) { if (await run(o.apply, i) !== false && !o.quietApply) toast(`Réglages « ${it.name} » appliqués.`); }
+            if (b.matches('[data-ps-apply]') && it) { if (await run(o.apply, i) !== false && !o.quietApply) toast(i18n('Réglages « {name} » appliqués.', {name: it.name})); }
         });
         box.addEventListener('keydown', e => { if (!e.target.matches('[data-ps-name]')) return; if (e.key === 'Enter') { e.preventDefault(); confirmName(); } if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); mode = ''; renaming = -1; draw(); } });
         box.refresh = draw; draw(); return box;
@@ -557,7 +558,7 @@
     UI.viewToggle = ({key = '', value = null, onChange = null, what = 'éléments', dflt = 'list'} = {}) => {
         let cur = value === 'cards' || value === 'list' ? value : (key ? UI.viewOf(key, dflt) : dflt);
         const w = h('span', 'segmented ui-viewtoggle');
-        w.setAttribute('role', 'group'); w.setAttribute('aria-label', `Affichage des ${what}`);
+        w.setAttribute('role', 'group'); w.setAttribute('aria-label', i18n('Affichage des {what}', {what: i18n(what)}));
         w.innerHTML = `<button type="button" data-view="list" title="En liste : une ligne par élément (vignette, nom, détails, date)">Liste</button><button type="button" data-view="cards" title="En fiches : une carte par élément, avec une grande vignette">Fiches</button>`;
         const paint = () => w.querySelectorAll('button').forEach(b => { const on = b.dataset.view === cur; b.classList.toggle('is-active', on); b.setAttribute('aria-pressed', String(on)); });
         w.set = (v, silent = false) => { const nv = v === 'cards' ? 'cards' : 'list'; if (nv === cur) return; cur = nv; if (key) UI.setView(key, cur); paint(); if (!silent) onChange?.(cur); };
@@ -604,7 +605,7 @@
     /** C6 — moreButton({remaining, step, onClick, feminine}) → le bouton « Voir les N suivants ↓ » (.update(remaining)) */
     UI.moreButton = ({remaining = 0, step = 20, onClick = null, feminine = false} = {}) => {
         const b = h('button', 'ui-more'); b.type = 'button';
-        b.update = rest => { const n = Math.min(step, Math.max(0, rest)); b.hidden = n <= 0; b.textContent = n === 1 ? `Voir ${feminine ? 'la suivante' : 'le suivant'} ↓` : `Voir les ${n.toLocaleString('fr-FR')} ${feminine ? 'suivantes' : 'suivants'} ↓`; };
+        b.update = rest => { const n = Math.min(step, Math.max(0, rest)); b.hidden = n <= 0; b.textContent = n === 1 ? i18n(`Voir ${feminine ? 'la suivante' : 'le suivant'} ↓`) : i18n(`Voir les {n} ${feminine ? 'suivantes' : 'suivants'} ↓`, {n}); };
         b.update(remaining);
         b.addEventListener('click', () => onClick?.(b));
         return b;
@@ -942,7 +943,7 @@
             $('[data-ui-namerow]').hidden = !cur.ext;
             if (q) q.hidden = ['svg', 'file'].includes(cur.id) || cur.quality === false;
             const br = $('[data-ui-bleedrow]'); if (br) br.hidden = ['svg', 'file'].includes(cur.id);
-            $('[data-ui-go]').textContent = cur.goLabel || (cur.id === 'print' ? '🖨 Imprimer' : `⤓ Exporter en ${cur.label.replace(/^\S+\s/, '')}`);
+            $('[data-ui-go]').textContent = cur.goLabel || (cur.id === 'print' ? i18n('🖨 Imprimer') : i18n('⤓ Exporter en {fmt}', {fmt: i18n(cur.label.replace(/^\S+\s/, ''))}));
             // champs en plus (son : qualité, quoi, canaux…) : montrés seulement pour les formats qui s'en servent
             fields.forEach(f => { const el = dlg.querySelector(`[data-ui-field="${CSS.escape(f.id)}"]`); if (el) el.hidden = !!f.show && !f.show(cur.id); });
             checks.forEach(c => { const el = dlg.querySelector(`[data-ui-checkrow="${CSS.escape(c.id)}"]`); if (el) el.hidden = !!c.show && !c.show(cur.id); });
@@ -1090,7 +1091,7 @@
             if (q && !rows.some(([f]) => fold(f) === q)) { const typed = cleanFont(sf.input.value); if (typed) rows.push([typed, 'TAPÉE']); }
             if (chosen && !q) { const i = rows.findIndex(([f]) => f === chosen); if (i >= STEP) rows.unshift(rows.splice(i, 1)[0]); } // la police en cours, visible tout de suite
             shown = 0; more0 = null; io?.disconnect(); list.innerHTML = '';
-            if (!rows.length) { list.innerHTML = `<div class="ui-font-empty">Aucune police pour « ${esc(sf.input.value)} ».</div>`; return; }
+            if (!rows.length) { list.innerHTML = `<div class="ui-font-empty">${i18n('Aucune police pour « {q} ».', {q: esc(sf.input.value)})}</div>`; return; }
             grow();
         }
         const mark = el => { if (!el) return; list.querySelectorAll('.ui-font.on').forEach(x => { x.classList.remove('on'); x.setAttribute('aria-selected', 'false'); }); el.classList.add('on'); el.setAttribute('aria-selected', 'true'); chosen = el.dataset.f; el.scrollIntoView({block: 'nearest'}); };

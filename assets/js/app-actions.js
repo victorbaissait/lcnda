@@ -11,6 +11,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (text, vars) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(text, vars) : String(text ?? '')); // 🌐 app-i18n.js
     const UI = window.LCNDA_UI = window.LCNDA_UI || {};
     const A = () => window.LCNDA_APP || {};
     const clean = s => String(s || '').replace(/\s+/g, ' ').trim();
@@ -503,11 +504,11 @@
         document.body.appendChild(dlg);
         const $ = s => dlg.querySelector(s), body = $('[data-k-body]'), go = $('[data-k-go]');
         let files = null, an = null, result = null, step = 1;
-        const setStep = n => { step = n; $('[data-k-step]').textContent = `IMPORTER · ÉTAPE ${n} SUR 3`; $('[data-k-back]').hidden = n !== 2; };
+        const setStep = n => { step = n; $('[data-k-step]').textContent = i18n('IMPORTER · ÉTAPE {n} SUR 3', {n}); $('[data-k-back]').hidden = n !== 2; };
         function step1() {
             setStep(1); go.hidden = true; an = null;
             body.innerHTML = o.intro ? `<p class="k-import-intro">${esc(o.intro)}</p>` : '';
-            const z = UI.dropZone({accept: o.accept || '', multiple: !!o.multiple, text: o.text || `📁 Glisse ici ${o.multiple ? 'les fichiers' : 'le fichier'}${o.what ? ` (${o.what})` : ''}, colle-le (⌘V) ou choisis-le sur l’ordinateur`, hint: o.hint ?? '', onFiles: f => { files = o.multiple ? f : f.slice(0, 1); step2(); }});
+            const z = UI.dropZone({accept: o.accept || '', multiple: !!o.multiple, text: o.text || (window.LCNDA_I18N && window.LCNDA_I18N.lang !== 'fr' ? i18n(o.multiple ? '📁 Glisse ici les fichiers, colle-les (⌘V) ou choisis-les sur l’ordinateur' : '📁 Glisse ici le fichier, colle-le (⌘V) ou choisis-le sur l’ordinateur') : `📁 Glisse ici ${o.multiple ? 'les fichiers' : 'le fichier'}${o.what ? ` (${o.what})` : ''}, colle-le (⌘V) ou choisis-le sur l’ordinateur`), hint: o.hint ?? '', onFiles: f => { files = o.multiple ? f : f.slice(0, 1); step2(); }});
             body.appendChild(z); setTimeout(() => z.focus(), 30);
         }
         async function step2() {
@@ -515,14 +516,14 @@
             const names = (files || []).map(f => f.name).join(', ');
             body.innerHTML = `<p class="k-import-file">📄 <b>${esc(names || 'fichier')}</b></p>${UI.spinner ? UI.spinner('Lecture du fichier…') : 'Lecture du fichier…'}`;
             try { an = (await o.analyze?.(files)) || {count: files.length}; }
-            catch (e) { body.innerHTML = `<p class="k-import-file">📄 <b>${esc(names)}</b></p>${UI.notice('error', `Ce fichier ne peut pas être importé : ${e?.message || e}`)}`; return; }
+            catch (e) { body.innerHTML = `<p class="k-import-file">📄 <b>${esc(names)}</b></p>${UI.notice('error', i18n('Ce fichier ne peut pas être importé : {err}', {err: e?.message || e}))}`; return; }
             if (step !== 2) return;
             const n = Number(an.count) || 0, noun = an.noun || o.noun || 'élément', many = an.many || o.many;
             const sum = an.summaryHtml || (an.summary ? esc(an.summary) : `<b>${esc(plural(n, noun, many))}</b>`);
             body.innerHTML = `<p class="k-import-file">📄 <b>${esc(names)}</b></p>${UI.notice(an.ok === false ? 'warn' : 'info', '')}${(an.notices || []).map(x => UI.notice(x.kind || 'warn', x.text)).join('')}${an.preview ? `<div class="k-import-prev">${an.preview}</div>` : ''}${an.extra || ''}`;
-            const first = body.querySelector('.ui-notice'); const txt = first?.querySelector('.ui-notice-t, span:last-child') || first; if (txt) txt.innerHTML = an.ok === false ? sum : `Voilà ce qui va entrer : ${sum}.`;
+            const first = body.querySelector('.ui-notice'); const txt = first?.querySelector('.ui-notice-t, span:last-child') || first; if (txt) txt.innerHTML = an.ok === false ? sum : i18n('Voilà ce qui va entrer : {sum}.', {sum});
             go.disabled = an.ok === false || (!n && an.count !== undefined && !an.allowEmpty);
-            go.textContent = typeof o.goLabel === 'function' ? o.goLabel(n, an) : an.goLabel || `⤒ Importer ${n ? plural(n, noun, many) : ''}`.trim();
+            go.textContent = typeof o.goLabel === 'function' ? o.goLabel(n, an) : an.goLabel || (n ? i18n('⤒ Importer {what}', {what: plural(n, noun, many)}) : i18n('⤒ Importer'));
             an.onShow?.(body);
             go.focus();
         }
@@ -534,9 +535,9 @@
                 const r = (await o.run?.(an, files, body)) || {};
                 if (r === false || r.keepOpen) { go.disabled = false; go.textContent = label; setStep(2); return; }
                 result = {analysis: an, files, ...r}; dlg.close();
-                const msg = r.message ?? (an.count ? `${plural(an.count, an.noun || o.noun || 'élément', an.many || o.many)} ${an.feminine || o.feminine ? (an.count > 1 ? 'importées' : 'importée') : (an.count > 1 ? 'importés' : 'importé')}.` : 'Import terminé.');
+                const msg = r.message ?? (an.count ? (window.LCNDA_I18N && window.LCNDA_I18N.lang !== 'fr' ? i18n('{what} importés.', {what: plural(an.count, an.noun || o.noun || 'élément', an.many || o.many)}) : `${plural(an.count, an.noun || o.noun || 'élément', an.many || o.many)} ${an.feminine || o.feminine ? (an.count > 1 ? 'importées' : 'importée') : (an.count > 1 ? 'importés' : 'importé')}.`) : i18n('Import terminé.'));
                 if (msg) { if (r.undo && A().undoToast) A().undoToast(msg, {undo: r.undo, redo: r.redo || null, icon: '⤒'}); else toast(msg, r.kind || ''); }
-            } catch (x) { setStep(2); go.disabled = false; go.textContent = label; body.insertAdjacentHTML('beforeend', UI.notice('error', `Impossible d’importer : ${x?.message || x}`)); }
+            } catch (x) { setStep(2); go.disabled = false; go.textContent = label; body.insertAdjacentHTML('beforeend', UI.notice('error', i18n('Impossible d’importer : {err}', {err: x?.message || x}))); }
         });
         dlg.addEventListener('close', () => { dlg.remove(); resolve(result); });
         dlg.showModal();

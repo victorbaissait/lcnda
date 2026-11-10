@@ -107,6 +107,8 @@
         if (text && !text.classList.contains('ui-ph-text')) text.classList.add('ui-ph-text');
         const detail = head.hasAttribute('data-ph-detail') || !!head.querySelector('.back-link');
         const place = UI.pagePlace({detail});
+        // 🌐 dans une autre langue, le texte voulu est comparé à sa traduction (sinon le filet de la page et cet en-tête se renvoient la balle)
+        const I = window.LCNDA_I18N, tr = x => (I && I.lang !== 'fr' && x ? (I.translateText(x) ?? x) : x), same = (a, b) => a === b || tr(b) === a;
         // sur-titre = l’endroit
         if (h2) {
             let eb = head.querySelector('.eyebrow');
@@ -118,7 +120,7 @@
                 else if (mod === 'recherche') want = `${nav} · ${had}`;
             }
             if (!eb) { eb = document.createElement('span'); eb.className = 'eyebrow'; h2.before(eb); }
-            if (want && eb.textContent !== want) eb.textContent = want;
+            if (want && !same(eb.textContent, want)) eb.textContent = want;
             // titre : l’icône du menu devant le nom (ou celle déjà écrite, rangée pareil)
             if (!h2.querySelector('.ui-ph-ico') && !h2.hasAttribute('data-ph-noicon')) {
                 const first = h2.firstChild, m = first && first.nodeType === 3 ? first.textContent.match(EMOJI_RE) : null;
@@ -131,7 +133,7 @@
         if (h2 && st.module === 'maintenance' && !detail && !head.hasAttribute('data-ph-title')) {
             const name = itemOf('maintenance', st.maintenanceTab), ico = h2.querySelector(':scope > .ui-ph-ico');
             const rest = [...h2.childNodes].filter(n => n !== ico);
-            if (name && rest.every(n => n.nodeType === 3) && rest.map(n => n.textContent).join('').trim() !== name) { rest.forEach(n => n.remove()); h2.append(name); }
+            if (name && rest.every(n => n.nodeType === 3) && !same(rest.map(n => n.textContent).join('').trim(), name)) { rest.forEach(n => n.remove()); h2.append(name); }
         }
         // la phrase d’aide : 2 lignes au plus, un clic pour lire la suite
         const help = text?.querySelector(':scope > p');
@@ -155,7 +157,7 @@
         const others = vis.filter(x => x !== primary && x !== reset);
         const front = [reset, ...others].filter(Boolean).slice(0, 2);
         const over = items.filter(x => x !== primary && !front.includes(x));
-        if (reset && !reset.children.length && reset.textContent.trim() !== '↺ Remettre comme au départ') reset.textContent = '↺ Remettre comme au départ';
+        if (reset && !reset.children.length && !same(reset.textContent.trim(), '↺ Remettre comme au départ')) reset.textContent = '↺ Remettre comme au départ';
         if (over.length && !more) { more = document.createElement('details'); more.className = 'ui-ph-more'; more.innerHTML = moreHtml; }
         const want = [saved, primary, ...front, over.length ? more : null, star].filter(Boolean);
         const cur = [...acts.children];
@@ -233,7 +235,8 @@
         const own = !!p.toasts && [...document.querySelectorAll('.toast:not(.is-leaving)')].some(t => !p.toasts.has(t) && /Annuler/.test(t.textContent || ''));
         p.toasts = null;
         if (own) return;
-        const msg = lbl === 'Réglages remis comme au départ' ? lbl : lbl ? `Réglage changé : « ${lbl} »` : 'Réglage changé';
+        const tt = (x, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(x, v) : x); // 🌐 app-i18n.js
+        const msg = lbl === 'Réglages remis comme au départ' ? tt(lbl) : lbl ? tt('Réglage changé : « {what} »', {what: tt(lbl)}) : tt('Réglage changé');
         const again = async () => { A().applyDesign?.(); if (page === p && p.redraw) await p.redraw(); else await A().refreshScreen?.(); if (page === p) p.base = snap(); };
         A().undoToast?.(msg, {undo: async () => { write(before); await again(); }, redo: async () => { write(after); await again(); }});
     }

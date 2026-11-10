@@ -1,0 +1,435 @@
+fr ¦ en ¦ es ¦ de ¦ it ¦ pt ¦ pl ¦ nl
+# ═════ Mots validés (K3, app-mots.js) ═════
+Enregistrer ¦ Save ¦ Guardar ¦ Speichern ¦ Salva ¦ Guardar ¦ Zapisz ¦ Opslaan
+Annuler ¦ Cancel ¦ Cancelar ¦ Abbrechen ¦ Annulla ¦ Cancelar ¦ Anuluj ¦ Annuleren
+Fermer ¦ Close ¦ Cerrar ¦ Schließen ¦ Chiudi ¦ Fechar ¦ Zamknij ¦ Sluiten
+Supprimer ¦ Delete ¦ Eliminar ¦ Löschen ¦ Elimina ¦ Eliminar ¦ Usuń ¦ Verwijderen
+Retirer ¦ Remove ¦ Quitar ¦ Entfernen ¦ Togli ¦ Retirar ¦ Odłącz ¦ Weghalen
+Modifier ¦ Edit ¦ Editar ¦ Bearbeiten ¦ Modifica ¦ Editar ¦ Edytuj ¦ Bewerken
+Créer ¦ Create ¦ Crear ¦ Erstellen ¦ Crea ¦ Criar ¦ Utwórz ¦ Maken
+Ajouter ¦ Add ¦ Añadir ¦ Hinzufügen ¦ Aggiungi ¦ Adicionar ¦ Dodaj ¦ Toevoegen
+Relier ¦ Link ¦ Vincular ¦ Verknüpfen ¦ Collega ¦ Ligar ¦ Połącz ¦ Koppelen
+↺ Remettre comme au départ ¦ ↺ Reset to default ¦ ↺ Restablecer como al principio ¦ ↺ Auf Anfang zurücksetzen ¦ ↺ Ripristina come all’inizio ¦ ↺ Repor como no início ¦ ↺ Przywróć ustawienia początkowe ¦ ↺ Terugzetten naar begin
+Remettre comme au départ ¦ Reset to default ¦ Restablecer como al principio ¦ Auf Anfang zurücksetzen ¦ Ripristina come all’inizio ¦ Repor como no início ¦ Przywróć ustawienia początkowe ¦ Terugzetten naar begin
+↶ Annuler ¦ ↶ Undo ¦ ↶ Deshacer ¦ ↶ Rückgängig ¦ ↶ Annulla ¦ ↶ Anular ¦ ↶ Cofnij ¦ ↶ Ongedaan maken
+↷ Rétablir ¦ ↷ Redo ¦ ↷ Rehacer ¦ ↷ Wiederherstellen ¦ ↷ Ripristina ¦ ↷ Refazer ¦ ↷ Ponów ¦ ↷ Opnieuw
+Rétablir ¦ Redo ¦ Rehacer ¦ Wiederherstellen ¦ Ripristina ¦ Refazer ¦ Ponów ¦ Opnieuw
+Continuer ¦ Continue ¦ Continuar ¦ Weiter ¦ Continua ¦ Continuar ¦ Dalej ¦ Doorgaan
+Réessayer ¦ Try again ¦ Reintentar ¦ Erneut versuchen ¦ Riprova ¦ Tentar de novo ¦ Spróbuj ponownie ¦ Opnieuw proberen
+Ouvrir ¦ Open ¦ Abrir ¦ Öffnen ¦ Apri ¦ Abrir ¦ Otwórz ¦ Openen
+↗ Ouvrir ¦ ↗ Open ¦ ↗ Abrir ¦ ↗ Öffnen ¦ ↗ Apri ¦ ↗ Abrir ¦ ↗ Otwórz ¦ ↗ Openen
+Renommer ¦ Rename ¦ Renombrar ¦ Umbenennen ¦ Rinomina ¦ Mudar o nome ¦ Zmień nazwę ¦ Hernoemen
+Dupliquer ¦ Duplicate ¦ Duplicar ¦ Duplizieren ¦ Duplica ¦ Duplicar ¦ Duplikuj ¦ Dupliceren
+Remplacer ¦ Replace ¦ Reemplazar ¦ Ersetzen ¦ Sostituisci ¦ Substituir ¦ Zastąp ¦ Vervangen
+Choisir ¦ Choose ¦ Elegir ¦ Auswählen ¦ Scegli ¦ Escolher ¦ Wybierz ¦ Kiezen
+Choisir… ¦ Choose… ¦ Elegir… ¦ Auswählen… ¦ Scegli… ¦ Escolher… ¦ Wybierz… ¦ Kiezen…
+Changer ¦ Change ¦ Cambiar ¦ Ändern ¦ Cambia ¦ Mudar ¦ Zmień ¦ Wijzigen
+Exporter ¦ Export ¦ Exportar ¦ Exportieren ¦ Esporta ¦ Exportar ¦ Eksportuj ¦ Exporteren
+Importer ¦ Import ¦ Importar ¦ Importieren ¦ Importa ¦ Importar ¦ Importuj ¦ Importeren
+Imprimer ¦ Print ¦ Imprimir ¦ Drucken ¦ Stampa ¦ Imprimir ¦ Drukuj ¦ Afdrukken
+🖨 Imprimer ¦ 🖨 Print ¦ 🖨 Imprimir ¦ 🖨 Drucken ¦ 🖨 Stampa ¦ 🖨 Imprimir ¦ 🖨 Drukuj ¦ 🖨 Afdrukken
+💾 Enregistrer ¦ 💾 Save ¦ 💾 Guardar ¦ 💾 Speichern ¦ 💾 Salva ¦ 💾 Guardar ¦ 💾 Zapisz ¦ 💾 Opslaan
+⤒ Importer ¦ ⤒ Import ¦ ⤒ Importar ¦ ⤒ Importieren ¦ ⤒ Importa ¦ ⤒ Importar ¦ ⤒ Importuj ¦ ⤒ Importeren
+⤓ Exporter ▾ ¦ ⤓ Export ▾ ¦ ⤓ Exportar ▾ ¦ ⤓ Exportieren ▾ ¦ ⤓ Esporta ▾ ¦ ⤓ Exportar ▾ ¦ ⤓ Eksportuj ▾ ¦ ⤓ Exporteren ▾
+📋 Copier ¦ 📋 Copy ¦ 📋 Copiar ¦ 📋 Kopieren ¦ 📋 Copia ¦ 📋 Copiar ¦ 📋 Kopiuj ¦ 📋 Kopiëren
+✓ Enregistré ¦ ✓ Saved ¦ ✓ Guardado ¦ ✓ Gespeichert ¦ ✓ Salvato ¦ ✓ Guardado ¦ ✓ Zapisano ¦ ✓ Opgeslagen
+Enregistré ¦ Saved ¦ Guardado ¦ Gespeichert ¦ Salvato ¦ Guardado ¦ Zapisano ¦ Opgeslagen
+Enregistrement… ¦ Saving… ¦ Guardando… ¦ Wird gespeichert… ¦ Salvataggio… ¦ A guardar… ¦ Zapisywanie… ¦ Bezig met opslaan…
+⚠️ Pas enregistré ¦ ⚠️ Not saved ¦ ⚠️ No guardado ¦ ⚠️ Nicht gespeichert ¦ ⚠️ Non salvato ¦ ⚠️ Não guardado ¦ ⚠️ Nie zapisano ¦ ⚠️ Niet opgeslagen
+• modifié ¦ • changed ¦ • modificado ¦ • geändert ¦ • modificato ¦ • alterado ¦ • zmieniono ¦ • gewijzigd
+Plein écran ¦ Full screen ¦ Pantalla completa ¦ Vollbild ¦ Schermo intero ¦ Ecrã inteiro ¦ Pełny ekran ¦ Volledig scherm
+Plus d’actions ¦ More actions ¦ Más acciones ¦ Weitere Aktionen ¦ Altre azioni ¦ Mais ações ¦ Więcej działań ¦ Meer acties
+Aide ¦ Help ¦ Ayuda ¦ Hilfe ¦ Aiuto ¦ Ajuda ¦ Pomoc ¦ Hulp
+Aide : ¦ Help: ¦ Ayuda: ¦ Hilfe: ¦ Aiuto: ¦ Ajuda: ¦ Pomoc: ¦ Hulp:
+En savoir plus (FAQ) → ¦ Learn more (FAQ) → ¦ Saber más (FAQ) → ¦ Mehr erfahren (FAQ) → ¦ Per saperne di più (FAQ) → ¦ Saber mais (FAQ) → ¦ Dowiedz się więcej (FAQ) → ¦ Meer weten (FAQ) →
+Clique pour lire la suite ¦ Click to read more ¦ Haz clic para leer más ¦ Klicken, um weiterzulesen ¦ Clicca per leggere il resto ¦ Clica para ler o resto ¦ Kliknij, aby czytać dalej ¦ Klik om verder te lezen
+Retour ¦ Back ¦ Volver ¦ Zurück ¦ Indietro ¦ Voltar ¦ Wstecz ¦ Terug
+← Retour ¦ ← Back ¦ ← Volver ¦ ← Zurück ¦ ← Indietro ¦ ← Voltar ¦ ← Wstecz ¦ ← Terug
+Oui ¦ Yes ¦ Sí ¦ Ja ¦ Sì ¦ Sim ¦ Tak ¦ Ja
+Non ¦ No ¦ No ¦ Nein ¦ No ¦ Não ¦ Nie ¦ Nee
+Aucune ¦ None ¦ Ninguna ¦ Keine ¦ Nessuna ¦ Nenhuma ¦ Brak ¦ Geen
+Aucun ¦ None ¦ Ninguno ¦ Keiner ¦ Nessuno ¦ Nenhum ¦ Brak ¦ Geen
+Tous ¦ All ¦ Todos ¦ Alle ¦ Tutti ¦ Todos ¦ Wszystkie ¦ Alle
+Toutes ¦ All ¦ Todas ¦ Alle ¦ Tutte ¦ Todas ¦ Wszystkie ¦ Alle
+Tout ¦ All ¦ Todo ¦ Alles ¦ Tutto ¦ Tudo ¦ Wszystko ¦ Alles
+Tout voir ¦ See all ¦ Ver todo ¦ Alles ansehen ¦ Vedi tutto ¦ Ver tudo ¦ Zobacz wszystko ¦ Alles bekijken
+Voir tout ¦ See all ¦ Ver todo ¦ Alles ansehen ¦ Vedi tutto ¦ Ver tudo ¦ Zobacz wszystko ¦ Alles bekijken
+Toutes ({n}) ¦ All ({n}) ¦ Todas ({n}) ¦ Alle ({n}) ¦ Tutte ({n}) ¦ Todas ({n}) ¦ Wszystkie ({n}) ¦ Alle ({n})
+Tout ({n}) ¦ All ({n}) ¦ Todo ({n}) ¦ Alles ({n}) ¦ Tutto ({n}) ¦ Tudo ({n}) ¦ Wszystko ({n}) ¦ Alles ({n})
+Rien pour l’instant ¦ Nothing yet ¦ Nada por ahora ¦ Noch nichts ¦ Niente per ora ¦ Nada por agora ¦ Na razie nic ¦ Nog niets
+Rien ¦ Nothing ¦ Nada ¦ Nichts ¦ Niente ¦ Nada ¦ Nic ¦ Niets
+Sans titre ¦ Untitled ¦ Sin título ¦ Ohne Titel ¦ Senza titolo ¦ Sem título ¦ Bez tytułu ¦ Zonder titel
+Échap ¦ Esc ¦ Esc ¦ Esc ¦ Esc ¦ Esc ¦ Esc ¦ Esc
+Entrée ¦ Enter ¦ Intro ¦ Eingabe ¦ Invio ¦ Enter ¦ Enter ¦ Enter
+Début ¦ Home ¦ Inicio ¦ Pos1 ¦ Inizio ¦ Início ¦ Home ¦ Home
+retour arrière ¦ backspace ¦ retroceso ¦ Rücktaste ¦ backspace ¦ retrocesso ¦ backspace ¦ backspace
+# ═════ Confirmer (confirmBox) ═════
+⚠️ ATTENTION ¦ ⚠️ WARNING ¦ ⚠️ ATENCIÓN ¦ ⚠️ ACHTUNG ¦ ⚠️ ATTENZIONE ¦ ⚠️ ATENÇÃO ¦ ⚠️ UWAGA ¦ ⚠️ LET OP
+CONFIRMER ¦ CONFIRM ¦ CONFIRMAR ¦ BESTÄTIGEN ¦ CONFERMA ¦ CONFIRMAR ¦ POTWIERDŹ ¦ BEVESTIGEN
+Es-tu sûr ? ¦ Are you sure? ¦ ¿Estás seguro? ¦ Bist du sicher? ¦ Sei sicuro? ¦ Tens a certeza? ¦ Na pewno? ¦ Weet je het zeker?
+Confirmer ¦ Confirm ¦ Confirmar ¦ Bestätigen ¦ Conferma ¦ Confirmar ¦ Potwierdź ¦ Bevestigen
+# ═════ Messages après une action (H7) ═════
+Impossible d’annuler : {err} ¦ Could not undo: {err} ¦ No se pudo deshacer: {err} ¦ Rückgängig nicht möglich: {err} ¦ Impossibile annullare: {err} ¦ Não foi possível anular: {err} ¦ Nie można cofnąć: {err} ¦ Ongedaan maken lukt niet: {err}
+Impossible de rétablir : {err} ¦ Could not redo: {err} ¦ No se pudo rehacer: {err} ¦ Wiederherstellen nicht möglich: {err} ¦ Impossibile ripristinare: {err} ¦ Não foi possível refazer: {err} ¦ Nie można ponowić: {err} ¦ Opnieuw uitvoeren lukt niet: {err}
+Déjà remis : rien à annuler de plus. ¦ Already restored: nothing more to undo. ¦ Ya restaurado: no queda nada que deshacer. ¦ Schon zurückgesetzt: nichts mehr rückgängig zu machen. ¦ Già ripristinato: niente altro da annullare. ¦ Já reposto: nada mais para anular. ¦ Już przywrócono: nie ma nic więcej do cofnięcia. ¦ Al teruggezet: niets meer ongedaan te maken.
+↶ Annulé : {what} ¦ ↶ Undone: {what} ¦ ↶ Deshecho: {what} ¦ ↶ Rückgängig gemacht: {what} ¦ ↶ Annullato: {what} ¦ ↶ Anulado: {what} ¦ ↶ Cofnięto: {what} ¦ ↶ Ongedaan gemaakt: {what}
+↶ Annulé : « {what} » ¦ ↶ Undone: “{what}” ¦ ↶ Deshecho: «{what}» ¦ ↶ Rückgängig gemacht: „{what}“ ¦ ↶ Annullato: «{what}» ¦ ↶ Anulado: «{what}» ¦ ↶ Cofnięto: „{what}” ¦ ↶ Ongedaan gemaakt: ‘{what}’
+Pas de connexion avec LCNDA : rien n’est perdu, réessaie. ¦ No connection to LCNDA: nothing is lost, try again. ¦ Sin conexión con LCNDA: no se ha perdido nada, inténtalo de nuevo. ¦ Keine Verbindung zu LCNDA: nichts ist verloren, versuche es erneut. ¦ Nessuna connessione con LCNDA: non si è perso niente, riprova. ¦ Sem ligação ao LCNDA: nada se perdeu, tenta de novo. ¦ Brak połączenia z LCNDA: nic nie zginęło, spróbuj ponownie. ¦ Geen verbinding met LCNDA: er is niets verloren, probeer het opnieuw.
+Réponse illisible du serveur ¦ Unreadable reply from the server ¦ Respuesta ilegible del servidor ¦ Unlesbare Antwort des Servers ¦ Risposta illeggibile del server ¦ Resposta ilegível do servidor ¦ Nieczytelna odpowiedź serwera ¦ Onleesbaar antwoord van de server
+Réponse illisible du serveur. ¦ Unreadable reply from the server. ¦ Respuesta ilegible del servidor. ¦ Unlesbare Antwort des Servers. ¦ Risposta illeggibile del server. ¦ Resposta ilegível do servidor. ¦ Nieczytelna odpowiedź serwera. ¦ Onleesbaar antwoord van de server.
+Erreur du serveur. ¦ Server error. ¦ Error del servidor. ¦ Serverfehler. ¦ Errore del server. ¦ Erro do servidor. ¦ Błąd serwera. ¦ Serverfout.
+Réglage changé ¦ Setting changed ¦ Ajuste cambiado ¦ Einstellung geändert ¦ Impostazione cambiata ¦ Definição alterada ¦ Zmieniono ustawienie ¦ Instelling gewijzigd
+Réglage changé : « {what} » ¦ Setting changed: “{what}” ¦ Ajuste cambiado: «{what}» ¦ Einstellung geändert: „{what}“ ¦ Impostazione cambiata: «{what}» ¦ Definição alterada: «{what}» ¦ Zmieniono ustawienie: „{what}” ¦ Instelling gewijzigd: ‘{what}’
+Réglages remis comme au départ ¦ Settings reset to default ¦ Ajustes restablecidos ¦ Einstellungen zurückgesetzt ¦ Impostazioni ripristinate ¦ Definições repostas ¦ Przywrócono ustawienia początkowe ¦ Instellingen teruggezet
+# ═════ Rien ici (K10), chargement (C7) ═════
+Chargement… ¦ Loading… ¦ Cargando… ¦ Wird geladen… ¦ Caricamento… ¦ A carregar… ¦ Wczytywanie… ¦ Laden…
+Chargement de la base… ¦ Loading the database… ¦ Cargando la base… ¦ Datenbank wird geladen… ¦ Caricamento della base… ¦ A carregar a base… ¦ Wczytywanie bazy… ¦ Database laden…
+Ouverture de la généalogie… ¦ Opening the family tree… ¦ Abriendo la genealogía… ¦ Stammbaum wird geöffnet… ¦ Apertura della genealogia… ¦ A abrir a genealogia… ¦ Otwieranie genealogii… ¦ Stamboom openen…
+# ═════ Cases de recherche (C1) et barre des listes (H10, C6) ═════
+Chercher ¦ Search ¦ Buscar ¦ Suchen ¦ Cerca ¦ Procurar ¦ Szukaj ¦ Zoeken
+Chercher… ¦ Search… ¦ Buscar… ¦ Suchen… ¦ Cerca… ¦ Procurar… ¦ Szukaj… ¦ Zoeken…
+Rechercher ¦ Search ¦ Buscar ¦ Suchen ¦ Cerca ¦ Pesquisar ¦ Szukaj ¦ Zoeken
+Vider la case (Échap) ¦ Clear the box (Esc) ¦ Vaciar la casilla (Esc) ¦ Feld leeren (Esc) ¦ Svuota la casella (Esc) ¦ Limpar a caixa (Esc) ¦ Wyczyść pole (Esc) ¦ Vak leegmaken (Esc)
+Vider la case ¦ Clear the box ¦ Vaciar la casilla ¦ Feld leeren ¦ Svuota la casella ¦ Limpar a caixa ¦ Wyczyść pole ¦ Vak leegmaken
+Touche « / » : aller dans la case de recherche ¦ “/” key: go to the search box ¦ Tecla «/»: ir a la casilla de búsqueda ¦ Taste „/“: ins Suchfeld springen ¦ Tasto «/»: vai alla casella di ricerca ¦ Tecla «/»: ir para a caixa de pesquisa ¦ Klawisz „/”: przejdź do pola wyszukiwania ¦ Toets ‘/’: naar het zoekvak
+Filtrer ¦ Filter ¦ Filtrar ¦ Filtern ¦ Filtra ¦ Filtrar ¦ Filtruj ¦ Filteren
+Filtrer ▾ ¦ Filter ▾ ¦ Filtrar ▾ ¦ Filtern ▾ ¦ Filtra ▾ ¦ Filtrar ▾ ¦ Filtruj ▾ ¦ Filteren ▾
+Tout effacer ¦ Clear all ¦ Borrar todo ¦ Alle löschen ¦ Cancella tutto ¦ Limpar tudo ¦ Wyczyść wszystko ¦ Alles wissen
+Retirer ce filtre ¦ Remove this filter ¦ Quitar este filtro ¦ Diesen Filter entfernen ¦ Togli questo filtro ¦ Retirar este filtro ¦ Usuń ten filtr ¦ Dit filter weghalen
+Trier ¦ Sort ¦ Ordenar ¦ Sortieren ¦ Ordina ¦ Ordenar ¦ Sortuj ¦ Sorteren
+Trier : ¦ Sort: ¦ Ordenar: ¦ Sortieren: ¦ Ordina: ¦ Ordenar: ¦ Sortuj: ¦ Sorteren:
+Les plus récents ¦ Newest first ¦ Más recientes ¦ Neueste zuerst ¦ Più recenti ¦ Mais recentes ¦ Najnowsze ¦ Nieuwste eerst
+Les plus anciens ¦ Oldest first ¦ Más antiguos ¦ Älteste zuerst ¦ Più vecchi ¦ Mais antigos ¦ Najstarsze ¦ Oudste eerst
+Les plus récentes ¦ Newest first ¦ Más recientes ¦ Neueste zuerst ¦ Più recenti ¦ Mais recentes ¦ Najnowsze ¦ Nieuwste eerst
+Les plus anciennes ¦ Oldest first ¦ Más antiguas ¦ Älteste zuerst ¦ Più vecchie ¦ Mais antigas ¦ Najstarsze ¦ Oudste eerst
+Nom A → Z ¦ Name A → Z ¦ Nombre A → Z ¦ Name A → Z ¦ Nome A → Z ¦ Nome A → Z ¦ Nazwa A → Z ¦ Naam A → Z
+Nom Z → A ¦ Name Z → A ¦ Nombre Z → A ¦ Name Z → A ¦ Nome Z → A ¦ Nome Z → A ¦ Nazwa Z → A ¦ Naam Z → A
+Liste ¦ List ¦ Lista ¦ Liste ¦ Elenco ¦ Lista ¦ Lista ¦ Lijst
+Fiches ¦ Cards ¦ Fichas ¦ Karten ¦ Schede ¦ Fichas ¦ Karty ¦ Kaarten
+En liste : une ligne par élément (vignette, nom, détails, date) ¦ As a list: one row per item (thumbnail, name, details, date) ¦ En lista: una línea por elemento (miniatura, nombre, detalles, fecha) ¦ Als Liste: eine Zeile pro Element (Vorschaubild, Name, Details, Datum) ¦ In elenco: una riga per elemento (miniatura, nome, dettagli, data) ¦ Em lista: uma linha por elemento (miniatura, nome, detalhes, data) ¦ Jako lista: jeden wiersz na element (miniatura, nazwa, szczegóły, data) ¦ Als lijst: één regel per item (miniatuur, naam, details, datum)
+En fiches : une carte par élément, avec une grande vignette ¦ As cards: one card per item, with a large thumbnail ¦ En fichas: una tarjeta por elemento, con una miniatura grande ¦ Als Karten: eine Karte pro Element, mit großem Vorschaubild ¦ In schede: una scheda per elemento, con una grande miniatura ¦ Em fichas: um cartão por elemento, com uma miniatura grande ¦ Jako karty: jedna karta na element, z dużą miniaturą ¦ Als kaarten: één kaart per item, met een grote miniatuur
+Affichage des {what} ¦ Display of {what} ¦ Vista de {what} ¦ Anzeige: {what} ¦ Visualizzazione: {what} ¦ Vista de {what} ¦ Widok: {what} ¦ Weergave: {what}
+Voir le suivant ↓ ¦ See the next one ↓ ¦ Ver el siguiente ↓ ¦ Nächsten ansehen ↓ ¦ Vedi il successivo ↓ ¦ Ver o seguinte ↓ ¦ Zobacz następny ↓ ¦ Volgende bekijken ↓
+Voir la suivante ↓ ¦ See the next one ↓ ¦ Ver la siguiente ↓ ¦ Nächste ansehen ↓ ¦ Vedi la successiva ↓ ¦ Ver a seguinte ↓ ¦ Zobacz następną ↓ ¦ Volgende bekijken ↓
+Voir les {n} suivants ↓ ¦ See the next {n} ↓ ¦ Ver los {n} siguientes ↓ ¦ Die nächsten {n} ansehen ↓ ¦ Vedi i {n} successivi ↓ ¦ Ver os {n} seguintes ↓ ¦ Zobacz kolejne {n} ↓ ¦ Volgende {n} bekijken ↓
+Voir les {n} suivantes ↓ ¦ See the next {n} ↓ ¦ Ver las {n} siguientes ↓ ¦ Die nächsten {n} ansehen ↓ ¦ Vedi le {n} successive ↓ ¦ Ver as {n} seguintes ↓ ¦ Zobacz kolejne {n} ↓ ¦ Volgende {n} bekijken ↓
+{n} éléments ¦ {n} items ¦ {n} elementos ¦ {n} Elemente ¦ {n} elementi ¦ {n} elementos ¦ {n} elementów ¦ {n} items
+=élément ¦ item|items ¦ elemento|elementos ¦ Element|Elemente ¦ elemento|elementi ¦ elemento|elementos ¦ element|elementy|elementów ¦ item|items
+éléments ¦ items ¦ elementos ¦ Elemente ¦ elementi ¦ elementos ¦ elementy ¦ items
+=personne ¦ person|people ¦ persona|personas ¦ Person|Personen ¦ persona|persone ¦ pessoa|pessoas ¦ osoba|osoby|osób ¦ persoon|personen
+=animal ¦ animal|animals ¦ animal|animales ¦ Tier|Tiere ¦ animale|animali ¦ animal|animais ¦ zwierzę|zwierzęta|zwierząt ¦ dier|dieren
+=fiche ¦ record|records ¦ ficha|fichas ¦ Eintrag|Einträge ¦ scheda|schede ¦ ficha|fichas ¦ karta|karty|kart ¦ profiel|profielen
+=lieu ¦ place|places ¦ lugar|lugares ¦ Ort|Orte ¦ luogo|luoghi ¦ lugar|lugares ¦ miejsce|miejsca|miejsc ¦ plaats|plaatsen
+=commune ¦ municipality|municipalities ¦ municipio|municipios ¦ Gemeinde|Gemeinden ¦ comune|comuni ¦ município|municípios ¦ gmina|gminy|gmin ¦ gemeente|gemeenten
+=ville ¦ city|cities ¦ ciudad|ciudades ¦ Stadt|Städte ¦ città|città ¦ cidade|cidades ¦ miasto|miasta|miast ¦ stad|steden
+=chose ¦ thing|things ¦ cosa|cosas ¦ Sache|Sachen ¦ cosa|cose ¦ coisa|coisas ¦ rzecz|rzeczy|rzeczy ¦ ding|dingen
+=caractère ¦ character|characters ¦ carácter|caracteres ¦ Zeichen|Zeichen ¦ carattere|caratteri ¦ carácter|caracteres ¦ znak|znaki|znaków ¦ teken|tekens
+=page ¦ page|pages ¦ página|páginas ¦ Seite|Seiten ¦ pagina|pagine ¦ página|páginas ¦ strona|strony|stron ¦ pagina|pagina’s
+=document ¦ document|documents ¦ documento|documentos ¦ Dokument|Dokumente ¦ documento|documenti ¦ documento|documentos ¦ dokument|dokumenty|dokumentów ¦ document|documenten
+=média ¦ media file|media files ¦ archivo|archivos ¦ Medium|Medien ¦ media|media ¦ média|médias ¦ plik|pliki|plików ¦ mediabestand|mediabestanden
+=source ¦ source|sources ¦ fuente|fuentes ¦ Quelle|Quellen ¦ fonte|fonti ¦ fonte|fontes ¦ źródło|źródła|źródeł ¦ bron|bronnen
+=événement ¦ event|events ¦ evento|eventos ¦ Ereignis|Ereignisse ¦ evento|eventi ¦ evento|eventos ¦ wydarzenie|wydarzenia|wydarzeń ¦ gebeurtenis|gebeurtenissen
+=étiquette ¦ label|labels ¦ etiqueta|etiquetas ¦ Etikett|Etiketten ¦ etichetta|etichette ¦ etiqueta|etiquetas ¦ etykieta|etykiety|etykiet ¦ label|labels
+=enquête ¦ investigation|investigations ¦ investigación|investigaciones ¦ Recherche|Recherchen ¦ indagine|indagini ¦ investigação|investigações ¦ śledztwo|śledztwa|śledztw ¦ onderzoek|onderzoeken
+=modification ¦ change|changes ¦ cambio|cambios ¦ Änderung|Änderungen ¦ modifica|modifiche ¦ alteração|alterações ¦ zmiana|zmiany|zmian ¦ wijziging|wijzigingen
+=famille ¦ family|families ¦ familia|familias ¦ Familie|Familien ¦ famiglia|famiglie ¦ família|famílias ¦ rodzina|rodziny|rodzin ¦ gezin|gezinnen
+=génération ¦ generation|generations ¦ generación|generaciones ¦ Generation|Generationen ¦ generazione|generazioni ¦ geração|gerações ¦ pokolenie|pokolenia|pokoleń ¦ generatie|generaties
+=réglage ¦ setting|settings ¦ ajuste|ajustes ¦ Einstellung|Einstellungen ¦ impostazione|impostazioni ¦ definição|definições ¦ ustawienie|ustawienia|ustawień ¦ instelling|instellingen
+=erreur captée ¦ error caught|errors caught ¦ error capturado|errores capturados ¦ erfasster Fehler|erfasste Fehler ¦ errore rilevato|errori rilevati ¦ erro registado|erros registados ¦ zarejestrowany błąd|zarejestrowane błędy|zarejestrowanych błędów ¦ vastgelegde fout|vastgelegde fouten
+=jour ¦ day|days ¦ día|días ¦ Tag|Tage ¦ giorno|giorni ¦ dia|dias ¦ dzień|dni|dni ¦ dag|dagen
+=type ¦ type|types ¦ tipo|tipos ¦ Typ|Typen ¦ tipo|tipi ¦ tipo|tipos ¦ typ|typy|typów ¦ type|types
+=branche ¦ branch|branches ¦ rama|ramas ¦ Zweig|Zweige ¦ ramo|rami ¦ ramo|ramos ¦ gałąź|gałęzie|gałęzi ¦ tak|takken
+=doublon possible ¦ possible duplicate|possible duplicates ¦ posible duplicado|posibles duplicados ¦ mögliches Duplikat|mögliche Duplikate ¦ possibile doppione|possibili doppioni ¦ possível duplicado|possíveis duplicados ¦ możliwy duplikat|możliwe duplikaty|możliwych duplikatów ¦ mogelijk dubbel|mogelijke dubbels
+=chose à vérifier ¦ thing to check|things to check ¦ cosa por revisar|cosas por revisar ¦ Sache zu prüfen|Sachen zu prüfen ¦ cosa da verificare|cose da verificare ¦ coisa a verificar|coisas a verificar ¦ rzecz do sprawdzenia|rzeczy do sprawdzenia|rzeczy do sprawdzenia ¦ ding om na te kijken|dingen om na te kijken
+=album ¦ album|albums ¦ álbum|álbumes ¦ Album|Alben ¦ album|album ¦ álbum|álbuns ¦ album|albumy|albumów ¦ album|albums
+=chanson ¦ song|songs ¦ canción|canciones ¦ Lied|Lieder ¦ canzone|canzoni ¦ canção|canções ¦ piosenka|piosenki|piosenek ¦ lied|liedjes
+=titre ¦ title|titles ¦ título|títulos ¦ Titel|Titel ¦ titolo|titoli ¦ título|títulos ¦ tytuł|tytuły|tytułów ¦ titel|titels
+# ═════ Menu de choix (pickerField, app-picker.js) ═════
+Nom, prénom… (2 lettres suffisent) ¦ Surname, first name… (2 letters are enough) ¦ Apellido, nombre… (bastan 2 letras) ¦ Name, Vorname… (2 Buchstaben genügen) ¦ Cognome, nome… (bastano 2 lettere) ¦ Apelido, nome… (bastam 2 letras) ¦ Nazwisko, imię… (wystarczą 2 litery) ¦ Achternaam, voornaam… (2 letters zijn genoeg)
+Ville, village, paroisse… ¦ Town, village, parish… ¦ Ciudad, pueblo, parroquia… ¦ Stadt, Dorf, Pfarrei… ¦ Città, paese, parrocchia… ¦ Cidade, aldeia, paróquia… ¦ Miasto, wieś, parafia… ¦ Stad, dorp, parochie…
+＋ Ajouter une personne… ¦ ＋ Add a person… ¦ ＋ Añadir una persona… ¦ ＋ Person hinzufügen… ¦ ＋ Aggiungi una persona… ¦ ＋ Adicionar uma pessoa… ¦ ＋ Dodaj osobę… ¦ ＋ Persoon toevoegen…
+＋ Ajouter un lieu… ¦ ＋ Add a place… ¦ ＋ Añadir un lugar… ¦ ＋ Ort hinzufügen… ¦ ＋ Aggiungi un luogo… ¦ ＋ Adicionar um lugar… ¦ ＋ Dodaj miejsce… ¦ ＋ Plaats toevoegen…
+＋ Ajouter une source… ¦ ＋ Add a source… ¦ ＋ Añadir una fuente… ¦ ＋ Quelle hinzufügen… ¦ ＋ Aggiungi una fonte… ¦ ＋ Adicionar uma fonte… ¦ ＋ Dodaj źródło… ¦ ＋ Bron toevoegen…
+＋ Ajouter un média… ¦ ＋ Add a media file… ¦ ＋ Añadir un archivo… ¦ ＋ Medium hinzufügen… ¦ ＋ Aggiungi un media… ¦ ＋ Adicionar um média… ¦ ＋ Dodaj plik… ¦ ＋ Mediabestand toevoegen…
+＋ Ajouter une enquête… ¦ ＋ Add an investigation… ¦ ＋ Añadir una investigación… ¦ ＋ Recherche hinzufügen… ¦ ＋ Aggiungi un’indagine… ¦ ＋ Adicionar uma investigação… ¦ ＋ Dodaj śledztwo… ¦ ＋ Onderzoek toevoegen…
+＋ Ajouter une étiquette… ¦ ＋ Add a label… ¦ ＋ Añadir una etiqueta… ¦ ＋ Etikett hinzufügen… ¦ ＋ Aggiungi un’etichetta… ¦ ＋ Adicionar uma etiqueta… ¦ ＋ Dodaj etykietę… ¦ ＋ Label toevoegen…
+＋ Ajouter un événement… ¦ ＋ Add an event… ¦ ＋ Añadir un evento… ¦ ＋ Ereignis hinzufügen… ¦ ＋ Aggiungi un evento… ¦ ＋ Adicionar um evento… ¦ ＋ Dodaj wydarzenie… ¦ ＋ Gebeurtenis toevoegen…
+＋ Ajouter un animal… ¦ ＋ Add an animal… ¦ ＋ Añadir un animal… ¦ ＋ Tier hinzufügen… ¦ ＋ Aggiungi un animale… ¦ ＋ Adicionar um animal… ¦ ＋ Dodaj zwierzę… ¦ ＋ Dier toevoegen…
+＋ Ajouter… ¦ ＋ Add… ¦ ＋ Añadir… ¦ ＋ Hinzufügen… ¦ ＋ Aggiungi… ¦ ＋ Adicionar… ¦ ＋ Dodaj… ¦ ＋ Toevoegen…
+↗ Fiche ¦ ↗ Record ¦ ↗ Ficha ¦ ↗ Eintrag ¦ ↗ Scheda ¦ ↗ Ficha ¦ ↗ Karta ¦ ↗ Profiel
+↗ Lieu ¦ ↗ Place ¦ ↗ Lugar ¦ ↗ Ort ¦ ↗ Luogo ¦ ↗ Lugar ¦ ↗ Miejsce ¦ ↗ Plaats
+Aucune fiche ¦ No record ¦ Ninguna ficha ¦ Kein Eintrag ¦ Nessuna scheda ¦ Nenhuma ficha ¦ Brak karty ¦ Geen profiel
+Aucun lieu ¦ No place ¦ Ningún lugar ¦ Kein Ort ¦ Nessun luogo ¦ Nenhum lugar ¦ Brak miejsca ¦ Geen plaats
+Aucune source ¦ No source ¦ Ninguna fuente ¦ Keine Quelle ¦ Nessuna fonte ¦ Nenhuma fonte ¦ Brak źródła ¦ Geen bron
+Aucun média ¦ No media ¦ Ningún archivo ¦ Kein Medium ¦ Nessun media ¦ Nenhum média ¦ Brak plików ¦ Geen media
+Aucune enquête ¦ No investigation ¦ Ninguna investigación ¦ Keine Recherche ¦ Nessuna indagine ¦ Nenhuma investigação ¦ Brak śledztw ¦ Geen onderzoek
+Aucune étiquette ¦ No label ¦ Ninguna etiqueta ¦ Kein Etikett ¦ Nessuna etichetta ¦ Nenhuma etiqueta ¦ Brak etykiet ¦ Geen label
+Aucun événement ¦ No event ¦ Ningún evento ¦ Kein Ereignis ¦ Nessun evento ¦ Nenhum evento ¦ Brak wydarzeń ¦ Geen gebeurtenis
+Aucun animal ¦ No animal ¦ Ningún animal ¦ Kein Tier ¦ Nessun animale ¦ Nenhum animal ¦ Brak zwierząt ¦ Geen dier
+Créer la fiche ¦ Create the record ¦ Crear la ficha ¦ Eintrag erstellen ¦ Crea la scheda ¦ Criar a ficha ¦ Utwórz kartę ¦ Profiel maken
+Créer le lieu ¦ Create the place ¦ Crear el lugar ¦ Ort erstellen ¦ Crea il luogo ¦ Criar o lugar ¦ Utwórz miejsce ¦ Plaats maken
+Créer une fiche ¦ Create a record ¦ Crear una ficha ¦ Eintrag erstellen ¦ Crea una scheda ¦ Criar uma ficha ¦ Utwórz kartę ¦ Profiel maken
+＋ Créer sa fiche ¦ ＋ Create their record ¦ ＋ Crear su ficha ¦ ＋ Eintrag erstellen ¦ ＋ Crea la sua scheda ¦ ＋ Criar a ficha ¦ ＋ Utwórz kartę ¦ ＋ Profiel maken
+👤 Personnes ¦ 👤 People ¦ 👤 Personas ¦ 👤 Personen ¦ 👤 Persone ¦ 👤 Pessoas ¦ 👤 Osoby ¦ 👤 Personen
+📍 Lieux ¦ 📍 Places ¦ 📍 Lugares ¦ 📍 Orte ¦ 📍 Luoghi ¦ 📍 Lugares ¦ 📍 Miejsca ¦ 📍 Plaatsen
+📚 Sources ¦ 📚 Sources ¦ 📚 Fuentes ¦ 📚 Quellen ¦ 📚 Fonti ¦ 📚 Fontes ¦ 📚 Źródła ¦ 📚 Bronnen
+🖼 Médias ¦ 🖼 Media ¦ 🖼 Archivos ¦ 🖼 Medien ¦ 🖼 Media ¦ 🖼 Médias ¦ 🖼 Pliki ¦ 🖼 Media
+🔍 Enquêtes ¦ 🔍 Investigations ¦ 🔍 Investigaciones ¦ 🔍 Recherchen ¦ 🔍 Indagini ¦ 🔍 Investigações ¦ 🔍 Śledztwa ¦ 🔍 Onderzoeken
+🏷 Étiquettes ¦ 🏷 Labels ¦ 🏷 Etiquetas ¦ 🏷 Etiketten ¦ 🏷 Etichette ¦ 🏷 Etiquetas ¦ 🏷 Etykiety ¦ 🏷 Labels
+📅 Événements ¦ 📅 Events ¦ 📅 Eventos ¦ 📅 Ereignisse ¦ 📅 Eventi ¦ 📅 Eventos ¦ 📅 Wydarzenia ¦ 📅 Gebeurtenissen
+🐾 Animaux ¦ 🐾 Animals ¦ 🐾 Animales ¦ 🐾 Tiere ¦ 🐾 Animali ¦ 🐾 Animais ¦ 🐾 Zwierzęta ¦ 🐾 Dieren
+✎ Garder le texte « {q} » sans fiche ¦ ✎ Keep the text “{q}” without a record ¦ ✎ Guardar el texto «{q}» sin ficha ¦ ✎ Text „{q}“ ohne Eintrag behalten ¦ ✎ Tieni il testo «{q}» senza scheda ¦ ✎ Manter o texto «{q}» sem ficha ¦ ✎ Zachowaj tekst „{q}” bez karty ¦ ✎ Tekst ‘{q}’ zonder profiel houden
+🗺 Choisir sur la carte ¦ 🗺 Pick on the map ¦ 🗺 Elegir en el mapa ¦ 🗺 Auf der Karte wählen ¦ 🗺 Scegli sulla mappa ¦ 🗺 Escolher no mapa ¦ 🗺 Wybierz na mapie ¦ 🗺 Kiezen op de kaart
+{what} de ta base ¦ {what} in your database ¦ {what} de tu base ¦ {what} in deiner Datenbank ¦ {what} nella tua base ¦ {what} da tua base ¦ {what} w twojej bazie ¦ {what} in je database
+{what} de France ¦ {what} in France ¦ {what} de Francia ¦ {what} in Frankreich ¦ {what} in Francia ¦ {what} de França ¦ {what} we Francji ¦ {what} in Frankrijk
+{what} du monde ¦ {what} worldwide ¦ {what} del mundo ¦ {what} weltweit ¦ {what} nel mondo ¦ {what} do mundo ¦ {what} na świecie ¦ {what} in de wereld
+300 villes du monde et plus ¦ 300+ cities worldwide ¦ más de 300 ciudades del mundo ¦ über 300 Städte weltweit ¦ oltre 300 città nel mondo ¦ mais de 300 cidades do mundo ¦ ponad 300 miast na świecie ¦ meer dan 300 steden in de wereld
+{what} trouvés ¦ {what} found ¦ {what} encontrados ¦ {what} gefunden ¦ {what} trovati ¦ {what} encontrados ¦ znaleziono: {what} ¦ {what} gevonden
+{none} pour « {q} ». Vérifie l’orthographe ¦ {none} for “{q}”. Check the spelling ¦ {none} para «{q}». Revisa la ortografía ¦ {none} für „{q}“. Prüfe die Schreibweise ¦ {none} per «{q}». Controlla l’ortografia ¦ {none} para «{q}». Verifica a ortografia ¦ {none} dla „{q}”. Sprawdź pisownię ¦ {none} voor ‘{q}’. Controleer de spelling
+{none} pour l’instant ¦ {none} yet ¦ {none} por ahora ¦ {none} bisher ¦ {none} per ora ¦ {none} por agora ¦ {none} na razie ¦ {none} tot nu toe
+, ou : ¦ , or: ¦ , o: ¦ , oder: ¦ , oppure: ¦ , ou: ¦ , lub: ¦ , of:
+↹ Tab passe d’un filtre à l’autre ¦ ↹ Tab moves from one filter to the next ¦ ↹ Tab pasa de un filtro a otro ¦ ↹ Tab wechselt zwischen den Filtern ¦ ↹ Tab passa da un filtro all’altro ¦ ↹ Tab passa de um filtro para o outro ¦ ↹ Tab przechodzi między filtrami ¦ ↹ Tab gaat van filter naar filter
+↑ ↓ Entrée ¦ ↑ ↓ Enter ¦ ↑ ↓ Intro ¦ ↑ ↓ Eingabe ¦ ↑ ↓ Invio ¦ ↑ ↓ Enter ¦ ↑ ↓ Enter ¦ ↑ ↓ Enter
+… la liste défile ¦ … the list scrolls ¦ … la lista se desplaza ¦ … die Liste scrollt ¦ … l’elenco scorre ¦ … a lista desliza ¦ … lista się przewija ¦ … de lijst schuift
+⭐ Personne principale ¦ ⭐ Main person ¦ ⭐ Persona principal ¦ ⭐ Hauptperson ¦ ⭐ Persona principale ¦ ⭐ Pessoa principal ¦ ⭐ Osoba główna ¦ ⭐ Hoofdpersoon
+Autres personnes principales ¦ Other main people ¦ Otras personas principales ¦ Weitere Hauptpersonen ¦ Altre persone principali ¦ Outras pessoas principais ¦ Inne osoby główne ¦ Andere hoofdpersonen
+Personnes principales ¦ Main people ¦ Personas principales ¦ Hauptpersonen ¦ Persone principali ¦ Pessoas principais ¦ Osoby główne ¦ Hoofdpersonen
+Personnes secondaires ¦ Secondary people ¦ Personas secundarias ¦ Nebenpersonen ¦ Persone secondarie ¦ Pessoas secundárias ¦ Osoby drugoplanowe ¦ Bijpersonen
+au cœur de la recherche ¦ at the heart of the research ¦ en el centro de la investigación ¦ im Mittelpunkt der Recherche ¦ al centro della ricerca ¦ no centro da pesquisa ¦ w centrum poszukiwań ¦ centraal in het onderzoek
+témoins, voisins, parrains, pistes… ¦ witnesses, neighbours, godparents, leads… ¦ testigos, vecinos, padrinos, pistas… ¦ Zeugen, Nachbarn, Paten, Spuren… ¦ testimoni, vicini, padrini, piste… ¦ testemunhas, vizinhos, padrinhos, pistas… ¦ świadkowie, sąsiedzi, chrzestni, tropy… ¦ getuigen, buren, peetouders, sporen…
+Choisir la personne principale… ¦ Choose the main person… ¦ Elegir la persona principal… ¦ Hauptperson auswählen… ¦ Scegli la persona principale… ¦ Escolher a pessoa principal… ¦ Wybierz osobę główną… ¦ Hoofdpersoon kiezen…
+＋ Ajouter une personne principale… ¦ ＋ Add a main person… ¦ ＋ Añadir una persona principal… ¦ ＋ Hauptperson hinzufügen… ¦ ＋ Aggiungi una persona principale… ¦ ＋ Adicionar uma pessoa principal… ¦ ＋ Dodaj osobę główną… ¦ ＋ Hoofdpersoon toevoegen…
+＋ Ajouter une personne secondaire… ¦ ＋ Add a secondary person… ¦ ＋ Añadir una persona secundaria… ¦ ＋ Nebenperson hinzufügen… ¦ ＋ Aggiungi una persona secondaria… ¦ ＋ Adicionar uma pessoa secundária… ¦ ＋ Dodaj osobę drugoplanową… ¦ ＋ Bijpersoon toevoegen…
+Changer le rôle ¦ Change the role ¦ Cambiar el papel ¦ Rolle ändern ¦ Cambia il ruolo ¦ Mudar o papel ¦ Zmień rolę ¦ Rol wijzigen
+Donner un rôle (facultatif) ¦ Give a role (optional) ¦ Dar un papel (opcional) ¦ Rolle vergeben (freiwillig) ¦ Assegna un ruolo (facoltativo) ¦ Dar um papel (opcional) ¦ Nadaj rolę (opcjonalnie) ¦ Rol geven (optioneel)
+rôle ▾ ¦ role ▾ ¦ papel ▾ ¦ Rolle ▾ ¦ ruolo ▾ ¦ papel ▾ ¦ rola ▾ ¦ rol ▾
+Rôle libre ¦ Free role ¦ Papel libre ¦ Freie Rolle ¦ Ruolo libero ¦ Papel livre ¦ Dowolna rola ¦ Vrije rol
+Retirer le rôle ¦ Remove the role ¦ Quitar el papel ¦ Rolle entfernen ¦ Togli il ruolo ¦ Retirar o papel ¦ Usuń rolę ¦ Rol weghalen
+Passer en secondaire ¦ Move to secondary ¦ Pasar a secundaria ¦ Zur Nebenperson machen ¦ Passa a secondaria ¦ Passar a secundária ¦ Przenieś do drugoplanowych ¦ Naar bijpersonen
+Passer en principale ¦ Move to main ¦ Pasar a principal ¦ Zur Hauptperson machen ¦ Passa a principale ¦ Passar a principal ¦ Przenieś do głównych ¦ Naar hoofdpersonen
+Autre mot… (Entrée) ¦ Other word… (Enter) ¦ Otra palabra… (Intro) ¦ Anderes Wort… (Eingabe) ¦ Altra parola… (Invio) ¦ Outra palavra… (Enter) ¦ Inne słowo… (Enter) ¦ Ander woord… (Enter)
+témoin ¦ witness ¦ testigo ¦ Zeuge ¦ testimone ¦ testemunha ¦ świadek ¦ getuige
+déclarant ¦ informant ¦ declarante ¦ Anzeigender ¦ dichiarante ¦ declarante ¦ zgłaszający ¦ aangever
+parrain ¦ godfather ¦ padrino ¦ Pate ¦ padrino ¦ padrinho ¦ ojciec chrzestny ¦ peetvader
+marraine ¦ godmother ¦ madrina ¦ Patin ¦ madrina ¦ madrinha ¦ matka chrzestna ¦ peetmoeder
+voisin ¦ neighbour ¦ vecino ¦ Nachbar ¦ vicino ¦ vizinho ¦ sąsiad ¦ buurman
+employeur ¦ employer ¦ empleador ¦ Arbeitgeber ¦ datore di lavoro ¦ empregador ¦ pracodawca ¦ werkgever
+officier ¦ registrar ¦ oficial ¦ Standesbeamter ¦ ufficiale ¦ oficial ¦ urzędnik ¦ ambtenaar
+épouse ¦ wife ¦ esposa ¦ Ehefrau ¦ moglie ¦ esposa ¦ żona ¦ echtgenote
+époux ¦ husband ¦ esposo ¦ Ehemann ¦ marito ¦ esposo ¦ mąż ¦ echtgenoot
+sans fiche ¦ no record ¦ sin ficha ¦ ohne Eintrag ¦ senza scheda ¦ sem ficha ¦ bez karty ¦ zonder profiel
+Personne sans fiche : clic pour créer sa fiche ¦ Person without a record: click to create one ¦ Persona sin ficha: haz clic para crear su ficha ¦ Person ohne Eintrag: klicken, um ihn zu erstellen ¦ Persona senza scheda: clicca per crearla ¦ Pessoa sem ficha: clica para criar a ficha ¦ Osoba bez karty: kliknij, aby ją utworzyć ¦ Persoon zonder profiel: klik om het te maken
+Ouvrir la fiche ¦ Open the record ¦ Abrir la ficha ¦ Eintrag öffnen ¦ Apri la scheda ¦ Abrir a ficha ¦ Otwórz kartę ¦ Profiel openen
+Voir sur la carte ¦ See on the map ¦ Ver en el mapa ¦ Auf der Karte ansehen ¦ Vedi sulla mappa ¦ Ver no mapa ¦ Zobacz na mapie ¦ Op de kaart bekijken
+Aucune personne choisie ¦ No person chosen ¦ Ninguna persona elegida ¦ Keine Person ausgewählt ¦ Nessuna persona scelta ¦ Nenhuma pessoa escolhida ¦ Nie wybrano osoby ¦ Geen persoon gekozen
+Choisir des personnes ¦ Choose people ¦ Elegir personas ¦ Personen auswählen ¦ Scegli delle persone ¦ Escolher pessoas ¦ Wybierz osoby ¦ Personen kiezen
+Choisir une personne ¦ Choose a person ¦ Elegir una persona ¦ Person auswählen ¦ Scegli una persona ¦ Escolher uma pessoa ¦ Wybierz osobę ¦ Persoon kiezen
+Choisir des lieux ¦ Choose places ¦ Elegir lugares ¦ Orte auswählen ¦ Scegli dei luoghi ¦ Escolher lugares ¦ Wybierz miejsca ¦ Plaatsen kiezen
+Choisir un lieu ¦ Choose a place ¦ Elegir un lugar ¦ Ort auswählen ¦ Scegli un luogo ¦ Escolher um lugar ¦ Wybierz miejsce ¦ Plaats kiezen
+Carte : clique l’endroit du lieu ¦ Map: click where the place is ¦ Mapa: haz clic en el sitio del lugar ¦ Karte: klicke auf die Stelle des Ortes ¦ Mappa: clicca sul punto del luogo ¦ Mapa: clica no sítio do lugar ¦ Mapa: kliknij miejsce ¦ Kaart: klik op de plek
+Clique l’endroit du lieu sur la carte (glisse pour te déplacer, molette pour zoomer). ¦ Click the spot on the map (drag to move, wheel to zoom). ¦ Haz clic en el sitio en el mapa (arrastra para moverte, rueda para hacer zoom). ¦ Klicke auf die Stelle auf der Karte (ziehen zum Verschieben, Mausrad zum Zoomen). ¦ Clicca il punto sulla mappa (trascina per spostarti, rotellina per lo zoom). ¦ Clica no sítio no mapa (arrasta para te deslocares, roda para fazer zoom). ¦ Kliknij miejsce na mapie (przeciągnij, aby przesunąć, kółkiem przybliż). ¦ Klik op de plek op de kaart (sleep om te verschuiven, scrollwiel om te zoomen).
+＋ Créer un lieu ici ¦ ＋ Create a place here ¦ ＋ Crear un lugar aquí ¦ ＋ Hier einen Ort erstellen ¦ ＋ Crea un luogo qui ¦ ＋ Criar um lugar aqui ¦ ＋ Utwórz tu miejsce ¦ ＋ Hier een plaats maken
+Nom du lieu ¦ Place name ¦ Nombre del lugar ¦ Name des Ortes ¦ Nome del luogo ¦ Nome do lugar ¦ Nazwa miejsca ¦ Naam van de plaats
+Lieux proches… ¦ Nearby places… ¦ Lugares cercanos… ¦ Orte in der Nähe… ¦ Luoghi vicini… ¦ Lugares próximos… ¦ Miejsca w pobliżu… ¦ Plaatsen in de buurt…
+Aucun lieu connu près d’ici : crée-le ci-dessous. ¦ No known place near here: create it below. ¦ Ningún lugar conocido cerca: créalo abajo. ¦ Kein bekannter Ort in der Nähe: erstelle ihn unten. ¦ Nessun luogo noto qui vicino: crealo qui sotto. ¦ Nenhum lugar conhecido perto daqui: cria-o abaixo. ¦ Brak znanych miejsc w pobliżu: utwórz je poniżej. ¦ Geen bekende plaats in de buurt: maak hem hieronder.
+Donne un nom au lieu. ¦ Give the place a name. ¦ Dale un nombre al lugar. ¦ Gib dem Ort einen Namen. ¦ Dai un nome al luogo. ¦ Dá um nome ao lugar. ¦ Nadaj miejscu nazwę. ¦ Geef de plaats een naam.
+Dézoomer ¦ Zoom out ¦ Alejar ¦ Herauszoomen ¦ Riduci lo zoom ¦ Afastar ¦ Oddal ¦ Uitzoomen
+Lieu impossible à ajouter ¦ This place can’t be added ¦ No se puede añadir el lugar ¦ Ort kann nicht hinzugefügt werden ¦ Impossibile aggiungere il luogo ¦ Não é possível adicionar o lugar ¦ Nie można dodać miejsca ¦ Plaats kan niet worden toegevoegd
+Crée d’abord la fiche dans Personnes, puis choisis-la ici. ¦ First create the record in People, then choose it here. ¦ Crea primero la ficha en Personas y luego elígela aquí. ¦ Erstelle zuerst den Eintrag unter Personen und wähle ihn dann hier. ¦ Crea prima la scheda in Persone, poi sceglila qui. ¦ Cria primeiro a ficha em Pessoas e depois escolhe-a aqui. ¦ Najpierw utwórz kartę w Osobach, potem wybierz ją tutaj. ¦ Maak eerst het profiel in Personen en kies het dan hier.
+Crée-la d’abord dans l’outil, puis choisis-la ici. ¦ Create it in the tool first, then choose it here. ¦ Créala primero en la herramienta y luego elígela aquí. ¦ Erstelle es zuerst im Werkzeug und wähle es dann hier. ¦ Creala prima nello strumento, poi sceglila qui. ¦ Cria-a primeiro na ferramenta e depois escolhe-a aqui. ¦ Najpierw utwórz to w narzędziu, potem wybierz tutaj. ¦ Maak het eerst in het hulpmiddel en kies het dan hier.
+Personne ¦ Person ¦ Persona ¦ Person ¦ Persona ¦ Pessoa ¦ Osoba ¦ Persoon
+Lieu ¦ Place ¦ Lugar ¦ Ort ¦ Luogo ¦ Lugar ¦ Miejsce ¦ Plaats
+# ═════ Formulaires (K1, app-forms.js) ═════
+À corriger. ¦ To be fixed. ¦ Por corregir. ¦ Bitte korrigieren. ¦ Da correggere. ¦ A corrigir. ¦ Do poprawienia. ¦ Te verbeteren.
+<b>{what} à corriger</b> avant d’enregistrer. ¦ <b>{what} to fix</b> before saving. ¦ <b>{what} por corregir</b> antes de guardar. ¦ <b>{what} zu korrigieren</b> vor dem Speichern. ¦ <b>{what} da correggere</b> prima di salvare. ¦ <b>{what} a corrigir</b> antes de guardar. ¦ <b>Do poprawienia: {what}</b> przed zapisaniem. ¦ <b>{what} te verbeteren</b> voor het opslaan.
+Coche cette case pour continuer. ¦ Tick this box to continue. ¦ Marca esta casilla para continuar. ¦ Kreuze dieses Feld an, um fortzufahren. ¦ Spunta questa casella per continuare. ¦ Marca esta caixa para continuar. ¦ Zaznacz to pole, aby kontynuować. ¦ Vink dit vakje aan om door te gaan.
+Choisis une des possibilités. ¦ Choose one of the options. ¦ Elige una de las opciones. ¦ Wähle eine der Möglichkeiten. ¦ Scegli una delle possibilità. ¦ Escolhe uma das opções. ¦ Wybierz jedną z możliwości. ¦ Kies een van de mogelijkheden.
+Choisis un fichier. ¦ Choose a file. ¦ Elige un archivo. ¦ Wähle eine Datei. ¦ Scegli un file. ¦ Escolhe um ficheiro. ¦ Wybierz plik. ¦ Kies een bestand.
+Choisis dans la liste. ¦ Choose from the list. ¦ Elige de la lista. ¦ Wähle aus der Liste. ¦ Scegli dall’elenco. ¦ Escolhe da lista. ¦ Wybierz z listy. ¦ Kies uit de lijst.
+Ce champ est à remplir. ¦ This field must be filled in. ¦ Hay que rellenar este campo. ¦ Dieses Feld muss ausgefüllt werden. ¦ Questo campo va compilato. ¦ Este campo tem de ser preenchido. ¦ To pole trzeba wypełnić. ¦ Dit veld moet ingevuld worden.
+Écris un nombre (par exemple 12 ou 3,5). ¦ Write a number (for example 12 or 3.5). ¦ Escribe un número (por ejemplo 12 o 3,5). ¦ Schreibe eine Zahl (zum Beispiel 12 oder 3,5). ¦ Scrivi un numero (per esempio 12 o 3,5). ¦ Escreve um número (por exemplo 12 ou 3,5). ¦ Wpisz liczbę (na przykład 12 lub 3,5). ¦ Schrijf een getal (bijvoorbeeld 12 of 3,5).
+Ce n’est pas compris : vérifie ce qui est écrit. ¦ Not understood: check what is written. ¦ No se entiende: revisa lo que está escrito. ¦ Nicht verstanden: prüfe, was dasteht. ¦ Non è chiaro: controlla ciò che è scritto. ¦ Não foi compreendido: verifica o que está escrito. ¦ Nie rozumiem: sprawdź, co jest wpisane. ¦ Niet begrepen: controleer wat er staat.
+Écris une adresse e-mail complète (nom@exemple.fr). ¦ Write a full e-mail address (name@example.com). ¦ Escribe una dirección de correo completa (nombre@ejemplo.es). ¦ Schreibe eine vollständige E-Mail-Adresse (name@beispiel.de). ¦ Scrivi un indirizzo e-mail completo (nome@esempio.it). ¦ Escreve um endereço de e-mail completo (nome@exemplo.pt). ¦ Wpisz pełny adres e-mail (imie@przyklad.pl). ¦ Schrijf een volledig e-mailadres (naam@voorbeeld.nl).
+Écris une adresse web complète (https://…). ¦ Write a full web address (https://…). ¦ Escribe una dirección web completa (https://…). ¦ Schreibe eine vollständige Webadresse (https://…). ¦ Scrivi un indirizzo web completo (https://…). ¦ Escreve um endereço web completo (https://…). ¦ Wpisz pełny adres strony (https://…). ¦ Schrijf een volledig webadres (https://…).
+Ce n’est pas au bon format. ¦ This is not in the right format. ¦ No tiene el formato correcto. ¦ Das ist nicht im richtigen Format. ¦ Non è nel formato giusto. ¦ Não está no formato certo. ¦ To nie jest właściwy format. ¦ Dit heeft niet het juiste formaat.
+Au moins {x}. ¦ At least {x}. ¦ Al menos {x}. ¦ Mindestens {x}. ¦ Almeno {x}. ¦ Pelo menos {x}. ¦ Co najmniej {x}. ¦ Minstens {x}.
+Au plus {x}. ¦ At most {x}. ¦ Como máximo {x}. ¦ Höchstens {x}. ¦ Al massimo {x}. ¦ No máximo {x}. ¦ Najwyżej {x}. ¦ Hoogstens {x}.
+Au moins {x} (là : {y}). ¦ At least {x} (now: {y}). ¦ Al menos {x} (ahora: {y}). ¦ Mindestens {x} (jetzt: {y}). ¦ Almeno {x} (ora: {y}). ¦ Pelo menos {x} (agora: {y}). ¦ Co najmniej {x} (teraz: {y}). ¦ Minstens {x} (nu: {y}).
+Cette valeur n’est pas permise ici : prends un nombre rond. ¦ This value isn’t allowed here: use a round number. ¦ Este valor no se permite aquí: usa un número redondo. ¦ Dieser Wert ist hier nicht erlaubt: nimm eine runde Zahl. ¦ Questo valore non è ammesso qui: usa un numero tondo. ¦ Este valor não é permitido aqui: usa um número redondo. ¦ Ta wartość jest tu niedozwolona: użyj okrągłej liczby. ¦ Deze waarde is hier niet toegestaan: neem een rond getal.
+Donne un nom à ces réglages. ¦ Give these settings a name. ¦ Dale un nombre a estos ajustes. ¦ Gib diesen Einstellungen einen Namen. ¦ Dai un nome a queste impostazioni. ¦ Dá um nome a estas definições. ¦ Nadaj nazwę tym ustawieniom. ¦ Geef deze instellingen een naam.
+# ═════ Couleur (C2), curseurs (C3), polices (E5) ═════
+Choisir une couleur ¦ Choose a colour ¦ Elegir un color ¦ Farbe wählen ¦ Scegli un colore ¦ Escolher uma cor ¦ Wybierz kolor ¦ Kleur kiezen
+Couleurs de l’app ¦ App colours ¦ Colores de la app ¦ Farben der App ¦ Colori dell’app ¦ Cores da app ¦ Kolory aplikacji ¦ Kleuren van de app
+Récentes ¦ Recent ¦ Recientes ¦ Zuletzt verwendet ¦ Recenti ¦ Recentes ¦ Ostatnie ¦ Recent
+Choisir une autre couleur ¦ Choose another colour ¦ Elegir otro color ¦ Andere Farbe wählen ¦ Scegli un altro colore ¦ Escolher outra cor ¦ Wybierz inny kolor ¦ Andere kleur kiezen
+Prendre une couleur n’importe où dans la fenêtre ¦ Pick a colour anywhere in the window ¦ Tomar un color en cualquier lugar de la ventana ¦ Farbe irgendwo im Fenster aufnehmen ¦ Preleva un colore ovunque nella finestra ¦ Apanhar uma cor em qualquer sítio da janela ¦ Pobierz kolor z dowolnego miejsca okna ¦ Een kleur ergens in het venster oppikken
+Code de la couleur ¦ Colour code ¦ Código del color ¦ Farbcode ¦ Codice del colore ¦ Código da cor ¦ Kod koloru ¦ Kleurcode
+Remettre la couleur d’avant ¦ Restore the previous colour ¦ Volver al color anterior ¦ Vorherige Farbe wiederherstellen ¦ Rimetti il colore di prima ¦ Repor a cor anterior ¦ Przywróć poprzedni kolor ¦ Vorige kleur terugzetten
+Double-clic : revenir à la valeur de départ ¦ Double-click: back to the starting value ¦ Doble clic: volver al valor inicial ¦ Doppelklick: zurück zum Ausgangswert ¦ Doppio clic: torna al valore iniziale ¦ Duplo clique: voltar ao valor inicial ¦ Dwuklik: powrót do wartości początkowej ¦ Dubbelklik: terug naar de beginwaarde
+Choisir une police ¦ Choose a font ¦ Elegir una fuente ¦ Schrift wählen ¦ Scegli un carattere ¦ Escolher um tipo de letra ¦ Wybierz czcionkę ¦ Lettertype kiezen
+Chercher une police… ¦ Search for a font… ¦ Buscar una fuente… ¦ Schrift suchen… ¦ Cerca un carattere… ¦ Procurar um tipo de letra… ¦ Szukaj czcionki… ¦ Lettertype zoeken…
+Les polices de l’ordinateur… ¦ The computer’s fonts… ¦ Las fuentes del ordenador… ¦ Schriften des Computers… ¦ I caratteri del computer… ¦ Os tipos de letra do computador… ¦ Czcionki komputera… ¦ Lettertypen van de computer…
+Aucune police pour « {q} ». ¦ No font for “{q}”. ¦ Ninguna fuente para «{q}». ¦ Keine Schrift für „{q}“. ¦ Nessun carattere per «{q}». ¦ Nenhum tipo de letra para «{q}». ¦ Brak czcionki dla „{q}”. ¦ Geen lettertype voor ‘{q}’.
+Lecture des polices… ¦ Reading fonts… ¦ Leyendo las fuentes… ¦ Schriften werden gelesen… ¦ Lettura dei caratteri… ¦ A ler os tipos de letra… ¦ Odczyt czcionek… ¦ Lettertypen lezen…
+🔓 Voir toutes les polices de l’ordinateur ¦ 🔓 See all the computer’s fonts ¦ 🔓 Ver todas las fuentes del ordenador ¦ 🔓 Alle Schriften des Computers ansehen ¦ 🔓 Vedi tutti i caratteri del computer ¦ 🔓 Ver todos os tipos de letra do computador ¦ 🔓 Zobacz wszystkie czcionki komputera ¦ 🔓 Alle lettertypen van de computer bekijken
+Le navigateur te demandera la permission. ¦ The browser will ask you for permission. ¦ El navegador te pedirá permiso. ¦ Der Browser fragt dich um Erlaubnis. ¦ Il browser ti chiederà il permesso. ¦ O navegador vai pedir-te autorização. ¦ Przeglądarka poprosi cię o zgodę. ¦ De browser vraagt je om toestemming.
+CONSEILLÉE ¦ RECOMMENDED ¦ RECOMENDADA ¦ EMPFOHLEN ¦ CONSIGLIATO ¦ RECOMENDADA ¦ ZALECANA ¦ AANBEVOLEN
+RÉCENTE ¦ RECENT ¦ RECIENTE ¦ ZULETZT ¦ RECENTE ¦ RECENTE ¦ OSTATNIA ¦ RECENT
+DE L’APP ¦ IN THE APP ¦ DE LA APP ¦ DER APP ¦ DELL’APP ¦ DA APP ¦ APLIKACJI ¦ VAN DE APP
+TAPÉE ¦ TYPED ¦ ESCRITA ¦ EINGEGEBEN ¦ DIGITATO ¦ ESCRITA ¦ WPISANA ¦ GETYPT
+# ═════ Réglages enregistrés (UI.presetsFrame) ═════
+Réglages enregistrés ¦ Saved settings ¦ Ajustes guardados ¦ Gespeicherte Einstellungen ¦ Impostazioni salvate ¦ Definições guardadas ¦ Zapisane ustawienia ¦ Opgeslagen instellingen
+Nom de ces réglages ¦ Name of these settings ¦ Nombre de estos ajustes ¦ Name dieser Einstellungen ¦ Nome di queste impostazioni ¦ Nome destas definições ¦ Nazwa tych ustawień ¦ Naam van deze instellingen
+Nom du réglage ¦ Setting name ¦ Nombre del ajuste ¦ Name der Einstellung ¦ Nome dell’impostazione ¦ Nome da definição ¦ Nazwa ustawienia ¦ Naam van de instelling
+Aucun réglage enregistré pour l’instant. ¦ No saved settings yet. ¦ Todavía no hay ajustes guardados. ¦ Noch keine gespeicherten Einstellungen. ¦ Ancora nessuna impostazione salvata. ¦ Ainda não há definições guardadas. ¦ Na razie brak zapisanych ustawień. ¦ Nog geen opgeslagen instellingen.
+＋ Enregistrer les réglages actuels ¦ ＋ Save the current settings ¦ ＋ Guardar los ajustes actuales ¦ ＋ Aktuelle Einstellungen speichern ¦ ＋ Salva le impostazioni attuali ¦ ＋ Guardar as definições atuais ¦ ＋ Zapisz bieżące ustawienia ¦ ＋ Huidige instellingen opslaan
+Un réglage « {name} » existe déjà. ¦ A setting called “{name}” already exists. ¦ Ya existe un ajuste «{name}». ¦ Eine Einstellung „{name}“ gibt es schon. ¦ Esiste già un’impostazione «{name}». ¦ Já existe uma definição «{name}». ¦ Ustawienie „{name}” już istnieje. ¦ Er bestaat al een instelling ‘{name}’.
+Le remplacer ? ¦ Replace it? ¦ ¿Reemplazarlo? ¦ Ersetzen? ¦ Sostituirla? ¦ Substituir? ¦ Zastąpić? ¦ Vervangen?
+Réglages gardés sous « {name} ». ¦ Settings saved as “{name}”. ¦ Ajustes guardados como «{name}». ¦ Einstellungen gespeichert als „{name}“. ¦ Impostazioni salvate come «{name}». ¦ Definições guardadas como «{name}». ¦ Ustawienia zapisane jako „{name}”. ¦ Instellingen bewaard als ‘{name}’.
+Remplacer par les réglages actuels ¦ Replace with the current settings ¦ Reemplazar por los ajustes actuales ¦ Durch die aktuellen Einstellungen ersetzen ¦ Sostituisci con le impostazioni attuali ¦ Substituir pelas definições atuais ¦ Zastąp bieżącymi ustawieniami ¦ Vervangen door de huidige instellingen
+Remplacer « {name} » par les réglages actuels ? ¦ Replace “{name}” with the current settings? ¦ ¿Reemplazar «{name}» por los ajustes actuales? ¦ „{name}“ durch die aktuellen Einstellungen ersetzen? ¦ Sostituire «{name}» con le impostazioni attuali? ¦ Substituir «{name}» pelas definições atuais? ¦ Zastąpić „{name}” bieżącymi ustawieniami? ¦ ‘{name}’ vervangen door de huidige instellingen?
+Réglage mis à jour. ¦ Setting updated. ¦ Ajuste actualizado. ¦ Einstellung aktualisiert. ¦ Impostazione aggiornata. ¦ Definição atualizada. ¦ Zaktualizowano ustawienie. ¦ Instelling bijgewerkt.
+Réglages « {name} » appliqués. ¦ Settings “{name}” applied. ¦ Ajustes «{name}» aplicados. ¦ Einstellungen „{name}“ angewendet. ¦ Impostazioni «{name}» applicate. ¦ Definições «{name}» aplicadas. ¦ Zastosowano ustawienia „{name}”. ¦ Instellingen ‘{name}’ toegepast.
+Exporter (fichier .json) ¦ Export (.json file) ¦ Exportar (archivo .json) ¦ Exportieren (.json-Datei) ¦ Esporta (file .json) ¦ Exportar (ficheiro .json) ¦ Eksportuj (plik .json) ¦ Exporteren (.json-bestand)
+Remplacer, renommer, dupliquer, exporter, supprimer ¦ Replace, rename, duplicate, export, delete ¦ Reemplazar, renombrar, duplicar, exportar, eliminar ¦ Ersetzen, umbenennen, duplizieren, exportieren, löschen ¦ Sostituisci, rinomina, duplica, esporta, elimina ¦ Substituir, mudar o nome, duplicar, exportar, eliminar ¦ Zastąp, zmień nazwę, duplikuj, eksportuj, usuń ¦ Vervangen, hernoemen, dupliceren, exporteren, verwijderen
+# ═════ Export (E3), Imprimer (L1), Importer (K13), Déposer (E4) ═════
+Exporter (PDF, image, impression…) ¦ Export (PDF, image, print…) ¦ Exportar (PDF, imagen, impresión…) ¦ Exportieren (PDF, Bild, Druck…) ¦ Esporta (PDF, immagine, stampa…) ¦ Exportar (PDF, imagem, impressão…) ¦ Eksportuj (PDF, obraz, wydruk…) ¦ Exporteren (pdf, afbeelding, afdruk…)
+⤓ Exporter en {fmt} ¦ ⤓ Export as {fmt} ¦ ⤓ Exportar en {fmt} ¦ ⤓ Als {fmt} exportieren ¦ ⤓ Esporta in {fmt} ¦ ⤓ Exportar em {fmt} ¦ ⤓ Eksportuj jako {fmt} ¦ ⤓ Exporteren als {fmt}
+Nom du fichier ¦ File name ¦ Nombre del archivo ¦ Dateiname ¦ Nome del file ¦ Nome do ficheiro ¦ Nazwa pliku ¦ Bestandsnaam
+Qualité ¦ Quality ¦ Calidad ¦ Qualität ¦ Qualità ¦ Qualidade ¦ Jakość ¦ Kwaliteit
+Fond perdu et traits de coupe (imprimeur) ¦ Bleed and crop marks (printer) ¦ Sangrado y marcas de corte (imprenta) ¦ Beschnitt und Schnittmarken (Druckerei) ¦ Abbondanza e crocini di taglio (tipografia) ¦ Sangria e marcas de corte (gráfica) ¦ Spad i znaczniki cięcia (drukarnia) ¦ Afloop en snijtekens (drukker)
+Ranger aussi une copie dans les médias ¦ Also keep a copy in the media ¦ Guardar también una copia en los archivos ¦ Auch eine Kopie bei den Medien ablegen ¦ Metti anche una copia nei media ¦ Guardar também uma cópia nos médias ¦ Zachowaj też kopię w plikach ¦ Ook een kopie bij de media bewaren
+Aperçu ¦ Preview ¦ Vista previa ¦ Vorschau ¦ Anteprima ¦ Pré-visualização ¦ Podgląd ¦ Voorbeeld
+Aperçu… ¦ Preview… ¦ Vista previa… ¦ Vorschau… ¦ Anteprima… ¦ Pré-visualização… ¦ Podgląd… ¦ Voorbeeld…
+Pas d’aperçu ¦ No preview ¦ Sin vista previa ¦ Keine Vorschau ¦ Nessuna anteprima ¦ Sem pré-visualização ¦ Brak podglądu ¦ Geen voorbeeld
+Format du papier ¦ Paper size ¦ Tamaño del papel ¦ Papierformat ¦ Formato della carta ¦ Formato do papel ¦ Format papieru ¦ Papierformaat
+Ce qu’on imprime ¦ What gets printed ¦ Lo que se imprime ¦ Was gedruckt wird ¦ Cosa si stampa ¦ O que se imprime ¦ Co drukujemy ¦ Wat er wordt afgedrukt
+Pages à imprimer ¦ Pages to print ¦ Páginas que imprimir ¦ Zu druckende Seiten ¦ Pagine da stampare ¦ Páginas a imprimir ¦ Strony do druku ¦ Af te drukken pagina’s
+Celle affichée ¦ The one shown ¦ La que se muestra ¦ Die angezeigte ¦ Quella visualizzata ¦ A que está à vista ¦ Wyświetlana ¦ De getoonde
+Page précédente ¦ Previous page ¦ Página anterior ¦ Vorherige Seite ¦ Pagina precedente ¦ Página anterior ¦ Poprzednia strona ¦ Vorige pagina
+Page suivante ¦ Next page ¦ Página siguiente ¦ Nächste Seite ¦ Pagina successiva ¦ Página seguinte ¦ Następna strona ¦ Volgende pagina
+Aperçu de l’impression ¦ Print preview ¦ Vista previa de impresión ¦ Druckvorschau ¦ Anteprima di stampa ¦ Pré-visualização da impressão ¦ Podgląd wydruku ¦ Afdrukvoorbeeld
+Exemplaires ¦ Copies ¦ Copias ¦ Exemplare ¦ Copie ¦ Cópias ¦ Kopie ¦ Exemplaren
+Portrait ¦ Portrait ¦ Vertical ¦ Hochformat ¦ Verticale ¦ Vertical ¦ Pionowo ¦ Staand
+Paysage ¦ Landscape ¦ Horizontal ¦ Querformat ¦ Orizzontale ¦ Horizontal ¦ Poziomo ¦ Liggend
+L’écran affiché ¦ The screen shown ¦ La pantalla mostrada ¦ Der angezeigte Bildschirm ¦ La schermata visualizzata ¦ O ecrã apresentado ¦ Wyświetlany ekran ¦ Het getoonde scherm
+Dans la fenêtre qui s’ouvre, choisis « Enregistrer au format PDF » comme imprimante. ¦ In the window that opens, choose “Save as PDF” as the printer. ¦ En la ventana que se abre, elige «Guardar como PDF» como impresora. ¦ Wähle im sich öffnenden Fenster „Als PDF speichern“ als Drucker. ¦ Nella finestra che si apre, scegli «Salva come PDF» come stampante. ¦ Na janela que se abre, escolhe «Guardar como PDF» como impressora. ¦ W oknie, które się otworzy, wybierz „Zapisz jako PDF” jako drukarkę. ¦ Kies in het venster dat opent ‘Opslaan als pdf’ als printer.
+Dans la fenêtre d’impression, choisis « Enregistrer au format PDF ». ¦ In the print window, choose “Save as PDF”. ¦ En la ventana de impresión, elige «Guardar como PDF». ¦ Wähle im Druckfenster „Als PDF speichern“. ¦ Nella finestra di stampa, scegli «Salva come PDF». ¦ Na janela de impressão, escolhe «Guardar como PDF». ¦ W oknie drukowania wybierz „Zapisz jako PDF”. ¦ Kies in het afdrukvenster ‘Opslaan als pdf’.
+IMPORTER · ÉTAPE 1 SUR 3 ¦ IMPORT · STEP 1 OF 3 ¦ IMPORTAR · PASO 1 DE 3 ¦ IMPORTIEREN · SCHRITT 1 VON 3 ¦ IMPORTA · PASSO 1 DI 3 ¦ IMPORTAR · PASSO 1 DE 3 ¦ IMPORT · KROK 1 Z 3 ¦ IMPORTEREN · STAP 1 VAN 3
+IMPORTER · ÉTAPE {n} SUR 3 ¦ IMPORT · STEP {n} OF 3 ¦ IMPORTAR · PASO {n} DE 3 ¦ IMPORTIEREN · SCHRITT {n} VON 3 ¦ IMPORTA · PASSO {n} DI 3 ¦ IMPORTAR · PASSO {n} DE 3 ¦ IMPORT · KROK {n} Z 3 ¦ IMPORTEREN · STAP {n} VAN 3
+📁 Glisse ici le fichier, colle-le (⌘V) ou choisis-le sur l’ordinateur ¦ 📁 Drop the file here, paste it (⌘V) or choose it on the computer ¦ 📁 Arrastra aquí el archivo, pégalo (⌘V) o elígelo en el ordenador ¦ 📁 Datei hierher ziehen, einfügen (⌘V) oder auf dem Computer auswählen ¦ 📁 Trascina qui il file, incollalo (⌘V) o sceglilo sul computer ¦ 📁 Arrasta o ficheiro para aqui, cola-o (⌘V) ou escolhe-o no computador ¦ 📁 Upuść tu plik, wklej go (⌘V) lub wybierz na komputerze ¦ 📁 Sleep het bestand hierheen, plak het (⌘V) of kies het op de computer
+📁 Glisse ici les fichiers, colle-les (⌘V) ou choisis-les sur l’ordinateur ¦ 📁 Drop the files here, paste them (⌘V) or choose them on the computer ¦ 📁 Arrastra aquí los archivos, pégalos (⌘V) o elígelos en el ordenador ¦ 📁 Dateien hierher ziehen, einfügen (⌘V) oder auf dem Computer auswählen ¦ 📁 Trascina qui i file, incollali (⌘V) o sceglili sul computer ¦ 📁 Arrasta os ficheiros para aqui, cola-os (⌘V) ou escolhe-os no computador ¦ 📁 Upuść tu pliki, wklej je (⌘V) lub wybierz na komputerze ¦ 📁 Sleep de bestanden hierheen, plak ze (⌘V) of kies ze op de computer
+Lecture du fichier… ¦ Reading the file… ¦ Leyendo el archivo… ¦ Datei wird gelesen… ¦ Lettura del file… ¦ A ler o ficheiro… ¦ Odczyt pliku… ¦ Bestand lezen…
+Ce fichier ne peut pas être importé : {err} ¦ This file can’t be imported: {err} ¦ Este archivo no se puede importar: {err} ¦ Diese Datei kann nicht importiert werden: {err} ¦ Questo file non può essere importato: {err} ¦ Este ficheiro não pode ser importado: {err} ¦ Tego pliku nie można zaimportować: {err} ¦ Dit bestand kan niet geïmporteerd worden: {err}
+Voilà ce qui va entrer : {sum}. ¦ Here is what will come in: {sum}. ¦ Esto es lo que va a entrar: {sum}. ¦ Das wird übernommen: {sum}. ¦ Ecco cosa entrerà: {sum}. ¦ Eis o que vai entrar: {sum}. ¦ Oto co zostanie dodane: {sum}. ¦ Dit komt erin: {sum}.
+⤒ Importer {what} ¦ ⤒ Import {what} ¦ ⤒ Importar {what} ¦ ⤒ {what} importieren ¦ ⤒ Importa {what} ¦ ⤒ Importar {what} ¦ ⤒ Importuj: {what} ¦ ⤒ {what} importeren
+{what} importés. ¦ {what} imported. ¦ {what} importados. ¦ {what} importiert. ¦ {what} importati. ¦ {what} importados. ¦ Zaimportowano: {what}. ¦ {what} geïmporteerd.
+Import terminé. ¦ Import finished. ¦ Importación terminada. ¦ Import abgeschlossen. ¦ Importazione terminata. ¦ Importação concluída. ¦ Import zakończony. ¦ Import voltooid.
+Impossible d’importer : {err} ¦ Could not import: {err} ¦ No se pudo importar: {err} ¦ Import nicht möglich: {err} ¦ Impossibile importare: {err} ¦ Não foi possível importar: {err} ¦ Nie można zaimportować: {err} ¦ Importeren lukt niet: {err}
+Importer un fichier ¦ Import a file ¦ Importar un archivo ¦ Datei importieren ¦ Importa un file ¦ Importar um ficheiro ¦ Importuj plik ¦ Een bestand importeren
+⤒ Importer un fichier… ¦ ⤒ Import a file… ¦ ⤒ Importar un archivo… ¦ ⤒ Datei importieren… ¦ ⤒ Importa un file… ¦ ⤒ Importar um ficheiro… ¦ ⤒ Importuj plik… ¦ ⤒ Een bestand importeren…
+Ce type de fichier n’est pas accepté ici. ¦ This type of file isn’t accepted here. ¦ Este tipo de archivo no se acepta aquí. ¦ Dieser Dateityp wird hier nicht angenommen. ¦ Questo tipo di file non è accettato qui. ¦ Este tipo de ficheiro não é aceite aqui. ¦ Ten typ pliku nie jest tu akceptowany. ¦ Dit soort bestand wordt hier niet aanvaard.
+Il entre dans les médias de l’app et se place dans l’outil. ¦ It goes into the app’s media and into the tool. ¦ Entra en los archivos de la app y se coloca en la herramienta. ¦ Sie kommt zu den Medien der App und ins Werkzeug. ¦ Entra nei media dell’app e si mette nello strumento. ¦ Entra nos médias da app e fica na ferramenta. ¦ Trafia do plików aplikacji i do narzędzia. ¦ Het gaat naar de media van de app en in het hulpmiddel.
+📁 Choisir un fichier ¦ 📁 Choose a file ¦ 📁 Elegir un archivo ¦ 📁 Datei auswählen ¦ 📁 Scegli un file ¦ 📁 Escolher um ficheiro ¦ 📁 Wybierz plik ¦ 📁 Bestand kiezen
+Ce fichier .json est abîmé : il ne peut pas être lu. ¦ This .json file is damaged: it can’t be read. ¦ Este archivo .json está dañado: no se puede leer. ¦ Diese .json-Datei ist beschädigt: sie kann nicht gelesen werden. ¦ Questo file .json è danneggiato: non può essere letto. ¦ Este ficheiro .json está danificado: não pode ser lido. ¦ Ten plik .json jest uszkodzony: nie da się go odczytać. ¦ Dit .json-bestand is beschadigd: het kan niet gelezen worden.
+# ═════ Éditeurs (E1, K18, K19) ═════
+Ajuster à la fenêtre ¦ Fit to window ¦ Ajustar a la ventana ¦ An Fenster anpassen ¦ Adatta alla finestra ¦ Ajustar à janela ¦ Dopasuj do okna ¦ Aanpassen aan venster
+Zoom arrière ¦ Zoom out ¦ Alejar ¦ Verkleinern ¦ Riduci ¦ Afastar ¦ Oddal ¦ Uitzoomen
+Zoom avant ¦ Zoom in ¦ Acercar ¦ Vergrößern ¦ Ingrandisci ¦ Aproximar ¦ Przybliż ¦ Inzoomen
+Règles ¦ Rulers ¦ Reglas ¦ Lineale ¦ Righelli ¦ Réguas ¦ Linijki ¦ Linialen
+Règles : montrer ou cacher ¦ Rulers: show or hide ¦ Reglas: mostrar u ocultar ¦ Lineale: zeigen oder ausblenden ¦ Righelli: mostra o nascondi ¦ Réguas: mostrar ou ocultar ¦ Linijki: pokaż lub ukryj ¦ Linialen: tonen of verbergen
+Aimanter : les objets se collent aux autres et à la grille (Alt pour s’en passer en glissant) ¦ Snap: objects stick to each other and to the grid (Alt to skip while dragging) ¦ Imantar: los objetos se pegan a los demás y a la cuadrícula (Alt para evitarlo al arrastrar) ¦ Einrasten: Objekte haften an anderen und am Raster (Alt beim Ziehen zum Abschalten) ¦ Calamita: gli oggetti si attaccano agli altri e alla griglia (Alt per evitarlo trascinando) ¦ Íman: os objetos colam-se aos outros e à grelha (Alt para evitar ao arrastar) ¦ Przyciąganie: obiekty przylegają do innych i do siatki (Alt, aby wyłączyć przy przeciąganiu) ¦ Magnetisch: objecten kleven aan elkaar en aan het raster (Alt om het bij slepen over te slaan)
+Les autres façons d’enregistrer ¦ Other ways to save ¦ Otras formas de guardar ¦ Weitere Speicherarten ¦ Altri modi di salvare ¦ Outras formas de guardar ¦ Inne sposoby zapisu ¦ Andere manieren om op te slaan
+Ranger, montrer ou cacher les boutons ¦ Arrange, show or hide the buttons ¦ Ordenar, mostrar u ocultar los botones ¦ Schaltflächen ordnen, zeigen oder ausblenden ¦ Ordina, mostra o nascondi i pulsanti ¦ Arrumar, mostrar ou ocultar os botões ¦ Uporządkuj, pokaż lub ukryj przyciski ¦ Knoppen ordenen, tonen of verbergen
+# ═════ Dates (C4) et heures (K17) : les libellés seulement ═════
+Compris ¦ Understood ¦ Entendido ¦ Verstanden ¦ Capito ¦ Compreendido ¦ Zrozumiano ¦ Begrepen
+Choisir sur un calendrier ¦ Pick on a calendar ¦ Elegir en un calendario ¦ Im Kalender wählen ¦ Scegli su un calendario ¦ Escolher num calendário ¦ Wybierz w kalendarzu ¦ Kiezen in een kalender
+Durée ¦ Duration ¦ Duración ¦ Dauer ¦ Durata ¦ Duração ¦ Czas trwania ¦ Duur
+aujourd’hui ¦ today ¦ hoy ¦ heute ¦ oggi ¦ hoje ¦ dziś ¦ vandaag
+aujourd’hui à {h} ¦ today at {h} ¦ hoy a las {h} ¦ heute um {h} ¦ oggi alle {h} ¦ hoje às {h} ¦ dziś o {h} ¦ vandaag om {h}
+hier ¦ yesterday ¦ ayer ¦ gestern ¦ ieri ¦ ontem ¦ wczoraj ¦ gisteren
+hier à {h} ¦ yesterday at {h} ¦ ayer a las {h} ¦ gestern um {h} ¦ ieri alle {h} ¦ ontem às {h} ¦ wczoraj o {h} ¦ gisteren om {h}
+{day} à {h} ¦ {day} at {h} ¦ {day} a las {h} ¦ {day} um {h} ¦ {day} alle {h} ¦ {day} às {h} ¦ {day} o {h} ¦ {day} om {h}
+Modifié ¦ Changed ¦ Modificado ¦ Geändert ¦ Modificato ¦ Alterado ¦ Zmieniono ¦ Gewijzigd
+Créé ¦ Created ¦ Creado ¦ Erstellt ¦ Creato ¦ Criado ¦ Utworzono ¦ Gemaakt
+Ajouté ¦ Added ¦ Añadido ¦ Hinzugefügt ¦ Aggiunto ¦ Adicionado ¦ Dodano ¦ Toegevoegd
+# ═════ Menu de choix : les autres sortes ═════
+Aucune battue ¦ No search sweep ¦ Ninguna batida ¦ Keine Suchaktion ¦ Nessuna battuta ¦ Nenhuma batida ¦ Brak przeszukań ¦ Geen zoekactie
+Aucune maison ¦ No house ¦ Ninguna casa ¦ Kein Haus ¦ Nessuna casa ¦ Nenhuma casa ¦ Brak domów ¦ Geen huis
+Aucune revue ¦ No magazine ¦ Ninguna revista ¦ Keine Zeitschrift ¦ Nessuna rivista ¦ Nenhuma revista ¦ Brak czasopism ¦ Geen tijdschrift
+Aucun employeur ¦ No employer ¦ Ningún empleador ¦ Kein Arbeitgeber ¦ Nessun datore di lavoro ¦ Nenhum empregador ¦ Brak pracodawców ¦ Geen werkgever
+Aucun recensement ¦ No census ¦ Ningún censo ¦ Keine Volkszählung ¦ Nessun censimento ¦ Nenhum recenseamento ¦ Brak spisów ¦ Geen volkstelling
+🎨 Œuvres ¦ 🎨 Works ¦ 🎨 Obras ¦ 🎨 Werke ¦ 🎨 Opere ¦ 🎨 Obras ¦ 🎨 Dzieła ¦ 🎨 Werken
+Chercher un graphique… (ex. naissances, camembert) ¦ Search for a chart… (e.g. births, pie) ¦ Buscar un gráfico… (p. ej. nacimientos, circular) ¦ Diagramm suchen… (z. B. Geburten, Kuchen) ¦ Cerca un grafico… (es. nascite, torta) ¦ Procurar um gráfico… (ex. nascimentos, circular) ¦ Szukaj wykresu… (np. urodzenia, kołowy) ¦ Grafiek zoeken… (bijv. geboorten, taart)
+Aucun graphique ¦ No chart ¦ Ningún gráfico ¦ Kein Diagramm ¦ Nessun grafico ¦ Nenhum gráfico ¦ Brak wykresów ¦ Geen grafiek
+Créer le graphique ¦ Create the chart ¦ Crear el gráfico ¦ Diagramm erstellen ¦ Crea il grafico ¦ Criar o gráfico ¦ Utwórz wykres ¦ Grafiek maken
+Nouveau graphique ¦ New chart ¦ Nuevo gráfico ¦ Neues Diagramm ¦ Nuovo grafico ¦ Novo gráfico ¦ Nowy wykres ¦ Nieuwe grafiek
+Aucun projet ¦ No project ¦ Ningún proyecto ¦ Kein Projekt ¦ Nessun progetto ¦ Nenhum projeto ¦ Brak projektów ¦ Geen project
+Aucun tableau ¦ No board ¦ Ningún tablero ¦ Keine Tafel ¦ Nessuna lavagna ¦ Nenhum quadro ¦ Brak tablic ¦ Geen bord
+Aucune mise en page ¦ No layout ¦ Ninguna maquetación ¦ Kein Layout ¦ Nessuna impaginazione ¦ Nenhuma paginação ¦ Brak składów ¦ Geen opmaak
+📐 Mises en page ¦ 📐 Layouts ¦ 📐 Maquetaciones ¦ 📐 Layouts ¦ 📐 Impaginazioni ¦ 📐 Paginações ¦ 📐 Składy ¦ 📐 Opmaken
+Aucun diagramme ¦ No diagram ¦ Ningún diagrama ¦ Keine Grafik ¦ Nessun diagramma ¦ Nenhum diagrama ¦ Brak diagramów ¦ Geen diagram
+Aucune carte ¦ No map ¦ Ningún mapa ¦ Keine Karte ¦ Nessuna mappa ¦ Nenhum mapa ¦ Brak map ¦ Geen kaart
+Aucune transcription ¦ No transcription ¦ Ninguna transcripción ¦ Keine Transkription ¦ Nessuna trascrizione ¦ Nenhuma transcrição ¦ Brak transkrypcji ¦ Geen transcriptie
+Aucune carte de photos ¦ No photo map ¦ Ningún mapa de fotos ¦ Keine Fotokarte ¦ Nessuna mappa di foto ¦ Nenhum mapa de fotos ¦ Brak map zdjęć ¦ Geen fotokaart
+Aucun classeur ¦ No workbook ¦ Ningún libro ¦ Keine Arbeitsmappe ¦ Nessuna cartella di lavoro ¦ Nenhum livro ¦ Brak skoroszytów ¦ Geen werkmap
+Aucun document ¦ No document ¦ Ningún documento ¦ Kein Dokument ¦ Nessun documento ¦ Nenhum documento ¦ Brak dokumentów ¦ Geen document
+Aucune parcelle ¦ No plot ¦ Ninguna parcela ¦ Keine Parzelle ¦ Nessuna particella ¦ Nenhuma parcela ¦ Brak działek ¦ Geen perceel
+Nom de l’objet, sorte… (2 lettres suffisent) ¦ Object name, kind… (2 letters are enough) ¦ Nombre del objeto, tipo… (bastan 2 letras) ¦ Name des Gegenstands, Art… (2 Buchstaben genügen) ¦ Nome dell’oggetto, tipo… (bastano 2 lettere) ¦ Nome do objeto, tipo… (bastam 2 letras) ¦ Nazwa przedmiotu, rodzaj… (wystarczą 2 litery) ¦ Naam van het voorwerp, soort… (2 letters zijn genoeg)
+Aucun objet de famille ¦ No family heirloom ¦ Ningún objeto de familia ¦ Kein Familienstück ¦ Nessun oggetto di famiglia ¦ Nenhum objeto de família ¦ Brak pamiątek rodzinnych ¦ Geen familiestuk
+Nom du défunt, notaire, année… (2 lettres suffisent) ¦ Name of the deceased, notary, year… (2 letters are enough) ¦ Nombre del difunto, notario, año… (bastan 2 letras) ¦ Name des Verstorbenen, Notar, Jahr… (2 Buchstaben genügen) ¦ Nome del defunto, notaio, anno… (bastano 2 lettere) ¦ Nome do falecido, notário, ano… (bastam 2 letras) ¦ Nazwisko zmarłego, notariusz, rok… (wystarczą 2 litery) ¦ Naam van de overledene, notaris, jaar… (2 letters zijn genoeg)
+Aucun inventaire après décès ¦ No probate inventory ¦ Ningún inventario post mortem ¦ Kein Nachlassinventar ¦ Nessun inventario post mortem ¦ Nenhum inventário post mortem ¦ Brak inwentarzy pośmiertnych ¦ Geen boedelinventaris
+⚖️ Inventaires après décès ¦ ⚖️ Probate inventories ¦ ⚖️ Inventarios post mortem ¦ ⚖️ Nachlassinventare ¦ ⚖️ Inventari post mortem ¦ ⚖️ Inventários post mortem ¦ ⚖️ Inwentarze pośmiertne ¦ ⚖️ Boedelinventarissen
+Nom, espèce, code de bague, puce… (2 lettres suffisent) ¦ Name, species, ring code, chip… (2 letters are enough) ¦ Nombre, especie, código de anilla, chip… (bastan 2 letras) ¦ Name, Art, Ringcode, Chip… (2 Buchstaben genügen) ¦ Nome, specie, codice anello, microchip… (bastano 2 lettere) ¦ Nome, espécie, código da anilha, chip… (bastam 2 letras) ¦ Imię, gatunek, kod obrączki, chip… (wystarczą 2 litery) ¦ Naam, soort, ringcode, chip… (2 letters zijn genoeg)
+Nom du site… (2 lettres suffisent) ¦ Site name… (2 letters are enough) ¦ Nombre del sitio… (bastan 2 letras) ¦ Name des Standorts… (2 Buchstaben genügen) ¦ Nome del sito… (bastano 2 lettere) ¦ Nome do local… (bastam 2 letras) ¦ Nazwa stanowiska… (wystarczą 2 litery) ¦ Naam van de locatie… (2 letters zijn genoeg)
+Aucun site ¦ No site ¦ Ningún sitio ¦ Kein Standort ¦ Nessun sito ¦ Nenhum local ¦ Brak stanowisk ¦ Geen locatie
+Nom du groupe, de la meute… (2 lettres suffisent) ¦ Name of the group, the pack… (2 letters are enough) ¦ Nombre del grupo, de la manada… (bastan 2 letras) ¦ Name der Gruppe, des Rudels… (2 Buchstaben genügen) ¦ Nome del gruppo, del branco… (bastano 2 lettere) ¦ Nome do grupo, da matilha… (bastam 2 letras) ¦ Nazwa grupy, watahy… (wystarczą 2 litery) ¦ Naam van de groep, de roedel… (2 letters zijn genoeg)
+Aucun groupe ¦ No group ¦ Ningún grupo ¦ Keine Gruppe ¦ Nessun gruppo ¦ Nenhum grupo ¦ Brak grup ¦ Geen groep
+👥 Groupes d’animaux ¦ 👥 Animal groups ¦ 👥 Grupos de animales ¦ 👥 Tiergruppen ¦ 👥 Gruppi di animali ¦ 👥 Grupos de animais ¦ 👥 Grupy zwierząt ¦ 👥 Diergroepen
+Maladie, cause de décès… (2 lettres suffisent) ¦ Illness, cause of death… (2 letters are enough) ¦ Enfermedad, causa de muerte… (bastan 2 letras) ¦ Krankheit, Todesursache… (2 Buchstaben genügen) ¦ Malattia, causa di morte… (bastano 2 lettere) ¦ Doença, causa de morte… (bastam 2 letras) ¦ Choroba, przyczyna zgonu… (wystarczą 2 litery) ¦ Ziekte, doodsoorzaak… (2 letters zijn genoeg)
+＋ Choisir une maladie… ¦ ＋ Choose an illness… ¦ ＋ Elegir una enfermedad… ¦ ＋ Krankheit wählen… ¦ ＋ Scegli una malattia… ¦ ＋ Escolher uma doença… ¦ ＋ Wybierz chorobę… ¦ ＋ Ziekte kiezen…
+Aucune maladie notée ¦ No illness recorded ¦ Ninguna enfermedad anotada ¦ Keine Krankheit vermerkt ¦ Nessuna malattia annotata ¦ Nenhuma doença registada ¦ Brak zapisanych chorób ¦ Geen ziekte genoteerd
+🩺 Santé ¦ 🩺 Health ¦ 🩺 Salud ¦ 🩺 Gesundheit ¦ 🩺 Salute ¦ 🩺 Saúde ¦ 🩺 Zdrowie ¦ 🩺 Gezondheid
+Chercher une de mes cartes… ¦ Search one of my maps… ¦ Buscar uno de mis mapas… ¦ Eine meiner Karten suchen… ¦ Cerca una delle mie mappe… ¦ Procurar um dos meus mapas… ¦ Szukaj jednej z moich map… ¦ Een van mijn kaarten zoeken…
+＋ Choisir une carte… ¦ ＋ Choose a map… ¦ ＋ Elegir un mapa… ¦ ＋ Karte wählen… ¦ ＋ Scegli una mappa… ¦ ＋ Escolher um mapa… ¦ ＋ Wybierz mapę… ¦ ＋ Kaart kiezen…
+Nom de la branche… ¦ Branch name… ¦ Nombre de la rama… ¦ Name des Zweigs… ¦ Nome del ramo… ¦ Nome do ramo… ¦ Nazwa gałęzi… ¦ Naam van de tak…
+＋ Choisir une branche… ¦ ＋ Choose a branch… ¦ ＋ Elegir una rama… ¦ ＋ Zweig wählen… ¦ ＋ Scegli un ramo… ¦ ＋ Escolher um ramo… ¦ ＋ Wybierz gałąź… ¦ ＋ Tak kiezen…
+Aucune branche ¦ No branch ¦ Ninguna rama ¦ Kein Zweig ¦ Nessun ramo ¦ Nenhum ramo ¦ Brak gałęzi ¦ Geen tak
+Nom d’une de mes couches… ¦ Name of one of my layers… ¦ Nombre de una de mis capas… ¦ Name einer meiner Ebenen… ¦ Nome di uno dei miei livelli… ¦ Nome de uma das minhas camadas… ¦ Nazwa jednej z moich warstw… ¦ Naam van een van mijn lagen…
+＋ Choisir une couche… ¦ ＋ Choose a layer… ¦ ＋ Elegir una capa… ¦ ＋ Ebene wählen… ¦ ＋ Scegli un livello… ¦ ＋ Escolher uma camada… ¦ ＋ Wybierz warstwę… ¦ ＋ Laag kiezen…
+Aucune couche dessinée ¦ No drawn layer ¦ Ninguna capa dibujada ¦ Keine gezeichnete Ebene ¦ Nessun livello disegnato ¦ Nenhuma camada desenhada ¦ Brak narysowanych warstw ¦ Geen getekende laag
+Commune, cote, année… (2 lettres suffisent) ¦ Municipality, shelfmark, year… (2 letters are enough) ¦ Municipio, signatura, año… (bastan 2 letras) ¦ Gemeinde, Signatur, Jahr… (2 Buchstaben genügen) ¦ Comune, segnatura, anno… (bastano 2 lettere) ¦ Município, cota, ano… (bastam 2 letras) ¦ Gmina, sygnatura, rok… (wystarczą 2 litery) ¦ Gemeente, signatuur, jaar… (2 letters zijn genoeg)
+🔗 Relier un dépouillement… ¦ 🔗 Link a record index… ¦ 🔗 Vincular un vaciado… ¦ 🔗 Auszug verknüpfen… ¦ 🔗 Collega uno spoglio… ¦ 🔗 Ligar um levantamento… ¦ 🔗 Połącz wypis… ¦ 🔗 Indexering koppelen…
+Aucun dépouillement ¦ No record index ¦ Ningún vaciado ¦ Kein Auszug ¦ Nessuno spoglio ¦ Nenhum levantamento ¦ Brak wypisów ¦ Geen indexering
+Nom, prénom d’un contact… (2 lettres suffisent) ¦ Surname, first name of a contact… (2 letters are enough) ¦ Apellido, nombre de un contacto… (bastan 2 letras) ¦ Name, Vorname eines Kontakts… (2 Buchstaben genügen) ¦ Cognome, nome di un contatto… (bastano 2 lettere) ¦ Apelido, nome de um contacto… (bastam 2 letras) ¦ Nazwisko, imię kontaktu… (wystarczą 2 litery) ¦ Achternaam, voornaam van een contact… (2 letters zijn genoeg)
+Aucun contact ¦ No contact ¦ Ningún contacto ¦ Kein Kontakt ¦ Nessun contatto ¦ Nenhum contacto ¦ Brak kontaktów ¦ Geen contact
+Chercher une de mes listes… ¦ Search one of my lists… ¦ Buscar una de mis listas… ¦ Eine meiner Listen suchen… ¦ Cerca uno dei miei elenchi… ¦ Procurar uma das minhas listas… ¦ Szukaj jednej z moich list… ¦ Een van mijn lijsten zoeken…
+Aucune liste ¦ No list ¦ Ninguna lista ¦ Keine Liste ¦ Nessun elenco ¦ Nenhuma lista ¦ Brak list ¦ Geen lijst
+Événement, personne, année… (2 lettres suffisent) ¦ Event, person, year… (2 letters are enough) ¦ Evento, persona, año… (bastan 2 letras) ¦ Ereignis, Person, Jahr… (2 Buchstaben genügen) ¦ Evento, persona, anno… (bastano 2 lettere) ¦ Evento, pessoa, ano… (bastam 2 letras) ¦ Wydarzenie, osoba, rok… (wystarczą 2 litery) ¦ Gebeurtenis, persoon, jaar… (2 letters zijn genoeg)
+Aucun service d’archives ¦ No archive service ¦ Ningún servicio de archivo ¦ Kein Archiv ¦ Nessun servizio archivistico ¦ Nenhum serviço de arquivo ¦ Brak archiwów ¦ Geen archiefdienst
+Créer le service ¦ Create the service ¦ Crear el servicio ¦ Archiv erstellen ¦ Crea il servizio ¦ Criar o serviço ¦ Utwórz archiwum ¦ Dienst maken
+🏛 Services d’archives ¦ 🏛 Archive services ¦ 🏛 Servicios de archivo ¦ 🏛 Archive ¦ 🏛 Servizi archivistici ¦ 🏛 Serviços de arquivo ¦ 🏛 Archiwa ¦ 🏛 Archiefdiensten
+Source, page, nom de la personne citée… ¦ Source, page, name of the person cited… ¦ Fuente, página, nombre de la persona citada… ¦ Quelle, Seite, Name der genannten Person… ¦ Fonte, pagina, nome della persona citata… ¦ Fonte, página, nome da pessoa citada… ¦ Źródło, strona, nazwisko wymienionej osoby… ¦ Bron, pagina, naam van de genoemde persoon…
+＋ Choisir une citation… ¦ ＋ Choose a citation… ¦ ＋ Elegir una cita… ¦ ＋ Zitat wählen… ¦ ＋ Scegli una citazione… ¦ ＋ Escolher uma citação… ¦ ＋ Wybierz cytat… ¦ ＋ Citaat kiezen…
+Aucune citation ¦ No citation ¦ Ninguna cita ¦ Kein Zitat ¦ Nessuna citazione ¦ Nenhuma citação ¦ Brak cytatów ¦ Geen citaat
+— une seule ¦ — only one ¦ — una sola ¦ — nur eine ¦ — una sola ¦ — só uma ¦ — tylko jedna ¦ — maar één
+＋ Ajouter une maison… ¦ ＋ Add a house… ¦ ＋ Añadir una casa… ¦ ＋ Haus hinzufügen… ¦ ＋ Aggiungi una casa… ¦ ＋ Adicionar uma casa… ¦ ＋ Dodaj dom… ¦ ＋ Huis toevoegen…
+＋ Ajouter une fiche… ¦ ＋ Add a record… ¦ ＋ Añadir una ficha… ¦ ＋ Eintrag hinzufügen… ¦ ＋ Aggiungi una scheda… ¦ ＋ Adicionar uma ficha… ¦ ＋ Dodaj kartę… ¦ ＋ Profiel toevoegen…
+＋ Ajouter un document… ¦ ＋ Add a document… ¦ ＋ Añadir un documento… ¦ ＋ Dokument hinzufügen… ¦ ＋ Aggiungi un documento… ¦ ＋ Adicionar um documento… ¦ ＋ Dodaj dokument… ¦ ＋ Document toevoegen…
+＋ Ajouter une carte… ¦ ＋ Add a map… ¦ ＋ Añadir un mapa… ¦ ＋ Karte hinzufügen… ¦ ＋ Aggiungi una mappa… ¦ ＋ Adicionar um mapa… ¦ ＋ Dodaj mapę… ¦ ＋ Kaart toevoegen…
+＋ Ajouter un groupe… ¦ ＋ Add a group… ¦ ＋ Añadir un grupo… ¦ ＋ Gruppe hinzufügen… ¦ ＋ Aggiungi un gruppo… ¦ ＋ Adicionar um grupo… ¦ ＋ Dodaj grupę… ¦ ＋ Groep toevoegen…
+＋ Ajouter un contact… ¦ ＋ Add a contact… ¦ ＋ Añadir un contacto… ¦ ＋ Kontakt hinzufügen… ¦ ＋ Aggiungi un contatto… ¦ ＋ Adicionar um contacto… ¦ ＋ Dodaj kontakt… ¦ ＋ Contact toevoegen…
+＋ Ajouter une liste… ¦ ＋ Add a list… ¦ ＋ Añadir una lista… ¦ ＋ Liste hinzufügen… ¦ ＋ Aggiungi un elenco… ¦ ＋ Adicionar uma lista… ¦ ＋ Dodaj listę… ¦ ＋ Lijst toevoegen…
+# ═════ Réglages enregistrés : le menu ⋯ ═════
+Ce réglage prend ce qui est à l’écran maintenant. ¦ This setting takes what is on screen now. ¦ Este ajuste toma lo que hay ahora en pantalla. ¦ Diese Einstellung übernimmt, was jetzt angezeigt wird. ¦ Questa impostazione prende ciò che è sullo schermo ora. ¦ Esta definição fica com o que está agora no ecrã. ¦ To ustawienie przejmie to, co jest teraz na ekranie. ¦ Deze instelling neemt over wat nu op het scherm staat.
+L’ancienne version de ce réglage ne sera plus gardée. ¦ The old version of this setting will no longer be kept. ¦ La versión anterior de este ajuste ya no se conservará. ¦ Die alte Version dieser Einstellung wird nicht mehr aufbewahrt. ¦ La vecchia versione di questa impostazione non sarà più conservata. ¦ A versão antiga desta definição deixa de ser guardada. ¦ Stara wersja tego ustawienia nie będzie już przechowywana. ¦ De oude versie van deze instelling wordt niet meer bewaard.
+Le nom devient modifiable sur la ligne. ¦ The name becomes editable on the row. ¦ El nombre se puede editar en la línea. ¦ Der Name wird in der Zeile bearbeitbar. ¦ Il nome diventa modificabile sulla riga. ¦ O nome passa a ser editável na linha. ¦ Nazwę można edytować w wierszu. ¦ De naam wordt bewerkbaar op de regel.
+Une copie, à modifier sans toucher à l’original. ¦ A copy, to change without touching the original. ¦ Una copia, para modificar sin tocar el original. ¦ Eine Kopie, die du ändern kannst, ohne das Original anzufassen. ¦ Una copia, da modificare senza toccare l’originale. ¦ Uma cópia, para alterar sem mexer no original. ¦ Kopia do zmiany bez ruszania oryginału. ¦ Een kopie, om te wijzigen zonder het origineel aan te raken.
+Pour le garder, ou l’ouvrir sur un autre ordinateur. ¦ To keep it, or open it on another computer. ¦ Para guardarlo o abrirlo en otro ordenador. ¦ Zum Aufbewahren oder zum Öffnen auf einem anderen Computer. ¦ Per conservarla o aprirla su un altro computer. ¦ Para a guardar ou abrir noutro computador. ¦ Aby je zachować lub otworzyć na innym komputerze. ¦ Om te bewaren of op een andere computer te openen.
+On peut encore l’annuler juste après. ¦ It can still be undone right after. ¦ Todavía se puede deshacer justo después. ¦ Das lässt sich gleich danach noch rückgängig machen. ¦ Si può ancora annullare subito dopo. ¦ Ainda se pode anular logo a seguir. ¦ Można to jeszcze cofnąć zaraz potem. ¦ Dit kan direct daarna nog ongedaan worden.
+Un fichier lcnda-reglage-….json exporté ici ou sur un autre ordinateur ¦ An lcnda-reglage-….json file exported here or on another computer ¦ Un archivo lcnda-reglage-….json exportado aquí o en otro ordenador ¦ Eine hier oder auf einem anderen Computer exportierte Datei lcnda-reglage-….json ¦ Un file lcnda-reglage-….json esportato qui o su un altro computer ¦ Um ficheiro lcnda-reglage-….json exportado aqui ou noutro computador ¦ Plik lcnda-reglage-….json wyeksportowany tutaj lub na innym komputerze ¦ Een bestand lcnda-reglage-….json dat hier of op een andere computer is geëxporteerd
+Ce navigateur ne donne pas la liste des polices : voici les polices courantes trouvées sur l’ordinateur. Pour une autre, tape son nom exact. ¦ This browser doesn’t give the list of fonts: here are the common fonts found on the computer. For another one, type its exact name. ¦ Este navegador no da la lista de fuentes: aquí están las fuentes habituales del ordenador. Para otra, escribe su nombre exacto. ¦ Dieser Browser liefert keine Schriftenliste: hier die üblichen Schriften des Computers. Für eine andere tippe ihren genauen Namen. ¦ Questo browser non fornisce l’elenco dei caratteri: ecco quelli comuni trovati sul computer. Per un altro, scrivi il nome esatto. ¦ Este navegador não dá a lista de tipos de letra: eis os habituais encontrados no computador. Para outro, escreve o nome exato. ¦ Ta przeglądarka nie podaje listy czcionek: oto popularne czcionki z komputera. Inną wpisz dokładną nazwą. ¦ Deze browser geeft geen lijst met lettertypen: hier zijn de gangbare lettertypen van de computer. Typ voor een ander de exacte naam.
+La liste des polices n’a pas pu être lue. Réessaie. ¦ The list of fonts couldn’t be read. Try again. ¦ No se pudo leer la lista de fuentes. Inténtalo de nuevo. ¦ Die Schriftenliste konnte nicht gelesen werden. Versuche es erneut. ¦ Non è stato possibile leggere l’elenco dei caratteri. Riprova. ¦ Não foi possível ler a lista de tipos de letra. Tenta de novo. ¦ Nie udało się odczytać listy czcionek. Spróbuj ponownie. ¦ De lijst met lettertypen kon niet gelezen worden. Probeer het opnieuw.
+Un autre format de la liste, ou un format libre (gardé dans « Mes formats ») ¦ Another size from the list, or a free size (kept in “My sizes”) ¦ Otro tamaño de la lista o uno libre (guardado en «Mis formatos») ¦ Ein anderes Format aus der Liste oder ein freies Format (in „Meine Formate“ gespeichert) ¦ Un altro formato dell’elenco o un formato libero (salvato in «I miei formati») ¦ Outro formato da lista ou um formato livre (guardado em «Os meus formatos») ¦ Inny format z listy lub dowolny (zapisany w „Moje formaty”) ¦ Een ander formaat uit de lijst of een vrij formaat (bewaard in ‘Mijn formaten’)
+Un exemplaire au moins. ¦ At least one copy. ¦ Al menos una copia. ¦ Mindestens ein Exemplar. ¦ Almeno una copia. ¦ Pelo menos uma cópia. ¦ Co najmniej jedna kopia. ¦ Minstens één exemplaar.
+{n} exemplaires au plus. ¦ {n} copies at most. ¦ {n} copias como máximo. ¦ Höchstens {n} Exemplare. ¦ Al massimo {n} copie. ¦ No máximo {n} cópias. ¦ Najwyżej {n} kopii. ¦ Hoogstens {n} exemplaren.

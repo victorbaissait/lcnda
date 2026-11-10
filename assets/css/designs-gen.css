@@ -1701,6 +1701,8 @@
 :root[data-lc-density] .rp-form{gap:calc(12px * var(--lc-sp))}
 :root[data-lc-density] .rp-field{gap:calc(6px * var(--lc-sp))}
 :root[data-lc-density] .rp-attach{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .install-lang{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .install-lang select{padding:calc(4px * var(--lc-sp)) calc(6px * var(--lc-sp))}
 /* picker.css */
 :root[data-lc-density] .pk-box{gap:calc(8px * var(--lc-sp))}
 :root .pk-box:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
