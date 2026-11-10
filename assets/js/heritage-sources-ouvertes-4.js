@@ -1,8 +1,7 @@
 /* LCNDA — 🗂 Archives en ligne (quatrième lot) : 🎖 monuments aux morts · 🪦 cimetières · 🏘 communes et noms · ✝ protestants et
  * marins · 🇪🇺 archives d'Europe · 🌍 presse étrangère (les écrans).
- * Même modèle que heritage-sources-ouvertes.js (et SocFace), validé par l'utilisateur :
- *  - « 🔍 Chercher » ouvre le NAVIGATEUR sur la recherche du site, champs déjà remplis ; l'app n'interroge jamais ces sites.
- *    L'adresse ouverte est montrée telle quelle ; « ⚙️ Adresses des sites » (rangé par pays et par thème) la change (K2).
+ * La recherche est la fenêtre commune de tous les lots (heritage-archives-en-ligne.js) : openSearch / openSettings /
+ * openPasteLink l'ouvrent déjà sur la rubrique de ce lot ; l'app n'interroge jamais ces sites. Ici : l'import et les boutons.
  *  - « ⤒ Importer ce que tu as trouvé » (fenêtre K13) : photo, PDF, page enregistrée (.html : le texte seul) ou texte, ou lien
  *    collé + saisie aidée → média relié à la fiche, source avec le lien ; selon la sorte : décès et unité (monument aux morts),
  *    sépulture et photo de tombe (bloc Cimetière), acte proposé (baptême, inhumation, recensement, émigration…), passage
@@ -10,9 +9,9 @@
  *    après (H7). Tout reste « À vérifier ».
  *  - 🏘 Population d'une commune depuis 1793 et ses anciens noms (Cassini / EHESS) : import du tableau ou saisie aidée,
  *    rapprochés des changements INSEE (frontières anciennes) ; dans la monographie de commune.
- * Entrées : blocs Poilu 14-18, Cimetière, 📰 Dans les médias, « Chercher sur internet » (fiche), monographie de commune,
+ * Entrées : blocs Poilu 14-18, Cimetière, 📰 Dans les médias, monographie de commune,
  * carte des patronymes (Géopatronyme). Calculs purs : app-sources-ouvertes-4-core.js (LCNDA_SO4). Serveur :
- * lib/sources_ouvertes_4.php. Mode d'emploi : docs/UI.md (« 🗂 Archives en ligne (quatrième lot) »).
+ * lib/sources_ouvertes_4.php. Mode d'emploi : docs/UI.md (« 🔍 Archives en ligne »).
  */
 (() => {
     'use strict';
@@ -26,7 +25,6 @@
     const plural = (n, one, many) => A().plural ? A().plural(n, one, many) : `${n} ${n > 1 ? many || one + 's' : one}`;
     const post = (action, body) => api(action, {}, {method: 'POST', body}).then(r => r?.result ?? r);
     const KEY = 'genealogie-sources-ouvertes-4-sites';
-    const TAB_KEY = 'genealogie-sources-ouvertes-4-tab';
     const lsGet = (k, d) => { try { const v = localStorage.getItem(k); return v == null ? d : v; } catch (_) { return d; } };
     const custom = () => { try { const o = JSON.parse(lsGet(KEY, '{}')); return o && typeof o === 'object' ? o : {}; } catch (_) { return {}; } };
     const pickerField = o => (window.LCNDA_PICKER || A()).pickerField(o);
@@ -36,7 +34,6 @@
     const forget = pid => { ctxCache.delete(Number(pid) || 0); };
     const refresh = () => { try { A().refreshScreen?.(); } catch (_) {} };
     const groupKeys = () => S4().GROUPS.map(g => g.key);
-    const KIND_OF_GROUP = {fr_guerres: 'memorial', fr_cimetieres: 'sepulture', fr_lieux: 'acte', fr_autres: 'acte', europe: 'acte', presse_etr: 'presse'};
     const GROUP_HELP = {
         fr_guerres: 'Les monuments aux morts relevés par les bénévoles de MémorialGenWeb (noms, photos du monument, souvent une biographie), les morts de la guerre de 1870-1871 et les victimes civiles de 1939-1945. Les sites ne gardent pas la recherche dans leur adresse : la recherche passe par Google, limitée au site.',
         fr_cimetieres: 'Les tombes photographiées et relevées par des bénévoles : Cimetières de France, BillionGraves (avec la position GPS), les relevés de Geneanet (Find a Grave est avec les archives américaines). La photo de la tombe se range dans le bloc Cimetière.',
@@ -46,99 +43,10 @@
         presse_etr: 'Les journaux étrangers numérisés et gratuits : États-Unis, Australie, Nouvelle-Zélande, Pays-Bas. Un article trouvé entre dans « 📰 Dans les médias », comme un article de Gallica.',
     };
 
-    /* ═════ 🔍 Chercher : la fenêtre qui prépare les adresses ═════ */
-    function paramsFrom(ctx, place = null) {
-        const p = ctx?.person || {};
-        const life = [p.birth_year || '', p.death_year || (p.birth_year ? Math.min(Number(p.birth_year) + 90, new Date().getFullYear()) : '')];
-        return {first: String(p.first || '').split(/\s+/)[0] || '', last: p.last || '', place: place?.name || (ctx?.death?.place || ctx?.birth?.place || ctx?.places?.[0] || '').split(',')[0],
-            y1: life[0], y2: life[1], birthYear: p.birth_year || '', deathYear: p.death_year || '', deptCode: place?.dept || ctx?.dept?.code || '', insee: place?.insee || ''};
-    }
-    function linksHtml(group, p, scope = '') {
-        const cu = custom();
-        const sites = S4().SITES.filter(s => s.group === group && (!scope || s.scope === scope || (scope === 'place' && s.scope !== 'name')));
-        if (!sites.length) return emptyLine('Aucun site de cette rubrique ne cherche à partir d’ici.', '🔍');
-        return `<ul class="so-links">${sites.map(s => {
-            const u = S4().url(s.key, p, cu);
-            return `<li class="so-link">
-                <span class="so-link-ico" aria-hidden="true">${esc(s.icon)}</span>
-                <span class="so-link-main"><b>${esc(s.label)}</b>${s.account ? ` ${UI().badge('Compte gratuit', 'yellow', {title: 'Gratuit, mais il faut créer un compte avant de chercher'})}` : ''}${cu[s.key] ? ` ${UI().badge('Adresse à toi', 'blue')}` : ''}${s.verified ? '' : ` <span class="so4-unverif" title="Adresse construite d’après la forme connue du site, pas encore vérifiée en ligne : si elle ne marche plus, change-la dans « ⚙️ Adresses des sites ».">adresse à vérifier</span>`}
-                    <small class="so4-note">${esc(s.note || '')}</small><code class="so-url" data-so4-url="${esc(s.key)}">${esc(u)}</code></span>
-                <a class="button small" href="${esc(u)}" target="_blank" rel="noopener noreferrer" data-so4-go="${esc(s.key)}">↗ Ouvrir</a></li>`;
-        }).join('')}</ul>`;
-    }
-    function openSearch(o = {}) {
-        const dlg = document.createElement('dialog'); dlg.className = 'modal modal-l so-search so4-search';
-        let group = groupKeys().includes(o.group) ? o.group : lsGet(TAB_KEY, 'fr_guerres'); if (!groupKeys().includes(group)) group = 'fr_guerres';
-        let ctx = null, pid = Number(o.personId) || 0; const place = o.place || null; const scope = place && !pid ? 'place' : '';
-        const tabs = () => `<div class="segmented so-tabs so4-tabs" role="tablist">${S4().GROUPS.map(g => `<button type="button" role="tab" class="${g.key === group ? 'is-active' : ''}" aria-selected="${g.key === group}" data-so4-tab="${g.key}" title="${esc(g.label)}">${esc(g.icon)} ${esc(g.label.replace(/^France · /, ''))}</button>`).join('')}</div>`;
-        dlg.innerHTML = `<form method="dialog"><div class="modal-head"><div><span class="eyebrow">ARCHIVES EN LIGNE · MONUMENTS, CIMETIÈRES, EUROPE, PRESSE ÉTRANGÈRE</span><h2>🔍 Chercher sur…</h2></div><button type="button" class="icon-button" data-x aria-label="Fermer">×</button></div>
-            <div class="h-dialog-body so-search-body" data-so4-body>${UI().spinner('Ce que la fiche sait…')}</div>
-            <div class="modal-actions"><button type="button" class="button secondary" data-so4-settings>⚙️ Adresses des sites</button><span class="spacer"></span><button type="button" class="button secondary" data-so4-paste-in>🔗 Coller un lien</button><button type="button" class="button secondary" data-so4-import-from-search>⤒ Importer ce que tu as trouvé…</button><button type="button" class="button" data-x>Fermer</button></div></form>`;
-        document.body.appendChild(dlg);
-        const body = dlg.querySelector('[data-so4-body]');
-        const val = () => { const v = Object.fromEntries(new FormData(dlg.querySelector('form'))); v.withFirst = true; return v; };
-        const updLinks = () => { const box = body.querySelector('[data-so4-links]'); if (box) box.innerHTML = linksHtml(group, val(), scope); };
-        const draw = () => {
-            const p = paramsFrom(ctx, place);
-            const living = ctx?.person && S4().livingRisk(ctx.person);
-            body.innerHTML = `${tabs()}
-                ${o.personId || place ? '' : `<div class="so-who"><span class="pk-lab">À partir d’une fiche (facultatif)</span>${pickerField({name: 'so4_pid', kind: 'person', value: pid || null})}</div>`}
-                ${living ? UI().notice('warn', 'Cette personne est peut-être vivante : ces recherches restent dans ton navigateur, rien n’est partagé. Pense à sa vie privée.') : ''}
-                <p class="so-help">${esc(GROUP_HELP[group] || '')}</p>
-                <div class="form-grid so-grid">
-                    <label>Nom<input name="last" value="${esc(p.last)}" autocomplete="off"></label>
-                    <label>Prénom<input name="first" value="${esc(p.first)}" autocomplete="off"></label>
-                    <label>Lieu<input name="place" value="${esc(p.place)}" autocomplete="off" placeholder="Tulle, Bergen, Wien…"></label>
-                    <label>De l’année<input name="y1" type="number" min="1500" max="2100" value="${esc(p.y1)}"></label>
-                    <label>à l’année<input name="y2" type="number" min="1500" max="2100" value="${esc(p.y2)}"></label>
-                    <label>N° du département<input name="deptCode" value="${esc(p.deptCode)}" autocomplete="off" placeholder="19"></label>
-                    <input type="hidden" name="birthYear" value="${esc(p.birthYear)}"><input type="hidden" name="insee" value="${esc(p.insee)}">
-                </div>
-                ${UI().notice('info', 'Chaque recherche s’ouvre dans ton navigateur. L’app n’envoie rien d’autre que ce que tu vois dans l’adresse, et ne se connecte jamais à ces sites.')}
-                <div data-so4-links></div>
-                <p class="ui-hint">Ce qu’on lit sur ces sites est à vérifier : homonymes, fautes de lecture. Ensuite, enregistre la page, la photo ou le PDF, ou copie son lien, et fais « ⤒ Importer ce que tu as trouvé ».</p>`;
-            updLinks();
-        };
-        dlg.addEventListener('input', e => { if (e.target.closest('.so-grid')) updLinks(); });
-        dlg.addEventListener('change', async e => {
-            if (e.target.closest('.so-grid')) updLinks();
-            if (e.target.name === 'so4_pid') { pid = Number(e.target.value) || 0; try { ctx = await context(pid); } catch (err) { toast(err.message, 'error'); } draw(); }
-        });
-        dlg.addEventListener('click', e => {
-            if (e.target.closest('[data-x]')) { dlg.close(); return; }
-            const t = e.target.closest('[data-so4-tab]');
-            if (t) { group = t.dataset.so4Tab; try { localStorage.setItem(TAB_KEY, group); } catch (_) {} const keep = val(); draw(); ['last', 'first', 'place', 'y1', 'y2', 'deptCode'].forEach(k => { const el = dlg.querySelector(`[name=${k}]`); if (el && keep[k] !== undefined) el.value = keep[k]; }); updLinks(); return; }
-            if (e.target.closest('[data-so4-settings]')) { openSettings(() => updLinks()); return; }
-            if (e.target.closest('[data-so4-import-from-search]')) { dlg.close(); if (group === 'fr_lieux' && place) openPopulation({placeId: place.id}); else openImport({personId: pid, kind: KIND_OF_GROUP[group]}); return; }
-            if (e.target.closest('[data-so4-paste-in]')) { dlg.close(); openPasteLink({personId: pid, kind: KIND_OF_GROUP[group]}); }
-        });
-        dlg.addEventListener('close', () => dlg.remove());
-        dlg.showModal();
-        (pid ? context(pid) : Promise.resolve(null)).then(c => { ctx = c; draw(); }).catch(err => { body.innerHTML = UI().notice('error', err.message); });
-        return dlg;
-    }
-
-    /* ═════ ⚙️ Adresses des sites (K2), rangées par pays et par thème ═════ */
-    function openSettings(onChange) {
-        const dlg = document.createElement('dialog'); dlg.className = 'modal so-settings so4-settings';
-        const sample = {first: '{prénom}', last: '{nom}', place: '{lieu}'};
-        const rows = () => { const cu = custom(); return S4().GROUPS.map(g => `<h4 class="so4-set-group">${esc(g.icon)} ${esc(g.label)}</h4>${S4().SITES.filter(s => s.group === g.key).map(s => `<div class="so-set-row"><label><span><b>${esc(s.icon)} ${esc(s.label)}</b>${s.verified ? '' : ' <span class="so4-unverif">adresse à vérifier</span>'}</span>
-            <input name="${esc(s.key)}" value="${esc(cu[s.key] || '')}" placeholder="${esc(decodeURIComponent(S4().url(s.key, sample)).slice(0, 300))}" autocomplete="off" spellcheck="false"></label></div>`).join('')}`).join(''); };
-        dlg.innerHTML = `<form method="dialog"><div class="modal-head"><div><span class="eyebrow">ARCHIVES EN LIGNE · RÉGLAGES</span><h2>⚙️ Adresses des sites</h2></div><button type="button" class="button small secondary" data-ui-reset>↺ Remettre comme au départ</button><button type="button" class="icon-button" data-ui-x aria-label="Fermer">×</button></div>
-            <div class="h-dialog-body"><p class="ui-hint">Si un site change son adresse de recherche, écris la nouvelle ici. Case vide = l’adresse de l’app (en gris). Mots remplacés : {nom}, {prénom}, {nom_complet}, {lieu}, {département}, {insee}, {pays}, {de}, {à}, {naissance}, {décès}. Seules les adresses en http(s) sont gardées.</p>
-            <div class="so-set" data-so4-set>${rows()}</div></div>
-            <div class="modal-actions"><span class="spacer"></span><button type="button" class="button" data-ui-x>Fermer</button></div></form>`;
-        document.body.appendChild(dlg);
-        UI().autoSaveDialog(dlg, {keys: [KEY], label: 'Adresse d’un site',
-            save: () => { const o = {}; dlg.querySelectorAll('[data-so4-set] input').forEach(i => { const v = i.value.trim(); if (v && S4().cleanUrl(v.replace(/[{}]/g, ''))) o[i.name] = v.slice(0, 600); }); if (Object.keys(o).length) localStorage.setItem(KEY, JSON.stringify(o)); else localStorage.removeItem(KEY); },
-            reload: () => { dlg.querySelector('[data-so4-set]').innerHTML = rows(); },
-            reset: () => { try { localStorage.removeItem(KEY); } catch (_) {} },
-            onChange: () => onChange?.()});
-        dlg.addEventListener('click', e => { if (e.target.closest('[data-ui-x]')) dlg.close(); });
-        dlg.addEventListener('close', () => { onChange?.(); dlg.remove(); });
-        dlg.showModal();
-        return dlg;
-    }
+    /* ═════ 🔍 Chercher et ⚙️ Adresses des sites : la fenêtre commune de tous les lots (heritage-archives-en-ligne.js) ═════ */
+    /** la fenêtre commune, déjà sur la rubrique de ce lot (fr_guerres, fr_cimetieres, fr_lieux, fr_autres, europe, presse_etr) */
+    const openSearch = (o = {}) => ext.archives?.open({...o, lot: 4, group: groupKeys().includes(o.group) ? o.group : undefined});
+    const openSettings = onChange => ext.archives?.openSettings({lot: 4, onChange});
 
     /* ═════ ⤒ Importer ce qu'on a téléchargé (K13) ═════ */
     const KIND_LABEL = {memorial: '🎖 Monument aux morts', sepulture: '🪦 Tombe', acte: '📜 Acte, registre', presse: '🌍 Journal étranger'};
@@ -308,25 +216,8 @@
             intro: `Ce que tu as téléchargé ou enregistré : ${kindWord[st.kind]} en image ou en PDF, la page enregistrée par ton navigateur (« Enregistrer sous… »), ou un texte copié. Rien n’est demandé au site : seul ton fichier est lu. Pas de fichier ? « 🔗 Coller un lien » dans la fenêtre de recherche.`,
             noun: 'document', analyze: async files => { const a = await analyze(files); const show = a.onShow; a.onShow = body => { body.closest('dialog')?.classList.add('modal-l', 'so-import'); bind(body); show(body); }; return a; }, run, files: o.files});
     }
-    /** pas de fichier : un lien collé (et le texte de la fiche si on l'a) → la même fenêtre d'import */
-    function openPasteLink(o = {}) {
-        const dlg = document.createElement('dialog'); dlg.className = 'modal so-paste';
-        dlg.innerHTML = `<form method="dialog"><div class="modal-head"><div><span class="eyebrow">ARCHIVES EN LIGNE</span><h2>🔗 Coller un lien</h2></div><button type="button" class="icon-button" data-x aria-label="Fermer">×</button></div>
-            <div class="h-dialog-body"><label>Lien de la fiche, de la tombe ou de l’article<input name="link" inputmode="url" placeholder="https://chroniclingamerica.loc.gov/lccn/…" autocomplete="off"></label>
-            <p class="ui-hint">Copie l’adresse dans la barre de ton navigateur. MémorialGenWeb, BillionGraves, Matricula, Digitalarkivet, Riksarkivet, irishgenealogy.ie, Chronicling America, Trove, Papers Past et Delpher sont reconnus : la date, la page, le registre sont remplis quand l’adresse les dit.</p>
-            <label>Texte de la fiche (facultatif)<textarea name="text" rows="6" placeholder="Nom : DUPONT&#10;Prénoms : Jean Marie&#10;Date de décès : 20/08/1914…"></textarea></label></div>
-            <div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-x>Annuler</button><button type="submit" class="button">Continuer</button></div></form>`;
-        document.body.appendChild(dlg);
-        dlg.addEventListener('click', e => { if (e.target.closest('[data-x]')) dlg.close(); });
-        dlg.querySelector('form').addEventListener('submit', e => {
-            e.preventDefault(); const link = dlg.querySelector('[name=link]').value.trim(), text = dlg.querySelector('[name=text]').value;
-            if (!S4().cleanUrl(link)) return UI().fail?.(dlg.querySelector('[name=link]'), 'Colle une adresse qui commence par https://');
-            dlg.close(); openImport({...o, link, text, linkOnly: true, files: [new File([text || link], 'lien-colle.txt', {type: 'text/plain'})]});
-        });
-        dlg.addEventListener('close', () => dlg.remove());
-        dlg.showModal(); setTimeout(() => dlg.querySelector('[name=link]')?.focus(), 30);
-        return dlg;
-    }
+    /** pas de fichier : un lien collé → le seul « 🔗 Coller un lien » de l'app (il reconnaît le site et revient à openImport) */
+    const openPasteLink = (o = {}) => ext.archives?.openPaste({...o, lot: 4});
 
     /* ═════ 🏘 Population d'une commune et anciens noms (Cassini / EHESS), rapprochés de l'INSEE ═════ */
     const fmtN = n => Number(n).toLocaleString('fr-FR');
@@ -405,8 +296,6 @@
     /* ═════ Les boutons posés dans l'app ═════ */
     const sBtn = (group, pid, label, title) => `<button type="button" class="button small secondary" data-so4-search="${esc(group)}" data-pid="${Number(pid) || 0}" title="${esc(title)}">${esc(label)}</button>`;
     const iBtn = (kind, pid, label = '⤒ Importer…') => `<button type="button" class="button small secondary" data-so4-import="${esc(kind)}" data-pid="${Number(pid) || 0}" title="Range la photo ou le document trouvé, crée la source et propose ce qu’il dit">${esc(label)}</button>`;
-    /** dans « Chercher sur internet » (fiche) : une ligne, à côté des autres lots */
-    const panelButton = ctx => ctx?.id ? `<div class="so-ws so4-ws"><button type="button" class="button small" data-so4-search="" data-pid="${Number(ctx.id)}">🗿 Monuments aux morts, cimetières, Europe (Matricula, Norvège, Suède…), presse étrangère…</button><button type="button" class="button small secondary" data-so4-paste data-pid="${Number(ctx.id)}">🔗 Coller un lien</button></div>` : '';
     /** les boutons d'un bloc de la fiche : poilu · cemetery · presse */
     function blockButtons(where, pid, editOnly = h => h) {
         if (!pid) return '';
@@ -445,5 +334,5 @@
         const pop = e.target.closest('[data-so4-pop]'); if (pop) { e.preventDefault(); openPopulation({placeId: Number(pop.dataset.so4Pop) || 0}); }
     });
 
-    ext.sourcesOuvertes4 = {openSearch, openImport, openPasteLink, openSettings, openPopulation, panelButton, blockButtons, placeHtml, geopatronymeUrl, context};
+    ext.sourcesOuvertes4 = {openSearch, openImport, openPasteLink, openSettings, openPopulation, blockButtons, placeHtml, geopatronymeUrl, context, archives: {help: GROUP_HELP}};
 })();

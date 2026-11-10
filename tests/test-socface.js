@@ -373,17 +373,21 @@ echo 'ok';`], {cwd: appRoot, encoding: 'utf8', env: envFor(dir)});
                     assert.match(await p.textContent('.sf-page'), /peut contenir des erreurs/);
                     await noScroll(); await shot(p, `socface-page-${name}.png`);
                 });
-                await t(`${name} : 🔍 Chercher — l’adresse affichée est celle qu’on ouvre, rien d’autre`, async () => {
+                await t(`${name} : 🔍 Chercher (fenêtre commune des archives en ligne) — une seule ligne FranceArchives, l’adresse affichée est celle qu’on ouvre`, async () => {
                     await p.click('[data-sf-open-search]');
-                    await p.waitForSelector('dialog.sf-search[open]');
-                    await p.fill('dialog.sf-search [name=last]', 'Mourgue'); await p.fill('dialog.sf-search [name=place]', 'Tulle');
-                    await p.fill('dialog.sf-search [name=y1]', '1900'); await p.fill('dialog.sf-search [name=y2]', '1912');
-                    const shown = await p.textContent('[data-sf-url]'), href = await p.getAttribute('[data-sf-go]', 'href');
-                    assert.equal(shown, href); assert.match(href, /es_names=Mourgue&es_locations=Tulle&es_date_min=1900&es_date_max=1912/);
-                    assert.match(await p.textContent('[data-sf-years]'), /1901, 1906, 1911/);
-                    assert.equal(await p.getAttribute('[data-sf-go]', 'target'), '_blank');
+                    await p.waitForSelector('dialog.ael-search[open] [data-ael-site="so_francearchives_noms"]');
+                    assert.match(await p.textContent('dialog.ael-search .ael-focus.is-active'), /Recensements/);
+                    await p.fill('dialog.ael-search [name=last]', 'Mourgue'); await p.fill('dialog.ael-search [name=place]', 'Tulle');
+                    await p.fill('dialog.ael-search [name=y1]', '1900'); await p.fill('dialog.ael-search [name=y2]', '1912');
+                    const href = await p.getAttribute('[data-ael-go="socface"]', 'href');
+                    assert.match(href, /^https:\/\/francearchives\.gouv\.fr\/basedenoms_recensement\?es_names=Mourgue&es_locations=Tulle&es_date_min=1900&es_date_max=1912/);
+                    assert.ok(await p.$('[data-ael-site="so_francearchives_noms"] [data-ael-go="socface"]'), 'SocFace dans la ligne FranceArchives (pas en double)');
+                    const shown = await p.textContent('[data-ael-url="so_francearchives_noms"]'), main = await p.getAttribute('[data-ael-go="so_francearchives_noms"]', 'href');
+                    assert.equal(shown, main);
+                    assert.match(await p.textContent('dialog.ael-search .sf-years'), /1901, 1906, 1911/);
+                    assert.equal(await p.getAttribute('[data-ael-go="socface"]', 'target'), '_blank');
                     await shot(p, `socface-chercher-${name}.png`);
-                    await p.click('dialog.sf-search .modal-head [data-x]');
+                    await p.click('dialog.ael-search .modal-head [data-x]');
                 });
                 await t(`${name} : ⤒ Importer un export — aperçu, « c’est la même personne ? », 🔍 doutes, correction, import, ↶`, async () => {
                     await p.evaluate(txt => { window.LCNDA_EXT.socface.openImport({files: [new File([txt], 'socface-complet.csv', {type: 'text/csv'})]}); }, FIX('socface-complet.csv').split('\n').filter((l, k) => !k || l.includes(';m-0001;')).join('\n').replace(/m-0001/g, `m-${name}`));

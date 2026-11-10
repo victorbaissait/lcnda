@@ -2,9 +2,8 @@
  * colonies, bagnards) · ⚓ Service historique de la Défense (inscrits maritimes, officiers) · 🕯 mémoire de la déportation et
  * des fusillés · 📜 Journal officiel · 📒 annuaires anciens · 🏰 patrimoine (Mérimée, Palissy) · 🌐 archives étrangères.
  *
- * Le même modèle que la première vague (heritage-sources-ouvertes.js), validé par l'utilisateur :
- *  - « 🔍 Chercher » ouvre le NAVIGATEUR sur la recherche du site, champs remplis ; l'app n'interroge jamais ces sites.
- *    L'adresse est montrée telle quelle ; « ⚙️ Adresses des sites » la change (K2).
+ * La recherche est la fenêtre commune de tous les lots (heritage-archives-en-ligne.js) : openSearch / openSettings /
+ * openPasteLink l'ouvrent déjà sur la rubrique de ce lot ; l'app n'interroge jamais ces sites. Ici : l'import et les boutons.
  *  - « ⤒ Importer ce que tu as trouvé » (fenêtre K13) : image, PDF, page enregistrée (.html : son texte seul), texte, ou lien
  *    collé + cases → média relié, source avec le lien, ajouts proposés (événements, inventaire, départ, bloc militaire, notice
  *    d'un lieu, d'une maison ou d'un objet) avec « c'est la même personne ? » ; rien n'est écrasé ; « ↶ Annuler » (H7) ;
@@ -12,7 +11,7 @@
  *  - 🕯 Déportation et fusillés : ton sobre, une phrase de contexte ; une fiche qui porte ces événements n'entre plus dans
  *    aucun jeu (lib/sources_ouvertes_2.php → « mem » dans mode_simple_data et tresor_tree).
  * Calculs purs : app-sources-ouvertes-2-core.js (LCNDA_SOURCES_OUVERTES_2). Serveur : lib/sources_ouvertes_2.php.
- * Mode d'emploi : docs/UI.md (« 🗂 Archives en ligne (suite) »).
+ * Mode d'emploi : docs/UI.md (« 🔍 Archives en ligne »).
  */
 (() => {
     'use strict';
@@ -25,10 +24,6 @@
     const api = (...a) => A().api(...a);
     const toast = (...a) => A().toast(...a);
     const post = (action, body) => api(action, {}, {method: 'POST', body}).then(r => r?.result ?? r);
-    const KEY = 'genealogie-sources-ouvertes-2-sites';
-    const TAB_KEY = 'genealogie-sources-ouvertes-2-tab';
-    const lsGet = (k, d) => { try { const v = localStorage.getItem(k); return v == null ? d : v; } catch (_) { return d; } };
-    const custom = () => { try { const o = JSON.parse(lsGet(KEY, '{}')); return o && typeof o === 'object' ? o : {}; } catch (_) { return {}; } };
     const GROUP_ORDER = ['an', 'anom', 'shd', 'memoire', 'jo', 'annuaires', 'patrimoine', 'etranger'];
     const pickerField = o => (window.LCNDA_PICKER || A()).pickerField(o);
     const ctxCache = new Map();
@@ -37,23 +32,7 @@
     const refresh = () => { try { A().refreshScreen?.(); } catch (_) {} };
     const RESPECT_NOTE = 'Ces événements s’écrivent sobrement sur la fiche. Une fiche qui porte une déportation, un décès en déportation ou « Fusillé » n’apparaît plus dans les jeux ni dans les Trésors à jouer.';
 
-    /* ═════ 🔍 Chercher ═════ */
-    function paramsFrom(ctx, target) {
-        const p = ctx?.person || {};
-        const life = [p.birth_year || '', p.death_year || (p.birth_year ? Math.min(Number(p.birth_year) + 90, new Date().getFullYear()) : '')];
-        return {first: String(p.first || '').split(/\s+/)[0] || '', last: p.last || '', place: target?.place || (ctx?.birth?.place || ctx?.places?.[0] || '').split(',')[0], y1: life[0], y2: life[1],
-            birthYear: p.birth_year || '', deathYear: p.death_year || '', what: target?.name || '', canton: lsGet('genealogie-sources-ouvertes-2-canton', '')};
-    }
-    function linksHtml(group, p) {
-        const cu = custom();
-        return `<ul class="so-links">${S2().SITES.filter(s => s.group === group).map(s => {
-            const u = S2().url(s.key, p, cu);
-            const kw = s.account ? ` ${UI().badge('Compte gratuit', 'blue', {title: 'Le site demande de créer un compte (gratuit) pour voir les listes de passagers'})}` : '';
-            return `<li class="so-link"><span class="so-link-ico" aria-hidden="true">${esc(s.icon)}</span>
-                <span class="so-link-main"><b>${esc(s.label)}</b>${kw}${cu[s.key] ? ` ${UI().badge('Adresse à toi', 'blue')}` : ''}<code class="so-url" data-so2-url="${esc(s.key)}">${esc(u)}</code></span>
-                <a class="button small" href="${esc(u)}" target="_blank" rel="noopener noreferrer" data-so2-go="${esc(s.key)}">↗ Ouvrir</a></li>`;
-        }).join('')}</ul>`;
-    }
+    /* ═════ 🔍 Chercher et ⚙️ Adresses des sites : la fenêtre commune de tous les lots (heritage-archives-en-ligne.js) ═════ */
     const GROUP_HELP = {
         an: 'Les décrets de naturalisation de 1883 à 1930 (série BB/11, et BB/34 pour les réintégrations) et les actes des notaires de Paris (Minutier central : contrats de mariage, inventaires après décès, testaments). La recherche se fait dans les inventaires des Archives nationales publiés sur FranceArchives ; les noms y sont écrits « Nom, Prénom ».',
         anom: 'Les Archives nationales d’outre-mer (Aix-en-Provence) : l’état civil des anciennes colonies (Algérie, Antilles, Guyane, Réunion, Indochine, Afrique…) et les registres matricules et dossiers des bagnards (Guyane, Nouvelle-Calédonie). La base d’état civil se cherche par territoire, commune et année.',
@@ -64,84 +43,9 @@
         patrimoine: 'Les bases du ministère de la Culture (POP) : Mérimée pour les monuments (églises, châteaux, maisons, fermes…) et Palissy pour les objets (cloches, retables, mobilier, tableaux d’église). Leur notice peut compléter la fiche d’un lieu, d’une maison ou d’un objet de famille.',
         etranger: 'Les Archives de l’État en Belgique (recherche de personnes dans l’état civil et les registres), les archives des cantons suisses (une par canton) et les listes des passagers arrivés à Ellis Island, à New York (1892-1954 : il faut un compte gratuit sur le site de la fondation).',
     };
-    function openSearch(o = {}) {
-        const dlg = document.createElement('dialog'); dlg.className = 'modal modal-l so-search so2-search';
-        let group = GROUP_ORDER.includes(o.group) ? o.group : (o.target ? 'patrimoine' : lsGet(TAB_KEY, 'an')); if (!GROUP_ORDER.includes(group)) group = 'an';
-        let ctx = null, pid = Number(o.personId) || 0; const target = o.target || null;
-        const tabs = () => `<div class="segmented so-tabs so2-tabs" role="tablist">${GROUP_ORDER.map(g => `<button type="button" role="tab" class="${g === group ? 'is-active' : ''}" aria-selected="${g === group}" data-so2-tab="${g}">${esc(S2().GROUPS[g].icon)} ${esc(S2().GROUPS[g].label)}</button>`).join('')}</div>`;
-        dlg.innerHTML = `<form method="dialog"><div class="modal-head"><div><span class="eyebrow">ARCHIVES EN LIGNE</span><h2>🔍 Chercher dans d’autres archives</h2></div><button type="button" class="icon-button" data-x aria-label="Fermer">×</button></div>
-            <div class="h-dialog-body so-search-body" data-so2-body>${UI().spinner('Ce que la fiche sait…')}</div>
-            <div class="modal-actions"><button type="button" class="button secondary" data-so2-settings>⚙️ Adresses des sites</button><span class="spacer"></span><button type="button" class="button secondary" data-so2-import-from-search>⤒ Importer ce que tu as trouvé…</button><button type="button" class="button" data-x>Fermer</button></div></form>`;
-        document.body.appendChild(dlg);
-        const body = dlg.querySelector('[data-so2-body]');
-        const val = () => { const f = dlg.querySelector('form'); return Object.fromEntries(new FormData(f)); };
-        const updLinks = () => { const box = body.querySelector('[data-so2-links]'); if (box) box.innerHTML = linksHtml(group, val()); };
-        const draw = () => {
-            const p = paramsFrom(ctx, target);
-            const living = ctx?.person && SO1()?.livingRisk?.(ctx.person);
-            const extra = {
-                patrimoine: `<label class="so-span-2">Ce que tu cherches<input name="what" value="${esc(p.what)}" placeholder="église Saint-Martin, château, cloche, retable…" autocomplete="off"></label>`,
-                etranger: `<label>Canton suisse<select name="canton"><option value="">—</option>${S2().CANTONS.map(c => `<option value="${c[0]}" ${c[0] === p.canton ? 'selected' : ''}>${esc(c[1])} (${c[0]})</option>`).join('')}</select></label>`,
-            }[group] || '';
-            const who = target ? `<p class="so2-target">${esc({place: '📍', house: '🏠', object: '🏺'}[target.type] || '')} Pour <b>${esc(target.name || '')}</b>${target.place ? ` · ${esc(target.place)}` : ''}</p>`
-                : o.personId ? '' : `<div class="so-who"><span class="pk-lab">À partir d’une fiche (facultatif)</span>${pickerField({name: 'so2_pid', kind: 'person', value: pid || null})}</div>`;
-            body.innerHTML = `${tabs()}${who}
-                ${living ? UI().notice('warn', 'Cette personne est peut-être vivante : ces recherches restent dans ton navigateur, rien n’est partagé. Pense à sa vie privée.') : ''}
-                ${S2().GROUPS[group].respect ? `<div class="so2-respect"><span aria-hidden="true">🕯</span><p>${esc(GROUP_HELP.memoire)}</p></div>` : `<p class="so-help">${esc(GROUP_HELP[group])}</p>`}
-                <div class="form-grid so-grid">
-                    ${group === 'patrimoine' ? extra : ''}
-                    <label>Nom<input name="last" value="${esc(group === 'patrimoine' ? '' : p.last)}" autocomplete="off"></label>
-                    <label>Prénom<input name="first" value="${esc(group === 'patrimoine' ? '' : p.first)}" autocomplete="off"></label>
-                    <label>Lieu<input name="place" value="${esc(p.place)}" autocomplete="off" placeholder="Paris, Alger, Bruxelles…"></label>
-                    <label>De l’année<input name="y1" type="number" min="1500" max="2100" value="${esc(p.y1)}"></label>
-                    <label>à l’année<input name="y2" type="number" min="1500" max="2100" value="${esc(p.y2)}"></label>
-                    ${group === 'patrimoine' ? '' : extra}
-                </div>
-                ${UI().notice('info', 'Chaque recherche s’ouvre dans ton navigateur. L’app n’envoie rien d’autre que ce que tu vois dans l’adresse, et ne se connecte jamais à ces sites.')}
-                <div data-so2-links></div>
-                <p class="ui-hint">Ce qu’on lit sur ces sites est à vérifier : homonymes, fautes de lecture. Ensuite, enregistre le document (image, PDF, page) ou copie son lien, et fais « ⤒ Importer ce que tu as trouvé ».</p>`;
-            updLinks();
-        };
-        dlg.addEventListener('input', e => { if (e.target.closest('.so-grid')) updLinks(); });
-        dlg.addEventListener('change', async e => {
-            if (e.target.name === 'canton') { try { localStorage.setItem('genealogie-sources-ouvertes-2-canton', e.target.value); } catch (_) {} }
-            if (e.target.closest('.so-grid')) updLinks();
-            if (e.target.name === 'so2_pid') { pid = Number(e.target.value) || 0; try { ctx = await context(pid); } catch (err) { toast(err.message, 'error'); } draw(); }
-        });
-        dlg.addEventListener('click', e => {
-            if (e.target.closest('[data-x]')) { dlg.close(); return; }
-            const t = e.target.closest('[data-so2-tab]');
-            if (t) { const keep = val(); group = t.dataset.so2Tab; try { localStorage.setItem(TAB_KEY, group); } catch (_) {} draw(); ['last', 'first', 'place', 'y1', 'y2'].forEach(k => { const el = dlg.querySelector(`[name=${k}]`); if (el && keep[k] && group !== 'patrimoine') el.value = keep[k]; }); updLinks(); return; }
-            if (e.target.closest('[data-so2-settings]')) { openSettings(() => updLinks()); return; }
-            if (e.target.closest('[data-so2-import-from-search]')) { dlg.close(); const k = S2().SITES.find(s => s.group === group)?.kind; openImport({personId: pid, kind: k, target}); }
-        });
-        dlg.addEventListener('close', () => dlg.remove());
-        dlg.showModal();
-        (pid ? context(pid) : Promise.resolve(null)).then(c => { ctx = c; draw(); }).catch(err => { body.innerHTML = UI().notice('error', err.message); });
-        return dlg;
-    }
-
-    /* ═════ ⚙️ Adresses des sites (K2) ═════ */
-    function openSettings(onChange) {
-        const dlg = document.createElement('dialog'); dlg.className = 'modal so-settings';
-        const sample = {first: '{prénom}', last: '{nom}', place: '{lieu}', what: '{quoi}', canton: ''};
-        const rows = () => { const cu = custom(); return GROUP_ORDER.map(g => `<h4 class="so2-set-h">${esc(S2().GROUPS[g].icon)} ${esc(S2().GROUPS[g].label)}</h4>${S2().SITES.filter(s => s.group === g).map(s => `<div class="so-set-row"><label><span><b>${esc(s.label)}</b>${s.verified ? '' : ' <small class="muted">(adresse non vérifiée)</small>'}</span>
-            <input name="${esc(s.key)}" value="${esc(cu[s.key] || '')}" placeholder="${esc(decodeURIComponent(S2().url(s.key, sample).replace(/%(?![0-9A-F]{2})/gi, '%25')))}" autocomplete="off" spellcheck="false"></label></div>`).join('')}`).join(''); };
-        dlg.innerHTML = `<form method="dialog"><div class="modal-head"><div><span class="eyebrow">ARCHIVES EN LIGNE · RÉGLAGES</span><h2>⚙️ Adresses des sites</h2></div><button type="button" class="button small secondary" data-ui-reset>↺ Remettre comme au départ</button><button type="button" class="icon-button" data-ui-x aria-label="Fermer">×</button></div>
-            <div class="h-dialog-body"><p class="ui-hint">Si un site change son adresse de recherche, écris la nouvelle ici. Case vide = l’adresse de l’app (en gris). « Adresse non vérifiée » : construite d’après la forme connue du site, sans avoir pu l’ouvrir. Mots remplacés : {nom}, {prénom}, {nom_complet}, {lieu}, {de}, {à}, {naissance}, {décès}, {canton}, {quoi}. Seules les adresses en http(s) sont gardées.</p>
-            <div class="so-set" data-so2-set>${rows()}</div></div>
-            <div class="modal-actions"><span class="spacer"></span><button type="button" class="button" data-ui-x>Fermer</button></div></form>`;
-        document.body.appendChild(dlg);
-        UI().autoSaveDialog(dlg, {keys: [KEY], label: 'Adresse d’un site',
-            save: () => { const o = {}; dlg.querySelectorAll('[data-so2-set] input').forEach(i => { const v = i.value.trim(); if (v && S2().cleanUrl(v.replace(/[{}]/g, ''))) o[i.name] = v.slice(0, 600); }); if (Object.keys(o).length) localStorage.setItem(KEY, JSON.stringify(o)); else localStorage.removeItem(KEY); },
-            reload: () => { dlg.querySelector('[data-so2-set]').innerHTML = rows(); },
-            reset: () => { try { localStorage.removeItem(KEY); } catch (_) {} },
-            onChange: () => onChange?.()});
-        dlg.addEventListener('click', e => { if (e.target.closest('[data-ui-x]')) dlg.close(); });
-        dlg.addEventListener('close', () => { onChange?.(); dlg.remove(); });
-        dlg.showModal();
-        return dlg;
-    }
+    /** la fenêtre commune, déjà sur la rubrique de ce lot ; target = un lieu, une maison ou un objet (Mérimée, Palissy) */
+    const openSearch = (o = {}) => ext.archives?.open({...o, lot: 2, group: GROUP_ORDER.includes(o.group) ? o.group : (o.target ? 'patrimoine' : undefined)});
+    const openSettings = onChange => ext.archives?.openSettings({lot: 2, onChange});
 
     /* ═════ ⤒ Importer ce qu'on a téléchargé (K13) ═════ */
     const NAME_FIELDS = [['last', 'Nom lu sur le document', 'text'], ['first', 'Prénoms lus', 'text'], ['birth', 'Naissance lue (date, lieu)', 'text']];
@@ -260,31 +164,12 @@
             intro: 'Ce que tu as téléchargé ou enregistré : un décret, un acte, une notice, une page de registre en image ou en PDF, la page enregistrée par ton navigateur (« Enregistrer sous… »), ou un texte copié. Rien n’est demandé au site : seul ton fichier est lu. Pas de fichier ? « 🔗 Coller un lien ».',
             noun: 'document', analyze: async files => { const a = await analyze(files); const show = a.onShow; a.onShow = body => { body.closest('dialog')?.classList.add('modal-l', 'so-import', 'so2-import'); bind(body); show(body); }; return a; }, run, files: o.files});
     }
-    /** pas de fichier : un lien collé (et le texte de la notice) → la même fenêtre d'import */
-    function openPasteLink(o = {}) {
-        const dlg = document.createElement('dialog'); dlg.className = 'modal so-paste';
-        dlg.innerHTML = `<form method="dialog"><div class="modal-head"><div><span class="eyebrow">ARCHIVES EN LIGNE</span><h2>🔗 Coller un lien</h2></div><button type="button" class="icon-button" data-x aria-label="Fermer">×</button></div>
-            <div class="h-dialog-body"><label>Lien du document ou de la notice<input name="link" inputmode="url" placeholder="https://francearchives.gouv.fr/fr/facomponent/…" autocomplete="off"></label>
-            <p class="ui-hint">Copie l’adresse dans la barre de ton navigateur. FranceArchives, POP (Mérimée, Palissy), Gallica et les autres sites de cette liste sont reconnus.</p>
-            <label>Texte de la notice (facultatif)<textarea name="text" rows="6" placeholder="Décret du 12 mars 1925&#10;Numéro de dossier : 1234 X 25&#10;Cote : BB/11/…"></textarea></label></div>
-            <div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-x>Annuler</button><button type="submit" class="button">Continuer</button></div></form>`;
-        document.body.appendChild(dlg);
-        dlg.addEventListener('click', e => { if (e.target.closest('[data-x]')) dlg.close(); });
-        dlg.querySelector('form').addEventListener('submit', e => {
-            e.preventDefault(); const link = dlg.querySelector('[name=link]').value.trim(), text = dlg.querySelector('[name=text]').value;
-            if (!S2().cleanUrl(link)) return UI().fail?.(dlg.querySelector('[name=link]'), 'Colle une adresse qui commence par https://');
-            dlg.close(); openImport({...o, link, text, linkOnly: true, files: [new File([text || link], 'lien-colle.txt', {type: 'text/plain'})]});
-        });
-        dlg.addEventListener('close', () => dlg.remove());
-        dlg.showModal(); setTimeout(() => dlg.querySelector('[name=link]')?.focus(), 30);
-        return dlg;
-    }
+    /** pas de fichier : un lien collé → le seul « 🔗 Coller un lien » de l'app (il reconnaît le site et revient à openImport) */
+    const openPasteLink = (o = {}) => ext.archives?.openPaste({...o, lot: 2});
 
     /* ═════ Les boutons posés dans l'app ═════ */
     const sBtn = (group, pid, label, title) => `<button type="button" class="button small secondary" data-so2-search="${esc(group)}" data-pid="${Number(pid) || 0}" title="${esc(title)}">${esc(label)}</button>`;
     const iBtn = (kind, pid, label = '⤒ Importer…') => `<button type="button" class="button small secondary" data-so2-import="${esc(kind)}" data-pid="${Number(pid) || 0}" title="Range le document trouvé, crée la source et propose ce qu’il dit">${esc(label)}</button>`;
-    /** dans « Chercher sur internet » (fiche) : une seule ligne, à côté de la première vague */
-    const panelButton = ctx => ctx?.id ? `<div class="so-ws so2-ws"><button type="button" class="button small" data-so2-search="" data-pid="${Number(ctx.id)}">🏛 Autres archives : naturalisations, notaires, colonies, marins, déportés, Journal officiel, annuaires, étranger…</button><button type="button" class="button small secondary" data-so2-paste data-pid="${Number(ctx.id)}">🔗 Coller un lien</button></div>` : '';
     /** les boutons d'un bloc de la fiche : military · voyage · probate · resistance */
     function blockButtons(where, pid, editOnly = h => h) {
         if (!pid) return '';
@@ -312,5 +197,5 @@
         if (pop) { e.preventDefault(); const d = pop.dataset; openSearch({group: 'patrimoine', target: {type: d.so2Pop, id: Number(d.id) || 0, name: d.name || '', place: d.place || ''}}); }
     });
 
-    ext.sourcesOuvertes2 = {openSearch, openImport, openPasteLink, openSettings, panelButton, blockButtons, placeHtml, objectButton};
+    ext.sourcesOuvertes2 = {openSearch, openImport, openPasteLink, openSettings, blockButtons, placeHtml, objectButton, archives: {help: GROUP_HELP}};
 })();

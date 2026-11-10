@@ -1,13 +1,6 @@
-/* LCNDA — 🧾 Recensements SocFace (assets/js/heritage-socface.js) : fenêtres de recherche, d'import et de vérification,
+/* LCNDA — 🧾 Recensements SocFace (assets/js/heritage-socface.js) : fenêtres d'import et de vérification (la recherche est la fenêtre commune des archives en ligne),
  * page Recherche → « 🧾 Recensements SocFace », bloc de la fiche. Couleurs : variables de l'app ; le mode sombre est écrit
  * par scripts/build-dark-css.py (bloc en fin de fichier). */
-
-/* fenêtre « 🔍 Chercher dans les recensements » (petite, K6) */
-.sf-search-body .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 12px; }
-.sf-search-body .form-grid .span-2 { grid-column: 1 / -1; }
-.sf-url { margin: 6px 0 4px; }
-.sf-url code { display: block; padding: 8px 10px; background: var(--blue-soft, #eef4ff); border: 1px solid #c9d6f2; font-size: 12px; line-height: 1.45; word-break: break-all; color: var(--ink); }
-.sf-search .modal-actions a.button { text-decoration: none; }
 
 /* aperçu d'import : un cadre par ménage */
 .sf-preview { display: grid; gap: 14px; }
@@ -66,11 +59,9 @@
     .sf-verify-side { border-left: 0; padding-left: 0; border-top: 1px solid #e3e5ea; padding-top: 10px; }
     .sf-item { flex-direction: column; }
     .sf-item-acts { max-width: none; justify-content: flex-start; }
-    .sf-search-body .form-grid { grid-template-columns: 1fr; }
     .sf-table td:nth-child(5) { min-width: 160px; }
 }
 /* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
-:root[data-theme="dark"] .sf-url code{border:1px solid #354464}
 :root[data-theme="dark"] .sf-hh{border:1.5px solid #484b51}
 :root[data-theme="dark"] .sf-ecart{background:#3e3412;color:#f8ebc1}
 :root[data-theme="dark"] .sf-ecart.is-orange{background:#3d2612;color:#f7d6b6}

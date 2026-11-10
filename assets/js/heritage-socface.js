@@ -1,6 +1,7 @@
 /* LCNDA — 🧾 Recensements SocFace (FranceArchives) : les écrans.
- *  - « 🔍 Chercher dans les recensements (SocFace) » : fiche (bloc Recensements), fiche d'un village, Recherche, « Chercher sur
- *    internet » → ouvre le NAVIGATEUR sur FranceArchives, champs remplis ; l'app n'interroge jamais ce site.
+ *  - « 🔍 Chercher dans les recensements (SocFace) » : fiche (bloc Recensements), fiche d'un village, Recherche → la fenêtre
+ *    commune « 🔍 Chercher dans les archives en ligne » (heritage-archives-en-ligne.js), sur la ligne FranceArchives ; elle ouvre
+ *    le NAVIGATEUR, champs remplis ; l'app n'interroge jamais ce site.
  *  - « ⤒ Importer des recensements SocFace » : fenêtre K13 ; CSV de FranceArchives (notice, export) ou texte copié d'une fiche,
  *    lus par le moteur des tableaux (LCNDA_SHEET) ; « c'est la même personne ? » pour chaque membre (rien relié sans confirmation).
  *  - « 🔍 Vérifier cette ligne SocFace » : le champ lu, la raison du doute, une proposition (jamais appliquée sans clic, ↶ Annuler),
@@ -29,58 +30,20 @@
     const imgLabel = u => SF()?.imageLabel ? SF().imageLabel(u) : '🖼 Voir l’image ↗';
     const btnLink = (href, label, cls = 'button small secondary') => href ? `<a class="${cls}" href="${esc(href)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>` : '';
 
-    /* ═════ 🔍 Chercher : la fenêtre qui prépare l'adresse ═════ */
+    /* ═════ 🔍 Chercher : la fenêtre commune des archives en ligne (heritage-archives-en-ligne.js), sur les recensements ═════ */
+    /** « 🔍 Chercher dans les recensements » : la fenêtre commune, déjà sur la ligne FranceArchives (base de noms + recensements SocFace) */
     function openSearch(o = {}) {
-        const places = [...new Set((o.places || []).map(p => String(p || '').split(',')[0].trim()).filter(Boolean))];
-        const dlg = document.createElement('dialog'); dlg.className = 'modal small-modal sf-search';
-        const y1 = Math.max(1836, Number(o.y1) || 1836), y2 = Math.min(1936, Number(o.y2) || 1936);
-        dlg.innerHTML = `<form method="dialog"><div class="modal-head"><div><span class="eyebrow">RECENSEMENTS 1836-1936 · SOCFACE</span><h2>🔍 Chercher dans les recensements</h2></div><button type="button" class="icon-button" data-x aria-label="Fermer">×</button></div>
-            <div class="h-dialog-body sf-search-body">
-                <div class="form-grid">
-                    <label>Nom<input name="last" value="${esc(o.last || '')}" autocomplete="off"></label>
-                    <label>Prénom<input name="first" value="${esc(String(o.first || '').split(/\s+/)[0] || '')}" autocomplete="off"></label>
-                    <label class="span-2">Commune<input name="place" value="${esc(o.place || places[0] || '')}" list="sf-search-places" autocomplete="off" placeholder="Tulle, Saint-Martin…"><datalist id="sf-search-places">${places.map(p => `<option value="${esc(p)}">`).join('')}</datalist></label>
-                    <label>De l’année<input name="y1" type="number" min="1836" max="1936" value="${esc(o.y1 === '' ? '' : y1)}"></label>
-                    <label>à l’année<input name="y2" type="number" min="1836" max="1936" value="${esc(o.y2 === '' ? '' : y2)}"></label>
-                    <label>Genre<select name="gender"><option value="">Tous</option><option value="f" ${o.gender === 'f' ? 'selected' : ''}>Femme</option><option value="h" ${o.gender === 'h' ? 'selected' : ''}>Homme</option></select></label>
-                </div>
-                <p class="ui-hint">Années de recensement : <span data-sf-years></span></p>
-                ${UI().notice('info', 'La recherche s’ouvre sur FranceArchives dans ton navigateur. L’app n’envoie rien d’autre que ce que tu vois dans cette adresse :')}
-                <p class="sf-url"><code data-sf-url></code></p>
-                <p class="ui-hint">Adresse vérifiée en partie : le nom, le prénom et le lieu sont sûrs ; les années et le genre viennent du code du site (s’ils ne filtrent pas, retouche-les sur la page).</p>
-                <p class="ui-hint">Les données sont une ${esc('transcription automatique (projet SocFace) : elles peuvent contenir des erreurs. Ensuite, télécharge la notice ou « Exporter les résultats » en CSV, et fais « ⤒ Importer des recensements SocFace ».')}</p>
-            </div>
-            <div class="modal-actions"><button type="button" class="button secondary" data-sf-import-from-search>⤒ Importer…</button><span class="spacer"></span><button type="button" class="button secondary" data-x>Annuler</button><a class="button" data-sf-go target="_blank" rel="noopener noreferrer">↗ Ouvrir FranceArchives</a></div></form>`;
-        document.body.appendChild(dlg);
-        const f = dlg.querySelector('form');
-        const upd = () => {
-            const v = Object.fromEntries(new FormData(f));
-            const url = SF().searchUrl(v);
-            dlg.querySelector('[data-sf-url]').textContent = url; dlg.querySelector('[data-sf-go]').href = url;
-            const ys = SF().censusYears(v.y1 || 1836, v.y2 || 1936);
-            dlg.querySelector('[data-sf-years]').textContent = ys.length ? ys.join(', ') : 'aucune entre ces deux années';
-        };
-        f.addEventListener('input', upd); upd();
-        dlg.addEventListener('click', e => {
-            if (e.target.closest('[data-x]')) dlg.close();
-            if (e.target.closest('[data-sf-go]')) setTimeout(() => dlg.close(), 50);
-            if (e.target.closest('[data-sf-import-from-search]')) { dlg.close(); openImport({personId: o.personId}); }
-        });
-        dlg.addEventListener('close', () => dlg.remove());
-        dlg.showModal();
-        return dlg;
+        if (ext.archives?.open) return ext.archives.open({personId: Number(o.personId) || 0, lot: 'socface', place: o.place || ''});
+        return null;
     }
-
-    /** ce qu'une fiche apporte à la recherche : nom, prénom, communes de vie, années possibles dans 1836-1936 */
-    async function searchFromPerson(personId) {
-        let d; try { d = await api('person', {id: personId}); } catch (e) { toast(e.message, 'error'); return; }
-        const p = d.person || {}, ctx = A().webSearchContext ? A().webSearchContext(d) : null;
-        const life = ctx && A().webSearchLifeRange ? A().webSearchLifeRange(ctx) : {from: p.birth_year, to: p.death_year};
-        const places = [...(d.events || []).map(e => e.place_name).filter(Boolean), ...((d.census?.records) || []).map(r => r.place_name).filter(Boolean)];
-        const counts = {}; places.forEach(x => { const k = String(x).split(',')[0].trim(); counts[k] = (counts[k] || 0) + 1; });
-        const ordered = Object.keys(counts).sort((a, b) => counts[b] - counts[a]);
-        openSearch({personId, last: p.last_name, first: p.first_name, places: ordered, y1: Math.max(1836, Number(life.from) || 1836), y2: Math.min(1936, Number(life.to) || 1936), gender: p.gender === 'female' ? 'f' : p.gender === 'male' ? 'h' : ''});
-    }
+    /** depuis une fiche : nom, prénom, communes et années de vie viennent de la fiche (so_context) */
+    const searchFromPerson = personId => openSearch({personId});
+    /** ce que la ligne de la fenêtre commune montre en plus : les années de recensement */
+    const archivesExtra = (e, p = {}) => {
+        if (e?.id !== 'socface' || !SF()?.censusYears) return '';
+        const ys = SF().censusYears(Math.max(1836, Number(p.y1) || 1836), Math.min(1936, Number(p.y2) || 1936));
+        return `<small class="ui-hint sf-years">🧾 Recensements : ${esc(ys.length ? ys.join(', ') : 'aucun entre ces deux années')} — transcription automatique (SocFace) à vérifier sur l’image ; ensuite « ⤒ Importer » le CSV.</small>`;
+    };
 
     /* ═════ Le contexte pour repérer les erreurs de lecture (prénoms, noms, communes, métiers) ═════ */
     const ctxCache = new Map();
@@ -354,5 +317,5 @@
     const start = () => { mo.observe(document.body, {childList: true, subtree: true}); fillEcarts(); };
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
 
-    ext.socface = {url: p => SF().searchUrl(p), openSearch, searchFromPerson, openImport, openPaste, openVerify, verifySaved, cardButtons, censusExtraHtml, summaryHtml, page, readingContext};
+    ext.socface = {url: p => SF().searchUrl(p), openSearch, searchFromPerson, archives: {extra: archivesExtra}, openImport, openPaste, openVerify, verifySaved, cardButtons, censusExtraHtml, summaryHtml, page, readingContext};
 })();

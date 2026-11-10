@@ -275,26 +275,28 @@ echo 'ok';`], {cwd: appRoot, encoding: 'utf8', env: envFor(dir)});
                 await p.waitForFunction(() => window.LCNDA_APP?.state && window.LCNDA_EXT?.sourcesOuvertes4 && window.LCNDA_SO4, null, {timeout: 20000});
                 if (dark) await p.evaluate(() => { const A = window.LCNDA_APP; localStorage.setItem('genealogie-design', JSON.stringify({...A.readDesignSettings(), preset: 'dark'})); A.applyDesign(); });
                 const noScroll = async () => { const sw = await p.evaluate(() => document.documentElement.scrollWidth - innerWidth); assert.ok(sw <= 0, `défilement horizontal : ${sw}`); };
-                await t(`${name} : fiche — boutons du bloc Poilu, « Chercher sur… » rempli, adresse montrée = adresse ouverte`, async () => {
+                await t(`${name} : fiche — boutons du bloc Poilu, fenêtre commune remplie, adresse montrée = adresse ouverte`, async () => {
                     await p.evaluate(() => window.LCNDA_APP.openPersonById(1));
                     await p.waitForSelector('[data-pblock="poilu"] [data-so4-search="fr_guerres"]', {timeout: 15000, state: 'attached'});
                     await p.evaluate(() => document.querySelector('[data-pblock="poilu"]')?.scrollIntoView());
                     await shot(p, `so4-fiche-poilu-${name}.png`);
                     await p.evaluate(() => document.querySelector('[data-pblock="poilu"] [data-so4-search="fr_guerres"]').click()); // à 390 px, le bloc peut être dans un onglet de section replié
-                    await p.waitForSelector('dialog.so4-search[open] [data-so4-go="memorialgenweb"]');
-                    assert.equal(await p.inputValue('dialog.so4-search [name=last]'), 'DUPONT');
-                    const shown = await p.textContent('[data-so4-url="memorialgenweb"]'), href = await p.getAttribute('[data-so4-go="memorialgenweb"]', 'href');
+                    await p.waitForSelector('dialog.ael-search[open] [data-ael-go="so4_memorialgenweb"]');
+                    assert.match(await p.textContent('dialog.ael-search .ael-focus.is-active'), /Guerres et monuments aux morts/);
+                    assert.equal(await p.inputValue('dialog.ael-search [name=last]'), 'DUPONT');
+                    const shown = await p.textContent('[data-ael-url="so4_memorialgenweb"]'), href = await p.getAttribute('[data-ael-go="so4_memorialgenweb"]', 'href');
                     assert.equal(shown, href); assert.match(href, /memorialgenweb\.org/);
-                    await p.click('dialog.so4-search [data-so4-tab="europe"]');
-                    await p.waitForSelector('[data-so4-go="matricula"]');
-                    assert.ok(await p.$('dialog.so4-search .so4-unverif'), 'adresse à vérifier signalée');
+                    await p.click('dialog.ael-search [data-ael-zone="eu"]');
+                    await p.waitForSelector('[data-ael-go="so4_matricula"]', {state: 'attached'});
+                    assert.match(await p.textContent('dialog.ael-search [data-ael-site="so4_matricula"]'), /Adresse non vérifiée/i, 'adresse à vérifier signalée');
                     await noScroll(); await shot(p, `so4-chercher-${name}.png`);
-                    await p.click('dialog.so4-search [data-so4-settings]');
-                    await p.waitForSelector('dialog.so4-settings[open] .so4-set-group');
-                    assert.equal(await p.$$eval('dialog.so4-settings .so4-set-group', a => a.length), 6);
+                    await p.click('dialog.ael-search [data-ael-settings]');
+                    await p.waitForSelector('dialog.ael-settings[open] details.ael-rub[open]');
+                    const opened = await p.$$eval('dialog.ael-settings details.ael-rub[open] input[data-ael-lot="4"]', a => a.length);
+                    assert.ok(opened >= 20, `les rubriques du lot sont ouvertes (${opened})`);
                     await shot(p, `so4-adresses-${name}.png`);
-                    await p.click('dialog.so4-settings .modal-actions [data-ui-x]');
-                    await p.click('dialog.so4-search .modal-actions [data-x]');
+                    await p.click('dialog.ael-settings .modal-actions [data-ui-x]');
+                    await p.click('dialog.ael-search .modal-actions [data-x]');
                 });
                 await t(`${name} : ⤒ importer une photo de tombe (fenêtre K13, écarts, ↶ Annuler)`, async () => {
                     await p.evaluate(b64 => { const bin = atob(b64), u = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i); window.LCNDA_EXT.sourcesOuvertes4.openImport({personId: 1, kind: 'sepulture', files: [new File([u], 'tombe.png', {type: 'image/png'})]}); }, PNG.toString('base64'));

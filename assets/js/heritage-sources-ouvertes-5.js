@@ -2,17 +2,16 @@
  * d'études acadiennes), 🚢 Castle Garden, 🎖 Médaillés de Sainte-Hélène, 🏭 Archives nationales du monde du travail, mémoriaux des
  * cheminots, gendarmes et policiers, 🌐 état civil consulaire, 📖 Geneawiki, 🇷🇺 Pamyat Naroda et Memorial, 📷 photographes anciens,
  * 📕 Maitron, 📜 CCFr et Calames.
- * Même modèle que heritage-sources-ouvertes.js, -2 et -3, validé par l'utilisateur :
- *  - « ↗ Ouvrir » ouvre le NAVIGATEUR sur la recherche du site, champs remplis ; quand le site garde sa recherche dans un formulaire,
- *    « 📋 Copier le nom et ouvrir ». L'app n'interroge jamais ces sites. « ⚙️ Adresses des sites » change une adresse (K2).
+ * La recherche est la fenêtre commune de tous les lots (heritage-archives-en-ligne.js) : openSearch / openSettings / openPasteText
+ * l'ouvrent déjà sur les sites de ce lot ; l'app n'interroge jamais ces sites. Ici : l'import, les boutons, « Mes sites ».
  *  - « ⤒ Importer ce que tu as trouvé » (K13) : image, PDF, page enregistrée, texte copié → média relié, source avec lien, et ce que
  *    le document propose (événements, voyage, récompense, ligne d'employeur, note, identifiant FamilySearch), coché ou non ;
  *    « c'est la même personne ? » ; rien d'écrasé ; « ↶ Annuler » (H7) ; tout reste « À vérifier ».
  *  - « Mes sites » (Réglages → Apparence → Chercher sur internet) : 🧪 Essayer un site ajouté, 💾 Réglages enregistrés pour le partager.
- * Entrées : bloc « Chercher sur internet », blocs Départs / émigration, Militaire, 🏆 Concours et récompenses, fiche d'un employeur,
+ * Entrées : blocs Départs / émigration, Militaire, 🏆 Concours et récompenses, fiche d'un employeur,
  * monographie et fiche d'un village (Geneawiki), Trésors → 📷 Dater une vieille photo (le photographe).
  * Calculs purs : app-sources-ouvertes-5-core.js (LCNDA_SOURCES_OUVERTES_5). Serveur : lib/sources_ouvertes_5.php.
- * Mode d'emploi : docs/UI.md (« 🌍 Archives en ligne, 5e lot »).
+ * Mode d'emploi : docs/UI.md (« 🔍 Archives en ligne »).
  */
 (() => {
     'use strict';
@@ -25,29 +24,18 @@
     const toast = (...a) => A().toast(...a);
     const post = (action, body) => api(action, {}, {method: 'POST', body}).then(r => r?.result ?? r);
     const KEY = 'genealogie-sources-ouvertes-5-sites';
-    const OPEN_KEY = 'genealogie-sources-ouvertes-5-open';
     const CUSTOM_KEY = 'genealogie-web-search-custom';
     const PRESETS_KEY = 'genealogie-web-search-custom-presets';
     const lsGet = (k, d) => { try { const v = localStorage.getItem(k); return v == null ? d : v; } catch (_) { return d; } };
     const lsJson = (k, d) => { try { const v = JSON.parse(lsGet(k, '')); return v ?? d; } catch (_) { return d; } };
     const custom = () => { const o = lsJson(KEY, {}); return o && typeof o === 'object' && !Array.isArray(o) ? o : {}; };
-    const pickerField = o => (window.LCNDA_PICKER || A()).pickerField(o);
     const refresh = () => { try { A().refreshScreen?.(); } catch (_) {} };
-    const context = async pid => { if (!pid) return null; const so = ext.sourcesOuvertes; if (so?.context) return so.context(pid); return api('so_context', {person_id: Number(pid) || 0}); };
     const badge = (t, k, o) => UI()?.badge ? UI().badge(t, k, o) : `<span class="ui-badge is-${esc(k)}">${esc(t)}</span>`;
     const emptyLine = (t, i = '📭') => `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">${i}</span><span class="empty-line-text">${esc(t)}</span></p>`;
     const VERIF = {oui: ['Adresse vérifiée', 'green', 'Déjà utilisée par l’app et vérifiée le 08/10/2026'], partiel: ['Vérifiée en partie', 'yellow', 'La forme de l’adresse est connue, mais pas tous ses paramètres'], non: ['Adresse non vérifiée', 'gray', 'Construite d’après la forme connue du site (le réseau n’était pas joignable) : si elle ne marche pas, change-la dans « ⚙️ Adresses des sites »']};
     const WHERE = {fiche: 'Toutes', emigration: '🧳 Émigration', militaire: '🎖 Militaire, gendarme', recompense: '🏆 Récompenses', employeur: '🏭 Employeur, métier', lieu: '📍 Un lieu', photo: '📷 Un photographe'};
 
-    /** ce que la fiche apporte à la recherche */
-    function paramsFrom(ctx, o = {}) {
-        const p = ctx?.person || {};
-        const cur = A()?.state?.currentPerson?.person;
-        const fsId = o.fsId || (cur && Number(cur.id) === Number(p.id) ? cur.familysearch_id || '' : '');
-        return {first: String(p.first || o.first || '').split(/\s+/)[0] || '', last: p.last || o.last || '', place: o.place || String(ctx?.birth?.place || ctx?.places?.[0] || '').split(',')[0],
-            y1: p.birth_year || '', y2: p.death_year || (p.birth_year ? Math.min(Number(p.birth_year) + 90, new Date().getFullYear()) : ''), birthYear: p.birth_year || '', deathYear: p.death_year || '',
-            fsId, employer: o.employer || '', photographer: o.photographer || '', county: o.county || '', insee: o.insee || ''};
-    }
+    /** une ligne de site (📷 Le photographe au dos de la carte ; la recherche, elle, est la fenêtre commune) */
     function rowHtml(s, p, cu) {
         const u = S5().url(s.key, p, cu); const v = VERIF[s.verified] || VERIF.non; const copy = S5().copyText(s.key, p);
         const hasName = !!(p.last || p.first || ((s.byPlace) && (p.place || p.county)) || (s.byPhotographer && p.photographer) || (s.key === 'anmt' && p.employer));
@@ -62,112 +50,16 @@
             ${go}</li>`;
     }
 
-    /* ═════ 🔍 Chercher : la fenêtre (rubriques par pays / thème, recherche C1, filtres C5) ═════ */
-    function openSearch(o = {}) {
-        const dlg = document.createElement('dialog'); dlg.className = 'modal modal-l so-search so5-search';
-        let ctx = null, pid = Number(o.personId) || 0, where = WHERE[o.where] ? o.where : 'fiche', group = '';
-        dlg.innerHTML = `<form method="dialog"><div class="modal-head"><div><span class="eyebrow">ARCHIVES EN LIGNE · MONDE, QUÉBEC, MÉTIERS</span><h2>🌍 FamilySearch, Québec, émigration, métiers…</h2></div><button type="button" class="icon-button" data-x aria-label="Fermer">×</button></div>
-            <div class="h-dialog-body so-search-body" data-so5-body>${UI().spinner ? UI().spinner('Ce que la fiche sait…') : '…'}</div>
-            <div class="modal-actions"><button type="button" class="button secondary" data-so5-settings>⚙️ Adresses des sites</button><span class="spacer"></span><button type="button" class="button secondary" data-so5-paste-in>📋 Coller un texte</button><button type="button" class="button" data-so5-import-from-search>⤒ Importer ce que tu as trouvé…</button></div></form>`;
-        document.body.appendChild(dlg);
-        const body = dlg.querySelector('[data-so5-body]');
-        const val = () => { const v = {...paramsFrom(ctx, o)}; dlg.querySelectorAll('.so-grid [name]').forEach(i => { v[i.name] = i.value; }); v.birthYear = v.y1 || v.birthYear; v.deathYear = v.y2 || v.deathYear; return v; };
-        const sites = () => S5().forPlace(where, {...val()});
-        const updLinks = () => {
-            const box = body.querySelector('[data-so5-links]'); if (!box) return;
-            const p = val(), cu = custom(), q = S5().fold(body.querySelector('[data-so5-q]')?.value || '');
-            const list = sites().filter(s => !q || S5().fold([s.label, s.country, S5().groupOf(s.group)?.label, s.note].join(' ')).includes(q));
-            const counts = {}; list.forEach(s => { counts[s.group] = (counts[s.group] || 0) + 1; });
-            if (group && !counts[group]) group = '';
-            body.querySelector('[data-so5-pills]').innerHTML = [`<button type="button" class="${group ? '' : 'is-active'}" data-so5-group="">Tout (${list.length})</button>`, ...S5().GROUPS.filter(g => counts[g.id]).map(g => `<button type="button" class="${group === g.id ? 'is-active' : ''}" data-so5-group="${esc(g.id)}">${esc(g.icon)} ${esc(g.label.replace(/^(France|Canada|États-Unis|Monde) — /, ''))} (${counts[g.id]})</button>`)].join('');
-            const shown = list.filter(s => !group || s.group === group);
-            box.innerHTML = shown.length ? S5().GROUPS.map(g => { const l = shown.filter(s => s.group === g.id); return l.length ? `<section class="so5-group"><h4>${esc(g.icon)} ${esc(g.label)}</h4>${g.id === 'urss' ? '<p class="ui-hint">Les victimes de la répression politique : ce qui vient de Memorial reste sobre sur la fiche et n’entre jamais dans un jeu.</p>' : ''}<ul class="so-links">${l.map(s => rowHtml(s, p, cu)).join('')}</ul></section>` : ''; }).join('')
-                : emptyLine(q ? `Aucun site pour « ${body.querySelector('[data-so5-q]')?.value || ''} ».` : 'Aucun site pour ces années à cet endroit.', '🔍');
-            body.querySelectorAll('[data-so5-extra]').forEach(l => { l.hidden = !l.dataset.so5Extra.split(' ').includes(where); });
-        };
-        const draw = () => {
-            const p = paramsFrom(ctx, o);
-            const living = ctx?.person && window.LCNDA_SOURCES_OUVERTES?.livingRisk?.(ctx.person);
-            body.innerHTML = `${o.personId ? '' : `<div class="so-who"><span class="pk-lab">À partir d’une fiche (facultatif)</span>${pickerField({name: 'so5_pid', kind: 'person', value: pid || null})}</div>`}
-                ${living ? UI().notice('warn', 'Cette personne est peut-être vivante : ces recherches restent dans ton navigateur, rien n’est partagé. Pense à sa vie privée.') : ''}
-                <div class="form-grid so-grid">
-                    <label>Nom<input name="last" value="${esc(p.last)}" autocomplete="off"></label>
-                    <label>Prénom<input name="first" value="${esc(p.first)}" autocomplete="off"></label>
-                    <label>Lieu<input name="place" value="${esc(p.place)}" autocomplete="off" placeholder="Tulle, Roubaix, Québec…"></label>
-                    <label>De l’année<input name="y1" type="number" min="1500" max="2100" value="${esc(p.y1)}"></label>
-                    <label>à l’année<input name="y2" type="number" min="1500" max="2100" value="${esc(p.y2)}"></label>
-                    <label>Pour<select name="so5_where">${Object.entries(WHERE).map(([k, l]) => `<option value="${k}" ${k === where ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
-                    <label data-so5-extra="employeur fiche">Employeur<input name="employer" value="${esc(p.employer)}" autocomplete="off" placeholder="Filature Motte-Bossut…"></label>
-                    <label data-so5-extra="photo">Photographe (au dos de la carte)<input name="photographer" value="${esc(p.photographer)}" autocomplete="off" placeholder="Nadar, Disdéri…"></label>
-                </div>
-                ${UI().notice('info', 'Chaque recherche s’ouvre dans ton navigateur. L’app n’envoie rien d’autre que ce que tu vois dans l’adresse, et ne se connecte jamais à ces sites.')}
-                <div class="so5-q"><input type="search" data-so5-q placeholder="Chercher un site… (Québec, cheminots, Maitron…)" autocomplete="off" aria-label="Chercher un site"></div>
-                <div class="ui-filters so5-pills" data-so5-pills></div>
-                <div data-so5-links></div>
-                <p class="ui-hint">Ce qu’on lit sur ces sites est à vérifier : homonymes, fautes de lecture. Ensuite, enregistre la fiche (image, PDF, page) ou copie son texte, et fais « ⤒ Importer ce que tu as trouvé ».</p>`;
-            updLinks();
-        };
-        dlg.addEventListener('input', e => { if (e.target.closest('.so-grid') || e.target.matches('[data-so5-q]')) updLinks(); });
-        dlg.addEventListener('keydown', e => { if (e.key === 'Escape' && e.target.matches('[data-so5-q]') && e.target.value) { e.preventDefault(); e.stopPropagation(); e.target.value = ''; updLinks(); } });
-        dlg.addEventListener('change', async e => {
-            if (e.target.name === 'so5_where') { where = e.target.value; group = ''; updLinks(); return; }
-            if (e.target.name === 'so5_pid') { pid = Number(e.target.value) || 0; try { ctx = await context(pid); } catch (err) { toast(err.message, 'error'); } draw(); return; }
-            if (e.target.closest('.so-grid')) updLinks();
-        });
-        dlg.addEventListener('click', e => {
-            if (e.target.closest('[data-x]')) { dlg.close(); return; }
-            const g = e.target.closest('[data-so5-group]'); if (g) { group = g.dataset.so5Group; updLinks(); return; }
-            const c = e.target.closest('[data-so5-copy]'); if (c) { copyAndOpen(c.dataset.text, c.dataset.href); return; }
-            if (e.target.closest('[data-so5-settings]')) { openSettings(() => updLinks()); return; }
-            if (e.target.closest('[data-so5-import-from-search]')) { dlg.close(); openImport({personId: pid}); return; }
-            if (e.target.closest('[data-so5-paste-in]')) { dlg.close(); openPasteText({personId: pid}); }
-        });
-        dlg.addEventListener('close', () => dlg.remove());
-        dlg.showModal();
-        context(pid).then(c => { ctx = c; draw(); }).catch(() => { ctx = null; draw(); });
-        return dlg;
-    }
+    /* ═════ 🔍 Chercher et ⚙️ Adresses des sites : la fenêtre commune de tous les lots (heritage-archives-en-ligne.js) ═════ */
+    /** la fenêtre commune, déjà sur les sites de ce lot utiles à cet endroit (where : fiche, emigration, militaire, recompense, employeur, lieu, photo) */
+    const openSearch = (o = {}) => ext.archives?.open({...o, lot: 5, where: WHERE[o.where] ? o.where : 'fiche', place: o.place || '', placeOnly: !o.personId && !!o.place && !o.employer});
+    const openSettings = onChange => ext.archives?.openSettings({lot: 5, onChange});
     /** un site sans recherche dans l'adresse : « NOM Prénom » dans le presse-papiers, puis la page */
     function copyAndOpen(text, href) {
         const u = S5().cleanUrl(href); if (!u) return;
         const done = ok => toast(ok && text ? `« ${text} » est copié : colle-le dans la case du site.` : `Écris « ${text} » dans la case du site.`);
         try { if (navigator.clipboard && text) navigator.clipboard.writeText(text).then(() => done(true), () => done(false)); else done(false); } catch (_) { done(false); }
         window.open(u, '_blank', 'noopener');
-    }
-
-    /* ═════ ⚙️ Adresses des sites (K2) : rubriques repliables + recherche C1 ═════ */
-    function openSettings(onChange) {
-        const dlg = document.createElement('dialog'); dlg.className = 'modal so-settings so5-settings';
-        let open = lsJson(OPEN_KEY, []); if (!Array.isArray(open)) open = [];
-        const ph = s => S5().url(s.key, {first: '{prénom}', last: '{nom}', place: '{lieu}', birthYear: '{annee_naissance}', employer: '{employeur}', photographer: '{photographe}'}).replace(/%7B/g, '{').replace(/%7D/g, '}').replace(/%C3%A9/g, 'é').replace(/%22/g, '"').replace(/%20/g, ' ');
-        const rows = () => { const cu = custom(); return S5().GROUPS.map(g => { const l = S5().SITES.filter(s => s.group === g.id); const n = l.filter(s => cu[s.key]).length;
-            return `<details class="so5-rub" data-so5-rub="${esc(g.id)}" ${open.includes(g.id) ? 'open' : ''}><summary><b>${esc(g.icon)} ${esc(g.label)}</b> <small class="muted">${l.length} site${l.length > 1 ? 's' : ''}${n ? ` · ${n} adresse${n > 1 ? 's' : ''} à toi` : ''}</small></summary>
-                ${l.map(s => `<div class="so-set-row" data-so5-text="${esc(S5().fold([s.label, s.country, g.label].join(' ')))}"><label><span><b>${esc(s.icon)} ${esc(s.label)}</b> ${badge((VERIF[s.verified] || VERIF.non)[0], (VERIF[s.verified] || VERIF.non)[1])}</span>
-                <input name="${esc(s.key)}" value="${esc(cu[s.key] || '')}" placeholder="${esc(ph(s))}" autocomplete="off" spellcheck="false"></label></div>`).join('')}</details>`; }).join(''); };
-        dlg.innerHTML = `<form method="dialog"><div class="modal-head"><div><span class="eyebrow">ARCHIVES EN LIGNE · RÉGLAGES</span><h2>⚙️ Adresses des sites — monde, Québec, métiers</h2></div><button type="button" class="button small secondary" data-ui-reset>↺ Remettre comme au départ</button><button type="button" class="icon-button" data-ui-x aria-label="Fermer">×</button></div>
-            <div class="h-dialog-body"><p class="ui-hint">Si un site change son adresse de recherche (ou si tu connais l’adresse exacte d’un mémorial), écris-la ici. Case vide = l’adresse de l’app (en gris). Mots remplacés : {nom}, {prénom}, {nom_complet}, {lieu}, {de}, {à}, {annee_naissance}, {annee_deces}, {departement}, {employeur}, {photographe}.</p>
-            <div class="so5-q"><input type="search" data-so5-sq placeholder="Chercher un site… (Québec, cheminots…)" autocomplete="off" aria-label="Chercher un site"></div>
-            <p class="ui-hint" data-so5-scount></p>
-            <div class="so-set" data-so-set>${rows()}</div></div>
-            <div class="modal-actions"><span class="spacer"></span><button type="button" class="button" data-ui-x>Fermer</button></div></form>`;
-        document.body.appendChild(dlg);
-        const filter = () => {
-            const q = S5().fold(dlg.querySelector('[data-so5-sq]').value); let n = 0;
-            dlg.querySelectorAll('.so5-rub').forEach(d => { let k = 0; d.querySelectorAll('.so-set-row').forEach(r => { const ok = !q || r.dataset.so5Text.includes(q); r.hidden = !ok; if (ok) k++; }); d.hidden = !k; if (q && k) d.open = true; n += k; });
-            dlg.querySelector('[data-so5-scount]').textContent = q ? (n ? `${n} site${n > 1 ? 's' : ''} trouvé${n > 1 ? 's' : ''}` : `Aucun site pour « ${dlg.querySelector('[data-so5-sq]').value} ».`) : '';
-        };
-        UI().autoSaveDialog(dlg, {keys: [KEY], label: 'Adresse d’un site',
-            save: () => { const o = {}; dlg.querySelectorAll('[data-so-set] input').forEach(i => { const v = i.value.trim(); if (v && S5().cleanUrl(v.replace(/[{}]/g, ''))) o[i.name] = v.slice(0, 600); }); if (Object.keys(o).length) localStorage.setItem(KEY, JSON.stringify(o)); else localStorage.removeItem(KEY); },
-            reload: () => { dlg.querySelector('[data-so-set]').innerHTML = rows(); filter(); },
-            reset: () => { try { localStorage.removeItem(KEY); } catch (_) {} },
-            onChange: () => onChange?.()});
-        dlg.addEventListener('input', e => { if (e.target.matches('[data-so5-sq]')) filter(); });
-        dlg.addEventListener('keydown', e => { if (e.key === 'Escape' && e.target.matches('[data-so5-sq]') && e.target.value) { e.preventDefault(); e.stopPropagation(); e.target.value = ''; filter(); } });
-        dlg.addEventListener('toggle', e => { const d = e.target.closest?.('.so5-rub'); if (!d || dlg.querySelector('[data-so5-sq]').value) return; open = [...dlg.querySelectorAll('.so5-rub[open]')].map(x => x.dataset.so5Rub); try { localStorage.setItem(OPEN_KEY, JSON.stringify(open)); } catch (_) {} }, true);
-        dlg.addEventListener('click', e => { if (e.target.closest('[data-ui-x]')) dlg.close(); });
-        dlg.addEventListener('close', () => { onChange?.(); dlg.remove(); });
-        dlg.showModal();
-        return dlg;
     }
 
     /* ═════ ⤒ Importer ce qu'on a téléchargé ou copié (K13) ═════ */
@@ -312,26 +204,8 @@
             intro: 'Ce que tu as téléchargé ou enregistré : un acte en image ou en PDF, la page enregistrée par ton navigateur (« Enregistrer sous… »), ou un texte copié (fiche FamilySearch, WikiTree, Fichier Origine, Castle Garden, médaillé de Sainte-Hélène, registre du personnel, notice du Maitron…). Rien n’est demandé au site : seul ton fichier est lu. Pas de fichier ? « 📋 Coller un texte ».',
             noun: 'document', analyze, run, files: o.files});
     }
-    /** pas de fichier : le texte copié d'une fiche → la même fenêtre d'import */
-    function openPasteText(o = {}) {
-        const dlg = document.createElement('dialog'); dlg.className = 'modal so-paste so5-paste';
-        dlg.innerHTML = `<form method="dialog"><div class="modal-head"><div><span class="eyebrow">ARCHIVES EN LIGNE</span><h2>📋 Coller un texte</h2></div><button type="button" class="icon-button" data-x aria-label="Fermer">×</button></div>
-            <div class="h-dialog-body"><label>Lien de la fiche (facultatif)<input name="link" inputmode="url" placeholder="https://…" autocomplete="off"></label>
-            <label>Texte de la fiche<textarea name="text" rows="9" placeholder="Nom : DUPONT&#10;Prénom : Jean&#10;Date de baptême : 3 mai 1650…"></textarea></label>
-            <p class="ui-hint">Sélectionne la fiche sur le site, copie-la, colle-la ici : l’app reconnaît la sorte (FamilySearch, WikiTree, Fichier Origine, Castle Garden, Sainte-Hélène, registre du personnel, Maitron, Pamyat Naroda…) et remplit les cases.</p></div>
-            <div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-x>Annuler</button><button type="submit" class="button">Continuer</button></div></form>`;
-        document.body.appendChild(dlg);
-        dlg.addEventListener('click', e => { if (e.target.closest('[data-x]')) dlg.close(); });
-        dlg.querySelector('form').addEventListener('submit', e => {
-            e.preventDefault(); const link = dlg.querySelector('[name=link]').value.trim(), text = dlg.querySelector('[name=text]').value;
-            if (link && !S5().cleanUrl(link)) return UI().fail?.(dlg.querySelector('[name=link]'), 'Colle une adresse qui commence par https://');
-            if (!text.trim() && !link) return UI().fail?.(dlg.querySelector('[name=text]'), 'Colle le texte de la fiche.');
-            dlg.close(); openImport({...o, link, text, textOnly: true, files: [new File([text || link], 'texte-colle.txt', {type: 'text/plain'})]});
-        });
-        dlg.addEventListener('close', () => dlg.remove());
-        dlg.showModal(); setTimeout(() => dlg.querySelector('[name=text]')?.focus(), 30);
-        return dlg;
-    }
+    /** pas de fichier : le texte copié (ou le lien) → le seul « 🔗 Coller un lien » de l'app, qui revient à openImport */
+    const openPasteText = (o = {}) => ext.archives?.openPaste({...o, lot: 5});
 
     /* ═════ 📷 Le photographe au dos de la carte (Trésors → Dater une vieille photo) ═════ */
     function openPhotographer(o = {}) {
@@ -404,7 +278,6 @@
     const BTN = {fiche: '🌍 FamilySearch, Québec, métiers…', emigration: '🌍 Québec, Castle Garden…', militaire: '🌍 Sainte-Hélène, gendarmes, Pamyat Naroda…', recompense: '🌍 Médaillés de Sainte-Hélène…', employeur: '🏭 Registres du personnel (ANMT)…', lieu: '📖 Geneawiki…', photo: '📷 Chercher le photographe…'};
     const btn = (where, pid, o = {}) => `<button type="button" class="button small secondary" data-so5-search="${esc(where)}" data-pid="${Number(pid) || 0}"${o.place ? ` data-place="${esc(o.place)}"` : ''}${o.employer ? ` data-employer="${esc(o.employer)}"` : ''} title="Ouvre la recherche dans ton navigateur, nom et années déjà remplis">${esc(BTN[where] || BTN.fiche)}</button>`;
     const importBtn = (pid, kind = '') => `<button type="button" class="button small secondary" data-so5-import="${esc(kind)}" data-pid="${Number(pid) || 0}" title="Range le document trouvé, crée la source et propose ce qu’il dit">⤒ Importer…</button>`;
-    const panelButton = pid => pid ? `<div class="so-ws so5-ws">${btn('fiche', pid)}<button type="button" class="button small secondary" data-so5-paste data-pid="${Number(pid)}">📋 Coller un texte</button></div>` : '';
     const geneawikiLinks = (commune, county, insee = '') => {
         const u1 = commune ? S5().url('geneawiki', {place: commune, insee}, custom()) : ''; const u2 = county ? S5().url('geneawiki', {county}, custom()) : '';
         return u1 || u2 ? `<p class="so-row so5-row so5-geneawiki">${u1 ? `<a class="button small secondary" href="${esc(u1)}" target="_blank" rel="noopener noreferrer" title="La page de la commune sur Geneawiki : registres, archives, histoire">📖 Geneawiki : ${esc(commune)}</a>` : ''}${u2 ? `<a class="button small secondary" href="${esc(u2)}" target="_blank" rel="noopener noreferrer">📖 Geneawiki : ${esc(county)}</a>` : ''}</p>` : '';
@@ -418,16 +291,16 @@
         // « Chercher sur internet » : un site qui garde sa recherche dans un formulaire → le nom est aussi copié
         const ws = e.target.closest('a[data-ws-site^="so5_"]'); if (ws) { const site = S5()?.site(ws.dataset.wsSite.slice(4)); const nm = ws.closest('.web-search-panel')?.dataset.so5Name || ''; if (site?.copy && nm) { try { navigator.clipboard?.writeText(nm).then(() => toast(`« ${nm} » est aussi copié : colle-le dans la case du site.`), () => {}); } catch (_) {} } }
     });
-    const BLOCK_WHERE = {web_search: 'fiche', voyages: 'emigration', military: 'militaire', awards: 'recompense'};
+    const BLOCK_WHERE = {voyages: 'emigration', military: 'militaire', awards: 'recompense'};
     const BLOCK_KIND = {voyages: 'passager', military: 'medaille_sh', awards: 'medaille_sh'};
     function decorate(root = document) {
         const ws = root.querySelector?.('#workspace') || root; if (!ws?.querySelectorAll || !S5()) return;
         const cur = A()?.state?.currentPerson?.person; const pid = Number(cur?.id) || 0;
         const ro = document.body.classList.contains('is-kiosk') || Number(cur?.is_locked) === 1 || document.documentElement.classList.contains('ms-open');
+        if (pid) ws.querySelectorAll('[data-pblock="web_search"] .web-search-panel:not([data-so5-name])').forEach(panel => { panel.dataset.so5Name = [String(cur.last_name || '').toUpperCase(), String(cur.first_name || '').split(/\s+/)[0]].filter(Boolean).join(' '); });
         if (pid) ws.querySelectorAll('[data-pblock]').forEach(card => {
             const key = card.dataset.pblock, where = BLOCK_WHERE[key]; if (!where || card.querySelector(':scope .so5-row, :scope .so5-ws')) return;
             const bodyEl = card.querySelector('.card-body'); if (!bodyEl) return;
-            if (key === 'web_search') { const panel = bodyEl.querySelector('.web-search-panel'); if (panel) { panel.dataset.so5Name = [String(cur.last_name || '').toUpperCase(), String(cur.first_name || '').split(/\s+/)[0]].filter(Boolean).join(' '); panel.insertAdjacentHTML('afterbegin', panelButton(pid)); } return; }
             if (!bodyEl.textContent.trim()) return;
             bodyEl.insertAdjacentHTML('beforeend', `<p class="so-row so5-row">${btn(where, pid)}${ro ? '' : importBtn(pid, BLOCK_KIND[key] || '')}</p>`);
         });
@@ -464,5 +337,5 @@
     };
     if (document.readyState === 'complete') start(); else window.addEventListener('load', start);
 
-    ext.sourcesOuvertes5 = {openSearch, openImport, openPasteText, openSettings, openPhotographer, testCustom, customPresets, btn, importBtn, panelButton, decorate, geneawikiLinks};
+    ext.sourcesOuvertes5 = {openSearch, openImport, openPasteText, openSettings, openPhotographer, testCustom, customPresets, btn, importBtn, decorate, geneawikiLinks};
 })();

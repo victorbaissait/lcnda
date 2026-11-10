@@ -286,33 +286,34 @@ echo 'ok';`], {cwd: appRoot, encoding: 'utf8', env: envFor(dir)});
                     assert.ok(await p.$('[data-so-import="mdh"]'), 'import depuis le bloc Poilu');
                     await noScroll();
                 });
-                await t(`${name} : 🔍 Chercher — l’adresse affichée est celle qu’on ouvre, rien n’est demandé aux sites`, async () => {
+                await t(`${name} : 🔍 Chercher (fenêtre commune) — l’adresse affichée est celle qu’on ouvre, rien n’est demandé aux sites`, async () => {
                     await p.$eval('[data-so-search="matricule"]', b => b.click());
-                    await p.waitForSelector('dialog.so-search .so-link [data-so-go]', {timeout: 15000});
-                    const cls = await p.textContent('dialog.so-search [data-so-classe]'); assert.match(cls, /Classe 1912/);
-                    assert.equal(await p.inputValue('dialog.so-search [name=dept]'), '19');
+                    await p.waitForSelector('dialog.ael-search .ael-site [data-ael-go]', {timeout: 15000});
+                    assert.match(await p.textContent('dialog.ael-search .ael-focus.is-active'), /Registres matricules/, 'ouverte sur la rubrique du bouton');
+                    const cls = await p.textContent('dialog.ael-search [data-ael-classe]'); assert.match(cls, /Classe 1912/);
+                    assert.equal(await p.inputValue('dialog.ael-search [name=dept]'), '19');
                     await shot(p, `so-chercher-matricule-${name}.png`);
-                    await p.click('dialog.so-search [data-so-tab="presse"]');
-                    await p.fill('dialog.so-search [name=place]', 'Brive & Tulle');
-                    const shown = await p.textContent('[data-so-url="gallica"]'), href = await p.getAttribute('[data-so-go="gallica"]', 'href');
+                    await p.click('dialog.ael-search [data-ael-zone=""]'); await p.click('dialog.ael-search [data-ael-theme="presse"]');
+                    await p.fill('dialog.ael-search [name=place]', 'Brive & Tulle');
+                    const shown = await p.textContent('[data-ael-url="so_gallica"]'), href = await p.getAttribute('[data-ael-go="so_gallica"]', 'href');
                     assert.equal(shown, href); assert.ok(href.includes('Brive%20%26%20Tulle'), href);
-                    assert.ok(await p.$('dialog.so-search .ui-badge'), 'RetroNews : « En partie payant »');
+                    assert.match(await p.textContent('dialog.ael-search [data-ael-site="so_retronews"]'), /En partie payant/i, 'RetroNews : « En partie payant »');
                     await shot(p, `so-chercher-presse-${name}.png`);
-                    await p.click('dialog.so-search [data-so-tab="mdh"]');
-                    assert.ok((await p.$$('dialog.so-search [data-so-go]')).length >= 5);
+                    await p.click('dialog.ael-search [data-ael-theme="soldats"]');
+                    assert.ok((await p.$$('dialog.ael-search [data-ael-go^="so_mdh_"]')).length >= 5);
                     await noScroll();
-                    await p.click('dialog.so-search .modal-head [data-x]');
+                    await p.click('dialog.ael-search .modal-head [data-x]');
                 });
-                await t(`${name} : ⚙️ Adresses des sites — gardé tout de suite (K2), utilisé, ↺`, async () => {
-                    await p.$eval('[data-so-search="leonore"]', b => b.click()); await p.waitForSelector('dialog.so-search [data-so-go="leonore"]');
-                    await p.click('dialog.so-search [data-so-settings]'); await p.waitForSelector('dialog.so-settings[open]');
-                    await p.fill('dialog.so-settings [name=leonore]', 'https://exemple.org/l?nom={nom}'); await p.waitForTimeout(800);
-                    assert.match(await p.evaluate(() => localStorage.getItem('genealogie-sources-ouvertes-sites')), /exemple\.org/);
+                await t(`${name} : ⚙️ Adresses des sites (un seul écran) — gardé tout de suite (K2) dans la clé du lot, ↺`, async () => {
+                    await p.$eval('[data-so-search="leonore"]', b => b.click()); await p.waitForSelector('dialog.ael-search [data-ael-go="so_leonore"]');
+                    await p.click('dialog.ael-search [data-ael-settings]'); await p.waitForSelector('dialog.ael-settings[open]');
+                    await p.fill('dialog.ael-settings [name=so_leonore]', 'https://exemple.org/l?nom={nom}'); await p.waitForTimeout(800);
+                    assert.match(await p.evaluate(() => localStorage.getItem('genealogie-sources-ouvertes-sites')), /exemple[.]org/);
                     await shot(p, `so-adresses-${name}.png`);
-                    await p.click('dialog.so-settings [data-ui-reset]'); await p.waitForTimeout(200);
+                    await p.click('dialog.ael-settings [data-ui-reset]'); await p.waitForTimeout(200);
                     assert.equal(await p.evaluate(() => localStorage.getItem('genealogie-sources-ouvertes-sites')), null);
-                    await p.click('dialog.so-settings .modal-actions [data-ui-x]');
-                    await p.click('dialog.so-search .modal-head [data-x]');
+                    await p.click('dialog.ael-settings .modal-actions [data-ui-x]');
+                    await p.click('dialog.ael-search .modal-head [data-x]');
                 });
                 await t(`${name} : ⤒ Importer une image — document à côté des cases, « c’est la même personne ? », import, ↶ Annuler`, async () => {
                     await p.evaluate(b64 => { const bin = atob(b64), u = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i);

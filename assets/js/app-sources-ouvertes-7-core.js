@@ -26,7 +26,7 @@
  *
  * Adresses : AUCUNE n'a pu être ouverte le jour où elles ont été écrites (le réseau n'était pas joignable) : verified 'non'
  * partout ; elles suivent la forme connue des sites (moteur MediaWiki pour les wikis, recherche Google limitée au site sinon)
- * et se changent dans « ⚙️ Réglages des sites » (docs/UI.md, « 🌍 Archives en ligne, 7e lot »).
+ * et se changent dans « ⚙️ Adresses des sites » (docs/UI.md, « 🌍 Archives en ligne, 7e lot »).
  */
 (function (root, factory) {
     const api = factory();
@@ -100,7 +100,7 @@
         // 📒 Cercles généalogiques : un lien par département (le sien d'abord, réglable)
         {key: 'cercle_dept', group: 'fr_cercles', country: 'France', icon: '📒', label: 'Le cercle généalogique du département (relevés gratuits)',
             home: 'https://www.genefede.eu/', search: '', verified: 'non', paid: false, needs: 'dept',
-            note: 'Les cercles relèvent les actes de leurs communes et les mettent souvent en ligne gratuitement. Écris l’adresse de ton cercle pour chaque département dans « ⚙️ Réglages des sites » ; sinon l’app ouvre une recherche « cercle généalogique + département ».',
+            note: 'Les cercles relèvent les actes de leurs communes et les mettent souvent en ligne gratuitement. Écris l’adresse de ton cercle pour chaque département dans « ⚙️ Adresses des sites » ; sinon l’app ouvre une recherche « cercle généalogique + département ».',
             build: p => cercleUrl(p.deptCode || p.county, null, p.county),
             where: ['fiche', 'lieu'], kind: 'acte'},
         {key: 'ffg_annuaire', group: 'fr_cercles', country: 'France', icon: '📇', label: 'Fédération française de généalogie — annuaire des cercles',

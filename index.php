@@ -73,14 +73,8 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/mode-simple.css?v=7">
     <link rel="stylesheet" href="assets/css/formats.css?v=1">
     <link rel="stylesheet" href="assets/css/tableur.css?v=7">
-    <link rel="stylesheet" href="assets/css/socface.css?v=3">
-    <link rel="stylesheet" href="assets/css/sources-ouvertes.css?v=1">
-    <link rel="stylesheet" href="assets/css/sources-ouvertes-2.css?v=1">
-    <link rel="stylesheet" href="assets/css/sources-ouvertes-3.css?v=1">
-    <link rel="stylesheet" href="assets/css/sources-ouvertes-4.css?v=1">
-    <link rel="stylesheet" href="assets/css/sources-ouvertes-5.css?v=1">
-    <link rel="stylesheet" href="assets/css/sources-ouvertes-6.css?v=1">
-    <link rel="stylesheet" href="assets/css/sources-ouvertes-7.css?v=1">
+    <link rel="stylesheet" href="assets/css/socface.css?v=4">
+    <link rel="stylesheet" href="assets/css/archives-en-ligne.css?v=1">
     <link rel="stylesheet" href="assets/css/semaine.css?v=3">
     <link rel="stylesheet" href="assets/css/ou-chercher.css?v=1">
     <link rel="stylesheet" href="assets/css/calculette.css?v=1">
@@ -1163,7 +1157,7 @@ header('X-Content-Type-Options: nosniff');
 <script>window.LCNDA_GENEALOGY = <?= json_encode(GENEALOGY_ID === '' ? 'main' : GENEALOGY_ID) ?>;window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;window.LCNDA_GRAPHS = <?php require_once __DIR__ . '/lib/graphs.php'; echo json_encode($ready ? graphs_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_INVALID_UTF8_SUBSTITUTE); ?>;</script>
 <script src="assets/js/app-fond.js?v=9" defer></script>
 <script src="assets/js/app-accord.js?v=1" defer></script>
-<script src="assets/js/app.js?v=547" defer></script>
+<script src="assets/js/app.js?v=548" defer></script>
 <script src="assets/js/app-indicateurs.js?v=1" defer></script>
 <script src="assets/js/app-picker.js?v=25" defer></script>
 <script src="assets/js/app-media-picker.js?v=3" defer></script>
@@ -1239,7 +1233,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-calendar-more.js?v=5" defer></script>
 <script src="assets/js/heritage-lecture-autrefois.js?v=2" defer></script>
 <script src="assets/js/heritage-links.js?v=22" defer></script>
-<script src="assets/js/heritage-more.js?v=303" defer></script>
+<script src="assets/js/heritage-more.js?v=304" defer></script>
 <script src="assets/js/heritage-controle.js?v=7" defer></script>
 <script src="assets/js/heritage-records.js?v=12" defer></script>
 <script src="assets/js/heritage-research.js?v=39" defer></script>
@@ -1321,21 +1315,23 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-research-gaps.js?v=7" defer></script>
 <script src="assets/js/app-lecture-auto.js?v=2" defer></script>
 <script src="assets/js/app-socface-core.js?v=2" defer></script>
-<script src="assets/js/heritage-socface.js?v=5" defer></script>
+<script src="assets/js/heritage-socface.js?v=7" defer></script>
 <script src="assets/js/app-sources-ouvertes-core.js?v=1" defer></script>
-<script src="assets/js/heritage-sources-ouvertes.js?v=1" defer></script>
+<script src="assets/js/heritage-sources-ouvertes.js?v=2" defer></script>
 <script src="assets/js/app-sources-ouvertes-2-core.js?v=1" defer></script>
-<script src="assets/js/heritage-sources-ouvertes-2.js?v=1" defer></script>
+<script src="assets/js/heritage-sources-ouvertes-2.js?v=2" defer></script>
 <script src="assets/js/app-sources-ouvertes-3-core.js?v=1" defer></script>
-<script src="assets/js/heritage-sources-ouvertes-3.js?v=1" defer></script>
+<script src="assets/js/heritage-sources-ouvertes-3.js?v=2" defer></script>
 <script src="assets/js/app-sources-ouvertes-4-core.js?v=1" defer></script>
-<script src="assets/js/heritage-sources-ouvertes-4.js?v=1" defer></script>
+<script src="assets/js/heritage-sources-ouvertes-4.js?v=2" defer></script>
 <script src="assets/js/app-sources-ouvertes-5-core.js?v=1" defer></script>
-<script src="assets/js/heritage-sources-ouvertes-5.js?v=2" defer></script>
+<script src="assets/js/heritage-sources-ouvertes-5.js?v=3" defer></script>
 <script src="assets/js/app-sources-ouvertes-6-core.js?v=1" defer></script>
-<script src="assets/js/heritage-sources-ouvertes-6.js?v=1" defer></script>
-<script src="assets/js/app-sources-ouvertes-7-core.js?v=1" defer></script>
-<script src="assets/js/heritage-sources-ouvertes-7.js?v=1" defer></script>
+<script src="assets/js/heritage-sources-ouvertes-6.js?v=2" defer></script>
+<script src="assets/js/app-sources-ouvertes-7-core.js?v=2" defer></script>
+<script src="assets/js/heritage-sources-ouvertes-7.js?v=2" defer></script>
+<script src="assets/js/app-archives-en-ligne-core.js?v=1" defer></script>
+<script src="assets/js/heritage-archives-en-ligne.js?v=1" defer></script>
 <script src="assets/js/heritage-journal.js?v=3" defer></script>
 <script src="assets/js/heritage-semaine.js?v=3" defer></script>
 <script src="assets/js/app-ou-chercher-core.js?v=1" defer></script>

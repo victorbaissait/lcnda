@@ -3,19 +3,16 @@
  * 🧭 FamilySearch Wiki, GenWiki, GOV · 🇩🇪 CompGen, Archion (PAYANT) · 🗺 Archivní mapy, Mapire · 📰 Arcanum ADT ·
  * 🏛 Ancestry Library Edition (gratuit seulement en bibliothèque).
  *
- * Le modèle commun des lots « Archives en ligne », validé par l'utilisateur :
- *  - « 🔍 Chercher » ouvre le NAVIGATEUR sur la recherche du site, champs remplis ; l'app n'interroge jamais ces sites. Quand
- *    le site ne garde pas la recherche dans son adresse, le nom (ou le lieu) est mis dans le presse-papiers.
- *  - Filtres C5 par rubrique (pays / thème) avec le nombre, « Gratuites seulement » (coché au départ), pastille PAYANT.
- *  - « ⚙️ Réglages des sites » (K2) : sites montrés ou cachés par rubrique, adresse à soi pour chaque site, son cercle
- *    généalogique pour chaque département, « ＋ Mon site ».
+ * La recherche (filtres, « Gratuites seulement », PAYANT) et « ⚙️ Adresses des sites » (sites montrés ou cachés, adresse à soi,
+ * cercle généalogique par département, « Mes sites ») sont la fenêtre commune de tous les lots (heritage-archives-en-ligne.js) :
+ * openSearch / openSettings / openPasteLink l'ouvrent déjà sur ce lot. L'app n'interroge jamais ces sites.
  *  - « ⤒ Importer ce que tu as trouvé » (K13) : image, PDF, page enregistrée (.html : son texte seul), texte ou lien collé →
  *    média relié (fiche et/ou lieu), source avec le lien, ajouts cochés (événement, « Juste parmi les nations », placement
  *    d'enfant) avec « c'est la même personne ? » ; rien n'est écrasé ; « ↶ Annuler » (H7) ; tout reste « À vérifier ».
- * Entrées : « Chercher sur internet » de la fiche, bloc « 👶 Enfant placé », monographie d'un lieu (aide par lieu, monument,
+ * Entrées : bloc « 👶 Enfant placé », monographie d'un lieu (aide par lieu, monument,
  * cadastre ancien, cercle), bloc Militaire (monument aux morts).
  * Calculs purs : app-sources-ouvertes-7-core.js (LCNDA_SOURCES_OUVERTES_7). Serveur : lib/sources_ouvertes_7.php.
- * Mode d'emploi : docs/UI.md (« 🌍 Archives en ligne, 7e lot »).
+ * Mode d'emploi : docs/UI.md (« 🔍 Archives en ligne »).
  */
 (() => {
     'use strict';
@@ -29,177 +26,30 @@
     const toast = (...a) => A().toast(...a);
     const post = (action, body) => api(action, {}, {method: 'POST', body}).then(r => r?.result ?? r);
     const KEY = 'genealogie-sources-ouvertes-7-sites';
-    const TAB_KEY = 'genealogie-sources-ouvertes-7-tab';
     const lsGet = (k, d) => { try { const v = localStorage.getItem(k); return v == null ? d : v; } catch (_) { return d; } };
-    /** réglage : {hidden: [clés], urls: {clé: modèle}, cercles: {« 32 »: adresse}, mine: [sites ajoutés]} ; « Gratuites seulement » : la clé commune à tous les lots */
-    const FREE_KEY = 'genealogie-sources-gratuites'; // posée par le lot 6 (heritage-sources-ouvertes-6.js), partagée par tous les lots
-    const freeOnly = () => { try { return ext.sourcesOuvertes6?.freeOnly ? !!ext.sourcesOuvertes6.freeOnly() : lsGet(FREE_KEY, '1') !== '0'; } catch (_) { return true; } };
-    const setFreeOnly = on => { if (ext.sourcesOuvertes6?.setFreeOnly) { try { ext.sourcesOuvertes6.setFreeOnly(!!on); return; } catch (_) {} } try { localStorage.setItem(FREE_KEY, on ? '1' : '0'); } catch (_) {} };
+    /** réglage : {hidden: [clés], urls: {clé: modèle}, cercles: {« 32 »: adresse}, mine: [sites ajoutés]}, écrit par « ⚙️ Adresses des sites » (heritage-archives-en-ligne.js) */
     const settings = () => { try { const o = JSON.parse(lsGet(KEY, '{}')); return o && typeof o === 'object' ? o : {}; } catch (_) { return {}; } };
-    const saveSettings = o => { try { localStorage.setItem(KEY, JSON.stringify(o)); } catch (_) {} };
     const custom = () => { const s = settings(); return {...(s.urls || {}), cercles: s.cercles || {}}; };
-    const mineSites = () => (settings().mine || []).map(m => S7().cleanCustom(m)).filter(m => !S7().checkCustom(m).length)
-        .map(m => ({key: m.key, group: m.group, icon: m.icon, label: m.label, paid: m.paid, verified: 'mine', note: 'Un site que tu as ajouté.', mine: true, tpl: m.url, kind: 'acte', where: ['fiche', 'lieu']}));
     const pickerField = o => (window.LCNDA_PICKER || A()).pickerField(o);
     const refresh = () => { try { A().refreshScreen?.(); } catch (_) {} };
     const ctxCache = new Map();
     const context = async pid => { const k = Number(pid) || 0; if (!k) return null; if (!ctxCache.has(k)) ctxCache.set(k, api('so_context', {person_id: k}).catch(e => { ctxCache.delete(k); throw e; })); return ctxCache.get(k); };
     const forget = pid => ctxCache.delete(Number(pid) || 0);
 
-    /* ═════ 🔍 Chercher ═════ */
-    function paramsFrom(ctx, place) {
-        const p = ctx?.person || {};
-        const pl = place?.name || ctx?.birth?.place || ctx?.places?.[0] || '';
-        return {first: String(p.first || '').split(/\s+/)[0] || '', last: p.last || '', place: String(pl).split(',')[0], county: place?.county || ctx?.birth?.county || ctx?.dept?.name || '',
-            deptCode: ctx?.dept?.code || '', country: place?.country || '', y1: p.birth_year || '', y2: p.death_year || '', birthYear: p.birth_year || '', deathYear: p.death_year || ''};
-    }
-    const urlOf = (s, p) => s.mine ? (S7().cleanUrl(S7().fillCustom(s.tpl, p)) || '') : S7().url(s.key, p, custom());
-    const badges = s => {
-        const b = S7().paidBadge(s); const out = [];
-        if (b) out.push(UI().badge(b.text, b.kind, {title: b.title}));
-        if (s.sensitive) out.push(UI().badge('Mémoire', 'grey', {title: 'Ton sobre : jamais dans un jeu'}));
-        if (s.mine) out.push(UI().badge('Mon site', 'blue'));
-        else if (s.verified === 'non') out.push(`<small class="muted" title="Construite d’après la forme connue du site, sans avoir pu l’ouvrir le ${esc(S7().CHECKED)}">adresse non vérifiée</small>`);
-        if (custom()[s.key] && typeof custom()[s.key] === 'string') out.push(UI().badge('Adresse à toi', 'blue'));
-        return out.join(' ');
-    };
-    function linksHtml(list, p) {
-        if (!list.length) return A().empty ? A().empty('Aucun site dans cette rubrique', {icon: '🌐', hint: 'Décoche « Gratuites seulement » ou montre des sites dans « ⚙️ Réglages des sites ».'}) : '';
-        return `<ul class="so-links so7-links">${list.map(s => {
-            const u = urlOf(s, p); const copy = s.mine ? '' : S7().copyText(s.key, p);
-            return `<li class="so-link${s.paid ? ' is-paid' : ''}"><span class="so-link-ico" aria-hidden="true">${esc(s.icon)}</span>
-                <span class="so-link-main"><b>${esc(s.label)}</b> ${badges(s)}${s.note ? `<small class="so7-note">${esc(s.note)}</small>` : ''}<code class="so-url" data-so7-url="${esc(s.key)}">${esc(u)}</code></span>
-                <a class="button small" href="${esc(u)}" target="_blank" rel="noopener noreferrer" data-so7-go="${esc(s.key)}" ${copy ? `data-so7-copy="${esc(copy)}" title="« ${esc(copy)} » sera copié : colle-le dans la case du site"` : ''}>↗ Ouvrir${copy ? ' 📋' : ''}</a></li>`;
-        }).join('')}</ul>`;
-    }
+    /* ═════ 🔍 Chercher et ⚙️ Adresses des sites : la fenêtre commune de tous les lots (heritage-archives-en-ligne.js) ═════ */
     const GROUP_HELP = {
         europe: 'Archives Portal Europe réunit les inventaires des archives nationales et régionales de 30 pays : on y trouve dans quel fonds et sous quelle cote est un registre, puis on va le voir sur le site du pays.',
         fr_memoire: 'Les Justes parmi les nations : celles et ceux qui ont caché ou sauvé des Juifs pendant la guerre, reconnus par Yad Vashem. Et les monuments aux morts de chaque commune, avec leur photo et leurs noms.',
         fr_enfants: 'Les enfants trouvés, abandonnés puis « assistés » étaient inscrits sous un numéro matricule et souvent placés en nourrice à la campagne (Morvan, Bretagne, Normandie…). Les registres sont aux Archives de Paris pour Paris, aux Archives départementales ailleurs.',
-        fr_cercles: 'Les cercles généalogiques relèvent les actes de leurs communes et en mettent souvent les tables en ligne gratuitement. Écris l’adresse de ton cercle dans « ⚙️ Réglages des sites » : elle s’ouvrira pour ce département.',
+        fr_cercles: 'Les cercles généalogiques relèvent les actes de leurs communes et en mettent souvent les tables en ligne gratuitement. Écris l’adresse de ton cercle dans « ⚙️ Adresses des sites » : elle s’ouvrira pour ce département.',
         aide: 'Avant de chercher dans un lieu inconnu : quels registres existent, depuis quand, où ils sont gardés et lesquels sont en ligne. FamilySearch Wiki pour le monde entier, GenWiki et GOV pour l’Allemagne et l’Europe centrale.',
         allemagne: 'CompGen (association allemande) publie gratuitement les livres des familles de nombreux villages. Archion montre les registres des paroisses protestantes, avec un abonnement payant.',
         centre: 'Les plans du cadastre ancien de Bohême-Moravie et de l’empire d’Autriche montrent la maison et les champs, parcelle par parcelle. Arcanum ADT est la grande bibliothèque numérique hongroise.',
         bibliotheque: 'Certaines bibliothèques et archives offrent Ancestry gratuitement sur leurs ordinateurs (Ancestry Library Edition). Demande à ta médiathèque ou à tes Archives départementales.',
     };
-    function openSearch(o = {}) {
-        const dlg = document.createElement('dialog'); dlg.className = 'modal modal-l so-search so7-search';
-        let group = typeof o.group === 'string' ? o.group : lsGet(TAB_KEY, ''); let ctx = null, pid = Number(o.personId) || 0; const place = o.place || null; const where = o.where || '';
-        dlg.innerHTML = `<form method="dialog"><div class="modal-head"><div><span class="eyebrow">ARCHIVES EN LIGNE</span><h2>🌍 Europe, Justes, enfants assistés, monuments, cadastres…</h2></div><button type="button" class="icon-button" data-x aria-label="Fermer">×</button></div>
-            <div class="h-dialog-body so-search-body" data-so7-body>${UI().spinner('Ce que la fiche sait…')}</div>
-            <div class="modal-actions"><button type="button" class="button secondary" data-so7-settings>⚙️ Réglages des sites</button><span class="spacer"></span><button type="button" class="button secondary" data-so7-import-from-search>⤒ Importer ce que tu as trouvé…</button><button type="button" class="button" data-x>Fermer</button></div></form>`;
-        document.body.appendChild(dlg);
-        const body = dlg.querySelector('[data-so7-body]');
-        const val = () => Object.fromEntries(new FormData(dlg.querySelector('form')));
-        const all = () => { const st = settings(); let l = S7().visible({...st, freeOnly: freeOnly()}, [...(where ? S7().forPlace(where, paramsFrom(ctx, place)) : S7().SITES), ...mineSites()]); return l; };
-        const updLinks = () => {
-            const list = all(); const c = S7().counts(list);
-            if (group && !c[group]) group = '';
-            const pills = body.querySelector('[data-so7-pills]');
-            if (pills) pills.innerHTML = [`<button type="button" class="${group ? '' : 'is-active'}" data-so7-tab="">Tout (${c.all})</button>`,
-                ...S7().GROUPS.filter(g => c[g.id]).map(g => `<button type="button" class="${g.id === group ? 'is-active' : ''}" data-so7-tab="${g.id}">${esc(g.icon)} ${esc(g.label)} (${c[g.id]})</button>`)].join('');
-            const help = body.querySelector('[data-so7-help]'); if (help) help.textContent = group ? (GROUP_HELP[group] || '') : 'Chaque recherche s’ouvre dans ton navigateur. L’app n’envoie rien d’autre que ce que tu vois dans l’adresse, et ne se connecte jamais à ces sites.';
-            const box = body.querySelector('[data-so7-links]'); if (box) box.innerHTML = linksHtml(list.filter(s => !group || s.group === group), {...paramsFrom(ctx, place), ...val()});
-        };
-        const draw = () => {
-            const p = paramsFrom(ctx, place);
-            const living = ctx?.person && SO1()?.livingRisk?.(ctx.person);
-            const who = place ? `<p class="so7-target">📍 Pour <b>${esc(place.name || '')}</b>${place.county ? ` · ${esc(place.county)}` : ''}</p>`
-                : o.personId ? '' : `<div class="so-who"><span class="pk-lab">À partir d’une fiche (facultatif)</span>${pickerField({name: 'so7_pid', kind: 'person', value: pid || null})}</div>`;
-            body.innerHTML = `<div class="ui-filters so7-pills" data-so7-pills></div>${who}
-                ${living ? UI().notice('warn', 'Cette personne est peut-être vivante : ces recherches restent dans ton navigateur, rien n’est partagé. Pense à sa vie privée.') : ''}
-                <p class="so-help" data-so7-help></p>
-                <div class="form-grid so-grid">
-                    <label>Nom<input name="last" value="${esc(place ? '' : p.last)}" autocomplete="off"></label>
-                    <label>Prénom<input name="first" value="${esc(place ? '' : p.first)}" autocomplete="off"></label>
-                    <label>Lieu<input name="place" value="${esc(p.place)}" autocomplete="off" placeholder="Auch, Brno, Sopron…"></label>
-                    <label>Département (nom ou n°)<input name="county" value="${esc(p.deptCode || p.county)}" autocomplete="off" placeholder="Gers, 32…"></label>
-                    <label>Pays<input name="country" value="${esc(p.country)}" autocomplete="off" placeholder="France, Allemagne…"></label>
-                    <label>Né(e) en<input name="birthYear" type="number" min="1500" max="2100" value="${esc(p.birthYear)}"></label>
-                </div>
-                <label class="ui-toggle so7-free"><input type="checkbox" data-so7-free ${freeOnly() ? 'checked' : ''}><i></i>Gratuites seulement</label>
-                <div data-so7-links></div>
-                <p class="ui-hint">Ce qu’on lit sur ces sites est à vérifier : homonymes, fautes de lecture. Enregistre le document (image, PDF, page) ou copie son lien, puis fais « ⤒ Importer ce que tu as trouvé ».</p>`;
-            updLinks();
-        };
-        dlg.addEventListener('input', e => { if (e.target.closest('.so-grid')) updLinks(); });
-        dlg.addEventListener('change', async e => {
-            if (e.target.matches('[data-so7-free]')) { setFreeOnly(e.target.checked); updLinks(); return; }
-            if (e.target.name === 'so7_pid') { pid = Number(e.target.value) || 0; try { ctx = await context(pid); } catch (err) { toast(err.message, 'error'); } draw(); }
-        });
-        dlg.addEventListener('click', e => {
-            if (e.target.closest('[data-x]')) { dlg.close(); return; }
-            const t = e.target.closest('[data-so7-tab]');
-            if (t) { group = t.dataset.so7Tab; try { localStorage.setItem(TAB_KEY, group); } catch (_) {} updLinks(); return; }
-            const go = e.target.closest('[data-so7-go][data-so7-copy]');
-            if (go) { try { navigator.clipboard?.writeText(go.dataset.so7Copy).then(() => toast(`« ${go.dataset.so7Copy} » copié : colle-le dans la case du site.`), () => {}); } catch (_) {} }
-            if (e.target.closest('[data-so7-settings]')) { openSettings(() => updLinks()); return; }
-            if (e.target.closest('[data-so7-import-from-search]')) {
-                dlg.close(); const s = all().find(x => (!group || x.group === group) && x.kind && x.kind !== 'aide');
-                openImport({personId: pid, kind: s?.kind || 'acte', site: s && !s.mine ? s.key : '', place});
-            }
-        });
-        dlg.addEventListener('close', () => dlg.remove());
-        dlg.showModal();
-        (pid ? context(pid) : Promise.resolve(null)).then(c => { ctx = c; draw(); }).catch(err => { body.innerHTML = UI().notice('error', err.message); });
-        return dlg;
-    }
-
-    /* ═════ ⚙️ Réglages des sites (K2) ═════ */
-    function openSettings(onChange) {
-        const dlg = document.createElement('dialog'); dlg.className = 'modal so-settings so7-settings';
-        const sample = {first: '{prénom}', last: '{nom}', place: '{lieu}', county: '{département}', country: '{pays}'};
-        const rows = () => {
-            const st = settings(); const hidden = new Set(st.hidden || []); const urls = st.urls || {};
-            const groups = S7().GROUPS.map(g => `<h4 class="so2-set-h">${esc(g.icon)} ${esc(g.label)}</h4>${S7().SITES.filter(s => s.group === g.id).map(s => `<div class="so-set-row so7-set-row">
-                <label class="ui-toggle"><input type="checkbox" data-so7-show="${esc(s.key)}" ${hidden.has(s.key) ? '' : 'checked'}><i></i><b>${esc(s.label)}</b></label> ${badges(s)}
-                <label class="so7-set-url"><span class="sr-only">Adresse à toi pour ${esc(s.label)}</span><input name="${esc(s.key)}" data-so7-tpl value="${esc(urls[s.key] || '')}" placeholder="${esc(decodeURIComponent(S7().url(s.key, sample).replace(/%(?![0-9A-F]{2})/gi, '%25')))}" autocomplete="off" spellcheck="false"></label></div>`).join('')}`).join('');
-            const cer = Object.entries(st.cercles || {});
-            const cercles = `<h4 class="so2-set-h">📒 Mon cercle généalogique, par département</h4><p class="ui-hint">Le n° du département puis l’adresse du site de son cercle (ses relevés). Une ligne par département.</p>
-                <div data-so7-cercles>${[...cer, ['', '']].map(([d, u]) => `<div class="so7-cercle"><label>Département<input data-so7-cdep value="${esc(d)}" placeholder="32" maxlength="3" autocomplete="off"></label><label>Adresse du cercle<input data-so7-curl value="${esc(u)}" inputmode="url" placeholder="https://…" autocomplete="off"></label></div>`).join('')}</div>`;
-            const mine = (st.mine || []).map(m => S7().cleanCustom(m));
-            const mines = `<h4 class="so2-set-h">🔗 Mes sites</h4><div data-so7-mine>${mine.map(m => `<div class="so7-mine" data-key="${esc(m.key)}"><label>Nom<input data-m="label" value="${esc(m.label)}" autocomplete="off"></label>
-                <label>Adresse de recherche<input data-m="url" value="${esc(m.url)}" placeholder="https://…?q={nom}+{lieu}" autocomplete="off" spellcheck="false"></label>
-                <label>Rubrique<select data-m="group">${S7().GROUPS.map(g => `<option value="${g.id}" ${g.id === m.group ? 'selected' : ''}>${esc(g.label)}</option>`).join('')}</select></label>
-                <label>Prix<select data-m="paid">${[['', 'Gratuit'], ['partiel', 'En partie payant'], ['oui', 'Payant'], ['bibliotheque', 'Gratuit en bibliothèque']].map(([v, l]) => `<option value="${v}" ${String(m.paid || '') === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
-                <button type="button" class="icon-button" data-so7-mine-del aria-label="Retirer ce site">×</button>${S7().checkCustom(m).map(t => `<p class="ui-hint is-error">⛔ ${esc(t)}</p>`).join('')}</div>`).join('')}</div>
-                <button type="button" class="button small secondary" data-so7-mine-add>＋ Mon site</button>`;
-            return `<label class="ui-toggle"><input type="checkbox" data-so7-free-set ${freeOnly() ? 'checked' : ''}><i></i>Gratuites seulement (les sites payants restent à la fin quand on décoche)</label>${groups}${cercles}${mines}`;
-        };
-        dlg.innerHTML = `<form method="dialog"><div class="modal-head"><div><span class="eyebrow">ARCHIVES EN LIGNE · RÉGLAGES</span><h2>⚙️ Réglages des sites</h2></div><button type="button" class="button small secondary" data-ui-reset>↺ Remettre comme au départ</button><button type="button" class="icon-button" data-ui-x aria-label="Fermer">×</button></div>
-            <div class="h-dialog-body"><p class="ui-hint">Montre ou cache chaque site. Si un site change son adresse de recherche, écris la nouvelle (case vide = l’adresse de l’app, en gris). Mots remplacés : {nom}, {prénom}, {nom_complet}, {lieu}, {département}, {pays}, {de}, {à}, {naissance}, {décès}.</p>
-            <div class="so-set" data-so7-set>${rows()}</div></div>
-            <div class="modal-actions"><span class="spacer"></span><button type="button" class="button" data-ui-x>Fermer</button></div></form>`;
-        document.body.appendChild(dlg);
-        const read = () => {
-            const box = dlg.querySelector('[data-so7-set]'); const o = {};
-            const fr = box.querySelector('[data-so7-free-set]'); if (fr && fr.checked !== freeOnly()) setFreeOnly(fr.checked); // la clé commune, pas ce réglage
-            o.hidden = [...box.querySelectorAll('[data-so7-show]')].filter(i => !i.checked).map(i => i.dataset.so7Show);
-            o.urls = {}; box.querySelectorAll('[data-so7-tpl]').forEach(i => { const v = i.value.trim(); if (v && S7().cleanUrl(v.replace(/[{}]/g, ''))) o.urls[i.name] = v.slice(0, 600); });
-            o.cercles = {}; box.querySelectorAll('.so7-cercle').forEach(r => { const d = r.querySelector('[data-so7-cdep]').value.trim().toUpperCase(); const u = S7().cleanUrl(r.querySelector('[data-so7-curl]').value); if (/^(\d{2,3}|2A|2B)$/.test(d) && u) o.cercles[d] = u; });
-            o.mine = [...box.querySelectorAll('.so7-mine')].map(r => S7().cleanCustom({key: r.dataset.key, label: r.querySelector('[data-m=label]').value, url: r.querySelector('[data-m=url]').value, group: r.querySelector('[data-m=group]').value, paid: r.querySelector('[data-m=paid]').value}));
-            return o;
-        };
-        const auto = UI().autoSaveDialog(dlg, {keys: [KEY, FREE_KEY], label: 'Réglage des sites',
-            save: () => saveSettings(read()),
-            reload: () => { dlg.querySelector('[data-so7-set]').innerHTML = rows(); },
-            reset: () => { try { localStorage.removeItem(KEY); } catch (_) {} },
-            onChange: () => onChange?.()});
-        dlg.addEventListener('click', e => {
-            if (e.target.closest('[data-ui-x]')) { dlg.close(); return; }
-            if (e.target.closest('[data-so7-mine-add]')) { const s = read(); s.mine.push(S7().cleanCustom({label: 'Mon site', url: 'https://', group: 'europe'})); saveSettings(s); dlg.querySelector('[data-so7-set]').innerHTML = rows(); dlg.querySelector('.so7-mine:last-child [data-m=url]')?.focus(); onChange?.(); return; }
-            const del = e.target.closest('[data-so7-mine-del]'); if (del) { del.closest('.so7-mine').remove(); saveSettings(read()); onChange?.(); }
-        });
-        dlg.addEventListener('change', e => { // la dernière ligne des cercles remplie (département ET adresse) : gardée, et une ligne vide s'ajoute
-            const row = e.target.closest('.so7-cercle:last-child'); if (!row) return;
-            const d = row.querySelector('[data-so7-cdep]').value.trim(), u = S7().cleanUrl(row.querySelector('[data-so7-curl]').value);
-            if (d && u) { saveSettings(read()); row.insertAdjacentHTML('afterend', `<div class="so7-cercle"><label>Département<input data-so7-cdep placeholder="32" maxlength="3" autocomplete="off"></label><label>Adresse du cercle<input data-so7-curl inputmode="url" placeholder="https://…" autocomplete="off"></label></div>`); }
-        });
-        dlg.addEventListener('close', () => { onChange?.(); dlg.remove(); });
-        dlg.showModal();
-        void auto;
-        return dlg;
-    }
+    /** la fenêtre commune, déjà sur une rubrique de ce lot (group) ou sur les sites utiles à un endroit (where : lieu, placement…) */
+    const openSearch = (o = {}) => ext.archives?.open({...o, lot: 7, group: o.group || undefined, where: o.group ? undefined : o.where || undefined});
+    const openSettings = onChange => ext.archives?.openSettings({lot: 7, onChange});
 
     /* ═════ ⤒ Importer ce qu'on a téléchargé (K13) ═════ */
     const fieldHtml = ([k, label, type, choices], v) => type === 'choice'
@@ -329,28 +179,10 @@
             intro: 'Ce que tu as téléchargé ou enregistré : un acte, une notice, la photo d’un monument ou d’une tombe, un plan de cadastre, la page enregistrée par ton navigateur (« Enregistrer sous… ») ou un texte copié. Rien n’est demandé au site : seul ton fichier est lu.',
             noun: 'document', analyze: async files => { const a = await analyze(files); const show = a.onShow; a.onShow = body => { body.closest('dialog')?.classList.add('modal-l', 'so-import', 'so7-import'); bind(body); show(body); }; return a; }, run, files: o.files});
     }
-    /** pas de fichier : un lien collé (et le texte de la notice) → la même fenêtre d'import */
-    function openPasteLink(o = {}) {
-        const dlg = document.createElement('dialog'); dlg.className = 'modal small-modal so-paste';
-        dlg.innerHTML = `<form method="dialog"><div class="modal-head"><div><span class="eyebrow">ARCHIVES EN LIGNE</span><h2>🔗 Coller un lien</h2></div><button type="button" class="icon-button" data-x aria-label="Fermer">×</button></div>
-            <div class="h-dialog-body"><label>Lien du document ou de la notice<input name="link" inputmode="url" placeholder="https://www.archivesportaleurope.net/…" autocomplete="off"></label>
-            <label>Texte de la notice (facultatif)<textarea name="text" rows="5"></textarea></label></div>
-            <div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-x>Annuler</button><button type="submit" class="button">Continuer</button></div></form>`;
-        document.body.appendChild(dlg);
-        dlg.addEventListener('click', e => { if (e.target.closest('[data-x]')) dlg.close(); });
-        dlg.querySelector('form').addEventListener('submit', e => {
-            e.preventDefault(); const link = dlg.querySelector('[name=link]').value.trim(), text = dlg.querySelector('[name=text]').value;
-            if (!S7().cleanUrl(link)) return UI().fail?.(dlg.querySelector('[name=link]'), 'Colle une adresse qui commence par https://');
-            dlg.close(); openImport({...o, link, text, linkOnly: true, files: [new File([text || link], 'lien-colle.txt', {type: 'text/plain'})]});
-        });
-        dlg.addEventListener('close', () => dlg.remove());
-        dlg.showModal();
-        return dlg;
-    }
+    /** pas de fichier : un lien collé → le seul « 🔗 Coller un lien » de l'app (il reconnaît le site et revient à openImport) */
+    const openPasteLink = (o = {}) => ext.archives?.openPaste({...o, lot: 7});
 
     /* ═════ Les boutons posés dans l'app ═════ */
-    /** dans « Chercher sur internet » (fiche) : une ligne, à côté des autres lots */
-    const panelButton = ctx => ctx?.id ? `<div class="so-ws so7-ws"><button type="button" class="button small" data-so7-search="" data-pid="${Number(ctx.id)}">🌍 Europe (30 pays), Justes, enfants assistés, monuments, cercles, Allemagne, cadastres anciens…</button><button type="button" class="button small secondary" data-so7-paste data-pid="${Number(ctx.id)}">🔗 Coller un lien</button></div>` : '';
     /** les boutons d'un bloc de la fiche : placement (👶 Enfant placé) · military (monument aux morts) */
     function blockButtons(where, pid, editOnly = h => h) {
         if (!pid) return '';
@@ -378,5 +210,5 @@
             if (pp.matches('[data-so7-place-import]')) openImport({place, kind: 'monument'}); else openSearch({place, where: 'lieu'}); }
     });
 
-    ext.sourcesOuvertes7 = {openSearch, openImport, openPasteLink, openSettings, panelButton, blockButtons, placeHtml, settings};
+    ext.sourcesOuvertes7 = {openSearch, openImport, openPasteLink, openSettings, blockButtons, placeHtml, settings, archives: {help: GROUP_HELP}};
 })();
