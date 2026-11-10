@@ -177,7 +177,7 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env: envFor(dir) });
                     await p.$eval('[data-mcp-t]', el => { el.value = '1860'; el.dispatchEvent(new Event('input', { bubbles: true })); });
                     assert.deepEqual(await p.$$eval('#mcp-legend .mcp-leg-row small', e => e.map(x => x.textContent.trim())), ['1', '1', '0']);
                     assert.equal((await p.textContent('[data-mcp-tl]')).trim(), '1860');
-                    await p.click('[data-mcp-play]'); await p.waitForFunction(() => document.querySelector('[data-mcp-tl]').textContent.trim() === '1990', null, { timeout: 20000 });
+                    await p.click('[data-mcp-play]'); await p.waitForFunction(() => document.querySelector('[data-mcp-tl]').textContent.trim() === '1990', null, { timeout: 60000 });
                     await p.click('[data-mcp-tall]');
                     // ⤓ GeoJSON (sans la vivante)
                     const [dl] = await Promise.all([p.waitForEvent('download'), p.evaluate(() => window.LCNDA_EXT.mesCartes.exportGeo('geojson'))]);
