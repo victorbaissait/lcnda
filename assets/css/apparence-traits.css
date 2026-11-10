@@ -3687,7 +3687,6 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root[data-theme="dark"].lc-frame .xl-baselink, :root[data-theme="dark"] .xl-baselink:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1.5px solid #415845}
 :root[data-theme="dark"].lc-frame .xl-steps li.is-done, :root[data-theme="dark"] .xl-steps li.is-done:is([data-lc-lines], [data-lc-lines] *) {border-color:#3e5b46}
 /* socface.css */
-:root.lc-frame .sf-url code, :root .sf-url code:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #c9d6f2}
 :root.lc-frame .sf-hh, :root .sf-hh:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid #d6d9df}
 :root.lc-frame .sf-ecart, :root .sf-ecart:is([data-lc-lines], [data-lc-lines] *) {border-left:3px solid #e1a500}
 :root.lc-frame .sf-ecart.is-orange, :root .sf-ecart.is-orange:is([data-lc-lines], [data-lc-lines] *) {border-left-color:#d9731a}
@@ -3696,12 +3695,13 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root.lc-frame .sf-item, :root .sf-item:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid #d6d9df}
 :root.lc-frame .h-htr-lx, :root .h-htr-lx:is([data-lc-lines], [data-lc-lines] *) {border-left:3px solid #e1a500}
 :root.lc-frame .sf-verify-side, :root .sf-verify-side:is([data-lc-lines], [data-lc-lines] *) {border-left:0;border-top:1px solid #e3e5ea}
-:root[data-theme="dark"].lc-frame .sf-url code, :root[data-theme="dark"] .sf-url code:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #354464}
 :root[data-theme="dark"].lc-frame .sf-hh, :root[data-theme="dark"] .sf-hh:is([data-lc-lines], [data-lc-lines] *) {border:calc(1.5px * var(--lc-frame-k)) solid var(--lc-frame-color)}
 :root[data-theme="dark"].lc-frame .sf-verify-side, :root[data-theme="dark"] .sf-verify-side:is([data-lc-lines], [data-lc-lines] *) {border-left:1px solid #474a52}
 :root[data-theme="dark"].lc-frame .sf-item, :root[data-theme="dark"] .sf-item:is([data-lc-lines], [data-lc-lines] *) {border:calc(1.5px * var(--lc-frame-k)) solid var(--lc-frame-color)}
 :root[data-theme="dark"].lc-frame .sf-verify-side, :root[data-theme="dark"] .sf-verify-side:is([data-lc-lines], [data-lc-lines] *) {border-top:1px solid #474a52}
-/* sources-ouvertes.css */
+/* archives-en-ligne.css */
+:root.lc-frame .ael-set-row, :root .ael-set-row:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid #e6e8ec}
+:root.lc-frame .ael-set-row:last-child, :root .ael-set-row:last-child:is([data-lc-lines], [data-lc-lines] *) {border-bottom:0}
 :root.lc-frame .so-import .k-import-prev, :root .so-import .k-import-prev:is([data-lc-lines], [data-lc-lines] *) {border:0}
 :root.lc-frame .so-classe, :root .so-classe:is([data-lc-lines], [data-lc-lines] *) {border-left:3px solid var(--accent, #2563eb)}
 :root.lc-frame .so-link, :root .so-link:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid #d6d9df}
@@ -3711,33 +3711,17 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root.lc-frame .so-ecart.is-yellow, :root .so-ecart.is-yellow:is([data-lc-lines], [data-lc-lines] *) {border-left-color:#e1a500}
 :root.lc-frame .so-ecart.is-orange, :root .so-ecart.is-orange:is([data-lc-lines], [data-lc-lines] *) {border-left-color:#d9731a}
 :root.lc-frame .so-ecart.is-ok, :root .so-ecart.is-ok:is([data-lc-lines], [data-lc-lines] *) {border-left-color:#2f8f4e}
+:root.lc-frame .so2-respect, :root .so2-respect:is([data-lc-lines], [data-lc-lines] *) {border-left:3px solid #6b7280}
+:root.lc-frame .so3-rub, :root .so3-rub:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid #d6d9df}
+:root.lc-frame .so4-pop-type, :root .so4-pop-type:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid #d6d9df}
+:root.lc-frame .so5-test, :root .so5-test:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid #d6d9df}
+:root[data-theme="dark"].lc-frame .ael-set-row, :root[data-theme="dark"] .ael-set-row:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid #474b52}
 :root[data-theme="dark"].lc-frame .so-link, :root[data-theme="dark"] .so-link:is([data-lc-lines], [data-lc-lines] *) {border:calc(1.5px * var(--lc-frame-k)) solid var(--lc-frame-color)}
 :root[data-theme="dark"].lc-frame .so-imp-img, :root[data-theme="dark"] .so-imp-img:is([data-lc-lines], [data-lc-lines] *) {border:calc(1.5px * var(--lc-frame-k)) solid var(--lc-frame-color)}
 :root[data-theme="dark"].lc-frame .so-props, :root[data-theme="dark"] .so-props:is([data-lc-lines], [data-lc-lines] *) {border:calc(1.5px * var(--lc-frame-k)) solid var(--lc-frame-color)}
-/* sources-ouvertes-2.css */
-:root.lc-frame .so2-respect, :root .so2-respect:is([data-lc-lines], [data-lc-lines] *) {border-left:3px solid #6b7280}
-/* sources-ouvertes-3.css */
-:root.lc-frame .so3-rub, :root .so3-rub:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid #d6d9df}
 :root[data-theme="dark"].lc-frame .so3-rub, :root[data-theme="dark"] .so3-rub:is([data-lc-lines], [data-lc-lines] *) {border:calc(1.5px * var(--lc-frame-k)) solid var(--lc-frame-color)}
-/* sources-ouvertes-4.css */
-:root.lc-frame .so4-unverif, :root .so4-unverif:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #e8cf7a}
-:root.lc-frame .so4-set-group, :root .so4-set-group:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid #d6d9df}
-:root.lc-frame .so4-pop-type, :root .so4-pop-type:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid #d6d9df}
-:root[data-theme="dark"].lc-frame .so4-set-group, :root[data-theme="dark"] .so4-set-group:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid #484b51}
 :root[data-theme="dark"].lc-frame .so4-pop-type, :root[data-theme="dark"] .so4-pop-type:is([data-lc-lines], [data-lc-lines] *) {border:calc(1.5px * var(--lc-frame-k)) solid var(--lc-frame-color)}
-/* sources-ouvertes-5.css */
-:root.lc-frame .so5-rub, :root .so5-rub:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid #d6d9df}
-:root.lc-frame .so5-test, :root .so5-test:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid #d6d9df}
-:root[data-theme="dark"].lc-frame .so5-rub, :root[data-theme="dark"] .so5-rub:is([data-lc-lines], [data-lc-lines] *) {border:calc(1.5px * var(--lc-frame-k)) solid var(--lc-frame-color)}
 :root[data-theme="dark"].lc-frame .so5-test, :root[data-theme="dark"] .so5-test:is([data-lc-lines], [data-lc-lines] *) {border:calc(1.5px * var(--lc-frame-k)) solid var(--lc-frame-color)}
-/* sources-ouvertes-6.css */
-:root.lc-frame .so6-rub, :root .so6-rub:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid #d6d9df}
-:root[data-theme="dark"].lc-frame .so6-rub, :root[data-theme="dark"] .so6-rub:is([data-lc-lines], [data-lc-lines] *) {border:calc(1.5px * var(--lc-frame-k)) solid var(--lc-frame-color)}
-/* sources-ouvertes-7.css */
-:root.lc-frame .so7-set-row, :root .so7-set-row:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid #e6e8ec}
-:root.lc-frame .so7-mine, :root .so7-mine:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid #e6e8ec}
-:root[data-theme="dark"].lc-frame .so7-set-row, :root[data-theme="dark"] .so7-set-row:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid #474b52}
-:root[data-theme="dark"].lc-frame .so7-mine, :root[data-theme="dark"] .so7-mine:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid #474b52}
 /* semaine.css */
 :root.lc-frame .msr-row, :root .msr-row:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid var(--line, #e3e6ea)}
 :root.lc-frame .msr-row:last-child, :root .msr-row:last-child:is([data-lc-lines], [data-lc-lines] *) {border-bottom:0}
