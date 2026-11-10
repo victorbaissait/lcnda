@@ -733,7 +733,11 @@
                 '-',
                 {icon: '⚙️', label: 'Ranger les sections…', run: () => openArrangeDialog()},
                 {icon: '⚙️', label: 'Boutons de l’en-tête…', run: () => openSheetsPage('lc-person-header')},
+                '-',
+                ext.readingAid ? {icon: '📜', label: 'Aide à la lecture des actes…', run: () => ext.readingAid.open()} : null, // heritage-lecture-autrefois.js
+                ext.autrefois ? {icon: '🪙', label: 'Convertisseur d’autrefois…', run: () => ext.autrefois.open()} : null,
                 p.kind === 'animal' && detail?.heritage?.animal?.id && ext.suivi?.openShare ? {icon: '📤', label: 'Partager le suivi…', run: () => ext.suivi.openShare({scope: 'pets', ids: [Number(detail.heritage.animal.id)]})} : null,
+                ...(() => { const more = (ext.personMoreItems || []).map(fn => { try { return fn(detail); } catch (_) { return null; } }).filter(Boolean); return more.length ? ['-', ...more] : []; })(), // 🧬 Arbre des métiers, 🗺 Carte de la vie…
             ].filter(Boolean), {title: A().personName?.(p) || 'La fiche'});
         });
     });

@@ -1,0 +1,36 @@
+/* LCNDA — 🌍 Archives en ligne, 5e lot (assets/js/heritage-sources-ouvertes-5.js) : rubriques de la fenêtre de recherche,
+ * réglage des sites en rubriques repliables, « Mes sites » (🧪 Essayer), 📷 photographe. Reprend les classes so-* de
+ * sources-ouvertes.css. Couleurs : variables de l'app ; mode sombre par scripts/build-dark-css.py (bloc en fin de fichier). */
+.so5-search .so-grid select { max-width: 100%; }
+.so5-search [data-so5-extra][hidden] { display: none; }
+.so5-q { display: block; }
+.so5-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+.so5-group { display: grid; gap: 6px; }
+.so5-group h4 { margin: 6px 0 0; font-size: 13.5px; }
+.so5-badges { display: inline-flex; flex-wrap: wrap; gap: 4px; vertical-align: middle; }
+.so5-link .ui-hint { margin: 0; }
+.so5-settings .so-set { gap: 6px; }
+.so5-rub { border: 1.5px solid #d6d9df; padding: 6px 10px; }
+.so5-rub > summary { cursor: pointer; padding: 4px 0; display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline; }
+.so5-rub[open] > summary { margin-bottom: 6px; }
+.so5-rub .so-set-row + .so-set-row { margin-top: 8px; }
+.so5-kindrow { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.so5-kind { display: grid; gap: 3px; }
+.so5-ws { margin-bottom: 4px; }
+.so5-imp .checkbox-line.is-off { opacity: .45; cursor: not-allowed; }
+.so5-geneawiki { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 0; }
+.so5-ph-btn { align-self: end; }
+.so5-photo .so-links { margin: 8px 0; }
+.ws-custom-test:empty { display: none; }
+.so5-test { display: grid; gap: 4px; margin: 6px 0; padding: 8px 10px; border: 1.5px solid #d6d9df; }
+.so5-test > span { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; min-width: 0; }
+.so5-test code { overflow-wrap: anywhere; }
+.web-search-custom-row .inline-actions { display: inline-flex; gap: 6px; flex-wrap: wrap; }
+@media (max-width: 760px) {
+    .so5-search .so-link { grid-template-columns: 22px minmax(0, 1fr); }
+    .so5-search .so-link > .button, .so5-search .so-link > a.button { grid-column: 1 / -1; justify-self: start; }
+}
+/* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
+:root[data-theme="dark"] .so5-rub{border:1.5px solid #484b51}
+:root[data-theme="dark"] .so5-test{border:1.5px solid #484b51}
+/* ═════ fin du mode sombre automatique ═════ */

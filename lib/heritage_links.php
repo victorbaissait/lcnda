@@ -640,9 +640,9 @@ function store_citation(PDO $pdo, int $linkId, array $data): void
 
 /* ─── 🤝 Demandes d'entraide ──────────────────────────────────────────── */
 
-const HELP_TARGETS = ['parents' => 'ses parents', 'birth' => 'sa naissance (date et lieu)', 'baptism' => 'son baptême', 'marriage' => 'son mariage', 'death' => 'son décès (date et lieu)', 'origin' => 'son origine (d’où venait la famille)', 'other' => 'autre chose'];
+const HELP_TARGETS = ['parents' => 'ses parents', 'birth' => 'sa naissance (date et lieu)', 'baptism' => 'son baptême', 'marriage' => 'son mariage', 'death' => 'son décès (date et lieu)', 'origin' => 'son origine (d’où venait la famille)', 'place_photo' => 'où a été prise une image (📍 Images de lieux)', 'other' => 'autre chose'];
 /** Même chose, dans une phrase : « Je cherche les parents de Jean Dupont ». */
-const HELP_TARGETS_SENTENCE = ['parents' => 'les parents', 'birth' => 'la naissance (date et lieu)', 'baptism' => 'le baptême', 'marriage' => 'le mariage', 'death' => 'le décès (date et lieu)', 'origin' => 'l’origine de la famille', 'other' => 'des informations sur'];
+const HELP_TARGETS_SENTENCE = ['parents' => 'les parents', 'birth' => 'la naissance (date et lieu)', 'baptism' => 'le baptême', 'marriage' => 'le mariage', 'death' => 'le décès (date et lieu)', 'origin' => 'l’origine de la famille', 'place_photo' => 'le lieu d’une image', 'other' => 'des informations sur'];
 const HELP_STATUSES = ['draft' => 'Brouillon', 'posted' => 'Publiée', 'answered' => 'Réponse reçue', 'solved' => 'Résolue', 'abandoned' => 'Abandonnée'];
 
 /** Ce qu'on sait (avec les sources), ce qu'on cherche, ce qui a été essayé : de quoi rédiger le message. */
@@ -719,7 +719,11 @@ function help_requests_data(PDO $pdo, string $status = 'open'): array
     $where = match ($status) { 'closed' => "WHERE h.status IN ('solved','abandoned')", 'all' => '', default => "WHERE h.status NOT IN ('solved','abandoned')" };
     $rows = $pdo->query("SELECT h.*, trim(p.first_name||' '||p.last_name) AS person_name FROM help_requests h LEFT JOIN persons p ON p.id=h.person_id {$where} ORDER BY h.updated_at DESC")->fetchAll();
     $counts = $pdo->query("SELECT sum(CASE WHEN status IN ('solved','abandoned') THEN 0 ELSE 1 END) AS open, sum(CASE WHEN status IN ('solved','abandoned') THEN 1 ELSE 0 END) AS closed FROM help_requests")->fetch();
-    return ['requests' => with_labels($pdo, 'help_request', $rows), 'counts' => ['open' => (int) ($counts['open'] ?? 0), 'closed' => (int) ($counts['closed'] ?? 0)], 'targets' => HELP_TARGETS, 'statuses' => HELP_STATUSES];
+    $rows = with_labels($pdo, 'help_request', $rows);
+    $media = heritage_media($pdo, 'help_request', array_column($rows, 'id')); // 📍 la photo d'une demande « où a été prise cette image ? » (lib/place_photos.php)
+    foreach ($rows as &$r) { $r['media'] = $media[(int) $r['id']] ?? []; }
+    unset($r);
+    return ['requests' => $rows, 'counts' => ['open' => (int) ($counts['open'] ?? 0), 'closed' => (int) ($counts['closed'] ?? 0)], 'targets' => HELP_TARGETS, 'statuses' => HELP_STATUSES];
 }
 
 function save_help_request(PDO $pdo, array $data): array

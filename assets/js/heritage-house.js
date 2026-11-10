@@ -1487,7 +1487,7 @@
                 : UI.cardsHtml(list.map(h => ({thumb: h.thumb ? `<img src="${esc(h.thumb)}" alt="">` : '<span class="ui-card-ico">🏠</span>', name: h.name, open: `data-hs-open="${h.id}"`,
                     lines: [[h.place, h.period].filter(Boolean).join(' · ') || 'Lieu à préciser', `${h.floors} étage${h.floors > 1 ? 's' : ''} · ${h.rooms} pièce${h.rooms > 1 ? 's' : ''}${h.people ? ` · ${h.people} habitant${h.people > 1 ? 's' : ''}` : ''}${versText(h) ? ` · ${versText(h)}` : ''}`],
                     badges: [linkChips(h)].filter(x => x && !/muted/.test(x)), when: h.updated_at, whenLabel: 'Modifiée',
-                    menu: [`<button type="button" data-hs-ren="${h.id}">✎ Renommer</button>`, `<button type="button" class="danger" data-hs-del="${h.id}">🗑 Supprimer</button>`]}))); };
+                    menu: [`<button type="button" data-hs-ren="${h.id}">✎ Renommer</button>`, `<button type="button" data-so2-pop="house" data-id="${h.id}" data-name="${esc(h.name)}" data-place="${esc(h.place || '')}">🏰 Notice Mérimée (patrimoine)…</button>`, `<button type="button" class="danger" data-hs-del="${h.id}">🗑 Supprimer</button>`]}))); };
         ws.innerHTML = `<section class="page collection-page" data-dnd-off><header class="page-header"><div><span class="eyebrow">LISTES</span><h2>🏠 Maisons de famille</h2><p>Les plans des maisons de la famille, en 2D et en 3D : leurs pièces, leurs meubles, leurs habitants, leurs recensements, leurs époques et leurs souvenirs.</p></div><button type="button" class="button" data-hs-new>＋ Nouvelle maison</button></header>
             <div data-hs-bar></div><div data-hs-grid></div></section>`;
         // H10 : la barre commune (🔍 Chercher · Liste | Fiches · Trier), retenue pour cette liste

@@ -1,0 +1,135 @@
+{
+  "title": "Prix et salaires de référence",
+  "version": 1,
+  "licence": "Faits et chiffres publics ; textes écrits pour LCNDA (CC BY-SA 4.0)",
+  "note": "Une ligne = un chiffre sûr, pour une période précise, avec sa source. L'app n'en parle que si la date tombe dans la période (from → to, au jour près) ; sinon elle ne dit rien. Pas de calcul ni d'estimation : pour ajouter une ligne, il faut sa source. Fichier commun : « ⏳ Une journée dans la vie de… » (lib/biographie_journee.php) le lit ; tout autre outil de prix anciens doit lire ce même fichier.",
+  "items": [
+    {
+      "id": "pain-paris-1789",
+      "kind": "pain",
+      "scope": "Paris",
+      "from": "1789-02-01",
+      "to": "1789-07-31",
+      "text": "À Paris, de février à juillet 1789, le pain de quatre livres (environ 2 kg) se vend jusqu’à 14 sous et demi : un prix très haut, qui pèse sur les plus pauvres.",
+      "source": "George Rudé, La Foule dans la Révolution française (1959 ; trad. fr. Maspero, 1982), sur les prix du pain à Paris en 1789"
+    },
+    {
+      "id": "smig-1950",
+      "kind": "salaire",
+      "scope": "France",
+      "from": "1950-08-23",
+      "to": "1950-12-31",
+      "text": "Le salaire minimum (SMIG), tout juste créé, est fixé à 78 francs de l’heure dans la région parisienne (64 francs dans les zones les moins chères de province).",
+      "source": "Décret n° 50-1029 du 23 août 1950 (SMIG)"
+    },
+    {
+      "id": "smig-1968",
+      "kind": "salaire",
+      "scope": "France",
+      "from": "1968-06-01",
+      "to": "1968-11-30",
+      "text": "Après les accords de Grenelle, le salaire minimum (SMIG) passe à 3 francs de l’heure (il était à 2,22 francs).",
+      "source": "Accords de Grenelle (27 mai 1968) et décret du 31 mai 1968 ; INSEE, série du salaire minimum"
+    },
+    {
+      "id": "smic-2002",
+      "kind": "salaire",
+      "scope": "France",
+      "from": "2002-01-01",
+      "to": "2002-06-30",
+      "text": "Le salaire minimum (SMIC) est de 6,67 euros brut de l’heure.",
+      "source": "Décret du 28 juin 2001 (43,72 F, soit 6,67 €) ; INSEE, série du salaire minimum"
+    },
+    {
+      "id": "smic-2010",
+      "kind": "salaire",
+      "scope": "France",
+      "from": "2010-01-01",
+      "to": "2010-12-31",
+      "text": "Le salaire minimum (SMIC) est de 8,86 euros brut de l’heure.",
+      "source": "Décret du 16 décembre 2009 ; INSEE, série du salaire minimum"
+    },
+    {
+      "id": "smic-2011",
+      "kind": "salaire",
+      "scope": "France",
+      "from": "2011-01-01",
+      "to": "2011-11-30",
+      "text": "Le salaire minimum (SMIC) est de 9 euros brut de l’heure.",
+      "source": "Décret du 13 décembre 2010 ; INSEE, série du salaire minimum"
+    },
+    {
+      "id": "smic-2013",
+      "kind": "salaire",
+      "scope": "France",
+      "from": "2013-01-01",
+      "to": "2013-12-31",
+      "text": "Le salaire minimum (SMIC) est de 9,43 euros brut de l’heure.",
+      "source": "Décret du 19 décembre 2012 ; INSEE, série du salaire minimum"
+    },
+    {
+      "id": "smic-2014",
+      "kind": "salaire",
+      "scope": "France",
+      "from": "2014-01-01",
+      "to": "2014-12-31",
+      "text": "Le salaire minimum (SMIC) est de 9,53 euros brut de l’heure.",
+      "source": "Décret du 19 décembre 2013 ; INSEE, série du salaire minimum"
+    },
+    {
+      "id": "smic-2015",
+      "kind": "salaire",
+      "scope": "France",
+      "from": "2015-01-01",
+      "to": "2015-12-31",
+      "text": "Le salaire minimum (SMIC) est de 9,61 euros brut de l’heure.",
+      "source": "Décret du 17 décembre 2014 ; INSEE, série du salaire minimum"
+    },
+    {
+      "id": "smic-2016",
+      "kind": "salaire",
+      "scope": "France",
+      "from": "2016-01-01",
+      "to": "2016-12-31",
+      "text": "Le salaire minimum (SMIC) est de 9,67 euros brut de l’heure.",
+      "source": "Décret du 16 décembre 2015 ; INSEE, série du salaire minimum"
+    },
+    {
+      "id": "smic-2017",
+      "kind": "salaire",
+      "scope": "France",
+      "from": "2017-01-01",
+      "to": "2017-12-31",
+      "text": "Le salaire minimum (SMIC) est de 9,76 euros brut de l’heure.",
+      "source": "Décret du 21 décembre 2016 ; INSEE, série du salaire minimum"
+    },
+    {
+      "id": "smic-2018",
+      "kind": "salaire",
+      "scope": "France",
+      "from": "2018-01-01",
+      "to": "2018-12-31",
+      "text": "Le salaire minimum (SMIC) est de 9,88 euros brut de l’heure.",
+      "source": "Décret du 20 décembre 2017 ; INSEE, série du salaire minimum"
+    },
+    {
+      "id": "smic-2019",
+      "kind": "salaire",
+      "scope": "France",
+      "from": "2019-01-01",
+      "to": "2019-12-31",
+      "text": "Le salaire minimum (SMIC) est de 10,03 euros brut de l’heure.",
+      "source": "Décret du 19 décembre 2018 ; INSEE, série du salaire minimum"
+    },
+    {
+      "id": "smic-2020",
+      "kind": "salaire",
+      "scope": "France",
+      "from": "2020-01-01",
+      "to": "2020-12-31",
+      "text": "Le salaire minimum (SMIC) est de 10,15 euros brut de l’heure.",
+      "source": "Décret du 18 décembre 2019 ; INSEE, série du salaire minimum"
+    }
+  ],
+  "verified": "10/11/2026 : SMIG 1950 (78 F en région parisienne, 64 F) vérifié ; ligne SMIC 1970 retirée (date et montant contradictoires selon les sources)."
+}

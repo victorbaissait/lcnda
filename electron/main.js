@@ -770,6 +770,6 @@ if (!app.requestSingleInstanceLock()) {
     quitting = true;
     clearInterval(reminderTimer);
     try { app.setBadgeCount(0); } catch { /* ignore */ }
-    server.stop().finally(() => app.quit());
+    server.closeBackup().finally(() => server.stop().finally(() => app.quit())); // 🗓 sauvegarde « à la fermeture » si elle est réglée
   });
 }

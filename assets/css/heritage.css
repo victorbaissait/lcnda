@@ -5278,6 +5278,111 @@ dialog.modal.h-lot > .modal-actions { position:sticky; bottom:0; z-index:5; back
   .cp-cmp-tag { top: auto; bottom: 64px; }
 }
 
+/* ═════ 🧬 Arbre des métiers (heritage-metiers-arbre.js) ═════ */
+.occ-controls { display: flex; flex-direction: column; gap: 8px; padding: 10px 16px; border-bottom: 1px solid #e3e3e3; background: white; }
+.occ-ctl-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
+.occ-ctl-row .occ-pk { min-width: 240px; flex: 0 1 320px; }
+.occ-ctl-row .ui-search { flex: 1 1 220px; max-width: 360px; }
+.occ-filters { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.occ-dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 5px; vertical-align: 1px; }
+.occ-view { padding: 6px 10px 20px; }
+.occ-title { text-align: center; margin: 0 auto 4px; max-width: 900px; }
+.occ-title h2 { margin: 2px 0; }
+.occ-tree .tree-card.occ-card { border-left: 7px solid var(--occ-c, #b8b8b8); min-height: 92px; }
+.occ-jobs { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 6px; }
+.occ-job { display: inline-block; font-size: 10.5px; line-height: 1.25; padding: 1px 6px; border-radius: 9px; border: 1.5px solid var(--occ-c, #999); color: inherit; background: color-mix(in srgb, var(--occ-c, #999) 14%, transparent); max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.occ-job.is-none { border-style: dashed; border-color: #aaa; font-style: italic; color: var(--muted); background: none; }
+.occ-job.is-more { border-color: #aaa; }
+.occ-card.is-dim { opacity: .28; }
+.occ-mark { display: inline-block; font-size: 10px; font-weight: 700; padding: 0 6px; border-radius: 8px; margin-bottom: 3px; }
+.occ-mark.is-same { background: var(--occ-c, #4d8a2f); color: #fff; }
+.occ-mark.is-change { background: #fff3cd; color: #7a4d00; border: 1px solid #e0b100; }
+/* les traits : plein et épais = même métier ; pointillés = un des deux sans métier */
+.occ-tree li.occ-li.is-same::after { border-left-color: var(--occ-c, #4d8a2f); border-left-width: 4px; }
+.occ-tree li.occ-li.is-same:last-child::before { border-right-color: var(--occ-c, #4d8a2f); border-right-width: 4px; }
+.occ-tree li.occ-li.is-unknown::after, .occ-tree li.occ-li.is-unknown:last-child::before { border-left-style: dashed; border-right-style: dashed; opacity: .7; }
+.occ-legend { display: flex; flex-direction: column; gap: 6px; align-items: center; margin: 18px auto 6px; max-width: 1000px; }
+.occ-legend-sectors, .occ-legend-links { display: flex; flex-wrap: wrap; gap: 6px 14px; justify-content: center; font-size: 12.5px; }
+.occ-leg { display: inline-flex; align-items: center; gap: 5px; }
+.occ-leg i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; }
+.occ-leg small { color: var(--muted); }
+.occ-leg .occ-line { width: 22px; height: 0; border-radius: 0; border-top: 4px solid #4d8a2f; }
+.occ-leg .occ-line.is-unknown { border-top: 2px dashed var(--ink); }
+.occ-stats { max-width: 860px; margin: 18px auto 0; }
+.occ-stats h3 { margin: 0 0 4px; }
+.occ-stat h4 { margin: 12px 0 6px; font-size: 14px; }
+.occ-stat-table { width: 100%; }
+.occ-stat-table .occ-total td { font-weight: 700; }
+@media (max-width: 640px) { .occ-controls { padding: 8px 12px; } .occ-ctl-row .occ-pk { min-width: 0; flex: 1 1 100%; } .occ-ctl-row .ui-search { max-width: none; flex-basis: 100%; } }
+
+/* ═════ 🗺 Carte de la vie (heritage-carte-vie.js) ═════ */
+.lv-dlg .lv-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; padding: 12px 20px 10px; border-bottom: 1px solid var(--line-color, #ddd); }
+.lv-dlg .lv-pk { min-width: 240px; flex: 0 1 340px; }
+.lv-dlg .lv-body { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 14px; padding: 12px 20px 0; align-items: start; }
+.lv-dlg .lv-map { min-width: 0; background: #fff; border-radius: 10px; padding: 0 0 8px; }
+.lv-dlg .lv-map > svg { width: 100%; height: auto; display: block; }
+.lv-dlg .lv-map .c2-tools { padding: 6px 8px 0; }
+.lv-dlg .lv-side { max-height: 66vh; overflow: auto; font-size: 13px; }
+.lv-dlg .lv-side h3 { margin: 0 0 6px; font-size: 15px; }
+.lv-dlg .lv-side h4 { margin: 12px 0 4px; font-size: 13.5px; }
+.lv-steps-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 3px; }
+.lv-step { display: flex; gap: 8px; width: 100%; text-align: left; background: none; border: 1px solid transparent; border-radius: 8px; padding: 5px 6px; cursor: pointer; color: inherit; font: inherit; }
+.lv-step:hover { border-color: var(--line-color, #ddd); }
+.lv-step.is-active { border-color: var(--blue); background: var(--blue-soft); }
+.lv-step .lv-num { flex: 0 0 22px; height: 22px; border-radius: 50%; background: var(--lv-c, #c0392b); color: #fff; font-size: 11px; font-weight: 700; display: grid; place-items: center; }
+.lv-step.is-noplace .lv-num { background: #fff; color: var(--muted); border: 1.5px dashed #999; }
+.lv-step .lv-txt small { display: block; color: var(--muted); }
+.lv-missing ul { margin: 4px 0 0; padding-left: 18px; }
+@media (max-width: 760px) { .lv-dlg .lv-bar, .lv-dlg .lv-body { padding-left: 12px; padding-right: 12px; } .lv-dlg .lv-body { grid-template-columns: 1fr; } .lv-dlg .lv-side { max-height: none; } .lv-dlg .lv-pk { min-width: 0; flex: 1 1 100%; } }
+:root[data-theme="dark"] .lv-dlg .lv-map { background: #f4f2ee; }
+:root[data-theme="dark"] .occ-mark.is-change { background: #3d3214; color: #f3d48a; border-color: #8a6a10; }
+/* ═════ 🗓 Sauvegarde automatique, 🔄 Deux ordinateurs, 🔒 verrou (heritage-sauvegarde.js) ═════ */
+.sa-page .sa-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 0 16px; }
+.sa-page .sa-grid > .maintenance-panel { margin-top: 0; }
+.sa-status .sa-last, .sa-widget .sa-last { font-size: 1.08rem; margin: 0 0 6px; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
+.sa-status .sa-last small, .sa-widget .sa-last small { flex-basis: 100%; }
+.sa-row { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: flex-end; }
+.sa-field { display: flex; flex-direction: column; gap: 4px; margin: 8px 0 2px; min-width: 0; }
+.sa-field > span { font-weight: 600; font-size: 13px; }
+.sa-field select, .sa-field input { max-width: 100%; }
+.sa-dir, .sa-dir input { width: 100%; }
+.sa-msg { margin: 8px 0 0; padding: 8px 12px; border-radius: 6px; border: 1.5px solid #9cc0f0; background: #eef5ff; color: #173a66; line-height: 1.45; }
+.sa-msg.is-warn { border-color: #e2c25a; background: #fff8dc; color: #5c4400; }
+.sa-msg.is-error { border-color: #e59a9a; background: #fdeeee; color: #7a1414; }
+.sa-msg.is-ok { border-color: #8fcf9f; background: #ecf8ee; color: #16502a; }
+.ui-hint.is-ok { color: #1d6b35; }
+.ui-hint.is-error { color: #a01818; font-weight: 600; }
+.sa-table-wrap { overflow-x: auto; max-width: 100%; }
+.sa-copies td, .sa-copies th { vertical-align: middle; }
+.sa-more { margin-top: 12px; }
+.sd-panel h3 { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.sd-line { display: flex; flex-wrap: wrap; gap: 4px 18px; margin: 6px 0; }
+.sd-line code { word-break: break-all; }
+.sd-setup { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) auto; gap: 8px 12px; align-items: end; margin: 10px 0; }
+.sd-setup .button { margin-bottom: 2px; }
+.sd-h { margin: 18px 0 4px; }
+.sd-conflicts { display: grid; gap: 12px; margin-top: 8px; }
+.sd-conflict { border: 1.5px solid #e2c25a; border-radius: 8px; padding: 10px 12px; background: var(--card-bg, #fff); }
+.sd-conflict header { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; margin-bottom: 6px; }
+.sd-side { table-layout: fixed; width: 100%; }
+.sd-side th[scope="row"] { width: 26%; font-weight: 600; }
+.sd-side td { word-break: break-word; }
+.sd-side .sd-mine { background: #eef5ff; }
+.sd-side .sd-theirs { background: #fff8dc; }
+.sd-held { margin: 6px 0; padding-left: 18px; }
+.sd-held li { margin: 4px 0; }
+.sd-merges { margin-top: 12px; }
+.sd-merges ul { margin: 6px 0; padding-left: 18px; }
+.sa-lock { position: fixed; inset: 0; z-index: 10050; display: flex; align-items: center; justify-content: center; padding: 16px; background: rgba(20, 24, 32, .55); }
+.sa-lock-card { width: min(var(--modal-s, 540px), 100%); background: var(--card-bg, #fff); color: var(--ink, #1d1d1f); border-radius: 12px; padding: 20px 22px; box-shadow: 0 18px 50px rgba(0,0,0,.3); }
+.sa-lock-card h2 { margin: 0 0 10px; font-size: 1.3rem; }
+.sa-lock-card .modal-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; margin-top: 16px; }
+.sa-lock-card .modal-actions [data-lock-force] { margin-right: auto; }
+@media (max-width: 640px) {
+    .sd-setup { grid-template-columns: 1fr; }
+    .sd-side th[scope="row"] { width: 32%; }
+    .sa-copies th:nth-child(3), .sa-copies td:nth-child(3) { display: none; }
+}
 /* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
 :root[data-theme="dark"] .h-poilu-event.is-blesse>strong,:root[data-theme="dark"] .h-poilu-event.is-tue>strong,:root[data-theme="dark"] .h-poilu-event.is-gaze>strong{color:#f49aa3}
 :root[data-theme="dark"] .h-calib-image{background:#292929}
@@ -5757,5 +5862,18 @@ dialog.modal.h-lot > .modal-actions { position:sticky; bottom:0; z-index:5; back
 :root[data-theme="dark"] .ip-map th,:root[data-theme="dark"] .ip-links th,:root[data-theme="dark"] .ip-prev th{color:#c1c6cd;background:#212121}
 :root[data-theme="dark"] .ip-warn{color:#f4d59a}
 :root[data-theme="dark"] .ip-links tr.is-undecided td{background:#403613}
+:root[data-theme="dark"] .cp-cmp-mid{background:#212121}
+:root[data-theme="dark"] .cp-cmp-handle::before{background:#212121}
+:root[data-theme="dark"] .cp-cmp-handle i{background:#212121}
+:root[data-theme="dark"] .occ-controls{border-bottom:1px solid #4c4c4c;background:#212121}
+:root[data-theme="dark"] .lv-step.is-noplace .lv-num{background:#212121}
+:root[data-theme="dark"] .sa-msg{border:1.5px solid #304869;background:#112139;color:#abc4e3}
+:root[data-theme="dark"] .sa-msg.is-warn{background:#403712;color:#f7e5b4}
+:root[data-theme="dark"] .sa-msg.is-error{border-color:#633636;background:#361515;color:#e7a7a7}
+:root[data-theme="dark"] .sa-msg.is-ok{background:#1d3120;color:#bce6cb}
+:root[data-theme="dark"] .ui-hint.is-ok{color:#ade1bd}
+:root[data-theme="dark"] .ui-hint.is-error{color:#e8a6a6}
+:root[data-theme="dark"] .sd-side .sd-mine{background:#112139}
+:root[data-theme="dark"] .sd-side .sd-theirs{background:#403712}
 @media (max-width:1100px){:root[data-theme="dark"] .h-at-detail{border-top:1px solid #4c4c4c}}
 /* ═════ fin du mode sombre automatique ═════ */

@@ -101,6 +101,7 @@
         page.querySelector('[data-qp-bar]').replaceWith(bar);
         if (S().qpContactFilter) { const c = S().qpContactFilter; S().qpContactFilter = null; bar.setFilter('contact', c); st2 = bar.state; }
         draw();
+        (ext.afterQuestions || []).forEach(fn => { try { fn(page); } catch (err) { console.error(err); } }); // 🔍 « Qui est sur cette photo ? » (heritage-photo-ask.js)
         const refresh = async () => { try { rows = (await api('qp_list')).questionnaires || []; } catch (_) {} if (page.isConnected) draw(); };
         page.addEventListener('click', async e => {
             const b = e.target.closest('button'); if (!b) return;
@@ -429,6 +430,8 @@
                     if (!f) throw new Error('Aucun fichier.');
                     if (f.size > 600 * 1024) throw new Error('ce fichier est trop gros pour un fichier de réponses (600 Ko au plus).');
                     body = {file: await f.text()};
+                    // 🔍 un fichier « Qui est sur cette photo ? » : il va dans sa propre fenêtre d'import (heritage-photo-ask.js)
+                    if (ext.photoAsk?.isReplyText(body.file)) { document.querySelectorAll('dialog.k-import[open]').forEach(d => d.close()); ext.photoAsk.importAnswers({files: [f], after}); return {count: 0, ok: false}; }
                 }
                 const r = await write('analyze', body);
                 const n = r.answers.length;

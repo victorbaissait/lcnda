@@ -539,6 +539,7 @@ function heritage_person_data(PDO $pdo, int $personId): array
         'profiles' => function_exists('profils_of_person') ? profils_of_person($pdo, $personId) : [], // 🧩 « Cette personne était… » (lib/profils.php)
         'heard' => function_exists('audio_regions_for_person') ? audio_regions_for_person($pdo, $personId) : [], // 🎧 « On l'entend » : passages de sons reliés (lib/audio_studio.php)
         'parcels' => function_exists('cadastre_for_person') ? cadastre_for_person($pdo, $personId) : [], // 🗺 « Propriétaire de… » : les parcelles du cadastre reliées (lib/cadastre.php)
+        'successions' => function_exists('successions_for_person') ? successions_for_person($pdo, $personId) : [], // 🏠 « Ce qu'il a reçu / transmis » (lib/successions.php)
     ];
 }
 

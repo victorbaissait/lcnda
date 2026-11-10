@@ -511,7 +511,9 @@
         help.setAttribute('aria-live', 'polite');
         inp.parentNode?.insertBefore(w, inp); box.appendChild(inp); w.append(box, help); inp.classList.add('ui-date-input');
         if (!inp.placeholder) inp.placeholder = '7 mai 1925, vers 1784, entre 1880 et 1885…';
-        const upd = () => { const r = UI.readDate(rawGet(inp)); help.innerHTML = dateHelpHtml(r); help.className = `ui-date-help${r ? (r.ok && !r.warn ? ' is-ok' : ' is-warn') : ''}`; };
+        const upd = () => { const r = UI.readDate(rawGet(inp)); help.innerHTML = dateHelpHtml(r); help.className = `ui-date-help${r ? (r.ok && !r.warn ? ' is-ok' : ' is-warn') : ''}`;
+            // une date d'acte en calendrier républicain : « 🪙 Convertir » ouvre le Convertisseur d'autrefois (heritage-lecture-autrefois.js)
+            if (r?.ok && /\d.*\ban [IVX]+\b/.test(r.label) && window.LCNDA_EXT?.autrefois) help.insertAdjacentHTML('beforeend', ' <span role="button" tabindex="0" class="ui-date-more" data-autrefois-open="calendrier" title="Le calendrier républicain dans les deux sens, mois par mois">🪙 Convertir</span>'); };
         if (calendar) {
             const b = h('button', 'ui-date-cal', '📅'); b.type = 'button'; b.title = 'Choisir sur un calendrier'; b.setAttribute('aria-label', b.title); b.tabIndex = -1;
             const cal = document.createElement('input'); cal.type = 'date'; cal.className = 'ui-native-date'; cal.tabIndex = -1; cal.setAttribute('aria-hidden', 'true'); cal.dataset.uiOff = '1';

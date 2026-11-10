@@ -21,8 +21,11 @@ const PICKER_KINDS = ['person', 'place', 'source', 'media', 'investigation', 'ba
     'event', // 📅 événements (personnes et couples) : un passage d'un son relié à un événement (Studio son, lib/audio_studio.php)
     'workbook', 'textdoc', // 🧾 classeurs du Tableur, 📝 documents du Traitement de texte (lib/textdocs.php)
     'parcel', // ▦ parcelles du cadastre (lib/cadastre.php)
+    'fobject', 'probate', // 🏺 objets de famille, ⚖️ inventaires après décès (🏠 Héritages et successions, lib/successions.php)
     'mylist', // 📋 Mes listes (custom_lists) : le groupe de personnes d'un diagramme (« Depuis l'app », lib/diagram_options.php)
-    'pet', 'tsite', 'agroup']; // 🐾 animaux (fiches « pets »), 🏞 sites de suivi, 👥 groupes d'animaux (lib/suivi.php)
+    'pet', 'tsite', 'agroup', // 🐾 animaux (fiches « pets »), 🏞 sites de suivi, 👥 groupes d'animaux (lib/suivi.php)
+    'health', // 🩺 maladies notées (lib/sante.php) : rien tant que « Santé de la famille » est cachée
+    'custommap', 'branch', 'maplayer']; // 🗺 Mes cartes, 🌿 branches, ✏️ mes couches de la Carte (lib/cartes_perso.php)
 const PICKER_LABELS = [
     'person' => '👤 Personnes', 'place' => '📍 Lieux', 'source' => '📚 Sources', 'media' => '🖼 Médias',
     'investigation' => '🔍 Enquêtes', 'battue' => '🧭 Battues', 'label' => '🏷 Étiquettes', 'house' => '🏠 Maisons',
@@ -37,7 +40,10 @@ const PICKER_LABELS = [
     'event' => '📅 Événements',
     'workbook' => '🧾 Classeurs', 'textdoc' => '📝 Documents',
     'parcel' => '▦ Parcelles',
+    'fobject' => '🏺 Objets de famille', 'probate' => '⚖️ Inventaires après décès',
     'pet' => '🐾 Animaux', 'tsite' => '🏞 Sites de suivi', 'agroup' => '👥 Groupes d’animaux',
+    'health' => '🩺 Santé',
+    'custommap' => '🗺 Mes cartes', 'branch' => '🌿 Branches', 'maplayer' => '✏️ Mes couches',
 ];
 // pays tapés en abrégé après un nom de lieu (« springfield usa »)
 const PICKER_COUNTRY_ALIASES = [
@@ -194,7 +200,7 @@ function picker_kind(PDO $pdo, string $kind, string $q, int $offset, int $limit,
             'digest' => picker_digests($pdo, $q, $offset, $limit),
             'contact' => picker_contacts($pdo, $q, $offset, $limit),
             'mylist' => picker_mylists($pdo, $q, $offset, $limit),
-            'event' => picker_events($pdo, $q, $offset, $limit),
+            'event' => picker_events($pdo, $q, $offset, $limit, $opts),
             'archive_service' => function_exists('picker_archive_services') ? picker_archive_services($pdo, $q, $offset, $limit) : ['total' => 0, 'items' => []], // 🏛 lib/archive_services.php
             'artwork' => function_exists('picker_art_items') ? picker_art_items($pdo, $q, $offset, $limit, $opts) : ['total' => 0, 'items' => []],
             'workbook' => function_exists('picker_workbooks') ? picker_workbooks($pdo, $q, $offset, $limit) : ['total' => 0, 'items' => []], // 🧾 lib/textdocs.php
@@ -202,10 +208,14 @@ function picker_kind(PDO $pdo, string $kind, string $q, int $offset, int $limit,
             'pet' => function_exists('picker_pets') ? picker_pets($pdo, $q, $offset, $limit) : ['total' => 0, 'items' => []], // 🐾 lib/suivi.php
             'tsite' => function_exists('picker_tsites') ? picker_tsites($pdo, $q, $offset, $limit) : ['total' => 0, 'items' => []],
             'agroup' => function_exists('picker_agroups') ? picker_agroups($pdo, $q, $offset, $limit) : ['total' => 0, 'items' => []],
+            'health' => function_exists('picker_health') ? picker_health($pdo, $q, $offset, $limit) : ['total' => 0, 'items' => []], // 🩺 lib/sante.php (cachée = rien)
             'parcel' => function_exists('picker_parcels') ? picker_parcels($pdo, $q, $offset, $limit) : ['total' => 0, 'items' => []], // ▦ lib/cadastre.php
+            'fobject' => function_exists('picker_family_objects') ? picker_family_objects($pdo, $q, $offset, $limit) : ['total' => 0, 'items' => []], // 🏺 lib/successions.php
+            'probate' => function_exists('picker_probates') ? picker_probates($pdo, $q, $offset, $limit) : ['total' => 0, 'items' => []], // ⚖️ lib/successions.php
             'graph' => function_exists('picker_graphs') ? picker_graphs($pdo, $q, $offset, $limit, $opts) : ['total' => 0, 'items' => []],
             // 🔗 sortes du widget « Raccourcis » (lib/widget_links.php) : fiches, Atelier, tableaux, mises en page, diagrammes, cartes, transcriptions
             'photomap' => (static function () use ($pdo, $q, $offset, $limit) { require_once __DIR__ . '/photomaps.php'; return picker_photomaps($pdo, $q, $offset, $limit); })(), // 📸 lib/photomaps.php
+            'custommap', 'branch', 'maplayer' => (static function () use ($pdo, $q, $offset, $limit, $kind) { require_once __DIR__ . '/cartes_perso.php'; return match ($kind) { 'custommap' => picker_custom_maps($pdo, $q, $offset, $limit), 'branch' => picker_branches($pdo, $q, $offset, $limit), default => picker_map_layers($pdo, $q, $offset, $limit) }; })(), // 🗺 lib/cartes_perso.php
             'sheet', 'atelier', 'board', 'layout', 'diagram', 'oldmap', 'act' => function_exists($fn = defined('WIDGET_LINK_PICKER_KINDS') ? (WIDGET_LINK_PICKER_KINDS[$kind][0] ?? '') : '') ? $fn($pdo, $q, $offset, $limit) : ['total' => 0, 'items' => []],
         };
         return ['groups' => [['kind' => $kind, 'key' => $kind, 'label' => PICKER_LABELS[$kind], 'total' => $r['total'], 'items' => $r['items']]],
@@ -258,12 +268,14 @@ function picker_text_where(array $columns, string $q, array &$params, string $pr
 
 // ─── 📅 Événements ──────────────────────────────────────────────────────────
 /** Un événement : son titre (ou sa sorte), la personne ou le couple, la date et le lieu ; on cherche aussi par nom de la personne */
-function picker_events(PDO $pdo, string $q, int $offset, int $limit): array
+function picker_events(PDO $pdo, string $q, int $offset, int $limit, array $opts = []): array
 {
     $params = [];
     $who = "COALESCE(p.first_name,'') || ' ' || COALESCE(p.last_name,'')";
     $couple = "COALESCE(p1.first_name,'') || ' ' || COALESCE(p1.last_name,'') || ' et ' || COALESCE(p2.first_name,'') || ' ' || COALESCE(p2.last_name,'')";
     $where = picker_text_where(['e.title', 't.label', 'e.date_text', 'pl.name', $who, $couple], $q, $params);
+    // filter.person_id : les événements d'une personne et de ses couples (⏳ Une journée dans la vie de…)
+    if (!empty($opts['person_id'])) { $pid = (int) $opts['person_id']; $where = "({$where}) AND (e.person_id={$pid} OR f.partner1_id={$pid} OR f.partner2_id={$pid})"; }
     [$total, $rows] = picker_page($pdo, "SELECT e.id, e.title, e.date_text, e.year, t.label, pl.name AS place, e.scope, {$who} AS who, {$couple} AS couple",
         "FROM events e LEFT JOIN event_types t ON t.id=e.event_type_id LEFT JOIN places pl ON pl.id=e.place_id LEFT JOIN persons p ON p.id=e.person_id LEFT JOIN families f ON f.id=e.family_id LEFT JOIN persons p1 ON p1.id=f.partner1_id LEFT JOIN persons p2 ON p2.id=f.partner2_id WHERE {$where}",
         'e.year IS NULL, e.year, e.id', $params, $offset, $limit);

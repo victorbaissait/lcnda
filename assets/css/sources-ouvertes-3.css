@@ -1,0 +1,31 @@
+/* LCNDA — 🌍 Archives de France et d’ailleurs (assets/js/heritage-sources-ouvertes-3.js) : rubriques de la fenêtre de
+ * recherche, réglage des sites en rubriques repliables, lignes d'un fichier de données. Reprend les classes so-* de
+ * sources-ouvertes.css. Couleurs : variables de l'app ; mode sombre par scripts/build-dark-css.py (bloc en fin de fichier). */
+.so3-search .so-grid select { max-width: 100%; }
+.so3-q { display: block; }
+.so3-search .so3-q .ui-search { width: 100%; max-width: 420px; }
+.so3-pills, .so3-wsbar .ui-filters { display: flex; flex-wrap: wrap; gap: 6px; }
+.so3-group { display: grid; gap: 6px; }
+.so3-group h4 { margin: 6px 0 0; font-size: 13.5px; }
+.so3-badges { display: inline-flex; flex-wrap: wrap; gap: 4px; vertical-align: middle; }
+.so3-link .ui-hint { margin: 0; }
+.so3-settings .so-set { gap: 6px; }
+.so3-rub { border: 1.5px solid #d6d9df; padding: 6px 10px; }
+.so3-rub > summary { cursor: pointer; padding: 4px 0; display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline; }
+.so3-rub[open] > summary { margin-bottom: 6px; }
+.so3-rub .so-set-row + .so-set-row { margin-top: 8px; }
+.so3-kind { display: grid; gap: 3px; max-width: 360px; }
+.so3-rows { max-height: 46vh; overflow: auto; }
+.so3-rows td, .so3-rows th { font-size: 12.5px; }
+.so3-wsbar { display: grid; gap: 6px; margin: 0 0 8px; }
+.so3-wsrub > summary { cursor: pointer; font-size: 13px; font-weight: 600; }
+.so3-wsrub .ui-filters { margin-top: 6px; }
+.so3-ws { margin-bottom: 4px; }
+@media (max-width: 760px) {
+    .so3-search .so-link { grid-template-columns: 22px minmax(0, 1fr); }
+    .so3-search .so-link > .button, .so3-search .so-link > a.button { grid-column: 1 / -1; justify-self: start; }
+    .so3-kind { max-width: none; }
+}
+/* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
+:root[data-theme="dark"] .so3-rub{border:1.5px solid #484b51}
+/* ═════ fin du mode sombre automatique ═════ */

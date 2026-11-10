@@ -425,6 +425,18 @@ class PhpServer extends EventEmitter {
   }
 
   /**
+   * 🗓 Sauvegarde « à la fermeture » (Réglages → 🗓 Sauvegarde automatique) et verrou d'ouverture rendu : appelé en quittant,
+   * avant d'arrêter PHP. Rien n'est fait si ce réglage est éteint ou si la base n'a pas changé. Jamais plus de 2 minutes.
+   * @returns {Promise<object|null>}
+   */
+  async closeBackup() {
+    try {
+      const r = await this.request('/api.php?action=autobackup_close', { timeout: 120000, headers: { 'x-carnet-local': this.localSecret } });
+      return JSON.parse(r.body.toString());
+    } catch { return null; }
+  }
+
+  /**
    * Ouvre la base une première fois, avant d'afficher l'interface : si sa structure doit être mise à jour
    * (lib/migrations.php : copie de sécurité puis migrations), cela se fait ici, une seule fois.
    * @returns {Promise<{ok: boolean, noDatabase?: boolean, version?: number, error?: string}>}

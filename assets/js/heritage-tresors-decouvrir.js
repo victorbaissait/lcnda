@@ -91,25 +91,15 @@
     F.push({key: 'prenoms-sauts', group: 'decouvrir', icon: '👶', title: 'Les prénoms qui sautent une génération', desc: 'Henri comme son grand-père, Rose comme son arrière-grand-mère : les prénoms transmis par-dessus les parents.', render: renderNames});
 
     /* ── 💰 Le pouvoir d'achat d'autrefois ── */
-    // [année, valeur en euros d'aujourd'hui d'une unité de la monnaie de l'année] — INSEE à partir de 1901 ; avant, ordre de grandeur
-    // tiré du prix des denrées. Unité : livre tournois avant 1795, franc ensuite (ancien franc jusqu'en 1959, nouveau franc 1960-2001), euro depuis 2002.
-    const EURO = [[1600, 14], [1700, 12], [1750, 10], [1789, 7], [1800, 5.5], [1820, 4.8], [1850, 4.5], [1870, 4.2], [1890, 4.3], [1901, 4.15], [1913, 3.95], [1918, 1.95], [1920, 1.3], [1925, 0.95], [1930, 0.75], [1935, 0.95], [1938, 0.62], [1940, 0.48], [1945, 0.15], [1948, 0.05], [1950, 0.035], [1955, 0.027], [1959, 0.0205],
-        [1960, 1.85], [1965, 1.6], [1970, 1.3], [1975, 0.92], [1980, 0.55], [1985, 0.38], [1990, 0.33], [1995, 0.29], [2001, 0.25], [2002, 1.46], [2010, 1.24], [2015, 1.16], [2020, 1.13], [2025, 1]];
-    // le prix d'un kilo de pain, dans la monnaie de l'année
-    const BREAD = [[1600, 0.12], [1700, 0.18], [1750, 0.2], [1789, 0.35], [1800, 0.3], [1820, 0.3], [1850, 0.32], [1870, 0.4], [1890, 0.36], [1900, 0.34], [1913, 0.42], [1918, 0.6], [1920, 1.2], [1925, 1.6], [1930, 2.2], [1935, 1.9], [1938, 2.6], [1945, 7], [1948, 30], [1950, 40], [1955, 55], [1959, 75],
-        [1960, 0.8], [1970, 1.6], [1975, 2.9], [1980, 5], [1985, 8], [1990, 10], [1995, 11.5], [2001, 13], [2002, 2.1], [2010, 3], [2015, 3.3], [2020, 3.6], [2025, 4.2]];
-    const era = y => (y < 1795 ? 'livre' : y < 1960 ? 'franc' : y < 2002 ? 'nf' : 'euro');
-    const interp = (rows, y) => { const same = rows.filter(r => era(r[0]) === era(y)); const R = same.length ? same : rows; if (y <= R[0][0]) return R[0][1]; if (y >= R.at(-1)[0]) return R.at(-1)[1];
-        for (let i = 1; i < R.length; i++) { const [y1, v1] = R[i - 1], [y2, v2] = R[i]; if (y <= y2) return v1 * Math.pow(v2 / v1, (y - y1) / (y2 - y1)); } return R.at(-1)[1]; };
+    // Les tables (indice des prix de l'INSEE à partir de 1901, ordre de grandeur avant, prix du pain) et le calcul sont ceux du
+    // 🪙 Convertisseur d'autrefois : app-autrefois-engine.js (window.LCNDA_AUTREFOIS). Un seul calcul pour toute l'app.
     const UNITS = [['livre', 'livres (ou francs de l’époque)'], ['sou', 'sous (1/20 de livre ou de franc)'], ['denier', 'deniers (1/240 de livre)'], ['ancien', 'anciens francs (après 1960)'], ['centime', 'centimes'], ['euro', 'euros']];
-    /** une somme d'une année → {euros, bread (kg), days (journées de journalier), unit} */
+    /** une somme d'une année → {euros, bread (kg), days (journées de journalier), native, era} (calcul du Convertisseur d'autrefois) */
     function worth(amount, unit, year) {
-        let v = Number(amount) || 0; const e = era(year);
-        if (unit === 'sou') v /= 20; else if (unit === 'denier') v /= 240; else if (unit === 'centime') v /= 100; else if (unit === 'ancien') v = e === 'nf' ? v / 100 : v;
-        else if (unit === 'euro' && e !== 'euro') v = e === 'nf' ? v * 6.55957 : v * 655.957;
-        const euros = v * interp(EURO, year), bread = v / interp(BREAD, year);
-        const sols = e === 'euro' ? v * 655.957 * 20 : e === 'nf' ? v * 100 * 20 : v * 20, wage = window.LCNDA_APP?.journalierWageSols?.(Math.min(year, 2001));
-        return {euros, bread, days: wage ? sols / wage : null, native: v, era: e};
+        const F = window.LCNDA_AUTREFOIS; let v = Number(amount) || 0, kind = 'plain';
+        if (unit === 'sou') v /= 20; else if (unit === 'denier') v /= 240; else if (unit === 'centime') v /= 100; else if (unit === 'ancien') kind = 'af'; else if (unit === 'euro') kind = 'euro';
+        const w = F?.worth({ok: true, kind, value: v}, year, {wageSols: window.LCNDA_APP?.journalierWageSols});
+        return w ? {euros: w.euros, bread: w.bread, days: w.days, native: w.native, era: w.era, source: w.source} : {euros: 0, bread: 0, days: null, native: v, era: 'franc'};
     }
     const fmtN = (n, d = 0) => Number(n).toLocaleString('fr-FR', {maximumFractionDigits: d, minimumFractionDigits: 0});
     const fmtE = n => (n >= 100 ? fmtN(Math.round(n / (n >= 10000 ? 100 : 1)) * (n >= 10000 ? 100 : 1)) : fmtN(n, 2)) + ' €';
@@ -121,7 +111,7 @@
         tr.events.forEach(e => { if (!e.what || !e.y) return; let m; re.lastIndex = 0; while ((m = re.exec(e.what))) { const n = Number(m[1].replace(/[\s.]/g, '').replace(',', '.')); if (n > 0) found.push({e, n, unit: /^(sous|sols)/i.test(m[2]) ? 'sou' : /^écu/i.test(m[2]) ? 'ecu' : 'livre', raw: m[0]}); } });
         host.innerHTML = `<form class="h-tr-panel h-tr-row" data-mo><label>La somme<input name="n" type="number" min="0" step="any" value="100" style="width:8em"></label><label>en<select name="u">${UNITS.map(([v, l]) => `<option value="${v}">${T.esc(l)}</option>`).join('')}</select></label><label>L’année<input name="y" type="number" min="1600" max="2025" value="1900" style="width:6em"></label></form>
             <div data-mo-out></div>
-            <p class="h-tr-muted">Repères : à partir de 1901, l’indice des prix de l’INSEE ; avant, un ordre de grandeur d’après le prix des denrées. Le pain : prix moyen du kilo de pain ordinaire. Les journées : le salaire d’un journalier (le convertisseur de l’application). Un écu = 3 livres.</p>
+            <p class="h-tr-muted">Repères : à partir de 1901, l’indice des prix de l’INSEE ; avant, un ordre de grandeur d’après le prix des denrées. Le pain : prix moyen du kilo de pain ordinaire. Les journées : le salaire d’un journalier. Un écu = 3 livres. <button type="button" class="link-button" data-autrefois-open="argent">🪙 Le calcul pas à pas dans le Convertisseur d’autrefois ↗</button></p>
             ${found.length ? `<h3>Les sommes de ton arbre</h3><ul class="h-tr-list">${found.slice(0, 60).map(f => { const n = f.unit === 'ecu' ? f.n * 3 : f.n, w = worth(n, f.unit === 'ecu' ? 'livre' : f.unit, f.e.y), p = tr.byId.get(f.e.p);
                 return `<li class="h-tr-item"><span class="h-tr-ic">💰</span><div class="h-tr-grow"><b>${T.esc(f.raw)}</b> en ${f.e.y}${p ? ` — ${T.esc(T.name(p))}` : ''} <small class="h-tr-muted">(${T.esc(f.e.label)} : ${T.esc(f.e.what)})</small><br>≈ <b>${fmtE(w.euros)}</b> d’aujourd’hui · ${fmtN(w.bread)} kg de pain${w.days ? ` · ${fmtN(w.days, 1)} journées de travail` : ''}</div></li>`; }).join('')}</ul>` : ''}`;
         const form = host.querySelector('[data-mo]'), out = host.querySelector('[data-mo-out]');
@@ -173,7 +163,7 @@
         const tr = await T.tree(), occs = [...new Set(tr.people.map(p => fold(p.occ)).filter(Boolean))], mine = WORDS.filter(([w]) => occs.some(o => o.includes(fold(w))));
         host.innerHTML = `<div class="h-tr-panel"><label style="display:grid;gap:4px"><b>Colle ici le texte d’un acte</b><textarea data-w-in rows="6" placeholder="L’an mil sept cent quatre-vingt, le douze mars, a été baptisé Jean, fils légitime de feu Antoine Martin, laboureur, et de Marie Durand…"></textarea></label><div data-w-out></div></div>
             ${mine.length ? `<div class="h-tr-panel"><b>Dans ton arbre</b> : ${mine.map(([w, d]) => `<span class="h-tr-pill" title="${T.esc(d)}">${T.esc(w)}</span>`).join(' ')}</div>` : ''}
-            <div class="h-tr-row"><label>Chercher un mot<input type="search" data-w-q placeholder="laboureur, brumaire, dot…"></label><span class="h-tr-muted">${WORDS.length} mots</span></div><dl class="h-tr-dict" data-w-list></dl>`;
+            <div class="h-tr-row"><label>Chercher un mot<input type="search" data-w-q placeholder="laboureur, brumaire, dot…"></label><span class="h-tr-muted">${WORDS.length} mots</span><button type="button" class="link-button" data-la-open="">📜 Le latin, les abréviations et les anciennes lettres ↗</button></div><dl class="h-tr-dict" data-w-list></dl>`;
         const q = host.querySelector('[data-w-q]'), dl = host.querySelector('[data-w-list]'), inp = host.querySelector('[data-w-in]'), out = host.querySelector('[data-w-out]');
         const list = () => { const s = fold(q.value.trim()); dl.innerHTML = WORDS.filter(([w, d]) => !s || fold(w + ' ' + d).includes(s)).sort((a, b) => a[0].localeCompare(b[0], 'fr')).map(([w, d]) => `<div><dt>${T.esc(w)}</dt><dd>${T.esc(d)}</dd></div>`).join(''); };
         const scan = () => { const t = inp.value.trim(); if (!t) { out.innerHTML = ''; return; } const {html, hits} = highlight(T, t);

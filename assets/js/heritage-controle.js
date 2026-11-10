@@ -25,7 +25,7 @@
     const ls = (k, d) => { try { const v = JSON.parse(localStorage.getItem(k) || 'null'); return v ?? d; } catch (_) { return d; } };
     const lsSet = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (_) {} };
 
-    const SORTS = {dates: ['📅', 'Dates'], ages: ['🎂', 'Âges'], parents: ['👪', 'Parents'], doublons: ['👥', 'Doublons'], lieux: ['📍', 'Lieux']};
+    const SORTS = {dates: ['📅', 'Dates'], ages: ['🎂', 'Âges'], parents: ['👪', 'Parents'], doublons: ['👥', 'Doublons'], lieux: ['📍', 'Lieux'], socface: ['🧾', 'Recensement SocFace']};
     const LEVELS = {red: ['🔴', 'Impossible'], orange: ['🟠', 'À vérifier'], yellow: ['🟡', 'Curieux']};
     const SUBS = {misplaced: 'Lieux mal placés', journeys: 'Voyages impossibles', baptism: 'Baptême loin', conflicting: 'Lieux contradictoires'};
     const FKEY = 'lcnda-controle-filtres';
@@ -55,12 +55,16 @@
         'long-date': 'une note ou une phrase de l’acte collée dans la case de la date : garde la date seule, mets le reste en note.',
         'negative-date': 'un tiret tapé par erreur devant l’année.',
         'spouse-ancestor': 'un homonyme pris pour le conjoint, ou une fiche rattachée une génération trop haut ou trop bas.',
+        'socface-birth': 'un chiffre mal lu par la machine (1/7, 3/8, 5/6), ou un âge déclaré au hasard par la famille : regarde l’image du recensement.',
+        'socface-place': 'un nom de commune mal lu ou abrégé (« St » pour Saint) : regarde l’image du recensement.',
+        'socface-gender': 'la case du genre mal lue, ou une autre personne du ménage : regarde l’image du recensement.',
+        'socface-relation': 'un lien mal lu (fils / fille), un ménage mal découpé, ou une fiche pas encore reliée : regarde l’image du recensement.',
         'animal-link': 'un ancien import où l’animal était relié comme une personne : relie-le à son maître dans sa fiche (Propriétaire).',
     };
     /** Raisons proposées dans « Ce n'est pas une erreur », selon la sorte */
     const REASONS = {
         common: ['J’ai vérifié dans l’acte : c’est bien ça', 'C’est rare, mais c’est vrai (cas connu dans la famille)', 'La date est approximative (« vers… »)'],
-        doublons: ['Ce sont deux personnes différentes'], lieux: ['Le lieu est juste'], journeys: ['Ce sont bien les mêmes dates et lieux'], parents: ['Enfant posthume'], ages: ['Remariage tardif'],
+        doublons: ['Ce sont deux personnes différentes'], lieux: ['Le lieu est juste'], socface: ['J’ai regardé l’image : ma fiche est juste, SocFace a mal lu', 'Ce n’est pas la même personne (homonyme)', 'L’âge déclaré au recensement était approximatif'], journeys: ['Ce sont bien les mêmes dates et lieux'], parents: ['Enfant posthume'], ages: ['Remariage tardif'],
     };
 
     /* ─── petits morceaux ─── */
@@ -123,7 +127,7 @@
         return list.filter(a => (f.sort === 'all' || a.sort === f.sort) && (!f.level || a.level === f.level) && (!f.sub || a.sub === f.sub));
     }
     function sorted(list, sort) {
-        const lv = {red: 0, orange: 1, yellow: 2}, so = {parents: 0, dates: 1, ages: 2, doublons: 3, lieux: 4};
+        const lv = {red: 0, orange: 1, yellow: 2}, so = {parents: 0, dates: 1, ages: 2, doublons: 3, lieux: 4, socface: 5};
         const name = a => nm(DATA.people[a.people[0]]) || a.place?.name || a.title;
         const out = list.slice();
         if (sort === 'sort') out.sort((x, y) => so[x.sort] - so[y.sort] || lv[x.level] - lv[y.level]);
@@ -147,6 +151,7 @@
         const fixBtn = a.sort === 'doublons' ? `<button type="button" class="button small secondary" data-ctl-compare="${i}">⚖️ Comparer</button>`
             : a.check === 'misplaced' ? `<button type="button" class="button small secondary" data-ctl-place="${i}">✎ ${a.suggest ? 'Corriger' : 'Placer sur la carte'}</button>`
             : a.fix?.event_id ? `<button type="button" class="button small secondary" data-ctl-fix="${i}">✎ Corriger</button>`
+            : a.socface?.census_id && window.LCNDA_EXT?.socface ? `<button type="button" class="button small secondary" data-sf-verify-census="${Number(a.socface.census_id)}" data-sf-member="${Number(a.socface.member_id)}">🔍 Vérifier la ligne</button>${a.socface.image_url ? `<a class="button small secondary" href="${esc(a.socface.image_url)}" target="_blank" rel="noopener noreferrer">${esc(window.LCNDA_SOCFACE?.imageLabel ? window.LCNDA_SOCFACE.imageLabel(a.socface.image_url) : '🖼 Image ↗')}</a>` : ''}${a.people[0] ? `<button type="button" class="button small secondary" data-open-person="${a.people[0]}">↗ Fiche</button>` : ''}`
             : a.people[0] ? `<button type="button" class="button small secondary" data-open-person="${a.people[0]}">↗ Ouvrir</button>` : '';
         return `<article class="ctl-row is-${esc(a.level)}" data-ctl-i="${i}" data-ctx-menu>
             <div class="ctl-row-main"><h3><span class="ctl-lvl" title="${esc(levelOf(a.level)[1])}">${ic}</span> ${esc(a.title)} ${sortBadge(a.sort)}${a.score ? ` ${UI().badge(a.score + ' %', 'yellow')}` : ''}${a.returned ? ` ${UI().badge('Dates changées', 'yellow', {title: 'Tu l’avais écartée, mais une des dates en cause a changé'})}` : ''}</h3>
@@ -296,8 +301,8 @@
     /** « Ce n'est pas une erreur » : une raison selon la sorte, une note, « me le signaler à nouveau si une date change ». */
     function dismiss(a, after) {
         if (!a) return;
-        const extra = a.check === 'journey' ? REASONS.journeys : a.sort === 'doublons' || a.check === 'misplaced' ? REASONS[a.sort] : a.check === 'old-marriage' ? REASONS.ages : a.check === 'after-father-death' ? REASONS.parents : [];
-        const reasons = a.sort === 'doublons' || a.check === 'misplaced' ? extra : [...REASONS.common, ...extra];
+        const extra = a.check === 'journey' ? REASONS.journeys : a.sort === 'socface' ? REASONS.socface : a.sort === 'doublons' || a.check === 'misplaced' ? REASONS[a.sort] : a.check === 'old-marriage' ? REASONS.ages : a.check === 'after-father-death' ? REASONS.parents : [];
+        const reasons = a.sort === 'doublons' || a.check === 'misplaced' || a.sort === 'socface' ? extra : [...REASONS.common, ...extra];
         const people = a.people.map(id => nm(DATA?.people?.[id] || {})).join(' → ');
         const dlg = document.createElement('dialog'); dlg.className = 'modal small-modal ctl-dismiss';
         dlg.innerHTML = `<form method="dialog"><div class="modal-head"><div><span class="eyebrow">CONTRÔLE DE LA BASE</span><h2>Ce n’est pas une erreur ?</h2></div><button class="icon-button" type="button" data-x aria-label="Fermer">×</button></div>
@@ -441,6 +446,7 @@
         ['👪 Parents', [['father_death_days', 'Délai après la mort du père', '🔴 naissance plus tard que', 'jours'], ['birth_gap_months', 'Écart entre deux naissances', '🔴 moins de', 'mois'], ['sibling_span', 'Fratrie étalée', '🟠 sur plus de', 'ans']]],
         ['📅 Dates', [['baptism_days', 'Baptême tardif (avant 1900)', '🟡 plus de', 'jours'], ['burial_days', 'Inhumation tardive (avant 1900)', '🟡 plus de', 'jours']]],
         ['📍 Lieux et 👥 Doublons', [['baptism_km', 'Baptême loin de la naissance', '🟠 au-delà de', 'km'], ['dup_min', 'Ressemblance des doublons', 'montrer à partir de', '%']]],
+        ['🧾 Recensement SocFace', [['socface_years', 'Année de naissance lue par SocFace', '🟡 écart de plus de', 'ans']]],
     ];
     const label = k => SEUILS.flatMap(s => s[1]).find(r => r[0] === k)?.[1] || k;
     ext.maintenance.controle_seuils = async token => {

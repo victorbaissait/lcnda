@@ -1,0 +1,84 @@
+/* LCNDA — 🧾 Recensements SocFace (assets/js/heritage-socface.js) : fenêtres de recherche, d'import et de vérification,
+ * page Recherche → « 🧾 Recensements SocFace », bloc de la fiche. Couleurs : variables de l'app ; le mode sombre est écrit
+ * par scripts/build-dark-css.py (bloc en fin de fichier). */
+
+/* fenêtre « 🔍 Chercher dans les recensements » (petite, K6) */
+.sf-search-body .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 12px; }
+.sf-search-body .form-grid .span-2 { grid-column: 1 / -1; }
+.sf-url { margin: 6px 0 4px; }
+.sf-url code { display: block; padding: 8px 10px; background: var(--blue-soft, #eef4ff); border: 1px solid #c9d6f2; font-size: 12px; line-height: 1.45; word-break: break-all; color: var(--ink); }
+.sf-search .modal-actions a.button { text-decoration: none; }
+
+/* aperçu d'import : un cadre par ménage */
+.sf-preview { display: grid; gap: 14px; }
+.sf-hh { border: 1.5px solid #d6d9df; padding: 10px 12px; background: var(--card-bg, #fff); }
+.sf-hh.is-existing { opacity: .7; }
+.sf-hh h4 { margin: 0 0 4px; font-size: 15px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.sf-hh-meta { margin: 0 0 8px; font-size: 12.5px; }
+.sf-table td, .sf-verify-table td { vertical-align: top; font-size: 13px; white-space: normal; overflow: visible; text-overflow: clip; max-width: none; }
+.sf-preview, .sf-hh { min-width: 0; }
+.sf-table td:nth-child(5) { min-width: 200px; max-width: 320px; white-space: normal; }
+.sf-table select { width: 100%; max-width: 320px; min-width: 0; }
+.sf-ecarts { list-style: none; margin: 6px 0 0; padding: 0; display: grid; gap: 4px; }
+.sf-ecarts:empty { display: none; }
+.sf-ecart { font-size: 12.5px; line-height: 1.45; padding: 4px 8px; border-left: 3px solid #e1a500; background: #fff8e1; color: #4d3b00; }
+.sf-ecart.is-orange { border-left-color: #d9731a; background: #fff0e3; color: #5a2c00; }
+
+/* fenêtre « 🔍 Vérifier cette ligne SocFace » (grande, K6) */
+.sf-verify-body { display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: 16px; align-items: start; }
+.sf-verify-who { font-size: 15px; margin: 8px 0; }
+.sf-verify-table .sf-k { white-space: nowrap; font-weight: 700; }
+.sf-verify-table tr.is-orange td { background: #fff0e3; }
+.sf-verify-table tr.is-yellow td { background: #fff8e1; }
+.sf-doubt { margin: 0 0 4px; font-size: 13px; line-height: 1.45; }
+.sf-props { margin: 4px 0 8px; display: flex; flex-wrap: wrap; gap: 6px; }
+.sf-verify-side { display: grid; gap: 8px; align-content: start; border-left: 1px solid #e3e5ea; padding-left: 14px; }
+.sf-verify-side h3 { margin: 6px 0 0; font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+.sf-verify-side a.button { text-decoration: none; text-align: center; }
+.sf-verify-rows { margin: 0; padding-left: 20px; display: grid; gap: 3px; font-size: 13px; }
+.sf-verify-rows .is-active { font-weight: 800; text-decoration: underline; }
+
+/* bloc Recensements de la fiche */
+.sf-card-actions { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
+.sf-rec { margin: 6px 0; padding: 8px 10px; border-left: 3px solid #e1a500; background: #fffaf0; }
+.sf-rec-head { margin: 0 0 6px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.sf-rec-acts { margin: 0; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.sf-rec-acts a.button, .sf-item-acts a.button { text-decoration: none; }
+.sf-verified { margin-left: 4px; }
+
+/* Recherche → 🧾 Recensements SocFace */
+.sf-bar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 12px 0; }
+.sf-bar .sf-q, .sf-bar .ui-search { flex: 1 1 260px; min-width: 0; }
+.sf-list { display: grid; gap: 10px; }
+.sf-item { display: flex; gap: 12px; justify-content: space-between; align-items: flex-start; border: 1.5px solid #d6d9df; padding: 10px 12px; background: var(--card-bg, #fff); }
+.sf-item h3 { margin: 0 0 4px; font-size: 15px; }
+.sf-item p { margin: 2px 0; }
+.sf-item-acts { display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end; align-items: center; max-width: 46%; }
+.sf-unlinked { color: var(--muted); }
+
+/* « ✨ Lire l'acte » : les lectures à vérifier (même moteur, app-lecture-auto.js) */
+.h-htr-lx { margin: 10px 0; padding: 8px 10px; border-left: 3px solid #e1a500; background: #fff8e1; color: #4d3b00; }
+.h-htr-lx h4 { margin: 0 0 6px; font-size: 13.5px; }
+.h-htr-lx ul { margin: 0; padding-left: 4px; list-style: none; display: grid; gap: 5px; font-size: 13px; }
+
+@media (max-width: 760px) {
+    .sf-verify-body { grid-template-columns: 1fr; }
+    .sf-verify-side { border-left: 0; padding-left: 0; border-top: 1px solid #e3e5ea; padding-top: 10px; }
+    .sf-item { flex-direction: column; }
+    .sf-item-acts { max-width: none; justify-content: flex-start; }
+    .sf-search-body .form-grid { grid-template-columns: 1fr; }
+    .sf-table td:nth-child(5) { min-width: 160px; }
+}
+/* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
+:root[data-theme="dark"] .sf-url code{border:1px solid #354464}
+:root[data-theme="dark"] .sf-hh{border:1.5px solid #484b51}
+:root[data-theme="dark"] .sf-ecart{background:#3e3412;color:#f8ebc1}
+:root[data-theme="dark"] .sf-ecart.is-orange{background:#3d2612;color:#f7d6b6}
+:root[data-theme="dark"] .sf-verify-table tr.is-orange td{background:#3d2612}
+:root[data-theme="dark"] .sf-verify-table tr.is-yellow td{background:#3e3412}
+:root[data-theme="dark"] .sf-verify-side{border-left:1px solid #474a52}
+:root[data-theme="dark"] .sf-rec{background:#392b10}
+:root[data-theme="dark"] .sf-item{border:1.5px solid #484b51}
+:root[data-theme="dark"] .h-htr-lx{background:#3e3412;color:#f8ebc1}
+@media (max-width: 760px){:root[data-theme="dark"] .sf-verify-side{border-top:1px solid #474a52}}
+/* ═════ fin du mode sombre automatique ═════ */

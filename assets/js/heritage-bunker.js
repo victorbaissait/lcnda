@@ -150,7 +150,7 @@
     let treeP = null;
     function tree() { treeP = treeP || (ext.tresors?.T?.tree ? ext.tresors.T.tree() : A().api('tresor_tree').then(d => ({...d, byId: new Map(d.people.map(p => [p.id, p]))}))); return treeP.then(t => { treeDone = t; return t; }).catch(e => { treeP = null; throw e; }); }
     /** jamais un vivant, une fiche confidentielle ni une fiche cachée au partage (vivant probable) parmi ceux que le jeu choisit seul */
-    const shareable = p => p && !p.living && !p.priv && !p.sh;
+    const shareable = p => p && !p.living && !p.priv && !p.sh && !p.mem;
     const nameOf = p => (p ? p.name || [p.first, p.last].filter(Boolean).join(' ') || 'Sans nom' : 'Sans nom');
     /** les proches d'abord (parents, conjoints, enfants, frères et sœurs), puis d'autres ancêtres au hasard */
     async function propose(form) {

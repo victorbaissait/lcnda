@@ -39,7 +39,7 @@
         if (o.scope === 'people') keep = new Set((o.ids || []).map(Number));
         const out = [];
         persons.forEach(p => {
-            if (!p || p.living || p.priv) return;
+            if (!p || p.living || p.priv || p.mem) return; // mem : déporté(e) ou fusillé(e), jamais dans un jeu
             const n = Number(sosa[p.id]) || 0;
             if (o.scope === 'sosa' && !n) return;
             if (o.scope === 'gen' && sosaGen(n) !== Number(o.gen)) return;

@@ -669,6 +669,7 @@ function export_gedcom(PDO $pdo, ?array &$sink = null): void
         $writeLabels(2, 'event:' . (int) $e['id']);
     };
 
+    $healthRows = $sink === null && !$geneanet && export_option_enabled('health', false) && function_exists('sante_gedcom_rows') ? sante_gedcom_rows($pdo) : []; // 🩺 jamais sans la case
     foreach ($persons as $p) {
         $pid = (int) $p['id'];
         $line(0, '@I' . $pid . '@', 'INDI');
@@ -718,6 +719,13 @@ function export_gedcom(PDO $pdo, ?array &$sink = null): void
         if (trim((string) ($p['nationality'] ?? '')) !== '') { $line(1, 'NATI', (string) $p['nationality']); }
         if (trim((string) ($p['physical_description'] ?? '')) !== '') { $line(1, 'DSCR', (string) $p['physical_description']); }
         foreach ($eventsByPerson[$pid] ?? [] as $e) { $writeEvent($e, 'person'); }
+        // 🩺 santé de la famille (lib/sante.php) : privée, seulement avec la case « Inclure la santé de la famille » cochée au moment de l'export
+        foreach ($healthRows[$pid] ?? [] as $h) {
+            $line(1, 'EVEN', (string) $h['label']);
+            $line(2, 'TYPE', match ($h['kind']) { 'handicap' => 'Handicap', 'deces' => 'Cause de décès', 'epidemie' => 'Épidémie traversée', 'autre' => 'Santé', default => 'Maladie' });
+            if (trim((string) $h['date_text']) !== '') { $line(2, 'DATE', gedcom_date_out((string) $h['date_text'], 'gregorian', $version)); }
+            if (trim((string) $h['note']) !== '' || $h['to_check']) { $text(2, 'NOTE', trim(($h['to_check'] ? '(à vérifier) ' : '') . (string) $h['note'])); }
+        }
         foreach ($famcByChild[$pid] ?? [] as $famId => $c) {
             $line(1, 'FAMC', '@F' . $famId . '@');
             $r1 = (string) ($c['relation_to_partner1'] ?? 'biological'); $r2 = (string) ($c['relation_to_partner2'] ?? 'biological');

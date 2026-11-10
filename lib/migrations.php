@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 74;
+const SCHEMA_VERSION = 87;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -95,6 +95,19 @@ function migration_steps(): array
         72 => 'schema_v72',
         73 => 'schema_v73',
         74 => 'schema_v74',
+        75 => 'schema_v75',
+        76 => 'schema_v76',
+        77 => 'schema_v77',
+        78 => 'schema_v78',
+        79 => 'schema_v79',
+        80 => 'schema_v80',
+        81 => 'schema_v81',
+        82 => 'schema_v82',
+        83 => 'schema_v83',
+        84 => 'schema_v84',
+        85 => 'schema_v85',
+        86 => 'schema_v86',
+        87 => 'schema_v87',
     ];
 }
 
@@ -2439,4 +2452,113 @@ function schema_v74(PDO $pdo): void
 {
     if (!function_exists('cartes_outils_schema')) { require_once __DIR__ . '/cartes_outils.php'; }
     cartes_outils_schema($pdo);
+}
+
+/** 75 : 🧾 Recensements SocFace (FranceArchives) — l'origine, les liens (notice, image), la cote, la page, « Vérifié sur l'image »
+ *  sur census_records / census_members, et socface_imports pour « ↶ Annuler » un import (lib/socface.php). */
+function schema_v75(PDO $pdo): void
+{
+    if (!function_exists('socface_schema')) { require_once __DIR__ . '/socface.php'; }
+    socface_schema($pdo);
+}
+
+/** 76 : 🗂 Archives en ligne (Mémoire des hommes, Léonore, registres matricules, presse) — so_imports garde ce qu'un import a
+ *  créé et les anciennes valeurs, pour « ↶ Annuler » (lib/sources_ouvertes.php). */
+function schema_v76(PDO $pdo): void
+{
+    if (!function_exists('so_schema')) { require_once __DIR__ . '/sources_ouvertes.php'; }
+    so_schema($pdo);
+}
+
+/** 77 : 🗂 Archives en ligne (suite) — les types d'événements Déportation, Décès en déportation, Fusillé, Condamnation, Arrivée au
+ *  bagne, Libération ou décès au bagne, Décoration, Changement de nom (lib/sources_ouvertes_2.php). Rien n'est ajouté s'ils existent. */
+function schema_v77(PDO $pdo): void
+{
+    if (!function_exists('so2_seed_types')) { require_once __DIR__ . '/sources_ouvertes_2.php'; }
+    so2_seed_types($pdo);
+}
+
+/** 78 : 🗂 Archives en ligne (4e lot) — population d'une commune depuis 1793 (place_populations) et ses anciens noms
+ *  (place_former_names), lus sur le site de l'EHESS « Des villages de Cassini… » ou recopiés (lib/sources_ouvertes_4.php). */
+function schema_v78(PDO $pdo): void
+{
+    if (!function_exists('so4_schema')) { require_once __DIR__ . '/sources_ouvertes_4.php'; }
+    so4_schema($pdo);
+}
+
+/** 79 : 🩺 Santé de la famille — maladies, handicaps, causes de décès, épidémies traversées (health_records), privées : cachées
+ *  au départ et jamais exportées (lib/sante.php). */
+function schema_v79(PDO $pdo): void
+{
+    if (!function_exists('sante_schema')) { require_once __DIR__ . '/sante.php'; }
+    sante_schema($pdo);
+}
+
+/** 80 : 🔄 Deux ordinateurs et 🤝 travail à deux — identifiants communs (uid) aussi sur les sources, médias, liens de médias et
+ *  citations ; conflits à régler (sync_conflicts) et fusions à défaire (sync_merges) (lib/sync_dossier.php). */
+function schema_v80(PDO $pdo): void
+{
+    if (!function_exists('sd_schema')) { require_once __DIR__ . '/sync_dossier.php'; }
+    sd_schema($pdo);
+}
+
+/** 81 : 🏠 Héritages et successions — les actes (testament, partage, inventaire après décès, donation, vente entre héritiers,
+ *  contrat de mariage, déclaration de succession), leurs personnes avec rôle (défunt ou donateur, bénéficiaires, autres) et
+ *  les biens transmis (maison, parcelle, objet de famille, terre, somme, meuble), à qui (lib/successions.php). */
+function schema_v81(PDO $pdo): void
+{
+    if (!function_exists('successions_schema')) { require_once __DIR__ . '/successions.php'; }
+    successions_schema($pdo);
+}
+
+/** 82 : 👶 Transmission des prénoms — les corrections à la main (« ce n'est pas ça », « choisir la personne ») :
+ *  name_origin_choices (lib/prenoms_france.php). Le reste est calculé à la lecture. */
+function schema_v82(PDO $pdo): void
+{
+    if (!function_exists('pf_schema')) { require_once __DIR__ . '/prenoms_france.php'; }
+    pf_schema($pdo);
+}
+
+/** 83 : 🧩 Murs de brique — les ancêtres où l'on bloque : marque « 🧱 Je bloque ici », statut (à chercher, en cours, résolu,
+ *  abandonné) et note (brick_walls) ; les murs eux-mêmes sont calculés (lib/ou_chercher.php). */
+function schema_v83(PDO $pdo): void
+{
+    if (!function_exists('ouc_schema')) { require_once __DIR__ . '/ou_chercher.php'; }
+    ouc_schema($pdo);
+}
+
+/** 84 : 🔍 « Qui est sur cette photo ? » à plusieurs (photo_asks : visages, noms proposés, réponses des cousins, imports à
+ *  défaire — lib/photo_ask.php) et 📮 courriers tout prêts (courriers.person_id, letter_json, media_id — lib/courriers_actes.php). */
+function schema_v84(PDO $pdo): void
+{
+    if (!function_exists('photo_ask_schema')) { require_once __DIR__ . '/photo_ask.php'; }
+    photo_ask_schema($pdo);
+    if (!function_exists('cl_schema')) { require_once __DIR__ . '/courriers_actes.php'; }
+    cl_schema($pdo);
+}
+
+/** 85 : 📍 Images de lieux — « Où a-t-elle été prise ? » : ce qu'on sait de l'image (place_photos : sorte, auteur, photo
+ *  d'aujourd'hui, comparaison) et ses hypothèses de lieu (place_photo_guesses : lieu, point, zone, rue, direction, certitude,
+ *  pourquoi, auteur, une seule retenue) (lib/place_photos.php). */
+function schema_v85(PDO $pdo): void
+{
+    if (!function_exists('place_photos_schema')) { require_once __DIR__ . '/place_photos.php'; }
+    place_photos_schema($pdo);
+}
+
+/** 86 : 🎉 Organiser une cousinade — les projets (cousinades : ancêtre ou couple, personne de référence, date, lieu, réglages)
+ *  et leurs invités (cousinade_guests : fiche ou nom libre, coordonnées propres au projet, réponse, régime, présence, table)
+ *  (lib/cousinade.php). Les liens de parenté et les branches sont calculés à la lecture. */
+function schema_v86(PDO $pdo): void
+{
+    if (!function_exists('cousinade_schema')) { require_once __DIR__ . '/cousinade.php'; }
+    cousinade_schema($pdo);
+}
+
+/** 87 : 🗺 Mes cartes (Carte → « 🗺 Mes cartes ») — custom_maps : nom, description et définition (fond, période, vue, couches avec
+ *  leurs filtres et leur style), jamais les données ; supprimée = gardée 30 jours pour « ↶ Annuler » (lib/cartes_perso.php). */
+function schema_v87(PDO $pdo): void
+{
+    if (!function_exists('cartes_perso_schema')) { require_once __DIR__ . '/cartes_perso.php'; }
+    cartes_perso_schema($pdo);
 }

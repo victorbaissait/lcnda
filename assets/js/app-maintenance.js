@@ -8,13 +8,13 @@
     const MG_KEY = 'genealogie-maintenance-groups';
     const MG_DEFAULT = [['g_look', '🎨', 'Apparence et affichage', ['design', 'design_sheets', 'design_maps', 'frontieres', 'viewer_prefs', 'raccourcis', 'accessibilite']], ['g_tools', '🛠️', 'Outils', ['montage_prefs', 'board_prefs', 'pet_prefs', 'atelier', 'htr']],
         ['g_build', '🧱', 'Construire (éditeurs)', ['block_editor', 'widget_editor', 'stats_editor', 'tabs_editor', 'my_lists']], ['g_quality', '🧹', 'Qualité des données', ['controle', 'duplicates', 'harmonize', 'controle_seuils', 'bulk', 'branches']],
-        ['g_data', '📦', 'Données : import, export, sauvegarde', ['export', 'import', 'fusion', 'cousin_vault', 'scan_inbox', 'sync', 'safety', 'entretien', 'changes', 'meteo']], ['g_ref', '📚', 'Référentiels', ['labels', 'event_types', 'calendar_measures', 'help']], ['g_help', '❓', 'Aide', ['faq', 'infos', 'mises_a_jour']]];
+        ['g_data', '📦', 'Données : import, export, sauvegarde', ['sauvegarde', 'export', 'import', 'fusion', 'cousin_vault', 'scan_inbox', 'sync', 'safety', 'entretien', 'changes', 'meteo', 'sante']], ['g_ref', '📚', 'Référentiels', ['labels', 'event_types', 'calendar_measures', 'help']], ['g_help', '❓', 'Aide', ['faq', 'infos', 'mises_a_jour']]];
     /* même rangement que Listes (app-sidegroups.js) : en groupes ou en une seule liste, chaque façon garde ses réglages */
     /* « Chercher un réglage… » trouve aussi une page par ce qu'elle contient (préférences, types de recherche, fonds de carte…) */
     const MAINT_KEYWORDS = {design: 'préférences réglages boutons en haut à droite barre du haut calculette mode consultation nouvelle fenêtre écran en deux mes généalogies types de recherche type de recherche ordre du menu onglets ordre des listes couleurs des badges messages après une action police couleur principale réglages enregistrés',
         design_maps: 'préférences fonds de carte fonds de cartes ordre des fonds boutons plan des adresses village carte par défaut ordre des cartes',
         design_board: 'préférences widgets bibliothèque', design_sheets: 'préférences blocs de la fiche en-tête boutons profils style des fiches traits coins arrondis ombres designs au choix', raccourcis: 'touches clavier préférences',
-        diagram_kinds: 'diagrammes graphiques types', accessibilite: 'préférences mode simple contraste animations mouvement mouvements', board_prefs: 'réglages des tableaux formes pointes couleurs', pet_prefs: 'réglages des animaux espèces formulaire', frontieres: 'cartes frontières anciennes provinces ancien régime départements 1790 communes disparues fusionnées anciennes communes insee historique des communes télécharger', meteo: 'météo temps pluie température neige climat ciel normale stations pack', mises_a_jour: 'mise à jour version nouvelle version télécharger installer github signaler un problème bug erreur e-mail'};
+        diagram_kinds: 'diagrammes graphiques types', accessibilite: 'préférences mode simple contraste animations mouvement mouvements', board_prefs: 'réglages des tableaux formes pointes couleurs', pet_prefs: 'réglages des animaux espèces formulaire', frontieres: 'cartes frontières anciennes provinces ancien régime départements 1790 communes disparues fusionnées anciennes communes insee historique des communes télécharger', sauvegarde: 'sauvegarde automatique copie backup clé usb icloud dropbox onedrive restaurer revenir intégrité fermeture chaque jour semaine', sync: 'deux ordinateurs synchroniser dossier partagé clé usb conflits travail à deux paquets', meteo: 'météo temps pluie température neige climat ciel normale stations pack', sante: 'santé maladies maladie handicap cause de décès épidémies privé vie privée confidentialité', mises_a_jour: 'mise à jour version nouvelle version télécharger installer github signaler un problème bug erreur e-mail'};
     const MO_KEY = 'genealogie-maintenance-order', A_ONLY = ['look_theme', 'look_portraits', 'look_msgs', 'look_layouts', 'nav_menus'];
     const mKeys = () => defaultMaintenanceTabs.map(t => t[0]).filter(k => (window.LCNDA_APP.reglagesA?.() ? k !== 'design' : !A_ONLY.includes(k)));
     /* présentation A : « Apparence et affichage » en trois groupes ; l'autre façon garde son propre rangement */
@@ -104,65 +104,19 @@
             +card('Compte long maya',mayaLongCount(jdn)||'—','Corrélation GMT (584283)')
             +(()=>{const k=koreanLunarParts(jdn,'chinese');return card('Bhoutanais (drukpa)',k?.year?`Année ${sexagenaryName(k.year)}`:'—','Calendrier luni-solaire : seule l’année est donnée (le Losar tombe près du Nouvel An chinois, parfois un mois plus tard)');})();
     }
-    function convertUnitValue(value,from,to){
-        const units={toise:{kind:'length',factor:1.949},pied:{kind:'length',factor:.32484},pouce:{kind:'length',factor:.02707},ligne:{kind:'length',factor:.002256},lieue:{kind:'length',factor:3898},arpent_area:{kind:'area',factor:3418.89},livre_weight:{kind:'weight',factor:.4895},once:{kind:'weight',factor:.03059},marc:{kind:'weight',factor:.24475}};
-        if(!Number.isFinite(value)||!units[from]||!units[to]||units[from].kind!==units[to].kind)return null;
-        return value*units[from].factor/units[to].factor;
-    }
-    function oldCurrencyTotalDeniers(values){
-        const livres=Number(values.livres)||0,sols=Number(values.sols)||0,deniers=Number(values.deniers)||0,francs=Number(values.francs)||0;
-        return Math.round((livres+francs)*240+sols*12+deniers);
-    }
-    function oldCurrencyBreakdown(total){
-        const sign=total<0?'-':'';
-        total=Math.abs(Number(total)||0);
-        const livres=Math.floor(total/240);
-        const sols=Math.floor((total%240)/12);
-        const deniers=total%12;
-        return `${sign}${livres} livre${livres>1?'s':''}, ${sols} sol${sols>1?'s':''}, ${deniers} denier${deniers>1?'s':''}`;
-    }
-    function purchasingPowerPanelHtml(){
-        return `<section class="maintenance-panel purchasing-power"><h3>Pouvoir d’achat d’une somme ancienne</h3><form id="purchasing-power-form" class="form-grid" style="padding:0">
-            <label>Montant<input name="amount" type="number" step="any" min="0" placeholder="300" required></label>
-            <label>Monnaie<select name="unit"><option value="livre">livres tournois (ou francs)</option><option value="sol">sols / sous</option><option value="denier">deniers</option><option value="ecu">écus de 3 livres</option><option value="ecu6">écus de 6 livres</option><option value="louis">louis d’or (24 livres)</option><option value="nf">nouveaux francs (1960-2001)</option></select></label>
-            <label>Année<input name="year" type="number" min="1550" max="2001" placeholder="1780" required></label>
-            <label>Salaire d’une journée aujourd’hui<input data-unit="€" name="today" type="number" step="1" min="1" value="84"></label>
-            <div class="page-actions" style="grid-column:1/-1"><button class="button small" type="submit">Calculer</button></div></form>
-            <div id="purchasing-power-result" class="purchasing-power-result"></div>
-            <p class="muted">Ordre de grandeur seulement. La somme est convertie en journées de travail d’un journalier de province (Paris : salaires plus élevés), puis en euros au salaire d’une journée d’aujourd’hui (84 € ≈ salaire minimum brut de 7 heures : à ajuster). Entre 1791 et 1797, les assignats perdent vite leur valeur. 1 franc de 1795 vaut à peu près 1 livre.</p></section>`;
-    }
-    function bindPurchasingPower(){
-        $('#purchasing-power-form')?.addEventListener('submit',event=>{
-            event.preventDefault();
-            const v=formObject(event.currentTarget);const year=Math.round(Number(v.year));const amount=Number(v.amount);const today=Number(v.today)||84;
-            if(!year||!(amount>=0))return;
-            const perUnit={livre:20,sol:1,denier:1/12,ecu:60,ecu6:120,louis:480,nf:20*100}[v.unit]||20;
-            let sols=amount*perUnit;
-            // À partir de 1960, « francs » veut dire nouveaux francs (1 NF = 100 anciens francs)
-            if(v.unit==='livre'&&year>=1960)sols*=100;
-            const wage=journalierWageSols(year);const days=sols/wage;const workYears=days/250;
-            const fmt=(n,d=0)=>Number(n).toLocaleString('fr-FR',{maximumFractionDigits:d});
-            const wageText=year<1795?`${fmt(wage,1)} sols par jour`:(year<1960?`${fmt(wage/20,2)} francs par jour`:`${fmt(wage/2000,2)} nouveaux francs par jour`);
-            const span=workYears>=1?`soit environ ${fmt(workYears,1)} année${workYears>=2?'s':''} de travail (250 jours par an)`:`soit environ ${fmt(days/25,1)} mois de travail`;
-            $('#purchasing-power-result').innerHTML=`<strong>≈ ${fmt(days,days<10?1:0)} journées de travail d’un journalier</strong><span>${span}</span><span>≈ ${fmt(days*today)} € d’aujourd’hui au salaire d’une journée de ${fmt(today)} €</span><small>Salaire retenu en ${year} : ${wageText}${year>=1791&&year<=1797?' — attention : période des assignats':''}.</small>`;
-        });
-    }
     function renderCalendarMeasureTools(token=++state.workspaceToken){
         if(token!==state.workspaceToken||state.module!=='maintenance'||state.maintenanceTab!=='calendar_measures')return;
         const design=readDesignSettings();
         const defaultCalendar=defaultCalendarValue(design);
-        const unitOptions=`<optgroup label="Longueurs"><option value="toise">Toise</option><option value="pied">Pied du roi</option><option value="pouce">Pouce</option><option value="ligne">Ligne</option><option value="lieue">Lieue de Paris</option></optgroup><optgroup label="Surfaces"><option value="arpent_area">Arpent carré</option></optgroup><optgroup label="Poids"><option value="livre_weight">Livre poids de marc</option><option value="once">Once</option><option value="marc">Marc</option></optgroup>`;
-        $('#workspace').innerHTML=`<section class="page"><header class="page-header"><div><span class="eyebrow">CALENDRIER / MESURES</span><h2>Convertisseurs de recherche</h2><p>Conversions utiles pour les actes anciens, les pays passés tardivement au grégorien et les notes de transcription.</p></div></header>
+        $('#workspace').innerHTML=`<section class="page"><header class="page-header"><div><span class="eyebrow">CALENDRIER / MESURES</span><h2>Convertisseurs de recherche</h2><p>Conversions utiles pour les actes anciens, les pays passés tardivement au grégorien et les notes de transcription.</p></div><div class="page-actions"><button type="button" class="button" data-autrefois-open="">🪙 Convertisseur d’autrefois</button><button type="button" class="button secondary" data-la-open="">📜 Aide à la lecture</button></div></header>
         <div class="calendar-tools-grid">
             <section class="maintenance-panel"><h3>Calendrier par défaut</h3><div class="form-grid" style="padding:0;grid-template-columns:minmax(0,1fr)"><label>Calendrier utilisé par défaut dans les champs de date<select id="default-calendar-select">${converterCalendarOptions.map(([key,label])=>`<option value="${key}" ${defaultCalendar===key?'selected':''}>${label}</option>`).join('')}</select></label></div><p class="muted">Grégorien reste le plus courant en France. Julien est utile pour certains pays orthodoxes et certaines sources anciennes.</p></section>
             <section class="maintenance-panel"><h3>Convertir une date</h3><form id="calendar-converter-form" class="form-grid" style="padding:0"><label>Calendrier source<select name="calendar_type">${converterCalendarOptions.filter(([k])=>!['burmese','druk','umalqura','roman','english_os','easter_style','spanish_era','maya'].includes(k)).map(([key,label])=>`<option value="${key}" ${defaultCalendar===key?'selected':''}>${label}</option>`).join('')}</select></label><label data-calendar-era hidden>Ère<select name="era">${japaneseEras.map(([k,l,start])=>`<option value="${k}" ${k==='showa'?'selected':''}>${escapeHtml(l)} (depuis ${start[0]})</option>`).join('')}</select></label><label>Année<input name="year" type="number" placeholder="1793"></label><label class="checkbox-line" data-calendar-leap hidden><input type="checkbox" name="leap_month"> Mois intercalaire (lunaire)</label><label>Mois<span data-calendar-month-field></span></label><label>Jour<input name="day" type="number" min="1" max="31" placeholder="1"></label><button class="button span-2" type="submit">Convertir</button></form><div id="calendar-converter-result">${calendarConversionCards(null)}</div></section>
             <section class="maintenance-panel"><h3>Calendrier républicain</h3><ul class="calendar-info-list">${republicanMonths.map((month,index)=>{const r=republicanMonthRange(2,index+1);return `<li><strong>${escapeHtml(month)}</strong>${index<12?' · 30 jours':' · 5 ou 6 jours'} · ${r.start.month===r.end.month?shortMonthsFr[r.start.month-1]:`${shortMonthsFr[r.start.month-1]} à ${shortMonthsFr[r.end.month-1]}`} <small class="muted">(du ${shortGregorian(r.start,false)} au ${shortGregorian(r.end,false)})</small></li>`;}).join('')}</ul><p class="muted" style="font-size:.85em">Dates de l’an II (1793-1794) : selon l’année, le début et la fin peuvent glisser d’un jour (le convertisseur donne les dates exactes).</p><p>Le calendrier républicain commence le 22 septembre 1792 et cesse officiellement le 1er janvier 1806. Les douze mois font 30 jours. Les 5 jours complémentaires, ou 6 en année sextile, terminent l’année.</p></section>
-            <section class="maintenance-panel"><h3>Unités anciennes</h3><form id="unit-converter-form" class="form-grid" style="padding:0"><label>Valeur<input name="value" type="number" step="any" placeholder="3"></label><label>De<select name="from">${unitOptions}</select></label><label>Vers<select name="to">${unitOptions}</select></label><button class="button" type="submit">Convertir</button></form><div id="unit-converter-result" class="unit-result">Entre une valeur et deux unités compatibles.</div></section>
-            <section class="maintenance-panel"><h3>Monnaies anciennes</h3><form id="currency-converter-form" class="form-grid" style="padding:0"><label>Livres<input name="livres" type="number" step="1" placeholder="12"></label><label>Sols / sous<input name="sols" type="number" step="1" placeholder="10"></label><label>Deniers<input name="deniers" type="number" step="1" placeholder="6"></label><label>Francs germinal indicatifs<input name="francs" type="number" step="any" placeholder="0"></label><button class="button span-2" type="submit">Convertir</button></form><div id="currency-converter-result" class="unit-result">1 livre = 20 sols = 240 deniers. Le franc indiqué ici est une équivalence pratique, pas une valeur historique absolue.</div></section>
-            ${purchasingPowerPanelHtml()}
+            <section class="maintenance-panel af-embed-panel"><h3>🪙 Convertisseur d’autrefois</h3><p class="muted">Argent d’autrefois en euros d’aujourd’hui (livres, sous et deniers, francs, nouveaux francs), mesures anciennes selon la région, calendrier républicain dans les deux sens. <button type="button" class="link-button" data-autrefois-open="">↗ Ouvrir en grand</button></p><div id="autrefois-host" class="af-embed"></div></section>
             ${(window.LCNDA_EXT?.calendarPanels||[]).map(fn=>{try{return fn();}catch(error){console.error(error);return '';}}).join('')}
         </div></section>`;
-        bindPurchasingPower();
+        const afHost=$('#autrefois-host');if(afHost)window.LCNDA_EXT?.mountAutrefois?.(afHost,{});
         (window.LCNDA_EXT?.afterCalendar||[]).forEach(fn=>{try{fn();}catch(error){console.error(error);}});
         $('#default-calendar-select')?.addEventListener('change',event=>{const current=readDesignSettings();current.defaultCalendar=event.target.value;localStorage.setItem('genealogie-design',JSON.stringify(current));toast(`Calendrier par défaut : ${calendarLabel(event.target.value)}.`);});
         $('#calendar-converter-form')?.addEventListener('submit',event=>{event.preventDefault();const f=event.currentTarget,jdn=readCalendarJdn(f),filled=f.elements.year.value&&f.elements.month.value&&f.elements.day.value;$('#calendar-converter-result').innerHTML=!jdn&&filled?'<p class="h-offsite-sentence is-warn">Cette date n’existe pas dans ce calendrier (jour trop grand pour ce mois, année hors de l’ère choisie…).</p>':calendarConversionCards(jdn);});
@@ -204,8 +158,6 @@
             converterForm.elements.year.placeholder=converterForm.elements.calendar_type.value==='hebrew'?'5600':converterForm.elements.calendar_type.value==='republican'?'2':'1793';
             converterForm.elements.calendar_type.addEventListener('change',()=>{const t=converterForm.elements.calendar_type.value;converterForm.elements.year.placeholder={hebrew:'5600',republican:'2',islamic:'1200',ethiopic:'1900',indian:'1800',japanese:'20',korean:'4280',korean_lunar:'1900',chinese:'1900',bengali:'1300',persian:'1300',juche:'30',thai:'2480',coptic:'1600',byzantine:'7200',minguo:'30'}[t]||'1793';});
         }
-        $('#unit-converter-form')?.addEventListener('submit',event=>{event.preventDefault();const values=formObject(event.currentTarget),result=convertUnitValue(Number(values.value),values.from,values.to);$('#unit-converter-result').textContent=result===null?'Unités incompatibles ou valeur invalide.':`${Number(values.value).toLocaleString('fr-FR')} → ${result.toLocaleString('fr-FR',{maximumFractionDigits:4})}`;});
-        $('#currency-converter-form')?.addEventListener('submit',event=>{event.preventDefault();const values=formObject(event.currentTarget),total=oldCurrencyTotalDeniers(values),francs=total/240;$('#currency-converter-result').textContent=`${oldCurrencyBreakdown(total)} · ${plural(total,'denier')} · environ ${francs.toLocaleString('fr-FR',{maximumFractionDigits:2})} ${francs<2?'franc germinal indicatif':'francs germinal indicatifs'}.`;});
     }
     function renderSoftwareInfos(token=++state.workspaceToken){
         if(token!==state.workspaceToken||state.module!=='maintenance'||state.maintenanceTab!=='infos')return;

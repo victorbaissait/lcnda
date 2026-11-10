@@ -1,0 +1,13 @@
+Identifiant unique de notice (service);Identifiant Arkindex;Nom de famille;Prénoms;Âge;Date de naissance;Lieu de naissance;Lien avec le chef de ménage;Profession (source);Genre;État civil;Nationalité;Observations;Année du recensement;URL de la visionneuse;Commune de recensement;Cote;Page et position de la ligne sur la page;Numéro Arkindex du ménage;Employeur;Thème
+n1;a1;Mourgue;Baptiste;45;1861;Tulle;chef;cult.;homme;marié;française;;1906;https://archives.example.org/visionneuse/6M999/vue/219;Tulle;6 M 999;"219 ; 4";m-0001;;RP
+n2;a2;Mourgue;Léonie;27;1879;St Perignen;épouse;ménag.;femme;mariée;française;;1906;https://archives.example.org/visionneuse/6M999/vue/219;Tulle;6 M 999;"219 ; 5";m-0001;;RP
+n3;a3;Mourgne;Jcan;47;1859;Tulle;fils;id.;homme;;française;;1906;https://archives.example.org/visionneuse/6M999/vue/219;Tulle;6 M 999;"219 ; 6";m-0001;;RP
+n4;a4;Mourgue;cultivateur;3;1903;Tulle;fils;;femme;;française;;1906;https://archives.example.org/visionneuse/6M999/vue/219;Tulle;6 M 999;"219 ; 7";m-0001;;RP
+n10;an10;Lepée;Gilbert;45;1861;Hérisson;chef;Platrice peintre;homme;;F;;1906;https://archives.example.org/visionneuse/6M1000/vue/220;Hérisson;6 M 1000;"220 ; 1";m-0002;patron;RP
+n11;an11;Pepce;Marie;40;1866;Herisses;épouse;Néant;femme;;F;;1906;https://archives.example.org/visionneuse/6M1000/vue/220;Hérisson;6 M 1000;"220 ; 2";m-0002;;RP
+n12;an12;Pepie;Jean;16;1890;Heinon;fles;apprenti platre;homme;;F;;1906;https://archives.example.org/visionneuse/6M1000/vue/220;Hérisson;6 M 1000;"220 ; 3";m-0002;M Exemple;RP
+n13;an13;Lepée;Maria;13;1893;Herisson;frère;Niant;;;F;;1906;https://archives.example.org/visionneuse/6M1000/vue/220;Hérisson;6 M 1000;"220 ; 4";m-0002;;RP
+n14;an14;Lepée;Louis;9;1897;Henison;fils;Camier;homme;;F;;1906;https://archives.example.org/visionneuse/6M1000/vue/220;Hérisson;6 M 1000;"220 ; 5";m-0002;Entrepresent frances frobles;RP
+n15;an15;V Jaulines;Anne;66;1840;Montrigny Corrèze;P;chef;femme;V;;;1906;https://archives.example.org/visionneuse/6M1000/vue/220;Hérisson;6 M 1000;"220 ; 6";m-0003;Agricalten;RP
+n16;an16;Chévenet;Pierre;30;1876;Gremoble;fils;proffice de Pait;homme;;F;;1906;https://archives.example.org/visionneuse/6M1000/vue/220;Hérisson;6 M 1000;"220 ; 7";m-0003;Dr Exemple;RP
+n17;an17;Théveuet;Paul;8;1898;Nouluner P Loire;;Douvrz ord;homme;Neveu;F;;1906;https://archives.example.org/visionneuse/6M1000/vue/220;Hérisson;6 M 1000;"220 ; 8";m-0003;S T M C;RP

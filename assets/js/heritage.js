@@ -430,7 +430,7 @@
         const rows = detail.heritage?.voyages || [];
         const body = rows.length ? `<div class="h-voyage-layout"><div class="h-records">${rows.map(v => voyageCardHtml(v, {editable: !Number(p.is_locked)})).join('')}</div><div class="h-voyage-map">${voyagePaths(rows)}<small class="muted">Trajet en mer tracé au plus court en ne passant que par la mer (détroits ; canaux de Suez, Kiel et Panama seulement après leur ouverture) ; en pointillés, le trajet à terre jusqu’à la destination.</small></div></div>`
             : empty('Aucun voyage pour l’instant', {icon: '🚢', hint: 'Ajoute le départ : date, port, navire, destination, liste de passagers, naturalisation…', action: editOnly('x') ? {label: '＋ Voyage', attrs: `data-h-voyage-edit="0" data-h-voyage-person="${p.id}"`} : null});
-        return card(index, 'Départs / émigration', rows.length || '', body, 'span-12', editOnly(`<button type="button" class="button small secondary" data-h-voyage-edit="0" data-h-voyage-person="${p.id}">＋ Voyage</button>`));
+        return card(index, 'Départs / émigration', rows.length || '', body, 'span-12', (ext.sourcesOuvertes2?.blockButtons?.('voyage', p.id, editOnly) || '') + editOnly(`<button type="button" class="button small secondary" data-h-voyage-edit="0" data-h-voyage-person="${p.id}">＋ Voyage</button>`));
     };
     // Champs préfixés « c_ » : ne pas se mélanger avec la naturalisation de la personne principale
     function companionRow(c = {}) {
@@ -543,7 +543,7 @@
         const rows = detail.heritage?.placements || [];
         const body = rows.length ? `<div class="h-voyage-layout"><div class="h-records">${rows.map(r => placementCardHtml(r, {editable: !Number(p.is_locked)})).join('')}</div><div>${placementMap(rows)}</div></div>`
             : empty('Aucun placement pour l’instant', {icon: '👶', hint: 'Nourrice, abandon, hospice, Assistance publique… avec le lieu et la durée.', action: editOnly('x') ? {label: '＋ Placement', attrs: `data-h-placement-edit="0" data-h-placement-person="${p.id}"`} : null});
-        return card(index, 'Enfant placé', rows.length || '', body, 'span-12', editOnly(`<button type="button" class="button small secondary" data-h-placement-edit="0" data-h-placement-person="${p.id}">＋ Placement</button>`));
+        return card(index, 'Enfant placé', rows.length || '', body, 'span-12', (ext.sourcesOuvertes7?.blockButtons?.('placement', p.id, editOnly) || '') + editOnly(`<button type="button" class="button small secondary" data-h-placement-edit="0" data-h-placement-person="${p.id}">＋ Placement</button>`));
     };
     async function openPlacementDialog(id, personId) {
         let r = {person_id: personId, kind: 'nourrice', media: []};
@@ -715,7 +715,8 @@
         const p = detail.person;
         if (!flagShown(p, 'show_poilu_block')) return '';
         const data = detail.heritage?.poilu || {units: [], events: []};
-        return card(index, 'Poilu 14-18', (data.units || []).length || '', poiluHtml(data, p), 'span-12', editOnly(tools(`data-h-poilu-edit="${p.id}"`, `data-h-poilu-clear="${p.id}"`, 'le parcours de poilu')));
+        const so = window.LCNDA_EXT?.sourcesOuvertes; // 🗂 Mémoire des hommes, registre matricule, import d'une fiche (heritage-sources-ouvertes.js)
+        return card(index, 'Poilu 14-18', (data.units || []).length || '', poiluHtml(data, p) + (so ? so.poiluRow(p.id, editOnly) : '') + (ext.sourcesOuvertes4 ? `<p class="so-row">${ext.sourcesOuvertes4.blockButtons('poilu', p.id, editOnly)}</p>` : ''), 'span-12', editOnly(tools(`data-h-poilu-edit="${p.id}"`, `data-h-poilu-clear="${p.id}"`, 'le parcours de poilu')));
     };
     async function openPoiluDialog(personId) {
         const detail = await api('person', {id: personId});
@@ -776,7 +777,7 @@
     ext.personBlocks.probate = (index, detail) => {
         const rows = detail.heritage?.probate_inventories || [];
         if (!rows.length) return '';
-        return card(index, 'Inventaire après décès', rows.length, rows.map(probateSummaryHtml).join(''), 'span-12', `<button type="button" class="button small secondary" data-h-open-list="probate" data-h-edit="0" data-h-person-id="${detail.person.id}">＋ Inventaire</button>`);
+        return card(index, 'Inventaire après décès', rows.length, rows.map(probateSummaryHtml).join(''), 'span-12', (ext.sourcesOuvertes2?.blockButtons?.('probate', detail.person.id) || '') + `<button type="button" class="button small secondary" data-h-open-list="probate" data-h-edit="0" data-h-person-id="${detail.person.id}">＋ Inventaire</button>`);
     };
 
     /* ═══════════════════════ 🗄️ PAPIERS DE FAMILLE ═══════════════════════ */

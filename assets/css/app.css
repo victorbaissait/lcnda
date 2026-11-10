@@ -4868,7 +4868,6 @@ dialog .is-save-locked, dialog .is-save-locked:hover { opacity: .45; cursor: not
 .toast.ui-toast.mj-toast .ui-toast-text{flex:1 1 calc(100% - 40px)}
 .toast.ui-toast.mj-toast .ui-toast-acts{flex:1 1 100%;flex-wrap:wrap;margin-left:0}
 .toast.ui-toast.mj-toast .ui-toast-btn{white-space:normal}
-
 /* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
 :root[data-theme="dark"] .install-card .import-form label{color:#c7c7c7}
 :root[data-theme="dark"] .person-list-item .life-dot.deceased{border-color:#4c4c4c}

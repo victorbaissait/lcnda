@@ -204,6 +204,9 @@ function research_gaps_data(PDO $pdo, array $q = []): array
         }
     }
 
+    // 🧾 recensements SocFace (FranceArchives) : une ligne par année de recensement où l'ancêtre vivait dans une commune connue (lib/socface.php)
+    if (function_exists('socface_gap_items')) { foreach (socface_gap_items($pdo, $ids, $sosaOf, $people) as $it) { $items[] = $it; } }
+
     // le lieu → le service d'archives
     $placeCache = [];
     $placeRow = static function (string $name) use ($pdo, &$placeCache): array {
@@ -218,7 +221,7 @@ function research_gaps_data(PDO $pdo, array $q = []): array
     $digest = [];
     try { foreach ($pdo->query("SELECT * FROM archive_digest_entries") as $r) { $digest[] = $r; } } catch (Throwable $_) {}
     $resultLabels = function_exists('journal_results') ? journal_results() : [];
-    $recType = ['birth' => 'naissance', 'marriage' => 'mariage', 'death' => 'deces', 'parents' => 'mariage', 'census' => 'recensement', 'military' => 'fiche_militaire', 'succession' => 'succession', 'contract' => 'autre'];
+    $recType = ['birth' => 'naissance', 'marriage' => 'mariage', 'death' => 'deces', 'parents' => 'mariage', 'census' => 'recensement', 'socface' => 'recensement', 'military' => 'fiche_militaire', 'succession' => 'succession', 'contract' => 'autre'];
     $archives = [];
     foreach ($items as &$it) {
         $pl = $placeRow((string) $it['place']);
@@ -237,7 +240,7 @@ function research_gaps_data(PDO $pdo, array $q = []): array
         if ($it['place'] !== '') { $archives[$k]['communes'][$it['place']] = ($archives[$k]['communes'][$it['place']] ?? 0) + 1; }
     }
     unset($it);
-    $order = ['birth' => 0, 'marriage' => 1, 'death' => 2, 'parents' => 3, 'contract' => 4, 'succession' => 5, 'census' => 6, 'military' => 7];
+    $order = ['birth' => 0, 'marriage' => 1, 'death' => 2, 'parents' => 3, 'contract' => 4, 'succession' => 5, 'census' => 6, 'socface' => 7, 'military' => 8];
     usort($items, static fn($a, $b) => [$a['generation'], $order[$a['kind']] ?? 9, $a['sosa']] <=> [$b['generation'], $order[$b['kind']] ?? 9, $b['sosa']]);
     $archives = array_values($archives);
     usort($archives, static fn($a, $b) => $b['count'] <=> $a['count']);

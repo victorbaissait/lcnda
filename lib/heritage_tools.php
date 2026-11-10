@@ -505,24 +505,45 @@ function impossible_journeys(PDO $pdo, int $personId = 0): array
 }
 
 /* ─── 🤝 Travail à deux : paquets de modifications ───────────────────── */
+/* 🔄 « Deux ordinateurs » (lib/sync_dossier.php) se sert des mêmes paquets, du même calcul des conflits (sync_items) et de la
+ * même application (sync_apply_core) : seul le transport change (un dossier partagé au lieu d'un fichier envoyé à la main). */
 
-const SYNC_TABLES = ['places', 'persons', 'families', 'family_children', 'events', 'notes'];
+const SYNC_TABLES = ['places', 'persons', 'families', 'family_children', 'events', 'sources', 'media', 'notes', 'media_links', 'source_links'];
 const SYNC_REFS = [
     'families' => ['partner1_id' => 'persons', 'partner2_id' => 'persons'],
     'family_children' => ['family_id' => 'families', 'child_id' => 'persons'],
     'events' => ['person_id' => 'persons', 'family_id' => 'families', 'place_id' => 'places'],
+    'media_links' => ['media_id' => 'media'],
+    'source_links' => ['source_id' => 'sources'],
+];
+/** Lignes posées « sur n'importe quelle fiche » (entity_type + entity_id) : seulement sur ce qui est échangé. */
+const SYNC_ENTITY = [
+    'notes' => ['person' => 'persons', 'event' => 'events', 'family' => 'families', 'source' => 'sources', 'media' => 'media'],
+    'media_links' => ['person' => 'persons', 'event' => 'events', 'family' => 'families', 'source' => 'sources'],
+    'source_links' => ['person' => 'persons', 'event' => 'events', 'family' => 'families', 'media' => 'media'],
 ];
 const SYNC_SKIP = ['id', 'uid', 'source_id', 'created_at', 'updated_at', 'is_bookmarked', 'is_start', 'portrait_media_id', 'surname_group_id', 'is_locked', 'confidence_media_id'];
+/** Colonnes propres à une table : liens vers des tables non échangées (laissés vides chez l'autre), ou au contraire gardées. */
+const SYNC_SKIP_TABLE = ['media' => ['place_id', 'correspondence_reply_to_media_id', 'archive_service_id'], 'sources' => ['archive_service_id'],
+    'media_links' => ['media_tag_id'], 'source_links' => ['source_record_id']];
+const SYNC_KEEP_TABLE = ['source_links' => ['source_id']]; // ici source_id est la source citée (ailleurs : l'origine d'un import)
 
 function sync_settings(PDO $pdo): array
 {
     return ht_setting($pdo, 'lcnda-sync', ['base_uid' => '', 'author' => '', 'started_at' => '', 'last_export_at' => '', 'last_import_at' => '']);
 }
 
+function sync_table_ok(PDO $pdo, string $table): bool
+{
+    static $cache = [];
+    return $cache[$table] ??= (bool) $pdo->query("SELECT 1 FROM pragma_table_info('{$table}') WHERE name='uid'")->fetchColumn();
+}
+
 function sync_columns(PDO $pdo, string $table): array
 {
     static $cache = [];
-    return $cache[$table] ??= array_values(array_filter(array_column($pdo->query("PRAGMA table_info({$table})")->fetchAll(), 'name'), static fn($c) => !in_array($c, SYNC_SKIP, true)));
+    $skip = array_merge(array_diff(SYNC_SKIP, SYNC_KEEP_TABLE[$table] ?? []), SYNC_SKIP_TABLE[$table] ?? []);
+    return $cache[$table] ??= array_values(array_filter(array_column($pdo->query("PRAGMA table_info({$table})")->fetchAll(), 'name'), static fn($c) => !in_array($c, $skip, true)));
 }
 
 function sync_assign_uids(PDO $pdo): int
@@ -530,6 +551,7 @@ function sync_assign_uids(PDO $pdo): int
     // Une seule requête par table (une écriture par ligne bloquait la base plusieurs minutes sur une grande généalogie)
     $n = 0;
     foreach (SYNC_TABLES as $t) {
+        if (!sync_table_ok($pdo, $t)) { continue; }
         if (!(int) $pdo->query("SELECT EXISTS(SELECT 1 FROM {$t} WHERE uid IS NULL OR uid='')")->fetchColumn()) { continue; }
         $n += (int) $pdo->exec("UPDATE {$t} SET uid=lower(hex(randomblob(10))) WHERE uid IS NULL OR uid=''");
     }
@@ -546,18 +568,20 @@ function sync_where(string $t): string
 function sync_portable_rows(PDO $pdo): array
 {
     $uidOf = [];
-    foreach (SYNC_TABLES as $t) { foreach ($pdo->query("SELECT id, uid FROM {$t}" . sync_where($t)) as $r) { $uidOf[$t][(int) $r['id']] = (string) $r['uid']; } }
+    $tables = array_values(array_filter(SYNC_TABLES, static fn($t) => sync_table_ok($pdo, $t)));
+    foreach ($tables as $t) { foreach ($pdo->query("SELECT id, uid FROM {$t}" . sync_where($t)) as $r) { $uidOf[$t][(int) $r['id']] = (string) $r['uid']; } }
     $types = [];
     foreach ($pdo->query('SELECT id, slug, label, scope, gedcom_tag FROM event_types') as $r) { $types[(int) $r['id']] = $r; }
     $out = [];
-    foreach (SYNC_TABLES as $t) {
+    foreach ($tables as $t) {
         $cols = sync_columns($pdo, $t);
         foreach ($pdo->query('SELECT uid, ' . implode(',', array_map(static fn($c) => '"' . $c . '"', $cols)) . " FROM {$t}" . sync_where($t)) as $r) {
             $uid = (string) $r['uid']; unset($r['uid']);
+            if ($uid === '') { continue; }
             foreach (SYNC_REFS[$t] ?? [] as $col => $ref) { $r[$col] = $r[$col] ? ($uidOf[$ref][(int) $r[$col]] ?? null) : null; }
             if ($t === 'events') { $et = $types[(int) $r['event_type_id']] ?? null; $r['event_type_id'] = $et ? ['slug' => $et['slug'], 'label' => $et['label'], 'scope' => $et['scope'], 'tag' => $et['gedcom_tag']] : null; }
-            if ($t === 'notes') {
-                $map = ['person' => 'persons', 'event' => 'events', 'family' => 'families'];
+            if (isset(SYNC_ENTITY[$t])) {
+                $map = SYNC_ENTITY[$t];
                 if (!isset($map[$r['entity_type']])) { continue; }
                 $r['entity_id'] = $uidOf[$map[$r['entity_type']]][(int) $r['entity_id']] ?? null;
                 if (!$r['entity_id']) { continue; }
@@ -648,19 +672,30 @@ function sync_diff(PDO $pdo): array
     return $changes;
 }
 
+/** Paquet de ce qui a changé ici ; la « photo » est mise à jour (ces changements ne repartiront plus). $extra : machine, etc. */
+function sync_build_package(PDO $pdo, array $changes, array $extra = []): array
+{
+    $s = sync_settings($pdo);
+    $package = ['format' => 'lcnda-changes', 'version' => 1, 'base_uid' => $s['base_uid'], 'package_uid' => bin2hex(random_bytes(8)), 'author' => $s['author'], 'created_at' => date('c')] + $extra + ['changes' => $changes];
+    $own = !$pdo->inTransaction();
+    if ($own) { $pdo->beginTransaction(); }
+    try {
+        sync_take_snapshot($pdo);
+        $s['last_export_at'] = date('c');
+        ht_save_setting($pdo, 'lcnda-sync', $s);
+        $pdo->prepare("INSERT INTO sync_packages(direction, package_uid, author, change_count, summary) VALUES('sent', ?, ?, ?, ?)")->execute([$package['package_uid'], $s['author'], count($changes), sync_summary($changes)]);
+        if ($own) { $pdo->commit(); }
+    } catch (Throwable $e) { if ($own) { $pdo->rollBack(); } throw $e; }
+    return $package;
+}
+
 function sync_export(PDO $pdo): never
 {
     $s = sync_settings($pdo);
     if ($s['base_uid'] === '') { json_response(['error' => 'Le travail à deux n’est pas commencé sur cette base.'], 422); }
     $changes = sync_diff($pdo);
     if (!$changes) { json_response(['error' => 'Aucune modification depuis le dernier paquet.'], 422); }
-    $package = ['format' => 'lcnda-changes', 'version' => 1, 'base_uid' => $s['base_uid'], 'package_uid' => bin2hex(random_bytes(8)), 'author' => $s['author'], 'created_at' => date('c'), 'changes' => $changes];
-    $pdo->beginTransaction();
-    sync_take_snapshot($pdo);
-    $s['last_export_at'] = date('c');
-    ht_save_setting($pdo, 'lcnda-sync', $s);
-    $pdo->prepare("INSERT INTO sync_packages(direction, package_uid, author, change_count, summary) VALUES('sent', ?, ?, ?, ?)")->execute([$package['package_uid'], $s['author'], count($changes), sync_summary($changes)]);
-    $pdo->commit();
+    $package = sync_build_package($pdo, $changes);
     header('Content-Type: application/json; charset=utf-8');
     header('Content-Disposition: attachment; filename="lcnda-modifications-' . preg_replace('/[^a-z0-9]+/i', '-', ascii_fold($s['author'] ?: 'paquet')) . '-' . date('Ymd-His') . '.lcnda-changes.json"');
     echo json_encode($package, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
@@ -670,9 +705,10 @@ function sync_export(PDO $pdo): never
 function sync_summary(array $changes): string
 {
     $count = [];
-    $labels = ['persons' => 'fiche', 'events' => 'événement', 'families' => 'union', 'family_children' => 'lien enfant', 'places' => 'lieu', 'notes' => 'note'];
+    $labels = ['persons' => 'fiche', 'events' => 'événement', 'families' => 'union', 'family_children' => 'lien enfant', 'places' => 'lieu', 'notes' => 'note',
+        'sources' => 'source', 'media' => 'média', 'media_links' => 'lien de média', 'source_links' => 'citation de source'];
     $ops = ['create' => 'ajout', 'update' => 'modification', 'delete' => 'suppression'];
-    foreach ($changes as $c) { $k = $ops[$c['op']] . ' ' . $labels[$c['tbl']]; $count[$k] = ($count[$k] ?? 0) + 1; }
+    foreach ($changes as $c) { if (!isset($ops[$c['op'] ?? ''], $labels[$c['tbl'] ?? ''])) { continue; } $k = $ops[$c['op']] . ' ' . $labels[$c['tbl']]; $count[$k] = ($count[$k] ?? 0) + 1; }
     return implode(', ', array_map(static fn($k, $n) => "{$n} {$k}" . ($n > 1 ? 's' : ''), array_keys($count), $count));
 }
 
@@ -681,33 +717,37 @@ function sync_label(array $byUid, string $t, ?array $r): string
 {
     if (!$r) { return ''; }
     $person = static fn($uid) => $uid && isset($byUid['persons'][$uid]) ? trim(($byUid['persons'][$uid]['first_name'] ?? '') . ' ' . ($byUid['persons'][$uid]['last_name'] ?? '')) : '?';
+    $media = static fn($uid) => $uid && isset($byUid['media'][$uid]) ? (string) ($byUid['media'][$uid]['title'] ?? '') : '';
+    $source = static fn($uid) => $uid && isset($byUid['sources'][$uid]) ? (string) ($byUid['sources'][$uid]['title'] ?? '') : '';
+    $on = static fn($r) => ($r['entity_type'] ?? '') === 'person' ? ' de ' . $person($r['entity_id'] ?? null) : '';
     return match ($t) {
         'persons' => trim(($r['first_name'] ?? '') . ' ' . ($r['last_name'] ?? '')) ?: 'Fiche sans nom',
-        'places' => trim(($r['name'] ?? '') . ($r['county'] ? ', ' . $r['county'] : '')),
-        'families' => 'Union de ' . $person($r['partner1_id']) . ' et ' . $person($r['partner2_id']),
-        'family_children' => 'Enfant ' . $person($r['child_id']),
-        'events' => ($r['event_type_id']['label'] ?? 'Événement') . ($r['person_id'] ? ' de ' . $person($r['person_id']) : '') . ($r['date_text'] ? ' (' . $r['date_text'] . ')' : ''),
-        'notes' => 'Note' . ($r['title'] ? ' « ' . $r['title'] . ' »' : ''),
+        'places' => trim(($r['name'] ?? '') . (($r['county'] ?? '') ? ', ' . $r['county'] : '')),
+        'families' => 'Union de ' . $person($r['partner1_id'] ?? null) . ' et ' . $person($r['partner2_id'] ?? null),
+        'family_children' => 'Enfant ' . $person($r['child_id'] ?? null),
+        'events' => ($r['event_type_id']['label'] ?? 'Événement') . (($r['person_id'] ?? null) ? ' de ' . $person($r['person_id']) : '') . (($r['date_text'] ?? '') ? ' (' . $r['date_text'] . ')' : ''),
+        'notes' => 'Note' . (($r['title'] ?? '') ? ' « ' . $r['title'] . ' »' : '') . $on($r),
+        'sources' => 'Source « ' . ((string) ($r['title'] ?? '') ?: 'sans titre') . ' »',
+        'media' => 'Média « ' . ((string) ($r['title'] ?? '') ?: (string) ($r['filename'] ?? '') ?: 'sans titre') . ' »',
+        'media_links' => 'Média ' . (($m = $media($r['media_id'] ?? null)) !== '' ? '« ' . $m . ' » ' : '') . 'relié' . $on($r),
+        'source_links' => 'Source ' . (($m = $source($r['source_id'] ?? null)) !== '' ? '« ' . $m . ' » ' : '') . 'citée' . $on($r),
         default => $t,
     };
 }
 
-/** Lit un paquet reçu et prépare la revue : pour chaque changement, ce qui change et s'il y a conflit. */
-function sync_preview(PDO $pdo, ?array $file): never
+/**
+ * Pour chaque changement d'un paquet : ce qui change et s'il y a conflit (« tu as aussi modifié la même chose »).
+ * $local : sync_portable_rows() déjà lu (sinon relu). Chaque élément garde aussi mine / theirs / before (lignes entières).
+ */
+function sync_items(PDO $pdo, array $package, ?array $local = null): array
 {
-    if (!$file || (int) ($file['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_OK) { json_response(['error' => 'Fichier non reçu.'], 422); }
-    $package = json_decode((string) file_get_contents($file['tmp_name']), true);
-    if (!is_array($package) || ($package['format'] ?? '') !== 'lcnda-changes' || !is_array($package['changes'] ?? null) || !array_is_list($package['changes'])) { json_response(['error' => 'Ce fichier n’est pas un paquet de modifications LCNDA.'], 422); }
-    $s = sync_settings($pdo);
-    if ($s['base_uid'] === '') { json_response(['error' => 'Le travail à deux n’est pas commencé sur cette base : ouvre la copie reçue de ton cousin, ou commence le partage.'], 422); }
-    if ($package['base_uid'] !== $s['base_uid']) { json_response(['error' => 'Ce paquet vient d’une autre généalogie (pas de la même base de départ).'], 422); }
-    $already = $pdo->prepare("SELECT 1 FROM sync_packages WHERE package_uid=? AND direction='received'"); $already->execute([$package['package_uid']]);
-    $local = sync_portable_rows($pdo);
+    $local ??= sync_portable_rows($pdo);
     $byUid = $local;
-    foreach ($package['changes'] as $c) { if ($c['after']) { $byUid[$c['tbl']][$c['uid']] ??= $c['after']; } }
+    foreach ($package['changes'] as $c) { if (is_array($c) && !empty($c['after']) && isset($c['tbl'], $c['uid'])) { $byUid[$c['tbl']][$c['uid']] ??= $c['after']; } }
     $items = [];
     foreach ($package['changes'] as $i => $c) {
-        if (!in_array($c['tbl'] ?? '', SYNC_TABLES, true) || !in_array($c['op'] ?? '', ['create', 'update', 'delete'], true)) { continue; }
+        if (!is_array($c) || !in_array($c['tbl'] ?? '', SYNC_TABLES, true) || !in_array($c['op'] ?? '', ['create', 'update', 'delete'], true) || !is_string($c['uid'] ?? null)) { continue; }
+        $c['after'] = is_array($c['after'] ?? null) ? $c['after'] : null; $c['before'] = is_array($c['before'] ?? null) ? $c['before'] : null;
         $mine = $local[$c['tbl']][$c['uid']] ?? null;
         $target = $c['after'];
         if ($mine !== null && $target !== null && sync_hash($mine) === sync_hash($target)) { $state = 'same'; }
@@ -724,13 +764,156 @@ function sync_preview(PDO $pdo, ?array $file): never
                 if (json_encode($a) !== json_encode($v)) { $fields[] = ['field' => $k, 'mine' => is_array($a) ? ($a['label'] ?? '') : $a, 'theirs' => is_array($v) ? ($v['label'] ?? '') : $v]; }
             }
         }
-        $items[] = ['index' => (int) $i, 'tbl' => $c['tbl'], 'uid' => $c['uid'], 'op' => $c['op'], 'state' => $state, 'label' => sync_label($byUid, $c['tbl'], $target ?? $c['before']), 'fields' => array_slice($fields, 0, 30)];
+        $items[] = ['index' => (int) $i, 'tbl' => $c['tbl'], 'uid' => $c['uid'], 'op' => $c['op'], 'state' => $state, 'label' => sync_label($byUid, $c['tbl'], $target ?? $c['before'] ?? $mine), 'fields' => array_slice($fields, 0, 30),
+            'mine' => $mine, 'theirs' => $target, 'before' => $c['before']];
     }
+    return $items;
+}
+
+/** Contrôle la forme d'un paquet reçu ; renvoie un message d'erreur ou ''. */
+function sync_package_problem(PDO $pdo, $package): string
+{
+    if (!is_array($package) || ($package['format'] ?? '') !== 'lcnda-changes' || !is_array($package['changes'] ?? null) || !array_is_list($package['changes'])) { return 'Ce fichier n’est pas un paquet de modifications LCNDA.'; }
+    $s = sync_settings($pdo);
+    if ($s['base_uid'] === '') { return 'Le travail à deux n’est pas commencé sur cette base : ouvre la copie reçue de ton cousin, ou commence le partage.'; }
+    if (($package['base_uid'] ?? '') !== $s['base_uid']) { return 'Ce paquet vient d’une autre généalogie (pas de la même base de départ).'; }
+    if (!is_string($package['package_uid'] ?? null) || !preg_match('/^[a-z0-9]{1,40}$/i', $package['package_uid'])) { return 'Ce paquet n’a pas d’identifiant lisible.'; }
+    return '';
+}
+
+/** Lit un paquet reçu et prépare la revue : pour chaque changement, ce qui change et s'il y a conflit. */
+function sync_preview(PDO $pdo, ?array $file): never
+{
+    if (!$file || (int) ($file['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_OK) { json_response(['error' => 'Fichier non reçu.'], 422); }
+    sync_preview_package($pdo, json_decode((string) file_get_contents($file['tmp_name']), true));
+}
+
+function sync_preview_package(PDO $pdo, $package, array $extra = []): never
+{
+    $problem = sync_package_problem($pdo, $package);
+    if ($problem !== '') { json_response(['error' => $problem], 422); }
+    $already = $pdo->prepare("SELECT 1 FROM sync_packages WHERE package_uid=? AND direction='received'"); $already->execute([$package['package_uid']]);
+    $items = array_map(static function ($it) { unset($it['mine'], $it['theirs'], $it['before']); return $it; }, sync_items($pdo, $package));
     $token = bin2hex(random_bytes(8));
     $dir = DATA_DIR . '/sync-inbox';
     if (!is_dir($dir)) { @mkdir($dir, 0775, true); }
     file_put_contents($dir . '/' . $token . '.json', json_encode($package, JSON_UNESCAPED_UNICODE));
-    json_response(['token' => $token, 'author' => $package['author'] ?? '', 'created_at' => $package['created_at'] ?? '', 'already_received' => (bool) $already->fetchColumn(), 'items' => $items]);
+    json_response(['token' => $token, 'author' => $package['author'] ?? '', 'created_at' => $package['created_at'] ?? '', 'already_received' => (bool) $already->fetchColumn(), 'items' => $items] + $extra);
+}
+
+/** Fiche verrouillée : le paquet ne la modifie pas, ni ses événements, ni ses notes (ceux du couple si l'un des deux est verrouillé). */
+function sync_is_locked(PDO $pdo, string $t, ?int $localId): bool
+{
+    if (!$localId) { return false; }
+    if ($t === 'persons') { return (bool) (int) $pdo->query('SELECT COALESCE(is_locked,0) FROM persons WHERE id=' . (int) $localId)->fetchColumn(); }
+    if (!in_array($t, ['events', 'notes'], true)) { return false; }
+    $lockSql = $t === 'events'
+        ? 'SELECT 1 FROM events e LEFT JOIN families f ON f.id=e.family_id JOIN persons p ON p.id IN (e.person_id, f.partner1_id, f.partner2_id) WHERE e.id=? AND COALESCE(p.is_locked,0)=1 LIMIT 1'
+        : "SELECT 1 FROM notes n JOIN persons p ON n.entity_type='person' AND p.id=n.entity_id WHERE n.id=? AND COALESCE(p.is_locked,0)=1 LIMIT 1";
+    $lk = $pdo->prepare($lockSql); $lk->execute([(int) $localId]);
+    return (bool) $lk->fetchColumn();
+}
+
+function sync_local_id(PDO $pdo, string $t, ?string $uid): ?int
+{
+    if (!$uid || !in_array($t, SYNC_TABLES, true)) { return null; }
+    $s = $pdo->prepare("SELECT id FROM {$t} WHERE uid=?"); $s->execute([$uid]);
+    $id = $s->fetchColumn();
+    $s->closeCursor();
+    return $id === false ? null : (int) $id;
+}
+
+function sync_event_type_id(PDO $pdo, ?array $et): ?int
+{
+    if (!$et || !isset($et['slug'], $et['label'], $et['scope'])) { return null; }
+    $s = $pdo->prepare('SELECT id FROM event_types WHERE slug=?'); $s->execute([(string) $et['slug']]); $id = $s->fetchColumn();
+    if ($id === false) { $s = $pdo->prepare('SELECT id FROM event_types WHERE label=? COLLATE NOCASE AND scope=?'); $s->execute([(string) $et['label'], (string) $et['scope']]); $id = $s->fetchColumn(); }
+    if ($id === false) {
+        $pdo->prepare("INSERT INTO event_types(scope, slug, label, gedcom_tag, icon, color, is_custom) VALUES(?,?,?,?, 'diamond', '#0066cc', 1)")->execute([(string) $et['scope'], (string) $et['slug'] . '-' . bin2hex(random_bytes(2)), (string) $et['label'], (string) ($et['tag'] ?? '')]);
+        $id = $pdo->lastInsertId();
+    }
+    return (int) $id;
+}
+
+/**
+ * Met une ligne portable en place (création, modification ou suppression), liens retrouvés par uid.
+ * Renvoie 'applied', 'locked' (fiche verrouillée), 'missing' (une fiche liée manque) ou 'none' (rien à supprimer).
+ */
+function sync_apply_row(PDO $pdo, string $t, string $uid, string $op, ?array $r, array &$errors): string
+{
+    if (!in_array($t, SYNC_TABLES, true) || !sync_table_ok($pdo, $t)) { return 'none'; }
+    $localId = sync_local_id($pdo, $t, $uid);
+    if (sync_is_locked($pdo, $t, $localId)) { return 'locked'; }
+    if ($op === 'delete' || $r === null) {
+        if (!$localId) { return 'none'; }
+        if ($t === 'persons' && function_exists('delete_person')) {
+            delete_person($pdo, ['id' => $localId]); // même nettoyage qu'à la main (médias, sources, notes, recherche) et fiche restaurable
+        } else {
+            if (in_array($t, ['events', 'media', 'sources'], true)) {
+                $kind = ['events' => 'event', 'media' => 'media', 'sources' => 'source'][$t];
+                foreach (['media_links', 'source_links', 'notes', 'label_links'] as $dep) {
+                    try { $pdo->prepare("DELETE FROM {$dep} WHERE entity_type=? AND entity_id=?")->execute([$kind, $localId]); } catch (Throwable $_) {}
+                }
+                if ($t === 'media') { $pdo->prepare('DELETE FROM media_links WHERE media_id=?')->execute([$localId]); }
+                if ($t === 'sources') { $pdo->prepare('DELETE FROM source_links WHERE source_id=?')->execute([$localId]); }
+            }
+            $pdo->prepare("DELETE FROM {$t} WHERE id=?")->execute([$localId]);
+        }
+        return 'applied';
+    }
+    $cols = sync_columns($pdo, $t);
+    $row = [];
+    foreach ($cols as $col) { if (array_key_exists($col, $r)) { $v = $r[$col]; $row[$col] = is_array($v) ? json_encode($v, JSON_UNESCAPED_UNICODE) : $v; } }
+    $missing = false;
+    foreach (SYNC_REFS[$t] ?? [] as $col => $ref) {
+        if (!empty($r[$col])) { $id = sync_local_id($pdo, $ref, (string) $r[$col]); if ($id === null) { $missing = true; } $row[$col] = $id; }
+    }
+    if ($t === 'events') { $row['event_type_id'] = sync_event_type_id($pdo, is_array($r['event_type_id'] ?? null) ? $r['event_type_id'] : null); if (!$row['event_type_id']) { $missing = true; } }
+    if (isset(SYNC_ENTITY[$t])) {
+        $map = SYNC_ENTITY[$t];
+        $row['entity_id'] = isset($map[$r['entity_type'] ?? '']) ? sync_local_id($pdo, $map[$r['entity_type']], (string) ($r['entity_id'] ?? '')) : null;
+        if (!$row['entity_id']) { $missing = true; }
+    }
+    if ($missing) { $errors[] = sync_label([], $t, $r) . ' : une fiche liée manque (refusée ou pas encore reçue)'; return 'missing'; }
+    if (!$row) { return 'none'; }
+    if ($localId) {
+        $pdo->prepare("UPDATE {$t} SET " . implode(',', array_map(static fn($k) => '"' . $k . '"=?', array_keys($row))) . ' WHERE id=?')->execute([...array_values($row), $localId]);
+    } else {
+        $pdo->prepare("INSERT INTO {$t}(" . implode(',', array_map(static fn($k) => '"' . $k . '"', array_keys($row))) . ',uid) VALUES(' . implode(',', array_fill(0, count($row) + 1, '?')) . ')')->execute([...array_values($row), $uid]);
+        $localId = (int) $pdo->lastInsertId();
+    }
+    if ($t === 'persons' && function_exists('rebuild_search')) { try { rebuild_search($pdo, $localId); } catch (Throwable $_) {} }
+    return 'applied';
+}
+
+/**
+ * Applique les changements choisis d'un paquet (sans transaction ni copie de sécurité : c'est à l'appelant).
+ * $local (lignes portables d'avant) permet de garder de quoi tout remettre (« ↶ Annuler » des deux ordinateurs).
+ */
+function sync_apply_core(PDO $pdo, array $changes, array $acceptedIdx, ?array $local = null): array
+{
+    $accepted = array_fill_keys(array_map('intval', $acceptedIdx), true);
+    $applied = 0; $errors = []; $touched = []; $undo = []; $locked = 0;
+    $order = array_flip(SYNC_TABLES);
+    $indexed = [];
+    foreach ($changes as $i => $c) { if (isset($accepted[$i]) && is_array($c) && isset($order[$c['tbl'] ?? '']) && is_string($c['uid'] ?? null) && in_array($c['op'] ?? '', ['create', 'update', 'delete'], true)) { $indexed[] = [$i, $c]; } }
+    usort($indexed, static function ($a, $b) use ($order) {
+        $da = $a[1]['op'] === 'delete' ? 1 : 0; $db = $b[1]['op'] === 'delete' ? 1 : 0;
+        if ($da !== $db) { return $da <=> $db; }
+        return $da ? $order[$b[1]['tbl']] <=> $order[$a[1]['tbl']] : $order[$a[1]['tbl']] <=> $order[$b[1]['tbl']];
+    });
+    foreach ($indexed as [$i, $c]) {
+        $t = $c['tbl'];
+        $res = sync_apply_row($pdo, $t, $c['uid'], $c['op'], $c['op'] === 'delete' ? null : (is_array($c['after'] ?? null) ? $c['after'] : null), $errors);
+        if ($res === 'locked') { $locked++; continue; }
+        if ($res === 'missing') { continue; }
+        if ($res === 'applied') {
+            $applied++;
+            if ($local !== null) { $undo[] = ['tbl' => $t, 'uid' => $c['uid'], 'row' => $local[$t][$c['uid']] ?? null]; }
+        }
+        $touched[] = [$t, $c['uid']];
+    }
+    return ['applied' => $applied, 'errors' => $errors, 'locked_skipped' => $locked, 'touched' => $touched, 'undo' => $undo, 'indexed' => $indexed];
 }
 
 /** Applique les changements acceptés (copie de sécurité complète avant). */
@@ -740,102 +923,24 @@ function sync_apply(PDO $pdo, array $data): never
     $path = DATA_DIR . '/sync-inbox/' . $token . '.json';
     if ($token === '' || !is_file($path)) { json_response(['error' => 'Paquet introuvable : recharge-le.'], 422); }
     $package = json_decode((string) file_get_contents($path), true);
-    $accepted = array_fill_keys(array_map('intval', is_array($data['accepted'] ?? null) ? $data['accepted'] : []), true);
+    if (!is_array($package) || !is_array($package['changes'] ?? null)) { json_response(['error' => 'Paquet illisible : recharge-le.'], 422); }
     $backupDir = DATA_DIR . '/backups';
     if (!is_dir($backupDir)) { @mkdir($backupDir, 0775, true); }
-    $pdo->exec('VACUUM main INTO ' . $pdo->quote($backupDir . '/genealogie-backup-' . date('Ymd-His') . '-avant-fusion-paquet.db'));
+    $pdo->exec('VACUUM main INTO ' . $pdo->quote($backupDir . '/genealogie-backup-' . date('Ymd-His') . '-' . bin2hex(random_bytes(2)) . '-avant-fusion-paquet.db'));
     $pdo->beginTransaction();
     try {
-        $idOf = static function (string $t, ?string $uid) use ($pdo): ?int {
-            if (!$uid) { return null; }
-            $s = $pdo->prepare("SELECT id FROM {$t} WHERE uid=?"); $s->execute([$uid]);
-            $id = $s->fetchColumn();
-            return $id === false ? null : (int) $id;
-        };
-        $typeId = static function (?array $et) use ($pdo): ?int {
-            if (!$et) { return null; }
-            $s = $pdo->prepare('SELECT id FROM event_types WHERE slug=?'); $s->execute([$et['slug']]); $id = $s->fetchColumn();
-            if ($id === false) { $s = $pdo->prepare('SELECT id FROM event_types WHERE label=? COLLATE NOCASE AND scope=?'); $s->execute([$et['label'], $et['scope']]); $id = $s->fetchColumn(); }
-            if ($id === false) {
-                $pdo->prepare("INSERT INTO event_types(scope, slug, label, gedcom_tag, icon, color, is_custom) VALUES(?,?,?,?, 'diamond', '#0066cc', 1)")->execute([$et['scope'], $et['slug'] . '-' . bin2hex(random_bytes(2)), $et['label'], $et['tag'] ?? '']);
-                $id = $pdo->lastInsertId();
-            }
-            return (int) $id;
-        };
-        $applied = 0; $errors = []; $touched = [];
-        $changes = $package['changes'];
-        $order = array_flip(SYNC_TABLES);
-        $indexed = [];
-        foreach ($changes as $i => $c) { if (isset($accepted[$i])) { $indexed[] = [$i, $c]; } }
-        usort($indexed, static function ($a, $b) use ($order) {
-            $da = $a[1]['op'] === 'delete' ? 1 : 0; $db = $b[1]['op'] === 'delete' ? 1 : 0;
-            if ($da !== $db) { return $da <=> $db; }
-            return $da ? $order[$b[1]['tbl']] <=> $order[$a[1]['tbl']] : $order[$a[1]['tbl']] <=> $order[$b[1]['tbl']];
-        });
-        foreach ($indexed as [$i, $c]) {
-            $t = $c['tbl'];
-            if (!in_array($t, SYNC_TABLES, true)) { continue; }
-            $localId = $idOf($t, $c['uid']);
-            // Fiche verrouillée : le paquet du cousin ne la modifie pas
-            if ($t === 'persons' && $localId && (int) $pdo->query('SELECT COALESCE(is_locked,0) FROM persons WHERE id=' . (int) $localId)->fetchColumn()) { $lockedSkipped = ($lockedSkipped ?? 0) + 1; continue; }
-            // … ni ses événements, ni ses notes (ceux du couple si l'un des deux est verrouillé)
-            if ($localId && in_array($t, ['events', 'notes'], true)) {
-                $lockSql = $t === 'events'
-                    ? 'SELECT 1 FROM events e LEFT JOIN families f ON f.id=e.family_id JOIN persons p ON p.id IN (e.person_id, f.partner1_id, f.partner2_id) WHERE e.id=? AND COALESCE(p.is_locked,0)=1 LIMIT 1'
-                    : "SELECT 1 FROM notes n JOIN persons p ON n.entity_type='person' AND p.id=n.entity_id WHERE n.id=? AND COALESCE(p.is_locked,0)=1 LIMIT 1";
-                $lk = $pdo->prepare($lockSql); $lk->execute([(int) $localId]);
-                if ($lk->fetchColumn()) { $lockedSkipped = ($lockedSkipped ?? 0) + 1; continue; }
-            }
-            if ($c['op'] === 'delete') {
-                if ($localId) {
-                    if ($t === 'persons' && function_exists('delete_person')) {
-                        delete_person($pdo, ['id' => $localId]); // même nettoyage qu'à la main (médias, sources, notes, recherche) et fiche restaurable
-                    } else {
-                        if ($t === 'events') {
-                            foreach (['media_links', 'source_links', 'notes', 'label_links'] as $dep) { $pdo->prepare("DELETE FROM {$dep} WHERE entity_type='event' AND entity_id=?")->execute([$localId]); }
-                        }
-                        $pdo->prepare("DELETE FROM {$t} WHERE id=?")->execute([$localId]);
-                    }
-                    $applied++;
-                }
-                $touched[] = [$t, $c['uid']];
-                continue;
-            }
-            $r = $c['after'];
-            $cols = sync_columns($pdo, $t);
-            $row = [];
-            foreach ($cols as $col) { if (array_key_exists($col, $r)) { $row[$col] = $r[$col]; } }
-            $missing = false;
-            foreach (SYNC_REFS[$t] ?? [] as $col => $ref) {
-                if (!empty($row[$col])) { $id = $idOf($ref, $row[$col]); if ($id === null) { $missing = true; } $row[$col] = $id; }
-            }
-            if ($t === 'events') { $row['event_type_id'] = $typeId($r['event_type_id'] ?? null); if (!$row['event_type_id']) { $missing = true; } }
-            if ($t === 'notes') {
-                $map = ['person' => 'persons', 'event' => 'events', 'family' => 'families'];
-                $row['entity_id'] = isset($map[$r['entity_type']]) ? $idOf($map[$r['entity_type']], $r['entity_id']) : null;
-                if (!$row['entity_id']) { $missing = true; }
-            }
-            if ($missing) { $errors[] = sync_label([], $t, $r) . ' : une fiche liée manque (refusée ou pas encore reçue)'; continue; }
-            if ($localId) {
-                $pdo->prepare("UPDATE {$t} SET " . implode(',', array_map(static fn($k) => '"' . $k . '"=?', array_keys($row))) . ' WHERE id=?')->execute([...array_values($row), $localId]);
-            } else {
-                $pdo->prepare("INSERT INTO {$t}(" . implode(',', array_map(static fn($k) => '"' . $k . '"', array_keys($row))) . ',uid) VALUES(' . implode(',', array_fill(0, count($row) + 1, '?')) . ')')->execute([...array_values($row), $c['uid']]);
-                $localId = (int) $pdo->lastInsertId();
-            }
-            if ($t === 'persons' && function_exists('rebuild_search')) { try { rebuild_search($pdo, $localId); } catch (Throwable $_) {} }
-            $touched[] = [$t, $c['uid']];
-            $applied++;
-        }
-        sync_take_snapshot($pdo, $touched);
+        $res = sync_apply_core($pdo, $package['changes'], is_array($data['accepted'] ?? null) ? $data['accepted'] : []);
+        sync_take_snapshot($pdo, $res['touched']);
         $s = sync_settings($pdo); $s['last_import_at'] = date('c'); ht_save_setting($pdo, 'lcnda-sync', $s);
         $pdo->prepare("INSERT INTO sync_packages(direction, package_uid, author, change_count, accepted_count, summary) VALUES('received', ?, ?, ?, ?, ?)")
-            ->execute([$package['package_uid'], $package['author'] ?? '', count($changes), $applied, sync_summary(array_map(static fn($x) => $x[1], $indexed))]);
-        log_change($pdo, 'meta', 0, 'update', 'Paquet de modifications de ' . ($package['author'] ?? '?') . ' : ' . $applied . ' changement(s) accepté(s) sur ' . count($changes));
+            ->execute([(string) ($package['package_uid'] ?? ''), (string) ($package['author'] ?? ''), count($package['changes']), $res['applied'], sync_summary(array_map(static fn($x) => $x[1], $res['indexed']))]);
+        log_change($pdo, 'meta', 0, 'update', 'Paquet de modifications de ' . ($package['author'] ?? '?') . ' : ' . $res['applied'] . ' changement(s) accepté(s) sur ' . count($package['changes']));
+        if (function_exists('sd_after_manual_apply')) { sd_after_manual_apply($pdo, $package, $res['touched']); } // 🔄 deux ordinateurs : paquet mis de côté puis revu
         $pdo->commit();
     } catch (Throwable $e) {
         $pdo->rollBack();
         json_response(['error' => 'Rien n’a été appliqué : ' . $e->getMessage()], 500);
     }
     @unlink($path);
-    json_response(['ok' => true, 'applied' => $applied, 'errors' => $errors, 'locked_skipped' => $lockedSkipped ?? 0]);
+    json_response(['ok' => true, 'applied' => $res['applied'], 'errors' => $res['errors'], 'locked_skipped' => $res['locked_skipped']]);
 }

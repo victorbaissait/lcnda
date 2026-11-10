@@ -140,7 +140,7 @@
     }
     BL.renderers.awards = render;
     ext.personBlocks.awards = BL.block({key: 'awards', title: '🏆 Concours et récompenses', render,
-        actions: (p, ed) => `<button type="button" class="button small secondary" data-bl-open="awards" data-pid="${Number(p.id)}" title="Le palmarès de cette personne">Palmarès</button>${ed(`<button type="button" class="button small secondary" data-bl-new="award" data-pid="${Number(p.id)}">＋ Ajouter</button>`)}`});
+        actions: (p, ed) => `<button type="button" class="button small secondary" data-bl-open="awards" data-pid="${Number(p.id)}" title="Le palmarès de cette personne">Palmarès</button>${window.LCNDA_EXT?.sourcesOuvertes && p.kind !== 'animal' ? window.LCNDA_EXT.sourcesOuvertes.btn('leonore', p.id) + ed(window.LCNDA_EXT.sourcesOuvertes.importBtn('leonore', p.id)) : ''}${ed(`<button type="button" class="button small secondary" data-bl-new="award" data-pid="${Number(p.id)}">＋ Ajouter</button>`)}`});
 
     /* ═════════ L'écran Listes → « Palmarès » ═════════ */
     ext.lists.palmares = BL.listScreen('awards', 'award');

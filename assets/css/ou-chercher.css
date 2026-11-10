@@ -1,0 +1,61 @@
+/* 🌍 Où chercher ? et 🧩 Murs de brique (assets/js/heritage-ou-chercher.js) : bloc de la fiche, page de Recherche, fenêtre d'un
+ * mur, widget du tableau de bord. Couleurs : variables de l'app seulement (--ink, --muted, --line, --card-bg, --blue-soft…) : le
+ * mode sombre suit tout seul (les quelques couleurs écrites ont leur règle sombre en bas). */
+.ouc-block, .ouc-page, .ouc-wall { min-width: 0; }
+.ouc-intro { margin: 0 0 8px; color: var(--muted); font-size: 13px; line-height: 1.45; }
+.ouc-free { margin: 0 0 8px; }
+.ouc-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.ouc-row { display: grid; grid-template-columns: 26px minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 8px 4px; border-bottom: 1px solid var(--line, #e3e6ea); min-width: 0; }
+.ouc-row:last-child { border-bottom: 0; }
+.ouc-row.is-done { opacity: .82; }
+.ouc-ico { font-size: 18px; text-align: center; }
+.ouc-main { min-width: 0; }
+.ouc-name { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; color: var(--ink); overflow-wrap: anywhere; line-height: 1.3; }
+.ouc-why { font-size: 13px; color: var(--ink); line-height: 1.4; overflow-wrap: anywhere; margin-top: 2px; }
+.ouc-why2 { font-size: 12.5px; color: var(--muted); line-height: 1.4; overflow-wrap: anywhere; }
+.ouc-acts { display: flex; gap: 4px; align-items: center; flex-wrap: nowrap; }
+.ouc-acts .button { white-space: nowrap; }
+.ouc-foot { margin: 8px 0 0; font-size: 13px; }
+.ouc-who { display: grid; gap: 4px; max-width: 520px; margin: 0 0 12px; }
+.ouc-facts { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 10px; }
+.ouc-fact { font-size: 12.5px; padding: 2px 8px; border-radius: 999px; background: var(--blue-soft, #eef3ff); color: var(--ink); border: 1px solid var(--line, #e3e6ea); }
+.ouc-bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0 0 8px; }
+.ouc-bar .ui-filters { display: flex; flex-wrap: wrap; gap: 6px; margin-right: auto; }
+.ouc-bar .ouc-free { margin: 0; }
+.ouc-out { margin: 0; padding-left: 18px; display: grid; gap: 4px; font-size: 13px; }
+.ouc-leads { margin-top: 12px; }
+.ouc-leads summary { cursor: pointer; font-weight: 600; }
+/* 🧩 la fenêtre d'un mur */
+.ouc-wall-head { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; margin: 0 0 12px; }
+.ouc-wall-head > div:not(.segmented) { min-width: 0; flex: 1 1 220px; }
+.ouc-status { flex-wrap: nowrap; flex: none; }
+.ouc-wall-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 18px; }
+.ouc-wall-grid > section { min-width: 0; border: 1px solid var(--line, #e3e6ea); border-radius: 10px; padding: 10px 12px; background: var(--card-bg, #fff); }
+.ouc-wall-grid h4 { margin: 0 0 6px; font-size: 14px; display: flex; gap: 6px; align-items: baseline; }
+.ouc-wall-grid h4 small { color: var(--muted); font-weight: 600; }
+.ouc-mini { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; font-size: 13px; line-height: 1.4; }
+.ouc-mini li { overflow-wrap: anywhere; }
+.ouc-note { width: 100%; box-sizing: border-box; resize: vertical; min-height: 84px; }
+.ouc-wall .ouc-row { grid-template-columns: 22px minmax(0, 1fr); }
+.ouc-wall .ouc-acts { grid-column: 2; flex-wrap: wrap; }
+.ouc-av { display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; font-size: 13px; font-weight: 700; color: #fff; background: #8a94a6; flex: none; }
+.ouc-av.is-m { background: #3b6fd8; }
+.ouc-av.is-f { background: #d84f8f; }
+/* widget */
+.ouc-w-counts { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 8px; }
+.ouc-w-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.ouc-w-row { display: grid; grid-template-columns: 34px minmax(0, 1fr) auto; gap: 8px; align-items: center; width: 100%; text-align: left; background: none; border: 0; border-bottom: 1px solid var(--line, #e3e6ea); padding: 6px 2px; cursor: pointer; color: inherit; font: inherit; }
+.ouc-w-row:hover { background: var(--blue-soft, #eef3ff); }
+.ouc-w-row span { display: grid; min-width: 0; }
+.ouc-w-row b { overflow-wrap: anywhere; }
+@media (max-width: 760px) {
+    .ouc-wall-grid { grid-template-columns: minmax(0, 1fr); }
+    .ouc-status { flex-wrap: wrap; flex: 1 1 100%; }
+    .ouc-row { grid-template-columns: 22px minmax(0, 1fr); }
+    .ouc-acts { grid-column: 2; flex-wrap: wrap; }
+}
+:root[data-theme="dark"] .ouc-av { color: #0f1218; background: #a7b0bf; }
+:root[data-theme="dark"] .ouc-av.is-m { background: #7fa6f5; }
+:root[data-theme="dark"] .ouc-av.is-f { background: #f08bbb; }
+/* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
+/* ═════ fin du mode sombre automatique ═════ */

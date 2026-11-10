@@ -1,0 +1,116 @@
+/* LCNDA — 📍 Images de lieux (assets/js/heritage-place-photos.js).
+ * Couleurs : variables de l'app (--ink, --muted, --card-bg, --blue-bright, --blue-soft…) ; le mode sombre suit tout seul,
+ * le reste est écrit par scripts/build-dark-css.py (bloc en fin de fichier). Les couleurs des hypothèses (--c) sont celles
+ * des pastilles K8 (vert certain, bleu probable, gris possible, jaune à vérifier). */
+
+/* ── La fenêtre « Où a-t-elle été prise ? » (grande, 2 colonnes, K6) ── */
+.pp-dlg { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 18px; align-items: start; }
+.pp-left, .pp-right { min-width: 0; display: flex; flex-direction: column; gap: 10px; }
+.pp-photo { display: block; width: 100%; border: 1px solid #d9dce3; background: #f3f4f7; padding: 0; cursor: zoom-in; }
+.pp-photo img { display: block; width: 100%; max-height: 300px; object-fit: contain; }
+.pp-title { margin: 0; display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+.pp-info { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 12px; }
+.pp-info label, .pp-gform label, .pp-askform label { display: flex; flex-direction: column; gap: 3px; font-size: 13px; font-weight: 600; }
+.pp-info .pp-span { grid-column: 1 / -1; }
+.pp-actions { display: flex; flex-wrap: wrap; gap: 6px; }
+.pp-today-row { display: flex; gap: 10px; align-items: center; border: 1px solid #d9dce3; padding: 6px; }
+.pp-today-row img { width: 54px; height: 40px; object-fit: cover; }
+.pp-today-row span { flex: 1; min-width: 0; }
+.pp-asks h4, .pp-gform h4 { margin: 6px 0; font-size: 14px; }
+.pp-asklist { list-style: none; margin: 0 0 6px; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.pp-asklist li { display: flex; gap: 8px; align-items: center; justify-content: space-between; flex-wrap: wrap; border-bottom: 1px solid #e3e5ea; padding-bottom: 6px; }
+.pp-askact { display: inline-flex; gap: 4px; align-items: center; }
+.pp-ghead { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.pp-ghead h3 { margin: 0; font-size: 15px; }
+.pp-guesses { display: flex; flex-direction: column; gap: 8px; }
+.pp-guess { display: grid; grid-template-columns: 28px minmax(0, 1fr) auto; gap: 10px; align-items: start; border: 1px solid #d9dce3; padding: 8px 10px; background: var(--card-bg, #fff); }
+.pp-guess.is-retained { border-color: var(--blue-bright, #1f6feb); box-shadow: inset 4px 0 0 var(--blue-bright, #1f6feb); }
+.pp-num { width: 24px; height: 24px; display: grid; place-items: center; border-radius: 50%; background: var(--c, #1f6feb); color: #fff; font: 700 12px system-ui, sans-serif; }
+.pp-guess-main { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.pp-guess-top { display: flex; gap: 8px; align-items: center; }
+.pp-star { font: 700 11px system-ui, sans-serif; color: var(--blue-bright, #1f6feb); text-transform: uppercase; letter-spacing: .04em; }
+.pp-why { margin: 3px 0 0; font-size: 13px; white-space: pre-line; overflow-wrap: anywhere; }
+.pp-guess-act { display: flex; gap: 2px; }
+.pp-gform { border: 2px solid var(--blue-bright, #1f6feb); padding: 10px 12px; display: flex; flex-direction: column; gap: 9px; background: var(--card-bg, #fff); }
+.pp-tools { display: flex; flex-wrap: wrap; gap: 6px 8px; align-items: center; }
+.pp-tools .pk-lab { width: 100%; }
+.pp-tools .segmented button.is-active { background: var(--blue-bright, #1f6feb); color: #fff; }
+.pp-tools .ui-hint { width: 100%; margin: 0; }
+.pp-grid { display: grid; grid-template-columns: 1fr 1fr 150px; gap: 8px; }
+.pp-cert { display: flex; flex-wrap: wrap; gap: 6px; }
+.pp-cert-opt { flex-direction: row !important; align-items: center; cursor: pointer; }
+.pp-cert-opt input { position: absolute; opacity: 0; pointer-events: none; }
+.pp-cert-opt span { display: inline-block; border: 1.5px solid #c9ccd3; padding: 4px 10px; font: 700 11px system-ui, sans-serif; text-transform: uppercase; letter-spacing: .04em; color: var(--ink, #111); background: var(--card-bg, #fff); }
+.pp-cert-opt input:focus-visible + span { outline: 2px solid var(--blue-bright, #1f6feb); outline-offset: 2px; }
+.pp-cert-opt.is-green input:checked + span { background: #1a7f37; border-color: #1a7f37; color: #fff; }
+.pp-cert-opt.is-blue input:checked + span { background: #1f6feb; border-color: #1f6feb; color: #fff; }
+.pp-cert-opt.is-grey input:checked + span { background: #6e7781; border-color: #6e7781; color: #fff; }
+.pp-cert-opt.is-yellow input:checked + span { background: #bf8700; border-color: #bf8700; color: #fff; }
+.pp-gform-act { display: flex; justify-content: flex-end; gap: 8px; }
+
+/* ── la petite carte : tuiles, zones, cônes, points ── */
+.pp-map { position: relative; overflow: hidden; border: 1px solid #d9dce3; background: #e9eaee; touch-action: none; user-select: none; cursor: grab; }
+.pp-map[data-tool="point"], .pp-map[data-tool="circle"], .pp-map[data-tool="polygon"], .pp-map[data-tool="dir"] { cursor: crosshair; }
+.pp-map-tiles img { position: absolute; width: 256px; height: 256px; pointer-events: none; }
+.pp-map-svg, .pp-layer-svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+.pp-map-zoom { position: absolute; right: 8px; top: 8px; display: flex; flex-direction: column; gap: 2px; }
+.pp-map-zoom button { width: 30px; height: 30px; border: 1px solid #c9ccd3; background: #fff; color: #111; font-weight: 700; cursor: pointer; }
+.pp-map-hint { position: absolute; left: 8px; bottom: 8px; right: 50px; background: rgba(17, 17, 17, .82); color: #fff; padding: 5px 8px; font-size: 12.5px; }
+.pp-zone { fill: var(--c); fill-opacity: .16; stroke: var(--c); stroke-width: 2; }
+.pp-cone { fill: var(--c); fill-opacity: .26; stroke: var(--c); stroke-width: 1.5; }
+.pp-pt { fill: var(--c); stroke: #fff; stroke-width: 2.5; }
+.pp-g.is-retained .pp-pt { stroke-width: 3.5; }
+.pp-g.is-faded { opacity: .4; }
+.pp-g.is-draft .pp-zone { stroke-dasharray: 6 4; }
+.pp-lab { font: 700 12px system-ui, sans-serif; fill: #111; paint-order: stroke; stroke: #fff; stroke-width: 3px; }
+.pp-poly-draft { fill: none; stroke: #d1242f; stroke-width: 2; stroke-dasharray: 5 4; }
+.pp-vtx { fill: #fff; stroke: #d1242f; stroke-width: 2; }
+
+/* ── la demande d'aide ── */
+.pp-askform { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 16px; align-items: start; }
+.pp-ask-side { display: flex; flex-direction: column; gap: 8px; }
+.pp-ask-side img { width: 100%; max-height: 240px; object-fit: contain; border: 1px solid #d9dce3; background: #f3f4f7; }
+.pp-ask-main { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.pp-where { border: 1px solid #d9dce3; padding: 8px 10px; margin: 0; }
+.pp-ask-copy { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+
+/* ── la liste et le bloc de la fiche du lieu ── */
+.pp-group { margin: 18px 0 8px; font-size: 15px; display: flex; gap: 8px; align-items: baseline; }
+.pp-block-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px; align-items: start; }
+.pp-street h4 { margin: 8px 0 4px; font-size: 14px; }
+.pp-epoch { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 8px; align-items: start; margin-bottom: 6px; }
+.pp-epoch-lab { font: 700 11px system-ui, sans-serif; text-transform: uppercase; letter-spacing: .04em; color: var(--muted, #666); padding-top: 6px; }
+.pp-tiles { display: flex; flex-wrap: wrap; gap: 6px; }
+.pp-tile { display: flex; gap: 8px; align-items: center; width: 220px; max-width: 100%; text-align: left; border: 1px solid #d9dce3; background: var(--card-bg, #fff); color: var(--ink, #111); padding: 4px; cursor: pointer; }
+.pp-tile:hover, .pp-tile:focus-visible { border-color: var(--blue-bright, #1f6feb); }
+.pp-tile img, .pp-tile .ui-card-ico { width: 64px; height: 46px; object-fit: cover; flex: none; }
+.pp-tile span { display: flex; flex-direction: column; min-width: 0; font-size: 13px; }
+.pp-tile b { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pp-help-media { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0; }
+.pp-help-thumb { display: inline-flex; gap: 8px; align-items: center; border: 1px solid #d9dce3; background: var(--card-bg, #fff); color: var(--ink, #111); padding: 3px 8px 3px 3px; cursor: pointer; font-size: 13px; }
+.pp-help-thumb img { width: 48px; height: 36px; object-fit: cover; }
+
+/* ── le calque de la Carte ── */
+.pp-layer { position: absolute; inset: 0; pointer-events: none; z-index: 4; }
+.pp-pin { position: absolute; transform: translate(-50%, -50%); width: 40px; height: 40px; padding: 0; border: 3px solid var(--c, #1f6feb); background: #fff; cursor: pointer; pointer-events: auto; box-shadow: 0 2px 6px rgba(0, 0, 0, .35); }
+.pp-pin img, .pp-pin .ui-card-ico { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pp-pin:hover, .pp-pin:focus-visible { z-index: 2; transform: translate(-50%, -50%) scale(1.6); }
+
+@media (max-width: 760px) {
+    .pp-dlg, .pp-askform, .pp-block-grid { grid-template-columns: minmax(0, 1fr); }
+    .pp-grid { grid-template-columns: 1fr; }
+    .pp-info { grid-template-columns: 1fr; }
+    .pp-epoch { grid-template-columns: minmax(0, 1fr); }
+    .pp-tile { width: 100%; }
+}
+/* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
+:root[data-theme="dark"] .pp-photo{border:1px solid #474a52;background:#22242a}
+:root[data-theme="dark"] .pp-today-row{border:1px solid #474a52}
+:root[data-theme="dark"] .pp-asklist li{border-bottom:1px solid #474a52}
+:root[data-theme="dark"] .pp-guess{border:1px solid #474a52}
+:root[data-theme="dark"] .pp-cert-opt span{border:1.5px solid #494b50}
+:root[data-theme="dark"] .pp-map{border:1px solid #474a52;background:#27282d}
+:root[data-theme="dark"] .pp-ask-side img{border:1px solid #474a52;background:#22242a}
+:root[data-theme="dark"] .pp-where{border:1px solid #474a52}
+:root[data-theme="dark"] .pp-pin{background:#212121}
+/* ═════ fin du mode sombre automatique ═════ */

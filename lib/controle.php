@@ -20,7 +20,7 @@ declare(strict_types=1);
  * d'aujourd'hui, sans dates de création ni de fusion (il faudrait l'historique INSEE / Cassini comme nouveau référentiel).
  */
 
-const CONTROLE_VERSION = 4; // à monter quand un contrôle change : le cache est refait
+const CONTROLE_VERSION = 5; // à monter quand un contrôle change : le cache est refait
 const CONTROLE_SORTS = ['dates', 'ages', 'parents', 'doublons', 'lieux'];
 const CONTROLE_LEVELS = ['red', 'orange', 'yellow'];
 
@@ -39,6 +39,7 @@ const CONTROLE_SEUILS = [
     'birth_gap_months' => [8.5, 5, 12, 0.5],
     'sibling_span' => [25, 15, 40, 1],
     'baptism_km' => [20, 2, 200, 1],
+    'socface_years' => [2, 0, 10, 1], // 🧾 écart toléré entre l'année de naissance lue par SocFace et la fiche
     'baptism_days' => [90, 15, 365, 5],
     'burial_days' => [15, 3, 90, 1],
     'dup_min' => [60, 40, 95, 5],
@@ -695,6 +696,9 @@ function controle_compute(PDO $pdo, array $th): array
         }
     }
 
+    // ═══ 🧾 RECENSEMENT SOCFACE ═══ ce que lit l'IA comparé aux fiches reliées (🟡 / 🟠, jamais 🔴 : la machine peut se tromper)
+    if (function_exists('socface_controle_alerts')) { foreach (socface_controle_alerts($pdo, $th) as $a) { $add($a); } }
+
     // ── fiches citées (nom, sexe, années, Sosa) ──
     $need = [];
     foreach ($A as $a) { foreach ($a['people'] as $id) { $need[$id] = true; } }
@@ -712,7 +716,7 @@ function controle_compute(PDO $pdo, array $th): array
     return ['alerts' => $list, 'people' => $people, 'persons_total' => count($P), 'sosa_root' => $root];
 }
 
-const CONTROLE_SORTS_ORDER = ['parents' => 0, 'dates' => 1, 'ages' => 2, 'doublons' => 3, 'lieux' => 4];
+const CONTROLE_SORTS_ORDER = ['parents' => 0, 'dates' => 1, 'ages' => 2, 'doublons' => 3, 'lieux' => 4, 'socface' => 5];
 
 /* ─── Exceptions (« Ce n'est pas une erreur ») ─────────────────────────── */
 
@@ -785,6 +789,7 @@ function controle_sort_of_key(string $key): string
     $k = strtok($key, ':');
     return match (true) {
         in_array($k, ['dup'], true) => 'doublons',
+        $k === 'socface' => 'socface',
         in_array($k, ['place', 'journey', 'baptism-far', 'conflicting-naissance-place', 'conflicting-décès-place'], true) => 'lieux',
         in_array($k, ['old-parent', 'young-marriage', 'old-marriage', 'sosa-gap'], true) => 'ages',
         in_array($k, ['spouse-ancestor', 'animal-link', 'child-after-parent-death', 'close-births', 'same-year-siblings', 'before-marriage', 'sibling-span', 'multiple-parent-families', 'ghost-family', 'sosa-sex', 'young-parent'], true) => 'parents',

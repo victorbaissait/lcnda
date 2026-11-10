@@ -310,24 +310,32 @@
         bar._stop = stop; bar._show = show;
         return bar;
     }
+    /** 🎬 le moteur vidéo des dessins : chaque image (un <svg> en texte) peinte sur un canevas, enregistrée par le navigateur
+     *  (canevas + MediaRecorder, comme la vidéo de la visite de la maison). frames : [svg] ou [{svg, ms}] ; per : durée d'une image (ms).
+     *  → {blob, ext ('mp4' | 'webm'), mime}. Sert aussi à 🗺 la Carte de la vie (heritage-carte-vie.js). */
+    async function recordSvgs(frames, {per = 450, hold = 900, maxW = 1600, onProgress = null, bg = '#ffffff'} = {}) {
+        if (typeof MediaRecorder === 'undefined') throw new Error('ce navigateur ne sait pas enregistrer de vidéo');
+        const list = (frames || []).map(f => (typeof f === 'string' ? {svg: f} : f)).filter(f => f && f.svg); if (!list.length) throw new Error('rien à filmer');
+        const m = list[0].svg.match(/viewBox="0 0 ([\d.]+) ([\d.]+)"/), w0 = Number(m?.[1]) || 900, h0 = Number(m?.[2]) || 600, k = Math.min(2, maxW / w0);
+        const cv = document.createElement('canvas'); cv.width = Math.round(w0 * k / 2) * 2; cv.height = Math.round(h0 * k / 2) * 2; const g = cv.getContext('2d');
+        const mime = ['video/mp4;codecs=avc1.42E01E', 'video/mp4', 'video/webm;codecs=vp9', 'video/webm;codecs=vp8', 'video/webm'].find(x => MediaRecorder.isTypeSupported?.(x)) || '';
+        const rec = new MediaRecorder(cv.captureStream(30), mime ? {mimeType: mime, videoBitsPerSecond: 5e6} : {}), chunks = [];
+        rec.ondataavailable = e => { if (e.data?.size) chunks.push(e.data); };
+        const done = new Promise(res => { rec.onstop = res; });
+        const paint = svg => new Promise(res => { const img = new Image(); img.onload = () => { g.fillStyle = bg; g.fillRect(0, 0, cv.width, cv.height); g.drawImage(img, 0, 0, cv.width, cv.height); res(); }; img.onerror = () => res(); img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg); });
+        await paint(list[0].svg); rec.start();
+        for (let j = 0; j < list.length; j++) { onProgress?.(j / list.length); await paint(list[j].svg); await new Promise(r => setTimeout(r, Math.max(60, list[j].ms || per))); }
+        await new Promise(r => setTimeout(r, hold)); rec.stop(); await done; onProgress?.(1);
+        const blob = new Blob(chunks, {type: (mime || 'video/webm').split(';')[0]});
+        return {blob, ext: /mp4/.test(blob.type) ? 'mp4' : 'webm', mime: blob.type};
+    }
     /** 🎬 la lecture en vidéo : chaque année dessinée sur un canevas, enregistrée par le navigateur (comme la vidéo de la visite de la maison) */
     async function recordVideo(spec, T, speed, btn) {
         const toast = (m, k) => A()?.toast?.(m, k);
         if (typeof MediaRecorder === 'undefined') return toast('Ce navigateur ne sait pas enregistrer de vidéo.', 'error');
         btn.disabled = true; const old = btn.textContent;
         try {
-            const first = R().svg(T.at(T.years[0])), m = first.match(/viewBox="0 0 ([\d.]+) ([\d.]+)"/), w0 = Number(m?.[1]) || 900, h0 = Number(m?.[2]) || 600, k = Math.min(2, 1600 / w0);
-            const cv = document.createElement('canvas'); cv.width = Math.round(w0 * k / 2) * 2; cv.height = Math.round(h0 * k / 2) * 2; const g = cv.getContext('2d');
-            const mime = ['video/mp4;codecs=avc1.42E01E', 'video/mp4', 'video/webm;codecs=vp9', 'video/webm;codecs=vp8', 'video/webm'].find(x => MediaRecorder.isTypeSupported?.(x)) || '';
-            const rec = new MediaRecorder(cv.captureStream(30), mime ? {mimeType: mime, videoBitsPerSecond: 5e6} : {}), chunks = [];
-            rec.ondataavailable = e => { if (e.data?.size) chunks.push(e.data); };
-            const done = new Promise(res => { rec.onstop = res; });
-            const paint = svg => new Promise(res => { const img = new Image(); img.onload = () => { g.fillStyle = '#ffffff'; g.fillRect(0, 0, cv.width, cv.height); g.drawImage(img, 0, 0, cv.width, cv.height); res(); }; img.onerror = () => res(); img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg); });
-            await paint(first); rec.start();
-            const per = Math.max(120, speed);
-            for (let j = 0; j < T.years.length; j++) { btn.textContent = `🔴 ${Math.round(j / T.years.length * 100)} %`; await paint(R().svg(T.at(T.years[j]))); await new Promise(r => setTimeout(r, per)); }
-            await new Promise(r => setTimeout(r, 900)); rec.stop(); await done;
-            const blob = new Blob(chunks, {type: (mime || 'video/webm').split(';')[0]}), ext2 = /mp4/.test(blob.type) ? 'mp4' : 'webm';
+            const {blob, ext: ext2} = await recordSvgs(T.years.map(y => R().svg(T.at(y))), {per: Math.max(120, speed), onProgress: k => { btn.textContent = `🔴 ${Math.round(k * 100)} %`; }});
             const name = (A()?.safeExportFilename ? A().safeExportFilename(spec.o?.title || 'diagramme', 'diagramme') : 'diagramme') + '-annees.' + ext2;
             const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000);
             toast(`✓ Vidéo exportée (${ext2.toUpperCase()}).`);
@@ -549,6 +557,6 @@
     function hook() { const r = R(); if (!r || r.__perso) return !!r; r.__perso = true; r.prepare = prepare; r.overlay = overlay; r.styleCss = styleCss; return true; }
     if (hasDom) loadDefault();
     if (!hook() && hasDom) document.addEventListener('DOMContentLoaded', hook);
-    ext.diagramPerso = {pane, afterDraw, mount, player, timeInfo, frameSpec, refValue, median, mean, applyStyle, currentStyle, styles, READY, STYLE_KEYS, cleanStyle, setDefault, getDefault: () => defStyle,
+    ext.diagramPerso = {pane, afterDraw, mount, player, recordSvgs, timeInfo, frameSpec, refValue, median, mean, applyStyle, currentStyle, styles, READY, STYLE_KEYS, cleanStyle, setDefault, getDefault: () => defStyle,
         canFacet, hasAxis, xOfYear, NOTE_KINDS, REF_KINDS, styleCss, overlay, prepare, hook};
 })();

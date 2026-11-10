@@ -1,0 +1,51 @@
+/* ⏳ « Une journée dans la vie de… » (assets/js/heritage-journee.js) — fenêtre grande (K6, 1040), récit à droite.
+ * Les couleurs suivent l'app (variables de app.css) ; le mode sombre est écrit par scripts/build-dark-css.py (bloc en fin de fichier). */
+.jr-dialog .jr-body { display: grid; grid-template-columns: minmax(240px, 300px) minmax(0, 1fr); gap: 20px; align-items: start; }
+.jr-side { display: grid; gap: 12px; align-content: start; }
+.jr-side .segmented { display: flex; flex-wrap: wrap; }
+.jr-lab { display: block; font-weight: 700; font-size: 13px; margin-bottom: 4px; }
+.jr-lab2 { font-size: 12px; color: var(--muted); margin-right: 4px; }
+.jr-quick { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-top: 8px; }
+.jr-q { border: 1.5px solid #c9d3e0; background: var(--card-bg, #fff); border-radius: 999px; padding: 3px 10px; font-size: 12.5px; cursor: pointer; }
+.jr-q small { color: var(--muted); }
+.jr-q:hover, .jr-q:focus-visible { border-color: var(--blue); }
+[data-jr-pane="date"] { display: grid; gap: 8px; justify-items: start; }
+[data-jr-pane="date"][hidden] { display: none; }
+[data-jr-pane="date"] .ui-date { width: 100%; }
+.jr-legend { display: flex; flex-wrap: wrap; gap: 6px; }
+.jr-chip { font-size: 12px; padding: 2px 8px; border-radius: 999px; border: 1.5px solid currentColor; }
+.jr-chip.is-fiche, .jr-notes .is-fiche .jr-mk { color: #1b7a3a; }
+.jr-chip.is-ref, .jr-notes .is-ref .jr-mk { color: #1f4e8c; }
+.jr-chip.is-imagine, .jr-notes .is-imagine .jr-mk { color: #7a5c99; }
+.jr-main { min-width: 0; }
+.jr-head { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.jr-actions { display: flex; flex-wrap: wrap; gap: 6px; }
+.jr-actions[hidden] { display: none; }
+.jr-story { font-family: Georgia, 'Times New Roman', serif; font-size: 16px; line-height: 1.6; max-width: 68ch; }
+.jr-story p { margin: 0 0 12px; }
+.jr-s .jr-ref { font-family: var(--font-family, Arial, sans-serif); font-size: 11px; text-decoration: none; margin-left: 2px; white-space: nowrap; }
+.jr-s.is-fiche .jr-ref { color: #1b7a3a; }
+.jr-s.is-ref .jr-ref { color: #1f4e8c; }
+.jr-s.is-imagine .jr-ref { color: #7a5c99; }
+.jr-imag { color: #5d4a73; }
+.jr-imag small { font-style: normal; font-size: 11px; font-family: var(--font-family, Arial, sans-serif); }
+.jr-notes-h { font-family: var(--font-family, Arial, sans-serif); font-size: 13px; margin: 16px 0 6px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+.jr-notes { font-family: var(--font-family, Arial, sans-serif); font-size: 12.5px; line-height: 1.45; padding-left: 22px; margin: 0; color: #444; }
+.jr-notes li { margin: 0 0 4px; }
+.jr-notes li:target { background: var(--blue-soft); }
+.jr-mk { font-weight: 700; }
+.jr-links { white-space: nowrap; }
+.jr-links .link-button, .jr-links a { font-size: 12.5px; color: var(--blue); }
+.event-row.jr-flash { outline: 3px solid var(--blue); outline-offset: 2px; transition: outline-color .6s; }
+@media (max-width: 760px) {
+    .jr-dialog .jr-body { grid-template-columns: 1fr; }
+    .jr-story { font-size: 15px; }
+}
+:root[data-theme="dark"] .jr-chip.is-fiche, :root[data-theme="dark"] .jr-notes .is-fiche .jr-mk, :root[data-theme="dark"] .jr-s.is-fiche .jr-ref { color: #6fd08c; }
+:root[data-theme="dark"] .jr-chip.is-ref, :root[data-theme="dark"] .jr-notes .is-ref .jr-mk, :root[data-theme="dark"] .jr-s.is-ref .jr-ref { color: #8fbaff; }
+:root[data-theme="dark"] .jr-chip.is-imagine, :root[data-theme="dark"] .jr-notes .is-imagine .jr-mk, :root[data-theme="dark"] .jr-s.is-imagine .jr-ref { color: #c7a9e6; }
+:root[data-theme="dark"] .jr-imag { color: #d4c2ea; }
+:root[data-theme="dark"] .jr-notes { color: #c9c9c9; }
+:root[data-theme="dark"] .jr-q { background: #242424; }
+/* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
+/* ═════ fin du mode sombre automatique ═════ */

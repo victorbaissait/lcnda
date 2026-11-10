@@ -154,7 +154,7 @@
                 <section class="h-tx-right">
                     <div class="h-tx-tools"><button type="button" data-tx-cmd="ocr" title="Lire un texte imprimé ou tapé (pose aussi les zones ligne par ligne)">🔎 Lire (imprimé)</button><button type="button" data-tx-cmd="htr" title="Lire l’écriture à la main : toute la page, ou seulement la zone choisie (▭). Le texte est proposé ligne par ligne, à relire." data-help="La lecture d’une écriture à la main (HTR), sur cet ordinateur : le texte est proposé ligne par ligne à côté de l’image, les mots peu sûrs surlignés. Elle s’installe une fois dans les Réglages. Relis toujours : elle se trompe sur les noms." data-help-faq="Lire l’acte">✨ Lire l’acte</button><span class="h-tx-htrrun" data-tx-htrrun hidden><span class="ui-spinner is-inline" role="status"><span class="ui-spin" aria-hidden="true"></span><span data-tx-htrtxt></span></span><button type="button" class="button small secondary" data-tx-cmd="htrstop" title="Arrêter la lecture">■ Arrêter</button></span>
                         <select data-tx-lang title="Langue du texte"><option value="fra">Français</option><option value="lat">Latin</option><option value="fra+lat">Français + latin</option><option value="eng">Anglais</option><option value="deu">Allemand</option><option value="ita">Italien</option><option value="spa">Espagnol</option></select>
-                        <button type="button" data-tx-cmd="template" title="Un modèle d’acte à compléter">📋 Modèle</button><button type="button" data-tx-cmd="detect" title="Repérer les noms, dates, lieux et métiers" data-help="Cherche dans le texte les noms (avec leur rôle : parrain, témoin…), les dates (même en toutes lettres ou au calendrier républicain), les lieux et les métiers, pour les relier aux fiches.">🧭 Repérer</button><span class="spacer"></span>
+                        <button type="button" data-tx-cmd="template" title="Un modèle d’acte à compléter">📋 Modèle</button><button type="button" data-tx-cmd="aide" title="Le latin des registres, les abréviations, les anciennes lettres (ſ, ꝑ…) et des exercices : choisis d’abord un mot dans le texte pour le chercher">📜 Aide à la lecture</button><button type="button" data-tx-cmd="detect" title="Repérer les noms, dates, lieux et métiers" data-help="Cherche dans le texte les noms (avec leur rôle : parrain, témoin…), les dates (même en toutes lettres ou au calendrier républicain), les lieux et les métiers, pour les relier aux fiches.">🧭 Repérer</button><span class="spacer"></span>
                         <details class="h-tx-more"><summary>Plus ▾</summary><div><button type="button" data-tx-cmd="tomedia">↪ Mettre le texte dans le média</button><button type="button" data-tx-cmd="copy">📋 Copier le texte</button><label class="ui-toggle h-tx-useenh" title="La lecture (imprimé et manuscrit) et l’export prennent l’image avec les réglages « Mieux voir » (contraste, netteté, canal, seuil…), sinon l’image d’origine"><input type="checkbox" data-tx-useenh ${useEnh() ? 'checked' : ''}><i></i>Lire et exporter l’image améliorée</label></div></details></div>
                     <div class="h-tx-chars">${SPECIAL.map(c => `<button type="button" data-tx-char="${esc(c)}" title="Insérer ${esc(c)}">${esc(c)}</button>`).join('')}</div>
                     <div class="h-tx-editor"><div class="h-tx-mirror" data-tx-mirror aria-hidden="true"></div><textarea data-tx-body spellcheck="false" placeholder="La transcription, ligne à ligne comme sur l’acte. Choisis un passage, puis dessine sa zone sur l’image (▭ Zone) : les deux restent liés.">${esc(t.body)}</textarea></div>
@@ -550,6 +550,7 @@
                         <div class="h-htr-rev-body">${src ? `<img class="h-htr-crop" src="${src}" alt="Ligne ${i + 1} sur l’image">` : '<span class="h-htr-crop is-none">pas d’image pour cette ligne</span>'}
                         <div class="h-htr-line" contenteditable="plaintext-only" spellcheck="false" role="textbox" aria-label="Ligne ${i + 1}" data-htr-line>${lineHtml(l)}</div></div>
                         <small class="h-htr-conf ${l.conf != null && l.conf < UNSURE ? 'is-low' : ''}">${l.conf != null ? `${pct(l.conf)} %` : ''}</small></li>`; }).join('')}</ol>
+                    <div class="h-htr-lx" data-htr-lx hidden></div>
                     <p class="ui-hint">Corrige directement dans les lignes (clique un mot surligné pour le remplacer) · Entrée : ligne suivante · décoche une ligne pour la laisser de côté. Lu par « ${esc(name(modelFile))} », sur cet ordinateur. Ensuite, « 🧭 Repérer » cherche tout seul les noms, dates et lieux.</p>`,
                 onOpen: d => {
                     d.querySelector('.h-htr-line')?.focus();
@@ -558,6 +559,26 @@
                     d.addEventListener('paste', e => { const ln = e.target.closest('[data-htr-line]'); if (!ln) return; e.preventDefault(); document.execCommand('insertText', false, (e.clipboardData?.getData('text/plain') || '').replace(/\s+/g, ' ')); });
                     d.addEventListener('keydown', e => { const ln = e.target.closest('[data-htr-line]'); if (!ln || e.key !== 'Enter') return; e.preventDefault(); const all = [...d.querySelectorAll('[data-htr-line]')], nx = all[all.indexOf(ln) + (e.shiftKey ? -1 : 1)]; if (nx) { nx.focus(); const r = document.createRange(); r.selectNodeContents(nx); r.collapse(false); const s = getSelection(); s.removeAllRanges(); s.addRange(r); } else d.querySelector('[type=submit]')?.focus(); });
                     d.querySelector('[data-htr-reread]').addEventListener('click', () => { const m = d.querySelector('[data-htr-rmodel]').value; d.close(); runHtr({model: m, zone: box || null}); });
+                    // 🔍 les erreurs typiques d'une lecture automatique (même moteur que SocFace : app-lecture-auto.js) : abréviations, noms proches de ceux de la base
+                    (async () => {
+                        const LX = window.LCNDA_LECTURE, host = d.querySelector('[data-htr-lx]'); if (!LX || !host) return;
+                        let ctx = {}; try { ctx = await (ext.socface?.readingContext ? ext.socface.readingContext() : Promise.resolve({})); } catch (_) {}
+                        const draw = () => {
+                            const text = [...d.querySelectorAll('[data-htr-line]')].map(x => x.textContent).join('\n');
+                            const ws = LX.checkWords(text, {surnames: ctx.surnames || [], firstNames: ctx.firstNames || []}).slice(0, 12);
+                            host.hidden = !ws.length;
+                            host.innerHTML = ws.length ? `<h4>🔍 Lectures à vérifier</h4><ul>${ws.map(w => `<li>🟡 ${esc(w.why)} ${w.proposals.map(p => `<button type="button" class="button small secondary" data-htr-lx-word="${esc(w.word)}" data-htr-lx-value="${esc(p.value)}">Utiliser « ${esc(p.value)} »</button>`).join(' ')}</li>`).join('')}</ul>` : '';
+                        };
+                        draw();
+                        host.addEventListener('click', e => {
+                            const b = e.target.closest('[data-htr-lx-word]'); if (!b) return;
+                            const from = b.dataset.htrLxWord, to = b.dataset.htrLxValue, rx = new RegExp(`(^|[^\\p{L}])${from.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?=$|[^\\p{L}])`, 'gu');
+                            const before = [...d.querySelectorAll('[data-htr-line]')].map(x => x.innerHTML);
+                            d.querySelectorAll('[data-htr-line]').forEach(x => { if (rx.test(x.textContent)) { rx.lastIndex = 0; x.textContent = x.textContent.replace(rx, (m, a) => a + to); } rx.lastIndex = 0; });
+                            draw();
+                            A().undoToast?.(`« ${from} » → « ${to} »`, {undo: () => { d.querySelectorAll('[data-htr-line]').forEach((x, i) => { x.innerHTML = before[i]; }); draw(); }});
+                        });
+                    })();
                 },
                 onSubmit: f => {
                     const kept = [...f.querySelectorAll('.h-htr-rev > li')].filter(li => li.querySelector('[data-htr-keep]').checked).map(li => ({l: lines[Number(li.dataset.i)], text: li.querySelector('[data-htr-line]').textContent.replace(/\s+/g, ' ').trim()})).filter(k => k.text);
@@ -637,6 +658,7 @@
             if (k === 'htrstop') return htrStop();
             if (k === 'htrzone') return runHtr({zone: htrArea()});
             if (k === 'detect') return runDetect();
+            if (k === 'aide') { const sel = area.value.slice(area.selectionStart, area.selectionEnd).trim().slice(0, 40); return ext.readingAid ? ext.readingAid.open({q: /\n/.test(sel) ? '' : sel}) : toast('L’aide à la lecture n’est pas chargée.', 'error'); } // heritage-lecture-autrefois.js
             if (k === 'template') { const tp = TEMPLATES[$('[data-tx="kind"]').value]; if (!tp) return toast('Pas de modèle pour ce genre d’acte.', 'error'); if (area.value.trim() && !await A().confirmBox('Le texte déjà écrit est gardé.', {title: 'Ajouter le modèle à la fin du texte ?', okLabel: 'Ajouter le modèle'})) return; area.value += (area.value.trim() ? '\n\n' : '') + tp; area.dispatchEvent(new Event('input')); return; }
             if (k === 'txt') { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([area.value], {type: 'text/plain;charset=utf-8'})); a.download = `${(A().safeExportFilename ? A().safeExportFilename($('[data-tx="title"]').value || 'transcription', 'transcription') : 'transcription')}.txt`; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 3000); return; }
             if (k === 'copy') { navigator.clipboard?.writeText(area.value).then(() => toast('Texte copié.')).catch(() => toast('Copie impossible ici.', 'error')); return; }
@@ -724,7 +746,7 @@
         UI.editorMenus?.($('[data-tx-menus]'), {
             Fichier: () => [{icon: '💾', label: 'Enregistrer', shortcut: '⌘S', run: cmdOf('save')}, {icon: '⤓', label: 'Exporter (texte, PDF, imprimer)…', run: cmdOf('export')}, '-', {icon: '🖼️', label: 'Image de l’acte…', run: cmdOf('image')}, {icon: '↪', label: 'Mettre le texte dans le média', run: cmdOf('tomedia')}, {icon: '📋', label: 'Copier le texte', run: cmdOf('copy')}, '-', {icon: '×', label: 'Fermer', run: cmdOf('close')}],
             Édition: () => [{icon: '↶', label: 'Annuler', shortcut: '⌘Z', disabled: !HX?.canUndo(), run: () => undoZones(false)}, {icon: '↷', label: 'Rétablir', shortcut: '⇧⌘Z', disabled: !HX?.canRedo(), run: () => undoZones(true)}, '-', {icon: '📋', label: 'Modèle d’acte', run: cmdOf('template')}, {icon: '🧭', label: 'Repérer les noms, dates, lieux', run: cmdOf('detect')}, {icon: '🔎', label: 'Lire (imprimé)', run: cmdOf('ocr')}, {icon: '✨', label: 'Lire l’acte (écriture à la main)', run: cmdOf('htr')}],
-            Outils: () => [{icon: '✋', label: 'Déplacer l’image', shortcut: 'H', run: () => setTool('pan')}, {icon: '▭', label: 'Dessiner une zone', shortcut: 'Z', run: () => setTool('zone')}, {icon: '🔍', label: 'Loupe', shortcut: 'L', run: cmdOf('loupe')}],
+            Outils: () => [{icon: '✋', label: 'Déplacer l’image', shortcut: 'H', run: () => setTool('pan')}, {icon: '▭', label: 'Dessiner une zone', shortcut: 'Z', run: () => setTool('zone')}, {icon: '🔍', label: 'Loupe', shortcut: 'L', run: cmdOf('loupe')}, '-', {icon: '📜', label: 'Aide à la lecture…', run: cmdOf('aide')}, {icon: '🪙', label: 'Convertisseur d’autrefois…', run: () => ext.autrefois?.open()}],
             Affichage: () => [{icon: '⤢', label: 'Ajuster à la fenêtre', shortcut: '⌘0', run: () => txBar?.zoom.fit()}, {icon: '↔', label: 'Toute la largeur (pour lire)', run: () => imgW && applyFit('width')}, {label: '100 %', shortcut: '⌘1', run: () => txBar?.zoom.actual()}, {icon: '＋', label: 'Zoom avant', shortcut: '⌘+', run: () => txBar?.zoom.in()}, {icon: '−', label: 'Zoom arrière', shortcut: '⌘−', run: () => txBar?.zoom.out()}, '-', {icon: '⟳', label: 'Tourner de 90°', run: cmdOf('rot')}, {icon: '↺', label: 'Image d’origine', run: cmdOf('resetview')}]});
         UI.editorRail?.($('[data-tx-rail]'), {breaks: ['[data-tx-cmd="loupe"]', '[data-tx-cmd="image"]']});
         if (UI.editorStatus) { // K18 : l'image à gauche, l'aide de l'outil au milieu, le zoom à droite (⌘ + molette, ⌘0, ⌘1)
@@ -796,5 +818,7 @@
         open: (id, again) => open({id, onSaved: again, onClose: again}),
         create: again => open({onSaved: again, onClose: again}),
         rename: (id, name) => post('rename_act_transcription', {id, name}),
-        remove: id => post('delete_act_transcription', {id}), createLabel: '＋ Nouvelle transcription'});
+        remove: id => post('delete_act_transcription', {id}), createLabel: '＋ Nouvelle transcription',
+        extra: '<button type="button" class="button secondary" data-et-x="aide">📜 Aide à la lecture</button><button type="button" class="button secondary" data-et-x="autrefois">🪙 Convertisseur d’autrefois</button>',
+        onExtra: k => (k === 'aide' ? ext.readingAid?.open() : ext.autrefois?.open())});
 })();

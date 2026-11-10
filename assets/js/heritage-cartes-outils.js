@@ -768,5 +768,6 @@
     });
     ext.mapDraw.push(({left, top, z, width, height}) => { L.last = {left, top, z, width, height}; redraw(); });
 
-    ext.cartesOutils = {openTravel, openPoster, openRelief, posterSvg, lifeLegs, STYLES, layers: {load: loadLayers, save: saveLayer, toggle, list: () => L.list, state: L, exportLayers, importLayers}};
+    ext.cartesOutils = {openTravel, openPoster, openRelief, posterSvg, lifeLegs, STYLES, helpers: {viewFor, baseLayers, rasterize, jpegPdf, photoData, compassSvg}, // helpers : aussi pour 🗺 Mes cartes (heritage-cartes-perso.js)
+        layers: {load: loadLayers, save: saveLayer, toggle, list: () => L.list, state: L, exportLayers, importLayers}};
 })();

@@ -236,6 +236,7 @@
     function optHtml(o, spec) {
         if (o.when && !o.when(spec)) return '';
         const v = spec.o?.[o.k], at = `data-opt="${esc(o.k)}"`;
+        if (o.type === 'link') { const h = o.href?.(spec) || ''; return h ? `<a class="button small secondary h-dg-optlink" href="${esc(h)}" target="_blank" rel="noopener noreferrer">${esc(o.label)}</a>` : (o.hint ? `<small class="ui-hint">${esc(o.hint)}</small>` : ''); } // un lien vers un site (ouvert dans le navigateur)
         if (o.type === 'check') return `<label class="ui-toggle"><input type="checkbox" ${at} ${(v ?? o.def) ? 'checked' : ''}><i></i>${esc(o.label)}</label>`;
         if (o.type === 'select') return `<label>${esc(o.label)}<select ${at}>${o.choices.map(([k, l]) => `<option value="${esc(k)}" ${String(v ?? o.def ?? '') === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>`;
         const un = o.unit != null ? ` data-unit="${esc(o.unit)}"` : ''; // K17 : l'unité dans la case, pas dans le libellé

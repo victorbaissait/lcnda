@@ -23,7 +23,7 @@
         const L = window.LCNDA_JEUX_LOGIQUE, J = window.LCNDA_JEUX_FAMILLE;
         try {
             const d = await J.loadData();
-            const list = d.persons.filter(x => x && !x.living && !x.priv && x.first).map(x => ({name: `${x.first} ${String(x.last || '').toLocaleUpperCase('fr-FR')}`.trim(), id: x.id, g: x.g}));
+            const list = d.persons.filter(x => x && !x.living && !x.priv && !x.mem && x.first).map(x => ({name: `${x.first} ${String(x.last || '').toLocaleUpperCase('fr-FR')}`.trim(), id: x.id, g: x.g}));
             return L.shuffle(list, L.rng(String(seed) + ':ancetres')).slice(0, n);
         } catch (_) { return []; }
     }

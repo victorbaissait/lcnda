@@ -51,6 +51,22 @@ function employer_block_mentions(PDO $pdo): array
     return $out;
 }
 
+/** Les métiers notés « Employeur : X » dans un événement Profession (import d'un registre du personnel, lib/sources_ouvertes_5.php) */
+function employer_event_mentions(PDO $pdo): array
+{
+    $out = [];
+    try {
+        $s = $pdo->query("SELECT e.person_id, e.date_text, e.description, COALESCE(pl.name,'') AS place FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN places pl ON pl.id=e.place_id
+            WHERE t.gedcom_tag='OCCU' AND e.person_id IS NOT NULL AND e.description LIKE '%Employeur :%'");
+        foreach ($s->fetchAll() as $r) {
+            if (!preg_match('/^(.*?)(?:\s+—\s+)?Employeur\s*:\s*(.+?)\s*$/u', (string) $r['description'], $m)) { continue; }
+            $name = trim($m[2]); if ($name === '') { continue; }
+            $out[employer_key($name)][] = ['name' => $name, 'person_id' => (int) $r['person_id'], 'occupation' => trim($m[1], " —"), 'from' => (string) $r['date_text'], 'to' => '', 'place' => (string) $r['place']];
+        }
+    } catch (Throwable) {}
+    return $out;
+}
+
 /** Liste « Employeurs » : recensements + blocs des fiches + fiches d'employeur créées à la main */
 function employer_list_all(PDO $pdo, string $like, int $limit = 500, int $offset = 0): array
 {
@@ -63,6 +79,7 @@ function employer_list_all(PDO $pdo, string $like, int $limit = 500, int $offset
     };
     foreach ($pdo->query("SELECT TRIM(employer) AS name, COUNT(*) AS n FROM census_members WHERE TRIM(COALESCE(employer,''))<>'' GROUP BY LOWER(TRIM(employer))") as $r) { $add((string) $r['name'], (int) $r['n']); }
     foreach (employer_block_mentions($pdo) as $list) { $ids = array_unique(array_column($list, 'person_id')); $add($list[0]['name'], count($ids)); }
+    foreach (employer_event_mentions($pdo) as $list) { $ids = array_unique(array_column($list, 'person_id')); $add($list[0]['name'], count($ids)); } // registres du personnel importés
     try {
         foreach ($pdo->query('SELECT key, name FROM employer_records') as $r) { $add((string) $r['name'], 0); if (isset($rows[$r['key']])) { $rows[$r['key']]['has_record'] = 1; $rows[$r['key']]['name'] = (string) $r['name']; /* le nom de la fiche l'emporte */ } }
     } catch (Throwable) {}
@@ -88,6 +105,7 @@ function employer_people(PDO $pdo, string $key, ?array $mentions = null): array
         $people[$k]['mentions'][] = ['kind' => 'census', 'year' => $r['census_year'] ? (int) $r['census_year'] : null, 'occupation' => (string) $r['occupation'], 'place' => (string) $r['place'], 'age' => (string) $r['age_text']];
     }
     $mentions ??= employer_block_mentions($pdo);
+    foreach (employer_event_mentions($pdo)[$key] ?? [] as $em) { $mentions[$key][] = $em; } // registres du personnel importés (Profession « Employeur : … »)
     $ids = array_unique(array_column($mentions[$key] ?? [], 'person_id'));
     $byId = $ids ? collection_people($pdo, $ids) : [];
     foreach ($mentions[$key] ?? [] as $m) {

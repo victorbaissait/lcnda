@@ -508,7 +508,7 @@
         if (!s.active) {
             body = `<div class="maintenance-panel"><h3>Comment ça marche</h3><ol class="h-steps"><li><b>Commencer</b> ici : chaque fiche reçoit un identifiant commun.</li><li>Donner <b>une copie de ta base</b> à ton cousin (bouton ci-dessous) : il l’ouvre dans son LCNDA (Réglages → Import → ouvrir une base .db).</li><li>Ensuite, chacun travaille de son côté et envoie de temps en temps <b>un paquet de ses modifications</b> (un petit fichier, par e-mail par exemple).</li><li>À la réception, tu <b>acceptes ou refuses</b> chaque changement. Une copie de sécurité est faite avant.</li></ol>
                 <form id="h-sync-start" class="page-actions"><input name="author" placeholder="Ton prénom (ex. Victor)" required><button class="button" type="submit">Commencer le travail à deux</button></form>
-                <p class="muted">Ce qui est échangé : fiches, unions, liens parents-enfants, événements, lieux, notes. Les médias (photos, scans) ne sont pas échangés.</p></div>`;
+                <p class="muted">Ce qui est échangé : fiches, unions, liens parents-enfants, événements, lieux, notes, sources et citations, fiches des médias et leurs liens. Les fichiers des photos et des scans voyagent seulement avec 🔄 Deux ordinateurs (dossier partagé).</p></div>`;
         } else {
             body = `<div class="h-sync-grid"><section class="maintenance-panel"><h3>Envoyer mes modifications</h3><p>${s.pending ? `<strong>${plural(s.pending, 'modification', 'modifications')}</strong> depuis le dernier paquet.` : 'Aucune modification depuis le dernier paquet.'}${s.last_export_at ? ` <small class="muted">Dernier envoi : ${esc(new Date(s.last_export_at).toLocaleString('fr-FR'))}</small>` : ''}</p>
                 <div class="page-actions"><button type="button" class="button" data-h-sync-export ${s.pending ? '' : 'disabled'}>Préparer le paquet</button><a class="button secondary" href="api.php?action=export_sqlite" download>Copie de la base pour un cousin</a></div>
@@ -518,8 +518,9 @@
                 ${preview ? syncPreviewHtml(preview) : ''}
                 ${s.log?.length ? `<h3>Paquets échangés</h3><table class="data-table"><thead><tr><th>Date</th><th>Sens</th><th>De</th><th>Contenu</th></tr></thead><tbody>${s.log.map(l => `<tr><td>${window.LCNDA_UI?.when?.(l.created_at) || esc(l.created_at)}</td><td>${l.direction === 'sent' ? '📤 envoyé' : '📥 reçu'}</td><td>${esc(l.author)}</td><td>${esc(l.summary)}${l.direction === 'received' ? ` <small>(${l.accepted_count}/${l.change_count} acceptés)</small>` : ''}</td></tr>`).join('')}</tbody></table>` : ''}`;
         }
-        A().$('#workspace').innerHTML = `<section class="page collection-page">${header('RÉGLAGES', 'Travail à deux', intro)}${body}</section>`;
+        A().$('#workspace').innerHTML = `<section class="page collection-page">${header('RÉGLAGES', 'Travail à deux', intro)}<section class="maintenance-panel sd-panel" data-sd-panel></section>${body}</section>`;
         const ws = A().$('#workspace');
+        ext.syncFolderPanel?.(ws.querySelector('[data-sd-panel]')); // 🔄 Deux ordinateurs (heritage-sauvegarde.js)
         ws.querySelector('#h-sync-start')?.addEventListener('submit', async ev => { ev.preventDefault(); try { await api('sync_start', {}, {method: 'POST', body: {author: ev.currentTarget.author.value}}); toast('Travail à deux commencé. Donne maintenant une copie de ta base à ton cousin.'); rerender(); } catch (error) { toast(error.message, 'error'); } });
         ws.querySelector('#h-sync-author')?.addEventListener('submit', async ev => { ev.preventDefault(); await api('sync_set_author', {}, {method: 'POST', body: {author: ev.currentTarget.author.value}}); toast('Enregistré.'); });
         ws.querySelector('[data-h-sync-export]')?.addEventListener('click', () => { location.assign('api.php?action=sync_export'); setTimeout(() => rerender(), 2500); });

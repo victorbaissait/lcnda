@@ -116,11 +116,13 @@ function tresor_tree(PDO $pdo): array
     $cond = []; if ($hasKind) { $cond[] = "COALESCE(p.kind,'human')<>'animal'"; }
     if ($kiosk) { $cond[] = "COALESCE(p.living_status,'')<>'living'"; if ($hasPriv) { $cond[] = 'COALESCE(p.is_private,0)=0'; } }
     $people = []; $where = $cond ? 'WHERE ' . implode(' AND ', $cond) : '';
+    $respect = function_exists('so2_respect_ids') ? so2_respect_ids($pdo) : []; // 🕯 déporté(e) ou fusillé(e) : « mem » → jamais dans les jeux des Trésors
+    if (function_exists('so7_respect_ids')) { $respect += so7_respect_ids($pdo); } // 🕯 « Juste parmi les nations » (lib/sources_ouvertes_7.php) : jamais dans les jeux
     foreach ($pdo->query('SELECT p.id, p.first_name, p.middle_name, p.last_name, p.gender, p.living_status, p.is_start, p.updated_at, ' . ($hasPriv ? 'COALESCE(p.is_private,0) AS priv, ' : '0 AS priv, ') . ($hasOcc ? 'p.occupation' : "'' AS occupation") . ",
             (SELECT COALESCE(NULLIF(m.thumbnail,''),m.filename) FROM media m WHERE m.id=p.portrait_media_id) AS portrait FROM persons p $where") as $r) {
         $id = (int) $r['id'];
         $people[$id] = ['id' => $id, 'first' => trim((string) $r['first_name']), 'last' => trim((string) $r['last_name']), 'name' => trim(preg_replace('/\s+/', ' ', $r['first_name'] . ' ' . $r['middle_name'] . ' ' . $r['last_name'])),
-            'gender' => $r['gender'], 'living' => $r['living_status'] === 'living', 'start' => (int) $r['is_start'] === 1, 'occ' => trim((string) $r['occupation']), 'portrait' => $r['portrait'] ?: null, 'touched' => substr((string) $r['updated_at'], 0, 10), 'priv' => (int) $r['priv'] === 1,
+            'gender' => $r['gender'], 'living' => $r['living_status'] === 'living', 'start' => (int) $r['is_start'] === 1, 'occ' => trim((string) $r['occupation']), 'portrait' => $r['portrait'] ?: null, 'touched' => substr((string) $r['updated_at'], 0, 10), 'priv' => (int) $r['priv'] === 1, 'mem' => isset($respect[$id]),
             'by' => null, 'bd' => null, 'bplace' => null, 'dy' => null, 'dd' => null, 'dplace' => null, 'father' => null, 'mother' => null];
     }
     $places = [];

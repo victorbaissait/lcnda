@@ -40,9 +40,15 @@
         workbook: {sym: '🧾', add: '＋ Ajouter un classeur…', one: 'classeur', none: 'Aucun classeur', label: '🧾 Classeurs'}, // lib/textdocs.php
         textdoc: {sym: '📝', add: '＋ Ajouter un document…', one: 'document', none: 'Aucun document', label: '📝 Documents'}, // 📝 Traitement de texte
         parcel: {sym: '▦', add: '＋ Ajouter une parcelle…', one: 'parcelle', fem: true, none: 'Aucune parcelle', label: '▦ Parcelles'}, // 🗺 Cadastre (heritage-cadastre.js)
+        fobject: {sym: '🏺', ph: 'Nom de l’objet, sorte… (2 lettres suffisent)', add: '＋ Ajouter un objet…', one: 'objet', none: 'Aucun objet de famille', label: '🏺 Objets de famille'}, // 🏠 Héritages et successions (heritage-successions.js)
+        probate: {sym: '⚖️', ph: 'Nom du défunt, notaire, année… (2 lettres suffisent)', add: '＋ Ajouter un inventaire…', one: 'inventaire', none: 'Aucun inventaire après décès', label: '⚖️ Inventaires après décès'},
         pet: {sym: '🐾', ph: 'Nom, espèce, code de bague, puce… (2 lettres suffisent)', add: '＋ Ajouter un animal…', one: 'animal', many: 'animaux', none: 'Aucun animal', label: '🐾 Animaux'}, // 🐾 Suivi des animaux (lib/suivi.php)
         tsite: {sym: '🏞', ph: 'Nom du site… (2 lettres suffisent)', add: '＋ Ajouter un site…', one: 'site', none: 'Aucun site', label: '🏞 Sites de suivi'},
         agroup: {sym: '👥', ph: 'Nom du groupe, de la meute… (2 lettres suffisent)', add: '＋ Ajouter un groupe…', one: 'groupe', none: 'Aucun groupe', label: '👥 Groupes d’animaux'},
+        health: {sym: '🩺', ph: 'Maladie, cause de décès… (2 lettres suffisent)', add: '＋ Choisir une maladie…', one: 'maladie', fem: true, none: 'Aucune maladie notée', label: '🩺 Santé'}, // 🩺 Santé de la famille (lib/sante.php) : rien tant qu'elle est cachée
+        custommap: {sym: '🗺', ph: 'Chercher une de mes cartes…', add: '＋ Choisir une carte…', one: 'carte', fem: true, none: 'Aucune carte', label: '🗺 Mes cartes'}, // 🗺 Mes cartes (lib/cartes_perso.php)
+        branch: {sym: '🌿', ph: 'Nom de la branche…', add: '＋ Choisir une branche…', one: 'branche', fem: true, none: 'Aucune branche', label: '🌿 Branches'},
+        maplayer: {sym: '✏️', ph: 'Nom d’une de mes couches…', add: '＋ Choisir une couche…', one: 'couche', fem: true, none: 'Aucune couche dessinée', label: '✏️ Mes couches'},
         digest: {sym: '📜', ph: 'Commune, cote, année… (2 lettres suffisent)', add: '🔗 Relier un dépouillement…', one: 'dépouillement', none: 'Aucun dépouillement', label: '📜 Dépouillements'}, // journal des recherches (lib/picker.php)
         contact: {sym: '📇', ph: 'Nom, prénom d’un contact… (2 lettres suffisent)', add: '＋ Ajouter un contact…', one: 'contact', none: 'Aucun contact', label: '📇 Contacts'}, // Répertoire des vivants (Questions aux proches)
         mylist: {sym: '📋', ph: 'Chercher une de mes listes…', add: '＋ Ajouter une liste…', one: 'liste', fem: true, none: 'Aucune liste', label: '📋 Mes listes'}, // Mes listes (lib/picker.php) : le groupe de personnes d'un diagramme
@@ -278,7 +284,7 @@
     // ── la recherche dans une case ──
     const SS = new WeakMap();
     const S = s => { if (!SS.has(s)) SS.set(s, {seq: 0, q: '', groups: [], flat: [], more: false, next: 0, active: 0, filter: 'all', counts: null, loading: false, timer: 0, kind: ''}); return SS.get(s); };
-    const EMPTY_OK = ['label', 'house', 'periodical', 'investigation', 'battue', 'source', 'employer', 'census', 'media', 'graph', 'sheet', 'atelier', 'board', 'layout', 'diagram', 'oldmap', 'act', 'photomap', 'digest'];
+    const EMPTY_OK = ['custommap', 'branch', 'maplayer', 'label', 'house', 'periodical', 'investigation', 'battue', 'source', 'employer', 'census', 'media', 'graph', 'sheet', 'atelier', 'board', 'layout', 'diagram', 'oldmap', 'act', 'photomap', 'digest'];
     function minLen(c) { const kinds = c.opts.kind.split(','); return kinds.length > 1 ? 2 : (K[kinds[0]]?.min ?? 1); }
     function onFocus(c, s) { const inp = s.querySelector('.pk-input'); if (inp.value.trim().length >= minLen(c) || (!inp.value.trim() && !c.opts.kind.includes(',') && EMPTY_OK.includes(c.kind))) { if (s.querySelector('.pk-list').hidden) run(c, s); } }
     function schedule(c, s) {
@@ -622,6 +628,7 @@
         if (it.kind === 'parcel' && window.LCNDA_EXT?.cadastre?.open) { window.LCNDA_EXT.cadastre.open(it.id, {dialog: true}); return; } // 🗺 la fiche de la parcelle, par-dessus
         if (it.kind === 'artwork' && window.LCNDA_EXT?.artistCatalog?.openItem) { window.LCNDA_EXT.artistCatalog.openItem(it.id); return; }
         if (it.kind === 'graph' && window.LCNDA_EXT?.openMyGraph) { close(); window.LCNDA_EXT.openMyGraph(it.uid); return; }
+        if (it.kind === 'custommap' && app.state && app.setModule && window.LCNDA_EXT?.mesCartes) { close(); window.LCNDA_EXT.mesCartes.open(it.id); return; } // 🗺 heritage-cartes-perso.js
         if (it.kind === 'photomap' && app.state && app.setModule) { close(); app.state.mapMode = 'photos'; window.LCNDA_PHOTOMAPS?.setCurrent?.(it.id); app.setModule('carte'); return; } // 📸 heritage-photomaps.js
         // fiches, Atelier, tableaux, mises en page, diagrammes, cartes, transcriptions : comme une tuile du widget « Raccourcis »
         if (window.LCNDA_EXT?.shortcuts?.openTarget && window.LCNDA_EXT.shortcuts.canOpen?.(it.kind)) { close(); window.LCNDA_EXT.shortcuts.openTarget(`${it.kind}:${it.id}`, {title: it.title}); return; }

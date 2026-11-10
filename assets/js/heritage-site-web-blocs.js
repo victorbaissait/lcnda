@@ -101,6 +101,10 @@ a { color: var(--lc-principale); }
             html: (ctx, o) => geneaBlock('timeline', {person: o.p.id}, `Frise de ${o.p.name}`, `La vie de ${o.p.name}`)},
         {key: 'map', group: 'genea', icon: '🗺', label: 'Carte', hint: 'Les lieux d’une personne (ou de ses ancêtres)', ask: async () => { const p = await pickPerson('La carte de qui ?'); return p && {p}; },
             html: (ctx, o) => geneaBlock('map', {person: o.p.id, scope: 'ancestors', gens: 6, fond: defaultFond(), vive: 0}, `Carte de ${o.p.name}`, `Les lieux de ${o.p.name} et de ses ancêtres`)},
+        {key: 'mymap', group: 'genea', icon: '🗺', label: 'Une de mes cartes', hint: 'Une carte sur mesure (Carte → 🗺 Mes cartes), mise en image sans personne vivante ni fiche confidentielle', ask: async () => {
+                const mc = window.LCNDA_EXT?.mesCartes, it = mc && await PK().openPicker?.({kind: 'custommap', title: 'Quelle carte ?'}); if (!it?.id) return null;
+                const m = await mc.renderPng(it.id, {dpi: 150}); return m ? {m: {...m, title: String(it.title || m.title || 'Carte')}} : null; },
+            html: (ctx, o) => section('Carte', `    <figure class="image" data-lc-name="Carte">\n      <img src="${esc(mediaSrc(o.m))}" alt="${esc(o.m.title || '')}">\n      <figcaption>${esc(o.m.title || '')}</figcaption>\n    </figure>`)},
         {key: 'diagram', group: 'genea', icon: '🏛️', label: 'Diagramme', hint: 'Un de tes diagrammes (Graphiques → Mes diagrammes), ou un nouveau ; redessiné à chaque ouverture, figé à l’export', ask: async () => { const d = await pickDiagram(); return d && {d}; },
             html: (ctx, o) => geneaBlock('diagram', {diagram: o.d.id}, `Diagramme ${o.d.name}`, o.d.name)},
         {key: 'chart', group: 'genea', icon: '📊', label: 'Chiffres', hint: 'Naissances par décennie, prénoms les plus portés', html: () => geneaBlock('chart', {chart: 'naissances'}, 'Chiffres de la famille', 'La famille en chiffres')},

@@ -88,7 +88,7 @@
     const yearOf = ev => ev?.date?.y || null;
     function index(D) {
         const P = new Map((D.persons || []).map(p => [p.id, p]));
-        const ok = p => p && !p.living && !p.priv;
+        const ok = p => p && !p.living && !p.priv && !p.mem; // mem : déporté(e) ou fusillé(e), jamais dans un jeu
         const parents = new Map(); (D.families || []).forEach(f => f.c.forEach(c => parents.set(c, f)));
         const name = p => `${p.first || ''} ${(p.last || '').toUpperCase()}`.trim() || 'Sans nom';
         const years = p => { const b = yearOf(p.birth) || yearOf(p.bapt), d = yearOf(p.death); return b || d ? `${b || '?'}–${d || '?'}` : ''; };

@@ -482,7 +482,7 @@
         const [Y, M, D] = H.date, iso = `${Y}-${String(M).padStart(2, '0')}-${String(D).padStart(2, '0')}`, ymd = v => /^\d{4}-\d\d-\d\d$/.test(String(v || ''));
         const keys = [H.city, ...H.keys].map(x => foldTxt(x));
         const here = id => { const n = foldTxt(places?.[id]?.name); return !!id && n.trim() && keys.some(x => n.includes(x)); };
-        const ok = p => { if (!p || p.living || p.priv || p.sh) return false; const by = Number(p.by) || 0, dy = Number(p.dy) || 0; if (!by) return false;
+        const ok = p => { if (!p || p.living || p.priv || p.sh || p.mem) return false; const by = Number(p.by) || 0, dy = Number(p.dy) || 0; if (!by) return false;
             if (ymd(p.bd) ? p.bd >= iso : by >= Y) return false; const age = Y - by; if (age < 8 || age > 95) return false;
             return dy ? (ymd(p.dd) ? p.dd > iso : dy > Y) : age <= 85; };
         const all = (Array.isArray(people) ? people : []).filter(ok).map(p => ({pid: Number(p.id) || 0, name: str(p.name || [p.first, p.last].filter(Boolean).join(' '), 80) || 'Sans nom', gender: str(p.gender, 10), occ: str(p.occ, 60), by: Number(p.by), age: Y - Number(p.by), local: here(p.bplace) || here(p.dplace)}));
@@ -1938,7 +1938,7 @@
 
     /* ═════════ 🧓 Souvenirs des ancêtres (option) : la vraie vie d'un habitant tiré de la base ═════════ */
     /** ce que la fiche apporte : métier, naissance (année, lieu), mariage (année, lieu, conjoint), enfants (années) ; rien d'un vivant, d'une fiche confidentielle ou cachée */
-    const cleanMem = m => (!m || typeof m !== 'object' || m.living || m.priv || m.sh ? null : {occ: str(m.occ, 60), by: Number(m.by) || 0, bplace: str(m.bplace, 60), mplace: str(m.mplace, 60), my: Number(m.my) || 0, spouse: str(m.spouse, 80), kids: (Array.isArray(m.kids) ? m.kids : []).slice(0, 20).map(y => Number(y) || 0)});
+    const cleanMem = m => (!m || typeof m !== 'object' || m.living || m.priv || m.sh || m.mem ? null : {occ: str(m.occ, 60), by: Number(m.by) || 0, bplace: str(m.bplace, 60), mplace: str(m.mplace, 60), my: Number(m.my) || 0, spouse: str(m.spouse, 80), kids: (Array.isArray(m.kids) ? m.kids : []).slice(0, 20).map(y => Number(y) || 0)});
     /** ce qui fait penser à un métier : lieux de la ville, lieux de la région, bâtiments, outils */
     const MEM_LINK = {construire: ['menuiserie', 'quincaillerie', 'foret', 'puits', 'scie', 'pelle'], reparer: ['garage', 'usine', 'depot', 'mine', 'atelier', 'cle'], soigner: ['pharmacie', 'hopital', 'abbaye', 'infirmerie'],
         cultiver: ['ferme', 'village', 'moulin', 'pelle'], cuisiner: ['supermarche', 'moulin', 'ferme'], fouiller: ['supermarche', 'droguerie', 'station', 'ville', 'port'], defendre: ['gare', 'mairie', 'depot'], raconter: ['bibliotheque', 'ecole', 'eglise', 'abbaye']};

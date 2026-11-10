@@ -444,3 +444,5 @@ function recits_schema(PDO $pdo): void
         updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
     )");
 }
+
+require_once __DIR__ . '/biographie_journee.php'; // ⏳ « Une journée dans la vie de… » : un mode de ce générateur

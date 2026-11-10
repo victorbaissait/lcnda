@@ -580,6 +580,17 @@
             });
         },
     };
+    /** les étapes d'une vie (api diagram_cartes2 what=story, ou carte_vie de lib/metiers_carte.php) → le diagramme « Carte qui raconte » ;
+     *  keep : garder les étapes sans lieu (sur la frise) ; colors : {src → couleur} (famille, recensement…) ; aussi pour 🗺 la Carte de la vie */
+    async function storySpec(r, {keep = false, spec = null, colors = {}} = {}) {
+        const steps = (r.steps || []).filter(x => keep || x.place);
+        const s = spec || {kind: 'storymap', o: {}, rows: []}, places = {}, names = new Map();
+        steps.forEach((x, i) => { if (!x.place) return; const label = x.county && steps.some(y => y.place === x.place && y.county !== x.county) ? `${x.place} (${x.county})` : x.place; x.label2 = label; places[i] = [x.place, x.county, '', x.country, x.lat ?? null, x.lon ?? null, x.insee || '']; names.set(i, label); });
+        const lost = steps.length ? await placesToSpec(s, places, names) : 0;
+        s.rows = steps.map(x => ({date: x.date || (x.year ? String(x.year) : ''), label: [x.kind, x.with ? `avec ${x.with}` : ''].filter(Boolean).join(' ') + (x.title && x.title !== x.kind ? ` : ${x.title}` : ''), place: x.label2 || '', note: '', color: colors[x.src] || ''}));
+        s.o = {...(s.o || {}), step: -1, title: `La vie de ${r.name}`, subtitle: (() => { const ys = steps.map(x => x.year).filter(Boolean); return ys.length ? `${Math.min(...ys)} – ${Math.max(...ys)}` : ''; })()};
+        return {spec: s, steps, lost};
+    }
     const storyApp = {
         html: () => `<div class="h-dg-app c2-app"><h4>📖 La vie d’une personne</h4><p class="muted">Ses événements (naissance, baptême, mariages, résidences, métiers, décès…) deviennent les étapes, dans l’ordre des dates. Le tableau est remplacé.</p>
             <div class="c2-form"><span class="pk-lab">Personne</span>${A().pickerField ? A().pickerField({name: 'c2_person', kind: 'person', value: Number(A().state?.bootstrap?.startPersonId) || null}) : ''}
@@ -590,12 +601,7 @@
             bindGo(pane, async () => {
                 const id = Number(pane.querySelector('[name="c2_person"]')?.value) || Number(A().state?.bootstrap?.startPersonId) || 0; if (!id) throw new Error('Choisis une personne.');
                 const r = await get({what: 'story', person: id}), keep = pane.querySelector('[data-c2="noplace"]').checked;
-                const steps = (r.steps || []).filter(x => keep || x.place); if (!steps.length) throw new Error('Aucun événement avec un lieu pour cette personne.');
-                const s = io.spec(), places = {}, names = new Map();
-                steps.forEach((x, i) => { if (!x.place) return; const label = x.county && steps.some(y => y.place === x.place && y.county !== x.county) ? `${x.place} (${x.county})` : x.place; x.label2 = label; places[i] = [x.place, x.county, '', x.country, x.lat ?? null, x.lon ?? null, x.insee || '']; names.set(i, label); });
-                const lost = await placesToSpec(s, places, names);
-                s.rows = steps.map(x => ({date: x.date || (x.year ? String(x.year) : ''), label: [x.kind, x.with ? `avec ${x.with}` : ''].filter(Boolean).join(' ') + (x.title && x.title !== x.kind ? ` : ${x.title}` : ''), place: x.label2 || '', note: ''}));
-                s.o = {...s.o, step: -1, title: `La vie de ${r.name}`, subtitle: (() => { const ys = steps.map(x => x.year).filter(Boolean); return ys.length ? `${Math.min(...ys)} – ${Math.max(...ys)}` : ''; })()};
+                const {spec: s, steps, lost} = await storySpec(r, {keep, spec: io.spec()}); if (!steps.length) throw new Error('Aucun événement avec un lieu pour cette personne.');
                 io.apply(s); return `${pl(s.rows.length, 'étape')} prise${s.rows.length > 1 ? 's' : ''} dans la vie de ${r.name}.${lost ? ` ${pl(lost, 'lieu sans position', 'lieux sans position')}.` : ''}`;
             });
         },
@@ -694,11 +700,14 @@
         const S = STORY.get(g.getAttribute('data-c2-story'));
         if (S) { try { svg.outerHTML = DR.svg({...S.spec, o: {...(S.spec.o || {}), step: i}}, S.W + 32); } catch (_) {} }
         paintTools(host, i, n);
+        try { host.dispatchEvent(new CustomEvent('c2-step', {detail: {i, n}})); } catch (_) {} // 🗺 la Carte de la vie suit l'étape
         // dans l'éditeur : l'étape est enregistrée avec le diagramme (pas pendant la lecture)
         const api = host.closest('[data-dg-preview]')?._c2Api || host._c2Api;
         if (persist && api && api.spec().kind === 'storymap') { clearTimeout(host._c2Save); host._c2Save = setTimeout(() => { if (api.spec().o?.step !== i) api.set({step: i}); }, 500); }
     }
     function paintTools(host, i, n) { const bar = host.querySelector(':scope > .c2-tools'); if (!bar) return; bar.querySelector('input').max = String(n - 1); bar.querySelector('input').value = String(i); bar.querySelector('output').textContent = i < 0 ? 'Toute la vie' : `Étape ${i + 1} / ${n}`; }
+    const SPEEDS = [['3000', '🐢 Lente'], ['1700', 'Normale'], ['900', '🐇 Rapide']];
+    const speedMs = host => Math.max(300, Math.min(10000, Number(host.dataset.c2Speed) || 1700));
     function storyEnhance(g) {
         if (g.__c2) return; g.__c2 = 1;
         const svg = g.ownerSVGElement, host = svg?.parentElement; if (!host) return;
@@ -706,7 +715,7 @@
         let bar = host.querySelector(':scope > .c2-tools');
         if (!bar) {
             bar = document.createElement('div'); bar.className = 'c2-tools'; bar.setAttribute('role', 'toolbar'); bar.setAttribute('aria-label', 'Étapes de la vie');
-            bar.innerHTML = `<button type="button" class="button small secondary" data-c2-t="all" title="Voir toute la vie">⤢ Toute la vie</button><button type="button" class="icon-button small" data-c2-t="prev" title="Étape précédente" aria-label="Étape précédente">◀</button><button type="button" class="icon-button small" data-c2-t="play" title="Lecture : les étapes défilent" aria-label="Lecture">▶︎</button><button type="button" class="icon-button small" data-c2-t="next" title="Étape suivante" aria-label="Étape suivante">▶</button><input type="range" min="-1" step="1" aria-label="Étape"><output></output>`;
+            bar.innerHTML = `<button type="button" class="button small secondary" data-c2-t="all" title="Voir toute la vie">⤢ Toute la vie</button><button type="button" class="icon-button small" data-c2-t="prev" title="Étape précédente" aria-label="Étape précédente">◀</button><button type="button" class="icon-button small" data-c2-t="play" title="Lecture : les étapes défilent" aria-label="Lecture">▶︎</button><button type="button" class="icon-button small" data-c2-t="next" title="Étape suivante" aria-label="Étape suivante">▶</button><input type="range" min="-1" step="1" aria-label="Étape"><output></output><select data-c2-speed aria-label="Vitesse de la lecture">${SPEEDS.map(([k, l]) => `<option value="${k}"${k === (host.dataset.c2Speed || '1700') ? ' selected' : ''}>${l}</option>`).join('')}</select>`;
             host.appendChild(bar);
             const cur0 = () => { const gg = host.querySelector('[data-c2-story]'); return gg ? [gg, Number(gg.getAttribute('data-c2-cur')), Number(gg.getAttribute('data-c2-n'))] : [null, -1, 0]; };
             const playBtn = () => host.querySelector(':scope > .c2-tools [data-c2-t="play"]'); // la lecture tient à la boîte (l'éditeur peut redessiner la barre)
@@ -716,8 +725,9 @@
                 if (b.dataset.c2T === 'prev') { stop(); storyGo(gg, c <= 0 ? nn - 1 : c - 1); }
                 if (b.dataset.c2T === 'next') { stop(); storyGo(gg, c >= nn - 1 ? 0 : c + 1); }
                 if (b.dataset.c2T === 'play') { if (host._c2T) return stop(); b.textContent = '⏸'; clearTimeout(host._c2Save); if (c >= nn - 1 || c < 0) storyGo(gg, 0, false);
-                    host._c2T = setInterval(() => { const [g2, c2, n2] = cur0(); if (!g2 || !host.isConnected) { clearInterval(host._c2T); host._c2T = 0; return; } if (c2 >= n2 - 1) return stop(); storyGo(g2, c2 + 1, false); }, 1700); } });
+                    host._c2T = setInterval(() => { const [g2, c2, n2] = cur0(); if (!g2 || !host.isConnected) { clearInterval(host._c2T); host._c2T = 0; return; } if (c2 >= n2 - 1) return stop(); storyGo(g2, c2 + 1, false); }, speedMs(host)); } });
             bar.querySelector('input').addEventListener('input', e => { stop(); const [gg] = cur0(); if (gg) storyGo(gg, Number(e.target.value)); });
+            bar.querySelector('[data-c2-speed]').addEventListener('change', e => { host.dataset.c2Speed = e.target.value; if (host._c2T) { const pb = playBtn(); stop(); pb?.click(); } });
         }
         paintTools(host, cur, n);
         const pb = bar.querySelector('[data-c2-t="play"]'); if (pb) pb.textContent = host._c2T ? '⏸' : '▶︎';
@@ -727,6 +737,8 @@
     if (typeof MutationObserver !== 'undefined' && typeof document !== 'undefined' && document.documentElement) new MutationObserver(() => { clearTimeout(scanT); scanT = setTimeout(scan, 60); }).observe(document.documentElement, {childList: true, subtree: true});
     const storyAfterDraw = (prev, api) => { prev._c2Api = api; };
     const keepApi = (prev, api) => { prev._c2Api = api; };
+
+    ext.storyMap = {storySpec, go: storyGo, enhance: storyEnhance, SPEEDS, located: (spec, W) => { const B = placeBases(spec, W); if (B.wait) return null; return stepsOf(spec, B.bases).map(x => !!x.p); }}; // 🗺 Carte de la vie (heritage-carte-vie.js)
 
     /* ═════════ Réglages et enregistrement des sortes ═════════ */
     const mapOpts = GC.mapOpts();

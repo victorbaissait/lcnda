@@ -71,7 +71,7 @@
         if (p.last) out.push(`Son nom commence par ${p.last[0]}… et compte ${p.last.length} lettres.`);
         return out;
     }
-    const pool = (T, tr) => tr.people.filter(p => !p.living && p.first && (p.by || p.bplace || p.occ));
+    const pool = (T, tr) => tr.people.filter(p => !p.living && !p.mem && p.first && (p.by || p.bplace || p.occ));
     function mysteryOf(T, tr, day) { const ps = pool(T, tr); if (!ps.length) return null; const r = T.rng(Number(day.replace(/-/g, '')) % 2147483646)(); return ps[Math.floor(r * ps.length)]; }
     async function renderMystery(host, T) {
         const tr = await T.tree(); let p = mysteryOf(T, tr, today()), shown = 1, over = false, tries = 0, mode = 'jour';
@@ -116,7 +116,7 @@
         return out;
     }
     async function renderHero(host, T) {
-        const tr = await T.tree(), cand = tr.people.filter(p => !p.living && p.by && (p.occ || (tr.fams.get(p.id) || []).length)), first = cand.find(p => p.occ && (tr.fams.get(p.id) || []).length) || cand[0];
+        const tr = await T.tree(), cand = tr.people.filter(p => !p.living && !p.mem && p.by && (p.occ || (tr.fams.get(p.id) || []).length)), first = cand.find(p => p.occ && (tr.fams.get(p.id) || []).length) || cand[0];
         if (!first) { host.innerHTML = T.empty('Il faut un ancêtre avec une date de naissance et un métier ou un mariage'); return; }
         host.innerHTML = `<div class="h-tr-row h-tr-noprint"><div style="min-width:260px"><span class="pk-lab">Tu seras</span>${T.personField('hero', first.id)}</div></div><div data-he-out></div>`;
         const out = host.querySelector('[data-he-out]');

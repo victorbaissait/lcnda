@@ -16,7 +16,7 @@
     const ls = (k, d) => { try { return localStorage.getItem(k) ?? d; } catch (_) { return d; } };
     const lsSet = (k, v) => { try { localStorage.setItem(k, v); } catch (_) {} };
 
-    const KINDS = {birth: ['👶', 'Naissance'], marriage: ['💍', 'Mariage'], death: ['🕯️', 'Décès'], parents: ['👪', 'Parents'], contract: ['📜', 'Contrat de mariage'], succession: ['⚖️', 'Succession'], census: ['🏠', 'Recensements'], military: ['🎖️', 'Registre matricule']};
+    const KINDS = {birth: ['👶', 'Naissance'], marriage: ['💍', 'Mariage'], death: ['🕯️', 'Décès'], parents: ['👪', 'Parents'], contract: ['📜', 'Contrat de mariage'], succession: ['⚖️', 'Succession'], census: ['🏠', 'Recensements'], socface: ['🧾', 'Recensement (SocFace)'], military: ['🎖️', 'Registre matricule']};
     const STATUS = {todo: 'à faire', done: 'terminé', review: 'à revoir', doubt: 'doute', priority: 'priorité', later: 'plus tard'};
     const years = it => it.from == null ? '' : it.from === it.to || it.to == null ? String(it.from) : `${it.from} – ${it.to}`;
     const st = () => (S().gapsView ||= {gen: Number(ls('genealogie-gaps-gen', 7)) || 7, group: ls('genealogie-gaps-group', 'archives'), off: [], q: ''});
@@ -27,7 +27,8 @@
         const [ico, label] = KINDS[it.kind] || ['•', it.what];
         const done = (it.digested || []).map(d => `<span class="h-gap-dig ${d.status === 'done' ? 'ok' : ''}" title="Déjà dans le suivi des dépouillements">${esc(d.year_text || 'sans période')} · ${esc(d.result_label || STATUS[d.status] || d.status)}</span>`).join('');
         const where = (it.where || []).map(w => `<li><b>${esc(w.series)}</b> — ${esc(w.detail)}</li>`).join('');
-        const links = [it.archive?.france && it.place ? `<a href="${esc(faSearch(`${it.place} ${it.what}`))}" target="_blank" rel="noopener">FranceArchives</a>` : '',
+        const sfUrl = it.kind === 'socface' && window.LCNDA_SOCFACE ? window.LCNDA_SOCFACE.searchUrl({last: it.sf?.last, first: it.sf?.first, place: it.sf?.place, y1: it.from, y2: it.to, gender: it.sf?.gender}) : '';
+        const links = [sfUrl ? `<a href="${esc(sfUrl)}" target="_blank" rel="noopener noreferrer" data-gap-sf-link>🔍 Chercher sur SocFace ↗</a>` : '', it.archive?.france && it.place && it.kind !== 'socface' ? `<a href="${esc(faSearch(`${it.place} ${it.what}`))}" target="_blank" rel="noopener">FranceArchives</a>` : '',
             it.kind === 'death' && it.gender === 'male' && it.from <= 1921 && it.to >= 1914 ? `<a href="${esc(webSearch(`Mémoire des hommes ${it.name}`))}" target="_blank" rel="noopener">Mémoire des hommes</a>` : '',
             `<a href="${esc(webSearch(`${it.name} ${it.place || ''} ${it.what} généalogie`))}" target="_blank" rel="noopener">Sur internet</a>`].filter(Boolean).join(' · ');
         return `<article class="h-gap" data-gap-i="${it._i}">
@@ -35,7 +36,7 @@
                 <div class="h-gap-who">${opts.noPerson ? '' : `<button type="button" class="table-link" data-h-person="${Number(it.person_id)}">${esc(it.name)}</button> <small class="muted">Sosa ${fmt(it.sosa)} · génération ${it.generation}</small>`}
                     <div><b>${esc(label)}</b>${it.place ? ` à <b>${esc(it.place)}</b>` : ' <span class="muted">(lieu inconnu)</span>'}${years(it) ? `, <b>${esc(years(it))}</b>` : ''} <small class="muted">— ${esc(it.why)}</small></div>
                     ${opts.noArchive ? '' : `<div class="h-gap-arch">🏛️ ${esc(it.archive?.label || '')}</div>`}</div>
-                <div class="h-gap-act"><button type="button" class="button small secondary" data-gap-add title="Ajouter une ligne « à faire » dans Recherche → Dépouillement d’archive">📌 Au suivi</button></div></div>
+                <div class="h-gap-act">${it.kind === 'socface' ? `<button type="button" class="button small secondary" data-gap-sf="found" title="Noté dans le Journal des recherches ; importe ensuite le CSV pour avoir le foyer">✓ Trouvé</button><button type="button" class="button small secondary" data-gap-sf="none" title="Noté dans le Journal des recherches : « Rien trouvé »">Pas trouvé</button><button type="button" class="button small secondary" data-sf-import="${Number(it.person_id)}">⤒ Importer…</button>` : '<button type="button" class="button small secondary" data-gap-add title="Ajouter une ligne « à faire » dans Recherche → Dépouillement d’archive">📌 Au suivi</button>' + (ext.openActLetter && {birth: 'naissance', marriage: 'mariage', death: 'deces'}[it.kind] ? `<button type="button" class="button small secondary" data-cl-ask="${Number(it.person_id)}" data-cl-act="${({birth: 'naissance', marriage: 'mariage', death: 'deces'})[it.kind]}" data-cl-what="${it.from != null && it.from < new Date().getFullYear() - 100 ? 'recherche' : 'integrale'}" title="Une lettre toute prête pour demander cet acte (mairie, archives…)">📮 Demander l’acte</button>` : '')}</div></div>
             ${it.decennial?.length ? `<p class="h-gap-td">📇 Tables décennales : ${it.decennial.map(t => `<span>${esc(t)}</span>`).join('')}</p>` : ''}
             <ul class="h-gap-where">${where}</ul>
             <div class="h-gap-foot">${done ? `<span class="muted">Déjà cherché :</span> ${done}` : ''}<span class="h-gap-links">${links}</span></div></article>`;
@@ -88,8 +89,23 @@
         ws.querySelectorAll('[data-gaps-kind]').forEach(c => c.addEventListener('change', () => { v.off = [...ws.querySelectorAll('[data-gaps-kind]')].filter(x => !x.checked).map(x => x.dataset.gapsKind); draw(); }));
         ws.querySelector('[data-gaps-print]').addEventListener('click', () => { if (window.LCNDA_UI?.printPage) { window.LCNDA_UI.printPage('Les trous à combler, pour aller aux archives', {bodyClass: 'h-gaps-printing'}); return; } document.body.classList.add('h-gaps-printing'); window.print(); setTimeout(() => document.body.classList.remove('h-gaps-printing'), 500); }); // K13
         ws.querySelector('[data-gaps-list]').addEventListener('click', async e => {
+            // 🧾 SocFace : « ✓ Trouvé / Pas trouvé » passe dans le Journal des recherches (un dépouillement fait), la ligne s'en va
+            const sfb = e.target.closest('[data-gap-sf]');
+            if (sfb) {
+                const art = sfb.closest('[data-gap-i]'), it = items.find(x => x._i === Number(art.dataset.gapI)), res = sfb.dataset.gapSf;
+                sfb.disabled = true;
+                try {
+                    const url = art.querySelector('[data-gap-sf-link]')?.href || '';
+                    const r = await api('save_archive_digest', {}, {method: 'POST', body: {id: 0, place_id: it.place_id || 0, city_name: it.place || '', department: it.archive?.department || '', archive_service: 'FranceArchives — recensements (SocFace)', archive_url: url, year_text: String(it.from), record_type: 'recensement', status: 'done', result: res,
+                        searched: `Recensement de ${it.from} à ${it.place} : ${it.name} (Sosa ${it.sosa}) — base de noms SocFace (transcription automatique, peut contenir des erreurs)`, sought_ids: [it.person_id]}});
+                    const id = Number(r?.result?.id || r?.id || 0);
+                    const idx = items.indexOf(it); items.splice(idx, 1); draw();
+                    A().undoToast?.(res === 'found' ? `Trouvé : recensement de ${it.from} noté dans le Journal des recherches` : `Pas trouvé : noté dans le Journal des recherches`, {undo: async () => { if (id) await api('delete_archive_digest', {}, {method: 'POST', body: {id}}); items.splice(idx, 0, it); draw(); }});
+                } catch (err) { sfb.disabled = false; toast(err.message, 'error'); }
+                return;
+            }
             const b = e.target.closest('[data-gap-add]'); if (!b) return;
-            const it = items[Number(b.closest('[data-gap-i]').dataset.gapI)];
+            const it = items.find(x => x._i === Number(b.closest('[data-gap-i]').dataset.gapI));
             const notes = (it.where || []).map(w => `${w.series} : ${w.detail}`).join('\n') + (it.decennial?.length ? `\nTables décennales : ${it.decennial.join(', ')}` : '');
             b.disabled = true;
             try {
@@ -101,4 +117,6 @@
         });
     }
     ext.researchGaps = render;
+    // un foyer SocFace importé : sa ligne « Recensement de … : chercher sur SocFace » s'en va
+    window.addEventListener('lcnda:socface-changed', () => { if (S()?.module === 'recherche' && S().researchKind === 'gaps') render(++S().workspaceToken); });
 })();

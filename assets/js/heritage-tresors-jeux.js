@@ -27,10 +27,10 @@
             // une famille = les ancêtres d'un des arrière-grands-parents (ou plus haut si l'arbre est petit)
             const st = T.start(tr); if (!st) return [];
             // la génération de « têtes de branche » qui donne le plus de familles d'au moins six (avec leurs frères et sœurs)
-            const branch = h => { const hp = tr.byId.get(h.id), ids = new Set([h.id, ...T.ancestors(tr, h.id, 12).map(a => a.id)]); [...ids].forEach(id => { const p = tr.byId.get(id); [p.father, p.mother].filter(Boolean).forEach(par => (tr.kids.get(par) || []).forEach(k => ids.add(k))); }); return [hp, [...ids].map(i => tr.byId.get(i)).filter(p => p && !p.living)]; };
+            const branch = h => { const hp = tr.byId.get(h.id), ids = new Set([h.id, ...T.ancestors(tr, h.id, 12).map(a => a.id)]); [...ids].forEach(id => { const p = tr.byId.get(id); [p.father, p.mother].filter(Boolean).forEach(par => (tr.kids.get(par) || []).forEach(k => ids.add(k))); }); return [hp, [...ids].map(i => tr.byId.get(i)).filter(p => p && !p.living && !p.mem)]; };
             const tries = [4, 3, 2, 1].map(g => T.ancestors(tr, st.id, g).filter(a => a.gen === g).map(branch)), best = tries.sort((a, b) => b.filter(x => x[1].length >= 6).length - a.filter(x => x[1].length >= 6).length)[0] || [];
             best.forEach(([hp, l]) => l.forEach(p => add(`Branche ${hp.last || T.name(hp)}${hp.first ? ` (${hp.first})` : ''}`, p)));
-        } else tr.people.forEach(p => { if (!p.living && p.last) add(p.last.toUpperCase(), p); });
+        } else tr.people.forEach(p => { if (!p.living && !p.mem && p.last) add(p.last.toUpperCase(), p); });
         const score = p => (p.portrait ? 3 : 0) + (p.by ? 1 : 0) + (p.occ ? 1 : 0) + (p.dy ? 0.5 : 0);
         return [...groups.entries()].filter(([, l]) => l.length >= 6).map(([k, l]) => ({name: k, people: l.sort((a, b) => score(b) - score(a)).slice(0, 6).sort((a, b) => (a.by || 9999) - (b.by || 9999))}))
             .sort((a, b) => b.people.reduce((s, p) => s + score(p), 0) - a.people.reduce((s, p) => s + score(p), 0)).slice(0, n);
@@ -230,7 +230,7 @@
     /** des questions tirées de l'arbre : {q, options[], answer (indice), why} ; le même tirage pour la même graine */
     function quizQuestions(T, tr, n = 15, seed = Date.now()) {
         const R = T.rng(seed), pick = a => a[Math.floor(R() * a.length)], shuffle = a => { const b = [...a]; for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(R() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } return b; };
-        const ppl = tr.people.filter(p => p.first), fem = p => p.gender === 'female', e = (s, p) => s.replace(/·e/g, fem(p) ? 'e' : '');
+        const ppl = tr.people.filter(p => p.first && !p.mem), fem = p => p.gender === 'female', e = (s, p) => s.replace(/·e/g, fem(p) ? 'e' : ''); // mem : déporté(e) ou fusillé(e), jamais dans un jeu
         const places = [...new Set(ppl.map(p => T.place(tr, p.bplace)).filter(Boolean))], jobs = [...new Set(ppl.map(p => p.occ).filter(Boolean))];
         const opts = (good, pool, k = 4) => { const others = shuffle(pool.filter(x => x !== good)).slice(0, k - 1); if (!others.length) return null; const all = shuffle([good, ...others]); return {options: all, answer: all.indexOf(good)}; };
         const makers = [

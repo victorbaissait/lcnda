@@ -62,7 +62,7 @@
         const list = box.querySelector('[data-df-list]');
         list.innerHTML = UI().skeleton?.(3) || '';
         let r;
-        try { r = await A().api('dates_feter', {period: c.period, who: c.who, sosa: c.sosa ? 1 : 0, round: c.round ? 1 : 0, kinds: (c.kinds || []).join(','), branch: c.branch || ''}); }
+        try { const now = new Date(); r = await A().api('dates_feter', {today: new Date(now.getTime() - now.getTimezoneOffset() * 60000).toISOString().slice(0, 10), period: c.period, who: c.who, sosa: c.sosa ? 1 : 0, round: c.round ? 1 : 0, kinds: (c.kinds || []).join(','), branch: c.branch || ''}); }
         catch (e) { list.innerHTML = A().empty(e.message, {icon: '⛔'}); return; }
         if (!box.isConnected) return;
         box.querySelector('[data-df-who="all"]').textContent = `Tout (${r.counts.all})`;

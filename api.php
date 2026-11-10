@@ -17,6 +17,8 @@ require_once __DIR__ . '/lib/widget_links.php'; // 🔗 widget « Raccourcis » 
 require_once __DIR__ . '/lib/scene.php'; // 🎤 scène : coordonnées des lieux des concerts (assets/js/heritage-scene*.js)
 require_once __DIR__ . '/lib/layout_extra.php'; // 📐 mise en page : arbre dynamique, citations, vérificateur, index des lieux et métiers
 require_once __DIR__ . '/lib/premier.php'; // 🧭 premier lancement : usages, base vide, 🧪 base d'exemple (lib/exemple.php)
+require_once __DIR__ . '/lib/sync_dossier.php'; // 🔄 deux ordinateurs (dossier partagé, paquets, conflits) et 🔒 verrou d'ouverture de la base
+require_once __DIR__ . '/lib/sauvegarde_auto.php'; // 🗓 sauvegarde automatique (jour, semaine, fermeture ; dossier choisi ; intégrité ; revenir à une copie)
 require_once __DIR__ . '/lib/diagram_genea.php'; // 📊 diagrammes Généalogie et Frises : éventail, soleil, réseau, arcs, Venn, calendrier, rose, spirale
 
 // SITE_DEFAULTS_PATH est défini dans lib/paths.php
@@ -142,6 +144,11 @@ try {
         $justInitialized = true;
     }
 
+    // 🔒 Une base ouverte sur un autre ordinateur (fichier dans un dossier synchronisé) : message clair, rien n'est écrit (lib/sync_dossier.php)
+    sd_lock_guard((string) $action, $isWrite);
+    // 🗓 Sauvegarde automatique (lib/sauvegarde_auto.php) : avant db(), une copie peut remplacer la base
+    sa_early((string) $action, $isWrite, is_array($payload) ? $payload : []);
+
     // Fichier lu directement sur le disque (application de bureau : choisi dans la fenêtre système).
     $importFile = null;
     if ($isWrite && $action === 'import_local_path') {
@@ -172,6 +179,7 @@ try {
         if ($emptyRead !== null) json_response($emptyRead + ['ready' => false]);
     }
     $pdo = db();
+    if (str_starts_with((string) $action, 'sd_')) { json_response(sd_dispatch($pdo, (string) $action, is_array($payload) ? $payload : [], $isWrite)); } // 🔄 deux ordinateurs
 
     // La structure de la base (tables, colonnes, types d’événements de base) est mise à jour une seule fois
     // par numéro de version dans lib/migrations.php, à l’ouverture de la base (db()).
@@ -245,6 +253,10 @@ try {
         require_once __DIR__ . '/lib/cartes_outils.php';
         cartes_outils_dispatch($pdo, (string) $action, $isWrite, $payload);
     }
+    if ($action === 'cartes_perso' || $action === 'cartes_perso_write') { // 🗺 Mes cartes : cartes sur mesure à couches filtrées (lib/cartes_perso.php)
+        require_once __DIR__ . '/lib/cartes_perso.php';
+        cartes_perso_dispatch($pdo, (string) $action, $isWrite, $payload);
+    }
     if (in_array($action, ['photomaps', 'photomap', 'photomap_all', 'photomap_thumb', 'photomap_write', 'photomap_upload'], true)) { // 📸 cartes de photos (lib/photomaps.php)
         require_once __DIR__ . '/lib/photomaps.php';
         photomaps_dispatch($pdo, (string) $action, $isWrite, $payload);
@@ -253,6 +265,14 @@ try {
         require_once __DIR__ . '/lib/questions_proches.php';
         qp_dispatch($pdo, (string) $action, $isWrite, $payload);
     }
+    if (in_array($action, ['pa_list', 'pa_get', 'pa_faces', 'pa_write'], true)) { // 🔍 « Qui est sur cette photo ? » à plusieurs (lib/photo_ask.php)
+        require_once __DIR__ . '/lib/photo_ask.php';
+        pa_dispatch($pdo, (string) $action, $isWrite, $payload);
+    }
+    if (in_array($action, ['cl_context', 'cl_letter', 'cl_ids', 'cl_templates', 'cl_write'], true)) { // 📮 courriers tout prêts : « Demander l'acte » (lib/courriers_actes.php)
+        require_once __DIR__ . '/lib/courriers_actes.php';
+        cl_dispatch($pdo, (string) $action, $isWrite, $payload);
+    }
     if (in_array($action, ['tresors', 'tresor_write', 'tresor_tree', 'tresor_media', 'tresor_signatures', 'tresor_faces', 'tresor_photos', 'tresor_memories', 'tresor_memory_write'], true)) { // ✨ trésors de famille (lib/tresors.php)
         require_once __DIR__ . '/lib/tresors.php';
         tresors_dispatch($pdo, (string) $action, $isWrite, $payload);
@@ -260,6 +280,10 @@ try {
     if (in_array($action, ['postcards', 'postcard_write'], true)) { // 🏞 cartes postales anciennes (lib/postcards.php)
         require_once __DIR__ . '/lib/postcards.php';
         postcards_dispatch($pdo, (string) $action, $isWrite, $payload);
+    }
+    if (in_array($action, ['place_photos', 'place_photo', 'place_photo_help_text', 'place_photo_write'], true)) { // 📍 images de lieux : « Où a-t-elle été prise ? » (lib/place_photos.php)
+        require_once __DIR__ . '/lib/place_photos.php';
+        place_photos_dispatch($pdo, (string) $action, $isWrite, $payload);
     }
     if (!$isWrite && $action === 'dates_feter') { // 🎂 dates à fêter du tableau de bord (lib/dates_feter.php)
         require_once __DIR__ . '/lib/dates_feter.php';
@@ -319,6 +343,27 @@ try {
     }
     if ($isWrite && $action === 'retouch_media') {
         retouch_media($pdo, $_FILES['file'] ?? null, $_POST);
+    }
+    if (in_array($action, SO_ACTIONS, true)) { // 🗂 Archives en ligne (lib/sources_ouvertes.php) : aucune requête vers les sites, seulement ce que la personne importe
+        so_dispatch($pdo, (string) $action, $isWrite, $payload);
+    }
+    if (in_array($action, SO3_ACTIONS, true)) { // 🌍 Archives en ligne, 3e lot (lib/sources_ouvertes_3.php) : même modèle, aucune requête vers les sites
+        so3_dispatch($pdo, (string) $action, $isWrite, $payload);
+    }
+    if (in_array($action, SO5_ACTIONS, true)) { // 🌍 Archives en ligne, 5e lot (lib/sources_ouvertes_5.php) : même modèle, aucune requête vers les sites
+        so5_dispatch($pdo, (string) $action, $isWrite, $payload);
+    }
+    if (in_array($action, SO2_ACTIONS, true)) { // 🗂 Archives en ligne, suite (lib/sources_ouvertes_2.php) : AN, ANOM, SHD, déportation, JO, annuaires, patrimoine, étranger
+        so2_dispatch($pdo, (string) $action, $isWrite, $payload);
+    }
+    if (in_array($action, SO6_ACTIONS, true)) { // 📚 Archives en ligne, 6e lot (lib/sources_ouvertes_6.php) : bibliothèques, auteurs, HisKi, Old Bailey — aucune requête vers les sites
+        so6_dispatch($pdo, (string) $action, $isWrite, $payload);
+    }
+    if (in_array($action, SO4_ACTIONS, true)) { // 🗂 Archives en ligne, 4e lot (lib/sources_ouvertes_4.php) : monuments, cimetières, communes, Europe — aucune requête vers les sites
+        so4_dispatch($pdo, (string) $action, $isWrite, $payload);
+    }
+    if (in_array($action, SO7_ACTIONS, true)) { // 🌍 Archives en ligne, 7e lot (lib/sources_ouvertes_7.php) : Europe, Justes, enfants assistés, monuments, cadastres — aucune requête vers les sites
+        so7_dispatch($pdo, (string) $action, $isWrite, $payload);
     }
     if ($isWrite && $action === 'htr_upload_model') {
         htr_upload_model($_FILES['file'] ?? null, safe_text($_POST['target'] ?? ''));
@@ -511,6 +556,10 @@ try {
         'cadastre_place' => json_response(cadastre_place_info($pdo, safe_int($_GET['id'] ?? 0))),
         'cadastre_lookup' => json_response(cadastre_lookup($pdo, $_GET)), // en ligne, par le serveur : API Carto IGN, WFS Géoplateforme (cache, délais, limite)
         'cadastre_dvf' => json_response(cadastre_dvf($pdo, $_GET)),
+        'successions' => json_response(['items' => successions_list($pdo)]), // 🏠 Héritages et successions (lib/successions.php)
+        'succession' => json_response(succession_get($pdo, safe_int($_GET['id'] ?? 0))),
+        'succession_chain' => json_response(succession_chain($pdo, (string) ($_GET['kind'] ?? ''), safe_int($_GET['id'] ?? 0))),
+        'successions_person' => json_response(['items' => successions_for_person($pdo, safe_int($_GET['id'] ?? 0))]),
         'house' => json_response(house_get($pdo, safe_int($_GET['id'] ?? 0))),
         'house_links' => json_response(['items' => house_links_lookup($pdo, safe_int($_GET['person_id'] ?? 0), safe_int($_GET['census_id'] ?? 0))]),
         'house_models' => json_response(['items' => house_models_list($pdo)]),
@@ -527,6 +576,8 @@ try {
         'diagram_more' => (static function () use ($pdo) { require_once __DIR__ . '/lib/diagram_more.php'; json_response(diagram_more_data($pdo, $_GET)); })(), // 📊 arbre en frise, crises, fratrie, pyramide, accordéon, cousinages, matrice, patronymes, accord (lib/diagram_more.php)
         'diagram_cartes2' => (static function () use ($pdo) { require_once __DIR__ . '/lib/diagram_cartes2.php'; json_response(diagram_cartes2_data($pdo, $_GET)); })(), // 🗺️ carte en points, hexagones, carte qui raconte, prénoms transmis, causes de décès (lib/diagram_cartes2.php)
         'diagram_geo' => (static function () use ($pdo) { require_once __DIR__ . '/lib/diagram_cartes.php'; json_response(diagram_geo_data($pdo, $_GET)); })(), // 🗺️ diagrammes « Cartes » : lieux de l'arbre et leurs coordonnées (lib/diagram_cartes.php)
+        'prenoms_transmis' => (static function () use ($pdo) { require_once __DIR__ . '/lib/prenoms_france.php'; json_response(prenoms_transmis($pdo, $_GET)); })(), // 👶 Transmission des prénoms (lib/prenoms_france.php)
+        'famille_france' => (static function () use ($pdo) { require_once __DIR__ . '/lib/prenoms_france.php'; json_response(famille_france($pdo, $_GET)); })(), // 📊 Ta famille et l'histoire de France (moyennes sourcées : assets/data/moyennes-france.json)
         'diagram_vie' => (static function () use ($pdo) { require_once __DIR__ . '/lib/diagram_vie.php'; json_response(diagram_vie_data($pdo, $_GET)); })(), // 📊 D23–D38 : mortalité des enfants, fratries, saisons, veuvage, durée des mariages, âge des parents, conceptions, écart d'âge, loin du berceau, savoir signer, ce que tu as prouvé, registres consultés (lib/diagram_vie.php)
         'diagram_famille' => (static function () use ($pdo) { require_once __DIR__ . '/lib/diagram_famille.php'; json_response(diagram_famille_data($pdo, $_GET)); })(), // 📊 D1–D8 : qui a connu qui, survie, métiers, rayon des mariages, implexe, mois, naissances, lieux de vie (lib/diagram_famille.php)
         'diagram_plus' => (static function () use ($pdo) { require_once __DIR__ . '/lib/diagram_plus.php'; json_response(diagram_plus_data($pdo, $_GET)); })(), // 📊 douze de plus : chemin de parenté, centre de gravité, générations, complétude, ahnentafel, roue de l'année, chiffres (lib/diagram_plus.php)
@@ -539,10 +590,14 @@ try {
         'press_ads' => json_response(press_ads_all($pdo)),
         'topic_sheet_templates' => json_response(['templates' => topic_sheet_templates($pdo)]),
         'biography' => json_response(bio_get($pdo, safe_int($_GET['id'] ?? 0), $_GET)), // 📖 lib/biographie.php
+        'biography_day' => json_response(bio_day($pdo, safe_int($_GET['id'] ?? 0), $_GET)), // ⏳ Une journée dans la vie de… (lib/biographie_journee.php)
+        'biography_day_events' => json_response(['events' => bio_day_events($pdo, safe_int($_GET['id'] ?? 0))]), // ⏳ les dates proposées
         'world_around' => json_response(world_around($pdo, safe_int($_GET['id'] ?? 0), $_GET)), // 🌍 lib/monde_autour.php
         'world_events' => json_response(world_events_list($pdo, $_GET)),
         'old_trade' => json_response(trade_sheet($pdo, $_GET)), // 🛠️ lib/metiers_anciens.php
         'old_trades' => json_response(trades_list($pdo, $_GET)),
+        'metiers_arbre' => (static function () use ($pdo) { require_once __DIR__ . '/lib/metiers_carte.php'; json_response(metiers_arbre_data($pdo, $_GET)); })(), // 🧬 Arbre des métiers (lib/metiers_carte.php)
+        'carte_vie' => (static function () use ($pdo) { require_once __DIR__ . '/lib/metiers_carte.php'; json_response(carte_vie_data($pdo, $_GET)); })(), // 🗺 Carte de la vie d'une personne
         'layout_docs' => json_response(['docs' => layout_docs_list($pdo)]),
         'layout_doc' => json_response(layout_doc_get($pdo, safe_int($_GET['id'] ?? 0))),
         'montage_projects' => json_response(['projects' => montage_projects_list($pdo)]),
@@ -583,6 +638,10 @@ try {
         'employer_record' => json_response(employer_record_detail($pdo, safe_text($_GET['name'] ?? ''))),
         'research_suggestions' => json_response(research_suggestions_data($pdo, max(1, min(200, safe_int($_GET['limit'] ?? 40))))),
         'research_gaps' => json_response(research_gaps_data($pdo, $_GET)),
+        'semaine' => json_response(semaine_data($pdo, $_GET)), // 🗓 Ma semaine de recherche (lib/semaine.php) : widget « daily_research »
+        'ou_chercher_person' => json_response(ouc_person_context($pdo, safe_int($_GET['id'] ?? 0))), // 🌍 Où chercher ? (lib/ou_chercher.php) : ce que la fiche dit pour choisir les sites
+        'murs_de_brique' => json_response(ouc_walls_data($pdo, $_GET)), // 🧩 Murs de brique (lib/ou_chercher.php) : ancêtres où l'on bloque
+        'mur_de_brique' => json_response(ouc_wall_detail($pdo, safe_int($_GET['id'] ?? 0))), // 🧩 un mur : déjà cherché, indices dans la base
         'research_journal' => json_response(research_journal_data($pdo, $_GET)), // 🗓 Journal des recherches (lib/research_journal.php) ; &person_id= : bloc « 🔍 Déjà cherché »
         'research_already' => json_response(research_already_data($pdo, $_GET)), // ⚠️ « Déjà dans ton suivi » pendant la saisie
         'archive_services' => json_response(archive_services_data($pdo)), // 🏛 Services d'archives (lib/archive_services.php)
@@ -590,6 +649,7 @@ try {
         'media_archive' => json_response(media_archive_data($pdo, safe_int($_GET['id'] ?? 0))),
         'source_citations' => json_response(source_citations_data($pdo, $_GET)), // ❝ citations toutes prêtes (lib/citation_styles.php)
         'hypothesis_compare' => json_response(hypothesis_compare_data($pdo, safe_int($_GET['id'] ?? 0))), // ⚖️ hypothèses à comparer (lib/hypothesis_compare.php)
+        'socface_context', 'socface_list', 'socface_person' => json_response(socface_api_get($pdo, (string) $action, $_GET)), // 🧾 Recensements SocFace (lib/socface.php) : lecture seule, aucune requête vers FranceArchives
         'controle' => json_response(controle_page_data($pdo, $_GET)), // ✅ Contrôle de la base (lib/controle.php) : alertes, exceptions, fiches citées
         'controle_summary' => json_response(controle_summary($pdo)), // ✅ widget : nombres par sorte, % des fiches sans alerte
         'controle_person' => json_response(controle_person($pdo, safe_int($_GET['id'] ?? 0))), // ✅ bandeau « ⚠️ N choses à vérifier » de la fiche
@@ -602,6 +662,8 @@ try {
         'art' => json_response(art_api_get($pdo, $_GET)), // 🎨 moteur des catalogues d'artistes (lib/art_engine.php)
         'sciences' => json_response(sciences_api_get($pdo, $_GET)), // 🔬 coordonnées des lieux (lib/sciences.php)
         'blocs' => json_response(blocs_api_get($pdo, $_GET)), // 📰 🏆 🎓 blocs communs (lib/blocs.php)
+        'cousinade' => json_response(cousinade_api_get($pdo, $_GET)), // 🎉 organiser une cousinade (lib/cousinade.php)
+        'sante' => json_response(sante_api_get($pdo, $_GET)), // 🩺 santé de la famille, privée (lib/sante.php)
         'creations' => (static function () use ($pdo) { require_once __DIR__ . '/lib/creations.php'; json_response(creations_api_get($pdo, $_GET)); })(), // 🎨 Listes « Créations et carrières » (lecture seule)
         'onglets' => (static function () use ($pdo) { require_once __DIR__ . '/lib/onglets.php'; json_response(onglets_api_get($pdo, $_GET)); })(), // 📄 Documents et 🎨 Catalogue raisonné : onglets du haut (lecture seule, lib/onglets.php)
         'suivi' => json_response(suivi_get($pdo, $_GET)), // 🐾 Suivi des animaux (lib/suivi.php)
@@ -4087,7 +4149,7 @@ function place_monograph_data(PDO $pdo): never
     $eventTypes = $pdo->query('SELECT id,label FROM event_types ORDER BY label COLLATE NOCASE')->fetchAll();
     $place = null;
     if ($placeId) {
-        $stmt = $pdo->prepare('SELECT id,name,subdivision,county,state,country,latitude,longitude FROM places WHERE id=?');
+        $stmt = $pdo->prepare('SELECT id,name,subdivision,county,state,country,latitude,longitude,COALESCE(description,\'\') AS description FROM places WHERE id=?'); // description : notices importées (🏰 Mérimée, Palissy)
         $stmt->execute([$placeId]);
         $place = $stmt->fetch() ?: null;
     }
@@ -9763,10 +9825,20 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'delete_battue_search_item' => delete_battue_search_item($pdo,$data),
             'save_battue_commune_status' => save_battue_commune_status($pdo,$data),
             'dismiss_issue' => dismiss_issue($pdo,$data),
+            'semaine_mark' => semaine_mark($pdo,$data), // 🗓 Ma semaine : ✓ fait, ⏭ reporter, ↶ Annuler (lib/semaine.php)
+            'ou_chercher_piste' => ouc_make_lead($pdo,$data), // 🌍 Où chercher ? : « ＋ En faire une piste » (lib/ou_chercher.php)
+            'mur_save' => ouc_wall_save($pdo,$data), // 🧩 Murs de brique : 🧱 Je bloque ici, statut, note
+            'mur_restore' => ouc_wall_restore($pdo,$data), // 🧩 Murs de brique : ↶ Annuler
+            'name_origin_set' => (static function () use ($pdo, $data) { require_once __DIR__ . '/lib/prenoms_france.php'; return name_origin_set($pdo, $data); })(), // 👶 « Ce n'est pas ça » / « Choisir la personne » (lib/prenoms_france.php)
             'controle_dismiss' => controle_dismiss($pdo,$data), // ✅ « Ce n'est pas une erreur » (lib/controle.php)
             'controle_undismiss' => controle_undismiss($pdo,$data), // ✅ « ↺ Signaler de nouveau »
             'controle_fix_date' => controle_fix_date($pdo,$data), // ✅ « Une à une » : date corrigée sur place
-            'controle_seuils_save' => controle_seuils_save($pdo,$data), // ✅ ⚙️ Seuils du contrôle
+            'controle_seuils_save' => controle_seuils_save($pdo,$data),
+            'socface_preview' => socface_preview($pdo,$data), // 🧾 SocFace : « c'est la même personne ? » et écarts, rien n'est écrit
+            'socface_import' => socface_import($pdo,$data), // 🧾 SocFace : foyers + sources (fiches reliées seulement si confirmées)
+            'socface_undo' => socface_undo($pdo,$data), // 🧾 SocFace : ↶ Annuler un import
+            'socface_verify' => socface_verify($pdo,$data), // 🧾 SocFace : « Vérifié sur l'image »
+            'socface_fix' => socface_fix($pdo,$data), // 🧾 SocFace : correction d'une lecture choisie dans « 🔍 Vérifier cette ligne » // ✅ ⚙️ Seuils du contrôle
             'meteo_place_altitude' => (static function () use ($pdo, $data) { require_once __DIR__ . '/lib/meteo.php'; return meteo_place_altitude_save($pdo, $data); })(), // 🌦 ⛰ altitude d’un lieu (saisie ou « ↺ » carte du relief)
             'bulk_group' => bulk_group($pdo,$data),
             'save_branch' => save_branch($pdo,$data),
@@ -9884,6 +9956,9 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'delete_cadastre_parcel' => delete_cadastre_parcel($pdo,$data),
             'restore_cadastre_parcel' => restore_cadastre_parcel($pdo,$data),
             'cadastre_link' => cadastre_link($pdo,$data),
+            'save_succession' => save_succession($pdo,$data), // 🏠 Héritages et successions (lib/successions.php)
+            'delete_succession' => delete_succession($pdo,$data),
+            'restore_succession' => restore_succession($pdo,$data),
             'save_dna_kit' => save_dna_kit($pdo,$data),
             'delete_dna_kit' => delete_dna_kit($pdo,$data),
             'save_dna_match' => save_dna_match($pdo,$data),
@@ -10038,6 +10113,8 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'art_write' => art_api_post($pdo,$data),
             'sciences_remote' => sciences_remote($data), // 🔬 publications : DOI (Crossref), ORCID, HAL
             'blocs_write' => blocs_api_post($pdo,$data),
+            'cousinade_write' => cousinade_api_post($pdo,$data), // 🎉 organiser une cousinade (lib/cousinade.php)
+            'sante_write' => sante_api_post($pdo,$data), // 🩺 santé de la famille (lib/sante.php)
             'face_ignore' => face_ignore($pdo,$data),
             'faces_reset' => faces_reset($pdo,$data),
             'update_media_tag' => update_media_tag($pdo,$data),
