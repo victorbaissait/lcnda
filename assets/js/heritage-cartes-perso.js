@@ -291,7 +291,7 @@
         if (!M.map.def.legend) return;
         const rows = C().legend(M.map.def, M.data, M.t);
         box.innerHTML = `<b class="mcp-leg-title">${esc(M.map.name)}${M.t !== null ? ` · <span>${M.map.def.time.mode === 'window' ? `${M.t - M.map.def.time.win}–${M.t}` : `jusqu’en ${M.t}`}</span>` : ''}</b>` +
-            (rows.length ? rows.map(r => `<div class="mcp-leg-row" data-mcp-leg="${esc(r.id)}" title="${esc(r.note || '')}">${miniSym(r)}<span>${esc(r.name)}</span><small>${r.n.toLocaleString('fr-FR')}</small></div>${r.cats.map(c => `<div class="mcp-leg-cat">${miniSym(r, c.color)}<span>${esc(c.name)}</span></div>`).join('')}`).join('') : `<div class="mcp-leg-row"><span class="muted">Aucune couche montrée</span></div>`);
+            (rows.length ? rows.map(r => `<div class="mcp-leg-row" data-mcp-leg="${esc(r.id)}" title="${esc(r.note || '')}">${miniSym(r)}<span>${esc(r.name)}</span><small>${r.n.toLocaleString('fr-FR')}</small></div>${r.cats.map(c => `<div class="mcp-leg-cat">${miniSym(r, c.color)}<span>${esc(c.name)}</span></div>`).join('')}`).join('') : `<div class="mcp-leg-row"><span class="empty-line"><span class="empty-line-ico" aria-hidden="true">🗺</span><span class="empty-line-text">Aucune couche montrée</span></span></div>`);
     }
 
     /* ═════════ Le curseur du temps ▶ ═════════ */
@@ -367,7 +367,7 @@
         h += row('Dans la zone', pk(`mcp_z_${l.id}`, 'maplayer', f.zone || null, false), 'Une couche de « ✏️ Mes couches » : ses zones dessinées.');
         if (has('cert')) h += row('Certitude', `<div class="mcp-checks">${(k === 'placeimages' ? C().CERT_IMAGES : C().CERT_EVENTS).map(([v, lab]) => `<label class="checkbox-line"><input type="checkbox" data-mcp-cert value="${v}"${f.cert.includes(v) ? ' checked' : ''}> ${esc(lab)}</label>`).join('')}</div>`, 'Rien de coché = toutes.');
         if (has('retained')) h += row('', tg('Seulement l’hypothèse retenue', f.retained, 'data-mcp-fb="retained"'));
-        if (has('types')) h += row('Sortes', `<div class="mcp-checks mcp-types">${types.map(t => `<label class="checkbox-line"><input type="checkbox" data-mcp-type value="${Number(t.id)}"${f.types.includes(Number(t.id)) ? ' checked' : ''}> ${esc(t.icon || '')} ${esc(t.label)}</label>`).join('') || '<span class="muted">Aucune sorte</span>'}</div>`, 'Rien de coché = tous les événements.');
+        if (has('types')) h += row('Sortes', `<div class="mcp-checks mcp-types">${types.map(t => `<label class="checkbox-line"><input type="checkbox" data-mcp-type value="${Number(t.id)}"${f.types.includes(Number(t.id)) ? ' checked' : ''}> ${esc(t.icon || '')} ${esc(t.label)}</label>`).join('') || '<span class="empty-line"><span class="empty-line-ico" aria-hidden="true">📅</span><span class="empty-line-text">Aucune sorte</span></span>'}</div>`, 'Rien de coché = tous les événements.');
         if (has('text')) h += row(k === 'surnames' ? 'Noms' : 'Métier', `<input type="text" data-mcp-f="text" maxlength="120" value="${esc(f.text)}" placeholder="${k === 'surnames' ? 'BORIE, BORYE' : 'tisserand, ou un secteur'}">`, k === 'surnames' ? 'Séparés par des virgules. Vide = le nom de la personne de départ.' : 'Vide = tous les métiers.');
         if (has('pets')) h += row('Animaux', pk(`mcp_a_${l.id}`, 'pet', f.pets, true), 'Vide = tous.');
         if (has('layers')) h += row('Couches', pk(`mcp_c_${l.id}`, 'maplayer', f.layers, true), 'Vide = toutes mes couches.');

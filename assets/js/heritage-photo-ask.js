@@ -150,7 +150,7 @@
             },
             onSubmit: async form => {
                 if (!form.elements.title.value.trim()) return UI().fail(form.elements.title, 'Donne un titre à la demande.');
-                if (!chosen.size) { toast('Choisis au moins un visage (clique sur un cadre, ou trace-le sur la photo).', 'error'); return false; }
+                if (!chosen.size) return UI().fail(form.querySelector('[data-pa-photos]') || form.elements.title, 'Choisis au moins un visage (clique sur un cadre, ou trace-le sur la photo).');
                 const faces = [...chosen.values()].filter(f => ed.media.includes(Number(f.media_id))).map(f => ({media_id: f.media_id, print_id: f.print_id || 0, tag_id: f.tag_id || 0, x: f.x, y: f.y, w: f.w, h: f.h}));
                 const names = String(form.querySelector('[name="names"]')?.value || '').split(',').map(Number).filter(Boolean);
                 const r = await write('save', {id: ed.id, title: form.elements.title.value, intro: form.elements.intro.value, media_ids: ed.media, faces, names, include_living: form.living.checked ? 1 : 0});

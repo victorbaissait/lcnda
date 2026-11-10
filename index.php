@@ -1237,7 +1237,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-alphabets-data.js?v=2" defer></script>
 <script src="assets/js/heritage-alphabets.js?v=3" defer></script>
 <script src="assets/js/heritage-calendar-more.js?v=5" defer></script>
-<script src="assets/js/heritage-lecture-autrefois.js?v=1" defer></script>
+<script src="assets/js/heritage-lecture-autrefois.js?v=2" defer></script>
 <script src="assets/js/heritage-links.js?v=22" defer></script>
 <script src="assets/js/heritage-more.js?v=303" defer></script>
 <script src="assets/js/heritage-controle.js?v=7" defer></script>
@@ -1443,9 +1443,9 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-cartes-outils-core.js?v=1" defer></script>
 <script src="assets/js/heritage-cartes-outils.js?v=2" defer></script>
 <script src="assets/js/app-cartes-perso-core.js?v=1" defer></script><!-- 🗺 Mes cartes : calculs (aussi pour Node) -->
-<script src="assets/js/heritage-cartes-perso.js?v=1" defer></script><!-- 🗺 Mes cartes (Carte) -->
+<script src="assets/js/heritage-cartes-perso.js?v=2" defer></script><!-- 🗺 Mes cartes (Carte) -->
 <script src="assets/js/app-metiers-carte-core.js?v=1" defer></script><!-- 🧬 🗺 noyau commun (aussi pour Node) -->
-<script src="assets/js/heritage-metiers-arbre.js?v=1" defer></script><!-- 🧬 Arbre des métiers (Graphiques) -->
+<script src="assets/js/heritage-metiers-arbre.js?v=2" defer></script><!-- 🧬 Arbre des métiers (Graphiques) -->
 <script src="assets/js/heritage-carte-vie.js?v=1" defer></script><!-- 🗺 Carte de la vie d’une personne -->
 <script src="assets/js/heritage-cartes-plus.js?v=2" defer></script>
 <script src="assets/js/heritage-house-dxf.js?v=2" defer></script>
@@ -1462,7 +1462,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/museum-viewer.js?v=10" defer></script>
 <script src="assets/js/heritage-museum.js?v=18" defer></script>
 <script src="assets/js/heritage-questions.js?v=2" defer></script>
-<script src="assets/js/heritage-photo-ask.js?v=1" defer></script>
+<script src="assets/js/heritage-photo-ask.js?v=2" defer></script>
 <script src="assets/js/heritage-courriers-actes.js?v=1" defer></script>
 <script src="assets/js/heritage-postcards.js?v=3" defer></script>
 <script src="assets/js/heritage-place-photos.js?v=1" defer></script>

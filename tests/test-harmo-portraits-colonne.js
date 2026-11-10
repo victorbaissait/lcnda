@@ -106,7 +106,7 @@ function sandbox(store = {}) {
         'assets/js/app.js': 2, 'assets/js/app-picker.js': 1, 'assets/js/app-media-picker.js': 1, 'assets/js/app-tableau-de-bord.js': 1,
         'assets/js/app-recherche.js': 2, 'assets/js/app-graphiques.js': 1, 'assets/js/heritage-creations.js': 1, 'assets/js/heritage-profils-liste.js': 1,
         'assets/js/heritage-artist.js': 1, 'assets/js/heritage-blocs-school.js': 1, 'assets/js/heritage-artist-page.js': 1, 'assets/js/heritage-profils.js': 1,
-        'assets/js/heritage-employers.js': 1, 'assets/js/heritage-boards.js': 1, 'assets/js/heritage-controle.js': 1,
+        'assets/js/heritage-employers.js': 1, 'assets/js/heritage-boards.js': 1, 'assets/js/heritage-controle.js': 1, 'assets/js/heritage-cousinade.js': 1, 'assets/js/heritage-sante.js': 1,
     };
     // à part, voulus : les exemples de l'accessibilité et des formes d'avatar, le « TXT » d'un média trouvé dans la Recherche,
     // et l'aperçu « Comme avant » des Portraits (app-colonne.js) qui montre exprès les dessins d'aujourd'hui avec leurs vraies classes

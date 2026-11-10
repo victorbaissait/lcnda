@@ -117,7 +117,7 @@
             if (st.tab === 'lettres') drawLetters(); else if (st.tab === 'exos') drawExos(); else drawDict();
         }
         host.addEventListener('click', e => {
-            const t = e.target.closest('[data-la-tab]'); if (t) { st.tab = t.dataset.laTab; st.exo = ''; st.shown = 60; store.set(LA_TAB, st.tab); draw(); return; }
+            const t = e.target.closest('[data-la-tab]'); if (t) { const qi = host.querySelector('.la-search input, [data-la-q]'); if (qi) st.q = qi.value; st.tab = t.dataset.laTab; st.exo = ''; st.shown = 60; store.set(LA_TAB, st.tab); draw(); return; }
             const k = e.target.closest('[data-la-kind]'); if (k) { st.kind = k.dataset.laKind; st.shown = 60; draw(); return; }
             const a = e.target.closest('[data-la-acte]'); if (a) { st.acte = a.dataset.laActe; st.shown = 60; draw(); return; }
             const c = e.target.closest('[data-la-copy]'); if (c) { copyText(c.dataset.laCopy); return; }

@@ -74,7 +74,7 @@
         const L = last, count = {};
         Object.entries(L.data.jobs).forEach(([id, jobs]) => { if (L.priv && L.hidden.has(Number(id))) return; [...new Set(jobs.map(j => j.sector))].forEach(s => { count[s] = (count[s] || 0) + 1; }); });
         const used = Object.values(L.sectors).filter(s => count[s.key]);
-        return `<div class="occ-legend" aria-label="Légende"><div class="occ-legend-sectors">${used.map(s => `<span class="occ-leg"><i style="background:${esc(s.color)}"></i>${s.icon} ${esc(s.label)} <small>${count[s.key]}</small></span>`).join('') || '<span class="muted">Aucun métier noté dans cet arbre.</span>'}</div>
+        return `<div class="occ-legend" aria-label="Légende"><div class="occ-legend-sectors">${used.map(s => `<span class="occ-leg"><i style="background:${esc(s.color)}"></i>${s.icon} ${esc(s.label)} <small>${count[s.key]}</small></span>`).join('') || '<span class="empty-line"><span class="empty-line-ico" aria-hidden="true">🧬</span><span class="empty-line-text">Aucun métier noté dans cet arbre.</span></span>'}</div>
             <div class="occ-legend-links"><span class="occ-leg"><i class="occ-line is-same"></i>Même métier que le parent</span><span class="occ-leg"><b class="occ-mark is-change">⇄</b>Changement de métier</span><span class="occ-leg"><i class="occ-line is-unknown"></i>Métier inconnu pour l’un des deux</span></div></div>`;
     }
 

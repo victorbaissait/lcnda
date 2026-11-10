@@ -106,7 +106,7 @@
                 <td><b>${esc(m.first)} ${esc(String(m.last || '').toUpperCase())}</b>${m.partial ? ' <small class="muted">(cité sur la fiche)</small>' : ''}<br><small class="muted">${esc([m.role, genderTxt(m.gender)].filter(Boolean).join(' · '))}</small></td>
                 <td>${esc(m.age ? m.age + ' ans' : '')}${m.birth_year || m.birth_place ? `<br><small class="muted">${esc(['né' + (m.gender === 'f' ? 'e' : '') + (m.birth_year ? ' en ' + m.birth_year : ''), m.birth_place ? 'à ' + m.birth_place : ''].filter(Boolean).join(' '))}</small>` : ''}</td>
                 <td>${esc(m.occupation)}</td>
-                <td>${cands.length ? sel : '<small class="muted">Aucune fiche proche : la ligne entre sans fiche.</small>'}${already.length ? `<br><small class="muted">ⓘ déjà un recensement de ${h.year} dans sa fiche : celui-ci s’ajoute à côté, rien n’est remplacé.</small>` : ''}${ec ? `<ul class="sf-ecarts">${ec}</ul>` : ''}</td>
+                <td>${cands.length ? sel : '<span class="empty-line"><span class="empty-line-ico" aria-hidden="true">👤</span><span class="empty-line-text">Aucune fiche proche : la ligne entre sans fiche.</span></span>'}${already.length ? `<br><small class="muted">ⓘ déjà un recensement de ${h.year} dans sa fiche : celui-ci s’ajoute à côté, rien n’est remplacé.</small>` : ''}${ec ? `<ul class="sf-ecarts">${ec}</ul>` : ''}</td>
                 <td>${ds.length ? `<button type="button" class="button small secondary" data-sf-doubts="${hi}:${mi}">${ds.some(d => d.level === 'orange') ? '🟠' : '🟡'} ${plural(ds.length, 'doute')}</button>` : '<small class="muted">—</small>'}</td></tr>`;
         };
         const previewHtml = () => state.households.map((h, hi) => {
