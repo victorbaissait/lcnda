@@ -40,13 +40,33 @@
     const tabsHtml = (tabs, cur, attr) => `<div class="ui-tabs la-tabs" role="tablist">${tabs.map(([k, l]) => `<button type="button" role="tab" ${attr}="${k}" class="${k === cur ? 'is-active' : ''}" aria-selected="${k === cur}">${esc(l)}</button>`).join('')}</div>`;
 
     /* ═════════════════════════ 📜 Aide à la lecture ═════════════════════════ */
-    const LA_TAB = 'lcnda-aide-lecture-tab', LA_BEST = 'lcnda-aide-lecture-scores';
+    const LA_TAB = 'lcnda-aide-lecture-tab', LA_BEST = 'lcnda-aide-lecture-scores', LA_LANG = 'lcnda-aide-lecture-lang';
     const LA_TABS = [['dict', '🔍 Dictionnaire'], ['lettres', '✍️ Les lettres'], ['exos', '🎓 Exercices']];
-    const KIND_BADGE = {latin: 'blue', formule: 'green', abrev: 'yellow', mot: 'grey'};
+    const KIND_BADGE = {mot: 'blue', formule: 'green', abrev: 'yellow', vieux: 'grey', mois: 'blue', nombre: 'blue', parente: 'blue', metier: 'blue'};
+    /** la langue d'une ligne : attributs lang et dir (hébreu, arabe : de droite à gauche) */
+    const langAttrs = code => { const l = L().langOf?.(code); return l ? ` lang="${esc(code === 'grc' ? 'grc' : code)}" dir="${l.dir === 'rtl' ? 'rtl' : 'auto'}"` : ''; };
+    /** 🔢 un convertisseur de nombres écrits en lettres (grec : α΄ = 1 … ͵α = 1000), quand la langue en a un */
+    function numeralsHtml(l) {
+        const N = l?.numerals; if (!N || typeof N.to !== 'function') return '';
+        return `<section class="la-num" data-la-num><h4>🔢 ${esc(N.label || 'Nombres')}</h4>
+            <label class="la-num-field"><span>Un nombre en lettres ou en chiffres</span><input type="text" data-la-num-in autocomplete="off" spellcheck="false" placeholder="${esc((N.examples || []).join(', '))}"${langAttrs(l.code)}><span data-la-num-out><span class="ui-hint">Écris « ${esc((N.examples || ['1852'])[0])} » ou « 1852 ».</span></span></label>
+            ${(N.examples || []).length ? `<p class="af-examples">Exemples : ${N.examples.map(x => `<button type="button" class="link-button" data-la-num-ex="${esc(x)}"${langAttrs(l.code)}>${esc(x)}</button>`).join(' · ')}</p>` : ''}</section>`;
+    }
+    function numeralsRead(l, v) {
+        const N = l?.numerals, t = String(v || '').trim(); if (!N || !t) return '';
+        if (/^\d{1,6}$/.test(t)) { const g = N.to(Number(t)); return g ? `<span class="ui-hint is-ok">✓ ${esc(t)} = <b${langAttrs(l.code)}>${esc(g)}</b></span>` : `<span class="ui-hint is-warn">⚠️ Un nombre entre 1 et 999 999.</span>`; }
+        const n = typeof N.from === 'function' ? N.from(t) : null;
+        return n != null ? `<span class="ui-hint is-ok">✓ Compris : <b>${esc(t)}</b> = <b>${nf(n, 0)}</b></span>` : `<span class="ui-hint is-warn">⚠️ Ce ne sont pas des lettres-nombres connues (exemples : ${esc((N.examples || []).join(', '))}).</span>`;
+    }
+    /** l'alphabet d'une langue (grec…) : majuscule, minuscules, nom, lettres latines, valeur de nombre */
+    const alphabetHtml = l => (!Array.isArray(l?.alphabet) || !l.alphabet.length ? '' : `<details class="la-alpha" open><summary>🔤 L’alphabet (${l.alphabet.length} lettres)</summary><table class="af-table la-alpha-table"><thead><tr><th>Lettre</th><th>Nom</th><th>Se lit</th><th>Nombre</th></tr></thead><tbody>${l.alphabet.map(a => `<tr><td${langAttrs(l.code)}><b>${esc(a.big)}</b> ${esc(a.small)}</td><td>${esc(a.name)}</td><td>${esc(a.latin)}</td><td>${a.value != null ? nf(a.value, 0) : ''}</td></tr>`).join('')}</tbody></table></details>`);
+    /** sous la liste : d'où viennent les mots de cette langue */
+    const sourcesHtml = l => (!l || l.builtin || !(l.sources || []).length ? '' : `<p class="ui-hint la-sources">Sources : ${l.sources.map(x => /^https:\/\//.test(String(x.url || '')) ? `<a href="${esc(x.url)}" target="_blank" rel="noopener noreferrer">${esc(x.label)}</a>` : esc(x.label)).join(' · ')}.</p>`);
     const LEVEL_BADGE = {facile: 'green', moyen: 'yellow', difficile: 'red'};
-    function mountReading(host, {tab = '', q = ''} = {}) {
+    function mountReading(host, {tab = '', q = '', lang} = {}) {
         if (!L()) { host.innerHTML = emptyLine('L’aide à la lecture n’a pas pu se charger (fichier app-aide-lecture.js manquant ?).', '⚠️'); return null; }
-        const st = {tab: tab || (q ? 'dict' : store.get(LA_TAB, 'dict')), q: String(q || ''), kind: '', acte: '', shown: 60, exo: ''};
+        const st = {tab: tab || (q ? 'dict' : store.get(LA_TAB, 'dict')), q: String(q || ''), kind: '', acte: '', shown: 60, exo: '', lang: lang != null ? String(lang) : q ? '' : store.get(LA_LANG, '')}; // un mot cherché : dans toutes les langues
+        if (st.lang && !L().langOf?.(st.lang)) st.lang = '';
         if (!LA_TABS.some(([k]) => k === st.tab)) st.tab = 'dict';
         host.classList.add('la');
         host.innerHTML = `${tabsHtml(LA_TABS, st.tab, 'data-la-tab')}<div class="la-search" data-la-search></div><div class="la-filters" data-la-filters></div><div class="la-body" data-la-body aria-live="polite"></div>`;
@@ -54,48 +74,74 @@
         const field = UI().searchField ? UI().searchField({placeholder: 'Chercher… ex. vve, feu, filius, ſ, cult., d°', value: st.q, label: 'Chercher dans l’aide à la lecture', delay: 120, onInput: v => { st.q = v; st.shown = 60; draw(); }}) : null;
         if (field) $('[data-la-search]').appendChild(field); else $('[data-la-search]').innerHTML = `<input type="search" data-la-q value="${esc(st.q)}" placeholder="Chercher…">`;
         $('[data-la-q]')?.addEventListener('input', e => { st.q = e.target.value; st.shown = 60; draw(); });
+        const pill = (attr, v, label, n, cur, extra = '') => `<button type="button" ${attr}="${esc(v)}" class="${cur === v ? 'is-active' : ''}"${extra}>${esc(label)}${n == null ? '' : ` (${nf(n, 0)})`}</button>`;
+        /** C5 : « Langue » — Toutes, Français, Latin, Grec, Allemand… avec le nombre trouvé (pour l'onglet affiché) */
+        function langPills() {
+            const type = st.tab === 'lettres' ? 'letter' : st.tab === 'exos' ? 'exercise' : 'entry';
+            const c = L().langCounts ? L().langCounts(st.q, {kind: st.tab === 'dict' ? st.kind : '', acte: st.tab === 'lettres' ? '' : st.acte, type}) : {all: 0};
+            const ls = (L().langs?.() || []).filter(l => c[l.code] || st.lang === l.code);
+            // beaucoup de langues : les plus courantes d'abord, les autres derrière « ＋ N autres langues » (dépliées si l'une est choisie)
+            const MAIN = ['fr', 'la', 'grc', 'de', 'it', 'es', 'nl', 'pl', 'pt', 'en'];
+            const main = ls.length > 12 && !st.allLangs ? ls.filter(l => MAIN.includes(l.code) || l.code === st.lang) : ls, rest = ls.length - main.length;
+            return `<div class="ui-filters la-langs" role="group" aria-label="Langue">${pill('data-la-lang', '', 'Toutes les langues', c.all, st.lang)}${main.map(l => pill('data-la-lang', l.code, l.name, c[l.code], st.lang, ` title="${esc(l.native || l.name)}"`)).join('')}${rest > 0 ? `<button type="button" class="la-langs-more" data-la-langs-more aria-expanded="false">＋ ${rest} autre${rest > 1 ? 's' : ''} langue${rest > 1 ? 's' : ''}</button>` : ls.length > 12 ? '<button type="button" class="la-langs-more" data-la-langs-more aria-expanded="true">− Moins de langues</button>' : ''}</div>`;
+        }
         function filters() {
-            if (st.tab !== 'dict') { $('[data-la-filters]').innerHTML = ''; return; }
-            const c = L().counts(st.q, st.acte), K = L().KINDS, AC = L().ACTES;
-            const pill = (attr, v, label, n, cur) => `<button type="button" ${attr}="${v}" class="${cur === v ? 'is-active' : ''}">${esc(label)}${n == null ? '' : ` (${nf(n, 0)})`}</button>`;
-            const nEntries = c.latin + c.formule + c.abrev + c.mot;
-            $('[data-la-filters]').innerHTML = `<div class="ui-filters" role="group" aria-label="Sorte">${pill('data-la-kind', '', 'Tout', nEntries, st.kind)}${Object.entries(K).filter(([k]) => c[k] || st.kind === k).map(([k, l]) => pill('data-la-kind', k, l, c[k], st.kind)).join('')}</div>
+            if (st.tab === 'exos' && st.exo) { $('[data-la-filters]').innerHTML = ''; return; }
+            if (st.tab !== 'dict') { $('[data-la-filters]').innerHTML = langPills(); return; }
+            const c = L().counts(st.q, st.acte, st.lang), K = L().KINDS, AC = L().ACTES;
+            const nEntries = Object.keys(K).reduce((n, k) => n + (c[k] || 0), 0);
+            $('[data-la-filters]').innerHTML = `${langPills()}<div class="ui-filters" role="group" aria-label="Sorte">${pill('data-la-kind', '', 'Tout', nEntries, st.kind)}${Object.entries(K).filter(([k]) => c[k] || st.kind === k).map(([k, l]) => pill('data-la-kind', k, l, c[k], st.kind)).join('')}</div>
                 <div class="ui-filters la-actes" role="group" aria-label="Sorte d’acte">${pill('data-la-acte', '', 'Tous les actes', null, st.acte)}${['bapteme', 'mariage', 'sepulture', 'recensement'].map(k => pill('data-la-acte', k, AC[k], null, st.acte)).join('')}</div>`;
         }
+        /** en tête de la liste d'une langue : une phrase, et son convertisseur de nombres s'il y en a un */
+        const langHead = (withNum = true) => { const l = st.lang ? L().langOf?.(st.lang) : null; return !l || l.builtin ? '' : `${l.intro ? `<p class="la-intro">${l.icon ? `<span aria-hidden="true">${esc(l.icon)}</span> ` : ''}${esc(l.intro)}</p>` : ''}${withNum ? numeralsHtml(l) : ''}`; };
+        const langFoot = () => sourcesHtml(st.lang ? L().langOf?.(st.lang) : null);
         function drawDict() {
-            const all = L().search(st.q, {kind: st.kind, acte: st.acte}).filter(r => r.type === 'entry'), rows = all.slice(0, st.shown);
-            if (!all.length) { body.innerHTML = emptyLine(st.q ? `Rien pour « ${st.q} ». Vérifie l’orthographe, ou cherche un morceau du mot (« vv », « legit »…).` : 'Rien dans cette rubrique.'); return; }
-            body.innerHTML = `<p class="la-count">${nf(all.length, 0)} ${all.length > 1 ? 'mots et formules' : 'mot'}</p><dl class="la-dict">${rows.map(({item: e}) => `<div class="la-row">
-                <dt>${mark(e.t, st.q)}</dt><dd>${mark(e.d, st.q)}${e.ex ? `<small class="la-ex">${esc(e.ex)}</small>` : ''}</dd>
-                <span class="la-row-tags">${badge(L().KINDS[e.k]?.replace(/^\S+\s/, '') || e.k, KIND_BADGE[e.k] || 'grey')}${e.a && e.a !== 'general' ? ` <small class="la-acte">${esc(L().ACTES[e.a] || '')}</small>` : ''}${e.src ? ` <small class="la-acte" title="Repris de ${esc(e.src)}">${esc(e.src)}</small>` : ''}</span>
+            const all = L().search(st.q, {kind: st.kind, acte: st.acte, lang: st.lang}).filter(r => r.type === 'entry'), rows = all.slice(0, st.shown);
+            const head = langHead();
+            if (!all.length) { body.innerHTML = head + emptyLine(st.q ? `Rien pour « ${st.q} »${st.lang ? ` en ${(L().langOf?.(st.lang)?.name || '').toLowerCase()}` : ''}. Vérifie l’orthographe, cherche un morceau du mot (« vv », « legit »…), ou choisis « Toutes les langues ».` : 'Rien dans cette rubrique.'); bindNum(); return; }
+            const langName = code => (st.lang ? '' : L().langOf?.(code)?.name || '');
+            body.innerHTML = `${head}<p class="la-count">${nf(all.length, 0)} ${all.length > 1 ? 'mots et formules' : 'mot'}</p><dl class="la-dict">${rows.map(({item: e}) => `<div class="la-row">
+                <dt${langAttrs(e.lang)}>${mark(e.t, st.q)}${e.tr?.length ? `<small class="la-tr" lang="fr">${esc(e.tr[0])}</small>` : ''}</dt><dd>${mark(e.d, st.q)}${e.ex ? `<small class="la-ex"${langAttrs(e.lang)}>${esc(e.ex)}</small>` : ''}</dd>
+                <span class="la-row-tags">${badge(L().KINDS[e.k]?.replace(/^\S+\s/, '') || e.k, KIND_BADGE[e.k] || 'grey')}${langName(e.lang) && e.lang !== 'fr' ? ` <small class="la-acte la-lang">${esc(langName(e.lang))}</small>` : ''}${e.a && e.a !== 'general' ? ` <small class="la-acte">${esc(L().ACTES[e.a] || '')}</small>` : ''}${e.src ? ` <small class="la-acte" title="Repris de ${esc(e.src)}">${esc(e.src)}</small>` : ''}</span>
                 <button type="button" class="icon-button small la-copy" data-la-copy="${esc(`${e.t} : ${e.d}`)}" title="Copier" aria-label="Copier « ${esc(e.t)} »">📋</button></div>`).join('')}</dl>`;
             if (all.length > st.shown && UI().moreButton) body.appendChild(UI().moreButton({remaining: all.length - st.shown, step: 60, onClick: () => { st.shown += 60; drawDict(); }}));
+            if (langFoot()) body.insertAdjacentHTML('beforeend', langFoot());
+            bindNum();
+        }
+        function bindNum() {
+            const box = body.querySelector('[data-la-num]'); if (!box) return;
+            const l = L().langOf?.(st.lang), inp = box.querySelector('[data-la-num-in]');
+            inp.addEventListener('input', () => { const o = box.querySelector('[data-la-num-out]'); o.innerHTML = numeralsRead(l, inp.value) || `<span class="ui-hint">Écris « ${esc((l.numerals.examples || ['1852'])[0])} » ou « 1852 ».</span>`; });
+            box.addEventListener('click', e => { const b = e.target.closest('[data-la-num-ex]'); if (b) { inp.value = b.dataset.laNumEx; inp.dispatchEvent(new Event('input')); } });
         }
         function drawLetters() {
-            const list = L().search(st.q, {kind: 'lettre'}).map(r => r.item);
-            if (!list.length) { body.innerHTML = emptyLine(`Aucune lettre pour « ${st.q} ». Essaie « s long », « r rond », « u n », « ligature ».`); return; }
-            body.innerHTML = `<p class="la-count">${nf(list.length, 0)} forme${list.length > 1 ? 's' : ''} de lettres · trait dessiné à la main, comme dans les registres</p><div class="la-letters">${list.map(l => `<article class="la-letter" data-la-letter="${esc(l.id)}">
+            const list = L().search(st.q, {kind: 'lettre', lang: st.lang}).map(r => r.item).sort((a, b) => (st.lang && !st.q ? (b.lang === st.lang) - (a.lang === st.lang) : 0)), cur = st.lang ? L().langOf?.(st.lang) : null;
+            const head = langHead() + (cur && !st.q ? alphabetHtml(cur) : '');
+            if (!list.length) { body.innerHTML = head + emptyLine(st.q ? `Aucune lettre pour « ${st.q} ». Essaie « s long », « r rond », « u n », « ligature », « kurrent ».` : 'Pas encore de lettres dessinées pour cette langue : elle s’écrit comme le français. Regarde ses mots dans 🔍 Dictionnaire.', '✍️'); bindNum(); return; }
+            body.innerHTML = `${head}<p class="la-count">${nf(list.length, 0)} forme${list.length > 1 ? 's' : ''} de lettres · trait dessiné à la main, comme dans les registres</p><div class="la-letters">${list.map(l => `<article class="la-letter" data-la-letter="${esc(l.id)}">
                 <div class="la-letter-draw"><figure>${L().glyphSvg(l.seen, {title: `${l.name} : se lit ${l.read}`})}<figcaption>on voit</figcaption></figure>${l.cmp.length ? `<figure class="is-cmp">${L().glyphSvg(l.cmp, {title: 'à ne pas confondre'})}<figcaption>à ne pas confondre</figcaption></figure>` : ''}</div>
-                <h4>${mark(l.name, st.q)}</h4><p class="la-read">se lit <b>${esc(l.read)}</b></p><p class="la-note">${mark(l.note, st.q)}</p></article>`).join('')}</div>`;
+                <h4>${mark(l.name, st.q)}${!st.lang && l.lang !== 'fr' ? ` <small class="la-acte la-lang">${esc(L().langOf?.(l.lang)?.name || '')}</small>` : ''}</h4><p class="la-read">se lit <b${langAttrs(l.lang)}>${esc(l.read)}</b></p><p class="la-note">${mark(l.note, st.q)}</p></article>`).join('')}</div>${langFoot()}`;
+            bindNum();
         }
         function exoCard(x) {
-            const best = store.get(LA_BEST, {})[x.id];
-            return `<button type="button" class="la-exo-card" data-la-exo="${esc(x.id)}"><span class="la-exo-ico" aria-hidden="true">${x.icon}</span><span class="la-exo-txt"><b>${mark(x.title, st.q)}</b><small>${esc(x.tip)}</small></span>
-                <span class="la-exo-tags">${badge(x.level, LEVEL_BADGE[x.level] || 'grey')}${best != null ? badge(`Meilleur : ${best} %`, best >= 90 ? 'green' : 'blue') : ''}</span></button>`;
+            const best = store.get(LA_BEST, {})[x.id], ln = L().langOf?.(x.lang);
+            return `<button type="button" class="la-exo-card" data-la-exo="${esc(x.id)}"><span class="la-exo-ico" aria-hidden="true">${esc(x.icon || '📜')}</span><span class="la-exo-txt"><b>${mark(x.title, st.q)}</b><small>${esc(x.tip)}</small></span>
+                <span class="la-exo-tags">${ln && !ln.builtin ? `<small class="la-acte la-lang">${esc(ln.name)}</small>` : ''}${badge(x.level, LEVEL_BADGE[x.level] || 'grey')}${best != null ? badge(`Meilleur : ${best} %`, best >= 90 ? 'green' : 'blue') : ''}</span></button>`;
         }
         function drawExos() {
             if (st.exo) return drawExo(L().EXERCISES.find(x => x.id === st.exo));
-            const list = L().search(st.q, {kind: 'exercice'}).map(r => r.item);
-            body.innerHTML = list.length ? `<p class="la-count">${nf(list.length, 0)} exercice${list.length > 1 ? 's' : ''} · lis le texte comme sur le registre, écris ta lecture (abréviations développées), puis « ✓ Corriger »</p><div class="la-exos">${list.map(exoCard).join('')}</div>
-                <p class="ui-hint">Textes rédigés sur le modèle des registres de l’époque (formules authentiques, personnes d’exemple, toutes nées bien avant 1950).</p>` : emptyLine(`Aucun exercice pour « ${st.q} ».`);
+            const list = L().search(st.q, {kind: 'exercice', lang: st.lang}).map(r => r.item);
+            body.innerHTML = !list.length && !st.q && st.lang ? emptyLine('Pas encore d’exercice dans cette langue : choisis « Toutes les langues ».', '🎓') : list.length ? `<p class="la-count">${nf(list.length, 0)} exercice${list.length > 1 ? 's' : ''} · lis le texte comme sur le registre, écris ta lecture (abréviations développées), puis « ✓ Corriger »</p><div class="la-exos">${list.map(exoCard).join('')}</div>
+                <p class="ui-hint">Textes modèles écrits pour l’app, sur le modèle des registres de l’époque (formules authentiques, personnes d’exemple, toutes nées bien avant 1950).</p>` : emptyLine(`Aucun exercice pour « ${st.q} ».`);
         }
         function drawExo(x) {
             if (!x) { st.exo = ''; return drawExos(); }
             const P = L().parseExercise(x);
             body.innerHTML = `<div class="la-exo">
                 <div class="la-exo-head"><button type="button" class="button small secondary" data-la-back>← Tous les exercices</button><h4>${x.icon} ${esc(x.title)}</h4>${badge(x.level, LEVEL_BADGE[x.level] || 'grey')}</div>
-                <div class="la-old" lang="${x.id === 'bapt1695' ? 'la' : 'fr'}" aria-label="Le texte comme sur le registre">${esc(P.shown)}</div>
-                <label class="la-answer"><span>Ta lecture <small class="muted">(développe les abréviations : « par. » → paroisse)</small></span><textarea data-la-answer rows="5" spellcheck="false" placeholder="Écris ici ce que tu lis, mot après mot…"></textarea></label>
+                <div class="la-old"${langAttrs(x.lang || 'fr')} aria-label="Le texte comme sur le registre">${esc(P.shown)}</div>
+                <label class="la-answer"><span>Ta lecture <small class="muted">(développe les abréviations : « par. » → paroisse)</small></span><textarea data-la-answer dir="auto" rows="5" spellcheck="false" placeholder="Écris ici ce que tu lis, mot après mot…"></textarea></label>
                 <div class="la-exo-actions"><button type="button" class="button" data-la-correct>✓ Corriger</button><button type="button" class="button secondary" data-la-hint>💡 Un indice</button><button type="button" class="button secondary" data-la-solution>👁 Voir la solution</button><button type="button" class="button secondary" data-la-reset>↻ Recommencer</button></div>
                 <div data-la-tip hidden class="ui-hint">💡 ${esc(x.tip)}</div>
                 <div class="la-result" data-la-result aria-live="polite"></div></div>`;
@@ -119,6 +165,8 @@
         host.addEventListener('click', e => {
             const t = e.target.closest('[data-la-tab]'); if (t) { const qi = host.querySelector('.la-search input, [data-la-q]'); if (qi) st.q = qi.value; st.tab = t.dataset.laTab; st.exo = ''; st.shown = 60; store.set(LA_TAB, st.tab); draw(); return; }
             const k = e.target.closest('[data-la-kind]'); if (k) { st.kind = k.dataset.laKind; st.shown = 60; draw(); return; }
+            if (e.target.closest('[data-la-langs-more]')) { st.allLangs = !st.allLangs; filters(); host.querySelector('[data-la-langs-more]')?.focus(); return; }
+            const lg = e.target.closest('[data-la-lang]'); if (lg) { st.lang = lg.dataset.laLang; store.set(LA_LANG, st.lang); st.shown = 60; draw(); return; }
             const a = e.target.closest('[data-la-acte]'); if (a) { st.acte = a.dataset.laActe; st.shown = 60; draw(); return; }
             const c = e.target.closest('[data-la-copy]'); if (c) { copyText(c.dataset.laCopy); return; }
             const x = e.target.closest('[data-la-exo]'); if (x) { st.exo = x.dataset.laExo; draw(); return; }
@@ -135,12 +183,14 @@
             if (e.key === 'Enter' && e.target.matches('input')) e.preventDefault(); // dans une fenêtre : Entrée ne la ferme pas
         });
         draw();
-        return {set(o = {}) { if (o.tab) st.tab = o.tab; if (o.q != null) { st.q = o.q; const i = host.querySelector('.la-search input'); if (i) i.value = o.q; } st.exo = ''; draw(); }};
+        return {set(o = {}) { if (o.tab) st.tab = o.tab; if (o.lang != null) st.lang = o.lang; if (o.q != null) { st.q = o.q; const i = host.querySelector('.la-search input'); if (i) i.value = o.q; } st.exo = ''; draw(); }, state: () => ({...st})};
     }
-    function openReading({tab = '', q = ''} = {}) {
+    /** open({tab, q, lang}) : lang = « de », « la », « grc »… (ou « deu », « fra+lat » : la langue choisie dans la transcription) */
+    function openReading({tab = '', q = '', lang} = {}) {
+        if (lang && !L()?.langOf?.(lang)) lang = L()?.langForOcr?.(lang) || '';
         if (!ext.openDialog) return toast('La fenêtre n’est pas encore prête : réessaie dans un instant.', 'error');
         return ext.openDialog({eyebrow: 'AIDE · LECTURE DES ACTES', title: '📜 Aide à la lecture des actes anciens', wide: true, submitLabel: 'Fermer', onSubmit: () => true,
-            body: '<div data-la-host></div>', onOpen: dg => { dg.classList.add('la-dialog'); mountReading(dg.querySelector('[data-la-host]'), {tab, q}); setTimeout(() => dg.querySelector('.la-search input')?.focus(), 30); }});
+            body: '<div data-la-host></div>', onOpen: dg => { dg.classList.add('la-dialog'); mountReading(dg.querySelector('[data-la-host]'), {tab, q, lang}); setTimeout(() => dg.querySelector('.la-search input')?.focus(), 30); }});
     }
     ext.readingAid = {open: openReading, mount: mountReading, search: (q, o) => L()?.search(q, o) || []};
 
@@ -251,7 +301,7 @@
     /* ═════════ Les entrées ═════════ */
     // n'importe quel bouton : data-la-open="mot cherché" (ou vide), data-autrefois-open="argent|mesures|calendrier" (+ data-autrefois-value)
     document.addEventListener('click', e => {
-        const la = e.target.closest('[data-la-open]'); if (la) { e.preventDefault(); openReading({q: la.dataset.laOpen || '', tab: la.dataset.laOpenTab || ''}); return; }
+        const la = e.target.closest('[data-la-open]'); if (la) { e.preventDefault(); openReading({q: la.dataset.laOpen || '', tab: la.dataset.laOpenTab || '', lang: la.dataset.laOpenLang}); return; }
         const af = e.target.closest('[data-autrefois-open]'); if (af) { e.preventDefault();
             // C4 : sous la date d'un acte en calendrier républicain (« ✓ Compris : 12 thermidor an II (30 juillet 1794) »), « 🪙 Convertir »
             const fromDate = af.closest('.ui-date')?.querySelector('input.ui-date-input')?.value;

@@ -4301,7 +4301,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
             const words=fold(q).split(/\s+/).filter(Boolean);
             const screens=words.length?quickSearchScreens().filter(row=>words.every(word=>fold(row.label+' '+row.hint).includes(word))).slice(0,6):[];
             // 📜 les mots des actes anciens (latin, formules, abréviations) : « vve », « filius », « dudit »…
-            const oldWords=q.length>=2?(window.LCNDA_EXT?.readingAid?.search(q,{limit:40})||[]).filter(r=>r.type==='entry'&&r.score>=50).slice(0,3).map(r=>({label:`📜 ${r.item.t} — ${r.item.d}`,hint:'Aide à la lecture',go:()=>window.LCNDA_EXT.readingAid.open({q:String(r.item.t).split(',')[0].trim()})})):[];
+            const oldWords=q.length>=2?(window.LCNDA_EXT?.readingAid?.search(q,{limit:40})||[]).filter(r=>r.type==='entry'&&r.score>=50).slice(0,3).map(r=>({label:`📜 ${r.item.t} — ${r.item.d}`,hint:'Aide à la lecture',go:()=>window.LCNDA_EXT.readingAid.open({q:String(r.item.t).split(',')[0].trim(),lang:r.item.lang&&r.item.lang!=='fr'?r.item.lang:''})})):[];
             items=[...screens,...oldWords];active=0;paint();
             if(q.length<2)return;
             let data={};try{data=await api('quick_search',{q});}catch(_){return;}

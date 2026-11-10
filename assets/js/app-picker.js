@@ -54,6 +54,7 @@
         mylist: {sym: '📋', ph: 'Chercher une de mes listes…', add: '＋ Ajouter une liste…', one: 'liste', fem: true, none: 'Aucune liste', label: '📋 Mes listes'}, // Mes listes (lib/picker.php) : le groupe de personnes d'un diagramme
         event: {sym: '📅', ph: 'Événement, personne, année… (2 lettres suffisent)', add: '＋ Ajouter un événement…', one: 'événement', none: 'Aucun événement', label: '📅 Événements'}, // 📅 événements (Studio son : un passage relié)
         archive_service: {sym: '🏛', ph: 'Nom, sigle, ville… (ex. AD 19, Tulle)', add: '＋ Ajouter un service d’archives…', one: 'service d’archives', many: 'services d’archives', none: 'Aucun service d’archives', create: 'Créer le service', label: '🏛 Services d’archives'}, // lib/archive_services.php (heritage-archive-services.js)
+        citation: {sym: '🔖', ph: 'Source, page, nom de la personne citée…', add: '＋ Choisir une citation…', one: 'citation', fem: true, none: 'Aucune citation', label: '🔖 Citations'}, // ⚖️ dossiers de preuve (lib/preuve.php : source_links)
     };
     const kindOf = k => K[k] ? k : 'person';
     const isPerson = it => it && (it.kind === 'person' || it.kind === 'animal');

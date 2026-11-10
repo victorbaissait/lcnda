@@ -642,6 +642,7 @@ try {
         'ou_chercher_person' => json_response(ouc_person_context($pdo, safe_int($_GET['id'] ?? 0))), // 🌍 Où chercher ? (lib/ou_chercher.php) : ce que la fiche dit pour choisir les sites
         'murs_de_brique' => json_response(ouc_walls_data($pdo, $_GET)), // 🧩 Murs de brique (lib/ou_chercher.php) : ancêtres où l'on bloque
         'mur_de_brique' => json_response(ouc_wall_detail($pdo, safe_int($_GET['id'] ?? 0))), // 🧩 un mur : déjà cherché, indices dans la base
+        'preuve' => json_response(preuve_api_get($pdo, $_GET)), // ⚖️ dossiers de preuve et 🛡 solidité des liens (lib/preuve.php)
         'research_journal' => json_response(research_journal_data($pdo, $_GET)), // 🗓 Journal des recherches (lib/research_journal.php) ; &person_id= : bloc « 🔍 Déjà cherché »
         'research_already' => json_response(research_already_data($pdo, $_GET)), // ⚠️ « Déjà dans ton suivi » pendant la saisie
         'archive_services' => json_response(archive_services_data($pdo)), // 🏛 Services d'archives (lib/archive_services.php)
@@ -9829,6 +9830,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'ou_chercher_piste' => ouc_make_lead($pdo,$data), // 🌍 Où chercher ? : « ＋ En faire une piste » (lib/ou_chercher.php)
             'mur_save' => ouc_wall_save($pdo,$data), // 🧩 Murs de brique : 🧱 Je bloque ici, statut, note
             'mur_restore' => ouc_wall_restore($pdo,$data), // 🧩 Murs de brique : ↶ Annuler
+            'preuve_write' => preuve_api_post($pdo,$data), // ⚖️ dossiers de preuve, 🛡 niveau choisi à la main, ↶ Annuler (lib/preuve.php)
             'name_origin_set' => (static function () use ($pdo, $data) { require_once __DIR__ . '/lib/prenoms_france.php'; return name_origin_set($pdo, $data); })(), // 👶 « Ce n'est pas ça » / « Choisir la personne » (lib/prenoms_france.php)
             'controle_dismiss' => controle_dismiss($pdo,$data), // ✅ « Ce n'est pas une erreur » (lib/controle.php)
             'controle_undismiss' => controle_undismiss($pdo,$data), // ✅ « ↺ Signaler de nouveau »

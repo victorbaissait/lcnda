@@ -77,8 +77,9 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/archives-en-ligne.css?v=1">
     <link rel="stylesheet" href="assets/css/semaine.css?v=3">
     <link rel="stylesheet" href="assets/css/ou-chercher.css?v=1">
+    <link rel="stylesheet" href="assets/css/preuve.css?v=1">
     <link rel="stylesheet" href="assets/css/calculette.css?v=1">
-    <link rel="stylesheet" href="assets/css/lecture-autrefois.css?v=1">
+    <link rel="stylesheet" href="assets/css/lecture-autrefois.css?v=2">
     <link rel="stylesheet" href="assets/css/prenoms-france.css?v=3">
     <link rel="stylesheet" href="assets/css/visite.css?v=1">
     <link rel="stylesheet" href="assets/css/cadastre.css?v=1">
@@ -90,8 +91,8 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/editeurs.css?v=4">
     <link rel="stylesheet" href="assets/css/versions.css?v=1">
     <link rel="stylesheet" href="assets/css/premier.css?v=2">
-    <link rel="stylesheet" href="assets/css/apparence-traits.css?v=14" id="lc-frame-css" media="not all">
-    <link rel="stylesheet" href="assets/css/designs-gen.css?v=14" id="lc-designs-gen" media="not all">
+    <link rel="stylesheet" href="assets/css/apparence-traits.css?v=15" id="lc-frame-css" media="not all">
+    <link rel="stylesheet" href="assets/css/designs-gen.css?v=15" id="lc-designs-gen" media="not all">
     <link rel="stylesheet" href="assets/css/designs.css?v=13">
     <script>/* 🎨 Designs au choix (app-designs.js) : le style choisi est posé avant le premier dessin, sans clignotement */
     (function(){try{var c=JSON.parse(localStorage.getItem('lcnda-designs-ui-v2')||'null');if(!c||typeof c!=='object'||!c.a)return;var r=document.documentElement,k;
@@ -1157,9 +1158,9 @@ header('X-Content-Type-Options: nosniff');
 <script>window.LCNDA_GENEALOGY = <?= json_encode(GENEALOGY_ID === '' ? 'main' : GENEALOGY_ID) ?>;window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;window.LCNDA_GRAPHS = <?php require_once __DIR__ . '/lib/graphs.php'; echo json_encode($ready ? graphs_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_INVALID_UTF8_SUBSTITUTE); ?>;</script>
 <script src="assets/js/app-fond.js?v=9" defer></script>
 <script src="assets/js/app-accord.js?v=1" defer></script>
-<script src="assets/js/app.js?v=548" defer></script>
+<script src="assets/js/app.js?v=549" defer></script>
 <script src="assets/js/app-indicateurs.js?v=1" defer></script>
-<script src="assets/js/app-picker.js?v=25" defer></script>
+<script src="assets/js/app-picker.js?v=26" defer></script>
 <script src="assets/js/app-media-picker.js?v=3" defer></script>
 <script src="assets/js/app-piece-archives.js?v=10" defer></script>
 <script src="assets/js/app-puzzle.js?v=8" defer></script>
@@ -1195,7 +1196,38 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-harmony.js?v=10" defer></script>
 <script src="assets/js/app-ui.js?v=29" defer></script>
 <script src="assets/js/app-tableur-engine.js?v=10" defer></script>
-<script src="assets/js/app-aide-lecture.js?v=1" defer></script>
+<script src="assets/js/app-aide-lecture.js?v=2" defer></script>
+<!-- aide-langues : une langue = un fichier (assets/js/aide-langues/README-format.md) -->
+<script src="assets/js/aide-langues/la.js?v=1" defer></script>
+<script src="assets/js/aide-langues/grc.js?v=1" defer></script>
+<script src="assets/js/aide-langues/de.js?v=1" defer></script>
+<script src="assets/js/aide-langues/it.js?v=1" defer></script>
+<script src="assets/js/aide-langues/es.js?v=1" defer></script>
+<script src="assets/js/aide-langues/pl.js?v=1" defer></script>
+<script src="assets/js/aide-langues/nl.js?v=1" defer></script>
+<script src="assets/js/aide-langues/oc.js?v=1" defer></script>
+<script src="assets/js/aide-langues/br.js?v=1" defer></script>
+<script src="assets/js/aide-langues/eu.js?v=1" defer></script>
+<script src="assets/js/aide-langues/cs.js?v=1" defer></script>
+<script src="assets/js/aide-langues/sk.js?v=1" defer></script>
+<script src="assets/js/aide-langues/hu.js?v=1" defer></script>
+<script src="assets/js/aide-langues/sv.js?v=1" defer></script>
+<script src="assets/js/aide-langues/da.js?v=1" defer></script>
+<script src="assets/js/aide-langues/no.js?v=1" defer></script>
+<script src="assets/js/aide-langues/ro.js?v=1" defer></script>
+<script src="assets/js/aide-langues/hr.js?v=1" defer></script>
+<script src="assets/js/aide-langues/sl.js?v=1" defer></script>
+<script src="assets/js/aide-langues/lt.js?v=1" defer></script>
+<script src="assets/js/aide-langues/pt.js?v=1" defer></script>
+<script src="assets/js/aide-langues/ca.js?v=1" defer></script>
+<script src="assets/js/aide-langues/en.js?v=1" defer></script>
+<script src="assets/js/aide-langues/ru.js?v=1" defer></script>
+<script src="assets/js/aide-langues/uk.js?v=1" defer></script>
+<script src="assets/js/aide-langues/he.js?v=1" defer></script>
+<script src="assets/js/aide-langues/yi.js?v=1" defer></script>
+<script src="assets/js/aide-langues/hy.js?v=1" defer></script>
+<script src="assets/js/aide-langues/ar.js?v=1" defer></script>
+<!-- aide-langues : fin -->
 <script src="assets/js/app-autrefois-engine.js?v=1" defer></script>
 <script src="assets/js/app-calculette-engine.js?v=1" defer></script>
 <script src="assets/js/app-texte-engine.js?v=1" defer></script>
@@ -1219,7 +1251,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-mode-simple.js?v=15" defer></script>
 <script src="assets/js/app-sidegroups.js?v=12" defer></script>
 <script src="assets/js/app-reordonner.js?v=3" defer></script>
-<script src="assets/js/app-listes.js?v=51" defer></script>
+<script src="assets/js/app-listes.js?v=52" defer></script>
 <script src="assets/js/app-maintenance.js?v=54" defer></script>
 <script src="assets/js/app-recherche.js?v=30" defer></script>
 <script src="assets/js/app-graphiques.js?v=24" defer></script>
@@ -1231,9 +1263,9 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-alphabets-data.js?v=2" defer></script>
 <script src="assets/js/heritage-alphabets.js?v=3" defer></script>
 <script src="assets/js/heritage-calendar-more.js?v=5" defer></script>
-<script src="assets/js/heritage-lecture-autrefois.js?v=2" defer></script>
+<script src="assets/js/heritage-lecture-autrefois.js?v=4" defer></script>
 <script src="assets/js/heritage-links.js?v=22" defer></script>
-<script src="assets/js/heritage-more.js?v=304" defer></script>
+<script src="assets/js/heritage-more.js?v=308" defer></script>
 <script src="assets/js/heritage-controle.js?v=7" defer></script>
 <script src="assets/js/heritage-records.js?v=12" defer></script>
 <script src="assets/js/heritage-research.js?v=39" defer></script>
@@ -1336,6 +1368,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-semaine.js?v=3" defer></script>
 <script src="assets/js/app-ou-chercher-core.js?v=1" defer></script>
 <script src="assets/js/heritage-ou-chercher.js?v=1" defer></script>
+<script src="assets/js/heritage-preuve.js?v=1" defer></script>
 <script src="assets/js/heritage-biographie.js?v=4" defer></script>
 <script src="assets/js/heritage-journee.js?v=1" defer></script>
 <script src="assets/js/heritage-monde.js?v=3" defer></script>
@@ -1402,7 +1435,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-onglets-documents.js?v=2" defer></script>
 <script src="assets/js/heritage-onglets-catalogue.js?v=2" defer></script>
 <script src="assets/js/heritage-transcribe-view.js?v=7" defer></script>
-<script src="assets/js/heritage-transcribe.js?v=26" defer></script>
+<script src="assets/js/heritage-transcribe.js?v=27" defer></script>
 <script src="assets/js/heritage-photomaps-time.js?v=2" defer></script>
 <script src="assets/js/heritage-photomaps.js?v=14" defer></script>
 <script src="assets/js/heritage-transcribe-list.js?v=3" defer></script>

@@ -73,6 +73,7 @@ P.pickerField({name: 'label_ids', kind: 'label', multiple: true});
 //         digest (📜 dépouillements d'archive : commune, cote, service, années ; badge = le résultat « Trouvé / Rien trouvé / En partie » — lib/research_journal.php)
 //         archive_service (🏛 services d'archives : nom, sigle, ville ; « ＋ Créer le service » ouvre sa fenêtre ; ↗ Ouvrir = sa fiche — lib/archive_services.php)
 //         parcel (▦ parcelles du cadastre : « ab 100 », commune, lieu-dit, adresse ; ↗ Ouvrir = la fiche par-dessus — lib/cadastre.php, heritage-cadastre.js)
+//         citation (🔖 citations : titre de la source — page, « Citée sur : naissance de Jean MARTIN (1784) », badge « Qualité 0–3 » — lib/preuve.php, dossiers de preuve)
 
 // 📈 un de mes graphiques (table custom_widgets, lib/graphs.php) : la valeur est le numéro de ligne (item.id) ; l'identifiant
 // du graphique (cw_…) est dans item.uid. Case vide = tous les graphiques ; « ＋ Nouveau graphique » / « ＋ Créer le graphique « … » »

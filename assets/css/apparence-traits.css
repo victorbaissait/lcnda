@@ -3734,6 +3734,26 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root.lc-frame .ouc-fact, :root .ouc-fact:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line, #e3e6ea)}
 :root.lc-frame .ouc-wall-grid > section, :root .ouc-wall-grid > section:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line, #e3e6ea)}
 :root.lc-frame .ouc-w-row, :root .ouc-w-row:is([data-lc-lines], [data-lc-lines] *) {border:0;border-bottom:1px solid var(--line, #e3e6ea)}
+/* preuve.css */
+:root.lc-frame .pv-person, :root .pv-person:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line, #dfe3e8)}
+:root.lc-frame .pv-col, :root .pv-col:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line, #dfe3e8)}
+:root.lc-frame .pv-col.is-for, :root .pv-col.is-for:is([data-lc-lines], [data-lc-lines] *) {border-top:3px solid var(--pv-proved)}
+:root.lc-frame .pv-col.is-against, :root .pv-col.is-against:is([data-lc-lines], [data-lc-lines] *) {border-top:3px solid var(--pv-refuted)}
+:root.lc-frame .pv-col.is-research, :root .pv-col.is-research:is([data-lc-lines], [data-lc-lines] *) {border-top:3px solid var(--pv-probable)}
+:root.lc-frame .pv-col.is-conflict, :root .pv-col.is-conflict:is([data-lc-lines], [data-lc-lines] *) {border-top:3px solid var(--pv-supposed)}
+:root.lc-frame .pv-item, :root .pv-item:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid var(--line, #eceff2)}
+:root.lc-frame .pv-item:last-child, :root .pv-item:last-child:is([data-lc-lines], [data-lc-lines] *) {border-bottom:0}
+:root.lc-frame .pv-fs, :root .pv-fs:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line, #dfe3e8)}
+:root.lc-frame .pv-choose-btn, :root .pv-choose-btn:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line, #dfe3e8)}
+:root.lc-frame .pv-choose-btn:hover, :root .pv-choose-btn:hover:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .pv-choose-btn:focus-visible, :root .pv-choose-btn:focus-visible:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--blue, #1f6fd1)}
+:root.lc-frame .pv-sol, :root .pv-sol:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .pv-w-row, :root .pv-w-row:is([data-lc-lines], [data-lc-lines] *) {border:0;border-bottom:1px solid var(--line, #eceff2)}
+:root.lc-frame .lc-sol-legend, :root .lc-sol-legend:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid var(--line, #e3e6ea)}
+:root.lc-frame .lc-sol-key i, :root .lc-sol-key i:is([data-lc-lines], [data-lc-lines] *) {border-top:calc(3px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root.lc-frame .lc-sol-key.is-proved i, :root .lc-sol-key.is-proved i:is([data-lc-lines], [data-lc-lines] *) {border-top-width:calc(4px * var(--lc-frame-k))}
+:root.lc-frame .lc-sol-key.is-supposed i, :root .lc-sol-key.is-supposed i:is([data-lc-lines], [data-lc-lines] *) {border-top-style:dashed}
+:root.lc-frame .lc-sol-key.is-unsourced i, :root .lc-sol-key.is-unsourced i:is([data-lc-lines], [data-lc-lines] *) {border-top-style:dotted;border-top-width:calc(2px * var(--lc-frame-k))}
+:root.lc-frame .lc-sol-key.is-refuted i, :root .lc-sol-key.is-refuted i:is([data-lc-lines], [data-lc-lines] *) {border-top-style:dashed}
 /* calculette.css */
 :root.lc-frame .cm-win, :root .cm-win:is([data-lc-lines], [data-lc-lines] *) {border:2px solid var(--cm-line)}
 :root.lc-frame .cm-head, :root .cm-head:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1.5px solid var(--cm-soft)}
@@ -3789,10 +3809,17 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root.lc-frame .af-cards > div, :root .af-cards > div:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--line-color, #d6d6d6)}
 :root.lc-frame .af-table td, :root .af-table td:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid var(--line-color, #d6d6d6)}
 :root.lc-frame .ui-date-help .ui-date-more, :root .ui-date-help .ui-date-more:is([data-lc-lines], [data-lc-lines] *) {border:1px solid currentColor}
+:root.lc-frame .la-intro, :root .la-intro:is([data-lc-lines], [data-lc-lines] *) {border-left:4px solid var(--blue-bright, #055dff)}
+:root.lc-frame .la-num, :root .la-num:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--line-color, #d6d6d6)}
+:root.lc-frame .la-num-field input, :root .la-num-field input:is([data-lc-lines], [data-lc-lines] *) {border:2px solid var(--ink, #080808)}
 :root[data-theme="dark"].lc-frame .la-old, :root[data-theme="dark"] .la-old:is([data-lc-lines], [data-lc-lines] *) {border-color:#5a4a2c}
 :root[data-theme="dark"].lc-frame .la-w.is-manque, :root[data-theme="dark"] .la-w.is-manque:is([data-lc-lines], [data-lc-lines] *) {border-color:#b08a1d}
 :root[data-theme="dark"].lc-frame .af-field input.is-invalid, :root[data-theme="dark"] .af-field input.is-invalid:is([data-lc-lines], [data-lc-lines] *) {border-color:#ff6b7e}
 :root.lc-frame .af-field input, :root .af-field input:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .af-field select, :root .af-field select:is([data-lc-lines], [data-lc-lines] *) {border:2px solid var(--ink, #080808)}
+:root[data-theme="dark"].lc-frame .la-letter, :root[data-theme="dark"] .la-letter:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .la-exo-card, :root[data-theme="dark"] .la-exo-card:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .la-num, :root[data-theme="dark"] .la-num:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
+:root[data-theme="dark"].lc-frame .la-num-field input, :root[data-theme="dark"] .la-num-field input:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
+:root[data-theme="dark"].lc-frame .la-intro, :root[data-theme="dark"] .la-intro:is([data-lc-lines], [data-lc-lines] *) {border-left-color:#5b9bff}
+:root.lc-frame .la-filters .la-langs .la-langs-more, :root .la-filters .la-langs .la-langs-more:is([data-lc-lines], [data-lc-lines] *) {border-style:dashed}
 /* prenoms-france.css */
 :root.lc-frame .pf-tile, :root .pf-tile:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line, #e3e6ea)}
 :root.lc-frame .pf-block, :root .pf-block:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line, #e3e6ea)}

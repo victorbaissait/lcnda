@@ -25,7 +25,8 @@ const PICKER_KINDS = ['person', 'place', 'source', 'media', 'investigation', 'ba
     'mylist', // 📋 Mes listes (custom_lists) : le groupe de personnes d'un diagramme (« Depuis l'app », lib/diagram_options.php)
     'pet', 'tsite', 'agroup', // 🐾 animaux (fiches « pets »), 🏞 sites de suivi, 👥 groupes d'animaux (lib/suivi.php)
     'health', // 🩺 maladies notées (lib/sante.php) : rien tant que « Santé de la famille » est cachée
-    'custommap', 'branch', 'maplayer']; // 🗺 Mes cartes, 🌿 branches, ✏️ mes couches de la Carte (lib/cartes_perso.php)
+    'custommap', 'branch', 'maplayer', // 🗺 Mes cartes, 🌿 branches, ✏️ mes couches de la Carte (lib/cartes_perso.php)
+    'citation']; // 🔖 citations de sources (source_links : source, page, ce qui est cité — ⚖️ dossiers de preuve, lib/preuve.php)
 const PICKER_LABELS = [
     'person' => '👤 Personnes', 'place' => '📍 Lieux', 'source' => '📚 Sources', 'media' => '🖼 Médias',
     'investigation' => '🔍 Enquêtes', 'battue' => '🧭 Battues', 'label' => '🏷 Étiquettes', 'house' => '🏠 Maisons',
@@ -44,6 +45,7 @@ const PICKER_LABELS = [
     'pet' => '🐾 Animaux', 'tsite' => '🏞 Sites de suivi', 'agroup' => '👥 Groupes d’animaux',
     'health' => '🩺 Santé',
     'custommap' => '🗺 Mes cartes', 'branch' => '🌿 Branches', 'maplayer' => '✏️ Mes couches',
+    'citation' => '🔖 Citations',
 ];
 // pays tapés en abrégé après un nom de lieu (« springfield usa »)
 const PICKER_COUNTRY_ALIASES = [
@@ -213,6 +215,7 @@ function picker_kind(PDO $pdo, string $kind, string $q, int $offset, int $limit,
             'fobject' => function_exists('picker_family_objects') ? picker_family_objects($pdo, $q, $offset, $limit) : ['total' => 0, 'items' => []], // 🏺 lib/successions.php
             'probate' => function_exists('picker_probates') ? picker_probates($pdo, $q, $offset, $limit) : ['total' => 0, 'items' => []], // ⚖️ lib/successions.php
             'graph' => function_exists('picker_graphs') ? picker_graphs($pdo, $q, $offset, $limit, $opts) : ['total' => 0, 'items' => []],
+            'citation' => function_exists('picker_citations') ? picker_citations($pdo, $q, $offset, $limit) : ['total' => 0, 'items' => []], // 🔖 lib/preuve.php
             // 🔗 sortes du widget « Raccourcis » (lib/widget_links.php) : fiches, Atelier, tableaux, mises en page, diagrammes, cartes, transcriptions
             'photomap' => (static function () use ($pdo, $q, $offset, $limit) { require_once __DIR__ . '/photomaps.php'; return picker_photomaps($pdo, $q, $offset, $limit); })(), // 📸 lib/photomaps.php
             'custommap', 'branch', 'maplayer' => (static function () use ($pdo, $q, $offset, $limit, $kind) { require_once __DIR__ . '/cartes_perso.php'; return match ($kind) { 'custommap' => picker_custom_maps($pdo, $q, $offset, $limit), 'branch' => picker_branches($pdo, $q, $offset, $limit), default => picker_map_layers($pdo, $q, $offset, $limit) }; })(), // 🗺 lib/cartes_perso.php

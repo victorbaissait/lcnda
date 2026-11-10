@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 87;
+const SCHEMA_VERSION = 88;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -108,6 +108,7 @@ function migration_steps(): array
         85 => 'schema_v85',
         86 => 'schema_v86',
         87 => 'schema_v87',
+        88 => 'schema_v88',
     ];
 }
 
@@ -2561,4 +2562,13 @@ function schema_v87(PDO $pdo): void
 {
     if (!function_exists('cartes_perso_schema')) { require_once __DIR__ . '/cartes_perso.php'; }
     cartes_perso_schema($pdo);
+}
+
+/** 88 : ⚖️ Dossiers de preuve (proof_cases : question, conclusion, certitude ; proof_items : indices pour et contre avec leur
+ *  source ou citation, sorte d'indice et qualité, recherches faites, conflits et leur résolution) et 🛡 solidité des liens
+ *  choisie à la main (link_strength) ; le reste est calculé à la lecture (lib/preuve.php). */
+function schema_v88(PDO $pdo): void
+{
+    if (!function_exists('preuve_schema')) { require_once __DIR__ . '/preuve.php'; }
+    preuve_schema($pdo);
 }

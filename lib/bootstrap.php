@@ -63,6 +63,7 @@ require_once __DIR__ . '/sources_ouvertes_7.php'; // 🌍 Archives en ligne (7e 
 require_once __DIR__ . '/research_journal.php'; // 🗓 Journal des recherches : tout ce qui a été cherché, « Déjà dans ton suivi », visites faites
 require_once __DIR__ . '/semaine.php'; // 🗓 Ma semaine de recherche : rappels, courriers, visites, pistes, « Que manque-t-il ? », à vérifier, entraide, fait cette semaine
 require_once __DIR__ . '/ou_chercher.php'; // 🌍 Où chercher ? (sites à consulter pour une personne) et 🧩 Murs de brique (ancêtres où l'on bloque)
+require_once __DIR__ . '/preuve.php'; // ⚖️ Dossiers de preuve (pour / contre, conclusion, certitude) et 🛡 solidité des liens parent-enfant (Branches fragiles)
 require_once __DIR__ . '/archive_services.php'; // 🏛 Services d'archives (F14) : fiches, séries, ce qui a été consulté chez eux
 require_once __DIR__ . '/citation_styles.php'; // ❝ Citation des sources toute prête (F4) : classique, Evidence Explained, Chicago, forum
 require_once __DIR__ . '/hypothesis_compare.php'; // ⚖️ Hypothèses à comparer (F2) : réponses, preuves pour / contre, conclusion

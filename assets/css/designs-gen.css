@@ -6269,6 +6269,41 @@
 :root[data-lc-density] .ouc-w-list{gap:calc(2px * var(--lc-sp))}
 :root[data-lc-density] .ouc-w-row{gap:calc(8px * var(--lc-sp))}
 :root[data-lc-density] .ouc-w-row{padding:calc(6px * var(--lc-sp)) calc(2px * var(--lc-sp))}
+/* preuve.css */
+:root[data-lc-density] .pv-top{gap:calc(8px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root[data-lc-density] .pv-people{gap:calc(6px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+:root[data-lc-density] .pv-person{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .pv-person{padding:calc(3px * var(--lc-sp)) calc(10px * var(--lc-sp)) calc(3px * var(--lc-sp)) calc(4px * var(--lc-sp))}
+:root[data-lc-density] .pv-tools{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .pv-q,:root[data-lc-density] .pv-concl{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .pv-cert{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .pv-grid{gap:calc(12px * var(--lc-sp))}
+:root[data-lc-density] .pv-col{padding:calc(10px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root[data-lc-density] .pv-col h4{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .pv-col > .button,:root[data-lc-density] .pv-col > .link-button{margin-top:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .pv-items{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .pv-item{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .pv-item{padding:calc(6px * var(--lc-sp)) 0}
+:root[data-lc-density] .pv-ref{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .pv-item-tags{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .pv-tag{padding:1px calc(7px * var(--lc-sp))}
+:root[data-lc-density] .pv-item-acts{gap:calc(2px * var(--lc-sp))}
+:root[data-lc-density] .pv-form{gap:calc(12px * var(--lc-sp))}
+:root[data-lc-density] .pv-form label{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .pv-fs{padding:calc(8px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .pv-fs legend{padding:0 calc(4px * var(--lc-sp))}
+:root[data-lc-density] .pv-radios{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .pv-form .pv-radio,:root[data-lc-density] .pv-link .pv-radio{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .pv-choose{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .pv-choose-btn{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .pv-choose-btn{padding:calc(9px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root[data-lc-density] .pv-link-now{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .pv-link-acts{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .pv-sol{padding:0 calc(2px * var(--lc-sp))}
+:root[data-lc-density] .pv-counts,:root[data-lc-density] .pv-w-counts{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .pv-w-list{gap:calc(2px * var(--lc-sp))}
+:root[data-lc-density] .pv-w-row{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .pv-w-row{padding:calc(6px * var(--lc-sp)) calc(4px * var(--lc-sp))}
 /* calculette.css */
 :root .cm-win:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
 :root[data-lc-density] .cm-head{gap:calc(6px * var(--lc-sp)) calc(8px * var(--lc-sp))}
@@ -6389,6 +6424,15 @@
 :root[data-lc-density] .af-table td{padding:calc(4px * var(--lc-sp)) calc(8px * var(--lc-sp))}
 :root[data-lc-density] .af-actions{gap:calc(8px * var(--lc-sp))}
 :root[data-lc-density] .ui-date-help .ui-date-more{padding:0 calc(6px * var(--lc-sp))}
+:root[data-lc-density] .la-intro{padding:calc(8px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root[data-lc-density] .la-num{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .la-num{padding:calc(10px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root .la-num:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .la-num-field{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .la-num-field input{padding:calc(6px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root .la-num-field input:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .la-alpha-table th{padding:calc(4px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+:root[data-lc-density] .h-htr-known ul{padding-left:calc(18px * var(--lc-sp))}
 @media (max-width: 640px){
   :root[data-lc-density] .la-old{padding:calc(10px * var(--lc-sp)) calc(12px * var(--lc-sp))}
 }

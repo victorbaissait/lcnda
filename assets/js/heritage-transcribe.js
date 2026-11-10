@@ -129,6 +129,18 @@
         return kept;
     }
 
+    /* La langue du texte (lecture automatique + « 📜 Aide à la lecture » ouverte sur cette langue) : retenue d'une fois sur l'autre */
+    const TX_BASE = [['fra', 'Français'], ['lat', 'Latin'], ['fra+lat', 'Français + latin'], ['eng', 'Anglais'], ['deu', 'Allemand'], ['ita', 'Italien'], ['spa', 'Espagnol'], ['pol', 'Polonais'], ['nld', 'Néerlandais'], ['grc', 'Grec ancien'], ['ell', 'Grec moderne']];
+    /** la liste + les langues de l'aide à la lecture (aide-langues/<code>.js, leur champ `ocr`) qui n'y sont pas encore */
+    const txLangs = () => { const out = TX_BASE.slice(), have = new Set(out.map(([k]) => k));
+        (window.LCNDA_AIDE_LECTURE?.langs?.() || []).forEach(l => (l.ocr || []).forEach(c => { if (/^[a-z]{3}(\+[a-z]{3})?$/.test(c) && !have.has(c)) { have.add(c); out.push([c, String(l.name || c)]); } }));
+        return out; };
+    const TX_LANG_KEY = 'genealogie-tx-lang';
+    const txLang = () => { try { const v = localStorage.getItem(TX_LANG_KEY); return txLangs().some(([k]) => k === v) ? v : 'fra'; } catch (_) { return 'fra'; } };
+    /** la langue de l'aide à la lecture pour la langue choisie (« deu » → « de ») ; rien pour le français */
+    const aideLang = v => window.LCNDA_AIDE_LECTURE?.langForOcr?.(v) || '';
+    const langName = code => window.LCNDA_AIDE_LECTURE?.langOf?.(code)?.name || '';
+
     /* ═════════ L'atelier ═════════ */
     async function open(ctx = {}) {
         const TV = ext.txView; // « 🎚️ Mieux voir » et la barre réglable (heritage-transcribe-view.js)
@@ -153,7 +165,7 @@
                 </section>
                 <section class="h-tx-right">
                     <div class="h-tx-tools"><button type="button" data-tx-cmd="ocr" title="Lire un texte imprimé ou tapé (pose aussi les zones ligne par ligne)">🔎 Lire (imprimé)</button><button type="button" data-tx-cmd="htr" title="Lire l’écriture à la main : toute la page, ou seulement la zone choisie (▭). Le texte est proposé ligne par ligne, à relire." data-help="La lecture d’une écriture à la main (HTR), sur cet ordinateur : le texte est proposé ligne par ligne à côté de l’image, les mots peu sûrs surlignés. Elle s’installe une fois dans les Réglages. Relis toujours : elle se trompe sur les noms." data-help-faq="Lire l’acte">✨ Lire l’acte</button><span class="h-tx-htrrun" data-tx-htrrun hidden><span class="ui-spinner is-inline" role="status"><span class="ui-spin" aria-hidden="true"></span><span data-tx-htrtxt></span></span><button type="button" class="button small secondary" data-tx-cmd="htrstop" title="Arrêter la lecture">■ Arrêter</button></span>
-                        <select data-tx-lang title="Langue du texte"><option value="fra">Français</option><option value="lat">Latin</option><option value="fra+lat">Français + latin</option><option value="eng">Anglais</option><option value="deu">Allemand</option><option value="ita">Italien</option><option value="spa">Espagnol</option></select>
+                        <select data-tx-lang title="Langue du texte : sert à la lecture automatique, et « 📜 Aide à la lecture » s’ouvre sur cette langue">${txLangs().map(([v, l]) => `<option value="${esc(v)}" ${txLang() === v ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select>
                         <button type="button" data-tx-cmd="template" title="Un modèle d’acte à compléter">📋 Modèle</button><button type="button" data-tx-cmd="aide" title="Le latin des registres, les abréviations, les anciennes lettres (ſ, ꝑ…) et des exercices : choisis d’abord un mot dans le texte pour le chercher">📜 Aide à la lecture</button><button type="button" data-tx-cmd="detect" title="Repérer les noms, dates, lieux et métiers" data-help="Cherche dans le texte les noms (avec leur rôle : parrain, témoin…), les dates (même en toutes lettres ou au calendrier républicain), les lieux et les métiers, pour les relier aux fiches.">🧭 Repérer</button><span class="spacer"></span>
                         <details class="h-tx-more"><summary>Plus ▾</summary><div><button type="button" data-tx-cmd="tomedia">↪ Mettre le texte dans le média</button><button type="button" data-tx-cmd="copy">📋 Copier le texte</button><label class="ui-toggle h-tx-useenh" title="La lecture (imprimé et manuscrit) et l’export prennent l’image avec les réglages « Mieux voir » (contraste, netteté, canal, seuil…), sinon l’image d’origine"><input type="checkbox" data-tx-useenh ${useEnh() ? 'checked' : ''}><i></i>Lire et exporter l’image améliorée</label></div></details></div>
                     <div class="h-tx-chars">${SPECIAL.map(c => `<button type="button" data-tx-char="${esc(c)}" title="Insérer ${esc(c)}">${esc(c)}</button>`).join('')}</div>
@@ -432,7 +444,9 @@
                 ${p.person_id ? `<button type="button" class="h-tx-linked" data-tx-popen="${p.person_id}" title="Ouvrir la fiche">👤 fiche n° ${p.person_id}</button><button type="button" class="link-button" data-tx-punlink="${i}">délier</button>` : `<button type="button" class="button small secondary" data-tx-plink="${i}">🔗 Fiche…</button>`}<button type="button" class="icon-button" data-tx-pdel="${i}" title="Retirer">×</button></li>`).join('')}</ul>` : '';
             const groups = [['person', '👤 Noms repérés'], ['date', '📅 Dates'], ['place', '📍 Lieux'], ['job', '🔨 Métiers']].map(([k, l]) => { const list = found.filter(f => f.type === k); if (!list.length) return '';
                 return `<h4>${l} <small class="muted">${list.length}</small>${k === 'person' ? ' <button type="button" class="link-button" data-tx-keepall>tout garder</button>' : ''}</h4><div class="h-tx-chips">${list.map(f => `<span class="h-tx-chip is-${k}"><button type="button" data-tx-goto="${f.s}:${f.e}" title="Montrer dans le texte">${esc(f.label)}${f.role ? ` <i>${esc(f.role)}</i>` : ''}</button>${k === 'person' ? `${(matchCache.get(f.label) || []).slice(0, 2).map(m => `<button type="button" class="h-tx-match" data-tx-match="${found.indexOf(f)}:${m.id}" title="Garder et relier à cette fiche">↔ ${esc(m.name)} <small>${esc(m.years)}</small></button>`).join('')}<button type="button" data-tx-keep="${found.indexOf(f)}" title="Garder dans les personnes de l’acte">＋</button>` : k === 'date' && f.iso ? `<button type="button" data-tx-setdate="${esc(f.label)}" title="Date de l’acte">⇢ date</button>` : k === 'place' ? `<button type="button" data-tx-setplace="${esc(f.label)}" title="Lieu de l’acte">⇢ lieu</button>` : ''}</span>`).join('')}</div>`; }).join('');
-            box.innerHTML = kept + groups || '<p class="muted h-tx-hint">« 🧭 Repérer » cherche dans le texte les noms (et leur rôle : parrain, témoin, fils de…), les dates (même en toutes lettres, ou au calendrier républicain), les lieux et les métiers, et propose les fiches de ta base qui leur ressemblent.</p>';
+            const lg = aideLang($('[data-tx-lang]').value), kw = lg && found.length + people.length ? (window.LCNDA_AIDE_LECTURE?.known?.(area.value, lg) || []) : [];
+            const words = kw.length ? `<h4>📜 Mots connus (${esc(langName(lg).toLowerCase())}) <small class="muted">${kw.length}</small></h4><div class="h-tx-chips">${kw.map(w => `<span class="h-tx-chip is-word"><button type="button" data-tx-lookword="${esc(String(w.item.t).split(',')[0].trim())}" title="Ouvrir dans 📜 Aide à la lecture">${esc(w.word)} <i>${esc(w.item.d.length > 48 ? `${w.item.d.slice(0, 46)}…` : w.item.d)}</i></button></span>`).join('')}</div>` : '';
+            box.innerHTML = kept + groups + words || '<p class="muted h-tx-hint">« 🧭 Repérer » cherche dans le texte les noms (et leur rôle : parrain, témoin, fils de…), les dates (même en toutes lettres, ou au calendrier républicain), les lieux et les métiers, et propose les fiches de ta base qui leur ressemblent.</p>';
         }
         async function runDetect() {
             found = detect(area.value);
@@ -450,6 +464,7 @@
         }
         $('[data-tx-found]').addEventListener('click', async e => {
             const b = e.target.closest('button'); if (!b) return; const d = b.dataset;
+            if (d.txLookword) return ext.readingAid?.open({q: d.txLookword, lang: aideLang($('[data-tx-lang]').value)});
             if (d.txGoto) { const [s, en] = d.txGoto.split(':').map(Number); selectText({s, e: en}); const z = t.data.zones.find(q => q.s < en && s < q.e); if (z) { selZone = z.id; drawZones(); reveal(z); } return; }
             if (d.txKeep) return keep(found[Number(d.txKeep)]);
             if (d.txKeepall !== undefined) { found.filter(f => f.type === 'person').forEach(f => keep(f)); return; }
@@ -550,7 +565,7 @@
                         <div class="h-htr-rev-body">${src ? `<img class="h-htr-crop" src="${src}" alt="Ligne ${i + 1} sur l’image">` : '<span class="h-htr-crop is-none">pas d’image pour cette ligne</span>'}
                         <div class="h-htr-line" contenteditable="plaintext-only" spellcheck="false" role="textbox" aria-label="Ligne ${i + 1}" data-htr-line>${lineHtml(l)}</div></div>
                         <small class="h-htr-conf ${l.conf != null && l.conf < UNSURE ? 'is-low' : ''}">${l.conf != null ? `${pct(l.conf)} %` : ''}</small></li>`; }).join('')}</ol>
-                    <div class="h-htr-lx" data-htr-lx hidden></div>
+                    <div class="h-htr-lx" data-htr-lx hidden></div><div class="h-htr-lx h-htr-known" data-htr-known hidden></div>
                     <p class="ui-hint">Corrige directement dans les lignes (clique un mot surligné pour le remplacer) · Entrée : ligne suivante · décoche une ligne pour la laisser de côté. Lu par « ${esc(name(modelFile))} », sur cet ordinateur. Ensuite, « 🧭 Repérer » cherche tout seul les noms, dates et lieux.</p>`,
                 onOpen: d => {
                     d.querySelector('.h-htr-line')?.focus();
@@ -559,6 +574,12 @@
                     d.addEventListener('paste', e => { const ln = e.target.closest('[data-htr-line]'); if (!ln) return; e.preventDefault(); document.execCommand('insertText', false, (e.clipboardData?.getData('text/plain') || '').replace(/\s+/g, ' ')); });
                     d.addEventListener('keydown', e => { const ln = e.target.closest('[data-htr-line]'); if (!ln || e.key !== 'Enter') return; e.preventDefault(); const all = [...d.querySelectorAll('[data-htr-line]')], nx = all[all.indexOf(ln) + (e.shiftKey ? -1 : 1)]; if (nx) { nx.focus(); const r = document.createRange(); r.selectNodeContents(nx); r.collapse(false); const s = getSelection(); s.removeAllRanges(); s.addRange(r); } else d.querySelector('[type=submit]')?.focus(); });
                     d.querySelector('[data-htr-reread]').addEventListener('click', () => { const m = d.querySelector('[data-htr-rmodel]').value; d.close(); runHtr({model: m, zone: box || null}); });
+                    // 📜 les mots connus de la langue choisie (allemand, latin, grec…), avec leur traduction : aide à relire
+                    const lg = aideLang($('[data-tx-lang]').value), kBox = d.querySelector('[data-htr-known]');
+                    const drawKnown = () => { if (!lg || !kBox) return; const kw = window.LCNDA_AIDE_LECTURE?.known?.([...d.querySelectorAll('[data-htr-line]')].map(x => x.textContent).join('\n'), lg) || [];
+                        kBox.hidden = !kw.length; kBox.innerHTML = kw.length ? `<h4>📜 Mots connus (${esc(langName(lg).toLowerCase())})</h4><ul>${kw.slice(0, 16).map(w => `<li><b>${esc(w.word)}</b> = ${esc(w.item.d)} <button type="button" class="link-button" data-htr-aide="${esc(String(w.item.t).split(',')[0].trim())}">↗ Aide</button></li>`).join('')}</ul>` : ''; };
+                    drawKnown(); d.addEventListener('input', e => { if (e.target.closest('[data-htr-line]')) { clearTimeout(drawKnown.t); drawKnown.t = setTimeout(drawKnown, 400); } });
+                    kBox?.addEventListener('click', e => { const b = e.target.closest('[data-htr-aide]'); if (b) ext.readingAid?.open({q: b.dataset.htrAide, lang: lg}); });
                     // 🔍 les erreurs typiques d'une lecture automatique (même moteur que SocFace : app-lecture-auto.js) : abréviations, noms proches de ceux de la base
                     (async () => {
                         const LX = window.LCNDA_LECTURE, host = d.querySelector('[data-htr-lx]'); if (!LX || !host) return;
@@ -658,7 +679,7 @@
             if (k === 'htrstop') return htrStop();
             if (k === 'htrzone') return runHtr({zone: htrArea()});
             if (k === 'detect') return runDetect();
-            if (k === 'aide') { const sel = area.value.slice(area.selectionStart, area.selectionEnd).trim().slice(0, 40); return ext.readingAid ? ext.readingAid.open({q: /\n/.test(sel) ? '' : sel}) : toast('L’aide à la lecture n’est pas chargée.', 'error'); } // heritage-lecture-autrefois.js
+            if (k === 'aide') { const sel = area.value.slice(area.selectionStart, area.selectionEnd).trim().slice(0, 40); return ext.readingAid ? ext.readingAid.open({q: /\n/.test(sel) ? '' : sel, lang: aideLang($('[data-tx-lang]').value)}) : toast('L’aide à la lecture n’est pas chargée.', 'error'); } // heritage-lecture-autrefois.js : ouverte sur la langue du texte
             if (k === 'template') { const tp = TEMPLATES[$('[data-tx="kind"]').value]; if (!tp) return toast('Pas de modèle pour ce genre d’acte.', 'error'); if (area.value.trim() && !await A().confirmBox('Le texte déjà écrit est gardé.', {title: 'Ajouter le modèle à la fin du texte ?', okLabel: 'Ajouter le modèle'})) return; area.value += (area.value.trim() ? '\n\n' : '') + tp; area.dispatchEvent(new Event('input')); return; }
             if (k === 'txt') { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([area.value], {type: 'text/plain;charset=utf-8'})); a.download = `${(A().safeExportFilename ? A().safeExportFilename($('[data-tx="title"]').value || 'transcription', 'transcription') : 'transcription')}.txt`; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 3000); return; }
             if (k === 'copy') { navigator.clipboard?.writeText(area.value).then(() => toast('Texte copié.')).catch(() => toast('Copie impossible ici.', 'error')); return; }
@@ -679,7 +700,8 @@
             if (e.target.matches('[data-tx-znote]')) { const z = t.data.zones.find(q => q.id === selZone); if (z) { z.note = e.target.value.slice(0, 300); touch(); } }
             if (e.target.matches('[data-tx-zcolor]')) { const z = t.data.zones.find(q => q.id === selZone); if (z) { if (!e.target.dataset.snapped) { snap(); e.target.dataset.snapped = '1'; } z.c = e.target.value; touch(); paintZoneRects(); paintMirror(); } }
         });
-        dlg.addEventListener('change', e => { if (e.target.dataset.tx === 'kind') { t.kind = e.target.value; touch(); } if (e.target.matches('[data-tx-state]')) { t.data.status = e.target.value; touch(); } });
+        dlg.addEventListener('change', e => { if (e.target.dataset.tx === 'kind') { t.kind = e.target.value; touch(); } if (e.target.matches('[data-tx-state]')) { t.data.status = e.target.value; touch(); }
+            if (e.target.matches('[data-tx-lang]')) { try { localStorage.setItem(TX_LANG_KEY, e.target.value); } catch (_) {} if (found.length) paintPeople(); } }); // la langue : retenue, et les mots connus suivent
         /* ─── « 🎚️ Mieux voir » (disposition B) : un panneau qui s'ouvre sous son bouton ─── */
         const togglePanel = (open) => { const pn = $('[data-tx-panel]'), b = $('[data-tx-cmd="better"]'); if (!pn) return; const on = open ?? pn.hidden; pn.hidden = !on; b.setAttribute('aria-expanded', String(on)); b.classList.toggle('is-active', on); };
         dlg.addEventListener('pointerdown', e => { const pn = $('[data-tx-panel]'); if (pn && !pn.hidden && !e.target.closest('[data-tx-item="better"]')) togglePanel(false); });

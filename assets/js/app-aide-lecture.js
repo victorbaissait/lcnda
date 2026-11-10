@@ -1,10 +1,14 @@
 /* LCNDA — 📜 Aide à la lecture des actes anciens : les données et les calculs (sans page ni réseau).
- * window.LCNDA_AIDE_LECTURE (aussi require() dans Node pour les essais : tests/test-lecture-convertisseur.js).
- *  - ENTRIES      le dictionnaire : latin des registres, formules des actes (baptême, mariage, sépulture…), abréviations
- *                 (dont celles des recensements relues par SocFace : cult., jlier, Vve, id., d°) ; {t, d, k, a, ex}
+ * window.LCNDA_AIDE_LECTURE (aussi require() dans Node pour les essais : tests/test-lecture-convertisseur.js, tests/test-aide-langues.js).
+ *  - LANGUES      une langue = un fichier assets/js/aide-langues/<code>.js (format : aide-langues/README-format.md), enregistré dans
+ *                 window.LCNDA_AIDE_LANGS et lu à chaque recherche (latin, grec, allemand, italien, espagnol, polonais, néerlandais…) ;
+ *                 le français (formules et abréviations) est ici. langs(), langOf(code), langForOcr('deu') → 'de'
+ *  - ENTRIES      le dictionnaire : formules des actes (baptême, mariage, sépulture…), abréviations (dont celles des recensements
+ *                 relues par SocFace : cult., jlier, Vve, id., d°) + les mots de chaque langue ; {t, d, k, a, ex, lang}
  *  - LETTERS      les formes des anciennes lettres (s long, r rond, e/c, u/n, ligatures…), chacune dessinée en SVG (traits maison)
  *  - EXERCISES    des exercices de paléographie : un texte « comme sur le registre » et sa lecture, corrigée mot à mot
- *  - search(q, {kind, acte, limit})   le dictionnaire, les lettres et les exercices, du plus proche au moins proche
+ *  - search(q, {kind, acte, lang, limit})   le dictionnaire, les lettres et les exercices, du plus proche au moins proche
+ *  - known(texte, lang)               les mots connus d'une langue trouvés dans un texte (après « ✨ Lire l'acte »)
  *  - correct(exercice, réponse)       la correction mot à mot : {words: [{exp, got, st: ok|faux|manque|trop, hint}], ok, total, score}
  *  - glyphSvg(lettre)                 le dessin d'une lettre (SVG, trait en currentColor : suit le thème clair ou sombre)
  * L'écran est dans heritage-lecture-autrefois.js (LCNDA_EXT.readingAid). Les « vieux mots » des Trésors (ext.tresorWords)
@@ -18,11 +22,13 @@
     'use strict';
     /** pour chercher et comparer : sans accents, sans majuscules, ſ = s, æ = ae, œ = oe, & = et */
     const fold = s => String(s ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase()
-        .replace(/ſ/g, 's').replace(/æ/g, 'ae').replace(/œ/g, 'oe').replace(/[’‘`]/g, "'").replace(/\s+/g, ' ').trim();
+        .replace(/ſ/g, 's').replace(/æ/g, 'ae').replace(/œ/g, 'oe').replace(/ł/g, 'l').replace(/ß/g, 'ss').replace(/ø/g, 'o').replace(/đ/g, 'd').replace(/ı/g, 'i')
+        .replace(/ς/g, 'σ').replace(/ϲ/g, 'σ').replace(/[’‘`᾽᾿]/g, "'").replace(/\s+/g, ' ').trim();
 
     /* ═════════ Le dictionnaire ═════════
-     * k : latin | formule | abrev ; a : bapteme | mariage | sepulture | recensement | notaire | general ; ex : un exemple tel qu'on le lit */
-    const E = (k, a, rows) => rows.map(([t, d, ex]) => ({t, d, k, a, ex: ex || ''}));
+     * k : mot | mois | nombre | metier | parente | formule | abrev | vieux ; a : bapteme | mariage | sepulture | recensement | notaire | general ;
+     * ex : un exemple tel qu'on le lit. Le latin et les autres langues sont dans assets/js/aide-langues/. */
+    const E = (k, a, rows) => rows.map(([t, d, ex]) => ({t, d, k, a, ex: ex || '', lang: 'fr'}));
     const ENTRIES = [
         /* ── Abréviations et formules courtes (registres et notaires) ── */
         ...E('abrev', 'general', [
@@ -158,48 +164,55 @@
             ['comparant', 'qui se présente devant l’officier ou le notaire'],
             ['a déclaré ne savoir signer', 'ne savait pas écrire son nom'],
         ]),
-        /* ── Le latin des registres ── */
-        ...E('latin', 'bapteme', [
-            ['baptizavi', 'j’ai baptisé'], ['baptizatus, baptizata', 'baptisé, baptisée'], ['natus, nata', 'né, née'], ['hodie, heri', 'aujourd’hui, hier'],
-            ['filius, filia', 'fils, fille'], ['legitimus, legitima', 'légitime'], ['filius legitimus et naturalis', 'fils légitime et naturel : né de parents mariés'],
-            ['ex legitimo matrimonio', 'né du mariage légitime'], ['naturalis, illegitimus, spurius', 'naturel, illégitime (né hors mariage)'], ['gemelli', 'jumeaux'],
-            ['infans, proles', 'enfant'], ['pater, mater', 'père, mère'], ['patrinus, matrina', 'parrain, marraine'], ['susceptores, levantes', 'parrain et marraine (ceux qui ont tenu l’enfant)'],
-            ['cui impositum est nomen', 'à qui on a donné le nom (le prénom) de'], ['domi baptizatus ob periculum mortis', 'ondoyé à la maison en danger de mort'],
-            ['sub conditione', 'sous condition (baptême refait au cas où le premier n’était pas valable)'], ['expositus, exposita', 'enfant trouvé, abandonné'],
-        ]),
-        ...E('latin', 'mariage', [
-            ['conjuges', 'les époux (le couple)'], ['matrimonium contraxerunt', 'ils se sont mariés'], ['matrimonio juncti', 'unis par le mariage'],
-            ['sponsus, sponsa', 'fiancé, fiancée ou époux, épouse'], ['uxor, maritus', 'épouse, mari'],
-            ['proclamationibus factis, bannis', 'les bans ayant été publiés'], ['praemissis tribus bannorum publicationibus', 'après la publication des trois bans'],
-            ['nullo detecto impedimento', 'sans qu’on ait trouvé d’empêchement'], ['per verba de praesenti', 'par paroles de présent (l’échange des consentements)'],
-            ['mutuo consensu', 'par consentement mutuel'], ['benedictionem nuptialem impertitus sum', 'j’ai donné la bénédiction nuptiale'],
-            ['in facie ecclesiae', 'devant l’Église (publiquement)'], ['dispensatione obtenta', 'la dispense ayant été obtenue'],
-            ['dispensatio in tertio gradu consanguinitatis', 'dispense de parenté au 3e degré (cousins issus de germains)'], ['affinitatis', 'de parenté par alliance'],
-            ['viduus, vidua', 'veuf, veuve'], ['relicta', 'veuve de (« laissée par »)'],
-        ]),
-        ...E('latin', 'sepulture', [
-            ['obiit', 'il est mort, elle est morte'], ['sepultus est, sepulta est', 'il a été inhumé, elle a été inhumée'], ['cujus corpus sepultum est', 'dont le corps a été inhumé'],
-            ['in coemeterio', 'au cimetière'], ['in ecclesia', 'dans l’église'], ['omnibus sacramentis munitus', 'muni de tous les sacrements'],
-            ['animam Deo reddidit', 'a rendu son âme à Dieu (est mort)'], ['requiescat in pace (R.I.P.)', 'qu’il repose en paix'],
-            ['annorum circiter quadraginta', 'âgé d’environ quarante ans'], ['aetatis suae', 'de son âge'], ['circiter', 'environ'],
-            ['quondam, q., defunctus, def.', 'feu, défunt'],
-        ]),
-        ...E('latin', 'general', [
-            ['anno Domini, Anno Dñi', 'l’an du Seigneur'], ['die, mensis', 'le jour, du mois'], ['ejusdem mensis', 'du même mois'], ['eodem die, eodem anno', 'le même jour, la même année'],
-            ['pridie', 'la veille'], ['hujus parochiae, ex hac parochia', 'de cette paroisse'], ['parochianus', 'paroissien'], ['ejusdem loci, dicti loci', 'du même lieu, dudit lieu'],
-            ['praedictus, dictus, supradictus', 'ledit, susdit'], ['oriundus ex', 'originaire de'], ['incola', 'habitant'],
-            ['testes, praesentibus', 'témoins, en présence de'], ['infrascriptus, subsignatus', 'soussigné'], ['ego infrascriptus parochus', 'moi, curé soussigné'],
-            ['parochus, curatus, rector', 'curé'], ['vicarius', 'vicaire'], ['sacerdos, presbyter', 'prêtre'], ['Dnus, Dni, Dno', 'Dominus (seigneur, maître, ou titre d’un prêtre)'],
-            ['R. D., Rdus', 'Reverendus Dominus : le révérend (un prêtre)'],
-            ['Januarii … Decembris', 'de janvier … de décembre'], ['Septembris, 7bris', 'de septembre'], ['primo, secundo, tertio die', 'le premier, deuxième, troisième jour'],
-            ['millesimo septingentesimo', 'mil sept cent'], ['millesimo sexcentesimo', 'mil six cent'], ['millesimo octingentesimo', 'mil huit cent'],
-            ['vigesimo, trigesimo, quadragesimo', 'vingtième, trentième, quarantième (dans une année : 20, 30, 40)'],
-            ['quinquagesimo, sexagesimo, septuagesimo', 'cinquantième, soixantième, soixante-dixième (50, 60, 70)'], ['octogesimo, nonagesimo', 'quatre-vingtième, quatre-vingt-dixième (80, 90)'],
-            ['agricola', 'cultivateur'], ['faber', 'forgeron'], ['sutor', 'cordonnier'], ['textor', 'tisserand'], ['molitor', 'meunier'], ['sartor', 'tailleur'], ['miles', 'soldat'], ['mercator', 'marchand'], ['nauta', 'marinier'],
-        ]),
     ];
-    const KINDS = {latin: '🏛 Latin', formule: '📜 Formules', abrev: '✂️ Abréviations', mot: '📖 Vieux mots'};
-    const ACTES = {bapteme: '👶 Baptême', mariage: '💍 Mariage', sepulture: '⚱️ Sépulture', recensement: '🏠 Recensement', general: 'Tous les actes', notaire: '🖋 Notaire'};
+    const KINDS = {mot: '📖 Mots des actes', formule: '📜 Formules', abrev: '✂️ Abréviations', mois: '📅 Mois', nombre: '🔢 Nombres et âges', parente: '👪 Parenté', metier: '🔨 Métiers', vieux: '📖 Vieux mots'};
+    const ACTES = {bapteme: '👶 Baptême', mariage: '💍 Mariage', sepulture: '⚱️ Décès, sépulture', recensement: '🏠 Recensement', general: 'Tous les actes', notaire: '🖋 Notaire'};
+    const FR = {code: 'fr', name: 'Français', script: 'latine', dir: 'ltr', ocr: ['fra'], builtin: true};
+
+    /* ═════════ Le registre des langues (assets/js/aide-langues/<code>.js) ═════════ */
+    let nodeLangs = null;
+    function registry() {
+        if (root) return Array.isArray(root.LCNDA_AIDE_LANGS) ? root.LCNDA_AIDE_LANGS : [];
+        if (nodeLangs) return nodeLangs;
+        nodeLangs = [];
+        try { // Node (essais) : tous les fichiers du dossier
+            const fs = require('fs'), path = require('path'), dir = path.join(__dirname, 'aide-langues');
+            fs.readdirSync(dir).filter(f => /^[a-z0-9_-]+\.js$/i.test(f)).sort().forEach(f => { const d = require(path.join(dir, f)); if (d && d.code) nodeLangs.push(d); });
+        } catch (_) {}
+        return nodeLangs;
+    }
+    let langCache = null;
+    /** les langues (français d'abord, puis l'ordre des fichiers chargés), sans doublon de code */
+    function langs() {
+        const reg = registry();
+        if (langCache && langCache.n === reg.length) return langCache.list;
+        const seen = new Set(['fr']), list = [FR];
+        const FIRST = ['la', 'grc'], rank = d => (FIRST.includes(d.code) ? FIRST.indexOf(d.code) : 9);
+        reg.slice().sort((a, b) => rank(a) - rank(b) || String(a.name || '').localeCompare(String(b.name || ''), 'fr'))
+            .forEach(d => { const c = String(d?.code || '').toLowerCase(); if (!c || seen.has(c)) return; seen.add(c); list.push(d); });
+        langCache = {n: reg.length, list}; mergedCache = null; glyphCache = null;
+        return list;
+    }
+    const langOf = code => langs().find(l => l.code === code) || null;
+    /** « deu » (liste « Langue du texte » de la transcription) → « de » ; « fra+lat » → « la » ; rien si aucune */
+    function langForOcr(ocr) {
+        const parts = String(ocr || '').toLowerCase().split('+').filter(Boolean);
+        for (const p of parts.slice().reverse()) { const l = langs().find(x => (x.ocr || []).includes(p)); if (l && l.code !== 'fr') return l.code; }
+        return '';
+    }
+    /** les écritures en lettres latines d'un mot (grec, cyrillique…) : la fonction `translit` de sa langue */
+    function translitOf(lang, text) {
+        const l = typeof lang === 'string' ? langOf(lang) : lang; if (!l || typeof l.translit !== 'function') return [];
+        const out = new Set();
+        String(text || '').split(/\s*[,;]\s*/).forEach(part => {
+            const words = part.split(/\s+/).filter(Boolean); if (!words.length) return;
+            const vs = words.map(w => { try { return (l.translit(w) || []).map(fold).filter(Boolean); } catch (_) { return []; } });
+            if (vs.some(v => !v.length)) return;
+            const n = Math.max(...vs.map(v => v.length));
+            for (let i = 0; i < n; i++) out.add(vs.map(v => v[Math.min(i, v.length - 1)]).join(' '));
+        });
+        return [...out];
+    }
 
     /* ═════════ Les anciennes lettres, dessinées (SVG maison) ═════════
      * Une cellule de 40 × 60 : haut des grandes lettres y = 8, haut des petites y = 26, ligne d'écriture y = 46, bas des jambages y = 58.
@@ -255,17 +268,26 @@
         g: ['M26 30 C22 25 13 27 13 37 C13 46 24 46 26 38', 'M26 28 L26 52 C26 59 15 59 13 54'],
         dash: ['M8 37 L30 37'],
     };
-    const W = {m: 34, ff: 40, ctlig: 44, stlig: 40, M: 36};
+    const W0 = {m: 34, ff: 40, ctlig: 44, stlig: 40, M: 36};
+    let glyphCache = null;
+    /** les dessins communs + ceux des langues (ids préfixés par le code de la langue) */
+    function glyphs() {
+        const ls = langs(); if (glyphCache && glyphCache.n === ls.length) return glyphCache;
+        const g = {...G}, w = {...W0};
+        ls.forEach(l => { Object.entries(l.glyphs || {}).forEach(([id, paths]) => { if (!G[id] && Array.isArray(paths)) g[id] = paths.map(String); }); Object.assign(w, l.widths || {}); });
+        glyphCache = {n: ls.length, g, w}; return glyphCache;
+    }
     /** le dessin d'une suite de lettres (ids de G) : <svg> en traits currentColor ; `title` pour les lecteurs d'écran */
     function glyphSvg(ids, {title = '', h = 60} = {}) {
-        const list = (Array.isArray(ids) ? ids : [ids]).filter(id => G[id]);
+        const {g, w: W} = glyphs(), clean = d => String(d).replace(/[^MLCQZHVSAmlcqzhvsa0-9 .,-]/g, '');
+        const list = (Array.isArray(ids) ? ids : [ids]).filter(id => g[id]);
         let x = 0, body = '';
-        for (const id of list) { body += `<g transform="translate(${x} 0)">${G[id].map(d => `<path d="${d}"/>`).join('')}</g>`; x += (W[id] || 36) - 4; }
+        for (const id of list) { body += `<g transform="translate(${x} 0)">${g[id].map(d => `<path d="${clean(d)}"/>`).join('')}</g>`; x += (W[id] || 36) - 4; }
         const w = Math.max(40, x + 4);
         return `<svg class="la-glyph" viewBox="0 0 ${w} 64" width="${Math.round(w * h / 64)}" height="${h}" role="img" aria-label="${title.replace(/"/g, '&quot;')}" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><line class="la-base" x1="0" y1="46" x2="${w}" y2="46"/>${body}</svg>`;
     }
     /** [id, nom, ce qu'on voit (dessin), se lit, comparer avec (dessin), remarque, mots-clés] */
-    const LETTERS = [
+    const BASE_LETTERS = [
         ['slong', 's long (ſ)', ['slong'], 's', ['f'], 'Au début et au milieu des mots ; il descend sous la ligne et n’a qu’une petite pointe à gauche. Le f, lui, est barré des deux côtés. « ſœur » = sœur, « eſté » = esté.', 's long ſ f confusion'],
         ['rrond', 'r rond (ꝛ)', ['o', 'rrond'], 'r', ['z'], 'Après o, b, p (et souvent ailleurs) : il ressemble à un 2 ou à un z. « oꝛ » = or.', 'r rond 2 z'],
         ['ec', 'e et c', ['e', 'c'], 'e, c', [], 'La boucle du e est parfois si petite qu’il devient un c ; regarde le sens de la phrase. « ceux » et « eeux » : un seul existe.', 'e c boucle confusion'],
@@ -290,12 +312,12 @@
         ['smuet', 's muet devant consonne', ['e', 'slong', 't'], 'ê, â…', [], 'Il est devenu un accent circonflexe : « eſtoit » = était, « teſte » = tête, « maiſtre » = maître.', 's muet circonflexe estoit'],
         ['roman', 'chiffres romains en j', ['i', 'i', 'i', 'J'], '4', [], 'Le dernier i s’allonge en j : « iiij » = 4, « vj » = 6, « iiijxx » = quatre-vingts.', 'chiffres romains iiij vj'],
         ['ponct', 'pas de ponctuation ni d’accent', ['dash'], '—', [], 'Les phrases s’enchaînent et les mots sont coupés en fin de ligne sans tiret : lis à voix haute.', 'ponctuation accent coupure'],
-    ].map(([id, name, seen, read, cmp, note, keys]) => ({id, name, seen, read, cmp, note, keys}));
+    ].map(([id, name, seen, read, cmp, note, keys]) => ({id, name, seen, read, cmp, note, keys, lang: 'fr'}));
 
     /* ═════════ Les exercices de paléographie ═════════
      * Textes rédigés sur le modèle des registres et des recensements (formules de l'époque, personnes d'exemple, toutes nées bien avant 1950).
      * src : les mots comme sur le registre ; « vu=lu » quand la lecture diffère, « vu=lu|autre » pour accepter une autre lecture. */
-    const EXERCISES = [
+    const BASE_EXERCISES = [
         {id: 'bapt1742', icon: '👶', title: 'Un baptême de 1742', level: 'facile', acte: 'bapteme', year: 1742,
             tip: 'Repère le s long (ſ), l’esperluette (&) et l’abréviation de paroisse.',
             src: 'Le vingt ſix=six de may=may|mai mil ſept=sept cent quarante deux a eſté=esté|été baptiſé=baptisé Jean filz=filz|fils legitime de Pierre Martin laboureur &=et de Marie Durand ſa=sa femme de cette par.=paroisse Le parrain a eſté=esté|été Jean Bonnet &=et la marraine Anne Roux qui ont declaré ne ſcavoir=scavoir|savoir ſigner=signer'},
@@ -305,16 +327,17 @@
         {id: 'sep1781', icon: '⚱️', title: 'Une sépulture de 1781', level: 'moyen', acte: 'sepulture', year: 1781,
             tip: 'Le tilde (õ, ã) remplace un m ou un n ; « aagé » = âgé.',
             src: 'Le trois mars mil ſept=sept cent quatre vingt un a eſté=esté|été inhumé dans le cimetiere de cette ꝑoiſſe=paroisse le corps de Jacques Roux veuf de feue Anne Martin aagé=aagé|âgé|age d’environ ſoixante=soixante ans decedé d’hier muny=muny|muni des ſacremens=sacremens|sacrements en preſence=presence|présence de ſes=ses enfans=enfans|enfants qui ont declaré ne ſcavoir=scavoir|savoir ſigner=signer de ce enquis'},
-        {id: 'bapt1695', icon: '🏛', title: 'Un baptême en latin (1695)', level: 'difficile', acte: 'bapteme', year: 1695,
-            tip: 'Latin : « Dñi » = Domini, « filiꝰ » = filius, « ꝑochiæ » = parochiae, « æ » = ae.',
-            src: 'Anno Dñi=Domini millesimo sexcentesimo nonagesimo quinto die decima mensis Januarii baptizatus fuit Joannes filiꝰ=filius legitimus Petri Garnier et Annæ=Annae Leroy conjugum hujus ꝑochiæ=parochiae Patrinus fuit Joannes Leroy matrina vero Maria Garnier'},
         {id: 'nais_anX', icon: '🗓', title: 'Une naissance en l’an X', level: 'moyen', acte: 'bapteme', year: 1801,
             tip: 'Calendrier républicain : brumaire an X = octobre-novembre 1801 (🪙 Convertisseur d’autrefois).',
             src: 'Du quinze brumaire an dix de la Republique françaiſe=française acte de naiſſance=naissance de Marie Louiſe=Louise née hier fille de Jacques Bernard cultivateur &=et de Jeanne Roux ſon=son épouſe=épouse le ſexe=sexe de l’enfant a eſté=esté|été reconnu être feminin'},
         {id: 'rec1836', icon: '🏠', title: 'Une page de recensement (1836)', level: 'facile', acte: 'recensement', year: 1836,
             tip: 'Les abréviations des recensements : cult., fe, fs, Vve, jlière, id., d° (développe-les).',
             src: 'Martin Jean cult.=cultivateur Durand Marie ſa=sa fe=femme Martin Pierre leur fs=fils Roux Anne Vve=veuve jlière=journaliere|journalière Roux Louis ſon=son fs=fils id.=idem|journalier Bonnet Claude d°=dito|idem'},
-    ];
+    ].map(x => ({...x, lang: 'fr'}));
+    const ACTE_OF = a => (a === 'deces' ? 'sepulture' : a || 'general');
+    /** toutes les lettres et tous les exercices : le français, puis chaque langue (lang = son code) */
+    const allLetters = () => BASE_LETTERS.concat(...langs().filter(l => !l.builtin).map(l => (l.letters || []).map(x => ({cmp: [], keys: '', ...x, seen: [].concat(x.seen || []), cmp: [].concat(x.cmp || []), lang: l.code}))));
+    const allExercises = () => BASE_EXERCISES.concat(...langs().filter(l => !l.builtin).map(l => (l.exercises || []).map(x => ({...x, acte: ACTE_OF(x.acte), lang: l.code}))));
     /** un exercice → {shown: [mots comme sur le registre], words: [{shown, exp, alts}]} */
     function parseExercise(ex) {
         const words = String(ex.src || '').split(/\s+/).filter(Boolean).map(tok => {
@@ -326,11 +349,12 @@
         return {words, shown: words.map(w => w.shown).join(' ').replace(/ \./g, '.'), answer: words.map(w => w.exp).join(' ')};
     }
     /** un mot ramené à l'essentiel pour comparer : u/v et i/j confondus (comme sur le registre), sans ponctuation */
-    const wkey = s => fold(s).replace(/&/g, 'et').replace(/[.,;:!?«»"()[\]’'-]/g, '').replace(/v/g, 'u').replace(/j/g, 'i').replace(/y$/, 'i');
-    const tokens = s => String(s ?? '').replace(/[’]/g, "'").replace(/([.,;:!?»)])/g, ' ').replace(/[«(]/g, ' ').split(/\s+/).map(w => w.trim()).filter(w => w && wkey(w));
+    const wkey = s => fold(s).replace(/&/g, 'et').replace(/[.,;:!?«»"()[\]’'ʹ͵΄·-]/g, '').replace(/v/g, 'u').replace(/j/g, 'i').replace(/y$/, 'i');
+    const tokens = s => String(s ?? '').replace(/[’]/g, "'").replace(/([.,;:!?»)·])/g, ' ').replace(/[«(]/g, ' ').split(/\s+/).map(w => w.trim()).filter(w => w && wkey(w));
     /** pourquoi le mot vu se lit autrement (une phrase), d'après les lettres qui changent */
-    function hintFor(shown, exp) {
+    function hintFor(shown, exp, notes) {
         const s = String(shown), out = [];
+        if (notes && notes[s]) return String(notes[s]);
         if (/ſ/.test(s)) out.push('ſ (s long) = s');
         if (/ꝑ/.test(s)) out.push('ꝑ = par / per');
         if (/ꝓ/.test(s)) out.push('ꝓ = pro');
@@ -348,16 +372,19 @@
      * → {words: [{exp, got, st: 'ok' | 'faux' | 'manque' | 'trop', hint, shown}], ok, total, score (0–100)}
      */
     function correct(ex, answer) {
-        const P = parseExercise(ex), exp = P.words, got = tokens(answer);
-        const match = (e, g) => e.alts.some(a => wkey(a) === wkey(g)) || wkey(e.shown) === wkey(g) && wkey(e.shown) === wkey(e.exp);
+        const P = parseExercise(ex), exp = P.words, got = tokens(answer), notes = ex.notes || null, L0 = ex.lang ? langOf(ex.lang) : null;
+        // écriture non latine : la lecture en lettres latines est acceptée aussi (« huios » pour υἱός)
+        const tr = L0 && typeof L0.translit === 'function' ? new Map() : null;
+        const latinOf = a => { if (!tr) return []; if (!tr.has(a)) tr.set(a, translitOf(L0, a).map(wkey)); return tr.get(a); };
+        const match = (e, g) => { const k = wkey(g); return e.alts.some(a => wkey(a) === k || latinOf(a).includes(k)) || wkey(e.shown) === k && wkey(e.shown) === wkey(e.exp); };
         const n = exp.length, m = got.length, L = Array.from({length: n + 1}, () => new Array(m + 1).fill(0));
         for (let i = n - 1; i >= 0; i--) for (let j = m - 1; j >= 0; j--) L[i][j] = match(exp[i], got[j]) ? L[i + 1][j + 1] + 1 : Math.max(L[i + 1][j], L[i][j + 1]);
         const words = []; let i = 0, j = 0;
         while (i < n || j < m) {
             if (i < n && j < m && match(exp[i], got[j])) { words.push({exp: exp[i].exp, got: got[j], st: 'ok', shown: exp[i].shown}); i++; j++; continue; }
             // un mot remplacé par un autre (faux) plutôt qu'un oublié + un en trop, quand les deux suites avancent ensemble
-            if (i < n && j < m && L[i + 1][j + 1] === L[i][j]) { words.push({exp: exp[i].exp, got: got[j], st: 'faux', shown: exp[i].shown, hint: hintFor(exp[i].shown, exp[i].exp) || `on lit « ${exp[i].exp} »`}); i++; j++; continue; }
-            if (i < n && (j >= m || L[i + 1][j] >= L[i][j + 1])) { words.push({exp: exp[i].exp, got: '', st: 'manque', shown: exp[i].shown, hint: hintFor(exp[i].shown, exp[i].exp)}); i++; continue; }
+            if (i < n && j < m && L[i + 1][j + 1] === L[i][j]) { words.push({exp: exp[i].exp, got: got[j], st: 'faux', shown: exp[i].shown, hint: hintFor(exp[i].shown, exp[i].exp, notes) || `on lit « ${exp[i].exp} »`}); i++; j++; continue; }
+            if (i < n && (j >= m || L[i + 1][j] >= L[i][j + 1])) { words.push({exp: exp[i].exp, got: '', st: 'manque', shown: exp[i].shown, hint: hintFor(exp[i].shown, exp[i].exp, notes)}); i++; continue; }
             words.push({exp: '', got: got[j], st: 'trop'}); j++;
         }
         const ok = words.filter(w => w.st === 'ok').length;
@@ -368,18 +395,27 @@
     /** les entrées en plus quand elles sont chargées : vieux mots des Trésors, abréviations de la lecture automatique */
     function extraEntries() {
         const out = [], W = root?.LCNDA_EXT?.tresorWords?.WORDS || [], AB = root?.LCNDA_LECTURE?.ABBREV || {};
-        W.forEach(([t, d]) => out.push({t, d, k: 'mot', a: 'general', ex: '', src: 'Trésors'}));
-        Object.entries(AB).forEach(([t, d]) => { if (t.length > 1) out.push({t: `${t}.`, d, k: 'abrev', a: 'recensement', ex: '', src: 'lecture automatique'}); });
+        W.forEach(([t, d]) => out.push({t, d, k: 'vieux', a: 'general', ex: '', src: 'Trésors', lang: 'fr'}));
+        Object.entries(AB).forEach(([t, d]) => { if (t.length > 1) out.push({t: `${t}.`, d, k: 'abrev', a: 'recensement', ex: '', src: 'lecture automatique', lang: 'fr'}); });
         return out;
+    }
+    const KIND_OK = new Set(Object.keys(KINDS));
+    /** les mots d'une langue, remis d'aplomb (sorte, acte, formes en plus, lettres latines pour l'écriture non latine) */
+    function langEntries(l) {
+        return (l.entries || []).filter(e => e && e.t && e.d).map(e => {
+            const alt = [].concat(e.alt || []).map(String);
+            return {t: String(e.t), d: String(e.d), ex: String(e.ex || ''), k: KIND_OK.has(e.k) ? e.k : 'mot', a: ACTE_OF(e.a), lang: l.code, alt,
+                tr: typeof l.translit === 'function' ? translitOf(l, [e.t, ...alt].join(', ')) : []};
+        });
     }
     let mergedCache = null;
     function allEntries() {
-        const extra = extraEntries();
-        if (mergedCache && mergedCache.n === extra.length) return mergedCache.list;
+        const extra = extraEntries(), ls = langs(), key = `${extra.length}|${ls.length}`;
+        if (mergedCache && mergedCache.key === key) return mergedCache.list;
         const seen = new Set(), list = [];
-        const add = e => { const key = `${e.k}|${fold(e.t)}`; const termKeys = fold(e.t).split(/\s*,\s*/).map(x => x.replace(/\.$/, '')); if (seen.has(key) || e.src && termKeys.some(x => seen.has(`term|${x}`))) return; seen.add(key); fold(e.t).split(/\s*,\s*/).forEach(x => seen.add(`term|${x.replace(/\.$/, '')}`)); list.push(e); };
-        ENTRIES.forEach(add); extra.forEach(add);
-        mergedCache = {n: extra.length, list};
+        const add = e => { const key = `${e.lang}|${e.k}|${fold(e.t)}`; const termKeys = fold(e.t).split(/\s*,\s*/).map(x => x.replace(/\.$/, '')); if (seen.has(key) || e.src && termKeys.some(x => seen.has(`term|${x}`))) return; seen.add(key); if (e.lang === 'fr') fold(e.t).split(/\s*,\s*/).forEach(x => seen.add(`term|${x.replace(/\.$/, '')}`)); list.push(e); };
+        ENTRIES.forEach(add); ls.filter(l => !l.builtin).forEach(l => langEntries(l).forEach(add)); extra.forEach(add);
+        mergedCache = {key, list};
         return list;
     }
     /** les morceaux d'un terme (« Vve, vve, veufve » → 3 mots à comparer) */
@@ -394,29 +430,69 @@
         if (words.every(w => hay.includes(w))) return 20 + (words.some(w => termParts.some(p => p.includes(w))) ? 10 : 0);
         return 0;
     }
+    const entryParts = e => parts(e.t).concat(...(e.alt || []).map(parts), e.tr || []);
+    /** les lettres anciennes communes (s long, abréviations…) valent pour toutes les langues en lettres latines */
+    const letterFor = (l, lang) => l.lang === lang || l.lang === 'fr' && (langOf(lang)?.script || 'latine') === 'latine';
+    /** « latin » (ancienne sorte) = la langue latine */
+    const normOpts = (kind, lang) => (kind === 'latin' ? ['', lang || 'la'] : [kind, lang]);
     /**
-     * search('vve', {kind, acte, limit}) → [{type: 'entry'|'letter'|'exercise', score, item}] (du plus proche au moins proche)
-     * kind : latin | formule | abrev | mot | lettre | exercice ; acte : bapteme | mariage | sepulture | recensement | general
+     * search('vve', {kind, acte, lang, limit}) → [{type: 'entry'|'letter'|'exercise', score, item}] (du plus proche au moins proche)
+     * kind : mot | formule | abrev | mois | nombre | parente | metier | vieux | lettre | exercice ; acte : bapteme | mariage | sepulture | recensement | general
+     * lang : fr | la | grc | de | it | es | pl | nl… (rien = toutes)
      */
-    function search(q, {kind = '', acte = '', limit = 0} = {}) {
+    function search(q, {kind = '', acte = '', lang = '', limit = 0} = {}) {
+        [kind, lang] = normOpts(kind, lang);
         const f = fold(q).replace(/\s+/g, ' ').trim(), out = [];
         if (!kind || !['lettre', 'exercice'].includes(kind)) allEntries().forEach(e => {
-            if (kind && e.k !== kind) return; if (acte && e.a !== acte) return;
-            const s = scoreOf(f, fold(`${e.t} ${e.d} ${e.ex}`), parts(e.t)); if (s) out.push({type: 'entry', score: s + (e.src ? -1 : 0), item: e});
+            if (kind && e.k !== kind) return; if (acte && e.a !== acte) return; if (lang && e.lang !== lang) return;
+            const s = scoreOf(f, fold(`${e.t} ${(e.alt || []).join(' ')} ${(e.tr || []).join(' ')} ${e.d} ${e.ex}`), entryParts(e)); if (s) out.push({type: 'entry', score: s + (e.src ? -1 : 0), item: e});
         });
-        if ((!kind || kind === 'lettre') && !acte) LETTERS.forEach(l => { const s = scoreOf(f, fold(`${l.name} ${l.read} ${l.note} ${l.keys}`), parts(`${l.name}, ${l.keys}`).concat(fold(l.keys).split(' '))); if (s) out.push({type: 'letter', score: s - 2, item: l}); });
-        if ((!kind || kind === 'exercice')) EXERCISES.forEach(x => { if (acte && x.acte !== acte) return; const s = scoreOf(f, fold(`${x.title} ${x.tip} ${x.level}`), parts(x.title)); if (s) out.push({type: 'exercise', score: s - 3, item: x}); });
+        const LETTERS = allLetters(), EXERCISES = allExercises();
+        if ((!kind || kind === 'lettre') && !acte) LETTERS.forEach(l => { if (lang && !letterFor(l, lang)) return; const s = scoreOf(f, fold(`${l.name} ${l.read} ${l.note} ${l.keys}`), parts(`${l.name}, ${l.keys}`).concat(fold(l.keys).split(' '))); if (s) out.push({type: 'letter', score: s - 2, item: l}); });
+        if ((!kind || kind === 'exercice')) EXERCISES.forEach(x => { if (acte && x.acte !== acte) return; if (lang && x.lang !== lang) return; const s = scoreOf(f, fold(`${x.title} ${x.tip} ${x.level}`), parts(x.title)); if (s) out.push({type: 'exercise', score: s - 3, item: x}); });
         // sans recherche : le dictionnaire de A à Z, les lettres et les exercices dans leur ordre (du plus courant au plus rare, du plus facile au plus difficile)
         const order = x => (x.type === 'entry' ? 0 : x.type === 'letter' ? 1 + LETTERS.indexOf(x.item) / 1000 : 2 + EXERCISES.indexOf(x.item) / 1000);
         out.sort((a, b) => b.score - a.score || (a.type !== 'entry' || b.type !== 'entry' ? order(a) - order(b) : fold(a.item.t).localeCompare(fold(b.item.t), 'fr')));
         return limit ? out.slice(0, limit) : out;
     }
-    /** combien d'entrées par sorte (pour les pastilles « Tout (n) ») */
-    function counts(q, acte = '') {
-        const r = search(q, {acte}), c = {all: r.length, latin: 0, formule: 0, abrev: 0, mot: 0, lettre: 0, exercice: 0};
-        r.forEach(x => { if (x.type === 'entry') c[x.item.k]++; else if (x.type === 'letter') c.lettre++; else c.exercice++; });
+    /** combien d'entrées par sorte (pour les pastilles « Tout (n) ») ; latin = les mots de la langue latine */
+    function counts(q, acte = '', lang = '') {
+        const r = search(q, {acte, lang}), c = {all: r.length, lettre: 0, exercice: 0, latin: 0};
+        Object.keys(KINDS).forEach(k => { c[k] = 0; });
+        r.forEach(x => { if (x.type === 'entry') { c[x.item.k] = (c[x.item.k] || 0) + 1; if (x.item.lang === 'la') c.latin++; } else if (x.type === 'letter') c.lettre++; else c.exercice++; });
         return c;
     }
+    /** combien par langue, pour la sorte d'onglet choisie : {all, fr, la, de…} */
+    function langCounts(q, {kind = '', acte = '', type = 'entry'} = {}) {
+        const k = type === 'letter' ? 'lettre' : type === 'exercise' ? 'exercice' : kind;
+        const r = search(q, {kind: k, acte}).filter(x => x.type === type), c = {all: r.length};
+        langs().forEach(l => { c[l.code] = type === 'letter' ? r.filter(x => letterFor(x.item, l.code)).length : 0; });
+        if (type !== 'letter') r.forEach(x => { c[x.item.lang] = (c[x.item.lang] || 0) + 1; });
+        return c;
+    }
+    /**
+     * known('ist getauft worden … Wittwe', 'de') → [{word, item}] : les mots du dictionnaire de cette langue trouvés dans le texte
+     * (mots d'au moins 3 lettres, formes et formes en plus ; formules de plusieurs mots si elles y sont entières), dans l'ordre du texte.
+     */
+    function known(text, lang, {limit = 30} = {}) {
+        if (!lang) return [];
+        const words = String(text || '').split(/[^\p{L}\p{M}'’ʹ͵0-9-]+/u).filter(Boolean), out = [], seen = new Set();
+        const idx = new Map();
+        allEntries().filter(e => e.lang === lang && e.k !== 'formule').forEach(e => entryParts(e).forEach(p => { if (p.length >= 3 && !/\s/.test(p) && !idx.has(p)) idx.set(p, e); }));
+        const stems = [...idx.keys()].filter(p => p.length >= 5);
+        // les expressions de 2 ou 3 mots (« działo się », « zoon van ») : entières dans le texte
+        const flat = ` ${words.map(w => fold(w)).join(' ')} `;
+        allEntries().filter(e => e.lang === lang && e.k !== 'formule').forEach(e => { if (seen.has(e)) return; const p = entryParts(e).find(x => /\s/.test(x) && x.split(' ').length <= 3 && !/…/.test(x) && flat.includes(` ${x} `)); if (p) { const at = flat.indexOf(` ${p} `), i = flat.slice(0, at + 1).split(' ').length - 2, n = p.split(' ').length; seen.add(e); out.push({word: words.slice(i, i + n).join(' ') || p, item: e, at}); } });
+        words.forEach(w => { const k = fold(w).replace(/['’ʹ͵.]/g, ''); // la forme exacte, sinon une terminaison en plus (ehelich → ehelicher, filius → filii non)
+            let e = idx.get(k); if (!e && k.length >= 6) { const st = stems.find(p => k.startsWith(p) && k.length - p.length <= 3); if (st) e = idx.get(st); }
+            if (e && !seen.has(e)) { seen.add(e); out.push({word: w, item: e, at: flat.indexOf(` ${k}`)}); } });
+        return out.sort((a, b) => a.at - b.at).slice(0, limit).map(({word, item}) => ({word, item}));
+    }
 
-    return {fold, ENTRIES, KINDS, ACTES, LETTERS, EXERCISES, G, glyphSvg, parseExercise, correct, tokens, search, counts, allEntries, _reset: () => { mergedCache = null; }};
+    const api = {fold, ENTRIES, KINDS, ACTES, G, glyphSvg, glyphs, parseExercise, correct, tokens, search, counts, langCounts, known, allEntries, allLetters, allExercises,
+        langs, langOf, langForOcr, translitOf, _reset: () => { mergedCache = null; langCache = null; glyphCache = null; nodeLangs = null; }};
+    // LETTERS et EXERCISES : relus à chaque fois (les langues s'ajoutent en chargeant leur fichier)
+    Object.defineProperty(api, 'LETTERS', {get: allLetters, enumerable: true});
+    Object.defineProperty(api, 'EXERCISES', {get: allExercises, enumerable: true});
+    return api;
 });

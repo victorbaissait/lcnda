@@ -182,6 +182,7 @@ function semaine_pistes(PDO $pdo): array
         }
     }
     if (function_exists('ouc_semaine_rows')) { foreach (ouc_semaine_rows($pdo) as $r) { $out[] = $r; } } // 🧩 un mur de brique par semaine (lib/ou_chercher.php)
+    if (function_exists('preuve_semaine_rows')) { foreach (preuve_semaine_rows($pdo) as $r) { $out[] = $r; } } // 🛡 un lien fragile par semaine (lib/preuve.php)
     return $out;
 }
 
@@ -357,6 +358,7 @@ function semaine_parse_key(string $key): array
     if (preg_match('/^(courrier|visite|piste|hypo|socface|entraide):(\d{1,10})$/', $key, $m)) { return [$m[1], (int) $m[2], '']; }
     if (preg_match('/^manque:\d{1,10}:[a-z]{2,20}:\d{1,4}$/', $key)) { return ['manque', 0, '']; }
     if (preg_match('/^mur:\d{1,10}:\d{6}$/', $key)) { return ['mur', 0, '']; } // 🧩 mur de la semaine : une marque « fait »
+    if (preg_match('/^solidite:\d{1,10}:\d{1,10}:\d{6}$/', $key)) { return ['solidite', 0, '']; } // 🛡 lien fragile de la semaine : une marque « fait »
     if (preg_match('/^controle:[\p{L}\p{N}:_.,\- ]{1,160}$/u', $key)) { return ['controle', 0, '']; }
     throw new RuntimeException('Ligne inconnue.');
 }
@@ -430,7 +432,7 @@ function semaine_mark(PDO $pdo, array $data): array
                 $prev['status'] = (string) $r['status']; $label = 'Demande résolue';
                 break;
             default: // hypothèse, recherche proposée, contrôle : une marque « fait »
-                $marks[$key] = ['s' => 'done', 'at' => $today, 't' => $title ?: $key, 'l' => ['hypo' => 'Hypothèse revue', 'manque' => 'Recherche faite', 'controle' => 'Alerte revue', 'mur' => 'Piste du mur faite'][$sort] ?? 'Fait', 'o' => $open];
+                $marks[$key] = ['s' => 'done', 'at' => $today, 't' => $title ?: $key, 'l' => ['hypo' => 'Hypothèse revue', 'manque' => 'Recherche faite', 'controle' => 'Alerte revue', 'mur' => 'Piste du mur faite', 'solidite' => 'Lien vérifié'][$sort] ?? 'Fait', 'o' => $open];
                 semaine_marks_save($pdo, $marks);
                 return ['ok' => true, 'key' => $key, 'prev' => $prev, 'label' => $marks[$key]['l']];
         }

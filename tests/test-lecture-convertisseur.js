@@ -176,7 +176,8 @@ require 'lib/bootstrap.php'; db(); echo 'ok';`], { cwd: appRoot, encoding: 'utf8
         ok(/Tout \(\d+\)/.test(await page.textContent('dialog[open] .la-filters')), 'pastilles avec le nombre');
         await page.fill('dialog[open] .la-search input', ''); await page.type('dialog[open] .la-search input', 'filius'); await page.waitForFunction(() => /filius/.test(document.querySelector('dialog[open] .la-dict')?.textContent || ''), null, {timeout: 5000}).catch(() => {});
         { const t = await page.textContent('dialog[open] .la-body'); ok(/fils/.test(t), 'recherche C1 : filius — ' + t.slice(0, 120)); }
-        await page.click('dialog[open] [data-la-kind="latin"]'); ok(await page.$eval('dialog[open] [data-la-kind="latin"]', b => b.classList.contains('is-active')), 'filtre Latin');
+        await page.click('dialog[open] [data-la-lang="la"]'); ok(await page.$eval('dialog[open] [data-la-lang="la"]', b => b.classList.contains('is-active')), 'filtre Langue : Latin');
+        await page.click('dialog[open] [data-la-lang=""]'); // le filtre « Langue » vaut pour les trois onglets : on revient à toutes les langues
         await page.keyboard.press('Enter'); ok(await page.$('dialog[open] .la') !== null, 'Entrée ne ferme pas la fenêtre');
         await shot(page, 'aide-dictionnaire-1440');
         await page.fill('dialog[open] .la-search input', ''); await page.click('dialog[open] [data-la-tab="lettres"]'); await page.waitForSelector('dialog[open] .la-letter svg.la-glyph');
