@@ -28,6 +28,7 @@
     if (root) root.LCNDA_SOURCES_OUVERTES_3 = api;
 })(typeof window !== 'undefined' ? window : null, function () {
     'use strict';
+    const i18n = (s, v) => (typeof window !== 'undefined' && window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js (dans Node : le français)
     const CHECKED = '2026-11-09';
     const MENTION = 'Lu sur un site d’archives en ligne et recopié : à vérifier sur le document';
     const clean = s => String(s ?? '').replace(/[\u0000-\u001f\u007f]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 200);
@@ -364,8 +365,8 @@
         switch (kind) {
             case 'cicr':
                 add('BIRT', 'Naissance', f.birth_date, f.birth_place, '');
-                add('EVEN', 'Fait prisonnier', f.capture_date, f.capture_place, [f.unit && `Unité : ${f.unit}`, f.rank && `Grade : ${f.rank}`, f.camp && `Camp : ${f.camp}`].filter(Boolean).join(' · '));
-                blocks.push({block: 'military', label: 'Militaire', data: {unit: f.unit || '', rank: f.rank || '', matricule: f.matricule || '', note: f.camp ? `Prisonnier, camp : ${f.camp}` : 'Prisonnier de guerre'}});
+                add('EVEN', 'Fait prisonnier', f.capture_date, f.capture_place, [f.unit && i18n('Unité : {nm}', {nm: f.unit}), f.rank && i18n('Grade : {nm}', {nm: f.rank}), f.camp && i18n('Camp : {nm}', {nm: f.camp})].filter(Boolean).join(' · '));
+                blocks.push({block: 'military', label: 'Militaire', data: {unit: f.unit || '', rank: f.rank || '', matricule: f.matricule || '', note: f.camp ? i18n('Prisonnier, camp : {nm}', {nm: f.camp}) : 'Prisonnier de guerre'}});
                 break;
             case 'elu':
                 add('BIRT', 'Naissance', f.birth_date, f.birth_place, ''); add('DEAT', 'Décès', f.death_date, f.death_place, '');
@@ -373,7 +374,7 @@
                 if (f.job) add('OCCU', 'Profession', '', '', f.job);
                 break;
             case 'brevet':
-                blocks.push({block: 'sciences', label: 'Inventions (brevet)', data: {kind: 'brevet', title: f.title || '', number: f.number || '', date: f.date || '', country: 'France', note: [f.duration && `Durée : ${f.duration}`, f.address && `Adresse : ${f.address}`].filter(Boolean).join(' · ')}});
+                blocks.push({block: 'sciences', label: 'Inventions (brevet)', data: {kind: 'brevet', title: f.title || '', number: f.number || '', date: f.date || '', country: 'France', note: [f.duration && i18n('Durée : {nm}', {nm: f.duration}), f.address && i18n('Adresse : {nm}', {nm: f.address})].filter(Boolean).join(' · ')}});
                 if (f.job) add('OCCU', 'Profession', f.date, '', f.job);
                 if (f.address) add('RESI', 'Domicile', f.date, f.address, 'D’après le brevet');
                 break;
@@ -382,36 +383,36 @@
                 break;
             case 'polytechnique':
                 add('BIRT', 'Naissance', f.birth_date, f.birth_place, '');
-                blocks.push({block: 'education', label: 'Diplômes et formation', data: {diploma: 'École polytechnique', title: f.promotion ? `Promotion ${f.promotion}` : '', year: yearOf(f.promotion || f.entry) || '', school: 'École polytechnique', cote: f.matricule || '', note: f.exit ? `Sortie : ${f.exit}` : ''}});
+                blocks.push({block: 'education', label: 'Diplômes et formation', data: {diploma: 'École polytechnique', title: f.promotion ? `Promotion ${f.promotion}` : '', year: yearOf(f.promotion || f.entry) || '', school: 'École polytechnique', cote: f.matricule || '', note: f.exit ? i18n('Sortie : {nm}', {nm: f.exit}) : ''}});
                 break;
             case 'cths':
                 add('BIRT', 'Naissance', f.birth_date, '', ''); add('DEAT', 'Décès', f.death_date, '', '');
                 if (f.job) add('OCCU', 'Profession', '', '', f.job);
-                if (f.societies) blocks.push({block: 'notes', label: 'Note', data: {text: `Membre de sociétés savantes : ${f.societies}`}});
+                if (f.societies) blocks.push({block: 'notes', label: 'Note', data: {text: i18n('Membre de sociétés savantes : {nm}', {nm: f.societies})}});
                 break;
             case 'joconde':
                 blocks.push({block: 'artistic_works', label: 'Œuvre', data: {title: f.title || '', date: f.date || '', museum: f.museum || '', inventory: f.inventory || '', technique: f.technique || '', dims: f.dims || ''}});
                 break;
             case 'findagrave':
                 add('BIRT', 'Naissance', f.birth, '', ''); add('DEAT', 'Décès', f.death, '', '');
-                add('BURI', 'Inhumation', '', f.cemetery || f.burial, [f.plot && `Emplacement : ${f.plot}`, f.memorial && `Find a Grave n° ${f.memorial}`].filter(Boolean).join(' · '));
+                add('BURI', 'Inhumation', '', f.cemetery || f.burial, [f.plot && i18n('Emplacement : {nm}', {nm: f.plot}), f.memorial && i18n('Find a Grave n° {nm}', {nm: f.memorial})].filter(Boolean).join(' · '));
                 break;
             case 'freecen':
-                add('CENS', 'Recensement', f.year, f.place, [f.relation && `Lien : ${f.relation}`, f.age && `Âge : ${f.age}`, f.job && `Profession : ${f.job}`, f.birth_place && `Né à ${f.birth_place}${f.birth_county ? ` (${f.birth_county})` : ''}`].filter(Boolean).join(' · '));
+                add('CENS', 'Recensement', f.year, f.place, [f.relation && i18n('Lien : {nm}', {nm: f.relation}), f.age && i18n('Âge : {nm}', {nm: f.age}), f.job && i18n('Profession : {nm}', {nm: f.job}), f.birth_place && `Né à ${f.birth_place}${f.birth_county ? ` (${f.birth_county})` : ''}`].filter(Boolean).join(' · '));
                 break;
             case 'juste':
-                blocks.push({block: 'awards', label: 'Concours et récompenses', data: {kind: 'decoration', title: 'Juste parmi les nations', date: f.date || '', org: 'Yad Vashem', note: [f.country && `Pays : ${f.country}`, f.file && `Dossier : ${f.file}`].filter(Boolean).join(' · ')}});
+                blocks.push({block: 'awards', label: 'Concours et récompenses', data: {kind: 'decoration', title: 'Juste parmi les nations', date: f.date || '', org: 'Yad Vashem', note: [f.country && i18n('Pays : {nm}', {nm: f.country}), f.file && i18n('Dossier : {nm}', {nm: f.file})].filter(Boolean).join(' · ')}});
                 break;
             case 'arolsen':
                 add('BIRT', 'Naissance', f.birth_date, f.birth_place, '');
                 if (f.camp || f.document) add('EVEN', 'Document des Arolsen Archives', '', f.camp, [f.document, f.number && `N° ${f.number}`, f.ref && `Réf. ${f.ref}`].filter(Boolean).join(' · '));
                 break;
             case 'electeur':
-                if (f.address) add('RESI', 'Domicile (liste électorale)', f.year, f.address, f.job ? `Profession : ${f.job}` : '');
+                if (f.address) add('RESI', 'Domicile (liste électorale)', f.year, f.address, f.job ? i18n('Profession : {nm}', {nm: f.job}) : '');
                 break;
             case 'acte': {
                 const t = fold(f.type || ''); const tag = (ACT_TAGS.find(([re]) => re.test(t)) || [null, 'EVEN'])[1];
-                add(tag, f.type || 'Acte', f.date, f.place, [f.father && `Père : ${f.father}`, f.mother && `Mère : ${f.mother}`, f.spouse && `Conjoint : ${f.spouse}`, f.cote && `Cote : ${f.cote}`].filter(Boolean).join(' · '));
+                add(tag, f.type || 'Acte', f.date, f.place, [f.father && i18n('Père : {nm}', {nm: f.father}), f.mother && i18n('Mère : {nm}', {nm: f.mother}), f.spouse && i18n('Conjoint : {nm}', {nm: f.spouse}), f.cote && i18n('Cote : {nm}', {nm: f.cote})].filter(Boolean).join(' · '));
                 break;
             }
             default: break;

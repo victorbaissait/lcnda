@@ -6,6 +6,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const ART = window.LCNDA_ART, ext = window.LCNDA_EXT || {}, BL = ext.blocs; if (!ART?.define || !BL?.open) return;
     const A = () => window.LCNDA_APP, U = ART.util, esc = U.esc;
 
@@ -32,7 +33,7 @@
         meta: (ctx, it) => { const n = linked(ctx, it, 'school').length; return n ? esc(U.plural(n, 'passage')) : ''; }, text: (ctx, it) => U.plural(linked(ctx, it, 'school').length, 'passage')};
 
     ART.define({key: 'school_step', icon: '🏫', label: 'Étape de scolarité', many: 'Étapes de scolarité', tab: 'Parcours', fem: true, domain: 'blocs', hidden: true,
-        eyebrow: it => `Scolarité et formation · ${BL.bare(lab(STYPES, it.data?.stype)) || 'étape'}`,
+        eyebrow: it => `${i18n('Scolarité et formation')} · ${i18n(BL.bare(lab(STYPES, it.data?.stype)) || 'étape')}`,
         newData: () => ({stype: 'ecole'}),
         titleHint: 'Donne un nom à cette étape, ou choisis l’établissement.',
         askWho: 'Le parcours de qui ?',
@@ -98,7 +99,7 @@
     });
 
     ART.define({key: 'school', icon: '🏛', label: 'Établissement', many: 'Établissements', tab: 'Établissements', domain: 'blocs', hidden: true,
-        eyebrow: it => `Établissement · ${BL.bare(lab(ETYPES, it.data?.etype)) || 'école'}`,
+        eyebrow: it => `${i18n('Établissement')} · ${i18n(BL.bare(lab(ETYPES, it.data?.etype)) || 'école')}`,
         newData: () => ({etype: ''}),
         titleHint: 'Il faut le nom de l’établissement.',
         askWho: 'À la fiche de qui ranger cet établissement ? (une personne qui y est passée)',
@@ -154,7 +155,7 @@
                 ${teach.length ? `<div class="bl-line"><small class="ar-g">${teach.length > 1 ? 'Maîtres' : 'Maître'} :</small> ${teach.map(r => pchip(r, st)).join('')}</div>` : ''}</div>` : ''}
             ${docs.length ? `<div class="ar-side"><h5>📒 Livrets et bulletins</h5>${docs.slice(0, 12).map(m => `<div><a class="ar-ochip" href="${esc(BL.mediaSrc(m))}" target="_blank" rel="noopener"><i>${BL.isImg(m.f) ? '🖼' : '📄'}</i>${esc(m.title || m.f)}</a></div>`).join('')}</div>` : ''}
             ${cited.length ? `<div class="ar-side"><h5>👥 Camarade, maître… chez d’autres</h5>${cited.slice(0, 12).map(it => `<div><button type="button" class="ar-ochip is-link" data-bl-item="${it.id}" data-bl-kind="${esc(it.kind)}" data-pid="${pid}"><i>${esc(ART.defs[it.kind]?.icon || '🏫')}</i>${esc(it.title)}${it.year ? ` (${esc(it.year)})` : ''}</button> <small class="ar-g">${esc([it.my_roles?.join(', '), it.owner && `avec ${it.owner}`].filter(Boolean).join(' · '))}</small></div>`).join('')}</div>` : ''}`;
-        const main = `${steps.length ? `<div class="bl-sec0"><b>🏫 Parcours scolaire et formation · ${esc(st.personTitle(pid) || [p.first_name, String(p.last_name || '').toLocaleUpperCase('fr-FR')].filter(Boolean).join(' '))}</b>${gantt(steps, pid)}</div>` : ''}
+        const main = `${steps.length ? `<div class="bl-sec0"><b>🏫 ${i18n('Parcours scolaire et formation')} · ${esc(st.personTitle(pid) || [p.first_name, String(p.last_name || '').toLocaleUpperCase('fr-FR')].filter(Boolean).join(' '))}</b>${gantt(steps, pid)}</div>` : ''}
             <div class="bl-sec"><div class="ar-sh"><b>🎓 Diplômes</b><span class="spacer"></span>${locked ? '' : `<button type="button" class="button small secondary" data-bl-new="diploma" data-pid="${pid}">＋ Ajouter</button>`}</div>${dips.length ? diplomasHtml(dips, pid) : '<p class="ar-g">Aucun diplôme noté.</p>'}</div>`;
         return `<div class="bl-edu ${side.trim() ? '' : 'no-side'}"><div class="bl-edu-main">${main}</div>${side.trim() ? `<div class="bl-edu-side">${side}</div>` : ''}</div>`;
     }

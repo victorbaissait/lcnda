@@ -34,6 +34,7 @@
     if (root) root.LCNDA_SOURCES_OUVERTES_7 = api;
 })(typeof window !== 'undefined' ? window : null, function () {
     'use strict';
+    const i18n = (s, v) => (typeof window !== 'undefined' && window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js (dans Node : le français)
     const CHECKED = '2026-11-09';
     const MENTION = 'Lu sur un site d’archives en ligne et recopié : à vérifier sur le document';
     const clean = s => String(s ?? '').replace(/[\u0000-\u001f\u007f]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 200);
@@ -335,7 +336,7 @@
                 const already = UNIQUE.includes(tag) && !!has[tag];
                 out.push({id: 'event', what: 'event', tag, label: {BIRT: 'Naissance', CHR: 'Baptême', DEAT: 'Décès', BURI: 'Inhumation', RESI: 'Domicile', OCCU: 'Métier', EVEN: clean(f.tag_text) || 'Événement'}[tag] || 'Événement',
                     date: clean(f.date), place: clean(f.place), checked: !already, exists: already ? 'un événement de cette sorte' : '',
-                    why: [f.father && `Père : ${clean(f.father)}`, f.mother && `Mère : ${clean(f.mother)}`].filter(Boolean).join(' · ')});
+                    why: [f.father && i18n('Père : {nm}', {nm: clean(f.father)}), f.mother && i18n('Mère : {nm}', {nm: clean(f.mother)})].filter(Boolean).join(' · ')});
             }
         } else if (kind === 'juste') {
             out.push({id: 'award', what: 'award', label: '🕯 Distinction « Juste parmi les nations »', date: clean(f.date), place: clean(f.place), checked: !ctx.hasJuste,

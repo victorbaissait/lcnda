@@ -28,6 +28,7 @@
     if (root) root.LCNDA_SOCFACE = api;
 })(typeof window !== 'undefined' ? window : null, function () {
     'use strict';
+    const i18n = (s, v) => (typeof window !== 'undefined' && window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js (sans fenêtre dans Node : le français)
     const YEARS = [1836, 1841, 1846, 1851, 1856, 1861, 1866, 1872, 1876, 1881, 1886, 1891, 1896, 1901, 1906, 1911, 1921, 1926, 1931, 1936];
     const BASE = 'https://francearchives.gouv.fr/basedenoms_recensement';
     /** l'adresse est vérifiée en partie : nom, prénom et lieu sur l'adresse réelle ; années et genre d'après le code du site */
@@ -201,10 +202,10 @@
         }
         const all = raw.map(rowFrom);
         const rows = all.filter(isCensus), skipped = all.length - rows.length;
-        if (skipped) notices.push({kind: 'info', text: `${skipped} ligne${skipped > 1 ? 's' : ''} laissée${skipped > 1 ? 's' : ''} de côté : ce ne sont pas des recensements.`});
+        if (skipped) notices.push({kind: 'info', text: (skipped > 1 ? i18n('{n} lignes laissées de côté : ce ne sont pas des recensements.', {n: skipped}) : i18n('{n} ligne laissée de côté : ce ne sont pas des recensements.', {n: skipped}))});
         if (format === 'fa-export' || format === 'fa-notice') notices.push({kind: 'info', text: 'Ce fichier ne dit pas qui vit avec qui (le CSV de FranceArchives ne contient pas le ménage) : les personnes de même nom, même commune et même année sont mises ensemble. Décoche celles qui ne vont pas avec les autres. Pour avoir le ménage exact, copie le texte de la fiche (avec « Voir les autres membres du ménage »).'});
         const noYear = rows.filter(r => !r.year).length;
-        if (noYear) notices.push({kind: 'warn', text: `${noYear} ligne${noYear > 1 ? 's' : ''} sans année de recensement : elle${noYear > 1 ? 's' : ''} ne ser${noYear > 1 ? 'ont' : 'a'} pas importée${noYear > 1 ? 's' : ''}.`});
+        if (noYear) notices.push({kind: 'warn', text: noYear > 1 ? i18n('{n} lignes sans année de recensement : elles ne seront pas importées.', {n: noYear}) : i18n('{n} ligne sans année de recensement : elle ne sera pas importée.', {n: noYear})});
         return {format, rows: rows.filter(r => r.year), skipped, households: group(rows.filter(r => r.year)), notices};
     }
 

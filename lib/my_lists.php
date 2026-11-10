@@ -887,7 +887,7 @@ function my_list_record_clean(PDO $pdo, array $fields, array $in, bool $geocode)
         }
         $out[$f['key']] = my_list_record_value($pdo, $f, $in[$f['key']] ?? null, $geocode);
         $v = $out[$f['key']];
-        if ($f['required'] && ($v === '' || $v === [] || ($f['type'] === 'place' && $v['text'] === ''))) { throw new RuntimeException('Le champ « ' . $f['label'] . ' » est à remplir.'); }
+        if ($f['required'] && ($v === '' || $v === [] || ($f['type'] === 'place' && $v['text'] === ''))) { throw new RuntimeException(i18n_t('Le champ « {label} » est à remplir.', ['label' => $f['label']])); }
     }
     return $out;
 }

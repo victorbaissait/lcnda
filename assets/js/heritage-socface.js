@@ -18,6 +18,7 @@
     const LX = () => window.LCNDA_LECTURE;
     const S = () => A().state;
     const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const api = (...a) => A().api(...a);
     const toast = (...a) => A().toast(...a);
     const plural = (n, one, many) => A().plural ? A().plural(n, one, many) : `${n} ${n > 1 ? many || one + 's' : one}`;
@@ -42,7 +43,7 @@
     const archivesExtra = (e, p = {}) => {
         if (e?.id !== 'socface' || !SF()?.censusYears) return '';
         const ys = SF().censusYears(Math.max(1836, Number(p.y1) || 1836), Math.min(1936, Number(p.y2) || 1936));
-        return `<small class="ui-hint sf-years">🧾 Recensements : ${esc(ys.length ? ys.join(', ') : 'aucun entre ces deux années')} — transcription automatique (SocFace) à vérifier sur l’image ; ensuite « ⤒ Importer » le CSV.</small>`;
+        return `<small class="ui-hint sf-years">${i18n('🧾 Recensements : {years} — transcription automatique (SocFace) à vérifier sur l’image ; ensuite « ⤒ Importer » le CSV.', {years: esc(ys.length ? ys.join(', ') : i18n('aucun entre ces deux années'))})}</small>`;
     };
 
     /* ═════ Le contexte pour repérer les erreurs de lecture (prénoms, noms, communes, métiers) ═════ */
@@ -66,10 +67,10 @@
             const ec = cands.flatMap(c => (c.ecarts || []).map(e => `<li class="sf-ecart is-${esc(e.level)}" data-sf-ec-for="${hi}:${mi}:${c.id}" hidden>${LEVEL[e.level]?.[0] || '🟡'} ${esc(e.text)}</li>`)).join('');
             return `<tr data-sf-row="${hi}:${mi}">
                 <td><input type="checkbox" data-sf-keep="${hi}:${mi}" ${m.skip ? '' : 'checked'} aria-label="Importer cette ligne"></td>
-                <td><b>${esc(m.first)} ${esc(String(m.last || '').toUpperCase())}</b>${m.partial ? ' <small class="muted">(cité sur la fiche)</small>' : ''}<br><small class="muted">${esc([m.role, genderTxt(m.gender)].filter(Boolean).join(' · '))}</small></td>
+                <td><b>${esc(m.first)} ${esc(String(m.last || '').toUpperCase())}</b>${m.partial ? ` <small class="muted">${i18n('(cité sur la fiche)')}</small>` : ''}<br><small class="muted">${esc([m.role, genderTxt(m.gender)].filter(Boolean).join(' · '))}</small></td>
                 <td>${esc(m.age ? m.age + ' ans' : '')}${m.birth_year || m.birth_place ? `<br><small class="muted">${esc(['né' + (m.gender === 'f' ? 'e' : '') + (m.birth_year ? ' en ' + m.birth_year : ''), m.birth_place ? 'à ' + m.birth_place : ''].filter(Boolean).join(' '))}</small>` : ''}</td>
                 <td>${esc(m.occupation)}</td>
-                <td>${cands.length ? sel : '<span class="empty-line"><span class="empty-line-ico" aria-hidden="true">👤</span><span class="empty-line-text">Aucune fiche proche : la ligne entre sans fiche.</span></span>'}${already.length ? `<br><small class="muted">ⓘ déjà un recensement de ${h.year} dans sa fiche : celui-ci s’ajoute à côté, rien n’est remplacé.</small>` : ''}${ec ? `<ul class="sf-ecarts">${ec}</ul>` : ''}</td>
+                <td>${cands.length ? sel : '<span class="empty-line"><span class="empty-line-ico" aria-hidden="true">👤</span><span class="empty-line-text">Aucune fiche proche : la ligne entre sans fiche.</span></span>'}${already.length ? `<br><small class="muted">${i18n('ⓘ déjà un recensement de {year} dans sa fiche : celui-ci s’ajoute à côté, rien n’est remplacé.', {year: String(h.year)})}</small>` : ''}${ec ? `<ul class="sf-ecarts">${ec}</ul>` : ''}</td>
                 <td>${ds.length ? `<button type="button" class="button small secondary" data-sf-doubts="${hi}:${mi}">${ds.some(d => d.level === 'orange') ? '🟠' : '🟡'} ${plural(ds.length, 'doute')}</button>` : '<small class="muted">—</small>'}</td></tr>`;
         };
         const previewHtml = () => state.households.map((h, hi) => {
@@ -96,7 +97,7 @@
             return {count: parsed.households.length, noun: 'foyer de recensement', many: 'foyers de recensement',
                 summaryHtml: `<b>${esc(plural(parsed.households.length, 'foyer de recensement', 'foyers de recensement'))}</b> (${esc(plural(people, 'personne'))})`,
                 notices: [{kind: 'warn', text: mention() + '. Chaque foyer reste « À vérifier » jusqu’à ce que tu coches « Vérifié sur l’image ».'}, ...parsed.notices,
-                    ...(nDoubts ? [{kind: 'info', text: `${plural(nDoubts, 'lecture douteuse', 'lectures douteuses')} repérée${nDoubts > 1 ? 's' : ''} (lettres ou chiffres qui se ressemblent, abréviations…) : clique sur « doute » pour voir pourquoi et corriger avant d’importer.`}] : []),
+                    ...(nDoubts ? [{kind: 'info', text: nDoubts > 1 ? i18n('{count} repérées (lettres ou chiffres qui se ressemblent, abréviations…) : clique sur « doute » pour voir pourquoi et corriger avant d’importer.', {count: plural(nDoubts, 'lecture douteuse', 'lectures douteuses')}) : i18n('{count} repérée (lettres ou chiffres qui se ressemblent, abréviations…) : clique sur « doute » pour voir pourquoi et corriger avant d’importer.', {count: plural(nDoubts, 'lecture douteuse', 'lectures douteuses')})}] : []),
                     {kind: 'info', text: 'Rien n’est relié à une fiche sans ton accord : choisis « Relier à… » seulement si c’est bien la même personne. Aucune donnée de tes fiches n’est remplacée.'}],
                 preview: `<div class="sf-preview">${previewHtml()}</div>`,
                 onShow: body => bindPreview(body)};
@@ -126,7 +127,7 @@
             const r = await post('socface_import', {households: hs});
             const refresh = () => { window.dispatchEvent(new CustomEvent('lcnda:socface-changed')); if (S().module !== 'recherche') { try { A().refreshScreen?.(); } catch (_) {} } };
             refresh();
-            const msg = `${plural(r.created, 'foyer importé', 'foyers importés')}${r.linked ? `, ${plural(r.linked, 'fiche reliée', 'fiches reliées')}` : ''}${r.skipped ? ` (${plural(r.skipped, 'déjà là', 'déjà là')})` : ''} — à vérifier sur l’image.`;
+            const msg = `${plural(r.created, 'foyer importé', 'foyers importés')}${r.linked ? `, ${plural(r.linked, 'fiche reliée', 'fiches reliées')}` : ''}${r.skipped ? ` (${plural(r.skipped, 'déjà là', 'déjà là')})` : ''} ${i18n('— à vérifier sur l’image.')}`;
             return {message: msg, undo: async () => { await post('socface_undo', {batch: r.batch}); refresh(); }};
         };
         return UI().openImportDialog({title: 'Importer des recensements SocFace', accept: '.csv,.txt,.tsv,text/csv,text/plain', what: 'CSV de FranceArchives ou texte d’une fiche',
@@ -168,11 +169,11 @@
             dlg.innerHTML = `<form method="dialog"><div class="modal-head"><div><span class="eyebrow">RECENSEMENT DE ${h.year}${h.commune || h.place ? ' · ' + esc(String(h.commune || h.place).toUpperCase()) : ''} · LIGNE ${row + 1} SUR ${rows.length}</span><h2>🔍 Vérifier cette ligne SocFace</h2></div><button type="button" class="icon-button" data-x aria-label="Fermer">×</button></div>
                 <div class="h-dialog-body sf-verify-body"><div class="sf-verify-main">
                     ${UI().notice('warn', mention() + '.')}
-                    <p class="sf-verify-who"><b>${esc(m.first)} ${esc(String(m.last || '').toUpperCase())}</b>${m.person_name ? ` · relié à <button type="button" class="table-link" data-open-person="${Number(m.person_id)}">${esc(m.person_name)}</button>` : ''}</p>
+                    <p class="sf-verify-who"><b>${esc(m.first)} ${esc(String(m.last || '').toUpperCase())}</b>${m.person_name ? ` · ${i18n('relié à')} <button type="button" class="table-link" data-open-person="${Number(m.person_id)}">${esc(m.person_name)}</button>` : ''}</p>
                     <div class="data-table-wrap"><table class="data-table sf-verify-table"><thead><tr><th>Case</th><th>Lu par SocFace</th><th>Doute</th></tr></thead><tbody>
                     ${fields.map(f => { const fd = ds.filter(d => d.field === f || (f === 'age' && d.field === 'birth_year' && !fields.includes('birth_year')));
-                        return `<tr class="${fd.some(d => d.level === 'orange') ? 'is-orange' : fd.length ? 'is-yellow' : ''}"><td class="sf-k">${esc(FIELD[f] || f)}</td><td><b>${esc(val(f))}</b>${orig[f] !== undefined && orig[f] !== val(f) ? `<br><small class="muted">lu d’abord : « ${esc(orig[f])} »</small>` : ''}</td>
-                        <td>${fd.length ? fd.map(d => `<p class="sf-doubt"><span title="${esc(LEVEL[d.level]?.[1] || '')}">${LEVEL[d.level]?.[0] || '🟡'}</span> ${esc(d.why)}</p>${(d.proposals || []).length ? `<p class="sf-props">${d.proposals.map(p => `<button type="button" class="button small secondary" data-sf-apply="${esc(p.field || d.field)}" data-sf-value="${esc(p.value)}" title="${esc(p.why || '')}">${p.field && p.field !== d.field ? `${esc(FIELD[p.field] || p.field)} : « ${esc(p.value)} »` : `Utiliser « ${esc(p.value)} »`}</button>`).join('')}</p>` : ''}`).join('') : '<small class="muted">✓ rien de suspect</small>'}</td></tr>`; }).join('')}
+                        return `<tr class="${fd.some(d => d.level === 'orange') ? 'is-orange' : fd.length ? 'is-yellow' : ''}"><td class="sf-k">${esc(FIELD[f] || f)}</td><td><b>${esc(val(f))}</b>${orig[f] !== undefined && orig[f] !== val(f) ? `<br><small class="muted">${i18n('lu d’abord : « {val} »', {val: esc(orig[f])})}</small>` : ''}</td>
+                        <td>${fd.length ? fd.map(d => `<p class="sf-doubt"><span title="${esc(LEVEL[d.level]?.[1] || '')}">${LEVEL[d.level]?.[0] || '🟡'}</span> ${esc(d.why)}</p>${(d.proposals || []).length ? `<p class="sf-props">${d.proposals.map(p => `<button type="button" class="button small secondary" data-sf-apply="${esc(p.field || d.field)}" data-sf-value="${esc(p.value)}" title="${esc(p.why || '')}">${p.field && p.field !== d.field ? `${esc(i18n(FIELD[p.field] || p.field))} : « ${esc(p.value)} »` : i18n('Utiliser « {val} »', {val: esc(p.value)})}</button>`).join('')}</p>` : ''}`).join('') : '<small class="muted">✓ rien de suspect</small>'}</td></tr>`; }).join('')}
                     </tbody></table></div>
                     <p class="ui-hint">Une proposition n’est jamais appliquée toute seule : regarde l’image, puis clique si elle est juste.${o.mode === 'saved' ? ' Tu peux toujours faire « ↶ Annuler ».' : ''}</p>
                 </div>
@@ -275,7 +276,7 @@
             const chef = r.members.find(m => m.is_primary) || r.members[0] || {};
             const linked = r.members.filter(m => m.person_id);
             return `<article class="sf-item" data-sf-item="${Number(r.id)}">
-                <div class="sf-item-main"><h3>📋 ${r.year} · ${esc(r.place || 'commune ?')} — ménage ${esc(chef.first || '')} ${esc(String(chef.last || '').toUpperCase())} ${UI().badge(r.verified ? 'Vérifié' : 'À vérifier', r.verified ? 'green' : 'yellow')}</h3>
+                <div class="sf-item-main"><h3>📋 ${r.year} · ${esc(r.place || 'commune ?')} — ${i18n('ménage {nm}', {nm: esc(`${chef.first || ''} ${String(chef.last || '').toUpperCase()}`.trim())})} ${UI().badge(r.verified ? 'Vérifié' : 'À vérifier', r.verified ? 'green' : 'yellow')}</h3>
                 <p class="muted">${esc(plural(r.members.length, 'personne'))}${r.cote ? ' · cote ' + esc(r.cote) : ''}${r.page_line ? ' · ' + esc(r.page_line) : ''} · ${UI().when ? UI().when(r.created_at, {label: 'Importé'}) : esc(r.created_at)}</p>
                 <p class="sf-item-people">${r.members.map(m => m.person_id ? `<button type="button" class="table-link" data-open-person="${Number(m.person_id)}">${esc(m.first)} ${esc(String(m.last || '').toUpperCase())}</button>` : `<span class="sf-unlinked" title="Pas de fiche reliée">? ${esc(m.first)} ${esc(String(m.last || '').toUpperCase())}</span>`).join(' · ')}</p></div>
                 <div class="sf-item-acts">${btnLink(r.image_url, imgLabel(r.image_url))}${btnLink(r.origin_url, '↗ Notice')}<button type="button" class="button small secondary" data-sf-verify-census="${Number(r.id)}">🔍 Vérifier</button><label class="ui-toggle sf-verified"><input type="checkbox" data-sf-verified="${Number(r.id)}" ${r.verified ? 'checked' : ''}><i></i>Vérifié sur l’image</label>${linked.length ? '' : ''}</div></article>`;

@@ -136,7 +136,7 @@ function sd_lock_guard(string $action, bool $isWrite): void
     $other = sd_lock_other();
     if ($other) {
         if (in_array($action, ['kiosk_state', 'genealogies'], true)) { return; }
-        json_response(['error' => 'Cette généalogie est déjà ouverte sur l’ordinateur « ' . $other['label'] . ' ». Ferme-la là-bas d’abord : deux ordinateurs qui écrivent dans le même fichier peuvent l’abîmer.',
+        json_response(['error' => i18n_t('Cette généalogie est déjà ouverte sur l’ordinateur « {name} ». Ferme-la là-bas d’abord : deux ordinateurs qui écrivent dans le même fichier peuvent l’abîmer.', ['name' => $other['label']]),
             'open_lock' => ['label' => (string) $other['label'], 'since' => date('c', (int) ($other['since'] ?? time())), 'beat' => date('c', (int) ($other['beat'] ?? time()))]], 423);
     }
     $l = sd_lock_read();
@@ -269,7 +269,7 @@ function sd_setup(PDO $pdo, array $data): array
     $folder = sd_expand(safe_text($data['folder'] ?? ''));
     if (!sd_path_ok($folder)) { throw new RuntimeException('Écris le chemin complet du dossier partagé (par exemple /Volumes/MaCle ou ~/Dropbox).'); }
     if (!is_dir($folder)) {
-        if (!is_dir(dirname($folder)) || !@mkdir($folder, 0775) ) { throw new RuntimeException('Dossier introuvable : ' . $folder . ' (clé débranchée ?).'); }
+        if (!is_dir(dirname($folder)) || !@mkdir($folder, 0775) ) { throw new RuntimeException(i18n_t('Dossier introuvable : {dir} (clé débranchée ?).', ['dir' => $folder])); }
     }
     if (!is_writable($folder)) { throw new RuntimeException('Ce dossier ne peut pas être modifié : ' . $folder); }
     $s = sync_settings($pdo);
@@ -459,7 +459,7 @@ function sd_sync(PDO $pdo): array
     $folder = sd_folder($pdo);
     if ($folder === '') { return ['ok' => false, 'no_folder' => true, 'error' => 'Aucun dossier partagé n’est choisi sur cet ordinateur.']; }
     $root = sd_root($pdo);
-    if (!is_dir($folder)) { return ['ok' => false, 'missing' => true, 'error' => 'Dossier partagé introuvable : ' . $folder . ' (clé débranchée ?). Rien n’est perdu : tes changements partiront la prochaine fois.']; }
+    if (!is_dir($folder)) { return ['ok' => false, 'missing' => true, 'error' => i18n_t('Dossier partagé introuvable : {dir} (clé débranchée ?). Rien n’est perdu : tes changements partiront la prochaine fois.', ['dir' => $folder])]; }
     foreach (['', '/paquets', '/medias', '/ordinateurs'] as $sub) { if (!is_dir($root . $sub)) { @mkdir($root . $sub, 0775, true); } }
     $in = sd_pull($pdo);
     $outp = sd_push($pdo);

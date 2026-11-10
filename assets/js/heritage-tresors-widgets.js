@@ -6,6 +6,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const A = () => window.LCNDA_APP;
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     ext.dashboard = ext.dashboard || {};
@@ -52,11 +53,11 @@
     ext.dashboard.tr_sky = {load, render: (index, widget, span, tr) => {
         const S = ext.tresorSky; if (!tr || !S || !T()) return A().card(index, titleOf(widget, '🌌 Le ciel de naissance'), '', off('Les Trésors n’ont pas pu se charger.'), span);
         const c = widget.config || {}, p = tr.byId.get(Number(c.person)) || T().start(tr), b = p && S.birthOf(T(), tr, p), hour = Number.isFinite(Number(c.hour)) && c.hour !== '' ? Number(c.hour) : 22;
-        if (!b) return A().card(index, titleOf(widget, '🌌 Le ciel de naissance'), '', off(p ? `Il faut au moins l’année de naissance de ${T().name(p)} pour voir son ciel.` : 'Choisis une personne dans les réglages du widget.'), span);
+        if (!b) return A().card(index, titleOf(widget, '🌌 Le ciel de naissance'), '', off(p ? i18n('Il faut au moins l’année de naissance de {nm} pour voir son ciel.', {nm: T().name(p)}) : 'Choisis une personne dans les réglages du widget.'), span);
         const id = `tr-sky-${++skyN}`;
         setTimeout(() => { const el = document.getElementById(id); if (!el) return; const s = S.sky({date: b.date, hour, lat: b.lat, lng: b.lng}); S.drawSky(el.querySelector('canvas'), s, S.caption(T(), p, b, s, hour));
             el.querySelector('[data-sky-txt]').textContent = `${s.moon.phase}${s.planets.some(x => x.alt > 0) ? ' · ' + s.planets.filter(x => x.alt > 0).map(x => x.n).join(', ') : ''}${b.exact ? '' : ' · date exacte inconnue'}`; }, 0);
-        return A().card(index, titleOf(widget, `🌌 Le ciel de naissance de ${p.first || T().name(p)}`), '', `<div class="h-tr-skyblock" id="${id}"><canvas width="600" height="670"></canvas><p class="muted" data-sky-txt></p></div>`, span,
+        return A().card(index, titleOf(widget, i18n('🌌 Le ciel de naissance de {nm}', {nm: p.first || T().name(p)})), '', `<div class="h-tr-skyblock" id="${id}"><canvas width="600" height="670"></canvas><p class="muted" data-sky-txt></p></div>`, span,
             `<button type="button" class="button small secondary" data-sky-big="${p.id}">Agrandir</button>`);
     }};
     ext.dashboardConfig.tr_sky = {
@@ -80,8 +81,8 @@
     ext.dashboard.tr_gazette = {load, render: (index, widget, span, tr) => {
         const G = ext.tresorGazette; if (!tr || !G || !T()) return A().card(index, titleOf(widget, '📰 La gazette de l’année'), '', off('Les Trésors n’ont pas pu se charger.'), span);
         const c = widget.config || {}, Y = yearFor(tr, c), g = G.gazette(T(), tr, Y), fam = T().start(tr)?.last || 'nôtres';
-        const line = (l, n) => (n ? `<li><b>${n}</b> ${esc(l)}${n > 1 ? 's' : ''}</li>` : '');
-        const body = `<article class="h-trw-gz"><header><small>Année ${Y}</small><b>La Gazette des ${esc(fam)}</b></header><h4>${esc(g.headline)}</h4>
+        const line = (l, n) => (n ? `<li>${esc(A().plural(n, l)).replace(/^(\S+)/, '<b>$1</b>')}</li>` : '');
+        const body = `<article class="h-trw-gz"><header><small>${i18n('Année {y}', {y: String(Y)})}</small><b>${i18n('La Gazette des {nm}', {nm: esc(fam)})}</b></header><h4>${esc(g.headline)}</h4>
             <ul>${line('naissance', g.born.length)}${line('mariage', g.wed.length)}${line('décès', g.dead.length)}${line('autre nouvelle', g.other.length)}</ul>
             ${g.born.length + g.wed.length + g.dead.length + g.other.length ? '' : '<p class="muted">Une année tranquille dans la famille.</p>'}</article>`;
         return A().card(index, titleOf(widget, '📰 La gazette de l’année'), '', body, span, `<button type="button" class="button small secondary" data-trw-gz="${Y}">Lire la gazette</button>`);
@@ -116,7 +117,7 @@
         const start = dayN() % anc.length; let p = null, list = [];
         for (let k = 0; k < anc.length && !list.length; k++) { p = anc[(start + k) % anc.length]; list = facts(T(), tr, p, ref).filter(x => !/^vivait sans doute|^n’était plus là/.test(x)); }
         if (!list.length) { p = anc[start]; list = facts(T(), tr, p, ref); }
-        return card(index, w, '🎂 À ton âge…', `<p class="h-trw-big">À <b>${ref} ans</b>${me.id !== p.id ? `, comme ${esc(me.first || T().name(me))}` : ''}…</p><p><button type="button" class="table-link" data-h-person="${p.id}">${esc(T().name(p))}</button> ${esc(list.slice(0, 2).join(' ; '))}.</p>`, span, open('aton-age', 'D’autres ancêtres'));
+        return card(index, w, '🎂 À ton âge…', `<p class="h-trw-big">${me.id !== p.id ? i18n('À <b>{n} ans</b>, comme {nm}…', {n: ref, nm: esc(me.first || T().name(me))}) : i18n('À <b>{n} ans</b>…', {n: ref})}</p><p><button type="button" class="table-link" data-h-person="${p.id}">${esc(T().name(p))}</button> ${esc(list.slice(0, 2).join(' ; '))}.</p>`, span, open('aton-age', 'D’autres ancêtres'));
     });
     ext.dashboardConfig.tr_aton = {html: w => personCfg('À ton âge').html(w) + `<label>Ou un âge précis<input type="number" data-trw="age" min="1" max="110" value="${esc(w?.config?.age || '')}" data-unit="ans" style="width:6em"></label>`, read: ed => ({...personCfg('').read(ed), age: Number(ed.querySelector('[data-trw=age]')?.value) || 0})};
 
@@ -125,7 +126,7 @@
         const all = ext.tresorCoinc?.coincidences ? ext.tresorCoinc.coincidences(T(), tr) : [];
         if (!all.length) return card(index, w, '🎯 La coïncidence du jour', off('Pas encore de coïncidence : il faut des dates complètes.'), span);
         const c = all[dayN() % all.length];
-        return card(index, w, '🎯 La coïncidence du jour', `<p class="h-trw-big">${esc(c.ic || '🎯')}</p><p>${esc(String(c.text || '').replace(/<[^>]+>/g, ''))}</p><p class="muted">${all.length} coïncidence${all.length > 1 ? 's' : ''} dans l’arbre</p>`, span, open('coincidences', 'Toutes'));
+        return card(index, w, '🎯 La coïncidence du jour', `<p class="h-trw-big">${esc(c.ic || '🎯')}</p><p>${esc(String(c.text || '').replace(/<[^>]+>/g, ''))}</p><p class="muted">${i18n('{n} dans l’arbre', {n: A().plural(all.length, 'coïncidence')})}</p>`, span, open('coincidences', 'Toutes'));
     });
 
     /* 🕵️ L'ancêtre mystère du jour */
@@ -149,7 +150,7 @@
         if (!next) return card(index, w, '✉️ Prochaine lettre à ouvrir', A().empty('Aucune lettre scellée.', {icon: '✉️'}), span, open('lettres', '✉️ Écrire une lettre'));
         const [y, m, d] = next.open_at.split('-').map(Number), now = new Date(), to = new Date(y, m - 1, d); let yy = to.getFullYear() - now.getFullYear(), mm = to.getMonth() - now.getMonth(); if (to.getDate() < now.getDate()) mm--; if (mm < 0) { yy--; mm += 12; }
         const left = yy > 0 ? `${yy} an${yy > 1 ? 's' : ''}${mm ? ` et ${mm} mois` : ''}` : mm > 0 ? `${mm} mois` : `${Math.max(0, Math.ceil((to - now) / 864e5))} jour${Math.ceil((to - now) / 864e5) > 1 ? 's' : ''}`;
-        return card(index, w, '✉️ Prochaine lettre à ouvrir', `<p class="h-trw-big">🔒 Dans ${esc(left)}</p><p><b>${esc(next.title)}</b>${next.data?.to ? ` · pour ${esc(next.data.to)}` : ''}<br><small class="muted">s’ouvrira le ${esc(T().dateFr(next.open_at))}</small></p>`, span, open('lettres', 'Les lettres'));
+        return card(index, w, '✉️ Prochaine lettre à ouvrir', `<p class="h-trw-big">🔒 Dans ${esc(left)}</p><p><b>${esc(next.title)}</b>${next.data?.to ? ` · ${i18n('pour {nm}', {nm: esc(next.data.to)})}` : ''}<br><small class="muted">${i18n('s’ouvrira le {d}', {d: esc(T().dateFr(next.open_at))})}</small></p>`, span, open('lettres', 'Les lettres'));
     }, {load: async () => { try { return await T().items('letter'); } catch (_) { return null; } }});
 
     /* 📜 Le vieux mot du jour */
@@ -182,7 +183,7 @@
     W('tr_world', '🌍 Le tour du monde des ancêtres', (index, w, span, tr) => {
         const s = ext.tresorWorld?.travelStats?.(T(), tr); if (!s?.per.length) return card(index, w, '🌍 Le tour du monde des ancêtres', off('Il faut des lieux placés sur la carte et datés.'), span);
         const km = n => `${Math.round(n).toLocaleString('fr-FR')} km`, tour = s.total / 40075;
-        return card(index, w, '🌍 Le tour du monde des ancêtres', `<p class="h-trw-big">${km(s.total)}</p><p>${tour >= 1 ? `${tour.toFixed(1).replace('.', ',')} fois le tour de la Terre` : `${Math.round(tour * 100)} % du tour de la Terre`}${s.far ? `<br><small class="muted">le plus loin : ${esc(T().name(s.far.p))}, ${km(s.far.km)}</small>` : ''}</p>`, span, open('tour-du-monde', 'Le détail'));
+        return card(index, w, '🌍 Le tour du monde des ancêtres', `<p class="h-trw-big">${km(s.total)}</p><p>${tour >= 1 ? i18n('{nm} fois le tour de la Terre', {nm: tour.toFixed(1).replace('.', ',')}) : i18n('{nm} % du tour de la Terre', {nm: Math.round(tour * 100)})}${s.far ? `<br><small class="muted">${i18n('le plus loin : {nm}, {km}', {nm: esc(T().name(s.far.p)), km: km(s.far.km)})}</small>` : ''}</p>`, span, open('tour-du-monde', 'Le détail'));
     });
 
     /* 📍 Passeport des lieux */

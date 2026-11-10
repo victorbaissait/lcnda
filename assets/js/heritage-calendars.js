@@ -9,6 +9,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const A = () => window.LCNDA_APP;
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     ext.lists = ext.lists || {};
@@ -102,7 +103,7 @@
                 const items = !LBK ? all : all.filter(it => (!words.length || words.every(w => fold(listbar.text(it)).includes(w))) && lbDefs.every(f => { const v = fval(f); return lbEmpty(v) || f.test(it, v); }));
                 const kindOn = LBK ? (fval(lbDefs.find(f => f.id === 'kind') || {}) || []) : [];
                 const [cy, cm, cd] = c.cursor, ix = makeIndex(items, p, cy);
-                const chip = (it, full = false) => `<button type="button" class="h-cal-ev ${it.done ? 'is-done' : ''} ${it.approx ? 'is-approx' : ''} ${it.cont ? 'is-cont' : ''}" data-cal-uid="${esc(it.uid)}" style="--c:${colorOf(key, p, it.group)}" title="${esc(it.title + (it.sub ? ' — ' + it.sub : '') + (it.approx ? ' (date approximative)' : ''))}"><i></i><span>${esc(p.anniv && it.y ? `${it.title} (${cy - it.y} ans)` : it.title)}</span>${full && it.sub ? `<small>${esc(it.sub)}</small>` : ''}</button>`;
+                const chip = (it, full = false) => `<button type="button" class="h-cal-ev ${it.done ? 'is-done' : ''} ${it.approx ? 'is-approx' : ''} ${it.cont ? 'is-cont' : ''}" data-cal-uid="${esc(it.uid)}" style="--c:${colorOf(key, p, it.group)}" title="${esc(it.title + (it.sub ? ' — ' + it.sub : '') + (it.approx ? ' (date approximative)' : ''))}"><i></i><span>${esc(p.anniv && it.y ? i18n("{t} ({n} ans)", {t: it.title, n: cy - it.y}) : it.title)}</span>${full && it.sub ? `<small>${esc(it.sub)}</small>` : ''}</button>`;
                 const head = (y, m, d) => `${p.alt.map(t => { const s = altShort(y, m, d, t); return s ? `<small class="h-cal-alt" title="${esc(calName(t))} : ${esc(altText(y, m, d, t))}">${esc(s)}</small>` : ''; }).join('')}`;
                 const today = iso(...todayArr());
                 const dayCell = (y, m, d, outside = false) => { const list = ix.day.get(iso(y, m, d)) || [], wd = dow(y, m, d);
@@ -147,7 +148,7 @@
                         const cells = [...Array(10).keys()].map(j => { const y = d0 + j, n = ix.count(y); tot += n; return `<td><button type="button" class="h-cal-hcell ${n ? 'has' : ''}" ${heat(n)} data-cal-go="year:${y}:1:1" title="${y}">${n ? `<small>${y}</small>${n}` : `<small>${y}</small>`}</button></td>`; }).join('');
                         return `<tr><th><button type="button" class="link-button" data-cal-go="decade:${d0}:1:1">${d0}s</button></th>${cells}<td class="h-cal-tot">${tot || ''}</td></tr>`; }).join('')}</tbody></table>`;
                 } else {
-                    label = `Liste · ${p.listScope === 'month' ? `${MONTHS[cm - 1]} ${cy}` : cy}`;
+                    label = `${i18n('Liste')} · ${p.listScope === 'month' ? `${i18n(MONTHS[cm - 1])} ${cy}` : cy}`;
                     const inScope = it => p.anniv ? (p.listScope !== 'month' || it.m === cm) : it.y === cy && (p.listScope !== 'month' || it.m === cm);
                     const list = items.filter(inScope).filter(it => !p.anniv || it.d).sort((a, b) => p.anniv ? (a.m - b.m || a.d - b.d) : (a.y - b.y || (a.m || 0) - (b.m || 0) || (a.d || 0) - (b.d || 0)));
                     body = `<div class="h-cal-listhead"><span class="segmented"><button type="button" class="${p.listScope !== 'month' ? 'is-active' : ''}" data-cal-scope="year">L’année</button><button type="button" class="${p.listScope === 'month' ? 'is-active' : ''}" data-cal-scope="month">Le mois</button></span></div>
@@ -275,7 +276,7 @@
             const e = it.raw, alts = e.d ? A().converterCalendarOptions.filter(([t]) => t !== 'gregorian').map(([t, n]) => [n, altText(e.y, e.m, e.d, t)]).filter(x => x[1]) : [];
             ext.openDialog({eyebrow: e.type.toUpperCase(), title: it.title, wide: true, submitLabel: 'Fermer',
                 body: `<p><b>Date dans la fiche :</b> ${esc(e.text || String(e.y))}${e.calendar && e.calendar !== 'gregorian' ? ` <small class="muted">(${esc(calName(e.calendar))})</small>` : ''}${e.approx ? ' <small class="muted">— approximative</small>' : ''}</p>
-                    ${e.d ? `<p><b>Grégorien :</b> ${longDate(e.y, e.m, e.d)}${p.anniv ? ` · il y a ${new Date().getFullYear() - e.y} ans` : ''}</p>` : `<p class="muted">Date connue ${e.m ? 'au mois' : 'à l’année'} près.</p>`}
+                    ${e.d ? `<p><b>Grégorien :</b> ${longDate(e.y, e.m, e.d)}${p.anniv ? ` · ${i18n('il y a {n} ans', {n: new Date().getFullYear() - e.y})}` : ''}</p>` : `<p class="muted">${e.m ? i18n('Date connue au mois près.') : i18n('Date connue à l’année près.')}</p>`}
                     ${e.place ? `<p><b>Lieu :</b> ${esc(e.place)}</p>` : ''}
                     <p>${e.who.map(w => `<button type="button" class="button small secondary" data-open-person="${w.id}">👤 ${esc(w.name)}</button>`).join(' ')}</p>
                     ${alts.length ? `<h4>Ce jour dans les autres calendriers</h4><dl class="h-cal-corr-dl">${alts.map(([n, t]) => `<dt>${esc(n)}</dt><dd>${esc(t)}</dd>`).join('')}</dl>` : ''}`,
@@ -294,7 +295,7 @@
     ];
     function newDialog(date, projects, after) {
         ext.openDialog({eyebrow: 'MON AGENDA', title: 'Nouveau', wide: true, submitLabel: 'Créer',
-            body: `<label>C’est…<select name="kind">${KINDS.map(([k, l, list]) => `<option value="${k}">${l} — rangé dans « ${esc(list)} »</option>`).join('')}</select></label>
+            body: `<label>C’est…<select name="kind">${KINDS.map(([k, l, list]) => `<option value="${k}">${i18n('{l} — rangé dans « {nm} »', {l: i18n(l), nm: esc(i18n(list))})}</option>`).join('')}</select></label>
                 <div class="form-grid"><label class="span-2" data-k="all">Titre<input name="title" placeholder="Salon de généalogie de Bourges"></label>
                 <label data-k="courrier">Destinataire<input name="destinataire" placeholder="Mairie de Saint-Amand-Montrond"></label>
                 <label data-k="archive_visit">Centre d’archives<input name="archive_center" placeholder="Archives départementales du Cher"></label>
@@ -325,7 +326,7 @@
                 if (k === 'atelier_task' && !body.project_id) { toast('Crée d’abord un projet dans l’Atelier.', 'error'); return false; }
                 const r = await A().api(def[3], {}, {method: 'POST', body});
                 if (r?.error) throw new Error(r.error);
-                toast(`Créé et rangé dans « ${def[2]} ».`);
+                toast(i18n('Créé et rangé dans « {nm} ».', {nm: def[2]}));
                 after();
             },
         });
@@ -387,7 +388,7 @@
             const li = r => r.kind === 'anniv'
                 ? `<li style="--c:${colorOf('genea', pg, r.e.group)}"><span class="h-agw-when">${dayLabel(r.when)}</span><button type="button" class="link-button" data-agw-person="${r.e.who[0]?.id || 0}">🎂 ${esc(r.e.type)} — ${esc(r.e.who.map(w => w.name).join(' et '))}</button> <small class="muted">il y a ${r.years} ans (${r.e.y})</small></li>`
                 : `<li class="${r.kind === 'late' ? 'is-late' : ''}" style="--c:${colorOf('agenda', p, r.it.src)}"><span class="h-agw-when">${r.kind === 'late' ? '⏰ en retard' : dayLabel(r.when)}</span><button type="button" class="link-button" data-agw-item="${esc(r.it.src + ':' + r.it.id)}">${esc(r.it.title)}</button>${r.it.sub ? ` <small class="muted">${esc(r.it.sub)}</small>` : ''}${r.it.end ? ` <small class="muted">→ ${esc(r.it.end.split('-').reverse().slice(0, 2).join('/'))}</small>` : ''}</li>`;
-            const html = rows.length ? `<ul class="h-agw">${rows.slice(0, limit).map(li).join('')}</ul>${rows.length > limit ? `<p class="muted">… et ${rows.length - limit} ${rows.length - limit > 1 ? 'autres' : 'autre'}.</p>` : ''}` : `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📅</span><span class="empty-line-text">Rien de prévu ${c.days === 1 ? 'aujourd’hui' : `sur les ${c.days} prochains jours`}.</span></p>`;
+            const html = rows.length ? `<ul class="h-agw">${rows.slice(0, limit).map(li).join('')}</ul>${rows.length > limit ? `<p class="muted">${i18n('… et {x}.', {x: A().plural(rows.length - limit, 'autre')})}</p>` : ''}` : `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📅</span><span class="empty-line-text">Rien de prévu ${c.days === 1 ? 'aujourd’hui' : i18n('sur les {nm} prochains jours', {nm: c.days})}.</span></p>`;
             setTimeout(() => document.querySelectorAll('[data-agw-item]:not([data-b]), [data-agw-person]:not([data-b])').forEach(b => { b.dataset.b = '1'; b.addEventListener('click', () => {
                 if (b.dataset.agwPerson) { S().currentPersonId = Number(b.dataset.agwPerson); return A().setModule('personnes'); }
                 const [src, id] = b.dataset.agwItem.split(':'), it = (data.agenda.items || []).find(x => x.src === src && String(x.id) === id);

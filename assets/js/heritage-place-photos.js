@@ -24,6 +24,7 @@
     const P = () => window.LCNDA_PICKER || A();
     const S = () => A().state;
     const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const api = (...a) => A().api(...a);
     const write = body => api('place_photo_write', {}, {method: 'POST', body});
     const toast = (...a) => A().toast(...a);
@@ -37,7 +38,7 @@
     const placeText = pl => (pl ? [pl.name, pl.county && pl.county !== pl.name ? pl.county : ''].filter(Boolean).join(', ') : '');
     const dirName = b => { if (b == null || b === '') return ''; const n = ((Number(b) % 360) + 360) % 360; return ['nord', 'nord-est', 'est', 'sud-est', 'sud', 'sud-ouest', 'ouest', 'nord-ouest'][Math.round(n / 45) % 8]; };
     const guessWhere = g => [placeText(g.place), g.street, g.address].filter(Boolean).join(' · ')
-        || (g.zone ? (g.zone.type === 'circle' ? `Zone : cercle de ${Math.round(g.zone.r)} m` : `Zone : ${g.zone.pts.length} points`) : g.lat != null ? `Point ${Number(g.lat).toFixed(5)}, ${Number(g.lon).toFixed(5)}` : 'Lieu à préciser');
+        || (g.zone ? (g.zone.type === 'circle' ? i18n('Zone : cercle de {nm} m', {nm: Math.round(g.zone.r)}) : i18n('Zone : {nm} points', {nm: g.zone.pts.length})) : g.lat != null ? `Point ${Number(g.lat).toFixed(5)}, ${Number(g.lon).toFixed(5)}` : 'Lieu à préciser');
     const thumb = (src, alt = '') => (src ? `<img src="${esc(src)}" alt="${esc(alt)}" loading="lazy">` : '<span class="ui-card-ico">📍</span>');
 
     /* ═════════ La lecture (aussi pour les autres outils : couche de la Carte, cartes personnalisées) ═════════ */
@@ -149,7 +150,7 @@
         function clickAt(la, lo) {
             const g = st.draft;
             if (g && st.tool === 'point') { g.lat = la; g.lon = lo; g.zone = null; draw(); api_.changed?.(); return; }
-            if (g && st.tool === 'polygon') { st.poly.push([la, lo]); draw(); say(`⬠ ${st.poly.length} point${st.poly.length > 1 ? 's' : ''} : clique les autres coins, puis double-clic (ou « ✓ Fermer la zone »).`); return; }
+            if (g && st.tool === 'polygon') { st.poly.push([la, lo]); draw(); say(st.poly.length > 1 ? i18n('⬠ {n} points : clique les autres coins, puis double-clic (ou « ✓ Fermer la zone »).', {n: st.poly.length}) : i18n('⬠ 1 point : clique les autres coins, puis double-clic (ou « ✓ Fermer la zone »).')); return; }
             if (g && st.tool === 'dir') { const o = originOf(g); if (!o) { say('🧭 Pose d’abord un point, une zone ou un lieu : la direction part de là.'); return; } g.bearing = Math.round(bearingOf(o[0], o[1], la, lo)); if (g.fov == null) g.fov = 60; draw(); api_.changed?.(); return; }
             onClick?.(la, lo);
         }
@@ -232,10 +233,10 @@
                     <span class="pp-num" style="--c:${CERT_COLOR[g.certainty] || '#1f6feb'}">${i + 1}</span>
                     <div class="pp-guess-main"><div class="pp-guess-top">${certBadge(g.certainty)}${g.retained ? ' <span class="pp-star" title="L’hypothèse retenue : c’est le lieu de l’image partout dans l’app">★ Retenue</span>' : ''}</div>
                         <b>${esc(guessWhere(g))}</b>
-                        ${g.zone ? `<small class="muted">${g.zone.type === 'circle' ? `◯ Zone : cercle de ${Math.round(g.zone.r)} m` : `⬠ Zone dessinée (${g.zone.pts.length} points)`}</small>` : ''}
-                        ${g.bearing != null ? `<small class="muted">🧭 Vue vers le ${esc(dirName(g.bearing))} (${Math.round(g.bearing)}°)</small>` : ''}
+                        ${g.zone ? `<small class="muted">${g.zone.type === 'circle' ? i18n('◯ Zone : cercle de {nm} m', {nm: Math.round(g.zone.r)}) : i18n('⬠ Zone dessinée ({nm} points)', {nm: g.zone.pts.length})}</small>` : ''}
+                        ${g.bearing != null ? `<small class="muted">${i18n('🧭 Vue vers le {dir} ({deg}°)', {dir: esc(i18n(dirName(g.bearing))), deg: Math.round(g.bearing)})}</small>` : ''}
                         ${g.why ? `<p class="pp-why">${esc(g.why)}</p>` : ''}
-                        <small class="muted">${[esc([g.author ? `Proposé par ${g.author}` : '', g.origin && g.origin !== 'me' ? g.origin_label : ''].filter(Boolean).join(' · ')), g.updated_at && UI().when ? UI().when(g.updated_at, {label: 'Modifié'}) : ''].filter(Boolean).join(' · ')}</small></div>
+                        <small class="muted">${[esc([g.author ? i18n('Proposé par {nm}', {nm: g.author}) : '', g.origin && g.origin !== 'me' ? g.origin_label : ''].filter(Boolean).join(' · ')), g.updated_at && UI().when ? UI().when(g.updated_at, {label: 'Modifié'}) : ''].filter(Boolean).join(' · ')}</small></div>
                     <div class="pp-guess-act">${g.retained ? '' : `<button type="button" class="icon-button small" data-pp-retain="${g.id}" title="Retenir cette hypothèse" aria-label="Retenir cette hypothèse">☆</button>`}
                         <button type="button" class="icon-button small" data-pp-edit-g="${g.id}" title="Modifier" aria-label="Modifier">✎</button>
                         <button type="button" class="icon-button small" data-pp-del="${g.id}" title="Supprimer" aria-label="Supprimer">🗑</button></div></article>`).join('')
@@ -272,7 +273,7 @@
             form.addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.matches('input:not([type=checkbox]):not([type=radio])')) { e.preventDefault(); submit(); } });
             map.setDraft(draft);
             const paintGeo = () => {
-                const parts = [draft.lat != null ? `📍 ${draft.lat.toFixed(5)}, ${draft.lon.toFixed(5)}` : '', draft.zone ? (draft.zone.type === 'circle' ? `◯ cercle de ${draft.zone.r} m` : `⬠ zone de ${draft.zone.pts.length} points`) : '', draft.bearing != null ? `🧭 vers le ${dirName(draft.bearing)} (${draft.bearing}°)` : ''].filter(Boolean);
+                const parts = [draft.lat != null ? `📍 ${draft.lat.toFixed(5)}, ${draft.lon.toFixed(5)}` : '', draft.zone ? (draft.zone.type === 'circle' ? i18n('◯ cercle de {nm} m', {nm: draft.zone.r}) : i18n('⬠ zone de {nm} points', {nm: draft.zone.pts.length})) : '', draft.bearing != null ? i18n('🧭 vers le {nm} ({x2}°)', {nm: i18n(dirName(draft.bearing)), x2: draft.bearing}) : ''].filter(Boolean);
                 form.querySelector('[data-pp-geo]').textContent = parts.length ? parts.join(' · ') : 'Rien sur la carte : choisis un outil, puis clique la carte.';
                 form.querySelector('[data-pp-fovrow]').hidden = draft.bearing == null;
             };
@@ -299,7 +300,7 @@
                     if (ans) {
                         const r = await write({...body, op: 'answer', ask_type: ans.type, ask_id: ans.id || 0});
                         reset(r.item); closeEditor();
-                        A().undoToast(`Réponse de ${fv.author} notée comme hypothèse`, {undo: async () => { const u = await write({op: 'answer_undo', ...r.undo}); if (u.item) reset(u.item); }});
+                        A().undoToast(i18n('Réponse de {nm} notée comme hypothèse', {nm: fv.author}), {undo: async () => { const u = await write({op: 'answer_undo', ...r.undo}); if (u.item) reset(u.item); }});
                     } else {
                         const r = await write({...body, op: 'guess'});
                         reset(r.item); closeEditor(); toast(v.id ? 'Enregistré' : 'Hypothèse ajoutée.', 'success');
@@ -318,7 +319,7 @@
         }
         async function pickToday() {
             const ret = it().retained;
-            const b = await P().openMediaPicker?.({types: ['image'], eyebrow: 'HIER ET AUJOURD’HUI', title: 'La photo d’aujourd’hui', intro: `Une photo prise du même endroit${ret ? ` (${guessWhere(ret)})` : ''}, aujourd’hui. Importe-la si elle n’est pas encore dans tes médias.`, okLabel: 'Comparer'});
+            const b = await P().openMediaPicker?.({types: ['image'], eyebrow: 'HIER ET AUJOURD’HUI', title: 'La photo d’aujourd’hui', intro: ret ? i18n('Une photo prise du même endroit ({where}), aujourd’hui. Importe-la si elle n’est pas encore dans tes médias.', {where: guessWhere(ret)}) : i18n('Une photo prise du même endroit, aujourd’hui. Importe-la si elle n’est pas encore dans tes médias.'), okLabel: 'Comparer'});
             if (!b) return null;
             if (Number(b.id) === Number(it().media_id)) { toast('C’est la même image : choisis une photo d’aujourd’hui.', 'error'); return null; }
             const r = await write({op: 'info', media_id: it().media_id, today_media_id: Number(b.id)}); reset(r.item); return r.item.today;
@@ -337,7 +338,7 @@
             const asks = D.asks || [], box = $('[data-pp-asks]');
             const st = {draft: 'Brouillon', posted: 'Publiée', answered: 'Réponse reçue', solved: 'Résolue', abandoned: 'Abandonnée', ready: 'Prête à envoyer', sent: 'Envoyée', published: 'Publiée', closed: 'Terminée', refused: 'Refusée'};
             box.innerHTML = `<h4>🙋 Demandes d’aide</h4>${asks.length ? `<ul class="pp-asklist">${asks.map(a => `<li><span>${a.type === 'press_ad' ? '✉️' : '🤝'} ${esc(a.label)}${a.where ? ` <small class="muted">· ${esc(a.where)}</small>` : ''} ${UI().badge ? UI().badge(st[a.status] || a.status, a.status) : ''}</span>
-                    <span class="pp-askact"><button type="button" class="button small secondary" data-pp-answer="${a.type}:${a.id}" title="Une réponse reçue devient une nouvelle hypothèse, avec son auteur">📨 Noter une réponse</button><button type="button" class="icon-button small" data-pp-askopen="${a.type}:${a.id}" title="Ouvrir dans ${a.type === 'press_ad' ? 'Petites annonces' : 'Demandes d’entraide'}" aria-label="Ouvrir">↗</button></span></li>`).join('')}</ul>`
+                    <span class="pp-askact"><button type="button" class="button small secondary" data-pp-answer="${a.type}:${a.id}" title="Une réponse reçue devient une nouvelle hypothèse, avec son auteur">📨 Noter une réponse</button><button type="button" class="icon-button small" data-pp-askopen="${a.type}:${a.id}" title="${a.type === 'press_ad' ? i18n('Ouvrir dans Petites annonces') : i18n('Ouvrir dans Demandes d’entraide')}" aria-label="Ouvrir">↗</button></span></li>`).join('')}</ul>`
                 : (A().empty ? A().empty('Aucune demande pour cette image.', {icon: '🙋'}) : '')}
                 <button type="button" class="link-button" data-pp-answer="forum:0">📨 Noter une réponse venue d’ailleurs (forum, courrier, visite…)</button>`;
         }
@@ -418,7 +419,7 @@
                 if (!String(fv.message || '').trim()) return UI().fail(form.elements.message, 'Le texte de la demande est vide.');
                 const r = await write({op: 'ask', media_id: item.media_id, where: fv.where, format: fv.format, question: fv.question, message: fv.message});
                 const where = r.type === 'press_ad' ? '✉️ Petites annonces' : '🤝 Demandes d’entraide';
-                toast(`Demande créée dans ${where} : les réponses reçues se notent ici (📨 Noter une réponse).`, 'success');
+                toast(i18n('Demande créée dans {nm} : les réponses reçues se notent ici (📨 Noter une réponse).', {nm: where}), 'success');
                 after?.(r);
                 return true;
             }});
@@ -476,7 +477,7 @@
             const cnt = (fn, k) => all.filter(i => fn(i) === k).length;
             const bar = U.listBar({key: KEY, search: {placeholder: 'Chercher… (titre, lieu, rue, éditeur, indices)'},
                 filters: [{id: 'place', label: 'Lieu', type: 'place', chipPrefix: 'À'},
-                    {id: 'street', label: 'Rue', type: 'select', options: [['', 'Toutes les rues'], ...(LD.streets || []).map(s => [s, s, `Rue : ${s}`])], dflt: ''},
+                    {id: 'street', label: 'Rue', type: 'select', options: [['', 'Toutes les rues'], ...(LD.streets || []).map(s => [s, s, i18n('Rue : {nm}', {nm: s})])], dflt: ''},
                     {id: 'decade', label: 'Époque', type: 'check', options: decades.map(d => [String(d), `Années ${d}`, `Années ${d}`, cnt(i => i.decade, d)])},
                     {id: 'cert', label: 'Certitude', type: 'check', options: Object.entries(CERT).map(([k, [l]]) => [k, l, l, all.filter(i => (i.guesses || []).some(g => g.certainty === k)).length])},
                     {id: 'kind', label: 'Sorte', type: 'check', options: Object.entries(KINDS).filter(([k]) => cnt(i => i.kind, k)).map(([k, l]) => [k, l, l, cnt(i => i.kind, k)])},

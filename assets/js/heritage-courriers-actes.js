@@ -16,6 +16,7 @@
     const P = () => window.LCNDA_PICKER;
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const api = (...a) => A().api(...a);
     const write = (op, body = {}) => api('cl_write', {}, {method: 'POST', body: {op, ...body}});
     const toast = (...a) => A().toast(...a);
@@ -124,7 +125,7 @@
                             mediaId = Number((r.result || r).media_id) || 0;
                             const h = $('[data-cl-media]'); h.hidden = false; h.textContent = '📁 Une copie (.docx) est rangée dans les médias ; elle sera reliée au courrier.';
                             toast('Copie rangée dans les médias.', '', {action: {label: '↗ Ouvrir', run: () => P()?.openMedia?.(mediaId)}});
-                        } catch (err) { toast(`Copie impossible : ${err.message}`, 'error'); }
+                        } catch (err) { toast(i18n('Copie impossible : {nm}', {nm: err.message}), 'error'); }
                         finally { btn.disabled = false; }
                     }
                 });
@@ -139,7 +140,7 @@
                 const r = await write('file', body);
                 const after = () => { if (A().state?.listType === 'courriers' && A().state?.module === 'listes') A().renderList?.(); window.dispatchEvent(new CustomEvent('lcnda:courrier-filed', {detail: r})); };
                 after();
-                A().undoToast(`Courrier rangé dans les courriers suivis${r.relance_date ? ` (relance le ${new Date(r.relance_date + 'T12:00:00').toLocaleDateString('fr-FR', {day: 'numeric', month: 'long'})})` : ''}`, {undo: async () => { await write('unfile', {courrier_id: r.courrier_id}); after(); }});
+                A().undoToast(r.relance_date ? i18n('Courrier rangé dans les courriers suivis (relance le {dt})', {dt: window.LCNDA_I18N && window.LCNDA_I18N.lang !== 'fr' ? window.LCNDA_I18N.fmtDate(new Date(r.relance_date + 'T12:00:00'), {day: 'numeric', month: 'long'}) : new Date(r.relance_date + 'T12:00:00').toLocaleDateString('fr-FR', {day: 'numeric', month: 'long'})}) : i18n('Courrier rangé dans les courriers suivis'), {undo: async () => { await write('unfile', {courrier_id: r.courrier_id}); after(); }});
                 o.onFiled?.(r);
             }});
         return dlg;
@@ -193,7 +194,7 @@
                         rename: (i, name) => { const l = list(); if (!l[i]) return false; l[i].name = name; put(l); },
                         duplicate: i => { const l = list(), x = l[i]; if (!x) return false; l.splice(i + 1, 0, {name: UI().freeName ? UI().freeName(x.name, l.map(y => y.name)) : `${x.name} (copie)`, date: now(), data: x.data}); put(l); },
                         exportOne: i => { const x = list()[i]; if (x) A().exportSettingFile?.('courriers-lettres', x.name, {data: x.data}); return false; },
-                        remove: i => { const l = list(), x = l[i]; if (!x) return false; if (A().undoLocalChange) A().undoLocalChange(`Réglage « ${x.name} » supprimé`, [PRESETS], () => { l.splice(i, 1); put(l); }, () => frame.isConnected && frame.refresh()); else { l.splice(i, 1); put(l); } },
+                        remove: i => { const l = list(), x = l[i]; if (!x) return false; if (A().undoLocalChange) A().undoLocalChange(i18n('Réglage « {nm} » supprimé', {nm: x.name}), [PRESETS], () => { l.splice(i, 1); put(l); }, () => frame.isConnected && frame.refresh()); else { l.splice(i, 1); put(l); } },
                         importOne: async () => { const got = await A().importSettingFile?.('courriers-lettres', {names: list().map(x => x.name), check: x => x && typeof x.data === 'object'}); if (!got) return false; const l = list(); l.push({name: got.nom, date: now(), data: got.donnees.data}); put(l); }});
                     slot.appendChild(frame);
                 }
@@ -218,7 +219,7 @@
         try {
             const c = (await api('cl_letter', {id})).courrier;
             ext.openDialog({eyebrow: 'COURRIER RANGÉ', title: c.objet || 'Courrier', wide: true, submitLabel: 'Fermer', onSubmit: () => true,
-                body: `<p class="muted">À ${esc(c.destinataire)}${c.date_envoi ? ` · envoyé le ${esc(c.date_envoi)}` : ''}${c.relance_date ? ` · relance le ${esc(c.relance_date)}` : ''}</p><pre class="cl-letter cl-read">${esc(c.letter)}</pre>
+                body: `<p class="muted">À ${esc(c.destinataire)}${c.date_envoi ? ` · ${i18n('envoyé le {dt}', {dt: esc(c.date_envoi)})}` : ''}${c.relance_date ? ` · ${i18n('relance le {dt}', {dt: esc(c.relance_date)})}` : ''}</p><pre class="cl-letter cl-read">${esc(c.letter)}</pre>
                     <div class="cl-out"><button type="button" class="button small secondary" data-cl-r="wp">📝 Traitement de texte</button><button type="button" class="button small secondary" data-cl-r="print">🖨 Imprimer ou ⤓ PDF</button>${c.person_id ? '<button type="button" class="button small secondary" data-cl-r="again">📮 Refaire une demande</button>' : ''}</div>`,
                 onOpen: d => d.addEventListener('click', e => { const k = e.target.closest('[data-cl-r]')?.dataset.clR; if (!k) return;
                     if (k === 'wp') { const data = docData(c.letter); ext.openTextDoc?.(data ? {data, name: c.objet} : {name: c.objet}); }

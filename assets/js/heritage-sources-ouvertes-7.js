@@ -16,6 +16,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const A = () => window.LCNDA_APP;
     const UI = () => window.LCNDA_UI;
@@ -79,7 +80,7 @@
             if (st.text) st.v = {...S7().parseFields(st.text, st.kind), ...st.v};
             await loadFiche();
             return {count: 1, noun: 'document', summaryHtml: `<b>un document</b> pour ${st.fiche ? `<b>${esc([st.fiche.first, String(st.fiche.last || '').toUpperCase()].join(' '))}</b>` : o.place ? `<b>${esc(o.place.name)}</b>` : 'la fiche ou le lieu choisi ci-dessous'}`,
-                notices: [{kind: 'warn', text: `${S7().MENTION}. Le document entre « À vérifier ».`}, {kind: 'info', text: 'Rien n’est remplacé : on ajoute à côté. « ↶ Annuler » retire tout ce que l’import a ajouté.'}],
+                notices: [{kind: 'warn', text: i18n("{nm}. Le document entre « À vérifier ».", {nm: i18n(S7().MENTION)})}, {kind: 'info', text: 'Rien n’est remplacé : on ajoute à côté. « ↶ Annuler » retire tout ce que l’import a ajouté.'}],
                 preview: '<div class="so-imp" data-so7-imp></div>', onShow: body => draw(body)};
         };
         const loadFiche = async () => {
@@ -173,7 +174,7 @@
             forget(st.pid); if (st.objUrl) URL.revokeObjectURL(st.objUrl);
             window.dispatchEvent(new CustomEvent('lcnda:sources-ouvertes-changed', {detail: r}));
             refresh();
-            return {message: `${r.summary} — à vérifier sur le document.`, undo};
+            return {message: i18n('{nm} — à vérifier sur le document.', {nm: r.summary}), undo};
         };
         return UI().openImportDialog({title: 'Importer depuis les archives en ligne', accept: 'image/*,.pdf,.html,.htm,.txt', what: 'image, PDF, page enregistrée ou texte',
             intro: 'Ce que tu as téléchargé ou enregistré : un acte, une notice, la photo d’un monument ou d’une tombe, un plan de cadastre, la page enregistrée par ton navigateur (« Enregistrer sous… ») ou un texte copié. Rien n’est demandé au site : seul ton fichier est lu.',

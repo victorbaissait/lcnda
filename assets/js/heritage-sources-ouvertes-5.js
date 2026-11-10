@@ -15,6 +15,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const A = () => window.LCNDA_APP;
     const UI = () => window.LCNDA_UI;
@@ -40,7 +41,7 @@
         const u = S5().url(s.key, p, cu); const v = VERIF[s.verified] || VERIF.non; const copy = S5().copyText(s.key, p);
         const hasName = !!(p.last || p.first || ((s.byPlace) && (p.place || p.county)) || (s.byPhotographer && p.photographer) || (s.key === 'anmt' && p.employer));
         const go = !hasName ? `<button type="button" class="button small" disabled title="Écris au moins un nom">↗ Ouvrir</button>`
-            : s.copy ? `<button type="button" class="button small" data-so5-copy="${esc(s.key)}" data-text="${esc(copy)}" data-href="${esc(u)}" title="Met « ${esc(copy)} » dans le presse-papiers et ouvre la page : colle-le dans la case du site">📋 Copier le nom et ouvrir</button>`
+            : s.copy ? `<button type="button" class="button small" data-so5-copy="${esc(s.key)}" data-text="${esc(copy)}" data-href="${esc(u)}" title="${i18n('Met « {nm} » dans le presse-papiers et ouvre la page : colle-le dans la case du site', {nm: esc(copy)})}">📋 Copier le nom et ouvrir</button>`
                 : `<a class="button small" href="${esc(u)}" target="_blank" rel="noopener noreferrer" data-so5-go="${esc(s.key)}">↗ Ouvrir</a>`;
         return `<li class="so-link so5-link" data-so5-site="${esc(s.key)}">
             <span class="so-link-ico" aria-hidden="true">${esc(s.icon)}</span>
@@ -57,7 +58,7 @@
     /** un site sans recherche dans l'adresse : « NOM Prénom » dans le presse-papiers, puis la page */
     function copyAndOpen(text, href) {
         const u = S5().cleanUrl(href); if (!u) return;
-        const done = ok => toast(ok && text ? `« ${text} » est copié : colle-le dans la case du site.` : `Écris « ${text} » dans la case du site.`);
+        const done = ok => toast(ok && text ? i18n('« {nm} » est copié : colle-le dans la case du site.', {nm: text}) : i18n('Écris « {nm} » dans la case du site.', {nm: text}));
         try { if (navigator.clipboard && text) navigator.clipboard.writeText(text).then(() => done(true), () => done(false)); else done(false); } catch (_) { done(false); }
         window.open(u, '_blank', 'noopener');
     }
@@ -110,7 +111,7 @@
             setKind(st.kind);
             const who = st.person ? `<b>${esc([st.person.first, String(st.person.last || '').toUpperCase()].join(' '))}</b>` : 'la fiche choisie ci-dessous';
             return {count: 1, noun: 'document', summaryHtml: `<b>${esc(S5().KIND_LABEL[st.kind] || 'un document')}</b> pour ${who}`,
-                notices: [{kind: 'warn', text: `${S5().MENTION}. Le document entre « À vérifier ».`}, {kind: 'info', text: 'Rien de la fiche n’est remplacé : une naissance, un baptême, un décès ou une inhumation déjà sur la fiche est gardé tel quel, et « ↶ Annuler » retire tout ce que l’import a ajouté.'}],
+                notices: [{kind: 'warn', text: i18n("{nm}. Le document entre « À vérifier ».", {nm: i18n(S5().MENTION)})}, {kind: 'info', text: 'Rien de la fiche n’est remplacé : une naissance, un baptême, un décès ou une inhumation déjà sur la fiche est gardé tel quel, et « ↶ Annuler » retire tout ce que l’import a ajouté.'}],
                 preview: '<div class="so-imp so5-imp" data-so5-imp></div>', onShow: body => { bind(body); draw(body); }};
         };
         const read = body => {
@@ -143,12 +144,12 @@
         const propsHtml = () => {
             const pr = st.pr; if (!pr) return '';
             const rows = [
-                ...pr.events.map((e, i) => line('ev' + i, `${esc(e.label || TAGNAME[e.tag] || e.tag)} : ${esc([e.date, e.place && `à ${e.place}`, e.description].filter(Boolean).join(' · ') || '—')}${e.already ? ' <small class="muted">— déjà sur la fiche : gardé tel quel</small>' : ''}`, e.already)),
-                pr.voyage ? line('voyage', `🧳 Ajouter un départ (bloc « Départs / émigration ») : ${esc([pr.voyage.ship_name, pr.voyage.departure_port && `de ${pr.voyage.departure_port}`, pr.voyage.destination && `vers ${pr.voyage.destination}`, pr.voyage.arrival_date].filter(Boolean).join(' · ') || pr.voyage.reason)}`) : '',
-                pr.award ? line('award', `🏆 Ajouter « ${esc(pr.award.title)} » (Concours et récompenses)`) : '',
-                pr.employer ? line('employer', `🏭 Ajouter une ligne dans la fiche de l’employeur « ${esc(pr.employer.name)} » (créée si elle n’existe pas)`) : '',
-                pr.note ? line('note', `📝 Ajouter une note : ${esc(pr.note.title)}`) : '',
-                st.fsId ? line('fs', `🌳 Noter l’identifiant FamilySearch ${esc(st.fsId)} (seulement si la fiche n’en a pas)`) : ''].filter(Boolean);
+                ...pr.events.map((e, i) => line('ev' + i, `${esc(e.label || TAGNAME[e.tag] || e.tag)} : ${esc([e.date, e.place && `à ${e.place}`, e.description].filter(Boolean).join(' · ') || '—')}${e.already ? ` <small class="muted">— ${i18n('déjà sur la fiche : gardé tel quel')}</small>` : ''}`, e.already)),
+                pr.voyage ? line('voyage', `🧳 ${i18n('Ajouter un départ (bloc « Départs / émigration ») : {nm}', {nm: esc([pr.voyage.ship_name, pr.voyage.departure_port && i18n('de {nm}', {nm: pr.voyage.departure_port}), pr.voyage.destination && i18n('vers {nm}', {nm: pr.voyage.destination}), pr.voyage.arrival_date].filter(Boolean).join(' · ') || pr.voyage.reason)})}`) : '',
+                pr.award ? line('award', i18n('🏆 Ajouter « {nm} » (Concours et récompenses)', {nm: esc(pr.award.title)})) : '',
+                pr.employer ? line('employer', i18n('🏭 Ajouter une ligne dans la fiche de l’employeur « {nm} » (créée si elle n’existe pas)', {nm: esc(pr.employer.name)})) : '',
+                pr.note ? line('note', i18n('📝 Ajouter une note : {nm}', {nm: esc(pr.note.title)})) : '',
+                st.fsId ? line('fs', i18n('🌳 Noter l’identifiant FamilySearch {nm} (seulement si la fiche n’en a pas)', {nm: esc(st.fsId)})) : ''].filter(Boolean);
             return rows.length ? `<fieldset class="so-props"><legend>Ce qui sera proposé sur la fiche (rien n’est remplacé)</legend>${rows.join('')}</fieldset>` : '';
         };
         const fieldsHtml = () => (FIELDS[st.kind] || []).map(k => LONG.has(k) ? `<label class="so-span-2">${esc(FIELD_LABEL[k] || k)}<textarea name="${esc(k)}" rows="2">${esc(st.v[k] ?? '')}</textarea></label>`
@@ -198,7 +199,7 @@
             const r = j.result; if (st.objUrl) URL.revokeObjectURL(st.objUrl);
             window.dispatchEvent(new CustomEvent('lcnda:sources-ouvertes-changed', {detail: r}));
             refresh();
-            return {message: `${r.summary} — à vérifier sur le document.`, undo: async () => { await post('so5_undo', {batch: r.batch}); refresh(); }};
+            return {message: i18n('{nm} — à vérifier sur le document.', {nm: r.summary}), undo: async () => { await post('so5_undo', {batch: r.batch}); refresh(); }};
         };
         return UI().openImportDialog({title: 'Importer depuis FamilySearch, le Québec, l’émigration, les métiers…', accept: 'image/*,.pdf,.html,.htm,.txt', what: 'image, PDF, page enregistrée ou texte',
             intro: 'Ce que tu as téléchargé ou enregistré : un acte en image ou en PDF, la page enregistrée par ton navigateur (« Enregistrer sous… »), ou un texte copié (fiche FamilySearch, WikiTree, Fichier Origine, Castle Garden, médaillé de Sainte-Hélène, registre du personnel, notice du Maitron…). Rien n’est demandé au site : seul ton fichier est lu. Pas de fichier ? « 📋 Coller un texte ».',
@@ -224,7 +225,7 @@
             per = S5().photographerPeriod(v.said || '');
             const hint = dlg.querySelector('[data-so5-ph-read]');
             hint.className = 'ui-hint' + (per.from ? ' is-ok' : v.said?.trim() ? ' is-error' : '');
-            hint.textContent = per.from ? `✓ Compris : actif ${per.to ? `de ${per.from} à ${per.to}` : `à partir de ${per.from}`}` : v.said?.trim() ? '⚠️ Je ne trouve pas d’années (ex. « actif de 1862 à 1895 »).' : 'Colle ici la ligne qui donne ses années d’activité.';
+            hint.textContent = per.from ? `✓ Compris : actif ${per.to ? `de ${per.from} à ${per.to}` : i18n('à partir de {nm}', {nm: String(per.from)})}` : v.said?.trim() ? '⚠️ Je ne trouve pas d’années (ex. « actif de 1862 à 1895 »).' : 'Colle ici la ligne qui donne ses années d’activité.';
             dlg.querySelector('[data-so5-ph-use]').disabled = !per.from;
         };
         dlg.addEventListener('input', upd);
@@ -252,7 +253,7 @@
         const u = S5().cleanUrl(S5().fillCustom(site.url, p));
         const left = [...String(S5().fillCustom(site.url, p)).matchAll(/\{([^{}]+)\}/g)].map(m => m[1]);
         if (out) out.innerHTML = `<div class="so5-test">${u ? `<span>🧪 Avec <b>${esc(p.name || p.first + ' ' + p.last)}</b>${p.birthYear ? ` (${esc(p.birthYear)}${p.deathYear ? '–' + esc(p.deathYear) : ''})` : ''} : <code class="so-url">${esc(u)}</code></span> <a class="button small" href="${esc(u)}" target="_blank" rel="noopener noreferrer">↗ Ouvrir</a>` : '<span>⛔ Cette adresse ne donne pas une adresse internet valable.</span>'}
-            ${problems.filter(m => !/^Donne un nom/.test(m)).map(m => `<small class="ui-hint is-error">⚠️ ${esc(m)}</small>`).join('')}${left.length ? `<small class="ui-hint is-error">⚠️ Resté tel quel : ${esc(left.map(k => `{${k}}`).join(' '))}</small>` : ''}</div>`;
+            ${problems.filter(m => !/^Donne un nom/.test(m)).map(m => `<small class="ui-hint is-error">⚠️ ${esc(m)}</small>`).join('')}${left.length ? `<small class="ui-hint is-error">⚠️ ${i18n('Resté tel quel : {nm}', {nm: esc(left.map(k => `{${k}}`).join(' '))})}</small>` : ''}</div>`;
     }
     function customPresets(slot) {
         if (!slot || slot.dataset.so5 || !UI()?.presetsFrame) return; slot.dataset.so5 = '1';
@@ -260,7 +261,7 @@
         const put = l => { try { localStorage.setItem(PRESETS_KEY, JSON.stringify(l.slice(0, 40))); } catch (_) {} };
         const clean = arr => (Array.isArray(arr) ? arr : []).slice(0, 60).map(s => S5().cleanCustom(s)).filter(s => s.label && /^https?:\/\//i.test(s.url));
         const merge = sites => { const cur = customList(); const have = new Set(cur.map(s => s.url)); const add = clean(sites).filter(s => !have.has(s.url)).map((s, i) => ({...s, key: `custom-${Date.now().toString(36)}${i}`}));
-            A().undoLocalChange(add.length ? `${A().plural ? A().plural(add.length, 'site ajouté', 'sites ajoutés') : add.length + ' sites'} à « Mes sites »` : 'Ces sites sont déjà dans « Mes sites »', [CUSTOM_KEY], () => localStorage.setItem(CUSTOM_KEY, JSON.stringify([...cur, ...add])), () => A().renderDesignTools?.());
+            A().undoLocalChange(add.length ? i18n('{n} à « Mes sites »', {n: A().plural ? A().plural(add.length, 'site ajouté', 'sites ajoutés') : add.length + ' sites'}) : i18n('Ces sites sont déjà dans « Mes sites »'), [CUSTOM_KEY], () => localStorage.setItem(CUSTOM_KEY, JSON.stringify([...cur, ...add])), () => A().renderDesignTools?.());
             A().renderDesignTools?.(); };
         slot.appendChild(UI().presetsFrame({id: 'mes-sites', title: 'Réglages enregistrés (pour partager « Mes sites »)', what: 'la liste de tes sites ajoutés', list, quietApply: true,
             apply: i => { const x = list()[i]; if (!x) return false; merge(x.data); return false; },
@@ -268,7 +269,7 @@
             replace: i => { const l = list(); if (!l[i]) return false; l[i] = {...l[i], date: new Date().toISOString(), data: clean(customList())}; put(l); },
             rename: (i, name) => { const l = list(); if (!l[i]) return false; l[i].name = name; put(l); },
             exportOne: i => { const x = list()[i]; if (x) A().exportSettingFile?.('mes-sites', x.name, {data: x.data}); return false; },
-            remove: i => { const l = list(), x = l[i]; if (!x) return false; l.splice(i, 1); put(l); toast(`Réglage « ${x.name} » supprimé.`); },
+            remove: i => { const l = list(), x = l[i]; if (!x) return false; l.splice(i, 1); put(l); toast(i18n('Réglage « {nm} » supprimé.', {nm: x.name})); },
             importOne: async () => { const got = await A().importSettingFile?.('mes-sites', {names: list().map(x => x.name), check: d => d && Array.isArray(d.data) && clean(d.data).length > 0}); if (!got) return false; const l = list(); l.push({name: got.nom, date: new Date().toISOString(), data: clean(got.donnees.data)}); put(l); }}));
         const hint = document.createElement('p'); hint.className = 'ui-hint'; hint.textContent = '« ＋ Enregistrer les réglages actuels » garde ta liste de sites sous un nom ; ⋯ → Exporter en fait un fichier à donner à quelqu’un, qui l’ouvre avec « ⤒ Importer » puis « Appliquer » (les sites s’ajoutent aux siens).';
         slot.appendChild(hint);
@@ -287,9 +288,9 @@
         const im = e.target.closest('[data-so5-import]'); if (im) { e.preventDefault(); openImport({personId: Number(im.dataset.pid) || 0, kind: im.dataset.so5Import || undefined}); return; }
         const pl = e.target.closest('[data-so5-paste]'); if (pl) { e.preventDefault(); openPasteText({personId: Number(pl.dataset.pid) || 0}); return; }
         const t = e.target.closest('[data-ws-custom-test]'); if (t) { e.preventDefault(); testCustom(t); return; }
-        const ph = e.target.closest('[data-so5-photo]'); if (ph) { e.preventDefault(); const form = ph.closest('form'); openPhotographer({place: form?.elements?.where?.value || '', onPeriod: per => { if (!form) return; form.elements.lo.value = per.from; form.elements.hi.value = per.to || ''; form.elements.lo.dispatchEvent(new Event('input', {bubbles: true})); toast(`Photographe actif ${per.to ? `de ${per.from} à ${per.to}` : `dès ${per.from}`} : mis dans la photo.`); }}); return; }
+        const ph = e.target.closest('[data-so5-photo]'); if (ph) { e.preventDefault(); const form = ph.closest('form'); openPhotographer({place: form?.elements?.where?.value || '', onPeriod: per => { if (!form) return; form.elements.lo.value = per.from; form.elements.hi.value = per.to || ''; form.elements.lo.dispatchEvent(new Event('input', {bubbles: true})); toast(per.to ? i18n('Photographe actif de {a} à {b} : mis dans la photo.', {a: String(per.from), b: String(per.to)}) : i18n('Photographe actif dès {a} : mis dans la photo.', {a: String(per.from)})); }}); return; }
         // « Chercher sur internet » : un site qui garde sa recherche dans un formulaire → le nom est aussi copié
-        const ws = e.target.closest('a[data-ws-site^="so5_"]'); if (ws) { const site = S5()?.site(ws.dataset.wsSite.slice(4)); const nm = ws.closest('.web-search-panel')?.dataset.so5Name || ''; if (site?.copy && nm) { try { navigator.clipboard?.writeText(nm).then(() => toast(`« ${nm} » est aussi copié : colle-le dans la case du site.`), () => {}); } catch (_) {} } }
+        const ws = e.target.closest('a[data-ws-site^="so5_"]'); if (ws) { const site = S5()?.site(ws.dataset.wsSite.slice(4)); const nm = ws.closest('.web-search-panel')?.dataset.so5Name || ''; if (site?.copy && nm) { try { navigator.clipboard?.writeText(nm).then(() => toast(i18n('« {nm} » est aussi copié : colle-le dans la case du site.', {nm: nm})), () => {}); } catch (_) {} } }
     });
     const BLOCK_WHERE = {voyages: 'emigration', military: 'militaire', awards: 'recompense'};
     const BLOCK_KIND = {voyages: 'passager', military: 'medaille_sh', awards: 'medaille_sh'};

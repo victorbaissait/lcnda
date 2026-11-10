@@ -7,6 +7,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const ART = window.LCNDA_ART; if (!ART) return;
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const A = () => window.LCNDA_APP;
@@ -83,7 +84,7 @@
                 film: [['wd', 'Wikidata (relie aux fiches IMDb)'], ['imdb', 'Une adresse IMDb de la personne (nm…)'], ['tmdb', 'TMDb (clé ; affiches)']]};
             const SRC = [...(SRC0[tab] || []), ['file', 'Un fichier exporté d’ici (💾 Fichier, ou l’ancienne « Sauvegarde JSON »)']];
             const name = C.store.name;
-            ext.openDialog({eyebrow: `IMPORTER · ${String(ART.defs[tab]?.many || '').toUpperCase()}`, title: '⤒ Importer', wide: true, submitLabel: 'Importer la sélection',
+            ext.openDialog({eyebrow: `${i18n('IMPORTER')} · ${String(i18n(ART.defs[tab]?.many || '')).toUpperCase()}`, title: '⤒ Importer', wide: true, submitLabel: 'Importer la sélection',
                 body: `<div class="ar-imp"><label>Source<select data-src>${SRC.map(([k, l]) => `<option value="${k}">${esc(l)}</option>`).join('')}</select></label>
                     <div class="ar-impq"><input data-iq value="${esc(name)}" placeholder="Nom, adresse, ISBN…"><button type="button" class="button small" data-go>Chercher</button></div><p class="muted" data-help></p>
                     <div data-res class="ar-res"></div><label class="checkbox-line"><input type="checkbox" data-imgs checked> Rapatrier les images (pochettes, affiches, couvertures) dans les médias de la fiche</label><label class="checkbox-line"><input type="checkbox" data-nodup checked> Ne pas doubler ce qui est déjà au catalogue (même titre, même année)</label><p class="muted" data-prog></p></div>`,
@@ -121,7 +122,7 @@
                 }});
         }
         // la liste à cocher des candidats
-        const candList = (res, cands, note = '') => { res._cands = cands; res.innerHTML = cands.length ? `${note ? `<p class="muted">${esc(note)}</p>` : ''}<label class="checkbox-line"><input type="checkbox" data-all checked> Tout cocher (${cands.length})</label><div class="ar-cands">${cands.map((c, i) => `<label class="checkbox-line"><input type="checkbox" data-cand="${i}" ${c.off ? '' : 'checked'}>${c.img ? `<img src="${esc(c.img)}" alt="" loading="lazy">` : ''}<span><b>${esc(c.title)}</b> <small class="muted">${esc(c.sub || '')}</small></span></label>`).join('')}</div>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔍</span><span class="empty-line-text">Rien trouvé.</span></p>'; };
+        const candList = (res, cands, note = '') => { res._cands = cands; res.innerHTML = cands.length ? `${note ? `<p class="muted">${esc(note)}</p>` : ''}<label class="checkbox-line"><input type="checkbox" data-all checked> ${i18n('Tout cocher ({n})', {n: cands.length})}</label><div class="ar-cands">${cands.map((c, i) => `<label class="checkbox-line"><input type="checkbox" data-cand="${i}" ${c.off ? '' : 'checked'}>${c.img ? `<img src="${esc(c.img)}" alt="" loading="lazy">` : ''}<span><b>${esc(c.title)}</b> <small class="muted">${esc(c.sub || '')}</small></span></label>`).join('')}</div>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔍</span><span class="empty-line-text">Rien trouvé.</span></p>'; };
         const choose = (res, rows, onPick, note = 'Lequel ?') => { res._pick = i => onPick(rows[i]); res.innerHTML = `<p class="muted">${esc(note)}</p>${rows.map((r, i) => `<button type="button" class="ar-choice" data-pick="${i}"><b>${esc(r.label)}</b> <small class="muted">${esc(r.description || '')}</small></button>`).join('') || '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔍</span><span class="empty-line-text">Rien trouvé.</span></p>'}`; };
         const remote = q2 => post('artist_remote', q2);
         // Wikidata : trouver la personne (nom, adresse, Q…), puis la liste
@@ -136,9 +137,9 @@
             file: async (val, res) => { const file = await new Promise(ok => { const i = Object.assign(document.createElement('input'), {type: 'file', accept: '.json,application/json', hidden: true}); i.dataset.uiOff = '1'; document.body.appendChild(i); i.addEventListener('change', () => { ok(i.files?.[0] || null); i.remove(); }); i.addEventListener('cancel', () => { ok(null); i.remove(); }); i.click(); }); if (!file) { res.innerHTML = ''; return; }
                 let j = null; try { j = JSON.parse(await file.text()); } catch (_) {} if (!j || !Array.isArray(j.items)) throw new Error('Ce fichier n’est pas un export du catalogue (💾 Fichier).');
                 const list = j.items.map(x => x && typeof x === 'object' ? (x.data && typeof x.data === 'object' ? {kind: x.kind || j.kind, data: x.data} : {kind: j.kind, data: x}) : null).filter(x => x && ART.defs[x.kind] && x.kind !== 'profile');
-                candList(res, list.map(x => ({title: x.data.title || 'Sans titre', sub: [ART.defs[x.kind].label, U.yearOf(x.data.year || x.data.date || x.data.released)].filter(Boolean).join(' · '), item: {kind: x.kind, data: x.data}})), `${U.plural(list.length, 'fiche')} dans « ${file.name} ».`); },
+                candList(res, list.map(x => ({title: x.data.title || 'Sans titre', sub: [ART.defs[x.kind].label, U.yearOf(x.data.year || x.data.date || x.data.released)].filter(Boolean).join(' · '), item: {kind: x.kind, data: x.data}})), i18n('{n} dans « {nm} ».', {n: U.plural(list.length, 'fiche'), nm: file.name})); },
             ol_isbn: async (val, res) => { const j = await remote({source: 'openlibrary', what: 'isbn', id: val}); candList(res, (j.docs || []).map(olCand)); },
-            ol_author: async (val, res) => { const j = await remote({source: 'openlibrary', what: 'author', q: val}); candList(res, (j.docs || []).map(olCand), `${A().plural(j.numFound || 0, 'titre')} chez Open Library (les éditions d’un même livre sont regroupées).`); },
+            ol_author: async (val, res) => { const j = await remote({source: 'openlibrary', what: 'author', q: val}); candList(res, (j.docs || []).map(olCand), i18n('{n} chez Open Library (les éditions d’un même livre sont regroupées).', {n: A().plural(j.numFound || 0, 'titre')})); },
             ol_subject: async (val, res) => { const j = await remote({source: 'openlibrary', what: 'subject', q: val}); candList(res, (j.docs || []).map(d => ({...olCand(d), off: true, item: {data: {...olCand(d).item.data, role: 'sur'}}}))); },
             wd: (val, res) => wdPerson(val, res, async qid => {
                 if (tab === 'book') { const r = (await remote({source: 'wikidata', what: 'books', id: qid})).items, by = groupBy(r, 'b'); candList(res, by.map(g => { const x = g[0]; return {title: x.bLabel, sub: [wdYear(x.date), x.pubLabel, x.typeLabel].filter(Boolean).join(' · '), item: {data: {title: x.bLabel, year: wdYear(x.date), publisher: x.pubLabel || '', isbn: x.isbn || '', role: 'auteur', bkind: 'livre', link: x.b}}}; })); }
@@ -156,7 +157,7 @@
                     [...(j.cast || []).map(c => ({...c, job: 'acteur'})), ...(j.crew || []).map(c => ({...c, job: ({Director: 'réalisation', Screenplay: 'scénario', Writer: 'scénario', 'Original Music Composer': 'musique', Producer: 'production', Editor: 'montage', 'Director of Photography': 'image'})[c.job] || c.job}))].forEach(c => {
                         const k = `${c.media_type}${c.id}`, cur = map.get(k) || {c, jobs: new Set(), role: ''}; cur.jobs.add(c.job); if (c.character) cur.role = c.character; map.set(k, cur); });
                     candList(res, [...map.values()].map(({c, jobs, role}) => { const title = c.title || c.name || '', yr = yearOf(c.release_date || c.first_air_date), poster = c.poster_path ? `https://image.tmdb.org/t/p/w500${c.poster_path}` : '';
-                        return {title, sub: [yr, [...jobs].join(', '), role && `rôle : ${role}`, c.media_type === 'tv' ? 'série' : ''].filter(Boolean).join(' · '), img: poster.replace('w500', 'w92'),
+                        return {title, sub: [yr, [...jobs].join(', '), role && i18n('rôle : {nm}', {nm: role}), c.media_type === 'tv' ? 'série' : ''].filter(Boolean).join(' · '), img: poster.replace('w500', 'w92'),
                             full: async () => { let m = {}; try { m = await remote({source: 'tmdb', what: c.media_type === 'tv' ? 'tv' : 'movie', id: String(c.id), key}); } catch (_) {}
                                 return {data: {title, original: c.original_title || c.original_name || '', year: yr, fkind: c.media_type === 'tv' ? 'serie' : 'long', jobs: [...jobs].join(', '), role, synopsis: c.overview || m.overview || '', duration: m.runtime || '', country: (m.production_countries || []).map(x => x.name).join(', '), production: (m.production_companies || []).map(x => x.name).slice(0, 4).join(', '),
                                     director: (m.credits?.crew || []).filter(x => x.job === 'Director').map(x => x.name).join(', '), cast: (m.credits?.cast || []).slice(0, 12).map(x => `${x.name}${x.character ? ` (${x.character})` : ''}`).join(', '), imdb: m.imdb_id || m.external_ids?.imdb_id || '', tmdb: String(c.id), photos: poster ? [{u: poster, k: 'recto'}] : []}}; }}; }).sort((a, b) => String(a.sub).localeCompare(String(b.sub))));
@@ -191,7 +192,7 @@
                     if (data.value) data.value = String(data.value).replace(/[^\d.,]/g, '').replace(',', '.');
                     const st = (data.location + ' ' + data.owner).toLowerCase(); if (/mus[ée]e|fonds|frac|bibl/.test(st)) data.status = 'musee'; else if (/vendu/.test(st)) data.status = 'vendu';
                     const c = (data.condition || '').toLowerCase(); data.condition = /[àa] restaurer|mauvais/.test(c) ? 'restaurer' : /restaur[ée]/.test(c) ? 'restaure' : /moyen/.test(c) ? 'moyen' : /bon|tr[eè]s bien/.test(c) ? 'bon' : '';
-                    return {title: data.title || '(sans titre)', sub: [data.inv, data.date, data.technique].filter(Boolean).join(' · '), item: {data}}; }), `Colonnes reconnues : ${idx.map(x => x[0]).join(', ')}.`); },
+                    return {title: data.title || '(sans titre)', sub: [data.inv, data.date, data.technique].filter(Boolean).join(' · '), item: {data}}; }), i18n('Colonnes reconnues : {nm}.', {nm: idx.map(x => x[0]).join(', ')})); },
         };
         const groupBy = (rows, k) => { const m = new Map(); rows.forEach(r => { if (!m.has(r[k])) m.set(r[k], []); m.get(r[k]).push(r); }); return [...m.values()]; };
         const olCand = d => ({title: d.title, sub: [d.first_publish_year, (d.author_name || []).join(', '), (d.publisher || [])[0]].filter(Boolean).join(' · '), img: d.cover_i ? `https://covers.openlibrary.org/b/id/${d.cover_i}-S.jpg` : '',
@@ -199,7 +200,7 @@
         function filmsFromWd(rows) {
             const kindOf = t => /série|series/i.test(t) ? 'serie' : /court/i.test(t) ? 'court' : /documentaire|documentary/i.test(t) ? 'docu' : /téléfilm|television film/i.test(t) ? 'telefilm' : /clip|music video/i.test(t) ? 'clip' : 'long';
             return groupBy(rows, 'f').map(g => { const x = g[0], jobs = [...new Set(g.map(y => y.job))], role = [...new Set(g.map(y => y.roleLabel).filter(r => r && !/^Q\d+$/.test(r)))].join(', '), yr = wdYear(g.map(y => y.date).filter(Boolean).sort()[0]);
-                return {title: x.fLabel, sub: [yr, jobs.join(', '), role && `rôle : ${role}`, x.typeLabel].filter(Boolean).join(' · '), y: Number(yr) || 9999,
+                return {title: x.fLabel, sub: [yr, jobs.join(', '), role && i18n('rôle : {nm}', {nm: role}), x.typeLabel].filter(Boolean).join(' · '), y: Number(yr) || 9999,
                     item: {data: {title: x.fLabel, year: yr, jobs: jobs.join(', '), role, director: [...new Set(g.map(y => y.dirLabel).filter(Boolean))].join(', '), duration: x.dur ? String(Math.round(Number(x.dur))) : '', imdb: x.imdb || '', wikidata: x.f.split('/').pop(), fkind: kindOf(x.typeLabel || ''), link: x.imdb ? `https://www.imdb.com/title/${x.imdb}/` : x.f}}}; }).sort((a, b) => a.y - b.y);
         }
         async function mbItem(rg, artist) {

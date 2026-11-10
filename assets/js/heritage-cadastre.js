@@ -27,6 +27,7 @@
     const post = (action, body) => A().api(action, {}, {method: 'POST', body});
     const toast = (m, k, o) => A().toast(m, k, o);
     const plural = (n, w, many) => (A().plural ? A().plural(n, w, many) : `${n} ${w}`);
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const fold = s => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
     const KEY = 'listes:cadastre';
     const ROLES = ['propriétaire', 'copropriétaire', 'usufruitier', 'nu-propriétaire', 'héritier', 'acheteur', 'vendeur', 'fermier', 'métayer', 'locataire', 'occupant', 'exploitant', 'voisin', 'notaire', 'géomètre'];
@@ -158,7 +159,7 @@
         const isNew = !d;
         return new Promise(resolve => {
             let saved = null, mm = null, insee = p.insee || prefill.insee || '';
-            const dlg = ext.openDialog({eyebrow: 'CADASTRE', title: isNew ? 'Nouvelle parcelle' : `Modifier « ${p.title || titleOf(p)} »`, wide: true,
+            const dlg = ext.openDialog({eyebrow: 'CADASTRE', title: isNew ? 'Nouvelle parcelle' : i18n('Modifier « {title} »', {title: p.title || titleOf(p)}), wide: true,
                 body: `<div class="cad-edit">
                     <section class="cad-find" aria-label="Retrouver la parcelle">
                         <h4>🔍 Retrouver la parcelle ${UI()?.helpTip ? '' : ''}<small class="muted">— le contour, la surface, la section et le numéro viennent du cadastre d’aujourd’hui (IGN)</small></h4>
@@ -225,7 +226,7 @@
                     let hits = [];
                     const showHits = (list, src) => {
                         hits = list;
-                        box.innerHTML = list.length ? `<p class="muted small">${plural(list.length, 'parcelle trouvée', 'parcelles trouvées')}${src === 'wfs' ? ' (Géoplateforme IGN)' : ' (API Carto IGN)'}</p>${list.slice(0, 200).map(rowHtml).join('')}${list.length > 200 ? `<p class="muted small">… et ${list.length - 200} autres : écris le numéro.</p>` : ''}`
+                        box.innerHTML = list.length ? `<p class="muted small">${plural(list.length, 'parcelle trouvée', 'parcelles trouvées')}${src === 'wfs' ? ' (Géoplateforme IGN)' : ' (API Carto IGN)'}</p>${list.slice(0, 200).map(rowHtml).join('')}${list.length > 200 ? `<p class="muted small">${i18n('… et {n} autres : écris le numéro.', {n: list.length - 200})}</p>` : ''}`
                             : UI().notice('warn', 'Aucune parcelle à cet endroit dans le cadastre d’aujourd’hui. Vérifie la section et le numéro (une parcelle a pu être divisée ou renumérotée), ou remplis la fiche à la main.');
                         if (list.length === 1 && !list[0].existing_id) { setFound(list[0]); box.querySelector('.cad-hit')?.classList.add('is-on'); }
                     };
@@ -246,7 +247,7 @@
                         secsBox.innerHTML = '';
                         if (!insee) return;
                         try { const r = await get('cadastre_lookup', {mode: 'sections', insee}); const s = r.sections || [];
-                            secsBox.innerHTML = s.length ? `<span class="muted small">Sections de la commune :</span> ${s.map(x => `<button type="button" class="cad-secbtn" data-cad-secpick="${esc(x)}">${esc(secText(x))}</button>`).join('')}` : '';
+                            secsBox.innerHTML = s.length ? `<span class="muted small">${i18n('Sections de la commune :')}</span> ${s.map(x => `<button type="button" class="cad-secbtn" data-cad-secpick="${esc(x)}">${esc(secText(x))}</button>`).join('')}` : '';
                         } catch (_) { /* pas de réseau : on écrit la section à la main */ }
                     }
                     dg.addEventListener('picker-change', async e => {
@@ -313,7 +314,7 @@
                     const res = await post('save_cadastre_parcel', body);
                     saved = res.result || res;
                     changed();
-                    toast(isNew ? `Parcelle « ${saved.title} » créée.` : 'Enregistré', isNew ? '' : 'success');
+                    toast(isNew ? i18n('Parcelle « {title} » créée.', {title: saved.title}) : 'Enregistré', isNew ? '' : 'success');
                 }});
             if (!dlg) resolve(null);
         });
@@ -324,7 +325,7 @@
         const snap = r.result || r; let id = parcel.id;
         changed();
         const again = after || refresh;
-        A().undoToast(`Parcelle « ${parcel.title || titleOf(parcel)} » supprimée`, {
+        A().undoToast(i18n('Parcelle « {title} » supprimée', {title: parcel.title || titleOf(parcel)}), {
             undo: async () => { const x = await post('restore_cadastre_parcel', snap); id = (x.result || x).id; changed(); await again(); },
             redo: async () => { await post('delete_cadastre_parcel', {id}); changed(); await again(); }});
         if (Number(S().cadastreId) === Number(parcel.id)) S().cadastreId = 0;
@@ -353,7 +354,7 @@
             primary: '<button type="button" class="button" data-cad-new>＋ Ajouter une parcelle</button>',
             actions: ['<button type="button" class="button secondary" data-cad-bigmap>🗺 Voir sur la carte</button>', '<button type="button" class="button secondary" data-cad-oldmaps>🗺️ Cartes anciennes</button>'],
             more: ['<button type="button" data-cad-faq>❓ Ce qu’on peut récupérer (licences)</button>']})}
-            <div data-cad-bar></div><div data-cad-list>${UI().spinner('Chargement des parcelles…')}</div><p class="muted small cad-attr">${esc(ATTR)} · plans, numéros et surfaces d’aujourd’hui (le plan napoléonien se cale à part).</p></section>`;
+            <div data-cad-bar></div><div data-cad-list>${UI().spinner('Chargement des parcelles…')}</div><p class="muted small cad-attr">${esc(ATTR)} · ${i18n('plans, numéros et surfaces d’aujourd’hui (le plan napoléonien se cale à part).')}</p></section>`;
         let all;
         try { all = await loadAll(true); } catch (e) { if (isCurrent(token)) ws.querySelector('[data-cad-list]').innerHTML = UI().notice('error', e.message || 'Chargement impossible.'); return; }
         if (!isCurrent(token)) return;
@@ -362,8 +363,8 @@
         let shown = 60, bar = null;
         bar = UI().listBar({key: KEY, search: {placeholder: 'Chercher… (commune, section, numéro, lieu-dit, propriétaire)'},
             filters: [{id: 'commune', label: 'Commune', type: 'check', options: communes.map(c => [c, `${c} (${count(x => x.commune === c)})`, c])},
-                {id: 'owner', label: 'Propriétaire', type: 'radio', dflt: '', options: [['', 'Toutes'], ['yes', `Avec un propriétaire (${count(x => ownersOf(x).length)})`, 'Avec propriétaire'], ['no', `Sans propriétaire (${count(x => !ownersOf(x).length)})`, 'Sans propriétaire']]},
-                {id: 'house', label: 'Maison', type: 'check', options: [['yes', `Reliées à une maison (${count(x => x.houses.length)})`, 'Avec maison']]},
+                {id: 'owner', label: 'Propriétaire', type: 'radio', dflt: '', options: [['', 'Toutes'], ['yes', i18n('Avec un propriétaire ({n})', {n: count(x => ownersOf(x).length)}), 'Avec propriétaire'], ['no', i18n('Sans propriétaire ({n})', {n: count(x => !ownersOf(x).length)}), 'Sans propriétaire']]},
+                {id: 'house', label: 'Maison', type: 'check', options: [['yes', i18n('Reliées à une maison ({n})', {n: count(x => x.houses.length)}), 'Avec maison']]},
                 {id: 'shape', label: 'Contour', type: 'check', options: [['no', `Sans contour (${count(x => !x.geometry)})`, 'Sans contour']]}],
             view: {dflt: 'list', what: 'parcelles'}, sort: {options: [['az', 'Commune, section, numéro'], ['recent', 'Les plus récentes'], ['old', 'Les plus anciennes'], ['big', 'Les plus grandes']], value: 'az'},
             onChange: () => { shown = 60; if (bar) paint(); }});
@@ -439,8 +440,8 @@
             ${p.id ? cardSec('🏠 Chaîne des propriétaires (héritages)', `<div data-succ-host="parcel" data-succ-id="${Number(p.id)}" data-succ-name="${esc(p.title || '')}"></div>`) : ''}
             ${cardSec(`🖼 Médias <small>(${media.length})</small>`, media.length ? `<div class="cad-media">${media.map((m, i) => `<button type="button" class="cad-mthumb" data-cad-media="${i}" title="${esc(m.title)}">${m.filename && /image/.test(m.media_type || 'image') ? `<img src="media/${encodeURIComponent(m.thumbnail || m.filename)}" alt="" loading="lazy">` : '<span>📄</span>'}<small>${esc(m.title)}</small></button>`).join('')}</div>`
                 : A().empty('Aucune image : un extrait de matrice, le plan scanné, une photo…', {icon: '🖼', action: {label: '＋ Ajouter des images', attrs: 'data-empty-click="[data-cad-addmedia]"'}}), '<button type="button" class="button small secondary" data-cad-addmedia>＋ Ajouter des images</button>')}
-            ${cardSec('🏛 Plan napoléonien et archives', `<p>Le plan cadastral « napoléonien » (vers 1810-1850) et ses matrices sont aux <b>archives départementales</b>. Beaucoup les montrent en ligne (conditions de réutilisation propres à chaque département) : télécharge l’image de la section, ajoute-la à tes médias, puis cale-la sur la carte d’aujourd’hui (2 points suffisent, 3 ou plus c’est mieux).</p>
-                <ul class="cad-ar">${ar?.url ? `<li><a href="${esc(ar.url)}" target="_blank" rel="noopener noreferrer">${esc(ar.service)} ↗</a>${ar.digitized ? ` <small class="muted">${esc(ar.digitized)}</small>` : ''}</li>` : ar ? `<li>${esc(ar.service)} <small class="muted">(adresse du site à chercher)</small></li>` : ''}<li><a href="${esc(fa)}" target="_blank" rel="noopener noreferrer">Chercher « cadastre ${esc(p.commune || '')} » sur FranceArchives ↗</a></li></ul>
+            ${cardSec('🏛 Plan napoléonien et archives', `<p>${i18n('Le plan cadastral « napoléonien » (vers 1810-1850) et ses matrices sont aux <b>archives départementales</b>. Beaucoup les montrent en ligne (conditions de réutilisation propres à chaque département) : télécharge l’image de la section, ajoute-la à tes médias, puis cale-la sur la carte d’aujourd’hui (2 points suffisent, 3 ou plus c’est mieux).')}</p>
+                <ul class="cad-ar">${ar?.url ? `<li><a href="${esc(ar.url)}" target="_blank" rel="noopener noreferrer">${esc(ar.service)} ↗</a>${ar.digitized ? ` <small class="muted">${esc(ar.digitized)}</small>` : ''}</li>` : ar ? `<li>${esc(ar.service)} <small class="muted">${i18n('(adresse du site à chercher)')}</small></li>` : ''}<li><a href="${esc(fa)}" target="_blank" rel="noopener noreferrer">${i18n('Chercher « cadastre {commune} » sur FranceArchives ↗', {commune: esc(p.commune || '')})}</a></li></ul>
                 <p class="muted small">Liens donnés sans garantie : les sites des archives changent souvent.</p>
                 ${of('oldmap').length ? `<h4 class="cad-sub">🗺️ Plans anciens calés</h4>${linkRows(of('oldmap'), l => ({thumb: '<span class="ui-card-ico" aria-hidden="true">🗺️</span>', name: l.title, open: l.gone ? '' : `data-cad-oldmap="${l.id}"`, actions: l.gone ? '' : `<button type="button" class="button small secondary" data-cad-oldmapshow="${l.id}">🗺 Sur la carte</button>`}))}` : ''}`,
                 '<button type="button" class="button small" data-cad-calage>＋ Caler un plan ancien</button>')}
@@ -472,7 +473,7 @@
                 if (b.matches('[data-cad-editme]')) { if (await edit(await get('cadastre_parcel', {id: p.id}))) reload?.(); return; }
                 if (b.matches('[data-cad-calage]')) {
                     leave();
-                    S().hOldMapPrefill = {title: `Plan napoléonien de ${p.commune || 'la commune'}${p.section ? `, section ${secText(p.section)}` : ''}`, lat: p.lat, lon: p.lon, parcelId: p.id, mapId: null};
+                    S().hOldMapPrefill = {title: p.section ? i18n('Plan napoléonien de {commune}, section {section}', {commune: p.commune || i18n('la commune'), section: secText(p.section)}) : i18n('Plan napoléonien de {commune}', {commune: p.commune || i18n('la commune')}), lat: p.lat, lon: p.lon, parcelId: p.id, mapId: null};
                     S().listType = 'old_maps'; await A().setModule('listes'); ext.lists.old_maps?.(++S().workspaceToken, 0);
                     toast('Donne une image du plan (photo ou scan), enregistre, puis clique 2 points (ou plus) sur l’image et au même endroit sur la carte.');
                     return;
@@ -481,7 +482,7 @@
                     const list = await P().openMediaPicker?.({multiple: true, types: ['image', 'document'], eyebrow: 'CADASTRE', title: 'Images de la parcelle', intro: 'Un extrait de matrice cadastrale, le plan napoléonien scanné, une photo de la parcelle… « 📁 Importer » ajoute une image de l’ordinateur à tes médias.', okLabel: 'Relier ces images'});
                     if (!list?.length) return;
                     for (const m of list) await post('cadastre_link', {parcel_id: p.id, kind: 'media', id: Number(m.id), on: true});
-                    toast(`${plural(list.length, 'image reliée', 'images reliées')} à la parcelle.`); changed(); reload?.(); return;
+                    toast(i18n('{count} à la parcelle.', {count: plural(list.length, 'image reliée', 'images reliées')})); changed(); reload?.(); return;
                 }
                 if (b.matches('[data-cad-refetch]')) {
                     b.disabled = true;
@@ -498,8 +499,8 @@
                     try {
                         const r = await get('cadastre_dvf', {idu: p.idu});
                         box.innerHTML = r.sales.length ? `<div class="data-table-wrap"><table class="data-table"><thead><tr><th>Date</th><th>Vente</th><th>Prix</th><th>Terrain</th><th>Bâti</th><th>Adresse</th></tr></thead><tbody>${r.sales.map(s => `<tr><td>${esc(s.date ? new Date(s.date + 'T12:00:00').toLocaleDateString('fr-FR') : '')}</td><td>${esc(s.nature_mutation)}</td><td>${s.valeur != null ? esc(Math.round(s.valeur).toLocaleString('fr-FR')) + ' €' : ''}</td><td>${esc([s.nature_culture, s.surface_terrain != null ? fmtN(s.surface_terrain) + ' m²' : ''].filter(Boolean).join(' · '))}</td><td>${esc([s.type_local, s.surface_bati ? fmtN(s.surface_bati) + ' m²' : ''].filter(Boolean).join(' · '))}</td><td>${esc(s.adresse)}</td></tr>`).join('')}</tbody></table></div>
-                            <p class="muted small">${esc(r.attribution)} · années lues : ${esc((r.years || []).join(', '))}${!p.nature && r.sales.find(s => s.nature_culture) ? ` · <button type="button" class="link-button" data-cad-dvfnature="${esc(r.sales.find(s => s.nature_culture).nature_culture)}">reprendre la nature « ${esc(r.sales.find(s => s.nature_culture).nature_culture)} »</button>` : ''}</p>`
-                            : A().empty(`Aucune vente de cette parcelle depuis ${r.years?.length ? Math.min(...r.years) : 2020}.`, {icon: '💶'});
+                            <p class="muted small">${esc(r.attribution)} · ${i18n('années lues : {years}', {years: esc((r.years || []).join(', '))})}${!p.nature && r.sales.find(s => s.nature_culture) ? ` · <button type="button" class="link-button" data-cad-dvfnature="${esc(r.sales.find(s => s.nature_culture).nature_culture)}">${i18n('reprendre la nature « {nature} »', {nature: esc(r.sales.find(s => s.nature_culture).nature_culture)})}</button>` : ''}</p>`
+                            : A().empty(i18n('Aucune vente de cette parcelle depuis {year}.', {year: String(r.years?.length ? Math.min(...r.years) : 2020)}), {icon: '💶'});
                     } catch (err) { box.innerHTML = UI().notice('error', err.message); }
                     return;
                 }
@@ -650,7 +651,7 @@
         try { items = (await get('cadastre_for', {kind, id, insee})).items || []; } catch (e) { host.innerHTML = UI().notice('error', e.message); return; }
         const ro = document.body.classList.contains('is-kiosk');
         const btns = ro ? '' : `<div class="cad-host-btns"><button type="button" class="button small secondary" data-cad-hadd>＋ Ajouter une parcelle</button><span class="cad-host-pk" data-cad-hpk>${P().pickerField({name: 'cad_link', hiddenName: false, kind: 'parcel', placeholder: '🔗 Relier une parcelle de ta liste…'})}</span></div>`;
-        const body = (items.length ? blockRows(items, {mine: kind !== 'place'}) : A().empty(kind === 'house' ? 'Aucune parcelle reliée à cette maison' : `Aucune parcelle à ${name || 'cet endroit'}`, {icon: '🗺'})) + btns;
+        const body = (items.length ? blockRows(items, {mine: kind !== 'place'}) : A().empty(kind === 'house' ? 'Aucune parcelle reliée à cette maison' : (name ? i18n('Aucune parcelle à {nm}', {nm: name}) : i18n('Aucune parcelle à cet endroit')), {icon: '🗺'})) + btns;
         host.innerHTML = inHouse ? body : `<section class="maintenance-panel cad-host"><h3>🗺 Parcelles du cadastre${items.length ? ` <small>(${items.length})</small>` : ''}</h3>${body}</section>`;
         host.querySelector('[data-cad-hadd]')?.addEventListener('click', async () => {
             const pre = kind === 'house' ? {house: {id, title: name}} : {place: id ? {id, title: name, name} : null, insee, linkPlace: null};

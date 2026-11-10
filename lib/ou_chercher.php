@@ -333,7 +333,7 @@ function ouc_walls_data(PDO $pdo, array $q = []): array
     foreach ($items as $it) { $counts[$it['status']] = ($counts[$it['status']] ?? 0) + 1; if ($it['manual']) { $counts['manual']++; } if (isset($counts[$it['missing']])) { $counts[$it['missing']]++; } }
     $names = [];
     foreach ($newly as $pid) { foreach ($items as $it) { if ($it['person_id'] === $pid) { $names[] = ['person_id' => $pid, 'name' => $it['name']]; } } }
-    return ['root_id' => $root, 'items' => $items, 'counts' => $counts, 'newly_solved' => $names, 'statuses' => OUC_STATUSES];
+    return ['root_id' => $root, 'items' => $items, 'counts' => $counts, 'newly_solved' => $names, 'statuses' => array_map(static fn($s) => i18n_t($s), OUC_STATUSES)];
 }
 
 /** GET mur_de_brique : déjà cherché et indices dans la base pour une personne */
@@ -375,11 +375,15 @@ function ouc_wall_detail(PDO $pdo, int $pid): array
             $hid = (int) $h['id']; if (isset($kin[$hid])) { continue; }
             $hy = $h['by'] !== null ? (int) $h['by'] : null; $samePlace = $h['place'] && isset($places[ouc_fold(explode(',', (string) $h['place'])[0])]);
             if ($by !== null && $hy !== null && $by - $hy >= 16 && $by - $hy <= 55) {
-                $hints[] = ['sort' => 'homonym', 'person_id' => $hid, 'name' => ouc_name($h), 'score' => 3 + ($samePlace ? 2 : 0), 'text' => 'Même nom, né' . ($h['gender'] === 'female' ? 'e' : '') . ' ' . ($by - $hy) . ' ans avant' . ($h['place'] ? ' à ' . explode(',', (string) $h['place'])[0] : '') . ' : ' . ($h['gender'] === 'female' ? 'sa mère ?' : 'son père ?')];
+                // 🌐 indices écrits dans la langue de la page (i18n_t), une phrase entière par cas
+                $hf = $h['gender'] === 'female'; $hv = ['n' => $by - $hy, 'place' => $h['place'] ? explode(',', (string) $h['place'])[0] : '', 'y' => $hy];
+                $hints[] = ['sort' => 'homonym', 'person_id' => $hid, 'name' => ouc_name($h), 'score' => 3 + ($samePlace ? 2 : 0), 'text' => i18n_t($h['place'] ? ($hf ? 'Même nom, née {n} ans avant à {place} : sa mère ?' : 'Même nom, né {n} ans avant à {place} : son père ?') : ($hf ? 'Même nom, née {n} ans avant : sa mère ?' : 'Même nom, né {n} ans avant : son père ?'), $hv)];
             } elseif ($by !== null && $hy !== null && abs($by - $hy) <= 12) {
-                $hints[] = ['sort' => 'homonym', 'person_id' => $hid, 'name' => ouc_name($h), 'score' => 2 + ($samePlace ? 2 : 0), 'text' => 'Même nom, né' . ($h['gender'] === 'female' ? 'e' : '') . ' en ' . $hy . ($h['place'] ? ' à ' . explode(',', (string) $h['place'])[0] : '') . ' : un frère, une sœur, un cousin ?'];
+                $hf = $h['gender'] === 'female'; $hv = ['place' => $h['place'] ? explode(',', (string) $h['place'])[0] : '', 'y' => $hy];
+                $hints[] = ['sort' => 'homonym', 'person_id' => $hid, 'name' => ouc_name($h), 'score' => 2 + ($samePlace ? 2 : 0), 'text' => i18n_t($h['place'] ? ($hf ? 'Même nom, née en {y} à {place} : un frère, une sœur, un cousin ?' : 'Même nom, né en {y} à {place} : un frère, une sœur, un cousin ?') : ($hf ? 'Même nom, née en {y} : un frère, une sœur, un cousin ?' : 'Même nom, né en {y} : un frère, une sœur, un cousin ?'), $hv)];
             } elseif ($samePlace) {
-                $hints[] = ['sort' => 'homonym', 'person_id' => $hid, 'name' => ouc_name($h), 'score' => 1, 'text' => 'Même nom, même lieu' . ($hy ? ' (né' . ($h['gender'] === 'female' ? 'e' : '') . ' en ' . $hy . ')' : '')];
+                $hf = $h['gender'] === 'female';
+                $hints[] = ['sort' => 'homonym', 'person_id' => $hid, 'name' => ouc_name($h), 'score' => 1, 'text' => i18n_t($hy ? ($hf ? 'Même nom, même lieu (née en {y})' : 'Même nom, même lieu (né en {y})') : 'Même nom, même lieu', ['y' => $hy])];
             }
         }
     }
@@ -391,7 +395,7 @@ function ouc_wall_detail(PDO $pdo, int $pid): array
         foreach ($s->fetchAll(PDO::FETCH_ASSOC) as $w) {
             $same = $last !== '' && ouc_fold((string) $w['last_name']) === ouc_fold($last);
             $hints[] = ['sort' => 'witness', 'person_id' => (int) $w['person_id'], 'name' => ouc_name(['id' => $w['person_id']] + $w), 'score' => $same ? 4 : 2,
-                'text' => trim(($w['note'] ? $w['note'] : 'Témoin') . ' · ' . ($w['label'] ?: 'acte') . ($w['year'] ? ' de ' . $w['year'] : '')) . ($same ? ' · même nom : de la famille ?' : ' · souvent un proche')];
+                'text' => trim(($w['note'] ? $w['note'] : i18n_t('Témoin')) . ' · ' . ($w['year'] ? i18n_t('{act} de {y}', ['act' => $w['label'] ?: i18n_t('acte'), 'y' => $w['year']]) : ($w['label'] ?: i18n_t('acte')))) . ' · ' . i18n_t($same ? 'même nom : de la famille ?' : 'souvent un proche')];
         }
     }
     // 3. voisins et foyer dans les recensements
@@ -400,8 +404,8 @@ function ouc_wall_detail(PDO $pdo, int $pid): array
             FROM census_members cm JOIN census_members cm2 ON cm2.census_id=cm.census_id AND cm2.id<>cm.id JOIN census_records cr ON cr.id=cm.census_id LEFT JOIN places pl ON pl.id=cr.place_id WHERE cm.person_id=? LIMIT 40");
         try { $s->execute([$pid]); foreach ($s->fetchAll(PDO::FETCH_ASSOC) as $c) {
             $nm = trim((string) ($c['first_name'] ?? '') . ' ' . (string) $c['display_name']);
-            $hints[] = ['sort' => 'census', 'person_id' => (int) ($c['person_id'] ?? 0), 'name' => $nm !== '' ? $nm : 'Quelqu’un', 'score' => 2,
-                'text' => 'Dans le même foyer en ' . $c['year'] . ($c['place'] !== '' ? ' à ' . explode(',', $c['place'])[0] : '') . ($c['household_position'] ? ' (' . $c['household_position'] . ')' : '') . ' : un parent âgé, un beau-parent ?'];
+            $hints[] = ['sort' => 'census', 'person_id' => (int) ($c['person_id'] ?? 0), 'name' => $nm !== '' ? $nm : i18n_t('Quelqu’un'), 'score' => 2,
+                'text' => i18n_t($c['place'] !== '' ? 'Dans le même foyer en {y} à {place}{pos} : un parent âgé, un beau-parent ?' : 'Dans le même foyer en {y}{pos} : un parent âgé, un beau-parent ?', ['y' => $c['year'], 'place' => $c['place'] !== '' ? explode(',', $c['place'])[0] : '', 'pos' => $c['household_position'] ? ' (' . $c['household_position'] . ')' : ''])];
         } } catch (Throwable $_) {}
     }
     // 4. ADN : correspondances au même nom ou reliées à quelqu'un du même nom
@@ -410,7 +414,7 @@ function ouc_wall_detail(PDO $pdo, int $pid): array
         $s->execute(['%' . mb_strtolower($last) . '%', $last]);
         foreach ($s->fetchAll(PDO::FETCH_ASSOC) as $m) {
             $hints[] = ['sort' => 'dna', 'person_id' => (int) ($m['person_id'] ?? 0), 'dna_id' => (int) $m['id'], 'name' => (string) $m['name'], 'score' => 3,
-                'text' => 'Correspondance ADN' . ($m['shared_cm'] ? ' · ' . round((float) $m['shared_cm']) . ' cM' : '') . ($m['relationship'] ? ' · ' . $m['relationship'] : '') . ' : son arbre a peut-être la suite'];
+                'text' => i18n_t('Correspondance ADN{details} : son arbre a peut-être la suite', ['details' => ($m['shared_cm'] ? ' · ' . round((float) $m['shared_cm']) . ' cM' : '') . ($m['relationship'] ? ' · ' . $m['relationship'] : '')])];
         }
     }
     usort($hints, static fn($a, $b) => $b['score'] <=> $a['score']);
@@ -491,9 +495,9 @@ function ouc_semaine_rows(PDO $pdo): array
     usort($open, static fn($a, $b) => [($a['status'] === 'progress') ? 0 : 1, $a['generation'] ?? 99, $a['sosa'] ?? PHP_INT_MAX] <=> [($b['status'] === 'progress') ? 0 : 1, $b['generation'] ?? 99, $b['sosa'] ?? PHP_INT_MAX]);
     $pool = array_slice($open, 0, 8);
     $w = $pool[$week % count($pool)];
-    $miss = ['both' => 'ses deux parents', 'father' => 'son père', 'mother' => 'sa mère'][$w['missing']] ?? 'ce qui manque';
-    return [['key' => 'mur:' . (int) $w['person_id'] . ':' . $week, 'sort' => 'piste', 'urgency' => 'week', 'badge' => '🧩 Mur de la semaine',
-        'title' => 'Mur de brique : ' . $w['name'] . ' — chercher ' . $miss,
-        'detail' => implode(' · ', array_filter([$w['sosa'] ? 'Sosa ' . $w['sosa'] : '', $w['generation'] ? 'génération ' . $w['generation'] : '', '🌍 Où chercher ? te propose les sites à consulter'])),
-        'person_id' => (int) $w['person_id'], 'open' => ['kind' => 'murs', 'id' => (int) $w['person_id']], 'done_label' => 'Piste faite', 'snooze' => 'mark']];
+    $title = ['both' => 'Mur de brique : {name} — chercher ses deux parents', 'father' => 'Mur de brique : {name} — chercher son père', 'mother' => 'Mur de brique : {name} — chercher sa mère'][$w['missing']] ?? 'Mur de brique : {name} — chercher ce qui manque';
+    return [['key' => 'mur:' . (int) $w['person_id'] . ':' . $week, 'sort' => 'piste', 'urgency' => 'week', 'badge' => i18n_t('🧩 Mur de la semaine'),
+        'title' => i18n_t($title, ['name' => $w['name']]),
+        'detail' => implode(' · ', array_filter([$w['sosa'] ? 'Sosa ' . $w['sosa'] : '', $w['generation'] ? i18n_t('génération {n}', ['n' => $w['generation']]) : '', i18n_t('🌍 Où chercher ? te propose les sites à consulter')])),
+        'person_id' => (int) $w['person_id'], 'open' => ['kind' => 'murs', 'id' => (int) $w['person_id']], 'done_label' => i18n_t('Piste faite'), 'snooze' => 'mark']];
 }

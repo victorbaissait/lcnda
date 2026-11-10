@@ -14,6 +14,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const ART = window.LCNDA_ART, PF = ART?.PF; if (!ART?.define || !PF) return;
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const A = () => window.LCNDA_APP, UI = () => window.LCNDA_UI || {};
@@ -175,16 +176,16 @@
         const stdPick = d => ['ppage', 'pfpages', 'page'].forEach(k => { if (d?.[k] !== undefined) std.data[k] = clone(d[k]); else delete std.data[k]; });
         const pframe = UI().presetsFrame?.({id: 'profils-pages', what: 'les pages des profils (et tous les champs affichés des fiches)', quietApply: true,
             list: () => M.presets.map(p => ({name: String(p?.name || 'Sans nom')})),
-            apply: i => { const p = M.presets[i]; if (!p) return false; stdPick(p.data); std.dirty = true; std.repaint(); toast(`Réglage « ${p.name} » repris : « Enregistrer le réglage standard » pour le garder.`); },
+            apply: i => { const p = M.presets[i]; if (!p) return false; stdPick(p.data); std.dirty = true; std.repaint(); toast(i18n('Réglage « {nm} » repris : « Enregistrer le réglage standard » pour le garder.', {nm: p.name})); },
             save: name => { const l = clone(M.presets), row = {name, data: clone(std.data)}, at = l.findIndex(p => p.name === name); if (at >= 0) l[at] = row; else l.push(row); return savePresets(l); },
             replace: i => { const l = clone(M.presets); if (!l[i]) return false; l[i].data = clone(std.data); return savePresets(l); },
             rename: (i, name) => { const l = clone(M.presets); if (!l[i]) return false; l[i].name = name; return savePresets(l); },
-            duplicate: async i => { const l = clone(M.presets), p = l[i]; if (!p) return false; const nm = UI().freeName(p.name, l.map(x => x.name)); l.splice(i + 1, 0, {...clone(p), name: nm}); await savePresets(l); toast(`Copie « ${nm} » créée.`); },
+            duplicate: async i => { const l = clone(M.presets), p = l[i]; if (!p) return false; const nm = UI().freeName(p.name, l.map(x => x.name)); l.splice(i + 1, 0, {...clone(p), name: nm}); await savePresets(l); toast(i18n('Copie « {nm} » créée.', {nm: nm})); },
             exportOne: i => { const p = M.presets[i]; if (p) A().exportSettingFile?.('artistes', p.name, {artistes: p.data}); return false; },
             remove: async i => { const old = clone(M.presets), p = old[i]; if (!p) return false; const l = old.filter((_, k) => k !== i); await savePresets(l);
-                A().undoToast(`Réglage « ${p.name} » supprimé`, {undo: async () => { await savePresets(old); pframe.refresh(); }, redo: async () => { await savePresets(l); pframe.refresh(); }}); },
+                A().undoToast(i18n('Réglage « {nm} » supprimé', {nm: p.name}), {undo: async () => { await savePresets(old); pframe.refresh(); }, redo: async () => { await savePresets(l); pframe.refresh(); }}); },
             importOne: async () => { const got = await A().importSettingFile?.('artistes', {names: M.presets.map(p => p.name), check: x => x && typeof x.artistes === 'object'}); if (!got) return false;
-                await savePresets([...clone(M.presets), {name: got.nom, data: got.donnees.artistes}]); toast(`Réglage « ${got.nom} » importé : « Appliquer » pour t’en servir.`); }});
+                await savePresets([...clone(M.presets), {name: got.nom, data: got.donnees.artistes}]); toast(i18n('Réglage « {nm} » importé : « Appliquer » pour t’en servir.', {nm: got.nom})); }});
         if (pframe) body.querySelector('[data-presets-slot="pfm-presets"]').replaceWith(pframe);
         const peopleBox = body.querySelector('[data-pfm-people]');
         const paintPeople = () => { peopleBox.innerHTML = M.people.length ? `<div class="pfm-plist">${M.people.map(p => `<div class="pfm-prow" data-pid="${p.id}"><b>${esc(nameOf(p))}</b><small class="muted">${window.LCNDA_UI?.when?.(p.updated_at, {label: 'Modifié'}) || ''}</small><button type="button" class="button small secondary" data-pfm-open="${p.id}">↗ Ouvrir</button><button type="button" class="button small secondary" data-pfm-drop="${p.id}">↺ Remettre comme au départ</button></div>`).join('')}</div>` : (A().emptyState ? A().emptyState({icon: '🧩', text: 'Aucune page personnalisée', hint: 'Une exception se crée ici, ou dans « ⚙️ Organiser la page » (« Réglage propre à … »).'}) : ''); };
@@ -194,17 +195,17 @@
         const dropPerson = async pid => { const p = M.people.find(x => x.id === pid), old = p?.data; if (!old) return;
             try { await write(`person:${pid}`, null); } catch (e) { toast(e.message, 'error'); return; }
             await reloadPeople(); if (exc.pid === pid) { exc.data = null; excBox.innerHTML = '<p class="muted">Cette page suit maintenant le réglage standard.</p>'; body.querySelector('[data-pfm-excact]').hidden = true; }
-            A().undoToast(`Page de ${nameOf(p)} : retour au standard`, {undo: async () => { await write(`person:${pid}`, old); await reloadPeople(); }, redo: async () => { await write(`person:${pid}`, null); await reloadPeople(); }}); };
+            A().undoToast(i18n('Page de {nm} : retour au standard', {nm: nameOf(p)}), {undo: async () => { await write(`person:${pid}`, old); await reloadPeople(); }, redo: async () => { await write(`person:${pid}`, null); await reloadPeople(); }}); };
         body.addEventListener('picker-change', async e => { if (!e.target.closest('[data-pfm-exc]')) return; const v = e.detail?.value ?? e.detail?.item?.id, pid = Number(typeof v === 'object' ? v?.id : v) || 0; if (!pid) return;
             try { const b = await A().api('art', {op: 'boot', person_id: pid}); const own = b.settings?.person?.own ? b.settings.person : {...clone(g), own: true};
                 Object.assign(exc, {pid, name: nameOf(b.person || {}), data: own, dirty: false, keys: [...new Set([...(b.person?.profiles || []).map(p => p.profile_key), ...(Number(b.person?.is_artist) ? ['artist'] : [])])].filter(known)});
-                if (!exc.keys.length) { excBox.innerHTML = `<p class="muted">${esc(exc.name)} n’a pas encore de profil : « 🧩 Choisir ses profils… » sur sa fiche.</p>`; body.querySelector('[data-pfm-excact]').hidden = true; exc.data = null; return; }
+                if (!exc.keys.length) { excBox.innerHTML = `<p class="muted">${i18n('{nm} n’a pas encore de profil : « 🧩 Choisir ses profils… » sur sa fiche.', {nm: esc(exc.name)})}</p>`; body.querySelector('[data-pfm-excact]').hidden = true; exc.data = null; return; }
                 exc.repaint(); } catch (er) { toast(er.message, 'error'); } });
         body.addEventListener('click', async e => {
             const b = e.target.closest('button'); if (!b || b.closest('.pk')) return;
             if (b.hasAttribute('data-pfm-save-std')) { const old = clone(M.global); try { await write('global', std.data); M.global = clone(std.data); std.dirty = false; PF.profColors = {...(std.data.ppage?.profColors || {})}; A().undoToast ? A().undoToast('Réglage standard des pages enregistré', {undo: async () => { await write('global', old); M.global = old; std.data = clone(old); std.repaint(); }}) : toast('✓ Enregistré'); } catch (er) { toast(er.message, 'error', {retry: () => b.click()}); } return; }
             if (b.hasAttribute('data-pfm-reset-std')) { const old = clone(std.data); ['ppage', 'pfpages', 'page'].forEach(k => { delete std.data[k]; }); try { await write('global', std.data); M.global = clone(std.data); PF.profColors = {}; std.repaint(); A().undoToast?.('Pages remises au réglage de départ', {undo: async () => { await write('global', old); M.global = old; std.data = clone(old); std.repaint(); }}); } catch (er) { toast(er.message, 'error'); } return; }
-            if (b.hasAttribute('data-pfm-save-exc')) { if (!exc.pid || !exc.data) return; try { exc.data.own = true; await write(`person:${exc.pid}`, exc.data); exc.dirty = false; await reloadPeople(); toast(`✓ Exception enregistrée pour ${exc.name}`, 'success'); } catch (er) { toast(er.message, 'error', {retry: () => b.click()}); } return; }
+            if (b.hasAttribute('data-pfm-save-exc')) { if (!exc.pid || !exc.data) return; try { exc.data.own = true; await write(`person:${exc.pid}`, exc.data); exc.dirty = false; await reloadPeople(); toast(i18n('✓ Exception enregistrée pour {nm}', {nm: exc.name}), 'success'); } catch (er) { toast(er.message, 'error', {retry: () => b.click()}); } return; }
             if (b.hasAttribute('data-pfm-open-exc')) return exc.pid && PF.openPage(exc.pid, 'all');
             if (b.hasAttribute('data-pfm-drop-exc')) return exc.pid && dropPerson(exc.pid);
             if (b.dataset.pfmOpen) return PF.openPage(Number(b.dataset.pfmOpen), 'all');

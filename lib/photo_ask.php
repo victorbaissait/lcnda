@@ -551,7 +551,7 @@ function pa_import(PDO $pdo, array $data): array
         $action = in_array($c['action'] ?? '', ['accept', 'refuse', 'later'], true) ? $c['action'] : 'later';
         if ($action !== 'accept') { $counts[$action]++; continue; }
         $pid = safe_int($c['person_id'] ?? 0);
-        if (!$pid || !pa_people($pdo, [$pid])) { throw new RuntimeException('Choisis la fiche de la personne pour le visage ' . substr($a['face'], 1) . ' (ou « Plus tard »).'); }
+        if (!$pid || !pa_people($pdo, [$pid])) { throw new RuntimeException(i18n_t('Choisis la fiche de la personne pour le visage {n} (ou « Plus tard »).', ['n' => substr($a['face'], 1)])); }
         $agree = 0;
         foreach ($replies as $rep) { foreach (($rep['answers'] ?? []) as $o) { if (($o['face'] ?? '') === $a['face'] && pa_answer_key($o) === pa_answer_key($a)) { $agree++; } } }
         $conf = $agree > 0 ? 'probable' : 'possible';

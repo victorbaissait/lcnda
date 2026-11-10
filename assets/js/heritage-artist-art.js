@@ -5,6 +5,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const ART = window.LCNDA_ART; if (!ART?.define) return;
     const U = ART.util, esc = U.esc;
     const WKIND = [['peinture', 'Peinture'], ['dessin', 'Dessin'], ['aquarelle', 'Aquarelle'], ['gravure', 'Gravure'], ['sculpture', 'Sculpture'], ['photographie', 'Photographie'], ['pastel', 'Pastel'], ['ceramique', 'Céramique'], ['autre', 'Autre']];
@@ -86,7 +87,7 @@
             if (typeof d.literature === 'string') d.literature = lines(d.literature).map(x => ({ref: {txt: x}}));
             if (d.catref === undefined && d.inv) d.catref = ''; if (d.valueDate && !d.value_by) d.value_by = d.valueDate; },
         sorts: [['catref', 'N° du catalogue'], ['date', 'Date'], ['az', 'Titre A → Z'], ['za', 'Titre Z → A'], ['value', 'Valeur'], ['size', 'Dimensions']],
-        summary: list => { const v = list.reduce((a, w) => a + (U.num(w.data.value) || 0), 0); return v ? `valeur estimée ${v.toLocaleString('fr-FR')} €` : ''; },
+        summary: list => { const v = list.reduce((a, w) => a + (U.num(w.data.value) || 0), 0); return v ? i18n('valeur estimée {amount} €', {amount: Number(v)}) : ''; },
     });
     const nextRef = store => { const n = store.of('work').map(w => Number(String(w.data.catref || '').match(/(\d+)\s*$/)?.[1] || 0)); return `CR ${(n.length ? Math.max(...n) : 0) + 1}`; };
     // la série : « Les moulins de la Corrèze (5) »

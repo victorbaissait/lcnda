@@ -5633,7 +5633,7 @@ function insee_deces_import(PDO $pdo): never
         if ($dup) {
             if ($cleanupPath !== '') @unlink($cleanupPath);
             json_response([
-                'error' => "Ce fichier semble déjà avoir été importé (« " . $dup['filename'] . " » le " . $dup['imported_at'] . ", " . (int)$dup['inserted_count'] . " ligne(s)). Confirme si tu veux l'importer quand même.",
+                'error' => i18n_t("Ce fichier semble déjà avoir été importé (« {file} » le {date}, {n} ligne(s)). Confirme si tu veux l'importer quand même.", ['file' => $dup['filename'], 'date' => $dup['imported_at'], 'n' => (int)$dup['inserted_count']]),
                 'duplicate' => true,
                 'existing_import' => $dup,
             ], 409);
@@ -10409,7 +10409,7 @@ function assert_family_unlocked(PDO $pdo, int $familyId): void
     if(!$familyId)return;
     $stmt=$pdo->prepare('SELECT partner1_id,partner2_id FROM families WHERE id=?');$stmt->execute([$familyId]);$f=$stmt->fetch();
     if(!$f)return;
-    foreach(['partner1_id','partner2_id'] as $k)if($f[$k]!==null&&person_is_locked($pdo,(int)$f[$k]))throw new RuntimeException('Fiche verrouillée ('.person_label_by_id($pdo,(int)$f[$k]).'). Déverrouille-la avant de modifier ce couple.');
+    foreach(['partner1_id','partner2_id'] as $k)if($f[$k]!==null&&person_is_locked($pdo,(int)$f[$k]))throw new RuntimeException(i18n_t('Fiche verrouillée ({name}). Déverrouille-la avant de modifier ce couple.',['name'=>person_label_by_id($pdo,(int)$f[$k])]));
 }
 
 /** Vérifie que la fiche (ou le couple) qui porte cet événement n'est pas verrouillée. */
@@ -11258,10 +11258,10 @@ function merge_people(PDO $pdo,array $data): array
     if(person_kind_of($pdo,$target)!==person_kind_of($pdo,$source))throw new RuntimeException('Fusion impossible : on ne fusionne pas une personne avec un animal.');
     // Deux fiches d'un même couple, ou un ancêtre et son descendant, ne sont pas des doublons : la fusion casserait l'arbre.
     $na=trim(full_name($a))?:'la fiche #'.$target;$nb=trim(full_name($b))?:'la fiche #'.$source;
-    if(couple_family_id($pdo,$target,$source))throw new RuntimeException('Fusion impossible : '.$na.' et '.$nb.' forment un couple. Deux conjoints ne sont pas la même personne.');
+    if(couple_family_id($pdo,$target,$source))throw new RuntimeException(i18n_t('Fusion impossible : {a} et {b} forment un couple. Deux conjoints ne sont pas la même personne.',['a'=>$na,'b'=>$nb]));
     if(person_is_ancestor_of($pdo,$target,$source)||person_is_ancestor_of($pdo,$source,$target)){
         [$anc,$desc]=person_is_ancestor_of($pdo,$target,$source)?[$na,$nb]:[$nb,$na];
-        throw new RuntimeException('Fusion impossible : '.$anc.' est un ancêtre de '.$desc.'. Un ancêtre et son descendant ne sont pas la même personne.');
+        throw new RuntimeException(i18n_t('Fusion impossible : {a} est un ancêtre de {b}. Un ancêtre et son descendant ne sont pas la même personne.',['a'=>$anc,'b'=>$desc]));
     }
     $pdo->prepare("INSERT INTO name_variants(person_id,type,first_name,middle_name,last_name,source_note,position) VALUES(?,'merged',?,?,?,'Nom conservé avant fusion de la fiche #{$source}',(SELECT COALESCE(max(position),0)+1 FROM name_variants WHERE person_id=?))")->execute([$target,$b['first_name']??'',$b['middle_name']??'',$b['last_name']??'',$target]);
     merge_person_references($pdo,$target,$source);

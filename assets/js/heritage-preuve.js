@@ -21,6 +21,7 @@
     ext.lists = ext.lists || {};
     ext.dashboard = ext.dashboard || {};
     const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const api = (...a) => A().api(...a);
     const get = (op, q = {}) => api('preuve', {op, ...q});
     const write = async (op, body) => { const r = await api('preuve_write', {}, {method: 'POST', body: {op, ...body}}); return r?.result || r; };
@@ -54,6 +55,7 @@
     const solBadge = l => badge(SOL[l]?.[0] || l, SOL[l]?.[1] || 'grey');
     const childWord = g => g === 'male' ? 'le fils' : g === 'female' ? 'la fille' : 'l’enfant';
     const ilElle = g => g === 'female' ? 'elle' : 'il';
+    const el = n => /^[aeiouyhàâéèêëîïôöûü]/i.test(String(n || '').trim()); // 🌐 « d’ » ou « de » (français) : deux clés, même traduction
     const de = n => (/^[aeiouyhàâéèêëîïôöûü]/i.test(String(n || '').trim()) ? 'd’' : 'de ') + n;
 
     /** après un changement : la fiche, les listes, l'arbre et les widgets ouverts se redessinent */
@@ -73,7 +75,7 @@
         if (f.case) return openCase(f.case.id);
         let r; try { r = await write('save_case', {...q, question: f.question}); } catch (e) { toast(e.message, 'error'); return; }
         const id = r.case.id;
-        undo(`⚖️ Dossier de preuve ouvert : « ${r.case.question} »`, {undo: async () => { await write('delete_case', {id}); document.querySelector(`dialog [data-pv-case="${id}"]`)?.closest('dialog')?.close(); changed(); }});
+        undo(i18n('⚖️ Dossier de preuve ouvert : « {nm} »', {nm: r.case.question}), {undo: async () => { await write('delete_case', {id}); document.querySelector(`dialog [data-pv-case="${id}"]`)?.closest('dialog')?.close(); changed(); }});
         changed();
         return openCase(id);
     }
@@ -83,7 +85,7 @@
         if (!ext.openDialog) return;
         const ro = RO();
         const dlg = ext.openDialog({eyebrow: '⚖️ DOSSIER DE PREUVE', title: 'Dossier de preuve', wide: true, submitLabel: 'Fermer', onSubmit: () => true,
-            onDelete: ro ? null : async () => { const c = view.c; if (!c) return true; await write('delete_case', {id}); undo(`🗑 Dossier supprimé : « ${c.question} »`, {undo: async () => { await write('restore_case', {id}); changed(); }}); changed(); return true; },
+            onDelete: ro ? null : async () => { const c = view.c; if (!c) return true; await write('delete_case', {id}); undo(i18n('🗑 Dossier supprimé : « {nm} »', {nm: c.question}), {undo: async () => { await write('restore_case', {id}); changed(); }}); changed(); return true; },
             body: `<div class="pv-case" data-pv-case="${Number(id)}">${UI().spinner ? UI().spinner('J’ouvre le dossier…') : '…'}</div>`});
         const box = dlg?.querySelector('[data-pv-case]'); if (!box) return;
         dlg.classList.add('pv-dialog');
@@ -114,10 +116,10 @@
                 <span class="pv-tools"><button type="button" class="button small secondary" data-pv-print>🖨 Imprimer</button><button type="button" class="button small secondary" data-pv-doc title="Un document du traitement de texte, déjà rempli">📝 Dans le traitement de texte</button></span></div>
               <label class="pv-q"><span class="pk-lab">La question</span><textarea data-pv-question rows="2" maxlength="500" ${ro ? 'readonly' : ''}>${esc(c.question)}</textarea></label>
               <div class="pv-cert"><span class="pk-lab">Niveau de certitude</span><div class="segmented pv-cert-seg" role="radiogroup" aria-label="Niveau de certitude">${Object.entries(CERT).map(([k, v]) => `<button type="button" class="${c.certainty === k ? 'is-active' : ''}" data-pv-cert="${k}" aria-pressed="${c.certainty === k}" title="${esc(CERT_HELP[k])}" ${ro ? 'disabled' : ''}>${v[2]} ${esc(v[0])}</button>`).join('')}</div>
-                <p class="ui-hint">${certBadge(c.certainty)} ${esc(CERT_HELP[c.certainty] || '')}${c.subject === 'parent' && c.link ? ` · 🛡 solidité du lien : ${solBadge(c.link.level)}${c.certainty === 'tocheck' ? ' (calculée : le dossier comptera dès qu’il aura une conclusion)' : ''}` : ''}</p></div>
+                <p class="ui-hint">${certBadge(c.certainty)} ${esc(CERT_HELP[c.certainty] || '')}${c.subject === 'parent' && c.link ? ` · ${i18n('🛡 solidité du lien :')} ${solBadge(c.link.level)}${c.certainty === 'tocheck' ? ' ' + i18n('(calculée : le dossier comptera dès qu’il aura une conclusion)') : ''}` : ''}</p></div>
               <div class="pv-grid">${col('for', by('for'))}${col('against', by('against'))}</div>
               <div class="pv-grid">${col('research', by('research'))}${col('conflict', by('conflict'))}</div>
-              ${open ? `<p class="ui-hint is-error">⚠️ ${plural(open, 'désaccord n’est pas encore résolu', 'désaccords ne sont pas encore résolus')} : explique-les avant de conclure « prouvé ».</p>` : ''}
+              ${open ? `<p class="ui-hint is-error">⚠️ ${i18n('{count} : explique-les avant de conclure « prouvé ».', {count: plural(open, 'désaccord n’est pas encore résolu', 'désaccords ne sont pas encore résolus')})}</p>` : ''}
               <label class="pv-concl"><span class="pk-lab">✍ Conclusion</span><textarea data-pv-conclusion rows="4" maxlength="20000" placeholder="Ce que tu conclus, et pourquoi : quels indices pèsent le plus, comment les désaccords s’expliquent…" ${ro ? 'readonly' : ''}>${esc(c.conclusion)}</textarea><span class="ui-hint" data-pv-saved>${ro ? 'Lecture seule.' : 'Gardé tout seul.'}</span></label>
               <details class="pv-guide"><summary>💡 Comment raisonner ? (5 étapes)</summary><p>${esc(GUIDE_INTRO)}</p><ol>${GUIDE.map(([i, t, d]) => `<li><b>${i} ${esc(t)}</b> — ${esc(d)}</li>`).join('')}</ol>
                 <p class="ui-hint">Un indice <b>direct</b> : ${esc(EVID.direct[1])} ; <b>indirect</b> : ${esc(EVID.indirect[1])} ; <b>négatif</b> : ${esc(EVID.negative[1])}. Une source <b>originale</b> : ${esc(QUAL.original[1])} ; <b>dérivée</b> : ${esc(QUAL.derived[1])} ; <b>écrite par un auteur</b> : ${esc(QUAL.authored[1])}.</p></details>`;
@@ -142,7 +144,7 @@
             if (b.dataset.pvCert && b.dataset.pvCert !== view.c.certainty) {
                 const prev = view.c.certainty, now = b.dataset.pvCert;
                 try { await write('save_case', {id, certainty: now}); } catch (err) { toast(err.message, 'error'); return; }
-                undo(`⚖️ Certitude : ${CERT[now][0]}`, {undo: async () => { await write('save_case', {id, certainty: prev}); if (box.isConnected) await reload(); changed(); }, redo: async () => { await write('save_case', {id, certainty: now}); if (box.isConnected) await reload(); changed(); }});
+                undo(i18n('⚖️ Certitude : {nm}', {nm: i18n(CERT[now][0])}), {undo: async () => { await write('save_case', {id, certainty: prev}); if (box.isConnected) await reload(); changed(); }, redo: async () => { await write('save_case', {id, certainty: now}); if (box.isConnected) await reload(); changed(); }});
                 await reload(); changed(); return;
             }
             if (b.dataset.pvAdd) { itemDialog(view.c, b.dataset.pvAdd, null, reload); return; }
@@ -150,7 +152,7 @@
             if (b.dataset.pvDel) {
                 const iid = Number(b.dataset.pvDel), it = view.c.items.find(x => x.id === iid);
                 try { await write('delete_item', {id: iid}); } catch (err) { toast(err.message, 'error'); return; }
-                undo(`🗑 Retiré du dossier : ${KINDS[it?.kind]?.[2] || 'ligne'}${it?.text ? ` « ${it.text.slice(0, 40)} »` : ''}`, {undo: async () => { await write('restore_item', {id: iid}); if (box.isConnected) await reload(); }});
+                undo(`${i18n('🗑 Retiré du dossier :')} ${i18n(KINDS[it?.kind]?.[2] || 'ligne')}${it?.text ? ` « ${it.text.slice(0, 40)} »` : ''}`, {undo: async () => { await write('restore_item', {id: iid}); if (box.isConnected) await reload(); }});
                 await reload(); return;
             }
             if (b.dataset.pvPrint !== undefined) return printCase(view.c);
@@ -206,7 +208,7 @@
         const by = k => c.items.filter(i => i.kind === k);
         const ref = it => it.ref ? ` <i>(${esc(it.ref.title)}${it.ref.meta ? ' — ' + esc(it.ref.meta) : ''})</i>` : '';
         const tags = it => [it.evidence && EVID[it.evidence] ? `indice ${EVID[it.evidence][0].toLowerCase()}` : '', it.quality && QUAL[it.quality] ? `source ${QUAL[it.quality][0].toLowerCase()}` : ''].filter(Boolean).join(', ');
-        const list = (k, empty) => by(k).length ? `<ul>${by(k).map(it => `<li>${esc(it.text || '')}${ref(it)}${tags(it) ? ` <small>[${esc(tags(it))}]</small>` : ''}${k === 'conflict' ? `<br><b>Résolution :</b> ${esc(it.resolution || 'pas encore résolu')}` : ''}</li>`).join('')}</ul>` : `<p><i>${esc(empty)}</i></p>`;
+        const list = (k, empty) => by(k).length ? `<ul>${by(k).map(it => `<li>${esc(it.text || '')}${ref(it)}${tags(it) ? ` <small>[${esc(tags(it))}]</small>` : ''}${k === 'conflict' ? `<br><b>${i18n('Résolution :')}</b> ${esc(it.resolution || i18n('pas encore résolu'))}` : ''}</li>`).join('')}</ul>` : `<p><i>${esc(empty)}</i></p>`;
         const people = [c.person, c.related].filter(Boolean).map(p => `${esc(nm(p))}${p.years ? ` (${esc(p.years)})` : ''}`).join(c.subject === 'parent' ? ' — enfant de — ' : ' et ');
         return `<h1>${esc(c.question)}</h1>
             <p class="meta">${esc(SUBJ[c.subject]?.[1] || '')} · ${people}${c.event ? ' · ' + esc(c.event.label) + (c.event.date_text ? ' ' + esc(c.event.date_text) : '') : ''}</p>
@@ -221,7 +223,7 @@
     function printCase(c) {
         if (!UI().openPrintDialog) return toast('L’impression n’est pas disponible.', 'error');
         const css = 'body{font:11pt/1.45 Georgia,serif;color:#111;margin:0}h1{font-size:17pt;margin:0 0 6px}h2{font-size:12.5pt;margin:16px 0 4px;border-bottom:1px solid #999}.meta{color:#444;margin:2px 0}ul,ol{margin:4px 0 4px 18px;padding:0}li{margin:3px 0}small{color:#555}';
-        UI().openPrintDialog({title: `Dossier de preuve — ${c.question}`, key: 'preuve', zone: 'Dossier de preuve', photos: false, margin: 14,
+        UI().openPrintDialog({title: i18n('Dossier de preuve — {nm}', {nm: c.question}), key: 'preuve', zone: 'Dossier de preuve', photos: false, margin: 14,
             options: [{key: 'research', label: 'Les recherches faites', checked: true}, {key: 'conflicts', label: 'Les désaccords et leur résolution', checked: true}, {key: 'guide', label: 'Le petit guide « Comment raisonner »', checked: false}],
             html: ch => `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>${esc(c.question)}</title><style>${css}</style></head><body>${caseHtml(c, ch || {})}</body></html>`});
     }
@@ -229,10 +231,10 @@
         const Kit = ext.textDocKit, open = ext.openTextDoc;
         if (!Kit?.Editor || !open) return toast('Le traitement de texte n’est pas chargé.', 'error');
         const by = k => c.items.filter(i => i.kind === k);
-        const li = it => `<li data-st="normal">${esc(it.text || '')}${it.ref ? ` (${esc(it.ref.title)})` : ''}${it.kind === 'conflict' ? ` — résolution : ${esc(it.resolution || 'pas encore résolu')}` : ''}</li>`;
+        const li = it => `<li data-st="normal">${esc(it.text || '')}${it.ref ? ` (${esc(it.ref.title)})` : ''}${it.kind === 'conflict' ? ` — ${i18n('résolution :')} ${esc(it.resolution || i18n('pas encore résolu'))}` : ''}</li>`;
         const sec = (t, k) => `<h1 data-st="h1">${esc(t)}</h1>${by(k).length ? `<ul>${by(k).map(li).join('')}</ul>` : '<p data-st="normal"><span class="wp-ph">Rien pour l’instant.</span></p>'}`;
         const html = `<p data-st="title">Dossier de preuve</p><p data-st="subtitle">${esc(c.question)}</p><p data-st="normal">Niveau de certitude : <b>${esc(CERT[c.certainty]?.[0] || '')}</b></p>${sec('Indices pour', 'for')}${sec('Indices contre', 'against')}${sec('Recherches faites', 'research')}${sec('Désaccords entre les sources', 'conflict')}<h1 data-st="h1">Conclusion</h1>${(c.conclusion || '').split(/\n{2,}/).filter(Boolean).map(p => `<p data-st="normal">${esc(p)}</p>`).join('') || '<p data-st="normal"><span class="wp-ph">Ta conclusion…</span></p>'}`;
-        try { const d = new Kit.Editor({data: null}).doc; return open({data: {...d, sections: [{html}]}, name: `Dossier de preuve — ${nm(c.person)}`.slice(0, 160)}); } catch (e) { toast(e.message, 'error'); }
+        try { const d = new Kit.Editor({data: null}).doc; return open({data: {...d, sections: [{html}]}, name: i18n('Dossier de preuve — {nm}', {nm: nm(c.person)}).slice(0, 160)}); } catch (e) { toast(e.message, 'error'); }
     }
 
     /* ═════════════════════ 3. Choisir la question (depuis la fiche ou la liste) ═════════════════════ */
@@ -244,14 +246,14 @@
         const lvl = new Map((mine.parents || []).map(x => [x.parent_id, x.level]));
         const ev = (det.events || []).find(e => ['BIRT', 'BAPM', 'CHR'].includes(String(e.gedcom_tag || '').toUpperCase()));
         const opts = [
-            ...(det.parents || []).map(x => ({subject: 'parent', related_id: x.id, ico: '👪', text: `${name} est-${ilElle(p.gender)} bien ${childWord(p.gender)} ${de(A().personName ? A().personName(x) : x.first_name)} ?`, extra: lvl.has(Number(x.id)) ? solBadge(lvl.get(Number(x.id))) : ''})),
-            ...(det.partners || []).map(x => ({subject: 'couple', related_id: x.id, ico: '💍', text: `${name} et ${A().personName ? A().personName(x) : x.first_name} formaient-ils bien un couple ?`})),
-            ...(ev ? [{subject: 'date', event_id: ev.id, ico: '📅', text: `La date de ${String(ev.type_label || 'naissance').toLowerCase()} (${ev.date_text || 'sans date'}) est-elle juste ?`}, {subject: 'place', event_id: ev.id, ico: '📍', text: `Le lieu de ${String(ev.type_label || 'naissance').toLowerCase()} (${ev.place_name || 'sans lieu'}) est-il juste ?`}] : []),
-            {subject: 'identity', ico: '👥', text: `${name} est-${ilElle(p.gender)} la même personne qu’une autre fiche ? (choisir…)`, pick: true},
+            ...(det.parents || []).map(x => ({subject: 'parent', related_id: x.id, ico: '👪', text: (() => { const par = A().personName ? A().personName(x) : x.first_name, v = {nm: name, par}, f = p.gender === 'female'; return f ? (el(par) ? i18n('{nm} est-elle bien la fille d’{par} ?', v) : i18n('{nm} est-elle bien la fille de {par} ?', v)) : p.gender === 'male' ? (el(par) ? i18n('{nm} est-il bien le fils d’{par} ?', v) : i18n('{nm} est-il bien le fils de {par} ?', v)) : (el(par) ? i18n('{nm} est-il bien l’enfant d’{par} ?', v) : i18n('{nm} est-il bien l’enfant de {par} ?', v)); })(), extra: lvl.has(Number(x.id)) ? solBadge(lvl.get(Number(x.id))) : ''})),
+            ...(det.partners || []).map(x => ({subject: 'couple', related_id: x.id, ico: '💍', text: i18n('{nm} et {x2} formaient-ils bien un couple ?', {nm: name, x2: A().personName ? A().personName(x) : x.first_name})})),
+            ...(ev ? [{subject: 'date', event_id: ev.id, ico: '📅', text: i18n('La date de {ev} ({dt}) est-elle juste ?', {ev: i18n(String(ev.type_label || 'naissance')).toLowerCase(), dt: ev.date_text || i18n('sans date')})}, {subject: 'place', event_id: ev.id, ico: '📍', text: i18n('Le lieu de {ev} ({pl}) est-il juste ?', {ev: i18n(String(ev.type_label || 'naissance')).toLowerCase(), pl: ev.place_name || i18n('sans lieu')})}] : []),
+            {subject: 'identity', ico: '👥', text: (p.gender === 'female' ? i18n('{nm} est-elle la même personne qu’une autre fiche ? (choisir…)', {nm: name}) : i18n('{nm} est-il la même personne qu’une autre fiche ? (choisir…)', {nm: name})), pick: true},
             {subject: 'other', ico: '❓', text: 'Une autre question…'},
         ];
         const cases = mine.cases || [];
-        const dlg = ext.openDialog({eyebrow: '⚖️ DOSSIER DE PREUVE', title: `Quelle question pour ${name} ?`, submitLabel: 'Fermer', onSubmit: () => true,
+        const dlg = ext.openDialog({eyebrow: '⚖️ DOSSIER DE PREUVE', title: i18n('Quelle question pour {nm} ?', {nm: name}), submitLabel: 'Fermer', onSubmit: () => true,
             body: `${cases.length ? `<span class="pk-lab">Ses dossiers</span><ul class="pv-choose">${cases.map(x => `<li><button type="button" class="pv-choose-btn" data-pv-go-case="${x.id}"><span aria-hidden="true">${SUBJ[x.subject]?.[0] || '⚖️'}</span><span>${esc(x.question)}</span>${certBadge(x.certainty)}</button></li>`).join('')}</ul>` : ''}
                 <span class="pk-lab">${cases.length ? 'Ou une nouvelle question' : 'Une question'}</span><ul class="pv-choose">${opts.map((o, i) => `<li><button type="button" class="pv-choose-btn" data-pv-go="${i}"><span aria-hidden="true">${o.ico}</span><span>${esc(o.text)}</span>${o.extra || ''}</button></li>`).join('')}</ul>
                 <p class="ui-hint">Un dossier de preuve rassemble ce qui dit « oui » et ce qui dit « non », puis ta conclusion. Pour un lien parent-enfant, il compte dans la 🛡 solidité du lien.</p>`});
@@ -279,7 +281,7 @@
         const paint = () => {
             const l = d.link, manual = l.manual ? l.level : '';
             box.innerHTML = `<p class="pv-link-now">${solBadge(l.level)} <span>${esc(l.why)}</span></p>
-                ${l.relation ? `<p class="ui-hint">Lien noté « ${esc(l.relation)} » sur la fiche (pas biologique).</p>` : ''}
+                ${l.relation ? `<p class="ui-hint">${i18n('Lien noté « {rel} » sur la fiche (pas biologique).', {rel: esc(l.relation)})}</p>` : ''}
                 <div class="pv-link-acts"><button type="button" class="button small" data-pv-link-case>⚖️ ${l.case_id ? 'Ouvrir le dossier de preuve' : 'Ouvrir un dossier de preuve'}</button>${ext.ouChercher ? `<button type="button" class="button small secondary" data-pv-ouc="${d.child.id}">🌍 Où chercher ?</button>` : ''}</div>
                 ${l.code === 'case' ? '<p class="ui-hint">Le dossier de preuve passe devant le calcul et le choix à la main.</p>' : `<fieldset class="pv-fs"><legend>Choisir à la main</legend><div class="pv-radios">${[['', 'Calculé par l’app', 'd’après les sources'], ['proved', 'Prouvé', ''], ['probable', 'Probable', ''], ['supposed', 'Supposé', ''], ['unsourced', 'Sans source', '']].map(([k, t, h]) => `<label class="pv-radio"><input type="radio" name="pv_manual" value="${k}" ${manual === k ? 'checked' : ''} ${ro ? 'disabled' : ''}><span><b>${esc(t)}</b>${h ? `<small>${esc(h)}</small>` : ''}</span></label>`).join('')}</div></fieldset>`}
                 <details class="pv-guide"><summary>Les règles, en clair</summary><ul>${(RULES.rules || []).map(([k, t, w]) => `<li>${solBadge(k)} ${esc(w)}</li>`).join('')}</ul><p class="ui-hint">Rien n’est changé dans ta base : c’est seulement un repère.</p></details>`;
@@ -290,7 +292,7 @@
             const level = e.target.value;
             let r; try { r = await write('manual_set', {child_id: childId, parent_id: parentId, level}); } catch (err) { toast(err.message, 'error'); return; }
             d.link = r.link; paint(); changed();
-            undo(level ? `🛡 Lien marqué « ${SOL[level][0]} » à la main` : '🛡 Lien de nouveau calculé par l’app', {undo: async () => { const x = await write('manual_restore', {child_id: childId, parent_id: parentId, prev: r.prev}); d.link = x.link; if (box.isConnected) paint(); changed(); }});
+            undo(level ? i18n('🛡 Lien marqué « {nm} » à la main', {nm: i18n(SOL[level][0])}) : '🛡 Lien de nouveau calculé par l’app', {undo: async () => { const x = await write('manual_restore', {child_id: childId, parent_id: parentId, prev: r.prev}); d.link = x.link; if (box.isConnected) paint(); changed(); }});
         });
         box.addEventListener('click', e => {
             if (e.target.closest('[data-pv-link-case]')) { dlg.close(); if (d.link.case_id) openCase(d.link.case_id); else openFor({subject: 'parent', person_id: childId, related_id: parentId}); return; }
@@ -307,7 +309,7 @@
             if (fresh) g.querySelectorAll('[data-pv-sol]').forEach(x => x.remove());
             (d.parents || []).forEach(l => {
                 const chip = g.querySelector(`.relation-chip[data-open-person="${l.parent_id}"]`); if (!chip || chip.parentElement.querySelector('[data-pv-sol]')) return;
-                chip.insertAdjacentHTML('afterend', `<button type="button" class="pv-sol" data-pv-sol="${pid}:${l.parent_id}" title="🛡 Solidité du lien : ${esc(SOL[l.level][0])} — ${esc(l.why)}" aria-label="Solidité du lien avec ${esc(nm(l.parent))} : ${esc(SOL[l.level][0])}">${solBadge(l.level)}</button>`);
+                chip.insertAdjacentHTML('afterend', `<button type="button" class="pv-sol" data-pv-sol="${pid}:${l.parent_id}" title="${esc(i18n('🛡 Solidité du lien : {lvl} — {why}', {lvl: i18n(SOL[l.level][0]), why: l.why}))}" aria-label="${esc(i18n('Solidité du lien avec {nm} : {lvl}', {nm: nm(l.parent), lvl: i18n(SOL[l.level][0])}))}">${solBadge(l.level)}</button>`);
             });
         });
     }
@@ -390,8 +392,8 @@
         e.preventDefault(); e.stopPropagation();
         const items = [];
         links.forEach(l => {
-            items.push({icon: '⚖️', label: `Dossier de preuve : ${name(l.child)} → enfant ${de(name(l.parent))}`, run: () => openFor({subject: 'parent', person_id: l.child, related_id: l.parent})});
-            items.push({icon: '🛡', label: `Solidité du lien : ${name(l.child)}, enfant ${de(name(l.parent))}`, run: () => openLink(l.child, l.parent)});
+            items.push({icon: '⚖️', label: (el(name(l.parent)) ? i18n('Dossier de preuve : {nm} → enfant d’{par}', {nm: name(l.child), par: name(l.parent)}) : i18n('Dossier de preuve : {nm} → enfant de {par}', {nm: name(l.child), par: name(l.parent)})), run: () => openFor({subject: 'parent', person_id: l.child, related_id: l.parent})});
+            items.push({icon: '🛡', label: (el(name(l.parent)) ? i18n('Solidité du lien : {nm}, enfant d’{par}', {nm: name(l.child), par: name(l.parent)}) : i18n('Solidité du lien : {nm}, enfant de {par}', {nm: name(l.child), par: name(l.parent)})), run: () => openLink(l.child, l.parent)});
         });
         if (card) { if (items.length) items.push('-'); items.push({icon: '↗', label: 'Ouvrir la fiche', run: () => A().openPersonById?.(Number(card.dataset.treePerson))}); items.push({icon: '⚖️', label: 'Autre question (dossier de preuve)…', run: () => chooseQuestion(Number(card.dataset.treePerson))}); }
         UI().contextMenu(e, items, {title: card ? name(Number(card.dataset.treePerson)) : 'Lien'});
@@ -453,7 +455,7 @@
         e.preventDefault(); e.stopPropagation();
         const full = async fn => { try { fn(await get('case', {id})); } catch (err) { toast(err.message, 'error'); } };
         UI().contextMenu(e, [{icon: '↗', label: 'Ouvrir', run: () => openCase(id)}, {icon: '🖨', label: 'Imprimer…', run: () => full(printCase)}, {icon: '📝', label: 'Dans le traitement de texte', run: () => full(textDoc)},
-            ...(RO() ? [] : ['-', {icon: '🗑', label: 'Supprimer', danger: true, run: async () => { try { await write('delete_case', {id}); } catch (err) { toast(err.message, 'error'); return; } undo(`🗑 Dossier supprimé : « ${x.question} »`, {undo: async () => { await write('restore_case', {id}); changed(); }}); changed(); }}])], {title: x.question});
+            ...(RO() ? [] : ['-', {icon: '🗑', label: 'Supprimer', danger: true, run: async () => { try { await write('delete_case', {id}); } catch (err) { toast(err.message, 'error'); return; } undo(i18n('🗑 Dossier supprimé : « {nm} »', {nm: x.question}), {undo: async () => { await write('restore_case', {id}); changed(); }}); changed(); }}])], {title: x.question});
     }, true);
 
     /* ═════════════════════ 8. Listes : « 🛡 Branches fragiles » ═════════════════════ */
@@ -496,7 +498,7 @@
             bar.setCount(l.length, 'lien');
             const cards = st.view === 'cards';
             list.innerHTML = l.length ? UI().itemsHtml(st.view, part.map(x => {
-                const l1 = `Sosa ${x.sosa} · génération ${x.generation} · parent ${de(nm(x.child))}`;
+                const l1 = (el(nm(x.child)) ? i18n('Sosa {sosa} · génération {gen} · parent d’{par}', {sosa: String(x.sosa), gen: x.generation, par: nm(x.child)}) : i18n('Sosa {sosa} · génération {gen} · parent de {par}', {sosa: String(x.sosa), gen: x.generation, par: nm(x.child)}));
                 return {thumb: avatarOf(x.parent), name: `${nm(x.parent)}${x.parent.years ? ` (${x.parent.years})` : ''}`, open: `data-pv-link-open="${x.child_id}:${x.parent_id}"`, openLabel: 'Pourquoi ?', attrs: `data-pv-frow="${x.child_id}:${x.parent_id}"`,
                     lines: cards ? [l1, x.why] : [{html: `${solBadge(x.level)} ${esc(l1)}`}, x.why],
                     badges: cards ? [{text: `Sosa ${x.sosa}`, kind: 'sosa'}, {text: SOL[x.level][0], kind: SOL[x.level][1]}] : [],
@@ -517,12 +519,12 @@
         const [c, p] = row.dataset.pvFrow.split(':').map(Number), x = cache.frag?.items.find(i => i.child_id === c && i.parent_id === p); if (!x) return;
         e.preventDefault(); e.stopPropagation();
         UI().contextMenu(e, [{icon: '↗', label: 'Pourquoi ce niveau ?', run: () => openLink(c, p)}, {icon: '⚖️', label: 'Dossier de preuve', run: () => x.case_id ? openCase(x.case_id) : openFor({subject: 'parent', person_id: c, related_id: p})},
-            ...(ext.ouChercher ? [{icon: '🌍', label: `Où chercher ? (${nm(x.child)})`, run: () => ext.ouChercher.openPerson(c)}] : []), '-', {icon: '↗', label: `Fiche de ${nm(x.parent)}`, run: () => A().openPersonById?.(p)}, {icon: '↗', label: `Fiche de ${nm(x.child)}`, run: () => A().openPersonById?.(c)}], {title: nm(x.parent)});
+            ...(ext.ouChercher ? [{icon: '🌍', label: i18n('Où chercher ? ({nm})', {nm: nm(x.child)}), run: () => ext.ouChercher.openPerson(c)}] : []), '-', {icon: '↗', label: i18n('Fiche de {nm}', {nm: nm(x.parent)}), run: () => A().openPersonById?.(p)}, {icon: '↗', label: i18n('Fiche de {nm}', {nm: nm(x.child)}), run: () => A().openPersonById?.(c)}], {title: nm(x.parent)});
     }, true);
     async function rulesDialog() {
         try { RULES = RULES || await get('rules'); } catch (e) { toast(e.message, 'error'); return; }
         ext.openDialog?.({eyebrow: '🛡 SOLIDITÉ DES LIENS', title: 'Comment l’app pèse chaque lien', submitLabel: 'Fermer', onSubmit: () => true,
-            body: `<p>Pour chaque lien parent-enfant, l’app regarde dans cet ordre :</p><ol class="pv-rules-order"><li><b>Le dossier de preuve</b> de ce lien, s’il a une conclusion : il passe devant tout.</li><li><b>Ton choix à la main</b> (pastille 🛡 à côté du parent, sur la fiche).</li><li><b>Les sources citées</b> : sur la naissance ou le baptême de l’enfant, son mariage, sa fiche, la famille ; leur qualité (0 à 3, venue de ton ancien logiciel) si elle est notée.</li></ol>
+            body: `<p>${i18n('Pour chaque lien parent-enfant, l’app regarde dans cet ordre :')}</p><ol class="pv-rules-order"><li>${i18n('<b>Le dossier de preuve</b> de ce lien, s’il a une conclusion : il passe devant tout.')}</li><li>${i18n('<b>Ton choix à la main</b> (pastille 🛡 à côté du parent, sur la fiche).')}</li><li>${i18n('<b>Les sources citées</b> : sur la naissance ou le baptême de l’enfant, son mariage, sa fiche, la famille ; leur qualité (0 à 3, venue de ton ancien logiciel) si elle est notée.')}</li></ol>
                 <ul class="pv-rules">${RULES.rules.map(([k, t, w]) => `<li>${solBadge(k)} ${esc(w)}</li>`).join('')}</ul><p class="ui-hint">Rien n’est changé dans ta base : c’est seulement un repère, recalculé dès qu’une source change.</p>`});
     }
 
@@ -533,7 +535,7 @@
         const pills = Object.entries(SOL).filter(([k]) => c[k]).map(([k, [l, kk]]) => badge(`${c[k]} ${l}`, kk)).join(' ');
         if (!d.total) return A().empty('Pas encore de lignée : choisis la personne de départ et ajoute ses parents.', {icon: '🌳'});
         if (!d.fragile) return `<div class="pv-w-counts">${pills}</div>${A().empty('Chaque lien de ta lignée s’appuie sur une source, bravo !', {icon: '🎉'})}`;
-        return `<div class="pv-w-counts">${pills}</div><ul class="pv-w-list">${(d.top || []).slice(0, limit).map(x => `<li><button type="button" class="pv-w-row" data-pv-w-link="${x.child_id}:${x.parent_id}">${avatarOf(x.parent)}<span><b>${esc(nm(x.parent))}</b><small class="muted">${esc(`Sosa ${x.sosa} · parent ${de(nm(x.child))}`)}</small></span>${solBadge(x.level)}</button></li>`).join('')}</ul>`;
+        return `<div class="pv-w-counts">${pills}</div><ul class="pv-w-list">${(d.top || []).slice(0, limit).map(x => `<li><button type="button" class="pv-w-row" data-pv-w-link="${x.child_id}:${x.parent_id}">${avatarOf(x.parent)}<span><b>${esc(nm(x.parent))}</b><small class="muted">${esc((el(nm(x.child)) ? i18n('Sosa {sosa} · parent d’{par}', {sosa: String(x.sosa), par: nm(x.child)}) : i18n('Sosa {sosa} · parent de {par}', {sosa: String(x.sosa), par: nm(x.child)})))}</small></span>${solBadge(x.level)}</button></li>`).join('')}</ul>`;
     }
     function paintWidget(el) { get('summary').then(d => { el.innerHTML = widgetBody(d, Number(el.dataset.limit) || 5); }).catch(() => {}); }
     ext.dashboard.fragile_widget = {

@@ -126,8 +126,8 @@ function bio_day(PDO $pdo, int $id, array $q = []): array
     }
     [$Y, $M, $D, $approx] = [$T[0], $T[1], $T[2], (bool) $T[3]];
     $precise = $M && $D && !$approx;
-    if ($bD && bio_day_cmp($T, $bD) < 0 && !($chosen && $chosen === $birthEv)) { throw new LcndaBadInput("Cette date est avant sa naissance (" . bio_when($birthEv['date_text'], $birthEv['year']) . ')'); }
-    if ($dD && bio_day_cmp($T, $dD) > 0 && !$chosen) { throw new LcndaBadInput("Cette date est après son décès (" . bio_when($deathEv['date_text'], $deathEv['year']) . ')'); }
+    if ($bD && bio_day_cmp($T, $bD) < 0 && !($chosen && $chosen === $birthEv)) { throw new LcndaBadInput(i18n_t('Cette date est avant sa naissance ({date})', ['date' => bio_when($birthEv['date_text'], $birthEv['year'])])); }
+    if ($dD && bio_day_cmp($T, $dD) > 0 && !$chosen) { throw new LcndaBadInput(i18n_t('Cette date est après son décès ({date})', ['date' => bio_when($deathEv['date_text'], $deathEv['year'])])); }
     $whenTxt = $chosen ? bio_when($chosen['date_text'], $chosen['year']) : (bio_day_republican($dateText) ? 'le ' . ($D === 1 ? '1er' : $D) . ' ' . BIO_MONTHS[$M - 1] . ' ' . $Y : bio_when($dateText));
 
     $out = []; $n = 0;

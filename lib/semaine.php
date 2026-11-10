@@ -68,7 +68,7 @@ function semaine_marks_save(PDO $pdo, array $marks): void
 /** « de Jean », « d’Antoine » */
 function semaine_de(string $name): string
 {
-    return preg_match('/^[aeiouyhàâéèêëîïôöûü]/iu', $name) ? 'd’' . $name : 'de ' . $name;
+    return preg_match('/^[aeiouyhàâéèêëîïôöûü]/iu', $name) ? 'd’' . $name : 'de ' . $name; // (français seulement : les autres langues ont la phrase entière, voir semaine_manques)
 }
 
 function semaine_person_name(array $r, string $f = 'first_name', string $l = 'last_name'): string
@@ -80,6 +80,12 @@ function semaine_fr_date(string $d): string
 {
     $d = substr($d, 0, 10);
     if (!semaine_is_date($d)) { return $d; }
+    // 🌐 dans une autre langue que le français : la date écrite à la façon de cette langue (« 12 May 2026 », « 12. Mai 2026 »)
+    if (function_exists('i18n_lang') && ($l = i18n_lang()) !== 'fr' && class_exists('IntlDateFormatter')) {
+        $f = new IntlDateFormatter(['en' => 'en-GB', 'es' => 'es-ES', 'de' => 'de-DE', 'it' => 'it-IT', 'pt' => 'pt-PT', 'pl' => 'pl-PL', 'nl' => 'nl-NL'][$l] ?? $l, IntlDateFormatter::MEDIUM, IntlDateFormatter::NONE, 'UTC');
+        $s = $f->format(new DateTimeImmutable($d . ' 12:00:00', new DateTimeZone('UTC')));
+        if (is_string($s) && $s !== '') { return $s; }
+    }
     $m = ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
     return (int) substr($d, 8, 2) . ' ' . $m[(int) substr($d, 5, 2) - 1] . ' ' . substr($d, 0, 4);
 }
@@ -104,13 +110,14 @@ function semaine_rappels(PDO $pdo): array
         $u = semaine_urgency($at);
         if ($u === 'later') { continue; }
         $standalone = ($r['source_type'] ?? '') === 'standalone';
-        $label = ['on' => 'À faire le', 'before' => 'Avant le', 'after' => 'Après le'][$mode] ?? 'À faire le';
+        // 🌐 phrases visibles dans la langue de la page (i18n_t) ; les titres écrits par la personne restent tels quels
+        $label = ['on' => 'À faire le {date}', 'before' => 'Avant le {date}', 'after' => 'Après le {date}'][$mode] ?? 'À faire le {date}';
         $out[] = ['key' => 'rappel:' . ($standalone ? 's' : 'i') . ':' . (int) $r['id'], 'sort' => 'rappel', 'urgency' => $u,
-            'title' => trim((string) ($r['item_title'] ?? '')) ?: 'Rappel',
-            'detail' => implode(' · ', array_filter([$label . ' ' . semaine_fr_date($at), $standalone ? 'Rappel libre' : 'Enquête « ' . trim((string) ($r['investigation_title'] ?? '')) . ' »', trim((string) ($r['person_name'] ?? ''))])),
+            'title' => trim((string) ($r['item_title'] ?? '')) ?: i18n_t('Rappel'),
+            'detail' => implode(' · ', array_filter([i18n_t($label, ['date' => semaine_fr_date($at)]), $standalone ? i18n_t('Rappel libre') : i18n_t('Enquête « {title} »', ['title' => trim((string) ($r['investigation_title'] ?? ''))]), trim((string) ($r['person_name'] ?? ''))])),
             'date' => $at, 'person_id' => (int) ($r['person_id'] ?? 0),
             'open' => $standalone ? ['kind' => 'list', 'list' => 'reminders'] : ['kind' => 'investigation', 'id' => (int) ($r['investigation_id'] ?? 0)],
-            'done_label' => 'Fait', 'snooze' => 'date'];
+            'done_label' => i18n_t('Fait'), 'snooze' => 'date'];
     }
     return $out;
 }
@@ -125,12 +132,12 @@ function semaine_courriers(PDO $pdo): array
         $rel = (string) $c['relance_date'];
         $u = $rel !== '' ? semaine_urgency($rel) : 'later';
         $since = semaine_days_since((string) $c['date_envoi']);
-        $wait = $since === null ? 'Pas encore envoyé' : ($since <= 0 ? 'Envoyé aujourd’hui' : 'Réponse attendue depuis ' . $since . ' jour' . ($since > 1 ? 's' : ''));
-        $relTxt = $rel === '' ? '' : ($u === 'late' ? 'relance prévue le ' . semaine_fr_date($rel) . ' : à relancer' : 'relance le ' . semaine_fr_date($rel));
+        $wait = $since === null ? i18n_t('Pas encore envoyé') : ($since <= 0 ? i18n_t('Envoyé aujourd’hui') : i18n_t($since > 1 ? 'Réponse attendue depuis {n} jours' : 'Réponse attendue depuis {n} jour', ['n' => $since]));
+        $relTxt = $rel === '' ? '' : i18n_t($u === 'late' ? 'relance prévue le {date} : à relancer' : 'relance le {date}', ['date' => semaine_fr_date($rel)]);
         $out[] = ['key' => 'courrier:' . (int) $c['id'], 'sort' => 'courrier', 'urgency' => $u,
             'title' => trim((string) $c['objet']) . ' — ' . trim((string) $c['destinataire']),
             'detail' => implode(' · ', array_filter([$wait, $relTxt, $orgs[$c['organisme']] ?? ''])), 'date' => $rel ?: substr((string) $c['date_envoi'], 0, 10),
-            'days' => $since, 'open' => ['kind' => 'list', 'list' => 'courriers'], 'done_label' => 'Réponse reçue', 'snooze' => 'date'];
+            'days' => $since, 'open' => ['kind' => 'list', 'list' => 'courriers'], 'done_label' => i18n_t('Réponse reçue'), 'snooze' => 'date'];
     }
     return $out;
 }
@@ -149,9 +156,9 @@ function semaine_visites(PDO $pdo): array
         $u = semaine_urgency($d);
         $n = (int) $v['n_items'];
         $out[] = ['key' => 'visite:' . (int) $v['id'], 'sort' => 'visite', 'urgency' => $u,
-            'title' => (trim((string) $v['title']) ?: 'Visite') . (trim((string) $v['archive_center']) !== '' ? ' — ' . trim((string) $v['archive_center']) : ''),
-            'detail' => implode(' · ', array_filter([$u === 'late' ? 'Prévue le ' . semaine_fr_date($d) . ' : note-la comme faite' : 'Le ' . semaine_fr_date($d), $n ? $n . ' cote' . ($n > 1 ? 's' : '') . ' à consulter' : '', trim((string) $v['opening_hours'])])),
-            'date' => $d, 'open' => ['kind' => 'list', 'list' => 'archive_visits', 'id' => (int) $v['id']], 'done_label' => 'Visite faite', 'snooze' => 'mark'];
+            'title' => (trim((string) $v['title']) ?: i18n_t('Visite')) . (trim((string) $v['archive_center']) !== '' ? ' — ' . trim((string) $v['archive_center']) : ''),
+            'detail' => implode(' · ', array_filter([i18n_t($u === 'late' ? 'Prévue le {date} : note-la comme faite' : 'Le {date}', ['date' => semaine_fr_date($d)]), $n ? i18n_t($n > 1 ? '{n} cotes à consulter' : '{n} cote à consulter', ['n' => $n]) : '', trim((string) $v['opening_hours'])])),
+            'date' => $d, 'open' => ['kind' => 'list', 'list' => 'archive_visits', 'id' => (int) $v['id']], 'done_label' => i18n_t('Visite faite'), 'snooze' => 'mark'];
     }
     return $out;
 }
@@ -167,18 +174,18 @@ function semaine_pistes(PDO $pdo): array
             WHERE ii.status IN ('to_explore_priority','to_explore','promising') AND COALESCE(i.status,'open') NOT IN ('closed','solved','resolved','abandoned')
             ORDER BY CASE ii.status WHEN 'to_explore_priority' THEN 0 WHEN 'promising' THEN 1 ELSE 2 END, ii.id DESC LIMIT " . SEMAINE_MAX_PER_SORT) as $r) {
             $out[] = ['key' => 'piste:' . (int) $r['id'], 'sort' => 'piste', 'urgency' => $r['status'] === 'to_explore_priority' ? 'week' : 'later',
-                'title' => trim((string) $r['title']) ?: 'Piste', 'badge' => $st[$r['status']] ?? '',
-                'detail' => implode(' · ', array_filter(['Enquête « ' . trim((string) $r['inv_title']) . ' »', semaine_person_name($r)])),
-                'person_id' => (int) $r['person_id'], 'open' => ['kind' => 'investigation', 'id' => (int) $r['investigation_id']], 'done_label' => 'Explorée', 'snooze' => 'mark'];
+                'title' => trim((string) $r['title']) ?: i18n_t('Piste'), 'badge' => isset($st[$r['status']]) ? i18n_t($st[$r['status']]) : '',
+                'detail' => implode(' · ', array_filter([i18n_t('Enquête « {title} »', ['title' => trim((string) $r['inv_title'])]), semaine_person_name($r)])),
+                'person_id' => (int) $r['person_id'], 'open' => ['kind' => 'investigation', 'id' => (int) $r['investigation_id']], 'done_label' => i18n_t('Explorée'), 'snooze' => 'mark'];
         }
     }
     if (semaine_has_table($pdo, 'hypotheses')) {
         $conf = ['low' => 'confiance faible', 'medium' => 'confiance moyenne', 'high' => 'confiance forte'];
         foreach ($pdo->query("SELECT h.id, h.title, h.statement, h.confidence, h.person_id, p.first_name, p.last_name FROM hypotheses h LEFT JOIN persons p ON p.id=h.person_id
             WHERE h.status='open' ORDER BY h.updated_at DESC, h.id DESC LIMIT " . SEMAINE_MAX_PER_SORT) as $h) {
-            $out[] = ['key' => 'hypo:' . (int) $h['id'], 'sort' => 'piste', 'urgency' => 'later', 'title' => 'Hypothèse : ' . (trim((string) $h['title']) ?: 'sans titre'), 'badge' => 'Hypothèse',
-                'detail' => implode(' · ', array_filter([semaine_person_name($h), $conf[$h['confidence']] ?? '', mb_substr(trim((string) $h['statement']), 0, 90)])),
-                'person_id' => (int) $h['person_id'], 'open' => ['kind' => 'person', 'id' => (int) $h['person_id'], 'view' => 'hypotheses'], 'done_label' => 'Vu', 'snooze' => 'mark'];
+            $out[] = ['key' => 'hypo:' . (int) $h['id'], 'sort' => 'piste', 'urgency' => 'later', 'title' => trim((string) $h['title']) !== '' ? i18n_t('Hypothèse : {title}', ['title' => trim((string) $h['title'])]) : i18n_t('Hypothèse : sans titre'), 'badge' => i18n_t('Hypothèse'),
+                'detail' => implode(' · ', array_filter([semaine_person_name($h), isset($conf[$h['confidence']]) ? i18n_t($conf[$h['confidence']]) : '', mb_substr(trim((string) $h['statement']), 0, 90)])),
+                'person_id' => (int) $h['person_id'], 'open' => ['kind' => 'person', 'id' => (int) $h['person_id'], 'view' => 'hypotheses'], 'done_label' => i18n_t('Vu'), 'snooze' => 'mark'];
         }
     }
     if (function_exists('ouc_semaine_rows')) { foreach (ouc_semaine_rows($pdo) as $r) { $out[] = $r; } } // 🧩 un mur de brique par semaine (lib/ou_chercher.php)
@@ -199,15 +206,19 @@ function semaine_manques(PDO $pdo): array
         $years = $it['from'] && $it['to'] ? ($it['from'] === $it['to'] ? (string) $it['from'] : $it['from'] . '–' . $it['to']) : (string) ($it['from'] ?: $it['to'] ?: '');
         $place = trim((string) ($it['place'] ?? ''));
         $row = ['key' => 'manque:' . $pid . ':' . $kind . ':' . (int) ($it['from'] ?? 0), 'sort' => 'manque', 'urgency' => 'later', 'person_id' => $pid,
-            'badge' => $it['sosa'] ? 'Sosa ' . $it['sosa'] : '', 'open' => ['kind' => 'gaps', 'id' => $pid], 'done_label' => 'Cherché', 'snooze' => 'mark'];
+            'badge' => $it['sosa'] ? 'Sosa ' . $it['sosa'] : '', 'open' => ['kind' => 'gaps', 'id' => $pid], 'done_label' => i18n_t('Cherché'), 'snooze' => 'mark'];
         if ($kind === 'socface') {
             if (($perSf[$pid] = ($perSf[$pid] ?? 0) + 1) > 2) { continue; } // deux recensements par ancêtre au plus : la liste reste lisible
-            $row['title'] = 'Recensement de ' . $it['from'] . ($place !== '' ? ' à ' . $place : '') . ' : chercher sur SocFace';
+            $row['title'] = i18n_t($place !== '' ? 'Recensement de {y} à {place} : chercher sur SocFace' : 'Recensement de {y} : chercher sur SocFace', ['y' => $it['from'], 'place' => $place]);
             $row['detail'] = implode(' · ', array_filter([(string) $it['name'], (string) ($it['why'] ?? '')]));
             $row['sf'] = $it['sf'] ?? null;
-            $row['done_label'] = 'Cherché sur SocFace';
+            $row['done_label'] = i18n_t('Cherché sur SocFace');
         } else {
-            $row['title'] = ($what[$kind] ?? ucfirst((string) ($it['what'] ?? 'Acte'))) . ' ' . semaine_de((string) $it['name']) . ($place !== '' ? ' : chercher à ' . $place : '') . ($years !== '' ? ' (' . $years . ')' : '');
+            // 🌐 en français, la phrase d'avant mot pour mot (« Naissance de Jean » / « d’Anne ») ; ailleurs, une phrase entière traduite
+            $act = isset($what[$kind]) ? i18n_t($what[$kind], [], 'acte') : ucfirst((string) ($it['what'] ?? 'Acte'));
+            $row['title'] = i18n_lang() === 'fr'
+                ? $act . ' ' . semaine_de((string) $it['name']) . ($place !== '' ? ' : chercher à ' . $place : '') . ($years !== '' ? ' (' . $years . ')' : '')
+                : i18n_t($place !== '' ? '{act} : {name}, chercher à {place}' : '{act} : {name}', ['act' => $act, 'name' => (string) $it['name'], 'place' => $place]) . ($years !== '' ? ' (' . $years . ')' : '');
             $arch = is_array($it['archive'] ?? null) ? (string) ($it['archive']['label'] ?? '') : '';
             $where = is_array($it['where'] ?? null) ? implode(', ', array_slice(array_map(static fn($w) => is_array($w) ? (string) ($w['label'] ?? $w['series'] ?? '') : (string) $w, $it['where']), 0, 2)) : '';
             $row['detail'] = implode(' · ', array_filter([$arch, $where, (string) ($it['why'] ?? '')]));
@@ -227,10 +238,10 @@ function semaine_verifier(PDO $pdo): array
             foreach (socface_records($pdo, 'cr.verified=0', [], 80) as $r) {
                 $chef = ''; foreach ($r['members'] as $m) { if ($m['is_primary'] || $chef === '') { $chef = trim($m['first'] . ' ' . $m['last']); if ($m['is_primary']) { break; } } }
                 $n = count($r['members']);
-                $out[] = ['key' => 'socface:' . (int) $r['id'], 'sort' => 'verifier', 'urgency' => 'later', 'badge' => 'Lecture SocFace',
-                    'title' => 'Recensement de ' . $r['year'] . ($r['place'] !== '' ? ' à ' . $r['place'] : '') . ' : lecture à vérifier sur l’image',
-                    'detail' => implode(' · ', array_filter([$chef !== '' ? 'Foyer de ' . $chef : '', $n ? $n . ' personne' . ($n > 1 ? 's' : '') : '', trim((string) $r['cote'])])),
-                    'url' => (string) ($r['image_url'] ?: $r['origin_url']), 'open' => ['kind' => 'socface', 'id' => (int) $r['id']], 'done_label' => 'Vérifié sur l’image', 'snooze' => 'mark'];
+                $out[] = ['key' => 'socface:' . (int) $r['id'], 'sort' => 'verifier', 'urgency' => 'later', 'badge' => 'Lecture SocFace', // reste en français : heritage-semaine.js choisit la couleur d'après ce texte
+                    'title' => i18n_t($r['place'] !== '' ? 'Recensement de {y} à {place} : lecture à vérifier sur l’image' : 'Recensement de {y} : lecture à vérifier sur l’image', ['y' => $r['year'], 'place' => $r['place']]),
+                    'detail' => implode(' · ', array_filter([$chef !== '' ? i18n_t('Foyer de {name}', ['name' => $chef]) : '', $n ? i18n_t($n > 1 ? '{n} personnes' : '{n} personne', ['n' => $n]) : '', trim((string) $r['cote'])])),
+                    'url' => (string) ($r['image_url'] ?: $r['origin_url']), 'open' => ['kind' => 'socface', 'id' => (int) $r['id']], 'done_label' => i18n_t('Vérifié sur l’image'), 'snooze' => 'mark'];
             }
         } catch (Throwable $_) {}
     }
@@ -242,9 +253,9 @@ function semaine_verifier(PDO $pdo): array
                 if (!in_array($a['level'], ['red', 'orange'], true)) { continue; }
                 $p = (int) ($a['people'][0] ?? 0);
                 $out[] = ['key' => 'controle:' . $a['key'], 'sort' => 'verifier', 'urgency' => $a['level'] === 'red' ? 'week' : 'later',
-                    'title' => (string) $a['title'], 'badge' => $a['level'] === 'red' ? '🔴 Impossible' : '🟠 À vérifier',
+                    'title' => (string) $a['title'], 'badge' => $a['level'] === 'red' ? '🔴 Impossible' : '🟠 À vérifier', // reste en français : heritage-semaine.js choisit la couleur d'après ce texte
                     'detail' => mb_substr(trim((string) ($a['detail'] ?? '')), 0, 140), 'person_id' => $p,
-                    'open' => ['kind' => 'controle', 'level' => $a['level'], 'id' => $p], 'done_label' => 'Vu', 'snooze' => 'mark'];
+                    'open' => ['kind' => 'controle', 'level' => $a['level'], 'id' => $p], 'done_label' => i18n_t('Vu'), 'snooze' => 'mark'];
                 if (++$n >= 80) { break; }
             }
         } catch (Throwable $_) {}
@@ -263,10 +274,10 @@ function semaine_entraide(PDO $pdo): array
         $since = semaine_days_since((string) $h['updated_at']);
         $t = $targets[$h['target']] ?? '';
         $out[] = ['key' => 'entraide:' . (int) $h['id'], 'sort' => 'entraide', 'urgency' => $h['status'] === 'answered' ? 'today' : 'later',
-            'title' => mb_substr(trim((string) $h['question']) ?: 'Demande d’entraide', 0, 140), 'badge' => $lab[$h['status']] ?? (string) $h['status'],
+            'title' => mb_substr(trim((string) $h['question']) ?: i18n_t('Demande d’entraide'), 0, 140), 'badge' => isset($lab[$h['status']]) ? i18n_t((string) $lab[$h['status']]) : (string) $h['status'],
             'detail' => implode(' · ', array_filter([semaine_person_name($h), is_array($t) ? (string) ($t['label'] ?? $t[0] ?? '') : (string) $t, trim((string) $h['posted_where']),
-                $h['status'] === 'answered' ? 'Une réponse t’attend' : ($h['status'] === 'draft' ? 'Brouillon à publier' : ($since !== null ? 'Publiée il y a ' . $since . ' jour' . ($since > 1 ? 's' : '') : ''))])),
-            'person_id' => (int) ($h['person_id'] ?? 0), 'url' => (string) $h['posted_url'], 'open' => ['kind' => 'list', 'list' => 'help_requests'], 'done_label' => 'Résolue', 'snooze' => 'mark'];
+                $h['status'] === 'answered' ? i18n_t('Une réponse t’attend') : ($h['status'] === 'draft' ? i18n_t('Brouillon à publier') : ($since !== null ? i18n_t($since > 1 ? 'Publiée il y a {n} jours' : 'Publiée il y a {n} jour', ['n' => $since]) : ''))])),
+            'person_id' => (int) ($h['person_id'] ?? 0), 'url' => (string) $h['posted_url'], 'open' => ['kind' => 'list', 'list' => 'help_requests'], 'done_label' => i18n_t('Résolue'), 'snooze' => 'mark'];
     }
     return $out;
 }
@@ -288,32 +299,32 @@ function semaine_fait(PDO $pdo, array $marks): array
     }
     try {
         foreach ($pdo->query("SELECT id, title, reminder_done_at FROM standalone_reminders WHERE reminder_done=1 AND substr(reminder_done_at,1,10)>='$mon'") as $r) {
-            $add(['key' => 'fait:rappel:s:' . (int) $r['id'], 'title' => (string) $r['title'], 'detail' => 'Rappel fait', 'date' => (string) $r['reminder_done_at'], 'open' => ['kind' => 'list', 'list' => 'reminders']]);
+            $add(['key' => 'fait:rappel:s:' . (int) $r['id'], 'title' => (string) $r['title'], 'detail' => i18n_t('Rappel fait'), 'date' => (string) $r['reminder_done_at'], 'open' => ['kind' => 'list', 'list' => 'reminders']]);
         }
         foreach ($pdo->query("SELECT ii.id, ii.title, ii.reminder_done_at, ii.investigation_id FROM investigation_items ii WHERE ii.reminder_done=1 AND substr(ii.reminder_done_at,1,10)>='$mon'") as $r) {
-            $add(['key' => 'fait:rappel:i:' . (int) $r['id'], 'title' => (string) $r['title'], 'detail' => 'Rappel fait', 'date' => (string) $r['reminder_done_at'], 'open' => ['kind' => 'investigation', 'id' => (int) $r['investigation_id']]]);
+            $add(['key' => 'fait:rappel:i:' . (int) $r['id'], 'title' => (string) $r['title'], 'detail' => i18n_t('Rappel fait'), 'date' => (string) $r['reminder_done_at'], 'open' => ['kind' => 'investigation', 'id' => (int) $r['investigation_id']]]);
         }
     } catch (Throwable $_) {}
     try {
         if ($pdo->query("SELECT 1 FROM pragma_table_info('archive_visit_plans') WHERE name='done_at'")->fetchColumn()) {
             foreach ($pdo->query("SELECT id, title, archive_center, done_at FROM archive_visit_plans WHERE COALESCE(done_at,'')>='$mon'") as $v) {
-                $add(['key' => 'fait:visite:' . (int) $v['id'], 'title' => trim((string) $v['title']) ?: (string) $v['archive_center'], 'detail' => 'Visite faite', 'date' => (string) $v['done_at'], 'open' => ['kind' => 'list', 'list' => 'archive_visits', 'id' => (int) $v['id']]]);
+                $add(['key' => 'fait:visite:' . (int) $v['id'], 'title' => trim((string) $v['title']) ?: (string) $v['archive_center'], 'detail' => i18n_t('Visite faite'), 'date' => (string) $v['done_at'], 'open' => ['kind' => 'list', 'list' => 'archive_visits', 'id' => (int) $v['id']]]);
             }
         }
     } catch (Throwable $_) {}
     try {
         foreach ($pdo->query("SELECT id, objet, destinataire, updated_at FROM courriers WHERE statut='reponse_recue' AND substr(updated_at,1,10)>='$mon'") as $c) {
-            $add(['key' => 'fait:courrier:' . (int) $c['id'], 'title' => trim((string) $c['objet']) . ' — ' . trim((string) $c['destinataire']), 'detail' => 'Réponse reçue', 'date' => (string) $c['updated_at'], 'open' => ['kind' => 'list', 'list' => 'courriers']]);
+            $add(['key' => 'fait:courrier:' . (int) $c['id'], 'title' => trim((string) $c['objet']) . ' — ' . trim((string) $c['destinataire']), 'detail' => i18n_t('Réponse reçue'), 'date' => (string) $c['updated_at'], 'open' => ['kind' => 'list', 'list' => 'courriers']]);
         }
     } catch (Throwable $_) {}
     try {
         foreach ($pdo->query("SELECT id, question, updated_at FROM help_requests WHERE status='solved' AND substr(updated_at,1,10)>='$mon'") as $h) {
-            $add(['key' => 'fait:entraide:' . (int) $h['id'], 'title' => mb_substr(trim((string) $h['question']) ?: 'Demande d’entraide', 0, 140), 'detail' => 'Demande résolue', 'date' => (string) $h['updated_at'], 'open' => ['kind' => 'list', 'list' => 'help_requests']]);
+            $add(['key' => 'fait:entraide:' . (int) $h['id'], 'title' => mb_substr(trim((string) $h['question']) ?: 'Demande d’entraide', 0, 140), 'detail' => i18n_t('Demande résolue'), 'date' => (string) $h['updated_at'], 'open' => ['kind' => 'list', 'list' => 'help_requests']]);
         }
     } catch (Throwable $_) {}
     foreach ($marks as $key => $m) {
         if (($m['s'] ?? '') !== 'done' || (string) ($m['at'] ?? '') < $mon) { continue; }
-        $add(['key' => 'fait:' . $key, 'title' => (string) ($m['t'] ?? $key), 'detail' => (string) ($m['l'] ?? 'Fait'), 'date' => (string) $m['at'], 'open' => is_array($m['o'] ?? null) ? $m['o'] : null, 'mark' => $key]);
+        $add(['key' => 'fait:' . $key, 'title' => (string) ($m['t'] ?? $key), 'detail' => i18n_t((string) ($m['l'] ?? 'Fait')), 'date' => (string) $m['at'], 'open' => is_array($m['o'] ?? null) ? $m['o'] : null, 'mark' => $key]);
     }
     $out = array_values($out);
     usort($out, static fn($a, $b) => strcmp((string) $b['date'], (string) $a['date']));
@@ -434,11 +445,11 @@ function semaine_mark(PDO $pdo, array $data): array
             default: // hypothèse, recherche proposée, contrôle : une marque « fait »
                 $marks[$key] = ['s' => 'done', 'at' => $today, 't' => $title ?: $key, 'l' => ['hypo' => 'Hypothèse revue', 'manque' => 'Recherche faite', 'controle' => 'Alerte revue', 'mur' => 'Piste du mur faite', 'solidite' => 'Lien vérifié'][$sort] ?? 'Fait', 'o' => $open];
                 semaine_marks_save($pdo, $marks);
-                return ['ok' => true, 'key' => $key, 'prev' => $prev, 'label' => $marks[$key]['l']];
+                return ['ok' => true, 'key' => $key, 'prev' => $prev, 'label' => i18n_t($marks[$key]['l'])]; // la marque garde le mot français, traduit à l'affichage
         }
         unset($marks[$key]); // une ancienne marque n'a plus lieu d'être
         semaine_marks_save($pdo, $marks);
-        return ['ok' => true, 'key' => $key, 'prev' => $prev, 'label' => $label];
+        return ['ok' => true, 'key' => $key, 'prev' => $prev, 'label' => i18n_t($label)];
     }
     if ($op === 'snooze') {
         $to = semaine_snooze_date((string) ($data['until'] ?? ''));

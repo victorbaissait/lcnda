@@ -23,6 +23,7 @@
     if (root) root.LCNDA_SOURCES_OUVERTES_2 = api;
 })(typeof window !== 'undefined' ? window : null, function () {
     'use strict';
+    const i18n = (s, v) => (typeof window !== 'undefined' && window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js (dans Node : le français)
     const clean = s => String(s ?? '').replace(/[\u0000-\u001f\u007f]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 200);
     const enc = v => encodeURIComponent(clean(v));
     const fold = s => String(s ?? '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[’']/g, "'").replace(/\s+/g, ' ').trim();
@@ -266,11 +267,11 @@
         const cote = f.cote ? `Cote ${clean(f.cote)}` : '';
         switch (kind) {
             case 'naturalisation':
-                ev('natu', 'naturalisation', 'NATU', 'Naturalisation', {date: f.date, place: f.place, description: [f.number && `Dossier ${clean(f.number)}`, f.origin && `Nationalité d’avant : ${clean(f.origin)}`, cote].filter(Boolean).join(' · '), why: 'Le décret dit la date de la naturalisation.'});
+                ev('natu', 'naturalisation', 'NATU', 'Naturalisation', {date: f.date, place: f.place, description: [f.number && `Dossier ${clean(f.number)}`, f.origin && i18n('Nationalité d’avant : {nm}', {nm: clean(f.origin)}), cote].filter(Boolean).join(' · '), why: 'Le décret dit la date de la naturalisation.'});
                 out.push({id: 'voyage', what: 'voyage', label: 'Départs et émigration : date de la naturalisation', date: clean(f.date || ''), place: clean(f.place || ''), checked: !!fiche.hasVoyage, why: fiche.hasVoyage ? 'Remplie seulement si la case est vide.' : 'Sa fiche n’a pas encore de départ noté.'});
                 break;
             case 'minutier': {
-                const act = f.act || 'autre'; const desc = [f.notary && `Notaire : ${clean(f.notary)}`, cote].filter(Boolean).join(' · ');
+                const act = f.act || 'autre'; const desc = [f.notary && i18n('Notaire : {nm}', {nm: clean(f.notary)}), cote].filter(Boolean).join(' · ');
                 if (act === 'contrat') ev('marc', 'contrat-de-mariage', 'MARC', 'Contrat de mariage', {date: f.date, place: f.place || 'Paris', description: desc, scope: 'family', checked: !!fiche.hasSpouse, why: fiche.hasSpouse ? 'Ajouté à son union.' : 'Sa fiche n’a pas d’union : relie d’abord le conjoint.'});
                 else if (act === 'inventaire') out.push({id: 'probate', what: 'probate', label: 'Inventaire après décès', date: clean(f.date || ''), place: clean(f.place || 'Paris'), title: clean(f.notary || ''), description: clean(f.cote || ''), checked: true, why: 'Rangé avec les autres inventaires après décès.'});
                 else if (act === 'testament') ev('will', 'testament', 'WILL', 'Testament', {date: f.date, place: f.place || 'Paris', description: desc});
@@ -284,12 +285,12 @@
                 else ev('deed', 'acte', 'DEED', 'Acte', {date: f.date, place, description: cote});
                 break; }
             case 'bagne':
-                ev('cond', 'condamnation', '', 'Condamnation', {date: f.date, place: f.court, description: [f.sentence && `Peine : ${clean(f.sentence)}`, f.number && `Matricule ${clean(f.number)}`, cote].filter(Boolean).join(' · ')});
+                ev('cond', 'condamnation', '', 'Condamnation', {date: f.date, place: f.court, description: [f.sentence && i18n('Peine : {nm}', {nm: clean(f.sentence)}), f.number && `Matricule ${clean(f.number)}`, cote].filter(Boolean).join(' · ')});
                 if (f.arrival || f.bagne) ev('bagne', 'bagne', '', 'Arrivée au bagne', {date: f.arrival, place: f.bagne, description: f.number ? `Matricule ${clean(f.number)}` : ''});
                 if (f.end) ev('end', 'liberation-du-bagne', '', 'Libération ou décès au bagne', {date: f.end, place: f.bagne, checked: false, why: 'À cocher si tu sais ce que dit la date (libération ou décès).'});
                 break;
             case 'shd_marin':
-                out.push({id: 'military', what: 'military', label: 'Bloc militaire : inscrit maritime', description: ['Inscrit maritime', f.quarter && `quartier de ${clean(f.quarter)}`, f.number && `folio ${clean(f.number)}`, f.date && `inscrit le ${clean(f.date)}`, f.ships && clean(f.ships), cote].filter(Boolean).join(' · '), checked: true, why: 'Ajouté à la fin des notes du bloc militaire (rien n’est remplacé).'});
+                out.push({id: 'military', what: 'military', label: 'Bloc militaire : inscrit maritime', description: ['Inscrit maritime', f.quarter && i18n('quartier de {nm}', {nm: clean(f.quarter)}), f.number && `folio ${clean(f.number)}`, f.date && i18n('inscrit le {nm}', {nm: clean(f.date)}), f.ships && clean(f.ships), cote].filter(Boolean).join(' · '), checked: true, why: 'Ajouté à la fin des notes du bloc militaire (rien n’est remplacé).'});
                 ev('mise', 'service-militaire', 'MISE', 'Service militaire', {date: f.date, place: f.quarter, title: 'Inscrit maritime', description: cote, checked: !!f.date});
                 break;
             case 'shd_officier':
@@ -297,7 +298,7 @@
                 if (f.date) ev('mise', 'service-militaire', 'MISE', 'Service militaire', {date: f.date, title: [f.rank, f.arm].filter(Boolean).map(clean).join(', ') || 'Officier', description: cote, checked: false});
                 break;
             case 'deportation':
-                ev('dep', 'deportation', '', 'Déportation', {date: f.date, place: f.from, description: [f.convoy && `Convoi n° ${clean(f.convoy)}`, f.camp && `vers ${clean(f.camp)}`, f.fate && clean(f.fate)].filter(Boolean).join(' · '), why: 'Le départ du convoi.'});
+                ev('dep', 'deportation', '', 'Déportation', {date: f.date, place: f.from, description: [f.convoy && i18n('Convoi n° {nm}', {nm: clean(f.convoy)}), f.camp && `vers ${clean(f.camp)}`, f.fate && clean(f.fate)].filter(Boolean).join(' · '), why: 'Le départ du convoi.'});
                 if (f.death_date || f.death_place || /dec|mort/.test(fold(f.fate))) ev('depdc', 'deces-en-deportation', '', 'Décès en déportation', {date: f.death_date, place: f.death_place || f.camp, why: 'Inscrit comme décès en déportation.'});
                 if ((f.death_date || f.death_place) && !has('deces', 'DEAT')) ev('deat', 'deces', 'DEAT', 'Décès', {date: f.death_date, place: f.death_place || f.camp, checked: false, why: 'À cocher si la notice donne une date de décès officielle.'});
                 break;
@@ -321,7 +322,7 @@
                 out.push({id: 'target', what: 'target', label: 'Ajouter la notice à la fiche choisie (texte et image)', title: clean(f.title || ''), description: [f.ref && `Notice ${clean(f.ref)}`, f.protection && clean(f.protection), f.summary && String(f.summary).slice(0, 4000)].filter(Boolean).join('\n'), checked: true, why: 'Le texte est ajouté à la suite de la description (rien n’est remplacé).'});
                 break;
             case 'ellis':
-                ev('immi', 'immigration', 'IMMI', 'Immigration', {date: f.date, place: 'New York (Ellis Island), États-Unis', description: [f.ship && `Navire : ${clean(f.ship)}`, f.from && `parti de ${clean(f.from)}`, f.age && `âge déclaré : ${clean(f.age)}`].filter(Boolean).join(' · ')});
+                ev('immi', 'immigration', 'IMMI', 'Immigration', {date: f.date, place: 'New York (Ellis Island), États-Unis', description: [f.ship && i18n('Navire : {nm}', {nm: clean(f.ship)}), f.from && i18n('parti de {nm}', {nm: clean(f.from)}), f.age && i18n('âge déclaré : {nm}', {nm: clean(f.age)})].filter(Boolean).join(' · ')});
                 out.push({id: 'voyage', what: 'voyage', label: 'Départs et émigration : nouveau départ', date: clean(f.date || ''), place: clean(f.from || ''), title: clean(f.ship || ''), description: clean(f.dest || ''), checked: true, why: 'Un départ ajouté au bloc (navire, port, arrivée à New York).'});
                 break;
             default: break;

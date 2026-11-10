@@ -23,6 +23,7 @@
     if (root) root.LCNDA_SOURCES_OUVERTES = api;
 })(typeof window !== 'undefined' ? window : null, function () {
     'use strict';
+    const i18n = (s, v) => (typeof window !== 'undefined' && window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js (dans Node : le français)
     const MDH = 'https://www.memoiredeshommes.sga.defense.gouv.fr/';
     const LEONORE = 'https://www.leonore.archives-nationales.culture.gouv.fr/';
     const MENTION = 'Lu sur un site d’archives en ligne et recopié : à vérifier sur le document';
@@ -110,8 +111,8 @@
         if (!y) return {classe: 0, text: 'Sans année de naissance, on ne peut pas calculer sa classe.', inRange: false};
         const c = y + 20;
         const inRange = c >= 1859 && c <= 1940;
-        return {classe: c, inRange, text: `Né en ${y}, il est de la classe ${c} : les garçons étaient recensés l’année de leurs 20 ans (${y} + 20 = ${c}). Les registres matricules sont rangés par classe, puis par bureau de recrutement.`
-            + (inRange ? '' : c < 1859 ? ' Avant les années 1860, il n’y a en général pas encore de registre matricule.' : ' Les registres de cette classe ne sont souvent pas encore en ligne (délai de 100 à 120 ans).')};
+        return {classe: c, inRange, text: i18n('Né en {y}, il est de la classe {c} : les garçons étaient recensés l’année de leurs 20 ans ({y} + 20 = {c}). Les registres matricules sont rangés par classe, puis par bureau de recrutement.', {y: String(y), c: String(c)})
+            + (inRange ? '' : c < 1859 ? ' ' + i18n('Avant les années 1860, il n’y a en général pas encore de registre matricule.') : ' ' + i18n('Les registres de cette classe ne sont souvent pas encore en ligne (délai de 100 à 120 ans).'))};
     }
 
     /** ce qu'un lien collé dit déjà */

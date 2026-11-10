@@ -352,7 +352,7 @@ function preuve_save_item(PDO $pdo, array $d): array
             ->execute([$kind, $text, $refKind, $refId, $evidence, $quality, $resolution, $id]);
     } else {
         $n = (int) $pdo->query("SELECT count(*) FROM proof_items WHERE deleted_at='' AND case_id=" . (int) $c['id'])->fetchColumn();
-        if ($n >= PREUVE_MAX_ITEMS) { throw new RuntimeException('Ce dossier a déjà ' . PREUVE_MAX_ITEMS . ' lignes : ouvre-en un autre.'); }
+        if ($n >= PREUVE_MAX_ITEMS) { throw new RuntimeException(i18n_t('Ce dossier a déjà {n} lignes : ouvre-en un autre.', ['n' => PREUVE_MAX_ITEMS])); }
         $pos = (int) $pdo->query('SELECT COALESCE(max(position),0)+1 FROM proof_items WHERE case_id=' . (int) $c['id'])->fetchColumn();
         $pdo->prepare('INSERT INTO proof_items(case_id, kind, text, ref_kind, ref_id, evidence, quality, resolution, position) VALUES(?,?,?,?,?,?,?,?,?)')
             ->execute([(int) $c['id'], $kind, $text, $refKind, $refId, $evidence, $quality, $resolution, $pos]);
@@ -708,10 +708,12 @@ function preuve_semaine_rows(PDO $pdo): array
     $week = (int) date('oW');
     $w = $pool[$week % count($pool)];
     $cw = preuve_child_word((string) ($w['child']['gender'] ?? ''));
-    return [['key' => 'solidite:' . (int) $w['child_id'] . ':' . (int) $w['parent_id'] . ':' . $week, 'sort' => 'piste', 'urgency' => 'week', 'badge' => '🛡 Lien à consolider',
-        'title' => 'Lien à consolider : ' . ($w['child']['name'] ?? '') . ', ' . $cw . ' ' . preuve_de((string) ($w['parent']['name'] ?? '')),
-        'detail' => implode(' · ', array_filter(['Sosa ' . $w['sosa'], 'génération ' . $w['generation'], SOLIDITE_LABELS[$w['level']], 'cherche l’acte de naissance ou de baptême qui le nomme'])),
-        'person_id' => (int) $w['child_id'], 'open' => ['kind' => 'list', 'list' => 'fragile_branches', 'id' => (int) $w['child_id']], 'done_label' => 'Lien vérifié', 'snooze' => 'mark']];
+    return [['key' => 'solidite:' . (int) $w['child_id'] . ':' . (int) $w['parent_id'] . ':' . $week, 'sort' => 'piste', 'urgency' => 'week', 'badge' => i18n_t('🛡 Lien à consolider'),
+        // 🌐 en français la phrase d'avant mot pour mot ; ailleurs une phrase entière selon le sexe de l'enfant (i18n_t)
+        'title' => i18n_lang() === 'fr' ? 'Lien à consolider : ' . ($w['child']['name'] ?? '') . ', ' . $cw . ' ' . preuve_de((string) ($w['parent']['name'] ?? ''))
+            : i18n_t(['male' => 'Lien à consolider : {child}, le fils de {parent}', 'female' => 'Lien à consolider : {child}, la fille de {parent}'][(string) ($w['child']['gender'] ?? '')] ?? 'Lien à consolider : {child}, l’enfant de {parent}', ['child' => $w['child']['name'] ?? '', 'parent' => $w['parent']['name'] ?? '']),
+        'detail' => implode(' · ', array_filter(['Sosa ' . $w['sosa'], i18n_t('génération {n}', ['n' => $w['generation']]), i18n_t(SOLIDITE_LABELS[$w['level']]), i18n_t('cherche l’acte de naissance ou de baptême qui le nomme')])),
+        'person_id' => (int) $w['child_id'], 'open' => ['kind' => 'list', 'list' => 'fragile_branches', 'id' => (int) $w['child_id']], 'done_label' => i18n_t('Lien vérifié'), 'snooze' => 'mark']];
 }
 
 /* ═════════════════════════ Menu de choix : la sorte « citation » ═════════════════════════ */

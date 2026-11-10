@@ -77,27 +77,28 @@ function research_suggestions_data(PDO $pdo, int $limit = 40): array
 
         // Naissance manquante : d'après le mariage, sinon la naissance de l'enfant de la lignée
         if (!$p['birth'] && $sosa > 1) {
-            if ($my) { $add($sosa, $pid, 'birth', 'naissance', $my - 40, $my - 15, $placeOf($marr, $child['birth'] ?? null), 'mariage en ' . $my); }
-            elseif ($cy) { $add($sosa, $pid, 'birth', 'naissance', $cy - ($female ? 45 : 55), $cy - 16, $placeOf($child['birth'] ?? null), 'enfant né en ' . $cy); }
+            // 🌐 « pourquoi » dans la langue de la page (i18n_t) ; « what » reste en français (il sert aux recherches sur FranceArchives)
+            if ($my) { $add($sosa, $pid, 'birth', 'naissance', $my - 40, $my - 15, $placeOf($marr, $child['birth'] ?? null), i18n_t('mariage en {y}', ['y' => $my])); }
+            elseif ($cy) { $add($sosa, $pid, 'birth', 'naissance', $cy - ($female ? 45 : 55), $cy - 16, $placeOf($child['birth'] ?? null), i18n_t('enfant né en {y}', ['y' => $cy])); }
         }
         // Mariage manquant (une fois par couple : chez le père, ou la mère si le père est inconnu)
         if ($sosa > 1 && !$marr && ($sosa % 2 === 0 || !isset($positions[$sosa - 1])) && $cy) {
             $wife = $female ? $p : ($spouseId ? ($people[$spouseId] ?? null) : null);
             $place = $placeOf($wife['birth'] ?? null, $child['birth'] ?? null);
-            $add($sosa, $pid, 'marriage', 'mariage', $cy - 12, $cy + 1, $place, 'enfant né en ' . $cy . ($wife && ($wife['birth']['place'] ?? '') !== '' ? ' ; souvent dans la paroisse de l’épouse' : ''));
+            $add($sosa, $pid, 'marriage', 'mariage', $cy - 12, $cy + 1, $place, i18n_t($wife && ($wife['birth']['place'] ?? '') !== '' ? 'enfant né en {y} ; souvent dans la paroisse de l’épouse' : 'enfant né en {y}', ['y' => $cy]));
         }
         // Décès manquant : après le dernier événement connu, jusqu'à ~95 ans
         if (!$p['death'] && $p['living_status'] !== 'living') {
             $base = $by ?? ($my ? $my - 25 : ($cy ? $cy - 30 : null));
             $after = max(array_filter([$p['last']['year'] ?? null, $my, $cy, $by], static fn($v) => $v !== null) ?: [0]);
             if ($base && $base < $now - 100 && $after) {
-                $add($sosa, $pid, 'death', 'décès', $after, max($after, $base + 95), $placeOf($p['last'], $marr, $child['birth'] ?? null), ($p['last']['year'] ?? null) ? 'dernière mention en ' . $p['last']['year'] : 'né' . ($female ? 'e' : '') . ' vers ' . $base);
+                $add($sosa, $pid, 'death', 'décès', $after, max($after, $base + 95), $placeOf($p['last'], $marr, $child['birth'] ?? null), ($p['last']['year'] ?? null) ? i18n_t('dernière mention en {y}', ['y' => $p['last']['year']]) : i18n_t($female ? 'née vers {y}' : 'né vers {y}', ['y' => $base]));
             }
         }
         // Parents inconnus : l'acte de mariage (ou de baptême) les nomme
         if ($sosa * 2 <= SUGGESTION_MAX_SOSA && !isset($positions[$sosa * 2]) && !isset($positions[$sosa * 2 + 1]) && ($my || $by)) {
             $add($sosa, $pid, 'parents', 'parents', $my ? $my - 1 : $by - 1, $my ? $my + 1 : $by + 1, $placeOf($marr, $p['birth']),
-                $my ? 'son acte de mariage (' . $my . ') nomme ses parents' : 'son acte de baptême (' . $by . ') nomme ses parents');
+                $my ? i18n_t('son acte de mariage ({y}) nomme ses parents', ['y' => $my]) : i18n_t('son acte de baptême ({y}) nomme ses parents', ['y' => $by]));
         }
     }
     // Les plus proches générations d'abord ; à génération égale, naissance → mariage → décès → parents

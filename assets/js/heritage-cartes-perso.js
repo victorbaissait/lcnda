@@ -16,6 +16,7 @@
     const A = () => window.LCNDA_APP, UI = () => window.LCNDA_UI || {}, P = () => window.LCNDA_PICKER || A(), C = () => window.LCNDA_CARTES_PERSO;
     const S = () => A()?.state || {}, DC = () => ext.diagramCartes, HP = () => ext.cartesOutils?.helpers;
     const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const toast = (m, k, o) => A()?.toast?.(m, k, o);
     const pl = (n, w, m) => A()?.plural ? A().plural(n, w, m) : `${n} ${w}`;
     const isF = Number.isFinite, r1 = v => Math.round(v * 10) / 10;
@@ -120,7 +121,7 @@
             const b = e.target.closest('button,[data-mcp-open]'); if (!b) return;
             if (b.dataset.mcpOpen) return open(b.dataset.mcpOpen);
             if (b.dataset.mcpDup) return duplicate(b.dataset.mcpDup);
-            if (b.dataset.mcpRen) { const m = findMap(b.dataset.mcpRen); const nm = await A().askText({title: 'Renommer la carte', value: m.name, okLabel: 'Enregistrer'}); if (nm && nm !== m.name) { const before = clone(m); await saveMap({...m, name: nm.slice(0, 80)}); renderList(); A().undoToast?.(`Carte renommée « ${nm.slice(0, 80)} »`, {undo: async () => { await saveMap(before); renderList(); }}); } return; }
+            if (b.dataset.mcpRen) { const m = findMap(b.dataset.mcpRen); const nm = await A().askText({title: 'Renommer la carte', value: m.name, okLabel: 'Enregistrer'}); if (nm && nm !== m.name) { const before = clone(m); await saveMap({...m, name: nm.slice(0, 80)}); renderList(); A().undoToast?.(i18n('Carte renommée « {nm} »', {nm: nm.slice(0, 80)}), {undo: async () => { await saveMap(before); renderList(); }}); } return; }
             if (b.dataset.mcpShare) return shareDef(findMap(b.dataset.mcpShare));
             if (b.dataset.mcpDel) return removeMap(findMap(b.dataset.mcpDel), () => renderList());
         });
@@ -153,7 +154,7 @@
                 const m = await saveMap({id: 0, name, description: form.elements.description.value.trim(), def});
                 M.panel = true; lsSet(PANEL_KEY, true);
                 await open(m.id);
-                A().undoToast?.(`Carte « ${m.name} » créée`, {undo: async () => { await post('delete', {id: m.id}); await loadList(true); if (String(M.cur) === String(m.id)) open(null); }, redo: async () => { await post('restore', {id: m.id}); await loadList(true); open(m.id); }});
+                A().undoToast?.(i18n('Carte « {nm} » créée', {nm: m.name}), {undo: async () => { await post('delete', {id: m.id}); await loadList(true); if (String(M.cur) === String(m.id)) open(null); }, redo: async () => { await post('restore', {id: m.id}); await loadList(true); open(m.id); }});
             }});
         void dlg;
     }
@@ -163,7 +164,7 @@
         if (isReady(src)) m = await saveMap({...src, id: 0, name: UI().freeName ? UI().freeName(src.name, (M.list?.maps || []).map(x => x.name)) : `${src.name} (2)`});
         else m = (await post('duplicate', {id: src.id})).map;
         await loadList(true);
-        A().undoToast?.(`Carte « ${m.name} » créée (copie)`, {undo: async () => { await post('delete', {id: m.id}); await loadList(true); if (String(M.cur) === String(m.id)) open(null); else rerender(); }});
+        A().undoToast?.(i18n('Carte « {nm} » créée (copie)', {nm: m.name}), {undo: async () => { await post('delete', {id: m.id}); await loadList(true); if (String(M.cur) === String(m.id)) open(null); else rerender(); }});
         open(m.id);
     }
     async function removeMap(m, after) {
@@ -172,7 +173,7 @@
         await loadList(true);
         if (String(M.cur) === String(m.id)) setCur(null);
         after?.();
-        A().undoToast?.(`Carte « ${m.name} » supprimée`, {undo: async () => { await post('restore', {id: m.id}); await loadList(true); after?.(); }, redo: async () => { await post('delete', {id: m.id}); await loadList(true); after?.(); }});
+        A().undoToast?.(i18n('Carte « {nm} » supprimée', {nm: m.name}), {undo: async () => { await post('restore', {id: m.id}); await loadList(true); after?.(); }, redo: async () => { await post('delete', {id: m.id}); await loadList(true); after?.(); }});
     }
     function shareDef(m) {
         if (!m) return;
@@ -182,7 +183,7 @@
         const got = await A().importSettingFile?.('mes-cartes', {names: (M.list?.maps || []).map(x => x.name), check: d => d && typeof d.data === 'object'});
         if (!got) return;
         const m = await saveMap({id: 0, name: got.nom, description: String(got.donnees.description || ''), def: C().cleanDef(got.donnees.data)});
-        A().undoToast?.(`Carte « ${m.name} » importée`, {undo: async () => { await post('delete', {id: m.id}); await loadList(true); open(null); }});
+        A().undoToast?.(i18n('Carte « {nm} » importée', {nm: m.name}), {undo: async () => { await post('delete', {id: m.id}); await loadList(true); open(null); }});
         open(m.id);
     }
 
@@ -203,7 +204,7 @@
             const wasReady = isReady(M.map);
             try {
                 const saved = await saveMap(M.map);
-                if (wasReady) { M.map.id = saved.id; setCur(saved.id); M.saved = JSON.stringify(M.map); A().renderSidebar?.(); toast(`« ${saved.name} » est gardée dans Mes cartes : tes changements y restent.`); }
+                if (wasReady) { M.map.id = saved.id; setCur(saved.id); M.saved = JSON.stringify(M.map); A().renderSidebar?.(); toast(i18n('« {nm} » est gardée dans Mes cartes : tes changements y restent.', {nm: saved.name})); }
                 const sv = document.querySelector('.mcp-saved'); if (sv) { sv.hidden = false; clearTimeout(sv._t); sv._t = setTimeout(() => { sv.hidden = true; }, 2500); }
                 if (!wasReady) A().undoToast?.(p.label, {undo: () => restoreState(p.before), redo: () => restoreState(after)});
             } catch (e) { toast(e.message, 'error', {retry: () => commit(label)}); }
@@ -290,7 +291,7 @@
         box.hidden = !M.map.def.legend;
         if (!M.map.def.legend) return;
         const rows = C().legend(M.map.def, M.data, M.t);
-        box.innerHTML = `<b class="mcp-leg-title">${esc(M.map.name)}${M.t !== null ? ` · <span>${M.map.def.time.mode === 'window' ? `${M.t - M.map.def.time.win}–${M.t}` : `jusqu’en ${M.t}`}</span>` : ''}</b>` +
+        box.innerHTML = `<b class="mcp-leg-title">${esc(M.map.name)}${M.t !== null ? ` · <span>${M.map.def.time.mode === 'window' ? `${M.t - M.map.def.time.win}–${M.t}` : i18n('jusqu’en {year}', {year: String(M.t)})}</span>` : ''}</b>` +
             (rows.length ? rows.map(r => `<div class="mcp-leg-row" data-mcp-leg="${esc(r.id)}" title="${esc(r.note || '')}">${miniSym(r)}<span>${esc(r.name)}</span><small>${r.n.toLocaleString('fr-FR')}</small></div>${r.cats.map(c => `<div class="mcp-leg-cat">${miniSym(r, c.color)}<span>${esc(c.name)}</span></div>`).join('')}`).join('') : `<div class="mcp-leg-row"><span class="empty-line"><span class="empty-line-ico" aria-hidden="true">🗺</span><span class="empty-line-text">Aucune couche montrée</span></span></div>`);
     }
 
@@ -399,7 +400,7 @@
             <div class="mcp-sec">Couches <small class="muted">(la première est dessinée par-dessus)</small></div>
             <ul class="mcp-layers">${def.layers.map((l, i) => { const n = layerCount(l), d = (M.data?.layers || []).find(x => x.id === l.id); return `<li class="mcp-layer${M.openL[l.id] ? ' is-open' : ''}" data-mcp-layer-row="${esc(l.id)}" data-i="${i}">
                 <div class="mcp-lhead"><span class="mcp-grip" draggable="true" tabindex="0" role="button" aria-label="Ranger la couche (Alt + ↑ / ↓)" title="Glisser pour ranger · Alt + ↑ / ↓">⠿</span>
-                <label class="ui-toggle" title="Montrer ou cacher"><input type="checkbox" data-mcp-vis="${esc(l.id)}"${l.visible ? ' checked' : ''} aria-label="Montrer « ${esc(l.name)} »"><i></i></label>
+                <label class="ui-toggle" title="Montrer ou cacher"><input type="checkbox" data-mcp-vis="${esc(l.id)}"${l.visible ? ' checked' : ''} aria-label="${esc(i18n('Montrer « {nm} »', {nm: l.name}))}"><i></i></label>
                 <button type="button" class="mcp-lname" data-mcp-expand="${esc(l.id)}" aria-expanded="${!!M.openL[l.id]}"><span aria-hidden="true">${C().KIND[l.kind]?.icon || ''}</span> ${esc(l.name)}</button>
                 <small class="mcp-lcount" data-mcp-count="${esc(l.id)}" title="${esc(d?.note || '')}">${n === null ? '…' : n.toLocaleString('fr-FR')}${d?.note ? ' ⚠️' : ''}</small>
                 <span class="mcp-swatch" style="background:${esc(l.s.color)}" aria-hidden="true"></span>
@@ -409,7 +410,7 @@
         box.querySelector('.mcp-pbody').scrollTop = scroll;
         box.querySelectorAll('[data-mcp-lbody]').forEach(b => {
             const l = def.layers.find(x => x.id === b.dataset.mcpLbody), slot = b.querySelector('[data-mcp-color]');
-            if (slot && UI().colorField) { const cf = UI().colorField({value: l.s.color}); slot.appendChild(cf); cf.input.addEventListener('change', () => { l.s.color = cf.value || l.s.color; commit(`Couleur de « ${l.name} » changée`, {panel: true}); }); }
+            if (slot && UI().colorField) { const cf = UI().colorField({value: l.s.color}); slot.appendChild(cf); cf.input.addEventListener('change', () => { l.s.color = cf.value || l.s.color; commit(i18n('Couleur de « {nm} » changée', {nm: l.name}), {panel: true}); }); }
         });
         mountPresets(box.querySelector('[data-mcp-presets]'));
     }
@@ -419,21 +420,21 @@
     function layerOf(el) { const id = el.closest('[data-mcp-layer-row]')?.dataset.mcpLayerRow; return M.map.def.layers.find(l => l.id === id); }
     function moveLayer(id, by) {
         const ls = M.map.def.layers, i = ls.findIndex(l => l.id === id), j = i + by; if (i < 0 || j < 0 || j >= ls.length) return;
-        const [x] = ls.splice(i, 1); ls.splice(j, 0, x); commit(`Couche « ${x.name} » rangée`, {panel: true});
+        const [x] = ls.splice(i, 1); ls.splice(j, 0, x); commit(i18n('Couche « {nm} » rangée', {nm: x.name}), {panel: true});
         document.querySelector(`[data-mcp-layer-row="${CSS.escape(id)}"] .mcp-grip`)?.focus();
     }
     function addLayerMenu(btn) {
-        UI().menuAt(btn, C().KINDS.map(k => ({icon: k[1], label: k[2], run: () => { const l = C().newLayer(k[0], M.map.def); M.map.def.layers.unshift(l); M.openL[l.id] = true; commit(`Couche « ${l.name} » ajoutée`, {panel: true, data: true}); }})), {title: 'Ajouter une couche'});
+        UI().menuAt(btn, C().KINDS.map(k => ({icon: k[1], label: k[2], run: () => { const l = C().newLayer(k[0], M.map.def); M.map.def.layers.unshift(l); M.openL[l.id] = true; commit(i18n('Couche « {nm} » ajoutée', {nm: l.name}), {panel: true, data: true}); }})), {title: 'Ajouter une couche'});
     }
     function layerMenu(btn, l) {
         const i = M.map.def.layers.indexOf(l);
         UI().menuAt(btn, [
             {icon: '✎', label: 'Régler', run: () => { M.openL[l.id] = true; panelFill(); }},
             {icon: '🎯', label: 'Cadrer sur la couche', run: () => { const d = {...M.map.def, layers: [l]}; const b = C().bounds(d, M.data); if (b) { const v = M.map.def.view; M.map.def.view = null; const keep = M.map.def.layers; M.map.def.layers = [l]; fit(); M.map.def.layers = keep; M.map.def.view = v; redraw(); } }},
-            {icon: '⧉', label: 'Dupliquer', run: () => { const c = C().newLayer(l.kind, M.map.def); Object.assign(c, clone(l), {id: c.id, name: `${l.name} (copie)`.slice(0, 80)}); M.map.def.layers.splice(i + 1, 0, c); commit(`Couche « ${l.name} » dupliquée`, {panel: true, data: true}); }},
+            {icon: '⧉', label: 'Dupliquer', run: () => { const c = C().newLayer(l.kind, M.map.def); Object.assign(c, clone(l), {id: c.id, name: `${l.name} (copie)`.slice(0, 80)}); M.map.def.layers.splice(i + 1, 0, c); commit(i18n('Couche « {nm} » dupliquée', {nm: l.name}), {panel: true, data: true}); }},
             ...(i > 0 ? [{icon: '↑', label: 'Monter', run: () => moveLayer(l.id, -1)}] : []),
             ...(i < M.map.def.layers.length - 1 ? [{icon: '↓', label: 'Descendre', run: () => moveLayer(l.id, 1)}] : []),
-            '-', {icon: '🗑', label: 'Retirer la couche', danger: true, run: () => { M.map.def.layers.splice(i, 1); commit(`Couche « ${l.name} » retirée`, {panel: true, data: false}); redraw(); }},
+            '-', {icon: '🗑', label: 'Retirer la couche', danger: true, run: () => { M.map.def.layers.splice(i, 1); commit(i18n('Couche « {nm} » retirée', {nm: l.name}), {panel: true, data: false}); redraw(); }},
         ], {title: l.name});
     }
     function bindPanel(box) {
@@ -447,29 +448,29 @@
             if (b.matches('[data-mcp-add]')) { addLayerMenu(b); return; }
             if (b.matches('[data-mcp-view]')) { M.map.def.view = {lat: S().mapCenter.lat, lon: S().mapCenter.lon, zoom: S().mapZoom}; commit('Vue gardée', {panel: true, data: false}); return; }
             if (b.matches('[data-mcp-noview]')) { M.map.def.view = null; commit('Vue automatique', {panel: true, data: false}); fit(); redraw(); return; }
-            if (b.dataset.mcpSeg) { const l = layerOf(b); l.f[b.dataset.mcpSeg] = b.dataset.v; commit(`Filtre de « ${l.name} » changé`, {panel: true}); return; }
+            if (b.dataset.mcpSeg) { const l = layerOf(b); l.f[b.dataset.mcpSeg] = b.dataset.v; commit(i18n('Filtre de « {nm} » changé', {nm: l.name}), {panel: true}); return; }
             if (b.dataset.mcpTm) { M.map.def.time.mode = b.dataset.v; commit('Curseur du temps changé', {panel: true, data: false}); return; }
         });
         const onField = (e, final) => {
             const t = e.target, l = t.closest('[data-mcp-layer-row]') ? layerOf(t) : null;
-            if (t.dataset.mcpM && final) { M.map[t.dataset.mcpM] = t.value.slice(0, t.dataset.mcpM === 'name' ? 80 : 1000); if (t.dataset.mcpM === 'name' && !M.map.name.trim()) { UI().fail?.(t, 'Donne un nom à la carte.'); return; } commit(t.dataset.mcpM === 'name' ? `Carte renommée « ${M.map.name} »` : 'Description changée', {data: false}); A().renderSidebar?.(); document.querySelector('.mcp-title') && (document.querySelector('.mcp-title').textContent = M.map.name); return; }
+            if (t.dataset.mcpM && final) { M.map[t.dataset.mcpM] = t.value.slice(0, t.dataset.mcpM === 'name' ? 80 : 1000); if (t.dataset.mcpM === 'name' && !M.map.name.trim()) { UI().fail?.(t, 'Donne un nom à la carte.'); return; } commit(t.dataset.mcpM === 'name' ? i18n('Carte renommée « {nm} »', {nm: M.map.name}) : 'Description changée', {data: false}); A().renderSidebar?.(); document.querySelector('.mcp-title') && (document.querySelector('.mcp-title').textContent = M.map.name); return; }
             if (t.dataset.mcpD === 'bg' && final) { M.map.def.bg = t.value; S().mapMineBg = t.value; commit('Fond de la carte changé', {data: false}); const sel = document.getElementById('map-background'); if (sel && t.value) sel.value = t.value; return; }
             if (t.dataset.mcpT2 && final) { const k = t.dataset.mcpT2; M.map.def.time[k] = k === 'from' || k === 'to' ? t.value.trim() : num(t, k === 'secs' ? 3 : 1, k === 'secs' ? 120 : 200); commit('Période changée'); return; }
             if (t.dataset.mcpDb && final) { M.map.def[t.dataset.mcpDb] = t.checked; commit(t.checked ? 'Légende montrée' : 'Légende cachée', {data: false}); return; }
-            if (t.dataset.mcpVis !== undefined && final) { const ll = M.map.def.layers.find(x => x.id === t.dataset.mcpVis); ll.visible = t.checked; commit(`Couche « ${ll.name} » ${t.checked ? 'montrée' : 'cachée'}`, {data: false}); return; }
+            if (t.dataset.mcpVis !== undefined && final) { const ll = M.map.def.layers.find(x => x.id === t.dataset.mcpVis); ll.visible = t.checked; commit((t.checked ? i18n('Couche « {nm} » montrée', {nm: ll.name}) : i18n('Couche « {nm} » cachée', {nm: ll.name})), {data: false}); return; }
             if (!l) return;
-            if (t.dataset.mcpL === 'name' && final) { l.name = t.value.trim().slice(0, 80) || C().KIND[l.kind].name; commit(`Couche renommée « ${l.name} »`, {data: false}); const nb = box.querySelector(`[data-mcp-expand="${CSS.escape(l.id)}"]`); if (nb) nb.lastChild.textContent = ` ${l.name}`; return; }
-            if (t.dataset.mcpF && final) { const k = t.dataset.mcpF; l.f[k] = ['gens', 'sosaGens'].includes(k) ? num(t, k === 'gens' ? 1 : 0, 40) : k === 'radius' ? Math.max(.1, Math.min(2000, Number(t.value) || 15)) : t.value; commit(`Filtre de « ${l.name} » changé`, {panel: ['side'].includes(k) ? false : false}); return; }
-            if (t.dataset.mcpFb && final) { l.f[t.dataset.mcpFb] = t.checked; commit(`Filtre de « ${l.name} » changé`, {panel: t.dataset.mcpFb === 'sosa'}); return; }
-            if (t.matches('[data-mcp-cert]') && final) { l.f.cert = [...box.querySelectorAll(`[data-mcp-layer-row="${CSS.escape(l.id)}"] [data-mcp-cert]:checked`)].map(x => x.value); commit(`Certitude de « ${l.name} » changée`); return; }
-            if (t.matches('[data-mcp-type]') && final) { l.f.types = [...box.querySelectorAll(`[data-mcp-layer-row="${CSS.escape(l.id)}"] [data-mcp-type]:checked`)].map(x => Number(x.value)); commit(`Sortes de « ${l.name} » changées`); return; }
+            if (t.dataset.mcpL === 'name' && final) { l.name = t.value.trim().slice(0, 80) || C().KIND[l.kind].name; commit(i18n('Couche renommée « {nm} »', {nm: l.name}), {data: false}); const nb = box.querySelector(`[data-mcp-expand="${CSS.escape(l.id)}"]`); if (nb) nb.lastChild.textContent = ` ${l.name}`; return; }
+            if (t.dataset.mcpF && final) { const k = t.dataset.mcpF; l.f[k] = ['gens', 'sosaGens'].includes(k) ? num(t, k === 'gens' ? 1 : 0, 40) : k === 'radius' ? Math.max(.1, Math.min(2000, Number(t.value) || 15)) : t.value; commit(i18n('Filtre de « {nm} » changé', {nm: l.name}), {panel: ['side'].includes(k) ? false : false}); return; }
+            if (t.dataset.mcpFb && final) { l.f[t.dataset.mcpFb] = t.checked; commit(i18n('Filtre de « {nm} » changé', {nm: l.name}), {panel: t.dataset.mcpFb === 'sosa'}); return; }
+            if (t.matches('[data-mcp-cert]') && final) { l.f.cert = [...box.querySelectorAll(`[data-mcp-layer-row="${CSS.escape(l.id)}"] [data-mcp-cert]:checked`)].map(x => x.value); commit(i18n('Certitude de « {nm} » changée', {nm: l.name})); return; }
+            if (t.matches('[data-mcp-type]') && final) { l.f.types = [...box.querySelectorAll(`[data-mcp-layer-row="${CSS.escape(l.id)}"] [data-mcp-type]:checked`)].map(x => Number(x.value)); commit(i18n('Sortes de « {nm} » changées', {nm: l.name})); return; }
             if (t.dataset.mcpS) {
                 const k = t.dataset.mcpS; l.s[k] = k === 'shape' ? t.value : num(t, k === 'size' ? 4 : 10, k === 'size' ? 40 : 100);
                 if (k !== 'shape') box.querySelectorAll(`[data-mcp-layer-row="${CSS.escape(l.id)}"] [data-mcp-s="${k}"]`).forEach(x => { if (x !== t) x.value = l.s[k]; });
-                if (final) commit(`Style de « ${l.name} » changé`, {data: false}); else redraw();
+                if (final) commit(i18n('Style de « {nm} » changé', {nm: l.name}), {data: false}); else redraw();
                 return;
             }
-            if (t.dataset.mcpSb && final) { l.s[t.dataset.mcpSb] = t.checked; commit(`Style de « ${l.name} » changé`, {data: false}); }
+            if (t.dataset.mcpSb && final) { l.s[t.dataset.mcpSb] = t.checked; commit(i18n('Style de « {nm} » changé', {nm: l.name}), {data: false}); }
         };
         box.addEventListener('input', e => { if (e.target.dataset.mcpS) { onField(e, false); } });
         box.addEventListener('change', e => onField(e, true));
@@ -479,19 +480,19 @@
             const n = String(e.detail.name || ''), v = e.detail.value;
             const ids = Array.isArray(v) ? v.map(Number).filter(x => x > 0) : [];
             const one = Number(Array.isArray(v) ? v[0] : v) || 0;
-            if (n.startsWith('mcp_p_')) { l.f.persons = ids; commit(`Personnes de « ${l.name} » changées`, {panel: true}); }
-            else if (n.startsWith('mcp_b_')) { l.f.branch = one; commit(`Branche de « ${l.name} » changée`); }
-            else if (n.startsWith('mcp_e_')) { l.f.labels = ids; commit(`Étiquettes de « ${l.name} » changées`); }
-            else if (n.startsWith('mcp_pl_')) { l.f.place = one; commit(`Lieu de « ${l.name} » changé`, {panel: true}); }
-            else if (n.startsWith('mcp_z_')) { l.f.zone = one; commit(`Zone de « ${l.name} » changée`); }
-            else if (n.startsWith('mcp_a_')) { l.f.pets = ids; commit(`Animaux de « ${l.name} » changés`); }
-            else if (n.startsWith('mcp_c_')) { l.f.layers = ids; commit(`Couches de « ${l.name} » changées`); }
+            if (n.startsWith('mcp_p_')) { l.f.persons = ids; commit(i18n('Personnes de « {nm} » changées', {nm: l.name}), {panel: true}); }
+            else if (n.startsWith('mcp_b_')) { l.f.branch = one; commit(i18n('Branche de « {nm} » changée', {nm: l.name})); }
+            else if (n.startsWith('mcp_e_')) { l.f.labels = ids; commit(i18n('Étiquettes de « {nm} » changées', {nm: l.name})); }
+            else if (n.startsWith('mcp_pl_')) { l.f.place = one; commit(i18n('Lieu de « {nm} » changé', {nm: l.name}), {panel: true}); }
+            else if (n.startsWith('mcp_z_')) { l.f.zone = one; commit(i18n('Zone de « {nm} » changée', {nm: l.name})); }
+            else if (n.startsWith('mcp_a_')) { l.f.pets = ids; commit(i18n('Animaux de « {nm} » changés', {nm: l.name})); }
+            else if (n.startsWith('mcp_c_')) { l.f.layers = ids; commit(i18n('Couches de « {nm} » changées', {nm: l.name})); }
         });
         // K20 : ⠿ à la souris (glisser) et au clavier (Alt + ↑ / ↓)
         let dragId = null;
         box.addEventListener('dragstart', e => { const g = e.target.closest('.mcp-grip'); if (!g) return; dragId = g.closest('[data-mcp-layer-row]').dataset.mcpLayerRow; try { e.dataTransfer.setData('text/plain', dragId); e.dataTransfer.effectAllowed = 'move'; } catch (_) {} });
         box.addEventListener('dragover', e => { if (dragId && e.target.closest('[data-mcp-layer-row]')) e.preventDefault(); });
-        box.addEventListener('drop', e => { const to = e.target.closest('[data-mcp-layer-row]')?.dataset.mcpLayerRow; if (!dragId || !to || to === dragId) { dragId = null; return; } e.preventDefault(); const ls = M.map.def.layers, i = ls.findIndex(l => l.id === dragId), j = ls.findIndex(l => l.id === to); const [x] = ls.splice(i, 1); ls.splice(j, 0, x); dragId = null; commit(`Couche « ${x.name} » rangée`, {panel: true}); });
+        box.addEventListener('drop', e => { const to = e.target.closest('[data-mcp-layer-row]')?.dataset.mcpLayerRow; if (!dragId || !to || to === dragId) { dragId = null; return; } e.preventDefault(); const ls = M.map.def.layers, i = ls.findIndex(l => l.id === dragId), j = ls.findIndex(l => l.id === to); const [x] = ls.splice(i, 1); ls.splice(j, 0, x); dragId = null; commit(i18n('Couche « {nm} » rangée', {nm: x.name}), {panel: true}); });
         box.addEventListener('keydown', e => { const g = e.target.closest('.mcp-grip'); if (!g || !e.altKey || !['ArrowUp', 'ArrowDown'].includes(e.key)) return; e.preventDefault(); moveLayer(g.closest('[data-mcp-layer-row]').dataset.mcpLayerRow, e.key === 'ArrowUp' ? -1 : 1); });
     }
     function togglePanel(on) {
@@ -506,14 +507,14 @@
         const list = () => { const v = lsGet(PRESETS_KEY, []); return Array.isArray(v) ? v.filter(x => x && typeof x.name === 'string').slice(0, 60) : []; };
         const put = l => lsSet(PRESETS_KEY, l.slice(0, 60)), today = () => new Date().toISOString(), now = () => C().forServer(M.map.def);
         const frame = U.presetsFrame({id: 'mes-cartes', what: 'la définition de cette carte (fond, période, couches, filtres et styles — jamais les données)', list: () => list().map(x => ({name: x.name, date: x.date})), quietApply: true,
-            apply: i => { const x = list()[i]; if (!x) return false; const keepView = M.map.def.view; M.map.def = C().cleanDef(x.data); if (!x.data.view) M.map.def.view = keepView; S().mapMineBg = M.map.def.bg || ''; commit(`Réglage « ${x.name} » appliqué`, {panel: true, data: true}); return false; },
+            apply: i => { const x = list()[i]; if (!x) return false; const keepView = M.map.def.view; M.map.def = C().cleanDef(x.data); if (!x.data.view) M.map.def.view = keepView; S().mapMineBg = M.map.def.bg || ''; commit(i18n('Réglage « {nm} » appliqué', {nm: x.name}), {panel: true, data: true}); return false; },
             save: name => { const l = list(), it = {name, date: today(), data: now()}, i = l.findIndex(x => x.name === name); if (i >= 0) l[i] = it; else l.push(it); put(l); },
             replace: i => { const l = list(); if (!l[i]) return false; l[i] = {...l[i], date: today(), data: now()}; put(l); },
             rename: (i, name) => { const l = list(); if (!l[i]) return false; l[i].name = name; put(l); },
             duplicate: i => { const l = list(), x = l[i]; if (!x) return false; l.splice(i + 1, 0, {name: U.freeName ? U.freeName(x.name, l.map(y => y.name)) : `${x.name} (copie)`, date: today(), data: x.data}); put(l); },
             exportOne: i => { const x = list()[i]; if (x) A().exportSettingFile?.('mes-cartes', x.name, {data: x.data}); return false; },
-            remove: i => { const l = list(), x = l[i]; if (!x) return false; if (A().undoLocalChange) A().undoLocalChange(`Réglage « ${x.name} » supprimé`, [PRESETS_KEY], () => { l.splice(i, 1); put(l); }, () => frame.isConnected && frame.refresh?.()); else { l.splice(i, 1); put(l); } },
-            importOne: async () => { const got = await A().importSettingFile?.('mes-cartes', {names: list().map(x => x.name), check: d => d && typeof d.data === 'object'}); if (!got) return false; const l = list(); l.push({name: got.nom, date: today(), data: C().forServer(got.donnees.data)}); put(l); toast(`Réglage « ${got.nom} » importé : clique « Appliquer » pour t’en servir.`); },
+            remove: i => { const l = list(), x = l[i]; if (!x) return false; if (A().undoLocalChange) A().undoLocalChange(i18n('Réglage « {nm} » supprimé', {nm: x.name}), [PRESETS_KEY], () => { l.splice(i, 1); put(l); }, () => frame.isConnected && frame.refresh?.()); else { l.splice(i, 1); put(l); } },
+            importOne: async () => { const got = await A().importSettingFile?.('mes-cartes', {names: list().map(x => x.name), check: d => d && typeof d.data === 'object'}); if (!got) return false; const l = list(); l.push({name: got.nom, date: today(), data: C().forServer(got.donnees.data)}); put(l); toast(i18n('Réglage « {nm} » importé : clique « Appliquer » pour t’en servir.', {nm: got.nom})); },
         });
         slot.appendChild(frame);
     }
@@ -572,11 +573,11 @@
         const bgSel = document.getElementById('map-background');
         if (bgSel) { if (M.map.def.bg) bgSel.value = M.map.def.bg; bgSel.addEventListener('change', e => { e.stopImmediatePropagation(); M.map.def.bg = bgSel.value; S().mapMineBg = bgSel.value; commit('Fond de la carte changé', {data: false, panel: true}); redraw(); }); }
         document.getElementById('map-france')?.addEventListener('click', e => { e.stopImmediatePropagation(); const v = M.map.def.view; M.map.def.view = null; fit(); M.map.def.view = v; redraw(); });
-        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg'); svg.id = 'mcp-svg'; svg.setAttribute('class', 'mcp-svg'); svg.setAttribute('role', 'img'); svg.setAttribute('aria-label', `Carte « ${M.map.name} »`);
+        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg'); svg.id = 'mcp-svg'; svg.setAttribute('class', 'mcp-svg'); svg.setAttribute('role', 'img'); svg.setAttribute('aria-label', i18n('Carte « {nm} »', {nm: M.map.name}));
         stage.insertBefore(svg, document.getElementById('map-overlay') || null);
         const leg = document.createElement('div'); leg.id = 'mcp-legend'; leg.className = 'mcp-legend'; stage.appendChild(leg);
         leg.addEventListener('pointerdown', e => e.stopPropagation());
-        leg.addEventListener('click', e => { const r = e.target.closest('[data-mcp-leg]'); if (!r || readOnly()) return; const l = M.map.def.layers.find(x => x.id === r.dataset.mcpLeg); if (l) { l.visible = false; commit(`Couche « ${l.name} » cachée`, {data: false, panel: true}); } });
+        leg.addEventListener('click', e => { const r = e.target.closest('[data-mcp-leg]'); if (!r || readOnly()) return; const l = M.map.def.layers.find(x => x.id === r.dataset.mcpLeg); if (l) { l.visible = false; commit(i18n('Couche « {nm} » cachée', {nm: l.name}), {data: false, panel: true}); } });
         const panel = document.createElement('div'); panel.id = 'mcp-panel'; panel.className = 'mcp-panel'; stage.appendChild(panel); bindPanel(panel);
         if (!ro) panelFill(); else panel.hidden = true;
         let down = null;
@@ -637,7 +638,7 @@
         const px = q => ({w: Math.round(cur.W / 25.4 * q), h: Math.round(cur.H / 25.4 * q)});
         const raster = async (q, type) => { const p = px(Math.min(q, 400)); return HP().rasterize(cur.svg, p.w, p.h, type, .92); };
         const copy = async (blob, fname, opt) => { if (opt.saveCopy && A().importMediaFile) { try { await A().importMediaFile(new File([blob], fname, {type: blob.type}), ['image']); toast('Une copie est rangée dans les médias.'); } catch (err) { toast(err.message, 'error'); } } };
-        await UI().openExportDialog({title: m.name, defaultName: fileBase(m.name), quality: 200, saveCopy: !!A().importMediaFile, info: `A4 paysage · ${pl(cur.count, 'élément')}${cur.hidden ? ` · sans les personnes vivantes ni les fiches confidentielles` : ''}`,
+        await UI().openExportDialog({title: m.name, defaultName: fileBase(m.name), quality: 200, saveCopy: !!A().importMediaFile, info: `${i18n('A4 paysage')} · ${pl(cur.count, 'élément')}${cur.hidden ? ` · ${i18n('sans les personnes vivantes ni les fiches confidentielles')}` : ''}`,
             preview: () => { const d = document.createElement('div'); d.className = 'mcp-export-prev'; d.innerHTML = cur.svg; return d; },
             formats: [{id: 'pdf', run: async x => { const b = await raster(x.quality, 'image/jpeg'); download(await HP().jpegPdf(b, cur.W, cur.H, m.name), x.filename); }},
                 {id: 'png', run: async x => { const b = await raster(x.quality, 'image/png'); download(b, x.filename); await copy(b, x.filename, x); }},
@@ -652,7 +653,7 @@
             const data = await shareData(m);
             if (fmt === 'kml') { const CO = window.LCNDA_CARTES_OUTILS; if (!CO?.toKML) throw new Error('L’export KML n’est pas chargé.'); download(new Blob([CO.toKML(C().toLayers(m.def, data))], {type: 'application/vnd.google-earth.kml+xml'}), fileBase(m.name) + '.kml'); }
             else download(new Blob([JSON.stringify(C().toGeoJSON(m.def, data, {name: m.name}), null, 1)], {type: 'application/geo+json'}), fileBase(m.name) + '.geojson');
-            toast(`Carte « ${m.name} » exportée en ${fmt === 'kml' ? 'KML' : 'GeoJSON'}${data.hidden ? ' (sans les personnes vivantes ni les fiches confidentielles)' : ''}.`);
+            toast(i18n('Carte « {nm} » exportée en {fmt}', {nm: m.name, fmt: fmt === 'kml' ? 'KML' : 'GeoJSON'}) + `${data.hidden ? ' ' + i18n('(sans les personnes vivantes ni les fiches confidentielles)') : ''}.`);
         } catch (e) { toast(e.message, 'error'); }
     }
     async function printMap(pre = null) {
@@ -677,7 +678,7 @@
         const w = app.dashboardNewWidget ? app.dashboardNewWidget('custommap_widget', {}) : {id: `custommap_widget-${Date.now().toString(36)}`, type: 'custommap_widget', width: '12', limit: 0, config: {}};
         w.config = {...(w.config || {}), mapId: m.id, mapName: m.name, height: 360};
         s.widgets = [...(s.widgets || []), w]; app.saveDashboardBlockSettings(s);
-        app.undoToast?.(`Carte « ${m.name} » ajoutée au tableau de bord`, {undo: async () => { app.saveDashboardBlockSettings(before); }});
+        app.undoToast?.(i18n('Carte « {nm} » ajoutée au tableau de bord', {nm: m.name}), {undo: async () => { app.saveDashboardBlockSettings(before); }});
     }
     async function toLayout(m) {
         const Kit = ext.layoutKit; if (!Kit) { toast('La mise en page n’est pas chargée.', 'error'); return; }
@@ -714,7 +715,7 @@
             el.innerHTML = cur.svg.replace(/<svg /, '<svg class="mcp-embed-svg" preserveAspectRatio="xMidYMid meet" ');
             el.title = 'Ouvrir dans la Carte'; el.setAttribute('role', 'button'); el.tabIndex = 0;
             const go = () => open(m.id); el.onclick = go; el.onkeydown = e => { if (e.key === 'Enter') go(); };
-        } catch (e) { el.innerHTML = A().empty(`La carte n’a pas pu se dessiner : ${e.message}`, {icon: '⚠️'}); }
+        } catch (e) { el.innerHTML = A().empty(i18n('La carte n’a pas pu se dessiner : {nm}', {nm: e.message}), {icon: '⚠️'}); }
     }
     // le widget « 🗺 Une de mes cartes » du tableau de bord
     const wcfg = w => ({mapId: w?.config?.mapId ?? null, mapName: String(w?.config?.mapName || ''), height: Number(w?.config?.height) || 360});

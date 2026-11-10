@@ -11,6 +11,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const A = () => window.LCNDA_APP;
     const UI = () => window.LCNDA_UI;
@@ -87,7 +88,7 @@
             if (st.pid) st.ctx = await context(st.pid).catch(() => null);
             setKind(st.kind);
             return {count: 1, noun: 'document', summaryHtml: `<b>${esc(S3().KIND_LABEL[st.kind] || 'un document')}</b> pour ${st.ctx?.person ? `<b>${esc([st.ctx.person.first, String(st.ctx.person.last || '').toUpperCase()].join(' '))}</b>` : 'la fiche choisie ci-dessous'}`,
-                notices: [{kind: 'warn', text: `${S3().MENTION}. Le document entre « À vérifier ».`}, {kind: 'info', text: 'Rien de la fiche n’est remplacé : une naissance, un baptême, un décès ou une inhumation déjà sur la fiche est gardé tel quel, et « ↶ Annuler » retire tout ce que l’import a ajouté.'}],
+                notices: [{kind: 'warn', text: i18n("{nm}. Le document entre « À vérifier ».", {nm: i18n(S3().MENTION)})}, {kind: 'info', text: 'Rien de la fiche n’est remplacé : une naissance, un baptême, un décès ou une inhumation déjà sur la fiche est gardé tel quel, et « ↶ Annuler » retire tout ce que l’import a ajouté.'}],
                 preview: `<div class="so-imp so3-imp" data-so3-imp></div>`, onShow: body => { bind(body); draw(body); }};
         };
         const read = body => {
@@ -112,7 +113,7 @@
             }, 350);
         };
         const events = () => (st.kind === 'openarchives' || st.kind === 'freebmd')
-            ? [...st.picked].map(i => st.rows[i]).filter(Boolean).map(x => ({tag: x.tag, label: x.type || TAGNAME[x.tag] || '', date: x.date, place: x.place || x.district || '', note: x.note || [x.role && `Rôle : ${x.role}`, x.archive && `Archives : ${x.archive}`, x.url].filter(Boolean).join(' · ')}))
+            ? [...st.picked].map(i => st.rows[i]).filter(Boolean).map(x => ({tag: x.tag, label: x.type || TAGNAME[x.tag] || '', date: x.date, place: x.place || x.district || '', note: x.note || [x.role && i18n('Rôle : {nm}', {nm: x.role}), x.archive && i18n('Archives : {nm}', {nm: x.archive}), x.url].filter(Boolean).join(' · ')}))
             : st.evs.filter((e, i) => st.evOn.has(i));
         const payload = () => {
             const ev = events(); const bl = BLOCK_OF[st.kind] && st.blockOn ? [BLOCK_OF[st.kind][0]] : [];
@@ -129,7 +130,7 @@
             if (!st.rows.length) return `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📭</span><span class="empty-line-text">Aucune ligne lue.</span></p>`;
             return `<p class="ui-hint">${esc(A().plural ? A().plural(st.rows.length, 'ligne lue') : `${st.rows.length} lignes`)} · coche celles qui parlent de cette personne (le même nom est coché d’office).</p>
                 <div class="data-table-wrap so3-rows"><table class="data-table"><thead><tr><th></th><th>Nom</th><th>Événement</th><th>Date</th><th>Lieu</th><th>${st.kind === 'freebmd' ? 'Réf.' : 'Rôle'}</th></tr></thead><tbody>
-                ${st.rows.slice(0, 300).map((x, i) => `<tr><td><label class="checkbox-line"><input type="checkbox" data-so3-row="${i}" ${st.picked.has(i) ? 'checked' : ''} aria-label="Ajouter cette ligne"></label></td><td>${esc(x.first)} <b>${esc(String(x.last).toUpperCase())}</b></td><td>${esc(x.type || TAGNAME[x.tag] || x.tag)}${['MARR', 'MARB'].includes(x.tag) ? ' <small class="muted">(dans la famille)</small>' : ''}</td><td>${esc(x.quarterText || x.date)}</td><td>${esc(x.place || x.district || '')}</td><td>${esc(st.kind === 'freebmd' ? `vol. ${x.vol} p. ${x.page}` : x.role)}</td></tr>`).join('')}</tbody></table></div>`;
+                ${st.rows.slice(0, 300).map((x, i) => `<tr><td><label class="checkbox-line"><input type="checkbox" data-so3-row="${i}" ${st.picked.has(i) ? 'checked' : ''} aria-label="Ajouter cette ligne"></label></td><td>${esc(x.first)} <b>${esc(String(x.last).toUpperCase())}</b></td><td>${esc(x.type || TAGNAME[x.tag] || x.tag)}${['MARR', 'MARB'].includes(x.tag) ? ' <small class="muted">(dans la famille)</small>' : ''}</td><td>${esc(x.quarterText || x.date)}</td><td>${esc(x.place || x.district || '')}</td><td>${esc(st.kind === 'freebmd' ? i18n('vol. {nm} p. {x2}', {nm: String(x.vol), x2: String(x.page)}) : x.role)}</td></tr>`).join('')}</tbody></table></div>`;
         };
         const evHtml = () => st.evs.length ? `<fieldset class="so-props"><legend>Ce qui sera proposé sur la fiche (rien n’est remplacé)</legend>${st.evs.map((e, i) => `<label class="checkbox-line"><input type="checkbox" data-so3-ev="${i}" ${st.evOn.has(i) ? 'checked' : ''}><span>${esc(TAGNAME[e.tag] || e.label)}${e.tag === 'EVEN' || e.tag === 'POW' ? ` « ${esc(e.label)} »` : ''} : ${esc([e.date, e.place && `à ${e.place}`, e.note].filter(Boolean).join(' · ') || '—')}</span></label>`).join('')}
             ${BLOCK_OF[st.kind] ? `<label class="checkbox-line"><input type="checkbox" name="so3_block" ${st.blockOn ? 'checked' : ''}><span>${esc(BLOCK_OF[st.kind][1])}</span></label>` : ''}</fieldset>`
@@ -176,7 +177,7 @@
             const r = j.result; if (st.objUrl) URL.revokeObjectURL(st.objUrl);
             window.dispatchEvent(new CustomEvent('lcnda:sources-ouvertes-changed', {detail: r}));
             refresh();
-            return {message: `${r.summary} — à vérifier sur le document.`, undo: async () => { await post('so3_undo', {batch: r.batch}); refresh(); }};
+            return {message: i18n('{nm} — à vérifier sur le document.', {nm: r.summary}), undo: async () => { await post('so3_undo', {batch: r.batch}); refresh(); }};
         };
         return UI().openImportDialog({title: 'Importer depuis les archives de France et d’ailleurs', accept: 'image/*,.pdf,.html,.htm,.txt,.json,.csv', what: 'image, PDF, page enregistrée, texte ou fichier de données',
             intro: 'Ce que tu as téléchargé ou enregistré : une fiche en image ou en PDF, la page enregistrée par ton navigateur (« Enregistrer sous… »), un texte copié (fiche du CICR, de Sycomore, d’un brevet, d’une tombe, page de résultats FreeBMD…) ou le fichier de données ouvertes d’Open Archives (JSON ou CSV). Rien n’est demandé au site : seul ton fichier est lu. Pas de fichier ? « 📋 Coller un texte ».',
@@ -240,13 +241,13 @@
             const groups = [...new Set(rows.map(groupOf).filter(Boolean))];
             const bar = document.createElement('div'); bar.className = 'so3-wsbar';
             bar.innerHTML = `<div class="so3-q"><input type="search" placeholder="Chercher un site… (Italie, presse, Justes…)" aria-label="Chercher un site" data-so3-wsq></div>
-                <details class="so3-wsrub"><summary>Rubriques (${groups.length})</summary><div class="ui-filters">${[`<button type="button" class="is-active" data-so3-wsg="">Tout (${rows.length})</button>`, ...groups.map(g => `<button type="button" class="" data-so3-wsg="${esc(g)}">${esc(g)} (${rows.filter(r => groupOf(r) === g).length})</button>`)].join('')}</div></details>
+                <details class="so3-wsrub"><summary>Rubriques (${groups.length})</summary><div class="ui-filters">${[`<button type="button" class="is-active" data-so3-wsg="">${i18n("Tout ({n})", {n: rows.length})}</button>`, ...groups.map(g => `<button type="button" class="" data-so3-wsg="${esc(g)}">${esc(g)} (${rows.filter(r => groupOf(r) === g).length})</button>`)].join('')}</div></details>
                 <small class="ui-hint" data-so3-wscount></small>`;
             list.before(bar);
             let g = '';
             const apply = () => { const q = S3().fold(bar.querySelector('[data-so3-wsq]').value); let n = 0;
                 rows.forEach(r => { const ok = (!g || groupOf(r) === g) && (!q || S3().fold(r.textContent).includes(q)); r.hidden = !ok; if (ok) n++; });
-                bar.querySelector('[data-so3-wscount]').textContent = q || g ? `${n} site${n > 1 ? 's' : ''} sur ${rows.length}` : ''; };
+                bar.querySelector('[data-so3-wscount]').textContent = q || g ? i18n('{x} sur {n}', {x: A().plural(n, 'site'), n: rows.length}) : ''; };
             bar.addEventListener('input', apply);
             bar.addEventListener('keydown', e => { if (e.key === 'Escape' && e.target.value) { e.preventDefault(); e.stopPropagation(); e.target.value = ''; apply(); } });
             bar.addEventListener('click', e => { const b = e.target.closest('[data-so3-wsg]'); if (!b) return; g = b.dataset.so3Wsg || ''; bar.querySelectorAll('[data-so3-wsg]').forEach(x => x.classList.toggle('is-active', x === b)); apply(); });

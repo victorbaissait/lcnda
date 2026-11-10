@@ -13,6 +13,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && k in v ? v[k] : m)));
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const A = () => window.LCNDA_APP, UI = () => window.LCNDA_UI || {}, CORE = () => window.LCNDA_METIERS_CARTE;
     const DR = () => ext.diagramRender, SM = () => ext.storyMap, GC = () => ext.diagramCartes;
@@ -93,7 +94,7 @@
             if (!pid) { host.innerHTML = A().emptyState({icon: '🗺', text: 'Choisis une personne', hint: 'La carte de sa vie se remplit avec ses événements, ses résidences, ses recensements, ses voyages…'}); return; }
             try { data = await load(pid, {family}); } catch (e) { host.innerHTML = UI().notice ? UI().notice('error', `⛔ ${esc(e.message)}`) : esc(e.message); return; }
             if (!dlg.isConnected) return;
-            $('[data-lv-title]').textContent = `🗺 La vie de ${data.name || 'cette personne'}`;
+            $('[data-lv-title]').textContent = i18n('🗺 La vie de {name}', {name: data.name || i18n('cette personne')});
             const parts = CORE().splitSteps(data.steps);
             const withPlace = data.steps.filter(s => String(s.place || '').trim());
             if (!withPlace.length) { host.innerHTML = A().emptyState({icon: '📍', text: 'Aucun lieu dans cette vie', hint: 'Ajoute un lieu à ses événements (naissance, mariage, résidence…), ou un recensement.', action: {label: '↗ Ouvrir la fiche', attrs: `data-lv-open="${Number(data.id)}"`}}); side.innerHTML = stepsListHtml({rows: [], placed: [], src: [], noPlace: parts.noPlace}); return; }
@@ -123,11 +124,11 @@
         async function exportVideo() {
             const rec = ext.diagramPerso?.recordSvgs; if (!rec) return A().toast('Le moteur vidéo n’est pas chargé.', 'error');
             const mp4 = ['video/mp4;codecs=avc1.42E01E', 'video/mp4'].some(m => MediaRecorder.isTypeSupported?.(m)), fmt = mp4 ? 'MP4' : 'WebM';
-            const title = `La vie de ${data?.name || 'cette personne'}`;
+            const title = i18n('La vie de {name}', {name: data?.name || i18n('cette personne')});
             await UI().openExportDialog({title: `🎬 ${title}`, defaultName: title, quality: false, saveCopy: !!(A().importMediaFile || window.LCNDA_PICKER?.importMediaFile), copyChecked: true,
                 info: 'Les étapes défilent l’une après l’autre, puis toute la vie. La vidéo se fait en temps réel : laisse la fenêtre ouverte. Les personnes vivantes et les fiches confidentielles n’y sont jamais.',
                 fields: [{id: 'per', label: 'Durée d’une étape', value: String(cfg.videoPer || 2000), options: [['1200', '1,2 s (rapide)'], ['2000', '2 s'], ['3000', '3 s (lent)']]}],
-                formats: [{id: 'video', label: `🎬 Vidéo ${fmt}`, hint: 'les étapes animées', ext: mp4 ? 'mp4' : 'webm', quality: false, goLabel: `⤓ Exporter la vidéo en ${fmt}`, run: async o => {
+                formats: [{id: 'video', label: i18n('🎬 Vidéo {file}', {file: fmt}), hint: i18n('les étapes animées'), ext: mp4 ? 'mp4' : 'webm', quality: false, goLabel: i18n('⤓ Exporter la vidéo en {file}', {file: fmt}), run: async o => {
                     const per = Math.max(600, Math.min(6000, Number(o.fields?.per) || 2000)); lsSet({videoPer: per});
                     const shared = await load(pid, {family, share: true});
                     if (shared.private) throw new Error('cette personne est vivante ou sa fiche est confidentielle : pas de vidéo à partager.');
@@ -139,8 +140,8 @@
                     const fname = o.filename ? o.filename.replace(/\.(mp4|webm)$/i, '') + '.' + x : `vie.${x}`;
                     const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = fname; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000);
                     lastVideo = {blob, name: fname, frames: frames.length};
-                    if (o.saveCopy) { const imp = A().importMediaFile || window.LCNDA_PICKER?.importMediaFile; try { await imp(new File([blob], fname, {type: blob.type}), ['video']); A().toast('✓ Vidéo exportée, et une copie rangée dans les médias.'); } catch (err) { A().toast(`Vidéo exportée, mais pas rangée dans les médias : ${err.message}`, 'error'); } }
-                    else A().toast(`✓ Vidéo exportée (${x.toUpperCase()}).`);
+                    if (o.saveCopy) { const imp = A().importMediaFile || window.LCNDA_PICKER?.importMediaFile; try { await imp(new File([blob], fname, {type: blob.type}), ['video']); A().toast('✓ Vidéo exportée, et une copie rangée dans les médias.'); } catch (err) { A().toast(i18n('Vidéo exportée, mais pas rangée dans les médias : {err}', {err: err.message}), 'error'); } }
+                    else A().toast(i18n('✓ Vidéo exportée ({file}).', {file: x.toUpperCase()}));
                 }}]});
         }
         dlg.showModal();

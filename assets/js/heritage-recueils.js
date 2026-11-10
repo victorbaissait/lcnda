@@ -25,13 +25,14 @@
     const post = (action, body) => A().api(action, {}, {method: 'POST', body});
     const dialog = opts => ext.openDialog(opts);
     const isCurrent = token => token === S().workspaceToken && S().module === 'listes' && S().listType === 'recueils';
-    const plural = (n, one, many) => `${Number(n || 0).toLocaleString('fr-FR')} ${n > 1 ? many : one}`;
+    const plural = (n, one, many) => (window.LCNDA_I18N && window.LCNDA_I18N.lang !== 'fr' ? window.LCNDA_I18N.plural(n, one, many) : `${Number(n || 0).toLocaleString('fr-FR')} ${n > 1 ? many : one}`);
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const st = () => (S().hRecueil ||= {id: 0, tab: 'summary', page: 0, view: 'grid', q: '', image: 0, compare: 0, cmpA: 0, cmpB: 0});
     let bust = Date.now();
     const thumbUrl = i => i ? `media/${encodeURIComponent(i.thumbnail || i.filename)}?v=${bust}` : '';
     const fullUrl = i => i ? `media/${encodeURIComponent(i.filename)}?v=${bust}` : '';
     const LINK_TYPES = {person: ['👤', 'Fiche'], village: ['🏘️', 'Village'], investigation: ['🔍', 'Enquête'], atelier_project: ['📚', 'Projet de l’Atelier'], battue: ['🧭', 'Battue']};
-    const pageName = p => p ? (p.label ? `p. ${p.num} — ${p.label}` : `Page ${p.num}`) : '';
+    const pageName = p => p ? (p.label ? i18n('p. {num} — {label}', {num: String(p.num), label: p.label}) : i18n('Page {num}', {num: String(p.num)})) : '';
     const excerpt = (t, n = 140) => { const s = String(t || '').replace(/\s+/g, ' ').trim(); return s.length > n ? s.slice(0, n - 1) + '…' : s; };
 
     /* ─────────── Ouvrir un recueil depuis n'importe où ─────────── */
@@ -118,12 +119,12 @@
                 ext.lists.recueils(++S().workspaceToken).then(() => { if (!r) addPhotosDialog(); });
             },
             onDelete: r ? async () => {
-                const keep = await A().confirmBox(`Supprimer le recueil « ${r.title} » avec ses pages, transcriptions et versions ?\n\nLes photos restent dans Médias.`, {title: 'Supprimer le recueil', okLabel: 'Supprimer le recueil'});
+                const keep = await A().confirmBox(i18n('Supprimer le recueil « {title} » avec ses pages, transcriptions et versions ?', {title: r.title}) + '\n\n' + i18n('Les photos restent dans Médias.'), {title: 'Supprimer le recueil', okLabel: 'Supprimer le recueil'});
                 if (!keep) return false;
                 const also = await A().confirmBox('Supprimer aussi les photos qui ne servent nulle part ailleurs ?\n\nSinon, elles restent dans Médias.', {title: 'Photos du recueil', okLabel: 'Supprimer aussi les photos', cancelLabel: 'Garder les photos', danger: true});
                 const res = await post('delete_recueil', {id: r.id, delete_media: also});
                 const out = res.result || res;
-                toast(also ? `Recueil supprimé (${plural(out.media_deleted, 'photo supprimée', 'photos supprimées')}, ${plural(out.media_kept, 'gardée', 'gardées')} car utilisées ailleurs).` : 'Recueil supprimé : les photos sont toujours dans Médias.');
+                toast(also ? i18n('Recueil supprimé ({deleted}, {kept} car utilisées ailleurs).', {deleted: plural(out.media_deleted, 'photo supprimée', 'photos supprimées'), kept: plural(out.media_kept, 'gardée', 'gardées')}) : 'Recueil supprimé : les photos sont toujours dans Médias.');
                 Object.assign(st(), {id: 0, page: 0});
                 ext.lists.recueils(++S().workspaceToken);
             } : null,
@@ -259,7 +260,7 @@
         const tray = (name, list, k) => `<details class="h-rc-tray" data-rc-tray="${esc(name)}" ${o[name] ? 'open' : ''}><summary draggable="true" title="Glisser pour changer l’ordre des dossiers"><span class="h-rc-tray-grip" aria-hidden="true">⠿</span><span class="h-rc-tray-name">📁 ${esc(name)}</span> <small class="muted">${plural(list.length, 'photo', 'photos')}</small>
                 <span class="h-rc-tray-tools">${ts.length > 1 ? `<button type="button" class="icon-button" data-rc-traymove="-1" ${k ? '' : 'disabled'} title="Monter le dossier">↑</button><button type="button" class="icon-button" data-rc-traymove="1" ${k < ts.length - 1 ? '' : 'disabled'} title="Descendre le dossier">↓</button>` : ''}<button type="button" class="icon-button" data-rc-trayren="${esc(name)}" title="Renommer le dossier">✎</button><button type="button" class="icon-button" data-rc-traydel="${esc(name)}" title="Supprimer le dossier (ses photos restent à ranger)">🗑</button></span></summary>
                 <div class="h-rc-loose-list">${list.map(looseItem).join('') || '<p class="muted">Vide : glisse des photos ici, ou choisis ce dossier sous une photo.</p>'}</div></details>`;
-        return `<div class="h-rc-loose maintenance-panel"><div class="h-rc-loose-head"><h3>🧺 À ranger <small class="muted">${plural(ls.length, 'photo', 'photos')} sans page${ts.length ? ' · trie-les d’abord dans des dossiers, puis choisis leur page' : ' : choisis sa page'}</small></h3>
+        return `<div class="h-rc-loose maintenance-panel"><div class="h-rc-loose-head"><h3>🧺 À ranger <small class="muted">${ts.length ? i18n('{count} sans page · trie-les d’abord dans des dossiers, puis choisis leur page', {count: plural(ls.length, 'photo', 'photos')}) : i18n('{count} sans page : choisis sa page', {count: plural(ls.length, 'photo', 'photos')})}</small></h3>
                 <span class="h-rc-loose-tools"><button type="button" class="button small secondary" data-rc-traynew>＋ Dossier</button>${ls.length ? `<button type="button" class="button small secondary" data-rc-pickall>${n ? 'Tout décocher' : 'Tout cocher'}</button>` : ''}</span></div>
             ${n ? `<div class="h-rc-bulk"><strong>${plural(n, 'photo choisie', 'photos choisies')}</strong>
                 <label>Mettre dans <select data-rc-bulktray><option value="">—</option><option value="__none">📂 Sans dossier</option>${ts.map(t => `<option value="${esc(t)}">📁 ${esc(t)}</option>`).join('')}<option value="__new">＋ Nouveau dossier…</option></select></label>
@@ -295,7 +296,7 @@
                     if (t.page_id < 0) { after = res.page_id; first = false; }
                     picked().delete(id);
                 }
-                toast(ids.length > 1 ? `${ids.length} photos rangées.` : 'Photo rangée.');
+                toast(ids.length > 1 ? i18n('{n} photos rangées.', {n: ids.length}) : 'Photo rangée.');
             } catch (e) { toast(e.message, 'error'); }
             await reload();
         };
@@ -304,7 +305,7 @@
         box.querySelector('[data-rc-pickall]')?.addEventListener('click', () => { const ids = loose().map(i => i.id); if (ids.some(id => picked().has(id))) picked().clear(); else ids.forEach(id => picked().add(id)); paint(); });
         box.querySelectorAll('[data-rc-trayren]').forEach(b => b.addEventListener('click', async e => { e.preventDefault(); const from = b.dataset.rcTrayren, to = await askTrayName('Nouveau nom du dossier :', from); if (!to || to === from) return;
             openTrays()[to] = openTrays()[from]; await run('save_recueil_trays', {recueil_id: D.recueil.id, trays: trays().map(t => t === from ? to : t), rename: {from, to}}, 'Dossier renommé.'); }));
-        box.querySelectorAll('[data-rc-traydel]').forEach(b => b.addEventListener('click', async e => { e.preventDefault(); const name = b.dataset.rcTraydel; if (!await A().confirmBox(`Supprimer le dossier « ${name} » ?\n\nSes photos restent « à ranger », sans dossier.`, {title: 'Supprimer le dossier', okLabel: 'Supprimer le dossier'})) return;
+        box.querySelectorAll('[data-rc-traydel]').forEach(b => b.addEventListener('click', async e => { e.preventDefault(); const name = b.dataset.rcTraydel; if (!await A().confirmBox(i18n('Supprimer le dossier « {nm} » ?', {nm: name}) + '\n\n' + i18n('Ses photos restent « à ranger », sans dossier.'), {title: 'Supprimer le dossier', okLabel: 'Supprimer le dossier'})) return;
             await run('save_recueil_trays', {recueil_id: D.recueil.id, trays: trays().filter(t => t !== name)}, 'Dossier supprimé.'); }));
         const saveOrder = list => run('save_recueil_trays', {recueil_id: D.recueil.id, trays: list});
         box.querySelectorAll('[data-rc-traymove]').forEach(b => b.addEventListener('click', e => { e.preventDefault(); const name = b.closest('[data-rc-tray]').dataset.rcTray, list = [...trays()], i = list.indexOf(name), j = i + Number(b.dataset.rcTraymove);
@@ -337,7 +338,7 @@
         let cur = imgById(s.image) && imgs.some(i => i.id === s.image) ? imgById(s.image) : imgById(p.shown_image_id) || imgs[0] || null;
         const cmp = s.compare && imgs.some(i => i.id === s.compare) ? imgById(s.compare) : null;
         const prev = D.pages[idx - 1], next = D.pages[idx + 1];
-        const stage = i => i ? `<figure class="h-rc-figure"><img src="${esc(fullUrl(i))}" alt="" data-rc-zoom="${i.id}" title="Cliquer : agrandir, pivoter, retoucher"><figcaption>${esc(versionById(i.version_id)?.name || '')}${i.role === 'detail' ? ' · 🔍 détail' : ''}${i.id === p.best_image_id ? ' · ⭐ retenue' : i.id === p.shown_image_id ? ' · montrée (la plus récente)' : ''}</figcaption></figure>` : '';
+        const stage = i => i ? `<figure class="h-rc-figure"><img src="${esc(fullUrl(i))}" alt="" data-rc-zoom="${i.id}" title="Cliquer : agrandir, pivoter, retoucher"><figcaption>${esc(versionById(i.version_id)?.name || '')}${i.role === 'detail' ? ' · ' + i18n('🔍 détail') : ''}${i.id === p.best_image_id ? ' · ' + i18n('⭐ retenue') : i.id === p.shown_image_id ? ' · ' + i18n('montrée (la plus récente)') : ''}</figcaption></figure>` : '';
         body.innerHTML = `<div class="h-rc-pagebar"><button type="button" class="button small secondary" data-rc-allpages>▦ Toutes les pages</button>
                 <span class="h-rc-pagenav"><button type="button" class="button small secondary" data-rc-go="${prev?.id || ''}" ${prev ? '' : 'disabled'} title="Page précédente" data-shortcut="⌥←">‹</button>
                 <select data-rc-jump>${D.pages.map(x => `<option value="${x.id}" ${x.id === p.id ? 'selected' : ''}>${esc(pageName(x))}</option>`).join('')}</select>
@@ -366,7 +367,7 @@
                     <button type="button" class="link-button h-rc-totable" data-rc-totable>📊 ${p.table ? 'Voir le tableau de la page' : 'Une liste à transposer ? Faire un tableau'} ↓</button>
                     <label>Notes<textarea data-rc-field="notes" rows="4" placeholder="Abréviations, mots incertains, ce qu’il reste à vérifier…">${esc(p.notes)}</textarea></label>
                     <div class="h-rc-sideactions"><button type="button" class="button small secondary" data-rc-pagemove="-1" ${idx ? '' : 'disabled'}>↑ Avancer la page</button><button type="button" class="button small secondary" data-rc-pagemove="1" ${next ? '' : 'disabled'}>↓ Reculer la page</button><button type="button" class="button small secondary" data-rc-insert>＋ Page après</button><button type="button" class="button small secondary" data-rc-linkpage title="Relier cette page à une fiche, un village, une enquête, un projet de l’Atelier, une battue">🔗 Relier la page…</button><button type="button" class="button small secondary danger" data-rc-delpage>Supprimer la page</button></div>
-                    ${(() => { const ls = D.links.filter(l => l.from_num ? p.num >= l.from_num && p.num <= (l.to_num || l.from_num) : true); const chips = [...new Set(ls.map(l => `<span class="h-rc-chip">${esc(l.type_label)} · ${esc(l.label)}${l.from_num ? '' : ' <small>(tout le recueil)</small>'}</span>`))]; return chips.length ? `<p class="h-rc-pagelinks"><b>🔗 Cette page est rattachée à :</b> ${chips.join(' ')}</p>` : ''; })()}
+                    ${(() => { const ls = D.links.filter(l => l.from_num ? p.num >= l.from_num && p.num <= (l.to_num || l.from_num) : true); const chips = [...new Set(ls.map(l => `<span class="h-rc-chip">${esc(l.type_label)} · ${esc(l.label)}${l.from_num ? '' : ` <small>${i18n('(tout le recueil)')}</small>`}</span>`))]; return chips.length ? `<p class="h-rc-pagelinks"><b>🔗 Cette page est rattachée à :</b> ${chips.join(' ')}</p>` : ''; })()}
                     <p class="muted h-rc-hint">Supprimer une page ne supprime pas ses photos : elles passent « à ranger ».</p>
                 </div></div>
             <details class="h-rc-tablebox maintenance-panel" data-rc-tablebox ${p.table || s.tableOpen ? 'open' : ''}><summary><b>📊 Tableau de la page</b> <small class="muted">${p.table ? plural(p.table.rows?.length || 0, 'ligne', 'lignes') + ' · ' + plural(p.table.cols?.length || 0, 'colonne', 'colonnes') : 'pour transposer une liste (noms, âges, lieux…) ligne par ligne'}</small> <span class="h-rc-saved muted" data-rc-tsaved></span></summary>
@@ -402,7 +403,7 @@
         const ownersBox = body.querySelector('[data-rc-owners]');
         if (ownersBox && cur) get('recueil_media_owners', {media_id: cur.media_id}).then(r => { if (!ownersBox.isConnected) return; const o = r.owners || []; ownersBox.innerHTML = o.length ? `🔗 Cette image est aussi : ${o.map(x => `<span class="h-rc-chip">${esc(x.label)}${x.name ? ' · ' + esc(x.name) : ''}</span>`).join(' ')}` : ''; }).catch(() => {});
         body.querySelector('[data-rc-insert]').addEventListener('click', async () => { const r = await run('save_recueil_page', {recueil_id: D.recueil.id, after: p.id}); if (r) go(r.id); });
-        body.querySelector('[data-rc-delpage]').addEventListener('click', async () => { if (!await A().confirmBox(`Supprimer la ${pageName(p)} ?${imgs.length ? `\n\n${imgs.length > 1 ? `Ses ${imgs.length} photos passent` : 'Sa photo passe'} « à ranger ».` : ''}${p.transcription.trim() ? '\n\nSa transcription sera perdue.' : ''}`, {title: 'Supprimer la page', okLabel: 'Supprimer la page'})) return; s.page = (next || prev)?.id || 0; await run('delete_recueil_page', {id: p.id}, 'Page supprimée.'); });
+        body.querySelector('[data-rc-delpage]').addEventListener('click', async () => { if (!await A().confirmBox(`${i18n('Supprimer la {page} ?', {page: pageName(p)})}${imgs.length ? `\n\n${imgs.length > 1 ? i18n('Ses {n} photos passent « à ranger ».', {n: imgs.length}) : i18n('Sa photo passe « à ranger ».')}` : ''}${p.transcription.trim() ? '\n\n' + i18n('Sa transcription sera perdue.') : ''}`, {title: 'Supprimer la page', okLabel: 'Supprimer la page'})) return; s.page = (next || prev)?.id || 0; await run('delete_recueil_page', {id: p.id}, 'Page supprimée.'); });
         // Enregistrement au fil de la frappe
         const saved = body.querySelector('[data-rc-saved]');
         let timer = 0, pending = {};
@@ -427,7 +428,7 @@
     /* E4 : la zone « 📷 Choisis… » accepte aussi les photos glissées ou collées (⌘V) */
     function bindDropLabel(label) {
         const input = label?.querySelector('input[type=file]'); if (!input || !window.LCNDA_UI?.bindFileDrop) return;
-        const txt = label.querySelector('span'); if (txt && !/glisse/.test(txt.textContent)) txt.insertAdjacentHTML('beforeend', `<small> — ou glisse ${input.multiple ? 'les photos' : 'la photo'} ici, ou colle-${input.multiple ? 'les' : 'la'} (⌘V)</small>`);
+        const txt = label.querySelector('span'); if (txt && !/glisse/.test(txt.textContent)) txt.insertAdjacentHTML('beforeend', `<small> ${input.multiple ? i18n('— ou glisse les photos ici, ou colle-les (⌘V)') : i18n('— ou glisse la photo ici, ou colle-la (⌘V)')}</small>`);
         input.addEventListener('change', () => { const n = input.files?.length || 0; label.classList.toggle('has-files', n > 0); const c = label.querySelector('.h-rc-dropcount') || label.appendChild(Object.assign(document.createElement('b'), {className: 'h-rc-dropcount'})); c.textContent = n ? ` ✓ ${A().plural(n, 'photo choisie', 'photos choisies')}` : ''; });
         window.LCNDA_UI.bindFileDrop(label, files => {
             const dt = new DataTransfer(), seen = new Set();
@@ -440,15 +441,15 @@
     function addPhotosDialog({pageId = 0, versionId = 0} = {}) {
         const p = pageId ? pageById(pageId) : null;
         const lastV = D.versions[D.versions.length - 1];
-        dialog({eyebrow: 'RECUEIL', title: p ? `Photo de la ${pageName(p)}` : 'Ajouter des photos', wide: true, submitLabel: 'Ajouter',
+        dialog({eyebrow: 'RECUEIL', title: p ? i18n('Photo de la {page}', {page: pageName(p)}) : 'Ajouter des photos', wide: true, submitLabel: 'Ajouter',
             body: `<label class="h-rc-drop"><input type="file" name="files" accept="image/*" ${p ? '' : 'multiple'} required><span>📷 Choisis ${p ? 'la photo' : 'les photos (dans l’ordre des pages : le nom du fichier compte)'}</span></label>
                 <div class="form-grid"><label>Série de photos (version)<select name="version_id">${D.versions.map(v => `<option value="${v.id}" ${(versionId || lastV?.id) === v.id ? 'selected' : ''}>${esc(v.name)}${v.date_text ? ` (${esc(v.date_text)})` : ''}</option>`).join('')}<option value="new">＋ Nouvelle série…</option></select></label>
                 <label data-rc-newv hidden>Nom de la nouvelle série<input name="new_version" placeholder="Photos ${new Date().getFullYear()}"></label></div>
                 ${p ? `<fieldset class="h-rc-modes"><legend>Cette photo est</legend><label class="checkbox-line"><input type="radio" name="role" value="page" checked> la page entière</label><label class="checkbox-line"><input type="radio" name="role" value="detail"> un détail (zoom) de la page</label></fieldset>`
                 : `<fieldset class="h-rc-modes"><legend>Où les mettre ?</legend>
-                    <label class="checkbox-line"><input type="radio" name="mode" value="new_pages" ${D.pages.length ? '' : 'checked'}> Chaque photo est une <b>nouvelle page</b>, à la suite</label>
-                    <label class="checkbox-line"><input type="radio" name="mode" value="fill" ${D.pages.length ? 'checked' : ''} ${D.pages.length ? '' : 'disabled'}> Sur les <b>pages déjà là</b>, dans l’ordre, à partir de la page <input type="number" name="start_page" value="1" min="1" max="${Math.max(1, D.pages.length)}" class="h-lr-year"> (celles qui n’ont pas encore de photo dans cette série), puis de nouvelles pages</label>
-                    <label class="checkbox-line"><input type="radio" name="mode" value="loose"> <b>À ranger</b> : je dirai plus tard sur quelle page va chaque photo</label></fieldset>`}
+                    <label class="checkbox-line"><input type="radio" name="mode" value="new_pages" ${D.pages.length ? '' : 'checked'}> ${i18n('Chaque photo est une <b>nouvelle page</b>, à la suite')}</label>
+                    <label class="checkbox-line"><input type="radio" name="mode" value="fill" ${D.pages.length ? 'checked' : ''} ${D.pages.length ? '' : 'disabled'}> ${i18n('Sur les <b>pages déjà là</b>, dans l’ordre, à partir de la page')} <input type="number" name="start_page" value="1" min="1" max="${Math.max(1, D.pages.length)}" class="h-lr-year"> ${i18n('(celles qui n’ont pas encore de photo dans cette série), puis de nouvelles pages')}</label>
+                    <label class="checkbox-line"><input type="radio" name="mode" value="loose"> ${i18n('<b>À ranger</b> : je dirai plus tard sur quelle page va chaque photo')}</label></fieldset>`}
                 <p class="muted" data-rc-progress></p>`,
             onOpen: dl => {
                 bindDropLabel(dl.querySelector('.h-rc-drop'));
@@ -515,7 +516,7 @@
                     const note = `Ligne ${t.rows.indexOf(row) + 1} : ${ext.recueilTableRowText(t, row) || '(vide)'}`;
                     const res = await post('save_recueil_link', {recueil_id: D.recueil.id, entity_type: 'person', entity_key: o.key, page_from: p.id, page_to: p.id, note});
                     row.person = {id: Number(o.key), name: o.label, link: (res.result || res).id}; row._note = note;
-                    toast(`Ligne rattachée à ${row.person.name} : elle apparaît dans le bloc « Recueils » de sa fiche.`);
+                    toast(i18n('Ligne rattachée à {nm} : elle apparaît dans le bloc « Recueils » de sa fiche.', {nm: row.person.name}));
                     end(true);
                 },
             });
@@ -531,7 +532,7 @@
         const save = async mid => { await post('save_recueil', {...r, cover_media_id: mid || 0}); toast(mid ? 'Couverture choisie.' : 'La couverture redevient la première page.'); await reload(); };
         const dl = dialog({eyebrow: 'RECUEIL', title: 'Image de couverture', wide: true,
             body: `<div class="h-rc-covnow">${cur ? `<img src="${esc(thumbUrl(cur))}" alt="">` : `<span class="h-rc-cover-empty">${esc(r.icon || '📚')}</span>`}
-                    <p>${cur?.chosen ? '<b>Couverture choisie.</b>' : 'Pour l’instant : <b>la première page</b> (automatique).'}<br><small class="muted">Clique sur une image ci-dessous pour en faire la couverture.</small>${cur?.chosen ? '<br><button type="button" class="link-button" data-rc-covreset>↺ Revenir à la première page</button>' : ''}</p></div>
+                    <p>${cur?.chosen ? `<b>${i18n('Couverture choisie.')}</b>` : i18n('Pour l’instant : <b>la première page</b> (automatique).')}<br><small class="muted">Clique sur une image ci-dessous pour en faire la couverture.</small>${cur?.chosen ? '<br><button type="button" class="link-button" data-rc-covreset>↺ Revenir à la première page</button>' : ''}</p></div>
                 <h4>🖼 Une image à part, juste pour la couverture</h4>
                 <label class="h-rc-drop"><input type="file" accept="image/*" data-rc-covfile><span>📷 Choisir une image sur l’ordinateur</span></label>
                 <h4>📚 Une photo du recueil</h4>
@@ -563,8 +564,8 @@
         let pkItem = null; // la chose choisie dans le menu de choix unique
         dialog({eyebrow: 'RATTACHER', title: `${D.recueil.title} — ${pageName(page)}`, wide: true, submitLabel: 'Relier',
             body: `<fieldset class="h-rc-modes"><legend>Quoi ?</legend>
-                    <label class="checkbox-line"><input type="radio" name="scope" value="page" ${scope === 'page' ? 'checked' : ''}> <b>Toute la page</b> <small class="muted">(elle apparaîtra dans « Recueils » de la fiche, du village, de l’enquête…)</small></label>
-                    <label class="checkbox-line"><input type="radio" name="scope" value="image" ${scope === 'image' ? 'checked' : ''} ${image ? '' : 'disabled'}> <b>Juste cette image</b> <small class="muted">(elle s’ajoute aux médias de la fiche, à un bloc, aux pièces de l’enquête…)</small></label></fieldset>
+                    <label class="checkbox-line"><input type="radio" name="scope" value="page" ${scope === 'page' ? 'checked' : ''}> <b>${i18n('Toute la page')}</b> <small class="muted">(elle apparaîtra dans « Recueils » de la fiche, du village, de l’enquête…)</small></label>
+                    <label class="checkbox-line"><input type="radio" name="scope" value="image" ${scope === 'image' ? 'checked' : ''} ${image ? '' : 'disabled'}> <b>${i18n('Juste cette image')}</b> <small class="muted">(elle s’ajoute aux médias de la fiche, à un bloc, aux pièces de l’enquête…)</small></label></fieldset>
                 ${image ? `<p class="h-rc-linkthumb"><img src="${esc(thumbUrl(image))}" alt=""> <small class="muted">${esc(versionById(image.version_id)?.name || '')}${image.role === 'detail' ? ' · détail' : ''}</small></p>` : ''}
                 <div class="form-grid"><label>À quoi ?<select name="kind">${LINK_KINDS.map(([k, l]) => `<option value="${k}">${l}</option>`).join('')}</select></label>
                     <label data-rc-qbox>Chercher<input type="search" name="q" placeholder="Nom, titre, commune… (2 lettres au moins)" autocomplete="off"></label></div>
@@ -626,11 +627,11 @@
     function paintVersions(body) {
         const s = st();
         const a = versionById(s.cmpA) || D.versions[0], b = versionById(s.cmpB) || D.versions[1];
-        body.innerHTML = `<div class="h-cfg-explain">Une <b>version</b> est une série de photos du même document : celles prises il y a dix ans, celles de ta prochaine visite… Elles coexistent. Pour chaque page, tu choisis l’image à garder (⭐) : c’est « la meilleure version », faite du meilleur de chacune. Une photo peut aussi être un <b>détail</b> (zoom) d’une page.</div>
+        body.innerHTML = `<div class="h-cfg-explain">${i18n('Une <b>version</b> est une série de photos du même document : celles prises il y a dix ans, celles de ta prochaine visite… Elles coexistent. Pour chaque page, tu choisis l’image à garder (⭐) : c’est « la meilleure version », faite du meilleur de chacune. Une photo peut aussi être un <b>détail</b> (zoom) d’une page.')}</div>
             ${D.versions.length > 1 ? `<section class="maintenance-panel"><h3>⇄ Comparer deux versions <small class="muted">et choisir, page par page, l’image à garder</small></h3>
                 <div class="form-grid h-rc-cmpsel"><label>À gauche<select data-rc-cmp="A">${D.versions.map(v => `<option value="${v.id}" ${v.id === a.id ? 'selected' : ''}>${esc(v.name)}</option>`).join('')}</select></label><label>À droite<select data-rc-cmp="B">${D.versions.map(v => `<option value="${v.id}" ${v.id === b.id ? 'selected' : ''}>${esc(v.name)}</option>`).join('')}</select></label></div>
                 <div class="h-rc-cmp">${D.pages.map(p => { const imgs = pageImages(p.id), ia = imgs.find(i => i.version_id === a.id && i.role === 'page'), ib = imgs.find(i => i.version_id === b.id && i.role === 'page');
-                    const cell = i => i ? `<button type="button" class="h-rc-cmpcell ${i.id === p.best_image_id ? 'is-best' : i.id === p.shown_image_id ? 'is-shown' : ''}" data-rc-keep="${p.id}:${i.id}" title="${i.id === p.best_image_id ? 'Image retenue' : 'Garder celle-ci pour la page'}"><img src="${esc(thumbUrl(i))}" alt="" loading="lazy"><span>${i.id === p.best_image_id ? '⭐ retenue' : i.id === p.shown_image_id ? '☆ garder <small>(montrée pour l’instant)</small>' : '☆ garder'}</span></button>` : '<span class="h-rc-cmpcell is-empty">pas de photo</span>';
+                    const cell = i => i ? `<button type="button" class="h-rc-cmpcell ${i.id === p.best_image_id ? 'is-best' : i.id === p.shown_image_id ? 'is-shown' : ''}" data-rc-keep="${p.id}:${i.id}" title="${i.id === p.best_image_id ? 'Image retenue' : 'Garder celle-ci pour la page'}"><img src="${esc(thumbUrl(i))}" alt="" loading="lazy"><span>${i.id === p.best_image_id ? '⭐ retenue' : i.id === p.shown_image_id ? `${i18n('☆ garder')} <small>${i18n('(montrée pour l’instant)')}</small>` : '☆ garder'}</span></button>` : '<span class="h-rc-cmpcell is-empty">pas de photo</span>';
                     return `<div class="h-rc-cmprow"><button type="button" class="table-link" data-rc-open="${p.id}">${esc(pageName(p))}</button>${cell(ia)}${cell(ib)}</div>`; }).join('')}</div></section>` : ''}
             ${D.versions.map((v, k) => { const imgs = D.images.filter(i => i.version_id === v.id); const covered = new Set(imgs.filter(i => i.page_id && i.role === 'page').map(i => i.page_id)).size;
                 return `<section class="maintenance-panel h-rc-version" data-rc-v="${v.id}"><div class="h-cfg-head"><h3>🗂️ ${esc(v.name)} <small class="muted">${esc(v.date_text || '')} · ${plural(imgs.length, 'photo', 'photos')} · ${plural(covered, 'page', 'pages')} sur ${D.pages.length}</small></h3>
@@ -648,7 +649,7 @@
             sec.querySelectorAll('[data-rc-vmove]').forEach(b => b.addEventListener('click', () => run('save_recueil_version', {...v, move: Number(b.dataset.rcVmove)})));
             sec.querySelector('[data-rc-vedit]').addEventListener('click', () => versionDialog(v));
             sec.querySelector('[data-rc-vadd]').addEventListener('click', () => addPhotosDialog({versionId: v.id}));
-            sec.querySelector('[data-rc-vdel]')?.addEventListener('click', async () => { if (await A().confirmBox(`Supprimer la version « ${v.name} » ?\n\nSes photos quittent le recueil (elles restent dans Médias). Les pages et leurs transcriptions restent.`, {title: 'Supprimer la version', okLabel: 'Supprimer la version'})) run('delete_recueil_version', {id: v.id}, 'Version supprimée.'); });
+            sec.querySelector('[data-rc-vdel]')?.addEventListener('click', async () => { if (await A().confirmBox(i18n('Supprimer la version « {nm} » ?', {nm: v.name}) + '\n\n' + i18n('Ses photos quittent le recueil (elles restent dans Médias). Les pages et leurs transcriptions restent.'), {title: 'Supprimer la version', okLabel: 'Supprimer la version'})) run('delete_recueil_version', {id: v.id}, 'Version supprimée.'); });
         });
         body.querySelector('[data-rc-vnew]').addEventListener('click', () => versionDialog(null));
     }
@@ -747,13 +748,13 @@
             case 'figures': inner = `<div class="h-rc-figs"><span><b>${pages.length}</b> pages</span><span><b>${imgs.length}</b> photos</span><span><b>${D.versions.length}</b> versions</span><span><b>${imgs.filter(i => i.role === 'detail').length}</b> détails</span><span><b>${done.length}</b> transcrites</span>${loose().length ? `<span class="h-rc-warn"><b>${loose().length}</b> à ranger</span>` : ''}</div>`; break;
             case 'description': inner = D.recueil.description ? `<p>${nl(D.recueil.description)}</p>` : '<p class="muted">Pas de description : « Modifier » pour en écrire une.</p>'; break;
             case 'progress': { const pct = pages.length ? Math.round(done.length / pages.length * 100) : 0; const todo = pages.filter(p => !p.transcription.trim()).slice(0, b.n);
-                inner = `<div class="h-rc-meter big"><i style="width:${pct}%"></i></div><p><b>${pct} %</b> — ${done.length} sur ${pages.length} pages</p>${todo.length ? `<p class="muted">À transcrire : ${todo.map(p => `<button type="button" class="link-button" data-rc-open="${p.id}">${p.num}</button>`).join(', ')}${pages.length - done.length > todo.length ? '…' : ''}</p>` : ''}`; break; }
+                inner = `<div class="h-rc-meter big"><i style="width:${pct}%"></i></div><p><b>${pct} %</b> — ${i18n('{done} sur {all} pages', {done: done.length, all: pages.length})}</p>${todo.length ? `<p class="muted">${i18n('À transcrire :')} ${todo.map(p => `<button type="button" class="link-button" data-rc-open="${p.id}">${p.num}</button>`).join(', ')}${pages.length - done.length > todo.length ? '…' : ''}</p>` : ''}`; break; }
             case 'versions': inner = `<ul class="h-rc-vlist">${D.versions.map(v => { const n = new Set(imgs.filter(i => i.version_id === v.id && i.page_id && i.role === 'page').map(i => i.page_id)).size; const kept = pages.filter(p => imgById(p.shown_image_id)?.version_id === v.id).length;
                 return `<li><b>${esc(v.name)}</b> ${v.date_text ? `<small class="muted">${esc(v.date_text)}</small>` : ''}<span class="h-rc-meter"><i style="width:${pages.length ? Math.round(n / pages.length * 100) : 0}%"></i></span><small>${n} / ${pages.length} pages · ⭐ ${plural(kept, 'retenue', 'retenues')}</small></li>`; }).join('')}</ul>`; break;
             case 'missing': { const rows = D.versions.map(v => ({v, miss: pages.filter(p => !imgs.some(i => i.page_id === p.id && i.version_id === v.id && i.role === 'page'))})).filter(x => x.miss.length);
                 const none = pages.filter(p => !imgs.some(i => i.page_id === p.id));
-                inner = rows.length || none.length ? `${none.length ? `<p><b>Sans aucune photo :</b> ${none.slice(0, b.n).map(p => `<button type="button" class="link-button" data-rc-open="${p.id}">${p.num}</button>`).join(', ')}</p>` : ''}${D.versions.length > 1 ? rows.map(x => `<p><b>${esc(x.v.name)} :</b> ${x.miss.slice(0, b.n).map(p => `<button type="button" class="link-button" data-rc-open="${p.id}">${p.num}</button>`).join(', ')}${x.miss.length > b.n ? '…' : ''}</p>`).join('') : ''}` : '<p class="muted">Toutes les pages ont leurs photos.</p>'; break; }
-            case 'toc': inner = pages.length ? `<ol class="h-rc-toc">${pages.slice(0, b.n).map(p => `<li><button type="button" class="link-button" data-rc-open="${p.id}">${esc(p.label || 'Page ' + p.num)}</button> ${p.transcription.trim() ? `<small class="muted">${esc(excerpt(p.transcription, 90))}</small>` : '<small class="muted">—</small>'}</li>`).join('')}</ol>${pages.length > b.n ? `<p class="muted">… et ${pages.length - b.n} autres.</p>` : ''}` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🗂️</span><span class="empty-line-text">Pas de page.</span></p>'; break;
+                inner = rows.length || none.length ? `${none.length ? `<p><b>${i18n('Sans aucune photo :')}</b> ${none.slice(0, b.n).map(p => `<button type="button" class="link-button" data-rc-open="${p.id}">${p.num}</button>`).join(', ')}</p>` : ''}${D.versions.length > 1 ? rows.map(x => `<p><b>${esc(x.v.name)} :</b> ${x.miss.slice(0, b.n).map(p => `<button type="button" class="link-button" data-rc-open="${p.id}">${p.num}</button>`).join(', ')}${x.miss.length > b.n ? '…' : ''}</p>`).join('') : ''}` : '<p class="muted">Toutes les pages ont leurs photos.</p>'; break; }
+            case 'toc': inner = pages.length ? `<ol class="h-rc-toc">${pages.slice(0, b.n).map(p => `<li><button type="button" class="link-button" data-rc-open="${p.id}">${esc(p.label || 'Page ' + p.num)}</button> ${p.transcription.trim() ? `<small class="muted">${esc(excerpt(p.transcription, 90))}</small>` : '<small class="muted">—</small>'}</li>`).join('')}</ol>${pages.length > b.n ? `<p class="muted">${i18n('… et {n} autres.', {n: pages.length - b.n})}</p>` : ''}` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🗂️</span><span class="empty-line-text">Pas de page.</span></p>'; break;
             case 'latest': inner = done.length ? done.slice(0, b.n).map(p => `<div class="h-rc-tr"><button type="button" class="link-button" data-rc-open="${p.id}">${esc(pageName(p))}</button><p>${nl(p.transcription)}</p></div>`).join('') : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📝</span><span class="empty-line-text">Aucune page transcrite.</span></p>'; break;
             case 'links': inner = D.links.length ? `<ul class="h-rc-llist">${D.links.map(l => `<li>${linkLabel(l)} <small class="muted">· ${esc(linkPages(l))}</small></li>`).join('')}</ul>` : '<p class="muted">Rattaché à rien.</p>'; break;
             case 'mosaic': inner = pages.length ? `<div class="h-rc-mosaic">${pages.slice(0, b.n).map(p => { const i = imgById(p.shown_image_id); return `<button type="button" class="h-rc-thumb" data-rc-open="${p.id}" title="${esc(pageName(p))}">${i ? `<img src="${esc(thumbUrl(i))}" alt="" loading="lazy">` : '<span class="h-rc-nophoto">—</span>'}<small>${p.num}</small></button>`; }).join('')}</div>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🗂️</span><span class="empty-line-text">Pas de page.</span></p>'; break;
@@ -806,7 +807,7 @@
     const folderOptions = (folders, current) => `<option value="" ${current == null ? 'selected' : ''}>🌐 Partout dans l’enquête</option><option value="0" ${current === 0 ? 'selected' : ''}>Racine de l’enquête</option>${folders.map(f => `<option value="${f.id}" ${current === f.id ? 'selected' : ''}>${'— '.repeat(f.depth || 0)}📁 ${esc(f.name)}</option>`).join('')}`;
     function forEntityHtml(rows, type, key, place = null) {
         return `<div class="h-rc-for">${rows.map(r => `<div class="h-rc-for-item"><div class="h-rc-for-head"><button type="button" class="table-link" data-open-recueil="${r.recueil_id}"><strong>${esc(r.icon || '📚')} ${esc(r.title)}</strong></button>
-                <small class="muted">${r.from_num ? (r.to_num && r.to_num !== r.from_num ? `pages ${r.from_num} à ${r.to_num}` : `page ${r.from_num}`) : `tout le recueil (${r.total_pages} p.)`} · ${r.transcribed}/${r.pages} ${r.transcribed > 1 ? 'transcrites' : 'transcrite'}${r.reference ? ' · ' + esc(r.reference) : ''}</small>
+                <small class="muted">${r.from_num ? (r.to_num && r.to_num !== r.from_num ? i18n('pages {from} à {to}', {from: String(r.from_num), to: String(r.to_num)}) : i18n('page {num}', {num: String(r.from_num)})) : i18n('tout le recueil ({n} p.)', {n: r.total_pages})} · ${r.transcribed > 1 ? i18n('{done}/{all} transcrites', {done: r.transcribed, all: r.pages}) : i18n('{done}/{all} transcrite', {done: r.transcribed, all: r.pages})}${r.reference ? ' · ' + esc(r.reference) : ''}</small>
                 ${place ? `<label class="h-rc-for-move" title="Le laisser visible dans tous les dossiers, ou le ranger dans un seul">Déplacer vers<select data-rc-linkmove="${r.link_id}">${folderOptions(place.folders, r.folder_id)}</select></label>` : ''}
                 <button type="button" class="icon-button" data-rc-unlink="${r.link_id}" title="Retirer">✕</button></div>
                 ${r.note ? `<p class="muted">${esc(r.note)}</p>` : ''}
@@ -846,7 +847,7 @@
             rows = all.filter(r => r.folder_id == null || r.folder_id === place.folder);
         }
         const elsewhere = all.length - rows.length;
-        const more = elsewhere ? `<p class="muted h-rc-elsewhere">${plural(elsewhere, 'autre recueil est rangé', 'autres recueils sont rangés')} dans d’autres dossiers de l’enquête.</p>` : '';
+        const more = elsewhere ? `<p class="muted h-rc-elsewhere">${i18n('{count} dans d’autres dossiers de l’enquête.', {count: plural(elsewhere, 'autre recueil est rangé', 'autres recueils sont rangés')})}</p>` : '';
         if (!rows.length && hideEmpty) { box.innerHTML = place ? (elsewhere ? more : '') : `<button type="button" class="button small secondary" data-rc-attach="${esc(type)}:${esc(key)}">🔗 Relier un recueil</button>`; }
         else box.innerHTML = `<section class="maintenance-panel h-rc-section"><h3>${title}</h3>${rows.length ? '' : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🗂️</span><span class="empty-line-text">Aucun recueil rattaché.</span></p>'}${forEntityHtml(rows, type, key, place)}${more}</section>`;
         const again = () => ext.recueilsSection(box, type, key, {title, hideEmpty});

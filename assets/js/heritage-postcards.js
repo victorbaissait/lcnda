@@ -10,6 +10,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const A = () => window.LCNDA_APP;
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     ext.lists = ext.lists || {};
@@ -53,7 +54,7 @@
                     <label class="span-2">Adresse du destinataire<textarea name="recipient_address" rows="2" maxlength="600" placeholder="Madame Borie, rue du Lycée, Tulle">${esc(v.recipient_address || '')}</textarea></label>
                     <div class="span-2 h-cpo-back"><div class="h-cpo-backhead"><span class="pk-lab">Texte écrit au dos</span><button type="button" class="button small secondary" data-cpo-transcribe title="L’atelier de transcription : l’image du dos à gauche, le texte à droite, lecture automatique, repérage des noms">📜 Transcrire dans l’atelier</button></div>
                         <textarea name="back_text" rows="5" maxlength="50000" placeholder="« Ma chère cousine, nous voici bien arrivés… »">${esc(v.back_text || '')}</textarea>
-                        <small class="muted">C’est la transcription de l’image du ${vs ? 'verso' : 'dos'} : la même que dans la visionneuse et la recherche.</small></div>
+                        <small class="muted">${vs ? i18n('C’est la transcription de l’image du verso : la même que dans la visionneuse et la recherche.') : i18n('C’est la transcription de l’image du dos : la même que dans la visionneuse et la recherche.')}</small></div>
                     <div class="span-2"><span class="pk-lab">Lieu montré sur la carte${r?.id && window.LCNDA_EXT?.placePhotos ? ` <button type="button" class="link-button" data-pp-open="${Number(r.id)}" title="Plusieurs lieux possibles, une zone, la certitude, les indices, comparer avec aujourd’hui, demander de l’aide">📍 Plusieurs lieux possibles, zone, certitude…</button>` : ''}</span>${P().pickerField({name: 'place_id', kind: 'place', value: pl ? {id: pl.id, title: pl.name, name: pl.name, kind: 'place', short: pl.county || ''} : null})}</div>
                     <fieldset class="span-2 h-cpo-view"><legend>Angle de vue <small class="muted">(facultatif : d’où la photo a été prise et dans quelle direction)</small></legend>
                         <div class="h-cpo-dirs" role="group" aria-label="Direction">${DIRS.map(([b, l]) => `<button type="button" class="button small ${String(v.view_bearing ?? '') !== '' && b !== '' && Math.round(Number(v.view_bearing) / 45) * 45 % 360 === b ? '' : 'secondary'}" data-cpo-dir="${b}">${l}</button>`).join('')}</div>
@@ -76,7 +77,7 @@
                     if (!vid) return UI().fail?.(f.elements.verso_media_id || f.elements.media_id, 'Choisis d’abord l’image du verso (ou du recto).');
                     if (!ext.openActTranscriber) return A().toast('L’atelier de transcription n’est pas encore chargé.', 'error');
                     const [m] = await (P().loadMedia?.([vid], true) || Promise.resolve([]));
-                    await ext.openActTranscriber({mediaId: vid, filename: m?.filename || '', title: `Carte postale — ${f.elements.title.value.trim() || m?.title || 'texte du dos'}`, text: f.elements.back_text.value, kind: 'lettre'});
+                    await ext.openActTranscriber({mediaId: vid, filename: m?.filename || '', title: i18n('Carte postale — {title}', {title: f.elements.title.value.trim() || m?.title || i18n('texte du dos')}), text: f.elements.back_text.value, kind: 'lettre'});
                     // à la fermeture de l'atelier : son texte, s'il a été « mis dans le média », revient ici
                     const wait = setInterval(async () => {
                         if (document.querySelector('dialog.h-tx-dlg[open]')) return; clearInterval(wait);
@@ -104,7 +105,7 @@
     async function removeCard(pc) {
         const res = await write({op: 'delete', id: pc.id});
         await load().catch(() => {}); refreshAll();
-        A().undoToast(`Fiche de la carte « ${pc.title} » supprimée (les images restent dans les Médias)`, {undo: async () => { await write({op: 'restore', snapshot: res.snapshot}); await load().catch(() => {}); refreshAll(); }});
+        A().undoToast(i18n('Fiche de la carte « {nm} » supprimée (les images restent dans les Médias)', {nm: pc.title}), {undo: async () => { await write({op: 'restore', snapshot: res.snapshot}); await load().catch(() => {}); refreshAll(); }});
     }
     function refreshAll() {
         if (S().module === 'listes' && S().listType === 'postcards') draw();
@@ -149,7 +150,7 @@
             : '<header class="page-header"><h2>🏞 Cartes postales</h2></header>';
         const todoN = (D?.candidates || []).length;
         ws.innerHTML = `<section class="page h-cpo-page">${header}
-            ${todoN ? (U.notice?.('info', `${A().plural(todoN, 'carte postale', 'cartes postales')} de tes médias ${todoN > 1 ? 'n’ont' : 'n’a'} pas encore de fiche : elles sont marquées « À compléter ».`) || '') : ''}
+            ${todoN ? (U.notice?.('info', (todoN > 1 ? i18n('{count} de tes médias n’ont pas encore de fiche : elles sont marquées « À compléter ».', {count: A().plural(todoN, 'carte postale', 'cartes postales')}) : i18n('{count} de tes médias n’a pas encore de fiche : elles sont marquées « À compléter ».', {count: A().plural(todoN, 'carte postale', 'cartes postales')}))) || '') : ''}
             ${all.length ? '<div data-cpo-bar></div>' : ''}
             ${!all.length ? A().emptyState({icon: '🏞', text: 'Aucune carte postale pour l’instant', hint: 'Ajoute une carte : l’image de la vue, celle du dos, puis le lieu montré pour la retrouver sur la Carte.', action: {label: '＋ Nouvelle carte postale', attrs: 'data-cpo-new'}})
                 : !rows.length ? A().emptyState({icon: '🔍', text: 'Aucune carte ne correspond', hint: 'Change les mots cherchés ou retire un filtre.'})
@@ -216,7 +217,7 @@
             if (x < -80 || y < -80 || x > width + 80 || y > height + 80) return '';
             const k = `${Math.round(x / 8)}:${Math.round(y / 8)}`, n = spot[k] = (spot[k] || 0) + 1, dx = (n - 1) * 14;
             const cone = pc.view_bearing != null ? `<svg class="h-cpo-cone" viewBox="-60 -60 120 120" aria-hidden="true" style="transform:rotate(${Number(pc.view_bearing)}deg)"><path d="M0 0 L-22 -54 A58 58 0 0 1 22 -54 Z"/></svg>` : '';
-            return `<button type="button" class="h-cpo-pin" data-cpo-pin="${pc.id}" style="left:${(x + dx).toFixed(1)}px;top:${y.toFixed(1)}px" title="${esc(pc.title)}${pc.view_bearing != null ? ' — vue vers le ' + dirName(pc.view_bearing) : ''}">${cone}<span class="h-cpo-pin-img">${img(pc.recto?.thumb, pc.title)}</span></button>`;
+            return `<button type="button" class="h-cpo-pin" data-cpo-pin="${pc.id}" style="left:${(x + dx).toFixed(1)}px;top:${y.toFixed(1)}px" title="${esc(pc.title)}${pc.view_bearing != null ? ' ' + esc(i18n('— vue vers le {dir}', {dir: i18n(dirName(pc.view_bearing))})) : ''}">${cone}<span class="h-cpo-pin-img">${img(pc.recto?.thumb, pc.title)}</span></button>`;
         }).join('');
         const pop = layer.querySelector('.h-cpo-pop');
         layer.innerHTML = pins;
@@ -230,7 +231,7 @@
         box.style.left = pin.style.left; box.style.top = pin.style.top;
         box.innerHTML = `<div class="map-tooltip-header"><strong>🏞 ${esc(pc.title)}</strong><button type="button" class="map-tooltip-close" aria-label="Fermer">×</button></div>
             <button type="button" class="h-cpo-pop-img" data-cpo-view="${pc.id}" title="Voir le recto et le verso en grand">${img(pc.recto?.thumb, pc.title)}${pc.verso ? img(pc.verso.thumb, 'verso') : ''}</button>
-            <small>${esc([placeText(pc.place), pc.sent_date && 'envoyée ' + pc.sent_date, pc.view_bearing != null && 'vue vers le ' + dirName(pc.view_bearing)].filter(Boolean).join(' · '))}</small>
+            <small>${esc([placeText(pc.place), pc.sent_date && i18n('envoyée {dt}', {dt: pc.sent_date}), pc.view_bearing != null && i18n('vue vers le {dir}', {dir: i18n(dirName(pc.view_bearing))})].filter(Boolean).join(' · '))}</small>
             ${pc.back_filled ? `<p class="h-cpo-pop-back">« ${esc(pc.back_text.slice(0, 160))}${pc.back_text.length > 160 ? '…' : ''} »</p>` : ''}
             <div class="h-cpo-pop-act"><button type="button" class="button small" data-cpo-open="${pc.id}">↗ Ouvrir la fiche</button></div>`;
         box.querySelector('.map-tooltip-close').addEventListener('click', () => box.remove());

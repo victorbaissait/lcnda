@@ -9,6 +9,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const ART = window.LCNDA_ART, OE = ART?.oeuvres; if (!OE) return;
     const A = () => window.LCNDA_APP;
     const U = ART.util, esc = U.esc, clone = U.clone;
@@ -57,7 +58,7 @@
         const req = ART.fieldsOf(def, C.store.customFields?.(def.key) || []).filter(f => f.required && f.key !== 'title'); if (!req.length) return [];
         let d = {}; try { d = ART.collect(C.body, C.store, C.current(), clone(C.S.draft || {})); } catch (_) { return []; }
         return req.filter(f => ART.isEmpty(f, d[f.key])); };
-    const guard = (e, C) => { const m = missing(C); if (!m.length) return; e.preventDefault(); e.stopImmediatePropagation(); A().toast(`À remplir avant d’enregistrer : ${m.map(f => f.label).join(', ')}.`, 'error'); C.body.querySelector(`[data-fk="${CSS.escape(m[0].key)}"] input, [data-fk="${CSS.escape(m[0].key)}"] textarea`)?.focus(); };
+    const guard = (e, C) => { const m = missing(C); if (!m.length) return; e.preventDefault(); e.stopImmediatePropagation(); A().toast(i18n('À remplir avant d’enregistrer : {nm}.', {nm: m.map(f => i18n(f.label)).join(', ')}), 'error'); C.body.querySelector(`[data-fk="${CSS.escape(m[0].key)}"] input, [data-fk="${CSS.escape(m[0].key)}"] textarea`)?.focus(); };
     document.addEventListener('click', e => { const b = e.target.closest('.ar-dlg [data-ar-cmd="save"]'); if (b) guard(e, b.closest('.ar-dlg')._C); }, true);
     document.addEventListener('keydown', e => { if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 's') { const dl = document.querySelector('dialog.ar-dlg[open]'); if (dl?._C && !document.querySelector('.ar-dlg ~ dialog[open]')) guard(e, dl._C); } }, true);
 
@@ -107,7 +108,7 @@
                 <div class="oe-parts" ${W.parts.on ? '' : 'hidden'}><label class="oe-fld">Une partie s’appelle<input data-wp="label" maxlength="60" value="${esc(W.parts.label)}" placeholder="Édition (une par année de défilé)"></label><label class="oe-fld">Au pluriel<input data-wp="many" maxlength="60" value="${esc(W.parts.many)}" placeholder="Éditions"></label></div></div>
             <p class="ar-note">Ce type est rangé avec les autres : liste avec la barre de recherche et les filtres, ⚙️ champs affichés, export, catalogue, « Lié à ». <b>⤓ Exporter le type</b> (⚙️ Gérer les types) pour le donner à un cousin.</p></div>`;
         /* — étape 2 — */
-        const defTxt = f => [f.type === 'list' ? (f.choices || []).slice(0, 3).join(' · ') + ((f.choices || []).length > 3 ? '…' : '') : '', f.unit ? `unité : ${f.unit}` : '', f.type === 'rows' ? (f.cols || []).map(c => c.label).join(', ') : '', f.type === 'computed' ? OE.lab(CALC, f.calc?.op) : '', f.type === 'item' ? ((f.kinds || []).map(k => ART.defs[k]?.label).filter(Boolean).join(', ') || 'toutes les fiches') : '', f.star ? '' : 'masqué à la lecture', f.help ? `« ${f.help} »` : ''].filter(Boolean).join(' · ');
+        const defTxt = f => [f.type === 'list' ? (f.choices || []).slice(0, 3).join(' · ') + ((f.choices || []).length > 3 ? '…' : '') : '', f.unit ? i18n('unité : {nm}', {nm: f.unit}) : '', f.type === 'rows' ? (f.cols || []).map(c => c.label).join(', ') : '', f.type === 'computed' ? OE.lab(CALC, f.calc?.op) : '', f.type === 'item' ? ((f.kinds || []).map(k => ART.defs[k]?.label).filter(Boolean).join(', ') || 'toutes les fiches') : '', f.star ? '' : 'masqué à la lecture', f.help ? `« ${f.help} »` : ''].filter(Boolean).join(' · ');
         const srcTxt = f => f.base ? 'base' : f.source ? `↙ ${ART.defs[String(f.source).split('.')[0]]?.label || f.source}` : '';
         const step2 = () => `<div class="oe-wiz3"><div class="oe-wgroups">${W.groups.map((g, gi) => { if (g.part && !W.parts.on) return '';
                 return `<div class="oe-gbox ${gsel === g.key ? 'is-sel' : ''} ${g.part ? 'is-part' : ''}" data-g="${esc(g.key)}"><div class="oe-gh"><button type="button" class="ar-linkbtn" data-w-gsel>▾ ${esc(g.label)}${g.part ? ` <small>(une ${esc(W.parts.label || 'partie')})</small>` : ''}</button><span class="spacer"></span>
@@ -117,19 +118,19 @@
                         <button type="button" class="oe-cfl" data-w-sel><b>${esc(f.label)}</b>${f.required ? ' <small class="ar-g">obligatoire</small>' : ''}</button><span class="oe-ty">${esc(short(f.type))}</span><span class="oe-src">${esc(srcTxt(f))}</span><span class="oe-def">${esc(defTxt(f))}</span></div>`).join('') || '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🧩</span><span class="empty-line-text">Aucun champ : choisis une sorte à droite.</span></p>'}</div>`; }).join('')}
                 <div class="ar-row"><button type="button" class="button small secondary" data-w-addf>＋ Ajouter un champ</button><button type="button" class="button small secondary" data-w-addg>＋ Ajouter un groupe</button><button type="button" class="button small secondary" data-w-lib>↙ Reprendre d’un autre type…</button></div>
                 ${sel ? settingsHtml(findF(sel)?.f) : ''}</div>
-            <aside class="oe-pan"><div class="oe-ph"><b>＋ Champs à ajouter</b></div><div class="oe-pb"><b class="oe-sm">Champ perso — choisis sa sorte</b> <small class="ar-g">(dans « ${esc(W.groups.find(g => g.key === gsel)?.label || '')} »)</small>
+            <aside class="oe-pan"><div class="oe-ph"><b>＋ Champs à ajouter</b></div><div class="oe-pb"><b class="oe-sm">Champ perso — choisis sa sorte</b> <small class="ar-g">${i18n('(dans « {nm} »)', {nm: esc(W.groups.find(g => g.key === gsel)?.label || '')})}</small>
                 <div class="oe-tys">${SORTS.map(t => `<button type="button" data-w-add="${t}">${esc(tile(t))}</button>`).join('')}</div></div>
                 <div class="oe-pb"><b class="oe-sm">Bibliothèque : champs des autres types</b><input type="search" data-w-libq placeholder="Chercher un champ…" value="${esc(libq)}" aria-label="Chercher un champ"><div class="oe-lib" data-w-libl>${libHtml()}</div>
                 <p class="ar-note">Un champ repris garde sa forme et son nom (tu peux le renommer) ; les fiches gardent leurs valeurs si tu le retires.</p></div></aside></div>`;
         const libHtml = () => { const have = new Set(allFields().map(f => f.source).filter(Boolean)), q = OE.norm(libq);
             const l = library().filter(({d, f}) => !q || OE.norm(`${f.label} ${d.label}`).includes(q));
             const seen = new Set(); const rows = l.filter(({d, f}) => { const k = `${d.key}.${f.key}`; if (seen.has(k)) return false; seen.add(k); return true; });
-            return rows.slice(0, q ? 200 : 60).map(({d, f}) => `<label class="checkbox-line"><input type="checkbox" data-w-libf="${esc(`${d.key}.${f.key}`)}" ${have.has(`${d.key}.${f.key}`) ? 'checked' : ''}> ${esc(short(f.type === 'person' ? 'people' : f.type).split(' ')[0])} ${esc(f.label)} <small>${esc(d.icon)} ${esc(d.label)}</small></label>`).join('') + (rows.length > (q ? 200 : 60) ? `<p class="ar-note">… ${rows.length - (q ? 200 : 60)} de plus : précise ta recherche.</p>` : '') || '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🧩</span><span class="empty-line-text">Aucun champ.</span></p>'; };
+            return rows.slice(0, q ? 200 : 60).map(({d, f}) => `<label class="checkbox-line"><input type="checkbox" data-w-libf="${esc(`${d.key}.${f.key}`)}" ${have.has(`${d.key}.${f.key}`) ? 'checked' : ''}> ${esc(short(f.type === 'person' ? 'people' : f.type).split(' ')[0])} ${esc(f.label)} <small>${esc(d.icon)} ${esc(d.label)}</small></label>`).join('') + (rows.length > (q ? 200 : 60) ? `<p class="ar-note">${i18n('… {n} de plus : précise ta recherche.', {n: rows.length - (q ? 200 : 60)})}</p>` : '') || '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🧩</span><span class="empty-line-text">Aucun champ.</span></p>'; };
         const tog = (k, on, label) => `<label class="ui-toggle"><input type="checkbox" data-ws-b="${k}" ${on ? 'checked' : ''}><i></i>${esc(label)}</label>`;
         function settingsHtml(f) { if (!f) return '';
             const kindsSel = `<select data-ws="kinds" class="ar-in"><option value="">Toutes les fiches</option>${Object.values(ART.defs).filter(d => !d.hidden && d.key !== 'profile' && !d.key.startsWith('profile') && d.key !== '_oe_preview').map(d => `<option value="${esc(d.key)}" ${(f.kinds || [])[0] === d.key ? 'selected' : ''}>${esc(d.icon)} ${esc(d.label)}</option>`).join('')}</select>`;
             const rowsF = W.groups.flatMap(g => g.fields).filter(x => x.type === 'rows');
-            return `<div class="oe-pop" data-ws-for="${esc(f.key)}"><div class="oe-poph"><b>Réglages du champ « ${esc(f.label)} »</b><span class="spacer"></span><button type="button" class="icon-button small" data-w-unsel aria-label="Fermer les réglages">×</button></div>
+            return `<div class="oe-pop" data-ws-for="${esc(f.key)}"><div class="oe-poph"><b>${i18n('Réglages du champ « {nm} »', {nm: esc(i18n(f.label))})}</b><span class="spacer"></span><button type="button" class="icon-button small" data-w-unsel aria-label="Fermer les réglages">×</button></div>
                 <div class="oe-popg"><label>Libellé<input class="ar-in" data-ws="label" maxlength="80" value="${esc(f.label)}"></label>
                 <label>Sorte<select class="ar-in" data-ws="type" ${f.base ? 'disabled' : ''}>${[...SORTS, ...(SORTS.includes(f.type) ? [] : [f.type])].map(t => `<option value="${t}" ${f.type === t ? 'selected' : ''}>${esc(tile(t))}</option>`).join('')}</select></label>
                 <label>Aide (bulle ?)<input class="ar-in" data-ws="help" maxlength="160" value="${esc(f.help || '')}" placeholder="« Mesures du char monté, sans les personnages »"></label>
@@ -143,11 +144,11 @@
                     ${['sum', 'dur'].includes(f.calc?.op) ? `<label>Colonne<select class="ar-in" data-ws="calc_col"><option value="">—</option>${(rowsF.find(x => x.key === f.calc?.field)?.cols || []).map(c => `<option value="${esc(c.key)}" ${f.calc?.col === c.key ? 'selected' : ''}>${esc(c.label)}</option>`).join('')}</select></label>` : ''}
                     ${f.calc?.op === 'years' ? `<label>Date<select class="ar-in" data-ws="calc_field">${W.groups.flatMap(g => g.fields).filter(x => x.type === 'date').map(x => `<option value="${esc(x.key)}" ${f.calc?.field === x.key ? 'selected' : ''}>${esc(x.label)}</option>`).join('')}</select></label>` : ''}` : ''}</div>
                 <div class="oe-popt"><span>Obligatoire</span>${tog('required', f.required, f.key === 'title' ? 'toujours (le titre)' : 'à remplir avant d’enregistrer')}<span>Affiché d’office</span><span class="oe-togs">${tog('star', f.star, 'fiche')}${tog('inList', f.inList || W.list.includes(f.key), 'liste')}${tog('inCard', f.inCard || W.card.includes(f.key), 'vignettes')}</span>
-                    <span>Dans la recherche</span>${tog('filterable', f.filterable, `filtre « ${f.label} » dans Filtrer ▾`)}</div>
+                    <span>Dans la recherche</span>${tog('filterable', f.filterable, i18n('filtre « {nm} » dans Filtrer ▾', {nm: i18n(f.label)}))}</div>
                 ${f.base ? '' : '<div class="ar-row"><button type="button" class="button small secondary danger" data-w-fdel>🗑 Retirer ce champ</button></div>'}</div>`; }
         /* — étape 3 — */
         const step3 = () => { const types = Object.values(ART.defs).filter(d => !d.hidden && d.key !== 'profile' && !d.key.startsWith('profile') && d.key !== '_oe_preview' && d.key !== W.key);
-            return `<div class="oe-w3"><p class="ar-phelp">Coche les types vers lesquels une fiche « ${esc(W.label || 'de ce type')} » peut pointer, et donne un nom au lien (dans les deux sens) : il s’affiche dans « 🔗 Lié à » des deux fiches.</p>
+            return `<div class="oe-w3"><p class="ar-phelp">${i18n('Coche les types vers lesquels une fiche « {nm} » peut pointer, et donne un nom au lien (dans les deux sens) : il s’affiche dans « 🔗 Lié à » des deux fiches.', {nm: esc(W.label || i18n('de ce type'))})}</p>
                 <div class="oe-links">${OE.FAMILIES.map(fm => { const l = types.filter(d => (d.userType ? 'mine' : OE.famOf(d.key)) === fm.key); if (!l.length) return '';
                     return `<details data-fam="${fm.key}" ${openFams.has(fm.key) || l.some(d => W.links.some(x => x.to === d.key)) ? 'open' : ''}><summary>${esc(fm.icon)} ${esc(fm.label)} <small class="ar-g">${W.links.filter(x => l.some(d => d.key === x.to)).length || ''}</small></summary>${l.map(d => { const lk = W.links.find(x => x.to === d.key);
                         return `<div class="oe-lk ${lk ? 'on' : ''}" data-to="${esc(d.key)}"><label class="checkbox-line"><input type="checkbox" data-w-link ${lk ? 'checked' : ''}> ${esc(d.icon)} ${esc(d.label)}</label>${lk ? `<input class="ar-in" data-w-lname value="${esc(lk.name)}" placeholder="musique du char" aria-label="Nom du lien"><input class="ar-in" data-w-lback value="${esc(lk.back)}" placeholder="vu de l’autre côté : « joué sur le char »" aria-label="Nom du lien vu de l’autre fiche">` : ''}</div>`; }).join('')}</details>`; }).join('')}</div></div>`; };
@@ -164,7 +165,7 @@
             try { const def = toDef(false, '_oe_preview'); ART.define({...def, key: '_oe_preview', hidden: true}); const sample = {id: 0, kind: '_oe_preview', title: W.label || 'Exemple', year: 1952, data: {title: W.label || 'Exemple', date: '1952'}};
                 pv = ART.readHtml(C.store, sample); } catch (e) { pv = `<p class="muted">${esc(e.message)}</p>`; } finally { delete ART.defs._oe_preview; }
             const n = allFields().filter(f => !f.g.part).length, np = allFields().filter(f => f.g.part).length;
-            return `<div class="oe-w5"><div class="ui-msg info oe-sum">ℹ️ <b>${esc(W.icon)} ${esc(W.label || '(sans nom)')}</b> · ${esc(OE.fam(W.family).label)} · ${esc(U.plural(n, 'champ'))}${W.parts.on ? ` · parties « ${esc(W.parts.label || 'partie')} » (${esc(U.plural(np, 'champ'))})` : ''} · ${esc(U.plural(W.links.length, 'lien'))}</div>
+            return `<div class="oe-w5"><div class="ui-msg info oe-sum">ℹ️ <b>${esc(W.icon)} ${esc(W.label || i18n('(sans nom)'))}</b> · ${esc(OE.fam(W.family).label)} · ${esc(U.plural(n, 'champ'))}${W.parts.on ? ` · ${i18n('parties « {nm} » ({x})', {nm: esc(W.parts.label || i18n('partie')), x: esc(U.plural(np, 'champ'))})}` : ''} · ${esc(U.plural(W.links.length, 'lien'))}</div>
                 <p class="ar-phelp">Voici une fiche vide de ce type, telle qu’elle s’affichera (les champs vides sont cachés à la lecture ; ici on montre leur place).</p><div class="oe-preview">${pv}</div></div>`; };
 
         const cleanF = f => { const o = {key: f.key, label: f.label, type: f.type, star: !!f.star}; if (f.key === 'title') o.head = true; ['help', 'ph', 'unit', 'source', 'back', 'calc', 'kinds'].forEach(k => { if (f[k] !== undefined && f[k] !== '') o[k] = clone(f[k]); });
@@ -177,7 +178,7 @@
             const fam = OE.fam(W.family);
             const groups = W.groups.filter(g => !g.part || !W.parts.on).map(g => ({key: g.key, label: g.label, zone: g.zone || 'main', icon: g.icon || '', fields: g.fields.map(cleanF)}));
             if (W.links.length) groups.push({key: 'links_oe', label: 'Liens', icon: '🔗', zone: 'right', fields: W.links.map(l => ({key: l.key || fkey(`lien_${l.name || ART.defs[l.to]?.label || 'lien'}`, taken()), label: l.name || ART.defs[l.to]?.label || 'Lien', type: 'items', kinds: [l.to], back: l.back || '', star: true}))});
-            if (W.parts.on && W.parts.key) groups.push({key: 'parts_oe', label: W.parts.many || 'Parties', zone: 'main', fields: [{key: '_parts', label: W.parts.many || 'Parties', type: 'computed', view: 'o_children', child: W.parts.key, childField: 'parent', unit: (W.parts.label || 'partie').toLowerCase(), add: `Ajouter « ${W.parts.label || 'partie'} »`, star: true, cols: [['title', 'Titre'], ['date', 'Date']]}]});
+            if (W.parts.on && W.parts.key) groups.push({key: 'parts_oe', label: W.parts.many || 'Parties', zone: 'main', fields: [{key: '_parts', label: W.parts.many || 'Parties', type: 'computed', view: 'o_children', child: W.parts.key, childField: 'parent', unit: (W.parts.label || 'partie').toLowerCase(), add: i18n('Ajouter « {nm} »', {nm: W.parts.label || i18n('partie')}), star: true, cols: [['title', 'Titre'], ['date', 'Date']]}]});
             groups.push({key: 'notes', label: 'Notes', icon: '📝', zone: 'right', fields: [{key: 'notes', label: 'Notes', type: 'longtext', star: true, bare: true}]});
             return {key, label: W.label.trim(), many: (W.many || `${W.label.trim()}s`).trim(), icon: W.icon || '✦', family: fam.key, domain: fam.domain, groups, list: W.list, card: W.card, export: W.export.length ? W.export : undefined, partKind: W.parts.on ? (W.parts.key || '') : '', userType: !forSave || undefined};
         }
@@ -200,7 +201,7 @@
                 Object.keys(ART.defs).filter(k => k === W.key || k === W.parts.key).forEach(k => { delete ART.defs[k]; });
                 await C.reload(); dirty = false; await close(true);
                 C.S.view = 'list'; C.S.kind = W.key; C.S.id = 0; C.prefs.extraTabs = [...new Set([...(C.prefs.extraTabs || []), W.key])]; C.savePrefs(); C.paint(true);
-                A().toast(cur ? `Type « ${def.label} » enregistré.` : `Type « ${def.label} » créé : il est dans « ✎ Mes types ».`);
+                A().toast(cur ? i18n('Type « {nm} » enregistré.', {nm: i18n(def.label)}) : i18n('Type « {nm} » créé : il est dans « ✎ Mes types ».', {nm: def.label}));
             } catch (e) { A().toast(e.message, 'error', {retry: save}); if (btn) btn.disabled = false; }
         }
         let painting = false;
@@ -210,7 +211,7 @@
         }
         function paint0() {
             const body = [step1, step2, step3, step4, step5][step]();
-            dlg.innerHTML = `<div class="oe-shell"><header class="ar-top"><span class="ar-ticon">${esc(W.icon || '✎')}</span><div class="ar-tname"><span class="eyebrow">ŒUVRES · ${cur ? 'MODIFIER UN TYPE' : 'NOUVEAU TYPE'}</span><h2>✎ ${cur ? `Le type « ${esc(cur.label)} »` : 'Créer un type d’œuvre'}</h2></div><span class="spacer"></span><button type="button" class="icon-button" data-w-close aria-label="Fermer" title="Fermer">×</button></header>
+            dlg.innerHTML = `<div class="oe-shell"><header class="ar-top"><span class="ar-ticon">${esc(W.icon || '✎')}</span><div class="ar-tname"><span class="eyebrow">${i18n('ŒUVRES')} · ${cur ? i18n('MODIFIER UN TYPE') : i18n('NOUVEAU TYPE')}</span><h2>✎ ${cur ? i18n('Le type « {nm} »', {nm: esc(cur.label)}) : i18n('Créer un type d’œuvre')}</h2></div><span class="spacer"></span><button type="button" class="icon-button" data-w-close aria-label="Fermer" title="Fermer">×</button></header>
                 <nav class="oe-steps" role="tablist">${STEPS.map((s, i) => `<button type="button" role="tab" class="${i === step ? 'is-active' : i < step ? 'dn' : ''}" data-w-step="${i}">${i + 1} · ${esc(s)}${i < step ? ' ✓' : ''}</button>`).join('')}</nav>
                 <div class="oe-body oe-wbody">${body}</div>
                 <div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-w-close>Annuler</button>${step ? '<button type="button" class="button secondary" data-w-prev>← Précédent</button>' : ''}${step < 4 ? '<button type="button" class="button" data-w-next>Suivant →</button>' : `<button type="button" class="button" data-w-save>${cur ? '💾 Enregistrer le type' : 'Créer le type'}</button>`}</div></div>`;
@@ -272,11 +273,11 @@
             if (gb && d.wGmv) { const i = W.groups.findIndex(g => g.key === gb.dataset.g), j = i + Number(d.wGmv); if (j < 0 || j >= W.groups.length) return; [W.groups[i], W.groups[j]] = [W.groups[j], W.groups[i]]; changed(); return paint(); }
             if (gb && d.wGren !== undefined) { const g = W.groups.find(x => x.key === gb.dataset.g); const n = await A().askText({title: 'Renommer le groupe', message: '', value: g.label, okLabel: 'Renommer'}); if (!n?.trim()) return; g.label = n.trim().slice(0, 60); changed(); return paint(); }
             if (gb && d.wGdel !== undefined) { const i = W.groups.findIndex(g => g.key === gb.dataset.g), g = W.groups[i]; W.groups.splice(i, 1); W.groups[0].fields.push(...g.fields); if (gsel === g.key) gsel = W.groups[0].key; changed(); paint();
-                A().undoToast(`Groupe « ${g.label} » retiré`, {undo: () => { W.groups[0].fields = W.groups[0].fields.filter(f => !g.fields.includes(f)); W.groups.splice(i, 0, g); paint(); }}); return; }
+                A().undoToast(i18n('Groupe « {nm} » retiré', {nm: g.label}), {undo: () => { W.groups[0].fields = W.groups[0].fields.filter(f => !g.fields.includes(f)); W.groups.splice(i, 0, g); paint(); }}); return; }
             if (row && d.wSel !== undefined) { sel = sel === row.dataset.f ? null : row.dataset.f; gsel = row.closest('[data-g]').dataset.g; paint(); dlg.querySelector('.oe-pop')?.scrollIntoView({block: 'nearest'}); return; }
             if (row && d.wEye !== undefined) { const f = findF(row.dataset.f).f; f.star = !f.star; changed(); return paint(); }
             if (d.wFdel !== undefined) { const at = findF(b.closest('[data-ws-for]').dataset.wsFor); if (!at || at.f.base) return; at.g.fields.splice(at.i, 1); sel = null; W.list = W.list.filter(k => k !== at.f.key); W.card = W.card.filter(k => k !== at.f.key); changed(); paint();
-                A().undoToast(`Champ « ${at.f.label} » retiré`, {undo: () => { at.g.fields.splice(at.i, 0, at.f); paint(); }}); return; }
+                A().undoToast(i18n('Champ « {nm} » retiré', {nm: at.f.label}), {undo: () => { at.g.fields.splice(at.i, 0, at.f); paint(); }}); return; }
             if (d.wCmv) { const fs = listable(), ord = [...W.list.filter(k => fs.some(f => f.key === k)), ...fs.map(f => f.key).filter(k => !W.list.includes(k))], k = b.closest('[data-lk]').dataset.lk, i = ord.indexOf(k), j = i + Number(d.wCmv);
                 if (j < 0 || j >= ord.length) return; [ord[i], ord[j]] = [ord[j], ord[i]]; W.list = ord.filter(x => W.list.includes(x)); changed(); return paint(); }
         });

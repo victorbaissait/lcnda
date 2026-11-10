@@ -10,6 +10,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && k in v ? v[k] : m)));
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const A = () => window.LCNDA_APP || {};
     const UI = () => window.LCNDA_UI || {};
@@ -97,17 +98,17 @@
     const momentT = r => (r?.moment?.t != null ? r.moment.t : r?.day?.tx ?? r?.day?.tn);
     function badge(r) {
         const B = UI().badge || ((t, k) => `<span class="ui-badge is-${k}">${esc(t)}</span>`);
-        if (r.reliability === 'measured') return B('Mesuré', 'green', {title: 'Station à moins de 15 km (et moins de 150 m d’écart d’altitude)'});
-        if (r.reliability === 'station') return B(`Station à ${Math.round(r.station?.km || 0)} km`, 'yellow', {title: 'Station entre 15 et 40 km : indicatif (la pluie change vite d’un village à l’autre)'});
-        if (r.reliability === 'estimated') return B('Estimé (carreau ≈ 30 km)', 'yellow', {title: 'Réanalyse ERA5 : aucune station à moins de 40 km'});
-        if (r.reliability === 'coarse') return B('Reconstitution grossière (≈ 100 km)', 'grey', {title: 'Réanalyse 20CR (1836–1939) : une idée du temps, pas une mesure'});
+        if (r.reliability === 'measured') return B(i18n('Mesuré'), 'green', {title: i18n('Station à moins de 15 km (et moins de 150 m d’écart d’altitude)')});
+        if (r.reliability === 'station') return B(i18n('Station à {n} km', {n: Math.round(r.station?.km || 0)}), 'yellow', {title: i18n('Station entre 15 et 40 km : indicatif (la pluie change vite d’un village à l’autre)')});
+        if (r.reliability === 'estimated') return B(i18n('Estimé (carreau ≈ 30 km)'), 'yellow', {title: i18n('Réanalyse ERA5 : aucune station à moins de 40 km')});
+        if (r.reliability === 'coarse') return B(i18n('Reconstitution grossière (≈ 100 km)'), 'grey', {title: i18n('Réanalyse 20CR (1836–1939) : une idée du temps, pas une mesure')});
         return '';
     }
     const badgeShort = r => (r.reliability === 'station' ? (UI().badge ? UI().badge(`${Math.round(r.station?.km || 0)} km`, 'yellow') : '') : badge(r));
     const COUNTRY = {FR: 'France', BE: 'Belgique', CH: 'Suisse', LU: 'Luxembourg', IT: 'Italie', NL: 'Pays-Bas', ES: 'Espagne', DE: 'Allemagne', PT: 'Portugal', GB: 'Royaume-Uni', PL: 'Pologne', DK: 'Danemark', CZ: 'Tchéquie', SK: 'Slovaquie'};
-    const emptyText = r => (r.why === 'nodata' ? 'Les données météo ne sont pas installées.' : r.why === 'place' ? 'Le lieu n’a pas de coordonnées : place-le sur la carte pour avoir sa météo.'
+    const emptyText = r => i18n(r.why === 'nodata' ? 'Les données météo ne sont pas installées.' : r.why === 'place' ? 'Le lieu n’a pas de coordonnées : place-le sur la carte pour avoir sa météo.'
         : r.why === 'date' ? 'La date n’est pas connue au jour près.'
-        : r.why === 'out' ? 'Pas de météo pour ce lieu : les données installées couvrent la France, la Belgique, la Suisse et le Luxembourg (le pack Europe ajoute le reste).' : `Pas de relevé connu près d’ici avant ${r.first?.year || 1836}${r.first ? ` (première station : ${r.first.name})` : ''}.`);
+        : r.why === 'out' ? 'Pas de météo pour ce lieu : les données installées couvrent la France, la Belgique, la Suisse et le Luxembourg (le pack Europe ajoute le reste).' : r.first ? 'Pas de relevé connu près d’ici avant {year} (première station : {name}).' : 'Pas de relevé connu près d’ici avant {year}.', {year: String(r.first?.year || 1836), name: r.first?.name || ''});
     const sourcesLine = r => (r.sources || []).map(x => { const m = x.mention || x.nom || ''; return `${x.id === 'era5' && r.hours_source && r.reliability !== 'estimated' ? 'Heures : ' : ''}${m}${x.licence && !/Copernicus|20th/.test(m) ? ', ' + x.licence : ''}`; }).join(' · ');
     const shown = (r, s = settings()) => r && r.ok && (r.reliability !== 'coarse' || s.coarse);
 
@@ -206,7 +207,7 @@
     }
     function undoToast(msg, before) {
         const after = settings();
-        A().undoToast ? A().undoToast(`${msg} (la retrouver : Réglages → 🌦 Météo d’autrefois)`, {undo: async () => { save(before); refreshAfterHide(); }, redo: async () => { save(after); refreshAfterHide(); }}) : A().toast?.(msg);
+        A().undoToast ? A().undoToast(i18n('{what} (la retrouver : Réglages → 🌦 Météo d’autrefois)', {what: i18n(msg)}), {undo: async () => { save(before); refreshAfterHide(); }, redo: async () => { save(after); refreshAfterHide(); }}) : A().toast?.(msg);
     }
 
     /* ═════════════════ M2 : le détail d'un jour ═════════════════ */
@@ -254,7 +255,7 @@
         catch (e) { dlg.querySelector('[data-wx-body]').innerHTML = UI().notice ? UI().notice('error', e.message) : esc(e.message); return; }
         const s = settings();
         const what = `${r.type || 'Événement'}${r.who ? ' de ' + r.who : ''}`;
-        dlg.querySelector('[data-wx-eye]').textContent = `🌦 MÉTÉO D’AUTREFOIS · ${what.toUpperCase()}`;
+        dlg.querySelector('[data-wx-eye]').textContent = `${i18n('🌦 MÉTÉO D’AUTREFOIS')} · ${i18n(what).toUpperCase()}`;
         dlg.querySelector('[data-wx-title]').textContent = r.date ? `${cap(weekday(r.date))} ${dayLong(r.date)}${r.place ? ' · ' + r.place : ''}` : (r.place || 'Météo');
         const body = dlg.querySelector('[data-wx-body]');
         body.innerHTML = dayHtml(r, s);
@@ -303,7 +304,7 @@
         try { await api('meteo_place_altitude', {}, {method: 'POST', body: {id, altitude: value}}); }
         catch (e) { A().toast(e.message, 'error'); return false; }
         cache.clear();
-        A().undoToast?.(value === null ? '↺ Altitude remise à celle de la carte' : `⛰ Altitude enregistrée : ${metres(value)}`, {
+        A().undoToast?.(value === null ? i18n('↺ Altitude remise à celle de la carte') : i18n('⛰ Altitude enregistrée : {n}', {n: metres(value)}), {
             undo: async () => { await api('meteo_place_altitude', {}, {method: 'POST', body: {id, altitude: before}}); cache.clear(); after?.(); },
             redo: async () => { await api('meteo_place_altitude', {}, {method: 'POST', body: {id, altitude: value}}); cache.clear(); after?.(); }});
         after?.();
@@ -330,7 +331,7 @@
         let changed = false; const after = () => { changed = true; };
         let d; try { d = await api('meteo_place', {id}); } catch (e) { return A().toast(e.message, 'error'); }
         const dlg = document.createElement('dialog'); dlg.className = 'modal small-modal wx-alt-dialog';
-        dlg.innerHTML = `<form method="dialog"><div class="modal-head"><div><span class="eyebrow">⛰ LIEU</span><h2>Altitude de ${esc(d.name || 'ce lieu')}</h2></div><button type="button" class="icon-button" data-wx-x aria-label="Fermer">×</button></div>
+        dlg.innerHTML = `<form method="dialog"><div class="modal-head"><div><span class="eyebrow">⛰ LIEU</span><h2>${i18n('Altitude de {name}', {name: esc(d.name || i18n('ce lieu'))})}</h2></div><button type="button" class="icon-button" data-wx-x aria-label="Fermer">×</button></div>
             <div class="wx-body"><p class="muted">Elle sert à choisir la station météo la plus semblable (en montagne, une station de plaine toute proche ne dit pas le temps qu’il faisait là-haut). Laisse la case vide pour garder celle de la carte du relief.</p>${altFieldHtml(d)}</div>
             <div class="modal-actions"><span class="spacer"></span><button type="submit" class="button secondary">Fermer</button></div></form>`;
         document.body.appendChild(dlg); dlg.addEventListener('close', () => { dlg.remove(); if (changed) onDone?.(); }); dlg.querySelector('[data-wx-x]').addEventListener('click', () => dlg.close());
@@ -501,7 +502,7 @@
                     const kind = rm.dataset.wxRemove;
                     try { await api('meteo_pack_remove', {}, {method: 'POST', body: {kind}}); } catch (x) { return A().toast(x.message, 'error'); }
                     await refresh();
-                    A().undoToast(`🗑 ${PACKS.find(p => p[0] === kind)?.[1] || 'Pack'} supprimé`, {undo: async () => { await api('meteo_pack_restore', {}, {method: 'POST', body: {kind}}); await refresh(); }, redo: async () => { await api('meteo_pack_remove', {}, {method: 'POST', body: {kind}}); await refresh(); }});
+                    A().undoToast(i18n('🗑 {name} supprimé', {name: i18n(PACKS.find(p => p[0] === kind)?.[1] || 'Pack')}), {undo: async () => { await api('meteo_pack_restore', {}, {method: 'POST', body: {kind}}); await refresh(); }, redo: async () => { await api('meteo_pack_remove', {}, {method: 'POST', body: {kind}}); await refresh(); }});
                 }
             });
             ws.addEventListener('change', e => {
@@ -531,7 +532,7 @@
             <li>Le fichier <code>meteo-${esc(cmd === 'socle' ? 'socle.sqlite' : 'pack-' + cmd + '.lcmeteo')}</code> apparaît dans le dossier <code>meteo-sortie</code>.</li>
             <li>Ici : <b>⤒ Importer le fichier…</b> (une seule fois). Ensuite l’app n’a plus besoin d’Internet.</li></ol>
             ${UI().notice('info', 'Rien n’est envoyé sur Internet par l’app : le fichier reste sur ton ordinateur.')}`;
-        if (ext.openDialog) ext.openDialog({eyebrow: '🌦 MÉTÉO D’AUTREFOIS', title: `Obtenir ${name}`, body});
+        if (ext.openDialog) ext.openDialog({eyebrow: '🌦 MÉTÉO D’AUTREFOIS', title: i18n('Obtenir {name}', {name: i18n(name)}), body});
     }
 
     /* ═════════════════ M6 : importer un pack (K13, envoi par morceaux) ═════════════════ */
@@ -564,7 +565,7 @@
                     const j = await resp.json().catch(() => ({error: 'réponse illisible'}));
                     if (!resp.ok || j.error) throw new Error(j.error || 'envoi interrompu');
                     const pc = Math.round(Math.min(f.size, off + CHUNK) / f.size * 100);
-                    if (bar) bar.style.width = pc + '%'; if (txt) txt.textContent = `Envoi du fichier… ${pc} %`;
+                    if (bar) bar.style.width = pc + '%'; if (txt) txt.textContent = i18n('Envoi du fichier… {n} %', {n: pc});
                 }
                 if (txt) txt.textContent = 'Vérification du pack…';
                 const r = await api('meteo_pack_finish', {}, {method: 'POST', body: {id}});

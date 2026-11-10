@@ -2162,9 +2162,57 @@
             ['Comment exporter seulement une branche ?', 'Réglages → Export propre : choisis la personne de départ et les ascendants ou descendants à exporter.'],
         ]],
     ];
+    /* 🌐 La FAQ dans la langue choisie (docs/I18N.md, « La FAQ ») : la liste française ci-dessus reste la référence ;
+     * les 7 autres langues sont dans assets/i18n/faq/<code>.json (fabriqués par scripts/build-faq-i18n.js), lus seulement quand
+     * on ouvre la FAQ ou une bulle « En savoir plus (FAQ) → ». Chaque question y a un repère tiré de sa question française
+     * (faqId) : les liens data-help-faq et UI.openFaq('…') qui citent la question française la retrouvent dans toutes les langues.
+     * Une question ou une réponse pas encore traduite reste en français. */
+    const FAQ_I18N_V = 1; // monter avec VERSION de scripts/build-faq-i18n.js
+    const faqI18n = () => window.LCNDA_I18N;
+    const tt = (s, v) => (faqI18n() ? faqI18n().t(s, v) : s);
+    const faqLang = () => faqI18n()?.lang || 'fr';
+    const faqId = q => { let h = 0x811c9dc5; for (const ch of String(q)) { h ^= ch.codePointAt(0); h = Math.imul(h, 0x01000193) >>> 0; } return h.toString(36).padStart(7, '0'); };
+    const faqMac = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent || '');
+    const faqKeys = s => String(s).replace(/\{mac:([^|{}]*)\|pc:([^{}]*)\}/g, (m, mac, pc) => (faqMac ? mac : pc));
+    const faqFiles = {}; // code → {items} (ou la promesse du chargement)
+    function faqDict(sync = true) {
+        const L = faqLang(); if (L === 'fr') return null;
+        const got = faqFiles[L]; if (got && !got.then) return got;
+        const url = `assets/i18n/faq/${L}.json?v=${FAQ_I18N_V}`;
+        if (!sync) { if (!got) faqFiles[L] = fetch(url).then(r => (r.ok ? r.json() : null)).then(j => { faqFiles[L] = j && j.items ? j : {items: {}}; faqCache.lang = null; return faqFiles[L]; }).catch(() => { faqFiles[L] = {items: {}}; }); return null; }
+        try { const x = new XMLHttpRequest(); x.open('GET', url, false); x.send(null); faqFiles[L] = x.status === 200 ? JSON.parse(x.responseText) : {items: {}}; } catch (_) { faqFiles[L] = {items: {}}; }
+        return faqFiles[L];
+    }
+    let faqCache = {lang: null, list: null};
+    /** la FAQ dans la langue choisie : [{group, label, rows: [{q, a, fq, fa, tq, ta}]}] (fq, fa : le français) */
+    function faqList() {
+        const L = faqLang();
+        if (faqCache.lang === L && faqCache.list) return faqCache.list;
+        const items = (faqDict() || {}).items || {};
+        const list = FAQ.map(([group, rows]) => ({group, label: L === 'fr' ? group : tt(group, {ctx: 'faq'}), rows: rows.map(([q, a]) => {
+            const tr = L === 'fr' ? null : items[faqId(q)];
+            return {q: tr && tr[0] ? faqKeys(tr[0]) : q, a: tr && tr[1] ? faqKeys(tr[1]) : a, fq: q, fa: a, tq: !!(tr && tr[0]), ta: !!(tr && tr[1])};
+        })}));
+        faqCache = {lang: L, list};
+        return list;
+    }
+    window.addEventListener('lcnda:lang', () => { faqCache = {lang: null, list: null}; });
+    // dans une autre langue, la traduction est lue en avance (sans bloquer), pour que la FAQ s'ouvre tout de suite
+    setTimeout(() => { if (faqLang() !== 'fr') faqDict(false); }, 4000);
+
     // Recherche dans la FAQ : on tape sa question comme on la dirait (« comment je fais un livre en pdf ? ») ;
     // sans accents ni majuscules, sans les petits mots, avec quelques synonymes ; les meilleures réponses d'abord.
+    // Dans une autre langue, on cherche dans la traduction ET dans le français (les liens de l'app citent le français).
     const FAQ_STOP = new Set('a ai as au aux avec ce ces cet cette comment dans de des du elle en est et etre faire fais fait faut il ils je j la le les leur leurs lui ma me mes moi mon ne nous on ou par pas peut peux plus pour pourquoi puis qu que quel quelle quels qui quoi sa se ses si son sur ta te tes toi ton tu un une vos votre vous y lcnda app logiciel veux voudrais aimerais aimer dois doit savoir besoin possible moyen base genealogie truc chose'.split(' '));
+    const FAQ_STOP_L = Object.fromEntries(Object.entries({
+        en: 'a an the and or of to in on at by for from with without is are was be been can could do does did how what which who why when where i me my mine you your it its this that these those there here not no yes if so as into about want would like should need way app lcnda software thing stuff genealogy database',
+        es: 'a al el la los las un una unos unas y o de del en con sin por para es son ser estar esta este esto como que cual quien por que cuando donde yo me mi mis tu te tus su sus se lo le les no si mas puedo puede hacer hago quiero quisiera debo forma manera app lcnda programa cosa genealogia base',
+        de: 'der die das den dem des ein eine einen einem einer eines und oder von zu im in an am auf mit ohne fur ist sind war sein kann konnen wie was welche welcher wer warum wann wo ich mich mir mein meine du dich dir dein deine es sie er man nicht kein keine ja wenn so als um aus bei nach uber will mochte soll muss machen mache app lcnda programm sache ding genealogie datenbank',
+        it: 'a al allo alla ai agli alle il lo la i gli le un uno una e o di del della dei delle da in con senza per su e sono essere come che cosa quale chi perche quando dove io mi mio mia miei tu ti tuo tua si non se piu posso puo fare faccio voglio vorrei devo modo app lcnda programma genealogia base',
+        pt: 'a o as os um uma uns umas e ou de do da dos das em no na nos nas com sem por para e sao ser estar como que qual quem porque quando onde eu me meu minha meus tu te teu tua se nao mais posso pode fazer faco quero queria devo forma maneira app lcnda programa coisa genealogia base',
+        pl: 'a i o u w we z ze na do od po za przez dla bez jest sa byc jak co czy jaki jaka jakie kto dlaczego kiedy gdzie ja mnie mi moj moja moje ty cie ci twoj twoja to ten ta te sie nie tak jesli mozna moge chce chcialbym musze zrobic robic sposob app lcnda program rzecz genealogia baza',
+        nl: 'de het een en of van te in op aan bij voor met zonder is zijn was kan kun kunnen hoe wat welke wie waarom wanneer waar ik mij me mijn jij je jou jouw u het dit dat deze die er hier niet geen ja als zo om uit naar over wil wilt zou moet doen maak maken app lcnda programma ding genealogie database',
+    }).map(([k, v]) => [k, new Set(v.split(' '))]));
     const FAQ_SYN = {photo: 'image media scan document', image: 'photo media', media: 'photo image document', scan: 'photo document numeriser', pdf: 'imprimer livre exporter', imprimer: 'pdf livre', livre: 'livret pdf imprimer',
         supprimer: 'effacer enlever retirer', effacer: 'supprimer', ancetre: 'sosa lignee aieul', sosa: 'ancetre lignee cujus', cujus: 'sosa depart', arbre: 'genealogie diagramme ascendant', carte: 'lieu plan',
         graphique: 'statistique stat diagramme', statistique: 'graphique stat chiffre', stat: 'statistique graphique', onglet: 'menu page', widget: 'tableau bord', sauvegarde: 'copie backup sauvegarder', sauvegarder: 'sauvegarde copie',
@@ -2173,21 +2221,46 @@
         prenom: 'saint prenoms', saint: 'prenom fete', nom: 'patronyme', son: 'audio enregistrement', video: 'film', mariage: 'union marie',
         enlever: 'supprimer retirer effacer', retirer: 'supprimer enlever', manquant: 'trou suggestion chercher manque', manque: 'trou suggestion chercher', trou: 'manquant suggestion', chercher: 'recherche trouver', trouver: 'chercher recherche',
         retoucher: 'eclaircir photo', vieux: 'ancien', ancien: 'vieux', vivant: 'vivants', montrer: 'afficher consultation', proche: 'famille cousin', email: 'mail courrier', lettre: 'courrier'};
+    // quelques synonymes dans les autres langues (même idée : les deux sens, au pluriel aussi)
+    const FAQ_SYN_L = {
+        en: {photo: 'picture image media scan', picture: 'photo image', pdf: 'print book export', print: 'pdf book', book: 'booklet pdf print', delete: 'remove erase', remove: 'delete', backup: 'copy save', save: 'backup', ancestor: 'sosa lineage', tree: 'chart diagram', map: 'place', chart: 'graph statistics', import: 'gedcom heredis gramps ancestry myheritage', export: 'pdf csv', mistake: 'error check', error: 'mistake check', sound: 'audio recording', marriage: 'wedding union', find: 'search look', search: 'find look'},
+        es: {foto: 'imagen medio escaneo', imagen: 'foto', pdf: 'imprimir libro exportar', imprimir: 'pdf libro', libro: 'pdf imprimir', borrar: 'eliminar quitar', eliminar: 'borrar quitar', copia: 'seguridad guardar', antepasado: 'sosa ancestro', arbol: 'diagrama', mapa: 'lugar', grafico: 'estadistica', importar: 'gedcom heredis gramps ancestry myheritage', exportar: 'pdf csv', error: 'comprobar', sonido: 'audio grabacion', boda: 'matrimonio union', buscar: 'encontrar'},
+        de: {foto: 'bild medien scan', bild: 'foto medien', pdf: 'drucken buch exportieren', drucken: 'pdf buch', buch: 'heft pdf drucken', loschen: 'entfernen', entfernen: 'loschen', sicherung: 'kopie backup speichern', backup: 'sicherung kopie', vorfahr: 'sosa ahn', ahn: 'vorfahr sosa', baum: 'stammbaum diagramm', stammbaum: 'baum', karte: 'ort', diagramm: 'statistik grafik', importieren: 'import gedcom heredis gramps ancestry myheritage', exportieren: 'export pdf csv', fehler: 'prufen', ton: 'audio aufnahme', hochzeit: 'ehe heirat', heirat: 'ehe hochzeit', suchen: 'finden', finden: 'suchen'},
+        it: {foto: 'immagine media scansione', immagine: 'foto', pdf: 'stampare libro esportare', stampare: 'pdf libro', libro: 'pdf stampare', eliminare: 'cancellare togliere', cancellare: 'eliminare', backup: 'copia salvare', antenato: 'sosa', albero: 'diagramma', mappa: 'luogo', grafico: 'statistica', importare: 'gedcom heredis gramps ancestry myheritage', esportare: 'pdf csv', errore: 'controllare', suono: 'audio registrazione', matrimonio: 'nozze unione', cercare: 'trovare', trovare: 'cercare'},
+        pt: {foto: 'imagem media digitalizacao', imagem: 'foto', pdf: 'imprimir livro exportar', imprimir: 'pdf livro', livro: 'pdf imprimir', apagar: 'eliminar remover', eliminar: 'apagar remover', copia: 'seguranca guardar backup', antepassado: 'sosa', arvore: 'diagrama', mapa: 'lugar', grafico: 'estatistica', importar: 'gedcom heredis gramps ancestry myheritage', exportar: 'pdf csv', erro: 'verificar', som: 'audio gravacao', casamento: 'uniao', procurar: 'encontrar', encontrar: 'procurar'},
+        pl: {zdjecie: 'obraz media skan fotografia', obraz: 'zdjecie', pdf: 'drukuj ksiazka eksport', drukuj: 'pdf ksiazka', ksiazka: 'pdf drukuj', usun: 'skasuj', kopia: 'zapasowa zapisz', przodek: 'sosa', drzewo: 'wykres', mapa: 'miejsce', wykres: 'statystyka', import: 'gedcom heredis gramps ancestry myheritage', eksport: 'pdf csv', blad: 'sprawdz', dzwiek: 'audio nagranie', slub: 'malzenstwo', szukaj: 'znajdz'},
+        nl: {foto: 'afbeelding media scan', afbeelding: 'foto', pdf: 'afdrukken boek exporteren', afdrukken: 'pdf boek', boek: 'pdf afdrukken', verwijderen: 'wissen', wissen: 'verwijderen', back: 'kopie opslaan', reservekopie: 'kopie backup', voorouder: 'sosa', stamboom: 'boom diagram', kaart: 'plaats', grafiek: 'statistiek', importeren: 'gedcom heredis gramps ancestry myheritage', exporteren: 'pdf csv', fout: 'controleren', geluid: 'audio opname', huwelijk: 'trouwen', zoeken: 'vinden', vinden: 'zoeken'},
+    };
     // les synonymes vont dans les deux sens, et se retrouvent aussi au pluriel ou sous une autre forme du mot
-    Object.entries({...FAQ_SYN}).forEach(([k, v]) => v.split(' ').forEach(x => { FAQ_SYN[x] = [...new Set(`${FAQ_SYN[x] || ''} ${k}`.trim().split(' '))].join(' '); }));
-    const faqSyn = w => FAQ_SYN[w] || FAQ_SYN[w.replace(/s$/, '')] || FAQ_SYN[w.replace(/(es|s|x)$/, 'e')] || FAQ_SYN[w.replace(/er$/, 'e')] || '';
-    const faqFold = t => String(t || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[’']/g, ' ');
-    const faqStem = w => w.length > 4 ? w.replace(/(ements|ement|ations|ation|ees|es|s|x|e)$/, '') : w.replace(/s$/, '');
+    const faqBoth = map => Object.entries({...map}).forEach(([k, v]) => v.split(' ').forEach(x => { map[x] = [...new Set(`${map[x] || ''} ${k}`.trim().split(' '))].join(' '); }));
+    faqBoth(FAQ_SYN); Object.values(FAQ_SYN_L).forEach(faqBoth);
+    const faqSyn = (w, L = 'fr') => { const M = L === 'fr' ? FAQ_SYN : (FAQ_SYN_L[L] || {}); return M[w] || M[w.replace(/s$/, '')] || M[w.replace(/(es|s|x)$/, 'e')] || M[w.replace(/er$/, 'e')] || ''; };
+    const faqFold = t => String(t || '').toLowerCase().replace(/ł/g, 'l').replace(/ß/g, 'ss').replace(/ø/g, 'o').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[’']/g, ' ');
+    const FAQ_STEM = {
+        fr: w => (w.length > 4 ? w.replace(/(ements|ement|ations|ation|ees|es|s|x|e)$/, '') : w.replace(/s$/, '')),
+        en: w => (w.length > 4 ? w.replace(/(ings|ing|ed|es|s)$/, '') : w.replace(/s$/, '')),
+        de: w => (w.length > 4 ? w.replace(/(ungen|ung|en|er|es|e|n|s)$/, '') : w),
+        es: w => (w.length > 4 ? w.replace(/(aciones|acion|es|s|a|o|e)$/, '') : w.replace(/s$/, '')),
+        pt: w => (w.length > 4 ? w.replace(/(coes|cao|es|s|a|o|e)$/, '') : w.replace(/s$/, '')),
+        it: w => (w.length > 4 ? w.replace(/(zioni|zione|i|e|a|o)$/, '') : w),
+        pl: w => (w.length > 4 ? w.replace(/(ami|ach|ow|om|em|ie|y|i|a|e|u|o)$/, '') : w),
+        nl: w => (w.length > 4 ? w.replace(/(en|e|s)$/, '') : w),
+    };
+    const faqStem = (w, L = 'fr') => (FAQ_STEM[L] || FAQ_STEM.fr)(w);
     // un mot composé (« faire-part ») reste entier dans la question ; dans les textes, il compte entier et en morceaux
-    const faqWords = (t, query = false) => { const out = []; faqFold(t).split(/[^a-z0-9-]+/).forEach(tok => { const parts = tok.split('-').filter(Boolean); if (parts.length > 1) { out.push(parts.join('')); if (!query) out.push(...parts); } else if (parts[0]) out.push(parts[0]); }); return out.filter(w => w.length > 1 && !FAQ_STOP.has(w)); };
+    const faqWords = (t, query = false, L = 'fr') => { const stop = L === 'fr' ? FAQ_STOP : (FAQ_STOP_L[L] || FAQ_STOP); const out = []; faqFold(t).split(/[^a-z0-9-]+/).forEach(tok => { const parts = tok.split('-').filter(Boolean); if (parts.length > 1) { out.push(parts.join('')); if (!query) out.push(...parts); } else if (parts[0]) out.push(parts[0]); }); return out.filter(w => w.length > 1 && !stop.has(w)); };
+    const faqIndex = new Map(); // « code|repère » → {qs, as} (les mots, déjà réduits)
+    const faqIdx = (L, key, group, q, a) => { const k = `${L}|${key}|${q.length}`; let x = faqIndex.get(k); if (!x) { x = {qs: faqWords(q + ' ' + group, false, L).map(w => faqStem(w, L)), as: faqWords(a, false, L).map(w => faqStem(w, L))}; faqIndex.set(k, x); } return x; };
     function faqSearch(query) {
-        const words = faqWords(query, true);
-        if (!words.length) return null;
-        const wanted = words.map(w => [faqStem(w), ...faqSyn(w).split(' ').filter(Boolean).map(faqStem)]);
-        const hits = [];
-        FAQ.forEach(([group, items]) => items.forEach(([q, a]) => {
-            const qs = faqWords(q + ' ' + group).map(faqStem), as = faqWords(a).map(faqStem);
-            const has = (list, w) => list.some(x => x === w || (w.length >= 4 && (x.startsWith(w) || w.startsWith(x)) && x.length >= 4));
+        const L = faqLang(), list = faqList();
+        // les mots cherchés, réduits à la façon de chaque langue (le français pour les liens de l'app, la langue choisie pour ce qu'on tape)
+        const want = lang => faqWords(query, true, lang).map(w => [faqStem(w, lang), ...faqSyn(w, lang).split(' ').filter(Boolean).map(x => faqStem(x, lang))]);
+        const wantFr = want('fr'), wantL = L === 'fr' ? [] : want(L);
+        if (!wantFr.length && !wantL.length) return null;
+        const folded = faqFold(query).replace(/[^a-z0-9]+/g, ' ').trim();
+        const has = (list2, w) => list2.some(x => x === w || (w.length >= 4 && (x.startsWith(w) || w.startsWith(x)) && x.length >= 4));
+        const scoreOf = (wanted, {qs, as}) => {
+            if (!wanted.length) return 0;
             let score = 0, found = 0;
             wanted.forEach(([w, ...syn]) => {
                 let best = has(qs, w) ? 4 : has(as, w) ? 1.5 : 0;
@@ -2195,34 +2268,52 @@
                 if (!best && syn.some(x => has(as, x))) best = .7;
                 if (best) { found++; score += best; }
             });
-            if (found) hits.push({group, q, a, score: score * (found / wanted.length) ** 1.5});
+            return found ? score * (found / wanted.length) ** 1.5 : 0;
+        };
+        const hits = [];
+        list.forEach(({label, group, rows}) => rows.forEach(r => {
+            const id = faqId(r.fq);
+            let score = scoreOf(wantFr, faqIdx('fr', id, group, r.fq, r.fa));
+            if (L !== 'fr' && (r.tq || r.ta)) score = Math.max(score, scoreOf(wantL, faqIdx(L, id, label, r.q, r.a)));
+            // la question exacte (un lien de l'app qui cite la question française, ou la question traduite) passe devant tout
+            if (folded && (folded === faqFold(r.fq).replace(/[^a-z0-9]+/g, ' ').trim() || (r.tq && folded === faqFold(r.q).replace(/[^a-z0-9]+/g, ' ').trim()))) score += 100;
+            if (score) hits.push({group: label, q: r.q, a: r.a, fq: r.fq, fr: L !== 'fr' && !r.ta, score});
         }));
         hits.sort((x, y) => y.score - x.score);
         return hits.filter(h => h.score >= hits[0].score * .35).slice(0, 6); // les réponses loin derrière la meilleure ne servent à rien
     }
-    const faqItem = (q, a, open = false) => `<details class="h-faq-item"${open ? ' open' : ''}><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`;
-    ext.faqHtml = () => `<section class="maintenance-panel full-width help-intro h-faq"><h3>Questions fréquentes</h3>
-        <label class="h-faq-search"><span aria-hidden="true">🔎</span><input type="search" data-faq-q placeholder="Pose ta question : comment faire un livre de famille en PDF ?" autocomplete="off"></label>
+    // une réponse pas encore traduite garde lang="fr" (lecteurs d'écran) ; le filet de traduction ne retouche pas la FAQ
+    const faqItem = (h, open = false) => `<details class="h-faq-item"${open ? ' open' : ''} data-i18n-off${h.fr ? ' lang="fr"' : ''}><summary>${esc(h.q)}</summary><p>${esc(h.a)}</p></details>`;
+    const faqNone = text => `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔍</span><span class="empty-line-text">${esc(text)}</span></p>`;
+    ext.faqHtml = () => {
+        const L = faqLang();
+        return `<section class="maintenance-panel full-width help-intro h-faq"><h3>${esc(tt('Questions fréquentes'))}</h3>
+        <label class="h-faq-search"><span aria-hidden="true">🔎</span><input type="search" data-faq-q placeholder="${esc(tt('Pose ta question : comment faire un livre de famille en PDF ?'))}" autocomplete="off"></label>
         <div data-faq-results hidden></div>
-        <div data-faq-all><p>Comment faire ceci ou cela dans LCNDA.</p>
-        ${FAQ.map(([group, items]) => `<h4>${esc(group)}</h4>${items.map(([q, a]) => faqItem(q, a)).join('')}`).join('')}</div></section>`;
+        <div data-faq-all><p>${esc(tt('Comment faire ceci ou cela dans LCNDA.'))}</p>
+        ${faqList().map(({label, rows}) => `<h4>${esc(label)}</h4>${rows.map(r => faqItem({q: r.q, a: r.a, fr: L !== 'fr' && !r.ta})).join('')}`).join('')}</div></section>`;
+    };
     document.addEventListener('input', event => {
         const input = event.target.closest?.('[data-faq-q]'); if (!input) return;
         const box = input.closest('.h-faq'), results = box.querySelector('[data-faq-results]'), all = box.querySelector('[data-faq-all]');
+        // un lien de l'app a mis la question française dans la case : on montre la question traduite
+        if (!event.isTrusted && faqLang() !== 'fr') { const v = input.value.trim(); const r = faqList().flatMap(g => g.rows).find(x => x.fq === v && x.tq); if (r) input.value = r.q; }
         const hits = faqSearch(input.value);
         results.hidden = !hits; all.hidden = !!hits;
         if (!hits) return;
         results.innerHTML = hits.length
-            ? `<p class="muted">${hits.length === 1 ? 'La réponse la plus proche' : 'Les réponses les plus proches'} :</p>${hits.map((h, i) => `<small class="h-faq-group">${esc(h.group)}</small>${faqItem(h.q, h.a, i === 0)}`).join('')}`
-            : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔍</span><span class="empty-line-text">Pas de réponse avec ces mots : essaie d’autres mots (« photo », « sauvegarde », « arbre »…). Pour une question sur ta généalogie elle-même (« Qui était boulanger à Lille ? »), va dans Recherche → « Poser une question en français ».</span></p>';
+            ? `<p class="muted">${esc(hits.length === 1 ? tt('La réponse la plus proche :') : tt('Les réponses les plus proches :'))}</p>${hits.map((h, i) => `<small class="h-faq-group">${esc(h.group)}</small>${faqItem(h, i === 0)}`).join('')}`
+            : faqNone(tt('Pas de réponse avec ces mots : essaie d’autres mots (« photo », « sauvegarde », « arbre »…). Pour une question sur ta généalogie elle-même (« Qui était boulanger à Lille ? »), va dans Recherche → « Poser une question en français ».'));
     });
-    ext.faqSearch = faqSearch; // pour les tests
+    ext.faqSearch = faqSearch; // pour les tests (et la bulle « En savoir plus (FAQ) → » dans une fenêtre, app-ui.js)
+    ext.faqList = faqList;
+    ext.faqId = faqId;
     /** ❓ Aide d'un éditeur plein écran : les réponses de la FAQ dans une fenêtre par-dessus (la page Réglages → FAQ resterait cachée derrière l'éditeur) */
     ext.faqPopup = question => {
         const hits = faqSearch(question) || [];
         if (!ext.openDialog) return false;
-        ext.openDialog({eyebrow: 'AIDE', title: '❓ Aide (FAQ)', submitLabel: 'Fermer', onSubmit: () => {},
-            body: `<div class="h-faq">${hits.length ? hits.map((h, i) => `<small class="h-faq-group">${esc(h.group)}</small>${faqItem(h.q, h.a, i === 0)}`).join('') : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔍</span><span class="empty-line-text">Pas de réponse toute prête.</span></p>'}<p class="muted">Toutes les questions : Réglages → Aide et FAQ.</p></div>`});
+        ext.openDialog({eyebrow: tt('AIDE'), title: tt('❓ Aide (FAQ)'), submitLabel: tt('Fermer'), onSubmit: () => {},
+            body: `<div class="h-faq">${hits.length ? hits.map((h, i) => `<small class="h-faq-group">${esc(h.group)}</small>${faqItem(h, i === 0)}`).join('') : faqNone(tt('Pas de réponse toute prête.'))}<p class="muted">${esc(tt('Toutes les questions : Réglages → Aide et FAQ.'))}</p></div>`});
         return true;
     };
     /* ═══════════════════════ ✍️ RECONNAISSANCE D'ÉCRITURE (HTR) : assistant en 3 étapes ═══════════════════════

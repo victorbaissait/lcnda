@@ -70,29 +70,32 @@ function socface_compare(array $m, int $year, array $p, string $relation = 'unkn
     $sfBorn = socface_member_born($m, $year);
     $pBorn = (int) ($p['birth_year'] ?? 0) ?: null;
     $g = ($p['gender'] ?? '') === 'female';
-    $vers = !empty($m['birth_year']) ? 'né' . ($g ? 'e' : '') . ' en ' . $sfBorn : 'né' . ($g ? 'e' : '') . ' vers ' . $sfBorn;
+    // 🌐 « text » dans la langue de la page (i18n_t) ; « fr » = la même phrase en français, pour l'empreinte des exceptions du Contrôle
+    $say = static fn(string $tpl, array $v): array => ['text' => i18n_t($tpl, $v), 'fr' => (string) preg_replace_callback('/\{([a-z_]+)\}/', static fn($x) => (string) ($v[$x[1]] ?? $x[0]), $tpl)];
     if ($sfBorn && $pBorn && abs($sfBorn - $pBorn) > $tol) {
-        $out[] = ['what' => 'birth', 'level' => abs($sfBorn - $pBorn) > 2 * $tol + 3 ? 'orange' : 'yellow',
-            'text' => 'SocFace lit « ' . $vers . ' », ta fiche dit ' . $pBorn . ' — l’IA a pu mal lire : vérifie sur l’image.'];
+        $tpl = !empty($m['birth_year']) ? ($g ? 'SocFace lit « née en {sf} », ta fiche dit {p} — l’IA a pu mal lire : vérifie sur l’image.' : 'SocFace lit « né en {sf} », ta fiche dit {p} — l’IA a pu mal lire : vérifie sur l’image.')
+            : ($g ? 'SocFace lit « née vers {sf} », ta fiche dit {p} — l’IA a pu mal lire : vérifie sur l’image.' : 'SocFace lit « né vers {sf} », ta fiche dit {p} — l’IA a pu mal lire : vérifie sur l’image.');
+        $out[] = ['what' => 'birth', 'level' => abs($sfBorn - $pBorn) > 2 * $tol + 3 ? 'orange' : 'yellow'] + $say($tpl, ['sf' => $sfBorn, 'p' => $pBorn]);
     }
     $sfPlace = trim((string) ($m['birth_place'] ?? ''));
     $pPlace = trim((string) ($p['birth_place'] ?? ''));
     if ($sfPlace !== '' && $pPlace !== '') {
         $a = socface_norm($sfPlace); $b = socface_norm(explode(',', $pPlace)[0]);
         if ($a !== '' && $b !== '' && !str_contains($a, $b) && !str_contains($b, $a) && levenshtein($a, $b) > 2) {
-            $out[] = ['what' => 'place', 'level' => 'yellow', 'text' => 'SocFace lit « né' . ($g ? 'e' : '') . ' à ' . $sfPlace . ' », ta fiche dit ' . explode(',', $pPlace)[0] . ' — l’IA a pu mal lire : vérifie sur l’image.'];
+            $out[] = ['what' => 'place', 'level' => 'yellow'] + $say($g ? 'SocFace lit « née à {sf} », ta fiche dit {p} — l’IA a pu mal lire : vérifie sur l’image.' : 'SocFace lit « né à {sf} », ta fiche dit {p} — l’IA a pu mal lire : vérifie sur l’image.', ['sf' => $sfPlace, 'p' => explode(',', $pPlace)[0]]);
         }
     }
     $sg = socface_gender((string) ($m['gender'] ?? ''));
     $pg = ($p['gender'] ?? '') === 'female' ? 'f' : (($p['gender'] ?? '') === 'male' ? 'h' : '');
     if ($sg !== '' && $pg !== '' && $sg !== $pg) {
-        $out[] = ['what' => 'gender', 'level' => 'orange', 'text' => 'SocFace lit « ' . ($sg === 'f' ? 'femme' : 'homme') . ' », ta fiche dit ' . ($pg === 'f' ? 'femme' : 'homme') . ' — l’IA a pu mal lire : vérifie sur l’image.'];
+        $out[] = ['what' => 'gender', 'level' => 'orange'] + $say($sg === 'f' ? 'SocFace lit « femme », ta fiche dit homme — l’IA a pu mal lire : vérifie sur l’image.' : 'SocFace lit « homme », ta fiche dit femme — l’IA a pu mal lire : vérifie sur l’image.', []);
     }
     $role = socface_norm((string) ($m['role'] ?? $m['household_position'] ?? ''));
     $want = preg_match('/^(fils|fille|enfant)$/', $role) ? 'child' : (preg_match('/^(epouse|epoux|femme|mari)$/', $role) ? 'spouse' : (preg_match('/^(pere|mere)$/', $role) ? 'parent' : ''));
     if ($want !== '' && $relation !== 'unknown' && $relation !== $want) {
-        $words = ['child' => 'enfant', 'spouse' => 'conjoint', 'parent' => 'parent', '' => 'rien'];
-        $out[] = ['what' => 'relation', 'level' => 'yellow', 'text' => 'SocFace lit « ' . ($m['role'] ?? $m['household_position']) . ' » du chef de ménage, ta fiche ' . ($relation === '' ? 'ne les relie pas' : 'dit ' . $words[$relation]) . ' — l’IA a pu mal lire : vérifie sur l’image.'];
+        $tpl = ['child' => 'SocFace lit « {role} » du chef de ménage, ta fiche dit enfant — l’IA a pu mal lire : vérifie sur l’image.', 'spouse' => 'SocFace lit « {role} » du chef de ménage, ta fiche dit conjoint — l’IA a pu mal lire : vérifie sur l’image.',
+            'parent' => 'SocFace lit « {role} » du chef de ménage, ta fiche dit parent — l’IA a pu mal lire : vérifie sur l’image.', '' => 'SocFace lit « {role} » du chef de ménage, ta fiche ne les relie pas — l’IA a pu mal lire : vérifie sur l’image.'][$relation] ?? 'SocFace lit « {role} » du chef de ménage, ta fiche dit rien — l’IA a pu mal lire : vérifie sur l’image.';
+        $out[] = ['what' => 'relation', 'level' => 'yellow'] + $say($tpl, ['role' => $m['role'] ?? $m['household_position']]);
     }
     return $out;
 }
@@ -548,7 +551,7 @@ function socface_gap_items(PDO $pdo, array $ids, array $sosaOf, array $people, i
             if (!$best) { continue; }
             $s2 = $sosaOf[$pid] ?? 0; $g = ($p['gender'] ?? '') === 'female';
             $out[] = ['sosa' => $s2, 'generation' => $s2 ? (int) floor(log($s2, 2)) + 1 : 0, 'person_id' => $pid, 'kind' => 'socface', 'what' => 'recensement de ' . $y, 'from' => $y, 'to' => $y, 'place' => $best[0],
-                'why' => 'vivant' . ($g ? 'e' : '') . ' en ' . $y . ', à ' . $best[0] . ' vers ' . $y . ' d’après ' . ($bd < 1 ? 'un événement de la même année' : 'un événement proche'),
+                'why' => i18n_t($bd < 1 ? ($g ? 'vivante en {y}, à {place} vers {y} d’après un événement de la même année' : 'vivant en {y}, à {place} vers {y} d’après un événement de la même année') : ($g ? 'vivante en {y}, à {place} vers {y} d’après un événement proche' : 'vivant en {y}, à {place} vers {y} d’après un événement proche'), ['y' => $y, 'place' => $best[0]]),
                 'name' => trim($p['first_name'] . ' ' . $p['last_name']) ?: 'Personne #' . $pid, 'gender' => $p['gender'],
                 'sf' => ['last' => (string) $p['last_name'], 'first' => (string) $p['first_name'], 'place' => $best[0], 'year' => $y, 'gender' => $g ? 'f' : (($p['gender'] ?? '') === 'male' ? 'h' : '')]];
             if (count($out) >= $max) { return $out; }
@@ -568,13 +571,14 @@ function socface_controle_alerts(PDO $pdo, array $th): array
     $people = socface_people($pdo, array_values($ids));
     $tol = (int) ($th['socface_years'] ?? 2);
     $titles = ['birth' => 'année de naissance', 'place' => 'lieu de naissance', 'gender' => 'genre', 'relation' => 'lien de parenté'];
+    $titleT = static fn(string $what, $year, string $place) => i18n_t($place !== '' ? 'Recensement de {y} à {place} (SocFace) : {what}' : 'Recensement de {y} (SocFace) : {what}', ['y' => $year, 'place' => $place, 'what' => i18n_t($titles[$what], [], 'socface')]);
     $out = [];
     foreach ($rows as $r) {
         foreach (socface_record_ecarts($pdo, $r, $people, $tol) as $e) {
             $out[] = ['key' => 'socface:' . $e['member_id'] . ':' . $e['what'], 'check' => 'socface-' . $e['what'], 'sort' => 'socface', 'level' => $e['level'],
-                'title' => 'Recensement de ' . $r['year'] . ($r['place'] !== '' ? ' à ' . $r['place'] : '') . ' (SocFace) : ' . $titles[$e['what']],
-                'detail' => $e['text'] . ($r['verified'] ? ' (foyer coché « Vérifié sur l’image »)' : ''), 'people' => [$e['person_id']],
-                'socface' => ['census_id' => (int) $r['id'], 'member_id' => $e['member_id'], 'image_url' => $r['image_url'], 'origin_url' => $r['origin_url']], 'fp' => md5($e['text'])];
+                'title' => $titleT($e['what'], $r['year'], (string) $r['place']),
+                'detail' => $r['verified'] ? i18n_t('{text} (foyer coché « Vérifié sur l’image »)', ['text' => $e['text']]) : $e['text'], 'people' => [$e['person_id']],
+                'socface' => ['census_id' => (int) $r['id'], 'member_id' => $e['member_id'], 'image_url' => $r['image_url'], 'origin_url' => $r['origin_url']], 'fp' => md5($e['fr'] ?? $e['text'])];
         }
     }
     return $out;

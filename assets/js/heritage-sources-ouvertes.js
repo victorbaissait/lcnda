@@ -11,6 +11,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const A = () => window.LCNDA_APP;
     const UI = () => window.LCNDA_UI;
@@ -48,7 +49,7 @@
     const area = (name, label, value = '', rows = 3, a = '') => `<label class="so-span-2">${esc(label)}<textarea name="${esc(name)}" rows="${rows}" ${a}>${esc(value ?? '')}</textarea></label>`;
     function fieldsHtml(kind, v, ctx) {
         const mil = ctx?.military || {};
-        const had = k => mil[k] ? `placeholder="déjà sur la fiche : ${esc(String(mil[k]).slice(0, 60))} (gardé)"` : '';
+        const had = k => mil[k] ? `placeholder="${esc(i18n('déjà sur la fiche : {val} (gardé)', {val: String(mil[k]).slice(0, 60)}))}"` : '';
         const p = ctx?.person || {};
         if (kind === 'mdh') {
             const bases = SO().SITES.filter(s => s.group === 'mdh' && s.key !== 'mdh_jmo');
@@ -58,7 +59,7 @@
                 ${fld('rank', 'Grade', v.rank, 'placeholder="soldat de 2e classe"')}${fld('unit', 'Unité', v.unit, 'placeholder="152e régiment d’infanterie"')}
                 ${fld('matricule', 'Matricule au corps · classe · recrutement', v.matricule)}
                 ${fld('death_date', 'Date du décès', v.death_date, 'data-ui-date placeholder="20 août 1914"')}
-                <div class="so-pk"><span class="pk-lab">Lieu du décès</span>${pickerField({name: 'place_id', kind: 'place', value: null})}${v.death_place ? `<small class="ui-hint">Lu : « ${esc(v.death_place)} » — choisis le lieu (ou crée-le).</small>` : ''}</div>
+                <div class="so-pk"><span class="pk-lab">Lieu du décès</span>${pickerField({name: 'place_id', kind: 'place', value: null})}${v.death_place ? `<small class="ui-hint">${i18n('Lu : « {val} » — choisis le lieu (ou crée-le).', {val: esc(v.death_place)})}</small>` : ''}</div>
                 ${fld('cause', 'Genre de mort', v.cause, 'placeholder="tué à l’ennemi, des suites de blessures…"')}`;
         }
         if (kind === 'leonore') {
@@ -113,8 +114,8 @@
             Object.assign(st.v, Object.fromEntries(Object.entries({journal: lk.journal, date: lk.date, page: lk.page, cote: lk.cote}).filter(([, x]) => x)));
             if (st.text) Object.assign(st.v, SO().parseFields(st.text, st.kind), {...st.v});
             if (st.pid) { forget(st.pid); st.ctx = await context(st.pid); }
-            return {count: 1, noun: 'document', summaryHtml: `<b>un document</b> pour ${st.ctx ? `<b>${esc([st.ctx.person.first, String(st.ctx.person.last || '').toUpperCase()].join(' '))}</b>` : 'la fiche choisie ci-dessous'}`,
-                notices: [{kind: 'warn', text: `${SO().MENTION}. Le document entre « À vérifier ».`}, {kind: 'info', text: 'Rien de la fiche n’est remplacé : seules les cases vides sont remplies, et « ↶ Annuler » retire tout ce que l’import a ajouté.'}],
+            return {count: 1, noun: 'document', summaryHtml: i18n('<b>un document</b> pour {who}', {who: st.ctx ? `<b>${esc([st.ctx.person.first, String(st.ctx.person.last || '').toUpperCase()].join(' '))}</b>` : i18n('la fiche choisie ci-dessous')}),
+                notices: [{kind: 'warn', text: `${i18n(SO().MENTION)}. ${i18n('Le document entre « À vérifier ».')}`}, {kind: 'info', text: 'Rien de la fiche n’est remplacé : seules les cases vides sont remplies, et « ↶ Annuler » retire tout ce que l’import a ajouté.'}],
                 preview: `<div class="so-imp" data-so-imp></div>`, onShow: body => draw(body)};
         };
         const read = body => {
@@ -180,11 +181,11 @@
             const r = j.result; forget(st.pid); if (st.objUrl) URL.revokeObjectURL(st.objUrl);
             window.dispatchEvent(new CustomEvent('lcnda:sources-ouvertes-changed', {detail: r}));
             refresh();
-            return {message: `${r.summary} — à vérifier sur le document.`, undo: async () => { await post('so_undo', {batch: r.batch}); forget(st.pid); refresh(); }};
+            return {message: `${r.summary} ${i18n('— à vérifier sur le document.')}`, undo: async () => { await post('so_undo', {batch: r.batch}); forget(st.pid); refresh(); }};
         };
         const kindWord = {mdh: 'une fiche de Mémoire des hommes', leonore: 'un dossier Léonore', matricule: 'une page de registre matricule', presse: 'un article de journal'};
         return UI().openImportDialog({title: 'Importer depuis les archives en ligne', accept: 'image/*,.pdf,.html,.htm,.txt', what: 'image, PDF, page enregistrée ou texte',
-            intro: `Ce que tu as téléchargé ou enregistré : ${kindWord[st.kind]} en image ou en PDF, la page enregistrée par ton navigateur (« Enregistrer sous… »), ou un texte copié. Rien n’est demandé au site : seul ton fichier est lu. Pas de fichier ? « 🔗 Coller un lien » dans la fenêtre de recherche.`,
+            intro: i18n('Ce que tu as téléchargé ou enregistré : {kind} en image ou en PDF, la page enregistrée par ton navigateur (« Enregistrer sous… »), ou un texte copié. Rien n’est demandé au site : seul ton fichier est lu. Pas de fichier ? « 🔗 Coller un lien » dans la fenêtre de recherche.', {kind: i18n(kindWord[st.kind])}),
             noun: 'document', analyze: async files => { const a = await analyze(files); const show = a.onShow; a.onShow = body => { body.closest('dialog')?.classList.add('modal-l', 'so-import'); bind(body); show(body); }; return a; }, run, files: o.files});
     }
     /** pas de fichier : un lien collé → le seul « 🔗 Coller un lien » de l'app (il reconnaît le site et revient à openImport) */

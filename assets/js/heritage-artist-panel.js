@@ -6,6 +6,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const ART = window.LCNDA_ART; if (!ART) return;
     const A = () => window.LCNDA_APP, ext = window.LCNDA_EXT || {};
     const U = ART.util, esc = U.esc;
@@ -61,11 +62,11 @@
             save: name => pput(name, JSON.parse(JSON.stringify(target(C.store)))),
             replace: i => pput(plist()[i].name, JSON.parse(JSON.stringify(target(C.store)))),
             rename: (i, name) => { const l = [...plist()]; l[i] = {...l[i], name}; return pwrite(l); },
-            duplicate: async i => { const l = plist(), p = l[i], nm = window.LCNDA_UI.freeName(p.name, l.map(x => x.name)); await pput(nm, JSON.parse(JSON.stringify(p.data || {})), i + 1); A().toast(`Copie « ${nm} » créée.`); },
+            duplicate: async i => { const l = plist(), p = l[i], nm = window.LCNDA_UI.freeName(p.name, l.map(x => x.name)); await pput(nm, JSON.parse(JSON.stringify(p.data || {})), i + 1); A().toast(i18n('Copie « {nm} » créée.', {nm: nm})); },
             exportOne: i => { const p = plist()[i]; A().exportSettingFile?.('artistes', p.name, {artistes: p.data}); return false; },
             remove: async i => { const before = plist(), p = before[i], after = before.filter((_, j) => j !== i), back = async l => { await pwrite(l); if (frame.isConnected) frame.refresh(); };
-                await pwrite(after); A().undoToast(`Réglage « ${p.name} » supprimé`, {undo: () => back(before), redo: () => back(after)}); },
-            importOne: async () => { const got = await A().importSettingFile?.('artistes', {names: plist().map(p => p.name), check: x => x && typeof x.artistes === 'object'}); if (!got) return false; await pwrite([...plist(), {name: got.nom, date: new Date().toISOString(), data: got.donnees.artistes}]); A().toast(`Réglage « ${got.nom} » importé : « Appliquer » pour t’en servir.`); }});
+                await pwrite(after); A().undoToast(i18n('Réglage « {nm} » supprimé', {nm: p.name}), {undo: () => back(before), redo: () => back(after)}); },
+            importOne: async () => { const got = await A().importSettingFile?.('artistes', {names: plist().map(p => p.name), check: x => x && typeof x.artistes === 'object'}); if (!got) return false; await pwrite([...plist(), {name: got.nom, date: new Date().toISOString(), data: got.donnees.artistes}]); A().toast(i18n('Réglage « {nm} » importé : « Appliquer » pour t’en servir.', {nm: got.nom})); }});
         const changed = async () => { try { await persist(C.store); } catch (e) { A().toast(e.message, 'error'); } C.paint(false); };
         const orderNow = (gkey) => { if (st.tab === 'fiche') return [...aside.querySelectorAll(`.ar-fr[data-g="${CSS.escape(gkey)}"]`)].map(r => r.dataset.fkey); return [...aside.querySelectorAll('.ar-fr')].map(r => r.dataset.fkey); };
         const saveOrder = gkey => { const T = tcfg(C.store, st.kind, st.tab); if (st.tab === 'fiche') { T.forder = T.forder || {}; T.forder[gkey] = orderNow(gkey); } else T.order = orderNow(); };
@@ -88,12 +89,12 @@
             if (d.pDel) { // H7 : enlevé tout de suite, « ↶ Annuler » ; les fiches gardent leurs valeurs
                 let obj0 = null, f0 = null; for (const obj of [s.global, s.personSet].filter(Boolean)) { const K = kcfg(obj, st.kind), i = (K.custom || []).findIndex(x => x.key === d.pDel); if (i >= 0) { f0 = K.custom.splice(i, 1)[0]; (K.removed = K.removed || []).push(f0); obj0 = obj; } }
                 await changed(); paint();
-                if (f0) A().undoToast(`Champ « ${f0.label} » enlevé`, {undo: async () => { const K = kcfg(obj0, st.kind); K.removed = (K.removed || []).filter(x => x.key !== f0.key); (K.custom = K.custom || []).push(f0); await changed(); paint(); }});
+                if (f0) A().undoToast(i18n('Champ « {nm} » enlevé', {nm: f0.label}), {undo: async () => { const K = kcfg(obj0, st.kind); K.removed = (K.removed || []).filter(x => x.key !== f0.key); (K.custom = K.custom || []).push(f0); await changed(); paint(); }});
                 return;
             }
             if (d.pAdd !== undefined) return ART.addFieldDialog(C, st.kind, {after: paint});
             if (d.pAddgrp !== undefined) { const n = await A().askText({title: '＋ Ajouter un groupe', message: 'Le nom du groupe (il apparaît dans la colonne de droite de la fiche, avec ses champs).', value: '', okLabel: 'Ajouter le groupe'}); if (!n?.trim()) return; const K = kcfg(target(s), st.kind); (K.groups = K.groups || []).push({key: `g_${U.slug(n)}_${Date.now().toString(36).slice(-3)}`, label: n.trim().slice(0, 60), zone: 'right', icon: '✎'}); await changed(); return paint(); }
-            if (d.pReset !== undefined) { if (!await A().confirmBox(`Les champs de « ${ART.defs[st.kind].label} » reviennent comme au départ (ordre, affichés, colonnes). Tes propres champs restent.`, {title: '↺ Remettre comme au départ ?', okLabel: 'Remettre comme au départ'})) return; const K = kcfg(target(s), st.kind); ART.TABS.forEach(t => { delete K[t]; }); await changed(); return paint(); }
+            if (d.pReset !== undefined) { if (!await A().confirmBox(i18n('Les champs de « {nm} » reviennent comme au départ (ordre, affichés, colonnes). Tes propres champs restent.', {nm: ART.defs[st.kind].label}), {title: '↺ Remettre comme au départ ?', okLabel: 'Remettre comme au départ'})) return; const K = kcfg(target(s), st.kind); ART.TABS.forEach(t => { delete K[t]; }); await changed(); return paint(); }
         };
         // ⠿ glisser une ligne dans son groupe
         let drag = null;
@@ -127,7 +128,7 @@
                 // dans le formulaire ouvert : ce qui est déjà tapé reste
                 if (C.S.edit) ART.collect(C.body, s, C.current(), C.S.draft);
                 try { await persist(s); } catch (e) { A().toast(e.message, 'error'); return false; }
-                C.paint(false); after?.(); A().toast(`Champ « ${label} » ajouté.`);
+                C.paint(false); after?.(); A().toast(i18n('Champ « {nm} » ajouté.', {nm: label}));
             }});
     };
 
@@ -136,7 +137,7 @@
     window.LCNDA_UI?.registerIconSet?.('ar-types', {items: ICONS.map(g => ({v: g, g, grp: 'ar'})), groups: [{id: 'ar', label: 'Proposées', icon: '⭐'}], emoji: true, title: 'Icône de la sorte'}); // L4
     ART.newTypeDialog = (C, {key = ''} = {}) => {
         const types = Object.values(ART.defs).filter(d => d.key !== 'profile'), cur = key ? ART.defs[key] : null;
-        ext.openDialog({eyebrow: 'CATALOGUE', title: cur ? `✎ La sorte « ${cur.label} »` : '＋ Créer une sorte de fiche', submitLabel: cur ? 'Enregistrer' : 'Créer la sorte',
+        ext.openDialog({eyebrow: 'CATALOGUE', title: cur ? i18n('✎ La sorte « {nm} »', {nm: cur.label}) : '＋ Créer une sorte de fiche', submitLabel: cur ? 'Enregistrer' : 'Créer la sorte',
             body: `<div class="form-grid"><label>Nom<input name="label" required maxlength="80" value="${esc(cur?.label || '')}" placeholder="Char de carnaval, Sculpture, Affiche…"></label><label>Au pluriel<input name="many" maxlength="80" value="${esc(cur?.many || '')}"></label>
                 <div class="span-2"><span class="pk-lab">Icône</span>${window.LCNDA_UI?.iconFieldHtml ? window.LCNDA_UI.iconFieldHtml({name: 'icon', set: 'ar-types', value: cur?.icon || '✦', allowNone: false}) : `<div class="ar-icons">${ICONS.map(i => `<label><input type="radio" name="icon" value="${i}" ${(cur?.icon || '✦') === i ? 'checked' : ''}><span>${i}</span></label>`).join('')}</div>`}</div>
                 <label>Famille<select name="domain">${ART.DOMAINS.map(([k, l]) => `<option value="${k}" ${(cur?.domain || 'autre') === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
@@ -147,7 +148,7 @@
                 const groups = cur ? cur.groups.filter(g => g.key !== '_linked' && g.key !== '_mine') : src ? JSON.parse(JSON.stringify(src.groups.filter(g => g.key !== '_linked'))).map(g => ({...g, fields: g.fields.filter(x => x.type !== 'computed').map(x => ({...x, source: `${src.key}.${x.key}`}))})).filter(g => g.fields.length) : undefined;
                 const r = await ART.write('save_type', {key: cur?.key || '', label: v.label, def: {many: v.many || `${v.label}s`, icon: v.icon || '✦', domain: v.domain, groups, list: src?.list || ['title', 'date'], card: src?.card || ['date'], export: src?.export}});
                 await C.reload(); C.S.view = 'list'; C.S.kind = r.key; C.S.id = 0; C.prefs.extraTabs = [...new Set([...(C.prefs.extraTabs || []), r.key])]; C.savePrefs(); C.paint(true);
-                A().toast(cur ? 'Sorte enregistrée.' : `Sorte « ${v.label} » créée : ajoute ses champs avec « ⚙️ Champs affichés ».`);
+                A().toast(cur ? 'Sorte enregistrée.' : i18n('Sorte « {nm} » créée : ajoute ses champs avec « ⚙️ Champs affichés ».', {nm: v.label}));
             }});
     };
 })();

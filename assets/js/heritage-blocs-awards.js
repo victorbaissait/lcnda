@@ -6,6 +6,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const ART = window.LCNDA_ART, ext = window.LCNDA_EXT || {}, BL = ext.blocs; if (!ART?.define || !BL?.open) return;
     const A = () => window.LCNDA_APP, U = ART.util, esc = U.esc;
 
@@ -33,7 +34,7 @@
         text: (ctx, it) => U.plural(ctx.store.linksTo(it.id, 'contest').length, 'récompense')};
 
     ART.define({key: 'award', icon: '🏆', label: 'Récompense', many: 'Récompenses', tab: 'Récompenses', fem: true, domain: 'blocs', hidden: true,
-        eyebrow: it => `Récompense · ${catLabel(it.data?.category) || 'concours'}`,
+        eyebrow: it => `${i18n('Récompense')} · ${i18n(catLabel(it.data?.category) || 'concours')}`,
         heading: (ctx, it) => { const d = it.data || {}; const bits = [d.category && `<span class="bl-cat ${COLOR[d.category] || ''}">${esc(lab(CATS, d.category))}</span>`, d.level && `<span class="ar-badge">${esc(BL.bare(lab(LEVELS, d.level)))}</span>`, d.medal && `<span class="ar-badge ${isFirst(d) ? 'ok' : ''}">${esc(lab(MEDALS, d.medal))}</span>`].filter(Boolean).join(' ');
             return `<div class="bl-head">${bits ? `<div class="ar-badges">${bits}</div>` : ''}<h2 class="ar-h2">${esc(it.title)}${it.year ? ` <small>· ${esc(it.year)}</small>` : ''}</h2>${d.prize_title ? `<p class="bl-hmeta">🏆 ${esc(d.prize_title)}</p>` : ''}</div>`; },
         newData: () => ({category: '', level: '', medal: ''}),
@@ -135,8 +136,8 @@
         const known = new Set(CATS.map(c => c[0])), free = [...counts.keys()].filter(k => !known.has(k));
         const opts = [['decoration', CATS_PL.decoration], ...CATS.filter(c => c[0] !== 'decoration'), ...free.map(k => [k, k])].filter(([k]) => counts.has(k));
         const firsts = all.filter(it => isFirst(it.data || {})).length;
-        const filt = opts.length > 1 ? `<div class="ui-filters bl-mfilt"><button type="button" class="is-active" data-bl-mf="">Tout (${all.length})</button>${opts.map(([k, l]) => `<button type="button" data-bl-mf="${esc(k)}">${esc(l)} (${counts.get(k)})</button>`).join('')}</div>` : '';
-        return `<div class="bl-bh"><small class="ar-g">${esc(U.plural(all.length, 'récompense'))}${firsts ? ` · ${esc(U.plural(firsts, 'première place', 'premières places'))}` : ''}</small><span class="spacer"></span></div>${filt}${tableHtml(all.slice(0, MAX), pid)}${all.length > MAX ? `<p class="ar-g">… et ${esc(U.plural(all.length - MAX, 'autre'))} : « Palmarès ».</p>` : ''}${all.length > 1 ? `<div class="bl-sec"><b>🏆 Frise du palmarès</b>${frise(all)}</div>` : ''}`;
+        const filt = opts.length > 1 ? `<div class="ui-filters bl-mfilt"><button type="button" class="is-active" data-bl-mf="">${i18n('Tout ({n})', {n: all.length})}</button>${opts.map(([k, l]) => `<button type="button" data-bl-mf="${esc(k)}">${esc(l)} (${counts.get(k)})</button>`).join('')}</div>` : '';
+        return `<div class="bl-bh"><small class="ar-g">${esc(U.plural(all.length, 'récompense'))}${firsts ? ` · ${esc(U.plural(firsts, 'première place', 'premières places'))}` : ''}</small><span class="spacer"></span></div>${filt}${tableHtml(all.slice(0, MAX), pid)}${all.length > MAX ? `<p class="ar-g">${i18n('… et {x} : « Palmarès ».', {x: esc(U.plural(all.length - MAX, 'autre'))})}</p>` : ''}${all.length > 1 ? `<div class="bl-sec"><b>🏆 Frise du palmarès</b>${frise(all)}</div>` : ''}`;
     }
     BL.renderers.awards = render;
     ext.personBlocks.awards = BL.block({key: 'awards', title: '🏆 Concours et récompenses', render,

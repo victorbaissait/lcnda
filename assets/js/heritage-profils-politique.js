@@ -6,6 +6,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const ART = window.LCNDA_ART, PF = ART?.PF; if (!ART?.define || !PF) return;
     const A = () => window.LCNDA_APP;
     const U = ART.util, esc = U.esc, plural = (n, w, pl) => U.plural(n, w, pl);
@@ -53,7 +54,7 @@
         filters: () => [{id: 'lvl', label: 'Niveau', type: 'check', options: LEVEL, test: (it, v) => !v.length || v.includes(it.data.level)}],
         cardLine: it => PF.years(it.data.date, it.data.end)});
     ART.define({...common, key: 'pol_election', icon: '🗳', label: 'Élection', many: 'Élections', fem: true,
-        eyebrow: it => `Élection · ${lab(SCRUTIN, it.data.scrutin) || ''}`, newData: () => ({scrutin: 'municipales', round: '1', result: ''}),
+        eyebrow: it => `${i18n('Élection')} · ${i18n(lab(SCRUTIN, it.data.scrutin) || '')}`, newData: () => ({scrutin: 'municipales', round: '1', result: ''}),
         groups: [{key: 'main', label: 'Le scrutin', icon: '🗳', zone: 'main', fields: [
             {key: 'title', label: 'Intitulé', type: 'text', star: true, head: true, ph: 'Législatives 1951, Municipales de Tulle 1947…'},
             {key: 'date', label: 'Date', type: 'date', star: true}, {key: 'scrutin', label: 'Scrutin', type: 'select', star: true, choices: SCRUTIN}, {key: 'round', label: 'Tour', type: 'select', star: true, choices: ROUND},
@@ -67,7 +68,7 @@
             {key: 'communes', label: 'Résultats par commune', icon: '📍', zone: 'main', fields: [{key: 'by_commune', label: 'Résultats par commune', type: 'rows', star: false, addLabel: 'Une commune', cols: [{key: 'place', label: 'Commune', type: 'place', w: 'l'}, {key: 'registered', label: 'Inscrits', w: 's'}, {key: 'votes', label: 'Voix', w: 's'}, {key: 'pct', label: '%', w: 's'}]}]}, SRC, NOTES],
         list: ['title', 'date', 'scrutin', 'round', 'votes', 'pct', 'result'], card: ['date', 'result'], export: ['title', 'date', 'scrutin', 'round', 'place', 'label', 'registered', 'voters', 'votes', 'pct', 'result', 'opponents'],
         filters: () => [{id: 'res', label: 'Résultat', type: 'check', options: [['won', 'gagnées'], ['lost', 'perdues']], test: (it, v) => !v.length || v.includes(WON.has(it.data.result) ? 'won' : 'lost')}, {id: 'scr', label: 'Scrutin', type: 'check', options: SCRUTIN, test: (it, v) => !v.length || v.includes(it.data.scrutin)}],
-        summary: l => ` · ${l.filter(e => WON.has(e.data.result)).length} gagnée${l.filter(e => WON.has(e.data.result)).length > 1 ? 's' : ''}`,
+        summary: l => ` · ${plural(l.filter(e => WON.has(e.data.result)).length, 'gagnée')}`,
         cardLine: it => [it.data.date, lab(RESULT, it.data.result)].filter(Boolean).join(' · ')});
     ART.define({...common, key: 'pol_party', icon: '👥', label: 'Parti, groupe, commission', many: 'Partis, groupes, commissions', tab: 'Partis',
         newData: () => ({pkind: 'parti'}),
@@ -123,9 +124,9 @@
         const st = C.store, l = sortY(st.of('pol_election')), won = l.filter(e => WON.has(e.data.result)).length, ctx = l[0] ? ART.ctx(st, l[0]) : null;
         const res = r => !r ? '' : PF.res(lab(RESULT, r), WON.has(r) ? 'w' : r === 'battu' ? 'l' : '');
         const body = l.length ? `<div class="ar-scroll"><table class="ar-t pf-t"><thead><tr><th>Date</th><th>Scrutin</th><th>Tour</th><th>Voix</th><th>%</th><th>Résultat</th><th>Adversaires</th><th>Affiche</th></tr></thead><tbody>${l.slice(0, 12).map(e => { const d = e.data;
-            return `<tr><td>${open(e, esc(d.date || e.year || '?'))}</td><td>${esc([lab(SCRUTIN, d.scrutin), U.placeTitle(d.place), d.constituency].filter(Boolean).join(' · '))}</td><td>${esc(lab(ROUND, d.round))}</td><td>${esc(String(d.votes || '').replace(/\B(?=(\d{3})+(?!\d))/g, ' '))}</td><td>${esc(String(d.pct || '').replace('.', ','))}</td><td>${res(d.result)}</td><td>${(d.opponents || []).slice(0, 3).map(o => U.personChip(o.who, '', ctx) || esc(o.party || '')).join(' ')}</td><td>${ART.mediaOf(d.poster) ? `<button type="button" class="ar-ochip is-link" data-ar-open="${e.id}"><i>🪧</i>${esc(PF.year(d.date) || 'affiche')}</button>` : ''}</td></tr>`; }).join('')}</tbody></table></div>${l.length > 12 ? `<p class="muted">… et ${l.length - 12} de plus (« Tout voir »).</p>` : ''}`
+            return `<tr><td>${open(e, esc(d.date || e.year || '?'))}</td><td>${esc([lab(SCRUTIN, d.scrutin), U.placeTitle(d.place), d.constituency].filter(Boolean).join(' · '))}</td><td>${esc(lab(ROUND, d.round))}</td><td>${esc(String(d.votes || '').replace(/\B(?=(\d{3})+(?!\d))/g, ' '))}</td><td>${esc(String(d.pct || '').replace('.', ','))}</td><td>${res(d.result)}</td><td>${(d.opponents || []).slice(0, 3).map(o => U.personChip(o.who, '', ctx) || esc(o.party || '')).join(' ')}</td><td>${ART.mediaOf(d.poster) ? `<button type="button" class="ar-ochip is-link" data-ar-open="${e.id}"><i>🪧</i>${esc(PF.year(d.date) || 'affiche')}</button>` : ''}</td></tr>`; }).join('')}</tbody></table></div>${l.length > 12 ? `<p class="muted">${i18n('… et {n} de plus (« Tout voir »).', {n: l.length - 12})}</p>` : ''}`
             : PF.muted('Aucune élection notée.');
-        return {body, count: l.length ? `${l.length} · ${won} gagnée${won > 1 ? 's' : ''}` : '', empty: !l.length, actions: `${PF.newBtn('pol_election')}${l.length ? PF.allBtn('pol_election') : ''}`};
+        return {body, count: l.length ? `${l.length} · ${plural(won, 'gagnée')}` : '', empty: !l.length, actions: `${PF.newBtn('pol_election')}${l.length ? PF.allBtn('pol_election') : ''}`};
     }};
     S.pol_texts = {icon: '📜', label: 'Textes, votes, propositions', w: '½', profile: P, render: C => {
         const l = sortY(C.store.of('pol_text')), votes = l.filter(t => t.data.tkind === 'vote').length;
@@ -143,7 +144,7 @@
     }};
     S.pol_speeches = {icon: '🗣', label: 'Discours', w: '⅓', profile: P, render: C => {
         const l = sortY(C.store.of('pol_speech')), rec = l.filter(s => ART.mediaOf(s.data.recording)).length;
-        return {body: l.length ? `<p>${esc(plural(l.length, 'discours', 'discours'))}${rec ? ` · dont ${rec} enregistré${rec > 1 ? 's' : ''}` : ''}</p>${l.slice(-3).map(s => `<div>${open(s, esc([s.data.date, s.title].filter(Boolean).join(' · ')))}</div>`).join('')}` : PF.muted('Aucun discours noté.'), count: l.length || '', empty: !l.length, actions: `${PF.newBtn('pol_speech', '＋')}${l.length ? PF.allBtn('pol_speech') : ''}`};
+        return {body: l.length ? `<p>${esc(plural(l.length, 'discours', 'discours'))}${rec ? ` · ${i18n('dont {x}', {x: plural(rec, 'enregistré')})}` : ''}</p>${l.slice(-3).map(s => `<div>${open(s, esc([s.data.date, s.title].filter(Boolean).join(' · ')))}</div>`).join('')}` : PF.muted('Aucun discours noté.'), count: l.length || '', empty: !l.length, actions: `${PF.newBtn('pol_speech', '＋')}${l.length ? PF.allBtn('pol_speech') : ''}`};
     }};
     S.pol_decorations = {icon: '🎖', label: 'Décorations', w: '⅓', profile: P, render: C => {
         if (!ext.awards?.listFor) return {body: PF.muted('Les décorations se notent dans le bloc commun « 🏆 Concours et récompenses ».'), empty: true};
@@ -196,7 +197,7 @@
         const links = [d.sycomore && {label: 'Base Sycomore (Assemblée)', icon: '🏛', url: /^\d+$/.test(d.sycomore) ? `https://www2.assemblee-nationale.fr/sycomore/fiche/(num_dept)/${d.sycomore}` : d.sycomore}, d.senat && {label: 'Sénat', icon: '🏛', url: d.senat},
             d.wikidata && {label: 'Wikidata', icon: '📖', url: /^Q\d+$/i.test(d.wikidata) ? `https://www.wikidata.org/wiki/${d.wikidata.toUpperCase()}` : d.wikidata}, ...(d.links || []).map(x => ({label: x.label, url: x.url, icon: '🌐'}))].filter(Boolean);
         return {eyebrow: `🏛 ${f ? 'FEMME' : 'HOMME'} POLITIQUE${fns.length ? ` · ${fns.join(', ')}` : ''}`.toLocaleUpperCase('fr-FR'),
-            summary: [l.filter(mElect).length && plural(l.filter(mElect).length, 'mandat électif', 'mandats électifs'), el.length && `${plural(el.length, 'élection')} (${won} gagnée${won > 1 ? 's' : ''})`, gov && plural(gov, 'portefeuille'), d.family || parties.join(' puis ')].filter(Boolean).join(' · '), links};
+            summary: [l.filter(mElect).length && plural(l.filter(mElect).length, 'mandat électif', 'mandats électifs'), el.length && `${plural(el.length, 'élection')} (${plural(won, 'gagnée')})`, gov && plural(gov, 'portefeuille'), d.family || parties.join(' puis ')].filter(Boolean).join(' · '), links};
     };
     const timeline = C => {
         const st = C.store, rows = new Map();
@@ -205,8 +206,8 @@
         const all = sortY(st.of('pol_party')), parties = bars(all.filter(p => (p.data.pkind || 'parti') === 'parti')), groups = bars(all.filter(p => (p.data.pkind || 'parti') !== 'parti'));
         return [...rows.values(), ...(parties.length ? [{label: 'Parti', bars: parties}] : []), ...(groups.length ? [{label: 'Groupes, commissions', bars: groups}] : [])];
     };
-    const NOTE = '<b>🗳 Fiche d’une élection</b> : date · scrutin (municipales, cantonales, régionales, législatives, sénatoriales, européennes, présidentielle, référendum, interne au parti) · circonscription 📍 · tour · inscrits, votants, voix, % · résultat · colistiers 👤 · adversaires 👤 avec leurs voix · profession de foi 📄 · affiche 🪧 · résultats par commune · presse 📰.';
-    const base = {group: 'public', kinds: ['pol_mandate', 'pol_election', 'pol_party', 'pol_text'], type: 'profile_politic', sections: null, models: M, timeline, hero, organizerNote: `Modèles de départ : <b>Élu local</b> (mandats, conseils, réalisations dans la commune), <b>Parlementaire</b>, <b>Ministre</b>, <b>Militant</b>, <b>Diplomate</b>, <b>Fonctionnaire d’autorité</b> (préfet…).<br><br>${NOTE}`};
+    const NOTE = i18n('<b>🗳 Fiche d’une élection</b> : date · scrutin (municipales, cantonales, régionales, législatives, sénatoriales, européennes, présidentielle, référendum, interne au parti) · circonscription 📍 · tour · inscrits, votants, voix, % · résultat · colistiers 👤 · adversaires 👤 avec leurs voix · profession de foi 📄 · affiche 🪧 · résultats par commune · presse 📰.');
+    const base = {group: 'public', kinds: ['pol_mandate', 'pol_election', 'pol_party', 'pol_text'], type: 'profile_politic', sections: null, models: M, timeline, hero, organizerNote: `${i18n('Modèles de départ : <b>Élu local</b> (mandats, conseils, réalisations dans la commune), <b>Parlementaire</b>, <b>Ministre</b>, <b>Militant</b>, <b>Diplomate</b>, <b>Fonctionnaire d’autorité</b> (préfet…).')}<br><br>${NOTE}`};
     ART.profiles.politic = {...base, key: 'politic', label: 'Homme / femme politique', short: 'Politique', icon: '🗳', color: '#055dff', desc: 'mandats, élections, partis, gouvernement, textes et votes', defaultModel: () => 'parlementaire'};
     ART.profiles.elu_local = {...base, key: 'elu_local', label: 'Élu local', icon: '🏛', color: '#055dff', type: 'profile_elu_local', uses: P, desc: 'maire, adjoint, conseiller : mandats, élections, réalisations', defaultModel: () => 'elu'};
 })();

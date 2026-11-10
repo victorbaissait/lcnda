@@ -59,8 +59,7 @@ function export_full_backup(PDO $pdo, string $password = ''): never
     $dbBytes = (int) @filesize(DB_PATH);
     $free = @disk_free_space($tmpDir);
     if ($free !== false && $free < ($mediaBytes + 2 * $dbBytes) * 1.1) {
-        json_response(['error' => 'Pas assez d’espace disque pour préparer la sauvegarde complète (il faut environ '
-            . round(($mediaBytes + 2 * $dbBytes) / 1048576) . ' Mo libres).'], 507);
+        json_response(['error' => i18n_t('Pas assez d’espace disque pour préparer la sauvegarde complète (il faut environ {n} Mo libres).', ['n' => round(($mediaBytes + 2 * $dbBytes) / 1048576)])], 507);
     }
     try {
         $pdo->exec('VACUUM main INTO ' . $pdo->quote($dbCopy));
@@ -260,7 +259,7 @@ function restore_package_upload(array $file): never
             }
             $free = @disk_free_space(is_dir(MEDIA_DIR) ? MEDIA_DIR : dirname($incoming));
             if ($free !== false && $declared > $free - 1073741824) { // garder au moins 1 Go libre
-                throw new RuntimeException('Pas assez de place sur le disque pour ouvrir cette sauvegarde (il faut environ ' . max(1, (int) round($declared / 1048576)) . ' Mo libres).');
+                throw new RuntimeException(i18n_t('Pas assez de place sur le disque pour ouvrir cette sauvegarde (il faut environ {n} Mo libres).', ['n' => max(1, (int) round($declared / 1048576))]));
             }
             $in = $zip->getStream((string) $zip->getNameIndex($dbEntry));
             $out = fopen($incoming, 'wb');

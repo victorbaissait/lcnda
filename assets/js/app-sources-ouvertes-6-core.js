@@ -34,6 +34,7 @@
     if (root) root.LCNDA_SOURCES_OUVERTES_6 = api;
 })(typeof window !== 'undefined' ? window : null, function () {
     'use strict';
+    const i18n = (s, v) => (typeof window !== 'undefined' && window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js (dans Node : le français)
     const CHECKED = '2026-11-09';
     const MENTION = 'Lu sur un site d’archives en ligne et recopié : à vérifier sur le document';
     const FREE_KEY = 'genealogie-sources-gratuites';
@@ -118,7 +119,7 @@
         if (!row) return null;
         const c = SHD_CENTRES[row[2]];
         return {port: row[0], dept: row[1], centre: row[2], shd: c.label, arr: c.arr,
-            text: `Quartier de ${row[0]} : ${c.arr}. Les registres des inscrits (matricules des gens de mer, rôles d’équipage) sont au ${c.label} — ou, pour beaucoup de quartiers, déjà versés aux Archives départementales (${row[1]}). Répartition indicative : vérifie sur le site.`};
+            text: i18n('Quartier de {q} : {arr}. Les registres des inscrits (matricules des gens de mer, rôles d’équipage) sont au {c} — ou, pour beaucoup de quartiers, déjà versés aux Archives départementales ({ad}). Répartition indicative : vérifie sur le site.', {q: row[0], arr: c.arr, c: c.label, ad: row[1]})};
     }
     const PORT_NAMES = PORTS.map(p => p[0]);
 
@@ -131,7 +132,7 @@
         if (!m) return null;
         const etude = /^\d+$/.test(m[1]) ? Number(m[1]) : fromRoman(m[1]); if (!etude) return null;
         const roman = toRoman(etude);
-        return {etude, roman, article: m[2] || '', cote: `MC/ET/${roman}${m[2] ? '/' + m[2] : ''}`, text: `Étude ${etude} (${roman})${m[2] ? `, article ${m[2]}` : ''} du Minutier central des notaires de Paris.`};
+        return {etude, roman, article: m[2] || '', cote: `MC/ET/${roman}${m[2] ? '/' + m[2] : ''}`, text: `Étude ${etude} (${roman})${m[2] ? i18n(', article {nm}', {nm: m[2]}) : ''} du Minutier central des notaires de Paris.`};
     }
 
     /* ═════ Rubriques : par pays, puis par thème (ordre du réglage et de la fenêtre « Chercher sur… ») ═════ */

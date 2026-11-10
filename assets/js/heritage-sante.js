@@ -26,6 +26,7 @@
     const get = (op, q = {}) => A().api('sante', {op, ...q});
     const post = async body => { const r = await A().api('sante_write', {}, {method: 'POST', body}); return r && typeof r === 'object' && 'result' in r ? r.result : r; };
     const plural = (n, w, many) => A().plural ? A().plural(n, w, many) : `${n} ${w}`;
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const years = r => (r.birth || r.death ? `${r.birth || '?'}–${r.death || ''}` : '');
     const legacyAv = p => { const g = p.gender === 'male' ? 'm' : p.gender === 'female' ? 'f' : 'u'; const ini = String(p.name || p.person || '?').split(/\s+/).filter(Boolean).map(w => w[0]).slice(0, 2).join('').toUpperCase(); return `<span class="pk-av ${g}" aria-hidden="true">${esc(ini || '?')}</span>`; };
     const avatar = (p, size = 34) => (UI()?.avatarOr ? UI().avatarOr({id: p.id || p.person_id, name: p.name || p.person, gender: p.gender}, size, legacyAv(p)) : legacyAv(p));
@@ -67,9 +68,9 @@
         const noted = new Set(d.records.map(r => r.world_id).filter(Boolean));
         const epi = epiOn() ? d.epidemics : [];
         host.innerHTML = `${rows.length ? UI().rowsHtml(rows.map(r => recordRow(r, ro))) : A().empty('Rien de noté sur sa santé pour l’instant', {icon: '🩺', action: ro ? null : {label: '＋ Ajouter une information', attrs: `data-sante-new="${pid}"`}})}
-            ${epi.length ? `<details class="h-sante-epi"${d.records.length ? '' : ' open'}><summary class="section-label">🦠 Épidémies de son vivant, là où ${d.person.gender === 'female' ? 'elle' : 'il'} a vécu <small class="muted">(${epi.length})</small></summary>
-                <p class="ui-hint">D’après « 🌍 Le monde autour ». On ne sait pas si ${esc(d.person.first || 'cette personne')} a été malade : « ＋ Noter » la garde comme épidémie traversée.</p>
-                <ul class="h-sante-epi-list">${epi.map(e => `<li><b>${esc(e.title)}</b> <small class="muted">${e.from}${e.to > e.from ? '–' + e.to : ''}${e.local ? ' · dans sa région' : ''}</small>${e.phrase ? `<br><small>${esc(e.phrase)}</small>` : ''}${e.hint ? `<br><small class="h-sante-hint">${esc(e.hint)}</small>` : ''}
+            ${epi.length ? `<details class="h-sante-epi"${d.records.length ? '' : ' open'}><summary class="section-label">${d.person.gender === 'female' ? i18n('🦠 Épidémies de son vivant, là où elle a vécu') : i18n('🦠 Épidémies de son vivant, là où il a vécu')} <small class="muted">(${epi.length})</small></summary>
+                <p class="ui-hint">${i18n('D’après « 🌍 Le monde autour ». On ne sait pas si {nm} a été malade : « ＋ Noter » la garde comme épidémie traversée.', {nm: esc(d.person.first || i18n('cette personne'))})}</p>
+                <ul class="h-sante-epi-list">${epi.map(e => `<li><b>${esc(e.title)}</b> <small class="muted">${e.from}${e.to > e.from ? '–' + e.to : ''}${e.local ? ' · ' + i18n('dans sa région') : ''}</small>${e.phrase ? `<br><small>${esc(e.phrase)}</small>` : ''}${e.hint ? `<br><small class="h-sante-hint">${esc(e.hint)}</small>` : ''}
                     <span class="h-sante-epi-act">${noted.has(e.id) ? UI().badge('Noté', 'green') : ro ? '' : `<button type="button" class="button small secondary" data-sante-epi="${esc(e.id)}">＋ Noter</button>`}</span></li>`).join('')}</ul></details>` : ''}`;
     }
     new MutationObserver(() => { document.querySelectorAll('[data-sante-host]:not([data-filled])').forEach(h => fillHost(h)); }).observe(document.documentElement, {childList: true, subtree: true});
@@ -96,7 +97,7 @@
             body: `<div class="h-sante-form">${pidNow ? '' : `<div><span class="pk-lab">La personne</span>${P().pickerField({name: 'person_id', kind: 'person', animals: false})}</div>`}
                 <div><span class="pk-lab">Sorte</span>${seg}</div>
                 <label>Ce que c’était<input name="label" maxlength="200" required value="${esc(r.label)}" placeholder="phtisie, diabète, sourd de naissance, grippe espagnole…" autocomplete="off"></label>
-                ${sugg.length ? `<div class="h-sante-sugg"><small class="muted">Déjà noté dans la famille :</small> ${sugg.map(s => `<button type="button" class="sv-tag" data-sante-label="${esc(s.label)}" title="${esc(plural(s.people, 'personne'))}">${esc(s.label)} <small>${s.people}</small></button>`).join('')}</div>` : ''}
+                ${sugg.length ? `<div class="h-sante-sugg"><small class="muted">${i18n('Déjà noté dans la famille :')}</small> ${sugg.map(s => `<button type="button" class="sv-tag" data-sante-label="${esc(s.label)}" title="${esc(plural(s.people, 'personne'))}">${esc(s.label)} <small>${s.people}</small></button>`).join('')}</div>` : ''}
                 <label>Quand<input name="date_text" data-ui-date maxlength="120" value="${esc(r.date_text)}" placeholder="vers 1890, 1918, entre 1880 et 1885…"></label>
                 <div class="h-sante-2"><div><span class="pk-lab">Source</span>${P().pickerField({name: 'source_id', kind: 'source', value: r.source_id || null})}</div><label>Page, cote, passage<input name="citation" maxlength="300" value="${esc(r.citation)}" placeholder="acte n° 12, lettre de 1921…"></label></div>
                 <label>Note<textarea name="note" rows="3" maxlength="4000" placeholder="Ce que la famille en dit, ce qu’on a lu…">${esc(r.note)}</textarea></label>
@@ -125,7 +126,7 @@
     async function del(row) {
         let r; try { r = await post({op: 'delete', id: row.id}); } catch (e) { A().toast(e.message, 'error'); return false; }
         await refresh();
-        A().undoToast(`Information de santé supprimée : « ${row.label} »`, {undo: async () => { await post({op: 'restore', row: r.row}); await refresh(); }, redo: async () => { await post({op: 'delete', id: row.id}); await refresh(); }});
+        A().undoToast(i18n('Information de santé supprimée : « {label} »', {label: row.label}), {undo: async () => { await post({op: 'restore', row: r.row}); await refresh(); }, redo: async () => { await post({op: 'delete', id: row.id}); await refresh(); }});
         return true;
     }
 
@@ -196,7 +197,7 @@
             // les plus notées : un nombre de personnes, jamais un pourcentage
             const by = new Map(); rows.forEach(r => { const k = fold(r.label); const o = by.get(k) || {label: r.label, people: new Set()}; o.people.add(r.person_id); by.set(k, o); });
             const top = [...by.values()].filter(o => o.people.size > 1).sort((a, b) => b.people.size - a.people.size).slice(0, 6);
-            body.querySelector('[data-sante-sum]').innerHTML = top.length ? `<p class="h-sante-top"><b>Le plus souvent noté :</b> ${top.map(o => `<button type="button" class="ui-chip h-sante-chip" data-sante-see="${esc(o.label)}" title="Voir la répartition dans les branches">${esc(o.label)} <small>${esc(plural(o.people.size, 'personne'))}</small></button>`).join(' ')}</p>` : '';
+            body.querySelector('[data-sante-sum]').innerHTML = top.length ? `<p class="h-sante-top"><b>${i18n('Le plus souvent noté :')}</b> ${top.map(o => `<button type="button" class="ui-chip h-sante-chip" data-sante-see="${esc(o.label)}" title="Voir la répartition dans les branches">${esc(o.label)} <small>${esc(plural(o.people.size, 'personne'))}</small></button>`).join(' ')}</p>` : '';
             const box = body.querySelector('[data-sante-list]');
             box.innerHTML = rows.length ? UI().itemsHtml(st.view, rows.map(r => recordRow(r, kiosk(), true))) : `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔍</span><span class="empty-line-text">Aucune ligne ne correspond.</span></p>`;
         }
@@ -228,7 +229,7 @@
         }
         const root = by.get(1);
         out += `<g class="h-sante-seg is-root ${cls(root)}"${root ? ` data-h-person="${root.id}" tabindex="0" role="button"` : ''}><title>${esc(tip(root))}</title><circle cx="${f(cx)}" cy="${f(cy)}" r="${R0 - 4}"/><text x="${f(cx)}" y="${f(cy)}">${esc(String(root?.first || root?.name || '').slice(0, 12))}</text></g>`;
-        return `<svg class="h-sante-fan" viewBox="0 0 ${f(W)} ${f(H)}" role="img" aria-label="Éventail des ancêtres de ${esc(root?.name || '')}">${out}</svg>`;
+        return `<svg class="h-sante-fan" viewBox="0 0 ${f(W)} ${f(H)}" role="img" aria-label="${esc(i18n('Éventail des ancêtres de {nm}', {nm: root?.name || ''}))}">${out}</svg>`;
     }
     const pill = p => `<button type="button" class="h-sante-pill" data-h-person="${p.id}" title="${esc((p.hits || []).join(', '))}">${avatar(p, 22)}<b>${esc(p.name)}</b>${years(p) ? `<small>${esc(years(p))}</small>` : ''}${p.to_check ? UI().badge('À vérifier', 'yellow') : ''}</button>`;
     async function drawBranches(body, token) {
@@ -258,13 +259,13 @@
             if (my !== seq || (token !== undefined && A().state && token !== A().state.workspaceToken && A().state.module !== 'listes')) return;
             if (!d.visible) return;
             const lab = d.label, known = d.nodes.length;
-            const sum = lab ? `<p class="h-sante-sum"><b>${esc(plural(d.total, 'personne'))}</b> avec « ${esc(lab)} » parmi ${esc(plural(known, 'personne connue', 'personnes connues'))} sur ${d.gens} générations.</p>`
+            const sum = lab ? `<p class="h-sante-sum">${i18n('<b>{count}</b> avec « {label} » parmi {known} sur {gens} générations.', {count: esc(plural(d.total, 'personne')), label: esc(lab), known: esc(plural(known, 'personne connue', 'personnes connues')), gens: d.gens})}</p>`
                 : '<p class="h-sante-sum">Choisis une maladie pour la voir en couleur. En gris : ce qui est noté d’autre.</p>';
             const legend = `<p class="h-sante-legend"><span><i class="is-hit"></i>${lab ? `« ${esc(lab)} »` : 'La maladie choisie'}</span><span><i class="is-other"></i>Autre chose de noté</span><span><i class="is-known"></i>Rien de noté</span><span><i class="is-empty"></i>Ancêtre pas encore trouvé</span></p>`;
             if (branchState.view === 'fan') { out.innerHTML = `${sum}${legend}<div class="h-sante-fan-wrap">${fanSvg(d)}</div>`; return; }
             const side = b => `<section class="h-sante-side"><h4>${esc(b.title)}</h4><p class="muted">${b.head ? `${pill(b.head)}` : 'Pas encore trouvé'} · ${esc(plural(b.known, 'personne connue', 'personnes connues'))}</p>
-                ${lab ? (b.matches.length ? `<p><b>${esc(plural(b.matches.length, 'personne'))}</b> avec « ${esc(lab)} » :</p><div class="h-sante-pills">${b.matches.map(pill).join('')}</div>` : `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">·</span><span class="empty-line-text">Personne avec « ${esc(lab)} » de ce côté.</span></p>`) : ''}</section>`;
-            out.innerHTML = `${sum}${d.center.length ? `<div class="h-sante-center"><b>Au centre${d.gens >= 3 ? ' et chez ses parents' : ''} :</b> <div class="h-sante-pills">${d.center.map(pill).join('')}</div></div>` : ''}<div class="h-sante-sides">${d.branches.map(side).join('')}</div>`;
+                ${lab ? (b.matches.length ? `<p><b>${esc(plural(b.matches.length, 'personne'))}</b> avec « ${esc(lab)} » :</p><div class="h-sante-pills">${b.matches.map(pill).join('')}</div>` : `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">·</span><span class="empty-line-text">${i18n('Personne avec « {label} » de ce côté.', {label: esc(lab)})}</span></p>`) : ''}</section>`;
+            out.innerHTML = `${sum}${d.center.length ? `<div class="h-sante-center"><b>${d.gens >= 3 ? i18n('Au centre et chez ses parents :') : i18n('Au centre :')}</b> <div class="h-sante-pills">${d.center.map(pill).join('')}</div></div>` : ''}<div class="h-sante-sides">${d.branches.map(side).join('')}</div>`;
         }
         paint();
     }

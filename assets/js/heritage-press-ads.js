@@ -8,6 +8,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const A = () => window.LCNDA_APP;
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     ext.lists = ext.lists || {};
@@ -40,18 +41,18 @@
         const unitName = {word: 'mot', line: 'ligne', char: 'caractère', fixed: 'forfait'}[r.unit];
         const member = opts.includes('member') && num(r.member_price) !== null, p = member ? num(r.member_price) : (num(r.price) ?? 0);
         let billable = units;
-        if (num(r.min_units) && billable < num(r.min_units)) { out.push([`Minimum : ${num(r.min_units)} ${unitName}s comptés (tu en as ${units})`, null]); billable = num(r.min_units); }
+        if (num(r.min_units) && billable < num(r.min_units)) { out.push([i18n('Minimum : {count} comptés (tu en as {n})', {count: A().plural(num(r.min_units), unitName, unitName + 's'), n: units}), null]); billable = num(r.min_units); }
         const free = Math.min(billable, num(r.free_units) || 0);
         if (free) out.push([`${free} premier${free > 1 ? 's' : ''} ${unitName}${free > 1 ? 's' : ''} gratuit${free > 1 ? 's' : ''}`, null]);
         let one = r.unit === 'fixed' ? p : (billable - free) * p;
-        out.push([r.unit === 'fixed' ? `Forfait${member ? ' (adhérent)' : ''}` : `${billable - free} ${unitName}${billable - free > 1 ? 's' : ''} × ${euro(p)}${member ? ' (adhérent)' : ''}`, one]);
+        out.push([r.unit === 'fixed' ? `${i18n('Forfait')}${member ? ' ' + i18n('(adhérent)') : ''}` : `${A().plural(billable - free, unitName, unitName + 's')} × ${euro(p)}${member ? ' ' + i18n('(adhérent)') : ''}`, one]);
         if (num(r.fixed_fee)) { out.push(['Frais fixes', num(r.fixed_fee)]); one += num(r.fixed_fee); }
-        OPTIONS.forEach(([k, l, key]) => { if (key && opts.includes(k)) { const v = num(r[key]); if (v === null) warn.push(`Prix de l’option « ${l} » pas indiqué dans les règles.`); else { out.push([l, v]); one += v; } } });
+        OPTIONS.forEach(([k, l, key]) => { if (key && opts.includes(k)) { const v = num(r[key]); if (v === null) warn.push(i18n('Prix de l’option « {nm} » pas indiqué dans les règles.', {nm: l})); else { out.push([l, v]); one += v; } } });
         if (num(r.min_price) && one < num(r.min_price)) { out.push([`Prix minimum d’une parution`, num(r.min_price) - one]); one = num(r.min_price); }
         let total = one; const n = Math.max(1, Math.round(insertions || 1));
-        if (n > 1) { total = one * n; out.push([`${n} parutions × ${euro(one)}`, null]); if (num(r.discount_from) && n >= num(r.discount_from) && num(r.discount_pct)) { const d = total * num(r.discount_pct) / 100; out.push([`Remise ${num(r.discount_pct)} % (dès ${num(r.discount_from)} parutions)`, -d]); total -= d; } }
+        if (n > 1) { total = one * n; out.push([`${n} parutions × ${euro(one)}`, null]); if (num(r.discount_from) && n >= num(r.discount_from) && num(r.discount_pct)) { const d = total * num(r.discount_pct) / 100; out.push([i18n('Remise {nm} % (dès {x2} parutions)', {nm: num(r.discount_pct), x2: num(r.discount_from)}), -d]); total -= d; } }
         if (num(r.tax_pct) && r.tax_included !== '1') { const t = total * num(r.tax_pct) / 100; out.push([`TVA ${num(r.tax_pct)} %`, t]); total += t; }
-        if (num(r.max_units) && units > num(r.max_units)) warn.push(`Trop long : ${units} ${unitName}s pour ${num(r.max_units)} au maximum.`);
+        if (num(r.max_units) && units > num(r.max_units)) warn.push(i18n('Trop long : {count} pour {max} au maximum.', {count: A().plural(units, unitName, unitName + 's'), max: num(r.max_units)}));
         return {total, lines: out, warn, c};
     }
 
@@ -127,7 +128,7 @@
         page.querySelector('[data-pa-ocr]').addEventListener('click', () => rulesDialog(null, {ocrNow: true}));
         page.addEventListener('click', e => { const ad = e.target.closest('[data-pa-ad]'); if (ad) return adDialog(D.ads.find(a => a.id === Number(ad.dataset.paAd))); const ru = e.target.closest('[data-pa-rules]'); if (ru) rulesDialog(D.rules.find(r => r.id === Number(ru.dataset.paRules))); });
     }
-    const summary = r => { if (!r?.unit) return 'tarif pas indiqué'; const u = {word: 'le mot', line: 'la ligne', char: 'le caractère', fixed: 'forfait'}[r.unit]; return [`${num(r.price) !== null ? euro(num(r.price)) : '?'} ${u}`, r.min_units && `minimum ${r.min_units} ${{word: 'mots', line: 'lignes', char: 'caractères'}[r.unit] || ''}`, r.free_units && `${r.free_units} premiers gratuits`, r.member_price && `adhérent ${euro(num(r.member_price) || 0)}`].filter(Boolean).join(' · '); };
+    const summary = r => { if (!r?.unit) return 'tarif pas indiqué'; const u = {word: 'le mot', line: 'la ligne', char: 'le caractère', fixed: 'forfait'}[r.unit]; return [`${num(r.price) !== null ? euro(num(r.price)) : '?'} ${u}`, r.min_units && `minimum ${r.min_units} ${{word: 'mots', line: 'lignes', char: 'caractères'}[r.unit] || ''}`, r.free_units && i18n('{nm} premiers gratuits', {nm: r.free_units}), r.member_price && `adhérent ${euro(num(r.member_price) || 0)}`].filter(Boolean).join(' · '); };
     const reload = async () => { D = await api('press_ads'); if (S().module === 'listes' && S().listType === 'press_ads') draw(); };
 
     /* ─── Les règles d'un journal ─── */
@@ -150,10 +151,10 @@
                 <div class="form-grid h-pa-rules">${RFIELDS.map(input).join('')}<label class="span-2">Notes<textarea name="notes" rows="2">${esc(r?.notes || '')}</textarea></label></div>`,
             onOpen: d => {
                 const state = d.querySelector('[data-pa-ocrstate]'), srcBox = d.querySelector('[data-pa-srcbox]');
-                const apply = text => { const found = parseRules(text); let n = 0; Object.entries(found).forEach(([k, val]) => { const el = d.querySelector(`[name="r_${k}"]`); if (!el) return; el.value = val; el.classList.add('is-ocr'); n++; }); state.textContent = n ? `${n} règle${n > 1 ? 's' : ''} reconnue${n > 1 ? 's' : ''} : vérifie les cases en jaune.` : 'Aucune règle reconnue : complète à la main (le texte lu est ci-dessous).'; };
+                const apply = text => { const found = parseRules(text); let n = 0; Object.entries(found).forEach(([k, val]) => { const el = d.querySelector(`[name="r_${k}"]`); if (!el) return; el.value = val; el.classList.add('is-ocr'); n++; }); state.textContent = n ? i18n('{count} : vérifie les cases en jaune.', {count: A().plural(n, 'règle reconnue', 'règles reconnues')}) : 'Aucune règle reconnue : complète à la main (le texte lu est ci-dessous).'; };
                 const read = async file => {
                     state.textContent = 'Lecture de la capture…';
-                    try { const T = await ocr(); const res = await T.recognize(file, 'fra', {logger: m => { if (m.status === 'recognizing text') state.textContent = `Lecture… ${Math.round((m.progress || 0) * 100)} %`; }}); const text = res?.data?.text || '';
+                    try { const T = await ocr(); const res = await T.recognize(file, 'fra', {logger: m => { if (m.status === 'recognizing text') state.textContent = i18n('Lecture… {nm} %', {nm: Math.round((m.progress || 0) * 100)}); }}); const text = res?.data?.text || '';
                         d.querySelector('[name=source_text]').value = text; srcBox.open = true; apply(text);
                         d._capture = file; } catch (err) { state.textContent = err.message; }
                 };
@@ -168,7 +169,7 @@
                 await post('save_press_ad_rules', {id: r?.id || 0, name: form.elements.name.value, periodical_id: Number(form.elements.periodical_id.value) || 0, rules, source_text: form.elements.source_text.value, notes: form.elements.notes.value});
                 toast('Règles enregistrées.'); await reload();
             },
-            onDelete: r ? async () => { if (!await A().confirmBox(`Supprimer les règles « ${r.name} » ? (les annonces restent)`, {title: 'Supprimer les règles', okLabel: 'Supprimer les règles'})) return false; await post('delete_press_item', {what: 'rules', id: r.id}); await reload(); } : null});
+            onDelete: r ? async () => { if (!await A().confirmBox(i18n('Supprimer les règles « {nm} » ? (les annonces restent)', {nm: r.name}), {title: 'Supprimer les règles', okLabel: 'Supprimer les règles'})) return false; await post('delete_press_item', {what: 'rules', id: r.id}); await reload(); } : null});
         return dl;
     }
 
@@ -210,7 +211,7 @@
                     const pr = price(f.elements.body.value, r, o, Number(f.elements.insertions.value) || 1);
                     dl.querySelector('[data-pa-calc]').innerHTML = `<div class="h-pa-counts"><span><b>${pr.c.words}</b> mots</span><span><b>${pr.c.chars}</b> caractères${r.count_spaces === '0' ? ' (sans espaces)' : ''}</span><span><b>${pr.c.lines}</b> lignes de ${pr.c.cpl}</span></div>
                         ${pr.lines.length ? `<table class="h-pa-bill">${pr.lines.map(([l, v]) => `<tr><td>${esc(l)}</td><td>${v === null ? '' : esc(euro(v))}</td></tr>`).join('')}<tr class="is-total"><td>Total</td><td>${pr.total === null ? '—' : esc(euro(pr.total))}</td></tr></table>` : ''}
-                        ${pr.warn.map(w => `<p class="h-offsite-sentence is-warn">⚠️ ${esc(w)}</p>`).join('')}${r.deadline ? `<p class="muted">📅 À envoyer avant : ${esc(r.deadline)}${r.send_to ? ` · ✉️ ${esc(r.send_to)}` : ''}</p>` : ''}${r.other ? `<details><summary>Autres règles du journal</summary><p>${esc(r.other)}</p></details>` : ''}`;
+                        ${pr.warn.map(w => `<p class="h-offsite-sentence is-warn">⚠️ ${esc(w)}</p>`).join('')}${r.deadline ? `<p class="muted">${i18n('📅 À envoyer avant : {dt}', {dt: esc(r.deadline)})}${r.send_to ? ` · ✉️ ${esc(r.send_to)}` : ''}</p>` : ''}${r.other ? `<details><summary>Autres règles du journal</summary><p>${esc(r.other)}</p></details>` : ''}`;
                     dl._estimate = pr.total;
                 };
                 dl.addEventListener('input', calc); dl.addEventListener('change', calc); calc();
@@ -227,7 +228,7 @@
                 if (ext.uploadMediaEditor) await ext.uploadMediaEditor(form, 'press_ad', Number((r.result || r).id));
                 toast('Annonce enregistrée.'); await reload();
             },
-            onDelete: ad ? async () => { if (!await A().confirmBox(`Supprimer « ${ad.title} » ?`, {title: 'Supprimer l’annonce', okLabel: 'Supprimer l’annonce'})) return false; await post('delete_press_item', {what: 'ad', id: ad.id}); await reload(); } : null});
+            onDelete: ad ? async () => { if (!await A().confirmBox(i18n('Supprimer « {nm} » ?', {nm: ad.title}), {title: 'Supprimer l’annonce', okLabel: 'Supprimer l’annonce'})) return false; await post('delete_press_item', {what: 'ad', id: ad.id}); await reload(); } : null});
     }
     function bindLinks(root) {
         const box = root.querySelector('[data-pr-links]'); if (!box) return;

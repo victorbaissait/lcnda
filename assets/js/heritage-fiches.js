@@ -6,6 +6,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const A = () => window.LCNDA_APP;
     const esc = v => A().escapeHtml(v ?? '');
@@ -137,7 +138,7 @@
                     e.preventDefault(); e.stopPropagation();
                     const id = Number(b.dataset.fiTpledit || b.dataset.fiTpldel), t = mine.find(x => x.id === id);
                     if (b.dataset.fiTpledit) { d.close(); S().ficheId = id; editing = true; return A().setModule('fiches'); }
-                    if (!await A().confirmBox(`Supprimer le modèle « ${t?.title} » ? (les fiches déjà créées avec lui ne changent pas)`, {title: 'Supprimer le modèle', okLabel: 'Supprimer le modèle'})) return;
+                    if (!await A().confirmBox(i18n('Supprimer le modèle « {nm} » ? (les fiches déjà créées avec lui ne changent pas)', {nm: t?.title}), {title: 'Supprimer le modèle', okLabel: 'Supprimer le modèle'})) return;
                     try { await post('delete_topic_sheet', {id}); mine = mine.filter(x => x.id !== id); const wasMine = d.querySelector('input[name="tpl"]:checked')?.value === 'u' + id; d.querySelector('[data-fi-mine]').innerHTML = mineHtml(); if (wasMine) d.querySelector('input[name="tpl"]').checked = true; toast('Modèle supprimé.'); } catch (err) { toast(err.message, 'error'); }
                 });
             },
@@ -233,14 +234,14 @@
             if (d.fiPrint !== undefined) return printSheet();
             if (d.fiCopy !== undefined) return duplicateSheet();
             if (d.fiUse !== undefined) { const r = await post('save_topic_sheet', {title: 'Nouvelle fiche', subtitle: '', icon: c.icon, color: c.color, blocks: emptyBlocks(c.blocks, true)}); toast('Fiche créée avec ce modèle : change son titre dans « ⚙️ Titre, icône, couleur ».'); S().ficheId = Number(r.result?.id || r.id); editing = true; return A().setModule('fiches'); }
-            if (d.fiDelete !== undefined) { if (!await A().confirmBox(c.template ? `Supprimer le modèle « ${c.title} » ? (les fiches déjà créées avec lui ne changent pas)` : `Supprimer la fiche « ${c.title} » ? (les images restent dans les médias de l’app)`, {title: c.template ? 'Supprimer le modèle' : 'Supprimer la fiche', okLabel: c.template ? 'Supprimer le modèle' : 'Supprimer la fiche'})) return; await post('delete_topic_sheet', {id: c.id}); toast(c.template ? 'Modèle supprimé.' : 'Fiche supprimée.'); S().ficheId = 0; return A().setModule('fiches'); }
+            if (d.fiDelete !== undefined) { if (!await A().confirmBox(c.template ? i18n('Supprimer le modèle « {nm} » ? (les fiches déjà créées avec lui ne changent pas)', {nm: c.title}) : i18n('Supprimer la fiche « {nm} » ? (les images restent dans les médias de l’app)', {nm: c.title}), {title: c.template ? 'Supprimer le modèle' : 'Supprimer la fiche', okLabel: c.template ? 'Supprimer le modèle' : 'Supprimer la fiche'})) return; await post('delete_topic_sheet', {id: c.id}); toast(c.template ? 'Modèle supprimé.' : 'Fiche supprimée.'); S().ficheId = 0; return A().setModule('fiches'); }
             if (d.fiUp !== undefined && i > 0) { [c.blocks[i - 1], c.blocks[i]] = [c.blocks[i], c.blocks[i - 1]]; await save(); return renderSheet(token); }
             if (d.fiDown !== undefined && i < c.blocks.length - 1) { [c.blocks[i + 1], c.blocks[i]] = [c.blocks[i], c.blocks[i + 1]]; await save(); return renderSheet(token); }
             if (d.fiDup !== undefined) { const b = JSON.parse(JSON.stringify(c.blocks[i])); b.id = uid(); c.blocks.splice(i + 1, 0, b); await save(); return renderSheet(token); }
             if (d.fiDel !== undefined) { // H7 : supprimé tout de suite, « ↶ Annuler » le remet à sa place
                 const b = c.blocks[i]; c.blocks.splice(i, 1); await save();
                 const same = () => { if (cur !== c) throw new Error('la fiche n’est plus ouverte'); };
-                A().undoToast?.(`Bloc « ${titleOf(b)} » supprimé`, {undo: async () => { same(); c.blocks.splice(Math.min(i, c.blocks.length), 0, b); await save(); if (S().module === 'fiches') refresh(); }, redo: async () => { same(); const k = c.blocks.indexOf(b); if (k >= 0) { c.blocks.splice(k, 1); await save(); } if (S().module === 'fiches') refresh(); }});
+                A().undoToast?.(i18n('Bloc « {nm} » supprimé', {nm: titleOf(b)}), {undo: async () => { same(); c.blocks.splice(Math.min(i, c.blocks.length), 0, b); await save(); if (S().module === 'fiches') refresh(); }, redo: async () => { same(); const k = c.blocks.indexOf(b); if (k >= 0) { c.blocks.splice(k, 1); await save(); } if (S().module === 'fiches') refresh(); }});
                 return refresh(); }
             if (d.fiEdit !== undefined) return editBlock(i, null, t.closest('[data-fi-block]'));
         });
@@ -319,7 +320,7 @@
         // un nouveau bloc s'ouvre lui aussi sur place : une carte vide en bas de la fiche, retournée sur ses réglages
         if (fresh && !host) {
             const grid = A().$('#workspace .h-fi-grid');
-            if (grid) { grid.querySelector(':scope > .empty-state, :scope > .empty')?.remove(); grid.insertAdjacentHTML('beforeend', A().card(cur.blocks.length + 1, `${ic} Nouveau bloc`, '', '', 'span-' + (b.type === 'divider' ? '12' : (b.width || '12'))).replace('<section class="card', '<section data-fi-new class="h-fi-block card')); host = grid.lastElementChild; host.scrollIntoView({block: 'center', behavior: 'smooth'}); }
+            if (grid) { grid.querySelector(':scope > .empty-state, :scope > .empty')?.remove(); grid.insertAdjacentHTML('beforeend', A().card(cur.blocks.length + 1, `${ic} ${i18n("Nouveau bloc")}`, '', '', 'span-' + (b.type === 'divider' ? '12' : (b.width || '12'))).replace('<section class="card', '<section data-fi-new class="h-fi-block card')); host = grid.lastElementChild; host.scrollIntoView({block: 'center', behavior: 'smooth'}); }
         }
         const target = host ? (host.querySelector(':scope > .card-body') || host) : null;
         if (target) { // sur place, comme le verso d'un widget
@@ -390,7 +391,7 @@
             const words = fold(q).split(/\s+/).filter(Boolean), list0 = sheets.filter(x => words.every(w => fold(`${x.title} ${x.subtitle || ''}`).includes(w)) && (!labId || (x.labels || []).some(l => Number(l.id) === labId)));
             const list = UI?.sortItems ? UI.sortItems(list0, sort, {name: x => x.title, date: x => x.updated_at}) : list0;
             bar?.setCount(`${A().plural(list.length, 'fiche')}${list.length !== sheets.length ? ` sur ${sheets.length}` : ''}`);
-            if (!list.length) { box.innerHTML = A().emptyState({icon: '🔎', text: q.trim() ? `Aucune fiche pour « ${q.trim()} »` : 'Aucune fiche ne correspond', hint: q.trim() ? 'Vérifie l’orthographe, ou cherche un autre mot (titre, sous-titre).' : 'Retire un filtre.'}); return; }
+            if (!list.length) { box.innerHTML = A().emptyState({icon: '🔎', text: q.trim() ? i18n('Aucune fiche pour « {nm} »', {nm: q.trim()}) : 'Aucune fiche ne correspond', hint: q.trim() ? 'Vérifie l’orthographe, ou cherche un autre mot (titre, sous-titre).' : 'Retire un filtre.'}); return; }
             box.innerHTML = view === 'cards' && UI?.cardsHtml
                 ? UI.cardsHtml(list.map(x => ({thumb: `<span class="ui-card-ico">${esc(x.icon || '📒')}</span>`, name: x.title || 'Fiche sans titre', open: `data-fi-listopen="${x.id}"`, lines: [x.subtitle, `${x.blocks} bloc${x.blocks > 1 ? 's' : ''}`], when: x.updated_at, whenLabel: 'Modifiée'})))
                 : `<div class="data-table-wrap"><table class="data-table"><thead><tr><th>Fiche</th><th>Sous-titre</th><th>Blocs</th><th>Modifiée</th></tr></thead><tbody>${list.map(s => `<tr><td><button type="button" class="table-link" data-fi-listopen="${s.id}">${esc((s.icon || '📒') + ' ' + s.title)}</button></td><td>${esc(s.subtitle || '')}</td><td>${s.blocks}</td><td>${fmtDate(s.updated_at)}</td></tr>`).join('')}</tbody></table></div>`;

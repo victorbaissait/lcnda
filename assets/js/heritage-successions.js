@@ -28,6 +28,7 @@
     const post = (action, body) => A().api(action, {}, {method: 'POST', body});
     const toast = (m, k, o) => A().toast(m, k, o);
     const plural = (n, w, many) => (A().plural ? A().plural(n, w, many) : `${n} ${w}`);
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const fold = s => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
     const res = r => (r && r.result !== undefined ? r.result : r);
     const KEY = 'listes:successions';
@@ -84,14 +85,14 @@
         try {
             if (AU?.readSum && AU.worth) {
                 const sum = AU.readSum(sumText(amount, unit, text)); if (!sum?.ok) return '';
-                const w = AU.worth(sum, y); return w && Number.isFinite(w.euros) && w.euros > 0 ? `${AU.euroText(w.euros)} d’aujourd’hui (ordre de grandeur)` : '';
+                const w = AU.worth(sum, y); return w && Number.isFinite(w.euros) && w.euros > 0 ? i18n('{amount} d’aujourd’hui (ordre de grandeur)', {amount: AU.euroText(w.euros)}) : '';
             }
             const W = ext.tresorMoney?.worth, n = Number(amount);
             if (!W || !(n > 0) || !unit) return '';
             const w = W(unit === 'ecu' ? n * 3 : n, unit === 'ecu' || unit === 'franc' ? 'livre' : unit, y);
             if (!w || !Number.isFinite(w.euros) || w.euros <= 0) return '';
             const e = w.euros >= 100 ? Math.round(w.euros / (w.euros >= 10000 ? 100 : 1)) * (w.euros >= 10000 ? 100 : 1) : Math.round(w.euros * 100) / 100;
-            return `≈ ${e.toLocaleString('fr-FR')} € d’aujourd’hui (ordre de grandeur)`;
+            return i18n('≈ {amount} € d’aujourd’hui (ordre de grandeur)', {amount: Number(e)});
         } catch (_) { return ''; }
     }
     function chip(p, {cls = ''} = {}) {
@@ -162,7 +163,7 @@
         const opt = (list, v) => list.map(([k, l]) => `<option value="${esc(k)}"${k === v ? ' selected' : ''}>${esc(l)}</option>`).join('');
         return new Promise(resolve => {
             let saved = null;
-            const dlg = ext.openDialog({eyebrow: 'HÉRITAGES ET SUCCESSIONS', title: isNew ? 'Nouvel acte' : `Modifier « ${titleOf(d)} »`, wide: true, submitLabel: isNew ? 'Créer l’acte' : 'Enregistrer',
+            const dlg = ext.openDialog({eyebrow: 'HÉRITAGES ET SUCCESSIONS', title: isNew ? 'Nouvel acte' : i18n('Modifier « {title} »', {title: titleOf(d)}), wide: true, submitLabel: isNew ? 'Créer l’acte' : 'Enregistrer',
                 body: `<div class="sc-edit">
                     <div class="form-grid">
                         <label>Sorte d’acte<select name="kind">${opt(Object.entries(KINDS).map(([k, v]) => [k, `${v[0]} ${v[1]}`]), d.kind)}</select></label>
@@ -176,7 +177,7 @@
                         <div><span class="pk-lab">Inventaire après décès relié <small class="muted">(facultatif)</small></span><div data-sc-f="probate">${P().pickerField({name: 'sc_probate', hiddenName: false, kind: 'probate', value: d.probate_id ? {id: d.probate_id, title: d.probate_title} : null})}</div></div>
                     </div>
                     <h4 class="sc-h">👥 Les personnes</h4>
-                    <p class="ui-hint">⭐ La personne principale : <b data-sc-giver>${esc(kindOf(d.kind)[2])}</b>. ★ ceux qui reçoivent ; ☆ les autres (témoins, tuteur…).</p>
+                    <p class="ui-hint">${i18n('⭐ La personne principale :')} <b data-sc-giver>${esc(i18n(kindOf(d.kind)[2]))}</b>. ${i18n('★ ceux qui reçoivent ; ☆ les autres (témoins, tuteur…).')}</p>
                     <div data-sc-f="people">${P().pickerField({name: 'sc_people', hiddenName: false, kind: 'person', allowFree: true, roles: {main: true, roleList: ROLES, zones: ZONES}, value: peopleVal})}</div>
                     <h4 class="sc-h">📦 Les biens et à qui ils vont</h4>
                     <div class="sc-goods" data-sc-goods></div>
@@ -238,7 +239,7 @@
                         goods = readRows(); goods.splice(Number(b.closest('.sc-good').dataset.i), 1); paint();
                     });
                     dg.querySelector('[data-sc-addgood]').addEventListener('click', () => { goods = readRows(); goods.push({kind: 'land', label: '', to: []}); paint(); box.querySelector('.sc-good:last-child [data-g="kind"]')?.focus(); });
-                    f.elements.kind.addEventListener('change', () => { dg.querySelector('[data-sc-giver]').textContent = kindOf(f.elements.kind.value)[2]; });
+                    f.elements.kind.addEventListener('change', () => { dg.querySelector('[data-sc-giver]').textContent = i18n(kindOf(f.elements.kind.value)[2]); });
                     f.elements.date_text.addEventListener('change', () => box.querySelectorAll('.sc-good').forEach(paintWorth));
                     dg.addEventListener('close', () => resolve(saved), {once: true});
                     setTimeout(() => (isNew ? f.elements.date_text : f.elements.title).focus(), 40);
@@ -261,8 +262,8 @@
                         goods: rows.map(g => ({kind: g.kind, ref_id: g.ref_id || 0, label: g.label, value_amount: g.value_amount, value_unit: g.value_unit, value_text: g.value_text, share_text: g.share_text, to: g.to || []}))};
                     const r = res(await post('save_succession', body));
                     saved = r; changed();
-                    if (isNew) A().undoToast(`Acte « ${r.title} » créé`, {icon: '', undo: async () => { await post('delete_succession', {id: r.id}); changed(); await refresh(); }, redo: async () => { await post('restore_succession', {id: r.id}); changed(); await refresh(); }});
-                    else if (r.before) { const before = r.before; A().undoToast(`Acte « ${r.title} » enregistré`, {icon: '', undo: async () => { await post('save_succession', before); changed(); await refresh(); }, redo: async () => { await post('save_succession', body); changed(); await refresh(); }}); }
+                    if (isNew) A().undoToast(i18n('Acte « {title} » créé', {title: r.title}), {icon: '', undo: async () => { await post('delete_succession', {id: r.id}); changed(); await refresh(); }, redo: async () => { await post('restore_succession', {id: r.id}); changed(); await refresh(); }});
+                    else if (r.before) { const before = r.before; A().undoToast(i18n('Acte « {title} » enregistré', {title: r.title}), {icon: '', undo: async () => { await post('save_succession', before); changed(); await refresh(); }, redo: async () => { await post('save_succession', body); changed(); await refresh(); }}); }
                     else toast('Enregistré', 'success');
                 }});
             if (!dlg) resolve(null);
@@ -273,7 +274,7 @@
         await post('delete_succession', {id: a.id});
         changed();
         const again = after || refresh;
-        A().undoToast(`Acte « ${titleOf(a)} » supprimé`, {
+        A().undoToast(i18n('Acte « {title} » supprimé', {title: titleOf(a)}), {
             undo: async () => { await post('restore_succession', {id: a.id}); changed(); await again(); },
             redo: async () => { await post('delete_succession', {id: a.id}); changed(); await again(); }});
         if (Number(S().succId) === Number(a.id)) S().succId = 0;
@@ -309,7 +310,7 @@
         let shown = 60, bar = null;
         bar = UI().listBar({key: KEY, search: {placeholder: 'Chercher… (personne, bien, notaire, lieu, cote)'},
             filters: [{id: 'kind', label: 'Sorte d’acte', type: 'check', options: Object.entries(KINDS).filter(([k]) => count(x => x.kind === k)).map(([k, v]) => [k, `${v[0]} ${v[1]} (${count(x => x.kind === k)})`, v[1]])},
-                {id: 'goods', label: 'Biens', type: 'check', options: [['house', `Avec une maison (${count(x => x.goods.some(g => g.kind === 'house' && g.ref_id))})`, 'Avec une maison'], ['parcel', `Avec une parcelle (${count(x => x.goods.some(g => g.kind === 'parcel' && g.ref_id))})`, 'Avec une parcelle'], ['object', `Avec un objet de famille (${count(x => x.goods.some(g => g.kind === 'object' && g.ref_id))})`, 'Avec un objet']]}],
+                {id: 'goods', label: 'Biens', type: 'check', options: [['house', i18n('Avec une maison ({n})', {n: count(x => x.goods.some(g => g.kind === 'house' && g.ref_id))}), 'Avec une maison'], ['parcel', i18n('Avec une parcelle ({n})', {n: count(x => x.goods.some(g => g.kind === 'parcel' && g.ref_id))}), 'Avec une parcelle'], ['object', i18n('Avec un objet de famille ({n})', {n: count(x => x.goods.some(g => g.kind === 'object' && g.ref_id))}), 'Avec un objet']]}],
             view: {dflt: 'list', what: 'actes'}, sort: {options: [['old', 'Les plus anciens'], ['new', 'Les plus récents'], ['az', 'A → Z'], ['za', 'Z → A'], ['recent', 'Modifiés récemment']], value: 'old'},
             onChange: () => { shown = 60; if (bar) paint(); }});
         ws.querySelector('[data-sc-bar]').replaceWith(bar);
@@ -454,7 +455,7 @@
         let chain;
         try { chain = await get('succession_chain', {kind, id}); } catch (e) { host.innerHTML = UI().notice('error', e.message); return; }
         const steps = chain.steps || [];
-        const btn = ro() ? '' : `<button type="button" class="button small secondary" data-sc-hadd>＋ Nouvel acte pour ${kind === 'house' ? 'cette maison' : kind === 'parcel' ? 'cette parcelle' : 'cet objet'}</button>`;
+        const btn = ro() ? '' : `<button type="button" class="button small secondary" data-sc-hadd>${kind === 'house' ? i18n('＋ Nouvel acte pour cette maison') : kind === 'parcel' ? i18n('＋ Nouvel acte pour cette parcelle') : i18n('＋ Nouvel acte pour cet objet')}</button>`;
         host.innerHTML = `<div class="sc-host">${kind === 'object' ? '<h4>🏠 Chaîne des propriétaires</h4>' : ''}${steps.length ? chainHtml(chain, {compact: kind !== 'house'}) : A().empty(kind === 'house' ? 'Aucun acte de succession pour cette maison' : 'Aucun acte de succession pour l’instant', {icon: '🏠'})}<div class="sc-host-btns">${btn}</div></div>`;
         host.querySelector('[data-sc-hadd]')?.addEventListener('click', async () => {
             const r = await edit(null, {good: {kind, ref_id: id, ref_title: chain.title || name}});
@@ -495,13 +496,13 @@
         const got = list.filter(x => x.side === 'got'), gave = list.filter(x => x.side === 'gave'), other = list.filter(x => x.side === 'other');
         const k = x => kindOf(x.kind);
         const when = x => [x.date_text, x.place].filter(Boolean).join(' · ');
-        const gotRows = got.map(x => ({thumb: `<span class="ui-card-ico" aria-hidden="true">${k(x)[0]}</span>`, name: x.received.length ? x.received.map(goodName).join(', ') : `${k(x)[1]} (sans bien noté pour ${f ? 'elle' : 'lui'})`, open: `data-sc-open="${x.id}"`,
+        const gotRows = got.map(x => ({thumb: `<span class="ui-card-ico" aria-hidden="true">${k(x)[0]}</span>`, name: x.received.length ? x.received.map(goodName).join(', ') : f ? i18n('{kind} (sans bien noté pour elle)', {kind: k(x)[1]}) : i18n('{kind} (sans bien noté pour lui)', {kind: k(x)[1]}), open: `data-sc-open="${x.id}"`,
             lines: [[k(x)[1], when(x)].filter(Boolean).join(' · '), x.main.length ? `de ${x.main.map(p => p.title).join(', ')}` : '', [x.role, ...x.received.map(g => [valueText(g), g.share_text].filter(Boolean).join(', '))].filter(Boolean).join(' · ')].filter(Boolean)}));
         const gaveRows = gave.map(x => ({thumb: `<span class="ui-card-ico" aria-hidden="true">${k(x)[0]}</span>`, name: titleOf({...x, people: x.main.map(p => ({...p, zone: 'main'}))}), open: `data-sc-open="${x.id}"`,
             lines: [when(x), x.goods.length ? x.goods.map(g => goodName(g)).slice(0, 4).join(', ') + (x.goods.length > 4 ? '…' : '') : '', x.beneficiaries.length ? `→ ${x.beneficiaries.map(p => p.title).join(', ')}` : ''].filter(Boolean)}));
         const otherRows = other.map(x => ({thumb: `<span class="ui-card-ico" aria-hidden="true">${k(x)[0]}</span>`, name: titleOf({...x, people: x.main.map(p => ({...p, zone: 'main'}))}), open: `data-sc-open="${x.id}"`, lines: [[x.role, when(x)].filter(Boolean).join(' · ')]}));
-        const body = `<div class="sc-pblock">${got.length ? `<h4>🎁 Ce qu’${il} a reçu</h4>${UI().rowsHtml(gotRows)}` : ''}${gave.length ? `<h4>📤 Ce qu’${il} a transmis</h4>${UI().rowsHtml(gaveRows)}` : ''}${other.length ? `<h4>👥 Présent${f ? 'e' : ''} dans d’autres actes</h4>${UI().rowsHtml(otherRows)}` : ''}</div>`;
-        return A().card(index, `🏠 Ce qu’${il} a reçu / transmis`, list.length, body, 'span-12');
+        const body = `<div class="sc-pblock">${got.length ? `<h4>${f ? i18n('🎁 Ce qu’elle a reçu') : i18n('🎁 Ce qu’il a reçu')}</h4>${UI().rowsHtml(gotRows)}` : ''}${gave.length ? `<h4>${f ? i18n('📤 Ce qu’elle a transmis') : i18n('📤 Ce qu’il a transmis')}</h4>${UI().rowsHtml(gaveRows)}` : ''}${other.length ? `<h4>${f ? i18n('👥 Présente dans d’autres actes') : i18n('👥 Présent dans d’autres actes')}</h4>${UI().rowsHtml(otherRows)}` : ''}</div>`;
+        return A().card(index, f ? i18n('🏠 Ce qu’elle a reçu / transmis') : i18n('🏠 Ce qu’il a reçu / transmis'), list.length, body, 'span-12');
     };
     const addBlock = () => {
         const Lb = A()?.defaultPersonBlocks; if (!Array.isArray(Lb) || Lb.some(b => b[0] === 'successions')) return;

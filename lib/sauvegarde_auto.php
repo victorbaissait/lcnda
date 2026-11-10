@@ -113,7 +113,7 @@ function sa_check_dir(array $s, bool $create): array
     if (!sa_dir_ok($dir)) { return ['ok' => false, 'custom' => true, 'dir' => $dir, 'error' => 'Écris le chemin complet du dossier (par exemple /Volumes/MaCle/LCNDA ou ~/Dropbox/LCNDA).']; }
     if (!is_dir($dir)) {
         if ($create && is_dir(dirname($dir)) && is_writable(dirname($dir)) && @mkdir($dir, 0775)) { return ['ok' => true, 'custom' => true, 'dir' => $dir]; }
-        return ['ok' => false, 'custom' => true, 'missing' => true, 'dir' => $dir, 'error' => 'Dossier introuvable : ' . $dir . ' (clé ou disque débranché ?). La sauvegarde se fera dès qu’il sera de retour.'];
+        return ['ok' => false, 'custom' => true, 'missing' => true, 'dir' => $dir, 'error' => i18n_t('Dossier introuvable : {dir} (clé ou disque débranché ?). La sauvegarde se fera dès qu’il sera de retour.', ['dir' => $dir])];
     }
     if (!is_writable($dir)) { return ['ok' => false, 'custom' => true, 'dir' => $dir, 'error' => 'Ce dossier ne peut pas être modifié : ' . $dir]; }
     return ['ok' => true, 'custom' => true, 'dir' => $dir];

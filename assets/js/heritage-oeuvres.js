@@ -13,6 +13,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const ART = window.LCNDA_ART; if (!ART?.define) return;
     const A = () => window.LCNDA_APP, X = () => window.LCNDA_EXT || {}, P = () => window.LCNDA_PICKER || window.LCNDA_APP;
     const U = ART.util, esc = U.esc, clone = U.clone;
@@ -246,7 +247,7 @@
         const store = C.store, prefs = readJ(PREFS, {});
         let q = '', fam = '', showHidden = false, act = mode || prefs.act || 'new';
         const dlg = document.createElement('dialog'); dlg.className = 'modal oe-dlg'; dlg.dataset.ownClose = '1'; dlg.dataset.dndOff = ''; dlg.dataset.ordOff = '';
-        dlg.innerHTML = `<div class="oe-shell"><header class="ar-top oe-top"><span class="ar-ticon">🎨</span><div class="ar-tname"><span class="eyebrow">${esc(store.name.toLocaleUpperCase('fr-FR'))} · ŒUVRES</span><h2>Quelle sorte d’œuvre ?</h2></div>
+        dlg.innerHTML = `<div class="oe-shell"><header class="ar-top oe-top"><span class="ar-ticon">🎨</span><div class="ar-tname"><span class="eyebrow">${esc(i18n(store.name).toLocaleUpperCase(window.LCNDA_I18N?.lang && window.LCNDA_I18N.lang !== 'fr' ? undefined : 'fr-FR'))} · ${i18n('ŒUVRES')}</span><h2>Quelle sorte d’œuvre ?</h2></div>
             <span class="segmented oe-act" role="tablist"><button type="button" data-oe-act="new">＋ Nouvelle fiche</button><button type="button" data-oe-act="list">☰ Voir la liste</button></span><span class="spacer"></span>
             <button type="button" class="button small secondary" data-oe-manage title="Cacher les types qui ne te servent jamais, modifier, exporter ou importer tes types">⚙️ Gérer les types</button>
             <button type="button" class="button small" data-oe-newtype>＋ Créer mon propre type…</button><button type="button" class="icon-button" data-oe-close aria-label="Fermer" title="Fermer">×</button></header>
@@ -264,12 +265,12 @@
             const hidden = OE.hiddenTypes(store), all = OE.entries(store).filter(e => showHidden || !hidden.has(e.kind)), shown = all.filter(match);
             const fams = OE.FAMILIES.filter(f => f.key === 'mine' || all.some(e => e.fam === f.key));
             const nOf = k => shown.filter(e => e.fam === k).length;
-            $('[data-oe-famfilt]').innerHTML = `<button type="button" class="${fam ? '' : 'is-active'}" data-oe-fam="">Tout (${shown.length})</button>${fams.map(f => `<button type="button" class="${fam === f.key ? 'is-active' : ''}" data-oe-fam="${f.key}">${esc(f.icon)} ${esc(f.label)} (${nOf(f.key)})</button>`).join('')}`;
+            $('[data-oe-famfilt]').innerHTML = `<button type="button" class="${fam ? '' : 'is-active'}" data-oe-fam="">${i18n('Tout ({n})', {n: shown.length})}</button>${fams.map(f => `<button type="button" class="${fam === f.key ? 'is-active' : ''}" data-oe-fam="${f.key}">${esc(f.icon)} ${esc(f.label)} (${nOf(f.key)})</button>`).join('')}`;
             const chip = e => { const n = count(e.kind), hid = hidden.has(e.kind); return `<button type="button" class="oe-tyc ${e.validated ? 'v' : ''} ${e.detailed ? 'd' : ''} ${e.user ? 'u' : ''} ${hid ? 'is-hidden' : ''}" data-oe-kind="${esc(e.kind)}" title="${esc(act === 'list' ? 'Voir la liste' : 'Nouvelle fiche')} : ${esc(e.label)}">${esc(e.icon)} ${esc(e.label)}${n ? ` <small class="oe-n">${n}</small>` : ''}</button>`; };
             $('[data-oe-fams]').innerHTML = fams.filter(f => !fam || f.key === fam).map(f => { const l = shown.filter(e => e.fam === f.key); if (q && !l.length && f.key !== 'mine') return '';
                 return `<section class="oe-famc ${f.key === 'mine' ? 'mine' : ''}"><div class="oe-fh"><b>${esc(f.icon)} ${esc(f.label)}</b><span class="spacer"></span><small>${esc(U.plural(l.length, 'type'))}</small></div><div class="oe-fb">${l.map(chip).join('') || (f.key === 'mine' ? '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🧩</span><span class="empty-line-text">Pas encore de type à toi.</span></p>' : '')}
                     ${f.key === 'design' && OE.openMetiers ? '<div class="oe-mine-btns"><button type="button" class="button small secondary" data-oe-metiers-open>⚒️ Les 16 domaines des métiers d’art…</button></div>' : ''}
-                    ${f.key === 'mine' ? '<div class="oe-mine-btns"><button type="button" class="button small secondary" data-oe-newtype>＋ Créer mon propre type…</button><button type="button" class="button small secondary" data-oe-import>⤒ Importer un type</button></div>' : ''}<div class="oe-ch">${esc(f.chain)}</div></div></section>`; }).join('') || A().emptyState({icon: '🔍', text: `Aucun type pour « ${q} »`, hint: 'Vérifie l’orthographe, ou crée ton propre type.', action: {label: '＋ Créer mon propre type…', attrs: 'data-oe-newtype'}});
+                    ${f.key === 'mine' ? '<div class="oe-mine-btns"><button type="button" class="button small secondary" data-oe-newtype>＋ Créer mon propre type…</button><button type="button" class="button small secondary" data-oe-import>⤒ Importer un type</button></div>' : ''}<div class="oe-ch">${esc(f.chain)}</div></div></section>`; }).join('') || A().emptyState({icon: '🔍', text: i18n('Aucun type pour « {nm} »', {nm: q}), hint: 'Vérifie l’orthographe, ou crée ton propre type.', action: {label: '＋ Créer mon propre type…', attrs: 'data-oe-newtype'}});
             dlg.querySelectorAll('[data-oe-act]').forEach(b => b.classList.toggle('is-active', b.dataset.oeAct === act));
             // les métiers d'art qui répondent (« dinandier » → pièce de métier d'art)
             const mbox = $('[data-oe-metiers]'); mbox.innerHTML = '';
@@ -333,9 +334,9 @@
                     if (d.mImport !== undefined) { if (await OE.importType(C)) { await C.reload(); paint(dg); after?.(); } return; }
                     if (d.mDel !== undefined) {
                         const t = (store.types || []).find(x => x.key === k); if (!t) return;
-                        if (store.of(k).length) { A().toast(`Ce type a encore ${U.plural(store.of(k).length, 'fiche')} : supprime-les d’abord.`, 'error'); return; }
+                        if (store.of(k).length) { A().toast(i18n('Ce type a encore {count} : supprime-les d’abord.', {count: U.plural(store.of(k).length, 'fiche')}), 'error'); return; }
                         await ART.write('delete_type', {key: k}); delete ART.defs[k]; await C.reload(); paint(dg); after?.();
-                        A().undoToast(`Type « ${t.label} » supprimé`, {undo: async () => { await ART.write('save_type', {key: k, label: t.label, def: t.def}); await C.reload(); paint(dg); after?.(); }});
+                        A().undoToast(i18n('Type « {nm} » supprimé', {nm: t.label}), {undo: async () => { await ART.write('save_type', {key: k, label: t.label, def: t.def}); await C.reload(); paint(dg); after?.(); }});
                     }
                 } catch (er) { A().toast(er.message, 'error'); }
             }); },
@@ -345,7 +346,7 @@
     OE.importType = async C => {
         const got = await A().importSettingFile?.('types-oeuvres', {names: Object.values(ART.defs).map(d => d.label), check: x => x && x.type && typeof x.type.label === 'string' && x.type.def && Array.isArray(x.type.def.groups)});
         if (!got) return false;
-        try { const r = await ART.write('save_type', {key: '', label: got.nom, def: {...got.donnees.type.def, label: got.nom}}); A().toast(`Type « ${got.nom} » importé : il est dans « ✎ Mes types ».`); return r.key; }
+        try { const r = await ART.write('save_type', {key: '', label: got.nom, def: {...got.donnees.type.def, label: got.nom}}); A().toast(i18n('Type « {nm} » importé : il est dans « ✎ Mes types ».', {nm: got.nom})); return r.key; }
         catch (e) { A().toast(e.message, 'error'); return false; }
     };
 

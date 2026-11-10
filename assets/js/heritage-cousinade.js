@@ -148,7 +148,7 @@
         }
         const d = cur.data;
         if (!TABS.some(t => t[0] === cur.tab)) cur.tab = 'guests';
-        const help = [d.ancestor_name ? `Descendants de ${esc(d.ancestor_name)}` : '', esc(d.date_text), esc(d.place_text)].filter(Boolean).join(' · ');
+        const help = [d.ancestor_name ? i18n('Descendants de {nm}', {nm: esc(d.ancestor_name)}) : '', esc(d.date_text), esc(d.place_text)].filter(Boolean).join(' · ');
         w.innerHTML = `<section class="page cous-page" data-cous-project="${d.id}">${UI().pageHeader({title: d.title, icon: '🎉', where: 'Listes · Cousinades', help,
             back: '<button type="button" class="button small secondary cous-back" data-cous-back>← Toutes les cousinades</button>',
             actions: kiosk() ? [] : ['<button type="button" class="button secondary" data-cous-edit>✎ Modifier</button>'],
@@ -279,7 +279,7 @@
         const d = cur.data, row = g || {}, isNew = !g, free = isNew || !row.person_id;
         const fs = C().foyers(d.guests, {all: true});
         const foyerOpts = `<option value="">${isNew ? 'Son propre foyer' : 'Garder son foyer'}</option>${fs.filter(f => !row.id || !f.members.some(m => m.id === row.id) || f.members.length > 1).map(f => `<option value="${esc(f.key)}"${f.key === row.foyer ? ' selected' : ''}>${esc(f.name)}</option>`).join('')}`;
-        ext.openDialog({eyebrow: '🎉 COUSINADE · INVITÉ', title: isNew ? 'Nouvel invité' : `Modifier : ${C().fullName(row)}`, submitLabel: isNew ? 'Ajouter' : 'Enregistrer',
+        ext.openDialog({eyebrow: '🎉 COUSINADE · INVITÉ', title: isNew ? 'Nouvel invité' : i18n('Modifier : {nm}', {nm: C().fullName(row)}), submitLabel: isNew ? 'Ajouter' : 'Enregistrer',
             body: `<div class="cous-form">
                 ${isNew ? `<div><span class="pk-lab">Une fiche de ta généalogie (facultatif)</span>${P().pickerField({name: 'person_id', kind: 'person', animals: false})}<p class="ui-hint">Sinon, écris le prénom et le nom ci-dessous.</p></div>` : ''}
                 ${free ? `<div class="cous-2"><label>Prénom<input name="first_name" maxlength="80" value="${esc(row.first_name || '')}"></label><label>Nom<input name="last_name" maxlength="80" value="${esc(row.last_name || '')}"></label></div>
@@ -367,7 +367,7 @@
     }
 
     /* ── ✉️ Invitations ── */
-    const invOpt = d => ({text: DEFAULT_TEXT, answerBy: '', contact: '', subject: `Invitation : ${d.title}`, ...(d.options?.invitation || {})});
+    const invOpt = d => ({text: DEFAULT_TEXT, answerBy: '', contact: '', subject: i18n('Invitation : {nm}', {nm: d.title}), ...(d.options?.invitation || {})});
     const letterOf = (d, f) => C().fill(invOpt(d).text, C().foyerValues(f, d, branchesOf(d)));
     function tabInvit(body, d) {
         const o = invOpt(d), fs = C().foyers(d.guests), ro = kiosk();
@@ -406,16 +406,16 @@
     const letterHtml = (d, f, {env = true} = {}) => `<div class="inv">${env && f.address.length ? `<div class="to"><b>${esc(f.name)}</b><br>${f.address.map(esc).join('<br>')}</div>` : ''}<h1>🎉 ${esc(d.title)}</h1><div class="txt">${esc(letterOf(d, f)).replace(/\n/g, '<br>')}</div></div>`;
     function printInvitations(d, fs) {
         if (!fs.length) return toast('Aucun foyer à inviter : coche des invités d’abord.');
-        UI().openPrintDialog({title: `Invitations — ${d.title}`, key: 'cousinade-invitations', zone: 'Invitations', photos: false, margin: 0,
+        UI().openPrintDialog({title: i18n('Invitations — {nm}', {nm: d.title}), key: 'cousinade-invitations', zone: 'Invitations', photos: false, margin: 0,
             options: [{key: 'addr', label: 'L’adresse du foyer en haut à droite (enveloppe à fenêtre)', checked: true}],
-            html: c => UI().printSheets({title: `Invitations — ${d.title}`, choix: c, pad: 18, css: `.inv{font-family:Georgia,serif;color:#111;font-size:12pt;line-height:1.5;height:100%;position:relative}.to{margin:22mm 0 18mm 95mm;font-size:11pt;line-height:1.35}h1{font-size:20pt;text-align:center;margin:0 0 8mm;color:#2a3b6b}.txt{white-space:normal}`,
+            html: c => UI().printSheets({title: i18n('Invitations — {nm}', {nm: d.title}), choix: c, pad: 18, css: `.inv{font-family:Georgia,serif;color:#111;font-size:12pt;line-height:1.5;height:100%;position:relative}.to{margin:22mm 0 18mm 95mm;font-size:11pt;line-height:1.35}h1{font-size:20pt;text-align:center;margin:0 0 8mm;color:#2a3b6b}.txt{white-space:normal}`,
                 pages: fs.map(f => ({html: letterHtml(d, f, {env: c.addr})}))})});
     }
     async function toTextDoc(d, fs) {
         if (!ext.openTextDoc || !ext.textDocTools?.dataOf) return toast('Le traitement de texte n’est pas chargé.', 'error');
         if (!fs.length) return toast('Aucun foyer à inviter : coche des invités d’abord.');
         const html = fs.map((f, i) => `${i ? '<hr class="wp-pb" data-break="page">' : ''}${f.address.length ? `<p style="text-align:right"><strong>${esc(f.name)}</strong><br>${f.address.map(esc).join('<br>')}</p>` : ''}<h1 style="text-align:center">${esc(d.title)}</h1>${letterOf(d, f).split(/\n{2,}/).map(p => `<p>${esc(p).replace(/\n/g, '<br>')}</p>`).join('')}`).join('');
-        ext.openTextDoc({data: ext.textDocTools.dataOf(html), name: `Invitations — ${d.title}`});
+        ext.openTextDoc({data: ext.textDocTools.dataOf(html), name: i18n('Invitations — {nm}', {nm: d.title})});
     }
     async function toCard(d, fs) {
         const CI = ext.cardInternals;
@@ -425,7 +425,7 @@
             family: [o.answerBy && i18n('Réponse avant le {date}', {date: o.answerBy}), o.contact].filter(Boolean).join(' · ')};
         const fields = K.fields.map(([key, label, value]) => ({key, role: key, label, value: vals[key] ?? value, hidden: false}));
         try { const doc = await CI.build({kind: 'cousinade', style: K.style, format: 'c10', orient: 'port', fold: 'single', fields});
-            ext.openVectorEditor({doc, name: `Cousinade — ${d.title}`}); } catch (e) { toast(e.message, 'error'); }
+            ext.openVectorEditor({doc, name: i18n('Cousinade — {nm}', {nm: d.title})}); } catch (e) { toast(e.message, 'error'); }
     }
     /** 📁 l'invitation (texte générique) en image, rangée dans les médias */
     async function copyToMedia(d, fs) {
@@ -478,8 +478,8 @@
     }
     function printBadges(d, o) {
         if (!badgeList(d, o.who).length) return toast('Personne à qui faire un badge.');
-        UI().openPrintDialog({title: `Badges — ${d.title}`, key: 'cousinade-badges', zone: 'Badges', photos: false, margin: 0, paper: 'A4', orientation: 'portrait',
-            html: c => UI().printSheets({title: `Badges — ${d.title}`, choix: c, pad: 10, css: BADGE_CSS, pages: badgePages(d, o)})});
+        UI().openPrintDialog({title: i18n('Badges — {nm}', {nm: d.title}), key: 'cousinade-badges', zone: 'Badges', photos: false, margin: 0, paper: 'A4', orientation: 'portrait',
+            html: c => UI().printSheets({title: i18n('Badges — {nm}', {nm: d.title}), choix: c, pad: 10, css: BADGE_CSS, pages: badgePages(d, o)})});
     }
 
     /* ── 🌳 Grand arbre de descendance (dessin vectoriel : export E3, PDF, fond perdu) ── */
@@ -501,7 +501,7 @@
         body.addEventListener('change', () => { const n = read(); d.options = {...d.options, tree: n}; if (!ro) saveOptions({tree: n}, {quiet: true}); });
         body.querySelector('[data-cous-tbuild]').addEventListener('click', async () => {
             const n = read(); toast('Fabrication du grand arbre…');
-            try { const doc = await buildTree(d, n); if (!doc) return; ext.openVectorEditor({doc, name: n.title || `Arbre — ${d.title}`}); } catch (e) { toast(e.message, 'error'); }
+            try { const doc = await buildTree(d, n); if (!doc) return; ext.openVectorEditor({doc, name: n.title || i18n('Arbre — {nm}', {nm: d.title})}); } catch (e) { toast(e.message, 'error'); }
         });
     }
     let tseq = 0; const tuid = () => 'c' + Date.now().toString(36) + (++tseq).toString(36);
@@ -545,13 +545,13 @@
                 {id: tuid(), type: 'rect', name: 'Bande de la branche', x: r2(cx - bw / 2), y: r2(y), w: r2(bw), h: r2(Math.max(bh * .1, 2 * unit)), r: 0, fill: color, stroke: 'none', sw: 0},
                 {id: tuid(), type: 'text', name: lines[0], text: lines.join('\n'), x: r2(cx), y: r2(y + bh / 2 - lines.length * 1.2 * size / 2 + size * .86 + bh * .04), size, font: T.font, align: 'middle', fill: T.ink, sw: 0}];
             boxes.push({id: tuid(), type: 'group', name: name(n.p), children: kids});
-            if (o.photos && living.has(n.p.id)) { const ph = Math.min(rowH * .26, bw * .5); photos.push({id: tuid(), type: 'rect', name: `Photo du jour — ${name(n.p)}`, x: r2(cx - ph * .7), y: r2(y + bh + rowH * .04), w: r2(ph * 1.4), h: r2(ph), r: r2(ph * .08), fill: 'none', stroke: color, sw, dash: '4 3'}); }
+            if (o.photos && living.has(n.p.id)) { const ph = Math.min(rowH * .26, bw * .5); photos.push({id: tuid(), type: 'rect', name: i18n('Photo du jour — {nm}', {nm: name(n.p)}), x: r2(cx - ph * .7), y: r2(y + bh + rowH * .04), w: r2(ph * 1.4), h: r2(ph), r: r2(ph * .08), fill: 'none', stroke: color, sw, dash: '4 3'}); }
             for (const k of n.kids) { const ky = y0 + k.depth * rowH + (rowH - bh) / 2 - (o.photos ? rowH * .1 : 0), ym = (y + bh + ky) / 2 + (o.photos ? rowH * .06 : 0), kx = pos.get(k);
                 links.push({id: tuid(), type: 'svgpath', name: 'Lien', d: `M${r2(cx)} ${r2(y + bh)}V${r2(ym)}H${r2(kx)}V${r2(ky)}`, fill: 'none', stroke: k.depth === 1 ? branchColorOf(k.branch) : branchColorOf(n.branch), sw: r2(sw * 1.4), join: 'round'}); }
         }
         const ts = Math.min(band * .5, W * .8 / Math.max(6, String(o.title || '').length * .55));
         const titles = [{id: tuid(), type: 'text', name: 'Titre', text: String(o.title || d.title), x: r2(W / 2), y: r2(m + band * .55), size: r2(ts), font: T.font, align: 'middle', bold: true, fill: T.title, sw: 0},
-            {id: tuid(), type: 'text', name: 'Sous-titre', text: [d.ancestor_name && `Les descendants de ${d.ancestor_name}`, d.date_text, d.place_text].filter(Boolean).join(' · '), x: r2(W / 2), y: r2(m + band * .55 + ts * .75), size: r2(ts * .4), font: T.font, align: 'middle', italic: true, fill: T.ink, sw: 0}];
+            {id: tuid(), type: 'text', name: 'Sous-titre', text: [d.ancestor_name && i18n('Les descendants de {nm}', {nm: d.ancestor_name}), d.date_text, d.place_text].filter(Boolean).join(' · '), x: r2(W / 2), y: r2(m + band * .55 + ts * .75), size: r2(ts * .4), font: T.font, align: 'middle', italic: true, fill: T.ink, sw: 0}];
         const legend = branchesOf(d).map((b, i) => ({id: tuid(), type: 'text', name: `Branche ${b.name}`, text: `■ ${b.name}`, x: r2(m + i * (w / Math.max(1, branchesOf(d).length)) + 4 * unit), y: r2(H - m * .45), size: r2(Math.min(14 * unit, m * .35)), font: T.font, align: 'start', fill: b.color, sw: 0}));
         const layer = (nm, children) => ({id: tuid(), type: 'group', layer: true, name: nm, children});
         const frame = T.frame ? [{id: tuid(), type: 'rect', name: 'Cadre', x: r2(m * .4), y: r2(m * .4), w: r2(W - m * .8), h: r2(H - m * .8), fill: 'none', stroke: T.ink, sw: r2(3 * unit)}] : [];
@@ -600,12 +600,12 @@
             const prev = (r.result || r).prev; await reload();
             A().undoToast(`Plan de table : ${plural(plan.tables.length, 'table')}.`, {undo: async () => { await post({op: 'guests_set', cousinade_id: d.id, field: 'table_no', values: prev}); reload(); }});
         });
-        sb.querySelector('[data-cous-tpr]')?.addEventListener('click', () => UI().openPrintDialog({title: `Plan de table — ${d.title}`, key: 'cousinade-tables', zone: 'Plan de table', photos: false, margin: 12,
+        sb.querySelector('[data-cous-tpr]')?.addEventListener('click', () => UI().openPrintDialog({title: i18n('Plan de table — {nm}', {nm: d.title}), key: 'cousinade-tables', zone: 'Plan de table', photos: false, margin: 12,
             html: () => `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>${esc(d.title)}</title><style>${printCss}.t{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.t section{border:2px solid #999;border-radius:6px;padding:6px 8px;break-inside:avoid}.t h2{font-size:12pt;margin:0 0 4px}.t ul{margin:0;padding-left:16px;font-size:10pt}</style></head><body><h1>🍽 ${esc(d.title)} — plan de table</h1><p class="sub">${esc([d.date_text, d.place_text].filter(Boolean).join(' · '))}</p><div class="t">${nos.map(no => { const gs = groups.get(no), b = branchOf(d, gs[0].branch_id); return `<section style="border-color:${esc(b?.color || '#999')}"><h2>Table ${no}${b ? ` · ${esc(b.first || b.name)}` : ''}</h2><ul>${gs.map(g => `<li>${esc(C().fullName(g))}${g.people_count > 1 ? ` (${g.people_count})` : ''}</li>`).join('')}</ul></section>`; }).join('')}</div></body></html>`}));
     }
     function dayAlbum(sb, d) {
         const ro = kiosk(), album = d.options?.album || [];
-        sb.innerHTML = `<div class="cous-daybar"><p class="muted">${esc(plural(album.length, 'photo'))} de la cousinade</p>${ro ? '' : '<button type="button" class="button" data-cous-aadd>＋ Ajouter des photos…</button>'}</div>
+        sb.innerHTML = `<div class="cous-daybar"><p class="muted">${i18n('{n} de la cousinade', {n: esc(plural(album.length, 'photo'))})}</p>${ro ? '' : '<button type="button" class="button" data-cous-aadd>＋ Ajouter des photos…</button>'}</div>
             ${album.length ? `<div class="cous-album">${album.map(m => `<figure class="cous-photo"><button type="button" class="cous-photo-open" data-cous-aopen="${m.id}" title="${esc(m.title)}"><img src="media/${encodeURIComponent(m.filename)}" alt="${esc(m.title)}" loading="lazy"></button>${ro ? '' : `<button type="button" class="icon-button small cous-photo-x" data-cous-adel="${m.id}" title="Retirer de l’album" aria-label="Retirer de l’album">×</button>`}<figcaption>${esc(m.title)}</figcaption></figure>`).join('')}</div>`
                 : A().emptyState({icon: '📸', text: 'L’album est vide', hint: 'Les photos du jour : importe-les depuis l’ordinateur ou choisis-les dans les médias.', action: ro ? null : {label: '＋ Ajouter des photos', attrs: 'data-cous-aadd'}})}`;
         sb.addEventListener('click', async e => {

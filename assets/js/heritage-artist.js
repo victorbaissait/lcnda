@@ -13,6 +13,8 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
+    const UPL = () => (window.LCNDA_I18N && window.LCNDA_I18N.lang !== 'fr' ? undefined : 'fr-FR'); // 🌐 capitales selon la langue
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const A = () => window.LCNDA_APP;
     const UI = () => window.LCNDA_UI || {};
@@ -232,7 +234,7 @@
     /* ═════════ Enregistrer, supprimer (avec « ↶ Annuler »), cocher « Artiste » ═════════ */
     async function needArtist(store) {
         if (Number(store.person.is_artist)) return {};
-        const ok = await A().confirmBox(`La fiche de ${store.name} n’est pas encore cochée « Artiste ». La cocher pour ranger ce catalogue ?`, {title: '🎨 Cocher « Artiste » ?', okLabel: 'Cocher « Artiste »'});
+        const ok = await A().confirmBox(i18n('La fiche de {nm} n’est pas encore cochée « Artiste ». La cocher pour ranger ce catalogue ?', {nm: store.name}), {title: '🎨 Cocher « Artiste » ?', okLabel: 'Cocher « Artiste »'});
         if (!ok) throw new Error('');
         store.person.is_artist = 1; return {make_artist: 1};
     }
@@ -245,7 +247,7 @@
     ART.deleteItem = async (store, it, after) => {
         const r = await write('delete_item', {person_id: it.person_id || store.pid, id: it.id});
         const snap = r.item; await after?.();
-        A().undoToast(`« ${it.title} » supprimé${ART.defs[it.kind]?.fem ? 'e' : ''}`, {
+        A().undoToast((ART.defs[it.kind]?.fem ? i18n('« {nm} » supprimée', {nm: it.title}) : i18n('« {nm} » supprimé', {nm: it.title})), {
             undo: async () => { await write('restore_item', {item: snap}); await after?.(); },
             redo: async () => { await write('delete_item', {person_id: snap.person_id, id: snap.id}); await after?.(); }});
     };
@@ -262,8 +264,8 @@
             const p = detail.person; if (!p || !Number(p.is_artist)) return '';
             const items = (detail.heritage?.artist || []).filter(i => i.kind === kind); if (!blockVisible(p, detail.heritage?.artist || [], kind)) return '';
             const def = ART.defs[kind] || {icon: '✦', label: 'élément', fem: false};
-            const body = items.length ? `<div class="ar-grid">${items.slice(0, 18).map(it => `<button type="button" class="ar-card" data-ar-item="${it.id}" data-ar-pid="${p.id}">${U.cover(it)}<b>${esc(it.title)}</b><small>${esc(cardLine(it))}</small></button>`).join('')}</div>${items.length > 18 ? `<p class="muted">… et ${items.length - 18} de plus (« Tout voir »).</p>` : ''}`
-                : `${A().emptyState({icon: def.icon, text: `${def.fem ? 'Aucune' : 'Aucun'} ${String(def.label).toLowerCase()} pour l’instant`})}<div class="ar-row"><button type="button" class="button small secondary" data-ar-open-kind="${kind}" data-ar-pid="${p.id}" data-ar-new>＋ ${def.fem ? 'Nouvelle' : 'Nouveau'} ${esc(String(def.label).toLowerCase())}</button><button type="button" class="button small secondary" data-ar-open-kind="${kind}" data-ar-pid="${p.id}" data-ar-import>⤒ Importer</button></div>`;
+            const body = items.length ? `<div class="ar-grid">${items.slice(0, 18).map(it => `<button type="button" class="ar-card" data-ar-item="${it.id}" data-ar-pid="${p.id}">${U.cover(it)}<b>${esc(it.title)}</b><small>${esc(cardLine(it))}</small></button>`).join('')}</div>${items.length > 18 ? `<p class="muted">${i18n('… et {n} de plus (« Tout voir »).', {n: items.length - 18})}</p>` : ''}`
+                : `${A().emptyState({icon: def.icon, text: def.fem ? i18n('Aucune {kind} pour l’instant', {kind: i18n(String(def.label)).toLowerCase()}) : i18n('Aucun {kind} pour l’instant', {kind: i18n(String(def.label)).toLowerCase()})})}<div class="ar-row"><button type="button" class="button small secondary" data-ar-open-kind="${kind}" data-ar-pid="${p.id}" data-ar-new>${esc(def.fem ? i18n('＋ Nouvelle {kind}', {kind: i18n(String(def.label)).toLowerCase()}) : i18n('＋ Nouveau {kind}', {kind: i18n(String(def.label)).toLowerCase()}))}</button><button type="button" class="button small secondary" data-ar-open-kind="${kind}" data-ar-pid="${p.id}" data-ar-import>⤒ Importer</button></div>`;
             return A().card(index, label, items.length || '', `<div class="ar-block">${body}</div>`, 'span-12', `<button type="button" class="button small secondary" data-ar-open-kind="${kind}" data-ar-pid="${p.id}">${items.length ? 'Tout voir, modifier' : 'Ouvrir'}</button>`);
         };
     });
@@ -277,7 +279,7 @@
     // 🎨 Cité dans des catalogues d'artistes : « joue sur Paris canaille (1958) »
     ext.personBlocks.artist_cited = (index, detail) => {
         const list = detail.heritage?.artist_cited || []; if (!list.length) return '';
-        return A().card(index, '🎨 Cité dans des catalogues d’artistes', list.length, `<ul class="ar-cited">${list.map(c => `<li><button type="button" class="ar-ochip is-link" data-ar-item="${c.id}" data-ar-pid="${c.person_id}"><i>${esc(ART.defs[c.kind]?.icon || '✦')}</i>${esc(c.title)}${c.year ? ` (${esc(c.year)})` : ''}</button> <small class="muted">${esc([c.roles.join(', '), c.person && c.person_id !== Number(detail.person?.id) ? `catalogue de ${c.person}` : ''].filter(Boolean).join(' · '))}</small></li>`).join('')}</ul>`, 'span-6');
+        return A().card(index, '🎨 Cité dans des catalogues d’artistes', list.length, `<ul class="ar-cited">${list.map(c => `<li><button type="button" class="ar-ochip is-link" data-ar-item="${c.id}" data-ar-pid="${c.person_id}"><i>${esc(ART.defs[c.kind]?.icon || '✦')}</i>${esc(c.title)}${c.year ? ` (${esc(c.year)})` : ''}</button> <small class="muted">${esc([c.roles.join(', '), c.person && c.person_id !== Number(detail.person?.id) ? i18n('catalogue de {nm}', {nm: c.person}) : ''].filter(Boolean).join(' · '))}</small></li>`).join('')}</ul>`, 'span-6');
     };
     document.addEventListener('click', e => {
         const b = e.target.closest('[data-ar-open-kind],[data-ar-item]'); if (!b || b.closest('.ar-dlg')) return;
@@ -361,7 +363,7 @@
             }
             const kinds = ART.tabKinds(store), def = ART.defs[S.kind] || {};
             const PH = ART.pageHead?.(store); // 🧩 page d'un artiste, d'un sportif, d'un élu… (heritage-profils.js)
-            const eb = S.view === 'page' && PH ? PH.eyebrow : S.view === 'page' ? `${((store.person.profiles || []).map(p => ART.profiles?.[p.profile_key]?.label).filter(Boolean).join(' · ') || 'Artiste').toLocaleUpperCase('fr-FR')} · SA PAGE` : S.kind === 'work' ? 'CATALOGUE RAISONNÉ' : `CATALOGUE · ${String(def.many || '').toLocaleUpperCase('fr-FR')}`;
+            const eb = S.view === 'page' && PH ? PH.eyebrow : S.view === 'page' ? `${((store.person.profiles || []).map(p => ART.profiles?.[p.profile_key]?.label).filter(Boolean).map(x => i18n(x)).join(' · ') || i18n('Artiste')).toLocaleUpperCase(UPL())} · ${i18n('SA PAGE')}` : S.kind === 'work' ? 'CATALOGUE RAISONNÉ' : `${i18n('CATALOGUE')} · ${i18n(String(def.many || '')).toLocaleUpperCase(UPL())}`;
             const n = S.view === 'list' ? store.of(S.kind).length : 0;
             return `<span class="ar-ticon">${S.view === 'page' && PH ? esc(PH.icon) : S.view === 'page' ? esc(ART.profiles?.[(store.person.profiles || [])[0]?.profile_key]?.icon || '🎨') : esc(def.icon || '✦')}</span><div class="ar-tname"><span class="eyebrow">${esc(eb)}</span><h2>${esc(store.name)}${S.view === 'list' ? ` — ${esc(plural(n, String(def.label || '').toLowerCase(), String(def.many || '').toLowerCase()))}` : ''}</h2></div>
                 <nav class="segmented ar-tabs" data-ar-tabs><button type="button" class="${S.view === 'page' ? 'is-active' : ''}" data-ar-tab="page">${esc(PH?.tab || '🎨 Page')}</button>${kinds.map(k => `<button type="button" class="${S.view === 'list' && S.kind === k ? 'is-active' : ''}" data-ar-tab="${k}">${esc(ART.defs[k].icon)} ${esc(ART.defs[k].tab || ART.defs[k].many)}</button>`).join('')}<button type="button" data-ar-cmd="morekinds" title="Les autres sortes de fiches, et créer la tienne">＋</button></nav>

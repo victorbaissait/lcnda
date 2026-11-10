@@ -188,7 +188,7 @@ function puzzle_save(PDO $pdo, array $data): array
     if ($old && $old['status'] === 'done') { return ['ok' => true, 'ignored' => 'done', 'uid' => $uid]; }
     if ($old && $ts && $ts < (int) $old['client_ts']) { return ['ok' => true, 'ignored' => 'older', 'uid' => $uid, 'saved_at' => (int) $old['client_ts']]; }
     if (!$old && (int) $pdo->query("SELECT count(*) FROM puzzle_games WHERE status='playing'")->fetchColumn() >= PUZZLE_MAX_PLAYING) {
-        throw new RuntimeException('Les ' . PUZZLE_MAX_PLAYING . ' puzzles en cours sont gardés : termine ou supprime-en un pour en commencer un autre.');
+        throw new RuntimeException(i18n_t('Les {n} puzzles en cours sont gardés : termine ou supprime-en un pour en commencer un autre.', ['n' => PUZZLE_MAX_PLAYING]));
     }
     $meta = puzzle_clean_meta($data['meta'] ?? null, $old ? (json_decode((string) $old['meta_json'], true) ?: []) + ['name' => $old['name']] : []);
     $n = (int) $meta['cols'] * (int) $meta['rows'];

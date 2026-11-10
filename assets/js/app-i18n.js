@@ -33,7 +33,7 @@
     ]);
     const CODES = LANGS.map(l => l.code);
     const KEY = 'lcnda-langue', COOKIE = 'lcnda_lang', BANNER_KEY = 'lcnda-i18n-banner-closed';
-    const VERSION = 2; // monter avec ?v= de assets/i18n/*.json dans index.php
+    const VERSION = 3; // monter avec ?v= de assets/i18n/*.json dans index.php
     const hasDom = typeof document !== 'undefined' && typeof window !== 'undefined';
     const isCode = c => CODES.includes(String(c || ''));
 
@@ -67,6 +67,11 @@
                 return p.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
             }).join('');
             if (lit.trim().length < 2) return; // « {n} » tout seul : trop large
+            // deux mots libres (ou plus) autour d'un petit mot (« {a} de {b} », « {what} le {date} ») : trop large pour le filet,
+            // il déformerait d'autres phrases ; ces textes-là passent par t() dans le code
+            const letters = parts.filter(p => !/^\{[a-z_][a-z0-9_]*\}$/i.test(p)).join('').replace(/[^\p{L}]/gu, '').length;
+            const wide = names.filter(n => !/^(n|count|nb|total|i|max|min)$/i.test(n)).length;
+            if (wide >= 2 && letters < 6) return;
             patterns.push({re: new RegExp(`^${re}$`, 'u'), names, lit, out: dict[k]});
         });
     }

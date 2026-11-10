@@ -12,6 +12,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const A = () => window.LCNDA_APP;
     const UI = () => window.LCNDA_UI || {};
     const P = () => window.LCNDA_PICKER || {};
@@ -33,7 +34,7 @@
     const COLORS = ['#0066cc', '#cc4700', '#2f8f5b', '#7a47db', '#c0392b', '#a07a00', '#00838f', '#d6336c', '#555555'];
     const color = c => (/^#[0-9a-f]{6}$/i.test(String(c || '')) ? c : '#0066cc');
     const SRC_LABEL = {gps: '🛰 par le GPS du fichier', manual: '✋ posée à la main', place: '📍 par un lieu de la base', '': 'pas encore placée'};
-    const tzLabel = tz => (!tz ? '' : tz === 'UTC' ? 'heure universelle (UTC)' : tz.startsWith('~') ? `fuseau estimé d’après la position (UTC${tz.slice(1)})` : `UTC${tz}`);
+    const tzLabel = tz => (!tz ? '' : tz === 'UTC' ? 'heure universelle (UTC)' : tz.startsWith('~') ? i18n('fuseau estimé d’après la position (UTC{nm})', {nm: tz.slice(1)}) : `UTC${tz}`);
 
     /* ═════════════════ Le moteur de carte (tuiles, grappes, trajet) ═════════════════ */
     const CELL = 84, ZMIN = 2, ZMAX = 19;
@@ -99,7 +100,7 @@
                     el = document.createElement('button'); el.type = 'button';
                     el.className = `pm-mk is-${m.shape}${c.rep.it.kind === 'video' ? ' is-video' : ''}${c.list.length > 1 ? ' is-cluster' : ''}${m.editable && c.list.length === 1 ? ' is-movable' : ''}`;
                     el.innerHTML = markerHtml(c); el._c = c;
-                    el.setAttribute('aria-label', c.list.length > 1 ? `${c.list.length} photos et vidéos ici : clic pour les séparer` : `${c.rep.it.title || 'Photo'}${c.rep.it.date_text ? ' — ' + c.rep.it.date_text : ''}`);
+                    el.setAttribute('aria-label', c.list.length > 1 ? i18n('{nm} photos et vidéos ici : clic pour les séparer', {nm: c.list.length}) : `${c.rep.it.title || 'Photo'}${c.rep.it.date_text ? ' — ' + c.rep.it.date_text : ''}`);
                     el.title = c.list.length > 1 ? `${plural(c.list.length, 'élément')} : clic pour zoomer` : [c.rep.it.title, c.rep.it.date_text, c.rep.it.caption].filter(Boolean).join(' — ');
                     marks.set(k, el); mk.appendChild(el);
                 }
@@ -187,7 +188,7 @@
         };
         stage.addEventListener('pointerup', up); stage.addEventListener('pointercancel', () => { pan = null; dragging = null; stage.classList.remove('is-panning'); });
         stage.addEventListener('contextmenu', e => { const el = e.target.closest('.pm-mk'); if (!el) return; e.preventDefault(); const c = el._c, one = c.list.length === 1; // K14 : le menu de l'app
-            const items = [{icon: '↗', label: one ? 'Ouvrir' : `Ouvrir les ${c.list.length} photos`, run: () => o.onOpen?.(c.rep.it, c.list.map(p => p.it))}, one && o.onEdit && {icon: '✎', label: 'Modifier le repère', run: () => o.onEdit(c.rep.it)}].filter(Boolean);
+            const items = [{icon: '↗', label: one ? 'Ouvrir' : i18n('Ouvrir les {nm} photos', {nm: c.list.length}), run: () => o.onOpen?.(c.rep.it, c.list.map(p => p.it))}, one && o.onEdit && {icon: '✎', label: 'Modifier le repère', run: () => o.onEdit(c.rep.it)}].filter(Boolean);
             if (window.LCNDA_UI?.contextMenu) window.LCNDA_UI.contextMenu(e, items); else if (one && o.onEdit) o.onEdit(c.rep.it); });
         stage.addEventListener('wheel', e => { e.preventDefault(); const now = Date.now(); if (now - lastWheel < 120) return; lastWheel = now; const r = stage.getBoundingClientRect(); m.zoomAt(e.deltaY < 0 ? 1 : -1, e.clientX - r.left, e.clientY - r.top); }, {passive: false});
         stage.addEventListener('dblclick', e => { if (e.target.closest('.pm-mk,.pm-zoom')) return; const r = stage.getBoundingClientRect(); m.zoomAt(1, e.clientX - r.left, e.clientY - r.top); });
@@ -309,7 +310,7 @@
         const stepHelp = (inp, help, set) => {
             const r = T.parseStep(inp.value);
             help.className = `pm-step-help${r ? (r.ok ? ' is-ok' : ' is-warn') : ''}`;
-            help.textContent = !r ? '' : r.ok ? `✓ Compris : ${r.label}` : `⚠️ ${r.error.charAt(0).toUpperCase()}${r.error.slice(1)}`;
+            help.textContent = !r ? '' : r.ok ? i18n('✓ Compris : {nm}', {nm: r.label}) : `⚠️ ${r.error.charAt(0).toUpperCase()}${r.error.slice(1)}`;
             if (r?.ok) set(r.step);
         };
         if (!compact) {
@@ -434,13 +435,13 @@
             const side = $('[data-pm=side]'); if (!side) return;
             const base = visibleItems(), todo = base.filter(it => it.lat == null), list = sideTab === 'todo' ? todo : shownList;
             const legend = data.all ? `<div class="pm-legend"><b>Légende</b>${data.maps.length ? data.maps.map(m2 => `<label class="checkbox-line"><input type="checkbox" data-pm-leg="${m2.id}" ${V.hidden.has(m2.id) ? '' : 'checked'}><span class="pm-legdot" style="background:${esc(mapColor.get(m2.id))}"></span><span class="pm-legname">${esc(m2.name)}</span><small>${(m2.photos || 0) + (m2.videos || 0)}</small></label>`).join('') : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📍</span><span class="empty-line-text">Aucune carte encore.</span></p>'}<span class="pm-legall"><button type="button" class="link-button" data-pm="legall">Tout cocher</button> · <button type="button" class="link-button" data-pm="legnone">Tout décocher</button></span></div>` : '';
-            side.innerHTML = `${legend}<div class="segmented pm-sidetabs"><button type="button" data-pm-tab="todo" class="${sideTab === 'todo' ? 'is-active' : ''}">À placer (${todo.length})</button><button type="button" data-pm-tab="all" class="${sideTab === 'all' ? 'is-active' : ''}">Affichés (${shownList.length})</button></div>
+            side.innerHTML = `${legend}<div class="segmented pm-sidetabs"><button type="button" data-pm-tab="todo" class="${sideTab === 'todo' ? 'is-active' : ''}">${i18n('À placer ({n})', {n: todo.length})}</button><button type="button" data-pm-tab="all" class="${sideTab === 'all' ? 'is-active' : ''}">${i18n('Affichés ({n})', {n: shownList.length})}</button></div>
                 ${sideTab === 'todo' && todo.length && editable ? '<p class="pm-hint">Glisse une vignette sur la carte, ou 📍 pour choisir un lieu de ta base.</p>' : ''}
                 <ol class="pm-drawer">${list.slice(0, 300).map(it => `<li class="pm-row" data-pm-item="${it.id}">
                     <span class="pm-rthumb${it.kind === 'video' ? ' is-video' : ''}${editable && it.lat == null ? ' is-grab' : ''}" data-pm-grab="${it.id}" title="${editable && it.lat == null ? 'Glisse-moi sur la carte' : 'Ouvrir'}"><img src="${esc(thumbUrl(it))}" alt="" loading="lazy" draggable="false" onerror="this.classList.add('is-broken')">${it.kind === 'video' ? `<i>▶</i>` : ''}</span>
                     <span class="pm-rtxt"><button type="button" class="link-button" data-pm-open="${it.id}">${esc(it.title || it.caption || 'Sans titre')}</button><small>${esc(it.date_text || 'sans date')}${it._t != null && !it._exact && it.date_text ? ' · sans heure' : ''}${data.all ? ` · ${esc(data.maps.find(m2 => m2.id === it.map_id)?.name || '')}` : ''}</small></span>
                     ${editable ? `<span class="pm-ract">${it.lat == null ? `<button type="button" class="icon-button" data-pm-place="${it.id}" title="Choisir un lieu de la base" aria-label="Choisir un lieu">📍</button>` : `<button type="button" class="icon-button" data-pm-goto="${it.id}" title="Voir sur la carte" aria-label="Voir sur la carte">🎯</button>`}<button type="button" class="icon-button" data-pm-edit="${it.id}" title="Modifier : date, légende, personnes, lieu" aria-label="Modifier">✎</button></span>` : (it.lat != null ? `<span class="pm-ract"><button type="button" class="icon-button" data-pm-goto="${it.id}" title="Voir sur la carte" aria-label="Voir sur la carte">🎯</button></span>` : '')}
-                </li>`).join('')}</ol>${list.length > 300 ? `<p class="muted">… et ${list.length - 300} autres (choisis une période sur la frise pour les voir).</p>` : ''}
+                </li>`).join('')}</ol>${list.length > 300 ? `<p class="muted">${i18n('… et {n} autres (choisis une période sur la frise pour les voir).', {n: list.length - 300})}</p>` : ''}
                 ${!list.length ? `<p class="muted pm-empty">${sideTab === 'todo' ? (base.length ? 'Tout est placé ✓' : (editable ? 'Carte vide : « ＋ Photos de l’app » ou glisse des fichiers ci-dessous.' : 'Rien sur cette carte pour l’instant.')) : 'Rien à afficher avec ces filtres.'}</p>` : ''}`;
         }
         const byId = id => data.items.find(it => it.id === Number(id));
@@ -462,7 +463,7 @@
             try { await update(it, {lat, lon, src}); }
             catch (e) { toast(e.message, 'error'); refresh(); return; }
             const back = () => update(it, before.lat == null ? {lat: null, lon: null} : {lat: before.lat, lon: before.lon, src: before.src});
-            A().undoToast?.(before.lat == null ? `« ${it.title || 'Photo'} » posée sur la carte` : `« ${it.title || 'Photo'} » déplacée${it.gps ? ' (la position GPS d’origine est gardée : ✎ → « ↺ Revenir au GPS »)' : ''}`,
+            A().undoToast?.(before.lat == null ? i18n('« {nm} » posée sur la carte', {nm: it.title || i18n('Photo')}) : `${i18n('« {nm} » déplacée', {nm: it.title || i18n('Photo')})}${it.gps ? ` ${i18n('(la position GPS d’origine est gardée : ✎ → « ↺ Revenir au GPS »)')}` : ''}`,
                 {undo: back, redo: () => update(it, {lat, lon, src})});
         }
         /* glisser une vignette du tiroir sur la carte (souris ou doigt) */
@@ -491,10 +492,10 @@
             moveItem(g.it, ll.lat, ll.lon, 'manual');
         });
         async function placeFromBase(it) {
-            const pl = await P().openPicker?.({kind: 'place', title: `Où a été prise « ${it.title || 'cette photo'} » ?`});
+            const pl = await P().openPicker?.({kind: 'place', title: i18n('Où a été prise « {nm} » ?', {nm: it.title || i18n('cette photo')})});
             if (!pl) return;
             const lat = Number(pl.lat), lon = Number(pl.lon);
-            if (!Number.isFinite(lat) || !Number.isFinite(lon) || (!lat && !lon)) { try { await update(it, {place_id: pl.id}); } catch (_) {} toast(`« ${pl.title} » n’a pas de coordonnées : glisse la photo sur la carte à la main.`, 'error'); return; }
+            if (!Number.isFinite(lat) || !Number.isFinite(lon) || (!lat && !lon)) { try { await update(it, {place_id: pl.id}); } catch (_) {} toast(i18n('« {nm} » n’a pas de coordonnées : glisse la photo sur la carte à la main.', {nm: pl.title}), 'error'); return; }
             try { await update(it, {place_id: pl.id}, true); } catch (e) { toast(e.message, 'error'); return; }
             await moveItem(it, lat, lon, 'place');
         }
@@ -528,7 +529,7 @@
         });
         /* ajouter : depuis la base (fenêtre unique), ou des fichiers de l'ordinateur (E4) */
         async function addFromBase() {
-            const list = await P().openMediaPicker?.({multiple: true, types: ['image', 'video'], eyebrow: 'CARTE DE PHOTOS', title: `Ajouter à « ${mp.name} »`, okLabel: 'Poser sur la carte', person: mp.person_id || null,
+            const list = await P().openMediaPicker?.({multiple: true, types: ['image', 'video'], eyebrow: 'CARTE DE PHOTOS', title: i18n('Ajouter à « {nm} »', {nm: mp.name}), okLabel: 'Poser sur la carte', person: mp.person_id || null,
                 intro: 'Les photos et vidéos qui ont des coordonnées GPS se placent toutes seules ; les autres vont dans « À placer ».'});
             if (!list?.length) return;
             try {
@@ -545,7 +546,7 @@
             files.forEach(f => { if (cur.length && (cur.length >= 8 || size + f.size > 60 * 1024 * 1024)) { batches.push(cur); cur = []; size = 0; } cur.push(f); size += f.size; });
             if (cur.length) batches.push(cur);
             for (const batch of batches) {
-                prog.innerHTML = UI().spinner(`Import : ${done} / ${files.length}… (le GPS et la date de prise de vue sont lus)`);
+                prog.innerHTML = UI().spinner(i18n('Import : {nm} / {x2}… (le GPS et la date de prise de vue sont lus)', {nm: done, x2: files.length}));
                 const fd = new FormData(); batch.forEach(f => fd.append('files[]', f, f.name)); fd.append('map_id', String(mp.id)); fd.append('csrf', S().csrf || '');
                 if (drop) { fd.append('drop_lat', String(drop.lat)); fd.append('drop_lon', String(drop.lon)); }
                 try {
@@ -555,7 +556,7 @@
                     done += r.imported?.length || 0; placed += r.placed || 0; unplaced += r.unplaced || 0; refused.push(...(r.refused || []));
                 } catch (x) { refused.push(...batch.map(f => ({name: f.name, reason: x.message}))); }
             }
-            prog.innerHTML = refused.length ? (UI().notice ? UI().notice('warn', `Pas importé : ${refused.slice(0, 6).map(r => `${r.name} (${r.reason})`).join(' · ')}${refused.length > 6 ? ` … et ${refused.length - 6} autres` : ''}`) : '') : '';
+            prog.innerHTML = refused.length ? (UI().notice ? UI().notice('warn', i18n('Pas importé : {list}', {list: `${refused.slice(0, 6).map(r => `${r.name} (${i18n(r.reason)})`).join(' · ')}${refused.length > 6 ? ` … ${i18n('et {n} autres', {n: refused.length - 6})}` : ''}`})) : '') : '';
             if (done) toast(addedText(done, placed, unplaced));
             await reload();
         }
@@ -576,7 +577,7 @@
                 <div><span class="pk-lab">Personnes sur la photo</span>${P().pickerField?.({name: 'pm_people', kind: 'person', multiple: true, value: it.people.map(p => ({id: p.id, title: p.name}))}) || ''}</div>
                 <div><span class="pk-lab">Lieu de la base</span>${P().pickerField?.({name: 'pm_place', kind: 'place', value: it.place_id ? {id: it.place_id, title: it.place_name || 'Lieu'} : null}) || ''}</div>
                 <label class="checkbox-line"><input type="checkbox" name="use_place"> Poser la photo sur ce lieu</label>
-                <p class="pm-note">Position : ${it.lat == null ? 'pas encore placée (dans « À placer »)' : `${esc(SRC_LABEL[it.src] || '')} — ${it.lat.toFixed(5)}, ${it.lon.toFixed(5)}`}${it.gps ? `<br>🛰 GPS d’origine gardé : ${it.gps[0].toFixed(5)}, ${it.gps[1].toFixed(5)}` : ''}</p>
+                <p class="pm-note">Position : ${it.lat == null ? 'pas encore placée (dans « À placer »)' : `${esc(i18n(SRC_LABEL[it.src] || ''))} — ${it.lat.toFixed(5)}, ${it.lon.toFixed(5)}`}${it.gps ? `<br>🛰 ${i18n('GPS d’origine gardé : {c}', {c: `${it.gps[0].toFixed(5)}, ${it.gps[1].toFixed(5)}`})}` : ''}</p>
                 <div class="pm-edit-acts">${it.gps && it.src !== 'gps' ? '<button type="button" class="button small secondary" data-pme="gps">↺ Revenir au GPS</button>' : ''}${it.lat != null ? '<button type="button" class="button small secondary" data-pme="unplace">Remettre dans « À placer »</button>' : ''}<button type="button" class="button small secondary danger" data-pme="remove">Retirer de la carte</button></div></div></div>`;
             const dlg = ext.openDialog({eyebrow: 'CARTE DE PHOTOS', title: `✎ ${it.title || 'Photo'}`, wide: true, body, submitLabel: 'Enregistrer',
                 onOpen: dl => dl.addEventListener('click', async e => {
@@ -607,7 +608,7 @@
             const ids = list.map(x => x.id);
             try { await post({op: 'remove_items', ids}); } catch (x) { toast(x.message, 'error'); return; }
             data.items = data.items.filter(x => !ids.includes(x.id)); refresh();
-            A().undoToast?.(list.length === 1 ? `« ${list[0].title || 'Photo'} » retirée de la carte (elle reste dans les médias)` : `${list.length} éléments retirés de la carte`, {undo: async () => { await post({op: 'restore_items', ids}); await reload(); }, redo: async () => { await post({op: 'remove_items', ids}); await reload(); }});
+            A().undoToast?.(list.length === 1 ? i18n('« {nm} » retirée de la carte (elle reste dans les médias)', {nm: list[0].title || i18n('Photo')}) : i18n('{nm} éléments retirés de la carte', {nm: list.length}), {undo: async () => { await post({op: 'restore_items', ids}); await reload(); }, redo: async () => { await post({op: 'remove_items', ids}); await reload(); }});
         }
         async function reload() {
             const v = map.view(), sel = tl.sel;
@@ -617,7 +618,7 @@
         /* ⤓ E3 : la carte en image (fond, trajet, vignettes) */
         function exportMap() {
             const sub = () => (tl.sel ? `Du ${T.label(tl.sel[0])} au ${T.label(tl.sel[1])}` : (mp.period_text || ''));
-            const toMedia = async (blob, filename) => { try { await P().importMediaFile(new File([blob], filename, {type: blob.type}), ['image']); toast('Une copie est rangée dans les médias.'); } catch (x) { toast(`Copie dans les médias impossible : ${x.message}`, 'error'); } };
+            const toMedia = async (blob, filename) => { try { await P().importMediaFile(new File([blob], filename, {type: blob.type}), ['image']); toast('Une copie est rangée dans les médias.'); } catch (x) { toast(i18n('Copie dans les médias impossible : {nm}', {nm: x.message}), 'error'); } };
             const run = async o => {
                 const blob = await renderPng(map, o.format === 'jpg' ? 'image/jpeg' : 'image/png', mp.name, sub());
                 const fn = o.filename || `carte-de-photos.${o.format === 'jpg' ? 'jpg' : 'png'}`;
@@ -625,7 +626,7 @@
                 if (o.saveCopy && P().importMediaFile) await toMedia(blob, fn);
             };
             if (!UI().openExportDialog) return run({format: 'png'}).catch(x => toast(x.message, 'error'));
-            UI().openExportDialog({title: `Carte de photos « ${mp.name} »`, defaultName: mp.name || 'carte-de-photos', quality: false, saveCopy: !kiosk() && !!P().importMediaFile,
+            UI().openExportDialog({title: i18n('Carte de photos « {nm} »', {nm: mp.name}), defaultName: mp.name || 'carte-de-photos', quality: false, saveCopy: !kiosk() && !!P().importMediaFile,
                 info: 'La carte telle qu’elle est à l’écran : fond, trajet et vignettes. Si le fond vient d’Internet et refuse d’être copié, l’image est faite sans lui.',
                 preview: async () => { try { return URL.createObjectURL(await renderPng(map, 'image/jpeg', mp.name, sub())); } catch (_) { return null; } },
                 formats: [{id: 'png', run}, {id: 'jpg', run}, {id: 'print', run: async () => { const blob = await renderPng(map, 'image/png', mp.name, ''); const u = URL.createObjectURL(blob); setTimeout(() => URL.revokeObjectURL(u), 600000); window.LCNDA_UI?.openPrintDialog?.({title: mp.name || 'Carte de photos', key: 'carte-photos', photos: false, orientation: 'landscape', html: `<!doctype html><title>${esc(mp.name)}</title><style>body{margin:0}img{display:block;max-width:100%;max-height:100%;margin:auto}</style><img src="${u}" alt="">`}); }}]}); // L1 : la fenêtre « Imprimer » commune
@@ -638,7 +639,7 @@
         if (opts.focusItem) { const it = byId(opts.focusItem); if (it) editItem(it); }
         return {map, tl, data, reload, root};
     }
-    const addedText = (n, placed, unplaced, already = 0, skipped = 0) => [`${plural(n, 'élément ajouté', 'éléments ajoutés')}`, placed ? `${placed} placé${placed > 1 ? 's' : ''} par le GPS` : '', unplaced ? `${unplaced} à placer` : '', already ? `${already} déjà sur la carte` : '', skipped ? `${skipped} ignoré${skipped > 1 ? 's' : ''} (ni photo ni vidéo)` : ''].filter(Boolean).join(' · ');
+    const addedText = (n, placed, unplaced, already = 0, skipped = 0) => [`${plural(n, 'élément ajouté', 'éléments ajoutés')}`, placed ? plural(placed, "placé par le GPS", "placés par le GPS") : '', unplaced ? i18n('{nm} à placer', {nm: unplaced}) : '', already ? i18n('{nm} déjà sur la carte', {nm: already}) : '', skipped ? `${plural(skipped, 'ignoré', 'ignorés')} ${i18n('(ni photo ni vidéo)')}` : ''].filter(Boolean).join(' · ');
 
     /** l'image de la carte (canvas) : tuiles si elles se laissent copier, trajet, vignettes */
     async function renderPng(map, type, title, sub) {
@@ -695,7 +696,7 @@
     }
     async function deleteMap(m, after) {
         try { await post({op: 'delete_map', id: m.id}); } catch (x) { toast(x.message, 'error'); return; }
-        A().undoToast?.(`Carte « ${m.name} » supprimée (les photos restent dans les médias)`, {undo: async () => { await post({op: 'restore_map', id: m.id}); await after?.('undo'); }, redo: async () => { await post({op: 'delete_map', id: m.id}); await after?.('redo'); }});
+        A().undoToast?.(i18n('Carte « {nm} » supprimée (les photos restent dans les médias)', {nm: m.name}), {undo: async () => { await post({op: 'restore_map', id: m.id}); await after?.('undo'); }, redo: async () => { await post({op: 'delete_map', id: m.id}); await after?.('redo'); }});
         await after?.('delete');
     }
 

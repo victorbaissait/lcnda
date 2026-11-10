@@ -385,8 +385,8 @@ function pet_check_parents(PDO $pdo, int $id, int $sire, int $dam): void
         $p = pet_row($pdo, $pid);
         if (!$p) { throw new RuntimeException(($role === 'sire' ? 'Le père' : 'La mère') . ' choisi(e) n’existe plus.'); }
         $sex = $p['d']['sex'] ?? '';
-        if ($role === 'sire' && $sex === 'F') { throw new RuntimeException('« ' . pet_title($p['d']) . ' » est une femelle : elle ne peut pas être le père.'); }
-        if ($role === 'dam' && $sex === 'M') { throw new RuntimeException('« ' . pet_title($p['d']) . ' » est un mâle : il ne peut pas être la mère.'); }
+        if ($role === 'sire' && $sex === 'F') { throw new RuntimeException(i18n_t('« {name} » est une femelle : elle ne peut pas être le père.', ['name' => pet_title($p['d'])])); }
+        if ($role === 'dam' && $sex === 'M') { throw new RuntimeException(i18n_t('« {name} » est un mâle : il ne peut pas être la mère.', ['name' => pet_title($p['d'])])); }
         if ($id && ($pid === $id || isset(pet_ancestors($pdo, $pid, 30)[$id]))) { throw new RuntimeException('Boucle dans le pedigree : un animal ne peut pas être son propre ancêtre.'); }
     }
     if ($sire && $sire === $dam) { throw new RuntimeException('Le père et la mère sont le même animal.'); }

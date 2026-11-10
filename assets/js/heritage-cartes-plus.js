@@ -13,6 +13,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && k in v ? v[k] : m)));
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     for (const key of ['mapSetup', 'mapDraw']) ext[key] = ext[key] || [];
     const A = () => window.LCNDA_APP, UI = () => window.LCNDA_UI, S = () => A()?.state || {};
@@ -210,8 +211,8 @@
     const MODS = {30: 'supprimée (partagée entre ses voisines)', 31: 'fusionnée', 32: 'réunie en commune nouvelle', 33: 'fusionnée (fusion-association)', 34: 'fusionnée', 10: 'renommée'};
     /** la bulle d'une commune ancienne : « Puy-d'Essai — fusionnée le 1er janvier 1973 ; aujourd'hui : Naves (19146) » */
     function goneHtml(r) {
-        const what = r.k === 'rename' ? `renommée « ${esc(r.tn)} » le ${fmtDate(r.d)}` : `${MODS[r.m] || 'disparue'} le ${fmtDate(r.d)}${r.tn && r.tn !== r.nn ? ` dans ${esc(r.tn)}` : ''}${r.as ? ` (devenue commune ${esc(r.as)})` : ''}`;
-        return `<b>🏚 ${esc(r.n)}</b> <small class="muted">(${esc(r.c)})</small><p>${what}.</p><p>Aujourd’hui : <b>${esc(r.nn || r.tn)}</b> <small class="muted">(${esc(r.nc || r.tc)})</small>${r.back ? `<br>Rétablie le ${fmtDate(r.back)}.` : ''}</p>${r.approx ? '<p class="ui-hint">Position approximative : le centre de la commune d’aujourd’hui.</p>' : ''}<p class="ui-hint">Source : INSEE, Code officiel géographique (depuis 1943).</p>`;
+        const what = r.k === 'rename' ? i18n('renommée « {name} » le {date}', {name: esc(r.tn), date: fmtDate(r.d)}) : `${i18n('{what} le {date}', {what: i18n(MODS[r.m] || 'disparue'), date: fmtDate(r.d)})}${r.tn && r.tn !== r.nn ? ` ${i18n('dans {name}', {name: esc(r.tn)})}` : ''}${r.as ? ` ${i18n('(devenue commune {name})', {name: esc(r.as)})}` : ''}`;
+        return `<b>🏚 ${esc(r.n)}</b> <small class="muted">(${esc(r.c)})</small><p>${what}.</p><p>${i18n('Aujourd’hui : <b>{name}</b>', {name: esc(r.nn || r.tn)})} <small class="muted">(${esc(r.nc || r.tc)})</small>${r.back ? `<br>${i18n('Rétablie le {date}.', {date: fmtDate(r.back)})}` : ''}</p>${r.approx ? '<p class="ui-hint">Position approximative : le centre de la commune d’aujourd’hui.</p>' : ''}<p class="ui-hint">Source : INSEE, Code officiel géographique (depuis 1943).</p>`;
     }
     let pop = null;
     const closePop = () => { pop?.remove(); pop = null; };
@@ -278,7 +279,7 @@
             loadGone(view, p.renames).then(ch => { if (ch) A().drawMap?.(); });
             gone.items.forEach(r => {
                 const [x, y] = P(r.lon, r.lat); if (x < -20 || y < -20 || x > width + 20 || y > height + 20) return;
-                out += `<g class="cp-gone${r.k === 'rename' ? ' is-rename' : ''}${r.approx ? ' is-approx' : ''}" data-cp-gone="${esc(r.c + '|' + r.d)}" tabindex="0" role="button" aria-label="${esc(r.n)}, commune ${r.k === 'rename' ? 'renommée' : 'disparue'}"><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${z >= 11 ? 7 : 5}"/><title>${esc(r.n)} — ${r.k === 'rename' ? 'renommée' : 'disparue'} en ${esc(String(r.d).slice(0, 4))}</title>${z >= 10 ? `<text x="${(x + 9).toFixed(1)}" y="${(y + 4).toFixed(1)}">${esc(r.n)}</text>` : ''}</g>`;
+                out += `<g class="cp-gone${r.k === 'rename' ? ' is-rename' : ''}${r.approx ? ' is-approx' : ''}" data-cp-gone="${esc(r.c + '|' + r.d)}" tabindex="0" role="button" aria-label="${esc(i18n(r.k === 'rename' ? '{name}, commune renommée' : '{name}, commune disparue', {name: r.n}))}"><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${z >= 11 ? 7 : 5}"/><title>${esc(i18n(r.k === 'rename' ? '{name} — renommée en {year}' : '{name} — disparue en {year}', {name: r.n, year: String(r.d).slice(0, 4)}))}</title>${z >= 10 ? `<text x="${(x + 9).toFixed(1)}" y="${(y + 4).toFixed(1)}">${esc(r.n)}</text>` : ''}</g>`;
             });
         }
         svg.innerHTML = out;
@@ -309,7 +310,7 @@
                 <div class="page-actions">${st.installed ? '<button type="button" class="button secondary" data-cp-dl>⤓ Télécharger de nouveau (mise à jour)</button><button type="button" class="button secondary" data-cp-rm>🗑 Retirer</button>'
                     : '<button type="button" class="button" data-cp-dl>⤓ Installer les frontières anciennes <span data-cp-size>(taille…)</span></button>'}</div>
                 <p class="ui-hint" data-cp-remote></p>
-                <p class="ui-hint">${esc(st.licence || '')}. Rangé dans le ${esc(st.dir_label || 'dossier des données')}, commun à toutes tes généalogies.</p></section>
+                <p class="ui-hint">${esc(st.licence || '')}. ${i18n('Rangé dans le {name}, commun à toutes tes généalogies.', {name: esc(i18n(st.dir_label || 'dossier des données'))})}</p></section>
             <section class="maintenance-panel"><h3>🏛 Provinces (≈ 1789) et départements de 1790</h3>
                 <p>Livrés avec l’app : rien à télécharger. Ce sont des tracés <b>approximatifs</b>, faits d’après les départements d’aujourd’hui (chaque département rangé dans la province qui en couvre la plus grande partie). Aucune source libre et officielle de leurs vrais contours n’a été trouvée.</p></section>
         </section>`;
@@ -318,12 +319,12 @@
         A().api('frontieres_remote').then(r => {
             if (sz) sz.textContent = r.total != null ? `(${mo(r.total)})` : '(taille inconnue)';
             if (info) info.textContent = (r.files || []).map(f => `${f.label} : ${f.size != null ? mo(f.size) : 'taille inconnue'} (${f.from})`).join(' · ');
-        }).catch(e => { if (sz) sz.textContent = ''; if (info) info.textContent = `Adresse de téléchargement injoignable pour l’instant (${e.message || 'pas d’Internet'}).`; });
+        }).catch(e => { if (sz) sz.textContent = ''; if (info) info.textContent = i18n('Adresse de téléchargement injoignable pour l’instant ({err}).', {err: e.message || i18n('pas d’Internet')}); });
         ws.querySelector('[data-cp-dl]')?.addEventListener('click', async e => {
             const b = e.currentTarget; b.disabled = true; const t = b.innerHTML; b.innerHTML = UI().spinner('Téléchargement et vérification…', {inline: true});
             try {
                 const r = await A().api('frontieres_download', {}, {method: 'POST', body: {}});
-                A().toast(`✓ Frontières anciennes installées : ${A().plural(r.gone || 0, 'commune disparue', 'communes disparues')}.`, 'success');
+                A().toast(i18n('✓ Frontières anciennes installées : {n}.', {n: A().plural(r.gone || 0, 'commune disparue', 'communes disparues')}), 'success');
                 gone = {key: '', items: [], total: 0, busy: false, installed: null};
                 ext.maintenance.frontieres(++S().workspaceToken);
             } catch (err) { b.disabled = false; b.innerHTML = t; A().toast(err.message || 'Téléchargement impossible.', 'error'); }

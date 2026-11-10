@@ -8,6 +8,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && k in v ? v[k] : m)));
     const A = () => window.LCNDA_APP;
     const UI = () => window.LCNDA_UI;
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
@@ -47,7 +48,7 @@
         const blob = await r.blob(), a = document.createElement('a');
         a.href = URL.createObjectURL(blob); a.download = `widget-${kind}.html`; document.body.appendChild(a); a.click();
         setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 4000);
-        toast(`Widget prêt : widget-${kind}.html. Ouvre-le d’un double-clic et garde l’onglet ouvert (ou épingle-le) : il change tout seul chaque jour.`, 'success');
+        toast(i18n('Widget prêt : {file}. Ouvre-le d’un double-clic et garde l’onglet ouvert (ou épingle-le) : il change tout seul chaque jour.', {file: `widget-${kind}.html`}), 'success');
     }
 
     /** la fenêtre « 🪟 Widgets sur le bureau » ; focus = la sorte à mettre en avant */
@@ -84,7 +85,7 @@
                             const r = await D.open(k, optsFor(k)); if (!r?.ok) throw new Error(r?.error || 'Le widget n’a pas pu s’ouvrir.');
                             toast(`${KINDS[k][0]} « ${KINDS[k][1]} » est sur le bureau.`, 'success'); return repaint();
                         }
-                        if (b.dataset.dwClose) { const k = b.dataset.dwClose; await D.close(k); A().undoToast ? A().undoToast(`« ${KINDS[k][1]} » retiré du bureau`, {undo: async () => { await D.open(k, optsFor(k)); repaint(); }}) : toast('Retiré du bureau.'); return repaint(); }
+                        if (b.dataset.dwClose) { const k = b.dataset.dwClose; await D.close(k); A().undoToast ? A().undoToast(i18n('« {name} » retiré du bureau', {name: i18n(KINDS[k][1])}), {undo: async () => { await D.open(k, optsFor(k)); repaint(); }}) : toast('Retiré du bureau.'); return repaint(); }
                     } catch (err) { toast(err.message, 'error'); }
                 });
                 dg.addEventListener('change', async e => {
@@ -106,7 +107,7 @@
             const id = tools.closest('[data-dashboard-widget]').dataset.dashboardWidget, w = (settings.widgets || []).find(x => x.id === id), kind = w && FROM_DASH[w.type];
             if (!kind) return;
             const b = document.createElement('button'); b.type = 'button'; b.className = 'icon-action'; b.dataset.dwPut = kind;
-            b.title = desk() ? `🪟 Mettre sur le bureau (« ${KINDS[kind][1]} », une petite fenêtre à part)` : `🪟 Mettre sur le bureau (« ${KINDS[kind][1]} » : un fichier .html autonome dans un navigateur)`; b.setAttribute('aria-label', 'Mettre sur le bureau'); b.textContent = '🪟';
+            b.title = desk() ? i18n('🪟 Mettre sur le bureau (« {name} », une petite fenêtre à part)', {name: i18n(KINDS[kind][1])}) : i18n('🪟 Mettre sur le bureau (« {name} » : un fichier .html autonome dans un navigateur)', {name: i18n(KINDS[kind][1])}); b.setAttribute('aria-label', i18n('Mettre sur le bureau')); b.textContent = '🪟';
             tools.prepend(b);
         });
         // 🧮 la calculette flottante de l'app : « 🪟 Mettre sur le bureau »

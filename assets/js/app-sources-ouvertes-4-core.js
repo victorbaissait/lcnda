@@ -25,6 +25,7 @@
     if (root) root.LCNDA_SO4 = api;
 })(typeof window !== 'undefined' ? window : null, function () {
     'use strict';
+    const i18n = (s, v) => (typeof window !== 'undefined' && window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js (dans Node : le français)
     const MENTION = 'Lu sur un site d’archives en ligne et recopié : à vérifier sur le document';
     const clean = s => String(s ?? '').replace(/[\u0000-\u001f\u007f]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 200);
     const enc = v => encodeURIComponent(clean(v));
@@ -294,7 +295,7 @@
         const cells = l => l.split(/\t|;|\s*\|\s*|,(?=\s*\S)(?![^"]*"\s*$)/).map(c => c.replace(/^"|"$/g, '').trim());
         const isYear = c => /^\d{4}$/.test(c) && +c >= POP_MIN && +c <= POP_MAX;
         const rows = new Map(), names = [], notices = [];
-        const put = (y, n) => { if (!Number.isFinite(n) || n < 0 || n > 20000000) return; if (rows.has(y) && rows.get(y) !== n) notices.push(`Deux chiffres pour ${y} (${rows.get(y)} et ${n}) : le premier est gardé.`); if (!rows.has(y)) rows.set(y, n); };
+        const put = (y, n) => { if (!Number.isFinite(n) || n < 0 || n > 20000000) return; if (rows.has(y) && rows.get(y) !== n) notices.push(i18n('Deux chiffres pour {nm} ({x2} et {x3}) : le premier est gardé.', {nm: String(y), x2: String(rows.get(y)), x3: String(n)})); if (!rows.has(y)) rows.set(y, n); };
         // 1. deux lignes : une d'années, la suivante de nombres (tableau « à l'horizontale »)
         for (let i = 0; i + 1 < lines.length; i++) {
             const a = cells(lines[i]), b = cells(lines[i + 1]);

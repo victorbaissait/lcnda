@@ -9,6 +9,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const A = () => window.LCNDA_APP;
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     for (const key of ['personBlocks', 'lists']) ext[key] = ext[key] || {};
@@ -74,7 +75,7 @@
         const top = (k, v) => v ? `<div><dt>${k}</dt><dd>${esc(v)}</dd></div>` : '';
         const model = MODELS.find(m => m[0] === d.model)?.[1] || '';
         A().$('#workspace').innerHTML = `<section class="page h-booklet">
-            <header class="page-header"><div><span class="eyebrow">LIVRET DE FAMILLE</span><h2>${esc(b.title)}</h2><p>${esc([d.commune, d.department, d.country].filter(Boolean).join(' · '))}${d.issued ? ` · délivré le ${esc(d.issued)}` : ''}</p></div>
+            <header class="page-header"><div><span class="eyebrow">LIVRET DE FAMILLE</span><h2>${esc(b.title)}</h2><p>${esc([d.commune, d.department, d.country].filter(Boolean).join(' · '))}${d.issued ? ` · ${i18n('délivré le {dt}', {dt: esc(d.issued)})}` : ''}</p></div>
                 <div class="page-actions"><button type="button" class="button secondary" data-bk-back>← Tous les livrets</button><button type="button" class="button" data-bk-edit>✎ Modifier</button><button type="button" class="button secondary" data-bk-design>🎨 Apparence</button><button type="button" class="button secondary" data-bk-tags title="Les étiquettes de ce livret">🏷 Étiquettes</button><button type="button" class="button secondary" data-bk-apply>🗂 Reporter sur les fiches</button><button type="button" class="button secondary" data-bk-print>🖨 Imprimer</button><button type="button" class="button secondary danger" data-bk-del>Supprimer</button></div></header>
             ${ext.labelChips ? ext.labelChips(b.labels) : ''}
             <div class="h-bk-book">
@@ -83,7 +84,7 @@
                 <section class="h-bk-page" data-bks="marriage"><h3>💍 Le mariage</h3><dl class="h-bk-dl">${top('Mariage civil', [d.marriage_date, d.marriage_place && 'à ' + d.marriage_place].filter(Boolean).join(' '))}${top('Officier', d.marriage_officer)}${top('Contrat', [d.contract_date, d.contract_notary && 'chez ' + d.contract_notary].filter(Boolean).join(' '))}${top('Mariage religieux', [d.religious_date, d.religious_parish && 'paroisse ' + d.religious_parish].filter(Boolean).join(' '))}${top('Divorce', [d.divorce_date, d.divorce_note].filter(Boolean).join(' — '))}</dl>
                     ${!d.marriage_date && !d.marriage_place ? '<p class="muted">Date et lieu du mariage à recopier.</p>' : ''}</section>
                 <section class="h-bk-page h-bk-couple" data-bks="couple"><div>${slotHtml(d.husband, people, 'Époux')}<div class="h-bk-parents">${parents('husband')}</div></div><div>${slotHtml(d.wife, people, 'Épouse')}<div class="h-bk-parents">${parents('wife')}</div></div></section>
-                <section class="h-bk-page h-bk-wide" data-bks="children"><h3>👶 Les enfants (${d.children.length})</h3>${d.children.length ? `<div class="h-bk-children">${d.children.map((c, i) => slotHtml(c, people, `Enfant n°${i + 1}${c.sex ? (c.sex === 'F' ? ' · fille' : ' · garçon') : ''}`)).join('')}</div>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">👶</span><span class="empty-line-text">Aucun enfant recopié.</span></p>'}</section>
+                <section class="h-bk-page h-bk-wide" data-bks="children"><h3>${i18n('👶 Les enfants ({n})', {n: d.children.length})}</h3>${d.children.length ? `<div class="h-bk-children">${d.children.map((c, i) => slotHtml(c, people, `Enfant n°${i + 1}${c.sex ? (c.sex === 'F' ? ' · ' + i18n('fille') : ' · ' + i18n('garçon')) : ''}`)).join('')}</div>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">👶</span><span class="empty-line-text">Aucun enfant recopié.</span></p>'}</section>
                 ${d.others.length ? `<section class="h-bk-page h-bk-wide" data-bks="others"><h3>👥 Autres personnes citées</h3><div class="h-bk-children">${d.others.map(c => slotHtml(c, people, 'Témoin / autre')).join('')}</div></section>` : ''}
                 ${d.mentions ? `<section class="h-bk-page h-bk-wide" data-bks="mentions"><h3>📝 Mentions</h3><p class="h-transcription">${nl(d.mentions)}</p></section>` : ''}
                 ${d.transcription ? `<section class="h-bk-page h-bk-wide" data-bks="transcription"><h3>✍️ Transcription intégrale</h3><p class="h-transcription">${nl(d.transcription)}</p></section>` : ''}
@@ -102,7 +103,7 @@
         ws.querySelector('[data-bk-tags]').addEventListener('click', () => { openEditor(b, again); setTimeout(() => { const lb = [...document.querySelectorAll('dialog[open] .h-labels-picker')].pop(); lb?.scrollIntoView({block: 'center'}); lb?.querySelector('[data-lp-add]')?.click(); }, 200); });
         ws.querySelector('[data-bk-print]').addEventListener('click', () => (window.LCNDA_UI?.printPage ? window.LCNDA_UI.printPage('') : window.print())); // K13 : la fenêtre « Imprimer » (aperçu, format)
         ws.querySelector('[data-bk-del]').addEventListener('click', async () => {
-            if (!await A().confirmBox(`Supprimer « ${b.title} » ? Les fiches des personnes et les photos restent.`, {title: 'Supprimer le livret', okLabel: 'Supprimer le livret'})) return;
+            if (!await A().confirmBox(i18n('Supprimer « {nm} » ? Les fiches des personnes et les photos restent.', {nm: b.title}), {title: 'Supprimer le livret', okLabel: 'Supprimer le livret'})) return;
             try { await api('delete_booklet', {}, {method: 'POST', body: {id}}); toast('Livret supprimé.'); st.hBooklet = 0; ext.lists.family_booklets(++st.workspaceToken); } catch (error) { toast(error.message, 'error'); }
         });
     }
@@ -190,10 +191,10 @@
                     const p = e.target.closest('[data-bk-preset]');
                     if (p) { const pr = PRESETS[p.dataset.bkPreset]; Object.entries(pr).forEach(([k, v]) => { const el = form.elements[k]; if (!el || k === 'label') return; if (el.tagName === 'SELECT' && ![...el.options].some(o => o.value === v)) el.insertAdjacentHTML('beforeend', `<option value="${esc(v)}">${esc(v.split(',')[0].replace(/"/g, ''))}</option>`); el.value = v; }); read(); g.preset = p.dataset.bkPreset; return; }
                     const mp = e.target.closest('[data-bk-myname]'); if (mp) { const x = myDesigns().find(y => y.name === mp.dataset.bkMyname); if (!x) return; g = {...effectiveDesign({}), ...x.design}; Object.entries(x.design).forEach(([k, v]) => { const el = form.elements[k]; if (!el || typeof v === 'object' || el instanceof RadioNodeList) return; if (el.tagName === 'SELECT' && ![...el.options].some(o => o.value === String(v))) el.insertAdjacentHTML('beforeend', `<option value="${esc(v)}">${esc(String(v).replace(/^local:/, '').split(',')[0].replace(/"/g, ''))}</option>`); el.value = v; }); ['size', 'title_size'].forEach(k => { if (x.design[k]) { dl.querySelector(`[data-bk-num="${k}"]`).value = x.design[k]; } });
-                        const ord = [...(x.design.order || []), ...SECTIONS.map(y => y[0]).filter(k => !(x.design.order || []).includes(k))]; dl.querySelector('[data-bk-order]').innerHTML = orderLis(g, ord); applyDesign(pageEl, g); toast(`Apparence « ${x.name} » appliquée (« Enregistrer » pour la garder sur ce livret).`); return; }
-                    const md = e.target.closest('[data-bk-mydelname]'); if (md) { const nm = md.dataset.bkMydelname; A().undoLocalChange(`Apparence « ${nm} » supprimée`, [MY_DESIGNS], () => { try { localStorage.setItem(MY_DESIGNS, JSON.stringify(myDesigns().filter(x => x.name !== nm))); } catch (_) {} }, () => { const mine = dl.querySelector('[data-bk-mine]'); if (mine) mine.innerHTML = mineHtml(); }); dl.querySelector('[data-bk-mine]').innerHTML = mineHtml(); return; }
+                        const ord = [...(x.design.order || []), ...SECTIONS.map(y => y[0]).filter(k => !(x.design.order || []).includes(k))]; dl.querySelector('[data-bk-order]').innerHTML = orderLis(g, ord); applyDesign(pageEl, g); toast(i18n('Apparence « {nm} » appliquée (« Enregistrer » pour la garder sur ce livret).', {nm: x.name})); return; }
+                    const md = e.target.closest('[data-bk-mydelname]'); if (md) { const nm = md.dataset.bkMydelname; A().undoLocalChange(i18n('Apparence « {nm} » supprimée', {nm: nm}), [MY_DESIGNS], () => { try { localStorage.setItem(MY_DESIGNS, JSON.stringify(myDesigns().filter(x => x.name !== nm))); } catch (_) {} }, () => { const mine = dl.querySelector('[data-bk-mine]'); if (mine) mine.innerHTML = mineHtml(); }); dl.querySelector('[data-bk-mine]').innerHTML = mineHtml(); return; }
                     if (e.target.closest('[data-bk-mysave]')) { read(); ext.openDialog({eyebrow: 'LIVRET DE FAMILLE', title: 'Enregistrer cette apparence', submitLabel: 'Enregistrer', body: '<label>Nom de l’apparence<input name="nm" maxlength="60" value="Mon livret" required></label><p class="muted">Elle sera proposée dans « Mes apparences », pour tous les livrets (sans l’image de couverture, propre à chaque livret).</p>',
-                        onSubmit: f2 => { const nm = f2.elements.nm.value.trim() || 'Mon livret'; const {label, cover_media, cover_mode, ...design} = g; const l = [...myDesigns().filter(x => x.name !== nm), {name: nm, design}].slice(-40); try { localStorage.setItem(MY_DESIGNS, JSON.stringify(l)); } catch (_) { toast('Impossible de garder l’apparence.', 'error'); return false; } toast(`Apparence « ${nm} » enregistrée : elle est dans « Mes apparences ».`); const box = dl.querySelector('[data-bk-mine]'); if (box) box.innerHTML = mineHtml(); }}); return; }
+                        onSubmit: f2 => { const nm = f2.elements.nm.value.trim() || 'Mon livret'; const {label, cover_media, cover_mode, ...design} = g; const l = [...myDesigns().filter(x => x.name !== nm), {name: nm, design}].slice(-40); try { localStorage.setItem(MY_DESIGNS, JSON.stringify(l)); } catch (_) { toast('Impossible de garder l’apparence.', 'error'); return false; } toast(i18n('Apparence « {nm} » enregistrée : elle est dans « Mes apparences ».', {nm: nm})); const box = dl.querySelector('[data-bk-mine]'); if (box) box.innerHTML = mineHtml(); }}); return; }
                     const mv = e.target.closest('[data-bk-move]');
                     if (mv) { const li = mv.closest('li'); if (mv.dataset.bkMove === '-1' && li.previousElementSibling) li.parentElement.insertBefore(li, li.previousElementSibling); else if (mv.dataset.bkMove === '1' && li.nextElementSibling) li.parentElement.insertBefore(li.nextElementSibling, li); read(); return; }
                     if (e.target.closest('[data-bk-reset]')) { g = {...PRESETS.bleu}; dl.close(); applyDesign(pageEl, g); try { await api('save_booklet_design', {}, {method: 'POST', body: {id, design: {}}}); } catch (_) {} toast('Apparence de départ remise.'); done?.(); return; }
@@ -258,7 +259,7 @@
     }
     function openEditor(b, done) {
         const d = b?.data || {husband: {}, wife: {}, children: [], others: []}, people = b?.people || {};
-        const childrenHtml = list => list.map((c, i) => slotEditor('child_' + i + '_' + Math.random().toString(36).slice(2, 6), c, `Enfant n°${i + 1}`, people, {child: true, removable: true})).join('');
+        const childrenHtml = list => list.map((c, i) => slotEditor('child_' + i + '_' + Math.random().toString(36).slice(2, 6), c, i18n('Enfant n°{nm}', {nm: i + 1}), people, {child: true, removable: true})).join('');
         const top = (name, label, ph = '') => field(name, label, d[name], ph);
         const area = (name, label, rows, ph = '') => `<label class="span-2">${esc(label)}<textarea name="${name}" rows="${rows}" placeholder="${esc(ph)}">${esc(d[name] || '')}</textarea></label>`;
         ext.openDialog({eyebrow: 'LIVRET DE FAMILLE', title: b ? b.title : 'Nouveau livret', wide: true, labels: ['family_booklet', b?.labels || []],
@@ -278,7 +279,7 @@
                 const body = dlg.querySelector('.h-dialog-body');
                 body.addEventListener('click', async e => {
                     const j = e.target.closest('[data-bk-jump]'); if (j) { e.preventDefault(); dlg.querySelector('#' + j.dataset.bkJump)?.scrollIntoView({behavior: 'smooth', block: 'start'}); return; }
-                    if (e.target.closest('[data-bk-addchild]')) { const box = body.querySelector('[data-bk-children]'); box.insertAdjacentHTML('beforeend', slotEditor('child_n' + Date.now().toString(36), {}, `Enfant n°${box.children.length + 1}`, people, {child: true, removable: true})); box.lastElementChild.querySelector('input').focus(); return; }
+                    if (e.target.closest('[data-bk-addchild]')) { const box = body.querySelector('[data-bk-children]'); box.insertAdjacentHTML('beforeend', slotEditor('child_n' + Date.now().toString(36), {}, i18n('Enfant n°{nm}', {nm: box.children.length + 1}), people, {child: true, removable: true})); box.lastElementChild.querySelector('input').focus(); return; }
                     if (e.target.closest('[data-bk-addother]')) { const box = body.querySelector('[data-bk-others]'); box.insertAdjacentHTML('beforeend', slotEditor('other_n' + Date.now().toString(36), {}, 'Personne citée', people, {removable: true})); return; }
                     const fs = e.target.closest('[data-bk-slot]');
                     if (fs && e.target.closest('[data-bk-remove]')) { fs.remove(); renumber(body); return; }
@@ -291,7 +292,7 @@
                         try {
                             const r = await api('save_person', {}, {method: 'POST', body: {...splitName(s.written_name), gender, living_status: s.death_date ? 'deceased' : 'unknown', occupation: s.occupation}});
                             const pid = Number(r.result?.id || r.id); const pkEl = fs.querySelector('.pk'); if (pkEl) window.LCNDA_PICKER.pickerSet(pkEl, {id: pid, title: s.written_name}); // la pastille montre la fiche créée
-                            toast(`Fiche créée pour ${s.written_name}. « Reporter sur les fiches » ajoutera ses dates.`);
+                            toast(i18n('Fiche créée pour {nm}. « Reporter sur les fiches » ajoutera ses dates.', {nm: s.written_name}));
                         } catch (error) { toast(error.message, 'error'); }
                     }
                 });
@@ -312,7 +313,7 @@
             },
         });
     }
-    const renumber = body => body.querySelectorAll('[data-bk-children] > [data-bk-slot]').forEach((fs, i) => { fs.querySelector('legend').textContent = `Enfant n°${i + 1}`; });
+    const renumber = body => body.querySelectorAll('[data-bk-children] > [data-bk-slot]').forEach((fs, i) => { fs.querySelector('legend').textContent = i18n('Enfant n°{nm}', {nm: i + 1}); });
 
     /* ─── Reporter sur les fiches ─── */
     async function openApply(id, done) {
@@ -327,7 +328,7 @@
                 const keys = [...form.querySelectorAll('[name=k]:checked')].map(i => i.value);
                 if (!keys.length) { toast('Rien de coché.'); return true; }
                 const res = await api('apply_booklet', {}, {method: 'POST', body: {id, keys}});
-                toast(`${A().plural(res.result?.done ?? res.done ?? keys.length, 'information reportée', 'informations reportées')} sur les fiches.`);
+                toast(i18n('{count} sur les fiches.', {count: A().plural(res.result?.done ?? res.done ?? keys.length, 'information reportée', 'informations reportées')}));
                 done?.();
             },
         });
@@ -341,7 +342,7 @@
             ${m.media?.[0] ? A().mediaThumbHtml(m.media[0]) : '<span class="h-bk-coverart small">LIVRET</span>'}
             <div><button type="button" class="table-link" data-bk-goto="${m.id}"><strong>${esc(m.title)}</strong></button>
             <p><span class="h-bk-role">${esc(m.role_label)}</span>${m.commune ? ` · ${esc(m.commune)}` : ''}${m.issued ? ` · délivré le ${esc(m.issued)}` : ''}</p>
-            <small class="muted">${esc([m.slot?.written_name && `écrit : « ${m.slot.written_name} »`, m.slot?.birth_date && `${(window.LCNDA_ACCORD?.accord || ((_, t) => t))(detail.person, 'né(e) le', {x: 'naissance le'})} ${m.slot.birth_date}${m.slot.birth_place ? ' à ' + m.slot.birth_place : ''}`, m.marriage && `mariage ${m.marriage}`, m.slot?.death_date && `décès ${m.slot.death_date}`].filter(Boolean).join(' · '))}</small></div></article>`).join('')}</div>`, 'span-12');
+            <small class="muted">${esc([m.slot?.written_name && i18n('écrit : « {nm} »', {nm: m.slot.written_name}), m.slot?.birth_date && `${(window.LCNDA_ACCORD?.accord || ((_, t) => t))(detail.person, 'né(e) le', {x: 'naissance le'})} ${m.slot.birth_date}${m.slot.birth_place ? ' à ' + m.slot.birth_place : ''}`, m.marriage && `mariage ${m.marriage}`, m.slot?.death_date && `décès ${m.slot.death_date}`].filter(Boolean).join(' · '))}</small></div></article>`).join('')}</div>`, 'span-12');
     };
     document.addEventListener('click', e => {
         const g = e.target.closest?.('[data-bk-goto]'); if (!g) return;

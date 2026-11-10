@@ -368,7 +368,7 @@ function save_cadastre_parcel(PDO $pdo, array $data): array
     $idu = cadastre_idu($insee, $prefixe, $section, $numero);
     if ($idu !== '') {
         $d = $pdo->prepare("SELECT id FROM cadastre_parcels WHERE idu=? AND id<>?"); $d->execute([$idu, $id]);
-        if ($other = (int) $d->fetchColumn()) { throw new RuntimeException('Cette parcelle est déjà dans ta liste (fiche n° ' . $other . ') : ouvre-la plutôt que d’en créer une deuxième.'); }
+        if ($other = (int) $d->fetchColumn()) { throw new RuntimeException(i18n_t('Cette parcelle est déjà dans ta liste (fiche n° {n}) : ouvre-la plutôt que d’en créer une deuxième.', ['n' => $other])); }
     }
     $links = cadastre_clean_links($pdo, $data['links'] ?? []);
     $row = [$insee, $placeId ?: null, $commune, $prefixe, $section, $numero, $idu, $lieuDit, $surface, cadastre_text($data['nature'] ?? '', 120), cadastre_text($data['address'] ?? '', 300),

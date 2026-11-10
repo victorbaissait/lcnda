@@ -3,18 +3,20 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && k in v ? v[k] : m)));
     const {$, $$, api, confirmBox, emptyState, plural, bindWebSearchPanels, bindWebSearchSitesEditors, card, censusStatusText, currentCustomTab, currentDashboardPage, dabovilleNumberFor, dashboardBaseType, dashboardBlockSettings, dashboardGroupItem, dashboardLineageCard, dashboardNewWidget, dashboardNormalizeWidget, dashboardPages, dashboardRecentPeople, dashboardSaintCard, dashboardWidgetInfo, dashboardWidgetLabel, dataRow, debounce, defaultDashboardBlockLimits, defaultDashboardBlocks, defaultDashboardBlockSpans, defaultPersonBlocks, empty, escapeHtml, familyMemoryCardHtml, familyObjectCardHtml, fillLineageWidgets, genderText, generationLabel, isUsableMapCoord, latToY, lifeText, lngToX, mapBackgroundValue, mapTileUrl, mediaPreviewHtml, mediaTypeShortLabelWithIcon, normalizedMediaType, openLightbox, orderedDashboardWidgetTypes, personBlockWidthChoices, personEventMap, personName, placeDisplay, readDesignSettings, readWebSearchSitesEditor, renderSidebar, restoreDoneText, saveDashboardBlockSettings, saveDashboardPages, setModule, sidebarSignal, sosaMap, sosaNumberFor, sosaNumbersText, sosaRootId, state, toast, webSearchPanelHtml, webSearchSettings, webSearchSitesEditor, years} = window.LCNDA_APP;
     // tableau de bord vide : « ＋ Ajouter un widget » montre la liste des widgets de la colonne de gauche (rouverte si besoin)
     document.addEventListener('click',event=>{if(!event.target.closest?.('[data-dash-empty-add]'))return;document.getElementById('app')?.classList.remove('sidebar-collapsed');const first=document.querySelector('[data-add-dashboard-widget]');if(first){first.scrollIntoView({behavior:'smooth',block:'center'});first.focus({preventScroll:true});}});
     // 🐾 Le Suivi des animaux (onglet « suivi ») utilise ce même moteur, avec ses pages à lui (app.js : dashboardSpace)
     const isDashModule=()=>state.module==='dashboard'||state.module==='suivi';
+    const loc=()=>window.LCNDA_I18N?.locale?.()||'fr-FR';
     const isSuiviWidget=type=>String(type).startsWith('sv_');
     function renderDashboardSidebar(content, footer) {
         const all=orderedDashboardWidgetTypes(false),suivi=state.module==='suivi';
         // le Suivi montre d'abord ses blocs, puis « Autres widgets de l'app » ; le tableau de bord met les blocs du Suivi dans leur rubrique, à la fin
         const mine=all.filter(([type])=>isSuiviWidget(type)),others=all.filter(([type])=>!isSuiviWidget(type));
         const groups=suivi?[[null,mine],['Autres widgets de l’app',others]]:[[null,others],['🐾 Suivi des animaux',mine]];
-        let n=1;const item=([type,,label])=>`<div class="dashboard-widget-catalog-item"><div><span>${String(++n).padStart(2,'0')}</span><strong>${escapeHtml(label)}</strong></div><div class="dashboard-widget-catalog-actions"><button type="button" data-info-dashboard-widget="${escapeHtml(type)}" aria-label="Infos ${escapeHtml(label)}">i</button><button type="button" data-add-dashboard-widget="${escapeHtml(type)}" aria-label="Ajouter ${escapeHtml(label)}">+</button></div></div>`;
+        let n=1;const item=([type,,label])=>`<div class="dashboard-widget-catalog-item"><div><span>${String(++n).padStart(2,'0')}</span><strong>${escapeHtml(label)}</strong></div><div class="dashboard-widget-catalog-actions"><button type="button" data-info-dashboard-widget="${escapeHtml(type)}" aria-label="Infos ${escapeHtml(label)}">i</button><button type="button" data-add-dashboard-widget="${escapeHtml(type)}" aria-label="${escapeHtml(i18n('Ajouter {what}',{what:i18n(label)}))}">+</button></div></div>`;
         content.innerHTML = `<div class="dashboard-widget-catalog"><div class="dashboard-widget-catalog-item dashboard-widget-overview is-active"><div><span>01</span><strong>Vue générale</strong></div></div>${groups.filter(([,items])=>items.length).map(([title,items])=>`${title?`<div class="section-label dashboard-widget-catalog-group">${escapeHtml(title)}</div>`:''}${items.map(item).join('')}`).join('')}</div>`;
         footer.innerHTML = `<div class="dashboard-footer-actions"><button class="button small secondary" id="dashboard-library" title="L’ordre des sortes de widgets dans cette colonne, et celles qu’on cache">🧩 Bibliothèque des widgets</button><button class="button small secondary" id="dashboard-reorder" title="Changer l’ordre des widgets de la vue générale">Réordonner les widgets</button><button class="button small secondary" id="dashboard-create-widget" title="Créer ton propre widget, de zéro ou à partir d’un widget existant">＋ Créer un widget</button></div><span style="display:block;margin-top:9px">Widgets duplicables et configurables.</span>`;
         $$('[data-info-dashboard-widget]',content).forEach(button=>button.addEventListener('click',()=>toast(dashboardWidgetInfo[button.dataset.infoDashboardWidget]||dashboardWidgetLabel(button.dataset.infoDashboardWidget)),{signal:sidebarSignal()}));
@@ -179,7 +181,7 @@
         $$('[data-delete-dashboard-widget]').forEach(button=>button.addEventListener('click',async event=>{event.preventDefault();event.stopPropagation();const id=button.dataset.deleteDashboardWidget;button.closest('.dashboard-widget')?.remove();const current=dashboardBlockSettings();const before=JSON.parse(JSON.stringify(current.widgets));const gone=before.find(widget=>widget.id===id);current.widgets=current.widgets.filter(widget=>widget.id!==id);saveDashboardBlockSettings(current);state.dashboardEditingWidget='';
             // H7 : pas de question avant ; « ↶ Annuler » remet le widget à sa place (avec ses réglages)
             const label=gone?dashboardWidgetLabel(gone.type||gone.id):'';const undo=window.LCNDA_APP?.undoToast;
-            if(undo)undo(label?`Widget « ${label} » retiré du tableau de bord.`:'Widget retiré du tableau de bord.',{undo:async()=>{const now=dashboardBlockSettings();now.widgets=before;saveDashboardBlockSettings(now);await renderDashboard();},redo:async()=>{const now=dashboardBlockSettings();now.widgets=now.widgets.filter(widget=>widget.id!==id);saveDashboardBlockSettings(now);await renderDashboard();}});
+            if(undo)undo(label?i18n('Widget « {name} » retiré du tableau de bord.',{name:label}):i18n('Widget retiré du tableau de bord.'),{undo:async()=>{const now=dashboardBlockSettings();now.widgets=before;saveDashboardBlockSettings(now);await renderDashboard();},redo:async()=>{const now=dashboardBlockSettings();now.widgets=now.widgets.filter(widget=>widget.id!==id);saveDashboardBlockSettings(now);await renderDashboard();}});
             else toast('Widget supprimé du tableau de bord.');
             await renderDashboard();}));
         $$('[data-cancel-dashboard-widget]').forEach(button=>button.addEventListener('click',async()=>{state.dashboardEditingWidget='';await renderDashboard(undefined,{reuse:true});}));
@@ -345,7 +347,7 @@
         const newPageId=()=>'pg_'+Date.now().toString(36)+Math.random().toString(36).slice(2,5);
         const draw=()=>{
             const widgets=page().widgets;let depth=-1;
-            $('.dash-pages-editor',dialog).innerHTML=ownTab?'':`<h3>${suivi?'Pages du suivi':'Pages du tableau de bord'}</h3><p class="muted">Chaque page a ses widgets ; les boutons des pages sont en haut ${suivi?'du Suivi des animaux':'du tableau de bord'}. La page cochée s’affiche à l’ouverture.</p>
+            $('.dash-pages-editor',dialog).innerHTML=ownTab?'':`<h3>${i18n(suivi?'Pages du suivi':'Pages du tableau de bord')}</h3><p class="muted">${i18n(suivi?'Chaque page a ses widgets ; les boutons des pages sont en haut du Suivi des animaux. La page cochée s’affiche à l’ouverture.':'Chaque page a ses widgets ; les boutons des pages sont en haut du tableau de bord. La page cochée s’affiche à l’ouverture.')}</p>
                 <div class="dash-pages-rows">${pagesWork.map(p=>`<div class="dash-page-row${p.id===editing?' is-editing':''}" data-page-row="${escapeHtml(p.id)}"><label class="checkbox-line" title="Page affichée à l’ouverture"><input type="radio" name="dash-default" value="${escapeHtml(p.id)}" ${p.id===defaultWork?'checked':''}> par défaut</label><input data-page-name value="${escapeHtml(p.name||'')}" maxlength="40" placeholder="Nom de la page"><button type="button" class="button small ${p.id===editing?'':'secondary'}" data-page-edit>${p.id===editing?'✎ en cours':'Ranger ses widgets'}</button>${pagesWork.length>1?'<button type="button" class="icon-button danger" data-page-del title="Supprimer cette page">🗑</button>':''}</div>`).join('')}</div>
                 <button type="button" class="button small secondary" data-page-add>＋ Nouvelle page</button>`;
             $('.dashboard-reorder-list',dialog).innerHTML=widgets.length?widgets.map((w,i)=>{
@@ -377,7 +379,7 @@
             if(e.target.closest('[data-page-add]')){const id=newPageId();pagesWork.push({id,name:`Page ${pagesWork.length+1}`,widgets:[]});editing=id;draw();setTimeout(()=>{const inp=pagesBox.querySelector(`[data-page-row="${id}"] [data-page-name]`);inp?.focus();inp?.select();},0);return;}
             const row=e.target.closest('[data-page-row]');if(!row)return;const id=row.dataset.pageRow;
             if(e.target.closest('[data-page-edit]')){editing=id;draw();return;}
-            if(e.target.closest('[data-page-del]')){const p=pagesWork.find(x=>x.id===id);if(p.widgets.length&&!await confirmBox(p.widgets.length<2?'Son widget sera supprimé avec elle.':`Ses ${plural(p.widgets.length,'widget')} seront supprimés avec elle.`,{title:`Supprimer la page « ${p.name||'Page'} » ?`,okLabel:'Supprimer la page'}))return;pagesWork=pagesWork.filter(x=>x.id!==id);if(editing===id)editing=pagesWork[0].id;if(defaultWork===id)defaultWork=pagesWork[0].id;draw();}
+            if(e.target.closest('[data-page-del]')){const p=pagesWork.find(x=>x.id===id);if(p.widgets.length&&!await confirmBox(p.widgets.length<2?i18n('Son widget sera supprimé avec elle.'):i18n('Ses {widgets} seront supprimés avec elle.',{widgets:plural(p.widgets.length,'widget')}),{title:i18n('Supprimer la page « {name} » ?',{name:p.name||i18n('Page')}),okLabel:i18n('Supprimer la page')}))return;pagesWork=pagesWork.filter(x=>x.id!==id);if(editing===id)editing=pagesWork[0].id;if(defaultWork===id)defaultWork=pagesWork[0].id;draw();}
         });
         pagesBox.addEventListener('input',e=>{const inp=e.target.closest('[data-page-name]');if(inp)pagesWork.find(x=>x.id===inp.closest('[data-page-row]').dataset.pageRow).name=inp.value;});
         pagesBox.addEventListener('change',e=>{if(e.target.name==='dash-default')defaultWork=e.target.value;});
@@ -397,19 +399,19 @@
         dialog.showModal();
     }
     function progressSentence(p){
-        const n=(v,one,many)=>v?`${Number(v).toLocaleString('fr-FR')} ${v>1?many:one}`:'';
+        const n=(v,one,many)=>v?plural(Number(v),one,many):'';
         return [n(p.persons_created,'fiche créée','fiches créées'),n(p.persons_edited,'fiche complétée','fiches complétées'),n(p.events_created,'événement ajouté','événements ajoutés'),n(p.sources_created,'source ajoutée','sources ajoutées'),n(p.census_created,'recensement ajouté','recensements ajoutés'),n(p.media_added,'média ajouté','médias ajoutés'),n(p.sosa_new,'nouvel ancêtre Sosa','nouveaux ancêtres Sosa'),n(p.battues_closed,'battue terminée','battues terminées'),n(p.investigations_closed,'enquête terminée','enquêtes terminées')].filter(Boolean).join(', ');
     }
     function dashboardProgressCard(index,data,spanClass){
         if(!data)return card(index,'Bilan de recherche','',empty('Bilan indisponible.',{icon:'📊'}),spanClass);
-        const month=new Date().toLocaleDateString('fr-FR',{month:'long'});
+        const month=new Date().toLocaleDateString(loc(),{month:'long'});
         const m=data.month,y=data.year,prev=data.previous_month;
-        const monthText=progressSentence(m)||'pas encore de modification ce mois-ci';
+        const monthText=progressSentence(m)||i18n('pas encore de modification ce mois-ci');
         const trend=prev.changes?(m.changes>=prev.changes?`<span class="progress-up">↑ plus actif que le mois dernier</span>`:''):'';
         const max=Math.max(1,...data.months.map(x=>x.changes));
-        const bars=data.months.map(x=>{const label=new Date(x.month+'-15').toLocaleDateString('fr-FR',{month:'short'});return `<div class="progress-bar" title="${escapeHtml(label)} : ${x.changes} modification${x.changes>1?'s':''}${x.persons?`, ${x.persons} fiche${x.persons>1?'s':''} créée${x.persons>1?'s':''}`:''}"><span style="height:${Math.max(x.changes?4:0,Math.round(60*x.changes/max))}px"></span><small>${escapeHtml(label.replace('.',''))}</small></div>`;}).join('');
-        const body=`<p class="progress-line"><strong>En ${escapeHtml(month)} :</strong> ${escapeHtml(monthText)}.${m.work_days?` <span class="muted">${m.work_days} jour${m.work_days>1?'s':''} de recherche.</span>`:''} ${trend}</p>
-            <p class="progress-line"><strong>En ${escapeHtml(data.year_label)} :</strong> ${escapeHtml(progressSentence(y)||'rien pour l’instant')}.${y.work_days?` <span class="muted">${plural(y.work_days,'jour')} de recherche, ${plural(y.changes,'modification')}.</span>`:''}</p>
+        const bars=data.months.map(x=>{const label=new Date(x.month+'-15').toLocaleDateString(loc(),{month:'short'});return `<div class="progress-bar" title="${escapeHtml(label)} : ${plural(x.changes,'modification')}${x.persons?`, ${plural(x.persons,'fiche créée','fiches créées')}`:''}"><span style="height:${Math.max(x.changes?4:0,Math.round(60*x.changes/max))}px"></span><small>${escapeHtml(label.replace('.',''))}</small></div>`;}).join('');
+        const body=`<p class="progress-line"><strong>${i18n('En {month} :',{month:escapeHtml(month)})}</strong> ${escapeHtml(monthText)}.${m.work_days?` <span class="muted">${i18n('{days} de recherche.',{days:plural(m.work_days,'jour')})}</span>`:''} ${trend}</p>
+            <p class="progress-line"><strong>${i18n('En {year} :',{year:escapeHtml(String(data.year_label))})}</strong> ${escapeHtml(progressSentence(y)||i18n('rien pour l’instant'))}.${y.work_days?` <span class="muted">${i18n('{days} de recherche, {changes}.',{days:plural(y.work_days,'jour'),changes:plural(y.changes,'modification')})}</span>`:''}</p>
             <div class="progress-chart" aria-label="Modifications par mois sur un an">${bars}</div>
             <small class="muted">D’après le journal des modifications : le travail fait à la main (les imports de fichiers ne comptent pas comme fiches créées).</small>`;
         return card(index,'Bilan de recherche','',body,spanClass);
@@ -453,7 +455,7 @@
             investigations:detail.investigations||[], battues:detail.battues||[], signatures:detail.signatures||[],
             children:detail.children||[], partners:detail.partners||[]
         };
-        const personTitle=personName(person)||`Personne #${person.id}`;
+        const personTitle=personName(person)||i18n('Personne #{id}',{id:String(person.id)});
         const listRows=(items,emptyText,mapper)=>items.length?`<div class="dashboard-list">${items.map(mapper).join('')}</div>`:empty(emptyText,{icon:'📭'});
         const mediaPreview=item=>mediaPreviewHtml(item,item.title||item.filename||'Média');
         const bodies={
@@ -525,7 +527,7 @@
         return card(index,'Communes à explorer',items.length,body,spanClass,`<button class="button small secondary" data-dashboard-module="enquetes">Battues</button>`);
     }
     function dashboardBattuesPriorityCard(index,items,spanClass){
-        const body=dashboardListRows(items,'Aucune battue prioritaire.',item=>`<article class="dashboard-row"><div><strong>${escapeHtml(item.title||'Battue')}</strong><small>${escapeHtml(item.start_name||'Commune de départ inconnue')} · ${Number(item.todo_count||0)} à chercher · ${plural(Number(item.item_count||0),'annotation')}</small></div><button class="button small secondary" data-dashboard-module="enquetes">Ouvrir</button></article>`);
+        const body=dashboardListRows(items,'Aucune battue prioritaire.',item=>`<article class="dashboard-row"><div><strong>${escapeHtml(item.title||'Battue')}</strong><small>${escapeHtml(item.start_name||'Commune de départ inconnue')} · ${i18n('{n} à chercher',{n:Number(item.todo_count||0)})} · ${plural(Number(item.item_count||0),'annotation')}</small></div><button class="button small secondary" data-dashboard-module="enquetes">Ouvrir</button></article>`);
         return card(index,'Battues prioritaires',items.length,body,spanClass,`<button class="button small secondary" data-dashboard-module="enquetes">Battues</button>`);
     }
     function dashboardSourcesToCheckCard(index,items,spanClass){
@@ -621,7 +623,7 @@
     }
     function dashboardSessionGoalCard(index,goal,spanClass,person=null){
         const linkedPerson=person?`<button class="table-link" data-open-dashboard-person="${person.id}">${escapeHtml(personName(person))}</button>`:'';
-        const body=goal?`<div class="dashboard-session-goal"><p>${escapeHtml(goal)}</p>${linkedPerson?`<small>Personne liée : ${linkedPerson}</small>`:''}</div>`:empty('Ajoute un objectif dans les réglages du widget.',{icon:'🎯'});
+        const body=goal?`<div class="dashboard-session-goal"><p>${escapeHtml(goal)}</p>${linkedPerson?`<small>${i18n('Personne liée : {name}',{name:linkedPerson})}</small>`:''}</div>`:empty('Ajoute un objectif dans les réglages du widget.',{icon:'🎯'});
         return card(index,'Objectif de session','',body,spanClass);
     }
     function dashboardAchievementsCard(index,data,spanClass){
@@ -671,7 +673,7 @@
         const answer=String(quiz.answer||'').trim();
         const choices=(quiz.choices||[]).filter(Boolean);
         if(!answer||choices.length<2)return card(index,'Quiz personne','',empty('Pas assez de dates distinctes pour générer des propositions.',{icon:'❓'}),spanClass,`<button class="button small secondary" data-reroll-dashboard-widget="${escapeHtml(widgetId)}">Changer</button>`);
-        const body=`<div class="dashboard-quiz"><p>Quelle est la date de <strong>${escapeHtml(label)}</strong> de <strong>${escapeHtml(person)}</strong> ?</p><div class="dashboard-quiz-answers">${choices.map(choice=>`<button type="button" data-dashboard-quiz-choice data-correct="${choice===answer?'1':'0'}">${escapeHtml(choice)}</button>`).join('')}</div></div>`;
+        const body=`<div class="dashboard-quiz"><p>${i18n('Quelle est la date de <strong>{what}</strong> de <strong>{name}</strong> ?',{what:escapeHtml(i18n(label)),name:escapeHtml(person)})}</p><div class="dashboard-quiz-answers">${choices.map(choice=>`<button type="button" data-dashboard-quiz-choice data-correct="${choice===answer?'1':'0'}">${escapeHtml(choice)}</button>`).join('')}</div></div>`;
         return card(index,'Quiz personne','',body,spanClass,`<button class="button small secondary" data-reroll-dashboard-widget="${escapeHtml(widgetId)}">Changer</button>${quiz.person_id?`<button class="button small" data-open-dashboard-person="${quiz.person_id}">Ouvrir</button>`:''}`);
     }
     function dashboardRandomMediaCard(index,media,spanClass,widgetId='',isFavorite=false){

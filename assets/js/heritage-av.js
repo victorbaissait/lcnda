@@ -7,6 +7,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const A = () => window.LCNDA_APP;
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     ext.lists = ext.lists || {};
@@ -135,13 +136,13 @@
             <div class="av-now"><span class="av-now-icon">🎧</span><div><strong class="av-now-title"></strong><small class="av-now-owner muted"></small></div><span class="av-now-pos muted"></span></div>
             <div class="av-media"></div>
             <div class="av-controls">
-                <button type="button" class="button small secondary" data-av="prev" title="${word} précédent(e)">⏮</button>
+                <button type="button" class="button small secondary" data-av="prev" title="${i18n(`${word} précédent(e)`)}">⏮</button>
                 <button type="button" class="button small secondary" data-av="back" title="Reculer de ${fmtSkip(skip)} (réglable dans Réglages › Apparence)" data-help="Recule (ou avance avec le bouton d’à côté) de quelques secondes : la durée se règle dans Réglages → Apparence.">−${fmtSkip(skip)}</button>
                 <button type="button" class="button small av-toggle" data-av="toggle" title="Lecture / pause">▶</button>
                 <button type="button" class="button small secondary" data-av="fwd" title="Avancer de ${fmtSkip(skip)} (réglable dans Réglages › Apparence)">+${fmtSkip(skip)}</button>
-                <button type="button" class="button small secondary" data-av="next" title="${word} suivant(e)">⏭</button>
+                <button type="button" class="button small secondary" data-av="next" title="${i18n(`${word} suivant(e)`)}">⏭</button>
                 <span class="av-rate">Vitesse <select class="av-rate-select" aria-label="Vitesse">${rateOptions(p.rate)}</select><input type="range" class="av-rate-range" min="${RATE_MIN}" max="${RATE_MAX}" step="0.05" value="${p.rate}" aria-label="Vitesse (curseur)" title="Glisser : de ${fmtRate(RATE_MIN)} à ${fmtRate(RATE_MAX)} · double-clic : 1×"><output class="av-rate-out">${fmtRate(p.rate)}</output><button type="button" class="button small secondary av-rate-reset" title="Remettre la vitesse normale (1×)"${p.rate === 1 ? ' disabled' : ''}>↺ 1×</button></span>
-                <label class="ui-toggle av-auto"><input type="checkbox" class="av-auto-box"${p.auto ? ' checked' : ''}><i></i>Enchaîner ${opts.chainLabel || (kind === 'audio' ? 'les sons' : 'les vidéos')}<span data-help="À la fin d’un${kind === 'audio' ? ' son, le suivant' : 'e vidéo, la suivante'} de la liste démarre tout${kind === 'audio' ? ' seul' : 'e seule'}, dans l’ordre du tri choisi."></span></label>
+                <label class="ui-toggle av-auto"><input type="checkbox" class="av-auto-box"${p.auto ? ' checked' : ''}><i></i>${i18n('Enchaîner {what}', {what: opts.chainLabel ? i18n(opts.chainLabel) : (kind === 'audio' ? i18n('les sons') : i18n('les vidéos'))})}<span data-help="${kind === 'audio' ? i18n('À la fin d’un son, le suivant de la liste démarre tout seul, dans l’ordre du tri choisi.') : i18n('À la fin d’une vidéo, la suivante de la liste démarre toute seule, dans l’ordre du tri choisi.')}"></span></label>
                 <button type="button" class="button small secondary" data-av="size" title="Agrandir / réduire la vidéo" hidden>⤢</button>
                 <button type="button" class="button small ghost" data-av="close" title="Fermer le lecteur">✕</button>
             </div>
@@ -240,7 +241,7 @@
                 actions: kind === 'audio' ? ['<button type="button" class="button secondary" data-av-projnew title="Un son de la base ou de l’ordinateur, à travailler et à garder comme projet">＋ Nouveau projet son</button><button type="button" class="button secondary" data-av-projects title="Revenir sur un son en cours de travail">📂 Projets son</button>'] : []})}
             ${items.length ? `<div id="av-bar"></div>
             <div id="av-cards" hidden></div><div class="data-table-wrap" id="av-tablewrap"><table class="data-table av-table"><thead><tr><th class="av-play-col"></th>${[['name', 'Titre'], ['dur', 'Durée'], ['owner', 'Rattaché à'], ['date', 'Date'], ['added', 'Ajouté le'], ['size', 'Taille']].map(([k, l]) => `<th><button type="button" data-av-sort="${k}" title="Trier par cette colonne">${l}</button></th>`).join('')}<th>Format</th><th class="av-edit-col"></th></tr></thead><tbody id="av-body"></tbody></table></div>
-            <div id="av-player-host"></div>` : A().emptyState({icon: K.icon, text: `Aucun${kind === 'video' ? 'e vidéo' : ' son'} pour l’instant`, hint: `Ajoute un fichier ${kind === 'video' ? 'MP4, MOV ou WEBM' : 'MP3, M4A, WAV, AIFF ou OGG'} sur une fiche, une battue, une enquête… (ou glisse-le ici) et ${kind === 'video' ? 'elle' : 'il'} apparaîtra ici.`})}
+            <div id="av-player-host"></div>` : A().emptyState({icon: K.icon, text: kind === 'video' ? i18n('Aucune vidéo pour l’instant') : i18n('Aucun son pour l’instant'), hint: kind === 'video' ? i18n('Ajoute un fichier MP4, MOV ou WEBM sur une fiche, une battue, une enquête… (ou glisse-le ici) et elle apparaîtra ici.') : i18n('Ajoute un fichier MP3, M4A, WAV, AIFF ou OGG sur une fiche, une battue, une enquête… (ou glisse-le ici) et il apparaîtra ici.')})}
         </section>`;
         const reloadAv = () => { if (st.module === 'listes') ext.lists?.[kind === 'video' ? 'videos' : 'audios']?.(++st.workspaceToken); };
         // E4 : un son (ou une vidéo) glissé ou collé sur la liste entre dans les Médias, sans fiche
@@ -251,7 +252,7 @@
                 try { const r = await fetch('api.php?action=retouch_media', {method: 'POST', body: fd, headers: {'X-CSRF-Token': st.csrf}}), j = await r.json().catch(() => ({})); if (!r.ok || j.error) throw new Error(j.error || 'envoi impossible'); n++; }
                 catch (e) { A().toast(`${f.name} : ${e.message}`, 'error'); }
             }
-            if (n) { A().toast(`${A().plural(n, kind === 'video' ? 'vidéo ajoutée' : 'son ajouté', kind === 'video' ? 'vidéos ajoutées' : 'sons ajoutés')} aux Médias (sans fiche pour l’instant).`); reloadAv(); }
+            if (n) { A().toast(i18n('{n} aux Médias (sans fiche pour l’instant).', {n: A().plural(n, kind === 'video' ? 'vidéo ajoutée' : 'son ajouté', kind === 'video' ? 'vidéos ajoutées' : 'sons ajoutés')})); reloadAv(); }
         }, {accept: kind === 'video' ? 'video/*' : 'audio/*'});
         ws.querySelector('[data-av-projnew]')?.addEventListener('click', () => ext.newAudioProject?.(reloadAv));
         ws.querySelector('[data-av-projects]')?.addEventListener('click', () => ext.openAudioProjects?.(reloadAv));
@@ -278,15 +279,15 @@
                 <td>${esc(it.date_text || '')}</td>
                 <td>${fmtAdded(it.created_at)}</td>
                 <td class="muted">${esc(fmtSize(it.size))}</td>
-                <td class="muted">${esc(it.format || '')}${it.original ? ` <small title="Version modifiée ; l’original (${esc(it.original_format)}) est gardé">✂️</small>` : ''}</td>
-                <td class="av-edit-col">${it.original ? `<button type="button" class="icon-button" data-av-original="${it.id}" title="${kind === 'video' ? 'Voir' : 'Écouter'} l’original (avant modification)">🕰️</button>` : ''}${it.exists ? `<button type="button" class="icon-button" data-av-edit="${it.id}" title="Modifier : couper, améliorer le son, assembler… (l’original est gardé)">✏️</button>` : ''}</td>
+                <td class="muted">${esc(it.format || '')}${it.original ? ` <small title="${i18n('Version modifiée ; l’original ({f}) est gardé', {f: esc(it.original_format)})}">✂️</small>` : ''}</td>
+                <td class="av-edit-col">${it.original ? `<button type="button" class="icon-button" data-av-original="${it.id}" title="${kind === 'video' ? i18n('Voir l’original (avant modification)') : i18n('Écouter l’original (avant modification)')}">🕰️</button>` : ''}${it.exists ? `<button type="button" class="icon-button" data-av-edit="${it.id}" title="Modifier : couper, améliorer le son, assembler… (l’original est gardé)">✏️</button>` : ''}</td>
             </tr>`;
         };
         // H10 : la barre commune (🔍 Chercher · Filtrer ▾ « Rattaché à » · Liste | Fiches · Trier), retenue pour chaque liste (sons, vidéos)
         const UI = window.LCNDA_UI, VKEY = `listes:${kind === 'video' ? 'videos' : 'audios'}`;
         let disp = UI?.viewOf ? UI.viewOf(VKEY) : 'list';
         const bar = UI.listBar({key: VKEY, search: {placeholder: 'Chercher un titre, une fiche, une battue…', value: p.q},
-            filters: [{id: 'owner', label: 'Rattaché à', type: 'radio', options: [['', 'Tout'], ...presentGroups.map(g => [g[0], g[1], `Rattaché à : ${g[1]}`]), ...(unlinked ? [['none', 'Rattaché à rien', 'Rattaché à rien']] : [])], value: p.owner || ''}],
+            filters: [{id: 'owner', label: 'Rattaché à', type: 'radio', options: [['', 'Tout'], ...presentGroups.map(g => [g[0], g[1], i18n('Rattaché à : {nm}', {nm: g[1]})]), ...(unlinked ? [['none', 'Rattaché à rien', 'Rattaché à rien']] : [])], value: p.owner || ''}],
             view: {what: kind === 'video' ? 'vidéos' : 'sons', onChange: v => { disp = v; draw(); }},
             sort: {options: sortsOf(kind), value: p.sort},
             onChange: (b, {what}) => { p.q = b.q; (st.hAvQ ||= {})[kind] = p.q; p.sort = b.sort; p.owner = b.filters.owner || ''; savePrefs(kind, {sort: p.sort, owner: p.owner}); if (what !== 'view') draw(); }});
@@ -311,7 +312,7 @@
             const [sk, sw] = String(p.sort).split('_');
             section.querySelectorAll('[data-av-sort]').forEach(b => { b.querySelector('.sort-mark')?.remove(); if (b.dataset.avSort === sk) b.insertAdjacentHTML('beforeend', `<span class="sort-mark">${sw === 'asc' ? ' ↑' : ' ↓'}</span>`); });
             const dur = view.reduce((s, it) => s + (it.duration || 0), 0);
-            bar.setCount(`${view.length} ${view.length > 1 ? K.many : K.one}${view.length !== items.length ? ` sur ${items.length}` : ''}${dur ? ` · ${fmtDur(dur)} en tout` : ''}`);
+            bar.setCount(`${A().plural(view.length, K.one, K.many)}${view.length !== items.length ? ` ${i18n('sur {n}', {n: items.length})}` : ''}${dur ? ` · ${i18n('{d} en tout', {d: fmtDur(dur)})}` : ''}`);
             player.updatePos();
         };
         const refreshRows = () => section.querySelectorAll('[data-av-row]').forEach(tr => {

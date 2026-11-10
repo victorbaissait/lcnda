@@ -16,6 +16,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const A = () => window.LCNDA_APP;
     const UI = () => window.LCNDA_UI;
@@ -53,7 +54,7 @@
             const m = S6().maritime(p.port);
             const ad = m && (ctx?.depts || []).find(d => d.code === m.dept);
             out += m ? `<small class="ui-hint so6-port">⚓ ${esc(m.text)}${ad?.url ? ` <a href="${esc(ad.url)}" target="_blank" rel="noopener noreferrer">↗ ${esc(ad.service || 'Archives départementales')} (${esc(ad.code)})</a>` : ''}</small>`
-                : `<small class="ui-hint">${p.port ? `Je ne connais pas le port « ${esc(p.port)} » : choisis le port d’attache le plus proche dans la liste.` : 'Écris son port d’attache (Saint-Malo, Fécamp, Sète…) dans « Plus de précisions » pour savoir où sont ses registres.'}</small>`;
+                : `<small class="ui-hint">${p.port ? i18n('Je ne connais pas le port « {nm} » : choisis le port d’attache le plus proche dans la liste.', {nm: esc(p.port)}) : 'Écris son port d’attache (Saint-Malo, Fécamp, Sète…) dans « Plus de précisions » pour savoir où sont ses registres.'}</small>`;
         }
         if (s.group === 'fr_notaires' && s.key === 'minutier') out += '<small class="ui-hint">Une cote comme « MC/ET/XLVIII/312 » se lit : étude 48 (en chiffres romains), article 312.</small>';
         return out;
@@ -83,7 +84,7 @@
             if (v.birth_date || v.birth_place) evs.push({tag: 'BIRT', label: 'Naissance', date: v.birth_date || '', place: v.birth_place || '', note: ''});
             if (v.death_date || v.death_place) evs.push({tag: 'DEAT', label: 'Décès', date: v.death_date || '', place: v.death_place || '', note: ''});
         } else if (st.kind === 'oldbailey') {
-            const desc = [v.offence && `Crime : ${v.offence}`, v.verdict && `verdict : ${v.verdict}`, v.punishment && `peine : ${v.punishment}`, v.ref && `réf. ${v.ref}`].filter(Boolean).join(' · ');
+            const desc = [v.offence && i18n('Crime : {nm}', {nm: v.offence}), v.verdict && i18n('verdict : {nm}', {nm: v.verdict}), v.punishment && i18n('peine : {nm}', {nm: v.punishment}), v.ref && `réf. ${v.ref}`].filter(Boolean).join(' · ');
             evs.push({tag: 'EVEN', label: S6().ROLE_LABEL[v.role || 'accuse'] + ' à l’Old Bailey', date: v.date || '', place: 'Londres (Old Bailey)', note: desc});
         } else if (st.kind === 'hiski') {
             st.rows.forEach((r, i) => { if (st.picked.has(i)) S6().hiskiEvents(r).forEach(e => evs.push(e)); });
@@ -131,7 +132,7 @@
             if (st.pid) { forget(st.pid); st.ctx = await context(st.pid).catch(() => null); }
             reparse();
             return {count: 1, noun: 'document', summaryHtml: `<b>un document</b> pour ${st.ctx?.person ? `<b>${esc([st.ctx.person.first, String(st.ctx.person.last || '').toUpperCase()].join(' '))}</b>` : st.placeId ? `le lieu <b>${esc(st.placeName)}</b>` : 'la fiche choisie ci-dessous'}`,
-                notices: [{kind: 'warn', text: `${S6().MENTION}. Le document entre « À vérifier ».`}, {kind: 'info', text: 'Rien de la fiche n’est remplacé : une naissance ou un décès déjà notés sont gardés, et « ↶ Annuler » retire tout ce que l’import a ajouté.'}],
+                notices: [{kind: 'warn', text: i18n("{nm}. Le document entre « À vérifier ».", {nm: i18n(S6().MENTION)})}, {kind: 'info', text: 'Rien de la fiche n’est remplacé : une naissance ou un décès déjà notés sont gardés, et « ↶ Annuler » retire tout ce que l’import a ajouté.'}],
                 preview: `<div class="so-imp" data-so6-imp></div>`, onShow: body => { body.closest('dialog')?.classList.add('modal-l', 'so-import', 'so6-import'); bind(body); draw(body); }};
         };
         const read = body => {
@@ -176,7 +177,7 @@
                     ${multi ? (st.rows.length ? `<fieldset class="so-props"><legend>Les actes trouvés : coche ceux qui sont les siens</legend><ul class="so6-rows">${st.rows.map((r, i) => `<li><label class="checkbox-line"><input type="checkbox" data-so6-row="${i}" ${st.picked.has(i) ? 'checked' : ''}><span><b>${esc({CHR: 'Baptême', BURI: 'Sépulture', MARR: 'Mariage', EVEN: 'Départ'}[r.tag] || r.tag)}</b> · ${esc(r.birth || r.death ? `${r.birth || r.death} → ${r.date}` : r.date)}${r.parish ? ` · ${esc(r.parish)}` : ''}<br><small class="muted">${esc(r.text)}</small></span></label></li>`).join('')}</ul></fieldset>`
                         : UI().notice('warn', st.rowsError || 'Colle le tableau des résultats de HisKi.')) : ''}
                     ${evs.length ? `<fieldset class="so-props"><legend>Ce qui sera proposé sur la fiche (rien n’est remplacé)</legend>${evs.map((e, i) => { const dup = has.includes(e.tag) || (st.ctx?.birth && ['BIRT'].includes(e.tag) && st.ctx.birth.date);
-                        return `<label class="checkbox-line"><input type="checkbox" data-so6-ev="${i}" ${e.tag === 'MARR' ? 'disabled' : st.evOn.has(i) && !dup ? 'checked' : ''}><span>${esc(e.label)}${e.date ? ` · ${esc(e.date)}` : ''}${e.place ? ` · ${esc(e.place)}` : ''}${e.tag === 'MARR' ? ' — un mariage se range dans la famille : il reste dans la source' : dup ? ' — déjà sur la fiche : gardé tel quel' : ''}</span></label>`; }).join('')}</fieldset>` : ''}
+                        return `<label class="checkbox-line"><input type="checkbox" data-so6-ev="${i}" ${e.tag === 'MARR' ? 'disabled' : st.evOn.has(i) && !dup ? 'checked' : ''}><span>${esc(e.label)}${e.date ? ` · ${esc(e.date)}` : ''}${e.place ? ` · ${esc(e.place)}` : ''}${e.tag === 'MARR' ? ` — ${i18n('un mariage se range dans la famille : il reste dans la source')}` : dup ? ` — ${i18n('déjà sur la fiche : gardé tel quel')}` : ''}</span></label>`; }).join('')}</fieldset>` : ''}
                     ${st.kind === 'auteur' ? `<label class="checkbox-line"><input type="checkbox" name="so6_sheet" ${st.sheet ? 'checked' : ''}><span>Ajouter le lien de la notice à ses « Fiches en ligne »</span></label>` : ''}
                     ${st.pid ? `<div class="so-ecarts-box"><h4>C’est la même personne ?</h4><ul class="so-ecarts" data-so6-ecarts></ul></div>` : '<ul class="so-ecarts" data-so6-ecarts hidden></ul>'}</div></div>`;
             ecarts(body);
@@ -207,7 +208,7 @@
             const r = j.result; forget(st.pid); if (st.objUrl) URL.revokeObjectURL(st.objUrl);
             window.dispatchEvent(new CustomEvent('lcnda:sources-ouvertes-changed', {detail: r}));
             refresh();
-            return {message: `${r.summary} — à vérifier sur le document.`, undo: async () => { await post('so6_undo', {batch: r.batch}); forget(st.pid); refresh(); }};
+            return {message: i18n('{nm} — à vérifier sur le document.', {nm: r.summary}), undo: async () => { await post('so6_undo', {batch: r.batch}); forget(st.pid); refresh(); }};
         };
         return UI().openImportDialog({title: 'Importer : bibliothèques, auteurs, HisKi, Old Bailey', accept: 'image/*,.pdf,.html,.htm,.txt,.xml,.json', what: 'image, PDF, page enregistrée, notice ou texte',
             intro: 'Ce que tu as téléchargé ou enregistré : une page en image ou en PDF, la page enregistrée par ton navigateur (« Enregistrer sous… »), la notice d’un auteur (IdRef : « Télécharger » en XML ou JSON), ou un texte copié (notice, procès de l’Old Bailey, tableau de résultats HisKi). Rien n’est demandé au site : seul ton fichier est lu. Pas de fichier ? « 🔗 Coller un lien » (avec ou sans le texte).',

@@ -712,7 +712,7 @@ function qp_import(PDO $pdo, array $data): array
         if ($dest === 'skip') { $counts['skip']++; continue; }
         $pid = max(0, safe_int($c['person_id'] ?? 0));
         if ($pid && !qp_people($pdo, [$pid])) { $pid = 0; }
-        if ($dest === 'testimony' && !$pid) { throw new RuntimeException('Choisis la personne concernée pour le témoignage « ' . mb_substr($a['question'], 0, 60) . ' ».'); }
+        if ($dest === 'testimony' && !$pid) { throw new RuntimeException(i18n_t('Choisis la personne concernée pour le témoignage « {q} ».', ['q' => mb_substr($a['question'], 0, 60)])); }
         $kind = $dest === 'testimony' ? 'testimony' : (is_string($c['kind'] ?? null) && isset(MEMORY_KINDS[$c['kind']]) && $c['kind'] !== 'testimony' ? $c['kind'] : 'story');
         $title = mb_strlen($a['question']) > 160 ? rtrim(mb_substr($a['question'], 0, 157)) . '…' : $a['question'];
         $pdo->prepare('INSERT INTO family_memories(kind, title, content, origin_text, notes) VALUES(?,?,?,?,?)')

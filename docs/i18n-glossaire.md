@@ -140,3 +140,90 @@ Les listes « a, b et c » passent par `Intl.ListFormat`, sans clé.
 
 Années et numéros (« Personne #12 », « né en 1890 ») : passer la valeur en texte (`String(…)`) dans `i18n()`, sinon elle est écrite
 comme un nombre (« 1,890 »).
+
+## Zone « Graphiques » (Graphiques, diagrammes, tableau de bord, Carte, météo, suivi des animaux, ADN)
+
+| Français | English | Español | Deutsch | Italiano | Português | Polski | Nederlands |
+|---|---|---|---|---|---|---|---|
+| diagramme (Mes diagrammes) | diagram | diagrama | Diagramm | diagramma | diagrama | diagram | diagram |
+| graphique (Éditeur de graphiques) | chart | gráfico | Diagramm | grafico | gráfico | wykres | grafiek |
+| widget | widget | widget | Widget | widget | widget | widżet | widget |
+| implexe | pedigree collapse | implexo | Ahnenschwund | implesso | implexo | implikacja | kwartierverlies |
+| frise | timeline | friso | Zeitleiste | fregio / linea del tempo | friso | oś czasu | tijdlijn |
+| hémicycle | hemicycle | hemiciclo | Halbrund | emiciclo | hemiciclo | półkole | halfrond |
+| carte de chaleur | heat map | mapa de calor | Heatmap | mappa di calore | mapa de calor | mapa ciepła | heatmap |
+| Météo d’autrefois | Weather of the past | Tiempo de antaño | Wetter von damals | Meteo di una volta | Tempo de antigamente | Dawna pogoda | Weer van vroeger |
+| socle / pack (météo) | base / pack | base / pack | Basis / Paket | base / pacchetto | base / pack | baza / pakiet | basis / pakket |
+| Suivi des animaux | Animal tracking | Seguimiento de animales | Tierbeobachtung | Monitoraggio degli animali | Seguimento de animais | Obserwacja zwierząt | Dieren volgen |
+| bague (oiseau) | ring | anilla | Ring | anello | anilha | obrączka | ring |
+| site de suivi | tracking site | sitio de seguimiento | Beobachtungsort | sito di monitoraggio | local de seguimento | stanowisko obserwacji | volglocatie |
+| correspondance ADN | DNA match | coincidencia de ADN | DNA-Übereinstimmung | corrispondenza DNA | correspondência de ADN | dopasowanie DNA | dna-match |
+| cM partagés | shared cM | cM compartidos | geteilte cM | cM condivisi | cM partilhados | wspólne cM | gedeelde cM |
+| cousin issu de germain | second cousin | primo segundo | Cousin 2. Grades | cugino di secondo grado | primo em segundo grau | kuzyn drugiego stopnia | achterneef |
+
+## Serveur (messages, ✅ Contrôle de la base, « Que manque-t-il ? », Ma semaine)
+
+Les textes calculés par `lib/*.php` passent par `i18n_t()` (phrase entière, une phrase par sexe quand le français accorde :
+« Mort à {n} ans » / « Morte à {n} ans » / « Mort(e) à {n} ans »). Les noms des services d’archives (« Archives
+départementales de la Corrèze »), les séries en clair dans les dates d’exemple (« entre 1880 et 1885 », « vers 1950 ») et
+les noms des sortes d’événements venus de la base restent en français.
+
+| Français | English | Español | Deutsch | Italiano | Português | Polski | Nederlands |
+|---|---|---|---|---|---|---|---|
+| seuil (d’un contrôle) | threshold | umbral | Schwelle | soglia | limite | próg | drempel |
+| Ce n’est pas une erreur / exception | Not a mistake / exception | No es un error / excepción | Kein Fehler / Ausnahme | Non è un errore / eccezione | Não é um erro / exceção | To nie błąd / wyjątek | Geen fout / uitzondering |
+| homonyme | namesake | homónimo | Namensvetter | omonimo | homónimo | imiennik | naamgenoot |
+| fratrie | siblings | hermanos | Geschwister | fratelli | irmãos | rodzeństwo | broers en zussen |
+| tables décennales | ten-year indexes | tablas decenales | Zehnjahresregister | tavole decennali | índices decenais | tablice dziesięcioletnie | tienjarige tafels |
+| registre matricule | service register | registro de matrícula | Stammrolle | registro matricolare | registo de matrícula | rejestr ewidencyjny | stamboek |
+| contrat de mariage | marriage contract | contrato de matrimonio | Ehevertrag | contratto di matrimonio | contrato de casamento | intercyza | huwelijkscontract |
+| succession | estate | sucesión | Nachlass | successione | sucessão | spadek | nalatenschap |
+| Enregistrement (série 3 Q) | Registration office (series 3 Q) | Enregistrement (serie 3 Q) | Enregistrement (Serie 3 Q) | Enregistrement (serie 3 Q) | Enregistrement (série 3 Q) | Enregistrement (seria 3 Q) | Enregistrement (reeks 3 Q) |
+| piste (d’enquête) | lead | pista | Spur | pista | pista | trop | spoor |
+| battue | search sweep | batida | Suchaktion | battuta | batida | przeszukanie | zoektocht |
+| cote (à consulter) | shelfmark | signatura | Signatur | segnatura | cota | sygnatura | signatuur |
+| relance (courrier) | follow-up | recordatorio | Nachfassen | sollecito | insistência | ponaglenie | herinnering |
+| foyer (recensement) | household | hogar | Haushalt | nucleo | agregado | gospodarstwo | huishouden |
+| introuvable | not found | no encontrado | nicht gefunden | non trovato | não encontrado | nie znaleziono | niet gevonden |
+| illisible | unreadable | ilegible | unlesbar | illeggibile | ilegível | nieczytelny | onleesbaar |
+
+## Zone « listes3 » (fenêtres et détails des autres listes, œuvres)
+
+| Français | English | Español | Deutsch | Italiano | Português | Polski | Nederlands |
+|---|---|---|---|---|---|---|---|
+| recueil (pages photographiées) | collection | recopilación | Sammlung | raccolta | coletânea | zbiór | bundel |
+| à ranger (photo sans page) | to sort | por ordenar | zum Einordnen | da sistemare | por arrumar | do uporządkowania | in te delen |
+| image retenue (⭐) | chosen image | imagen elegida | gewähltes Bild | immagine scelta | imagem escolhida | wybrany obraz | gekozen afbeelding |
+| héritier / légataire | heir / legatee | heredero / legatario | Erbe / Vermächtnisnehmer | erede / legatario | herdeiro / legatário | spadkobierca / zapisobiorca | erfgenaam / legataris |
+| parcelle (cadastre) | parcel | parcela | Parzelle | particella | parcela | działka | perceel |
+| section (cadastre) | section | sección | Flur | sezione | secção | sekcja | sectie |
+| plan napoléonien | Napoleonic plan | plano napoleónico | napoleonischer Plan | mappa napoleonica | planta napoleónica | plan napoleoński | napoleontisch plan |
+| caler (un plan ancien) | georeference | ajustar | einpassen | georeferenziare | ajustar | dopasować | kalibreren |
+| couche (Mes cartes) | layer | capa | Ebene | livello | camada | warstwa | laag |
+| dossier de preuve | proof file | expediente de prueba | Beweisakte | fascicolo di prova | dossiê de prova | teczka dowodowa | bewijsdossier |
+| indice (pour / contre) | evidence (for / against) | indicio | Hinweis | indizio | indício | poszlaka | aanwijzing |
+| solidité du lien (🛡) | link strength | solidez del vínculo | Belastbarkeit der Verbindung | solidità del legame | solidez da ligação | pewność powiązania | stevigheid van de band |
+| registre matricule | military register | registro de reclutamiento | Stammrolle | registro matricolare | registo de matrícula | rejestr wojskowy | stamboek |
+| classe (service militaire) | class (year) | quinta | Jahrgang | classe | classe | rocznik | lichting |
+| foyer de recensement | census household | hogar del padrón | Zählungshaushalt | nucleo censito | agregado recenseado | gospodarstwo ze spisu | getelde huishouden |
+| livret de famille | family booklet | libro de familia | Familienstammbuch | libretto di famiglia | livro de família | książeczka rodzinna | trouwboekje |
+| petite annonce | classified ad | anuncio | Kleinanzeige | piccolo annuncio | anúncio | ogłoszenie | zoekertje |
+| demande d’entraide | help request | solicitud de ayuda | Hilfeanfrage | richiesta di aiuto | pedido de entreajuda | prośba o pomoc | hulpverzoek |
+| hypothèse de lieu | place hypothesis | hipótesis de lugar | Ortsvermutung | ipotesi di luogo | hipótese de local | hipoteza miejsca | plaatshypothese |
+| œuvre | work | obra | Werk | opera | obra | dzieło | werk |
+| métiers d’art | fine crafts | oficios artesanos | Kunsthandwerk | mestieri d’arte | ofícios de arte | rzemiosło artystyczne | kunstambachten |
+
+Le français « de / d’ » devant un nom (« enfant de Pierre », « enfant d’Anne ») : deux clés (`… de {par}`, `… d’{par}`) avec la même traduction, pour garder l’élision française.
+
+## Zone « listes4 » (œuvres, profils, Trésors, sources ouvertes 3 à 7, divers)
+
+| fr | en | es | de | it | pt | pl | nl |
+|---|---|---|---|---|---|---|---|
+| fonte (sculpture) | cast | fundición | Guss | fusione | fundição | odlew | gietsel |
+| mise en scène | staging | puesta en escena | Inszenierung | messa in scena | encenação | inscenizacja | enscenering |
+| métier d’art | craft | oficio artístico | Kunsthandwerk | mestiere d’arte | ofício artístico | rzemiosło artystyczne | kunstambacht |
+| dépouillement | abstract | vaciado | Auswertung | spoglio | despojo | opracowanie | uitwerking |
+| foyer (recensement) | household | hogar | Haushalt | nucleo | agregado | gospodarstwo | huishouden |
+| fiche sur un sujet | sheet | ficha | Blatt | scheda | ficha | karta | fiche |
+| cousinade | family reunion | encuentro familiar | Familientreffen | rimpatriata | encontro de família | zjazd rodzinny | familiereünie |
+| Trésors | Treasures | Tesoros | Schätze | Tesori | Tesouros | Skarby | Schatten |

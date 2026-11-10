@@ -9,6 +9,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const A = () => window.LCNDA_APP;
     const UI = () => window.LCNDA_UI;
     const P = () => window.LCNDA_PICKER;
@@ -119,14 +120,14 @@
         try {
             await write('delete', {id: r.id});
             after?.();
-            A().undoToast(`Questionnaire « ${r.title} » supprimé`, {undo: async () => { await write('restore', {id: r.id}); after?.(); }});
+            A().undoToast(i18n('Questionnaire « {nm} » supprimé', {nm: r.title}), {undo: async () => { await write('restore', {id: r.id}); after?.(); }});
         } catch (e) { toast(e.message, 'error'); }
     }
     async function downloadFile(id, after) {
         try {
             const r = await write('render', {id, mode: 'file'});
             download(r.filename, r.html, 'text/html;charset=utf-8');
-            toast(r.missing_photos ? `Questionnaire téléchargé (${plural(r.missing_photos, 'photo')} n’a pas pu être jointe).` : 'Questionnaire téléchargé : joins-le à un e-mail.', r.missing_photos ? 'error' : '');
+            toast(r.missing_photos ? i18n('Questionnaire téléchargé ({n} n’a pas pu être jointe).', {n: plural(r.missing_photos, 'photo')}) : i18n('Questionnaire téléchargé : joins-le à un e-mail.'), r.missing_photos ? 'error' : '');
             after?.(r);
         } catch (e) { toast(e.message, 'error', {retry: () => downloadFile(id, after)}); }
     }
@@ -141,7 +142,7 @@
             try {
                 const p = (await api('person', {id: e.personId})).person;
                 ed.person = personItem({...p, name: A().personName ? A().personName(p) : `${p.first_name} ${p.last_name}`});
-                ed.title = `Tes souvenirs de ${p.first_name || ed.person.title}`;
+                ed.title = i18n('Tes souvenirs de {nm}', {nm: p.first_name || ed.person.title});
                 const th = (await loadTemplates()).find(t => t.key === 'personne');
                 ed.questions = (th?.questions || []).slice(0, 4).map(q => ({id: '', text: q.text, kind: 'person', theme: 'personne', person: ed.person, person_id: ed.person.id}));
             } catch (_) {}
@@ -180,13 +181,13 @@
                     <div class="qp-field" data-qp-person><span class="pk-lab">Les questions portent sur <small>(facultatif)</small></span>${P().pickerField({name: '', hiddenName: false, kind: 'person', value: ed.person})}<small class="muted">« [Prénom] » dans une question devient son prénom.</small></div>
                     <h3><span class="qp-step">2</span> Le mot d’accueil</h3>
                     <label>Titre<input name="title" required maxlength="200" value="${esc(ed.title)}" placeholder="Tes souvenirs de mémé Marie" data-error="Donne un titre au questionnaire."></label>
-                    <label>Mot d’accueil <small class="muted">(après « Bonjour ${esc(greetOf(ed) || 'Anne')}, »)</small><textarea name="intro" rows="4" maxlength="4000">${esc(ed.intro)}</textarea></label>
+                    <label>Mot d’accueil <small class="muted">${i18n('(après « Bonjour {nm}, »)', {nm: esc(greetOf(ed) || 'Anne')})}</small><textarea name="intro" rows="4" maxlength="4000">${esc(ed.intro)}</textarea></label>
                     <h3><span class="qp-step">3</span> Les questions <small class="muted" data-qp-count>${esc(plural(ed.questions.length, 'question'))}</small></h3>
                     <ol class="qp-qs" data-qp-qs></ol>
                     <div class="page-actions qp-add"><button type="button" class="button secondary" data-qp-models>＋ Ajouter des questions</button><button type="button" class="button secondary" data-qp-own>＋ Ma question</button></div>
                 </form>
                 <aside class="qp-side">
-                    <section class="maintenance-panel qp-prev-box"><h3>Aperçu <small class="muted">tel que ${esc(greetOf(ed) || 'ton proche')} le verra</small></h3><div class="qp-prev"><iframe sandbox="allow-scripts" title="Aperçu du questionnaire" data-qp-frame></iframe></div></section>
+                    <section class="maintenance-panel qp-prev-box"><h3>${i18n('Aperçu')} <small class="muted">${i18n('tel que {nm} le verra', {nm: esc(greetOf(ed) || i18n('ton proche'))})}</small></h3><div class="qp-prev"><iframe sandbox="allow-scripts" title="Aperçu du questionnaire" data-qp-frame></iframe></div></section>
                     <section class="maintenance-panel qp-send"><h3><span class="qp-step">4</span> Envoyer</h3>${sendHtml(ed)}</section>
                     <section class="maintenance-panel qp-back"><h3><span class="qp-step">5</span> Les réponses</h3>${backHtml(ed)}</section>
                 </aside>
@@ -200,7 +201,7 @@
             const email = x.contact?.email || (x.recipient && typeof x.recipient === 'object' ? x.recipient.email : '');
             return `<div class="qp-actions"><button type="button" class="button" data-qp-file>⤓ Télécharger le questionnaire (.html)</button><button type="button" class="button secondary" data-qp-print>🖨 Version imprimable</button></div>
                 <label class="qp-mail">Le message à envoyer avec le fichier<textarea rows="8" readonly data-qp-mail>${esc(x.email)}</textarea></label>
-                <div class="qp-actions"><button type="button" class="button secondary" data-qp-copy>📋 Copier le message</button>${email ? `<a class="button secondary" data-qp-mailto href="mailto:${esc(encodeURIComponent(email))}?subject=${esc(encodeURIComponent(x.title))}&amp;body=${esc(encodeURIComponent(x.email))}">✉ Écrire à ${esc(email)}</a>` : ''}</div>
+                <div class="qp-actions"><button type="button" class="button secondary" data-qp-copy>📋 Copier le message</button>${email ? `<a class="button secondary" data-qp-mailto href="mailto:${esc(encodeURIComponent(email))}?subject=${esc(encodeURIComponent(x.title))}&amp;body=${esc(encodeURIComponent(x.email))}">✉ ${i18n('Écrire à {nm}', {nm: esc(email)})}</a>` : ''}</div>
                 <div class="qp-state"><span>${badge({status: x.status, to_remind: x.status === 'sent' && x.remind_at && x.remind_at <= today()})}</span>
                 ${x.status === 'prepared' ? '<button type="button" class="button" data-qp-sent>📤 Marquer comme envoyé</button>' : ''}
                 <label>État<select data-qp-status>${Object.entries(STATUS).map(([k, [l]]) => `<option value="${k}"${x.status === k ? ' selected' : ''}>${esc(l)}</option>`).join('')}</select></label></div>
@@ -210,14 +211,14 @@
             if (!x.id) return A().empty('Les réponses arriveront ici.', {icon: '📬'});
             const n = Object.values(x.answers || {}).filter(a => a && String(a.answer || '').trim()).length;
             return `<div class="qp-actions"><button type="button" class="button${x.status === 'sent' ? '' : ' secondary'}" data-qp-import>⤒ Importer les réponses</button><button type="button" class="button secondary" data-qp-paste>✎ Coller une réponse reçue par e-mail</button></div>
-                ${n ? `<p class="qp-got">${UI().badge('Répondu', 'green')} <b>${esc(plural(n, 'réponse'))}</b>${x.answered_by ? ` de ${esc(x.answered_by)}` : ''}${x.answered_at ? ` · ${esc(when(x.answered_at, 'reçues'))}` : ''}</p>` : A().empty('Pas encore de réponse.', {icon: '📬'})}
+                ${n ? `<p class="qp-got">${UI().badge('Répondu', 'green')} <b>${esc(plural(n, 'réponse'))}</b>${x.answered_by ? ` ${i18n('de {nm}', {nm: esc(x.answered_by)})}` : ''}${x.answered_at ? ` · ${esc(when(x.answered_at, i18n('reçues')))}` : ''}</p>` : A().empty('Pas encore de réponse.', {icon: '📬'})}
                 ${x.memories.length ? `<ul class="qp-mems">${x.memories.map(m => `<li><span class="ui-badge is-${m.kind === 'testimony' ? 'blue' : 'green'}">${esc(m.kind_label)}</span> ${esc(m.title)}</li>`).join('')}</ul><div class="qp-actions"><button type="button" class="button small secondary" data-h-open-list="family_memories">↗ Mémoire familiale</button>${x.status === 'answered' ? '<button type="button" class="button small secondary" data-qp-file-away>🗄 Ranger le questionnaire</button>' : ''}</div>` : ''}`;
         };
         const rowHtml = (q, i, n) => `<li class="qp-qrow" data-i="${i}">
             <span class="qp-grip order-grip" draggable="true" title="Glisser pour ranger" aria-hidden="true">⠿</span><span class="qp-num">${i + 1}</span>
             <div class="qp-qmain"><textarea data-qp-text rows="2" maxlength="1000" aria-label="Question ${i + 1}" placeholder="Écris la question…">${esc(q.text)}</textarea>
                 <div class="qp-qextra"><select data-qp-kind aria-label="Sorte de question">${Object.entries(KIND_LABEL).map(([k, l]) => `<option value="${k}"${(q.kind || 'text') === k ? ' selected' : ''}>${esc(l)}</option>`).join('')}</select>
-                ${q.kind === 'person' ? `<div class="qp-qpk" data-qp-qperson>${P().pickerField({name: '', hiddenName: false, kind: 'person', value: q.person || (q.person_id ? Number(q.person_id) : null), placeholder: ed.person ? `Sinon : ${ed.person.title}` : 'La personne…'})}</div>` : ''}
+                ${q.kind === 'person' ? `<div class="qp-qpk" data-qp-qperson>${P().pickerField({name: '', hiddenName: false, kind: 'person', value: q.person || (q.person_id ? Number(q.person_id) : null), placeholder: ed.person ? i18n('Sinon : {nm}', {nm: ed.person.title}) : 'La personne…'})}</div>` : ''}
                 ${q.kind === 'photo' ? `<div class="qp-qpk" data-qp-qphoto>${P().mediaField({name: '', types: ['image'], value: q.media || (q.media_id ? Number(q.media_id) : null), person: ed.person?.id || undefined, title: 'La photo de la question', okLabel: 'Prendre cette photo'})}</div>` : ''}</div></div>
             <span class="qp-qbtns"><button type="button" class="icon-button small" data-qp-up aria-label="Monter" ${i ? '' : 'disabled'}>↑</button><button type="button" class="icon-button small" data-qp-down aria-label="Descendre" ${i < n - 1 ? '' : 'disabled'}>↓</button><button type="button" class="icon-button small" data-qp-rm title="Retirer la question" aria-label="Retirer la question">×</button></span></li>`;
         const drawQuestions = () => {
@@ -304,7 +305,7 @@
             }
             if (b.matches('[data-qp-print]')) {
                 if (!await ensureSaved()) return;
-                return UI().openPrintDialog({title: `Questionnaire « ${ed.title} » à imprimer`, html: async () => (await write('preview', {...payload(ed), mode: 'print'})).html});
+                return UI().openPrintDialog({title: i18n('Questionnaire « {nm} » à imprimer', {nm: ed.title}), html: async () => (await write('preview', {...payload(ed), mode: 'print'})).html});
             }
             if (b.matches('[data-qp-copy]')) return copyText(ed.email, ws.querySelector('[data-qp-mail]'));
             if (b.matches('[data-qp-sent]')) return setStatus({status: 'sent', sent_at: today()});
@@ -436,7 +437,7 @@
                 const r = await write('analyze', body);
                 const n = r.answers.length;
                 return {count: n, noun: 'réponse', feminine: true, ok: n > 0, data: {body, r},
-                    summaryHtml: n ? `<b>${esc(plural(n, 'réponse'))}</b> de <b>${esc(r.from || 'ton proche')}</b> au questionnaire « ${esc(r.questionnaire.title)} » (${esc(r.date_label)}). Choisis où va chacune` : 'Aucune réponse écrite dans ce fichier',
+                    summaryHtml: n ? i18n('<b>{n}</b> de <b>{from}</b> au questionnaire « {t} » ({d}). Choisis où va chacune', {n: esc(plural(n, 'réponse')), from: esc(r.from || i18n('ton proche')), t: esc(r.questionnaire.title), d: esc(r.date_label)}) : i18n('Aucune réponse écrite dans ce fichier'),
                     notices: r.unknown ? [{kind: 'warn', text: `${plural(r.unknown, 'réponse')} à une question retirée depuis l’envoi : mise de côté.`}] : [],
                     preview: n ? choicesHtml(r) : '', onShow: bindChoices, goLabel: n ? `⤒ Importer ${plural(n, 'réponse')}` : '⤒ Importer'};
             },
@@ -447,7 +448,7 @@
                 after?.(res);
                 const c = res.counts || {};
                 const parts = [c.testimony ? plural(c.testimony, 'témoignage') : '', c.memory ? plural(c.memory, 'souvenir') : ''].filter(Boolean);
-                return {message: parts.length ? `${parts.join(' et ')} ${c.testimony + c.memory > 1 ? 'ajoutés' : 'ajouté'} (réponses de ${res.from || 'ton proche'})` : 'Réponses gardées avec le questionnaire.',
+                return {message: parts.length ? i18n(c.testimony + c.memory > 1 ? '{what} ajoutés (réponses de {nm})' : '{what} ajouté (réponses de {nm})', {what: parts.join(` ${i18n('et')} `), nm: res.from || i18n('ton proche')}) : i18n('Réponses gardées avec le questionnaire.'),
                     undo: async () => { await write('undo_import', {id: res.id}); after?.(); A().refreshPersonIfOpen?.(); }};
             }});
     }
@@ -455,7 +456,7 @@
     function pasteAnswer(ed, after) {
         const qs = ed.questions.filter(q => q.id);
         ext.openDialog({eyebrow: 'QUESTIONS AUX PROCHES', title: 'Coller une réponse reçue par e-mail', submitLabel: 'Continuer →',
-            body: `<p class="muted">Colle ici ce que ${esc(greet(ed) || 'ton proche')} t’a répondu. Si c’est le contenu d’un fichier de réponses (.json), il est lu comme le fichier.</p>
+            body: `<p class="muted">${i18n('Colle ici ce que {nm} t’a répondu. Si c’est le contenu d’un fichier de réponses (.json), il est lu comme le fichier.', {nm: esc(greet(ed) || i18n('ton proche'))})}</p>
                 <label>Elle répond à<select name="qid"><option value="free">Tout le message (une seule réponse)</option>${qs.map((q, i) => `<option value="${esc(q.id)}">${i + 1}. ${esc(q.text.length > 90 ? q.text.slice(0, 90) + '…' : q.text)}</option>`).join('')}</select></label>
                 <label>Le texte reçu<textarea name="text" rows="9" required maxlength="20000" data-error="Colle le texte de la réponse."></textarea></label>
                 <div class="form-grid"><label>De<input name="from" maxlength="120" value="${esc(ed.answered_by || (ed.recipient && typeof ed.recipient === 'object' ? ed.recipient.title : String(ed.recipient || '').replace(/^txt:/, '')))}"></label><label>Reçue le<input type="date" name="date" value="${today()}"></label></div>`,

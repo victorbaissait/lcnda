@@ -98,7 +98,7 @@ function lot_store_upload(?array $file, string $origName): array
     if (!$file || (int) ($file['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_OK) { throw new LcndaBadInput('Fichier non reçu.'); }
     $ext = strtolower(pathinfo($origName, PATHINFO_EXTENSION));
     if ($ext === 'jpeg') { $ext = 'jpg'; }
-    if (!isset(LOT_TYPES[$ext])) { throw new LcndaBadInput('Ce type de fichier ne se range pas dans les médias (' . ($ext !== '' ? '.' . $ext : 'sans extension') . ').'); }
+    if (!isset(LOT_TYPES[$ext])) { throw new LcndaBadInput($ext !== '' ? i18n_t('Ce type de fichier ne se range pas dans les médias (.{ext}).', ['ext' => $ext]) : i18n_t('Ce type de fichier ne se range pas dans les médias (sans extension).')); }
     [$family, $mediaType, $mb] = LOT_TYPES[$ext];
     $size = (int) ($file['size'] ?? 0);
     if ($size <= 0) { throw new LcndaBadInput('Fichier vide.'); }
@@ -127,7 +127,7 @@ function lot_store_upload(?array $file, string $origName): array
         'mp4', 'mov' => in_array(substr($head, 4, 4), ['ftyp', 'moov', 'mdat', 'wide', 'free', 'skip'], true),
         default => false,
     };
-    if (!$ok) { throw new LcndaBadInput('Le contenu du fichier ne correspond pas à son extension (.' . $ext . ').'); }
+    if (!$ok) { throw new LcndaBadInput(i18n_t('Le contenu du fichier ne correspond pas à son extension (.{ext}).', ['ext' => $ext])); }
     $name = bin2hex(random_bytes(16)) . '.' . $ext;
     if (!@move_uploaded_file($tmp, MEDIA_DIR . '/' . $name) && !@copy($tmp, MEDIA_DIR . '/' . $name)) { throw new RuntimeException('Impossible de ranger le fichier dans les médias.'); }
     return ['name' => $name, 'family' => $family, 'media_type' => $mediaType, 'ext' => $ext];

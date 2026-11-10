@@ -164,7 +164,7 @@ function graph_store(PDO $pdo, array $c, bool $onlyNew = false): bool
         return true;
     }
     if ((int) $pdo->query('SELECT count(*) FROM custom_widgets WHERE deleted_at IS NULL')->fetchColumn() >= GRAPH_MAX) {
-        throw new RuntimeException('Les ' . GRAPH_MAX . ' graphiques et widgets sont gardés : supprime-en un pour en créer un autre.');
+        throw new RuntimeException(i18n_t('Les {n} graphiques et widgets sont gardés : supprime-en un pour en créer un autre.', ['n' => GRAPH_MAX]));
     }
     $pdo->prepare('INSERT INTO custom_widgets(kind, name, icon, in_stats, is_graph, draw_label, data_label, search_text, def_json, uid, position) VALUES(?,?,?,?,?,?,?,?,?,?,(SELECT COALESCE(MAX(position),0)+10 FROM custom_widgets))')->execute([...$vals, $uid]);
     return true;

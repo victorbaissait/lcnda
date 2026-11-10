@@ -32,6 +32,7 @@
     if (root) root.LCNDA_SOURCES_OUVERTES_5 = api;
 })(typeof window !== 'undefined' ? window : null, function () {
     'use strict';
+    const i18n = (s, v) => (typeof window !== 'undefined' && window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js (dans Node : le français)
     const CHECKED = '2026-11-09';
     const MENTION = 'Lu sur un site d’archives en ligne et recopié : à vérifier sur le document';
     const clean = s => String(s ?? '').replace(/[\u0000-\u001f\u007f]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 200);
@@ -389,8 +390,8 @@
         switch (kind) {
             case 'acte': {
                 const t = fold(f.type || ''); const tag = (ACT_TAGS.find(([re]) => re.test(t)) || [null, ''])[1];
-                if (tag === 'MARR') { out.note = {title: `Mariage${f.date ? ' — ' + clean(f.date) : ''}`, text: [`Mariage${f.date ? ' le ' + clean(f.date) : ''}${f.place ? ' à ' + clean(f.place) : ''}`, f.spouse && `Conjoint : ${clean(f.spouse)}`, f.father && `Père : ${clean(f.father)}`, f.mother && `Mère : ${clean(f.mother)}`, f.cote && `Cote : ${clean(f.cote)}`].filter(Boolean).join('\n')}; break; }
-                if (tag) add(tag, f.date, f.place, [f.father && `Père : ${clean(f.father)}`, f.mother && `Mère : ${clean(f.mother)}`].filter(Boolean).join(' · '));
+                if (tag === 'MARR') { out.note = {title: `Mariage${f.date ? ' — ' + clean(f.date) : ''}`, text: [`Mariage${f.date ? ' le ' + clean(f.date) : ''}${f.place ? ' à ' + clean(f.place) : ''}`, f.spouse && i18n('Conjoint : {nm}', {nm: clean(f.spouse)}), f.father && i18n('Père : {nm}', {nm: clean(f.father)}), f.mother && i18n('Mère : {nm}', {nm: clean(f.mother)}), f.cote && i18n('Cote : {nm}', {nm: clean(f.cote)})].filter(Boolean).join('\n')}; break; }
+                if (tag) add(tag, f.date, f.place, [f.father && i18n('Père : {nm}', {nm: clean(f.father)}), f.mother && i18n('Mère : {nm}', {nm: clean(f.mother)})].filter(Boolean).join(' · '));
                 else if (f.birth_date || f.birth_place) add('BIRT', f.birth_date, f.birth_place, '');
                 else if (f.date || f.place) add('EVEN', f.date, f.place, clean(f.type) || 'Acte', {label: clean(f.type) || 'Acte'});
                 break;
@@ -403,15 +404,15 @@
                 add('CHR', f.birth_date, f.birth_place, [f.father && `Parents : ${clean(f.father)}${f.mother ? ' et ' + clean(f.mother) : ''}`].filter(Boolean).join(''));
                 if (f.job) add('OCCU', '', '', clean(f.job));
                 out.voyage = {departure_port: '', destination: clean(f.marriage_place) || 'Québec (Nouvelle-France)', arrival_date: clean(f.arrival), departure_date: '',
-                    reason: 'Établissement en Nouvelle-France', passenger_list_ref: f.numero ? `Fichier Origine, fiche n° ${clean(f.numero)}` : 'Fichier Origine',
-                    notes: [f.marriage_date && `Mariage au Canada : ${clean(f.marriage_date)}${f.marriage_place ? ' à ' + clean(f.marriage_place) : ''}${f.spouse ? ' avec ' + clean(f.spouse) : ''}`, f.ref && `Références : ${clean(f.ref)}`].filter(Boolean).join('\n'), checked: true};
+                    reason: 'Établissement en Nouvelle-France', passenger_list_ref: f.numero ? i18n('Fichier Origine, fiche n° {nm}', {nm: clean(f.numero)}) : 'Fichier Origine',
+                    notes: [f.marriage_date && `Mariage au Canada : ${clean(f.marriage_date)}${f.marriage_place ? ' à ' + clean(f.marriage_place) : ''}${f.spouse ? ' avec ' + clean(f.spouse) : ''}`, f.ref && i18n('Références : {nm}', {nm: clean(f.ref)})].filter(Boolean).join('\n'), checked: true};
                 if (f.death_date || f.death_place) add('DEAT', f.death_date, f.death_place, '');
                 break;
             case 'passager': {
                 const by = (Number(f.age) && yearOf(f.arrival_date)) ? yearOf(f.arrival_date) - Number(f.age) : 0;
                 out.voyage = {departure_port: clean(f.departure_port), ship_name: clean(f.ship), arrival_date: clean(f.arrival_date), arrival_port: clean(f.arrival_port) || 'New York (Castle Garden)',
                     destination: clean(f.destination) || clean(f.arrival_port) || 'New York', departure_date: '', reason: 'Émigration vers les États-Unis', passenger_list_ref: 'Castle Garden',
-                    notes: [f.age && `Âge à l’arrivée : ${clean(f.age)}${by ? ` (né vers ${by})` : ''}`, f.job && `Profession : ${clean(f.job)}`, f.origin && `Origine déclarée : ${clean(f.origin)}`].filter(Boolean).join('\n'), checked: true};
+                    notes: [f.age && `Âge à l’arrivée : ${clean(f.age)}${by ? ` (né vers ${by})` : ''}`, f.job && i18n('Profession : {nm}', {nm: clean(f.job)}), f.origin && i18n('Origine déclarée : {nm}', {nm: clean(f.origin)})].filter(Boolean).join('\n'), checked: true};
                 if (by && !has.BIRT && !has.CHR) add('BIRT', `vers ${by}`, '', 'D’après l’âge déclaré à l’arrivée à New York');
                 if (f.job) add('OCCU', clean(f.arrival_date), '', clean(f.job));
                 break;
@@ -419,13 +420,13 @@
             case 'medaille_sh':
                 out.award = {category: 'decoration', level: 'national', title: 'Médaille de Sainte-Hélène', date: '1857', org: 'Grande chancellerie de la Légion d’honneur',
                     grade: clean(f.rank), source: 'Médaillés de Sainte-Hélène' + (f.cote ? `, ${clean(f.cote)}` : ''),
-                    notes: [f.unit && `Corps : ${clean(f.unit)}`, f.service && `Services : ${clean(f.service)}`, f.residence && `Domicile vers 1857 : ${clean(f.residence)}`].filter(Boolean).join('\n'), checked: true};
+                    notes: [f.unit && i18n('Corps : {nm}', {nm: clean(f.unit)}), f.service && i18n('Services : {nm}', {nm: clean(f.service)}), f.residence && i18n('Domicile vers 1857 : {nm}', {nm: clean(f.residence)})].filter(Boolean).join('\n'), checked: true};
                 add('BIRT', f.birth_date, f.birth_place, '');
                 if (f.residence) add('RESI', 'vers 1857', f.residence, 'Domicile lors de la remise de la médaille de Sainte-Hélène');
                 break;
             case 'personnel': {
-                const span = [clean(f.entry), clean(f.exit)].filter(Boolean); const date = span.length === 2 ? `entre ${yearOf(span[0]) || span[0]} et ${yearOf(span[1]) || span[1]}` : (span[0] || '');
-                if (f.employer || f.job) add('OCCU', date, f.address || '', [clean(f.job), f.employer && `Employeur : ${clean(f.employer)}`].filter(Boolean).join(' — '));
+                const span = [clean(f.entry), clean(f.exit)].filter(Boolean); const date = span.length === 2 ? i18n('entre {nm} et {x2}', {nm: String(yearOf(span[0]) || span[0]), x2: String(yearOf(span[1]) || span[1])}) : (span[0] || '');
+                if (f.employer || f.job) add('OCCU', date, f.address || '', [clean(f.job), f.employer && i18n('Employeur : {nm}', {nm: clean(f.employer)})].filter(Boolean).join(' — '));
                 if (f.employer) out.employer = {name: clean(f.employer), line: `${who || 'Personne'} : ${[f.job && clean(f.job), f.entry && `entré(e) ${clean(f.entry)}`, f.exit && `sorti(e) ${clean(f.exit)}`, f.matricule && `matricule ${clean(f.matricule)}`].filter(Boolean).join(', ')} (registre du personnel${f.cote ? ', ' + clean(f.cote) : ''})`, date: clean(f.entry), checked: true};
                 add('BIRT', f.birth_date, f.birth_place, '');
                 break;
@@ -442,7 +443,7 @@
                 if (f.text) out.note = {title: `Notice du Maitron${f.name ? ' — ' + clean(f.name) : ''}`, text: String(f.text).slice(0, 20000) + (f.author ? `\n\nNotice de ${clean(f.author)}.` : ''), checked: true};
                 break;
             case 'fonds':
-                if (f.description || f.title) out.note = {title: `Fonds d’archives : ${clean(f.title) || 'sans titre'}`, text: [f.title && `Titre : ${clean(f.title)}`, f.repository && `Conservé à : ${clean(f.repository)}`, f.cote && `Cote : ${clean(f.cote)}`, f.dates && `Dates : ${clean(f.dates)}`, f.description && String(f.description).slice(0, 4000)].filter(Boolean).join('\n'), checked: false};
+                if (f.description || f.title) out.note = {title: `Fonds d’archives : ${clean(f.title) || 'sans titre'}`, text: [f.title && i18n('Titre : {nm}', {nm: clean(f.title)}), f.repository && i18n('Conservé à : {nm}', {nm: clean(f.repository)}), f.cote && i18n('Cote : {nm}', {nm: clean(f.cote)}), f.dates && i18n('Dates : {nm}', {nm: clean(f.dates)}), f.description && String(f.description).slice(0, 4000)].filter(Boolean).join('\n'), checked: false};
                 break;
             case 'pamyat':
                 add('BIRT', f.birth_date, f.birth_place, '');
@@ -451,7 +452,7 @@
                 break;
             case 'repression':
                 add('BIRT', f.birth_date, f.birth_place, '');
-                add('EVEN', f.arrest_date, '', [f.arrest_date && `Arrêté(e) le ${clean(f.arrest_date)}`, f.sentence && `Condamnation : ${clean(f.sentence)}${f.sentence_date ? ' (' + clean(f.sentence_date) + ')' : ''}`, f.rehabilitation && `Réhabilité(e) : ${clean(f.rehabilitation)}`].filter(Boolean).join(' · '),
+                add('EVEN', f.arrest_date, '', [f.arrest_date && i18n('Arrêté(e) le {nm}', {nm: clean(f.arrest_date)}), f.sentence && `Condamnation : ${clean(f.sentence)}${f.sentence_date ? ' (' + clean(f.sentence_date) + ')' : ''}`, f.rehabilitation && i18n('Réhabilité(e) : {nm}', {nm: clean(f.rehabilitation)})].filter(Boolean).join(' · '),
                     {label: RESPECT.labels[0], slug: RESPECT.slugs[0]});
                 if (f.death_date) add('DEAT', f.death_date, '', 'Victime de la répression politique');
                 break;

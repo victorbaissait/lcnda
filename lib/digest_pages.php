@@ -42,7 +42,7 @@ function save_archive_digest_page(PDO $pdo, array $data): array
     } else {
         if ($number === '') { throw new RuntimeException('Indique le numéro de la page (ou de la vue).'); }
         if ($number !== $old) {
-            foreach ($pages as $p) { if (is_array($p) && (string) ($p['number'] ?? '') === $number) { throw new RuntimeException('La page ' . $number . ' existe déjà.'); } }
+            foreach ($pages as $p) { if (is_array($p) && (string) ($p['number'] ?? '') === $number) { throw new RuntimeException(i18n_t('La page {n} existe déjà.', ['n' => $number])); } }
         }
         $cur = $idx !== null && is_array($pages[$idx]) ? $pages[$idx] : ['number' => $number, 'status' => 'todo', 'content_type' => 'acts', 'act_from' => '', 'act_to' => '', 'note' => ''];
         $status = (string) ($data['status'] ?? $cur['status'] ?? 'todo');

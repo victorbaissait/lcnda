@@ -15,6 +15,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const A = () => window.LCNDA_APP;
     const UI = () => window.LCNDA_UI;
@@ -75,7 +76,7 @@
             if (st.text) st.v = {...S2().parseFields(st.text, st.kind), ...st.v};
             await loadFiche();
             return {count: 1, noun: 'document', summaryHtml: `<b>un document</b> pour ${st.fiche ? `<b>${esc([st.fiche.first, String(st.fiche.last || '').toUpperCase()].join(' '))}</b>` : st.target ? `<b>${esc(st.target.name)}</b>` : 'la fiche choisie ci-dessous'}`,
-                notices: [{kind: 'warn', text: `${S2().MENTION}. Le document entre « À vérifier ».`}, {kind: 'info', text: 'Rien n’est remplacé : on ajoute, ou on remplit une case vide. « ↶ Annuler » retire tout ce que l’import a ajouté.'}],
+                notices: [{kind: 'warn', text: i18n('{nm}. Le document entre « À vérifier ».', {nm: i18n(S2().MENTION)})}, {kind: 'info', text: 'Rien n’est remplacé : on ajoute, ou on remplit une case vide. « ↶ Annuler » retire tout ce que l’import a ajouté.'}],
                 preview: '<div class="so-imp" data-so2-imp></div>', onShow: body => draw(body)};
         };
         const loadFiche = async () => {
@@ -98,7 +99,7 @@
         const propsHtml = () => {
             const list = proposals(); if (!list.length) return '';
             return `<fieldset class="so-props so2-props"><legend>Ce qui sera ajouté (rien n’est remplacé)</legend>${list.map(p => `<label class="checkbox-line"><input type="checkbox" data-so2-add="${esc(p.id)}" ${p.checked ? 'checked' : ''}>
-                <span><b>${esc(p.label)}</b>${[p.date, p.place, p.title].filter(Boolean).length ? ` — ${esc([p.date, p.place, p.title].filter(Boolean).join(' · '))}` : ''}${p.exists ? `<br><small class="ui-hint">Déjà sur la fiche : ${esc(p.exists)} (gardé)</small>` : p.why ? `<br><small class="ui-hint">${esc(p.why)}</small>` : ''}</span></label>`).join('')}</fieldset>`;
+                <span><b>${esc(p.label)}</b>${[p.date, p.place, p.title].filter(Boolean).length ? ` — ${esc([p.date, p.place, p.title].filter(Boolean).join(' · '))}` : ''}${p.exists ? `<br><small class="ui-hint">${i18n('Déjà sur la fiche : {val} (gardé)', {val: esc(p.exists)})}</small>` : p.why ? `<br><small class="ui-hint">${esc(i18n(p.why))}</small>` : ''}</span></label>`).join('')}</fieldset>`;
         };
         const ecartsHtml = () => !st.pid ? `<li class="so-ecart is-info">ℹ️ Choisis la fiche : l’app comparera le document avec elle.</li>`
             : st.ecarts.length ? st.ecarts.map(e => `<li class="so-ecart is-${esc(e.level)}">${e.level === 'orange' ? '🟠' : e.level === 'yellow' ? '🟡' : 'ℹ️'} ${esc(e.text)}</li>`).join('') : `<li class="so-ecart is-ok">✓ Le nom, le prénom et les dates ne contredisent pas la fiche.</li>`;
@@ -158,7 +159,7 @@
             const r = j.result; forget(st.pid); if (st.objUrl) URL.revokeObjectURL(st.objUrl);
             window.dispatchEvent(new CustomEvent('lcnda:sources-ouvertes-changed', {detail: r}));
             refresh();
-            return {message: `${r.summary} — à vérifier sur le document.`, undo: async () => { await post('so2_undo', {batch: r.batch}); forget(st.pid); refresh(); }};
+            return {message: i18n('{nm} — à vérifier sur le document.', {nm: r.summary}), undo: async () => { await post('so2_undo', {batch: r.batch}); forget(st.pid); refresh(); }};
         };
         return UI().openImportDialog({title: 'Importer depuis d’autres archives', accept: 'image/*,.pdf,.html,.htm,.txt', what: 'image, PDF, page enregistrée ou texte',
             intro: 'Ce que tu as téléchargé ou enregistré : un décret, un acte, une notice, une page de registre en image ou en PDF, la page enregistrée par ton navigateur (« Enregistrer sous… »), ou un texte copié. Rien n’est demandé au site : seul ton fichier est lu. Pas de fichier ? « 🔗 Coller un lien ».',

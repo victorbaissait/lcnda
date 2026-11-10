@@ -331,7 +331,7 @@ function same_birthday_ids(PDO $pdo, int $personId): array
     $md = [];
     foreach ($rows as $r) { $d = exact_date((string) $r['date_text']); if ($d && !isset($md[(int) $r['person_id']])) { $md[(int) $r['person_id']] = substr($d, 5); } }
     $target = $md[$personId] ?? null;
-    if (!$target) { throw new RuntimeException('La date de naissance exacte de ' . question_person_name($pdo, $personId) . ' n’est pas connue.'); }
+    if (!$target) { throw new RuntimeException(i18n_t('La date de naissance exacte de {name} n’est pas connue.', ['name' => question_person_name($pdo, $personId)])); }
     return array_values(array_keys(array_filter($md, static fn($v, $id) => $v === $target && $id !== $personId, ARRAY_FILTER_USE_BOTH)));
 }
 

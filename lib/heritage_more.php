@@ -831,13 +831,13 @@ function suspicious_places(PDO $pdo): array
         $country = strtolower(ascii_fold(trim((string) $r['country']))) ?: 'france';
         $country = str_replace(['etats unis', 'usa', 'united states'], 'etats-unis', $country);
         $reasons = []; $suggest = null;
-        if ($lat == 0.0 && $lon == 0.0) { $reasons[] = 'Coordonnées 0, 0 (en plein océan, au large de l’Afrique)'; }
+        if ($lat == 0.0 && $lon == 0.0) { $reasons[] = i18n_t('Coordonnées 0, 0 (en plein océan, au large de l’Afrique)'); }
         elseif (isset(COUNTRY_BOXES[$country])) {
             [$a, $b, $c, $d] = COUNTRY_BOXES[$country];
             if (!place_in_country($country, $lat, $lon)) {
-                $reasons[] = 'Hors de ' . ($r['country'] ?: 'France') . ' alors que le pays indiqué est ' . ($r['country'] ?: 'France');
-                if ($lon >= $a && $lon <= $b && $lat >= $c && $lat <= $d) { $reasons[] = 'Latitude et longitude probablement inversées'; $suggest = ['lat' => $lon, 'lon' => $lat, 'why' => 'Inverser latitude et longitude']; }
-                elseif ($country === 'france' && $lat >= $a && $lat <= $b && -$lon >= $c && -$lon <= $d) { $reasons[] = 'Longitude probablement de mauvais signe (est / ouest)'; $suggest = ['lat' => $lat, 'lon' => -$lon, 'why' => 'Corriger le signe de la longitude']; }
+                $reasons[] = i18n_t('Hors de {country} alors que le pays indiqué est {country}', ['country' => $r['country'] ?: 'France']);
+                if ($lon >= $a && $lon <= $b && $lat >= $c && $lat <= $d) { $reasons[] = i18n_t('Latitude et longitude probablement inversées'); $suggest = ['lat' => $lon, 'lon' => $lat, 'why' => i18n_t('Inverser latitude et longitude')]; }
+                elseif ($country === 'france' && $lat >= $a && $lat <= $b && -$lon >= $c && -$lon <= $d) { $reasons[] = i18n_t('Longitude probablement de mauvais signe (est / ouest)'); $suggest = ['lat' => $lat, 'lon' => -$lon, 'why' => i18n_t('Corriger le signe de la longitude')]; }
             }
         }
         $dist = h_distance_km($center[0], $center[1], $lat, $lon);
@@ -845,12 +845,13 @@ function suspicious_places(PDO $pdo): array
             $best = null;
             foreach ($byName[mb_strtolower(trim((string) $r['name']))] as $c) { $dc = h_distance_km($center[0], $center[1], (float) $c['centroid_lat'], (float) $c['centroid_lon']); if (!$best || $dc < $best['d']) { $best = ['d' => $dc, 'c' => $c]; } }
             if ($best && $best['d'] + 150 < $dist && $best['c']['insee_code'] !== $r['admin4_code']) {
-                $reasons[] = 'Une autre commune « ' . $r['name'] . ' » est beaucoup plus près du reste de la famille (' . round($best['d']) . ' km au lieu de ' . round($dist) . ' km) : département ' . substr((string) $best['c']['insee_code'], 0, 2);
-                $suggest ??= ['lat' => (float) $best['c']['centroid_lat'], 'lon' => (float) $best['c']['centroid_lon'], 'insee' => $best['c']['insee_code'], 'why' => 'Prendre la commune du département ' . substr((string) $best['c']['insee_code'], 0, 2)];
+                $reasons[] = i18n_t('Une autre commune « {name} » est beaucoup plus près du reste de la famille ({a} km au lieu de {b} km) : département {dep}', ['name' => $r['name'], 'a' => round($best['d']), 'b' => round($dist), 'dep' => substr((string) $best['c']['insee_code'], 0, 2)]);
+                $suggest ??= ['lat' => (float) $best['c']['centroid_lat'], 'lon' => (float) $best['c']['centroid_lon'], 'insee' => $best['c']['insee_code'], 'why' => i18n_t('Prendre la commune du département {dep}', ['dep' => substr((string) $best['c']['insee_code'], 0, 2)])];
             }
         }
-        if (!$reasons && $dist > 1500 && $country === 'france' && !france_overseas_name($lat, $lon)) { $reasons[] = 'À ' . round($dist) . ' km du reste de la famille'; }
-        if ($reasons) { $alerts[] = ['place' => $r, 'distance' => round($dist), 'reasons' => $reasons, 'suggest' => $suggest]; }
+        $onlyFar = false;
+        if (!$reasons && $dist > 1500 && $country === 'france' && !france_overseas_name($lat, $lon)) { $reasons[] = i18n_t('À {n} km du reste de la famille', ['n' => round($dist)]); $onlyFar = true; }
+        if ($reasons) { $alerts[] = ['place' => $r, 'distance' => round($dist), 'reasons' => $reasons, 'suggest' => $suggest, 'only_far' => $onlyFar]; }
     }
     usort($alerts, static fn($a, $b) => $b['distance'] <=> $a['distance']);
     return ['alerts' => $alerts, 'center' => $center];
@@ -1140,7 +1141,7 @@ function save_custom_block_entry(PDO $pdo, array $data): array
             case 'longtext': $clean[$f['key']] = mb_substr((string) ($v ?? ''), 0, 40000); break;
             default: $clean[$f['key']] = mb_substr(safe_text($v ?? ''), 0, 2000);
         }
-        if (!empty($f['required']) && in_array($f['type'], ['text', 'longtext', 'date', 'select', 'person'], true) && ($clean[$f['key']] ?? '') === '') { throw new RuntimeException('Le champ « ' . $f['label'] . ' » est obligatoire.'); }
+        if (!empty($f['required']) && in_array($f['type'], ['text', 'longtext', 'date', 'select', 'person'], true) && ($clean[$f['key']] ?? '') === '') { throw new RuntimeException(i18n_t('Le champ « {label} » est obligatoire.', ['label' => $f['label']])); }
     }
     $json = json_encode($clean, JSON_UNESCAPED_UNICODE);
     if ($id) {

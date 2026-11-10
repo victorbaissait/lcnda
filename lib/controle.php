@@ -113,9 +113,9 @@ function controle_years(array $a, array $b): float { return controle_gap($a, $b)
 function controle_span_text(float $days): string
 {
     $days = abs($days);
-    if ($days < 60) { return (int) round($days) . ' jour' . (round($days) > 1 ? 's' : ''); }
-    if ($days < 730) { return (int) floor($days / 30.44) . ' mois'; }
-    $y = (int) floor($days / 365.25); return $y . ' an' . ($y > 1 ? 's' : '');
+    if ($days < 60) { $n = (int) round($days); return i18n_t($n > 1 ? '{n} jours' : '{n} jour', ['n' => $n]); }
+    if ($days < 730) { return i18n_t('{n} mois', ['n' => (int) floor($days / 30.44)]); }
+    $y = (int) floor($days / 365.25); return i18n_t($y > 1 ? '{n} ans' : '{n} an', ['n' => $y]);
 }
 
 /** Signature de ce qui sert au contrôle : si elle ne bouge pas, le résultat gardé est encore bon. */
@@ -133,7 +133,8 @@ function controle_signature(PDO $pdo, array $th): string
     return md5(json_encode([$row, $th, CONTROLE_VERSION]));
 }
 
-function controle_cache_file(): string { return DATA_DIR . '/cache/controle.json'; }
+// 🌐 les phrases des alertes sont écrites dans la langue de la page : un fichier gardé par langue (le français garde l'ancien nom)
+function controle_cache_file(): string { $l = i18n_lang(); return DATA_DIR . '/cache/controle' . ($l === 'fr' ? '' : '-' . $l) . '.json'; }
 
 /** Le contrôle complet (sans les exceptions), gardé tant que la base ne change pas. */
 function controle_run(PDO $pdo, bool $fresh = false): array
@@ -178,6 +179,11 @@ function controle_compute(PDO $pdo, array $th): array
     };
     $first = static function (int $id) use (&$P, $name): string { $f = trim(explode(' ', trim($P[$id]['fn'] ?? ''))[0] ?? ''); return $f !== '' ? $f : $name($id); };
     $g = static fn(int $id, string $m, string $f, string $x) => ($P[$id]['g'] ?? '') === 'male' ? $m : (($P[$id]['g'] ?? '') === 'female' ? $f : $x);
+    // 🌐 les phrases visibles passent par i18n_t() (lib/i18n.php) ; en français elles restent mot pour mot
+    $T = static fn(string $s, array $v = []): string => i18n_t($s, $v);
+    $gT = static fn(int $id, string $m, string $f, string $x, array $v = []): string => i18n_t($g($id, $m, $f, $x), $v); // phrase entière selon le sexe de la fiche
+    $rT = static fn(string $pg, string $f, string $m, string $x, array $v = []): string => i18n_t($pg === 'female' ? $f : ($pg === 'male' ? $m : $x), $v); // selon le sexe du parent
+    $dec = static fn($x): string => i18n_lang() === 'en' ? (string) $x : str_replace('.', ',', (string) $x);
 
     // ── événements : une lecture ──
     $lifeTags = ['CHR', 'BAPM', 'CONF', 'FCOM', 'BARM', 'BASM', 'BLES', 'ADOP', 'GRAD', 'EDUC', 'OCCU', 'RETI', 'EMIG', 'IMMI', 'NATU', 'CENS', 'RESI', 'ORDN'];
@@ -244,8 +250,8 @@ function controle_compute(PDO $pdo, array $th): array
         $ok = $month >= 1 && $month <= 12 && $day >= 1 && ($julian ? $day <= [31, ($year % 4 === 0 ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][$month - 1] : checkdate($month, $day, max(1, $year)));
         if ($ok) { continue; }
         $pid = (int) $r['person_id']; $people = $pid ? [$pid] : array_filter($families[(int) $r['family_id']] ?? []);
-        $add(['key' => "impossible-date:{$r['id']}", 'check' => 'impossible-date', 'sort' => 'dates', 'level' => 'red', 'title' => 'Date qui n’existe pas : « ' . $r['date_text'] . ' »',
-            'detail' => $r['label'] . ' le « ' . $r['date_text'] . ' » : ce jour n’existe pas dans le calendrier ' . ($julian ? 'julien' : 'grégorien') . '.', 'people' => $people,
+        $add(['key' => "impossible-date:{$r['id']}", 'check' => 'impossible-date', 'sort' => 'dates', 'level' => 'red', 'title' => $T('Date qui n’existe pas : « {date} »', ['date' => $r['date_text']]),
+            'detail' => $T($julian ? '{event} le « {date} » : ce jour n’existe pas dans le calendrier julien.' : '{event} le « {date} » : ce jour n’existe pas dans le calendrier grégorien.', ['event' => $r['label'], 'date' => $r['date_text']]), 'people' => $people,
             'dates' => [['label' => (string) $r['label'], 'text' => (string) $r['date_text'], 'y' => (int) $r['year'], 'j' => null, 'event_id' => (int) $r['id'], 'person_id' => $pid ?: (int) ($people[0] ?? 0)]],
             'fix' => ['event_id' => (int) $r['id'], 'person_id' => $pid ?: (int) ($people[0] ?? 0)], 'fp' => md5($r['id'] . '=' . $r['date_text'])]);
     }
@@ -259,17 +265,17 @@ function controle_compute(PDO $pdo, array $th): array
         $fix = ['event_id' => (int) $r['id'], 'person_id' => $pid ?: (int) ($people[0] ?? 0)]; $fp = md5($r['id'] . '=' . $text);
         $len = mb_strlen($text);
         if ($len > 80) {
-            $add(['key' => "long-date:{$r['id']}", 'check' => 'long-date', 'sort' => 'dates', 'level' => 'orange', 'title' => 'Date trop longue (' . $len . ' signes)',
-                'detail' => $r['label'] . ' : « ' . mb_substr($text, 0, 60) . '… » — une note a sans doute été collée dans la case de la date.', 'people' => $people, 'dates' => [$one], 'fix' => $fix, 'fp' => $fp]);
+            $add(['key' => "long-date:{$r['id']}", 'check' => 'long-date', 'sort' => 'dates', 'level' => 'orange', 'title' => $T('Date trop longue ({n} signes)', ['n' => $len]),
+                'detail' => $T('{event} : « {text}… » — une note a sans doute été collée dans la case de la date.', ['event' => $r['label'], 'text' => mb_substr($text, 0, 60)]), 'people' => $people, 'dates' => [$one], 'fix' => $fix, 'fp' => $fp]);
             continue;
         }
         if (preg_match('/\b(?:entre|between|bet\.?)\s+(?:.*?\D)?(\d{3,4})\b.*?\s(?:et|and)\s+(?:.*?\D)?(\d{3,4})\b/iu', $text, $m) && (int) $m[1] > (int) $m[2]) {
-            $add(['key' => "reversed-range:{$r['id']}", 'check' => 'reversed-range', 'sort' => 'dates', 'level' => 'orange', 'title' => 'Dates à l’envers : « ' . $text . ' »',
-                'detail' => $r['label'] . ' : la première année (' . $m[1] . ') vient après la seconde (' . $m[2] . '). Sans doute « entre ' . $m[2] . ' et ' . $m[1] . ' ».', 'people' => $people, 'dates' => [$one], 'fix' => $fix, 'fp' => $fp]);
+            $add(['key' => "reversed-range:{$r['id']}", 'check' => 'reversed-range', 'sort' => 'dates', 'level' => 'orange', 'title' => $T('Dates à l’envers : « {date} »', ['date' => $text]),
+                'detail' => $T('{event} : la première année ({a}) vient après la seconde ({b}). Sans doute « entre {b} et {a} ».', ['event' => $r['label'], 'a' => $m[1], 'b' => $m[2]]), 'people' => $people, 'dates' => [$one], 'fix' => $fix, 'fp' => $fp]);
         }
         if (preg_match('/^[-−–]\s*\d{1,4}$/u', $text)) {
-            $add(['key' => "negative-date:{$r['id']}", 'check' => 'negative-date', 'sort' => 'dates', 'level' => 'orange', 'title' => 'Date « ' . $text . ' » lue comme l’an ' . (int) preg_replace('/\D/', '', $text),
-                'detail' => $r['label'] . ' : un signe moins devant l’année. Pour une date avant Jésus-Christ, écris « 5 av. J.-C. »; sinon corrige l’année.', 'people' => $people, 'dates' => [$one], 'fix' => $fix, 'fp' => $fp]);
+            $add(['key' => "negative-date:{$r['id']}", 'check' => 'negative-date', 'sort' => 'dates', 'level' => 'orange', 'title' => $T('Date « {date} » lue comme l’an {y}', ['date' => $text, 'y' => (int) preg_replace('/\D/', '', $text)]),
+                'detail' => $T('{event} : un signe moins devant l’année. Pour une date avant Jésus-Christ, écris « 5 av. J.-C. »; sinon corrige l’année.', ['event' => $r['label']]), 'people' => $people, 'dates' => [$one], 'fix' => $fix, 'fp' => $fp]);
         }
     }
     unset($evRows, $allDated); // plus servis : la mémoire est rendue avant les autres contrôles
@@ -277,31 +283,31 @@ function controle_compute(PDO $pdo, array $th): array
         $b = $p['b']; $d = $p['d'];
         // 2. décès avant la naissance
         if ($b && $d && (($b['j'] !== null && $d['j'] !== null) ? $d['j'] < $b['j'] : $d['y'] < $b['y'])) {
-            $add(['key' => "death-before-birth:$id", 'check' => 'death-before-birth', 'sort' => 'dates', 'level' => 'red', 'title' => 'Décès avant la naissance',
-                'detail' => "Naissance {$b['t']} · décès {$d['t']}", 'views' => [$id => "Décès ({$d['t']}) avant sa naissance ({$b['t']})"], 'people' => [$id],
-                'dates' => [$dt($b, 'naissance', $id), $dt($d, 'décès', $id)], 'fix' => ['event_id' => $d['e'], 'person_id' => $id], 'fp' => $fpOf($b, $d)]);
+            $add(['key' => "death-before-birth:$id", 'check' => 'death-before-birth', 'sort' => 'dates', 'level' => 'red', 'title' => $T('Décès avant la naissance'),
+                'detail' => $T('Naissance {b} · décès {d}', ['b' => $b['t'], 'd' => $d['t']]), 'views' => [$id => $T('Décès ({d}) avant sa naissance ({b})', ['b' => $b['t'], 'd' => $d['t']])], 'people' => [$id],
+                'dates' => [$dt($b, $T('naissance'), $id), $dt($d, $T('décès'), $id)], 'fix' => ['event_id' => $d['e'], 'person_id' => $id], 'fp' => $fpOf($b, $d)]);
         } elseif ($b && $d) {
             // 4. longévité
             $life = controle_years($b, $d);
             if ($life > $th['longevity']) {
                 $lvl = $life > $th['longevity_max'] ? 'red' : 'orange';
-                $add(['key' => "lifespan:$id", 'check' => 'lifespan', 'sort' => 'dates', 'level' => $lvl, 'title' => $g($id, 'Mort', 'Morte', 'Mort(e)') . ' à ' . floor($life) . ' ans',
-                    'detail' => "Naissance {$b['t']} · décès {$d['t']} (seuil : " . ($lvl === 'red' ? $th['longevity_max'] : $th['longevity']) . ' ans)', 'people' => [$id],
-                    'rule' => 'Très peu de gens dépassent ' . $th['longevity'] . ' ans ; au-delà de ' . $th['longevity_max'] . ' ans, c’est presque toujours une erreur.',
-                    'dates' => [$dt($b, 'naissance', $id), $dt($d, 'décès', $id)], 'fix' => ['event_id' => $b['e'], 'person_id' => $id], 'fp' => $fpOf($b, $d)]);
+                $add(['key' => "lifespan:$id", 'check' => 'lifespan', 'sort' => 'dates', 'level' => $lvl, 'title' => $gT($id, 'Mort à {n} ans', 'Morte à {n} ans', 'Mort(e) à {n} ans', ['n' => floor($life)]),
+                    'detail' => $T('Naissance {b} · décès {d} (seuil : {n} ans)', ['b' => $b['t'], 'd' => $d['t'], 'n' => $lvl === 'red' ? $th['longevity_max'] : $th['longevity']]), 'people' => [$id],
+                    'rule' => $T('Très peu de gens dépassent {a} ans ; au-delà de {b} ans, c’est presque toujours une erreur.', ['a' => $th['longevity'], 'b' => $th['longevity_max']]),
+                    'dates' => [$dt($b, $T('naissance'), $id), $dt($d, $T('décès'), $id)], 'fix' => ['event_id' => $b['e'], 'person_id' => $id], 'fp' => $fpOf($b, $d)]);
             }
         }
         // 3. naissance dans le futur
         if ($b && $b['y'] > $current) {
-            $add(['key' => "future-birth:$id", 'check' => 'future-birth', 'sort' => 'dates', 'level' => 'red', 'title' => 'Naissance dans le futur', 'detail' => "Naissance {$b['t']}", 'people' => [$id],
-                'dates' => [$dt($b, 'naissance', $id)], 'fix' => ['event_id' => $b['e'], 'person_id' => $id], 'fp' => $fpOf($b)]);
+            $add(['key' => "future-birth:$id", 'check' => 'future-birth', 'sort' => 'dates', 'level' => 'red', 'title' => $T('Naissance dans le futur'), 'detail' => $T('Naissance {b}', ['b' => $b['t']]), 'people' => [$id],
+                'dates' => [$dt($b, $T('naissance'), $id)], 'fix' => ['event_id' => $b['e'], 'person_id' => $id], 'fp' => $fpOf($b)]);
         }
         // dates de naissance ou de décès contradictoires (deux années différentes)
         foreach (['bs' => ['naissance', 'conflicting-naissance-date'], 'ds' => ['décès', 'conflicting-décès-date']] as $k => [$what, $ck]) {
             if (count($p[$k]) > 1) {
                 $ds = array_values($p[$k]);
-                $add(['key' => "$ck:$id", 'check' => 'conflicting-date', 'sort' => 'dates', 'level' => 'orange', 'title' => "Dates de $what contradictoires",
-                    'detail' => implode(' / ', array_map(static fn($x) => $x['t'], $ds)), 'people' => [$id], 'dates' => array_map(static fn($x) => $dt($x, $what, $id), $ds),
+                $add(['key' => "$ck:$id", 'check' => 'conflicting-date', 'sort' => 'dates', 'level' => 'orange', 'title' => $T($what === 'naissance' ? 'Dates de naissance contradictoires' : 'Dates de décès contradictoires'),
+                    'detail' => implode(' / ', array_map(static fn($x) => $x['t'], $ds)), 'people' => [$id], 'dates' => array_map(static fn($x) => $dt($x, $T($what), $id), $ds),
                     'fix' => ['event_id' => $ds[1]['e'], 'person_id' => $id], 'fp' => $fpOf(...$ds)]);
             }
         }
@@ -310,20 +316,20 @@ function controle_compute(PDO $pdo, array $th): array
         if ($bu && $d) {
             $gap = controle_gap($d, $bu);
             if (($gap['exact'] && $gap['days'] < 0) || (!$gap['exact'] && $bu['y'] < $d['y'])) {
-                $add(['key' => "burial-before-death:$id", 'check' => 'burial-before-death', 'sort' => 'dates', 'level' => 'red', 'title' => 'Inhumation avant le décès',
-                    'detail' => "Décès {$d['t']} · inhumation {$bu['t']}", 'people' => [$id], 'dates' => [$dt($d, 'décès', $id), $dt($bu, 'inhumation', $id)],
+                $add(['key' => "burial-before-death:$id", 'check' => 'burial-before-death', 'sort' => 'dates', 'level' => 'red', 'title' => $T('Inhumation avant le décès'),
+                    'detail' => $T('Décès {d} · inhumation {i}', ['d' => $d['t'], 'i' => $bu['t']]), 'people' => [$id], 'dates' => [$dt($d, $T('décès'), $id), $dt($bu, $T('inhumation'), $id)],
                     'fix' => ['event_id' => $bu['e'], 'person_id' => $id], 'fp' => $fpOf($d, $bu)]);
             } elseif ($gap['exact'] && $d['y'] < 1900 && $gap['days'] > $th['burial_days']) {
-                $add(['key' => "burial-late:$id", 'check' => 'burial-late', 'sort' => 'dates', 'level' => 'yellow', 'title' => 'Inhumation ' . controle_span_text($gap['days']) . ' après le décès',
-                    'detail' => "Décès {$d['t']} · inhumation {$bu['t']} (seuil : {$th['burial_days']} jours)", 'people' => [$id], 'dates' => [$dt($d, 'décès', $id), $dt($bu, 'inhumation', $id)],
+                $add(['key' => "burial-late:$id", 'check' => 'burial-late', 'sort' => 'dates', 'level' => 'yellow', 'title' => $T('Inhumation {span} après le décès', ['span' => controle_span_text($gap['days'])]),
+                    'detail' => $T('Décès {d} · inhumation {i} (seuil : {n} jours)', ['d' => $d['t'], 'i' => $bu['t'], 'n' => $th['burial_days']]), 'people' => [$id], 'dates' => [$dt($d, $T('décès'), $id), $dt($bu, $T('inhumation'), $id)],
                     'fix' => ['event_id' => $bu['e'], 'person_id' => $id], 'fp' => $fpOf($d, $bu)]);
             }
         }
         // baptême longtemps après la naissance (avant 1900)
         $ba = $p['bapt'];
         if ($ba && $b && $b['j'] !== null && $ba['j'] !== null && $b['y'] < 1900 && $ba['j'] - $b['j'] > $th['baptism_days']) {
-            $add(['key' => "baptism-late:$id", 'check' => 'baptism-late', 'sort' => 'dates', 'level' => 'yellow', 'title' => 'Baptême ' . controle_span_text($ba['j'] - $b['j']) . ' après la naissance',
-                'detail' => "Naissance {$b['t']} · baptême {$ba['t']} (seuil : {$th['baptism_days']} jours)", 'people' => [$id], 'dates' => [$dt($b, 'naissance', $id), $dt($ba, 'baptême', $id)],
+            $add(['key' => "baptism-late:$id", 'check' => 'baptism-late', 'sort' => 'dates', 'level' => 'yellow', 'title' => $T('Baptême {span} après la naissance', ['span' => controle_span_text($ba['j'] - $b['j'])]),
+                'detail' => $T('Naissance {b} · baptême {t} (seuil : {n} jours)', ['b' => $b['t'], 't' => $ba['t'], 'n' => $th['baptism_days']]), 'people' => [$id], 'dates' => [$dt($b, $T('naissance'), $id), $dt($ba, $T('baptême'), $id)],
                 'fix' => ['event_id' => $ba['e'], 'person_id' => $id], 'fp' => $fpOf($b, $ba)]);
         }
     }
@@ -331,13 +337,13 @@ function controle_compute(PDO $pdo, array $th): array
     foreach ($lifeEv as $x) {
         $id = $x['pid']; $e = $x['d']; $b = $P[$id]['b']; $d = $P[$id]['d'];
         if ($b && (($e['j'] !== null && $b['j'] !== null) ? $e['j'] < $b['j'] : $e['y'] < $b['y'])) {
-            $add(['key' => "event-before-birth:{$e['e']}", 'check' => 'event-before-birth', 'sort' => 'dates', 'level' => 'red', 'title' => "{$x['label']} avant la naissance",
-                'detail' => "{$x['label']} {$e['t']} · naissance {$b['t']}", 'people' => [$id], 'dates' => [$dt($b, 'naissance', $id), $dt($e, mb_strtolower($x['label']), $id)],
+            $add(['key' => "event-before-birth:{$e['e']}", 'check' => 'event-before-birth', 'sort' => 'dates', 'level' => 'red', 'title' => $T('{event} avant la naissance', ['event' => $x['label']]),
+                'detail' => $T('{event} {date} · naissance {b}', ['event' => $x['label'], 'date' => $e['t'], 'b' => $b['t']]), 'people' => [$id], 'dates' => [$dt($b, $T('naissance'), $id), $dt($e, mb_strtolower($x['label']), $id)],
                 'fix' => ['event_id' => $e['e'], 'person_id' => $id], 'fp' => $fpOf($b, $e)]);
         }
         if ($d && (($e['j'] !== null && $d['j'] !== null) ? $e['j'] > $d['j'] : $e['y'] > $d['y'])) {
-            $add(['key' => "event-after-death:{$e['e']}", 'check' => 'event-after-death', 'sort' => 'dates', 'level' => 'red', 'title' => "{$x['label']} après le décès",
-                'detail' => "{$x['label']} {$e['t']} · décès {$d['t']}", 'people' => [$id], 'dates' => [$dt($d, 'décès', $id), $dt($e, mb_strtolower($x['label']), $id)],
+            $add(['key' => "event-after-death:{$e['e']}", 'check' => 'event-after-death', 'sort' => 'dates', 'level' => 'red', 'title' => $T('{event} après le décès', ['event' => $x['label']]),
+                'detail' => $T('{event} {date} · décès {d}', ['event' => $x['label'], 'date' => $e['t'], 'd' => $d['t']]), 'people' => [$id], 'dates' => [$dt($d, $T('décès'), $id), $dt($e, mb_strtolower($x['label']), $id)],
                 'fix' => ['event_id' => $e['e'], 'person_id' => $id], 'fp' => $fpOf($d, $e)]);
         }
     }
@@ -352,24 +358,24 @@ function controle_compute(PDO $pdo, array $th): array
                 $d = $P[$id]['d']; $b = $birth($id);
                 $isMarr = $m['tag'] !== 'ENGA';
                 if ($isMarr && $d && (($m['j'] !== null && $d['j'] !== null) ? $m['j'] > $d['j'] : $m['y'] > $d['y'])) {
-                    $add(['key' => "marriage-after-death:$id:{$m['e']}", 'check' => 'marriage-after-death', 'sort' => 'dates', 'level' => 'red', 'title' => $g($id, 'Marié', 'Mariée', 'Marié(e)') . ' après son décès',
-                        'detail' => "Mariage {$m['t']} · décès {$d['t']}", 'views' => [$id => $g($id, 'Marié', 'Mariée', 'Marié(e)') . " le {$m['t']}, après sa mort"], 'people' => [$id],
-                        'dates' => [$dt($d, 'décès', $id), $dt($m, 'mariage', $id)], 'fix' => ['event_id' => $m['e'], 'person_id' => $id], 'fp' => $fpOf($d, $m)]);
+                    $add(['key' => "marriage-after-death:$id:{$m['e']}", 'check' => 'marriage-after-death', 'sort' => 'dates', 'level' => 'red', 'title' => $gT($id, 'Marié après son décès', 'Mariée après son décès', 'Marié(e) après son décès'),
+                        'detail' => $T('Mariage {m} · décès {d}', ['m' => $m['t'], 'd' => $d['t']]), 'views' => [$id => $gT($id, 'Marié le {m}, après sa mort', 'Mariée le {m}, après sa mort', 'Marié(e) le {m}, après sa mort', ['m' => $m['t']])], 'people' => [$id],
+                        'dates' => [$dt($d, $T('décès'), $id), $dt($m, $T('mariage'), $id)], 'fix' => ['event_id' => $m['e'], 'person_id' => $id], 'fp' => $fpOf($d, $m)]);
                 }
                 if (!$b) { continue; }
                 $age = controle_years($b, $m);
                 if ($age < 0 && (($m['j'] !== null && $b['j'] !== null) || $m['y'] < $b['y'])) {
-                    $add(['key' => "young-marriage:$id:{$m['e']}", 'check' => 'marriage-before-birth', 'sort' => 'dates', 'level' => 'red', 'title' => 'Mariage avant la naissance',
-                        'detail' => "Mariage {$m['t']} · naissance {$b['t']}", 'people' => [$id], 'dates' => [$dt($m, 'mariage', $id), $dt($b, 'naissance', $id)],
+                    $add(['key' => "young-marriage:$id:{$m['e']}", 'check' => 'marriage-before-birth', 'sort' => 'dates', 'level' => 'red', 'title' => $T('Mariage avant la naissance'),
+                        'detail' => $T('Mariage {m} · naissance {b}', ['m' => $m['t'], 'b' => $b['t']]), 'people' => [$id], 'dates' => [$dt($m, $T('mariage'), $id), $dt($b, $T('naissance'), $id)],
                         'fix' => ['event_id' => $m['e'], 'person_id' => $id], 'fp' => $fpOf($b, $m)]);
                 } elseif ($age >= 0 && $age < $th['marriage_min']) {
-                    $add(['key' => "young-marriage:$id:{$m['e']}", 'check' => 'young-marriage', 'sort' => 'ages', 'level' => 'red', 'title' => $g($id, 'Marié', 'Mariée', 'Marié(e)') . ' à ' . floor($age) . ' ans',
-                        'detail' => "Mariage {$m['t']} · naissance {$b['t']} (seuil : {$th['marriage_min']} ans)", 'people' => [$id], 'rule' => 'Avant ' . $th['marriage_min'] . ' ans, un mariage est presque impossible.',
-                        'dates' => [$dt($b, 'naissance', $id), $dt($m, 'mariage', $id)], 'fix' => ['event_id' => $m['e'], 'person_id' => $id], 'fp' => $fpOf($b, $m)]);
+                    $add(['key' => "young-marriage:$id:{$m['e']}", 'check' => 'young-marriage', 'sort' => 'ages', 'level' => 'red', 'title' => $gT($id, 'Marié à {n} ans', 'Mariée à {n} ans', 'Marié(e) à {n} ans', ['n' => floor($age)]),
+                        'detail' => $T('Mariage {m} · naissance {b} (seuil : {n} ans)', ['m' => $m['t'], 'b' => $b['t'], 'n' => $th['marriage_min']]), 'people' => [$id], 'rule' => $T('Avant {n} ans, un mariage est presque impossible.', ['n' => $th['marriage_min']]),
+                        'dates' => [$dt($b, $T('naissance'), $id), $dt($m, $T('mariage'), $id)], 'fix' => ['event_id' => $m['e'], 'person_id' => $id], 'fp' => $fpOf($b, $m)]);
                 } elseif ($isMarr && $age > $th['marriage_old']) {
-                    $add(['key' => "old-marriage:$id:{$m['e']}", 'check' => 'old-marriage', 'sort' => 'ages', 'level' => 'yellow', 'title' => $g($id, 'Marié', 'Mariée', 'Marié(e)') . ' à ' . floor($age) . ' ans',
-                        'detail' => "Mariage {$m['t']} · naissance {$b['t']} (seuil : {$th['marriage_old']} ans)", 'people' => [$id],
-                        'dates' => [$dt($b, 'naissance', $id), $dt($m, 'mariage', $id)], 'fix' => ['event_id' => $m['e'], 'person_id' => $id], 'fp' => $fpOf($b, $m)]);
+                    $add(['key' => "old-marriage:$id:{$m['e']}", 'check' => 'old-marriage', 'sort' => 'ages', 'level' => 'yellow', 'title' => $gT($id, 'Marié à {n} ans', 'Mariée à {n} ans', 'Marié(e) à {n} ans', ['n' => floor($age)]),
+                        'detail' => $T('Mariage {m} · naissance {b} (seuil : {n} ans)', ['m' => $m['t'], 'b' => $b['t'], 'n' => $th['marriage_old']]), 'people' => [$id],
+                        'dates' => [$dt($b, $T('naissance'), $id), $dt($m, $T('mariage'), $id)], 'fix' => ['event_id' => $m['e'], 'person_id' => $id], 'fp' => $fpOf($b, $m)]);
                 }
             }
         }
@@ -392,28 +398,28 @@ function controle_compute(PDO $pdo, array $th): array
                     $age = controle_years($pb, $cb);
                     $cmpAge = $pb['j'] !== null && $cb['j'] !== null ? $age : (float) ($cb['y'] - $pb['y']);
                     if ($cmpAge <= 0) {
-                        $add(['key' => "young-parent:$pid:$c", 'check' => 'parent-after-child', 'sort' => 'parents', 'level' => 'red', 'title' => ucfirst($role) . ' né' . ($pg === 'female' ? 'e' : '') . ' après son enfant',
-                            'detail' => "Naissance de {$cn} {$cb['t']} · {$role} né" . ($pg === 'female' ? 'e' : '') . " {$pb['t']}", 'people' => [$pid, $c],
-                            'views' => [$pid => "Né" . ($pg === 'female' ? 'e' : '') . " après son enfant {$cn} ({$cb['t']})", $c => ($pg === 'female' ? 'Sa mère est née' : ($pg === 'male' ? 'Son père est né' : 'Son parent est né')) . " après sa naissance ({$pb['t']})"],
-                            'dates' => [$dt($pb, "naiss. {$first($pid)}", $pid), $dt($cb, "naiss. {$cn}", $c)], 'fix' => ['event_id' => $pb['e'], 'person_id' => $pid], 'fp' => $fpOf($pb, $cb)]);
+                        $add(['key' => "young-parent:$pid:$c", 'check' => 'parent-after-child', 'sort' => 'parents', 'level' => 'red', 'title' => $rT($pg, 'Mère née après son enfant', 'Père né après son enfant', 'Parent né après son enfant'),
+                            'detail' => $rT($pg, 'Naissance de {child} {cb} · mère née {pb}', 'Naissance de {child} {cb} · père né {pb}', 'Naissance de {child} {cb} · parent né {pb}', ['child' => $cn, 'cb' => $cb['t'], 'pb' => $pb['t']]), 'people' => [$pid, $c],
+                            'views' => [$pid => $T($pg === 'female' ? 'Née après son enfant {child} ({cb})' : 'Né après son enfant {child} ({cb})', ['child' => $cn, 'cb' => $cb['t']]), $c => $rT($pg, 'Sa mère est née après sa naissance ({pb})', 'Son père est né après sa naissance ({pb})', 'Son parent est né après sa naissance ({pb})', ['pb' => $pb['t']])],
+                            'dates' => [$dt($pb, $T('naiss. {name}', ['name' => $first($pid)]), $pid), $dt($cb, $T('naiss. {name}', ['name' => $cn]), $c)], 'fix' => ['event_id' => $pb['e'], 'person_id' => $pid], 'fp' => $fpOf($pb, $cb)]);
                     } elseif ($cmpAge < $th['parent_min']) {
-                        $add(['key' => "young-parent:$pid:$c", 'check' => 'young-parent', 'sort' => 'ages', 'level' => $cmpAge < 12 ? 'red' : 'orange', 'title' => ucfirst($role) . ' de ' . floor($cmpAge) . ' an' . (floor($cmpAge) > 1 ? 's' : '') . ' à la naissance',
-                            'detail' => "Naissance {$cb['t']} · {$role} né" . ($pg === 'female' ? 'e' : '') . " {$pb['t']} (seuil : {$th['parent_min']} ans)", 'people' => [$pid, $c],
-                            'views' => [$pid => ucfirst($role) . ' de ' . $cn . ' à ' . floor($cmpAge) . ' ans', $c => ($pg === 'female' ? 'Sa mère' : ($pg === 'male' ? 'Son père' : 'Son parent')) . " n’avait que " . floor($cmpAge) . ' ans à sa naissance'],
-                            'dates' => [$dt($pb, "naiss. {$first($pid)}", $pid), $dt($cb, "naiss. {$cn}", $c)], 'fix' => ['event_id' => $pb['e'], 'person_id' => $pid], 'fp' => $fpOf($pb, $cb)]);
+                        $add(['key' => "young-parent:$pid:$c", 'check' => 'young-parent', 'sort' => 'ages', 'level' => $cmpAge < 12 ? 'red' : 'orange', 'title' => floor($cmpAge) > 1 ? $rT($pg, 'Mère de {n} ans à la naissance', 'Père de {n} ans à la naissance', 'Parent de {n} ans à la naissance', ['n' => floor($cmpAge)]) : $rT($pg, 'Mère de {n} an à la naissance', 'Père de {n} an à la naissance', 'Parent de {n} an à la naissance', ['n' => floor($cmpAge)]),
+                            'detail' => $rT($pg, 'Naissance {cb} · mère née {pb} (seuil : {n} ans)', 'Naissance {cb} · père né {pb} (seuil : {n} ans)', 'Naissance {cb} · parent né {pb} (seuil : {n} ans)', ['cb' => $cb['t'], 'pb' => $pb['t'], 'n' => $th['parent_min']]), 'people' => [$pid, $c],
+                            'views' => [$pid => $rT($pg, 'Mère de {child} à {n} ans', 'Père de {child} à {n} ans', 'Parent de {child} à {n} ans', ['child' => $cn, 'n' => floor($cmpAge)]), $c => $rT($pg, 'Sa mère n’avait que {n} ans à sa naissance', 'Son père n’avait que {n} ans à sa naissance', 'Son parent n’avait que {n} ans à sa naissance', ['n' => floor($cmpAge)])],
+                            'dates' => [$dt($pb, $T('naiss. {name}', ['name' => $first($pid)]), $pid), $dt($cb, $T('naiss. {name}', ['name' => $cn]), $c)], 'fix' => ['event_id' => $pb['e'], 'person_id' => $pid], 'fp' => $fpOf($pb, $cb)]);
                     } elseif ($pg === 'female' && $age >= $th['mother_warn']) {
                         $lvl = $age >= $th['mother_max'] ? 'red' : 'orange';
-                        $add(['key' => "old-parent:$pid:$c", 'check' => 'old-mother', 'sort' => 'ages', 'level' => $lvl, 'title' => 'Mère de ' . floor($age) . ' ans à la naissance',
-                            'detail' => "Naissance {$cb['t']} · mère née {$pb['t']} (seuil : " . ($lvl === 'red' ? $th['mother_max'] : $th['mother_warn']) . ' ans)', 'people' => [$pid, $c],
-                            'views' => [$pid => 'Mère de ' . $cn . ' à ' . floor($age) . ' ans', $c => 'Sa mère avait ' . floor($age) . ' ans à sa naissance'],
-                            'rule' => 'Une naissance après ' . $th['mother_max'] . ' ans est presque impossible ; à partir de ' . $th['mother_warn'] . ' ans, c’est à vérifier.',
-                            'dates' => [$dt($pb, "naiss. {$first($pid)}", $pid), $dt($cb, "naiss. {$cn}", $c)], 'fix' => ['event_id' => $pb['e'], 'person_id' => $pid], 'fp' => $fpOf($pb, $cb)]);
+                        $add(['key' => "old-parent:$pid:$c", 'check' => 'old-mother', 'sort' => 'ages', 'level' => $lvl, 'title' => $T('Mère de {n} ans à la naissance', ['n' => floor($age)]),
+                            'detail' => $T('Naissance {cb} · mère née {pb} (seuil : {n} ans)', ['cb' => $cb['t'], 'pb' => $pb['t'], 'n' => $lvl === 'red' ? $th['mother_max'] : $th['mother_warn']]), 'people' => [$pid, $c],
+                            'views' => [$pid => $T('Mère de {child} à {n} ans', ['child' => $cn, 'n' => floor($age)]), $c => $T('Sa mère avait {n} ans à sa naissance', ['n' => floor($age)])],
+                            'rule' => $T('Une naissance après {a} ans est presque impossible ; à partir de {b} ans, c’est à vérifier.', ['a' => $th['mother_max'], 'b' => $th['mother_warn']]),
+                            'dates' => [$dt($pb, $T('naiss. {name}', ['name' => $first($pid)]), $pid), $dt($cb, $T('naiss. {name}', ['name' => $cn]), $c)], 'fix' => ['event_id' => $pb['e'], 'person_id' => $pid], 'fp' => $fpOf($pb, $cb)]);
                     } elseif ($pg === 'male' && $age > $th['father_warn']) {
                         $lvl = $age > $th['father_max'] ? 'red' : 'orange';
-                        $add(['key' => "old-parent:$pid:$c", 'check' => 'old-father', 'sort' => 'ages', 'level' => $lvl, 'title' => 'Père de ' . floor($age) . ' ans à la naissance',
-                            'detail' => "Naissance {$cb['t']} · père né {$pb['t']} (seuil : " . ($lvl === 'red' ? $th['father_max'] : $th['father_warn']) . ' ans)', 'people' => [$pid, $c],
-                            'views' => [$pid => 'Père de ' . $cn . ' à ' . floor($age) . ' ans', $c => 'Son père avait ' . floor($age) . ' ans à sa naissance'],
-                            'dates' => [$dt($pb, "naiss. {$first($pid)}", $pid), $dt($cb, "naiss. {$cn}", $c)], 'fix' => ['event_id' => $pb['e'], 'person_id' => $pid], 'fp' => $fpOf($pb, $cb)]);
+                        $add(['key' => "old-parent:$pid:$c", 'check' => 'old-father', 'sort' => 'ages', 'level' => $lvl, 'title' => $T('Père de {n} ans à la naissance', ['n' => floor($age)]),
+                            'detail' => $T('Naissance {cb} · père né {pb} (seuil : {n} ans)', ['cb' => $cb['t'], 'pb' => $pb['t'], 'n' => $lvl === 'red' ? $th['father_max'] : $th['father_warn']]), 'people' => [$pid, $c],
+                            'views' => [$pid => $T('Père de {child} à {n} ans', ['child' => $cn, 'n' => floor($age)]), $c => $T('Son père avait {n} ans à sa naissance', ['n' => floor($age)])],
+                            'dates' => [$dt($pb, $T('naiss. {name}', ['name' => $first($pid)]), $pid), $dt($cb, $T('naiss. {name}', ['name' => $cn]), $c)], 'fix' => ['event_id' => $pb['e'], 'person_id' => $pid], 'fp' => $fpOf($pb, $cb)]);
                     }
                 }
                 // né après la mort d'un parent (père : 300 jours au plus ; mère : jamais)
@@ -425,14 +431,15 @@ function controle_compute(PDO $pdo, array $th): array
                         : ($gap['exact'] ? $gap['days'] > $th['father_death_days'] : $cb['y'] > $pd['y'] + 1);
                     if ($late) {
                         $span = controle_span_text($gap['days']);
-                        $born = $g($c, 'Né', 'Née', 'Né(e)');
-                        $kid = $g($c, 'Son fils', 'Sa fille', 'Son enfant');
+                        // une phrase entière par sexe de l'enfant et du parent (« Née 3 jours après la mort de son père »)
+                        $bornT = static fn(string $parentG, bool $withSpan) => $g($c, 'Né', 'Née', 'Né(e)') . ($withSpan ? ' {span}' : '') . ' après la mort de ' . ($parentG === 'female' ? 'sa mère' : ($parentG === 'male' ? 'son père' : 'son parent'));
+                        $kidT = $g($c, 'Son fils {child} naît ', 'Sa fille {child} naît ', 'Son enfant {child} naît ') . ($gap['days'] > 0 ? '{span} après sa mort' : 'après sa mort');
                         $add(['key' => "child-after-parent-death:$pid:$c", 'check' => $pg === 'female' ? 'after-mother-death' : 'after-father-death', 'sort' => 'parents', 'level' => 'red',
-                            'title' => $gap['exact'] || $gap['days'] > 730 ? "$born $span après la mort de " . ($pg === 'female' ? 'sa mère' : ($pg === 'male' ? 'son père' : 'son parent')) : "$born après la mort de " . ($pg === 'female' ? 'sa mère' : ($pg === 'male' ? 'son père' : 'son parent')),
-                            'detail' => "Naissance {$cb['t']} · décès " . ($pg === 'female' ? 'de la mère' : ($pg === 'male' ? 'du père' : 'du parent')) . " {$pd['t']}" . ($pg !== 'female' ? " (seuil : {$th['father_death_days']} jours)" : ''),
-                            'views' => [$pid => "$kid {$cn} naît " . ($gap['days'] > 0 ? "$span après sa mort" : 'après sa mort'), $c => "$born $span après la mort de " . ($pg === 'female' ? 'sa mère' : 'son père')],
-                            'rule' => $pg === 'female' ? 'Un enfant ne peut pas naître après la mort de sa mère.' : 'Un enfant naît au plus 9 à 10 mois après la mort du père (seuil : ' . $th['father_death_days'] . ' jours).',
-                            'people' => [$c, $pid], 'dates' => [$dt($pb, "naiss. {$first($pid)}", $pid), $dt($pd, "décès {$first($pid)}", $pid), $dt($cb, "naiss. {$cn}", $c)],
+                            'title' => $T($bornT($pg, $gap['exact'] || $gap['days'] > 730), ['span' => $span]),
+                            'detail' => $rT($pg, 'Naissance {cb} · décès de la mère {pd}', 'Naissance {cb} · décès du père {pd} (seuil : {n} jours)', 'Naissance {cb} · décès du parent {pd} (seuil : {n} jours)', ['cb' => $cb['t'], 'pd' => $pd['t'], 'n' => $th['father_death_days']]),
+                            'views' => [$pid => $T($kidT, ['child' => $cn, 'span' => $span]), $c => $T($bornT($pg === 'female' ? 'female' : 'male', true), ['span' => $span])],
+                            'rule' => $pg === 'female' ? $T('Un enfant ne peut pas naître après la mort de sa mère.') : $T('Un enfant naît au plus 9 à 10 mois après la mort du père (seuil : {n} jours).', ['n' => $th['father_death_days']]),
+                            'people' => [$c, $pid], 'dates' => [$dt($pb, $T('naiss. {name}', ['name' => $first($pid)]), $pid), $dt($pd, $T('décès {name}', ['name' => $first($pid)]), $pid), $dt($cb, $T('naiss. {name}', ['name' => $cn]), $c)],
                             'fix' => ['event_id' => $pd['e'], 'person_id' => $pid], 'fp' => $fpOf($pd, $cb)]);
                     }
                 }
@@ -443,24 +450,23 @@ function controle_compute(PDO $pdo, array $th): array
                 if ($pb2['j'] !== null && $cb['j'] !== null) {
                     $months = ($cb['j'] - $pb2['j']) / 30.44;
                     if ($months > 0.1 && $months < $th['birth_gap_months']) {
-                        $older = $g($prev['id'], 'son frère', 'sa sœur', 'son aîné');
-                        $add(['key' => "close-births:{$prev['id']}:$c", 'check' => 'close-births', 'sort' => 'parents', 'level' => 'red', 'title' => 'Seulement ' . str_replace('.', ',', (string) round($months, 1)) . " mois après $older",
-                            'detail' => "Naissances {$pb2['t']} et {$cb['t']} (seuil : " . str_replace('.', ',', (string) $th['birth_gap_months']) . ' mois)', 'people' => [$c, $prev['id']],
-                            'rule' => 'Deux enfants de la même mère naissent au moins 8 à 9 mois l’un après l’autre (sauf jumeaux).',
-                            'dates' => [$dt($pb2, "naiss. {$first($prev['id'])}", $prev['id']), $dt($cb, "naiss. {$cn}", $c)], 'fix' => ['event_id' => $cb['e'], 'person_id' => $c], 'fp' => $fpOf($pb2, $cb)]);
+                        $add(['key' => "close-births:{$prev['id']}:$c", 'check' => 'close-births', 'sort' => 'parents', 'level' => 'red', 'title' => $gT($prev['id'], 'Seulement {n} mois après son frère', 'Seulement {n} mois après sa sœur', 'Seulement {n} mois après son aîné', ['n' => $dec(round($months, 1))]),
+                            'detail' => $T('Naissances {a} et {b} (seuil : {n} mois)', ['a' => $pb2['t'], 'b' => $cb['t'], 'n' => $dec($th['birth_gap_months'])]), 'people' => [$c, $prev['id']],
+                            'rule' => $T('Deux enfants de la même mère naissent au moins 8 à 9 mois l’un après l’autre (sauf jumeaux).'),
+                            'dates' => [$dt($pb2, $T('naiss. {name}', ['name' => $first($prev['id'])]), $prev['id']), $dt($cb, $T('naiss. {name}', ['name' => $cn]), $c)], 'fix' => ['event_id' => $cb['e'], 'person_id' => $c], 'fp' => $fpOf($pb2, $cb)]);
                     }
                 } elseif ($pb2['y'] === $cb['y']) {
                     $a1 = min($prev['id'], $c); $a2 = max($prev['id'], $c);
-                    $add(['key' => "same-year-siblings:$fid:$a1:$a2", 'check' => 'same-year-siblings', 'sort' => 'parents', 'level' => 'yellow', 'title' => 'Deux enfants la même année',
-                        'detail' => "{$name($a1)} et {$name($a2)} : naissance en {$cb['y']} (jumeaux, doublon ou date approximative ?)", 'people' => [$a1, $a2],
-                        'dates' => [$dt($pb2, "naiss. {$first($prev['id'])}", $prev['id']), $dt($cb, "naiss. {$cn}", $c)], 'fix' => ['event_id' => $cb['e'], 'person_id' => $c], 'fp' => $fpOf($pb2, $cb)]);
+                    $add(['key' => "same-year-siblings:$fid:$a1:$a2", 'check' => 'same-year-siblings', 'sort' => 'parents', 'level' => 'yellow', 'title' => $T('Deux enfants la même année'),
+                        'detail' => $T('{a} et {b} : naissance en {y} (jumeaux, doublon ou date approximative ?)', ['a' => $name($a1), 'b' => $name($a2), 'y' => $cb['y']]), 'people' => [$a1, $a2],
+                        'dates' => [$dt($pb2, $T('naiss. {name}', ['name' => $first($prev['id'])]), $prev['id']), $dt($cb, $T('naiss. {name}', ['name' => $cn]), $c)], 'fix' => ['event_id' => $cb['e'], 'person_id' => $c], 'fp' => $fpOf($pb2, $cb)]);
                 }
             }
             // né bien avant le mariage des parents (15 ans)
             $m = $marr[$fid] ?? null;
             if ($m && controle_years($cb, $m) > 15) {
-                $add(['key' => "before-marriage:$c:$fid", 'check' => 'before-marriage', 'sort' => 'parents', 'level' => 'yellow', 'title' => $g($c, 'Né', 'Née', 'Né(e)') . ' bien avant le mariage des parents',
-                    'detail' => "Naissance {$cb['t']} · mariage {$m['t']}", 'people' => array_merge([$c], $parents), 'dates' => [$dt($cb, "naiss. {$cn}", $c), $dt($m, 'mariage', $parents[0] ?? 0)],
+                $add(['key' => "before-marriage:$c:$fid", 'check' => 'before-marriage', 'sort' => 'parents', 'level' => 'yellow', 'title' => $gT($c, 'Né bien avant le mariage des parents', 'Née bien avant le mariage des parents', 'Né(e) bien avant le mariage des parents'),
+                    'detail' => $T('Naissance {b} · mariage {m}', ['b' => $cb['t'], 'm' => $m['t']]), 'people' => array_merge([$c], $parents), 'dates' => [$dt($cb, $T('naiss. {name}', ['name' => $cn]), $c), $dt($m, $T('mariage'), $parents[0] ?? 0)],
                     'fix' => ['event_id' => $m['e'], 'person_id' => $parents[0] ?? $c], 'fp' => $fpOf($cb, $m)]);
             }
         }
@@ -471,17 +477,17 @@ function controle_compute(PDO $pdo, array $th): array
             $hasMother = (bool) array_filter($parents, static fn($x) => ($P[$x]['g'] ?? '') === 'female');
             $limit = $th['sibling_span'] + ($hasMother ? 0 : 5);
             if ($span > $limit) {
-                $add(['key' => "sibling-span:$fid", 'check' => 'sibling-span', 'sort' => 'parents', 'level' => $span > $limit + 10 ? 'red' : 'orange', 'title' => 'Fratrie étalée sur ' . floor($span) . ' ans',
-                    'detail' => "Aîné(e) {$first($f0['id'])} {$f0['b']['t']}, cadet(te) {$first($fl['id'])} {$fl['b']['t']} (seuil : $limit ans) : deux générations mélangées ?", 'people' => [$fl['id'], $f0['id']],
-                    'dates' => [$dt($f0['b'], "naiss. {$first($f0['id'])}", $f0['id']), $dt($fl['b'], "naiss. {$first($fl['id'])}", $fl['id'])], 'fix' => ['event_id' => $fl['b']['e'], 'person_id' => $fl['id']], 'fp' => $fpOf($f0['b'], $fl['b'])]);
+                $add(['key' => "sibling-span:$fid", 'check' => 'sibling-span', 'sort' => 'parents', 'level' => $span > $limit + 10 ? 'red' : 'orange', 'title' => $T('Fratrie étalée sur {n} ans', ['n' => floor($span)]),
+                    'detail' => $T('Aîné(e) {a} {ad}, cadet(te) {b} {bd} (seuil : {n} ans) : deux générations mélangées ?', ['a' => $first($f0['id']), 'ad' => $f0['b']['t'], 'b' => $first($fl['id']), 'bd' => $fl['b']['t'], 'n' => $limit]), 'people' => [$fl['id'], $f0['id']],
+                    'dates' => [$dt($f0['b'], $T('naiss. {name}', ['name' => $first($f0['id'])]), $f0['id']), $dt($fl['b'], $T('naiss. {name}', ['name' => $first($fl['id'])]), $fl['id'])], 'fix' => ['event_id' => $fl['b']['e'], 'person_id' => $fl['id']], 'fp' => $fpOf($f0['b'], $fl['b'])]);
             }
         }
     }
     // rattaché à plusieurs familles
     foreach ($parentFams as $c => $fams) {
         if (count(array_unique($fams)) > 1 && isset($P[$c])) {
-            $add(['key' => "multiple-parent-families:$c", 'check' => 'multiple-parents', 'sort' => 'parents', 'level' => 'orange', 'title' => 'Rattaché' . ($P[$c]['g'] === 'female' ? 'e' : '') . ' à ' . count(array_unique($fams)) . ' familles de parents',
-                'detail' => 'Cela peut être voulu (adoption, famille recomposée) ou être une erreur.', 'people' => [$c], 'fp' => md5(implode(',', $fams))]);
+            $add(['key' => "multiple-parent-families:$c", 'check' => 'multiple-parents', 'sort' => 'parents', 'level' => 'orange', 'title' => $T($P[$c]['g'] === 'female' ? 'Rattachée à {n} familles de parents' : 'Rattaché à {n} familles de parents', ['n' => count(array_unique($fams))]),
+                'detail' => $T('Cela peut être voulu (adoption, famille recomposée) ou être une erreur.'), 'people' => [$c], 'fp' => md5(implode(',', $fams))]);
         }
     }
     // familles sans conjoint (mais avec des enfants ou des événements)
@@ -489,8 +495,8 @@ function controle_compute(PDO $pdo, array $th): array
         if ($a || $b) { continue; }
         $ch = array_values(array_filter($kids[$fid] ?? [], static fn($x) => isset($P[$x])));
         if (!$ch && empty($famEv[$fid])) { continue; }
-        $add(['key' => "ghost-family:$fid", 'check' => 'ghost-family', 'sort' => 'parents', 'level' => 'yellow', 'title' => 'Famille n° ' . $fid . ' sans conjoint',
-            'detail' => ($ch ? 'Enfants : ' . implode(', ', array_map($name, array_slice($ch, 0, 4))) . (count($ch) > 4 ? '…' : '') : 'Un mariage, sans les époux') . ' : il manque le père et la mère.', 'people' => $ch, 'fp' => md5(implode(',', $ch))]);
+        $add(['key' => "ghost-family:$fid", 'check' => 'ghost-family', 'sort' => 'parents', 'level' => 'yellow', 'title' => $T('Famille n° {n} sans conjoint', ['n' => $fid]),
+            'detail' => $ch ? $T('Enfants : {names} : il manque le père et la mère.', ['names' => implode(', ', array_map($name, array_slice($ch, 0, 4))) . (count($ch) > 4 ? '…' : '')]) : $T('Un mariage, sans les époux : il manque le père et la mère.'), 'people' => $ch, 'fp' => md5(implode(',', $ch))]);
     }
 
     // ═══ Sosa : sexe et place dans l'arbre ; ancêtre trop jeune ou trop vieux pour sa génération ═══
@@ -504,8 +510,8 @@ function controle_compute(PDO $pdo, array $th): array
             $s = (int) $s; $pid = (int) $pid; if ($s < 2 || !isset($P[$pid])) { continue; }
             $gd = $P[$pid]['g'];
             if (($s % 2 === 0 && $gd === 'female') || ($s % 2 === 1 && $gd === 'male')) {
-                $add(['key' => "sosa-sex:$pid", 'check' => 'sosa-sex', 'sort' => 'parents', 'level' => 'orange', 'title' => "Sosa $s noté" . ($gd === 'female' ? 'e femme' : ' homme'),
-                    'detail' => 'Un Sosa ' . ($s % 2 === 0 ? 'pair est un père' : 'impair est une mère') . ' : le sexe de la fiche, ou sa place dans l’arbre, est à vérifier.', 'people' => [$pid], 'fp' => md5($gd . $s)]);
+                $add(['key' => "sosa-sex:$pid", 'check' => 'sosa-sex', 'sort' => 'parents', 'level' => 'orange', 'title' => $T($gd === 'female' ? 'Sosa {n} notée femme' : 'Sosa {n} noté homme', ['n' => $s]),
+                    'detail' => $T($s % 2 === 0 ? 'Un Sosa pair est un père : le sexe de la fiche, ou sa place dans l’arbre, est à vérifier.' : 'Un Sosa impair est une mère : le sexe de la fiche, ou sa place dans l’arbre, est à vérifier.'), 'people' => [$pid], 'fp' => md5($gd . $s)]);
             }
             $b = $birth($pid); if (!$b || $s < 4) { continue; }
             $k = 0; $n = $s; $desc = null;
@@ -513,9 +519,9 @@ function controle_compute(PDO $pdo, array $th): array
             if (!$desc || $k < 2) { continue; }
             $gap = controle_years($b, $desc[2]);
             if ($gap < 15 * $k || $gap > 55 * $k) {
-                $add(['key' => "sosa-gap:$pid", 'check' => 'sosa-gap', 'sort' => 'ages', 'level' => $gap < 12 * $k || $gap > 65 * $k ? 'red' : 'orange', 'title' => "Sosa $s : " . floor($gap) . " ans pour $k générations",
-                    'detail' => "Né(e) {$b['t']}, son descendant Sosa {$desc[0]} {$desc[2]['t']} : " . ($gap < 15 * $k ? 'une génération en trop (homonyme pris pour son père) ?' : 'une génération oubliée ?'), 'people' => [$pid, $desc[1]],
-                    'dates' => [$dt($b, "naiss. {$first($pid)}", $pid), $dt($desc[2], "naiss. {$first($desc[1])}", $desc[1])], 'fix' => ['event_id' => $b['e'], 'person_id' => $pid], 'fp' => $fpOf($b, $desc[2])]);
+                $add(['key' => "sosa-gap:$pid", 'check' => 'sosa-gap', 'sort' => 'ages', 'level' => $gap < 12 * $k || $gap > 65 * $k ? 'red' : 'orange', 'title' => $T('Sosa {s} : {n} ans pour {k} générations', ['s' => $s, 'n' => floor($gap), 'k' => $k]),
+                    'detail' => $T($gap < 15 * $k ? 'Né(e) {b}, son descendant Sosa {s} {d} : une génération en trop (homonyme pris pour son père) ?' : 'Né(e) {b}, son descendant Sosa {s} {d} : une génération oubliée ?', ['b' => $b['t'], 's' => $desc[0], 'd' => $desc[2]['t']]), 'people' => [$pid, $desc[1]],
+                    'dates' => [$dt($b, $T('naiss. {name}', ['name' => $first($pid)]), $pid), $dt($desc[2], $T('naiss. {name}', ['name' => $first($desc[1])]), $desc[1])], 'fix' => ['event_id' => $b['e'], 'person_id' => $pid], 'fp' => $fpOf($b, $desc[2])]);
                 if (++$gen >= 200) { break; }
             }
         }
@@ -557,35 +563,35 @@ function controle_compute(PDO $pdo, array $th): array
                 if ($sameParents && $ba && $bb && $ba['j'] !== null && $bb['j'] !== null && abs($ba['j'] - $bb['j']) > 270) { continue; }
                 if (isset($par1[$b]) || isset($par2[$a])) { continue; }
                 $checks = []; $score = 0; $max = 0;
-                $checks[] = ['ok', 'même nom']; $score += 25; $max += 25;
-                $max += 20; if ($pa['fk'] === $pb['fk']) { $checks[] = ['ok', 'même prénom']; $score += 20; } else { $checks[] = ['?', 'prénom proche']; $score += 8; }
-                $max += 5; if ($pa['g'] === $pb['g'] && $pa['g'] !== 'unknown') { $checks[] = ['ok', 'même sexe']; $score += 5; } else { $checks[] = ['?', 'sexe']; $score += 2; }
+                $checks[] = ['ok', $T('même nom')]; $score += 25; $max += 25;
+                $max += 20; if ($pa['fk'] === $pb['fk']) { $checks[] = ['ok', $T('même prénom')]; $score += 20; } else { $checks[] = ['?', $T('prénom proche')]; $score += 8; }
+                $max += 5; if ($pa['g'] === $pb['g'] && $pa['g'] !== 'unknown') { $checks[] = ['ok', $T('même sexe')]; $score += 5; } else { $checks[] = ['?', $T('sexe')]; $score += 2; }
                 $max += 20;
-                if ($ba && $bb) { if ($ba['j'] !== null && $ba['j'] === $bb['j']) { $checks[] = ['ok', 'même naissance']; $score += 20; } elseif (abs($ba['y'] - $bb['y']) <= 2) { $checks[] = ['ok', 'nés à ' . (abs($ba['y'] - $bb['y']) ? abs($ba['y'] - $bb['y']) . ' an près' : 'la même année')]; $score += 14; } else { $checks[] = ['no', 'nés ' . $ba['y'] . ' / ' . $bb['y']]; } }
+                if ($ba && $bb) { if ($ba['j'] !== null && $ba['j'] === $bb['j']) { $checks[] = ['ok', $T('même naissance')]; $score += 20; } elseif (abs($ba['y'] - $bb['y']) <= 2) { $checks[] = ['ok', abs($ba['y'] - $bb['y']) ? $T('nés à {n} an près', ['n' => abs($ba['y'] - $bb['y'])]) : $T('nés la même année')]; $score += 14; } else { $checks[] = ['no', $T('nés {a} / {b}', ['a' => $ba['y'], 'b' => $bb['y']])]; } }
                 else { $score += 8; }
                 $max += 10;
-                if ($da && $db) { if (abs($da['y'] - $db['y']) <= 2) { $checks[] = ['ok', 'même décès']; $score += 10; } else { $checks[] = ['no', 'morts ' . $da['y'] . ' / ' . $db['y']]; } }
+                if ($da && $db) { if (abs($da['y'] - $db['y']) <= 2) { $checks[] = ['ok', $T('même décès')]; $score += 10; } else { $checks[] = ['no', $T('morts {a} / {b}', ['a' => $da['y'], 'b' => $db['y']])]; } }
                 else { $score += 4; }
-                $max += 15; if ($sameParents) { $checks[] = ['ok', 'mêmes parents']; $score += 15; } else { $checks[] = ['?', 'parents']; $score += 5; }
+                $max += 15; if ($sameParents) { $checks[] = ['ok', $T('mêmes parents')]; $score += 15; } else { $checks[] = ['?', $T('parents')]; $score += 5; }
                 $max += 10;
                 $sp1 = $spouses[$a] ?? []; $sp2 = $spouses[$b] ?? [];
-                if ($sp1 && $sp2) { if (array_intersect_key($sp1, $sp2)) { $checks[] = ['ok', 'même conjoint']; $score += 10; } else { $checks[] = ['no', 'autres conjoints']; } }
+                if ($sp1 && $sp2) { if (array_intersect_key($sp1, $sp2)) { $checks[] = ['ok', $T('même conjoint')]; $score += 10; } else { $checks[] = ['no', $T('autres conjoints')]; } }
                 else { $score += 4; }
                 $pl1 = array_keys($pa['bpl']); $pl2 = array_keys($pb['bpl']);
                 if ($pl1 && $pl2) {
                     $max += 10; $best = null;
                     foreach ($pl1 as $x) { foreach ($pl2 as $y) { $dd = $plDist($x, $y); if ($dd !== null && ($best === null || $dd < $best)) { $best = $dd; } if ($x === $y) { $best = 0.0; } } }
-                    if ($best !== null && $best < 1) { $checks[] = ['ok', 'nés au même endroit']; $score += 10; }
-                    elseif ($best !== null && $best <= 15) { $checks[] = ['ok', 'nés à ' . round($best) . ' km']; $score += 8; }
-                    elseif ($best !== null && $best > 60) { $checks[] = ['no', 'nés à ' . round($best) . ' km']; }
+                    if ($best !== null && $best < 1) { $checks[] = ['ok', $T('nés au même endroit')]; $score += 10; }
+                    elseif ($best !== null && $best <= 15) { $checks[] = ['ok', $T('nés à {n} km', ['n' => round($best)])]; $score += 8; }
+                    elseif ($best !== null && $best > 60) { $checks[] = ['no', $T('nés à {n} km', ['n' => round($best)])]; }
                     else { $score += 3; }
                 }
                 $pct = (int) round(100 * $score / max(1, $max));
                 if ($pct < $th['dup_min']) { continue; }
-                $years = static fn($x, $y) => ($x ? 'né ' . $x['y'] : 'né ?') . ($y ? ' / mort ' . $y['y'] : '');
+                $years = static fn($x, $y) => i18n_t($x ? ($y ? 'né {b} / mort {d}' : 'né {b}') : ($y ? 'né ? / mort {d}' : 'né ?'), ['b' => $x['y'] ?? '', 'd' => $y['y'] ?? '']);
                 $add(['key' => "dup:$a:$b", 'check' => 'duplicate', 'sort' => 'doublons', 'level' => $pct >= 85 ? 'orange' : 'yellow', 'title' => $name($a) . ' ↔ ' . $name($b), 'score' => $pct,
                     'detail' => $years($ba, $da) . ' · ' . $years($bb, $db), 'checks' => $checks, 'people' => [$a, $b],
-                    'views' => [$a => 'Ressemble à la fiche n° ' . $b . ' (' . $pct . ' %)', $b => 'Ressemble à la fiche n° ' . $a . ' (' . $pct . ' %)'],
+                    'views' => [$a => $T('Ressemble à la fiche n° {n} ({pct} %)', ['n' => $b, 'pct' => $pct]), $b => $T('Ressemble à la fiche n° {n} ({pct} %)', ['n' => $a, 'pct' => $pct])],
                     'fp' => md5($pa['fn'] . $pa['ln'] . $pb['fn'] . $pb['ln'] . json_encode([$ba['t'] ?? '', $bb['t'] ?? '']))]);
                 if (++$dupCount > 3000) { break 3; }
             }
@@ -603,8 +609,9 @@ function controle_compute(PDO $pdo, array $th): array
         return 0;
     };
     $kin = static function (int $k, string $g, bool $up): string {
-        if ($up) { return $k === 1 ? ($g === 'female' ? 'sa mère' : ($g === 'male' ? 'son père' : 'son parent')) : ($k === 2 ? ($g === 'female' ? 'sa grand-mère' : ($g === 'male' ? 'son grand-père' : 'son grand-parent')) : 'son ancêtre (' . $k . ' générations)'); }
-        return $k === 1 ? ($g === 'female' ? 'sa fille' : ($g === 'male' ? 'son fils' : 'son enfant')) : ($k === 2 ? ($g === 'female' ? 'sa petite-fille' : ($g === 'male' ? 'son petit-fils' : 'son petit-enfant')) : 'son descendant (' . $k . ' générations)');
+        // 🌐 un lien de parenté (« sa petite-fille ») glissé dans une phrase : contexte « kin » pour la traduction
+        if ($up) { return $k === 1 ? i18n_t($g === 'female' ? 'sa mère' : ($g === 'male' ? 'son père' : 'son parent'), [], 'kin') : ($k === 2 ? i18n_t($g === 'female' ? 'sa grand-mère' : ($g === 'male' ? 'son grand-père' : 'son grand-parent'), [], 'kin') : i18n_t('son ancêtre ({n} générations)', ['n' => $k], 'kin')); }
+        return $k === 1 ? i18n_t($g === 'female' ? 'sa fille' : ($g === 'male' ? 'son fils' : 'son enfant'), [], 'kin') : ($k === 2 ? i18n_t($g === 'female' ? 'sa petite-fille' : ($g === 'male' ? 'son petit-fils' : 'son petit-enfant'), [], 'kin') : i18n_t('son descendant ({n} générations)', ['n' => $k], 'kin'));
     };
     $kinChecks = 0;
     foreach ($families as $fid => [$a, $b]) {
@@ -613,8 +620,8 @@ function controle_compute(PDO $pdo, array $th): array
         if (!$k) { $k = $ancestorDepth($b, $a); $anc = $a; $desc = $b; }
         if (!$k) { continue; }
         $add(['key' => "spouse-ancestor:$fid", 'check' => 'spouse-ancestor', 'sort' => 'parents', 'level' => 'red',
-            'title' => $name($anc) . ' ' . $g($anc, 'marié', 'mariée', 'marié(e)') . ' à ' . $kin($k, $P[$desc]['g'], false),
-            'detail' => $name($desc) . ' est ' . $kin($k, $P[$desc]['g'], false) . ' et aussi son conjoint (famille n° ' . $fid . ') : une fiche rattachée à la mauvaise génération, ou deux homonymes confondus.',
+            'title' => $gT($anc, '{name} marié à {kin}', '{name} mariée à {kin}', '{name} marié(e) à {kin}', ['name' => $name($anc), 'kin' => $kin($k, $P[$desc]['g'], false)]),
+            'detail' => $T('{name} est {kin} et aussi son conjoint (famille n° {n}) : une fiche rattachée à la mauvaise génération, ou deux homonymes confondus.', ['name' => $name($desc), 'kin' => $kin($k, $P[$desc]['g'], false), 'n' => $fid]),
             'people' => [$anc, $desc], 'fp' => md5("$fid:$a:$b:$k")]);
         if (++$kinChecks >= 500) { break; }
     }
@@ -627,8 +634,8 @@ function controle_compute(PDO $pdo, array $th): array
             if (!$an || !$hu) { continue; }
             $partnerAnimal = isset($animals[$a]) || isset($animals[$b]);
             $add(['key' => "animal-link:$fid", 'check' => 'animal-link', 'sort' => 'parents', 'level' => 'orange',
-                'title' => 'Animal noté ' . ($partnerAnimal ? ((($a && isset($P[$a])) || ($b && isset($P[$b]))) ? 'conjoint d’une personne' : 'parent d’une personne') : 'enfant d’une personne') . ' : ' . $animals[$an[0]],
-                'detail' => 'Famille n° ' . $fid . ' : ' . implode(', ', array_map(static fn($x) => '🐾 ' . $animals[$x], array_slice($an, 0, 3))) . ' avec ' . implode(', ', array_map($name, array_slice($hu, 0, 3))) . '. Un animal se relie à son maître dans sa fiche (Propriétaire), pas comme parent ou conjoint.',
+                'title' => $T($partnerAnimal ? ((($a && isset($P[$a])) || ($b && isset($P[$b]))) ? 'Animal noté conjoint d’une personne : {name}' : 'Animal noté parent d’une personne : {name}') : 'Animal noté enfant d’une personne : {name}', ['name' => $animals[$an[0]]]),
+                'detail' => $T('Famille n° {n} : {animals} avec {people}. Un animal se relie à son maître dans sa fiche (Propriétaire), pas comme parent ou conjoint.', ['n' => $fid, 'animals' => implode(', ', array_map(static fn($x) => '🐾 ' . $animals[$x], array_slice($an, 0, 3))), 'people' => implode(', ', array_map($name, array_slice($hu, 0, 3)))]),
                 'people' => $hu, 'fp' => md5(implode(',', $members))]);
         }
     }
@@ -639,9 +646,9 @@ function controle_compute(PDO $pdo, array $th): array
         $sus = function_exists('suspicious_places') ? suspicious_places($pdo) : ['alerts' => []];
         foreach ($sus['alerts'] ?? [] as $s) {
             $pl = $s['place']; $id = (int) $pl['id'];
-            $onlyFar = count($s['reasons']) === 1 && str_starts_with($s['reasons'][0], 'À ');
+            $onlyFar = $s['only_far'] ?? (count($s['reasons']) === 1 && str_starts_with($s['reasons'][0], 'À '));
             $add(['key' => "place:$id", 'check' => 'misplaced', 'sort' => 'lieux', 'sub' => 'misplaced', 'level' => $onlyFar ? 'yellow' : 'orange', 'title' => $s['reasons'][0],
-                'detail' => (int) $pl['n'] . ' événement' . ((int) $pl['n'] > 1 ? 's' : '') . ' à cet endroit' . (count($s['reasons']) > 1 ? ' · ' . implode(' · ', array_slice($s['reasons'], 1)) : ''),
+                'detail' => $T((int) $pl['n'] > 1 ? '{n} événements à cet endroit' : '{n} événement à cet endroit', ['n' => (int) $pl['n']]) . (count($s['reasons']) > 1 ? ' · ' . implode(' · ', array_slice($s['reasons'], 1)) : ''),
                 'people' => [], 'place' => ['id' => $id, 'name' => (string) $pl['name'], 'county' => (string) $pl['county'], 'country' => (string) $pl['country'], 'lat' => (float) $pl['lat'], 'lon' => (float) $pl['lon'], 'n' => (int) $pl['n']],
                 'suggest' => $s['suggest'] ?? null, 'fp' => md5(round((float) $pl['lat'], 5) . ',' . round((float) $pl['lon'], 5))]);
         }
@@ -652,9 +659,9 @@ function controle_compute(PDO $pdo, array $th): array
             $pid = (int) $j['person_id']; if (!isset($P[$pid])) { continue; }
             $ea = (int) $j['a']['event_id']; $eb = (int) $j['b']['event_id'];
             $add(['key' => "journey:$pid:$ea:$eb", 'check' => 'journey', 'sort' => 'lieux', 'sub' => 'journeys', 'level' => $j['ratio'] >= 3 ? 'red' : 'orange',
-                'title' => 'À ' . number_format((float) $j['km'], 0, ',', ' ') . ' km en ' . ($j['days'] ? $j['days'] . ' jour' . ($j['days'] > 1 ? 's' : '') : 'moins d’un jour'),
-                'detail' => "{$j['a']['type_label']} {$j['a']['date_text']} à " . ($j['a']['place_name'] ?: '?') . " · {$j['b']['type_label']} {$j['b']['date_text']} à " . ($j['b']['place_name'] ?: '?') . ' (au plus ≈ ' . $j['speed_limit'] . ' km par jour à cette époque)',
-                'people' => [$pid], 'rule' => 'Une même personne ne peut pas être à deux endroits aussi éloignés en si peu de temps : souvent deux homonymes confondus dans une seule fiche.',
+                'title' => $T($j['days'] ? ($j['days'] > 1 ? 'À {km} km en {n} jours' : 'À {km} km en {n} jour') : 'À {km} km en moins d’un jour', ['km' => number_format((float) $j['km'], 0, ',', ' '), 'n' => $j['days']]),
+                'detail' => $T('{a} {ad} à {ap} · {b} {bd} à {bp} (au plus ≈ {n} km par jour à cette époque)', ['a' => $j['a']['type_label'], 'ad' => $j['a']['date_text'], 'ap' => $j['a']['place_name'] ?: '?', 'b' => $j['b']['type_label'], 'bd' => $j['b']['date_text'], 'bp' => $j['b']['place_name'] ?: '?', 'n' => $j['speed_limit']]),
+                'people' => [$pid], 'rule' => $T('Une même personne ne peut pas être à deux endroits aussi éloignés en si peu de temps : souvent deux homonymes confondus dans une seule fiche.'),
                 'dates' => [['label' => $j['a']['type_label'], 'text' => $j['a']['date_text'], 'y' => (int) $j['a']['year'], 'j' => null, 'event_id' => $ea, 'person_id' => $pid], ['label' => $j['b']['type_label'], 'text' => $j['b']['date_text'], 'y' => (int) $j['b']['year'], 'j' => null, 'event_id' => $eb, 'person_id' => $pid]],
                 'fix' => ['event_id' => $eb, 'person_id' => $pid], 'fp' => md5($ea . $j['a']['date_text'] . $eb . $j['b']['date_text'])]);
         }
@@ -666,7 +673,7 @@ function controle_compute(PDO $pdo, array $th): array
             $ids = array_keys($p[$k]); $names = array_map(static fn($x) => (string) ($placeRows[$x]['name'] ?? '?'), $ids);
             $far = false; foreach ($ids as $x) { foreach ($ids as $y) { if ($x < $y) { $dd = $plDist($x, $y); if ($dd === null || $dd > 5) { $far = true; } } } }
             if (!$far) { continue; }
-            $add(['key' => "$ck:$id", 'check' => 'conflicting-place', 'sort' => 'lieux', 'sub' => 'conflicting', 'level' => 'yellow', 'title' => "Lieux de $what contradictoires",
+            $add(['key' => "$ck:$id", 'check' => 'conflicting-place', 'sort' => 'lieux', 'sub' => 'conflicting', 'level' => 'yellow', 'title' => $T($what === 'naissance' ? 'Lieux de naissance contradictoires' : 'Lieux de décès contradictoires'),
                 'detail' => implode(' / ', array_unique($names)), 'people' => [$id], 'fp' => md5(implode(',', $ids))]);
         }
     }
@@ -689,8 +696,8 @@ function controle_compute(PDO $pdo, array $th): array
             $cx = (string) ($placeRows[$x]['admin4_code'] ?? ''); $cy = (string) ($placeRows[$y]['admin4_code'] ?? '');
             if ($cx !== '' && $cy !== '' && (isset($nb[$cx][$cy]) || isset($nb[$cy][$cx]))) { continue; }
             $bn = (string) ($placeRows[$x]['name'] ?? '?'); $tn = (string) ($placeRows[$y]['name'] ?? '?');
-            $add(['key' => "baptism-far:$id", 'check' => 'baptism-far', 'sort' => 'lieux', 'sub' => 'baptism', 'level' => 'orange', 'title' => 'Baptême à ' . round($dd) . ' km du lieu de naissance',
-                'detail' => "Naissance à $bn · baptême à $tn (seuil : {$th['baptism_km']} km). Souvent : une commune homonyme.", 'people' => [$id],
+            $add(['key' => "baptism-far:$id", 'check' => 'baptism-far', 'sort' => 'lieux', 'sub' => 'baptism', 'level' => 'orange', 'title' => $T('Baptême à {n} km du lieu de naissance', ['n' => round($dd)]),
+                'detail' => $T('Naissance à {b} · baptême à {t} (seuil : {n} km). Souvent : une commune homonyme.', ['b' => $bn, 't' => $tn, 'n' => $th['baptism_km']]), 'people' => [$id],
                 'place' => ['id' => $y, 'name' => $tn, 'county' => (string) ($placeRows[$y]['county'] ?? ''), 'country' => (string) ($placeRows[$y]['country'] ?? ''), 'lat' => (float) ($placeRows[$y]['latitude'] ?? 0), 'lon' => (float) ($placeRows[$y]['longitude'] ?? 0)],
                 'fix' => ['event_id' => $P[$id]['bapt']['e'] ?? ($P[$id]['b']['e'] ?? 0), 'person_id' => $id], 'fp' => md5("$x,$y")]);
         }

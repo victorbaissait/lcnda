@@ -15,6 +15,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const A = () => window.LCNDA_APP;
     const UI = () => window.LCNDA_UI;
@@ -65,7 +66,7 @@
                 ${fld('birth_date', 'Date de naissance', v.birth_date, 'data-ui-date placeholder="12 mars 1890"')}${fld('birth_place', 'Lieu de naissance', v.birth_place)}
                 ${fld('rank', 'Grade', v.rank, 'placeholder="soldat de 2e classe"')}${fld('unit', 'Unité', v.unit, 'placeholder="152e régiment d’infanterie"')}
                 ${fld('death_date', 'Date du décès', v.death_date, 'data-ui-date placeholder="20 août 1914"')}
-                <div class="so-pk"><span class="pk-lab">Lieu du décès</span>${pickerField({name: 'place_id', kind: 'place', value: null})}${v.death_place ? `<small class="ui-hint">Lu : « ${esc(v.death_place)} » — choisis le lieu (ou crée-le).</small>` : ''}</div>
+                <div class="so-pk"><span class="pk-lab">Lieu du décès</span>${pickerField({name: 'place_id', kind: 'place', value: null})}${v.death_place ? `<small class="ui-hint">${i18n('Lu : « {nm} » — choisis le lieu (ou crée-le).', {nm: esc(v.death_place)})}</small>` : ''}</div>
                 ${fld('cause', 'Genre de mort', v.cause, 'placeholder="tué à l’ennemi, bombardement…"')}${fld('monument', 'Monument de (commune)', v.monument, 'placeholder="Tulle"')}
                 ${area('bio', 'Biographie (gardée dans la source)', v.bio, 3)}`;
         }
@@ -80,7 +81,7 @@
             return `${siteSelect('acte', v)}<label>Sorte d’acte<select name="tag">${ACT_TAGS.map(t => `<option value="${t}" ${t === tag ? 'selected' : ''}>${esc(S4().EVENT_LABELS[t] || t)}</option>`).join('')}</select></label>
                 ${fld('last', 'Nom', v.last ?? p.last)}${fld('first', 'Prénoms', v.first ?? p.first)}
                 ${fld('date', 'Date', v.date, 'data-ui-date placeholder="12 mars 1850"')}
-                <div class="so-pk"><span class="pk-lab">Lieu (paroisse, commune)</span>${pickerField({name: 'place_id', kind: 'place', value: null})}${v.place ? `<small class="ui-hint">Lu : « ${esc(v.place)} » — choisis le lieu (ou crée-le).</small>` : ''}</div>
+                <div class="so-pk"><span class="pk-lab">Lieu (paroisse, commune)</span>${pickerField({name: 'place_id', kind: 'place', value: null})}${v.place ? `<small class="ui-hint">${i18n('Lu : « {nm} » — choisis le lieu (ou crée-le).', {nm: esc(v.place)})}</small>` : ''}</div>
                 ${fld('father', 'Père', v.father)}${fld('mother', 'Mère', v.mother)}${fld('occupation', 'Profession, rôle', v.occupation, 'placeholder="matelot, mousse…"')}${fld('ship', 'Navire (rôle d’équipage)', v.ship)}
                 ${fld('register', 'Registre', v.register, 'placeholder="Taufbuch 1845-1860"')}${fld('cote', 'Cote', v.cote)}${fld('page', 'Page, image', v.page)}`;
         }
@@ -95,19 +96,19 @@
         if (kind === 'memorial') {
             const d = hasTag(ctx, ['DEAT']); const mpfLocked = p.mpf === 'yes' || p.mpf === 'no';
             return `<fieldset class="so-props"><legend>Ce qui sera proposé sur la fiche (rien n’est remplacé)</legend>
-                ${line('add_event', true, d ? `Ajouter le décès — la fiche a déjà un décès (${d.date || d.year || ''}) : il est gardé` : 'Ajouter le décès', !!d)}
+                ${line('add_event', true, d ? i18n('Ajouter le décès — la fiche a déjà un décès ({nm}) : il est gardé', {nm: d.date || d.year || ''}) : 'Ajouter le décès', !!d)}
                 ${line('set_mpf', v.mpf === 'yes', p.mpf === 'yes' ? 'Cocher « Mort pour la France » — déjà coché' : p.mpf === 'no' ? 'Cocher « Mort pour la France » — la fiche dit « non » : change-la toi-même' : 'Cocher « Mort pour la France » sur la fiche (si le monument le dit)', mpfLocked)}
                 ${line('add_unit', true, 'Ajouter son unité au bloc « Poilu 14-18 » (guerre de 1914-1918, si elle n’y est pas)')}</fieldset>`;
         }
         if (kind === 'sepulture') {
             const b = hasTag(ctx, ['BURI']);
             return `<fieldset class="so-props"><legend>Ce qui sera proposé sur la fiche (rien n’est remplacé)</legend>
-                ${ctx?.grave ? `<p class="ui-hint">La fiche a déjà une sépulture (${esc(ctx.grave.cemetery_name || 'cimetière')}${ctx.grave.city ? ', ' + esc(ctx.grave.city) : ''}) : la photo s’ajoute à ses « Photos datées », ses cases ne changent pas.</p>` : line('add_grave', true, 'Créer la sépulture (bloc Cimetière) avec le cimetière, la commune, l’emplacement et la position')}
-                ${line('add_event', !b, b ? `Ajouter l’inhumation — la fiche en a déjà une (${b.date || b.year || ''}) : elle est gardée` : 'Ajouter l’inhumation dans cette commune', !!b)}</fieldset>`;
+                ${ctx?.grave ? `<p class="ui-hint">${i18n('La fiche a déjà une sépulture ({nm}) : la photo s’ajoute à ses « Photos datées », ses cases ne changent pas.', {nm: `${esc(ctx.grave.cemetery_name || i18n('cimetière'))}${ctx.grave.city ? ', ' + esc(ctx.grave.city) : ''}`})}</p>` : line('add_grave', true, 'Créer la sépulture (bloc Cimetière) avec le cimetière, la commune, l’emplacement et la position')}
+                ${line('add_event', !b, b ? i18n('Ajouter l’inhumation — la fiche en a déjà une ({nm}) : elle est gardée', {nm: b.date || b.year || ''}) : 'Ajouter l’inhumation dans cette commune', !!b)}</fieldset>`;
         }
         const tag = v.tag || 'CHR'; const uniq = S4().UNIQUE_EVENTS.includes(tag); const had = uniq && hasTag(ctx, tag === 'CHR' ? ['CHR', 'BAPM'] : [tag]);
         return `<fieldset class="so-props"><legend>Ce qui sera proposé sur la fiche (rien n’est remplacé)</legend>
-            ${line('add_event', !had, had ? `Ajouter l’événement « ${S4().EVENT_LABELS[tag]} » — la fiche en a déjà un (${had.date || had.year || ''}) : il est gardé` : `Ajouter l’événement « ${S4().EVENT_LABELS[tag] || tag} » (avec la date et le lieu)`, !!had)}</fieldset>`;
+            ${line('add_event', !had, had ? i18n('Ajouter l’événement « {nm} » — la fiche en a déjà un ({x2}) : il est gardé', {nm: S4().EVENT_LABELS[tag], x2: had.date || had.year || ''}) : i18n('Ajouter l’événement « {nm} » (avec la date et le lieu)', {nm: S4().EVENT_LABELS[tag] || tag}), !!had)}</fieldset>`;
     }
     const readText = f => f.arrayBuffer().then(b => window.LCNDA_SHEET?.decodeBytes ? window.LCNDA_SHEET.decodeBytes(new Uint8Array(b)).text : new TextDecoder().decode(b));
     const savedPage = html => window.LCNDA_SOURCES_OUVERTES?.parseSavedPage ? window.LCNDA_SOURCES_OUVERTES.parseSavedPage(html) : {title: '', url: '', text: String(html).replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').slice(0, 20000)};
@@ -132,7 +133,7 @@
             if (st.text && st.kind !== 'presse') { const pf = S4().parseFields(st.text, st.kind); Object.assign(st.v, {...pf, ...st.v}); }
             if (st.pid) { forget(st.pid); st.ctx = await context(st.pid); }
             return {count: 1, noun: 'document', summaryHtml: `<b>un document</b> pour ${st.ctx ? `<b>${esc([st.ctx.person.first, String(st.ctx.person.last || '').toUpperCase()].join(' '))}</b>` : 'la fiche choisie ci-dessous'}`,
-                notices: [{kind: 'warn', text: `${S4().MENTION}. Le document entre « À vérifier ».`}, {kind: 'info', text: 'Rien de la fiche n’est remplacé : un événement ou une sépulture déjà là est gardé, et « ↶ Annuler » retire tout ce que l’import a ajouté.'}],
+                notices: [{kind: 'warn', text: i18n("{nm}. Le document entre « À vérifier ».", {nm: i18n(S4().MENTION)})}, {kind: 'info', text: 'Rien de la fiche n’est remplacé : un événement ou une sépulture déjà là est gardé, et « ↶ Annuler » retire tout ce que l’import a ajouté.'}],
                 preview: `<div class="so-imp" data-so4-imp></div>`, onShow: body => draw(body)};
         };
         const read = body => {
@@ -209,11 +210,11 @@
             const r = j.result; forget(st.pid); if (st.objUrl) URL.revokeObjectURL(st.objUrl);
             window.dispatchEvent(new CustomEvent('lcnda:sources-ouvertes-changed', {detail: r}));
             refresh();
-            return {message: `${r.summary} — à vérifier sur le document.`, undo: async () => { await post(undoAction, {batch: r.batch}); forget(st.pid); refresh(); }};
+            return {message: i18n('{nm} — à vérifier sur le document.', {nm: r.summary}), undo: async () => { await post(undoAction, {batch: r.batch}); forget(st.pid); refresh(); }};
         };
         const kindWord = {memorial: 'la fiche d’un soldat ou la photo d’un monument', sepulture: 'la photo d’une tombe', acte: 'un acte ou une page de registre', presse: 'un article de journal'};
         return UI().openImportDialog({title: 'Importer depuis les archives en ligne', accept: 'image/*,.pdf,.html,.htm,.txt', what: 'image, PDF, page enregistrée ou texte',
-            intro: `Ce que tu as téléchargé ou enregistré : ${kindWord[st.kind]} en image ou en PDF, la page enregistrée par ton navigateur (« Enregistrer sous… »), ou un texte copié. Rien n’est demandé au site : seul ton fichier est lu. Pas de fichier ? « 🔗 Coller un lien » dans la fenêtre de recherche.`,
+            intro: i18n('Ce que tu as téléchargé ou enregistré : {nm} en image ou en PDF, la page enregistrée par ton navigateur (« Enregistrer sous… »), ou un texte copié. Rien n’est demandé au site : seul ton fichier est lu. Pas de fichier ? « 🔗 Coller un lien » dans la fenêtre de recherche.', {nm: kindWord[st.kind]}),
             noun: 'document', analyze: async files => { const a = await analyze(files); const show = a.onShow; a.onShow = body => { body.closest('dialog')?.classList.add('modal-l', 'so-import'); bind(body); show(body); }; return a; }, run, files: o.files});
     }
     /** pas de fichier : un lien collé → le seul « 🔗 Coller un lien » de l'app (il reconnaît le site et revient à openImport) */
@@ -250,7 +251,7 @@
                 <h4 class="so4-h">👥 Population ${rows.length ? `<small class="muted">· ${esc(plural(rows.length, 'année'))}, de ${esc(rows[0].year)} à ${esc(rows[rows.length - 1].year)}</small>` : ''} ${rows.length ? UI().badge('À vérifier', 'yellow', {title: S4().MENTION}) : ''}</h4>
                 ${rows.length ? `${popChart(rows)}<details class="so4-pop-table"><summary>Le tableau</summary><div class="data-table-wrap"><table class="data-table"><thead><tr><th>Année</th><th>Habitants</th><th>D’où</th></tr></thead><tbody>${rows.map(r => `<tr><td>${esc(r.year)}</td><td>${esc(fmtN(r.pop))}</td><td>${esc(r.origin === 'cassini' ? 'Cassini (EHESS)' : 'recopié')}</td></tr>`).join('')}</tbody></table></div></details>`
                     : emptyLine('Pas encore de population pour cette commune : importe le tableau de l’EHESS ou recopie-le.', '👥')}
-                <h4 class="so4-h">🏷 Anciens noms <small class="muted">· rapprochés des changements de l’INSEE depuis 1943</small></h4>${namesHtml(d)}`;
+                <h4 class="so4-h">🏷 Anciens noms <small class="muted">· ${i18n('rapprochés des changements de l’INSEE depuis 1943')}</small></h4>${namesHtml(d)}`;
         };
         const save = async (parsed, site, url = '') => {
             const r = await post('so4_place_import', {place_id: placeId, site, url, rows: parsed.rows, names: parsed.names});
