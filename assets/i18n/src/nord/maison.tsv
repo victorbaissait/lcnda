@@ -346,7 +346,7 @@ Ardoises ¦ Břidlice ¦ Skiffer ¦ Skifer
 Lauzes (pierre) ¦ Kamenné desky ¦ Stenflis ¦ Stenheller
 Chaume ¦ Došky ¦ Halmtak ¦ Stråtag
 Zinc ¦ Zinek ¦ Zink ¦ Zink
-Bac acier ¦ Ocelový trapézový plech ¦ Profilerad stålplåt ¦ Trapezplade af stål
+Bac acier ¦ Trapézový plech ¦ Profilerad stålplåt ¦ Trapezplade af stål
 Pignons, acrotères ¦ Štíty, atiky ¦ Gavlar, bröstningar ¦ Gavle, brystninger
 Acrotère (toit plat) ¦ Atika (plochá střecha) ¦ Bröstning (platt tak) ¦ Brystning (fladt tag)
 Une cheminée ¦ Komín ¦ En skorsten ¦ En skorsten
@@ -450,3 +450,1673 @@ tout l’étage ¦ celé patro ¦ hela våningen ¦ hele etagen
 toute la maison ¦ celý dům ¦ hela huset ¦ hele huset
 Couleur et texture ¦ Barva a textura ¦ Färg och struktur ¦ Farve og tekstur
 Taille du motif ¦ Velikost vzoru ¦ Mönstrets storlek ¦ Mønstrets størrelse
+Allège (cm du sol) ¦ Parapet (cm od podlahy) ¦ Bröstningshöjd (cm från golvet) ¦ Brystningshøjde (cm fra gulvet)
+Position sur le mur ¦ Poloha na zdi ¦ Läge på väggen ¦ Placering på væggen
+Du début du mur ¦ Od začátku zdi ¦ Från väggens början ¦ Fra væggens start
+Jusqu’à la fin ¦ Až do konce ¦ Till slutet ¦ Til enden
+🚪 Genre et ouverture ¦ 🚪 Druh a otevírání ¦ 🚪 Typ och öppning ¦ 🚪 Type og åbning
+Porte ¦ Dveře ¦ Dörr ¦ Dør
+Porte double ¦ Dvoukřídlé dveře ¦ Pardörr ¦ Dobbeltdør
+Porte d’entrée ¦ Vchodové dveře ¦ Ytterdörr ¦ Hoveddør
+Passage, arche ¦ Průchod, oblouk ¦ Passage, valv ¦ Gennemgang, bue
+Porte de grange ¦ Vrata stodoly ¦ Ladugårdsport ¦ Ladeport
+Une rangée de fenêtres (ou de portes) le long du mur ¦ Řada oken (nebo dveří) podél zdi ¦ En rad fönster (eller dörrar) längs väggen ¦ En række vinduer (eller døre) langs væggen
+🔁 Répéter… ¦ 🔁 Opakovat… ¦ 🔁 Upprepa… ¦ 🔁 Gentag…
+↔ Sens d’ouverture ¦ ↔ Směr otevírání ¦ ↔ Öppningsriktning ¦ ↔ Åbningsretning
+▨ Plancher : plein ou vide ¦ ▨ Podlaha: plná nebo volná ¦ ▨ Bjälklag: helt eller öppet ¦ ▨ Gulv: helt eller åbent
+Pas de plancher : vide sur l’étage du dessous ¦ Bez podlahy: volný prostor do patra pod ním ¦ Inget bjälklag: öppet mot våningen under ¦ Intet gulv: åbent mod etagen nedenunder
+Garde-corps ¦ Zábradlí ¦ Räcke ¦ Rækværk
+Garde-corps autour ¦ Zábradlí kolem ¦ Räcke runt om ¦ Rækværk rundt om
+Ajoute l’étage du dessus s’il manque, une mezzanine sur une partie de cette pièce, le vide sur le reste, son garde-corps et l’escalier ¦ Přidá patro nad, pokud chybí, galerii nad částí místnosti, volný prostor nad zbytkem, zábradlí a schodiště ¦ Lägger till våningen ovanför om den saknas, en loftgång över en del av rummet, öppet över resten, räcket och trappan ¦ Tilføjer etagen ovenover, hvis den mangler, en hems over en del af rummet, åbent over resten, rækværket og trappen
+🏗 Mezzanine ouverte sur cette pièce ¦ 🏗 Galerie otevřená do této místnosti ¦ 🏗 Loftgång öppen mot rummet ¦ 🏗 Hems åben mod rummet
+Mezzanine ouverte ¦ Otevřená galerie ¦ Öppen loftgång ¦ Åben hems
+🔗 Les murs et les meubles suivent la pièce ¦ 🔗 Zdi a nábytek se pohybují s místností ¦ 🔗 Väggar och möbler följer rummet ¦ 🔗 Vægge og møbler følger rummet
+🧱 Murs de la pièce ¦ 🧱 Zdi místnosti ¦ 🧱 Rummets väggar ¦ 🧱 Rummets vægge
+Sol ¦ Podlaha ¦ Golv ¦ Gulv
+Salle commune ¦ Světnice ¦ Allrum ¦ Dagligstue
+Chambre des parents ¦ Ložnice rodičů ¦ Föräldrarnas sovrum ¦ Forældrenes soveværelse
+Chambre des enfants ¦ Dětský pokoj ¦ Barnens sovrum ¦ Børneværelse
+Salle à manger ¦ Jídelna ¦ Matsal ¦ Spisestue
+Grenier ¦ Půda ¦ Vind ¦ Loft
+Cellier ¦ Komora ¦ Förråd ¦ Viktualierum
+Étable ¦ Chlév ¦ Ladugård ¦ Kostald
+Grange ¦ Stodola ¦ Lada ¦ Lade
+Fournil ¦ Pekárna ¦ Bagarstuga ¦ Bagehus
+Boutique ¦ Obchod ¦ Butik ¦ Butik
+Couloir ¦ Chodba ¦ Korridor ¦ Gang
+Cour ¦ Dvůr ¦ Gårdsplan ¦ Gårdsplads
+Jardin ¦ Zahrada ¦ Trädgård ¦ Have
+Potager ¦ Zeleninová zahrada ¦ Köksträdgård ¦ Køkkenhave
+Basse-cour ¦ Drůbežárna ¦ Hönsgård ¦ Hønsegård
+🕯 Souvenirs de la pièce ¦ 🕯 Vzpomínky místnosti ¦ 🕯 Rummets minnen ¦ 🕯 Rummets minder
+La chambre où est née Marie en 1890 ; la veillée… ¦ Pokoj, kde se v roce 1890 narodila Marie; večerní posezení… ¦ Rummet där Marie föddes 1890; aftonsamkvämen… ¦ Værelset, hvor Marie blev født i 1890; aftenhyggen…
+Les personnes de la pièce ¦ Osoby místnosti ¦ Personerna i rummet ¦ Personerne i rummet
+Leurs années dans cette pièce ¦ Jejich roky v této místnosti ¦ Deras år i rummet ¦ Deres år i rummet
+années : 1890 – 1925 ¦ roky: 1890 – 1925 ¦ år: 1890 – 1925 ¦ år: 1890 – 1925
+🪜 Escalier ¦ 🪜 Schodiště ¦ 🪜 Trappa ¦ 🪜 Trappe
+✓ confortable (60 à 66 cm) ¦ ✓ pohodlné (60 až 66 cm) ¦ ✓ bekväm (60 till 66 cm) ¦ ✓ behagelig (60 til 66 cm)
+⚠️ un peu raide : allonge l’escalier ou choisis un escalier tournant ¦ ⚠️ trochu strmé: prodluž schodiště nebo zvol točité ¦ ⚠️ lite brant: förläng trappan eller välj en svängd trappa ¦ ⚠️ lidt stejl: forlæng trappen eller vælg en svungen trappe
+⚠️ marches très longues : raccourcis l’escalier ¦ ⚠️ velmi dlouhé stupně: zkrať schodiště ¦ ⚠️ mycket långa steg: korta trappan ¦ ⚠️ meget lange trin: afkort trappen
+Quart tournant ¦ Se čtvrtotočkou ¦ Kvartsvängd ¦ Kvartsvinget
+Vers la gauche ¦ Doleva ¦ Åt vänster ¦ Til venstre
+Vers la droite ¦ Doprava ¦ Åt höger ¦ Til højre
+Le haut devient le bas ¦ Horní konec se stane dolním ¦ Toppen blir botten ¦ Toppen bliver bunden
+⇅ Inverser le sens de montée ¦ ⇅ Obrátit směr výstupu ¦ ⇅ Vänd riktningen uppåt ¦ ⇅ Vend opgangsretningen
+Pas d’étage au-dessus : ajoute-le avec ＋ en haut. ¦ Nad tím není patro: přidej ho pomocí ＋ nahoře. ¦ Ingen våning ovanför: lägg till den med ＋ högst upp. ¦ Ingen etage ovenover: tilføj den med ＋ øverst.
+Pour les maisons dessinées avant : chaque escalier perce le plancher de l’étage du dessus ¦ Pro dříve nakreslené domy: každé schodiště prorazí strop do patra nad ním ¦ För hus som ritats tidigare: varje trappa öppnar bjälklaget till våningen ovanför ¦ For huse tegnet tidligere: hver trappe åbner etageadskillelsen til etagen ovenover
+Ouvrir les trémies de tous les escaliers ¦ Otevřít otvory všech schodišť ¦ Öppna trapphålen för alla trappor ¦ Åbn trappehullerne for alle trapper
+Du sol ¦ Od podlahy ¦ Från golvet ¦ Fra gulvet
+Les prochains objets de ce modèle seront posés à cette taille ¦ Další předměty tohoto modelu se umístí v této velikosti ¦ Nästa föremål av den här modellen placeras i den här storleken ¦ De næste genstande af denne model placeres i denne størrelse
+💾 Garder pour ce modèle ¦ 💾 Ponechat pro tento model ¦ 💾 Behåll för den här modellen ¦ 💾 Behold for denne model
+Le poser sur le meuble qui est dessous (table, commode, cheminée…) ¦ Položit na nábytek pod ním (stůl, komoda, krb…) ¦ Ställ den på möbeln under (bord, byrå, öppen spis…) ¦ Stil den på møblet nedenunder (bord, kommode, pejs…)
+⬆ Sur l’objet dessous ¦ ⬆ Na předmět pod ním ¦ ⬆ På föremålet under ¦ ⬆ På genstanden nedenunder
+⬇ Au sol ¦ ⬇ Na zem ¦ ⬇ På golvet ¦ ⬇ På gulvet
+Plusieurs copies d’un coup : en ligne, en grille, ou en cercle autour d’un objet (6 chaises autour d’une table) ¦ Více kopií najednou: v řadě, v mřížce nebo v kruhu kolem předmětu (6 židlí kolem stolu) ¦ Flera kopior på en gång: i rad, i rutnät eller i en cirkel runt ett föremål (6 stolar runt ett bord) ¦ Flere kopier på én gang: på række, i gitter eller i en cirkel omkring en genstand (6 stole omkring et bord)
+Pieds ¦ Nohy ¦ Ben ¦ Ben
+Pieds, poignées, filets, ferrures ¦ Nohy, úchyty, lišty, kování ¦ Ben, handtag, lister, beslag ¦ Ben, håndtag, lister, beslag
+Sans deuxième couleur ¦ Bez druhé barvy ¦ Utan andra färg ¦ Uden anden farve
+Époque, style ¦ Období, styl ¦ Period, stil ¦ Periode, stil
+Effets : pieds et détails ¦ Efekty: nohy a detaily ¦ Effekter: ben och detaljer ¦ Effekter: ben og detaljer
+🏷 Souvenirs de cet objet ¦ 🏷 Vzpomínky tohoto předmětu ¦ 🏷 Föremålets minnen ¦ 🏷 Genstandens minder
+Son histoire (objet de famille) ¦ Jeho příběh (rodinný předmět) ¦ Dess historia (släktklenod) ¦ Dens historie (arvestykke)
+Flèche vers un point ¦ Šipka k bodu ¦ Pil mot en punkt ¦ Pil mod et punkt
+Couleur de la flèche ¦ Barva šipky ¦ Pilens färg ¦ Pilens farve
+Police de départ ¦ Výchozí písmo ¦ Standardtypsnitt ¦ Standardskrifttype
+Des versions de la maison selon les années ou des dates : la voir évoluer, rattacher une époque à un recensement ¦ Verze domu podle let nebo dat: sledovat jeho vývoj, propojit období se sčítáním ¦ Versioner av huset efter år eller datum: se det förändras, koppla en period till en folkräkning ¦ Versioner af huset efter år eller datoer: se det udvikle sig, forbind en periode med en folketælling
+🕰 Époques ¦ 🕰 Období ¦ 🕰 Perioder ¦ 🕰 Perioder
+L’époque d’avant ¦ Předchozí období ¦ Föregående period ¦ Forrige periode
+L’époque montrée (plan 2D et vue 3D) ¦ Zobrazené období (2D plán a 3D zobrazení) ¦ Den visade perioden (2D-plan och 3D-vy) ¦ Den viste periode (2D-plan og 3D-visning)
+L’époque d’après ¦ Následující období ¦ Nästa period ¦ Næste periode
+⋯ Gérer les époques… ¦ ⋯ Spravovat období… ¦ ⋯ Hantera perioder… ¦ ⋯ Administrér perioder…
+▶ Voir évoluer : les époques l’une après l’autre ¦ ▶ Sledovat vývoj: období jedno po druhém ¦ ▶ Se förändringen: perioderna en efter en ¦ ▶ Se udviklingen: perioderne en efter en
+MAISON · ÉPOQUES ¦ DŮM · OBDOBÍ ¦ HUS · PERIODER ¦ HUS · PERIODER
+MAISON ¦ DŮM ¦ HUS ¦ HUS
+Créer l’époque ¦ Vytvořit období ¦ Skapa perioden ¦ Opret perioden
+La maison telle qu’elle est dessinée maintenant devient la première époque : donne-lui un nom et une date. La nouvelle époque part d’une copie, que tu changes ensuite (une pièce ajoutée, un mur abattu, d’autres meubles…). ¦ Dům, jak je teď nakreslen, se stane prvním obdobím: dej mu název a datum. Nové období začíná kopií, kterou pak upravíš (přidaná místnost, zbouraná zeď, jiný nábytek…). ¦ Huset som det är ritat nu blir den första perioden: ge den ett namn och ett datum. Den nya perioden börjar som en kopia, som du sedan ändrar (ett tillagt rum, en riven vägg, andra möbler…). ¦ Huset, som det er tegnet nu, bliver den første periode: giv den et navn og en dato. Den nye periode starter som en kopi, som du så ændrer (et tilføjet rum, en revet væg, andre møbler…).
+La maison dessinée maintenant ¦ Dům, jak je nakreslen teď ¦ Huset som det är ritat nu ¦ Huset, som det er tegnet nu
+Année ou date ¦ Rok nebo datum ¦ År eller datum ¦ År eller dato
+La nouvelle époque ¦ Nové období ¦ Den nya perioden ¦ Den nye periode
+ex. Après l’agrandissement ¦ např. Po rozšíření ¦ t.ex. Efter tillbyggnaden ¦ f.eks. Efter udvidelsen
+Rattachée au recensement ¦ Propojeno se sčítáním ¦ Kopplad till folkräkningen ¦ Forbundet med folketællingen
+Pour la rattacher à un recensement : onglet Maison → « 📋 Les recensements » → ＋ Un recensement. ¦ Pro propojení se sčítáním: karta Dům → „📋 Sčítání lidu“ → ＋ Sčítání. ¦ För att koppla den till en folkräkning: fliken Hus → ”📋 Folkräkningarna” → ＋ En folkräkning. ¦ For at forbinde den med en folketælling: fanen Hus → »📋 Folketællingerne« → ＋ En folketælling.
+Donne un nom ou une date à cette époque. ¦ Dej tomuto období název nebo datum. ¦ Ge perioden ett namn eller ett datum. ¦ Giv perioden et navn eller en dato.
+Nouvelle époque créée (copie) : change ce qui était différent. « ‹ › » en haut pour passer d’une époque à l’autre. ¦ Nové období vytvořeno (kopie): změň, co bylo jinak. „‹ ›“ nahoře pro přechod mezi obdobími. ¦ Ny period skapad (kopia): ändra det som var annorlunda. ”‹ ›” högst upp för att gå mellan perioderna. ¦ Ny periode oprettet (kopi): ændr det, der var anderledes. »‹ ›« øverst for at skifte mellem perioder.
+Époque supprimée ¦ Období smazáno ¦ Perioden raderad ¦ Perioden slettet
+Crée au moins deux époques (＋ Nouvelle époque) pour voir la maison évoluer. ¦ Vytvoř aspoň dvě období (＋ Nové období) a uvidíš vývoj domu. ¦ Skapa minst två perioder (＋ Ny period) för att se huset förändras. ¦ Opret mindst to perioder (＋ Ny periode) for at se huset udvikle sig.
+＋ Un recensement ¦ ＋ Sčítání ¦ ＋ En folkräkning ¦ ＋ En folketælling
+Recensements à rattacher ¦ Sčítání k propojení ¦ Folkräkningar att koppla ¦ Folketællinger at forbinde
+Ajouter aussi les personnes du foyer comme habitants ¦ Přidat také členy domácnosti jako obyvatele ¦ Lägg också till hushållets personer som invånare ¦ Tilføj også husstandens personer som beboere
+À l’époque ¦ K období ¦ Till perioden ¦ Til perioden
+Choisis au moins un recensement. ¦ Vyber aspoň jedno sčítání. ¦ Välj minst en folkräkning. ¦ Vælg mindst én folketælling.
+Clique sur un mur. ¦ Klikni na zeď. ¦ Klicka på en vägg. ¦ Klik på en væg.
+Une étiquette à flèche ¦ Popisek se šipkou ¦ En etikett med pil ¦ En etiket med pil
+La note (ex. « Double vitrage posé en 1978 », « Ici était le puits ») ¦ Poznámka (např. „Dvojité zasklení z roku 1978“, „Tady byla studna“) ¦ Anteckningen (t.ex. ”Dubbelglas insatt 1978”, ”Här låg brunnen”) ¦ Noten (f.eks. »Termoruder sat i 1978«, »Her lå brønden«)
+Étiquette à flèche ¦ Popisek se šipkou ¦ Etikett med pil ¦ Etiket med pil
+Un texte sur le plan ¦ Text na plánu ¦ En text på planen ¦ En tekst på planen
+Le texte à écrire (nom d’une pièce, d’un lieu, une remarque…) ¦ Text k napsání (název místnosti, místa, poznámka…) ¦ Texten att skriva (namn på ett rum, en plats, en kommentar…) ¦ Teksten, der skal skrives (navn på et rum, et sted, en bemærkning…)
+Mur modifié ¦ Zeď upravena ¦ Väggen ändrad ¦ Væggen ændret
+Pièce modifiée ¦ Místnost upravena ¦ Rummet ändrat ¦ Rummet ændret
+Flèche déplacée ¦ Šipka přesunuta ¦ Pilen flyttad ¦ Pilen flyttet
+Objet tourné ¦ Předmět otočen ¦ Föremålet roterat ¦ Genstanden roteret
+Plan ancien déplacé ¦ Starý plán přesunut ¦ Den gamla planen flyttad ¦ Den gamle plan flyttet
+Une pièce d’au moins 50 cm de côté. ¦ Místnost o straně aspoň 50 cm. ¦ Ett rum med minst 50 cm per sida. ¦ Et rum på mindst 50 cm på hver side.
+Un vide d’au moins 40 cm de côté. ¦ Volný prostor o straně aspoň 40 cm. ¦ En öppen yta med minst 40 cm per sida. ¦ Et åbent rum på mindst 40 cm på hver side.
+Ce vide est à l’étage le plus bas : il n’ouvre sur rien. Pour une mezzanine, dessine le vide à l’étage du dessus. ¦ Tento volný prostor je v nejnižším patře: nikam nevede. Pro galerii nakresli volný prostor v patře nad. ¦ Den öppna ytan ligger på den lägsta våningen: den öppnar sig mot ingenting. För en loftgång, rita den öppna ytan på våningen ovanför. ¦ Det åbne rum er på den laveste etage: det åbner ikke mod noget. For en hems, tegn det åbne rum på etagen ovenover.
+Choisis d’abord la pièce (le séjour) sur le plan. ¦ Nejdřív vyber na plánu místnost (obývací pokoj). ¦ Välj först rummet (vardagsrummet) på planen. ¦ Vælg først rummet (stuen) på planen.
+La pièce est un peu petite pour une mezzanine (au moins 2,5 m × 4 m). ¦ Místnost je na galerii trochu malá (aspoň 2,5 m × 4 m). ¦ Rummet är lite litet för en loftgång (minst 2,5 m × 4 m). ¦ Rummet er lidt lille til en hems (mindst 2,5 m × 4 m).
+Clic : choisir · glisser : déplacer · poignées : allonger un mur, déformer une pièce · ⌫ : supprimer ¦ Klik: vybrat · tažení: přesunout · úchyty: prodloužit zeď, změnit tvar místnosti · ⌫: smazat ¦ Klick: välj · dra: flytta · handtag: förläng en vägg, forma om ett rum · ⌫: radera ¦ Klik: vælg · træk: flyt · håndtag: forlæng en væg, omform et rum · ⌫: slet
+Glisser pour déplacer la vue ¦ Tažením posuneš pohled ¦ Dra för att flytta vyn ¦ Træk for at flytte visningen
+Glisse en diagonale : une pièce rectangulaire avec ses quatre murs (la surface s’affiche) ¦ Táhni úhlopříčně: obdélníková místnost se čtyřmi zdmi (zobrazí se plocha) ¦ Dra diagonalt: ett rektangulärt rum med fyra väggar (ytan visas) ¦ Træk diagonalt: et rektangulært rum med fire vægge (arealet vises)
+Glisse en diagonale : un vide sans plancher (mezzanine, double hauteur, trémie) ; un garde-corps se pose tout seul le long des bords sans mur ¦ Táhni úhlopříčně: volný prostor bez podlahy (galerie, dvojnásobná výška, otvor); podél okrajů bez zdi se samo umístí zábradlí ¦ Dra diagonalt: en öppen yta utan bjälklag (loftgång, dubbel takhöjd, trapphål); ett räcke sätts automatiskt längs kanterna utan vägg ¦ Træk diagonalt: et åbent rum uden gulv (hems, dobbelt højde, trappehul); et rækværk sættes automatisk langs kanterne uden væg
+Un clic par coin (aimant : grille, coins, angles droits ; Alt : libre) · double-clic ou Entrée : finir · clic sur le 1er point : fermer (et créer la pièce) ¦ Jeden klik na roh (přichytávání: mřížka, rohy, pravé úhly; Alt: volně) · dvojklik nebo Enter: dokončit · klik na 1. bod: uzavřít (a vytvořit místnost) ¦ Ett klick per hörn (fästning: rutnät, hörn, räta vinklar; Alt: fritt) · dubbelklick eller Retur: avsluta · klick på 1:a punkten: stäng (och skapa rummet) ¦ Ét klik pr. hjørne (fastgørelse: gitter, hjørner, rette vinkler; Alt: frit) · dobbeltklik eller Enter: afslut · klik på 1. punkt: luk (og opret rummet)
+Une pièce de forme libre (sans murs) : un clic par coin, double-clic pour finir ¦ Místnost volného tvaru (bez zdí): jeden klik na roh, dvojklik pro dokončení ¦ Ett rum med fri form (utan väggar): ett klick per hörn, dubbelklicka för att avsluta ¦ Et rum med fri form (uden vægge): ét klik pr. hjørne, dobbeltklik for at afslutte
+Clic sur un mur : une porte (glisse-la ensuite le long du mur) ¦ Klik na zeď: dveře (pak je posuň podél zdi) ¦ Klick på en vägg: en dörr (dra den sedan längs väggen) ¦ Klik på en væg: en dør (træk den så langs væggen)
+Clic sur un mur : une fenêtre ¦ Klik na zeď: okno ¦ Klick på en vägg: ett fönster ¦ Klik på en væg: et vindue
+Deux clics : une cote (la distance s’affiche) ¦ Dva kliky: kóta (zobrazí se vzdálenost) ¦ Två klick: ett mått (avståndet visas) ¦ To klik: et mål (afstanden vises)
+Clic : écrire un texte sur le plan ¦ Klik: napsat text na plán ¦ Klick: skriv en text på planen ¦ Klik: skriv en tekst på planen
+Clic sur le point à montrer (le puits, une fenêtre…), puis clic là où écrire la note ¦ Klikni na bod, který chceš ukázat (studna, okno…), pak tam, kde má být poznámka ¦ Klicka på punkten att visa (brunnen, ett fönster…), sedan där anteckningen ska stå ¦ Klik på punktet, der skal vises (brønden, et vindue…), og så hvor noten skal skrives
+largeur x profondeur (ex. 420 x 350, 4,2 x 3,5 m) ↵ ¦ šířka x hloubka (např. 420 x 350, 4,2 x 3,5 m) ↵ ¦ bredd x djup (t.ex. 420 x 350, 4,2 x 3,5 m) ↵ ¦ bredde x dybde (f.eks. 420 x 350, 4,2 x 3,5 m) ↵
+longueur (cm, ou 3,5 m) puis @angle ↵ ¦ délka (cm, nebo 3,5 m), pak @úhel ↵ ¦ längd (cm, eller 3,5 m) sedan @vinkel ↵ ¦ længde (cm, eller 3,5 m) derefter @vinkel ↵
+Écris largeur x profondeur : 420 x 350 (cm) ou 4,2 x 3,5 m (50 cm au moins). ¦ Napiš šířku x hloubku: 420 x 350 (cm) nebo 4,2 x 3,5 m (aspoň 50 cm). ¦ Skriv bredd x djup: 420 x 350 (cm) eller 4,2 x 3,5 m (minst 50 cm). ¦ Skriv bredde x dybde: 420 x 350 (cm) eller 4,2 x 3,5 m (mindst 50 cm).
+Clique d’abord le point de départ sur le plan, puis tape la longueur. ¦ Nejdřív klikni na plánu na výchozí bod, pak napiš délku. ¦ Klicka först på startpunkten på planen och skriv sedan längden. ¦ Klik først på startpunktet på planen, og skriv så længden.
+Longueur incomprise : 350, 3,5 m, ou 350 @ 90 pour l’angle. ¦ Délce nerozumím: 350, 3,5 m, nebo 350 @ 90 pro úhel. ¦ Längden förstods inte: 350, 3,5 m, eller 350 @ 90 för vinkeln. ¦ Længden blev ikke forstået: 350, 3,5 m, eller 350 @ 90 for vinklen.
+Angle incompris (en degrés : 0 à droite, 90 en haut). ¦ Úhlu nerozumím (ve stupních: 0 vpravo, 90 nahoru). ¦ Vinkeln förstods inte (i grader: 0 åt höger, 90 uppåt). ¦ Vinklen blev ikke forstået (i grader: 0 til højre, 90 opad).
+Grille ¦ Mřížka ¦ Rutnät ¦ Gitter
+Coins des murs et des pièces ¦ Rohy zdí a místností ¦ Hörn på väggar och rum ¦ Hjørner af vægge og rum
+Milieu des murs ¦ Středy zdí ¦ Väggarnas mittpunkter ¦ Væggenes midtpunkter
+Le long des murs (au cm) ¦ Podél zdí (na cm) ¦ Längs väggarna (på cm) ¦ Langs væggene (på cm)
+Alignements (lignes de rappel) ¦ Zarovnání (vodicí čáry) ¦ Inriktningar (stödlinjer) ¦ Justeringer (hjælpelinjer)
+Pas des angles ¦ Krok úhlů ¦ Vinkelsteg ¦ Vinkeltrin
+Alt : aucun aimant (au mm près) · ⇧ : angles à 45° · flèches : décaler ce qui est choisi de 1 cm (⇧ : d’un pas de grille) · en traçant, tape la longueur au clavier. ¦ Alt: bez přichytávání (na mm) · ⇧: úhly po 45° · šipky: posunout výběr o 1 cm (⇧: o krok mřížky) · při kreslení napiš délku na klávesnici. ¦ Alt: ingen fästning (på mm) · ⇧: 45°-vinklar · pilar: flytta det valda 1 cm (⇧: ett rutnätssteg) · när du ritar, skriv längden på tangentbordet. ¦ Alt: ingen fastgørelse (på mm) · ⇧: 45°-vinkler · pile: flyt det valgte 1 cm (⇧: ét gittertrin) · mens du tegner, skriv længden på tastaturet.
+Décalé ¦ Posunuto ¦ Flyttat ¦ Flyttet
+Il faut un fichier OBJ, STL, GLB ou glTF. ¦ Je potřeba soubor OBJ, STL, GLB nebo glTF. ¦ En OBJ-, STL-, GLB- eller glTF-fil behövs. ¦ Der skal bruges en OBJ-, STL-, GLB- eller glTF-fil.
+Lecture du modèle… ¦ Čtení modelu… ¦ Läser modellen… ¦ Læser modellen…
+Objet importé ¦ Předmět importován ¦ Föremålet importerat ¦ Genstanden importeret
+Objet 3D importé : il est aussi dans Mobilier → « Mes objets », pour toutes les maisons. ¦ 3D předmět importován: je také v Nábytek → „Moje předměty“, pro všechny domy. ¦ 3D-föremålet importerat: det finns också i Möbler → ”Mina föremål”, för alla hus. ¦ 3D-genstanden er importeret: den findes også i Møbler → »Mine genstande« for alle huse.
+Objet posé (vue de dessus) : règle sa taille réelle dans Propriétés. ¦ Předmět umístěn (pohled shora): nastav jeho skutečnou velikost ve Vlastnostech. ¦ Föremålet utplacerat (vy ovanifrån): ställ in den verkliga storleken under Egenskaper. ¦ Genstanden er placeret (set ovenfra): indstil dens faktiske størrelse i Egenskaber.
+Envoi de l’image dans les médias… ¦ Odesílání obrázku do médií… ¦ Skickar bilden till media… ¦ Sender billedet til medier…
+MAISON · PLAN ANCIEN ¦ DŮM · STARÝ PLÁN ¦ HUS · GAMMAL PLAN ¦ HUS · GAMMEL PLAN
+Le plan à calquer ¦ Plán k obkreslení ¦ Planen att kalkera ¦ Planen, der skal kalkeres
+Un cadastre napoléonien, un plan ancien, un croquis… « 📁 Importer » en prend un sur l’ordinateur (il entre dans les médias). ¦ Napoleonský katastr, starý plán, náčrt… „📁 Importovat“ ho vezme z počítače (uloží se do médií). ¦ En napoleonsk lantmäterikarta, en gammal plan, en skiss… ”📁 Importera” hämtar en från datorn (den hamnar i media). ¦ Et napoleonsk matrikelkort, en gammel plan, en skitse… »📁 Importér« henter en fra computeren (den kommer i medier).
+Poser ce plan ¦ Umístit tento plán ¦ Placera planen ¦ Placér planen
+Cette image ne peut pas servir de plan. ¦ Tento obrázek nemůže sloužit jako plán. ¦ Bilden kan inte användas som plan. ¦ Billedet kan ikke bruges som plan.
+Plan ancien posé ¦ Starý plán umístěn ¦ Den gamla planen placerad ¦ Den gamle plan placeret
+📏 Clique les deux bouts d’une longueur connue sur le plan ancien (un mur, l’échelle dessinée) ¦ 📏 Klikni na oba konce známé délky na starém plánu (zeď, nakreslené měřítko) ¦ 📏 Klicka på båda ändarna av en känd längd på den gamla planen (en vägg, den ritade skalan) ¦ 📏 Klik på begge ender af en kendt længde på den gamle plan (en væg, den tegnede skala)
+Les deux points sont trop proches. ¦ Oba body jsou příliš blízko. ¦ Punkterna ligger för nära varandra. ¦ De to punkter er for tæt på hinanden.
+📏 Mettre le plan à l’échelle ¦ 📏 Nastavit měřítko plánu ¦ 📏 Skala planen ¦ 📏 Skalér planen
+Mettre à l’échelle ¦ Nastavit měřítko ¦ Skala ¦ Skalér
+Quelle est la vraie longueur entre ces deux points ? ¦ Jaká je skutečná délka mezi těmito body? ¦ Vilken är den verkliga längden mellan punkterna? ¦ Hvad er den faktiske længde mellem de to punkter?
+Le cadastre napoléonien est souvent au 1/2500 ou au 1/1250 ; les plans anciens comptent en toises (6 pieds, 1,949 m) et en pieds du roi (32,48 cm) : écris le nombre, la conversion se fait toute seule. ¦ Napoleonský katastr bývá v měřítku 1:2500 nebo 1:1250; staré plány počítají v sázích (6 stop, 1,949 m) a královských stopách (32,48 cm): napiš číslo, převod proběhne sám. ¦ Den napoleonska lantmäterikartan är ofta i 1:2500 eller 1:1250; gamla planer räknar i toiser (6 fot, 1,949 m) och kungliga fot (32,48 cm): skriv talet, omvandlingen sker automatiskt. ¦ Det napoleonske matrikelkort er ofte i 1:2500 eller 1:1250; gamle planer regner i toiser (6 fod, 1,949 m) og kongelige fod (32,48 cm): skriv tallet, omregningen sker automatisk.
+Écris une longueur, par exemple 12 ou 3,5. ¦ Napiš délku, například 12 nebo 3,5. ¦ Skriv en längd, till exempel 12 eller 3,5. ¦ Skriv en længde, for eksempel 12 eller 3,5.
+Plan ancien mis à l’échelle ¦ Měřítko starého plánu nastaveno ¦ Den gamla planen skalad ¦ Den gamle plan skaleret
+↻ Clique deux points le long d’un mur du plan ancien : il deviendra droit ¦ ↻ Klikni na dva body podél zdi na starém plánu: srovná se ¦ ↻ Klicka på två punkter längs en vägg i den gamla planen: den blir rak ¦ ↻ Klik på to punkter langs en væg på den gamle plan: den bliver lige
+Ce mur est déjà droit. ¦ Tato zeď už je rovná. ¦ Väggen är redan rak. ¦ Væggen er allerede lige.
+↻ Redresser ¦ ↻ Srovnat ¦ ↻ Räta upp ¦ ↻ Ret op
+✥ Déplacer ¦ ✥ Přesunout ¦ ✥ Flytta ¦ ✥ Flyt
+✏️ Décalque : un clic par coin de mur, en suivant le plan ancien · double-clic ou Entrée pour finir un mur · ⬚ pour une pièce entière ¦ ✏️ Obkreslování: jeden klik na roh zdi podle starého plánu · dvojklik nebo Enter pro dokončení zdi · ⬚ pro celou místnost ¦ ✏️ Kalkering: ett klick per väggens hörn, efter den gamla planen · dubbelklick eller Retur för att avsluta en vägg · ⬚ för ett helt rum ¦ ✏️ Kalkering: ét klik pr. væghjørne efter den gamle plan · dobbeltklik eller Enter for at afslutte en væg · ⬚ for et helt rum
+Photo, document ¦ Fotka, dokument ¦ Foto, dokument ¦ Foto, dokument
+Récit ¦ Vyprávění ¦ Berättelse ¦ Fortælling
+Souvenir de famille ¦ Rodinná vzpomínka ¦ Familjeminne ¦ Familieminde
+Objet de famille ¦ Rodinný předmět ¦ Släktklenod ¦ Arvestykke
+Voir ce souvenir ¦ Zobrazit tuto vzpomínku ¦ Visa minnet ¦ Se mindet
+Retirer ce souvenir (sans le supprimer de la base) ¦ Odebrat tuto vzpomínku (bez smazání z databáze) ¦ Ta bort minnet (utan att radera det ur databasen) ¦ Fjern mindet (uden at slette det fra databasen)
+Aucun souvenir rattaché : une photo, un récit, une personne… ¦ Žádná propojená vzpomínka: fotka, vyprávění, osoba… ¦ Inget kopplat minne: ett foto, en berättelse, en person… ¦ Intet forbundet minde: et foto, en fortælling, en person…
+Aucun souvenir ne correspond. ¦ Žádná vzpomínka neodpovídá. ¦ Inget minne matchar. ¦ Intet minde passer.
+Aucun souvenir de famille pour l’instant ¦ Zatím žádná rodinná vzpomínka ¦ Inga familjeminnen än ¦ Ingen familieminder endnu
+Essaie un autre mot. ¦ Zkus jiné slovo. ¦ Prova ett annat ord. ¦ Prøv et andet ord.
+Listes → Mémoire familiale (recettes, expressions, chansons…) ou Objets de famille. ¦ Seznamy → Rodinná paměť (recepty, rčení, písně…) nebo Rodinné předměty. ¦ Listor → Familjeminne (recept, uttryck, sånger…) eller Släktklenoder. ¦ Lister → Familieminde (opskrifter, udtryk, sange…) eller Arvestykker.
+MAISON · SOUVENIRS ¦ DŮM · VZPOMÍNKY ¦ HUS · MINNEN ¦ HUS · MINDER
+📜 Un souvenir de famille ¦ 📜 Rodinná vzpomínka ¦ 📜 Ett familjeminne ¦ 📜 Et familieminde
+Chercher… (recette, montre, surnom) ¦ Hledat… (recept, hodinky, přezdívka) ¦ Sök… (recept, klocka, smeknamn) ¦ Søg… (opskrift, ur, kælenavn)
+Chercher un souvenir ¦ Hledat vzpomínku ¦ Sök ett minne ¦ Søg et minde
+Choisis d’abord un meuble, un objet ou une pièce. ¦ Nejdřív vyber kus nábytku, předmět nebo místnost. ¦ Välj först en möbel, ett föremål eller ett rum. ¦ Vælg først et møbel, en genstand eller et rum.
+🖼 Une photo, un document ¦ 🖼 Fotka, dokument ¦ 🖼 Ett foto, ett dokument ¦ 🖼 Et foto, et dokument
+pris dans les médias (ou importé depuis l’ordinateur) ¦ z médií (nebo importovaný z počítače) ¦ hämtat från media (eller importerat från datorn) ¦ hentet fra medier (eller importeret fra computeren)
+✍ Un récit ¦ ✍ Vyprávění ¦ ✍ En berättelse ¦ ✍ En fortælling
+ce qui s’est passé ici, ce qu’on en raconte ¦ co se tu stalo, co se o tom vypráví ¦ vad som hände här, vad man berättar om det ¦ hvad der skete her, hvad man fortæller om det
+👤 Une personne ¦ 👤 Osoba ¦ 👤 En person ¦ 👤 En person
+qui a vécu ici, qui s’en servait ¦ kdo tu žil, kdo to používal ¦ som bodde här, som använde det ¦ som boede her, som brugte det
+une recette, une expression, un objet de famille… ¦ recept, rčení, rodinný předmět… ¦ ett recept, ett uttryck, en släktklenod… ¦ en opskrift, et udtryk, et arvestykke…
+ex. La veillée de Noël 1912 ¦ např. Štědrý večer 1912 ¦ t.ex. Julaftonen 1912 ¦ f.eks. Juleaften 1912
+Ce qui s’est passé ici, ce qu’on en raconte… ¦ Co se tu stalo, co se o tom vypráví… ¦ Vad som hände här, vad man berättar om det… ¦ Hvad der skete her, hvad man fortæller om det…
+Le récit ¦ Vyprávění ¦ Berättelsen ¦ Fortællingen
+Écris un titre ou un récit. ¦ Napiš název nebo vyprávění. ¦ Skriv en titel eller en berättelse. ¦ Skriv en titel eller en fortælling.
+Souvenir rattaché ¦ Vzpomínka propojena ¦ Minnet kopplat ¦ Mindet forbundet
+Ce média n’existe plus. ¦ Toto médium už neexistuje. ¦ Mediet finns inte längre. ¦ Mediet findes ikke længere.
+La maison non enregistrée sera perdue (💾 d’abord). ¦ Neuložený dům se ztratí (nejdřív 💾). ¦ Det osparade huset går förlorat (💾 först). ¦ Det ikke-gemte hus går tabt (💾 først).
+Ouvrir la fiche ? ¦ Otevřít kartu? ¦ Öppna posten? ¦ Åbn posten?
+les aimants, la grille, l’épaisseur des murs, la hauteur des yeux et la lumière ¦ přichytávání, mřížka, tloušťka zdí, výška očí a světlo ¦ fästningen, rutnätet, väggtjockleken, ögonhöjden och ljuset ¦ fastgørelsen, gitteret, vægtykkelsen, øjenhøjden og lyset
+Fichier prêt : il s’importe dans 🧲 Aimants → « ⤒ Importer ». ¦ Soubor je připravený: importuje se v 🧲 Přichytávat → „⤒ Importovat“. ¦ Filen är klar: den importeras i 🧲 Fäst → ”⤒ Importera”. ¦ Filen er klar: den importeres i 🧲 Fastgør → »⤒ Importér«.
+Ce fichier n’est pas lisible (il faut un fichier .json de réglage). ¦ Tento soubor nelze přečíst (je potřeba soubor nastavení .json). ¦ Filen kan inte läsas (en .json-fil med inställningar behövs). ¦ Filen kan ikke læses (der skal bruges en .json-fil med indstillinger).
+Ce fichier n’est pas un réglage LCNDA (⤓ Exporter un réglage, dans un outil). ¦ Tento soubor není nastavení LCNDA (⤓ Exportovat nastavení, v nástroji). ¦ Filen är ingen LCNDA-inställning (⤓ Exportera en inställning, i ett verktyg). ¦ Filen er ikke en LCNDA-indstilling (⤓ Eksportér en indstilling, i et værktøj).
+Le plan de cet étage est vide. ¦ Plán tohoto patra je prázdný. ¦ Våningens plan är tom. ¦ Etagens plan er tom.
+le plan de l’étage ¦ plán patra ¦ våningens plan ¦ etagens plan
+le plan, plus léger ¦ plán, menší soubor ¦ planen, lättare ¦ planen, lettere
+le plan sur une page A4 ¦ plán na stránce A4 ¦ planen på en A4-sida ¦ planen på en A4-side
+le plan, en dessin ¦ plán jako kresba ¦ planen, som ritning ¦ planen, som tegning
+le plan, tout de suite ¦ plán, hned ¦ planen, direkt ¦ planen, med det samme
+le plan de l’étage pour AutoCAD, LibreCAD… (calques, en cm) ¦ plán patra pro AutoCAD, LibreCAD… (vrstvy, v cm) ¦ våningens plan för AutoCAD, LibreCAD… (lager, i cm) ¦ etagens plan til AutoCAD, LibreCAD… (lag, i cm)
+image de la vue 3D ¦ obrázek 3D zobrazení ¦ bild av 3D-vyn ¦ billede af 3D-visningen
+🧊 Vue 3D ¦ 🧊 3D zobrazení ¦ 🧊 3D-vy ¦ 🧊 3D-visning
+💾 Fichier de la maison ¦ 💾 Soubor domu ¦ 💾 Husets fil ¦ 💾 Husets fil
+à réimporter (⤒ Importer) ¦ k opětovnému importu (⤒ Importovat) ¦ att importera igen (⤒ Importera) ¦ til genimport (⤒ Importér)
+Ce fichier DXF n’est pas lisible. ¦ Tento soubor DXF nelze přečíst. ¦ DXF-filen kan inte läsas. ¦ DXF-filen kan ikke læses.
+Aucun trait trouvé dans ce DXF (un DXF « binaire » ne se lit pas : enregistre-le en DXF texte, ASCII). ¦ V tomto DXF nebyla nalezena žádná čára („binární“ DXF nelze číst: ulož ho jako textový DXF, ASCII). ¦ Inga linjer hittades i DXF-filen (en ”binär” DXF kan inte läsas: spara den som text-DXF, ASCII). ¦ Ingen streger fundet i DXF-filen (en »binær« DXF kan ikke læses: gem den som tekst-DXF, ASCII).
+MAISON · IMPORT DXF ¦ DŮM · IMPORT DXF ¦ HUS · DXF-IMPORT ¦ HUS · DXF-IMPORT
+Importer le plan ¦ Importovat plán ¦ Importera planen ¦ Importér planen
+Unité du dessin ¦ Jednotka výkresu ¦ Ritningens enhet ¦ Tegningens enhed
+Épaisseur des murs ¦ Tloušťka zdí ¦ Väggtjocklek ¦ Vægtykkelse
+Où le mettre ¦ Kam ho dát ¦ Var den ska läggas ¦ Hvor den skal placeres
+Un nouvel étage ¦ Nové patro ¦ En ny våning ¦ En ny etage
+Calques à prendre ¦ Vrstvy k převzetí ¦ Lager att ta med ¦ Lag, der skal med
+Un plan exporté d’ici : ses murs sont repris par leur axe (MURS_AXES). ¦ Plán exportovaný odsud: zdi se převezmou podle osy (MURS_AXES). ¦ En plan exporterad härifrån: väggarna tas med efter sin mittlinje (MURS_AXES). ¦ En plan eksporteret herfra: væggene medtages efter deres akse (MURS_AXES).
+Un plan d’architecte dessine souvent chaque mur avec deux traits : garde une petite épaisseur, ou décoche les calques de meubles, de cotes et de hachures. ¦ Architektonický plán často kreslí každou zeď dvěma čarami: ponech malou tloušťku nebo zruš zaškrtnutí vrstev nábytku, kót a šrafování. ¦ En arkitektritning ritar ofta varje vägg med två linjer: behåll en liten tjocklek, eller avmarkera lagren för möbler, mått och skraffering. ¦ En arkitekttegning tegner ofte hver væg med to streger: behold en lille tykkelse, eller fjern markeringen af lagene for møbler, mål og skravering.
+Coche au moins un calque. ¦ Zaškrtni aspoň jednu vrstvu. ¦ Markera minst ett lager. ¦ Markér mindst ét lag.
+Rien à reprendre dans ces calques. ¦ V těchto vrstvách není co převzít. ¦ Inget att ta med från lagren. ¦ Intet at medtage fra disse lag.
+Plan importé ¦ Importovaný plán ¦ Importerad plan ¦ Importeret plan
+Plan DXF importé ¦ Plán DXF importován ¦ DXF-planen importerad ¦ DXF-planen importeret
+Nombre en tout ¦ Celkový počet ¦ Totalt antal ¦ Antal i alt
+Espace entre deux ¦ Mezera mezi dvěma ¦ Avstånd mellan två ¦ Afstand mellem to
+Pas la place sur ce mur : moins d’espace, ou déplace la première vers le début du mur. ¦ Na této zdi není místo: zmenši mezeru nebo posuň první blíž k začátku zdi. ¦ Inte plats på väggen: mindre avstånd, eller flytta den första mot väggens början. ¦ Ikke plads på væggen: mindre afstand, eller flyt den første mod væggens start.
+Répété ¦ Zopakováno ¦ Upprepat ¦ Gentaget
+Choisis d’abord un objet, une porte ou une fenêtre. ¦ Nejdřív vyber předmět, dveře nebo okno. ¦ Välj först ett föremål, en dörr eller ett fönster. ¦ Vælg først en genstand, en dør eller et vindue.
+En ligne ¦ V řadě ¦ I rad ¦ På række
+En grille (rangées) ¦ V mřížce (řady) ¦ I rutnät (rader) ¦ I gitter (rækker)
+En cercle (autour d’un objet) ¦ V kruhu (kolem předmětu) ¦ I cirkel (runt ett föremål) ¦ I cirkel (omkring en genstand)
+Sens (en ligne) ¦ Směr (v řadě) ¦ Riktning (i rad) ¦ Retning (på række)
+→ vers la droite ¦ → doprava ¦ → åt höger ¦ → til højre
+↓ vers le bas ¦ ↓ dolů ¦ ↓ nedåt ¦ ↓ nedad
+← vers la gauche ¦ ← doleva ¦ ← åt vänster ¦ ← til venstre
+↑ vers le haut ¦ ↑ nahoru ¦ ↑ uppåt ¦ ↑ opad
+Par rangée (en grille) ¦ Na řadu (v mřížce) ¦ Per rad (rutnät) ¦ Pr. række (gitter)
+Autour de (en cercle) ¦ Kolem (v kruhu) ¦ Runt (cirkel) ¦ Omkring (cirkel)
+Un point, au rayon ci-dessous ¦ Bod v poloměru níže ¦ En punkt, med radien nedan ¦ Et punkt, med radius nedenfor
+Rayon (si autour d’un point) ¦ Poloměr (pokud kolem bodu) ¦ Radie (om runt en punkt) ¦ Radius (hvis omkring et punkt)
+En cercle : place d’abord un seul objet (une chaise) à sa place autour de la table, choisis-le, puis répète : les copies tournent autour de la table et regardent vers elle, comme la première. ¦ V kruhu: nejdřív umísti jeden předmět (židli) na místo u stolu, vyber ho a pak opakuj: kopie se rozmístí kolem stolu a budou k němu otočené jako první. ¦ I cirkel: placera först ett enda föremål (en stol) på sin plats vid bordet, välj det och upprepa sedan: kopiorna går runt bordet och vänds mot det, som den första. ¦ I cirkel: placér først én genstand (en stol) på sin plads ved bordet, vælg den, og gentag så: kopierne går rundt om bordet og vender mod det ligesom den første.
+Ce fichier n’est pas lisible. ¦ Tento soubor nelze přečíst. ¦ Filen kan inte läsas. ¦ Filen kan ikke læses.
+Ce fichier n’est pas une maison LCNDA (⤓ Exporter → 💾 Fichier de la maison). ¦ Tento soubor není dům LCNDA (⤓ Exportovat → 💾 Soubor domu). ¦ Filen är inget LCNDA-hus (⤓ Exportera → 💾 Husets fil). ¦ Filen er ikke et LCNDA-hus (⤓ Eksportér → 💾 Husets fil).
+Le plan dessiné ici sera remplacé par celui du fichier (↶ pour revenir en arrière). ¦ Zde nakreslený plán bude nahrazen plánem ze souboru (↶ pro návrat). ¦ Planen som ritats här ersätts med den i filen (↶ för att gå tillbaka). ¦ Planen, der er tegnet her, erstattes af den i filen (↶ for at gå tilbage).
+Remplacer le plan par celui du fichier ? ¦ Nahradit plán plánem ze souboru? ¦ Ersätta planen med den i filen? ¦ Erstat planen med den i filen?
+Remplacer le plan ¦ Nahradit plán ¦ Ersätt planen ¦ Erstat planen
+Maison importée ¦ Dům importován ¦ Huset importerat ¦ Huset importeret
+Dépose une image, un objet 3D (OBJ, STL, glTF, GLB) ou un fichier de maison. ¦ Přetáhni sem obrázek, 3D předmět (OBJ, STL, glTF, GLB) nebo soubor domu. ¦ Släpp en bild, ett 3D-föremål (OBJ, STL, glTF, GLB) eller en husfil. ¦ Slip et billede, en 3D-genstand (OBJ, STL, glTF, GLB) eller en husfil.
+📁 Que faire de cette image ? ¦ 📁 Co s tímto obrázkem? ¦ 📁 Vad ska göras med bilden? ¦ 📁 Hvad skal der ske med billedet?
+🖼 L’image de ce tableau, de ce cadre ¦ 🖼 Obrázek pro tento obraz, tento rám ¦ 🖼 Bilden för den här tavlan, den här ramen ¦ 🖼 Billedet til dette maleri, denne ramme
+posée sur l’objet choisi, en 2D et en 3D ¦ umístěný na vybraný předmět, ve 2D i 3D ¦ placerad på det valda föremålet, i 2D och 3D ¦ placeret på den valgte genstand, i 2D og 3D
+📐 Un plan ancien, un cadastre, à calquer ¦ 📐 Starý plán, katastr k obkreslení ¦ 📐 En gammal plan, en lantmäterikarta, att kalkera ¦ 📐 En gammel plan, et matrikelkort, at kalkere
+posé en fond, à mettre à l’échelle ¦ umístěný do pozadí, k nastavení měřítka ¦ placerad i bakgrunden, att skala ¦ placeret i baggrunden, til skalering
+🖼 Un objet vu de dessus ¦ 🖼 Předmět viděný shora ¦ 🖼 Ett föremål sett ovanifrån ¦ 🖼 En genstand set ovenfra
+posé sur le plan comme un meuble ¦ umístěný na plán jako nábytek ¦ placerad på planen som en möbel ¦ placeret på planen som et møbel
+🏷 Un souvenir pour ce qui est choisi ¦ 🏷 Vzpomínka pro vybraný prvek ¦ 🏷 Ett minne för det valda ¦ 🏷 Et minde for det valgte
+rattaché au meuble ou à la pièce ¦ propojená s nábytkem nebo místností ¦ kopplat till möbeln eller rummet ¦ forbundet med møblet eller rummet
+Construction de la maison en 3D… ¦ Stavba domu ve 3D… ¦ Bygger huset i 3D… ¦ Bygger huset i 3D…
+Vue 3D indisponible. ¦ 3D zobrazení není k dispozici. ¦ 3D-vyn är inte tillgänglig. ¦ 3D-visningen er ikke tilgængelig.
+Glisser : tourner · clic droit ou ⇧ glisser : déplacer · molette : approcher · ☀️ Lumière : l’heure et la saison · 🚶 Visiter : Z Q S D ou flèches · ✦ : un souvenir ¦ Tažení: otáčet · pravé tlačítko nebo ⇧ tažení: posunout · kolečko: přiblížit · ☀️ Světlo: čas a roční období · 🚶 Prohlídka: W A S D nebo šipky · ✦: vzpomínka ¦ Dra: rotera · högerklick eller ⇧ dra: flytta · mushjul: zooma in · ☀️ Ljus: tid och årstid · 🚶 Besök: W A S D eller pilar · ✦: ett minne ¦ Træk: rotér · højreklik eller ⇧ træk: flyt · hjul: zoom ind · ☀️ Lys: tid og årstid · 🚶 Besøg: W A S D eller pile · ✦: et minde
+Les dernières modifications de la maison seront perdues. ¦ Poslední změny domu se ztratí. ¦ De senaste ändringarna i huset går förlorade. ¦ De seneste ændringer af huset går tabt.
+Fermer sans enregistrer la maison ? ¦ Zavřít dům bez uložení? ¦ Stäng utan att spara huset? ¦ Luk uden at gemme huset?
+Supprimé ¦ Smazáno ¦ Raderat ¦ Slettet
+Dupliqué ¦ Duplikováno ¦ Duplicerat ¦ Duplikeret
+Sens de l’escalier ¦ Směr schodiště ¦ Trappans riktning ¦ Trappens retning
+Tous les escaliers ouvrent déjà le plancher. ¦ Všechna schodiště už strop prorážejí. ¦ Alla trappor öppnar redan bjälklaget. ¦ Alle trapper åbner allerede etageadskillelsen.
+Verrière ajoutée ¦ Prosklená střecha přidána ¦ Glastak tillagt ¦ Glastag tilføjet
+Édicule ajouté ¦ Nástavba přidána ¦ Takhus tillagt ¦ Tagopbygning tilføjet
+Lanterneau ajouté ¦ Světlík přidán ¦ Takljus tillagt ¦ Ovenlys tilføjet
+Fenêtre de toit ajoutée ¦ Střešní okno přidáno ¦ Takfönster tillagt ¦ Tagvindue tilføjet
+Lucarne ajoutée ¦ Vikýř přidán ¦ Takkupa tillagd ¦ Kvist tilføjet
+Chien-assis ajouté ¦ Pultový vikýř přidán ¦ Släpkupa tillagd ¦ Slæbkvist tilføjet
+✓ Elle se voit dans la vue 3D, avec le toit. ¦ ✓ Je vidět v 3D zobrazení i se střechou. ¦ ✓ Den syns i 3D-vyn, med taket. ¦ ✓ Den ses i 3D-visningen sammen med taget.
+Retiré du toit ¦ Odebráno ze střechy ¦ Borttaget från taket ¦ Fjernet fra taget
+Fenêtre de toit ou lucarne retirée ¦ Střešní okno nebo vikýř odebrán ¦ Takfönster eller takkupa borttagen ¦ Tagvindue eller kvist fjernet
+Rien sous cet objet : glisse-le d’abord au-dessus du meuble (une table, une commode…). ¦ Pod tímto předmětem nic není: nejdřív ho přetáhni nad nábytek (stůl, komodu…). ¦ Inget under föremålet: dra det först över möbeln (ett bord, en byrå…). ¦ Intet under genstanden: træk den først hen over møblet (et bord, en kommode…).
+Taille hors limites (de 1 cm à 50 m). ¦ Velikost mimo rozsah (od 1 cm do 50 m). ¦ Storleken utanför gränserna (från 1 cm till 50 m). ¦ Størrelsen uden for grænserne (fra 1 cm til 50 m).
+Agrandi ¦ Zvětšeno ¦ Förstorat ¦ Forstørret
+Réduit ¦ Zmenšeno ¦ Förminskat ¦ Formindsket
+Taille gardée pour ce modèle : les prochains seront posés comme celui-ci. ¦ Velikost uložena pro tento model: další se umístí jako tento. ¦ Storleken sparad för modellen: nästa placeras som den här. ¦ Størrelsen er gemt for modellen: de næste placeres som denne.
+Sens d’ouverture ¦ Směr otevírání ¦ Öppningsriktning ¦ Åbningsretning
+Côté d’ouverture ¦ Strana otevírání ¦ Öppningssida ¦ Åbningsside
+Mur coupé ¦ Zeď rozdělena ¦ Väggen delad ¦ Væggen delt
+＋ Un étage ¦ ＋ Patro ¦ ＋ En våning ¦ ＋ En etage
+Hauteur sous plafond ¦ Světlá výška ¦ Takhöjd ¦ Lofthøjde
+Gérer les étages… ¦ Spravovat patra… ¦ Hantera våningar… ¦ Administrér etager…
+Renommer, hauteur sous plafond, supprimer ¦ Přejmenovat, světlá výška, smazat ¦ Byt namn, takhöjd, radera ¦ Omdøb, lofthøjde, slet
+Ajouter un étage… ¦ Přidat patro… ¦ Lägg till en våning… ¦ Tilføj en etage…
+Les étages ¦ Patra ¦ Våningarna ¦ Etagerne
+Du plus haut au plus bas. Renomme, change la hauteur, ou supprime un étage (avec tout ce qu’il contient). ¦ Od nejvyššího po nejnižší. Přejmenuj, změň výšku nebo smaž patro (se vším, co obsahuje). ¦ Från högsta till lägsta. Byt namn, ändra höjden eller radera en våning (med allt som finns där). ¦ Fra øverst til nederst. Omdøb, skift højden, eller slet en etage (med alt, hvad den indeholder).
+Niveau ¦ Úroveň ¦ Nivå ¦ Niveau
+Il faut au moins un étage. ¦ Je potřeba aspoň jedno patro. ¦ Minst en våning behövs. ¦ Der skal være mindst én etage.
+{names} supprimés avec ce qu’ils contenaient ¦ {names} smazána i s obsahem ¦ {names} raderade med sitt innehåll ¦ {names} slettet med deres indhold
+{names} supprimé avec ce qu’il contenait ¦ {names} smazáno i s obsahem ¦ {names} raderad med sitt innehåll ¦ {names} slettet med sit indhold
+Étage supprimé ¦ Patro smazáno ¦ Våningen raderad ¦ Etagen slettet
+Étage renommé ¦ Patro přejmenováno ¦ Våningen har bytt namn ¦ Etagen omdøbt
+Renommer l’étage ¦ Přejmenovat patro ¦ Byt namn på våningen ¦ Omdøb etagen
+✥ Glisse le plan ancien (sur un endroit vide du plan) ; reclique « ✥ Déplacer » pour finir. ¦ ✥ Přetáhni starý plán (na prázdném místě plánu); pro dokončení znovu klikni na „✥ Přesunout“. ¦ ✥ Dra den gamla planen (på en tom plats på planen); klicka på ”✥ Flytta” igen för att avsluta. ¦ ✥ Træk den gamle plan (på et tomt sted på planen); klik på »✥ Flyt« igen for at afslutte.
+Plan ancien retiré ¦ Starý plán odebrán ¦ Den gamla planen borttagen ¦ Den gamle plan fjernet
+Plan ancien retiré du fond (l’image reste dans les médias) ¦ Starý plán odebrán z pozadí (obrázek zůstává v médiích) ¦ Den gamla planen borttagen från bakgrunden (bilden ligger kvar i media) ¦ Den gamle plan fjernet fra baggrunden (billedet bliver i medier)
+Plan ancien sous cet étage ¦ Starý plán pod tímto patrem ¦ Gammal plan under våningen ¦ Gammel plan under etagen
+Plan ancien ¦ Starý plán ¦ Gammal plan ¦ Gammel plan
+Plan ancien verrouillé ¦ Starý plán zamčen ¦ Den gamla planen låst ¦ Den gamle plan låst
+Plan ancien déverrouillé ¦ Starý plán odemčen ¦ Den gamla planen upplåst ¦ Den gamle plan låst op
+Un habitant de la maison ¦ Obyvatel domu ¦ En invånare i huset ¦ En beboer i huset
+Habitant ajouté ¦ Obyvatel přidán ¦ Invånare tillagd ¦ Beboer tilføjet
+Habitant retiré ¦ Obyvatel odebrán ¦ Invånare borttagen ¦ Beboer fjernet
+Une personne liée à cette pièce ¦ Osoba propojená s touto místností ¦ En person kopplad till rummet ¦ En person forbundet med rummet
+Personne liée à la pièce ¦ Osoba propojena s místností ¦ Person kopplad till rummet ¦ Person forbundet med rummet
+Le plan est vide. ¦ Plán je prázdný. ¦ Planen är tom. ¦ Planen er tom.
+Fenêtre bloquée. ¦ Okno zablokováno. ¦ Fönstret blockerades. ¦ Vinduet blev blokeret.
+Ce recensement n’est relié à aucune fiche. ¦ Toto sčítání není propojeno s žádnou kartou. ¦ Folkräkningen är inte kopplad till någon post. ¦ Folketællingen er ikke forbundet med nogen post.
+Recensement retiré ¦ Sčítání odebráno ¦ Folkräkningen borttagen ¦ Folketællingen fjernet
+Personne retirée ¦ Osoba odebrána ¦ Personen borttagen ¦ Personen fjernet
+Souvenir retiré ¦ Vzpomínka odebrána ¦ Minnet borttaget ¦ Mindet fjernet
+Légende des époques ¦ Legenda období ¦ Teckenförklaring för perioder ¦ Signaturforklaring for perioder
+Personnes de la pièce ¦ Osoby místnosti ¦ Personer i rummet ¦ Personer i rummet
+Flèche ajoutée ¦ Šipka přidána ¦ Pil tillagd ¦ Pil tilføjet
+Flèche retirée ¦ Šipka odebrána ¦ Pil borttagen ¦ Pil fjernet
+Lumière ¦ Světlo ¦ Ljus ¦ Lys
+Années de la personne ¦ Roky osoby ¦ Personens år ¦ Personens år
+Recensement rattaché à l’époque ¦ Sčítání propojeno s obdobím ¦ Folkräkning kopplad till perioden ¦ Folketælling forbundet med perioden
+Revêtement du mur ¦ Obklad zdi ¦ Väggbeklädnad ¦ Vægbeklædning
+Murs de la pièce ¦ Zdi místnosti ¦ Rummets väggar ¦ Rummets vægge
+Autre époque en 3D ¦ Jiné období ve 3D ¦ Annan period i 3D ¦ Anden periode i 3D
+📍 Un arrêt de la visite guidée ¦ 📍 Zastávka prohlídky ¦ 📍 Ett stopp i den guidade turen ¦ 📍 Et stop på rundvisningen
+Ce qu’on dit ici (lu à voix haute pendant la visite guidée) : ¦ Co se tu říká (čte se nahlas během prohlídky): ¦ Vad som sägs här (läses upp under den guidade turen): ¦ Hvad der siges her (læses højt under rundvisningen):
+Ici, la salle commune : on y veillait l’hiver… ¦ Tady je světnice: v zimě se tu sedávalo po večerech… ¦ Här är allrummet: här satt man om vinterkvällarna… ¦ Her er dagligstuen: her sad man om vinteraftenerne…
+Ajouter l’arrêt ¦ Přidat zastávku ¦ Lägg till stoppet ¦ Tilføj stoppet
+MAISON · PHOTO D’ÉPOQUE ¦ DŮM · DOBOVÁ FOTKA ¦ HUS · TIDSFOTO ¦ HUS · TIDSBILLEDE
+La photo prise d’ici ¦ Fotka pořízená odsud ¦ Fotot taget härifrån ¦ Fotoet taget herfra
+La photo ancienne prise à cet endroit, dans cette direction : tu pourras la comparer avec la maison (curseur Autrefois ⟷ Aujourd’hui). ¦ Stará fotka pořízená na tomto místě v tomto směru: můžeš ji porovnat s domem (posuvník Dříve ⟷ Dnes). ¦ Det gamla fotot taget på den här platsen, i den här riktningen: du kan jämföra det med huset (reglaget Förr ⟷ Nu). ¦ Det gamle foto taget på dette sted i denne retning: du kan sammenligne det med huset (skyderen Før ⟷ Nu).
+Poser la photo ¦ Umístit fotku ¦ Placera fotot ¦ Placér fotoet
+Cette image ne peut pas servir ici. ¦ Tento obrázek tu nelze použít. ¦ Bilden kan inte användas här. ¦ Billedet kan ikke bruges her.
+Photo d’époque ¦ Dobová fotka ¦ Tidsfoto ¦ Tidsbillede
+Photo d’époque posée ¦ Dobová fotka umístěna ¦ Tidsfoto placerat ¦ Tidsbillede placeret
+Le nord du plan : clic pour le régler (☀️ Orientation et lumière) ¦ Sever plánu: kliknutím ho nastavíš (☀️ Orientace a světlo) ¦ Planens norr: klicka för att ställa in (☀️ Orientering och ljus) ¦ Planens nord: klik for at indstille (☀️ Orientering og lys)
+Aucune maison ne correspond. ¦ Žádný dům neodpovídá. ¦ Inget hus matchar. ¦ Intet hus passer.
+Époques ¦ Období ¦ Perioder ¦ Perioder
+🏰 Notice Mérimée (patrimoine)… ¦ 🏰 Záznam Mérimée (památky)… ¦ 🏰 Mérimée-post (kulturarv)… ¦ 🏰 Mérimée-post (kulturarv)…
+🏠 Maisons ¦ 🏠 Domy ¦ 🏠 Hus ¦ 🏠 Huse
+Les plans des maisons de la famille, en 2D et en 3D : leurs pièces, leurs meubles, leurs habitants, leurs recensements, leurs époques et leurs souvenirs. ¦ Plány rodinných domů ve 2D a 3D: jejich místnosti, nábytek, obyvatelé, sčítání, období a vzpomínky. ¦ Planer över familjens hus, i 2D och 3D: rum, möbler, invånare, folkräkningar, perioder och minnen. ¦ Planer over familiens huse i 2D og 3D: rum, møbler, beboere, folketællinger, perioder og minder.
+Renommer la maison ¦ Přejmenovat dům ¦ Byt namn på huset ¦ Omdøb huset
+Ouvrir la maison ¦ Otevřít dům ¦ Öppna huset ¦ Åbn huset
+↗ Ouvrir la maison ¦ ↗ Otevřít dům ¦ ↗ Öppna huset ¦ ↗ Åbn huset
+Cette maison est déjà rattachée. ¦ Tento dům už je propojen. ¦ Huset är redan kopplat. ¦ Huset er allerede forbundet.
+🏠 Maison ¦ 🏠 Dům ¦ 🏠 Hus ¦ 🏠 Hus
+Enregistre d’abord le recensement : tu pourras ensuite lui rattacher la maison où vivait le foyer (et l’époque de la maison). ¦ Nejdřív ulož sčítání: pak k němu můžeš propojit dům, kde domácnost žila (a období domu). ¦ Spara folkräkningen först: sedan kan du koppla den till huset där hushållet bodde (och husets period). ¦ Gem folketællingen først: så kan du forbinde den med huset, hvor husstanden boede (og husets periode).
+Détacher la maison de ce recensement ¦ Odpojit dům od tohoto sčítání ¦ Koppla bort huset från folkräkningen ¦ Fjern forbindelsen mellem huset og folketællingen
+Relier une maison : nom, lieu… ¦ Propojit dům: název, místo… ¦ Koppla ett hus: namn, plats… ¦ Forbind et hus: navn, sted…
+Époque de la maison ¦ Období domu ¦ Husets period ¦ Husets periode
+Dessiner la maison de ce foyer ¦ Nakreslit dům této domácnosti ¦ Rita hushållets hus ¦ Tegn husstandens hus
+Rattachée tout de suite (sans attendre « Enregistrer »). Dans la maison : onglet Maison → « 📋 Les recensements ». ¦ Propojeno hned (bez čekání na „Uložit“). V domě: karta Dům → „📋 Sčítání lidu“. ¦ Kopplad direkt (utan att vänta på ”Spara”). I huset: fliken Hus → ”📋 Folkräkningarna”. ¦ Forbundet med det samme (uden at vente på »Gem«). I huset: fanen Hus → »📋 Folketællingerne«.
+— époque de la maison — ¦ — období domu — ¦ — husets period — ¦ — husets periode —
+Le recensement a des changements non enregistrés. ¦ Sčítání má neuložené změny. ¦ Folkräkningen har osparade ändringar. ¦ Folketællingen har ikke-gemte ændringer.
+Ouvrir la maison quand même ? ¦ Přesto otevřít dům? ¦ Öppna huset ändå? ¦ Åbn huset alligevel?
+Maison détachée du recensement. ¦ Dům odpojen od sčítání. ¦ Huset bortkopplat från folkräkningen. ¦ Huset er ikke længere forbundet med folketællingen.
+Choisis une maison. ¦ Vyber dům. ¦ Välj ett hus. ¦ Vælg et hus.
+Maison rattachée au recensement. ¦ Dům propojen se sčítáním. ¦ Huset kopplat till folkräkningen. ¦ Huset er forbundet med folketællingen.
+La longueur et la largeur de tout l’étage, sous le plan et à sa gauche (en plus des cotes de chaque mur). ¦ Délka a šířka celého patra, pod plánem a vlevo od něj (navíc ke kótám jednotlivých zdí). ¦ Hela våningens längd och bredd, under planen och till vänster om den (utöver varje väggs mått). ¦ Hele etagens længde og bredde, under planen og til venstre for den (ud over hver vægs mål).
+Un tableau posé à droite du plan : chaque pièce et sa surface, et le total. Il se met à jour tout seul et part avec le plan (image, PDF, impression). ¦ Tabulka vpravo od plánu: každá místnost a její plocha a celkový součet. Aktualizuje se sama a jde s plánem (obrázek, PDF, tisk). ¦ En tabell till höger om planen: varje rum och dess yta, och summan. Den uppdateras av sig själv och följer med planen (bild, PDF, utskrift). ¦ En tabel til højre for planen: hvert rum og dets areal, og summen. Den opdaterer sig selv og følger med planen (billede, PDF, udskrift).
+Le cadre en bas à droite des vrais plans : le nom de la maison, le lieu, l’époque, l’étage et la date du jour. ¦ Rámeček vpravo dole jako na skutečných plánech: název domu, místo, období, patro a dnešní datum. ¦ Rutan nere till höger på riktiga planer: husets namn, platsen, perioden, våningen och dagens datum. ¦ Feltet nederst til højre på rigtige planer: husets navn, stedet, perioden, etagen og dagens dato.
+Le plan en clair sur fond sombre, comme dans un logiciel de dessin technique. Seulement à l’écran : les images, PDF et impressions restent sur fond blanc. ¦ Plán ve světlých čarách na tmavém pozadí, jako v programu pro technické kreslení. Jen na obrazovce: obrázky, PDF a tisky zůstávají na bílém pozadí. ¦ Planen i ljusa linjer på mörk bakgrund, som i ett tekniskt ritprogram. Bara på skärmen: bilder, PDF:er och utskrifter förblir på vit bakgrund. ¦ Planen i lyse streger på mørk baggrund, som i et teknisk tegneprogram. Kun på skærmen: billeder, PDF’er og udskrifter forbliver på hvid baggrund.
+L’étage du dessous (ou du dessus) apparaît en transparence sous celui-ci : pratique pour poser les murs du 1er étage juste au-dessus de ceux du rez-de-chaussée. 🕰 Une autre époque : le même étage, tel qu’il était (ou sera), en sépia. ¦ Patro pod (nebo nad) prosvítá pod tímto: praktické pro umístění zdí 1. patra přesně nad zdi přízemí. 🕰 Jiné období: stejné patro, jak bylo (nebo bude), v sépiovém tónu. ¦ Våningen under (eller ovanför) syns genomskinligt under den här: praktiskt för att placera väggarna på våning 1 precis ovanför bottenvåningens. 🕰 En annan period: samma våning, som den var (eller blir), i sepia. ¦ Etagen nedenunder (eller ovenover) ses gennemsigtigt under denne: praktisk til at placere 1. sals vægge lige over stueetagens. 🕰 En anden periode: samme etage, som den var (eller bliver), i sepia.
+Clique les deux bouts d’une longueur connue sur l’image (un mur, l’échelle du plan), puis donne sa vraie longueur : en mètres, ou en toises et pieds anciens (convertis tout seuls). ¦ Klikni na oba konce známé délky na obrázku (zeď, měřítko plánu) a pak zadej její skutečnou délku: v metrech nebo ve starých sázích a stopách (převedou se samy). ¦ Klicka på båda ändarna av en känd längd i bilden (en vägg, planens skala) och ange sedan den verkliga längden: i meter, eller i gamla toiser och fot (omvandlas automatiskt). ¦ Klik på begge ender af en kendt længde på billedet (en væg, planens skala), og angiv så den faktiske længde: i meter eller i gamle toiser og fod (omregnes automatisk).
+Le plafond suit la pente du toit (vue 3D, coupe, visite) ; la surface « loi Carrez » ne compte que là où la hauteur fait au moins 1,80 m. ¦ Strop sleduje sklon střechy (3D zobrazení, řez, prohlídka); plocha podle „zákona Carrez“ se počítá jen tam, kde je výška aspoň 1,80 m. ¦ Innertaket följer takets lutning (3D-vy, sektion, besök); ytan enligt ”Carrez-lagen” räknas bara där höjden är minst 1,80 m. ¦ Loftet følger tagets hældning (3D-visning, snit, besøg); arealet efter »Carrez-loven« tæller kun, hvor højden er mindst 1,80 m.
+Le mur bas sous la pente (le « jambage ») : 0 si le toit part du plancher, 100 cm souvent. ¦ Nízká zeď pod sklonem („nadezdívka“): 0, pokud střecha začíná u podlahy, často 100 cm. ¦ Den låga väggen under lutningen (”knäväggen”): 0 om taket börjar vid golvet, ofta 100 cm. ¦ Den lave væg under hældningen (»skunkvæggen«): 0, hvis taget starter ved gulvet, ofte 100 cm.
+Pour une maison en L, en T ou en U : un toit par aile, à la même pente ; les noues (là où deux toits se rejoignent) se font toutes seules. Les ailes suivent les pièces de l’étage du haut. ¦ Pro dům do L, T nebo U: střecha pro každé křídlo se stejným sklonem; úžlabí (kde se dvě střechy setkávají) se vytvoří samo. Křídla sledují místnosti nejvyššího patra. ¦ För ett L-, T- eller U-format hus: ett tak per flygel, med samma lutning; vinkelrännorna (där två tak möts) görs automatiskt. Flyglarna följer rummen på översta våningen. ¦ For et L-, T- eller U-formet hus: ét tag pr. fløj med samme hældning; skotrenderne (hvor to tage mødes) laves automatisk. Fløjene følger rummene på den øverste etage.
+Tourne le plan par rapport au nord : 0° = le haut du plan est au nord, 90° = le haut du plan regarde l’est. Le soleil et les ombres de la vue 3D suivent. ¦ Otočí plán vůči severu: 0° = horní okraj plánu je na severu, 90° = horní okraj plánu míří na východ. Slunce a stíny 3D zobrazení se přizpůsobí. ¦ Vrider planen i förhållande till norr: 0° = planens överkant är mot norr, 90° = planens överkant vetter mot öster. Solen och skuggorna i 3D-vyn följer. ¦ Drejer planen i forhold til nord: 0° = planens overkant er mod nord, 90° = planens overkant vender mod øst. Solen og skyggerne i 3D-visningen følger med.
+La hauteur de tes yeux pendant la visite (🚶 Visiter, vue 3D) : 1,60 m pour un adulte, 1 m pour voir comme un enfant. ¦ Výška tvých očí během prohlídky (🚶 Prohlídka, 3D zobrazení): 1,60 m pro dospělého, 1 m, abys viděl(a) jako dítě. ¦ Höjden på dina ögon under besöket (🚶 Besök, 3D-vy): 1,60 m för en vuxen, 1 m för att se som ett barn. ¦ Højden på dine øjne under besøget (🚶 Besøg, 3D-visning): 1,60 m for en voksen, 1 m for at se som et barn.
+La hauteur de tes yeux dans la maison : 1,60 m pour un adulte, 1 m pour voir comme un enfant. ¦ Výška tvých očí v domě: 1,60 m pro dospělého, 1 m, abys viděl(a) jako dítě. ¦ Höjden på dina ögon i huset: 1,60 m för en vuxen, 1 m för att se som ett barn. ¦ Højden på dine øjne i huset: 1,60 m for en voksen, 1 m for at se som et barn.
+De combien le milieu du mur sort de la ligne droite : + d’un côté, − de l’autre ; 0 = un mur droit. Pour une tour ronde, une abside, un mur cintré. ¦ O kolik se střed zdi vyklenuje z přímky: + na jednu stranu, − na druhou; 0 = rovná zeď. Pro kulatou věž, apsidu, zakřivenou zeď. ¦ Hur mycket väggens mitt buktar ut från den raka linjen: + åt ena hållet, − åt andra; 0 = en rak vägg. För ett runt torn, en absid, en bågformad vägg. ¦ Hvor meget væggens midte bugter ud fra den lige linje: + til den ene side, − til den anden; 0 = en lige væg. Til et rundt tårn, en apsis, en buet væg.
+Agrandit ou rapetisse le motif (briques, pierres, papier peint) sur ce mur : 100 % = taille réelle. ¦ Zvětší nebo zmenší vzor (cihly, kameny, tapeta) na této zdi: 100 % = skutečná velikost. ¦ Förstorar eller förminskar mönstret (tegel, sten, tapet) på väggen: 100 % = verklig storlek. ¦ Forstørrer eller formindsker mønstret (mursten, sten, tapet) på væggen: 100 % = faktisk størrelse.
+La hauteur du bas de la fenêtre au-dessus du plancher (souvent 90 cm). ¦ Výška spodní hrany okna nad podlahou (často 90 cm). ¦ Höjden från golvet till fönstrets underkant (ofta 90 cm). ¦ Højden fra gulvet til vinduets underkant (ofte 90 cm).
+Une zone sans plancher : on voit l’étage du dessous (mezzanine, séjour en double hauteur, cage d’escalier). En 3D le plancher est percé, et pendant la visite on ne peut pas y marcher. ¦ Oblast bez podlahy: je vidět patro pod ní (galerie, obývací pokoj s dvojnásobnou výškou, schodišťový prostor). Ve 3D je podlaha proražená a při prohlídce se po ní nedá chodit. ¦ Ett område utan bjälklag: man ser våningen under (loftgång, vardagsrum med dubbel takhöjd, trapphus). I 3D är bjälklaget öppet, och under besöket kan man inte gå där. ¦ Et område uden gulv: man ser etagen nedenunder (hems, stue med dobbelt højde, trappeopgang). I 3D er gulvet åbent, og under besøget kan man ikke gå der.
+Posé tout seul le long des bords du vide qui ne touchent pas un mur (et laissé ouvert là où arrive un escalier). ¦ Umístí se samo podél okrajů volného prostoru, které se nedotýkají zdi (a zůstane otevřené tam, kde ústí schodiště). ¦ Sätts automatiskt längs den öppna ytans kanter som inte rör en vägg (och lämnas öppet där en trappa kommer upp). ¦ Placeres automatisk langs det åbne rums kanter, der ikke rører en væg (og efterlades åbent, hvor en trappe kommer op).
+En déplaçant la pièce, ses murs (portes et fenêtres comprises), ses meubles et ses textes suivent. ⇧ en glissant : la pièce seule. ¦ Při přesunu místnosti se s ní pohybují zdi (včetně dveří a oken), nábytek a texty. ⇧ při tažení: jen místnost. ¦ När rummet flyttas följer väggarna (dörrar och fönster inräknade), möblerna och texterna med. ⇧ när du drar: bara rummet. ¦ Når rummet flyttes, følger væggene (inkl. døre og vinduer), møblerne og teksterne med. ⇧ mens du trækker: kun rummet.
+La hauteur à monter : celle de l’étage plus l’épaisseur du plancher (réglée dans l’onglet Maison). Décoche pour la fixer à la main dans « Hauteur ». ¦ Výška k vystoupání: výška patra plus tloušťka stropu (nastavená na kartě Dům). Zruš zaškrtnutí a zadej ji ručně v „Výška“. ¦ Höjden att gå upp: våningens höjd plus bjälklagets tjocklek (inställd i fliken Hus). Avmarkera för att ange den för hand i ”Höjd”. ¦ Højden, der skal op: etagens højde plus etageadskillelsens tykkelse (indstillet i fanen Hus). Fjern fluebenet for at angive den i hånden i »Højde«.
+Perce le plancher de l’étage du dessus au-dessus de l’escalier (la trémie), avec un garde-corps autour sauf du côté de l’arrivée. ¦ Prorazí strop do patra nad schodištěm (otvor) se zábradlím kolem, kromě strany výstupu. ¦ Öppnar bjälklaget till våningen ovanför trappan (trapphålet), med ett räcke runt om utom på ankomstsidan. ¦ Åbner etageadskillelsen til etagen over trappen (trappehullet) med et rækværk rundt om undtagen på ankomstsiden.
+La hauteur du dessous de l’objet au-dessus du plancher : 0 pour un meuble posé au sol, 140 pour une horloge accrochée au mur. ¦ Výška spodku předmětu nad podlahou: 0 pro nábytek na zemi, 140 pro hodiny zavěšené na zdi. ¦ Höjden från golvet till föremålets underkant: 0 för en möbel på golvet, 140 för en klocka som hänger på väggen. ¦ Højden fra gulvet til genstandens underkant: 0 for et møbel på gulvet, 140 for et ur, der hænger på væggen.
+Agrandit ou réduit l’objet en gardant ses proportions : pratique pour un modèle importé arrivé trop petit ou trop grand. ¦ Zvětší nebo zmenší předmět se zachováním proporcí: praktické pro importovaný model, který je příliš malý nebo velký. ¦ Förstorar eller förminskar föremålet med bibehållna proportioner: praktiskt för en importerad modell som kom för liten eller för stor. ¦ Forstørrer eller formindsker genstanden med bevarede proportioner: praktisk for en importeret model, der kom for lille eller for stor.
+Une flèche du texte vers un point du plan (le puits, une fenêtre, une cheminée…). Glisse la poignée rouge pour la pointer. ¦ Šipka od textu k bodu na plánu (studna, okno, krb…). Přetažením červeného úchytu ji namiř. ¦ En pil från texten till en punkt på planen (brunnen, ett fönster, en öppen spis…). Dra det röda handtaget för att rikta den. ¦ En pil fra teksten til et punkt på planen (brønden, et vindue, en pejs…). Træk det røde håndtag for at pege med den.
+Quand l’aimant des angles est mis, un mur tracé se cale sur des angles de ce pas : 90° = seulement des angles droits, 45° = aussi les diagonales, 15° = plus fin. ¦ Když je zapnuté přichytávání úhlů, kreslená zeď se zarovná na úhly s tímto krokem: 90° = jen pravé úhly, 45° = i úhlopříčky, 15° = jemněji. ¦ När vinkelfästning är på låses en ritad vägg till vinklar med det här steget: 90° = bara räta vinklar, 45° = även diagonaler, 15° = finare. ¦ Når vinkelfastgørelse er slået til, låses en tegnet væg til vinkler med dette trin: 90° = kun rette vinkler, 45° = også diagonaler, 15° = finere.
+Glisse : la maison prend l’époque la plus proche de l’année (avant ou égale). ¦ Posuň: dům převezme období nejbližší danému roku (dřívější nebo stejné). ¦ Dra: huset tar den period som ligger närmast året (före eller lika). ¦ Træk: huset tager den periode, der ligger nærmest året (før eller lig med).
+Tourne le plan par rapport au nord : 0° = le haut du plan est au nord, 90° = le haut du plan regarde l’est. Les ombres suivent. ¦ Otočí plán vůči severu: 0° = horní okraj plánu je na severu, 90° = horní okraj plánu míří na východ. Stíny se přizpůsobí. ¦ Vrider planen i förhållande till norr: 0° = planens överkant är mot norr, 90° = planens överkant vetter mot öster. Skuggorna följer. ¦ Drejer planen i forhold til nord: 0° = planens overkant er mod nord, 90° = planens overkant vender mod øst. Skyggerne følger med.
+Licence : {x} ¦ Licence: {x} ¦ Licens: {x} ¦ Licens: {x}
+Auteur : {x} ¦ Autor: {x} ¦ Upphovsperson: {x} ¦ Ophavsperson: {x}
+Source : {x} ¦ Zdroj: {x} ¦ Källa: {x} ¦ Kilde: {x}
+🕰 ancien ¦ 🕰 starý ¦ 🕰 gammalt ¦ 🕰 gammelt
+Forme « {name} » ¦ Tvar „{name}“ ¦ Form ”{name}” ¦ Form »{name}«
+{w} × {d} cm, {h} cm de haut, à {elev} cm du sol ¦ {w} × {d} cm, výška {h} cm, {elev} cm nad podlahou ¦ {w} × {d} cm, {h} cm hög, {elev} cm över golvet ¦ {w} × {d} cm, {h} cm høj, {elev} cm over gulvet
+{w} × {d} cm, {h} cm de haut ¦ {w} × {d} cm, výška {h} cm ¦ {w} × {d} cm, {h} cm hög ¦ {w} × {d} cm, {h} cm høj
+{name} (à moi) ¦ {name} (můj) ¦ {name} (min) ¦ {name} (min)
+Comme « {name} » ¦ Jako „{name}“ ¦ Som ”{name}” ¦ Som »{name}«
+Supprimer l’objet « {name} » de la bibliothèque ? ¦ Smazat předmět „{name}“ z knihovny? ¦ Radera föremålet ”{name}” från biblioteket? ¦ Slet genstanden »{name}« fra biblioteket?
+« {name} » est dans « {cat} » : clique-le pour le poser. ¦ „{name}“ je v „{cat}“: klikni na něj a umísti ho. ¦ ”{name}” finns i ”{cat}”: klicka på det för att placera det. ¦ »{name}« ligger i »{cat}«: klik på den for at placere den.
+Supprimer « {name} » de « Mes objets » ? ¦ Smazat „{name}“ z „Moje předměty“? ¦ Radera ”{name}” från ”Mina föremål”? ¦ Slet »{name}« fra »Mine genstande«?
+Des modèles 3D <b>libres de droit</b> (CC0 : domaine public, utilisables sans condition) à poser dans tes maisons. Ils arrivent dans <b>Mobilier → « Mes objets »</b>, avec leur licence, leur auteur et leur source. ¦ 3D modely <b>bez autorských omezení</b> (CC0: volné dílo, použitelné bez podmínek) k umístění do tvých domů. Objeví se v <b>Nábytek → „Moje předměty“</b> s licencí, autorem a zdrojem. ¦ <b>Fria</b> 3D-modeller (CC0: allmän egendom, kan användas utan villkor) att placera i dina hus. De hamnar i <b>Möbler → ”Mina föremål”</b>, med licens, upphovsperson och källa. ¦ <b>Frie</b> 3D-modeller (CC0: offentlig ejendom, kan bruges uden betingelser) til dine huse. De havner i <b>Møbler → »Mine genstande«</b> med licens, ophavsperson og kilde.
+Modèles fournis par {ph} (Powered by Poly Haven) — licence {cc0}. Le téléchargement passe par ton serveur (environ 1 à 10 Mo par modèle, textures comprises). ¦ Modely poskytuje {ph} (Powered by Poly Haven) — licence {cc0}. Stahování jde přes tvůj server (asi 1 až 10 MB na model včetně textur). ¦ Modeller från {ph} (Powered by Poly Haven) — licens {cc0}. Nedladdningen går via din server (ungefär 1 till 10 MB per modell, texturer inräknade). ¦ Modeller leveret af {ph} (Powered by Poly Haven) — licens {cc0}. Hentningen går via din server (omkring 1 til 10 MB pr. model inkl. teksturer).
+Télécharge d’abord un pack <b>CC0</b> sur le site de son auteur (un fichier .zip), puis choisis-le ici : tu coches les modèles à garder (GLB, glTF, OBJ, STL). ¦ Nejdřív stáhni balíček <b>CC0</b> z webu autora (soubor .zip), pak ho vyber zde: zaškrtni modely, které chceš ponechat (GLB, glTF, OBJ, STL). ¦ Ladda först ner ett <b>CC0</b>-paket från upphovspersonens webbplats (en .zip-fil), välj det sedan här: markera modellerna du vill behålla (GLB, glTF, OBJ, STL). ¦ Hent først en <b>CC0</b>-pakke fra ophavspersonens websted (en .zip-fil), og vælg den så her: markér de modeller, du vil beholde (GLB, glTF, OBJ, STL).
+{models} (les {n} plus téléchargés sur {total}) ¦ {models} ({n} nejstahovanějších z {total}) ¦ {models} (de {n} mest nedladdade av {total}) ¦ {models} (de {n} mest hentede af {total})
+« {name} » est dans Mobilier → « Mes objets » (CC0, Poly Haven). ¦ „{name}“ je v Nábytek → „Moje předměty“ (CC0, Poly Haven). ¦ ”{name}” finns i Möbler → ”Mina föremål” (CC0, Poly Haven). ¦ »{name}« ligger i Møbler → »Mine genstande« (CC0, Poly Haven).
+Licence trouvée dans le pack ¦ Licence nalezená v balíčku ¦ Licens hittad i paketet ¦ Licens fundet i pakken
+Mesure et vignettes… ¦ Měření a miniatury… ¦ Mätning och miniatyrer… ¦ Måling og miniaturer…
+{models} dans « Mes objets ». ¦ {models} v „Moje předměty“. ¦ {models} i ”Mina föremål”. ¦ {models} i »Mine genstande«.
+Renommer, ranger, voir la licence, supprimer ¦ Přejmenovat, zařadit, zobrazit licenci, smazat ¦ Byt namn, sortera, visa licensen, radera ¦ Omdøb, sortér, se licensen, slet
+Modifier ou supprimer cet objet ¦ Upravit nebo smazat tento předmět ¦ Redigera eller radera föremålet ¦ Rediger eller slet genstanden
+Rien ne correspond. ＋ Crée l’objet, ou cherche-le dans la 📦 Bibliothèque en ligne. ¦ Nic neodpovídá. ＋ Vytvoř předmět nebo ho hledej v 📦 Online knihovně. ¦ Inget matchar. ＋ Skapa föremålet, eller sök det i 📦 Bibliotek på nätet. ¦ Intet passer. ＋ Opret genstanden, eller søg efter den i 📦 Bibliotek på nettet.
+Ici : les objets que tu crées (＋ Créer un objet), ceux téléchargés dans la 📦 Bibliothèque en ligne, et les fichiers 3D importés (⤒ Importer, en haut). ¦ Zde: předměty, které vytvoříš (＋ Vytvořit předmět), stažené z 📦 Online knihovny a importované 3D soubory (⤒ Importovat, nahoře). ¦ Här: föremålen du skapar (＋ Skapa ett föremål), de som laddats ner från 📦 Bibliotek på nätet, och importerade 3D-filer (⤒ Importera, högst upp). ¦ Her: de genstande, du opretter (＋ Opret en genstand), dem, der er hentet fra 📦 Bibliotek på nettet, og importerede 3D-filer (⤒ Importér, øverst).
+Rien d’ancien dans cette catégorie (décoche « 🕰 Ancien seulement »). ¦ V této kategorii nic starého není (zruš „🕰 Jen staré“). ¦ Inget gammalt i den här kategorin (avmarkera ”🕰 Bara gammalt”). ¦ Intet gammelt i denne kategori (fjern fluebenet ved »🕰 Kun gammelt«).
+Aucun objet montré dans cette catégorie (⚙️ Ranger pour en remontrer). ¦ V této kategorii se nezobrazuje žádný předmět (⚙️ Zařadit pro opětovné zobrazení). ¦ Inga föremål visas i den här kategorin (⚙️ Sortera för att visa några igen). ¦ Ingen genstande vises i denne kategori (⚙️ Sortér for at vise nogle igen).
+Chercher… lit, lampe, piano, vache, salon… ¦ Hledat… postel, lampa, klavír, kráva, obývák… ¦ Sök… säng, lampa, piano, ko, vardagsrum… ¦ Søg… seng, lampe, klaver, ko, stue…
+Chercher un objet ¦ Hledat předmět ¦ Sök ett föremål ¦ Søg en genstand
+Un objet à toi : nom, taille, couleur, forme, image ¦ Vlastní předmět: název, velikost, barva, tvar, obrázek ¦ Ett eget föremål: namn, storlek, färg, form, bild ¦ En egen genstand: navn, størrelse, farve, form, billede
+Des modèles 3D libres de droit (CC0) à télécharger ¦ 3D modely bez autorských omezení (CC0) ke stažení ¦ Fria 3D-modeller (CC0) att ladda ner ¦ Frie 3D-modeller (CC0) at hente
+Montrer, cacher, ranger les catégories et les objets ¦ Zobrazit, skrýt, seřadit kategorie a předměty ¦ Visa, dölj, sortera kategorier och föremål ¦ Vis, skjul, sortér kategorier og genstande
+Ne montrer que le mobilier et les objets d’autrefois ¦ Zobrazit jen starý nábytek a předměty ¦ Visa bara möbler och föremål från förr ¦ Vis kun møbler og genstande fra gamle dage
+＋ Créer un objet ¦ ＋ Vytvořit předmět ¦ ＋ Skapa ett föremål ¦ ＋ Opret en genstand
+📦 Bibliothèque en ligne ¦ 📦 Online knihovna ¦ 📦 Bibliotek på nätet ¦ 📦 Bibliotek på nettet
+⚙️ Ranger ¦ ⚙️ Zařadit ¦ ⚙️ Sortera ¦ ⚙️ Sortér
+🕰 Ancien seulement ¦ 🕰 Jen staré ¦ 🕰 Bara gammalt ¦ 🕰 Kun gammelt
+Ovale ¦ Ovál ¦ Oval ¦ Oval
+Triangle ¦ Trojúhelník ¦ Triangel ¦ Trekant
+En L ¦ Do L ¦ L-format ¦ L-formet
+Lit simple ¦ Jednolůžko ¦ Enkelsäng ¦ Enkeltseng
+Lit clos ¦ Skříňové lůžko ¦ Skåpsäng ¦ Alkoveseng
+Meuble à portes ¦ Skříňka s dvířky ¦ Skåp med dörrar ¦ Skab med døre
+Banc-coffre à dossier ¦ Lavice s truhlou a opěradlem ¦ Kistsoffa med ryggstöd ¦ Kistebænk med ryglæn
+Horloge ¦ Hodiny ¦ Klocka ¦ Ur
+Cheminée à manteau ¦ Krb s římsou ¦ Öppen spis med kappa ¦ Pejs med kappe
+Cheminée à manteau (hotte) ¦ Krb s římsou (digestoř) ¦ Öppen spis med kappa (huv) ¦ Pejs med kappe (emhætte)
+Poêle ¦ Kamna ¦ Kamin ¦ Kakkelovn
+Cuisinière ¦ Sporák ¦ Spis ¦ Komfur
+Évier ¦ Dřez ¦ Diskbänk ¦ Køkkenvask
+Lavabo, toilette ¦ Umyvadlo, toaletní stolek ¦ Tvättställ, toalettbord ¦ Håndvask, servante
+Maie, pétrin ¦ Díža, necky ¦ Degtråg ¦ Dejtrug
+Broc et cuvette ¦ Džbán a umyvadlo ¦ Kanna och handfat ¦ Kande og fad
+Fontaine ¦ Kašna ¦ Fontän ¦ Springvand
+Baratte ¦ Máselnice ¦ Smörkärna ¦ Smørkærne
+Lampe ¦ Lampa ¦ Lampa ¦ Lampe
+Bougeoir ¦ Svícen ¦ Ljusstake ¦ Lysestage
+Chenets ¦ Kozlíky do krbu ¦ Brandjärn ¦ Brandjern
+Fer à repasser ¦ Žehlička ¦ Strykjärn ¦ Strygejern
+Banc d’école ¦ Školní lavice ¦ Skolbänk ¦ Skolebænk
+Miroir, cadre au mur ¦ Zrcadlo, rám na zdi ¦ Spegel, ram på väggen ¦ Spejl, ramme på væggen
+Statue ¦ Socha ¦ Staty ¦ Statue
+Animal ¦ Zvíře ¦ Djur ¦ Dyr
+Cabane ¦ Chatrč ¦ Koja ¦ Hytte
+Cône, tipi ¦ Kužel, týpí ¦ Kon, tipi ¦ Kegle, tipi
+Bloc (boîte pleine) ¦ Kvádr (plná krabice) ¦ Block (massiv låda) ¦ Blok (massiv kasse)
+Cylindre ¦ Válec ¦ Cylinder ¦ Cylinder
+Bassine, baquet (ouvert) ¦ Mísa, škopek (otevřený) ¦ Balja, tråg (öppen) ¦ Balje, kar (åben)
+Table (plateau et 4 pieds) ¦ Stůl (deska a 4 nohy) ¦ Bord (skiva och 4 ben) ¦ Bord (plade og 4 ben)
+Table ovale ¦ Oválný stůl ¦ Ovalt bord ¦ Ovalt bord
+Caisson sur pieds ¦ Skříňka na nohách ¦ Låda på ben ¦ Kasse på ben
+Comptoir, plan de travail ¦ Pult, pracovní deska ¦ Disk, arbetsbänk ¦ Disk, bordplade
+Buffet deux-corps, vaisselier ¦ Dvoudílný příborník, kredenc ¦ Tvådelat skåp, porslinsskåp ¦ Todelt skab, tallerkenrække
+Vitrine ¦ Vitrína ¦ Vitrinskåp ¦ Vitrineskab
+Armoire (corniche) ¦ Skříň (s římsou) ¦ Garderob (med list) ¦ Klædeskab (med gesims)
+Commode à tiroirs ¦ Komoda se zásuvkami ¦ Byrå med lådor ¦ Kommode med skuffer
+Coffre à couvercle ¦ Truhla s víkem ¦ Kista med lock ¦ Kiste med låg
+Étagère ouverte ¦ Otevřená police ¦ Öppen hylla ¦ Åben reol
+Lit ¦ Postel ¦ Säng ¦ Seng
+Poêle rond (Godin) ¦ Kulatá kamna (Godin) ¦ Rund kamin (Godin) ¦ Rund kakkelovn (Godin)
+Crémaillère et chaudron ¦ Háček a kotel ¦ Grythake och kittel ¦ Gryderamme og kedel
+Baignoire sur pieds ¦ Vana na nožičkách ¦ Badkar på tassar ¦ Badekar på løvefødder
+Lavabo sur colonne ¦ Umyvadlo na noze ¦ Tvättställ på pelare ¦ Søjlehåndvask
+Fontaine sur support ¦ Nádržka s kohoutkem na stojanu ¦ Vattenbehållare på ställ ¦ Vandbeholder på stativ
+Baratte à piston ¦ Pístová máselnice ¦ Stavkärna ¦ Stampekærne
+Lampe à pétrole ¦ Petrolejová lampa ¦ Fotogenlampa ¦ Petroleumslampe
+Bougeoir, chandelier ¦ Svícen, kandelábr ¦ Ljusstake, kandelaber ¦ Lysestage, kandelaber
+Poste TSF ¦ Rozhlasový přijímač ¦ Radioapparat ¦ Radioapparat
+Phonographe ¦ Fonograf ¦ Fonograf ¦ Fonograf
+Machine à coudre à pédale ¦ Šlapací šicí stroj ¦ Trampsymaskin ¦ Trædesymaskine
+Banc d’école à pupitre ¦ Školní lavice s pultem ¦ Skolbänk med pulpet ¦ Skolebænk med pult
+Pressoir, presse ¦ Lis ¦ Press ¦ Presse
+Miroir ¦ Zrcadlo ¦ Spegel ¦ Spejl
+Cadre au mur ¦ Rám na zdi ¦ Ram på väggen ¦ Ramme på væggen
+Statue sur socle ¦ Socha na podstavci ¦ Staty på sockel ¦ Statue på sokkel
+Plante en pot ¦ Květina v květináči ¦ Krukväxt ¦ Potteplante
+Boule ¦ Koule ¦ Klot ¦ Kugle
+Cône ¦ Kužel ¦ Kon ¦ Kegle
+Cabane (toit) ¦ Chatrč (střecha) ¦ Koja (tak) ¦ Hytte (tag)
+À plat (tapis) ¦ Naplocho (koberec) ¦ Platt (matta) ¦ Fladt (tæppe)
+Plateau avec l’image dessus ¦ Deska s obrázkem navrchu ¦ Skiva med bilden ovanpå ¦ Plade med billedet ovenpå
+MAISON · MOBILIER ¦ DŮM · NÁBYTEK ¦ HUS · MÖBLER ¦ HUS · MØBLER
+MAISON · MES OBJETS ¦ DŮM · MOJE PŘEDMĚTY ¦ HUS · MINA FÖREMÅL ¦ HUS · MINE GENSTANDE
+Créer l’objet ¦ Vytvořit předmět ¦ Skapa föremålet ¦ Opret genstanden
+Partir d’un objet existant (facultatif) ¦ Vyjít z existujícího předmětu (nepovinné) ¦ Utgå från ett befintligt föremål (valfritt) ¦ Tag udgangspunkt i en eksisterende genstand (valgfrit)
+— un objet vide — ¦ — prázdný předmět — ¦ — ett tomt föremål — ¦ — en tom genstand —
+ex. Armoire de la grand-mère, pressoir du moulin… ¦ např. Babiččina skříň, lis ze mlýna… ¦ t.ex. Mormors garderob, kvarnens press… ¦ f.eks. Bedstemors klædeskab, møllens presse…
+Nouvelle catégorie… ¦ Nová kategorie… ¦ Ny kategori… ¦ Ny kategori…
+ex. Grenier ¦ např. Půda ¦ t.ex. Vind ¦ f.eks. Loft
+Vu de dessus (2D) ¦ Pohled shora (2D) ¦ Sett ovanifrån (2D) ¦ Set ovenfra (2D)
+En volume (3D) ¦ Prostorově (3D) ¦ I volym (3D) ¦ I rumfang (3D)
+2ᵉ couleur (pieds, poignées, filets) ¦ 2. barva (nohy, úchyty, lišty) ¦ 2:a färg (ben, handtag, lister) ¦ 2. farve (ben, håndtag, lister)
+2ᵉ couleur ¦ 2. barva ¦ 2:a färg ¦ 2. farve
+Une deuxième couleur ¦ Druhá barva ¦ En andra färg ¦ En anden farve
+Posé au sol (0), sur une table (75), accroché au mur (140)… ¦ Na zemi (0), na stole (75), na zdi (140)… ¦ På golvet (0), på ett bord (75), på väggen (140)… ¦ På gulvet (0), på et bord (75), på væggen (140)…
+Tourné de ¦ Otočeno o ¦ Vriden med ¦ Drejet med
+Image vue de dessus (facultatif) ¦ Obrázek shora (nepovinné) ¦ Bild ovanifrån (valfritt) ¦ Billede set ovenfra (valgfrit)
+🖼️ Une photo des médias… ¦ 🖼️ Fotka z médií… ¦ 🖼️ Ett foto från media… ¦ 🖼️ Et foto fra medier…
+Retirer l’image ¦ Odebrat obrázek ¦ Ta bort bilden ¦ Fjern billedet
+Note (souvenir, provenance) ¦ Poznámka (vzpomínka, původ) ¦ Anteckning (minne, ursprung) ¦ Note (minde, oprindelse)
+Aperçu en 3D ¦ Náhled ve 3D ¦ Förhandsvisning i 3D ¦ Forhåndsvisning i 3D
+⏳ Mesure… ¦ ⏳ Měření… ¦ ⏳ Mäter… ¦ ⏳ Måler…
+Une photo de l’objet (vue de dessus) ¦ Fotka předmětu (pohled shora) ¦ Ett foto av föremålet (ovanifrån) ¦ Et foto af genstanden (set ovenfra)
+L’image se pose sur le plan, à la taille de l’objet. ¦ Obrázek se umístí na plán ve velikosti předmětu. ¦ Bilden placeras på planen, i föremålets storlek. ¦ Billedet placeres på planen i genstandens størrelse.
+Ceux déjà posés dans les maisons restent. ¦ Ty, které už jsou v domech umístěné, zůstanou. ¦ De som redan är placerade i husen finns kvar. ¦ Dem, der allerede er placeret i husene, bliver.
+Donne un nom à la nouvelle catégorie. ¦ Dej nové kategorii název. ¦ Ge den nya kategorin ett namn. ¦ Giv den nye kategori et navn.
+Objet modifié (ceux déjà posés gardent leur ancienne forme). ¦ Předmět upraven (již umístěné si ponechají původní tvar). ¦ Föremålet ändrat (de redan placerade behåller sin gamla form). ¦ Genstanden er ændret (de allerede placerede beholder deres gamle form).
+Montrer aussi dans la catégorie ¦ Zobrazit také v kategorii ¦ Visa också i kategorin ¦ Vis også i kategorien
+— seulement dans « Mes objets » — ¦ — jen v „Moje předměty“ — ¦ — bara i ”Mina föremål” — ¦ — kun i »Mine genstande« —
+« Mes objets » seulement ¦ Jen „Moje předměty“ ¦ Bara ”Mina föremål” ¦ Kun »Mine genstande«
+Licence ¦ Licence ¦ Licens ¦ Licens
+non précisée (fichier importé) ¦ neuvedena (importovaný soubor) ¦ ej angiven (importerad fil) ¦ ikke angivet (importeret fil)
+Le fichier 3D est supprimé : là où il est posé, il redevient une simple boîte. ¦ 3D soubor se smaže: tam, kde je umístěný, se z něj stane obyčejný kvádr. ¦ 3D-filen raderas: där den är placerad blir den en enkel låda igen. ¦ 3D-filen slettes: hvor den er placeret, bliver den en simpel kasse igen.
+Aucun objet. ¦ Žádné předměty. ¦ Inga föremål. ¦ Ingen genstande.
+⚙️ Ranger le mobilier ¦ ⚙️ Uspořádat nábytek ¦ ⚙️ Sortera möblerna ¦ ⚙️ Sortér møblerne
+Coche ce que tu veux voir et range avec ↑ ↓ : les catégories, puis les objets de chaque catégorie. ¦ Zaškrtni, co chceš vidět, a seřaď pomocí ↑ ↓: kategorie a pak předměty v každé kategorii. ¦ Markera det du vill se och sortera med ↑ ↓: kategorierna, sedan föremålen i varje kategori. ¦ Markér det, du vil se, og sortér med ↑ ↓: kategorierne og så genstandene i hver kategori.
+Objets de ¦ Předměty v ¦ Föremål i ¦ Genstande i
+Mobilier remis comme au départ. ¦ Nábytek obnoven do výchozího stavu. ¦ Möblerna återställda som från början. ¦ Møblerne er nulstillet som fra start.
+Garde au moins une catégorie. ¦ Ponech aspoň jednu kategorii. ¦ Behåll minst en kategori. ¦ Behold mindst én kategori.
+Kenney — tous les packs 3D ¦ Kenney — všechny 3D balíčky ¦ Kenney — alla 3D-paket ¦ Kenney — alle 3D-pakker
+OpenGameArt — filtre « CC0 » ¦ OpenGameArt — filtr „CC0“ ¦ OpenGameArt — filtret ”CC0” ¦ OpenGameArt — filteret »CC0«
+📦 Bibliothèque en ligne (libre de droit) ¦ 📦 Online knihovna (bez autorských omezení) ¦ 📦 Bibliotek på nätet (fritt) ¦ 📦 Bibliotek på nettet (frit)
+Chercher (en français ou en anglais) : chaise, tonneau, lampe, vase… ¦ Hledat (francouzsky nebo anglicky): chaise, tonneau, lampe, vase… ¦ Sök (på franska eller engelska): chaise, barrel, lamp, vase… ¦ Søg (på fransk eller engelsk): chaise, barrel, lamp, vase…
+🌐 Poly Haven (en ligne) ¦ 🌐 Poly Haven (online) ¦ 🌐 Poly Haven (på nätet) ¦ 🌐 Poly Haven (på nettet)
+🗜️ Un pack ZIP (Kenney, Quaternius…) ¦ 🗜️ Balíček ZIP (Kenney, Quaternius…) ¦ 🗜️ Ett ZIP-paket (Kenney, Quaternius…) ¦ 🗜️ En ZIP-pakke (Kenney, Quaternius…)
+Ranger aussi dans ¦ Zařadit také do ¦ Sortera också under ¦ Sortér også under
+Chargement de la liste… ¦ Načítání seznamu… ¦ Laddar listan… ¦ Indlæser listen…
+Recherche… ¦ Hledání… ¦ Söker… ¦ Søger…
+🗜️ Choisir le fichier ZIP… ¦ 🗜️ Vybrat soubor ZIP… ¦ 🗜️ Välj ZIP-filen… ¦ 🗜️ Vælg ZIP-filen…
+Voir sur Poly Haven ¦ Zobrazit na Poly Haven ¦ Visa på Poly Haven ¦ Se på Poly Haven
+Aucun modèle ne correspond. ¦ Žádný model neodpovídá. ¦ Ingen modell matchar. ¦ Ingen model passer.
+Sans internet, tu peux toujours importer un pack ZIP déjà téléchargé (onglet à côté), ou ＋ créer tes objets. ¦ Bez internetu můžeš stále importovat už stažený balíček ZIP (vedlejší karta) nebo ＋ vytvořit vlastní předměty. ¦ Utan internet kan du fortfarande importera ett redan nedladdat ZIP-paket (fliken bredvid), eller ＋ skapa egna föremål. ¦ Uden internet kan du stadig importere en allerede hentet ZIP-pakke (fanen ved siden af), eller ＋ oprette dine egne genstande.
+Un téléchargement est en cours… ¦ Probíhá stahování… ¦ En nedladdning pågår… ¦ En hentning er i gang…
+⏳ Téléchargement… ¦ ⏳ Stahování… ¦ ⏳ Laddar ner… ¦ ⏳ Henter…
+✓ Dans « Mes objets » ¦ ✓ V „Moje předměty“ ¦ ✓ I ”Mina föremål” ¦ ✓ I »Mine genstande«
+Envoi et lecture du pack… ¦ Odesílání a čtení balíčku… ¦ Skickar och läser paketet… ¦ Sender og læser pakken…
+Envoi impossible (fichier trop gros pour le serveur ?). ¦ Odeslání se nezdařilo (soubor je pro server příliš velký?). ¦ Uppladdningen misslyckades (för stor fil för servern?). ¦ Upload mislykkedes (for stor fil til serveren?).
+Envoi impossible. ¦ Odeslání se nezdařilo. ¦ Uppladdningen misslyckades. ¦ Upload mislykkedes.
+Image impossible. ¦ Obrázek se nepodařilo vytvořit. ¦ Bilden misslyckades. ¦ Billedet mislykkedes.
+Aucun fichier de licence dans le pack : vérifie sur le site de l’auteur qu’il est bien libre de droit. ¦ V balíčku není soubor s licencí: ověř na webu autora, že je opravdu bez autorských omezení. ¦ Ingen licensfil i paketet: kontrollera på upphovspersonens webbplats att det verkligen är fritt. ¦ Ingen licensfil i pakken: tjek på ophavspersonens websted, at den virkelig er fri.
+Auteur, source ¦ Autor, zdroj ¦ Upphovsperson, källa ¦ Ophavsperson, kilde
+Adresse du pack (facultatif) ¦ Adresa balíčku (nepovinné) ¦ Paketets adress (valfritt) ¦ Pakkens adresse (valgfrit)
+⤒ Importer les modèles cochés ¦ ⤒ Importovat zaškrtnuté modely ¦ ⤒ Importera de markerade modellerna ¦ ⤒ Importér de markerede modeller
+Coche au moins un modèle. ¦ Zaškrtni aspoň jeden model. ¦ Markera minst en modell. ¦ Markér mindst én model.
+Indique la licence du pack (par exemple CC0 1.0). ¦ Uveď licenci balíčku (například CC0 1.0). ¦ Ange paketets licens (till exempel CC0 1.0). ¦ Angiv pakkens licens (for eksempel CC0 1.0).
+Surface (m²) ¦ Plocha (m²) ¦ Yta (m²) ¦ Areal (m²)
+Loi Carrez ≥ 1,80 m (m²) ¦ Zákon Carrez ≥ 1,80 m (m²) ¦ Carrez-lagen ≥ 1,80 m (m²) ¦ Carrez-loven ≥ 1,80 m (m²)
+Hauteur mini (cm) ¦ Min. výška (cm) ¦ Min. höjd (cm) ¦ Min. højde (cm)
+Hauteur maxi (cm) ¦ Max. výška (cm) ¦ Max. höjd (cm) ¦ Maks. højde (cm)
+Un mur de moins de 5 cm (un double-clic de trop ?) ¦ Zeď kratší než 5 cm (dvojklik navíc?) ¦ En vägg kortare än 5 cm (ett dubbelklick för mycket?) ¦ En væg kortere end 5 cm (et dobbeltklik for meget?)
+« {name} » n’a pas de porte ¦ „{name}“ nemá dveře ¦ ”{name}” har ingen dörr ¦ »{name}« har ingen dør
+=Escalier un peu raide : {n} marches de {rise} cm, giron {going} cm (2 h + g = {sum} cm) ¦ Schodiště je trochu strmé: {n} schod výšky {rise} cm, stupnice {going} cm (2 v + s = {sum} cm)|Schodiště je trochu strmé: {n} schody výšky {rise} cm, stupnice {going} cm (2 v + s = {sum} cm)|Schodiště je trochu strmé: {n} schodů výšky {rise} cm, stupnice {going} cm (2 v + s = {sum} cm) ¦ Trappan är lite brant: {n} trappsteg på {rise} cm, steglängd {going} cm (2 h + s = {sum} cm)|Trappan är lite brant: {n} trappsteg på {rise} cm, steglängd {going} cm (2 h + s = {sum} cm) ¦ Trappen er lidt stejl: {n} trin på {rise} cm, grund {going} cm (2 s + g = {sum} cm)|Trappen er lidt stejl: {n} trin på {rise} cm, grund {going} cm (2 s + g = {sum} cm)
+Un escalier sans étage au-dessus ¦ Schodiště bez patra nad ním ¦ En trappa utan våning ovanför ¦ En trappe uden etage ovenover
+L’escalier ne perce pas le plancher de « {name} » (Propriétés → « Ouvrir le plancher au-dessus ») ¦ Schodiště neprorazí strop „{name}“ (Vlastnosti → „Otevřít strop nad tím“) ¦ Trappan öppnar inte bjälklaget i ”{name}” (Egenskaper → ”Öppna bjälklaget ovanför”) ¦ Trappen åbner ikke etageadskillelsen i »{name}« (Egenskaber → »Åbn etageadskillelsen ovenover«)
+Un vide à l’étage le plus bas : il n’ouvre sur rien ¦ Volný prostor v nejnižším patře: nikam nevede ¦ En öppen yta på den lägsta våningen: den öppnar sig mot ingenting ¦ Et åbent rum på den laveste etage: det åbner ikke mod noget
+Des pièces sans aucun mur ¦ Místnosti úplně bez zdí ¦ Rum utan några väggar ¦ Rum helt uden vægge
+maison|Mur ¦ Zeď ¦ Vägg ¦ Væg
+maison|Ouverture ¦ Otvor ¦ Öppning ¦ Åbning
+maison|Combles ¦ Podkroví ¦ Vind ¦ Tagetage
+maison|Pièce ¦ Místnost ¦ Rum ¦ Rum
+maison|Escalier ¦ Schodiště ¦ Trappa ¦ Trappe
+maison|Étage ¦ Patro ¦ Våning ¦ Etage
+Mur ¦ Zeď ¦ Vägg ¦ Væg
+Escalier ¦ Schodiště ¦ Trappa ¦ Trappe
+Combles ¦ Podkroví ¦ Vind ¦ Tagetage
+Plans ¦ Plány ¦ Planer ¦ Planer
+▶ Visite guidée ¦ ▶ Prohlídka s průvodcem ¦ ▶ Guidad tur ¦ ▶ Rundvisning
+Visite en lecture seule, ouverte sans l’application. Souris ou doigt pour tourner, molette pour zoomer, « 🚶 Visiter » pour marcher (Z Q S D ou flèches). ¦ Prohlídka jen ke čtení, otevřená bez aplikace. Myší nebo prstem otáčíš, kolečkem přibližuješ, „🚶 Prohlídka“ pro chůzi (W A S D nebo šipky). ¦ Skrivskyddat besök, öppnat utan appen. Mus eller finger för att rotera, mushjul för att zooma, ”🚶 Besök” för att gå (W A S D eller pilar). ¦ Skrivebeskyttet besøg, åbnet uden appen. Mus eller finger for at rotere, hjul for at zoome, »🚶 Besøg« for at gå (W A S D eller pile).
+📐 Surfaces ¦ 📐 Plochy ¦ 📐 Ytor ¦ 📐 Arealer
+Surfaces ¦ Plochy ¦ Ytor ¦ Arealer
+⚠️ Vérifier le plan ¦ ⚠️ Zkontrolovat plán ¦ ⚠️ Kontrollera planen ¦ ⚠️ Tjek planen
+🗺 Visite guidée ¦ 🗺 Prohlídka s průvodcem ¦ 🗺 Guidad tur ¦ 🗺 Rundvisning
+aucun arrêt ¦ žádné zastávky ¦ inga stopp ¦ ingen stop
+📷 Photos d’époque ¦ 📷 Dobové fotky ¦ 📷 Tidsfoton ¦ 📷 Tidsbilleder
+🏘 Le hameau ¦ 🏘 Osada ¦ 🏘 Byn ¦ 🏘 Landsbyen
+cette maison seule ¦ jen tento dům ¦ bara det här huset ¦ kun dette hus
+foyer n° {n} ¦ domácnost č. {n} ¦ hushåll nr {n} ¦ husstand nr. {n}
+{a} à {b} m ¦ {a} až {b} m ¦ {a} till {b} m ¦ {a} til {b} m
+un clic : aller à l’endroit ¦ jeden klik: přejít na místo ¦ ett klick: gå till platsen ¦ ét klik: gå til stedet
+{name} — coupe ¦ {name} — řez ¦ {name} — sektion ¦ {name} — snit
+Texte de l’arrêt {n} ¦ Text zastávky {n} ¦ Text för stopp {n} ¦ Tekst til stop {n}
+Texte de l’arrêt ¦ Text zastávky ¦ Stoppets text ¦ Stoppets tekst
+⤓ Exporter la vidéo en {fmt} ¦ ⤓ Exportovat video jako {fmt} ¦ ⤓ Exportera videon som {fmt} ¦ ⤓ Eksportér videoen som {fmt}
+{stops} : la caméra glisse de l’un à l’autre, et le texte de chaque arrêt s’affiche en sous-titre. La vidéo se fait en temps réel (environ {s} secondes) : laisse la fenêtre ouverte. ¦ {stops}: kamera plyne od jedné k druhé a text každé zastávky se zobrazí jako titulek. Video se vytváří v reálném čase (asi {s} sekund): nech okno otevřené. ¦ {stops}: kameran glider från det ena till det andra, och varje stopps text visas som undertext. Videon görs i realtid (ungefär {s} sekunder): låt fönstret vara öppet. ¦ {stops}: kameraet glider fra det ene til det næste, og hvert stops tekst vises som undertekst. Videoen laves i realtid (omkring {s} sekunder): lad vinduet være åbent.
+Une fenêtre est posée sur un mur qui n’existe plus ¦ Okno je na zdi, která už neexistuje ¦ Ett fönster sitter på en vägg som inte längre finns ¦ Et vindue sidder på en væg, der ikke længere findes
+Une porte est posée sur un mur qui n’existe plus ¦ Dveře jsou na zdi, která už neexistuje ¦ En dörr sitter på en vägg som inte längre finns ¦ En dør sidder på en væg, der ikke længere findes
+Une fenêtre est plus large que son mur ¦ Okno je širší než jeho zeď ¦ Ett fönster är bredare än sin vägg ¦ Et vindue er bredere end sin væg
+Une porte est plus large que son mur ¦ Dveře jsou širší než jejich zeď ¦ En dörr är bredare än sin vägg ¦ En dør er bredere end sin væg
+Une fenêtre dépasse le plafond ({top} cm pour {wall} cm de mur) : elle est coupée par le plancher ¦ Okno přesahuje strop ({top} cm u zdi {wall} cm): podlaha nad ním ho ořízne ¦ Ett fönster går över innertaket ({top} cm för en vägg på {wall} cm): bjälklaget skär av det ¦ Et vindue går over loftet ({top} cm for en væg på {wall} cm): etageadskillelsen skærer det
+Une porte dépasse le plafond ({top} cm pour {wall} cm de mur) : elle est coupée par le plancher ¦ Dveře přesahují strop ({top} cm u zdi {wall} cm): podlaha nad nimi je ořízne ¦ En dörr går över innertaket ({top} cm för en vägg på {wall} cm): bjälklaget skär av den ¦ En dør går over loftet ({top} cm for en væg på {wall} cm): etageadskillelsen skærer den
+Une fenêtre passe sous la pente du toit à cet endroit ¦ Okno na tomto místě zasahuje pod sklon střechy ¦ Ett fönster hamnar under takets lutning på det här stället ¦ Et vindue går ind under tagets hældning på dette sted
+Une porte passe sous la pente du toit à cet endroit ¦ Dveře na tomto místě zasahují pod sklon střechy ¦ En dörr hamnar under takets lutning på det här stället ¦ En dør går ind under tagets hældning på dette sted
+🧰 Outils de la maison ¦ 🧰 Nástroje domu ¦ 🧰 Husets verktyg ¦ 🧰 Husets værktøjer
+Le tableau des surfaces, ouvert dans le 🧾 Tableur ¦ Tabulka ploch, otevřená v 🧾 Tabulkovém editoru ¦ Ytstabellen, öppnad i 🧾 Kalkylbladet ¦ Arealtabellen, åbnet i 🧾 Regnearket
+Clique deux points sur le plan : la ligne de coupe ¦ Klikni na dva body na plánu: linie řezu ¦ Klicka på två punkter på planen: sektionslinjen ¦ Klik på to punkter på planen: snitlinjen
+📐 Surfaces par pièce ¦ 📐 Plochy podle místností ¦ 📐 Ytor per rum ¦ 📐 Arealer pr. rum
+✂ Tracer la ligne de coupe ¦ ✂ Nakreslit linii řezu ¦ ✂ Rita sektionslinjen ¦ ✂ Tegn snitlinjen
+✂ Voir la coupe ¦ ✂ Zobrazit řez ¦ ✂ Visa sektionen ¦ ✂ Se snittet
+🕰 L’année ¦ 🕰 Rok ¦ 🕰 Året ¦ 🕰 Året
+Pendant que tu glisses l’année, l’époque d’avant reste visible en pointillés sépia ¦ Zatímco posouváš rok, předchozí období zůstává vidět sépiovou tečkovanou čarou ¦ Medan du drar i året syns den föregående perioden kvar med prickade sepialinjer ¦ Mens du trækker i året, ses den forrige periode stadig med prikkede sepialinjer
+👻 Voir l’époque d’avant en fantôme ¦ 👻 Zobrazit předchozí období jako ducha ¦ 👻 Visa föregående period som spöke ¦ 👻 Vis forrige periode som spøgelse
+La visite guidée en vidéo, toute faite : on glisse d’un arrêt à l’autre, le texte en sous-titre ¦ Prohlídka jako hotové video: plynulý přechod od zastávky k zastávce, text jako titulky ¦ Den guidade turen som färdig video: man glider från stopp till stopp, med texten som undertext ¦ Rundvisningen som færdig video: man glider fra stop til stop med teksten som undertekst
+Une image par arrêt et les textes, dans un fichier .zip : à glisser dans le 🎬 Montage ¦ Jeden obrázek na zastávku a texty v souboru .zip: k přetažení do 🎬 Střihu ¦ En bild per stopp och texterna, i en .zip-fil: att dra till 🎬 Klippning ¦ Ét billede pr. stop og teksterne i en .zip-fil: til at trække ind i 🎬 Klipning
+✎ Les arrêts ¦ ✎ Zastávky ¦ ✎ Stoppen ¦ ✎ Stoppene
+🎬 Vidéo de la visite… ¦ 🎬 Video prohlídky… ¦ 🎬 Video av turen… ¦ 🎬 Video af rundvisningen…
+⤓ Images de la visite ¦ ⤓ Obrázky prohlídky ¦ ⤓ Bilder från turen ¦ ⤓ Billeder fra rundvisningen
+Les arrêts et les photos se posent pendant la visite (🚶 Visiter, vue 3D) ¦ Zastávky a fotky se umísťují během prohlídky (🚶 Prohlídka, 3D zobrazení) ¦ Stoppen och fotona placeras under besöket (🚶 Besök, 3D-vy) ¦ Stop og fotos placeres under besøget (🚶 Besøg, 3D-visning)
+＋ Arrêt, 📷 photo… ¦ ＋ Zastávka, 📷 fotka… ¦ ＋ Stopp, 📷 foto… ¦ ＋ Stop, 📷 foto…
+Un fichier .html à envoyer : la maison en 3D et ses plans, sans l’app, en lecture seule (sans personnes ni souvenirs) ¦ Soubor .html k odeslání: dům ve 3D a jeho plány, bez aplikace, jen ke čtení (bez osob a vzpomínek) ¦ En .html-fil att skicka: huset i 3D och dess planer, utan appen, skrivskyddat (utan personer och minnen) ¦ En .html-fil til at sende: huset i 3D og dets planer, uden appen, skrivebeskyttet (uden personer og minder)
+🏘 Bâtiments du terrain… ¦ 🏘 Budovy na pozemku… ¦ 🏘 Byggnader på tomten… ¦ 🏘 Bygninger på grunden…
+📤 Partager la visite ¦ 📤 Sdílet prohlídku ¦ 📤 Dela besöket ¦ 📤 Del besøget
+Aucune pièce dessinée. ¦ Žádná místnost není nakreslena. ¦ Inga rum ritade. ¦ Ingen rum tegnet.
+Toute la maison ¦ Celý dům ¦ Hela huset ¦ Hele huset
+Loi Carrez ¦ Zákon Carrez ¦ Carrez-lagen ¦ Carrez-loven
+Surface ¦ Plocha ¦ Yta ¦ Areal
+Loi Carrez : seules comptent les parties où l’on tient debout (hauteur sous plafond d’au moins 1,80 m, combles comprises). Les vides et les escaliers ne comptent pas. ¦ Zákon Carrez: počítají se jen části, kde se dá stát (světlá výška aspoň 1,80 m, včetně podkroví). Volné prostory a schodiště se nepočítají. ¦ Carrez-lagen: bara de delar där man kan stå räknas (takhöjd minst 1,80 m, vindar inräknade). Öppna ytor och trappor räknas inte. ¦ Carrez-loven: kun de dele, hvor man kan stå, tæller (lofthøjde mindst 1,80 m, inkl. tagetager). Åbne rum og trapper tæller ikke.
+Le Tableur n’est pas prêt. ¦ Tabulkový editor není připravený. ¦ Kalkylbladet är inte klart. ¦ Regnearket er ikke klar.
+Rien à signaler : portes, fenêtres, escaliers et pièces sont cohérents. ¦ Nic k hlášení: dveře, okna, schodiště a místnosti jsou v pořádku. ¦ Inget att anmärka: dörrar, fönster, trappor och rum hänger ihop. ¦ Intet at bemærke: døre, vinduer, trapper og rum hænger sammen.
+✓ Rien à signaler. ¦ ✓ Nic k hlášení. ¦ ✓ Inget att anmärka. ¦ ✓ Intet at bemærke.
+✂ Clique les deux bouts de la ligne de coupe sur le plan ¦ ✂ Klikni na oba konce linie řezu na plánu ¦ ✂ Klicka på sektionslinjens båda ändar på planen ¦ ✂ Klik på snitlinjens to ender på planen
+Ligne de coupe ¦ Linie řezu ¦ Sektionslinje ¦ Snitlinje
+Trace d’abord la ligne de coupe sur le plan. ¦ Nejdřív nakresli na plánu linii řezu. ¦ Rita först sektionslinjen på planen. ¦ Tegn først snitlinjen på planen.
+✂ Coupe de la maison ¦ ✂ Řez domem ¦ ✂ Sektion av huset ¦ ✂ Snit af huset
+⤓ Exporter en SVG ¦ ⤓ Exportovat jako SVG ¦ ⤓ Exportera som SVG ¦ ⤓ Eksportér som SVG
+⤓ Exporter en PNG ¦ ⤓ Exportovat jako PNG ¦ ⤓ Exportera som PNG ¦ ⤓ Eksportér som PNG
+Ouvre la vue 3D, puis « 🚶 Visiter » : en bas de la visite, « 📍 Arrêt ici » pose un arrêt (avec un texte lu à voix haute) et « 📷 Photo d’époque ici » pose une photo prise de cet endroit. ¦ Otevři 3D zobrazení, pak „🚶 Prohlídka“: dole během prohlídky „📍 Zastávka zde“ přidá zastávku (s textem čteným nahlas) a „📷 Dobová fotka zde“ umístí fotku pořízenou z tohoto místa. ¦ Öppna 3D-vyn, sedan ”🚶 Besök”: längst ner i besöket placerar ”📍 Stopp här” ett stopp (med en text som läses upp) och ”📷 Tidsfoto här” ett foto taget från platsen. ¦ Åbn 3D-visningen og så »🚶 Besøg«: nederst under besøget placerer »📍 Stop her« et stop (med en tekst, der læses højt), og »📷 Tidsbillede her« et foto taget fra stedet.
+🗺 Les arrêts de la visite guidée ¦ 🗺 Zastávky prohlídky ¦ 🗺 Stoppen i den guidade turen ¦ 🗺 Rundvisningens stop
+Arrêt retiré ¦ Zastávka odebrána ¦ Stoppet borttaget ¦ Stoppet fjernet
+Arrêts rangés ¦ Zastávky seřazeny ¦ Stoppen ordnade ¦ Stoppene ordnet
+Impossible de faire les images. ¦ Obrázky se nepodařilo vytvořit. ¦ Det gick inte att göra bilderna. ¦ Billederne kunne ikke laves.
+Une image par arrêt… ¦ Jeden obrázek na zastávku… ¦ En bild per stopp… ¦ Ét billede pr. stop…
+Pose d’abord des arrêts : vue 3D → 🚶 Visiter → 📍 Arrêt ici. ¦ Nejdřív přidej zastávky: 3D zobrazení → 🚶 Prohlídka → 📍 Zastávka zde. ¦ Placera först några stopp: 3D-vy → 🚶 Besök → 📍 Stopp här. ¦ Placér først nogle stop: 3D-visning → 🚶 Besøg → 📍 Stop her.
+🎬 La vidéo de la visite guidée ¦ 🎬 Video prohlídky ¦ 🎬 Video av den guidade turen ¦ 🎬 Video af rundvisningen
+Paysage 1280 × 720 (écran) ¦ Na šířku 1280 × 720 (obrazovka) ¦ Liggande 1280 × 720 (skärm) ¦ Liggende 1280 × 720 (skærm)
+Carré 1080 × 1080 (messageries) ¦ Čtverec 1080 × 1080 (chatovací aplikace) ¦ Kvadrat 1080 × 1080 (meddelandeappar) ¦ Kvadrat 1080 × 1080 (beskedapps)
+Titre au début ¦ Název na začátku ¦ Titel i början ¦ Titel i starten
+⛔ Ce navigateur ne sait pas enregistrer de vidéo : garde « ⤓ Images de la visite ». ¦ ⛔ Tento prohlížeč neumí nahrávat video: použij „⤓ Obrázky prohlídky“. ¦ ⛔ Webbläsaren kan inte spela in video: använd ”⤓ Bilder från turen”. ¦ ⛔ Browseren kan ikke optage video: brug »⤓ Billeder fra rundvisningen«.
+🔴 Enregistrement de la visite… ¦ 🔴 Nahrávání prohlídky… ¦ 🔴 Spelar in turen… ¦ 🔴 Optager rundvisningen…
+fenêtre des médias indisponible ¦ okno médií není k dispozici ¦ mediafönstret är inte tillgängligt ¦ medievinduet er ikke tilgængeligt
+✓ Vidéo exportée, et une copie rangée dans les médias. ¦ ✓ Video exportováno a kopie uložena v médiích. ¦ ✓ Videon exporterad, och en kopia sparad i media. ¦ ✓ Videoen er eksporteret, og en kopi er gemt i medier.
+✓ Vidéo exportée. ¦ ✓ Video exportováno. ¦ ✓ Videon exporterad. ¦ ✓ Videoen er eksporteret.
+Photo retirée ¦ Fotka odebrána ¦ Fotot borttaget ¦ Fotoet fjernet
+Fichier prêt : envoie-le, il s’ouvre d’un double-clic dans un navigateur, sans l’app. ¦ Soubor je připravený: pošli ho, otevře se dvojklikem v prohlížeči, bez aplikace. ¦ Filen är klar: skicka den, den öppnas med ett dubbelklick i en webbläsare, utan appen. ¦ Filen er klar: send den, den åbnes med et dobbeltklik i en browser, uden appen.
+Retirer du terrain ¦ Odebrat z pozemku ¦ Ta bort från tomten ¦ Fjern fra grunden
+🏘 Le hameau : les bâtiments du terrain ¦ 🏘 Osada: budovy na pozemku ¦ 🏘 Byn: byggnaderna på tomten ¦ 🏘 Landsbyen: bygningerne på grunden
+La ferme, la grange, le four, le puits, les maisons voisines : chacune est une maison de la liste « 🏠 Maisons de famille », posée ici à côté (en 3D et en pointillés sur le plan). ¦ Statek, stodola, pec, studna, sousední domy: každý je domem ze seznamu „🏠 Rodinné domy“, umístěným sem vedle (ve 3D a tečkovaně na plánu). ¦ Gården, ladan, ugnen, brunnen, grannhusen: var och en är ett hus från listan ”🏠 Släktgårdar”, placerat här bredvid (i 3D och prickat på planen). ¦ Gården, laden, ovnen, brønden, nabohusene: hver er et hus fra listen »🏠 Slægtens huse«, placeret her ved siden af (i 3D og prikket på planen).
+＋ Ajouter un bâtiment ¦ ＋ Přidat budovu ¦ ＋ Lägg till en byggnad ¦ ＋ Tilføj en bygning
+N° de foyer au recensement (facultatif) ¦ Č. domácnosti při sčítání (nepovinné) ¦ Hushållsnr i folkräkningen (valfritt) ¦ Husstandsnr. i folketællingen (valgfrit)
+Bâtiment ajouté ¦ Budova přidána ¦ Byggnad tillagd ¦ Bygning tilføjet
+Bâtiment déplacé ¦ Budova přesunuta ¦ Byggnad flyttad ¦ Bygning flyttet
+Bâtiment retiré ¦ Budova odebrána ¦ Byggnad borttagen ¦ Bygning fjernet
+Soleil à {deg}° de haut, au {dir} ¦ Slunce {deg}° nad obzorem, na {dir} ¦ Solen {deg}° högt, åt {dir} ¦ Solen {deg}° højt, mod {dir}
+boussole|nord ¦ sever ¦ norr ¦ nord
+boussole|nord-est ¦ severovýchod ¦ nordost ¦ nordøst
+boussole|est ¦ východ ¦ öster ¦ øst
+boussole|sud-est ¦ jihovýchod ¦ sydost ¦ sydøst
+boussole|sud ¦ jih ¦ söder ¦ syd
+boussole|sud-ouest ¦ jihozápad ¦ sydväst ¦ sydvest
+boussole|ouest ¦ západ ¦ väster ¦ vest
+boussole|nord-ouest ¦ severozápad ¦ nordväst ¦ nordvest
+🌙 Nuit ¦ 🌙 Noc ¦ 🌙 Natt ¦ 🌙 Nat
+Crépuscule ¦ Soumrak ¦ Skymning ¦ Tusmørke
+(pose une lampe pour éclairer) ¦ (umísti lampu, ať je světlo) ¦ (placera en lampa för att lysa upp) ¦ (placér en lampe for at give lys)
+nuit polaire ¦ polární noc ¦ polarnatt ¦ polarnat
+soleil de minuit ¦ půlnoční slunce ¦ midnattssol ¦ midnatssol
+lever {rise}, coucher {set} ¦ východ {rise}, západ {set} ¦ uppgång {rise}, nedgång {set} ¦ solopgang {rise}, solnedgang {set}
+France (lieu de la maison inconnu) ¦ Francie (místo domu neznámé) ¦ Frankrike (husets plats okänd) ¦ Frankrig (husets sted ukendt)
+au sol {len} ¦ na zemi {len} ¦ på marken {len} ¦ på jorden {len}
+🗺 Arrêt {n} sur {total} ¦ 🗺 Zastávka {n} z {total} ¦ 🗺 Stopp {n} av {total} ¦ 🗺 Stop {n} af {total}
+🪜 Un escalier : ¦ 🪜 Schodiště: ¦ 🪜 En trappa: ¦ 🪜 En trappe:
+⬆ Monter (E) ¦ ⬆ Nahoru (E) ¦ ⬆ Gå upp (E) ¦ ⬆ Gå op (E)
+⬇ Descendre (C) ¦ ⬇ Dolů (C) ¦ ⬇ Gå ner (C) ¦ ⬇ Gå ned (C)
+Ce glTF utilise des fichiers à part : exporte-le plutôt en GLB (un seul fichier). ¦ Tento glTF používá samostatné soubory: raději ho exportuj jako GLB (jediný soubor). ¦ Den här glTF:n använder separata filer: exportera den hellre som GLB (en enda fil). ¦ Denne glTF bruger separate filer: eksportér den hellere som GLB (én fil).
+Format 3D inconnu. ¦ Neznámý 3D formát. ¦ Okänt 3D-format. ¦ Ukendt 3D-format.
+✦ Les souvenirs de la pièce ¦ ✦ Vzpomínky místnosti ¦ ✦ Rummets minnen ¦ ✦ Rummets minder
+☀️ Lumière du jour ¦ ☀️ Denní světlo ¦ ☀️ Dagsljus ¦ ☀️ Dagslys
+Le soleil passe d’une heure à l’autre ¦ Slunce přechází z hodiny na hodinu ¦ Solen går från timme till timme ¦ Solen går fra time til time
+À cette heure-ci, du 1er janvier au 31 décembre : les ombres s’allongent l’hiver ¦ V tuto hodinu, od 1. ledna do 31. prosince: v zimě se stíny prodlužují ¦ Vid den här tiden, från 1 januari till 31 december: skuggorna blir längre på vintern ¦ På dette tidspunkt, fra 1. januar til 31. december: skyggerne bliver længere om vinteren
+▶ Voir la journée ¦ ▶ Přehrát den ¦ ▶ Spela upp dagen ¦ ▶ Afspil dagen
+▶ Voir l’année ¦ ▶ Přehrát rok ¦ ▶ Spela upp året ¦ ▶ Afspil året
+❄️ Hiver ¦ ❄️ Zima ¦ ❄️ Vinter ¦ ❄️ Vinter
+🌱 Printemps ¦ 🌱 Jaro ¦ 🌱 Vår ¦ 🌱 Forår
+☀️ Été ¦ ☀️ Léto ¦ ☀️ Sommar ¦ ☀️ Sommer
+🍂 Automne ¦ 🍂 Podzim ¦ 🍂 Höst ¦ 🍂 Efterår
+📅 Aujourd’hui ¦ 📅 Dnes ¦ 📅 I dag ¦ 📅 I dag
+Ombres portées ¦ Vržené stíny ¦ Slagskuggor ¦ Slagskygger
+🚶 Visite ¦ 🚶 Prohlídka ¦ 🚶 Besök ¦ 🚶 Besøg
+Monter à l’étage du dessus (E ou Page ↑) ¦ Přejít do patra nad (E nebo Page ↑) ¦ Gå upp till våningen ovanför (E eller Page ↑) ¦ Gå op til etagen ovenover (E eller Page ↑)
+Descendre à l’étage du dessous (C ou Page ↓) ¦ Přejít do patra pod (C nebo Page ↓) ¦ Gå ner till våningen under (C eller Page ↓) ¦ Gå ned til etagen nedenunder (C eller Page ↓)
+Yeux à ¦ Oči ve výšce ¦ Ögon på ¦ Øjne i
+Un arrêt de la visite guidée, ici, regardant par là (avec un texte lu à voix haute) ¦ Zastávka prohlídky zde, s pohledem tímto směrem (s textem čteným nahlas) ¦ Ett stopp i den guidade turen, här, med blicken åt det hållet (med en text som läses upp) ¦ Et stop på rundvisningen, her, med blikket den vej (med en tekst, der læses højt)
+Une photo ancienne prise de cet endroit, dans cette direction : on la compare avec la maison d’aujourd’hui ¦ Stará fotka pořízená z tohoto místa v tomto směru: porovná se s dnešním domem ¦ Ett gammalt foto taget från den här platsen, i den här riktningen: jämförs med dagens hus ¦ Et gammelt foto taget fra dette sted i denne retning: sammenlignes med huset i dag
+📍 Arrêt ici ¦ 📍 Zastávka zde ¦ 📍 Stopp här ¦ 📍 Stop her
+📷 Photo d’époque ici ¦ 📷 Dobová fotka zde ¦ 📷 Tidsfoto här ¦ 📷 Tidsbillede her
+Petite carte : clic pour t’y rendre ¦ Minimapa: kliknutím se tam přesuneš ¦ Minikarta: klicka för att gå dit ¦ Minikort: klik for at gå derhen
+Z Q S D, W A S D ou flèches : marcher · Maj : courir · la souris regarde · Échap : libérer la souris ¦ W A S D nebo šipky: chůze · Shift: běh · myš: rozhlížení · Esc: uvolnit myš ¦ W A S D eller pilar: gå · Skift: spring · musen tittar runt · Esc: släpp musen ¦ W A S D eller pile: gå · Skift: løb · musen ser rundt · Esc: frigør musen
+Le rond en bas à gauche : marcher · glisser sur la vue : regarder · ✦ : toucher pour voir le souvenir ¦ Kroužek vlevo dole: chůze · tažení po pohledu: rozhlížení · ✦: dotkni se a uvidíš vzpomínku ¦ Cirkeln nere till vänster: gå · dra på vyn: titta · ✦: tryck för att se minnet ¦ Cirklen nederst til venstre: gå · træk på visningen: se · ✦: tryk for at se mindet
+Z Q S D, W A S D ou flèches : marcher · clic sur la vue : regarder avec la souris · ✦ : clic pour voir le souvenir · Échap : sortir ¦ W A S D nebo šipky: chůze · klik na pohled: rozhlížení myší · ✦: klik pro zobrazení vzpomínky · Esc: odejít ¦ W A S D eller pilar: gå · klick på vyn: titta med musen · ✦: klicka för att se minnet · Esc: avsluta ¦ W A S D eller pile: gå · klik på visningen: se med musen · ✦: klik for at se mindet · Esc: afslut
+✋ Arrêter la visite ¦ ✋ Ukončit prohlídku ¦ ✋ Avsluta besöket ¦ ✋ Stop besøget
+Autrefois ¦ Dříve ¦ Förr ¦ Før
+Autrefois ou aujourd’hui ¦ Dříve nebo dnes ¦ Förr eller nu ¦ Før eller nu
+Arrêt suivant ¦ Další zastávka ¦ Nästa stopp ¦ Næste stop
+Arrêter la visite guidée ¦ Ukončit prohlídku s průvodcem ¦ Avsluta den guidade turen ¦ Stop rundvisningen
+Pose d’abord des arrêts (🚶 Visiter → 📍 Arrêt ici). ¦ Nejdřív přidej zastávky (🚶 Prohlídka → 📍 Zastávka zde). ¦ Placera först några stopp (🚶 Besök → 📍 Stopp här). ¦ Placér først nogle stop (🚶 Besøg → 📍 Stop her).
+Ce navigateur ne sait pas enregistrer de vidéo. ¦ Tento prohlížeč neumí nahrávat video. ¦ Webbläsaren kan inte spela in video. ¦ Browseren kan ikke optage video.
+Remettre la vue comme au départ ¦ Obnovit výchozí pohled ¦ Återställ vyn som från början ¦ Nulstil visningen som fra start
+L’image du média n° {n} est introuvable : une toile neutre la remplace. ¦ Obrázek média č. {n} nelze najít: nahradí ho neutrální plátno. ¦ Bilden för media nr {n} hittas inte: en neutral duk ersätter den. ¦ Billedet til medie nr. {n} findes ikke: et neutralt lærred erstatter det.
+Cadre {n} : une image ¦ Rám {n}: obrázek ¦ Ram {n}: en bild ¦ Ramme {n}: et billede
+Cadre {n} : vide ¦ Rám {n}: prázdný ¦ Ram {n}: tom ¦ Ramme {n}: tom
+Image du cadre {n} ¦ Obrázek rámu {n} ¦ Bild i ram {n} ¦ Billede i ramme {n}
+Prise dans les médias ¦ Z médií ¦ Hämtad från media ¦ Hentet fra medier
+L’image de « {name} » ¦ Obrázek pro „{name}“ ¦ Bilden för ”{name}” ¦ Billedet til »{name}«
+🖼 Déposer sur « {name} » (cadre {n}) ¦ 🖼 Pustit na „{name}“ (rám {n}) ¦ 🖼 Släpp på ”{name}” (ram {n}) ¦ 🖼 Slip på »{name}« (ramme {n})
+🖼 Déposer sur « {name} » ¦ 🖼 Pustit na „{name}“ ¦ 🖼 Släpp på ”{name}” ¦ 🖼 Slip på »{name}«
+Remplir (recadrer) ¦ Vyplnit (oříznout) ¦ Fyll (beskär) ¦ Udfyld (beskær)
+Ajuster (toute l’image) ¦ Přizpůsobit (celý obrázek) ¦ Anpassa (hela bilden) ¦ Tilpas (hele billedet)
+Centrer (taille réelle) ¦ Na střed (skutečná velikost) ¦ Centrera (verklig storlek) ¦ Centrér (faktisk størrelse)
+Pas d’image. ¦ Žádný obrázek. ¦ Ingen bild. ¦ Intet billede.
+Image introuvable ¦ Obrázek nenalezen ¦ Bilden hittades inte ¦ Billedet blev ikke fundet
+Le cadre ¦ Rám ¦ Ramen ¦ Rammen
+MAISON · IMAGE ¦ DŮM · OBRÁZEK ¦ HUS · BILD ¦ HUS · BILLEDE
+Poser cette image ¦ Umístit tento obrázek ¦ Placera bilden ¦ Placér billedet
+Ou un souvenir de cet objet : ¦ Nebo vzpomínka tohoto předmětu: ¦ Eller ett minne för föremålet: ¦ Eller et minde for genstanden:
+La rattacher aussi aux souvenirs de cet objet ¦ Propojit ho také se vzpomínkami tohoto předmětu ¦ Koppla den också till föremålets minnen ¦ Forbind det også med genstandens minder
+🏷 Garder aussi comme souvenir ¦ 🏷 Ponechat také jako vzpomínku ¦ 🏷 Spara också som minne ¦ 🏷 Gem også som minde
+⚠️ Cette image est introuvable dans les médias : une toile neutre la remplace. Choisis-en une autre. ¦ ⚠️ Tento obrázek v médiích nelze najít: nahradí ho neutrální plátno. Vyber jiný. ¦ ⚠️ Bilden hittas inte i media: en neutral duk ersätter den. Välj en annan. ¦ ⚠️ Billedet findes ikke i medier: et neutralt lærred erstatter det. Vælg et andet.
+Aperçu : glisse pour déplacer l’image, molette pour zoomer ¦ Náhled: tažením posuneš obrázek, kolečkem přiblížíš ¦ Förhandsvisning: dra för att flytta bilden, mushjul för att zooma ¦ Forhåndsvisning: træk for at flytte billedet, hjul for at zoome
+Glisse pour déplacer l’image · molette pour zoomer ¦ Tažením posuneš obrázek · kolečkem přiblížíš ¦ Dra för att flytta bilden · mushjul för att zooma ¦ Træk for at flytte billedet · hjul for at zoome
+Dans le cadre ¦ V rámu ¦ I ramen ¦ I rammen
+Remettre l’image au centre, sans zoom ¦ Vrátit obrázek doprostřed, bez přiblížení ¦ Lägg tillbaka bilden i mitten, utan zoom ¦ Sæt billedet tilbage i midten, uden zoom
+↺ Recadrage de départ ¦ ↺ Výchozí ořez ¦ ↺ Ursprunglig beskärning ¦ ↺ Oprindelig beskæring
+Recadrage de départ ¦ Výchozí ořez ¦ Ursprunglig beskärning ¦ Oprindelig beskæring
+Sa couleur ¦ Jeho barva ¦ Dess färg ¦ Dens farve
+Passe-partout ¦ Pasparta ¦ Passepartout ¦ Passepartout
+🖼 Images des cadres ¦ 🖼 Obrázky rámů ¦ 🖼 Ramarnas bilder ¦ 🖼 Rammernes billeder
+🖼 Image ¦ 🖼 Obrázek ¦ 🖼 Bild ¦ 🖼 Billede
+📁 Tu peux aussi glisser une image de l’ordinateur sur l’objet, dans le plan ou dans la vue 3D : elle entre dans les médias. ¦ 📁 Obrázek z počítače můžeš také přetáhnout na předmět v plánu nebo ve 3D zobrazení: uloží se do médií. ¦ 📁 Du kan också dra en bild från datorn till föremålet, i planen eller i 3D-vyn: den hamnar i media. ¦ 📁 Du kan også trække et billede fra computeren hen på genstanden, i planen eller i 3D-visningen: det kommer i medier.
+Image posée ¦ Obrázek umístěn ¦ Bilden placerad ¦ Billedet placeret
+Image retirée ¦ Obrázek odebrán ¦ Bilden borttagen ¦ Billedet fjernet
+Import de l’image… ¦ Import obrázku… ¦ Importerar bilden… ¦ Importerer billedet…
+Image déposée sur l’objet ¦ Obrázek puštěn na předmět ¦ Bilden släppt på föremålet ¦ Billedet sluppet på genstanden
+✓ L’image est rangée dans les médias et posée sur l’objet. ¦ ✓ Obrázek je uložen v médiích a umístěn na předmět. ¦ ✓ Bilden är sparad i media och placerad på föremålet. ¦ ✓ Billedet er gemt i medier og placeret på genstanden.
+Image prise dans les souvenirs ¦ Obrázek ze vzpomínek ¦ Bild hämtad från minnena ¦ Billede hentet fra minderne
+Image tournée ¦ Obrázek otočen ¦ Bilden roterad ¦ Billedet roteret
+Image réglée ¦ Obrázek nastaven ¦ Bilden justerad ¦ Billedet justeret
+Image recadrée ¦ Obrázek oříznut ¦ Bilden beskuren ¦ Billedet beskåret
+Image zoomée ¦ Obrázek přiblížen ¦ Bilden zoomad ¦ Billedet zoomet
+Cote ¦ Kóta ¦ Mått ¦ Mål
+Hauteur (cm) ¦ Výška (cm) ¦ Höjd (cm) ¦ Højde (cm)
+Contenu ¦ Obsah ¦ Innehåll ¦ Indhold
+Tourne le plan par rapport au nord : 0° = le haut du plan est au nord, 90° = le haut du plan regarde l’est. Le soleil et les ombres suivent. ¦ Otočí plán vůči severu: 0° = horní okraj plánu je na severu, 90° = horní okraj plánu míří na východ. Slunce a stíny se přizpůsobí. ¦ Vrider planen i förhållande till norr: 0° = planens överkant är mot norr, 90° = planens överkant vetter mot öster. Solen och skuggorna följer. ¦ Drejer planen i forhold til nord: 0° = planens overkant er mod nord, 90° = planens overkant vender mod øst. Solen og skyggerne følger med.
+Lit d’une personne ¦ Jednolůžko ¦ Enkelsäng ¦ Enkeltseng
+Chambre ¦ Ložnice ¦ Sovrum ¦ Soveværelse
+Lit double ¦ Dvoulůžko ¦ Dubbelsäng ¦ Dobbeltseng
+Lit clos (breton) ¦ Skříňové lůžko (bretaňské) ¦ Skåpsäng (bretonsk) ¦ Alkoveseng (bretonsk)
+Berceau ¦ Kolébka ¦ Vagga ¦ Vugge
+Lit d’enfant ¦ Dětská postel ¦ Barnsäng ¦ Børneseng
+Table de chevet ¦ Noční stolek ¦ Nattduksbord ¦ Natbord
+Commode ¦ Komoda ¦ Byrå ¦ Kommode
+Coiffeuse ¦ Toaletní stolek ¦ Sminkbord ¦ Toiletbord
+Prie-Dieu ¦ Klekátko ¦ Bönpall ¦ Bedeskammel
+Religion, souvenirs ¦ Náboženství, upomínky ¦ Religion, minnessaker ¦ Religion, souvenirer
+Table ¦ Stůl ¦ Bord ¦ Bord
+Séjour ¦ Obývací pokoj ¦ Vardagsrum ¦ Stue
+Table ronde ¦ Kulatý stůl ¦ Runt bord ¦ Rundt bord
+Chaise ¦ Židle ¦ Stol ¦ Stol
+Fauteuil ¦ Křeslo ¦ Fåtölj ¦ Lænestol
+Canapé ¦ Pohovka ¦ Soffa ¦ Sofa
+Banc ¦ Lavice ¦ Bänk ¦ Bænk
+Buffet ¦ Příborník ¦ Skänk ¦ Skænk
+Vaisselier ¦ Kredenc ¦ Porslinsskåp ¦ Tallerkenrække
+Horloge comtoise ¦ Komtoazské hodiny ¦ Comtoise-klocka ¦ Comtoise-ur
+Piano droit ¦ Pianino ¦ Piano ¦ Opretstående klaver
+Bibliothèque ¦ Knihovna ¦ Bokhylla ¦ Bogreol
+Cheminée ¦ Krb ¦ Öppen spis ¦ Pejs
+Poêle à bois ¦ Kamna na dřevo ¦ Vedkamin ¦ Brændeovn
+Tapis ¦ Koberec ¦ Matta ¦ Tæppe
+Lampadaire ¦ Stojací lampa ¦ Golvlampa ¦ Standerlampe
+Plante ¦ Rostlina ¦ Växt ¦ Plante
+Poste de radio (TSF) ¦ Rozhlasový přijímač ¦ Radioapparat ¦ Radioapparat
+Cuisinière à bois ¦ Sporák na dřevo ¦ Vedspis ¦ Brændekomfur
+Cuisine ¦ Kuchyně ¦ Kök ¦ Køkken
+Évier en pierre ¦ Kamenný dřez ¦ Stenho ¦ Stenvask
+Pétrin ¦ Díža ¦ Degtråg ¦ Dejtrug
+Garde-manger ¦ Spíž ¦ Skafferi ¦ Spisekammer
+Réfrigérateur ¦ Lednice ¦ Kylskåp ¦ Køleskab
+Plan de travail ¦ Pracovní deska ¦ Arbetsbänk ¦ Bordplade
+Baignoire ¦ Vana ¦ Badkar ¦ Badekar
+Salle d’eau ¦ Koupelna ¦ Badrum ¦ Badeværelse
+Douche ¦ Sprcha ¦ Dusch ¦ Bruser
+WC ¦ WC ¦ Toalett ¦ Toilet
+Lavabo ¦ Umyvadlo ¦ Tvättställ ¦ Håndvask
+Table de toilette (broc et cuvette) ¦ Toaletní stolek (džbán a umyvadlo) ¦ Tvättbord (kanna och handfat) ¦ Servante (kande og fad)
+Armoire ¦ Skříň ¦ Garderob ¦ Klædeskab
+Rangement ¦ Úložný prostor ¦ Förvaring ¦ Opbevaring
+Coffre ¦ Truhla ¦ Kista ¦ Kiste
+Étagère ¦ Police ¦ Hylla ¦ Hylde
+Rouet ¦ Kolovrat ¦ Spinnrock ¦ Spinderok
+Métiers, atelier ¦ Řemesla, dílna ¦ Hantverk, verkstad ¦ Håndværk, værksted
+Métier à tisser ¦ Tkalcovský stav ¦ Vävstol ¦ Væv
+Établi ¦ Ponk ¦ Arbetsbänk ¦ Høvlebænk
+Tonneau ¦ Sud ¦ Tunna ¦ Tønde
+Machine à coudre ¦ Šicí stroj ¦ Symaskin ¦ Symaskine
+Enclume ¦ Kovadlina ¦ Städ ¦ Ambolt
+Mangeoire, crèche ¦ Žlab, jesle ¦ Krubba, foderhäck ¦ Krybbe, foderkrybbe
+Ferme, animaux ¦ Statek, zvířata ¦ Gård, djur ¦ Gård, dyr
+Charrette ¦ Vůz ¦ Kärra ¦ Kærre
+Puits ¦ Studna ¦ Brunn ¦ Brønd
+Jardin, extérieur ¦ Zahrada, venku ¦ Trädgård, utomhus ¦ Have, udendørs
+Arbre ¦ Strom ¦ Träd ¦ Træ
+Voiture ¦ Auto ¦ Bil ¦ Bil
+Banc de jardin ¦ Zahradní lavička ¦ Trädgårdsbänk ¦ Havebænk
+Escalier droit ¦ Přímé schodiště ¦ Rak trappa ¦ Lige trappe
+Structure ¦ Konstrukce ¦ Konstruktion ¦ Konstruktion
+Escalier tournant ¦ Točité schodiště ¦ Svängd trappa ¦ Svungen trappe
+Poteau, pilier ¦ Sloup, pilíř ¦ Stolpe, pelare ¦ Stolpe, søjle
+Placard ¦ Vestavěná skříň ¦ Inbyggt skåp ¦ Indbygget skab
+Lit bateau (Empire) ¦ Postel ve tvaru lodi (empír) ¦ Båtsäng (empir) ¦ Bådseng (empire)
+Lit Louis-Philippe ¦ Postel Louis-Philippe ¦ Louis-Philippe-säng ¦ Louis-Philippe-seng
+Lit à baldaquin ¦ Postel s nebesy ¦ Himmelssäng ¦ Himmelseng
+Lit en fer forgé ¦ Postel z kovaného železa ¦ Säng i smidesjärn ¦ Seng i smedejern
+Grand lit (160) ¦ Velká postel (160) ¦ Stor säng (160) ¦ Stor seng (160)
+Paillasse (lit de paille) ¦ Slamník ¦ Halmmadrass ¦ Halmmadras
+Armoire normande ¦ Normandská skříň ¦ Normandisk garderob ¦ Normannisk klædeskab
+Armoire à glace ¦ Skříň se zrcadlem ¦ Garderob med spegel ¦ Klædeskab med spejl
+Chiffonnier, semainier ¦ Vysoká komoda ¦ Hög byrå ¦ Høj kommode
+Table de nuit à marbre ¦ Noční stolek s mramorem ¦ Nattduksbord med marmorskiva ¦ Natbord med marmorplade
+Lampe de chevet ¦ Noční lampička ¦ Sänglampa ¦ Sengelampe
+Pot de chambre ¦ Nočník ¦ Potta ¦ Natpotte
+Paravent ¦ Paraván ¦ Skärm ¦ Skærm
+Psyché (miroir sur pied) ¦ Stojací zrcadlo ¦ Golvspegel ¦ Standspejl
+Fauteuil Voltaire ¦ Křeslo Voltaire ¦ Voltairefåtölj ¦ Voltaire-lænestol
+Banquette de pied de lit ¦ Lavička u nohou postele ¦ Sängbänk ¦ Sengebænk
+Descente de lit ¦ Předložka k posteli ¦ Sängmatta ¦ Sengeforligger
+Dressing ¦ Šatna ¦ Klädkammare ¦ Walk-in-closet
+Chaise paillée ¦ Židle s výpletem ¦ Stol med flätad sits ¦ Stol med flettet sæde
+Coffre de mariage ¦ Svatební truhla ¦ Brudkista ¦ Brudekiste
+Malle-cabine ¦ Kufr do kajuty ¦ Kabinkoffert ¦ Kahytskuffert
+Table de toilette à miroir ¦ Toaletní stolek se zrcadlem ¦ Tvättbord med spegel ¦ Servante med spejl
+Chaufferette, bassinoire ¦ Ohřívač nohou, ohřívač postele ¦ Fotvärmare, sängvärmare ¦ Fodvarmer, sengevarmer
+Cheminée de chambre ¦ Krb v ložnici ¦ Öppen spis i sovrummet ¦ Pejs i soveværelset
+Table ovale à rallonges ¦ Oválný rozkládací stůl ¦ Ovalt utdragsbord ¦ Ovalt udtræksbord
+Table de ferme ¦ Selský stůl ¦ Bondbord ¦ Bondebord
+Table basse ¦ Konferenční stolek ¦ Soffbord ¦ Sofabord
+Guéridon ¦ Kulatý stolek ¦ Pelarbord ¦ Søjlebord
+Bergère ¦ Bergère ¦ Bergère ¦ Bergère
+Fauteuil à bascule ¦ Houpací křeslo ¦ Gungstol ¦ Gyngestol
+Canapé trois places ¦ Trojsedačka ¦ Tresitssoffa ¦ Tre-personers sofa
+Méridienne ¦ Lenoška ¦ Dagbädd ¦ Daybed
+Pouf ¦ Taburet ¦ Puff ¦ Puf
+Pendule de cheminée ¦ Krbové hodiny ¦ Kaminur ¦ Kaminur
+Grande cheminée à manteau ¦ Velký krb s římsou ¦ Stor öppen spis med kappa ¦ Stor pejs med kappe
+Poêle en faïence ¦ Kachlová kamna ¦ Kakelugn ¦ Kakkelovn
+Meuble TV ¦ Televizní stolek ¦ TV-bänk ¦ TV-møbel
+Gramophone ¦ Gramofon ¦ Grammofon ¦ Grammofon
+Harmonium ¦ Harmonium ¦ Harmonium ¦ Harmonium
+Piano à queue ¦ Křídlo ¦ Flygel ¦ Flygel
+Lustre ¦ Lustr ¦ Ljuskrona ¦ Lysekrone
+Tapis rond ¦ Kulatý koberec ¦ Rund matta ¦ Rundt tæppe
+Bibliothèque vitrée ¦ Prosklená knihovna ¦ Bokskåp med glasdörrar ¦ Bogskab med glasdøre
+Chaise cannée ¦ Židle s ratanovým výpletem ¦ Stol med rottingsits ¦ Stol med rørfletning
+Jardinière ¦ Květinový stolek ¦ Blomsterställ ¦ Blomsterstativ
+Cage à oiseaux ¦ Ptačí klec ¦ Fågelbur ¦ Fuglebur
+Aquarium ¦ Akvárium ¦ Akvarium ¦ Akvarium
+Console ¦ Konzolový stolek ¦ Konsolbord ¦ Konsolbord
+Bonheur-du-jour ¦ Dámský psací stolek ¦ Damskrivbord ¦ Dameskrivebord
+Canapé-lit, clic-clac ¦ Rozkládací pohovka ¦ Bäddsoffa ¦ Sovesofa
+Potager (fourneau maçonné) ¦ Zděný sporák ¦ Murad spis ¦ Muret komfur
+Âtre avec crémaillère ¦ Ohniště s háčkem ¦ Härd med grythake ¦ Ildsted med gryderamme
+Four encastrable ¦ Vestavná trouba ¦ Inbyggnadsugn ¦ Indbygningsovn
+Plaques de cuisson ¦ Varná deska ¦ Häll ¦ Kogeplade
+Lave-vaisselle ¦ Myčka nádobí ¦ Diskmaskin ¦ Opvaskemaskine
+Congélateur coffre ¦ Truhlicový mrazák ¦ Frysbox ¦ Kummefryser
+Glacière (armoire à glace) ¦ Lednice na led ¦ Isskåp ¦ Isskab
+Évier double ¦ Dvojitý dřez ¦ Dubbel diskho ¦ Dobbeltvask
+Îlot central ¦ Kuchyňský ostrůvek ¦ Köksö ¦ Køkkenø
+Plan de travail en L ¦ Pracovní deska do L ¦ L-formad arbetsbänk ¦ L-formet bordplade
+Hotte ¦ Digestoř ¦ Köksfläkt ¦ Emhætte
+Meuble haut ¦ Horní skříňka ¦ Överskåp ¦ Overskab
+Meuble bas ¦ Spodní skříňka ¦ Underskåp ¦ Underskab
+Tabouret ¦ Stolička ¦ Pall ¦ Taburet
+Table de cuisine ¦ Kuchyňský stůl ¦ Köksbord ¦ Køkkenbord
+Panetière ¦ Chlebník ¦ Brödskåp ¦ Brødskab
+Billot de boucher ¦ Řeznický špalek ¦ Slaktarkubbe ¦ Slagterblok
+Seau, cruche ¦ Vědro, džbán ¦ Hink, kruka ¦ Spand, kande
+Saloir, jarre ¦ Nádoba na nakládání masa, džbán ¦ Saltkar, kruka ¦ Saltekar, krukke
+Micro-ondes ¦ Mikrovlnná trouba ¦ Mikrovågsugn ¦ Mikrobølgeovn
+Cuisinière à gaz ¦ Plynový sporák ¦ Gasspis ¦ Gaskomfur
+Chaudron ¦ Kotel ¦ Kittel ¦ Kedel
+Moulin à café ¦ Mlýnek na kávu ¦ Kaffekvarn ¦ Kaffekværn
+Réfrigérateur américain ¦ Americká lednice ¦ Amerikanskt kylskåp ¦ Amerikansk køleskab
+Égouttoir, vaisselier mural ¦ Odkapávač, nástěnná polička na nádobí ¦ Diskställ, väggställ för porslin ¦ Opvaskestativ, tallerkenrække
+Baignoire sabot ¦ Sedací vana ¦ Sittbadkar ¦ Siddebadekar
+Baignoire sur pieds (fonte) ¦ Litinová vana na nožičkách ¦ Badkar på tassar (gjutjärn) ¦ Badekar på løvefødder (støbejern)
+Cuvier, baquet ¦ Necky, škopek ¦ Tvättbalja ¦ Vaskebalje
+Bidet ¦ Bidet ¦ Bidé ¦ Bidet
+Double vasque ¦ Dvojité umyvadlo ¦ Dubbelt handfat ¦ Dobbelt håndvask
+Douche à l’italienne ¦ Sprchový kout bez vaničky ¦ Golvdusch ¦ Gulvbruser
+Machine à laver ¦ Pračka ¦ Tvättmaskin ¦ Vaskemaskine
+Sèche-linge ¦ Sušička ¦ Torktumlare ¦ Tørretumbler
+Chauffe-eau, ballon ¦ Ohřívač vody, bojler ¦ Varmvattenberedare ¦ Vandvarmer
+Radiateur ¦ Radiátor ¦ Element ¦ Radiator
+Sèche-serviettes ¦ Sušák na ručníky ¦ Handdukstork ¦ Håndklædetørrer
+Meuble vasque ¦ Skříňka pod umyvadlo ¦ Kommod med handfat ¦ Vaskeskab
+Miroir de salle de bains ¦ Koupelnové zrcadlo ¦ Badrumsspegel ¦ Badeværelsesspejl
+WC à la turque ¦ Turecký záchod ¦ Hukbare toalett ¦ Hugtoilet
+Chaise percée ¦ Pokojový klozet ¦ Toastol ¦ Natstol
+Lessiveuse ¦ Kotel na prádlo ¦ Tvättgryta ¦ Vasketøjskedel
+Étendoir à linge ¦ Sušák na prádlo ¦ Torkställ ¦ Tørrestativ
+Panier à linge ¦ Koš na prádlo ¦ Tvättkorg ¦ Vasketøjskurv
+Colonne de rangement ¦ Vysoká úložná skříňka ¦ Högskåp ¦ Højskab
+WC suspendu ¦ Závěsné WC ¦ Vägghängd toalett ¦ Væghængt toilet
+Bac à douche ¦ Sprchová vanička ¦ Duschkar ¦ Brusekar
+Malle de voyage ¦ Cestovní kufr ¦ Reskoffert ¦ Rejsekuffert
+Bahut ¦ Nízká skříň ¦ Låg skänk ¦ Lav skænk
+Buffet deux corps ¦ Dvoudílný příborník ¦ Tvådelad skänk ¦ Todelt skænk
+Enfilade ¦ Dlouhý příborník ¦ Lång skänk ¦ Lang skænk
+Confiturier ¦ Skříňka na zavařeniny ¦ Syltskåp ¦ Syltetøjsskab
+Étagère métallique ¦ Kovový regál ¦ Metallhylla ¦ Metalreol
+Penderie, portant ¦ Věšák na šaty ¦ Klädstång ¦ Tøjstativ
+Portemanteau ¦ Věšák ¦ Klädhängare ¦ Stumtjener
+Meuble à cases ¦ Přihrádkový regál ¦ Kubhylla ¦ Kassereol
+Placard mural ¦ Nástěnná skříňka ¦ Väggskåp ¦ Vægskab
+Meuble à chaussures ¦ Botník ¦ Skoskåp ¦ Skoskab
+Casier à bouteilles ¦ Stojan na lahve ¦ Vinställ ¦ Vinreol
+Pile de cartons ¦ Hromada krabic ¦ Hög med kartonger ¦ Stak af papkasser
+Cantine militaire ¦ Vojenská bedna ¦ Militärkista ¦ Militærkiste
+Armoire à linge ¦ Skříň na prádlo ¦ Linneskåp ¦ Linnedskab
+Porte-parapluies ¦ Stojan na deštníky ¦ Paraplyställ ¦ Paraplystativ
+Meuble d’entrée ¦ Předsíňová stěna ¦ Hallmöbel ¦ Entrémøbel
+Vestiaire métallique ¦ Kovová šatní skříňka ¦ Metallskåp ¦ Metalskab
+Commode basse ¦ Nízká komoda ¦ Låg byrå ¦ Lav kommode
+Coffre à bois ¦ Bedna na dřevo ¦ Vedlår ¦ Brændekasse
+Secrétaire à abattant ¦ Sekretář se sklopnou deskou ¦ Sekretär ¦ Chatol
+Bureau plat (ministre) ¦ Velký psací stůl ¦ Stort skrivbord ¦ Stort skrivebord
+Bureau à cylindre ¦ Psací stůl s roletou ¦ Rullgardinsskrivbord ¦ Rulleskrivebord
+Fauteuil de bureau ¦ Kancelářské křeslo ¦ Kontorsstol ¦ Kontorstol
+Chaise de bureau en bois ¦ Dřevěná kancelářská židle ¦ Skrivbordsstol i trä ¦ Skrivebordsstol i træ
+Cartonnier ¦ Kartotéka na krabice ¦ Arkivskåp med kartonger ¦ Kartotekskab med kasser
+Classeur à tiroirs ¦ Kartotéka se zásuvkami ¦ Arkivskåp med lådor ¦ Arkivskab med skuffer
+Ordinateur (écran) ¦ Počítač (monitor) ¦ Dator (skärm) ¦ Computer (skærm)
+Imprimante, scanner ¦ Tiskárna, skener ¦ Skrivare, skanner ¦ Printer, scanner
+Globe terrestre ¦ Globus ¦ Jordglob ¦ Globus
+Coffre-fort ¦ Trezor ¦ Kassaskåp ¦ Pengeskab
+Lampe de bureau ¦ Stolní lampa ¦ Skrivbordslampa ¦ Skrivebordslampe
+Bibliothèque murale ¦ Nástěnná knihovna ¦ Bokvägg ¦ Bogvæg
+Table à dessin ¦ Rýsovací stůl ¦ Ritbord ¦ Tegnebord
+Boîtes d’archives ¦ Archivní krabice ¦ Arkivlådor ¦ Arkivkasser
+Téléphone mural (ancien) ¦ Nástěnný telefon (starý) ¦ Väggtelefon (gammal) ¦ Vægtelefon (gammel)
+Tableau noir, tableau blanc ¦ Tabule, bílá tabule ¦ Svarta tavlan, whiteboard ¦ Tavle, whiteboard
+Bureau moderne ¦ Moderní psací stůl ¦ Modernt skrivbord ¦ Moderne skrivebord
+Caisson à tiroirs ¦ Kontejner se zásuvkami ¦ Låddhurts ¦ Skuffeelement
+Fauteuil club ¦ Klubové křeslo ¦ Klubbfåtölj ¦ Klubstol
+Berceau en osier ¦ Proutěná kolébka ¦ Korgvagga ¦ Kurvevugge
+Lit à barreaux ¦ Dětská postýlka ¦ Spjälsäng ¦ Tremmeseng
+Lits superposés ¦ Patrová postel ¦ Våningssäng ¦ Køjeseng
+Table à langer ¦ Přebalovací pult ¦ Skötbord ¦ Puslebord
+Coffre à jouets ¦ Truhla na hračky ¦ Leksakskista ¦ Legetøjskiste
+Cheval à bascule ¦ Houpací kůň ¦ Gunghäst ¦ Gyngehest
+Parc ¦ Ohrádka ¦ Lekhage ¦ Kravlegård
+Chaise haute ¦ Dětská židlička ¦ Barnstol ¦ Høj stol
+Pupitre d’écolier ¦ Školní pult ¦ Skolpulpet ¦ Skolepult
+Landau ¦ Kočárek ¦ Barnvagn ¦ Barnevogn
+Maison de poupée ¦ Domeček pro panenky ¦ Dockskåp ¦ Dukkehus
+Tipi ¦ Týpí ¦ Tipi ¦ Tipi
+Petite table ¦ Stolek ¦ Litet bord ¦ Lille bord
+Petite chaise ¦ Židlička ¦ Liten stol ¦ Lille stol
+Tapis de jeu ¦ Hrací podložka ¦ Lekmatta ¦ Legetæppe
+Ours en peluche ¦ Plyšový medvídek ¦ Nallebjörn ¦ Bamse
+Bibliothèque basse ¦ Nízká knihovna ¦ Låg bokhylla ¦ Lav bogreol
+Trotteur, porteur ¦ Chodítko, odrážedlo ¦ Gåstol, åkleksak ¦ Gåvogn, gå-bil
+Crucifix ¦ Krucifix ¦ Krucifix ¦ Krucifiks
+Bénitier ¦ Kropenka ¦ Vigvattenskål ¦ Vievandskar
+Petit autel, oratoire ¦ Domácí oltářík ¦ Litet altare, bönehörna ¦ Lille alter, bedehjørne
+Statue de la Vierge ¦ Socha Panny Marie ¦ Madonnastaty ¦ Madonnastatue
+Chandelier, cierge ¦ Svícen, svíce ¦ Ljusstake, kyrkljus ¦ Lysestage, kirkelys
+Portrait de famille ¦ Rodinný portrét ¦ Familjeporträtt ¦ Familieportræt
+Photo de mariage encadrée ¦ Zarámovaná svatební fotka ¦ Inramat bröllopsfoto ¦ Indrammet bryllupsbillede
+Arbre généalogique encadré ¦ Zarámovaný rodokmen ¦ Inramat släktträd ¦ Indrammet stamtræ
+Globe de mariée ¦ Svatební skleněný zvon ¦ Brudglob ¦ Brudeklokke
+Cadre de médailles ¦ Rám s medailemi ¦ Medaljram ¦ Medaljeramme
+Bible familiale sur lutrin ¦ Rodinná bible na pultu ¦ Familjebibel på läspulpet ¦ Familiebibel på læsepult
+Coffret à souvenirs ¦ Skříňka na upomínky ¦ Minnesask ¦ Mindeskrin
+Vitrine à souvenirs ¦ Vitrína na upomínky ¦ Minnesvitrin ¦ Mindevitrine
+Lampe à huile ¦ Olejová lampa ¦ Oljelampa ¦ Olielampe
+Buste sur colonne ¦ Busta na sloupu ¦ Byst på pelare ¦ Buste på søjle
+Icône, image pieuse ¦ Ikona, svatý obrázek ¦ Ikon, helgonbild ¦ Ikon, helgenbillede
+Pile d’albums de famille ¦ Hromada rodinných alb ¦ Hög med familjealbum ¦ Stak af familiealbum
+Plaque commémorative ¦ Pamětní deska ¦ Minnesplakett ¦ Mindeplade
+Malle aux souvenirs ¦ Truhla vzpomínek ¦ Minneskista ¦ Mindekiste
+Croix de bois au mur ¦ Dřevěný kříž na zdi ¦ Träkors på väggen ¦ Trækors på væggen
+Retable, armoire d’église ¦ Oltářní nástavec, kostelní skříň ¦ Altarskåp, kyrkskåp ¦ Altertavle, kirkeskab
+Forge (foyer) ¦ Kovářská výheň ¦ Smedja (ässja) ¦ Smedje (esse)
+Soufflet de forge ¦ Kovářský měch ¦ Smidesbälg ¦ Smedebælg
+Tour à bois ¦ Soustruh na dřevo ¦ Träsvarv ¦ Drejebænk
+Presse à imprimer ¦ Tiskařský lis ¦ Tryckpress ¦ Trykpresse
+Meule à aiguiser ¦ Brus ¦ Slipsten ¦ Slibesten
+Cuve de vigneron ¦ Vinařská káď ¦ Vinkar ¦ Vinkar
+Pressoir à vin ¦ Vinný lis ¦ Vinpress ¦ Vinpresse
+Alambic ¦ Destilační přístroj ¦ Destillationsapparat ¦ Destillationsapparat
+Comptoir de boutique ¦ Pult obchodu ¦ Butiksdisk ¦ Butiksdisk
+Balance à bascule ¦ Decimálka ¦ Decimalvåg ¦ Decimalvægt
+Caisse enregistreuse ¦ Pokladna ¦ Kassaapparat ¦ Kasseapparat
+Étalage de magasin ¦ Výloha obchodu ¦ Butiksdisplay ¦ Butiksudstilling
+Fauteuil de barbier ¦ Holičské křeslo ¦ Barberarstol ¦ Barberstol
+Établi de cordonnier ¦ Ševcovský verpánek ¦ Skomakarbänk ¦ Skomagerbænk
+Chevalet de peintre ¦ Malířský stojan ¦ Målarstaffli ¦ Malerstaffeli
+Carreau de dentellière ¦ Krajkářský herdule ¦ Knyppeldyna ¦ Kniplepude
+Four de boulanger ¦ Pekařská pec ¦ Bagarugn ¦ Bagerovn
+Barrique ¦ Barik ¦ Fat ¦ Fad
+Meule de moulin ¦ Mlýnský kámen ¦ Kvarnsten ¦ Møllesten
+Chevalet de scieur ¦ Koza na řezání dřeva ¦ Sågbock ¦ Savbuk
+Établi de menuisier ¦ Truhlářský ponk ¦ Snickarbänk ¦ Snedkerbænk
+Panneau à outils ¦ Tabule na nářadí ¦ Verktygstavla ¦ Værktøjstavle
+Vache ¦ Kráva ¦ Ko ¦ Ko
+Cheval ¦ Kůň ¦ Häst ¦ Hest
+Âne ¦ Osel ¦ Åsna ¦ Æsel
+Cochon ¦ Prase ¦ Gris ¦ Gris
+Mouton ¦ Ovce ¦ Får ¦ Får
+Chèvre ¦ Koza ¦ Get ¦ Ged
+Poule ¦ Slepice ¦ Höna ¦ Høne
+Chien ¦ Pes ¦ Hund ¦ Hund
+Chat ¦ Kočka ¦ Katt ¦ Kat
+Clapier à lapins ¦ Králíkárna ¦ Kaninbur ¦ Kaninbur
+Poulailler ¦ Kurník ¦ Hönshus ¦ Hønsehus
+Niche ¦ Psí bouda ¦ Hundkoja ¦ Hundehus
+Stalle, box d’écurie ¦ Stání, box ve stáji ¦ Spilta, box ¦ Bås, boks
+Abreuvoir ¦ Napajedlo ¦ Vattentråg ¦ Vandtrug
+Râtelier à foin ¦ Žebřiny na seno ¦ Höhäck ¦ Høhæk
+Meule de foin ¦ Kupka sena ¦ Höstack ¦ Høstak
+Botte de paille ¦ Balík slámy ¦ Halmbal ¦ Halmballe
+Charrue ¦ Pluh ¦ Plog ¦ Plov
+Herse ¦ Brány ¦ Harv ¦ Harve
+Tracteur ancien ¦ Starý traktor ¦ Gammal traktor ¦ Gammel traktor
+Brouette ¦ Kolečko ¦ Skottkärra ¦ Trillebør
+Baratte à beurre ¦ Máselnice ¦ Smörkärna ¦ Smørkærne
+Ruche ¦ Úl ¦ Bikupa ¦ Bistade
+Coffre à grain ¦ Truhla na obilí ¦ Sädesbinge ¦ Kornkiste
+Bidon à lait ¦ Konev na mléko ¦ Mjölkkanna ¦ Mælkejunge
+Tombereau ¦ Sklápěcí vůz ¦ Tippkärra ¦ Tipvogn
+Arbre fruitier ¦ Ovocný strom ¦ Fruktträd ¦ Frugttræ
+Sapin, conifère ¦ Jedle, jehličnan ¦ Gran, barrträd ¦ Gran, nåletræ
+Haie ¦ Živý plot ¦ Häck ¦ Hæk
+Buisson, arbuste ¦ Keř ¦ Buske ¦ Busk
+Massif de fleurs ¦ Květinový záhon ¦ Rabatt ¦ Blomsterbed
+Potager (planches) ¦ Zeleninové záhony ¦ Köksland (bäddar) ¦ Køkkenhave (bede)
+Mare, bassin ¦ Rybníček, jezírko ¦ Damm, bassäng ¦ Dam, bassin
+Lavoir ¦ Prádelna ¦ Tvättplats ¦ Vaskehus
+Four à pain ¦ Chlebová pec ¦ Bakugn ¦ Bageovn
+Pompe à bras ¦ Ruční pumpa ¦ Handpump ¦ Håndpumpe
+Croix de chemin, calvaire ¦ Boží muka, kalvárie ¦ Vägkors, kalvarieberg ¦ Vejkors, golgata
+Pierre tombale ¦ Náhrobní kámen ¦ Gravsten ¦ Gravsten
+Table de jardin ¦ Zahradní stůl ¦ Trädgårdsbord ¦ Havebord
+Chaise de jardin ¦ Zahradní židle ¦ Trädgårdsstol ¦ Havestol
+Transat, chaise longue ¦ Lehátko ¦ Solstol, schäslong ¦ Liggestol
+Parasol ¦ Slunečník ¦ Parasoll ¦ Parasol
+Barbecue ¦ Gril ¦ Grill ¦ Grill
+Balançoire ¦ Houpačka ¦ Gunga ¦ Gynge
+Toboggan ¦ Skluzavka ¦ Rutschkana ¦ Rutsjebane
+Pergola, tonnelle ¦ Pergola, besídka ¦ Pergola, berså ¦ Pergola, lysthus
+Clôture, barrière ¦ Plot, branka ¦ Staket, grind ¦ Hegn, låge
+Portail ¦ Brána ¦ Grind ¦ Port
+Muret de pierre ¦ Kamenná zídka ¦ Låg stenmur ¦ Lav stenmur
+Bicyclette ¦ Jízdní kolo ¦ Cykel ¦ Cykel
+Cabane de jardin ¦ Zahradní domek ¦ Trädgårdsbod ¦ Haveskur
+Serre ¦ Skleník ¦ Växthus ¦ Drivhus
+Tas de bois ¦ Hromada dřeva ¦ Vedtrave ¦ Brændestabel
+Bouleau, arbre fin ¦ Bříza, štíhlý strom ¦ Björk, smalt träd ¦ Birk, slankt træ
+Banc de pierre ¦ Kamenná lavice ¦ Stenbänk ¦ Stenbænk
+Escalier en colimaçon ¦ Točité schodiště ¦ Spiraltrappa ¦ Vindeltrappe
+Échelle de meunier ¦ Mlynářské schody ¦ Branttrappa ¦ Hanebjælketrappe
+Colonne ronde ¦ Kulatý sloup ¦ Rund pelare ¦ Rund søjle
+Poutre apparente ¦ Viditelný trám ¦ Synlig bjälke ¦ Synlig bjælke
+Trappe de cave ¦ Sklepní poklop ¦ Källarlucka ¦ Kælderlem
+Marche, seuil ¦ Schod, práh ¦ Trappsteg, tröskel ¦ Trin, dørtrin
+Garde-corps, rampe ¦ Zábradlí, madlo ¦ Räcke, ledstång ¦ Rækværk, gelænder
+Conduit de cheminée ¦ Komínový průduch ¦ Skorstensrör ¦ Skorstensrør
+Verrière, cloison vitrée ¦ Prosklená příčka ¦ Glasvägg ¦ Glasvæg
+Radiateur en fonte ¦ Litinový radiátor ¦ Gjutjärnselement ¦ Støbejernsradiator
+Chaudière ¦ Kotel ¦ Panna ¦ Kedel
+Pilier de pierre ¦ Kamenný pilíř ¦ Stenpelare ¦ Stensøjle
+Estrade, palier ¦ Pódium, podesta ¦ Podium, trapplan ¦ Podium, trappeafsats
+Muret, demi-cloison ¦ Nízká příčka ¦ Halvvägg ¦ Halvvæg
+Niche, alcôve ¦ Výklenek, alkovna ¦ Nisch, alkov ¦ Niche, alkove
+Bonnetière (armoire à une porte) ¦ Jednodveřová skříň ¦ Endörrsgarderob ¦ Enkeltdørs klædeskab
+Armoire de mariage (de dot) ¦ Svatební skříň (věno) ¦ Brudgarderob (hemgift) ¦ Brudeskab (medgift)
+Lit clos à portes coulissantes ¦ Skříňové lůžko s posuvnými dvířky ¦ Skåpsäng med skjutdörrar ¦ Alkoveseng med skydedøre
+Lit-armoire, lit clos d’angle ¦ Skříňové lůžko, rohové skříňové lůžko ¦ Skåpsäng, hörnskåpsäng ¦ Skabsseng, hjørnealkoveseng
+Lit d’alcôve à rideaux ¦ Lůžko v alkovně se závěsy ¦ Alkovsäng med draperier ¦ Alkoveseng med forhæng
+Berceau ancien en bois (à bascule) ¦ Stará dřevěná houpací kolébka ¦ Gammal gungvagga i trä ¦ Gammel gyngevugge i træ
+Berceau à capote en osier ¦ Proutěná kolébka se stříškou ¦ Korgvagga med sufflett ¦ Kurvevugge med kaleche
+Bassinoire en cuivre (à long manche) ¦ Měděný ohřívač postele (s dlouhou rukojetí) ¦ Sängvärmare i koppar (långt skaft) ¦ Sengevarmer i kobber (langt skaft)
+Table de toilette à marbre ¦ Toaletní stolek s mramorem ¦ Tvättbord med marmorskiva ¦ Servante med marmorplade
+Cuvette et broc en faïence ¦ Fajánsové umyvadlo a džbán ¦ Handfat och kanna i fajans ¦ Fad og kande i fajance
+Commode galbée (Louis XV) ¦ Vypouklá komoda (Ludvík XV.) ¦ Svängd byrå (Louis XV) ¦ Buet kommode (Louis XV)
+Bougeoir de chevet ¦ Noční svícen ¦ Sängljusstake ¦ Natlysestage
+Chaufferette à braises ¦ Ohřívač nohou na uhlíky ¦ Fotvärmare för glöd ¦ Fodvarmer til gløder
+Malle en osier ¦ Proutěný kufr ¦ Korgkoffert ¦ Kurvekuffert
+Horloge comtoise à ventre (violonée) ¦ Komtoazské hodiny s vypouklou skříní ¦ Comtoise-klocka med midja ¦ Comtoise-ur med talje
+Horloge comtoise peinte ¦ Malované komtoazské hodiny ¦ Målad comtoise-klocka ¦ Malet comtoise-ur
+Horloge de parquet (régulateur) ¦ Podlahové hodiny (regulátor) ¦ Golvur (regulator) ¦ Standur (regulator)
+Buffet bas à deux portes ¦ Nízký dvoudveřový příborník ¦ Låg skänk med två dörrar ¦ Lav skænk med to døre
+Vaisselier breton ¦ Bretaňská kredenc ¦ Bretonskt porslinsskåp ¦ Bretonsk tallerkenrække
+Vaisselier normand ¦ Normandská kredenc ¦ Normandiskt porslinsskåp ¦ Normannisk tallerkenrække
+Banc-coffre à dossier (archebanc) ¦ Lavice s truhlou a opěradlem ¦ Kistsoffa med ryggstöd (archebanc) ¦ Kistebænk med ryglæn (archebanc)
+Banc-coffre de lit clos ¦ Lavice s truhlou u skříňového lůžka ¦ Kistbänk vid skåpsäng ¦ Kistebænk ved alkoveseng
+Chaise paillée à barreaux ¦ Příčková židle s výpletem ¦ Pinnstol med flätad sits ¦ Tremmestol med flettet sæde
+Fauteuil paillé (de grand-mère) ¦ Pletené křeslo (babiččino) ¦ Fåtölj med flätad sits (mormors) ¦ Lænestol med flettet sæde (bedstemors)
+Table à volets ¦ Stůl se sklopnými křídly ¦ Klaffbord ¦ Klapbord
+Table de ferme en chêne (à tiroir) ¦ Dubový selský stůl (se zásuvkou) ¦ Bondbord i ek (med låda) ¦ Bondebord i eg (med skuffe)
+Lampe tempête ¦ Petrolejová lucerna ¦ Stormlykta ¦ Stormlampe
+Chandelier, bougeoir ¦ Svícen ¦ Ljusstake ¦ Lysestage
+Suspension à pétrole ¦ Závěsná petrolejová lampa ¦ Hängande fotogenlampa ¦ Hængende petroleumslampe
+Poste TSF à lampes ¦ Elektronkový rozhlasový přijímač ¦ Rörradio ¦ Rørradio
+Phonographe à pavillon ¦ Fonograf s troubou ¦ Fonograf med tratt ¦ Fonograf med tragt
+Poêle Godin (fonte émaillée) ¦ Kamna Godin (smaltovaná litina) ¦ Godin-kamin (emaljerat gjutjärn) ¦ Godin-ovn (emaljeret støbejern)
+Poêle à bois en fonte (cloche) ¦ Litinová kamna na dřevo (zvon) ¦ Vedkamin i gjutjärn (klocka) ¦ Brændeovn i støbejern (klokke)
+Chenets (la paire) ¦ Kozlíky do krbu (pár) ¦ Brandjärn (paret) ¦ Brandjern (parret)
+Cheminée à manteau (à hotte) ¦ Krb s římsou (s digestoří) ¦ Öppen spis med kappa (huv) ¦ Pejs med kappe (emhætte)
+Cheminée de pierre à linteau de bois ¦ Kamenný krb s dřevěným překladem ¦ Öppen spis i sten med träöverstycke ¦ Stenpejs med træoverligger
+Cantou (coin du feu) ¦ Koutek u ohně ¦ Spiskrok ¦ Krog ved ilden
+Bergère Louis XVI ¦ Bergère Ludvík XVI. ¦ Bergère Louis XVI ¦ Bergère Louis XVI
+Fauteuil crapaud ¦ Křeslo „ropucha“ ¦ Paddfåtölj ¦ Paddestol
+Sellette (porte-plante) ¦ Stojan na květiny ¦ Blompiedestal ¦ Blomstersøjle
+Portrait des ancêtres (ovale) ¦ Portrét předků (oválný) ¦ Anfädernas porträtt (ovalt) ¦ Anernes portræt (ovalt)
+Maie (pétrin sur pieds) ¦ Díža na nohách ¦ Degtråg på ben ¦ Dejtrug på ben
+Maie-coffre à couvercle ¦ Díža-truhla s víkem ¦ Degkista med lock ¦ Dejkiste med låg
+Huche à pain ¦ Truhla na chleba ¦ Brödlåda ¦ Brødkasse
+Cuisinière à bois en fonte (à barre de laiton) ¦ Litinový sporák na dřevo (s mosaznou tyčí) ¦ Vedspis i gjutjärn (med mässingsstång) ¦ Brændekomfur i støbejern (med messingstang)
+Cuisinière émaillée bois et charbon ¦ Smaltovaný sporák na dřevo a uhlí ¦ Emaljerad spis för ved och kol ¦ Emaljeret komfur til brænde og kul
+Potager carrelé (fourneau à braises) ¦ Obkládaný sporák na uhlíky ¦ Kaklad spis för glöd ¦ Flisebeklædt gløderkomfur
+Évier taillé dans la pierre ¦ Dřez vytesaný z kamene ¦ Diskho uthuggen i sten ¦ Vask hugget i sten
+Évier en grès émaillé ¦ Dřez z glazované kameniny ¦ Diskho i glaserat stengods ¦ Vask i glaseret stentøj
+Fontaine en cuivre sur son support ¦ Měděná nádržka s kohoutkem na stojanu ¦ Vattenbehållare i koppar på ställ ¦ Vandbeholder i kobber på stativ
+Fontaine en grès ¦ Kameninová nádržka s kohoutkem ¦ Vattenbehållare i stengods ¦ Vandbeholder i stentøj
+Saloir en grès ¦ Kameninová nádoba na nakládání ¦ Saltkar i stengods ¦ Saltekar i stentøj
+Saloir en bois (coffre à sel) ¦ Dřevěná solnička (truhlička na sůl) ¦ Saltlåda i trä ¦ Saltkasse i træ
+Garde-manger grillagé (mural) ¦ Nástěnná spížka se síťkou ¦ Väggskafferi med nät ¦ Vægspisekammer med net
+Buffet de cuisine (années 1930-1950) ¦ Kuchyňská kredenc (30.–50. léta) ¦ Köksskåp (1930–1950-tal) ¦ Køkkenskab (1930’erne–1950’erne)
+Moulin à café mural ¦ Nástěnný mlýnek na kávu ¦ Väggkaffekvarn ¦ Vægkaffekværn
+Fer à repasser en fonte ¦ Litinová žehlička ¦ Strykjärn i gjutjärn ¦ Strygejern i støbejern
+Marmite en fonte ¦ Litinový hrnec ¦ Gryta i gjutjärn ¦ Gryde i støbejern
+Cruche, pichet en grès ¦ Kameninový džbán ¦ Kanna i stengods ¦ Kande i stentøj
+Tue-mouches en verre (piège à mouches) ¦ Skleněná past na mouchy ¦ Flugfälla i glas ¦ Fluefælde i glas
+Balance Roberval et ses poids ¦ Robervalovy váhy se závažím ¦ Robervalvåg med vikter ¦ Roberval-vægt med lodder
+Glacière en bois doublée de zinc ¦ Dřevěná lednice vyložená zinkem ¦ Isskåp i trä med zinkfoder ¦ Isskab i træ foret med zink
+Tub (grand bassin en zinc) ¦ Velká zinková vana ¦ Stor zinkbalja ¦ Stor zinkbalje
+Baquet de lessive en bois ¦ Dřevěné necky na prádlo ¦ Tvättbalja i trä ¦ Vaskebalje i træ
+Lessiveuse à champignon ¦ Kotel na prádlo s kloboukem ¦ Tvättgryta med svamplock ¦ Vasketøjskedel med svamp
+Baignoire en zinc ¦ Zinková vana ¦ Badkar i zink ¦ Badekar i zink
+Lave-mains en fonte émaillée ¦ Umývátko ze smaltované litiny ¦ Handfat i emaljerat gjutjärn ¦ Håndvask i emaljeret støbejern
+Planche à laver ¦ Valcha ¦ Tvättbräda ¦ Vaskebræt
+Buffet deux-corps vitré ¦ Dvoudílná prosklená kredenc ¦ Tvådelat skåp med glasdörrar ¦ Todelt skab med glasdøre
+Buffet deux-corps normand ¦ Dvoudílná normandská kredenc ¦ Tvådelat normandiskt skåp ¦ Todelt normannisk skab
+Armoire lorraine ¦ Lotrinská skříň ¦ Lothringsk garderob ¦ Lothringsk klædeskab
+Armoire bressane ¦ Skříň z Bresse ¦ Garderob från Bresse ¦ Klædeskab fra Bresse
+Coffre de mariage sculpté ¦ Vyřezávaná svatební truhla ¦ Snidad brudkista ¦ Udskåret brudekiste
+Malle bombée de voyage ¦ Klenutý cestovní kufr ¦ Välvd reskoffert ¦ Hvælvet rejsekuffert
+Coffre à linge à pentures de fer ¦ Truhla na prádlo s železným kováním ¦ Linnekista med järnbeslag ¦ Linnedkiste med jernbeslag
+Panetière provençale (murale) ¦ Provensálský nástěnný chlebník ¦ Provensalskt brödskåp (vägg) ¦ Provencalsk brødskab (væg)
+Étagère à cuivres ¦ Police na měděné nádobí ¦ Hylla för kopparkärl ¦ Hylde til kobbertøj
+Bureau de pente (dos d’âne) ¦ Psací stůl se šikmou deskou ¦ Skrivbyrå med lutande lock ¦ Skrivepult med skrå klap
+Scriban (pente et vitrine) ¦ Sekretář s vitrínou ¦ Skrivbyrå med vitrinskåp ¦ Chatol med vitrine
+Écritoire, encrier et plumier ¦ Psací souprava, kalamář a penál ¦ Skrivställ, bläckhorn och pennlåda ¦ Skrivesæt, blækhus og penneskrin
+Lampe bouillotte ¦ Lampa bouillotte ¦ Bouillottelampa ¦ Bouillottelampe
+Banc d’école à pupitre (deux places) ¦ Dvoumístná školní lavice ¦ Skolbänk med pulpet (två platser) ¦ Skolebænk med pult (to pladser)
+Pupitre d’écolier à abattant ¦ Školní pult se sklopnou deskou ¦ Skolpulpet med lock ¦ Skolepult med låg
+Ardoise d’écolier ¦ Školní tabulka ¦ Griffeltavla ¦ Griffeltavle
+Cheval de bois ¦ Dřevěný kůň ¦ Trähäst ¦ Træhest
+Poupée de porcelaine ¦ Porcelánová panenka ¦ Porslinsdocka ¦ Porcelænsdukke
+Chaise d’enfant paillée ¦ Dětská židle s výpletem ¦ Barnstol med flätad sits ¦ Børnestol med flettet sæde
+Trotteur d’enfant en bois ¦ Dřevěné chodítko ¦ Gåvagn i trä ¦ Gåvogn i træ
+Prie-Dieu sculpté ¦ Vyřezávané klekátko ¦ Snidad bönpall ¦ Udskåret bedeskammel
+Bénitier de chambre en faïence ¦ Fajánsová pokojová kropenka ¦ Vigvattenskål i fajans för sovrummet ¦ Vievandskar i fajance til soveværelset
+Crucifix de chevet (Christ en bronze) ¦ Krucifix u postele (bronzový Kristus) ¦ Krucifix vid sängen (Kristus i brons) ¦ Krucifiks ved sengen (Kristus i bronze)
+Globe de mariée sur son socle ¦ Svatební skleněný zvon na podstavci ¦ Brudglob på sockel ¦ Brudeklokke på sokkel
+Statuette de saint ¦ Soška světce ¦ Helgonstatyett ¦ Helgenfigur
+Image de communion encadrée ¦ Zarámovaný obrázek k prvnímu přijímání ¦ Inramat kommunionskort ¦ Indrammet kommunionsbillede
+Couronne de perles (mortuaire) ¦ Smuteční korálkový věnec ¦ Begravningskrans av pärlor ¦ Perlekrans (til begravelse)
+Rouet flamand (à fuseau) ¦ Vlámský kolovrat (s vřetenem) ¦ Flamländsk spinnrock (med slända) ¦ Flamsk spinderok (med ten)
+Grand rouet à laine ¦ Velký kolovrat na vlnu ¦ Stor ullspinnrock ¦ Stor uldspinderok
+Métier à tisser à bras ¦ Ruční tkalcovský stav ¦ Handvävstol ¦ Håndvæv
+Métier à tapisserie (vertical) ¦ Gobelínový stav (svislý) ¦ Gobelängvävstol (stående) ¦ Gobelinvæv (lodret)
+Dévidoir à écheveaux ¦ Motovidlo ¦ Härvel ¦ Garnvinde
+Machine à coudre à pédale (Singer) ¦ Šlapací šicí stroj (Singer) ¦ Trampsymaskin (Singer) ¦ Trædesymaskine (Singer)
+Machine à coudre à main ¦ Ruční šicí stroj ¦ Handsymaskin ¦ Håndsymaskine
+Mannequin de couturière ¦ Krejčovská panna ¦ Provdocka ¦ Syerskedukke
+Fourneau à fers de repasseuse ¦ Kamínka na nahřívání žehliček ¦ Kamin för strykjärn ¦ Ovn til strygejern
+Banc de sabotier ¦ Ponk dřevákaře ¦ Träskomakarbänk ¦ Træskomagerbænk
+Presse à fromage ¦ Lis na sýr ¦ Ostpress ¦ Ostepresse
+Baratte à piston en bois ¦ Dřevěná pístová máselnice ¦ Stavkärna i trä ¦ Stampekærne i træ
+Baratte-tonneau à manivelle ¦ Sudová máselnice s klikou ¦ Tunnkärna med vev ¦ Tøndekærne med håndsving
+Écrémeuse ¦ Odstředivka ¦ Separator ¦ Centrifuge
+Joug de bœufs ¦ Volské jho ¦ Oxok ¦ Okseåg
+Outils (fourche, faux, râteau) ¦ Nářadí (vidle, kosa, hrábě) ¦ Redskap (grep, lie, kratta) ¦ Redskaber (fork, le, rive)
+Pressoir à pommes (cidre) ¦ Lis na jablka (mošt) ¦ Äppelpress (cider) ¦ Æblepresse (cider)
+Charreton à bras ¦ Ruční vozík ¦ Dragkärra ¦ Trækvogn
+Ruche en paille (panier) ¦ Slaměný úl (košík) ¦ Halmkupa ¦ Halmkube
+Puits à margelle et petit toit ¦ Studna s roubením a stříškou ¦ Brunn med brunnskant och litet tak ¦ Brønd med brøndkarm og lille tag
+Pompe à eau en fonte et son auge ¦ Litinová pumpa se žlabem ¦ Vattenpump i gjutjärn med tråg ¦ Vandpumpe i støbejern med trug
+Auge en pierre ¦ Kamenné koryto ¦ Stentråg ¦ Stentrug
+Banc à laver (de lavoir) ¦ Lavice na praní (v prádelně) ¦ Tvättbänk (tvättplats) ¦ Vaskebænk (vaskehus)
+Canapé moderne trois places ¦ Moderní trojsedačka ¦ Modern tresitssoffa ¦ Moderne tre-personers sofa
+Canapé deux places ¦ Dvojsedačka ¦ Tvåsitssoffa ¦ To-personers sofa
+Canapé d’angle ¦ Rohová sedačka ¦ Hörnsoffa ¦ Hjørnesofa
+Canapé Chesterfield (capitonné) ¦ Pohovka Chesterfield (prošívaná) ¦ Chesterfieldsoffa (knappad) ¦ Chesterfield-sofa (knappet)
+Fauteuil scandinave ¦ Skandinávské křeslo ¦ Skandinavisk fåtölj ¦ Skandinavisk lænestol
+Fauteuil suspendu (œuf) ¦ Závěsné křeslo (vejce) ¦ Hängstol (ägg) ¦ Hængestol (æg)
+Pouf poire ¦ Sedací vak ¦ Sittsäck ¦ Sækkestol
+Pouf capitonné ¦ Prošívaný taburet ¦ Knappad puff ¦ Knappet puf
+Repose-pieds ¦ Podnožka ¦ Fotpall ¦ Fodskammel
+Table basse en verre ¦ Skleněný konferenční stolek ¦ Soffbord i glas ¦ Sofabord i glas
+Bout de canapé ¦ Odkládací stolek ¦ Sidobord ¦ Sidebord
+Bibliothèque garnie de livres ¦ Knihovna plná knih ¦ Bokhylla full med böcker ¦ Bogreol fuld af bøger
+Meuble à disques vinyles ¦ Skříňka na gramodesky ¦ Skivhylla för vinyl ¦ Pladeskab til vinyl
+Cheminée moderne à insert ¦ Moderní krb s vložkou ¦ Modern braskamin ¦ Moderne pejs med indsats
+Poêle à granulés ¦ Kamna na pelety ¦ Pelletskamin ¦ Pilleovn
+Porte-revues ¦ Stojan na časopisy ¦ Tidningsställ ¦ Bladholder
+Table d’échecs ¦ Šachový stolek ¦ Schackbord ¦ Skakbord
+Billard ¦ Kulečník ¦ Biljardbord ¦ Billardbord
+Pare-feu de cheminée ¦ Krbová zástěna ¦ Brasskärm ¦ Gnistskærm
+Panier à bûches ¦ Koš na polena ¦ Vedkorg ¦ Brændekurv
+Table de salle à manger (8 couverts) ¦ Jídelní stůl (pro 8 osob) ¦ Matbord (8 kuvert) ¦ Spisebord (8 kuverter)
+Table dressée pour un repas de famille ¦ Stůl prostřený pro rodinnou hostinu ¦ Bord dukat för en familjemåltid ¦ Bord dækket til et familiemåltid
+Table ronde à pied central ¦ Kulatý stůl na jedné noze ¦ Runt pelarbord ¦ Rundt søjlebord
+Table à rallonges ouverte ¦ Roztažený rozkládací stůl ¦ Utdraget utdragsbord ¦ Udtrukket udtræksbord
+Chaise à barreaux (bistrot) ¦ Bistrová židle ¦ Bistrostol ¦ Bistrostol
+Chaise rembourrée ¦ Čalouněná židle ¦ Stoppad stol ¦ Polstret stol
+Chaise scandinave ¦ Skandinávská židle ¦ Skandinavisk stol ¦ Skandinavisk stol
+Chaise médaillon (Louis XVI) ¦ Židle s medailonovým opěradlem (Ludvík XVI.) ¦ Medaljongstol (Louis XVI) ¦ Medaljonstol (Louis XVI)
+Buffet scandinave sur pieds ¦ Skandinávský příborník na nohách ¦ Skandinavisk skänk på ben ¦ Skandinavisk skænk på ben
+Vitrine à vaisselle ¦ Vitrína na nádobí ¦ Porslinsvitrin ¦ Porcelænsvitrine
+Banc de table ¦ Lavice ke stolu ¦ Bordsbänk ¦ Bordbænk
+Desserte, chariot de service ¦ Servírovací vozík ¦ Serveringsvagn ¦ Serveringsvogn
+Candélabre à cinq branches ¦ Pětiramenný kandelábr ¦ Femarmad kandelaber ¦ Femarmet kandelaber
+Coupe de fruits ¦ Mísa s ovocem ¦ Fruktskål ¦ Frugtskål
+Bouquet dans un vase ¦ Kytice ve váze ¦ Bukett i en vas ¦ Buket i en vase
+Piano de cuisson ¦ Velký sporák ¦ Restaurangspis ¦ Stort komfur
+Colonne de cuisine (four et micro-ondes) ¦ Kuchyňská vestavná skříň (trouba a mikrovlnka) ¦ Köksskåp högt (ugn och mikrovågsugn) ¦ Højskab til køkken (ovn og mikrobølgeovn)
+Évier timbre d’office (céramique) ¦ Keramický dřez ¦ Keramisk diskho ¦ Keramisk køkkenvask
+Suspension à casseroles ¦ Závěs na hrnce ¦ Kastrullhängare ¦ Gryderamme
+Poubelle à pédale ¦ Šlapací koš ¦ Pedalhink ¦ Pedalspand
+Étagère à épices et bocaux ¦ Polička na koření a sklenice ¦ Kryddhylla med burkar ¦ Krydderihylde med glas
+Desserte à roulettes de cuisine ¦ Kuchyňský vozík ¦ Köksvagn ¦ Køkkenvogn
+Mange-debout ¦ Barový stůl ¦ Barbord ¦ Barbord
+Tabouret de bar ¦ Barová stolička ¦ Barstol ¦ Barstol
+Table en formica (années 60) ¦ Stůl z umakartu (60. léta) ¦ Formicabord (1960-tal) ¦ Formicabord (1960’erne)
+Chaise en formica (années 60) ¦ Židle z umakartu (60. léta) ¦ Formicastol (1960-tal) ¦ Formicastol (1960’erne)
+Pots d’herbes aromatiques ¦ Květináče s bylinkami ¦ Krukor med örter ¦ Krydderurtepotter
+Échelle à pain (suspendue) ¦ Závěsná polička na chleba ¦ Hängande brödhylla ¦ Hængende brødhylde
+Lit double moderne (140) ¦ Moderní dvoulůžko (140) ¦ Modern dubbelsäng (140) ¦ Moderne dobbeltseng (140)
+Lit king size (180) ¦ Postel king size (180) ¦ King size-säng (180) ¦ King size-seng (180)
+Lit simple moderne (90) ¦ Moderní jednolůžko (90) ¦ Modern enkelsäng (90) ¦ Moderne enkeltseng (90)
+Lit mezzanine avec bureau ¦ Vyvýšená postel se stolem ¦ Loftsäng med skrivbord ¦ Højseng med skrivebord
+Futon, lit bas ¦ Futon, nízká postel ¦ Futon, låg säng ¦ Futon, lav seng
+Table de chevet moderne ¦ Moderní noční stolek ¦ Modernt nattduksbord ¦ Moderne natbord
+Armoire à portes coulissantes (miroir) ¦ Skříň s posuvnými dveřmi (zrcadlo) ¦ Garderob med skjutdörrar (spegel) ¦ Klædeskab med skydedøre (spejl)
+Coiffeuse moderne à miroir rond ¦ Moderní toaletní stolek s kulatým zrcadlem ¦ Modernt sminkbord med rund spegel ¦ Moderne toiletbord med rundt spejl
+Valet de chambre ¦ Němý sluha ¦ Klädbetjänt ¦ Stumtjener
+Lit de fer à barreaux ¦ Železná postel s příčkami ¦ Järnsäng med spjälor ¦ Jernseng med tremmer
+Chaise de nourrice (basse) ¦ Nízká židle pro kojení ¦ Låg ammningsstol ¦ Lav ammestol
+Baignoire d’angle ¦ Rohová vana ¦ Hörnbadkar ¦ Hjørnebadekar
+Baignoire îlot (moderne) ¦ Volně stojící vana (moderní) ¦ Fristående badkar (modernt) ¦ Fritstående badekar (moderne)
+Cabine de douche ¦ Sprchový kout ¦ Duschkabin ¦ Brusekabine
+Porte-serviettes sur pied ¦ Stojan na ručníky ¦ Handduksställ ¦ Håndklædestativ
+Pèse-personne ¦ Osobní váha ¦ Personvåg ¦ Badevægt
+Vasque à poser sur plan en bois ¦ Umyvadlo na dřevěné desce ¦ Handfat på träskiva ¦ Håndvask på træplade
+WC à réservoir ¦ WC s nádržkou ¦ Toalett med cistern ¦ Toilet med cisterne
+WC à chasse d’eau haute (à chaîne) ¦ WC s vysoko zavěšenou nádržkou (na řetízek) ¦ Toalett med högt placerad cistern (med kedja) ¦ Toilet med højtsiddende cisterne (med kæde)
+Armoire à pharmacie murale ¦ Nástěnná lékárnička ¦ Väggmedicinskåp ¦ Vægmedicinskab
+Colonne lave-linge et sèche-linge ¦ Pračka se sušičkou nad sebou ¦ Tvättmaskin och torktumlare i pelare ¦ Vaskemaskine og tørretumbler i søjle
+Buanderie ¦ Prádelna ¦ Tvättstuga ¦ Bryggers
+Planche à repasser et son fer ¦ Žehlicí prkno a žehlička ¦ Strykbräda och strykjärn ¦ Strygebræt og strygejern
+Bac à laver (évier de buanderie) ¦ Prací dřez ¦ Tvättho ¦ Skyllevask
+Balai, seau et serpillière ¦ Koště, kbelík a hadr ¦ Kvast, hink och mopp ¦ Kost, spand og gulvklud
+Étagère à linge plié ¦ Police na složené prádlo ¦ Hylla för vikt tvätt ¦ Hylde til foldet tøj
+Corbeille à linge en osier ¦ Proutěný koš na prádlo ¦ Tvättkorg i korgmaterial ¦ Vasketøjskurv i flet
+Séchoir à linge (accordéon) ¦ Skládací sušák na prádlo ¦ Hopfällbart torkställ ¦ Sammenfoldeligt tørrestativ
+Aspirateur traîneau ¦ Podlahový vysavač ¦ Dammsugare ¦ Støvsuger
+Aspirateur balai ¦ Tyčový vysavač ¦ Skaftdammsugare ¦ Ledningsfri støvsuger
+Essoreuse à rouleaux (ancienne) ¦ Ždímačka s válci (stará) ¦ Mangel (gammal) ¦ Rullevridemaskine (gammel)
+Machine à laver à manivelle (ancienne) ¦ Pračka na kliku (stará) ¦ Tvättmaskin med vev (gammal) ¦ Vaskemaskine med håndsving (gammel)
+Patère murale et manteaux ¦ Nástěnný věšák s kabáty ¦ Väggkrokar och rockar ¦ Knagerække og frakker
+Vestiaire d’entrée à miroir (ancien) ¦ Předsíňový věšák se zrcadlem (starý) ¦ Hallmöbel med spegel (gammal) ¦ Entrémøbel med spejl (gammelt)
+Banc à chaussures ¦ Lavice na boty ¦ Skobänk ¦ Skobænk
+Console et miroir d’entrée ¦ Předsíňový stolek a zrcadlo ¦ Hallbord och spegel ¦ Entrékonsol og spejl
+Paillasson ¦ Rohožka ¦ Dörrmatta ¦ Dørmåtte
+Boîte à clés murale ¦ Nástěnná skříňka na klíče ¦ Nyckelskåp ¦ Nøgleskab
+Boîte aux lettres sur pied ¦ Poštovní schránka na sloupku ¦ Fristående brevlåda ¦ Fritstående postkasse
+Ordinateur portable ¦ Notebook ¦ Bärbar dator ¦ Bærbar computer
+Ordinateur de bureau (écran, tour, clavier) ¦ Stolní počítač (monitor, skříň, klávesnice) ¦ Stationär dator (skärm, torn, tangentbord) ¦ Stationær computer (skærm, kabinet, tastatur)
+Minitel ¦ Minitel ¦ Minitel ¦ Minitel
+Téléphone à cadran ¦ Telefon s číselníkem ¦ Telefon med fingerskiva ¦ Drejeskivetelefon
+Échelle de bibliothèque ¦ Knihovní žebřík ¦ Biblioteksstege ¦ Biblioteksstige
+Tableau en liège (pense-bête) ¦ Korková nástěnka ¦ Anslagstavla i kork ¦ Opslagstavle i kork
+Corbeille à papier ¦ Koš na papír ¦ Papperskorg ¦ Papirkurv
+Bureau assis-debout ¦ Polohovatelný stůl ¦ Höj- och sänkbart skrivbord ¦ Hæve-sænkebord
+Rayonnage d’archives (généalogie) ¦ Archivní regál (genealogie) ¦ Arkivhylla (släktforskning) ¦ Arkivreol (slægtsforskning)
+Circuit de train électrique ¦ Elektrická vláčkodráha ¦ Modelljärnväg ¦ Modeltogbane
+Cubes empilés ¦ Naskládané kostky ¦ Staplade klossar ¦ Stablede klodser
+Tricycle ¦ Tříkolka ¦ Trehjuling ¦ Trehjulet cykel
+Cuisine pour enfant (dînette) ¦ Dětská kuchyňka ¦ Lekkök ¦ Legekøkken
+Théâtre de marionnettes (castelet) ¦ Loutkové divadlo ¦ Dockteater ¦ Dukketeater
+Ballon ¦ Míč ¦ Boll ¦ Bold
+Trottinette ¦ Koloběžka ¦ Sparkcykel ¦ Løbehjul
+Baby-foot ¦ Stolní fotbal ¦ Fotbollsspel ¦ Bordfodbold
+Luge en bois ¦ Dřevěné sáňky ¦ Kälke i trä ¦ Kælk i træ
+Lit de fer d’enfant ¦ Dětská železná postel ¦ Järnsäng för barn ¦ Børneseng i jern
+Lampadaire à abat-jour ¦ Stojací lampa se stínidlem ¦ Golvlampa med skärm ¦ Standerlampe med skærm
+Luminaires ¦ Svítidla ¦ Belysning ¦ Belysning
+Lampadaire arc ¦ Oblouková stojací lampa ¦ Båglampa ¦ Buelampe
+Lampadaire trépied ¦ Stojací lampa na trojnožce ¦ Golvlampa på trefot ¦ Standerlampe på trefod
+Lampe de salon (pied boule) ¦ Stolní lampa (kulový podstavec) ¦ Bordslampa (klotfot) ¦ Bordlampe (kuglefod)
+Lampe de banquier (verte) ¦ Bankéřská lampa (zelená) ¦ Bankirlampa (grön) ¦ Bankierlampe (grøn)
+Lampe d’architecte ¦ Architektonická lampa ¦ Arkitektlampa ¦ Arkitektlampe
+Suspension de cuisine ¦ Kuchyňské závěsné svítidlo ¦ Köksampel ¦ Køkkenpendel
+Suspension à trois globes ¦ Závěsné svítidlo se třemi koulemi ¦ Taklampa med tre glober ¦ Pendel med tre glober
+Lustre à pampilles ¦ Křišťálový lustr ¦ Kristallkrona ¦ Krystallysekrone
+Suspension boule en papier ¦ Papírové kulaté svítidlo ¦ Rislampa ¦ Rispapirlampe
+Applique murale ¦ Nástěnné svítidlo ¦ Vägglampa ¦ Væglampe
+Rail de spots ¦ Lišta s bodovými světly ¦ Spotlightskena ¦ Spotskinne
+Lanterne ¦ Lucerna ¦ Lykta ¦ Lygte
+Bougies (groupe) ¦ Svíčky (skupina) ¦ Ljus (grupp) ¦ Stearinlys (gruppe)
+Guirlande lumineuse ¦ Světelný řetěz ¦ Ljusslinga ¦ Lyskæde
+Lampe Tiffany (vitrail) ¦ Lampa Tiffany (vitráž) ¦ Tiffanylampa (blyinfattat glas) ¦ Tiffanylampe (glasmosaik)
+Lampe à lave ¦ Lávová lampa ¦ Lavalampa ¦ Lavalampe
+Lampe champignon ¦ Lampa ve tvaru houby ¦ Svamplampa ¦ Svampelampe
+Réverbère (lampadaire de jardin) ¦ Pouliční lampa (zahradní) ¦ Gatlykta (trädgårdslampa) ¦ Gadelygte (havelampe)
+Lampe Pigeon ¦ Lampa Pigeon ¦ Pigeonlampa ¦ Pigeon-lampe
+Mur de cadres photo ¦ Stěna s fotorámečky ¦ Vägg med fotoramar ¦ Væg med fotorammer
+Cadre photo à poser ¦ Stojací fotorámeček ¦ Fotoram att ställa ¦ Fotoramme til at stille
+Tableau : paysage ¦ Obraz: krajina ¦ Tavla: landskap ¦ Maleri: landskab
+Tableau : marine ¦ Obraz: moře ¦ Tavla: marinmålning ¦ Maleri: marinebillede
+Tableau abstrait ¦ Abstraktní obraz ¦ Abstrakt tavla ¦ Abstrakt maleri
+Tableau : nature morte ¦ Obraz: zátiší ¦ Tavla: stilleben ¦ Maleri: stilleben
+Carte ancienne encadrée ¦ Zarámovaná stará mapa ¦ Inramad gammal karta ¦ Indrammet gammelt kort
+Papillons encadrés ¦ Zarámovaní motýli ¦ Inramade fjärilar ¦ Indrammede sommerfugle
+Miroir rond ¦ Kulaté zrcadlo ¦ Rund spegel ¦ Rundt spejl
+Miroir soleil ¦ Zrcadlo slunce ¦ Solspegel ¦ Solspejl
+Grand miroir doré (trumeau) ¦ Velké zlacené zrcadlo (trumeau) ¦ Stor förgylld spegel (trumeau) ¦ Stort forgyldt spejl (trumeau)
+Tapis persan ¦ Perský koberec ¦ Persisk matta ¦ Persisk tæppe
+Tapis berbère ¦ Berberský koberec ¦ Berbermatta ¦ Berbertæppe
+Tapis kilim ¦ Kilim ¦ Kelimmatta ¦ Kelimtæppe
+Tapis de couloir ¦ Běhoun ¦ Hallmatta ¦ Gangløber
+Tapis à poils longs ¦ Huňatý koberec ¦ Ryamatta ¦ Langhåret tæppe
+Rideaux sur tringle ¦ Závěsy na tyči ¦ Gardiner på stång ¦ Gardiner på stang
+Ficus en pot ¦ Fíkovník v květináči ¦ Fikus i kruka ¦ Ficus i potte
+Monstera (grandes feuilles) ¦ Monstera (velké listy) ¦ Monstera (stora blad) ¦ Monstera (store blade)
+Cactus en pot ¦ Kaktus v květináči ¦ Kaktus i kruka ¦ Kaktus i potte
+Palmier d’intérieur (kentia) ¦ Pokojová palma (kentie) ¦ Inomhuspalm (kentia) ¦ Stuepalme (kentia)
+Bambou en bac ¦ Bambus v truhlíku ¦ Bambu i kruka ¦ Bambus i krukke
+Orchidée ¦ Orchidej ¦ Orkidé ¦ Orkidé
+Fougère en pot ¦ Kapradina v květináči ¦ Ormbunke i kruka ¦ Bregne i potte
+Grand vase de sol (branches) ¦ Velká podlahová váza (větve) ¦ Stor golvvas (grenar) ¦ Stor gulvvase (grene)
+Horloge murale ¦ Nástěnné hodiny ¦ Väggklocka ¦ Vægur
+Horloge à coucou ¦ Kukačky ¦ Gökur ¦ Kukur
+Horloge œil-de-bœuf ¦ Kulaté nástěnné hodiny ¦ Rund väggklocka ¦ Rundt vægur
+Sculpture moderne sur socle ¦ Moderní socha na podstavci ¦ Modern skulptur på sockel ¦ Moderne skulptur på sokkel
+Maquette de voilier ¦ Model plachetnice ¦ Segelfartygsmodell ¦ Model af sejlskib
+Coupe, trophée ¦ Pohár, trofej ¦ Pokal, trofé ¦ Pokal, trofæ
+Bocal à poisson rouge ¦ Akvárium pro zlatou rybku ¦ Guldfiskskål ¦ Guldfiskeglas
+Réfrigérateur rétro (années 50) ¦ Retro lednice (50. léta) ¦ Retrokylskåp (1950-tal) ¦ Retrokøleskab (1950’erne)
+Électroménager ¦ Domácí spotřebiče ¦ Hushållsapparater ¦ Husholdningsapparater
+Réfrigérateur combiné moderne ¦ Moderní kombinovaná lednice ¦ Modernt kyl-frys ¦ Moderne køle-fryseskab
+Congélateur armoire ¦ Skříňový mrazák ¦ Frysskåp ¦ Fryseskab
+Cave à vin réfrigérée ¦ Vinotéka ¦ Vinkyl ¦ Vinkøleskab
+Grille-pain ¦ Topinkovač ¦ Brödrost ¦ Brødrister
+Bouilloire ¦ Rychlovarná konvice ¦ Vattenkokare ¦ Elkedel
+Machine à café expresso ¦ Espresso kávovar ¦ Espressomaskin ¦ Espressomaskine
+Robot pâtissier ¦ Kuchyňský robot ¦ Köksmaskin ¦ Køkkenmaskine
+Téléviseur des années 60 (à pieds) ¦ Televizor z 60. let (na nožičkách) ¦ TV från 1960-talet (på ben) ¦ Fjernsyn fra 1960’erne (på ben)
+Chaîne hi-fi et enceintes ¦ Hi-fi věž a reproduktory ¦ Stereo och högtalare ¦ Stereoanlæg og højttalere
+Enceinte colonne ¦ Sloupový reproduktor ¦ Golvhögtalare ¦ Gulvhøjttaler
+Platine vinyle ¦ Gramofon ¦ Skivspelare ¦ Pladespiller
+Radiocassette (années 80) ¦ Radiomagnetofon (80. léta) ¦ Bergsprängare (1980-tal) ¦ Radiokassetteafspiller (1980’erne)
+Console de jeux et manettes ¦ Herní konzole a ovladače ¦ Spelkonsol och handkontroller ¦ Spillekonsol og controllere
+Ventilateur sur pied ¦ Stojanový ventilátor ¦ Golvfläkt ¦ Standerventilator
+Radiateur bain d’huile ¦ Olejový radiátor ¦ Oljefylld radiator ¦ Oliefyldt radiator
+Poêle à pétrole ¦ Petrolejová kamna ¦ Fotogenkamin ¦ Petroleumsovn
+Aspirateur robot ¦ Robotický vysavač ¦ Robotdammsugare ¦ Robotstøvsuger
+Climatiseur mural ¦ Nástěnná klimatizace ¦ Väggmonterad luftkonditionering ¦ Vægmonteret aircondition
+Guitare sur son support ¦ Kytara na stojanu ¦ Gitarr på ställ ¦ Guitar på stativ
+Musique ¦ Hudba ¦ Musik ¦ Musik
+Guitare électrique et ampli ¦ Elektrická kytara a zesilovač ¦ Elgitarr och förstärkare ¦ Elguitar og forstærker
+Violon sur son support ¦ Housle na stojanu ¦ Fiol på ställ ¦ Violin på stativ
+Violoncelle ¦ Violoncello ¦ Cello ¦ Cello
+Contrebasse ¦ Kontrabas ¦ Kontrabas ¦ Kontrabas
+Harpe ¦ Harfa ¦ Harpa ¦ Harpe
+Batterie ¦ Bicí souprava ¦ Trumset ¦ Trommesæt
+Clavier électronique sur pied ¦ Elektronické klávesy na stojanu ¦ Keyboard på stativ ¦ Keyboard på stativ
+Pupitre à musique ¦ Notový stojan ¦ Notställ ¦ Nodestativ
+Tuba ¦ Tuba ¦ Tuba ¦ Tuba
+Djembé ¦ Djembe ¦ Djembe ¦ Djembe
+Clavecin ¦ Cembalo ¦ Cembalo ¦ Cembalo
+Vielle à roue ¦ Niněra ¦ Vevlira ¦ Drejelire
+Juke-box ¦ Jukebox ¦ Jukebox ¦ Jukeboks
+Orgue de Barbarie ¦ Flašinet ¦ Positiv ¦ Lirekasse
+Moto ¦ Motorka ¦ Motorcykel ¦ Motorcykel
+Garage ¦ Garáž ¦ Garage ¦ Garage
+Mobylette (cyclomoteur) ¦ Moped ¦ Moped ¦ Knallert
+Servante d’atelier ¦ Dílenský vozík ¦ Verktygsvagn ¦ Værktøjsvogn
+Établi et panneau à outils ¦ Ponk a tabule na nářadí ¦ Arbetsbänk och verktygstavla ¦ Arbejdsbænk og værktøjstavle
+Rayonnage métallique et caisses ¦ Kovový regál a bedny ¦ Metallhylla och lådor ¦ Metalreol og kasser
+Perceuse à colonne ¦ Sloupová vrtačka ¦ Pelarborrmaskin ¦ Søjleboremaskine
+Scie sur table ¦ Stolní pila ¦ Bordssåg ¦ Bordsav
+Jerrican ¦ Kanystr ¦ Dunk ¦ Dunk
+Pile de pneus ¦ Hromada pneumatik ¦ Däckstapel ¦ Dækstabel
+Escabeau ¦ Štafle ¦ Trappstege ¦ Trappestige
+Remorque ¦ Přívěs ¦ Släpvagn ¦ Trailer
+Kayak ¦ Kajak ¦ Kajak ¦ Kajak
+Table de ping-pong ¦ Pingpongový stůl ¦ Pingisbord ¦ Bordtennisbord
+Tondeuse à gazon ¦ Sekačka na trávu ¦ Gräsklippare ¦ Plæneklipper
+Tracteur tondeuse ¦ Zahradní traktor ¦ Åkgräsklippare ¦ Havetraktor
+Trampoline ¦ Trampolína ¦ Studsmatta ¦ Trampolin
+Piscine hors-sol ¦ Nadzemní bazén ¦ Ovanmarkspool ¦ Fritstående pool
+Piscine creusée ¦ Zapuštěný bazén ¦ Nedgrävd pool ¦ Nedgravet pool
+Spa (jacuzzi) ¦ Vířivka (jacuzzi) ¦ Spabad (jacuzzi) ¦ Spabad (jacuzzi)
+Hamac sur support ¦ Houpací síť na stojanu ¦ Hängmatta på ställ ¦ Hængekøje på stativ
+Balancelle de jardin ¦ Zahradní houpačka ¦ Hammock ¦ Havegynge
+Kiosque, gloriette ¦ Altán, gloriet ¦ Lusthus, paviljong ¦ Pavillon, lysthus
+Salon de jardin bistrot ¦ Bistrová zahradní souprava ¦ Bistrogrupp för trädgården ¦ Bistrohavesæt
+Barbecue boule ¦ Kulatý gril ¦ Klotgrill ¦ Kuglegrill
+Brasero ¦ Ohniště ¦ Eldstad ¦ Bålfad
+Bac à sable ¦ Pískoviště ¦ Sandlåda ¦ Sandkasse
+Nichoir sur poteau ¦ Ptačí budka na sloupku ¦ Fågelholk på stolpe ¦ Fuglehus på pæl
+Composteur ¦ Kompostér ¦ Kompostbehållare ¦ Kompostbeholder
+Récupérateur d’eau de pluie ¦ Sud na dešťovou vodu ¦ Regnvattentunna ¦ Regnvandstønde
+Nain de jardin ¦ Zahradní trpaslík ¦ Trädgårdstomte ¦ Havenisse
+Cadran solaire ¦ Sluneční hodiny ¦ Solur ¦ Solur
+Pots de fleurs ¦ Květináče ¦ Blomkrukor ¦ Urtepotter
+Olivier en pot ¦ Olivovník v květináči ¦ Olivträd i kruka ¦ Oliventræ i krukke
+Carré potager surélevé ¦ Vyvýšený záhon ¦ Upphöjd odlingslåda ¦ Højbed
+Dévidoir à tuyau d’arrosage ¦ Navíjecí buben na hadici ¦ Slangvinda ¦ Slangetromle
+Arrosoir ¦ Konev ¦ Vattenkanna ¦ Vandkande
+Étendoir parapluie ¦ Otočný sušák na prádlo ¦ Torkvinda ¦ Tørrestativ (paraply)
+Petit pont de jardin ¦ Zahradní můstek ¦ Liten trädgårdsbro ¦ Lille havebro
+Mât et drapeau ¦ Stožár s vlajkou ¦ Flaggstång och flagga ¦ Flagstang og flag
+Roue de charrette (décor) ¦ Kolo od vozu (dekorace) ¦ Vagnshjul (dekoration) ¦ Vognhjul (dekoration)
+Tarare (vanneuse à grain) ¦ Fukar (čistička obilí) ¦ Sädesharpa ¦ Kornrenser
+Égrenoir à maïs ¦ Loupačka kukuřice ¦ Majsskalare ¦ Majsafskaller
+Hache-paille ¦ Řezačka slámy ¦ Hackelsemaskin ¦ Hakkelsemaskine
+Selle sur chevalet ¦ Sedlo na stojanu ¦ Sadel på bock ¦ Sadel på buk
+Faucheuse à cheval ¦ Koňská sekačka ¦ Hästdragen slåttermaskin ¦ Hestetrukken slåmaskine
+Rouleau agricole en pierre ¦ Kamenný polní válec ¦ Stenvält ¦ Stentromle
+Palanche et ses deux seaux ¦ Vahadlo se dvěma vědry ¦ Bärok med två hinkar ¦ Åg med to spande
+Tonneaux sur leur chantier ¦ Sudy na ložišti ¦ Tunnor på sitt ställ ¦ Tønder på deres stativ
+Tabouret de traite et seau ¦ Dojicí stolička a vědro ¦ Mjölkpall och hink ¦ Malkeskammel og spand
+Sacs de grain ¦ Pytle s obilím ¦ Säckar med säd ¦ Kornsække
+Éolienne de pompage (ancienne) ¦ Větrné čerpadlo (staré) ¦ Vindpump (gammal) ¦ Vindpumpe (gammel)
+Pigeonnier ¦ Holubník ¦ Duvslag ¦ Dueslag
+Épouvantail ¦ Strašák ¦ Fågelskrämma ¦ Fugleskræmsel
+Encoignure (meuble d’angle) ¦ Rohová skříňka ¦ Hörnskåp ¦ Hjørneskab
+Placard à portes coulissantes ¦ Skříň s posuvnými dveřmi ¦ Skåp med skjutdörrar ¦ Skab med skydedøre
+Étagère à chaussures ¦ Police na boty ¦ Skohylla ¦ Skohylde
+Coin des icônes (« beau coin » orthodoxe) ¦ Ikonový kout (pravoslavný „krásný kout“) ¦ Ikonhörna (ortodoxt ”vackert hörn”) ¦ Ikonhjørne (ortodoks »smukt hjørne«)
+Veilleuse d’icône (lampada) ¦ Lampička u ikony (lampada) ¦ Ikonlampa (lampada) ¦ Ikonlampe (lampada)
+Croix orthodoxe murale ¦ Pravoslavný kříž na zdi ¦ Ortodoxt väggkors ¦ Ortodoks vægkors
+Croix murale sans Christ (protestante) ¦ Kříž bez Krista na zdi (protestantský) ¦ Väggkors utan Kristus (protestantiskt) ¦ Vægkors uden Kristus (protestantisk)
+Grande Bible ouverte sur pupitre ¦ Velká otevřená bible na pultu ¦ Stor uppslagen bibel på läspulpet ¦ Stor opslået bibel på læsepult
+Image du Sacré-Cœur encadrée ¦ Zarámovaný obraz Nejsvětějšího Srdce ¦ Inramad bild av Jesu heliga hjärta ¦ Indrammet billede af Jesu Hellige Hjerte
+Ex-voto (plaque de remerciement) ¦ Votivní deska (poděkování) ¦ Votivtavla (tackplakett) ¦ Votivtavle (takkeplade)
+Couronne de l’Avent ¦ Adventní věnec ¦ Adventskrans ¦ Adventskrans
+Crèche de Noël ¦ Betlém ¦ Julkrubba ¦ Julekrybbe
+Chapelet accroché (rosaire) ¦ Zavěšený růženec ¦ Upphängt radband (rosenkrans) ¦ Ophængt rosenkrans
+Ménorah (chandelier à sept branches) ¦ Menora (sedmiramenný svícen) ¦ Menora (sjuarmad ljusstake) ¦ Menora (syvarmet lysestage)
+Hanoukia (chandelier à neuf branches) ¦ Chanukija (devítiramenný svícen) ¦ Chanukka-ljusstake (nioarmad) ¦ Hanukkalysestage (nimarmet)
+Chandeliers de shabbat (paire) ¦ Šabatové svícny (pár) ¦ Sabbatsljusstakar (par) ¦ Sabbatslysestager (par)
+Mézouza (au montant de la porte) ¦ Mezuza (na zárubni dveří) ¦ Mezuza (på dörrposten) ¦ Mezuza (på dørkarmen)
+Étoile de David murale ¦ Davidova hvězda na zdi ¦ Davidsstjärna på väggen ¦ Davidsstjerne på væggen
+Mizrah (plaque tournée vers Jérusalem) ¦ Mizrach (deska obrácená k Jeruzalému) ¦ Mizrach (tavla vänd mot Jerusalem) ¦ Mizrach (plade vendt mod Jerusalem)
+Armoire de la Torah (aron, avec son rideau) ¦ Svatostánek Tóry (aron se závěsem) ¦ Toraskåp (aron, med förhänge) ¦ Toraskab (aron, med forhæng)
+Pupitre de lecture (bimah) ¦ Řečnický pult (bima) ¦ Läspulpet (bima) ¦ Læsepult (bima)
+Coupe de kiddouch et plateau ¦ Kidušový pohár a podnos ¦ Kiddushbägare och bricka ¦ Kiddushbæger og bakke
+Plat du séder (Pessah) ¦ Sederová mísa (Pesach) ¦ Sederfat (pesach) ¦ Sederfad (påske)
+Châle de prière (talit) sur son cintre ¦ Modlitební šál (talit) na ramínku ¦ Bönesjal (tallit) på galge ¦ Bedesjal (tallit) på bøjle
+Tirelire de tsedaka ¦ Pokladnička cedaka ¦ Tzedakabössa ¦ Tzedaka-bøsse
+Tapis de prière ¦ Modlitební koberec ¦ Bönematta ¦ Bedetæppe
+Porte-Coran pliant (rahle) ¦ Skládací stojan na Korán (rahle) ¦ Hopfällbart koranställ (rahle) ¦ Sammenfoldeligt koranstativ (rahle)
+Croissant et étoile muraux ¦ Půlměsíc a hvězda na zdi ¦ Halvmåne och stjärna på väggen ¦ Halvmåne og stjerne på væggen
+Calligraphie encadrée (Bismillah) ¦ Zarámovaná kaligrafie (Bismilláh) ¦ Inramad kalligrafi (Bismillah) ¦ Indrammet kalligrafi (Bismillah)
+Chapelet (misbaha) sur sa coupelle ¦ Modlitební šňůra (misbaha) na misce ¦ Bönepärlor (misbaha) i en skål ¦ Bedekæde (misbaha) i en lille skål
+Lanterne du ramadan (fanous) ¦ Ramadánská lucerna (fanús) ¦ Ramadanlykta (fanous) ¦ Ramadanlygte (fanous)
+Niche de prière murale (mihrab décoratif) ¦ Modlitební výklenek ve zdi (dekorativní mihráb) ¦ Bönenisch i väggen (dekorativ mihrab) ¦ Bedeniche i væggen (dekorativ mihrab)
+Coran sur l’étagère du haut ¦ Korán na horní polici ¦ Koranen på översta hyllan ¦ Koranen på den øverste hylde
+Brûleur d’encens (mabkhara) ¦ Kadidelnice (mabchara) ¦ Rökelsebrännare (mabkhara) ¦ Røgelsesbrænder (mabkhara)
+Bouddha assis ¦ Sedící Buddha ¦ Sittande Buddha ¦ Siddende Buddha
+Grand Bouddha de jardin ¦ Velký zahradní Buddha ¦ Stor trädgårdsbuddha ¦ Stor havebuddha
+Autel bouddhique (butsudan) ¦ Buddhistický oltář (bucudan) ¦ Buddhistiskt altare (butsudan) ¦ Buddhistisk alter (butsudan)
+Stupa miniature (chorten) ¦ Miniaturní stúpa (čorten) ¦ Miniatyrstupa (chorten) ¦ Miniaturestupa (chorten)
+Moulin à prières ¦ Modlitební mlýnek ¦ Bönekvarn ¦ Bedemølle
+Drapeaux de prière (guirlande) ¦ Modlitební praporky (girlanda) ¦ Böneflaggor (slinga) ¦ Bedeflag (guirlande)
+Thangka (peinture sur rouleau) ¦ Thangka (svitková malba) ¦ Thangka (rullmålning) ¦ Thangka (rullemaleri)
+Roue du dharma murale ¦ Kolo dharmy na zdi ¦ Dharmahjul på väggen ¦ Dharmahjul på væggen
+Bol chantant sur coussin ¦ Zpívající mísa na polštářku ¦ Klangskål på kudde ¦ Syngeskål på pude
+Gong sur portique ¦ Gong na stojanu ¦ Gonggong på ställ ¦ Gongong på stativ
+Coussin de méditation (zafu et zabuton) ¦ Meditační polštář (zafu a zabuton) ¦ Meditationskudde (zafu och zabuton) ¦ Meditationspude (zafu og zabuton)
+Brûle-parfum et bâtons d’encens ¦ Kadidelnice a vonné tyčinky ¦ Rökelsehållare och rökelsepinnar ¦ Røgelsesholder og røgelsespinde
+Temple de maison (mandir) ¦ Domácí svatyně (mandir) ¦ Hemaltare (mandir) ¦ Hjemmealter (mandir)
+Statue de Ganesh ¦ Socha Ganéši ¦ Ganeshastaty ¦ Ganesha-statue
+Nataraja (Shiva dansant) ¦ Natarádža (tančící Šiva) ¦ Nataraja (dansande Shiva) ¦ Nataraja (dansende Shiva)
+Om mural ¦ Óm na zdi ¦ Om på väggen ¦ Om på væggen
+Lampe à huile (diya) ¦ Olejová lampička (dija) ¦ Oljelampa (diya) ¦ Olielampe (diya)
+Pot de tulsi (basilic sacré) ¦ Květináč s tulsí (posvátná bazalka) ¦ Tulsikruka (helig basilika) ¦ Tulsikrukke (hellig basilikum)
+Rangoli (motif coloré au sol) ¦ Rangoli (barevný vzor na zemi) ¦ Rangoli (färgglatt golvmönster) ¦ Rangoli (farverigt gulvmønster)
+Cloche de puja ¦ Púdžový zvonek ¦ Pujaklocka ¦ Puja-klokke
+Guirlande de fleurs (œillets d’Inde) ¦ Květinová girlanda (aksamitníky) ¦ Blomstergirlang (tagetes) ¦ Blomsterguirlande (fløjlsblomster)
+Khanda mural ¦ Khanda na zdi ¦ Khanda på väggen ¦ Khanda på væggen
+Palki Sahib (dais du Guru Granth Sahib) ¦ Palki Sahib (baldachýn Guru Granth Sahib) ¦ Palki Sahib (baldakin för Guru Granth Sahib) ¦ Palki Sahib (baldakin til Guru Granth Sahib)
+Manji Sahib (petit lit du livre saint) ¦ Manji Sahib (lůžko svaté knihy) ¦ Manji Sahib (den heliga bokens lilla säng) ¦ Manji Sahib (den hellige bogs lille seng)
+Kamidana (autel shinto mural) ¦ Kamidana (šintoistický nástěnný oltář) ¦ Kamidana (shintoistiskt väggaltare) ¦ Kamidana (shinto-vægalter)
+Torii de jardin ¦ Zahradní torii ¦ Trädgårdstorii ¦ Havetorii
+Lanterne de pierre (tōrō) ¦ Kamenná lucerna (tóró) ¦ Stenlykta (tōrō) ¦ Stenlygte (tōrō)
+Corde sacrée (shimenawa) ¦ Posvátné lano (šimenawa) ¦ Helig rep (shimenawa) ¦ Helligt reb (shimenawa)
+Autel des ancêtres ¦ Oltář předků ¦ Anfädersaltare ¦ Anealter
+Tablettes des ancêtres ¦ Tabulky předků ¦ Anfäderstavlor ¦ Anetavler
+Brûle-parfum tripode (bronze) ¦ Trojnohá kadidelnice (bronz) ¦ Trebent rökelsekar (brons) ¦ Trebenet røgelseskar (bronze)
+Yin et yang mural ¦ Jin a jang na zdi ¦ Yin och yang på väggen ¦ Yin og yang på væggen
+Lanterne rouge en papier ¦ Červený papírový lampion ¦ Röd papperslykta ¦ Rød papirlygte
+Vase à feu sacré (afrinagan) ¦ Nádoba posvátného ohně (afrinagan) ¦ Kärl för helig eld (afrinagan) ¦ Kar til hellig ild (afrinagan)
+Coin mémoire (photo, bougie, fleurs) ¦ Vzpomínkový kout (fotka, svíčka, květiny) ¦ Minneshörna (foto, ljus, blommor) ¦ Mindehjørne (foto, lys, blomster)
+Urne funéraire ¦ Pohřební urna ¦ Gravurna ¦ Urne
+Cadre de deuil (photo et ruban noir) ¦ Smuteční rám (fotka a černá stuha) ¦ Sorgram (foto och svart band) ¦ Sørgeramme (foto og sort bånd)
+Bougie du souvenir ¦ Vzpomínková svíčka ¦ Minnesljus ¦ Mindelys
+Boîte à lettres d’amour (correspondance) ¦ Krabička s milostnými dopisy (korespondence) ¦ Ask med kärleksbrev (korrespondens) ¦ Æske med kærlighedsbreve (korrespondance)
+Vitrine à médailles et souvenirs militaires ¦ Vitrína s medailemi a vojenskými upomínkami ¦ Vitrin med medaljer och militära minnen ¦ Vitrine med medaljer og militære minder
+Lave-linge à hublot ¦ Pračka s předním plněním ¦ Frontmatad tvättmaskin ¦ Frontbetjent vaskemaskine
+Lave-linge à ouverture par le dessus ¦ Pračka s horním plněním ¦ Toppmatad tvättmaskin ¦ Topbetjent vaskemaskine
+Lave-vaisselle compact (à poser) ¦ Kompaktní stolní myčka ¦ Bänkdiskmaskin ¦ Bordopvaskemaskine
+Four à micro-ondes ¦ Mikrovlnná trouba ¦ Mikrovågsugn ¦ Mikrobølgeovn
+Mini-four ¦ Minitrouba ¦ Miniugn ¦ Miniovn
+Four encastrable sous le plan ¦ Vestavná trouba pod deskou ¦ Inbyggnadsugn under bänken ¦ Indbygningsovn under bordpladen
+Plaque à induction ¦ Indukční deska ¦ Induktionshäll ¦ Induktionskogeplade
+Table de cuisson au gaz (4 feux) ¦ Plynová varná deska (4 hořáky) ¦ Gashäll (4 brännare) ¦ Gaskogeplade (4 blus)
+Plancha électrique ¦ Elektrická plancha ¦ Elektrisk stekhäll ¦ Elektrisk stegeplade
+Appareil à raclette ¦ Raclette gril ¦ Raclettegrill ¦ Raclettegrill
+Hotte aspirante murale ¦ Nástěnná digestoř ¦ Väggmonterad köksfläkt ¦ Vægmonteret emhætte
+Hotte îlot (suspendue) ¦ Ostrůvková digestoř (zavěšená) ¦ Köksöfläkt (hängande) ¦ Køkkenø-emhætte (hængende)
+Cuiseur à riz ¦ Rýžovar ¦ Riskokare ¦ Riskoger
+Mijoteuse ¦ Pomalý hrnec ¦ Långkokare ¦ Slowcooker
+Autocuiseur (cocotte-minute) ¦ Tlakový hrnec ¦ Tryckkokare ¦ Trykkoger
+Friteuse ¦ Fritéza ¦ Fritös ¦ Frituregryde
+Friteuse sans huile ¦ Horkovzdušná fritéza ¦ Airfryer ¦ Airfryer
+Machine à pain ¦ Domácí pekárna ¦ Bakmaskin ¦ Bagemaskine
+Gaufrier ¦ Vaflovač ¦ Våffeljärn ¦ Vaffeljern
+Blender ¦ Mixér ¦ Mixer ¦ Blender
+Centrifugeuse (presse-fruits) ¦ Odšťavňovač ¦ Juicepress ¦ Juicer
+Robot multifonction ¦ Multifunkční robot ¦ Matberedare ¦ Foodprocessor
+Cafetière à filtre ¦ Překapávač ¦ Bryggare ¦ Kaffemaskine
+Machine à café à capsules ¦ Kapslový kávovar ¦ Kapselmaskin ¦ Kapselmaskine
+Bouilloire émaillée ¦ Smaltovaná konvice ¦ Emaljerad kittel ¦ Emaljeret kedel
+Mini-réfrigérateur ¦ Minilednice ¦ Minikylskåp ¦ Minikøleskab
+Téléviseur écran plat sur pied ¦ Televizor s plochou obrazovkou na stojanu ¦ Platt-TV på fot ¦ Fladskærms-tv på fod
+Grand téléviseur au mur ¦ Velký televizor na zdi ¦ Stor TV på väggen ¦ Stort tv på væggen
+Écran de projection ¦ Projekční plátno ¦ Projektorduk ¦ Lærred
+Vidéoprojecteur ¦ Projektor ¦ Projektor ¦ Projektor
+Barre de son ¦ Soundbar ¦ Soundbar ¦ Soundbar
+Magnétoscope (VHS) ¦ Videorekordér (VHS) ¦ Videobandspelare (VHS) ¦ Videobåndoptager (VHS)
+Lecteur DVD / Blu-ray ¦ Přehrávač DVD / Blu-ray ¦ DVD- / Blu-ray-spelare ¦ DVD- / Blu-ray-afspiller
+Box internet ¦ Internetový router ¦ Internetrouter ¦ Internetrouter
+Poste de radio TSF ¦ Rozhlasový přijímač ¦ Radioapparat ¦ Radioapparat
+Transistor ¦ Tranzistorové rádio ¦ Transistorradio ¦ Transistorradio
+Téléphone sans fil et sa base ¦ Bezdrátový telefon se základnou ¦ Trådlös telefon med bas ¦ Trådløs telefon med base
+Nettoyeur vapeur (balai) ¦ Parní mop ¦ Ångmopp ¦ Dampmoppe
+Centrale vapeur ¦ Parní generátor ¦ Ångstation ¦ Dampstation
+Déshumidificateur ¦ Odvlhčovač ¦ Avfuktare ¦ Affugter
+Purificateur d’air ¦ Čistička vzduchu ¦ Luftrenare ¦ Luftrenser
+Ventilateur colonne ¦ Sloupový ventilátor ¦ Tornfläkt ¦ Tårnventilator
+Chauffe-eau (ballon d’eau chaude) ¦ Bojler ¦ Varmvattenberedare ¦ Varmtvandsbeholder
+Chaudière murale ¦ Nástěnný kotel ¦ Väggmonterad panna ¦ Vægmonteret kedel
+Radiateur électrique mural ¦ Nástěnný elektrický radiátor ¦ Elektriskt väggelement ¦ Elektrisk vægradiator
+Machine à coudre électrique ¦ Elektrický šicí stroj ¦ Elektrisk symaskin ¦ Elektrisk symaskine
+Fauteuil de bureau à roulettes ¦ Kancelářské křeslo na kolečkách ¦ Kontorsstol med hjul ¦ Kontorstol med hjul
+Siège ergonomique (dossier filet) ¦ Ergonomická židle (síťované opěradlo) ¦ Ergonomisk stol (nätrygg) ¦ Ergonomisk stol (netryg)
+Fauteuil de direction en cuir ¦ Kožené manažerské křeslo ¦ Chefsstol i läder ¦ Direktørstol i læder
+Bureau informatique ¦ Počítačový stůl ¦ Datorbord ¦ Computerbord
+Grand bureau (plateau 180 cm) ¦ Velký stůl (deska 180 cm) ¦ Stort skrivbord (180 cm skiva) ¦ Stort skrivebord (180 cm plade)
+Table à dessin inclinable ¦ Sklopný rýsovací stůl ¦ Lutbart ritbord ¦ Vippebart tegnebord
+Caisson à tiroirs à roulettes ¦ Pojízdný kontejner se zásuvkami ¦ Låddhurts med hjul ¦ Skuffeelement på hjul
+Classeur métallique à tiroirs ¦ Kovová kartotéka se zásuvkami ¦ Arkivskåp i metall ¦ Arkivskab i metal
+Armoire à rideaux ¦ Skříň s roletou ¦ Jalusiskåp ¦ Jalousiskab
+Meuble à plans ¦ Skříň na výkresy ¦ Ritningsskåp ¦ Tegningsskab
+Fichier à fiches en bois ¦ Dřevěná kartotéka ¦ Kortregister i trä ¦ Kartotek i træ
+Étagère de classeurs ¦ Police na šanony ¦ Pärmhylla ¦ Ringbindreol
+Imprimante ¦ Tiskárna ¦ Skrivare ¦ Printer
+Imprimante multifonction (scanner) ¦ Multifunkční tiskárna (skener) ¦ Multifunktionsskrivare (skanner) ¦ Multifunktionsprinter (scanner)
+Photocopieur ¦ Kopírka ¦ Kopiator ¦ Kopimaskine
+Scanner à plat ¦ Plochý skener ¦ Flatbäddsskanner ¦ Flatbed-scanner
+Écran d’ordinateur ¦ Monitor ¦ Datorskärm ¦ Computerskærm
+Deux écrans côte à côte ¦ Dva monitory vedle sebe ¦ Två skärmar bredvid varandra ¦ To skærme side om side
+Ordinateur tout-en-un ¦ Počítač vše v jednom ¦ Allt-i-ett-dator ¦ Alt-i-én-computer
+Globe sur pied ¦ Globus na stojanu ¦ Golvglob ¦ Globus på fod
+Tableau blanc ¦ Bílá tabule ¦ Whiteboard ¦ Whiteboard
+Destructeur de documents ¦ Skartovačka ¦ Dokumentförstörare ¦ Makuleringsmaskine
+Trieur à courrier ¦ Třídič pošty ¦ Brevkorg ¦ Brevbakke
+Plante de bureau ¦ Kancelářská rostlina ¦ Kontorsväxt ¦ Kontorplante
+Lampe de bureau LED ¦ LED stolní lampa ¦ LED-skrivbordslampa ¦ LED-skrivebordslampe
+Repose-pieds de bureau ¦ Podnožka pod stůl ¦ Fotstöd ¦ Fodstøtte
+Fontaine à eau ¦ Výdejník vody ¦ Vattenautomat ¦ Vandautomat
+Voiture citadine ¦ Městské auto ¦ Småbil ¦ Bybil
+Voiture familiale (break) ¦ Rodinné auto (kombi) ¦ Kombibil ¦ Stationcar
+Camionnette ¦ Dodávka ¦ Skåpbil ¦ Varevogn
+2 CV ¦ 2CV ¦ 2CV ¦ 2CV
+Renault 4 L ¦ Renault 4 ¦ Renault 4 ¦ Renault 4
+Traction avant ¦ Citroën Traction Avant ¦ Citroën Traction Avant ¦ Citroën Traction Avant
+Caravane ¦ Obytný přívěs ¦ Husvagn ¦ Campingvogn
+Vélo ¦ Kolo ¦ Cykel ¦ Cykel
+Vélo électrique ¦ Elektrokolo ¦ Elcykel ¦ Elcykel
+Vélo d’enfant ¦ Dětské kolo ¦ Barncykel ¦ Børnecykel
+Vélo ancien (de facteur) ¦ Staré kolo (pošťácké) ¦ Gammal cykel (brevbärarens) ¦ Gammel cykel (postbudets)
+Râtelier à vélos ¦ Stojan na kola ¦ Cykelställ ¦ Cykelstativ
+Scooter ¦ Skútr ¦ Skoter ¦ Scooter
+Panneau à outils mural ¦ Nástěnná tabule na nářadí ¦ Verktygstavla på väggen ¦ Værktøjstavle på væggen
+Armoire métallique d’atelier ¦ Kovová dílenská skříň ¦ Verkstadsskåp i metall ¦ Værkstedsskab i metal
+Étagère de garage en bois ¦ Dřevěný garážový regál ¦ Garagehylla i trä ¦ Garagereol i træ
+Établi pliant ¦ Skládací ponk ¦ Hopfällbar arbetsbänk ¦ Sammenklappelig arbejdsbænk
+Scie à onglet ¦ Pokosová pila ¦ Kap- och geringssåg ¦ Kapsav
+Poste à souder ¦ Svářečka ¦ Svetsaggregat ¦ Svejseapparat
+Nettoyeur haute pression ¦ Vysokotlaký čistič ¦ Högtryckstvätt ¦ Højtryksrenser
+Groupe électrogène ¦ Elektrocentrála ¦ Elverk ¦ Generator
+Aspirateur d’atelier ¦ Dílenský vysavač ¦ Grovdammsugare ¦ Værkstedsstøvsuger
+Cric rouleur ¦ Pojízdný zvedák ¦ Garagedomkraft ¦ Garagedonkraft
+Borne de recharge (voiture électrique) ¦ Nabíjecí stanice (elektromobil) ¦ Laddbox (elbil) ¦ Ladestander (elbil)
+Échelle d’appui ¦ Opěrný žebřík ¦ Stege ¦ Stige
+Réfrigérateur de garage ¦ Garážová lednice ¦ Garagekylskåp ¦ Garagekøleskab
+Congélateur coffre de garage ¦ Garážový truhlicový mrazák ¦ Garagefrysbox ¦ Garagekummefryser
+Poubelles de tri (conteneurs) ¦ Nádoby na tříděný odpad ¦ Sopkärl för sortering ¦ Affaldsspande til sortering
+Canoë ¦ Kanoe ¦ Kanot ¦ Kano
+Planche de surf ¦ Surfové prkno ¦ Surfbräda ¦ Surfbræt
+Réglette d’atelier ¦ Dílenské zářivkové svítidlo ¦ Lysrörsarmatur ¦ Værkstedslysstofrør
+Plafonnier rond ¦ Kulaté stropní svítidlo ¦ Rund taklampa ¦ Rund loftslampe
+Plafonnier Art déco ¦ Stropní svítidlo art deco ¦ Art déco-taklampa ¦ Art deco-loftslampe
+Dalle LED ¦ LED panel ¦ LED-panel ¦ LED-panel
+Lustre à bras ¦ Lustr s rameny ¦ Ljuskrona med armar ¦ Lysekrone med arme
+Lustre en fer forgé (à bougies) ¦ Lustr z kovaného železa (na svíčky) ¦ Ljuskrona i smidesjärn (för levande ljus) ¦ Lysekrone i smedejern (til stearinlys)
+Lustre roue de charrette ¦ Lustr z kola od vozu ¦ Ljuskrona av vagnshjul ¦ Vognhjulslysekrone
+Réglette lumineuse ¦ Světelná lišta ¦ Ljuslist ¦ Lysliste
+Néon décoratif (enseigne) ¦ Dekorativní neon (nápis) ¦ Dekorativ neonskylt ¦ Dekorativt neonskilt
+Bandeau LED ¦ LED pásek ¦ LED-list ¦ LED-strip
+Lampadaire vasque (halogène) ¦ Stojací lampa s miskou (halogen) ¦ Uppljusare (halogen) ¦ Uplight-standerlampe (halogen)
+Lampadaire vasque Art déco ¦ Stojací lampa s miskou art deco ¦ Art déco-uppljusare ¦ Art deco-uplight
+Lampadaire liseuse ¦ Stojací lampa na čtení ¦ Läslampa på fot ¦ Læselampe på fod
+Lampe à abat-jour plissé ¦ Lampa s plisovaným stínidlem ¦ Lampa med plisserad skärm ¦ Lampe med plisseret skærm
+Lampe globe en opaline ¦ Opálová kulová lampa ¦ Globlampa i opalin ¦ Globelampe i opalglas
+Lampe de sel ¦ Solná lampa ¦ Saltlampa ¦ Saltlampe
+Veilleuse d’enfant ¦ Dětské noční světýlko ¦ Nattlampa för barn ¦ Natlampe til børn
+Lampe de lecture articulée ¦ Kloubová lampa na čtení ¦ Ledad läslampa ¦ Justerbar læselampe
+Lampe à carbure (de mineur) ¦ Karbidová lampa (hornická) ¦ Karbidlampa (gruvarbetarens) ¦ Karbidlampe (minearbejderens)
+Bougeoir à main ¦ Ruční svícen ¦ Handljusstake ¦ Kammerstage
+Applique double ¦ Dvojité nástěnné svítidlo ¦ Dubbel vägglampa ¦ Dobbelt væglampe
+Applique de salle de bain ¦ Koupelnové nástěnné svítidlo ¦ Badrumslampa ¦ Badeværelseslampe
+Suspension industrielle ¦ Industriální závěsné svítidlo ¦ Industrilampa ¦ Industripendel
+Ampoule nue (filament) ¦ Holá žárovka (vlákno) ¦ Naken glödlampa (filament) ¦ Nøgen pære (glødetråd)
+Suspension en rotin ¦ Ratanové závěsné svítidlo ¦ Taklampa i rotting ¦ Rattanpendel
+Boule à facettes ¦ Disko koule ¦ Discokula ¦ Diskokugle
+Projecteur extérieur ¦ Venkovní reflektor ¦ Utomhusstrålkastare ¦ Udendørs projektør
+Borne lumineuse de jardin ¦ Zahradní sloupkové svítidlo ¦ Trädgårdspollare ¦ Havepullert med lys
+Balise solaire de jardin ¦ Solární zahradní světlo ¦ Solcellslampa för trädgården ¦ Solcellelampe til haven
+maison|Genre ¦ Druh ¦ Typ ¦ Type
+maison|Avant ¦ Přední ¦ Fram ¦ For
+maison|Poser ¦ Umístit ¦ Placera ¦ Placér
+maison|Angles ¦ Úhly ¦ Vinklar ¦ Vinkler
+maison|Écurie ¦ Stáj ¦ Stall ¦ Stald
+maison|Croix ¦ Kříž ¦ Kors ¦ Kors
+couleur|aucune ¦ žádná ¦ ingen ¦ ingen
