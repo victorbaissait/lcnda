@@ -1,0 +1,921 @@
+fr ¦ fi ¦ hu
+Image réglée ¦ Kuva säädetty ¦ Kép beállítva
+Image recadrée ¦ Kuva rajattu ¦ Kép körbevágva
+Image zoomée ¦ Kuva zoomattu ¦ Kép nagyítva
+Cote ¦ Mitta ¦ Méret
+Hauteur (cm) ¦ Korkeus (cm) ¦ Magasság (cm)
+Contenu ¦ Sisältö ¦ Tartalom
+Tourne le plan par rapport au nord : 0° = le haut du plan est au nord, 90° = le haut du plan regarde l’est. Le soleil et les ombres suivent. ¦ Kääntää pohjapiirrosta pohjoisen suhteen: 0° = piirroksen yläreuna on pohjoisessa, 90° = piirroksen yläreuna osoittaa itään. Aurinko ja varjot seuraavat. ¦ Elforgatja az alaprajzot északhoz képest: 0° = az alaprajz teteje északra néz, 90° = az alaprajz teteje keletre néz. A nap és az árnyékok követik.
+Lit d’une personne ¦ Yhden hengen sänky ¦ Egyszemélyes ágy
+Chambre ¦ Makuuhuone ¦ Hálószoba
+Lit double ¦ Parisänky ¦ Franciaágy
+Lit clos (breton) ¦ Kaappisänky (bretagnelainen) ¦ Szekrényágy (breton)
+Berceau ¦ Kehto ¦ Bölcső
+Lit d’enfant ¦ Lastensänky ¦ Gyerekágy
+Table de chevet ¦ Yöpöytä ¦ Éjjeliszekrény
+Commode ¦ Lipasto ¦ Komód
+Coiffeuse ¦ Kampauspöytä ¦ Fésülködőasztal
+Prie-Dieu ¦ Rukousjakkara ¦ Imazsámoly
+Religion, souvenirs ¦ Uskonto, muistoesineet ¦ Vallás, emléktárgyak
+Table ¦ Pöytä ¦ Asztal
+Séjour ¦ Olohuone ¦ Nappali
+Table ronde ¦ Pyöreä pöytä ¦ Kerek asztal
+Chaise ¦ Tuoli ¦ Szék
+Fauteuil ¦ Nojatuoli ¦ Fotel
+Canapé ¦ Sohva ¦ Kanapé
+Banc ¦ Penkki ¦ Pad
+Buffet ¦ Senkki ¦ Tálalószekrény
+Vaisselier ¦ Astiakaappi ¦ Edénytartó szekrény
+Horloge comtoise ¦ Comtoise-kaappikello ¦ Comtoise állóóra
+Piano droit ¦ Pianiino ¦ Pianínó
+Bibliothèque ¦ Kirjahylly ¦ Könyvespolc
+Cheminée ¦ Takka ¦ Kandalló
+Poêle à bois ¦ Puukamina ¦ Fatüzelésű kályha
+Tapis ¦ Matto ¦ Szőnyeg
+Lampadaire ¦ Lattiavalaisin ¦ Állólámpa
+Plante ¦ Kasvi ¦ Növény
+Poste de radio (TSF) ¦ Radio (TSF) ¦ Rádiókészülék (TSF)
+Cuisinière à bois ¦ Puuhella ¦ Fatüzelésű tűzhely
+Cuisine ¦ Keittiö ¦ Konyha
+Évier en pierre ¦ Kivinen tiskiallas ¦ Kőmosogató
+Pétrin ¦ Taikinakaukalo ¦ Dagasztóteknő
+Garde-manger ¦ Ruokakomero ¦ Éléskamra-szekrény
+Réfrigérateur ¦ Jääkaappi ¦ Hűtőszekrény
+Plan de travail ¦ Työtaso ¦ Munkapult
+Baignoire ¦ Kylpyamme ¦ Fürdőkád
+Salle d’eau ¦ Kylpyhuone ¦ Fürdőszoba
+Douche ¦ Suihku ¦ Zuhanyzó
+WC ¦ WC ¦ WC
+Lavabo ¦ Pesuallas ¦ Mosdó
+Table de toilette (broc et cuvette) ¦ Pesupöytä (kannu ja pesuvati) ¦ Mosdóasztal (kancsó és lavór)
+Armoire ¦ Vaatekaappi ¦ Ruhásszekrény
+Rangement ¦ Säilytys ¦ Tárolás
+Coffre ¦ Arkku ¦ Láda
+Étagère ¦ Hylly ¦ Polc
+Rouet ¦ Rukki ¦ Rokka
+Métiers, atelier ¦ Ammatit, työpaja ¦ Mesterségek, műhely
+Métier à tisser ¦ Kangaspuut ¦ Szövőszék
+Établi ¦ Höyläpenkki ¦ Munkapad
+Tonneau ¦ Tynnyri ¦ Hordó
+Machine à coudre ¦ Ompelukone ¦ Varrógép
+Enclume ¦ Alasin ¦ Üllő
+Mangeoire, crèche ¦ Ruokintakaukalo, seimi ¦ Etető, jászol
+Ferme, animaux ¦ Maatila, eläimet ¦ Tanya, állatok
+Charrette ¦ Kärryt ¦ Szekér
+Puits ¦ Kaivo ¦ Kút
+Jardin, extérieur ¦ Puutarha, ulkona ¦ Kert, kültér
+Arbre ¦ Puu ¦ Fa
+Voiture ¦ Auto ¦ Autó
+Banc de jardin ¦ Puutarhapenkki ¦ Kerti pad
+Escalier droit ¦ Suora portaikko ¦ Egyenes lépcső
+Structure ¦ Rakenne ¦ Szerkezet
+Escalier tournant ¦ Kääntyvä portaikko ¦ Forduló lépcső
+Poteau, pilier ¦ Tolppa, pilari ¦ Oszlop, pillér
+Placard ¦ Komero ¦ Beépített szekrény
+Lit bateau (Empire) ¦ Venesänky (empire) ¦ Csónakágy (empire)
+Lit Louis-Philippe ¦ Louis-Philippe-sänky ¦ Lajos Fülöp-korabeli ágy
+Lit à baldaquin ¦ Katosvuode ¦ Baldachinos ágy
+Lit en fer forgé ¦ Takorautasänky ¦ Kovácsoltvas ágy
+Grand lit (160) ¦ Iso sänky (160) ¦ Nagy ágy (160)
+Paillasse (lit de paille) ¦ Olkipatja ¦ Szalmazsák
+Armoire normande ¦ Normandialainen vaatekaappi ¦ Normandiai szekrény
+Armoire à glace ¦ Peilivaatekaappi ¦ Tükrös szekrény
+Chiffonnier, semainier ¦ Korkea lipasto, viikkolipasto ¦ Fiókos szekrény, heti fiókos
+Table de nuit à marbre ¦ Marmorikantinen yöpöytä ¦ Márványlapos éjjeliszekrény
+Lampe de chevet ¦ Yölamppu ¦ Éjjeli lámpa
+Pot de chambre ¦ Yöastia ¦ Éjjeliedény
+Paravent ¦ Sermi ¦ Paraván
+Psyché (miroir sur pied) ¦ Jalallinen peili ¦ Állótükör
+Fauteuil Voltaire ¦ Voltaire-nojatuoli ¦ Voltaire-fotel
+Banquette de pied de lit ¦ Sängynpäätypenkki ¦ Ágyvégi pad
+Descente de lit ¦ Sängynvierusmatto ¦ Ágyelő
+Dressing ¦ Vaatehuone ¦ Gardróbszoba
+Chaise paillée ¦ Punottuistuimen tuoli ¦ Gyékényülésű szék
+Coffre de mariage ¦ Myötäjäisarkku ¦ Kelengyeláda
+Malle-cabine ¦ Laivamatka-arkku ¦ Kabinbőrönd
+Table de toilette à miroir ¦ Peilillinen pesupöytä ¦ Tükrös mosdóasztal
+Chaufferette, bassinoire ¦ Jalkalämmitin, sängynlämmitin ¦ Lábmelegítő, ágymelegítő
+Cheminée de chambre ¦ Makuuhuoneen takka ¦ Hálószobai kandalló
+Table ovale à rallonges ¦ Soikea jatkettava pöytä ¦ Bővíthető ovális asztal
+Table de ferme ¦ Maalaispöytä ¦ Parasztasztal
+Table basse ¦ Sohvapöytä ¦ Dohányzóasztal
+Guéridon ¦ Pikkupöytä ¦ Kisasztal
+Bergère ¦ Bergère-nojatuoli ¦ Bergère-fotel
+Fauteuil à bascule ¦ Keinutuoli ¦ Hintaszék
+Canapé trois places ¦ Kolmen istuttava sohva ¦ Háromszemélyes kanapé
+Méridienne ¦ Leposohva ¦ Récamier
+Pouf ¦ Rahi ¦ Puff
+Pendule de cheminée ¦ Takan pöytäkello ¦ Kandallóóra
+Grande cheminée à manteau ¦ Iso takka hyllyllä ¦ Nagy párkányos kandalló
+Poêle en faïence ¦ Kaakeliuuni ¦ Cserépkályha
+Meuble TV ¦ TV-taso ¦ TV-szekrény
+Gramophone ¦ Gramofoni ¦ Gramofon
+Harmonium ¦ Harmoni ¦ Harmónium
+Piano à queue ¦ Flyygeli ¦ Hangversenyzongora
+Lustre ¦ Kattokruunu ¦ Csillár
+Tapis rond ¦ Pyöreä matto ¦ Kerek szőnyeg
+Bibliothèque vitrée ¦ Lasiovinen kirjakaappi ¦ Üveges könyvszekrény
+Chaise cannée ¦ Rottinkituoli ¦ Nádfonatos szék
+Jardinière ¦ Kukkapöytä ¦ Virágtartó
+Cage à oiseaux ¦ Lintuhäkki ¦ Madárkalitka
+Aquarium ¦ Akvaario ¦ Akvárium
+Console ¦ Konsolipöytä ¦ Konzolasztal
+Bonheur-du-jour ¦ Bonheur-du-jour-kirjoituspöytä ¦ Bonheur-du-jour íróasztal
+Canapé-lit, clic-clac ¦ Vuodesohva ¦ Kinyitható kanapé
+Potager (fourneau maçonné) ¦ Muurattu liesi ¦ Rakott tűzhely
+Âtre avec crémaillère ¦ Tulisija ja patakoukku ¦ Tűzhely üstakasztóval
+Four encastrable ¦ Kalusteuuni ¦ Beépíthető sütő
+Plaques de cuisson ¦ Keittotaso ¦ Főzőlap
+Lave-vaisselle ¦ Astianpesukone ¦ Mosogatógép
+Congélateur coffre ¦ Arkkupakastin ¦ Fagyasztóláda
+Glacière (armoire à glace) ¦ Jääkaappi (jäälaatikko) ¦ Jégszekrény
+Évier double ¦ Kaksoisallas ¦ Dupla mosogató
+Îlot central ¦ Keittiösaareke ¦ Konyhasziget
+Plan de travail en L ¦ L-muotoinen työtaso ¦ L alakú munkapult
+Hotte ¦ Liesituuletin ¦ Páraelszívó
+Meuble haut ¦ Yläkaappi ¦ Felső szekrény
+Meuble bas ¦ Alakaappi ¦ Alsó szekrény
+Tabouret ¦ Jakkara ¦ Hokedli
+Table de cuisine ¦ Keittiön pöytä ¦ Konyhaasztal
+Panetière ¦ Leipäkaappi ¦ Kenyértartó szekrény
+Billot de boucher ¦ Lihapölkky ¦ Hentestőke
+Seau, cruche ¦ Ämpäri, kannu ¦ Vödör, korsó
+Saloir, jarre ¦ Suolausastia, ruukku ¦ Sózóteknő, csupor
+Micro-ondes ¦ Mikroaaltouuni ¦ Mikrohullámú sütő
+Cuisinière à gaz ¦ Kaasuliesi ¦ Gáztűzhely
+Chaudron ¦ Pata ¦ Üst
+Moulin à café ¦ Kahvimylly ¦ Kávédaráló
+Réfrigérateur américain ¦ Amerikkalainen jääkaappi ¦ Amerikai hűtőszekrény
+Égouttoir, vaisselier mural ¦ Astiankuivausteline, seinäastiakaappi ¦ Edényszárító, fali tálas
+Baignoire sabot ¦ Istuinamme ¦ Ülőkád
+Baignoire sur pieds (fonte) ¦ Jalallinen kylpyamme (valurauta) ¦ Lábas fürdőkád (öntöttvas)
+Cuvier, baquet ¦ Pesusoikko, sammio ¦ Mosóteknő, dézsa
+Bidet ¦ Bidee ¦ Bidé
+Double vasque ¦ Kaksoispesuallas ¦ Dupla mosdó
+Douche à l’italienne ¦ Lattiatasoinen suihku ¦ Zuhanytálca nélküli zuhany
+Machine à laver ¦ Pesukone ¦ Mosógép
+Sèche-linge ¦ Kuivausrumpu ¦ Szárítógép
+Chauffe-eau, ballon ¦ Lämminvesivaraaja ¦ Vízmelegítő, bojler
+Radiateur ¦ Lämpöpatteri ¦ Radiátor
+Sèche-serviettes ¦ Pyyhekuivain ¦ Törölközőszárító
+Meuble vasque ¦ Allaskaappi ¦ Mosdószekrény
+Miroir de salle de bains ¦ Kylpyhuoneen peili ¦ Fürdőszobatükör
+WC à la turque ¦ Kyykkykäymälä ¦ Guggolós WC
+Chaise percée ¦ Potta-tuoli ¦ Szobavécé-szék
+Lessiveuse ¦ Pyykkikattila ¦ Mosóüst
+Étendoir à linge ¦ Pyykkiteline ¦ Ruhaszárító állvány
+Panier à linge ¦ Pyykkikori ¦ Szennyeskosár
+Colonne de rangement ¦ Korkea säilytyskaappi ¦ Magas tárolószekrény
+WC suspendu ¦ Seinä-WC ¦ Fali WC
+Bac à douche ¦ Suihkuallas ¦ Zuhanytálca
+Malle de voyage ¦ Matka-arkku ¦ Utazóláda
+Bahut ¦ Matala senkki ¦ Alacsony tálaló
+Buffet deux corps ¦ Kaksiosainen senkki ¦ Kétrészes tálalószekrény
+Enfilade ¦ Pitkä senkki ¦ Hosszú tálaló
+Confiturier ¦ Hillokaappi ¦ Lekvárosszekrény
+Étagère métallique ¦ Metallihylly ¦ Fémpolc
+Penderie, portant ¦ Vaaterekki ¦ Ruhaállvány
+Portemanteau ¦ Naulakko ¦ Fogas
+Meuble à cases ¦ Lokerohylly ¦ Rekeszes polc
+Placard mural ¦ Seinäkaappi ¦ Faliszekrény
+Meuble à chaussures ¦ Kenkäkaappi ¦ Cipősszekrény
+Casier à bouteilles ¦ Pulloteline ¦ Palacktartó
+Pile de cartons ¦ Pahvilaatikkopino ¦ Dobozkupac
+Cantine militaire ¦ Sotilasarkku ¦ Katonaláda
+Armoire à linge ¦ Liinavaatekaappi ¦ Fehérneműs szekrény
+Porte-parapluies ¦ Sateenvarjoteline ¦ Esernyőtartó
+Meuble d’entrée ¦ Eteisen kaluste ¦ Előszobabútor
+Vestiaire métallique ¦ Metallinen pukukaappi ¦ Fém öltözőszekrény
+Commode basse ¦ Matala lipasto ¦ Alacsony komód
+Coffre à bois ¦ Puulaatikko ¦ Fatároló láda
+Secrétaire à abattant ¦ Kirjoituslipasto ¦ Lehajtható lapú szekreter
+Bureau plat (ministre) ¦ Tasokirjoituspöytä ¦ Íróasztal (miniszteri)
+Bureau à cylindre ¦ Rullakantinen kirjoituspöytä ¦ Redőnyös íróasztal
+Fauteuil de bureau ¦ Työtuoli ¦ Irodai szék
+Chaise de bureau en bois ¦ Puinen työtuoli ¦ Fa íróasztalszék
+Cartonnier ¦ Laatikkoarkistokaappi ¦ Dobozos irattartó szekrény
+Classeur à tiroirs ¦ Laatikollinen arkistokaappi ¦ Fiókos irattartó
+Ordinateur (écran) ¦ Tietokone (näyttö) ¦ Számítógép (képernyő)
+Imprimante, scanner ¦ Tulostin, skanneri ¦ Nyomtató, szkenner
+Globe terrestre ¦ Karttapallo ¦ Földgömb
+Coffre-fort ¦ Kassakaappi ¦ Páncélszekrény
+Lampe de bureau ¦ Työpöytävalaisin ¦ Asztali lámpa
+Bibliothèque murale ¦ Seinäkirjahylly ¦ Fali könyvespolc
+Table à dessin ¦ Piirustuspöytä ¦ Rajzasztal
+Boîtes d’archives ¦ Arkistolaatikot ¦ Archiváló dobozok
+Téléphone mural (ancien) ¦ Seinäpuhelin (vanha) ¦ Fali telefon (régi)
+Tableau noir, tableau blanc ¦ Liitutaulu, valkotaulu ¦ Iskolatábla, fehértábla
+Bureau moderne ¦ Moderni kirjoituspöytä ¦ Modern íróasztal
+Caisson à tiroirs ¦ Laatikosto ¦ Fiókos konténer
+Fauteuil club ¦ Klubituoli ¦ Klubfotel
+Berceau en osier ¦ Pajukehto ¦ Fonott bölcső
+Lit à barreaux ¦ Pinnasänky ¦ Rácsos ágy
+Lits superposés ¦ Kerrossänky ¦ Emeletes ágy
+Table à langer ¦ Hoitopöytä ¦ Pelenkázóasztal
+Coffre à jouets ¦ Leluarkku ¦ Játékosláda
+Cheval à bascule ¦ Keinuhevonen ¦ Hintaló
+Parc ¦ Leikkikehä ¦ Járóka
+Chaise haute ¦ Syöttötuoli ¦ Etetőszék
+Pupitre d’écolier ¦ Koulupulpetti ¦ Iskolapad
+Landau ¦ Lastenvaunut ¦ Babakocsi
+Maison de poupée ¦ Nukkekoti ¦ Babaház
+Tipi ¦ Tiipii ¦ Indiánsátor
+Petite table ¦ Pieni pöytä ¦ Kis asztal
+Petite chaise ¦ Pieni tuoli ¦ Kis szék
+Tapis de jeu ¦ Leikkimatto ¦ Játszószőnyeg
+Ours en peluche ¦ Nalle ¦ Plüssmaci
+Bibliothèque basse ¦ Matala kirjahylly ¦ Alacsony könyvespolc
+Trotteur, porteur ¦ Kävelytuoli, potkuauto ¦ Járássegítő, lábbal hajtós jármű
+Crucifix ¦ Krusifiksi ¦ Feszület
+Bénitier ¦ Vihkivesimalja ¦ Szenteltvíztartó
+Petit autel, oratoire ¦ Pieni alttari, rukoushuone ¦ Kis oltár, házi oltár
+Statue de la Vierge ¦ Neitsyt Marian patsas ¦ Szűz Mária-szobor
+Chandelier, cierge ¦ Kynttilänjalka, kirkkokynttilä ¦ Gyertyatartó, templomi gyertya
+Portrait de famille ¦ Perhemuotokuva ¦ Családi portré
+Photo de mariage encadrée ¦ Kehystetty hääkuva ¦ Bekeretezett esküvői fénykép
+Arbre généalogique encadré ¦ Kehystetty sukupuu ¦ Bekeretezett családfa
+Globe de mariée ¦ Morsiamen lasikupu ¦ Menyasszonyi üvegbúra
+Cadre de médailles ¦ Mitalikehys ¦ Érmekeret
+Bible familiale sur lutrin ¦ Perheraamattu lukupulpetilla ¦ Családi Biblia olvasóállványon
+Coffret à souvenirs ¦ Muistolipas ¦ Emlékdoboz
+Vitrine à souvenirs ¦ Muistovitriini ¦ Emlékvitrin
+Lampe à huile ¦ Öljylamppu ¦ Olajlámpa
+Buste sur colonne ¦ Rintakuva pylväällä ¦ Mellszobor oszlopon
+Icône, image pieuse ¦ Ikoni, pyhäinkuva ¦ Ikon, szentkép
+Pile d’albums de famille ¦ Perhealbumipino ¦ Családi albumok kupaca
+Plaque commémorative ¦ Muistolaatta ¦ Emléktábla
+Malle aux souvenirs ¦ Muistoarkku ¦ Emlékláda
+Croix de bois au mur ¦ Puinen risti seinällä ¦ Fakereszt a falon
+Retable, armoire d’église ¦ Alttaritaulu, kirkkokaappi ¦ Oltárkép, templomi szekrény
+Forge (foyer) ¦ Ahjo (tulisija) ¦ Kovácstűzhely (tűztér)
+Soufflet de forge ¦ Ahjon palkeet ¦ Kovácsfújtató
+Tour à bois ¦ Puusorvi ¦ Faeszterga
+Presse à imprimer ¦ Painokone ¦ Nyomdagép
+Meule à aiguiser ¦ Hiomakivi ¦ Köszörűkő
+Cuve de vigneron ¦ Viinitynnyri ¦ Borkád
+Pressoir à vin ¦ Viinipuristin ¦ Borprés
+Alambic ¦ Tislauslaite ¦ Lepárlóüst
+Comptoir de boutique ¦ Myymälän tiski ¦ Bolti pult
+Balance à bascule ¦ Lavavaaka ¦ Tizedesmérleg
+Caisse enregistreuse ¦ Kassakone ¦ Pénztárgép
+Étalage de magasin ¦ Myymälän esittelyteline ¦ Bolti kirakat
+Fauteuil de barbier ¦ Parturintuoli ¦ Borbélyszék
+Établi de cordonnier ¦ Suutarin työpenkki ¦ Cipészpad
+Chevalet de peintre ¦ Maalarin teline ¦ Festőállvány
+Carreau de dentellière ¦ Nypläystyyny ¦ Csipkeverő párna
+Four de boulanger ¦ Leipurin uuni ¦ Pékkemence
+Barrique ¦ Viinitynnyri (barrique) ¦ Hordó (barrique)
+Meule de moulin ¦ Myllynkivi ¦ Malomkő
+Chevalet de scieur ¦ Sahapukki ¦ Fűrészbak
+Établi de menuisier ¦ Puusepän höyläpenkki ¦ Asztalos munkapad
+Panneau à outils ¦ Työkalutaulu ¦ Szerszámtábla
+Vache ¦ Lehmä ¦ Tehén
+Cheval ¦ Hevonen ¦ Ló
+Âne ¦ Aasi ¦ Szamár
+Cochon ¦ Sika ¦ Disznó
+Mouton ¦ Lammas ¦ Juh
+Chèvre ¦ Vuohi ¦ Kecske
+Poule ¦ Kana ¦ Tyúk
+Chien ¦ Koira ¦ Kutya
+Chat ¦ Kissa ¦ Macska
+Clapier à lapins ¦ Kanikoppi ¦ Nyúlketrec
+Poulailler ¦ Kanala ¦ Tyúkól
+Niche ¦ Koirankoppi ¦ Kutyaház
+Stalle, box d’écurie ¦ Pilttuu, karsina ¦ Állás, lóboksz
+Abreuvoir ¦ Juomakaukalo ¦ Itató
+Râtelier à foin ¦ Heinähäkki ¦ Szénatartó rács
+Meule de foin ¦ Heinäsuova ¦ Szénaboglya
+Botte de paille ¦ Olkipaali ¦ Szalmabála
+Charrue ¦ Aura ¦ Eke
+Herse ¦ Äes ¦ Borona
+Tracteur ancien ¦ Vanha traktori ¦ Régi traktor
+Brouette ¦ Kottikärryt ¦ Talicska
+Baratte à beurre ¦ Voikirnu ¦ Köpülő
+Ruche ¦ Mehiläispesä ¦ Méhkas
+Coffre à grain ¦ Viljalaari ¦ Gabonaláda
+Bidon à lait ¦ Maitotonkka ¦ Tejeskanna
+Tombereau ¦ Kippikärryt ¦ Billenős kocsi
+Arbre fruitier ¦ Hedelmäpuu ¦ Gyümölcsfa
+Sapin, conifère ¦ Kuusi, havupuu ¦ Fenyő, tűlevelű
+Haie ¦ Pensasaita ¦ Sövény
+Buisson, arbuste ¦ Pensas ¦ Bokor, cserje
+Massif de fleurs ¦ Kukkapenkki ¦ Virágágyás
+Potager (planches) ¦ Kasvimaa (penkit) ¦ Veteményes (ágyások)
+Mare, bassin ¦ Lampi, allas ¦ Tavacska, medence
+Lavoir ¦ Pesupaikka ¦ Mosóház
+Four à pain ¦ Leivinuuni ¦ Kenyérsütő kemence
+Pompe à bras ¦ Käsipumppu ¦ Kézi szivattyú
+Croix de chemin, calvaire ¦ Tienvarsiristi, kalvaario ¦ Útmenti kereszt, kálvária
+Pierre tombale ¦ Hautakivi ¦ Sírkő
+Table de jardin ¦ Puutarhapöytä ¦ Kerti asztal
+Chaise de jardin ¦ Puutarhatuoli ¦ Kerti szék
+Transat, chaise longue ¦ Kansituoli, aurinkotuoli ¦ Nyugágy
+Parasol ¦ Aurinkovarjo ¦ Napernyő
+Barbecue ¦ Grilli ¦ Grillsütő
+Balançoire ¦ Keinu ¦ Hinta
+Toboggan ¦ Liukumäki ¦ Csúszda
+Pergola, tonnelle ¦ Pergola, lehtimaja ¦ Pergola, lugas
+Clôture, barrière ¦ Aita, veräjä ¦ Kerítés, sorompó
+Portail ¦ Portti ¦ Kapu
+Muret de pierre ¦ Matala kivimuuri ¦ Alacsony kőfal
+Bicyclette ¦ Polkupyörä ¦ Kerékpár
+Cabane de jardin ¦ Puutarhavaja ¦ Kerti kunyhó
+Serre ¦ Kasvihuone ¦ Üvegház
+Tas de bois ¦ Puupino ¦ Farakás
+Bouleau, arbre fin ¦ Koivu, hoikka puu ¦ Nyírfa, karcsú fa
+Banc de pierre ¦ Kivipenkki ¦ Kőpad
+Escalier en colimaçon ¦ Kierreportaikko ¦ Csigalépcső
+Échelle de meunier ¦ Jyrkät portaat ¦ Molnárlépcső
+Colonne ronde ¦ Pyöreä pylväs ¦ Kerek oszlop
+Poutre apparente ¦ Näkyvä palkki ¦ Látszó gerenda
+Trappe de cave ¦ Kellariluukku ¦ Pinceajtó (csapóajtó)
+Marche, seuil ¦ Askelma, kynnys ¦ Lépcsőfok, küszöb
+Garde-corps, rampe ¦ Kaide, käsijohde ¦ Korlát, karfa
+Conduit de cheminée ¦ Savuhormi ¦ Kéménykürtő
+Verrière, cloison vitrée ¦ Lasiseinä ¦ Üvegfal
+Radiateur en fonte ¦ Valurautapatteri ¦ Öntöttvas radiátor
+Chaudière ¦ Lämmityskattila ¦ Kazán
+Pilier de pierre ¦ Kivipilari ¦ Kőpillér
+Estrade, palier ¦ Koroke, porrastasanne ¦ Dobogó, pihenő
+Muret, demi-cloison ¦ Puoliseinä ¦ Félfal
+Niche, alcôve ¦ Syvennys, alkovi ¦ Fülke, alkóv
+Bonnetière (armoire à une porte) ¦ Yksiovinen vaatekaappi ¦ Egyajtós szekrény
+Armoire de mariage (de dot) ¦ Myötäjäiskaappi ¦ Kelengyeszekrény
+Lit clos à portes coulissantes ¦ Kaappisänky liukuovin ¦ Tolóajtós szekrényágy
+Lit-armoire, lit clos d’angle ¦ Kaappisänky, kulmakaappisänky ¦ Szekrényágy, sarok-szekrényágy
+Lit d’alcôve à rideaux ¦ Verhoiltu alkovisänky ¦ Függönyös alkóvágy
+Berceau ancien en bois (à bascule) ¦ Vanha puinen kehto (keinuva) ¦ Régi fa bölcső (ringatós)
+Berceau à capote en osier ¦ Kuomullinen pajukehto ¦ Fedeles fonott bölcső
+Bassinoire en cuivre (à long manche) ¦ Kuparinen vuoteenlämmitin (pitkävartinen) ¦ Réz ágymelegítő (hosszú nyelű)
+Table de toilette à marbre ¦ Marmorikantinen pesupöytä ¦ Márványlapos mosdóasztal
+Cuvette et broc en faïence ¦ Fajanssinen pesuvati ja kannu ¦ Fajansz lavór és kancsó
+Commode galbée (Louis XV) ¦ Kaareva lipasto (Ludvig XV) ¦ Ívelt komód (XV. Lajos)
+Bougeoir de chevet ¦ Yöpöydän kynttilänjalka ¦ Éjjeli gyertyatartó
+Chaufferette à braises ¦ Hiilijalkalämmitin ¦ Parazsas lábmelegítő
+Malle en osier ¦ Paju-arkku ¦ Fonott láda
+Horloge comtoise à ventre (violonée) ¦ Pullea Comtoise-kaappikello (viulunmuotoinen) ¦ Hasas Comtoise állóóra (hegedű alakú)
+Horloge comtoise peinte ¦ Maalattu Comtoise-kaappikello ¦ Festett Comtoise állóóra
+Horloge de parquet (régulateur) ¦ Kaappikello (regulaattori) ¦ Padlóóra (regulátor)
+Buffet bas à deux portes ¦ Matala kaksiovinen senkki ¦ Alacsony kétajtós tálaló
+Vaisselier breton ¦ Bretagnelainen astiakaappi ¦ Breton tálas
+Vaisselier normand ¦ Normandialainen astiakaappi ¦ Normandiai tálas
+Banc-coffre à dossier (archebanc) ¦ Selkänojallinen arkkupenkki (archebanc) ¦ Támlás ládapad (archebanc)
+Banc-coffre de lit clos ¦ Kaappisängyn arkkupenkki ¦ Szekrényágy melletti ládapad
+Chaise paillée à barreaux ¦ Puolapuuselkäinen punottu tuoli ¦ Létratámlás gyékényszék
+Fauteuil paillé (de grand-mère) ¦ Punottu nojatuoli (isoäidin) ¦ Gyékényfotel (nagymamáé)
+Table à volets ¦ Läppäpöytä ¦ Lehajtható szárnyú asztal
+Table de ferme en chêne (à tiroir) ¦ Tammeinen maalaispöytä (laatikollinen) ¦ Tölgyfa parasztasztal (fiókos)
+Lampe tempête ¦ Myrskylyhty ¦ Viharlámpa
+Chandelier, bougeoir ¦ Kynttilänjalka ¦ Gyertyatartó
+Suspension à pétrole ¦ Riippuva öljylamppu ¦ Függő petróleumlámpa
+Poste TSF à lampes ¦ Putkiradio (TSF) ¦ Csöves rádió (TSF)
+Phonographe à pavillon ¦ Torvifonografi ¦ Tölcséres fonográf
+Poêle Godin (fonte émaillée) ¦ Godin-kamina (emaloitu valurauta) ¦ Godin kályha (zománcozott öntöttvas)
+Poêle à bois en fonte (cloche) ¦ Valurautainen puukamina (kello) ¦ Öntöttvas fatüzelésű kályha (harang)
+Chenets (la paire) ¦ Takkatelineet (pari) ¦ Tűzbak (pár)
+Cheminée à manteau (à hotte) ¦ Takka hyllyllä (huuvalla) ¦ Párkányos kandalló (füstfogóval)
+Cheminée de pierre à linteau de bois ¦ Kivitakka puisella kamanalla ¦ Kőkandalló fa szemöldökfával
+Cantou (coin du feu) ¦ Takkanurkkaus (cantou) ¦ Tűzhelyzug (cantou)
+Bergère Louis XVI ¦ Ludvig XVI -bergère ¦ XVI. Lajos-bergère
+Fauteuil crapaud ¦ Sammakkonojatuoli ¦ Békafotel
+Sellette (porte-plante) ¦ Kukkapylväs ¦ Virágtartó állvány
+Portrait des ancêtres (ovale) ¦ Esivanhempien muotokuva (soikea) ¦ Ősök portréja (ovális)
+Maie (pétrin sur pieds) ¦ Jalallinen taikinakaukalo ¦ Lábas dagasztóteknő
+Maie-coffre à couvercle ¦ Kannellinen taikina-arkku ¦ Fedeles dagasztóláda
+Huche à pain ¦ Leipälaatikko ¦ Kenyértartó
+Cuisinière à bois en fonte (à barre de laiton) ¦ Valurautainen puuhella (messinkikaiteella) ¦ Öntöttvas fatüzelésű tűzhely (rézkorláttal)
+Cuisinière émaillée bois et charbon ¦ Emaloitu puu- ja hiilihella ¦ Zománcozott fa- és széntüzelésű tűzhely
+Potager carrelé (fourneau à braises) ¦ Laatoitettu hiilihella ¦ Csempés parázstűzhely
+Évier taillé dans la pierre ¦ Kiveen hakattu tiskiallas ¦ Kőbe vájt mosogató
+Évier en grès émaillé ¦ Lasitettu kivitavara-allas ¦ Mázas kőagyag mosogató
+Fontaine en cuivre sur son support ¦ Kuparinen vesisäiliö jalustallaan ¦ Réz vízadagoló az állványán
+Fontaine en grès ¦ Kivitavarainen vesisäiliö ¦ Kőagyag vízadagoló
+Saloir en grès ¦ Kivitavarainen suolausruukku ¦ Kőagyag sózócsupor
+Saloir en bois (coffre à sel) ¦ Puinen suolalaatikko ¦ Fa sóláda
+Garde-manger grillagé (mural) ¦ Verkkokomero (seinä) ¦ Hálós fali éléskamra-szekrény
+Buffet de cuisine (années 1930-1950) ¦ Keittiön astiakaappi (1930–1950-luvut) ¦ Konyhai kredenc (1930–1950-es évek)
+Moulin à café mural ¦ Seinäkahvimylly ¦ Fali kávédaráló
+Fer à repasser en fonte ¦ Valurautainen silitysrauta ¦ Öntöttvas vasaló
+Marmite en fonte ¦ Valurautapata ¦ Öntöttvas fazék
+Cruche, pichet en grès ¦ Kivitavarainen kannu ¦ Kőagyag korsó, kancsó
+Tue-mouches en verre (piège à mouches) ¦ Lasinen kärpäsloukku ¦ Üveg légyfogó
+Balance Roberval et ses poids ¦ Roberval-vaaka punnuksineen ¦ Roberval-mérleg súlyokkal
+Glacière en bois doublée de zinc ¦ Sinkillä vuorattu puinen jääkaappi ¦ Horganylemezzel bélelt fa jégszekrény
+Tub (grand bassin en zinc) ¦ Sinkkiamme ¦ Horganyzott dézsa
+Baquet de lessive en bois ¦ Puinen pyykkisoikko ¦ Fa mosóteknő
+Lessiveuse à champignon ¦ Sienimallinen pyykkikattila ¦ Gombás mosóüst
+Baignoire en zinc ¦ Sinkkikylpyamme ¦ Horganyzott fürdőkád
+Lave-mains en fonte émaillée ¦ Emaloitu valurautainen käsienpesuallas ¦ Zománcozott öntöttvas kézmosó
+Planche à laver ¦ Pyykkilauta ¦ Mosódeszka
+Buffet deux-corps vitré ¦ Lasiovinen kaksiosainen astiakaappi ¦ Üveges kétrészes tálalószekrény
+Buffet deux-corps normand ¦ Normandialainen kaksiosainen astiakaappi ¦ Normandiai kétrészes tálalószekrény
+Armoire lorraine ¦ Lorrainelainen vaatekaappi ¦ Lotaringiai szekrény
+Armoire bressane ¦ Bressen vaatekaappi ¦ Bresse-i szekrény
+Coffre de mariage sculpté ¦ Veistetty myötäjäisarkku ¦ Faragott kelengyeláda
+Malle bombée de voyage ¦ Kupera matka-arkku ¦ Domború tetejű utazóláda
+Coffre à linge à pentures de fer ¦ Rautahelainen liinavaatearkku ¦ Vaspántos fehérneműs láda
+Panetière provençale (murale) ¦ Provencelainen leipäkaappi (seinä) ¦ Provence-i kenyértartó (fali)
+Étagère à cuivres ¦ Kuparitavarahylly ¦ Rézedénypolc
+Bureau de pente (dos d’âne) ¦ Viistokantinen kirjoituspöytä ¦ Lejtős lapú íróasztal
+Scriban (pente et vitrine) ¦ Kirjoituslipasto vitriinillä (scriban) ¦ Szekreter vitrinnel (scriban)
+Écritoire, encrier et plumier ¦ Kirjoitusvälineet, mustepullo ja kynäkotelo ¦ Íróeszközök, tintatartó és tolltartó
+Lampe bouillotte ¦ Bouillotte-lamppu ¦ Bouillotte-lámpa
+Banc d’école à pupitre (deux places) ¦ Koulupenkki pulpetilla (kahden hengen) ¦ Iskolapad (kétszemélyes)
+Pupitre d’écolier à abattant ¦ Kannellinen koulupulpetti ¦ Felnyitható tetejű iskolapad
+Ardoise d’écolier ¦ Koululaisen kivitaulu ¦ Palatábla
+Cheval de bois ¦ Puuhevonen ¦ Falovacska
+Poupée de porcelaine ¦ Posliininukke ¦ Porcelánbaba
+Chaise d’enfant paillée ¦ Lasten punottu tuoli ¦ Gyermek gyékényszék
+Trotteur d’enfant en bois ¦ Puinen kävelytuoli ¦ Fa járássegítő
+Prie-Dieu sculpté ¦ Veistetty rukousjakkara ¦ Faragott imazsámoly
+Bénitier de chambre en faïence ¦ Makuuhuoneen fajanssinen vihkivesimalja ¦ Fajansz szobai szenteltvíztartó
+Crucifix de chevet (Christ en bronze) ¦ Yöpöydän krusifiksi (pronssinen Kristus) ¦ Éjjeli feszület (bronz Krisztus)
+Globe de mariée sur son socle ¦ Morsiamen lasikupu jalustallaan ¦ Menyasszonyi üvegbúra talapzaton
+Statuette de saint ¦ Pyhimyksen pienoispatsas ¦ Szentszobrocska
+Image de communion encadrée ¦ Kehystetty ehtoolliskuva ¦ Bekeretezett elsőáldozási kép
+Couronne de perles (mortuaire) ¦ Helmiseppele (hautajais-) ¦ Gyöngykoszorú (gyász-)
+Rouet flamand (à fuseau) ¦ Flaamilainen rukki (värttinä) ¦ Flamand rokka (orsós)
+Grand rouet à laine ¦ Iso villarukki ¦ Nagy gyapjúfonó kerék
+Métier à tisser à bras ¦ Käsikangaspuut ¦ Kézi szövőszék
+Métier à tapisserie (vertical) ¦ Kuvakudoskangaspuut (pystysuorat) ¦ Gobelinszövő szék (álló)
+Dévidoir à écheveaux ¦ Vyyhdinpuu ¦ Motolla
+Machine à coudre à pédale (Singer) ¦ Poljettava ompelukone (Singer) ¦ Lábhajtású varrógép (Singer)
+Machine à coudre à main ¦ Käsikäyttöinen ompelukone ¦ Kézi hajtású varrógép
+Mannequin de couturière ¦ Ompelijan sovitusnukke ¦ Szabóbaba
+Fourneau à fers de repasseuse ¦ Silittäjän rautojen lämmitysuuni ¦ Vasalónő vasmelegítő kályhája
+Banc de sabotier ¦ Puukenkäsepän penkki ¦ Fapapucskészítő pad
+Presse à fromage ¦ Juustopuristin ¦ Sajtprés
+Baratte à piston en bois ¦ Puinen mäntäkirnu ¦ Fa dugattyús köpülő
+Baratte-tonneau à manivelle ¦ Kammellinen tynnyrikirnu ¦ Forgattyús hordóköpülő
+Écrémeuse ¦ Separaattori ¦ Tejszeparátor
+Joug de bœufs ¦ Härkien ies ¦ Ökörjárom
+Outils (fourche, faux, râteau) ¦ Työkalut (hanko, viikate, harava) ¦ Szerszámok (vasvilla, kasza, gereblye)
+Pressoir à pommes (cidre) ¦ Omenapuristin (siideri) ¦ Almaprés (almabor)
+Charreton à bras ¦ Käsikärryt ¦ Kézikocsi
+Ruche en paille (panier) ¦ Olkipesä (kori) ¦ Szalmakas (kosár)
+Puits à margelle et petit toit ¦ Kaivo kehyksineen ja pienine kattoineen ¦ Káváva és kis tetővel ellátott kút
+Pompe à eau en fonte et son auge ¦ Valurautainen vesipumppu ja kaukalo ¦ Öntöttvas vízpumpa és vályú
+Auge en pierre ¦ Kivikaukalo ¦ Kővályú
+Banc à laver (de lavoir) ¦ Pesupenkki (pesupaikan) ¦ Mosópad (mosóházi)
+Canapé moderne trois places ¦ Moderni kolmen istuttava sohva ¦ Modern háromszemélyes kanapé
+Canapé deux places ¦ Kahden istuttava sohva ¦ Kétszemélyes kanapé
+Canapé d’angle ¦ Kulmasohva ¦ Sarokkanapé
+Canapé Chesterfield (capitonné) ¦ Chesterfield-sohva (napitettu) ¦ Chesterfield kanapé (steppelt)
+Fauteuil scandinave ¦ Skandinaavinen nojatuoli ¦ Skandináv fotel
+Fauteuil suspendu (œuf) ¦ Riippuva munatuoli ¦ Függő tojásfotel
+Pouf poire ¦ Säkkituoli ¦ Babzsákfotel
+Pouf capitonné ¦ Napitettu rahi ¦ Steppelt puff
+Repose-pieds ¦ Jalkajakkara ¦ Lábtartó
+Table basse en verre ¦ Lasinen sohvapöytä ¦ Üveg dohányzóasztal
+Bout de canapé ¦ Sohvan sivupöytä ¦ Kanapé melletti kisasztal
+Bibliothèque garnie de livres ¦ Kirjoja täynnä oleva kirjahylly ¦ Könyvekkel teli könyvespolc
+Meuble à disques vinyles ¦ Vinyylilevykaappi ¦ Bakelitlemez-tartó szekrény
+Cheminée moderne à insert ¦ Moderni takka tulipesällä ¦ Modern betétes kandalló
+Poêle à granulés ¦ Pellettikamina ¦ Pelletkályha
+Porte-revues ¦ Lehtiteline ¦ Újságtartó
+Table d’échecs ¦ Shakkipöytä ¦ Sakkasztal
+Billard ¦ Biljardipöytä ¦ Biliárdasztal
+Pare-feu de cheminée ¦ Takan suojaverkko ¦ Kandallóvédő rács
+Panier à bûches ¦ Halkokori ¦ Fahasábkosár
+Table de salle à manger (8 couverts) ¦ Ruokapöytä (8 hengelle) ¦ Étkezőasztal (8 személyes)
+Table dressée pour un repas de famille ¦ Suvun ateriaa varten katettu pöytä ¦ Családi étkezéshez megterített asztal
+Table ronde à pied central ¦ Pyöreä keskijalkainen pöytä ¦ Kerek, középlábas asztal
+Table à rallonges ouverte ¦ Jatkettu jatkopöytä ¦ Kihúzott bővíthető asztal
+Chaise à barreaux (bistrot) ¦ Bistrotuoli ¦ Bisztrószék
+Chaise rembourrée ¦ Pehmustettu tuoli ¦ Kárpitozott szék
+Chaise scandinave ¦ Skandinaavinen tuoli ¦ Skandináv szék
+Chaise médaillon (Louis XVI) ¦ Medaljonkituoli (Ludvig XVI) ¦ Medalionos szék (XVI. Lajos)
+Buffet scandinave sur pieds ¦ Jalallinen skandinaavinen senkki ¦ Lábas skandináv tálaló
+Vitrine à vaisselle ¦ Astiavitriini ¦ Porcelánvitrin
+Banc de table ¦ Pöytäpenkki ¦ Asztali pad
+Desserte, chariot de service ¦ Tarjoiluvaunu ¦ Zsúrkocsi
+Candélabre à cinq branches ¦ Viisihaarainen kynttelikkö ¦ Ötágú kandeláber
+Coupe de fruits ¦ Hedelmävati ¦ Gyümölcsöstál
+Bouquet dans un vase ¦ Kimppu maljakossa ¦ Csokor vázában
+Piano de cuisson ¦ Ammattiliesi ¦ Nagykonyhai tűzhely
+Colonne de cuisine (four et micro-ondes) ¦ Keittiön korkea kaappi (uuni ja mikro) ¦ Konyhai magas szekrény (sütő és mikró)
+Évier timbre d’office (céramique) ¦ Keraaminen pesuallas (timbre d’office) ¦ Kerámia mosogató (timbre d’office)
+Suspension à casseroles ¦ Kattilateline (riippuva) ¦ Függő edénytartó
+Poubelle à pédale ¦ Poljinroskis ¦ Pedálos szemetes
+Étagère à épices et bocaux ¦ Mauste- ja purkkihylly ¦ Fűszer- és befőttesüveg-polc
+Desserte à roulettes de cuisine ¦ Keittiön pyörällinen tarjoiluvaunu ¦ Görgős konyhai kocsi
+Mange-debout ¦ Baaripöytä ¦ Bárasztal
+Tabouret de bar ¦ Baarijakkara ¦ Bárszék
+Table en formica (années 60) ¦ Formica-pöytä (1960-luku) ¦ Formica asztal (60-as évek)
+Chaise en formica (années 60) ¦ Formica-tuoli (1960-luku) ¦ Formica szék (60-as évek)
+Pots d’herbes aromatiques ¦ Yrttiruukut ¦ Fűszernövény-cserepek
+Échelle à pain (suspendue) ¦ Riippuva leipäteline ¦ Függő kenyértartó létra
+Lit double moderne (140) ¦ Moderni parisänky (140) ¦ Modern franciaágy (140)
+Lit king size (180) ¦ King size -sänky (180) ¦ King size ágy (180)
+Lit simple moderne (90) ¦ Moderni yhden hengen sänky (90) ¦ Modern egyszemélyes ágy (90)
+Lit mezzanine avec bureau ¦ Parvisänky kirjoituspöydällä ¦ Galériaágy íróasztallal
+Futon, lit bas ¦ Futon, matala sänky ¦ Futon, alacsony ágy
+Table de chevet moderne ¦ Moderni yöpöytä ¦ Modern éjjeliszekrény
+Armoire à portes coulissantes (miroir) ¦ Liukuovinen vaatekaappi (peili) ¦ Tolóajtós szekrény (tükrös)
+Coiffeuse moderne à miroir rond ¦ Moderni kampauspöytä pyöreällä peilillä ¦ Modern fésülködőasztal kerek tükörrel
+Valet de chambre ¦ Vaatepalvelija ¦ Némainas
+Lit de fer à barreaux ¦ Rautapinnasänky ¦ Rácsos vaságy
+Chaise de nourrice (basse) ¦ Matala imetystuoli ¦ Alacsony szoptatószék
+Baignoire d’angle ¦ Kulmakylpyamme ¦ Sarokkád
+Baignoire îlot (moderne) ¦ Vapaasti seisova kylpyamme (moderni) ¦ Szabadon álló kád (modern)
+Cabine de douche ¦ Suihkukaappi ¦ Zuhanykabin
+Porte-serviettes sur pied ¦ Jalallinen pyyheteline ¦ Álló törölközőtartó
+Pèse-personne ¦ Henkilövaaka ¦ Személymérleg
+Vasque à poser sur plan en bois ¦ Puutasolle asetettava pesuallas ¦ Fa pultra ültetett mosdótál
+WC à réservoir ¦ Säiliöllinen WC ¦ Tartályos WC
+WC à chasse d’eau haute (à chaîne) ¦ WC korkealla huuhtelusäiliöllä (ketjulla) ¦ Magas tartályos WC (lánccal)
+Armoire à pharmacie murale ¦ Seinälääkekaappi ¦ Fali gyógyszeres szekrény
+Colonne lave-linge et sèche-linge ¦ Pesukone ja kuivausrumpu päällekkäin ¦ Mosógép és szárítógép egymáson
+Buanderie ¦ Kodinhoitohuone ¦ Mosókonyha
+Planche à repasser et son fer ¦ Silityslauta ja silitysrauta ¦ Vasalódeszka és vasaló
+Bac à laver (évier de buanderie) ¦ Pesuallas (kodinhoitohuoneen) ¦ Mosókonyhai mosogató
+Balai, seau et serpillière ¦ Luuta, ämpäri ja moppi ¦ Seprű, vödör és felmosó
+Étagère à linge plié ¦ Hylly taitetuille liinavaatteille ¦ Polc összehajtott ruhaneműnek
+Corbeille à linge en osier ¦ Paju pyykkikori ¦ Fonott szennyeskosár
+Séchoir à linge (accordéon) ¦ Taitettava pyykkiteline ¦ Harmonika ruhaszárító
+Aspirateur traîneau ¦ Lattiaimuri ¦ Porszívó (szánkós)
+Aspirateur balai ¦ Varsi-imuri ¦ Álló porszívó
+Essoreuse à rouleaux (ancienne) ¦ Mankeli (vanha) ¦ Hengeres facsaró (régi)
+Machine à laver à manivelle (ancienne) ¦ Kammellinen pesukone (vanha) ¦ Kézi hajtású mosógép (régi)
+Patère murale et manteaux ¦ Seinänaulakko ja takit ¦ Fali fogas és kabátok
+Vestiaire d’entrée à miroir (ancien) ¦ Peilillinen eteisnaulakko (vanha) ¦ Tükrös előszobafal (régi)
+Banc à chaussures ¦ Kenkäpenkki ¦ Cipőtartó pad
+Console et miroir d’entrée ¦ Eteisen konsolipöytä ja peili ¦ Előszobai konzolasztal és tükör
+Paillasson ¦ Ovimatto ¦ Lábtörlő
+Boîte à clés murale ¦ Seinäavainkaappi ¦ Fali kulcsszekrény
+Boîte aux lettres sur pied ¦ Jalallinen postilaatikko ¦ Álló postaláda
+Ordinateur portable ¦ Kannettava tietokone ¦ Laptop
+Ordinateur de bureau (écran, tour, clavier) ¦ Pöytätietokone (näyttö, keskusyksikkö, näppäimistö) ¦ Asztali számítógép (képernyő, gépház, billentyűzet)
+Minitel ¦ Minitel ¦ Minitel
+Téléphone à cadran ¦ Valintalevypuhelin ¦ Tárcsás telefon
+Échelle de bibliothèque ¦ Kirjastotikkaat ¦ Könyvtárlétra
+Tableau en liège (pense-bête) ¦ Korkkitaulu (muistilaput) ¦ Parafatábla (emlékeztetők)
+Corbeille à papier ¦ Paperikori ¦ Papírkosár
+Bureau assis-debout ¦ Sähköpöytä (istuen ja seisten) ¦ Állítható magasságú íróasztal
+Rayonnage d’archives (généalogie) ¦ Arkistohyllystö (sukututkimus) ¦ Archiváló polcrendszer (családfakutatás)
+Circuit de train électrique ¦ Sähköjunarata ¦ Villanyvasút-terepasztal
+Cubes empilés ¦ Pinotut palikat ¦ Egymásra rakott kockák
+Tricycle ¦ Kolmipyörä ¦ Tricikli
+Cuisine pour enfant (dînette) ¦ Leikkikeittiö ¦ Játékkonyha
+Théâtre de marionnettes (castelet) ¦ Nukketeatteri ¦ Bábszínház
+Ballon ¦ Pallo ¦ Labda
+Trottinette ¦ Potkulauta ¦ Roller
+Baby-foot ¦ Pöytäjalkapallo ¦ Csocsó
+Luge en bois ¦ Puukelkka ¦ Fa szánkó
+Lit de fer d’enfant ¦ Lasten rautasänky ¦ Gyermek vaságy
+Lampadaire à abat-jour ¦ Varjostimellinen lattiavalaisin ¦ Ernyős állólámpa
+Luminaires ¦ Valaisimet ¦ Világítás
+Lampadaire arc ¦ Kaarilattiavalaisin ¦ Íves állólámpa
+Lampadaire trépied ¦ Kolmijalkainen lattiavalaisin ¦ Háromlábú állólámpa
+Lampe de salon (pied boule) ¦ Olohuoneen pöytävalaisin (pallojalka) ¦ Asztali lámpa (gömbtalpú)
+Lampe de banquier (verte) ¦ Pankkiirinlamppu (vihreä) ¦ Bankárlámpa (zöld)
+Lampe d’architecte ¦ Arkkitehtivalaisin ¦ Építészlámpa
+Suspension de cuisine ¦ Keittiön riippuvalaisin ¦ Konyhai függőlámpa
+Suspension à trois globes ¦ Kolmen pallon riippuvalaisin ¦ Háromgömbös függőlámpa
+Lustre à pampilles ¦ Kristallikruunu ¦ Kristálycsillár
+Suspension boule en papier ¦ Paperinen pallovalaisin ¦ Papír gömblámpa
+Applique murale ¦ Seinävalaisin ¦ Fali lámpa
+Rail de spots ¦ Kohdevalokisko ¦ Spotlámpasín
+Lanterne ¦ Lyhty ¦ Lámpás
+Bougies (groupe) ¦ Kynttilät (ryhmä) ¦ Gyertyák (csoport)
+Guirlande lumineuse ¦ Valosarja ¦ Fényfüzér
+Lampe Tiffany (vitrail) ¦ Tiffany-lamppu (lasimaalaus) ¦ Tiffany-lámpa (üvegmozaik)
+Lampe à lave ¦ Laavalamppu ¦ Lávalámpa
+Lampe champignon ¦ Sienilamppu ¦ Gombalámpa
+Réverbère (lampadaire de jardin) ¦ Katulyhty (puutarhavalaisin) ¦ Kandeláber (kerti lámpa)
+Lampe Pigeon ¦ Pigeon-lamppu ¦ Pigeon-lámpa
+Mur de cadres photo ¦ Valokuvakehysseinä ¦ Képkeretfal
+Cadre photo à poser ¦ Pöydälle asetettava valokuvakehys ¦ Asztali képkeret
+Tableau : paysage ¦ Taulu: maisema ¦ Festmény: tájkép
+Tableau : marine ¦ Taulu: merimaisema ¦ Festmény: tengeri tájkép
+Tableau abstrait ¦ Abstrakti taulu ¦ Absztrakt festmény
+Tableau : nature morte ¦ Taulu: asetelma ¦ Festmény: csendélet
+Carte ancienne encadrée ¦ Kehystetty vanha kartta ¦ Bekeretezett régi térkép
+Papillons encadrés ¦ Kehystetyt perhoset ¦ Bekeretezett lepkék
+Miroir rond ¦ Pyöreä peili ¦ Kerek tükör
+Miroir soleil ¦ Aurinkopeili ¦ Napsugaras tükör
+Grand miroir doré (trumeau) ¦ Iso kullattu peili (trumeau) ¦ Nagy aranyozott tükör (trumeau)
+Tapis persan ¦ Persialainen matto ¦ Perzsaszőnyeg
+Tapis berbère ¦ Berberimatto ¦ Berber szőnyeg
+Tapis kilim ¦ Kelimmatto ¦ Kilimszőnyeg
+Tapis de couloir ¦ Käytävämatto ¦ Folyosószőnyeg
+Tapis à poils longs ¦ Pitkänukkainen matto ¦ Hosszú szálú szőnyeg
+Rideaux sur tringle ¦ Verhot tangossa ¦ Függöny karnison
+Ficus en pot ¦ Ruukkufiikus ¦ Cserepes fikusz
+Monstera (grandes feuilles) ¦ Peikonlehti (suuret lehdet) ¦ Könnyezőpálma (nagy levelek)
+Cactus en pot ¦ Ruukkukaktus ¦ Cserepes kaktusz
+Palmier d’intérieur (kentia) ¦ Huonepalmu (kentia) ¦ Szobapálma (kencia)
+Bambou en bac ¦ Bambu ruukussa ¦ Bambusz dézsában
+Orchidée ¦ Orkidea ¦ Orchidea
+Fougère en pot ¦ Ruukkusaniainen ¦ Cserepes páfrány
+Grand vase de sol (branches) ¦ Iso lattiamaljakko (oksia) ¦ Nagy padlóváza (ágak)
+Horloge murale ¦ Seinäkello ¦ Falióra
+Horloge à coucou ¦ Käkikello ¦ Kakukkos óra
+Horloge œil-de-bœuf ¦ Häränsilmäkello ¦ Ökörszemóra
+Sculpture moderne sur socle ¦ Moderni veistos jalustalla ¦ Modern szobor talapzaton
+Maquette de voilier ¦ Purjelaivan pienoismalli ¦ Vitorlás hajómakett
+Coupe, trophée ¦ Pokaali, palkinto ¦ Kupa, trófea
+Bocal à poisson rouge ¦ Kultakalamalja ¦ Aranyhalas gömb
+Réfrigérateur rétro (années 50) ¦ Retrojääkaappi (1950-luku) ¦ Retró hűtőszekrény (50-es évek)
+Électroménager ¦ Kodinkoneet ¦ Háztartási gépek
+Réfrigérateur combiné moderne ¦ Moderni jääpakastin ¦ Modern kombinált hűtő
+Congélateur armoire ¦ Kaappipakastin ¦ Fagyasztószekrény
+Cave à vin réfrigérée ¦ Viinikaappi ¦ Borhűtő
+Grille-pain ¦ Leivänpaahdin ¦ Kenyérpirító
+Bouilloire ¦ Vedenkeitin ¦ Vízforraló
+Machine à café expresso ¦ Espressokeitin ¦ Eszpresszógép
+Robot pâtissier ¦ Yleiskone ¦ Konyhai robotgép
+Téléviseur des années 60 (à pieds) ¦ 1960-luvun televisio (jalallinen) ¦ 60-as évekbeli televízió (lábakon)
+Chaîne hi-fi et enceintes ¦ Stereot ja kaiuttimet ¦ Hifi-torony és hangszórók
+Enceinte colonne ¦ Lattiakaiutin ¦ Álló hangfal
+Platine vinyle ¦ Levysoitin ¦ Lemezjátszó
+Radiocassette (années 80) ¦ Kasettiradio (1980-luku) ¦ Rádiósmagnó (80-as évek)
+Console de jeux et manettes ¦ Pelikonsoli ja ohjaimet ¦ Játékkonzol és kontrollerek
+Ventilateur sur pied ¦ Jalallinen tuuletin ¦ Álló ventilátor
+Radiateur bain d’huile ¦ Öljytäytteinen lämpöpatteri ¦ Olajradiátor
+Poêle à pétrole ¦ Petrolilämmitin ¦ Petróleumkályha
+Aspirateur robot ¦ Robotti-imuri ¦ Robotporszívó
+Climatiseur mural ¦ Seinäilmastointilaite ¦ Fali klíma
+Guitare sur son support ¦ Kitara telineessään ¦ Gitár az állványán
+Musique ¦ Musiikki ¦ Zene
+Guitare électrique et ampli ¦ Sähkökitara ja vahvistin ¦ Elektromos gitár és erősítő
+Violon sur son support ¦ Viulu telineessään ¦ Hegedű az állványán
+Violoncelle ¦ Sello ¦ Cselló
+Contrebasse ¦ Kontrabasso ¦ Nagybőgő
+Harpe ¦ Harppu ¦ Hárfa
+Batterie ¦ Rummut ¦ Dobfelszerelés
+Clavier électronique sur pied ¦ Jalallinen koskettimisto ¦ Szintetizátor állványon
+Pupitre à musique ¦ Nuottiteline ¦ Kottatartó
+Tuba ¦ Tuuba ¦ Tuba
+Djembé ¦ Djembe ¦ Dzsembe
+Clavecin ¦ Cembalo ¦ Csembaló
+Vielle à roue ¦ Kampiliira ¦ Tekerőlant
+Juke-box ¦ Jukeboksi ¦ Wurlitzer (zenegép)
+Orgue de Barbarie ¦ Posetiivi ¦ Verkli
+Moto ¦ Moottoripyörä ¦ Motorkerékpár
+Garage ¦ Autotalli ¦ Garázs
+Mobylette (cyclomoteur) ¦ Mopo ¦ Segédmotoros kerékpár
+Servante d’atelier ¦ Työkaluvaunu ¦ Szerszámkocsi
+Établi et panneau à outils ¦ Höyläpenkki ja työkalutaulu ¦ Munkapad és szerszámtábla
+Rayonnage métallique et caisses ¦ Metallihyllystö ja laatikot ¦ Fémpolc és ládák
+Perceuse à colonne ¦ Pylväsporakone ¦ Oszlopos fúrógép
+Scie sur table ¦ Pöytäsaha ¦ Asztali fűrész
+Jerrican ¦ Bensakanisteri ¦ Kanna (benzines)
+Pile de pneus ¦ Rengaspino ¦ Gumiabroncs-halom
+Escabeau ¦ Tikkaat ¦ Létra (állólétra)
+Remorque ¦ Peräkärry ¦ Utánfutó
+Kayak ¦ Kajakki ¦ Kajak
+Table de ping-pong ¦ Pingispöytä ¦ Pingpongasztal
+Tondeuse à gazon ¦ Ruohonleikkuri ¦ Fűnyíró
+Tracteur tondeuse ¦ Ajoleikkuri ¦ Fűnyíró traktor
+Trampoline ¦ Trampoliini ¦ Trambulin
+Piscine hors-sol ¦ Maanpäällinen uima-allas ¦ Föld feletti medence
+Piscine creusée ¦ Maahan upotettu uima-allas ¦ Földbe süllyesztett medence
+Spa (jacuzzi) ¦ Poreallas (jacuzzi) ¦ Pezsgőfürdő (jacuzzi)
+Hamac sur support ¦ Riippumatto telineessä ¦ Állványos függőágy
+Balancelle de jardin ¦ Puutarhakeinu ¦ Kerti hintaágy
+Kiosque, gloriette ¦ Huvimaja ¦ Kerti pavilon, filagória
+Salon de jardin bistrot ¦ Bistro-puutarhakalusteet ¦ Bisztró kerti garnitúra
+Barbecue boule ¦ Pallogrilli ¦ Gömbgrill
+Brasero ¦ Tulisija (brasero) ¦ Tűzrakóhely (brasero)
+Bac à sable ¦ Hiekkalaatikko ¦ Homokozó
+Nichoir sur poteau ¦ Linnunpönttö tolpassa ¦ Oszlopos madárodú
+Composteur ¦ Kompostori ¦ Komposztáló
+Récupérateur d’eau de pluie ¦ Sadevesisäiliö ¦ Esővízgyűjtő
+Nain de jardin ¦ Puutarhatonttu ¦ Kerti törpe
+Cadran solaire ¦ Aurinkokello ¦ Napóra
+Pots de fleurs ¦ Kukkaruukut ¦ Virágcserepek
+Olivier en pot ¦ Oliivipuu ruukussa ¦ Cserepes olajfa
+Carré potager surélevé ¦ Korotettu kasvilaatikko ¦ Magaságyás
+Dévidoir à tuyau d’arrosage ¦ Puutarhaletkun kela ¦ Locsolótömlő-tekercselő
+Arrosoir ¦ Kastelukannu ¦ Locsolókanna
+Étendoir parapluie ¦ Sateenvarjokuivausteline ¦ Forgó ruhaszárító
+Petit pont de jardin ¦ Pieni puutarhasilta ¦ Kis kerti híd
+Mât et drapeau ¦ Lipputanko ja lippu ¦ Zászlórúd és zászló
+Roue de charrette (décor) ¦ Kärrynpyörä (koriste) ¦ Szekérkerék (dísz)
+Tarare (vanneuse à grain) ¦ Viskuukone ¦ Rosta (gabonatisztító)
+Égrenoir à maïs ¦ Maissinjyväkone ¦ Kukoricamorzsoló
+Hache-paille ¦ Silppuri ¦ Szecskavágó
+Selle sur chevalet ¦ Satula telineellä ¦ Nyereg állványon
+Faucheuse à cheval ¦ Hevosniittokone ¦ Lóvontatású kaszálógép
+Rouleau agricole en pierre ¦ Kivinen peltojyrä ¦ Kőhenger (mezőgazdasági)
+Palanche et ses deux seaux ¦ Kantoies ja kaksi ämpäriä ¦ Vállfa két vödörrel
+Tonneaux sur leur chantier ¦ Tynnyrit telineellään ¦ Hordók az ászokon
+Tabouret de traite et seau ¦ Lypsyjakkara ja ämpäri ¦ Fejőszék és sajtár
+Sacs de grain ¦ Viljasäkit ¦ Gabonazsákok
+Éolienne de pompage (ancienne) ¦ Pumppaava tuulimylly (vanha) ¦ Szivattyús szélkerék (régi)
+Pigeonnier ¦ Kyyhkyslakka ¦ Galambdúc
+Épouvantail ¦ Linnunpelätin ¦ Madárijesztő
+Encoignure (meuble d’angle) ¦ Kulmakaappi ¦ Sarokszekrény
+Placard à portes coulissantes ¦ Liukuovinen komero ¦ Tolóajtós beépített szekrény
+Étagère à chaussures ¦ Kenkähylly ¦ Cipőpolc
+Coin des icônes (« beau coin » orthodoxe) ¦ Ikoninurkka (ortodoksinen ”kaunis nurkka”) ¦ Ikonsarok (ortodox „szépsarok”)
+Veilleuse d’icône (lampada) ¦ Ikonilamppu (lampada) ¦ Ikonmécses (lampada)
+Croix orthodoxe murale ¦ Ortodoksinen seinäristi ¦ Ortodox fali kereszt
+Croix murale sans Christ (protestante) ¦ Seinäristi ilman Kristusta (protestanttinen) ¦ Korpusz nélküli fali kereszt (protestáns)
+Grande Bible ouverte sur pupitre ¦ Iso avoin Raamattu lukupulpetilla ¦ Nagy nyitott Biblia olvasóállványon
+Image du Sacré-Cœur encadrée ¦ Kehystetty Jeesuksen Pyhän Sydämen kuva ¦ Bekeretezett Jézus Szentséges Szíve-kép
+Ex-voto (plaque de remerciement) ¦ Votiivitaulu (kiitoslaatta) ¦ Fogadalmi tábla (hálatábla)
+Couronne de l’Avent ¦ Adventtikranssi ¦ Adventi koszorú
+Crèche de Noël ¦ Jouluseimi ¦ Betlehem (karácsonyi)
+Chapelet accroché (rosaire) ¦ Ripustettu rukousnauha (rosaario) ¦ Felakasztott rózsafüzér
+Ménorah (chandelier à sept branches) ¦ Menora (seitsenhaarainen kynttilänjalka) ¦ Menóra (hétágú gyertyatartó)
+Hanoukia (chandelier à neuf branches) ¦ Hanukkia (yhdeksänhaarainen kynttilänjalka) ¦ Hanukija (kilencágú gyertyatartó)
+Chandeliers de shabbat (paire) ¦ Sapattikynttilänjalat (pari) ¦ Szombati gyertyatartók (pár)
+Mézouza (au montant de la porte) ¦ Mezuza (ovenpielessä) ¦ Mezuza (az ajtófélfán)
+Étoile de David murale ¦ Daavidin tähti seinällä ¦ Dávid-csillag a falon
+Mizrah (plaque tournée vers Jérusalem) ¦ Mizrah (Jerusalemiin päin suunnattu laatta) ¦ Mizrach (Jeruzsálem felé néző tábla)
+Armoire de la Torah (aron, avec son rideau) ¦ Tooran kaappi (aron, verhoineen) ¦ Tóraszekrény (áron, függönnyel)
+Pupitre de lecture (bimah) ¦ Lukupulpetti (bima) ¦ Felolvasóasztal (bima)
+Coupe de kiddouch et plateau ¦ Kidduš-malja ja tarjotin ¦ Kiduspohár és tálca
+Plat du séder (Pessah) ¦ Seder-lautanen (pesah) ¦ Széder-tál (pészah)
+Châle de prière (talit) sur son cintre ¦ Rukousviitta (tallit) henkarissaan ¦ Imasál (tálit) a vállfán
+Tirelire de tsedaka ¦ Tsedaka-säästölipas ¦ Cedaka-persely
+Tapis de prière ¦ Rukousmatto ¦ Imaszőnyeg
+Porte-Coran pliant (rahle) ¦ Taitettava Koraaniteline (rahle) ¦ Összecsukható Korántartó (rahle)
+Croissant et étoile muraux ¦ Kuunsirppi ja tähti seinällä ¦ Félhold és csillag a falon
+Calligraphie encadrée (Bismillah) ¦ Kehystetty kalligrafia (Bismillah) ¦ Bekeretezett kalligráfia (Bismillah)
+Chapelet (misbaha) sur sa coupelle ¦ Rukousnauha (misbaha) kupissaan ¦ Imafüzér (miszbaha) kis tálkában
+Lanterne du ramadan (fanous) ¦ Ramadanlyhty (fanous) ¦ Ramadáni lámpás (fánúsz)
+Niche de prière murale (mihrab décoratif) ¦ Seinän rukoussyvennys (koristeellinen mihrab) ¦ Fali imafülke (díszítő mihráb)
+Coran sur l’étagère du haut ¦ Koraani ylimmällä hyllyllä ¦ Korán a legfelső polcon
+Brûleur d’encens (mabkhara) ¦ Suitsukepoltin (mabkhara) ¦ Füstölőégető (mabkhara)
+Bouddha assis ¦ Istuva Buddha ¦ Ülő Buddha
+Grand Bouddha de jardin ¦ Iso puutarha-Buddha ¦ Nagy kerti Buddha
+Autel bouddhique (butsudan) ¦ Buddhalainen alttari (butsudan) ¦ Buddhista oltár (butsudan)
+Stupa miniature (chorten) ¦ Pienoisstupa (chorten) ¦ Miniatűr sztúpa (csorten)
+Moulin à prières ¦ Rukousmylly ¦ Imamalom
+Drapeaux de prière (guirlande) ¦ Rukousliput (nauha) ¦ Imazászlók (füzér)
+Thangka (peinture sur rouleau) ¦ Thangka (kääremaalaus) ¦ Thangka (tekercsfestmény)
+Roue du dharma murale ¦ Dharman pyörä seinällä ¦ Dharma-kerék a falon
+Bol chantant sur coussin ¦ Laulava kulho tyynyllä ¦ Hangtál párnán
+Gong sur portique ¦ Gongi telineessä ¦ Gong állványon
+Coussin de méditation (zafu et zabuton) ¦ Meditaatiotyyny (zafu ja zabuton) ¦ Meditációs párna (zafu és zabuton)
+Brûle-parfum et bâtons d’encens ¦ Suitsuketeline ja suitsukkeet ¦ Füstölőtartó és füstölőpálcák
+Temple de maison (mandir) ¦ Kotitemppeli (mandir) ¦ Házi szentély (mandir)
+Statue de Ganesh ¦ Ganesha-patsas ¦ Ganésa-szobor
+Nataraja (Shiva dansant) ¦ Nataraja (tanssiva Šiva) ¦ Natarádzsa (táncoló Siva)
+Om mural ¦ Om-merkki seinällä ¦ Óm jel a falon
+Lampe à huile (diya) ¦ Öljylamppu (diya) ¦ Olajmécses (dija)
+Pot de tulsi (basilic sacré) ¦ Tulsi-ruukku (pyhä basilika) ¦ Tulszi-cserép (szent bazsalikom)
+Rangoli (motif coloré au sol) ¦ Rangoli (värikäs lattiakuvio) ¦ Rangoli (színes padlóminta)
+Cloche de puja ¦ Puja-kello ¦ Púdzsa-csengő
+Guirlande de fleurs (œillets d’Inde) ¦ Kukkaköynnös (samettikukat) ¦ Virágfüzér (büdöskék)
+Khanda mural ¦ Khanda seinällä ¦ Khanda a falon
+Palki Sahib (dais du Guru Granth Sahib) ¦ Palki Sahib (Guru Granth Sahibin katos) ¦ Palki Sahib (a Guru Granth Szahib baldachinja)
+Manji Sahib (petit lit du livre saint) ¦ Manji Sahib (pyhän kirjan pieni sänky) ¦ Mandzsi Sahib (a szent könyv kis ágya)
+Kamidana (autel shinto mural) ¦ Kamidana (šintolainen seinäalttari) ¦ Kamidana (sintó fali oltár)
+Torii de jardin ¦ Puutarhan torii ¦ Kerti torii
+Lanterne de pierre (tōrō) ¦ Kivilyhty (tōrō) ¦ Kőlámpás (tōrō)
+Corde sacrée (shimenawa) ¦ Pyhä köysi (shimenawa) ¦ Szent kötél (shimenawa)
+Autel des ancêtres ¦ Esivanhempien alttari ¦ Ősök oltára
+Tablettes des ancêtres ¦ Esivanhempien muistotaulut ¦ Őstáblák
+Brûle-parfum tripode (bronze) ¦ Kolmijalkainen suitsukepoltin (pronssi) ¦ Háromlábú füstölőégető (bronz)
+Yin et yang mural ¦ Yin ja yang seinällä ¦ Jin és jang a falon
+Lanterne rouge en papier ¦ Punainen paperilyhty ¦ Piros papírlámpás
+Vase à feu sacré (afrinagan) ¦ Pyhän tulen astia (afrinagan) ¦ Szent tűz edénye (afrinagan)
+Coin mémoire (photo, bougie, fleurs) ¦ Muistonurkka (kuva, kynttilä, kukat) ¦ Emléksarok (fénykép, gyertya, virágok)
+Urne funéraire ¦ Tuhka-uurna ¦ Urna
+Cadre de deuil (photo et ruban noir) ¦ Surukehys (kuva ja musta nauha) ¦ Gyászkeret (fénykép és fekete szalag)
+Bougie du souvenir ¦ Muistokynttilä ¦ Emlékgyertya
+Boîte à lettres d’amour (correspondance) ¦ Rakkauskirjelaatikko (kirjeenvaihto) ¦ Szerelmeslevelek doboza (levelezés)
+Vitrine à médailles et souvenirs militaires ¦ Vitriini mitaleille ja sotilasmuistoille ¦ Vitrin érmekkel és katonai emléktárgyakkal
+Lave-linge à hublot ¦ Edestä täytettävä pesukone ¦ Elöltöltős mosógép
+Lave-linge à ouverture par le dessus ¦ Päältä täytettävä pesukone ¦ Felültöltős mosógép
+Lave-vaisselle compact (à poser) ¦ Pieni pöytäastianpesukone ¦ Kompakt pultra helyezhető mosogatógép
+Four à micro-ondes ¦ Mikroaaltouuni ¦ Mikrohullámú sütő
+Mini-four ¦ Miniuuni ¦ Minisütő
+Four encastrable sous le plan ¦ Työtason alle upotettava kalusteuuni ¦ Pult alá beépíthető sütő
+Plaque à induction ¦ Induktiotaso ¦ Indukciós főzőlap
+Table de cuisson au gaz (4 feux) ¦ Kaasukeittotaso (4 poltinta) ¦ Gázfőzőlap (4 égős)
+Plancha électrique ¦ Sähköinen paistolevy (plancha) ¦ Elektromos sütőlap (plancha)
+Appareil à raclette ¦ Raclette-laite ¦ Raclette-sütő
+Hotte aspirante murale ¦ Seinään kiinnitettävä liesituuletin ¦ Fali páraelszívó
+Hotte îlot (suspendue) ¦ Saarekeliesituuletin (riippuva) ¦ Sziget páraelszívó (függő)
+Cuiseur à riz ¦ Riisinkeitin ¦ Rizsfőző
+Mijoteuse ¦ Haudutuspata ¦ Lassúfőző
+Autocuiseur (cocotte-minute) ¦ Painekattila ¦ Kukta
+Friteuse ¦ Friteerauskeitin ¦ Olajsütő
+Friteuse sans huile ¦ Airfryer ¦ Forrólevegős sütő
+Machine à pain ¦ Leipäkone ¦ Kenyérsütőgép
+Gaufrier ¦ Vohvelirauta ¦ Gofrisütő
+Blender ¦ Tehosekoitin ¦ Turmixgép
+Centrifugeuse (presse-fruits) ¦ Mehulinko ¦ Gyümölcscentrifuga
+Robot multifonction ¦ Monitoimikone ¦ Multifunkciós konyhagép
+Cafetière à filtre ¦ Suodatinkahvinkeitin ¦ Filteres kávéfőző
+Machine à café à capsules ¦ Kapselikahvinkeitin ¦ Kapszulás kávégép
+Bouilloire émaillée ¦ Emaloitu vedenkeitin ¦ Zománcozott teáskanna
+Mini-réfrigérateur ¦ Minijääkaappi ¦ Minihűtő
+Téléviseur écran plat sur pied ¦ Taulutelevisio jalalla ¦ Lapostévé talpon
+Grand téléviseur au mur ¦ Iso televisio seinällä ¦ Nagy falra szerelt tévé
+Écran de projection ¦ Valkokangas ¦ Vetítővászon
+Vidéoprojecteur ¦ Videoprojektori ¦ Projektor
+Barre de son ¦ Soundbar ¦ Hangprojektor (soundbar)
+Magnétoscope (VHS) ¦ Videonauhuri (VHS) ¦ Videomagnó (VHS)
+Lecteur DVD / Blu-ray ¦ DVD- / Blu-ray-soitin ¦ DVD / Blu-ray lejátszó
+Box internet ¦ Reititin ¦ Internetes router
+Poste de radio TSF ¦ Radio (TSF) ¦ Rádiókészülék (TSF)
+Transistor ¦ Transistoriradio ¦ Táskarádió
+Téléphone sans fil et sa base ¦ Langaton puhelin ja tukiasema ¦ Vezeték nélküli telefon és bázisa
+Nettoyeur vapeur (balai) ¦ Höyrymoppi ¦ Gőzölős felmosó
+Centrale vapeur ¦ Höyrysilitysasema ¦ Gőzállomás
+Déshumidificateur ¦ Ilmankuivain ¦ Párátlanító
+Purificateur d’air ¦ Ilmanpuhdistin ¦ Légtisztító
+Ventilateur colonne ¦ Tornituuletin ¦ Oszlopventilátor
+Chauffe-eau (ballon d’eau chaude) ¦ Lämminvesivaraaja ¦ Melegvíztároló (bojler)
+Chaudière murale ¦ Seinään asennettava lämmityskattila ¦ Fali kazán
+Radiateur électrique mural ¦ Sähköinen seinälämmitin ¦ Elektromos fali fűtőtest
+Machine à coudre électrique ¦ Sähköompelukone ¦ Elektromos varrógép
+Fauteuil de bureau à roulettes ¦ Pyörillä varustettu työtuoli ¦ Görgős irodai szék
+Siège ergonomique (dossier filet) ¦ Ergonominen tuoli (verkkoselkänoja) ¦ Ergonomikus szék (hálós támla)
+Fauteuil de direction en cuir ¦ Nahkainen johtajantuoli ¦ Bőr vezetői fotel
+Bureau informatique ¦ Tietokonepöytä ¦ Számítógépasztal
+Grand bureau (plateau 180 cm) ¦ Iso kirjoituspöytä (180 cm:n levy) ¦ Nagy íróasztal (180 cm-es lap)
+Table à dessin inclinable ¦ Kallistettava piirustuspöytä ¦ Dönthető rajzasztal
+Caisson à tiroirs à roulettes ¦ Pyörällinen laatikosto ¦ Görgős fiókos konténer
+Classeur métallique à tiroirs ¦ Metallinen laatikollinen arkistokaappi ¦ Fém fiókos irattartó
+Armoire à rideaux ¦ Rullaovikaappi ¦ Redőnyös szekrény
+Meuble à plans ¦ Piirustuskaappi ¦ Tervrajztároló szekrény
+Fichier à fiches en bois ¦ Puinen kortisto ¦ Fa kartotékszekrény
+Étagère de classeurs ¦ Kansiohylly ¦ Iratrendezős polc
+Imprimante ¦ Tulostin ¦ Nyomtató
+Imprimante multifonction (scanner) ¦ Monitoimitulostin (skanneri) ¦ Multifunkciós nyomtató (szkenner)
+Photocopieur ¦ Kopiokone ¦ Fénymásoló
+Scanner à plat ¦ Tasoskanneri ¦ Síkágyas szkenner
+Écran d’ordinateur ¦ Tietokoneen näyttö ¦ Számítógép-monitor
+Deux écrans côte à côte ¦ Kaksi näyttöä vierekkäin ¦ Két képernyő egymás mellett
+Ordinateur tout-en-un ¦ All-in-one-tietokone ¦ All-in-one számítógép
+Globe sur pied ¦ Jalallinen karttapallo ¦ Álló földgömb
+Tableau blanc ¦ Valkotaulu ¦ Fehértábla
+Destructeur de documents ¦ Paperisilppuri ¦ Iratmegsemmisítő
+Trieur à courrier ¦ Postilokerikko ¦ Levélrendező tálca
+Plante de bureau ¦ Työpöydän kasvi ¦ Asztali növény
+Lampe de bureau LED ¦ LED-työpöytävalaisin ¦ LED-es asztali lámpa
+Repose-pieds de bureau ¦ Työpöydän jalkatuki ¦ Íróasztal alatti lábtartó
+Fontaine à eau ¦ Vesiautomaatti ¦ Vízadagoló
+Voiture citadine ¦ Kaupunkiauto ¦ Városi kisautó
+Voiture familiale (break) ¦ Farmariauto ¦ Kombi
+Camionnette ¦ Pakettiauto ¦ Kisteherautó
+2 CV ¦ 2 CV ¦ 2 CV
+Renault 4 L ¦ Renault 4 L ¦ Renault 4 L
+Traction avant ¦ Traction Avant ¦ Traction Avant
+Caravane ¦ Asuntovaunu ¦ Lakókocsi
+Vélo ¦ Polkupyörä ¦ Kerékpár
+Vélo électrique ¦ Sähköpyörä ¦ Elektromos kerékpár
+Vélo d’enfant ¦ Lasten polkupyörä ¦ Gyerekbicikli
+Vélo ancien (de facteur) ¦ Vanha polkupyörä (postinkantajan) ¦ Régi kerékpár (postásé)
+Râtelier à vélos ¦ Pyöräteline ¦ Kerékpártartó
+Scooter ¦ Skootteri ¦ Robogó
+Panneau à outils mural ¦ Seinätyökalutaulu ¦ Fali szerszámtábla
+Armoire métallique d’atelier ¦ Metallinen työpajakaappi ¦ Fém műhelyszekrény
+Étagère de garage en bois ¦ Puinen autotallihylly ¦ Fa garázspolc
+Établi pliant ¦ Taitettava työpenkki ¦ Összecsukható munkapad
+Scie à onglet ¦ Jiirisaha ¦ Gérvágó fűrész
+Poste à souder ¦ Hitsauskone ¦ Hegesztőgép
+Nettoyeur haute pression ¦ Painepesuri ¦ Magasnyomású mosó
+Groupe électrogène ¦ Aggregaatti ¦ Áramfejlesztő
+Aspirateur d’atelier ¦ Työpajaimuri ¦ Műhelyporszívó
+Cric rouleur ¦ Siirrettävä tunkki ¦ Gurulós emelő
+Borne de recharge (voiture électrique) ¦ Latauspiste (sähköauto) ¦ Töltőállomás (elektromos autó)
+Échelle d’appui ¦ Nojatikkaat ¦ Támasztólétra
+Réfrigérateur de garage ¦ Autotallin jääkaappi ¦ Garázshűtő
+Congélateur coffre de garage ¦ Autotallin arkkupakastin ¦ Garázsbeli fagyasztóláda
+Poubelles de tri (conteneurs) ¦ Lajitteluastiat (jäteastiat) ¦ Szelektív kukák (konténerek)
+Canoë ¦ Kanootti ¦ Kenu
+Planche de surf ¦ Surffilauta ¦ Szörfdeszka
+Réglette d’atelier ¦ Työpajan loisteputkivalaisin ¦ Műhelyi fénycsöves lámpa
+Plafonnier rond ¦ Pyöreä kattovalaisin ¦ Kerek mennyezeti lámpa
+Plafonnier Art déco ¦ Art deco -kattovalaisin ¦ Art deco mennyezeti lámpa
+Dalle LED ¦ LED-paneeli ¦ LED-panel
+Lustre à bras ¦ Haarakruunu ¦ Karos csillár
+Lustre en fer forgé (à bougies) ¦ Takorautainen kruunu (kynttilät) ¦ Kovácsoltvas csillár (gyertyás)
+Lustre roue de charrette ¦ Kärrynpyöräkruunu ¦ Szekérkerék-csillár
+Réglette lumineuse ¦ Valolista ¦ Lámpasor
+Néon décoratif (enseigne) ¦ Koristeneon (kyltti) ¦ Díszneon (felirat)
+Bandeau LED ¦ LED-nauha ¦ LED-szalag
+Lampadaire vasque (halogène) ¦ Ylöspäin valaiseva lattiavalaisin (halogeeni) ¦ Felfelé világító állólámpa (halogén)
+Lampadaire vasque Art déco ¦ Art deco -lattiavalaisin ylöspäin ¦ Art deco felfelé világító állólámpa
+Lampadaire liseuse ¦ Lukulattiavalaisin ¦ Olvasó állólámpa
+Lampe à abat-jour plissé ¦ Laskostettu varjostinlamppu ¦ Rakott ernyős lámpa
+Lampe globe en opaline ¦ Opaalilasinen pallolamppu ¦ Opálüveg gömblámpa
+Lampe de sel ¦ Suolalamppu ¦ Sólámpa
+Veilleuse d’enfant ¦ Lasten yövalo ¦ Gyermek éjjeli fény
+Lampe de lecture articulée ¦ Säädettävä lukuvalaisin ¦ Állítható olvasólámpa
+Lampe à carbure (de mineur) ¦ Karbidilamppu (kaivosmiehen) ¦ Karbidlámpa (bányászé)
+Bougeoir à main ¦ Kädessä kannettava kynttilänjalka ¦ Kézi gyertyatartó
+Applique double ¦ Kaksoisseinävalaisin ¦ Dupla fali lámpa
+Applique de salle de bain ¦ Kylpyhuoneen seinävalaisin ¦ Fürdőszobai fali lámpa
+Suspension industrielle ¦ Teollinen riippuvalaisin ¦ Ipari függőlámpa
+Ampoule nue (filament) ¦ Paljas hehkulamppu (hehkulanka) ¦ Csupasz izzó (izzószálas)
+Suspension en rotin ¦ Rottinkinen riippuvalaisin ¦ Rattan függőlámpa
+Boule à facettes ¦ Peilipallo ¦ Diszkógömb
+Projecteur extérieur ¦ Ulkovalonheitin ¦ Kültéri reflektor
+Borne lumineuse de jardin ¦ Puutarhan pollarivalaisin ¦ Kerti állólámpa (oszlop)
+Balise solaire de jardin ¦ Aurinkokennoinen puutarhavalo ¦ Napelemes kerti lámpa
+maison|Genre ¦ Tyyppi ¦ Típus
+maison|Avant ¦ Etuosa ¦ Elöl
+maison|Poser ¦ Aseta ¦ Elhelyezés
+maison|Angles ¦ Kulmat ¦ Szögek
+maison|Écurie ¦ Talli ¦ Istálló
+maison|Croix ¦ Risti ¦ Kereszt
+couleur|aucune ¦ ei mitään ¦ nincs
