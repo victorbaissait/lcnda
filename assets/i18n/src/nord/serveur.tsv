@@ -1,0 +1,501 @@
+fr ¦ cs ¦ sv ¦ da
+Action inconnue ¦ Neznámá akce ¦ Okänd åtgärd ¦ Ukendt handling
+Action inconnue. ¦ Neznámá akce. ¦ Okänd åtgärd. ¦ Ukendt handling.
+Demande inconnue. ¦ Neznámý požadavek. ¦ Okänd begäran. ¦ Ukendt forespørgsel.
+Fichier non reçu. ¦ Soubor nebyl přijat. ¦ Filen togs inte emot. ¦ Filen blev ikke modtaget.
+Personne introuvable ¦ Osoba nenalezena ¦ Personen hittades inte ¦ Personen blev ikke fundet
+Personne introuvable. ¦ Osoba nenalezena. ¦ Personen hittades inte. ¦ Personen blev ikke fundet.
+Source introuvable. ¦ Pramen nenalezen. ¦ Källan hittades inte. ¦ Kilden blev ikke fundet.
+Version introuvable. ¦ Verze nenalezena. ¦ Versionen hittades inte. ¦ Versionen blev ikke fundet.
+ID manquant ¦ Chybí ID ¦ ID saknas ¦ ID mangler
+POST requis ¦ Vyžadován POST ¦ POST krävs ¦ POST kræves
+Refusé. ¦ Odmítnuto. ¦ Nekad. ¦ Afvist.
+Mot de passe incorrect. ¦ Nesprávné heslo. ¦ Fel lösenord. ¦ Forkert adgangskode.
+ZIP illisible. ¦ Nečitelný ZIP. ¦ Oläslig ZIP. ¦ Ulæselig ZIP.
+Export impossible : l’extension PHP zip manque. ¦ Export nelze provést: chybí rozšíření PHP zip. ¦ Export omöjlig: PHP-tillägget zip saknas. ¦ Eksport umulig: PHP-udvidelsen zip mangler.
+Une autre généalogie a été ouverte dans une autre fenêtre : recharge la page. ¦ V jiném okně byl otevřen jiný rodokmen: načti stránku znovu. ¦ Ett annat släktträd har öppnats i ett annat fönster: ladda om sidan. ¦ Et andet slægtstræ er åbnet i et andet vindue: genindlæs siden.
+Session expirée, ou une autre généalogie a été ouverte entre-temps (autre fenêtre) : recharge la page. ¦ Relace vypršela, nebo byl mezitím otevřen jiný rodokmen (jiné okno): načti stránku znovu. ¦ Sessionen har gått ut, eller ett annat släktträd har öppnats under tiden (annat fönster): ladda om sidan. ¦ Sessionen er udløbet, eller et andet slægtstræ er åbnet i mellemtiden (andet vindue): genindlæs siden.
+L’enregistrement n’a pas pu se faire (une donnée reçue n’a pas la forme attendue). Rien n’a été modifié. Réessaie ; si ça recommence, recharge la page et signale-le. ¦ Uložení se nepodařilo (některý přijatý údaj nemá očekávanou podobu). Nic se nezměnilo. Zkus to znovu; pokud se to opakuje, načti stránku znovu a nahlas to. ¦ Det gick inte att spara (en mottagen uppgift hade inte förväntad form). Inget har ändrats. Försök igen; om det händer igen, ladda om sidan och rapportera det. ¦ Det lykkedes ikke at gemme (en modtaget oplysning havde ikke den forventede form). Intet er ændret. Prøv igen; hvis det sker igen, så genindlæs siden, og rapportér det.
+Mode consultation : pas de copie de la base vers un autre dossier. ¦ Režim prohlížení: žádné kopírování databáze do jiné složky. ¦ Visningsläge: ingen kopiering av databasen till en annan mapp. ¦ Visningstilstand: ingen kopiering af databasen til en anden mappe.
+{n} jour ¦ {n} den ¦ {n} dag ¦ {n} dag
+{n} jours ¦ dní: {n} ¦ {n} dagar ¦ {n} dage
+{n} an ¦ {n} rok ¦ {n} år ¦ {n} år
+Date qui n’existe pas : « {date} » ¦ Neexistující datum: „{date}“ ¦ Datum som inte finns: ”{date}” ¦ Dato, der ikke findes: »{date}«
+{event} le « {date} » : ce jour n’existe pas dans le calendrier julien. ¦ {event} „{date}“: tento den v juliánském kalendáři neexistuje. ¦ {event} den ”{date}”: den dagen finns inte i den julianska kalendern. ¦ {event} den »{date}«: denne dag findes ikke i den julianske kalender.
+{event} le « {date} » : ce jour n’existe pas dans le calendrier grégorien. ¦ {event} „{date}“: tento den v gregoriánském kalendáři neexistuje. ¦ {event} den ”{date}”: den dagen finns inte i den gregorianska kalendern. ¦ {event} den »{date}«: denne dag findes ikke i den gregorianske kalender.
+Date trop longue ({n} signes) ¦ Příliš dlouhé datum ({n} znaků) ¦ För långt datum ({n} tecken) ¦ For lang dato ({n} tegn)
+{event} : « {text}… » — une note a sans doute été collée dans la case de la date. ¦ {event}: „{text}…“ — do pole data byla nejspíš vložena poznámka. ¦ {event}: ”{text}…” — en anteckning har troligen klistrats in i datumfältet. ¦ {event}: »{text}…« — en note er sandsynligvis indsat i datofeltet.
+Dates à l’envers : « {date} » ¦ Obrácená data: „{date}“ ¦ Datum åt fel håll: ”{date}” ¦ Datoer i forkert rækkefølge: »{date}«
+{event} : la première année ({a}) vient après la seconde ({b}). Sans doute « entre {b} et {a} ». ¦ {event}: první rok ({a}) je po druhém ({b}). Nejspíš „mezi {b} a {a}“. ¦ {event}: det första året ({a}) kommer efter det andra ({b}). Troligen ”mellan {b} och {a}”. ¦ {event}: det første år ({a}) kommer efter det andet ({b}). Sandsynligvis »mellem {b} og {a}«.
+Date « {date} » lue comme l’an {y} ¦ Datum „{date}“ přečteno jako rok {y} ¦ Datumet ”{date}” läst som år {y} ¦ Datoen »{date}« læst som år {y}
+{event} : un signe moins devant l’année. Pour une date avant Jésus-Christ, écris « 5 av. J.-C. »; sinon corrige l’année. ¦ {event}: před rokem je znaménko minus. Pro datum před Kristem napiš „5 av. J.-C.“; jinak oprav rok. ¦ {event}: ett minustecken före året. För ett datum före Kristus, skriv ”5 av. J.-C.”; annars rätta året. ¦ {event}: et minustegn før året. For en dato før Kristus skal du skrive »5 av. J.-C.«; ellers ret året.
+Décès avant la naissance ¦ Úmrtí před narozením ¦ Död före födelse ¦ Død før fødsel
+Naissance {b} · décès {d} ¦ Narození {b} · úmrtí {d} ¦ Födelse {b} · död {d} ¦ Fødsel {b} · død {d}
+Décès ({d}) avant sa naissance ({b}) ¦ Úmrtí ({d}) před narozením ({b}) ¦ Död ({d}) före födelsen ({b}) ¦ Død ({d}) før fødslen ({b})
+inhumation ¦ pohřeb ¦ begravning ¦ begravelse
+baptême ¦ křest ¦ dop ¦ dåb
+Mort à {n} ans ¦ Zemřel ve věku {n} let ¦ Död vid {n} års ålder ¦ Død som {n}-årig
+Morte à {n} ans ¦ Zemřela ve věku {n} let ¦ Död vid {n} års ålder ¦ Død som {n}-årig
+Mort(e) à {n} ans ¦ Zemřel(a) ve věku {n} let ¦ Död vid {n} års ålder ¦ Død som {n}-årig
+Naissance {b} · décès {d} (seuil : {n} ans) ¦ Narození {b} · úmrtí {d} (hranice: {n} let) ¦ Födelse {b} · död {d} (gräns: {n} år) ¦ Fødsel {b} · død {d} (grænse: {n} år)
+Très peu de gens dépassent {a} ans ; au-delà de {b} ans, c’est presque toujours une erreur. ¦ Jen velmi málo lidí se dožije víc než {a} let; nad {b} let jde téměř vždy o chybu. ¦ Mycket få blir äldre än {a} år; över {b} år är det nästan alltid ett fel. ¦ Meget få bliver over {a} år; over {b} år er det næsten altid en fejl.
+Naissance dans le futur ¦ Narození v budoucnosti ¦ Födelse i framtiden ¦ Fødsel i fremtiden
+Naissance {b} ¦ Narození {b} ¦ Födelse {b} ¦ Fødsel {b}
+Dates de naissance contradictoires ¦ Rozporná data narození ¦ Motstridiga födelsedatum ¦ Modstridende fødselsdatoer
+Dates de décès contradictoires ¦ Rozporná data úmrtí ¦ Motstridiga dödsdatum ¦ Modstridende dødsdatoer
+Inhumation avant le décès ¦ Pohřeb před úmrtím ¦ Begravning före död ¦ Begravelse før død
+Décès {d} · inhumation {i} ¦ Úmrtí {d} · pohřeb {i} ¦ Död {d} · begravning {i} ¦ Død {d} · begravelse {i}
+Inhumation {span} après le décès ¦ Pohřeb {span} po úmrtí ¦ Begravning {span} efter döden ¦ Begravelse {span} efter døden
+Décès {d} · inhumation {i} (seuil : {n} jours) ¦ Úmrtí {d} · pohřeb {i} (hranice: {n} dní) ¦ Död {d} · begravning {i} (gräns: {n} dagar) ¦ Død {d} · begravelse {i} (grænse: {n} dage)
+Baptême {span} après la naissance ¦ Křest {span} po narození ¦ Dop {span} efter födelsen ¦ Dåb {span} efter fødslen
+Naissance {b} · baptême {t} (seuil : {n} jours) ¦ Narození {b} · křest {t} (hranice: {n} dní) ¦ Födelse {b} · dop {t} (gräns: {n} dagar) ¦ Fødsel {b} · dåb {t} (grænse: {n} dage)
+{event} avant la naissance ¦ {event} před narozením ¦ {event} före födelsen ¦ {event} før fødslen
+{event} {date} · naissance {b} ¦ {event} {date} · narození {b} ¦ {event} {date} · födelse {b} ¦ {event} {date} · fødsel {b}
+{event} après le décès ¦ {event} po úmrtí ¦ {event} efter döden ¦ {event} efter døden
+{event} {date} · décès {d} ¦ {event} {date} · úmrtí {d} ¦ {event} {date} · död {d} ¦ {event} {date} · død {d}
+Marié après son décès ¦ Oženil se po své smrti ¦ Gift efter sin död ¦ Gift efter sin død
+Mariée après son décès ¦ Vdala se po své smrti ¦ Gift efter sin död ¦ Gift efter sin død
+Marié(e) après son décès ¦ Uzavřel(a) sňatek po své smrti ¦ Gift efter sin död ¦ Gift efter sin død
+Mariage {m} · décès {d} ¦ Sňatek {m} · úmrtí {d} ¦ Vigsel {m} · död {d} ¦ Vielse {m} · død {d}
+Marié le {m}, après sa mort ¦ Oženil se {m}, po své smrti ¦ Gift {m}, efter sin död ¦ Gift {m}, efter sin død
+Mariée le {m}, après sa mort ¦ Vdala se {m}, po své smrti ¦ Gift {m}, efter sin död ¦ Gift {m}, efter sin død
+Marié(e) le {m}, après sa mort ¦ Uzavřel(a) sňatek {m}, po své smrti ¦ Gift {m}, efter sin död ¦ Gift {m}, efter sin død
+Mariage avant la naissance ¦ Sňatek před narozením ¦ Vigsel före födelse ¦ Vielse før fødsel
+Mariage {m} · naissance {b} ¦ Sňatek {m} · narození {b} ¦ Vigsel {m} · födelse {b} ¦ Vielse {m} · fødsel {b}
+Marié à {n} ans ¦ Oženil se ve věku {n} let ¦ Gift vid {n} års ålder ¦ Gift som {n}-årig
+Mariée à {n} ans ¦ Vdala se ve věku {n} let ¦ Gift vid {n} års ålder ¦ Gift som {n}-årig
+Marié(e) à {n} ans ¦ Uzavřel(a) sňatek ve věku {n} let ¦ Gift vid {n} års ålder ¦ Gift som {n}-årig
+Mariage {m} · naissance {b} (seuil : {n} ans) ¦ Sňatek {m} · narození {b} (hranice: {n} let) ¦ Vigsel {m} · födelse {b} (gräns: {n} år) ¦ Vielse {m} · fødsel {b} (grænse: {n} år)
+Avant {n} ans, un mariage est presque impossible. ¦ Před {n}. rokem věku je sňatek téměř nemožný. ¦ Före {n} års ålder är en vigsel nästan omöjlig. ¦ Før {n}-årsalderen er en vielse næsten umulig.
+Mère née après son enfant ¦ Matka narozená po svém dítěti ¦ Mor född efter sitt barn ¦ Mor født efter sit barn
+Père né après son enfant ¦ Otec narozený po svém dítěti ¦ Far född efter sitt barn ¦ Far født efter sit barn
+Parent né après son enfant ¦ Rodič narozený po svém dítěti ¦ Förälder född efter sitt barn ¦ Forælder født efter sit barn
+Naissance de {child} {cb} · mère née {pb} ¦ Narození {child} {cb} · matka narozena {pb} ¦ Födelse för {child} {cb} · mor född {pb} ¦ Fødsel af {child} {cb} · mor født {pb}
+Naissance de {child} {cb} · père né {pb} ¦ Narození {child} {cb} · otec narozen {pb} ¦ Födelse för {child} {cb} · far född {pb} ¦ Fødsel af {child} {cb} · far født {pb}
+Naissance de {child} {cb} · parent né {pb} ¦ Narození {child} {cb} · rodič narozen {pb} ¦ Födelse för {child} {cb} · förälder född {pb} ¦ Fødsel af {child} {cb} · forælder født {pb}
+Née après son enfant {child} ({cb}) ¦ Narozena po svém dítěti {child} ({cb}) ¦ Född efter sitt barn {child} ({cb}) ¦ Født efter sit barn {child} ({cb})
+Né après son enfant {child} ({cb}) ¦ Narozen po svém dítěti {child} ({cb}) ¦ Född efter sitt barn {child} ({cb}) ¦ Født efter sit barn {child} ({cb})
+Sa mère est née après sa naissance ({pb}) ¦ Matka se narodila až po něm/ní ({pb}) ¦ Modern föddes efter personen ({pb}) ¦ Moderen blev født efter personen ({pb})
+Son père est né après sa naissance ({pb}) ¦ Otec se narodil až po něm/ní ({pb}) ¦ Fadern föddes efter personen ({pb}) ¦ Faderen blev født efter personen ({pb})
+Son parent est né après sa naissance ({pb}) ¦ Rodič se narodil až po něm/ní ({pb}) ¦ Föräldern föddes efter personen ({pb}) ¦ Forælderen blev født efter personen ({pb})
+naiss. {name} ¦ nar. {name} ¦ föd. {name} ¦ fødsel {name}
+décès {name} ¦ úmrtí {name} ¦ död {name} ¦ død {name}
+Mère de {n} ans à la naissance ¦ Matka ve věku {n} let při narození ¦ Mor {n} år vid födelsen ¦ Mor {n} år ved fødslen
+Père de {n} ans à la naissance ¦ Otec ve věku {n} let při narození ¦ Far {n} år vid födelsen ¦ Far {n} år ved fødslen
+Parent de {n} ans à la naissance ¦ Rodič ve věku {n} let při narození ¦ Förälder {n} år vid födelsen ¦ Forælder {n} år ved fødslen
+Mère de {n} an à la naissance ¦ Matka ve věku {n} roku při narození ¦ Mor {n} år vid födelsen ¦ Mor {n} år ved fødslen
+Père de {n} an à la naissance ¦ Otec ve věku {n} roku při narození ¦ Far {n} år vid födelsen ¦ Far {n} år ved fødslen
+Parent de {n} an à la naissance ¦ Rodič ve věku {n} roku při narození ¦ Förälder {n} år vid födelsen ¦ Forælder {n} år ved fødslen
+Naissance {cb} · mère née {pb} (seuil : {n} ans) ¦ Narození {cb} · matka narozena {pb} (hranice: {n} let) ¦ Födelse {cb} · mor född {pb} (gräns: {n} år) ¦ Fødsel {cb} · mor født {pb} (grænse: {n} år)
+Naissance {cb} · père né {pb} (seuil : {n} ans) ¦ Narození {cb} · otec narozen {pb} (hranice: {n} let) ¦ Födelse {cb} · far född {pb} (gräns: {n} år) ¦ Fødsel {cb} · far født {pb} (grænse: {n} år)
+Naissance {cb} · parent né {pb} (seuil : {n} ans) ¦ Narození {cb} · rodič narozen {pb} (hranice: {n} let) ¦ Födelse {cb} · förälder född {pb} (gräns: {n} år) ¦ Fødsel {cb} · forælder født {pb} (grænse: {n} år)
+Mère de {child} à {n} ans ¦ Matkou {child} ve věku {n} let ¦ Mor till {child} vid {n} års ålder ¦ Mor til {child} som {n}-årig
+Père de {child} à {n} ans ¦ Otcem {child} ve věku {n} let ¦ Far till {child} vid {n} års ålder ¦ Far til {child} som {n}-årig
+Parent de {child} à {n} ans ¦ Rodičem {child} ve věku {n} let ¦ Förälder till {child} vid {n} års ålder ¦ Forælder til {child} som {n}-årig
+Sa mère n’avait que {n} ans à sa naissance ¦ Matce bylo při jeho/jejím narození jen {n} let ¦ Modern var bara {n} år vid födelsen ¦ Moderen var kun {n} år ved fødslen
+Son père n’avait que {n} ans à sa naissance ¦ Otci bylo při jeho/jejím narození jen {n} let ¦ Fadern var bara {n} år vid födelsen ¦ Faderen var kun {n} år ved fødslen
+Son parent n’avait que {n} ans à sa naissance ¦ Rodiči bylo při jeho/jejím narození jen {n} let ¦ Föräldern var bara {n} år vid födelsen ¦ Forælderen var kun {n} år ved fødslen
+Sa mère avait {n} ans à sa naissance ¦ Matce bylo při jeho/jejím narození {n} let ¦ Modern var {n} år vid födelsen ¦ Moderen var {n} år ved fødslen
+Son père avait {n} ans à sa naissance ¦ Otci bylo při jeho/jejím narození {n} let ¦ Fadern var {n} år vid födelsen ¦ Faderen var {n} år ved fødslen
+Une naissance après {a} ans est presque impossible ; à partir de {b} ans, c’est à vérifier. ¦ Porod po {a}. roce věku je téměř nemožný; od {b} let je třeba to ověřit. ¦ En födsel efter {a} års ålder är nästan omöjlig; från {b} år bör det kontrolleras. ¦ En fødsel efter {a}-årsalderen er næsten umulig; fra {b} år bør det kontrolleres.
+Naissance {cb} · décès de la mère {pd} ¦ Narození {cb} · úmrtí matky {pd} ¦ Födelse {cb} · moderns död {pd} ¦ Fødsel {cb} · moderens død {pd}
+Naissance {cb} · décès du père {pd} (seuil : {n} jours) ¦ Narození {cb} · úmrtí otce {pd} (hranice: {n} dní) ¦ Födelse {cb} · faderns död {pd} (gräns: {n} dagar) ¦ Fødsel {cb} · faderens død {pd} (grænse: {n} dage)
+Naissance {cb} · décès du parent {pd} (seuil : {n} jours) ¦ Narození {cb} · úmrtí rodiče {pd} (hranice: {n} dní) ¦ Födelse {cb} · förälderns död {pd} (gräns: {n} dagar) ¦ Fødsel {cb} · forælderens død {pd} (grænse: {n} dage)
+Un enfant ne peut pas naître après la mort de sa mère. ¦ Dítě se nemůže narodit po smrti své matky. ¦ Ett barn kan inte födas efter moderns död. ¦ Et barn kan ikke fødes efter moderens død.
+Un enfant naît au plus 9 à 10 mois après la mort du père (seuil : {n} jours). ¦ Dítě se narodí nejvýše 9 až 10 měsíců po smrti otce (hranice: {n} dní). ¦ Ett barn föds högst 9 till 10 månader efter faderns död (gräns: {n} dagar). ¦ Et barn fødes højst 9 til 10 måneder efter faderens død (grænse: {n} dage).
+Né {span} après la mort de sa mère ¦ Narozen {span} po smrti matky ¦ Född {span} efter moderns död ¦ Født {span} efter moderens død
+Né {span} après la mort de son père ¦ Narozen {span} po smrti otce ¦ Född {span} efter faderns död ¦ Født {span} efter faderens død
+Né {span} après la mort de son parent ¦ Narozen {span} po smrti rodiče ¦ Född {span} efter förälderns död ¦ Født {span} efter forælderens død
+Née {span} après la mort de sa mère ¦ Narozena {span} po smrti matky ¦ Född {span} efter moderns död ¦ Født {span} efter moderens død
+Née {span} après la mort de son père ¦ Narozena {span} po smrti otce ¦ Född {span} efter faderns död ¦ Født {span} efter faderens død
+Née {span} après la mort de son parent ¦ Narozena {span} po smrti rodiče ¦ Född {span} efter förälderns död ¦ Født {span} efter forælderens død
+Né(e) {span} après la mort de sa mère ¦ Narozen(a) {span} po smrti matky ¦ Född {span} efter moderns död ¦ Født {span} efter moderens død
+Né(e) {span} après la mort de son père ¦ Narozen(a) {span} po smrti otce ¦ Född {span} efter faderns död ¦ Født {span} efter faderens død
+Né(e) {span} après la mort de son parent ¦ Narozen(a) {span} po smrti rodiče ¦ Född {span} efter förälderns död ¦ Født {span} efter forælderens død
+Né après la mort de sa mère ¦ Narozen po smrti matky ¦ Född efter moderns död ¦ Født efter moderens død
+Né après la mort de son père ¦ Narozen po smrti otce ¦ Född efter faderns död ¦ Født efter faderens død
+Né après la mort de son parent ¦ Narozen po smrti rodiče ¦ Född efter förälderns död ¦ Født efter forælderens død
+Née après la mort de sa mère ¦ Narozena po smrti matky ¦ Född efter moderns död ¦ Født efter moderens død
+Née après la mort de son père ¦ Narozena po smrti otce ¦ Född efter faderns död ¦ Født efter faderens død
+Née après la mort de son parent ¦ Narozena po smrti rodiče ¦ Född efter förälderns död ¦ Født efter forælderens død
+Né(e) après la mort de sa mère ¦ Narozen(a) po smrti matky ¦ Född efter moderns död ¦ Født efter moderens død
+Né(e) après la mort de son père ¦ Narozen(a) po smrti otce ¦ Född efter faderns död ¦ Født efter faderens død
+Né(e) après la mort de son parent ¦ Narozen(a) po smrti rodiče ¦ Född efter förälderns död ¦ Født efter forælderens død
+Son fils {child} naît {span} après sa mort ¦ Syn {child} se narodil {span} po jeho/její smrti ¦ Sonen {child} föds {span} efter personens död ¦ Sønnen {child} fødes {span} efter personens død
+Son fils {child} naît après sa mort ¦ Syn {child} se narodil po jeho/její smrti ¦ Sonen {child} föds efter personens död ¦ Sønnen {child} fødes efter personens død
+Sa fille {child} naît {span} après sa mort ¦ Dcera {child} se narodila {span} po jeho/její smrti ¦ Dottern {child} föds {span} efter personens död ¦ Datteren {child} fødes {span} efter personens død
+Sa fille {child} naît après sa mort ¦ Dcera {child} se narodila po jeho/její smrti ¦ Dottern {child} föds efter personens död ¦ Datteren {child} fødes efter personens død
+Son enfant {child} naît {span} après sa mort ¦ Dítě {child} se narodilo {span} po jeho/její smrti ¦ Barnet {child} föds {span} efter personens död ¦ Barnet {child} fødes {span} efter personens død
+Son enfant {child} naît après sa mort ¦ Dítě {child} se narodilo po jeho/její smrti ¦ Barnet {child} föds efter personens död ¦ Barnet {child} fødes efter personens død
+Seulement {n} mois après son frère ¦ Jen {n} měsíců po bratrovi ¦ Bara {n} månader efter brodern ¦ Kun {n} måneder efter broderen
+Seulement {n} mois après sa sœur ¦ Jen {n} měsíců po sestře ¦ Bara {n} månader efter systern ¦ Kun {n} måneder efter søsteren
+Seulement {n} mois après son aîné ¦ Jen {n} měsíců po starším sourozenci ¦ Bara {n} månader efter det äldre syskonet ¦ Kun {n} måneder efter den ældre søskende
+Naissances {a} et {b} (seuil : {n} mois) ¦ Narození {a} a {b} (hranice: {n} měsíců) ¦ Födslar {a} och {b} (gräns: {n} månader) ¦ Fødsler {a} og {b} (grænse: {n} måneder)
+Deux enfants de la même mère naissent au moins 8 à 9 mois l’un après l’autre (sauf jumeaux). ¦ Dvě děti téže matky se rodí nejméně 8 až 9 měsíců po sobě (kromě dvojčat). ¦ Två barn till samma mor föds minst 8 till 9 månader isär (utom tvillingar). ¦ To børn af samme mor fødes mindst 8 til 9 måneder fra hinanden (undtagen tvillinger).
+Deux enfants la même année ¦ Dvě děti v témže roce ¦ Två barn samma år ¦ To børn samme år
+{a} et {b} : naissance en {y} (jumeaux, doublon ou date approximative ?) ¦ {a} a {b}: narození v roce {y} (dvojčata, duplicita nebo přibližné datum?) ¦ {a} och {b}: födda {y} (tvillingar, dubblett eller ungefärligt datum?) ¦ {a} og {b}: født i {y} (tvillinger, dublet eller omtrentlig dato?)
+Né bien avant le mariage des parents ¦ Narozen dlouho před sňatkem rodičů ¦ Född långt före föräldrarnas vigsel ¦ Født længe før forældrenes vielse
+Née bien avant le mariage des parents ¦ Narozena dlouho před sňatkem rodičů ¦ Född långt före föräldrarnas vigsel ¦ Født længe før forældrenes vielse
+Né(e) bien avant le mariage des parents ¦ Narozen(a) dlouho před sňatkem rodičů ¦ Född långt före föräldrarnas vigsel ¦ Født længe før forældrenes vielse
+Naissance {b} · mariage {m} ¦ Narození {b} · sňatek {m} ¦ Födelse {b} · vigsel {m} ¦ Fødsel {b} · vielse {m}
+Fratrie étalée sur {n} ans ¦ Sourozenci rozložení na {n} let ¦ Syskon utspridda över {n} år ¦ Søskende spredt over {n} år
+Aîné(e) {a} {ad}, cadet(te) {b} {bd} (seuil : {n} ans) : deux générations mélangées ? ¦ Nejstarší {a} {ad}, nejmladší {b} {bd} (hranice: {n} let): smíchané dvě generace? ¦ Äldst {a} {ad}, yngst {b} {bd} (gräns: {n} år): två generationer sammanblandade? ¦ Ældste {a} {ad}, yngste {b} {bd} (grænse: {n} år): to generationer blandet sammen?
+Rattaché à {n} familles de parents ¦ Připojen k rodinám rodičů: {n} ¦ Kopplad till {n} föräldrafamiljer ¦ Forbundet med {n} forældrefamilier
+Rattachée à {n} familles de parents ¦ Připojena k rodinám rodičů: {n} ¦ Kopplad till {n} föräldrafamiljer ¦ Forbundet med {n} forældrefamilier
+Cela peut être voulu (adoption, famille recomposée) ou être une erreur. ¦ Může to být záměr (adopce, nová rodina), nebo chyba. ¦ Det kan vara avsiktligt (adoption, ombildad familj) eller ett misstag. ¦ Det kan være tilsigtet (adoption, sammenbragt familie) eller en fejl.
+Famille n° {n} sans conjoint ¦ Rodina č. {n} bez partnera ¦ Familj nr {n} utan partner ¦ Familie nr. {n} uden partner
+Enfants : {names} : il manque le père et la mère. ¦ Děti: {names}: chybí otec i matka. ¦ Barn: {names}: fadern och modern saknas. ¦ Børn: {names}: faderen og moderen mangler.
+Un mariage, sans les époux : il manque le père et la mère. ¦ Sňatek bez manželů: chybí otec i matka. ¦ En vigsel utan makar: fadern och modern saknas. ¦ En vielse uden ægtefæller: faderen og moderen mangler.
+Sosa {n} notée femme ¦ Sosa {n} zapsána jako žena ¦ Sosa {n} registrerad som kvinna ¦ Sosa {n} registreret som kvinde
+Sosa {n} noté homme ¦ Sosa {n} zapsán jako muž ¦ Sosa {n} registrerad som man ¦ Sosa {n} registreret som mand
+Un Sosa pair est un père : le sexe de la fiche, ou sa place dans l’arbre, est à vérifier. ¦ Sudé číslo Sosa je otec: zkontroluj pohlaví karty nebo její místo ve stromu. ¦ Ett jämnt Sosa-nummer är en far: kontrollera postens kön eller dess plats i trädet. ¦ Et lige Sosa-nummer er en far: kontrollér postens køn eller dens plads i træet.
+Un Sosa impair est une mère : le sexe de la fiche, ou sa place dans l’arbre, est à vérifier. ¦ Liché číslo Sosa je matka: zkontroluj pohlaví karty nebo její místo ve stromu. ¦ Ett udda Sosa-nummer är en mor: kontrollera postens kön eller dess plats i trädet. ¦ Et ulige Sosa-nummer er en mor: kontrollér postens køn eller dens plads i træet.
+Sosa {s} : {n} ans pour {k} générations ¦ Sosa {s}: {n} let na {k} generací ¦ Sosa {s}: {n} år för {k} generationer ¦ Sosa {s}: {n} år for {k} generationer
+Né(e) {b}, son descendant Sosa {s} {d} : une génération en trop (homonyme pris pour son père) ? ¦ Narozen(a) {b}, potomek Sosa {s} {d}: generace navíc (jmenovec považovaný za otce)? ¦ Född {b}, ättlingen Sosa {s} {d}: en generation för mycket (en namne tagen för fadern)? ¦ Født {b}, efterkommeren Sosa {s} {d}: én generation for meget (en navnebror taget for faderen)?
+Né(e) {b}, son descendant Sosa {s} {d} : une génération oubliée ? ¦ Narozen(a) {b}, potomek Sosa {s} {d}: zapomenutá generace? ¦ Född {b}, ättlingen Sosa {s} {d}: en bortglömd generation? ¦ Født {b}, efterkommeren Sosa {s} {d}: en glemt generation?
+même nom ¦ stejné příjmení ¦ samma efternamn ¦ samme efternavn
+même prénom ¦ stejné jméno ¦ samma förnamn ¦ samme fornavn
+prénom proche ¦ podobné jméno ¦ liknande förnamn ¦ lignende fornavn
+même sexe ¦ stejné pohlaví ¦ samma kön ¦ samme køn
+sexe ¦ pohlaví ¦ kön ¦ køn
+même naissance ¦ stejné narození ¦ samma födelse ¦ samme fødsel
+nés à {n} an près ¦ narozeni s rozdílem do {n} roku ¦ födda inom {n} år ¦ født inden for {n} år
+nés la même année ¦ narozeni ve stejném roce ¦ födda samma år ¦ født samme år
+nés {a} / {b} ¦ narozeni {a} / {b} ¦ födda {a} / {b} ¦ født {a} / {b}
+même décès ¦ stejné úmrtí ¦ samma död ¦ samme død
+morts {a} / {b} ¦ zemřeli {a} / {b} ¦ döda {a} / {b} ¦ død {a} / {b}
+mêmes parents ¦ stejní rodiče ¦ samma föräldrar ¦ samme forældre
+parents ¦ rodiče ¦ föräldrar ¦ forældre
+même conjoint ¦ stejný partner ¦ samma partner ¦ samme partner
+autres conjoints ¦ jiní partneři ¦ andra partner ¦ andre partnere
+nés au même endroit ¦ narozeni na stejném místě ¦ födda på samma ort ¦ født samme sted
+nés à {n} km ¦ narozeni {n} km od sebe ¦ födda {n} km ifrån varandra ¦ født {n} km fra hinanden
+né {b} / mort {d} ¦ nar. {b} / zem. {d} ¦ född {b} / död {d} ¦ født {b} / død {d}
+né {b} ¦ nar. {b} ¦ född {b} ¦ født {b}
+né ? / mort {d} ¦ nar. ? / zem. {d} ¦ född ? / död {d} ¦ født ? / død {d}
+né ? ¦ nar. ? ¦ född ? ¦ født ?
+Ressemble à la fiche n° {n} ({pct} %) ¦ Podobá se kartě č. {n} ({pct} %) ¦ Liknar post nr {n} ({pct} %) ¦ Ligner post nr. {n} ({pct} %)
+kin|sa mère ¦ jeho/její matka ¦ sin mor ¦ sin mor
+kin|son père ¦ jeho/její otec ¦ sin far ¦ sin far
+kin|son parent ¦ jeho/její rodič ¦ sin förälder ¦ sin forælder
+kin|sa grand-mère ¦ jeho/její babička ¦ sin mormor/farmor ¦ sin bedstemor
+kin|son grand-père ¦ jeho/její dědeček ¦ sin morfar/farfar ¦ sin bedstefar
+kin|son grand-parent ¦ jeho/její prarodič ¦ sin far- eller morförälder ¦ sin bedsteforælder
+kin|son ancêtre ({n} générations) ¦ jeho/její předek ({n} generací) ¦ sin anfader ({n} generationer) ¦ sin ane ({n} generationer)
+kin|sa fille ¦ jeho/její dcera ¦ sin dotter ¦ sin datter
+kin|son fils ¦ jeho/její syn ¦ sin son ¦ sin søn
+kin|son enfant ¦ jeho/její dítě ¦ sitt barn ¦ sit barn
+kin|sa petite-fille ¦ jeho/její vnučka ¦ sitt barnbarn (flicka) ¦ sit barnebarn (pige)
+kin|son petit-fils ¦ jeho/její vnuk ¦ sitt barnbarn (pojke) ¦ sit barnebarn (dreng)
+kin|son petit-enfant ¦ jeho/její vnouče ¦ sitt barnbarn ¦ sit barnebarn
+kin|son descendant ({n} générations) ¦ jeho/její potomek ({n} generací) ¦ sin ättling ({n} generationer) ¦ sin efterkommer ({n} generationer)
+{name} marié à {kin} ¦ {name} ženatý s osobou: {kin} ¦ {name} gift med {kin} ¦ {name} gift med {kin}
+{name} mariée à {kin} ¦ {name} vdaná za osobu: {kin} ¦ {name} gift med {kin} ¦ {name} gift med {kin}
+{name} marié(e) à {kin} ¦ {name} v manželství s osobou: {kin} ¦ {name} gift med {kin} ¦ {name} gift med {kin}
+{name} est {kin} et aussi son conjoint (famille n° {n}) : une fiche rattachée à la mauvaise génération, ou deux homonymes confondus. ¦ {name} je {kin} a zároveň partnerem (rodina č. {n}): karta připojená ke špatné generaci, nebo dva zaměnění jmenovci. ¦ {name} är {kin} och även partner (familj nr {n}): en post kopplad till fel generation, eller två namnar som blandats ihop. ¦ {name} er {kin} og også partner (familie nr. {n}): en post forbundet med den forkerte generation, eller to navnebrødre blandet sammen.
+Animal noté conjoint d’une personne : {name} ¦ Zvíře zapsané jako partner osoby: {name} ¦ Djur registrerat som en persons partner: {name} ¦ Dyr registreret som en persons partner: {name}
+Animal noté parent d’une personne : {name} ¦ Zvíře zapsané jako rodič osoby: {name} ¦ Djur registrerat som en persons förälder: {name} ¦ Dyr registreret som en persons forælder: {name}
+Animal noté enfant d’une personne : {name} ¦ Zvíře zapsané jako dítě osoby: {name} ¦ Djur registrerat som en persons barn: {name} ¦ Dyr registreret som en persons barn: {name}
+Famille n° {n} : {animals} avec {people}. Un animal se relie à son maître dans sa fiche (Propriétaire), pas comme parent ou conjoint. ¦ Rodina č. {n}: {animals} s {people}. Zvíře se propojuje se svým pánem ve své kartě (Majitel), ne jako rodič nebo partner. ¦ Familj nr {n}: {animals} med {people}. Ett djur kopplas till sin ägare i sin post (Ägare), inte som förälder eller partner. ¦ Familie nr. {n}: {animals} med {people}. Et dyr forbindes med sin ejer i sin post (Ejer), ikke som forælder eller partner.
+{n} événement à cet endroit ¦ {n} událost na tomto místě ¦ {n} händelse på den här orten ¦ {n} begivenhed på dette sted
+{n} événements à cet endroit ¦ Události na tomto místě: {n} ¦ {n} händelser på den här orten ¦ {n} begivenheder på dette sted
+À {km} km en {n} jours ¦ {km} km za {n} dní ¦ {km} km på {n} dagar ¦ {km} km på {n} dage
+À {km} km en {n} jour ¦ {km} km za {n} den ¦ {km} km på {n} dag ¦ {km} km på {n} dag
+À {km} km en moins d’un jour ¦ {km} km za méně než den ¦ {km} km på mindre än en dag ¦ {km} km på mindre end en dag
+{a} {ad} à {ap} · {b} {bd} à {bp} (au plus ≈ {n} km par jour à cette époque) ¦ {a} {ad} v {ap} · {b} {bd} v {bp} (v té době nejvýše ≈ {n} km za den) ¦ {a} {ad} i {ap} · {b} {bd} i {bp} (högst ≈ {n} km per dag på den tiden) ¦ {a} {ad} i {ap} · {b} {bd} i {bp} (højst ≈ {n} km om dagen på den tid)
+Une même personne ne peut pas être à deux endroits aussi éloignés en si peu de temps : souvent deux homonymes confondus dans une seule fiche. ¦ Tatáž osoba nemůže být za tak krátkou dobu na dvou tak vzdálených místech: často jde o dva jmenovce sloučené v jedné kartě. ¦ Samma person kan inte vara på två så avlägsna platser på så kort tid: ofta två namnar som blandats ihop i en post. ¦ Den samme person kan ikke være to så fjerne steder på så kort tid: ofte to navnebrødre blandet sammen i én post.
+Lieux de naissance contradictoires ¦ Rozporná místa narození ¦ Motstridiga födelseorter ¦ Modstridende fødesteder
+Lieux de décès contradictoires ¦ Rozporná místa úmrtí ¦ Motstridiga dödsorter ¦ Modstridende dødssteder
+Baptême à {n} km du lieu de naissance ¦ Křest {n} km od místa narození ¦ Dop {n} km från födelseorten ¦ Dåb {n} km fra fødestedet
+Naissance à {b} · baptême à {t} (seuil : {n} km). Souvent : une commune homonyme. ¦ Narození v {b} · křest v {t} (hranice: {n} km). Často: obec stejného jména. ¦ Födelse i {b} · dop i {t} (gräns: {n} km). Ofta: en ort med samma namn. ¦ Fødsel i {b} · dåb i {t} (grænse: {n} km). Ofte: en by med samme navn.
+Coordonnées 0, 0 (en plein océan, au large de l’Afrique) ¦ Souřadnice 0, 0 (uprostřed oceánu, u Afriky) ¦ Koordinaterna 0, 0 (mitt i havet, utanför Afrika) ¦ Koordinaterne 0, 0 (midt i havet, ud for Afrika)
+Hors de {country} alors que le pays indiqué est {country} ¦ Mimo {country}, přestože uvedená země je {country} ¦ Utanför {country} fast det angivna landet är {country} ¦ Uden for {country}, selvom det angivne land er {country}
+Latitude et longitude probablement inversées ¦ Zeměpisná šířka a délka jsou nejspíš prohozené ¦ Latitud och longitud troligen omkastade ¦ Bredde- og længdegrad sandsynligvis byttet om
+Inverser latitude et longitude ¦ Prohodit šířku a délku ¦ Byt latitud och longitud ¦ Byt bredde- og længdegrad
+Longitude probablement de mauvais signe (est / ouest) ¦ Zeměpisná délka má nejspíš špatné znaménko (východ / západ) ¦ Longituden har troligen fel tecken (öst / väst) ¦ Længdegraden har sandsynligvis forkert fortegn (øst / vest)
+Corriger le signe de la longitude ¦ Opravit znaménko zeměpisné délky ¦ Rätta longitudens tecken ¦ Ret længdegradens fortegn
+Une autre commune « {name} » est beaucoup plus près du reste de la famille ({a} km au lieu de {b} km) : département {dep} ¦ Jiná obec „{name}“ je mnohem blíž ke zbytku rodiny ({a} km místo {b} km): departement {dep} ¦ En annan ort som heter ”{name}” ligger mycket närmare resten av familjen ({a} km i stället för {b} km): departement {dep} ¦ En anden by ved navn »{name}« ligger meget tættere på resten af familien ({a} km i stedet for {b} km): departement {dep}
+Prendre la commune du département {dep} ¦ Vzít obec z departementu {dep} ¦ Använd orten i departement {dep} ¦ Brug byen i departement {dep}
+À {n} km du reste de la famille ¦ {n} km od zbytku rodiny ¦ {n} km från resten av familjen ¦ {n} km fra resten af familien
+la commune ¦ obec ¦ orten ¦ byen
+Commence par les tables décennales (un index alphabétique par décennie), puis le registre de l’année trouvée. ¦ Začni desetiletými rejstříky (abecední rejstřík na desetiletí), pak matriku nalezeného roku. ¦ Börja med tioårsregistren (ett alfabetiskt register per årtionde), sedan registret för det år du hittar. ¦ Begynd med tiårsregistrene (et alfabetisk register pr. årti), derefter protokollen for det fundne år.
+Registres paroissiaux (BMS) ¦ Farní matriky (BMS) ¦ Kyrkböcker (BMS) ¦ Kirkebøger (BMS)
+Les baptêmes de la paroisse de {commune} (collection communale, série E dépôt ou GG ; ou celle du greffe). Le baptême suit la naissance de 0 à 3 jours. ¦ Křty farnosti {commune} (obecní exemplář, série E dépôt nebo GG; nebo exemplář soudu). Křest následuje 0 až 3 dny po narození. ¦ Dopen i församlingen {commune} (kommunens exemplar, serie E dépôt eller GG; eller domstolens exemplar). Dopet följer födelsen med 0 till 3 dagar. ¦ Dåbene i sognet {commune} (kommunens eksemplar, serie E dépôt eller GG; eller rettens eksemplar). Dåben følger fødslen med 0 til 3 dage.
+État civil — naissances ¦ Matrika — narození ¦ Folkbokföring — födslar ¦ Civilregistrering — fødsler
+Les registres de naissances de {commune}. {td} ¦ Matriky narozených {commune}. {td} ¦ Födelseregistren för {commune}. {td} ¦ Fødselsprotokollerne for {commune}. {td}
+Mairie ¦ Matriční úřad ¦ Kommun ¦ Kommune
+Un acte de naissance de moins de 75 ans n’est pas en ligne : copie intégrale à demander à la mairie (avec la preuve de ta filiation). ¦ Záznam o narození mladší 75 let není online: úplný opis si vyžádej na matričním úřadě (s dokladem o příbuzenství). ¦ En födelsehandling yngre än 75 år finns inte på nätet: begär en fullständig kopia från kommunen (med bevis på din härstamning). ¦ En fødselsattest under 75 år er ikke online: bed kommunen om en fuld kopi (med bevis for din afstamning).
+Les mariages de la paroisse de {commune}, d’ordinaire celle de l’épouse ; regarde aussi les bans dans la paroisse de l’époux. ¦ Sňatky farnosti {commune}, obvykle farnosti nevěsty; podívej se i na ohlášky ve farnosti ženicha. ¦ Vigslarna i församlingen {commune}, vanligen brudens; titta också efter lysningarna i brudgummens församling. ¦ Vielserne i sognet {commune}, som regel brudens; se også efter lysningerne i brudgommens sogn.
+État civil — mariages ¦ Matrika — sňatky ¦ Folkbokföring — vigslar ¦ Civilregistrering — vielser
+Les registres de mariages de {commune} (commune de l’épouse le plus souvent). {td} Les publications de bans sont parfois dans un registre à part. ¦ Matriky oddaných {commune} (nejčastěji obec nevěsty). {td} Ohlášky bývají někdy ve zvláštní knize. ¦ Vigselregistren för {commune} (oftast brudens ort). {td} Lysningarna finns ibland i ett separat register. ¦ Vielsesprotokollerne for {commune} (oftest brudens by). {td} Lysningerne står undertiden i en separat protokol.
+Notaires (série E) et contrôle des actes (2 C) ¦ Notáři (série E) a kontrola listin (2 C) ¦ Notarier (serie E) och kontroll av handlingar (2 C) ¦ Notarer (serie E) og kontrol af dokumenter (2 C)
+Minutes notariales (série 3 E) ¦ Notářské zápisy (série 3 E) ¦ Notarieakter (serie 3 E) ¦ Notarprotokoller (serie 3 E)
+Le contrat de mariage, signé chez un notaire quelques jours ou semaines avant ; depuis 1850 l’acte de mariage dit s’il y en a un, et chez quel notaire. Le registre du contrôle des actes (série 2 C) donne le notaire et la date. ¦ Svatební smlouva, podepsaná u notáře několik dní nebo týdnů předem; od roku 1850 záznam o sňatku uvádí, zda existuje a u kterého notáře. Rejstřík kontroly listin (série 2 C) uvádí notáře a datum. ¦ Äktenskapsförordet, undertecknat hos en notarie några dagar eller veckor före; sedan 1850 anger vigselhandlingen om det finns ett, och hos vilken notarie. Registret över kontroll av handlingar (serie 2 C) ger notarien och datumet. ¦ Ægtepagten, underskrevet hos en notar nogle dage eller uger før; siden 1850 angiver vielsesattesten, om der er en, og hos hvilken notar. Registret over kontrol af dokumenter (serie 2 C) giver notaren og datoen.
+Le contrat de mariage, signé chez un notaire quelques jours ou semaines avant ; depuis 1850 l’acte de mariage dit s’il y en a un, et chez quel notaire. Les registres de l’enregistrement (série 3 Q, actes civils publics) le retrouvent aussi. ¦ Svatební smlouva, podepsaná u notáře několik dní nebo týdnů předem; od roku 1850 záznam o sňatku uvádí, zda existuje a u kterého notáře. Najdou ji i rejstříky registrace (série 3 Q, veřejné občanské listiny). ¦ Äktenskapsförordet, undertecknat hos en notarie några dagar eller veckor före; sedan 1850 anger vigselhandlingen om det finns ett, och hos vilken notarie. Registreringsregistren (serie 3 Q, offentliga civila handlingar) tar också upp det. ¦ Ægtepagten, underskrevet hos en notar nogle dage eller uger før; siden 1850 angiver vielsesattesten, om der er en, og hos hvilken notar. Registreringsprotokollerne (serie 3 Q, offentlige civile dokumenter) viser den også.
+Un acte de mariage de moins de 75 ans n’est pas en ligne : copie à demander à la mairie. ¦ Záznam o sňatku mladší 75 let není online: opis si vyžádej na matričním úřadě. ¦ En vigselhandling yngre än 75 år finns inte på nätet: begär en kopia från kommunen. ¦ En vielsesattest under 75 år er ikke online: bed kommunen om en kopi.
+Les sépultures de la paroisse de {commune} (inhumation le lendemain du décès, en général). ¦ Pohřby farnosti {commune} (pohřeb obvykle den po úmrtí). ¦ Begravningarna i församlingen {commune} (vanligen dagen efter dödsfallet). ¦ Begravelserne i sognet {commune} (som regel dagen efter dødsfaldet).
+État civil — décès ¦ Matrika — úmrtí ¦ Folkbokföring — dödsfall ¦ Civilregistrering — dødsfald
+Les décès de {commune}, mais aussi de la commune d’un enfant chez qui la personne a pu finir sa vie, ou de l’hospice voisin. {td} ¦ Úmrtí v {commune}, ale také v obci dítěte, u kterého mohla osoba dožít, nebo v sousedním chudobinci. {td} ¦ Dödsfallen i {commune}, men även i orten där ett barn bodde som personen kan ha bott hos på slutet, eller i fattighuset intill. {td} ¦ Dødsfaldene i {commune}, men også i byen for et barn, som personen kan have boet hos til sidst, eller i det nærliggende fattighus. {td}
+Enregistrement (série 3 Q) ¦ Registrace (série 3 Q) ¦ Registrering (serie 3 Q) ¦ Registrering (serie 3 Q)
+Les tables des successions et absences du bureau de l’enregistrement du canton : la date et le lieu du décès, les héritiers, parfois les biens. ¦ Rejstříky pozůstalostí a nepřítomných na registračním úřadě kantonu: datum a místo úmrtí, dědicové, někdy majetek. ¦ Registren över dödsbon och frånvarande vid kantonens registreringskontor: datum och ort för döden, arvingar, ibland egendomen. ¦ Registrene over dødsboer og fraværende på kantonens registreringskontor: dato og sted for døden, arvinger, undertiden ejendommen.
+Pour un homme mort entre 1914 et 1921 : la base des « morts pour la France » (ministère des Armées). ¦ Pro muže zemřelého v letech 1914 až 1921: databáze „morts pour la France“ (francouzské ministerstvo ozbrojených sil). ¦ För en man som dog mellan 1914 och 1921: databasen ”Morts pour la France” (franska försvarsministeriet). ¦ For en mand, der døde mellem 1914 og 1921: databasen »Morts pour la France« (det franske forsvarsministerium).
+Son acte de mariage nomme ses parents (et dit s’ils sont vivants) ; à défaut, son acte de baptême. Avant 1792, les actes de mariage nomment souvent les parents, pas toujours. ¦ Záznam o sňatku jmenuje rodiče (a uvádí, zda žijí); jinak záznam o křtu. Před rokem 1792 záznamy o sňatku rodiče často jmenují, ne vždy. ¦ Vigselhandlingen nämner föräldrarna (och om de lever); annars dophandlingen. Före 1792 nämner vigselhandlingar ofta föräldrarna, inte alltid. ¦ Vielsesattesten nævner forældrene (og om de lever); ellers dåbsattesten. Før 1792 nævner vielsesattester ofte forældrene, ikke altid.
+Son acte de mariage nomme ses parents (et dit s’ils sont vivants) ; à défaut, son acte de naissance. Avant 1792, les actes de mariage nomment souvent les parents, pas toujours. ¦ Záznam o sňatku jmenuje rodiče (a uvádí, zda žijí); jinak záznam o narození. Před rokem 1792 záznamy o sňatku rodiče často jmenují, ne vždy. ¦ Vigselhandlingen nämner föräldrarna (och om de lever); annars födelsehandlingen. Före 1792 nämner vigselhandlingar ofta föräldrarna, inte alltid. ¦ Vielsesattesten nævner forældrene (og om de lever); ellers fødselsattesten. Før 1792 nævner vielsesattester ofte forældrene, ikke altid.
+Recensements (série 6 M), à partir de 1836 ¦ Sčítání lidu (série 6 M), od roku 1836 ¦ Folkräkningar (serie 6 M), från 1836 ¦ Folketællinger (serie 6 M), fra 1836
+La famille sous le même toit, avec les âges : pour trouver la commune et l’année de naissance. ¦ Rodina pod jednou střechou, s věkem: pro nalezení obce a roku narození. ¦ Familjen under samma tak, med åldrar: för att hitta födelseorten och födelseåret. ¦ Familien under samme tag, med aldre: for at finde fødebyen og fødselsåret.
+Recensements (série 6 M) ¦ Sčítání lidu (série 6 M) ¦ Folkräkningar (serie 6 M) ¦ Folketællinger (serie 6 M)
+Les listes nominatives de {commune}, tous les 5 ans de 1836 à 1936 (avec l’âge, le métier, toute la maisonnée) ; beaucoup sont en ligne. Dans une grande ville, il faut l’adresse (rue). ¦ Jmenné seznamy {commune}, každých 5 let od 1836 do 1936 (s věkem, povoláním, celou domácností); mnohé jsou online. Ve velkém městě je třeba adresa (ulice). ¦ Folkräkningslängderna för {commune}, vart 5:e år 1836–1936 (med ålder, yrke, hela hushållet); många finns på nätet. I en storstad behövs adressen (gatan). ¦ Folketællingslisterne for {commune}, hvert 5. år fra 1836 til 1936 (med alder, erhverv, hele husstanden); mange er online. I en storby skal man bruge adressen (gaden).
+Recrutement militaire (série 1 R) ¦ Vojenské odvody (série 1 R) ¦ Militär utskrivning (serie 1 R) ¦ Militær udskrivning (serie 1 R)
+Le registre matricule de sa classe (année de naissance + 20), au bureau de recrutement du département où il habitait à 20 ans : signalement (taille, yeux, cheveux), adresses successives, campagnes, blessures. Index alphabétique par classe. ¦ Kmenový list jeho ročníku (rok narození + 20) na odvodním úřadě departementu, kde žil ve 20 letech: popis (výška, oči, vlasy), postupné adresy, tažení, zranění. Abecední rejstřík podle ročníku. ¦ Rullan för hans årsklass (födelseår + 20), vid utskrivningskontoret i departementet där han bodde vid 20: signalement (längd, ögon, hår), adresser i tur och ordning, fälttåg, skador. Alfabetiskt register per årsklass. ¦ Lægdsrullen for hans årgang (fødselsår + 20) på udskrivningskontoret i det departement, hvor han boede som 20-årig: signalement (højde, øjne, hår), skiftende adresser, felttog, sår. Alfabetisk register pr. årgang.
+Les tables des successions et absences puis les registres des mutations après décès, au bureau de l’enregistrement du canton du décès : héritiers, biens, valeur. Souvent dans les 6 mois après le décès. ¦ Rejstříky pozůstalostí a nepřítomných a pak knihy převodů po úmrtí na registračním úřadě kantonu úmrtí: dědicové, majetek, hodnota. Často do 6 měsíců po úmrtí. ¦ Registren över dödsbon och frånvarande, sedan registren över övergångar efter död, vid registreringskontoret i dödskantonen: arvingar, egendom, värde. Ofta inom 6 månader efter dödsfallet. ¦ Registrene over dødsboer og fraværende, derefter protokollerne over overdragelser efter død, på registreringskontoret i dødskantonen: arvinger, ejendom, værdi. Ofte inden for 6 måneder efter dødsfaldet.
+Le contrat de mariage chez le notaire du bourg ou du canton, peu avant le mariage : la dot, les témoins, la famille élargie. ¦ Svatební smlouva u notáře v obci nebo kantonu, krátce před sňatkem: věno, svědci, širší rodina. ¦ Äktenskapsförordet hos notarien i byn eller kantonen, strax före vigseln: hemgiften, vittnena, den utvidgade familjen. ¦ Ægtepagten hos notaren i landsbyen eller kantonen, kort før vielsen: medgiften, vidnerne, den udvidede familie.
+Le contrat de mariage chez le notaire du bourg ou du canton, peu avant le mariage : la dot, les témoins, la famille élargie. L’acte de mariage (après 1850) dit s’il y a un contrat et chez quel notaire. ¦ Svatební smlouva u notáře v obci nebo kantonu, krátce před sňatkem: věno, svědci, širší rodina. Záznam o sňatku (po roce 1850) uvádí, zda existuje smlouva a u kterého notáře. ¦ Äktenskapsförordet hos notarien i byn eller kantonen, strax före vigseln: hemgiften, vittnena, den utvidgade familjen. Vigselhandlingen (efter 1850) anger om det finns ett förord och hos vilken notarie. ¦ Ægtepagten hos notaren i landsbyen eller kantonen, kort før vielsen: medgiften, vidnerne, den udvidede familie. Vielsesattesten (efter 1850) angiver, om der er en pagt, og hos hvilken notar.
+Hors de France : les registres sont aux archives de la région ou de la paroisse ; FamilySearch en a numérisé beaucoup. ¦ Mimo Francii: matriky jsou v archivu regionu nebo farnosti; FamilySearch jich mnoho digitalizoval. ¦ Utanför Frankrike: registren finns i regionens eller församlingens arkiv; FamilySearch har digitaliserat många. ¦ Uden for Frankrig: protokollerne findes i regionens eller sognets arkiv; FamilySearch har digitaliseret mange af dem.
+Les Archives nationales d’outre-mer gardent les doubles des registres (état civil en ligne). ¦ Národní archiv zámoří (Archives nationales d’outre-mer) uchovává duplikáty matrik (matriky online). ¦ Franska nationalarkivet för utomeuropeiska territorier (Archives nationales d’outre-mer) förvarar dubbletterna av registren (folkbokföring på nätet). ¦ Det franske nationalarkiv for oversøiske områder (Archives nationales d’outre-mer) opbevarer dubletterne af protokollerne (civilregistrering online).
+État civil reconstitué ¦ Rekonstruovaná matrika ¦ Rekonstruerad folkbokföring ¦ Rekonstrueret civilregistrering
+L’état civil parisien d’avant 1860 a brûlé en 1871 : chercher dans les fichiers de l’état civil reconstitué (Archives de Paris). ¦ Pařížské matriky z doby před rokem 1860 shořely v roce 1871: hledej v kartotékách rekonstruovaných matrik (Archives de Paris). ¦ Paris folkbokföring från före 1860 brann 1871: sök i kartoteken över den rekonstruerade folkbokföringen (Archives de Paris). ¦ Paris' civilregistrering fra før 1860 brændte i 1871: søg i kartotekerne over den rekonstruerede civilregistrering (Archives de Paris).
+vivante aux recensements de {a} à {b} ({n}) ¦ žila při sčítáních od {a} do {b} ({n}) ¦ levde vid folkräkningarna {a} till {b} ({n}) ¦ levende ved folketællingerne fra {a} til {b} ({n})
+vivant aux recensements de {a} à {b} ({n}) ¦ žil při sčítáních od {a} do {b} ({n}) ¦ levde vid folkräkningarna {a} till {b} ({n}) ¦ levende ved folketællingerne fra {a} til {b} ({n})
+vivante aux recensements de {years} ¦ žila při sčítáních {years} ¦ levde vid folkräkningarna {years} ¦ levende ved folketællingerne {years}
+vivant aux recensements de {years} ¦ žil při sčítáních {years} ¦ levde vid folkräkningarna {years} ¦ levende ved folketællingerne {years}
+classe {c} (né en {y}) ¦ ročník {c} (narozen {y}) ¦ årsklass {c} (född {y}) ¦ årgang {c} (født {y})
+décès en {y} ¦ úmrtí v roce {y} ¦ död {y} ¦ død i {y}
+mariage en {y} ¦ sňatek v roce {y} ¦ vigsel {y} ¦ vielse i {y}
+enfant né en {y} ¦ dítě narozené v roce {y} ¦ barn fött {y} ¦ barn født i {y}
+enfant né en {y} ; souvent dans la paroisse de l’épouse ¦ dítě narozené v roce {y}; často ve farnosti manželky ¦ barn fött {y}; ofta i hustruns församling ¦ barn født i {y}; ofte i hustruens sogn
+dernière mention en {y} ¦ poslední zmínka v roce {y} ¦ senaste omnämnande {y} ¦ sidste omtale i {y}
+née vers {y} ¦ narozena kolem {y} ¦ född omkring {y} ¦ født omkring {y}
+né vers {y} ¦ narozen kolem {y} ¦ född omkring {y} ¦ født omkring {y}
+son acte de mariage ({y}) nomme ses parents ¦ jeho/její záznam o sňatku ({y}) jmenuje rodiče ¦ vigselhandlingen ({y}) nämner föräldrarna ¦ vielsesattesten ({y}) nævner forældrene
+son acte de baptême ({y}) nomme ses parents ¦ jeho/její záznam o křtu ({y}) jmenuje rodiče ¦ dophandlingen ({y}) nämner föräldrarna ¦ dåbsattesten ({y}) nævner forældrene
+Même nom, née {n} ans avant à {place} : sa mère ? ¦ Stejné příjmení, narozena o {n} let dříve v {place}: matka? ¦ Samma efternamn, född {n} år tidigare i {place}: modern? ¦ Samme efternavn, født {n} år før i {place}: moderen?
+Même nom, né {n} ans avant à {place} : son père ? ¦ Stejné příjmení, narozen o {n} let dříve v {place}: otec? ¦ Samma efternamn, född {n} år tidigare i {place}: fadern? ¦ Samme efternavn, født {n} år før i {place}: faderen?
+Même nom, née {n} ans avant : sa mère ? ¦ Stejné příjmení, narozena o {n} let dříve: matka? ¦ Samma efternamn, född {n} år tidigare: modern? ¦ Samme efternavn, født {n} år før: moderen?
+Même nom, né {n} ans avant : son père ? ¦ Stejné příjmení, narozen o {n} let dříve: otec? ¦ Samma efternamn, född {n} år tidigare: fadern? ¦ Samme efternavn, født {n} år før: faderen?
+Même nom, née en {y} à {place} : un frère, une sœur, un cousin ? ¦ Stejné příjmení, narozena v roce {y} v {place}: bratr, sestra, bratranec? ¦ Samma efternamn, född {y} i {place}: en bror, en syster, en kusin? ¦ Samme efternavn, født i {y} i {place}: en bror, en søster, en fætter eller kusine?
+Même nom, né en {y} à {place} : un frère, une sœur, un cousin ? ¦ Stejné příjmení, narozen v roce {y} v {place}: bratr, sestra, bratranec? ¦ Samma efternamn, född {y} i {place}: en bror, en syster, en kusin? ¦ Samme efternavn, født i {y} i {place}: en bror, en søster, en fætter eller kusine?
+Même nom, née en {y} : un frère, une sœur, un cousin ? ¦ Stejné příjmení, narozena v roce {y}: bratr, sestra, bratranec? ¦ Samma efternamn, född {y}: en bror, en syster, en kusin? ¦ Samme efternavn, født i {y}: en bror, en søster, en fætter eller kusine?
+Même nom, né en {y} : un frère, une sœur, un cousin ? ¦ Stejné příjmení, narozen v roce {y}: bratr, sestra, bratranec? ¦ Samma efternamn, född {y}: en bror, en syster, en kusin? ¦ Samme efternavn, født i {y}: en bror, en søster, en fætter eller kusine?
+Même nom, même lieu (née en {y}) ¦ Stejné příjmení, stejné místo (narozena v roce {y}) ¦ Samma efternamn, samma ort (född {y}) ¦ Samme efternavn, samme sted (født i {y})
+Même nom, même lieu (né en {y}) ¦ Stejné příjmení, stejné místo (narozen v roce {y}) ¦ Samma efternamn, samma ort (född {y}) ¦ Samme efternavn, samme sted (født i {y})
+Même nom, même lieu ¦ Stejné příjmení, stejné místo ¦ Samma efternamn, samma ort ¦ Samme efternavn, samme sted
+{act} de {y} ¦ {act} z roku {y} ¦ {act} från {y} ¦ {act} fra {y}
+même nom : de la famille ? ¦ stejné příjmení: z rodiny? ¦ samma efternamn: släkt? ¦ samme efternavn: familie?
+souvent un proche ¦ často příbuzný ¦ ofta en anhörig ¦ ofte en slægtning
+Quelqu’un ¦ Někdo ¦ Någon ¦ Nogen
+Dans le même foyer en {y} à {place}{pos} : un parent âgé, un beau-parent ? ¦ Ve stejné domácnosti v roce {y} v {place}{pos}: starý rodič, tchán či tchyně? ¦ I samma hushåll {y} i {place}{pos}: en gammal förälder, en svärförälder? ¦ I samme husstand i {y} i {place}{pos}: en gammel forælder, en svigerforælder?
+Dans le même foyer en {y}{pos} : un parent âgé, un beau-parent ? ¦ Ve stejné domácnosti v roce {y}{pos}: starý rodič, tchán či tchyně? ¦ I samma hushåll {y}{pos}: en gammal förälder, en svärförälder? ¦ I samme husstand i {y}{pos}: en gammel forælder, en svigerforælder?
+Correspondance ADN{details} : son arbre a peut-être la suite ¦ Shoda DNA{details}: jeho strom možná obsahuje pokračování ¦ DNA-matchning{details}: hens träd kanske har fortsättningen ¦ DNA-match{details}: deres træ har måske fortsættelsen
+🧩 Mur de la semaine ¦ 🧩 Slepá ulička týdne ¦ 🧩 Veckans återvändsgränd ¦ 🧩 Ugens blindgyde
+Mur de brique : {name} — chercher ses deux parents ¦ Slepá ulička: {name} — hledat oba rodiče ¦ Återvändsgränd: {name} — sök båda föräldrarna ¦ Blindgyde: {name} — søg efter begge forældre
+Mur de brique : {name} — chercher son père ¦ Slepá ulička: {name} — hledat otce ¦ Återvändsgränd: {name} — sök fadern ¦ Blindgyde: {name} — søg efter faderen
+Mur de brique : {name} — chercher sa mère ¦ Slepá ulička: {name} — hledat matku ¦ Återvändsgränd: {name} — sök modern ¦ Blindgyde: {name} — søg efter moderen
+Mur de brique : {name} — chercher ce qui manque ¦ Slepá ulička: {name} — hledat, co chybí ¦ Återvändsgränd: {name} — sök det som saknas ¦ Blindgyde: {name} — søg efter det, der mangler
+génération {n} ¦ generace {n} ¦ generation {n} ¦ generation {n}
+🌍 Où chercher ? te propose les sites à consulter ¦ 🌍 Kde hledat? ti navrhne weby k prohlédnutí ¦ 🌍 Var ska jag söka? föreslår webbplatser att besöka ¦ 🌍 Hvor skal jeg søge? foreslår websteder at besøge
+Piste faite ¦ Stopa hotová ¦ Spår klart ¦ Spor færdigt
+Commune inconnue : choisis la commune du dépouillement (avec son code INSEE) dans Recherche. ¦ Neznámá obec: vyber v Pátrání obec výpisu (s kódem INSEE). ¦ Okänd ort: välj registrets ort (med dess INSEE-kod) i Forskning. ¦ Ukendt by: vælg registreringens by (med INSEE-kode) i Forskning.
+Département inconnu. ¦ Neznámý departement. ¦ Okänt departement. ¦ Ukendt departement.
+Téléchargement impossible : PHP n’a pas l’extension curl. ¦ Stažení nelze provést: PHP nemá rozšíření curl. ¦ Nedladdning omöjlig: PHP har inte tillägget curl. ¦ Download umulig: PHP har ikke udvidelsen curl.
+Le fichier des adresses du département n’est pas encore téléchargé. ¦ Soubor adres departementu ještě není stažený. ¦ Departementets adressfil är inte nedladdad än. ¦ Departementets adressefil er ikke hentet endnu.
+Fichier des adresses illisible. ¦ Soubor adres je nečitelný. ¦ Adressfilen är oläslig. ¦ Adressefilen er ulæselig.
+Indique l’ancien nom de la rue. ¦ Zadej starý název ulice. ¦ Ange gatans gamla namn. ¦ Angiv gadens gamle navn.
+Les services d’archives ne sont pas encore prêts : relance l’app. ¦ Archivní služby ještě nejsou připravené: spusť aplikaci znovu. ¦ Arkivtjänsterna är inte redo än: starta om appen. ¦ Arkivtjenesterne er ikke klar endnu: genstart appen.
+Cette suppression n’a pas été trouvée dans le journal. ¦ Toto smazání nebylo v deníku nalezeno. ¦ Den här borttagningen hittades inte i loggen. ¦ Denne sletning blev ikke fundet i loggen.
+Ce service existe déjà. ¦ Tato služba už existuje. ¦ Tjänsten finns redan. ¦ Tjenesten findes allerede.
+Artiste introuvable : cette fiche n’existe pas, ou plus (supprimée ?). ¦ Umělec nenalezen: tato karta neexistuje, nebo už ne (smazána?). ¦ Konstnären hittades inte: posten finns inte, eller inte längre (raderad?). ¦ Kunstneren blev ikke fundet: posten findes ikke, eller ikke længere (slettet?).
+Sorte de fiche inconnue. ¦ Neznámý druh karty. ¦ Okänd posttyp. ¦ Ukendt posttype.
+Cette fiche n’est pas cochée « Artiste » : coche « Artiste » sur la fiche (Modifier la fiche) avant d’y ranger un élément du catalogue. ¦ Tato karta nemá zaškrtnuto „Umělec“: zaškrtni „Umělec“ na kartě (Upravit kartu), než do ní uložíš položku katalogu. ¦ Posten är inte ikryssad som ”Konstnär”: kryssa i ”Konstnär” på posten (Redigera posten) innan du lägger in ett katalogobjekt. ¦ Posten er ikke afkrydset som »Kunstner«: sæt flueben ved »Kunstner« på posten (Redigér posten), før du lægger et katalogelement ind.
+Élément trop volumineux. ¦ Položka je příliš velká. ¦ Objektet är för stort. ¦ Elementet er for stort.
+Élément introuvable : il a peut-être été supprimé ou rangé chez un autre artiste. ¦ Položka nenalezena: možná byla smazána nebo přesunuta k jinému umělci. ¦ Objektet hittades inte: det kan ha raderats eller flyttats till en annan konstnär. ¦ Elementet blev ikke fundet: det er måske slettet eller flyttet til en anden kunstner.
+Élément introuvable : il a peut-être déjà été supprimé. ¦ Položka nenalezena: možná už byla smazána. ¦ Objektet hittades inte: det kan redan ha raderats. ¦ Elementet blev ikke fundet: det er måske allerede slettet.
+Rangement impossible : un des éléments n’existe plus (recharge le catalogue). ¦ Seřazení nelze provést: jedna z položek už neexistuje (načti katalog znovu). ¦ Kan inte ordna: ett av objekten finns inte längre (läs in katalogen igen). ¦ Kan ikke ordne: et af elementerne findes ikke længere (genindlæs kataloget).
+Rien à remettre. ¦ Není co obnovit. ¦ Inget att återställa. ¦ Intet at gendanne.
+La fiche de la personne n’existe plus : impossible de remettre cet élément. ¦ Karta osoby už neexistuje: tuto položku nelze obnovit. ¦ Personens post finns inte längre: objektet kan inte återställas. ¦ Personens post findes ikke længere: elementet kan ikke gendannes.
+Donne un nom à cette sorte de fiche. ¦ Pojmenuj tento druh karty. ¦ Ge posttypen ett namn. ¦ Giv denne posttype et navn.
+Cette sorte a trop de réglages. ¦ Tento druh má příliš mnoho nastavení. ¦ Typen har för många inställningar. ¦ Typen har for mange indstillinger.
+Des fiches de cette sorte existent encore : supprime-les d’abord. ¦ Karty tohoto druhu ještě existují: nejdřív je smaž. ¦ Poster av den här typen finns fortfarande: radera dem först. ¦ Poster af denne type findes stadig: slet dem først.
+Réglage inconnu. ¦ Neznámé nastavení. ¦ Okänd inställning. ¦ Ukendt indstilling.
+Réglages trop volumineux. ¦ Nastavení jsou příliš velká. ¦ Inställningarna är för stora. ¦ Indstillingerne er for store.
+Import impossible : PHP n’a pas l’extension curl. ¦ Import nelze provést: PHP nemá rozšíření curl. ¦ Import omöjlig: PHP har inte tillägget curl. ¦ Import umulig: PHP har ikke udvidelsen curl.
+Le site demande de patienter (trop de demandes) : réessaie dans une minute. ¦ Web žádá o strpení (příliš mnoho požadavků): zkus to za minutu znovu. ¦ Webbplatsen ber dig vänta (för många förfrågningar): försök igen om en minut. ¦ Webstedet beder dig vente (for mange forespørgsler): prøv igen om et minut.
+Le site refuse la demande : une clé ou un jeton est nécessaire (ou il n’est pas bon). ¦ Web požadavek odmítá: je potřeba klíč nebo token (nebo není správný). ¦ Webbplatsen nekar förfrågan: en nyckel eller token behövs (eller så är den fel). ¦ Webstedet afviser forespørgslen: en nøgle eller et token er nødvendigt (eller det er forkert).
+Rien trouvé à cette adresse (identifiant inconnu). ¦ Na této adrese nic nenalezeno (neznámý identifikátor). ¦ Inget hittades på adressen (okänd identifierare). ¦ Intet fundet på adressen (ukendt identifikator).
+Réponse illisible du site. ¦ Nečitelná odpověď webu. ¦ Oläsligt svar från webbplatsen. ¦ Ulæseligt svar fra webstedet.
+La recherche par nom sur Discogs demande un jeton personnel (gratuit : discogs.com → Paramètres → Développeurs). Sans jeton, colle l’adresse d’un artiste, d’un album ou d’un disque. ¦ Hledání podle jména na Discogs vyžaduje osobní token (zdarma: discogs.com → Nastavení → Vývojáři). Bez tokenu vlož adresu umělce, alba nebo desky. ¦ Sökning på namn på Discogs kräver en personlig token (gratis: discogs.com → Inställningar → Utvecklare). Utan token, klistra in adressen till en artist, ett album eller en skiva. ¦ Søgning på navn på Discogs kræver et personligt token (gratis: discogs.com → Indstillinger → Udviklere). Uden token skal du indsætte adressen på en kunstner, et album eller en plade.
+Ce n’est pas une image (JPEG, PNG, WebP ou GIF). ¦ Není to obrázek (JPEG, PNG, WebP nebo GIF). ¦ Det är inte en bild (JPEG, PNG, WebP eller GIF). ¦ Det er ikke et billede (JPEG, PNG, WebP eller GIF).
+Image refusée : seules les images de Discogs, MusicBrainz/Cover Art Archive, Open Library, Wikimedia, TMDb et Apple sont rapatriées. ¦ Obrázek odmítnut: stahují se jen obrázky z Discogs, MusicBrainz/Cover Art Archive, Open Library, Wikimedia, TMDb a Apple. ¦ Bilden nekad: bara bilder från Discogs, MusicBrainz/Cover Art Archive, Open Library, Wikimedia, TMDb och Apple hämtas. ¦ Billedet afvist: kun billeder fra Discogs, MusicBrainz/Cover Art Archive, Open Library, Wikimedia, TMDb og Apple hentes.
+Trop de redirections. ¦ Příliš mnoho přesměrování. ¦ För många omdirigeringar. ¦ For mange omdirigeringer.
+Donne un titre au projet. ¦ Dej projektu název. ¦ Ge projektet en titel. ¦ Giv projektet en titel.
+Ce dossier n’est pas dans ce projet. ¦ Tato složka není v tomto projektu. ¦ Mappen finns inte i projektet. ¦ Mappen er ikke i dette projekt.
+Un dossier ne peut pas aller dans lui-même ni dans un de ses sous-dossiers. ¦ Složka nemůže jít sama do sebe ani do své podsložky. ¦ En mapp kan inte läggas i sig själv eller i en av sina undermappar. ¦ En mappe kan ikke lægges i sig selv eller i en af sine undermapper.
+Donne un nom au dossier. ¦ Pojmenuj složku. ¦ Ge mappen ett namn. ¦ Giv mappen et navn.
+Élément introuvable. ¦ Položka nenalezena. ¦ Objektet hittades inte. ¦ Elementet blev ikke fundet.
+Donne un titre à cet élément. ¦ Dej této položce název. ¦ Ge objektet en titel. ¦ Giv elementet en titel.
+Rien de reconnu : le fichier doit être un export Zotero RDF (.rdf), CSL JSON (.json), EndNote XML (.xml), BibTeX (.bib) ou RIS (.ris). ¦ Nic nerozpoznáno: soubor musí být export Zotero RDF (.rdf), CSL JSON (.json), EndNote XML (.xml), BibTeX (.bib) nebo RIS (.ris). ¦ Inget känt igen: filen måste vara en export i Zotero RDF (.rdf), CSL JSON (.json), EndNote XML (.xml), BibTeX (.bib) eller RIS (.ris). ¦ Intet genkendt: filen skal være en eksport i Zotero RDF (.rdf), CSL JSON (.json), EndNote XML (.xml), BibTeX (.bib) eller RIS (.ris).
+Fichier refusé : il contient des déclarations XML (DOCTYPE ou ENTITY) qu’un export de bibliographie n’utilise pas. ¦ Soubor odmítnut: obsahuje deklarace XML (DOCTYPE nebo ENTITY), které export bibliografie nepoužívá. ¦ Filen nekad: den innehåller XML-deklarationer (DOCTYPE eller ENTITY) som en litteraturexport inte använder. ¦ Filen afvist: den indeholder XML-erklæringer (DOCTYPE eller ENTITY), som en litteratureksport ikke bruger.
+Donne un nom au projet. ¦ Pojmenuj projekt. ¦ Ge projektet ett namn. ¦ Giv projektet et navn.
+Projet trop gros (4 Mo au plus pour les réglages). ¦ Projekt je příliš velký (nejvýše 4 MB na nastavení). ¦ Projektet är för stort (högst 4 MB för inställningarna). ¦ Projektet er for stort (højst 4 MB til indstillingerne).
+Réglages du projet illisibles. ¦ Nastavení projektu jsou nečitelná. ¦ Projektets inställningar är oläsliga. ¦ Projektets indstillinger er ulæselige.
+Ce média n’est pas un son. ¦ Toto médium není zvuk. ¦ Mediet är inte ett ljud. ¦ Mediet er ikke en lyd.
+Ce fichier n’est pas une version de ce son. ¦ Tento soubor není verzí tohoto zvuku. ¦ Filen är inte en version av ljudet. ¦ Filen er ikke en version af denne lyd.
+Trop de zones (500 au plus). ¦ Příliš mnoho oblastí (nejvýše 500). ¦ För många regioner (högst 500). ¦ For mange områder (højst 500).
+Le mot de passe doit faire au moins 8 caractères. ¦ Heslo musí mít aspoň 8 znaků. ¦ Lösenordet måste ha minst 8 tecken. ¦ Adgangskoden skal have mindst 8 tegn.
+Le chiffrement des sauvegardes n’est pas disponible sur cet ordinateur. ¦ Šifrování záloh není v tomto počítači k dispozici. ¦ Kryptering av säkerhetskopior finns inte på den här datorn. ¦ Kryptering af sikkerhedskopier er ikke tilgængelig på denne computer.
+Impossible de créer le dossier temporaire de la sauvegarde. ¦ Nelze vytvořit dočasnou složku zálohy. ¦ Kunde inte skapa säkerhetskopians tillfälliga mapp. ¦ Kunne ikke oprette sikkerhedskopiens midlertidige mappe.
+Impossible de créer l’archive. ¦ Nelze vytvořit archiv. ¦ Kunde inte skapa arkivet. ¦ Kunne ikke oprette arkivet.
+Écriture de l’archive impossible. ¦ Zápis archivu nelze provést. ¦ Kunde inte skriva arkivet. ¦ Kunne ikke skrive arkivet.
+Ce fichier n’est pas une base SQLite lisible. ¦ Tento soubor není čitelná databáze SQLite. ¦ Filen är inte en läsbar SQLite-databas. ¦ Filen er ikke en læsbar SQLite-database.
+Cette base vient d’une version plus récente de l’application : mets LCNDA à jour pour l’ouvrir. ¦ Tato databáze pochází z novější verze aplikace: aktualizuj LCNDA, abys ji otevřel. ¦ Databasen kommer från en nyare version av appen: uppdatera LCNDA för att öppna den. ¦ Databasen kommer fra en nyere version af appen: opdatér LCNDA for at åbne den.
+Une généalogie est déjà ouverte : elle ne sera pas remplacée. Ouvre ce fichier sur l’écran de démarrage d’une installation vide. ¦ Rodokmen je už otevřený: nebude nahrazen. Otevři tento soubor na úvodní obrazovce prázdné instalace. ¦ Ett släktträd är redan öppet: det ersätts inte. Öppna filen från startskärmen i en tom installation. ¦ Et slægtstræ er allerede åbent: det erstattes ikke. Åbn filen fra startskærmen i en tom installation.
+Impossible de créer le dossier de la base. ¦ Nelze vytvořit složku databáze. ¦ Kunde inte skapa databasens mapp. ¦ Kunne ikke oprette databasens mappe.
+Lecture de la base impossible dans l’archive. ¦ Databázi v archivu nelze přečíst. ¦ Kunde inte läsa databasen i arkivet. ¦ Kunne ikke læse databasen i arkivet.
+Impossible d’enregistrer le fichier reçu. ¦ Přijatý soubor nelze uložit. ¦ Kunde inte spara den mottagna filen. ¦ Kunne ikke gemme den modtagne fil.
+Impossible de créer le dossier des médias. ¦ Nelze vytvořit složku médií. ¦ Kunde inte skapa mediemappen. ¦ Kunne ikke oprette mediemappen.
+Impossible de remplacer la base vide. ¦ Prázdnou databázi nelze nahradit. ¦ Kunde inte ersätta den tomma databasen. ¦ Kunne ikke erstatte den tomme database.
+Impossible de mettre la base en place. ¦ Databázi nelze umístit. ¦ Kunde inte installera databasen. ¦ Kunne ikke sætte databasen på plads.
+Import par chemin réservé à l’application de bureau. ¦ Import podle cesty je jen pro desktopovou aplikaci. ¦ Import via sökväg är bara för skrivbordsappen. ¦ Import via sti er kun til skrivebordsappen.
+Ce dossier n’est ni un paquet MacFamilyTree (.mftpkg), ni un fichier Hérédis (.hmw). ¦ Tato složka není balíček MacFamilyTree (.mftpkg) ani soubor Hérédis (.hmw). ¦ Mappen är varken ett MacFamilyTree-paket (.mftpkg) eller en Hérédis-fil (.hmw). ¦ Mappen er hverken en MacFamilyTree-pakke (.mftpkg) eller en Hérédis-fil (.hmw).
+« Une journée dans la vie » est faite pour les personnes. ¦ „Jeden den v životě“ je určen pro osoby. ¦ ”En dag i livet” är gjord för personer. ¦ »En dag i livet« er lavet til personer.
+Cette fiche n’est pas montrée en mode consultation. ¦ Tato karta se v režimu prohlížení nezobrazuje. ¦ Posten visas inte i visningsläge. ¦ Posten vises ikke i visningstilstand.
+Cet événement n’est pas dans la vie de cette personne. ¦ Tato událost není v životě této osoby. ¦ Händelsen ingår inte i personens liv. ¦ Begivenheden er ikke i personens liv.
+Cet événement n’a pas de date : choisis-en un autre, ou écris une date. ¦ Tato událost nemá datum: vyber jinou, nebo napiš datum. ¦ Händelsen har inget datum: välj en annan eller skriv ett datum. ¦ Begivenheden har ingen dato: vælg en anden, eller skriv en dato.
+Choisis un événement de sa vie, ou écris une date. ¦ Vyber událost z jeho/jejího života, nebo napiš datum. ¦ Välj en händelse i personens liv, eller skriv ett datum. ¦ Vælg en begivenhed i personens liv, eller skriv en dato.
+Je ne comprends pas cette date (exemples : 7 mai 1925, vers 1784, 12 thermidor an II). ¦ Tomuto datu nerozumím (příklady: 7 mai 1925, vers 1784, 12 thermidor an II). ¦ Jag förstår inte det här datumet (exempel: 7 mai 1925, vers 1784, 12 thermidor an II). ¦ Jeg forstår ikke denne dato (eksempler: 7 mai 1925, vers 1784, 12 thermidor an II).
+Personne introuvable : choisis d’abord à qui se rattache cette fiche. ¦ Osoba nenalezena: nejdřív vyber, ke komu tato karta patří. ¦ Personen hittades inte: välj först vem posten hör till. ¦ Personen blev ikke fundet: vælg først, hvem posten hører til.
+Fiche verrouillée. Déverrouille-la avant de modifier ou supprimer cette personne. ¦ Karta je zamčená. Než tuto osobu upravíš nebo smažeš, odemkni ji. ¦ Posten är låst. Lås upp den innan du redigerar eller raderar personen. ¦ Posten er låst. Lås den op, før du redigerer eller sletter personen.
+Fiche introuvable : elle a peut-être été supprimée. ¦ Karta nenalezena: možná byla smazána. ¦ Posten hittades inte: den kan ha raderats. ¦ Posten blev ikke fundet: den er måske slettet.
+Fiche introuvable : elle a peut-être déjà été supprimée. ¦ Karta nenalezena: možná už byla smazána. ¦ Posten hittades inte: den kan redan ha raderats. ¦ Posten blev ikke fundet: den er måske allerede slettet.
+Ce tableau a été modifié dans une autre fenêtre depuis que tu l’as ouvert. ¦ Tato tabulka byla od jejího otevření změněna v jiném okně. ¦ Tabellen har ändrats i ett annat fönster sedan du öppnade den. ¦ Tabellen er ændret i et andet vindue, siden du åbnede den.
+Instantané introuvable. ¦ Snímek stavu nenalezen. ¦ Ögonblicksbilden hittades inte. ¦ Øjebliksbilledet blev ikke fundet.
+Donne un nom à l’instantané. ¦ Pojmenuj snímek stavu. ¦ Ge ögonblicksbilden ett namn. ¦ Giv øjebliksbilledet et navn.
+La base locale n'a pas encore été importée. ¦ Místní databáze ještě nebyla importována. ¦ Den lokala databasen har inte importerats än. ¦ Den lokale database er ikke importeret endnu.
+Parcelle introuvable (supprimée ?). ¦ Parcela nenalezena (smazána?). ¦ Skiftet hittades inte (raderat?). ¦ Matriklen blev ikke fundet (slettet?).
+Lien de sorte inconnue. ¦ Odkaz neznámého druhu. ¦ Länk av okänd typ. ¦ Forbindelse af ukendt type.
+La section s’écrit avec 1 ou 2 lettres ou chiffres (ex. « AB », « B », « 0A »). ¦ Oddíl se píše 1 nebo 2 písmeny či číslicemi (např. „AB“, „B“, „0A“). ¦ Sektionen skrivs med 1 eller 2 bokstäver eller siffror (t.ex. ”AB”, ”B”, ”0A”). ¦ Sektionen skrives med 1 eller 2 bogstaver eller cifre (f.eks. »AB«, »B«, »0A«).
+Le numéro de parcelle est un nombre de 1 à 9999. ¦ Číslo parcely je číslo od 1 do 9999. ¦ Skiftesnumret är ett tal från 1 till 9999. ¦ Matrikelnummeret er et tal fra 1 til 9999.
+Code de commune (INSEE) inconnu : 5 chiffres, ex. 19272. ¦ Neznámý kód obce (INSEE): 5 číslic, např. 19272. ¦ Okänd ortskod (INSEE): 5 siffror, t.ex. 19272. ¦ Ukendt kommunekode (INSEE): 5 cifre, f.eks. 19272.
+Donne au moins la section et le numéro de la parcelle (ou un lieu-dit). ¦ Zadej aspoň oddíl a číslo parcely (nebo pomístní název). ¦ Ange åtminstone sektionen och skiftesnumret (eller ett ortnamn). ¦ Angiv mindst sektionen og matrikelnummeret (eller et stednavn).
+La surface est un nombre de mètres carrés. ¦ Výměra je počet metrů čtverečních. ¦ Ytan är ett antal kvadratmeter. ¦ Arealet er et antal kvadratmeter.
+Parcelle introuvable (déjà supprimée ?). ¦ Parcela nenalezena (už smazána?). ¦ Skiftet hittades inte (redan raderat?). ¦ Matriklen blev ikke fundet (allerede slettet?).
+Cette fiche n’existe pas (supprimée ?). ¦ Tato karta neexistuje (smazána?). ¦ Posten finns inte (raderad?). ¦ Posten findes ikke (slettet?).
+Beaucoup de demandes au cadastre en une minute : attends un petit moment et réessaie. ¦ Za minutu příliš mnoho dotazů na katastr: chvíli počkej a zkus to znovu. ¦ Många förfrågningar till fastighetsregistret på en minut: vänta en stund och försök igen. ¦ Mange forespørgsler til matriklen på et minut: vent lidt, og prøv igen.
+Le cadastre en ligne ne répond pas pour l’instant. ¦ Online katastr teď neodpovídá. ¦ Fastighetsregistret på nätet svarar inte just nu. ¦ Matriklen online svarer ikke lige nu.
+Le cadastre en ligne ne répond pas (pas d’Internet ?). Tu peux remplir la parcelle à la main. ¦ Online katastr neodpovídá (není internet?). Parcelu můžeš vyplnit ručně. ¦ Fastighetsregistret på nätet svarar inte (inget internet?). Du kan fylla i skiftet för hand. ¦ Matriklen online svarer ikke (intet internet?). Du kan udfylde matriklen i hånden.
+Recherche impossible : PHP n’a pas l’extension curl. ¦ Hledání nelze provést: PHP nemá rozšíření curl. ¦ Sökning omöjlig: PHP har inte tillägget curl. ¦ Søgning umulig: PHP har ikke udvidelsen curl.
+La réponse du service est trop grosse : précise la recherche (section et numéro). ¦ Odpověď služby je příliš velká: zpřesni hledání (oddíl a číslo). ¦ Tjänstens svar är för stort: förfina sökningen (sektion och nummer). ¦ Tjenestens svar er for stort: præcisér søgningen (sektion og nummer).
+Choisis d’abord une commune de France (avec son code INSEE). ¦ Nejdřív vyber obec ve Francii (s kódem INSEE). ¦ Välj först en ort i Frankrike (med dess INSEE-kod). ¦ Vælg først en by i Frankrig (med dens INSEE-kode).
+Point de la carte incompris. ¦ Bod mapy nebyl pochopen. ¦ Kartpunkten förstods inte. ¦ Kortpunktet blev ikke forstået.
+Écris la section (1 ou 2 lettres, ex. « AB » ou « B »). ¦ Napiš oddíl (1 nebo 2 písmena, např. „AB“ nebo „B“). ¦ Skriv sektionen (1 eller 2 bokstäver, t.ex. ”AB” eller ”B”). ¦ Skriv sektionen (1 eller 2 bogstaver, f.eks. »AB« eller »B«).
+Il faut une parcelle avec sa commune, sa section et son numéro. ¦ Je potřeba parcela s obcí, oddílem a číslem. ¦ Det behövs ett skifte med ort, sektion och nummer. ¦ Der skal være en matrikel med by, sektion og nummer.
+Les ventes (DVF) n’ont pas pu être lues : pas d’Internet, ou service indisponible. ¦ Prodeje (DVF) se nepodařilo načíst: není internet, nebo služba není dostupná. ¦ Försäljningarna (DVF) kunde inte läsas: inget internet, eller tjänsten är inte tillgänglig. ¦ Salgene (DVF) kunne ikke læses: intet internet, eller tjenesten er utilgængelig.
+Demande de carte inconnue. ¦ Neznámý požadavek na mapu. ¦ Okänd kartbegäran. ¦ Ukendt kortforespørgsel.
+Opération de carte inconnue. ¦ Neznámá operace s mapou. ¦ Okänd kartåtgärd. ¦ Ukendt kortoperation.
+Action de carte inconnue. ¦ Neznámá akce s mapou. ¦ Okänd kartåtgärd. ¦ Ukendt korthandling.
+Zone illisible : il faut un sud, un ouest, un nord et un est. ¦ Nečitelná oblast: je potřeba jih, západ, sever a východ. ¦ Oläsligt område: det behövs syd, väst, nord och öst. ¦ Ulæseligt område: der skal være syd, vest, nord og øst.
+Carte trop longue à décrire. ¦ Popis mapy je příliš dlouhý. ¦ Kartan är för lång att beskriva. ¦ Kortet er for langt at beskrive.
+Adresse refusée. ¦ Adresa odmítnuta. ¦ Adressen nekad. ¦ Adressen afvist.
+Fichier impossible à écrire. ¦ Soubor nelze zapsat. ¦ Filen kan inte skrivas. ¦ Filen kan ikke skrives.
+Fichier trop gros : ce n’est pas celui attendu. ¦ Soubor je příliš velký: není to ten očekávaný. ¦ Filen är för stor: det är inte den förväntade. ¦ Filen er for stor: det er ikke den forventede.
+Dossier des frontières impossible à créer. ¦ Složku hranic nelze vytvořit. ¦ Mappen för gränser kan inte skapas. ¦ Mappen med grænser kan ikke oprettes.
+Aucune commune ancienne lue dans ces fichiers : rien n’a été installé. ¦ V těchto souborech nebyla načtena žádná bývalá obec: nic nebylo nainstalováno. ¦ Ingen tidigare ort lästes i filerna: inget har installerats. ¦ Ingen tidligere by læst i disse filer: intet er installeret.
+Fichier impossible à ranger. ¦ Soubor nelze uložit. ¦ Filen kan inte sparas. ¦ Filen kan ikke gemmes.
+Choisis un nom de famille. ¦ Vyber příjmení. ¦ Välj ett efternamn. ¦ Vælg et efternavn.
+Rien à citer : choisis une source. ¦ Není co citovat: vyber pramen. ¦ Inget att citera: välj en källa. ¦ Intet at citere: vælg en kilde.
+Donne un nom à l’objet (ex. « Horloge comtoise »). ¦ Pojmenuj předmět (např. „Stojací hodiny“). ¦ Ge föremålet ett namn (t.ex. ”Moraklocka”). ¦ Giv genstanden et navn (f.eks. »Bornholmerur«).
+Donne un titre (ex. « La tarte aux pommes de mémé »). ¦ Zadej název (např. „Babiččin jablečný koláč“). ¦ Ange en titel (t.ex. ”Mormors äppelpaj”). ¦ Angiv en titel (f.eks. »Mormors æbletærte«).
+Lieu introuvable (les adresses ont peut-être changé). ¦ Místo nenalezeno (adresy se možná změnily). ¦ Orten hittades inte (adresserna kan ha ändrats). ¦ Stedet blev ikke fundet (adresserne er måske ændret).
+Donne un nom (ex. « Salon de généalogie de Paris »). ¦ Zadej název (např. „Pařížský genealogický veletrh“). ¦ Ange ett namn (t.ex. ”Släktforskarmässan i Paris”). ¦ Angiv et navn (f.eks. »Slægtsforskermessen i Paris«).
+Réglages illisibles. ¦ Nastavení jsou nečitelná. ¦ Inställningarna är oläsliga. ¦ Indstillingerne er ulæselige.
+Événement introuvable. ¦ Událost nenalezena. ¦ Händelsen hittades inte. ¦ Begivenheden blev ikke fundet.
+Donnée incorrecte : un texte est attendu. ¦ Nesprávný údaj: očekává se text. ¦ Fel uppgift: en text förväntas. ¦ Forkert data: en tekst forventes.
+Opération inconnue. ¦ Neznámá operace. ¦ Okänd åtgärd. ¦ Ukendt operation.
+Choisis l’ancêtre (ou le couple) dont on réunit les descendants. ¦ Vyber předka (nebo pár), jehož potomci se setkávají. ¦ Välj anfadern (eller paret) vars ättlingar samlas. ¦ Vælg anen (eller parret), hvis efterkommere samles.
+Invité introuvable. ¦ Host nenalezen. ¦ Gästen hittades inte. ¦ Gæsten blev ikke fundet.
+Réponse inconnue. ¦ Neznámá odpověď. ¦ Okänt svar. ¦ Ukendt svar.
+Le nombre de personnes va de 0 à 99. ¦ Počet osob je od 0 do 99. ¦ Antalet personer går från 0 till 99. ¦ Antallet af personer går fra 0 til 99.
+SocFace lit « née en {sf} », ta fiche dit {p} — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace čte „narozena v {sf}“, tvoje karta říká {p} — UI mohla špatně číst: zkontroluj obrázek. ¦ SocFace läser ”född {sf}”, din post säger {p} — AI:n kan ha läst fel: kontrollera på bilden. ¦ SocFace læser »født i {sf}«, din post siger {p} — AI'en kan have læst forkert: kontrollér på billedet.
+SocFace lit « né en {sf} », ta fiche dit {p} — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace čte „narozen v {sf}“, tvoje karta říká {p} — UI mohla špatně číst: zkontroluj obrázek. ¦ SocFace läser ”född {sf}”, din post säger {p} — AI:n kan ha läst fel: kontrollera på bilden. ¦ SocFace læser »født i {sf}«, din post siger {p} — AI'en kan have læst forkert: kontrollér på billedet.
+SocFace lit « née vers {sf} », ta fiche dit {p} — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace čte „narozena kolem {sf}“, tvoje karta říká {p} — UI mohla špatně číst: zkontroluj obrázek. ¦ SocFace läser ”född omkring {sf}”, din post säger {p} — AI:n kan ha läst fel: kontrollera på bilden. ¦ SocFace læser »født omkring {sf}«, din post siger {p} — AI'en kan have læst forkert: kontrollér på billedet.
+SocFace lit « né vers {sf} », ta fiche dit {p} — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace čte „narozen kolem {sf}“, tvoje karta říká {p} — UI mohla špatně číst: zkontroluj obrázek. ¦ SocFace läser ”född omkring {sf}”, din post säger {p} — AI:n kan ha läst fel: kontrollera på bilden. ¦ SocFace læser »født omkring {sf}«, din post siger {p} — AI'en kan have læst forkert: kontrollér på billedet.
+SocFace lit « née à {sf} », ta fiche dit {p} — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace čte „narozena v {sf}“, tvoje karta říká {p} — UI mohla špatně číst: zkontroluj obrázek. ¦ SocFace läser ”född i {sf}”, din post säger {p} — AI:n kan ha läst fel: kontrollera på bilden. ¦ SocFace læser »født i {sf}«, din post siger {p} — AI'en kan have læst forkert: kontrollér på billedet.
+SocFace lit « né à {sf} », ta fiche dit {p} — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace čte „narozen v {sf}“, tvoje karta říká {p} — UI mohla špatně číst: zkontroluj obrázek. ¦ SocFace läser ”född i {sf}”, din post säger {p} — AI:n kan ha läst fel: kontrollera på bilden. ¦ SocFace læser »født i {sf}«, din post siger {p} — AI'en kan have læst forkert: kontrollér på billedet.
+SocFace lit « femme », ta fiche dit homme — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace čte „žena“, tvoje karta říká muž — UI mohla špatně číst: zkontroluj obrázek. ¦ SocFace läser ”kvinna”, din post säger man — AI:n kan ha läst fel: kontrollera på bilden. ¦ SocFace læser »kvinde«, din post siger mand — AI'en kan have læst forkert: kontrollér på billedet.
+SocFace lit « homme », ta fiche dit femme — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace čte „muž“, tvoje karta říká žena — UI mohla špatně číst: zkontroluj obrázek. ¦ SocFace läser ”man”, din post säger kvinna — AI:n kan ha läst fel: kontrollera på bilden. ¦ SocFace læser »mand«, din post siger kvinde — AI'en kan have læst forkert: kontrollér på billedet.
+SocFace lit « {role} » du chef de ménage, ta fiche dit enfant — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace čte „{role}“ hlavy domácnosti, tvoje karta říká dítě — UI mohla špatně číst: zkontroluj obrázek. ¦ SocFace läser ”{role}” till hushållsföreståndaren, din post säger barn — AI:n kan ha läst fel: kontrollera på bilden. ¦ SocFace læser »{role}« til husstandens overhoved, din post siger barn — AI'en kan have læst forkert: kontrollér på billedet.
+SocFace lit « {role} » du chef de ménage, ta fiche dit conjoint — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace čte „{role}“ hlavy domácnosti, tvoje karta říká partner — UI mohla špatně číst: zkontroluj obrázek. ¦ SocFace läser ”{role}” till hushållsföreståndaren, din post säger partner — AI:n kan ha läst fel: kontrollera på bilden. ¦ SocFace læser »{role}« til husstandens overhoved, din post siger partner — AI'en kan have læst forkert: kontrollér på billedet.
+SocFace lit « {role} » du chef de ménage, ta fiche dit parent — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace čte „{role}“ hlavy domácnosti, tvoje karta říká rodič — UI mohla špatně číst: zkontroluj obrázek. ¦ SocFace läser ”{role}” till hushållsföreståndaren, din post säger förälder — AI:n kan ha läst fel: kontrollera på bilden. ¦ SocFace læser »{role}« til husstandens overhoved, din post siger forælder — AI'en kan have læst forkert: kontrollér på billedet.
+SocFace lit « {role} » du chef de ménage, ta fiche ne les relie pas — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace čte „{role}“ hlavy domácnosti, tvoje karta je nepropojuje — UI mohla špatně číst: zkontroluj obrázek. ¦ SocFace läser ”{role}” till hushållsföreståndaren, din post kopplar inte ihop dem — AI:n kan ha läst fel: kontrollera på bilden. ¦ SocFace læser »{role}« til husstandens overhoved, din post forbinder dem ikke — AI'en kan have læst forkert: kontrollér på billedet.
+SocFace lit « {role} » du chef de ménage, ta fiche dit rien — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace čte „{role}“ hlavy domácnosti, tvoje karta neříká nic — UI mohla špatně číst: zkontroluj obrázek. ¦ SocFace läser ”{role}” till hushållsföreståndaren, din post säger ingenting — AI:n kan ha läst fel: kontrollera på bilden. ¦ SocFace læser »{role}« til husstandens overhoved, din post siger intet — AI'en kan have læst forkert: kontrollér på billedet.
+vivante en {y}, à {place} vers {y} d’après un événement de la même année ¦ žila v roce {y}, v {place} kolem roku {y} podle události z téhož roku ¦ levde {y}, i {place} omkring {y} enligt en händelse samma år ¦ levende i {y}, i {place} omkring {y} ifølge en begivenhed samme år
+vivant en {y}, à {place} vers {y} d’après un événement de la même année ¦ žil v roce {y}, v {place} kolem roku {y} podle události z téhož roku ¦ levde {y}, i {place} omkring {y} enligt en händelse samma år ¦ levende i {y}, i {place} omkring {y} ifølge en begivenhed samme år
+vivante en {y}, à {place} vers {y} d’après un événement proche ¦ žila v roce {y}, v {place} kolem roku {y} podle blízké události ¦ levde {y}, i {place} omkring {y} enligt en närliggande händelse ¦ levende i {y}, i {place} omkring {y} ifølge en nærliggende begivenhed
+vivant en {y}, à {place} vers {y} d’après un événement proche ¦ žil v roce {y}, v {place} kolem roku {y} podle blízké události ¦ levde {y}, i {place} omkring {y} enligt en närliggande händelse ¦ levende i {y}, i {place} omkring {y} ifølge en nærliggende begivenhed
+Recensement de {y} à {place} (SocFace) : {what} ¦ Sčítání lidu {y} v {place} (SocFace): {what} ¦ Folkräkning {y} i {place} (SocFace): {what} ¦ Folketælling {y} i {place} (SocFace): {what}
+Recensement de {y} (SocFace) : {what} ¦ Sčítání lidu {y} (SocFace): {what} ¦ Folkräkning {y} (SocFace): {what} ¦ Folketælling {y} (SocFace): {what}
+socface|année de naissance ¦ rok narození ¦ födelseår ¦ fødselsår
+socface|lieu de naissance ¦ místo narození ¦ födelseort ¦ fødested
+socface|genre ¦ pohlaví ¦ kön ¦ køn
+socface|lien de parenté ¦ příbuzenský vztah ¦ släktskap ¦ slægtskab
+{text} (foyer coché « Vérifié sur l’image ») ¦ {text} (domácnost zaškrtnutá „Ověřeno na obrázku“) ¦ {text} (hushållet ikryssat ”Kontrollerat på bilden”) ¦ {text} (husstanden afkrydset »Kontrolleret på billedet«)
+Le numéro de table va de 1 à 500. ¦ Číslo stolu je od 1 do 500. ¦ Bordsnumret går från 1 till 500. ¦ Bordnummeret går fra 1 til 500.
+Donne au moins un prénom ou un nom. ¦ Zadej aspoň jméno nebo příjmení. ¦ Ange åtminstone ett förnamn eller ett efternamn. ¦ Angiv mindst et fornavn eller et efternavn.
+Cette fiche est introuvable (ou confidentielle). ¦ Tato karta nebyla nalezena (nebo je důvěrná). ¦ Posten hittades inte (eller är konfidentiell). ¦ Posten blev ikke fundet (eller er fortrolig).
+Cette personne est déjà dans la liste des invités. ¦ Tato osoba už je na seznamu hostů. ¦ Personen finns redan på gästlistan. ¦ Personen er allerede på gæstelisten.
+Aucun invité. ¦ Žádní hosté. ¦ Inga gäster. ¦ Ingen gæster.
+Aucune ligne à importer. ¦ Žádný řádek k importu. ¦ Inga rader att importera. ¦ Ingen rækker at importere.
+Réglage trop long. ¦ Nastavení je příliš dlouhé. ¦ Inställningen är för lång. ¦ Indstillingen er for lang.
+Mode consultation : les cousinades (adresses des vivants) ne se montrent pas. ¦ Režim prohlížení: rodinná setkání (adresy žijících) se nezobrazují. ¦ Visningsläge: släktträffar (levandes adresser) visas inte. ¦ Visningstilstand: slægtsstævner (levendes adresser) vises ikke.
+Choisis l’ancêtre. ¦ Vyber předka. ¦ Välj anfadern. ¦ Vælg anen.
+Donnée inconnue. ¦ Neznámý údaj. ¦ Okänd uppgift. ¦ Ukendt data.
+Données inconnues. ¦ Neznámé údaje. ¦ Okända uppgifter. ¦ Ukendte data.
+Diagramme trop gros (plus de 1,5 Mo de données). ¦ Diagram je příliš velký (víc než 1,5 MB dat). ¦ Schemat är för stort (mer än 1,5 MB data). ¦ Skemaet er for stort (over 1,5 MB data).
+Indique le numéro de la page (ou de la vue). ¦ Zadej číslo stránky (nebo snímku). ¦ Ange sidans (eller bildens) nummer. ¦ Angiv sidens (eller billedets) nummer.
+Choisis la personne testée (ou donne un nom au test). ¦ Vyber testovanou osobu (nebo pojmenuj test). ¦ Välj den testade personen (eller ge testet ett namn). ¦ Vælg den testede person (eller giv testen et navn).
+Choisis d’abord le test (kit) auquel rattacher les correspondances. ¦ Nejdřív vyber test (kit), ke kterému připojit shody. ¦ Välj först testet (kit) som matchningarna ska kopplas till. ¦ Vælg først testen (kit), som matchene skal forbindes med.
+Donne le nom de la correspondance. ¦ Zadej jméno shody. ¦ Ange matchningens namn. ¦ Angiv matchens navn.
+Ce fichier ressemble à un fichier ADN brut (des SNP « rs… ») : il n’est jamais importé, par prudence pour la vie privée et la loi française. Importe plutôt la liste des correspondances ou des segments. ¦ Tento soubor vypadá jako surový soubor DNA (SNP „rs…“): z důvodu ochrany soukromí a francouzského práva se nikdy neimportuje. Importuj raději seznam shod nebo segmentů. ¦ Filen ser ut som en rå DNA-fil (SNP:er ”rs…”): den importeras aldrig, av hänsyn till integriteten och fransk lag. Importera i stället listan över matchningar eller segment. ¦ Filen ligner en rå DNA-fil (SNP'er »rs…«): den importeres aldrig af hensyn til privatlivet og fransk lov. Importér i stedet listen over match eller segmenter.
+Coche au moins une sorte d’anniversaire. ¦ Zaškrtni aspoň jeden druh výročí. ¦ Bocka för minst en typ av årsdag. ¦ Sæt flueben ved mindst én slags mærkedag.
+Coche au moins une sorte de contacts. ¦ Zaškrtni aspoň jeden druh kontaktů. ¦ Bocka för minst en typ av kontakter. ¦ Sæt flueben ved mindst én slags kontakter.
+Aucun contact à exporter : ton répertoire, tes services d’archives et tes cousins ADN sont vides. ¦ Žádné kontakty k exportu: tvůj adresář, archivní služby a bratranci DNA jsou prázdné. ¦ Inga kontakter att exportera: din adressbok, dina arkivtjänster och dina DNA-kusiner är tomma. ¦ Ingen kontakter at eksportere: din adressebog, dine arkivtjenester og dine DNA-fætre og -kusiner er tomme.
+Aucune personne n°1 (Sosa) : choisis-la d’abord (Réglages → Apparence). ¦ Žádná osoba č. 1 (Sosa): nejdřív ji vyber (Nastavení → Vzhled). ¦ Ingen person nr 1 (Sosa): välj den först (Inställningar → Utseende). ¦ Ingen person nr. 1 (Sosa): vælg den først (Indstillinger → Udseende).
+Choisis la personne de la branche. ¦ Vyber osobu větve. ¦ Välj personen för grenen. ¦ Vælg personen for grenen.
+Aucune personne à exporter. ¦ Žádná osoba k exportu. ¦ Inga personer att exportera. ¦ Ingen personer at eksportere.
+Création du fichier ZIP impossible. ¦ Soubor ZIP nelze vytvořit. ¦ Kunde inte skapa ZIP-filen. ¦ Kunne ikke oprette ZIP-filen.
+Donne un nom à l’employeur. ¦ Pojmenuj zaměstnavatele. ¦ Ge arbetsgivaren ett namn. ¦ Giv arbejdsgiveren et navn.
+La base d’exemple a déjà des fiches. ¦ Ukázková databáze už má karty. ¦ Exempeldatabasen har redan poster. ¦ Eksempeldatabasen har allerede poster.
+Dossier des médias impossible à créer. ¦ Složku médií nelze vytvořit. ¦ Mediemappen kan inte skapas. ¦ Mediemappen kan ikke oprettes.
+Copie d’une image d’exemple impossible. ¦ Ukázkový obrázek nelze zkopírovat. ¦ Kunde inte kopiera en exempelbild. ¦ Kunne ikke kopiere et eksempelbillede.
+Les médias font plus de 4 Go : le paquet serait trop gros. Fais plutôt une branche (une personne et ses ancêtres), ou une sauvegarde complète. ¦ Média mají víc než 4 GB: balíček by byl příliš velký. Udělej raději větev (osobu a její předky) nebo úplnou zálohu. ¦ Medierna är över 4 GB: paketet skulle bli för stort. Gör i stället en gren (en person och dess anfäder), eller en fullständig säkerhetskopia. ¦ Medierne fylder over 4 GB: pakken ville blive for stor. Lav i stedet en gren (en person og dens aner) eller en fuld sikkerhedskopi.
+Pas assez de place libre sur l’ordinateur pour fabriquer ce paquet. ¦ V počítači není dost volného místa na vytvoření balíčku. ¦ Inte tillräckligt med ledigt utrymme på datorn för att skapa paketet. ¦ Ikke nok ledig plads på computeren til at lave pakken.
+Le paquet GedZip n’a pas pu être fabriqué. ¦ Balíček GedZip se nepodařilo vytvořit. ¦ GedZip-paketet kunde inte skapas. ¦ GedZip-pakken kunne ikke laves.
+Le paquet GedZip n’a pas pu être écrit. ¦ Balíček GedZip se nepodařilo zapsat. ¦ GedZip-paketet kunde inte skrivas. ¦ GedZip-pakken kunne ikke skrives.
+Le paquet Gramps n’a pas pu être fabriqué. ¦ Balíček Gramps se nepodařilo vytvořit. ¦ Gramps-paketet kunde inte skapas. ¦ Gramps-pakken kunne ikke laves.
+Contrôle : le nom d’une personne cachée restait dans la copie. Rien n’a été fabriqué. ¦ Kontrola: v kopii zůstalo jméno skryté osoby. Nic nebylo vytvořeno. ¦ Kontroll: namnet på en dold person fanns kvar i kopian. Inget har skapats. ¦ Kontrol: navnet på en skjult person var stadig i kopien. Intet blev lavet.
+Contrôle : une personne vivante avait encore des renseignements. Rien n’a été fabriqué. ¦ Kontrola: žijící osoba měla ještě údaje. Nic nebylo vytvořeno. ¦ Kontroll: en levande person hade fortfarande uppgifter. Inget har skapats. ¦ Kontrol: en levende person havde stadig oplysninger. Intet blev lavet.
+Une des personnes choisies pour les branches n’existe plus. ¦ Jedna z osob vybraných pro větve už neexistuje. ¦ En av personerna som valts för grenarna finns inte längre. ¦ En af de personer, der er valgt til grenene, findes ikke længere.
+Impossible de préparer le fichier. ¦ Soubor nelze připravit. ¦ Kunde inte förbereda filen. ¦ Kunne ikke forberede filen.
+Lecture du fichier GEDCOM impossible ¦ Soubor GEDCOM nelze přečíst ¦ Kunde inte läsa GEDCOM-filen ¦ Kunne ikke læse GEDCOM-filen
+Ce fichier n’est pas un GEDCOM : aucune personne ni en-tête « HEAD » trouvé. ¦ Tento soubor není GEDCOM: nebyla nalezena žádná osoba ani záhlaví „HEAD“. ¦ Filen är inte en GEDCOM: ingen person eller ”HEAD”-huvud hittades. ¦ Filen er ikke en GEDCOM: ingen person eller »HEAD«-hoved fundet.
+Graphique illisible (trop de champs). ¦ Nečitelný graf (příliš mnoho polí). ¦ Oläsligt diagram (för många fält). ¦ Ulæseligt diagram (for mange felter).
+Graphique illisible (trop imbriqué). ¦ Nečitelný graf (příliš vnořený). ¦ Oläsligt diagram (för djupt nästlat). ¦ Ulæseligt diagram (for dybt indlejret).
+Sorte de graphique inconnue. ¦ Neznámý druh grafu. ¦ Okänd diagramtyp. ¦ Ukendt diagramtype.
+Graphique trop gros pour être enregistré (2 Mo au plus). ¦ Graf je na uložení příliš velký (nejvýše 2 MB). ¦ Diagrammet är för stort för att sparas (högst 2 MB). ¦ Diagrammet er for stort til at blive gemt (højst 2 MB).
+Liste de graphiques illisible. ¦ Seznam grafů je nečitelný. ¦ Diagramlistan är oläslig. ¦ Diagramlisten er ulæselig.
+Vignette refusée. ¦ Náhled odmítnut. ¦ Miniatyren nekad. ¦ Miniaturen afvist.
+Opération inconnue sur les graphiques. ¦ Neznámá operace s grafy. ¦ Okänd åtgärd för diagram. ¦ Ukendt operation på diagrammer.
+Action inconnue sur les graphiques. ¦ Neznámá akce s grafy. ¦ Okänd åtgärd för diagram. ¦ Ukendt handling på diagrammer.
+Fichier Hérédis introuvable. ¦ Soubor Hérédis nenalezen. ¦ Hérédis-filen hittades inte. ¦ Hérédis-filen blev ikke fundet.
+Aucun fichier .heredis dans ce dossier Hérédis. ¦ V této složce Hérédis není žádný soubor .heredis. ¦ Ingen .heredis-fil i den här Hérédis-mappen. ¦ Ingen .heredis-fil i denne Hérédis-mappe.
+Ce fichier n’est pas un fichier Hérédis lisible (Hérédis 2019 ou plus récent). ¦ Tento soubor není čitelný soubor Hérédis (Hérédis 2019 nebo novější). ¦ Filen är inte en läsbar Hérédis-fil (Hérédis 2019 eller nyare). ¦ Filen er ikke en læsbar Hérédis-fil (Hérédis 2019 eller nyere).
+Média introuvable ¦ Médium nenalezeno ¦ Mediet hittades inte ¦ Mediet blev ikke fundet
+Donne un nom aux armoiries (ex. « Armes de la famille de Montferrand »). ¦ Pojmenuj erb (např. „Erb rodu z Montferrandu“). ¦ Ge vapnet ett namn (t.ex. ”Släkten de Montferrands vapen”). ¦ Giv våbenskjoldet et navn (f.eks. »Slægten de Montferrands våben«).
+Donne un nom au circuit (ex. « Sur les traces des Dupont en Corrèze »). ¦ Pojmenuj okruh (např. „Po stopách Dupontových v Corrèze“). ¦ Ge rundturen ett namn (t.ex. ”I familjen Duponts fotspår i Corrèze”). ¦ Giv rundturen et navn (f.eks. »I familien Duponts fodspor i Corrèze«).
+Étape introuvable ¦ Zastávka nenalezena ¦ Etappen hittades inte ¦ Stoppet blev ikke fundet
+Choisis au moins une personne (ou une branche) pour préparer le circuit. ¦ Vyber aspoň jednu osobu (nebo větev) pro přípravu okruhu. ¦ Välj minst en person (eller en gren) för att förbereda rundturen. ¦ Vælg mindst én person (eller en gren) for at forberede rundturen.
+Donne un titre au document (ex. « Livret de famille Dupont-Martin »). ¦ Dej dokumentu název (např. „Rodinná knížka Dupont-Martin“). ¦ Ge dokumentet en titel (t.ex. ”Familjebok Dupont-Martin”). ¦ Giv dokumentet en titel (f.eks. »Familiebog Dupont-Martin«).
+Donne un nom à la carte (ex. « Cadastre napoléonien de Saint-Yrieix, 1834 »). ¦ Pojmenuj mapu (např. „Napoleonský katastr Saint-Yrieix, 1834“). ¦ Ge kartan ett namn (t.ex. ”Napoleons fastighetskarta över Saint-Yrieix, 1834”). ¦ Giv kortet et navn (f.eks. »Napoleonsk matrikelkort over Saint-Yrieix, 1834«).
+Indique au moins un critère. ¦ Zadej aspoň jedno kritérium. ¦ Ange minst ett kriterium. ¦ Angiv mindst ét kriterium.
+Donne un nom à la recherche (ex. « Les Dupont du Nord avant 1800 »). ¦ Pojmenuj hledání (např. „Dupontové ze severu před rokem 1800“). ¦ Ge sökningen ett namn (t.ex. ”Familjen Dupont i Nord före 1800”). ¦ Giv søgningen et navn (f.eks. »Familien Dupont i Nord før 1800«).
+Décompresse d’abord le fichier ZIP, puis importe le fichier CSV. ¦ Nejdřív rozbal soubor ZIP, pak importuj soubor CSV. ¦ Packa först upp ZIP-filen och importera sedan CSV-filen. ¦ Pak først ZIP-filen ud, og importér så CSV-filen.
+dossier introuvable (disque ou clé débranché ?) ¦ složka nenalezena (disk nebo flash disk odpojen?) ¦ mappen hittades inte (disk eller USB-minne urkopplat?) ¦ mappen blev ikke fundet (disk eller USB-nøgle frakoblet?)

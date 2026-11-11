@@ -2389,3 +2389,953 @@ aucun ancêtre de ta famille ne vivait à cette date ¦ v tu dobu nežil žádn�
 {who} : {inv} de l’époque pour compléter le groupe ¦ {who}: {inv} z té doby na doplnění skupiny ¦ {who}: {inv} från tiden för att fylla ut gruppen ¦ {who}: {inv} fra tiden for at fylde gruppen op
 🏆 Pour gagner : tenir {n} jours. (On peut continuer ensuite.) ¦ 🏆 K výhře: vydržet {n} dní. (Pak lze pokračovat.) ¦ 🏆 För att vinna: håll ut i {n} dagar. (Man kan fortsätta efteråt.) ¦ 🏆 For at vinde: hold ud i {n} dage. (Man kan fortsætte bagefter.)
 📘 Tutoriel — {step} ¦ 📘 Návod — {step} ¦ 📘 Handledning — {step} ¦ 📘 Vejledning — {step}
+Pour commencer : construire des toilettes et un lit à l’atelier, creuser un étage, et envoyer quelqu’un chercher de quoi tenir. Le bric-à-brac ({junk}, une chaise…) se démonte pour en tirer des composants : onglet ♻️ Bric-à-brac. ¦ Pro začátek: postav v dílně záchod a postel, vykopej patro a pošli někoho pro zásoby. Harampádí ({junk}, židle…) se dá rozebrat na součástky: karta ♻️ Harampádí. ¦ För att börja: bygg en toalett och en säng i verkstaden, gräv en våning och skicka någon att hämta förnödenheter. Skrotet ({junk}, en stol…) kan plockas isär till komponenter: fliken ♻️ Skrot. ¦ For at begynde: byg et toilet og en seng i værkstedet, grav en etage, og send nogen ud efter forsyninger. Skramlet ({junk}, en stol…) kan skilles ad til komponenter: fanen ♻️ Skrammel.
+un vieux tonneau ¦ starý sud ¦ en gammal tunna ¦ en gammel tønde
+une vieille radio ¦ staré rádio ¦ en gammal radio ¦ en gammel radio
+Un voyageur ¦ Cestovatel ¦ En resenär ¦ En rejsende
+rue n° {n} ¦ ulice č. {n} ¦ gata nr {n} ¦ gade nr. {n}
+Maison natale de {name} ({y}) ¦ Rodný dům osoby {name} ({y}) ¦ {name}s födelsehem ({y}) ¦ {name}s fødehjem ({y})
+Maison natale de {name} ¦ Rodný dům osoby {name} ¦ {name}s födelsehem ¦ {name}s fødehjem
+Objet inconnu. ¦ Neznámý předmět. ¦ Okänt föremål. ¦ Ukendt genstand.
+Il faut d’abord trouver le plan « {name} ». ¦ Nejdřív je potřeba najít plán „{name}“. ¦ Du måste först hitta ritningen ”{name}”. ¦ Du skal først finde tegningen »{name}«.
+Il faut l’outil « {name} ». ¦ Je potřeba nástroj „{name}“. ¦ Verktyget ”{name}” behövs. ¦ Værktøjet »{name}« kræves.
+Les chaînes de fabrication sont désactivées (réglages). ¦ Výrobní řetězce jsou vypnuté (nastavení). ¦ Produktionskedjorna är avstängda (inställningar). ¦ Produktionskæderne er slået fra (indstillinger).
+« {name} » n’existe pas encore à cette époque. ¦ „{name}“ v této době ještě neexistuje. ¦ ”{name}” finns inte än i den här tiden. ¦ »{name}« findes ikke endnu i denne tid.
+Cette place est prise. ¦ Toto místo je obsazené. ¦ Platsen är upptagen. ¦ Pladsen er optaget.
+Il manque : {list}. ¦ Chybí: {list}. ¦ Det saknas: {list}. ¦ Der mangler: {list}.
+🛠️ {name} commandé à l’atelier (étage {f}). ¦ 🛠️ {name} objednáno v dílně (patro {f}). ¦ 🛠️ {name} beställd i verkstaden (våning {f}). ¦ 🛠️ {name} bestilt i værkstedet (etage {f}).
+🔧 {ico} {name} {why} : il faut le réparer (clique dessus) — {cost}. ¦ 🔧 {ico} {name} {why}: je třeba opravit (klikni na to) — {cost}. ¦ 🔧 {ico} {name} {why}: den behöver lagas (klicka på den) — {cost}. ¦ 🔧 {ico} {name} {why}: den skal repareres (klik på den) — {cost}.
+tombe en panne ¦ se porouchá ¦ går sönder ¦ går i stykker
+Rien à réparer ici. ¦ Tady není co opravovat. ¦ Inget att laga här. ¦ Intet at reparere her.
+C’est déjà commandé. ¦ Už je objednáno. ¦ Det är redan beställt. ¦ Det er allerede bestilt.
+Pour réparer un moyen de transport, il faut un établi (🪚). ¦ K opravě dopravního prostředku je potřeba ponk (🪚). ¦ För att laga ett transportmedel behövs en hyvelbänk (🪚). ¦ For at reparere et transportmiddel skal der være en høvlebænk (🪚).
+🔧 Réparation de {name} commandée. ¦ 🔧 Oprava {name} objednána. ¦ 🔧 Reparation av {name} beställd. ¦ 🔧 Reparation af {name} bestilt.
+Cette installation ne s’améliore pas. ¦ Toto zařízení nelze vylepšit. ¦ Den här installationen kan inte uppgraderas. ¦ Denne installation kan ikke opgraderes.
+Déjà au niveau le plus haut. ¦ Už na nejvyšší úrovni. ¦ Redan på högsta nivån. ¦ Allerede på højeste niveau.
+Il faut d’abord la réparer. ¦ Nejdřív je třeba ho opravit. ¦ Den måste lagas först. ¦ Den skal repareres først.
+⬆️ {name} : amélioration au niveau {n} commandée. ¦ ⬆️ {name}: vylepšení na úroveň {n} objednáno. ¦ ⬆️ {name}: uppgradering till nivå {n} beställd. ¦ ⬆️ {name}: opgradering til niveau {n} bestilt.
+{name} démonté. ¦ {name} rozebráno. ¦ {name} isärplockad. ¦ {name} skilt ad.
+Cette place n’existe pas. ¦ Toto místo neexistuje. ¦ Platsen finns inte. ¦ Pladsen findes ikke.
+C’est la même place. ¦ To je stejné místo. ¦ Det är samma plats. ¦ Det er samme plads.
+Rien à déplacer ici. ¦ Tady není co přesouvat. ¦ Inget att flytta här. ¦ Intet at flytte her.
+Ce transport est parti en ville ou en convoi. ¦ Tento dopravní prostředek je ve městě nebo v konvoji. ¦ Det här transportmedlet är i staden eller med en konvoj. ¦ Dette transportmiddel er i byen eller med en konvoj.
+↔ {a} et {b} échangent leur place. ¦ ↔ {a} a {b} si vyměňují místa. ¦ ↔ {a} och {b} byter plats. ¦ ↔ {a} og {b} bytter plads.
+Le chantier ¦ Stavba ¦ Bygget ¦ Byggeriet
+↔ {a} change de place (étage −{f}). ¦ ↔ {a} mění místo (patro −{f}). ¦ ↔ {a} byter plats (våning −{f}). ¦ ↔ {a} skifter plads (etage −{f}).
+🎚️ Difficulté : {d}. ¦ 🎚️ Obtížnost: {d}. ¦ 🎚️ Svårighet: {d}. ¦ 🎚️ Sværhedsgrad: {d}.
+Rien à démonter. ¦ Není co rozebírat. ¦ Inget att plocka isär. ¦ Intet at skille ad.
+♻️ {name} s’installe pour démonter. ¦ ♻️ {name} se usadil(a) k rozebírání. ¦ ♻️ {name} sätter sig för att plocka isär. ¦ ♻️ {name} sætter sig for at skille ting ad.
+♻️ {name} a démonté {ico} {what} : {got}. Plus de place pour {lost}. ¦ ♻️ {name} rozebral(a) {ico} {what}: {got}. Není místo pro {lost}. ¦ ♻️ {name} plockade isär {ico} {what}: {got}. Ingen plats för {lost}. ¦ ♻️ {name} skilte {ico} {what} ad: {got}. Ikke plads til {lost}.
+♻️ {name} a démonté {ico} {what} : {got}. ¦ ♻️ {name} rozebral(a) {ico} {what}: {got}. ¦ ♻️ {name} plockade isär {ico} {what}: {got}. ¦ ♻️ {name} skilte {ico} {what} ad: {got}.
+Pas au bunker. ¦ Není v bunkru. ¦ Inte i bunkern. ¦ Ikke i bunkeren.
+Besoin inconnu. ¦ Neznámá potřeba. ¦ Okänt behov. ¦ Ukendt behov.
+Plus d’eau. ¦ Došla voda. ¦ Vattnet är slut. ¦ Vandet er sluppet op.
+Plus de nourriture. ¦ Došlo jídlo. ¦ Maten är slut. ¦ Maden er sluppet op.
+Impossible pour l’instant. ¦ Teď to nejde. ¦ Inte möjligt just nu. ¦ Ikke muligt lige nu.
+Personne à envoyer. ¦ Není koho poslat. ¦ Ingen att skicka. ¦ Ingen at sende.
+{name} est bien trop petit·e pour la ville. ¦ {name} je na město ještě moc malý/á. ¦ {name} är alldeles för liten för staden. ¦ {name} er alt for lille til byen.
+{name} n’est pas au bunker. ¦ {name} není v bunkru. ¦ {name} är inte i bunkern. ¦ {name} er ikke i bunkeren.
+Lieu inconnu. ¦ Neznámé místo. ¦ Okänd plats. ¦ Ukendt sted.
+{n} lieux : {list} ¦ Míst: {n}: {list} ¦ {n} platser: {list} ¦ {n} steder: {list}
+🚶 {name} part vers {dest} ({h} h de marche en tout, sans compter les fouilles ; avec {with}). ¦ 🚶 {name} vyráží do {dest} ({h} h chůze celkem, bez prohledávání; s {with}). ¦ 🚶 {name} ger sig av mot {dest} ({h} h promenad totalt, utan letandet; med {with}). ¦ 🚶 {name} drager mod {dest} ({h} t gang i alt, uden at regne søgningen med; med {with}).
+🚶 {name} part vers {dest} ({h} h de marche en tout, sans compter les fouilles). ¦ 🚶 {name} vyráží do {dest} ({h} h chůze celkem, bez prohledávání). ¦ 🚶 {name} ger sig av mot {dest} ({h} h promenad totalt, utan letandet). ¦ 🚶 {name} drager mod {dest} ({h} t gang i alt, uden at regne søgningen med).
+📯 Un gamin du quartier court porter le message : « {name}, rentre ! » ¦ 📯 Kluk ze sousedství běží se vzkazem: „{name}, vrať se!“ ¦ 📯 En grabb från kvarteret springer med budet: ”{name}, kom hem!” ¦ 📯 En knægt fra kvarteret løber af sted med beskeden: »{name}, kom hjem!«
+📻 « {name}, rentre ! » — « Bien reçu, je rentre. » ¦ 📻 „{name}, vrať se!“ — „Rozumím, vracím se.“ ¦ 📻 ”{name}, kom hem!” — ”Uppfattat, jag kommer.” ¦ 📻 »{name}, kom hjem!« — »Modtaget, jeg kommer.«
+🔔 On frappe à la trappe : un marchand de {group} propose {give} contre {want}. ¦ 🔔 Někdo klepe na poklop: obchodník od {group} nabízí {give} za {want}. ¦ 🔔 Det knackar på luckan: en handlare från {group} erbjuder {give} mot {want}. ¦ 🔔 Det banker på lugen: en handlende fra {group} tilbyder {give} for {want}.
+🔔 On frappe à la trappe : un marchand propose {give} contre {want}. ¦ 🔔 Někdo klepe na poklop: obchodník nabízí {give} za {want}. ¦ 🔔 Det knackar på luckan: en handlare erbjuder {give} mot {want}. ¦ 🔔 Det banker på lugen: en handlende tilbyder {give} for {want}.
+réfugié·e ¦ uprchlík/uprchlice ¦ flykting ¦ flygtning
+🔔 On frappe à la trappe : {name}, {occ}, demande à entrer. ¦ 🔔 Někdo klepe na poklop: {name}, {occ}, prosí o vstup. ¦ 🔔 Det knackar på luckan: {name}, {occ}, ber att få komma in. ¦ 🔔 Det banker på lugen: {name}, {occ}, beder om at komme ind.
+🔔 On frappe à la trappe : {name}, demande à entrer. ¦ 🔔 Někdo klepe na poklop: {name} prosí o vstup. ¦ 🔔 Det knackar på luckan: {name} ber att få komma in. ¦ 🔔 Det banker på lugen: {name} beder om at komme ind.
+tout ce que vous avez ¦ vše, co máte ¦ allt ni har ¦ alt hvad I har
+🔔 {band} tapent sur la trappe : ils veulent {what}. ¦ 🔔 {band} buší na poklop: chtějí {what}. ¦ 🔔 {band} bankar på luckan: de vill ha {what}. ¦ 🔔 {band} hamrer på lugen: de vil have {what}.
+🔔 Des pillards tapent sur la trappe : ils veulent {what}. ¦ 🔔 Lupiči buší na poklop: chtějí {what}. ¦ 🔔 Plundrare bankar på luckan: de vill ha {what}. ¦ 🔔 Plyndrere hamrer på lugen: de vil have {what}.
+🛡️ Les pillards repartent bredouilles ! Ils ont laissé {n} métal en fuyant. ¦ 🛡️ Lupiči odcházejí s prázdnou! Na útěku nechali {n} kovu. ¦ 🛡️ Plundrarna går tomhänta! De tappade {n} metall när de flydde. ¦ 🛡️ Plyndrerne går tomhændede! De tabte {n} metal på flugten.
+💥 Les pillards forcent la trappe et emportent {took} ; {name} est blessé·e. Une porte renforcée et des pièges aideraient. ¦ 💥 Lupiči vypáčí poklop a odnesou {took}; {name} je zraněn(a). Pomohly by zesílené dveře a pasti. ¦ 💥 Plundrarna bryter upp luckan och tar {took}; {name} är skadad. En förstärkt dörr och fällor skulle hjälpa. ¦ 💥 Plyndrerne bryder lugen op og tager {took}; {name} er såret. En forstærket dør og fælder ville hjælpe.
+💥 Les pillards forcent la trappe et emportent {took}. Une porte renforcée et des pièges aideraient. ¦ 💥 Lupiči vypáčí poklop a odnesou {took}. Pomohly by zesílené dveře a pasti. ¦ 💥 Plundrarna bryter upp luckan och tar {took}. En förstärkt dörr och fällor skulle hjälpa. ¦ 💥 Plyndrerne bryder lugen op og tager {took}. En forstærket dør og fælder ville hjælpe.
+💥 Les pillards forcent la trappe ; {name} est blessé·e. Une porte renforcée et des pièges aideraient. ¦ 💥 Lupiči vypáčí poklop; {name} je zraněn(a). Pomohly by zesílené dveře a pasti. ¦ 💥 Plundrarna bryter upp luckan; {name} är skadad. En förstärkt dörr och fällor skulle hjälpa. ¦ 💥 Plyndrerne bryder lugen op; {name} er såret. En forstærket dør og fælder ville hjælpe.
+💥 Les pillards forcent la trappe. Une porte renforcée et des pièges aideraient. ¦ 💥 Lupiči vypáčí poklop. Pomohly by zesílené dveře a pasti. ¦ 💥 Plundrarna bryter upp luckan. En förstärkt dörr och fällor skulle hjälpa. ¦ 💥 Plyndrerne bryder lugen op. En forstærket dør og fælder ville hjælpe.
+Personne à la trappe. ¦ U poklopu nikdo není. ¦ Ingen vid luckan. ¦ Ingen ved lugen.
+Il manque {what}. ¦ Chybí {what}. ¦ Det saknas {what}. ¦ Der mangler {what}.
+🤝 Marché conclu : {give} contre {want}. ¦ 🤝 Obchod uzavřen: {give} za {want}. ¦ 🤝 Affären klar: {give} mot {want}. ¦ 🤝 Handlen er afsluttet: {give} for {want}.
+🦹 Vous prenez {what} au marchand sans payer. Il s’enfuit en criant qu’on s’en souviendra. ¦ 🦹 Vezmete obchodníkovi {what} bez zaplacení. Utíká a křičí, že se na to nezapomene. ¦ 🦹 Ni tar {what} från handlaren utan att betala. Han springer iväg och ropar att det här ska bli ihågkommet. ¦ 🦹 I tager {what} fra den handlende uden at betale. Han løber og råber, at det ikke vil blive glemt.
+🦹 Le marchand se méfiait : il repart avec sa marchandise, furieux. ¦ 🦹 Obchodník byl ostražitý: odchází se zbožím, rozzuřený. ¦ 🦹 Handlaren var misstänksam: han går med sina varor, rasande. ¦ 🦹 Den handlende var på vagt: han går med sine varer, rasende.
+🚪 Le marchand repart. ¦ 🚪 Obchodník odchází. ¦ 🚪 Handlaren går. ¦ 🚪 Den handlende går.
+🤗 {name} entre dans le bunker ({from}). Une bouche de plus, mais aussi des bras. ¦ 🤗 {name} vstupuje do bunkru ({from}). Jeden hladový krk navíc, ale i ruce k práci. ¦ 🤗 {name} kommer in i bunkern ({from}). En mun till att mätta, men också ett par händer till. ¦ 🤗 {name} kommer ind i bunkeren ({from}). En mund mere at mætte, men også et par hænder mere.
+🤗 {name} entre dans le bunker. Une bouche de plus, mais aussi des bras. ¦ 🤗 {name} vstupuje do bunkru. Jeden hladový krk navíc, ale i ruce k práci. ¦ 🤗 {name} kommer in i bunkern. En mun till att mätta, men också ett par händer till. ¦ 🤗 {name} kommer ind i bunkeren. En mund mere at mætte, men også et par hænder mere.
+🚪 {name} repart seul·e dans la nuit. ¦ 🚪 {name} odchází sám/sama do noci. ¦ 🚪 {name} går ensam ut i natten. ¦ 🚪 {name} går alene ud i natten.
+🫳 Vous donnez ce qu’ils demandent. Ils s’en vont… pour cette fois. ¦ 🫳 Dáte jim, co chtějí. Odcházejí… tentokrát. ¦ 🫳 Ni ger dem det de begär. De går… den här gången. ¦ 🫳 I giver dem det, de beder om. De går… denne gang.
+⚡ Le groupe électrogène est en panne : le bunker est dans le noir. Il faut le réparer. ¦ ⚡ Agregát se porouchal: bunkr je ve tmě. Je třeba ho opravit. ¦ ⚡ Generatorn har gått sönder: bunkern är mörk. Den måste lagas. ¦ ⚡ Generatoren er gået i stykker: bunkeren er mørk. Den skal repareres.
+⚡ Plus d’essence : le groupe électrogène s’arrête, le bunker est dans le noir. ¦ ⚡ Došel benzín: agregát se zastavil, bunkr je ve tmě. ¦ ⚡ Bensinen är slut: generatorn stannar, bunkern är mörk. ¦ ⚡ Benzinen er sluppet op: generatoren stopper, bunkeren er mørk.
+⚡ Groupe électrogène éteint. ¦ ⚡ Agregát vypnut. ¦ ⚡ Generatorn avstängd. ¦ ⚡ Generatoren slukket.
+⚡ Le courant revient. ¦ ⚡ Proud je zpět. ¦ ⚡ Strömmen är tillbaka. ¦ ⚡ Strømmen er tilbage.
+{msg} (message reçu en retard) ¦ {msg} (zpráva přišla pozdě) ¦ {msg} (meddelandet kom sent) ¦ {msg} (beskeden kom for sent)
+📘 Bien joué ! Étape {a} / {b} — {step} ¦ 📘 Dobře! Krok {a} / {b} — {step} ¦ 📘 Bra jobbat! Steg {a} / {b} — {step} ¦ 📘 Godt klaret! Trin {a} / {b} — {step}
+📘 Tutoriel terminé : tu sais tout ce qu’il faut. Bonne chance ! ¦ 📘 Návod dokončen: víš vše potřebné. Hodně štěstí! ¦ 📘 Handledningen är klar: du vet allt du behöver. Lycka till! ¦ 📘 Vejledningen er færdig: du ved alt, hvad du skal. Held og lykke!
+⛏️ Un nouvel étage est creusé : étage −{n}. ¦ ⛏️ Vykopáno nové patro: patro −{n}. ¦ ⛏️ En ny våning är grävd: våning −{n}. ¦ ⛏️ En ny etage er gravet: etage −{n}.
+✅ {name} est réparé. ¦ ✅ {name} je opraveno. ¦ ✅ {name} är lagad. ¦ ✅ {name} er repareret.
+⬆️ {name} passe au niveau {n}. ¦ ⬆️ {name} postupuje na úroveň {n}. ¦ ⬆️ {name} når nivå {n}. ¦ ⬆️ {name} når niveau {n}.
+✅ {name} est prêt. ¦ ✅ {name} je hotovo. ¦ ✅ {name} är klar. ¦ ✅ {name} er klar.
+🗺️ Tous les lieux de la ville sont marqués sur la carte. ¦ 🗺️ Všechna místa ve městě jsou označena na mapě. ¦ 🗺️ Alla platser i staden är markerade på kartan. ¦ 🗺️ Alle steder i byen er markeret på kortet.
+☠️ Plus personne en vie. Le bunker a tenu {n} jours. ¦ ☠️ Už nikdo nežije. Bunkr vydržel {n} dní. ¦ ☠️ Ingen är längre vid liv. Bunkern höll ut i {n} dagar. ¦ ☠️ Ingen er længere i live. Bunkeren holdt ud i {n} dage.
+☠️ Plus personne en vie. Le bunker a tenu moins d’un jour. ¦ ☠️ Už nikdo nežije. Bunkr vydržel méně než den. ¦ ☠️ Ingen är längre vid liv. Bunkern höll ut mindre än en dag. ¦ ☠️ Ingen er længere i live. Bunkeren holdt ud mindre end en dag.
+🌤️ La pluie s’arrête. ¦ 🌤️ Přestává pršet. ¦ 🌤️ Regnet upphör. ¦ 🌤️ Regnen holder op.
+🌧️ Il pleut : les bidons du toit et les cuves se remplissent (eau à filtrer). ¦ 🌧️ Prší: kanystry na střeše a nádrže se plní (voda k filtrování). ¦ 🌧️ Det regnar: dunkarna på taket och tankarna fylls (vatten att filtrera). ¦ 🌧️ Det regner: dunkene på taget og tankene fyldes (vand, der skal filtreres).
+🌧️ Il pleut : les bidons du toit se remplissent (eau à filtrer). ¦ 🌧️ Prší: kanystry na střeše se plní (voda k filtrování). ¦ 🌧️ Det regnar: dunkarna på taket fylls (vatten att filtrera). ¦ 🌧️ Det regner: dunkene på taget fyldes (vand, der skal filtreres).
+⚗️ Le filtre est nettoyé (1 tissu) : il marche de nouveau. ¦ ⚗️ Filtr je vyčištěn (1 látka): znovu funguje. ¦ ⚗️ Filtret är rengjort (1 tyg): det fungerar igen. ¦ ⚗️ Filteret er renset (1 stof): det virker igen.
+⚗️ Le filtre est encrassé : il faut 1 tissu pour le nettoyer. ¦ ⚗️ Filtr je zanesený: k vyčištění je potřeba 1 látka. ¦ ⚗️ Filtret är igensatt: det behövs 1 tyg för att rengöra det. ¦ ⚗️ Filteret er tilstoppet: der skal 1 stof til at rense det.
+🌀 L’air devient lourd : le conduit d’aération est encrassé. Quelqu’un de libre ira le nettoyer. ¦ 🌀 Vzduch houstne: větrací potrubí je zanesené. Někdo volný ho půjde vyčistit. ¦ 🌀 Luften blir tung: ventilationskanalen är igensatt. Någon ledig går och rensar den. ¦ 🌀 Luften bliver tung: ventilationskanalen er tilstoppet. En ledig går ud og renser den.
+❄️ Il fait froid dans le bunker : plus de bois pour le poêle. On dort mal, le moral baisse. ¦ ❄️ V bunkru je zima: došlo dřevo na kamna. Špatně se spí, nálada klesá. ¦ ❄️ Det är kallt i bunkern: veden till kaminen är slut. Man sover dåligt, moralen sjunker. ¦ ❄️ Det er koldt i bunkeren: brændet til ovnen er sluppet op. Man sover dårligt, moralen falder.
+❄️ Il fait froid dans le bunker : il faudrait un poêle à bois. On dort mal, le moral baisse. ¦ ❄️ V bunkru je zima: chtělo by to kamna na dřevo. Špatně se spí, nálada klesá. ¦ ❄️ Det är kallt i bunkern: det behövs en vedkamin. Man sover dåligt, moralen sjunker. ¦ ❄️ Det er koldt i bunkeren: der mangler en brændeovn. Man sover dårligt, moralen falder.
+Pensez au bois pour le poêle. ¦ Myslete na dřevo do kamen. ¦ Tänk på ved till kaminen. ¦ Tænk på brænde til ovnen.
+Il pleuvra moins : gardez de l’eau. ¦ Bude méně pršet: šetřete vodou. ¦ Det kommer att regna mindre: spara vatten. ¦ Det vil regne mindre: gem noget vand.
+🚪 Personne n’a répondu : le marchand est reparti. ¦ 🚪 Nikdo neodpověděl: obchodník odešel. ¦ 🚪 Ingen svarade: handlaren har gått. ¦ 🚪 Ingen svarede: den handlende er gået.
+🚪 Personne n’a répondu : {name} est reparti·e. ¦ 🚪 Nikdo neodpověděl: {name} odešel/odešla. ¦ 🚪 Ingen svarade: {name} har gått. ¦ 🚪 Ingen svarede: {name} er gået.
+🐀 Faute de mieux, on fait cuire des rats, comme tout Paris cet hiver-là (+2 rations). ¦ 🐀 Z nouze se vaří krysy, jako celá Paříž té zimy (+2 dávky). ¦ 🐀 I brist på bättre lagar man råttor, som hela Paris den vintern (+2 ransoner). ¦ 🐀 I mangel af bedre koger man rotter, som hele Paris den vinter (+2 rationer).
+🏆 {scen} : vous avez tenu {n} jours ! On peut continuer aussi longtemps qu’on veut. ¦ 🏆 {scen}: vydrželi jste {n} dní! Můžete pokračovat, jak dlouho chcete. ¦ 🏆 {scen}: ni höll ut i {n} dagar! Man kan fortsätta så länge man vill. ¦ 🏆 {scen}: I holdt ud i {n} dage! Man kan fortsætte, så længe man vil.
+⚕️ {name} a de la fièvre et des bubons : la peste est entrée dans l’abri. ¦ ⚕️ {name} má horečku a dýmějí: mor pronikl do úkrytu. ¦ ⚕️ {name} har feber och bölder: pesten har tagit sig in i skyddet. ¦ ⚕️ {name} har feber og bylder: pesten er kommet ind i beskyttelsesrummet.
+🦠 {name} a attrapé la fièvre qui court. ¦ 🦠 {name} chytil(a) horečku, která obchází. ¦ 🦠 {name} har fått febern som går runt. ¦ 🦠 {name} har fået feberen, der går rundt.
+J’ai de la fièvre. Pourvu que ce ne soit rien. ¦ Mám horečku. Snad to nic není. ¦ Jag har feber. Hoppas det inte är något. ¦ Jeg har feber. Forhåbentlig er det ingenting.
+{ico} {name} n’a rien eu à manger aujourd’hui. ¦ {ico} {name} dnes nic nejedl(a). ¦ {ico} {name} har inte fått något att äta i dag. ¦ {ico} {name} har ikke fået noget at spise i dag.
+{ico} {name} est parti·e chercher à manger ailleurs… ¦ {ico} {name} odešel/odešla hledat jídlo jinam… ¦ {ico} {name} har gett sig av för att hitta mat på annat håll… ¦ {ico} {name} er gået for at finde mad et andet sted…
+des poules ¦ slepice ¦ några hönor ¦ nogle høns
+un·e {pet} ¦ {pet} ¦ en {pet} ¦ en {pet}
+{ico} {by} ramène {what} : {name} ! ({desc} ; mange {food} par jour) ¦ {ico} {by} přivádí {what}: {name}! ({desc}; sní {food} denně) ¦ {ico} {by} kommer med {what}: {name}! ({desc}; äter {food} om dagen) ¦ {ico} {by} kommer med {what}: {name}! ({desc}; spiser {food} om dagen)
+{ico} Voici {what} : {name} ! ({desc} ; mange {food} par jour) ¦ {ico} Tady je {what}: {name}! ({desc}; sní {food} denně) ¦ {ico} Här är {what}: {name}! ({desc}; äter {food} om dagen) ¦ {ico} Her er {what}: {name}! ({desc}; spiser {food} om dagen)
+J’ai ramené {name}, {what}. Tout le monde l’adore déjà. ¦ Přivedl(a) jsem {name}, {what}. Všichni to už zbožňují. ¦ Jag tog med {name}, {what}. Alla älskar redan djuret. ¦ Jeg tog {name} med, {what}. Alle elsker allerede dyret.
+nos poules ¦ naše slepice ¦ våra hönor ¦ vores høns
+🐀 Les rats ont mangé {a} rations et {b} plantes cette nuit. ¦ 🐀 Krysy v noci snědly {a} dávek a {b} rostlin. ¦ 🐀 Råttorna åt {a} ransoner och {b} växter i natt. ¦ 🐀 Rotterne spiste {a} rationer og {b} planter i nat.
+🐀 Les rats ont mangé {a} rations cette nuit. ¦ 🐀 Krysy v noci snědly {a} dávek. ¦ 🐀 Råttorna åt {a} ransoner i natt. ¦ 🐀 Rotterne spiste {a} rationer i nat.
+Des 🪤 pièges, un 🐈 chat ou des 🫙 bocaux les arrêteraient. ¦ 🪤 Pasti, 🐈 kočka nebo 🫙 zavařovačky by je zastavily. ¦ 🪤 Fällor, en 🐈 katt eller 🫙 burkar skulle stoppa dem. ¦ 🪤 Fælder, en 🐈 kat eller 🫙 glas ville stoppe dem.
+🪳 Les cafards et les rats envahissent le bunker : l’hygiène en pâtit, la fièvre guette. ¦ 🪳 Švábi a krysy zaplavují bunkr: hygiena trpí, hrozí horečka. ¦ 🪳 Kackerlackor och råttor tar över bunkern: hygienen lider, febern lurar. ¦ 🪳 Kakerlakker og rotter overtager bunkeren: hygiejnen lider, feberen lurer.
+🤒 {name} a de la fièvre (les rats…). ¦ 🤒 {name} má horečku (krysy…). ¦ 🤒 {name} har feber (råttorna…). ¦ 🤒 {name} har feber (rotterne…).
+🔥 Le feu a pris à l’étage −{f} ({name}) ! ¦ 🔥 Hoří v patře −{f} ({name})! ¦ 🔥 Det brinner på våning −{f} ({name})! ¦ 🔥 Det brænder på etage −{f} ({name})!
+Tout le monde jette de l’eau. Un 🧯 extincteur l’éteindrait tout de suite. ¦ Všichni lijí vodu. 🧯 Hasicí přístroj by ho hned uhasil. ¦ Alla kastar vatten. En 🧯 brandsläckare skulle släcka den direkt. ¦ Alle kaster vand. En 🧯 ildslukker ville slukke den med det samme.
+Le feu a pris au bunker. J’ai cru qu’on allait tous y passer. ¦ V bunkru hořelo. Myslel(a) jsem, že tam všichni zůstaneme. ¦ Det brann i bunkern. Jag trodde att vi alla skulle stryka med. ¦ Det brændte i bunkeren. Jeg troede, vi alle skulle omkomme.
+🧯 L’extincteur éteint le feu. Ouf ! ¦ 🧯 Hasicí přístroj oheň uhasil. Uf! ¦ 🧯 Brandsläckaren släcker elden. Puh! ¦ 🧯 Ildslukkeren slukker ilden. Puha!
+🔥 Le feu est éteint. Il faut aérer et réparer. ¦ 🔥 Oheň je uhašen. Je třeba vyvětrat a opravit. ¦ 🔥 Elden är släckt. Dags att vädra och laga. ¦ 🔥 Ilden er slukket. Der skal luftes ud og repareres.
+🔥 Le feu s’est éteint de lui-même, après avoir tout noirci. ¦ 🔥 Oheň uhasl sám, když vše začernil. ¦ 🔥 Elden slocknade av sig själv, efter att ha svärtat allt. ¦ 🔥 Ilden gik ud af sig selv efter at have sværtet alt.
+🧒 {name} a {n} ans : il ou elle aide déjà un peu (pas encore en ville). ¦ 🧒 {name} je {n} let: už trochu pomáhá (do města ještě ne). ¦ 🧒 {name} är {n} år: hjälper redan till lite (inte i staden än). ¦ 🧒 {name} er {n} år: hjælper allerede lidt til (ikke i byen endnu).
+🧑 {name} a {n} ans : un·e adulte, qui peut partir en ville. ¦ 🧑 {name} je {n} let: dospělý/á, může chodit do města. ¦ 🧑 {name} är {n} år: vuxen, kan ge sig ut i staden. ¦ 🧑 {name} er {n} år: voksen og kan tage ind til byen.
+Je suis grand·e maintenant. Je veux aider dehors. ¦ Už jsem velký/á. Chci pomáhat venku. ¦ Jag är stor nu. Jag vill hjälpa till ute. ¦ Jeg er stor nu. Jeg vil hjælpe udenfor.
+👴 {name} a 65 ans : il ou elle travaille un peu moins vite, mais en sait long. ¦ 👴 {name} je 65 let: pracuje trochu pomaleji, ale ví toho hodně. ¦ 👴 {name} är 65 år: arbetar lite långsammare, men kan mycket. ¦ 👴 {name} er 65 år: arbejder lidt langsommere, men ved meget.
+🕯️ {name} s’éteint paisiblement, à {n} ans. ¦ 🕯️ {name} pokojně odchází ve věku {n} let. ¦ 🕯️ {name} somnar stilla in, {n} år gammal. ¦ 🕯️ {name} sover stille ind, {n} år gammel.
+Retrouver {doc} de {name} (né·e en {y} à {place}) ¦ Najít {doc} osoby {name} (nar. {y} v {place}) ¦ Hitta {doc} för {name} (född {y} i {place}) ¦ Find {doc} for {name} (født i {y} i {place})
+Retrouver {doc} de {name} (né·e en {y}) ¦ Najít {doc} osoby {name} (nar. {y}) ¦ Hitta {doc} för {name} (född {y}) ¦ Find {doc} for {name} (født i {y})
+Retrouver {doc} de {name} ¦ Najít {doc} osoby {name} ¦ Hitta {doc} för {name} ¦ Find {doc} for {name}
+Impossible ici. ¦ Tady to nejde. ¦ Inte möjligt här. ¦ Ikke muligt her.
+Pas à cette époque. ¦ V této době ne. ¦ Inte i den här tiden. ¦ Ikke i denne tid.
+{n} décorations au plus par étage. ¦ Nejvýš {n} ozdob na patro. ¦ Högst {n} dekorationer per våning. ¦ Højst {n} dekorationer pr. etage.
+🎨 {ico} {deco} de {name} à l’étage −{f}. ¦ 🎨 {ico} {deco} osoby {name} v patře −{f}. ¦ 🎨 {ico} {deco} av {name} på våning −{f}. ¦ 🎨 {ico} {deco} af {name} på etage −{f}.
+🎨 {ico} {deco} à l’étage −{f}. ¦ 🎨 {ico} {deco} v patře −{f}. ¦ 🎨 {ico} {deco} på våning −{f}. ¦ 🎨 {ico} {deco} på etage −{f}.
+{ico} {name} : c’est fini. ¦ {ico} {name}: je konec. ¦ {ico} {name}: det är över. ¦ {ico} {name}: det er slut.
+{ico} {name} ! {what}. ¦ {ico} {name}! {what}. ¦ {ico} {name}! {what}. ¦ {ico} {name}! {what}.
+🩹 {name} est blessé·e par une chute de gravats. ¦ 🩹 {name} je zraněn(a) padající sutí. ¦ 🩹 {name} skadas av nedfallande bråte. ¦ 🩹 {name} er såret af nedfaldne murbrokker.
+{ico} {name} aujourd’hui. {feel} ¦ {ico} {name} dnes. {feel} ¦ {ico} {name} i dag. {feel} ¦ {ico} {name} i dag. {feel}
+📯 Le crieur annonce le marché : {n} offres aujourd’hui (onglet Crieur). ¦ 📯 Vyvolávač ohlašuje trh: dnes {n} nabídek (karta Vyvolávač). ¦ 📯 Utroparen ropar ut marknaden: {n} erbjudanden i dag (fliken Utropare). ¦ 📯 Byudråberen bekendtgør markedet: {n} tilbud i dag (fanen Byudråber).
+📻 Le marché de la radio : {n} offres aujourd’hui (onglet Radio). ¦ 📻 Trh přes rádio: dnes {n} nabídek (karta Rádio). ¦ 📻 Radiomarknaden: {n} erbjudanden i dag (fliken Radio). ¦ 📻 Radiomarkedet: {n} tilbud i dag (fanen Radio).
+🚚 Un messager de {who} apporte {what}. ¦ 🚚 Posel od {who} přináší {what}. ¦ 🚚 En budbärare från {who} kommer med {what}. ¦ 🚚 Et bud fra {who} kommer med {what}.
+😠 Le messager de {who} n’est jamais venu… On s’est fait avoir. ¦ 😠 Posel od {who} nikdy nepřišel… Napálili nás. ¦ 😠 Budbäraren från {who} kom aldrig… Vi har blivit lurade. ¦ 😠 Buddet fra {who} kom aldrig… Vi er blevet snydt.
+Il faut la radio et de l’électricité. ¦ Je potřeba rádio a elektřina. ¦ Radion och el behövs. ¦ Der skal radio og strøm til.
+Cette offre n’existe plus. ¦ Tato nabídka už neexistuje. ¦ Erbjudandet finns inte längre. ¦ Tilbuddet findes ikke længere.
+{ico} Marché conclu avec {who} : {want} envoyés ; {give} arriveront par messager. ¦ {ico} Obchod s {who} uzavřen: {want} odesláno; {give} přijde po poslovi. ¦ {ico} Affär klar med {who}: {want} skickat; {give} kommer med budbärare. ¦ {ico} Handel afsluttet med {who}: {want} sendt; {give} kommer med bud.
+🤝 {a} et {b} sont devenu·e·s ami·e·s. ¦ 🤝 {a} a {b} se spřátelili. ¦ 🤝 {a} och {b} har blivit vänner. ¦ 🤝 {a} og {b} er blevet venner.
+{name} est devenu·e un·e vrai·e ami·e. ¦ {name} je teď opravdový přítel. ¦ {name} har blivit en riktig vän. ¦ {name} er blevet en rigtig ven.
+😠 {a} et {b} ne se supportent plus. ¦ 😠 {a} a {b} se už nesnesou. ¦ 😠 {a} och {b} står inte ut med varandra längre. ¦ 😠 {a} og {b} kan ikke længere udstå hinanden.
+Je ne supporte plus {name}. ¦ Už nesnesu {name}. ¦ Jag står inte ut med {name} längre. ¦ Jeg kan ikke længere udstå {name}.
+📈 {name} progresse : {ico} {skill} ×{n}. ¦ 📈 {name} se zlepšuje: {ico} {skill} ×{n}. ¦ 📈 {name} blir bättre: {ico} {skill} ×{n}. ¦ 📈 {name} bliver bedre: {ico} {skill} ×{n}.
+J’ai fait des progrès pour {skill} : ça vient tout seul, maintenant. ¦ Zlepšil(a) jsem se v: {skill}: teď to jde samo. ¦ Jag har blivit bättre på {skill}: det går av sig självt nu. ¦ Jeg er blevet bedre til {skill}: det kommer af sig selv nu.
+Il fait froid, heureusement il y a les vêtements chauds. ¦ Je zima, naštěstí máme teplé oblečení. ¦ Det är kallt, tur att vi har varma kläder. ¦ Det er koldt, heldigvis har vi varmt tøj.
+Il fait si froid… ¦ Je taková zima… ¦ Det är så kallt… ¦ Det er så koldt…
+Je suis malade. ¦ Jsem nemocný/á. ¦ Jag är sjuk. ¦ Jeg er syg.
+Ça ne va pas fort côté {what}. ¦ Se {what} to moc nejde. ¦ Det går inte så bra med {what}. ¦ Det går ikke så godt med {what}.
+{ico} {name} : il manque {what} pour fonctionner. ¦ {ico} {name}: k chodu chybí {what}. ¦ {ico} {name}: det saknas {what} för att det ska fungera. ¦ {ico} {name}: der mangler {what} for at virke.
+raconte la recette « {title} » ¦ vypráví recept „{title}“ ¦ berättar receptet ”{title}” ¦ fortæller opskriften »{title}«
+chante « {title} » ¦ zpívá „{title}“ ¦ sjunger ”{title}” ¦ synger »{title}«
+raconte le souvenir « {title} » ¦ vypráví vzpomínku „{title}“ ¦ berättar minnet ”{title}” ¦ fortæller mindet »{title}«
+raconte {tale} ¦ vypráví {tale} ¦ berättar {tale} ¦ fortæller {tale}
+📖 Le soir, {name} {what} : « {quote} ». Le moral remonte. ¦ 📖 Večer {name} {what}: „{quote}“. Nálada se zvedá. ¦ 📖 På kvällen {what} {name}: ”{quote}”. Moralen stiger. ¦ 📖 Om aftenen {what} {name}: »{quote}«. Moralen stiger.
+📖 Le soir, {name} {what}. Le moral remonte. ¦ 📖 Večer {name} {what}. Nálada se zvedá. ¦ 📖 På kvällen {what} {name}. Moralen stiger. ¦ 📖 Om aftenen {what} {name}. Moralen stiger.
+👵 {a} apprend à {b} à {skill}. ¦ 👵 {a} učí {b}: {skill}. ¦ 👵 {a} lär {b} att {skill}. ¦ 👵 {a} lærer {b} at {skill}.
+💢 {a} et {b} se disputent à table. ¦ 💢 {a} a {b} se hádají u stolu. ¦ 💢 {a} och {b} grälar vid bordet. ¦ 💢 {a} og {b} skændes ved bordet.
+⚡ {a} et {b} se disputent encore (de vieilles histoires de famille). ¦ ⚡ {a} a {b} se zase hádají (staré rodinné historky). ¦ ⚡ {a} och {b} grälar igen (gamla släktgräl). ¦ ⚡ {a} og {b} skændes igen (gamle familiehistorier).
+🤰 Une bonne nouvelle : {m} attend un bébé de {f}. Naissance dans six jours. ¦ 🤰 Dobrá zpráva: {m} čeká dítě s {f}. Narození za šest dní. ¦ 🤰 Goda nyheter: {m} väntar barn med {f}. Födsel om sex dagar. ¦ 🤰 Gode nyheder: {m} venter barn med {f}. Fødsel om seks dage.
+{name} est né·e ! Le plus beau jour sous terre. ¦ {name} se narodil(a)! Nejkrásnější den pod zemí. ¦ {name} är född! Den finaste dagen under jorden. ¦ {name} er født! Den smukkeste dag under jorden.
+👶 {name} est né·e au bunker ! {m} et {f} sont aux anges. ¦ 👶 {name} se narodil(a) v bunkru! {m} a {f} jsou v sedmém nebi. ¦ 👶 {name} har fötts i bunkern! {m} och {f} är i sjunde himlen. ¦ 👶 {name} er født i bunkeren! {m} og {f} er i den syvende himmel.
+👶 {name} est né·e au bunker ! {m} sont aux anges. ¦ 👶 {name} se narodil(a) v bunkru! {m} je v sedmém nebi. ¦ 👶 {name} har fötts i bunkern! {m} är i sjunde himlen. ¦ 👶 {name} er født i bunkeren! {m} er i den syvende himmel.
+{name} nous a quitté·e·s. Je n’arrive pas à y croire. ¦ {name} nás opustil(a). Nemůžu tomu uvěřit. ¦ {name} har lämnat oss. Jag kan inte tro det. ¦ {name} har forladt os. Jeg kan ikke tro det.
+📻 Plus de nouvelles de {name}… ¦ 📻 Od {name} už žádné zprávy… ¦ 📻 Inga fler nyheter från {name}… ¦ 📻 Ikke flere nyheder fra {name}…
+📻 Le convoi annonce une terrible nouvelle : {name} est mort·e en route. ¦ 📻 Konvoj hlásí hroznou zprávu: {name} zemřel(a) cestou. ¦ 📻 Konvojen meddelar en hemsk nyhet: {name} dog på vägen. ¦ 📻 Konvojen melder en frygtelig nyhed: {name} døde undervejs.
+☠️ {name} est mort·e. ¦ ☠️ {name} zemřel(a). ¦ ☠️ {name} har dött. ¦ ☠️ {name} er død.
+😌 {name} est guéri·e de sa fièvre. ¦ 😌 {name} se uzdravil(a) z horečky. ¦ 😌 {name} har tillfrisknat från febern. ¦ 😌 {name} er kommet sig over feberen.
+😌 {name} est guéri·e de sa blessure. ¦ 😌 Zranění osoby {name} se zahojilo. ¦ 😌 {name}s sår har läkt. ¦ 😌 {name}s sår er helet.
+💊 {name} prend des médicaments. ¦ 💊 {name} bere léky. ¦ 💊 {name} tar mediciner. ¦ 💊 {name} tager medicin.
+💊 {name} prend des médicaments contre sa fièvre. ¦ 💊 {name} bere léky na horečku. ¦ 💊 {name} tar mediciner mot febern. ¦ 💊 {name} tager medicin mod feberen.
+💊 {name} prend des médicaments contre sa blessure. ¦ 💊 {name} bere léky na zranění. ¦ 💊 {name} tar mediciner för såret. ¦ 💊 {name} tager medicin for såret.
+😫 {name} craque et renverse 3 rations. Il faudrait lui remonter le moral (jeux, musique, histoires). ¦ 😫 {name} se zhroutí a rozlije 3 dávky. Chtělo by to zvednout náladu (hry, hudba, příběhy). ¦ 😫 {name} brister och spiller ut 3 ransoner. Moralen behöver höjas (spel, musik, berättelser). ¦ 😫 {name} bryder sammen og spilder 3 rationer. Moralen skal løftes (spil, musik, historier).
+😞 {name} n’a plus le moral et refuse de travailler. ¦ 😞 {name} ztratil(a) chuť a odmítá pracovat. ¦ 😞 {name} har tappat modet och vägrar arbeta. ¦ 😞 {name} har mistet modet og nægter at arbejde.
+🤒 {name} a bu de l’eau de pluie sans la filtrer : la fièvre monte. (Un filtre à eau éviterait ça.) ¦ 🤒 {name} pil(a) nefiltrovanou dešťovou vodu: horečka stoupá. (Vodní filtr by tomu zabránil.) ¦ 🤒 {name} drack ofiltrerat regnvatten: febern stiger. (Ett vattenfilter skulle förhindra det.) ¦ 🤒 {name} drak ufiltreret regnvand: feberen stiger. (Et vandfilter ville forhindre det.)
+🚽 Pas de toilettes : {name} se soulage dans un coin… Il faudrait en construire. ¦ 🚽 Žádný záchod: {name} si ulevuje v koutě… Chtělo by to ho postavit. ¦ 🚽 Ingen toalett: {name} uträttar sina behov i ett hörn… En borde byggas. ¦ 🚽 Intet toilet: {name} forretter sin nødtørft i et hjørne… Der burde bygges et.
+🌀 {name} nettoie le conduit d’aération : on respire mieux. ¦ 🌀 {name} čistí větrací potrubí: dýchá se lépe. ¦ 🌀 {name} rensar ventilationskanalen: det blir lättare att andas. ¦ 🌀 {name} renser ventilationskanalen: det er lettere at trække vejret.
+📻 {name} : « Je suis devant {place}. Les volets sont encore là… J’entre. » ¦ 📻 {name}: „Stojím před {place}. Okenice tu ještě jsou… Jdu dovnitř.“ ¦ 📻 {name}: ”Jag står framför {place}. Fönsterluckorna finns kvar… Jag går in.” ¦ 📻 {name}: »Jeg står foran {place}. Skodderne er der endnu… Jeg går ind.«
+la maison où est né·e ¦ rodný dům osoby ¦ födelsehemmet för ¦ fødehjemmet for
+📻 {name} : « Je suis à {place}, je fouille. » ¦ 📻 {name}: „Jsem v {place}, prohledávám.“ ¦ 📻 {name}: ”Jag är vid {place}, letar.” ¦ 📻 {name}: »Jeg er ved {place}, leder.«
+{n} à démonter ({list}) ¦ {n} k rozebrání ({list}) ¦ {n} att plocka isär ({list}) ¦ {n} at skille ad ({list})
+le plan « {name} » ¦ plán „{name}“ ¦ ritningen ”{name}” ¦ tegningen »{name}«
+une lettre de la famille ¦ rodinný dopis ¦ ett släktbrev ¦ et familiebrev
+« {title} », un objet de la famille ¦ „{title}“, rodinná památka ¦ ”{title}”, ett släktklenod ¦ »{title}«, et arvestykke
+des poules qui me suivent ¦ slepice, které jdou za mnou ¦ några hönor som följer efter mig ¦ nogle høns, der følger efter mig
+un·e {pet} qui me suit ¦ {pet}, který/á jde za mnou ¦ en {pet} som följer efter mig ¦ en {pet}, der følger efter mig
+{doc} de {name} ¦ {doc} osoby {name} ¦ {doc} för {name} ¦ {doc} for {name}
+J’ai trouvé {list}. ¦ Našel/našla jsem {list}. ¦ Jag hittade {list}. ¦ Jeg fandt {list}.
+Rien du tout, l’endroit est vide. ¦ Vůbec nic, místo je prázdné. ¦ Ingenting alls, platsen är tom. ¦ Slet ingenting, stedet er tomt.
+Je continue vers {place}. ¦ Pokračuji do {place}. ¦ Jag fortsätter mot {place}. ¦ Jeg fortsætter mod {place}.
+Mon sac est plein : je rentre. ¦ Batoh je plný: vracím se. ¦ Säcken är full: jag kommer hem. ¦ Sækken er fuld: jeg kommer hjem.
+Je rentre. ¦ Vracím se. ¦ Jag kommer hem. ¦ Jeg kommer hjem.
+📻 {name} : « {speech} » ¦ 📻 {name}: „{speech}“ ¦ 📻 {name}: ”{speech}” ¦ 📻 {name}: »{speech}«
+Je me suis fait mal en route… ¦ Cestou jsem se zranil(a)… ¦ Jag skadade mig på vägen… ¦ Jeg kom til skade undervejs…
+plan « {name} » ¦ plán „{name}“ ¦ ritningen ”{name}” ¦ tegningen »{name}«
+🏠 {name} est rentré·e. ¦ 🏠 {name} se vrátil(a). ¦ 🏠 {name} är tillbaka. ¦ 🏠 {name} er tilbage.
+♻️ {n} à démonter. ¦ ♻️ {n} k rozebrání. ¦ ♻️ {n} att plocka isär. ¦ ♻️ {n} at skille ad.
+Nouveau : {list}. ¦ Nové: {list}. ¦ Nytt: {list}. ¦ Nyt: {list}.
+Plus de place pour {list} : laissé dehors (construis des étagères ou du stockage). ¦ Není místo pro {list}: zůstalo venku (postav police nebo sklad). ¦ Ingen plats för {list}: lämnat ute (bygg hyllor eller förvaring). ¦ Ikke plads til {list}: efterladt udenfor (byg hylder eller opbevaring).
+lettre « {title} » ¦ dopis „{title}“ ¦ brevet ”{title}” ¦ brevet »{title}«
+✉️ {name} rapporte une lettre retrouvée : « {title} », de {from} à {to}. Tout le monde veut la voir. ¦ ✉️ {name} přináší nalezený dopis: „{title}“, od {from} pro {to}. Všichni ho chtějí vidět. ¦ ✉️ {name} kommer med ett hittat brev: ”{title}”, från {from} till {to}. Alla vill se det. ¦ ✉️ {name} kommer med et fundet brev: »{title}«, fra {from} til {to}. Alle vil se det.
+✉️ {name} rapporte une lettre retrouvée : « {title} », de {from}. Tout le monde veut la voir. ¦ ✉️ {name} přináší nalezený dopis: „{title}“, od {from}. Všichni ho chtějí vidět. ¦ ✉️ {name} kommer med ett hittat brev: ”{title}”, från {from}. Alla vill se det. ¦ ✉️ {name} kommer med et fundet brev: »{title}«, fra {from}. Alle vil se det.
+✉️ {name} rapporte une lettre retrouvée : « {title} » à {to}. Tout le monde veut la voir. ¦ ✉️ {name} přináší nalezený dopis: „{title}“ pro {to}. Všichni ho chtějí vidět. ¦ ✉️ {name} kommer med ett hittat brev: ”{title}” till {to}. Alla vill se det. ¦ ✉️ {name} kommer med et fundet brev: »{title}« til {to}. Alle vil se det.
+✉️ {name} rapporte une lettre retrouvée : « {title} ». Tout le monde veut la voir. ¦ ✉️ {name} přináší nalezený dopis: „{title}“. Všichni ho chtějí vidět. ¦ ✉️ {name} kommer med ett hittat brev: ”{title}”. Alla vill se det. ¦ ✉️ {name} kommer med et fundet brev: »{title}«. Alle vil se det.
+🩹 {name} est blessé·e : il faut la soigner (médicaments, ou plantes pour un remède). ¦ 🩹 {name} je zraněn(a): je třeba ošetřit (léky, nebo rostliny na lék). ¦ 🩹 {name} är skadad: såret måste vårdas (mediciner, eller växter till ett botemedel). ¦ 🩹 {name} er såret: såret skal plejes (medicin, eller planter til et lægemiddel).
+🦠 {name} rentre avec la fièvre qui court en ville. ¦ 🦠 {name} se vrací s horečkou, která obchází městem. ¦ 🦠 {name} kommer hem med febern som går runt i staden. ¦ 🦠 {name} kommer hjem med feberen, der går rundt i byen.
+objet de famille « {title} » ¦ rodinná památka „{title}“ ¦ släktklenodet ”{title}” ¦ arvestykket »{title}«
+🧳 {name} rapporte « {title} », un objet de la famille retrouvé dans les ruines ! Il rejoint le coffre ({what}). ¦ 🧳 {name} přináší „{title}“, rodinnou památku nalezenou v troskách! Jde do truhly ({what}). ¦ 🧳 {name} kommer med ”{title}”, ett släktklenod funnet i ruinerna! Det läggs i kistan ({what}). ¦ 🧳 {name} kommer med »{title}«, et arvestykke fundet i ruinerne! Det kommer i kisten ({what}).
+{ico} {name} s’est blessé·e à la patte : deux jours de repos. ¦ {ico} {name} si poranil(a) tlapku: dva dny odpočinku. ¦ {ico} {name} har skadat en tass: två dagars vila. ¦ {ico} {name} har skadet en pote: to dages hvile.
+{who}, né·e en {y} à {place} ¦ {who}, nar. {y} v {place} ¦ {who}, född {y} i {place} ¦ {who}, født i {y} i {place}
+{who}, né·e en {y} ¦ {who}, nar. {y} ¦ {who}, född {y} ¦ {who}, født i {y}
+{who} à {place} ¦ {who} v {place} ¦ {who} i {place} ¦ {who} i {place}
+{who} ({occ}) ¦ {who} ({occ}) ¦ {who} ({occ}) ¦ {who} ({occ})
+📜 Mission accomplie : {name} rapporte {doc} de {anc} ! {txt} (+{reward}) ¦ 📜 Mise splněna: {name} přináší {doc} osoby {anc}! {txt} (+{reward}) ¦ 📜 Uppdraget klart: {name} kommer med {doc} för {anc}! {txt} (+{reward}) ¦ 📜 Mission fuldført: {name} kommer med {doc} for {anc}! {txt} (+{reward})
+J’ai retrouvé {doc} de {anc}. Toute la famille l’a lu et relu. ¦ Našel/našla jsem {doc} osoby {anc}. Celá rodina to četla znovu a znovu. ¦ Jag hittade {doc} för {anc}. Hela familjen har läst det om och om igen. ¦ Jeg fandt {doc} for {anc}. Hele familien har læst det igen og igen.
+Je suis allé·e à {places}. ¦ Byl(a) jsem v {places}. ¦ Jag var i {places}. ¦ Jeg var i {places}.
+puis à ¦ pak v ¦ sedan i ¦ derefter i
+Je suis allé·e en ville. ¦ Byl(a) jsem ve městě. ¦ Jag var i staden. ¦ Jeg var i byen.
+J’ai rapporté {what}. ¦ Přinesl(a) jsem {what}. ¦ Jag tog med {what}. ¦ Jeg tog {what} med.
+Rien de bien utile. ¦ Nic moc užitečného. ¦ Inget särskilt användbart. ¦ Intet særlig nyttigt.
+Et surtout : « {title} » ! ¦ A hlavně: „{title}“! ¦ Och framför allt: ”{title}”! ¦ Og frem for alt: »{title}«!
+Je me suis blessé·e. ¦ Zranil(a) jsem se. ¦ Jag skadade mig. ¦ Jeg kom til skade.
+Il faut d’abord construire le chariot de mine. ¦ Nejdřív je třeba postavit důlní vozík. ¦ Du måste bygga gruvvagnen först. ¦ Du skal bygge minevognen først.
+Trop loin : les rails vont jusqu’à 4 cases du bunker. ¦ Příliš daleko: koleje sahají nejvýš 4 pole od bunkru. ¦ För långt: rälsen räcker upp till 4 rutor från bunkern. ¦ For langt: skinnerne rækker op til 4 felter fra bunkeren.
+⛓️ Les rails sont posés jusqu’à {place} : le chariot y va deux fois plus vite et rapporte gros. ¦ ⛓️ Koleje jsou položeny až do {place}: vozík tam jezdí dvakrát rychleji a přiveze hodně. ¦ ⛓️ Rälsen är lagd ända till {place}: vagnen åker dit dubbelt så snabbt och tar hem mycket. ¦ ⛓️ Skinnerne er lagt helt til {place}: vognen kører dobbelt så hurtigt og bringer meget hjem.
+Lieu {n} ¦ Místo {n} ¦ Plats {n} ¦ Sted {n}
+{kind} de {town} ¦ {kind} {town} ¦ {kind} i {town} ¦ {kind} i {town}
+Les environs de {city} ¦ Okolí {city} ¦ Trakten kring {city} ¦ Egnen omkring {city}
+Pas de carte de la région. ¦ Žádná mapa kraje. ¦ Ingen karta över regionen. ¦ Intet kort over regionen.
+Choisis un lieu de la région. ¦ Vyber místo v kraji. ¦ Välj en plats i regionen. ¦ Vælg et sted i regionen.
+Ce lieu n’est pas encore connu. ¦ Toto místo zatím není známé. ¦ Den här platsen är inte känd än. ¦ Dette sted er ikke kendt endnu.
+Un convoi y est déjà en route. ¦ Konvoj už je na cestě tam. ¦ En konvoj är redan på väg dit. ¦ En konvoj er allerede på vej derhen.
+{name} ne peut pas partir (trop jeune). ¦ {name} nemůže vyrazit (příliš mladý/á). ¦ {name} kan inte ge sig av (för ung). ¦ {name} kan ikke tage af sted (for ung).
+{name} ne peut pas partir (pas au bunker). ¦ {name} nemůže vyrazit (není v bunkru). ¦ {name} kan inte ge sig av (inte i bunkern). ¦ {name} kan ikke tage af sted (ikke i bunkeren).
+Personne inconnue. ¦ Neznámá osoba. ¦ Okänd person. ¦ Ukendt person.
+{name} est malade : soigne-le ou la d’abord. ¦ {name} je nemocný/á: nejdřív ho/ji ošetři. ¦ {name} är sjuk: vårda hen först. ¦ {name} er syg: pleje vedkommende først.
+{name} est blessé·e : soigne-le ou la d’abord. ¦ {name} je zraněn(a): nejdřív ho/ji ošetři. ¦ {name} är skadad: vårda hen först. ¦ {name} er såret: pleje vedkommende først.
+Personne ne vit là-bas : on ne peut que fouiller. ¦ Nikdo tam nežije: lze jen prohledávat. ¦ Ingen bor där: man kan bara leta. ¦ Ingen bor der: man kan kun lede.
+{name} ne commercent pas avec vous. ¦ {name} s vámi neobchodují. ¦ {name} handlar inte med er. ¦ {name} handler ikke med jer.
+Trop lourd : {w} à porter pour {cap} de place. Prends moins de provisions, ou plus de transports. ¦ Příliš těžké: {w} k nesení na {cap} místa. Vezmi méně zásob, nebo víc dopravních prostředků. ¦ För tungt: {w} att bära för {cap} plats. Ta mindre förnödenheter eller fler transportmedel. ¦ For tungt: {w} at bære til {cap} plads. Tag færre forsyninger eller flere transportmidler.
+🧭 Un convoi part vers {dest} ({goal}) : {who}, avec {with}. Environ {days} jours aller-retour. ¦ 🧭 Konvoj vyráží do {dest} ({goal}): {who}, s {with}. Zhruba {days} dní tam a zpět. ¦ 🧭 En konvoj ger sig av mot {dest} ({goal}): {who}, med {with}. Cirka {days} dagar tur och retur. ¦ 🧭 En konvoj drager mod {dest} ({goal}): {who}, med {with}. Cirka {days} dage frem og tilbage.
+🧭 Un convoi part vers {dest} ({goal}) : {who}. Environ {days} jours aller-retour. ¦ 🧭 Konvoj vyráží do {dest} ({goal}): {who}. Zhruba {days} dní tam a zpět. ¦ 🧭 En konvoj ger sig av mot {dest} ({goal}): {who}. Cirka {days} dagar tur och retur. ¦ 🧭 En konvoj drager mod {dest} ({goal}): {who}. Cirka {days} dage frem og tilbage.
+📻 Convoi : « {name} n’a plus rien à manger ni à boire. » ¦ 📻 Konvoj: „{name} už nemá co jíst ani pít.“ ¦ 📻 Konvojen: ”{name} har inget kvar att äta eller dricka.” ¦ 📻 Konvojen: »{name} har intet tilbage at spise eller drikke.«
+{ico} {name} s’est sauvé·e en route, faute de manger. ¦ {ico} {name} cestou utekl(a), protože neměl(a) co jíst. ¦ {ico} {name} sprang bort på vägen, i brist på mat. ¦ {ico} {name} løb væk undervejs af mangel på mad.
+des {band} nous ont attaqués, on les a repoussés ¦ napadli nás {band}, odrazili jsme je ¦ {band} anföll oss, vi slog tillbaka dem ¦ {band} angreb os, vi slog dem tilbage
+des pillards nous ont attaqués, on les a repoussés ¦ napadli nás lupiči, odrazili jsme je ¦ plundrare anföll oss, vi slog tillbaka dem ¦ plyndrere angreb os, vi slog dem tilbage
+ils ont emmené {name} ¦ odvedli {name} ¦ de tog med sig {name} ¦ de tog {name} med
+une embuscade de {band} : {name} est blessé·e, on a perdu une partie du chargement ¦ přepadení od {band}: {name} je zraněn(a), přišli jsme o část nákladu ¦ ett bakhåll av {band}: {name} är skadad, vi förlorade en del av lasten ¦ et baghold af {band}: {name} er såret, vi mistede en del af lasten
+une embuscade : {name} est blessé·e, on a perdu une partie du chargement ¦ přepadení: {name} je zraněn(a), přišli jsme o část nákladu ¦ ett bakhåll: {name} är skadad, vi förlorade en del av lasten ¦ et baghold: {name} er såret, vi mistede en del af lasten
+{name} s’est blessé·e à la patte ¦ {name} si poranil(a) tlapku ¦ {name} har skadat en tass ¦ {name} har skadet en pote
+{name} s’est fait mal en route ¦ {name} se cestou zranil(a) ¦ {name} skadade sig på vägen ¦ {name} kom til skade undervejs
+on s’est perdus, on a {n} h de retard ¦ zabloudili jsme, máme {n} h zpoždění ¦ vi gick vilse, vi är {n} h försenade ¦ vi farede vild, vi er {n} t forsinket
+trouvé {what} au bord de la route ¦ u cesty jsme našli {what} ¦ hittade {what} vid vägkanten ¦ fandt {what} ved vejkanten
+{name} marche avec nous ¦ {name} jde s námi ¦ {name} går med oss ¦ {name} går med os
+📻 Le convoi ({who}) : « On est à {place}.{news} » ¦ 📻 Konvoj ({who}): „Jsme v {place}.{news}“ ¦ 📻 Konvojen ({who}): ”Vi är i {place}.{news}” ¦ 📻 Konvojen ({who}): »Vi er i {place}.{news}«
+la bagarre a mal tourné, {name} est blessé·e ¦ rvačka dopadla špatně, {name} je zraněn(a) ¦ bråket gick illa, {name} är skadad ¦ slagsmålet gik galt, {name} er såret
+{name} voulaient nous chasser, on a tenu bon et fouillé ¦ {name} nás chtěli vyhnat, vydrželi jsme a prohledali to ¦ {name} ville jaga bort oss, vi höll stånd och letade ¦ {name} ville jage os væk, vi holdt stand og ledte
+{name} nous ont donné 3 {res} ¦ {name} nám dali 3 {res} ¦ {name} gav oss 3 {res} ¦ {name} gav os 3 {res}
+on n’avait rien à échanger ¦ neměli jsme co vyměnit ¦ vi hade inget att byta ¦ vi havde intet at bytte
+échange conclu avec {name} ¦ výměna s {name} uzavřena ¦ byte klart med {name} ¦ byttehandel afsluttet med {name}
+on a aidé {name} ({what}) ¦ pomohli jsme {name} ({what}) ¦ vi hjälpte {name} ({what}) ¦ vi hjalp {name} ({what})
+on a aidé {name} ¦ pomohli jsme {name} ¦ vi hjälpte {name} ¦ vi hjalp {name}
+en remerciement, le plan « {name} » ¦ jako poděkování plán „{name}“ ¦ som tack, ritningen ”{name}” ¦ som tak, tegningen »{name}«
+on a pris la réserve de {name} ¦ vzali jsme zásoby {name} ¦ vi tog {name}s förråd ¦ vi tog {name}s forråd
+{name}, {occ}, veut venir avec nous ¦ {name}, {occ}, chce jít s námi ¦ {name}, {occ}, vill följa med oss ¦ {name}, {occ}, vil gerne med os
+{name} veut venir avec nous ¦ {name} chce jít s námi ¦ {name} vill följa med oss ¦ {name} vil gerne med os
+un âne sans maître nous suit ¦ jde za námi osel bez pána ¦ en herrelös åsna följer efter oss ¦ et herreløst æsel følger efter os
+un cheval sans maître nous suit ¦ jde za námi kůň bez pána ¦ en herrelös häst följer efter oss ¦ en herreløs hest følger efter os
+les gens de {place} disent que l’hiver sera rude ¦ lidé z {place} říkají, že zima bude krutá ¦ folket i {place} säger att vintern blir hård ¦ folk i {place} siger, at vinteren bliver hård
+on dit qu’il reste des vivres plus loin ¦ říká se, že dál ještě zbyly zásoby ¦ det sägs att det finns mat kvar längre bort ¦ man siger, der er mad tilbage længere fremme
+des voyageurs parlent d’une bande sur la grand-route ¦ cestující mluví o bandě na hlavní silnici ¦ resenärer talar om ett gäng på stora vägen ¦ rejsende taler om en bande på hovedvejen
+quelqu’un a vu de la fumée du côté du bunker ¦ někdo viděl kouř u bunkru ¦ någon såg rök nära bunkern ¦ nogen så røg nær bunkeren
+les routes de l’est sont plus sûres en ce moment ¦ cesty na východ jsou teď bezpečnější ¦ vägarna österut är säkrare just nu ¦ vejene mod øst er sikrere lige nu
+nouvelles : {news} ¦ zprávy: {news} ¦ nyheter: {news} ¦ nyheder: {news}
+📻 Le convoi ({who}) à {place} : « {news}. On repart. » ¦ 📻 Konvoj ({who}) v {place}: „{news}. Jedeme dál.“ ¦ 📻 Konvojen ({who}) i {place}: ”{news}. Vi fortsätter.” ¦ 📻 Konvojen ({who}) i {place}: »{news}. Vi fortsætter.«
+Rien de spécial ¦ Nic zvláštního ¦ Inget särskilt ¦ Intet særligt
+Rentré·e de {place} après {n} jours. ¦ Zpět z {place} po {n} dnech. ¦ Tillbaka från {place} efter {n} dagar. ¦ Tilbage fra {place} efter {n} dage.
+la route ¦ cesta ¦ vägen ¦ vejen
+On dit que {news}. ¦ Říká se, že {news}. ¦ Det sägs att {news}. ¦ Man siger, at {news}.
+la région ¦ kraj ¦ regionen ¦ regionen
+🧭 Le convoi est rentré de {place} sans {who}. ¦ 🧭 Konvoj se vrátil z {place} bez {who}. ¦ 🧭 Konvojen är tillbaka från {place} utan {who}. ¦ 🧭 Konvojen er tilbage fra {place} uden {who}.
+🧭 Le convoi est rentré de {place}. ¦ 🧭 Konvoj se vrátil z {place}. ¦ 🧭 Konvojen är tillbaka från {place}. ¦ 🧭 Konvojen er tilbage fra {place}.
+Rapporté : {list}. ¦ Přineseno: {list}. ¦ Hemtaget: {list}. ¦ Bragt hjem: {list}.
+Presque rien rapporté. ¦ Skoro nic nepřineseno. ¦ Nästan inget hemtaget. ¦ Næsten intet bragt hjem.
+🤗 Avec eux : {list}. ¦ 🤗 S nimi: {list}. ¦ 🤗 Med dem: {list}. ¦ 🤗 Med dem: {list}.
+🩹 Des blessés à soigner. ¦ 🩹 Ranění k ošetření. ¦ 🩹 Skadade att vårda. ¦ 🩹 Sårede at pleje.
+Plus de place pour {list}. ¦ Není místo pro {list}. ¦ Ingen plats för {list}. ¦ Ikke plads til {list}.
+En route : {list}. ¦ Cestou: {list}. ¦ På vägen: {list}. ¦ Undervejs: {list}.
+🕯️ Le convoi parti vers {place} n’est jamais revenu. ¦ 🕯️ Konvoj, který vyrazil do {place}, se nikdy nevrátil. ¦ 🕯️ Konvojen som gav sig av mot {place} kom aldrig tillbaka. ¦ 🕯️ Konvojen, der drog mod {place}, kom aldrig tilbage.
+{ico} « Le convoi, rentrez ! » — « Bien reçu, on fait demi-tour. » ¦ {ico} „Konvoji, vraťte se!“ — „Rozumíme, otáčíme to.“ ¦ {ico} ”Konvojen, kom hem!” — ”Uppfattat, vi vänder.” ¦ {ico} »Konvojen, kom hjem!« — »Modtaget, vi vender om.«
+{ico} {name} : {level} (réputation {rep}) — {why}. ¦ {ico} {name}: {level} (pověst {rep}) — {why}. ¦ {ico} {name}: {level} (rykte {rep}) — {why}. ¦ {ico} {name}: {level} (omdømme {rep}) — {why}.
+{ico} {name} : {level} (réputation {rep}). ¦ {ico} {name}: {level} (pověst {rep}). ¦ {ico} {name}: {level} (rykte {rep}). ¦ {ico} {name}: {level} (omdømme {rep}).
+Groupe inconnu. ¦ Neznámá skupina. ¦ Okänd grupp. ¦ Ukendt gruppe.
+Rien à offrir. ¦ Není co nabídnout. ¦ Inget att erbjuda. ¦ Intet at tilbyde.
+Il faut de quoi porter le message (radio et électricité, crieur, talkies ou pigeons). ¦ Je potřeba něco, čím zprávu poslat (rádio a elektřina, vyvolávač, vysílačky nebo holubi). ¦ Det behövs ett sätt att skicka budet (radio och el, utropare, walkie-talkies eller duvor). ¦ Der skal være en måde at sende beskeden på (radio og strøm, byudråber, walkie-talkier eller duer).
+🎁 Un messager porte {what} à {name}. ¦ 🎁 Posel nese {what} k {name}. ¦ 🎁 En budbärare tar {what} till {name}. ¦ 🎁 Et bud bringer {what} til {name}.
+Ils ne veulent pas commercer. ¦ Nechtějí obchodovat. ¦ De vill inte handla. ¦ De vil ikke handle.
+Bête inconnue. ¦ Neznámé zvíře. ¦ Okänt djur. ¦ Ukendt dyr.
+{name} ne vous font pas encore assez confiance. ¦ {name} vám ještě dost nedůvěřují. ¦ {name} litar inte tillräckligt på er än. ¦ {name} stoler ikke nok på jer endnu.
+Il faut de quoi porter le message. ¦ Je potřeba něco, čím zprávu poslat. ¦ Det behövs ett sätt att skicka budet. ¦ Der skal være en måde at sende beskeden på.
+{n} animaux au plus. ¦ Nejvýš {n} zvířat. ¦ Högst {n} djur. ¦ Højst {n} dyr.
+Cette demande n’existe plus. ¦ Tato žádost už neexistuje. ¦ Begäran finns inte längre. ¦ Anmodningen findes ikke længere.
+🤲 Vous envoyez {what} à {name}. ¦ 🤲 Posíláte {what} k {name}. ¦ 🤲 Ni skickar {what} till {name}. ¦ 🤲 I sender {what} til {name}.
+vos voisins ¦ vaši sousedé ¦ era grannar ¦ jeres naboer
+🚫 Vous refusez d’aider {name}. ¦ 🚫 Odmítáte pomoci {name}. ¦ 🚫 Ni vägrar hjälpa {name}. ¦ 🚫 I nægter at hjælpe {name}.
+⌛ {name} n’ont pas eu de réponse. ¦ ⌛ {name} nedostali odpověď. ¦ ⌛ {name} fick inget svar. ¦ ⌛ {name} fik intet svar.
+Des voisins ¦ Sousedé ¦ Några grannar ¦ Nogle naboer
+📻 {name} demandent de l’aide : {what} (réponse dans les 36 h, onglet 🗺️ Région). ¦ 📻 {name} žádají o pomoc: {what} (odpověď do 36 h, karta 🗺️ Kraj). ¦ 📻 {name} ber om hjälp: {what} (svar inom 36 h, fliken 🗺️ Region). ¦ 📻 {name} beder om hjælp: {what} (svar inden for 36 t, fanen 🗺️ Region).
+🤝 {name} ont appris que ça va mal chez vous : ils envoient {what} par messager. ¦ 🤝 {name} se doslechli, že se vám nedaří: posílají {what} po poslovi. ¦ 🤝 {name} har hört att det går dåligt för er: de skickar {what} med budbärare. ¦ 🤝 {name} har hørt, at det går dårligt hos jer: de sender {what} med bud.
+Bâtiment inconnu. ¦ Neznámá budova. ¦ Okänd byggnad. ¦ Ukendt bygning.
+Le chantier est déjà lancé. ¦ Stavba už začala. ¦ Bygget har redan börjat. ¦ Byggeriet er allerede i gang.
+Il marche déjà. ¦ Už funguje. ¦ Den fungerar redan. ¦ Den virker allerede.
+🏚️ {site} : le chantier commence ({n} h de travail sur place). Envoie des habitants y travailler. ¦ 🏚️ {site}: stavba začíná ({n} h práce na místě). Pošli tam obyvatele pracovat. ¦ 🏚️ {site}: bygget börjar ({n} h arbete på plats). Skicka invånare dit för att arbeta. ¦ 🏚️ {site}: byggeriet begynder ({n} t arbejde på stedet). Send beboere derhen for at arbejde.
+Il y a déjà une palissade. ¦ Palisáda už tam je. ¦ Det finns redan en palissad. ¦ Der er allerede en palisade.
+🪵 Une palissade autour de {site}. ¦ 🪵 Palisáda kolem {site}. ¦ 🪵 En palissad runt {site}. ¦ 🪵 En palisade omkring {site}.
+{name} est trop petit·e. ¦ {name} je příliš malý/á. ¦ {name} är för liten. ¦ {name} er for lille.
+Le bâtiment marche déjà : on peut y aller récolter. ¦ Budova už funguje: lze tam jít sklízet. ¦ Byggnaden fungerar redan: man kan gå dit och hämta skörd. ¦ Bygningen virker allerede: man kan gå derhen og høste.
+Lance d’abord le chantier (les matériaux). ¦ Nejdřív zahaj stavbu (materiál). ¦ Starta bygget först (material). ¦ Start byggeriet først (materialer).
+Rien à récolter : il ne produit pas encore. ¦ Není co sklízet: zatím nic nevyrábí. ¦ Inget att hämta: den producerar inget än. ¦ Intet at høste: den producerer ikke endnu.
+👷 {name} part travailler {n} h à {site}. ¦ 👷 {name} jde pracovat {n} h do {site}. ¦ 👷 {name} går och arbetar {n} h vid {site}. ¦ 👷 {name} går ud og arbejder {n} t ved {site}.
+👷 {name} part récolter à {site}. ¦ 👷 {name} jde sklízet do {site}. ¦ 👷 {name} går och hämtar skörd vid {site}. ¦ 👷 {name} går ud og høster ved {site}.
+📻 {name} : « Je suis à {site}. » ¦ 📻 {name}: „Jsem v {site}.“ ¦ 📻 {name}: ”Jag är vid {site}.” ¦ 📻 {name}: »Jeg er ved {site}.«
+✅ {site} est réparé : il produit {prod} par jour. Pense à y passer : ce qui n’est pas récolté peut être pillé. ¦ ✅ {site} je opraveno: vyrábí {prod} denně. Nezapomeň se tam zastavit: co se nesklidí, může být ukradeno. ¦ ✅ {site} är lagad: den producerar {prod} om dagen. Glöm inte att titta förbi: det som inte hämtas kan plundras. ¦ ✅ {site} er repareret: den producerer {prod} om dagen. Husk at kigge forbi: det, der ikke høstes, kan blive plyndret.
+✅ {site} est remis en état : il produit {prod} par jour. Pense à y passer : ce qui n’est pas récolté peut être pillé. ¦ ✅ {site} je obnoveno: vyrábí {prod} denně. Nezapomeň se tam zastavit: co se nesklidí, může být ukradeno. ¦ ✅ {site} är upprustad: den producerar {prod} om dagen. Glöm inte att titta förbi: det som inte hämtas kan plundras. ¦ ✅ {site} er sat i stand: den producerer {prod} om dagen. Husk at kigge forbi: det, der ikke høstes, kan blive plyndret.
+🏠 {name} rentre de {site} (chantier : {pc} %) avec {got}. ¦ 🏠 {name} se vrací z {site} (stavba: {pc} %) s {got}. ¦ 🏠 {name} kommer tillbaka från {site} (bygget: {pc} %) med {got}. ¦ 🏠 {name} kommer tilbage fra {site} (byggeri: {pc} %) med {got}.
+🏠 {name} rentre de {site} (chantier : {pc} %). ¦ 🏠 {name} se vrací z {site} (stavba: {pc} %). ¦ 🏠 {name} kommer tillbaka från {site} (bygget: {pc} %). ¦ 🏠 {name} kommer tilbage fra {site} (byggeri: {pc} %).
+🏠 {name} rentre de {site} avec {got}. ¦ 🏠 {name} se vrací z {site} s {got}. ¦ 🏠 {name} kommer tillbaka från {site} med {got}. ¦ 🏠 {name} kommer tilbage fra {site} med {got}.
+🏠 {name} rentre de {site}. ¦ 🏠 {name} se vrací z {site}. ¦ 🏠 {name} kommer tillbaka från {site}. ¦ 🏠 {name} kommer tilbage fra {site}.
+💥 {site} a été pillé et abîmé (personne n’y était passé depuis {n} jours) : il ne produit plus, il faut le réparer. ¦ 💥 {site} bylo vyrabováno a poškozeno (nikdo tam nebyl {n} dní): už nevyrábí, je třeba ho opravit. ¦ 💥 {site} har plundrats och skadats (ingen hade varit där på {n} dagar): den producerar inte längre, den måste lagas. ¦ 💥 {site} er blevet plyndret og beskadiget (ingen havde været der i {n} dage): den producerer ikke længere og skal repareres.
+💥 {site} a été pillé et abîmé : il ne produit plus, il faut le réparer. ¦ 💥 {site} bylo vyrabováno a poškozeno: už nevyrábí, je třeba ho opravit. ¦ 💥 {site} har plundrats och skadats: den producerar inte längre, den måste lagas. ¦ 💥 {site} er blevet plyndret og beskadiget: den producerer ikke længere og skal repareres.
+🦹 Des pillards sont passés à {site} et ont tout emporté. ¦ 🦹 Lupiči prošli {site} a vše odnesli. ¦ 🦹 Plundrare var vid {site} och tog allt. ¦ 🦹 Plyndrere var forbi {site} og tog alt.
+🦹 Des pillards sont passés à {site}. ¦ 🦹 Lupiči prošli {site}. ¦ 🦹 Plundrare var vid {site}. ¦ 🦹 Plyndrere var forbi {site}.
+🔧 {site} s’est abîmé faute d’entretien : il faut le réparer. ¦ 🔧 {site} se bez údržby poškodilo: je třeba ho opravit. ¦ 🔧 {site} har förfallit av brist på underhåll: den måste lagas. ¦ 🔧 {site} er forfaldet af mangel på vedligehold: den skal repareres.
+Choisis un maître et un apprenti. ¦ Vyber mistra a učně. ¦ Välj en mästare och en lärling. ¦ Vælg en mester og en lærling.
+{name} n’en sait pas assez pour enseigner. ¦ {name} toho neumí dost, aby učil(a). ¦ {name} kan inte tillräckligt för att undervisa. ¦ {name} ved ikke nok til at undervise.
+{name} en sait déjà autant. ¦ {name} už umí stejně. ¦ {name} kan redan lika mycket. ¦ {name} ved allerede lige så meget.
+{name} a déjà un·e apprenti·e. ¦ {name} už má učně. ¦ {name} har redan en lärling. ¦ {name} har allerede en lærling.
+{name} apprend déjà un métier. ¦ {name} se už učí řemeslu. ¦ {name} lär sig redan ett yrke. ¦ {name} er allerede i lære.
+🎓 {a} devient l’apprenti·e de {m} : {ico} {skill}. ¦ 🎓 {a} se stává učněm {m}: {ico} {skill}. ¦ 🎓 {a} blir {m}s lärling: {ico} {skill}. ¦ 🎓 {a} bliver {m}s lærling: {ico} {skill}.
+{name} m’apprend son métier. Je veux être à la hauteur. ¦ {name} mě učí svému řemeslu. Chci obstát. ¦ {name} lär mig sitt yrke. Jag vill leva upp till det. ¦ {name} lærer mig sit fag. Jeg vil leve op til det.
+J’ai pris {name} comme apprenti·e. ¦ Vzal(a) jsem si {name} do učení. ¦ Jag har tagit {name} som lärling. ¦ Jeg har taget {name} i lære.
+🎓 {a} en sait maintenant autant que {m} : {skill}, c’est son métier. ¦ 🎓 {a} teď umí stejně jako {m}: {skill} je jeho/její řemeslo. ¦ 🎓 {a} kan nu lika mycket som {m}: {skill} är hens yrke. ¦ 🎓 {a} ved nu lige så meget som {m}: {skill} er vedkommendes fag.
+{name} dit que je n’ai plus rien à apprendre de lui ou d’elle. ¦ {name} říká, že se od něj/ní už nemám co naučit. ¦ {name} säger att jag inte har något mer att lära av hen. ¦ {name} siger, at jeg ikke har mere at lære af vedkommende.
+📜 {m} n’est plus, mais son savoir reste chez {a} : {skill} ×{n}. ¦ 📜 {m} už tu není, ale jeho/její vědění zůstává u {a}: {skill} ×{n}. ¦ 📜 {m} är borta, men kunskapen lever vidare hos {a}: {skill} ×{n}. ¦ 📜 {m} er borte, men viden lever videre hos {a}: {skill} ×{n}.
+{name} est parti·e. Je continuerai ce qu’il ou elle m’a appris. ¦ {name} odešel/odešla. Budu pokračovat v tom, co mě naučil(a). ¦ {name} har gått bort. Jag ska föra vidare det hen lärde mig. ¦ {name} er gået bort. Jeg fører videre, hvad vedkommende lærte mig.
+💔 {a} et {b} se séparent. ¦ 💔 {a} a {b} se rozcházejí. ¦ 💔 {a} och {b} gör slut. ¦ 💔 {a} og {b} går fra hinanden.
+💞 {a} et {b} forment un couple. ¦ 💞 {a} a {b} tvoří pár. ¦ 💞 {a} och {b} blir ett par. ¦ 💞 {a} og {b} bliver et par.
+{name} et moi, c’est sérieux. ¦ {name} a já, to je vážné. ¦ {name} och jag, det är allvar. ¦ {name} og jeg, det er alvor.
+J’étais {occ}. ¦ Byl(a) jsem {occ}. ¦ Jag var {occ}. ¦ Jeg var {occ}.
+Je suis né·e en {y} à {place}. ¦ Narodil(a) jsem se v roce {y} v {place}. ¦ Jag föddes {y} i {place}. ¦ Jeg blev født i {y} i {place}.
+Je suis né·e en {y}. ¦ Narodil(a) jsem se v roce {y}. ¦ Jag föddes {y}. ¦ Jeg blev født i {y}.
+Je me suis marié·e en {y} à {place}, avec {spouse}. ¦ V roce {y} jsem uzavřel(a) sňatek v {place} s {spouse}. ¦ Jag gifte mig {y} i {place}, med {spouse}. ¦ Jeg blev gift i {y} i {place} med {spouse}.
+Je me suis marié·e en {y} à {place}. ¦ V roce {y} jsem uzavřel(a) sňatek v {place}. ¦ Jag gifte mig {y} i {place}. ¦ Jeg blev gift i {y} i {place}.
+Je me suis marié·e en {y}, avec {spouse}. ¦ V roce {y} jsem uzavřel(a) sňatek s {spouse}. ¦ Jag gifte mig {y}, med {spouse}. ¦ Jeg blev gift i {y} med {spouse}.
+Je me suis marié·e en {y}. ¦ V roce {y} jsem uzavřel(a) sňatek. ¦ Jag gifte mig {y}. ¦ Jeg blev gift i {y}.
+J’ai eu un enfant (à cette date). ¦ Měl(a) jsem jedno dítě (k tomu datu). ¦ Jag hade ett barn (vid det datumet). ¦ Jeg havde ét barn (på den dato).
+J’ai eu un enfant. ¦ Měl(a) jsem jedno dítě. ¦ Jag hade ett barn. ¦ Jeg havde ét barn.
+J’ai eu {n} enfants (à cette date). ¦ Měl(a) jsem {n} dětí (k tomu datu). ¦ Jag hade {n} barn (vid det datumet). ¦ Jeg havde {n} børn (på den dato).
+J’ai eu {n} enfants. ¦ Měl(a) jsem {n} dětí. ¦ Jag hade {n} barn. ¦ Jeg havde {n} børn.
+{place}… C’est là que je suis né·e, en {y}. ¦ {place}… Tady jsem se narodil(a), v roce {y}. ¦ {place}… Det var där jag föddes, år {y}. ¦ {place}… Det var her, jeg blev født, i {y}.
+{place}… C’est là que je suis né·e. ¦ {place}… Tady jsem se narodil(a). ¦ {place}… Det var där jag föddes. ¦ {place}… Det var her, jeg blev født.
+{place} ! C’est ici que je me suis marié·e, en {y}, avec {spouse}. ¦ {place}! Tady jsem v roce {y} uzavřel(a) sňatek s {spouse}. ¦ {place}! Det var här jag gifte mig, år {y}, med {spouse}. ¦ {place}! Det var her, jeg blev gift, i {y}, med {spouse}.
+{place} ! C’est ici que je me suis marié·e, en {y}. ¦ {place}! Tady jsem v roce {y} uzavřel(a) sňatek. ¦ {place}! Det var här jag gifte mig, år {y}. ¦ {place}! Det var her, jeg blev gift, i {y}.
+{what}… ça me rappelle mon métier. ¦ {what}… to mi připomíná mé řemeslo. ¦ {what}… det påminner mig om mitt yrke. ¦ {what}… det minder mig om mit fag.
+La maison où je suis né·e, en {y}… Rien n’a changé. ¦ Dům, kde jsem se narodil(a), v roce {y}… Nic se nezměnilo. ¦ Huset där jag föddes, år {y}… Ingenting har förändrats. ¦ Huset, hvor jeg blev født, i {y}… Intet har forandret sig.
+La maison où je suis né·e… Rien n’a changé. ¦ Dům, kde jsem se narodil(a)… Nic se nezměnilo. ¦ Huset där jag föddes… Ingenting har förändrats. ¦ Huset, hvor jeg blev født… Intet har forandret sig.
+Je connais ces rues par cœur : je suis né·e ici, à {city}. ¦ Ty ulice znám nazpaměť: narodil(a) jsem se tady, v {city}. ¦ Jag kan de här gatorna utantill: jag föddes här, i {city}. ¦ Jeg kender disse gader udenad: jeg blev født her, i {city}.
+{what} ! J’en avais une pareille pour mon métier. ¦ {what}! Takový jsem měl(a) při svém řemesle. ¦ {what}! Jag hade en likadan i mitt yrke. ¦ {what}! Jeg havde sådan en i mit fag.
+🧓 Souvenir de {name} (d’après sa fiche) : « {txt} » ¦ 🧓 Vzpomínka osoby {name} (podle karty): „{txt}“ ¦ 🧓 Minne av {name} (från posten): ”{txt}” ¦ 🧓 Minde om {name} (fra posten): »{txt}«
+🏆 Succès : {ico} {name} ! ¦ 🏆 Úspěch: {ico} {name}! ¦ 🏆 Prestation: {ico} {name}! ¦ 🏆 Præstation: {ico} {name}!
+Ce matin-là n’est plus gardé. ¦ To ráno už není uložené. ¦ Den morgonen finns inte längre sparad. ¦ Den morgen er ikke længere gemt.
+Ce matin-là n’a pas pu être relu. ¦ To ráno se nepodařilo načíst. ¦ Den morgonen kunde inte läsas in. ¦ Den morgen kunne ikke indlæses.
+⏪ Retour au matin du jour {n} ({date}) : on reprend d’ici. ¦ ⏪ Zpět na ráno dne {n} ({date}): pokračujeme odtud. ¦ ⏪ Tillbaka till morgonen dag {n} ({date}): vi fortsätter härifrån. ¦ ⏪ Tilbage til morgenen dag {n} ({date}): vi fortsætter herfra.
+⏪ Retour au matin du jour {n} : on reprend d’ici. ¦ ⏪ Zpět na ráno dne {n}: pokračujeme odtud. ¦ ⏪ Tillbaka till morgonen dag {n}: vi fortsätter härifrån. ¦ ⏪ Tilbage til morgenen dag {n}: vi fortsætter herfra.
+Ce fichier n’est pas une partie du bunker. ¦ Tento soubor není hra bunkru. ¦ Filen är inte ett bunkerspel. ¦ Filen er ikke et bunkerspil.
+Cette partie n’a aucun habitant. ¦ Tato hra nemá žádné obyvatele. ¦ Spelet har inga invånare. ¦ Spillet har ingen beboere.
+🗺️ Une carte de la région a été dessinée pour cette partie : d’autres villes, des routes, d’autres survivants (onglet 🗺️ Région). ¦ 🗺️ Pro tuto hru byla nakreslena mapa kraje: další města, cesty, další přeživší (karta 🗺️ Kraj). ¦ 🗺️ En karta över regionen har ritats för det här spelet: andra städer, vägar, andra överlevande (fliken 🗺️ Region). ¦ 🗺️ Et kort over regionen er tegnet til dette spil: andre byer, veje, andre overlevende (fanen 🗺️ Region).
+✓ Partie enregistrée. ¦ ✓ Hra uložena. ¦ ✓ Spelet sparat. ¦ ✓ Spillet gemt.
+La partie n’a pas pu être enregistrée (plus de place sur cet ordinateur) : exporte-la dans un fichier. ¦ Hru se nepodařilo uložit (v tomto počítači už není místo): exportuj ji do souboru. ¦ Spelet kunde inte sparas (ingen plats kvar på den här datorn): exportera det till en fil. ¦ Spillet kunne ikke gemmes (ikke mere plads på denne computer): eksportér det til en fil.
+🏆 Succès : {ico} {name} ¦ 🏆 Úspěch: {ico} {name} ¦ 🏆 Prestation: {ico} {name} ¦ 🏆 Præstation: {ico} {name}
+Le bunker n’a pas pu se charger. ¦ Bunkr se nepodařilo načíst. ¦ Bunkern kunde inte laddas. ¦ Bunkeren kunne ikke indlæses.
+Le bunker ¦ Bunkr ¦ Bunkern ¦ Bunkeren
+Le bunker de {name} ¦ Bunkr osoby {name} ¦ {name}s bunker ¦ {name}s bunker
+jour {n} ¦ den {n} ¦ dag {n} ¦ dag {n}
+☠️ terminé ¦ ☠️ konec ¦ ☠️ slut ¦ ☠️ slut
+{a} sur {b} en vie ¦ {a} z {b} naživu ¦ {a} av {b} vid liv ¦ {a} af {b} i live
+On cherche les ancêtres qui vivaient à cette date… ¦ Hledám předky, kteří v tu dobu žili… ¦ Letar efter anfäderna som levde vid den tiden… ¦ Leder efter aner, der levede på den tid…
+Lecture des objets de famille… ¦ Načítám rodinné památky… ¦ Läser släktklenoder… ¦ Indlæser arvestykker…
+{n} lieux ¦ Míst: {n} ¦ {n} platser ¦ {n} steder
+Choisir une ville de ton arbre… ¦ Vybrat město z tvého rodokmenu… ¦ Välj en stad ur ditt släktträd… ¦ Vælg en by fra dit slægtstræ…
+{n} de ta famille ¦ {n} z tvé rodiny ¦ {n} ur din släkt ¦ {n} fra din familie
+aucun ancêtre de ta famille ¦ žádný předek z tvé rodiny ¦ ingen anfader ur din släkt ¦ ingen ane fra din familie
+📜 Dans l’histoire, avec tes ancêtres ¦ 📜 V dějinách, s tvými předky ¦ 📜 I historien, med dina anfäder ¦ 📜 I historien, med dine aner
+Pour gagner : tenir {n} jours, puis la partie continue sans fin. ¦ K výhře: vydržet {n} dní, pak hra pokračuje bez konce. ¦ För att vinna: håll ut i {n} dagar, sedan fortsätter spelet utan slut. ¦ For at vinde: hold ud i {n} dage, derefter fortsætter spillet uden ende.
+👥 <b>{who} de ta famille</b> vivaient en {y}, dont {l} {region} : ils descendent dans l’abri, ceux de la région d’abord. S’il en manque, des habitants inventés de l’époque complètent le groupe. ¦ 👥 <b>{who} z tvé rodiny</b> žili v roce {y}, z toho {l} {region}: sestupují do úkrytu, nejdřív ti z kraje. Pokud jich je málo, skupinu doplní vymyšlení obyvatelé té doby. ¦ 👥 <b>{who} ur din släkt</b> levde {y}, varav {l} {region}: de går ner i skyddet, de från regionen först. Räcker de inte, fylls gruppen ut med påhittade invånare från tiden. ¦ 👥 <b>{who} fra din familie</b> levede i {y}, heraf {l} {region}: de går ned i beskyttelsesrummet, dem fra regionen først. Er der for få, fyldes gruppen op med opdigtede indbyggere fra tiden.
+👥 <b>{who} de ta famille</b> vivaient en {y} : ils descendent dans l’abri, ceux de la région d’abord. S’il en manque, des habitants inventés de l’époque complètent le groupe. ¦ 👥 <b>{who} z tvé rodiny</b> žili v roce {y}: sestupují do úkrytu, nejdřív ti z kraje. Pokud jich je málo, skupinu doplní vymyšlení obyvatelé té doby. ¦ 👥 <b>{who} ur din släkt</b> levde {y}: de går ner i skyddet, de från regionen först. Räcker de inte, fylls gruppen ut med påhittade invånare från tiden. ¦ 👥 <b>{who} fra din familie</b> levede i {y}: de går ned i beskyttelsesrummet, dem fra regionen først. Er der for få, fyldes gruppen op med opdigtede indbyggere fra tiden.
+👥 <b>{who} de ta famille</b> vivait en {y}, dont {l} {region} : il ou elle descend dans l’abri, ceux de la région d’abord. S’il en manque, des habitants inventés de l’époque complètent le groupe. ¦ 👥 <b>{who} z tvé rodiny</b> žil(a) v roce {y}, z toho {l} {region}: sestupuje do úkrytu, nejdřív ti z kraje. Pokud jich je málo, skupinu doplní vymyšlení obyvatelé té doby. ¦ 👥 <b>{who} ur din släkt</b> levde {y}, varav {l} {region}: hen går ner i skyddet, de från regionen först. Räcker de inte, fylls gruppen ut med påhittade invånare från tiden. ¦ 👥 <b>{who} fra din familie</b> levede i {y}, heraf {l} {region}: vedkommende går ned i beskyttelsesrummet, dem fra regionen først. Er der for få, fyldes gruppen op med opdigtede indbyggere fra tiden.
+👥 <b>{who} de ta famille</b> vivait en {y} : il ou elle descend dans l’abri, ceux de la région d’abord. S’il en manque, des habitants inventés de l’époque complètent le groupe. ¦ 👥 <b>{who} z tvé rodiny</b> žil(a) v roce {y}: sestupuje do úkrytu, nejdřív ti z kraje. Pokud jich je málo, skupinu doplní vymyšlení obyvatelé té doby. ¦ 👥 <b>{who} ur din släkt</b> levde {y}: hen går ner i skyddet, de från regionen först. Räcker de inte, fylls gruppen ut med påhittade invånare från tiden. ¦ 👥 <b>{who} fra din familie</b> levede i {y}: vedkommende går ned i beskyttelsesrummet, dem fra regionen først. Er der for få, fyldes gruppen op med opdigtede indbyggere fra tiden.
+👥 Aucun ancêtre de ta famille ne vivait en {y} (d’après les dates de naissance et de décès de ta base) : le groupe sera fait d’habitants inventés de l’époque. ¦ 👥 V roce {y} nežil žádný předek z tvé rodiny (podle dat narození a úmrtí v tvé databázi): skupinu budou tvořit vymyšlení obyvatelé té doby. ¦ 👥 Ingen anfader ur din släkt levde {y} (enligt födelse- och dödsdatum i din databas): gruppen kommer att bestå av påhittade invånare från tiden. ¦ 👥 Ingen ane fra din familie levede i {y} (ifølge fødsels- og dødsdatoer i din database): gruppen vil bestå af opdigtede indbyggere fra tiden.
+Aucun objet de famille dans ta base (Listes › Objets de famille) : le coffre partira vide. ¦ V databázi nejsou žádné rodinné památky (Seznamy › Rodinné památky): truhla bude prázdná. ¦ Inga släktklenoder i din databas (Listor › Släktklenoder): kistan startar tom. ¦ Ingen arvestykker i din database (Lister › Arvestykker): kisten starter tom.
+Le coffre ne contient que 3 objets. ¦ Truhla obsahuje jen 3 předměty. ¦ Kistan rymmer bara 3 föremål. ¦ Kisten rummer kun 3 genstande.
+Choisis l’ancêtre que tu incarnes. ¦ Vyber předka, za kterého hraješ. ¦ Välj anfadern du spelar. ¦ Vælg den ane, du spiller.
+Fiche {n} ¦ Karta {n} ¦ Post {n} ¦ Post {n}
+Choisis ou tape une ville. ¦ Vyber nebo napiš město. ¦ Välj eller skriv en stad. ¦ Vælg eller skriv en by.
+La partie s’est arrêtée sur une erreur (fichier abîmé ?). ¦ Hra se zastavila kvůli chybě (poškozený soubor?). ¦ Spelet stoppade på ett fel (skadad fil?). ¦ Spillet stoppede på en fejl (beskadiget fil?).
+Jour {n} ¦ Den {n} ¦ Dag {n} ¦ Dag {n}
+{season} : il fait froid dans le bunker ¦ {season}: v bunkru je zima ¦ {season}: det är kallt i bunkern ¦ {season}: det er koldt i bunkeren
+{n} installation(s) en panne ¦ Porouchaná zařízení: {n} ¦ {n} installation(er) ur funktion ¦ {n} installation(er) i stykker
+Pas d’électricité à cette époque : on s’éclaire à la chandelle ¦ V této době není elektřina: svítí se svíčkami ¦ Ingen el i den här tiden: man lyser med ljus ¦ Ingen strøm i denne tid: man lyser med stearinlys
+Électricité ({src}) ¦ Elektřina ({src}) ¦ El ({src}) ¦ Strøm ({src})
+Pas d’électricité ¦ Bez elektřiny ¦ Ingen el ¦ Ingen strøm
+L’air est lourd ¦ Vzduch je těžký ¦ Luften är tung ¦ Luften er tung
+{n} dans la région ¦ {n} v kraji ¦ {n} i regionen ¦ {n} i regionen
+On vous demande de l’aide (onglet 🗺️ Région) ¦ Někdo vás žádá o pomoc (karta 🗺️ Kraj) ¦ Någon ber er om hjälp (fliken 🗺️ Region) ¦ Nogen beder jer om hjælp (fanen 🗺️ Region)
+📘 Tutoriel {a} / {b} ¦ 📘 Návod {a} / {b} ¦ 📘 Handledning {a} / {b} ¦ 📘 Vejledning {a} / {b}
+Passer le tutoriel ¦ Přeskočit návod ¦ Hoppa över handledningen ¦ Spring vejledningen over
+({occ}, né·e en {y}) ¦ ({occ}, nar. {y}) ¦ ({occ}, född {y}) ¦ ({occ}, født i {y})
+🔔 <b>Un marchand</b>{who} propose {give} contre {want}. ¦ 🔔 <b>Obchodník</b>{who} nabízí {give} za {want}. ¦ 🔔 <b>En handlare</b>{who} erbjuder {give} mot {want}. ¦ 🔔 <b>En handlende</b>{who} tilbyder {give} for {want}.
+🤝 Échanger ¦ 🤝 Vyměnit ¦ 🤝 Byt ¦ 🤝 Byt
+Non merci ¦ Ne, děkuji ¦ Nej tack ¦ Nej tak
+🦹 Voler ¦ 🦹 Ukrást ¦ 🦹 Stjäl ¦ 🦹 Stjæl
+🔔 <b>{name}</b>{info} demande à entrer : une bouche de plus, mais aussi des bras. ¦ 🔔 <b>{name}</b>{info} prosí o vstup: jeden hladový krk navíc, ale i ruce k práci. ¦ 🔔 <b>{name}</b>{info} ber att få komma in: en mun till att mätta, men också ett par händer till. ¦ 🔔 <b>{name}</b>{info} beder om at komme ind: en mund mere at mætte, men også et par hænder mere.
+🤗 Faire entrer ¦ 🤗 Pustit dovnitř ¦ 🤗 Släpp in ¦ 🤗 Luk ind
+Laisser dehors ¦ Nechat venku ¦ Lämna utanför ¦ Lad blive udenfor
+🔔 <b>Des pillards</b>{who} veulent {what}. Défense du bunker : {n}. ¦ 🔔 <b>Lupiči</b>{who} chtějí {what}. Obrana bunkru: {n}. ¦ 🔔 <b>Plundrare</b>{who} vill ha {what}. Bunkerns försvar: {n}. ¦ 🔔 <b>Plyndrere</b>{who} vil have {what}. Bunkerens forsvar: {n}.
+tout ¦ vše ¦ allt ¦ alt
+🫳 Donner ¦ 🫳 Dát ¦ 🫳 Ge ¦ 🫳 Giv
+🛡️ Résister ¦ 🛡️ Bránit se ¦ 🛡️ Stå emot ¦ 🛡️ Gør modstand
+{n} en ville ¦ {n} ve městě ¦ {n} i staden ¦ {n} i byen
+🧭 {n} dans la région ¦ 🧭 {n} v kraji ¦ 🧭 {n} i regionen ¦ 🧭 {n} i regionen
+Quelqu’un frappe à la trappe ! ¦ Někdo klepe na poklop! ¦ Någon knackar på luckan! ¦ Nogen banker på lugen!
+La trappe ¦ Poklop ¦ Luckan ¦ Lugen
+↔ Clique sur la place où le mettre (une place prise : les deux s’échangent) ¦ ↔ Klikni na místo, kam to dát (obsazené místo: obě se vymění) ¦ ↔ Klicka på platsen där den ska stå (en upptagen plats: de två byter) ¦ ↔ Klik på den plads, den skal stå på (en optaget plads: de to bytter)
+Le feu ! ¦ Hoří! ¦ Det brinner! ¦ Det brænder!
+{deco} de {name} ¦ {deco} osoby {name} ¦ {deco} av {name} ¦ {deco} af {name}
+EN PANNE : clique pour réparer ¦ POROUCHÁNO: klikni pro opravu ¦ TRASIG: klicka för att laga ¦ I STYKKER: klik for at reparere
+En panne ¦ Porouchané ¦ Trasig ¦ I stykker
+En construction : {name} ¦ Ve výstavbě: {name} ¦ Under byggnad: {name} ¦ Under opførelse: {name}
+Poser ici (sans frais) ¦ Položit sem (zdarma) ¦ Ställ här (gratis) ¦ Stil her (gratis)
+Place libre : construire ici ¦ Volné místo: stavět tady ¦ Ledig plats: bygg här ¦ Ledig plads: byg her
+Ceux qui attendent ¦ Ti, kdo čekají ¦ De som väntar ¦ De ventende
+Choisir qui creuse ¦ Vybrat, kdo kope ¦ Välj vem som gräver ¦ Vælg hvem der graver
+Étage en cours de creusement ¦ Patro se kope ¦ Våning som grävs ¦ Etage under udgravning
+Creuser un étage ¦ Vykopat patro ¦ Gräv en våning ¦ Grav en etage
+Le bunker ne peut pas descendre plus bas. ¦ Bunkr už nemůže jít hlouběji. ¦ Bunkern kan inte gå djupare. ¦ Bunkeren kan ikke gå dybere.
+☠️ Plus personne en vie ¦ ☠️ Už nikdo nežije ¦ ☠️ Ingen är längre vid liv ¦ ☠️ Ingen er længere i live
+Le bunker a tenu {n}. ¦ Bunkr vydržel {n}. ¦ Bunkern höll ut {n}. ¦ Bunkeren holdt ud {n}.
+⏪ Reprendre au matin du jour {n}… ¦ ⏪ Začít znovu od rána dne {n}… ¦ ⏪ Börja om från morgonen dag {n}… ¦ ⏪ Start forfra fra morgenen dag {n}…
+☠️ mort·e ¦ ☠️ mrtvý/á ¦ ☠️ död ¦ ☠️ død
+🧭 en convoi vers {place} ¦ 🧭 v konvoji do {place} ¦ 🧭 i konvoj mot {place} ¦ 🧭 i konvoj mod {place}
+{skill} : {n} % de mieux ¦ {skill}: o {n} % lépe ¦ {skill}: {n} % bättre ¦ {skill}: {n} % bedre
+En couple : le moral tient mieux quand on est ensemble ¦ Pár: nálada lépe vydrží, když jsou spolu ¦ Ett par: moralen håller bättre när de är tillsammans ¦ Et par: moralen holder bedre, når de er sammen
+De la même famille : le moral tient mieux quand on est ensemble ¦ Ze stejné rodiny: nálada lépe vydrží, když jsou spolu ¦ Samma släkt: moralen håller bättre när de är tillsammans ¦ Samme familie: moralen holder bedre, når de er sammen
+Ami·e : le moral tient mieux ensemble ¦ Přítel: nálada spolu lépe vydrží ¦ Vän: moralen håller bättre tillsammans ¦ Ven: moralen holder bedre sammen
+Ne se supportent plus : ça mine le moral ¦ Už se nesnesou: kazí to náladu ¦ Står inte ut med varandra: det tär på moralen ¦ Kan ikke udstå hinanden: det slider på moralen
+{skill} ×{k} : {a} h / {b} h de pratique avant le prochain progrès ¦ {skill} ×{k}: {a} h / {b} h praxe do dalšího zlepšení ¦ {skill} ×{k}: {a} h / {b} h övning före nästa förbättring ¦ {skill} ×{k}: {a} t / {b} t øvelse før næste forbedring
+Une vieille brouille de famille ¦ Starý rodinný spor ¦ En gammal släktfejd ¦ En gammel familiefejde
+(toi) ¦ (ty) ¦ (du) ¦ (dig)
+(bébé) ¦ (miminko) ¦ (bebis) ¦ (baby)
+(enfant) ¦ (dítě) ¦ (barn) ¦ (barn)
+Ce qu’il ou elle apprend en pratiquant ¦ Co se učí praxí ¦ Vad hen lär sig genom att öva ¦ Hvad vedkommende lærer ved at øve
+progrès : ¦ pokrok: ¦ framsteg: ¦ fremskridt:
+Un habitant expert ou âgé forme un·e apprenti·e, qui progresse chaque soir ¦ Zkušený nebo starší obyvatel vyučí učně, který se každý večer zlepšuje ¦ En erfaren eller äldre invånare lär upp en lärling, som blir bättre varje kväll ¦ En erfaren eller ældre beboer oplærer en lærling, som bliver bedre hver aften
+Son apprenti·e ¦ Jeho/její učeň ¦ Hens lärling ¦ Vedkommendes lærling
+Former un·e apprenti·e ¦ Vyučit učně ¦ Lär upp en lärling ¦ Oplær en lærling
+Quand il ou elle va de soi-même boire, manger, aux toilettes… ¦ Když sám/sama jde pít, jíst, na záchod… ¦ När hen själv går och dricker, äter, går på toaletten… ¦ Når vedkommende selv går hen og drikker, spiser, går på toilettet…
+Autonomie ¦ Samostatnost ¦ Självständighet ¦ Selvstændighed
+comme tout le monde ¦ jako všichni ¦ som alla andra ¦ som alle andre
+Lui dire de ¦ Říct mu/jí, ať ¦ Säg åt hen att ¦ Bed vedkommende om at
+😞 Plus de moral : refuse de travailler (jeux, musique, histoires du soir…). ¦ 😞 Žádná nálada: odmítá pracovat (hry, hudba, večerní příběhy…). ¦ 😞 Ingen moral kvar: vägrar arbeta (spel, musik, kvällshistorier…). ¦ 😞 Ingen moral tilbage: nægter at arbejde (spil, musik, aftenhistorier…).
+⚗️ <b>Filtre encrassé</b> : il faut 1 tissu. ¦ ⚗️ <b>Filtr zanesený</b>: je potřeba 1 látka. ¦ ⚗️ <b>Filtret igensatt</b>: det behövs 1 tyg. ¦ ⚗️ <b>Filteret tilstoppet</b>: der skal 1 stof til.
+⚗️ Filtre : {n} / 30 L avant de le nettoyer (1 tissu). ¦ ⚗️ Filtr: {n} / 30 l do vyčištění (1 látka). ¦ ⚗️ Filter: {n} / 30 L innan det ska rengöras (1 tyg). ¦ ⚗️ Filter: {n} / 30 L før det skal renses (1 stof).
+Ils viennent quand il y a de quoi manger. ¦ Přijdou, když je co jíst. ¦ De kommer när det finns mat. ¦ De kommer, når der er mad.
+une saison dure {n} jours. ¦ roční období trvá {n} dní. ¦ en årstid varar i {n} dagar. ¦ en årstid varer {n} dage.
+{src} donne le courant ¦ {src} dodává proud ¦ {src} ger ström ¦ {src} giver strøm
+🔌 Plus d’essence : pas d’électricité ¦ 🔌 Došel benzín: žádná elektřina ¦ 🔌 Bensinen är slut: ingen el ¦ 🔌 Benzinen er sluppet op: ingen strøm
+🔌 Groupe électrogène éteint ¦ 🔌 Agregát vypnut ¦ 🔌 Generatorn avstängd ¦ 🔌 Generatoren slukket
+le groupe brûle {n} L d’essence par heure, seulement quand rien d’autre ne donne de courant. ¦ agregát spálí {n} l benzínu za hodinu, jen když proud nedodává nic jiného. ¦ generatorn bränner {n} L bensin i timmen, bara när inget annat ger ström. ¦ generatoren bruger {n} L benzin i timen, kun når intet andet giver strøm.
+🔋 Batteries : {a} h / {b} h en réserve. ¦ 🔋 Baterie: {a} h / {b} h v záloze. ¦ 🔋 Batterier: {a} h / {b} h i reserv. ¦ 🔋 Batterier: {a} t / {b} t i reserve.
+Éteindre pour économiser l’essence ¦ Vypnout kvůli úspoře benzínu ¦ Stäng av för att spara bensin ¦ Sluk for at spare benzin
+Rallumer le groupe électrogène ¦ Znovu zapnout agregát ¦ Sätt på generatorn igen ¦ Tænd generatoren igen
+(à trouver) ¦ (k nalezení) ¦ (att hitta) ¦ (skal findes)
+🔧 Réparer : ¦ 🔧 Opravit: ¦ 🔧 Laga: ¦ 🔧 Reparér:
+⬆️ Niveau {n} : ¦ ⬆️ Úroveň {n}: ¦ ⬆️ Nivå {n}: ¦ ⬆️ Niveau {n}:
+étage −{f} · encore {h} h ¦ patro −{f} · ještě {h} h ¦ våning −{f} · {h} h kvar ¦ etage −{f} · {h} t tilbage
+Annuler (les matériaux reviennent) ¦ Zrušit (materiál se vrátí) ¦ Avbryt (materialet återlämnas) ¦ Annuller (materialerne gives tilbage)
+Pas d’électricité : l’atelier est à l’arrêt. ¦ Bez elektřiny: dílna stojí. ¦ Ingen el: verkstaden står stilla. ¦ Ingen strøm: værkstedet står stille.
+Personne n’est à l’atelier : mets quelqu’un sur « 🔨 Construire » (onglet Habitants). ¦ V dílně nikdo není: dej někoho na „🔨 Stavět“ (karta Obyvatelé). ¦ Ingen är i verkstaden: sätt någon på ”🔨 Bygga” (fliken Invånare). ¦ Ingen er i værkstedet: sæt nogen på »🔨 Bygge« (fanen Beboere).
+Rien en construction. ¦ Nic se nestaví. ¦ Inget byggs. ¦ Intet under opførelse.
+Clique sur une place libre du bunker (＋), ou sur « Construire » ci-dessous. ¦ Klikni na volné místo v bunkru (＋), nebo níže na „Stavět“. ¦ Klicka på en ledig plats i bunkern (＋), eller på ”Bygga” nedan. ¦ Klik på en ledig plads i bunkeren (＋), eller på »Bygge« nedenfor.
+à démonter : {list} ¦ k rozebrání: {list} ¦ att plocka isär: {list} ¦ at skille ad: {list}
+en ville : {list} ¦ ve městě: {list} ¦ i staden: {list} ¦ i byen: {list}
+❔ Les plans se trouvent en fouillant : {list}. ¦ ❔ Plány se najdou při prohledávání: {list}. ¦ ❔ Ritningar hittas genom att leta: {list}. ¦ ❔ Tegninger findes ved at lede: {list}.
+❔ Plan à trouver en ville, surtout : {list} (rare). ¦ ❔ Plán k nalezení ve městě, hlavně: {list} (vzácný). ¦ ❔ Ritning att hitta i staden, främst: {list} (sällsynt). ¦ ❔ Tegning at finde i byen, især: {list} (sjælden).
+❔ Plan à trouver en ville, surtout : {list}. ¦ ❔ Plán k nalezení ve městě, hlavně: {list}. ¦ ❔ Ritning att hitta i staden, främst: {list}. ¦ ❔ Tegning at finde i byen, især: {list}.
+{res} : il en faut {q}, tu en as {h} ¦ {res}: potřeba {q}, máš {h} ¦ {res}: {q} behövs, du har {h} ¦ {res}: {q} kræves, du har {h}
+plan rare ¦ vzácný plán ¦ sällsynt ritning ¦ sjælden tegning
+plan à trouver ¦ plán k nalezení ¦ ritning att hitta ¦ tegning at finde
+{n} h de travail ¦ {n} h práce ¦ {n} h arbete ¦ {n} t arbejde
+⚡ électricité ¦ ⚡ elektřina ¦ ⚡ el ¦ ⚡ strøm
+Des objets qui ne servent à rien tels quels… mais qu’on démonte pour en tirer des composants. {a} / {b} places (un 🧺 débarras en ajoute). ¦ Předměty, které jsou samy o sobě k ničemu… ale rozeberou se na součástky. {a} / {b} míst (🧺 komora přidá další). ¦ Föremål som är oanvändbara som de är… men kan plockas isär till komponenter. {a} / {b} platser (en 🧺 skrubb ger fler). ¦ Genstande, der er ubrugelige, som de er… men kan skilles ad til komponenter. {a} / {b} pladser (et 🧺 pulterkammer giver flere).
+Personne ne démonte : mets quelqu’un sur « ♻️ Démonter le bric-à-brac » (onglet Habitants) — ou clique « Démonter », quelqu’un de libre s’y mettra. ¦ Nikdo nerozebírá: dej někoho na „♻️ Rozebírat harampádí“ (karta Obyvatelé) — nebo klikni na „Rozebrat“, pustí se do toho někdo volný. ¦ Ingen plockar isär: sätt någon på ”♻️ Plocka isär skrot” (fliken Invånare) — eller klicka ”Plocka isär”, så tar någon ledig det. ¦ Ingen skiller ad: sæt nogen på »♻️ Skil skrammel ad« (fanen Beboere) — eller klik »Skil ad«, så gør en ledig det.
+encore {h} h ¦ ještě {h} h ¦ {h} h kvar ¦ {h} t tilbage
+Une fois démonté ({n} h) : ¦ Po rozebrání ({n} h): ¦ När det är isärplockat ({n} h): ¦ Når det er skilt ad ({n} t):
+♻️ Démonter ¦ ♻️ Rozebrat ¦ ♻️ Plocka isär ¦ ♻️ Skil ad
+Les {n} ¦ Všech {n} ¦ Alla {n} ¦ Alle {n}
+En ville, coche « ♻️ Bric-à-brac » dans ce qu’on rapporte : la décharge, les maisons, le magasin d’électroménager en regorgent. ¦ Ve městě zaškrtni „♻️ Harampádí“ mezi tím, co se má přinést: skládka, domy a obchod s elektrospotřebiči jsou ho plné. ¦ I staden, kryssa i ”♻️ Skrot” bland det som ska hämtas: soptippen, husen och vitvaruaffären är fulla av det. ¦ I byen, sæt kryds ved »♻️ Skrammel« blandt det, der skal hentes: lossepladsen, husene og hvidevarebutikken er fulde af det.
+on y trouve : {list} ¦ najdeš tam: {list} ¦ där finns: {list} ¦ der findes: {list}
+plus de plans ¦ víc plánů ¦ fler ritningar ¦ flere tegninger
+plus d’outils ¦ víc nástrojů ¦ fler verktyg ¦ flere værktøjer
+plus de lettres ¦ víc dopisů ¦ fler brev ¦ flere breve
+plus de documents ¦ víc dokumentů ¦ fler dokument ¦ flere dokumenter
+plus risqué ¦ riskantnější ¦ riskablare ¦ mere risikabelt
+Fouiller : ¦ Prohledat: ¦ Leta: ¦ Gennemsøg:
+Quelle pièce ¦ Která místnost ¦ Vilket rum ¦ Hvilket rum
+🏠 Tout le lieu (2 h) ¦ 🏠 Celé místo (2 h) ¦ 🏠 Hela platsen (2 h) ¦ 🏠 Hele stedet (2 t)
+déjà fouillée ¦ už prohledaná ¦ redan genomsökt ¦ allerede gennemsøgt
+pas encore fouillée : un petit trésor caché ¦ ještě neprohledaná: malý skrytý poklad ¦ inte genomsökt än: en liten gömd skatt ¦ ikke gennemsøgt endnu: en lille skjult skat
+Toutes les pièces : tout ce qu’il y a ¦ Všechny místnosti: vše, co tam je ¦ Alla rum: allt som finns ¦ Alle rum: alt, hvad der er
+(vu : {n}) ¦ (viděno: {n}) ¦ (sett: {n}) ¦ (set: {n})
+Ce qu’on rapporte de {place} ¦ Co přinést z {place} ¦ Vad som ska hämtas från {place} ¦ Hvad der skal hentes fra {place}
+♻️ bric-à-brac ¦ ♻️ harampádí ¦ ♻️ skrot ¦ ♻️ skrammel
+Combien au plus de {what} (vide = tout) ¦ Nejvýš kolik {what} (prázdné = vše) ¦ Högst hur mycket {what} (tomt = allt) ¦ Højst hvor meget {what} (tomt = alt)
+bric-à-brac ¦ harampádí ¦ skrot ¦ skrammel
+Rapporter : ¦ Přinést: ¦ Hämta: ¦ Hent:
+{h} h de marche en tout (aller, de lieu en lieu, retour), plus 2 h de fouille par lieu. <b>Place pour rapporter : {cap}</b> (en poids : l’eau et le métal comptent ×1,5, le tissu ×0,5 ; un bric-à-brac = 2 ; {terr} aujourd’hui){planned}. Sac plein : il rentre plus tôt. Plus de place : 🎒 sacs à dos, 🧺 hotte, 🛞 brouette, 🛒 charrette, 🚛 remorque de vélo, ou le grand sac trouvé en ville. ¦ {h} h chůze celkem (tam, z místa na místo, zpět), plus 2 h prohledávání na místo. <b>Místo na přinesení: {cap}</b> (podle váhy: voda a kov se počítají ×1,5, látka ×0,5; jeden kus harampádí = 2; dnes {terr}){planned}. Plný batoh: vrátí se dřív. Víc místa: 🎒 batohy, 🧺 nůše, 🛞 kolečko, 🛒 vozík, 🚛 vozík za kolo, nebo velký pytel nalezený ve městě. ¦ {h} h promenad totalt (dit, från plats till plats, tillbaka), plus 2 h letande per plats. <b>Plats att ta hem: {cap}</b> (efter vikt: vatten och metall räknas ×1,5, tyg ×0,5; ett skrotföremål = 2; {terr} i dag){planned}. Full säck: hen kommer hem tidigare. Mer plats: 🎒 ryggsäckar, 🧺 korg, 🛞 skottkärra, 🛒 kärra, 🚛 cykelkärra, eller den stora säcken som hittats i staden. ¦ {h} t gang i alt (frem, fra sted til sted, tilbage), plus 2 t søgning pr. sted. <b>Plads til at bringe hjem: {cap}</b> (efter vægt: vand og metal tæller ×1,5, stof ×0,5; ét stykke skrammel = 2; {terr} i dag){planned}. Fuld sæk: vedkommende kommer tidligere hjem. Mere plads: 🎒 rygsække, 🧺 kurv, 🛞 trillebør, 🛒 vogn, 🚛 cykelanhænger eller den store sæk fundet i byen.
+prévu : {n} {warn} ¦ plánováno: {n} {warn} ¦ planerat: {n} {warn} ¦ planlagt: {n} {warn}
+— trop : il rapportera {n} au plus ¦ — příliš: přinese nejvýš {n} ¦ — för mycket: hen tar hem högst {n} ¦ — for meget: vedkommende bringer højst {n} hjem
+prévu : {n} ¦ plánováno: {n} ¦ planerat: {n} ¦ planlagt: {n}
+🚶 Partir ¦ 🚶 Vyrazit ¦ 🚶 Ge dig av ¦ 🚶 Tag af sted
+Personne de libre au bunker. ¦ V bunkru nikdo není volný. ¦ Ingen ledig i bunkern. ¦ Ingen ledig i bunkeren.
+(étape {n}) ¦ (zastávka {n}) ¦ (etapp {n}) ¦ (etape {n})
+ville {size} ¦ {size} město ¦ {size} stad ¦ {size} by
+30 min par case (×1,5 la nuit sans {tool}). ¦ 30 min na pole (×1,5 v noci bez {tool}). ¦ 30 min per ruta (×1,5 på natten utan {tool}). ¦ 30 min pr. felt (×1,5 om natten uden {tool}).
+Revenir à la petite carte (Échap) ¦ Zpět na malou mapu (Esc) ¦ Tillbaka till lilla kartan (Esc) ¦ Tilbage til det lille kort (Esc)
+Voir la carte dans un grand cadre ¦ Zobrazit mapu ve velkém rámu ¦ Visa kartan i en stor ram ¦ Vis kortet i en stor ramme
+✕ Réduire la carte ¦ ✕ Zmenšit mapu ¦ ✕ Förminska kartan ¦ ✕ Formindsk kortet
+⤢ Ouvrir la carte en grand ¦ ⤢ Otevřít mapu ve velkém ¦ ⤢ Öppna kartan i stort ¦ ⤢ Åbn kortet i stort
+Pas de plan en fond : cette ville n’a pas de coordonnées (ni dans ton arbre, ni dans les communes). ¦ Bez podkladové mapy: toto město nemá souřadnice (ani ve tvém rodokmenu, ani v obcích). ¦ Ingen bakgrundskarta: staden har inga koordinater (varken i ditt träd eller bland kommunerna). ¦ Intet baggrundskort: byen har ingen koordinater (hverken i dit træ eller blandt kommunerne).
+{h} h de marche (aller) ¦ {h} h chůze (tam) ¦ {h} h promenad (dit) ¦ {h} t gang (frem)
+fouillé {n} ¦ prohledáno {n} ¦ genomsökt {n} ¦ gennemsøgt {n}
+🏚️ Pièces : {list} — à choisir dans le parcours. ¦ 🏚️ Místnosti: {list} — vyber je v trase. ¦ 🏚️ Rum: {list} — välj dem i rutten. ¦ 🏚️ Rum: {list} — vælg dem i ruten.
+🌙 Dangereux la nuit. ¦ 🌙 V noci nebezpečné. ¦ 🌙 Farligt på natten. ¦ 🌙 Farligt om natten.
+🌙 La nuit, on y trouve plus (les autres dorment). ¦ 🌙 V noci se tam najde víc (ostatní spí). ¦ 🌙 På natten hittar man mer där (de andra sover). ¦ 🌙 Om natten finder man mere der (de andre sover).
+📜 Peut-être ici : {list}. ¦ 📜 Možná tady: {list}. ¦ 📜 Kanske här: {list}. ¦ 📜 Måske her: {list}.
+👁️ Vu le jour {d} : {list}. ¦ 👁️ Viděno v den {d}: {list}. ¦ 👁️ Sett dag {d}: {list}. ¦ 👁️ Set dag {d}: {list}.
+plus aucune réserve ¦ už žádné zásoby ¦ inga förråd kvar ¦ ingen forråd tilbage
+{n} bric-à-brac ¦ {n} harampádí ¦ {n} skrot ¦ {n} skrammel
+Ça change chaque matin, au hasard : des choses reviennent, d’autres survivants passent. ¦ Mění se každé ráno náhodně: věci se vracejí, prochází jiní přeživší. ¦ Det ändras varje morgon slumpvis: saker kommer tillbaka, andra överlevande kommer förbi. ¦ Det ændrer sig hver morgen tilfældigt: ting kommer igen, andre overlevende kommer forbi.
+♻️ Du bric-à-brac : {list}. ¦ ♻️ Harampádí: {list}. ¦ ♻️ Skrot: {list}. ¦ ♻️ Skrammel: {list}.
+♻️ Du bric-à-brac (plus rien pour l’instant). ¦ ♻️ Harampádí (zatím nic). ¦ ♻️ Skrot (inget kvar just nu). ¦ ♻️ Skrammel (intet lige nu).
+♻️ Du bric-à-brac. ¦ ♻️ Harampádí. ¦ ♻️ Skrot. ¦ ♻️ Skrammel.
+⛓️ Relié au bunker par les rails : deux fois plus vite, et le chariot de mine rapporte +30. ¦ ⛓️ Spojeno s bunkrem kolejemi: dvakrát rychleji a důlní vozík přiveze +30. ¦ ⛓️ Förbunden med bunkern via räls: dubbelt så snabbt, och gruvvagnen tar hem +30. ¦ ⛓️ Forbundet med bunkeren via skinner: dobbelt så hurtigt, og minevognen bringer +30 hjem.
+⛓️ Poser les rails jusqu’ici (à la place des autres) ¦ ⛓️ Položit koleje až sem (místo ostatních) ¦ ⛓️ Lägg rälsen ända hit (i stället för de andra) ¦ ⛓️ Læg skinnerne hertil (i stedet for de andre)
+⛓️ Poser les rails jusqu’ici ¦ ⛓️ Položit koleje až sem ¦ ⛓️ Lägg rälsen ända hit ¦ ⛓️ Læg skinnerne hertil
+− Retirer du parcours ¦ − Odebrat z trasy ¦ − Ta bort från rutten ¦ − Fjern fra ruten
+＋ Ajouter au parcours ¦ ＋ Přidat do trasy ¦ ＋ Lägg till i rutten ¦ ＋ Tilføj til ruten
+Clique sur les lieux de la carte pour composer le parcours (jusqu’à 6 étapes). ¦ Klikej na místa na mapě a sestav trasu (až 6 zastávek). ¦ Klicka på platser på kartan för att bygga rutten (upp till 6 stopp). ¦ Klik på steder på kortet for at sammensætte ruten (op til 6 stop).
+où chercher : {list} · récompense : {reward} ¦ kde hledat: {list} · odměna: {reward} ¦ var man ska leta: {list} · belöning: {reward} ¦ hvor man skal lede: {list} · belønning: {reward}
+Toutes les missions sont faites ! ¦ Všechny mise jsou splněny! ¦ Alla uppdrag är klara! ¦ Alle missioner er fuldført!
+Pas d’ancêtre connu pour une mission (la partie a été créée sans arbre). ¦ Pro misi není známý žádný předek (hra byla vytvořena bez rodokmenu). ¦ Ingen känd anfader för ett uppdrag (spelet skapades utan träd). ¦ Ingen kendt ane til en mission (spillet blev oprettet uden træ).
+Le coffre est parti vide (aucun objet choisi au départ). ¦ Truhla začala prázdná (na začátku nebyl vybrán žádný předmět). ¦ Kistan började tom (inga föremål valdes i början). ¦ Kisten startede tom (ingen genstande valgt fra start).
+💞 {a} et {b} ¦ 💞 {a} a {b} ¦ 💞 {a} och {b} ¦ 💞 {a} og {b}
+{n} en vie. Ceux qui ont de la famille près d’eux gardent mieux le moral. ¦ Naživu: {n}. Kdo má rodinu nablízku, drží si lepší náladu. ¦ {n} vid liv. De som har släkt nära sig håller humöret uppe bättre. ¦ {n} i live. De, der har familie tæt på, holder humøret bedre oppe.
+⚡ Une vieille brouille : {a} et {b}. ¦ ⚡ Starý spor: {a} a {b}. ¦ ⚡ En gammal fejd: {a} och {b}. ¦ ⚡ En gammel fejde: {a} og {b}.
+🤰 {name} attend un bébé : naissance le jour {n}. ¦ 🤰 {name} čeká miminko: narození v den {n}. ¦ 🤰 {name} väntar barn: födsel dag {n}. ¦ 🤰 {name} venter barn: fødsel dag {n}.
+né·e le jour {n} ¦ narozen(a) v den {n} ¦ född dag {n} ¦ født dag {n}
+Cet arbre reste dans la partie : il ne touche pas à ta vraie base. ¦ Tento strom zůstává ve hře: nesahá na tvou skutečnou databázi. ¦ Det här trädet stannar i spelet: det rör inte din riktiga databas. ¦ Dette træ bliver i spillet: det rører ikke din rigtige database.
+Pas encore de naissance. Il faut un couple qui a le moral, et un peu de temps (à partir du jour 5). ¦ Zatím žádné narození. Je potřeba pár v dobré náladě a trochu času (od 5. dne). ¦ Inga födslar än. Det behövs ett par vid gott mod och lite tid (från dag 5). ¦ Ingen fødsler endnu. Der skal et par ved godt mod og lidt tid til (fra dag 5).
+Pas encore de naissance. Il faut un berceau, un couple qui a le moral, et un peu de temps (à partir du jour 5). ¦ Zatím žádné narození. Je potřeba kolébka, pár v dobré náladě a trochu času (od 5. dne). ¦ Inga födslar än. Det behövs en vagga, ett par vid gott mod och lite tid (från dag 5). ¦ Ingen fødsler endnu. Der skal en vugge, et par ved godt mod og lidt tid til (fra dag 5).
+{a} — {b} : {h} h, route {danger}, {terr} ¦ {a} — {b}: {h} h, cesta {danger}, {terr} ¦ {a} — {b}: {h} h, {danger} väg, {terr} ¦ {a} — {b}: {h} t, {danger} vej, {terr}
+Lieu pas encore connu ¦ Místo zatím neznámé ¦ Platsen är inte känd än ¦ Sted endnu ukendt
+Le convoi vers {place} ¦ Konvoj do {place} ¦ Konvojen mot {place} ¦ Konvojen mod {place}
+{name} : la carte de la région ¦ {name}: mapa kraje ¦ {name}: kartan över regionen ¦ {name}: kortet over regionen
+🧭 Former un convoi vers {place} ¦ 🧭 Sestavit konvoj do {place} ¦ 🧭 Bilda en konvoj mot {place} ¦ 🧭 Saml en konvoj mod {place}
+(à soigner) ¦ (k ošetření) ¦ (behöver vård) ¦ (skal plejes)
+avec son cheval ¦ se svým koněm ¦ med sin häst ¦ med sin hest
+usé à {n} % ¦ opotřebováno z {n} % ¦ {n} % sliten ¦ {n} % slidt
+mange et boit en route ¦ jí a pije cestou ¦ äter och dricker på vägen ¦ spiser og drikker undervejs
+le bunker s’en passe ¦ bunkr se bez toho obejde ¦ bunkern klarar sig utan ¦ bunkeren klarer sig uden
+{res} emportés ¦ {res} s sebou ¦ {res} med sig ¦ {res} med
+Environ {days} jours aller-retour ({h} h de route à l’aller, {stay} h sur place) · {ico} pire route : {danger} · {terr}. Pour la route : {need}. ¦ Zhruba {days} dní tam a zpět ({h} h cesty tam, {stay} h na místě) · {ico} nejhorší cesta: {danger} · {terr}. Na cestu: {need}. ¦ Cirka {days} dagar tur och retur ({h} h på vägen dit, {stay} h på plats) · {ico} sämsta vägen: {danger} · {terr}. För vägen: {need}. ¦ Cirka {days} dage frem og tilbage ({h} t på vejen frem, {stay} t på stedet) · {ico} værste vej: {danger} · {terr}. Til vejen: {need}.
+L’eau et le métal pèsent lourd (×1,5), le tissu et les plantes peu (×0,5). ¦ Voda a kov jsou těžké (×1,5), látka a rostliny lehké (×0,5). ¦ Vatten och metall väger mycket (×1,5), tyg och växter lite (×0,5). ¦ Vand og metal vejer meget (×1,5), stof og planter lidt (×0,5).
+Pas de carte de la région pour cette partie. ¦ Pro tuto hru není mapa kraje. ¦ Ingen karta över regionen för det här spelet. ¦ Intet kort over regionen til dette spil.
+sur place à {place} jusqu’à {time} ¦ na místě v {place} do {time} ¦ på plats i {place} till {time} ¦ på stedet i {place} til {time}
+Vers {place} ¦ Do {place} ¦ Mot {place} ¦ Mod {place}
+Rentrez ! ¦ Vraťte se! ¦ Kom hem! ¦ Kom hjem!
+{name} demandent {what} ¦ {name} žádají {what} ¦ {name} ber om {what} ¦ {name} beder om {what}
+réponse avant jour {d} {time} · partager fait monter leur réputation, refuser la fait baisser ¦ odpověď do dne {d} {time} · dělit se zvyšuje jejich pověst, odmítnout ji snižuje ¦ svar före dag {d} {time} · att dela höjer deras rykte, att vägra sänker det ¦ svar før dag {d} {time} · at dele hæver deres omdømme, at nægte sænker det
+🤲 Partager ¦ 🤲 Podělit se ¦ 🤲 Dela ¦ 🤲 Del
+Refuser ¦ Odmítnout ¦ Vägra ¦ Afslå
+quelque part dans la région ¦ někde v kraji ¦ någonstans i regionen ¦ et sted i regionen
+force {n} ¦ síla {n} ¦ styrka {n} ¦ styrke {n}
+Réputation {n} (de −100 à +100) ¦ Pověst {n} (od −100 do +100) ¦ Rykte {n} (från −100 till +100) ¦ Omdømme {n} (fra −100 til +100)
+Il faut de quoi porter le message ¦ Je potřeba něco, čím zprávu poslat ¦ Det behövs ett sätt att skicka budet ¦ Der skal være en måde at sende beskeden på
+🎁 Offrir… ¦ 🎁 Darovat… ¦ 🎁 Ge… ¦ 🎁 Giv…
+🫏 Échanger une bête… ¦ 🫏 Vyměnit za zvíře… ¦ 🫏 Byt till ett djur… ¦ 🫏 Byt til et dyr…
+visité {n} ¦ navštíveno {n} ¦ besökt {n} ¦ besøgt {n}
+jamais visité ¦ nikdy nenavštíveno ¦ aldrig besökt ¦ aldrig besøgt
+{d} j aller-retour, pire route {ico} {danger} ¦ {d} d tam a zpět, nejhorší cesta {ico} {danger} ¦ {d} d tur och retur, sämsta vägen {ico} {danger} ¦ {d} d frem og tilbage, værste vej {ico} {danger}
+{name} vivent ici ¦ Žijí tu {name} ¦ {name} bor här ¦ {name} bor her
+On peut y trouver : {list}. ¦ Dá se tu najít: {list}. ¦ Här kan man hitta: {list}. ¦ Her kan man finde: {list}.
+des plans ¦ plány ¦ ritningar ¦ tegninger
+des bêtes de bât ¦ soumaři ¦ packdjur ¦ pakdyr
+des gens qui cherchent un abri ¦ lidé, kteří hledají úkryt ¦ folk som söker skydd ¦ folk, der søger ly
+🧭 Un convoi y est déjà en route. ¦ 🧭 Konvoj už je na cestě tam. ¦ 🧭 En konvoj är redan på väg dit. ¦ 🧭 En konvoj er allerede på vej derhen.
+🧭 Former un convoi… ¦ 🧭 Sestavit konvoj… ¦ 🧭 Bilda en konvoj… ¦ 🧭 Saml en konvoj…
+? Un lieu pas encore connu ¦ ? Zatím neznámé místo ¦ ? En plats som inte är känd än ¦ ? Et sted, der endnu ikke er kendt
+Un convoi qui passe à côté le découvrira. ¦ Objeví ho konvoj, který půjde kolem. ¦ En konvoj som passerar i närheten upptäcker den. ¦ En konvoj, der kommer forbi i nærheden, vil opdage det.
+Clique sur un lieu de la carte pour y envoyer un convoi : plusieurs jours de route, les absents ne travaillent pas au bunker. ¦ Klikni na místo na mapě a pošli tam konvoj: několik dní cesty, a kdo je pryč, v bunkru nepracuje. ¦ Klicka på en plats på kartan för att skicka en konvoj dit: flera dagars resa, och de som är borta arbetar inte i bunkern. ¦ Klik på et sted på kortet for at sende en konvoj derhen: flere dages rejse, og de fraværende arbejder ikke i bunkeren.
+{n} sur {total}. ¦ {n} z {total}. ¦ {n} av {total}. ¦ {n} af {total}.
+Aucun convoi en route. ¦ Žádný konvoj na cestě. ¦ Ingen konvoj på väg. ¦ Ingen konvoj undervejs.
+{h} h de marche · produit par jour : {prod} ¦ {h} h chůze · vyrábí denně: {prod} ¦ {h} h promenad · producerar per dag: {prod} ¦ {h} t gang · producerer pr. dag: {prod}
+🪵 palissade ¦ 🪵 palisáda ¦ 🪵 palissad ¦ 🪵 palisade
+pillé {n} ¦ vyrabováno {n} ¦ plundrad {n} ¦ plyndret {n}
+🧺 En attente : {list} ¦ 🧺 Čeká: {list} ¦ 🧺 Väntar: {list} ¦ 🧺 Venter: {list}
+🧺 Rien en attente pour l’instant. ¦ 🧺 Zatím nic nečeká. ¦ 🧺 Inget väntar just nu. ¦ 🧺 Intet venter lige nu.
+personne n’y est encore passé ¦ ještě tam nikdo nebyl ¦ ingen har varit där än ¦ ingen har været der endnu
+dernier passage il y a {n} ¦ naposledy tam někdo byl před {n} ¦ senaste besöket för {n} sedan ¦ seneste besøg for {n} siden
+quelqu’un y est passé aujourd’hui ¦ dnes tam někdo byl ¦ någon var där i dag ¦ nogen var der i dag
+— il risque d’être pillé ¦ — hrozí, že bude vyrabováno ¦ — den riskerar att plundras ¦ — den risikerer at blive plyndret
+Abîmé : il ne produit plus. Les réparations coûtent un tiers du chantier. ¦ Poškozeno: už nevyrábí. Oprava stojí třetinu stavby. ¦ Skadad: den producerar inte längre. Reparationen kostar en tredjedel av bygget. ¦ Beskadiget: den producerer ikke længere. Reparationen koster en tredjedel af byggeriet.
+🔨 Lancer le chantier ¦ 🔨 Zahájit stavbu ¦ 🔨 Starta bygget ¦ 🔨 Start byggeriet
+🔧 Lancer les réparations ¦ 🔧 Zahájit opravy ¦ 🔧 Starta reparationerna ¦ 🔧 Start reparationerne
+Qui y va ? ¦ Kdo půjde? ¦ Vem går? ¦ Hvem går?
+👷 Travailler 8 h ¦ 👷 Pracovat 8 h ¦ 👷 Arbeta 8 h ¦ 👷 Arbejd 8 t
+🧺 Aller récolter ¦ 🧺 Jít sklízet ¦ 🧺 Gå och hämta ¦ 🧺 Gå ud og høste
+🪵 Construire une palissade ¦ 🪵 Postavit palisádu ¦ 🪵 Bygg en palissad ¦ 🪵 Byg en palisade
+chacun, en plus ¦ každý, navíc ¦ var och en, extra ¦ hver, ekstra
+sur chaque âne ¦ na každém oslovi ¦ på varje åsna ¦ på hvert æsel
+vers {place} ¦ do {place} ¦ mot {place} ¦ mod {place}
+les rails ne sont pas encore posés (onglet 🏙️ Ville, un lieu proche) ¦ koleje ještě nejsou položené (karta 🏙️ Město, blízké místo) ¦ rälsen är inte lagd än (fliken 🏙️ Staden, en närliggande plats) ¦ skinnerne er ikke lagt endnu (fanen 🏙️ Byen, et nærliggende sted)
+un seul véhicule par sortie, le meilleur pour le terrain ¦ jen jedno vozidlo na výpravu, to nejlepší pro terén ¦ bara ett fordon per tur, det bästa för terrängen ¦ kun ét køretøj pr. tur, det bedste til terrænet
+(inutile aujourd’hui) ¦ (dnes k ničemu) ¦ (oanvändbar i dag) ¦ (ubrugelig i dag)
+(×{k} aujourd’hui) ¦ (dnes ×{k}) ¦ (×{k} i dag) ¦ (×{k} i dag)
+parti ¦ pryč ¦ borta ¦ væk
+🔧 à réparer (il faut un établi) ¦ 🔧 k opravě (je potřeba ponk) ¦ 🔧 ska lagas (kräver en hyvelbänk) ¦ 🔧 skal repareres (kræver en høvlebænk)
+blessé·e, au repos ¦ zraněn(a), odpočívá ¦ skadad, vilar ¦ såret, hviler
+parti·e ¦ pryč ¦ borta ¦ væk
+Aujourd’hui en ville : {terr}. ¦ Dnes ve městě: {terr}. ¦ I staden i dag: {terr}. ¦ I byen i dag: {terr}.
+Ce qu’on rapporte se compte en poids : l’eau, le métal et l’essence pèsent lourd, le tissu, les plantes et les médicaments peu. La brouette peine dans la boue, le traîneau ne va que sur la neige, la barque que sur l’eau. ¦ Co se přinese, počítá se podle váhy: voda, kov a benzín jsou těžké, látka, rostliny a léky lehké. Kolečko má potíže v blátě, saně jedou jen po sněhu, loďka jen po vodě. ¦ Det man tar hem räknas efter vikt: vatten, metall och bensin väger mycket, tyg, växter och mediciner lite. Skottkärran har svårt i leran, släden går bara på snö, båten bara på vatten. ¦ Det, man bringer hjem, tæller efter vægt: vand, metal og benzin vejer meget, stof, planter og medicin lidt. Trillebøren har det svært i mudder, slæden kører kun på sne, båden kun på vand.
+Pas encore de transport : des sacs à dos, une brouette, une charrette… (onglet 🛠️ Atelier), ou un âne. ¦ Zatím žádná doprava: batohy, kolečko, vozík… (karta 🛠️ Dílna), nebo osel. ¦ Inga transportmedel än: ryggsäckar, en skottkärra, en kärra… (fliken 🛠️ Verkstad), eller en åsna. ¦ Ingen transport endnu: rygsække, en trillebør, en vogn… (fanen 🛠️ Værksted), eller et æsel.
+Ami·e ¦ Přítel ¦ Vän ¦ Ven
+Bonne entente ¦ Dobře spolu vycházejí ¦ Kommer bra överens ¦ Kommer godt ud af det
+Froid ¦ Chladný vztah ¦ Kyligt ¦ Køligt
+Ne se supportent plus ¦ Už se nesnesou ¦ Står inte ut med varandra ¦ Kan ikke udstå hinanden
+Il ou elle progresse chaque soir passé au bunker avec son maître ¦ Zlepšuje se každý večer strávený v bunkru se svým mistrem ¦ Hen blir bättre varje kväll i bunkern med sin mästare ¦ Vedkommende bliver bedre hver aften i bunkeren med sin mester
+🎓 apprenti·e de {name} ¦ 🎓 učeň {name} ¦ 🎓 lärling till {name} ¦ 🎓 lærling hos {name}
+Son savoir restera chez son apprenti ¦ Jeho/její vědění zůstane u učně ¦ Kunskapen lever vidare hos lärlingen ¦ Viden lever videre hos lærlingen
+🎓 forme {name} ¦ 🎓 vyučuje {name} ¦ 🎓 lär upp {name} ¦ 🎓 oplærer {name}
+Arrêter l’apprentissage de {name} ¦ Ukončit učení osoby {name} ¦ Avsluta {name}s lärlingstid ¦ Afslut {name}s læretid
+{name} ×{a} → jusqu’à ×{b} ¦ {name} ×{a} → až ×{b} ¦ {name} ×{a} → upp till ×{b} ¦ {name} ×{a} → op til ×{b}
+Personne à qui apprendre : tout le monde en sait déjà autant. ¦ Není koho učit: všichni už umějí stejně. ¦ Ingen att lära upp: alla kan redan lika mycket. ¦ Ingen at oplære: alle ved allerede lige så meget.
+🎓 {name} forme un·e apprenti·e ¦ 🎓 {name} vyučuje učně ¦ 🎓 {name} lär upp en lärling ¦ 🎓 {name} oplærer en lærling
+en couple ¦ pár ¦ ett par ¦ et par
+de la même famille ¦ ze stejné rodiny ¦ samma släkt ¦ samme familie
+Le bunker de {name} s’est tu après {n} ¦ Bunkr osoby {name} utichl po {n} ¦ {name}s bunker tystnade efter {n} ¦ {name}s bunker blev tavs efter {n}
+{n} sous terre : tout le monde tient bon ¦ {n} pod zemí: všichni vydrží ¦ {n} under jorden: alla håller ut ¦ {n} under jorden: alle holder ud
+Jour {d} : {n} à {city} ¦ Den {d}: {n} v {city} ¦ Dag {d}: {n} i {city} ¦ Dag {d}: {n} i {city}
+La Gazette de l’abri ¦ Noviny z úkrytu ¦ Skyddets tidning ¦ Beskyttelsesrummets avis
+La Gazette du Bunker ¦ Noviny z bunkru ¦ Bunkertidningen ¦ Bunkeravisen
+{scen} · lue à la chandelle ¦ {scen} · čteno při svíčce ¦ {scen} · läst i stearinljusets sken ¦ {scen} · læst ved stearinlys
+Édition spéciale · ne paraît que sous terre ¦ Zvláštní vydání · vychází jen pod zemí ¦ Specialutgåva · utkommer bara under jorden ¦ Særudgave · udkommer kun under jorden
+(né·e au bunker) ¦ (narozen(a) v bunkru) ¦ (född i bunkern) ¦ (født i bunkeren)
+mort·e le jour {n} ¦ zemřel(a) v den {n} ¦ död dag {n} ¦ død dag {n}
+{name}, jour {d}, de {m} et {f} ¦ {name}, den {d}, dítě {m} a {f} ¦ {name}, dag {d}, barn till {m} och {f} ¦ {name}, dag {d}, barn af {m} og {f}
+{name}, jour {d}, de {m} ¦ {name}, den {d}, dítě {m} ¦ {name}, dag {d}, barn till {m} ¦ {name}, dag {d}, barn af {m}
+{n} de pillards ({won}, {lost}) ¦ {n} od lupičů ({won}, {lost}) ¦ {n} från plundrare ({won}, {lost}) ¦ {n} fra plyndrere ({won}, {lost})
+aucun pillard ¦ žádní lupiči ¦ inga plundrare ¦ ingen plyndrere
+{n} ({ok}, {lost}) ¦ {n} ({ok}, {lost}) ¦ {n} ({ok}, {lost}) ¦ {n} ({ok}, {lost})
+{n} ({ok}) ¦ {n} ({ok}) ¦ {n} ({ok}) ¦ {n} ({ok})
+Aucun convoi n’est encore parti ¦ Zatím nevyrazil žádný konvoj ¦ Ingen konvoj har gett sig av än ¦ Ingen konvoj er draget af sted endnu
+{n} en route ¦ {n} na cestě ¦ {n} på väg ¦ {n} undervejs
+💞 {a} et {b}, jour {d} ¦ 💞 {a} a {b}, den {d} ¦ 💞 {a} och {b}, dag {d} ¦ 💞 {a} og {b}, dag {d}
+{a} apprend auprès de {m} ¦ {a} se učí u {m} ¦ {a} lär sig av {m} ¦ {a} lærer af {m}
+Un savoir transmis au-delà de la mort. ¦ Vědění předané i za hrob. ¦ Kunskap som förts vidare bortom döden. ¦ Viden givet videre ud over døden.
+Rien de notable pour l’instant. ¦ Zatím nic pozoruhodného. ¦ Inget anmärkningsvärt än. ¦ Intet bemærkelsesværdigt endnu.
+{floors}, {n} installations ({built} à l’atelier), {tools}, {plans}. ¦ {floors}, zařízení: {n} ({built} v dílně), {tools}, {plans}. ¦ {floors}, {n} installationer ({built} i verkstaden), {tools}, {plans}. ¦ {floors}, {n} installationer ({built} i værkstedet), {tools}, {plans}.
+Pas encore de succès dans cette partie. ¦ V této hře zatím žádný úspěch. ¦ Inga prestationer i det här spelet än. ¦ Ingen præstationer i dette spil endnu.
+{scen} : gagné le jour {n} ! ¦ {scen}: vyhráno v den {n}! ¦ {scen}: vunnet dag {n}! ¦ {scen}: vundet dag {n}!
+⏪ Revenu en arrière {n}. ¦ ⏪ Vráceno zpět {n}. ¦ ⏪ Gick tillbaka {n}. ¦ ⏪ Gik tilbage {n}.
+Le plat du jour ¦ Jídlo dne ¦ Dagens rätt ¦ Dagens ret
+✨ Le meilleur possible ¦ ✨ To nejlepší možné ¦ ✨ Det bästa möjliga ¦ ✨ Det bedst mulige
+Aujourd’hui : ¦ Dnes: ¦ I dag: ¦ I dag:
+(rien pour cuire : un 🔥 poêle, un 🍲 fourneau ou un 🍞 four) ¦ (není na čem vařit: 🔥 kamna, 🍲 sporák nebo 🍞 pec) ¦ (inget att laga mat på: en 🔥 kamin, en 🍲 spis eller en 🍞 ugn) ¦ (intet at lave mad på: en 🔥 brændeovn, et 🍲 komfur eller en 🍞 ovn)
+🔥 à cuire ¦ 🔥 k vaření ¦ 🔥 att tillaga ¦ 🔥 skal tilberedes
+faim +{a}, moral {b} ¦ hlad +{a}, nálada {b} ¦ hunger +{a}, moral {b} ¦ sult +{a}, moral {b}
+mange {food} par jour ¦ sní {food} denně ¦ äter {food} om dagen ¦ spiser {food} om dagen
+n’a pas mangé depuis {n} jour(s) ¦ nejedl(a) {n} dní ¦ har inte ätit på {n} dag(ar) ¦ har ikke spist i {n} dag(e)
+(a faim) ¦ (má hlad) ¦ (hungrig) ¦ (sulten)
+Portrait de ¦ Portrét osoby ¦ Porträtt av ¦ Portræt af
+moral +{n}/h ¦ nálada +{n}/h ¦ moral +{n}/h ¦ moral +{n}/t
+(avec électricité) ¦ (s elektřinou) ¦ (med el) ¦ (med strøm)
+{what} : {n} {unit} aujourd’hui ¦ {what}: dnes {n} {unit} ¦ {what}: {n} {unit} i dag ¦ {what}: {n} {unit} i dag
+Rien encore. ¦ Zatím nic. ¦ Inget än. ¦ Intet endnu.
+Jour {d} : {v} ¦ Den {d}: {v} ¦ Dag {d}: {v} ¦ Dag {d}: {v}
+né·e au bunker ¦ narozen(a) v bunkru ¦ född i bunkern ¦ født i bunkeren
+Le livre du bunker de {name} ¦ Kniha bunkru osoby {name} ¦ Boken om {name}s bunker ¦ Bogen om {name}s bunker
+{n} sous terre ¦ {n} pod zemí ¦ {n} under jorden ¦ {n} under jorden
+le premier jour ¦ první den ¦ första dagen ¦ den første dag
+Ceux qui sont descendus ¦ Ti, kdo sestoupili ¦ De som gick ner ¦ De, der gik ned
+Jour après jour ¦ Den za dnem ¦ Dag efter dag ¦ Dag efter dag
+{name}, jour {d} ¦ {name}, den {d} ¦ {name}, dag {d} ¦ {name}, dag {d}
+Ce qu’on a retrouvé de la famille ¦ Co se z rodiny našlo ¦ Det som hittades av släkten ¦ Det, der blev fundet af familien
+(jour {n}) ¦ (den {n}) ¦ (dag {n}) ¦ (dag {n})
+Le coffre de famille ¦ Rodinná truhla ¦ Släktkistan ¦ Familiekisten
+⤓ Télécharger (.html) ¦ ⤓ Stáhnout (.html) ¦ ⤓ Ladda ner (.html) ¦ ⤓ Hent (.html)
+✨ Ranger dans Trésors ¦ ✨ Uložit do Pokladů ¦ ✨ Spara i Skatter ¦ ✨ Gem i Skatte
+Ceux qui sont descendus : ¦ Ti, kdo sestoupili: ¦ De som gick ner: ¦ De, der gik ned:
+Ce qu’on a retrouvé de la famille : ¦ Co se z rodiny našlo: ¦ Det som hittades av släkten: ¦ Det, der blev fundet af familien:
+étape {a} / {b} ¦ krok {a} / {b} ¦ steg {a} / {b} ¦ trin {a} / {b}
+dangereux la nuit : {a} ; plus de choses la nuit : {b} ¦ nebezpečné v noci: {a}; víc věcí v noci: {b} ¦ farligt på natten: {a}; mer att hitta på natten: {b} ¦ farligt om natten: {a}; mere at finde om natten: {b}
+un ancêtre de ta base qui trouve un objet ou un lieu de sa vraie vie (son métier, son village, un lieu de sa fiche) raconte une anecdote tirée de sa fiche, dans le journal et en bulle. Jamais rien sur un vivant ni une fiche confidentielle. ¦ předek z tvé databáze, který najde předmět nebo místo ze svého skutečného života (své řemeslo, svou vesnici, místo ze své karty), vypráví historku ze své karty, v deníku a v bublině. Nikdy nic o žijícím ani o důvěrné kartě. ¦ en anfader ur din databas som hittar ett föremål eller en plats från sitt verkliga liv (sitt yrke, sin by, en plats på sin post) berättar en anekdot ur sin post, i loggen och i en pratbubbla. Aldrig något om en levande person eller en konfidentiell post. ¦ en ane fra din database, der finder en genstand eller et sted fra sit virkelige liv (sit fag, sin landsby, et sted på sin post), fortæller en anekdote fra sin post, i loggen og i en taleboble. Aldrig noget om en levende person eller en fortrolig post.
+(Aucun habitant de cette partie n’a de fiche à raconter.) ¦ (Žádný obyvatel této hry nemá kartu, o které by vyprávěl.) ¦ (Ingen invånare i det här spelet har en post att berätta om.) ¦ (Ingen beboer i dette spil har en post at fortælle om.)
+🏆 Gagné le jour {n} : tu peux continuer aussi longtemps que tu veux. ¦ 🏆 Vyhráno v den {n}: můžeš pokračovat, jak dlouho chceš. ¦ 🏆 Vunnet dag {n}: du kan fortsätta så länge du vill. ¦ 🏆 Vundet dag {n}: du kan fortsætte, så længe du vil.
+🏆 Pour gagner : tenir {n} jours (encore {left}). Ensuite, la partie continue sans fin. ¦ 🏆 K výhře: vydržet {n} dní (zbývá {left}). Pak hra pokračuje bez konce. ¦ 🏆 För att vinna: håll ut i {n} dagar ({left} kvar). Sedan fortsätter spelet utan slut. ¦ 🏆 For at vinde: hold ud i {n} dage ({left} tilbage). Derefter fortsætter spillet uden ende.
+{a} de ta famille, {b} de l’époque. ¦ {a} z tvé rodiny, {b} z té doby. ¦ {a} ur din släkt, {b} från tiden. ¦ {a} fra din familie, {b} fra tiden.
+{a} de ta famille. ¦ {a} z tvé rodiny. ¦ {a} ur din släkt. ¦ {a} fra din familie.
+{what} (encore {n} h). ¦ {what} (ještě {n} h). ¦ {what} ({n} h kvar). ¦ {what} ({n} t tilbage).
+🔧 En panne : {list}. ¦ 🔧 Porouchané: {list}. ¦ 🔧 Trasigt: {list}. ¦ 🔧 I stykker: {list}.
+✓ Rien en panne. ¦ ✓ Nic není porouchané. ¦ ✓ Inget är trasigt. ¦ ✓ Intet er i stykker.
+📻 Pas d’électricité : la radio est muette. Les messages arriveront quand le courant reviendra. ¦ 📻 Bez elektřiny: rádio mlčí. Zprávy přijdou, až se proud vrátí. ¦ 📻 Ingen el: radion är tyst. Meddelandena kommer när strömmen kommer tillbaka. ¦ 📻 Ingen strøm: radioen er tavs. Beskederne kommer, når strømmen vender tilbage.
+📯 Pas de radio à cette époque : un gamin du quartier court porter les nouvelles, et le crieur annonce le marché chaque matin. ¦ 📯 V této době není rádio: kluk ze sousedství běhá se zprávami a vyvolávač každé ráno ohlašuje trh. ¦ 📯 Ingen radio i den här tiden: en grabb från kvarteret springer med nyheterna, och utroparen ropar ut marknaden varje morgon. ¦ 📯 Ingen radio i denne tid: en knægt fra kvarteret løber med nyhederne, og byudråberen bekendtgør markedet hver morgen.
+(étape {a} / {b}) ¦ (zastávka {a} / {b}) ¦ (stopp {a} / {b}) ¦ (stop {a} / {b})
+Rentre ! ¦ Vrať se! ¦ Kom hem! ¦ Kom hjem!
+Tout le monde est au bunker. ¦ Všichni jsou v bunkru. ¦ Alla är i bunkern. ¦ Alle er i bunkeren.
+J{n} ¦ D{n} ¦ D{n} ¦ D{n}
+Sans radio, pas de marché. ¦ Bez rádia není trh. ¦ Ingen radio, ingen marknad. ¦ Ingen radio, intet marked.
+contre {what} · {who} ¦ za {what} · {who} ¦ mot {what} · {who} ¦ for {what} · {who}
+🤝 Accepter ¦ 🤝 Přijmout ¦ 🤝 Acceptera ¦ 🤝 Acceptér
+Plus d’offre aujourd’hui : de nouvelles demain matin (7 h). ¦ Dnes už žádná nabídka: nové zítra ráno (7 h). ¦ Inga fler erbjudanden i dag: nya i morgon bitti (kl. 7). ¦ Ikke flere tilbud i dag: nye i morgen tidlig (kl. 7).
+🚚 En route : {list}. ¦ 🚚 Na cestě: {list}. ¦ 🚚 På väg: {list}. ¦ 🚚 Undervejs: {list}.
+{ico} {n} de {who} (vers {time}) ¦ {ico} {n} od {who} (kolem {time}) ¦ {ico} {n} från {who} (omkring {time}) ¦ {ico} {n} fra {who} (omkring {time})
+📔 Le journal de {name} ¦ 📔 Deník osoby {name} ¦ 📔 {name}s dagbok ¦ 📔 {name}s dagbog
+← Tous les habitants ¦ ← Všichni obyvatelé ¦ ← Alla invånare ¦ ← Alle beboere
+Rien d’écrit pour l’instant : il ou elle écrit chaque soir. ¦ Zatím nic napsáno: píše každý večer. ¦ Inget skrivet än: hen skriver varje kväll. ¦ Intet skrevet endnu: vedkommende skriver hver aften.
+La fenêtre d’impression a été bloquée. ¦ Okno tisku bylo zablokováno. ¦ Utskriftsfönstret blockerades. ¦ Udskriftsvinduet blev blokeret.
+Partie « Le bunker de {name} » supprimée ¦ Hra „Bunkr osoby {name}“ smazána ¦ Spelet ”{name}s bunker” raderat ¦ Spillet »{name}s bunker« slettet
+Choisis un lieu sur la carte. ¦ Vyber místo na mapě. ¦ Välj en plats på kartan. ¦ Vælg et sted på kortet.
+La radio ne passe pas (pas d’électricité ?). ¦ Rádio nefunguje (chybí elektřina?). ¦ Radion når inte fram (ingen el?). ¦ Radioen kommer ikke igennem (ingen strøm?).
+✓ Rangé dans ✨ Trésors (sur la fiche de {name}). ¦ ✓ Uloženo v ✨ Pokladech (na kartě osoby {name}). ¦ ✓ Sparat i ✨ Skatter (på {name}s post). ¦ ✓ Gemt i ✨ Skatte (på {name}s post).
+Impossible de ranger le livre. ¦ Knihu se nepodařilo uložit. ¦ Boken kunde inte sparas. ¦ Bogen kunne ikke gemmes.
+Plus de place libre : creuse un étage (⛏️). ¦ Už žádné volné místo: vykopej patro (⛏️). ¦ Ingen ledig plats kvar: gräv en våning (⛏️). ¦ Ingen ledig plads tilbage: grav en etage (⛏️).
+Le message ne passe pas (pas d’électricité ?). ¦ Zpráva neprochází (chybí elektřina?). ¦ Budet når inte fram (ingen el?). ¦ Beskeden kommer ikke igennem (ingen strøm?).
+tu en as {n} ¦ máš {n} ¦ du har {n} ¦ du har {n}
+🎁 Offrir ¦ 🎁 Darovat ¦ 🎁 Ge ¦ 🎁 Giv
+contre {what} · {desc} ¦ za {what} · {desc} ¦ mot {what} · {desc} ¦ for {what} · {desc}
+🫏 Échanger une bête de bât ¦ 🫏 Vyměnit za soumara ¦ 🫏 Byt till ett packdjur ¦ 🫏 Byt til et pakdyr
+Reprendre au matin du jour {n}… ¦ Začít znovu od rána dne {n}… ¦ Börja om från morgonen dag {n}… ¦ Start forfra fra morgenen dag {n}…
+Reprendre au matin… ¦ Začít znovu od rána… ¦ Börja om från en morgon… ¦ Start forfra fra en morgen…
+pas encore de matin gardé ¦ zatím žádné uložené ráno ¦ ingen sparad morgon än ¦ ingen gemt morgen endnu
+Succès et records ¦ Úspěchy a rekordy ¦ Prestationer och rekord ¦ Præstationer og rekorder
+Le livre de la partie ¦ Kniha hry ¦ Spelets bok ¦ Spillets bog
+le récit, jour après jour ¦ příběh, den za dnem ¦ berättelsen, dag efter dag ¦ fortællingen, dag efter dag
+Exporter la partie ¦ Exportovat hru ¦ Exportera spelet ¦ Eksportér spillet
+la garder dans un fichier ¦ uchovat ji v souboru ¦ spara det i en fil ¦ gem det i en fil
+⏪ Revenir au matin d’avant ¦ ⏪ Vrátit se k dřívějšímu ránu ¦ ⏪ Gå tillbaka till en tidigare morgon ¦ ⏪ Gå tilbage til en tidligere morgen
+Chaque matin à 6 h, la partie est gardée (les {n} derniers). Reprendre ramène ce matin-là ; si tu changes d’avis, « ↶ Annuler » ramène où tu en étais. ¦ Každé ráno v 6 h se hra uloží (posledních {n}). Návrat tě vrátí do toho rána; pokud si to rozmyslíš, „↶ Vrátit zpět“ tě vrátí, kde jsi byl(a). ¦ Varje morgon kl. 6 sparas spelet (de {n} senaste). Att börja om tar dig tillbaka till den morgonen; ångrar du dig tar ”↶ Ångra” dig tillbaka dit du var. ¦ Hver morgen kl. 6 gemmes spillet (de sidste {n}). At starte forfra fører dig tilbage til den morgen; fortryder du, fører »↶ Fortryd« dig tilbage, hvor du var.
+{n} en vie sur {tot} ¦ {n} naživu z {tot} ¦ {n} vid liv av {tot} ¦ {n} i live af {tot}
+⏪ Reprendre ce matin-là ¦ ⏪ Začít znovu od tohoto rána ¦ ⏪ Börja om från den morgonen ¦ ⏪ Start forfra fra den morgen
+Pas encore de matin gardé : le premier le sera demain à 6 h. ¦ Zatím žádné uložené ráno: první bude zítra v 6 h. ¦ Ingen sparad morgon än: den första blir i morgon kl. 6. ¦ Ingen gemt morgen endnu: den første bliver i morgen kl. 6.
+⏪ Repris au matin du jour {n} (en pause) ¦ ⏪ Pokračuje se od rána dne {n} (pozastaveno) ¦ ⏪ Återupptaget från morgonen dag {n} (pausat) ¦ ⏪ Genoptaget fra morgenen dag {n} (på pause)
+retour au matin du jour {n} ¦ návrat na ráno dne {n} ¦ tillbaka till morgonen dag {n} ¦ tilbage til morgenen dag {n}
+Succès caché : il se dévoile quand on le gagne. ¦ Skrytý úspěch: odhalí se, až ho získáš. ¦ Dold prestation: visas när du får den. ¦ Skjult præstation: afsløres, når du opnår den.
+Succès caché ¦ Skrytý úspěch ¦ Dold prestation ¦ Skjult præstation
+Il se dévoile quand on le gagne. ¦ Odhalí se, až ho získáš. ¦ Den visas när du får den. ¦ Den afsløres, når du opnår den.
+{a} sur {b} succès gagnés. Gardé sur cet ordinateur seulement. ¦ Získáno {a} z {b} úspěchů. Uloženo jen v tomto počítači. ¦ {a} av {b} prestationer klara. Sparas bara på den här datorn. ¦ {a} af {b} præstationer opnået. Gemt kun på denne computer.
+Pas encore de succès : tiens une semaine, construis, repousse les pillards… ¦ Zatím žádný úspěch: vydrž týden, stav, odrážej lupiče… ¦ Inga prestationer än: håll ut en vecka, bygg, slå tillbaka plundrare… ¦ Ingen præstationer endnu: hold ud en uge, byg, afvis plyndrere…
+Pas encore de partie : descends dans le bunker ! ¦ Zatím žádná hra: sestup do bunkru! ¦ Inga spel än: gå ner i bunkern! ¦ Ingen spil endnu: gå ned i bunkeren!
+Personne au bunker pour ce travail. ¦ V bunkru nikdo pro tuto práci. ¦ Ingen i bunkern för den här sysslan. ¦ Ingen i bunkeren til denne opgave.
+clic : le retirer de ce travail ¦ klik: odvolat z této práce ¦ klick: ta bort från sysslan ¦ klik: tag vedkommende fra opgaven
+fait : {what} ¦ dělá: {what} ¦ gör: {what} ¦ laver: {what}
+n’a plus le moral ¦ ztratil(a) náladu ¦ har tappat modet ¦ har mistet modet
+Voir tous les habitants ¦ Zobrazit všechny obyvatele ¦ Visa alla invånare ¦ Se alle beboere
+niveau {n} ¦ úroveň {n} ¦ nivå {n} ¦ niveau {n}
+EN PANNE ¦ POROUCHÁNO ¦ TRASIG ¦ I STYKKER
+Réparation commandée ¦ Oprava objednána ¦ Reparation beställd ¦ Reparation bestilt
+Amélioration commandée ¦ Vylepšení objednáno ¦ Uppgradering beställd ¦ Opgradering bestilt
+Améliorer (niveau {n}) ¦ Vylepšit (úroveň {n}) ¦ Uppgradera (nivå {n}) ¦ Opgradér (niveau {n})
+effets ×{k} · {cost} ¦ účinky ×{k} · {cost} ¦ effekter ×{k} · {cost} ¦ effekter ×{k} · {cost}
+Annuler la commande ¦ Zrušit objednávku ¦ Avbryt beställningen ¦ Annuller bestillingen
+les matériaux reviennent ¦ materiál se vrátí ¦ materialet återlämnas ¦ materialerne gives tilbage
+Qui construit ? ¦ Kdo staví? ¦ Vem bygger? ¦ Hvem bygger?
+sans frais : clique ensuite sur une autre place (ou glisse-le) ¦ zdarma: pak klikni na jiné místo (nebo ho přetáhni) ¦ gratis: klicka sedan på en annan plats (eller dra den) ¦ gratis: klik derefter på en anden plads (eller træk den)
+Démonter ¦ Rozebrat ¦ Plocka isär ¦ Skil ad
+en panne : on récupère un tiers des matériaux ¦ porouchané: vrátí se třetina materiálu ¦ trasig: man får tillbaka en tredjedel av materialet ¦ i stykker: man får en tredjedel af materialerne tilbage
+on récupère la moitié des matériaux ¦ vrátí se polovina materiálu ¦ man får tillbaka hälften av materialet ¦ man får halvdelen af materialerne tilbage
+Déplacer le chantier ¦ Přesunout stavbu ¦ Flytta bygget ¦ Flyt byggeriet
+sans frais : clique ensuite sur une autre place ¦ zdarma: pak klikni na jiné místo ¦ gratis: klicka sedan på en annan plats ¦ gratis: klik derefter på en anden plads
+Annuler « {name} » ¦ Zrušit „{name}“ ¦ Avbryt ”{name}” ¦ Annuller »{name}«
+il manque : {list} ¦ chybí: {list} ¦ det saknas: {list} ¦ der mangler: {list}
+Construire ici ¦ Stavět tady ¦ Bygg här ¦ Byg her
+Ce fichier est trop gros pour être une partie du bunker. ¦ Tento soubor je na hru bunkru příliš velký. ¦ Filen är för stor för att vara ett bunkerspel. ¦ Filen er for stor til at være et bunkerspil.
+✓ Partie ouverte. ¦ ✓ Hra otevřena. ¦ ✓ Spelet öppnat. ¦ ✓ Spillet åbnet.
+=convoi ¦ konvoj|konvoje|konvojů ¦ konvoj|konvojer ¦ konvoj|konvojer
+=parti ¦ nepřítomný|nepřítomní|nepřítomných ¦ person borta|personer borta ¦ person væk|personer væk
+=fois ¦ krát|krát|krát ¦ gång|gånger ¦ gang|gange
+=survivant ¦ přeživší|přeživší|přeživších ¦ överlevande|överlevande ¦ overlevende|overlevende
+=marchand ¦ obchodník|obchodníci|obchodníků ¦ handlare|handlare ¦ handlende|handlende
+=échange ¦ výměna|výměny|výměn ¦ byte|byten ¦ byttehandel|byttehandler
+=voyageur ¦ cestovatel|cestovatelé|cestovatelů ¦ resenär|resenärer ¦ rejsende|rejsende
+=repoussée ¦ odražený|odražené|odražených ¦ tillbakaslagen|tillbakaslagna ¦ afvist|afviste
+=perdue ¦ ztracený|ztracené|ztracených ¦ förlorad|förlorade ¦ tabt|tabte
+=histoire ¦ příběh|příběhy|příběhů ¦ berättelse|berättelser ¦ historie|historier
+=réussie ¦ úspěšná|úspěšné|úspěšných ¦ lyckad|lyckade ¦ vellykket|vellykkede
+=apprenti ¦ učeň|učni|učňů ¦ lärling|lärlingar ¦ lærling|lærlinge
+=fabriquée ¦ vyrobený|vyrobené|vyrobených ¦ tillverkad|tillverkade ¦ fremstillet|fremstillede
+=outil ¦ nástroj|nástroje|nástrojů ¦ verktyg|verktyg ¦ værktøj|værktøjer
+=plan ¦ plán|plány|plánů ¦ ritning|ritningar ¦ tegning|tegninger
+=habitant inventé ¦ vymyšlený obyvatel|vymyšlení obyvatelé|vymyšlených obyvatel ¦ påhittad invånare|påhittade invånare ¦ opdigtet indbygger|opdigtede indbyggere
+=matin gardé ¦ uložené ráno|uložená rána|uložených rán ¦ sparad morgon|sparade morgnar ¦ gemt morgen|gemte morgener
+=habitant ¦ obyvatel|obyvatelé|obyvatel ¦ invånare|invånare ¦ beboer|beboere
+vous les avez repoussés ¦ odrazili jste je ¦ ni slog tillbaka dem ¦ I slog dem tilbage
+un marché honnête ¦ poctivý obchod ¦ en ärlig affär ¦ en ærlig handel
+vous avez volé leur marchand ¦ okradli jste jejich obchodníka ¦ ni rånade deras handlare ¦ I bestjal deres handlende
+la nouvelle du vol se répand ¦ zpráva o krádeži se šíří ¦ ryktet om stölden sprids ¦ rygtet om tyveriet spreder sig
+vous avez payé ¦ zaplatili jste ¦ ni betalade ¦ I betalte
+{ico} C’est l’été. ¦ {ico} Je léto. ¦ {ico} Det är sommar. ¦ {ico} Det er sommer.
+{ico} C’est l’hiver. ¦ {ico} Je zima. ¦ {ico} Det är vinter. ¦ {ico} Det er vinter.
+{ico} C’est l’automne. ¦ {ico} Je podzim. ¦ {ico} Det är höst. ¦ {ico} Det er efterår.
+{ico} C’est le printemps. ¦ {ico} Je jaro. ¦ {ico} Det är vår. ¦ {ico} Det er forår.
+est touché par un éclat d’obus ¦ je zasaženo střepinou granátu ¦ träffas av en granatskärva ¦ rammes af en granatsplint
+est grillé par la foudre ¦ je spáleno bleskem ¦ bränns av blixten ¦ brændes af af lynet
+est noyé ¦ je zatopeno ¦ är översvämmad ¦ er oversvømmet
+est abîmé par la secousse ¦ je poškozeno otřesem ¦ skadas av skalvet ¦ beskadiges af rystelsen
+J’ai eu peur. ¦ Měl(a) jsem strach. ¦ Jag var rädd. ¦ Jeg var bange.
+On s’est serré les coudes. ¦ Drželi jsme při sobě. ¦ Vi höll ihop. ¦ Vi holdt sammen.
+Encore une épreuve. ¦ Další zkouška. ¦ Ännu en prövning. ¦ Endnu en prøvelse.
+Il faudra réparer. ¦ Bude třeba opravovat. ¦ Det måste lagas. ¦ Der skal repareres.
+Bonne journée. ¦ Dobrý den. ¦ En bra dag. ¦ En god dag.
+Je me sens bien, malgré tout. ¦ Navzdory všemu se cítím dobře. ¦ Jag mår bra, trots allt. ¦ Jeg har det godt, trods alt.
+On rit encore, ici. ¦ Tady se pořád smějeme. ¦ Vi skrattar fortfarande här nere. ¦ Vi griner stadig hernede.
+Une journée comme les autres. ¦ Den jako každý jiný. ¦ En dag som alla andra. ¦ En dag som alle andre.
+Le temps est long sous terre. ¦ Pod zemí se čas vleče. ¦ Tiden går långsamt under jorden. ¦ Tiden går langsomt under jorden.
+Dure journée. ¦ Těžký den. ¦ En tung dag. ¦ En hård dag.
+J’ai le cafard. ¦ Mám splín. ¦ Jag är nere. ¦ Jeg er nedtrykt.
+Je pense à ceux d’en haut. ¦ Myslím na ty nahoře. ¦ Jag tänker på dem där uppe. ¦ Jeg tænker på dem deroppe.
+Je n’en peux plus. ¦ Už nemůžu. ¦ Jag orkar inte mer. ¦ Jeg kan ikke mere.
+Tout me pèse. ¦ Všechno mě tíží. ¦ Allt tynger mig. ¦ Alt tynger mig.
+Je voudrais revoir le ciel. ¦ Chtěl(a) bych znovu vidět nebe. ¦ Jag skulle vilja se himlen igen. ¦ Jeg ville gerne se himlen igen.
+J’ai creusé toute la journée, j’ai mal au dos. ¦ Celý den jsem kopal(a), bolí mě záda. ¦ Jag grävde hela dagen, jag har ont i ryggen. ¦ Jeg gravede hele dagen, jeg har ondt i ryggen.
+J’ai travaillé à l’atelier. ¦ Pracoval(a) jsem v dílně. ¦ Jag arbetade i verkstaden. ¦ Jeg arbejdede i værkstedet.
+J’ai démonté de vieux objets : on y trouve de tout. ¦ Rozebíral(a) jsem staré věci: najde se v nich všechno. ¦ Jag plockade isär gamla saker: man hittar allt möjligt. ¦ Jeg skilte gamle ting ad: man finder alt muligt.
+J’ai monté la garde près de la trappe. ¦ Držel(a) jsem hlídku u poklopu. ¦ Jag höll vakt vid luckan. ¦ Jeg holdt vagt ved lugen.
+J’ai pédalé pour la lumière. ¦ Šlapal(a) jsem pro světlo. ¦ Jag trampade för ljuset. ¦ Jeg trådte for lyset.
+🌿 {name} prépare un remède de grand-mère (d’après « {recipe} ») contre sa fièvre. ¦ 🌿 {name} připravuje babský lék (podle „{recipe}“) na svou horečku. ¦ 🌿 {name} gör ett huskur (efter ”{recipe}”) mot sin feber. ¦ 🌿 {name} laver et husråd (efter »{recipe}«) mod sin feber.
+🌿 {name} prépare un remède de grand-mère (d’après « {recipe} ») contre sa blessure. ¦ 🌿 {name} připravuje babský lék (podle „{recipe}“) na své zranění. ¦ 🌿 {name} gör ett huskur (efter ”{recipe}”) för sitt sår. ¦ 🌿 {name} laver et husråd (efter »{recipe}«) til sit sår.
+🌿 {name} prépare un remède de grand-mère (d’après « {recipe} ») contre sa fièvre de {sick}. ¦ 🌿 {name} připravuje babský lék (podle „{recipe}“) na horečku osoby {sick}. ¦ 🌿 {name} gör ett huskur (efter ”{recipe}”) mot {sick}s feber. ¦ 🌿 {name} laver et husråd (efter »{recipe}«) mod {sick}s feber.
+🌿 {name} prépare un remède de grand-mère (d’après « {recipe} ») contre sa blessure de {sick}. ¦ 🌿 {name} připravuje babský lék (podle „{recipe}“) na zranění osoby {sick}. ¦ 🌿 {name} gör ett huskur (efter ”{recipe}”) för {sick}s sår. ¦ 🌿 {name} laver et husråd (efter »{recipe}«) til {sick}s sår.
+🌿 {name} prépare un remède de grand-mère contre sa fièvre. ¦ 🌿 {name} připravuje babský lék na svou horečku. ¦ 🌿 {name} gör ett huskur mot sin feber. ¦ 🌿 {name} laver et husråd mod sin feber.
+🌿 {name} prépare un remède de grand-mère contre sa blessure. ¦ 🌿 {name} připravuje babský lék na své zranění. ¦ 🌿 {name} gör ett huskur för sitt sår. ¦ 🌿 {name} laver et husråd til sit sår.
+🌿 {name} prépare un remède de grand-mère contre sa fièvre de {sick}. ¦ 🌿 {name} připravuje babský lék na horečku osoby {sick}. ¦ 🌿 {name} gör ett huskur mot {sick}s feber. ¦ 🌿 {name} laver et husråd mod {sick}s feber.
+🌿 {name} prépare un remède de grand-mère contre sa blessure de {sick}. ¦ 🌿 {name} připravuje babský lék na zranění osoby {sick}. ¦ 🌿 {name} gör ett huskur för {sick}s sår. ¦ 🌿 {name} laver et husråd til {sick}s sår.
+est usé·e jusqu’à la corde ¦ je úplně opotřebovaný/á ¦ är helt utsliten ¦ er helt udslidt
+vous les avez chassés de chez eux ¦ vyhnali jste je z domova ¦ ni drev dem från deras hem ¦ I drev dem ud af deres hjem
+vous avez fouillé sur leurs terres ¦ prohledávali jste na jejich půdě ¦ ni letade på deras mark ¦ I ledte på deres jord
+un bon échange ¦ dobrá výměna ¦ ett bra byte ¦ en god byttehandel
+vous êtes venus les aider ¦ přišli jste jim pomoci ¦ ni kom för att hjälpa dem ¦ I kom for at hjælpe dem
+vous les avez attaqués ¦ zaútočili jste na ně ¦ ni anföll dem ¦ I angreb dem
+une bande de moins sur les routes ¦ o jednu bandu na silnicích méně ¦ ett gäng mindre på vägarna ¦ én bande færre på vejene
+vous avez attaqué des gens paisibles ¦ zaútočili jste na mírumilovné lidi ¦ ni anföll fredliga människor ¦ I angreb fredelige folk
+un bon marché ¦ dobrý obchod ¦ en bra affär ¦ en god handel
+🤝 {name} vous amènent un âne. ¦ 🤝 {name} vám přivádějí osla. ¦ 🤝 {name} kommer med en åsna till er. ¦ 🤝 {name} bringer jer et æsel.
+🤝 {name} vous amènent un cheval. ¦ 🤝 {name} vám přivádějí koně. ¦ 🤝 {name} kommer med en häst till er. ¦ 🤝 {name} bringer jer en hest.
+vous avez partagé ¦ podělili jste se ¦ ni delade med er ¦ I delte
+vous avez refusé de les aider ¦ odmítli jste jim pomoci ¦ ni vägrade hjälpa dem ¦ I nægtede at hjælpe dem
+personne ne leur a répondu ¦ nikdo jim neodpověděl ¦ ingen svarade dem ¦ ingen svarede dem
+une dette envers eux ¦ dluh vůči nim ¦ en skuld till dem ¦ en gæld til dem
+🎓 {a} : 1 semaine d’apprentissage auprès de {m} — {ico} ×{n}. ¦ 🎓 {a}: 1 týden učení u {m} — {ico} ×{n}. ¦ 🎓 {a}: 1 veckas lärlingstid hos {m} — {ico} ×{n}. ¦ 🎓 {a}: 1 uges læretid hos {m} — {ico} ×{n}.
+🎓 {a} : {w} semaines d’apprentissage auprès de {m} — {ico} ×{n}. ¦ 🎓 {a}: {w} týdnů učení u {m} — {ico} ×{n}. ¦ 🎓 {a}: {w} veckors lärlingstid hos {m} — {ico} ×{n}. ¦ 🎓 {a}: {w} ugers læretid hos {m} — {ico} ×{n}.
+☢ TU AS TROUVÉ LA TRAPPE ¦ ☢ NAŠEL/NAŠLA JSI POKLOP ¦ ☢ DU HAR HITTAT LUCKAN ¦ ☢ DU HAR FUNDET LUGEN
+Personne ne sait qu’il existe. Tu y descends avec des ancêtres de ton arbre : il faut boire, manger, dormir, se laver… et tenir le plus longtemps possible. ¦ Nikdo neví, že existuje. Sestupuješ do něj s předky ze svého rodokmenu: je třeba pít, jíst, spát, mýt se… a vydržet co nejdéle. ¦ Ingen vet att den finns. Du går ner med anfäder ur ditt träd: man måste dricka, äta, sova, tvätta sig… och hålla ut så länge som möjligt. ¦ Ingen ved, at den findes. Du går ned med aner fra dit træ: man skal drikke, spise, sove, vaske sig… og holde ud så længe som muligt.
+🏆 Succès et records ¦ 🏆 Úspěchy a rekordy ¦ 🏆 Prestationer och rekord ¦ 🏆 Præstationer og rekorder
+Parties enregistrées ¦ Uložené hry ¦ Sparade spel ¦ Gemte spil
+Combien descendent dans l’abri (avec toi) ? ¦ Kolik vás sestoupí do úkrytu (i s tebou)? ¦ Hur många går ner i skyddet (med dig)? ¦ Hvor mange går ned i beskyttelsesrummet (med dig)?
+Qui incarnes-tu ? ¦ Za koho hraješ? ¦ Vem spelar du? ¦ Hvem spiller du?
+Qui descend avec toi ? ¦ Kdo sestoupí s tebou? ¦ Vem går ner med dig? ¦ Hvem går ned med dig?
+Ses proches d’abord : parents, conjoint, enfants, frères et sœurs ¦ Nejdřív blízcí: rodiče, manžel(ka), děti, sourozenci ¦ Närmaste först: föräldrar, make/maka, barn, syskon ¦ De nærmeste først: forældre, ægtefælle, børn, søskende
+🎲 Proposer des proches ¦ 🎲 Navrhnout blízké ¦ 🎲 Föreslå anhöriga ¦ 🎲 Foreslå pårørende
+ou tape un nom de ville ¦ nebo napiš název města ¦ eller skriv ett stadsnamn ¦ eller skriv et bynavn
+Dans quelle ville ? ¦ Ve kterém městě? ¦ I vilken stad? ¦ I hvilken by?
+🧳 Le coffre de famille ¦ 🧳 Rodinná truhla ¦ 🧳 Släktkistan ¦ 🧳 Familiekisten
+(3 objets de ta base au plus : chacun donne un petit avantage) ¦ (nejvýš 3 předměty z tvé databáze: každý dává malou výhodu) ¦ (högst 3 föremål ur din databas: vart och ett ger en liten fördel) ¦ (højst 3 genstande fra din database: hver giver en lille fordel)
+Taille de la ville ¦ Velikost města ¦ Stadens storlek ¦ Byens størrelse
+⚙️ Réglages de la partie ¦ ⚙️ Nastavení hry ¦ ⚙️ Spelinställningar ¦ ⚙️ Spilindstillinger
+🌪️ Météo et catastrophes ¦ 🌪️ Počasí a katastrofy ¦ 🌪️ Väder och katastrofer ¦ 🌪️ Vejr og katastrofer
+(canicule, tempête, inondation, séisme, orage, vague de froid : des installations à réparer) ¦ (vedro, bouře, povodeň, zemětřesení, bouřka, vlna mrazů: zařízení k opravě) ¦ (värmebölja, storm, översvämning, jordbävning, åskväder, köldknäpp: installationer att laga) ¦ (hedebølge, storm, oversvømmelse, jordskælv, tordenvejr, kuldebølge: installationer at reparere)
+🧵 Chaînes de fabrication ¦ 🧵 Výrobní řetězce ¦ 🧵 Produktionskedjor ¦ 🧵 Produktionskæder
+(plantes → fil → tissu → vêtements chauds ; blé → farine → pain) ¦ (rostliny → příze → látka → teplé oblečení; pšenice → mouka → chléb) ¦ (växter → garn → tyg → varma kläder; vete → mjöl → bröd) ¦ (planter → garn → stof → varmt tøj; hvede → mel → brød)
+(un jour = un an : les bébés grandissent, les aînés ralentissent) ¦ (jeden den = jeden rok: miminka rostou, starší zpomalují) ¦ (en dag = ett år: bebisar växer upp, de äldre saktar ner) ¦ (én dag = ét år: babyer vokser op, de ældre sætter tempoet ned)
+(un poêle, un court-circuit… un extincteur sauve tout) ¦ (kamna, zkrat… hasicí přístroj vše zachrání) ¦ (en kamin, en kortslutning… en brandsläckare räddar allt) ¦ (en ovn, en kortslutning… en ildslukker redder alt)
+🌗 La nuit en ville ¦ 🌗 Noc ve městě ¦ 🌗 Natten i staden ¦ 🌗 Natten i byen
+(certains lieux sont dangereux la nuit, d’autres cachent plus de choses) ¦ (některá místa jsou v noci nebezpečná, jiná skrývají víc věcí) ¦ (vissa platser är farliga på natten, andra döljer fler saker) ¦ (nogle steder er farlige om natten, andre gemmer flere ting)
+📜 Missions généalogiques ¦ 📜 Genealogické mise ¦ 📜 Släktforskningsuppdrag ¦ 📜 Slægtsforskningsmissioner
+(retrouver l’acte, la photo ou la lettre d’un vrai ancêtre de ton arbre) ¦ (najít záznam, fotku nebo dopis skutečného předka z tvého rodokmenu) ¦ (hitta handlingen, fotot eller brevet från en verklig anfader i ditt träd) ¦ (find dokumentet, fotoet eller brevet fra en virkelig ane i dit træ)
+🧓 Souvenirs des ancêtres ¦ 🧓 Vzpomínky předků ¦ 🧓 Anfädernas minnen ¦ 🧓 Anernes minder
+(un ancêtre de ta base qui trouve un objet ou un lieu de sa vraie vie raconte une anecdote tirée de sa fiche : métier, naissance, mariage, enfants ; jamais rien sur un vivant ni une fiche confidentielle) ¦ (předek z tvé databáze, který najde předmět nebo místo ze svého skutečného života, vypráví historku ze své karty: povolání, narození, sňatek, děti; nikdy nic o žijícím ani o důvěrné kartě) ¦ (en anfader ur din databas som hittar ett föremål eller en plats från sitt verkliga liv berättar en anekdot ur sin post: yrke, födelse, giftermål, barn; aldrig något om en levande person eller en konfidentiell post) ¦ (en ane fra din database, der finder en genstand eller et sted fra sit virkelige liv, fortæller en anekdote fra sin post: erhverv, fødsel, ægteskab, børn; aldrig noget om en levende person eller en fortrolig post)
+📘 Tutoriel guidé ¦ 📘 Řízený návod ¦ 📘 Guidad handledning ¦ 📘 Guidet vejledning
+(les premiers pas, étape par étape) ¦ (první kroky, jeden po druhém) ¦ (de första stegen, ett i taget) ¦ (de første skridt, ét ad gangen)
+Tout se change aussi pendant la partie : onglet ⚙️ Réglages (sauf le scénario). ¦ Vše se dá změnit i během hry: karta ⚙️ Nastavení (kromě scénáře). ¦ Allt kan också ändras under spelet: fliken ⚙️ Inställningar (utom scenariot). ¦ Alt kan også ændres under spillet: fanen ⚙️ Indstillinger (undtagen scenariet).
+⤒ Ouvrir une partie (fichier) ¦ ⤒ Otevřít hru (soubor) ¦ ⤒ Öppna ett spel (fil) ¦ ⤒ Åbn et spil (fil)
+☢ Descendre dans le bunker ¦ ☢ Sestoupit do bunkru ¦ ☢ Gå ner i bunkern ¦ ☢ Gå ned i bunkeren
+1 heure de jeu en 6 secondes ¦ 1 herní hodina za 6 sekund ¦ 1 speltimme på 6 sekunder ¦ 1 spiltime på 6 sekunder
+Deux fois plus vite ¦ Dvakrát rychleji ¦ Dubbelt så snabbt ¦ Dobbelt så hurtigt
+Quatre fois plus vite ¦ Čtyřikrát rychleji ¦ Fyra gånger så snabbt ¦ Fire gange så hurtigt
+Huit fois plus vite ¦ Osmkrát rychleji ¦ Åtta gånger så snabbt ¦ Otte gange så hurtigt
+Seize fois plus vite (une journée en moins de 10 secondes) ¦ Šestnáctkrát rychleji (den za méně než 10 sekund) ¦ Sexton gånger så snabbt (en dag på under 10 sekunder) ¦ Seksten gange så hurtigt (en dag på under 10 sekunder)
+Trente-deux fois plus vite (une journée en moins de 5 secondes) ¦ Dvaatřicetkrát rychleji (den za méně než 5 sekund) ¦ Trettiotvå gånger så snabbt (en dag på under 5 sekunder) ¦ Toogtredive gange så hurtigt (en dag på under 5 sekunder)
+Couper ou remettre le son ¦ Vypnout nebo zapnout zvuk ¦ Stäng av eller sätt på ljudet ¦ Slå lyden fra eller til
+Le journal de la partie ¦ Noviny hry ¦ Spelets tidning ¦ Spillets avis
+📦 Réserves ¦ 📦 Zásoby ¦ 📦 Förråd ¦ 📦 Forråd
+éolienne ¦ větrná elektrárna ¦ vindkraftverk ¦ vindmølle
+dynamo à pédales ¦ šlapací dynamo ¦ trampdynamo ¦ pedaldynamo
+sans réponse dans {left}, ils attaquent ¦ bez odpovědi do {left} zaútočí ¦ utan svar inom {left} anfaller de ¦ uden svar inden for {left} angriber de
+sans réponse dans {left}, on repart ¦ bez odpovědi do {left} odejde ¦ utan svar inom {left} går de ¦ uden svar inden for {left} går de
+à un chantier en ville ¦ na stavbě ve městě ¦ på ett bygge i staden ¦ på en byggeplads i byen
+en convoi dans la région ¦ v konvoji v kraji ¦ i konvoj i regionen ¦ i konvoj i regionen
+boit de l’eau de pluie ¦ pije dešťovou vodu ¦ dricker regnvatten ¦ drikker regnvand
+fait sa toilette ¦ myje se ¦ tvättar sig ¦ vasker sig
+écoute de la musique ¦ poslouchá hudbu ¦ lyssnar på musik ¦ lytter til musik
+nettoie l’aération ¦ čistí větrání ¦ rensar ventilationen ¦ renser ventilationen
+pédale ¦ šlape ¦ trampar ¦ træder
+monte la garde ¦ drží hlídku ¦ håller vakt ¦ holder vagt
+📰 Lire la gazette ¦ 📰 Číst noviny ¦ 📰 Läs tidningen ¦ 📰 Læs avisen
+↩ Revenir aux parties ¦ ↩ Zpět ke hrám ¦ ↩ Tillbaka till spelen ¦ ↩ Tilbage til spillene
+🟢 Prudente (dès que la barre baisse) ¦ 🟢 Opatrná (jakmile ukazatel klesne) ¦ 🟢 Försiktig (så snart mätaren sjunker) ¦ 🟢 Forsigtig (så snart bjælken falder)
+🔴 Manuelle (à la dernière minute ; je donne les ordres) ¦ 🔴 Ruční (na poslední chvíli; rozkazy dávám já) ¦ 🔴 Manuell (i sista minuten; jag ger order) ¦ 🔴 Manuel (i sidste øjeblik; jeg giver ordrerne)
+🧍 Autonomie de tout le monde ¦ 🧍 Samostatnost všech ¦ 🧍 Allas självständighet ¦ 🧍 Alles selvstændighed
+Chacun va de soi-même boire, manger, aux toilettes, se laver ou dormir quand sa barre descend : 🟢 prudente = dès qu’elle passe sous la moitié, 🟡 normale = vers un tiers, 🔴 manuelle = seulement à la toute dernière minute (c’est vous qui donnez les ordres). Les boutons 💧🍞🚽🧼💤 de chacun donnent un ordre tout de suite. ¦ Každý jde sám pít, jíst, na záchod, mýt se nebo spát, když mu klesne ukazatel: 🟢 opatrná = jakmile klesne pod polovinu, 🟡 normální = kolem třetiny, 🔴 ruční = jen na úplně poslední chvíli (rozkazy dáváte vy). Tlačítka 💧🍞🚽🧼💤 každého dávají rozkaz okamžitě. ¦ Var och en går själv och dricker, äter, går på toaletten, tvättar sig eller sover när mätaren sjunker: 🟢 försiktig = så snart den går under hälften, 🟡 normal = vid en tredjedel, 🔴 manuell = bara i allra sista minuten (ni ger order). Var och ens knappar 💧🍞🚽🧼💤 ger en order direkt. ¦ Hver går selv hen og drikker, spiser, går på toilettet, vasker sig eller sover, når bjælken falder: 🟢 forsigtig = så snart den kommer under halvdelen, 🟡 normal = omkring en tredjedel, 🔴 manuel = kun i allersidste øjeblik (I giver ordrerne). Hver persons knapper 💧🍞🚽🧼💤 giver en ordre med det samme.
+🚶 en route vers {place} ¦ 🚶 na cestě do {place} ¦ 🚶 på väg mot {place} ¦ 🚶 på vej mod {place}
+🚶 travaille à {place} ¦ 🚶 pracuje v {place} ¦ 🚶 arbetar vid {place} ¦ 🚶 arbejder ved {place}
+🛡️ Monter la garde ¦ 🛡️ Držet hlídku ¦ 🛡️ Hålla vakt ¦ 🛡️ Holde vagt
+🚲 Pédaler (électricité) ¦ 🚲 Šlapat (elektřina) ¦ 🚲 Trampa (el) ¦ 🚲 Træde (strøm)
+🤒 fièvre (soignée) ¦ 🤒 horečka (léčená) ¦ 🤒 feber (behandlad) ¦ 🤒 feber (behandlet)
+🤒 fièvre ¦ 🤒 horečka ¦ 🤒 feber ¦ 🤒 feber
+🩹 blessure (soignée) ¦ 🩹 zranění (ošetřené) ¦ 🩹 sår (behandlat) ¦ 🩹 sår (behandlet)
+🚶 Envoyer en ville ¦ 🚶 Poslat do města ¦ 🚶 Skicka till staden ¦ 🚶 Send til byen
+Réserves ¦ Zásoby ¦ Förråd ¦ Forråd
+Plantes → 🧶 rouet → fil → 🪢 métier à tisser → tissu → 🧥 tailleur → vêtements chauds (l’hiver, le froid fait bien moins de mal). Blé → ⚙️ moulin → farine → 🍞 four à pain. ¦ Rostliny → 🧶 kolovrat → příze → 🪢 tkalcovský stav → látka → 🧥 krejčí → teplé oblečení (v zimě chlad škodí mnohem méně). Pšenice → ⚙️ mlýn → mouka → 🍞 pec na chleba. ¦ Växter → 🧶 spinnrock → garn → 🪢 vävstol → tyg → 🧥 skräddare → varma kläder (på vintern gör kylan mycket mindre skada). Vete → ⚙️ kvarn → mjöl → 🍞 bakugn. ¦ Planter → 🧶 rok → garn → 🪢 væv → stof → 🧥 skrædder → varmt tøj (om vinteren gør kulden langt mindre skade). Hvede → ⚙️ mølle → mel → 🍞 bageovn.
+Les composants viennent surtout du ♻️ bric-à-brac qu’on démonte (et de certains lieux : droguerie, électroménager, usine…). ¦ Součástky pocházejí hlavně z ♻️ harampádí, které se rozebírá (a z některých míst: drogerie, elektro, továrna…). ¦ Komponenterna kommer mest från ♻️ skrot man plockar isär (och från vissa platser: färghandel, vitvaror, fabrik…). ¦ Komponenterne kommer mest fra ♻️ skrammel, man skiller ad (og fra nogle steder: materialist, hvidevarer, fabrik…).

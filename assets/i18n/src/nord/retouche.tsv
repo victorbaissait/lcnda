@@ -839,3 +839,727 @@ Vieux papier ¦ Starý papír ¦ Gammalt papper ¦ Gammelt papir
 Nuit ¦ Noc ¦ Natt ¦ Nat
 Printemps ¦ Jaro ¦ Vår ¦ Forår
 Mer ¦ Moře ¦ Hav ¦ Hav
+Coucher de soleil ¦ Západ slunce ¦ Solnedgång ¦ Solnedgang
+▭ Linéaire ¦ ▭ Lineární ¦ ▭ Linjär ¦ ▭ Lineær
+◉ Radial ¦ ◉ Kruhový ¦ ◉ Radiell ¦ ◉ Radial
+◔ Angle (conique) ¦ ◔ Úhlový (kuželový) ¦ ◔ Vinkel (konisk) ¦ ◔ Vinkel (konisk)
+⇋ Réfléchi ¦ ⇋ Zrcadlený ¦ ⇋ Speglad ¦ ⇋ Spejlet
+◇ Losange ¦ ◇ Kosočtverec ¦ ◇ Romb ¦ ◇ Rombe
+Damier ¦ Šachovnice ¦ Schackruta ¦ Skakbræt
+Pois ¦ Puntíky ¦ Prickar ¦ Prikker
+Rayures ¦ Pruhy ¦ Ränder ¦ Striber
+Hachures ¦ Šrafování ¦ Skraffering ¦ Skravering
+Briques ¦ Cihly ¦ Tegel ¦ Mursten
+Chevrons ¦ Krokve ¦ Sparrar ¦ Chevroner
+Losanges ¦ Kosočtverce ¦ Romber ¦ Romber
+Vagues ¦ Vlny ¦ Vågor ¦ Bølger
+Toile ¦ Plátno ¦ Duk ¦ Lærred
+Croix ¦ Křížky ¦ Kors ¦ Kryds
+Fleurs de lys ¦ Liliové květy ¦ Liljor ¦ Liljer
+Clique maintenant à l’endroit à recopier. ¦ Teď klikni na místo ke kopírování. ¦ Klicka nu på punkten att kopiera. ¦ Klik nu på stedet at kopiere.
+Ce calque est verrouillé : déverrouille-le dans Calques. ¦ Tato vrstva je zamčená: odemkni ji ve Vrstvách. ¦ Lagret är låst: lås upp det i Lager. ¦ Laget er låst: lås det op i Lag.
+Texte effacé ¦ Text vymazán ¦ Text raderad ¦ Tekst slettet
+Sélection vide ¦ Prázdný výběr ¦ Tom markering ¦ Tom markering
+Sélection ajoutée ¦ Výběr přidán ¦ Markering tillagd ¦ Markering tilføjet
+Sélection retirée ¦ Výběr ubrán ¦ Markering fråndragen ¦ Markering fratrukket
+Image remplacée : même place, même taille, même rotation. ¦ Obrázek nahrazen: stejné místo, velikost i otočení. ¦ Bilden ersatt: samma plats, storlek och rotation. ¦ Billedet erstattet: samme sted, størrelse og rotation.
+Image placée : ➤ glisse-la, tire un coin pour la taille (⇧ : libre), la poignée ronde pour la tourner. ¦ Obrázek vložen: ➤ táhni ho, za roh změníš velikost (⇧: volně), kulatý úchyt ho otočí. ¦ Bild placerad: ➤ dra den, dra i ett hörn för storleken (⇧: fritt), det runda handtaget för att rotera. ¦ Billede placeret: ➤ træk det, træk i et hjørne for størrelsen (⇧: frit), det runde håndtag for at rotere.
+Ce fichier n’est pas une image. ¦ Tento soubor není obrázek. ¦ Filen är inte en bild. ¦ Filen er ikke et billede.
+Remplacer l’image de l’objet dynamique ¦ Nahradit obrázek inteligentního objektu ¦ Ersätt det smarta objektets bild ¦ Erstat det smarte objekts billede
+Remplacer par cette image ¦ Nahradit tímto obrázkem ¦ Ersätt med den här bilden ¦ Erstat med dette billede
+La nouvelle image prend la place, la taille et la rotation de l’ancienne. ¦ Nový obrázek převezme místo, velikost a otočení starého. ¦ Den nya bilden tar den gamlas plats, storlek och rotation. ¦ Det nye billede overtager det gamles plads, størrelse og rotation.
+Elle arrive sur un nouveau calque, en objet dynamique 🧩 (agrandir, réduire, tourner sans perte). Tu peux aussi glisser un fichier sur la photo, ou coller une image copiée (⌘V). ¦ Přijde na novou vrstvu jako inteligentní objekt 🧩 (zvětšovat, zmenšovat, otáčet bez ztráty). Můžeš také přetáhnout soubor na fotku nebo vložit zkopírovaný obrázek (⌘V). ¦ Den hamnar på ett nytt lager, som smart objekt 🧩 (förstora, förminska, rotera utan förlust). Du kan också släppa en fil på fotot eller klistra in en kopierad bild (⌘V). ¦ Det kommer på et nyt lag som smart objekt 🧩 (forstør, formindsk, rotér uden tab). Du kan også trække en fil hen på fotoet eller indsætte et kopieret billede (⌘V).
+Sélection automatique ¦ Automatický výběr ¦ Automatisk markering ¦ Automatisk markering
+Ce calque est verrouillé : choisis-en un autre dans Calques. ¦ Tato vrstva je zamčená: vyber ve Vrstvách jinou. ¦ Lagret är låst: välj ett annat i Lager. ¦ Laget er låst: vælg et andet i Lag.
+Endroit à recopier choisi : peins maintenant sur la zone à couvrir. ¦ Místo ke kopírování vybráno: teď přemaluj oblast, kterou chceš zakrýt. ¦ Punkten att kopiera vald: måla nu över området som ska täckas. ¦ Stedet at kopiere valgt: mal nu over området, der skal dækkes.
+Choisis d’abord l’endroit à recopier (bouton 🎯 ou ⌥ + clic). ¦ Nejdřív vyber místo ke kopírování (tlačítko 🎯 nebo ⌥ + klik). ¦ Välj först punkten att kopiera (knappen 🎯 eller ⌥ + klick). ¦ Vælg først stedet at kopiere (knappen 🎯 eller ⌥ + klik).
+La photo n’est plus dans les calques : « ↺ Remettre la photo » (onglet Calques). ¦ Fotka už není ve vrstvách: „↺ Vrátit fotku“ (karta Vrstvy). ¦ Fotot finns inte längre i lagren: ”↺ Lägg tillbaka fotot” (fliken Lager). ¦ Fotoet er ikke længere i lagene: »↺ Sæt fotoet tilbage« (fanen Lag).
+La photo est verrouillée (🔒 dans Calques). ¦ Fotka je zamčená (🔒 ve Vrstvách). ¦ Fotot är låst (🔒 i Lager). ¦ Fotoet er låst (🔒 i Lag).
+Tampon : zone recopiée (calque ✨ Retouches) ¦ Razítko: oblast zkopírována (vrstva ✨ Retuše) ¦ Klonstämpel: område kopierat (lagret ✨ Retuscher) ¦ Klonestempel: område kopieret (laget ✨ Retoucheringer)
+Fais d’abord une sélection (outils ⬚ ◯ ➰ ✒︎ 🪄). ¦ Nejdřív udělej výběr (nástroje ⬚ ◯ ➰ ✒︎ 🪄). ¦ Gör först en markering (verktygen ⬚ ◯ ➰ ✒︎ 🪄). ¦ Lav først en markering (værktøjerne ⬚ ◯ ➰ ✒︎ 🪄).
+Aucun filtre utilisé pour l’instant (menu Filtre). ¦ Zatím nebyl použit žádný filtr (nabídka Filtr). ¦ Inget filter använt än (menyn Filter). ¦ Intet filter brugt endnu (menuen Filter).
+Opacité du calque (dosage) ¦ Krytí vrstvy (dávkování) ¦ Lagrets opacitet (dosering) ¦ Lagets opacitet (dosering)
+Valeurs de départ ¦ Výchozí hodnoty ¦ Standardvärden ¦ Standardværdier
+Rien n’est détruit : le filtre est sur son propre calque. Plus tard : Calques → le calque → onglet ✨ Filtres → « régler… ». ¦ Nic se neničí: filtr je na vlastní vrstvě. Později: Vrstvy → vrstva → karta ✨ Filtry → „nastavit…“. ¦ Inget förstörs: filtret ligger på ett eget lager. Senare: Lager → lagret → fliken ✨ Filter → ”justera…”. ¦ Intet ødelægges: filteret er på sit eget lag. Senere: Lag → laget → fanen ✨ Filtre → »justér…«.
+Filtre enlevé du calque ¦ Filtr odebrán z vrstvy ¦ Filtret borttaget från lagret ¦ Filteret fjernet fra laget
+Ordre des filtres ¦ Pořadí filtrů ¦ Filterordning ¦ Filterrækkefølge
+Filtres enlevés ¦ Filtry odebrány ¦ Filtren borttagna ¦ Filtrene fjernet
+Plus de place pour les actions : supprimes-en une. ¦ Už není místo pro akce: některou smaž. ¦ Inget utrymme kvar för åtgärder: radera en. ¦ Ikke mere plads til handlinger: slet en.
+⚡ Actions ¦ ⚡ Akce ¦ ⚡ Åtgärder ¦ ⚡ Handlinger
+Nom de l’action (ex. « Photos de l’album 1930 ») ¦ Název akce (např. „Fotky z alba 1930“) ¦ Åtgärdens namn (t.ex. ”Foton från albumet 1930”) ¦ Handlingens navn (f.eks. »Fotos fra albummet 1930«)
+Une action garde les réglages de la photo (exposition, niveaux, courbe, teinte, filtres, poussière, colorisation…) et ses calques de réglage sans masque. On la remet sur une autre photo, ou sur plusieurs d’un coup : chacune reçoit une <b>nouvelle version</b>, l’original est gardé. ¦ Akce si uchová úpravy fotky (expozice, úrovně, křivka, odstín, filtry, prach, kolorování…) a její vrstvy úprav bez masky. Dá se použít na jinou fotku, nebo na několik najednou: každá dostane <b>novou verzi</b>, originál se zachová. ¦ En åtgärd sparar fotots justeringar (exponering, nivåer, kurva, nyans, filter, damm, färgläggning…) och dess justeringslager utan mask. Du tillämpar den på ett annat foto, eller på flera på en gång: vart och ett får en <b>ny version</b>, originalet behålls. ¦ En handling gemmer fotoets justeringer (eksponering, niveauer, kurve, farvetone, filtre, støv, farvelægning…) og dets justeringslag uden maske. Den anvendes på et andet foto eller på flere på én gang: hvert får en <b>ny version</b>, originalen bevares.
+Enregistrer cette action dans un fichier, pour la garder ou la donner ¦ Uložit tuto akci do souboru, abys ji uchoval nebo někomu dal ¦ Spara åtgärden i en fil, för att behålla den eller ge den till någon ¦ Gem handlingen i en fil for at beholde den eller give den til nogen
+Sur cette photo ¦ Na tuto fotku ¦ På det här fotot ¦ På dette foto
+Sur plusieurs photos… ¦ Na více fotek… ¦ På flera foton… ¦ På flere fotos…
+Aucune action enregistrée pour l’instant ¦ Zatím žádná uložená akce ¦ Inga sparade åtgärder än ¦ Ingen gemte handlinger endnu
+« ＋ Enregistrer les réglages actuels » les garde pour les rejouer sur d’autres photos. ¦ „＋ Uložit aktuální úpravy“ je uchová pro použití na jiných fotkách. ¦ ”＋ Spara de aktuella justeringarna” behåller dem för att spela upp på andra foton. ¦ »＋ Gem de aktuelle justeringer« beholder dem til at bruge på andre fotos.
+Les photos à retoucher ¦ Fotky k úpravě ¦ Fotona att retuschera ¦ Fotoene, der skal retoucheres
+Prendre ces photos ¦ Vzít tyto fotky ¦ Ta de här fotona ¦ Tag disse fotos
+＋ Choisir des photos… ¦ ＋ Vybrat fotky… ¦ ＋ Välj foton… ¦ ＋ Vælg fotos…
+afficher la nouvelle version ¦ zobrazit novou verzi ¦ visa den nya versionen ¦ vis den nye version
+Aucune photo choisie. ¦ Žádná fotka nevybrána. ¦ Inget foto valt. ¦ Intet foto valgt.
+refusé ¦ odmítnuto ¦ nekad ¦ afvist
+fx Effets du calque ¦ fx Efekty vrstvy ¦ fx Lagereffekter ¦ fx Lageffekter
+Fond (le contenu seulement, pas les effets) ¦ Výplň (jen obsah, ne efekty) ¦ Fyllning (bara innehållet, inte effekterna) ¦ Fyld (kun indholdet, ikke effekterne)
+Lueur externe ¦ Vnější záře ¦ Yttre glöd ¦ Ydre glød
+Incrustation de couleur ¦ Barevný překryv ¦ Färgöverlägg ¦ Farveoverlejring
+à l’extérieur ¦ vně ¦ utanför ¦ udenfor
+au milieu ¦ uprostřed ¦ i mitten ¦ i midten
+à l’intérieur ¦ uvnitř ¦ innanför ¦ indenfor
+Tout enlever ¦ Odebrat vše ¦ Ta bort allt ¦ Fjern alt
+🔍 Plis et rayures ¦ 🔍 Přehyby a škrábance ¦ 🔍 Veck och repor ¦ 🔍 Folder og ridser
+Recherche des plis… ¦ Hledám přehyby… ¦ Söker efter veck… ¦ Søger efter folder…
+garder le grain autour ¦ zachovat okolní zrno ¦ behåll kornet runt omkring ¦ behold kornet omkring
+🪡 Plutôt à la main ¦ 🪡 Raději ručně ¦ 🪡 Hellre för hand ¦ 🪡 Hellere i hånden
+✓ Réparer ces lignes ¦ ✓ Opravit tyto čáry ¦ ✓ Reparera linjerna ¦ ✓ Reparér disse linjer
+Aucun pli trouvé : monte la sensibilité, ou répare à la main avec le pinceau 🪡. ¦ Žádný přehyb nenalezen: zvyš citlivost, nebo opravuj ručně štětcem 🪡. ¦ Inget veck hittades: höj känsligheten eller reparera för hand med penseln 🪡. ¦ Ingen fold fundet: hæv følsomheden, eller reparér i hånden med penslen 🪡.
+Réparation… ¦ Opravuji… ¦ Reparerar… ¦ Reparerer…
+✨ Plis et rayures comblés ¦ ✨ Přehyby a škrábance vyplněny ¦ ✨ Veck och repor fyllda ¦ ✨ Folder og ridser udfyldt
+🌫️ Débruitage ¦ 🌫️ Odšumění ¦ 🌫️ Brusreducering ¦ 🌫️ Støjreduktion
+adoucit le grain sans perdre les contours ¦ zjemní zrno, aniž ztratí obrysy ¦ mjukar upp kornet utan att förlora konturerna ¦ udglatter kornet uden at miste konturerne
+🧹 Poussières et rayures ¦ 🧹 Prach a škrábance ¦ 🧹 Damm och repor ¦ 🧹 Støv og ridser
+les petits points blancs ou noirs ¦ malé bílé nebo černé tečky ¦ de små vita eller svarta prickarna ¦ de små hvide eller sorte prikker
+🩹 Plis et fines déchirures ¦ 🩹 Přehyby a jemné trhliny ¦ 🩹 Veck och fina revor ¦ 🩹 Folder og fine rifter
+lignes fines repérées puis comblées ¦ tenké čáry nalezené a vyplněné ¦ tunna linjer hittade och fyllda ¦ tynde linjer fundet og udfyldt
+🎚 Contraste et niveaux automatiques ¦ 🎚 Automatický kontrast a úrovně ¦ 🎚 Automatisk kontrast och nivåer ¦ 🎚 Automatisk kontrast og niveauer
+noirs bien noirs, blancs bien blancs ¦ černá opravdu černá, bílá opravdu bílá ¦ svart riktigt svart, vitt riktigt vitt ¦ sort helt sort, hvid helt hvid
+🔎 Netteté douce ¦ 🔎 Jemné doostření ¦ 🔎 Mjuk skärpning ¦ 🔎 Blød skærpning
+un peu plus de piqué ¦ o trochu víc ostrosti ¦ lite mer skärpa ¦ lidt mere skarphed
+🌈 Colorisation ¦ 🌈 Kolorování ¦ 🌈 Färgläggning ¦ 🌈 Farvelægning
+couleurs d’époque (photo en noir et blanc) ¦ dobové barvy (černobílá fotka) ¦ tidstypiska färger (svartvitt foto) ¦ tidstypiske farver (sort-hvidt foto)
+la photo a déjà des couleurs : coche si tu veux quand même ¦ fotka už barvy má: zaškrtni, pokud to přesto chceš ¦ fotot har redan färger: kryssa i om du ändå vill ¦ fotoet har allerede farver: sæt flueben, hvis du alligevel vil
+Coche les étapes à garder ; chacune devient un calque « ✨ » que tu peux ensuite cacher ou doser. ↶ défait tout d’un coup. ¦ Zaškrtni kroky, které chceš ponechat; každý se stane vrstvou „✨“, kterou pak můžeš skrýt nebo zeslabit. ↶ vrátí vše najednou. ¦ Bocka för stegen som ska behållas; varje steg blir ett ”✨”-lager som du sedan kan dölja eller tona ned. ↶ ångrar allt på en gång. ¦ Sæt flueben ved de trin, der skal beholdes; hvert bliver et »✨«-lag, som du senere kan skjule eller dæmpe. ↶ fortryder det hele på én gang.
+Garder : {what} ¦ Ponechat: {what} ¦ Behåll: {what} ¦ Behold: {what}
+détail au centre ¦ detail uprostřed ¦ detalj i mitten ¦ detalje i midten
+Aperçus… ¦ Náhledy… ¦ Förhandsvisningar… ¦ Forhåndsvisninger…
+aucun pli trouvé à cette intensité ¦ při této intenzitě nenalezen žádný přehyb ¦ inget veck hittades vid den här intensiteten ¦ ingen fold fundet ved denne intensitet
+Coche au moins une étape. ¦ Zaškrtni aspoň jeden krok. ¦ Bocka för minst ett steg. ¦ Sæt flueben ved mindst ét trin.
+✨ Plis et fines déchirures ¦ ✨ Přehyby a jemné trhliny ¦ ✨ Veck och fina revor ¦ ✨ Folder og fine rifter
+✨ Poussières et rayures ¦ ✨ Prach a škrábance ¦ ✨ Damm och repor ¦ ✨ Støv og ridser
+✨ Débruitage ¦ ✨ Odšumění ¦ ✨ Brusreducering ¦ ✨ Støjreduktion
+✨ Contraste et niveaux ¦ ✨ Kontrast a úrovně ¦ ✨ Kontrast och nivåer ¦ ✨ Kontrast og niveauer
+✨ Netteté douce ¦ ✨ Jemné doostření ¦ ✨ Mjuk skärpning ¦ ✨ Blød skærpning
+✨ Colorisation ¦ ✨ Kolorování ¦ ✨ Färgläggning ¦ ✨ Farvelægning
+Colorisation ¦ Kolorování ¦ Färgläggning ¦ Farvelægning
+Couleurs (pinceau) ¦ Barvy (štětec) ¦ Färger (pensel) ¦ Farver (pensel)
+✨ Retouches (taches, plis, tampon) ¦ ✨ Retuše (skvrny, přehyby, razítko) ¦ ✨ Retuscher (fläckar, veck, klonstämpel) ¦ ✨ Retoucheringer (pletter, folder, klonestempel)
+🪪 Photo d’identité ¦ 🪪 Průkazová fotka ¦ 🪪 Passfoto ¦ 🪪 Pasfoto
+Les yeux à l’horizontale, toujours à la même hauteur : tous les portraits faits ainsi ont le même format. ¦ Oči vodorovně, vždy ve stejné výšce: všechny takto udělané portréty mají stejný formát. ¦ Ögonen vågräta, alltid på samma höjd: alla porträtt som görs så har samma format. ¦ Øjnene vandrette, altid i samme højde: alle portrætter lavet sådan har samme format.
+✓ Yeux trouvés sur le visage. ¦ ✓ Oči na obličeji nalezeny. ¦ ✓ Ögonen hittades i ansiktet. ¦ ✓ Øjnene fundet i ansigtet.
+✓ D’après l’identification de la photo : ajuste les ronds sur les yeux. ¦ ✓ Podle identifikace fotky: uprav kroužky na očích. ¦ ✓ Utifrån fotots identifiering: justera ringarna på ögonen. ¦ ✓ Ud fra fotoets identifikation: justér ringene på øjnene.
+⚠️ Visage non trouvé : glisse les deux ronds sur les yeux. ¦ ⚠️ Obličej nenalezen: přetáhni oba kroužky na oči. ¦ ⚠️ Ansiktet hittades inte: dra de två ringarna till ögonen. ¦ ⚠️ Ansigtet blev ikke fundet: træk de to ringe hen på øjnene.
+Plusieurs fiches… ¦ Více karet… ¦ Flera poster… ¦ Flere poster…
+✓ Recadrer ¦ ✓ Oříznout ¦ ✓ Beskär ¦ ✓ Beskær
+👤 Utiliser comme portrait… ¦ 👤 Použít jako portrét… ¦ 👤 Använd som porträtt… ¦ 👤 Brug som portræt…
+Recadré en photo d’identité ¦ Oříznuto jako průkazová fotka ¦ Beskuret som passfoto ¦ Beskåret som pasfoto
+3:4 (portrait classique) ¦ 3:4 (klasický portrét) ¦ 3:4 (klassiskt porträtt) ¦ 3:4 (klassisk portræt)
+35 × 45 mm (photo d’identité) ¦ 35 × 45 mm (průkazová fotka) ¦ 35 × 45 mm (passfoto) ¦ 35 × 45 mm (pasfoto)
+Marge autour du visage ¦ Okraj kolem obličeje ¦ Marginal runt ansiktet ¦ Margen omkring ansigtet
+Hauteur des yeux ¦ Výška očí ¦ Ögonhöjd ¦ Øjenhøjde
+modèle absent ¦ model chybí ¦ modellen saknas ¦ modellen mangler
+Recherche du visage… ¦ Hledám obličej… ¦ Söker efter ansiktet… ¦ Søger efter ansigtet…
+Photo non enregistrée. ¦ Fotka neuložena. ¦ Fotot inte sparat. ¦ Fotoet er ikke gemt.
+Utiliser comme portrait de quelle fiche ? ¦ Použít jako portrét které karty? ¦ Använda som porträtt för vilken post? ¦ Brug som portræt for hvilken post?
+PHOTO D’IDENTITÉ ¦ PRŮKAZOVÁ FOTKA ¦ PASSFOTO ¦ PASFOTO
+La photo recadrée est ajoutée aux médias de la fiche, puis devient son portrait (l’ancien portrait reste dans ses médias). ¦ Oříznutá fotka se přidá do médií karty a stane se jejím portrétem (starý portrét zůstane v jejích médiích). ¦ Det beskurna fotot läggs till postens medier och blir dess porträtt (det gamla porträttet finns kvar bland dess medier). ¦ Det beskårne foto føjes til postens medier og bliver dens portræt (det gamle portræt bliver i dens medier).
+Choisis une personne dans la liste. ¦ Vyber osobu ze seznamu. ¦ Välj en person i listan. ¦ Vælg en person på listen.
+RETOUCHE · PHOTO D’IDENTITÉ ¦ ÚPRAVA FOTEK · PRŮKAZOVÁ FOTKA ¦ RETUSCH · PASSFOTO ¦ RETOUCHERING · PASFOTO
+🪪 Portraits de plusieurs fiches ¦ 🪪 Portréty více karet ¦ 🪪 Porträtt för flera poster ¦ 🪪 Portrætter til flere poster
+Choisis les fiches : pour chacune, l’app prend son portrait (ou sa première photo), trouve le visage et le cadre au même format que les autres (yeux à la même hauteur). Tu vérifies, puis « Utiliser comme portraits » : chaque photo recadrée entre dans les médias de sa fiche et devient son portrait (l’ancien reste). ¦ Vyber karty: u každé aplikace vezme portrét (nebo první fotku), najde obličej a ořízne ho ve stejném formátu jako ostatní (oči ve stejné výšce). Zkontroluješ to, pak „Použít jako portréty“: každá oříznutá fotka přejde do médií své karty a stane se jejím portrétem (starý zůstane). ¦ Välj posterna: för var och en tar appen dess porträtt (eller första foto), hittar ansiktet och beskär det i samma format som de andra (ögonen på samma höjd). Du kontrollerar, sedan ”Använd som porträtt”: varje beskuret foto hamnar bland postens medier och blir dess porträtt (det gamla finns kvar). ¦ Vælg posterne: for hver tager appen dens portræt (eller første foto), finder ansigtet og beskærer det i samme format som de andre (øjnene i samme højde). Du kontrollerer, og så »Brug som portrætter«: hvert beskåret foto kommer i postens medier og bliver dens portræt (det gamle bliver).
+🔍 Préparer les portraits ¦ 🔍 Připravit portréty ¦ 🔍 Förbered porträtten ¦ 🔍 Forbered portrætterne
+Aucune fiche choisie pour l’instant ¦ Zatím není vybraná žádná karta ¦ Ingen post vald än ¦ Ingen post valgt endnu
+Choisis une ou plusieurs personnes ci-dessus, puis « 🔍 Préparer les portraits ». ¦ Vyber výše jednu nebo více osob, pak „🔍 Připravit portréty“. ¦ Välj en eller flera personer ovan, sedan ”🔍 Förbered porträtten”. ¦ Vælg én eller flere personer ovenfor, og så »🔍 Forbered portrætterne«.
+Choisis d’abord une ou plusieurs fiches. ¦ Nejdřív vyber jednu nebo více karet. ¦ Välj först en eller flera poster. ¦ Vælg først én eller flere poster.
+aucune photo dans la fiche ¦ v kartě není žádná fotka ¦ inget foto i posten ¦ intet foto i posten
+yeux trouvés ¦ oči nalezeny ¦ ögonen hittade ¦ øjnene fundet
+d’après l’identification ¦ podle identifikace ¦ utifrån identifieringen ¦ ud fra identifikationen
+✓ portrait mis à jour ¦ ✓ portrét aktualizován ¦ ✓ porträttet uppdaterat ¦ ✓ portrættet opdateret
+Utiliser comme portraits ¦ Použít jako portréty ¦ Använd som porträtt ¦ Brug som portrætter
+La rotation n’est pas encore prête : réessaie dans un instant. ¦ Otáčení ještě není připravené: zkus to za chvíli znovu. ¦ Rotationen är inte redo än: försök igen om en stund. ¦ Rotationen er ikke klar endnu: prøv igen om lidt.
+Rotation de l’image ¦ Otočení obrázku ¦ Bildrotation ¦ Billedrotation
+Rotation de l’image : 90° horaire ¦ Otočení obrázku: 90° po směru hodin ¦ Bildrotation: 90° medurs ¦ Billedrotation: 90° med uret
+Rotation de l’image : 90° antihoraire ¦ Otočení obrázku: 90° proti směru hodin ¦ Bildrotation: 90° moturs ¦ Billedrotation: 90° mod uret
+Rotation de l’image : 180° ¦ Otočení obrázku: 180° ¦ Bildrotation: 180° ¦ Billedrotation: 180°
+Rotation de l’image : {a}° horaire ¦ Otočení obrázku: {a}° po směru hodin ¦ Bildrotation: {a}° medurs ¦ Billedrotation: {a}° med uret
+Rotation de l’image : {a}° antihoraire ¦ Otočení obrázku: {a}° proti směru hodin ¦ Bildrotation: {a}° moturs ¦ Billedrotation: {a}° mod uret
+Symétrie horizontale de l’image ¦ Překlopit obrázek vodorovně ¦ Vänd bilden vågrätt ¦ Vend billedet vandret
+Symétrie verticale de l’image ¦ Překlopit obrázek svisle ¦ Vänd bilden lodrätt ¦ Vend billedet lodret
+Perspective figée ¦ Perspektiva zafixována ¦ Perspektivet låst ¦ Perspektivet låst
+Le recadrage d’avant a été retiré (il ne tenait plus droit) : refais-le si besoin, ou ↶ Annuler. ¦ Předchozí ořez byl odebrán (už nebyl rovný): v případě potřeby ho udělej znovu, nebo ↶ Zpět. ¦ Den tidigare beskärningen togs bort (den var inte längre rak): gör om den vid behov, eller ↶ Ångra. ¦ Den tidligere beskæring blev fjernet (den var ikke længere lige): lav den igen om nødvendigt, eller ↶ Fortryd.
+📐 Redresser l’horizon ¦ 📐 Narovnat horizont ¦ 📐 Räta upp horisonten ¦ 📐 Ret horisonten op
+L’angle mesuré sur ta ligne : la photo tourne de cet angle pour la remettre droite. ¦ Úhel naměřený na tvé čáře: fotka se o něj otočí, aby byla rovně. ¦ Vinkeln uppmätt på din linje: fotot vrids med den vinkeln för att bli rakt. ¦ Vinklen målt på din linje: fotoet drejes med denne vinkel for at blive lige.
+Coins ajoutés autour ¦ Rohy přidané kolem ¦ Hörn tillagda runt om ¦ Hjørner tilføjet rundt om
+Transparents (PNG) ¦ Průhledné (PNG) ¦ Genomskinliga (PNG) ¦ Gennemsigtige (PNG)
+✂️ Recadrer pour enlever les coins vides ¦ ✂️ Oříznout a odebrat prázdné rohy ¦ ✂️ Beskär för att ta bort de tomma hörnen ¦ ✂️ Beskær for at fjerne de tomme hjørner
+Tous les calques, masques, textes et la sélection tournent avec la photo. ↶ Annuler (⌘Z) revient comme avant. ¦ Všechny vrstvy, masky, texty i výběr se otočí s fotkou. ↶ Zpět (⌘Z) vrátí původní stav. ¦ Alla lager, masker, texter och markeringen roterar med fotot. ↶ Ångra (⌘Z) återställer som det var. ¦ Alle lag, masker, tekster og markeringen drejer med fotoet. ↶ Fortryd (⌘Z) går tilbage til, som det var.
+Donne un angle entre 0,01 et 359,99°. ¦ Zadej úhel mezi 0,01 a 359,99°. ¦ Ange en vinkel mellan 0,01 och 359,99°. ¦ Angiv en vinkel mellem 0,01 og 359,99°.
+Trace une ligne le long de l’horizon (ou d’un mur bien droit) : la photo tournera pour la remettre droite. Échap pour arrêter. ¦ Nakresli čáru podél horizontu (nebo rovné zdi): fotka se otočí, aby byla rovně. Esc pro ukončení. ¦ Rita en linje längs horisonten (eller en rak vägg): fotot vrids för att bli rakt. Esc för att avbryta. ¦ Tegn en linje langs horisonten (eller en lige væg): fotoet drejes, så det bliver lige. Esc for at stoppe.
+Cette ligne est déjà droite : rien à tourner. ¦ Tato čára je už rovná: není co otáčet. ¦ Linjen är redan rak: inget att vrida. ¦ Linjen er allerede lige: intet at dreje.
+Photo prise avec le téléphone tourné : elle est enregistrée couchée. ¦ Fotka focená otočeným telefonem: je uložená naležato. ¦ Foto taget med telefonen vriden: det är sparat liggande. ¦ Foto taget med telefonen drejet: det er gemt liggende.
+↻ Remettre droite ¦ ↻ Narovnat ¦ ↻ Vänd rätt ¦ ↻ Vend rigtigt
+Photo remise droite (orientation du téléphone) ¦ Fotka narovnána (orientace telefonu) ¦ Fotot vänt rätt (telefonens orientering) ¦ Fotoet vendt rigtigt (telefonens retning)
+Les retouches en cours seront perdues (💾 Enregistrer le projet les garde pour plus tard). ¦ Rozpracované úpravy se ztratí (💾 Uložit projekt je uchová na později). ¦ Pågående retuscher går förlorade (💾 Spara projektet behåller dem till senare). ¦ De igangværende retoucheringer går tabt (💾 Gem projektet beholder dem til senere).
+Passer à la retouche simple ? ¦ Přepnout na jednoduchou úpravu? ¦ Växla till enkel retusch? ¦ Skift til enkel retouchering?
+Passer sans enregistrer ¦ Přepnout bez uložení ¦ Växla utan att spara ¦ Skift uden at gemme
+Le PSD n’est pas encore prêt : réessaie dans un instant. ¦ PSD ještě není připravené: zkus to za chvíli znovu. ¦ PSD är inte redo än: försök igen om en stund. ¦ PSD er ikke klar endnu: prøv igen om lidt.
+L’assemblage de photos n’est pas encore prêt. ¦ Skládání fotek ještě není připravené. ¦ Sammanfogning av foton är inte redo än. ¦ Sammensætning af fotos er ikke klar endnu.
+Cet outil n’est pas encore prêt : réessaie dans un instant. ¦ Tento nástroj ještě není připravený: zkus to za chvíli znovu. ¦ Verktyget är inte redo än: försök igen om en stund. ¦ Værktøjet er ikke klar endnu: prøv igen om lidt.
+Recherche du sujet… ¦ Hledám objekt… ¦ Söker efter motivet… ¦ Søger efter motivet…
+Sujet introuvable : le fond touche tout le bord. Essaie avec moins de tolérance (🪄), ou le lasso. ¦ Objekt nenalezen: pozadí se dotýká celého okraje. Zkus menší toleranci (🪄), nebo laso. ¦ Motivet hittades inte: bakgrunden rör hela kanten. Prova med mindre tolerans (🪄), eller lassot. ¦ Motivet blev ikke fundet: baggrunden rører hele kanten. Prøv med mindre tolerance (🪄) eller lassoen.
+Sujet sélectionné : ⇧ + baguette ou lasso pour ajouter, ⌥ pour enlever ; « Masque » pour l’appliquer. Tolérance (🪄) : jusqu’où va le fond. ¦ Objekt vybrán: ⇧ + hůlka nebo laso pro přidání, ⌥ pro ubrání; „Maska“ ho použije. Tolerance (🪄): kam až sahá pozadí. ¦ Motivet markerat: ⇧ + trollstav eller lasso för att lägga till, ⌥ för att dra ifrån; ”Mask” för att tillämpa. Tolerans (🪄): hur långt bakgrunden går. ¦ Motivet markeret: ⇧ + tryllestav eller lasso for at tilføje, ⌥ for at fratrække; »Maske« for at anvende. Tolerance (🪄): hvor langt baggrunden går.
+Sujet sélectionné ¦ Objekt vybrán ¦ Motivet markerat ¦ Motivet markeret
+La photo semble déjà droite. ¦ Fotka se zdá být už rovně. ¦ Fotot verkar redan vara rakt. ¦ Fotoet ser allerede ud til at være lige.
+Des corrections (taches, tampon) sont déjà faites : elles vont bouger avec la remise à plat. ¦ Některé opravy (skvrny, razítko) jsou už hotové: při vyrovnání se posunou. ¦ Vissa korrigeringar (fläckar, klonstämpel) är redan gjorda: de flyttas med utplattningen. ¦ Nogle rettelser (pletter, klonestempel) er allerede lavet: de flytter sig med udretningen.
+Redresser la perspective ? ¦ Narovnat perspektivu? ¦ Korrigera perspektivet? ¦ Ret perspektivet?
+Perspective redressée ¦ Perspektiva narovnána ¦ Perspektivet korrigerat ¦ Perspektivet rettet
+Perspective enlevée ¦ Perspektiva odebrána ¦ Perspektivet borttaget ¦ Perspektivet fjernet
+Peins les couleurs (pinceau doux) : le calque est en fusion « Couleur », la lumière de la photo est gardée. 🧽 pour corriger, opacité du calque pour doser. ¦ Maluj barvy (měkký štětec): vrstva je v režimu prolnutí „Barva“, světlo fotky se zachová. 🧽 pro opravu, krytí vrstvy pro dávkování. ¦ Måla färgerna (mjuk pensel): lagret har blandningsläget ”Färg”, fotots ljus behålls. 🧽 för att rätta, lagrets opacitet för att dosera. ¦ Mal farverne (blød pensel): laget er i blandingstilstanden »Farve«, fotoets lys bevares. 🧽 for at rette, lagets opacitet for at dosere.
+Recherche des taches… ¦ Hledám skvrny… ¦ Söker efter fläckar… ¦ Søger efter pletter…
+Aucune tache trouvée : augmente la sensibilité ou la taille. ¦ Žádná skvrna nenalezena: zvyš citlivost nebo velikost. ¦ Inga fläckar hittades: öka känsligheten eller storleken. ¦ Ingen pletter fundet: øg følsomheden eller størrelsen.
+✨ Jaunissement enlevé ¦ ✨ Zažloutnutí odstraněno ¦ ✨ Gulning borttagen ¦ ✨ Gulning fjernet
+Jaunissement enlevé sur le calque de réglage « ✨ Jaunissement enlevé » : la photo n’est pas touchée. ¦ Zažloutnutí odstraněno na vrstvě úprav „✨ Zažloutnutí odstraněno“: fotka zůstane nedotčená. ¦ Gulning borttagen på justeringslagret ”✨ Gulning borttagen”: fotot rörs inte. ¦ Gulning fjernet på justeringslaget »✨ Gulning fjernet«: fotoet røres ikke.
+Jaunissement enlevé (calque de réglage) ¦ Zažloutnutí odstraněno (vrstva úprav) ¦ Gulning borttagen (justeringslager) ¦ Gulning fjernet (justeringslag)
+Entoure d’abord le visage avec l’ellipse ◯ (glisse sur la photo), puis reclique « Visage plus net ». ¦ Nejdřív obkresli obličej elipsou ◯ (táhni po fotce), pak znovu klikni na „Ostřejší obličej“. ¦ Ringa först in ansiktet med ellipsen ◯ (dra på fotot), klicka sedan på ”Skarpare ansikte” igen. ¦ Tegn først rundt om ansigtet med ellipsen ◯ (træk på fotoet), og klik så på »Skarpere ansigt« igen.
+Visage débruité et accentué sur un calque à part : son opacité dose l’effet. ¦ Obličej odšuměn a doostřen na samostatné vrstvě: její krytí určuje sílu efektu. ¦ Ansiktet brusreducerat och skärpt på ett separat lager: dess opacitet styr effekten. ¦ Ansigtet støjreduceret og skærpet på et separat lag: dets opacitet styrer effekten.
+Correcteur prêt : glisse le long de la rayure ou du pli (zoome pour être précis). ¦ Korektor připraven: táhni podél škrábance nebo přehybu (pro přesnost přibliž). ¦ Lagningsverktyget redo: dra längs repan eller vecket (zooma för att vara exakt). ¦ Reparationsværktøjet er klar: træk langs ridsen eller folden (zoom for at være præcis).
+✨ Vieille photo ravivée ¦ ✨ Stará fotka oživena ¦ ✨ Gammalt foto återupplivat ¦ ✨ Gammelt foto genoplivet
+✨ Réglage automatique ¦ ✨ Automatické nastavení ¦ ✨ Automatisk justering ¦ ✨ Automatisk justering
+Fais d’abord une sélection. ¦ Nejdřív udělej výběr. ¦ Gör först en markering. ¦ Lav først en markering.
+Masque qui cache tout ¦ Maska skrývající vše ¦ Mask som döljer allt ¦ Maske, der skjuler alt
+Ce calque n’a pas de masque (Calque → Ajouter un masque). ¦ Tato vrstva nemá masku (Vrstva → Přidat masku). ¦ Lagret har ingen mask (Lager → Lägg till en mask). ¦ Laget har ingen maske (Lag → Tilføj en maske).
+Ce calque n’a pas de masque. ¦ Tato vrstva nemá masku. ¦ Lagret har ingen mask. ¦ Laget har ingen maske.
+Sélection inversée ¦ Výběr převrácen ¦ Markeringen inverterad ¦ Markeringen inverteret
+Agrandir la sélection ¦ Rozšířit výběr ¦ Utöka markeringen ¦ Udvid markeringen
+Réduire la sélection ¦ Zúžit výběr ¦ Minska markeringen ¦ Formindsk markeringen
+De combien de points (de l’aperçu) ? ¦ O kolik bodů (náhledu)? ¦ Med hur många pixlar (i förhandsvisningen)? ¦ Med hvor mange pixels (i forhåndsvisningen)?
+Sélection agrandie ¦ Výběr rozšířen ¦ Markeringen utökad ¦ Markeringen udvidet
+Sélection réduite ¦ Výběr zúžen ¦ Markeringen minskad ¦ Markeringen formindsket
+Contour progressif de la sélection ¦ Prolnutí okraje výběru ¦ Mjuk kant på markeringen ¦ Blød kant på markeringen
+Copie de la sélection ¦ Kopie výběru ¦ Kopia av markeringen ¦ Kopi af markeringen
+Sélection copiée sur un calque ¦ Výběr zkopírován do vrstvy ¦ Markeringen kopierad till ett lager ¦ Markeringen kopieret til et lag
+Remplissage ¦ Vyplnění ¦ Fyllning ¦ Udfyldning
+Zone effacée de la photo : elle sera transparente (image enregistrée en PNG). ¦ Oblast vymazána z fotky: bude průhledná (obrázek uložen jako PNG). ¦ Område raderat från fotot: det blir genomskinligt (bilden sparas som PNG). ¦ Område slettet fra fotoet: det bliver gennemsigtigt (billedet gemmes som PNG).
+Sélection effacée ¦ Výběr vymazán ¦ Markeringen raderad ¦ Markeringen slettet
+Recadré sur la sélection ¦ Oříznuto podle výběru ¦ Beskuret till markeringen ¦ Beskåret til markeringen
+Filtres de ce calque ¦ Filtry této vrstvy ¦ Lagrets filter ¦ Lagets filtre
+Plus tôt ¦ Dříve ¦ Tidigare ¦ Tidligere
+un filtre… ¦ filtr… ¦ ett filter… ¦ et filter…
+＋ Ajouter ¦ ＋ Přidat ¦ ＋ Lägg till ¦ ＋ Tilføj
+✨ Menu <b>Filtre</b> : chaque filtre se pose sur son propre calque (rien n’est détruit) : on le règle, on le dose avec l’opacité du calque, on le limite avec un masque 🎭, on le cache 👁. ¦ ✨ Nabídka <b>Filtr</b>: každý filtr se vloží na vlastní vrstvu (nic se neničí): nastavíš ho, zeslabíš krytím vrstvy, omezíš maskou 🎭, skryješ 👁. ¦ ✨ Menyn <b>Filter</b>: varje filter läggs på ett eget lager (inget förstörs): du justerar det, tonar ned det med lagrets opacitet, begränsar det med en mask 🎭, döljer det 👁. ¦ ✨ Menuen <b>Filter</b>: hvert filter lægges på sit eget lag (intet ødelægges): du justerer det, dæmper det med lagets opacitet, begrænser det med en maske 🎭, skjuler det 👁.
+Réglages remis à zéro ¦ Úpravy vynulovány ¦ Justeringar nollställda ¦ Justeringer nulstillet
+Point de courbe enlevé ¦ Bod křivky odebrán ¦ Kurvpunkt borttagen ¦ Kurvepunkt fjernet
+Supprimer ce point ¦ Smazat tento bod ¦ Radera punkten ¦ Slet punktet
+Point de la courbe ¦ Bod křivky ¦ Kurvpunkt ¦ Kurvepunkt
+Masque en rouge : ce qui est caché (touche \ pour revenir) ¦ Maska červeně: co je skryté (klávesa \ pro návrat) ¦ Masken i rött: det som är dolt (tangenten \ för att gå tillbaka) ¦ Masken i rødt: det skjulte (tasten \ for at gå tilbage)
+Pas encore enregistré comme projet : 💾 Enregistrer garde tout le travail pour continuer plus tard ¦ Zatím neuloženo jako projekt: 💾 Uložit uchová celou práci na později ¦ Inte sparat som projekt än: 💾 Spara behåller allt arbete till senare ¦ Endnu ikke gemt som projekt: 💾 Gem beholder alt arbejdet til senere
+Enregistrer le projet sous un autre nom ¦ Uložit projekt pod jiným názvem ¦ Spara projektet under ett annat namn ¦ Gem projektet under et andet navn
+Nom du nouveau projet (pour le retrouver dans « 📂 Projets… ») : ¦ Název nového projektu (abys ho našel v „📂 Projekty…“): ¦ Det nya projektets namn (för att hitta det i ”📂 Projekt…”): ¦ Det nye projekts navn (for at finde det i »📂 Projekter…«):
+Les retouches en cours seront perdues. ¦ Rozpracované úpravy se ztratí. ¦ Pågående retuscher går förlorade. ¦ De igangværende retoucheringer går tabt.
+Ouvrir un autre projet sans enregistrer ce travail ? ¦ Otevřít jiný projekt bez uložení této práce? ¦ Öppna ett annat projekt utan att spara arbetet? ¦ Åbn et andet projekt uden at gemme dette arbejde?
+Ouvrir sans enregistrer ¦ Otevřít bez uložení ¦ Öppna utan att spara ¦ Åbn uden at gemme
+affichée ¦ zobrazená ¦ visas ¦ vist
+en cours de retouche ¦ právě upravovaná ¦ retuscheras ¦ under retouchering
+Voir, comparer, revenir, renommer, supprimer (L3) ¦ Zobrazit, porovnat, vrátit se, přejmenovat, smazat (L3) ¦ Visa, jämför, gå tillbaka, byt namn, radera (L3) ¦ Vis, sammenlign, gå tilbage, omdøb, slet (L3)
+Voir, comparer, revenir, renommer, supprimer ¦ Zobrazit, porovnat, vrátit se, přejmenovat, smazat ¦ Visa, jämför, gå tillbaka, byt namn, radera ¦ Vis, sammenlign, gå tilbage, omdøb, slet
+l’original est toujours gardé ¦ originál se vždy zachová ¦ originalet behålls alltid ¦ originalen bevares altid
+Original ¦ Originál ¦ Original ¦ Original
+Quitter cette retouche sans l’enregistrer ? ¦ Opustit tuto úpravu bez uložení? ¦ Lämna retuschen utan att spara den? ¦ Forlad retoucheringen uden at gemme den?
+Pas de versions pour cette image. ¦ Tento obrázek nemá verze. ¦ Inga versioner för den här bilden. ¦ Ingen versioner af dette billede.
+Bicubique, plus lisse (pour agrandir) ¦ Bikubické, hladší (pro zvětšení) ¦ Bikubisk, mjukare (för förstoring) ¦ Bikubisk, blødere (til forstørrelse)
+Bicubique, plus net (pour réduire) ¦ Bikubické, ostřejší (pro zmenšení) ¦ Bikubisk, skarpare (för förminskning) ¦ Bikubisk, skarpere (til formindskelse)
+Bilinéaire ¦ Bilineární ¦ Bilinjär ¦ Bilineær
+Au plus proche (contours nets, pixels) ¦ Nejbližší soused (ostré okraje, pixely) ¦ Närmaste granne (skarpa kanter, pixlar) ¦ Nærmeste nabo (skarpe kanter, pixels)
+La taille de l’image enregistrée ou exportée (Image → Taille de l’image, Taille de la zone de travail) ¦ Velikost uloženého nebo exportovaného obrázku (Obrázek → Velikost obrázku, Velikost pracovní plochy) ¦ Storleken på den sparade eller exporterade bilden (Bild → Bildstorlek, Arbetsytans storlek) ¦ Størrelsen på det gemte eller eksporterede billede (Billede → Billedstørrelse, Lærredsstørrelse)
+📏 Taille de l’image ¦ 📏 Velikost obrázku ¦ 📏 Bildstorlek ¦ 📏 Billedstørrelse
+pixels ¦ pixely ¦ pixlar ¦ pixels
+pour cent ¦ procenta ¦ procent ¦ procent
+Ajuster à un format ¦ Přizpůsobit formátu ¦ Anpassa till ett format ¦ Tilpas til et format
+— garder ces mesures — ¦ — ponechat tyto rozměry — ¦ — behåll de här måtten — ¦ — behold disse mål —
+🔗 Conserver les proportions ¦ 🔗 Zachovat poměr stran ¦ 🔗 Behåll proportionerna ¦ 🔗 Bevar proportionerne
+Résolution ¦ Rozlišení ¦ Upplösning ¦ Opløsning
+Rééchantillonner ¦ Převzorkovat ¦ Sampla om ¦ Omsampl
+Méthode ¦ Metoda ¦ Metod ¦ Metode
+À l’impression ¦ Při tisku ¦ Vid utskrift ¦ Ved udskrift
+↺ Remettre la taille d’origine ¦ ↺ Obnovit původní velikost ¦ ↺ Återställ originalstorleken ¦ ↺ Nulstil til den oprindelige størrelse
+La photo reste en pleine qualité pendant la retouche : la taille choisie s’applique quand tu enregistres ou exportes l’image. ↶ Annuler (⌘Z) revient à la taille d’avant. ¦ Během úprav zůstává fotka v plné kvalitě: zvolená velikost se použije při uložení nebo exportu obrázku. ↶ Zpět (⌘Z) vrátí předchozí velikost. ¦ Fotot behåller full kvalitet under retuschen: den valda storleken gäller när du sparar eller exporterar bilden. ↶ Ångra (⌘Z) går tillbaka till föregående storlek. ¦ Fotoet bevarer fuld kvalitet under retoucheringen: den valgte størrelse anvendes, når du gemmer eller eksporterer billedet. ↶ Fortryd (⌘Z) går tilbage til den forrige størrelse.
+✓ Assez grande pour imprimer en A5 à 300 ppp. ¦ ✓ Dost velká pro tisk A5 při 300 dpi. ¦ ✓ Tillräckligt stor för att skrivas ut i A5 vid 300 dpi. ¦ ✓ Stor nok til udskrift i A5 ved 300 dpi.
+⚠️ Trop petite pour imprimer en A5 à 300 ppp (il faut 1748 × 2480 px). ¦ ⚠️ Příliš malá pro tisk A5 při 300 dpi (je potřeba 1748 × 2480 px). ¦ ⚠️ För liten för att skrivas ut i A5 vid 300 dpi (1748 × 2480 px behövs). ¦ ⚠️ For lille til udskrift i A5 ved 300 dpi (1748 × 2480 px kræves).
+Choisis une taille entre 1 et 30 000 pixels de côté (260 millions de pixels au plus). ¦ Vyber velikost od 1 do 30 000 pixelů na stranu (nejvýše 260 milionů pixelů). ¦ Välj en storlek mellan 1 och 30 000 pixlar per sida (högst 260 miljoner pixlar). ¦ Vælg en størrelse mellem 1 og 30.000 pixels pr. side (højst 260 millioner pixels).
+⬚ Taille de la zone de travail ¦ ⬚ Velikost pracovní plochy ¦ ⬚ Arbetsytans storlek ¦ ⬚ Lærredsstørrelse
+Nouvelle taille ¦ Nová velikost ¦ Ny storlek ¦ Ny størrelse
+Ancrage ¦ Ukotvení ¦ Ankarpunkt ¦ Ankerpunkt
+Où reste l’image ¦ Kde zůstane obrázek ¦ Var bilden stannar ¦ Hvor billedet bliver
+Relative (ajouter à la taille actuelle) ¦ Relativní (přidat k aktuální velikosti) ¦ Relativ (lägg till den aktuella storleken) ¦ Relativ (læg til den nuværende størrelse)
+Au centre ¦ Na střed ¦ I mitten ¦ I midten
+L’image reste à cet endroit ; la toile s’agrandit (ou se coupe) autour. ¦ Obrázek zůstane na tomto místě; plátno se kolem něj zvětší (nebo ořízne). ¦ Bilden stannar på det här stället; duken växer (eller beskärs) runt den. ¦ Billedet bliver på dette sted; lærredet vokser (eller beskæres) rundt om det.
+Fond de la zone ajoutée ¦ Pozadí přidané oblasti ¦ Bakgrund för det tillagda området ¦ Baggrund for det tilføjede område
+Transparent (PNG) ¦ Průhledné (PNG) ¦ Genomskinlig (PNG) ¦ Gennemsigtig (PNG)
+↺ Remettre la zone de départ ¦ ↺ Obnovit původní plochu ¦ ↺ Återställ den ursprungliga arbetsytan ¦ ↺ Nulstil til det oprindelige lærred
+↶ Annuler (⌘Z) revient à la zone d’avant. ¦ ↶ Zpět (⌘Z) vrátí předchozí plochu. ¦ ↶ Ångra (⌘Z) går tillbaka till föregående arbetsyta. ¦ ↶ Fortryd (⌘Z) går tilbage til det forrige lærred.
+Choisis une taille entre 1 et 30 000 pixels de côté. ¦ Vyber velikost od 1 do 30 000 pixelů na stranu. ¦ Välj en storlek mellan 1 och 30 000 pixlar per sida. ¦ Vælg en størrelse mellem 1 og 30.000 pixels pr. side.
+Informations de l’image ¦ Informace o obrázku ¦ Bildinformation ¦ Billedoplysninger
+Ces informations sont écrites dans l’image enregistrée ou exportée (XMP, lisible par Photoshop, Lightroom, l’Explorateur…). ¦ Tyto informace se zapíšou do uloženého nebo exportovaného obrázku (XMP, čitelné Photoshopem, Lightroomem, Průzkumníkem…). ¦ Uppgifterna skrivs in i den sparade eller exporterade bilden (XMP, läsbart av Photoshop, Lightroom, Utforskaren…). ¦ Oplysningerne skrives ind i det gemte eller eksporterede billede (XMP, læsbart for Photoshop, Lightroom, Stifinder…).
+Droits (copyright) ¦ Práva (copyright) ¦ Rättigheter (copyright) ¦ Rettigheder (copyright)
+Personnes reliées ¦ Propojené osoby ¦ Kopplade personer ¦ Forbundne personer
+Image trop grande pour être enregistrée par le navigateur. ¦ Obrázek je pro uložení prohlížečem příliš velký. ¦ Bilden är för stor för att sparas av webbläsaren. ¦ Billedet er for stort til at blive gemt af browseren.
+Image trop grande pour le navigateur. ¦ Obrázek je pro prohlížeč příliš velký. ¦ Bilden är för stor för webbläsaren. ¦ Billedet er for stort til browseren.
+Copie retouchée ajoutée aux mêmes fiches. ¦ Upravená kopie přidána ke stejným kartám. ¦ Retuscherad kopia tillagd till samma poster. ¦ Retoucheret kopi tilføjet til de samme poster.
+Image enregistrée dans les Médias. ¦ Obrázek uložen do Médií. ¦ Bilden sparad bland Medierna. ¦ Billedet gemt i Medier.
+Nouvelle version affichée. L’original est gardé dans les versions. ¦ Nová verze zobrazena. Originál zůstává ve verzích. ¦ Ny version visas. Originalet behålls bland versionerna. ¦ Ny version vist. Originalen bevares i versionerne.
+Version enregistrée (non affichée). ¦ Verze uložena (nezobrazená). ¦ Version sparad (visas inte). ¦ Version gemt (ikke vist).
+Ouverture de la photo ¦ Otevírám fotku ¦ Öppnar fotot ¦ Åbner fotoet
+La photo de départ n’a plus la même taille : vérifie les calques. ¦ Výchozí fotka už nemá stejnou velikost: zkontroluj vrstvy. ¦ Startfotot har inte längre samma storlek: kontrollera lagren. ¦ Udgangsfotoet har ikke længere samme størrelse: kontrollér lagene.
+Supprimer le projet (les photos et leurs versions restent) ¦ Smazat projekt (fotky a jejich verze zůstanou) ¦ Radera projektet (fotona och deras versioner finns kvar) ¦ Slet projektet (fotoene og deres versioner bliver)
+Aucun projet de retouche pour l’instant ¦ Zatím žádný projekt úprav ¦ Inga retuschprojekt än ¦ Ingen retoucheringsprojekter endnu
+Dans la Retouche, « 💾 Enregistrer le projet ». ¦ V Úpravě fotek „💾 Uložit projekt“. ¦ I Retusch, ”💾 Spara projektet”. ¦ I Retouchering, »💾 Gem projektet«.
+Renommer le projet ¦ Přejmenovat projekt ¦ Byt namn på projektet ¦ Omdøb projektet
+La photo et ses versions restent. ¦ Fotka a její verze zůstanou. ¦ Fotot och dess versioner finns kvar. ¦ Fotoet og dets versioner bliver.
+Écran 16:9 — 1920 × 1080 ¦ Obrazovka 16:9 — 1920 × 1080 ¦ Skärm 16:9 — 1920 × 1080 ¦ Skærm 16:9 — 1920 × 1080
+Carré — 1080 × 1080 ¦ Čtverec — 1080 × 1080 ¦ Kvadrat — 1080 × 1080 ¦ Kvadrat — 1080 × 1080
+Carte postale — 1500 × 2100 ¦ Pohlednice — 1500 × 2100 ¦ Vykort — 1500 × 2100 ¦ Postkort — 1500 × 2100
+A4 portrait (150 dpi) — 1240 × 1754 ¦ A4 na výšku (150 dpi) — 1240 × 1754 ¦ A4 stående (150 dpi) — 1240 × 1754 ¦ A4 stående (150 dpi) — 1240 × 1754
+A4 paysage (150 dpi) — 1754 × 1240 ¦ A4 na šířku (150 dpi) — 1754 × 1240 ¦ A4 liggande (150 dpi) — 1754 × 1240 ¦ A4 liggende (150 dpi) — 1754 × 1240
+A4 portrait (300 dpi) — 2480 × 3508 ¦ A4 na výšku (300 dpi) — 2480 × 3508 ¦ A4 stående (300 dpi) — 2480 × 3508 ¦ A4 stående (300 dpi) — 2480 × 3508
+Autre taille… ¦ Jiná velikost… ¦ Annan storlek… ¦ Anden størrelse…
+⬜ Partir d’un canevas vide ¦ ⬜ Začít od prázdného plátna ¦ ⬜ Börja från en tom duk ¦ ⬜ Start fra et tomt lærred
+⬜ Canevas vide ¦ ⬜ Prázdné plátno ¦ ⬜ Tom duk ¦ ⬜ Tomt lærred
+Créer et ouvrir ¦ Vytvořit a otevřít ¦ Skapa och öppna ¦ Opret og åbn
+Une couleur… ¦ Barva… ¦ En färg… ¦ En farve…
+Le canevas est ajouté aux Médias ; on y met ensuite des calques, des groupes, du texte, des formes, des photos (Sélection → calque)… ¦ Plátno se přidá do Médií; pak na něj dáváš vrstvy, skupiny, text, tvary, fotky (Výběr → vrstva)… ¦ Duken läggs till bland Medierna; sedan lägger du lager, grupper, text, former, foton på den (Markering → lager)… ¦ Lærredet føjes til Medier; derefter lægger du lag, grupper, tekst, former, fotos på det (Markering → lag)…
+Taille entre 16 et 8 000 pixels de côté. ¦ Velikost od 16 do 8 000 pixelů na stranu. ¦ Storlek mellan 16 och 8 000 pixlar per sida. ¦ Størrelse mellem 16 og 8.000 pixels pr. side.
+Canevas trop grand pour le navigateur. ¦ Plátno je pro prohlížeč příliš velké. ¦ Duken är för stor för webbläsaren. ¦ Lærredet er for stort til browseren.
+Création impossible. ¦ Nelze vytvořit. ¦ Kan inte skapas. ¦ Kan ikke oprettes.
+Canevas ¦ Plátno ¦ Duk ¦ Lærred
+Restaurer cette photo ¦ Obnovit tuto fotku ¦ Restaurera det här fotot ¦ Restaurér dette foto
+Retoucher cette photo ¦ Upravit tuto fotku ¦ Retuschera det här fotot ¦ Retouchér dette foto
+Une photo importée est ajoutée aux Médias (sans être rattachée à une fiche) ; ses retouches sont gardées comme versions. ¦ Importovaná fotka se přidá do Médií (bez propojení s kartou); její úpravy se uchovají jako verze. ¦ Ett importerat foto läggs till bland Medierna (utan koppling till en post); dess retuscher sparas som versioner. ¦ Et importeret foto føjes til Medier (uden at være forbundet med en post); dets retoucheringer gemmes som versioner.
+Rouvrir un travail de retouche enregistré ¦ Znovu otevřít uloženou práci na úpravě ¦ Öppna ett sparat retuscharbete igen ¦ Genåbn et gemt retoucheringsarbejde
+📂 Projets… ¦ 📂 Projekty… ¦ 📂 Projekt… ¦ 📂 Projekter…
+Une image vide, pour dessiner, écrire ou assembler des calques ¦ Prázdný obrázek ke kreslení, psaní nebo skládání vrstev ¦ En tom bild för att rita, skriva eller sätta ihop lager ¦ Et tomt billede til at tegne, skrive eller sætte lag sammen
+Trop grande : {w} × {h} points. L’agrandissement est limité à {max} points de côté (et {mp} millions de points). ¦ Příliš velké: {w} × {h} bodů. Zvětšení je omezeno na {max} bodů na stranu (a {mp} milionů bodů). ¦ För stort: {w} × {h} pixlar. Förstoring är begränsad till {max} pixlar per sida (och {mp} miljoner pixlar). ¦ For stort: {w} × {h} pixels. Forstørrelse er begrænset til {max} pixels pr. side (og {mp} millioner pixels).
+Ta sélection est prise comme ciel ¦ Tvůj výběr se bere jako obloha ¦ Din markering används som himmel ¦ Din markering bruges som himmel
+Ciel trouvé : {cov} de la photo ¦ Obloha nalezena: {cov} fotky ¦ Himmel hittad: {cov} av fotot ¦ Himmel fundet: {cov} af fotoet
+calques « Ciel » et « Harmonisation » ¦ vrstvy „Obloha“ a „Sladění“ ¦ lagren ”Himmel” och ”Harmonisering” ¦ lagene »Himmel« og »Harmonisering«
+Ciel remplacé ({what}) ¦ Obloha nahrazena ({what}) ¦ Himlen utbytt ({what}) ¦ Himlen udskiftet ({what})
+Personne détourée (dans ton rectangle) : choisis le fond ; « Retoucher le contour » pour corriger au pinceau. ¦ Osoba vyříznuta (v tvém obdélníku): vyber pozadí; „Upravit obrys“ pro opravu štětcem. ¦ Personen friläggd (i din rektangel): välj bakgrund; ”Justera konturen” för att rätta med penseln. ¦ Personen fritlagt (i dit rektangel): vælg baggrunden; »Ret omridset« for at rette med penslen.
+Personne détourée : choisis le fond ; « Retoucher le contour » pour corriger au pinceau. ¦ Osoba vyříznuta: vyber pozadí; „Upravit obrys“ pro opravu štětcem. ¦ Personen friläggd: välj bakgrund; ”Justera konturen” för att rätta med penseln. ¦ Personen fritlagt: vælg baggrunden; »Ret omridset« for at rette med penslen.
+{w} × {h} points aujourd’hui ¦ {w} × {h} bodů teď ¦ {w} × {h} pixlar nu ¦ {w} × {h} pixels nu
+Cette image est déjà grande : l’agrandissement est limité à {max} points de côté. ¦ Tento obrázek je už velký: zvětšení je omezeno na {max} bodů na stranu. ¦ Bilden är redan stor: förstoring är begränsad till {max} pixlar per sida. ¦ Billedet er allerede stort: forstørrelse er begrænset til {max} pixels pr. side.
+×4 donnerait plus de {max} points de côté : seulement ×2. ¦ ×4 by dalo víc než {max} bodů na stranu: jen ×2. ¦ ×4 skulle ge mer än {max} pixlar per sida: bara ×2. ¦ ×4 ville give mere end {max} pixels pr. side: kun ×2.
+Image agrandie téléchargée ({w} × {h}). ¦ Zvětšený obrázek stažen ({w} × {h}). ¦ Förstorad bild nedladdad ({w} × {h}). ¦ Forstørret billede hentet ({w} × {h}).
+Image agrandie ×{k} ({w} × {h}) rangée dans les médias. ¦ Obrázek zvětšený ×{k} ({w} × {h}) uložen do médií. ¦ Bild förstorad ×{k} ({w} × {h}) sparad bland medierna. ¦ Billede forstørret ×{k} ({w} × {h}) gemt i medierne.
+Nouvelle version agrandie ×{k} ({w} × {h}) affichée ; l’original reste dans les versions. ¦ Nová verze zvětšená ×{k} ({w} × {h}) zobrazena; originál zůstává ve verzích. ¦ Ny version förstorad ×{k} ({w} × {h}) visas; originalet finns kvar bland versionerna. ¦ Ny version forstørret ×{k} ({w} × {h}) vist; originalen bliver i versionerne.
+☀️ Bleu dégagé ¦ ☀️ Jasně modrá ¦ ☀️ Klarblått ¦ ☀️ Klar blå
+⛅ Beaux nuages ¦ ⛅ Pěkné mraky ¦ ⛅ Vackra moln ¦ ⛅ Flotte skyer
+🌅 Coucher de soleil ¦ 🌅 Západ slunce ¦ 🌅 Solnedgång ¦ 🌅 Solnedgang
+⛈️ Ciel orageux ¦ ⛈️ Bouřková obloha ¦ ⛈️ Åskhimmel ¦ ⛈️ Tordenhimmel
+🌫️ Ciel blanc d’hiver ¦ 🌫️ Bílá zimní obloha ¦ 🌫️ Vit vinterhimmel ¦ 🌫️ Hvid vinterhimmel
+Agrandissement arrêté. ¦ Zvětšování zastaveno. ¦ Förstoringen stoppad. ¦ Forstørrelse stoppet.
+Fil de calcul en panne. ¦ Výpočetní vlákno selhalo. ¦ Beräkningstråden fungerar inte. ¦ Beregningstråden svigtede.
+Recherche du ciel… ¦ Hledám oblohu… ¦ Söker efter himlen… ¦ Søger efter himlen…
+Je ne trouve pas de ciel : il doit toucher le haut de la photo et être assez uni. Sélectionne-le toi-même (🪄 baguette, ➰ lasso), puis recommence : ta sélection sera prise comme ciel. ¦ Nenacházím oblohu: musí se dotýkat horního okraje fotky a být dost jednolitá. Vyber ji sám (🪄 hůlka, ➰ laso) a začni znovu: tvůj výběr se vezme jako obloha. ¦ Jag hittar ingen himmel: den måste nå fotots överkant och vara ganska jämn. Markera den själv (🪄 trollstav, ➰ lasso) och börja om: din markering används som himmel. ¦ Jeg kan ikke finde en himmel: den skal røre fotoets øverste kant og være nogenlunde ensartet. Markér den selv (🪄 tryllestav, ➰ lasso), og start forfra: din markering bruges som himmel.
+Harmonisation du premier plan ¦ Sladění popředí ¦ Harmonisering av förgrunden ¦ Harmonisering af forgrunden
+Ciel ¦ Obloha ¦ Himmel ¦ Himmel
+☁️ Remplacer le ciel ¦ ☁️ Nahradit oblohu ¦ ☁️ Byt ut himlen ¦ ☁️ Udskift himlen
+Une photo de ciel : de la base, ou de l’ordinateur ¦ Fotka oblohy: z databáze nebo z počítače ¦ Ett himmelsfoto: ur databasen eller från datorn ¦ Et himmelfoto: fra databasen eller computeren
+Une image… ¦ Obrázek… ¦ En bild… ¦ Et billede…
+Taille du nouveau ciel ¦ Velikost nové oblohy ¦ Den nya himlens storlek ¦ Den nye himmels størrelse
+Position verticale ¦ Svislá poloha ¦ Lodrät position ¦ Lodret placering
+Position horizontale ¦ Vodorovná poloha ¦ Vågrät position ¦ Vandret placering
+Avec une taille au-dessus de 100 % : quelle partie du ciel se voit (0 = le haut). ¦ Při velikosti nad 100 %: která část oblohy je vidět (0 = horní). ¦ Med en storlek över 100 %: vilken del av himlen som syns (0 = överst). ¦ Med en størrelse over 100 %: hvilken del af himlen der ses (0 = øverst).
+Fondu à l’horizon ¦ Prolnutí u horizontu ¦ Övertoning vid horisonten ¦ Overgang ved horisonten
+Adoucit la limite entre le ciel et la terre (arbres, toits) : plus haut, plus fondu. ¦ Zjemní hranici mezi oblohou a zemí (stromy, střechy): výš = víc prolnuté. ¦ Mjukar upp gränsen mellan himmel och mark (träd, tak): högre = mer övertonat. ¦ Blødgør grænsen mellem himmel og jord (træer, tage): højere = mere glidende.
+Harmoniser le premier plan ¦ Sladit popředí ¦ Harmonisera förgrunden ¦ Harmonisér forgrunden
+Le paysage prend un peu la couleur et la lumière du nouveau ciel, pour que tout aille ensemble. ¦ Krajina převezme trochu barvy a světla nové oblohy, aby vše ladilo. ¦ Landskapet tar lite av den nya himlens färg och ljus så att allt passar ihop. ¦ Landskabet tager lidt af den nye himmels farve og lys, så alt passer sammen.
+Opacité du ciel ¦ Krytí oblohy ¦ Himlens opacitet ¦ Himlens opacitet
+Peindre le masque du calque « Ciel » : ⬛ cacher (là où le ciel ne doit pas passer), ⬜ montrer ¦ Malovat masku vrstvy „Obloha“: ⬛ skrýt (kde obloha nemá být), ⬜ odkrýt ¦ Måla masken för lagret ”Himmel”: ⬛ dölj (där himlen inte ska synas), ⬜ visa ¦ Mal masken for laget »Himmel«: ⬛ skjul (hvor himlen ikke skal ses), ⬜ vis
+🖌 Corriger le masque ¦ 🖌 Opravit masku ¦ 🖌 Rätta masken ¦ 🖌 Ret masken
+Rien n’est détruit : le ciel est un calque avec un masque. Si un bout de ciel manque ou déborde : « Corriger le masque », ou sélectionne le ciel toi-même (🪄, ➰) et relance. ¦ Nic se neničí: obloha je vrstva s maskou. Když kus oblohy chybí nebo přetéká: „Opravit masku“, nebo vyber oblohu sám (🪄, ➰) a spusť znovu. ¦ Inget förstörs: himlen är ett lager med en mask. Om en bit himmel saknas eller går utanför: ”Rätta masken”, eller markera himlen själv (🪄, ➰) och kör igen. ¦ Intet ødelægges: himlen er et lag med en maske. Hvis et stykke himmel mangler eller flyder over: »Ret masken«, eller markér himlen selv (🪄, ➰), og kør igen.
+Une photo de ciel ¦ Fotka oblohy ¦ Ett himmelsfoto ¦ Et himmelfoto
+Prendre ce ciel ¦ Použít tuto oblohu ¦ Använd den här himlen ¦ Brug denne himmel
+Une photo de la base, ou une image de l’ordinateur (elle entre dans les médias). ¦ Fotka z databáze nebo obrázek z počítače (přejde do médií). ¦ Ett foto ur databasen eller en bild från datorn (den hamnar bland medierna). ¦ Et foto fra databasen eller et billede fra computeren (det kommer i medierne).
+Tu peins le masque du ciel : ⬛ cacher là où le ciel déborde (feuillage, toits), ⬜ montrer là où il manque. Puis « ✓ OK ». ¦ Maluješ masku oblohy: ⬛ skryj tam, kde obloha přetéká (listí, střechy), ⬜ odkryj tam, kde chybí. Pak „✓ OK“. ¦ Du målar himlens mask: ⬛ dölj där himlen går utanför (lövverk, tak), ⬜ visa där den saknas. Sedan ”✓ OK”. ¦ Du maler himlens maske: ⬛ skjul, hvor himlen flyder over (løv, tage), ⬜ vis, hvor den mangler. Derefter »✓ OK«.
+Ciel remplacé : calques « Ciel » et « Harmonisation du premier plan » (opacité, masque, 👁 pour comparer). ¦ Obloha nahrazena: vrstvy „Obloha“ a „Sladění popředí“ (krytí, maska, 👁 pro porovnání). ¦ Himlen utbytt: lagren ”Himmel” och ”Harmonisering av förgrunden” (opacitet, mask, 👁 för att jämföra). ¦ Himlen udskiftet: lagene »Himmel« og »Harmonisering af forgrunden« (opacitet, maske, 👁 for at sammenligne).
+✂️ Détourer une personne ¦ ✂️ Vyříznout osobu ¦ ✂️ Frilägg en person ¦ ✂️ Fritlæg en person
+Sans intelligence artificielle : tout se calcule ici ¦ Bez umělé inteligence: vše se počítá tady ¦ Utan artificiell intelligens: allt beräknas här ¦ Uden kunstig intelligens: alt beregnes her
+1. Trace un rectangle autour de la personne (⬚), pas trop serré — ou laisse tout : la photo entière sert de cadre. ¦ 1. Nakresli obdélník kolem osoby (⬚), ne příliš těsně — nebo nech vše: rámečkem bude celá fotka. ¦ 1. Rita en rektangel runt personen (⬚), inte för tätt — eller låt allt vara: hela fotot blir ramen. ¦ 1. Tegn et rektangel rundt om personen (⬚), ikke for tæt — eller lad det hele være: hele fotoet bliver rammen.
+2. « Détourer » : l’app apprend les couleurs de la personne (dans le rectangle) et du fond (autour), puis suit les contours. ¦ 2. „Vyříznout“: aplikace se naučí barvy osoby (v obdélníku) a pozadí (kolem) a pak sleduje obrysy. ¦ 2. ”Frilägg”: appen lär sig personens färger (i rektangeln) och bakgrundens (runt om) och följer sedan konturerna. ¦ 2. »Fritlæg«: appen lærer personens farver (i rektanglet) og baggrundens (rundt om) og følger så konturerne.
+⬚ Tracer un rectangle ¦ ⬚ Nakreslit obdélník ¦ ⬚ Rita en rektangel ¦ ⬚ Tegn et rektangel
+✂️ Détourer ¦ ✂️ Vyříznout ¦ ✂️ Frilägg ¦ ✂️ Fritlæg
+Fond transparent (image en PNG) ¦ Průhledné pozadí (obrázek PNG) ¦ Genomskinlig bakgrund (PNG-bild) ¦ Gennemsigtig baggrund (PNG-billede)
+Fond flou ¦ Rozmazané pozadí ¦ Suddig bakgrund ¦ Sløret baggrund
+Fond uni ¦ Jednobarevné pozadí ¦ Enfärgad bakgrund ¦ Ensfarvet baggrund
+Garder la personne sur un calque à part ¦ Ponechat osobu na samostatné vrstvě ¦ Behåll personen på ett separat lager ¦ Behold personen på et separat lag
+Flou du fond ¦ Rozmazání pozadí ¦ Bakgrundsoskärpa ¦ Baggrundssløring
+Peindre le masque : ⬛ cacher, ⬜ montrer ¦ Malovat masku: ⬛ skrýt, ⬜ odkrýt ¦ Måla masken: ⬛ dölj, ⬜ visa ¦ Mal masken: ⬛ skjul, ⬜ vis
+🖌 Retoucher le contour ¦ 🖌 Upravit obrys ¦ 🖌 Justera konturen ¦ 🖌 Ret omridset
+Marche bien quand la personne se détache de son fond (couleurs différentes, fond assez simple). Cheveux fins, fond chargé ou vêtements de la couleur du fond : il faudra retoucher au pinceau (« Retoucher le contour »). ¦ Funguje dobře, když osoba vystupuje z pozadí (odlišné barvy, dost jednoduché pozadí). Jemné vlasy, rušné pozadí nebo oblečení v barvě pozadí: bude třeba doladit štětcem („Upravit obrys“). ¦ Fungerar bra när personen sticker ut från bakgrunden (olika färger, ganska enkel bakgrund). Fint hår, rörig bakgrund eller kläder i bakgrundens färg: du behöver justera med penseln (”Justera konturen”). ¦ Virker godt, når personen skiller sig ud fra baggrunden (forskellige farver, nogenlunde enkel baggrund). Fint hår, en uroligt baggrund eller tøj i baggrundens farve: du skal rette med penslen (»Ret omridset«).
+Personne détourée ¦ Osoba vyříznuta ¦ Personen friläggd ¦ Personen fritlagt
+Trace un rectangle autour de la personne (en laissant un peu de fond tout autour), puis « ✂️ Détourer ». ¦ Nakresli obdélník kolem osoby (nech kolem trochu pozadí), pak „✂️ Vyříznout“. ¦ Rita en rektangel runt personen (lämna lite bakgrund runt om), sedan ”✂️ Frilägg”. ¦ Tegn et rektangel rundt om personen (lad lidt baggrund være rundt om), og så »✂️ Fritlæg«.
+Détourage… ¦ Vyřezávám… ¦ Frilägger… ¦ Fritlægger…
+Personne introuvable : trace le rectangle plus près d’elle, puis recommence. ¦ Osoba nenalezena: nakresli obdélník blíž k ní a začni znovu. ¦ Personen hittades inte: rita rektangeln närmare personen och börja om. ¦ Personen blev ikke fundet: tegn rektanglet tættere på personen, og start forfra.
+✂️ Détourer à nouveau ¦ ✂️ Vyříznout znovu ¦ ✂️ Frilägg igen ¦ ✂️ Fritlæg igen
+Tu peins le masque de la personne : ⬛ cacher (du fond resté), ⬜ montrer (un bout de la personne oublié). ¦ Maluješ masku osoby: ⬛ skrýt (zbytky pozadí), ⬜ odkrýt (zapomenutý kus osoby). ¦ Du målar personens mask: ⬛ dölj (kvarvarande bakgrund), ⬜ visa (en glömd bit av personen). ¦ Du maler personens maske: ⬛ skjul (resterende baggrund), ⬜ vis (et glemt stykke af personen).
+Tu peins le masque du fond : ⬛ cacher (là c’est la personne), ⬜ montrer (là c’est du fond). ¦ Maluješ masku pozadí: ⬛ skrýt (tam je osoba), ⬜ odkrýt (tam je pozadí). ¦ Du målar bakgrundens mask: ⬛ dölj (där är personen), ⬜ visa (där är bakgrund). ¦ Du maler baggrundens maske: ⬛ skjul (der er personen), ⬜ vis (der er baggrund).
+Détourage : fond transparent ¦ Vyříznutí: průhledné pozadí ¦ Frilägg: genomskinlig bakgrund ¦ Fritlægning: gennemsigtig baggrund
+Détourage : fond flou ¦ Vyříznutí: rozmazané pozadí ¦ Frilägg: suddig bakgrund ¦ Fritlægning: sløret baggrund
+Détourage : fond uni ¦ Vyříznutí: jednobarevné pozadí ¦ Frilägg: enfärgad bakgrund ¦ Fritlægning: ensfarvet baggrund
+Détourage : personne sur un calque ¦ Vyříznutí: osoba na vrstvě ¦ Frilägg: personen på ett lager ¦ Fritlægning: personen på et lag
+Fond rendu transparent (masque de la photo) : l’image sera enregistrée en PNG. ¦ Pozadí zprůhledněno (maska fotky): obrázek se uloží jako PNG. ¦ Bakgrunden genomskinlig (fotots mask): bilden sparas som PNG. ¦ Baggrunden gjort gennemsigtig (fotoets maske): billedet gemmes som PNG.
+Détourage fait : tout est sur des calques, avec des masques à retoucher au besoin. ¦ Vyříznutí hotovo: vše je na vrstvách, s maskami, které lze podle potřeby upravit. ¦ Friläggning klar: allt ligger på lager, med masker att justera vid behov. ¦ Fritlægning færdig: alt er på lag med masker, der kan rettes efter behov.
+Trace un rectangle autour de la personne (⬚), ou « ✂️ Détourer » directement pour toute la photo. ¦ Nakresli obdélník kolem osoby (⬚), nebo rovnou „✂️ Vyříznout“ pro celou fotku. ¦ Rita en rektangel runt personen (⬚), eller ”✂️ Frilägg” direkt för hela fotot. ¦ Tegn et rektangel rundt om personen (⬚), eller »✂️ Fritlæg« direkte for hele fotoet.
+Préparation de l’image en pleine taille… ¦ Připravuji obrázek v plné velikosti… ¦ Förbereder bilden i full storlek… ¦ Forbereder billedet i fuld størrelse…
+🔍 Agrandir l’image ¦ 🔍 Zvětšit obrázek ¦ 🔍 Förstora bilden ¦ 🔍 Forstør billedet
+Netteté des contours ¦ Ostrost hran ¦ Kantskärpa ¦ Kantskarphed
+Renforce les contours sans faire de halo ; les aplats (ciel, peau) restent doux. ¦ Zesílí hrany bez svatozáře; plochy (obloha, pleť) zůstanou jemné. ¦ Förstärker kanterna utan glorior; ytor (himmel, hud) förblir mjuka. ¦ Forstærker kanterne uden glorier; flader (himmel, hud) forbliver bløde.
+Clique pour choisir l’endroit de l’aperçu ¦ Klikni a vyber místo náhledu ¦ Klicka för att välja var förhandsvisningen ska vara ¦ Klik for at vælge, hvor forhåndsvisningen skal være
+Lissage du grain ¦ Vyhlazení zrna ¦ Kornutjämning ¦ Kornudjævning
+Avant (agrandi simplement) ¦ Před (jen zvětšeno) ¦ Före (bara förstorat) ¦ Før (blot forstørret)
+Après, à 100 % ¦ Po, při 100 % ¦ Efter, vid 100 % ¦ Efter, ved 100 %
+Une nouvelle version de la photo, affichée partout (l’original reste) ¦ Nová verze fotky, zobrazená všude (originál zůstane) ¦ En ny version av fotot, visas överallt (originalet finns kvar) ¦ En ny version af fotoet, vist overalt (originalen bliver)
+Agrandir → nouvelle version ¦ Zvětšit → nová verze ¦ Förstora → ny version ¦ Forstør → ny version
+→ copie séparée ¦ → samostatná kopie ¦ → separat kopia ¦ → separat kopi
+Agrandir → dans les médias ¦ Zvětšit → do médií ¦ Förstora → till medierna ¦ Forstør → i medierne
+Agrandir ne retrouve pas les détails qui n’ont jamais été photographiés : l’image est plus grande et plus nette, pas plus précise. ¦ Zvětšení nevrátí detaily, které nikdy nebyly vyfoceny: obrázek je větší a ostřejší, ne přesnější. ¦ Förstoring återskapar inte detaljer som aldrig fotograferades: bilden blir större och skarpare, inte mer exakt. ¦ Forstørrelse genskaber ikke detaljer, der aldrig blev fotograferet: billedet bliver større og skarpere, ikke mere præcist.
+Cette image est déjà trop grande pour être agrandie. ¦ Tento obrázek je už příliš velký na zvětšení. ¦ Bilden är redan för stor för att förstoras. ¦ Billedet er allerede for stort til at blive forstørret.
+Filtre : {what} ¦ Filtr: {what} ¦ Filter: {what} ¦ Filter: {what}
+🎨 Teinte/Saturation {num} ¦ 🎨 Odstín/sytost {num} ¦ 🎨 Nyans/mättnad {num} ¦ 🎨 Farvetone/mætning {num}
+Motif {num} ¦ Vzorek {num} ¦ Mönster {num} ¦ Mønster {num}
+Bruit ¦ Šum ¦ Brus ¦ Støj
+Artistiques ¦ Umělecké ¦ Konstnärliga ¦ Kunstneriske
+Pixellisation ¦ Pixelizace ¦ Pixla ¦ Pixelér
+Rendu ¦ Vykreslení ¦ Rendera ¦ Gengiv
+Autres ¦ Ostatní ¦ Övrigt ¦ Andre
+Flou gaussien ¦ Gaussovské rozostření ¦ Gaussisk oskärpa ¦ Gaussisk sløring
+Flou de mouvement ¦ Pohybové rozostření ¦ Rörelseoskärpa ¦ Bevægelsessløring
+Flou radial (zoom) ¦ Radiální rozostření (zoom) ¦ Radiell oskärpa (zoom) ¦ Radial sløring (zoom)
+Flou rotatif ¦ Rotační rozostření ¦ Rotationsoskärpa ¦ Rotationssløring
+Accentuation (masque flou) ¦ Doostření (maska neostrosti) ¦ Oskarp mask ¦ Uskarp maske
+Estampage (relief) ¦ Reliéf ¦ Relief ¦ Relief
+Solarisation ¦ Solarizace ¦ Solarisera ¦ Solarisér
+Diffusion ¦ Difúze ¦ Diffusion ¦ Diffusion
+Vent ¦ Vítr ¦ Vind ¦ Vind
+Aquarelle ¦ Akvarel ¦ Akvarell ¦ Akvarel
+Vieux film ¦ Starý film ¦ Gammal film ¦ Gammel film
+Cristallisation ¦ Krystalizace ¦ Kristallisera ¦ Krystallisér
+Pointillisme ¦ Pointilismus ¦ Pointillism ¦ Pointillisme
+Nuages (texture) ¦ Mraky (textura) ¦ Moln (textur) ¦ Skyer (tekstur)
+Lueur diffuse ¦ Rozptýlená záře ¦ Diffust sken ¦ Diffus glød
+Tourbillon ¦ Zatočení ¦ Virvel ¦ Hvirvel
+Onde ¦ Vlna ¦ Våg ¦ Bølge
+Rayon ¦ Poloměr ¦ Radie ¦ Radius
+Centre X ¦ Střed X ¦ Mitt X ¦ Midte X
+Centre Y ¦ Střed Y ¦ Mitt Y ¦ Midte Y
+Seuil ¦ Práh ¦ Tröskel ¦ Tærskel
+Bande nette, hauteur ¦ Ostrý pás, výška ¦ Skarpt band, höjd ¦ Skarpt bånd, højde
+Points lumineux ¦ Světlé body ¦ Ljuspunkter ¦ Lyspunkter
+Monochrome (0 / 1) ¦ Jednobarevné (0 / 1) ¦ Monokrom (0 / 1) ¦ Monokrom (0 / 1)
+Gain ¦ Míra ¦ Mängd ¦ Mængde
+Niveaux ¦ Úrovně ¦ Nivåer ¦ Niveauer
+Longueur ¦ Délka ¦ Längd ¦ Længde
+Contours ¦ Obrysy ¦ Kanter ¦ Kanter
+Trait ¦ Tah ¦ Drag ¦ Streg
+Traits noirs ¦ Černé čáry ¦ Svarta linjer ¦ Sorte linjer
+Usure ¦ Opotřebení ¦ Slitage ¦ Slid
+Position X ¦ Poloha X ¦ Position X ¦ Position X
+Position Y ¦ Poloha Y ¦ Position Y ¦ Position Y
+Amplitude ¦ Amplituda ¦ Amplitud ¦ Amplitude
+Horizontale (0) / verticale (1) ¦ Vodorovně (0) / svisle (1) ¦ Vågrät (0) / lodrät (1) ¦ Vandret (0) / lodret (1)
+Horizontal ¦ Vodorovně ¦ Vågrät ¦ Vandret
+Contraste ¦ Kontrast ¦ Kontrast ¦ Kontrast
+Ombres ¦ Stíny ¦ Skuggor ¦ Skygger
+Chaleur ¦ Teplota barev ¦ Värme ¦ Varme
+Rouge ¦ Červená ¦ Röd ¦ Rød
+Vert ¦ Zelená ¦ Grön ¦ Grøn
+Bleu ¦ Modrá ¦ Blå ¦ Blå
+RVB ¦ RGB ¦ RGB ¦ RGB
+Assombrir ¦ Ztmavit ¦ Gör mörkare ¦ Gør mørkere
+Grain ¦ Zrno ¦ Korn ¦ Korn
+Vignette ¦ Vinětace ¦ Vinjett ¦ Vignet
+Force ¦ Síla ¦ Styrka ¦ Styrke
+Couleurs ¦ Barvy ¦ Färger ¦ Farver
+Auto ¦ Auto ¦ Auto ¦ Auto
+Document lisible ¦ Čitelný dokument ¦ Läsbart dokument ¦ Læsbart dokument
+Niveaux : point noir, tons moyens, point blanc ¦ Úrovně: černý bod, středy, bílý bod ¦ Nivåer: svartpunkt, mellantoner, vitpunkt ¦ Niveauer: sortpunkt, mellemtoner, hvidpunkt
+Niveaux automatiques ¦ Automatické úrovně ¦ Automatiska nivåer ¦ Automatiske niveauer
+Monter la courbe éclaircit, la creuser assombrit, un « S » donne du contraste. Rouge, vert, bleu : corriger une dominante de couleur. ¦ Zvednutí křivky zesvětlí, prohnutí ztmaví, „S“ dodá kontrast. Červená, zelená, modrá: oprava barevného nádechu. ¦ Att höja kurvan gör ljusare, att sänka gör mörkare, ett ”S” ger kontrast. Röd, grön, blå: rätta en färgton. ¦ At hæve kurven gør lysere, at sænke den gør mørkere, et »S« giver kontrast. Rød, grøn, blå: ret et farvestik.
+✨ Menu ¦ ✨ Nabídka ¦ ✨ Meny ¦ ✨ Menu
+Déplacer : glisse la poignée, ou Alt + ↑ / ↓ ¦ Přesun: táhni úchyt, nebo Alt + ↑ / ↓ ¦ Flytta: dra i handtaget, eller Alt + ↑ / ↓ ¦ Flyt: træk i håndtaget, eller Alt + ↑ / ↓
+Auto : les points les plus sombres deviennent noirs et les plus clairs blancs ; cliquer une 2ᵉ fois revient à l’état d’avant. ¦ Auto: nejtmavší body zčernají a nejsvětlejší zbělají; druhé kliknutí vrátí předchozí stav. ¦ Auto: de mörkaste punkterna blir svarta och de ljusaste vita; ett andra klick återställer som det var. ¦ Auto: de mørkeste punkter bliver sorte og de lyseste hvide; et 2. klik går tilbage til, som det var.
+Éclaircit seulement les parties sombres (ou les assombrit vers la gauche), sans toucher aux claires. ¦ Zesvětlí jen tmavé části (nebo je ztmaví doleva), světlých se nedotkne. ¦ Gör bara de mörka delarna ljusare (eller mörkare åt vänster), utan att röra de ljusa. ¦ Gør kun de mørke dele lysere (eller mørkere mod venstre) uden at røre de lyse.
+Cliquer à nouveau pour revenir à l’état d’avant ¦ Klikni znovu a vrátíš předchozí stav ¦ Klicka igen för att återställa som det var ¦ Klik igen for at gå tilbage til, som det var
+Clic sur la courbe : ajouter un point · glisser : le déplacer · pour l’enlever : le choisir puis « Enlever le point » (ou la touche ⌫), ou le glisser hors du cadre. ¦ Klik na křivku: přidat bod · tažení: posunout ho · odebrání: vyber ho a pak „Odebrat bod“ (nebo klávesu ⌫), nebo ho přetáhni mimo rámeček. ¦ Klicka på kurvan: lägg till en punkt · dra: flytta den · för att ta bort den: välj den och sedan ”Ta bort punkten” (eller tangenten ⌫), eller dra den utanför ramen. ¦ Klik på kurven: tilføj et punkt · træk: flyt det · for at fjerne det: vælg det, og så »Fjern punktet« (eller tasten ⌫), eller træk det uden for rammen.
+fx ¦ fx ¦ fx ¦ fx
+Normal italique ¦ Normální kurzíva ¦ Normal kursiv ¦ Normal kursiv
+Extra-fin italique ¦ Extra tenká kurzíva ¦ Extra tunn kursiv ¦ Ekstra tynd kursiv
+Ultra-léger italique ¦ Ultra lehká kurzíva ¦ Extra lätt kursiv ¦ Ekstra let kursiv
+Léger italique ¦ Lehká kurzíva ¦ Lätt kursiv ¦ Let kursiv
+Médium italique ¦ Střední kurzíva ¦ Medium kursiv ¦ Medium kursiv
+Demi-gras italique ¦ Polotučná kurzíva ¦ Halvfet kursiv ¦ Halvfed kursiv
+Gras italique ¦ Tučná kurzíva ¦ Fet kursiv ¦ Fed kursiv
+Extra-gras italique ¦ Extra tučná kurzíva ¦ Extra fet kursiv ¦ Ekstra fed kursiv
+Noir italique ¦ Černá kurzíva ¦ Svart kursiv ¦ Sort kursiv
+Unicode : Latin-1 ¦ Unicode: Latin-1 ¦ Unicode: Latin-1 ¦ Unicode: Latin-1
+Unicode : grec ¦ Unicode: řečtina ¦ Unicode: grekiska ¦ Unicode: græsk
+Unicode : cyrillique ¦ Unicode: cyrilice ¦ Unicode: kyrilliska ¦ Unicode: kyrillisk
+Unicode : ponctuation ¦ Unicode: interpunkce ¦ Unicode: interpunktion ¦ Unicode: tegnsætning
+Unicode : monnaies ¦ Unicode: měny ¦ Unicode: valutor ¦ Unicode: valutaer
+Unicode : symboles de lettres ¦ Unicode: symboly podobné písmenům ¦ Unicode: bokstavsliknande symboler ¦ Unicode: bogstavlignende symboler
+Unicode : nombres ¦ Unicode: čísla ¦ Unicode: tal ¦ Unicode: tal
+Unicode : traits de tableau ¦ Unicode: rámečkové čáry ¦ Unicode: ramtecken ¦ Unicode: rammetegn
+Unicode : symboles divers ¦ Unicode: různé symboly ¦ Unicode: diverse symboler ¦ Unicode: diverse symboler
+Unicode : casseau (dingbats) ¦ Unicode: dingbaty ¦ Unicode: dingbats ¦ Unicode: dingbats
+Unicode : ligatures ¦ Unicode: ligatury ¦ Unicode: ligaturer ¦ Unicode: ligaturer
+Grain de papier ¦ Zrno papíru ¦ Papperskorn ¦ Papirkorn
+Rond ¦ Kulatý ¦ Rund ¦ Rund
+Plume calligraphique ¦ Kaligrafické pero ¦ Kalligrafipenna ¦ Kalligrafipen
+Crayon ¦ Tužka ¦ Blyertspenna ¦ Blyant
+Pinceau sec ¦ Suchý štětec ¦ Torr pensel ¦ Tør pensel
+Herbe ¦ Tráva ¦ Gräs ¦ Græs
+Peau claire ¦ Světlá pleť ¦ Ljus hud ¦ Lys hud
+Peau hâlée ¦ Opálená pleť ¦ Solbränd hud ¦ Solbrun hud
+Peau mate ¦ Snědá pleť ¦ Olivfärgad hud ¦ Olivenfarvet hud
+Joues, lèvres ¦ Tváře, rty ¦ Kinder, läppar ¦ Kinder, læber
+Cheveux bruns ¦ Hnědé vlasy ¦ Brunt hår ¦ Brunt hår
+Cheveux blonds ¦ Blond vlasy ¦ Blont hår ¦ Lyst hår
+Cheveux gris ¦ Šedé vlasy ¦ Grått hår ¦ Gråt hår
+Feuillage ¦ Listí ¦ Lövverk ¦ Løv
+Uniforme, costume bleu ¦ Uniforma, modrý oblek ¦ Uniform, blå kostym ¦ Uniform, blåt jakkesæt
+Robe bordeaux ¦ Bordó šaty ¦ Vinröd klänning ¦ Bordeauxrød kjole
+Habit noir ¦ Černý oděv ¦ Svarta kläder ¦ Sort tøj
+Mur, pierre ¦ Zeď, kámen ¦ Mur, sten ¦ Mur, sten
+Brique, tuile ¦ Cihla, taška ¦ Tegel, takpanna ¦ Mursten, tagsten
+Bois ¦ Dřevo ¦ Trä ¦ Træ
+🩹 Correcteur ¦ 🩹 Korektor ¦ 🩹 Lagningsverktyg ¦ 🩹 Reparationsværktøj
+🧬 Tampon (morceau manquant) ¦ 🧬 Razítko (chybějící kus) ¦ 🧬 Klonstämpel (saknad bit) ¦ 🧬 Klonestempel (manglende stykke)
+Zoom : ajuster, 50 %, 100 %, 200 % ¦ Lupa: přizpůsobit, 50 %, 100 %, 200 % ¦ Zoom: anpassa, 50 %, 100 %, 200 % ¦ Zoom: tilpas, 50 %, 100 %, 200 %
+photo|Restaurer ¦ Obnovit ¦ Restaurera ¦ Restaurér
+menu|Sélection ¦ Výběr ¦ Markera ¦ Markér
+retouche|Courbe ¦ Křivka ¦ Kurva ¦ Kurve
+motif|D’après ¦ Podle ¦ Från ¦ Ud fra
+pinceau|Feuille ¦ List ¦ Löv ¦ Blad
+pinceau|Étoile ¦ Hvězda ¦ Stjärna ¦ Stjerne
+pinceau|Carré ¦ Čtverec ¦ Fyrkant ¦ Firkant
+Glisse pour comparer ¦ Táhni a porovnej ¦ Dra för att jämföra ¦ Træk for at sammenligne
+Rideau avant / après ¦ Opona před / po ¦ Före / efter-ridå ¦ Før / efter-gardin
+Image importée ¦ Importovaný obrázek ¦ Importerad bild ¦ Importeret billede
+La fenêtre d’export n’est pas encore prête. ¦ Okno exportu ještě není připravené. ¦ Exportfönstret är inte redo än. ¦ Eksportvinduet er ikke klar endnu.
+Image téléchargée ; une copie est rangée dans les médias. ¦ Obrázek stažen; kopie je uložena v médiích. ¦ Bilden nedladdad; en kopia sparas bland medierna. ¦ Billedet hentet; en kopi er gemt i medierne.
+Aperçu de l’avant / après ¦ Náhled před / po ¦ Förhandsvisning av före / efter ¦ Forhåndsvisning af før / efter
+Rideau vertical (avant à gauche) ¦ Svislá opona (před vlevo) ¦ Lodrät ridå (före till vänster) ¦ Lodret gardin (før til venstre)
+Rideau horizontal (avant en haut) ¦ Vodorovná opona (před nahoře) ¦ Vågrät ridå (före överst) ¦ Vandret gardin (før øverst)
+L’une sous l’autre ¦ Pod sebou ¦ Under varandra ¦ Under hinanden
+Position du rideau ¦ Poloha opony ¦ Ridåns position ¦ Gardinets placering
+ex. Mariage de Jean et Marie, 1925 ¦ např. Svatba Jana a Marie, 1925 ¦ t.ex. Jeans och Maries bröllop, 1925 ¦ f.eks. Jeans og Maries bryllup, 1925
+Écrire « Avant » et « Après » ¦ Napsat „Před“ a „Po“ ¦ Skriv ”Före” och ”Efter” ¦ Skriv »Før« og »Efter«
+Avant / après téléchargé ; une copie est rangée dans les médias. ¦ Před / po staženo; kopie je uložena v médiích. ¦ Före / efter nedladdad; en kopia sparas bland medierna. ¦ Før / efter hentet; en kopi er gemt i medierne.
+Garder appuyé pour voir l’original ¦ Podrž a uvidíš originál ¦ Håll ned för att se originalet ¦ Hold nede for at se originalen
+👁 Avant / après ¦ 👁 Před / po ¦ 👁 Före / efter ¦ 👁 Før / efter
+◧ Rideau ¦ ◧ Opona ¦ ◧ Ridå ¦ ◧ Gardin
+Comparer avec un rideau qu’on glisse sur la photo ¦ Porovnat oponou, kterou posouváš po fotce ¦ Jämför med en ridå som du drar över fotot ¦ Sammenlign med et gardin, du trækker hen over fotoet
+Rideau vertical ou horizontal ¦ Svislá nebo vodorovná opona ¦ Lodrät eller vågrät ridå ¦ Lodret eller vandret gardin
+Exporter l’avant / après en image (côte à côte ou rideau, avec légende) ¦ Exportovat před / po jako obrázek (vedle sebe nebo opona, s popiskem) ¦ Exportera före / efter som en bild (sida vid sida eller ridå, med bildtext) ¦ Eksportér før / efter som et billede (side om side eller gardin, med billedtekst)
+Rideau horizontal ¦ Vodorovná opona ¦ Vågrät ridå ¦ Vandret gardin
+Rideau vertical ¦ Svislá opona ¦ Lodrät ridå ¦ Lodret gardin
+De combien le cadre dépasse autour du visage : petit = visage serré, grand = épaules et un peu de fond. ¦ Jak daleko rámeček přesahuje kolem obličeje: malý = těsně obličej, velký = ramena a trochu pozadí. ¦ Hur långt ramen går runt ansiktet: liten = tätt ansikte, stor = axlar och lite bakgrund. ¦ Hvor langt rammen går omkring ansigtet: lille = tæt på ansigtet, stor = skuldre og lidt baggrund.
+La hauteur des yeux dans le cadre, depuis le haut : la même pour tous les portraits, ils s’alignent quand on les met côte à côte. ¦ Výška očí v rámečku shora: stejná pro všechny portréty, takže se vedle sebe zarovnají. ¦ Ögonens höjd i ramen, uppifrån: samma för alla porträtt, så att de linjerar sida vid sida. ¦ Øjnenes højde i rammen, oppefra: den samme for alle portrætter, så de flugter side om side.
+Faible : le bord du pinceau est doux et se fond ; forte : le bord est net. ¦ Nízká: okraj štětce je měkký a splývá; vysoká: okraj je ostrý. ¦ Låg: penselns kant är mjuk och smälter in; hög: kanten är skarp. ¦ Lav: penslens kant er blød og glider ud; høj: kanten er skarp.
+Filtres ¦ Filtry ¦ Filter ¦ Filtre
+✨ Filtres ¦ ✨ Filtry ¦ ✨ Filter ¦ ✨ Filtre
+Classique : comme avant. Perceptuel : un passage plus égal à l’œil, sans zone grise ni trop sombre au milieu. Par les teintes : en passant par les couleurs de l’arc-en-ciel. ¦ Klasické: jako dřív. Percepční: přechod, který oku připadá rovnoměrnější, bez šedé nebo příliš tmavé zóny uprostřed. Přes odstíny: přes barvy duhy. ¦ Klassisk: som förut. Perceptuell: en övergång som ser jämnare ut för ögat, utan grå eller för mörk zon i mitten. Via nyanserna: genom regnbågens färger. ¦ Klassisk: som før. Perceptuel: en overgang, der ser mere jævn ud for øjet, uden en grå eller for mørk zone i midten. Via farvetonerne: gennem regnbuens farver.
+Plus haut : des lignes plus pâles ou plus courtes sont aussi prises. Trop haut, des détails de la photo (cheveux, écriture) peuvent l’être : regarde le rouge. ¦ Výš: zachytí se i bledší nebo kratší čáry. Příliš vysoko se mohou zachytit i detaily fotky (vlasy, písmo): sleduj červenou. ¦ Högre: blekare eller kortare linjer tas också med. För högt kan detaljer i fotot (hår, skrift) tas med: titta på det röda. ¦ Højere: blegere eller kortere linjer tages også med. For højt kan detaljer i fotoet (hår, skrift) tages med: hold øje med det røde.
+La force de toutes les étapes d’un coup : bas = une restauration discrète, haut = plus marquée (mais attention au « trop lisse »). ¦ Síla všech kroků najednou: nízká = nenápadná obnova, vysoká = výraznější (ale pozor na „příliš hladké“). ¦ Styrkan för alla steg på en gång: låg = en diskret restaurering, hög = kraftigare (men se upp för ”för slätt”). ¦ Styrken for alle trin på én gang: lav = en diskret restaurering, høj = kraftigere (men pas på »for glat«).
+Sens ¦ Směr ¦ Riktning ¦ Retning
+De combien ¦ O kolik ¦ Hur mycket ¦ Hvor meget
+↻ Horaire ¦ ↻ Po směru hodin ¦ ↻ Medurs ¦ ↻ Med uret
+↺ Antihoraire ¦ ↺ Proti směru hodin ¦ ↺ Moturs ¦ ↺ Mod uret
+↻ Faire pivoter ¦ ↻ Otočit ¦ ↻ Rotera ¦ ↻ Rotér
+Garde le plus grand rectangle droit dans la photo tournée : plus de coins vides. C’est un recadrage : « Annuler le recadrage » le retire. ¦ Ponechá největší rovný obdélník v otočené fotce: žádné prázdné rohy. Je to ořez: „Zrušit ořez“ ho odebere. ¦ Behåller den största raka rektangeln i det roterade fotot: inga tomma hörn. Det är en beskärning: ”Ångra beskärningen” tar bort den. ¦ Beholder det største lige rektangel i det roterede foto: ingen tomme hjørner. Det er en beskæring: »Fortryd beskæringen« fjerner den.
+Enlever ¦ Odebrat ¦ Ta bort ¦ Fjern
+Coché : le nombre de pixels change (l’image est recalculée). Décoché : seuls la résolution et la taille à l’impression changent, les pixels restent les mêmes. ¦ Zaškrtnuto: počet pixelů se změní (obrázek se přepočítá). Nezaškrtnuto: změní se jen rozlišení a velikost při tisku, pixely zůstanou stejné. ¦ Ikryssad: antalet pixlar ändras (bilden räknas om). Avkryssad: bara upplösningen och utskriftsstorleken ändras; pixlarna förblir desamma. ¦ Afkrydset: antallet af pixels ændres (billedet genberegnes). Ikke afkrydset: kun opløsningen og udskriftsstørrelsen ændres; pixelene forbliver de samme.
+Coché : tu écris ce qu’on ajoute (ou enlève, avec un nombre négatif) autour de l’image. ¦ Zaškrtnuto: zadáváš, co se kolem obrázku přidá (nebo ubere, záporným číslem). ¦ Ikryssad: du anger vad som läggs till (eller tas bort, med ett negativt tal) runt bilden. ¦ Afkrydset: du angiver, hvad der tilføjes (eller fjernes, med et negativt tal) rundt om billedet.
+Avant d’agrandir, adoucit le grain et le bruit (les contours restent) : utile pour une photo scannée granuleuse. ¦ Před zvětšením zjemní zrno a šum (obrysy zůstanou): užitečné pro zrnitou naskenovanou fotku. ¦ Före förstoring mjukas korn och brus upp (konturerna finns kvar): användbart för ett kornigt skannat foto. ¦ Før forstørrelse udglattes korn og støj (konturerne bliver): nyttigt for et kornet scannet foto.
+Pour un négatif photographié ou scanné : les clairs et les sombres s’échangent. ¦ Pro vyfocený nebo naskenovaný negativ: světlé a tmavé se prohodí. ¦ För ett fotograferat eller skannat negativ: ljust och mörkt byter plats. ¦ For et fotograferet eller scannet negativ: lyse og mørke dele bytter plads.
+Nom de la photo retouchée ¦ Název upravené fotky ¦ Det retuscherade fotots namn ¦ Det retoucherede fotos navn
+Le nom de la copie et des fichiers exportés ¦ Název kopie a exportovaných souborů ¦ Namnet på kopian och de exporterade filerna ¦ Navnet på kopien og de eksporterede filer
+La retouche complète : calques, sélections, masques, texte, formes, filtres, projets ¦ Úplná úprava: vrstvy, výběry, masky, text, tvary, filtry, projekty ¦ Fullständig retusch: lager, markeringar, masker, text, former, filter, projekt ¦ Fuld retouchering: lag, markeringer, masker, tekst, former, filtre, projekter
+Débruitage, poussières, plis, contraste, netteté et colorisation d’un coup (dans la retouche complète) ¦ Odšumění, prach, přehyby, kontrast, ostrost a kolorování najednou (v úplné úpravě) ¦ Brusreducering, damm, veck, kontrast, skärpa och färgläggning i ett svep (i den fullständiga retuschen) ¦ Støjreduktion, støv, folder, kontrast, skarphed og farvelægning i ét hug (i den fulde retouchering)
+🎛️ Retouche complète ¦ 🎛️ Úplná úprava ¦ 🎛️ Fullständig retusch ¦ 🎛️ Fuld retouchering
+Retouche complète ¦ Úplná úprava ¦ Fullständig retusch ¦ Fuld retouchering
+Exporter : la photo retouchée (PNG, JPG, imprimer) ou l’avant / après ¦ Export: upravená fotka (PNG, JPG, tisk) nebo před / po ¦ Exportera: det retuscherade fotot (PNG, JPG, skriv ut) eller före / efter ¦ Eksport: det retoucherede foto (PNG, JPG, udskriv) eller før / efter
+Enregistrer et afficher cette version de la photo (l’original est gardé) ¦ Uložit a zobrazit tuto verzi fotky (originál se zachová) ¦ Spara och visa den här versionen av fotot (originalet behålls) ¦ Gem og vis denne version af fotoet (originalen bevares)
+🖼 La photo retouchée (PNG, JPG, imprimer)… ¦ 🖼 Upravená fotka (PNG, JPG, tisk)… ¦ 🖼 Det retuscherade fotot (PNG, JPG, skriv ut)… ¦ 🖼 Det retoucherede foto (PNG, JPG, udskriv)…
+Barre des outils ¦ Panel nástrojů ¦ Verktygsfält ¦ Værktøjslinje
+Réglages : couleur, lumière, courbe ¦ Úpravy: barva, světlo, křivka ¦ Justeringar: färg, ljus, kurva ¦ Justeringer: farve, lys, kurve
+Correcteur de taches : clique sur une tache, une poussière, une rayure ¦ Bodový korektor: klikni na skvrnu, prach, škrábanec ¦ Punktlagning: klicka på en fläck, ett dammkorn, en repa ¦ Pletreparation: klik på en plet, et støvkorn, en ridse
+Tampon de duplication : {key} + clic sur l’endroit à recopier, puis peins sur la zone à couvrir ¦ Razítko: {key} + klik na místo ke kopírování, pak přemaluj oblast, kterou chceš zakrýt ¦ Klonstämpel: {key} + klick på punkten att kopiera, måla sedan över området som ska täckas ¦ Klonestempel: {key} + klik på stedet at kopiere, og mal så over området, der skal dækkes
+{key} + clic pour choisir l’endroit à recopier, puis peins sur la zone à couvrir. ¦ {key} + klik vybere místo ke kopírování, pak přemaluj oblast, kterou chceš zakrýt. ¦ {key} + klick för att välja punkten att kopiera, måla sedan över området som ska täckas. ¦ {key} + klik for at vælge stedet at kopiere, og mal så over området, der skal dækkes.
+Faire pivoter de 90° vers la gauche (antihoraire) ¦ Otočit o 90° doleva (proti směru hodin) ¦ Rotera 90° åt vänster (moturs) ¦ Rotér 90° til venstre (mod uret)
+Pivoter à gauche ¦ Otočit doleva ¦ Rotera åt vänster ¦ Rotér til venstre
+Faire pivoter de 90° vers la droite (horaire) ¦ Otočit o 90° doprava (po směru hodin) ¦ Rotera 90° åt höger (medurs) ¦ Rotér 90° til højre (med uret)
+Pivoter à droite ¦ Otočit doprava ¦ Rotera åt höger ¦ Rotér til højre
+Retouche complète : calques, sélections, masques, texte, filtres ¦ Úplná úprava: vrstvy, výběry, masky, text, filtry ¦ Fullständig retusch: lager, markeringar, masker, text, filter ¦ Fuld retouchering: lag, markeringer, masker, tekst, filtre
+Les corrections en cours seront perdues. ¦ Rozpracované opravy se ztratí. ¦ Pågående korrigeringar går förlorade. ¦ De igangværende rettelser går tabt.
+Passer à la retouche complète ? ¦ Přepnout na úplnou úpravu? ¦ Växla till fullständig retusch? ¦ Skift til fuld retouchering?
+Passer à la retouche complète ¦ Přepnout na úplnou úpravu ¦ Växla till fullständig retusch ¦ Skift til fuld retouchering
+Règle la couleur et la lumière à droite · garde « 👁 Avant / après » appuyé pour comparer ¦ Nastav barvu a světlo vpravo · podrž „👁 Před / po“ pro porovnání ¦ Ställ in färg och ljus till höger · håll ned ”👁 Före / efter” för att jämföra ¦ Indstil farve og lys til højre · hold »👁 Før / efter« nede for at sammenligne
+Clique sur une tache, une poussière ou une rayure : elle est remplacée par ce qui l’entoure. Pour une rayure, glisse le long. ¦ Klikni na skvrnu, prach nebo škrábanec: nahradí se okolím. U škrábance táhni podél. ¦ Klicka på en fläck, ett dammkorn eller en repa: den ersätts av omgivningen. För en repa, dra längs den. ¦ Klik på en plet, et støvkorn eller en ridse: den erstattes af omgivelserne. For en ridse skal du trække langs den.
+Choisis d’abord l’endroit à recopier : Alt + clic (⌥ + clic sur Mac). ¦ Nejdřív vyber místo ke kopírování: Alt + klik (⌥ + klik na Macu). ¦ Välj först punkten att kopiera: Alt + klick (⌥ + klick på Mac). ¦ Vælg først stedet at kopiere: Alt + klik (⌥ + klik på Mac).
+Versions de la photo ¦ Verze fotky ¦ Fotots versioner ¦ Fotoets versioner
+Enregistrer sans l’afficher (gardée dans les versions) ¦ Uložit bez zobrazení (zůstane ve verzích) ¦ Spara utan att visa den (sparas bland versionerna) ¦ Gem uden at vise den (bevares i versionerne)
+Copie séparée (un autre média, relié aux mêmes fiches) ¦ Samostatná kopie (jiné médium, propojené se stejnými kartami) ¦ Separat kopia (ett annat medium, kopplat till samma poster) ¦ Separat kopi (et andet medie, forbundet med de samme poster)
+Exporter la photo retouchée (PNG, JPG, imprimer)… ¦ Exportovat upravenou fotku (PNG, JPG, tisk)… ¦ Exportera det retuscherade fotot (PNG, JPG, skriv ut)… ¦ Eksportér det retoucherede foto (PNG, JPG, udskriv)…
+Exporter l’avant / après… ¦ Exportovat před / po… ¦ Exportera före / efter… ¦ Eksportér før / efter…
+Restaurer en une fois… ¦ Obnovit najednou… ¦ Restaurera i ett svep… ¦ Restaurér i ét hug…
+Pivoter de 90° à droite (horaire) ¦ Otočit o 90° doprava (po směru hodin) ¦ Rotera 90° åt höger (medurs) ¦ Rotér 90° til højre (med uret)
+Pivoter de 90° à gauche (antihoraire) ¦ Otočit o 90° doleva (proti směru hodin) ¦ Rotera 90° åt vänster (moturs) ¦ Rotér 90° til venstre (mod uret)
+Avant / après en rideau ¦ Před / po jako opona ¦ Före / efter som ridå ¦ Før / efter som gardin
+La photo est ajoutée aux médias (sans fiche). Les réglages en cours sur cette photo-ci sont abandonnés. ¦ Fotka se přidá do médií (bez karty). Rozpracované úpravy této fotky se zahodí. ¦ Fotot läggs till bland medierna (utan post). De pågående justeringarna på det här fotot släpps. ¦ Fotoet føjes til medierne (uden post). De igangværende justeringer på dette foto droppes.
+Retoucher « {name} » à la place ? ¦ Upravit raději „{name}“? ¦ Retuschera ”{name}” i stället? ¦ Retouchér »{name}« i stedet?
+💧 Fluidité ¦ 💧 Zkapalnění ¦ 💧 Gör flytande ¦ 💧 Gør flydende
+Fluidité ¦ Zkapalnění ¦ Gör flytande ¦ Gør flydende
+Peins sur la photo pour la déformer, comme une pâte souple ¦ Maluj po fotce a deformuj ji jako měkké těsto ¦ Måla på fotot för att förvränga det, som en mjuk deg ¦ Mal på fotoet for at forvrænge det som en blød dej
+L’image suit la main ¦ Obraz sleduje ruku ¦ Bilden följer handen ¦ Billedet følger hånden
+Agrandit sous le pinceau (garder appuyé) ¦ Zvětšuje pod štětcem (podrž) ¦ Förstorar under penseln (håll ned) ¦ Forstørrer under penslen (hold nede)
+Rétrécit sous le pinceau (garder appuyé) ¦ Zmenšuje pod štětcem (podrž) ¦ Krymper under penseln (håll ned) ¦ Formindsker under penslen (hold nede)
+Fait tourner dans le sens des aiguilles d’une montre ¦ Otáčí po směru hodinových ručiček ¦ Vrider medurs ¦ Drejer med uret
+Fait tourner dans l’autre sens ¦ Otáčí opačně ¦ Vrider åt andra hållet ¦ Drejer den anden vej
+Ramène peu à peu l’image d’origine ¦ Postupně vrací původní obraz ¦ Tar gradvis tillbaka originalbilden ¦ Bringer gradvist det oprindelige billede tilbage
+➡ Pousser ¦ ➡ Tlačit ¦ ➡ Knuffa ¦ ➡ Skub
+⊕ Gonfler ¦ ⊕ Nafouknout ¦ ⊕ Blås upp ¦ ⊕ Pust op
+⊖ Dégonfler ¦ ⊖ Splasknout ¦ ⊖ Dra ihop ¦ ⊖ Træk sammen
+Dégonfler ¦ Splasknout ¦ Dra ihop ¦ Træk sammen
+Gonfler ¦ Nafouknout ¦ Blås upp ¦ Pust op
+Pousser ¦ Tlačit ¦ Knuffa ¦ Skub
+↻ Tourbillon ¦ ↻ Zatočení ¦ ↻ Virvel ¦ ↻ Hvirvel
+↺ Tourbillon inverse ¦ ↺ Obrácené zatočení ¦ ↺ Omvänd virvel ¦ ↺ Omvendt hvirvel
+Tourbillon inverse ¦ Obrácené zatočení ¦ Omvänd virvel ¦ Omvendt hvirvel
+↩ Reconstruire ¦ ↩ Rekonstruovat ¦ ↩ Rekonstruera ¦ ↩ Rekonstruér
+Reconstruire ¦ Rekonstruovat ¦ Rekonstruera ¦ Rekonstruér
+Image trop grande pour la Fluidité. ¦ Obrázek je pro Zkapalnění příliš velký. ¦ Bilden är för stor för Gör flytande. ¦ Billedet er for stort til Gør flydende.
+↶ Annuler le coup ¦ ↶ Vrátit tah ¦ ↶ Ångra draget ¦ ↶ Fortryd strøget
+✓ Appliquer (calque « Fluidité ») ¦ ✓ Použít (vrstva „Zkapalnění“) ¦ ✓ Tillämpa (lagret ”Gör flytande”) ¦ ✓ Anvend (laget »Gør flydende«)
+Rien n’a été déformé. ¦ Nic nebylo deformováno. ¦ Inget har förvrängts. ¦ Intet blev forvrænget.
+💧 Fluidité appliquée sur le calque « Fluidité » (la photo reste dessous : 👁 pour comparer). ¦ 💧 Zkapalnění použito na vrstvě „Zkapalnění“ (fotka zůstane pod ní: 👁 pro porovnání). ¦ 💧 Gör flytande tillämpat på lagret ”Gör flytande” (fotot finns kvar under: 👁 för att jämföra). ¦ 💧 Gør flydende anvendt på laget »Gør flydende« (fotoet bliver nedenunder: 👁 for at sammenligne).
+🪄 Gomme magique ¦ 🪄 Kouzelná guma ¦ 🪄 Magiskt suddgummi ¦ 🪄 Magisk viskelæder
+Clique sur le fond à rendre transparent (plusieurs clics s’ajoutent) ¦ Klikni na pozadí, které má být průhledné (více kliknutí se sčítá) ¦ Klicka på bakgrunden som ska bli genomskinlig (flera klick läggs ihop) ¦ Klik på baggrunden, der skal gøres gennemsigtig (flere klik lægges sammen)
+Zone voisine seulement (sinon : cette couleur partout) ¦ Jen sousední oblast (jinak: tato barva všude) ¦ Bara närliggande område (annars: den här färgen överallt) ¦ Kun nærliggende område (ellers: denne farve overalt)
+↶ Annuler le clic ¦ ↶ Vrátit kliknutí ¦ ↶ Ångra klicket ¦ ↶ Fortryd klikket
+✓ Appliquer (masque de la photo) ¦ ✓ Použít (maska fotky) ¦ ✓ Tillämpa (fotots mask) ¦ ✓ Anvend (fotoets maske)
+La photo a déjà un masque : la gomme magique le remplace. ¦ Fotka už masku má: kouzelná guma ji nahradí. ¦ Fotot har redan en mask: det magiska suddgummit ersätter den. ¦ Fotoet har allerede en maske: den magiske viskelæder erstatter den.
+Remplacer le masque de la photo ? ¦ Nahradit masku fotky? ¦ Ersätta fotots mask? ¦ Erstat fotoets maske?
+🪄 Fond rendu transparent (masque de la photo, à retoucher au pinceau) : l’image s’enregistre en PNG. ¦ 🪄 Pozadí zprůhledněno (maska fotky, k doladění štětcem): obrázek se uloží jako PNG. ¦ 🪄 Bakgrunden genomskinlig (fotots mask, att justera med penseln): bilden sparas som PNG. ¦ 🪄 Baggrunden gjort gennemsigtig (fotoets maske, kan rettes med penslen): billedet gemmes som PNG.
+Masque de « {name} » ¦ Maska „{name}“ ¦ Mask för ”{name}” ¦ Maske for »{name}«
+Il n’y a pas encore de masque : détoure (✂️), gomme le fond (🪄) ou ajoute un masque à un calque, puis affine son bord. ¦ Zatím tu není maska: vyřízni (✂️), vymaž pozadí (🪄) nebo přidej masku k vrstvě, pak uprav její okraj. ¦ Det finns ingen mask än: frilägg (✂️), sudda bakgrunden (🪄) eller lägg till en mask på ett lager, förfina sedan dess kant. ¦ Der er ingen maske endnu: fritlæg (✂️), visk baggrunden ud (🪄) eller tilføj en maske til et lag, og forfin så dens kant.
+✨ Affiner le bord ¦ ✨ Upřesnit okraj ¦ ✨ Förfina kanten ¦ ✨ Forfin kanten
+Décaler le bord ¦ Posunout okraj ¦ Flytta kanten ¦ Flyt kanten
+Voir le masque seul (blanc : gardé) ¦ Zobrazit jen masku (bílá: ponecháno) ¦ Se bara masken (vitt: behålls) ¦ Se kun masken (hvid: beholdes)
+Bord du masque affiné ¦ Okraj masky upřesněn ¦ Maskens kant förfinad ¦ Maskens kant forfinet
+✨ Bord affiné (↶ pour revenir ; le pinceau corrige le reste). ¦ ✨ Okraj upřesněn (↶ pro návrat; štětec opraví zbytek). ¦ ✨ Kanten förfinad (↶ för att gå tillbaka; penseln rättar resten). ¦ ✨ Kanten forfinet (↶ for at gå tilbage; penslen retter resten).
+Lissage du bord ¦ Vyhlazení okraje ¦ Kantutjämning ¦ Kantudjævning
+Contraste du bord ¦ Kontrast okraje ¦ Kantkontrast ¦ Kantkontrast
+Image trop grande ({w} × {h} points) : réduis la taille des photos. ¦ Obrázek je příliš velký ({w} × {h} bodů): zmenši velikost fotek. ¦ Bilden är för stor ({w} × {h} pixlar): minska fotonas storlek. ¦ Billedet er for stort ({w} × {h} pixels): formindsk fotoenes størrelse.
+Recherche… ({i}/{total}) ¦ Hledám… ({i}/{total}) ¦ Söker… ({i}/{total}) ¦ Søger… ({i}/{total})
+« {name} » : décalage {dx} × {dy} points, rotation {rot}°, ressemblance {pct} %. ¦ „{name}“: posun {dx} × {dy} bodů, otočení {rot}°, podobnost {pct} %. ¦ ”{name}”: förskjutning {dx} × {dy} pixlar, rotation {rot}°, likhet {pct} %. ¦ »{name}«: forskydning {dx} × {dy} pixels, rotation {rot}°, lighed {pct} %.
+Pas de partie commune sûre pour {names} : place-la à la main (glisser, flèches ; « Mode différence » pour vérifier). ¦ Pro {names} není jistá společná část: umísti ji ručně (tažení, šipky; „Režim rozdílu“ pro kontrolu). ¦ Ingen säker gemensam del för {names}: placera den för hand (dra, pilar; ”Differensläge” för att kontrollera). ¦ Ingen sikker fælles del for {names}: placér den i hånden (træk, pile; »Forskelstilstand« for at kontrollere).
+Photos alignées : vérifie (glisser, flèches pour ajuster). « Fondre les raccords » adoucit la jonction à l’enregistrement. ¦ Fotky zarovnány: zkontroluj (tažení, šipky pro doladění). „Prolnout spoje“ zjemní napojení při uložení. ¦ Fotona justerade: kontrollera (dra, pilar för att justera). ”Tona ut skarvarna” mjukar upp skarven när du sparar. ¦ Fotoene justeret: kontrollér (træk, pile for at justere). »Udglat samlingerne« blødgør samlingen, når der gemmes.
+Photo alignée : vérifie (glisser, flèches pour ajuster). « Fondre les raccords » adoucit la jonction à l’enregistrement. ¦ Fotka zarovnána: zkontroluj (tažení, šipky pro doladění). „Prolnout spoje“ zjemní napojení při uložení. ¦ Fotot justerat: kontrollera (dra, pilar för att justera). ”Tona ut skarvarna” mjukar upp skarven när du sparar. ¦ Fotoet justeret: kontrollér (træk, pile for at justere). »Udglat samlingerne« blødgør samlingen, når der gemmes.
+Image assemblée enregistrée, rattachée aux mêmes fiches que « {name} ». Les photos d’origine restent. ¦ Složený obrázek uložen, propojený se stejnými kartami jako „{name}“. Původní fotky zůstanou. ¦ Den sammanfogade bilden sparad, kopplad till samma poster som ”{name}”. Originalfotona finns kvar. ¦ Det sammensatte billede gemt, forbundet med de samme poster som »{name}«. De oprindelige fotos bliver.
+Titre de l’image assemblée ¦ Název složeného obrázku ¦ Den sammanfogade bildens titel ¦ Det sammensatte billedes titel
+Le titre de l’image assemblée (et le nom des fichiers exportés) ¦ Název složeného obrázku (a název exportovaných souborů) ¦ Den sammanfogade bildens titel (och namnet på de exporterade filerna) ¦ Det sammensatte billedes titel (og navnet på de eksporterede filer)
+L’image assemblée : PNG, JPG ou imprimer ¦ Složený obrázek: PNG, JPG nebo tisk ¦ Den sammanfogade bilden: PNG, JPG eller skriv ut ¦ Det sammensatte billede: PNG, JPG eller udskriv
+Enregistrer l’image assemblée dans les médias, rattachée aux mêmes fiches que la première photo de la base ¦ Uložit složený obrázek do médií, propojený se stejnými kartami jako první fotka z databáze ¦ Spara den sammanfogade bilden bland medierna, kopplad till samma poster som det första fotot ur databasen ¦ Gem det sammensatte billede i medierne, forbundet med de samme poster som det første foto fra databasen
+Clique une photo pour la choisir, glisse pour la déplacer · Maj + molette : taille · Alt + molette : rotation · molette : zoom · flèches : 1 px (Maj : 10 px) · glisse ici une photo de l’ordinateur pour l’ajouter ¦ Klikni na fotku a vyber ji, táhni a posuň ji · Shift + kolečko: velikost · Alt + kolečko: otočení · kolečko: lupa · šipky: 1 px (Shift: 10 px) · fotku z počítače sem přetáhni a přidáš ji ¦ Klicka på ett foto för att välja det, dra för att flytta det · Skift + hjul: storlek · Alt + hjul: rotation · hjul: zoom · pilar: 1 px (Skift: 10 px) · släpp ett foto från datorn här för att lägga till det ¦ Klik på et foto for at vælge det, træk for at flytte det · Skift + hjul: størrelse · Alt + hjul: rotation · hjul: zoom · pile: 1 px (Skift: 10 px) · træk et foto fra computeren herhen for at tilføje det
+Fond blanc (sinon transparent en PNG) ¦ Bílé pozadí (jinak průhledné v PNG) ¦ Vit bakgrund (annars genomskinlig i PNG) ¦ Hvid baggrund (ellers gennemsigtig i PNG)
+Coché : le fond autour des photos est blanc. Décoché, il reste transparent (seulement en PNG ; le JPG met toujours du blanc). ¦ Zaškrtnuto: pozadí kolem fotek je bílé. Nezaškrtnuto zůstane průhledné (jen v PNG; JPG dává vždy bílou). ¦ Ikryssad: bakgrunden runt fotona är vit. Avkryssad förblir den genomskinlig (bara i PNG; JPG ger alltid vitt). ¦ Afkrydset: baggrunden omkring fotoene er hvid. Ikke afkrydset forbliver den gennemsigtig (kun i PNG; JPG giver altid hvid).
+Ce qui se superpose bien devient noir : idéal pour aligner deux photos du même endroit ¦ Co se dobře překrývá, zčerná: ideální pro zarovnání dvou fotek stejného místa ¦ Det som överlappar väl blir svart: perfekt för att justera två foton av samma plats ¦ Det, der overlapper godt, bliver sort: ideelt til at justere to fotos af samme sted
+Les parties identiques des deux photos deviennent noires : quand l’écriture disparaît presque, elles sont parfaitement alignées. ¦ Shodné části obou fotek zčernají: když písmo téměř zmizí, jsou dokonale zarovnané. ¦ De identiska delarna av de två fotona blir svarta: när skriften nästan försvinner är de perfekt justerade. ¦ De identiske dele af de to fotos bliver sorte: når skriften næsten forsvinder, er de perfekt justeret.
+Mode différence ¦ Režim rozdílu ¦ Differensläge ¦ Forskelstilstand
+Boutons des photos ¦ Tlačítka fotek ¦ Fotoknappar ¦ Fotoknapper
+Panorama, page photographiée en deux fois : chaque photo est posée sur la précédente là où elles se recouvrent (décalage, petite rotation) ¦ Panorama, stránka vyfocená nadvakrát: každá fotka se položí na předchozí tam, kde se překrývají (posun, malé otočení) ¦ Panorama, sida fotograferad i två omgångar: varje foto läggs på det föregående där de överlappar (förskjutning, liten rotation) ¦ Panorama, side fotograferet i to omgange: hvert foto lægges på det forrige, hvor de overlapper (forskydning, lille rotation)
+🪄 Aligner tout seul ¦ 🪄 Zarovnat automaticky ¦ 🪄 Justera automatiskt ¦ 🪄 Justér automatisk
+Image enregistrée ¦ Uložený obrázek ¦ Sparad bild ¦ Gemt billede
+JPEG (léger) ¦ JPEG (menší) ¦ JPEG (lätt) ¦ JPEG (let)
+PNG (sans perte) ¦ PNG (bezeztrátový) ¦ PNG (förlustfritt) ¦ PNG (tabsfrit)
+Fondre les raccords ¦ Prolnout spoje ¦ Tona ut skarvarna ¦ Udglat samlingerne
+Là où deux photos se recouvrent, le bord de celle du dessus s’efface en douceur : pas de marche visible au raccord. ¦ Kde se dvě fotky překrývají, okraj horní jemně zmizí: na spoji není vidět schod. ¦ Där två foton överlappar tonas kanten på det övre mjukt ut: inget synligt trappsteg vid skarven. ¦ Hvor to fotos overlapper, toner kanten af det øverste blødt ud: intet synligt trin ved samlingen.
+Largeur du fondu ¦ Šířka prolnutí ¦ Toningsbredd ¦ Overgangsbredde
+Rogner aux parties couvertes (sans coins vides) ¦ Oříznout na pokryté části (bez prázdných rohů) ¦ Beskär till de täckta delarna (utan tomma hörn) ¦ Beskær til de dækkede dele (uden tomme hjørner)
+Garde le plus grand rectangle entièrement couvert par les photos : plus de coins blancs autour d’un panorama. ¦ Ponechá největší obdélník zcela pokrytý fotkami: žádné bílé rohy kolem panoramatu. ¦ Behåller den största rektangeln helt täckt av fotona: inga vita hörn runt ett panorama. ¦ Beholder det største rektangel, der er helt dækket af fotoene: ingen hvide hjørner omkring et panorama.
+L’assemblage non enregistré sera perdu. ¦ Neuložené složení se ztratí. ¦ Den osparade sammanfogningen går förlorad. ¦ Den ikke-gemte sammensætning går tabt.
+Fermer sans enregistrer l’assemblage ? ¦ Zavřít bez uložení složení? ¦ Stänga utan att spara sammanfogningen? ¦ Luk uden at gemme sammensætningen?
+Mettre devant ¦ Dát dopředu ¦ Lägg längst fram ¦ Læg forrest
+Mettre derrière ¦ Dát dozadu ¦ Lägg längst bak ¦ Læg bagerst
+Aucune photo à assembler pour l’instant ¦ Zatím nejsou fotky ke složení ¦ Inga foton att sätta ihop än ¦ Ingen fotos at sætte sammen endnu
+« ＋ Photos », ou glisse une photo de l’ordinateur sur le plan de travail. ¦ „＋ Fotky“, nebo přetáhni fotku z počítače na pracovní plochu. ¦ ”＋ Foton”, eller släpp ett foto från datorn på arbetsytan. ¦ »＋ Fotos«, eller træk et foto fra computeren hen på arbejdsfladen.
+＋ Photos ¦ ＋ Fotky ¦ ＋ Foton ¦ ＋ Fotos
+Clique une photo pour la régler. ¦ Klikni na fotku a nastav ji. ¦ Klicka på ett foto för att justera det. ¦ Klik på et foto for at justere det.
+La taille de la photo par rapport à ses vrais points : pour mettre deux photos à la même échelle. ¦ Velikost fotky vůči jejím skutečným bodům: pro sjednocení měřítka dvou fotek. ¦ Fotots storlek jämfört med dess verkliga pixlar: för att ge två foton samma skala. ¦ Fotoets størrelse i forhold til dets rigtige pixels: for at give to fotos samme skala.
+À moitié transparente, la photo du dessus laisse voir celle du dessous : on aligne les écritures. ¦ Napůl průhledná horní fotka nechá prosvítat tu spodní: zarovnáš písmo. ¦ Halvt genomskinligt låter det övre fotot det undre synas: du justerar skriften. ¦ Halvt gennemsigtigt lader det øverste foto det nederste skinne igennem: du justerer skriften.
+À moitié transparente ¦ Napůl průhledná ¦ Halvt genomskinlig ¦ Halvt gennemsigtig
+Pour mettre deux photos à la même échelle : rends celle du dessus à moitié transparente (ou coche « Mode différence »), puis ajuste sa taille et sa rotation jusqu’à ce que les écritures se superposent. ¦ Pro sjednocení měřítka dvou fotek: udělej horní napůl průhlednou (nebo zaškrtni „Režim rozdílu“), pak uprav její velikost a otočení, dokud se písmo nepřekryje. ¦ För att ge två foton samma skala: gör det övre halvt genomskinligt (eller kryssa i ”Differensläge”), justera sedan storlek och rotation tills skriften överlappar. ¦ For at give to fotos samme skala: gør det øverste halvt gennemsigtigt (eller sæt flueben ved »Forskelstilstand«), og justér så størrelse og rotation, indtil skriften overlapper.
+Opaque ¦ Neprůhledná ¦ Ogenomskinlig ¦ Uigennemsigtig
+Aucune photo visible. ¦ Žádná viditelná fotka. ¦ Inget synligt foto. ¦ Intet synligt foto.
+Ajoute au moins deux photos qui se recouvrent (« ＋ Photos »). ¦ Přidej aspoň dvě fotky, které se překrývají („＋ Fotky“). ¦ Lägg till minst två foton som överlappar (”＋ Foton”). ¦ Tilføj mindst to fotos, der overlapper (»＋ Fotos«).
+Le navigateur n’a pas pu créer l’image. ¦ Prohlížeč nemohl obrázek vytvořit. ¦ Webbläsaren kunde inte skapa bilden. ¦ Browseren kunne ikke oprette billedet.
+Pour enregistrer dans la base, l’une des photos doit venir de la base (sinon : ⤓ Télécharger). ¦ Pro uložení do databáze musí jedna z fotek pocházet z databáze (jinak: ⤓ Stáhnout). ¦ För att spara i databasen måste ett av fotona komma från databasen (annars: ⤓ Ladda ned). ¦ For at gemme i databasen skal et af fotoene komme fra databasen (ellers: ⤓ Hent).
+Création de l’image… ¦ Vytvářím obrázek… ¦ Skapar bilden… ¦ Opretter billedet…
+ASSEMBLER ¦ SLOŽIT ¦ SÄTT IHOP ¦ SÆT SAMMEN
+ce n’est pas un fichier PSD ¦ není to soubor PSD ¦ det är inte en PSD-fil ¦ det er ikke en PSD-fil
+les très grands PSD (PSB) ne sont pas lus ¦ velmi velké PSD (PSB) se nečtou ¦ mycket stora PSD-filer (PSB) läses inte ¦ meget store PSD-filer (PSB) læses ikke
+version de PSD inconnue ¦ neznámá verze PSD ¦ okänd PSD-version ¦ ukendt PSD-version
+profondeur {n} bits non lue (seulement 8 bits) ¦ hloubka {n} bitů se nečte (jen 8 bitů) ¦ {n}-bitars djup läses inte (bara 8 bitar) ¦ {n}-bit dybde læses ikke (kun 8 bit)
+seuls les PSD en RVB ou en niveaux de gris sont lus ¦ čtou se jen PSD v RGB nebo ve stupních šedi ¦ bara PSD i RGB eller gråskala läses ¦ kun PSD i RGB eller gråtoner læses
+image trop grande ¦ obrázek je příliš velký ¦ bilden är för stor ¦ billedet er for stort
+compression ZIP non lue ¦ komprese ZIP se nečte ¦ ZIP-komprimering läses inte ¦ ZIP-komprimering læses ikke
+=🗂 PSD prêt : {n} calques, {w} × {h} px (les calques de réglage sont dans l’image aplatie). ¦ 🗂 PSD připraveno: {n} vrstva, {w} × {h} px (vrstvy úprav jsou ve sloučeném obrázku).|🗂 PSD připraveno: {n} vrstvy, {w} × {h} px (vrstvy úprav jsou ve sloučeném obrázku).|🗂 PSD připraveno: {n} vrstev, {w} × {h} px (vrstvy úprav jsou ve sloučeném obrázku). ¦ 🗂 PSD klar: {n} lager, {w} × {h} px (justeringslagren ingår i den sammanslagna bilden).|🗂 PSD klar: {n} lager, {w} × {h} px (justeringslagren ingår i den sammanslagna bilden). ¦ 🗂 PSD klar: {n} lag, {w} × {h} px (justeringslagene er i det flade billede).|🗂 PSD klar: {n} lag, {w} × {h} px (justeringslagene er i det flade billede).
+=🗂 PSD prêt : {n} calque, {w} × {h} px (les calques de réglage sont dans l’image aplatie). ¦ 🗂 PSD připraveno: {n} vrstva, {w} × {h} px (vrstvy úprav jsou ve sloučeném obrázku).|🗂 PSD připraveno: {n} vrstvy, {w} × {h} px (vrstvy úprav jsou ve sloučeném obrázku).|🗂 PSD připraveno: {n} vrstev, {w} × {h} px (vrstvy úprav jsou ve sloučeném obrázku). ¦ 🗂 PSD klar: {n} lager, {w} × {h} px (justeringslagren ingår i den sammanslagna bilden).|🗂 PSD klar: {n} lager, {w} × {h} px (justeringslagren ingår i den sammanslagna bilden). ¦ 🗂 PSD klar: {n} lag, {w} × {h} px (justeringslagene er i det flade billede).|🗂 PSD klar: {n} lag, {w} × {h} px (justeringslagene er i det flade billede).
+PSD illisible : {err}. ¦ Nečitelné PSD: {err}. ¦ Oläslig PSD: {err}. ¦ Ulæselig PSD: {err}.
+Calque PSD ¦ Vrstva PSD ¦ PSD-lager ¦ PSD-lag
+PSD importé : {file} ¦ PSD importováno: {file} ¦ PSD importerad: {file} ¦ PSD importeret: {file}
+=🗂 {n} calques importés de « {file} » (proportions différentes : ajusté à la photo). ¦ 🗂 {n} vrstva importována z „{file}“ (jiný poměr stran: přizpůsobeno fotce).|🗂 {n} vrstvy importovány z „{file}“ (jiný poměr stran: přizpůsobeno fotce).|🗂 {n} vrstev importováno z „{file}“ (jiný poměr stran: přizpůsobeno fotce). ¦ 🗂 {n} lager importerat från ”{file}” (andra proportioner: anpassat till fotot).|🗂 {n} lager importerade från ”{file}” (andra proportioner: anpassat till fotot). ¦ 🗂 {n} lag importeret fra »{file}« (andre proportioner: tilpasset fotoet).|🗂 {n} lag importeret fra »{file}« (andre proportioner: tilpasset fotoet).
+=🗂 {n} calques importés de « {file} ». ¦ 🗂 {n} vrstva importována z „{file}“.|🗂 {n} vrstvy importovány z „{file}“.|🗂 {n} vrstev importováno z „{file}“. ¦ 🗂 {n} lager importerat från ”{file}”.|🗂 {n} lager importerade från ”{file}”. ¦ 🗂 {n} lag importeret fra »{file}«.|🗂 {n} lag importeret fra »{file}«.
+=🗂 {n} calque importé de « {file} » (proportions différentes : ajusté à la photo). ¦ 🗂 {n} vrstva importována z „{file}“ (jiný poměr stran: přizpůsobeno fotce).|🗂 {n} vrstvy importovány z „{file}“ (jiný poměr stran: přizpůsobeno fotce).|🗂 {n} vrstev importováno z „{file}“ (jiný poměr stran: přizpůsobeno fotce). ¦ 🗂 {n} lager importerat från ”{file}” (andra proportioner: anpassat till fotot).|🗂 {n} lager importerade från ”{file}” (andra proportioner: anpassat till fotot). ¦ 🗂 {n} lag importeret fra »{file}« (andre proportioner: tilpasset fotoet).|🗂 {n} lag importeret fra »{file}« (andre proportioner: tilpasset fotoet).
+=🗂 {n} calque importé de « {file} ». ¦ 🗂 {n} vrstva importována z „{file}“.|🗂 {n} vrstvy importovány z „{file}“.|🗂 {n} vrstev importováno z „{file}“. ¦ 🗂 {n} lager importerat från ”{file}”.|🗂 {n} lager importerade från ”{file}”. ¦ 🗂 {n} lag importeret fra »{file}«.|🗂 {n} lag importeret fra »{file}«.
+Cocher pour comparer ¦ Zaškrtni a porovnej ¦ Kryssa i för att jämföra ¦ Sæt flueben for at sammenligne
+Coche deux versions pour les comparer. ¦ Zaškrtni dvě verze a porovnej je. ¦ Bocka för två versioner för att jämföra dem. ¦ Sæt flueben ved to versioner for at sammenligne dem.
+Plus ancien ¦ Starší ¦ Äldre ¦ Ældre
+léger ¦ menší ¦ lätt ¦ let
+Taille des vignettes ¦ Velikost náhledů ¦ Miniatyrstorlek ¦ Miniaturestørrelse
+Utiliser ces images ¦ Použít tyto obrázky ¦ Använd bilderna ¦ Brug disse billeder
+Chercher : titre, cote, personne, lieu, année ¦ Hledat: název, signatura, osoba, místo, rok ¦ Sök: titel, signum, person, ort, år ¦ Søg: titel, signatur, person, sted, år
+Titre, cote, personne, lieu, année… ¦ Název, signatura, osoba, místo, rok… ¦ Titel, signum, person, ort, år… ¦ Titel, signatur, person, sted, år…
+↑ ↓ ← → · Espace : cocher · Entrée : valider ¦ ↑ ↓ ← → · Mezerník: zaškrtnout · Enter: potvrdit ¦ ↑ ↓ ← → · Mellanslag: kryssa · Enter: bekräfta ¦ ↑ ↓ ← → · Mellemrum: sæt flueben · Enter: bekræft
+↑ ↓ ← → · Entrée : valider ¦ ↑ ↓ ← → · Enter: potvrdit ¦ ↑ ↓ ← → · Enter: bekräfta ¦ ↑ ↓ ← → · Enter: bekræft
+Retouche ¦ Úprava fotek ¦ Retusch ¦ Retouchering
+RETOUCHE ¦ ÚPRAVA FOTEK ¦ RETUSCH ¦ RETOUCHERING
+photo|Légende ¦ Popisek ¦ Bildtext ¦ Billedtekst
+Propriétés ¦ Vlastnosti ¦ Egenskaper ¦ Egenskaber
+Préréglage ¦ Předvolba ¦ Förinställning ¦ Forudindstilling
+Aucun. ¦ Žádné. ¦ Inga. ¦ Ingen.
+trop petite pour imprimer en A5 ¦ příliš malá pro tisk A5 ¦ för liten för att skrivas ut i A5 ¦ for lille til udskrift i A5
+assez grande pour imprimer en A5 ¦ dost velká pro tisk A5 ¦ tillräckligt stor för att skrivas ut i A5 ¦ stor nok til udskrift i A5
+Écran 16:9 (1920 × 1080) ¦ Obrazovka 16:9 (1920 × 1080) ¦ Skärm 16:9 (1920 × 1080) ¦ Skærm 16:9 (1920 × 1080)
+Écran 4:3 (1600 × 1200) ¦ Obrazovka 4:3 (1600 × 1200) ¦ Skärm 4:3 (1600 × 1200) ¦ Skærm 4:3 (1600 × 1200)
+Carré 1:1 (1080 × 1080) ¦ Čtverec 1:1 (1080 × 1080) ¦ Kvadrat 1:1 (1080 × 1080) ¦ Kvadrat 1:1 (1080 × 1080)
+Vertical 9:16 (1080 × 1920) ¦ Na výšku 9:16 (1080 × 1920) ¦ Stående 9:16 (1080 × 1920) ¦ Lodret 9:16 (1080 × 1920)
+photo|Exposition ¦ Expozice ¦ Exponering ¦ Eksponering
+photo|Luminosité ¦ Jas ¦ Ljusstyrka ¦ Lysstyrke
+Colorisation : {what} ¦ Kolorování: {what} ¦ Färgläggning: {what} ¦ Farvelægning: {what}
+{what} oui ¦ {what} zapnuto ¦ {what} på ¦ {what} til
+{what} non ¦ {what} vypnuto ¦ {what} av ¦ {what} fra
+Courbe {what} ¦ Křivka {what} ¦ Kurva {what} ¦ Kurve {what}
+{layer} verrouillé ¦ {layer} zamčeno ¦ {layer} låst ¦ {layer} låst
+{layer} déverrouillé ¦ {layer} odemčeno ¦ {layer} upplåst ¦ {layer} låst op
+« {name} » seulement sur l’élément dessous ¦ „{name}“ jen na prvek pod ní ¦ ”{name}” bara på objektet under ¦ »{name}« kun på elementet nedenunder
+« {name} » sur tout ce qui est dessous ¦ „{name}“ na vše pod ní ¦ ”{name}” på allt under ¦ »{name}« på alt nedenunder
+Teinte/Saturation : {what} ¦ Odstín/sytost: {what} ¦ Nyans/mättnad: {what} ¦ Farvetone/mætning: {what}
+{dpi} ppp ¦ {dpi} dpi ¦ {dpi} dpi ¦ {dpi} dpi
+Envoi ({w} × {h} points, {size} Mo)… ¦ Odesílám ({w} × {h} bodů, {size} MB)… ¦ Laddar upp ({w} × {h} pixlar, {size} MB)… ¦ Uploader ({w} × {h} pixels, {size} MB)…
+Barre du haut (groupes) ¦ Horní lišta (skupiny) ¦ Övre fältet (grupper) ¦ Øverste linje (grupper)
+Les outils ¦ Nástroje ¦ Verktygen ¦ Værktøjerne
+Options des outils (pinceau, texte…) ¦ Možnosti nástrojů (štětec, text…) ¦ Verktygsalternativ (pensel, text…) ¦ Værktøjsindstillinger (pensel, tekst…)
+Colonne d’outils ¦ Sloupec nástrojů ¦ Verktygskolumn ¦ Værktøjskolonne
+Panneau Réglages ¦ Panel Úpravy ¦ Panelen Justeringar ¦ Panelet Justeringer
+Préréglages ¦ Předvolby ¦ Förinställningar ¦ Forudindstillinger
+Import des réglages indisponible. ¦ Import nastavení není k dispozici. ¦ Import av inställningar är inte tillgänglig. ¦ Import af indstillinger er ikke tilgængelig.
