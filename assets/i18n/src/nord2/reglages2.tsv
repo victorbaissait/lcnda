@@ -361,3 +361,1203 @@ Le bouton pour noter qu’on a vu l’animal. Seulement sur les fiches d’anima
 Carré 👁＋ en premier dans la grille des boutons ¦ Štvorec 👁＋ ako prvý v mriežke tlačidiel ¦ Ruten 👁＋ først i knapperutenettet
 en bas à droite de la fiche ¦ vpravo dole na karte ¦ nederst til høyre på oppføringen
 Le carré suit aussi « Ordre et visibilité des boutons » plus haut (ligne 01). ¦ Štvorec sa riadi aj „Poradím a viditeľnosťou tlačidiel“ vyššie (riadok 01). ¦ Ruten følger også «Rekkefølge og synlighet for knappene» ovenfor (rad 01).
+=élément retiré ¦ odobratá položka|odobraté položky|odobratých položiek ¦ element fjernet|elementer fjernet
+=heure ¦ hodina|hodiny|hodín ¦ time|timer
+=généalogie ¦ rodokmeň|rodokmene|rodokmeňov ¦ slektstre|slektstrær
+=changement ¦ zmena|zmeny|zmien ¦ endring|endringer
+=paquet ¦ balík|balíky|balíkov ¦ pakke|pakker
+=chose changée des deux côtés ¦ vec zmenená na oboch stranách|veci zmenené na oboch stranách|vecí zmenených na oboch stranách ¦ ting endret på begge sider|ting endret på begge sider
+=changement reçu ¦ prijatá zmena|prijaté zmeny|prijatých zmien ¦ endring mottatt|endringer mottatt
+=changement envoyé ¦ odoslaná zmena|odoslané zmeny|odoslaných zmien ¦ endring sendt|endringer sendt
+=corrigée ¦ opravená|opravené|opravených ¦ rettet|rettet
+=écartée ¦ odložená|odložené|odložených ¦ lagt til side|lagt til side
+=document traité ¦ spracovaný dokument|spracované dokumenty|spracovaných dokumentov ¦ dokument behandlet|dokumenter behandlet
+=erreur ¦ chyba|chyby|chýb ¦ feil|feil
+=nom corrigé ¦ opravené meno|opravené mená|opravených mien ¦ navn rettet|navn rettet
+=document sélectionné ¦ vybraný dokument|vybrané dokumenty|vybraných dokumentov ¦ valgt dokument|valgte dokumenter
+=photo ¦ fotka|fotky|fotiek ¦ bilde|bilder
+=souvenir ¦ spomienka|spomienky|spomienok ¦ minne|minner
+=bonne réponse ¦ správna odpoveď|správne odpovede|správnych odpovedí ¦ riktig svar|riktige svar
+=chiffre tapé ¦ zadaná číslica|zadané číslice|zadaných číslic ¦ siffer tastet inn|sifre tastet inn
+=an ¦ rok|roky|rokov ¦ år|år
+=raccourci ¦ skratka|skratky|skratiek ¦ snarvei|snarveier
+=forme ¦ tvar|tvary|tvarov ¦ form|former
+=chemin gardé ¦ zachovaná cesta|zachované cesty|zachovaných ciest ¦ sti beholdt|stier beholdt
+=famille vide ¦ prázdna rodina|prázdne rodiny|prázdnych rodín ¦ tom familie|tomme familier
+=famille vide supprimée ¦ vymazaná prázdna rodina|vymazané prázdne rodiny|vymazaných prázdnych rodín ¦ tom familie slettet|tomme familier slettet
+=ligne exportée ¦ exportovaný riadok|exportované riadky|exportovaných riadkov ¦ linje eksportert|linjer eksportert
+=autre élément ¦ ďalšia položka|ďalšie položky|ďalších položiek ¦ annet element|andre elementer
+=fiche trouvée ¦ nájdená karta|nájdené karty|nájdených kariet ¦ oppføring funnet|oppføringer funnet
+=hypothèse ¦ hypotéza|hypotézy|hypotéz ¦ hypotese|hypoteser
+=média enregistré ¦ zaevidované médium|zaevidované médiá|zaevidovaných médií ¦ mediefil registrert|mediefiler registrert
+=fichier présent ¦ prítomný súbor|prítomné súbory|prítomných súborov ¦ fil finnes|filer finnes
+=lien familial impossible ignoré ¦ preskočený nemožný rodinný vzťah|preskočené nemožné rodinné vzťahy|preskočených nemožných rodinných vzťahov ¦ umulig familierelasjon hoppet over|umulige familierelasjoner hoppet over
+=média introuvable ¦ nenájdené médium|nenájdené médiá|nenájdených médií ¦ mediefil ikke funnet|mediefiler ikke funnet
+=mois ¦ mesiac|mesiace|mesiacov ¦ måned|måneder
+=minute ¦ minúta|minúty|minút ¦ minutt|minutter
+=seconde ¦ sekunda|sekundy|sekúnd ¦ sekund|sekunder
+=ligne ¦ riadok|riadky|riadkov ¦ linje|linjer
+=cadre ¦ dlaždica|dlaždice|dlaždíc ¦ rute|ruter
+=copie ¦ kópia|kópie|kópií ¦ kopi|kopier
+Ressemblance {n} % ¦ Podobnosť {n} % ¦ Likhet {n} %
+Score {n}/110 ¦ Skóre {n}/110 ¦ Poengsum {n}/110
+Naissances : {a} / {b} ¦ Narodenia: {a} / {b} ¦ Fødsler: {a} / {b}
+Décès : {a} / {b} ¦ Úmrtia: {a} / {b} ¦ Dødsfall: {a} / {b}
+Fusionner la fiche #{a} dans la fiche #{b} ? ¦ Zlúčiť kartu #{a} do karty #{b}? ¦ Slå sammen oppføring #{a} med oppføring #{b}?
+Lancer sur {n} ¦ Spustiť na {n} ¦ Kjør på {n}
+{n} avec succès. ¦ Úspešne: {n}. ¦ {n} vellykket.
+{n} sera concernée. Confirmer pour {action} ? ¦ Týka sa to: {n}. Potvrdiť akciu {action}? ¦ {n} berøres. Bekreft for å {action}?
+{n} seront concernées. Confirmer pour {action} ? ¦ Týka sa to: {n}. Potvrdiť akciu {action}? ¦ {n} berøres. Bekreft for å {action}?
+corriger le nom inscrit en conservant une variante ¦ opraviť zapísané meno a ponechať variant ¦ rette det skrevne navnet og beholde en variant
+rattacher au groupe ¦ priradiť k skupine ¦ knytte til gruppen
+{n} et ancien nom conservé. ¦ {n} a staré meno ponechané. ¦ {n} og gammelt navn beholdt.
+{n} et anciens noms conservés. ¦ {n} a staré mená ponechané. ¦ {n} og gamle navn beholdt.
+{n} rattachée au groupe. ¦ Priradené k skupine: {n}. ¦ {n} knyttet til gruppen.
+{n} rattachées au groupe. ¦ Priradené k skupine: {n}. ¦ {n} knyttet til gruppen.
+Couleur de « {name} » ¦ Farba „{name}“ ¦ Farge for «{name}»
+Pictogramme de « {name} » ¦ Ikona „{name}“ ¦ Ikon for «{name}»
+Supprimer le type « {name} » ? ¦ Vymazať typ „{name}“? ¦ Slette typen «{name}»?
+Import de « {name} » annulé : tout ce qu’il avait ajouté a été retiré. ¦ Import „{name}“ vrátený späť: všetko, čo pridal, bolo odobraté. ¦ Importen av «{name}» er angret: alt den la til, er fjernet.
+Supprimer définitivement la base « {name} » ? ¦ Natrvalo vymazať databázu „{name}“? ¦ Slette databasen «{name}» permanent?
+Convertir {n} Deed en Décès ? ¦ Previesť {n} Deed na Úmrtie? ¦ Konvertere {n} Deed til Dødsfall?
+Le texte sur « {name} » ¦ Text o „{name}“ ¦ Teksten om «{name}»
+Les photos de {name} ¦ Fotky: {name} ¦ Bilder av {name}
+{x} de {who} (lien) ¦ {x} – {who} ¦ {x} til {who}
+C’est toi ¦ To si ty ¦ Det er deg
+c’est toi ¦ to si ty ¦ det er deg
+C’est toi ! ¦ To si ty! ¦ Det er deg!
+C’est {rel}. ¦ To je {rel}. ¦ Det er {rel}.
+Bonjour {name} ! ¦ Ahoj, {name}! ¦ Hei, {name}!
+Bonjour ! ¦ Ahoj! ¦ Hei!
+Bonjour {name}. Touche un gros bouton : {list}. ¦ Ahoj, {name}. Dotkni sa veľkého tlačidla: {list}. ¦ Hei, {name}. Trykk på en stor knapp: {list}.
+Bonjour. Touche un gros bouton : {list}. ¦ Ahoj. Dotkni sa veľkého tlačidla: {list}. ¦ Hei. Trykk på en stor knapp: {list}.
+Bonjour {name} ! L’app dira « ta mère », « ton petit-fils »… ¦ Ahoj, {name}! Aplikácia bude hovoriť „tvoja mama“, „tvoj vnuk“… ¦ Hei, {name}! Appen vil si «moren din», «barnebarnet ditt»…
+D’accord. L’app ne dira pas les liens de famille. ¦ Dobre. Aplikácia nebude hovoriť rodinné vzťahy. ¦ Greit. Appen sier ikke familierelasjonene.
+⚠️ {what} (caché sur la tablette) ¦ ⚠️ {what} (na tablete skryté) ¦ ⚠️ {what} (skjult på nettbrettet)
+{n} aujourd’hui ¦ {n} dnes ¦ {n} i dag
+Ce n’est pas {name} ? ¦ Nie si {name}? ¦ Er det ikke {name}?
+Quitter le mode simple : garde le doigt appuyé {n} secondes, ou garde la touche Entrée enfoncée ¦ Opustiť jednoduchý režim: drž prst {n} sekúnd alebo drž stlačený Enter ¦ Gå ut av enkel modus: hold fingeren nede i {n} sekunder, eller hold Enter nede
+garde le doigt appuyé {n} s ¦ drž prst {n} s ¦ hold fingeren nede {n} s
+Garde le doigt appuyé {n} secondes ¦ Drž prst {n} sekúnd ¦ Hold fingeren nede i {n} sekunder
+Vers les parents ¦ K rodičom ¦ Til foreldrene
+Vers les enfants ¦ K deťom ¦ Til barna
+l’aîné ¦ najstarší ¦ den eldste
+l’aînée ¦ najstaršia ¦ den eldste
+Regarder les {n} ¦ Pozrieť si {n} ¦ Se de {n}
+{a} sur {b} ¦ {a} z {b} ¦ {a} av {b}
+vers {y} (date) ¦ okolo roku {y} ¦ rundt {y}
+en {date} (année) ¦ v roku {date} ¦ i {date}
+en {date} (mois) ¦ v {date} ¦ i {date}
+le {date} (jour) ¦ {date} ¦ den {date}
+à {place} (lieu) ¦ v {place} ¦ i {place}
+{name} fait partie de la famille. ¦ {name} patrí do rodiny. ¦ {name} hører til familien.
+{name} est né {details}. ¦ {name} sa narodil {details}. ¦ {name} ble født {details}.
+{name} est née {details}. ¦ {name} sa narodila {details}. ¦ {name} ble født {details}.
+{name} a été baptisé {details}. ¦ {name} bol pokrstený {details}. ¦ {name} ble døpt {details}.
+{name} a été baptisée {details}. ¦ {name} bola pokrstená {details}. ¦ {name} ble døpt {details}.
+Il ¦ On ¦ Han
+Elle ¦ Ona ¦ Hun
+C’est la fille de {names}. ¦ Je to dcéra: {names}. ¦ Hun er datter av {names}.
+C’est le fils de {names}. ¦ Je to syn: {names}. ¦ Han er sønn av {names}.
+C’est l’enfant de {names}. ¦ Je to dieťa: {names}. ¦ Det er barn av {names}.
+Il était {job}. ¦ Bol z povolania: {job}. ¦ Han var {job}.
+Elle était {job}. ¦ Bola z povolania: {job}. ¦ Hun var {job}.
+Il a été {job}. ¦ Pracoval ako: {job}. ¦ Han arbeidet som {job}.
+Elle a été {job}. ¦ Pracovala ako: {job}. ¦ Hun arbeidet som {job}.
+Il est {job}. ¦ Je z povolania: {job}. ¦ Han er {job}.
+Elle est {job}. ¦ Je z povolania: {job}. ¦ Hun er {job}.
+Il s’est marié avec {name} {details}. ¦ Oženil sa s osobou {name} {details}. ¦ Han giftet seg med {name} {details}.
+Elle s’est mariée avec {name} {details}. ¦ Vydala sa za osobu {name} {details}. ¦ Hun giftet seg med {name} {details}.
+Il s’est marié avec {name}. ¦ Oženil sa s osobou {name}. ¦ Han giftet seg med {name}.
+Elle s’est mariée avec {name}. ¦ Vydala sa za osobu {name}. ¦ Hun giftet seg med {name}.
+Il a vécu avec {name}. ¦ Žil s osobou {name}. ¦ Han levde med {name}.
+Elle a vécu avec {name}. ¦ Žila s osobou {name}. ¦ Hun levde med {name}.
+Ils ont eu une fille, {name}. ¦ Mali dcéru: {name}. ¦ De fikk en datter, {name}.
+Ils ont eu un fils, {name}. ¦ Mali syna: {name}. ¦ De fikk en sønn, {name}.
+Ils ont eu un enfant, {name}. ¦ Mali dieťa: {name}. ¦ De fikk et barn, {name}.
+Ils ont eu {n} enfants : {names}. ¦ Mali deti ({n}): {names}. ¦ De fikk {n} barn: {names}.
+Aujourd’hui, il a {age}. ¦ Dnes má {age}. ¦ I dag er han {age}.
+Aujourd’hui, elle a {age}. ¦ Dnes má {age}. ¦ I dag er hun {age}.
+Il est décédé {details}, à {age}. ¦ Zomrel {details} vo veku {age}. ¦ Han døde {details}, {age} gammel.
+Elle est décédée {details}, à {age}. ¦ Zomrela {details} vo veku {age}. ¦ Hun døde {details}, {age} gammel.
+Il est décédé {details}. ¦ Zomrel {details}. ¦ Han døde {details}.
+Elle est décédée {details}. ¦ Zomrela {details}. ¦ Hun døde {details}.
+né en {y} ¦ narodený v roku {y} ¦ født {y}
+née en {y} ¦ narodená v roku {y} ¦ født {y}
+mort en {y} ¦ zomrel v roku {y} ¦ død {y}
+morte en {y} ¦ zomrela v roku {y} ¦ død {y}
+de {a} à {b} ¦ od {a} do {b} ¦ fra {a} til {b}
+Toucher pour la mettre au milieu. ¦ Dotkni sa a daj ju doprostred. ¦ Trykk for å sette personen i midten.
+Toucher pour voir sa fiche. ¦ Dotkni sa a uvidíš kartu. ¦ Trykk for å se oppføringen.
+Les prénoms en « {x} » ¦ Mená na „{x}“ ¦ Fornavn på «{x}»
+Personne ne s’appelle « {q} ». Vérifie l’orthographe. ¦ Nikto sa nevolá „{q}“. Skontroluj pravopis. ¦ Ingen heter «{q}». Sjekk stavemåten.
+Pas d’anniversaire aujourd’hui. ¦ Dnes nemá nikto narodeniny. ¦ Ingen bursdag i dag.
+Pas d’anniversaire aujourd’hui. Voici ce qui arrive bientôt. ¦ Dnes nemá nikto narodeniny. Tu je, čo príde čoskoro. ¦ Ingen bursdag i dag. Her er det som kommer snart.
+📷 Des photos prises en {month} ¦ 📷 Fotky urobené v mesiaci {month} ¦ 📷 Bilder tatt i {month}
+La famille de {name} ¦ Rodina: {name} ¦ Familien til {name}
+Aujourd’hui ! ¦ Dnes! ¦ I dag!
+Demain ¦ Zajtra ¦ I morgen
+Dans {n} jours ¦ O {n} dní ¦ Om {n} dager
+{n} depuis le début ¦ {n} od začiatku ¦ {n} siden starten
+Ce n’est pas {name}. Essaie encore ! ¦ To nie je {name}. Skús to znova! ¦ Det er ikke {name}. Prøv igjen!
+Ce n’est pas ça. Essaie encore ! ¦ To nie je ono. Skús to znova! ¦ Det er ikke det. Prøv igjen!
+C’est {part} ¦ Je {part} ¦ Det er {part}
+le matin ¦ ráno ¦ morgen
+l’après-midi ¦ popoludnie ¦ ettermiddag
+le soir ¦ večer ¦ kveld
+{n} sur 4 ¦ {n} zo 4 ¦ {n} av 4
+⚠️ {what} pour qu’il apparaisse ¦ ⚠️ {what}, aby sa zobrazil ¦ ⚠️ {what} for at den skal vises
+Modifier « {name} » ¦ Upraviť „{name}“ ¦ Rediger «{name}»
+Dupliquer « {name} » ¦ Duplikovať „{name}“ ¦ Dupliser «{name}»
+Retirer « {name} » ¦ Odobrať „{name}“ ¦ Fjern «{name}»
+Monter « {name} » ¦ Posunúť „{name}“ nahor ¦ Flytt «{name}» opp
+Descendre « {name} » ¦ Posunúť „{name}“ nadol ¦ Flytt «{name}» ned
+Montrer « {name} » ¦ Zobraziť „{name}“ ¦ Vis «{name}»
+Afficher « {name} » ¦ Zobraziť „{name}“ ¦ Vis «{name}»
+cadres ajoutés au plus. ¦ pridaných dlaždíc najviac. ¦ tillagte ruter høyst.
+Côté {branch} ¦ Strana {branch} ¦ {branch}-siden
+Remettre « {name} » dans le mode simple ¦ Vrátiť „{name}“ do jednoduchého režimu ¦ Sett «{name}» tilbake i enkel modus
+Photo ¦ Fotka ¦ Bilde
+{n} s par photo ¦ {n} s na fotku ¦ {n} s per bilde
+cadre après {n} min ¦ fotorámik po {n} min ¦ fotoramme etter {n} min
+sans cadre photo ¦ bez fotorámika ¦ uten fotoramme
+Chiffre {n} du code ¦ Číslica {n} kódu ¦ Siffer {n} i koden
+Ce que verra {name} sur une tablette. Le mode simple ne permet <b>ni de modifier, ni de supprimer</b> : ni menu caché, ni clic droit. ¦ Čo uvidí {name} na tablete. Jednoduchý režim <b>neumožňuje upravovať ani mazať</b>: žiadna skrytá ponuka, žiadne pravé tlačidlo. ¦ Det {name} ser på et nettbrett. Enkel modus tillater <b>verken redigering eller sletting</b>: ingen skjult meny, ingen høyreklikk.
+Ce que verra la personne sur une tablette. Le mode simple ne permet <b>ni de modifier, ni de supprimer</b> : ni menu caché, ni clic droit. ¦ Čo osoba uvidí na tablete. Jednoduchý režim <b>neumožňuje upravovať ani mazať</b>: žiadna skrytá ponuka, žiadne pravé tlačidlo. ¦ Det personen ser på et nettbrett. Enkel modus tillater <b>verken redigering eller sletting</b>: ingen skjult meny, ingen høyreklikk.
+Réglage « {name} » supprimé ¦ Nastavenie „{name}“ vymazané ¦ Innstillingen «{name}» slettet
+Réglage « {name} » importé : clique « Appliquer » pour t’en servir. ¦ Nastavenie „{name}“ importované: klikni na „Použiť“ a začni ho používať. ¦ Innstillingen «{name}» er importert: klikk på «Bruk» for å ta den i bruk.
+Maison choisie : « {name} ». ¦ Vybraný dom: „{name}“. ¦ Valgt hus: «{name}».
+Maison ¦ Dom ¦ Hus
+Adresse copiée : {url} ¦ Adresa skopírovaná: {url} ¦ Adressen er kopiert: {url}
+ ou  ¦  alebo  ¦  eller 
+Seulement avec {what}. ¦ Len s: {what}. ¦ Bare med {what}.
+{what} remis comme au départ ¦ {what}: obnovený východiskový stav ¦ {what} tilbakestilt som fra start
+activé ¦ zapnuté ¦ på
+désactivé ¦ vypnuté ¦ av
+Style des fiches : {name}. ¦ Štýl kariet: {name}. ¦ Stil for oppføringer: {name}.
+Style des fiches : {name} (retouché). ¦ Štýl kariet: {name} (upravený). ¦ Stil for oppføringer: {name} (justert).
+ton {x} (lien) ¦ tvoj {x} ¦ din {x}
+ta {x} (lien) ¦ tvoja {x} ¦ din {x}
+le {x} (lien) ¦ {x} ¦ {x}
+la {x} (lien) ¦ {x} ¦ {x}
+la femme de {who} {name} (lien) ¦ manželka, ktorej manžel je {who} {name} ¦ kona til {who} {name}
+le mari de {who} {name} (lien) ¦ manžel, ktorého manželka je {who} {name} ¦ mannen til {who} {name}
+le conjoint de {who} {name} (lien) ¦ partner(ka) osoby, ktorou je {who} {name} ¦ partneren til {who} {name}
+lien|mère ¦ matka ¦ mor
+lien|père ¦ otec ¦ far
+lien|parent ¦ rodič ¦ forelder
+lien|grand-mère ¦ stará mama ¦ bestemor
+lien|grand-père ¦ starý otec ¦ bestefar
+lien|arrière-grand-mère ¦ prastará mama ¦ oldemor
+lien|arrière-grand-père ¦ prastarý otec ¦ oldefar
+lien|arrière-arrière-grand-mère ¦ praprastará mama ¦ tippoldemor
+lien|arrière-arrière-grand-père ¦ praprastarý otec ¦ tippoldefar
+lien|fille ¦ dcéra ¦ datter
+lien|fils ¦ syn ¦ sønn
+lien|enfant ¦ dieťa ¦ barn
+lien|petite-fille ¦ vnučka ¦ barnebarn
+lien|petit-fils ¦ vnuk ¦ barnebarn
+lien|arrière-petite-fille ¦ pravnučka ¦ oldebarn
+lien|arrière-petit-fils ¦ pravnuk ¦ oldebarn
+lien|arrière-arrière-petite-fille ¦ prapravnučka ¦ tippoldebarn
+lien|arrière-arrière-petit-fils ¦ prapravnuk ¦ tippoldebarn
+lien|sœur ¦ sestra ¦ søster
+lien|frère ¦ brat ¦ bror
+lien|tante ¦ teta ¦ tante
+lien|oncle ¦ strýko ¦ onkel
+lien|grand-tante ¦ prateta ¦ grandtante
+lien|grand-oncle ¦ prastrýko ¦ grandonkel
+lien|arrière-grand-tante ¦ praprateta ¦ oldetante
+lien|arrière-grand-oncle ¦ praprastrýko ¦ oldeonkel
+lien|arrière-arrière-grand-tante ¦ prapraprateta ¦ tippoldetante
+lien|arrière-arrière-grand-oncle ¦ prapraprastrýko ¦ tippoldeonkel
+lien|nièce ¦ neter ¦ niese
+lien|neveu ¦ synovec ¦ nevø
+lien|petite-nièce ¦ praneter ¦ grandniese
+lien|petit-neveu ¦ prasynovec ¦ grandnevø
+lien|arrière-petite-nièce ¦ prapraneter ¦ oldeniese
+lien|arrière-petit-neveu ¦ praprasynovec ¦ oldenevø
+lien|arrière-arrière-petite-nièce ¦ praprapraneter ¦ tippoldeniese
+lien|arrière-arrière-petit-neveu ¦ prapraprasynovec ¦ tippoldenevø
+lien|cousin germain ¦ bratranec ¦ fetter
+lien|cousine germaine ¦ sesternica ¦ kusine
+lien|cousin issu de germains ¦ bratranec z druhého kolena ¦ tremenning
+lien|cousine issue de germains ¦ sesternica z druhého kolena ¦ tremenning
+lien|cousin éloigné ¦ vzdialený bratranec ¦ fjern fetter
+lien|cousine éloignée ¦ vzdialená sesternica ¦ fjern kusine
+lien|cousin ¦ bratranec ¦ fetter
+lien|cousine ¦ sesternica ¦ kusine
+lien|femme ¦ manželka ¦ kone
+lien|mari ¦ manžel ¦ mann
+lien|conjoint ¦ partner(ka) ¦ partner
+lien|belle-mère ¦ svokra ¦ svigermor
+lien|beau-père ¦ svokor ¦ svigerfar
+lien|belle-fille ¦ nevesta ¦ svigerdatter
+lien|gendre ¦ zať ¦ svigersønn
+lien|beau-fils ¦ nevlastný syn ¦ stesønn
+lien|belle-sœur ¦ švagriná ¦ svigerinne
+lien|beau-frère ¦ švagor ¦ svoger
+⚙️ Gérer les formes ({n}) ¦ ⚙️ Spravovať tvary ({n}) ¦ ⚙️ Administrer former ({n})
+Forme « {name} » supprimée ¦ Tvar „{name}“ vymazaný ¦ Formen «{name}» slettet
+Forme « {name} » importée : elle est dans le menu « Forme des avatars ». ¦ Tvar „{name}“ importovaný: nájdeš ho v ponuke „Tvar avatarov“. ¦ Formen «{name}» er importert: den ligger i menyen «Avatarform».
+Aucune forme pour « {q} ». Essaie un autre mot (cœur, arbre, étoile, croix…). ¦ Žiadny tvar pre „{q}“. Skús iné slovo (srdce, strom, hviezda, kríž…). ¦ Ingen form for «{q}». Prøv et annet ord (hjerte, tre, stjerne, kors…).
+{n} points au plus. ¦ Najviac {n} bodov. ¦ Høyst {n} punkter.
+{what} (scripts, textes, images, styles…) ¦ {what} (skripty, texty, obrázky, štýly…) ¦ {what} (skript, tekster, bilder, stiler…)
+Forme « {name} » enregistrée. ¦ Tvar „{name}“ uložený. ¦ Formen «{name}» er lagret.
+Forme « {name} » créée : elle est dans le menu « Forme des avatars » (✎ Mes formes). ¦ Tvar „{name}“ vytvorený: nájdeš ho v ponuke „Tvar avatarov“ (✎ Moje tvary). ¦ Formen «{name}» er opprettet: den ligger i menyen «Avatarform» (✎ Mine former).
+Ce qu’ouvre « {name} » ¦ Čo otvára „{name}“ ¦ Hva «{name}» åpner
+Ouvre la fenêtre « ＋ Nouvelle personne » (ou un nouvel animal sur la page des animaux). Caché au départ. ¦ Otvorí okno „＋ Nová osoba“ (alebo nové zviera na stránke zvierat). Na začiatku skryté. ¦ Åpner vinduet «＋ Ny person» (eller et nytt dyr på dyresiden). Skjult fra start.
+Raccourci : Enquêtes, sur cet onglet. Caché au départ. ¦ Skratka: Pátrania, na tejto karte. Na začiatku skryté. ¦ Snarvei: Undersøkelser, på denne fanen. Skjult fra start.
+Raccourci : Listes → 🛠️ Outils de modification, sur cet outil. Caché au départ. ¦ Skratka: Zoznamy → 🛠️ Nástroje úprav, na tomto nástroji. Na začiatku skryté. ¦ Snarvei: Lister → 🛠️ Redigeringsverktøy, på dette verktøyet. Skjult fra start.
+Forme : « {name} » ¦ Tvar: „{name}“ ¦ Form: «{name}»
+Portraits : « {name} » ¦ Portréty: „{name}“ ¦ Portretter: «{name}»
+Colonne de gauche : partir de « {name} » ¦ Ľavý stĺpec: vychádzať z „{name}“ ¦ Venstre kolonne: ta utgangspunkt i «{name}»
+Contrôlé {when} ¦ Skontrolované {when} ¦ Kontrollert {when}
+Lieu corrigé : {name} ({what}) ¦ Miesto opravené: {name} ({what}) ¦ Sted rettet: {name} ({what})
+La bonne commune pour « {name} » ¦ Správna obec pre „{name}“ ¦ Riktig sted for «{name}»
+Exception gardée : {what} ¦ Výnimka ponechaná: {what} ¦ Unntak beholdt: {what}
+Signalée de nouveau : {what} ¦ Znova nahlásené: {what} ¦ Markert igjen: {what}
+Alerte {i} sur {n} ¦ Upozornenie {i} z {n} ¦ Varsel {i} av {n}
+{n} plus tard ¦ o {n} neskôr ¦ {n} senere
+Date enregistrée : {date} ¦ Dátum uložený: {date} ¦ Dato lagret: {date}
+✓ Alerte réglée ({date}) ¦ ✓ Upozornenie vyriešené ({date}) ¦ ✓ Varsel løst ({date})
+Bandeau sur la fiche : {what} ¦ Pruh na karte: {what} ¦ Banner på oppføringen: {what}
+{a} fiches sur {b} n’ont aucune alerte (les exceptions ne comptent pas) ¦ {a} kariet z {b} nemá žiadne upozornenie (výnimky sa nepočítajú) ¦ {a} oppføringer av {b} har ingen varsler (unntak teller ikke)
+{n} ans ¦ {n} rokov ¦ {n} år
+{n} mois ¦ {n} mes. ¦ {n} mnd.
+Supprimer les {n} familles vides ¦ Vymazať prázdne rodiny ({n}) ¦ Slett de {n} tomme familiene
+Supprimer les {n} familles vides ? ¦ Vymazať prázdne rodiny ({n})? ¦ Slette de {n} tomme familiene?
+Me le signaler à nouveau si une de ces dates change ¦ Znova ma upozorniť, keď sa jeden z týchto dátumov zmení ¦ Varsle meg igjen hvis en av disse datoene endres
+Me le signaler à nouveau si une de ces coordonnées change ¦ Znova ma upozorniť, keď sa jedna z týchto súradníc zmení ¦ Varsle meg igjen hvis en av disse koordinatene endres
+Déjà pris par {os} ou le menu de l’application : « {what} ». ¦ Už používa {os} alebo ponuka aplikácie: „{what}“. ¦ Brukes allerede av {os} eller programmenyen: «{what}».
+Déjà pris par l’app (même quand un outil est ouvert) : « {what} ». Change-le d’abord dans Raccourcis clavier si tu veux cette touche. ¦ Už používa aplikácia (aj keď je otvorený nástroj): „{what}“. Ak chceš túto klávesu, najprv to zmeň v Klávesových skratkách. ¦ Brukes allerede av appen (også når et verktøy er åpent): «{what}». Endre det først i Hurtigtaster hvis du vil ha denne tasten.
+Dans cet outil, cette touche sert déjà à « {what} » : ton raccourci passera avant. ¦ V tomto nástroji už táto klávesa slúži na „{what}“: tvoja skratka bude mať prednosť. ¦ I dette verktøyet brukes tasten allerede til «{what}»: snarveien din går foran.
+La touche de départ ({key}) ne fera plus cette action : elle est libre pour autre chose. ¦ Východisková klávesa ({key}) už túto akciu robiť nebude: je voľná na niečo iné. ¦ Standardtasten ({key}) gjør ikke lenger dette: den er ledig til noe annet.
+Déjà donné à « {what} » : il lui sera retiré. ¦ Už priradené k „{what}“: bude mu odobraté. ¦ Allerede gitt til «{what}»: den blir fjernet derfra.
+Sans {key}, il ne marchera qu’en dehors des cases de texte. ¦ Bez {key} bude fungovať len mimo textových polí. ¦ Uten {key} virker den bare utenfor tekstfelt.
+NOUVEAU RACCOURCI ¦ NOVÁ SKRATKA ¦ NY SNARVEI
+Nouveau raccourci : {key} ¦ Nová skratka: {key} ¦ Ny snarvei: {key}
+Donne une touche à n’importe quelle commande de l’outil (ses menus, ses outils, ses boutons). {os} et le menu de l’application passent avant : une touche qu’ils prennent est refusée. Ton raccourci passe avant la touche de l’outil. Sans {key}, il ne marche qu’en dehors des cases de texte. ¦ Priraď klávesu ľubovoľnému príkazu nástroja (jeho ponukám, nástrojom, tlačidlám). {os} a ponuka aplikácie majú prednosť: klávesa, ktorú používajú, sa odmietne. Tvoja skratka má prednosť pred klávesou nástroja. Bez {key} funguje len mimo textových polí. ¦ Gi en tast til hvilken som helst kommando i verktøyet (menyer, verktøy, knapper). {os} og programmenyen går foran: en tast de bruker, avvises. Snarveien din går foran verktøyets tast. Uten {key} virker den bare utenfor tekstfelt.
+{n} à toi ¦ {n} vlastných ¦ {n} egne
+{a} et {n} autres personnes ¦ {a} a ďalšie osoby ({n}) ¦ {a} og {n} andre personer
+Sinon, on lira : « {text} » ¦ Inak sa prečíta: „{text}“ ¦ Ellers leses: «{text}»
+Dicter dans ce champ ({key}) ¦ Diktovať do tohto poľa ({key}) ¦ Dikter i dette feltet ({key})
+Dicter : parle, le texte s’écrit au curseur ({key}, Échap pour arrêter) ¦ Diktovať: hovor a text sa píše pri kurzore ({key}, Esc na zastavenie) ¦ Dikter: snakk, så skrives teksten ved markøren ({key}, Esc for å stoppe)
+Voici un message : il reste {n} secondes environ. ¦ Tu je správa: zostáva asi {n} sekúnd. ¦ Her er en melding: omtrent {n} sekunder igjen.
+toutes les {n} ¦ každých {n} ¦ hver {n}
+chaque jour ¦ každý deň ¦ hver dag
+chaque semaine ¦ každý týždeň ¦ hver uke
+Dernière sauvegarde : <b>{when}</b> ¦ Posledná záloha: <b>{when}</b> ¦ Siste sikkerhetskopi: <b>{when}</b>
+Dernière sauvegarde : <b>jamais</b> ¦ Posledná záloha: <b>nikdy</b> ¦ Siste sikkerhetskopi: <b>aldri</b>
+rien n’avait changé ¦ nič sa nezmenilo ¦ ingenting hadde endret seg
+dès maintenant ¦ hneď teraz ¦ fra nå av
+Prochaine : {when} ({freq}). ¦ Ďalšia: {when} ({freq}). ¦ Neste: {when} ({freq}).
+Prochaine : {when} ({freq}, et à la fermeture). ¦ Ďalšia: {when} ({freq} a pri zatvorení). ¦ Neste: {when} ({freq}, og ved lukking).
+Dernier essai raté : {error} ¦ Posledný pokus zlyhal: {error} ¦ Siste forsøk mislyktes: {error}
+Rien n’est bloqué : continue à travailler. ¦ Nič nie je zablokované: pracuj ďalej. ¦ Ingenting er blokkert: fortsett å jobbe.
+Toutes mes généalogies ({n}) ¦ Všetky moje rodokmene ({n}) ¦ Alle slektstrærne mine ({n})
+Remettre ta généalogie comme dans la copie choisie ({when}) ? Tout ce que tu as fait depuis sera remplacé. Ta base actuelle est d’abord gardée dans les sauvegardes (« avant restauration »), pour pouvoir y revenir. ¦ Vrátiť rodokmeň do stavu vybranej kópie ({when})? Všetko, čo si odvtedy urobil(a), sa nahradí. Súčasná databáza sa najprv uloží do záloh („pred obnovením“), aby si sa k nej mohol (mohla) vrátiť. ¦ Gjenopprette slektstreet ditt fra den valgte kopien ({when})? Alt du har gjort siden, blir erstattet. Den nåværende databasen lagres først blant sikkerhetskopiene («før gjenoppretting»), så du kan gå tilbake til den.
+Remettre ta généalogie comme dans la copie choisie ? Tout ce que tu as fait depuis sera remplacé. Ta base actuelle est d’abord gardée dans les sauvegardes (« avant restauration »), pour pouvoir y revenir. ¦ Vrátiť rodokmeň do stavu vybranej kópie? Všetko, čo si odvtedy urobil(a), sa nahradí. Súčasná databáza sa najprv uloží do záloh („pred obnovením“), aby si sa k nej mohol (mohla) vrátiť. ¦ Gjenopprette slektstreet ditt fra den valgte kopien? Alt du har gjort siden, blir erstattet. Den nåværende databasen lagres først blant sikkerhetskopiene («før gjenoppretting»), så du kan gå tilbake til den.
+✓ Généalogie remise comme dans la copie ({n}). L’ancienne est gardée : {file}. ¦ ✓ Rodokmeň obnovený z kópie ({n}). Starý je uložený: {file}. ¦ ✓ Slektstreet er gjenopprettet fra kopien ({n}). Det gamle er tatt vare på: {file}.
+✓ Sauvegarde faite et vérifiée ({n}) : {size}. ¦ ✓ Záloha vytvorená a overená ({n}): {size}. ¦ ✓ Sikkerhetskopi tatt og kontrollert ({n}): {size}.
+✓ Sauvegarde faite et vérifiée : {size}. ¦ ✓ Záloha vytvorená a overená: {size}. ¦ ✓ Sikkerhetskopi tatt og kontrollert: {size}.
+Supprimée sur cet ordinateur, modifiée sur « {name} ». ¦ Vymazané na tomto počítači, upravené na „{name}“. ¦ Slettet på denne datamaskinen, endret på «{name}».
+Modifiée ici, supprimée sur « {name} ». ¦ Upravené tu, vymazané na „{name}“. ¦ Endret her, slettet på «{name}».
+modifiée des deux côtés ¦ upravené na oboch stranách ¦ endret på begge sider
+Sur « {name} » ¦ Na „{name}“ ¦ På «{name}»
+<b>{n}</b> à envoyer ¦ Na odoslanie: <b>{n}</b> ¦ <b>{n}</b> å sende
+<b>{n}</b> à recevoir ¦ Na prijatie: <b>{n}</b> ¦ <b>{n}</b> å motta
+Rien à envoyer ¦ Nič na odoslanie ¦ Ingenting å sende
+Rien à recevoir ¦ Nič na prijatie ¦ Ingenting å motta
+Dernière synchronisation : {when} ¦ Posledná synchronizácia: {when} ¦ Siste synkronisering: {when}
+jamais ¦ nikdy ¦ aldri
+⚠️ {n} : choisis ¦ ⚠️ {n}: vyber ¦ ⚠️ {n}: velg
+rien de nouveau ¦ nič nové ¦ ingenting nytt
+{n} de « {from} » ¦ {n} z „{from}“ ¦ {n} fra «{from}»
+Déjà à jour ¦ Už je aktuálne ¦ Allerede oppdatert
+⚠️ {n} : à toi de choisir. ¦ ⚠️ {n}: je na tebe, aby si vybral(a). ¦ ⚠️ {n}: du velger.
+Cette généalogie est déjà ouverte sur l’ordinateur <b>« {name} »</b> (depuis {when}). ¦ Tento rodokmeň je už otvorený na počítači <b>„{name}“</b> (od {when}). ¦ Dette slektstreet er allerede åpent på datamaskinen <b>«{name}»</b> (siden {when}).
+Cette généalogie est déjà ouverte sur l’ordinateur <b>« {name} »</b>. ¦ Tento rodokmeň je už otvorený na počítači <b>„{name}“</b>. ¦ Dette slektstreet er allerede åpent på datamaskinen <b>«{name}»</b>.
+Ouvrir quand même ? Fais-le seulement si « {name} » est éteint ou si l’app y est fermée (sinon le fichier peut s’abîmer). ¦ Napriek tomu otvoriť? Urob to len vtedy, keď je „{name}“ vypnutý alebo je tam aplikácia zatvorená (inak sa súbor môže poškodiť). ¦ Åpne likevel? Gjør det bare hvis «{name}» er slått av eller appen er lukket der (ellers kan filen bli skadet).
+Télécharger LCNDA {v} ¦ Stiahnuť LCNDA {v} ¦ Last ned LCNDA {v}
+{a} sur {b}… ¦ {a} z {b}… ¦ {a} av {b}…
+Plus de message pour la version {v} ¦ Už žiadne správy pre verziu {v} ¦ Ingen flere meldinger om versjon {v}
+🔄 Une nouvelle version {v} est disponible. ¦ 🔄 Je k dispozícii nová verzia {v}. ¦ 🔄 En ny versjon {v} er tilgjengelig.
+regardé {when} ¦ skontrolované {when} ¦ sjekket {when}
+« 🔍 Rechercher une mise à jour » regarde tout de suite. ¦ „🔍 Vyhľadať aktualizáciu“ sa pozrie hneď. ¦ «🔍 Se etter oppdatering» sjekker med en gang.
+Pas encore regardé sur cet ordinateur. « 🔍 Rechercher une mise à jour » regarde tout de suite. ¦ Na tomto počítači ešte neskontrolované. „🔍 Vyhľadať aktualizáciu“ sa pozrie hneď. ¦ Ikke sjekket på denne datamaskinen ennå. «🔍 Se etter oppdatering» sjekker med en gang.
+Tu as la dernière version publiée ({v}){when}. ¦ Máš najnovšiu vydanú verziu ({v}){when}. ¦ Du har den sist utgitte versjonen ({v}){when}.
+Une nouvelle version {v} est disponible (tu as la {cur}). ¦ Je k dispozícii nová verzia {v} (máš {cur}). ¦ En ny versjon {v} er tilgjengelig (du har {cur}).
+Tu as choisi de ne plus être prévenu pour la {v}{when}. ¦ Zvolil(a) si, že už nechceš upozornenia na verziu {v}{when}. ¦ Du har valgt å ikke få beskjed om {v} lenger{when}.
+Ce réglage vient d’un autre outil (« {name} ») : il ne va pas dans la visionneuse. ¦ Toto nastavenie pochádza z iného nástroja („{name}“): do prehliadača nepatrí. ¦ Denne innstillingen kommer fra et annet verktøy («{name}»): den hører ikke til i visningsprogrammet.
+Réglage « {name} » mis. ¦ Nastavenie „{name}“ použité. ¦ Innstillingen «{name}» er tatt i bruk.
+Range avec ↑ ↓, coche ce qui s’affiche dans la colonne, en groupes ou en une seule liste. ¦ Usporiadaj pomocou ↑ ↓, zaškrtni, čo sa zobrazí v stĺpci, v skupinách alebo v jednom zozname. ¦ Ordne med ↑ ↓, kryss av for det som vises i kolonnen, i grupper eller i én liste.
+Range avec ↑ ↓, en groupes ou en une seule liste. ¦ Usporiadaj pomocou ↑ ↓, v skupinách alebo v jednom zozname. ¦ Ordne med ↑ ↓, i grupper eller i én liste.
+Réordonner les listes ¦ Preusporiadať zoznamy ¦ Endre rekkefølgen på listene
+Réordonner les pages ¦ Preusporiadať stránky ¦ Endre rekkefølgen på sidene
+Réordonner les {what} ¦ Preusporiadať: {what} ¦ Endre rekkefølgen: {what}
+Range avec ↑ ↓, coche ce qui s’affiche, en groupes ou en une seule liste. Puis Enregistrer. ¦ Usporiadaj pomocou ↑ ↓, zaškrtni, čo sa zobrazí, v skupinách alebo v jednom zozname. Potom Uložiť. ¦ Ordne med ↑ ↓, kryss av for det som vises, i grupper eller i én liste. Deretter Lagre.
+Range avec ↑ ↓, en groupes ou en une seule liste. Puis Enregistrer. ¦ Usporiadaj pomocou ↑ ↓, v skupinách alebo v jednom zozname. Potom Uložiť. ¦ Ordne med ↑ ↓, i grupper eller i én liste. Deretter Lagre.
+Garde au moins une liste visible. ¦ Ponechaj aspoň jeden zoznam viditeľný. ¦ La minst én liste være synlig.
+Garde au moins une page visible. ¦ Ponechaj aspoň jednu stránku viditeľnú. ¦ La minst én side være synlig.
+(CC BY 4.0) ; collectivités locales d’Australie : © ¦ (CC BY 4.0); miestne samosprávy Austrálie: © ¦ (CC BY 4.0); Australias lokale forvaltningsområder: ©
+(OGL v3) ; paroisses civiles d’Irlande : © ¦ (OGL v3); civilné farnosti Írska: © ¦ (OGL v3); Irlands sivile sogn: ©
+(William & Mary geoLab), d’après leurs sources (gouvernements, OCHA, Banque mondiale, GRID3…), licences ouvertes indiquées pays par pays dans le fichier de chaque pays (domaine public, CC BY, CC BY IGO, ODbL, CC BY-SA pour le Togo et Taïwan). ¦ (William & Mary geoLab), podľa ich zdrojov (vlády, OCHA, Svetová banka, GRID3…), otvorené licencie uvedené krajinu po krajine v súbore každej krajiny (voľné dielo, CC BY, CC BY IGO, ODbL, CC BY-SA pre Togo a Taiwan). ¦ (William & Mary geoLab), etter deres kilder (myndigheter, OCHA, Verdensbanken, GRID3…), åpne lisenser angitt land for land i filen til hvert land (fritt tilgjengelig, CC BY, CC BY IGO, ODbL, CC BY-SA for Togo og Taiwan).
+(auto = comme l’app) ¦ (auto = ako aplikácia) ¦ (auto = som appen)
+(avec ou sans accents). Ex. : ¦ (s diakritikou aj bez nej). Napr.: ¦ (med eller uten aksenter). F.eks.:
+(domaine public) ; paroisses d’Angleterre et du pays de Galles : © ¦ (voľné dielo); farnosti Anglicka a Walesu: © ¦ (fritt tilgjengelig); sogn i England og Wales: ©
+(familles qu’on ouvre et referme) ¦ (rodiny, ktoré sa otvárajú a zatvárajú) ¦ (familier som åpnes og lukkes)
+(hors des cases de texte) ¦ (mimo textových polí) ¦ (utenfor tekstfelt)
+(jusqu’à 32 px). ¦ (až 32 px). ¦ (opptil 32 px).
+(style « Onglets en haut ») ¦ (štýl „Karty hore“) ¦ (stilen «Faner øverst»)
+(un petit fichier, par e-mail par exemple). ¦ (malý súbor, napríklad e-mailom). ¦ (en liten fil, for eksempel på e-post).
+), parle, et le texte s’écrit au curseur. Dis « virgule », « point », « point d’interrogation », « deux points », « à la ligne » ou « nouveau paragraphe » pour la ponctuation. ¦ ), hovor a text sa píše pri kurzore. Na interpunkciu povedz „virgule“, „point“, „point d’interrogation“, „deux points“, „à la ligne“ alebo „nouveau paragraphe“ (francúzske hlasové príkazy). ¦ ), snakk, så skrives teksten ved markøren. Si «virgule», «point», «point d’interrogation», «deux points», «à la ligne» eller «nouveau paragraphe» for tegnsetting (franske talekommandoer).
+). Il se règle avec la forme de l’en-tête, plus bas sur cette page. ¦ ). Nastavuje sa tvarom záhlavia, nižšie na tejto stránke. ¦ ). Den stilles inn med topptekstens form, lenger ned på denne siden.
+, contient des données OS © Crown copyright (OGL v3) ; paroisses civiles d’Écosse : © ¦ , obsahuje údaje OS © Crown copyright (OGL v3); civilné farnosti Škótska: © ¦ , inneholder OS-data © Crown copyright (OGL v3); Skottlands sivile sogn: ©
+, données sous licence ¦ , údaje pod licenciou ¦ , data under lisens
+, même dans un tableau large avec beaucoup de colonnes. ¦ , aj v širokej tabuľke s mnohými stĺpcami. ¦ , også i en bred tabell med mange kolonner.
+. Aucune fiche n’est supprimée : les personnes restent là, même quand l’onglet est caché. On peut en allumer plusieurs : leurs onglets s’additionnent. ¦ . Žiadna karta sa nevymaže: osoby zostávajú, aj keď je karta skrytá. Môžeš ich zapnúť viac: ich karty sa sčítajú. ¦ . Ingen oppføringer slettes: personene blir der, også når fanen er skjult. Du kan slå på flere: fanene deres legges sammen.
+. Double-clic sur un curseur : valeur de départ. ¦ . Dvojklik na posúvač: východisková hodnota. ¦ . Dobbeltklikk på en glidebryter: standardverdi.
+. Même licence pour les communes d’Amérique du Sud, du Moyen-Orient, d’Asie et d’une partie de l’Afrique. ¦ . Rovnaká licencia pre obce Južnej Ameriky, Blízkeho východu, Ázie a časti Afriky. ¦ . Samme lisens for kommunene i Sør-Amerika, Midtøsten, Asia og deler av Afrika.
+12/03/1790, mars 1790 ou 1790 ¦ 12/03/1790, mars 1790 alebo 1790 ¦ 12/03/1790, mars 1790 eller 1790
+1re heure du jour, au lever du soleil ¦ 1. hodina dňa, pri východe slnka ¦ Dagens 1. time, ved soloppgang
+3e heure, milieu de la matinée (heure de la grand-messe) ¦ 3. hodina, polovica dopoludnia (čas veľkej omše) ¦ 3. time, midt på formiddagen (tiden for høymessen)
+9e heure, milieu de l’après-midi ¦ 9. hodina, polovica popoludnia ¦ 9. time, midt på ettermiddagen
+256 ancêtres de la génération 8 en théorie (Sosa 256 à 511) ; 510 ancêtres en tout jusqu’à cette génération ¦ teoreticky 256 predkov v 8. generácii (Sosa 256 až 511); spolu 510 predkov až po túto generáciu ¦ 256 aner i generasjon 8 i teorien (Sosa 256 til 511); 510 aner i alt opp til denne generasjonen
+4 générations ¦ 4 generácie ¦ 4 generasjoner
+5 générations ¦ 5 generácií ¦ 5 generasjoner
+6 générations ¦ 6 generácií ¦ 6 generasjoner
+6 secondes (de départ) ¦ 6 sekúnd (východiskové) ¦ 6 sekunder (standard)
+4 tailles seulement : 22 px (dans une ligne), 34 px (listes, menu de choix), 48 px (arbre, vignettes), 88 px (fiche). ¦ Len 4 veľkosti: 22 px (v riadku), 34 px (zoznamy, výberová ponuka), 48 px (strom, miniatúry), 88 px (karta). ¦ Bare 4 størrelser: 22 px (i en linje), 34 px (lister, velger), 48 px (tre, miniatyrer), 88 px (oppføring).
+: boutons et barres d’outils au trait, rubriques et contenus en émoji (💍 conjoints, 🎂 anniversaires…). ¦ : tlačidlá a panely nástrojov v linkách, rubriky a obsah v emoji (💍 manželia, 🎂 narodeniny…). ¦ : knapper og verktøylinjer i strekstil, rubrikker og innhold som emoji (💍 ektefeller, 🎂 bursdager…).
+: chaque bouton est une vraie « touche » encadrée, avec son ombre. ¦ : každé tlačidlo je skutočná orámovaná „klávesa“ s tieňom. ¦ : hver knapp er en ekte innrammet «tast» med skygge.
+: coins presque droits, traits fins, un léger grain de papier derrière les pages. Pour le fond crème, choisis le Preset « Archive papier » dans Apparence. ¦ : takmer pravé rohy, tenké linky, jemné zrno papiera za stránkami. Pre krémové pozadie vyber vo Vzhľade predvoľbu „Papierový archív“. ¦ : nesten rette hjørner, tynne streker, en lett papirstruktur bak sidene. For kremfarget bakgrunn velger du forhåndsinnstillingen «Papirarkiv» i Utseende.
+: comme un registre, on voit beaucoup de lignes. ¦ : ako v matrike, vidíš veľa riadkov. ¦ : som i en protokoll, du ser mange linjer.
+: des émojis en couleur, faciles à reconnaître. ¦ : farebné emoji, ľahko rozpoznateľné. ¦ : emoji i farger, lette å kjenne igjen.
+: grand nom très lisible, outils toujours à droite. ¦ : veľké, dobre čitateľné meno, nástroje vždy vpravo. ¦ : stort, svært lesbart navn, verktøyene alltid til høyre.
+: le style « néo-brutal » que tu connais, net et très lisible. ¦ : „neobrutálny“ štýl, ktorý poznáš, ostrý a veľmi čitateľný. ¦ : den «nybrutale» stilen du kjenner, skarp og svært lesbar.
+: les autres restent visibles mais plus légers. ¦ : ostatné zostávajú viditeľné, ale ľahšie. ¦ : de andre forblir synlige, men lettere.
+: les lignes sont hautes, on ne se trompe pas de ligne. ¦ : riadky sú vysoké, nepomýliš si riadok. ¦ : linjene er høye, du tar ikke feil av linjen.
+: l’équilibre actuel entre place et lisibilité. ¦ : súčasná rovnováha medzi miestom a čitateľnosťou. ¦ : den nåværende balansen mellom plass og lesbarhet.
+: nom, prénoms, naissance, décès rangés dans des cases fixes. ¦ : priezvisko, mená, narodenie, úmrtie v pevných poliach. ¦ : etternavn, fornavn, fødsel, død i faste felt.
+: parfait pour les longues listes et les petits écrans. ¦ : ideálne pre dlhé zoznamy a malé obrazovky. ¦ : perfekt for lange lister og små skjermer.
+: rien ne dépasse, seul le contenu compte. Idéal pour imprimer ou faire des captures. ¦ : nič nevyčnieva, záleží len na obsahu. Ideálne na tlač alebo snímky obrazovky. ¦ : ingenting stikker seg ut, bare innholdet teller. Ideelt for utskrift eller skjermbilder.
+: toutes les icônes ont le même trait et prennent la couleur du texte (aussi en mode sombre). ¦ : všetky ikony majú rovnakú linku a preberajú farbu textu (aj v tmavom režime). ¦ : alle ikonene har samme strek og får tekstens farge (også i mørk modus).
+: traits dans les Listes, cartes encadrées dans la colonne Personnes. ¦ : linky v Zoznamoch, orámované karty v stĺpci Osoby. ¦ : streker i Lister, innrammede kort i kolonnen Personer.
+: traits fins et pâles, coins ronds, ombres floues comme sur un téléphone. ¦ : tenké svetlé linky, okrúhle rohy, mäkké tiene ako na telefóne. ¦ : tynne, bleke streker, runde hjørner, myke skygger som på en telefon.
+: une clé USB, ou un dossier iCloud Drive, Dropbox, OneDrive… L’app n’utilise aucun service en ligne et n’a pas besoin de serveur : chaque ordinateur garde sa base et dépose ses changements dans ce dossier ; l’autre les reprend. ¦ : USB kľúč alebo priečinok iCloud Drive, Dropbox, OneDrive… Aplikácia nepoužíva žiadnu online službu a nepotrebuje server: každý počítač má svoju databázu a ukladá zmeny do tohto priečinka; druhý si ich prevezme. ¦ : en minnepinne, eller en mappe i iCloud Drive, Dropbox, OneDrive… Appen bruker ingen nettjeneste og trenger ingen server: hver datamaskin har sin database og legger endringene sine i denne mappen; den andre henter dem.
+: une grande photo (la maison, la famille, le village) et le portrait rond par-dessus, comme un profil. ¦ : veľká fotka (dom, rodina, dedina) a nad ňou okrúhly portrét, ako profil. ¦ : et stort bilde (huset, familien, bygda) og det runde portrettet oppå, som en profil.
+: « Annuler », « Modifier » deviennent des mots en couleur, soulignés au survol. ¦ : „Zrušiť“, „Upraviť“ sa stanú farebnými slovami, podčiarknutými pri prejdení myšou. ¦ : «Avbryt», «Rediger» blir fargede ord, understreket når musen holdes over.
+: « Née le … à …, décédée le … », portrait ovale sépia, tampon Sosa. ¦ : „Narodená … v …, zomrela …“, oválny sépiový portrét, pečiatka Sosa. ¦ : «Født den … i …, død den …», ovalt sepiaportrett, Sosa-stempel.
+; des Pays-Bas : © ¦ ; Holandska: © ¦ ; Nederlands: ©
+; du Québec : © ¦ ; Québecu: © ¦ ; Québecs: ©
+; noms traduits en français. Les autres formes sont dessinées pour l’application. ¦ ; názvy preložené do francúzštiny. Ostatné tvary sú nakreslené pre aplikáciu. ¦ ; navn oversatt til fransk. De andre formene er tegnet for appen.
+Accents et esprits (s’ajoutent à la lettre avant le curseur) ¦ Diakritika a prídychy (pridajú sa k písmenu pred kurzorom) ¦ Aksenter og åndetegn (legges til bokstaven foran markøren)
+Accents é è ê, et ç, œ, æ. ¦ Diakritika é è ê a ç, œ, æ. ¦ Aksenter é è ê, og ç, œ, æ.
+Actes et documents ¦ Záznamy a dokumenty ¦ Dokumenter og papirer
+Affichage des événements ¦ Zobrazenie udalostí ¦ Visning av hendelser
+Afficher ce bouton ¦ Zobraziť toto tlačidlo ¦ Vis denne knappen
+Afficher cette catégorie ¦ Zobraziť túto kategóriu ¦ Vis denne kategorien
+Afficher dans la fiche ¦ Zobraziť na karte ¦ Vis i oppføringen
+Afficher dans le menu ¦ Zobraziť v ponuke ¦ Vis i menyen
+Afficher la liste des raccourcis ¦ Zobraziť zoznam skratiek ¦ Vis listen over snarveier
+Afficher le cadre (défaut) ¦ Zobraziť rámček (predvolené) ¦ Vis rammen (standard)
+Afficher seulement si renseigné ¦ Zobraziť len, keď je vyplnené ¦ Vis bare hvis utfylt
+Affiché : clique pour le cacher ¦ Zobrazené: klikni a skry ho ¦ Vises: klikk for å skjule
+Agit sur les marges intérieures et l’écart entre les blocs. 100 % = comme avant. La « Taille typographique » de l’Apparence reste à part et s’ajoute ; une colonne de gauche réglée « Compacte » (onglet Colonne) garde sa propre taille : la Densité ne la touche pas. ¦ Pôsobí na vnútorné okraje a medzery medzi blokmi. 100 % = ako predtým. „Veľkosť textu“ vo Vzhľade zostáva zvlášť a sčíta sa; ľavý stĺpec nastavený na „Kompaktný“ (karta Stĺpec) si drží vlastnú veľkosť: Hustota naň nesiaha. ¦ Påvirker indre marger og avstanden mellom blokkene. 100 % = som før. «Tekststørrelse» i Utseende er egen og legges til; en venstre kolonne satt til «Kompakt» (fanen Kolonne) beholder sin egen størrelse: Tettheten rører den ikke.
+Agrandit et aère le texte. Les outils en plein écran gardent leur taille pour que leurs réglages restent à leur place. ¦ Zväčší a prevzdušní text. Nástroje na celú obrazovku si držia veľkosť, aby ich nastavenia zostali na mieste. ¦ Gjør teksten større og luftigere. Verktøy i fullskjerm beholder størrelsen sin, så innstillingene blir på plass.
+Aide : Ce que tu fais avec l’app : ses onglets et son premier écran. Aucune fiche n’est supprimée. ¦ Pomocník: Čo v aplikácii robíš: jej karty a prvá obrazovka. Žiadna karta sa nevymaže. ¦ Hjelp: Hva du bruker appen til: fanene og den første skjermen. Ingen oppføringer slettes.
+Aide : Choisis la sorte de daltonisme : l’app corrige ses couleurs pour que tu les distingues mieux. Les petites pastilles montrent comment ces couleurs sont vues. ¦ Pomocník: Vyber druh farbosleposti: aplikácia upraví farby, aby si ich lepšie rozlíšil(a). Malé bodky ukazujú, ako sa tieto farby vidia. ¦ Hjelp: Velg typen fargeblindhet: appen justerer fargene sine så du lettere skiller dem fra hverandre. De små prikkene viser hvordan fargene oppfattes.
+Aide : La forme des petits carrés numérotés des blocs et des initiales des fiches. Ajoute tes formes (bibliothèque des tableaux, polygone dessiné, SVG importé), range la liste du menu « Forme des avatars », cache celles qui ne te servent pas. ¦ Pomocník: Tvar malých číslovaných štvorčekov blokov a iniciál na kartách. Pridaj vlastné tvary (knižnica tabúľ, nakreslený mnohouholník, importované SVG), usporiadaj zoznam v ponuke „Tvar avatarov“, skry tie, ktoré nepoužívaš. ¦ Hjelp: Formen på blokkenes små nummererte firkanter og initialene på oppføringene. Legg til egne former (tavlebiblioteket, tegnet polygon, importert SVG), ordne listen i menyen «Avatarform», skjul dem du ikke bruker.
+(CC BY 4.0) ; de Slovénie : © ¦ (CC BY 4.0); Slovinska: © ¦ (CC BY 4.0); Slovenias: ©
+3 fiches trouvées ¦ Nájdené 3 karty ¦ 3 oppføringer funnet
+Aide des touches ¦ Pomocník ku klávesám ¦ Tastehjelp
+Anniversaires et souvenirs ¦ Narodeniny a spomienky ¦ Bursdager og minner
+Année ¦ Rok ¦ År
+Année de naissance lue par SocFace ¦ Rok narodenia prečítaný SocFace ¦ Fødselsår lest av SocFace
+Aperçu vivant ¦ Živý náhľad ¦ Levende forhåndsvisning
+Appeler quelqu’un ¦ Zavolať niekomu ¦ Ring noen
+Arial, comme d’habitude. ¦ Arial, ako obvykle. ¦ Arial, som vanlig.
+Arrondi des coins ¦ Zaoblenie rohov ¦ Avrunding av hjørner
+Atkinson Hyperlegible : faite pour les personnes qui voient mal (lettres qu’on ne confond pas : I l 1, O 0). Toujours disponible. ¦ Atkinson Hyperlegible: pre ľudí so slabým zrakom (písmená, ktoré si nepomýliš: I l 1, O 0). Vždy k dispozícii. ¦ Atkinson Hyperlegible: laget for svaksynte (bokstaver man ikke forveksler: I l 1, O 0). Alltid tilgjengelig.
+Atkinson Hyperlegible, texte 30 px, très gros boutons ¦ Atkinson Hyperlegible, text 30 px, veľmi veľké tlačidlá ¦ Atkinson Hyperlegible, tekst 30 px, svært store knapper
+Au démarrage, une fois par jour au plus. Seule une demande « quelle est la dernière version ? » part vers GitHub : aucune donnée de ta généalogie, aucun identifiant. Rien n’est installé tout seul. ¦ Pri spustení, najviac raz denne. Na GitHub odchádza len otázka „aká je najnovšia verzia?“: žiadne údaje z tvojho rodokmeňa, žiadny identifikátor. Nič sa neinštaluje samo. ¦ Ved oppstart, høyst én gang om dagen. Bare en forespørsel «hva er den nyeste versjonen?» går til GitHub: ingen data fra slektstreet ditt, ingen identifikator. Ingenting installeres av seg selv.
+Aucun fichier média manquant. ¦ Žiadny chýbajúci mediálny súbor. ¦ Ingen mediefiler mangler.
+Aucune modification pour ce filtre. ¦ Žiadna zmena pre tento filter. ¦ Ingen endringer for dette filteret.
+Aucune ombre ¦ Žiadny tieň ¦ Ingen skygge
+Aucune voix française trouvée ¦ Nenašiel sa žiadny francúzsky hlas ¦ Fant ingen fransk stemme
+Aujourd’hui, pas de portrait dans les cases de l’arbre. ¦ Dnes žiadny portrét v poliach stromu. ¦ I dag ingen portretter i treets ruter.
+Aussi : ⇧ + Entrée dans la recherche rapide. ¦ Aj: ⇧ + Enter v rýchlom hľadaní. ¦ Også: ⇧ + Enter i hurtigsøket.
+Aussi dans Réglages → Accessibilité → 🧓 Mode simple (« Montrer le bouton »). Caché au départ. ¦ Aj v Nastaveniach → Prístupnosť → 🧓 Jednoduchý režim („Zobraziť tlačidlo“). Na začiatku skryté. ¦ Også i Innstillinger → Tilgjengelighet → 🧓 Enkel modus («Vis knappen»). Skjult fra start.
+Aussi dans les réglages de la calculette (« Bouton 🧮 dans la barre du haut »). ¦ Aj v nastaveniach kalkulačky („Tlačidlo 🧮 v hornej lište“). ¦ Også i kalkulatorens innstillinger («Knappen 🧮 i topplinjen»).
+Avec les médias (photos, actes, sons…) ¦ S médiami (fotky, záznamy, zvuky…) ¦ Med medier (bilder, dokumenter, lyder…)
+Avec les pastilles ¦ So štítkami ¦ Med merkene
+Aérée ¦ Vzdušná ¦ Luftig
+Bande d’actions rapides ¦ Pruh rýchlych akcií ¦ Felt med hurtighandlinger
+Baptême loin de la naissance ¦ Krst dlho po narodení ¦ Dåp lenge etter fødselen
+Baptême tardif (avant 1900) ¦ Neskorý krst (pred rokom 1900) ¦ Sen dåp (før 1900)
+Barre de côté ¦ Bočný pruh ¦ Sidelinje
+Bleu et jaune affaiblis. ¦ Oslabená modrá a žltá. ¦ Svekket blått og gult.
+Bouton bleu « ＋ Observation » au-dessus de la grille ¦ Modré tlačidlo „＋ Pozorovanie“ nad mriežkou ¦ Blå knapp «＋ Observasjon» over rutenettet
+Boutons carrés ¦ Štvorcové tlačidlá ¦ Firkantede knapper
+Boutons des pistes : plus grands ¦ Tlačidlá stôp: väčšie ¦ Sporenes knapper: større
+Boutons des pistes : plus petits ¦ Tlačidlá stôp: menšie ¦ Sporenes knapper: mindre
+Boutons des pistes : taille de départ ¦ Tlačidlá stôp: východisková veľkosť ¦ Sporenes knapper: standardstørrelse
+Boutons encadrés ¦ Orámované tlačidlá ¦ Innrammede knapper
+Cache les outils avancés ou rarement utilisés : ADN, comparaison, animaux, écran divisé, nouvelle fenêtre, réglages du tableau de bord, supprimer / verrouiller une fiche, historique, filtres avancés de la carte… ¦ Skryje pokročilé alebo málo používané nástroje: DNA, porovnanie, zvieratá, rozdelená obrazovka, nové okno, nastavenia prehľadu, vymazanie / zamknutie karty, história, pokročilé filtre mapy… ¦ Skjuler avanserte eller sjelden brukte verktøy: DNA, sammenligning, dyr, delt skjerm, nytt vindu, innstillinger for oversikten, slette / låse en oppføring, historikk, avanserte kartfiltre…
+Caché ¦ Skryté ¦ Skjult
+Caché : le mode simple s’ouvre d’ici, ou par le widget du tableau de bord. ¦ Skryté: jednoduchý režim sa otvára odtiaľto alebo widgetom v prehľade. ¦ Skjult: enkel modus åpnes herfra, eller fra widgeten på oversikten.
+Calendrier de cette date ¦ Kalendár tohto dátumu ¦ Kalender for denne datoen
+Calendrier républicain ¦ Republikánsky kalendár ¦ Den republikanske kalenderen
+Calendrier source ¦ Zdrojový kalendár ¦ Kildekalender
+Calendrier utilisé par défaut dans les champs de date ¦ Predvolený kalendár v poliach dátumu ¦ Standardkalender i datofeltene
+Carré arrondi ¦ Zaoblený štvorec ¦ Avrundet firkant
+Carré droit ¦ Rovný štvorec ¦ Rett firkant
+Carré penché (défaut) ¦ Naklonený štvorec (predvolené) ¦ Skrå firkant (standard)
+Carrés numérotés ¦ Číslované štvorčeky ¦ Nummererte firkanter
+Cartes avec repère ¦ Karty so značkou ¦ Kort med markør
+Cartes espacées ¦ Karty s medzerami ¦ Kort med mellomrom
+Cases de l’arbre ¦ Polia stromu ¦ Treets ruter
+Ce n’est pas une erreur ¦ Nie je to chyba ¦ Det er ikke en feil
+Ce que tu as réglé dans « ♿ Toute l’app » (daltonisme, contraste, taille du texte, mouvements, voix) s’applique aussi au mode simple. Pour un réglage différent, choisis « Propre au mode simple ». ¦ Čo si nastavil(a) v „♿ Celá aplikácia“ (farboslepost, kontrast, veľkosť textu, pohyby, hlas), platí aj pre jednoduchý režim. Pre iné nastavenie vyber „Vlastné pre jednoduchý režim“. ¦ Det du har stilt inn i «♿ Hele appen» (fargeblindhet, kontrast, tekststørrelse, bevegelser, stemme), gjelder også i enkel modus. For en annen innstilling velger du «Egen for enkel modus».
+Ce qui semble impossible ou très rare dans tes fiches : souvent une faute de frappe, un homonyme ou de mauvais parents. Rien n’est changé sans toi. ¦ Čo sa v tvojich kartách zdá nemožné alebo veľmi zriedkavé: často preklep, menovec alebo nesprávni rodičia. Nič sa nemení bez teba. ¦ Det som virker umulig eller svært sjeldent i oppføringene dine: ofte en skrivefeil, en navnebror eller feil foreldre. Ingenting endres uten deg.
+Ce qu’on montre ¦ Čo sa zobrazuje ¦ Hva som vises
+Celle de l’app ¦ Tá z aplikácie ¦ Appens
+Celle du thème ¦ Tá z motívu ¦ Temaets
+Cette personne était… (ses profils) ¦ Táto osoba bola… (jej profily) ¦ Denne personen var… (profiler)
+Ceux qui arrivent ¦ Nadchádzajúce ¦ Kommende
+Champs œuvre ¦ Polia diela ¦ Verkfelt
+Changer la couleur ¦ Zmeniť farbu ¦ Endre fargen
+Changer le pictogramme ¦ Zmeniť ikonu ¦ Endre ikonet
+Chaque choix se voit : clique, l’aperçu suit. Pour les outils Graphiques, Carte, Enquêtes, Recherche, Personnes, Listes, Réglages… ¦ Každú voľbu vidno: klikni a náhľad sa zmení. Pre nástroje Grafy, Mapa, Pátrania, Výskum, Osoby, Zoznamy, Nastavenia… ¦ Hvert valg synes: klikk, så følger forhåndsvisningen. For verktøyene Diagrammer, Kart, Undersøkelser, Forskning, Personer, Lister, Innstillinger…
+Chaque fiche est un objet ¦ Každá karta je objekt ¦ Hver oppføring er et objekt
+Chaque gros bouton garde sa couleur partout : on se repère sans lire. ¦ Každé veľké tlačidlo si všade drží svoju farbu: zorientuješ sa aj bez čítania. ¦ Hver stor knapp beholder fargen sin overalt: du finner frem uten å lese.
+Chercher quelqu’un par son nom ¦ Hľadať niekoho podľa mena ¦ Søk etter noen ved navn
+Chercher une commande… ¦ Hľadať príkaz… ¦ Søk etter en kommando…
+Chercher… (nom, contrôle, lieu) ¦ Hľadať… (meno, kontrola, miesto) ¦ Søk… (navn, kontroll, sted)
+Choisir une voix propre au mode simple ¦ Vybrať hlas len pre jednoduchý režim ¦ Velg en stemme bare for enkel modus
+Clair ou sombre ¦ Svetlý alebo tmavý ¦ Lyst eller mørkt
+Clavier et souris ¦ Klávesnica a myš ¦ Tastatur og mus
+Comme le prototype ¦ Ako prototyp ¦ Som prototypen
+Comme le reste ¦ Ako zvyšok ¦ Som resten
+Comme les blocs (réglage A1) ¦ Ako bloky (nastavenie A1) ¦ Som blokkene (innstilling A1)
+Communes de Belgique : IGN-NGI (Institut géographique national belge), licence ouverte, via ¦ Obce Belgicka: IGN-NGI (Belgický národný geografický inštitút), otvorená licencia, cez ¦ Belgias kommuner: IGN-NGI (Belgias nasjonale geografiske institutt), åpen lisens, via
+Communes de Tchéquie : RÚIAN © ¦ Obce Česka: RÚIAN © ¦ Tsjekkias kommuner: RÚIAN ©
+Communes d’Allemagne : VG250 © ¦ Obce Nemecka: VG250 © ¦ Tysklands kommuner: VG250 ©
+Communes d’Autriche : © ¦ Obce Rakúska: © ¦ Østerrikes kommuner: ©
+Communes d’Espagne : © ¦ Obce Španielska: © ¦ Spanias kommuner: ©
+Communes d’Italie : confini amministrativi © ¦ Obce Talianska: confini amministrativi © ¦ Italias kommuner: confini amministrativi ©
+Compact et clair ¦ Kompaktné a prehľadné ¦ Kompakt og oversiktlig
+Comparer les GEDCOM ¦ Porovnať súbory GEDCOM ¦ Sammenlign GEDCOM-filer
+Comtés des États-Unis : ¦ Okresy USA: ¦ USAs counties:
+Contour bien visible autour de l’élément choisi au clavier ¦ Dobre viditeľný obrys okolo prvku vybraného klávesnicou ¦ Tydelig omriss rundt elementet som er valgt med tastaturet
+Contours des communes : IGN, Admin Express, via ¦ Hranice obcí: IGN, Admin Express, cez ¦ Kommunegrenser: IGN, Admin Express, via
+Contraste élevé ¦ Vysoký kontrast ¦ Høy kontrast
+Contrôle ¦ Kontrola ¦ Kontroll
+Convertir une date ¦ Previesť dátum ¦ Konverter en dato
+Correspondance (lettres, cartes) ¦ Korešpondencia (listy, pohľadnice) ¦ Korrespondanse (brev, kort)
+Couleur du bord ¦ Farba okraja ¦ Kantfarge
+Couleur du genre, fond plein (lettres blanches) ¦ Farba pohlavia, plné pozadie (biele písmená) ¦ Kjønnsfarge, helfarget bakgrunn (hvite bokstaver)
+Couleur du genre, fond pâle (lettres de couleur) ¦ Farba pohlavia, svetlé pozadie (farebné písmená) ¦ Kjønnsfarge, blek bakgrunn (fargede bokstaver)
+Couleur principale pâle avec un trait ¦ Svetlá hlavná farba s linkou ¦ Blek hovedfarge med en strek
+Couleurs et daltonisme ¦ Farby a farboslepost ¦ Farger og fargeblindhet
+Couleurs seulement affaiblies (léger) ¦ Farby len oslabené (mierne) ¦ Fargene bare svekket (mild)
+Créer / modifier une branche ¦ Vytvoriť / upraviť vetvu ¦ Opprett / rediger en gren
+Créer / modifier une étiquette ¦ Vytvoriť / upraviť štítok ¦ Opprett / rediger en etikett
+Créer le type ¦ Vytvoriť typ ¦ Opprett typen
+Créer un type ¦ Vytvoriť typ ¦ Opprett en type
+Créer une copie de test ¦ Vytvoriť skúšobnú kópiu ¦ Opprett en testkopi
+Créer une forme ¦ Vytvoriť tvar ¦ Opprett en form
+DENSITÉ ¦ HUSTOTA ¦ TETTHET
+Dans la barre au-dessus ¦ V lište hore ¦ I linjen over
+Dans un navigateur ¦ V prehliadači ¦ I en nettleser
+Demander aussi un code ¦ Požadovať aj kód ¦ Be også om en kode
+Demander « Qui regarde ? » ¦ Opýtať sa „Kto sa pozerá?“ ¦ Spør «Hvem ser på?»
+Densité ¦ Hustota ¦ Tetthet
+Des photos au hasard ¦ Náhodné fotky ¦ Tilfeldige bilder
+Des photos choisies ¦ Vybrané fotky ¦ Valgte bilder
+Dessin au trait ¦ Perokresba ¦ Strektegning
+Deutéranomalie ¦ Deuteranomália ¦ Deuteranomali
+Deutéranopie ¦ Deuteranopia ¦ Deuteranopi
+Deux façons de faire selon l’endroit. ¦ Dva spôsoby podľa miesta. ¦ To måter, avhengig av stedet.
+Diaporama et cadre photo ¦ Prezentácia a fotorámik ¦ Lysbildefremvisning og fotoramme
+Dictée vocale ¦ Hlasové diktovanie ¦ Talediktering
+Dictée vocale dans les champs texte ¦ Hlasové diktovanie v textových poliach ¦ Talediktering i tekstfelt
+Données géographiques ¦ Geografické údaje ¦ Geografiske data
+Dossier des copies ¦ Priečinok kópií ¦ Mappe for kopier
+Dossier partagé ¦ Zdieľaný priečinok ¦ Delt mappe
+Double-clic : 320 px, la valeur de départ. ¦ Dvojklik: 320 px, východisková hodnota. ¦ Dobbeltklikk: 320 px, standardverdien.
+Douces et floues ¦ Mäkké a rozmazané ¦ Myke og uskarpe
+Duplique la base ouverte pour essayer un import ou une fusion sans modifier l’original. Les médias restent partagés : ne les supprime pas depuis la copie si tu veux préserver l’original. ¦ Zduplikuje otvorenú databázu, aby si mohol (mohla) vyskúšať import alebo zlúčenie bez zmeny originálu. Médiá zostávajú zdieľané: nemaž ich z kópie, ak chceš zachovať originál. ¦ Dupliserer den åpne databasen så du kan prøve en import eller sammenslåing uten å endre originalen. Mediene forblir delt: ikke slett dem fra kopien hvis du vil bevare originalen.
+Durée de chaque photo ¦ Trvanie každej fotky ¦ Varighet for hvert bilde
+Durée de l’appui long ¦ Trvanie dlhého stlačenia ¦ Varighet for langt trykk
+Décrire les images ¦ Opisovať obrázky ¦ Beskriv bildene
+Défilement ¦ Posúvanie ¦ Rulling
+Délai après la mort du père ¦ Čas po otcovej smrti ¦ Tid etter farens død
+Effacer le groupe (son contenu va dans le groupe d’à côté) ¦ Vymazať skupinu (jej obsah prejde do susednej skupiny) ¦ Slett gruppen (innholdet går til gruppen ved siden av)
+En bas de la colonne ¦ Dole v stĺpci ¦ Nederst i kolonnen
+En bas de la colonne des badges ¦ Dole v stĺpci odznakov ¦ Nederst i merkekolonnen
+En bas de l’en-tête ¦ Dole v záhlaví ¦ Nederst i toppteksten
+En diaporama ¦ Ako prezentácia ¦ Som lysbildefremvisning
+En français. Pas dans les cases de recherche, les dates, les nombres ni les mots de passe. ¦ Vo francúzštine. Nie v poliach hľadania, dátumoch, číslach ani heslách. ¦ På fransk. Ikke i søkefelt, datoer, tall eller passord.
+En grand, avec sa légende ¦ Veľké, s popisom ¦ Stort, med bildetekst
+En très grand ¦ Veľmi veľké ¦ Svært stort
+En-tête actuel ¦ Súčasné záhlavie ¦ Nåværende topptekst
+En-tête de la fiche ¦ Záhlavie karty ¦ Oppføringens topptekst
+En-têtes ¦ Záhlavia ¦ Topptekster
+Enlever l’élément choisi ¦ Odobrať vybraný prvok ¦ Fjern det valgte elementet
+Enregistrer la branche ¦ Uložiť vetvu ¦ Lagre grenen
+Enregistrer le projet sous un autre nom… ¦ Uložiť projekt pod iným názvom… ¦ Lagre prosjektet under et annet navn…
+Ensembles prêts ¦ Hotové sady ¦ Ferdige sett
+Entre une date complète pour convertir. ¦ Zadaj úplný dátum na prevod. ¦ Skriv inn en fullstendig dato for å konvertere.
+Espace dans les blocs ¦ Medzery v blokoch ¦ Plass i blokkene
+Espace entre les boutons ¦ Medzera medzi tlačidlami ¦ Avstand mellom knappene
+Espace entre les cadres ¦ Medzera medzi dlaždicami ¦ Avstand mellom rutene
+Espace entre les lettres ¦ Medzery medzi písmenami ¦ Avstand mellom bokstavene
+Espace entre les mots ¦ Medzery medzi slovami ¦ Avstand mellom ordene
+Essaie ici ¦ Vyskúšaj tu ¦ Prøv her
+FICHES ANIMAUX ¦ KARTY ZVIERAT ¦ DYREOPPFØRINGER
+FICHES PERSONNES ET ANIMAUX ¦ KARTY OSÔB A ZVIERAT ¦ OPPFØRINGER FOR PERSONER OG DYR
+Fiche d’une personne ¦ Karta osoby ¦ En persons oppføring
+Fiche · 88 px ¦ Karta · 88 px ¦ Oppføring · 88 px
+Fiches personnes ¦ Karty osôb ¦ Personoppføringer
+Fichiers médias ¦ Mediálne súbory ¦ Mediefiler
+Fond crème, police de livre, doux pour les yeux ¦ Krémové pozadie, knižné písmo, šetrné k očiam ¦ Kremfarget bakgrunn, bokskrift, skånsomt for øynene
+Fond pâle (comme avant) ¦ Svetlé pozadie (ako predtým) ¦ Blek bakgrunn (som før)
+Force de la correction ¦ Sila korekcie ¦ Korreksjonens styrke
+Forme de l’en-tête ¦ Tvar záhlavia ¦ Topptekstens form
+Forme des boutons ¦ Tvar tlačidiel ¦ Knappenes form
+Forme des listes ¦ Tvar zoznamov ¦ Listenes form
+Français ¦ Francúzština ¦ Fransk
+Fratrie étalée ¦ Súrodenci s veľkými odstupmi ¦ Spredte søsken
+GEDCOM de référence ¦ Referenčný GEDCOM ¦ Referanse-GEDCOM
+Garder les dernières ¦ Ponechať posledné ¦ Behold de siste
+Gouvernement du Québec ¦ Vláda Québecu ¦ Québecs regjering
+Gravité ¦ Závažnosť ¦ Alvorlighetsgrad
+Grosse flèche de souris ¦ Veľký kurzor myši ¦ Stor musepeker
+Grégorien ¦ Gregoriánsky ¦ Gregoriansk
+Hauteur des boutons ¦ Výška tlačidiel ¦ Knappenes høyde
+Hauteur des cadres ¦ Výška dlaždíc ¦ Rutenes høyde
+Hauteur des lignes ¦ Výška riadkov ¦ Linjehøyde
+Hauteur du bandeau ¦ Výška pruhu ¦ Bannerets høyde
+ICÔNES ¦ IKONY ¦ IKONER
+Ici : choisis le dossier. L’app y pose une copie de départ ( ¦ Tu: vyber priečinok. Aplikácia doň uloží východiskovú kópiu ( ¦ Her: velg mappen. Appen legger en startkopi der (
+Icône + nom ¦ Ikona + názov ¦ Ikon + navn
+Icône au-dessus ¦ Ikona hore ¦ Ikon over
+Icônes ¦ Ikony ¦ Ikoner
+Ignorée dans une case de texte ; réglable dans Raccourcis clavier. ¦ V textovom poli sa ignoruje; nastaviteľné v Klávesových skratkách. ¦ Ignoreres i et tekstfelt; kan stilles inn i Hurtigtaster.
+Ils sont gardés avec ta généalogie : chaque tablette ou ordinateur part d’ici. ¦ Ukladajú sa s tvojím rodokmeňom: každý tablet alebo počítač vychádza odtiaľto. ¦ De lagres sammen med slektstreet ditt: hvert nettbrett eller hver datamaskin starter herfra.
+Intégrité SQLite : ¦ Integrita SQLite: ¦ SQLite-integritet:
+Jamais testé ¦ Nikdy netestované ¦ Aldri testet
+Je ne suis pas dans l’arbre ¦ Nie som v strome ¦ Jeg er ikke i treet
+La forme ¦ Tvar ¦ Formen
+La maison ¦ Dom ¦ Huset
+La personne de départ ¦ Východisková osoba ¦ Startpersonen
+La photo de chaque case : plus grande, on se reconnaît plus vite. ¦ Fotka v každom poli: väčšia, rýchlejšie sa spoznáš. ¦ Bildet i hver rute: større, så man kjenner seg igjen raskere.
+Largeur de la colonne ¦ Šírka stĺpca ¦ Kolonnens bredde
+Le bouton principal ressort ¦ Hlavné tlačidlo vynikne ¦ Hovedknappen skiller seg ut
+Le cadre du haut ¦ Horný rámček ¦ Den øverste rammen
+Le carré de la fiche, partout ¦ Štvorec karty, všade ¦ Oppføringens firkant, overalt
+Le dessin de la colonne ¦ Vzhľad stĺpca ¦ Kolonnens utseende
+Le gris peut se confondre avec une ligne choisie si l’écran est pâle. ¦ Sivá sa môže pomýliť s vybraným riadkom, ak je obrazovka svetlá. ¦ Det grå kan forveksles med en valgt linje hvis skjermen er blek.
+Le meilleur des deux ¦ To najlepšie z oboch ¦ Det beste fra begge
+Le mode simple ¦ Jednoduchý režim ¦ Enkel modus
+Le nom est moins grand ; un style plus « administratif ». ¦ Meno je menšie; „úradnejší“ štýl. ¦ Navnet er mindre; en mer «administrativ» stil.
+Le plus discret ¦ Najnenápadnejší ¦ Den mest diskré
+Le plus épuré ¦ Najčistejší ¦ Den mest enkle
+Le portrait ¦ Portrét ¦ Portrettet
+Le rond ou carré qui montre une personne : ses couleurs, sa photo, ses initiales. ¦ Kruh alebo štvorec, ktorý zobrazuje osobu: jeho farby, fotka, iniciály. ¦ Sirkelen eller firkanten som viser en person: farger, bilde, initialer.
+Le rouge est peu visible (paraît sombre, se confond avec le vert). ¦ Červená je málo viditeľná (vyzerá tmavo, splýva so zelenou). ¦ Rødt er vanskelig å se (ser mørkt ut, forveksles med grønt).
+Le rouge prévient avant de cliquer : on ne supprime pas une fiche par erreur. ¦ Červená varuje pred kliknutím: kartu omylom nevymažeš. ¦ Rødt advarer før du klikker: du sletter ikke en oppføring ved en feil.
+Le site propose seulement des candidats. La fusion déplace les données vers la fiche gardée puis supprime l’autre fiche. ¦ Web navrhuje len kandidátov. Zlúčenie presunie údaje do ponechanej karty a potom vymaže druhú kartu. ¦ Nettstedet foreslår bare kandidater. Sammenslåingen flytter dataene til oppføringen som beholdes, og sletter deretter den andre.
+Le sépia est plus doux pour les yeux fatigués ; le sombre n’éblouit pas le soir. ¦ Sépia je šetrnejšia k unaveným očiam; tmavý režim večer neoslňuje. ¦ Sepia er mildere for slitne øyne; mørkt blender ikke om kvelden.
+Le texte des boutons principaux ¦ Text hlavných tlačidiel ¦ Teksten på hovedknappene
+Lecteur d’écran ¦ Čítačka obrazovky ¦ Skjermleser
+Les anniversaires ¦ Narodeniny ¦ Bursdagene
+Les blocs se détachent un peu moins du fond. ¦ Bloky menej vystupujú z pozadia. ¦ Blokkene skiller seg litt mindre ut fra bakgrunnen.
+Les couleurs de l’app, sans changement. ¦ Farby aplikácie, bez zmeny. ¦ Appens farger, uendret.
+Les dates seules (comme avant) ¦ Len dátumy (ako predtým) ¦ Bare datoer (som før)
+Les deux ¦ Oboje ¦ Begge
+Les fiches marquées « confidentielles » ne sont jamais montrées. ¦ Karty označené ako „dôverné“ sa nikdy nezobrazujú. ¦ Oppføringer merket «fortrolig» vises aldri.
+Les gros boutons ¦ Veľké tlačidlá ¦ De store knappene
+Les modifications effectuées depuis ce site sont enregistrées ici. ¦ Zmeny vykonané z tohto webu sa zaznamenávajú sem. ¦ Endringer gjort fra dette nettstedet registreres her.
+Les personnes ¦ Osoby ¦ Personene
+Les photos ¦ Fotky ¦ Bildene
+Les réglages du prototype que tu as aimé ¦ Nastavenia prototypu, ktorý sa ti páčil ¦ Innstillingene fra prototypen du likte
+Lettres d’origine ¦ Pôvodné písmená ¦ Originale bokstaver
+Lien « 🧩 Cette personne était… » ¦ Odkaz „🧩 Táto osoba bola…“ ¦ Lenken «🧩 Denne personen var…»
+Liens toujours soulignés ¦ Odkazy vždy podčiarknuté ¦ Lenker alltid understreket
+Lier au mode Artiste : masqué pour les personnes non artistes ¦ Prepojiť s režimom Umelec: skryté pre osoby, ktoré nie sú umelci ¦ Koble til kunstnermodus: skjult for personer som ikke er kunstnere
+Lieux et souvenirs ¦ Miesta a spomienky ¦ Steder og minner
+Lire les légendes des photos dans le diaporama ¦ Čítať popisy fotiek v prezentácii ¦ Les opp bildetekstene i lysbildefremvisningen
+Lire l’histoire dès qu’on ouvre une fiche ¦ Prečítať príbeh hneď pri otvorení karty ¦ Les opp historien så snart en oppføring åpnes
+Liste aérée ¦ Vzdušný zoznam ¦ Luftig liste
+Liste continue ¦ Súvislý zoznam ¦ Sammenhengende liste
+Liste · 34 px ¦ Zoznam · 34 px ¦ Liste · 34 px
+Listes et arbre ¦ Zoznamy a strom ¦ Lister og tre
+Longévité 🔴 ¦ Dlhovekosť 🔴 ¦ Levealder 🔴
+Longévité 🟠 ¦ Dlhovekosť 🟠 ¦ Levealder 🟠
+L’ambiance des archives ¦ Atmosféra archívu ¦ Arkivstemningen
+L’app dit alors les noms, sans « ta mère » ni « ton petit-fils ». ¦ Aplikácia potom hovorí mená, bez „tvoja mama“ alebo „tvoj vnuk“. ¦ Appen sier da navnene, uten «moren din» eller «barnebarnet ditt».
+L’arbre ¦ Strom ¦ Treet
+L’heure et la date ¦ Čas a dátum ¦ Tid og dato
+L’ombre fait « touche qu’on enfonce ». Elle suit le style général (franche, douce ou aucune). ¦ Tieň vyzerá ako „stlačená klávesa“. Riadi sa všeobecným štýlom (ostrý, mäkký alebo žiadny). ¦ Skyggen ser ut som «en tast man trykker ned». Den følger den generelle stilen (skarp, myk eller ingen).
+Masquer tout le cadre ¦ Skryť celý rámček ¦ Skjul hele rammen
+Mettre les espacements conseillés pour la dyslexie ¦ Použiť medzery odporúčané pre dyslexiu ¦ Bruk avstandene som anbefales ved dysleksi
+Mode consultation (la famille regarde sans rien modifier) ¦ Režim prehliadania (rodina sa pozerá bez akýchkoľvek zmien) ¦ Visningsmodus (familien ser uten å endre noe)
+Modifier ce cadre ¦ Upraviť túto dlaždicu ¦ Rediger denne ruten
+Moins de boutons, moins d’hésitation : garde seulement ce que la personne aime regarder. Un cadre ajouté peut ouvrir directement la fiche d’une personne, ses photos ou un petit mot. ¦ Menej tlačidiel, menej váhania: nechaj len to, na čo sa osoba rada pozerá. Pridaná dlaždica môže priamo otvoriť kartu osoby, jej fotky alebo krátky odkaz. ¦ Færre knapper, mindre nøling: behold bare det personen liker å se på. En ekstra rute kan åpne en persons oppføring, bildene eller en liten hilsen direkte.
+Moins de choses visibles d’un coup ; plus de défilement. ¦ Menej vecí naraz; viac posúvania. ¦ Færre ting synlig samtidig; mer rulling.
+Moins de lignes visibles ; plus de défilement. ¦ Menej viditeľných riadkov; viac posúvania. ¦ Færre synlige linjer; mer rulling.
+Moins de place pour les boutons ; plus décoratif que pratique. ¦ Menej miesta pre tlačidlá; skôr ozdobné ako praktické. ¦ Mindre plass til knapper; mer dekorativt enn praktisk.
+Montre l’écran comme le voit une personne daltonienne, pour vérifier qu’un document reste lisible avant de l’envoyer ou de l’imprimer. Rien n’est modifié. ¦ Ukáže obrazovku tak, ako ju vidí farboslepý človek, aby si overil(a), že dokument zostane čitateľný pred odoslaním alebo tlačou. Nič sa nemení. ¦ Viser skjermen slik en fargeblind person ser den, så du kan sjekke at et dokument er lesbart før du sender eller skriver det ut. Ingenting endres.
+Montrer la photo de la fiche quand elle existe ¦ Zobraziť fotku karty, ak existuje ¦ Vis bildet til oppføringen når det finnes
+Montrer les boutons « 🔊 Écouter » ¦ Zobraziť tlačidlá „🔊 Vypočuť“ ¦ Vis knappene «🔊 Lytt»
+Médias et transcriptions ¦ Médiá a prepisy ¦ Medier og transkripsjoner
+Ne range jamais le fichier de la base lui-même dans iCloud ou Dropbox pour l’ouvrir des deux côtés : l’app le refuse (verrou), car il pourrait s’abîmer. ¦ Nikdy neukladaj samotný súbor databázy do iCloudu alebo Dropboxu, aby si ho otváral(a) na oboch stranách: aplikácia to odmietne (zámok), pretože by sa mohol poškodiť. ¦ Legg aldri selve databasefilen i iCloud eller Dropbox for å åpne den begge steder: appen avviser det (lås), fordi den kan bli skadet.
+Net et régulier ¦ Čisté a pravidelné ¦ Rent og jevnt
+Norvégien ¦ Nórčina ¦ Norsk
+Nouveau GEDCOM ¦ Nový GEDCOM ¦ Ny GEDCOM
+Nouvelle étiquette ¦ Nový štítok ¦ Ny etikett
+Numéros ¦ Čísla ¦ Numre
+Numéros qui se suivent (01, 02, 03…), les mêmes onglets partout (icône + nom), « Liste | Fiches » dans la barre au-dessus de la liste ¦ Čísla za sebou (01, 02, 03…), všade rovnaké karty (ikona + názov), „Zoznam | Karty“ v lište nad zoznamom ¦ Fortløpende numre (01, 02, 03…), de samme fanene overalt (ikon + navn), «Liste | Kort» i linjen over listen
+N’importe quel autre lieu peut être saisi librement. ¦ Akékoľvek iné miesto sa dá zadať voľne. ¦ Et hvilket som helst annet sted kan skrives inn fritt.
+On suit la ligne sans se tromper ¦ Riadok sleduješ bez chyby ¦ Du følger linjen uten å ta feil
+Onglets du haut ¦ Horné karty ¦ Faner øverst
+Ordre des pages des Réglages ¦ Poradie stránok Nastavení ¦ Rekkefølgen på sidene i Innstillinger
+Ordre et visibilité des boutons ¦ Poradie a viditeľnosť tlačidiel ¦ Knappenes rekkefølge og synlighet
+Ordre et visibilité des éléments de l’en-tête ¦ Poradie a viditeľnosť prvkov záhlavia ¦ Rekkefølge og synlighet for elementene i toppteksten
+Par défaut ¦ Predvolené ¦ Standard
+Par ligne ¦ Na riadok ¦ Per linje
+Pareil que l’app ¦ Rovnako ako aplikácia ¦ Samme som appen
+Parle au lieu de taper : un petit 🎤 apparaît dans le champ texte où tu écris. Clique dessus (ou ¦ Hovor namiesto písania: v textovom poli, kde píšeš, sa objaví malý 🎤. Klikni naň (alebo ¦ Snakk i stedet for å skrive: en liten 🎤 vises i tekstfeltet der du skriver. Klikk på den (eller
+Pas de numéros ¦ Bez čísel ¦ Ingen numre
+Pas vérifiée ¦ Neoverené ¦ Ikke kontrollert
+Pastille sous le nom ¦ Štítok pod menom ¦ Merke under navnet
+Persan (hégirien solaire) ¦ Perzský (slnečná hidžra) ¦ Persisk (solar hijri)
+Personne qui regarde ¦ Kto sa pozerá ¦ Person som ser på
+Personnes identifiées ¦ Identifikované osoby ¦ Identifiserte personer
+Personnes vivantes ¦ Žijúce osoby ¦ Levende personer
+Petit écran ¦ Malá obrazovka ¦ Liten skjerm
+Peut se confondre avec un lien ; demande un peu d’habitude. ¦ Môže sa pomýliť s odkazom; chce to trochu zvyku. ¦ Kan forveksles med en lenke; krever litt tilvenning.
+Photo de la personne ¦ Fotka osoby ¦ Personens bilde
+Photo des cases de l’arbre ¦ Fotka v poliach stromu ¦ Bilde i treets ruter
+Photos retirées ¦ Odobraté fotky ¦ Fjernede bilder
+Pictogrammes des tableaux ¦ Piktogramy tabúľ ¦ Tavlenes piktogrammer
+Place de ＋ Nouvelle observation ¦ Umiestnenie ＋ Nové pozorovanie ¦ Plassering av ＋ Ny observasjon
+Plus calme pour les yeux ¦ Pokojnejšie pre oči ¦ Roligere for øynene
+Plus discret que « Comme avant » : les blocs se détachent un peu moins. ¦ Nenápadnejšie ako „Ako predtým“: bloky vystupujú o niečo menej. ¦ Mer diskré enn «Som før»: blokkene skiller seg litt mindre ut.
+Plus d’actions (menu ⋯) ¦ Ďalšie akcie (ponuka ⋯) ¦ Flere handlinger (menyen ⋯)
+Plus d’espace : on touche moins souvent le bouton d’à côté. ¦ Viac miesta: menej často trafíš vedľajšie tlačidlo. ¦ Mer plass: du treffer sjeldnere knappen ved siden av.
+Plus grandes, elles se voient de loin ; plus petites, les barres d’outils prennent moins de place. ¦ Väčšie sú vidieť zďaleka; menšie panely nástrojov zaberajú menej miesta. ¦ Større synes de på avstand; mindre tar verktøylinjene mindre plass.
+Plus haut, la photo se voit mieux ; plus bas, la fiche commence plus tôt. Seulement pour le bandeau photo. ¦ Vyššie: fotka je lepšie vidieť; nižšie: karta začína skôr. Len pre fotopruh. ¦ Høyere synes bildet bedre; lavere begynner oppføringen tidligere. Bare for bildebanneret.
+Police des cadres ¦ Písmo dlaždíc ¦ Rutenes skrift
+Portée ¦ Rozsah ¦ Omfang
+Pour la dyslexie : choisis celle qui te va ¦ Pre dyslexiu: vyber, čo ti vyhovuje ¦ For dysleksi: velg den som passer deg
+Pour quitter ¦ Na opustenie ¦ For å gå ut
+Pour tout le monde ¦ Pre všetkých ¦ For alle
+Pratique pour apprendre l’app : plus besoin de passer la souris pour savoir ce que fait chaque bouton. Prend un peu plus de place. ¦ Praktické na učenie aplikácie: nemusíš prechádzať myšou, aby si vedel(a), čo ktoré tlačidlo robí. Zaberie trochu viac miesta. ¦ Praktisk for å lære appen: du trenger ikke holde musen over for å vite hva hver knapp gjør. Tar litt mer plass.
+Prend de la hauteur ; sans photo, le bandeau prend la couleur principale (Apparence). ¦ Zaberá výšku; bez fotky má pruh hlavnú farbu (Vzhľad). ¦ Tar plass i høyden; uten bilde får banneret hovedfargen (Utseende).
+Proposer dans le menu ¦ Ponúkať v ponuke ¦ Tilby i menyen
+Prénom + nom (JM) ¦ Meno + priezvisko (JM) ¦ Fornavn + etternavn (JM)
+Prénom seulement ¦ Len meno ¦ Bare fornavn
+Présentation (Keynote) ¦ Prezentácia (Keynote) ¦ Presentasjon (Keynote)
+Quand il y a beaucoup de boutons, on ne voit plus lequel est important. ¦ Keď je tlačidiel veľa, nevidno, ktoré je dôležité. ¦ Når det er mange knapper, ser man ikke lenger hvilken som er viktig.
+Quand personne ne touche, lancer le diaporama ¦ Keď sa nikto nedotýka, spustiť prezentáciu ¦ Når ingen rører skjermen, start lysbildefremvisningen
+Quand plusieurs personnes se servent de la même tablette. ¦ Keď rovnaký tablet používa viac ľudí. ¦ Når flere personer bruker samme nettbrett.
+Quelqu’un d’autre de la famille ¦ Niekto iný z rodiny ¦ Noen andre i familien
+Qui est-ce ? ¦ Kto je to? ¦ Hvem er det?
+Qui regarde ¦ Kto sa pozerá ¦ Hvem ser på
+Qui regarde ? ¦ Kto sa pozerá? ¦ Hvem ser på?
+Qui regarde l’arbre ? ¦ Kto sa pozerá na strom? ¦ Hvem ser på treet?
+Qui se suivent ¦ Za sebou ¦ Fortløpende
+Quitter le mode simple ¦ Opustiť jednoduchý režim ¦ Gå ut av enkel modus
+Rattaché à ¦ Patrí k ¦ Knyttet til
+Recherche et enquêtes ¦ Výskum a pátrania ¦ Forskning og undersøkelser
+Reculer le morceau → ¦ Posunúť úsek späť → ¦ Flytt stykket bakover →
+Remettre un réglage exporté (fichier .json) ¦ Obnoviť exportované nastavenie (súbor .json) ¦ Gjenopprett en eksportert innstilling (.json-fil)
+Ressemblance des doublons ¦ Podobnosť duplicít ¦ Likhet mellom duplikater
+Rien ne bouge ¦ Nič sa nehýbe ¦ Ingenting beveger seg
+Récit d’une vie (diaporama tout fait) ¦ Príbeh života (hotová prezentácia) ¦ Livshistorie (ferdig lysbildefremvisning)
+Réduire les mouvements ¦ Obmedziť pohyby ¦ Reduser bevegelse
+Réglages de base ¦ Základné nastavenia ¦ Grunnleggende innstillinger
+Réglages et export ¦ Nastavenia a export ¦ Innstillinger og eksport
+Républicain ¦ Republikánsky ¦ Republikansk
+Sans couleur, il faut parfois une seconde de plus pour les reconnaître. ¦ Bez farby treba niekedy sekundu navyše, aby si ich spoznal(a). ¦ Uten farge tar det noen ganger et sekund ekstra å kjenne dem igjen.
+Se lit comme un acte ¦ Číta sa ako matričný záznam ¦ Leses som en kirkebokinnføring
+Ses photos, ceux qui y sont nés ¦ Jeho fotky, tí, ktorí sa tam narodili ¦ Bildene derfra, de som ble født der
+Signatures identifiées ¦ Identifikované podpisy ¦ Identifiserte underskrifter
+Son rapide ¦ Rýchly zvuk ¦ Rask lyd
+Sortie et démarrage ¦ Odchod a spustenie ¦ Avslutning og oppstart
+Sous la souris ¦ Pod myšou ¦ Under musen
+Sous le nom ¦ Pod menom ¦ Under navnet
+Sous À vérifier, Hors généalogie, Artiste. ¦ Pod Na overenie, Mimo rodokmeňa, Umelec. ¦ Under Må sjekkes, Utenfor slektstreet, Kunstner.
+Sous-titres toujours affichés ¦ Titulky vždy zobrazené ¦ Undertekster alltid vist
+Studio son ¦ Zvukové štúdio ¦ Lydstudio
+Style des entrées ¦ Štýl položiek ¦ Punktenes stil
+Style des fiches ¦ Štýl kariet ¦ Stil for oppføringer
+Style « acte ancien » ¦ Štýl „starý matričný záznam“ ¦ Stilen «gammel kirkebokinnføring»
+Style « carte d’identité » ¦ Štýl „občiansky preukaz“ ¦ Stilen «ID-kort»
+Suit l’accessibilité de l’app ¦ Riadi sa prístupnosťou aplikácie ¦ Følger appens tilgjengelighet
+Sur 1 colonne ¦ V 1 stĺpci ¦ I 1 kolonne
+Sur 2 colonnes ¦ V 2 stĺpcoch ¦ I 2 kolonner
+Sur 2 lignes (défaut) ¦ Na 2 riadkoch (predvolené) ¦ På 2 linjer (standard)
+Sur cet appareil ¦ Na tomto zariadení ¦ På denne enheten
+Sur l’autre ordinateur : ouvre ¦ Na druhom počítači: otvor ¦ På den andre datamaskinen: åpne
+Sur un grand écran, l’œil peut sauter de ligne. ¦ Na veľkej obrazovke môže oko preskočiť riadok. ¦ På en stor skjerm kan øyet hoppe over en linje.
+Sur un petit portable, il faut souvent faire défiler. ¦ Na malom notebooku treba často posúvať. ¦ På en liten bærbar må man ofte rulle.
+Sur un téléphone, la barre du haut est repliée : ces boutons n’y sont pas montrés. ¦ Na telefóne je horná lišta zbalená: tieto tlačidlá sa tam nezobrazujú. ¦ På en telefon er topplinjen slått sammen: disse knappene vises ikke der.
+Suédois ¦ Švédčina ¦ Svensk
+Sépia doux ¦ Jemná sépia ¦ Myk sepia
+Ta version ¦ Tvoja verzia ¦ Din versjon
+Taille des entrées ¦ Veľkosť položiek ¦ Punktenes størrelse
+Taille des icônes ¦ Veľkosť ikon ¦ Ikonstørrelse
+Taille des initiales ¦ Veľkosť iniciál ¦ Initialenes størrelse
+Taille du texte ¦ Veľkosť textu ¦ Tekststørrelse
+Taille du titre des cadres ¦ Veľkosť nadpisu dlaždíc ¦ Størrelse på rutenes tittel
+Tchèque ¦ Čeština ¦ Tsjekkisk
+Tes réglages d’accessibilité valent aussi ici ¦ Tvoje nastavenia prístupnosti platia aj tu ¦ Tilgjengelighetsinnstillingene dine gjelder også her
+Tester cette sauvegarde ¦ Otestovať túto zálohu ¦ Test denne sikkerhetskopien
+Texte et traits ¦ Text a linky ¦ Tekst og streker
+Thème et couleurs → Taille typographique ¦ Motív a farby → Veľkosť textu ¦ Tema og farger → Tekststørrelse
+Ton prénom ¦ Tvoje meno ¦ Fornavnet ditt
+Touche O pour une nouvelle observation ¦ Klávesa O pre nové pozorovanie ¦ Tasten O for en ny observasjon
+Touche de l’outil ¦ Klávesa nástroja ¦ Verktøyets tast
+Touche ta photo. L’app dira ensuite « ta mère », « ton petit-fils »… ¦ Dotkni sa svojej fotky. Aplikácia potom bude hovoriť „tvoja mama“, „tvoj vnuk“… ¦ Trykk på bildet ditt. Appen sier deretter «moren din», «barnebarnet ditt»…
+Touche un gros bouton pour commencer. ¦ Dotkni sa veľkého tlačidla a začni. ¦ Trykk på en stor knapp for å begynne.
+Touches déjà prévues dans cet outil ¦ Klávesy už priradené v tomto nástroji ¦ Taster som allerede brukes i dette verktøyet
+Toujours proposée (la forme de départ) ¦ Vždy ponúkaný (východiskový tvar) ¦ Alltid tilbudt (standardformen)
+Tous, dans l’ordre d’origine ¦ Všetky, v pôvodnom poradí ¦ Alle, i den opprinnelige rekkefølgen
+Tout désélectionner ¦ Zrušiť výber všetkého ¦ Fjern alle valg
+Tout d’un coup d’œil ¦ Všetko na prvý pohľad ¦ Alt med ett blikk
+Tout le monde ¦ Všetci ¦ Alle
+Tout seul ¦ Automaticky ¦ Automatisk
+Tout sélectionner ¦ Vybrať všetko ¦ Velg alle
+Toute l’app ¦ Celá aplikácia ¦ Hele appen
+Toutes les ¦ Každých ¦ Hver
+Toutes les … heures ¦ Každých … hodín ¦ Hver … time
+Traits entre les lignes ¦ Linky medzi riadkami ¦ Streker mellom linjene
+Trois par ligne ¦ Tri na riadok ¦ Tre per linje
+Très grande (56 px) ¦ Veľmi veľká (56 px) ¦ Svært stor (56 px)
+Très lisible ¦ Veľmi čitateľné ¦ Svært lesbart
+Très petite (30 px) ¦ Veľmi malá (30 px) ¦ Svært liten (30 px)
+Un album ¦ Album ¦ Et album
+Un appui long ne se fait pas par hasard : on ne sort pas par erreur. ¦ Dlhé stlačenie sa nestane náhodou: neodídeš omylom. ¦ Et langt trykk skjer ikke tilfeldig: man går ikke ut ved en feil.
+Un bord noir va avec les blocs de l’app (tous ont un trait noir de 2 px) ; sans bord, c’est plus léger. Sur les plus petits portraits, le bord s’affine tout seul. ¦ Čierny okraj ladí s blokmi aplikácie (všetky majú čiernu linku 2 px); bez okraja je to ľahšie. Pri najmenších portrétoch sa okraj sám zúži. ¦ En svart kant passer til appens blokker (alle har en svart strek på 2 px); uten kant blir det lettere. På de minste portrettene blir kanten tynnere av seg selv.
+Un bouton carré 🧩, dans la colonne des boutons ¦ Štvorcové tlačidlo 🧩 v stĺpci tlačidiel ¦ En firkantet knapp 🧩 i knappekolonnen
+Un bouton qui ne répond pas, un écran bizarre, un message d’erreur ? Décris-le : un rapport technique (sans aucune donnée de ta généalogie) est préparé, tu le relis, puis tu l’envoies par GitHub ou par e-mail. ¦ Tlačidlo, ktoré nereaguje, divná obrazovka, chybová správa? Opíš to: pripraví sa technická správa (bez akýchkoľvek údajov z tvojho rodokmeňa), prečítaš si ju a potom ju pošleš cez GitHub alebo e-mailom. ¦ En knapp som ikke reagerer, en rar skjerm, en feilmelding? Beskriv det: en teknisk rapport (uten noen data fra slektstreet ditt) blir laget, du leser den gjennom og sender den via GitHub eller e-post.
+Un doigt qui tremble touche facilement un bouton de 72 px ou plus (64 px au moins). ¦ Trasúci sa prst ľahko trafí tlačidlo 72 px alebo väčšie (aspoň 64 px). ¦ En skjelvende finger treffer lett en knapp på 72 px eller mer (minst 64 px).
+Un film de famille ¦ Rodinný film ¦ En familiefilm
+Un lieu de famille ¦ Rodinné miesto ¦ Et familiested
+Un mot de la famille ¦ Odkaz od rodiny ¦ En hilsen fra familien
+Un petit jeu avec les portraits ¦ Malá hra s portrétmi ¦ Et lite spill med portrettene
+Un petit portrait au début de chaque ligne ¦ Malý portrét na začiatku každého riadku ¦ Et lite portrett i starten av hver linje
+Un peu grande (46 px) ¦ Trochu veľká (46 px) ¦ Litt stor (46 px)
+Un peu moins « cliquable » au premier regard. ¦ Na prvý pohľad o niečo menej „klikateľné“. ¦ Litt mindre «klikkbart» ved første øyekast.
+Un peu petite (38 px) ¦ Trochu malá (38 px) ¦ Litt liten (38 px)
+Un peu « bureau » : moins de caractère que les autres. ¦ Trochu „kancelárske“: menej osobité ako ostatné. ¦ Litt «kontoraktig»: mindre særpreg enn de andre.
+Un son, une chanson ¦ Zvuk, pieseň ¦ En lyd, en sang
+Un trait épais ressemble aux traits noirs de l’app ; un trait fin fait plus élégant. Seulement pour les icônes au trait. ¦ Hrubá linka pripomína čierne linky aplikácie; tenká pôsobí elegantnejšie. Len pre ikony v linkách. ¦ En tykk strek ligner appens svarte streker; en tynn strek er mer elegant. Bare for strekikoner.
+Une copie de ta généalogie, faite toute seule, vérifiée, rangée dans le dossier de ton choix. ¦ Kópia tvojho rodokmeňa, vytvorená automaticky, overená, uložená v priečinku podľa tvojej voľby. ¦ En kopi av slektstreet ditt, laget automatisk, kontrollert og lagret i mappen du velger.
+Une copie quand tu quittes l’app (ou fermes l’onglet), seulement si quelque chose a changé. ¦ Kópia, keď opustíš aplikáciu (alebo zatvoríš kartu prehliadača), len ak sa niečo zmenilo. ¦ En kopi når du går ut av appen (eller lukker fanen), bare hvis noe er endret.
+Une grande colonne ¦ Jeden veľký stĺpec ¦ Én stor kolonne
+Une grande partie des formes des tableaux (animaux, métiers, maison, transports, météo, santé…) vient de ¦ Veľká časť tvarov tabúľ (zvieratá, remeslá, dom, doprava, počasie, zdravie…) pochádza z ¦ En stor del av tavlenes former (dyr, yrker, hus, transport, vær, helse…) kommer fra
+Une ombre sous les boutons ¦ Tieň pod tlačidlami ¦ En skygge under knappene
+Une photo ¦ Fotka ¦ Et bilde
+Une photo rend la fiche vivante. Sans elle, les initiales prennent sa place (le bandeau prend la couleur principale de l’Apparence). ¦ Fotka kartu oživí. Bez nej nastúpia iniciály (pruh dostane hlavnú farbu zo Vzhľadu). ¦ Et bilde gjør oppføringen levende. Uten det tar initialene plassen (banneret får hovedfargen fra Utseende).
+Une phrase écoutée se comprend même quand on lit mal. ¦ Vypočutú vetu pochopíš, aj keď zle čítaš. ¦ En setning man hører, forstås selv om man leser dårlig.
+Une seule couleur pour tous (comme la fiche) ¦ Jedna farba pre všetkých (ako karta) ¦ Én farge for alle (som oppføringen)
+Une seule lettre, celle du nom (M) ¦ Len jedno písmeno, z priezviska (M) ¦ Én bokstav, etternavnets (M)
+Utile quand un petit-enfant joue aussi avec la tablette. Ce n’est pas une vraie protection : il évite seulement de sortir par erreur. ¦ Užitočné, keď sa s tabletom hrá aj vnúča. Nie je to skutočná ochrana: len zabráni odchodu omylom. ¦ Nyttig når et barnebarn også leker med nettbrettet. Det er ingen ekte beskyttelse: det hindrer bare at man går ut ved en feil.
+Utiliser la personne affichée ¦ Použiť zobrazenú osobu ¦ Bruk personen som vises
+Verrouiller / déverrouiller ¦ Zamknúť / odomknúť ¦ Lås / lås opp
+Vert affaibli (le plus courant de tous). ¦ Oslabená zelená (najčastejšia zo všetkých). ¦ Svekket grønt (den vanligste av alle).
+Vitesse de la voix ¦ Rýchlosť hlasu ¦ Stemmens hastighet
+Voir l’aperçu ¦ Zobraziť náhľad ¦ Se forhåndsvisningen
+Voix française de l’appareil ¦ Francúzsky hlas zariadenia ¦ Enhetens franske stemme
+Vu la dernière fois (fiches d’animaux) ¦ Naposledy videný (karty zvierat) ¦ Sist sett (dyreoppføringer)
+Zoom de départ ¦ Východiskové priblíženie ¦ Startzoom
+arrête la lecture. ¦ zastaví čítanie. ¦ stopper opplesingen.
+au-delà de ¦ nad ¦ over
+carré photo, grand nom ¦ štvorcová fotka, veľké meno ¦ firkantet bilde, stort navn
+champs rangés, photo d’identité ¦ usporiadané polia, fotka ako na preukaz ¦ ordnede felt, passbilde
+chaque ligne dans son cadre ¦ každý riadok vo svojom rámčeku ¦ hver linje i sin ramme
+chaque liste garde le sien ¦ každý zoznam si drží svoj ¦ hver liste beholder sin egen
+chaque outil le sien ¦ každý nástroj svoj ¦ hvert verktøy sin egen
+coins arrondis, ombres légères ¦ zaoblené rohy, ľahké tiene ¦ avrundede hjørner, lette skygger
+dans LCNDA (écran de démarrage → Importer un fichier, ou une nouvelle généalogie vide), puis ici même, choisis le même dossier. ¦ v LCNDA (úvodná obrazovka → Importovať súbor alebo nový prázdny rodokmeň), potom priamo tu vyber rovnaký priečinok. ¦ i LCNDA (startskjermen → Importer en fil, eller et nytt tomt slektstre), og velg deretter samme mappe her.
+de départ ¦ východiskové ¦ standard
+dossier partagé ¦ zdieľaný priečinok ¦ delt mappe
+du nom ¦ priezviska ¦ etternavnets
+décédé ¦ zosnulý ¦ avdød
+décédée ¦ zosnulá ¦ avdød
+ex. Dimensions, Technique, Lieu de conservation ¦ napr. Rozmery, Technika, Miesto uloženia ¦ f.eks. Mål, Teknikk, Oppbevaringssted
+icônes fines, une seule couleur ¦ tenké ikony, jedna farba ¦ tynne ikoner, én farge
+impossible au-delà de ¦ nemožné nad ¦ umulig over
+juste au-dessus de la liste ¦ tesne nad zoznamom ¦ rett over listen
+la Densité ne s’y ajoute pas ¦ Hustota sa k tomu nepripočítava ¦ Tettheten legges ikke til
+la liste des projets ¦ zoznam projektov ¦ prosjektlisten
+le numéro dans un carré ¦ číslo v štvorčeku ¦ nummeret i en firkant
+là où il était ¦ tam, kde bol ¦ der det var
+l’entrée choisie dépasse ¦ vybraná položka vyčnieva ¦ det valgte punktet stikker ut
+on passe par le bloc « 👁 Observations » ¦ cez blok „👁 Pozorovania“ ¦ via blokken «👁 Observasjoner»
+papier, phrase d’état civil ¦ papier, matričná veta ¦ papir, kirkebokformulering
+par défaut ¦ predvolené ¦ standard
+plus d’espace ¦ viac miesta ¦ mer plass
+plus d’espace partout ¦ viac miesta všade ¦ mer plass overalt
+règle tout d’un coup ; tu peux ensuite changer chaque ligne (« retouché » s’affiche). ¦ nastaví všetko naraz; potom môžeš meniť každý riadok (zobrazí sa „upravené“). ¦ stiller inn alt på én gang; du kan deretter endre hver linje («justert» vises).
+sans icône ¦ bez ikony ¦ uten ikon
+se règle dans ¦ nastavuje sa v ¦ stilles inn i
+serré, plus de lignes ¦ husto, viac riadkov ¦ tett, flere linjer
+sous l’en-tête de la fiche, replié ¦ pod záhlavím karty, zbalené ¦ under oppføringens topptekst, slått sammen
+sur une ligne ¦ na jednom riadku ¦ på én linje
+taille du texte ¦ veľkosť textu ¦ tekststørrelse
+tout dans un cadre ¦ všetko v jednom rámčeku ¦ alt i én ramme
+tout reste comme avant ¦ všetko zostane ako predtým ¦ alt blir som før
+trait pour agir, émoji pour les rubriques ¦ linka pre akcie, emoji pre rubriky ¦ strek for handlinger, emoji for rubrikker
+traits fins, grain du papier ¦ tenké linky, zrno papiera ¦ tynne streker, papirstruktur
+traits épais, ombres franches ¦ hrubé linky, ostré tiene ¦ tykke streker, skarpe skygger
+un seul cadre, lignes fines ¦ jeden rámček, tenké riadky ¦ én ramme, tynne linjer
+un trait fin, fond transparent ¦ tenká linka, priehľadné pozadie ¦ en tynn strek, gjennomsiktig bakgrunn
+« Calendrier de cette date » ¦ „Kalendár tohto dátumu“ ¦ «Kalender for denne datoen»
+« Liste | Fiches » ¦ „Zoznam | Karty“ ¦ «Liste | Kort»
+« Retirer » cache la photo du mode simple seulement : elle reste dans tes médias. ¦ „Odobrať“ skryje fotku len v jednoduchom režime: zostane v tvojich médiách. ¦ «Fjern» skjuler bildet bare i enkel modus: det blir værende i mediene dine.
+« ＋ Nouvelle observation · vu il y a 2 j » ¦ „＋ Nové pozorovanie · videný pred 2 dňami“ ¦ «＋ Ny observasjon · sett for 2 d siden»
+À chaque ouverture ¦ Pri každom otvorení ¦ Ved hver åpning
+À droite, les unes sous les autres (comme avant) ¦ Vpravo, pod sebou (ako predtým) ¦ Til høyre, under hverandre (som før)
+À vérifier, branche maternelle, acte illisible… ¦ Na overenie, materská vetva, nečitateľný záznam… ¦ Må sjekkes, morsside, uleselig dokument…
+À écouter ¦ Na vypočutie ¦ Å lytte til
+Âge de la mère 🔴 ¦ Vek matky 🔴 ¦ Morens alder 🔴
+Âge de la mère 🟠 ¦ Vek matky 🟠 ¦ Morens alder 🟠
+Âge du père 🔴 ¦ Vek otca 🔴 ¦ Farens alder 🔴
+Âge du père 🟠 ¦ Vek otca 🟠 ¦ Farens alder 🟠
+Âge minimum au mariage ¦ Minimálny vek pri sobáši ¦ Minstealder ved vielse
+Ère ¦ Letopočet ¦ Æra
+Ère d’Espagne ¦ Španielska éra ¦ Den spanske æra
+Écart entre deux naissances ¦ Odstup medzi dvoma narodeniami ¦ Avstand mellom to fødsler
+Écouter ¦ Vypočuť ¦ Lytt
+Édition ¦ Úpravy ¦ Rediger
+Émojis ¦ Emoji ¦ Emoji
+Énorme (62 px) ¦ Obrovská (62 px) ¦ Kjempestor (62 px)
+Épaisseur des traits ¦ Hrúbka liniek ¦ Strekenes tykkelse
+Épaisseur du trait ¦ Hrúbka linky ¦ Strektykkelse
+Éteint : seulement la pastille « Vu hier ». ¦ Vypnuté: len štítok „Videný včera“. ¦ Av: bare merket «Sett i går».
+Éthiopien ¦ Etiópsky ¦ Etiopisk
+Étoile ¦ Hviezda ¦ Stjerne
+à vérifier au-delà de ¦ na overenie nad ¦ må sjekkes over
+← Avancer le morceau ¦ ← Posunúť úsek vpred ¦ ← Flytt stykket fremover
+↗ Voir les versions publiées ¦ ↗ Zobraziť vydané verzie ¦ ↗ Se utgitte versjoner
+↺ Remettre seulement les groupes ¦ ↺ Obnoviť len skupiny ¦ ↺ Tilbakestill bare gruppene
+↻ Relancer le contrôle ¦ ↻ Spustiť kontrolu znova ¦ ↻ Kjør kontrollen på nytt
+▶ Ouvrir le mode simple ¦ ▶ Otvoriť jednoduchý režim ¦ ▶ Åpne enkel modus
+♿ Voir les réglages de toute l’app ¦ ♿ Zobraziť nastavenia celej aplikácie ¦ ♿ Se innstillingene for hele appen
+⤓ Exporter ce réglage ¦ ⤓ Exportovať toto nastavenie ¦ ⤓ Eksporter denne innstillingen
+＋ Créer une forme… ¦ ＋ Vytvoriť tvar… ¦ ＋ Opprett en form…
+＋ Nouvelle branche ¦ ＋ Nová vetva ¦ ＋ Ny gren
+＋ Nouvelle forme… ¦ ＋ Nový tvar… ¦ ＋ Ny form…
+＋ Nouvelle observation (fiches d’animaux) ¦ ＋ Nové pozorovanie (karty zvierat) ¦ ＋ Ny observasjon (dyreoppføringer)
+＋ Nouvelle étiquette ¦ ＋ Nový štítok ¦ ＋ Ny etikett
+🌳 L’arbre ¦ 🌳 Strom ¦ 🌳 Treet
+🎂 Âges ¦ 🎂 Veky ¦ 🎂 Aldre
+🎤 Dictée vocale ¦ 🎤 Hlasové diktovanie ¦ 🎤 Talediktering
+🎯 Élément choisi ¦ 🎯 Vybraný prvok ¦ 🎯 Valgt element
+👁 Aperçu : le même réglage partout ¦ 👁 Náhľad: rovnaké nastavenie všade ¦ 👁 Forhåndsvisning: samme innstilling overalt
+👁 Aperçu vivant ¦ 👁 Živý náhľad ¦ 👁 Levende forhåndsvisning
+👁 Essayer ici ¦ 👁 Vyskúšať tu ¦ 👁 Prøv her
+👁＋ Observation · 🩺＋ Santé · 📍 Trajet GPS · 🔖 Marque ¦ 👁＋ Pozorovanie · 🩺＋ Zdravie · 📍 Trasa GPS · 🔖 Značka ¦ 👁＋ Observasjon · 🩺＋ Helse · 📍 GPS-spor · 🔖 Merke
+👤 Sur la fiche ¦ 👤 Na karte ¦ 👤 I oppføringen
+👥 Les personnes ¦ 👥 Osoby ¦ 👥 Personene
+📊 Moyennes de la famille ¦ 📊 Rodinné priemery ¦ 📊 Familiens gjennomsnitt
+📜 Sépia ¦ 📜 Sépia ¦ 📜 Sepia
+📦 Quoi ¦ 📦 Čo ¦ 📦 Hva
+📷 Les photos ¦ 📷 Fotky ¦ 📷 Bildene
+🔗 Relier ce dossier ¦ 🔗 Prepojiť tento priečinok ¦ 🔗 Koble denne mappen
+🔴 moins de ¦ 🔴 menej ako ¦ 🔴 mindre enn
+🔴 naissance plus tard que ¦ 🔴 narodenie neskôr ako ¦ 🔴 fødsel senere enn
+🔷 Formes des avatars ¦ 🔷 Tvary avatarov ¦ 🔷 Avatarformer
+🖨 Imprimer la liste ¦ 🖨 Tlačiť zoznam ¦ 🖨 Skriv ut listen
+🗂 Les copies ¦ 🗂 Kópie ¦ 🗂 Kopiene
+🗑 Enlever l’élément choisi ¦ 🗑 Odobrať vybraný prvok ¦ 🗑 Fjern det valgte elementet
+🟠 au-delà de ¦ 🟠 nad ¦ 🟠 over
+🟡 au-delà de ¦ 🟡 nad ¦ 🟡 over
+🟡 plus de ¦ 🟡 viac ako ¦ 🟡 mer enn
+🟡 écart de plus de ¦ 🟡 odstup viac ako ¦ 🟡 avstand på mer enn
+🦮 Lecteur d’écran ¦ 🦮 Čítačka obrazovky ¦ 🦮 Skjermleser
+🪙 Convertisseur d’autrefois ¦ 🪙 Prevodník starých mier ¦ 🪙 Omregner for gamle mål
+C’est ton anniversaire ! ¦ Máš narodeniny! ¦ Det er bursdagen din!
+{name} a {n} ans aujourd’hui ! ¦ {name} dnes oslavuje {n}. narodeniny! ¦ {name} fyller {n} år i dag!
+Il est né {details}. ¦ Narodil sa {details}. ¦ Han ble født {details}.
+Elle est née {details}. ¦ Narodila sa {details}. ¦ Hun ble født {details}.
+{a} et {b} se sont mariés il y a {n} ans ¦ {a} a {b} uzavreli sobáš pred {n} rokmi ¦ {a} og {b} giftet seg for {n} år siden
+{name} aurait eu {n} ans aujourd’hui ¦ {name} by dnes oslávil(a) {n}. narodeniny ¦ {name} ville ha fylt {n} år i dag
+On se souvient de {name} ¦ Spomíname na {name} ¦ Vi minnes {name}
+Elle nous a quittés {details}, il y a {n} ans. ¦ Opustila nás {details}, pred {n} rokmi. ¦ Hun forlot oss {details}, for {n} år siden.
+Il nous a quittés {details}, il y a {n} ans. ¦ Opustil nás {details}, pred {n} rokmi. ¦ Han forlot oss {details}, for {n} år siden.
+ton anniversaire ¦ tvoje narodeniny ¦ bursdagen din
+Elle aurait eu {n} ans ¦ Oslávila by {n}. narodeniny ¦ Hun ville ha fylt {n} år
+Il aurait eu {n} ans ¦ Oslávil by {n}. narodeniny ¦ Han ville ha fylt {n} år
+Tu auras {n} ans ¦ Oslávíš {n}. narodeniny ¦ Du fyller {n} år
+Elle aura {n} ans ¦ Oslávi {n}. narodeniny ¦ Hun fyller {n} år
+Il aura {n} ans ¦ Oslávi {n}. narodeniny ¦ Han fyller {n} år
+Mariés ici ¦ Uzavreli tu sobáš ¦ Giftet seg her
+Né·es ici ¦ Narodení tu ¦ Født her
+Mort·es ici ¦ Zomreli tu ¦ Døde her
+Bravo ! C’est {name} ({rel}). ¦ Výborne! Je to {name} ({rel}). ¦ Bra! Det er {name} ({rel}).
+Bravo ! C’est {name}. ¦ Výborne! Je to {name}. ¦ Bra! Det er {name}.
+toi ¦ ty ¦ deg
+Avec toi ({n}) ¦ S tebou ({n}) ¦ Med deg ({n})
+Ses photos ({n}) ¦ Fotky ({n}) ¦ Bilder ({n})
+Sur la photo : {names}. ¦ Na fotke: {names}. ¦ På bildet: {names}.
+=personne trouvée ¦ nájdená osoba|nájdené osoby|nájdených osôb ¦ person funnet|personer funnet
+Icône du gros bouton ¦ Ikona veľkého tlačidla ¦ Ikonet til den store knappen
+Un cadre ¦ Dlaždica ¦ En rute
+Écris le mot ¦ Napíš odkaz ¦ Skriv hilsenen
+Choisis la maison ¦ Vyber dom ¦ Velg huset
+Choisis la personne ¦ Vyber osobu ¦ Velg personen
+Choisis la photo ¦ Vyber fotku ¦ Velg bildet
+Choisis les photos ¦ Vyber fotky ¦ Velg bildene
+Choisis le film ¦ Vyber film ¦ Velg filmen
+Choisis le son ¦ Vyber zvuk ¦ Velg lyden
+Choisis le lieu ¦ Vyber miesto ¦ Velg stedet
+Écris le numéro ¦ Napíš číslo ¦ Skriv nummeret
+Sa fiche ¦ Karta ¦ Oppføringen
+Un mot ¦ Odkaz ¦ En hilsen
+Un film ¦ Film ¦ En film
+Un lieu ¦ Miesto ¦ Et sted
+Un instant… ¦ Okamih… ¦ Et øyeblikk…
+Sans prénom ¦ Bez mena ¦ Uten fornavn
+Un instant, on prépare l’arbre… ¦ Okamih, pripravujeme strom… ¦ Et øyeblikk, treet gjøres klart…
+Un instant, on construit la maison… ¦ Okamih, staviame dom… ¦ Et øyeblikk, huset bygges…
+La maison n’a pas pu être montrée. ¦ Dom sa nepodarilo zobraziť. ¦ Huset kunne ikke vises.
+Monter d’un étage ¦ O poschodie vyššie ¦ Gå opp en etasje
+Descendre d’un étage ¦ O poschodie nižšie ¦ Gå ned en etasje
+Voir toute la maison ¦ Zobraziť celý dom ¦ Se hele huset
+Plus près ¦ Bližšie ¦ Nærmere
+Plus loin ¦ Ďalej ¦ Lenger unna
+La visite ¦ Prehliadka ¦ Omvisningen
+Étage ¦ Poschodie ¦ Etasje
+Il se passe quelque chose aujourd’hui ! ¦ Dnes sa niečo deje! ¦ Det skjer noe i dag!
+Continue… encore un peu ¦ Pokračuj… ešte chvíľku ¦ Fortsett… litt til
+On ne connaît pas encore ses parents ¦ Rodičov zatiaľ nepoznáme ¦ Foreldrene er ikke kjent ennå
+Voir sa fiche ¦ Zobraziť kartu ¦ Se oppføringen
+Pas d’enfants connus ¦ Žiadne známe deti ¦ Ingen kjente barn
+Plus gros ¦ Väčšie ¦ Større
+Plus de monde ¦ Viac ľudí ¦ Flere personer
+Photo d’avant ¦ Predchádzajúca fotka ¦ Forrige bilde
+Cacher les noms ¦ Skryť mená ¦ Skjul navnene
+Qui est là ? ¦ Kto je tu? ¦ Hvem er her?
+Arrêter le défilement ¦ Zastaviť prezentáciu ¦ Stopp lysbildefremvisningen
+Défilement tout seul ¦ Automatické prehrávanie ¦ Spill av automatisk
+Ses maris ¦ Jej manželia ¦ Ektemennene hennes
+Son mari ¦ Jej manžel ¦ Mannen hennes
+Ses femmes ¦ Jeho manželky ¦ Konene hans
+Sa femme ¦ Jeho manželka ¦ Kona hans
+Son conjoint ¦ Partner(ka) ¦ Partneren
+Sa sœur ¦ Sestra ¦ Søsteren
+Son frère ¦ Brat ¦ Broren
+Ses frères et sœurs ¦ Súrodenci ¦ Søsknene
+Écouter son histoire ¦ Vypočuť si príbeh ¦ Lytt til historien
+Voir dans l’arbre ¦ Zobraziť v strome ¦ Se i treet
+Ses parents ¦ Rodičia ¦ Foreldrene
+Son parent ¦ Rodič ¦ Forelderen
+Ses enfants ¦ Deti ¦ Barna
+Son enfant ¦ Dieťa ¦ Barnet
+Par famille ¦ Podľa rodiny ¦ Etter familie
+Par prénom ¦ Podľa mena ¦ Etter fornavn
+La famille d’aujourd’hui ¦ Dnešná rodina ¦ Dagens familie
+Touche la première lettre du prénom. ¦ Dotkni sa prvého písmena mena. ¦ Trykk på den første bokstaven i fornavnet.
+Touche la personne qui regarde. ¦ Dotkni sa osoby, ktorá sa pozerá. ¦ Trykk på personen som ser på.
+Tape un prénom ou un nom ¦ Napíš meno alebo priezvisko ¦ Skriv et fornavn eller et etternavn
+Effacer une lettre ¦ Vymazať písmeno ¦ Slett en bokstav
+J’écoute… ¦ Počúvam… ¦ Jeg lytter…
+Je n’ai pas bien entendu. Réessaie, ou utilise le clavier. ¦ Nepočula som dobre. Skús to znova alebo použi klávesnicu. ¦ Jeg hørte ikke godt. Prøv igjen, eller bruk tastaturet.
+La dictée n’a pas marché. Utilise le clavier. ¦ Diktovanie nefungovalo. Použi klávesnicu. ¦ Dikteringen virket ikke. Bruk tastaturet.
+Voir la photo ¦ Zobraziť fotku ¦ Se bildet
+🎈 Bientôt ¦ 🎈 Čoskoro ¦ 🎈 Snart
+Dis d’abord qui regarde : l’app montrera ta famille. ¦ Najprv povedz, kto sa pozerá: aplikácia ukáže tvoju rodinu. ¦ Si først hvem som ser på: appen viser familien din.
+Tes conjoints ¦ Tvoji partneri ¦ Partnerne dine
+Ta femme ¦ Tvoja manželka ¦ Kona di
+Ton mari ¦ Tvoj manžel ¦ Mannen din
+Tes parents ¦ Tvoji rodičia ¦ Foreldrene dine
+Tes grands-parents ¦ Tvoji starí rodičia ¦ Besteforeldrene dine
+Tes enfants ¦ Tvoje deti ¦ Barna dine
+Tes petits-enfants ¦ Tvoje vnúčatá ¦ Barnebarna dine
+Tes arrière-petits-enfants ¦ Tvoje pravnúčatá ¦ Oldebarna dine
+Personne n’est encore relié dans l’arbre. ¦ V strome zatiaľ nikto nie je prepojený. ¦ Ingen er koblet i treet ennå.
+Ton anniversaire ¦ Tvoje narodeniny ¦ Bursdagen din
+Les anniversaires qui arrivent ¦ Nadchádzajúce narodeniny ¦ Kommende bursdager
+Pas de date de naissance connue pour l’instant. ¦ Zatiaľ žiadny známy dátum narodenia. ¦ Ingen kjent fødselsdato ennå.
+Voir les photos ¦ Zobraziť fotky ¦ Se bildene
+Il faut au moins trois portraits pour jouer. ¦ Na hru sú potrebné aspoň tri portréty. ¦ Det trengs minst tre portretter for å spille.
+Un autre portrait ¦ Ďalší portrét ¦ Et annet portrett
+Écouter l’heure ¦ Vypočuť si čas ¦ Lytt til klokken
+Écouter le numéro ¦ Vypočuť si číslo ¦ Lytt til nummeret
+Tape le code pour quitter ¦ Zadaj kód na odchod ¦ Skriv koden for å gå ut
+Arrêter ¦ Zastaviť ¦ Stopp
+Les gros boutons : avancer, reculer, tourner. On passe par les portes. ¦ Veľké tlačidlá: dopredu, dozadu, otočiť. Prechádza sa dverami. ¦ De store knappene: fram, tilbake, snu. Man går gjennom dørene.
+On voit déjà le plus de monde possible. ¦ Už vidno čo najviac ľudí. ¦ Du ser allerede så mange som mulig.
+Pas de frère ou de sœur après. ¦ Žiadny ďalší súrodenec. ¦ Ingen søsken etter.
+Pas de frère ou de sœur avant. ¦ Žiadny súrodenec pred ním. ¦ Ingen søsken før.
+Mode simple quitté. Tu retrouves l’app normale. ¦ Jednoduchý režim ukončený. Si späť v bežnej aplikácii. ¦ Enkel modus er avsluttet. Du er tilbake i den vanlige appen.
+Première fois : vérifie ces réglages, puis « ▶ Ouvrir le mode simple ». ¦ Prvýkrát: skontroluj tieto nastavenia, potom „▶ Otvoriť jednoduchý režim“. ¦ Første gang: sjekk disse innstillingene, deretter «▶ Åpne enkel modus».
+▶ Démarrer le mode simple ¦ ▶ Spustiť jednoduchý režim ¦ ▶ Start enkel modus
+⚙️ Préparer ¦ ⚙️ Pripraviť ¦ ⚙️ Forbered
+Ta couleur ¦ Tvoja farba ¦ Fargen din
+La personne ¦ Osoba ¦ Personen
+⚠️ Pas encore de photo de cette personne : le cadre est caché ¦ ⚠️ Zatiaľ žiadna fotka tejto osoby: dlaždica je skrytá ¦ ⚠️ Ingen bilder av denne personen ennå: ruten er skjult
+Écrite toute seule (nombre de photos, souvenirs du jour) ¦ Píše sa sama (počet fotiek, spomienky dňa) ¦ Skrives automatisk (antall bilder, dagens minner)
+Le mot ¦ Odkaz ¦ Hilsenen
+Icône du cadre ¦ Ikona dlaždice ¦ Rutens ikon
+↺ Remettre ce cadre comme au départ ¦ ↺ Obnoviť východiskový stav tejto dlaždice ¦ ↺ Tilbakestill denne ruten som fra start
+Retirer ce cadre ¦ Odobrať túto dlaždicu ¦ Fjern denne ruten
+La photo ¦ Fotka ¦ Bildet
+Le film ¦ Film ¦ Filmen
+Le son ¦ Zvuk ¦ Lyden
+Le lieu ¦ Miesto ¦ Stedet
+Choisis un lieu… ¦ Vyber miesto… ¦ Velg et sted…
+Aucun lieu dans l’arbre pour l’instant (naissances, mariages, photos). ¦ Zatiaľ žiadne miesto v strome (narodenia, sobáše, fotky). ¦ Ingen steder i treet ennå (fødsler, vielser, bilder).
+Le numéro ¦ Číslo ¦ Nummeret
+Montre la famille de la personne qui regarde (ses parents, ses enfants, ses petits-enfants…). ¦ Ukazuje rodinu osoby, ktorá sa pozerá (rodičia, deti, vnúčatá…). ¦ Viser familien til personen som ser på (foreldre, barn, barnebarn…).
+Les anniversaires des vivants, du plus proche au plus lointain. ¦ Narodeniny žijúcich, od najbližších po najvzdialenejšie. ¦ Bursdagene til de levende, fra den nærmeste til den fjerneste.
+Un portrait, trois prénoms : il faut trouver le bon. Il faut au moins trois portraits. ¦ Jeden portrét, tri mená: nájdi to správne. Sú potrebné aspoň tri portréty. ¦ Ett portrett, tre fornavn: finn det riktige. Det trengs minst tre portretter.
+Toutes les photos, dans le désordre. ¦ Všetky fotky, v náhodnom poradí. ¦ Alle bildene, i tilfeldig rekkefølge.
+Propre au mode simple ¦ Vlastné pre jednoduchý režim ¦ Egen for enkel modus
+✕ Fermer l’essai ¦ ✕ Zavrieť skúšku ¦ ✕ Lukk prøven
+Daltonisme propre au mode simple ¦ Farboslepost len pre jednoduchý režim ¦ Fargeblindhet bare for enkel modus
+Contraste fort dans le mode simple ¦ Vysoký kontrast v jednoduchom režime ¦ Høy kontrast i enkel modus
+Moins d’animations dans le mode simple ¦ Menej animácií v jednoduchom režime ¦ Færre animasjoner i enkel modus
+✓ Appliqué ¦ ✓ Použité ¦ ✓ Tatt i bruk
+Personne de l’arbre ¦ Osoba zo stromu ¦ Person i treet
+Le contraste fort est allumé : les couleurs choisies ici reviendront quand tu l’éteindras. ¦ Vysoký kontrast je zapnutý: farby vybrané tu sa vrátia, keď ho vypneš. ¦ Høy kontrast er slått på: fargene som er valgt her, kommer tilbake når du slår den av.
+✓ très lisible ¦ ✓ veľmi čitateľné ¦ ✓ svært lesbart
+Jamais moins de 22 px. ¦ Nikdy menej ako 22 px. ¦ Aldri mindre enn 22 px.
+Comme l’app ¦ Ako aplikácia ¦ Som appen
+↺ Remettre la disposition comme au départ ¦ ↺ Obnoviť východiskové rozloženie ¦ ↺ Tilbakestill oppsettet som fra start
+ℹ️ Le « mode confidentialité » de l’app est allumé : les vivants sont montrés par leur prénom seulement. ¦ ℹ️ „Režim súkromia“ aplikácie je zapnutý: žijúci sa zobrazujú len krstným menom. ¦ ℹ️ Appens «personvernmodus» er slått på: levende personer vises bare med fornavn.
+Les branches apparaîtront quand l’arbre sera lu. ¦ Vetvy sa objavia, keď sa strom načíta. ¦ Grenene vises når treet er lest inn.
+Remettre dans le mode simple ¦ Vrátiť do jednoduchého režimu ¦ Sett tilbake i enkel modus
+🔒 Un code est enregistré (il est gardé caché, même pour l’app). Tape 4 chiffres pour le changer. ¦ 🔒 Kód je uložený (je skrytý, aj pred aplikáciou). Zadaj 4 číslice, ak ho chceš zmeniť. ¦ 🔒 En kode er lagret (den holdes skjult, også for appen). Skriv 4 sifre for å endre den.
+Coupé : cet appareil garde ses propres réglages du mode simple. ¦ Vypnuté: toto zariadenie si drží vlastné nastavenia jednoduchého režimu. ¦ Av: denne enheten beholder sine egne innstillinger for enkel modus.
+⚠️ À corriger ¦ ⚠️ Na opravu ¦ ⚠️ Må rettes
+⚠️ Pas assez lisible ¦ ⚠️ Málo čitateľné ¦ ⚠️ Ikke lesbart nok
+Essai fermé : c’est ainsi qu’on quitte le mode simple. ¦ Skúška zatvorená: takto sa opúšťa jednoduchý režim. ¦ Prøven er lukket: slik går man ut av enkel modus.
+La photo du gros bouton ¦ Fotka veľkého tlačidla ¦ Bildet til den store knappen
+Les photos du gros bouton ¦ Fotky veľkého tlačidla ¦ Bildene til den store knappen
+Le film du gros bouton ¦ Film veľkého tlačidla ¦ Filmen til den store knappen
+Le son du gros bouton ¦ Zvuk veľkého tlačidla ¦ Lyden til den store knappen
+La police des gros boutons ¦ Písmo veľkých tlačidiel ¦ Skriften på de store knappene
+La police du mode simple ¦ Písmo jednoduchého režimu ¦ Skriften i enkel modus
+Il faut garder au moins un gros bouton. ¦ Musíš ponechať aspoň jedno veľké tlačidlo. ¦ Du må beholde minst én stor knapp.
+Code de sortie enregistré (gardé caché). ¦ Kód na odchod uložený (skrytý). ¦ Utgangskoden er lagret (holdes skjult).
+Retour à l’écran d’avant ¦ Späť na predchádzajúcu obrazovku ¦ Tilbake til forrige skjerm
+Âges ¦ Veky ¦ Aldre
+Lieux mal placés ¦ Zle umiestnené miesta ¦ Feilplasserte steder
+Baptême loin ¦ Krst ďaleko ¦ Dåp langt unna
+Lieux contradictoires ¦ Protichodné miesta ¦ Motstridende steder
+une mauvaise année de décès (1862 au lieu de 1882 ?), ou un homonyme pris pour le père. Regarde l’acte de décès du père. ¦ zlý rok úmrtia (1862 namiesto 1882?) alebo menovec považovaný za otca. Pozri si záznam o úmrtí otca. ¦ feil dødsår (1862 i stedet for 1882?), eller en navnebror tatt for faren. Se farens dødsinnføring.
+une erreur de date, ou la mère confondue avec une homonyme (une tante, une cousine). Regarde l’acte de naissance de l’enfant. ¦ chyba v dátume alebo matka zamenená s menovkyňou (teta, sesternica). Pozri si záznam o narodení dieťaťa. ¦ en datofeil, eller moren forvekslet med en navnesøster (en tante, en kusine). Se barnets fødselsinnføring.
+une génération confondue (la grand-mère prise pour la mère), ou une année mal lue. ¦ zamenená generácia (stará mama považovaná za matku) alebo zle prečítaný rok. ¦ en forvekslet generasjon (bestemoren tatt for moren), eller et feillest år.
+une génération sautée, ou une année mal lue. ¦ preskočená generácia alebo zle prečítaný rok. ¦ en hoppet over generasjon, eller et feillest år.
+une mauvaise date de décès, ou le mariage d’un homonyme. ¦ zlý dátum úmrtia alebo sobáš menovca. ¦ feil dødsdato, eller en navnebrors vielse.
+deux dates inversées, ou une année mal recopiée. ¦ dva prehodené dátumy alebo zle odpísaný rok. ¦ to datoer som er byttet om, eller et feil avskrevet år.
+un chiffre mal lu (31 au lieu de 21) ou un mois mal recopié. ¦ zle prečítaná číslica (31 namiesto 21) alebo zle odpísaný mesiac. ¦ et feillest siffer (31 i stedet for 21) eller en feil avskrevet måned.
+la naissance d’un parent prise pour la sienne, ou un homonyme. ¦ narodenie rodiča považované za jeho vlastné alebo menovec. ¦ en forelders fødsel tatt for personens egen, eller en navnebror.
+des jumeaux mal datés, ou un enfant rattaché aux mauvais parents. ¦ zle datované dvojčatá alebo dieťa priradené k nesprávnym rodičom. ¦ feildaterte tvillinger, eller et barn knyttet til feil foreldre.
+la même personne saisie deux fois : compare les deux fiches avant de les fusionner. ¦ rovnaká osoba zadaná dvakrát: porovnaj obe karty, skôr než ich zlúčiš. ¦ samme person registrert to ganger: sammenlign de to oppføringene før du slår dem sammen.
+une commune homonyme d’un autre département, ou des coordonnées inversées. ¦ rovnomenná obec v inom departemente alebo prehodené súradnice. ¦ et sted med samme navn i et annet departement, eller koordinater som er byttet om.
+deux homonymes confondus dans une seule fiche. ¦ dvaja menovci spojení v jednej karte. ¦ to navnebrødre blandet sammen i én oppføring.
+une commune homonyme d’un autre département. ¦ rovnomenná obec v inom departemente. ¦ et sted med samme navn i et annet departement.
+les deux dates inversées. ¦ oba dátumy prehodené. ¦ de to datoene byttet om.
+un tiret tapé par erreur devant l’année. ¦ pomlčka napísaná omylom pred rokom. ¦ en bindestrek skrevet ved en feil foran året.
+un homonyme pris pour le conjoint, ou une fiche rattachée une génération trop haut ou trop bas. ¦ menovec považovaný za manžela/manželku alebo karta pripojená o generáciu vyššie alebo nižšie. ¦ en navnebror tatt for ektefellen, eller en oppføring knyttet én generasjon for høyt eller for lavt.
+un chiffre mal lu par la machine (1/7, 3/8, 5/6), ou un âge déclaré au hasard par la famille : regarde l’image du recensement. ¦ číslica zle prečítaná strojom (1/7, 3/8, 5/6) alebo vek uvedený rodinou naslepo: pozri si obraz sčítania obyvateľov. ¦ et siffer feillest av maskinen (1/7, 3/8, 5/6), eller en alder oppgitt på måfå av familien: se bildet av folketellingen.
+un nom de commune mal lu ou abrégé (« St » pour Saint) : regarde l’image du recensement. ¦ zle prečítaný alebo skrátený názov obce („St“ pre Saint): pozri si obraz sčítania obyvateľov. ¦ et stedsnavn som er feillest eller forkortet («St» for Saint): se bildet av folketellingen.
+la case du genre mal lue, ou une autre personne du ménage : regarde l’image du recensement. ¦ zle prečítané pole pohlavia alebo iná osoba z domácnosti: pozri si obraz sčítania obyvateľov. ¦ kjønnsfeltet feillest, eller en annen person i husholdningen: se bildet av folketellingen.
+un lien mal lu (fils / fille), un ménage mal découpé, ou une fiche pas encore reliée : regarde l’image du recensement. ¦ zle prečítaný vzťah (syn / dcéra), zle rozdelená domácnosť alebo dosiaľ neprepojená karta: pozri si obraz sčítania obyvateľov. ¦ en feillest relasjon (sønn / datter), en feil oppdelt husholdning, eller en oppføring som ikke er koblet ennå: se bildet av folketellingen.
+J’ai vérifié dans l’acte : c’est bien ça ¦ Overil(a) som v zázname: je to tak ¦ Jeg har sjekket i dokumentet: det stemmer
+La date est approximative (« vers… ») ¦ Dátum je približný („okolo…“) ¦ Datoen er omtrentlig («omkring…»)
+Ce sont deux personnes différentes ¦ Sú to dve rôzne osoby ¦ Det er to forskjellige personer
+Le lieu est juste ¦ Miesto je správne ¦ Stedet er riktig
+J’ai regardé l’image : ma fiche est juste, SocFace a mal lu ¦ Pozrel(a) som sa na obraz: moja karta je správna, SocFace zle čítal ¦ Jeg har sett på bildet: oppføringen min er riktig, SocFace leste feil
+Ce n’est pas la même personne (homonyme) ¦ Nie je to tá istá osoba (menovec) ¦ Det er ikke samme person (navnebror)
+L’âge déclaré au recensement était approximatif ¦ Vek uvedený pri sčítaní bol približný ¦ Alderen oppgitt i folketellingen var omtrentlig
+Personne sans nom ¦ Osoba bez mena ¦ Person uten navn
+Dates changées ¦ Zmenené dátumy ¦ Endrede datoer
+Écartée ¦ Odložená ¦ Lagt til side
+Plus d’alerte ¦ Už bez upozornenia ¦ Ikke lenger varsel
+Le contrôle ne trouve plus ce problème ¦ Kontrola už tento problém nenachádza ¦ Kontrollen finner ikke lenger dette problemet
+Pas une erreur ¦ Nie je chyba ¦ Ikke en feil
+Toute la base ¦ Celá databáza ¦ Hele databasen
+Mes ancêtres (Sosa) ¦ Moji predkovia (Sosa) ¦ Anene mine (Sosa)
+Tous les lieux ¦ Všetky miesta ¦ Alle steder
+Aucune alerte écartée ¦ Žiadne odložené upozornenie ¦ Ingen varsler lagt til side
+Rien avec ces filtres ¦ S týmito filtrami nič ¦ Ingenting med disse filtrene
+Retire un filtre pour revoir les autres alertes. ¦ Odober filter a uvidíš ostatné upozornenia. ¦ Fjern et filter for å se de andre varslene igjen.
+Aucune incohérence trouvée dans tes fiches. Bravo ! ¦ V tvojich kartách sa nenašla žiadna nezrovnalosť. Výborne! ¦ Ingen uoverensstemmelser funnet i oppføringene dine. Bra jobbet!
+Ouvre l’événement dans la fiche pour corriger sa date. ¦ Otvor udalosť na karte a oprav jej dátum. ¦ Åpne hendelsen i oppføringen for å rette datoen.
+PLACER SUR LA CARTE ¦ UMIESTNIŤ NA MAPU ¦ PLASSER PÅ KARTET
+Choisis la commune : ses coordonnées seront reprises ¦ Vyber obec: prevezmú sa jej súradnice ¦ Velg stedet: koordinatene blir hentet
+Ce lieu n’a pas de coordonnées : choisis une commune de la liste. ¦ Toto miesto nemá súradnice: vyber obec zo zoznamu. ¦ Dette stedet har ingen koordinater: velg et sted fra listen.
+CONTRÔLE DE LA BASE ¦ KONTROLA DATABÁZY ¦ KONTROLL AV DATABASEN
+Ta raison ¦ Tvoj dôvod ¦ Begrunnelsen din
+Ne plus signaler ¦ Už nehlásiť ¦ Ikke varsle lenger
+Écris ta raison, ou choisis-en une. ¦ Napíš svoj dôvod alebo jeden vyber. ¦ Skriv begrunnelsen din, eller velg en.
+Détail ¦ Podrobnosti ¦ Detaljer
+Fermer (Échap) ¦ Zavrieť (Esc) ¦ Lukk (Esc)
+La famille ¦ Rodina ¦ Familien
+Contrôle impossible pour l’instant. ¦ Kontrola zatiaľ nie je možná. ¦ Kontrollen er ikke mulig akkurat nå.
+des fiches sans alerte ¦ kariet bez upozornenia ¦ av oppføringene uten varsel
+Tout voir dans « ✅ Contrôle de la base » → ¦ Zobraziť všetko v „✅ Kontrola databázy“ → ¦ Se alt i «✅ Kontroll av databasen» →
+Moyennes de la famille ¦ Rodinné priemery ¦ Familiens gjennomsnitt
+Âge au mariage des hommes ¦ Vek mužov pri sobáši ¦ Menns alder ved vielse
+des femmes ¦ žien ¦ kvinners
+Écart entre naissances ¦ Odstup medzi narodeniami ¦ Avstand mellom fødsler
+Pas assez de dates ¦ Málo dátumov ¦ Ikke nok datoer
+: ni conjoint, ni enfant, ni événement, ni note, ni média, ni source (souvent laissées par un ancien logiciel ou un import). Une copie de sécurité de la base est faite juste avant. ¦ : žiadny partner, dieťa, udalosť, poznámka, médium ani prameň (často pozostatok starého programu alebo importu). Tesne predtým sa vytvorí bezpečnostná kópia databázy. ¦ : ingen ektefelle, barn, hendelse, notat, medier eller kilde (ofte etterlatt av et gammelt program eller en import). En sikkerhetskopi av databasen tas rett før.
+Elles ne contiennent aucune information. Une copie de sécurité de la base est faite juste avant. ¦ Neobsahujú žiadne informácie. Tesne predtým sa vytvorí bezpečnostná kópia databázy. ¦ De inneholder ingen opplysninger. En sikkerhetskopi av databasen tas rett før.
+Familles vides ¦ Prázdne rodiny ¦ Tomme familier
+Supprimer la famille vide ¦ Vymazať prázdnu rodinu ¦ Slett den tomme familien
+Supprimer la famille vide ? ¦ Vymazať prázdnu rodinu? ¦ Slette den tomme familien?
+Supprimer les familles vides ¦ Vymazať prázdne rodiny ¦ Slett de tomme familiene
+À la fermeture ¦ Pri zatvorení ¦ Ved lukking
+À la main ¦ Ručne ¦ Manuelt
+Avant une restauration ou une fusion ¦ Pred obnovením alebo zlúčením ¦ Før en gjenoppretting eller sammenslåing
+Automatique ¦ Automatická ¦ Automatisk
+Avant une mise à jour ¦ Pred aktualizáciou ¦ Før en oppdatering
+Jamais tout seul (seulement à la main) ¦ Nikdy automaticky (len ručne) ¦ Aldri automatisk (bare manuelt)
+Chaque jour ¦ Každý deň ¦ Hver dag
+Chaque semaine ¦ Každý týždeň ¦ Hver uke
+Vérifiée ¦ Overená ¦ Kontrollert
+Échec ¦ Zlyhanie ¦ Mislyktes
+Dossier absent ¦ Priečinok chýba ¦ Mappen mangler
+La sauvegarde automatique est éteinte : choisis « Chaque jour » ci-dessous. ¦ Automatická záloha je vypnutá: vyber nižšie „Každý deň“. ¦ Automatisk sikkerhetskopi er slått av: velg «Hver dag» nedenfor.
+Prochaine : à la fermeture de l’app (si quelque chose a changé). ¦ Ďalšia: pri zatvorení aplikácie (ak sa niečo zmenilo). ¦ Neste: når appen lukkes (hvis noe er endret).
+Aucune copie dans ce dossier pour l’instant. ¦ V tomto priečinku zatiaľ nie je žiadna kópia. ¦ Ingen kopi i denne mappen ennå.
+Abîmée ¦ Poškodená ¦ Skadet
+⚠️ Dossier introuvable pour l’instant (clé débranchée ?). ¦ ⚠️ Priečinok sa teraz nedá nájsť (odpojený USB kľúč?). ¦ ⚠️ Fant ikke mappen akkurat nå (minnepinnen frakoblet?).
+Dossier trouvé ¦ Priečinok nájdený ¦ Mappe funnet
+Dossier synchronisé en ligne ¦ Priečinok synchronizovaný online ¦ Mappe synkronisert på nett
+Chacune dans son sous-dossier, pour qu’elles ne s’effacent pas l’une l’autre. ¦ Každá vo svojom podpriečinku, aby sa navzájom neprepísali. ¦ Hver i sin egen undermappe, så de ikke overskriver hverandre.
+Avec les médias ¦ S médiami ¦ Med medier
+Toutes mes généalogies ¦ Všetky moje rodokmene ¦ Alle slektstrærne mine
+État indisponible. ¦ Stav nie je k dispozícii. ¦ Status ikke tilgjengelig.
+Dossier introuvable (clé débranchée ?). Rien n’est bloqué. ¦ Priečinok sa nedá nájsť (odpojený USB kľúč?). Nič nie je zablokované. ¦ Fant ikke mappen (minnepinnen frakoblet?). Ingenting er blokkert.
+Éteinte : rien ne se fait tout seul. ¦ Vypnutá: nič sa nedeje automaticky. ¦ Av: ingenting skjer automatisk.
+⚙️ Régler ¦ ⚙️ Nastaviť ¦ ⚙️ Still inn
+Lieu (texte) ¦ Miesto (text) ¦ Sted (tekst)
+Sorte d’événement ¦ Druh udalosti ¦ Type hendelse
+Posée sur ¦ Umiestnené na ¦ Plassert på
+l’autre ordinateur ¦ druhý počítač ¦ den andre datamaskinen
+À choisir ¦ Na výber ¦ Må velges
+Sur cet ordinateur ¦ Na tomto počítači ¦ På denne datamaskinen
+Garder la mienne ¦ Ponechať moju ¦ Behold min
+Prendre l’autre ¦ Vziať druhú ¦ Ta den andre
+Garder les deux ¦ Ponechať obe ¦ Behold begge
+Dossier branché ¦ Priečinok pripojený ¦ Mappe tilkoblet
+💻 L’autre : ¦ 💻 Druhý: ¦ 💻 Den andre:
+L’autre ordinateur n’est pas encore passé par ce dossier. ¦ Druhý počítač tento priečinok ešte nepoužil. ¦ Den andre datamaskinen har ikke brukt denne mappen ennå.
+Dossier introuvable pour l’instant (clé débranchée ?). Rien n’est perdu : tes changements partiront la prochaine fois. ¦ Priečinok sa teraz nedá nájsť (odpojený USB kľúč?). Nič sa nestratí: tvoje zmeny odídu nabudúce. ¦ Fant ikke mappen akkurat nå (minnepinnen frakoblet?). Ingenting går tapt: endringene dine sendes neste gang.
+Paquets mis de côté ¦ Odložené balíky ¦ Pakker lagt til side
+Tu as annulé leur fusion : ils ne sont plus repris tout seuls. « Revoir » pour choisir changement par changement. ¦ Vrátil(a) si ich zlúčenie: už sa nepreberajú automaticky. „Prejsť“ a vyber zmenu po zmene. ¦ Du angret sammenslåingen: de tas ikke lenger med automatisk. «Gå gjennom» for å velge endring for endring.
+Revoir ¦ Prejsť ¦ Gå gjennom
+Dernières fusions ¦ Posledné zlúčenia ¦ Siste sammenslåinger
