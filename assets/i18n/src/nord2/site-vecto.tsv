@@ -427,3 +427,1203 @@ Gens d’un lieu ¦ Ľudia z jedného miesta ¦ Folk fra et sted
 </> Montrer ou cacher le code ¦ </> Zobraziť alebo skryť kód ¦ </> Vis eller skjul koden
 le site à l’écran ¦ web na obrazovke ¦ nettstedet på skjermen
 Plan du village en 1850 ¦ Plán dediny v roku 1850 ¦ Bygdekart i 1850
+Lien hypertexte ¦ Hypertextový odkaz ¦ Hyperkobling
+Abréviation ¦ Skratka ¦ Forkortelse
+Coordonnées de contact d’une page ou d’un élément article ¦ Kontaktné údaje stránky alebo prvku article ¦ Kontaktopplysninger for en side eller et article-element
+Lien ou zone inactive sur une image cliquable (map) ¦ Odkaz alebo neaktívna oblasť na klikateľnom obrázku (map) ¦ Lenke eller inaktivt område på et klikkbart bilde (map)
+Composition autonome, qu’on peut diffuser ou réutiliser seule ¦ Samostatný celok, ktorý sa dá šíriť alebo použiť samostatne ¦ Selvstendig innhold som kan deles eller gjenbrukes alene
+Encadré pour un contenu en marge du sujet ¦ Rámček pre obsah mimo hlavnej témy ¦ Boks for innhold ved siden av hovedemnet
+Lecteur audio ¦ Prehrávač zvuku ¦ Lydspiller
+Mots-clés (mis en avant sans importance particulière) ¦ Kľúčové slová (zvýraznené bez osobitnej dôležitosti) ¦ Nøkkelord (fremhevet uten spesiell viktighet)
+Adresse de base et cible par défaut des liens et formulaires ¦ Základná adresa a predvolený cieľ odkazov a formulárov ¦ Basisadresse og standardmål for lenker og skjemaer
+Isole le sens d’écriture d’un texte ¦ Izoluje smer písania textu ¦ Isolerer skriveretningen til en tekst
+Impose le sens d’écriture d’un texte ¦ Vynúti smer písania textu ¦ Tvinger skriveretningen til en tekst
+Passage cité d’une autre source ¦ Úryvok citovaný z iného zdroja ¦ Avsnitt sitert fra en annen kilde
+Corps du document ¦ Telo dokumentu ¦ Dokumentets brødtekst
+Retour à la ligne (dans un poème, une adresse postale…) ¦ Zalomenie riadku (v básni, poštovej adrese…) ¦ Linjeskift (i et dikt, en postadresse…)
+Bouton ¦ Tlačidlo ¦ Knapp
+Zone de dessin pilotée par script ¦ Kresliaca plocha ovládaná skriptom ¦ Tegneområde styrt av skript
+Titre d’un tableau ¦ Popis tabuľky ¦ Tabelltittel
+Titre d’une œuvre ¦ Názov diela ¦ Tittel på et verk
+Code informatique ¦ Počítačový kód ¦ Datakode
+Colonne de tableau ¦ Stĺpec tabuľky ¦ Tabellkolonne
+Groupe de colonnes d’un tableau ¦ Skupina stĺpcov tabuľky ¦ Gruppe av tabellkolonner
+Équivalent lisible par une machine ¦ Strojovo čitateľný ekvivalent ¦ Maskinlesbar ekvivalent
+Liste de propositions pour un champ à saisie libre ¦ Zoznam návrhov pre pole s voľným zadávaním ¦ Liste med forslag til et fritekstfelt
+Contenu du ou des termes dt correspondants ¦ Obsah zodpovedajúcich termínov dt ¦ Innhold for de tilsvarende dt-termene
+Suppression dans le document ¦ Odstránenie v dokumente ¦ Sletting i dokumentet
+Bloc dépliable pour cacher des détails ¦ Rozbaľovací blok na skrytie podrobností ¦ Utvidbar blokk for å skjule detaljer
+Définition d’un terme (première occurrence) ¦ Definícia termínu (prvý výskyt) ¦ Definisjon av et begrep (første forekomst)
+Boîte de dialogue ou fenêtre ¦ Dialógové okno alebo okno ¦ Dialogboks eller vindu
+Conteneur générique (bloc), ou groupe nom-valeur dans un dl ¦ Všeobecný kontajner (blok) alebo skupina názov – hodnota v dl ¦ Generell beholder (blokk), eller navn-verdi-gruppe i en dl
+Liste d’associations : zéro ou plusieurs groupes nom-valeur ¦ Zoznam priradení: žiadna alebo viac skupín názov – hodnota ¦ Beskrivelsesliste: null eller flere navn-verdi-grupper
+Intitulé du ou des éléments dd correspondants ¦ Názov zodpovedajúcich prvkov dd ¦ Overskrift for de tilsvarende dd-elementene
+Accent d’insistance ¦ Dôrazné zvýraznenie ¦ Betoning
+Module externe (plugin) ¦ Externý modul (plugin) ¦ Eksternt modul (plugin)
+Groupe de champs de formulaire ¦ Skupina polí formulára ¦ Gruppe av skjemafelter
+Légende d’une figure ¦ Popis obrázka ¦ Figurtekst
+Figure, avec une légende facultative ¦ Obrázok s nepovinným popisom ¦ Figur med valgfri figurtekst
+Pied d’une page ou d’une section ¦ Päta stránky alebo časti ¦ Bunntekst for en side eller seksjon
+Formulaire à envoyer ¦ Formulár na odoslanie ¦ Skjema som skal sendes
+Titre (niveau 1) ¦ Nadpis (úroveň 1) ¦ Overskrift (nivå 1)
+Titre (niveau 2) ¦ Nadpis (úroveň 2) ¦ Overskrift (nivå 2)
+Titre (niveau 3) ¦ Nadpis (úroveň 3) ¦ Overskrift (nivå 3)
+Titre (niveau 4) ¦ Nadpis (úroveň 4) ¦ Overskrift (nivå 4)
+Titre (niveau 5) ¦ Nadpis (úroveň 5) ¦ Overskrift (nivå 5)
+Titre (niveau 6) ¦ Nadpis (úroveň 6) ¦ Overskrift (nivå 6)
+Conteneur des métadonnées du document ¦ Kontajner metadát dokumentu ¦ Beholder for dokumentets metadata
+Introduction ou aides à la navigation d’une page ou d’une section ¦ Úvod alebo navigačné pomôcky stránky či časti ¦ Innledning eller navigasjonshjelp for en side eller seksjon
+Groupe de titres (titre et sous-titre) ¦ Skupina nadpisov (nadpis a podnadpis) ¦ Overskriftsgruppe (tittel og undertittel)
+Rupture thématique (changement de sujet) ¦ Tematický predel (zmena témy) ¦ Tematisk skille (emneskifte)
+Élément racine ¦ Koreňový prvok ¦ Rotelement
+Autre voix (terme étranger, pensée, nom d’œuvre…) ¦ Iný hlas (cudzí výraz, myšlienka, názov diela…) ¦ Annen stemme (fremmedord, tanke, verktittel…)
+Page incluse dans la page (cadre) ¦ Stránka vložená do stránky (rámec) ¦ Side innebygd i siden (ramme)
+Champ de formulaire ¦ Pole formulára ¦ Skjemafelt
+Ajout dans le document ¦ Vloženie do dokumentu ¦ Tillegg i dokumentet
+Saisie de l’utilisateur (touches) ¦ Vstup používateľa (klávesy) ¦ Brukerinndata (taster)
+Libellé d’un champ de formulaire ¦ Popis poľa formulára ¦ Etikett for et skjemafelt
+Légende d’un fieldset ¦ Popis fieldsetu ¦ Overskrift for et fieldset
+Élément de liste ¦ Položka zoznamu ¦ Listeelement
+Lien de métadonnées (feuille de styles, icône…) ¦ Odkaz na metadáta (šablóna štýlov, ikona…) ¦ Metadatalenke (stilark, ikon…)
+Conteneur du contenu principal du document ¦ Kontajner hlavného obsahu dokumentu ¦ Beholder for dokumentets hovedinnhold
+Image cliquable (zones) ¦ Klikateľný obrázok (oblasti) ¦ Klikkbart bilde (områder)
+Racine MathML (formules) ¦ Koreň MathML (vzorce) ¦ MathML-rot (formler)
+Menu de commandes ¦ Ponuka príkazov ¦ Kommandomeny
+Métadonnée en texte ¦ Textové metadáta ¦ Tekstmetadata
+Jauge ¦ Ukazovateľ ¦ Måler
+Section de liens de navigation ¦ Časť s navigačnými odkazmi ¦ Seksjon med navigasjonslenker
+Contenu de secours quand les scripts ne tournent pas ¦ Záložný obsah, keď skripty nebežia ¦ Reserveinnhold når skript ikke kjører
+Image, page incluse ou module externe ¦ Obrázok, vložená stránka alebo externý modul ¦ Bilde, innebygd side eller eksternt modul
+Groupe d’options dans une liste ¦ Skupina možností v zozname ¦ Gruppe av alternativer i en liste
+Option d’une liste ou d’un champ à choix ¦ Možnosť zoznamu alebo výberového poľa ¦ Alternativ i en liste eller et valgfelt
+Résultat d’un calcul ¦ Výsledok výpočtu ¦ Resultat av en beregning
+Image (avec plusieurs sources) ¦ Obrázok (s viacerými zdrojmi) ¦ Bilde (med flere kilder)
+Bloc de texte préformaté ¦ Blok predformátovaného textu ¦ Blokk med forhåndsformatert tekst
+Barre de progression ¦ Indikátor priebehu ¦ Fremdriftslinje
+Citation courte ¦ Krátka citácia ¦ Kort sitat
+Parenthèse pour une annotation ruby ¦ Zátvorka pre anotáciu ruby ¦ Parentes for en ruby-annotasjon
+Texte d’une annotation ruby ¦ Text anotácie ruby ¦ Tekst i en ruby-annotasjon
+Annotation(s) ruby (prononciation au-dessus du texte) ¦ Anotácie ruby (výslovnosť nad textom) ¦ Ruby-annotasjoner (uttale over teksten)
+Texte qui n’est plus exact ¦ Text, ktorý už nie je presný ¦ Tekst som ikke lenger er korrekt
+Sortie d’un programme ¦ Výstup programu ¦ Utdata fra et program
+Script intégré ¦ Vložený skript ¦ Innebygd skript
+Conteneur des champs de recherche ¦ Kontajner vyhľadávacích polí ¦ Beholder for søkefelter
+Section générique d’un document ou d’une application ¦ Všeobecná časť dokumentu alebo aplikácie ¦ Generell seksjon i et dokument eller et program
+Liste déroulante ¦ Rozbaľovací zoznam ¦ Nedtrekksliste
+Reprend le contenu de l’option choisie ¦ Prevezme obsah zvolenej možnosti ¦ Gjentar innholdet i det valgte alternativet
+Emplacement dans un arbre « shadow » ¦ Miesto v tieňovom strome (shadow) ¦ Plass i et skyggetre (shadow)
+Remarque en marge (petits caractères) ¦ Poznámka na okraj (drobné písmo) ¦ Merknad i margen (liten skrift)
+Source d’une image (img) ou d’un média (video, audio) ¦ Zdroj obrázka (img) alebo média (video, audio) ¦ Kilde for et bilde (img) eller et medium (video, audio)
+Conteneur générique (dans le texte) ¦ Všeobecný kontajner (v texte) ¦ Generell beholder (i teksten)
+Importance ¦ Dôležitosť ¦ Viktighet
+Styles intégrés ¦ Vložené štýly ¦ Innebygde stiler
+Intitulé d’un details ¦ Názov prvku details ¦ Overskrift for et details-element
+Racine SVG (dessin vectoriel) ¦ Koreň SVG (vektorová kresba) ¦ SVG-rot (vektortegning)
+Groupe de lignes d’un tableau ¦ Skupina riadkov tabuľky ¦ Gruppe av tabellrader
+Cellule de tableau ¦ Bunka tabuľky ¦ Tabellcelle
+Modèle (contenu inerte, à copier par script) ¦ Šablóna (neaktívny obsah na kopírovanie skriptom) ¦ Mal (inaktivt innhold som kopieres med skript)
+Zone de texte sur plusieurs lignes ¦ Viacriadkové textové pole ¦ Tekstfelt med flere linjer
+Groupe de lignes de pied d’un tableau ¦ Skupina riadkov päty tabuľky ¦ Gruppe av bunnrader i en tabell
+Cellule d’en-tête de tableau ¦ Bunka záhlavia tabuľky ¦ Overskriftscelle i en tabell
+Groupe de lignes d’en-tête d’un tableau ¦ Skupina riadkov záhlavia tabuľky ¦ Gruppe av overskriftsrader i en tabell
+Date ou heure, lisible par une machine ¦ Dátum alebo čas, strojovo čitateľný ¦ Dato eller klokkeslett, maskinlesbart
+Titre du document (onglet du navigateur) ¦ Názov dokumentu (karta prehliadača) ¦ Dokumentets tittel (nettleserfanen)
+Ligne de tableau ¦ Riadok tabuľky ¦ Tabellrad
+Piste de texte minutée (sous-titres) ¦ Časovaná textová stopa (titulky) ¦ Tidsstyrt tekstspor (undertekster)
+Annotation non exprimée (souligné) ¦ Nevyslovená anotácia (podčiarknutie) ¦ Uuttalt annotasjon (understreking)
+Variable ¦ Premenná ¦ Variabel
+Lecteur vidéo ¦ Prehrávač videa ¦ Videospiller
+Possibilité de coupure de ligne ¦ Možné zalomenie riadku ¦ Mulig linjeskift
+texte courant ¦ textový obsah ¦ tekstinnhold
+interactif ¦ interaktívny ¦ interaktivt
+palpable ¦ hmatateľný ¦ håndgripelig
+transparent ¦ priehľadný ¦ transparent
+vide ¦ prázdny ¦ tomt
+intégré ¦ vložený ¦ innebygd
+métadonnées ¦ metadáta ¦ metadata
+listé ¦ uvedený v zozname ¦ listet
+avec libellé ¦ s popisom ¦ med etikett
+envoyable ¦ odoslateľný ¦ kan sendes
+associé à un formulaire ¦ priradený k formuláru ¦ knyttet til et skjema
+éléments de soutien aux scripts ¦ prvky podporujúce skripty ¦ skriptstøttende elementer
+contenu de métadonnées ¦ obsah metadát ¦ metadatainnhold
+réinitialisable ¦ obnoviteľný ¦ kan tilbakestilles
+contenu de titre ¦ obsah nadpisu ¦ overskriftsinnhold
+selon MathML ¦ podľa MathML ¦ ifølge MathML
+un img ¦ jeden img ¦ én img
+soutien aux scripts ¦ podpora skriptov ¦ skriptstøtte
+script, data, ou documentation du script ¦ skript, dáta alebo dokumentácia skriptu ¦ skript, data eller skriptdokumentasjon
+selon SVG ¦ podľa SVG ¦ ifølge SVG
+flux ¦ tokový obsah ¦ flytinnhold
+tous les éléments ¦ všetky prvky ¦ alle elementer
+voir chaque propriété ¦ pozri jednotlivé vlastnosti ¦ se hver egenskap
+éléments positionnés ¦ umiestnené prvky ¦ posisjonerte elementer
+tous les éléments et le texte ¦ všetky prvky a text ¦ alle elementer og tekst
+éléments d’un flex ¦ prvky flexu ¦ flex-elementer
+conteneurs flex ¦ flexové kontajnery ¦ flex-beholdere
+conteneurs de grille ¦ kontajnery mriežky ¦ rutenett-beholdere
+éléments remplacés (img, video…) ¦ nahradené prvky (img, video…) ¦ erstattede elementer (img, video…)
+éléments transformables ¦ transformovateľné prvky ¦ transformerbare elementer
+conteneurs de blocs ¦ blokové kontajnery ¦ blokkbeholdere
+éléments personnalisés de formulaire ¦ vlastné prvky formulára ¦ egendefinerte skjemaelementer
+présent ou absent ¦ prítomný alebo neprítomný ¦ til stede eller fraværende
+mots séparés par des espaces ¦ slová oddelené medzerami ¦ ord atskilt med mellomrom
+adresse (URL) ¦ adresa (URL) ¦ adresse (URL)
+chaîne vide ¦ prázdny reťazec ¦ tom streng
+nombre entier ¦ celé číslo ¦ heltall
+un id ¦ id ¦ en id
+nombres ¦ čísla ¦ tall
+date (et heure) ¦ dátum (a čas) ¦ dato (og klokkeslett)
+date, heure, durée… ¦ dátum, čas, trvanie… ¦ dato, klokkeslett, varighet…
+nom de cadre ou _blank, _self, _parent, _top ¦ názov rámca alebo _blank, _self, _parent, _top ¦ rammenavn eller _blank, _self, _parent, _top
+nombre entier between 0 and 8 ¦ celé číslo od 0 do 8 ¦ heltall mellom 0 og 8
+code de langue (fr, en…) ¦ kód jazyka (fr, en…) ¦ språkkode (fr, en…)
+code de langue (fr, en…) or chaîne vide ¦ kód jazyka (fr, en…) alebo prázdny reťazec ¦ språkkode (fr, en…) eller tom streng
+tailles (sizes) ¦ veľkosti (sizes) ¦ størrelser (sizes)
+liste d’images (srcset) ¦ zoznam obrázkov (srcset) ¦ bildeliste (srcset)
+requête @media ¦ dopyt @media ¦ @media-spørring
+expression régulière ¦ regulárny výraz ¦ regulært uttrykk
+déclarations CSS ¦ deklarácie CSS ¦ CSS-deklarasjoner
+type MIME (image/png…) ¦ typ MIME (image/png…) ¦ MIME-type (image/png…)
+un type de champ (text, email, date, number…) ¦ typ poľa (text, email, date, number…) ¦ en felttype (text, email, date, number…)
+liste séparée par des virgules consisting of valid MIME type strings with no parameters or audio/*, video/*, or image/* ¦ čiarkami oddelený zoznam platných typov MIME bez parametrov alebo audio/*, video/* či image/* ¦ kommaseparert liste med gyldige MIME-typer uten parametere, eller audio/*, video/* eller image/*
+nombre greater than zero, or "any" ¦ číslo väčšie ako nula alebo "any" ¦ tall større enn null, eller "any"
+Couleur des cases, boutons radio, curseurs ¦ Farba začiarkavacích políčok, prepínačov, posúvačov ¦ Farge på avkrysningsbokser, radioknapper, glidebrytere
+Répartition des lignes (flex à plusieurs lignes, grid) ¦ Rozloženie riadkov (viacriadkový flex, grid) ¦ Fordeling av linjer (flex med flere linjer, grid)
+Alignement des éléments sur l’axe secondaire ¦ Zarovnanie prvkov na vedľajšej osi ¦ Justering av elementer på tverraksen
+Alignement de cet élément seul ¦ Zarovnanie iba tohto prvku ¦ Justering av bare dette elementet
+Raccourci d’une animation (@keyframes) ¦ Skratka animácie (@keyframes) ¦ Kortform for en animasjon (@keyframes)
+Délai avant l’animation ¦ Oneskorenie pred animáciou ¦ Forsinkelse før animasjonen
+Sens de l’animation ¦ Smer animácie ¦ Animasjonens retning
+Durée de l’animation ¦ Trvanie animácie ¦ Animasjonens varighet
+État avant et après l’animation ¦ Stav pred animáciou a po nej ¦ Tilstand før og etter animasjonen
+Nombre de répétitions (infinite) ¦ Počet opakovaní (infinite) ¦ Antall gjentakelser (infinite)
+Nom de l’animation (@keyframes) ¦ Názov animácie (@keyframes) ¦ Animasjonens navn (@keyframes)
+Rythme de l’animation ¦ Časovanie animácie ¦ Animasjonens tempo
+Apparence native d’un champ ou d’un bouton ¦ Natívny vzhľad poľa alebo tlačidla ¦ Innebygd utseende for et felt eller en knapp
+Proportions largeur / hauteur (16 / 9…) ¦ Pomer šírky a výšky (16 / 9…) ¦ Forhold bredde / høyde (16 / 9…)
+Effets sur ce qu’il y a derrière (verre dépoli) ¦ Efekty na to, čo je za ním (matné sklo) ¦ Effekter på det som er bak (frostet glass)
+Raccourci : couleur, image, position et taille du fond ¦ Skratka: farba, obrázok, poloha a veľkosť pozadia ¦ Kortform: bakgrunnens farge, bilde, posisjon og størrelse
+Le fond défile avec la page ou reste fixe ¦ Pozadie sa posúva so stránkou alebo zostáva pevné ¦ Bakgrunnen ruller med siden eller står fast
+Jusqu’où va le fond (bordure, marges intérieures, texte) ¦ Kam až siaha pozadie (okraj, vnútorné odsadenie, text) ¦ Hvor langt bakgrunnen går (kant, innvendig marg, tekst)
+Image(s) ou dégradé(s) du fond ¦ Obrázky alebo prechody pozadia ¦ Bakgrunnsbilde(r) eller -overgang(er)
+Point de départ de l’image de fond ¦ Východiskový bod obrázka pozadia ¦ Utgangspunkt for bakgrunnsbildet
+Place de l’image de fond ¦ Poloha obrázka pozadia ¦ Posisjon for bakgrunnsbildet
+Répétition de l’image de fond ¦ Opakovanie obrázka pozadia ¦ Gjentakelse av bakgrunnsbildet
+Taille de l’image de fond (cover, contain, 100px…) ¦ Veľkosť obrázka pozadia (cover, contain, 100px…) ¦ Størrelse på bakgrunnsbildet (cover, contain, 100px…)
+Hauteur (selon le sens d’écriture) ¦ Výška (podľa smeru písania) ¦ Høyde (etter skriveretningen)
+Raccourci : épaisseur, style et couleur de la bordure ¦ Skratka: hrúbka, štýl a farba okraja ¦ Kortform: kantens tykkelse, stil og farge
+Bordures de tableau fusionnées ou séparées ¦ Zlúčené alebo oddelené okraje tabuľky ¦ Tabellkanter slått sammen eller atskilt
+Couleur de la bordure ¦ Farba okraja ¦ Kantfarge
+Image utilisée comme bordure ¦ Obrázok použitý ako okraj ¦ Bilde brukt som kant
+Bordure de gauche ¦ Ľavý okraj ¦ Venstre kant
+Bordure de droite ¦ Pravý okraj ¦ Høyre kant
+Espace entre les cellules ¦ Medzera medzi bunkami ¦ Avstand mellom cellene
+Style de la bordure (solid, dashed, dotted…) ¦ Štýl okraja (solid, dashed, dotted…) ¦ Kantstil (solid, dashed, dotted…)
+Bordure du haut ¦ Horný okraj ¦ Øverste kant
+Épaisseur de la bordure ¦ Hrúbka okraja ¦ Kanttykkelse
+Décalage depuis le bas (avec position) ¦ Posun zdola (s position) ¦ Forskyvning fra bunnen (med position)
+Ombre autour de la boîte ¦ Tieň okolo rámčeka ¦ Skygge rundt boksen
+La largeur compte-t-elle les bordures et l’espace intérieur (border-box) ? ¦ Zahŕňa šírka okraje a vnútorné odsadenie (border-box)? ¦ Regnes kanter og innvendig marg med i bredden (border-box)?
+Saut (page, colonne) après ¦ Zalomenie (stránky, stĺpca) za ¦ Skift (side, kolonne) etter
+Saut (page, colonne) avant ¦ Zalomenie (stránky, stĺpca) pred ¦ Skift (side, kolonne) før
+Éviter de couper l’élément ¦ Nerozdeľovať prvok ¦ Unngå å dele elementet
+Titre du tableau en haut ou en bas ¦ Popis tabuľky hore alebo dole ¦ Tabelltittel øverst eller nederst
+Couleur du curseur de saisie ¦ Farba textového kurzora ¦ Farge på tekstmarkøren
+Passe sous les éléments flottants ¦ Posunie sa pod plávajúce prvky ¦ Plasseres under flytende elementer
+Découpe en forme (cercle, polygone…) ¦ Orezanie do tvaru (kruh, mnohouholník…) ¦ Beskjær til en form (sirkel, polygon…)
+Nombre de colonnes de texte ¦ Počet textových stĺpcov ¦ Antall tekstkolonner
+Espace entre les colonnes ¦ Medzera medzi stĺpcami ¦ Avstand mellom kolonnene
+Trait entre les colonnes de texte ¦ Čiara medzi textovými stĺpcami ¦ Linje mellom tekstkolonnene
+Largeur des colonnes de texte ¦ Šírka textových stĺpcov ¦ Bredde på tekstkolonnene
+Texte en plusieurs colonnes ¦ Text vo viacerých stĺpcoch ¦ Tekst i flere kolonner
+Isole l’élément pour accélérer l’affichage ¦ Izoluje prvok pre rýchlejšie vykresľovanie ¦ Isolerer elementet for raskere visning
+Nom du conteneur (@container) ¦ Názov kontajnera (@container) ¦ Beholderens navn (@container)
+Fait de l’élément un conteneur (@container) ¦ Urobí z prvku kontajner (@container) ¦ Gjør elementet til en beholder (@container)
+Contenu généré (::before, ::after) ¦ Generovaný obsah (::before, ::after) ¦ Generert innhold (::before, ::after)
+Augmente un compteur ¦ Zvýši počítadlo ¦ Øker en teller
+Remet un compteur à zéro ¦ Vynuluje počítadlo ¦ Nullstiller en teller
+Forme du pointeur de la souris ¦ Tvar ukazovateľa myši ¦ Formen på musepekeren
+Sens du texte (ltr, rtl) ¦ Smer textu (ltr, rtl) ¦ Tekstretning (ltr, rtl)
+Façon d’afficher la boîte : block, inline, flex, grid, none… ¦ Spôsob zobrazenia rámčeka: block, inline, flex, grid, none… ¦ Hvordan boksen vises: block, inline, flex, grid, none…
+Bordures des cellules vides ¦ Okraje prázdnych buniek ¦ Kanter på tomme celler
+Effets : flou, noir et blanc, luminosité… ¦ Efekty: rozmazanie, čiernobiela, jas… ¦ Effekter: uskarphet, svart-hvitt, lysstyrke…
+Raccourci : capacité à grandir, rétrécir, taille de départ (flexbox) ¦ Skratka: schopnosť rásť, zmenšovať sa, východisková veľkosť (flexbox) ¦ Kortform: evne til å vokse, krympe, startstørrelse (flexbox)
+Taille de départ dans un flex ¦ Východisková veľkosť vo flexe ¦ Startstørrelse i en flex
+Sens des éléments d’un flex : ligne ou colonne ¦ Smer prvkov flexu: riadok alebo stĺpec ¦ Retning for flex-elementer: rad eller kolonne
+Raccourci de flex-direction et flex-wrap ¦ Skratka pre flex-direction a flex-wrap ¦ Kortform for flex-direction og flex-wrap
+Part de la place libre prise par l’élément ¦ Podiel voľného miesta, ktorý prvok zaberie ¦ Andel av den ledige plassen elementet tar
+Capacité à rétrécir ¦ Schopnosť zmenšovať sa ¦ Evne til å krympe
+Les éléments d’un flex passent à la ligne ou non ¦ Či sa prvky flexu zalamujú na nový riadok ¦ Om flex-elementer brytes over på nye linjer
+Fait flotter à gauche ou à droite (le texte l’entoure) ¦ Nechá plávať vľavo alebo vpravo (text ho obteká) ¦ Flyter til venstre eller høyre (teksten flyter rundt)
+Raccourci : style, graisse, taille, interligne et police ¦ Skratka: štýl, hrúbka, veľkosť, riadkovanie a písmo ¦ Kortform: stil, vekt, størrelse, linjeavstand og skrift
+Police (et polices de secours) ¦ Písmo (a záložné písma) ¦ Skrift (og reserveskrifter)
+Fonctions OpenType de la police ¦ Funkcie OpenType písma ¦ Skriftens OpenType-funksjoner
+Italique ou droit ¦ Kurzíva alebo vzpriamené ¦ Kursiv eller rett
+Variantes (petites capitales…) ¦ Varianty (kapitálky…) ¦ Varianter (kapitéler…)
+Graisse du texte (400 normal, 700 gras) ¦ Hrúbka textu (400 normálne, 700 tučné) ¦ Tekstvekt (400 normal, 700 fet)
+Espace entre les éléments (flex, grid, colonnes) ¦ Medzera medzi prvkami (flex, grid, stĺpce) ¦ Avstand mellom elementer (flex, grid, kolonner)
+Raccourci de toute la grille ¦ Skratka celej mriežky ¦ Kortform for hele rutenettet
+Zone de la grille occupée par l’élément ¦ Oblasť mriežky, ktorú prvok zaberá ¦ Område i rutenettet som elementet tar
+Taille des colonnes créées automatiquement ¦ Veľkosť automaticky vytvorených stĺpcov ¦ Størrelse på automatisk opprettede kolonner
+Comment la grille place les éléments sans place précise ¦ Ako mriežka umiestni prvky bez určeného miesta ¦ Hvordan rutenettet plasserer elementer uten fast plass
+Taille des lignes créées automatiquement ¦ Veľkosť automaticky vytvorených riadkov ¦ Størrelse på automatisk opprettede rader
+Colonnes occupées par l’élément ¦ Stĺpce, ktoré prvok zaberá ¦ Kolonner som elementet tar
+Lignes occupées par l’élément ¦ Riadky, ktoré prvok zaberá ¦ Rader som elementet tar
+Zones nommées de la grille ¦ Pomenované oblasti mriežky ¦ Navngitte områder i rutenettet
+Colonnes de la grille (1fr 1fr, repeat(3, 1fr)…) ¦ Stĺpce mriežky (1fr 1fr, repeat(3, 1fr)…) ¦ Kolonner i rutenettet (1fr 1fr, repeat(3, 1fr)…)
+Lignes de la grille ¦ Riadky mriežky ¦ Rader i rutenettet
+Césure automatique (avec lang) ¦ Automatické delenie slov (s lang) ¦ Automatisk orddeling (med lang)
+Agrandissement d’une image (net, lissé) ¦ Zväčšenie obrázka (ostré, vyhladené) ¦ Forstørring av et bilde (skarpt, utjevnet)
+Largeur (selon le sens d’écriture) ¦ Šírka (podľa smeru písania) ¦ Bredde (etter skriveretningen)
+Raccourci de top, right, bottom, left ¦ Skratka pre top, right, bottom, left ¦ Kortform for top, right, bottom, left
+Crée un nouveau groupe d’empilement ¦ Vytvorí nový kontext vrstvenia ¦ Oppretter en ny stablingskontekst
+Répartition des éléments sur l’axe principal (flex, grid) ¦ Rozloženie prvkov na hlavnej osi (flex, grid) ¦ Fordeling av elementer på hovedaksen (flex, grid)
+Alignement des éléments dans leur case (grid) ¦ Zarovnanie prvkov v ich bunke (grid) ¦ Justering av elementer i cellen sin (grid)
+Alignement de cet élément dans sa case ¦ Zarovnanie tohto prvku v jeho bunke ¦ Justering av dette elementet i cellen sin
+Décalage depuis la gauche (avec position) ¦ Posun zľava (s position) ¦ Forskyvning fra venstre (med position)
+Raccourci du style des puces ¦ Skratka štýlu odrážok ¦ Kortform for punktstil
+Image de puce ¦ Obrázok odrážky ¦ Punktbilde
+Puces dedans ou dehors ¦ Odrážky vnútri alebo zvonka ¦ Punkttegn innenfor eller utenfor
+Forme des puces ou numéros ¦ Tvar odrážok alebo čísel ¦ Form på punkttegn eller numre
+Marge extérieure (les 4 côtés) ¦ Vonkajší okraj (všetky 4 strany) ¦ Marg (alle 4 sider)
+Marges extérieures haut et bas (selon le sens d’écriture) ¦ Vonkajšie okraje hore a dole (podľa smeru písania) ¦ Marger øverst og nederst (etter skriveretningen)
+Marge extérieure en bas ¦ Vonkajší okraj dole ¦ Marg nederst
+Marges extérieures des côtés (selon le sens d’écriture) ¦ Vonkajšie okraje po stranách (podľa smeru písania) ¦ Sidemarger (etter skriveretningen)
+Marge extérieure à gauche ¦ Vonkajší okraj vľavo ¦ Marg til venstre
+Marge extérieure à droite ¦ Vonkajší okraj vpravo ¦ Marg til høyre
+Marge extérieure en haut ¦ Vonkajší okraj hore ¦ Marg øverst
+Masque (image ou dégradé) ¦ Maska (obrázok alebo prechod) ¦ Maske (bilde eller overgang)
+Hauteur maximale ¦ Maximálna výška ¦ Maksimal høyde
+Largeur maximale ¦ Maximálna šírka ¦ Maksimal bredde
+Hauteur minimale ¦ Minimálna výška ¦ Minimal høyde
+Largeur minimale ¦ Minimálna šírka ¦ Minimal bredde
+Mélange avec ce qu’il y a dessous ¦ Prelínanie s tým, čo je pod ním ¦ Blanding med det som er under
+Image ou vidéo dans sa boîte : cover, contain… ¦ Obrázok alebo video v rámčeku: cover, contain… ¦ Bilde eller video i boksen sin: cover, contain…
+Place de l’image dans sa boîte ¦ Poloha obrázka v rámčeku ¦ Bildets posisjon i boksen
+Transparence de tout l’élément (0 : invisible, 1 : opaque) ¦ Priehľadnosť celého prvku (0: neviditeľný, 1: nepriehľadný) ¦ Gjennomsiktighet for hele elementet (0: usynlig, 1: ugjennomsiktig)
+Ordre d’affichage dans un flex ou une grille ¦ Poradie zobrazenia vo flexe alebo mriežke ¦ Visningsrekkefølge i en flex eller et rutenett
+Lignes minimum en bas de page ¦ Minimum riadkov dole na stránke ¦ Minste antall linjer nederst på en side
+Contour (n’occupe pas de place), utile pour le focus clavier ¦ Obrys (nezaberá miesto), užitočný pre fokus klávesnice ¦ Omriss (tar ikke plass), nyttig for tastaturfokus
+Écart entre le contour et la bordure ¦ Medzera medzi obrysom a okrajom ¦ Avstand mellom omriss og kant
+Ce qui dépasse : visible, caché, barre de défilement ¦ Čo presahuje: viditeľné, skryté, posuvník ¦ Det som stikker ut: synlig, skjult, rullefelt
+Couper un mot trop long pour qu’il tienne ¦ Rozdeliť príliš dlhé slovo, aby sa zmestilo ¦ Del et for langt ord så det får plass
+Ce qui dépasse en largeur ¦ Čo presahuje do šírky ¦ Det som stikker ut i bredden
+Ce qui dépasse en hauteur ¦ Čo presahuje do výšky ¦ Det som stikker ut i høyden
+Espace intérieur (les 4 côtés) ¦ Vnútorné odsadenie (všetky 4 strany) ¦ Innvendig marg (alle 4 sider)
+Espaces intérieurs haut et bas ¦ Vnútorné odsadenie hore a dole ¦ Innvendig marg øverst og nederst
+Espace intérieur en bas ¦ Vnútorné odsadenie dole ¦ Innvendig marg nederst
+Espaces intérieurs des côtés ¦ Vnútorné odsadenie po stranách ¦ Innvendig marg på sidene
+Espace intérieur à gauche ¦ Vnútorné odsadenie vľavo ¦ Innvendig marg til venstre
+Espace intérieur à droite ¦ Vnútorné odsadenie vpravo ¦ Innvendig marg til høyre
+Espace intérieur en haut ¦ Vnútorné odsadenie hore ¦ Innvendig marg øverst
+Raccourci de align-content et justify-content ¦ Skratka pre align-content a justify-content ¦ Kortform for align-content og justify-content
+Raccourci de align-items et justify-items ¦ Skratka pre align-items a justify-items ¦ Kortform for align-items og justify-items
+L’élément réagit-il à la souris ? ¦ Reaguje prvok na myš? ¦ Reagerer elementet på musen?
+Placement : static, relative, absolute, fixed, sticky ¦ Umiestnenie: static, relative, absolute, fixed, sticky ¦ Plassering: static, relative, absolute, fixed, sticky
+Guillemets utilisés par <q> ¦ Úvodzovky používané prvkom <q> ¦ Anførselstegn brukt av <q>
+L’utilisateur peut-il redimensionner (textarea…) ¦ Môže používateľ meniť veľkosť (textarea…) ¦ Kan brukeren endre størrelsen (textarea…)
+Décalage depuis la droite (avec position) ¦ Posun sprava (s position) ¦ Forskyvning fra høyre (med position)
+Tourner ¦ Otočiť ¦ Roter
+Agrandir ou réduire ¦ Zväčšiť alebo zmenšiť ¦ Forstørr eller forminsk
+Défilement doux vers une ancre ¦ Plynulé posúvanie ku kotve ¦ Myk rulling til et anker
+Marge gardée quand on fait défiler jusqu’à l’élément ¦ Okraj zachovaný pri posúvaní k prvku ¦ Marg som beholdes når du ruller til elementet
+Défilement qui s’arrête sur des éléments ¦ Posúvanie, ktoré sa zastavuje na prvkoch ¦ Rulling som stopper ved elementer
+Calcul de la largeur des colonnes d’un tableau ¦ Výpočet šírky stĺpcov tabuľky ¦ Beregning av bredden på tabellkolonnene
+Alignement du texte (gauche, centré, droite, justifié) ¦ Zarovnanie textu (vľavo, na stred, vpravo, do bloku) ¦ Tekstjustering (venstre, midtstilt, høyre, blokkjustert)
+Soulignement, barré… ¦ Podčiarknutie, prečiarknutie… ¦ Understreking, gjennomstreking…
+Couleur du soulignement ¦ Farba podčiarknutia ¦ Farge på understrekingen
+Épaisseur du soulignement ¦ Hrúbka podčiarknutia ¦ Tykkelse på understrekingen
+Retrait de la première ligne ¦ Odsadenie prvého riadku ¦ Innrykk på første linje
+Texte coupé : « … » à la fin ¦ Orezaný text: „…“ na konci ¦ Avkortet tekst: «…» på slutten
+Majuscules, minuscules, capitales ¦ Veľké písmená, malé písmená, veľké začiatočné ¦ Store bokstaver, små bokstaver, stor forbokstav
+Écart du soulignement ¦ Odsadenie podčiarknutia ¦ Avstand for understrekingen
+Façon de couper les lignes (balance, pretty…) ¦ Spôsob zalamovania riadkov (balance, pretty…) ¦ Hvordan linjene brytes (balance, pretty…)
+Décalage depuis le haut (avec position) ¦ Posun zhora (s position) ¦ Forskyvning fra toppen (med position)
+Déplacer, tourner, agrandir, incliner ¦ Posunúť, otočiť, zväčšiť, skosiť ¦ Flytt, roter, forstørr, skråstill
+Point d’appui des transformations ¦ Bod transformácií ¦ Utgangspunkt for transformasjonene
+Changement progressif d’une valeur à l’autre ¦ Postupná zmena z jednej hodnoty na druhú ¦ Gradvis endring fra én verdi til en annen
+Délai avant la transition ¦ Oneskorenie pred prechodom ¦ Forsinkelse før overgangen
+Durée de la transition ¦ Trvanie prechodu ¦ Overgangens varighet
+Propriétés qui changent en douceur ¦ Vlastnosti, ktoré sa menia plynulo ¦ Egenskaper som endres mykt
+Rythme de la transition (ease, linear…) ¦ Časovanie prechodu (ease, linear…) ¦ Overgangens tempo (ease, linear…)
+Le texte peut-il être sélectionné ? ¦ Dá sa text označiť? ¦ Kan teksten merkes?
+Alignement vertical dans la ligne ou une cellule ¦ Zvislé zarovnanie v riadku alebo bunke ¦ Loddrett justering i linjen eller en celle
+Visible ou caché (en gardant la place) ¦ Viditeľné alebo skryté (miesto zostáva) ¦ Synlig eller skjult (beholder plassen)
+Gestion des espaces et des retours à la ligne ¦ Zaobchádzanie s medzerami a zalomeniami riadkov ¦ Håndtering av mellomrom og linjeskift
+Lignes minimum en haut de page ¦ Minimum riadkov hore na stránke ¦ Minste antall linjer øverst på en side
+Prévient le navigateur d’un changement (animations) ¦ Upozorní prehliadač na zmenu (animácie) ¦ Varsler nettleseren om en endring (animasjoner)
+Coupure des mots longs ¦ Delenie dlhých slov ¦ Deling av lange ord
+Sens d’écriture (horizontal, vertical) ¦ Smer písania (vodorovne, zvisle) ¦ Skriveretning (vannrett, loddrett)
+Ordre d’empilement (qui passe devant) ¦ Poradie vrstvenia (čo je vpredu) ¦ Stablingsrekkefølge (hva som ligger foran)
+Trouve le premier élément qui correspond à un sélecteur CSS ¦ Nájde prvý prvok zodpovedajúci selektoru CSS ¦ Finner det første elementet som passer til en CSS-selektor
+Trouve tous les éléments qui correspondent (une liste) ¦ Nájde všetky zodpovedajúce prvky (zoznam) ¦ Finner alle elementer som passer (en liste)
+Trouve l’élément qui a cet id ¦ Nájde prvok s týmto id ¦ Finner elementet med denne id-en
+Réagit à un évènement (click, input, submit…) ¦ Reaguje na udalosť (click, input, submit…) ¦ Reagerer på en hendelse (click, input, submit…)
+Arrête de réagir à un évènement ¦ Prestane reagovať na udalosť ¦ Slutter å reagere på en hendelse
+Empêche l’action habituelle (suivre un lien, envoyer un formulaire) ¦ Zabráni obvyklej akcii (otvorenie odkazu, odoslanie formulára) ¦ Hindrer standardhandlingen (følge en lenke, sende et skjema)
+Ajouter, retirer, basculer une classe ¦ Pridať, odobrať, prepnúť triedu ¦ Legg til, fjern, veksle en klasse
+Le texte d’un élément (sans HTML) ¦ Text prvku (bez HTML) ¦ Teksten i et element (uten HTML)
+Le HTML à l’intérieur d’un élément (attention aux textes venus d’ailleurs) ¦ HTML vo vnútri prvku (pozor na texty odinakiaľ) ¦ HTML inne i et element (vær forsiktig med tekst utenfra)
+Donne une valeur à un attribut ¦ Nastaví hodnotu atribútu ¦ Gir et attributt en verdi
+Lit la valeur d’un attribut ¦ Prečíta hodnotu atribútu ¦ Leser verdien til et attributt
+Les attributs data-… d’un élément ¦ Atribúty data-… prvku ¦ Data-…-attributtene til et element
+Les styles écrits sur l’élément (style="…") ¦ Štýly zapísané priamo na prvku (style="…") ¦ Stiler skrevet på elementet (style="…")
+Crée un nouvel élément ¦ Vytvorí nový prvok ¦ Oppretter et nytt element
+Ajoute à la fin d’un élément ¦ Pridá na koniec prvku ¦ Legger til på slutten av et element
+Retire l’élément de la page ¦ Odoberie prvok zo stránky ¦ Fjerner elementet fra siden
+Le plus proche parent qui correspond au sélecteur ¦ Najbližší rodič zodpovedajúci selektoru ¦ Nærmeste forelder som passer til selektoren
+L’élément correspond-il au sélecteur ? ¦ Zodpovedá prvok selektoru? ¦ Passer elementet til selektoren?
+Fait défiler jusqu’à l’élément ¦ Posunie až k prvku ¦ Ruller til elementet
+Lance une fonction après un délai (en ms) ¦ Spustí funkciu po oneskorení (v ms) ¦ Kjører en funksjon etter en forsinkelse (i ms)
+Lance une fonction à intervalles réguliers ¦ Spúšťa funkciu v pravidelných intervaloch ¦ Kjører en funksjon med jevne mellomrom
+Garde des petites données dans le navigateur ¦ Uchováva malé dáta v prehliadači ¦ Lagrer små data i nettleseren
+Charge un fichier ou des données (JSON…) ¦ Načíta súbor alebo dáta (JSON…) ¦ Laster inn en fil eller data (JSON…)
+Texte JSON ↔ objet JavaScript ¦ Text JSON ↔ objekt JavaScript ¦ JSON-tekst ↔ JavaScript-objekt
+Écrit dans la console du navigateur (pour vérifier) ¦ Zapíše do konzoly prehliadača (na kontrolu) ¦ Skriver i nettleserens konsoll (for å sjekke)
+Évènement : la page est prête (HTML lu) ¦ Udalosť: stránka je pripravená (HTML načítané) ¦ Hendelse: siden er klar (HTML lest)
+Évènements courants : clic, saisie, changement, envoi ¦ Bežné udalosti: kliknutie, zadanie, zmena, odoslanie ¦ Vanlige hendelser: klikk, inntasting, endring, innsending
+Prévient quand un élément entre à l’écran (apparitions au défilement) ¦ Upozorní, keď prvok vstúpi na obrazovku (objavovanie pri posúvaní) ¦ Sier fra når et element kommer inn på skjermen (vises ved rulling)
+Teste une requête @media en JS ¦ Otestuje dopyt @media v JS ¦ Tester en @media-spørring i JS
+Déclare une variable (const : ne change plus) ¦ Deklaruje premennú (const: už sa nemení) ¦ Deklarerer en variabel (const: endres ikke)
+Déclare une fonction (=> : écriture courte) ¦ Deklaruje funkciu (=>: krátky zápis) ¦ Deklarerer en funksjon (=>: kort skrivemåte)
+Fait une chose ou une autre selon une condition ¦ Urobí jedno alebo druhé podľa podmienky ¦ Gjør én ting eller en annen avhengig av en betingelse
+Parcourt une liste ¦ Prejde zoznam ¦ Går gjennom en liste
+Transforme, trie ou parcourt un tableau ¦ Prevedie, zoradí alebo prejde pole ¦ Omformer, sorterer eller går gjennom en matrise
+Attend un résultat (fetch…) sans bloquer la page ¦ Čaká na výsledok (fetch…) bez blokovania stránky ¦ Venter på et resultat (fetch…) uten å blokkere siden
+Attrape une erreur pour l’afficher proprement ¦ Zachytí chybu, aby ju zobrazil úhľadne ¦ Fanger en feil for å vise den pent
+Texte avec des valeurs dedans ¦ Text s vloženými hodnotami ¦ Tekst med verdier i
+Dates et heures ¦ Dátumy a časy ¦ Datoer og klokkeslett
+Nombre au hasard, arrondi ¦ Náhodné číslo, zaokrúhlenie ¦ Tilfeldig tall, avrunding
+Chercher, couper, remplacer dans un texte ¦ Hľadať, deliť, nahrádzať v texte ¦ Søke, dele, erstatte i en tekst
+Autre libellé de la cellule d’en-tête, quand on y renvoie ailleurs ¦ Iný popis bunky záhlavia, keď sa na ňu odkazuje inde ¦ Annen etikett for overskriftscellen når det vises til den et annet sted
+Types de fichiers attendus dans un champ d’envoi de fichier ¦ Očakávané typy súborov v poli na odoslanie súboru ¦ Forventede filtyper i et felt for filopplasting
+Codages de caractères pour l’envoi du formulaire ¦ Kódovanie znakov pri odoslaní formulára ¦ Tegnkodinger for innsending av skjemaet
+Raccourci clavier pour activer ou atteindre l’élément ¦ Klávesová skratka na aktiváciu alebo dosiahnutie prvku ¦ Hurtigtast for å aktivere eller nå elementet
+Adresse où envoyer le formulaire ¦ Adresa, kam sa odošle formulár ¦ Adresse skjemaet sendes til
+Permissions données au contenu de l’iframe ¦ Oprávnenia udelené obsahu iframe ¦ Tillatelser gitt til innholdet i iframe
+Le contenu de l’iframe peut-il passer en plein écran ¦ Môže obsah iframe prejsť na celú obrazovku ¦ Kan innholdet i iframe gå til fullskjerm
+Permet de choisir la transparence (alpha) de la couleur ¦ Umožní zvoliť priehľadnosť (alfa) farby ¦ Lar deg velge fargens gjennomsiktighet (alfa)
+Texte de remplacement quand l’image ne s’affiche pas (essentiel pour l’accessibilité) ¦ Náhradný text, keď sa obrázok nezobrazí (zásadný pre prístupnosť) ¦ Erstatningstekst når bildet ikke vises (avgjørende for tilgjengeligheten)
+Sorte de ressource à précharger (avec rel="preload" ou "modulepreload") ¦ Druh prostriedku na prednačítanie (s rel="preload" alebo "modulepreload") ¦ Type ressurs som skal forhåndslastes (med rel="preload" eller "modulepreload")
+Lance le script dès qu’il est prêt, sans bloquer la page ¦ Spustí skript, hneď ako je pripravený, bez blokovania stránky ¦ Kjører skriptet så snart det er klart, uten å blokkere siden
+Majuscules automatiques conseillées (claviers qui le gèrent) ¦ Odporúčané automatické veľké písmená (klávesnice, ktoré to podporujú) ¦ Foreslåtte automatiske store bokstaver (tastaturer som støtter det)
+Remplissage automatique par défaut des champs du formulaire ¦ Predvolené automatické vypĺňanie polí formulára ¦ Standard for autoutfylling av feltene i skjemaet
+Indice pour le remplissage automatique (email, nom, adresse…) ¦ Nápoveda pre automatické vypĺňanie (email, meno, adresa…) ¦ Hint for autoutfylling (e-post, navn, adresse…)
+Correction automatique conseillée (claviers qui le gèrent) ¦ Odporúčaná automatická oprava (klávesnice, ktoré to podporujú) ¦ Foreslått autokorrektur (tastaturer som støtter det)
+Met le curseur dans l’élément à l’ouverture de la page ¦ Pri otvorení stránky umiestni kurzor do prvku ¦ Plasserer markøren i elementet når siden åpnes
+Le média peut démarrer tout seul à l’ouverture de la page ¦ Médium sa môže spustiť samo pri otvorení stránky ¦ Mediet kan starte av seg selv når siden åpnes
+L’élément peut-il retarder l’affichage de la page ¦ Môže prvok zdržať zobrazenie stránky ¦ Kan elementet forsinke visningen av siden
+Codage des caractères du document (UTF-8) ¦ Kódovanie znakov dokumentu (UTF-8) ¦ Dokumentets tegnkoding (UTF-8)
+La case est-elle cochée ¦ Je políčko začiarknuté ¦ Er boksen avkrysset
+Lien vers la source de la citation ou vers des précisions sur la modification ¦ Odkaz na zdroj citátu alebo na podrobnosti o zmene ¦ Lenke til kilden for sitatet eller til detaljer om endringen
+Classes de l’élément (pour le CSS) ¦ Triedy prvku (pre CSS) ¦ Elementets klasser (for CSS)
+Ce qui ferme la boîte de dialogue ¦ Čo zatvorí dialógové okno ¦ Det som lukker dialogboksen
+Couleur de l’icône du site (rel="mask-icon") ¦ Farba ikony webu (rel="mask-icon") ¦ Farge på nettstedets ikon (rel="mask-icon")
+Espace colorimétrique de la couleur choisie ¦ Farebný priestor zvolenej farby ¦ Fargerom for den valgte fargen
+Nombre de caractères par ligne ¦ Počet znakov na riadok ¦ Antall tegn per linje
+Nombre de colonnes couvertes par la cellule ¦ Počet stĺpcov, cez ktoré bunka siaha ¦ Antall kolonner cellen strekker seg over
+Action à faire sur l’élément visé ¦ Akcia, ktorá sa má vykonať na cieľovom prvku ¦ Handling som skal utføres på målelementet
+Élément visé par le bouton ¦ Prvok, na ktorý tlačidlo mieri ¦ Element som knappen er rettet mot
+Valeur de la métadonnée ¦ Hodnota metadát ¦ Verdien til metadataene
+L’élément est-il modifiable par le visiteur ¦ Môže návštevník prvok upravovať ¦ Kan besøkende redigere elementet
+Montrer les boutons de lecture du navigateur ¦ Zobraziť tlačidlá prehrávania prehliadača ¦ Vis nettleserens avspillingsknapper
+Coordonnées de la zone dans une image cliquable ¦ Súradnice oblasti v klikateľnom obrázku ¦ Koordinatene til området i et klikkbart bilde
+Façon de traiter les demandes vers un autre site (CORS) ¦ Spôsob spracovania požiadaviek na iný web (CORS) ¦ Hvordan forespørsler til et annet nettsted håndteres (CORS)
+Adresse de la ressource ¦ Adresa prostriedku ¦ Ressursens adresse
+Date (et heure) de la modification ¦ Dátum (a čas) zmeny ¦ Dato (og klokkeslett) for endringen
+Valeur lisible par une machine ¦ Strojovo čitateľná hodnota ¦ Maskinlesbar verdi
+Indice de décodage de l’image pour l’affichage ¦ Nápoveda k dekódovaniu obrázka pri zobrazení ¦ Dekodingshint for visning av bildet
+Active cette piste si aucune autre ne convient mieux ¦ Zapne túto stopu, ak sa žiadna iná nehodí lepšie ¦ Slår på dette sporet hvis ingen andre passer bedre
+Lance le script après la lecture de la page ¦ Spustí skript po načítaní stránky ¦ Kjører skriptet etter at siden er lest
+Sens d’écriture de l’élément ¦ Smer písania prvku ¦ Elementets skriveretning
+Nom du champ qui envoie le sens d’écriture avec le formulaire ¦ Názov poľa, ktoré s formulárom odošle smer písania ¦ Navnet på feltet som sender skriveretningen med skjemaet
+Le champ est-il désactivé ¦ Je pole vypnuté ¦ Er feltet deaktivert
+Les champs à l’intérieur sont-ils désactivés (sauf dans legend) ¦ Sú polia vnútri vypnuté (okrem v legend) ¦ Er feltene inni deaktivert (unntatt i legend)
+Le lien est-il désactivé ¦ Je odkaz vypnutý ¦ Er lenken deaktivert
+Télécharger le fichier au lieu de l’ouvrir, et sous quel nom ¦ Stiahnuť súbor namiesto otvorenia, a pod akým názvom ¦ Last ned filen i stedet for å åpne den, og under hvilket navn
+L’élément peut-il être glissé ¦ Dá sa prvok presúvať ¦ Kan elementet dras
+Codage des données à l’envoi du formulaire ¦ Kódovanie dát pri odoslaní formulára ¦ Datakoding når skjemaet sendes
+Libellé conseillé pour la touche Entrée du clavier ¦ Odporúčaný popis klávesu Enter ¦ Foreslått etikett for Enter-tasten
+Priorité du chargement lancé par l’élément ¦ Priorita načítania spusteného prvkom ¦ Prioritet for innlastingen elementet starter
+Relie le libellé à un champ (son id) ¦ Prepojí popis s poľom (jeho id) ¦ Kobler etiketten til et felt (id-en til feltet)
+Champs dont dépend le résultat ¦ Polia, od ktorých závisí výsledok ¦ Felter som resultatet avhenger av
+Met à jour un contenu existant ¦ Aktualizuje existujúci obsah ¦ Oppdaterer eksisterende innhold
+Rattache l’élément à un formulaire (son id) ¦ Pripojí prvok k formuláru (jeho id) ¦ Knytter elementet til et skjema (id-en til skjemaet)
+Adresse d’envoi (pour ce bouton) ¦ Adresa odoslania (pre toto tlačidlo) ¦ Innsendingsadresse (for denne knappen)
+Codage de l’envoi (pour ce bouton) ¦ Kódovanie odoslania (pre toto tlačidlo) ¦ Innsendingskoding (for denne knappen)
+Méthode d’envoi : GET ou POST (pour ce bouton) ¦ Spôsob odoslania: GET alebo POST (pre toto tlačidlo) ¦ Innsendingsmetode: GET eller POST (for denne knappen)
+Envoyer sans vérifier les champs (pour ce bouton) ¦ Odoslať bez kontroly polí (pre toto tlačidlo) ¦ Send uten å sjekke feltene (for denne knappen)
+Où ouvrir la réponse (pour ce bouton) ¦ Kde otvoriť odpoveď (pre toto tlačidlo) ¦ Hvor svaret skal åpnes (for denne knappen)
+Cellules d’en-tête de cette cellule ¦ Bunky záhlavia tejto bunky ¦ Overskriftsceller for denne cellen
+Décale les niveaux des titres à l’intérieur ¦ Posunie úrovne nadpisov vo vnútri ¦ Forskyver nivåene til overskriftene inni
+Empêche le décalage des niveaux de titres d’aller plus loin ¦ Zabráni ďalšiemu posunu úrovní nadpisov ¦ Hindrer at forskyvningen av overskriftsnivåer går lenger
+Caché (l’élément ne compte pas pour l’instant) ¦ Skryté (prvok sa zatiaľ nepočíta) ¦ Skjult (elementet teller ikke for øyeblikket)
+Début de la zone haute de la jauge ¦ Začiatok horného pásma ukazovateľa ¦ Starten på målerens høye område
+Adresse du lien ¦ Adresa odkazu ¦ Lenkens adresse
+Adresse de la ressource liée ¦ Adresa prepojeného prostriedku ¦ Adressen til den koblede ressursen
+Adresse de base du document ¦ Základná adresa dokumentu ¦ Dokumentets basisadresse
+Langue de la page liée ¦ Jazyk odkazovanej stránky ¦ Språket på den koblede siden
+Instruction pour le navigateur (http-equiv) ¦ Pokyn pre prehliadač (http-equiv) ¦ Instruks til nettleseren (http-equiv)
+Identifiant unique de l’élément (pour le CSS, le JS et les ancres #) ¦ Jedinečný identifikátor prvku (pre CSS, JS a kotvy #) ¦ Elementets unike id (for CSS, JS og #-ankre)
+Tailles d’image selon la mise en page (préchargement) ¦ Veľkosti obrázka podľa rozloženia (prednačítanie) ¦ Bildestørrelser avhengig av oppsettet (forhåndslasting)
+Images selon l’écran (préchargement) ¦ Obrázky podľa obrazovky (prednačítanie) ¦ Bilder avhengig av skjermen (forhåndslasting)
+Rend l’élément inerte (ni clic ni focus) ¦ Urobí prvok neaktívnym (bez kliknutia aj fokusu) ¦ Gjør elementet inaktivt (verken klikk eller fokus)
+Clavier conseillé sur mobile (chiffres, email…) ¦ Odporúčaná klávesnica na mobile (číslice, email…) ¦ Foreslått tastatur på mobil (tall, e-post…)
+Empreinte pour vérifier que le fichier n’a pas été modifié (SRI) ¦ Odtlačok na overenie, že súbor nebol zmenený (SRI) ¦ Fingeravtrykk for å sjekke at filen ikke er endret (SRI)
+Crée un élément personnalisé à partir d’un élément existant ¦ Vytvorí vlastný prvok na základe existujúceho prvku ¦ Oppretter et egendefinert element ut fra et eksisterende element
+Image cliquable gérée par le serveur ¦ Klikateľný obrázok spracovaný serverom ¦ Klikkbart bilde som håndteres av serveren
+Identifiant global d’un objet de microdonnées ¦ Globálny identifikátor položky mikrodát ¦ Global id for et mikrodataelement
+Propriétés de microdonnées ¦ Vlastnosti mikrodát ¦ Mikrodataegenskaper
+Éléments rattachés (microdonnées) ¦ Pripojené prvky (mikrodáta) ¦ Refererte elementer (mikrodata)
+Commence un objet de microdonnées ¦ Začne položku mikrodát ¦ Starter et mikrodataelement
+Type d’un objet de microdonnées (schema.org…) ¦ Typ položky mikrodát (schema.org…) ¦ Type mikrodataelement (schema.org…)
+Sorte de piste de texte (sous-titres, chapitres…) ¦ Druh textovej stopy (titulky, kapitoly…) ¦ Type tekstspor (undertekster, kapitler…)
+Libellé visible ¦ Viditeľný popis ¦ Synlig etikett
+Langue de l’élément (fr, en…) ¦ Jazyk prvku (fr, en…) ¦ Elementets språk (fr, en…)
+Liste de propositions (id d’un datalist) ¦ Zoznam návrhov (id prvku datalist) ¦ Liste med forslag (id-en til en datalist)
+Chargement différé : lazy ou eager ¦ Odložené načítanie: lazy alebo eager ¦ Utsatt innlasting: lazy eller eager
+Lecture en boucle ¦ Prehrávanie v slučke ¦ Avspilling i løkke
+Fin de la zone basse de la jauge ¦ Koniec dolného pásma ukazovateľa ¦ Slutten på målerens lave område
+Valeur maximale ¦ Maximálna hodnota ¦ Maksimal verdi
+Borne haute ¦ Horná hranica ¦ Øvre grense
+Longueur maximale ¦ Maximálna dĺžka ¦ Maksimal lengde
+Média concerné (requête @media) ¦ Dotknuté médium (dopyt @media) ¦ Medium det gjelder (@media-spørring)
+Méthode d’envoi : GET ou POST ¦ Spôsob odoslania: GET alebo POST ¦ Innsendingsmetode: GET eller POST
+Valeur minimale ¦ Minimálna hodnota ¦ Minimal verdi
+Borne basse ¦ Dolná hranica ¦ Nedre grense
+Longueur minimale ¦ Minimálna dĺžka ¦ Minimal lengde
+Plusieurs valeurs permises ¦ Povolených viac hodnôt ¦ Flere verdier tillatt
+Son coupé au départ ¦ Zvuk na začiatku stlmený ¦ Lyden er slått av ved start
+Nom du champ pour l’envoi du formulaire ¦ Názov poľa pri odoslaní formulára ¦ Feltnavn ved innsending av skjemaet
+Nom d’un groupe de details (un seul ouvert à la fois) ¦ Názov skupiny details (vždy otvorený iba jeden) ¦ Navn på en details-gruppe (bare én åpen om gangen)
+Nom du formulaire (document.forms) ¦ Názov formulára (document.forms) ¦ Skjemaets navn (document.forms)
+Nom du cadre (cible des liens) ¦ Názov rámca (cieľ odkazov) ¦ Rammens navn (mål for lenker)
+Nom de l’image cliquable (pour usemap) ¦ Názov klikateľného obrázka (pre usemap) ¦ Navnet på det klikkbare bildet (for usemap)
+Nom de la métadonnée (description, viewport…) ¦ Názov metadát (description, viewport…) ¦ Navnet på metadataene (description, viewport…)
+Nom de l’emplacement (shadow DOM) ¦ Názov miesta (shadow DOM) ¦ Navnet på plassen (shadow DOM)
+Ignoré par les navigateurs qui lisent les modules ¦ Ignorované prehliadačmi, ktoré čítajú moduly ¦ Ignoreres av nettlesere som leser moduler
+Jeton unique pour la politique de sécurité (CSP) ¦ Jednorazový token pre bezpečnostnú politiku (CSP) ¦ Engangstoken for sikkerhetspolicyen (CSP)
+Envoyer sans vérifier les champs ¦ Odoslať bez kontroly polí ¦ Send uten å sjekke feltene
+Le details est-il ouvert ¦ Je details otvorený ¦ Er details-elementet åpent
+La boîte de dialogue est-elle affichée ¦ Je dialógové okno zobrazené ¦ Vises dialogboksen
+Valeur idéale de la jauge ¦ Ideálna hodnota ukazovateľa ¦ Målerens ideelle verdi
+Motif que la saisie doit suivre (expression régulière) ¦ Vzor, ktorému musí vstup zodpovedať (regulárny výraz) ¦ Mønster inndataene må følge (regulært uttrykk)
+Adresses à prévenir quand on suit le lien ¦ Adresy, ktoré sa upozornia pri otvorení odkazu ¦ Adresser som varsles når lenken følges
+Texte d’exemple dans le champ vide ¦ Ukážkový text v prázdnom poli ¦ Eksempeltekst i det tomme feltet
+Lire la vidéo dans la page (pas en plein écran sur mobile) ¦ Prehrať video na stránke (nie na celú obrazovku na mobile) ¦ Spill av videoen på siden (ikke i fullskjerm på mobil)
+Fait de l’élément une fenêtre surgissante (popover) ¦ Urobí z prvku vyskakovacie okno (popover) ¦ Gjør elementet til en popover
+Fenêtre surgissante visée par le bouton ¦ Vyskakovacie okno, na ktoré tlačidlo mieri ¦ Popover som knappen er rettet mot
+Montrer, cacher ou basculer la fenêtre surgissante ¦ Zobraziť, skryť alebo prepnúť vyskakovacie okno ¦ Vis, skjul eller veksle popoveren
+Image montrée avant la lecture de la vidéo ¦ Obrázok zobrazený pred prehraním videa ¦ Bilde som vises før videoen spilles av
+Quantité de média à charger à l’avance ¦ Koľko média načítať vopred ¦ Hvor mye av mediet som lastes inn på forhånd
+Le champ est-il en lecture seule ¦ Je pole iba na čítanie ¦ Er feltet skrivebeskyttet
+Lecture seule (éléments personnalisés) ¦ Iba na čítanie (vlastné prvky) ¦ Skrivebeskyttet (egendefinerte elementer)
+Informations de provenance envoyées lors des chargements ¦ Informácie o pôvode odosielané pri načítavaní ¦ Henvisningsinformasjon som sendes ved innlasting
+Relation du lien (noopener, nofollow…) ¦ Vzťah odkazu (noopener, nofollow…) ¦ Lenkens relasjon (noopener, nofollow…)
+Relation du document lié (stylesheet, icon…) ¦ Vzťah prepojeného dokumentu (stylesheet, icon…) ¦ Relasjonen til det koblede dokumentet (stylesheet, icon…)
+Champ obligatoire ¦ Povinné pole ¦ Obligatorisk felt
+Numérotation à l’envers ¦ Obrátené číslovanie ¦ Omvendt nummerering
+Nombre de lignes visibles ¦ Počet viditeľných riadkov ¦ Antall synlige linjer
+Nombre de lignes couvertes par la cellule ¦ Počet riadkov, cez ktoré bunka siaha ¦ Antall rader cellen strekker seg over
+Règles de sécurité du contenu intégré ¦ Bezpečnostné pravidlá vloženého obsahu ¦ Sikkerhetsregler for innebygd innhold
+Cellules concernées par l’en-tête (row, col…) ¦ Bunky, ktorých sa záhlavie týka (row, col…) ¦ Celler som overskriften gjelder (row, col…)
+Option choisie au départ ¦ Možnosť vybraná na začiatku ¦ Alternativ valgt ved start
+Shadow root clonable ¦ Klonovateľný shadow root ¦ Klonbar shadow root
+Shadow root avec registre d’éléments personnalisés ¦ Shadow root s registrom vlastných prvkov ¦ Shadow root med register over egendefinerte elementer
+Shadow root qui transmet le focus ¦ Shadow root, ktorý odovzdáva fokus ¦ Shadow root som delegerer fokus
+Shadow root déclaratif (open ou closed) ¦ Deklaratívny shadow root (open alebo closed) ¦ Deklarativ shadow root (open eller closed)
+Shadow root sérialisable ¦ Serializovateľný shadow root ¦ Serialiserbar shadow root
+Répartition des emplacements du shadow root ¦ Priradenie miest shadow rootu ¦ Plasstildeling i shadow root
+Forme de la zone (rect, circle, poly) ¦ Tvar oblasti (rect, circle, poly) ¦ Områdets form (rect, circle, poly)
+Taille du champ ¦ Veľkosť poľa ¦ Feltstørrelse
+Tailles des icônes (rel="icon") ¦ Veľkosti ikon (rel="icon") ¦ Ikonstørrelser (rel="icon")
+Tailles d’image selon la mise en page ¦ Veľkosti obrázka podľa rozloženia ¦ Bildestørrelser avhengig av oppsettet
+Emplacement voulu (shadow DOM) ¦ Požadované miesto (shadow DOM) ¦ Ønsket plass (shadow DOM)
+Nombre de colonnes couvertes ¦ Počet prekrytých stĺpcov ¦ Antall kolonner det strekkes over
+Vérifier l’orthographe et la grammaire ¦ Kontrolovať pravopis a gramatiku ¦ Kontroller rettskriving og grammatikk
+Adresse du fichier ¦ Adresa súboru ¦ Filens adresse
+Page à afficher dans l’iframe (HTML) ¦ Stránka zobrazená v iframe (HTML) ¦ Side som vises i iframen (HTML)
+Langue de la piste de texte ¦ Jazyk textovej stopy ¦ Tekstsporets språk
+Images selon l’écran (haute définition, petit écran…) ¦ Obrázky podľa obrazovky (vysoké rozlíšenie, malá obrazovka…) ¦ Bilder avhengig av skjermen (høy oppløsning, liten skjerm…)
+Premier numéro de la liste ¦ Prvé číslo zoznamu ¦ Listens første nummer
+Pas de la valeur (1, 0.5…) ¦ Krok hodnoty (1, 0.5…) ¦ Verdiens trinn (1, 0.5…)
+Styles écrits sur l’élément ¦ Štýly zapísané na prvku ¦ Stiler skrevet på elementet
+Ordre et possibilité d’atteindre l’élément au clavier (Tab) ¦ Poradie a možnosť dosiahnuť prvok klávesnicou (Tab) ¦ Rekkefølge og mulighet for å nå elementet med tastaturet (Tab)
+Où ouvrir le lien (_blank : nouvel onglet) ¦ Kde otvoriť odkaz (_blank: nová karta) ¦ Hvor lenken skal åpnes (_blank: ny fane)
+Cible par défaut des liens et formulaires ¦ Predvolený cieľ odkazov a formulárov ¦ Standardmål for lenker og skjemaer
+Où ouvrir la réponse du formulaire ¦ Kde otvoriť odpoveď formulára ¦ Hvor svaret fra skjemaet skal åpnes
+Infobulle (information en plus) ¦ Bublina (doplňujúce informácie) ¦ Verktøytips (ekstra informasjon)
+Forme complète de l’abréviation ¦ Plný tvar skratky ¦ Forkortelsens fulle form
+Explication du motif attendu ¦ Vysvetlenie očakávaného vzoru ¦ Forklaring av det forventede mønsteret
+Titre du lien ¦ Názov odkazu ¦ Lenkens tittel
+Nom d’un jeu de feuilles de styles ¦ Názov sady šablón štýlov ¦ Navn på et sett med stilark
+Faut-il traduire l’élément quand la page est traduite (yes, no) ¦ Má sa prvok prekladať pri preklade stránky (yes, no) ¦ Skal elementet oversettes når siden oversettes (yes, no)
+Type de la ressource liée ¦ Typ prepojeného prostriedku ¦ Typen til den koblede ressursen
+Type de bouton (submit, button, reset) ¦ Typ tlačidla (submit, button, reset) ¦ Knappetype (submit, button, reset)
+Type de la ressource intégrée ¦ Typ vloženého prostriedku ¦ Typen til den innebygde ressursen
+Type de champ (text, email, date…) ¦ Typ poľa (text, email, date…) ¦ Felttype (text, email, date…)
+Forme des numéros de la liste (1, a, A, i, I) ¦ Tvar čísel zoznamu (1, a, A, i, I) ¦ Nummereringsstil for listen (1, a, A, i, I)
+Type de script (module…) ¦ Typ skriptu (module…) ¦ Skripttype (module…)
+Image cliquable à utiliser (#nom) ¦ Klikateľný obrázok, ktorý sa má použiť (#názov) ¦ Klikkbart bilde som skal brukes (#navn)
+Valeur envoyée avec le formulaire ¦ Hodnota odoslaná s formulárom ¦ Verdi som sendes med skjemaet
+Valeur du champ ¦ Hodnota poľa ¦ Feltets verdi
+Numéro de cet élément de liste ¦ Číslo tejto položky zoznamu ¦ Nummeret på dette listeelementet
+Valeur actuelle ¦ Aktuálna hodnota ¦ Nåværende verdi
+Retour à la ligne du texte envoyé (soft, hard) ¦ Zalamovanie odosielaného textu (soft, hard) ¦ Linjebryting i teksten som sendes (soft, hard)
+Suggestions d’écriture permises ou non ¦ Povoliť alebo zakázať návrhy pri písaní ¦ Skriveforslag tillatt eller ikke
+{tag} ferme une balise qui n’est pas ouverte. ¦ {tag} uzatvára značku, ktorá nie je otvorená. ¦ {tag} lukker en tagg som ikke er åpen.
+{tag} n’est pas fermée ({end}). ¦ {tag} nie je uzatvorená ({end}). ¦ {tag} er ikke lukket ({end}).
+L’id « {id} » est donné deux fois. ¦ Id „{id}“ je použité dvakrát. ¦ Id-en «{id}» er brukt to ganger.
+Une image sans alt (texte pour ceux qui ne la voient pas). ¦ Obrázok bez alt (text pre tých, ktorí ho nevidia). ¦ Et bilde uten alt (tekst for dem som ikke kan se det).
+Des guillemets ne sont pas fermés. ¦ Niektoré úvodzovky nie sú uzatvorené. ¦ Noen anførselstegn er ikke lukket.
+« {ch} » en trop. ¦ „{ch}“ navyše. ¦ «{ch}» for mye.
+« {ch} » ferme « {open} » (ligne {n}). ¦ „{ch}“ uzatvára „{open}“ (riadok {n}). ¦ «{ch}» lukker «{open}» (linje {n}).
+Un commentaire /* … */ n’est pas fermé. ¦ Komentár /* … */ nie je uzatvorený. ¦ En kommentar /* … */ er ikke lukket.
+« {ch} » n’est pas fermé. ¦ „{ch}“ nie je uzatvorené. ¦ «{ch}» er ikke lukket.
+Il manque sans doute un « ; » au bout de la ligne. ¦ Na konci riadku asi chýba „;“. ¦ Det mangler sannsynligvis et «;» på slutten av linjen.
+Ligne {line}, colonne {col} ¦ Riadok {line}, stĺpec {col} ¦ Linje {line}, kolonne {col}
+Le numéro de la ligne (1 à {n}), ou ligne:colonne : ¦ Číslo riadku (1 až {n}) alebo riadok:stĺpec: ¦ Linjenummeret (1 til {n}), eller linje:kolonne:
+Aller à la ligne (1 à {n}) ¦ Prejsť na riadok (1 až {n}) ¦ Gå til linje (1 til {n})
+Déjà en forme. ¦ Už je naformátované. ¦ Allerede formatert.
+Code remis en forme. ¦ Kód preformátovaný. ¦ Koden er formatert på nytt.
+Retour au début. ¦ Späť na začiatok. ¦ Tilbake til starten.
+Sur PC et Linux : Ctrl au lieu de ⌘, Alt au lieu de ⌥. ¦ Na PC a Linuxe: Ctrl namiesto ⌘, Alt namiesto ⌥. ¦ På PC og Linux: Ctrl i stedet for ⌘, Alt i stedet for ⌥.
+jumelle ligne {n} ¦ párová zátvorka na riadku {n} ¦ tilhørende parentes på linje {n}
+✓ Rien à signaler ¦ ✓ Nič na hlásenie ¦ ✓ Ingenting å melde
+Ligne {n} : {msg} ¦ Riadok {n}: {msg} ¦ Linje {n}: {msg}
+Le code a l’air bien formé. ¦ Kód vyzerá správne vytvorený. ¦ Koden ser velformet ut.
+Rien à signaler. ¦ Nič na hlásenie. ¦ Ingenting å melde.
+=remplacé ¦ nahradený|nahradené|nahradených ¦ erstattet|erstattet
+=caractère choisi ¦ vybraný znak|vybrané znaky|vybraných znakov ¦ tegn valgt|tegn valgt
+pas sur {name} ¦ nie v {name} ¦ ikke i {name}
+pas sur {name} avant {v} ¦ nie v {name} pred {v} ¦ ikke i {name} før {v}
+Aller à la ligne {n} de {file} ¦ Prejsť na riadok {n} súboru {file} ¦ Gå til linje {n} i {file}
+partout chez les navigateurs visés ¦ všade v cieľových prehliadačoch ¦ overalt i nettleserne du sikter mot
+ligne {n} de {file} ¦ riadok {n} súboru {file} ¦ linje {n} i {file}
+Navigateurs visés : {list}. ¦ Cieľové prehliadače: {list}. ¦ Nettlesere du sikter mot: {list}.
+✅ Rien à signaler : ton site devrait marcher sur tous les navigateurs visés. ¦ ✅ Nič na hlásenie: tvoj web by mal fungovať vo všetkých cieľových prehliadačoch. ¦ ✅ Ingenting å melde: nettstedet ditt bør virke i alle nettleserne du sikter mot.
+{what} : certains visiteurs verront ton site un peu différemment. ¦ {what}: niektorí návštevníci uvidia tvoj web trochu inak. ¦ {what}: noen besøkende vil se nettstedet ditt litt annerledes.
+=fonction récente, bien prise en charge ¦ nová funkcia, dobre podporovaná|nové funkcie, dobre podporované|nových funkcií, dobre podporovaných ¦ ny funksjon, godt støttet|nye funksjoner, godt støttet
+=point à vérifier ¦ bod na overenie|body na overenie|bodov na overenie ¦ punkt å sjekke|punkter å sjekke
+=autre fonction récente, sans souci ¦ ďalšia nová funkcia, bez problémov|ďalšie nové funkcie, bez problémov|ďalších nových funkcií, bez problémov ¦ annen ny funksjon, ikke noe problem|andre nye funksjoner, ikke noe problem
+swref|Sur ¦ Na ¦ På
+Imiter {name} ¦ Napodobniť {name} ¦ Etterlign {name}
+Carte : {err} ¦ Mapa: {err} ¦ Kart: {err}
+Ce lien mène hors du site ({url}) : il marchera dans le site exporté. ¦ Tento odkaz vedie mimo webu ({url}): bude fungovať v exportovanom webe. ¦ Denne lenken fører ut av nettstedet ({url}): den vil virke i det eksporterte nettstedet.
+Comme dans {name} : {what} à vérifier (🧭 Navigateurs). ¦ Ako v {name}: {what} na overenie (🧭 Prehliadače). ¦ Som i {name}: {what} å sjekke (🧭 Nettlesere).
+Comme dans {name} : rien à signaler. ¦ Ako v {name}: nič na hlásenie. ¦ Som i {name}: ingenting å melde.
+L’aperçu reste celui de l’app : pour voir le vrai, ↗ Aperçu dans ce navigateur. ¦ Náhľad zostáva náhľadom aplikácie: skutočný uvidíš cez ↗ Náhľad v tomto prehliadači. ¦ Forhåndsvisningen er fortsatt appens: for å se den ekte, ↗ Forhåndsvis i den nettleseren.
+Largeur en px ¦ Šírka v px ¦ Bredde i px
+aperçu {w} ¦ náhľad {w} ¦ forhåndsvisning {w}
+{a} et {b} ¦ {a} a {b} ¦ {a} og {b}
+{what} dans le CSS ¦ {what} v CSS ¦ {what} i CSS
+pas encore de CSS ¦ zatiaľ žiadne CSS ¦ ingen CSS ennå
+ces blocs suivront la nouvelle requête ¦ tieto bloky sa budú riadiť novým dopytom ¦ disse blokkene følger den nye spørringen
+l’aperçu le montre même si ton appareil ne l’est pas ¦ náhľad to ukáže, aj keď tvoje zariadenie také nie je ¦ forhåndsvisningen viser det selv om enheten din ikke er det
+Chaque écran est un bouton au-dessus de l’aperçu, et un choix « Écran » quand tu règles un élément : ses styles vont dans son bloc {code} du CSS du site. ¦ Každá obrazovka je tlačidlo nad náhľadom a voľba „Obrazovka“ pri nastavovaní prvku: jej štýly idú do jej bloku {code} v CSS webu. ¦ Hver skjerm er en knapp over forhåndsvisningen og et valg «Skjerm» når du stiller inn et element: stilene havner i dens {code}-blokk i nettstedets CSS.
+Dans le CSS, sans écran : ¦ V CSS, bez obrazovky: ¦ I CSS, uten skjerm:
+Cette page : « {name} » ¦ Táto stránka: „{name}“ ¦ Denne siden: «{name}»
+Titre dans l’onglet du navigateur ¦ Názov na karte prehliadača ¦ Tittel i nettleserfanen
+Description (pour les moteurs de recherche) ¦ Popis (pre vyhľadávače) ¦ Beskrivelse (for søkemotorer)
+Ces réglages remplissent les variables {code} de ta feuille de styles (onglet CSS). ¦ Tieto nastavenia vyplnia premenné {code} tvojej šablóny štýlov (karta CSS). ¦ Disse innstillingene fyller ut {code}-variablene i stilarket ditt (fanen CSS).
+titres ¦ nadpisy ¦ overskrifter
+Ta règle {rule} passe devant ce curseur : change-la, ou retire sa ligne. ¦ Tvoje pravidlo {rule} má prednosť pred týmto posúvačom: zmeň ho alebo odober jeho riadok. ¦ Regelen din {rule} går foran denne glidebryteren: endre den, eller fjern linjen.
+ligne {n} ¦ riadok {n} ¦ linje {n}
+Écrit dans {code} : seulement sur cet écran. ¦ Zapísané v {code}: iba na tejto obrazovke. ¦ Skrevet i {code}: bare på denne skjermen.
+Écrit dans le CSS du site, pour tous les écrans. ¦ Zapísané v CSS webu, pre všetky obrazovky. ¦ Skrevet i nettstedets CSS, for alle skjermer.
+Pour un seul élément : clique-le, section « Marges, espace intérieur et taille ». ¦ Pre jediný prvok: klikni naň, časť „Okraje, vnútorné odsadenie a veľkosť“. ¦ For ett enkelt element: klikk på det, seksjonen «Marger, innvendig marg og størrelse».
+la racine du site ¦ koreň webu ¦ nettstedets rot
+Dans {dir} : ¦ V {dir}: ¦ I {dir}:
+{dir} : glisses-y des fichiers, ou ＋ pour en créer un dedans (un dossier vide n’est pas gardé à l’enregistrement). ¦ {dir}: presuň do nej súbory alebo ＋ na vytvorenie súboru vo vnútri (prázdny priečinok sa pri uložení nezachová). ¦ {dir}: dra filer inn i den, eller ＋ for å opprette en inni (en tom mappe beholdes ikke ved lagring).
+Page « {name} » supprimée ¦ Stránka „{name}“ vymazaná ¦ Siden «{name}» er slettet
+Page « {name} » créée : elle est dans le menu de toutes les pages. ¦ Stránka „{name}“ vytvorená: je v ponuke všetkých stránok. ¦ Siden «{name}» er opprettet: den er i menyen på alle sidene.
+C’est ton {what} : {tag}, nommé « {name} ». ¦ Je to tvoj {what}: {tag}, pomenovaný „{name}“. ¦ Det er din {what}: {tag}, med navnet «{name}».
+{what}. Valeur : {value}. ¦ {what}. Hodnota: {value}. ¦ {what}. Verdi: {value}.
+Sa valeur : ¦ Jeho hodnota: ¦ Verdien:
+{what} · valeur : {value} ¦ {what} · hodnota: {value} ¦ {what} · verdi: {value}
+Attribut sans description dans la norme (data-…, aria-…, ou propre à ton site) ¦ Atribút bez popisu v norme (data-…, aria-… alebo špecifický pre tvoj web) ¦ Attributt uten beskrivelse i standarden (data-…, aria-… eller spesifikk for nettstedet ditt)
+Attributs HTML ¦ Atribúty HTML ¦ HTML-attributter
+＋ Ajouter un attribut… ¦ ＋ Pridať atribút… ¦ ＋ Legg til et attributt…
+Propres à {tag} ¦ Špecifické pre {tag} ¦ Spesifikke for {tag}
+Pour tous les éléments ¦ Pre všetky prvky ¦ For alle elementer
+Autre (data-…, aria-…)… ¦ Iný (data-…, aria-…)… ¦ Annet (data-…, aria-…)…
+Source : {link}, © {by}, licence {lic} ; {changes}. ¦ Zdroj: {link}, © {by}, licencia {lic}; {changes}. ¦ Kilde: {link}, © {by}, lisens {lic}; {changes}.
+traduit en français et adapté ¦ preložené do francúzštiny a upravené (tu zobrazené popisy preložila AI) ¦ oversatt til fransk og tilpasset (beskrivelsene her er oversatt av KI)
+Syntaxe, valeur de départ, héritage : {link} (relevées dans w3c/webref), © World Wide Web Consortium, {lic} ; seuls quelques champs sont repris, « héritée » et certains « s’applique à » sont traduits. Descriptions en français : écrites pour LCNDA. ¦ Syntax, východisková hodnota, dedičnosť: {link} (prevzaté z w3c/webref), © World Wide Web Consortium, {lic}; prevzatých je len niekoľko polí, „dedí sa“ a niektoré „platí pre“ sú preložené. Popisy: napísané pre LCNDA vo francúzštine. ¦ Syntaks, startverdi, arv: {link} (hentet fra w3c/webref), © World Wide Web Consortium, {lic}; bare noen få felter brukes, «arves» og noen «gjelder for» er oversatt. Beskrivelser: skrevet for LCNDA på fransk.
+normes CSS du W3C ¦ normy CSS konzorcia W3C ¦ W3Cs CSS-standarder
+Notice de la licence W3C ¦ Licenčné upozornenie W3C ¦ W3C-lisensmerknad
+Les plus utiles ; cherche pour voir les {n}. ¦ Najužitočnejšie; hľadaním zobrazíš všetkých {n}. ¦ De mest nyttige; søk for å se alle {n}.
+{x} copié. ¦ {x} skopírované. ¦ {x} kopiert.
+Astuces ¦ Tipy ¦ Tips
+{b} : clique dans un texte pour le changer, le code suit tout seul. ¦ {b}: klikni do textu a zmeň ho, kód sa prispôsobí sám. ¦ {b}: klikk i en tekst for å endre den, koden følger med av seg selv.
+T Écrire ¦ T Písať ¦ T Skriv
+Dans le code, {key} déplie une abréviation : {ex}. ¦ V kóde {key} rozbalí skratku: {ex}. ¦ I koden utvider {key} en forkortelse: {ex}.
+{b} fait tourner tes scripts (JS) dans l’aperçu isolé. ¦ {b} spustí tvoje skripty (JS) v izolovanom náhľade. ¦ {b} kjører skriptene dine (JS) i den isolerte forhåndsvisningen.
+▶ Tester ¦ ▶ Vyskúšať ¦ ▶ Test
+La carte est faite en image avec ce fond (et sa mention : {credit}), redessinée à chaque ouverture. ¦ Mapa sa vytvorí ako obrázok s týmto podkladom (a jeho uvedením zdroja: {credit}), prekreslí sa pri každom otvorení. ¦ Kartet lages som et bilde med denne bakgrunnen (og kildehenvisningen: {credit}) og tegnes på nytt hver gang det åpnes.
+🌳 Bloc de la généalogie : {what} ¦ 🌳 Blok rodokmeňa: {what} ¦ 🌳 Slektsblokk: {what}
+Texte de remplacement (pour qui ne voit pas l’image) ¦ Náhradný text (pre tých, ktorí obrázok nevidia) ¦ Erstatningstekst (for dem som ikke ser bildet)
+Ceci est ¦ Toto je ¦ Dette er
+Ceci est… ¦ Toto je… ¦ Dette er…
+{tag}, nommé « {name} » ¦ {tag}, pomenovaný „{name}“ ¦ {tag}, med navnet «{name}»
+Nom (pour toi) ¦ Názov (pre teba) ¦ Navn (for deg)
+Balise ¦ Značka ¦ Tagg
+Classe(s) ¦ Trieda (triedy) ¦ Klasse(r)
+{x} en px ¦ {x} v px ¦ {x} i px
+marge ¦ okraj ¦ marg
+espace intérieur ¦ vnútorné odsadenie ¦ innvendig marg
+style="…" de l’élément ¦ style="…" prvku ¦ elementets style="…"
+dans @media {q} ¦ v @media {q} ¦ i @media {q}
+Appliquer à ¦ Použiť na ¦ Bruk på
+Tous les éléments {cls} ¦ Všetky prvky {cls} ¦ Alle {cls}-elementer
+Écrit dans : {where} ¦ Zapísané v: {where} ¦ Skrevet i: {where}
+CSS du site ¦ CSS webu ¦ Nettstedets CSS
+modifié le {date} ¦ zmenené {date} ¦ endret {date}
+{kb} Ko · dans une page : {html} · dans le CSS : {css} ¦ {kb} kB · na stránke: {html} · v CSS: {css} ¦ {kb} kB · på en side: {html} · i CSS: {css}
+depuis css/ ¦ z css/ ¦ fra css/
+page « {name} » ¦ stránka „{name}“ ¦ siden «{name}»
+Fichiers du site ({n}) ¦ Súbory webu ({n}) ¦ Nettstedets filer ({n})
+{name} garde son nom : c’est le fichier principal du site. ¦ {name} si ponechá svoj názov: je to hlavný súbor webu. ¦ {name} beholder navnet sitt: det er nettstedets hovedfil.
+tu peux y écrire du PHP, par exemple {code} ¦ môžeš doň písať PHP, napríklad {code} ¦ du kan skrive PHP i den, for eksempel {code}
+aujourd’hui : {where} ¦ teraz: {where} ¦ nå: {where}
+la racine ¦ koreň ¦ roten
+Déplacer {name} ¦ Presunúť {name} ¦ Flytt {name}
+{x} supprimé ¦ {x} vymazané ¦ {x} slettet
+PHP exécuté ({ms} ms) ¦ PHP spustené ({ms} ms) ¦ PHP kjørt ({ms} ms)
+L’aperçu remplace seulement les include. ¦ Náhľad nahrádza iba include. ¦ Forhåndsvisningen erstatter bare include.
+lié après style.css sur {what} ¦ pripojené za style.css na {what} ¦ koblet etter style.css på {what}
+lié après style.css ¦ pripojené za style.css ¦ koblet etter style.css
+clic droit sur l’onglet : ses pages ¦ pravé kliknutie na kartu: jej stránky ¦ høyreklikk på fanen: sidene den har
+lié après script.js, tourne en ▶ Tester ¦ pripojené za script.js, beží vo ▶ Vyskúšať ¦ koblet etter script.js, kjører i ▶ Test
+à inclure dans une page PHP : {code} ¦ na vloženie do stránky PHP: {code} ¦ til å inkludere i en PHP-side: {code}
+PHP de « {name} » · {code} pour un en-tête commun ¦ PHP stránky „{name}“ · {code} pre spoločné záhlavie ¦ PHP for «{name}» · {code} for en felles topptekst
+HTML de « {name} » · Tab : Emmet (ul>li*3) · les blocs data-lc-block sont remplis tout seuls ¦ HTML stránky „{name}“ · Tab: Emmet (ul>li*3) · bloky data-lc-block sa vyplnia samy ¦ HTML for «{name}» · Tab: Emmet (ul>li*3) · data-lc-block-blokkene fylles ut automatisk
+CSS de tout le site · Tab : m10 → margin: 10px; · les couleurs de 🎨 : var(--lc-principale)… ¦ CSS celého webu · Tab: m10 → margin: 10px; · farby z 🎨: var(--lc-principale)… ¦ CSS for hele nettstedet · Tab: m10 → margin: 10px; · fargene fra 🎨: var(--lc-principale)…
+JS de tout le site · il tourne seulement en ▶ Tester, dans l’aperçu isolé, et dans le site exporté ¦ JS celého webu · beží iba vo ▶ Vyskúšať, v izolovanom náhľade a v exportovanom webe ¦ JS for hele nettstedet · kjører bare i ▶ Test, i den isolerte forhåndsvisningen og i det eksporterte nettstedet
+🎨 CSS de {what} ¦ 🎨 CSS pre {what} ¦ 🎨 CSS for {what}
+aucune règle ¦ žiadne pravidlo ¦ ingen regel
+modifie ici, le fichier suit ¦ uprav tu, súbor sa prispôsobí ¦ rediger her, filen følger med
+＋ Règle {sel} ¦ ＋ Pravidlo {sel} ¦ ＋ Regel {sel}
+Règle {n} ¦ Pravidlo {n} ¦ Regel {n}
+{what} du HTML (scripts, cadres, attributs on…, liens javascript:) : mets ton JavaScript dans l’onglet JS. ¦ {what} z HTML (skripty, rámce, atribúty on…, odkazy javascript:): daj svoj JavaScript na kartu JS. ¦ {what} fra HTML (skript, rammer, on…-attributter, javascript:-lenker): legg JavaScript-koden din i fanen JS.
+=chose retirée ¦ odobratá vec|odobraté veci|odobratých vecí ¦ ting fjernet|ting fjernet
+Impossible d’enregistrer : {err} ¦ Nedá sa uložiť: {err} ¦ Kunne ikke lagre: {err}
+Copie enregistrée : « {name} » (Mes sites…). ¦ Kópia uložená: „{name}“ (Moje weby…). ¦ Kopi lagret: «{name}» (Mine nettsteder…).
+Site prêt : {name}. Décompresse-le et ouvre index.html (ou pose le dossier dans MAMP, WAMP, chez ton hébergeur) : le mode d’emploi est dans LISEZ-MOI.html. ¦ Web je pripravený: {name}. Rozbaľ ho a otvor index.html (alebo daj priečinok do MAMP, WAMP, k svojmu poskytovateľovi hostingu): návod je v LISEZ-MOI.html. ¦ Nettstedet er klart: {name}. Pakk det ut og åpne index.html (eller legg mappen i MAMP, WAMP, hos webhotellet ditt): bruksanvisningen er i LISEZ-MOI.html.
+Page prête : {name} (tout est dedans, à ouvrir d’un double-clic). ¦ Stránka je pripravená: {name} (všetko je vnútri, otvor dvojklikom). ¦ Siden er klar: {name} (alt er inni, åpne den med et dobbeltklikk).
+{what} (sans GPS ni appareil) ¦ {what} (bez GPS a údajov o prístroji) ¦ {what} (uten GPS- eller kameradata)
+=image réduite ¦ zmenšený obrázok|zmenšené obrázky|zmenšených obrázkov ¦ forminsket bilde|forminskede bilder
+=image pas mise ¦ vynechaný obrázok|vynechané obrázky|vynechaných obrázkov ¦ bilde utelatt|bilder utelatt
+=nom de personne vivante remplacé ¦ nahradené meno žijúcej osoby|nahradené mená žijúcich osôb|nahradených mien žijúcich osôb ¦ erstattet navn på levende person|erstattede navn på levende personer
+=image introuvable ¦ nenájdený obrázok|nenájdené obrázky|nenájdených obrázkov ¦ bilde som ikke ble funnet|bilder som ikke ble funnet
+{what} (une personne vivante ou confidentielle dessus : {list}) ¦ {what} (je na ňom žijúca alebo dôverná osoba: {list}) ¦ {what} (en levende eller konfidensiell person er med: {list})
+{what} (une personne vivante ou confidentielle dessus) ¦ {what} (je na ňom žijúca alebo dôverná osoba) ¦ {what} (en levende eller konfidensiell person er med)
+{what} par « [nom retiré] » ¦ {what} textom „[nom retiré]“ ¦ {what} med «[nom retiré]»
+{what} vers une page qui n’existe plus ¦ {what} na stránku, ktorá už neexistuje ¦ {what} til en side som ikke lenger finnes
+{what} dans tes médias ¦ {what} v tvojich médiách ¦ {what} i mediene dine
+Le site a sa politique de sécurité (CSP) : ses scripts viennent seulement de ses fichiers. ¦ Web má svoju bezpečnostnú politiku (CSP): jeho skripty pochádzajú iba z jeho súborov. ¦ Nettstedet har sin egen sikkerhetspolicy (CSP): skriptene kommer bare fra nettstedets egne filer.
+Déjà en ligne : ¦ Už online: ¦ Allerede på nett:
+Jeton Netlify ¦ Token Netlify ¦ Netlify-token
+Jeton GitHub ¦ Token GitHub ¦ GitHub-token
+Dépôt ¦ Repozitár ¦ Repository
+Serveur ¦ Server ¦ Server
+Port ¦ Port ¦ Port
+Identifiant ¦ Používateľské meno ¦ Brukernavn
+Dossier du site sur le serveur ¦ Priečinok webu na serveri ¦ Nettstedets mappe på serveren
+Ton site est en ligne ({n} fichiers). Il peut falloir une minute avant qu’il s’affiche. ¦ Tvoj web je online ({n} súborov). Kým sa zobrazí, môže to trvať minútu. ¦ Nettstedet ditt er på nett ({n} filer). Det kan ta et minutt før det vises.
+Ton site est envoyé ({n} fichiers). ¦ Tvoj web je odoslaný ({n} súborov). ¦ Nettstedet ditt er sendt ({n} filer).
+↗ Ouvrir {url} ¦ ↗ Otvoriť {url} ¦ ↗ Åpne {url}
+« {name} » illisible. ¦ „{name}“ sa nedá prečítať. ¦ «{name}» kan ikke leses.
+« {name} » : {pages}, {files} ; laissé de côté : {list}. Enregistre (💾) pour le garder. ¦ „{name}“: {pages}, {files}; vynechané: {list}. Ulož (💾), aby si ho zachoval. ¦ «{name}»: {pages}, {files}; utelatt: {list}. Lagre (💾) for å beholde det.
+« {name} » : {pages}, {files}. Enregistre (💾) pour le garder. ¦ „{name}“: {pages}, {files}. Ulož (💾), aby si ho zachoval. ¦ «{name}»: {pages}, {files}. Lagre (💾) for å beholde det.
+Rempli depuis la fiche de {name} : relis et complète. ¦ Vyplnené z karty osoby {name}: skontroluj a doplň. ¦ Fylt ut fra oppføringen til {name}: les gjennom og fyll ut.
+Mon dessin : {what} ¦ Moja kresba: {what} ¦ Min tegning: {what}
+celui déjà enregistré ¦ ten už uložený ¦ den som allerede er lagret
+ce qui est choisi dans le dessin ({what}) ¦ to, čo je v kresbe vybraté ({what}) ¦ det som er markert i tegningen ({what})
+choisis d’abord des formes dans le dessin (outil Sélection), puis « ＋ Créer un élément » ¦ najprv vyber tvary v kresbe (nástroj Výber) a potom „＋ Vytvoriť prvok“ ¦ marker først former i tegningen (verktøyet Markering), og deretter «＋ Opprett et element»
+Le remplacer par ce qui est choisi dans le dessin ({n}) ¦ Nahradiť tým, čo je v kresbe vybraté ({n}) ¦ Erstatt det med det som er markert i tegningen ({n})
+Choisis ce que tu dessines, puis : {a} — un clic par point, double-clic ou Entrée pour finir (les courbes se lissent toutes seules) ; {b} — glisse un rectangle ; {c} — un clic. ¦ Vyber, čo kreslíš, a potom: {a} — jedno kliknutie na bod, dvojklik alebo Enter na dokončenie (krivky sa vyhladia samy); {b} — potiahni obdĺžnik; {c} — jedno kliknutie. ¦ Velg hva du tegner, og deretter: {a} — ett klikk per punkt, dobbeltklikk eller Enter for å avslutte (kurvene glattes ut av seg selv); {b} — dra et rektangel; {c} — ett klikk.
+traits et zones ¦ čiary a plochy ¦ linjer og områder
+bâtiment ¦ budova ¦ bygning
+symbole, nom ¦ symbol, názov ¦ symbol, navn
+Plan situé : {place} — il couvre {size} (1 px ≈ {m} m). Les lieux de ta base se posent à leur vraie place (📍). ¦ Mapa umiestnená: {place} — pokrýva {size} (1 px ≈ {m} m). Miesta z tvojej databázy sa umiestnia na svoje skutočné miesto (📍). ¦ Kartet er plassert: {place} — det dekker {size} (1 px ≈ {m} m). Stedene i databasen din plasseres der de faktisk er (📍).
+Pour une carte juste et pas déformée, commence par {b} (plus bas) : l’échelle se règle toute seule. Sinon, dis combien vaut un pixel : ¦ Pre presnú a nezdeformovanú mapu začni s {b} (nižšie): mierka sa nastaví sama. Inak povedz, koľko zodpovedá jednému pixelu: ¦ For et nøyaktig kart uten forvrengning, begynn med {b} (nedenfor): målestokken stilles inn av seg selv. Ellers oppgi hva én piksel tilsvarer:
+🗺️ Fond de carte d’un lieu ¦ 🗺️ Podkladová mapa miesta ¦ 🗺️ Bakgrunnskart for et sted
+1 pixel = … mètres ¦ 1 pixel = … metrov ¦ 1 piksel = … meter
+Longueur réelle : {v} ¦ Skutočná dĺžka: {v} ¦ Faktisk lengde: {v}
+Surface : {v} · tour : {t} ¦ Plocha: {v} · obvod: {t} ¦ Areal: {v} · omkrets: {t}
+Taille réelle : {v} ¦ Skutočná veľkosť: {v} ¦ Faktisk størrelse: {v}
+(échelle à régler) ¦ (mierku treba nastaviť) ¦ (målestokk må stilles inn)
+Centré sur le lieu ¦ Vycentrované na miesto ¦ Sentrert på stedet
+Décalé de {what} ¦ Posunuté o {what} ¦ Forskjøvet {what}
+{d} vers le nord ¦ {d} na sever ¦ {d} mot nord
+{d} vers le sud ¦ {d} na juh ¦ {d} mot sør
+{d} vers l’est ¦ {d} na východ ¦ {d} mot øst
+{d} vers l’ouest ¦ {d} na západ ¦ {d} mot vest
+=lieu posé ¦ umiestnené miesto|umiestnené miesta|umiestnených miest ¦ sted plassert|steder plassert
+Choisis l’image d’un acte, puis {b} en glissant. Le papier, les taches et les lignes s’effacent ; l’encre devient un tracé net, à agrandir sans perte, à imprimer ou à graver. ¦ Vyber obrázok záznamu a potom ťahaním {b}. Papier, škvrny a linky zmiznú; atrament sa zmení na ostrú cestu, ktorú možno bez straty zväčšiť, vytlačiť alebo vyryť. ¦ Velg bildet av et dokument, og deretter {b} ved å dra. Papir, flekker og linjer forsvinner; blekket blir en skarp bane som kan forstørres uten tap, skrives ut eller graveres.
+encadre la signature ¦ zarámuj podpis ¦ ramme inn underskriften
+Pas rangée dans les médias : {err} ¦ Neuložené do médií: {err} ¦ Ikke lagret i mediene: {err}
+Image non rangée : {err} ¦ Obrázok neuložený: {err} ¦ Bildet ble ikke lagret: {err}
+Signature rangée dans les médias d’{name}. ¦ Podpis uložený do médií osoby {name}. ¦ Underskriften er lagret i mediene til {name}.
+Signature rangée dans les médias de {name}. ¦ Podpis uložený do médií osoby {name}. ¦ Underskriften er lagret i mediene til {name}.
+Supprimer « {name} » ? ¦ Vymazať „{name}“? ¦ Slette «{name}»?
+cet élément ¦ tento prvok ¦ dette elementet
+{n} générations ({c} cases) ¦ {n} generácií ({c} políčok) ¦ {n} generasjoner ({c} felter)
+Établi par … en {y} ¦ Zostavil … v roku {y} ¦ Utarbeidet av … i {y}
+{file} enregistré dans Téléchargements. ¦ {file} uložené do Stiahnutých súborov. ¦ {file} er lagret i Nedlastinger.
+Ce fichier est un réglage d’un autre outil (« {other} ») : il ne va pas dans {tool}. ¦ Tento súbor je nastavenie iného nástroja („{other}“): do {tool} nepatrí. ¦ Denne filen er en innstilling fra et annet verktøy («{other}»): den hører ikke hjemme i {tool}.
+cet outil ¦ tento nástroj ¦ dette verktøyet
+le dessin vectoriel ¦ vektorová kresba ¦ vektortegningen
+le faire-part ¦ oznámenie ¦ kortet
+les signatures et sceaux ¦ podpisy a pečate ¦ underskrifter og segl
+l’arbre décoratif ¦ dekoratívny strom ¦ det dekorative treet
+la palette du plan ¦ paleta plánu ¦ kartets palett
+les réglages du document ¦ nastavenia dokumentu ¦ dokumentets innstillinger
+ces réglages du faire-part ¦ tieto nastavenia oznámenia ¦ disse kortinnstillingene
+cette palette du plan ¦ túto paletu plánu ¦ denne kartpaletten
+ces réglages du sceau ¦ tieto nastavenia pečate ¦ disse seglinnstillingene
+ces réglages de l’arbre ¦ tieto nastavenia stromu ¦ disse treinnstillingene
+Un réglage « {name} » existe déjà. Quel nom donner à celui-ci ? ¦ Nastavenie „{name}“ už existuje. Ako pomenovať toto? ¦ En innstilling «{name}» finnes allerede. Hvilket navn skal denne få?
+« {name} » est tourné : remets sa rotation à 0, ou dissocie-le, pour travailler dedans. ¦ „{name}“ je otočený: vráť jeho otočenie na 0 alebo ho rozdeľ, aby si v ňom mohol pracovať. ¦ «{name}» er rotert: sett rotasjonen tilbake til 0, eller del den opp, for å jobbe inni den.
+Ce groupe ¦ Táto skupina ¦ Denne gruppen
+Tu es dans « {name} » : le reste est pâli. Échap ou ⤴ pour en sortir. ¦ Si v „{name}“: zvyšok je vyblednutý. Esc alebo ⤴ na opustenie. ¦ Du er i «{name}»: resten er nedtonet. Esc eller ⤴ for å gå ut.
+le groupe ¦ skupina ¦ gruppen
+Sortir de ce calque ¦ Opustiť túto vrstvu ¦ Gå ut av dette laget
+Sortir de ce groupe ¦ Opustiť túto skupinu ¦ Gå ut av denne gruppen
+Travailler dans ce calque : les nouveaux dessins y vont ¦ Pracovať v tejto vrstve: nové kresby pôjdu do nej ¦ Jobb i dette laget: nye tegninger havner her
+Travailler dans ce groupe : les nouveaux dessins y vont ¦ Pracovať v tejto skupine: nové kresby pôjdu do nej ¦ Jobb i denne gruppen: nye tegninger havner her
+Retirer le masque : la forme revient tout en haut, rien n’est perdu ¦ Odobrať masku: tvar sa vráti úplne hore, nič sa nestratí ¦ Fjern masken: formen kommer tilbake øverst, ingenting går tapt
+Masquer avec la forme du dessus : la forme la plus haute de ce calque le découpe (on ne voit que ce qui est dedans) ¦ Maskovať horným tvarom: najvyšší tvar tejto vrstvy ju oreže (vidno iba to, čo je vnútri) ¦ Masker med formen øverst: den øverste formen i dette laget beskjærer det (bare det som er inni, vises)
+Masquer avec la forme du dessus : la forme la plus haute de ce groupe le découpe (on ne voit que ce qui est dedans) ¦ Maskovať horným tvarom: najvyšší tvar tejto skupiny ju oreže (vidno iba to, čo je vnútri) ¦ Masker med formen øverst: den øverste formen i denne gruppen beskjærer den (bare det som er inni, vises)
+le dessin (hors calque) ¦ kresba (mimo vrstvy) ¦ tegningen (utenfor lag)
+Range la sélection dans un groupe ¦ Vloží výber do skupiny ¦ Legger markeringen i en gruppe
+Un groupe vide dans le calque actuel ¦ Prázdna skupina v aktuálnej vrstve ¦ En tom gruppe i det gjeldende laget
+Grouper la sélection ¦ Zoskupiť výber ¦ Grupper markeringen
+Tu dessines dans : {where} ¦ Kreslíš do: {where} ¦ Du tegner i: {where}
+au moins 3 objets ¦ aspoň 3 objekty ¦ minst 3 objekter
+{w} × {h} cm à l’impression (96 points par pouce). ¦ {w} × {h} cm pri tlači (96 bodov na palec). ¦ {w} × {h} cm ved utskrift (96 punkter per tomme).
+=volet ¦ diel|diely|dielov ¦ panel|paneler
+{name} — clic : au centre ; glisser : où tu veux ¦ {name} — klik: do stredu; ťahanie: kam chceš ¦ {name} — klikk: i midten; dra: dit du vil
+Aucun ornement pour « {q} ». ¦ Žiadny ornament pre „{q}“. ¦ Ingen ornamenter for «{q}».
+Ornement : {name} ¦ Ornament: {name} ¦ Ornament: {name}
+{what} en hachures : prêt pour une impression en noir et blanc. ¦ {what} šrafovaním: pripravené na čiernobielu tlač. ¦ {what} med skravering: klar for svart-hvitt-utskrift.
+Couleur {n} ¦ Farba {n} ¦ Farge {n}
+Masque retiré : la forme est revenue tout en haut du calque. ¦ Maska odobratá: tvar sa vrátil úplne hore vo vrstve. ¦ Masken er fjernet: formen er tilbake øverst i laget.
+Masque retiré : la forme est revenue tout en haut du groupe. ¦ Maska odobratá: tvar sa vrátil úplne hore v skupine. ¦ Masken er fjernet: formen er tilbake øverst i gruppen.
+Pose d’abord une forme (rond, ovale, rectangle, tracé…) tout en haut de ce calque : elle servira de découpe. ¦ Najprv umiestni tvar (kruh, ovál, obdĺžnik, cestu…) úplne hore v tejto vrstve: poslúži ako výrez. ¦ Plasser først en form (sirkel, oval, rektangel, bane…) helt øverst i dette laget: den brukes som utsnitt.
+Pose d’abord une forme (rond, ovale, rectangle, tracé…) tout en haut de ce groupe : elle servira de découpe. ¦ Najprv umiestni tvar (kruh, ovál, obdĺžnik, cestu…) úplne hore v tejto skupine: poslúži ako výrez. ¦ Plasser først en form (sirkel, oval, rektangel, bane…) helt øverst i denne gruppen: den brukes som utsnitt.
+Il faut quelque chose à découper sous la forme, dans ce calque. ¦ Pod tvarom v tejto vrstve musí byť niečo na orezanie. ¦ Det må være noe å beskjære under formen, i dette laget.
+Il faut quelque chose à découper sous la forme, dans ce groupe. ¦ Pod tvarom v tejto skupine musí byť niečo na orezanie. ¦ Det må være noe å beskjære under formen, i denne gruppen.
+Masque posé : on ne voit plus que ce qui est dans « {name} ». ¦ Maska použitá: vidno iba to, čo je vnútri „{name}“. ¦ Masken er brukt: bare det som er inni «{name}», vises nå.
+la forme ¦ tvar ¦ formen
+« {name} » supprimé avec ce qu’il contient ¦ „{name}“ vymazané aj s obsahom ¦ «{name}» er slettet med innholdet
+Émail : {name} ¦ Tinktúra: {name} ¦ Tinktur: {name}
+Le blasonnement est écrit en français héraldique. ¦ Blazón je napísaný francúzskym heraldickým jazykom. ¦ Blasoneringen er skrevet på fransk heraldisk språk.
+Ajoute un meuble {name} seul, à placer où tu veux ¦ Pridá samostatnú figúru {name}, ktorú umiestniš, kam chceš ¦ Legger til en enkelt {name}-figur som du kan plassere der du vil
+{a} → {b} points. ¦ {a} → {b} bodov. ¦ {a} → {b} punkter.
+Plans de travail ({n}) ¦ Pracovné plochy ({n}) ¦ Tegneflater ({n})
+Ce dessin a plusieurs pages ({what}) : leur taille vient du pliage choisi. Tu peux changer ici le fond, l’unité et la résolution. ¦ Táto kresba má niekoľko strán ({what}): ich veľkosť vychádza zo zvoleného skladania. Tu môžeš zmeniť pozadie, jednotku a rozlíšenie. ¦ Denne tegningen har flere sider ({what}): størrelsen kommer fra den valgte brettingen. Her kan du endre bakgrunn, enhet og oppløsning.
+Vectorisé : {what} ¦ Vektorizované: {what} ¦ Vektorisert: {what}
+{n} pages, une par face ¦ {n} strán, jedna na každú stranu ¦ {n} sider, én per side
+Image : {name} ¦ Obrázok: {name} ¦ Bilde: {name}
+« {name} » rangée dans les médias ¦ „{name}“ uložené do médií ¦ «{name}» er lagret i mediene
+Pas rangée dans les médias ({err}) : l’image est posée dans le dessin seulement. ¦ Neuložené do médií ({err}): obrázok je umiestnený iba v kresbe. ¦ Ikke lagret i mediene ({err}): bildet er bare plassert i tegningen.
+Ouvrir « {name} » à la place ? ¦ Otvoriť namiesto toho „{name}“? ¦ Åpne «{name}» i stedet?
+Ma forme ¦ Môj tvar ¦ Min form
+Remplacer « {name} » ¦ Nahradiť „{name}“ ¦ Erstatt «{name}»
+Forme « {name} » enregistrée : elle est dans « Mes formes ». ¦ Tvar „{name}“ uložený: je v „Moje tvary“. ¦ Formen «{name}» er lagret: den ligger i «Mine former».
+Image ajoutée aux armoiries « {name} ». ¦ Obrázok pridaný k erbu „{name}“. ¦ Bildet er lagt til våpenet «{name}».
+L’image (PNG, nette, fond transparent) y est ajoutée. ¦ Obrázok (PNG, ostrý, priehľadné pozadie) sa k nemu pridá. ¦ Bildet (PNG, skarpt, gjennomsiktig bakgrunn) legges til.
+L’image (PNG, nette, fond compris) y est ajoutée. ¦ Obrázok (PNG, ostrý, vrátane pozadia) sa k nemu pridá. ¦ Bildet (PNG, skarpt, med bakgrunn) legges til.
+=copié ¦ skopírovaný|skopírované|skopírovaných ¦ kopiert|kopiert
+=copie transformée ¦ transformovaná kópia|transformované kópie|transformovaných kópií ¦ transformert kopi|transformerte kopier
+=bloc @media ¦ blok @media|bloky @media|blokov @media ¦ @media-blokk|@media-blokker
+=règle ¦ pravidlo|pravidlá|pravidiel ¦ regel|regler
+=calque de plan créé ¦ vytvorená vrstva plánu|vytvorené vrstvy plánu|vytvorených vrstiev plánu ¦ kartlag opprettet|kartlag opprettet
+Mot de passe ¦ Heslo ¦ Passord
+Écrans enregistrés ; {what} du CSS ont suivi. ¦ Obrazovky uložené; {what} v CSS sa prispôsobili. ¦ Skjermene er lagret; {what} i CSS fulgte med.
+Écrans enregistrés ; {what} du CSS a suivi. ¦ Obrazovky uložené; {what} v CSS sa prispôsobil. ¦ Skjermene er lagret; {what} i CSS fulgte med.
+(accordéon exclusif) ¦ (výlučný akordeón) ¦ (eksklusivt trekkspill)
+(celle de la fiche, ou à choisir) ¦ (z karty, alebo zvoliť) ¦ (oppføringens, eller velg en)
+(réglé tout seul) ¦ (nastavené automaticky) ¦ (stilles inn automatisk)
+(se remplit avec ce qui est dessiné) ¦ (vyplní sa tým, čo je nakreslené) ¦ (fylles ut med det som er tegnet)
+* : avec des conditions, voir la norme. ¦ *: s podmienkami, pozri normu. ¦ *: med betingelser, se standarden.
+1 point de fuite (une rue vue de face) ¦ 1 úbežník (ulica spredu) ¦ 1 forsvinningspunkt (en gate sett forfra)
+2 points (une maison vue de l’angle) ¦ 2 body (dom z rohu) ¦ 2 punkter (et hus sett fra hjørnet)
+60 styles au plus. ¦ Najviac 60 štýlov. ¦ Høyst 60 stiler.
+ARBRE DÉCORATIF ¦ DEKORATÍVNY STROM ¦ DEKORATIVT TRE
+Aa Choisir… ¦ Aa Vybrať… ¦ Aa Velg…
+Abbaye, prieuré ¦ Opátstvo, priorstvo ¦ Kloster, priori
+Accueil, notre arbre, la famille en chiffres, nous écrire ¦ Úvod, náš strom, rodina v číslach, napíšte nám ¦ Forside, treet vårt, familien i tall, skriv til oss
+Afficher ce champ sur le faire-part (décoché : gardé ici, mais pas imprimé) ¦ Zobraziť toto pole na oznámení (nezačiarknuté: uložené tu, ale nevytlačí sa) ¦ Vis dette feltet på kortet (uten kryss: beholdes her, men skrives ikke ut)
+Affiché ¦ Zobrazené ¦ Vist
+Aimanter : en glissant, les objets se collent aux bords et aux centres des autres (⌘ pour s’en passer) ¦ Prichytávať: pri ťahaní sa objekty prichytia k okrajom a stredom ostatných (⌘ na vypnutie) ¦ Fest: når du drar, fester objektene seg til kantene og midtpunktene til andre (⌘ for å la være)
+Aimanter à la grille ¦ Prichytávať k mriežke ¦ Fest til rutenettet
+Ajoute un vrai bouton « Fermer ». ¦ Pridá skutočné tlačidlo „Zavrieť“. ¦ Legger til en ekte «Lukk»-knapp.
+Aligner en bas ¦ Zarovnať nadol ¦ Juster nederst
+Aligner en haut ¦ Zarovnať nahor ¦ Juster øverst
+Aligner par rapport au plan de travail ¦ Zarovnať vzhľadom na pracovnú plochu ¦ Juster etter tegneflaten
+Aligner par rapport à la sélection ¦ Zarovnať vzhľadom na výber ¦ Juster etter markeringen
+Aligné ¦ Zarovnané ¦ Justert
+Aller à un bloc @media du CSS ¦ Prejsť na blok @media v CSS ¦ Gå til en @media-blokk i CSS
+Allongé 11 × 22 cm ¦ Podlhovastá 11 × 22 cm ¦ Avlang 11 × 22 cm
+Allongé DL 10 × 21 cm ¦ Podlhovastá DL 10 × 21 cm ¦ Avlang DL 10 × 21 cm
+Allongés ¦ Podlhovasté ¦ Avlange
+Alt + flèches dans une case : ±10 px. Les valeurs vont là où dit « Appliquer à » (élément, classe, écran). ¦ Alt + šípky v políčku: ±10 px. Hodnoty idú tam, kam hovorí „Použiť na“ (prvok, trieda, obrazovka). ¦ Alt + piltaster i et felt: ±10 px. Verdiene havner der «Bruk på» sier (element, klasse, skjerm).
+Anglaise entrelacée ¦ Prepletaná anglická kurzíva ¦ Sammenflettet engelsk skråskrift
+Animations réduites ¦ Obmedzené animácie ¦ Reduserte animasjoner
+Années 50 ¦ 50. roky ¦ 1950-tallet
+Aperçu du fond ¦ Náhľad pozadia ¦ Forhåndsvisning av bakgrunnen
+Aperçu du site ¦ Náhľad webu ¦ Forhåndsvisning av nettstedet
+Aperçu indisponible. ¦ Náhľad nie je k dispozícii. ¦ Forhåndsvisning er ikke tilgjengelig.
+Arbre dessiné (tronc et branches) ¦ Kreslený strom (kmeň a konáre) ¦ Tegnet tre (stamme og greiner)
+Arbre en cases (de bas en haut) ¦ Strom v políčkach (zdola nahor) ¦ Tre i felter (nedenfra og opp)
+Au centre (horizontal) ¦ Na stred (vodorovne) ¦ I midten (vannrett)
+Au milieu (vertical) ¦ V strede (zvisle) ¦ I midten (loddrett)
+Au naturel (brun) ¦ Prírodná (hnedá) ¦ Naturlig (brun)
+Au plus ¦ Najviac ¦ Høyst
+Auberge, café ¦ Hostinec, kaviareň ¦ Kro, kafé
+Aucun (l’aperçu seul) ¦ Žiadny (iba náhľad) ¦ Ingen (bare forhåndsvisning)
+Aucun ancêtre trouvé. ¦ Nenašiel sa žiadny predok. ¦ Fant ingen aner.
+Aucun attribut ne correspond. ¦ Žiadny atribút nezodpovedá. ¦ Ingen attributter passer.
+Aucun dessin enregistré. ¦ Žiadna uložená kresba. ¦ Ingen lagret tegning.
+Aucun élément ne correspond. ¦ Žiadny prvok nezodpovedá. ¦ Ingen elementer passer.
+Aucune propriété ne correspond. ¦ Žiadna vlastnosť nezodpovedá. ¦ Ingen egenskaper passer.
+Autour du centre de la sélection. Avec des copies, chaque copie reprend la transformation de la précédente (une frise, un dégradé de tailles…). ¦ Okolo stredu výberu. S kópiami každá kópia zopakuje transformáciu predchádzajúcej (vlys, prechod veľkostí…). ¦ Rundt midten av markeringen. Med kopier gjentar hver kopi transformasjonen til den forrige (en frise, en størrelsesovergang…).
+Avancé ¦ Posunuté dopredu ¦ Flyttet fram
+Bannière 150 × 50 ¦ Banner 150 × 50 ¦ Banner 150 × 50
+Bien plus épais ¦ Oveľa hrubšie ¦ Mye tykkere
+Blason créé ¦ Erb vytvorený ¦ Våpen opprettet
+Blocs @media du CSS ¦ Bloky @media v CSS ¦ @media-blokker i CSS
+Bourg, quartier bâti ¦ Mestečko, zastavaná štvrť ¦ Tettsted, bebygd område
+Bâtiment ou symbole ¦ Budova alebo symbol ¦ Bygning eller symbol
+CALLIGRAPHIE ET SCEAUX ¦ KALIGRAFIA A PEČATE ¦ KALLIGRAFI OG SEGL
+CSS de la classe ou de l’id (édition rapide) ¦ CSS triedy alebo id (rýchla úprava) ¦ CSS for klassen eller id-en (hurtigredigering)
+Cacher ce panneau (la languette sur le bord, ou ◧, le remet) ¦ Skryť tento panel (vráti ho záložka na okraji alebo ◧) ¦ Skjul dette panelet (fliken i kanten, eller ◧, henter det tilbake)
+Cacher ce panneau (la languette sur le bord, ou ◨, le remet) ¦ Skryť tento panel (vráti ho záložka na okraji alebo ◨) ¦ Skjul dette panelet (fliken i kanten, eller ◨, henter det tilbake)
+Cacher le panneau Ceci est ¦ Skryť panel Toto je ¦ Skjul panelet Dette er
+Cacher le panneau de gauche ¦ Skryť ľavý panel ¦ Skjul venstre panel
+Cadastre napoléonien ¦ Napoleonský kataster ¦ Napoleonsk matrikkel
+Cadre Art déco ¦ Rámček art deco ¦ Art deco-ramme
+Cadre Art nouveau ¦ Rámček secesia ¦ Jugendramme
+Cadre Belle Époque ¦ Rámček Belle Époque ¦ Belle Époque-ramme
+Cadre du salon, toile 80 × 120… ¦ Rám do obývačky, plátno 80 × 120… ¦ Ramme til stua, lerret 80 × 120…
+Cadre et ornements ¦ Rámček a ornamenty ¦ Ramme og ornamenter
+Cadre à filets ¦ Rámček s linkami ¦ Ramme med linjer
+Calques déjà là ¦ Už existujúce vrstvy ¦ Lag som allerede finnes
+Carré 100 × 100 ¦ Štvorec 100 × 100 ¦ Kvadrat 100 × 100
+Carré 12 × 12 cm ¦ Štvorec 12 × 12 cm ¦ Kvadrat 12 × 12 cm
+Carré 14 × 14 cm ¦ Štvorec 14 × 14 cm ¦ Kvadrat 14 × 14 cm
+Carré 17 × 17 cm ¦ Štvorec 17 × 17 cm ¦ Kvadrat 17 × 17 cm
+Carré 30 × 30 ¦ Štvorec 30 × 30 ¦ Kvadrat 30 × 30
+Carré 60 × 60 ¦ Štvorec 60 × 60 ¦ Kvadrat 60 × 60
+Carrée 14 × 14 cm ¦ Štvorcová 14 × 14 cm ¦ Kvadratisk 14 × 14 cm
+Carrée 16 × 16 cm ¦ Štvorcová 16 × 16 cm ¦ Kvadratisk 16 × 16 cm
+Carrée 17 × 17 cm ¦ Štvorcová 17 × 17 cm ¦ Kvadratisk 17 × 17 cm
+Carrée 22 × 22 cm ¦ Štvorcová 22 × 22 cm ¦ Kvadratisk 22 × 22 cm
+Carte 10 × 15 cm ¦ Karta 10 × 15 cm ¦ Kort 10 × 15 cm
+Carte 12 × 17 cm ¦ Karta 12 × 17 cm ¦ Kort 12 × 17 cm
+Carte 13 × 18 cm ¦ Karta 13 × 18 cm ¦ Kort 13 × 18 cm
+Carte 15 × 21 cm ¦ Karta 15 × 21 cm ¦ Kort 15 × 21 cm
+Carte 16 × 22 cm ¦ Karta 16 × 22 cm ¦ Kort 16 × 22 cm
+Carte des lieux ¦ Mapa miest ¦ Kart over steder
+Carte moderne ¦ Moderná mapa ¦ Moderne kart
+Carte simple ¦ Jednoduchá karta ¦ Enkelt kort
+Cartouche à enroulements ¦ Kartuša s volútami ¦ Kartusj med rullverk
+Cases vides (ancêtres à trouver) ¦ Prázdne políčka (predkovia, ktorých treba nájsť) ¦ Tomme felter (aner som skal finnes)
+Ce fichier n’est pas un SVG lisible. ¦ Tento súbor nie je čitateľný SVG. ¦ Denne filen er ikke en lesbar SVG.
+Ce navigateur n’a pas pu s’ouvrir. ¦ Tento prehliadač sa nepodarilo otvoriť. ¦ Denne nettleseren kunne ikke åpnes.
+Ce qui n’est pas enregistré sera perdu. ¦ Čo nie je uložené, sa stratí. ¦ Det som ikke er lagret, går tapt.
+Ceci est… (nom, balise, classe, id) ¦ Toto je… (názov, značka, trieda, id) ¦ Dette er… (navn, tagg, klasse, id)
+Centrer sur le plan de travail ¦ Vycentrovať na pracovnej ploche ¦ Sentrer på tegneflaten
+Ces formes ne se mélangent pas. ¦ Tieto tvary sa neprelínajú. ¦ Disse formene kan ikke blandes.
+Cet élément seulement ¦ Iba tento prvok ¦ Bare dette elementet
+Cette adresse n’est pas permise (data:…). ¦ Táto adresa nie je povolená (data:…). ¦ Denne adressen er ikke tillatt (data:…).
+Cette adresse n’est pas permise (javascript:, data:…). ¦ Táto adresa nie je povolená (javascript:, data:…). ¦ Denne adressen er ikke tillatt (javascript:, data:…).
+Cette adresse n’est pas permise (javascript:…). ¦ Táto adresa nie je povolená (javascript:…). ¦ Denne adressen er ikke tillatt (javascript:…).
+Changer l’affichage des fichiers ¦ Zmeniť zobrazenie súborov ¦ Endre visningen av filene
+Chercher : titre, lien, tableau, h2… ¦ Hľadať: nadpis, odkaz, tabuľka, h2… ¦ Søk: overskrift, lenke, tabell, h2…
+Chercher dans l’aide-mémoire ¦ Hľadať v ťaháku ¦ Søk i huskelisten
+Chercher un ornement ¦ Hľadať ornament ¦ Søk etter et ornament
+Chercher une signature ¦ Hľadať podpis ¦ Søk etter en underskrift
+Chercher… (fleuron, coin, déco) ¦ Hľadať… (fleurón, roh, deco) ¦ Søk… (fleuron, hjørne, deco)
+Choisir le parent ¦ Vybrať rodiča ¦ Velg forelderen
+Choisir l’élément qui le contient ¦ Vybrať prvok, ktorý ho obsahuje ¦ Velg elementet som inneholder det
+Choisir un élément de la page ¦ Vybrať prvok na stránke ¦ Velg et element på siden
+Choisis au moins deux formes. ¦ Vyber aspoň dva tvary. ¦ Marker minst to former.
+Choisis au moins deux objets. ¦ Vyber aspoň dva objekty. ¦ Marker minst to objekter.
+Choisis d’abord des objets. ¦ Najprv vyber objekty. ¦ Marker noen objekter først.
+Choisis d’abord l’image d’un acte. ¦ Najprv vyber obrázok záznamu. ¦ Velg bildet av et dokument først.
+Choisis d’abord un objet. ¦ Najprv vyber objekt. ¦ Marker et objekt først.
+Choisis d’abord un ou plusieurs objets. ¦ Najprv vyber jeden alebo viac objektov. ¦ Marker ett eller flere objekter først.
+Choisis exactement deux formes (rectangle, ellipse, étoile, tracé…). ¦ Vyber presne dva tvary (obdĺžnik, elipsa, hviezda, cesta…). ¦ Marker nøyaktig to former (rektangel, ellipse, stjerne, bane…).
+Choisis un fichier ou une image. ¦ Vyber súbor alebo obrázok. ¦ Velg en fil eller et bilde.
+Choisis un lieu : la carte s’affiche ici. ¦ Vyber miesto: mapa sa zobrazí tu. ¦ Velg et sted: kartet vises her.
+Choisis un modèle : tu pourras tout changer ensuite, en glissant des blocs ou dans le code. ¦ Vyber šablónu: potom môžeš všetko zmeniť presúvaním blokov alebo v kóde. ¦ Velg en mal: du kan endre alt etterpå, ved å dra blokker eller i koden.
+Choisis un objet (outil Sélection) pour changer ses couleurs, son trait, sa taille. Les couleurs ci-dessous seront celles des prochaines formes. ¦ Vyber objekt (nástroj Výber) a zmeň jeho farby, obrys a veľkosť. Farby nižšie sa použijú pre ďalšie tvary. ¦ Marker et objekt (verktøyet Markering) for å endre farger, strek og størrelse. Fargene nedenfor brukes til de neste formene.
+Choisis un objet qui a un contour. ¦ Vyber objekt, ktorý má obrys. ¦ Marker et objekt som har et omriss.
+Château ¦ Zámok ¦ Slott
+Clic : choisir un élément (« Ceci est… ») · double-clic sur un texte : l’écrire · glisse un bloc depuis ＋ Blocs ¦ Klik: vybrať prvok („Toto je…“) · dvojklik na text: písať ho · presuň blok z ＋ Bloky ¦ Klikk: velg et element («Dette er…») · dobbeltklikk på en tekst: skriv den · dra en blokk fra ＋ Blokker
+Clique sur un élément de l’aperçu (ou dans le code) : il dira ce qu’il est, par exemple « header.site-entete ». Tu pourras lui donner un nom, une classe, un id, des couleurs. ¦ Klikni na prvok v náhľade (alebo v kóde): povie, čo je, napríklad „header.site-entete“. Môžeš mu dať názov, triedu, id, farby. ¦ Klikk på et element i forhåndsvisningen (eller i koden): det sier hva det er, for eksempel «header.site-entete». Du kan gi det et navn, en klasse, en id, farger.
+Coche ou décoche un champ pour l’afficher ou le masquer, ↑ ↓ pour le ranger, 🗑 pour l’enlever. Le faire-part s’ouvre ensuite dans le dessin vectoriel : tout se retouche (textes, couleurs, polices, ornements), puis « ⤓ Exporter » (PDF, image, impression, recto-verso sur A4). ¦ Začiarkni alebo odškrtni pole a zobraz alebo skry ho, ↑ ↓ na zoradenie, 🗑 na odstránenie. Oznámenie sa potom otvorí vo vektorovej kresbe: všetko sa dá upraviť (texty, farby, písma, ornamenty), potom „⤓ Exportovať“ (PDF, obrázok, tlač, obojstranne na A4). ¦ Kryss av eller fjern krysset for et felt for å vise eller skjule det, ↑ ↓ for å ordne, 🗑 for å fjerne det. Kortet åpnes deretter i vektortegningen: alt kan justeres (tekster, farger, skrifter, ornamenter), og så «⤓ Eksporter» (PDF, bilde, utskrift, tosidig på A4).
+Code du site ¦ Kód webu ¦ Nettstedets kode
+Coin Art déco ¦ Roh art deco ¦ Art deco-hjørne
+Coin Art nouveau ¦ Roh secesia ¦ Jugendhjørne
+Coin fleuronné ¦ Kvetinový roh ¦ Blomsterhjørne
+Coin perlé ¦ Perlový roh ¦ Perlehjørne
+Coin à filet arrondi ¦ Roh so zaoblenou linkou ¦ Hjørne med avrundet linje
+Coin à volutes ¦ Roh s volútami ¦ Hjørne med voluter
+Colle ton jeton ici ¦ Vlož sem svoj token ¦ Lim inn tokenet ditt her
+Collé ¦ Vložené ¦ Limt inn
+Comme Tailwind, en montant (640, 768, 1024, 1280) ¦ Ako Tailwind, vzostupne (640, 768, 1024, 1280) ¦ Som Tailwind, oppover (640, 768, 1024, 1280)
+Comme l’original ¦ Ako originál ¦ Som originalen
+Commencer un nouveau dessin ? ¦ Začať novú kresbu? ¦ Starte en ny tegning?
+Comment colorer les cases : côté du père et côté de la mère, hommes et femmes, une teinte qui pâlit à chaque génération, ou une seule couleur (pour imprimer). ¦ Ako zafarbiť políčka: strana otca a strana matky, muži a ženy, odtieň, ktorý s každou generáciou bledne, alebo jedna farba (na tlač). ¦ Hvordan feltene fargelegges: farssiden og morssiden, menn og kvinner, en nyanse som blir lysere for hver generasjon, eller én farge (for utskrift).
+Commenter, décommenter ¦ Zakomentovať, odkomentovať ¦ Kommenter, fjern kommentar
+Contour du trait → forme ¦ Obrys čiary → tvar ¦ Strekens omriss → form
+Contour par défaut ¦ Predvolený obrys ¦ Standardomriss
+Convertir en tracé ¦ Previesť na cestu ¦ Konverter til bane
+Convertir en tracé (points modifiables) ¦ Previesť na cestu (upraviteľné body) ¦ Konverter til bane (redigerbare punkter)
+Copie impossible ici. ¦ Tu sa nedá kopírovať. ¦ Kan ikke kopiere her.
+Couleur libre : n’importe quelle couleur ¦ Voľná farba: akákoľvek farba ¦ Fri farge: hvilken som helst farge
+Coupé ¦ Delený vodorovne ¦ Delt
+Courbes lissées ¦ Vyhladené krivky ¦ Utjevnede kurver
+Cours d’eau, lac ¦ Vodný tok, jazero ¦ Elv, innsjø
+Croix fleuronnée ¦ Kvetinový kríž ¦ Blomsterkors
+Créer et ouvrir dans le dessin ¦ Vytvoriť a otvoriť v kresbe ¦ Opprett og åpne i tegningen
+Créer la page ¦ Vytvoriť stránku ¦ Opprett siden
+Créer l’arbre ¦ Vytvoriť strom ¦ Opprett treet
+Créer l’élément ¦ Vytvoriť prvok ¦ Opprett elementet
+Créer un style (à partir de celui choisi) ¦ Vytvoriť štýl (na základe zvoleného) ¦ Opprett en stil (ut fra den valgte)
+Cul-de-lampe en triangle ¦ Trojuholníková koncová vinetka ¦ Trekantet sluttvignett
+Cérémonie ¦ Obrad ¦ Seremoni
+Cérémonie, réception ¦ Obrad, hostina ¦ Seremoni, mottakelse
+Côte à côte ou l’un au-dessus de l’autre ¦ Vedľa seba alebo nad sebou ¦ Side om side eller over hverandre
+Côte, rivage ¦ Pobrežie, breh ¦ Kyst, strand
+Cœur fleuronné ¦ Kvetinové srdce ¦ Blomsterhjerte
+Dans l’export ¦ V exporte ¦ I eksporten
+Date et lieu ¦ Dátum a miesto ¦ Dato og sted
+Date, heure, lieu ¦ Dátum, čas, miesto ¦ Dato, klokkeslett, sted
+Dates complètes ¦ Úplné dátumy ¦ Fullstendige datoer
+De qui est cette signature ? ¦ Čí je tento podpis? ¦ Hvem sin underskrift er dette?
+Des copies tournent autour d’un centre (une rosace, une couronne de meubles autour d’un écu…). Le tout devient un groupe. ¦ Kópie sa otáčajú okolo stredu (rozeta, veniec figúr okolo štítu…). Celok sa stane skupinou. ¦ Kopier dreier rundt et sentrum (en roset, en krans av figurer rundt et skjold…). Det hele blir en gruppe.
+Descendre l’élément ¦ Posunúť prvok nadol ¦ Flytt elementet ned
+Deux fichiers (côte à côte ou l’un au-dessus de l’autre) ¦ Dva súbory (vedľa seba alebo nad sebou) ¦ To filer (side om side eller over hverandre)
+Deux fichiers : côte à côte ou l’un au-dessus de l’autre ¦ Dva súbory: vedľa seba alebo nad sebou ¦ To filer: side om side eller over hverandre
+Deuxième fichier ¦ Druhý súbor ¦ Andre fil
+Dis ce que c’est : « c’est mon en-tête, mon menu… » ¦ Povedz, čo to je: „je to moje záhlavie, moja ponuka…“ ¦ Si hva det er: «det er toppteksten min, menyen min…»
+Dissocié ¦ Rozdelené ¦ Delt opp
+Distance au centre (si « sous la sélection ») ¦ Vzdialenosť od stredu (ak „pod výberom“) ¦ Avstand fra midten (hvis «under markeringen»)
+Donne un nom aux armoiries. ¦ Pomenuj erb. ¦ Gi våpenet et navn.
+Dossier css/ — déposer un fichier ici pour l’y ranger ¦ Priečinok css/ — vlož sem súbor, aby si ho do neho uložil ¦ Mappen css/ — slipp en fil her for å legge den der
+Dossier js/ — déposer un fichier ici pour l’y ranger ¦ Priečinok js/ — vlož sem súbor, aby si ho do neho uložil ¦ Mappen js/ — slipp en fil her for å legge den der
+Dupliquer la ligne ¦ Duplikovať riadok ¦ Dupliser linjen
+Dupliquer l’élément ¦ Duplikovať prvok ¦ Dupliser elementet
+Décalage ¦ Posun ¦ Forskyvning
+Décaler le fond (d’un dixième de sa largeur) ¦ Posunúť pozadie (o desatinu jeho šírky) ¦ Forskyv bakgrunnen (en tidel av bredden)
+Déplacé dedans ¦ Presunuté dovnútra ¦ Flyttet inn
+Déplier / replier ¦ Rozbaliť / zbaliť ¦ Vis / skjul
+Déverrouillé ¦ Odomknuté ¦ Låst opp
+D’après la norme HTML du WHATWG (CC BY 4.0), traduit. ¦ Podľa normy HTML od WHATWG (CC BY 4.0), preložené. ¦ Ifølge HTML-standarden fra WHATWG (CC BY 4.0), oversatt.
+D’après la norme HTML du WHATWG (CC BY 4.0), traduit. Les on… (onclick) vont dans le JS du site. ¦ Podľa normy HTML od WHATWG (CC BY 4.0), preložené. Atribúty on… (onclick) patria do JS webu. ¦ Ifølge HTML-standarden fra WHATWG (CC BY 4.0), oversatt. on…-attributter (onclick) hører hjemme i nettstedets JS.
+D’après une personne ¦ Podľa osoby ¦ Ut fra en person
+Effacer les lignes du registre ¦ Odstrániť linky matriky ¦ Fjern linjene i protokollen
+Effacer les petites taches ¦ Odstrániť malé škvrny ¦ Fjern små flekker
+Effilé aux deux bouts ¦ Zúžené na oboch koncoch ¦ Spisset i begge ender
+Elle montre tout seul ce qui est dessiné. ¦ Sama ukazuje, čo je nakreslené. ¦ Den viser automatisk det som er tegnet.
+En bas de chaque page ¦ Dole na každej stránke ¦ Nederst på hver side
+En déplaçant, en agrandissant ou en dessinant, l’objet s’aimante aux bords et aux centres des autres objets, du plan de travail et des pages ; un trait rose le montre. ⌘ (ou Ctrl) maintenu : sans aimant. ¦ Pri presúvaní, zväčšovaní alebo kreslení sa objekt prichytí k okrajom a stredom ostatných objektov, pracovnej plochy a strán; ukazuje to ružová čiara. Podržaný ⌘ (alebo Ctrl): bez prichytávania. ¦ Når du flytter, endrer størrelse eller tegner, festes objektet til kantene og midtpunktene til andre objekter, tegneflaten og sidene; en rosa linje viser det. Hold ⌘ (eller Ctrl) nede: uten festing.
+En faire un écran ¦ Urobiť z toho obrazovku ¦ Gjør det til en skjerm
+En-tête, carte de la famille… ¦ Záhlavie, mapa rodiny… ¦ Topptekst, familiens kart…
+Encre sépia ¦ Sépiový atrament ¦ Sepiablekk
+Enlever ce champ ¦ Odobrať toto pole ¦ Fjern dette feltet
+Enregistrer ce site avant d’en ouvrir un autre ? ¦ Uložiť tento web pred otvorením iného? ¦ Lagre dette nettstedet før du åpner et annet?
+Enregistrer comme forme ¦ Uložiť ako tvar ¦ Lagre som form
+Enregistrer comme image d’armoiries ¦ Uložiť ako obrázok erbu ¦ Lagre som våpenbilde
+Enregistrer dans les médias d’une fiche ¦ Uložiť do médií karty ¦ Lagre i mediene til en oppføring
+Enregistrer le dessin ¦ Uložiť kresbu ¦ Lagre tegningen
+Envoi dans les médias… ¦ Odosielam do médií… ¦ Sender til mediene…
+Espace en haut et en bas des sections ¦ Medzera nad a pod časťami ¦ Avstand over og under seksjonene
+Espace entre colonnes et photos ¦ Medzera medzi stĺpcami a fotkami ¦ Avstand mellom kolonner og bilder
+Espace intérieur des cartes ¦ Vnútorné odsadenie kariet ¦ Innvendig marg i kortene
+Espace intérieur, les 4 côtés d’un coup ¦ Vnútorné odsadenie, všetky 4 strany naraz ¦ Innvendig marg, alle 4 sider på én gang
+Espace sous les paragraphes ¦ Medzera pod odsekmi ¦ Avstand under avsnittene
+Espace sous les titres ¦ Medzera pod nadpismi ¦ Avstand under overskriftene
+Espacement des lettres ¦ Medzery medzi písmenami ¦ Bokstavavstand
+Existe depuis (année) ¦ Existuje od (rok) ¦ Finnes siden (år)
+Exporter : PDF, images, SVG, impression, fichier du dessin ¦ Exportovať: PDF, obrázky, SVG, tlač, súbor kresby ¦ Eksporter: PDF, bilder, SVG, utskrift, tegningsfil
+Expression régulière ¦ Regulárny výraz ¦ Regulært uttrykk
+Expéditeur ¦ Odosielateľ ¦ Avsender
+Expéditeur (en haut à gauche) ¦ Odosielateľ (vľavo hore) ¦ Avsender (øverst til venstre)
+FAIRE-PART ET AFFICHES ¦ OZNÁMENIA A PLAGÁTY ¦ KORT OG PLAKATER
+FTP sécurisé ¦ Zabezpečené FTP ¦ Sikker FTP
+Fermer la recherche ¦ Zavrieť hľadanie ¦ Lukk søket
+Fermer l’onglet ¦ Zavrieť kartu ¦ Lukk fanen
+Fermer l’onglet (le fichier reste dans le site) ¦ Zavrieť kartu (súbor zostane vo webe) ¦ Lukk fanen (filen blir værende på nettstedet)
+Fermer sans enregistrer le dessin ? ¦ Zavrieť bez uloženia kresby? ¦ Lukke uten å lagre tegningen?
+Feuillage (arbre dessiné) ¦ Lístie (kreslený strom) ¦ Løvverk (tegnet tre)
+Feuille d’acanthe ¦ Akantový list ¦ Akantusblad
+Fiche affichée ¦ Zobrazená karta ¦ Oppføring som vises
+Fichier du deuxième éditeur ¦ Súbor v druhom editore ¦ Fil i det andre redigeringsvinduet
+Fichier trop gros (25 Mo au plus). ¦ Súbor je príliš veľký (najviac 25 MB). ¦ Filen er for stor (høyst 25 MB).
+Fichiers du site ¦ Súbory webu ¦ Nettstedets filer
+Fichiers en onglets (comme Phoenix Code) ¦ Súbory na kartách (ako Phoenix Code) ¦ Filer i faner (som Phoenix Code)
+Fichiers en trois boutons (HTML / CSS / JS) ¦ Súbory na troch tlačidlách (HTML / CSS / JS) ¦ Filer som tre knapper (HTML / CSS / JS)
+Filet Art déco ¦ Linka art deco ¦ Art deco-linje
+Filet au fleuron ¦ Linka s fleurónom ¦ Linje med fleuron
+Filet au losange ¦ Linka s kosoštvorcom ¦ Linje med rombe
+Filet ondulé ¦ Vlnitá linka ¦ Bølget linje
+Filet perlé ¦ Perlová linka ¦ Perlelinje
+Filet à volutes ¦ Linka s volútami ¦ Linje med voluter
+Fleurons, cadres Belle Époque, Art nouveau, Art déco, coins, filets, culs-de-lampe, lettrines. Clique pour poser au centre, ou glisse sur le dessin ; la palette « Couleur » les recolore ensuite. ¦ Fleuróny, rámčeky Belle Époque, secesia, art deco, rohy, linky, koncové vinetky, iniciály. Kliknutím umiestniš do stredu, alebo presuň na kresbu; paleta „Farba“ ich potom prefarbí. ¦ Fleuroner, rammer i Belle Époque, jugend og art deco, hjørner, linjer, sluttvignetter, initialer. Klikk for å plassere i midten, eller dra inn på tegningen; paletten «Farge» fargelegger dem etterpå.
+Fond du plan ¦ Podklad plánu ¦ Kartets bakgrunn
+Fond décalé ¦ Pozadie posunuté ¦ Bakgrunnen er forskjøvet
+Format de l’enveloppe ¦ Formát obálky ¦ Konvoluttformat
+Format d’image non lu par ce navigateur. ¦ Formát obrázka, ktorý tento prehliadač nevie prečítať. ¦ Bildeformat som denne nettleseren ikke kan lese.
+Forme au départ ¦ Východiskový tvar ¦ Startform
+Forme, format, style, cases… reviennent comme au départ. ¦ Tvar, formát, štýl, políčka… sa vrátia do východiskového stavu. ¦ Form, format, stil, felter… tilbakestilles som fra start.
+Forêt, bois ¦ Les, háj ¦ Skog, lund
+Frontière ¦ Hranica ¦ Grense
+Garde-en au moins un. ¦ Ponechaj aspoň jeden. ¦ Behold minst én.
+Gironné ¦ Kosmo-šikmo delený ¦ Gerert
+GitHub Pages met ton site à l’adresse « ton-compte.github.io/nom-du-depot ». Crée un jeton dans GitHub → Settings → Developer settings → « Fine-grained tokens », avec les droits « Contents » et « Pages » en lecture et écriture (et « Administration » si le dépôt n’existe pas encore). ¦ GitHub Pages umiestni tvoj web na adresu „tvoj-ucet.github.io/nazov-repozitara“. Vytvor token v GitHub → Settings → Developer settings → „Fine-grained tokens“ s právami „Contents“ a „Pages“ na čítanie aj zápis (a „Administration“, ak repozitár ešte neexistuje). ¦ GitHub Pages legger nettstedet ditt på adressen «din-konto.github.io/repo-navn». Opprett et token i GitHub → Settings → Developer settings → «Fine-grained tokens», med rettighetene «Contents» og «Pages» for lesing og skriving (og «Administration» hvis repositoryet ikke finnes ennå).
+Glisse pour dessiner la forme · ⇧ : carré, cercle, angle droit ¦ Ťahaním nakresli tvar · ⇧: štvorec, kruh, pravý uhol ¦ Dra for å tegne formen · ⇧: kvadrat, sirkel, rett vinkel
+Glisse un bloc dans l’aperçu, ou clique pour l’ajouter après l’élément choisi. ¦ Presuň blok do náhľadu alebo klikni a pridaj ho za vybraný prvok. ¦ Dra en blokk inn i forhåndsvisningen, eller klikk for å legge den til etter det valgte elementet.
+Glisse une ligne sur un groupe pour l’y ranger (il devient bleu), entre deux lignes pour changer l’ordre ; ou sélectionne puis « 📁 Ranger dans… ». Double-clic sur un nom pour le renommer. ✂️ : la forme la plus haute du groupe ou du calque le découpe (masque), 2e clic pour le retirer. ○ : travailler dans ce calque ou ce groupe. Dans le dessin : double-clic sur un groupe pour y entrer, Échap pour en sortir. ¦ Presuň riadok na skupinu a vlož ho do nej (zmodrie), medzi dva riadky na zmenu poradia; alebo vyber a potom „📁 Vložiť do…“. Dvojklikom na názov ho premenuješ. ✂️: najvyšší tvar skupiny alebo vrstvy ju oreže (maska), druhým kliknutím sa odoberie. ○: pracovať v tejto vrstve alebo skupine. V kresbe: dvojklik na skupinu na vstup, Esc na opustenie. ¦ Dra en linje til en gruppe for å legge den der (den blir blå), mellom to linjer for å endre rekkefølgen; eller marker og så «📁 Legg i…». Dobbeltklikk på et navn for å gi det nytt navn. ✂️: den øverste formen i gruppen eller laget beskjærer den (maske), klikk igjen for å fjerne den. ○: jobb i dette laget eller denne gruppen. I tegningen: dobbeltklikk på en gruppe for å gå inn, Esc for å gå ut.
+Glisser pour élargir ou rétrécir le panneau (double-clic : taille d’origine) ¦ Ťahaním rozšíriš alebo zúžiš panel (dvojklik: pôvodná veľkosť) ¦ Dra for å gjøre panelet bredere eller smalere (dobbeltklikk: opprinnelig størrelse)
+Goutte et volutes ¦ Kvapka a volúty ¦ Dråpe og voluter
+Grand téléphone ¦ Veľký telefón ¦ Stor telefon
+Grand écran ¦ Veľká obrazovka ¦ Stor skjerm
+Grille d’échelle ¦ Mierková mriežka ¦ Målestokkrutenett
+Grille d’échelle pendant le dessin ¦ Mierková mriežka počas kreslenia ¦ Målestokkrutenett mens du tegner
+Grille et repères ¦ Mriežka a vodiace čiary ¦ Rutenett og hjelpelinjer
+Groupé ¦ Zoskupené ¦ Gruppert
+Gérer les écrans ¦ Spravovať obrazovky ¦ Administrer skjermer
+Gérer les écrans (@media)… ¦ Spravovať obrazovky (@media)… ¦ Administrer skjermer (@media)…
+Gérer les écrans : points de rupture et @media (largeurs, orientation, mode sombre, impression…) ¦ Spravovať obrazovky: body zlomu a @media (šírky, orientácia, tmavý režim, tlač…) ¦ Administrer skjermer: bruddpunkter og @media (bredder, retning, mørk modus, utskrift…)
+Gérer les écrans… ¦ Spravovať obrazovky… ¦ Administrer skjermer…
+Hachures héraldiques ¦ Heraldické šrafovanie ¦ Heraldisk skravering
+Hameau, lieu-dit ¦ Osada, miestny názov ¦ Grend, stedsnavn
+Héritée ¦ Dedí sa ¦ Arves
+Il faut au moins trois objets. ¦ Sú potrebné aspoň tri objekty. ¦ Det trengs minst tre objekter.
+Il faut des formes ou des tracés (pas seulement du texte ou des images). ¦ Sú potrebné tvary alebo cesty (nie iba text či obrázky). ¦ Det trengs former eller baner (ikke bare tekst eller bilder).
+Image ajustée ¦ Obrázok prispôsobený ¦ Bildet er tilpasset
+Image copiée. ¦ Obrázok skopírovaný. ¦ Bildet er kopiert.
+Image refusée. ¦ Obrázok odmietnutý. ¦ Bildet ble avvist.
+Importe d’abord une image (Fichier → Importer), puis choisis-la. ¦ Najprv importuj obrázok (Súbor → Importovať) a potom ho vyber. ¦ Importer først et bilde (Fil → Importer), og velg det deretter.
+Intervertir remplissage et contour (⇧X) ¦ Prehodiť výplň a obrys (⇧X) ¦ Bytt fyll og omriss (⇧X)
+Intérieur 1 ¦ Vnútro 1 ¦ Innside 1
+Intérieur 2 ¦ Vnútro 2 ¦ Innside 2
+Intérieur 3 ¦ Vnútro 3 ¦ Innside 3
+Intérieur 4 ¦ Vnútro 4 ¦ Innside 4
+Intérieur droit ¦ Vnútro vpravo ¦ Innside høyre
+Intérieur gauche ¦ Vnútro vľavo ¦ Innside venstre
+Intérieur milieu ¦ Vnútro v strede ¦ Innside midten
+Inverser l’aperçu et le code ¦ Prehodiť náhľad a kód ¦ Bytt forhåndsvisning og kode
+JS du site ¦ JS webu ¦ Nettstedets JS
+La bibliothèque d’ornements n’est pas chargée. ¦ Knižnica ornamentov nie je načítaná. ¦ Ornamentbiblioteket er ikke lastet inn.
+La carte du lieu se pose sous le dessin, en transparence, à la taille du plan de travail : décalque les rues, les rivières, les maisons. Le plan est alors « situé » : l’échelle est juste et les lieux de ta base peuvent s’y placer. ¦ Mapa miesta sa umiestni pod kresbu, priehľadne, vo veľkosti pracovnej plochy: obkresli ulice, rieky, domy. Plán je potom „umiestnený“: mierka je správna a miesta z tvojej databázy sa naň môžu umiestniť. ¦ Kartet over stedet legges under tegningen, gjennomsiktig, i tegneflatens størrelse: tegn av gatene, elvene, husene. Kartet er da «plassert»: målestokken er riktig, og stedene i databasen din kan plasseres på det.
+La fenêtre d’export n’est pas chargée. ¦ Okno exportu nie je načítané. ¦ Eksportvinduet er ikke lastet inn.
+La largeur de l’aperçu quand on choisit cet écran ¦ Šírka náhľadu pri výbere tejto obrazovky ¦ Bredden på forhåndsvisningen når denne skjermen er valgt
+La lettre du nom au milieu, plus grande (3 initiales) ¦ Písmeno priezviska v strede, väčšie (3 iniciály) ¦ Etternavnets bokstav i midten, større (3 initialer)
+La lettrine ¦ Iniciála ¦ Initialen
+La page ¦ Stránka ¦ Siden
+La photo du faire-part ¦ Fotka oznámenia ¦ Kortets bilde
+La racine du site ¦ Koreň webu ¦ Nettstedets rot
+La taille, le fond, la grille et les couleurs par défaut, gardés sous un nom. ¦ Veľkosť, pozadie, mriežka a predvolené farby, uložené pod názvom. ¦ Størrelse, bakgrunn, rutenett og standardfarger, lagret under et navn.
+La vérification des navigateurs n’est pas chargée. ¦ Kontrola prehliadačov nie je načítaná. ¦ Nettleserkontrollen er ikke lastet inn.
+Lac, étang, mare ¦ Jazero, rybník, mláka ¦ Innsjø, dam, tjern
+Largeur au plus (0 = toute) ¦ Najviac šírka (0 = celá) ¦ Største bredde (0 = hele)
+Largeur du contenu ¦ Šírka obsahu ¦ Innholdets bredde
+Le nombre de rangées d’ancêtres, la personne comptant pour la première. Au-delà de 7, choisis un grand format (A2, A1…) pour que les noms restent lisibles. ¦ Počet radov predkov, pričom osoba sa počíta ako prvá. Nad 7 zvoľ veľký formát (A2, A1…), aby mená zostali čitateľné. ¦ Antall rader med aner, der personen teller som den første. Over 7 bør du velge et stort format (A2, A1…) så navnene blir lesbare.
+Les ancêtres d’une personne (2 à 5 générations) ¦ Predkovia osoby (2 až 5 generácií) ¦ En persons aner (2 til 5 generasjoner)
+Les blocs « Ma généalogie » sont remplis par l’app et figés à l’export : jamais de personne vivante ni de fiche confidentielle. ¦ Bloky „Môj rodokmeň“ vypĺňa aplikácia a pri exporte sa zmrazia: nikdy žiadna žijúca osoba ani dôverná karta. ¦ Blokkene «Mitt slektstre» fylles ut av appen og fryses ved eksport: aldri en levende person eller en konfidensiell oppføring.
+Les liens vers les pages, tenus à jour ¦ Odkazy na stránky, priebežne aktualizované ¦ Lenker til sidene, holdes oppdatert
+Les lieux d’une personne (ou de ses ancêtres) ¦ Miesta osoby (alebo jej predkov) ¦ En persons steder (eller anenes)
+Les noms, dates, lieux et parents de la fiche remplissent les champs ; relis-les et complète avant de créer. ¦ Mená, dátumy, miesta a rodičia z karty vyplnia polia; pred vytvorením ich skontroluj a doplň. ¦ Navn, datoer, steder og foreldre fra oppføringen fyller ut feltene; les dem gjennom og fyll ut før du oppretter.
+Les objets s’alignent entre eux ¦ Objekty sa zarovnajú medzi sebou ¦ Objektene justeres etter hverandre
+Les objets s’alignent sur le plan de travail (ou la page, le volet où ils sont) ¦ Objekty sa zarovnajú k pracovnej ploche (alebo k strane či dielu, kde sú) ¦ Objektene justeres etter tegneflaten (eller siden eller panelet de er på)
+Les points d’encre plus petits que cette taille sont effacés (poussières, piqûres du papier). ¦ Atramentové bodky menšie ako táto veľkosť sa vymažú (prach, škvrnky na papieri). ¦ Blekkprikker mindre enn denne størrelsen fjernes (støv, flekker i papiret).
+Les raccourcis ¦ Skratky ¦ Snarveier
+Les versions viennent d’une liste intégrée à l’app (comme caniuse.com, sans internet). Pour voir le site en vrai : ↗ Aperçu, puis ouvre l’adresse dans le navigateur voulu. ¦ Verzie pochádzajú zo zoznamu zabudovaného v aplikácii (ako caniuse.com, bez internetu). Ak chceš web vidieť naozaj: ↗ Náhľad a potom otvor adresu v požadovanom prehliadači. ¦ Versjonene kommer fra en liste som er innebygd i appen (som caniuse.com, uten Internett). For å se nettstedet på ordentlig: ↗ Forhåndsvis, og åpne så adressen i ønsket nettleser.
+Lettrine Art déco ¦ Iniciála art deco ¦ Art deco-initial
+Lettrine Art nouveau ¦ Secesná iniciála ¦ Jugendinitial
+Lettrine au feuillage ¦ Iniciála s lístím ¦ Initial med løvverk
+Lettrine carrée ¦ Štvorcová iniciála ¦ Kvadratisk initial
+Lettrine cerclée ¦ Iniciála v kruhu ¦ Initial i sirkel
+Lettrine médiévale ¦ Stredoveká iniciála ¦ Middelaldersk initial
+Lien retiré ¦ Odkaz odobratý ¦ Lenken er fjernet
+Lieu important ¦ Dôležité miesto ¦ Viktig sted
+Lieux de ¦ Miesta osoby ¦ Steder for
+Ligne d’horizon (hauteur) ¦ Línia horizontu (výška) ¦ Horisontlinje (høyde)
+Lisser les courbes ¦ Vyhladiť krivky ¦ Glatt ut kurvene
+Légende du bas ¦ Dolný popis ¦ Nederste tekst
+Légende du haut ¦ Horný popis ¦ Øverste tekst
+Légende sous la signature (facultatif) ¦ Popis pod podpisom (nepovinné) ¦ Tekst under underskriften (valgfritt)
+L’aperçu de la signature s’affiche ici. ¦ Náhľad podpisu sa zobrazí tu. ¦ Forhåndsvisningen av underskriften vises her.
+L’arbre est fabriqué comme un dessin : il s’ouvre ensuite dans l’outil de dessin vectoriel pour changer les couleurs, les polices, les textes, ajouter des ornements, un blason… puis l’exporter en PDF ou en image, à la taille voulue. ¦ Strom sa vytvorí ako kresba: potom sa otvorí vo vektorovom kresliacom nástroji, kde môžeš zmeniť farby, písma, texty, pridať ornamenty, erb… a potom ho exportovať do PDF alebo ako obrázok v požadovanej veľkosti. ¦ Treet lages som en tegning: det åpnes så i vektortegneverktøyet, der du kan endre farger, skrifter, tekster, legge til ornamenter, et våpen… og så eksportere det som PDF eller bilde i ønsket størrelse.
+L’image d’un acte ¦ Obrázok záznamu ¦ Bildet av et dokument
+L’objet du dessus doit être une forme ou un tracé. ¦ Horný objekt musí byť tvar alebo cesta. ¦ Det øverste objektet må være en form eller en bane.
+L’un au-dessus de l’autre ¦ Nad sebou ¦ Over hverandre
+L’écran de base : son CSS s’applique partout, sans @media. Les autres écrans le complètent. ¦ Základná obrazovka: jej CSS platí všade, bez @media. Ostatné obrazovky ju dopĺňajú. ¦ Basisskjermen: CSS-en gjelder overalt, uten @media. De andre skjermene supplerer den.
+L’écrire dans le HTML de la page, là où est le curseur ¦ Zapísať do HTML stránky na miesto kurzora ¦ Skriv det i sidens HTML, der markøren er
+Ma généalogie (rempli tout seul) ¦ Môj rodokmeň (vyplní sa sám) ¦ Mitt slektstre (fylles ut automatisk)
+Marche partout depuis 2023 ; mets une couleur simple juste avant pour les plus vieux. ¦ Funguje všade od roku 2023; pre staršie daj tesne predtým jednoduchú farbu. ¦ Virker overalt siden 2023; sett en enkel farge rett før for de eldre.
+Marge des côtés du contenu ¦ Bočný okraj obsahu ¦ Sidemarg for innholdet
+Marges et espace intérieur ¦ Okraje a vnútorné odsadenie ¦ Marger og innvendig marg
+Marges, espace intérieur et taille ¦ Okraje, vnútorné odsadenie a veľkosť ¦ Marger, innvendig marg og størrelse
+Mariés le… ¦ Zosobášení dňa… ¦ Gift den…
+Masque d’écrêtage ¦ Orezová maska ¦ Beskjæringsmaske
+Masque d’écrêtage (l’objet du dessus découpe les autres) ¦ Orezová maska (horný objekt oreže ostatné) ¦ Beskjæringsmaske (det øverste objektet beskjærer de andre)
+Masqué ¦ Skryté ¦ Skjult
+Mes formats ; ranger, montrer ou cacher ¦ Moje formáty; radiť, zobraziť alebo skryť ¦ Mine formater; ordne, vise eller skjule
+Mes sites : en ouvrir un autre, en créer un, ouvrir un dossier ¦ Moje weby: otvoriť iný, vytvoriť nový, otvoriť priečinok ¦ Mine nettsteder: åpne et annet, opprette et, åpne en mappe
+Mes styles ; ranger, montrer ou cacher ¦ Moje štýly; radiť, zobraziť alebo skryť ¦ Mine stiler; ordne, vise eller skjule
+Mettre le site en ligne : Netlify, GitHub Pages ou ton hébergement (FTP sécurisé) ¦ Dať web online: Netlify, GitHub Pages alebo tvoj hosting (zabezpečené FTP) ¦ Legg nettstedet på nett: Netlify, GitHub Pages eller webhotellet ditt (sikker FTP)
+Mettre l’un au-dessus de l’autre ¦ Dať nad seba ¦ Plasser over hverandre
+Mine, carrière ¦ Baňa, lom ¦ Gruve, steinbrudd
+Mode Blason désactivé ¦ Režim Erb vypnutý ¦ Våpenmodus er slått av
+Mode Carte ¦ Režim Mapa ¦ Kartmodus
+Mode Carte désactivé ¦ Režim Mapa vypnutý ¦ Kartmodus er slått av
+Mode Plan (cartes), fond de carte, image de référence ¦ Režim Plán (mapy), podkladová mapa, referenčný obrázok ¦ Planmodus (kart), bakgrunnskart, referansebilde
+Mode Plan désactivé ¦ Režim Plán vypnutý ¦ Planmodus er slått av
+Moderne épuré ¦ Čistý moderný ¦ Enkel moderne
+Modifier mon style ¦ Upraviť môj štýl ¦ Rediger stilen min
+Mon ancêtre ¦ Môj predok ¦ Min ane
+Monter l’élément ¦ Posunúť prvok nahor ¦ Flytt elementet opp
+Montre l’onglet Plan et ses outils (routes, rivières…) ¦ Zobrazí kartu Plán a jej nástroje (cesty, rieky…) ¦ Viser fanen Plan og verktøyene der (veier, elver…)
+Montre l’onglet et le menu Blason ¦ Zobrazí kartu a ponuku Erb ¦ Viser fanen og menyen Våpen
+Montrer dans la liste ¦ Zobraziť v zozname ¦ Vis i listen
+Montrer la grille ¦ Zobraziť mriežku ¦ Vis rutenettet
+Montrer l’année ¦ Zobraziť rok ¦ Vis året
+Montrer ou cacher le panneau de gauche (Blocs, Pages, Styles) ¦ Zobraziť alebo skryť ľavý panel (Bloky, Stránky, Štýly) ¦ Vis eller skjul venstre panel (Blokker, Sider, Stiler)
+Montrer ou cacher le panneau des réglages ¦ Zobraziť alebo skryť panel nastavení ¦ Vis eller skjul innstillingspanelet
+Montrer ou cacher le panneau « Ceci est… » ¦ Zobraziť alebo skryť panel „Toto je…“ ¦ Vis eller skjul panelet «Dette er…»
+Monument aux morts, obélisque ¦ Pomník padlým, obelisk ¦ Minnesmerke over de falne, obelisk
+Médaillon perlé ¦ Perlový medailón ¦ Perlemedaljong
+Mélanger ¦ Prelínať ¦ Bland
+Naissance, décès, parents, événements ¦ Narodenie, úmrtie, rodičia, udalosti ¦ Fødsel, død, foreldre, hendelser
+Naissances par décennie, prénoms les plus portés ¦ Narodenia podľa desaťročí, najčastejšie krstné mená ¦ Fødsler per tiår, vanligste fornavn
+Navigateur par défaut ¦ Predvolený prehliadač ¦ Standard nettleser
+Navigateurs : vérifier le site… ¦ Prehliadače: skontrolovať web… ¦ Nettlesere: sjekk nettstedet…
+Navigateurs visés (versions les plus anciennes à prendre en charge) ¦ Cieľové prehliadače (najstaršie podporované verzie) ¦ Nettlesere du sikter mot (eldste versjoner som skal støttes)
+Ne rien sélectionner ¦ Nič nevybrať ¦ Marker ingenting
+Netlify héberge ton site gratuitement, à une adresse en …netlify.app. 1. Crée un compte sur netlify.com. 2. Dans « User settings → Applications → Personal access tokens », crée un jeton (« New access token »). 3. Colle-le ici. ¦ Netlify hostuje tvoj web zadarmo na adrese končiacej …netlify.app. 1. Vytvor si účet na netlify.com. 2. V „User settings → Applications → Personal access tokens“ vytvor token („New access token“). 3. Vlož ho sem. ¦ Netlify er vert for nettstedet ditt gratis, på en adresse som slutter på …netlify.app. 1. Opprett en konto på netlify.com. 2. I «User settings → Applications → Personal access tokens» oppretter du et token («New access token»). 3. Lim det inn her.
+Nom de lieu (ville, village, rivière… déjà mis en forme pour une carte ; T = texte libre) ¦ Názov miesta (mesto, dedina, rieka… už naformátovaný pre mapu; T = voľný text) ¦ Stedsnavn (by, bygd, elv… allerede formatert for et kart; T = fri tekst)
+Nom de l’écran ¦ Názov obrazovky ¦ Skjermens navn
+Nom du dessin ¦ Názov kresby ¦ Tegningens navn
+Nom placé ¦ Umiestnenie názvu ¦ Navnets plassering
+Nombre (avec l’original) ¦ Počet (vrátane originálu) ¦ Antall (med originalen)
+Nombre d’étapes ¦ Počet krokov ¦ Antall trinn
+Noms des générations ¦ Názvy generácií ¦ Generasjonsnavn
+Note, légende ¦ Poznámka, popis ¦ Notat, bildetekst
+Nouveau dessin ¦ Nová kresba ¦ Ny tegning
+Nouveau fichier ¦ Nový súbor ¦ Ny fil
+Nouveau fichier : page HTML ou PHP, CSS, JS, morceau PHP (en-tête…) ¦ Nový súbor: stránka HTML alebo PHP, CSS, JS, kúsok PHP (záhlavie…) ¦ Ny fil: HTML- eller PHP-side, CSS, JS, PHP-bit (topptekst…)
+Nouveau fichier dans css/ ¦ Nový súbor v css/ ¦ Ny fil i css/
+Nouveau fichier dans js/ ¦ Nový súbor v js/ ¦ Ny fil i js/
+Nouveau fichier ici ¦ Nový súbor tu ¦ Ny fil her
+Nouveau fichier… ¦ Nový súbor… ¦ Ny fil…
+Nouveau sans enregistrer ¦ Nový bez uloženia ¦ Ny uten å lagre
