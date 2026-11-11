@@ -1,0 +1,1629 @@
+fr ¦ fi ¦ hu
+Lien hypertexte ¦ Hyperlinkki ¦ Hivatkozás
+Abréviation ¦ Lyhenne ¦ Rövidítés
+Coordonnées de contact d’une page ou d’un élément article ¦ Sivun tai article-elementin yhteystiedot ¦ Egy oldal vagy article elem elérhetőségi adatai
+Lien ou zone inactive sur une image cliquable (map) ¦ Linkki tai ei-aktiivinen alue napsautettavassa kuvassa (map) ¦ Hivatkozás vagy inaktív terület egy kattintható képen (map)
+Composition autonome, qu’on peut diffuser ou réutiliser seule ¦ Itsenäinen kokonaisuus, jota voi jakaa tai käyttää uudelleen erikseen ¦ Önálló egység, amely külön is terjeszthető vagy újrahasznosítható
+Encadré pour un contenu en marge du sujet ¦ Laatikko pääaiheen sivuun liittyvälle sisällölle ¦ Keretes rész a fő témához lazán kapcsolódó tartalomnak
+Lecteur audio ¦ Äänisoitin ¦ Hanglejátszó
+Mots-clés (mis en avant sans importance particulière) ¦ Avainsanat (korostettu ilman erityistä painoarvoa) ¦ Kulcsszavak (kiemelve, különösebb fontosság nélkül)
+Adresse de base et cible par défaut des liens et formulaires ¦ Linkkien ja lomakkeiden perusosoite ja oletuskohde ¦ A hivatkozások és űrlapok alapcíme és alapértelmezett célja
+Isole le sens d’écriture d’un texte ¦ Eristää tekstin kirjoitussuunnan ¦ Elkülöníti egy szöveg írásirányát
+Impose le sens d’écriture d’un texte ¦ Pakottaa tekstin kirjoitussuunnan ¦ Kikényszeríti egy szöveg írásirányát
+Passage cité d’une autre source ¦ Toisesta lähteestä lainattu kohta ¦ Más forrásból idézett szakasz
+Corps du document ¦ Asiakirjan runko ¦ A dokumentum törzse
+Retour à la ligne (dans un poème, une adresse postale…) ¦ Rivinvaihto (runossa, postiosoitteessa…) ¦ Sortörés (versben, postacímben…)
+Bouton ¦ Painike ¦ Gomb
+Zone de dessin pilotée par script ¦ Skriptillä ohjattu piirtoalue ¦ Szkripttel vezérelt rajzterület
+Titre d’un tableau ¦ Taulukon otsikko ¦ Táblázat címe
+Titre d’une œuvre ¦ Teoksen nimi ¦ Mű címe
+Code informatique ¦ Ohjelmakoodi ¦ Programkód
+Colonne de tableau ¦ Taulukon sarake ¦ Táblázat oszlopa
+Groupe de colonnes d’un tableau ¦ Taulukon sarakeryhmä ¦ Táblázat oszlopcsoportja
+Équivalent lisible par une machine ¦ Koneluettava vastine ¦ Géppel olvasható megfelelő
+Liste de propositions pour un champ à saisie libre ¦ Ehdotusluettelo vapaasti täytettävälle kentälle ¦ Javaslatlista egy szabadon kitölthető mezőhöz
+Contenu du ou des termes dt correspondants ¦ Vastaavan dt-termin tai -termien sisältö ¦ A megfelelő dt kifejezés(ek) tartalma
+Suppression dans le document ¦ Poisto asiakirjassa ¦ Törlés a dokumentumban
+Bloc dépliable pour cacher des détails ¦ Avattava lohko yksityiskohtien piilottamiseen ¦ Kinyitható blokk részletek elrejtéséhez
+Définition d’un terme (première occurrence) ¦ Termin määritelmä (ensimmäinen esiintymä) ¦ Kifejezés meghatározása (első előfordulás)
+Boîte de dialogue ou fenêtre ¦ Valintaikkuna tai ikkuna ¦ Párbeszédablak vagy ablak
+Conteneur générique (bloc), ou groupe nom-valeur dans un dl ¦ Yleinen säiliö (lohko) tai nimi-arvo-ryhmä dl-elementissä ¦ Általános tároló (blokk), vagy név-érték csoport egy dl-ben
+Liste d’associations : zéro ou plusieurs groupes nom-valeur ¦ Kuvausluettelo: nolla tai useampia nimi-arvo-ryhmiä ¦ Leíró lista: nulla vagy több név-érték csoport
+Intitulé du ou des éléments dd correspondants ¦ Vastaavan dd-elementin tai -elementtien otsikko ¦ A megfelelő dd elem(ek) címkéje
+Accent d’insistance ¦ Painotettu korostus ¦ Hangsúlyos kiemelés
+Module externe (plugin) ¦ Ulkoinen moduuli (laajennus) ¦ Külső modul (bővítmény)
+Groupe de champs de formulaire ¦ Lomakekenttien ryhmä ¦ Űrlapmezők csoportja
+Légende d’une figure ¦ Kuvan kuvateksti ¦ Ábra felirata
+Figure, avec une légende facultative ¦ Kuva, valinnaisella kuvatekstillä ¦ Ábra, opcionális felirattal
+Pied d’une page ou d’une section ¦ Sivun tai osion alatunniste ¦ Oldal vagy szakasz lábléce
+Formulaire à envoyer ¦ Lähetettävä lomake ¦ Elküldendő űrlap
+Titre (niveau 1) ¦ Otsikko (taso 1) ¦ Címsor (1. szint)
+Titre (niveau 2) ¦ Otsikko (taso 2) ¦ Címsor (2. szint)
+Titre (niveau 3) ¦ Otsikko (taso 3) ¦ Címsor (3. szint)
+Titre (niveau 4) ¦ Otsikko (taso 4) ¦ Címsor (4. szint)
+Titre (niveau 5) ¦ Otsikko (taso 5) ¦ Címsor (5. szint)
+Titre (niveau 6) ¦ Otsikko (taso 6) ¦ Címsor (6. szint)
+Conteneur des métadonnées du document ¦ Asiakirjan metatietojen säiliö ¦ A dokumentum metaadatainak tárolója
+Introduction ou aides à la navigation d’une page ou d’une section ¦ Sivun tai osion johdanto tai navigointiapu ¦ Oldal vagy szakasz bevezetője vagy navigációs segédletei
+Groupe de titres (titre et sous-titre) ¦ Otsikkoryhmä (otsikko ja alaotsikko) ¦ Címsorcsoport (cím és alcím)
+Rupture thématique (changement de sujet) ¦ Temaattinen katko (aiheen vaihdos) ¦ Tematikus törés (témaváltás)
+Élément racine ¦ Juurielementti ¦ Gyökérelem
+Autre voix (terme étranger, pensée, nom d’œuvre…) ¦ Toinen ääni (vieras termi, ajatus, teoksen nimi…) ¦ Eltérő hang (idegen kifejezés, gondolat, műcím…)
+Page incluse dans la page (cadre) ¦ Sivuun upotettu sivu (kehys) ¦ Oldalba ágyazott oldal (keret)
+Champ de formulaire ¦ Lomakekenttä ¦ Űrlapmező
+Ajout dans le document ¦ Lisäys asiakirjaan ¦ Beszúrás a dokumentumba
+Saisie de l’utilisateur (touches) ¦ Käyttäjän syöte (näppäimet) ¦ Felhasználói bevitel (billentyűk)
+Libellé d’un champ de formulaire ¦ Lomakekentän nimike ¦ Űrlapmező címkéje
+Légende d’un fieldset ¦ fieldset-ryhmän otsikko ¦ Egy fieldset felirata
+Élément de liste ¦ Luettelon kohta ¦ Listaelem
+Lien de métadonnées (feuille de styles, icône…) ¦ Metatietolinkki (tyylitiedosto, kuvake…) ¦ Metaadat-hivatkozás (stíluslap, ikon…)
+Conteneur du contenu principal du document ¦ Asiakirjan pääsisällön säiliö ¦ A dokumentum fő tartalmának tárolója
+Image cliquable (zones) ¦ Napsautettava kuva (alueet) ¦ Kattintható kép (területek)
+Racine MathML (formules) ¦ MathML-juuri (kaavat) ¦ MathML-gyökér (képletek)
+Menu de commandes ¦ Komentovalikko ¦ Parancsmenü
+Métadonnée en texte ¦ Tekstimuotoinen metatieto ¦ Szöveges metaadat
+Jauge ¦ Mittari ¦ Mérő
+Section de liens de navigation ¦ Navigointilinkkien osio ¦ Navigációs hivatkozások szakasza
+Contenu de secours quand les scripts ne tournent pas ¦ Varasisältö, kun skriptit eivät toimi ¦ Tartalék tartalom, ha a szkriptek nem futnak
+Image, page incluse ou module externe ¦ Kuva, upotettu sivu tai ulkoinen moduuli ¦ Kép, beágyazott oldal vagy külső modul
+Groupe d’options dans une liste ¦ Luettelon vaihtoehtoryhmä ¦ Lehetőségek csoportja egy listában
+Option d’une liste ou d’un champ à choix ¦ Luettelon tai valintakentän vaihtoehto ¦ Egy lista vagy választómező lehetősége
+Résultat d’un calcul ¦ Laskun tulos ¦ Számítás eredménye
+Image (avec plusieurs sources) ¦ Kuva (useasta lähteestä) ¦ Kép (több forrással)
+Bloc de texte préformaté ¦ Esimuotoiltu tekstilohko ¦ Előformázott szövegblokk
+Barre de progression ¦ Edistymispalkki ¦ Folyamatjelző
+Citation courte ¦ Lyhyt lainaus ¦ Rövid idézet
+Parenthèse pour une annotation ruby ¦ Ruby-merkinnän sulkeet ¦ Zárójel ruby-jegyzethez
+Texte d’une annotation ruby ¦ Ruby-merkinnän teksti ¦ Ruby-jegyzet szövege
+Annotation(s) ruby (prononciation au-dessus du texte) ¦ Ruby-merkintä(t) (ääntämys tekstin yläpuolella) ¦ Ruby-jegyzet(ek) (kiejtés a szöveg fölött)
+Texte qui n’est plus exact ¦ Teksti, joka ei enää pidä paikkaansa ¦ Már nem pontos szöveg
+Sortie d’un programme ¦ Ohjelman tuloste ¦ Program kimenete
+Script intégré ¦ Upotettu skripti ¦ Beágyazott szkript
+Conteneur des champs de recherche ¦ Hakukenttien säiliö ¦ Keresőmezők tárolója
+Section générique d’un document ou d’une application ¦ Asiakirjan tai sovelluksen yleinen osio ¦ Dokumentum vagy alkalmazás általános szakasza
+Liste déroulante ¦ Pudotusvalikko ¦ Legördülő lista
+Reprend le contenu de l’option choisie ¦ Toistaa valitun vaihtoehdon sisällön ¦ Megismétli a kiválasztott lehetőség tartalmát
+Emplacement dans un arbre « shadow » ¦ Paikka ”shadow”-puussa ¦ Hely egy „shadow” fában
+Remarque en marge (petits caractères) ¦ Sivuhuomautus (pienellä) ¦ Széljegyzet (apró betűs)
+Source d’une image (img) ou d’un média (video, audio) ¦ Kuvan (img) tai median (video, audio) lähde ¦ Kép (img) vagy média (video, audio) forrása
+Conteneur générique (dans le texte) ¦ Yleinen säiliö (tekstin sisällä) ¦ Általános tároló (szövegen belül)
+Importance ¦ Tärkeys ¦ Fontosság
+Styles intégrés ¦ Upotetut tyylit ¦ Beágyazott stílusok
+Intitulé d’un details ¦ details-elementin otsikko ¦ Egy details elem összefoglalója
+Racine SVG (dessin vectoriel) ¦ SVG-juuri (vektoripiirros) ¦ SVG-gyökér (vektorrajz)
+Groupe de lignes d’un tableau ¦ Taulukon riviryhmä ¦ Táblázat sorcsoportja
+Cellule de tableau ¦ Taulukon solu ¦ Táblázatcella
+Modèle (contenu inerte, à copier par script) ¦ Malli (passiivinen sisältö, skriptillä kopioitava) ¦ Sablon (inaktív tartalom, szkripttel másolandó)
+Zone de texte sur plusieurs lignes ¦ Monirivinen tekstikenttä ¦ Többsoros szövegmező
+Groupe de lignes de pied d’un tableau ¦ Taulukon alatunnisterivien ryhmä ¦ Táblázat láblécsorainak csoportja
+Cellule d’en-tête de tableau ¦ Taulukon otsikkosolu ¦ Táblázat fejléccellája
+Groupe de lignes d’en-tête d’un tableau ¦ Taulukon otsikkorivien ryhmä ¦ Táblázat fejlécsorainak csoportja
+Date ou heure, lisible par une machine ¦ Päivämäärä tai kellonaika, koneluettava ¦ Dátum vagy időpont, géppel olvasható
+Titre du document (onglet du navigateur) ¦ Asiakirjan otsikko (selaimen välilehti) ¦ A dokumentum címe (böngészőlap)
+Ligne de tableau ¦ Taulukon rivi ¦ Táblázat sora
+Piste de texte minutée (sous-titres) ¦ Ajastettu tekstiraita (tekstitykset) ¦ Időzített szövegsáv (feliratok)
+Annotation non exprimée (souligné) ¦ Ilmaisematon merkintä (alleviivaus) ¦ Ki nem mondott jelölés (aláhúzás)
+Variable ¦ Muuttuja ¦ Változó
+Lecteur vidéo ¦ Videosoitin ¦ Videólejátszó
+Possibilité de coupure de ligne ¦ Mahdollinen rivinvaihtokohta ¦ Lehetséges sortörés
+texte courant ¦ juokseva teksti ¦ folyó szöveg
+interactif ¦ interaktiivinen ¦ interaktív
+palpable ¦ havaittava ¦ érzékelhető
+transparent ¦ läpinäkyvä ¦ átlátszó
+vide ¦ tyhjä ¦ üres
+intégré ¦ upotettu ¦ beágyazott
+métadonnées ¦ metatiedot ¦ metaadatok
+listé ¦ lueteltu ¦ listázott
+avec libellé ¦ nimikkeellinen ¦ címkézhető
+envoyable ¦ lähetettävä ¦ elküldhető
+associé à un formulaire ¦ lomakkeeseen liitetty ¦ űrlaphoz társított
+éléments de soutien aux scripts ¦ skriptejä tukevat elementit ¦ szkripteket támogató elemek
+contenu de métadonnées ¦ metatietosisältö ¦ metaadat-tartalom
+réinitialisable ¦ palautettava ¦ visszaállítható
+contenu de titre ¦ otsikkosisältö ¦ címsortartalom
+selon MathML ¦ MathML:n mukaan ¦ MathML szerint
+un img ¦ yksi img ¦ egy img
+soutien aux scripts ¦ skriptejä tukeva ¦ szkripteket támogató
+script, data, ou documentation du script ¦ script, data tai skriptin dokumentaatio ¦ script, data vagy a szkript dokumentációja
+selon SVG ¦ SVG:n mukaan ¦ SVG szerint
+flux ¦ virtaussisältö ¦ folyamtartalom
+tous les éléments ¦ kaikki elementit ¦ minden elem
+voir chaque propriété ¦ katso kukin ominaisuus ¦ lásd az egyes tulajdonságokat
+éléments positionnés ¦ sijoitetut elementit ¦ pozicionált elemek
+tous les éléments et le texte ¦ kaikki elementit ja teksti ¦ minden elem és a szöveg
+éléments d’un flex ¦ flex-kohteet ¦ flex-elemek
+conteneurs flex ¦ flex-säiliöt ¦ flex-tárolók
+conteneurs de grille ¦ ruudukkosäiliöt ¦ rácstárolók
+éléments remplacés (img, video…) ¦ korvattavat elementit (img, video…) ¦ helyettesített elemek (img, video…)
+éléments transformables ¦ muunnettavat elementit ¦ átalakítható elemek
+conteneurs de blocs ¦ lohkosäiliöt ¦ blokktárolók
+éléments personnalisés de formulaire ¦ lomakkeeseen liitetyt mukautetut elementit ¦ űrlaphoz társított egyéni elemek
+présent ou absent ¦ läsnä tai poissa ¦ jelen van vagy hiányzik
+mots séparés par des espaces ¦ välilyönnein erotetut sanat ¦ szóközzel elválasztott szavak
+adresse (URL) ¦ osoite (URL) ¦ cím (URL)
+chaîne vide ¦ tyhjä merkkijono ¦ üres karakterlánc
+nombre entier ¦ kokonaisluku ¦ egész szám
+un id ¦ yksi id ¦ egy id
+nombres ¦ luvut ¦ számok
+date (et heure) ¦ päivämäärä (ja kellonaika) ¦ dátum (és időpont)
+date, heure, durée… ¦ päivämäärä, kellonaika, kesto… ¦ dátum, időpont, időtartam…
+nom de cadre ou _blank, _self, _parent, _top ¦ kehyksen nimi tai _blank, _self, _parent, _top ¦ keret neve vagy _blank, _self, _parent, _top
+nombre entier between 0 and 8 ¦ kokonaisluku 0–8 ¦ egész szám 0 és 8 között
+code de langue (fr, en…) ¦ kielikoodi (fr, en…) ¦ nyelvkód (fr, en…)
+code de langue (fr, en…) or chaîne vide ¦ kielikoodi (fr, en…) tai tyhjä merkkijono ¦ nyelvkód (fr, en…) vagy üres karakterlánc
+tailles (sizes) ¦ koot (sizes) ¦ méretek (sizes)
+liste d’images (srcset) ¦ kuvaluettelo (srcset) ¦ képlista (srcset)
+requête @media ¦ @media-kysely ¦ @media lekérdezés
+expression régulière ¦ säännöllinen lauseke ¦ reguláris kifejezés
+déclarations CSS ¦ CSS-määrittelyt ¦ CSS-deklarációk
+type MIME (image/png…) ¦ MIME-tyyppi (image/png…) ¦ MIME-típus (image/png…)
+un type de champ (text, email, date, number…) ¦ kenttätyyppi (text, email, date, number…) ¦ egy mezőtípus (text, email, date, number…)
+liste séparée par des virgules consisting of valid MIME type strings with no parameters or audio/*, video/*, or image/* ¦ pilkuin eroteltu luettelo kelvollisia MIME-tyyppejä ilman parametreja, tai audio/*, video/* tai image/* ¦ vesszővel elválasztott lista érvényes, paraméter nélküli MIME-típusokból, vagy audio/*, video/* vagy image/*
+nombre greater than zero, or "any" ¦ nollaa suurempi luku tai ”any” ¦ nullánál nagyobb szám, vagy „any”
+Couleur des cases, boutons radio, curseurs ¦ Valintaruutujen, valintanappien ja liukusäätimien väri ¦ Jelölőnégyzetek, rádiógombok, csúszkák színe
+Répartition des lignes (flex à plusieurs lignes, grid) ¦ Rivien jakautuminen (monirivinen flex, grid) ¦ Sorok elosztása (többsoros flex, grid)
+Alignement des éléments sur l’axe secondaire ¦ Elementtien tasaus sivuakselilla ¦ Elemek igazítása a keresztirányú tengelyen
+Alignement de cet élément seul ¦ Vain tämän elementin tasaus ¦ Csak ennek az elemnek az igazítása
+Raccourci d’une animation (@keyframes) ¦ Animaation lyhenne (@keyframes) ¦ Animáció rövidítése (@keyframes)
+Délai avant l’animation ¦ Viive ennen animaatiota ¦ Késleltetés az animáció előtt
+Sens de l’animation ¦ Animaation suunta ¦ Az animáció iránya
+Durée de l’animation ¦ Animaation kesto ¦ Az animáció időtartama
+État avant et après l’animation ¦ Tila ennen animaatiota ja sen jälkeen ¦ Állapot az animáció előtt és után
+Nombre de répétitions (infinite) ¦ Toistojen määrä (infinite) ¦ Ismétlések száma (infinite)
+Nom de l’animation (@keyframes) ¦ Animaation nimi (@keyframes) ¦ Az animáció neve (@keyframes)
+Rythme de l’animation ¦ Animaation rytmi ¦ Az animáció ritmusa
+Apparence native d’un champ ou d’un bouton ¦ Kentän tai painikkeen alkuperäinen ulkoasu ¦ Mező vagy gomb natív megjelenése
+Proportions largeur / hauteur (16 / 9…) ¦ Leveyden ja korkeuden suhde (16 / 9…) ¦ Szélesség / magasság arány (16 / 9…)
+Effets sur ce qu’il y a derrière (verre dépoli) ¦ Tehosteet taustalla olevaan (huurrelasi) ¦ Hatások a mögötte lévőre (matt üveg)
+Raccourci : couleur, image, position et taille du fond ¦ Lyhenne: taustan väri, kuva, sijainti ja koko ¦ Rövidítés: a háttér színe, képe, helyzete és mérete
+Le fond défile avec la page ou reste fixe ¦ Tausta vierii sivun mukana tai pysyy paikallaan ¦ A háttér görög az oldallal vagy rögzített marad
+Jusqu’où va le fond (bordure, marges intérieures, texte) ¦ Mihin asti tausta ulottuu (reunus, sisämarginaali, teksti) ¦ Meddig ér a háttér (szegély, belső margó, szöveg)
+Image(s) ou dégradé(s) du fond ¦ Taustan kuva(t) tai liukuväri(t) ¦ A háttér képe(i) vagy színátmenete(i)
+Point de départ de l’image de fond ¦ Taustakuvan lähtökohta ¦ A háttérkép kiindulópontja
+Place de l’image de fond ¦ Taustakuvan sijainti ¦ A háttérkép helyzete
+Répétition de l’image de fond ¦ Taustakuvan toisto ¦ A háttérkép ismétlése
+Taille de l’image de fond (cover, contain, 100px…) ¦ Taustakuvan koko (cover, contain, 100px…) ¦ A háttérkép mérete (cover, contain, 100px…)
+Hauteur (selon le sens d’écriture) ¦ Korkeus (kirjoitussuunnan mukaan) ¦ Magasság (az írásirány szerint)
+Raccourci : épaisseur, style et couleur de la bordure ¦ Lyhenne: reunuksen paksuus, tyyli ja väri ¦ Rövidítés: a szegély vastagsága, stílusa és színe
+Bordures de tableau fusionnées ou séparées ¦ Taulukon reunukset yhdistettyinä tai erillisinä ¦ Táblázatszegélyek összevonva vagy külön
+Couleur de la bordure ¦ Reunuksen väri ¦ Szegély színe
+Image utilisée comme bordure ¦ Reunuksena käytetty kuva ¦ Szegélyként használt kép
+Bordure de gauche ¦ Vasen reunus ¦ Bal szegély
+Bordure de droite ¦ Oikea reunus ¦ Jobb szegély
+Espace entre les cellules ¦ Solujen välinen tila ¦ Cellák közötti távolság
+Style de la bordure (solid, dashed, dotted…) ¦ Reunuksen tyyli (solid, dashed, dotted…) ¦ Szegély stílusa (solid, dashed, dotted…)
+Bordure du haut ¦ Yläreunus ¦ Felső szegély
+Épaisseur de la bordure ¦ Reunuksen paksuus ¦ Szegély vastagsága
+Décalage depuis le bas (avec position) ¦ Siirtymä alhaalta (position-ominaisuuden kanssa) ¦ Eltolás alulról (position mellett)
+Ombre autour de la boîte ¦ Varjo laatikon ympärillä ¦ Árnyék a doboz körül
+La largeur compte-t-elle les bordures et l’espace intérieur (border-box) ? ¦ Sisältyvätkö reunukset ja sisätila leveyteen (border-box)? ¦ A szélesség tartalmazza-e a szegélyeket és a belső margót (border-box)?
+Saut (page, colonne) après ¦ Vaihto (sivu, palsta) jälkeen ¦ Törés (oldal, hasáb) utána
+Saut (page, colonne) avant ¦ Vaihto (sivu, palsta) ennen ¦ Törés (oldal, hasáb) előtte
+Éviter de couper l’élément ¦ Vältä elementin katkaisemista ¦ Az elem kettévágásának elkerülése
+Titre du tableau en haut ou en bas ¦ Taulukon otsikko ylhäällä tai alhaalla ¦ Táblázat címe felül vagy alul
+Couleur du curseur de saisie ¦ Kirjoituskohdistimen väri ¦ A szövegkurzor színe
+Passe sous les éléments flottants ¦ Siirtyy kelluvien elementtien alapuolelle ¦ A lebegő elemek alá kerül
+Découpe en forme (cercle, polygone…) ¦ Leikkaus muotoon (ympyrä, monikulmio…) ¦ Alakra vágás (kör, sokszög…)
+Nombre de colonnes de texte ¦ Tekstipalstojen määrä ¦ Szöveghasábok száma
+Espace entre les colonnes ¦ Palstojen välinen tila ¦ Hasábok közötti távolság
+Trait entre les colonnes de texte ¦ Viiva tekstipalstojen välissä ¦ Vonal a szöveghasábok között
+Largeur des colonnes de texte ¦ Tekstipalstojen leveys ¦ Szöveghasábok szélessége
+Texte en plusieurs colonnes ¦ Teksti useassa palstassa ¦ Szöveg több hasábban
+Isole l’élément pour accélérer l’affichage ¦ Eristää elementin nopeuttaakseen näyttämistä ¦ Elkülöníti az elemet a megjelenítés gyorsításához
+Nom du conteneur (@container) ¦ Säiliön nimi (@container) ¦ Tároló neve (@container)
+Fait de l’élément un conteneur (@container) ¦ Tekee elementistä säiliön (@container) ¦ Tárolóvá teszi az elemet (@container)
+Contenu généré (::before, ::after) ¦ Luotu sisältö (::before, ::after) ¦ Generált tartalom (::before, ::after)
+Augmente un compteur ¦ Kasvattaa laskuria ¦ Növel egy számlálót
+Remet un compteur à zéro ¦ Nollaa laskurin ¦ Nullázza a számlálót
+Forme du pointeur de la souris ¦ Hiiren osoittimen muoto ¦ Az egérmutató alakja
+Sens du texte (ltr, rtl) ¦ Tekstin suunta (ltr, rtl) ¦ Szövegirány (ltr, rtl)
+Façon d’afficher la boîte : block, inline, flex, grid, none… ¦ Laatikon näyttötapa: block, inline, flex, grid, none… ¦ A doboz megjelenítési módja: block, inline, flex, grid, none…
+Bordures des cellules vides ¦ Tyhjien solujen reunukset ¦ Üres cellák szegélyei
+Effets : flou, noir et blanc, luminosité… ¦ Tehosteet: sumennus, mustavalkoinen, kirkkaus… ¦ Hatások: elmosás, fekete-fehér, fényerő…
+Raccourci : capacité à grandir, rétrécir, taille de départ (flexbox) ¦ Lyhenne: kasvu- ja kutistumiskyky, aloituskoko (flexbox) ¦ Rövidítés: növekedési és zsugorodási képesség, kezdőméret (flexbox)
+Taille de départ dans un flex ¦ Aloituskoko flexissä ¦ Kezdőméret egy flexben
+Sens des éléments d’un flex : ligne ou colonne ¦ Flex-elementtien suunta: rivi tai sarake ¦ A flex elemeinek iránya: sor vagy oszlop
+Raccourci de flex-direction et flex-wrap ¦ flex-direction- ja flex-wrap-lyhenne ¦ A flex-direction és flex-wrap rövidítése
+Part de la place libre prise par l’élément ¦ Elementin osuus vapaasta tilasta ¦ Az elem által elfoglalt szabad hely aránya
+Capacité à rétrécir ¦ Kyky kutistua ¦ Zsugorodási képesség
+Les éléments d’un flex passent à la ligne ou non ¦ Rivittyvätkö flex-elementit uusille riveille ¦ A flex elemei új sorba törnek-e
+Fait flotter à gauche ou à droite (le texte l’entoure) ¦ Kelluu vasemmalle tai oikealle (teksti kiertää sen) ¦ Balra vagy jobbra úsztatja (a szöveg körbefolyja)
+Raccourci : style, graisse, taille, interligne et police ¦ Lyhenne: tyyli, lihavuus, koko, riviväli ja fontti ¦ Rövidítés: stílus, vastagság, méret, sorköz és betűtípus
+Police (et polices de secours) ¦ Fontti (ja varafontit) ¦ Betűtípus (és tartalék betűtípusok)
+Fonctions OpenType de la police ¦ Fontin OpenType-ominaisuudet ¦ A betűtípus OpenType-funkciói
+Italique ou droit ¦ Kursiivi tai pysty ¦ Dőlt vagy álló
+Variantes (petites capitales…) ¦ Muunnelmat (kapiteelit…) ¦ Változatok (kiskapitális…)
+Graisse du texte (400 normal, 700 gras) ¦ Tekstin lihavuus (400 normaali, 700 lihavoitu) ¦ Szöveg vastagsága (400 normál, 700 félkövér)
+Espace entre les éléments (flex, grid, colonnes) ¦ Elementtien välinen tila (flex, grid, palstat) ¦ Elemek közötti távolság (flex, grid, hasábok)
+Raccourci de toute la grille ¦ Koko ruudukon lyhenne ¦ A teljes rács rövidítése
+Zone de la grille occupée par l’élément ¦ Elementin viemä ruudukkoalue ¦ Az elem által elfoglalt rácsterület
+Taille des colonnes créées automatiquement ¦ Automaattisesti luotujen sarakkeiden koko ¦ Automatikusan létrehozott oszlopok mérete
+Comment la grille place les éléments sans place précise ¦ Miten ruudukko sijoittaa elementit, joilla ei ole tarkkaa paikkaa ¦ Hogyan helyezi el a rács a pontos hely nélküli elemeket
+Taille des lignes créées automatiquement ¦ Automaattisesti luotujen rivien koko ¦ Automatikusan létrehozott sorok mérete
+Colonnes occupées par l’élément ¦ Elementin viemät sarakkeet ¦ Az elem által elfoglalt oszlopok
+Lignes occupées par l’élément ¦ Elementin viemät rivit ¦ Az elem által elfoglalt sorok
+Zones nommées de la grille ¦ Ruudukon nimetyt alueet ¦ A rács elnevezett területei
+Colonnes de la grille (1fr 1fr, repeat(3, 1fr)…) ¦ Ruudukon sarakkeet (1fr 1fr, repeat(3, 1fr)…) ¦ A rács oszlopai (1fr 1fr, repeat(3, 1fr)…)
+Lignes de la grille ¦ Ruudukon rivit ¦ A rács sorai
+Césure automatique (avec lang) ¦ Automaattinen tavutus (lang-määritteen kanssa) ¦ Automatikus elválasztás (lang mellett)
+Agrandissement d’une image (net, lissé) ¦ Kuvan suurennus (terävä, pehmennetty) ¦ Kép nagyítása (éles, simított)
+Largeur (selon le sens d’écriture) ¦ Leveys (kirjoitussuunnan mukaan) ¦ Szélesség (az írásirány szerint)
+Raccourci de top, right, bottom, left ¦ top-, right-, bottom- ja left-lyhenne ¦ A top, right, bottom, left rövidítése
+Crée un nouveau groupe d’empilement ¦ Luo uuden pinoamisryhmän ¦ Új egymásra helyezési csoportot hoz létre
+Répartition des éléments sur l’axe principal (flex, grid) ¦ Elementtien jakautuminen pääakselilla (flex, grid) ¦ Elemek elosztása a fő tengelyen (flex, grid)
+Alignement des éléments dans leur case (grid) ¦ Elementtien tasaus solussaan (grid) ¦ Elemek igazítása a cellájukban (grid)
+Alignement de cet élément dans sa case ¦ Tämän elementin tasaus solussaan ¦ Ennek az elemnek az igazítása a cellájában
+Décalage depuis la gauche (avec position) ¦ Siirtymä vasemmalta (position-ominaisuuden kanssa) ¦ Eltolás balról (position mellett)
+Raccourci du style des puces ¦ Luettelomerkkien tyylin lyhenne ¦ A felsorolásjelek stílusának rövidítése
+Image de puce ¦ Luettelomerkin kuva ¦ Felsorolásjel képe
+Puces dedans ou dehors ¦ Luettelomerkit sisällä tai ulkona ¦ Felsorolásjelek belül vagy kívül
+Forme des puces ou numéros ¦ Luettelomerkkien tai numeroiden muoto ¦ Felsorolásjelek vagy számok formája
+Marge extérieure (les 4 côtés) ¦ Ulkomarginaali (kaikki 4 sivua) ¦ Külső margó (mind a 4 oldal)
+Marges extérieures haut et bas (selon le sens d’écriture) ¦ Ylä- ja alaulkomarginaalit (kirjoitussuunnan mukaan) ¦ Felső és alsó külső margó (az írásirány szerint)
+Marge extérieure en bas ¦ Alaulkomarginaali ¦ Alsó külső margó
+Marges extérieures des côtés (selon le sens d’écriture) ¦ Sivujen ulkomarginaalit (kirjoitussuunnan mukaan) ¦ Oldalsó külső margók (az írásirány szerint)
+Marge extérieure à gauche ¦ Vasen ulkomarginaali ¦ Bal külső margó
+Marge extérieure à droite ¦ Oikea ulkomarginaali ¦ Jobb külső margó
+Marge extérieure en haut ¦ Yläulkomarginaali ¦ Felső külső margó
+Masque (image ou dégradé) ¦ Maski (kuva tai liukuväri) ¦ Maszk (kép vagy színátmenet)
+Hauteur maximale ¦ Enimmäiskorkeus ¦ Maximális magasság
+Largeur maximale ¦ Enimmäisleveys ¦ Maximális szélesség
+Hauteur minimale ¦ Vähimmäiskorkeus ¦ Minimális magasság
+Largeur minimale ¦ Vähimmäisleveys ¦ Minimális szélesség
+Mélange avec ce qu’il y a dessous ¦ Sekoitus alla olevan kanssa ¦ Keverés az alatta lévővel
+Image ou vidéo dans sa boîte : cover, contain… ¦ Kuva tai video laatikossaan: cover, contain… ¦ Kép vagy videó a dobozában: cover, contain…
+Place de l’image dans sa boîte ¦ Kuvan sijainti laatikossaan ¦ A kép helyzete a dobozában
+Transparence de tout l’élément (0 : invisible, 1 : opaque) ¦ Koko elementin läpinäkyvyys (0: näkymätön, 1: peittävä) ¦ Az egész elem átlátszósága (0: láthatatlan, 1: átlátszatlan)
+Ordre d’affichage dans un flex ou une grille ¦ Näyttöjärjestys flexissä tai ruudukossa ¦ Megjelenítési sorrend flexben vagy rácsban
+Lignes minimum en bas de page ¦ Vähimmäisrivit sivun alalaidassa ¦ Minimális sorszám az oldal alján
+Contour (n’occupe pas de place), utile pour le focus clavier ¦ Ääriviiva (ei vie tilaa), hyödyllinen näppäimistökohdistukselle ¦ Körvonal (nem foglal helyet), hasznos a billentyűzetes fókuszhoz
+Écart entre le contour et la bordure ¦ Ääriviivan ja reunuksen välinen rako ¦ Távolság a körvonal és a szegély között
+Ce qui dépasse : visible, caché, barre de défilement ¦ Ylivuoto: näkyvä, piilotettu, vierityspalkki ¦ Ami kilóg: látható, rejtett, görgetősáv
+Couper un mot trop long pour qu’il tienne ¦ Katkaise liian pitkä sana, jotta se mahtuu ¦ Túl hosszú szó megtörése, hogy elférjen
+Ce qui dépasse en largeur ¦ Ylivuoto leveyssuunnassa ¦ Vízszintes kilógás
+Ce qui dépasse en hauteur ¦ Ylivuoto korkeussuunnassa ¦ Függőleges kilógás
+Espace intérieur (les 4 côtés) ¦ Sisätila (kaikki 4 sivua) ¦ Belső margó (mind a 4 oldal)
+Espaces intérieurs haut et bas ¦ Ylä- ja alasisätila ¦ Felső és alsó belső margó
+Espace intérieur en bas ¦ Alasisätila ¦ Alsó belső margó
+Espaces intérieurs des côtés ¦ Sivujen sisätila ¦ Oldalsó belső margók
+Espace intérieur à gauche ¦ Vasen sisätila ¦ Bal belső margó
+Espace intérieur à droite ¦ Oikea sisätila ¦ Jobb belső margó
+Espace intérieur en haut ¦ Yläsisätila ¦ Felső belső margó
+Raccourci de align-content et justify-content ¦ align-content- ja justify-content-lyhenne ¦ Az align-content és justify-content rövidítése
+Raccourci de align-items et justify-items ¦ align-items- ja justify-items-lyhenne ¦ Az align-items és justify-items rövidítése
+L’élément réagit-il à la souris ? ¦ Reagoiko elementti hiireen? ¦ Reagál-e az elem az egérre?
+Placement : static, relative, absolute, fixed, sticky ¦ Sijoittelu: static, relative, absolute, fixed, sticky ¦ Elhelyezés: static, relative, absolute, fixed, sticky
+Guillemets utilisés par <q> ¦ <q>-elementin käyttämät lainausmerkit ¦ A <q> által használt idézőjelek
+L’utilisateur peut-il redimensionner (textarea…) ¦ Voiko käyttäjä muuttaa kokoa (textarea…) ¦ Átméretezheti-e a felhasználó (textarea…)
+Décalage depuis la droite (avec position) ¦ Siirtymä oikealta (position-ominaisuuden kanssa) ¦ Eltolás jobbról (position mellett)
+Tourner ¦ Kierrä ¦ Forgatás
+Agrandir ou réduire ¦ Suurenna tai pienennä ¦ Nagyítás vagy kicsinyítés
+Défilement doux vers une ancre ¦ Pehmeä vieritys ankkuriin ¦ Finom görgetés egy horgonyhoz
+Marge gardée quand on fait défiler jusqu’à l’élément ¦ Marginaali, joka säilyy, kun elementtiin vieritetään ¦ Megtartott margó, amikor az elemhez görgetünk
+Défilement qui s’arrête sur des éléments ¦ Vieritys, joka pysähtyy elementtien kohdalle ¦ Görgetés, amely elemeknél áll meg
+Calcul de la largeur des colonnes d’un tableau ¦ Taulukon sarakeleveyksien laskutapa ¦ Táblázat oszlopszélességeinek kiszámítása
+Alignement du texte (gauche, centré, droite, justifié) ¦ Tekstin tasaus (vasen, keskitetty, oikea, tasattu) ¦ Szöveg igazítása (balra, középre, jobbra, sorkizárt)
+Soulignement, barré… ¦ Alleviivaus, yliviivaus… ¦ Aláhúzás, áthúzás…
+Couleur du soulignement ¦ Alleviivauksen väri ¦ Aláhúzás színe
+Épaisseur du soulignement ¦ Alleviivauksen paksuus ¦ Aláhúzás vastagsága
+Retrait de la première ligne ¦ Ensimmäisen rivin sisennys ¦ Első sor behúzása
+Texte coupé : « … » à la fin ¦ Katkaistu teksti: ”…” lopussa ¦ Levágott szöveg: „…” a végén
+Majuscules, minuscules, capitales ¦ Isot kirjaimet, pienet kirjaimet, iso alkukirjain ¦ Nagybetűk, kisbetűk, nagy kezdőbetű
+Écart du soulignement ¦ Alleviivauksen etäisyys ¦ Aláhúzás távolsága
+Façon de couper les lignes (balance, pretty…) ¦ Rivien katkaisutapa (balance, pretty…) ¦ A sorok tördelésének módja (balance, pretty…)
+Décalage depuis le haut (avec position) ¦ Siirtymä ylhäältä (position-ominaisuuden kanssa) ¦ Eltolás felülről (position mellett)
+Déplacer, tourner, agrandir, incliner ¦ Siirrä, kierrä, suurenna, kallista ¦ Mozgatás, forgatás, nagyítás, döntés
+Point d’appui des transformations ¦ Muunnosten kiintopiste ¦ Az átalakítások kiindulópontja
+Changement progressif d’une valeur à l’autre ¦ Asteittainen muutos arvosta toiseen ¦ Fokozatos váltás egyik értékről a másikra
+Délai avant la transition ¦ Viive ennen siirtymää ¦ Késleltetés az átmenet előtt
+Durée de la transition ¦ Siirtymän kesto ¦ Az átmenet időtartama
+Propriétés qui changent en douceur ¦ Pehmeästi muuttuvat ominaisuudet ¦ Fokozatosan változó tulajdonságok
+Rythme de la transition (ease, linear…) ¦ Siirtymän rytmi (ease, linear…) ¦ Az átmenet ritmusa (ease, linear…)
+Le texte peut-il être sélectionné ? ¦ Voiko tekstin valita? ¦ Kijelölhető-e a szöveg?
+Alignement vertical dans la ligne ou une cellule ¦ Pystytasaus rivillä tai solussa ¦ Függőleges igazítás a sorban vagy egy cellában
+Visible ou caché (en gardant la place) ¦ Näkyvä tai piilotettu (tila säilyy) ¦ Látható vagy rejtett (a helyét megtartva)
+Gestion des espaces et des retours à la ligne ¦ Välilyöntien ja rivinvaihtojen käsittely ¦ Szóközök és sortörések kezelése
+Lignes minimum en haut de page ¦ Vähimmäisrivit sivun ylälaidassa ¦ Minimális sorszám az oldal tetején
+Prévient le navigateur d’un changement (animations) ¦ Ilmoittaa selaimelle tulevasta muutoksesta (animaatiot) ¦ Előre jelzi a böngészőnek a változást (animációk)
+Coupure des mots longs ¦ Pitkien sanojen katkaisu ¦ Hosszú szavak megtörése
+Sens d’écriture (horizontal, vertical) ¦ Kirjoitussuunta (vaaka, pysty) ¦ Írásirány (vízszintes, függőleges)
+Ordre d’empilement (qui passe devant) ¦ Pinoamisjärjestys (mikä on edessä) ¦ Egymásra helyezési sorrend (mi kerül előre)
+Trouve le premier élément qui correspond à un sélecteur CSS ¦ Etsii ensimmäisen CSS-valitsinta vastaavan elementin ¦ Megkeresi az első elemet, amely megfelel egy CSS-szelektornak
+Trouve tous les éléments qui correspondent (une liste) ¦ Etsii kaikki vastaavat elementit (luettelo) ¦ Megkeresi az összes megfelelő elemet (egy lista)
+Trouve l’élément qui a cet id ¦ Etsii elementin, jolla on tämä id ¦ Megkeresi az elemet, amelynek ez az id-je
+Réagit à un évènement (click, input, submit…) ¦ Reagoi tapahtumaan (click, input, submit…) ¦ Reagál egy eseményre (click, input, submit…)
+Arrête de réagir à un évènement ¦ Lakkaa reagoimasta tapahtumaan ¦ Abbahagyja az eseményre való reagálást
+Empêche l’action habituelle (suivre un lien, envoyer un formulaire) ¦ Estää tavallisen toiminnon (linkin seuraaminen, lomakkeen lähetys) ¦ Megakadályozza a szokásos műveletet (hivatkozás követése, űrlap elküldése)
+Ajouter, retirer, basculer une classe ¦ Lisää, poista tai vaihda luokka ¦ Osztály hozzáadása, eltávolítása, váltása
+Le texte d’un élément (sans HTML) ¦ Elementin teksti (ilman HTML:ää) ¦ Egy elem szövege (HTML nélkül)
+Le HTML à l’intérieur d’un élément (attention aux textes venus d’ailleurs) ¦ Elementin sisällä oleva HTML (varo muualta tulevia tekstejä) ¦ Egy elemen belüli HTML (vigyázz a máshonnan érkező szövegekkel)
+Donne une valeur à un attribut ¦ Antaa määritteelle arvon ¦ Értéket ad egy attribútumnak
+Lit la valeur d’un attribut ¦ Lukee määritteen arvon ¦ Kiolvassa egy attribútum értékét
+Les attributs data-… d’un élément ¦ Elementin data-…-määritteet ¦ Egy elem data-… attribútumai
+Les styles écrits sur l’élément (style="…") ¦ Elementtiin kirjoitetut tyylit (style="…") ¦ Az elemre írt stílusok (style="…")
+Crée un nouvel élément ¦ Luo uuden elementin ¦ Új elemet hoz létre
+Ajoute à la fin d’un élément ¦ Lisää elementin loppuun ¦ Hozzáad egy elem végéhez
+Retire l’élément de la page ¦ Poistaa elementin sivulta ¦ Eltávolítja az elemet az oldalról
+Le plus proche parent qui correspond au sélecteur ¦ Lähin valitsinta vastaava yläelementti ¦ A legközelebbi szülő, amely megfelel a szelektornak
+L’élément correspond-il au sélecteur ? ¦ Vastaako elementti valitsinta? ¦ Megfelel-e az elem a szelektornak?
+Fait défiler jusqu’à l’élément ¦ Vierittää elementin kohdalle ¦ Az elemhez görget
+Lance une fonction après un délai (en ms) ¦ Suorittaa funktion viiveen jälkeen (ms) ¦ Késleltetés után futtat egy függvényt (ms-ben)
+Lance une fonction à intervalles réguliers ¦ Suorittaa funktion säännöllisin väliajoin ¦ Rendszeres időközönként futtat egy függvényt
+Garde des petites données dans le navigateur ¦ Säilyttää pieniä tietoja selaimessa ¦ Kis adatokat tárol a böngészőben
+Charge un fichier ou des données (JSON…) ¦ Lataa tiedoston tai tietoja (JSON…) ¦ Betölt egy fájlt vagy adatokat (JSON…)
+Texte JSON ↔ objet JavaScript ¦ JSON-teksti ↔ JavaScript-objekti ¦ JSON-szöveg ↔ JavaScript-objektum
+Écrit dans la console du navigateur (pour vérifier) ¦ Kirjoittaa selaimen konsoliin (tarkistusta varten) ¦ A böngésző konzoljába ír (ellenőrzéshez)
+Évènement : la page est prête (HTML lu) ¦ Tapahtuma: sivu on valmis (HTML luettu) ¦ Esemény: az oldal kész (HTML beolvasva)
+Évènements courants : clic, saisie, changement, envoi ¦ Tavalliset tapahtumat: napsautus, syöttö, muutos, lähetys ¦ Gyakori események: kattintás, bevitel, változás, küldés
+Prévient quand un élément entre à l’écran (apparitions au défilement) ¦ Ilmoittaa, kun elementti tulee näkyviin (ilmestyminen vierittäessä) ¦ Jelzi, amikor egy elem a képernyőre kerül (megjelenés görgetéskor)
+Teste une requête @media en JS ¦ Testaa @media-kyselyn JS:ssä ¦ Tesztel egy @media lekérdezést JS-ben
+Déclare une variable (const : ne change plus) ¦ Määrittelee muuttujan (const: ei enää muutu) ¦ Változót deklarál (const: többé nem változik)
+Déclare une fonction (=> : écriture courte) ¦ Määrittelee funktion (=>: lyhyt kirjoitustapa) ¦ Függvényt deklarál (=>: rövid írásmód)
+Fait une chose ou une autre selon une condition ¦ Tekee yhden tai toisen asian ehdon mukaan ¦ Feltételtől függően egyik vagy másik dolgot teszi
+Parcourt une liste ¦ Käy luettelon läpi ¦ Végigmegy egy listán
+Transforme, trie ou parcourt un tableau ¦ Muuntaa, lajittelee tai käy taulukon läpi ¦ Átalakít, rendez vagy bejár egy tömböt
+Attend un résultat (fetch…) sans bloquer la page ¦ Odottaa tulosta (fetch…) estämättä sivua ¦ Eredményre vár (fetch…) az oldal blokkolása nélkül
+Attrape une erreur pour l’afficher proprement ¦ Sieppaa virheen näyttääkseen sen siististi ¦ Elkap egy hibát, hogy rendesen megjelenítse
+Texte avec des valeurs dedans ¦ Teksti, jonka sisällä on arvoja ¦ Szöveg, benne értékekkel
+Dates et heures ¦ Päivämäärät ja kellonajat ¦ Dátumok és időpontok
+Nombre au hasard, arrondi ¦ Satunnaisluku, pyöristys ¦ Véletlenszám, kerekítés
+Chercher, couper, remplacer dans un texte ¦ Etsi, pilko, korvaa tekstissä ¦ Keresés, darabolás, csere egy szövegben
+Autre libellé de la cellule d’en-tête, quand on y renvoie ailleurs ¦ Otsikkosolun vaihtoehtoinen nimike, kun siihen viitataan muualla ¦ A fejléccella másik címkéje, ha máshol hivatkoznak rá
+Types de fichiers attendus dans un champ d’envoi de fichier ¦ Tiedoston lähetyskenttään odotetut tiedostotyypit ¦ Fájlfeltöltő mezőben várt fájltípusok
+Codages de caractères pour l’envoi du formulaire ¦ Merkistöt lomakkeen lähetykseen ¦ Karakterkódolások az űrlap elküldéséhez
+Raccourci clavier pour activer ou atteindre l’élément ¦ Pikanäppäin elementin aktivoimiseen tai siihen siirtymiseen ¦ Billentyűparancs az elem aktiválásához vagy eléréséhez
+Adresse où envoyer le formulaire ¦ Osoite, johon lomake lähetetään ¦ Cím, ahová az űrlapot küldjük
+Permissions données au contenu de l’iframe ¦ iframen sisällölle annetut oikeudet ¦ Az iframe tartalmának adott engedélyek
+Le contenu de l’iframe peut-il passer en plein écran ¦ Voiko iframen sisältö siirtyä koko näytön tilaan ¦ Átválthat-e az iframe tartalma teljes képernyőre
+Permet de choisir la transparence (alpha) de la couleur ¦ Sallii värin läpinäkyvyyden (alfa) valinnan ¦ Lehetővé teszi a szín átlátszóságának (alfa) megadását
+Texte de remplacement quand l’image ne s’affiche pas (essentiel pour l’accessibilité) ¦ Korvaava teksti, kun kuva ei näy (olennainen saavutettavuudelle) ¦ Helyettesítő szöveg, ha a kép nem jelenik meg (az akadálymentességhez elengedhetetlen)
+Sorte de ressource à précharger (avec rel="preload" ou "modulepreload") ¦ Esiladattavan resurssin laji (rel="preload" tai "modulepreload" kanssa) ¦ Az előre betöltendő erőforrás fajtája (rel="preload" vagy "modulepreload" mellett)
+Lance le script dès qu’il est prêt, sans bloquer la page ¦ Suorittaa skriptin heti kun se on valmis, estämättä sivua ¦ Azonnal futtatja a szkriptet, amint kész, az oldal blokkolása nélkül
+Majuscules automatiques conseillées (claviers qui le gèrent) ¦ Suositellut automaattiset isot kirjaimet (tukevat näppäimistöt) ¦ Javasolt automatikus nagybetűk (az ezt kezelő billentyűzeteken)
+Remplissage automatique par défaut des champs du formulaire ¦ Lomakkeen kenttien automaattinen täyttö oletuksena ¦ Az űrlapmezők alapértelmezett automatikus kitöltése
+Indice pour le remplissage automatique (email, nom, adresse…) ¦ Vihje automaattiseen täyttöön (sähköposti, nimi, osoite…) ¦ Tipp az automatikus kitöltéshez (e-mail, név, cím…)
+Correction automatique conseillée (claviers qui le gèrent) ¦ Suositeltu automaattinen korjaus (tukevat näppäimistöt) ¦ Javasolt automatikus javítás (az ezt kezelő billentyűzeteken)
+Met le curseur dans l’élément à l’ouverture de la page ¦ Asettaa kohdistimen elementtiin sivun avautuessa ¦ Az oldal megnyitásakor az elembe teszi a kurzort
+Le média peut démarrer tout seul à l’ouverture de la page ¦ Media voi käynnistyä itsestään sivun avautuessa ¦ A média magától elindulhat az oldal megnyitásakor
+L’élément peut-il retarder l’affichage de la page ¦ Voiko elementti viivästyttää sivun näyttämistä ¦ Késleltetheti-e az elem az oldal megjelenítését
+Codage des caractères du document (UTF-8) ¦ Asiakirjan merkistö (UTF-8) ¦ A dokumentum karakterkódolása (UTF-8)
+La case est-elle cochée ¦ Onko ruutu valittu ¦ Be van-e jelölve a négyzet
+Lien vers la source de la citation ou vers des précisions sur la modification ¦ Linkki lainauksen lähteeseen tai muutoksen tarkennuksiin ¦ Hivatkozás az idézet forrására vagy a módosítás részleteire
+Classes de l’élément (pour le CSS) ¦ Elementin luokat (CSS:ää varten) ¦ Az elem osztályai (a CSS-hez)
+Ce qui ferme la boîte de dialogue ¦ Mikä sulkee valintaikkunan ¦ Mi zárja be a párbeszédablakot
+Couleur de l’icône du site (rel="mask-icon") ¦ Sivuston kuvakkeen väri (rel="mask-icon") ¦ A webhely ikonjának színe (rel="mask-icon")
+Espace colorimétrique de la couleur choisie ¦ Valitun värin väriavaruus ¦ A kiválasztott szín színtere
+Nombre de caractères par ligne ¦ Merkkien määrä riviä kohden ¦ Karakterek száma soronként
+Nombre de colonnes couvertes par la cellule ¦ Solun kattamien sarakkeiden määrä ¦ A cella által átfogott oszlopok száma
+Action à faire sur l’élément visé ¦ Kohde-elementille tehtävä toiminto ¦ A célelemen végrehajtandó művelet
+Élément visé par le bouton ¦ Painikkeen kohde-elementti ¦ A gomb által megcélzott elem
+Valeur de la métadonnée ¦ Metatiedon arvo ¦ A metaadat értéke
+L’élément est-il modifiable par le visiteur ¦ Voiko kävijä muokata elementtiä ¦ Szerkesztheti-e a látogató az elemet
+Montrer les boutons de lecture du navigateur ¦ Näytä selaimen toistopainikkeet ¦ A böngésző lejátszógombjainak megjelenítése
+Coordonnées de la zone dans une image cliquable ¦ Alueen koordinaatit napsautettavassa kuvassa ¦ A terület koordinátái egy kattintható képen
+Façon de traiter les demandes vers un autre site (CORS) ¦ Toiselle sivustolle menevien pyyntöjen käsittely (CORS) ¦ Más webhelyre irányuló kérések kezelése (CORS)
+Adresse de la ressource ¦ Resurssin osoite ¦ Az erőforrás címe
+Date (et heure) de la modification ¦ Muutoksen päivämäärä (ja kellonaika) ¦ A módosítás dátuma (és időpontja)
+Valeur lisible par une machine ¦ Koneluettava arvo ¦ Géppel olvasható érték
+Indice de décodage de l’image pour l’affichage ¦ Kuvan dekoodausvihje näyttämistä varten ¦ Képdekódolási tipp a megjelenítéshez
+Active cette piste si aucune autre ne convient mieux ¦ Ottaa tämän raidan käyttöön, ellei mikään muu sovi paremmin ¦ Bekapcsolja ezt a sávot, ha egyik másik sem megfelelőbb
+Lance le script après la lecture de la page ¦ Suorittaa skriptin sivun lukemisen jälkeen ¦ Az oldal beolvasása után futtatja a szkriptet
+Sens d’écriture de l’élément ¦ Elementin kirjoitussuunta ¦ Az elem írásiránya
+Nom du champ qui envoie le sens d’écriture avec le formulaire ¦ Kentän nimi, joka lähettää kirjoitussuunnan lomakkeen mukana ¦ A mező neve, amely az űrlappal együtt elküldi az írásirányt
+Le champ est-il désactivé ¦ Onko kenttä poistettu käytöstä ¦ Le van-e tiltva a mező
+Les champs à l’intérieur sont-ils désactivés (sauf dans legend) ¦ Ovatko sisällä olevat kentät poissa käytöstä (paitsi legend-elementissä) ¦ Le vannak-e tiltva a benne lévő mezők (a legend kivételével)
+Le lien est-il désactivé ¦ Onko linkki poistettu käytöstä ¦ Le van-e tiltva a hivatkozás
+Télécharger le fichier au lieu de l’ouvrir, et sous quel nom ¦ Lataa tiedosto avaamisen sijaan, ja millä nimellä ¦ A fájl letöltése megnyitás helyett, és milyen néven
+L’élément peut-il être glissé ¦ Voiko elementtiä vetää ¦ Húzható-e az elem
+Codage des données à l’envoi du formulaire ¦ Tietojen koodaus lomakkeen lähetyksessä ¦ Az adatok kódolása az űrlap elküldésekor
+Libellé conseillé pour la touche Entrée du clavier ¦ Suositeltu nimike näppäimistön Enter-näppäimelle ¦ Javasolt felirat a billentyűzet Enter billentyűjéhez
+Priorité du chargement lancé par l’élément ¦ Elementin käynnistämän latauksen prioriteetti ¦ Az elem által indított betöltés prioritása
+Relie le libellé à un champ (son id) ¦ Yhdistää nimikkeen kenttään (sen id) ¦ A címkét egy mezőhöz kapcsolja (annak id-je)
+Champs dont dépend le résultat ¦ Kentät, joista tulos riippuu ¦ Mezők, amelyektől az eredmény függ
+Met à jour un contenu existant ¦ Päivittää olemassa olevan sisällön ¦ Frissít egy meglévő tartalmat
+Rattache l’élément à un formulaire (son id) ¦ Liittää elementin lomakkeeseen (sen id) ¦ Az elemet egy űrlaphoz rendeli (annak id-je)
+Adresse d’envoi (pour ce bouton) ¦ Lähetysosoite (tälle painikkeelle) ¦ Küldési cím (ehhez a gombhoz)
+Codage de l’envoi (pour ce bouton) ¦ Lähetyksen koodaus (tälle painikkeelle) ¦ Küldés kódolása (ehhez a gombhoz)
+Méthode d’envoi : GET ou POST (pour ce bouton) ¦ Lähetystapa: GET tai POST (tälle painikkeelle) ¦ Küldési mód: GET vagy POST (ehhez a gombhoz)
+Envoyer sans vérifier les champs (pour ce bouton) ¦ Lähetä tarkistamatta kenttiä (tälle painikkeelle) ¦ Küldés a mezők ellenőrzése nélkül (ehhez a gombhoz)
+Où ouvrir la réponse (pour ce bouton) ¦ Mihin vastaus avataan (tälle painikkeelle) ¦ Hol nyíljon meg a válasz (ehhez a gombhoz)
+Cellules d’en-tête de cette cellule ¦ Tämän solun otsikkosolut ¦ Ennek a cellának a fejléccellái
+Décale les niveaux des titres à l’intérieur ¦ Siirtää sisällä olevien otsikoiden tasoja ¦ Eltolja a benne lévő címsorok szintjét
+Empêche le décalage des niveaux de titres d’aller plus loin ¦ Estää otsikkotasojen siirron jatkumisen ¦ Megakadályozza, hogy a címsorszintek eltolása tovább terjedjen
+Caché (l’élément ne compte pas pour l’instant) ¦ Piilotettu (elementti ei toistaiseksi ole käytössä) ¦ Rejtett (az elem egyelőre nem számít)
+Début de la zone haute de la jauge ¦ Mittarin yläalueen alku ¦ A mérő felső tartományának kezdete
+Adresse du lien ¦ Linkin osoite ¦ A hivatkozás címe
+Adresse de la ressource liée ¦ Linkitetyn resurssin osoite ¦ A hivatkozott erőforrás címe
+Adresse de base du document ¦ Asiakirjan perusosoite ¦ A dokumentum alapcíme
+Langue de la page liée ¦ Linkitetyn sivun kieli ¦ A hivatkozott oldal nyelve
+Instruction pour le navigateur (http-equiv) ¦ Ohje selaimelle (http-equiv) ¦ Utasítás a böngészőnek (http-equiv)
+Identifiant unique de l’élément (pour le CSS, le JS et les ancres #) ¦ Elementin yksilöllinen tunniste (CSS:ää, JS:ää ja #-ankkureita varten) ¦ Az elem egyedi azonosítója (a CSS-hez, JS-hez és a # horgonyokhoz)
+Tailles d’image selon la mise en page (préchargement) ¦ Kuvakoot asettelun mukaan (esilataus) ¦ Képméretek az elrendezés szerint (előtöltés)
+Images selon l’écran (préchargement) ¦ Kuvat näytön mukaan (esilataus) ¦ Képek a képernyő szerint (előtöltés)
+Rend l’élément inerte (ni clic ni focus) ¦ Tekee elementistä passiivisen (ei napsautusta, ei kohdistusta) ¦ Inaktívvá teszi az elemet (se kattintás, se fókusz)
+Clavier conseillé sur mobile (chiffres, email…) ¦ Suositeltu näppäimistö mobiilissa (numerot, sähköposti…) ¦ Javasolt billentyűzet mobilon (számok, e-mail…)
+Empreinte pour vérifier que le fichier n’a pas été modifié (SRI) ¦ Tarkiste, jolla varmistetaan, ettei tiedostoa ole muutettu (SRI) ¦ Ujjlenyomat annak ellenőrzésére, hogy a fájlt nem módosították (SRI)
+Crée un élément personnalisé à partir d’un élément existant ¦ Luo mukautetun elementin olemassa olevan pohjalta ¦ Egyéni elemet hoz létre egy meglévő elemből
+Image cliquable gérée par le serveur ¦ Palvelimen käsittelemä napsautettava kuva ¦ Szerver által kezelt kattintható kép
+Identifiant global d’un objet de microdonnées ¦ Mikrodataobjektin yleinen tunniste ¦ Egy mikroadat-objektum globális azonosítója
+Propriétés de microdonnées ¦ Mikrodatan ominaisuudet ¦ Mikroadat-tulajdonságok
+Éléments rattachés (microdonnées) ¦ Viitatut elementit (mikrodata) ¦ Hivatkozott elemek (mikroadatok)
+Commence un objet de microdonnées ¦ Aloittaa mikrodataobjektin ¦ Mikroadat-objektumot indít
+Type d’un objet de microdonnées (schema.org…) ¦ Mikrodataobjektin tyyppi (schema.org…) ¦ Mikroadat-objektum típusa (schema.org…)
+Sorte de piste de texte (sous-titres, chapitres…) ¦ Tekstiraidan laji (tekstitykset, luvut…) ¦ Szövegsáv fajtája (feliratok, fejezetek…)
+Libellé visible ¦ Näkyvä nimike ¦ Látható címke
+Langue de l’élément (fr, en…) ¦ Elementin kieli (fr, en…) ¦ Az elem nyelve (fr, en…)
+Liste de propositions (id d’un datalist) ¦ Ehdotusluettelo (datalist-elementin id) ¦ Javaslatlista (egy datalist id-je)
+Chargement différé : lazy ou eager ¦ Viivästetty lataus: lazy tai eager ¦ Késleltetett betöltés: lazy vagy eager
+Lecture en boucle ¦ Toisto silmukassa ¦ Ismétlődő lejátszás
+Fin de la zone basse de la jauge ¦ Mittarin ala-alueen loppu ¦ A mérő alsó tartományának vége
+Valeur maximale ¦ Enimmäisarvo ¦ Maximális érték
+Borne haute ¦ Yläraja ¦ Felső határ
+Longueur maximale ¦ Enimmäispituus ¦ Maximális hossz
+Média concerné (requête @media) ¦ Koskee mediaa (@media-kysely) ¦ Érintett média (@media lekérdezés)
+Méthode d’envoi : GET ou POST ¦ Lähetystapa: GET tai POST ¦ Küldési mód: GET vagy POST
+Valeur minimale ¦ Vähimmäisarvo ¦ Minimális érték
+Borne basse ¦ Alaraja ¦ Alsó határ
+Longueur minimale ¦ Vähimmäispituus ¦ Minimális hossz
+Plusieurs valeurs permises ¦ Useita arvoja sallittu ¦ Több érték megengedett
+Son coupé au départ ¦ Ääni mykistetty alussa ¦ Kezdetben némítva
+Nom du champ pour l’envoi du formulaire ¦ Kentän nimi lomakkeen lähetystä varten ¦ A mező neve az űrlap elküldéséhez
+Nom d’un groupe de details (un seul ouvert à la fois) ¦ details-ryhmän nimi (vain yksi auki kerrallaan) ¦ Egy details-csoport neve (egyszerre csak egy nyitva)
+Nom du formulaire (document.forms) ¦ Lomakkeen nimi (document.forms) ¦ Az űrlap neve (document.forms)
+Nom du cadre (cible des liens) ¦ Kehyksen nimi (linkkien kohde) ¦ A keret neve (hivatkozások célja)
+Nom de l’image cliquable (pour usemap) ¦ Napsautettavan kuvan nimi (usemap-määritteelle) ¦ A kattintható kép neve (a usemap-hez)
+Nom de la métadonnée (description, viewport…) ¦ Metatiedon nimi (description, viewport…) ¦ A metaadat neve (description, viewport…)
+Nom de l’emplacement (shadow DOM) ¦ Paikan nimi (shadow DOM) ¦ A hely neve (shadow DOM)
+Ignoré par les navigateurs qui lisent les modules ¦ Selaimet, jotka lukevat moduuleja, ohittavat tämän ¦ A modulokat olvasó böngészők figyelmen kívül hagyják
+Jeton unique pour la politique de sécurité (CSP) ¦ Kertakäyttöinen tunnus tietoturvakäytännölle (CSP) ¦ Egyszeri token a biztonsági házirendhez (CSP)
+Envoyer sans vérifier les champs ¦ Lähetä tarkistamatta kenttiä ¦ Küldés a mezők ellenőrzése nélkül
+Le details est-il ouvert ¦ Onko details-elementti auki ¦ Nyitva van-e a details elem
+La boîte de dialogue est-elle affichée ¦ Näkyykö valintaikkuna ¦ Látható-e a párbeszédablak
+Valeur idéale de la jauge ¦ Mittarin ihanteellinen arvo ¦ A mérő ideális értéke
+Motif que la saisie doit suivre (expression régulière) ¦ Malli, jota syötteen on noudatettava (säännöllinen lauseke) ¦ Minta, amelyet a bevitelnek követnie kell (reguláris kifejezés)
+Adresses à prévenir quand on suit le lien ¦ Osoitteet, joille ilmoitetaan, kun linkkiä seurataan ¦ Értesítendő címek, amikor a hivatkozást követik
+Texte d’exemple dans le champ vide ¦ Esimerkkiteksti tyhjässä kentässä ¦ Példaszöveg az üres mezőben
+Lire la vidéo dans la page (pas en plein écran sur mobile) ¦ Toista video sivulla (ei koko näytöllä mobiilissa) ¦ A videó lejátszása az oldalon (mobilon nem teljes képernyőn)
+Fait de l’élément une fenêtre surgissante (popover) ¦ Tekee elementistä ponnahdusikkunan (popover) ¦ Felugró ablakká teszi az elemet (popover)
+Fenêtre surgissante visée par le bouton ¦ Painikkeen kohteena oleva ponnahdusikkuna ¦ A gomb által megcélzott felugró ablak
+Montrer, cacher ou basculer la fenêtre surgissante ¦ Näytä, piilota tai vaihda ponnahdusikkuna ¦ A felugró ablak megjelenítése, elrejtése vagy váltása
+Image montrée avant la lecture de la vidéo ¦ Kuva, joka näytetään ennen videon toistoa ¦ A videó lejátszása előtt mutatott kép
+Quantité de média à charger à l’avance ¦ Kuinka paljon mediaa ladataan etukäteen ¦ Mennyi médiát töltsön be előre
+Le champ est-il en lecture seule ¦ Onko kenttä vain luku -tilassa ¦ Csak olvasható-e a mező
+Lecture seule (éléments personnalisés) ¦ Vain luku (mukautetut elementit) ¦ Csak olvasható (egyéni elemek)
+Informations de provenance envoyées lors des chargements ¦ Lataamisen yhteydessä lähetetyt viittaustiedot ¦ Betöltéskor küldött hivatkozó-információk
+Relation du lien (noopener, nofollow…) ¦ Linkin suhde (noopener, nofollow…) ¦ A hivatkozás kapcsolata (noopener, nofollow…)
+Relation du document lié (stylesheet, icon…) ¦ Linkitetyn asiakirjan suhde (stylesheet, icon…) ¦ A hivatkozott dokumentum kapcsolata (stylesheet, icon…)
+Champ obligatoire ¦ Pakollinen kenttä ¦ Kötelező mező
+Numérotation à l’envers ¦ Käänteinen numerointi ¦ Fordított számozás
+Nombre de lignes visibles ¦ Näkyvien rivien määrä ¦ Látható sorok száma
+Nombre de lignes couvertes par la cellule ¦ Solun kattamien rivien määrä ¦ A cella által átfogott sorok száma
+Règles de sécurité du contenu intégré ¦ Upotetun sisällön tietoturvasäännöt ¦ A beágyazott tartalom biztonsági szabályai
+Cellules concernées par l’en-tête (row, col…) ¦ Otsikon koskemat solut (row, col…) ¦ A fejléc által érintett cellák (row, col…)
+Option choisie au départ ¦ Alussa valittu vaihtoehto ¦ Kezdetben kiválasztott lehetőség
+Shadow root clonable ¦ Kloonattava shadow root ¦ Klónozható shadow root
+Shadow root avec registre d’éléments personnalisés ¦ Shadow root mukautettujen elementtien rekisterillä ¦ Shadow root egyéni elemek regiszterével
+Shadow root qui transmet le focus ¦ Shadow root, joka välittää kohdistuksen ¦ Shadow root, amely továbbadja a fókuszt
+Shadow root déclaratif (open ou closed) ¦ Deklaratiivinen shadow root (open tai closed) ¦ Deklaratív shadow root (open vagy closed)
+Shadow root sérialisable ¦ Sarjallistettava shadow root ¦ Szerializálható shadow root
+Répartition des emplacements du shadow root ¦ Shadow rootin paikkojen jako ¦ A shadow root helyeinek kiosztása
+Forme de la zone (rect, circle, poly) ¦ Alueen muoto (rect, circle, poly) ¦ A terület alakja (rect, circle, poly)
+Taille du champ ¦ Kentän koko ¦ A mező mérete
+Tailles des icônes (rel="icon") ¦ Kuvakkeiden koot (rel="icon") ¦ Ikonméretek (rel="icon")
+Tailles d’image selon la mise en page ¦ Kuvakoot asettelun mukaan ¦ Képméretek az elrendezés szerint
+Emplacement voulu (shadow DOM) ¦ Haluttu paikka (shadow DOM) ¦ Kívánt hely (shadow DOM)
+Nombre de colonnes couvertes ¦ Katettujen sarakkeiden määrä ¦ Átfogott oszlopok száma
+Vérifier l’orthographe et la grammaire ¦ Tarkista oikeinkirjoitus ja kielioppi ¦ Helyesírás és nyelvtan ellenőrzése
+Adresse du fichier ¦ Tiedoston osoite ¦ A fájl címe
+Page à afficher dans l’iframe (HTML) ¦ iframessa näytettävä sivu (HTML) ¦ Az iframe-ben megjelenítendő oldal (HTML)
+Langue de la piste de texte ¦ Tekstiraidan kieli ¦ A szövegsáv nyelve
+Images selon l’écran (haute définition, petit écran…) ¦ Kuvat näytön mukaan (teräväpiirto, pieni näyttö…) ¦ Képek a képernyő szerint (nagy felbontás, kis képernyő…)
+Premier numéro de la liste ¦ Luettelon ensimmäinen numero ¦ A lista első száma
+Pas de la valeur (1, 0.5…) ¦ Arvon askel (1, 0.5…) ¦ Az érték lépésköze (1, 0.5…)
+Styles écrits sur l’élément ¦ Elementtiin kirjoitetut tyylit ¦ Az elemre írt stílusok
+Ordre et possibilité d’atteindre l’élément au clavier (Tab) ¦ Järjestys ja mahdollisuus päästä elementtiin näppäimistöllä (Tab) ¦ Sorrend és az elem billentyűzettel (Tab) való elérhetősége
+Où ouvrir le lien (_blank : nouvel onglet) ¦ Mihin linkki avataan (_blank: uusi välilehti) ¦ Hol nyíljon meg a hivatkozás (_blank: új lap)
+Cible par défaut des liens et formulaires ¦ Linkkien ja lomakkeiden oletuskohde ¦ A hivatkozások és űrlapok alapértelmezett célja
+Où ouvrir la réponse du formulaire ¦ Mihin lomakkeen vastaus avataan ¦ Hol nyíljon meg az űrlap válasza
+Infobulle (information en plus) ¦ Työkaluvihje (lisätieto) ¦ Buboréksúgó (további információ)
+Forme complète de l’abréviation ¦ Lyhenteen koko muoto ¦ A rövidítés teljes alakja
+Explication du motif attendu ¦ Odotetun mallin selitys ¦ A várt minta magyarázata
+Titre du lien ¦ Linkin otsikko ¦ A hivatkozás címe
+Nom d’un jeu de feuilles de styles ¦ Tyylitiedostojoukon nimi ¦ Egy stíluslapkészlet neve
+Faut-il traduire l’élément quand la page est traduite (yes, no) ¦ Käännetäänkö elementti, kun sivu käännetään (yes, no) ¦ Le kell-e fordítani az elemet, amikor az oldalt fordítják (yes, no)
+Type de la ressource liée ¦ Linkitetyn resurssin tyyppi ¦ A hivatkozott erőforrás típusa
+Type de bouton (submit, button, reset) ¦ Painikkeen tyyppi (submit, button, reset) ¦ A gomb típusa (submit, button, reset)
+Type de la ressource intégrée ¦ Upotetun resurssin tyyppi ¦ A beágyazott erőforrás típusa
+Type de champ (text, email, date…) ¦ Kentän tyyppi (text, email, date…) ¦ A mező típusa (text, email, date…)
+Forme des numéros de la liste (1, a, A, i, I) ¦ Luettelon numeroiden muoto (1, a, A, i, I) ¦ A lista számozásának formája (1, a, A, i, I)
+Type de script (module…) ¦ Skriptin tyyppi (module…) ¦ A szkript típusa (module…)
+Image cliquable à utiliser (#nom) ¦ Käytettävä napsautettava kuva (#nimi) ¦ Használandó kattintható kép (#név)
+Valeur envoyée avec le formulaire ¦ Lomakkeen mukana lähetettävä arvo ¦ Az űrlappal elküldött érték
+Valeur du champ ¦ Kentän arvo ¦ A mező értéke
+Numéro de cet élément de liste ¦ Tämän luettelokohdan numero ¦ Ennek a listaelemnek a száma
+Valeur actuelle ¦ Nykyinen arvo ¦ Jelenlegi érték
+Retour à la ligne du texte envoyé (soft, hard) ¦ Lähetetyn tekstin rivitys (soft, hard) ¦ Az elküldött szöveg sortörése (soft, hard)
+Suggestions d’écriture permises ou non ¦ Kirjoitusehdotukset sallittu tai ei ¦ Írási javaslatok engedélyezve vagy sem
+{tag} ferme une balise qui n’est pas ouverte. ¦ {tag} sulkee tagin, jota ei ole avattu. ¦ {tag} egy meg nem nyitott címkét zár be.
+{tag} n’est pas fermée ({end}). ¦ {tag} ei ole suljettu ({end}). ¦ {tag} nincs lezárva ({end}).
+L’id « {id} » est donné deux fois. ¦ Id ”{id}” on annettu kahdesti. ¦ A(z) „{id}” id kétszer szerepel.
+Une image sans alt (texte pour ceux qui ne la voient pas). ¦ Kuva ilman alt-tekstiä (teksti niille, jotka eivät näe sitä). ¦ Kép alt nélkül (szöveg azoknak, akik nem látják).
+Des guillemets ne sont pas fermés. ¦ Lainausmerkkejä on jäänyt sulkematta. ¦ Egyes idézőjelek nincsenek lezárva.
+« {ch} » en trop. ¦ Ylimääräinen ”{ch}”. ¦ Fölösleges „{ch}”.
+« {ch} » ferme « {open} » (ligne {n}). ¦ ”{ch}” sulkee merkin ”{open}” (rivi {n}). ¦ A(z) „{ch}” a(z) „{open}” jelet zárja ({n}. sor).
+Un commentaire /* … */ n’est pas fermé. ¦ Kommenttia /* … */ ei ole suljettu. ¦ Egy /* … */ megjegyzés nincs lezárva.
+« {ch} » n’est pas fermé. ¦ ”{ch}” ei ole suljettu. ¦ A(z) „{ch}” nincs lezárva.
+Il manque sans doute un « ; » au bout de la ligne. ¦ Rivin lopusta puuttuu luultavasti ”;”. ¦ Valószínűleg hiányzik egy „;” a sor végéről.
+Ligne {line}, colonne {col} ¦ Rivi {line}, sarake {col} ¦ {line}. sor, {col}. oszlop
+Le numéro de la ligne (1 à {n}), ou ligne:colonne : ¦ Rivin numero (1–{n}) tai rivi:sarake: ¦ A sor száma (1–{n}), vagy sor:oszlop:
+Aller à la ligne (1 à {n}) ¦ Siirry riville (1–{n}) ¦ Ugrás sorra (1–{n})
+Déjà en forme. ¦ Jo muotoiltu. ¦ Már formázva.
+Code remis en forme. ¦ Koodi muotoiltu uudelleen. ¦ Kód újraformázva.
+Retour au début. ¦ Takaisin alkuun. ¦ Vissza az elejére.
+Sur PC et Linux : Ctrl au lieu de ⌘, Alt au lieu de ⌥. ¦ PC:llä ja Linuxissa: Ctrl ⌘:n sijaan, Alt ⌥:n sijaan. ¦ PC-n és Linuxon: Ctrl a ⌘ helyett, Alt a ⌥ helyett.
+jumelle ligne {n} ¦ pari rivillä {n} ¦ párja: {n}. sor
+✓ Rien à signaler ¦ ✓ Ei huomautettavaa ¦ ✓ Nincs teendő
+Ligne {n} : {msg} ¦ Rivi {n}: {msg} ¦ {n}. sor: {msg}
+Le code a l’air bien formé. ¦ Koodi näyttää oikein muodostetulta. ¦ A kód jól formázottnak tűnik.
+Rien à signaler. ¦ Ei huomautettavaa. ¦ Nincs teendő.
+=remplacé ¦ korvattu|korvattu ¦ lecserélve|lecserélve
+=caractère choisi ¦ merkki valittu|merkkiä valittu ¦ karakter kijelölve|karakter kijelölve
+pas sur {name} ¦ ei: {name} ¦ nem: {name}
+pas sur {name} avant {v} ¦ ei: {name} ennen versiota {v} ¦ nem: {name} a(z) {v} előtt
+Aller à la ligne {n} de {file} ¦ Siirry tiedoston {file} riville {n} ¦ Ugrás a(z) {file} {n}. sorára
+partout chez les navigateurs visés ¦ kaikkialla kohdeselaimissa ¦ mindenhol a célböngészőkben
+ligne {n} de {file} ¦ tiedoston {file} rivi {n} ¦ {file}, {n}. sor
+Navigateurs visés : {list}. ¦ Kohdeselaimet: {list}. ¦ Célböngészők: {list}.
+✅ Rien à signaler : ton site devrait marcher sur tous les navigateurs visés. ¦ ✅ Ei huomautettavaa: sivustosi pitäisi toimia kaikissa kohdeselaimissa. ¦ ✅ Nincs teendő: a webhelyednek minden célböngészőben működnie kell.
+{what} : certains visiteurs verront ton site un peu différemment. ¦ {what}: jotkut kävijät näkevät sivustosi hieman eri tavalla. ¦ {what}: egyes látogatók kissé másképp látják majd a webhelyedet.
+=fonction récente, bien prise en charge ¦ uusi ominaisuus, hyvin tuettu|uutta ominaisuutta, hyvin tuettuja ¦ új funkció, jól támogatott|új funkció, jól támogatott
+=point à vérifier ¦ tarkistettava kohta|tarkistettavaa kohtaa ¦ ellenőrizendő pont|ellenőrizendő pont
+=autre fonction récente, sans souci ¦ muu uusi ominaisuus, ei ongelmia|muuta uutta ominaisuutta, ei ongelmia ¦ egyéb új funkció, gond nélkül|egyéb új funkció, gond nélkül
+swref|Sur ¦ Selaimessa ¦ Böngészőben
+Imiter {name} ¦ Jäljittele: {name} ¦ {name} utánzása
+Carte : {err} ¦ Kartta: {err} ¦ Térkép: {err}
+Ce lien mène hors du site ({url}) : il marchera dans le site exporté. ¦ Tämä linkki vie sivuston ulkopuolelle ({url}): se toimii viedyssä sivustossa. ¦ Ez a hivatkozás a webhelyen kívülre vezet ({url}): az exportált webhelyen működni fog.
+Comme dans {name} : {what} à vérifier (🧭 Navigateurs). ¦ Kuten selaimessa {name}: {what} tarkistettavana (🧭 Selaimet). ¦ Mint a(z) {name} böngészőben: {what} ellenőrizendő (🧭 Böngészők).
+Comme dans {name} : rien à signaler. ¦ Kuten selaimessa {name}: ei huomautettavaa. ¦ Mint a(z) {name} böngészőben: nincs teendő.
+L’aperçu reste celui de l’app : pour voir le vrai, ↗ Aperçu dans ce navigateur. ¦ Esikatselu on yhä sovelluksen oma: nähdäksesi oikean, ↗ Esikatselu tuossa selaimessa. ¦ Az előnézet továbbra is az alkalmazásé: a valódihoz ↗ Előnézet abban a böngészőben.
+Largeur en px ¦ Leveys pikseleinä ¦ Szélesség px-ben
+aperçu {w} ¦ esikatselu {w} ¦ előnézet {w}
+{a} et {b} ¦ {a} ja {b} ¦ {a} és {b}
+{what} dans le CSS ¦ {what} CSS:ssä ¦ {what} a CSS-ben
+pas encore de CSS ¦ ei vielä CSS:ää ¦ még nincs CSS
+ces blocs suivront la nouvelle requête ¦ nämä lohkot noudattavat uutta kyselyä ¦ ezek a blokkok az új lekérdezést követik
+l’aperçu le montre même si ton appareil ne l’est pas ¦ esikatselu näyttää sen, vaikka laitteesi ei olisi sellainen ¦ az előnézet akkor is mutatja, ha az eszközöd nem ilyen
+Chaque écran est un bouton au-dessus de l’aperçu, et un choix « Écran » quand tu règles un élément : ses styles vont dans son bloc {code} du CSS du site. ¦ Jokainen näyttö on painike esikatselun yläpuolella ja ”Näyttö”-valinta, kun säädät elementtiä: sen tyylit menevät sen {code}-lohkoon sivuston CSS:ssä. ¦ Minden képernyő egy gomb az előnézet fölött, és egy „Képernyő” választás, amikor egy elemet állítasz be: a stílusai a webhely CSS-ének saját {code} blokkjába kerülnek.
+Dans le CSS, sans écran : ¦ CSS:ssä, ilman näyttöä: ¦ A CSS-ben, képernyő nélkül:
+Cette page : « {name} » ¦ Tämä sivu: ”{name}” ¦ Ez az oldal: „{name}”
+Titre dans l’onglet du navigateur ¦ Otsikko selaimen välilehdellä ¦ Cím a böngészőlapon
+Description (pour les moteurs de recherche) ¦ Kuvaus (hakukoneille) ¦ Leírás (keresőmotoroknak)
+Ces réglages remplissent les variables {code} de ta feuille de styles (onglet CSS). ¦ Nämä asetukset täyttävät tyylitiedostosi {code}-muuttujat (CSS-välilehti). ¦ Ezek a beállítások kitöltik a stíluslapod {code} változóit (CSS lap).
+titres ¦ otsikot ¦ címsorok
+Ta règle {rule} passe devant ce curseur : change-la, ou retire sa ligne. ¦ Sääntösi {rule} ohittaa tämän liukusäätimen: muuta sitä tai poista sen rivi. ¦ A(z) {rule} szabályod felülírja ezt a csúszkát: módosítsd, vagy töröld a sorát.
+ligne {n} ¦ rivi {n} ¦ {n}. sor
+Écrit dans {code} : seulement sur cet écran. ¦ Kirjoitettu kohteeseen {code}: vain tällä näytöllä. ¦ Ide írva: {code} – csak ezen a képernyőn.
+Écrit dans le CSS du site, pour tous les écrans. ¦ Kirjoitettu sivuston CSS:ään, kaikille näytöille. ¦ A webhely CSS-ébe írva, minden képernyőre.
+Pour un seul élément : clique-le, section « Marges, espace intérieur et taille ». ¦ Yksittäiselle elementille: napsauta sitä, osio ”Marginaalit, sisätila ja koko”. ¦ Egyetlen elemhez: kattints rá, „Margók, belső margó és méret” szakasz.
+la racine du site ¦ sivuston juuri ¦ a webhely gyökere
+Dans {dir} : ¦ Kansiossa {dir}: ¦ Itt: {dir}:
+{dir} : glisses-y des fichiers, ou ＋ pour en créer un dedans (un dossier vide n’est pas gardé à l’enregistrement). ¦ {dir}: vedä tiedostoja tänne tai luo uusi ＋-painikkeella (tyhjää kansiota ei säilytetä tallennettaessa). ¦ {dir}: húzz ide fájlokat, vagy ＋ egy új létrehozásához benne (az üres mappa mentéskor nem marad meg).
+Page « {name} » supprimée ¦ Sivu ”{name}” poistettu ¦ „{name}” oldal törölve
+Page « {name} » créée : elle est dans le menu de toutes les pages. ¦ Sivu ”{name}” luotu: se on kaikkien sivujen valikossa. ¦ „{name}” oldal létrehozva: minden oldal menüjében ott van.
+C’est ton {what} : {tag}, nommé « {name} ». ¦ Tämä on {what}: {tag}, nimeltään ”{name}”. ¦ Ez a(z) {what}: {tag}, „{name}” néven.
+{what}. Valeur : {value}. ¦ {what}. Arvo: {value}. ¦ {what}. Érték: {value}.
+Sa valeur : ¦ Sen arvo: ¦ Az értéke:
+{what} · valeur : {value} ¦ {what} · arvo: {value} ¦ {what} · érték: {value}
+Attribut sans description dans la norme (data-…, aria-…, ou propre à ton site) ¦ Määrite, jolla ei ole kuvausta standardissa (data-…, aria-… tai sivustosi oma) ¦ A szabványban leírás nélküli attribútum (data-…, aria-…, vagy a webhelyed saját)
+Attributs HTML ¦ HTML-määritteet ¦ HTML-attribútumok
+＋ Ajouter un attribut… ¦ ＋ Lisää määrite… ¦ ＋ Attribútum hozzáadása…
+Propres à {tag} ¦ Vain elementille {tag} ¦ Csak ehhez: {tag}
+Pour tous les éléments ¦ Kaikille elementeille ¦ Minden elemhez
+Autre (data-…, aria-…)… ¦ Muu (data-…, aria-…)… ¦ Egyéb (data-…, aria-…)…
+Source : {link}, © {by}, licence {lic} ; {changes}. ¦ Lähde: {link}, © {by}, lisenssi {lic}; {changes}. ¦ Forrás: {link}, © {by}, licenc: {lic}; {changes}.
+traduit en français et adapté ¦ käännetty ranskaksi ja mukautettu (tässä näkyvät kuvaukset tekoälyn kääntämiä) ¦ franciára fordítva és átdolgozva (az itt látható leírásokat MI fordította)
+Syntaxe, valeur de départ, héritage : {link} (relevées dans w3c/webref), © World Wide Web Consortium, {lic} ; seuls quelques champs sont repris, « héritée » et certains « s’applique à » sont traduits. Descriptions en français : écrites pour LCNDA. ¦ Syntaksi, alkuarvo, periytyminen: {link} (poimittu lähteestä w3c/webref), © World Wide Web Consortium, {lic}; vain muutama kenttä on otettu mukaan, ”periytyvä” ja jotkin ”koskee”-kohdat on käännetty. Kuvaukset: kirjoitettu LCNDA:lle ranskaksi. ¦ Szintaxis, kezdőérték, öröklődés: {link} (a w3c/webref-ből), © World Wide Web Consortium, {lic}; csak néhány mező került átvételre, az „öröklődő” és egyes „vonatkozik” részek le vannak fordítva. Leírások: franciául, az LCNDA számára írva.
+normes CSS du W3C ¦ W3C:n CSS-standardit ¦ A W3C CSS-szabványai
+Notice de la licence W3C ¦ W3C-lisenssin ilmoitus ¦ A W3C licenc közleménye
+Les plus utiles ; cherche pour voir les {n}. ¦ Hyödyllisimmät; hae nähdäksesi kaikki {n}. ¦ A leghasznosabbak; keress, hogy mind a(z) {n} látható legyen.
+{x} copié. ¦ {x} kopioitu. ¦ {x} másolva.
+Astuces ¦ Vinkit ¦ Tippek
+{b} : clique dans un texte pour le changer, le code suit tout seul. ¦ {b}: napsauta tekstiä muuttaaksesi sitä, koodi seuraa itsestään. ¦ {b}: kattints egy szövegbe a módosításához, a kód magától követi.
+T Écrire ¦ T Kirjoita ¦ T Írás
+Dans le code, {key} déplie une abréviation : {ex}. ¦ Koodissa {key} laajentaa lyhenteen: {ex}. ¦ A kódban a(z) {key} kibont egy rövidítést: {ex}.
+{b} fait tourner tes scripts (JS) dans l’aperçu isolé. ¦ {b} suorittaa skriptisi (JS) eristetyssä esikatselussa. ¦ {b} futtatja a szkriptjeidet (JS) az elkülönített előnézetben.
+▶ Tester ¦ ▶ Testaa ¦ ▶ Tesztelés
+La carte est faite en image avec ce fond (et sa mention : {credit}), redessinée à chaque ouverture. ¦ Kartta tehdään kuvaksi tällä taustalla (ja sen maininnalla: {credit}), ja se piirretään uudelleen joka avauksella. ¦ A térkép képként készül ezzel a háttérrel (és a feltüntetésével: {credit}), minden megnyitáskor újrarajzolva.
+🌳 Bloc de la généalogie : {what} ¦ 🌳 Sukututkimuslohko: {what} ¦ 🌳 Családfa-blokk: {what}
+Texte de remplacement (pour qui ne voit pas l’image) ¦ Korvaava teksti (niille, jotka eivät näe kuvaa) ¦ Helyettesítő szöveg (azoknak, akik nem látják a képet)
+Ceci est ¦ Tämä on ¦ Ez
+Ceci est… ¦ Tämä on… ¦ Ez…
+{tag}, nommé « {name} » ¦ {tag}, nimeltään ”{name}” ¦ {tag}, „{name}” néven
+Nom (pour toi) ¦ Nimi (sinua varten) ¦ Név (neked)
+Balise ¦ Tagi ¦ Címke
+Classe(s) ¦ Luokka/luokat ¦ Osztály(ok)
+{x} en px ¦ {x} pikseleinä ¦ {x} px-ben
+marge ¦ marginaali ¦ margó
+espace intérieur ¦ sisätila ¦ belső margó
+style="…" de l’élément ¦ elementin style="…" ¦ az elem style="…" attribútuma
+dans @media {q} ¦ kohteessa @media {q} ¦ a @media {q} részben
+Appliquer à ¦ Koskee ¦ Alkalmazás erre
+Tous les éléments {cls} ¦ Kaikki {cls}-elementit ¦ Minden {cls} elem
+Écrit dans : {where} ¦ Kirjoitettu: {where} ¦ Ide írva: {where}
+CSS du site ¦ Sivuston CSS ¦ Webhely CSS
+modifié le {date} ¦ muokattu {date} ¦ módosítva: {date}
+{kb} Ko · dans une page : {html} · dans le CSS : {css} ¦ {kb} kt · sivulla: {html} · CSS:ssä: {css} ¦ {kb} KB · oldalon: {html} · a CSS-ben: {css}
+depuis css/ ¦ kansiosta css/ ¦ a css/ mappából
+page « {name} » ¦ sivu ”{name}” ¦ „{name}” oldal
+Fichiers du site ({n}) ¦ Sivuston tiedostot ({n}) ¦ A webhely fájljai ({n})
+{name} garde son nom : c’est le fichier principal du site. ¦ {name} pitää nimensä: se on sivuston päätiedosto. ¦ {name} megtartja a nevét: ez a webhely fő fájlja.
+tu peux y écrire du PHP, par exemple {code} ¦ voit kirjoittaa siihen PHP:tä, esimerkiksi {code} ¦ írhatsz bele PHP-t, például {code}
+aujourd’hui : {where} ¦ nyt: {where} ¦ jelenleg: {where}
+la racine ¦ juuri ¦ a gyökér
+Déplacer {name} ¦ Siirrä {name} ¦ {name} áthelyezése
+{x} supprimé ¦ {x} poistettu ¦ {x} törölve
+PHP exécuté ({ms} ms) ¦ PHP suoritettu ({ms} ms) ¦ PHP lefuttatva ({ms} ms)
+L’aperçu remplace seulement les include. ¦ Esikatselu korvaa vain include-käskyt. ¦ Az előnézet csak az include-okat helyettesíti.
+lié après style.css sur {what} ¦ linkitetty style.css:n jälkeen kohteessa {what} ¦ a style.css után hivatkozva itt: {what}
+lié après style.css ¦ linkitetty style.css:n jälkeen ¦ a style.css után hivatkozva
+clic droit sur l’onglet : ses pages ¦ napsauta välilehteä hiiren oikealla: sen sivut ¦ jobb kattintás a lapra: az oldalai
+lié après script.js, tourne en ▶ Tester ¦ linkitetty script.js:n jälkeen, toimii ▶ Testaa -tilassa ¦ a script.js után hivatkozva, a ▶ Tesztelésben fut
+à inclure dans une page PHP : {code} ¦ sisällytettäväksi PHP-sivulle: {code} ¦ PHP-oldalba illesztéshez: {code}
+PHP de « {name} » · {code} pour un en-tête commun ¦ Sivun ”{name}” PHP · {code} yhteistä ylätunnistetta varten ¦ „{name}” PHP-ja · {code} közös fejléchez
+HTML de « {name} » · Tab : Emmet (ul>li*3) · les blocs data-lc-block sont remplis tout seuls ¦ Sivun ”{name}” HTML · Tab: Emmet (ul>li*3) · data-lc-block-lohkot täyttyvät itsestään ¦ „{name}” HTML-je · Tab: Emmet (ul>li*3) · a data-lc-block blokkok maguktól töltődnek ki
+CSS de tout le site · Tab : m10 → margin: 10px; · les couleurs de 🎨 : var(--lc-principale)… ¦ Koko sivuston CSS · Tab: m10 → margin: 10px; · 🎨-värit: var(--lc-principale)… ¦ Az egész webhely CSS-e · Tab: m10 → margin: 10px; · a 🎨 színei: var(--lc-principale)…
+JS de tout le site · il tourne seulement en ▶ Tester, dans l’aperçu isolé, et dans le site exporté ¦ Koko sivuston JS · se toimii vain ▶ Testaa -tilassa, eristetyssä esikatselussa ja viedyssä sivustossa ¦ Az egész webhely JS-e · csak a ▶ Tesztelésben, az elkülönített előnézetben és az exportált webhelyen fut
+🎨 CSS de {what} ¦ 🎨 CSS: {what} ¦ 🎨 CSS: {what}
+aucune règle ¦ ei sääntöjä ¦ nincs szabály
+modifie ici, le fichier suit ¦ muokkaa tässä, tiedosto seuraa ¦ itt szerkeszd, a fájl követi
+＋ Règle {sel} ¦ ＋ Sääntö {sel} ¦ ＋ Szabály: {sel}
+Règle {n} ¦ Sääntö {n} ¦ {n}. szabály
+{what} du HTML (scripts, cadres, attributs on…, liens javascript:) : mets ton JavaScript dans l’onglet JS. ¦ {what} HTML:stä (skriptit, kehykset, on…-määritteet, javascript:-linkit): laita JavaScriptisi JS-välilehdelle. ¦ {what} a HTML-ből (szkriptek, keretek, on… attribútumok, javascript: hivatkozások): a JavaScriptedet a JS lapra tedd.
+=chose retirée ¦ asia poistettu|asiaa poistettu ¦ elem eltávolítva|elem eltávolítva
+Impossible d’enregistrer : {err} ¦ Tallennus ei onnistunut: {err} ¦ Nem sikerült menteni: {err}
+Copie enregistrée : « {name} » (Mes sites…). ¦ Kopio tallennettu: ”{name}” (Omat sivustot…). ¦ Másolat mentve: „{name}” (Saját webhelyek…).
+Site prêt : {name}. Décompresse-le et ouvre index.html (ou pose le dossier dans MAMP, WAMP, chez ton hébergeur) : le mode d’emploi est dans LISEZ-MOI.html. ¦ Sivusto valmis: {name}. Pura se ja avaa index.html (tai laita kansio MAMPiin, WAMPiin tai palveluntarjoajallesi): käyttöohje on tiedostossa LISEZ-MOI.html. ¦ A webhely kész: {name}. Csomagold ki és nyisd meg az index.html-t (vagy tedd a mappát a MAMP-ba, WAMP-ba, a tárhelyszolgáltatódhoz): a használati útmutató a LISEZ-MOI.html fájlban van.
+Page prête : {name} (tout est dedans, à ouvrir d’un double-clic). ¦ Sivu valmis: {name} (kaikki on mukana, avaa kaksoisnapsautuksella). ¦ Az oldal kész: {name} (minden benne van, dupla kattintással nyisd meg).
+{what} (sans GPS ni appareil) ¦ {what} (ilman GPS- ja kameratietoja) ¦ {what} (GPS- és fényképezőgép-adatok nélkül)
+=image réduite ¦ pienennetty kuva|pienennettyä kuvaa ¦ kicsinyített kép|kicsinyített kép
+=image pas mise ¦ pois jätetty kuva|pois jätettyä kuvaa ¦ kihagyott kép|kihagyott kép
+=nom de personne vivante remplacé ¦ elävän henkilön nimi korvattu|elävien henkilöiden nimeä korvattu ¦ élő személy neve lecserélve|élő személy neve lecserélve
+=image introuvable ¦ kuvaa ei löytynyt|kuvaa ei löytynyt ¦ nem található kép|nem található kép
+{what} (une personne vivante ou confidentielle dessus : {list}) ¦ {what} (kuvassa elävä tai luottamuksellinen henkilö: {list}) ¦ {what} (élő vagy bizalmas személy szerepel rajta: {list})
+{what} (une personne vivante ou confidentielle dessus) ¦ {what} (kuvassa elävä tai luottamuksellinen henkilö) ¦ {what} (élő vagy bizalmas személy szerepel rajta)
+{what} par « [nom retiré] » ¦ {what} tekstillä ”[nom retiré]” ¦ {what} erre: „[nom retiré]”
+{what} vers une page qui n’existe plus ¦ {what} sivulle, jota ei enää ole ¦ {what} egy már nem létező oldalra
+{what} dans tes médias ¦ {what} mediassasi ¦ {what} a médiáid között
+Le site a sa politique de sécurité (CSP) : ses scripts viennent seulement de ses fichiers. ¦ Sivustolla on oma tietoturvakäytäntönsä (CSP): sen skriptit tulevat vain sen omista tiedostoista. ¦ A webhelynek saját biztonsági házirendje van (CSP): a szkriptjei csak a saját fájljaiból jönnek.
+Déjà en ligne : ¦ Jo verkossa: ¦ Már online:
+Jeton Netlify ¦ Netlify-tunnus ¦ Netlify token
+Jeton GitHub ¦ GitHub-tunnus ¦ GitHub token
+Dépôt ¦ Repositorio ¦ Tároló
+Serveur ¦ Palvelin ¦ Szerver
+Port ¦ Portti ¦ Port
+Identifiant ¦ Käyttäjätunnus ¦ Felhasználónév
+Dossier du site sur le serveur ¦ Sivuston kansio palvelimella ¦ A webhely mappája a szerveren
+Ton site est en ligne ({n} fichiers). Il peut falloir une minute avant qu’il s’affiche. ¦ Sivustosi on verkossa ({n} tiedostoa). Voi kestää minuutin ennen kuin se näkyy. ¦ A webhelyed online van ({n} fájl). Egy percig is eltarthat, mire megjelenik.
+Ton site est envoyé ({n} fichiers). ¦ Sivustosi on lähetetty ({n} tiedostoa). ¦ A webhelyed elküldve ({n} fájl).
+↗ Ouvrir {url} ¦ ↗ Avaa {url} ¦ ↗ {url} megnyitása
+« {name} » illisible. ¦ ”{name}” ei ole luettavissa. ¦ „{name}” nem olvasható.
+« {name} » : {pages}, {files} ; laissé de côté : {list}. Enregistre (💾) pour le garder. ¦ ”{name}”: {pages}, {files}; jätetty pois: {list}. Tallenna (💾) säilyttääksesi sen. ¦ „{name}”: {pages}, {files}; kihagyva: {list}. Mentsd (💾), hogy megmaradjon.
+« {name} » : {pages}, {files}. Enregistre (💾) pour le garder. ¦ ”{name}”: {pages}, {files}. Tallenna (💾) säilyttääksesi sen. ¦ „{name}”: {pages}, {files}. Mentsd (💾), hogy megmaradjon.
+Rempli depuis la fiche de {name} : relis et complète. ¦ Täytetty henkilön {name} kortilta: lue ja täydennä. ¦ Kitöltve {name} adatlapjáról: nézd át és egészítsd ki.
+Mon dessin : {what} ¦ Oma piirrokseni: {what} ¦ Saját rajzom: {what}
+celui déjà enregistré ¦ jo tallennettu ¦ a már mentett
+ce qui est choisi dans le dessin ({what}) ¦ piirroksesta valittu ({what}) ¦ ami a rajzon ki van jelölve ({what})
+choisis d’abord des formes dans le dessin (outil Sélection), puis « ＋ Créer un élément » ¦ valitse ensin muotoja piirroksesta (Valinta-työkalu), sitten ”＋ Luo elementti” ¦ először jelölj ki alakzatokat a rajzon (Kijelölés eszköz), majd „＋ Elem létrehozása”
+Le remplacer par ce qui est choisi dans le dessin ({n}) ¦ Korvaa se piirroksesta valitulla ({n}) ¦ Csere a rajzon kijelöltre ({n})
+Choisis ce que tu dessines, puis : {a} — un clic par point, double-clic ou Entrée pour finir (les courbes se lissent toutes seules) ; {b} — glisse un rectangle ; {c} — un clic. ¦ Valitse, mitä piirrät, sitten: {a} — yksi napsautus pistettä kohden, kaksoisnapsautus tai Enter lopettaa (käyrät pehmenevät itsestään); {b} — vedä suorakulmio; {c} — yksi napsautus. ¦ Válaszd ki, mit rajzolsz, majd: {a} — pontonként egy kattintás, a befejezéshez dupla kattintás vagy Enter (a görbék maguktól simulnak); {b} — húzz egy téglalapot; {c} — egy kattintás.
+traits et zones ¦ viivat ja alueet ¦ vonalak és területek
+bâtiment ¦ rakennus ¦ épület
+symbole, nom ¦ symboli, nimi ¦ szimbólum, név
+Plan situé : {place} — il couvre {size} (1 px ≈ {m} m). Les lieux de ta base se posent à leur vraie place (📍). ¦ Kartta paikannettu: {place} — se kattaa {size} (1 px ≈ {m} m). Tietokantasi paikat asettuvat oikeille kohdilleen (📍). ¦ Térkép elhelyezve: {place} — {size} területet fed le (1 px ≈ {m} m). Az adatbázisod helyei a valódi helyükre kerülnek (📍).
+Pour une carte juste et pas déformée, commence par {b} (plus bas) : l’échelle se règle toute seule. Sinon, dis combien vaut un pixel : ¦ Tarkkaa ja vääristymätöntä karttaa varten aloita painikkeesta {b} (alempana): mittakaava asettuu itsestään. Muuten kerro, paljonko yksi pikseli on: ¦ Pontos, torzítás nélküli térképhez kezdd ezzel: {b} (lejjebb): a lépték magától beáll. Különben add meg, mennyi egy képpont:
+🗺️ Fond de carte d’un lieu ¦ 🗺️ Paikan taustakartta ¦ 🗺️ Egy hely alaptérképe
+1 pixel = … mètres ¦ 1 pikseli = … metriä ¦ 1 képpont = … méter
+Longueur réelle : {v} ¦ Todellinen pituus: {v} ¦ Valódi hossz: {v}
+Surface : {v} · tour : {t} ¦ Pinta-ala: {v} · ympärysmitta: {t} ¦ Terület: {v} · kerület: {t}
+Taille réelle : {v} ¦ Todellinen koko: {v} ¦ Valódi méret: {v}
+(échelle à régler) ¦ (mittakaava asetettava) ¦ (a léptéket be kell állítani)
+Centré sur le lieu ¦ Keskitetty paikkaan ¦ A helyre középre igazítva
+Décalé de {what} ¦ Siirretty: {what} ¦ Eltolva: {what}
+{d} vers le nord ¦ {d} pohjoiseen ¦ {d} északra
+{d} vers le sud ¦ {d} etelään ¦ {d} délre
+{d} vers l’est ¦ {d} itään ¦ {d} keletre
+{d} vers l’ouest ¦ {d} länteen ¦ {d} nyugatra
+=lieu posé ¦ paikka lisätty|paikkaa lisätty ¦ hely hozzáadva|hely hozzáadva
+Choisis l’image d’un acte, puis {b} en glissant. Le papier, les taches et les lignes s’effacent ; l’encre devient un tracé net, à agrandir sans perte, à imprimer ou à graver. ¦ Valitse asiakirjan kuva ja sitten {b} vetämällä. Paperi, tahrat ja viivat häviävät; mustesta tulee terävä viiva, jota voi suurentaa häviöttä, tulostaa tai kaivertaa. ¦ Válaszd ki egy anyakönyvi bejegyzés képét, majd {b} húzással. A papír, a foltok és a vonalak eltűnnek; a tinta éles vonallá válik, amely veszteség nélkül nagyítható, nyomtatható vagy gravírozható.
+encadre la signature ¦ rajaa allekirjoitus ¦ keretezd be az aláírást
+Pas rangée dans les médias : {err} ¦ Ei tallennettu mediaan: {err} ¦ Nincs elmentve a médiába: {err}
+Image non rangée : {err} ¦ Kuvaa ei tallennettu: {err} ¦ A kép nincs elmentve: {err}
+Signature rangée dans les médias d’{name}. ¦ Allekirjoitus tallennettu henkilön {name} mediaan. ¦ Aláírás elmentve {name} médiái közé.
+Signature rangée dans les médias de {name}. ¦ Allekirjoitus tallennettu henkilön {name} mediaan. ¦ Aláírás elmentve {name} médiái közé.
+Supprimer « {name} » ? ¦ Poistetaanko ”{name}”? ¦ Törlöd ezt: „{name}”?
+cet élément ¦ tämä kohde ¦ ez az elem
+{n} générations ({c} cases) ¦ {n} sukupolvea ({c} ruutua) ¦ {n} nemzedék ({c} doboz)
+Établi par … en {y} ¦ Laatinut … vuonna {y} ¦ Készítette: … ({y})
+{file} enregistré dans Téléchargements. ¦ {file} tallennettu Lataukset-kansioon. ¦ {file} elmentve a Letöltések mappába.
+Ce fichier est un réglage d’un autre outil (« {other} ») : il ne va pas dans {tool}. ¦ Tämä tiedosto on toisen työkalun asetus (”{other}”): se ei kuulu työkaluun {tool}. ¦ Ez a fájl egy másik eszköz beállítása („{other}”): nem a(z) {tool} eszközbe való.
+cet outil ¦ tämä työkalu ¦ ez az eszköz
+le dessin vectoriel ¦ vektoripiirros ¦ a vektorrajz
+le faire-part ¦ ilmoituskortti ¦ az értesítő
+les signatures et sceaux ¦ allekirjoitukset ja sinetit ¦ az aláírások és pecsétek
+l’arbre décoratif ¦ koristepuu ¦ a díszfa
+la palette du plan ¦ kartan paletti ¦ a térkép palettája
+les réglages du document ¦ asiakirjan asetukset ¦ a dokumentum beállításai
+ces réglages du faire-part ¦ nämä ilmoituskortin asetukset ¦ az értesítő ezen beállításai
+cette palette du plan ¦ tämä kartan paletti ¦ a térkép ezen palettája
+ces réglages du sceau ¦ nämä sinetin asetukset ¦ a pecsét ezen beállításai
+ces réglages de l’arbre ¦ nämä puun asetukset ¦ a fa ezen beállításai
+Un réglage « {name} » existe déjà. Quel nom donner à celui-ci ? ¦ Asetus ”{name}” on jo olemassa. Minkä nimen annat tälle? ¦ Már van „{name}” nevű beállítás. Milyen nevet adsz ennek?
+« {name} » est tourné : remets sa rotation à 0, ou dissocie-le, pour travailler dedans. ¦ ”{name}” on kierretty: palauta sen kierto nollaan tai pura ryhmä, jotta voit työskennellä sen sisällä. ¦ „{name}” el van forgatva: állítsd vissza a forgatását 0-ra, vagy bontsd fel, hogy benne dolgozhass.
+Ce groupe ¦ Tämä ryhmä ¦ Ez a csoport
+Tu es dans « {name} » : le reste est pâli. Échap ou ⤴ pour en sortir. ¦ Olet kohteen ”{name}” sisällä: muu on himmennetty. Esc tai ⤴ poistuu. ¦ A(z) „{name}” belsejében vagy: a többi halványítva. Esc vagy ⤴ a kilépéshez.
+le groupe ¦ ryhmä ¦ a csoport
+Sortir de ce calque ¦ Poistu tästä tasosta ¦ Kilépés ebből a rétegből
+Sortir de ce groupe ¦ Poistu tästä ryhmästä ¦ Kilépés ebből a csoportból
+Travailler dans ce calque : les nouveaux dessins y vont ¦ Työskentele tässä tasossa: uudet piirrokset menevät siihen ¦ Munka ebben a rétegben: az új rajzok ide kerülnek
+Travailler dans ce groupe : les nouveaux dessins y vont ¦ Työskentele tässä ryhmässä: uudet piirrokset menevät siihen ¦ Munka ebben a csoportban: az új rajzok ide kerülnek
+Retirer le masque : la forme revient tout en haut, rien n’est perdu ¦ Poista maski: muoto palaa ylimmäksi, mitään ei menetetä ¦ Maszk eltávolítása: az alakzat visszakerül legfelülre, semmi sem vész el
+Masquer avec la forme du dessus : la forme la plus haute de ce calque le découpe (on ne voit que ce qui est dedans) ¦ Maskaa ylimmällä muodolla: tämän tason ylin muoto rajaa sen (näkyy vain sen sisällä oleva) ¦ Maszkolás a felső alakzattal: a réteg legfelső alakzata kivágja (csak ami benne van, az látszik)
+Masquer avec la forme du dessus : la forme la plus haute de ce groupe le découpe (on ne voit que ce qui est dedans) ¦ Maskaa ylimmällä muodolla: tämän ryhmän ylin muoto rajaa sen (näkyy vain sen sisällä oleva) ¦ Maszkolás a felső alakzattal: a csoport legfelső alakzata kivágja (csak ami benne van, az látszik)
+le dessin (hors calque) ¦ piirros (tasojen ulkopuolella) ¦ a rajz (rétegen kívül)
+Range la sélection dans un groupe ¦ Siirtää valinnan ryhmään ¦ A kijelölést egy csoportba teszi
+Un groupe vide dans le calque actuel ¦ Tyhjä ryhmä nykyisessä tasossa ¦ Üres csoport a jelenlegi rétegben
+Grouper la sélection ¦ Ryhmitä valinta ¦ Kijelölés csoportosítása
+Tu dessines dans : {where} ¦ Piirrät kohteeseen: {where} ¦ Ide rajzolsz: {where}
+au moins 3 objets ¦ vähintään 3 objektia ¦ legalább 3 objektum
+{w} × {h} cm à l’impression (96 points par pouce). ¦ {w} × {h} cm tulostettuna (96 pistettä tuumalla). ¦ {w} × {h} cm nyomtatva (96 pont per hüvelyk).
+=volet ¦ paneeli|paneelia ¦ panel|panel
+{name} — clic : au centre ; glisser : où tu veux ¦ {name} — napsautus: keskelle; vedä: minne haluat ¦ {name} — kattintás: középre; húzás: ahová szeretnéd
+Aucun ornement pour « {q} ». ¦ Ei koristetta haulle ”{q}”. ¦ Nincs díszítés erre: „{q}”.
+Ornement : {name} ¦ Koriste: {name} ¦ Díszítés: {name}
+{what} en hachures : prêt pour une impression en noir et blanc. ¦ {what} viivoitettuna: valmis mustavalkotulostukseen. ¦ {what} sraffozva: kész a fekete-fehér nyomtatásra.
+Couleur {n} ¦ Väri {n} ¦ {n}. szín
+Masque retiré : la forme est revenue tout en haut du calque. ¦ Maski poistettu: muoto on palannut tason ylimmäksi. ¦ Maszk eltávolítva: az alakzat visszakerült a réteg tetejére.
+Masque retiré : la forme est revenue tout en haut du groupe. ¦ Maski poistettu: muoto on palannut ryhmän ylimmäksi. ¦ Maszk eltávolítva: az alakzat visszakerült a csoport tetejére.
+Pose d’abord une forme (rond, ovale, rectangle, tracé…) tout en haut de ce calque : elle servira de découpe. ¦ Aseta ensin muoto (ympyrä, soikio, suorakulmio, polku…) tämän tason ylimmäksi: sitä käytetään rajauksena. ¦ Előbb tegyél egy alakzatot (kör, ovális, téglalap, útvonal…) a réteg legtetejére: ez lesz a kivágás.
+Pose d’abord une forme (rond, ovale, rectangle, tracé…) tout en haut de ce groupe : elle servira de découpe. ¦ Aseta ensin muoto (ympyrä, soikio, suorakulmio, polku…) tämän ryhmän ylimmäksi: sitä käytetään rajauksena. ¦ Előbb tegyél egy alakzatot (kör, ovális, téglalap, útvonal…) a csoport legtetejére: ez lesz a kivágás.
+Il faut quelque chose à découper sous la forme, dans ce calque. ¦ Muodon alla tässä tasossa täytyy olla jotain rajattavaa. ¦ Az alakzat alatt, ebben a rétegben kell lennie valaminek, amit ki lehet vágni.
+Il faut quelque chose à découper sous la forme, dans ce groupe. ¦ Muodon alla tässä ryhmässä täytyy olla jotain rajattavaa. ¦ Az alakzat alatt, ebben a csoportban kell lennie valaminek, amit ki lehet vágni.
+Masque posé : on ne voit plus que ce qui est dans « {name} ». ¦ Maski asetettu: nyt näkyy vain se, mikä on kohteen ”{name}” sisällä. ¦ Maszk alkalmazva: már csak az látszik, ami a(z) „{name}” belsejében van.
+la forme ¦ muoto ¦ az alakzat
+« {name} » supprimé avec ce qu’il contient ¦ ”{name}” poistettu sisältöineen ¦ „{name}” törölve a tartalmával együtt
+Émail : {name} ¦ Väri: {name} ¦ Máz: {name}
+Le blasonnement est écrit en français héraldique. ¦ Vaakunaselitys on kirjoitettu ranskalaisella heraldisella kielellä. ¦ A címerleírás francia heraldikai nyelven van írva.
+Ajoute un meuble {name} seul, à placer où tu veux ¦ Lisää yksittäisen kuvion {name}, sijoitettavaksi minne haluat ¦ Egyetlen {name} címerképet ad hozzá, ahová szeretnéd
+{a} → {b} points. ¦ {a} → {b} pistettä. ¦ {a} → {b} pont.
+Plans de travail ({n}) ¦ Työpöydät ({n}) ¦ Munkalapok ({n})
+Ce dessin a plusieurs pages ({what}) : leur taille vient du pliage choisi. Tu peux changer ici le fond, l’unité et la résolution. ¦ Tässä piirroksessa on useita sivuja ({what}): niiden koko tulee valitusta taitosta. Täällä voit muuttaa taustaa, yksikköä ja tarkkuutta. ¦ Ennek a rajznak több oldala van ({what}): a méretük a választott hajtogatásból adódik. Itt módosíthatod a hátteret, a mértékegységet és a felbontást.
+Vectorisé : {what} ¦ Vektoroitu: {what} ¦ Vektorizálva: {what}
+{n} pages, une par face ¦ {n} sivua, yksi kullekin puolelle ¦ {n} oldal, oldalanként egy
+Image : {name} ¦ Kuva: {name} ¦ Kép: {name}
+« {name} » rangée dans les médias ¦ ”{name}” tallennettu mediaan ¦ „{name}” elmentve a médiába
+Pas rangée dans les médias ({err}) : l’image est posée dans le dessin seulement. ¦ Ei tallennettu mediaan ({err}): kuva on vain piirroksessa. ¦ Nincs elmentve a médiába ({err}): a kép csak a rajzban van.
+Ouvrir « {name} » à la place ? ¦ Avataanko ”{name}” sen sijaan? ¦ Inkább a(z) „{name}” megnyitása?
+Ma forme ¦ Oma muotoni ¦ Saját alakzatom
+Remplacer « {name} » ¦ Korvaa ”{name}” ¦ „{name}” cseréje
+Forme « {name} » enregistrée : elle est dans « Mes formes ». ¦ Muoto ”{name}” tallennettu: se on kohdassa ”Omat muodot”. ¦ „{name}” alakzat mentve: a „Saját alakzatok” között van.
+Image ajoutée aux armoiries « {name} ». ¦ Kuva lisätty vaakunaan ”{name}”. ¦ Kép hozzáadva a(z) „{name}” címerhez.
+L’image (PNG, nette, fond transparent) y est ajoutée. ¦ Kuva (PNG, terävä, läpinäkyvä tausta) lisätään siihen. ¦ A kép (PNG, éles, átlátszó háttér) hozzáadódik.
+L’image (PNG, nette, fond compris) y est ajoutée. ¦ Kuva (PNG, terävä, tausta mukana) lisätään siihen. ¦ A kép (PNG, éles, háttérrel együtt) hozzáadódik.
+=copié ¦ kopioitu|kopioitu ¦ másolva|másolva
+=copie transformée ¦ muunnettu kopio|muunnettua kopiota ¦ átalakított másolat|átalakított másolat
+=bloc @media ¦ @media-lohko|@media-lohkoa ¦ @media blokk|@media blokk
+=règle ¦ sääntö|sääntöä ¦ szabály|szabály
+=calque de plan créé ¦ karttataso luotu|karttatasoa luotu ¦ térképréteg létrehozva|térképréteg létrehozva
+Mot de passe ¦ Salasana ¦ Jelszó
+Écrans enregistrés ; {what} du CSS ont suivi. ¦ Näytöt tallennettu; CSS:n {what} seurasivat mukana. ¦ Képernyők mentve; a CSS {what} is követte.
+Écrans enregistrés ; {what} du CSS a suivi. ¦ Näytöt tallennettu; CSS:n {what} seurasi mukana. ¦ Képernyők mentve; a CSS {what} is követte.
+(accordéon exclusif) ¦ (yksinomainen haitari) ¦ (kizárólagos harmonika)
+(celle de la fiche, ou à choisir) ¦ (kortin oma tai valitse) ¦ (az adatlapé, vagy válassz)
+(réglé tout seul) ¦ (asetettu automaattisesti) ¦ (automatikusan beállítva)
+(se remplit avec ce qui est dessiné) ¦ (täyttyy piirretyllä) ¦ (a rajzoltakkal töltődik ki)
+* : avec des conditions, voir la norme. ¦ *: ehdoin, katso standardi. ¦ *: feltételekkel, lásd a szabványt.
+1 point de fuite (une rue vue de face) ¦ 1 pakopiste (katu edestä katsottuna) ¦ 1 iránypont (szemből látott utca)
+2 points (une maison vue de l’angle) ¦ 2 pistettä (talo kulmasta katsottuna) ¦ 2 pont (sarokból látott ház)
+60 styles au plus. ¦ Enintään 60 tyyliä. ¦ Legfeljebb 60 stílus.
+ARBRE DÉCORATIF ¦ KORISTEPUU ¦ DÍSZFA
+Aa Choisir… ¦ Aa Valitse… ¦ Aa Kiválasztás…
+Abbaye, prieuré ¦ Luostari, priorikunta ¦ Apátság, perjelség
+Accueil, notre arbre, la famille en chiffres, nous écrire ¦ Etusivu, sukupuumme, suku lukuina, ota yhteyttä ¦ Kezdőlap, a családfánk, a család számokban, írj nekünk
+Afficher ce champ sur le faire-part (décoché : gardé ici, mais pas imprimé) ¦ Näytä tämä kenttä ilmoituskortissa (ei valittu: säilyy tässä, mutta ei tulostu) ¦ A mező megjelenítése az értesítőn (nincs bejelölve: itt megmarad, de nem nyomtatódik)
+Affiché ¦ Näytetty ¦ Megjelenítve
+Aimanter : en glissant, les objets se collent aux bords et aux centres des autres (⌘ pour s’en passer) ¦ Magneettikohdistus: vedettäessä objektit tarttuvat muiden reunoihin ja keskikohtiin (⌘ ohittaa) ¦ Mágneses igazítás: húzáskor az objektumok a többi széléhez és közepéhez tapadnak (⌘ a kikapcsoláshoz)
+Aimanter à la grille ¦ Kohdista ruudukkoon ¦ Igazítás a rácshoz
+Ajoute un vrai bouton « Fermer ». ¦ Lisää oikea ”Sulje”-painike. ¦ Valódi „Bezárás” gomb hozzáadása.
+Aligner en bas ¦ Tasaa alas ¦ Igazítás alulra
+Aligner en haut ¦ Tasaa ylös ¦ Igazítás felülre
+Aligner par rapport au plan de travail ¦ Tasaa työpöydän mukaan ¦ Igazítás a munkalaphoz
+Aligner par rapport à la sélection ¦ Tasaa valinnan mukaan ¦ Igazítás a kijelöléshez
+Aligné ¦ Tasattu ¦ Igazítva
+Aller à un bloc @media du CSS ¦ Siirry CSS:n @media-lohkoon ¦ Ugrás a CSS egy @media blokkjához
+Allongé 11 × 22 cm ¦ Pitkä 11 × 22 cm ¦ Hosszú 11 × 22 cm
+Allongé DL 10 × 21 cm ¦ Pitkä DL 10 × 21 cm ¦ Hosszú DL 10 × 21 cm
+Allongés ¦ Pitkät ¦ Hosszúak
+Alt + flèches dans une case : ±10 px. Les valeurs vont là où dit « Appliquer à » (élément, classe, écran). ¦ Alt + nuolet ruudussa: ±10 px. Arvot menevät sinne, mihin ”Koskee” osoittaa (elementti, luokka, näyttö). ¦ Alt + nyilak egy mezőben: ±10 px. Az értékek oda kerülnek, ahová az „Alkalmazás erre” mutat (elem, osztály, képernyő).
+Anglaise entrelacée ¦ Lomittuva kaunokirjoitus ¦ Összefonódó angol kézírás
+Animations réduites ¦ Vähennetyt animaatiot ¦ Csökkentett animációk
+Années 50 ¦ 1950-luku ¦ Az 50-es évek
+Aperçu du fond ¦ Taustan esikatselu ¦ Háttér előnézete
+Aperçu du site ¦ Sivuston esikatselu ¦ Webhely előnézete
+Aperçu indisponible. ¦ Esikatselu ei käytettävissä. ¦ Az előnézet nem érhető el.
+Arbre dessiné (tronc et branches) ¦ Piirretty puu (runko ja oksat) ¦ Rajzolt fa (törzs és ágak)
+Arbre en cases (de bas en haut) ¦ Ruutupuu (alhaalta ylös) ¦ Dobozos fa (alulról felfelé)
+Au centre (horizontal) ¦ Keskelle (vaakasuunta) ¦ Középre (vízszintesen)
+Au milieu (vertical) ¦ Keskelle (pystysuunta) ¦ Középre (függőlegesen)
+Au naturel (brun) ¦ Luonnollinen (ruskea) ¦ Természetes (barna)
+Au plus ¦ Enintään ¦ Legfeljebb
+Auberge, café ¦ Majatalo, kahvila ¦ Fogadó, kávézó
+Aucun (l’aperçu seul) ¦ Ei mitään (vain esikatselu) ¦ Nincs (csak az előnézet)
+Aucun ancêtre trouvé. ¦ Esivanhempia ei löytynyt. ¦ Nem található felmenő.
+Aucun attribut ne correspond. ¦ Mikään määrite ei vastaa. ¦ Nincs megfelelő attribútum.
+Aucun dessin enregistré. ¦ Ei tallennettuja piirroksia. ¦ Nincs mentett rajz.
+Aucun élément ne correspond. ¦ Mikään elementti ei vastaa. ¦ Nincs megfelelő elem.
+Aucune propriété ne correspond. ¦ Mikään ominaisuus ei vastaa. ¦ Nincs megfelelő tulajdonság.
+Autour du centre de la sélection. Avec des copies, chaque copie reprend la transformation de la précédente (une frise, un dégradé de tailles…). ¦ Valinnan keskipisteen ympäri. Kopioissa kukin kopio toistaa edellisen muunnoksen (friisi, kokojen liukuma…). ¦ A kijelölés közepe körül. Másolatoknál minden másolat megismétli az előző átalakítását (fríz, méretátmenet…).
+Avancé ¦ Tuotu eteenpäin ¦ Előrébb hozva
+Bannière 150 × 50 ¦ Banneri 150 × 50 ¦ Szalagcím 150 × 50
+Bien plus épais ¦ Paljon paksumpi ¦ Sokkal vastagabb
+Blason créé ¦ Vaakuna luotu ¦ Címer létrehozva
+Blocs @media du CSS ¦ CSS:n @media-lohkot ¦ A CSS @media blokkjai
+Bourg, quartier bâti ¦ Taajama, rakennettu alue ¦ Mezőváros, beépített terület
+Bâtiment ou symbole ¦ Rakennus tai symboli ¦ Épület vagy szimbólum
+CALLIGRAPHIE ET SCEAUX ¦ KALLIGRAFIA JA SINETIT ¦ KALLIGRÁFIA ÉS PECSÉTEK
+CSS de la classe ou de l’id (édition rapide) ¦ Luokan tai id:n CSS (pikamuokkaus) ¦ Az osztály vagy id CSS-e (gyors szerkesztés)
+Cacher ce panneau (la languette sur le bord, ou ◧, le remet) ¦ Piilota tämä paneeli (reunan kieleke tai ◧ tuo sen takaisin) ¦ A panel elrejtése (a szélén lévő fül vagy a ◧ visszahozza)
+Cacher ce panneau (la languette sur le bord, ou ◨, le remet) ¦ Piilota tämä paneeli (reunan kieleke tai ◨ tuo sen takaisin) ¦ A panel elrejtése (a szélén lévő fül vagy a ◨ visszahozza)
+Cacher le panneau Ceci est ¦ Piilota Tämä on -paneeli ¦ Az „Ez” panel elrejtése
+Cacher le panneau de gauche ¦ Piilota vasen paneeli ¦ A bal panel elrejtése
+Cadastre napoléonien ¦ Napoleonin aikainen maarekisterikartta ¦ Napóleoni kataszter
+Cadre Art déco ¦ Art déco -kehys ¦ Art deco keret
+Cadre Art nouveau ¦ Jugendkehys ¦ Szecessziós keret
+Cadre Belle Époque ¦ Belle Époque -kehys ¦ Belle Époque keret
+Cadre du salon, toile 80 × 120… ¦ Olohuoneen kehys, kangas 80 × 120… ¦ Nappali kerete, vászon 80 × 120…
+Cadre et ornements ¦ Kehys ja koristeet ¦ Keret és díszítések
+Cadre à filets ¦ Viivakehys ¦ Vonalas keret
+Calques déjà là ¦ Jo olemassa olevat tasot ¦ Már meglévő rétegek
+Carré 100 × 100 ¦ Neliö 100 × 100 ¦ Négyzet 100 × 100
+Carré 12 × 12 cm ¦ Neliö 12 × 12 cm ¦ Négyzet 12 × 12 cm
+Carré 14 × 14 cm ¦ Neliö 14 × 14 cm ¦ Négyzet 14 × 14 cm
+Carré 17 × 17 cm ¦ Neliö 17 × 17 cm ¦ Négyzet 17 × 17 cm
+Carré 30 × 30 ¦ Neliö 30 × 30 ¦ Négyzet 30 × 30
+Carré 60 × 60 ¦ Neliö 60 × 60 ¦ Négyzet 60 × 60
+Carrée 14 × 14 cm ¦ Neliönmuotoinen 14 × 14 cm ¦ Négyzetes 14 × 14 cm
+Carrée 16 × 16 cm ¦ Neliönmuotoinen 16 × 16 cm ¦ Négyzetes 16 × 16 cm
+Carrée 17 × 17 cm ¦ Neliönmuotoinen 17 × 17 cm ¦ Négyzetes 17 × 17 cm
+Carrée 22 × 22 cm ¦ Neliönmuotoinen 22 × 22 cm ¦ Négyzetes 22 × 22 cm
+Carte 10 × 15 cm ¦ Kortti 10 × 15 cm ¦ Kártya 10 × 15 cm
+Carte 12 × 17 cm ¦ Kortti 12 × 17 cm ¦ Kártya 12 × 17 cm
+Carte 13 × 18 cm ¦ Kortti 13 × 18 cm ¦ Kártya 13 × 18 cm
+Carte 15 × 21 cm ¦ Kortti 15 × 21 cm ¦ Kártya 15 × 21 cm
+Carte 16 × 22 cm ¦ Kortti 16 × 22 cm ¦ Kártya 16 × 22 cm
+Carte des lieux ¦ Paikkojen kartta ¦ Helyek térképe
+Carte moderne ¦ Nykyaikainen kartta ¦ Modern térkép
+Carte simple ¦ Yksinkertainen kortti ¦ Egyszerű kártya
+Cartouche à enroulements ¦ Kiemuroitu kartussi ¦ Tekercses kartus
+Cases vides (ancêtres à trouver) ¦ Tyhjät ruudut (löydettävät esivanhemmat) ¦ Üres dobozok (megtalálandó felmenők)
+Ce fichier n’est pas un SVG lisible. ¦ Tämä tiedosto ei ole luettava SVG. ¦ Ez a fájl nem olvasható SVG.
+Ce navigateur n’a pas pu s’ouvrir. ¦ Tätä selainta ei voitu avata. ¦ Ezt a böngészőt nem sikerült megnyitni.
+Ce qui n’est pas enregistré sera perdu. ¦ Tallentamaton menetetään. ¦ Ami nincs mentve, elvész.
+Ceci est… (nom, balise, classe, id) ¦ Tämä on… (nimi, tagi, luokka, id) ¦ Ez… (név, címke, osztály, id)
+Centrer sur le plan de travail ¦ Keskitä työpöydälle ¦ Középre a munkalapon
+Ces formes ne se mélangent pas. ¦ Nämä muodot eivät sekoitu. ¦ Ezek az alakzatok nem keverhetők.
+Cet élément seulement ¦ Vain tämä elementti ¦ Csak ez az elem
+Cette adresse n’est pas permise (data:…). ¦ Tämä osoite ei ole sallittu (data:…). ¦ Ez a cím nem engedélyezett (data:…).
+Cette adresse n’est pas permise (javascript:, data:…). ¦ Tämä osoite ei ole sallittu (javascript:, data:…). ¦ Ez a cím nem engedélyezett (javascript:, data:…).
+Cette adresse n’est pas permise (javascript:…). ¦ Tämä osoite ei ole sallittu (javascript:…). ¦ Ez a cím nem engedélyezett (javascript:…).
+Changer l’affichage des fichiers ¦ Vaihda tiedostojen näyttötapaa ¦ A fájlok megjelenítésének módosítása
+Chercher : titre, lien, tableau, h2… ¦ Hae: otsikko, linkki, taulukko, h2… ¦ Keresés: címsor, hivatkozás, táblázat, h2…
+Chercher dans l’aide-mémoire ¦ Hae muistilistasta ¦ Keresés a puskában
+Chercher un ornement ¦ Hae koristetta ¦ Díszítés keresése
+Chercher une signature ¦ Hae allekirjoitusta ¦ Aláírás keresése
+Chercher… (fleuron, coin, déco) ¦ Hae… (kukkakoriste, kulma, koriste) ¦ Keresés… (virágdísz, sarok, dekor)
+Choisir le parent ¦ Valitse yläelementti ¦ A szülő kijelölése
+Choisir l’élément qui le contient ¦ Valitse elementti, joka sisältää sen ¦ Az őt tartalmazó elem kijelölése
+Choisir un élément de la page ¦ Valitse sivun elementti ¦ Egy elem kijelölése az oldalon
+Choisis au moins deux formes. ¦ Valitse vähintään kaksi muotoa. ¦ Jelölj ki legalább két alakzatot.
+Choisis au moins deux objets. ¦ Valitse vähintään kaksi objektia. ¦ Jelölj ki legalább két objektumot.
+Choisis d’abord des objets. ¦ Valitse ensin objekteja. ¦ Előbb jelölj ki objektumokat.
+Choisis d’abord l’image d’un acte. ¦ Valitse ensin asiakirjan kuva. ¦ Előbb válaszd ki egy anyakönyvi bejegyzés képét.
+Choisis d’abord un objet. ¦ Valitse ensin objekti. ¦ Előbb jelölj ki egy objektumot.
+Choisis d’abord un ou plusieurs objets. ¦ Valitse ensin yksi tai useampi objekti. ¦ Előbb jelölj ki egy vagy több objektumot.
+Choisis exactement deux formes (rectangle, ellipse, étoile, tracé…). ¦ Valitse tasan kaksi muotoa (suorakulmio, ellipsi, tähti, polku…). ¦ Jelölj ki pontosan két alakzatot (téglalap, ellipszis, csillag, útvonal…).
+Choisis un fichier ou une image. ¦ Valitse tiedosto tai kuva. ¦ Válassz egy fájlt vagy képet.
+Choisis un lieu : la carte s’affiche ici. ¦ Valitse paikka: kartta näkyy tässä. ¦ Válassz egy helyet: a térkép itt jelenik meg.
+Choisis un modèle : tu pourras tout changer ensuite, en glissant des blocs ou dans le code. ¦ Valitse malli: voit muuttaa kaiken myöhemmin vetämällä lohkoja tai koodissa. ¦ Válassz egy sablont: utána mindent módosíthatsz, blokkok húzásával vagy a kódban.
+Choisis un objet (outil Sélection) pour changer ses couleurs, son trait, sa taille. Les couleurs ci-dessous seront celles des prochaines formes. ¦ Valitse objekti (Valinta-työkalu) muuttaaksesi sen värejä, viivaa ja kokoa. Alla olevia värejä käytetään seuraaviin muotoihin. ¦ Jelölj ki egy objektumot (Kijelölés eszköz) a színei, vonala, mérete módosításához. Az alábbi színek lesznek a következő alakzatokéi.
+Choisis un objet qui a un contour. ¦ Valitse objekti, jolla on ääriviiva. ¦ Jelölj ki egy körvonallal rendelkező objektumot.
+Château ¦ Linna ¦ Kastély
+Clic : choisir un élément (« Ceci est… ») · double-clic sur un texte : l’écrire · glisse un bloc depuis ＋ Blocs ¦ Napsautus: valitse elementti (”Tämä on…”) · kaksoisnapsautus tekstiin: kirjoita se · vedä lohko kohdasta ＋ Lohkot ¦ Kattintás: elem kijelölése („Ez…”) · dupla kattintás egy szövegre: írás · húzz egy blokkot a ＋ Blokkokból
+Clique sur un élément de l’aperçu (ou dans le code) : il dira ce qu’il est, par exemple « header.site-entete ». Tu pourras lui donner un nom, une classe, un id, des couleurs. ¦ Napsauta esikatselun elementtiä (tai koodissa): se kertoo, mikä se on, esimerkiksi ”header.site-entete”. Voit antaa sille nimen, luokan, id:n, värit. ¦ Kattints egy elemre az előnézetben (vagy a kódban): megmondja, mi az, például „header.site-entete”. Adhatsz neki nevet, osztályt, id-t, színeket.
+Coche ou décoche un champ pour l’afficher ou le masquer, ↑ ↓ pour le ranger, 🗑 pour l’enlever. Le faire-part s’ouvre ensuite dans le dessin vectoriel : tout se retouche (textes, couleurs, polices, ornements), puis « ⤓ Exporter » (PDF, image, impression, recto-verso sur A4). ¦ Valitse kenttä tai poista valinta näyttääksesi tai piilottaaksesi sen, ↑ ↓ järjestää, 🗑 poistaa sen. Ilmoituskortti avautuu sitten vektoripiirrokseen: kaikkea voi hioa (tekstit, värit, fontit, koristeet), sitten ”⤓ Vie” (PDF, kuva, tulostus, kaksipuolinen A4:lle). ¦ Jelölj be vagy vedd ki egy mezőt a megjelenítéséhez vagy elrejtéséhez, ↑ ↓ a sorrendhez, 🗑 a törléséhez. Az értesítő ezután a vektorrajzban nyílik meg: minden finomítható (szövegek, színek, betűtípusok, díszítések), majd „⤓ Exportálás” (PDF, kép, nyomtatás, kétoldalas A4-re).
+Code du site ¦ Sivuston koodi ¦ A webhely kódja
+Coin Art déco ¦ Art déco -kulma ¦ Art deco sarok
+Coin Art nouveau ¦ Jugendkulma ¦ Szecessziós sarok
+Coin fleuronné ¦ Kukkakoristeinen kulma ¦ Virágdíszes sarok
+Coin perlé ¦ Helmikulma ¦ Gyöngyös sarok
+Coin à filet arrondi ¦ Pyöristetty viivakulma ¦ Lekerekített vonalas sarok
+Coin à volutes ¦ Kiemurakulma ¦ Csigavonalas sarok
+Colle ton jeton ici ¦ Liitä tunnuksesi tähän ¦ Illeszd be ide a tokenedet
+Collé ¦ Liitetty ¦ Beillesztve
+Comme Tailwind, en montant (640, 768, 1024, 1280) ¦ Kuten Tailwind, nousevasti (640, 768, 1024, 1280) ¦ Mint a Tailwind, növekvő sorrendben (640, 768, 1024, 1280)
+Comme l’original ¦ Kuten alkuperäisessä ¦ Mint az eredetiben
+Commencer un nouveau dessin ? ¦ Aloitetaanko uusi piirros? ¦ Új rajzot kezdesz?
+Comment colorer les cases : côté du père et côté de la mère, hommes et femmes, une teinte qui pâlit à chaque génération, ou une seule couleur (pour imprimer). ¦ Miten ruudut väritetään: isän ja äidin puoli, miehet ja naiset, jokaisessa sukupolvessa vaaleneva sävy tai yksi väri (tulostamista varten). ¦ Hogyan színezd a dobozokat: apai és anyai ág, férfiak és nők, nemzedékenként halványuló árnyalat, vagy egyetlen szín (nyomtatáshoz).
+Commenter, décommenter ¦ Kommentoi, poista kommentointi ¦ Megjegyzésbe tesz, kiveszi
+Contour du trait → forme ¦ Viivan ääriviiva → muoto ¦ Vonal körvonala → alakzat
+Contour par défaut ¦ Oletusääriviiva ¦ Alapértelmezett körvonal
+Convertir en tracé ¦ Muunna poluksi ¦ Átalakítás útvonallá
+Convertir en tracé (points modifiables) ¦ Muunna poluksi (muokattavat pisteet) ¦ Átalakítás útvonallá (szerkeszthető pontok)
+Copie impossible ici. ¦ Kopiointi ei onnistu tässä. ¦ Itt nem lehet másolni.
+Couleur libre : n’importe quelle couleur ¦ Vapaa väri: mikä tahansa väri ¦ Szabad szín: bármilyen szín
+Coupé ¦ Katkaistu ¦ Vágott
+Courbes lissées ¦ Pehmennetyt käyrät ¦ Simított görbék
+Cours d’eau, lac ¦ Vesistö, järvi ¦ Vízfolyás, tó
+Croix fleuronnée ¦ Kukkakoristeinen risti ¦ Virágdíszes kereszt
+Créer et ouvrir dans le dessin ¦ Luo ja avaa piirroksessa ¦ Létrehozás és megnyitás a rajzban
+Créer la page ¦ Luo sivu ¦ Oldal létrehozása
+Créer l’arbre ¦ Luo puu ¦ Fa létrehozása
+Créer l’élément ¦ Luo elementti ¦ Elem létrehozása
+Créer un style (à partir de celui choisi) ¦ Luo tyyli (valitun pohjalta) ¦ Stílus létrehozása (a kiválasztott alapján)
+Cul-de-lampe en triangle ¦ Kolmion muotoinen loppukoriste ¦ Háromszög alakú záródísz
+Cérémonie ¦ Seremonia ¦ Szertartás
+Cérémonie, réception ¦ Seremonia, vastaanotto ¦ Szertartás, fogadás
+Côte à côte ou l’un au-dessus de l’autre ¦ Vierekkäin tai päällekkäin ¦ Egymás mellett vagy egymás alatt
+Côte, rivage ¦ Rannikko, ranta ¦ Partvidék, part
+Cœur fleuronné ¦ Kukkakoristeinen sydän ¦ Virágdíszes szív
+Dans l’export ¦ Viennissä ¦ Az exportban
+Date et lieu ¦ Päivämäärä ja paikka ¦ Dátum és hely
+Date, heure, lieu ¦ Päivämäärä, kellonaika, paikka ¦ Dátum, időpont, hely
+Dates complètes ¦ Täydelliset päivämäärät ¦ Teljes dátumok
+De qui est cette signature ? ¦ Kenen allekirjoitus tämä on? ¦ Kinek az aláírása ez?
+Des copies tournent autour d’un centre (une rosace, une couronne de meubles autour d’un écu…). Le tout devient un groupe. ¦ Kopiot kiertävät keskipisteen ympäri (ruusuke, kuviokehä kilven ympärillä…). Kokonaisuudesta tulee ryhmä. ¦ Másolatok forognak egy középpont körül (rozetta, címerképek koszorúja egy pajzs körül…). Az egész csoporttá válik.
+Descendre l’élément ¦ Siirrä elementtiä alaspäin ¦ Elem mozgatása lefelé
+Deux fichiers (côte à côte ou l’un au-dessus de l’autre) ¦ Kaksi tiedostoa (vierekkäin tai päällekkäin) ¦ Két fájl (egymás mellett vagy egymás alatt)
+Deux fichiers : côte à côte ou l’un au-dessus de l’autre ¦ Kaksi tiedostoa: vierekkäin tai päällekkäin ¦ Két fájl: egymás mellett vagy egymás alatt
+Deuxième fichier ¦ Toinen tiedosto ¦ Második fájl
+Dis ce que c’est : « c’est mon en-tête, mon menu… » ¦ Kerro, mikä se on: ”se on ylätunnisteeni, valikkoni…” ¦ Mondd meg, mi ez: „ez a fejlécem, a menüm…”
+Dissocié ¦ Ryhmitys purettu ¦ Csoportbontás kész
+Distance au centre (si « sous la sélection ») ¦ Etäisyys keskipisteestä (jos ”valinnan alla”) ¦ Távolság a középponttól (ha „a kijelölés alatt”)
+Donne un nom aux armoiries. ¦ Anna vaakunalle nimi. ¦ Adj nevet a címernek.
+Dossier css/ — déposer un fichier ici pour l’y ranger ¦ Kansio css/ — pudota tiedosto tähän siirtääksesi sen sinne ¦ css/ mappa — dobj ide egy fájlt, hogy oda kerüljön
+Dossier js/ — déposer un fichier ici pour l’y ranger ¦ Kansio js/ — pudota tiedosto tähän siirtääksesi sen sinne ¦ js/ mappa — dobj ide egy fájlt, hogy oda kerüljön
+Dupliquer la ligne ¦ Monista rivi ¦ Sor megkettőzése
+Dupliquer l’élément ¦ Monista elementti ¦ Elem megkettőzése
+Décalage ¦ Siirtymä ¦ Eltolás
+Décaler le fond (d’un dixième de sa largeur) ¦ Siirrä taustaa (kymmenesosa sen leveydestä) ¦ A háttér eltolása (a szélessége tizedével)
+Déplacé dedans ¦ Siirretty sisään ¦ Beljebb helyezve
+Déplier / replier ¦ Avaa / sulje ¦ Kinyitás / becsukás
+Déverrouillé ¦ Lukitus avattu ¦ Feloldva
+D’après la norme HTML du WHATWG (CC BY 4.0), traduit. ¦ WHATWG:n HTML-standardin pohjalta (CC BY 4.0), käännetty. ¦ A WHATWG HTML-szabványa alapján (CC BY 4.0), fordítva.
+D’après la norme HTML du WHATWG (CC BY 4.0), traduit. Les on… (onclick) vont dans le JS du site. ¦ WHATWG:n HTML-standardin pohjalta (CC BY 4.0), käännetty. on…-määritteet (onclick) kuuluvat sivuston JS:ään. ¦ A WHATWG HTML-szabványa alapján (CC BY 4.0), fordítva. Az on… attribútumok (onclick) a webhely JS-ébe kerülnek.
+D’après une personne ¦ Henkilön perusteella ¦ Egy személy alapján
+Effacer les lignes du registre ¦ Poista rekisterin viivat ¦ Az anyakönyv vonalainak eltávolítása
+Effacer les petites taches ¦ Poista pienet tahrat ¦ Apró foltok eltávolítása
+Effilé aux deux bouts ¦ Kapeneva molemmista päistä ¦ Mindkét végén elvékonyodó
+Elle montre tout seul ce qui est dessiné. ¦ Se näyttää itsestään sen, mitä on piirretty. ¦ Magától mutatja, amit rajzoltál.
+En bas de chaque page ¦ Jokaisen sivun alalaidassa ¦ Minden oldal alján
+En déplaçant, en agrandissant ou en dessinant, l’objet s’aimante aux bords et aux centres des autres objets, du plan de travail et des pages ; un trait rose le montre. ⌘ (ou Ctrl) maintenu : sans aimant. ¦ Siirrettäessä, suurennettaessa tai piirrettäessä objekti tarttuu muiden objektien, työpöydän ja sivujen reunoihin ja keskikohtiin; vaaleanpunainen viiva näyttää sen. ⌘ (tai Ctrl) pohjassa: ei magneettia. ¦ Mozgatáskor, átméretezéskor vagy rajzoláskor az objektum a többi objektum, a munkalap és az oldalak széleihez és közepéhez tapad; egy rózsaszín vonal mutatja. Nyomva tartott ⌘ (vagy Ctrl): mágnes nélkül.
+En faire un écran ¦ Tee siitä näyttö ¦ Képernyő létrehozása belőle
+En-tête, carte de la famille… ¦ Ylätunniste, perheen kortti… ¦ Fejléc, családi kártya…
+Encre sépia ¦ Seepiamuste ¦ Szépia tinta
+Enlever ce champ ¦ Poista tämä kenttä ¦ Mező eltávolítása
+Enregistrer ce site avant d’en ouvrir un autre ? ¦ Tallennetaanko tämä sivusto ennen toisen avaamista? ¦ Mented ezt a webhelyet, mielőtt egy másikat megnyitsz?
+Enregistrer comme forme ¦ Tallenna muotona ¦ Mentés alakzatként
+Enregistrer comme image d’armoiries ¦ Tallenna vaakunakuvana ¦ Mentés címerképként
+Enregistrer dans les médias d’une fiche ¦ Tallenna kortin mediaan ¦ Mentés egy adatlap médiái közé
+Enregistrer le dessin ¦ Tallenna piirros ¦ Rajz mentése
+Envoi dans les médias… ¦ Lähetetään mediaan… ¦ Küldés a médiába…
+Espace en haut et en bas des sections ¦ Tila osioiden ylä- ja alapuolella ¦ Térköz a szakaszok fölött és alatt
+Espace entre colonnes et photos ¦ Tila palstojen ja kuvien välillä ¦ Térköz a hasábok és fényképek között
+Espace intérieur des cartes ¦ Korttien sisätila ¦ A kártyák belső margója
+Espace intérieur, les 4 côtés d’un coup ¦ Sisätila, kaikki 4 sivua kerralla ¦ Belső margó, mind a 4 oldal egyszerre
+Espace sous les paragraphes ¦ Tila kappaleiden alla ¦ Térköz a bekezdések alatt
+Espace sous les titres ¦ Tila otsikoiden alla ¦ Térköz a címsorok alatt
+Espacement des lettres ¦ Merkkiväli ¦ Betűköz
+Existe depuis (année) ¦ Olemassa vuodesta ¦ Létezik (évtől)
+Exporter : PDF, images, SVG, impression, fichier du dessin ¦ Vie: PDF, kuvat, SVG, tulostus, piirrostiedosto ¦ Exportálás: PDF, képek, SVG, nyomtatás, rajzfájl
+Expression régulière ¦ Säännöllinen lauseke ¦ Reguláris kifejezés
+Expéditeur ¦ Lähettäjä ¦ Feladó
+Expéditeur (en haut à gauche) ¦ Lähettäjä (vasemmalla ylhäällä) ¦ Feladó (bal felül)
+FAIRE-PART ET AFFICHES ¦ ILMOITUSKORTIT JA JULISTEET ¦ ÉRTESÍTŐK ÉS PLAKÁTOK
+FTP sécurisé ¦ Suojattu FTP ¦ Biztonságos FTP
+Fermer la recherche ¦ Sulje haku ¦ Keresés bezárása
+Fermer l’onglet ¦ Sulje välilehti ¦ Lap bezárása
+Fermer l’onglet (le fichier reste dans le site) ¦ Sulje välilehti (tiedosto jää sivustoon) ¦ Lap bezárása (a fájl a webhelyen marad)
+Fermer sans enregistrer le dessin ? ¦ Suljetaanko tallentamatta piirrosta? ¦ Bezárod a rajz mentése nélkül?
+Feuillage (arbre dessiné) ¦ Lehvästö (piirretty puu) ¦ Lombozat (rajzolt fa)
+Feuille d’acanthe ¦ Akantuksenlehti ¦ Akantuszlevél
+Fiche affichée ¦ Näytetty kortti ¦ Megjelenített adatlap
+Fichier du deuxième éditeur ¦ Toisen editorin tiedosto ¦ A második szerkesztő fájlja
+Fichier trop gros (25 Mo au plus). ¦ Tiedosto on liian suuri (enintään 25 Mt). ¦ Túl nagy fájl (legfeljebb 25 MB).
+Fichiers du site ¦ Sivuston tiedostot ¦ A webhely fájljai
+Fichiers en onglets (comme Phoenix Code) ¦ Tiedostot välilehdillä (kuten Phoenix Code) ¦ Fájlok lapokon (mint a Phoenix Code-ban)
+Fichiers en trois boutons (HTML / CSS / JS) ¦ Tiedostot kolmena painikkeena (HTML / CSS / JS) ¦ Fájlok három gombként (HTML / CSS / JS)
+Filet Art déco ¦ Art déco -viiva ¦ Art deco vonal
+Filet au fleuron ¦ Viiva kukkakoristeella ¦ Vonal virágdísszel
+Filet au losange ¦ Viiva vinoneliöllä ¦ Vonal rombusszal
+Filet ondulé ¦ Aaltoileva viiva ¦ Hullámos vonal
+Filet perlé ¦ Helmiviiva ¦ Gyöngyös vonal
+Filet à volutes ¦ Kiemuraviiva ¦ Csigavonalas vonal
+Fleurons, cadres Belle Époque, Art nouveau, Art déco, coins, filets, culs-de-lampe, lettrines. Clique pour poser au centre, ou glisse sur le dessin ; la palette « Couleur » les recolore ensuite. ¦ Kukkakoristeet, Belle Époque-, jugend- ja art déco -kehykset, kulmat, viivat, loppukoristeet, anfangit. Napsauta asettaaksesi keskelle tai vedä piirrokseen; ”Väri”-paletti värittää ne sen jälkeen uudelleen. ¦ Virágdíszek, Belle Époque, szecessziós és art deco keretek, sarkok, vonalak, záródíszek, iniciálék. Kattints a középre helyezéshez, vagy húzd a rajzra; a „Szín” paletta utána átszínezi őket.
+Fond du plan ¦ Kartan tausta ¦ A térkép háttere
+Fond décalé ¦ Tausta siirretty ¦ Háttér eltolva
+Format de l’enveloppe ¦ Kirjekuoren koko ¦ A boríték mérete
+Format d’image non lu par ce navigateur. ¦ Tämä selain ei lue tätä kuvamuotoa. ¦ Ez a böngésző nem olvassa ezt a képformátumot.
+Forme au départ ¦ Alkuperäinen muoto ¦ Kezdő alakzat
+Forme, format, style, cases… reviennent comme au départ. ¦ Muoto, koko, tyyli, ruudut… palautuvat alkuperäisiksi. ¦ Az alak, méret, stílus, dobozok… visszaállnak az alapra.
+Forêt, bois ¦ Metsä, lehto ¦ Erdő, liget
+Frontière ¦ Raja ¦ Határ
+Garde-en au moins un. ¦ Säilytä vähintään yksi. ¦ Tarts meg legalább egyet.
+Gironné ¦ Kiilajaettu ¦ Ékekre osztott
+GitHub Pages met ton site à l’adresse « ton-compte.github.io/nom-du-depot ». Crée un jeton dans GitHub → Settings → Developer settings → « Fine-grained tokens », avec les droits « Contents » et « Pages » en lecture et écriture (et « Administration » si le dépôt n’existe pas encore). ¦ GitHub Pages julkaisee sivustosi osoitteessa ”tilisi.github.io/repositorion-nimi”. Luo tunnus GitHubissa → Settings → Developer settings → ”Fine-grained tokens”, ja anna oikeudet ”Contents” ja ”Pages” luku- ja kirjoitusoikeuksin (ja ”Administration”, jos repositoriota ei vielä ole). ¦ A GitHub Pages a „fiókod.github.io/tároló-neve” címre teszi a webhelyedet. Hozz létre egy tokent a GitHubon → Settings → Developer settings → „Fine-grained tokens”, olvasási és írási joggal a „Contents” és „Pages” részekhez (és „Administration” joggal, ha a tároló még nem létezik).
+Glisse pour dessiner la forme · ⇧ : carré, cercle, angle droit ¦ Vedä piirtääksesi muodon · ⇧: neliö, ympyrä, suora kulma ¦ Húzd az alakzat rajzolásához · ⇧: négyzet, kör, derékszög
+Glisse un bloc dans l’aperçu, ou clique pour l’ajouter après l’élément choisi. ¦ Vedä lohko esikatseluun tai napsauta lisätäksesi sen valitun elementin jälkeen. ¦ Húzz egy blokkot az előnézetbe, vagy kattints, hogy a kijelölt elem után kerüljön.
+Glisse une ligne sur un groupe pour l’y ranger (il devient bleu), entre deux lignes pour changer l’ordre ; ou sélectionne puis « 📁 Ranger dans… ». Double-clic sur un nom pour le renommer. ✂️ : la forme la plus haute du groupe ou du calque le découpe (masque), 2e clic pour le retirer. ○ : travailler dans ce calque ou ce groupe. Dans le dessin : double-clic sur un groupe pour y entrer, Échap pour en sortir. ¦ Vedä rivi ryhmän päälle siirtääksesi sen sinne (ryhmä muuttuu siniseksi), kahden rivin väliin muuttaaksesi järjestystä; tai valitse ja sitten ”📁 Siirrä kohteeseen…”. Kaksoisnapsauta nimeä nimetäksesi sen uudelleen. ✂️: ryhmän tai tason ylin muoto rajaa sen (maski), toinen napsautus poistaa sen. ○: työskentele tässä tasossa tai ryhmässä. Piirroksessa: kaksoisnapsauta ryhmää mennäksesi sisään, Esc poistuu. ¦ Húzz egy sort egy csoportra, hogy belekerüljön (kékre vált), két sor közé a sorrend módosításához; vagy jelöld ki, majd „📁 Áthelyezés ide…”. Dupla kattintás egy névre az átnevezéshez. ✂️: a csoport vagy réteg legfelső alakzata kivágja (maszk), második kattintás az eltávolításhoz. ○: munka ebben a rétegben vagy csoportban. A rajzon: dupla kattintás egy csoportra a belépéshez, Esc a kilépéshez.
+Glisser pour élargir ou rétrécir le panneau (double-clic : taille d’origine) ¦ Vedä levittääksesi tai kaventaaksesi paneelia (kaksoisnapsautus: alkuperäinen koko) ¦ Húzd a panel szélesítéséhez vagy keskenyítéséhez (dupla kattintás: eredeti méret)
+Goutte et volutes ¦ Pisara ja kiemurat ¦ Csepp és csigavonalak
+Grand téléphone ¦ Suuri puhelin ¦ Nagy telefon
+Grand écran ¦ Suuri näyttö ¦ Nagy képernyő
+Grille d’échelle ¦ Mittakaavaruudukko ¦ Méretarány-rács
+Grille d’échelle pendant le dessin ¦ Mittakaavaruudukko piirrettäessä ¦ Méretarány-rács rajzolás közben
+Grille et repères ¦ Ruudukko ja apuviivat ¦ Rács és segédvonalak
+Groupé ¦ Ryhmitetty ¦ Csoportosítva
+Gérer les écrans ¦ Hallitse näyttöjä ¦ Képernyők kezelése
+Gérer les écrans (@media)… ¦ Hallitse näyttöjä (@media)… ¦ Képernyők kezelése (@media)…
+Gérer les écrans : points de rupture et @media (largeurs, orientation, mode sombre, impression…) ¦ Hallitse näyttöjä: keskeytyspisteet ja @media (leveydet, suunta, tumma tila, tulostus…) ¦ Képernyők kezelése: töréspontok és @media (szélességek, tájolás, sötét mód, nyomtatás…)
+Gérer les écrans… ¦ Hallitse näyttöjä… ¦ Képernyők kezelése…
+Hachures héraldiques ¦ Heraldiset viivoitukset ¦ Heraldikai sraffozás
+Hameau, lieu-dit ¦ Kylänosa, paikannimi ¦ Tanya, dűlő
+Héritée ¦ Periytyvä ¦ Öröklődő
+Il faut au moins trois objets. ¦ Tarvitaan vähintään kolme objektia. ¦ Legalább három objektum kell.
+Il faut des formes ou des tracés (pas seulement du texte ou des images). ¦ Tarvitaan muotoja tai polkuja (ei pelkkää tekstiä tai kuvia). ¦ Alakzatok vagy útvonalak kellenek (nem csak szöveg vagy képek).
+Image ajustée ¦ Kuva sovitettu ¦ Kép igazítva
+Image copiée. ¦ Kuva kopioitu. ¦ Kép másolva.
+Image refusée. ¦ Kuva hylätty. ¦ Kép elutasítva.
+Importe d’abord une image (Fichier → Importer), puis choisis-la. ¦ Tuo ensin kuva (Tiedosto → Tuo) ja valitse se sitten. ¦ Előbb importálj egy képet (Fájl → Importálás), majd jelöld ki.
+Intervertir remplissage et contour (⇧X) ¦ Vaihda täyttö ja ääriviiva keskenään (⇧X) ¦ Kitöltés és körvonal felcserélése (⇧X)
+Intérieur 1 ¦ Sisäpuoli 1 ¦ Belső 1
+Intérieur 2 ¦ Sisäpuoli 2 ¦ Belső 2
+Intérieur 3 ¦ Sisäpuoli 3 ¦ Belső 3
+Intérieur 4 ¦ Sisäpuoli 4 ¦ Belső 4
+Intérieur droit ¦ Sisäpuoli oikea ¦ Belső jobb
+Intérieur gauche ¦ Sisäpuoli vasen ¦ Belső bal
+Intérieur milieu ¦ Sisäpuoli keski ¦ Belső közép
+Inverser l’aperçu et le code ¦ Vaihda esikatselu ja koodi keskenään ¦ Előnézet és kód felcserélése
+JS du site ¦ Sivuston JS ¦ Webhely JS
+La bibliothèque d’ornements n’est pas chargée. ¦ Koristekirjastoa ei ole ladattu. ¦ A díszítéstár nincs betöltve.
+La carte du lieu se pose sous le dessin, en transparence, à la taille du plan de travail : décalque les rues, les rivières, les maisons. Le plan est alors « situé » : l’échelle est juste et les lieux de ta base peuvent s’y placer. ¦ Paikan kartta asettuu piirroksen alle läpikuultavana työpöydän kokoisena: jäljennä kadut, joet, talot. Kartta on silloin ”paikannettu”: mittakaava on oikea ja tietokantasi paikat voidaan sijoittaa siihen. ¦ A hely térképe a rajz alá kerül, áttetszően, a munkalap méretében: rajzold át az utcákat, folyókat, házakat. A térkép ekkor „elhelyezett”: a lépték pontos, és az adatbázisod helyei rákerülhetnek.
+La fenêtre d’export n’est pas chargée. ¦ Vientiikkunaa ei ole ladattu. ¦ Az exportálási ablak nincs betöltve.
+La largeur de l’aperçu quand on choisit cet écran ¦ Esikatselun leveys, kun tämä näyttö valitaan ¦ Az előnézet szélessége, amikor ezt a képernyőt választod
+La lettre du nom au milieu, plus grande (3 initiales) ¦ Sukunimen kirjain keskellä, suurempana (3 nimikirjainta) ¦ A családnév betűje középen, nagyobban (3 kezdőbetű)
+La lettrine ¦ Anfangi ¦ Az iniciálé
+La page ¦ Sivu ¦ Az oldal
+La photo du faire-part ¦ Ilmoituskortin kuva ¦ Az értesítő fényképe
+La racine du site ¦ Sivuston juuri ¦ A webhely gyökere
+La taille, le fond, la grille et les couleurs par défaut, gardés sous un nom. ¦ Koko, tausta, ruudukko ja oletusvärit nimellä tallennettuina. ¦ A méret, háttér, rács és alapszínek egy név alatt megőrizve.
+La vérification des navigateurs n’est pas chargée. ¦ Selaintarkistusta ei ole ladattu. ¦ A böngészőellenőrzés nincs betöltve.
+Lac, étang, mare ¦ Järvi, lampi, allikko ¦ Tó, halastó, pocsolya
+Largeur au plus (0 = toute) ¦ Enimmäisleveys (0 = koko) ¦ Legnagyobb szélesség (0 = teljes)
+Largeur du contenu ¦ Sisällön leveys ¦ A tartalom szélessége
+Le nombre de rangées d’ancêtres, la personne comptant pour la première. Au-delà de 7, choisis un grand format (A2, A1…) pour que les noms restent lisibles. ¦ Esivanhempien rivien määrä, henkilö itse lasketaan ensimmäiseksi. Yli 7:n valitse suuri koko (A2, A1…), jotta nimet pysyvät luettavina. ¦ A felmenők sorainak száma, a személy maga számít az elsőnek. 7 fölött válassz nagy méretet (A2, A1…), hogy a nevek olvashatók maradjanak.
+Les ancêtres d’une personne (2 à 5 générations) ¦ Henkilön esivanhemmat (2–5 sukupolvea) ¦ Egy személy felmenői (2–5 nemzedék)
+Les blocs « Ma généalogie » sont remplis par l’app et figés à l’export : jamais de personne vivante ni de fiche confidentielle. ¦ ”Oma sukututkimukseni” -lohkot sovellus täyttää ja ne jäädytetään viennissä: ei koskaan elävää henkilöä eikä luottamuksellista korttia. ¦ A „Saját családfám” blokkokat az alkalmazás tölti ki, és exportáláskor rögzülnek: soha nem szerepel élő személy vagy bizalmas adatlap.
+Les liens vers les pages, tenus à jour ¦ Linkit sivuille, pidetään ajan tasalla ¦ Hivatkozások az oldalakra, naprakészen tartva
+Les lieux d’une personne (ou de ses ancêtres) ¦ Henkilön paikat (tai hänen esivanhempiensa) ¦ Egy személy helyei (vagy a felmenőié)
+Les noms, dates, lieux et parents de la fiche remplissent les champs ; relis-les et complète avant de créer. ¦ Kortin nimet, päivämäärät, paikat ja vanhemmat täyttävät kentät; lue ne ja täydennä ennen luomista. ¦ Az adatlap nevei, dátumai, helyei és szülei kitöltik a mezőket; nézd át és egészítsd ki őket létrehozás előtt.
+Les objets s’alignent entre eux ¦ Objektit tasautuvat toisiinsa ¦ Az objektumok egymáshoz igazodnak
+Les objets s’alignent sur le plan de travail (ou la page, le volet où ils sont) ¦ Objektit tasautuvat työpöytään (tai sivuun tai paneeliin, jolla ne ovat) ¦ Az objektumok a munkalaphoz igazodnak (vagy az oldalhoz, panelhez, amelyen vannak)
+Les points d’encre plus petits que cette taille sont effacés (poussières, piqûres du papier). ¦ Tätä pienemmät mustepisteet poistetaan (pöly, paperin ruostepilkut). ¦ Az ennél kisebb tintapöttyök törlődnek (por, a papír foltjai).
+Les raccourcis ¦ Pikanäppäimet ¦ Billentyűparancsok
+Les versions viennent d’une liste intégrée à l’app (comme caniuse.com, sans internet). Pour voir le site en vrai : ↗ Aperçu, puis ouvre l’adresse dans le navigateur voulu. ¦ Versiot tulevat sovellukseen sisäänrakennetusta luettelosta (kuten caniuse.com, ilman internetiä). Nähdäksesi sivuston todellisuudessa: ↗ Esikatselu, avaa sitten osoite haluamassasi selaimessa. ¦ A verziók az alkalmazásba épített listából származnak (mint a caniuse.com, internet nélkül). A webhely valódi megtekintéséhez: ↗ Előnézet, majd nyisd meg a címet a kívánt böngészőben.
+Lettrine Art déco ¦ Art déco -anfangi ¦ Art deco iniciálé
+Lettrine Art nouveau ¦ Jugendanfangi ¦ Szecessziós iniciálé
+Lettrine au feuillage ¦ Lehväanfangi ¦ Lombos iniciálé
+Lettrine carrée ¦ Neliöanfangi ¦ Négyzetes iniciálé
+Lettrine cerclée ¦ Ympyröity anfangi ¦ Körbe zárt iniciálé
+Lettrine médiévale ¦ Keskiaikainen anfangi ¦ Középkori iniciálé
+Lien retiré ¦ Linkki poistettu ¦ Hivatkozás eltávolítva
+Lieu important ¦ Tärkeä paikka ¦ Fontos hely
+Lieux de ¦ Paikat: ¦ Helyek:
+Ligne d’horizon (hauteur) ¦ Horisonttiviiva (korkeus) ¦ Horizontvonal (magasság)
+Lisser les courbes ¦ Pehmennä käyrät ¦ Görbék simítása
+Légende du bas ¦ Alaselite ¦ Alsó felirat
+Légende du haut ¦ Yläselite ¦ Felső felirat
+Légende sous la signature (facultatif) ¦ Kuvateksti allekirjoituksen alla (valinnainen) ¦ Felirat az aláírás alatt (nem kötelező)
+L’aperçu de la signature s’affiche ici. ¦ Allekirjoituksen esikatselu näkyy tässä. ¦ Az aláírás előnézete itt jelenik meg.
+L’arbre est fabriqué comme un dessin : il s’ouvre ensuite dans l’outil de dessin vectoriel pour changer les couleurs, les polices, les textes, ajouter des ornements, un blason… puis l’exporter en PDF ou en image, à la taille voulue. ¦ Puu tehdään piirroksena: se avautuu sitten vektoripiirtotyökaluun, jossa voit muuttaa värejä, fontteja ja tekstejä, lisätä koristeita, vaakunan… ja viedä sen PDF:nä tai kuvana haluamassasi koossa. ¦ A fa rajzként készül: utána a vektorrajzoló eszközben nyílik meg, ahol módosíthatod a színeket, betűtípusokat, szövegeket, díszítéseket, címert adhatsz hozzá… majd PDF-be vagy képbe exportálhatod a kívánt méretben.
+L’image d’un acte ¦ Asiakirjan kuva ¦ Egy anyakönyvi bejegyzés képe
+L’objet du dessus doit être une forme ou un tracé. ¦ Ylimmän objektin on oltava muoto tai polku. ¦ A felső objektumnak alakzatnak vagy útvonalnak kell lennie.
+L’un au-dessus de l’autre ¦ Päällekkäin ¦ Egymás alatt
+L’écran de base : son CSS s’applique partout, sans @media. Les autres écrans le complètent. ¦ Perusnäyttö: sen CSS pätee kaikkialla ilman @mediaa. Muut näytöt täydentävät sitä. ¦ Az alapképernyő: a CSS-e mindenhol érvényes, @media nélkül. A többi képernyő kiegészíti.
+L’écrire dans le HTML de la page, là où est le curseur ¦ Kirjoita se sivun HTML:ään kohdistimen kohdalle ¦ Beírás az oldal HTML-jébe, a kurzor helyére
+Ma généalogie (rempli tout seul) ¦ Oma sukututkimukseni (täyttyy itsestään) ¦ Saját családfám (magától töltődik ki)
+Marche partout depuis 2023 ; mets une couleur simple juste avant pour les plus vieux. ¦ Toimii kaikkialla vuodesta 2023; lisää vanhempia varten tavallinen väri juuri sen edelle. ¦ 2023 óta mindenhol működik; a régebbiekhez tegyél elé egy egyszerű színt.
+Marge des côtés du contenu ¦ Sisällön sivumarginaali ¦ A tartalom oldalsó margója
+Marges et espace intérieur ¦ Marginaalit ja sisätila ¦ Margók és belső margó
+Marges, espace intérieur et taille ¦ Marginaalit, sisätila ja koko ¦ Margók, belső margó és méret
+Mariés le… ¦ Vihitty… ¦ Házasságot kötöttek…
+Masque d’écrêtage ¦ Leikkausmaski ¦ Vágómaszk
+Masque d’écrêtage (l’objet du dessus découpe les autres) ¦ Leikkausmaski (ylin objekti rajaa muut) ¦ Vágómaszk (a felső objektum kivágja a többit)
+Masqué ¦ Piilotettu ¦ Elrejtve
+Mes formats ; ranger, montrer ou cacher ¦ Omat kokoni; järjestä, näytä tai piilota ¦ Saját méreteim; rendezés, megjelenítés vagy elrejtés
+Mes sites : en ouvrir un autre, en créer un, ouvrir un dossier ¦ Omat sivustoni: avaa toinen, luo uusi, avaa kansio ¦ Saját webhelyeim: másik megnyitása, új létrehozása, mappa megnyitása
+Mes styles ; ranger, montrer ou cacher ¦ Omat tyylini; järjestä, näytä tai piilota ¦ Saját stílusaim; rendezés, megjelenítés vagy elrejtés
+Mettre le site en ligne : Netlify, GitHub Pages ou ton hébergement (FTP sécurisé) ¦ Julkaise sivusto verkossa: Netlify, GitHub Pages tai oma palveluntarjoajasi (suojattu FTP) ¦ A webhely közzététele: Netlify, GitHub Pages vagy a saját tárhelyed (biztonságos FTP)
+Mettre l’un au-dessus de l’autre ¦ Aseta päällekkäin ¦ Egymás alá helyezés
+Mine, carrière ¦ Kaivos, louhos ¦ Bánya, kőfejtő
+Mode Blason désactivé ¦ Vaakunatila pois käytöstä ¦ Címer mód kikapcsolva
+Mode Carte ¦ Karttatila ¦ Térkép mód
+Mode Carte désactivé ¦ Karttatila pois käytöstä ¦ Térkép mód kikapcsolva
+Mode Plan (cartes), fond de carte, image de référence ¦ Asemakaavatila (kartat), taustakartta, viitekuva ¦ Alaprajz mód (térképek), alaptérkép, referenciakép
+Mode Plan désactivé ¦ Asemakaavatila pois käytöstä ¦ Alaprajz mód kikapcsolva
+Moderne épuré ¦ Pelkistetty moderni ¦ Letisztult modern
+Modifier mon style ¦ Muokkaa tyyliäni ¦ Stílusom szerkesztése
+Mon ancêtre ¦ Esivanhempani ¦ Felmenőm
+Monter l’élément ¦ Siirrä elementtiä ylöspäin ¦ Elem mozgatása felfelé
+Montre l’onglet Plan et ses outils (routes, rivières…) ¦ Näyttää Asemakaava-välilehden ja sen työkalut (tiet, joet…) ¦ Megjeleníti az Alaprajz lapot és eszközeit (utak, folyók…)
+Montre l’onglet et le menu Blason ¦ Näyttää Vaakuna-välilehden ja -valikon ¦ Megjeleníti a Címer lapot és menüt
+Montrer dans la liste ¦ Näytä luettelossa ¦ Megjelenítés a listában
+Montrer la grille ¦ Näytä ruudukko ¦ Rács megjelenítése
+Montrer l’année ¦ Näytä vuosi ¦ Évszám megjelenítése
+Montrer ou cacher le panneau de gauche (Blocs, Pages, Styles) ¦ Näytä tai piilota vasen paneeli (Lohkot, Sivut, Tyylit) ¦ A bal panel megjelenítése vagy elrejtése (Blokkok, Oldalak, Stílusok)
+Montrer ou cacher le panneau des réglages ¦ Näytä tai piilota asetuspaneeli ¦ A beállításpanel megjelenítése vagy elrejtése
+Montrer ou cacher le panneau « Ceci est… » ¦ Näytä tai piilota ”Tämä on…”-paneeli ¦ Az „Ez…” panel megjelenítése vagy elrejtése
+Monument aux morts, obélisque ¦ Sankarimuistomerkki, obeliski ¦ Hősi emlékmű, obeliszk
+Médaillon perlé ¦ Helmimedaljonki ¦ Gyöngyös medalion
+Mélanger ¦ Sekoita ¦ Keverés
+Naissance, décès, parents, événements ¦ Syntymä, kuolema, vanhemmat, tapahtumat ¦ Születés, halál, szülők, események
+Naissances par décennie, prénoms les plus portés ¦ Syntymät vuosikymmenittäin, yleisimmät etunimet ¦ Születések évtizedenként, leggyakoribb keresztnevek
+Navigateur par défaut ¦ Oletusselain ¦ Alapértelmezett böngésző
+Navigateurs : vérifier le site… ¦ Selaimet: tarkista sivusto… ¦ Böngészők: a webhely ellenőrzése…
+Navigateurs visés (versions les plus anciennes à prendre en charge) ¦ Kohdeselaimet (vanhimmat tuettavat versiot) ¦ Célböngészők (a legrégebbi támogatandó verziók)
+Ne rien sélectionner ¦ Älä valitse mitään ¦ Kijelölés megszüntetése
+Netlify héberge ton site gratuitement, à une adresse en …netlify.app. 1. Crée un compte sur netlify.com. 2. Dans « User settings → Applications → Personal access tokens », crée un jeton (« New access token »). 3. Colle-le ici. ¦ Netlify ylläpitää sivustoasi ilmaiseksi osoitteessa, joka päättyy …netlify.app. 1. Luo tili osoitteessa netlify.com. 2. Kohdassa ”User settings → Applications → Personal access tokens” luo tunnus (”New access token”). 3. Liitä se tähän. ¦ A Netlify ingyen tárolja a webhelyedet egy …netlify.app végű címen. 1. Hozz létre fiókot a netlify.com oldalon. 2. A „User settings → Applications → Personal access tokens” részben hozz létre egy tokent („New access token”). 3. Illeszd be ide.
+Nom de lieu (ville, village, rivière… déjà mis en forme pour une carte ; T = texte libre) ¦ Paikannimi (kaupunki, kylä, joki… valmiiksi muotoiltu karttaa varten; T = vapaa teksti) ¦ Helynév (város, falu, folyó… térképhez már formázva; T = szabad szöveg)
+Nom de l’écran ¦ Näytön nimi ¦ A képernyő neve
+Nom du dessin ¦ Piirroksen nimi ¦ A rajz neve
+Nom placé ¦ Nimen sijainti ¦ A név helye
+Nombre (avec l’original) ¦ Määrä (alkuperäinen mukaan lukien) ¦ Szám (az eredetivel együtt)
+Nombre d’étapes ¦ Vaiheiden määrä ¦ Lépések száma
+Noms des générations ¦ Sukupolvien nimet ¦ Nemzedékek nevei
+Note, légende ¦ Huomautus, kuvateksti ¦ Megjegyzés, felirat
+Nouveau dessin ¦ Uusi piirros ¦ Új rajz
+Nouveau fichier ¦ Uusi tiedosto ¦ Új fájl
+Nouveau fichier : page HTML ou PHP, CSS, JS, morceau PHP (en-tête…) ¦ Uusi tiedosto: HTML- tai PHP-sivu, CSS, JS, PHP-pätkä (ylätunniste…) ¦ Új fájl: HTML- vagy PHP-oldal, CSS, JS, PHP-részlet (fejléc…)
+Nouveau fichier dans css/ ¦ Uusi tiedosto kansioon css/ ¦ Új fájl a css/ mappában
+Nouveau fichier dans js/ ¦ Uusi tiedosto kansioon js/ ¦ Új fájl a js/ mappában
+Nouveau fichier ici ¦ Uusi tiedosto tähän ¦ Új fájl ide
+Nouveau fichier… ¦ Uusi tiedosto… ¦ Új fájl…
+Nouveau sans enregistrer ¦ Uusi tallentamatta ¦ Új, mentés nélkül
+Nouveau site… ¦ Uusi sivusto… ¦ Új webhely…
+Nouveau sous-dossier… ¦ Uusi alikansio… ¦ Új almappa…
+Nouvel écran ¦ Uusi näyttö ¦ Új képernyő
+Orangé ¦ Oranssi ¦ Narancs
+Outils du mode Plan ¦ Karttatilan työkalut ¦ Térképmód eszközei
+Ouvrir cette page dans un onglet du navigateur, comme un visiteur (isolée de l’app) ¦ Avaa tämä sivu selaimen välilehdessä kävijän tavoin (erillään sovelluksesta) ¦ Nyisd meg ezt az oldalt egy böngészőlapon, ahogy egy látogató látná (az alkalmazástól elkülönítve)
+Ouvrir l’aperçu dans le navigateur ¦ Avaa esikatselu selaimessa ¦ Előnézet megnyitása a böngészőben
+Ouvrir un autre dessin ? ¦ Avataanko toinen piirros? ¦ Megnyitsz egy másik rajzot?
+Ouvrir un dessin ¦ Avaa piirros ¦ Rajz megnyitása
+Ouvrir un dessin… ¦ Avaa piirros… ¦ Rajz megnyitása…
+Ouvrir un dossier… ¦ Avaa kansio… ¦ Mappa megnyitása…
+Pages où il est lié… ¦ Sivut, joihin se on yhdistetty… ¦ Oldalak, amelyekhez kapcsolódik…
+Palette du plan (routes, rivières, bâtiments…) ¦ Kartan paletti (tiet, joet, rakennukset…) ¦ A térkép palettája (utak, folyók, épületek…)
+Panneau Ceci est ¦ Tämä on -paneeli ¦ Ez itt panel
+Panneau « Ceci est… » ¦ Paneeli ”Tämä on…” ¦ „Ez itt…” panel
+Parents, frères et sœurs ¦ Vanhemmat, veljet ja sisaret ¦ Szülők, fivérek és nővérek
+Part du tracé occupée ¦ Käytetty osa polusta ¦ Az útvonal kihasznált része
+Pas de la grille (0 = aucune) ¦ Ruudukon väli (0 = ei mitään) ¦ Rácsköz (0 = nincs)
+Pas d’autre attribut que la classe et l’id. ¦ Ei muita määritteitä kuin class ja id. ¦ A class és az id kivételével nincs más attribútum.
+Pas encore de version. ¦ Ei vielä versioita. ¦ Még nincs verzió.
+Passer aux trois boutons HTML / CSS / JS ¦ Vaihda kolmeen painikkeeseen HTML / CSS / JS ¦ Váltás a három gombra: HTML / CSS / JS
+Passer aux onglets de fichiers (comme Phoenix Code) ¦ Vaihda tiedostovälilehtiin (kuten Phoenix Code) ¦ Váltás fájllapokra (mint a Phoenix Code-ban)
+Personne au centre (ou au pied de l’arbre) ¦ Henkilö keskellä (tai puun juurella) ¦ Személy középen (vagy a fa tövében)
+Peut se mettre dans ¦ Voi olla sisällä ¦ Bele tehető
+Peut contenir ¦ Voi sisältää ¦ Tartalmazhat
+Photos d’une personne ¦ Henkilön valokuvat ¦ Egy személy fényképei
+Phrase d’ouverture ¦ Aloituslause ¦ Nyitómondat
+Pipette (prend la couleur d’un objet) ¦ Pipetti (poimii kohteen värin) ¦ Pipetta (felveszi egy objektum színét)
+Place du titre ¦ Otsikon paikka ¦ A cím helye
+Plus : déplacer, format, pages où il est lié, dupliquer, supprimer ¦ Lisää: siirrä, muoto, sivut, joihin se on yhdistetty, monista, poista ¦ Továbbiak: áthelyezés, formátum, oldalak, amelyekhez kapcsolódik, másolat, törlés
+Plus fin ¦ Ohuempi ¦ Vékonyabb
+Plus à droite : plus de gris devient de l’encre (un trait pâle réapparaît) ; plus à gauche : seulement l’encre la plus foncée (les taches disparaissent). Réglé tout seul au départ. ¦ Enemmän oikealle: harmaata muuttuu enemmän musteeksi (vaalea viiva palaa); enemmän vasemmalle: vain tummin muste (tahrat katoavat). Säädetään aluksi automaattisesti. ¦ Jobbra: több szürke válik tintává (a halvány vonal visszatér); balra: csak a legsötétebb tinta marad (a foltok eltűnnek). Kezdetben magától beállítva.
+Plus épais ¦ Paksumpi ¦ Vastagabb
+Plusieurs images en vignettes ¦ Useita kuvia pikkukuvina ¦ Több kép bélyegképként
+Point modifié ¦ Piste muutettu ¦ Pont módosítva
+Portfolio d’artiste ¦ Taiteilijan portfolio ¦ Művészportfólió
+Portraits (arbre dessiné) ¦ Muotokuvat (piirretty puu) ¦ Portrék (rajzolt fa)
+Pose un texte qui suit ce tracé ¦ Lisää tekstin, joka seuraa tätä polkua ¦ Ezt az útvonalat követő szöveget helyez el
+Poser le fond ¦ Aseta tausta ¦ Háttér elhelyezése
+Poser l’image ¦ Aseta kuva ¦ Kép elhelyezése
+Propriété changée ¦ Ominaisuus muutettu ¦ Tulajdonság módosítva
+Pré, prairie ¦ Niitty, laidun ¦ Rét, legelő
+Prénom (grand) ¦ Etunimi (suuri) ¦ Utónév (nagy)
+Prénom, puis NOM dessous ¦ Etunimi, SUKUNIMI alla ¦ Utónév, alatta a CSALÁDNÉV
+Prénoms les plus portés ¦ Yleisimmät etunimet ¦ Leggyakoribb utónevek
+Préparer l’impression ¦ Valmistele tulostus ¦ Nyomtatás előkészítése
+Présentation, œuvres en galerie, expositions, contact ¦ Esittely, teokset galleriassa, näyttelyt, yhteystiedot ¦ Bemutatkozás, művek galériában, kiállítások, kapcsolat
+Prévois un polygon() juste avant. ¦ Lisää polygon() juuri ennen. ¦ Tegyél elé közvetlenül egy polygon()-t.
+Publier en ligne… ¦ Julkaise verkossa… ¦ Közzététel online…
+Quel lieu ? ¦ Mikä paikka? ¦ Melyik hely?
+Qui est né, s’est marié ou est mort là ¦ Kuka syntyi, avioitui tai kuoli siellä ¦ Ki született, házasodott vagy halt meg ott
+Raccourcis du code ¦ Koodin pikanäppäimet ¦ Kód billentyűparancsai
+Ranger aussi l’image (fond transparent) dans les médias de la personne ¦ Tallenna kuva (läpinäkyvä tausta) myös henkilön mediaan ¦ A kép (átlátszó háttérrel) kerüljön a személy médiái közé is
+Ranger la sélection dans un groupe ou un calque, sans glisser ¦ Siirrä valinta ryhmään tai tasoon vetämättä ¦ A kijelölés áthelyezése csoportba vagy rétegbe, húzás nélkül
+Ranger tout seul ¦ Järjestä automaattisesti ¦ Automatikus rendezés
+Rangé dans un groupe ¦ Siirretty ryhmään ¦ Csoportba téve
+Recto-verso : deux faces. Pliée en 2, 3 ou 4 : la carte a plusieurs volets ; le dessin montre les plis (traits roses) et s’imprime face par face, ou sur A4 avec les traits de coupe et de pli (⤓ Exporter → Recto-verso sur A4). ¦ Kaksipuolinen: kaksi puolta. Taitettu 2, 3 tai 4 osaan: kortissa on useita osia; piirros näyttää taitokset (vaaleanpunaiset viivat) ja tulostuu puoli kerrallaan, tai A4:lle leikkaus- ja taittomerkkien kanssa (⤓ Vie → Kaksipuolinen A4:lle). ¦ Kétoldalas: két oldal. 2, 3 vagy 4 részre hajtva: a lapnak több szárnya van; a rajz mutatja a hajtásokat (rózsaszín vonalak), és oldalanként nyomtatódik, vagy A4-re vágó- és hajtásjelekkel (⤓ Exportálás → Kétoldalas A4-re).
+Reculé ¦ Siirretty taaemmas ¦ Hátrébb helyezve
+Redimensionné ¦ Kokoa muutettu ¦ Átméretezve
+Relief, Eau, Végétation, Parcelles, Routes, Bâti, Limites, Noms, Généalogie, Habillage ¦ Korkokuvat, Vesi, Kasvillisuus, Palstat, Tiet, Rakennukset, Rajat, Nimet, Sukututkimus, Viimeistely ¦ Domborzat, Víz, Növényzet, Földrészletek, Utak, Épületek, Határok, Nevek, Családfa, Díszítés
+Relire les blocs de la généalogie ¦ Lue sukututkimuksen lohkot uudelleen ¦ A családfa blokkjainak újraolvasása
+Remettre un champ enlevé… ¦ Palauta poistettu kenttä… ¦ Eltávolított mező visszatétele…
+Remplir depuis une fiche ¦ Täytä kortilta ¦ Kitöltés adatlapról
+Remplissage : clic pour choisir la couleur ¦ Täyttö: valitse väri napsauttamalla ¦ Kitöltés: kattints a szín kiválasztásához
+Remplissage par défaut ¦ Oletustäyttö ¦ Alapértelmezett kitöltés
+Reprendre les couleurs du style ¦ Käytä uudelleen tyylin värejä ¦ A stílus színeinek visszavétele
+Repères de pli et noms des pages : oui / non ¦ Taittomerkit ja sivujen nimet: kyllä / ei ¦ Hajtásjelek és oldalnevek: igen / nem
+Requête @media ¦ @media-kysely ¦ @media lekérdezés
+Retire les longues lignes droites imprimées ou tracées du registre qui traversent la signature. ¦ Poistaa pitkät painetut tai viivatut rekisterin suorat viivat, jotka kulkevat allekirjoituksen läpi. ¦ Eltávolítja az anyakönyv aláíráson áthaladó hosszú, nyomtatott vagy vonalzott egyenes vonalait.
+Retirer cette couleur ¦ Poista tämä väri ¦ Szín eltávolítása
+Retirer l’attribut ¦ Poista määrite ¦ Attribútum eltávolítása
+Retourné ¦ Käännetty ¦ Tükrözve
+Revenir au niveau du dessus (Échap) ¦ Palaa ylemmälle tasolle (Esc) ¦ Vissza egy szinttel feljebb (Esc)
+Revenir aux champs d’origine de ce modèle ¦ Palaa tämän mallin alkuperäisiin kenttiin ¦ Vissza a sablon eredeti mezőihez
+Rosace à six pétales ¦ Kuusiterälehtinen ruusuke ¦ Hatszirmú rozetta
+Rose des vents ¦ Kompassiruusu ¦ Szélrózsa
+Récent. ¦ Viimeaikainen. ¦ Friss.
+Région, pays ¦ Alue, maa ¦ Régió, ország
+Réglages appliqués ¦ Asetukset otettu käyttöön ¦ Beállítások alkalmazva
+Réparti ¦ Jaettu tasaisesti ¦ Elosztva
+Répartir horizontalement ¦ Jaa vaakasuunnassa ¦ Vízszintes elosztás
+Répartir horizontalement (même écart) ¦ Jaa vaakasuunnassa (sama väli) ¦ Vízszintes elosztás (azonos távolság)
+Répartir verticalement ¦ Jaa pystysuunnassa ¦ Függőleges elosztás
+Répartir verticalement (même écart) ¦ Jaa pystysuunnassa (sama väli) ¦ Függőleges elosztás (azonos távolság)
+Réponse souhaitée ¦ Vastausta pyydetään ¦ Válasz kérése
+Répétition en cercle ¦ Toisto ympyrässä ¦ Körkörös ismétlés
+Répétition en cercle… ¦ Toisto ympyrässä… ¦ Körkörös ismétlés…
+Répétition en grille… ¦ Toisto ruudukossa… ¦ Rácsos ismétlés…
+Sa fiche, sa vie en frise, son arbre, ses lieux, ses photos ¦ Hänen korttinsa, elämänsä aikajanana, sukupuunsa, paikkansa, valokuvansa ¦ Az adatlapja, az élete idővonalon, a családfája, a helyei, a fényképei
+Sa vie, année par année ¦ Hänen elämänsä vuosi vuodelta ¦ Az élete évről évre
+Sable, grève ¦ Hiekka, ranta ¦ Homok, part
+Sans grille d’échelle ¦ Ei mittakaavaruudukkoa ¦ Méretarány-rács nélkül
+Selon la forme ¦ Muodon mukaan ¦ Az alaktól függően
+Ses photos publiables, toutes seules ¦ Hänen julkaistavat valokuvansa, itsestään ¦ A közzétehető fényképei, maguktól
+Simple : tablette et téléphone ¦ Yksinkertainen: tabletti ja puhelin ¦ Egyszerű: táblagép és telefon
+Simplifier le tracé… ¦ Yksinkertaista polkua… ¦ Útvonal egyszerűsítése…
+Simplifiée ¦ Yksinkertaistettu ¦ Egyszerűsített
+Site modifié ailleurs ¦ Sivustoa muutettu muualla ¦ A webhelyet máshol módosították
+Situer la carte tout de suite (conseillé) : le lieu et la largeur couverte donnent la bonne échelle, et la carte n’est pas déformée ¦ Sijoita kartta heti (suositeltu): paikka ja katettu leveys antavat oikean mittakaavan, eikä kartta vääristy ¦ Helyezd el a térképet azonnal (ajánlott): a hely és a lefedett szélesség adja a helyes méretarányt, és a térkép nem torzul
+Son CSS ¦ Sen CSS ¦ A CSS-e
+Son nouveau chemin : ¦ Sen uusi polku: ¦ Az új elérési útja:
+Sortir d’un niveau (Échap) ¦ Poistu yhdeltä tasolta (Esc) ¦ Kilépés egy szinttel (Esc)
+Style du plan ¦ Kartan tyyli ¦ A térkép stílusa
+Suivant / précédent ¦ Seuraava / edellinen ¦ Következő / előző
+Supprimer l’élément ¦ Poista elementti ¦ Elem törlése
+Survenu le… ¦ Tapahtui… ¦ Történt…
+Symbole, bâtiment ¦ Symboli, rakennus ¦ Jel, épület
+S’applique à ¦ Koskee ¦ Vonatkozik
+S’épaississant ¦ Paksuneva ¦ Vastagodó
+Tableau d’ascendance (de gauche à droite) ¦ Esipolvitaulu (vasemmalta oikealle) ¦ Felmenői tábla (balról jobbra)
+Taille de l’écran ¦ Näytön koko ¦ Képernyőméret
+Taille des meubles ¦ Kuvioiden koko ¦ A címerképek mérete
+Taille du nom ¦ Nimen koko ¦ A név mérete
+Taillé ¦ Vastavinojaettu ¦ Balharántvágott
+Tes éléments sont gardés. ¦ Elementtisi säilytetään. ¦ Az elemeid megmaradnak.
+Ton hébergeur (OVH, o2switch, Infomaniak…) te donne un serveur FTP. La connexion est toujours chiffrée (FTPS) et son certificat vérifié : un serveur sans chiffrement est refusé. ¦ Palveluntarjoajasi (OVH, o2switch, Infomaniak…) antaa sinulle FTP-palvelimen. Yhteys on aina salattu (FTPS) ja sen varmenne tarkistetaan: salaamaton palvelin hylätään. ¦ A tárhelyszolgáltatód (OVH, o2switch, Infomaniak…) ad egy FTP-szervert. A kapcsolat mindig titkosított (FTPS), és a tanúsítványát ellenőrizzük: titkosítás nélküli szervert nem fogadunk el.
+Ton site est envoyé tel qu’à l’export (.zip) : sans personne vivante ni fiche confidentielle. Le jeton ou le mot de passe reste sur cet ordinateur : il n’est jamais montré, ni mis dans une sauvegarde ou dans le site. ¦ Sivustosi lähetetään kuten viennissä (.zip): ilman eläviä henkilöitä tai luottamuksellisia kortteja. Tunnus tai salasana jää tälle tietokoneelle: sitä ei koskaan näytetä eikä laiteta varmuuskopioon tai sivustoon. ¦ A webhelyed úgy kerül feltöltésre, mint az exportnál (.zip): élő személyek és bizalmas adatlapok nélkül. A token vagy a jelszó ezen a számítógépen marad: soha nem jelenik meg, és nem kerül sem biztonsági mentésbe, sem a webhelyre.
+Tous les fichiers ¦ Kaikki tiedostot ¦ Minden fájl
+Tous les fichiers du site ¦ Kaikki sivuston tiedostot ¦ A webhely összes fájlja
+Tous les écrans ¦ Kaikki näytöt ¦ Minden képernyő
+Tout affiché ¦ Kaikki näytetty ¦ Minden látható
+Tracé fermé ¦ Suljettu polku ¦ Zárt útvonal
+Tracé simplifié ¦ Polku yksinkertaistettu ¦ Útvonal egyszerűsítve
+Trait au crayon ¦ Lyijykynäviiva ¦ Ceruzavonás
+Tranché ¦ Vinojaettu ¦ Jobbharántvágott
+Transformer… (échelle, inclinaison, copies) ¦ Muunna… (mittakaava, kallistus, kopiot) ¦ Átalakítás… (méretezés, döntés, másolatok)
+Transformé ¦ Muunnettu ¦ Átalakítva
+Trois cartes côte à côte (une seule sur téléphone) ¦ Kolme korttia rinnakkain (puhelimessa vain yksi) ¦ Három kártya egymás mellett (telefonon csak egy)
+Très fine ¦ Hyvin ohut ¦ Nagyon vékony
+Très simplifiée ¦ Hyvin yksinkertaistettu ¦ Nagyon egyszerűsített
+Téléphone couché ¦ Puhelin vaakatasossa ¦ Fekvő telefon
+Un bouton pour écrire un courriel ¦ Painike sähköpostin kirjoittamiseen ¦ Gomb e-mail írásához
+Un calque vide, au-dessus des autres : tu dessines dedans ¦ Tyhjä taso muiden yläpuolella: piirrät siihen ¦ Egy üres réteg a többi fölött: abba rajzolsz
+Un de tes diagrammes (Graphiques → Mes diagrammes), ou un nouveau ; redessiné à chaque ouverture, figé à l’export ¦ Yksi diagrammeistasi (Kaaviot → Omat diagrammit) tai uusi; piirretään uudelleen joka avauksella, jäädytetään viennissä ¦ Az egyik diagramod (Grafikonok → Saját diagramok), vagy egy új; minden megnyitáskor újrarajzolódik, exportáláskor rögzül
+Un en-tête, un texte, un pied de page : à toi de jouer ¦ Ylätunniste, teksti, alatunniste: sinun vuorosi ¦ Fejléc, szöveg, lábléc: rajtad a sor
+Un grand titre et une phrase ¦ Iso otsikko ja lause ¦ Nagy cím és egy mondat
+Un objet seul s’aligne sur le plan de travail (ou sur la page, le volet où il se trouve). Plusieurs : entre eux, ou sur le plan si « Plan de travail » est choisi. En déplaçant ou en agrandissant, des repères roses aimantent aux bords et aux centres des autres objets (⌘ ou Ctrl pour s’en passer). ¦ Yksittäinen kohde tasataan työalueeseen (tai sivuun tai osaan, jolla se on). Useampi: toisiinsa, tai työalueeseen, jos ”Työalue” on valittu. Siirrettäessä tai suurennettaessa vaaleanpunaiset apuviivat kohdistuvat magneettisesti muiden kohteiden reunoihin ja keskikohtiin (⌘ tai Ctrl ohittaa sen). ¦ Egyetlen objektum a munkaterülethez igazodik (vagy az oldalhoz, szárnyhoz, amelyen van). Több objektum: egymáshoz, vagy a munkaterülethez, ha a „Munkaterület” van kiválasztva. Mozgatáskor vagy nagyításkor rózsaszín segédvonalak tapadnak a többi objektum széleihez és középpontjaihoz (⌘ vagy Ctrl nélküle).
+Un quadrillage bleu en kilomètres (ou mètres) aide à dessiner aux bonnes distances ; il ne s’imprime jamais. ¦ Sininen kilometri- (tai metri)ruudukko auttaa piirtämään oikeilla etäisyyksillä; sitä ei koskaan tulosteta. ¦ Egy kék, kilométeres (vagy méteres) rács segít a helyes távolságokkal rajzolni; sosem nyomtatódik ki.
+Un titre et un paragraphe ¦ Otsikko ja kappale ¦ Egy cím és egy bekezdés
+Une autre fenêtre a enregistré ce site entre-temps. Garder ta version effacera la sienne. ¦ Toinen ikkuna tallensi tämän sivuston sillä välin. Jos säilytät oman versiosi, sen versio poistuu. ¦ Egy másik ablak közben elmentette ezt a webhelyet. Ha a saját változatodat tartod meg, az övé törlődik.
+Une autre image ¦ Toinen kuva ¦ Másik kép
+Une carte sur mesure (Carte → 🗺 Mes cartes), mise en image sans personne vivante ni fiche confidentielle ¦ Mittatilauskartta (Kartta → 🗺 Omat kartat), kuvaksi muutettuna ilman eläviä henkilöitä tai luottamuksellisia kortteja ¦ Egyedi térkép (Térkép → 🗺 Saját térképek), képpé alakítva élő személyek és bizalmas adatlapok nélkül
+Une image de tes médias ¦ Kuva mediastasi ¦ Egy kép a médiáid közül
+Une page de plus dans le document : l’enveloppe au bon format (C6, DL, C5 ou carrée, selon la carte), dans le même style, avec l’adresse du destinataire et l’expéditeur. Elle s’imprime à sa taille. ¦ Yksi sivu lisää asiakirjaan: kirjekuori oikeassa koossa (C6, DL, C5 tai neliö, kortin mukaan), samalla tyylillä, vastaanottajan osoitteella ja lähettäjällä. Se tulostuu omassa koossaan. ¦ Egy további oldal a dokumentumban: a boríték a megfelelő méretben (C6, DL, C5 vagy négyzetes, a laptól függően), ugyanabban a stílusban, a címzett címével és a feladóval. A saját méretében nyomtatódik.
+Une phrase mise en valeur ¦ Korostettu lause ¦ Kiemelt mondat
+Une signature déjà encadrée dans la visionneuse (Signatures identifiées) ¦ Allekirjoitus, joka on jo rajattu katseluohjelmassa (Tunnistetut allekirjoitukset) ¦ Egy aláírás, amely már be van keretezve a megjelenítőben (Azonosított aláírások)
+Unité montrée ¦ Näytettävä yksikkö ¦ Megjelenített mértékegység
+Variante du bord de cire ¦ Vahareunan muunnelma ¦ A viaszperem változata
+Le bord d’un cachet de cire est irrégulier : chaque variante l’écrase autrement. ¦ Vahasinetin reuna on epäsäännöllinen: jokainen muunnelma litistää sitä eri tavalla. ¦ A viaszpecsét pereme szabálytalan: minden változat másképp lapítja.
+Le site entier (.zip, à mettre en ligne) ou une page seule (.html) ¦ Koko sivusto (.zip, verkkoon vietäväksi) tai yksittäinen sivu (.html) ¦ A teljes webhely (.zip, feltöltéshez) vagy egyetlen oldal (.html)
+Le village, son histoire, les familles qui y ont vécu ¦ Kylä, sen historia, siellä asuneet suvut ¦ A falu, a története, az ott élt családok
+🧭 Le site dans les navigateurs ¦ 🧭 Sivusto selaimissa ¦ 🧭 A webhely a böngészőkben
+Imiter dans l’aperçu : ¦ Jäljittele esikatselussa: ¦ Utánzás az előnézetben:
+pour l’export en image (PNG, JPG) ; 300 ppp pour imprimer ¦ kuvavientiin (PNG, JPG); 300 ppt tulostukseen ¦ képexportáláshoz (PNG, JPG); nyomtatáshoz 300 dpi
+Verrouillé ¦ Lukittu ¦ Zárolva
+Vers le bas ¦ Alas ¦ Lefelé
+Vers le haut ¦ Ylös ¦ Felfelé
+Vers le nord ¦ Pohjoiseen ¦ Észak felé
+Vers le sud ¦ Etelään ¦ Dél felé
+Vers l’est ¦ Itään ¦ Kelet felé
+Vers l’ouest ¦ Länteen ¦ Nyugat felé
+Vide : ne pas vérifier ce navigateur ¦ Tyhjä: älä tarkista tätä selainta ¦ Üres: ne ellenőrizd ezt a böngészőt
+Voie ferrée ¦ Rautatie ¦ Vasútvonal
+Voie, rivière, limite (un clic par point) ¦ Tie, joki, raja (yksi napsautus pistettä kohden) ¦ Út, folyó, határ (pontonként egy kattintás)
+Voir dans le code ¦ Näytä koodissa ¦ Megtekintés a kódban
+Voir et modifier le CSS de cette classe ou de cet id (⌘E), comme l’édition rapide de Phoenix Code ¦ Näytä ja muokkaa tämän luokan tai id:n CSS:ää (⌘E), kuten Phoenix Coden pikamuokkaus ¦ Az osztály vagy az id CSS-ének megtekintése és szerkesztése (⌘E), mint a Phoenix Code gyorsszerkesztése
+Voir l’élément dans le code ¦ Näytä elementti koodissa ¦ Az elem megtekintése a kódban
+Végétation ¦ Kasvillisuus ¦ Növényzet
+Zone : forêt, champ, lac, bourg… ¦ Alue: metsä, pelto, järvi, kauppala… ¦ Terület: erdő, mező, tó, mezőváros…
+animations liées au défilement ¦ vieritykseen sidotut animaatiot ¦ görgetéshez kötött animációk
+biseautés ¦ viistetyt ¦ letört sarkú
+carrés ¦ neliömäiset ¦ szögletes
+chaînage optionnel ?. ¦ valinnainen ketjutus ?. ¦ opcionális láncolás ?.
+délier ¦ irrota yhteys ¦ kapcsolat bontása
+gap en flexbox ¦ gap flexboxissa ¦ gap flexboxban
+la personne seule ¦ vain henkilö ¦ csak a személy
+la personne et ses ancêtres ¦ henkilö ja hänen esivanhempansa ¦ a személy és a felmenői
+lié après script.js ¦ linkitetty script.js:n jälkeen ¦ a script.js után csatolva
+liée après style.css ¦ linkitetty style.css:n jälkeen ¦ a style.css után csatolva
+margin-left et margin-right : auto ¦ margin-left ja margin-right: auto ¦ margin-left és margin-right: auto
+Retirer margin et padding posés ici ¦ Poista tähän asetetut margin ja padding ¦ Az itt megadott margin és padding eltávolítása
+mon-site (ou compte/mon-site) ¦ oma-sivusto (tai tili/oma-sivusto) ¦ sajat-webhely (vagy fiok/sajat-webhely)
+opérateur ?? ¦ operaattori ?? ¦ ?? operátor
+ouvrir la fiche ¦ avaa kortti ¦ adatlap megnyitása
+principal · tout le site ¦ pääasiallinen · koko sivusto ¦ fő · az egész webhely
+script.js · le script de tout le site ¦ script.js · koko sivuston skripti ¦ script.js · az egész webhely szkriptje
+style.css · la feuille de styles de tout le site ¦ style.css · koko sivuston tyylisivu ¦ style.css · az egész webhely stíluslapja
+translate, rotate, scale séparés ¦ erilliset translate, rotate, scale ¦ külön translate, rotate, scale
+un seul fichier .html ¦ yksi ainoa .html-tiedosto ¦ egyetlen .html-fájl
+une face par feuille ¦ yksi puoli arkkia kohden ¦ laponként egy oldal
+unités cqw, cqh, cqi, cqb ¦ yksiköt cqw, cqh, cqi, cqb ¦ cqw, cqh, cqi, cqb egységek
+unités dvh, svh, lvh ¦ yksiköt dvh, svh, lvh ¦ dvh, svh, lvh egységek
+unités lh, rlh ¦ yksiköt lh, rlh ¦ lh, rlh egységek
+évènement scrollend ¦ scrollend-tapahtuma ¦ scrollend esemény
+Écart horizontal ¦ Vaakaväli ¦ Vízszintes távolság
+Écart vertical ¦ Pystyväli ¦ Függőleges távolság
+Écartelé ¦ Neljätty ¦ Négyelt
+Échelle, rose des vents, cartouche, légende ¦ Mittakaava, kompassiruusu, nimiö, selite ¦ Méretarány, szélrózsa, címmező, jelmagyarázat
+Échiqueté ¦ Shakkiruutuinen ¦ Sakktáblás
+Écran 16:9 ¦ Näyttö 16:9 ¦ 16:9-es képernyő
+Écrans enregistrés. ¦ Näytöt tallennettu. ¦ Képernyők mentve.
+Écrire ¦ Kirjoita ¦ Írás
+Écrire le texte dans la page ¦ Kirjoita teksti sivulle ¦ A szöveg beírása az oldalra
+Écu ¦ Kilpi ¦ Pajzs
+Écu (5 × 6) ¦ Kilpi (5 × 6) ¦ Pajzs (5 × 6)
+Écu français moderne ¦ Moderni ranskalainen kilpi ¦ Modern francia pajzs
+Écu suisse ¦ Sveitsiläinen kilpi ¦ Svájci pajzs
+Élément incomplet. ¦ Keskeneräinen elementti. ¦ Hiányos elem.
+Émail des meubles ¦ Kuvioiden tinktuura ¦ A címerképek máza
+Émail du champ ¦ Kentän tinktuura ¦ A mező máza
+Étendue ¦ Laajuus ¦ Kiterjedés
+Éventail (demi-cercle) ¦ Viuhka (puoliympyrä) ¦ Legyező (félkör)
+Éventail Art déco ¦ Art deco -viuhka ¦ Art deco legyező
+Éventail ouvert (240°) ¦ Avoin viuhka (240°) ¦ Nyitott legyező (240°)
+Éventail trois-quarts (270°) ¦ Kolmen neljäsosan viuhka (270°) ¦ Háromnegyedes legyező (270°)
+× Oublier cet accès FTP ¦ × Unohda tämä FTP-yhteys ¦ × Az FTP-hozzáférés elfelejtése
+× Oublier le jeton Netlify ¦ × Unohda Netlify-tunnus ¦ × A Netlify-token elfelejtése
+× Oublier le jeton GitHub ¦ × Unohda GitHub-tunnus ¦ × A GitHub-token elfelejtése
+à la taille exacte ¦ tarkassa koossa ¦ pontos méretben
+à ouvrir partout : double-clic, MAMP, WAMP, hébergeur ¦ avautuu kaikkialla: kaksoisnapsautus, MAMP, WAMP, palveluntarjoaja ¦ bárhol megnyitható: dupla kattintás, MAMP, WAMP, tárhelyszolgáltató
+à rouvrir ici ¦ avattava uudelleen täällä ¦ itt nyitható meg újra
+↗ Ouvrir le site dans : ¦ ↗ Avaa sivusto selaimessa: ¦ ↗ A webhely megnyitása itt:
+↗ Ouvrir là ¦ ↗ Avaa siellä ¦ ↗ Megnyitás ott
+↺ Les 2 dernières années ¦ ↺ 2 viimeistä vuotta ¦ ↺ Az utolsó 2 év
+↺ Marges de départ ¦ ↺ Alkuperäiset marginaalit ¦ ↺ Alapmargók
+↺ Remettre comme au départ (retire cette règle) ¦ ↺ Palauta alkuperäiseksi (poistaa tämän säännön) ¦ ↺ Visszaállítás alapra (eltávolítja ezt a szabályt)
+↻ La personne affichée ¦ ↻ Näytetty henkilö ¦ ↻ A megjelenített személy
+↻ Remplacer l’image… ¦ ↻ Korvaa kuva… ¦ ↻ Kép cseréje…
+▶ Tester : comme un visiteur (tes scripts tournent, les liens marchent) ¦ ▶ Testaa: kävijän tavoin (skriptisi toimivat, linkit toimivat) ¦ ▶ Kipróbálás: látogatóként (a szkriptjeid futnak, a hivatkozások működnek)
+◎ Exclure (là où ils se croisent) ¦ ◎ Poissulje (missä ne menevät päällekkäin) ¦ ◎ Kizárás (ahol átfedik egymást)
+◐ Soustraire (le dessous moins le reste) ¦ ◐ Vähennä (alin miinus muut) ¦ ◐ Kivonás (az alsó mínusz a többi)
+◫ Visuel et code ¦ ◫ Visuaalinen ja koodi ¦ ◫ Vizuális és kód
+⚙ Les écrans du site (@media) ¦ ⚙ Sivuston näytöt (@media) ¦ ⚙ A webhely képernyői (@media)
+⚙️ Les formats ¦ ⚙️ Koot ¦ ⚙️ Méretek
+⚙️ Les éléments du plan ¦ ⚙️ Kartan elementit ¦ ⚙️ A térkép elemei
+⚙️ Ranger les éléments ¦ ⚙️ Järjestä elementit ¦ ⚙️ Elemek rendezése
+⚜️ Ajouter un meuble (fleur de lys, lion, étoile…)… ¦ ⚜️ Lisää kuvio (lilja, leijona, tähti…)… ¦ ⚜️ Címerkép hozzáadása (liliom, oroszlán, csillag…)…
+⚜️ Ajouter un meuble seul ¦ ⚜️ Lisää yksittäinen kuvio ¦ ⚜️ Egyetlen címerkép hozzáadása
+⛔ Colle ton jeton GitHub. ¦ ⛔ Liitä GitHub-tunnuksesi. ¦ ⛔ Illeszd be a GitHub-tokenedet.
+⛔ Colle ton jeton Netlify. ¦ ⛔ Liitä Netlify-tunnuksesi. ¦ ⛔ Illeszd be a Netlify-tokenedet.
+✍️ La signature d’un acte ¦ ✍️ Asiakirjan allekirjoitus ¦ ✍️ Egy anyakönyvi bejegyzés aláírása
+✍️ Une signature déjà repérée ¦ ✍️ Jo löydetty allekirjoitus ¦ ✍️ Egy már azonosított aláírás
+✍️ Une signature déjà repérée… ¦ ✍️ Jo löydetty allekirjoitus… ¦ ✍️ Egy már azonosított aláírás…
+✎ Mon élément ¦ ✎ Oma elementtini ¦ ✎ Saját elemem
+✒ La sélection seule en SVG ¦ ✒ Vain valinta SVG:nä ¦ ✒ Csak a kijelölés SVG-ként
+➰ Texte sur une courbe… ¦ ➰ Teksti käyrälle… ¦ ➰ Szöveg görbén…
+➰ Un texte qui suit une courbe ¦ ➰ Teksti, joka seuraa käyrää ¦ ➰ Görbét követő szöveg
+➰ Un texte sur ce tracé ¦ ➰ Teksti tälle polulle ¦ ➰ Szöveg ezen az útvonalon
+⤒ Importer de l’ordinateur (SVG, PNG, JPG, WEBP, GIF, BMP, fichier du dessin…) ¦ ⤒ Tuo tietokoneelta (SVG, PNG, JPG, WEBP, GIF, BMP, piirrostiedosto…) ¦ ⤒ Importálás a számítógépről (SVG, PNG, JPG, WEBP, GIF, BMP, rajzfájl…)
+⤓ Exporter le site ¦ ⤓ Vie sivusto ¦ ⤓ A webhely exportálása
+⤓ Exporter tout le site (.zip) ¦ ⤓ Vie koko sivusto (.zip) ¦ ⤓ A teljes webhely exportálása (.zip)
+⤓ Exporter la page (.html) ¦ ⤓ Vie sivu (.html) ¦ ⤓ Az oldal exportálása (.html)
+⧉ Copier l’exemple ¦ ⧉ Kopioi esimerkki ¦ ⧉ A példa másolása
+⧉ Mélange de deux formes (étapes)… ¦ ⧉ Kahden muodon sekoitus (vaiheet)… ¦ ⧉ Két alakzat összemosása (lépések)…
+⧉ Mélange de deux formes ¦ ⧉ Kahden muodon sekoitus ¦ ⧉ Két alakzat összemosása
+⬤ Réunir ¦ ⬤ Yhdistä ¦ ⬤ Egyesítés
+◑ Intersection ¦ ◑ Leikkaus ¦ ◑ Metszet
+⭕ Médaillon rond ¦ ⭕ Pyöreä medaljonki ¦ ⭕ Kerek medalion
+〰 Largeur du trait ¦ 〰 Viivan leveys ¦ 〰 Vonalvastagság
+＋ Blocs : glisse-les dans la page ¦ ＋ Lohkot: vedä ne sivulle ¦ ＋ Blokkok: húzd őket az oldalra
+＋ Créer un style ¦ ＋ Luo tyyli ¦ ＋ Stílus létrehozása
+＋ Créer un élément ¦ ＋ Luo elementti ¦ ＋ Elem létrehozása
+＋ Enregistrer la version actuelle ¦ ＋ Tallenna nykyinen versio ¦ ＋ A jelenlegi verzió mentése
+＋ Nouveau faire-part ¦ ＋ Uusi ilmoituskortti ¦ ＋ Új értesítőkártya
+＋ Nouveau site : par où commencer ? ¦ ＋ Uusi sivusto: mistä aloittaa? ¦ ＋ Új webhely: hol kezdjem?
+＋ Nouvel arbre décoratif ¦ ＋ Uusi koristepuu ¦ ＋ Új díszfa
+＋ Signature ou sceau ¦ ＋ Allekirjoitus tai sinetti ¦ ＋ Aláírás vagy pecsét
+＋ Un écran ¦ ＋ Näyttö ¦ ＋ Egy képernyő
+📱 Téléphone couché ¦ 📱 Puhelin vaakatasossa ¦ 📱 Fekvő telefon
+👆 Écran tactile ¦ 👆 Kosketusnäyttö ¦ 👆 Érintőképernyő
+🖨 Impression ¦ 🖨 Tulostus ¦ 🖨 Nyomtatás
+🌐 Cette page seule ¦ 🌐 Vain tämä sivu ¦ 🌐 Csak ez az oldal
+🌳 Un arbre à imprimer en grand ¦ 🌳 Suurena tulostettava puu ¦ 🌳 Nagy méretben nyomtatható fa
+🎨 Couleurs, polices, largeur du site ¦ 🎨 Värit, fontit, sivuston leveys ¦ 🎨 Színek, betűtípusok, a webhely szélessége
+🎨 Les styles ¦ 🎨 Tyylit ¦ 🎨 Stílusok
+🎨 Remettre les émaux en couleur ¦ 🎨 Palauta tinktuurat väreiksi ¦ 🎨 A mázak visszaállítása színesre
+🎨 Son CSS : les règles de ses classes et de son id, modifiables (⌘E) ¦ 🎨 Sen CSS: sen luokkien ja id:n säännöt, muokattavissa (⌘E) ¦ 🎨 A CSS-e: az osztályai és az id-ja szabályai, szerkeszthetők (⌘E)
+💻 De l’ordinateur ¦ 💻 Tietokoneelta ¦ 💻 A számítógépről
+💾 Fichier du dessin ¦ 💾 Piirrostiedosto ¦ 💾 Rajzfájl
+💾 Fichier du dessin… ¦ 💾 Piirrostiedosto… ¦ 💾 Rajzfájl…
+📄 Les pages du site ¦ 📄 Sivuston sivut ¦ 📄 A webhely oldalai
+📋 Copier le code SVG ¦ 📋 Kopioi SVG-koodi ¦ 📋 Az SVG-kód másolása
+📍 Lieux de la base sur le plan… ¦ 📍 Tietokannan paikat kartalla… ¦ 📍 Az adatbázis helyei a térképen…
+📐 Format du document / plans de travail… ¦ 📐 Asiakirjan koko / työalueet… ¦ 📐 Dokumentumméret / munkaterületek…
+📖 Aide-mémoire ¦ 📖 Muistilista ¦ 📖 Puska
+📤 Publier en ligne ¦ 📤 Julkaise verkossa ¦ 📤 Közzététel online
+📤 Publier le site ¦ 📤 Julkaise sivusto ¦ 📤 A webhely közzététele
+📤 Publier ¦ 📤 Julkaise ¦ 📤 Közzététel
+📤 Site publié. ¦ 📤 Sivusto julkaistu. ¦ 📤 Webhely közzétéve.
+📦 Tout le site en .zip ¦ 📦 Koko sivusto .zip-tiedostona ¦ 📦 A teljes webhely .zip-ként
+📰 Avis dans le journal ¦ 📰 Lehti-ilmoitus ¦ 📰 Újsághirdetés
+📰 Un faire-part, une affiche ¦ 📰 Ilmoituskortti, juliste ¦ 📰 Értesítőkártya, plakát
+📷 Un acte des médias… ¦ 📷 Asiakirja mediasta… ¦ 📷 Egy anyakönyvi bejegyzés a médiák közül…
+🔗 Objets reliés ¦ 🔗 Yhdistetyt esineet ¦ 🔗 Összekapcsolt tárgyak
+🔗 Objets reliés à la famille… ¦ 🔗 Perheeseen yhdistetyt esineet… ¦ 🔗 A családhoz kapcsolt tárgyak…
+🔷 Enregistrer comme forme (Mes formes)… ¦ 🔷 Tallenna muotona (Omat muodot)… ¦ 🔷 Mentés alakzatként (Saját alakzatok)…
+🔷 Enregistrer la forme ¦ 🔷 Tallenna muoto ¦ 🔷 Alakzat mentése
+🖨 Hachures héraldiques ¦ 🖨 Heraldiset viivoitukset ¦ 🖨 Heraldikai vonalkázás
+🖨 Hachures héraldiques (noir et blanc) ¦ 🖨 Heraldiset viivoitukset (mustavalkoinen) ¦ 🖨 Heraldikai vonalkázás (fekete-fehér)
+🖼 Choisir la photo… ¦ 🖼 Valitse valokuva… ¦ 🖼 Fénykép kiválasztása…
+🖼 Une image de la base… ¦ 🖼 Kuva tietokannasta… ¦ 🖼 Egy kép az adatbázisból…
+🖼️ Enregistrer dans les médias d’une fiche… ¦ 🖼️ Tallenna kortin mediaan… ¦ 🖼️ Mentés egy adatlap médiái közé…
+🖼️ Image de référence (en transparence)… ¦ 🖼️ Mallikuva (läpikuultava)… ¦ 🖼️ Referenciakép (áttetsző)…
+🗂 Créer les calques d’un plan ¦ 🗂 Luo kartan tasot ¦ 🗂 Egy térkép rétegeinek létrehozása
+🗺️ Mode Plan (cartes) : oui / non ¦ 🗺️ Karttatila (kartat): kyllä / ei ¦ 🗺️ Térképmód (térképek): igen / nem
+🗺️ Plan : la palette des routes, rivières, bâtiments… ¦ 🗺️ Kartta: teiden, jokien, rakennusten… paletti ¦ 🗺️ Térkép: utak, folyók, épületek… palettája
+🗺️ Une nouvelle carte ¦ 🗺️ Uusi kartta ¦ 🗺️ Új térkép
+🛡️ Créer ce blason ¦ 🛡️ Luo tämä vaakuna ¦ 🛡️ A címer létrehozása
+🛡️ Créer un blason… ¦ 🛡️ Luo vaakuna… ¦ 🛡️ Címer létrehozása…
+🛡️ Dans ces armoiries ¦ 🛡️ Tässä vaakunassa ¦ 🛡️ Ebben a címerben
+🛡️ Enregistrer comme image d’armoiries… ¦ 🛡️ Tallenna vaakunakuvana… ¦ 🛡️ Mentés címerképként…
+🛡️ Écu ¦ 🛡️ Kilpi ¦ 🛡️ Pajzs
+🥚 Médaillon ovale ¦ 🥚 Soikea medaljonki ¦ 🥚 Ovális medalion
+🧭 Navigateurs : ce qui pourrait ne pas marcher sur Safari, Firefox, un vieux téléphone… et imiter un navigateur ¦ 🧭 Selaimet: mikä ei ehkä toimi Safarissa, Firefoxissa, vanhassa puhelimessa… ja selaimen jäljittely ¦ 🧭 Böngészők: ami esetleg nem működik Safariban, Firefoxban, egy régi telefonon… és böngésző utánzása
+🧲 Aimanter (bords et centres des objets) : oui / non ¦ 🧲 Magneettikohdistus (kohteiden reunat ja keskikohdat): kyllä / ei ¦ 🧲 Mágneses igazítás (objektumok szélei és középpontjai): igen / nem
+🧲 Aimanter aux autres objets (traits roses) ¦ 🧲 Magneettikohdistus muihin kohteisiin (vaaleanpunaiset viivat) ¦ 🧲 Mágneses igazítás más objektumokhoz (rózsaszín vonalak)
+🪄 Vectoriser cette image ¦ 🪄 Vektoroi tämä kuva ¦ 🪄 A kép vektorizálása
+🪄 Vectoriser une image (refaire un blason scanné)… ¦ 🪄 Vektoroi kuva (skannatun vaakunan uudelleenpiirto)… ¦ 🪄 Kép vektorizálása (szkennelt címer újrarajzolása)…
+Prévois un style correct sans :has() (il sera ignoré sur les vieux Firefox). ¦ Varaa toimiva tyyli ilman :has()-valitsinta (vanhat Firefoxit ohittavat sen). ¦ Készíts egy elfogadható stílust :has() nélkül is (a régi Firefox figyelmen kívül hagyja).
+@container (requêtes de conteneur) ¦ @container (säiliökyselyt) ¦ @container (tárolólekérdezések)
+Marche partout depuis 2023 ; garde une mise en page lisible sans. ¦ Toimii kaikkialla vuodesta 2023; säilytä luettava asettelu ilman sitä. ¦ 2023 óta mindenhol működik; tarts meg nélküle is olvasható elrendezést.
+@container style() (requêtes de style) ¦ @container style() (tyylikyselyt) ¦ @container style() (stíluslekérdezések)
+Pas sur Firefox : utilise une classe à la place. ¦ Ei Firefoxissa: käytä luokkaa sen sijaan. ¦ Firefoxban nem: használj helyette osztályt.
+Seulement Chrome et Edge : ne compte pas dessus. ¦ Vain Chrome ja Edge: älä luota siihen. ¦ Csak Chrome és Edge: ne számíts rá.
+Marche partout depuis 2023. ¦ Toimii kaikkialla vuodesta 2023. ¦ 2023 óta mindenhol működik.
+CSS imbriqué (nesting) ¦ Sisäkkäinen CSS (nesting) ¦ Beágyazott CSS (nesting)
+Marche partout depuis fin 2023 ; pour les plus vieux navigateurs, écris les sélecteurs en entier. ¦ Toimii kaikkialla vuoden 2023 lopusta; kirjoita valitsimet kokonaan vanhimpia selaimia varten. ¦ 2023 vége óta mindenhol működik; a legrégebbi böngészőkhöz írd ki teljesen a szelektorokat.
+Marche partout depuis 2023 ; mets une couleur #hex juste avant pour les plus vieux. ¦ Toimii kaikkialla vuodesta 2023; laita #hex-väri juuri ennen sitä vanhimpia varten. ¦ 2023 óta mindenhol működik; a legrégebbiekhez tegyél elé közvetlenül egy #hex színt.
+Récent : mets une couleur fixe juste avant. ¦ Uusi: laita kiinteä väri juuri ennen sitä. ¦ Új: tegyél elé közvetlenül egy rögzített színt.
+Marche partout depuis 2022. ¦ Toimii kaikkialla vuodesta 2022. ¦ 2022 óta mindenhol működik.
+Récent : mets une couleur fixe juste avant, ou utilise @media (prefers-color-scheme). ¦ Uusi: laita kiinteä väri juuri ennen sitä tai käytä @media (prefers-color-scheme). ¦ Új: tegyél elé közvetlenül egy rögzített színt, vagy használd a @media (prefers-color-scheme) lekérdezést.
+Sans risque : les vieux navigateurs coupent les titres comme avant. ¦ Turvallinen: vanhat selaimet rivittävät otsikot kuten ennenkin. ¦ Biztonságos: a régi böngészők a korábbiak szerint tördelik a címeket.
+Sans risque : ignoré là où ça ne marche pas. ¦ Turvallinen: ohitetaan siellä, missä se ei toimi. ¦ Biztonságos: ahol nem működik, figyelmen kívül marad.
+Récent sur Firefox : préfère des classes bien nommées si tu vises de vieux Firefox. ¦ Uusi Firefoxissa: suosi hyvin nimettyjä luokkia, jos tähtäät vanhoihin Firefoxeihin. ¦ Firefoxban új: ha régi Firefoxot is célzol, inkább jól elnevezett osztályokat használj.
+@property (variables typées) ¦ @property (tyypitetyt muuttujat) ¦ @property (típusos változók)
+Marche partout depuis 2024 ; donne une valeur de départ à la variable. ¦ Toimii kaikkialla vuodesta 2024; anna muuttujalle alkuarvo. ¦ 2024 óta mindenhol működik; adj kezdőértéket a változónak.
+Très récent : prévois une position de repli (position: absolute classique). ¦ Hyvin uusi: varaa varasijainti (perinteinen position: absolute). ¦ Nagyon új: készíts tartalék pozíciót (klasszikus position: absolute).
+Sans risque : les pages changent sans animation là où ça ne marche pas. ¦ Turvallinen: sivut vaihtuvat ilman animaatiota siellä, missä se ei toimi. ¦ Biztonságos: ahol nem működik, az oldalak animáció nélkül váltanak.
+Pas sur Firefox : le contenu doit rester visible sans l'animation. ¦ Ei Firefoxissa: sisällön on pysyttävä näkyvissä ilman animaatiota. ¦ Firefoxban nem: a tartalomnak animáció nélkül is láthatónak kell maradnia.
+Marche partout depuis 2023 ; mets 100vh juste avant pour les plus vieux. ¦ Toimii kaikkialla vuodesta 2023; laita 100vh juuri ennen sitä vanhimpia varten. ¦ 2023 óta mindenhol működik; a legrégebbiekhez tegyél elé közvetlenül 100vh-t.
+backdrop-filter sans -webkit- ¦ backdrop-filter ilman -webkit- ¦ backdrop-filter -webkit- nélkül
+Ajoute aussi -webkit-backdrop-filter (Safari avant 18). ¦ Lisää myös -webkit-backdrop-filter (Safari ennen versiota 18). ¦ Add hozzá a -webkit-backdrop-filter tulajdonságot is (18 előtti Safari).
+mask / mask-image sans -webkit- ¦ mask / mask-image ilman -webkit- ¦ mask / mask-image -webkit- nélkül
+Ajoute aussi -webkit-mask-image pour les Chrome un peu anciens. ¦ Lisää myös -webkit-mask-image hieman vanhempia Chromeja varten. ¦ Add hozzá a -webkit-mask-image tulajdonságot is a kicsit régebbi Chrome-okhoz.
+user-select sans -webkit- ¦ user-select ilman -webkit- ¦ user-select -webkit- nélkül
+Ajoute -webkit-user-select : Safari n'a toujours que celui-là. ¦ Lisää -webkit-user-select: Safarissa on edelleen vain se. ¦ Add hozzá a -webkit-user-select tulajdonságot: a Safariban még mindig csak ez van.
+Marche partout depuis 2021. ¦ Toimii kaikkialla vuodesta 2021. ¦ 2021 óta mindenhol működik.
+Pas sur Firefox ni Safari : donne une hauteur normale au champ. ¦ Ei Firefoxissa eikä Safarissa: anna kentälle tavallinen korkeus. ¦ Firefoxban és Safariban nem: adj a mezőnek normál magasságot.
+Sans risque : pas d'animation d'entrée là où ça ne marche pas. ¦ Turvallinen: ei sisääntuloanimaatiota siellä, missä se ei toimi. ¦ Biztonságos: ahol nem működik, nincs belépő animáció.
+Sans risque : l'élément apparaît sans transition ailleurs. ¦ Turvallinen: muualla elementti ilmestyy ilman siirtymää. ¦ Biztonságos: máshol az elem átmenet nélkül jelenik meg.
+Seulement Chrome et Edge : l'ouverture se fera sans animation ailleurs. ¦ Vain Chrome ja Edge: muualla avautuminen tapahtuu ilman animaatiota. ¦ Csak Chrome és Edge: máshol animáció nélkül nyílik meg.
+Marche partout depuis fin 2023. ¦ Toimii kaikkialla vuoden 2023 lopusta. ¦ 2023 vége óta mindenhol működik.
+Pas sur Firefox : sans risque, juste un peu plus d'espace. ¦ Ei Firefoxissa: turvallinen, vain hieman enemmän tilaa. ¦ Firefoxban nem: biztonságos, csak egy kicsit több hely.
+Marche partout depuis 2020. ¦ Toimii kaikkialla vuodesta 2020. ¦ 2020 óta mindenhol működik.
+Récent sur Chrome : mets une valeur fixe juste avant. ¦ Uusi Chromessa: laita kiinteä arvo juuri ennen sitä. ¦ Chrome-ban új: tegyél elé közvetlenül egy rögzített értéket.
+Pas sur Safari : sans risque. ¦ Ei Safarissa: turvallinen. ¦ Safariban nem: biztonságos.
+Pas sur Firefox : prévois une lettrine avec ::first-letter et float. ¦ Ei Firefoxissa: varaa anfangi ::first-letter- ja float-määrityksillä. ¦ Firefoxban nem: készíts iniciálét ::first-letter és float segítségével.
+Marche partout depuis 2024 ; sinon [dir="rtl"]. ¦ Toimii kaikkialla vuodesta 2024; muuten [dir="rtl"]. ¦ 2024 óta mindenhol működik; különben [dir="rtl"].
+Marche partout depuis 2024. ¦ Toimii kaikkialla vuodesta 2024. ¦ 2024 óta mindenhol működik.
+Sans risque : ignoré ailleurs. ¦ Turvallinen: ohitetaan muualla. ¦ Biztonságos: máshol figyelmen kívül marad.
+Firefox ne le gère que depuis 2024 : préfère transform: scale() si besoin. ¦ Firefox tukee sitä vasta vuodesta 2024: käytä tarvittaessa mieluummin transform: scale(). ¦ A Firefox csak 2024 óta támogatja: szükség esetén inkább a transform: scale() megoldást használd.
+Récent : le contenu s'ouvrira sans animation ailleurs. ¦ Uusi: muualla sisältö avautuu ilman animaatiota. ¦ Új: máshol a tartalom animáció nélkül nyílik meg.
+appearance: base-select (menus stylés) ¦ appearance: base-select (tyylitellyt valikot) ¦ appearance: base-select (stílusos menük)
+Seulement Chrome et Edge : le menu reste normal ailleurs (sans risque). ¦ Vain Chrome ja Edge: muualla valikko pysyy tavallisena (turvallinen). ¦ Csak Chrome és Edge: máshol a menü normál marad (biztonságos).
+Seulement Chrome et Edge : mets une valeur fixe juste avant. ¦ Vain Chrome ja Edge: laita kiinteä arvo juuri ennen sitä. ¦ Csak Chrome és Edge: tegyél elé közvetlenül egy rögzített értéket.
+Seulement Chrome et Edge. ¦ Vain Chrome ja Edge. ¦ Csak Chrome és Edge.
+Récent sur Firefox : le texte ne sera pas surligné ailleurs. ¦ Uusi Firefoxissa: muualla tekstiä ei korosteta. ¦ Firefoxban új: máshol a szöveg nem lesz kiemelve.
+Seulement Chrome et Edge : garde un ordre du code logique. ¦ Vain Chrome ja Edge: pidä koodin järjestys loogisena. ¦ Csak Chrome és Edge: tartsd logikusan a kód sorrendjét.
+popover (bulles sans JavaScript) ¦ popover (ponnahduskuplat ilman JavaScriptiä) ¦ popover (buborékok JavaScript nélkül)
+Marche partout depuis 2024 ; sur les plus vieux, la bulle reste cachée. ¦ Toimii kaikkialla vuodesta 2024; vanhimmissa kupla pysyy piilossa. ¦ 2024 óta mindenhol működik; a legrégebbiekben a buborék rejtve marad.
+<details name=…> (accordéon exclusif) ¦ <details name=…> (yksinomainen haitari) ¦ <details name=…> (kizárólagos harmonika)
+loading="lazy" sur les images ¦ loading="lazy" kuvissa ¦ loading="lazy" a képeken
+loading="lazy" sur les cadres (iframe) ¦ loading="lazy" kehyksissä (iframe) ¦ loading="lazy" a kereteken (iframe)
+Sans risque : chargé tout de suite ailleurs. ¦ Turvallinen: muualla ladataan heti. ¦ Biztonságos: máshol azonnal betöltődik.
+Ajoute role="search" pour les plus vieux. ¦ Lisää role="search" vanhimpia varten. ¦ A legrégebbiekhez add hozzá a role="search" attribútumot.
+commandfor / command (boutons sans JS) ¦ commandfor / command (painikkeet ilman JS:ää) ¦ commandfor / command (gombok JS nélkül)
+Très récent : garde un petit script de repli. ¦ Hyvin uusi: säilytä pieni varaskripti. ¦ Nagyon új: tarts meg egy kis tartalékszkriptet.
+Pas sur Safari : le texte restera caché à la recherche. ¦ Ei Safarissa: teksti pysyy piilossa haulta. ¦ Safariban nem: a szöveg rejtve marad a keresés elől.
+Seulement Safari : ailleurs c'est une case à cocher normale. ¦ Vain Safari: muualla se on tavallinen valintaruutu. ¦ Csak Safari: máshol normál jelölőnégyzet.
+Marche partout depuis 2023 ; garde une version JPEG dans un <picture>. ¦ Toimii kaikkialla vuodesta 2023; säilytä JPEG-versio <picture>-elementissä. ¦ 2023 óta mindenhol működik; tarts meg egy JPEG-változatot egy <picture> elemben.
+règles de préchargement (speculationrules) ¦ esilatauksen säännöt (speculationrules) ¦ előtöltési szabályok (speculationrules)
+Marche partout. ¦ Toimii kaikkialla. ¦ Mindenhol működik.
+Marche partout depuis 2023 ; sinon [...t].sort(). ¦ Toimii kaikkialla vuodesta 2023; muuten [...t].sort(). ¦ 2023 óta mindenhol működik; különben [...t].sort().
+Marche partout depuis 2024 ; sinon new Promise((res, rej) => …). ¦ Toimii kaikkialla vuodesta 2024; muuten new Promise((res, rej) => …). ¦ 2024 óta mindenhol működik; különben new Promise((res, rej) => …).
+Récent : sinon new Promise(r => r(f())). ¦ Uusi: muuten new Promise(r => r(f())). ¦ Új: különben new Promise(r => r(f())).
+Seulement dans un <script type="module"> ; marche partout depuis 2022. ¦ Vain <script type="module">-elementissä; toimii kaikkialla vuodesta 2022. ¦ Csak <script type="module"> elemben; 2022 óta mindenhol működik.
+Firefox ne l'a que depuis 2024. ¦ Firefoxissa se on vasta vuodesta 2024. ¦ A Firefoxban csak 2024 óta van meg.
+Récent : écris la durée à la main pour les plus vieux. ¦ Uusi: kirjoita kesto käsin vanhimpia varten. ¦ Új: a legrégebbiekhez írd be kézzel az időtartamot.
+Très récent sur Firefox et Safari : garde des liens normaux. ¦ Hyvin uusi Firefoxissa ja Safarissa: säilytä tavalliset linkit. ¦ Firefoxban és Safariban nagyon új: tarts meg normál hivatkozásokat.
+Vérifie que document.startViewTransition existe avant de l'appeler. ¦ Tarkista, että document.startViewTransition on olemassa, ennen kuin kutsut sitä. ¦ Ellenőrizd, hogy létezik-e a document.startViewTransition, mielőtt meghívod.
+Firefox ne l'a que depuis l'été 2024. ¦ Firefoxissa se on vasta kesästä 2024. ¦ A Firefoxban csak 2024 nyara óta van meg.
+Récent sur Safari : passe par [...it] pour les plus vieux. ¦ Uusi Safarissa: käytä [...it] vanhimpia varten. ¦ Safariban új: a legrégebbiekhez használd a [...it] formát.
+Récent : sinon s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'). ¦ Uusi: muuten s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'). ¦ Új: különben s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').
+Pas sur Safari : utilise Date ou une petite bibliothèque. ¦ Ei Safarissa: käytä Date-oliota tai pientä kirjastoa. ¦ Safariban nem: használd a Date-et vagy egy kis könyvtárat.
+Récent : sinon btoa() / atob(). ¦ Uusi: muuten btoa() / atob(). ¦ Új: különben btoa() / atob().
+champs privés de classe (#x) ¦ luokan yksityiset kentät (#x) ¦ privát osztálymezők (#x)
+Pas sur Safari : vérifie qu'il existe, sinon setTimeout(f, 1). ¦ Ei Safarissa: tarkista, että se on olemassa, muuten setTimeout(f, 1). ¦ Safariban nem: ellenőrizd, hogy létezik-e, különben setTimeout(f, 1).
+Récent sur Firefox. ¦ Uusi Firefoxissa. ¦ Firefoxban új.
+Pas sur Safari : garde un minuteur après scroll. ¦ Ei Safarissa: säilytä ajastin scrollin jälkeen. ¦ Safariban nem: tarts meg egy időzítőt a scroll után.
+Seulement Chrome et Edge sur ordinateur : vérifie qu'il existe. ¦ Vain Chrome ja Edge tietokoneella: tarkista, että se on olemassa. ¦ Csak Chrome és Edge számítógépen: ellenőrizd, hogy létezik-e.
+Récent : sinon try { new URL(…) } catch. ¦ Uusi: muuten try { new URL(…) } catch. ¦ Új: különben try { new URL(…) } catch.
+Pas sur Safari : vérifie qu'il existe. ¦ Ei Safarissa: tarkista, että se on olemassa. ¦ Safariban nem: ellenőrizd, hogy létezik-e.
+Marche partout depuis 2022 (seulement en https). ¦ Toimii kaikkialla vuodesta 2022 (vain https). ¦ 2022 óta mindenhol működik (csak https-en).
+Sélection directe (points et poignées) ¦ Suora valinta (pisteet ja kahvat) ¦ Közvetlen kijelölés (pontok és fogantyúk)
+Plume (clic : point, glisser : courbe) ¦ Kynä (napsautus: piste, veto: käyrä) ¦ Toll (kattintás: pont, húzás: görbe)
+Crayon (à main levée) ¦ Lyijykynä (vapaalla kädellä) ¦ Ceruza (szabadkézi)
+Spirale (glisser depuis le centre) ¦ Spiraali (vedä keskeltä) ¦ Spirál (húzás a középpontból)
+Cote (mesure entre deux points) ¦ Mitta (mittaus kahden pisteen välillä) ¦ Méretvonal (mérés két pont között)
+Main (déplacer la vue) ¦ Käsi (siirrä näkymää) ¦ Kéz (a nézet mozgatása)
+Loupe (⌥ : dézoomer) ¦ Suurennuslasi (⌥: loitonna) ¦ Nagyító (⌥: kicsinyítés)
+Clic : choisir (⇧ : en plus) · glisser : déplacer · poignées : agrandir, ⇧ garde les proportions · rond du haut : tourner (⇧ : par 15°) ¦ Napsautus: valitse (⇧: lisää) · veto: siirrä · kahvat: muuta kokoa, ⇧ säilyttää mittasuhteet · ylin ympyrä: kierrä (⇧: 15° kerrallaan) ¦ Kattintás: kijelölés (⇧: hozzáadás) · húzás: mozgatás · fogantyúk: átméretezés, ⇧ megtartja az arányokat · felső kör: forgatás (⇧: 15°-onként)
+Glisse les points et leurs poignées · ⌥ clic sur un point : angle ↔ courbe · ⌫ : supprimer le point · double-clic sur un tracé : ajouter un point ¦ Vedä pisteitä ja niiden kahvoja · ⌥-napsautus pisteeseen: kulma ↔ käyrä · ⌫: poista piste · kaksoisnapsautus polulla: lisää piste ¦ Húzd a pontokat és a fogantyúikat · ⌥ + kattintás egy ponton: sarok ↔ görbe · ⌫: pont törlése · dupla kattintás egy útvonalon: pont hozzáadása
+Clic : un point · glisser : une courbe (⌥ : casser la poignée) · ⇧ : angles de 45° · clic sur le 1er point : fermer · ⌫ : retirer le dernier point · Entrée, Échap ou double-clic : terminer · clic sur le bout d’un tracé ouvert choisi : le reprendre ¦ Napsautus: piste · veto: käyrä (⌥: katkaise kahva) · ⇧: 45° kulmat · napsautus 1. pisteeseen: sulje · ⌫: poista viimeinen piste · Enter, Esc tai kaksoisnapsautus: lopeta · napsautus valitun avoimen polun päähän: jatka sitä ¦ Kattintás: pont · húzás: görbe (⌥: a fogantyú megtörése) · ⇧: 45°-os szögek · kattintás az 1. pontra: lezárás · ⌫: az utolsó pont eltávolítása · Enter, Esc vagy dupla kattintás: befejezés · kattintás egy kijelölt nyitott útvonal végére: folytatás
+Dessine à main levée : le trait est lissé ¦ Piirrä vapaalla kädellä: viiva tasoitetaan ¦ Rajzolj szabadkézzel: a vonal kisimul
+Clic : nouveau texte (écris-le dans « Propriétés ») ¦ Napsautus: uusi teksti (kirjoita se kohtaan ”Ominaisuudet”) ¦ Kattintás: új szöveg (írd be a „Tulajdonságok” részben)
+Clic sur un objet : sa couleur et son trait vont à la sélection ¦ Napsauta kohdetta: sen väri ja viiva siirtyvät valintaan ¦ Kattints egy objektumra: a színe és a vonala átkerül a kijelölésre
+Glisser : déplacer la vue (ou barre d’espace, ou la molette) ¦ Veto: siirrä näkymää (tai välilyönti tai hiiren rulla) ¦ Húzás: a nézet mozgatása (vagy szóköz, vagy görgő)
+Clic : zoomer · ⌥ clic : dézoomer · ⌘ molette partout ¦ Napsautus: lähennä · ⌥-napsautus: loitonna · ⌘ + rulla missä tahansa ¦ Kattintás: nagyítás · ⌥ + kattintás: kicsinyítés · ⌘ + görgő bárhol
+Glisse depuis le centre : la taille et le départ de la spirale ¦ Vedä keskeltä: spiraalin koko ja alku ¦ Húzz a középpontból: a spirál mérete és kezdete
+Des lignes de fuite par-dessus le dessin (elles ne s’impriment pas). Avec ╱ Ligne et 📏 Cote, le trait s’aligne sur la ligne de fuite, la verticale ou l’horizontale la plus proche (⌘ ou Ctrl : sans). ¦ Pakoviivat piirroksen päällä (ne eivät tulostu). Työkaluilla ╱ Viiva ja 📏 Mitta viiva kohdistuu lähimpään pakoviivaan, pystyyn tai vaakaan (⌘ tai Ctrl: ilman). ¦ Enyészvonalak a rajz fölött (nem nyomtatódnak ki). A ╱ Vonal és a 📏 Méretvonal eszközzel a vonás a legközelebbi enyészvonalhoz, függőlegeshez vagy vízszinteshez igazodik (⌘ vagy Ctrl: nélküle).
+Aucune image pour l’instant : choisis un acte, ou glisse une image ici (⌘V pour la coller). ¦ Ei vielä kuvaa: valitse asiakirja tai vedä kuva tähän (⌘V liittää sen). ¦ Még nincs kép: válassz egy anyakönyvi bejegyzést, vagy húzz ide egy képet (⌘V a beillesztéshez).
+Gens d’un lieu ¦ Paikan ihmiset ¦ Egy hely lakói
+</> Écrire dans le code ¦ </> Kirjoita koodiin ¦ </> Írás a kódba
+</> Écrire dans le CSS ¦ </> Kirjoita CSS:ään ¦ </> Írás a CSS-be
+</> Écrire dans le JS ¦ </> Kirjoita JS:ään ¦ </> Írás a JS-be
+</> Montrer ou cacher le code ¦ </> Näytä tai piilota koodi ¦ </> Kód megjelenítése vagy elrejtése
+le site à l’écran ¦ sivusto näytöllä ¦ a webhely a képernyőn
+Plan du village en 1850 ¦ Kylän kartta vuonna 1850 ¦ A falu térképe 1850-ben
