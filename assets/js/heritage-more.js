@@ -2174,7 +2174,7 @@
      * on ouvre la FAQ ou une bulle « En savoir plus (FAQ) → ». Chaque question y a un repère tiré de sa question française
      * (faqId) : les liens data-help-faq et UI.openFaq('…') qui citent la question française la retrouvent dans toutes les langues.
      * Une question ou une réponse pas encore traduite reste en français. */
-    const FAQ_I18N_V = 3; // monter avec VERSION de scripts/build-faq-i18n.js
+    const FAQ_I18N_V = 4; // monter avec VERSION de scripts/build-faq-i18n.js
     const faqI18n = () => window.LCNDA_I18N;
     const tt = (s, v) => (faqI18n() ? faqI18n().t(s, v) : s);
     const faqLang = () => faqI18n()?.lang || 'fr';
