@@ -1,0 +1,1607 @@
+fr ¦ ro
+son importé ¦ sunet importat
+⚠ fichier de travail introuvable ¦ ⚠ fișierul de lucru nu a fost găsit
+Une vieille cassette ou un dictaphone : souffle, bourdonnement, voix, volume, début et fin, pas à pas ¦ O casetă veche sau un reportofon: fâșâit, bâzâit, voce, volum, început și sfârșit, pas cu pas
+Sauver une vieille cassette ¦ Salvează o casetă veche
+Une lettre lue, un souvenir raconté : le son entre dans les médias puis s’ouvre dans le Studio son ¦ O scrisoare citită, o amintire povestită: sunetul intră în fișierele media, apoi se deschide în Studioul de sunet
+Un son de la base, nettoyé en deux minutes ¦ Un sunet din bază, curățat în două minute
+Son rapide… ¦ Sunet rapid…
+⚠ photo de départ introuvable ¦ ⚠ fotografia de pornire nu a fost găsită
+Une image vide (blanche, transparente ou d’une couleur), à la taille voulue, pour dessiner, écrire ou assembler des calques ¦ O imagine goală (albă, transparentă sau de o culoare), la dimensiunea dorită, pentru a desena, a scrie sau a asambla straturi
+Canevas vide ¦ Pânză goală
+Une vieille photo abîmée : redresser, couleurs, taches, déchirures, visages, colorisation, pas à pas ¦ O fotografie veche deteriorată: îndreptare, culori, pete, rupturi, fețe, colorizare, pas cu pas
+Restaurer une vieille photo ¦ Restaurează o fotografie veche
+Le portrait de plusieurs fiches recadré au même format (yeux à la même hauteur), puis utilisé comme portrait ¦ Portretul mai multor fișe decupat la același format (ochii la aceeași înălțime), apoi folosit ca portret
+Portraits d’identité ¦ Portrete de identitate
+Nouveau blason ¦ Blazon nou
+Blason ¦ Blazon
+Livre vide ¦ Carte goală
+Ouvrir l’atelier ¦ Deschide atelierul
+OUTILS DE MODIFICATION ¦ INSTRUMENTE DE MODIFICARE
+Ranger les outils ¦ Aranjează instrumentele
+Range les onglets avec la poignée ⠿ (ou Alt + ↑ / ↓) et décoche ceux que tu ne veux pas voir. ¦ Aranjează filele cu mânerul ⠿ (sau Alt + ↑ / ↓) și debifează-le pe cele pe care nu vrei să le vezi.
+Garde au moins un outil : coche celui que tu veux voir. ¦ Păstrează cel puțin un instrument: bifează-l pe cel pe care vrei să-l vezi.
+Garde au moins un outil. ¦ Păstrează cel puțin un instrument.
+{shown} sur {n} ¦ {shown} din {n}
+Aucun projet pour « {q} » ¦ Niciun proiect pentru „{q}”
+Vérifie l’orthographe, ou cherche un autre mot (nom, photo, détails). ¦ Verifică ortografia sau caută alt cuvânt (nume, fotografie, detalii).
+Effacer la recherche ¦ Șterge căutarea
+Aucun projet de {what} pour l’instant ¦ Deocamdată niciun proiect de {what}
+projet|montage ¦ montaj
+projet|son ¦ sunet
+projet|retouche ¦ retușare
+projet|dessin ¦ desen
+projet|livre ¦ carte
+projet|tableau ¦ tablou
+projet|cousinade ¦ reuniune de familie
+projet|maison ¦ casă
+projet|traitement par lot ¦ prelucrare în serie
+projet|comparaison de photos ¦ comparare de fotografii
+projet|site ¦ site
+projet|présentation ou de diaporama ¦ prezentare sau diaporamă
+projet|document ¦ document
+projet|transcription ¦ transcriere
+projet|faire-part ¦ anunț de familie
+projet|carte ¦ hartă
+projet|signature ou sceau ¦ semnătură sau sigiliu
+projet|arbre ¦ arbore
+Les projets des outils de l’app : choisis un outil, puis ouvre, cherche, trie, renomme ou commence un projet. ¦ Proiectele instrumentelor aplicației: alege un instrument, apoi deschide, caută, sortează, redenumește sau începe un proiect.
+Une calculette flottante (simple, scientifique, courbes, mesures anciennes, dates des actes), qui reste ouverte au-dessus de l’app ¦ Un calculator plutitor (simplu, științific, curbe, măsuri vechi, datele actelor), care rămâne deschis deasupra aplicației
+projets ¦ proiecte
+Projet renommé. ¦ Proiect redenumit.
+Les photos, vidéos et sons restent dans les Médias. ¦ Fotografiile, videoclipurile și sunetele rămân în fișierele media.
+=projet ¦ proiect|proiecte|de proiecte
+＋ Nouvelle retouche ¦ ＋ Retușare nouă
+＋ Nouveau dessin ¦ ＋ Desen nou
+＋ Nouveau livre ¦ ＋ Carte nouă
+＋ Nouveau traitement ¦ ＋ Prelucrare nouă
+＋ Nouvelle comparaison ¦ ＋ Comparare nouă
+Ce calcul est trop long : je m’arrête là. ¦ Calculul acesta e prea lung: mă opresc aici.
+Essaie avec des nombres plus petits ou moins d’étapes. ¦ Încearcă cu numere mai mici sau cu mai puțini pași.
+Division par zéro : on ne peut pas diviser par 0. ¦ Împărțire la zero: nu se poate împărți la 0.
+Nombre trop grand pour être calculé. ¦ Număr prea mare pentru a fi calculat.
+Liste trop longue (plus de {list} nombres). ¦ Listă prea lungă (peste {list} numere).
+Matrice trop grande (au plus {mat} × {mat2}). ¦ Matrice prea mare (cel mult {mat} × {mat2}).
+{what} : il faut des nombres ici{x}. ¦ {what}: aici trebuie numere{x}.
+(« {text} » est un résultat écrit en mots) ¦ („{text}” este un rezultat scris în cuvinte)
+Les deux listes n’ont pas la même longueur ({n} et {n2}). ¦ Cele două liste nu au aceeași lungime ({n} și {n2}).
+On ne peut pas ajouter un nombre et une matrice. ¦ Nu se poate aduna un număr cu o matrice.
+Pour multiplier chaque case, utilise « × ». ¦ Pentru a înmulți fiecare căsuță, folosește „×”.
+Les deux matrices n’ont pas la même taille ({r} × {c} et {r2} × {c2}). ¦ Cele două matrice nu au aceeași dimensiune ({r} × {c} și {r2} × {c2}).
+Signe moins ¦ Semnul minus
+Addition ¦ Adunare
+Multiplication ¦ Înmulțire
+Division ¦ Împărțire
+Produit impossible : la 1re matrice a {cols}, la 2e a {rows}. ¦ Produs imposibil: prima matrice are {cols}, a doua are {rows}.
+Pour multiplier deux matrices, il faut autant de colonnes dans la 1re que de lignes dans la 2e. ¦ Pentru a înmulți două matrice, prima trebuie să aibă tot atâtea coloane câte rânduri are a doua.
+Produit impossible : la matrice a {c} colonnes et la liste {n} nombres. ¦ Produs imposibil: matricea are {c} coloane, iar lista {n} numere.
+ln(0) n’existe pas (il part vers −∞). ¦ ln(0) nu există (tinde spre −∞).
+Une matrice ne peut être élevée qu’à une puissance entière. ¦ O matrice poate fi ridicată doar la o putere întreagă.
+Seule une matrice carrée peut être élevée à une puissance. ¦ Doar o matrice pătratică poate fi ridicată la o putere.
+Puissance trop grande pour une matrice. ¦ Putere prea mare pentru o matrice.
+Division par zéro : 0 ne peut pas être élevé à une puissance négative. ¦ Împărțire la zero: 0 nu poate fi ridicat la o putere negativă.
+Ce calcul n’a pas de résultat. ¦ Calculul acesta nu are rezultat.
+{what} : il faut un nombre réel (sans i). ¦ {what}: trebuie un număr real (fără i).
+{what} : il faut un nombre entier. ¦ {what}: trebuie un număr întreg.
+{what} : il faut une matrice, par exemple [[1 ; 2] ; [3 ; 4]]. ¦ {what}: trebuie o matrice, de exemplu [[1 ; 2] ; [3 ; 4]].
+Déterminant ¦ Determinant
+Le déterminant demande une matrice carrée (celle-ci fait {r} × {c}). ¦ Determinantul cere o matrice pătratică (aceasta are {r} × {c}).
+Inverse ¦ Inversa
+Seule une matrice carrée a un inverse (celle-ci fait {r} × {c}). ¦ Doar o matrice pătratică are inversă (aceasta are {r} × {c}).
+Cette matrice n’a pas d’inverse (son déterminant vaut 0). ¦ Matricea aceasta nu are inversă (determinantul ei este 0).
+Transposée ¦ Transpusa
+Ce système n’a aucune solution (les équations se contredisent). ¦ Sistemul acesta nu are nicio soluție (ecuațiile se contrazic).
+Ce système a une infinité de solutions (des équations disent la même chose). ¦ Sistemul acesta are o infinitate de soluții (unele ecuații spun același lucru).
+Ce nombre est trop dur à décomposer. ¦ Numărul acesta e prea greu de descompus.
+Ce nombre est trop grand pour être décomposé (au plus 30 chiffres). ¦ Numărul acesta e prea mare pentru a fi descompus (cel mult 30 de cifre).
+{n} n’a pas de facteur premier. ¦ {n} nu are factor prim.
+{x} est un nombre premier. ¦ {x} este un număr prim.
+Factorielle trop grande : au plus {fact}!. ¦ Factorial prea mare: cel mult {fact}!.
+Factorielle ¦ Factorial
+La factorielle n’existe pas pour un entier négatif. ¦ Factorialul nu există pentru un număr întreg negativ.
+n! = 1 × 2 × … × n, pour n = 0, 1, 2… ¦ n! = 1 × 2 × … × n, pentru n = 0, 1, 2…
+Changement de base ¦ Schimbare de bază
+La base va de 2 à 36. ¦ Baza merge de la 2 la 36.
+{n} écrit en base {b} ¦ {n} scris în baza {b}
+(à retaper : {x}{pre}{x2}) ¦ (de retastat: {x}{pre}{x2})
+{what} : la liste est vide. ¦ {what}: lista este goală.
+L’écart-type d’un échantillon demande au moins 2 nombres. ¦ Abaterea standard a unui eșantion cere cel puțin 2 numere.
+Ce calcul n’a pas de résultat fini. ¦ Calculul acesta nu are un rezultat finit.
+Calcul trop long (plus de {input} signes). ¦ Calcul prea lung (peste {input} semne).
+« {x} » n’est pas un nombre en base {base}. ¦ „{x}” nu este un număr în baza {base}.
+Je ne comprends pas le signe « {c} ». ¦ Nu înțeleg semnul „{c}”.
+Les signes compris : + − × ÷ ^ ! % ( ) [ ] ; = et les noms des fonctions. ¦ Semnele înțelese: + − × ÷ ^ ! % ( ) [ ] ; = și numele funcțiilor.
+Tape un calcul. ¦ Tastează un calcul.
+Trop de parenthèses imbriquées. ¦ Prea multe paranteze imbricate.
+Il manque un nombre après « {x} ». ¦ Lipsește un număr după „{x}”.
+Il manque un nombre à la fin. ¦ Lipsește un număr la sfârșit.
+Il manque un nombre après « {x} », avant « ) ». ¦ Lipsește un număr după „{x}”, înainte de „)”.
+Il y a une parenthèse fermante « ) » de trop, ou il manque un nombre avant elle. ¦ Există o paranteză de închidere „)” în plus sau lipsește un număr înaintea ei.
+Il manque un nombre avant « {x} ». ¦ Lipsește un număr înainte de „{x}”.
+Le signe « {v} » sépare les nombres d’une fonction, comme pgcd(12 ; 18). ¦ Semnul „{v}” separă numerele unei funcții, ca în pgcd(12 ; 18).
+Pour un nombre à virgule, colle la virgule aux chiffres : 2,5. ¦ Pentru un număr zecimal, lipește virgula de cifre: 2,5.
+Je ne comprends pas « {raw} » ici. ¦ Nu înțeleg „{raw}” aici.
+Il manque un signe entre « {raw} » et « {raw2} ». ¦ Lipsește un semn între „{raw}” și „{raw2}”.
+Par exemple « × » ou « + ». ¦ De exemplu „×” sau „+”.
+Il manque une parenthèse fermante « ) » après {name}(…). ¦ Lipsește o paranteză de închidere „)” după {name}(…).
+Ajoute « ) » à la fin. ¦ Adaugă „)” la sfârșit.
+Je ne comprends pas « {raw} » dans {name}(…). ¦ Nu înțeleg „{raw}” în {name}(…).
+Les parenthèses sont vides. ¦ Parantezele sunt goale.
+Le signe « ; » sépare les nombres d’une fonction, comme pgcd(12 ; 18) — il n’a pas sa place ici. ¦ Semnul „;” separă numerele unei funcții, ca în pgcd(12 ; 18) — nu își are locul aici.
+Il manque une parenthèse fermante « ) ». ¦ Lipsește o paranteză de închidere „)”.
+Il manque un crochet fermant « ] ». ¦ Lipsește o paranteză dreaptă de închidere „]”.
+Je ne comprends pas « {raw} » dans la liste. ¦ Nu înțeleg „{raw}” în listă.
+Une liste s’écrit [1 ; 2 ; 3]. ¦ O listă se scrie [1 ; 2 ; 3].
+Il manque la barre fermante « | » de la valeur absolue. ¦ Lipsește bara de închidere „|” a valorii absolute.
+Il manque le nombre de {x}. ¦ Lipsește numărul pentru {x}.
+Par exemple {name}(30). ¦ De exemplu {name}(30).
+Il y a une parenthèse fermante « ) » de trop. ¦ Există o paranteză de închidere „)” în plus.
+Retire-la, ou ajoute « ( » avant. ¦ Scoate-o sau adaugă „(” înainte.
+Il y a un crochet fermant « ] » de trop. ¦ Există o paranteză dreaptă de închidere „]” în plus.
+Il manque un signe avant « {raw} ». ¦ Lipsește un semn înainte de „{raw}”.
+Une équation ne peut pas contenir un autre signe « = ». ¦ O ecuație nu poate conține alt semn „=”.
+Je ne sais comparer avec « = » que des nombres. ¦ Cu „=” știu să compar doar numere.
+Je ne comprends pas ce calcul. ¦ Nu înțeleg calculul acesta.
+L’infini (∞) n’est pas un nombre : je ne peux pas calculer avec. ¦ Infinitul (∞) nu este un număr: nu pot calcula cu el.
+Il n’y a pas encore de résultat précédent (ans). ¦ Nu există încă un rezultat anterior (ans).
+{n} est une fonction : écris {n2}(…) avec son nombre entre parenthèses. ¦ {n} este o funcție: scrie {n2}(…) cu numărul ei între paranteze.
+La lettre « {n} » n’a pas de valeur. ¦ Litera „{n}” nu are valoare.
+Pour une équation, ajoute « = … » (x² = 4) ; pour une courbe, ouvre l’onglet 📈 Courbes. ¦ Pentru o ecuație, adaugă „= …” (x² = 4); pentru o curbă, deschide fila 📈 Curbe.
+Je ne connais pas « {n} ». ¦ Nu cunosc „{n}”.
+Voulais-tu dire « {s} » ? ¦ Ai vrut să spui „{s}”?
+La liste des fonctions est dans le mode 🧪 Scientifique (rubriques en haut des touches). ¦ Lista funcțiilor se află în modul 🧪 Științific (rubricile de deasupra tastelor).
+Je ne connais pas la fonction « {name} ». ¦ Nu cunosc funcția „{name}”.
+au moins {n} ¦ cel puțin {n}
+{min} à {max} nombres ¦ între {min} și {max} numere
+, séparés par « ; » ¦ , separate prin „;”
+La virgule sert aux nombres à virgule (2,5) : sépare les nombres avec « ; », par exemple {x}. ¦ Virgula servește pentru numerele zecimale (2,5): separă numerele cu „;”, de exemplu {x}.
+Par exemple : {ex} ¦ De exemplu: {ex}
+Je résous les équations jusqu’au degré 4. ¦ Rezolv ecuații până la gradul 4.
+Plusieurs lettres inconnues ({x}) : pour un système, écris toutes les équations dans resoudre(… ; …). ¦ Mai multe litere necunoscute ({x}): pentru un sistem, scrie toate ecuațiile în resoudre(… ; …).
+Aucune solution ¦ Nicio soluție
+Toujours vrai : tout nombre {name} convient. ¦ Mereu adevărat: orice număr {name} se potrivește.
+(l’égalité est toujours fausse) ¦ (egalitatea este mereu falsă)
+entre {x} et {x2} ¦ între {x} și {x2}
+, solutions entre {x} et {x2} ¦ , soluții între {x} și {x2}
+entre {a} et {b} ¦ între {a} și {b}
+Solutions cherchées entre {a} et {b}{x}. ¦ Soluții căutate între {a} și {b}{x}.
+(valeurs approchées) ¦ (valori aproximative)
+Ce système n’a pas d’inconnue (x, y, z…). ¦ Sistemul acesta nu are necunoscute (x, y, z…).
+Je résous les systèmes jusqu’à 6 inconnues. ¦ Rezolv sisteme cu până la 6 necunoscute.
+Ce système n’est pas du premier degré : je sais résoudre les systèmes où les inconnues ne sont ni multipliées entre elles, ni au carré. ¦ Sistemul acesta nu este de gradul întâi: știu să rezolv sisteme în care necunoscutele nu sunt nici înmulțite între ele, nici la pătrat.
+Système de {eq} à {unk}. ¦ Sistem de {eq} cu {unk}.
+Équation du 1er degré{x2}. ¦ Ecuație de gradul 1{x2}.
+Équation du {x}e degré{x2}. ¦ Ecuație de gradul {x}{x2}.
+=nb|équation ¦ ecuație|ecuații|de ecuații
+=nb|inconnue ¦ necunoscută|necunoscute|de necunoscute
+=nb|colonne ¦ coloană|coloane|de coloane
+=nb|ligne ¦ rând|rânduri|de rânduri
+=nb|nombre ¦ număr|numere|de numere
+=nb|jour ¦ zi|zile|de zile
+=nb|semaine ¦ săptămână|săptămâni|de săptămâni
+=nb|an ¦ an|ani|de ani
+=nb|mois ¦ lună|luni|de luni
+La dérivée n’existe pas en {name} = {x}. ¦ Derivata nu există în {name} = {x}.
+Les bornes de l’intégrale doivent être des nombres. ¦ Limitele integralei trebuie să fie numere.
+L’intégrale ne converge pas (la fonction part à l’infini entre les bornes). ¦ Integrala nu converge (funcția tinde la infinit între limite).
+Trop de termes (au plus {sum}). ¦ Prea mulți termeni (cel mult {sum}).
+Sinus (dans l’unité d’angle choisie) ¦ Sinus (în unitatea de unghi aleasă)
+Cosinus ¦ Cosinus
+Tangente ¦ Tangentă
+tan({x}{x2}) n’existe pas (le cosinus vaut 0). ¦ tan({x}{x2}) nu există (cosinusul este 0).
+Cette tangente n’existe pas (le cosinus vaut 0). ¦ Tangenta aceasta nu există (cosinusul este 0).
+{nm}(…) demande un nombre entre −1 et 1. ¦ {nm}(…) cere un număr între −1 și 1.
+Arc sinus (angle dont le sinus vaut x) ¦ Arcsinus (unghiul al cărui sinus este x)
+Arc cosinus ¦ Arccosinus
+Arc tangente ¦ Arctangentă
+Angle du point (x ; y) : atan2(y ; x) ¦ Unghiul punctului (x ; y): atan2(y ; x)
+Sinus hyperbolique ¦ Sinus hiperbolic
+Cosinus hyperbolique ¦ Cosinus hiperbolic
+Tangente hyperbolique ¦ Tangentă hiperbolică
+Argument sinus hyperbolique ¦ Argument sinus hiperbolic
+Argument cosinus hyperbolique ¦ Argument cosinus hiperbolic
+Argument tangente hyperbolique ¦ Argument tangentă hiperbolică
+Le logarithme demande un nombre plus grand que 0. ¦ Logaritmul cere un număr mai mare decât 0.
+Logarithme népérien (base e) ¦ Logaritm natural (baza e)
+Logarithme décimal ; log(x ; b) en base b ¦ Logaritm zecimal; log(x ; b) în baza b
+La base d’un logarithme ne peut pas valoir 1. ¦ Baza unui logaritm nu poate fi 1.
+Logarithme en base 2 ¦ Logaritm în baza 2
+Exponentielle : e puissance x ¦ Exponențială: e la puterea x
+Racine carrée ; racine(x ; n) : racine n-ième ¦ Rădăcină pătrată; racine(x ; n): rădăcina de ordinul n
+Racine cubique ¦ Rădăcină cubică
+Racine 4e ¦ Rădăcina de ordinul 4
+Racine n-ième : root(x ; n) ¦ Rădăcina de ordinul n: root(x ; n)
+Racine ¦ Rădăcină
+La racine 0-ième n’existe pas. ¦ Rădăcina de ordinul 0 nu există.
+Valeur absolue (ou module d’un complexe) : |x| ¦ Valoare absolută (sau modulul unui număr complex): |x|
+Factorielle : n! = 1 × 2 × … × n ¦ Factorial: n! = 1 × 2 × … × n
+Fonction Γ : Γ(n) = (n − 1)! ¦ Funcția Γ: Γ(n) = (n − 1)!
+Partie réelle ¦ Partea reală
+Partie imaginaire ¦ Partea imaginară
+Module |z| = √(a² + b²) ¦ Modulul |z| = √(a² + b²)
+Argument (angle) d’un complexe ¦ Argumentul (unghiul) unui număr complex
+L’argument de 0 n’existe pas. ¦ Argumentul lui 0 nu există.
+Conjugué : a − bi ¦ Conjugatul: a − bi
+Arrondi (au plus proche) ; arrondi(x ; n) avec n chiffres après la virgule ¦ Rotunjire (la cel mai apropiat); arrondi(x ; n) cu n cifre după virgulă
+Partie entière (vers le bas) ¦ Partea întreagă (în jos)
+Arrondi vers le haut ¦ Rotunjire în sus
+Coupe les chiffres après la virgule (vers 0) ¦ Taie cifrele de după virgulă (spre 0)
+Tronque ¦ Trunchiere
+Écrit un nombre à virgule en fraction ¦ Scrie un număr zecimal ca fracție
+Je ne trouve pas de fraction simple pour ce nombre. ¦ Nu găsesc o fracție simplă pentru numărul acesta.
+Écrit le nombre en décimal ¦ Scrie numărul în formă zecimală
+Signe : −1, 0 ou 1 ¦ Semn: −1, 0 sau 1
+Signe ¦ Semn
+Reste de la division : 17 mod 5 ¦ Restul împărțirii: 17 mod 5
+Quotient entier ¦ Cât întreg
+Plus grand commun diviseur ¦ Cel mai mare divizor comun
+Plus petit commun multiple ¦ Cel mai mic multiplu comun
+Combinaisons : C(n ; k) façons de choisir k parmi n ¦ Combinări: C(n ; k) moduri de a alege k din n
+Arrangements : A(n ; k) (l’ordre compte) ¦ Aranjamente: A(n ; k) (ordinea contează)
+Est-ce un nombre premier ? ¦ Este un număr prim?
+Oui, {n} est premier ✓ ¦ Da, {n} este prim ✓
+Non, {n} n’est pas premier ¦ Nu, {n} nu este prim
+Décomposition en facteurs premiers ¦ Descompunere în factori primi
+Le nombre premier suivant ¦ Următorul număr prim
+Écrit un entier en binaire (base 2) ¦ Scrie un număr întreg în binar (baza 2)
+Écrit un entier en octal (base 8) ¦ Scrie un număr întreg în octal (baza 8)
+Écrit un entier en hexadécimal (base 16) ¦ Scrie un număr întreg în hexazecimal (baza 16)
+Écrit un entier dans une base de 2 à 36 ¦ Scrie un număr întreg într-o bază de la 2 la 36
+calc|Moyenne ¦ Media
+Médiane (la valeur du milieu) ¦ Mediana (valoarea din mijloc)
+Variance (de la population) ¦ Varianța (populației)
+Variance ¦ Varianță
+Écart-type σ (de la population, comme au lycée) ¦ Abaterea standard σ (a populației, ca la liceu)
+Écart-type ¦ Abatere standard
+Écart-type d’un échantillon (divisé par n − 1) ¦ Abaterea standard a unui eșantion (împărțită la n − 1)
+Somme d’une liste ; somme(k² ; k ; 1 ; 10) : somme d’une suite ¦ Suma unei liste; somme(k² ; k ; 1 ; 10): suma unui șir
+Produit d’une liste ; produit(k ; k ; 1 ; 5) ¦ Produsul unei liste; produit(k ; k ; 1 ; 5)
+Le plus petit ¦ Cel mai mic
+Le plus grand ¦ Cel mai mare
+Étendue : max − min ¦ Amplitudine: max − min
+calc|Étendue ¦ Amplitudine
+1er quartile ¦ Quartila 1
+Quartile ¦ Quartilă
+3e quartile ¦ Quartila 3
+Combien de nombres dans la liste ¦ Câte numere sunt în listă
+Effectif ¦ Efectiv
+Range la liste du plus petit au plus grand ¦ Ordonează lista de la cel mai mic la cel mai mare
+Tri ¦ Sortare
+Déterminant d’une matrice carrée ¦ Determinantul unei matrice pătratice
+Matrice inverse ¦ Matricea inversă
+Transposée (lignes ↔ colonnes) ¦ Transpusa (rânduri ↔ coloane)
+Trace : somme de la diagonale ¦ Urma: suma diagonalei
+Trace ¦ Urmă
+La trace demande une matrice carrée. ¦ Urma cere o matrice pătratică.
+Matrice identité n × n ¦ Matricea unitate n × n
+La taille va de 1 à {mat}. ¦ Dimensiunea merge de la 1 la {mat}.
+Rang d’une matrice ¦ Rangul unei matrice
+Rang ¦ Rang
+Résout A·X = B (matrice A, liste B) ¦ Rezolvă A·X = B (matricea A, lista B)
+La matrice a {r} lignes et la liste {n} nombres : il en faut autant. ¦ Matricea are {r} rânduri, iar lista {n} numere: trebuie să fie tot atâtea.
+Le système doit avoir autant d’équations que d’inconnues. ¦ Sistemul trebuie să aibă tot atâtea ecuații câte necunoscute.
+Résout une équation (jusqu’au 4e degré exactement, ou approchée) ou un système ¦ Rezolvă o ecuație (exact până la gradul 4 sau aproximativ) ori un sistem
+Écris l’équation dans resoudre(…), par exemple resoudre(x^2 = 4). ¦ Scrie ecuația în resoudre(…), de exemplu resoudre(x^2 = 4).
+Intervalle ¦ Interval
+resoudre(équation ; lettre ; début ; fin) : je n’ai pas compris les nombres en plus. ¦ resoudre(ecuație ; literă ; început ; sfârșit): nu am înțeles numerele în plus.
+Racines d’un polynôme : ses coefficients, du plus haut degré au plus bas ¦ Rădăcinile unui polinom: coeficienții lui, de la gradul cel mai mare la cel mai mic
+Nombre dérivé de f en a : derivee(f(x) ; a) ¦ Derivata lui f în a: derivee(f(x) ; a)
+calc|Dérivée ¦ Derivată
+Intégrale de f entre a et b : integrale(f(x) ; a ; b) ¦ Integrala lui f între a și b: integrale(f(x) ; a ; b)
+Intégrale ¦ Integrală
+Valeur approchée de la limite en a ¦ Valoarea aproximativă a limitei în a
+Je ne trouve pas de limite (à gauche et à droite ce n’est pas pareil, ou ça part à l’infini). ¦ Nu găsesc o limită (la stânga și la dreapta nu e la fel, sau tinde la infinit).
+pas un nombre ¦ nu este un număr
+longueur ¦ lungime
+surface ¦ suprafață
+volume ¦ volum
+poids ¦ greutate
+monnaie ¦ monedă
+durée ¦ durată
+température ¦ temperatură
+valeur approchée : la mesure changeait d’un lieu à l’autre ¦ valoare aproximativă: măsura varia de la un loc la altul
+mesure de {region} ¦ măsură din {region}
+valeur approchée ¦ valoare aproximativă
+Le calendrier républicain n’est pas chargé. ¦ Calendarul republican nu este încărcat.
+Le calendrier républicain n’a servi que du 22 septembre 1792 (1er vendémiaire an I) au 31 décembre 1805. ¦ Calendarul republican a fost folosit doar între 22 septembrie 1792 (1 vendémiaire an I) și 31 decembrie 1805.
+Cette date est hors du calendrier républicain. ¦ Data aceasta este în afara calendarului republican.
+date approchée ¦ dată aproximativă
+Le calcul des écarts de dates n’est pas chargé. ¦ Calculul diferențelor dintre date nu este încărcat.
+Je ne sais pas calculer l’écart entre ces deux dates. ¦ Nu știu să calculez diferența dintre aceste două date.
+soit {days} ({weeks}) ¦ adică {days} ({weeks})
+la 2e date est la plus ancienne ¦ a doua dată este cea mai veche
+du {from} au {to} ¦ de la {from} la {to}
+{n} environ ¦ aproximativ {n}
+entre {years} et {x} ¦ între {years} și {x}
+une date n’est pas complète (jour, mois et année) : de {x} à {x2} ¦ o dată nu este completă (zi, lună și an): de la {x} la {x2}
+Je ne comprends pas la date « {x} ». ¦ Nu înțeleg data „{x}”.
+Écris-la comme dans un acte : 7 mai 1925, 14/07/1789, 3 frimaire an XII. ¦ Scrie-o ca într-un act: 7 mai 1925, 14/07/1789, 3 frimaire an XII.
+Il faut une date complète (jour, mois, année). ¦ Trebuie o dată completă (zi, lună, an).
+« {x} » est une mesure de {label} : choisis cette région dans ⚙️ Réglages → Mesures anciennes. ¦ „{x}” este o măsură din {label}: alege regiunea aceasta în ⚙️ Setări → Măsuri vechi.
+Je ne connais pas l’unité « {right} ». ¦ Nu cunosc unitatea „{right}”.
+Les unités comprises sont dans la rubrique « Unités » du mode 🧪 Scientifique. ¦ Unitățile înțelese se află în rubrica „Unități” din modul 🧪 Științific.
+On ne peut pas convertir une {x} en {x2} ({right}). ¦ Nu se poate converti o {x} în {x2} ({right}).
+Je ne connais pas l’unité de « {left} ». ¦ Nu cunosc unitatea lui „{left}”.
+angle en {x} : passe en RAD pour calculer avec π ¦ unghi în {x}: treci la RAD pentru a calcula cu π
+degrés ¦ grade
+grades ¦ grade centesimale
+Ce calcul est trop gros pour être fait. ¦ Calculul acesta e prea mare pentru a fi făcut.
+La lettre « {x} » n’a pas de valeur : une courbe s’écrit avec x seulement, par exemple sin(x). ¦ Litera „{x}” nu are valoare: o curbă se scrie doar cu x, de exemplu sin(x).
+Écris seulement la formule de y, par exemple x^2 − 1 (sans « = »). ¦ Scrie doar formula lui y, de exemplu x^2 − 1 (fără „=”).
+Trigonométrie ¦ Trigonometrie
+Hyperboliques ¦ Hiperbolice
+Logarithmes et exponentielle ¦ Logaritmi și exponențială
+Puissances et racines ¦ Puteri și rădăcini
+Nombres complexes ¦ Numere complexe
+Arithmétique et arrondis ¦ Aritmetică și rotunjiri
+Bases (binaire, hexadécimal…) ¦ Baze (binar, hexazecimal…)
+Matrices ¦ Matrice
+Équations ¦ Ecuații
+Dérivées et intégrales ¦ Derivate și integrale
+Degrés (un tour = 360°) ¦ Grade (o tură = 360°)
+Radians (un tour = 2π) ¦ Radiani (o tură = 2π)
+Grades (un tour = 400 gr) ¦ Grade centesimale (o tură = 400 gr)
+Fonctions ¦ Funcții
+Sinus ¦ Sinus
+Au carré ¦ La pătrat
+Puissance ¦ Putere
+Racine carrée ¦ Rădăcină pătrată
+Arc sinus ¦ Arcsinus
+Au cube ¦ La cub
+Logarithme népérien ¦ Logaritm natural
+Exponentielle ¦ Exponențială
+Valeur absolue ¦ Valoare absolută
+Pi = 3,14159… ¦ Pi = 3,14159…
+Nombre d’or = 1,61803… ¦ Numărul de aur = 1,61803…
+Puissance de 10 ¦ Putere a lui 10
+Reste de la division ¦ Restul împărțirii
+Pour cent (200 + 10 % = 220) ¦ Procent (200 + 10 % = 220)
+Degrés, même en mode RAD ¦ Grade, chiar și în modul RAD
+Sépare les nombres d’une fonction ¦ Separă numerele unei funcții
+Le résultat précédent ¦ Rezultatul anterior
+Complexes ¦ Complexe
+Module |z| ¦ Modulul |z|
+Argument (angle) ¦ Argument (unghi)
+Conjugué ¦ Conjugat
+Écris un complexe a + bi : (3 + 4i) × 2, √(−9), i^2. ¦ Scrie un număr complex a + bi: (3 + 4i) × 2, √(−9), i^2.
+Arithmétique ¦ Aritmetică
+Combinaisons : C(n ; k) ¦ Combinări: C(n ; k)
+Arrangements : A(n ; k) ¦ Aranjamente: A(n ; k)
+Arrondi à 2 chiffres après la virgule ¦ Rotunjire la 2 cifre după virgulă
+Partie entière ¦ Partea întreagă
+En fraction ¦ Ca fracție
+En nombre à virgule ¦ Ca număr zecimal
+Bases ¦ Baze
+En binaire ¦ În binar
+En octal ¦ În octal
+En hexadécimal ¦ În hexazecimal
+Dans une base de 2 à 36 ¦ Într-o bază de la 2 la 36
+Un nombre binaire : 0b1010 ¦ Un număr binar: 0b1010
+Un nombre hexadécimal : 0xFF ¦ Un număr hexazecimal: 0xFF
+Une liste : [12 ; 15 ; 9] ¦ O listă: [12 ; 15 ; 9]
+Sépare les nombres ¦ Separă numerele
+Écart-type (population) ¦ Abatere standard (populație)
+Écart-type d’un échantillon ¦ Abaterea standard a unui eșantion
+Mets tes nombres entre crochets, séparés par « ; ». ¦ Pune numerele între paranteze drepte, separate prin „;”.
+Écrire une matrice dans une grille ¦ Scrie o matrice într-o grilă
+Une matrice : [[1 ; 2] ; [3 ; 4]] ¦ O matrice: [[1 ; 2] ; [3 ; 4]]
+Matrice identité ¦ Matrice unitate
+Produit de deux matrices ¦ Produsul a două matrice
+Une matrice = des lignes entre crochets : [[1 ; 2] ; [3 ; 4]]. ¦ O matrice = rânduri între paranteze drepte: [[1 ; 2] ; [3 ; 4]].
+Le signe égal d’une équation ¦ Semnul egal al unei ecuații
+Résout une équation ou un système ¦ Rezolvă o ecuație sau un sistem
+Racines d’un polynôme : ses coefficients ¦ Rădăcinile unui polinom: coeficienții lui
+Système A·X = B ¦ Sistem A·X = B
+Tape l’équation avec « = » : la calculette la résout (jusqu’au 4e degré exactement). ¦ Tastează ecuația cu „=”: calculatorul o rezolvă (exact până la gradul 4).
+Analyse ¦ Analiză
+Nombre dérivé : derivee(f(x) ; a) ¦ Derivata într-un punct: derivee(f(x) ; a)
+Intégrale : integrale(f(x) ; a ; b) ¦ Integrala: integrale(f(x) ; a ; b)
+Limite : limite(f(x) ; a) ¦ Limita: limite(f(x) ; a)
+Somme d’une suite ¦ Suma unui șir
+Les dérivées, intégrales et limites se calculent en radians. ¦ Derivatele, integralele și limitele se calculează în radiani.
+Unités ¦ Unități
+Écris « 3 toises en m » ; les mesures anciennes suivent la région choisie dans ⚙️. ¦ Scrie „3 toises en m”; măsurile vechi urmează regiunea aleasă în ⚙️.
+Les dates s’écrivent comme dans un acte (C4) : 7 mai 1925, 14/07/1789, vers 1784, 3 frimaire an XII. ¦ Datele se scriu ca într-un act (C4): 7 mai 1925, 14/07/1789, vers 1784, 3 frimaire an XII.
+Tout effacer (Échap) ¦ Șterge tot (Esc)
+Effacer le dernier signe ¦ Șterge ultimul semn
+Pour cent ¦ Procent
+Changer le signe ¦ Schimbă semnul
+Calculer (Entrée) ¦ Calculează (Enter)
+Glisser pour déplacer la calculette ¦ Trage pentru a muta calculatorul
+Mode de la calculette ¦ Modul calculatorului
+Grosses touches, ruban, mémoire ¦ Taste mari, bandă, memorie
+Fonctions, complexes, matrices, équations, unités, dates ¦ Funcții, numere complexe, matrice, ecuații, unități, date
+Tracer des courbes y = f(x) ¦ Desenează curbe y = f(x)
+Réglages de la calculette ¦ Setările calculatorului
+Fermer la calculette ¦ Închide calculatorul
+Vider le ruban (on peut l’annuler juste après) ¦ Golește banda (poți anula imediat după)
+Calculs déjà faits : un clic reprend le résultat ¦ Calcule deja făcute: un clic reia rezultatul
+Calcul à faire ¦ Calcul de făcut
+Tape un calcul… ¦ Tastează un calcul…
+Copier le résultat ¦ Copiază rezultatul
+Effacer la mémoire ¦ Golește memoria
+Reprendre le nombre gardé en mémoire ¦ Reia numărul păstrat în memorie
+Ajouter le résultat à la mémoire ¦ Adaugă rezultatul la memorie
+Retirer le résultat de la mémoire ¦ Scade rezultatul din memorie
+Unité des angles ¦ Unitatea unghiurilor
+Ajouter une courbe ¦ Adaugă o curbă
+Exporter l’image du graphique (PNG) ¦ Exportă imaginea graficului (PNG)
+Exporter en PNG ¦ Exportă în PNG
+Graphique des courbes ¦ Graficul curbelor
+Glisse pour te déplacer · molette pour zoomer · survole une courbe pour lire ses valeurs · x en radians. ¦ Trage pentru a te deplasa · rotița pentru zoom · treci peste o curbă pentru a-i citi valorile · x în radiani.
+Glisser pour agrandir ou réduire ¦ Trage pentru a mări sau a micșora
+Point décimal ¦ Punct zecimal
+Par exemple 12 × 3,5, ou 1/3 + 1/6. ¦ De exemplu 12 × 3,5 sau 1/3 + 1/6.
+Reprendre ce résultat dans le calcul ¦ Reia rezultatul acesta în calcul
+Reprendre ce calcul pour le modifier ¦ Reia calculul acesta pentru a-l modifica
+Reprendre ce calcul ¦ Reia calculul acesta
+Copier ce résultat ¦ Copiază rezultatul acesta
+Tes calculs s’écriront ici. ¦ Calculele tale vor apărea aici.
+Ruban de la calculette vidé ¦ Banda calculatorului a fost golită
+Résultat copié ¦ Rezultat copiat
+Il n’y a pas encore de résultat à copier. ¦ Nu există încă un rezultat de copiat.
+La copie n’a pas marché : choisis le résultat et copie-le à la main. ¦ Copierea nu a mers: selectează rezultatul și copiază-l manual.
+Nombre gardé en mémoire ¦ Număr păstrat în memorie
+Calcule d’abord un nombre à garder en mémoire. ¦ Calculează mai întâi un număr de păstrat în memorie.
+Ajouter au calcul ¦ Adaugă la calcul
+Mesures anciennes : {label} (à changer dans ⚙️). Pour les mesures et monnaies d’autres régions : Réglages → Calendrier / mesures. ¦ Măsuri vechi: {label} (de schimbat în ⚙️). Pentru măsurile și monedele altor regiuni: Setări → Calendar / măsuri.
+Âge ou écart entre deux dates ¦ Vârsta sau diferența dintre două date
+Calculer l’écart ¦ Calculează diferența
+Calendrier républicain ↔ grégorien ¦ Calendar republican ↔ gregorian
+3 frimaire an XII ou 14/07/1794 ¦ 3 frimaire an XII sau 14/07/1794
+Retirer cette courbe ¦ Scoate curba aceasta
+Aucune courbe. ¦ Nicio curbă.
+Revenir à la vue de départ ¦ Revino la vederea inițială
+Image « {name} » téléchargée. ¦ Imaginea „{name}” a fost descărcată.
+Ce résultat ne se reprend pas dans un calcul (c’est un texte). ¦ Rezultatul acesta nu poate fi reluat într-un calcul (este un text).
+Courbe retirée. ¦ Curbă scoasă.
+Écris la première date. ¦ Scrie prima dată.
+Écris la deuxième date. ¦ Scrie a doua dată.
+Écris une date. ¦ Scrie o dată.
+{d} en grégorien ¦ {d} în calendarul gregorian
+{d} en républicain ¦ {d} în calendarul republican
+Comme l’app (clair ou sombre) ¦ Ca aplicația (luminos sau întunecat)
+Chiffres affichés ¦ Cifre afișate
+Séparateur décimal ¦ Separator zecimal
+Virgule : 2,5 (et « ; » entre les nombres) ¦ Virgulă: 2,5 (și „;” între numere)
+Point : 2.5 (et « , » ou « ; » entre les nombres) ¦ Punct: 2.5 (și „,” sau „;” între numere)
+Fractions exactes quand c’est possible (1/3 au lieu de 0,333…) ¦ Fracții exacte când se poate (1/3 în loc de 0,333…)
+Fractions exactes ¦ Fracții exacte
+Bouton 🧮 dans la barre du haut ¦ Butonul 🧮 din bara de sus
+La calculette s’ouvre aussi avec {x} (à changer dans Réglages → Raccourcis). Sa place parmi les boutons du haut : Réglages → Apparence → « Boutons en haut à droite ». ¦ Calculatorul se deschide și cu {x} (de schimbat în Setări → Comenzi rapide). Locul lui printre butoanele de sus: Setări → Aspect → „Butoane din dreapta sus”.
+Réglage de la calculette ¦ Setare a calculatorului
+les réglages de la calculette (thème, mode, angle, précision) ¦ setările calculatorului (temă, mod, unghi, precizie)
+Réglage « {nom} » importé : clique « Appliquer » pour t’en servir. ¦ Setarea „{nom}” a fost importată: fă clic pe „Aplică” ca s-o folosești.
+La calculette n’est pas encore chargée. Réessaie dans un instant. ¦ Calculatorul nu este încă încărcat. Încearcă din nou într-o clipă.
+Ouvrir la calculette ¦ Deschide calculatorul
+CALCULETTE ¦ CALCULATOR
+Mesures anciennes ¦ Măsuri vechi
+date|De ¦ De la
+date|À ¦ Până la
+=calcul ¦ calcul|calcule|de calcule
+Français + latin ¦ Franceză + latină
+Titre de l’acte (ex. Baptême de Jean Martin, 1790) ¦ Titlul actului (ex. Botezul lui Jean Martin, 1790)
+Genre d’acte ¦ Tipul actului
+Source (AD, cote, vue) ¦ Sursă (AD, cotă, imagine)
+Archives, cote, numéro de vue ¦ Arhive, cotă, numărul imaginii
+Où en est cette transcription (pour la liste « Transcriptions d’actes ») ¦ Stadiul acestei transcrieri (pentru lista „Transcrieri de acte”)
+Le texte (.txt), l’impression ou un PDF (image + texte) ¦ Textul (.txt), tipărirea sau un PDF (imagine + text)
+Exporter ▾ ¦ Exportă ▾
+Plus ▾ ¦ Mai mult ▾
+Déplacer l’image, ou barre d’espace ¦ Mută imaginea, sau bara de spațiu
+Déplacer l’image ¦ Mută imaginea
+Dessiner une zone : choisis un passage dans le texte, puis dessine son rectangle sur l’image (les deux restent liés) ¦ Desenează o zonă: alege un pasaj din text, apoi desenează-i dreptunghiul pe imagine (cele două rămân legate)
+Dessiner une zone ¦ Desenează o zonă
+Loupe qui suit la souris (la molette change le grossissement) ¦ Lupă care urmărește mouse-ul (rotița schimbă mărirea)
+Tourner l’image de 90° ¦ Rotește imaginea cu 90°
+Tourner de 90° ¦ Rotește cu 90°
+Choisir l’image de l’acte (base ou ordinateur) ¦ Alege imaginea actului (din bază sau de pe calculator)
+Choisis l’image de l’acte : « 🖼️ Image… » (une photo de la base, ou un fichier de l’ordinateur). ¦ Alege imaginea actului: „🖼️ Imagine…” (o fotografie din bază sau un fișier de pe calculator).
+Lire un texte imprimé ou tapé (pose aussi les zones ligne par ligne) ¦ Citește un text tipărit sau dactilografiat (pune și zonele rând cu rând)
+Lire (imprimé) ¦ Citește (tipărit)
+Lire l’écriture à la main : toute la page, ou seulement la zone choisie (▭). Le texte est proposé ligne par ligne, à relire. ¦ Citește scrisul de mână: toată pagina sau doar zona aleasă (▭). Textul este propus rând cu rând, de recitit.
+Lire l’acte ¦ Citește actul
+Arrêter la lecture ¦ Oprește citirea
+Langue du texte : sert à la lecture automatique, et « 📜 Aide à la lecture » s’ouvre sur cette langue ¦ Limba textului: servește la citirea automată, iar „📜 Ajutor la citire” se deschide pe această limbă
+Un modèle d’acte à compléter ¦ Un model de act de completat
+Le latin des registres, les abréviations, les anciennes lettres (ſ, ꝑ…) et des exercices : choisis d’abord un mot dans le texte pour le chercher ¦ Latina registrelor, abrevierile, literele vechi (ſ, ꝑ…) și exerciții: alege mai întâi un cuvânt din text ca să-l cauți
+Aide à la lecture ¦ Ajutor la citire
+Repérer les noms, dates, lieux et métiers ¦ Găsește numele, datele, locurile și meseriile
+Repérer ¦ Găsește
+Mettre le texte dans le média ¦ Pune textul în fișierul media
+Copier le texte ¦ Copiază textul
+La lecture (imprimé et manuscrit) et l’export prennent l’image avec les réglages « Mieux voir » (contraste, netteté, canal, seuil…), sinon l’image d’origine ¦ Citirea (tipărit și manuscris) și exportul iau imaginea cu setările „Vezi mai bine” (contrast, claritate, canal, prag…), altfel imaginea originală
+Lire et exporter l’image améliorée ¦ Citește și exportă imaginea îmbunătățită
+Insérer {c} ¦ Inserează {c}
+La transcription, ligne à ligne comme sur l’acte. Choisis un passage, puis dessine sa zone sur l’image (▭ Zone) : les deux restent liés. ¦ Transcrierea, rând cu rând ca în act. Alege un pasaj, apoi desenează-i zona pe imagine (▭ Zonă): cele două rămân legate.
+Elles étaient posées pour l’ancienne image. ¦ Erau puse pentru imaginea veche.
+Garder les zones déjà posées ? ¦ Păstrezi zonele deja puse?
+Garder les zones ¦ Păstrează zonele
+Les retirer ¦ Scoate-le
+L’image est dans les Médias et devient l’image de l’acte. ¦ Imaginea este în fișierele media și devine imaginea actului.
+Largeur (l’image prend toute la largeur, le mieux pour lire) ¦ Lățime (imaginea ocupă toată lățimea, cel mai bine pentru citit)
+Taille réelle (100 %) ¦ Mărime reală (100 %)
+« Mieux voir » : cette image n’a pas pu être préparée (trop grande ou abîmée) ; seuls contraste, luminosité, négatif et gris s’appliquent. ¦ „Vezi mai bine”: imaginea aceasta nu a putut fi pregătită (prea mare sau deteriorată); se aplică doar contrastul, luminozitatea, negativul și tonurile de gri.
+Ce navigateur ne sait pas calculer ces réglages : seuls contraste, luminosité, négatif et gris s’appliquent. ¦ Browserul acesta nu știe să calculeze aceste setări: se aplică doar contrastul, luminozitatea, negativul și tonurile de gri.
+Image de l’acte illisible. ¦ Imaginea actului nu poate fi citită.
+Zone non reliée ¦ Zonă nelegată
+— glisse pour la déplacer, tire une poignée pour la redimensionner (flèches, Maj + flèches) ¦ — trage pentru a o muta, trage de un mâner pentru a-i schimba mărimea (săgeți, Shift + săgeți)
+Tirer pour redimensionner ¦ Trage pentru a schimba mărimea
+pas encore reliée au texte ¦ încă nelegată de text
+Relier cette zone au passage choisi dans le texte ¦ Leagă zona aceasta de pasajul ales din text
+Au passage choisi ¦ De pasajul ales
+Lire l’écriture à la main dans cette zone seulement ¦ Citește scrisul de mână doar în zona aceasta
+Lire cette zone ¦ Citește zona aceasta
+Supprimer la zone (Suppr) — « ↶ Annuler » la remet ¦ Șterge zona (Del) — „↶ Anulează” o pune înapoi
+Glisse la zone pour la déplacer, tire une des 8 poignées pour changer sa taille ¦ Trage zona pentru a o muta, trage de unul dintre cele 8 mânere pentru a-i schimba mărimea
+glisser · poignées · flèches · Maj + flèches · ⌘Z ¦ trage · mânere · săgeți · Shift + săgeți · ⌘Z
+Rétabli ¦ Refăcut
+Annulé ¦ Anulat
+Zone supprimée ¦ Zonă ștearsă
+Zone déplacée (⌘Z pour annuler) ¦ Zonă mutată (⌘Z pentru anulare)
+Zone redimensionnée (⌘Z pour annuler) ¦ Zonă redimensionată (⌘Z pentru anulare)
+Zone reliée au passage choisi ¦ Zonă legată de pasajul ales
+Zone posée : choisis son passage dans le texte, puis « 🔗 Au passage choisi » ¦ Zonă pusă: alege-i pasajul din text, apoi „🔗 De pasajul ales”
+Glisse pour déplacer l’image (ou barre d’espace) · molette : zoomer · clic sur une zone : la choisir ¦ Trage pentru a muta imaginea (sau bara de spațiu) · rotița: zoom · clic pe o zonă: o alegi
+Choisis un passage dans le texte, puis dessine son rectangle sur l’image : les deux restent liés ¦ Alege un pasaj din text, apoi desenează-i dreptunghiul pe imagine: cele două rămân legate
+Pas encore d’image ¦ Încă nicio imagine
+Personnes de l’acte ¦ Persoanele din act
+Rôle dans l’acte ¦ Rolul în act
+— rôle — ¦ — rol —
+role|sujet ¦ subiect
+role|parent ¦ părinte
+role|conjoint ¦ soț/soție
+role|conjoint défunt ¦ soț/soție decedat(ă)
+role|défunt ¦ decedat
+role|parrain ¦ naș
+role|marraine ¦ nașă
+role|témoin ¦ martor
+role|déclarant ¦ declarant
+role|officiant ¦ oficiant
+role|officier ¦ ofițer de stare civilă
+role|notaire ¦ notar
+role|autre ¦ altul
+fiche n° {person_id} ¦ fișa nr. {person_id}
+Fiche… ¦ Fișă…
+Noms repérés ¦ Nume găsite
+tout garder ¦ păstrează tot
+Garder et relier à cette fiche ¦ Păstrează și leagă de această fișă
+Garder dans les personnes de l’acte ¦ Păstrează în persoanele actului
+Ouvrir dans 📜 Aide à la lecture ¦ Deschide în 📜 Ajutor la citire
+« 🧭 Repérer » cherche dans le texte les noms (et leur rôle : parrain, témoin, fils de…), les dates (même en toutes lettres, ou au calendrier républicain), les lieux et les métiers, et propose les fiches de ta base qui leur ressemblent. ¦ „🧭 Găsește” caută în text numele (și rolul lor: naș, martor, fiul lui…), datele (chiar scrise în litere sau în calendarul republican), locurile și meseriile, și îți propune fișele din baza ta care le seamănă.
+Relier « {name} » à une fiche ¦ Leagă „{name}” de o fișă
+Choisis une fiche. ¦ Alege o fișă.
+Personne gardée et reliée à sa fiche. ¦ Persoană păstrată și legată de fișa ei.
+La transcription non enregistrée sera perdue (💾 d’abord). ¦ Transcrierea nesalvată se va pierde (💾 mai întâi).
+« Mieux voir » : cette image n’a pas pu être préparée. ¦ „Vezi mai bine”: imaginea aceasta nu a putut fi pregătită.
+Chargement du lecteur… ¦ Se încarcă cititorul…
+Aucun texte lu sur cette image (essaie le contraste, ou « Lire (manuscrit) »). ¦ Niciun text citit pe imaginea aceasta (încearcă contrastul sau „Citește (manuscris)”).
+Texte lu (à relire) ¦ Text citit (de recitit)
+Texte lu et zones posées ligne par ligne : relis et corrige. ¦ Text citit și zone puse rând cu rând: recitește și corectează.
+Lecture arrêtée ¦ Citire oprită
+Une lecture est déjà en cours. ¦ O citire este deja în curs.
+La lecture d’écriture manuscrite n’est pas encore installée : Réglages → Reconnaissance d’écriture (HTR) (une seule fois, l’assistant explique tout). ¦ Citirea scrisului de mână nu este încă instalată: Setări → Recunoașterea scrisului (HTR) (o singură dată, asistentul explică totul).
+Lecture de la zone… ¦ Se citește zona…
+Lecture de l’acte… ¦ Se citește actul…
+Lecture de la zone ¦ Citirea zonei
+Lecture de l’acte ¦ Citirea actului
+La lecture n’a pas abouti. ¦ Citirea nu a reușit.
+Aucune ligne d’écriture trouvée : essaie « 🎚️ Mieux voir » (contraste), ou une zone plus serrée. ¦ Niciun rând de scris găsit: încearcă „🎚️ Vezi mai bine” (contrast) sau o zonă mai strânsă.
+Sûr à {x} % — clique pour le corriger ¦ Sigur în proporție de {x} % — fă clic pentru a-l corecta
+LECTURE AUTOMATIQUE · À RELIRE ¦ CITIRE AUTOMATĂ · DE RECITIT
+Le texte lu, ligne par ligne ¦ Textul citit, rând cu rând
+Mettre {x} dans le texte ¦ Pune {x} în text
+les {n} lignes ¦ cele {n} rânduri
+mots peu sûrs ¦ cuvinte nesigure
+=mot peu sûr ¦ cuvânt nesigur|cuvinte nesigure|de cuvinte nesigure
+(sûrs à moins de {x} %) ¦ (sigure sub {x} %)
+aucun mot peu sûr ¦ niciun cuvânt nesigur
+Relire avec ce modèle ¦ Recitește cu modelul acesta
+Garder cette ligne ¦ Păstrează rândul acesta
+Ligne {x} sur l’image ¦ Rândul {x} pe imagine
+pas d’image pour cette ligne ¦ nicio imagine pentru rândul acesta
+Corrige directement dans les lignes (clique un mot surligné pour le remplacer) · Entrée : ligne suivante · décoche une ligne pour la laisser de côté. Lu par « {x} », sur cet ordinateur. Ensuite, « 🧭 Repérer » cherche tout seul les noms, dates et lieux. ¦ Corectează direct în rânduri (fă clic pe un cuvânt evidențiat pentru a-l înlocui) · Enter: rândul următor · debifează un rând pentru a-l lăsa deoparte. Citit de „{x}”, pe acest calculator. Apoi, „🧭 Găsește” caută singur numele, datele și locurile.
+Lectures à vérifier ¦ Citiri de verificat
+Utiliser « {value} » ¦ Folosește „{value}”
+Aucune ligne gardée. ¦ Niciun rând păstrat.
+Lu automatiquement (sûr à {x} %) ¦ Citit automat (sigur în proporție de {x} %)
+{x} (à relire) ¦ {x} (de recitit)
+Texte mis dans la transcription, zones posées ligne par ligne ; noms, dates et lieux repérés à droite. ¦ Text pus în transcriere, zone puse rând cu rând; numele, datele și locurile găsite sunt în dreapta.
+Clique sur l’image de l’acte. Une image de l’ordinateur est ajoutée aux Médias. ¦ Fă clic pe imaginea actului. O imagine de pe calculator este adăugată în fișierele media.
+Enregistré, et le texte est dans la transcription du média. ¦ Salvat, iar textul este în transcrierea fișierului media.
+Image + texte côte à côte ¦ Imagine + text alăturate
+Image améliorée ¦ Imagine îmbunătățită
+Choisis d’abord un passage dans le texte. ¦ Alege mai întâi un pasaj din text.
+Il n’y a pas d’image de la base. ¦ Nu există nicio imagine din bază.
+Loupe : la molette change le grossissement ¦ Lupă: rotița schimbă mărirea
+Réglages de l’image retenus pour cet acte : ils reviennent à la prochaine ouverture. ¦ Setările imaginii au fost reținute pentru acest act: revin la următoarea deschidere.
+L’image est déjà d’origine ¦ Imaginea este deja cea originală
+Image remise d’origine ¦ Imaginea a revenit la original
+L’aide à la lecture n’est pas chargée. ¦ Ajutorul la citire nu este încărcat.
+Pas de modèle pour ce genre d’acte. ¦ Niciun model pentru acest tip de act.
+Le texte déjà écrit est gardé. ¦ Textul deja scris se păstrează.
+Ajouter le modèle à la fin du texte ? ¦ Adaugi modelul la sfârșitul textului?
+Ajouter le modèle ¦ Adaugă modelul
+avec l’image de l’acte ¦ cu imaginea actului
+le texte seul (.txt) ¦ doar textul (.txt)
+image + texte (« Enregistrer en PDF ») ¦ imagine + text („Salvează ca PDF”)
+Les dernières modifications de la transcription seront perdues. ¦ Ultimele modificări ale transcrierii se vor pierde.
+Fermer sans enregistrer la transcription ? ¦ Închizi fără să salvezi transcrierea?
+Exporter (texte, PDF, imprimer)… ¦ Exportă (text, PDF, tipărire)…
+Image de l’acte… ¦ Imaginea actului…
+Modèle d’acte ¦ Model de act
+Repérer les noms, dates, lieux ¦ Găsește numele, datele, locurile
+Lire l’acte (écriture à la main) ¦ Citește actul (scris de mână)
+Aide à la lecture… ¦ Ajutor la citire…
+Toute la largeur (pour lire) ¦ Toată lățimea (pentru citit)
+Image d’origine ¦ Imaginea originală
+Toute la transcription, en grand (et les actes transcrits dans l’outil) ¦ Toată transcrierea, în mare (și actele transcrise în instrument)
+Lire en entier ¦ Citește în întregime
+Ouvrir l’outil Transcription d’actes sur cette image (zones, noms, dates) ¦ Deschide instrumentul Transcriere de acte pe imaginea aceasta (zone, nume, date)
+Nouvelle ¦ Nouă
+Transcrire dans l’outil ¦ Transcrie în instrument
+Ouvrir dans Transcription d’actes ¦ Deschide în Transcriere de acte
+Aucun acte transcrit dans l’outil pour cette image. ¦ Niciun act transcris în instrument pentru imaginea aceasta.
+Rien d’écrit pour l’instant dans la visionneuse. ¦ Deocamdată nimic scris în vizualizator.
+Personnes : ¦ Persoane:
+Le calcul de l’image s’est arrêté (image trop grande ?). ¦ Calculul imaginii s-a oprit (imagine prea mare?).
+Calcul impossible ici. ¦ Calcul imposibil aici.
+Outil fermé. ¦ Instrument închis.
+Faire ressortir l’encre ¦ Scoate în evidență cerneala
+{label} — double-clic : valeur de départ ¦ {label} — dublu clic: valoarea inițială
+Netteté (et son rayon) ¦ Claritate (și raza ei)
+Canal de couleur ¦ Canal de culoare
+Un seul canal : l’encre ferro-gallique ressort souvent mieux sur le rouge ou le bleu ¦ Un singur canal: cerneala ferogalică iese adesea mai bine în evidență pe roșu sau pe albastru
+Toutes les couleurs ¦ Toate culorile
+Effacer le fond ¦ Șterge fundalul
+Jaunissement et taches : le papier redevient blanc, l’encre reste ¦ Îngălbenire și pete: hârtia redevine albă, cerneala rămâne
+Seuil noir et blanc ¦ Prag alb-negru
+Redresser (au degré près) ¦ Îndreaptă (la grad)
+Négatif : encre claire sur fond sombre ¦ Negativ: cerneală deschisă pe fundal închis
+Retourner l’image : pour lire un texte vu par transparence (le verso) ¦ Întoarce imaginea: pentru a citi un text văzut prin transparență (versoul)
+Retenir pour cet acte ¦ Reține pentru acest act
+Ces réglages de l’image sont enregistrés avec l’acte et reviennent à la prochaine ouverture ¦ Aceste setări ale imaginii sunt salvate odată cu actul și revin la următoarea deschidere
+Remettre l’image d’origine (tous les réglages de l’image à zéro) ¦ Readu imaginea originală (toate setările imaginii la zero)
+Plus de place pour garder ce réglage. ¦ Nu mai e loc pentru a păstra setarea aceasta.
+Les autres réglages de l’image : contraste local, netteté, canal, seuil, niveaux, redresser… ¦ Celelalte setări ale imaginii: contrast local, claritate, canal, prag, niveluri, îndreptare…
+Écran étroit : les réglages sont rangés dans « 🎚️ Mieux voir » ¦ Ecran îngust: setările sunt puse în „🎚️ Vezi mai bine”
+Ranger, montrer ou cacher les boutons de cette barre ; disposition A ou B (aussi dans Réglages → Montage, retouche, mise en page et son) ¦ Aranjează, arată sau ascunde butoanele acestei bare; aranjamentul A sau B (și în Setări → Montaj, retușare, paginare și sunet)
+Personnaliser la barre ¦ Personalizează bara
+Montrer dans la barre ¦ Arată în bară
+Où va {label} ¦ Unde merge {label}
+Dans la barre, ou dans le panneau « 🎚️ Mieux voir » ¦ În bară sau în panoul „🎚️ Vezi mai bine”
+Dans la barre ¦ În bară
+Dans « Mieux voir » ¦ În „Vezi mai bine”
+Disposition de la barre ¦ Aranjamentul barei
+Tous les réglages dans la barre ; elle passe à la ligne s’il le faut ¦ Toate setările în bară; trece pe rândul următor dacă e nevoie
+A · Tout dans la barre ¦ A · Totul în bară
+Une barre courte ; les autres réglages dans le panneau « 🎚️ Mieux voir », rangés en trois rubriques ¦ O bară scurtă; celelalte setări în panoul „🎚️ Vezi mai bine”, grupate în trei rubrici
+B · Barre courte + « 🎚️ Mieux voir » ¦ B · Bară scurtă + „🎚️ Vezi mai bine”
+Coche ce qu’on montre (👁), range avec ↑ ↓ (ou en glissant ⠿){x}. Gardé aussitôt ; l’outil ouvert suit tout de suite. ¦ Bifează ce se arată (👁), aranjează cu ↑ ↓ (sau trăgând ⠿){x}. Se păstrează imediat; instrumentul deschis se actualizează pe loc.
+, et choisis ce qui va dans la barre ou dans le panneau « 🎚️ Mieux voir » ¦ , și alege ce merge în bară sau în panoul „🎚️ Vezi mai bine”
+cette barre (disposition, ordre, boutons montrés) ¦ această bară (aranjament, ordine, butoane afișate)
+Réglages « {nom} » importés : « Appliquer » pour les utiliser. ¦ Setările „{nom}” au fost importate: „Aplică” pentru a le folosi.
+Barre de la transcription remise comme au départ ¦ Bara transcrierii a fost readusă la starea inițială
+Barre de la transcription ¦ Bara transcrierii
+={n} réglages actifs dans « Mieux voir » ¦ {n} setare activă în „Vezi mai bine”|{n} setări active în „Vezi mai bine”|{n} de setări active în „Vezi mai bine”
+{n} réglage actif dans « Mieux voir » ¦ {n} setare activă în „Vezi mai bine”
+={n} éléments repérés ¦ {n} element găsit|{n} elemente găsite|{n} de elemente găsite
+{n} élément repéré ¦ {n} element găsit
+={n} lignes lues (à relire) ¦ {n} rând citit (de recitit)|{n} rânduri citite (de recitit)|{n} de rânduri citite (de recitit)
+{n} ligne lue (à relire) ¦ {n} rând citit (de recitit)
+Nouvelle transcription ¦ Transcriere nouă
+le tilde remplace un m ou un n ¦ tilda înlocuiește un m sau un n
+æ = ae ¦ æ = ae
+& = et ¦ & = et
+7bre = septembre, 8bre = octobre, 9bre = novembre, Xbre = décembre ¦ 7bre = septembrie, 8bre = octombrie, 9bre = noiembrie, Xbre = decembrie
+« {s} » est une abréviation de « {exp} » ¦ „{s}” este o abreviere pentru „{exp}”
+on lit « {x} » ¦ se citește „{x}”
+« u » et « n » ont les mêmes jambages ¦ „u” și „n” au aceleași bastonașe
+« m » et « rn » se ressemblent ¦ „m” și „rn” seamănă
+« m » et « nn » ont le même nombre de jambages ¦ „m” și „nn” au același număr de bastonașe
+« m » et « in » ont le même nombre de jambages ¦ „m” și „in” au același număr de bastonașe
+« n » et « ri » se ressemblent ¦ „n” și „ri” seamănă
+« u » et « ii » se ressemblent ¦ „u” și „ii” seamănă
+« a » et « o » se confondent quand la boucle est fermée ¦ „a” și „o” se confundă când bucla este închisă
+« e » et « c » se confondent quand la boucle est petite ¦ „e” și „c” se confundă când bucla este mică
+« i » sans point ressemble à « l » ¦ „i” fără punct seamănă cu „l”
+« i » et « t » sans barre se confondent ¦ „i” și „t” fără bară se confundă
+« l » et « t » sans barre se confondent ¦ „l” și „t” fără bară se confundă
+le s long « ſ » ressemble à « f » ¦ s-ul lung „ſ” seamănă cu „f”
+« v » et « r » se confondent ¦ „v” și „r” se confundă
+« cl » collé ressemble à « d » ¦ „cl” lipit seamănă cu „d”
+« h » et « b » se confondent ¦ „h” și „b” se confundă
+« h » et « k » se confondent ¦ „h” și „k” se confundă
+les majuscules anciennes « S » et « L » se ressemblent ¦ majusculele vechi „S” și „L” seamănă
+les majuscules anciennes « I » et « J » sont la même lettre ¦ majusculele vechi „I” și „J” sunt aceeași literă
+les majuscules anciennes « T » et « F » se ressemblent ¦ majusculele vechi „T” și „F” seamănă
+« g » et « q » se confondent ¦ „g” și „q” se confundă
+« y » et « g » se confondent ¦ „y” și „g” se confundă
+« e » et « o » se confondent ¦ „e” și „o” se confundă
+« o » ouvert ressemble à « u » ¦ „o” deschis seamănă cu „u”
+« c » et « o » se confondent ¦ „c” și „o” se confundă
+« {x} » lu au lieu de « {y} » : {x2} ¦ „{x}” citit în loc de „{y}”: {x2}
+« {p} » lu au lieu de « {q} » : {x} ¦ „{p}” citit în loc de „{q}”: {x}
+« {y} » oublié à la lecture ¦ „{y}” omis la citire
+« {x} » en trop ¦ „{x}” în plus
+« {x} » lu au lieu de « {y} » ¦ „{x}” citit în loc de „{y}”
+« {x} » lu au lieu de « {r} » ¦ „{x}” citit în loc de „{r}”
+« {x} » veut dire « idem » : la même chose qu’à la ligne au-dessus. ¦ „{x}” înseamnă „idem”: același lucru ca pe rândul de deasupra.
+la valeur de la ligne {x} ¦ valoarea de pe rândul {x}
+« {role} » est la nationalité ¦ „{role}” este naționalitatea
+« {occupation} » est le lien avec le chef ¦ „{occupation}” este legătura cu capul gospodăriei
+« {employer} » est sans doute la profession ¦ „{employer}” este probabil profesia
+Colonnes décalées : « {role} » dans la case du lien ressemble à la nationalité{x}. Remets chaque valeur dans sa colonne. ¦ Coloane decalate: „{role}” în căsuța legăturii seamănă cu naționalitatea{x}. Pune fiecare valoare înapoi în coloana ei.
+, et « {occupation} » dans la case de la profession est un lien de parenté ¦ , iar „{occupation}” în căsuța profesiei este o legătură de rudenie
+« {occupation} » dans la case de la profession est un lien de parenté : la colonne a glissé. ¦ „{occupation}” în căsuța profesiei este o legătură de rudenie: coloana a alunecat.
+c’est le lien avec le chef ¦ este legătura cu capul gospodăriei
+la case suivante est sans doute la profession ¦ căsuța următoare este probabil profesia
+« {civil_status} » dans la case de l’état civil est un lien de parenté : mal rangé. ¦ „{civil_status}” în căsuța stării civile este o legătură de rudenie: pus greșit.
+« {civil_status} » veut dire « veuve » (ou « veuf ») : abréviation non développée. ¦ „{civil_status}” înseamnă „veuve” (văduvă, sau „veuf”, văduv): abreviere nedezvoltată.
+« {x} » devant le nom veut dire « veuve » : le nom est « {x2} ». ¦ „{x}” în fața numelui înseamnă „veuve” (văduvă): numele este „{x2}”.
+le nom sans « veuve » ¦ numele fără „veuve”
+« {x} » = veuve ¦ „{x}” = văduvă
+« {v} » est sans doute « {joined} » mal lu (lettres qui se ressemblent). ¦ „{v}” este probabil „{joined}” citit greșit (litere care seamănă).
+forme connue la plus proche ¦ cea mai apropiată formă cunoscută
+« {u} » ressemble à « {x} » ¦ „{u}” seamănă cu „{x}”
+« {v} » ne ressemble à aucun métier connu : lecture sans doute illisible, regarde l’image. ¦ „{v}” nu seamănă cu nicio meserie cunoscută: probabil o citire ilizibilă, uită-te la imagine.
+Employeur « {employer} » : lecture douteuse, regarde l’image. ¦ Angajator „{employer}”: citire îndoielnică, uită-te la imagine.
+(non développée par la lecture automatique). ¦ (nedezvoltată de citirea automată).
+« {first} » ressemble à une profession : la colonne a pu être décalée. ¦ „{first}” seamănă cu o profesie: coloana poate fi decalată.
+« {last} » est aussi le nom d’une commune : la colonne du lieu a pu glisser dans celle du nom. ¦ „{last}” este și numele unei localități: coloana locului poate să fi alunecat în cea a numelui.
+Le mari s’appelle « {last} », l’épouse « {last2} » : au recensement, l’épouse est en général inscrite sous le nom du mari (lettres mal lues ?). ¦ Soțul se numește „{last}”, soția „{last2}”: la recensământ, soția este de obicei înscrisă cu numele soțului (litere citite greșit?).
+le nom du chef du ménage ¦ numele capului gospodăriei
+Le chef du ménage s’appelle « {last} » : {x}. ¦ Capul gospodăriei se numește „{last}”: {x}.
+Le chef du ménage s’appelle « {last} », ici « {last2} » : les membres d’un ménage portent en général le même nom (lettres mal lues ?). ¦ Capul gospodăriei se numește „{last}”, aici „{last2}”: membrii unei gospodării poartă de obicei același nume (litere citite greșit?).
+« {last} » n’est pas dans ta base, mais {x} oui : {x2}. ¦ „{last}” nu este în baza ta, dar {x} este: {x2}.
+Prénom peu courant « {w} » : {x} ? ({x2}) ¦ Prenume neobișnuit „{w}”: {x}? ({x2})
+la forme lue {x} fois sur la page ¦ forma citită de {x} ori pe pagină
+la commune connue la plus proche ¦ cea mai apropiată localitate cunoscută
+« {commune} » : sur la même page, ce lieu est lu « {best} » {x}{x2} — sans doute le même lieu mal lu. ¦ „{commune}”: pe aceeași pagină, locul acesta este citit „{best}” {x}{x2} — probabil același loc citit greșit.
+aussi ¦ și
+commune connue ¦ localitate cunoscută
+Commune inconnue « {birth_place} » : peut-être {x} (à vérifier, plusieurs choix possibles). ¦ Localitate necunoscută „{birth_place}”: poate {x} (de verificat, sunt posibile mai multe variante).
+Âge illisible « {age} ». ¦ Vârstă ilizibilă „{age}”.
+{age} ans en {year} veut dire né vers {x}, pas {by} : un des deux chiffres a été mal lu. ¦ {age} ani în {year} înseamnă născut pe la {x}, nu {by}: una dintre cele două cifre a fost citită greșit.
+{age} ans : âge très rare, un chiffre a pu être mal lu. ¦ {age} ani: vârstă foarte rară, o cifră poate fi citită greșit.
+{role} de {age} ans pour un chef de {chefAge} ans : impossible, un âge a pu être mal lu. ¦ {role} de {age} ani pentru un cap al gospodăriei de {chefAge} ani: imposibil, o vârstă poate fi citită greșit.
+{role} de {age} ans : impossible, un chiffre a été mal lu. ¦ {role} de {age} ani: imposibil, o cifră a fost citită greșit.
+{x} ans d’écart entre les époux : c’est rare, vérifie les âges. ¦ {x} ani diferență între soți: e rar, verifică vârstele.
+Lien avec le chef de ménage vide : la case a pu être sautée. ¦ Legătura cu capul gospodăriei este goală: căsuța poate să fi fost sărită.
+Née en {by}, après le recensement de {year} : un chiffre a été mal lu. ¦ Născută în {by}, după recensământul din {year}: o cifră a fost citită greșit.
+Né en {by}, après le recensement de {year} : un chiffre a été mal lu. ¦ Născut în {by}, după recensământul din {year}: o cifră a fost citită greșit.
+{role} de {age} ans, plus âgée que le chef du ménage ({chefAge} ans) : un âge a pu être mal lu. ¦ {role} de {age} ani, mai în vârstă decât capul gospodăriei ({chefAge} ani): o vârstă poate fi citită greșit.
+{role} de {age} ans, plus âgé que le chef du ménage ({chefAge} ans) : un âge a pu être mal lu. ¦ {role} de {age} ani, mai în vârstă decât capul gospodăriei ({chefAge} ani): o vârstă poate fi citită greșit.
+Au recensement de {year}, née vers {ob} ; ici vers {mine}. ¦ La recensământul din {year}, născută pe la {ob}; aici pe la {mine}.
+Au recensement de {year}, né vers {ob} ; ici vers {mine}. ¦ La recensământul din {year}, născut pe la {ob}; aici pe la {mine}.
+« {role} » pour « {x} », un prénom {x2} : le lien ou le prénom a été mal lu. ¦ „{role}” pentru „{x}”, un prenume {x2}: legătura sau prenumele a fost citit greșit.
+de femme ¦ de femeie
+d’homme ¦ de bărbat
+« {role} » pour {x} : le lien ou le genre a été mal lu. ¦ „{role}” pentru {x}: legătura sau genul a fost citit greșit.
+une femme ¦ o femeie
+un homme ¦ un bărbat
+le lien qui va avec le genre ¦ legătura care se potrivește cu genul
+« {role} » d’un chef de ménage {x} : le lien ou le genre a été mal lu. ¦ „{role}” al unui cap al gospodăriei {x}: legătura sau genul a fost citit greșit.
+« {last} » et « {x} » dans le même ménage : sans doute le même nom mal lu. ¦ „{last}” și „{x}” în aceeași gospodărie: probabil același nume citit greșit.
+lu {x} fois dans le ménage ¦ citit de {x} ori în gospodărie
+le nom d’un autre membre du ménage ¦ numele altui membru al gospodăriei
+Deux « chef » dans le même ménage : deux ménages ont pu être mis ensemble, ou le lien a été mal lu. ¦ Doi „chef” în aceeași gospodărie: două gospodării pot să fi fost puse împreună, sau legătura a fost citită greșit.
+Même nom, même prénom que la ligne {x} : la même personne lue deux fois ? ¦ Același nume, același prenume ca pe rândul {x}: aceeași persoană citită de două ori?
+Ce ménage commence en haut d’une page sans chef : c’est sans doute la suite du ménage de la page d’avant (ménage coupé au changement de page). ¦ Gospodăria aceasta începe în capul unei pagini fără cap al gospodăriei: probabil este continuarea gospodăriei de pe pagina dinainte (gospodărie tăiată la schimbarea paginii).
+Ce ménage n’a pas de chef : il a pu être coupé en deux (changement de page) ou mal découpé. ¦ Gospodăria aceasta nu are cap: poate să fi fost tăiată în două (schimbare de pagină) sau împărțită greșit.
+{role} « {last} » dans le ménage de {last2}, mais le ménage d’avant s’appelle {last3} : rattaché au mauvais ménage ? ¦ {role} „{last}” în gospodăria lui {last2}, dar gospodăria dinainte se numește {last3}: legat de gospodăria greșită?
+« {w} » ressemble à {x} : {x2} ¦ „{w}” seamănă cu {x}: {x2}
+Copié. ¦ Copiat.
+Un nombre en lettres ou en chiffres ¦ Un număr în litere sau în cifre
+Écris « {x} » ou « 1852 ». ¦ Scrie „{x}” sau „1852”.
+Un nombre entre 1 et 999 999. ¦ Un număr între 1 și 999 999.
+Ce ne sont pas des lettres-nombres connues (exemples : {x}). ¦ Acestea nu sunt litere-numere cunoscute (exemple: {x}).
+L’alphabet ({n} lettres) ¦ Alfabetul ({n} litere)
+Sources : {x}. ¦ Surse: {x}.
+L’aide à la lecture n’a pas pu se charger (fichier app-aide-lecture.js manquant ?). ¦ Ajutorul la citire nu s-a putut încărca (lipsește fișierul app-aide-lecture.js?).
+Chercher… ex. vve, feu, filius, ſ, cult., d° ¦ Caută… ex. vve, feu, filius, ſ, cult., d°
+Chercher dans l’aide à la lecture ¦ Caută în ajutorul la citire
+Toutes les langues ¦ Toate limbile
+Moins de langues ¦ Mai puține limbi
+Rien pour « {q} »{x}. Vérifie l’orthographe, cherche un morceau du mot (« vv », « legit »…), ou choisis « Toutes les langues ». ¦ Nimic pentru „{q}”{x}. Verifică ortografia, caută o bucată din cuvânt („vv”, „legit”…) sau alege „Toate limbile”.
+en {lang} ¦ în {lang}
+Rien dans cette rubrique. ¦ Nimic în rubrica aceasta.
+mots et formules ¦ cuvinte și formule
+Repris de {src} ¦ Preluat din {src}
+Copier « {t} » ¦ Copiază „{t}”
+Aucune lettre pour « {q} ». Essaie « s long », « r rond », « u n », « ligature », « kurrent ». ¦ Nicio literă pentru „{q}”. Încearcă „s long”, „r rond”, „u n”, „ligature”, „kurrent”.
+Pas encore de lettres dessinées pour cette langue : elle s’écrit comme le français. Regarde ses mots dans 🔍 Dictionnaire. ¦ Încă nu există litere desenate pentru această limbă: se scrie ca franceza. Uită-te la cuvintele ei în 🔍 Dicționar.
+on voit ¦ se vede
+à ne pas confondre ¦ a nu se confunda
+Pas encore d’exercice dans cette langue : choisis « Toutes les langues ». ¦ Încă niciun exercițiu în această limbă: alege „Toate limbile”.
+Textes modèles écrits pour l’app, sur le modèle des registres de l’époque (formules authentiques, personnes d’exemple, toutes nées bien avant 1950). ¦ Texte model scrise pentru aplicație, după modelul registrelor din epocă (formule autentice, persoane de exemplu, toate născute cu mult înainte de 1950).
+Aucun exercice pour « {q} ». ¦ Niciun exercițiu pentru „{q}”.
+Tous les exercices ¦ Toate exercițiile
+Le texte comme sur le registre ¦ Textul ca în registru
+Ta lecture ¦ Citirea ta
+(développe les abréviations : « par. » → paroisse) ¦ (dezvoltă abrevierile: „par.” → paroisse)
+Écris ici ce que tu lis, mot après mot… ¦ Scrie aici ce citești, cuvânt cu cuvânt…
+exercice|Un indice ¦ Un indiciu
+Voir la solution ¦ Vezi soluția
+{miss} à revoir ¦ {miss} de revăzut
+bravo ! ¦ bravo!
+{extra} en trop ¦ {extra} în plus
+oublié ¦ omis
+en trop ¦ în plus
+— passe la souris sur un mot à revoir pour l’explication. ¦ — treci cu mouse-ul peste un cuvânt de revăzut pentru explicație.
+Ce mot n’est pas dans le texte ¦ Cuvântul acesta nu este în text
+On lit « {exp} » ¦ Se citește „{exp}”
+Écris d’abord ta lecture du texte. ¦ Scrie mai întâi citirea ta a textului.
+La fenêtre n’est pas encore prête : réessaie dans un instant. ¦ Fereastra nu este încă gata: încearcă din nou într-o clipă.
+AIDE · LECTURE DES ACTES ¦ AJUTOR · CITIREA ACTELOR
+Aide à la lecture des actes anciens ¦ Ajutor la citirea actelor vechi
+Le convertisseur n’a pas pu se charger (fichier app-autrefois-engine.js manquant ?). ¦ Convertorul nu s-a putut încărca (lipsește fișierul app-autrefois-engine.js?).
+La mesure ¦ Măsura
+Région, ville ¦ Regiune, oraș
+Les mesures changeaient d’une province à l’autre : choisis celle de l’acte. ¦ Măsurile se schimbau de la o provincie la alta: alege-o pe cea a actului.
+La date (républicaine ou de tous les jours) ¦ Data (republicană sau obișnuită)
+Tout est calculé ici, sans internet. Argent : {x} à partir de 1901 ; avant, un ordre de grandeur. Les résultats sont des repères (≈), pas des valeurs exactes. ¦ Totul se calculează aici, fără internet. Bani: {x} începând din 1901; înainte, un ordin de mărime. Rezultatele sunt repere (≈), nu valori exacte.
+(année républicaine) ¦ (an republican)
+une année d’aujourd’hui ou d’avant (jusqu’à 2025) ¦ un an de azi sau de dinainte (până în 2025)
+une année entre 1300 et 2025 (exemples : 1780, an X, 1955) ¦ un an între 1300 și 2025 (exemple: 1780, an X, 1955)
+Écris une somme et son année : « 300 livres » en « 1780 ». ¦ Scrie o sumă și anul ei: „300 livres” în „1780”.
+Écris aussi l’année de la somme. ¦ Scrie și anul sumei.
+Corrige la case marquée ⚠️ ci-dessus. ¦ Corectează căsuța marcată cu ⚠️ de mai sus.
+{label} en {y} {x} d’aujourd’hui ({x2}) ¦ {label} în {y}: {x} de astăzi ({x2})
+indice des prix de l’INSEE ¦ indicele prețurilor INSEE
+ordre de grandeur ¦ ordin de mărime
+Ordre de grandeur ¦ Ordin de mărime
+Dans la monnaie de {y} ¦ În moneda din {y}
+Le calcul, pas à pas ¦ Calculul, pas cu pas
+(mesure de {fromRegion}) ¦ (măsură din {fromRegion})
+Écris une mesure : « 3 arpents », « 12 toises 3 pieds », « 2 boisseaux »… ou « 1,5 ha » pour l’inverse. ¦ Scrie o măsură: „3 arpents”, „12 toises 3 pieds”, „2 boisseaux”… sau „1,5 ha” pentru invers.
+Valeur approchée ¦ Valoare aproximativă
+Dans les autres mesures de la région ¦ În celelalte măsuri ale regiunii
+La même mesure ailleurs (pour 1) ¦ Aceeași măsură în altă parte (pentru 1)
+Écris une date républicaine (« 12 thermidor an II ») ou de tous les jours (« 14 juillet 1794 ») : la conversion se fait dans les deux sens. ¦ Scrie o dată republicană („12 thermidor an II”) sau obișnuită („14 juillet 1794”): conversia se face în ambele sensuri.
+Dans notre calendrier ¦ În calendarul nostru
+Dans le calendrier républicain ¦ În calendarul republican
+{decade} (jour {x} de la décade) ¦ {decade} (ziua {x} a decadei)
+L’an {x} mois par mois ¦ Anul {x} lună cu lună
+={n} formes de lettres · trait dessiné à la main, comme dans les registres ¦ {n} formă de litere · trăsătură desenată de mână, ca în registre|{n} forme de litere · trăsătură desenată de mână, ca în registre|{n} de forme de litere · trăsătură desenată de mână, ca în registre
+{n} forme de lettres · trait dessiné à la main, comme dans les registres ¦ {n} formă de litere · trăsătură desenată de mână, ca în registre
+={n} exercices · lis le texte comme sur le registre, écris ta lecture (abréviations développées), puis « ✓ Corriger » ¦ {n} exercițiu · citește textul ca în registru, scrie-ți citirea (cu abrevierile dezvoltate), apoi „✓ Corectează”|{n} exerciții · citește textul ca în registru, scrie-ți citirea (cu abrevierile dezvoltate), apoi „✓ Corectează”|{n} de exerciții · citește textul ca în registru, scrie-ți citirea (cu abrevierile dezvoltate), apoi „✓ Corectează”
+{n} exercice · lis le texte comme sur le registre, écris ta lecture (abréviations développées), puis « ✓ Corriger » ¦ {n} exercițiu · citește textul ca în registru, scrie-ți citirea (cu abrevierile dezvoltate), apoi „✓ Corectează”
+={ok} mots justes sur {total} ({score} %) ¦ {ok} cuvânt corect din {total} ({score} %)|{ok} cuvinte corecte din {total} ({score} %)|{ok} de cuvinte corecte din {total} ({score} %)
+{ok} mot juste sur {total} ({score} %) ¦ {ok} cuvânt corect din {total} ({score} %)
+Plus de place pour enregistrer cette recette. ¦ Nu mai e loc pentru a salva rețeta aceasta.
+aucune action ¦ nicio acțiune
+nouvelle version ¦ versiune nouă
+copie dans les médias ¦ copie în fișierele media
+« {name} » : fichier introuvable dans le dossier des médias ¦ „{name}”: fișierul nu a fost găsit în dosarul fișierelor media
+le navigateur n’a pas pu écrire l’image ¦ browserul nu a putut scrie imaginea
+qualité baissée à {x} % pour tenir dans {x2} Ko ¦ calitate redusă la {x} % pentru a încăpea în {x2} Ko
+image réduite à {width} × {height} px pour tenir dans {x} Ko ¦ imagine redusă la {width} × {height} px pentru a încăpea în {x} Ko
+{x} : plus lourd que {x2} Ko ¦ {x}: mai mare de {x2} Ko
+le moteur du son n’est pas chargé ¦ motorul de sunet nu este încărcat
+Ne pas tourner ¦ Nu roti
+¼ de tour à droite ¦ ¼ de tură la dreapta
+¼ de tour à gauche ¦ ¼ de tură la stânga
+Modèle du nom ¦ Modelul numelui
+Ajouter au modèle ¦ Adaugă la model
+Ajouter {t} au modèle ¦ Adaugă {t} la model
+Séquence sur ¦ Secvență pe
+Comme tapé ¦ Așa cum a fost tastat
+Une Majuscule Par Mot ¦ O Majusculă La Fiecare Cuvânt
+Garder les espaces ¦ Păstrează spațiile
+Des tirets (-) ¦ Cratime (-)
+Des soulignés (_) ¦ Liniuțe de subliniere (_)
+Sans accents (é → e) ¦ Fără diacritice (é → e)
+Changer aussi le titre dans les médias ¦ Schimbă și titlul în fișierele media
+Le plus grand côté ¦ Latura cea mai mare
+La largeur ¦ Lățimea
+La hauteur ¦ Înălțimea
+Un cadre largeur × hauteur ¦ Un cadru lățime × înălțime
+Un pourcentage ¦ Un procent
+Plus grand côté ¦ Latura cea mai mare
+Garder les proportions ¦ Păstrează proporțiile
+Ne pas agrandir les petites images ¦ Nu mări imaginile mici
+Couper les bords ¦ Taie marginile
+Recadrer au format ¦ Decupează la format
+Sépia (photo ancienne) ¦ Sepia (fotografie veche)
+Taille (de la largeur) ¦ Mărime (din lățime)
+AVIF (récent, très léger) ¦ AVIF (recent, foarte ușor)
+Poids au plus (0 = pas de limite) ¦ Mărime maximă (0 = fără limită)
+JPG, WebP et AVIF. Pour un PNG, le poids baisse en réduisant l’image. ¦ JPG, WebP și AVIF. Pentru un PNG, mărimea fișierului scade micșorând imaginea.
+L’appareil, la date de prise, la position GPS, les mots-clés… sont effacés. Pour un JPG ou un PNG sans autre retouche : sans perte (l’image ne change pas). ¦ Aparatul, data fotografierii, poziția GPS, cuvintele-cheie… sunt șterse. Pentru un JPG sau un PNG fără altă retușare: fără pierdere (imaginea nu se schimbă).
+Étiquettes à ajouter ¦ Etichete de adăugat
+Relier à une personne ¦ Leagă de o persoană
+Fiche n° {person} ¦ Fișa nr. {person}
+Seulement pour ce qui va dans la base (nouvelle version ou copie), pas pour un ZIP. ¦ Doar pentru ce intră în bază (versiune nouă sau copie), nu pentru un ZIP.
+Nom du PDF ¦ Numele PDF-ului
+A4 (l’image centrée) ¦ A4 (imaginea centrată)
+À la taille de chaque image ¦ La mărimea fiecărei imagini
+Garder aussi chaque image à part ¦ Păstrează și fiecare imagine separat
+Glisse pour ranger (ou Alt + ↑ / ↓) ¦ Trage pentru a aranja (sau Alt + ↑ / ↓)
+Ranger « {label} » (Alt + flèche haut ou bas) ¦ Mută „{label}” (Alt + săgeată sus sau jos)
+Déplier les réglages ¦ Desfă setările
+Replier les réglages ¦ Strânge setările
+Éteindre cette étape (elle reste dans la chaîne) ¦ Oprește etapa aceasta (rămâne în lanț)
+Rallumer cette étape ¦ Repornește etapa aceasta
+Étape active ¦ Etapă activă
+Retirer de la chaîne ¦ Scoate din lanț
+Le moteur des traitements par lot n’est pas chargé : recharge la page. ¦ Motorul prelucrărilor în serie nu este încărcat: reîncarcă pagina.
+Les fichiers ¦ Fișierele
+Photos, documents, classeurs et sons de la base : filtres, recherche, plusieurs à la fois ¦ Fotografii, documente, registre de calcul și sunete din bază: filtre, căutare, mai multe deodată
+Choisir dans les médias… ¦ Alege din fișierele media…
+Fichiers du lot ¦ Fișierele lotului
+Les actions ¦ Acțiunile
+Ajouter une action ▾ ¦ Adaugă o acțiune ▾
+Voilà ce qui va se passer ¦ Iată ce se va întâmpla
+Le résultat ¦ Rezultatul
+Nouvelle version du média ¦ Versiune nouă a fișierului media
+l’original reste dans ses versions ¦ originalul rămâne în versiunile lui
+Copie dans les médias ¦ Copie în fișierele media
+reliée aux mêmes fiches ¦ legată de aceleași fișe
+Un ZIP à télécharger ¦ Un ZIP de descărcat
+rien ne change dans la base ¦ nimic nu se schimbă în bază
+Images, documents (Word, LibreOffice, RTF, Markdown, texte, page web, PDF), classeurs (Excel, LibreOffice, CSV) et sons. ¦ Imagini, documente (Word, LibreOffice, RTF, Markdown, text, pagină web, PDF), registre de calcul (Excel, LibreOffice, CSV) și sunete.
+{name} (prêt) ¦ {name} (gata făcută)
+Recettes enregistrées ¦ Rețete salvate
+cette chaîne d’actions et la sortie ¦ acest lanț de acțiuni și ieșirea
+Recette « {name} » appliquée. ¦ Rețeta „{name}” a fost aplicată.
+Une recette prête ne se remplace pas : enregistre-la sous un autre nom. ¦ O rețetă gata făcută nu se înlocuiește: salveaz-o cu alt nume.
+Une recette prête ne se supprime pas. ¦ O rețetă gata făcută nu se șterge.
+Recette « {name} » supprimée ¦ Rețeta „{name}” a fost ștearsă
+Ce fichier n’est pas une recette LCNDA. ¦ Fișierul acesta nu este o rețetă LCNDA.
+Ce fichier n’est pas une recette des traitements par lot. ¦ Fișierul acesta nu este o rețetă pentru prelucrări în serie.
+Recette importée ¦ Rețetă importată
+Retirer du lot ¦ Scoate din lot
+Retirer « {name} » du lot ¦ Scoate „{name}” din lot
+Aucun fichier pour l’instant ¦ Deocamdată niciun fișier
+500 fichiers au plus par lot : {x} de côté. ¦ Cel mult 500 de fișiere pe lot: {x} lăsate deoparte.
+Aucune action : ajoute-en une ¦ Nicio acțiune: adaugă una
+Ajouter une action ¦ Adaugă o acțiune
+Lancer sur {x} ¦ Pornește pe {x}
+Choisis d’abord des fichiers : chaque changement s’affichera ici avant de lancer. ¦ Alege mai întâi fișiere: fiecare schimbare va apărea aici înainte de pornire.
+Nouvelle version ¦ Versiune nouă
+Titre et liens ¦ Titlu și legături
+Nouveau média ¦ Fișier media nou
+Dans le ZIP ¦ În ZIP
+Dans le PDF ¦ În PDF
+Rien ne change ¦ Nimic nu se schimbă
+Laissé de côté ¦ Lăsat deoparte
+à la taille des images ¦ la mărimea imaginilor
+, dans le ZIP ¦ , în ZIP
+, rangé dans les médias ¦ , pus în fișierele media
+position GPS dans la photo ¦ poziția GPS din fotografie
+Lecture des fichiers… ({waiting}) ¦ Se citesc fișierele… ({waiting})
+On commence… ¦ Începem…
+copie rangée ¦ copie pusă deoparte
+rangé dans les médias ¦ pus în fișierele media
+titre et liens ¦ titlu și legături
+le fabricant de PDF n’est pas chargé ¦ generatorul de PDF nu este încărcat
+Le ZIP… ¦ ZIP-ul…
+traitement-par-lot-{x}.zip ¦ prelucrare-in-serie-{x}.zip
+Le lot ¦ Lotul
+(arrêté) ¦ (oprit)
+{what} · ⤓ le ZIP est téléchargé. ¦ {what} · ⤓ ZIP-ul a fost descărcat.
+{what} · rangé dans les médias. ¦ {what} · pus în fișierele media.
+Traitement par lot : {what} ¦ Prelucrare în serie: {what}
+{what} · ⤓ ZIP téléchargé. ¦ {what} · ⤓ ZIP descărcat.
+TRAITEMENTS PAR LOT ¦ PRELUCRĂRI ÎN SERIE
+Les fichiers à traiter ¦ Fișierele de prelucrat
+Action « {x} » retirée ¦ Acțiunea „{x}” a fost scoasă
+traitement par lot ¦ prelucrare în serie
+Nouveau traitement ¦ Prelucrare nouă
+1 600 px au plus, JPG 82 %, sans la position GPS : prêtes à envoyer ou à mettre en ligne ¦ Cel mult 1 600 px, JPG 82 %, fără poziția GPS: gata de trimis sau de pus online
+Photos pour le web ¦ Fotografii pentru web
+photo-001, photo-002… (et le titre dans les médias) ¦ foto-001, foto-002… (și titlul în fișierele media)
+Renommer en séquence ¦ Redenumește în secvență
+Des scans ou des photos d’actes réunis dans un seul PDF, une page par image ¦ Scanări sau fotografii de acte reunite într-un singur PDF, câte o pagină pe imagine
+Scans en PDF ¦ Scanări în PDF
+=change ¦ se schimbă|se schimbă|se schimbă
+={files} traités ¦ {files} prelucrat|{files} prelucrate|{files} prelucrate
+{files} traité ¦ {files} prelucrat
+={files} retirés du lot ¦ {files} scos din lot|{files} scoase din lot|{files} scoase din lot
+{files} retiré du lot ¦ {files} scos din lot
+Garder le format ¦ Păstrează formatul
+Un nom fixe, une séquence 001, 002…, la date, le titre, la personne ou le lieu. ¦ Un nume fix, o secvență 001, 002…, data, titlul, persoana sau locul.
+Plus grand côté, largeur, hauteur, cadre ou pourcentage. ¦ Latura cea mai mare, lățime, înălțime, cadru sau procent.
+Couper les bords, recadrer au format voulu (centré), tourner d’un quart de tour, retourner. ¦ Taie marginile, decupează la formatul dorit (centrat), rotește cu un sfert de tură, întoarce.
+Gris ou sépia. ¦ Gri sau sepia.
+Un texte posé dans un coin, au milieu ou répété. ¦ Un text pus într-un colț, la mijloc sau repetat.
+Changer de format ¦ Schimbă formatul
+Images, documents, classeurs et sons : chacun vers un format de sa sorte. ¦ Imagini, documente, registre de calcul și sunete: fiecare spre un format de felul lui.
+Qualité et poids ¦ Calitate și mărime
+Qualité JPG / WebP / AVIF et un poids à ne pas dépasser. ¦ Calitate JPG / WebP / AVIF și o mărime de nedepășit.
+Effacer les métadonnées ¦ Șterge metadatele
+Appareil, date de prise, position GPS… : effacés (sans perte pour un JPG ou un PNG). ¦ Aparat, data fotografierii, poziție GPS…: șterse (fără pierdere pentru un JPG sau un PNG).
+Étiquettes et personne ¦ Etichete și persoană
+Ajouter des étiquettes, relier à une personne (dans la base seulement). ¦ Adaugă etichete, leagă de o persoană (doar în bază).
+Assembler en un PDF ¦ Asamblează într-un PDF
+Toutes les images dans un seul PDF, une page par image. ¦ Toate imaginile într-un singur PDF, câte o pagină pe imagine.
+Ne pas recadrer ¦ Nu decupa
+Répété en biais ¦ Repetat în diagonală
+Nom d’origine ¦ Numele original
+1 600 px au plus, JPG 82 %, sans GPS ¦ Cel mult 1 600 px, JPG 82 %, fără GPS
+les images dans un seul PDF A4 ¦ imaginile într-un singur PDF A4
+carré 1:1, 400 px, JPG ¦ pătrat 1:1, 400 px, JPG
+Partager sans la position GPS ¦ Partajează fără poziția GPS
+métadonnées effacées ¦ metadate șterse
+Documents en Word ¦ Documente în Word
+tous en .docx ¦ toate în .docx
+Classeurs en CSV ¦ Registre de calcul în CSV
+la 1re feuille en CSV ¦ prima foaie în CSV
+{x} : pas pour un {x2} ¦ {x}: nu pentru un {x2}
+{x} : rien à changer ¦ {x}: nimic de schimbat
+Ton navigateur ne sait pas écrire l’AVIF : WebP à la place ¦ Browserul tău nu știe să scrie AVIF: WebP în loc
+{x} ne s’écrit pas ici : PNG à la place ¦ {x} nu se poate scrie aici: PNG în loc
+Un GIF n’a pas de position GPS à effacer ¦ Un GIF nu are poziție GPS de șters
+PNG : le poids baisse en réduisant la taille de l’image ¦ PNG: mărimea fișierului scade micșorând dimensiunea imaginii
+CSV : seulement la 1re feuille, sans mise en forme ¦ CSV: doar prima foaie, fără formatare
+{x} : le texte seul, sans images ni mise en forme ¦ {x}: doar textul, fără imagini și fără formatare
+PDF : en lecture seule (seulement renommé, étiqueté ou relié) ¦ PDF: doar în citire (doar redenumit, etichetat sau legat)
+{x} : seulement renommé, étiqueté ou relié ¦ {x}: doar redenumit, etichetat sau legat
+Étiquettes et personne : seulement dans la base (pas dans un ZIP) ¦ Etichete și persoană: doar în bază (nu într-un ZIP)
+Venu de l’ordinateur : rangé comme nouveau média ¦ Venit de pe calculator: pus ca fișier media nou
+« Assembler en un PDF » : aucune image dans le lot ¦ „Asamblează într-un PDF”: nicio imagine în lot
+Une action en double : seule la dernière carte compte pour « Renommer » et « Changer de format » ¦ O acțiune dublată: doar ultimul card contează pentru „Redenumește” și „Schimbă formatul”
+plus grand côté {long} px ¦ latura cea mai mare {long} px
+tête en bas ¦ cu susul în jos
+rien à faire ¦ nimic de făcut
+sépia ¦ sepia
+rien ne change ¦ nimic nu se schimbă
+Ko au plus ¦ Ko cel mult
+rien de choisi ¦ nimic ales
+.{ext} ne se range pas dans les médias : ⤓ ZIP seulement ¦ .{ext} nu se poate pune în fișierele media: doar ⤓ ZIP
+Ouvrir la fiche Employeurs ¦ Deschide fișa Angajatori
+Fiche Employeurs ¦ Fișa Angajatori
+Revues et magazines ¦ Reviste și magazine
+Nouvelle fiche Employeurs : « {title} ». ¦ Fișă Angajatori nouă: „{title}”.
+La fiche de {name} n’est pas encore cochée « {icon} {label} ». La cocher pour y ranger cette {x2} ? ¦ Fișa lui {name} nu este încă bifată „{icon} {label}”. O bifezi ca să pui acolo această {x2}?
+La fiche de {name} n’est pas encore cochée « {icon} {label} ». La cocher pour y ranger ce {x2} ? ¦ Fișa lui {name} nu este încă bifată „{icon} {label}”. O bifezi ca să pui acolo acest {x2}?
+Cocher « {label} » ? ¦ Bifezi „{label}”?
+Cocher « {label} » ¦ Bifează „{label}”
+Tchécoslovaquie ¦ Cehoslovacia
+Brevet européen ¦ Brevet european
+déposé ¦ depus
+en examen ¦ în examinare
+délivré ¦ acordat
+en vigueur ¦ în vigoare
+tombé (domaine public) ¦ căzut (în domeniul public)
+expiré ¦ expirat
+abandonné ¦ abandonat
+annulé ¦ anulat
+idée, croquis ¦ idee, schiță
+breveté ¦ brevetat
+fabriqué, vendu ¦ fabricat, vândut
+on ne sait pas ¦ nu se știe
+donné ¦ donat
+cassé ¦ spart
+détruit ¦ distrus
+antériorité opposée ¦ anterioritate opusă
+contrefaçon ¦ contrafacere
+action en nullité ¦ acțiune în anulare
+procès ¦ proces
+gagné ¦ câștigat
+brevet refusé ¦ brevet refuzat
+invention dérivée ¦ invenție derivată
+perfectionnement de ¦ perfecționare a
+issue de la découverte ¦ rezultată din descoperire
+a mené à ¦ a dus la
+fabriquée sous forme de ¦ fabricată sub formă de
+publiée dans ¦ publicată în
+liée à ¦ legată de
+Figure du brevet ¦ Figura din brevet
+Objet fabriqué ¦ Obiect fabricat
+Publicité, notice ¦ Reclamă, prospect
+tombé ¦ căzut
+Annuités ¦ Taxe anuale
+Publié ¦ Publicat
+Cité par ¦ Citat de
+brevet ultérieur ¦ brevet ulterior
+brevets ultérieurs ¦ brevete ulterioare
+Voir en ligne ¦ Vezi online
+Ajouter un brevet ¦ Adaugă un brevet
+Délivrance ¦ Acordare
+Déposant ¦ Solicitant
+Fabriqués ¦ Fabricate
+(aussi dans « 🏆 Concours et récompenses » de la personne) ¦ (și în „🏆 Concursuri și premii” ale persoanei)
+conçu en {dt} ¦ conceput în {dt}
+conçu le {dt} ¦ conceput la {dt}
+conçu {dt} ¦ conceput {dt}
+L’invention ¦ Invenția
+Nom de l’invention ¦ Numele invenției
+Première idée ¦ Prima idee
+Où l’idée est notée ¦ Unde este notată ideea
+D’après, inspirée de ¦ După, inspirată de
+Carnet, plan (média) ¦ Carnet, plan (fișier media)
+Figures du brevet, prototypes, objets fabriqués ¦ Figurile brevetului, prototipuri, obiecte fabricate
+Un inventeur ¦ Un inventator
+Un brevet ¦ Un brevet
+Titre du brevet ¦ Titlul brevetului
+Revendications (une par ligne) ¦ Revendicări (câte una pe rând)
+Publié (BOPI…) ¦ Publicat (BOPI…)
+Famille de brevets ¦ Familie de brevete
+Pièce (brevet complet, 4 p.…) ¦ Document (brevet complet, 4 p.…)
+Adresse en ligne ¦ Adresă online
+Un prototype ¦ Un prototip
+Présenté ¦ Prezentat
+Licences et exploitation ¦ Licențe și exploatare
+Antériorités et procès ¦ Anteriorități și procese
+Une antériorité, un procès ¦ O anterioritate, un proces
+Objets fabriqués ¦ Obiecte fabricate
+Un objet ¦ Un obiect
+Modèle, objet ¦ Model, obiect
+Fiche de l’exemplaire ¦ Fișa exemplarului
+Note sur les objets ¦ Notă despre obiecte
+Inventions et découvertes liées ¦ Invenții și descoperiri legate
+Liées ¦ Legate
+ex. sécateur, FR 1 054 321, Lépine, 1952 ¦ ex. sécateur, FR 1 054 321, Lépine, 1952
+Breveté en ¦ Brevetat în
+Avec au moins un brevet ¦ Cu cel puțin un brevet
+Brevet encore en vigueur ¦ Brevet încă în vigoare
+Exploitée (licence) ¦ Exploatată (licență)
+Le plus de brevets ¦ Cele mai multe brevete
+Espèce nouvelle (plante) ¦ Specie nouă (plantă)
+Espèce nouvelle (animal) ¦ Specie nouă (animal)
+Comète ¦ Cometă
+Astéroïde, petite planète ¦ Asteroid, planetă minoră
+Étoile, exoplanète, galaxie ¦ Stea, exoplanetă, galaxie
+Gène ¦ Genă
+Molécule, élément chimique ¦ Moleculă, element chimic
+Minéral ¦ Mineral
+Site archéologique ¦ Sit arheologic
+Épave ¦ Epavă
+Manuscrit, archive, trésor ¦ Manuscris, arhivă, comoară
+Loi, théorème, méthode ¦ Lege, teoremă, metodă
+Source, gisement ¦ Izvor, zăcământ
+Lieu (col, lac, île, sommet…) ¦ Loc (trecătoare, lac, insulă, vârf…)
+Autre découverte ¦ Altă descoperire
+espèce, sous-espèce, variété ¦ specie, subspecie, varietate
+Holotype (spécimen type) ¦ Holotip (specimen tip)
+N° de collection ¦ Nr. de colecție
+Désignation ¦ Denumire
+Éclat (magnitude) ¦ Strălucire (magnitudine)
+Système cristallin ¦ Sistem cristalin
+Localité type ¦ Localitate tip
+Objets trouvés ¦ Obiecte găsite
+Musée, dépôt ¦ Muzeu, depozit
+Développement, profondeur ¦ Dezvoltare, adâncime
+Ornée, remplissage ¦ Decorată, umplutură
+Objets remontés ¦ Obiecte scoase la suprafață
+Fonds, bibliothèque ¦ Fond, bibliotecă
+Énoncé ¦ Enunț
+Preuve, démonstration ¦ Dovadă, demonstrație
+Débit, réserve ¦ Debit, rezervă
+Sorte (col, lac, île…) ¦ Fel (trecătoare, lac, insulă…)
+Quoi exactement ¦ Ce anume
+Ces champs changent avec la « Sorte » : comète (désignation, orbite, observatoire), gène (organisme, chromosome, n° GenBank), site archéologique (période, fouilles, musée), fossile (âge, couche, gisement)… ¦ Aceste câmpuri se schimbă după „Fel”: cometă (denumire, orbită, observator), genă (organism, cromozom, nr. GenBank), sit arheologic (perioadă, săpături, muzeu), fosilă (vârstă, strat, zăcământ)…
+publié ¦ publicat
+accepté ¦ acceptat
+rétrogradé (sous-espèce…) ¦ retrogradat (subspecie…)
+en attente ¦ în așteptare
+contestée ¦ contestată
+rétrogradée ¦ retrogradată
+réfutée ¦ infirmată
+priorité contestée ¦ prioritate contestată
+critiquée ¦ criticată
+Première description ¦ Prima descriere
+Révision ¦ Revizuire
+découverte en même temps que ¦ descoperită în același timp cu
+nommée d’après ¦ numită după
+fabriquée ¦ fabricată
+Lieu, station ¦ Loc, stație
+Ce lieu n’a pas encore ses coordonnées (fiche du lieu, ou « Coordonnées » ici). ¦ Locul acesta nu are încă coordonate (fișa locului sau „Coordonate” aici).
+Nommée d’après ¦ Numită după
+Liens possibles : « publiée dans », « a mené à », « confirme », « contredit », « découverte en même temps que », « nommée d’après ». ¦ Legături posibile: „publicată în”, „a dus la”, „confirmă”, „contrazice”, „descoperită în același timp cu”, „numită după”.
+Découvertes ¦ Descoperiri
+La découverte ¦ Descoperirea
+Nom de la découverte ¦ Numele descoperirii
+Découvreurs ¦ Descoperitori
+Un découvreur ¦ Un descoperitor
+a trouvé la plante, a décrit l’espèce… ¦ a găsit planta, a descris specia…
+découvreur ¦ descoperitor
+Spécimen type ¦ Specimen tip
+Reconnue ou contestée ¦ Recunoscută sau contestată
+Auteur et année du nom ¦ Autorul și anul numelui
+En l’honneur de ¦ În onoarea lui/ei
+nommée en son honneur ¦ numită în onoarea sa
+Pourquoi ce nom ¦ De ce acest nume
+Statut du nom ¦ Statutul numelui
+Précision du statut ¦ Precizare privind statutul
+Spécimen, lieu, planche, étiquette ¦ Specimen, loc, planșă, etichetă
+Les images de la découverte ¦ Imaginile descoperirii
+Lieu de la découverte ¦ Locul descoperirii
+Endroit précis ¦ Loc precis
+Publication (fiche ou texte) ¦ Publicație (fișă sau text)
+Reconnaissance et controverses ¦ Recunoaștere și controverse
+Liens entre découvertes et inventions ¦ Legături între descoperiri și invenții
+ex. ophrys, comète, Laguenne, 1956 ¦ ex. ophrys, comète, Laguenne, 1956
+Porte le nom de quelqu’un ¦ Poartă numele cuiva
+Article de revue ¦ Articol de revistă
+Communication, congrès ¦ Comunicare, congres
+Chapitre de livre ¦ Capitol de carte
+La publication ¦ Publicația
+Auteurs (dans l’ordre) ¦ Autori (în ordine)
+rôle (facultatif) : dernier auteur, correspondant… ¦ rol (opțional): ultimul autor, autor corespondent…
+Éditeur, congrès ¦ Editură, congres
+PDF, tiré à part ¦ PDF, extras
+Découvertes et inventions ¦ Descoperiri și invenții
+Fiches liées ¦ Fișe legate
+Avec un DOI ¦ Cu un DOI
+Avec le PDF ¦ Cu PDF-ul
+Les plus citées ¦ Cele mai citate
+=famille de brevets ¦ familie de brevete|familii de brevete|de familii de brevete
+=autre brevet détaillé ¦ alt brevet detaliat|alte brevete detaliate|de alte brevete detaliate
+=brevet ¦ brevet|brevete|de brevete
+=prototype ¦ prototip|prototipuri|de prototipuri
+élève, stagiaire ¦ elev, stagiar
+maître, patron ¦ maestru, șef
+conférence invitée ¦ conferință invitată
+congrès ¦ congres
+séjour de recherche ¦ stagiu de cercetare
+espèce ¦ specie
+astéroïde ¦ asteroid
+minéral ¦ mineral
+école, lycée ¦ școală, liceu
+laboratoire, bâtiment ¦ laborator, clădire
+carnets de laboratoire ¦ caiete de laborator
+carnets de terrain ¦ caiete de teren
+notes de cours ¦ notițe de curs
+Profil de scientifique ¦ Profil de om de știință
+Profils de scientifique ¦ Profiluri de om de știință
+Le scientifique ¦ Omul de știință
+Sujets de recherche ¦ Teme de cercetare
+Plus haut diplôme ¦ Cea mai înaltă diplomă
+Publications en tout ¦ Publicații în total
+(si toutes ne sont pas notées ici) ¦ (dacă nu sunt toate notate aici)
+Citations en tout ¦ Citări în total
+Directeur de thèse ¦ Conducător de doctorat
+codirecteur de thèse ¦ coconducător de doctorat
+Un membre du jury ¦ Un membru al comisiei
+président, rapporteur… ¦ președinte, referent…
+jury de thèse ¦ comisie de doctorat
+Laboratoires et postes ¦ Laboratoare și posturi
+Filiation académique ¦ Filiație academică
+Un maître ¦ Un maestru
+Pour elle, lui ¦ Pentru ea, el
+Élèves, doctorants ¦ Elevi, doctoranzi
+Un élève ¦ Un elev
+Thèse en ¦ Doctorat în
+Doctorants en tout ¦ Doctoranzi în total
+Un collaborateur ¦ Un colaborator
+Missions et conférences ¦ Misiuni și conferințe
+Missions · conférences ¦ Misiuni · conferințe
+Une mission, une conférence ¦ O misiune, o conferință
+Expédition ¦ Expediție
+Académies, sociétés, distinctions ¦ Academii, societăți, distincții
+Académies, sociétés ¦ Academii, societăți
+Une académie, une société ¦ O academie, o societate
+Académie, société ¦ Academie, societate
+Une distinction ¦ O distincție
+Porte son nom ¦ Îi poartă numele
+Une chose à son nom ¦ Ceva care îi poartă numele
+Fiche de la découverte ¦ Fișa descoperirii
+Carnets de laboratoire ¦ Caiete de laborator
+Des carnets ¦ Caiete
+Un financement ¦ O finanțare
+Récit de carrière ¦ Povestea carierei
+Profil d’inventeur ¦ Profil de inventator
+Profils d’inventeur ¦ Profiluri de inventator
+L’inventeur ¦ Inventatorul
+Lieu de l’atelier ¦ Locul atelierului
+Associations d’inventeurs ¦ Asociații de inventatori
+thèse, postes, publications, élèves, académies, missions, nommages, découvertes ¦ teză, posturi, publicații, elevi, academii, misiuni, denumiri, descoperiri
+découverte ¦ descoperire
+inventions, brevets pays par pays, prototypes, licences, objets fabriqués, concours ¦ invenții, brevete țară cu țară, prototipuri, licențe, obiecte fabricate, concursuri
+expéditions sur la carte, membres, premières, collectes, récits, toponymes, sociétés ¦ expediții pe hartă, membri, premiere, colectări, relatări, toponime, societăți
+Disciplines et domaines ¦ Discipline și domenii
+Disciplines, sujets, ORCID, IdRef… : « … » pour les écrire. ¦ Discipline, teme, ORCID, IdRef…: „…” pentru a le scrie.
+Titre, date, université, directeur, jury : « … » pour l’écrire. ¦ Titlu, dată, universitate, conducător, comisie: „…” pentru a-l scrie.
+les institutions sont des fiches Employeurs ¦ instituțiile sunt fișe Angajatori
+Aucun poste noté. ¦ Niciun post notat.
+… et {x} de plus (« Tout voir »). ¦ … și încă {x} („Vezi tot”).
+Aucune publication pour l’instant : importe-les par DOI, ORCID ou HAL, ou écris-les une par une. ¦ Deocamdată nicio publicație: importă-le prin DOI, ORCID sau HAL, ori scrie-le una câte una.
+Importer (DOI, ORCID, HAL) ¦ Importă (DOI, ORCID, HAL)
+Aucune invention pour l’instant. ¦ Deocamdată nicio invenție.
+Nouvelle invention ¦ Invenție nouă
+Aucune découverte pour l’instant. ¦ Deocamdată nicio descoperire.
+Nouvelle découverte ¦ Descoperire nouă
+son directeur de thèse ¦ conducătorul său de doctorat
+l’a eu(e) pour élève ¦ l-a avut ca elev
+Son directeur de thèse, ses maîtres, ses élèves : « … » pour les écrire. Les fiches de la base qui la, le citent comme directeur de thèse s’ajoutent toutes seules. ¦ Conducătorul de doctorat, maeștrii, elevii: „…” pentru a-i scrie. Fișele din bază care o/îl citează drept conducător de doctorat se adaugă singure.
+maîtres de ¦ maeștri ai lui/ei
+directeur de thèse de ¦ conducător de doctorat al lui/ei
+thèse {x} ¦ teza {x}
+{x} de thèse de ({ns}) ¦ teza {x} a ({ns})
+Les co-auteurs de ses publications s’ajoutent tout seuls. ¦ Coautorii publicațiilor sale se adaugă singuri.
+Aucun financement noté. ¦ Nicio finanțare notată.
+conférence ¦ conferință
+séjour ¦ stagiu
+Missions, terrains, conférences invitées : « … » pour les écrire. ¦ Misiuni, teren, conferințe invitate: „…” pentru a le scrie.
+Académies, distinctions ¦ Academii, distincții
+Aucune académie notée. ¦ Nicio academie notată.
+nommée par {other} ¦ numită de {other}
+Espèces, astéroïdes, rues, prix à son nom : « … » pour les écrire. Les découvertes de la base « en l’honneur de » cette personne s’ajoutent toutes seules. ¦ Specii, asteroizi, străzi, premii care îi poartă numele: „…” pentru a le scrie. Descoperirile din bază „în onoarea” acestei persoane se adaugă singure.
+Carnets de laboratoire ou de terrain : « … » pour les noter (les scans vont dans les médias). ¦ Caiete de laborator sau de teren: „…” pentru a le nota (scanările merg în fișierele media).
+« … » pour l’écrire. ¦ „…” pentru a-l scrie.
+L’inventeur et son atelier ¦ Inventatorul și atelierul său
+Métier, atelier, domaines : « … » pour les écrire. ¦ Meserie, atelier, domenii: „…” pentru a le scrie.
+Tous ses brevets ¦ Toate brevetele sale
+Aucun brevet : sur la fiche d’une invention, « 📜 Brevets » → une ligne par pays. ¦ Niciun brevet: pe fișa unei invenții, „📜 Brevete” → câte un rând pentru fiecare țară.
+Aucune licence notée. ¦ Nicio licență notată.
+Concours d’inventeurs ¦ Concursuri de inventatori
+Concours Lépine, foires, expositions : sur la fiche de chaque invention. ¦ Concursul Lépine, târguri, expoziții: pe fișa fiecărei invenții.
+Aucun objet noté. ¦ Niciun obiect notat.
+Importer les publications de {name} ¦ Importă publicațiile lui/ei {name}
+Importer les publications cochées ¦ Importă publicațiile bifate
+Ne pas reprendre celles qui sont déjà là (même DOI ou même titre) ¦ Nu le relua pe cele care sunt deja aici (același DOI sau același titlu)
+Relier {name} comme auteur quand son nom y est ¦ Leagă {name} ca autor când numele său apare
+Compléter par Crossref (auteurs, pages, citations) quand il y a un DOI ¦ Completează prin Crossref (autori, pagini, citări) când există un DOI
+Colle un ou plusieurs DOI (un par ligne), ou leurs adresses https://doi.org/… : titre, revue, auteurs, pages et citations viennent de Crossref. ¦ Lipește unul sau mai multe DOI (câte unul pe rând) sau adresele lor https://doi.org/…: titlul, revista, autorii, paginile și citările vin din Crossref.
+L’identifiant ORCID (16 chiffres, ex. 0000-0002-1825-0097) ou l’adresse orcid.org/… : toute la liste des travaux déclarés. ¦ Identificatorul ORCID (16 cifre, ex. 0000-0002-1825-0097) sau adresa orcid.org/…: toată lista lucrărilor declarate.
+Le nom de l’auteur (ex. Anne Martin) ou son identifiant HAL (idHal, ex. anne-martin) : les dépôts de l’archive ouverte HAL. ¦ Numele autorului (ex. Anne Martin) sau identificatorul său HAL (idHal, ex. anne-martin): depunerile din arhiva deschisă HAL.
+Écris d’abord ce qu’il faut chercher. ¦ Scrie mai întâi ce trebuie căutat.
+Coche les publications à importer. ¦ Bifează publicațiile de importat.
+expédition ¦ expediție
+Ouvrir sa page ¦ Deschide pagina sa
+=publication ¦ publicație|publicații|de publicații
+=invention ¦ invenție|invenții|de invenții
+=discovery ¦ descoperire|descoperiri|de descoperiri
+=doctorant ¦ doctorand|doctoranzi|de doctoranzi
+=expédition ¦ expediție|expediții|de expediții
+=élève ¦ elev|elevi|de elevi
+=mission ¦ misiune|misiuni|de misiuni
+=cours ¦ curs|cursuri|de cursuri
+=publication importée ¦ publicație importată|publicații importate|de publicații importate
+=membre ¦ membru|membri|de membri
+géographique, cartographie ¦ geografică, cartografie
+maritime, océanographique ¦ maritimă, oceanografică
+spéléologie ¦ speologie
+archéologique ¦ arheologică
+aérienne ¦ aeriană
+raid, traversée ¦ raid, traversare
+Conférences ¦ Conferințe
+Radio, télévision ¦ Radio, televiziune
+nom donné, non officiel ¦ nume dat, neoficial
+disparu, remplacé ¦ dispărut, înlocuit
+Ajouter une étape ¦ Adaugă o etapă
+Les lieux de l’itinéraire n’ont pas encore leurs coordonnées (fiche du lieu, ou colonne « Coordonnées »). ¦ Locurile itinerariului nu au încă coordonate (fișa locului sau coloana „Coordonate”).
+L’expédition ¦ Expediția
+Nom de l’expédition ¦ Numele expediției
+Coordonnées (si le lieu n’en a pas) ¦ Coordonate (dacă locul nu are)
+Une première ¦ O premieră
+Un membre ¦ Un membru
+chef, médecin, botaniste, guide… ¦ șef, medic, botanist, ghid…
+Un moyen ¦ Un mijloc
+Véhicule, animaux, matériel ¦ Vehicul, animale, echipament
+Un carnet, des photos… ¦ Un carnet, fotografii…
+Collectes — où elles sont aujourd’hui ¦ Colectări — unde se află astăzi
+Une collecte ¦ O colectare
+Où aujourd’hui ¦ Unde astăzi
+Un incident ¦ Un incident
+Les photos de l’expédition ¦ Fotografiile expediției
+Récits et conférences ¦ Relatări și conferințe
+Un récit, des conférences ¦ O relatare, conferințe
+Fiche (livre…) ¦ Fișă (carte…)
+Cartes tracées ¦ Hărți trasate
+Toponymes donnés ¦ Toponime date
+Un nom donné ¦ Un nume dat
+Passée par ¦ A trecut prin
+Avec une première ¦ Cu o premieră
+Profil d’explorateur ¦ Profil de explorator
+Profils d’explorateur ¦ Profiluri de explorator
+L’explorateur ¦ Exploratorul
+Régions parcourues ¦ Regiuni străbătute
+Sociétés ¦ Societăți
+Une société ¦ O societate
+Société, club ¦ Societate, club
+Lieux à son nom ¦ Locuri care îi poartă numele
+Un lieu à son nom ¦ Un loc care îi poartă numele
+Des conférences ¦ Conferințe
+Récit de vie ¦ Povestea vieții
+Aucune expédition pour l’instant. ¦ Deocamdată nicio expediție.
+Nouvelle expédition ¦ Expediție nouă
+Carte de toutes ses expéditions ¦ Harta tuturor expedițiilor sale
+Aucun itinéraire : sur la fiche d’une expédition, « 🗺 Itinéraire » → une ligne par étape. ¦ Niciun itinerariu: pe fișa unei expediții, „🗺 Itinerariu” → câte un rând pentru fiecare etapă.
+Frise des expéditions ¦ Cronologia expedițiilor
+Les expéditions sans date n’ont pas de place sur la frise. ¦ Expedițiile fără dată nu au loc pe cronologie.
+Aucune première notée. ¦ Nicio premieră notată.
+Toponymes donnés ou à son nom ¦ Toponime date sau care îi poartă numele
+Noms donnés ¦ Nume date
+À son nom ¦ Care îi poartă numele
+Aucun nom de lieu noté. ¦ Niciun nume de loc notat.
+Collectes et où elles sont ¦ Colectări și unde se află
+Aucune collecte notée. ¦ Nicio colectare notată.
+Aucun récit noté. ¦ Nicio relatare notată.
+Sociétés et distinctions ¦ Societăți și distincții
+Société de géographie, Explorers Club, médailles… : « … » pour les écrire. ¦ Société de géographie, Explorers Club, medalii…: „…” pentru a le scrie.
+Compagnons d’expédition ¦ Tovarăși de expediție
+Personne d’autre noté dans ses expéditions. ¦ Nimeni altcineva notat în expedițiile sale.
+Découverte ¦ Descoperire
+<strong>Mode consultation</strong> : parcours la généalogie librement, rien ne peut être modifié ni supprimé. ¦ <strong>Mod consultare</strong>: parcurge genealogia liber, nimic nu poate fi modificat sau șters.
+Quitter la consultation ¦ Ieși din consultare
+Quitter le mode consultation (mot de passe) ¦ Ieși din modul consultare (parolă)
+Encore une fois ¦ Încă o dată
+Les deux mots de passe sont différents. ¦ Cele două parole sunt diferite.
+Donne le mot de passe choisi en entrant dans ce mode. ¦ Dă parola aleasă la intrarea în acest mod.
+Mode consultation terminé. ¦ Mod consultare încheiat.
+Passer en mode consultation ¦ Treci în modul consultare
+La famille pourra parcourir ta généalogie sur cet ordinateur sans rien pouvoir modifier ni supprimer. <b>Choisis un mot de passe</b> : il sera demandé pour sortir de ce mode. (Oublié ? Supprime le fichier <code>consultation.json</code> du dossier des données.) ¦ Familia va putea parcurge genealogia ta pe acest calculator fără să poată modifica sau șterge ceva. <b>Alege o parolă</b>: va fi cerută pentru a ieși din acest mod. (Ai uitat-o? Șterge fișierul <code>consultation.json</code> din dosarul de date.)
+Mode consultation activé. ¦ Mod consultare activat.
+Aucune fête reconnue (il faut le nom de la fête et l’année, ex. « le jour de la Pentecôte 1754 »). ¦ Nicio sărbătoare recunoscută (trebuie numele sărbătorii și anul, ex. „le jour de la Pentecôte 1754”).
+(calendrier julien, en usage en France avant décembre 1582 ; soit le {gregorian} dans le calendrier grégorien) ¦ (calendarul iulian, folosit în Franța înainte de decembrie 1582; adică {gregorian} în calendarul gregorian)
+Pâques {x} : {easter}. ¦ Paștele {x}: {easter}.
+Écrit : « {original} ». ¦ Scris: „{original}”.
+Fêtes religieuses → date exacte ¦ Sărbători religioase → dată exactă
+Les curés écrivaient souvent « le jour de la Pentecôte 1754 », « le lendemain de la Saint-Martin », « le lundi après la Saint-Martin 1650 » ou « trois jours avant Pâques 1702 ». Écris la mention : l’app calcule la vraie date (Pâques selon le comput julien avant 1583, grégorien ensuite). ¦ Preoții scriau adesea „le jour de la Pentecôte 1754”, „le lendemain de la Saint-Martin”, „le lundi après la Saint-Martin 1650” sau „trois jours avant Pâques 1702”. Scrie mențiunea: aplicația calculează data adevărată (Paștele după computul iulian înainte de 1583, gregorian după aceea).
+Mention de l’acte ¦ Mențiunea din act
+Toutes les fêtes mobiles d’une année (Septuagésime, Cendres, Pâques, Pentecôte, Fête-Dieu…) : cadre « Saint du jour et fêtes mobiles ». ¦ Toate sărbătorile mobile ale unui an (Septuagésime, Cendres, Pâques, Pentecôte, Fête-Dieu…): cadrul „Sfântul zilei și sărbători mobile”.
+Utiliser cette date ¦ Folosește această dată
+Date écrite dans l’acte : « {original} » ¦ Data scrisă în act: „{original}”
+Date calculée d’après « {original} »{x}. ¦ Dată calculată după „{original}”{x}.
+(mention gardée dans la description) ¦ (mențiune păstrată în descriere)
+{x} par le dossier Scans : à identifier dans les médias. ¦ {x} prin dosarul Scanări: de identificat în fișierele media.
+Choisis un dossier sur ton ordinateur. Chaque fichier qui y arrive (depuis le scanner, le téléphone ou AirDrop) entre tout seul dans l’app, dans les médias à identifier. Plus besoin d’importer tes photos d’archives une par une. ¦ Alege un dosar de pe calculatorul tău. Fiecare fișier care ajunge acolo (de la scaner, telefon sau AirDrop) intră singur în aplicație, în fișierele media de identificat. Nu mai trebuie să-ți imporți fotografiile de arhivă una câte una.
+Dossier surveillé ¦ Dosar supravegheat
+Surveiller ce dossier (toutes les 20 secondes, tant que l’app est ouverte) ¦ Supraveghează acest dosar (la fiecare 20 de secunde, cât timp aplicația este deschisă)
+Ranger les fichiers importés dans le sous-dossier « Importés dans LCNDA » ¦ Pune fișierele importate în subdosarul „Importés dans LCNDA”
+Formats : JPEG, PNG, WebP, GIF, PDF{x}. Conseil : un dossier réservé aux scans (AirDrop dépose dans « Téléchargements », où il y a de tout). Un même fichier n’est jamais importé deux fois. ¦ Formate: JPEG, PNG, WebP, GIF, PDF{x}. Sfat: un dosar rezervat scanărilor (AirDrop pune în „Descărcări”, unde e de toate). Un același fișier nu este niciodată importat de două ori.
+, et HEIC (iPhone) ou TIFF, convertis en JPEG ¦ , și HEIC (iPhone) sau TIFF, convertite în JPEG
+(les photos HEIC de l’iPhone et les TIFF ne sont pas convertibles sur cet ordinateur : règle l’iPhone sur « Le plus compatible ») ¦ (fotografiile HEIC de pe iPhone și fișierele TIFF nu pot fi convertite pe acest calculator: setează iPhone-ul pe „Cel mai compatibil”)
+Vérifier maintenant ¦ Verifică acum
+{x} · {x2} en tout ¦ {x} · {x2} în total
+Rien en attente ¦ Nimic în așteptare
+dossier introuvable (disque débranché ?) ¦ dosarul nu a fost găsit (disc deconectat?)
+Derniers arrivés ¦ Ultimele sosite
+Voir les médias à identifier ¦ Vezi fișierele media de identificat
+Rien d’arrivé pour l’instant ¦ Deocamdată n-a sosit nimic
+Dossier surveillé. ¦ Dosar supravegheat.
+Surveillé ¦ Supravegheat
+Pas surveillé ¦ Nesupravegheat
+Avant {until}, chercher dans les registres de la paroisse de ¦ Înainte de {until}, caută în registrele parohiei
+Beaucoup de hameaux et de villages dépendaient de la paroisse d’à côté : les baptêmes, mariages et sépultures d’avant la Révolution sont alors dans les registres d’une autre commune. Note ces rattachements au fil de tes trouvailles : l’app l’indique sur les événements des fiches, dans les battues et dans les registres en ligne. ¦ Multe cătune și sate depindeau de parohia vecină: botezurile, căsătoriile și înmormântările de dinainte de Revoluție se află atunci în registrele altei localități. Notează aceste dependențe pe măsură ce le descoperi: aplicația le arată la evenimentele fișelor, în căutările ample și în registrele online.
+Modifier le rattachement ¦ Modifică dependența
+Nouveau rattachement ¦ Dependență nouă
+Lieu (hameau, village, commune actuelle) ¦ Loc (cătun, sat, localitate actuală)
+Dépendait de la paroisse de ¦ Depindea de parohia
+Nom de la paroisse (tel que dans les registres) ¦ Numele parohiei (așa cum apare în registre)
+Note, source ¦ Notă, sursă
+Chercher… (lieu, paroisse, note) ¦ Caută… (loc, parohie, notă)
+Avec des événements concernés ({withEv}) ¦ Cu evenimente vizate ({withEv})
+Avec des événements concernés ¦ Cu evenimente vizate
+Jusqu’en (année) ¦ Până în (anul)
+Événements concernés ¦ Evenimente vizate
+Modifier ce rattachement ¦ Modifică această dependență
+Supprimer ce rattachement ¦ Șterge această dependență
+Aucun rattachement ne correspond ¦ Nicio dependență nu se potrivește
+Supprimer ce rattachement ? ¦ Ștergi această dependență?
+Supprimer le rattachement ¦ Șterge dependența
+Rattachement enregistré. ¦ Dependență salvată.
+Les témoins, voisins, curés, parrains qui n’ont pas de fiche. Par exemple : « Pierre Martin, tisserand, apparaît dans 7 actes entre 1781 et 1803 ». Ce cercle (famille, amis, voisins) débloque souvent une recherche. ¦ Martorii, vecinii, preoții, nașii care nu au fișă. De exemplu: „Pierre Martin, țesător, apare în 7 acte între 1781 și 1803”. Acest cerc (familie, prieteni, vecini) deblochează adesea o cercetare.
+Ouvre « Marquer dans les transcriptions » : sélectionne un nom dans le texte d’un acte, ou accepte les noms repérés par l’app. ¦ Deschide „Marchează în transcrieri”: selectează un nume din textul unui act sau acceptă numele găsite de aplicație.
+Aucune transcription pour l’instant ¦ Deocamdată nicio transcriere
+Transcris d’abord un acte : visionneuse des médias → transcription. ¦ Transcrie mai întâi un act: vizualizatorul fișierelor media → transcriere.
+Chercher… (nom, métier, lieu) ¦ Caută… (nume, meserie, loc)
+Lieu : ¦ Loc:
+Avec une fiche ¦ Cu o fișă
+Le plus de mentions ¦ Cele mai multe mențiuni
+Chercher… (titre, texte, cote) ¦ Caută… (titlu, text, cotă)
+Noms marqués ¦ Nume marcate
+Aucun nom marqué ¦ Niciun nume marcat
+Au moins un nom marqué ¦ Cel puțin un nume marcat
+{x} — apparaît dans ¦ {x} — apare în
+entre {from} et {to} ¦ între {from} și {to}
+Fiche : {x} ¦ Fișă: {x}
+Les {n} mentions ¦ Cele {n} mențiuni
+nom marqué ¦ nume marcat
+noms marqués ¦ nume marcate
+aucun nom ¦ niciun nume
+Début de la transcription ¦ Începutul transcrierii
+Aucun nom ne correspond ¦ Niciun nume nu se potrivește
+Aucune transcription ne correspond ¦ Nicio transcriere nu se potrivește
+NOMS CITÉS ¦ NUME CITATE
+Sélectionne un nom dans le texte avec la souris : un bouton « Ajouter » apparaît. ¦ Selectează un nume din text cu mouse-ul: apare un buton „Adaugă”.
+Noms marqués ({n}) ¦ Nume marcate ({n})
+Noms repérés par l’app ¦ Nume găsite de aplicație
+À vérifier : la détection automatique n’est pas parfaite. ¦ De verificat: detectarea automată nu este perfectă.
+Ajouter… ¦ Adaugă…
+Ajouter ce nom ¦ Adaugă acest nume
+NOM CITÉ ¦ NUME CITAT
+Ajouter au cercle ¦ Adaugă la cerc
+Demeurant à… ¦ Locuind în…
+C’est quelqu’un de la base ? ¦ Este cineva din bază?
+Nom ajouté au cercle. ¦ Nume adăugat la cerc.
+à appliquer ¦ de aplicat
+tu as aussi modifié ¦ l-ai modificat și tu
+déjà identique ¦ deja identic
+absent chez toi ¦ lipsește la tine
+Toi et un cousin, chacun sur son ordinateur, sur la même généalogie. L’app échange des « paquets de modifications » : tu reçois les siens, tu acceptes ou refuses chaque changement. On ne partage jamais la base elle-même par iCloud ou Dropbox (risque de fichier abîmé). ¦ Tu și un văr, fiecare pe calculatorul lui, pe aceeași genealogie. Aplicația schimbă „pachete de modificări”: le primești pe ale lui, accepți sau refuzi fiecare schimbare. Nu se partajează niciodată baza însăși prin iCloud sau Dropbox (risc de fișier deteriorat).
+Comment ça marche ¦ Cum funcționează
+<b>Commencer</b> ici : chaque fiche reçoit un identifiant commun. ¦ <b>Începe</b> aici: fiecare fișă primește un identificator comun.
+Donner <b>une copie de ta base</b> à ton cousin (bouton ci-dessous) : il l’ouvre dans son LCNDA (Réglages → Import → ouvrir une base .db). ¦ Dă <b>o copie a bazei tale</b> vărului tău (butonul de mai jos): el o deschide în LCNDA-ul lui (Setări → Import → deschide o bază .db).
+Ensuite, chacun travaille de son côté et envoie de temps en temps <b>un paquet de ses modifications</b> (un petit fichier, par e-mail par exemple). ¦ Apoi fiecare lucrează separat și trimite din când în când <b>un pachet cu modificările sale</b> (un fișier mic, prin e-mail de exemplu).
+À la réception, tu <b>acceptes ou refuses</b> chaque changement. Une copie de sécurité est faite avant. ¦ La primire, <b>accepți sau refuzi</b> fiecare schimbare. Înainte se face o copie de siguranță.
+Ton prénom (ex. Victor) ¦ Prenumele tău (ex. Victor)
+Commencer le travail à deux ¦ Începe lucrul în doi
+Ce qui est échangé : fiches, unions, liens parents-enfants, événements, lieux, notes, sources et citations, fiches des médias et leurs liens. Les fichiers des photos et des scans voyagent seulement avec 🔄 Deux ordinateurs (dossier partagé). ¦ Ce se schimbă: fișe, uniuni, legături părinți-copii, evenimente, locuri, note, surse și citări, fișele fișierelor media și legăturile lor. Fișierele fotografiilor și ale scanărilor circulă doar cu 🔄 Două calculatoare (dosar partajat).
+depuis le dernier paquet. ¦ de la ultimul pachet.
+Préparer le paquet ¦ Pregătește pachetul
+Copie de la base pour un cousin ¦ Copie a bazei pentru un văr
+Le paquet est un fichier « .lcnda-changes.json » à envoyer à ton cousin. Une fois préparé, ces modifications ne seront plus remises dans le paquet suivant : garde-le jusqu’à ce qu’il l’ait reçu. ¦ Pachetul este un fișier „.lcnda-changes.json” de trimis vărului tău. Odată pregătit, aceste modificări nu vor mai fi puse în pachetul următor: păstrează-l până când l-a primit.
+Je signe mes paquets ¦ Îmi semnez pachetele
+Recevoir un paquet ¦ Primește un pachet
+Lire le paquet ¦ Citește pachetul
+Paquets échangés ¦ Pachete schimbate
+envoyé ¦ trimis
+reçu ¦ primit
+({accepted_count}/{change_count} acceptés) ¦ ({accepted_count}/{change_count} acceptate)
+Travail à deux commencé. Donne maintenant une copie de ta base à ton cousin. ¦ Lucrul în doi a început. Dă acum o copie a bazei tale vărului tău.
+Aucun changement coché. ¦ Nicio schimbare bifată.
+Appliquer {x} ? Une copie de sécurité de ta base est faite avant. ¦ Aplici {x}? Înainte se face o copie de siguranță a bazei tale.
+Appliquer les changements ¦ Aplică schimbările
+; {x} (fiche verrouillée) ¦ ; {x} (fișă blocată)
+Paquet de {x} ¦ Pachet de la {x}
+Ce paquet a déjà été reçu une fois. ¦ Pachetul acesta a fost deja primit o dată.
+, dont {x} déjà identiques chez toi (ignorés) ¦ , dintre care {x} deja identice la tine (ignorate)
+Tout cocher / décocher ¦ Bifează / debifează tot
+Rien de nouveau. ¦ Nimic nou.
+Appliquer les changements cochés ¦ Aplică schimbările bifate
+=fichier arrivé ¦ fișier sosit|fișiere sosite|de fișiere sosite
+=fichier en attente ¦ fișier în așteptare|fișiere în așteptare|de fișiere în așteptare
+=rattachement ¦ dependență|dependențe|de dependențe
+=changement appliqué ¦ schimbare aplicată|schimbări aplicate|de schimbări aplicate
+=changement ignoré ¦ schimbare ignorată|schimbări ignorate|de schimbări ignorate
+Une langue ¦ O limbă
+Quelle langue ? ¦ Ce limbă?
+Cyrillique et grec ¦ Chirilică și greacă
+Aucune langue. ¦ Nicio limbă.
+Sous chaque lettre : sa translittération ({x}). ¦ Sub fiecare literă: transliterarea ei ({x}).
+L’alphabet ¦ Alfabetul
+lettres à accents ou propres à la langue ¦ litere cu diacritice sau proprii limbii
+Lettres à accents et lettres spéciales ¦ Litere cu diacritice și litere speciale
+Aucune : cette langue n’a pas de lettres à accents. ¦ Niciuna: această limbă nu are litere cu diacritice.
+Seulement dans les mots et les noms étrangers : ¦ Doar în cuvintele și numele străine:
+Lettres anciennes et abréviations des actes ¦ Litere vechi și abrevieri din acte
+Comment la reconnaître ¦ Cum o recunoști
+Mots fréquents dans les actes : ¦ Cuvinte frecvente în acte:
+très probable ¦ foarte probabil
+Tape une lettre (ł, ő, ж, ω…) ou un mot entier de l’acte : les langues possibles s’affichent, les plus probables d’abord. ¦ Tastează o literă (ł, ő, ж, ω…) sau un cuvânt întreg din act: apar limbile posibile, cele mai probabile mai întâi.
+Tape des lettres : les chiffres, les espaces et la ponctuation ne comptent pas. ¦ Tastează litere: cifrele, spațiile și punctuația nu contează.
+Ce caractère n’est dans aucune des langues de la liste. ¦ Caracterul acesta nu se află în niciuna dintre limbile din listă.
+Aucune langue de la liste n’a tous ces caractères ensemble : regarde lettre par lettre ci-dessous. ¦ Nicio limbă din listă nu are toate aceste caractere împreună: uită-te literă cu literă mai jos.
+— que des lettres simples (a à z) : tape une lettre à accent ou un mot entier pour départager. ¦ — doar litere simple (de la a la z): tastează o literă cu diacritic sau un cuvânt întreg pentru a decide.
+{x} : seulement dans cette langue ¦ {x}: doar în această limbă
+mot des actes : « {x} » ¦ cuvânt din acte: „{x}”
+Lettre par lettre ¦ Literă cu literă
+ce caractère n’est dans aucune des langues de la liste ¦ caracterul acesta nu se află în niciuna dintre limbile din listă
+lettre simple : dans {x} en lettres latines ¦ literă simplă: în {x} cu litere latine
+Majuscules (cliquer encore pour revenir aux minuscules) ¦ Majuscule (fă clic din nou pentru a reveni la minuscule)
+Alphabets et langues des actes ¦ Alfabete și limbi ale actelor
+Pour lire un acte écrit dans une autre langue : l’alphabet de chaque langue, ses lettres à accents, les lettres anciennes, et comment la reconnaître. ¦ Pentru a citi un act scris în altă limbă: alfabetul fiecărei limbi, literele cu diacritice, literele vechi și cum o recunoști.
+Lettres ou mot de l’acte ¦ Litere sau cuvânt din act
+Chercher… (ł, ő, ж, ω, natus, урожденный) ¦ Caută… (ł, ő, ж, ω, natus, урожденный)
+Clique sur les lettres, ou tape ici ¦ Fă clic pe litere sau tastează aici
+Effacer la dernière lettre ¦ Șterge ultima literă
+Cyrillique en ¦ Chirilică în
+français courant ¦ franceză curentă
+biélorusse ¦ belarusă
+En lettres latines : ¦ Cu litere latine:
+cyrillique en ISO 9 ¦ chirilică în ISO 9
+lu comme du {x} ¦ citit ca {x}
+Clique d’abord sur une lettre grecque, puis sur l’accent ou l’esprit. ¦ Fă clic mai întâi pe o literă grecească, apoi pe accent sau pe spirit.
+Texte vidé ¦ Text golit
+Texte vidé. ¦ Text golit.
+Rien à copier : clique d’abord sur des lettres. ¦ Nimic de copiat: fă clic mai întâi pe litere.
+Texte copié : colle-le où tu veux (⌘V). ¦ Text copiat: lipește-l unde vrei (⌘V).
+Copie impossible : sélectionne le texte et fais ⌘C. ¦ Copiere imposibilă: selectează textul și apasă ⌘C.
+=lettre ¦ literă|litere|de litere
+=langue possible ¦ limbă posibilă|limbi posibile|de limbi posibile
+=langue ¦ limbă|limbi|de limbi
+La lecture d’une écriture à la main (HTR), sur cet ordinateur : le texte est proposé ligne par ligne à côté de l’image, les mots peu sûrs surlignés. Elle s’installe une fois dans les Réglages. Relis toujours : elle se trompe sur les noms. ¦ Citirea scrisului de mână (HTR), pe acest calculator: textul este propus rând cu rând lângă imagine, cu cuvintele nesigure evidențiate. Se instalează o dată în Setări. Recitește mereu: se înșală la nume.
+Cherche dans le texte les noms (avec leur rôle : parrain, témoin…), les dates (même en toutes lettres ou au calendrier républicain), les lieux et les métiers, pour les relier aux fiches. ¦ Caută în text numele (cu rolul lor: naș, martor…), datele (chiar scrise în litere sau în calendarul republican), locurile și meseriile, pentru a le lega de fișe.
+Mots des actes ¦ Cuvinte din acte
+Abréviations ¦ Abrevieri
+Mois ¦ Luni
+Nombres et âges ¦ Numere și vârste
+Parenté ¦ Rudenie
+Vieux mots ¦ Cuvinte vechi
+Décès, sépulture ¦ Deces, înmormântare
+Notaire ¦ Notar

@@ -1,0 +1,1543 @@
+fr ¦ ro
+son {x} (lien) ¦ {x} său
+sa {x} (lien) ¦ {x} sa
+père ¦ tată
+mère ¦ mamă
+grand-père ¦ bunic
+grand-mère ¦ bunică
+arrière-grand-père ¦ străbunic
+arrière-grand-mère ¦ străbunică
+arrière-arrière-grand-père ¦ răsbunic
+arrière-arrière-grand-mère ¦ răsbunică
+arrière-arrière-arrière-grand-père ¦ stră-răsbunic
+arrière-arrière-arrière-grand-mère ¦ stră-răsbunică
+ancêtre à la {n}e génération ¦ strămoș din generația a {n}-a
+{kin} de {name} ¦ {kin} lui {name}
+Il est né {when}{where}. ¦ S-a născut {when}{where}.
+Elle est née {when}{where}. ¦ S-a născut {when}{where}.
+Il était {occ}. ¦ Era {occ}.
+Elle était {occ}. ¦ Era {occ}.
+Il a épousé {name}{when}{where}. ¦ S-a căsătorit cu {name}{when}{where}.
+Elle a épousé {name}{when}{where}. ¦ S-a căsătorit cu {name}{when}{where}.
+Il a eu un enfant : {list}. ¦ A avut un copil: {list}.
+Elle a eu un enfant : {list}. ¦ A avut un copil: {list}.
+Il a eu {n} enfants : {list}. ¦ A avut {n} copii: {list}.
+Elle a eu {n} enfants : {list}. ¦ A avut {n} copii: {list}.
+Il est mort {when}{age}{where}. ¦ A murit {when}{age}{where}.
+Elle est morte {when}{age}{where}. ¦ A murit {when}{age}{where}.
+, à {n} ans ¦ , la {n} ani
+, à {n} an ¦ , la {n} an
+avec {name} ¦ cu {name}
+se mariait{with}{where}{date} ¦ se căsătorea{with}{where}{date}
+se mariait civilement{with}{where}{date} ¦ se căsătorea civil{with}{where}{date}
+se mariait religieusement{with}{where}{date} ¦ se căsătorea religios{with}{where}{date}
+mourait{with}{where}{date} ¦ murea{with}{where}{date}
+était inhumé{with}{where}{date} ¦ era înmormântat{with}{where}{date}
+était inhumée{with}{where}{date} ¦ era înmormântată{with}{where}{date}
+habitait{with}{where}{date} ¦ locuia{with}{where}{date}
+travaillait comme{what}{with}{where}{date} ¦ lucra ca{what}{with}{where}{date}
+partait{with}{where}{date} ¦ pleca{with}{where}{date}
+arrivait{with}{where}{date} ¦ sosea{with}{where}{date}
+était recensé{with}{where}{date} ¦ era recenzat{with}{where}{date}
+était recensée{with}{where}{date} ¦ era recenzată{with}{where}{date}
+était sous les drapeaux{with}{where}{date} ¦ era sub arme{with}{where}{date}
+obtenait un diplôme{with}{where}{date} ¦ obținea o diplomă{with}{where}{date}
+devenait français{with}{where}{date} ¦ devenea cetățean francez{with}{where}{date}
+devenait française{with}{where}{date} ¦ devenea cetățeană franceză{with}{where}{date}
+était baptisé{with}{where}{date} ¦ era botezat{with}{where}{date}
+était baptisée{with}{where}{date} ¦ era botezată{with}{where}{date}
+faisait sa confirmation{with}{where}{date} ¦ își făcea confirmarea{with}{where}{date}
+était à l’école{with}{where}{date} ¦ era la școală{with}{where}{date}
+vivait un événement ({label}){where}{date} ¦ trăia un eveniment ({label}){where}{date}
+devenait père de {name}{where}{date} ¦ devenea tatăl lui {name}{where}{date}
+devenait mère de {name}{where}{date} ¦ devenea mama lui {name}{where}{date}
+n’était plus là : il était mort à {n} ans ¦ nu mai era: murise la {n} ani
+n’était plus là : elle était morte à {n} ans ¦ nu mai era: murise la {n} ani
+vivait sans doute du côté de {place} en {y}{occ} ¦ trăia probabil prin părțile {place} în {y}{occ}
+vivait sa vie en {y}{occ} ¦ își trăia viața în {y}{occ}
+À {n} ans… ¦ La {n} ani…
+À {n} ans, il {facts}. ¦ La {n} ani, {facts}.
+À {n} ans, elle {facts}. ¦ La {n} ani, {facts}.
+{who} de {name} dont on connaît la naissance. ¦ {who} ai lui {name} cu nașterea cunoscută.
+{who} de {name} dont on connaît la naissance ({k} sans date de naissance ne sont pas comptés). ¦ {who} ai lui {name} cu nașterea cunoscută ({k} fără dată de naștere nu sunt numărați).
+{who}{y}, comme {kin} {from}{fy} ¦ {who}{y}, ca {kin} {from}{fy}
+C’est un homme. ¦ Este un bărbat.
+C’est une femme. ¦ Este o femeie.
+C’est un homme, né au XVIIIe siècle ou avant. ¦ Este un bărbat, născut în secolul al XVIII-lea sau înainte.
+C’est un homme, né au XIXe siècle. ¦ Este un bărbat, născut în secolul al XIX-lea.
+C’est un homme, né au XXe siècle. ¦ Este un bărbat, născut în secolul al XX-lea.
+C’est une femme, née au XVIIIe siècle ou avant. ¦ Este o femeie, născută în secolul al XVIII-lea sau înainte.
+C’est une femme, née au XIXe siècle. ¦ Este o femeie, născută în secolul al XIX-lea.
+C’est une femme, née au XXe siècle. ¦ Este o femeie, născută în secolul al XX-lea.
+Il est né à {place}. ¦ S-a născut la {place}.
+Elle est née à {place}. ¦ S-a născut la {place}.
+Son métier : {occ}. ¦ Meseria sa: {occ}.
+Il a vécu {n} ans. ¦ A trăit {n} ani.
+Elle a vécu {n} ans. ¦ A trăit {n} ani.
+Il a eu {n} enfant. ¦ A avut {n} copil.
+Elle a eu {n} enfant. ¦ A avut {n} copil.
+Il a eu {n} enfants. ¦ A avut {n} copii.
+Elle a eu {n} enfants. ¦ A avut {n} copii.
+On ne lui connaît pas d’enfant. ¦ Nu i se cunoaște niciun copil.
+Né dans les années {y}. ¦ Născut în anii {y}.
+Née dans les années {y}. ¦ Născută în anii {y}.
+Sa femme s’appelait {name}. ¦ Soția lui se numea {name}.
+Son mari s’appelait {name}. ¦ Soțul ei se numea {name}.
+Un de ses enfants s’appelait {name}. ¦ Unul dintre copiii săi se numea {name}.
+Son nom commence par {l}… et compte {n} lettres. ¦ Numele începe cu {l}… și are {n} litere.
+Ta naissance ¦ Nașterea ta
+Tu es {name}. ¦ Ești {name}.
+Tu nais {when}{where}{parents}. ¦ Te naști {when}{where}{parents}.
+fils de {names} ¦ fiul lui {names}
+fille de {names} ¦ fiica lui {names}
+{a} et de {b} ¦ {a} și {b}
+Ton père est {occ}. ¦ Tatăl tău este {occ}.
+Le métier ¦ Meseria
+Tu as quinze ans, c’est l’année {y}. Il faut gagner ta vie. Que vas-tu faire ? ¦ Ai cincisprezece ani, e anul {y}. Trebuie să-ți câștigi traiul. Ce vei face?
+Tu as quinze ans. Il faut gagner ta vie. Que vas-tu faire ? ¦ Ai cincisprezece ani. Trebuie să-ți câștigi traiul. Ce vei face?
+Devenir {occ} ¦ Să devii {occ}
+Dans la vraie vie, {name} est devenu {occ}. ¦ În viața reală, {name} a devenit {occ}.
+Dans la vraie vie, {name} est devenue {occ}. ¦ În viața reală, {name} a devenit {occ}.
+L’amour ¦ Dragostea
+Tu as {n} ans. ¦ Ai {n} ani.
+À {place}, deux personnes ont attiré ton regard… ¦ La {place}, două persoane ți-au atras privirea…
+deux personnes ont attiré ton regard… ¦ două persoane ți-au atras privirea…
+Épouser {name} ¦ Să te căsătorești cu {name}
+Rester libre encore un peu ¦ Să mai rămâi liber puțin
+Dans la vraie vie, {first} a épousé {name}{when}{where}. ¦ În viața reală, {first} s-a căsătorit cu {name}{when}{where}.
+Partir ? ¦ Să pleci?
+La vie est dure{where}. On parle de partir… ¦ Viața e grea{where}. Se vorbește de plecare…
+Partir pour {place} ¦ Să pleci la {place}
+Rester au pays ¦ Să rămâi acasă
+Dans la vraie vie, {name} a fini sa route à {place}. ¦ În viața reală, {name} și-a încheiat drumul la {place}.
+On parle de partir pour la ville… ¦ Se vorbește de plecarea la oraș…
+Partir ¦ Să pleci
+Rester à {place} ¦ Să rămâi la {place}
+Dans la vraie vie, {name} est resté à {place}. ¦ În viața reală, {name} a rămas la {place}.
+Dans la vraie vie, {name} est restée à {place}. ¦ În viața reală, {name} a rămas la {place}.
+Les enfants ¦ Copiii
+Un enfant arrive : {list}. Tu les regardes grandir. ¦ Vine un copil: {list}. Îi privești crescând.
+{n} enfants arrivent : {list}. Tu les regardes grandir. ¦ Vin {n} copii: {list}. Îi privești crescând.
+La fin du voyage ¦ Sfârșitul călătoriei
+Tu t’éteins {when}{where}{age}. ¦ Te stingi {when}{where}{age}.
+Ton histoire continue… ¦ Povestea ta continuă…
+{n} personnes nées un {date} : {list}. ¦ {n} persoane născute pe {date}: {list}.
+{name} est mort le jour de son anniversaire, à {n} ans ({date}). ¦ {name} a murit în ziua aniversării sale, la {n} ani ({date}).
+{name} est morte le jour de son anniversaire, à {n} ans ({date}). ¦ {name} a murit în ziua aniversării sale, la {n} ani ({date}).
+{name} est né un {date}, jour anniversaire de la mort de {kin} {who} ({y}). ¦ {name} s-a născut pe {date}, ziua în care se împlinea un an de la moartea lui {kin} {who} ({y}).
+{name} est née un {date}, jour anniversaire de la mort de {kin} {who} ({y}). ¦ {name} s-a născut pe {date}, ziua în care se împlinea un an de la moartea lui {kin} {who} ({y}).
+son ancêtre ¦ strămoșul său
+{n} mariages le même jour de l’année : {list}. ¦ {n} căsătorii în aceeași zi a anului: {list}.
+{a} et {b} sont nés à {n} ans pile d’écart, jour pour jour ({y1} et {y2}). ¦ {a} și {b} s-au născut la exact {n} ani distanță, zi cu zi ({y1} și {y2}).
+{name} est né le jour de Noël {y}. ¦ {name} s-a născut în ziua de Crăciun {y}.
+{name} est née le jour de Noël {y}. ¦ {name} s-a născut în ziua de Crăciun {y}.
+{name} est né le jour de l’An {y}. ¦ {name} s-a născut în ziua de Anul Nou {y}.
+{name} est née le jour de l’An {y}. ¦ {name} s-a născut în ziua de Anul Nou {y}.
+{name} est né un vendredi 13 ({date}). ¦ {name} s-a născut într-o vineri 13 ({date}).
+{name} est née un vendredi 13 ({date}). ¦ {name} s-a născut într-o vineri 13 ({date}).
+{name} s’est marié à {n} ans, au même âge que son père {father}. ¦ {name} s-a căsătorit la {n} ani, la aceeași vârstă ca tatăl său, {father}.
+{name} s’est mariée à {n} ans, au même âge que son père {father}. ¦ {name} s-a căsătorit la {n} ani, la aceeași vârstă ca tatăl ei, {father}.
+En quelle année est né {name} ? ¦ În ce an s-a născut {name}?
+En quelle année est née {name} ? ¦ În ce an s-a născut {name}?
+Où est né {name} ? ¦ Unde s-a născut {name}?
+Où est née {name} ? ¦ Unde s-a născut {name}?
+Quel était le métier de {name} ? ¦ Care era meseria lui {name}?
+{name} était {occ}. ¦ {name} era {occ}.
+Qui a épousé {name} ? ¦ Cu cine s-a căsătorit {name}?
+{a} et {b} se sont mariés{when}{where}. ¦ {a} și {b} s-au căsătorit{when}{where}.
+Qui est le père de {name} ? ¦ Cine este tatăl lui {name}?
+Qui est la mère de {name} ? ¦ Cine este mama lui {name}?
+{name} est le fils de {parent}. ¦ {name} este fiul lui {parent}.
+{name} est la fille de {parent}. ¦ {name} este fiica lui {parent}.
+Combien d’enfants a eus {name} ? ¦ Câți copii a avut {name}?
+À quel âge est mort {name} ? ¦ La ce vârstă a murit {name}?
+À quel âge est morte {name} ? ¦ La ce vârstă a murit {name}?
+Qui est né le premier ? ¦ Cine s-a născut primul?
+Ici est né {name}, {when}. ¦ Aici s-a născut {name}, {when}.
+Ici est née {name}, {when}. ¦ Aici s-a născut {name}, {when}.
+C’est aussi ici que est né {name}, {when}. ¦ Tot aici s-a născut {name}, {when}.
+C’est aussi ici que est née {name}, {when}. ¦ Tot aici s-a născut {name}, {when}.
+Ici est né {name}, {when} ; il sera {occ}. ¦ Aici s-a născut {name}, {when}; va fi {occ}.
+Ici est née {name}, {when} ; elle sera {occ}. ¦ Aici s-a născut {name}, {when}; va fi {occ}.
+C’est aussi ici que est né {name}, {when} ; il sera {occ}. ¦ Tot aici s-a născut {name}, {when}; va fi {occ}.
+C’est aussi ici que est née {name}, {when} ; elle sera {occ}. ¦ Tot aici s-a născut {name}, {when}; va fi {occ}.
+Ici, {when}, {name} : {label}{what}. ¦ Aici, {when}, {name}: {label}{what}.
+Puis, {when}, {name} : {label}{what}. ¦ Apoi, {when}, {name}: {label}{what}.
+Ici, {when}, {name} a épousé {other}. ¦ Aici, {when}, {name} s-a căsătorit cu {other}.
+Puis, {when}, {name} a épousé {other}. ¦ Apoi, {when}, {name} s-a căsătorit cu {other}.
+Ici est mort {name}, {when}{age}. ¦ Aici a murit {name}, {when}{age}.
+Ici est morte {name}, {when}{age}. ¦ Aici a murit {name}, {when}{age}.
+C’est aussi ici que est mort {name}, {when}{age}. ¦ Tot aici a murit {name}, {when}{age}.
+C’est aussi ici que est morte {name}, {when}{age}. ¦ Tot aici a murit {name}, {when}{age}.
+son conjoint ¦ soțul/soția sa
+Naissance ({date}) ¦ Naștere ({date})
+Mariage avec {name} ({date}) ¦ Căsătorie cu {name} ({date})
+Mariage avec {name} ¦ Căsătorie cu {name}
+Mariage ({date}) ¦ Căsătorie ({date})
+Décès ({date}) ¦ Deces ({date})
+ont la joie de vous annoncer la naissance de leur fils ¦ au bucuria de a vă anunța nașterea fiului lor
+ont la joie de vous annoncer la naissance de leur fille ¦ au bucuria de a vă anunța nașterea fiicei lor
+a la joie de vous annoncer la naissance de son fils ¦ are bucuria de a vă anunța nașterea fiului său
+a la joie de vous annoncer la naissance de sa fille ¦ are bucuria de a vă anunța nașterea fiicei sale
+a la joie de vous annoncer la naissance de ¦ are bucuria de a vă anunța nașterea lui
+On nous prie d’annoncer le décès de ¦ Suntem rugați să anunțăm decesul lui
+survenu {when}{age} ¦ survenit {when}{age}
+survenue {when}{age} ¦ survenit {when}{age}
+, dans sa {n}e année ¦ , în al {n}-lea an al vieții
+De la part de ¦ Din partea
+Monsieur {name}, son époux ¦ Domnul {name}, soțul ei
+Madame {name}, son épouse ¦ Doamna {name}, soția lui
+{names}, ses enfants ¦ {names}, copiii săi
+{names}, son fils ¦ {names}, fiul său
+{names}, sa fille ¦ {names}, fiica sa
+ont l’honneur de vous faire part du mariage de leurs enfants ¦ au onoarea de a vă anunța căsătoria copiilor lor
+ont la joie de vous faire part de leur mariage ¦ au bucuria de a vă anunța căsătoria lor
+célébré {when} ¦ celebrată {when}
+{names} se sont dit oui ! ¦ {names} și-au spus „da”!
+Bienvenue à {name} ! ¦ Bun venit, {name}!
+Adieu à {name} ¦ Adio, {name}
+Une année tranquille ¦ Un an liniștit
+C’est {when} que {a} a épousé {b}. ¦ {when} s-a căsătorit {a} cu {b}.
+{name} est le fils de {parents} ¦ {name} este fiul lui {parents}
+{name} est la fille de {parents} ¦ {name} este fiica lui {parents}
+Tous nos vœux de bonheur aux jeunes époux. ¦ Toate urările de fericire tinerilor căsătoriți.
+Les heureux parents, {names}, reçoivent les félicitations de toute la famille. ¦ Fericiții părinți, {names}, primesc felicitările întregii familii.
+Rien de notable à signaler cette année dans la famille, ce qui est aussi une bonne nouvelle. ¦ Nimic demn de semnalat anul acesta în familie, ceea ce este tot o veste bună.
+{name} fête ses {n} ans. ¦ {name} își serbează cei {n} ani.
+{names} : {n} ans de mariage ! ¦ {names}: {n} ani de căsnicie!
+Né il y a {n} ans, jour pour jour. ¦ Născut acum {n} ani, zi cu zi.
+Née il y a {n} ans, jour pour jour. ¦ Născută acum {n} ani, zi cu zi.
+Disparu il y a {n} ans, jour pour jour. ¦ Dispărut acum {n} ani, zi cu zi.
+Disparue il y a {n} ans, jour pour jour. ¦ Dispărută acum {n} ani, zi cu zi.
+Fils de {names}. ¦ Fiul lui {names}.
+Fille de {names}. ¦ Fiica lui {names}.
+{name}, son frère, est né {when} : moins de neuf mois d’écart (des jumeaux auraient la même date). ¦ {name}, fratele său, s-a născut {when}: mai puțin de nouă luni diferență (gemenii ar avea aceeași dată).
+{name}, sa sœur, est née {when} : moins de neuf mois d’écart (des jumeaux auraient la même date). ¦ {name}, sora sa, s-a născut {when}: mai puțin de nouă luni diferență (gemenii ar avea aceeași dată).
+{name} est mort {when}, avant ce mariage. ¦ {name} a murit {when}, înainte de această căsătorie.
+{name} est morte {when}, avant ce mariage. ¦ {name} a murit {when}, înainte de această căsătorie.
+La même année, {label} à {place}, à {km} km : possible, mais à vérifier. ¦ În același an, {label} la {place}, la {km} km: posibil, dar de verificat.
+Un métier à {n} ans : c’est jeune. ¦ O meserie la {n} ani: e tânăr.
+🔎 À regarder aussi ¦ 🔎 De văzut și
+{name} naît {when} {where}. ¦ {name} se naște {when} {where}.
+Ses parents : {list}. ¦ Părinții săi: {list}.
+Parent connu : {list}. ¦ Părinte cunoscut: {list}.
+Ses frères et sœurs ¦ Frații și surorile sale
+Son frère ou sa sœur ¦ Fratele sau sora sa
+{name} reçoit le baptême {when} {where}. ¦ {name} primește botezul {when} {where}.
+Présents : {list}. ¦ Prezenți: {list}.
+Le mariage religieux est célébré {when} {where}. ¦ Căsătoria religioasă este celebrată {when} {where}.
+Le mariage civil est célébré {when} {where}. ¦ Căsătoria civilă este celebrată {when} {where}.
+{name} se marie avec {who} {when} {where}. ¦ {name} se căsătorește cu {who} {when} {where}.
+{name} se marie {when} {where}. ¦ {name} se căsătorește {when} {where}.
+{name} meurt {when} {where}{age}. ¦ {name} moare {when} {where}{age}.
+Cause notée : {cause}. ¦ Cauza notată: {cause}.
+{name} repose {where} ¦ {name} odihnește {where}
+{name} est inhumé ¦ {name} este înmormântat
+{name} est inhumée ¦ {name} este înmormântată
+{name} est inhumé(e) ¦ {name} este înmormântat(ă)
+(inhumation {when}) ¦ (înmormântare {when})
+{kind} {when} {where}. ¦ {kind} {when} {where}.
+{name} exerce le métier de {job}{where}. ¦ {name} practică meseria de {job}{where}.
+{name} s’installe {where}{addr}. ¦ {name} se stabilește {where}{addr}.
+{name} habite {where}{addr}. ¦ {name} locuiește {where}{addr}.
+Au recensement de {y}, {name} vit {where}{desc}. ¦ La recensământul din {y}, {name} trăiește {where}{desc}.
+Au recensement {when}, {name} vit {where}{desc}. ¦ La recensământul {when}, {name} trăiește {where}{desc}.
+à l’adresse « {ad} » ¦ la adresa „{ad}”
+Métier noté : {job}. ¦ Meserie notată: {job}.
+Le foyer compte {who}. ¦ Gospodăria numără {who}.
+{label} {when} {where}. ¦ {label} {when} {where}.
+Recensement de {y} ¦ Recensământul din {y}
+Déménagement ¦ Mutare
+Domicile ¦ Domiciliu
+Sépulture ¦ Înmormântare
+Crémation ¦ Incinerare
+Obsèques ¦ Funeralii
+Ses enfants ¦ Copiii săi
+Son enfant ¦ Copilul său
+{n} enfants connus : {list}. ¦ {n} copii cunoscuți: {list}.
+Un enfant connu : {list}. ¦ Un copil cunoscut: {list}.
+Pendant sa vie ¦ În timpul vieții
+Sa vie en quelques mots ¦ Viața sa în câteva cuvinte
+Ta version de la biographie (📖 sur la fiche). ¦ Versiunea ta a biografiei (📖 pe fișă).
+Biographie écrite par l’app d’après la fiche. ¦ Biografie scrisă de aplicație după fișă.
+Les lieux de sa vie ¦ Locurile vieții sale
+Sa descendance ¦ Descendența sa
+{list} dans la généalogie. ¦ {list} în genealogie.
+Récit d’une vie — {name} ¦ Povestea unei vieți — {name}
+=petit-enfant ¦ nepot|nepoți|de nepoți
+=arrière-petit-enfant ¦ strănepot|strănepoți|de strănepoți
+=autre descendant ¦ alt descendent|alți descendenți|de alți descendenți
+=signature ¦ semnătură|semnături|de semnături
+=visage ¦ chip|chipuri|de chipuri
+=trésor caché ¦ comoară ascunsă|comori ascunse|de comori ascunse
+Garder la mémoire ¦ Păstrează memoria
+← Tous les trésors ¦ ← Toate comorile
+Trésors · {fam} ¦ Comori · {fam}
+Un texte, un son ou une vidéo qui ne s’ouvre qu’à une date : « pour les 18 ans de Léa », « en 2050 ». ¦ Un text, un sunet sau un videoclip care se deschide doar la o anumită dată: „pentru cei 18 ani ai Leei”, „în 2050”.
+{n} scellée ¦ {n} sigilată
+{n} ouverte ¦ {n} deschisă
+📬 Ouvertes ¦ 📬 Deschise
+Aucune lettre ouverte pour l’instant ¦ Deocamdată nicio scrisoare deschisă
+Une lettre scellée s’ouvre toute seule le jour venu. ¦ O scrisoare sigilată se deschide singură în ziua stabilită.
+Souvenirs des sens ¦ Amintiri ale simțurilor
+L’odeur de la cire, le bruit du moulin, le goût des confitures : ce qu’aucun acte ne garde. ¦ Mirosul de ceară, zgomotul morii, gustul dulcețurilor: ce nu păstrează niciun act.
+Le sens ¦ Simțul
+👃 Une odeur ¦ 👃 Un miros
+👂 Un son ¦ 👂 Un sunet
+👅 Un goût ¦ 👅 Un gust
+✋ Au toucher ¦ ✋ La atingere
+👁 Une image ¦ 👁 O imagine
+Les souvenirs qui ne tiennent dans aucun acte : une odeur, un bruit, un goût. Joins-y un son enregistré ou une photo si tu en as. ¦ Amintirile care nu încap în niciun act: un miros, un zgomot, un gust. Atașează un sunet înregistrat sau o fotografie, dacă ai.
+Noter un souvenir ¦ Notează o amintire
+📋 Voir dans Listes › Mémoire familiale ¦ 📋 Vezi în Liste › Memoria familiei
+Rangé avec les expressions, surnoms, traditions et témoignages ¦ Pusă alături de expresii, porecle, tradiții și mărturii
+Aucun souvenir noté pour l’instant : l’odeur de la cire dans l’escalier, le bruit du moulin, le goût des confitures de Mémé… ¦ Deocamdată nicio amintire notată: mirosul de ceară de pe scară, zgomotul morii, gustul dulcețurilor bunicii…
+Le livre de recettes ¦ Cartea de rețete
+Les recettes de la famille, avec qui les faisait et leur histoire, puis un vrai livre à imprimer. ¦ Rețetele familiei, cu cine le făcea și povestea lor, apoi o carte adevărată de tipărit.
+Rubrique ¦ Rubrică
+Entrées et soupes ¦ Antreuri și supe
+Plats ¦ Feluri principale
+Desserts et gâteaux ¦ Deserturi și prăjituri
+Confitures et conserves ¦ Dulcețuri și conserve
+Boissons ¦ Băuturi
+Ajouter une recette ¦ Adaugă o rețetă
+Imprimer le livre ¦ Tipărește cartea
+{label} : couverture, sommaire, une page chacun ¦ {label}: copertă, cuprins, câte o pagină fiecare
+Aucune recette pour l’instant : le far de Mamie, la soupe aux choux du dimanche… ¦ Deocamdată nicio rețetă: plăcinta bunicii, ciorba de varză de duminică…
+Rien à mettre dans le livre pour l’instant : commence par « ＋ {what} ». ¦ Deocamdată nimic de pus în carte: începe cu „＋ {what}”.
+Les chansons de la famille ¦ Cântecele familiei
+Berceuses, chansons de banquet, de conscrits : paroles, air, qui la chantait, l’enregistrement, et un carnet à imprimer. ¦ Cântece de leagăn, cântece de petrecere, de recruți: versuri, melodie, cine o cânta, înregistrarea și un carnet de tipărit.
+Berceuses ¦ Cântece de leagăn
+Chansons de fête et de repas ¦ Cântece de sărbătoare și de masă
+Chansons de travail ¦ Cântece de muncă
+Conscrits et soldats ¦ Recruți și soldați
+Noël ¦ Crăciun
+En patois ¦ În grai local
+Les paroles, l’air, qui la chantait — et, si tu peux, l’enregistrement (un son choisi dans les médias). ¦ Versurile, melodia, cine o cânta — și, dacă poți, înregistrarea (un sunet ales din fișierele media).
+Ajouter une chanson ¦ Adaugă un cântec
+Imprimer le carnet ¦ Tipărește carnetul
+Aucune chanson pour l’instant : la berceuse de Mémé, la chanson des fins de banquet… ¦ Deocamdată niciun cântec: cântecul de leagăn al bunicii, cântecul de la sfârșitul ospețelor…
+L’entretien guidé ¦ Interviul ghidat
+Les bonnes questions à poser à un grand-parent, lues à voix haute ; l’enregistrement est rangé sur sa fiche, avec un repère par question. ¦ Întrebările potrivite de pus unui bunic, citite cu voce tare; înregistrarea este pusă pe fișa lui, cu un reper pentru fiecare întrebare.
+Les questions s’affichent en grand (et peuvent être lues à voix haute) ; l’entretien s’enregistre au micro, chaque question est marquée dans l’enregistrement, puis le son est rangé dans les médias de la fiche. ¦ Întrebările se afișează mare (și pot fi citite cu voce tare); interviul se înregistrează la microfon, fiecare întrebare este marcată în înregistrare, apoi sunetul este pus în fișierele media ale fișei.
+La personne interrogée ¦ Persoana intervievată
+Lire les questions à voix haute ¦ Citește întrebările cu voce tare
+Les thèmes ¦ Temele
+🧒 L’enfance ¦ 🧒 Copilăria
+✏️ L’école ¦ ✏️ Școala
+👪 La famille ¦ 👪 Familia
+🔨 Le travail ¦ 🔨 Munca
+💞 L’amour ¦ 💞 Dragostea
+🪖 La guerre ¦ 🪖 Războiul
+🏡 La maison ¦ 🏡 Casa
+🎉 Les fêtes ¦ 🎉 Sărbătorile
+💬 Pour plus tard ¦ 💬 Pentru mai târziu
+Les entretiens enregistrés ¦ Interviurile înregistrate
+🎙️ Commencer l’entretien ¦ 🎙️ Începe interviul
+Les questions sur papier, avec la place pour noter les réponses ¦ Întrebările pe hârtie, cu loc pentru a nota răspunsurile
+Aucun entretien pour l’instant ¦ Deocamdată niciun interviu
+Choisis la personne et les thèmes, puis « 🎙️ Commencer l’entretien ». ¦ Alege persoana și temele, apoi „🎙️ Începe interviul”.
+La veillée en un clic ¦ Șezătoarea dintr-un clic
+En plein écran, les portraits d’une branche défilent, chaque vie est racontée à voix haute, avec une musique douce. ¦ Pe tot ecranul, portretele unei ramuri defilează, fiecare viață este povestită cu voce tare, cu o muzică liniștită.
+Autour de ¦ În jurul lui
+Secondes par vie ¦ Secunde pe viață
+Raconter à voix haute ¦ Povestește cu voce tare
+Musique douce ¦ Muzică liniștită
+En plein écran : les portraits défilent, chaque vie est racontée. Espace = pause, flèches = avant / après, Échap = fin. ¦ Pe tot ecranul: portretele defilează, fiecare viață este povestită. Spațiu = pauză, săgeți = înainte / înapoi, Esc = sfârșit.
+La veillée de la famille {name} ¦ Șezătoarea familiei {name}
+Ce soir, on raconte {n} vies de la famille de {name}. ¦ În seara asta povestim {n} vieți din familia lui {name}.
+Bonne nuit ¦ Noapte bună
+Et maintenant, à vous de raconter ce dont vous vous souvenez. ¦ Și acum e rândul vostru să povestiți ce vă amintiți.
+{n} vies à raconter : {list} ¦ {n} vieți de povestit: {list}
+🕯️ Lancer la veillée ¦ 🕯️ Pornește șezătoarea
+Découvrir ¦ Descoperă
+À ton âge… ¦ La vârsta ta…
+Ce que faisait chaque ancêtre au même âge que toi : il se mariait, partait, devenait parent… ¦ Ce făcea fiecare strămoș la aceeași vârstă ca tine: se căsătorea, pleca, devenea părinte…
+L’âge ¦ Vârsta
+Mon âge ¦ Vârsta mea
+Aperçu, A4 ou A5, ⤓ PDF ¦ Previzualizare, A4 sau A5, ⤓ PDF
+Les prénoms qui sautent une génération ¦ Prenumele care sar o generație
+Henri comme son grand-père, Rose comme son arrière-grand-mère : les prénoms transmis par-dessus les parents. ¦ Henri ca bunicul său, Rose ca străbunica ei: prenumele transmise peste părinți.
+Un prénom qui « saute » une génération : l’enfant le reçoit d’un grand-parent (ou d’un arrière-grand-parent), alors que ni son père ni sa mère ne le portaient. La popularité de chaque prénom en France (INSEE) est dans <b>Patrimoine → Prénoms</b>. ¦ Un prenume care „sare” o generație: copilul îl primește de la un bunic (sau de la un străbunic), deși nici tatăl, nici mama lui nu îl purtau. Popularitatea fiecărui prenume în Franța (INSEE) este în <b>Patrimoniu → Prenume</b>.
+{n} prénom transmis par-dessus une génération ¦ {n} prenume transmis peste o generație
+{n} fois ¦ de {n} ori
+Les prénoms qui reviennent ¦ Prenumele care revin
+Le pouvoir d’achat d’autrefois ¦ Puterea de cumpărare de odinioară
+Une dot de 1 200 francs en 1880 : combien d’euros d’aujourd’hui, de kilos de pain, de journées de travail ? ¦ O zestre de 1 200 de franci în 1880: câți euro de azi, câte kilograme de pâine, câte zile de muncă?
+La somme ¦ Suma
+livres (ou francs de l’époque) ¦ livre (sau franci de atunci)
+sous (1/20 de livre ou de franc) ¦ sous (1/20 dintr-o livră sau un franc)
+deniers (1/240 de livre) ¦ deniers (1/240 dintr-o livră)
+anciens francs (après 1960) ¦ franci vechi (după 1960)
+centimes ¦ centime
+euros ¦ euro
+Repères : à partir de 1901, l’indice des prix de l’INSEE ; avant, un ordre de grandeur d’après le prix des denrées. Le pain : prix moyen du kilo de pain ordinaire. Les journées : le salaire d’un journalier. Un écu = 3 livres. ¦ Repere: din 1901, indicele prețurilor INSEE; înainte, un ordin de mărime după prețul alimentelor. Pâinea: prețul mediu al kilogramului de pâine obișnuită. Zilele: salariul unui zilier. Un écu = 3 livre.
+🪙 Le calcul pas à pas dans le Convertisseur d’autrefois ↗ ¦ 🪙 Calculul pas cu pas în Convertorul de odinioară ↗
+Les sommes de ton arbre ¦ Sumele din arborele tău
+{sum} en {y} ¦ {sum} în {y}
+≈ {eur} d’aujourd’hui ¦ ≈ {eur} de azi
+{kg} kg de pain ¦ {kg} kg de pâine
+{d} journées de travail ¦ {d} zile de muncă
+En euros d’aujourd’hui ¦ În euro de azi
+En pain ¦ În pâine
+soit {n} baguettes d’aujourd’hui ¦ adică {n} baghete de azi
+En journées de travail ¦ În zile de muncă
+d’un journalier en {y} ¦ ale unui zilier în {y}
+≈ {eur} au SMIC d’aujourd’hui ¦ ≈ {eur} la salariul minim de azi (SMIC)
+francs ¦ franci
+{n} {unit} de {y}. ¦ {n} {unit} din {y}.
+Les deux chiffres ne disent pas la même chose : le pain coûtait proportionnellement bien plus cher autrefois, le travail beaucoup moins. ¦ Cele două cifre nu spun același lucru: pâinea era proporțional mult mai scumpă odinioară, munca mult mai ieftină.
+Les vieux mots des actes ¦ Cuvintele vechi din acte
+Laboureur, ondoyé, brumaire, douaire… Colle un acte : les mots anciens sont surlignés et expliqués. ¦ Laboureur, ondoyé, brumaire, douaire… Lipește un act: cuvintele vechi sunt evidențiate și explicate.
+Colle ici le texte d’un acte ¦ Lipește aici textul unui act
+Dans ton arbre ¦ În arborele tău
+Chercher un mot ¦ Caută un cuvânt
+{n} mots ¦ {n} cuvinte
+📜 Le latin, les abréviations et les anciennes lettres ↗ ¦ 📜 Latina, abrevierile și literele vechi ↗
+Ces mots et leurs explications sont ceux des actes français : ils restent en français. ¦ Aceste cuvinte și explicațiile lor sunt cele din actele franceze: rămân în franceză.
+Jouer en famille ¦ Joacă în familie
+Jeu des 7 familles ¦ Jocul celor 7 familii
+Les cartes faites depuis ton arbre : la photo de chacun au choix et recadrée, six styles de cartes, les couleurs, le dos ; à imprimer et découper. ¦ Cărțile făcute din arborele tău: fotografia fiecăruia aleasă și decupată, șase stiluri de cărți, culorile, spatele; de tipărit și decupat.
+Les familles ¦ Familiile
+par nom de famille ¦ după numele de familie
+par branche (arrière-grands-parents) ¦ după ramură (străbunici)
+Le style ¦ Stilul
+🃏 Classique ¦ 🃏 Clasic
+📜 Ancien (papier jauni) ¦ 📜 Vechi (hârtie îngălbenită)
+◻️ Moderne (grande photo) ¦ ◻️ Modern (fotografie mare)
+🧸 Pour les petits ¦ 🧸 Pentru cei mici
+🎩 Années folles ¦ 🎩 Anii nebuni
+🪵 Bois gravé ¦ 🪵 Lemn gravat
+Couleurs d’origine ¦ Culorile originale
+Le dos ¦ Spatele
+Un dos à motif (à imprimer au verso) ¦ Un spate cu model (de tipărit pe verso)
+Sans dos ¦ Fără spate
+Le lieu de naissance ¦ Locul nașterii
+La liste de la famille ¦ Lista familiei
+Les photos choisies, les couleurs et le style de départ ¦ Fotografiile alese, culorile și stilul inițial
+📷 sur une carte : choisir et recadrer sa photo. ¦ 📷 pe o carte: alege și decupează-i fotografia.
+{n} familles de 6 cartes ({total} cartes). ¦ {n} familii de 6 cărți ({total} de cărți).
+Choisir et recadrer la photo de {name} ¦ Alege și decupează fotografia lui {name}
+Le grand-père ¦ Bunicul
+Le fils ¦ Fiul
+Jeu des familles ¦ Jocul familiilor
+La grand-mère ¦ Bunica
+La fille ¦ Fiica
+Les planches de cartes (et leurs dos), avec la règle du jeu ¦ Planșele de cărți (și spatele lor), cu regula jocului
+Arbre à colorier ¦ Arbore de colorat
+Les vrais ancêtres d’un enfant en traits noirs : un arbre, un jardin de fleurs, un village, des blasons, des montgolfières, une ruche, un éventail ou une rosace. ¦ Strămoșii adevărați ai unui copil în linii negre: un arbore, o grădină cu flori, un sat, blazoane, baloane cu aer cald, un stup, un evantai sau o rozetă.
+L’enfant (ou la personne) au pied de l’arbre ¦ Copilul (sau persoana) de la baza arborelui
+5 (petites cases) ¦ 5 (căsuțe mici)
+Le dessin ¦ Desenul
+🌳 Le grand arbre ¦ 🌳 Arborele mare
+🌷 Le jardin de fleurs ¦ 🌷 Grădina cu flori
+🏡 Le village (une maison chacun) ¦ 🏡 Satul (câte o casă fiecare)
+🛡️ Les blasons ¦ 🛡️ Blazoanele
+🎈 Les montgolfières ¦ 🎈 Baloanele cu aer cald
+🐝 La ruche (alvéoles) ¦ 🐝 Stupul (celule)
+🪭 L’éventail ¦ 🪭 Evantaiul
+🏵️ La rosace ¦ 🏵️ Rozeta
+Le prénom seul (petits) ¦ Doar prenumele (cei mici)
+Prénom et nom ¦ Prenume și nume
+Prénom, nom et année ¦ Prenume, nume și an
+L’écriture ¦ Scrisul
+D’écolier ¦ De școlar
+Bâton (lettres rondes) ¦ Majuscule de tipar (litere rotunde)
+Le trait ¦ Linia
+Fin (grands) ¦ Subțire (cei mari)
+Épais (petits, gros feutres) ¦ Groasă (cei mici, carioci groase)
+Sans ¦ Fără
+Double trait ¦ Linie dublă
+Guirlande de feuilles ¦ Ghirlandă de frunze
+Le titre ¦ Titlul
+L’arbre de … ¦ Arborele lui …
+Dessiner ¦ Desenează
+Enregistrer un fichier sur l’ordinateur, ou ranger une copie dans les médias ¦ Salvează un fișier pe calculator sau pune o copie în fișierele media
+L’arbre de {name} ¦ Arborele lui {name}
+Le quiz du repas ¦ Quizul de la masă
+Sur la télé, en équipes : des questions tirées de l’arbre (qui a épousé qui, où, quel métier), compte à rebours et scores. ¦ La televizor, pe echipe: întrebări luate din arbore (cine cu cine s-a căsătorit, unde, ce meserie), numărătoare inversă și scoruri.
+Les équipes (séparées par des virgules) ¦ Echipele (separate prin virgule)
+Les {name}, Les cousins ¦ Familia {name}, Verii
+Secondes pour répondre ¦ Secunde pentru răspuns
+Branche l’ordinateur sur la télé : la question et les quatre réponses s’affichent en grand ; à la fin du compte à rebours (ou avec <b>Entrée</b>), la bonne réponse apparaît, puis on donne le point à l’équipe qui a trouvé (touches <b>1</b> à <b>9</b>). Répondre depuis les téléphones demanderait que l’application soit joignable depuis tout le réseau de la maison : ce n’est pas possible pour l’instant, on joue devant l’écran. ¦ Conectează calculatorul la televizor: întrebarea și cele patru răspunsuri se afișează mare; la sfârșitul numărătorii inverse (sau cu <b>Enter</b>), apare răspunsul corect, apoi dai punctul echipei care a ghicit (tastele <b>1</b> până la <b>9</b>). Ca să răspundeți de pe telefoane, aplicația ar trebui să fie accesibilă din toată rețeaua casei: deocamdată nu e posibil, se joacă în fața ecranului.
+📺 Lancer le quiz ¦ 📺 Pornește quizul
+Un avant-goût ¦ O mostră
+Créer et fabriquer ¦ Creează și construiește
+Le faire-part d’un événement ¦ Anunțul unui eveniment
+Une naissance, un mariage ou un décès de l’arbre : le faire-part se compose tout seul, dans le style de l’époque. ¦ O naștere, o căsătorie sau un deces din arbore: anunțul se compune singur, în stilul epocii.
+L’événement ¦ Evenimentul
+Classique (1900) ¦ Clasic (1900)
+Art déco (1925) ¦ Art déco (1925)
+Fleuri ¦ Înflorat
+Deuil (liseré noir) ¦ Doliu (chenar negru)
+Romantique (dentelle, 1880) ¦ Romantic (dantelă, 1880)
+Art nouveau (1900) ¦ Art nouveau (1900)
+Champêtre (papier kraft) ¦ Rustic (hârtie kraft)
+Bleu et or ¦ Albastru și auriu
+Layette (naissance) ¦ Trusou de bebeluș (naștere)
+Épuré ¦ Simplu
+🎨 Plus d’options ¦ 🎨 Mai multe opțiuni
+Le format ¦ Formatul
+Carte A6 (portrait) ¦ Carte A6 (portret)
+Marque-page ¦ Semn de carte
+Celle du style ¦ Cea a stilului
+Écriture à la plume ¦ Scris cu peniță
+Élégante (Didot) ¦ Elegant (Didot)
+Bâton ¦ Majuscule de tipar
+Les ornements ¦ Ornamentele
+Ceux du style ¦ Cele ale stilului
+Mes couleurs ¦ Culorile mele
+La photo de la personne ¦ Fotografia persoanei
+Sa forme ¦ Forma ei
+Couleurs de la photo ¦ Culorile fotografiei
+D’origine ¦ Originale
+Le texte (une ligne par ligne ; * devant une ligne = en grand) ¦ Textul (rând cu rând; * în fața unui rând = mare)
+Le mur des signatures ¦ Zidul semnăturilor
+Toutes les signatures repérées sur les actes, découpées et rangées par époque : l’écriture de chaque génération. ¦ Toate semnăturile găsite pe acte, decupate și ordonate pe epoci: scrisul fiecărei generații.
+La Belle Époque ¦ La Belle Époque
+L’affiche (image PNG) ¦ Afișul (imagine PNG)
+Lieux et voyages ¦ Locuri și călătorii
+Le film des migrations ¦ Filmul migrațiilor
+Année après année, chacun se déplace sur la carte, de sa naissance à sa mort ; le film s’enregistre en vidéo. ¦ An după an, fiecare se deplasează pe hartă, de la naștere până la moarte; filmul se înregistrează ca videoclip.
+Durée du film ¦ Durata filmului
+Sans carte ¦ Fără hartă
+▶ Jouer ¦ ▶ Redă
+{n} parcours, de {y0} à {y1} ¦ {n} parcursuri, din {y0} până în {y1}
+famille {name} ¦ familia {name}
+Le fond de carte se charge… ¦ Se încarcă fondul de hartă…
+{n} personne en vie ¦ {n} persoană în viață
+Fond de carte © OpenStreetMap, Esri ¦ Fond de hartă © OpenStreetMap, Esri
+La vidéo (WebM) ¦ Videoclipul (WebM)
+Le film se joue une fois pendant l’enregistrement ¦ Filmul se redă o dată în timpul înregistrării
+Cette image (PNG) ¦ Această imagine (PNG)
+Le film des migrations — {title} ¦ Filmul migrațiilor — {title}
+La vidéo, enregistrée pendant que le film se joue ¦ Videoclipul, înregistrat în timp ce filmul rulează
+Le village des ancêtres sur la carte de Cassini et sur la carte d’aujourd’hui, avec un rideau à faire glisser. ¦ Satul strămoșilor pe harta Cassini și pe harta de azi, cu o cortină de glisat.
+Hier ¦ Ieri
+Carte de Cassini (XVIIIe s.) ¦ Harta Cassini (sec. XVIII)
+Cassini, exemplaire du roi ¦ Cassini, exemplarul regelui
+Carte d’État-major (1820-1866) ¦ Harta Statului-Major (1820-1866)
+OpenHistoricalMap ¦ OpenHistoricalMap
+Fais glisser le rideau (ou les flèches du clavier). ¦ Glisează cortina (sau săgețile tastaturii).
+Rideau entre la carte d’hier et celle d’aujourd’hui ¦ Cortină între harta de ieri și cea de azi
+Cartes : Géoplateforme IGN (Cassini, État-major), © OpenStreetMap, Esri. Dans l’onglet Carte, le mode « superposition » compare aussi deux fonds avec l’opacité. ¦ Hărți: Géoplateforme IGN (Cassini, État-major), © OpenStreetMap, Esri. În fila Hartă, modul „suprapunere” compară și el două fonduri cu opacitatea.
+La promenade guidée ¦ Plimbarea ghidată
+Les lieux d’une vie dans l’ordre, l’histoire de chaque étape lue à voix haute — même toute seule, en arrivant sur place. ¦ Locurile unei vieți în ordine, povestea fiecărei etape citită cu voce tare — chiar singură, când ajungi la fața locului.
+La promenade de ¦ Plimbarea lui
+Le parcours ¦ Parcursul
+les lieux de sa vie ¦ locurile vieții sale
+les villages de ses ancêtres ¦ satele strămoșilor săi
+🔊 Tout le guide ¦ 🔊 Tot ghidul
+📍 Me guider en marchant ¦ 📍 Ghidează-mă în timp ce merg
+⏹ Silence ¦ ⏹ Liniște
+Le guide de la promenade, étape par étape ¦ Ghidul plimbării, etapă cu etapă
+🔊 Écouter ¦ 🔊 Ascultă
+🧭 Itinéraire ¦ 🧭 Itinerar
+{km} km en tout (à vol d’oiseau) ¦ {km} km în total (în linie dreaptă)
+Outils malins ¦ Instrumente istețe
+Dater une vieille photo ¦ Datează o fotografie veche
+Le support, le carton, les vêtements, les coiffures : une fourchette d’années, et qui de l’arbre ça peut être. ¦ Suportul, cartonul, hainele, coafurile: un interval de ani și cine din arbore ar putea fi.
+Coche ce que tu vois sur la photo (une ou plusieurs réponses par question, ou rien si tu ne sais pas). Les repères sont volontairement larges. ¦ Bifează ce vezi în fotografie (unul sau mai multe răspunsuri pe întrebare, sau nimic dacă nu știi). Reperele sunt intenționat largi.
+Le support ¦ Suportul
+Plaque de métal argentée, comme un miroir, dans un écrin ¦ Placă de metal argintată, ca o oglindă, într-o casetă
+Image sur verre, dans un écrin (ambrotype) ¦ Imagine pe sticlă, într-o casetă (ambrotip)
+Image sur une fine plaque de fer, sombre (ferrotype) ¦ Imagine pe o placă subțire de fier, închisă la culoare (ferotip)
+Petite carte (6 × 10 cm) collée sur un carton : carte de visite ¦ Carte mică (6 × 10 cm) lipită pe un carton: carte de vizită
+Grande carte (11 × 16 cm) sur carton : carte cabinet ¦ Carte mare (11 × 16 cm) pe carton: carte cabinet
+Carte postale photo (dos imprimé « carte postale ») ¦ Carte poștală foto (spate tipărit „carte poștală”)
+Tirage papier aux bords dentelés ¦ Copie pe hârtie cu margini zimțate
+Petit tirage papier noir et blanc sans carton, bords blancs droits ¦ Copie mică pe hârtie alb-negru fără carton, margini albe drepte
+Photo couleur aux couleurs passées (orange, magenta) ¦ Fotografie color cu culori decolorate (portocaliu, magenta)
+Tirage carré à bord blanc large (type Polaroid / Instamatic) ¦ Copie pătrată cu margine albă lată (tip Polaroid / Instamatic)
+Le carton (carte de visite ou cabinet) ¦ Cartonul (carte de vizită sau cabinet)
+Coins carrés, carton fin et clair ¦ Colțuri drepte, carton subțire și deschis la culoare
+Carton épais et coloré (crème, noir, bordeaux), tranche dorée ¦ Carton gros și colorat (crem, negru, bordo), muchie aurită
+Nom du photographe en grandes lettres décorées au dos, médailles ¦ Numele fotografului cu litere mari decorate pe spate, medalii
+Bord biseauté doré ¦ Margine teșită aurită
+Les vêtements des femmes ¦ Hainele femeilor
+Jupe très large en cloche (crinoline), épaules tombantes ¦ Fustă foarte largă, în clopot (crinolină), umeri căzuți
+Jupe plate devant et gonflée derrière (tournure) ¦ Fustă plată în față și umflată în spate (turnură)
+Manches très bouffantes en haut (gigot) ¦ Mâneci foarte bufante sus (gigot)
+Silhouette en S, col montant, grand chapeau ¦ Siluetă în S, guler înalt, pălărie mare
+Robe droite, taille basse, jupe au genou ¦ Rochie dreaptă, talie joasă, fustă până la genunchi
+Épaules carrées, jupe sous le genou ¦ Umeri pătrați, fustă sub genunchi
+Jupe ample et taille fine (New Look) ¦ Fustă amplă și talie subțire (New Look)
+Coiffe régionale ou bonnet de paysanne ¦ Bonetă regională sau scufie de țărancă
+Les coiffures ¦ Coafurile
+Raie au milieu, cheveux plaqués sur les oreilles ¦ Cărare la mijloc, păr lipit peste urechi
+Frange frisée sur le front ¦ Breton creț pe frunte
+Chignon haut et volumineux ¦ Coc înalt și voluminos
+Cheveux courts « à la garçonne » ¦ Păr scurt „à la garçonne”
+Mise en plis ondulée ¦ Coafură ondulată
+Les hommes ¦ Bărbații
+Haut-de-forme ¦ Joben
+Canotier (chapeau de paille plat) ¦ Canotieră (pălărie de pai plată)
+Moustache fournie, sans barbe ¦ Mustață bogată, fără barbă
+Barbe entière fournie ¦ Barbă întreagă bogată
+Col cassé et nœud papillon ¦ Guler cu colțuri îndoite și papion
+Uniforme bleu horizon ¦ Uniformă bleu horizon
+Costume trois-pièces large, chapeau mou ¦ Costum larg din trei piese, pălărie moale
+Pantalon pattes d’éléphant, cheveux longs ¦ Pantaloni evazați, păr lung
+Le décor ¦ Decorul
+Fond peint, colonne, balustrade, rideau drapé ¦ Fundal pictat, coloană, balustradă, perdea drapată
+Fond uni, simple chaise ¦ Fundal uni, scaun simplu
+Dehors, photo prise sur le vif (pas en atelier) ¦ Afară, fotografie spontană (nu în atelier)
+Et toi, que sais-tu ? ¦ Și tu, ce știi?
+Photographe ou date notée : de ¦ Fotograf sau dată notată: din
+Âge apparent de la personne ¦ Vârsta aparentă a persoanei
+C’est ¦ Este
+un homme, un garçon ¦ un bărbat, un băiat
+une femme, une fille ¦ o femeie, o fată
+Lieu (nom du photographe, ville) ¦ Loc (numele fotografului, oraș)
+Coche au moins un indice ¦ Bifează cel puțin un indiciu
+Les rappels de recherche ¦ Mementourile de cercetare
+« Tu n’as pas touché à la branche FAURE depuis 8 mois » : les branches endormies, ce qui y manque, un rappel en un clic. ¦ „N-ai mai atins ramura FAURE de 8 luni”: ramurile adormite, ce lipsește în ele, un memento dintr-un clic.
+Les branches de ¦ Ramurile lui
+Endormie depuis au moins ¦ Adormită de cel puțin
+peu importe ¦ nu contează
+La date est celle de la dernière modification d’une fiche de la branche. Un rappel se crée en un clic : il rejoint les rappels de l’application (Listes → Rappels) et le widget « À venir ». ¦ Data este cea a ultimei modificări a unei fișe din ramură. Un memento se creează dintr-un clic: se alătură mementourilor aplicației (Liste → Mementouri) și widgetului „Urmează”.
+Branche {name} ({first}) ¦ Ramura {name} ({first})
+Reprendre la branche {name} ({first}) ¦ Reia ramura {name} ({first})
+Aucune branche endormie depuis aussi longtemps ¦ Nicio ramură adormită de atâta timp
+Les actes manquants ¦ Actele lipsă
+Ce qui manque à la lignée, rangé par archives où chercher (l’assistant de l’onglet Recherche). ¦ Ce lipsește din linie, ordonat după arhivele unde să cauți (asistentul din fila Cercetare).
+Je regarde ce qui manque… ¦ Mă uit ce lipsește…
+L’assistant <b>« Que manque-t-il ? »</b> (onglet Recherche) liste les actes qui manquent à la lignée, rangés par service d’archives, avec la commune, les années et les séries à consulter (état civil, tables décennales, registres paroissiaux, notaires, recensements, registres matricules), et un lien vers FranceArchives. ¦ Asistentul <b>„Ce lipsește?”</b> (fila Cercetare) listează actele care lipsesc din linie, ordonate după serviciul de arhive, cu localitatea, anii și seriile de consultat (stare civilă, tabele decenale, registre parohiale, notari, recensăminte, registre matricole) și un link către FranceArchives.
+{n} recherches à faire sur 6 générations ¦ {n} căutări de făcut pe 6 generații
+L’assistant « Que manque-t-il ? » de l’onglet Recherche ¦ Asistentul „Ce lipsește?” din fila Cercetare
+Le thème d’époque ¦ Tema de epocă
+Chaque fiche aux couleurs de son temps : parchemin, sépia, Belle Époque, art déco, Trente Glorieuses. ¦ Fiecare fișă în culorile timpului ei: pergament, sepia, Belle Époque, art déco, Cei treizeci de ani glorioși.
+Habiller chaque fiche aux couleurs de son époque ¦ Îmbracă fiecare fișă în culorile epocii sale
+La fiche d’un ancêtre prend l’allure du temps où il a vécu (ses 25 ans) : parchemin pour l’Ancien Régime, sépia au XIXe, art déco pour les années folles… Le reste de l’application ne change pas. Ce réglage est gardé sur cet ordinateur. ¦ Fișa unui strămoș capătă aspectul timpului în care a trăit (la 25 de ani ai săi): pergament pentru Vechiul Regim, sepia în secolul al XIX-lea, art déco pentru anii nebuni… Restul aplicației nu se schimbă. Această setare este păstrată pe acest calculator.
+📜 Ancien Régime ¦ 📜 Vechiul Regim
+avant ¦ înainte
+🎖️ Révolution et Empire ¦ 🎖️ Revoluția și Imperiul
+🎩 Le XIXe siècle ¦ 🎩 Secolul al XIX-lea
+🌿 La Belle Époque ¦ 🌿 La Belle Époque
+🍸 Les années folles et la guerre ¦ 🍸 Anii nebuni și războiul
+🚗 Les Trente Glorieuses ¦ 🚗 Cei treizeci de ani glorioși
+📻 Les années 70 et après ¦ 📻 Anii ’70 și după
+Les étoiles, la Lune et les planètes au-dessus du village, la nuit de la naissance : une image à garder ou à offrir. ¦ Stelele, Luna și planetele deasupra satului, în noaptea nașterii: o imagine de păstrat sau de dăruit.
+La naissance de ¦ Nașterea lui
+Vers quelle heure (heure solaire du lieu) ¦ Cam la ce oră (ora solară a locului)
+Nuit bleue ¦ Noapte albastră
+Affiche (fond crème) ¦ Afiș (fond crem)
+Noir et or ¦ Negru și auriu
+Encre sur papier (à imprimer) ¦ Cerneală pe hârtie (de tipărit)
+Aube (rose et bleu) ¦ Zori (roz și albastru)
+Vert forêt ¦ Verde de pădure
+Ronde ¦ Rotundă
+Carrée ¦ Pătrată
+Fenêtre en arc ¦ Fereastră în arc
+Affiche ¦ Afiș
+A4 (portrait) ¦ A4 (portret)
+Élégante ¦ Elegantă
+À la plume ¦ Cu penița
+Les constellations ¦ Constelațiile
+La Voie lactée (évocation) ¦ Calea Lactee (evocare)
+Les repères (hauteur, directions) ¦ Reperele (înălțime, direcții)
+✏️ Les textes ¦ ✏️ Textele
+(le nom) ¦ (numele)
+(le lieu et la date) ¦ (locul și data)
+Dernière ligne ¦ Ultimul rând
+(la lune, les planètes) ¦ (luna, planetele)
+Aussi rangée sur sa fiche ¦ Pusă și pe fișa sa
+{place} — {when}, vers {h} ¦ {place} — {when}, în jurul orei {h}
+pleine lune ¦ lună plină
+Jupiter ¦ Jupiter
+{list} brillait ¦ {list} strălucea
+Grande Ourse ¦ Ursa Mare
+Orion ¦ Orion
+Cassiopée ¦ Cassiopeea
+Lion ¦ Leul
+Gémeaux ¦ Gemenii
+Bouvier ¦ Boarul
+Taureau ¦ Taurul
+Petite Ourse ¦ Ursa Mică
+Cocher ¦ Vizitiul
+Grand Chien ¦ Câinele Mare
+Vierge ¦ Fecioara
+boussole|N ¦ N
+boussole|E ¦ E
+boussole|S ¦ S
+boussole|O ¦ V
+{n} % éclairée ¦ {n} % luminată
+coucher du soleil vers {h} ¦ apusul soarelui în jurul orei {h}
+lever vers {h} ¦ răsărit în jurul orei {h}
+{n} étoiles brillantes au-dessus de l’horizon ¦ {n} stele strălucitoare deasupra orizontului
+Allumer une bougie ¦ Aprinde o lumânare
+Une bougie pour un ancêtre, avec un mot : elle brûle sept jours. Les anniversaires de naissance et de décès à venir. ¦ O lumânare pentru un strămoș, cu un mesaj: arde șapte zile. Aniversările nașterilor și deceselor care urmează.
+{n} bougie allumée ¦ {n} lumânare aprinsă
+{n} au registre ¦ {n} în registru
+Aucune bougie allumée en ce moment ¦ Nicio lumânare aprinsă în acest moment
+📅 Dans les trente jours ¦ 📅 În următoarele treizeci de zile
+{n} ans de sa naissance ({date}) ¦ {n} ani de la naștere ({date})
+dans {n} jours ¦ peste {n} zile
+{n} ans de son décès ({date}) ¦ {n} ani de la deces ({date})
+L’ambiance sonore d’époque ¦ Ambianța sonoră de epocă
+Le feu et l’horloge de la veillée, les cloches du dimanche, la forge, la gare, le moulin : les bruits du temps des ancêtres. ¦ Focul și ceasul de la șezătoare, clopotele de duminică, fierăria, gara, moara: zgomotele din vremea strămoșilor.
+🔥 La veillée au coin du feu (vers 1880) ¦ 🔥 Șezătoarea lângă foc (în jurul anului 1880)
+🔔 Le village un dimanche matin ¦ 🔔 Satul într-o duminică dimineață
+⚒️ L’atelier du forgeron ¦ ⚒️ Atelierul fierarului
+🚂 La gare (vers 1900) ¦ 🚂 Gara (în jurul anului 1900)
+💧 Le moulin au bord de l’eau ¦ 💧 Moara de pe malul apei
+🌧️ La nuit d’orage ¦ 🌧️ Noaptea cu furtună
+🌊 Le port ¦ 🌊 Portul
+🐓 La ferme au petit matin ¦ 🐓 Ferma în zori
+🌙 Une nuit d’été à la campagne ¦ 🌙 O noapte de vară la țară
+🧺 Le lavoir ¦ 🧺 Spălătoria satului
+🧺 Le jour de marché ¦ 🧺 Ziua de târg
+🍷 Le café du village ¦ 🍷 Cafeneaua satului
+🪗 Le bal musette ¦ 🪗 Balul musette
+⛪ La messe à l’église ¦ ⛪ Slujba la biserică
+🪡 L’atelier de couture ¦ 🪡 Atelierul de croitorie
+🧵 La filature et le tissage ¦ 🧵 Filatura și țesătoria
+🧶 La veillée des fileuses ¦ 🧶 Șezătoarea torcătoarelor
+🪚 L’atelier du menuisier ¦ 🪚 Atelierul tâmplarului
+🏫 La classe (vers 1900) ¦ 🏫 Clasa (în jurul anului 1900)
+✒️ L’étude du notaire ¦ ✒️ Biroul notarului
+🌾 Les moissons ¦ 🌾 Secerișul
+🐝 Le rucher ¦ 🐝 Stupina
+🐴 La route en diligence ¦ 🐴 Drumul cu diligența
+Ou celle du métier de ¦ Sau cea a meseriei de
+▶ Écouter ¦ ▶ Ascultă
+🔈 Volume ¦ 🔈 Volum
+⏲️ S’arrêter après ¦ ⏲️ Oprește după
+Un mélange au hasard de 3 à 5 couches ¦ Un amestec la întâmplare de 3 până la 5 straturi
+🎲 Au hasard ¦ 🎲 La întâmplare
+Tout à zéro ¦ Totul la zero
+Durée du fichier son ¦ Durata fișierului de sunet
+⭐ Mes ambiances ¦ ⭐ Ambianțele mele
+💾 Garder ce mélange ¦ 💾 Păstrează acest amestec
+Tout est fabriqué par l’ordinateur, à partir de bruit et de sons purs : une évocation, pas un enregistrement. Règle chaque couche à ton goût ({n} couches). ¦ Totul este creat de calculator, din zgomot și sunete pure: o evocare, nu o înregistrare. Reglează fiecare strat după gustul tău ({n} straturi).
+Chercher une couche (cloches, eau, atelier…) ¦ Caută un strat (clopote, apă, atelier…)
+Chercher une couche ¦ Caută un strat
+🌬️ Le vent ¦ 🌬️ Vântul
+🌧️ La pluie ¦ 🌧️ Ploaia
+🔥 Le feu de cheminée ¦ 🔥 Focul din șemineu
+🕰️ L’horloge comtoise ¦ 🕰️ Ceasul cu pendul
+🔔 Les cloches du village ¦ 🔔 Clopotele satului
+⚒️ L’enclume du forgeron ¦ ⚒️ Nicovala fierarului
+🐦 Les oiseaux ¦ 🐦 Păsările
+💧 La rivière et le moulin ¦ 💧 Râul și moara
+🚂 Le train à vapeur ¦ 🚂 Trenul cu aburi
+🌊 La mer ¦ 🌊 Marea
+🦗 Les grillons ¦ 🦗 Greierii
+🐸 Les grenouilles de la mare ¦ 🐸 Broaștele din baltă
+🦉 La chouette ¦ 🦉 Bufnița
+🐓 Le coq ¦ 🐓 Cocoșul
+🐄 Les sonnailles des vaches ¦ 🐄 Talăngile vacilor
+🐴 Les sabots du cheval ¦ 🐴 Copitele calului
+🛞 La charrette sur les pavés ¦ 🛞 Căruța pe caldarâm
+🐝 Les abeilles du rucher ¦ 🐝 Albinele din stupină
+🌾 Le vent dans les blés ¦ 🌾 Vântul prin grâu
+⛈️ Le tonnerre au loin ¦ ⛈️ Tunetul în depărtare
+⛲ La fontaine du lavoir ¦ ⛲ Fântâna spălătoriei
+🧺 Les battoirs des lavandières ¦ 🧺 Maiurile spălătoreselor
+🧶 Le rouet qui file ¦ 🧶 Roata de tors
+🧵 Le métier à tisser ¦ 🧵 Războiul de țesut
+🪡 La machine à coudre ¦ 🪡 Mașina de cusut
+🪚 La scie du menuisier ¦ 🪚 Ferăstrăul tâmplarului
+✒️ La plume sur le papier ¦ ✒️ Penița pe hârtie
+🗣️ Le murmure de la foule ¦ 🗣️ Murmurul mulțimii
+🍷 Les verres du café ¦ 🍷 Paharele din cafenea
+⛪ L’orgue de l’église ¦ ⛪ Orga bisericii
+🪗 L’accordéon du bal musette ¦ 🪗 Acordeonul de la balul musette
+🏫 La craie au tableau ¦ 🏫 Creta pe tablă
+🪵 Le bois qui craque ¦ 🪵 Lemnul care trosnește
+👣 Des pas sur le gravier ¦ 👣 Pași pe pietriș
+🕊️ Les mouettes ¦ 🕊️ Pescărușii
+🎶 Le bourdon de la vielle ¦ 🎶 Bâzâitul vielei
+© Crédits et droits des sons ¦ © Credite și drepturi ale sunetelor
+Aucun enregistrement n’est utilisé : <b>chaque son est calculé par ton navigateur</b> au moment où tu l’écoutes (Web Audio), à partir de bruit et de sons purs. Il n’y a donc aucun auteur à créditer en dehors de LCNDA, et rien n’est téléchargé. ¦ Nu este folosită nicio înregistrare: <b>fiecare sunet este calculat de browserul tău</b> în momentul în care îl asculți (Web Audio), din zgomot și sunete pure. Nu există deci niciun autor de menționat în afară de LCNDA și nu se descarcă nimic.
+<b>Libres de droits</b> : tu peux les écouter, les enregistrer, les mettre dans un montage ou une présentation, même les partager, sans rien demander (comme le domaine public, CC0). ¦ <b>Fără drepturi de autor</b>: le poți asculta, înregistra, pune într-un montaj sau într-o prezentare, chiar partaja, fără să ceri nimic (ca domeniul public, CC0).
+bruit blanc filtré, qui ondule lentement ¦ zgomot alb filtrat, care ondulează încet
+bruit aigu et milliers de petites gouttes au hasard ¦ zgomot ascuțit și mii de picături mici la întâmplare
+bruit grave et crépitements au hasard ¦ zgomot grav și pocnituri la întâmplare
+deux « tic » de sons purs, un carillon toutes les 40 secondes ¦ două „tic”-uri din sunete pure, un carilon la fiecare 40 de secunde
+sons purs aux harmoniques des cloches de bronze ¦ sunete pure cu armonicele clopotelor de bronz
+coups métalliques : trois sons purs qui s’éteignent ¦ lovituri metalice: trei sunete pure care se sting
+petits sifflets de sons purs qui montent ¦ mici fluierături din sunete pure care urcă
+bruit filtré et le battement grave de la roue ¦ zgomot filtrat și bătaia gravă a roții
+souffles de vapeur rythmés et un sifflet à deux notes ¦ pufăituri de abur ritmate și un fluier pe două note
+bruit grave qui monte et descend comme les vagues ¦ zgomot grav care urcă și coboară ca valurile
+trilles de sons purs très aigus ¦ triluri din sunete pure foarte ascuțite
+sons en dents de scie qui montent ¦ sunete în dinți de ferăstrău care urcă
+trois sons purs graves qui glissent ¦ trei sunete pure grave care alunecă
+trois sons qui montent puis retombent ¦ trei sunete care urcă apoi coboară
+sons métalliques aux harmoniques de cloche ¦ sunete metalice cu armonice de clopot
+petits chocs de bruit au rythme du pas ¦ mici șocuri de zgomot în ritmul pasului
+grondement grave qui tremble et cailloux de bruit ¦ bubuit grav care tremură și pietricele de zgomot
+trois notes graves qui vibrent ¦ trei note grave care vibrează
+bruit très aigu qui ondule ¦ zgomot foarte ascuțit care ondulează
+grondements de bruit très grave ¦ bubuituri de zgomot foarte grav
+bruit d’eau et gouttes de sons purs ¦ zgomot de apă și picături din sunete pure
+deux chocs sourds ¦ două șocuri înfundate
+ronronnement et petit clic de la roue ¦ tors și mic clic al roții
+le claquement de la navette et le coup du battant ¦ pocnetul suveicii și lovitura spatei
+cliquetis rapides par séries ¦ clicăituri rapide în serii
+bruit filtré qui va et vient ¦ zgomot filtrat care vine și pleacă
+grattements de bruit aigu ¦ zgârieturi de zgomot ascuțit
+quatre bandes de bruit qui imitent les voix ¦ patru benzi de zgomot care imită vocile
+tintements de sons purs ¦ clinchete din sunete pure
+accords tenus de sons doux ¦ acorduri ținute din sunete blânde
+une petite valse de sons en dents de scie, basse et accords ¦ un mic vals din sunete în dinți de ferăstrău, bas și acorduri
+traits de bruit et le petit coup du point ¦ linii de zgomot și mica lovitură a punctului
+craquements de bruit ¦ trosnituri de zgomot
+pas de bruit filtré ¦ pași de zgomot filtrat
+cris en dents de scie qui descendent ¦ țipete în dinți de ferăstrău care coboară
+trois notes graves tenues, qui vibrent un peu ¦ trei note grave ținute, care vibrează puțin
+Fichier son (WebM) ¦ Fișier de sunet (WebM)
+Ce qu’on entend, pendant la durée choisie ¦ Ce se aude, pe durata aleasă
+L’arbre qui pousse ¦ Arborele care crește
+Les descendants d’un ancêtre apparaissent année après année, les branches poussent, les feuilles roussissent. ¦ Descendenții unui strămoș apar an după an, ramurile cresc, frunzele se îngălbenesc.
+▶ Faire pousser ¦ ▶ Fă-l să crească
+lente ¦ lentă
+normale ¦ normală
+rapide ¦ rapidă
+La musique de l’arbre ¦ Muzica arborelui
+L’arbre joué comme une partition : une note par naissance, un accord par mariage ; à écouter ou à télécharger. ¦ Arborele cântat ca o partitură: o notă pentru fiecare naștere, un acord pentru fiecare căsătorie; de ascultat sau de descărcat.
+tout l’arbre ¦ tot arborele
+Tempo ¦ Tempo
+lent ¦ lent
+normal ¦ normal
+vif ¦ vioi
+Chaque naissance est une note : plus aiguë pour les générations proches, plus longue pour une longue vie, au timbre plus doux pour les femmes ; chaque mariage, un accord ; chaque décès, une note grave. ¦ Fiecare naștere este o notă: mai ascuțită pentru generațiile apropiate, mai lungă pentru o viață lungă, cu timbru mai blând pentru femei; fiecare căsătorie, un acord; fiecare deces, o notă gravă.
+Fichier son (WAV) ¦ Fișier de sunet (WAV)
+{b} naissances, {m} mariages, {d} décès — {s} secondes ¦ {b} nașteri, {m} căsătorii, {d} decese — {s} secunde
+La chasse au trésor ¦ Vânătoarea de comori
+Des énigmes sur les ancêtres cachées dans la maison : seule la bonne réponse mène à la cachette suivante. ¦ Ghicitori despre strămoși ascunse prin casă: doar răspunsul corect duce la ascunzătoarea următoare.
+🗝️ Préparer la chasse ¦ 🗝️ Pregătește vânătoarea
+Le nom de la chasse ¦ Numele vânătorii
+La chasse au trésor de la famille {name} ¦ Vânătoarea de comori a familiei {name}
+Les cachettes, dans l’ordre (une par ligne ; la dernière est celle du trésor) ¦ Ascunzătorile, în ordine (câte una pe rând; ultima este cea a comorii)
+sous le paillasson ¦ sub preș
+dans la boîte aux lettres ¦ în cutia poștală
+derrière l’horloge ¦ în spatele ceasului
+au fond du placard de l’entrée ¦ în fundul dulapului de la intrare
+Le trésor (ce qu’on trouve à la fin) ¦ Comoara (ce se găsește la sfârșit)
+le gâteau d’anniversaire de Mamie ¦ tortul de ziua bunicii
+Chaque énigme porte sur un ancêtre ; chaque réponse renvoie à une cachette : il faut la bonne réponse pour trouver la suite. ¦ Fiecare ghicitoare este despre un strămoș; fiecare răspuns trimite la o ascunzătoare: ai nevoie de răspunsul corect ca să găsești continuarea.
+L’ancêtre mystère ¦ Strămoșul misterios
+Un ancêtre caché, des indices un par un : le même pour toute la famille chaque jour. Qui le trouve le plus vite ? ¦ Un strămoș ascuns, indicii unul câte unul: același pentru toată familia în fiecare zi. Cine îl găsește cel mai repede?
+🕵️ L’ancêtre mystère du {date} ¦ 🕵️ Strămoșul misterios din {date}
+Proposer ¦ Propune
+Un indice de plus ({n}) ¦ Încă un indiciu ({n})
+Je donne ma langue au chat ¦ Mă dau bătut
+Trouvé maintenant : {n} points. ¦ Găsit acum: {n} puncte.
+Le livre dont tu es le héros ¦ Cartea în care tu ești eroul
+Vis la vie d’un ancêtre et fais ses choix — métier, mariage, départ — puis découvre ce qu’il a vraiment choisi. ¦ Trăiește viața unui strămoș și fă-i alegerile — meserie, căsătorie, plecare — apoi descoperă ce a ales cu adevărat.
+Tu seras ¦ Vei fi
+📖 Commencer l’histoire ¦ 📖 Începe povestea
+Les coïncidences ¦ Coincidențele
+Nés le même jour, mort le jour de son anniversaire, mariés à cent ans d’écart jour pour jour : les hasards de l’arbre. ¦ Născuți în aceeași zi, mort în ziua aniversării, căsătoriți la o sută de ani distanță zi cu zi: întâmplările arborelui.
+Plus l’arbre a de dates précises (jour et mois), plus il y en a. ¦ Cu cât arborele are mai multe date precise (zi și lună), cu atât sunt mai multe.
+« Et si… » ¦ „Și dacă…”
+Et si ces deux-là ne s’étaient pas rencontrés ? Toutes les vies qui n’auraient jamais existé — peut-être la tienne. ¦ Și dacă acești doi nu s-ar fi întâlnit? Toate viețile care n-ar fi existat niciodată — poate și a ta.
+Et si… ¦ Și dacă…
+ces deux-là ne s’étaient jamais rencontrés ¦ acești doi nu s-ar fi întâlnit niciodată
+cette personne n’avait pas vécu ¦ această persoană n-ar fi trăit
+🦋 {n} vies n’auraient jamais existé ¦ 🦋 {n} vieți n-ar fi existat niciodată
+{pct} % de l’arbre, dont {who} en vie aujourd’hui. ¦ {pct} % din arbore, dintre care {who} în viață azi.
+Et {name} non plus. ¦ Și nici {name}.
+La broderie au point de croix ¦ Broderia în cruciuliță
+Un marquoir à l’ancienne : le nom de la famille, un couple, une date, un arbre ; la grille et les fils. ¦ Un abecedar brodat de odinioară: numele familiei, un cuplu, o dată, un arbore; grila și firele.
+FAMILLE {name} ¦ FAMILIA {name}
+La date ¦ Data
+Le lieu (facultatif) ¦ Locul (opțional)
+La couleur du titre ¦ Culoarea titlului
+Brun ¦ Maro
+Bleu ciel ¦ Bleu
+La couleur du couple ¦ Culoarea cuplului
+Le titre en grandes lettres (double) ¦ Titlul cu litere mari (dublu)
+Le motif ¦ Motivul
+❤️ Le cœur ¦ ❤️ Inima
+👑 Le cœur couronné ¦ 👑 Inima încoronată
+🌷 Les tulipes ¦ 🌷 Lalelele
+⛪ L’église ¦ ⛪ Biserica
+🕊️ Les colombes ¦ 🕊️ Porumbeii
+— Aucun motif ¦ — Niciun motiv
+Ses couleurs ¦ Culorile lui
+celle du motif ¦ cea a motivului
+Deux petits cœurs de chaque côté ¦ Două inimioare de fiecare parte
+La bordure ¦ Bordura
+· Les points (à l’ancienne) ¦ · Punctele (de odinioară)
+♥ La frise de cœurs ¦ ♥ Friza de inimi
+⌇ La frise en zigzag ¦ ⌇ Friza în zigzag
+▭ Le double trait ¦ ▭ Linia dublă
+— Sans bordure ¦ — Fără bordură
+La toile ¦ Pânza
+Aïda 11 ¦ Aida 11
+Aïda 14 ¦ Aida 14
+Aïda 16 ¦ Aida 16
+Aïda 18 ¦ Aida 18
+Lin 28 fils (un point sur 2 fils) ¦ In 28 de fire (un punct pe 2 fire)
+Sa couleur (aperçu) ¦ Culoarea ei (previzualizare)
+Écru ¦ Ecru
+Lin ¦ In
+Bleu nuit ¦ Bleumarin
+l’aperçu brodé ¦ previzualizarea brodată
+la grille à symboles ¦ grila cu simboluri
+La grille (dessin SVG) ¦ Grila (desen SVG)
+L’aperçu brodé (image PNG) ¦ Previzualizarea brodată (imagine PNG)
+La grille à symboles et la liste des fils ¦ Grila cu simboluri și lista firelor
+{w} × {h} points · sur {cloth} : {cw} × {ch} cm (prévoir 5 cm de marge tout autour) ¦ {w} × {h} puncte · pe {cloth}: {cw} × {ch} cm (prevede 5 cm de margine de jur împrejur)
+{n} points ¦ {n} puncte
+La gravure au laser ¦ Gravura cu laser
+L’éventail des ancêtres en fichier SVG aux vraies dimensions, prêt pour une graveuse laser (gravure et découpe). ¦ Evantaiul strămoșilor ca fișier SVG la dimensiunile reale, gata pentru o mașină de gravat cu laser (gravură și decupare).
+Les ancêtres de ¦ Strămoșii lui
+Le fichier est aux vraies dimensions, en millimètres : <b>noir = gravure</b> (traits et noms), <b>rouge = découpe</b> (le contour, trait fin). Convient à LightBurn, Glowforge, xTool, Inkscape. Vérifie toujours la taille à l’import. ¦ Fișierul este la dimensiunile reale, în milimetri: <b>negru = gravură</b> (linii și nume), <b>roșu = decupare</b> (conturul, linie subțire). Merge cu LightBurn, Glowforge, xTool, Inkscape. Verifică întotdeauna dimensiunea la import.
+Dessin SVG pour la graveuse ¦ Desen SVG pentru mașina de gravat
+Aux vraies dimensions : noir = gravure, rouge = découpe ¦ La dimensiunile reale: negru = gravură, roșu = decupare
+La mosaïque de portraits ¦ Mozaicul de portrete
+Tous les visages de l’arbre en une image, ou un portrait refait avec les visages de toute la famille. ¦ Toate chipurile din arbore într-o imagine, sau un portret refăcut cu chipurile întregii familii.
+Je rassemble les visages… ¦ Adun chipurile…
+La mosaïque ¦ Mozaicul
+tous les visages, en grille ¦ toate chipurile, în grilă
+un portrait refait avec tous les autres ¦ un portret refăcut cu toate celelalte
+Le portrait à refaire ¦ Portretul de refăcut
+Finesse ¦ Finețe
+Le visage de la lignée ¦ Chipul liniei
+De père en père ou de mère en mère : les visages côte à côte, en fondu, et le visage moyen des générations. ¦ Din tată în tată sau din mamă în mamă: chipurile unul lângă altul, în fondu, și chipul mediu al generațiilor.
+La lignée ¦ Linia
+de père en père ¦ din tată în tată
+de mère en mère ¦ din mamă în mamă
+▶ Le fondu ¦ ▶ Fondul
+Les visages (image PNG) ¦ Chipurile (imagine PNG)
+Le visage moyen de {n} générations ¦ Chipul mediu din {n} generații
+Le fondu ¦ Fondul
+La gazette de l’année ¦ Gazeta anului
+La une d’un journal pour une année de la famille : mariages, naissances, nouvelles des nôtres, le prix du pain. ¦ Prima pagină a unui ziar pentru un an al familiei: căsătorii, nașteri, vești de la ai noștri, prețul pâinii.
+Les années les plus riches : ¦ Anii cei mai bogați:
+🎨 Le style du journal ¦ 🎨 Stilul ziarului
+📜 Ancien (1900) ¦ 📜 Vechi (1900)
+🎨 Supplément illustré (en couleurs) ¦ 🎨 Supliment ilustrat (color)
+🗞️ Le quotidien (papier journal) ¦ 🗞️ Cotidianul (hârtie de ziar)
+🎩 Années 30 ¦ 🎩 Anii ’30
+◻️ Moderne ¦ ◻️ Modern
+💖 Magazine ¦ 💖 Revistă
+📣 À sensation (gros titres) ¦ 📣 De senzație (titluri mari)
+🧸 Le journal des enfants ¦ 🧸 Ziarul copiilor
+Le nom du journal ¦ Numele ziarului
+Le bandeau ¦ Banda de titlu
+Édition unique ¦ Ediție unică
+Le papier ¦ Hârtia
+Celui du style ¦ Cea a stilului
+Crème ¦ Crem
+Jauni ¦ Îngălbenită
+Papier journal ¦ Hârtie de ziar
+Ma couleur ¦ Culoarea mea
+Les colonnes ¦ Coloanele
+L’article de une ¦ Articolul de pe prima pagină
+Les nouvelles ¦ Știrile
+Le coin pratique ¦ Colțul practic
+5 centimes ¦ 5 centime
+Prix : {price} ¦ Preț: {price}
+{n} membres de la famille en vie ¦ {n} membri ai familiei în viață
+Carnet ¦ Carnet
+Nouvelles des nôtres ¦ Vești de la ai noștri
+Anniversaires ¦ Aniversări
+{n} centimes ¦ {n} centime
+Le kilo de pain : environ {price}. ¦ Kilogramul de pâine: aproximativ {price}.
+Qui fait quoi ¦ Cine ce face
+Composée à partir de l’arbre de famille · {y} ¦ Alcătuită din arborele familiei · {y}
+Le fond d’écran du jour ¦ Fundalul de ecran al zilei
+Chaque jour un ancêtre en image, aux dimensions de ton écran : couleurs, motif, photo, textes, calendrier… tout se règle. ¦ În fiecare zi un strămoș în imagine, la dimensiunile ecranului tău: culori, motiv, fotografie, texte, calendar… totul se reglează.
+L’ANCÊTRE DU JOUR ¦ STRĂMOȘUL ZILEI
+Ordinateur ¦ Calculator
+Grand écran (2K) ¦ Ecran mare (2K)
+Écran 4K ¦ Ecran 4K
+Écran très large ¦ Ecran foarte lat
+Mac Retina ¦ Mac Retina
+Tablette ¦ Tabletă
+Tablette debout ¦ Tabletă în picioare
+Téléphone Android ¦ Telefon Android
+L’ancêtre (celui du jour par défaut) ¦ Strămoșul (cel al zilei, implicit)
+🎨 Couleurs et fond ¦ 🎨 Culori și fond
+Les couleurs ¦ Culorile
+Selon l’époque de l’ancêtre ¦ După epoca strămoșului
+Crème et encre ¦ Crem și cerneală
+Vert sauge ¦ Verde salvie
+Océan ¦ Ocean
+Poudre ¦ Pudră
+Le dégradé ¦ Degradeul
+En biais ¦ Oblic
+De haut en bas ¦ De sus în jos
+De gauche à droite ¦ De la stânga la dreapta
+En rond ¦ Circular
+Aucun (uni) ¦ Niciunul (uni)
+Rayures fines ¦ Dungi fine
+Un arbre en filigrane ¦ Un arbore în filigran
+La photo floutée en fond ¦ Fotografia estompată ca fond
+🖼️ La photo ¦ 🖼️ Fotografia
+En arc ¦ În arc
+La place ¦ Locul
+En haut, centrée ¦ Sus, centrat
+La taille ¦ Dimensiunea
+L’alignement ¦ Alinierea
+L’étiquette ¦ Eticheta
+Sa vie en deux phrases ¦ Viața sa în două fraze
+Une phrase à moi ¦ O frază a mea
+Une devise, un souvenir… ¦ O deviză, o amintire…
+🧩 En plus ¦ 🧩 În plus
+Le calendrier du mois ¦ Calendarul lunii
+Laisser la place pour ¦ Lasă loc pentru
+les icônes du bureau (à gauche) ¦ pictogramele de pe desktop (în stânga)
+l’heure du téléphone (en haut) ¦ ora telefonului (sus)
+Chaque jour un autre ancêtre — en priorité celui dont c’est l’anniversaire de naissance ou de décès. Tes réglages sont gardés sur cet ordinateur. ¦ În fiecare zi alt strămoș — în primul rând cel care își are aniversarea nașterii sau a decesului. Setările tale sunt păstrate pe acest calculator.
+Le fond d’écran (image PNG) ¦ Fundalul de ecran (imagine PNG)
+Fond d’écran du jour ¦ Fundalul de ecran al zilei
+Les passeports ¦ Pașapoartele
+Le passeport intérieur ou pour l’étranger d’un ancêtre voyageur, son signalement, son portrait-robot, et l’import des relevés publiés (Saint-Brieuc…). ¦ Pașaportul intern sau pentru străinătate al unui strămoș călător, semnalmentele lui, portretul-robot și importul extraselor publicate (Saint-Brieuc…).
+＋ Ajouter un passeport ¦ ＋ Adaugă un pașaport
+⤒ Importer un relevé (XML, CSV)… ¦ ⤒ Importă un extras (XML, CSV)…
+Un relevé publié (par exemple sur data.gouv.fr) ¦ Un extras publicat (de exemplu pe data.gouv.fr)
+{n} passeport rattaché ¦ {n} pașaport legat
+« ＋ Ajouter un passeport », ou importe un relevé publié. ¦ „＋ Adaugă un pașaport” sau importă un extras publicat.
+Grand-parent raconte ¦ Bunicul povestește
+Un récit dicté ou collé : les naissances, mariages, métiers et domiciles repérés, comparés à l’arbre, à ajouter en un clic. ¦ O povestire dictată sau lipită: nașterile, căsătoriile, meseriile și domiciliile găsite, comparate cu arborele, de adăugat dintr-un clic.
+Qui raconte ¦ Cine povestește
+🎤 Dicter ¦ 🎤 Dictează
+🔍 Repérer les faits ¦ 🔍 Găsește faptele
+Le repérage des faits lit les récits écrits en français. ¦ Găsirea faptelor citește povestirile scrise în franceză.
+Le récit (dicté, collé, ou recopié d’un enregistrement) ¦ Povestirea (dictată, lipită sau transcrisă dintr-o înregistrare)
+💾 Enregistrer le récit ¦ 💾 Salvează povestirea
+Rangé dans le bloc ✨ Trésors de la fiche ¦ Pusă în blocul ✨ Comori al fișei
+Partager une branche (pour un temps) ¦ Partajează o ramură (pentru o vreme)
+Un fichier à envoyer à un cousin : la branche sans les vivants, protégée par un mot de passe, qui expire à la date choisie. ¦ Un fișier de trimis unui văr: ramura fără cei în viață, protejată cu o parolă, care expiră la data aleasă.
+La branche de ¦ Ramura lui
+Valable jusqu’au ¦ Valabil până la
+Mot de passe (le fichier est chiffré, illisible sans lui) ¦ Parolă (fișierul este criptat, ilizibil fără ea)
+à donner à part, par téléphone par exemple ¦ de dat separat, de exemplu la telefon
+Montrer ou cacher le mot de passe ¦ Arată sau ascunde parola
+Quatre mots et un nombre, faciles à dicter ¦ Patru cuvinte și un număr, ușor de dictat
+🎲 En proposer un ¦ 🎲 Propune una
+Copier le mot de passe ¦ Copiază parola
+Sans mot de passe (déconseillé : quiconque reçoit le fichier peut le lire, et la date limite ne protège plus rien) ¦ Fără parolă (nerecomandat: oricine primește fișierul îl poate citi, iar data limită nu mai protejează nimic)
+Un seul fichier HTML, qui s’ouvre dans n’importe quel navigateur, sans l’application : à envoyer par courriel ou à déposer sur un nuage. Retirées, avec les phrases qui les nomment : les personnes vivantes ou probablement vivantes (même règle que l’export GEDCOM « Pour partager »), les fiches confidentielles. Les numéros de fiche ne sortent pas. ¦ Un singur fișier HTML, care se deschide în orice browser, fără aplicație: de trimis prin e-mail sau de pus în cloud. Scoase, împreună cu frazele care le numesc: persoanele în viață sau probabil în viață (aceeași regulă ca exportul GEDCOM „Pentru partajare”), fișele confidențiale. Numerele fișelor nu ies.
+🔐 Ce que protège ce fichier, et ce qu’il ne protège pas ¦ 🔐 Ce protejează acest fișier și ce nu protejează
+Chiffrement AES-256-GCM, clé tirée du mot de passe (PBKDF2, {n} tours) : sans le mot de passe, le contenu (noms compris, titre compris) est illisible. ¦ Criptare AES-256-GCM, cheie derivată din parolă (PBKDF2, {n} iterații): fără parolă, conținutul (inclusiv numele și titlul) este ilizibil.
+Le fichier ne se connecte à rien (aucune adresse internet n’est appelée, ce que le navigateur fait respecter). ¦ Fișierul nu se conectează la nimic (nu este apelată nicio adresă de internet, iar browserul impune acest lucru).
+La date limite est vérifiée à l’ouverture, mais quelqu’un qui a le mot de passe et recule l’horloge de son ordinateur peut la contourner, ou recopier ce qu’il voit : un partage ne se reprend pas. Ne partage que ce que tu acceptes de voir circuler. ¦ Data limită este verificată la deschidere, dar cineva care are parola și dă înapoi ceasul calculatorului o poate ocoli sau poate copia ce vede: o partajare nu se mai poate lua înapoi. Partajează doar ce accepți să circule.
+Envoie le mot de passe par un autre chemin que le fichier (téléphone, SMS) : les deux ensemble dans le même courriel ne protègent rien. ¦ Trimite parola pe altă cale decât fișierul (telefon, SMS): amândouă în același e-mail nu protejează nimic.
+{n} personnes partagées ¦ {n} persoane partajate
+{n} retirées (vivantes ou récentes) ¦ {n} scoase (în viață sau recente)
+🔗 Fabriquer le fichier à partager ¦ 🔗 Creează fișierul de partajat
+Le passeport des lieux ¦ Pașaportul locurilor
+Un tampon par village de l’arbre : quand tu y vas, il se colore. Combien en as-tu visité ? ¦ O ștampilă pentru fiecare sat din arbore: când mergi acolo, se colorează. Câte ai vizitat?
+Le carnet des tampons, à imprimer ¦ Carnetul de ștampile, de tipărit
+{n} / {total} lieux visités ¦ {n} / {total} locuri vizitate
+Chaque lieu de l’arbre a son tampon. Quand tu y vas — le village, l’église, la mairie, le cimetière —, clique dessus : « J’y suis allé ». ¦ Fiecare loc din arbore are ștampila lui. Când mergi acolo — satul, biserica, primăria, cimitirul —, fă clic pe ea: „Am fost acolo”.
+{n} pers. ¦ {n} pers.
+Le tour du monde des ancêtres ¦ Ocolul lumii al strămoșilor
+Les kilomètres parcourus de lieu en lieu, le plus long voyage, le plus loin du berceau, siècle après siècle. ¦ Kilometrii parcurși din loc în loc, cea mai lungă călătorie, cel mai departe de leagăn, secol după secol.
+Tous ensemble ¦ Toți împreună
+{n} % du chemin vers la Lune ¦ {n} % din drumul spre Lună
+Le plus long voyage ¦ Cea mai lungă călătorie
+Le plus loin du berceau ({place}) ¦ Cel mai departe de leagăn ({place})
+Les grands voyageurs ¦ Marii călători
+Entre le berceau des parents et celui des enfants ¦ Între leagănul părinților și cel al copiilor
+La distance moyenne, siècle par siècle, entre le lieu de naissance d’un parent et celui de son enfant : la famille qui s’éloigne de son village. ¦ Distanța medie, secol cu secol, între locul nașterii unui părinte și cel al copilului său: familia care se îndepărtează de satul ei.
+Les maisons dans le temps ¦ Casele de-a lungul timpului
+Un village, une maison : qui y a vécu, de quand à quand, génération après génération. ¦ Un sat, o casă: cine a locuit acolo, de când până când, generație după generație.
+{n} personnes sur {y} ans ¦ {n} persoane în {y} ani
+{place} : {y} ans de présence de la famille, sur {n} générations d’ancêtres ¦ {place}: {y} ani de prezență a familiei, pe parcursul a {n} generații de strămoși
+1 sou ¦ 1 sou
+{n} membre de la famille en vie ¦ {n} membru al familiei în viață
+Pas d’autres nouvelles. ¦ Nicio altă veste.
+Rien cette année. ¦ Nimic anul acesta.
+1 franc ¦ 1 franc
+5 francs ¦ 5 franci
+Ce soir, on raconte {n} vie de la famille de {name}. ¦ În seara asta povestim {n} viață din familia lui {name}.
+⏳ Ce partage a expiré. ¦ ⏳ Această partajare a expirat.
+Parents : ¦ Părinți:
+Enfants : ¦ Copii:
+Chercher un nom… ¦ Caută un nume…
+🔒 Ce partage est protégé. ¦ 🔒 Această partajare este protejată.
+Partage valable jusqu’au {date}. Les personnes vivantes ne sont pas incluses. ¦ Partajare valabilă până la {date}. Persoanele în viață nu sunt incluse.
+l’arbre dit {what} ¦ arborele spune {what}
+concorde avec l’arbre ({what}) ¦ se potrivește cu arborele ({what})
+nouvelle lune ¦ lună nouă
+(sous l’horizon) ¦ (sub orizont)
+astre|Mars ¦ Marte
+{list} brillaient ¦ {list} străluceau
+dernier croissant ¦ ultima seceră
+lune gibbeuse décroissante ¦ lună gibbosă descrescătoare
+Saturne ¦ Saturn
+dernier quartier ¦ ultimul pătrar
+{km} km depuis l’étape d’avant ¦ {km} km de la etapa anterioară
+🕯️ Garder la mémoire ¦ 🕯️ Păstrează memoria
+🔭 Découvrir ¦ 🔭 Descoperă
+Trésor ¦ Comoară
+Récits ¦ Povestiri
+Chasses au trésor ¦ Vânători de comori
+TRÉSORS ¦ COMORI
+trésors ¦ comori
+Garde au moins un trésor affiché. ¦ Păstrează cel puțin o comoară afișată.
+Dossier vide ¦ Dosar gol
+Les trésors n’ont pas pu être lus. ¦ Comorile nu au putut fi citite.
+Broderie — {title} ¦ Broderie — {title}
+Aucun visage connu dans cette lignée ¦ Niciun chip cunoscut în această linie
+La Gazette {y} ¦ Gazeta {y}
+Fond d’écran ¦ Fundal de ecran
+Pégase ¦ Pegasus
+Andromède ¦ Andromeda
+Persée ¦ Perseu
+sous l’horizon ¦ sub orizont
+date exacte inconnue ¦ data exactă necunoscută
+Les deux guerres ¦ Cele două războaie
+(aucun événement daté) ¦ (niciun eveniment datat)
+Faire-part — {name} ¦ Anunț — {name}
+Faire-part ¦ Anunț
+L’arbre est vide ¦ Arborele este gol
+{n} prénoms transmis par-dessus une génération ¦ {n} prenume transmise peste o generație
+{n} mots expliqués ¦ {n} cuvinte explicate
+{n} mot expliqué ¦ {n} cuvânt explicat
+Aucun vieux mot reconnu. ¦ Niciun cuvânt vechi recunoscut.
+sous l’évier ¦ sub chiuvetă
+Les chasses préparées ¦ Vânătorile pregătite
+{n} cachettes ¦ {n} ascunzători
+Donne au moins deux cachettes. ¦ Dă cel puțin două ascunzători.
+Chasse au trésor ¦ Vânătoare de comori
+La chasse sera effacée. ¦ Vânătoarea va fi ștearsă.
+Carte {n} ¦ Cartea {n}
+(à donner au départ) ¦ (de dat la început)
+{answer} → cherchez {where} ¦ {answer} → căutați {where}
+Il faut quelques ancêtres avec une date, un lieu ou un métier ¦ E nevoie de câțiva strămoși cu o dată, un loc sau o meserie
+🕵️ Un ancêtre mystère au hasard ¦ 🕵️ Un strămoș misterios la întâmplare
+{n} parties ¦ {n} partide
+{n} partie ¦ {n} partidă
+🎉 Bravo ! ¦ 🎉 Bravo!
+😶 C’était… ¦ 😶 Era…
+🎲 Un autre, au hasard ¦ 🎲 Altul, la întâmplare
+{n} essais ratés ¦ {n} încercări ratate
+Choisis quelqu’un. ¦ Alege pe cineva.
+Une autre vie aurait été possible… mais c’est celle-là qui a mené jusqu’à toi. ¦ O altă viață ar fi fost posibilă… dar aceasta este cea care a dus până la tine.
+📖 Recommencer ¦ 📖 Începe din nou
+Tourner la page → ¦ Întoarce pagina →
+Aucune coïncidence trouvée ¦ Nicio coincidență găsită
+🦋 {n} vie n’aurait jamais existé ¦ 🦋 {n} viață n-ar fi existat niciodată
+la fenêtre d’impression n’est pas prête. ¦ fereastra de tipărire nu este gata.
+🃏 7 FAMILLES ¦ 🃏 7 FAMILII
+(visage repéré) ¦ (chip găsit)
+Ajoute-en depuis sa fiche (Médias), puis reviens ici. ¦ Adaugă din fișa sa (Media), apoi revino aici.
+Jeu remis comme au départ. ¦ Joc readus la starea inițială.
+Donne au moins une équipe. ¦ Dă cel puțin o echipă.
+Égalité ! ¦ Egalitate!
+{n} point ¦ {n} punct
+Question {n} / {total} ¦ Întrebarea {n} / {total}
+Question suivante ▶ ¦ Întrebarea următoare ▶
+Vidéo prête. ¦ Videoclip gata.
+Donne-lui un titre. ¦ Dă-i un titlu.
+SOUVENIR DES SENS ¦ AMINTIRE A SIMȚURILOR
+Chaque samedi, elle cirait les marches… ¦ În fiecare sâmbătă, ceruia treptele…
+La préparation ¦ Prepararea
+CHANSONS DE LA FAMILLE ¦ CÂNTECELE FAMILIEI
+Les paroles ¦ Versurile
+Quand on la chantait ¦ Când se cânta
+Raconte-moi une journée ordinaire quand tu avais dix ans. ¦ Povestește-mi o zi obișnuită de când aveai zece ani.
+Qu’est-ce qu’on apprenait par cœur ? ¦ Ce se învăța pe de rost?
+Y avait-il des histoires qu’on se racontait toujours dans la famille ? ¦ Erau povești care se spuneau mereu în familie?
+Quel outil ou quel geste te reste dans les mains ? ¦ Ce unealtă sau ce gest îți rămâne în mâini?
+Comment as-tu rencontré ton mari, ta femme, ton amour ? ¦ Cum l-ai cunoscut pe soțul tău, pe soția ta, pe iubirea ta?
+Où avez-vous habité au début ? ¦ Unde ați locuit la început?
+Où étais-tu pendant la guerre ? ¦ Unde erai în timpul războiului?
+Y a-t-il un jour que tu n’as jamais oublié ? ¦ Există o zi pe care n-ai uitat-o niciodată?
+Comment se chauffait-on, comment s’éclairait-on ? ¦ Cum vă încălzeați, cum vă luminați casa?
+Comment fêtait-on Noël ? ¦ Cum se sărbătorea Crăciunul?
+S’ouvre ¦ Se deschide
+L’anniversaire de ¦ Ziua de naștere a lui
+À ses ¦ La cei
+La lettre ¦ Scrisoarea
+Écris ici… ¦ Scrie aici…
+LETTRE AUX DESCENDANTS ¦ SCRISOARE CĂTRE DESCENDENȚI
+✉️ La lettre ¦ ✉️ Scrisoarea
+✉️ Nouvelle lettre ¦ ✉️ Scrisoare nouă
+🔒 Sceller la lettre ¦ 🔒 Sigilează scrisoarea
+Choisis une personne dont on connaît la naissance. ¦ Alege o persoană a cărei naștere este cunoscută.
+Écris quelque chose ou joins un son, une vidéo ou une photo. ¦ Scrie ceva sau atașează un sunet, un videoclip sau o fotografie.
+{n} scellées ¦ {n} sigilate
+{n} ouvertes ¦ {n} deschise
+De {from} ¦ De la {from}
+écrite ¦ scrisă
+Sommaire ¦ Cuprins
+ça rappelle {who} ¦ amintește de {who}
+{n} recettes transmises ¦ {n} rețete transmise
+{n} recette transmise ¦ {n} rețetă transmisă
+Chantée par {who} ¦ Cântată de {who}
+Sans enregistrement ¦ Fără înregistrare
+(le son reste dans les médias) ¦ (sunetul rămâne în fișierele media)
+Entretien avec {name} ¦ Interviu cu {name}
+Choisis au moins un thème. ¦ Alege cel puțin o temă.
+Question suivante → ¦ Întrebarea următoare →
+Passer ¦ Sari peste
+🔊 Relire ¦ 🔊 Citește din nou
+J’enregistre l’entretien… ¦ Înregistrez interviul…
+Entretien gardé (sans son). ¦ Interviu păstrat (fără sunet).
+{n} bougies allumées ¦ {n} lumânări aprinse
+mélange ¦ amestec
+UNE BOUGIE ¦ O LUMÂNARE
+encore {n} j ¦ încă {n} z
+demain ¦ mâine
+allumée ¦ aprinsă
+par {name} ¦ de {name}
+Bougie supprimée ¦ Lumânare ștearsă
+Bougie supprimée. ¦ Lumânare ștearsă.
+Ambiance arrêtée (minuterie). ¦ Ambianță oprită (cronometru).
+Monte au moins une couche. ¦ Ridică cel puțin un strat.
+Garder ce mélange ¦ Păstrează acest amestec
+Mélange gardé. ¦ Amestec păstrat.
+« {name} » supprimé. ¦ „{name}” a fost șters.
+Ce navigateur ne sait pas enregistrer. ¦ Acest browser nu poate înregistra.
+Ambiance — {name} ¦ Ambianță — {name}
+à ¦ la
+Tous les indices s’accordent (vers {y}). ¦ Toate indiciile se potrivesc (în jurul anului {y}).
+Qui cela peut être ¦ Cine ar putea fi
+Avait {n} ans vers {y} ¦ Avea {n} ani în jurul anului {y}
+Reprendre la branche {name} ¦ Reia ramura {name}
+RAPPEL DE RECHERCHE ¦ MEMENTO DE CERCETARE
+Pas touchée depuis {d} ¦ Neatinsă de {d}
+modifiée ¦ modificată
+Jamais modifiée ¦ Niciodată modificată
+rien d’évident ne manque ¦ nu lipsește nimic evident
+Thème d’époque arrêté. ¦ Tema de epocă oprită.
+châtains ¦ castanii
+coloré ¦ colorat
+cicatrice au front ¦ cicatrice pe frunte
+{n} passeports rattachés ¦ {n} pașapoarte legate
+{n} affichés ¦ {n} afișate
+{n} affiché ¦ {n} afișat
+Dans l’arbre ¦ În arbore
+Délivré ¦ Eliberat
+son grand-père ¦ bunicul său
+sa grand-mère ¦ bunica sa
+un frère ou une sœur ¦ un frate sau o soră
+{n} faits repérés ¦ {n} fapte găsite
+{n} fait repéré ¦ {n} fapt găsit
+{n} personne partagée ¦ {n} persoană partajată
+PASSEPORT ¦ PAȘAPORT
+🛂 Nouveau passeport ¦ 🛂 Pașaport nou
+Passeport enregistré. ¦ Pașaport salvat.
+je ne trouve pas d’enregistrements répétés dans ce XML ¦ nu găsesc înregistrări repetate în acest XML
+{n} passeports ¦ {n} pașapoarte
+aucune ¦ niciuna
+un nom, une commune, un métier… ¦ un nume, o localitate, o meserie…
+Ce relevé est trop gros (20 Mo au plus). ¦ Acest extras este prea mare (cel mult 20 Mo).
+{n} passeports lus. ¦ {n} pașapoarte citite.
+Passeport intérieur ¦ Pașaport intern
+＋ Passeport ¦ ＋ Pașaport
+Les passeports n’ont pas pu être lus. ¦ Pașapoartele nu au putut fi citite.
+Modifier ce passeport ¦ Modifică acest pașaport
+Aucun passeport ne correspond ¦ Niciun pașaport nu se potrivește
+Passeports ¦ Pașapoarte
+Voyageur ¦ Călător
+Délivré à ¦ Eliberat la
+📍 Délivré à ¦ 📍 Eliberat la
+sorte d’événement introuvable ¦ tip de eveniment negăsit
+Aucun fait repéré ¦ Niciun fapt găsit
+⏹ Arrêter la dictée ¦ ⏹ Oprește dictarea
+Solide. ¦ Solid.
+Oui, quand même ¦ Da, totuși
+La branche {name} — partagée par la famille ¦ Ramura {name} — partajată de familie
+PASSEPORT DES LIEUX ¦ PAȘAPORTUL LOCURILOR
+Où es-tu né, et dans quelle maison as-tu grandi ? ¦ Unde te-ai născut și în ce casă ai crescut?
+Où es-tu née, et dans quelle maison as-tu grandi ? ¦ Unde te-ai născut și în ce casă ai crescut?
+À quoi jouais-tu, et avec qui ? ¦ Cu ce te jucai și cu cine?
+Quelle odeur ou quel bruit te ramène tout de suite à ton enfance ? ¦ Ce miros sau ce zgomot te duce imediat înapoi în copilărie?
+Qui était la personne la plus importante pour toi, petit ? ¦ Cine era persoana cea mai importantă pentru tine când erai mic?
+Qui était la personne la plus importante pour toi, petite ? ¦ Cine era persoana cea mai importantă pentru tine când erai mică?
+Comment allais-tu à l’école ? ¦ Cum mergeai la școală?
+Te souviens-tu de ton maître ou de ta maîtresse ? ¦ Îți amintești de învățătorul sau de învățătoarea ta?
+Jusqu’à quel âge es-tu allé à l’école, et pourquoi ? ¦ Până la ce vârstă ai mers la școală și de ce?
+Jusqu’à quel âge es-tu allée à l’école, et pourquoi ? ¦ Până la ce vârstă ai mers la școală și de ce?
+Que sais-tu de tes grands-parents ? ¦ Ce știi despre bunicii tăi?
+Quels étaient les métiers de tes parents ? ¦ Care erau meseriile părinților tăi?
+Y a-t-il un secret ou une brouille dont on parlait à voix basse ? ¦ Era vreun secret sau vreo ceartă despre care se vorbea în șoaptă?
+Quels prénoms revenaient dans la famille, et pourquoi ? ¦ Ce prenume reveneau în familie și de ce?
+Quel a été ton premier travail, et combien gagnais-tu ? ¦ Care a fost primul tău loc de muncă și cât câștigai?
+Raconte une journée de travail. ¦ Povestește o zi de muncă.
+De quoi es-tu le plus fier dans ton métier ? ¦ Cu ce te mândrești cel mai mult în meseria ta?
+Comment s’est passé le mariage ? ¦ Cum a fost nunta?
+Qu’est-ce qui manquait le plus ? ¦ Ce lipsea cel mai mult?
+Qui est parti, et qui est revenu ? ¦ Cine a plecat și cine s-a întors?
+Décris-moi la maison : les pièces, la cuisine, le jardin. ¦ Descrie-mi casa: camerele, bucătăria, grădina.
+Qu’est-ce qu’on mangeait le dimanche ? ¦ Ce se mânca duminica?
+Quelles étaient les fêtes du village ? ¦ Care erau sărbătorile satului?
+Quelle chanson chantait-on à la fin des repas ? ¦ Ce cântec se cânta la sfârșitul meselor?
+Qu’est-ce que tu aimerais que tes arrière-petits-enfants sachent de toi ? ¦ Ce ți-ar plăcea să știe strănepoții tăi despre tine?
+Quel conseil donnerais-tu à quelqu’un de vingt ans ? ¦ Ce sfat i-ai da cuiva de douăzeci de ani?
+Qu’est-ce qui a le plus changé dans ta vie ? ¦ Ce s-a schimbat cel mai mult în viața ta?
+{n} livre ¦ {n} livră
+{n} livres ¦ {n} livre
+{n} franc ¦ {n} franc
+{n} francs ¦ {n} franci
+{n} euro ¦ {n} euro
+unité|en ¦ în
+année|à ¦ în
+date|Le ¦ Pe
+force|faible ¦ slabă
+force|correct ¦ acceptabilă
+force|solide ¦ solidă
+aucune|personne ¦ nimeni
+signalement|1 m 65 ¦ 1 m 65
+signalement|châtains ¦ castanii
+signalement|gris ¦ cenușii
+signalement|aquilin ¦ acvilin
+signalement|rond ¦ rotund
+signalement|ovale ¦ oval
+signalement|coloré ¦ colorat
+signalement|brune ¦ brună
+signalement|cicatrice au front ¦ cicatrice pe frunte
+soit {n} baguette d’aujourd’hui ¦ adică {n} baghetă de azi
+De la Révolution au Second Empire, il fallait un passeport pour aller d’un département à l’autre ; il portait le <b>signalement</b> du voyageur, une description qui remplace souvent la photo qu’on n’a pas. Les relevés publiés (par exemple les passeports intérieurs de Saint-Brieuc, 1830-1839, sur data.gouv.fr) s’importent ici : télécharge le fichier, puis « Importer un relevé ». ¦ De la Revoluție până la al Doilea Imperiu, era nevoie de un pașaport ca să mergi dintr-un departament în altul; acesta purta <b>semnalmentele</b> călătorului, o descriere care înlocuiește adesea fotografia pe care n-o avem. Extrasele publicate (de exemplu pașapoartele interne din Saint-Brieuc, 1830-1839, pe data.gouv.fr) se importă aici: descarcă fișierul, apoi „Importă un extras”.
+🎲 Jouer en famille ¦ 🎲 Joacă în familie
+🎨 Créer et fabriquer ¦ 🎨 Creează și construiește
+🗺️ Lieux et voyages ¦ 🗺️ Locuri și călătorii
+🧰 Outils malins ¦ 🧰 Instrumente istețe
+L’atelier de mise en page n’est pas disponible ici. ¦ Atelierul de machetare nu este disponibil aici.
+Une copie est rangée dans les médias (et sur la fiche) : « {title} ». ¦ O copie este pusă în fișierele media (și pe fișă): „{title}”.
+Une copie est rangée dans les médias : « {title} ». ¦ O copie este pusă în fișierele media: „{title}”.
+Ouvrir dans la mise en page ¦ Deschide în machetare
+Pour tout retravailler (textes, cadres, pages) ¦ Ca să refaci totul (texte, cadre, pagini)
+⤓ Exporter ¦ ⤓ Exportă
+🖨 Imprimer ▾ ¦ 🖨 Tipărește ▾
+Les trésors et leurs dossiers ¦ Comorile și dosarele lor
+Réordonner les trésors ¦ Reordonează comorile
+Ordre et trésors affichés enregistrés. ¦ Ordinea și comorile afișate au fost salvate.
+Pour s’émerveiller, jouer, créer et garder la mémoire, à partir de ton arbre. ¦ Ca să te minunezi, să te joci, să creezi și să păstrezi memoria, pornind de la arborele tău.
+⚙️ Réglages pour y ranger des trésors (ou l’effacer). ¦ ⚙️ Setări pentru a pune comori în el (sau pentru a-l șterge).
+＋ Souvenir ¦ ＋ Amintire
+＋ Lettre ¦ ＋ Scrisoare
+Aucun trésor pour l’instant ¦ Deocamdată nicio comoară
+Un souvenir (une odeur, un bruit), une recette, une chanson, une lettre pour plus tard, un entretien enregistré… tout se garde dans l’onglet ✨ Trésors. ¦ O amintire (un miros, un zgomot), o rețetă, un cântec, o scrisoare pentru mai târziu, un interviu înregistrat… totul se păstrează în fila ✨ Comori.
+Grille de broderie ¦ Grilă de broderie
+Un carré = un point de croix ; les traits épais tous les 10 points. ¦ Un pătrat = o cruciuliță; liniile groase la fiecare 10 puncte.
+Aucun portrait dans l’arbre ¦ Niciun portret în arbore
+Ajoute une photo de portrait sur les fiches, ou encadre les visages dans la visionneuse. ¦ Adaugă o fotografie de portret pe fișe sau încadrează chipurile în vizualizator.
+{list}. Ajoute des portraits ou encadre les visages sur les photos. ¦ {list}. Adaugă portrete sau încadrează chipurile din fotografii.
+Le visage moyen de {n} génération ¦ Chipul mediu din {n} generație
+{n} sous ¦ {n} sous
+Il faut des ancêtres avec une date de naissance ¦ E nevoie de strămoși cu o dată de naștere
+premier croissant ¦ prima seceră
+premier quartier ¦ primul pătrar
+lune gibbeuse croissante ¦ lună gibbosă crescătoare
+{place} (pas placé sur la carte : ciel de Paris) ¦ {place} (neplasat pe hartă: cerul Parisului)
+il faisait jour : voici les étoiles cachées par le soleil ¦ era zi: iată stelele ascunse de soare
+Il faut au moins l’année de naissance. ¦ E nevoie cel puțin de anul nașterii.
+⚠️ Date exacte inconnue : ciel du 1er juillet. ¦ ⚠️ Data exactă necunoscută: cerul din 1 iulie.
+⚠️ Lieu non placé sur la carte. ¦ ⚠️ Loc neplasat pe hartă.
+Il faut au moins l’année de naissance pour voir le ciel. ¦ E nevoie cel puțin de anul nașterii ca să vezi cerul.
+Pas de portrait sur cette fiche. ¦ Niciun portret pe această fișă.
+Avant 1700 ¦ Înainte de 1700
+Le XVIIIe siècle ¦ Secolul al XVIII-lea
+Révolution et Empire ¦ Revoluția și Imperiul
+Le XIXe siècle ¦ Secolul al XIX-lea
+Depuis 1946 ¦ Din 1946
+Aucune signature repérée pour l’instant ¦ Deocamdată nicio semnătură găsită
+Ouvre un acte dans la visionneuse des médias, puis « ＋ Identifier une signature » : encadre la signature et dis de qui elle est. Elle viendra se poser ici, rangée par époque. ¦ Deschide un act în vizualizatorul de media, apoi „＋ Identifică o semnătură”: încadrează semnătura și spune a cui este. Va veni aici, ordonată pe epoci.
+Pas d’ancêtres connus pour cette personne ¦ Niciun strămoș cunoscut pentru această persoană
+Aucun prénom ne saute de génération dans l’arbre pour l’instant ¦ Deocamdată niciun prenume nu sare o generație în arbore
+laboureur, brumaire, dot… ¦ laboureur, brumaire, dot…
+(passe la souris dessus) : ¦ (treci cu mouse-ul peste ele):
+L’arbre ne donne que {n} énigmes : enlève des cachettes. ¦ Arborele oferă doar {n} ghicitori: scoate din ascunzători.
+L’arbre ne donne que {n} énigme : enlève des cachettes. ¦ Arborele oferă doar {n} ghicitoare: scoate din ascunzători.
+Chasse prête : imprime les cartes. ¦ Vânătoare gata: tipărește cărțile.
+Supprimer ? ¦ Ștergi?
+sous le lit ¦ sub pat
+dans le four ¦ în cuptor
+derrière le canapé ¦ în spatele canapelei
+dans la baignoire ¦ în cadă
+dans le panier à linge ¦ în coșul de rufe
+derrière la porte du garage ¦ în spatele ușii garajului
+dans la boîte à chaussures ¦ în cutia de pantofi
+sous le coussin ¦ sub pernă
+dans le pot de fleurs ¦ în ghiveciul de flori
+au fond du frigo ¦ în fundul frigiderului
+sous la table de la cuisine ¦ sub masa din bucătărie
+sous le tapis ¦ sub covor
+(à cacher : {where}) ¦ (de ascuns: {where})
+C’est la dernière : le trésor vous attend ! ¦ Este ultima: comoara vă așteaptă!
+<b>Pour l’organisateur.</b> Donnez la carte 1 aux joueurs. Cachez chaque carte suivante à l’endroit indiqué en haut de la carte. Le trésor ({treasure}) va à : {where}. ¦ <b>Pentru organizator.</b> Dați cartea 1 jucătorilor. Ascundeți fiecare carte următoare în locul indicat în partea de sus a cărții. Comoara ({treasure}) merge: {where}.
+à vous de choisir ¦ alegeți voi
+{n} essai raté ¦ {n} încercare ratată
+Non, ce n’est pas ça… un indice de plus. ¦ Nu, nu e asta… încă un indiciu.
+Il faut un ancêtre avec une date de naissance et un métier ou un mariage ¦ E nevoie de un strămoș cu o dată de naștere și o meserie sau o căsătorie
+Tu as fait {n} choix sur {total} comme {name}. ¦ Ai făcut {n} alegeri din {total} la fel ca {name}.
+Une vie vécue à l’identique : tu connais bien ton ancêtre ! ¦ O viață trăită identic: îți cunoști bine strămoșul!
+Avec tes choix, l’histoire de la famille aurait été tout autre. ¦ Cu alegerile tale, istoria familiei ar fi fost cu totul alta.
+✨ Le même choix que ton ancêtre ! ¦ ✨ Aceeași alegere ca strămoșul tău!
+🌀 Une autre vie commence… mais revenons à la vraie. ¦ 🌀 O altă viață începe… dar să revenim la cea adevărată.
+Il faut des dates précises (jour et mois). ¦ E nevoie de date precise (zi și lună).
+{pct} % de l’arbre. ¦ {pct} % din arbore.
+Personne ne descend de ce choix dans l’arbre ¦ Nimeni din arbore nu descinde din această alegere
+Portrait de la fiche ¦ Portretul fișei
+Aucune photo jointe à cette fiche, ni de visage encadré sur une photo ¦ Nicio fotografie atașată la această fișă și niciun chip încadrat într-o fotografie
+🔍 Zoom ¦ 🔍 Zoom
+Glisse la photo dans le cadre pour la placer ; la molette (ou + et −) zoome. ¦ Trage fotografia în cadru ca s-o așezi; rotița (sau + și −) face zoom.
+Les photos marquées d’un visage se recadrent toutes seules sur lui. ¦ Fotografiile marcate cu un chip se decupează singure pe el.
+Pas encore assez de familles ¦ Încă nu sunt destule familii
+Il faut au moins deux familles d’au moins six personnes (décédées) : complète l’arbre, ou essaie « par branche ». ¦ E nevoie de cel puțin două familii cu cel puțin șase persoane (decedate): completează arborele sau încearcă „după ramură”.
+{n} famille de 6 cartes ({total} cartes). ¦ {n} familie de 6 cărți ({total} de cărți).
+🃏 Le jeu des {n} familles ¦ 🃏 Jocul celor {n} familii
+Distribuez 6 cartes à chacun, le reste fait la pioche. À ton tour, demande à un joueur une carte d’une famille dont tu as déjà une carte (« Dans la famille {fam}, je voudrais {role} »). S’il l’a, il te la donne et tu rejoues ; sinon, « Pioche ! ». Une famille complète se pose devant soi. Celui qui a le plus de familles a gagné. ¦ Împărțiți câte 6 cărți fiecăruia, restul formează pachetul. La rândul tău, cere unui jucător o carte dintr-o familie din care ai deja o carte („Din familia {fam}, aș vrea {role}”). Dacă o are, ți-o dă și joci din nou; altfel: „Trage din pachet!”. O familie completă se pune în fața ta. Cel care are cele mai multe familii a câștigat.
+Les familles : {list}. ¦ Familiile: {list}.
+Impression recto verso (bord long) : chaque page de dos suit sa page de cartes, déjà retournée pour tomber pile derrière. ¦ Tipărire față-verso (marginea lungă): fiecare pagină de spate urmează pagina ei de cărți, deja întoarsă ca să cadă exact în spate.
+Ajoute des personnes pour dessiner leur arbre. ¦ Adaugă persoane ca să le desenezi arborele.
+L’arbre est trop petit pour faire des questions. ¦ Arborele este prea mic pentru a face întrebări.
+Voir la réponse (Entrée) ¦ Vezi răspunsul (Enter)
+✕ Fin ¦ ✕ Sfârșit
+Il faut des lieux placés sur la carte (latitude et longitude) et datés pour faire le film ¦ E nevoie de locuri plasate pe hartă (latitudine și longitudine) și datate ca să faci filmul
+🔴 Enregistrement… ¦ 🔴 Înregistrare…
+Aucun lieu de l’arbre n’est placé sur la carte (latitude et longitude) ¦ Niciun loc din arbore nu este plasat pe hartă (latitudine și longitudine)
+Aucun lieu placé sur la carte pour cette personne ¦ Niciun loc plasat pe hartă pentru această persoană
+La position n’est pas disponible sur cet appareil. ¦ Poziția nu este disponibilă pe acest dispozitiv.
+📍 Je cherche ta position… (l’histoire de chaque étape se lira toute seule à moins de 300 m) ¦ 📍 Îți caut poziția… (povestea fiecărei etape se va citi singură la mai puțin de 300 m)
+dans {n} jour ¦ peste {n} zi
+dans {n} mois ¦ peste {n} luni
+dans {n} ans ¦ peste {n} ani
+De la part de (une fiche, ou un nom) ¦ Din partea (o fișă sau un nume)
+Pour (ex. « Léa », « mes petits-enfants », « celui qui reprendra la maison ») ¦ Pentru (ex. „Lea”, „nepoții mei”, „cel care va prelua casa”)
+à une date ¦ la o dată
+à un anniversaire ¦ la o aniversare
+Un son, une vidéo ou une photo (facultatif) ¦ Un sunet, un videoclip sau o fotografie (opțional)
+Choisis le jour où la lettre s’ouvrira. ¦ Alege ziua în care se va deschide scrisoarea.
+La date doit être dans le futur (sinon ce n’est plus une surprise). ¦ Data trebuie să fie în viitor (altfel nu mai e o surpriză).
+Pour ses {n} ans ¦ Pentru cei {n} ani ai săi
+à ses {n} ans ¦ la cei {n} ani ai săi
+Lettre enregistrée. ¦ Scrisoare salvată.
+🔒 Lettre scellée : elle s’ouvrira le {date}. ¦ 🔒 Scrisoare sigilată: se va deschide pe {date}.
+🔒 En attente ¦ 🔒 În așteptare
+La lettre sera effacée pour de bon. ¦ Scrisoarea va fi ștearsă definitiv.
+Supprimer la lettre ? ¦ Ștergi scrisoarea?
+Cet élément sera effacé pour de bon. ¦ Acest element va fi șters definitiv.
+Rien à mettre dans le livre pour l’instant. ¦ Deocamdată nimic de pus în carte.
+de la famille ¦ a familiei
+Le souvenir en quelques mots ¦ Amintirea în câteva cuvinte
+L’odeur de la cire dans l’escalier ¦ Mirosul de ceară de pe scară
+Ça rappelle (une fiche, ou un nom) ¦ Amintește de (o fișă sau un nume)
+la maison de Naves ¦ casa din Naves
+vers 1950, l’été ¦ în jurul anului 1950, vara
+Un son, une photo (facultatif) ¦ Un sunet, o fotografie (opțional)
+LIVRE DE RECETTES ¦ CARTE DE REȚETE
+Le nom de la recette ¦ Numele rețetei
+Le clafoutis de Rose ¦ Clafoutis-ul Rosei
+La recette de (une fiche, ou un nom) ¦ Rețeta lui (o fișă sau un nume)
+Pour combien ¦ Pentru câte persoane
+pour 6 ¦ pentru 6
+Les ingrédients (un par ligne) ¦ Ingredientele (câte unul pe rând)
+500 g de cerises noires ¦ 500 g de cireșe negre
+3 œufs ¦ 3 ouă
+Son histoire (d’où elle vient, quand on la faisait) ¦ Povestea ei (de unde vine, când se făcea)
+Une photo du plat ou de la fiche écrite à la main ¦ O fotografie a felului de mâncare sau a fișei scrise de mână
+sur l’air de « {tune} » ¦ pe melodia „{tune}”
+Le titre (ou le premier vers) ¦ Titlul (sau primul vers)
+Chantée par (une fiche, ou un nom) ¦ Cântată de (o fișă sau un nume)
+Sur l’air de ¦ Pe melodia
+L’enregistrement (son ou vidéo) ¦ Înregistrarea (sunet sau videoclip)
+Le carnet de chansons ¦ Carnetul de cântece
+{n} chansons de la famille ¦ {n} cântece ale familiei
+{n} chanson de la famille ¦ {n} cântec al familiei
+Supprimer la fiche de l’entretien ¦ Șterge fișa interviului
+La fiche de l’entretien (les questions et les repères) sera effacée ; le son reste dans les médias. ¦ Fișa interviului (întrebările și reperele) va fi ștearsă; sunetul rămâne în fișierele media.
+Le micro n’est pas disponible : l’entretien continue sans enregistrement (note les réponses). ¦ Microfonul nu este disponibil: interviul continuă fără înregistrare (notează răspunsurile).
+Notes rapides (facultatif) ¦ Note rapide (opțional)
+← Précédente ¦ ← Anterioara
+Dernière question : terminer ¦ Ultima întrebare: termină
+▶ Reprendre ¦ ▶ Reia
+⏸ Pause ¦ ⏸ Pauză
+⏹ Terminer ¦ ⏹ Termină
+Entretien enregistré : le son est dans les médias de la fiche. ¦ Interviu înregistrat: sunetul este în fișierele media ale fișei.
+Personne à raconter de ce côté-là. ¦ Nimeni de povestit pe această parte.
+Un mot (facultatif) ¦ Un mesaj (opțional)
+Choisis pour qui. ¦ Alege pentru cine.
+🕯️ Une bougie brûle pour {name} pendant {n} jours. ¦ 🕯️ O lumânare arde pentru {name} timp de {n} zile.
+📖 Le registre ¦ 📖 Registrul
+Son nom : ¦ Numele său:
+Le nom de ce mélange ¦ Numele acestui amestec
+Choisis d’abord un de tes mélanges. ¦ Alege mai întâi unul dintre amestecurile tale.
+Enregistrement de {d} : le fichier arrive à la fin (⤓ Exporter → fichier son, de nouveau, pour finir plus tôt). ¦ Înregistrare de {d}: fișierul vine la sfârșit (⤓ Exportă → fișier de sunet, din nou, ca să termini mai devreme).
+Ce navigateur ne sait pas fabriquer de fichier son. ¦ Acest browser nu poate crea un fișier de sunet.
+Je fabrique le fichier son… ¦ Creez fișierul de sunet…
+Les indices ne s’accordent pas tous : {n} sur {total} tombent dans cette période. Revois celui qui détonne. ¦ Indiciile nu se potrivesc toate: {n} din {total} cad în această perioadă. Revezi-l pe cel care nu se potrivește.
+Personne dans l’arbre n’avait cet âge pendant cette période. ¦ Nimeni din arbore nu avea această vârstă în această perioadă.
+Indique l’âge apparent pour voir qui ça peut être. ¦ Indică vârsta aparentă ca să vezi cine ar putea fi.
+⏰ Me le rappeler ¦ ⏰ Amintește-mi
+Le rappel ¦ Mementoul
+Écris le rappel. ¦ Scrie mementoul.
+Choisis la date du rappel. ¦ Alege data mementoului.
+⏰ Rappel créé pour le {date} (Listes → Rappels). ¦ ⏰ Memento creat pentru {date} (Liste → Mementouri).
+Archives à trouver ¦ Arhive de găsit
+{n} recherche à faire sur 6 générations ¦ {n} căutare de făcut pe 6 generații
+Rien ne manque sur 6 générations, ou l’assistant n’a pas pu être lu ¦ Nu lipsește nimic pe 6 generații sau asistentul nu a putut fi citit
+Les fiches prennent maintenant les couleurs de leur époque. ¦ Fișele iau acum culorile epocii lor.
+Signes particuliers ¦ Semne particulare
+pour voyager d’un département à l’autre ¦ pentru a călători dintr-un departament în altul
+pour aller à l’étranger ¦ pentru a merge în străinătate
+Date de délivrance ¦ Data eliberării
+Motif du voyage ¦ Motivul călătoriei
+Le signalement ¦ Semnalmentele
+🛂 Le passeport ¦ 🛂 Pașaportul
+Le voyageur ¦ Călătorul
+Choisis le voyageur. ¦ Alege călătorul.
+{what} de {name} ({date}) ¦ {what} al lui {name} ({date})
+ce XML contient des déclarations (DOCTYPE ou ENTITY) : il est refusé par prudence ¦ acest XML conține declarații (DOCTYPE sau ENTITY): este refuzat din prudență
+le fichier XML est abîmé ¦ fișierul XML este deteriorat
+Fermer le relevé ¦ Închide extrasul
+Le passeport sera effacé. ¦ Pașaportul va fi șters.
+Rattaché à {name}. ¦ Legat de {name}.
+{n} correspondances possibles avec l’arbre (en tête) ¦ {n} potriviri posibile cu arborele (primele)
+{n} correspondance possible avec l’arbre (en tête) ¦ {n} potrivire posibilă cu arborele (prima)
+Aucun passeport pour l’instant. ¦ Deocamdată niciun pașaport.
+Avant 1860, pour voyager en France, il fallait un passeport intérieur avec son signalement : s’il en existe un, ajoute-le ici. ¦ Înainte de 1860, pentru a călători în Franța, era nevoie de un pașaport intern cu semnalmentele persoanei: dacă există unul, adaugă-l aici.
+＋ Nouveau passeport intérieur ¦ ＋ Pașaport intern nou
+Les passeports de la famille : le passeport intérieur (pour voyager d’un département à l’autre, jusque vers 1860) et le passeport pour l’étranger. Ils se saisissent sur la fiche (bloc 🛂 Passeports) ou dans ✨ Trésors. ¦ Pașapoartele familiei: pașaportul intern (pentru a călători dintr-un departament în altul, până pe la 1860) și pașaportul pentru străinătate. Se introduc pe fișă (blocul 🛂 Pașapoarte) sau în ✨ Comori.
+Chercher… (voyageur, destination, motif, profession) ¦ Caută… (călător, destinație, motiv, profesie)
+Passeport pour l’étranger ¦ Pașaport pentru străinătate
+Pour l’étranger ¦ Pentru străinătate
+pas encore dans l’arbre ¦ încă nu este în arbore
+mariage pas encore daté dans l’arbre ¦ căsătorie încă nedatată în arbore
+concorde ({what}) ¦ se potrivește ({what})
+pas de métier dans l’arbre ¦ nicio meserie în arbore
+ce lieu est déjà dans l’arbre ¦ acest loc este deja în arbore
+ce lieu n’est pas encore sur la fiche ¦ acest loc nu este încă pe fișă
+👶 Naissance ¦ 👶 Naștere
+🕯️ Décès ¦ 🕯️ Deces
+💍 Mariage ¦ 💍 Căsătorie
+🔨 Métier ¦ 🔨 Meserie
+🏠 Domicile ¦ 🏠 Domiciliu
+un mariage s’ajoute depuis la fiche du couple ¦ o căsătorie se adaugă din fișa cuplului
+D’après le récit de {name} : « {text} » ¦ După povestirea lui {name}: „{text}”
+＋ Ajouter à la fiche ¦ ＋ Adaugă la fișă
+Rien n’est changé sans ton accord : « Ajouter à la fiche » crée un événement avec la phrase du récit comme source. ¦ Nimic nu se schimbă fără acordul tău: „Adaugă la fișă” creează un eveniment cu fraza din povestire ca sursă.
+Essaie des phrases comme « Mon père était boulanger », « Ma mère est née en 1932 à Tulle ». ¦ Încearcă fraze ca „Mon père était boulanger”, „Ma mère est née en 1932 à Tulle”.
+Ajouté à la fiche. ¦ Adăugat la fișă.
+Le récit est vide : dicte-le, colle-le ou recopie-le. ¦ Povestirea este goală: dictează, lipește sau transcrie povestirea.
+Le récit de {name} ({date}) ¦ Povestirea lui {name} ({date})
+Récit enregistré (bloc ✨ Trésors de la fiche). ¦ Povestire salvată (blocul ✨ Comori al fișei).
+Trop court : quelqu’un d’obstiné pourrait le deviner en essayant beaucoup de mots de passe sur le fichier. ¦ Prea scurtă: cineva încăpățânat ar putea s-o ghicească încercând multe parole pe fișier.
+Correct pour un partage de quelques semaines. ¦ Acceptabilă pentru o partajare de câteva săptămâni.
+Une branche de famille partagée ¦ O ramură de familie partajată
+{n} retirée (vivantes ou récentes) ¦ {n} scoasă (în viață sau recente)
+Mot de passe copié. ¦ Parolă copiată.
+Personne à partager dans cette branche. ¦ Nimeni de partajat în această ramură.
+Choisis un mot de passe (ou « 🎲 En proposer un »), ou coche « Sans mot de passe ». ¦ Alege o parolă (sau „🎲 Propune una”) sau bifează „Fără parolă”.
+Ce mot de passe est court : quelqu’un d’obstiné pourrait le trouver en essayant beaucoup de mots de passe. Fabriquer le fichier quand même ? ¦ Această parolă este scurtă: cineva încăpățânat ar putea s-o găsească încercând multe parole. Creezi fișierul oricum?
+Mot de passe faible ¦ Parolă slabă
+Choisis jusqu’à quand le partage est valable. ¦ Alege până când este valabilă partajarea.
+Une branche de la famille — partagée par la famille ¦ O ramură a familiei — partajată de familie
+Fichier prêt : envoie-le, et donne le mot de passe à part. ¦ Fișier gata: trimite-l și dă parola separat.
+Aucun lieu dans l’arbre ¦ Niciun loc în arbore
+✅ J’y suis allé ¦ ✅ Am fost acolo
+Retirer le tampon ¦ Scoate ștampila
+Il faut des lieux placés sur la carte et datés pour compter les kilomètres ¦ E nevoie de locuri plasate pe hartă și datate ca să numeri kilometrii
+Il faut au moins un lieu où deux personnes de l’arbre ont vécu ¦ E nevoie de cel puțin un loc unde au trăit două persoane din arbore
+{place} : {y} ans de présence de la famille, sur {n} génération d’ancêtres ¦ {place}: {y} ani de prezență a familiei, pe parcursul a {n} generație de strămoși
+{place} : {y} ans de présence de la famille ¦ {place}: {y} ani de prezență a familiei
+portrait ✓ ¦ portret ✓
+✨ Récit d’une vie : un diaporama tout fait à partir de cette fiche ¦ ✨ Povestea unei vieți: o prezentare de diapozitive gata făcută din această fișă
+Récit d’une vie en diaporama ¦ Povestea unei vieți ca prezentare de diapozitive
+Pour tes 18 ans ¦ Pentru cei 18 ani ai tăi
+Quand ¦ Când
+Raconte ¦ Povestește
+Passeport ¦ Pașaport
+Barbe ¦ Barbă
