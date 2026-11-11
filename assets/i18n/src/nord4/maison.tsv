@@ -919,3 +919,1203 @@ maison|Angles ¦ Kulmat ¦ Szögek
 maison|Écurie ¦ Talli ¦ Istálló
 maison|Croix ¦ Risti ¦ Kereszt
 couleur|aucune ¦ ei mitään ¦ nincs
+Rez-de-chaussée ¦ Pohjakerros ¦ Földszint
+Cave ¦ Kellari ¦ Pince
+1er étage ¦ 1. kerros ¦ 1. emelet
+{level}e étage ¦ {level}. kerros ¦ {level}. emelet
+Maison de famille ¦ Suvun talo ¦ Családi ház
+Époque sans nom ¦ Nimetön aikakausi ¦ Névtelen korszak
+Barre du haut ¦ Yläpalkki ¦ Felső sáv
+Barre de la vue 3D ¦ 3D-näkymän palkki ¦ A 3D nézet sávja
+Vues dessus / face / côté ¦ Näkymät ylhäältä / edestä / sivulta ¦ Felül- / elöl- / oldalnézet
+Revêtement sur {what} de mur ¦ Seinäpinnoite: {what} ¦ Falburkolat: {what}
+=face ¦ puoli|puolta ¦ oldal|oldal
+=mur ¦ seinä|seinää ¦ fal|fal
+=étage ¦ kerros|kerrosta ¦ szint|szint
+=trait ¦ viiva|viivaa ¦ vonal|vonal
+=objet trouvé ¦ esine löytyi|esinettä löytyi ¦ talált tárgy|talált tárgy
+Aucune pièce tracée ¦ Huoneita ei ole piirretty ¦ Nincs megrajzolt helyiség
+Pièces et surfaces ¦ Huoneet ja pinta-alat ¦ Helyiségek és területek
+Plan du ¦ Pohjapiirros ajalta ¦ Alaprajz, dátum:
+double hauteur (vide au-dessus) ¦ kaksinkertainen korkeus (avoin yläpuolelta) ¦ dupla belmagasság (fölötte nyitott)
+trémie de l’escalier ¦ portaikon aukko ¦ lépcsőnyílás
+escalier (plancher fermé) ¦ portaat (lattia suljettu) ¦ lépcső (zárt födém)
+VIDE ¦ AVOIN ¦ ÜRES TÉR
+vide sur {name} ¦ avoin tilaan {name} ¦ légtér ide: {name}
+maison|Vide ¦ Avoin tila ¦ Légtér
+sans plancher ¦ ilman lattiaa ¦ födém nélkül
+m² Carrez ¦ m² Carrez ¦ m² Carrez
+Moins de 1,80 m sous la pente du toit ¦ Alle 1,80 m katon kaltevuuden alla ¦ 1,80 m-nél kevesebb a tetőlejtés alatt
+🕰 Fantôme : {name} ¦ 🕰 Haamu: {name} ¦ 🕰 Szellem: {name}
+⌒ {len} · flèche {arrow} ¦ ⌒ {len} · nuoli {arrow} ¦ ⌒ {len} · ívmagasság {arrow}
+{len} pour fermer en rectangle ¦ {len} suorakulmion sulkemiseen ¦ {len} a téglalap bezárásához
+départ (clic : fermer) ¦ alku (napsautus: sulje) ¦ kezdőpont (kattintás: bezárás)
+maison|départ ¦ alku ¦ kezdőpont
+Posé sous l’étage « {name} ». ¦ Sijoitettu kerroksen ”{name}” alle. ¦ A(z) „{name}” szint alá helyezve.
+📐 {area} m² au sol ¦ 📐 {area} m² lattiapinta-alaa ¦ 📐 {area} m² alapterület
+{area} m² au sol ¦ {area} m² lattiapinta-alaa ¦ {area} m² alapterület
+{carrez} m² loi Carrez ¦ {carrez} m² Carrez-lain mukaan ¦ {carrez} m² a Carrez-törvény szerint
+{area} m² loi Carrez (hauteur ≥ 1,80 m) ¦ {area} m² Carrez-lain mukaan (korkeus ≥ 1,80 m) ¦ {area} m² a Carrez-törvény szerint (magasság ≥ 1,80 m)
+(là où l’on tient debout : 1,80 m et plus, hachuré sur le plan) ¦ (missä voi seistä: 1,80 m tai enemmän, viivoitettu pohjapiirrokseen) ¦ (ahol fel lehet állni: 1,80 m vagy több, az alaprajzon vonalkázva)
+Habitant : {role} — ouvrir la fiche ¦ Asukas: {role} — avaa kortti ¦ Lakó: {role} — adatlap megnyitása
+Habitant — ouvrir la fiche ¦ Asukas — avaa kortti ¦ Lakó — adatlap megnyitása
+Liée à la pièce « {room} » — ouvrir la fiche ¦ Yhdistetty huoneeseen ”{room}” — avaa kortti ¦ A(z) „{room}” helyiséghez kapcsolva — adatlap megnyitása
+{label} — époque : {era} — ouvrir la fiche où il est ¦ {label} — aikakausi: {era} — avaa kortti, jolla se on ¦ {label} — korszak: {era} — az adatlap megnyitása, amelyen szerepel
+{label} — ouvrir la fiche où il est ¦ {label} — avaa kortti, jolla se on ¦ {label} — az adatlap megnyitása, amelyen szerepel
+🏷 Les souvenirs de la maison ¦ 🏷 Talon muistot ¦ 🏷 A ház emlékei
+Aller à « {where} » et voir le souvenir ¦ Siirry kohteeseen ”{where}” ja katso muisto ¦ Ugrás ide: „{where}”, és az emlék megtekintése
+Soleil calculé pour {place} ({lat}° N). ¦ Aurinko laskettu paikalle {place} ({lat}° N). ¦ A nap helyzete ide számolva: {place} ({lat}° É).
+le lieu de la maison ¦ talon paikka ¦ a ház helye
+Le lieu de la maison n’a pas de coordonnées : soleil calculé pour le centre de la France. ¦ Talon paikalla ei ole koordinaatteja: aurinko laskettu Ranskan keskipisteeseen. ¦ A ház helyének nincsenek koordinátái: a nap helyzete Franciaország közepére számolva.
+La nuit, les lampes posées s’allument (Vue 3D → ☀️ Lumière). ¦ Yöllä sijoittamasi lamput syttyvät (3D-näkymä → ☀️ Valo). ¦ Éjjel a lerakott lámpák felgyulladnak (3D nézet → ☀️ Fény).
+Pour commencer : ⬚ <b>glisse une pièce</b> (ses murs se font tout seuls), ou ▬ trace les murs un par un. ▨ Un <b>vide</b> (mezzanine, double hauteur) se dessine à l’étage du dessus. Puis 🚪 portes et 🪟 fenêtres (un clic sur un mur), et le <b>mobilier</b> (onglet à côté). ¦ Aloita näin: ⬚ <b>vedä huone</b> (sen seinät syntyvät itsestään) tai ▬ piirrä seinät yksi kerrallaan. ▨ <b>Avoin tila</b> (parvi, kaksinkertainen korkeus) piirretään yläkerrokseen. Sitten 🚪 ovet ja 🪟 ikkunat (napsautus seinään) ja <b>huonekalut</b> (viereinen välilehti). ¦ Kezdésként: ⬚ <b>húzz ki egy helyiséget</b> (a falai maguktól elkészülnek), vagy ▬ rajzold meg a falakat egyenként. ▨ A <b>légteret</b> (galéria, dupla belmagasság) a fölötte lévő szinten kell megrajzolni. Aztán 🚪 ajtók és 🪟 ablakok (egy kattintás egy falra), és a <b>bútorok</b> (a szomszédos lap).
+{area} m² habitables ¦ {area} m² asuinpinta-alaa ¦ {area} m² lakóterület
+Face côté {rooms} ¦ Puoli huoneisiin {rooms} päin ¦ A(z) {rooms} felé néző oldal
+Face extérieure (façade) ¦ Ulkopuoli (julkisivu) ¦ Külső oldal (homlokzat)
+Les murs de « {name} » ¦ Huoneen ”{name}” seinät ¦ „{name}” falai
+la pièce ¦ huone ¦ a helyiség
+Les murs de toutes les pièces de cet étage ¦ Tämän kerroksen kaikkien huoneiden seinät ¦ A szint összes helyiségének falai
+Toutes les façades de cet étage ¦ Tämän kerroksen kaikki julkisivut ¦ A szint összes homlokzata
+Les murs de toutes les pièces de la maison (tous les étages) ¦ Talon kaikkien huoneiden seinät (kaikki kerrokset) ¦ A ház összes helyiségének falai (minden szint)
+Toutes les façades de la maison (tous les étages) ¦ Talon kaikki julkisivut (kaikki kerrokset) ¦ A ház összes homlokzata (minden szint)
+Vide sur « {room} » ({floor}). ¦ Avoin tilaan ”{room}” ({floor}). ¦ Légtér ide: „{room}” ({floor}).
+Vide sur l’étage « {floor} ». ¦ Avoin kerrokseen ”{floor}”. ¦ Légtér erre a szintre: „{floor}”.
+⚠️ C’est l’étage le plus bas : ce vide n’ouvre sur rien. ¦ ⚠️ Tämä on alin kerros: tämä avoin tila ei avaudu mihinkään. ¦ ⚠️ Ez a legalsó szint: ez a légtér semmire sem nyílik.
+{w} × {d} hors tout · périmètre {p} ¦ {w} × {d} ulkomitat · ympärysmitta {p} ¦ {w} × {d} teljes méret · kerület {p}
+La face de {walls} tournée vers la pièce. ¦ Seinän {walls} huoneeseen päin oleva puoli. ¦ A(z) {walls} helyiség felé néző oldala.
+Années de {name} ¦ Vuodet: {name} ¦ {name} évei
+Hauteur : celle de l’étage + le plancher ({h}) ¦ Korkeus: kerroksen korkeus + välipohja ({h}) ¦ Magasság: a szint magassága + a födém ({h})
+={n} marches de {rise} cm, giron {going} cm · 2 h + g = {sum} cm ¦ {n} askelma, nousu {rise} cm, etenemä {going} cm · 2 n + e = {sum} cm|{n} askelmaa, nousu {rise} cm, etenemä {going} cm · 2 n + e = {sum} cm ¦ {n} lépcsőfok, {rise} cm magas, belépő {going} cm · 2 m + b = {sum} cm|{n} lépcsőfok, {rise} cm magas, belépő {going} cm · 2 m + b = {sum} cm
+Ouvrir le plancher au-dessus (« {name} ») ¦ Avaa yläpuolinen lattia (”{name}”) ¦ A fölötte lévő födém megnyitása („{name}”)
+Ouvrir le plancher au-dessus ¦ Avaa yläpuolinen lattia ¦ A fölötte lévő födém megnyitása
+posé sur « {name} » : il le suit ¦ sijoitettu kohteen ”{name}” päälle: se seuraa sitä ¦ a(z) „{name}” elemre helyezve: követi azt
+un objet ¦ esine ¦ egy tárgy
+Georgia (de départ) ¦ Georgia (oletus) ¦ Georgia (alapértelmezett)
+État d’origine ¦ Alkuperäinen tila ¦ Eredeti állapot
+Époque modifiée ¦ Aikakausi muutettu ¦ Korszak módosítva
+Nouvelle époque : {name} ¦ Uusi aikakausi: {name} ¦ Új korszak: {name}
+Époques retirées (le plan « {name} » reste, sans date) ¦ Aikakaudet poistettu (pohjapiirros ”{name}” jää ilman päivämäärää) ¦ Korszakok eltávolítva (a(z) „{name}” alaprajz megmarad, dátum nélkül)
+Époque « {name} » supprimée avec son plan ¦ Aikakausi ”{name}” poistettu pohjapiirroksineen ¦ „{name}” korszak törölve az alaprajzával együtt
+{name} est déjà rattaché. ¦ {name} on jo yhdistetty. ¦ {name} már kapcsolódik.
+🏠 un habitant y est ¦ 🏠 siellä on asukas ¦ 🏠 van benne lakó
+Posé sur « {name} » ¦ Sijoitettu kohteen ”{name}” päälle ¦ A(z) „{name}” elemre helyezve
+Posé au sol ¦ Sijoitettu lattialle ¦ A padlóra helyezve
+Pièce {n} ¦ Huone {n} ¦ {n}. helyiség
+Pièce de {area} m² ¦ Huone, {area} m² ¦ {area} m²-es helyiség
+Vide sur {name} ¦ Avoin tilaan {name} ¦ Légtér ide: {name}
+Mezzanine ¦ Parvi ¦ Galéria
+🏗 Mezzanine posée (étage « Mezzanine » ajouté) : vide sur {room}, garde-corps et escalier. ¦ 🏗 Parvi sijoitettu (kerros ”Parvi” lisätty): avoin tilaan {room}, kaide ja portaat. ¦ 🏗 Galéria elhelyezve („Galéria” szint hozzáadva): légtér ide: {room}, korlát és lépcső.
+🏗 Mezzanine posée à l’étage « {floor} » : vide sur {room}, garde-corps et escalier. ¦ 🏗 Parvi sijoitettu kerrokseen ”{floor}”: avoin tilaan {room}, kaide ja portaat. ¦ 🏗 Galéria elhelyezve a(z) „{floor}” szinten: légtér ide: {room}, korlát és lépcső.
+{len} cm, c’est trop court : pour des mètres, écris « {typed} m ». ¦ {len} cm on liian lyhyt: jos tarkoitat metrejä, kirjoita ”{typed} m”. ¦ {len} cm túl rövid: méterhez írd így: „{typed} m”.
+{name} posé ¦ {name} sijoitettu ¦ {name} elhelyezve
+{msg} — et maintenant le deuxième point. ¦ {msg} — ja nyt toinen piste. ¦ {msg} — és most a második pont.
+À l’échelle : la longueur choisie mesure {len}. Puis « ✏️ Décalquer les murs » (onglet Étage). ¦ Mittakaavassa: valitun pituuden mitta on {len}. Sitten ”✏️ Jäljennä seinät” (Kerros-välilehti). ¦ Méretarányosan: a kiválasztott hossz {len}. Aztán „✏️ Falak átrajzolása” (Szint lap).
+Plan ancien redressé ({deg}°) ¦ Vanha pohjapiirros suoristettu ({deg}°) ¦ Régi alaprajz kiegyenesítve ({deg}°)
+Souvenir ¦ Muisto ¦ Emlék
+🔗 Relier un souvenir à « {name} » ¦ 🔗 Yhdistä muisto kohteeseen ”{name}” ¦ 🔗 Emlék összekapcsolása ezzel: „{name}”
+Un souvenir pour « {name} » ¦ Muisto kohteelle ”{name}” ¦ Egy emlék ehhez: „{name}”
+✍ Un récit pour « {name} » ¦ ✍ Kertomus kohteelle ”{name}” ¦ ✍ Egy történet ehhez: „{name}”
+👤 Une personne liée à « {name} » ¦ 👤 Kohteeseen ”{name}” liittyvä henkilö ¦ 👤 Egy személy, aki ehhez kapcsolódik: „{name}”
+Ce qui s’y est passé ¦ Mitä siellä tapahtui ¦ Ami ott történt
+Réglage « {name} » appliqué ¦ Asetus ”{name}” otettu käyttöön ¦ „{name}” beállítás alkalmazva
+Ce réglage est celui d’un autre outil (« {tool} ») : importe-le dans cet outil-là, pas dans la Maison. ¦ Tämä asetus kuuluu toiseen työkaluun (”{tool}”): tuo se siihen työkaluun, ei Taloon. ¦ Ez a beállítás egy másik eszközé („{tool}”): abba importáld, ne a Házba.
+Un réglage s’appelle déjà « {name} ». Nom du réglage importé : ¦ Asetuksen nimi ”{name}” on jo käytössä. Tuodun asetuksen nimi: ¦ Már van „{name}” nevű beállítás. Az importált beállítás neve:
+{lines} et {texts}. ¦ {lines} ja {texts}. ¦ {lines} és {texts}.
+Chaque trait devient un mur ; un contour fermé sur un calque « pièce / room » devient une pièce, nommée par le texte posé dedans. ¦ Jokaisesta viivasta tulee seinä; suljettu ääriviiva tasolla ”pièce / room” muuttuu huoneeksi, joka nimetään sen sisällä olevan tekstin mukaan. ¦ Minden vonalból fal lesz; egy „pièce / room” rétegen lévő zárt körvonal helyiséggé válik, a benne álló szöveg lesz a neve.
+Pas repris : {what}. ¦ Ei otettu mukaan: {what}. ¦ Nem került át: {what}.
+Cet étage ({name}), en plus de ce qui y est ¦ Tämä kerros ({name}) siellä jo olevan lisäksi ¦ Ez a szint ({name}), a rajta már meglévők mellé
+{walls}, {rooms} et {texts} importés. ¦ {walls}, {rooms} ja {texts} tuotu. ¦ {walls}, {rooms} és {texts} importálva.
+🔁 Répéter cette fenêtre ¦ 🔁 Toista tämä ikkuna ¦ 🔁 Ablak ismétlése
+🔁 Répéter cette porte ¦ 🔁 Toista tämä ovi ¦ 🔁 Ajtó ismétlése
+Des copies le long du même mur, vers son autre bout (mur de {len}). ¦ Kopioita saman seinän suuntaisesti sen toiseen päähän (seinä {len}). ¦ Másolatok ugyanazon a falon, a másik vége felé (fal: {len}).
+🔁 Répéter « {name} » ¦ 🔁 Toista ”{name}” ¦ 🔁 „{name}” ismétlése
+{name} (à {len}) ¦ {name} ({len} päässä) ¦ {name} ({len} távolságra)
+{copies} de « {name} ». ¦ {copies}: ”{name}”. ¦ {copies}: „{name}”.
+Vue 3D ¦ 3D-näkymä ¦ 3D nézet
+Au-dessus : {name} ¦ Yläpuolella: {name} ¦ Fölötte: {name}
+En dessous : {name} (cave, sous-sol) ¦ Alapuolella: {name} (kellari, pohjakerros) ¦ Alatta: {name} (pince, alagsor)
+Reprendre les murs de « {name} » (et ses fenêtres) ¦ Kopioi huoneen ”{name}” seinät (ja ikkunat) ¦ „{name}” falainak átvétele (az ablakaival)
+{name} ajouté ¦ {name} lisätty ¦ {name} hozzáadva
+Étages ¦ Kerrokset ¦ Szintek
+{name} (murs repris) ¦ {name} (seinät kopioitu) ¦ {name} (falak átvéve)
+Étage « {name} » supprimé ¦ Kerros ”{name}” poistettu ¦ „{name}” szint törölve
+Maison de {place} ¦ Talo, {place} ¦ Ház, {place}
+✓ Toit retiré ¦ ✓ Katto poistettu ¦ ✓ Tető eltávolítva
+✓ Toit ajouté : il se voit depuis « {name} », l’étage du haut ¦ ✓ Katto lisätty: se näkyy ylimmästä kerroksesta ”{name}” ¦ ✓ Tető hozzáadva: a legfelső szintről látszik („{name}”)
+✓ Toit ajouté : il se pose sur les murs (aucun mur pour l’instant) ¦ ✓ Katto lisätty: se asettuu seinien päälle (ei vielä seiniä) ¦ ✓ Tető hozzáadva: a falakra kerül (még nincs fal)
+✓ Toit ajouté ¦ ✓ Katto lisätty ¦ ✓ Tető hozzáadva
+Arrêt {n} de la visite guidée ¦ Opastetun kierroksen pysähdys {n} ¦ A vezetett bejárás {n}. állomása
+{label} — ouvrir la fiche ¦ {label} — avaa kortti ¦ {label} — adatlap megnyitása
+Habitant ¦ Asukas ¦ Lakó
+{label} — époque : {era} ¦ {label} — aikakausi: {era} ¦ {label} — korszak: {era}
+{what} sur {total} ¦ {what} / {total} ¦ {what} / {total}
+Supprimer la maison « {name} » ? ¦ Poistetaanko talo ”{name}”? ¦ Törlöd a(z) „{name}” házat?
+Supprimer la maison ¦ Poista talo ¦ Ház törlése
+🕰 époque : {name} ¦ 🕰 aikakausi: {name} ¦ 🕰 korszak: {name}
+aucune époque choisie ¦ aikakautta ei valittu ¦ nincs kiválasztott korszak
+mètres ¦ metriä ¦ méter
+centimètres ¦ senttimetriä ¦ centiméter
+millimètres ¦ millimetriä ¦ milliméter
+pieds ¦ jalkaa ¦ láb
+toises (1,949 m) ¦ toises (1,949 m) ¦ toise (1,949 m)
+pieds du roi (32,48 cm) ¦ pieds du roi (32,48 cm) ¦ pied du roi (32,48 cm)
+aunes de Paris (1,188 m) ¦ aunes de Paris (1,188 m) ¦ aune de Paris (1,188 m)
+perches de Paris (18 pieds, 5,847 m) ¦ perches de Paris (18 pieds, 5,847 m) ¦ perche de Paris (18 pied, 5,847 m)
+perches royales (22 pieds, 7,146 m) ¦ perches royales (22 pieds, 7,146 m) ¦ perche royale (22 pied, 7,146 m)
+pas (environ 75 cm) ¦ askelta (noin 75 cm) ¦ lépés (kb. 75 cm)
+Plâtre blanc ¦ Valkoinen kipsi ¦ Fehér gipsz
+Enduit à la chaux ¦ Kalkkirappaus ¦ Meszes vakolat
+Pierre apparente ¦ Näkyvä kivi ¦ Látszó kő
+Brique ¦ Tiili ¦ Tégla
+Colombage (pans de bois) ¦ Ristikko (puurunko) ¦ Favázas (paticsfal)
+Lambris de bois ¦ Puupaneeli ¦ Falburkolat fából
+Papier peint ¦ Tapetti ¦ Tapéta
+Carrelage ¦ Laatoitus ¦ Csempe
+Béton ¦ Betoni ¦ Beton
+Torchis ¦ Savilaasti (punos ja savi) ¦ Vályog (paticsfal)
+Enduit, crépi ¦ Rappaus, roiskerappaus ¦ Vakolat, fröcskölt vakolat
+Pierre de taille ¦ Hakattu kivi ¦ Faragott kő
+Papier peint à rayures ¦ Raidallinen tapetti ¦ Csíkos tapéta
+Papier peint à fleurs ¦ Kukallinen tapetti ¦ Virágos tapéta
+Toile de Jouy ¦ Toile de Jouy ¦ Toile de Jouy
+Parquet ¦ Parketti ¦ Parketta
+Parquet à bâtons rompus ¦ Kalanruotoparketti ¦ Halszálkás parketta
+Tomettes ¦ Terrakottalaatat ¦ Terrakotta padlólapok
+Carreaux de ciment ¦ Sementtilaatat ¦ Cementlapok
+Damier noir et blanc ¦ Mustavalkoinen shakkiruutu ¦ Fekete-fehér sakktábla
+Dalles de pierre ¦ Kivilaatat ¦ Kőlapok
+Terre battue ¦ Tamppattu maa ¦ Döngölt föld
+Moquette, tapis ¦ Kokolattiamatto, matto ¦ Padlószőnyeg, szőnyeg
+Herbe (extérieur) ¦ Ruoho (ulkona) ¦ Fű (kültér)
+Gravier, cour ¦ Sora, piha ¦ Kavics, udvar
+Bois clair (hêtre, pin) ¦ Vaalea puu (pyökki, mänty) ¦ Világos fa (bükk, fenyő)
+Chêne ¦ Tammi ¦ Tölgy
+Noyer ¦ Pähkinäpuu ¦ Dió
+Merisier ¦ Kirsikkapuu ¦ Cseresznyefa
+Bois foncé (ébène, bois ciré) ¦ Tumma puu (eebenpuu, vahattu puu) ¦ Sötét fa (ében, viaszolt fa)
+Bois peint ¦ Maalattu puu ¦ Festett fa
+Métal, acier ¦ Metalli, teräs ¦ Fém, acél
+Fonte, fer forgé ¦ Valurauta, takorauta ¦ Öntöttvas, kovácsoltvas
+Laiton, bronze, doré ¦ Messinki, pronssi, kullattu ¦ Sárgaréz, bronz, aranyozott
+Zinc, fer-blanc ¦ Sinkki, peltiä ¦ Cink, bádog
+Pierre ¦ Kivi ¦ Kő
+Marbre ¦ Marmori ¦ Márvány
+Grès, terre cuite ¦ Kivitavara, terrakotta ¦ Kőagyag, terrakotta
+Faïence, porcelaine, émail ¦ Fajanssi, posliini, emali ¦ Fajansz, porcelán, zománc
+Tissu ¦ Kangas ¦ Szövet
+Velours ¦ Sametti ¦ Bársony
+Cuir ¦ Nahka ¦ Bőr
+Osier, rotin ¦ Paju, rottinki ¦ Vessző, rattan
+Paille ¦ Olki ¦ Szalma
+Verre ¦ Lasi ¦ Üveg
+Sans pieds ¦ Ei jalkoja ¦ Láb nélkül
+Pieds droits ¦ Suorat jalat ¦ Egyenes lábak
+Pieds tournés ¦ Sorvatut jalat ¦ Esztergált lábak
+Pieds boules (miches) ¦ Pallojalat ¦ Gömblábak
+Patins ¦ Jalakset ¦ Csúszótalpak
+Roulettes ¦ Pyörät ¦ Görgők
+Barreaux de bois ¦ Puiset pinnat ¦ Fa korlátpálcák
+Métal (barreaux fins) ¦ Metalli (ohuet pinnat) ¦ Fém (vékony pálcák)
+Muret plein ¦ Umpinainen matala muuri ¦ Tömör mellvéd
+Métiers, ferme ¦ Ammatit, maatila ¦ Mesterségek, tanya
+Extérieur ¦ Ulkona ¦ Kültér
+sa chambre ¦ hänen huoneensa ¦ a szobája
+né ici ¦ syntynyt täällä ¦ itt született
+née ici ¦ syntynyt täällä ¦ itt született
+y a vécu ¦ asui täällä ¦ itt élt
+y est mort ¦ kuoli täällä ¦ itt halt meg
+y est morte ¦ kuoli täällä ¦ itt halt meg
+les parents ¦ vanhemmat ¦ a szülők
+les enfants ¦ lapset ¦ a gyerekek
+locataire ¦ vuokralainen ¦ bérlő
+fermier ¦ vuokraviljelijä ¦ haszonbérlő
+domestique ¦ palvelija ¦ cseléd
+servante ¦ piika ¦ szolgáló
+valet ¦ renki ¦ béres
+nourrice ¦ imettäjä ¦ dajka
+pensionnaire ¦ täysihoitolainen ¦ kosztos
+atelier ¦ työpaja ¦ műhely
+boutique ¦ kauppa ¦ bolt
+Nom de la maison ¦ Talon nimi ¦ A ház neve
+Réglages de l’aimant : grille, coins, angles, précision et 💾 réglages enregistrés ¦ Magneettikohdistuksen asetukset: ruudukko, kulmat, kulmat asteina, tarkkuus ja 💾 tallennetut asetukset ¦ A mágneses igazítás beállításai: rács, sarkok, szögek, pontosság és 💾 mentett beállítások
+Réglages de l’aimant ¦ Magneettikohdistuksen asetukset ¦ A mágneses igazítás beállításai
+📐 Un plan ancien, un cadastre, à calquer… ¦ 📐 Vanha pohjapiirros tai maarekisterikartta jäljennettäväksi… ¦ 📐 Régi alaprajz, kataszteri térkép átrajzoláshoz…
+🖼️ Un objet en image (vue de dessus)… ¦ 🖼️ Esine kuvana (ylhäältä)… ¦ 🖼️ Tárgy képként (felülnézet)…
+🧊 Un objet 3D (OBJ, STL, glTF, GLB)… ¦ 🧊 3D-esine (OBJ, STL, glTF, GLB)… ¦ 🧊 3D tárgy (OBJ, STL, glTF, GLB)…
+🏠 Une maison (fichier .json)… ¦ 🏠 Talo (.json-tiedosto)… ¦ 🏠 Egy ház (.json fájl)…
+📐 Un plan DXF (AutoCAD, LibreCAD, architecte, notaire)… ¦ 📐 DXF-piirustus (AutoCAD, LibreCAD, arkkitehti, notaari)… ¦ 📐 DXF-rajz (AutoCAD, LibreCAD, építész, közjegyző)…
+Le plan (PNG, JPG, PDF, SVG, impression), la vue 3D, le fichier de la maison ¦ Pohjapiirros (PNG, JPG, PDF, SVG, tulostus), 3D-näkymä, talon tiedosto ¦ Az alaprajz (PNG, JPG, PDF, SVG, nyomtatás), a 3D nézet, a ház fájlja
+Choisir, déplacer ¦ Valitse, siirrä ¦ Kijelölés, mozgatás
+Déplacer la vue, ou barre d’espace ¦ Siirrä näkymää tai välilyönti ¦ Nézet mozgatása, vagy szóköz
+Pièce rectangulaire, murs compris : glisser ¦ Suorakulmainen huone seinineen: vedä ¦ Téglalap alakú helyiség falakkal: húzd ki
+Vide, trémie, double hauteur : glisser, sans murs ¦ Avoin tila, aukko, kaksinkertainen korkeus: vedä, ilman seiniä ¦ Légtér, nyílás, dupla belmagasság: húzd ki, falak nélkül
+Mur : un clic par coin, double-clic ou Entrée pour finir ¦ Seinä: yksi napsautus kulmaa kohden, lopeta kaksoisnapsautuksella tai Enterillä ¦ Fal: sarkonként egy kattintás, dupla kattintás vagy Enter a befejezéshez
+Pièce de forme libre, sans murs : un clic par coin ¦ Vapaamuotoinen huone ilman seiniä: yksi napsautus kulmaa kohden ¦ Szabad alakú helyiség falak nélkül: sarkonként egy kattintás
+Porte : clic sur un mur ¦ Ovi: napsauta seinää ¦ Ajtó: kattints egy falra
+Fenêtre : clic sur un mur ¦ Ikkuna: napsauta seinää ¦ Ablak: kattints egy falra
+Cote, mesure : deux clics ¦ Mitta, mittaus: kaksi napsautusta ¦ Méretvonal, mérés: két kattintás
+Étiquette à flèche : un clic sur le point, un clic où écrire ¦ Nuolellinen merkintä: napsauta pistettä ja sitten kohtaa, johon kirjoitetaan ¦ Nyilas címke: egy kattintás a pontra, egy oda, ahová írsz
+Une autre époque de la maison en fantôme (celle du calque 🕰, sinon l’époque d’avant) : murs très transparents, arêtes en pointillés ¦ Talon toinen aikakausi haamuna (🕰-tason aikakausi, muuten edellinen aikakausi): hyvin läpinäkyvät seinät, katkoviivaiset reunat ¦ A ház egy másik korszaka szellemként (a 🕰 rétegé, különben az előző korszak): nagyon átlátszó falak, pontozott élek
+Deux clics sur la maison : la distance (et la hauteur entre les deux points) ¦ Kaksi napsautusta taloon: etäisyys (ja korkeus pisteiden välillä) ¦ Két kattintás a házon: a távolság (és a két pont közti magasság)
+Tous les étages ¦ Kaikki kerrokset ¦ Minden szint
+Murs coupés (voir dedans) ¦ Leikatut seinät (näe sisään) ¦ Vágott falak (belátni)
+Murs coupés ¦ Leikatut seinät ¦ Vágott falak
+🕰 Autre époque ¦ 🕰 Toinen aikakausi ¦ 🕰 Másik korszak
+Vue de dessus ¦ Näkymä ylhäältä ¦ Felülnézet
+Vue de face ¦ Näkymä edestä ¦ Elölnézet
+Vue de côté ¦ Näkymä sivulta ¦ Oldalnézet
+Dessus ¦ Ylhäältä ¦ Felül
+Face ¦ Edestä ¦ Elöl
+Le soleil selon l’heure, la date et le lieu ; la nuit, les lampes ¦ Aurinko kellonajan, päivämäärän ja paikan mukaan; yöllä lamput ¦ A nap az idő, a dátum és a hely szerint; éjjel a lámpák
+Visiter la maison à hauteur d’yeux ¦ Kierrä talossa silmien korkeudella ¦ A ház bejárása szemmagasságban
+☀️ Lumière ¦ ☀️ Valo ¦ ☀️ Fény
+🚶 Visiter ¦ 🚶 Kierrä ¦ 🚶 Bejárás
+📏 Mesurer ¦ 📏 Mittaa ¦ 📏 Mérés
+Plan 2D ¦ 2D-pohjapiirros ¦ 2D alaprajz
+Toit ¦ Katto ¦ Tető
+Cotes ¦ Mitat ¦ Méretek
+Mobilier ¦ Huonekalut ¦ Bútorok
+Propriétés de l’élément choisi ¦ Valitun kohteen ominaisuudet ¦ A kiválasztott elem tulajdonságai
+Mobilier : meubles, portes, fenêtres à poser ¦ Huonekalut: sijoitettavat kalusteet, ovet, ikkunat ¦ Bútorok: elhelyezhető berendezések, ajtók, ablakok
+L’étage affiché : niveaux, hauteur, sol ¦ Näytetty kerros: tasot, korkeus, lattia ¦ A megjelenített szint: szintek, magasság, padló
+La maison : nom, époque, réglages généraux ¦ Talo: nimi, aikakausi, yleiset asetukset ¦ A ház: név, korszak, általános beállítások
+la maison est fermée ¦ talo on suljettu ¦ a ház be van zárva
+d’autres changements ont suivi : utilise ↶ dans la barre du haut ¦ muita muutoksia on tehty sen jälkeen: käytä yläpalkin ↶ ¦ azóta más módosítások is történtek: használd a felső sáv ↶ gombját
+Aimanter : grille, coins et milieux des murs, angles (Alt pour s’en passer) ¦ Magneettikohdistus: ruudukko, seinien kulmat ja keskipisteet, kulmat (Alt ohittaa) ¦ Mágneses igazítás: rács, a falak sarkai és felezőpontjai, szögek (Alt-tal kikapcsolható)
+{walls} ajouté depuis {when} ¦ {walls} lisätty {when} jälkeen ¦ {walls} hozzáadva ekkor óta: {when}
+{walls} ajoutés depuis {when} ¦ {walls} lisätty {when} jälkeen ¦ {walls} hozzáadva ekkor óta: {when}
+{walls} disparu depuis {when} ¦ {walls} kadonnut {when} jälkeen ¦ {walls} eltűnt ekkor óta: {when}
+{walls} disparus depuis {when} ¦ {walls} kadonneet {when} jälkeen ¦ {walls} eltűnt ekkor óta: {when}
+{walls} plus là en {when} ¦ {walls} ei enää paikallaan ajankohtana {when} ¦ {walls} már nincs meg ekkor: {when}
+{walls} ajouté en {when} ¦ {walls} lisätty ajankohtana {when} ¦ {walls} hozzáadva ekkor: {when}
+{walls} ajoutés en {when} ¦ {walls} lisätty ajankohtana {when} ¦ {walls} hozzáadva ekkor: {when}
+={n} souvenir : clic pour voir ¦ {n} muisto: napsauta nähdäksesi|{n} muistoa: napsauta nähdäksesi ¦ {n} emlék: kattints a megtekintéshez|{n} emlék: kattints a megtekintéshez
+={n} souvenirs : clic pour voir ¦ {n} muisto: napsauta nähdäksesi|{n} muistoa: napsauta nähdäksesi ¦ {n} emlék: kattints a megtekintéshez|{n} emlék: kattints a megtekintéshez
+Glisser : la pointe de la flèche ¦ Vedä: nuolen kärki ¦ Húzd: a nyíl hegye
+Voir un autre étage, ou le même étage à une autre époque, en transparence ¦ Näytä toinen kerros tai sama kerros toisena aikakautena läpikuultavana ¦ Egy másik szint, vagy ugyanaz a szint egy másik korszakban, áttetszően
+Calque d’un autre étage ou d’une autre époque ¦ Toisen kerroksen tai aikakauden taso ¦ Másik szint vagy másik korszak rétege
+Calque d’un autre étage ou d’une époque ¦ Toisen kerroksen tai aikakauden taso ¦ Másik szint vagy egy korszak rétege
+👻 Calque : non ¦ 👻 Taso: ei ¦ 👻 Réteg: nincs
+👻 Dessous ¦ 👻 Alapuolella ¦ 👻 Alatta
+👻 Dessus ¦ 👻 Yläpuolella ¦ 👻 Fölötte
+👻 Les deux ¦ 👻 Molemmat ¦ 👻 Mindkettő
+🕰 Époque d’avant ¦ 🕰 Edellinen aikakausi ¦ 🕰 Előző korszak
+🕰 Époque d’après ¦ 🕰 Seuraava aikakausi ¦ 🕰 Következő korszak
+🕰 Choisir une époque… ¦ 🕰 Valitse aikakausi… ¦ 🕰 Korszak kiválasztása…
+Ajouter un étage ou une cave ¦ Lisää kerros tai kellari ¦ Szint vagy pince hozzáadása
+Les étages : gérer, ajouter, dupliquer, supprimer ¦ Kerrokset: hallitse, lisää, monista, poista ¦ Szintek: kezelés, hozzáadás, megkettőzés, törlés
+Plus d’actions sur les étages ¦ Lisää kerrostoimintoja ¦ További műveletek a szintekkel
+Chercher : lit, poêle, rouet… ¦ Hae: sänky, uuni, rukki… ¦ Keresés: ágy, kályha, rokka…
+Mes objets ¦ Omat esineeni ¦ Saját tárgyaim
+Aucun objet importé pour l’instant ¦ Ei vielä tuotuja esineitä ¦ Még nincs importált tárgy
+« ⤒ Importer » (en haut) un fichier 3D (OBJ, STL, glTF, GLB) ou une image. ¦ ”⤒ Tuo” (ylhäällä) 3D-tiedosto (OBJ, STL, glTF, GLB) tai kuva. ¦ „⤒ Importálás” (fent): 3D fájl (OBJ, STL, glTF, GLB) vagy kép.
+Clic sur un objet : il se pose au milieu de la vue ; glisse-le ensuite à sa place (R ou la poignée ronde pour tourner). ¦ Napsauta esinettä: se asettuu näkymän keskelle; vedä se sitten paikalleen (R tai pyöreä kahva kääntää). ¦ Kattints egy tárgyra: a nézet közepére kerül; aztán húzd a helyére (forgatás: R vagy a kerek fogantyú).
+Nom de l’étage ¦ Kerroksen nimi ¦ A szint neve
+Épaisseur des nouveaux murs ¦ Uusien seinien paksuus ¦ Az új falak vastagsága
+Épaisseur des planchers ¦ Välipohjien paksuus ¦ A födémek vastagsága
+Pas de la grille ¦ Ruudukon väli ¦ Rácsosztás
+⧉ Dupliquer cet étage (murs) ¦ ⧉ Monista tämä kerros (seinät) ¦ ⧉ Szint megkettőzése (falak)
+Supprimer l’étage ¦ Poista kerros ¦ Szint törlése
+Cotes des murs ¦ Seinien mitat ¦ A falak méretei
+Cotes d’ensemble ¦ Kokonaismitat ¦ Befoglaló méretek
+Tableau des pièces sur le plan ¦ Huonetaulukko pohjapiirroksessa ¦ Helyiségtáblázat az alaprajzon
+Cartouche (nom, lieu, époque, étage) ¦ Nimiö (nimi, paikka, aikakausi, kerros) ¦ Szövegmező (név, hely, korszak, szint)
+Affichage sombre (dessin technique) ¦ Tumma näyttö (tekninen piirustus) ¦ Sötét megjelenítés (műszaki rajz)
+Plafond (visite 3D) ¦ Katto (3D-kierros) ¦ Mennyezet (3D bejárás)
+Aucun (ouvert) ¦ Ei mitään (avoin) ¦ Nincs (nyitott)
+Plafond uni ¦ Sileä katto ¦ Sima mennyezet
+Poutres apparentes ¦ Näkyvät palkit ¦ Látszó gerendák
+Couleur du plafond ¦ Katon väri ¦ A mennyezet színe
+Légende : ― ajouté · ┄ disparu ¦ Selite: ― lisätty · ┄ kadonnut ¦ Jelmagyarázat: ― hozzáadva · ┄ eltűnt
+Transparence du calque ¦ Tason läpinäkyvyys ¦ A réteg átlátszósága
+📐 Plan ancien, cadastre ¦ 📐 Vanha pohjapiirros, maarekisteri ¦ 📐 Régi alaprajz, kataszter
+Un cadastre napoléonien, un plan ancien, un croquis : pose-le en fond, mets-le à l’échelle, puis décalque les murs par-dessus. ¦ Napoleoninen maarekisterikartta, vanha pohjapiirros, luonnos: aseta se taustaksi, skaalaa se ja jäljennä seinät sen päälle. ¦ Napóleoni kataszter, régi alaprajz, vázlat: tedd háttérbe, állítsd be a méretarányát, aztán rajzold át rajta a falakat.
+🖼 Choisir l’image… ¦ 🖼 Valitse kuva… ¦ 🖼 Kép kiválasztása…
+Le mettre sous cet étage ¦ Aseta tämän kerroksen alle ¦ A szint alá helyezés
+Visible ¦ Näkyvissä ¦ Látható
+🔒 Verrouillé ¦ 🔒 Lukittu ¦ 🔒 Zárolva
+📏 Mettre à l’échelle ¦ 📏 Skaalaa ¦ 📏 Méretarány beállítása
+Deux clics le long d’un mur de l’image : il devient droit (horizontal ou vertical) ¦ Kaksi napsautusta kuvan seinää pitkin: siitä tulee suora (vaaka tai pysty) ¦ Két kattintás a képen egy fal mentén: egyenes lesz (vízszintes vagy függőleges)
+✓ Fin du décalque ¦ ✓ Lopeta jäljennys ¦ ✓ Átrajzolás vége
+✏️ Décalquer les murs ¦ ✏️ Jäljennä seinät ¦ ✏️ Falak átrajzolása
+🖼 Changer d’image… ¦ 🖼 Vaihda kuva… ¦ 🖼 Kép cseréje…
+🏠 Combles (sous le toit) ¦ 🏠 Ullakko (katon alla) ¦ 🏠 Tetőtér (a tető alatt)
+Pour l’étage le plus haut, sous un toit en pente (onglet Étage → 🏠 Toit) : le plafond suit alors la pente, et la hauteur sous plafond se lit partout sur le plan. ¦ Ylimmälle kerrokselle kaltevan katon alla (Kerros-välilehti → 🏠 Katto): katto seuraa silloin kaltevuutta, ja huonekorkeus näkyy kaikkialla pohjapiirroksessa. ¦ A legfelső szinthez, lejtős tető alatt (Szint lap → 🏠 Tető): ilyenkor a mennyezet követi a lejtést, és a belmagasság mindenhol leolvasható az alaprajzon.
+Combles : le plafond suit la pente du toit ¦ Ullakko: katto seuraa katon kaltevuutta ¦ Tetőtér: a mennyezet követi a tető lejtését
+Hauteur des murs sous le toit ¦ Seinien korkeus katon alla ¦ A falak magassága a tető alatt
+🏠 Toit (vue 3D) ¦ 🏠 Katto (3D-näkymä) ¦ 🏠 Tető (3D nézet)
+Un toit sur l’étage le plus haut ¦ Katto ylimpään kerrokseen ¦ Tető a legfelső szintre
+Deux pans (pignons) ¦ Harjakatto (päädyt) ¦ Nyeregtető (oromfalak)
+Quatre pans (croupes) ¦ Aumakatto ¦ Kontytető
+Pavillon (pointe) ¦ Telttakatto (huippu) ¦ Sátortető (csúcs)
+Un pan (appentis) ¦ Pulpettikatto ¦ Félnyeregtető
+Mansardé ¦ Mansardikatto ¦ Manzárdtető
+Plat (toit-terrasse) ¦ Tasakatto (kattoterassi) ¦ Lapostető (tetőterasz)
+Faîtage ¦ Harja ¦ Gerinc
+Dans la longueur ¦ Pituussuunnassa ¦ Hosszában
+Dans la largeur ¦ Leveyssuunnassa ¦ Szélességében
+Est – ouest ¦ Itä – länsi ¦ Kelet – nyugat
+Nord – sud ¦ Pohjoinen – etelä ¦ Észak – dél
+Débord ¦ Räystäs ¦ Ereszkiugrás
+Couverture ¦ Katemateriaali ¦ Tetőfedés
+Tuiles canal ¦ Kourutiilet ¦ Hódfarkú csatornacserép
+Tuiles plates ¦ Litteät tiilet ¦ Hódfarkú cserép
+Tuiles vernissées ¦ Lasitetut tiilet ¦ Mázas cserép
+Ardoises ¦ Liuskekivi ¦ Pala
+Lauzes (pierre) ¦ Kivilaatat (lauzes) ¦ Kőlapok (lauze)
+Chaume ¦ Olkikatto ¦ Nádtető
+Zinc ¦ Sinkki ¦ Cink
+Bac acier ¦ Teräspelti ¦ Acéllemez
+Pignons, acrotères ¦ Päädyt, kaiteet ¦ Oromfalak, attikafalak
+Acrotère (toit plat) ¦ Kaide (tasakatto) ¦ Attikafal (lapostető)
+Une cheminée ¦ Savupiippu ¦ Egy kémény
+Place de la cheminée ¦ Savupiipun paikka ¦ A kémény helye
+Gouttières et descentes ¦ Rännit ja syöksytorvet ¦ Ereszcsatornák és lefolyók
+Un toit par aile (maison en L, en T, en U) ¦ Katto siipeä kohden (L-, T-, U-muotoinen talo) ¦ Szárnyanként egy tető (L, T, U alakú ház)
+Verrières, lanterneaux et édicules ¦ Lasikatot, kattoikkunat ja kattorakennelmat ¦ Üvegtetők, felülvilágítók és tetőfelépítmények
+Fenêtres de toit et lucarnes ¦ Kattoikkunat ja kattolyhdyt ¦ Tetőablakok és manzárdablakok
+🪟 Verrière ¦ 🪟 Lasikatto ¦ 🪟 Üvegtető
+🚪 Édicule (sortie sur le toit) ¦ 🚪 Kattorakennelma (kulku katolle) ¦ 🚪 Tetőfelépítmény (kijárat a tetőre)
+🔆 Lanterneau ¦ 🔆 Kattolyhty ¦ 🔆 Felülvilágító
+🪟 Fenêtre de toit ¦ 🪟 Kattoikkuna ¦ 🪟 Tetőablak
+🏠 Lucarne ¦ 🏠 Kattolyhty ¦ 🏠 Tetőablak (manzárd)
+🏚 Chien-assis ¦ 🏚 Kattolape ¦ 🏚 Kutyaól tetőablak
+Lucarne ¦ Kattolyhty ¦ Tetőablak (manzárd)
+Aile ¦ Siipi ¦ Szárny
+Arrière ¦ Takana ¦ Hátul
+En travers ¦ Poikittain ¦ Keresztben
+Vers l’égout ¦ Räystästä kohti ¦ Az eresz felé
+Profondeur ¦ Syvyys ¦ Mélység
+＋ Verrière ¦ ＋ Lasikatto ¦ ＋ Üvegtető
+＋ Édicule ¦ ＋ Kattorakennelma ¦ ＋ Tetőfelépítmény
+＋ Lanterneau ¦ ＋ Kattolyhty ¦ ＋ Felülvilágító
+＋ Fenêtre de toit ¦ ＋ Kattoikkuna ¦ ＋ Tetőablak
+＋ Lucarne ¦ ＋ Kattolyhty ¦ ＋ Manzárdablak
+＋ Chien-assis ¦ ＋ Kattolape ¦ ＋ Kutyaól tetőablak
+Rien pour l’instant : ajoute des habitants et des recensements (plus bas). ¦ Ei vielä mitään: lisää asukkaita ja henkikirjoja (alempana). ¦ Még semmi: adj hozzá lakókat és népszámlálásokat (lent).
+📍 Lieu et époque ¦ 📍 Paikka ja aikakausi ¦ 📍 Hely és korszak
+Époque (en quelques mots) ¦ Aikakausi (muutamalla sanalla) ¦ Korszak (néhány szóban)
+Aucun souvenir posé pour l’instant ¦ Muistoja ei ole vielä sijoitettu ¦ Még nincs elhelyezett emlék
+Clic sur un meuble ou une pièce, puis « 🔗 Relier un souvenir » : une photo, un récit, une personne, un souvenir de famille. ¦ Napsauta huonekalua tai huonetta ja valitse sitten ”🔗 Yhdistä muisto”: valokuva, kertomus, henkilö, suvun muisto. ¦ Kattints egy bútorra vagy helyiségre, majd „🔗 Emlék összekapcsolása”: egy fotó, egy történet, egy személy, egy családi emlék.
+☀️ Orientation et lumière ¦ ☀️ Suunta ja valo ¦ ☀️ Tájolás és fény
+Nord du plan ¦ Pohjapiirroksen pohjoinen ¦ Az alaprajz északi iránya
+Heure ¦ Kellonaika ¦ Időpont
+Jour ¦ Päivä ¦ Nap
+Jour de l’année ¦ Vuoden päivä ¦ Az év napja
+Hauteur des yeux pour la visite ¦ Silmien korkeus kierroksella ¦ Szemmagasság a bejáráshoz
+👥 Les habitants ¦ 👥 Asukkaat ¦ 👥 A lakók
+rôle, années (né ici, 1880–1920…) ¦ rooli, vuodet (syntynyt täällä, 1880–1920…) ¦ szerep, évek (itt született, 1880–1920…)
+＋ Ajouter un habitant… ¦ ＋ Lisää asukas… ¦ ＋ Lakó hozzáadása…
+📋 Les recensements ¦ 📋 Henkikirjat ¦ 📋 A népszámlálások
+Ouvrir la fiche où est ce recensement ¦ Avaa kortti, jolla tämä henkikirja on ¦ Az adatlap megnyitása, amelyen ez a népszámlálás szerepel
+L’époque de la maison qui correspond à ce recensement ¦ Talon aikakausi, joka vastaa tätä henkikirjaa ¦ A ház korszaka, amely ennek a népszámlálásnak felel meg
+— époque — ¦ — aikakausi — ¦ — korszak —
+Aucun recensement rattaché. ¦ Ei yhdistettyjä henkikirjoja. ¦ Nincs kapcsolt népszámlálás.
+＋ Ajouter un recensement… ¦ ＋ Lisää henkikirja… ¦ ＋ Népszámlálás hozzáadása…
+🕰 Les époques ¦ 🕰 Aikakaudet ¦ 🕰 A korszakok
+Montrer la maison à cette époque ¦ Näytä talo tänä aikakautena ¦ A ház megjelenítése ebben a korszakban
+Renommer, changer la date, rattacher à un recensement ¦ Nimeä uudelleen, vaihda päivämäärä, yhdistä henkikirjaan ¦ Átnevezés, dátum módosítása, összekapcsolás népszámlálással
+Supprimer cette époque ¦ Poista tämä aikakausi ¦ Korszak törlése
+La maison a changé avec le temps ? Crée une époque par année ou par date (1850, 1900, 1936…), chacune avec son plan : tu la verras évoluer, et chacune peut être rattachée à un recensement. ¦ Onko talo muuttunut ajan myötä? Luo aikakausi vuotta tai päivämäärää kohden (1850, 1900, 1936…), kullekin oma pohjapiirroksensa: näet sen kehittyvän, ja jokaisen voi yhdistää henkikirjaan. ¦ Változott a ház az idők során? Hozz létre évenként vagy dátumonként egy korszakot (1850, 1900, 1936…), mindegyiket saját alaprajzzal: látni fogod, hogyan változik, és mindegyik összekapcsolható egy népszámlálással.
+＋ Nouvelle époque (copie de celle-ci) ¦ ＋ Uusi aikakausi (kopio tästä) ¦ ＋ Új korszak (ennek a másolata)
+＋ Nouvelle époque (copie de celle-ci)… ¦ ＋ Uusi aikakausi (kopio tästä)… ¦ ＋ Új korszak (ennek a másolata)…
+▶ Voir évoluer ¦ ▶ Katso muutos ¦ ▶ A változás megtekintése
+⏹ Arrêter ¦ ⏹ Pysäytä ¦ ⏹ Leállítás
+📖 Histoire de la maison ¦ 📖 Talon historia ¦ 📖 A ház története
+Histoire de la maison ¦ Talon historia ¦ A ház története
+Construite par…, agrandie en…, vendue en… ¦ Rakentanut…, laajennettu…, myyty… ¦ Építette…, bővítették…, eladták…
+Clic sur un mur, une pièce, un meuble : ses réglages viennent ici (matériau, couleur, taille, nom, souvenirs). Molette : zoomer ; barre d’espace : déplacer la vue ; Alt : sans aimant. ¦ Napsauta seinää, huonetta tai huonekalua: sen asetukset tulevat tähän (materiaali, väri, koko, nimi, muistot). Rulla: zoomaa; välilyönti: siirrä näkymää; Alt: ilman magneettikohdistusta. ¦ Kattints egy falra, helyiségre, bútorra: a beállításai itt jelennek meg (anyag, szín, méret, név, emlékek). Görgő: nagyítás; szóköz: nézet mozgatása; Alt: mágneses igazítás nélkül.
+Cet étage ¦ Tämä kerros ¦ Ez a szint
+={n} pièce ¦ {n} huone|{n} huonetta ¦ {n} helyiség|{n} helyiség
+={n} pièces ¦ {n} huone|{n} huonetta ¦ {n} helyiség|{n} helyiség
+={n} étage ¦ {n} kerros|{n} kerrosta ¦ {n} szint|{n} szint
+={n} étages ¦ {n} kerros|{n} kerrosta ¦ {n} szint|{n} szint
+={n} habitant ¦ {n} asukas|{n} asukasta ¦ {n} lakó|{n} lakó
+={n} habitants ¦ {n} asukas|{n} asukasta ¦ {n} lakó|{n} lakó
+={n} époque ¦ {n} aikakausi|{n} aikakautta ¦ {n} korszak|{n} korszak
+={n} époques ¦ {n} aikakausi|{n} aikakautta ¦ {n} korszak|{n} korszak
+={n} arrêt ¦ {n} pysähdys|{n} pysähdystä ¦ {n} állomás|{n} állomás
+={n} arrêts ¦ {n} pysähdys|{n} pysähdystä ¦ {n} állomás|{n} állomás
+={n} modèle ¦ {n} malli|{n} mallia ¦ {n} modell|{n} modell
+={n} modèles ¦ {n} malli|{n} mallia ¦ {n} modell|{n} modell
+={n} recensement rattaché ¦ {n} henkikirja yhdistetty|{n} henkikirjaa yhdistetty ¦ {n} népszámlálás kapcsolva|{n} népszámlálás kapcsolva
+={n} recensements rattachés ¦ {n} henkikirja yhdistetty|{n} henkikirjaa yhdistetty ¦ {n} népszámlálás kapcsolva|{n} népszámlálás kapcsolva
+={n} habitant ajouté depuis le recensement. ¦ {n} asukas lisätty henkikirjasta.|{n} asukasta lisätty henkikirjasta. ¦ {n} lakó hozzáadva a népszámlálásból.|{n} lakó hozzáadva a népszámlálásból.
+={n} habitants ajoutés depuis le recensement. ¦ {n} asukas lisätty henkikirjasta.|{n} asukasta lisätty henkikirjasta. ¦ {n} lakó hozzáadva a népszámlálásból.|{n} lakó hozzáadva a népszámlálásból.
+={n} trémie ouverte ¦ {n} portaikon aukko avattu|{n} portaikon aukkoa avattu ¦ {n} lépcsőnyílás megnyitva|{n} lépcsőnyílás megnyitva
+={n} trémies ouvertes ¦ {n} portaikon aukko avattu|{n} portaikon aukkoa avattu ¦ {n} lépcsőnyílás megnyitva|{n} lépcsőnyílás megnyitva
+={n} étage supprimé ¦ {n} kerros poistettu|{n} kerrosta poistettu ¦ {n} szint törölve|{n} szint törölve
+={n} étages supprimés ¦ {n} kerros poistettu|{n} kerrosta poistettu ¦ {n} szint törölve|{n} szint törölve
+={n} copie seulement : le mur est trop court pour plus. ¦ Vain {n} kopio: seinä on liian lyhyt useammalle.|Vain {n} kopiota: seinä on liian lyhyt useammalle. ¦ Csak {n} másolat: a fal túl rövid többhöz.|Csak {n} másolat: a fal túl rövid többhöz.
+={n} copies seulement : le mur est trop court pour plus. ¦ Vain {n} kopio: seinä on liian lyhyt useammalle.|Vain {n} kopiota: seinä on liian lyhyt useammalle. ¦ Csak {n} másolat: a fal túl rövid többhöz.|Csak {n} másolat: a fal túl rövid többhöz.
+={n} lampe allumée ¦ {n} lamppu päällä|{n} lamppua päällä ¦ {n} lámpa ég|{n} lámpa ég
+={n} lampes allumées ¦ {n} lamppu päällä|{n} lamppua päällä ¦ {n} lámpa ég|{n} lámpa ég
+={n} refusé : {list} ¦ {n} hylätty: {list}|{n} hylätty: {list} ¦ {n} elutasítva: {list}|{n} elutasítva: {list}
+={n} refusés : {list} ¦ {n} hylätty: {list}|{n} hylätty: {list} ¦ {n} elutasítva: {list}|{n} elutasítva: {list}
+=✓ {n} image : à glisser dans le 🎬 Montage pour en faire un film (avec les textes en voix off). ¦ ✓ {n} kuva: vedä se 🎬 Leikkaukseen tehdäksesi elokuvan (tekstit selostuksena).|✓ {n} kuvaa: vedä ne 🎬 Leikkaukseen tehdäksesi elokuvan (tekstit selostuksena). ¦ ✓ {n} kép: húzd a 🎬 Vágásba, hogy film legyen belőle (a szövegek narrációként).|✓ {n} kép: húzd őket a 🎬 Vágásba, hogy film legyen belőlük (a szövegek narrációként).
+=✓ {n} images : à glisser dans le 🎬 Montage pour en faire un film (avec les textes en voix off). ¦ ✓ {n} kuva: vedä se 🎬 Leikkaukseen tehdäksesi elokuvan (tekstit selostuksena).|✓ {n} kuvaa: vedä ne 🎬 Leikkaukseen tehdäksesi elokuvan (tekstit selostuksena). ¦ ✓ {n} kép: húzd a 🎬 Vágásba, hogy film legyen belőle (a szövegek narrációként).|✓ {n} kép: húzd őket a 🎬 Vágásba, hogy film legyen belőlük (a szövegek narrációként).
+🔗 Relier un souvenir… ¦ 🔗 Yhdistä muisto… ¦ 🔗 Emlék összekapcsolása…
+Angle (°, 0 = vers la droite, 90 = vers le haut) ¦ Kulma (°, 0 = oikealle, 90 = ylöspäin) ¦ Szög (°, 0 = jobbra, 90 = felfelé)
+Début X ¦ Alku X ¦ Kezdő X
+Début Y ¦ Alku Y ¦ Kezdő Y
+Fin X ¦ Loppu X ¦ Záró X
+Fin Y ¦ Loppu Y ¦ Záró Y
+Hauteur (cm, vide = celle de l’étage) ¦ Korkeus (cm, tyhjä = kerroksen korkeus) ¦ Magasság (cm, üres = a szinté)
+⌒ Courbure (flèche) ¦ ⌒ Kaarevuus (nuoli) ¦ ⌒ Görbület (ívmagasság)
+✂ Couper en deux ¦ ✂ Jaa kahtia ¦ ✂ Kettévágás
+Revêtement ¦ Pinnoite ¦ Burkolat
+Pareil pour : ¦ Sama myös: ¦ Ugyanígy:
+tout l’étage ¦ koko kerros ¦ az egész szint
+toute la maison ¦ koko talo ¦ az egész ház
+Couleur et texture ¦ Väri ja pintakuvio ¦ Szín és textúra
+Taille du motif ¦ Kuvion koko ¦ A minta mérete
+Allège (cm du sol) ¦ Ikkunalaudan korkeus (cm lattiasta) ¦ Mellvédmagasság (cm a padlótól)
+Position sur le mur ¦ Sijainti seinällä ¦ Helyzet a falon
+Du début du mur ¦ Seinän alusta ¦ A fal elejétől
+Jusqu’à la fin ¦ Loppuun asti ¦ A végéig
+🚪 Genre et ouverture ¦ 🚪 Tyyppi ja avautuminen ¦ 🚪 Fajta és nyitás
+Porte ¦ Ovi ¦ Ajtó
+Porte double ¦ Pariovi ¦ Kétszárnyú ajtó
+Porte d’entrée ¦ Ulko-ovi ¦ Bejárati ajtó
+Passage, arche ¦ Kulkuaukko, kaari ¦ Átjáró, boltív
+Porte de grange ¦ Ladon ovi ¦ Csűrkapu
+Une rangée de fenêtres (ou de portes) le long du mur ¦ Ikkunarivi (tai ovirivi) seinää pitkin ¦ Ablaksor (vagy ajtósor) a fal mentén
+🔁 Répéter… ¦ 🔁 Toista… ¦ 🔁 Ismétlés…
+↔ Sens d’ouverture ¦ ↔ Avautumissuunta ¦ ↔ Nyitásirány
+▨ Plancher : plein ou vide ¦ ▨ Lattia: umpinainen tai avoin ¦ ▨ Födém: tömör vagy nyitott
+Pas de plancher : vide sur l’étage du dessous ¦ Ei lattiaa: avoin alempaan kerrokseen ¦ Nincs födém: légtér az alatta lévő szintre
+Garde-corps ¦ Kaide ¦ Korlát
+Garde-corps autour ¦ Kaide ympärillä ¦ Korlát körben
+Ajoute l’étage du dessus s’il manque, une mezzanine sur une partie de cette pièce, le vide sur le reste, son garde-corps et l’escalier ¦ Lisää puuttuessa yläkerroksen, parven osaan tätä huonetta, avoimen tilan muuhun osaan, sen kaiteen ja portaat ¦ Hozzáadja a hiányzó felső szintet, egy galériát a helyiség egy része fölé, a légteret a többi rész fölé, a korlátot és a lépcsőt
+🏗 Mezzanine ouverte sur cette pièce ¦ 🏗 Tähän huoneeseen avautuva parvi ¦ 🏗 Erre a helyiségre nyíló galéria
+Mezzanine ouverte ¦ Avoin parvi ¦ Nyitott galéria
+🔗 Les murs et les meubles suivent la pièce ¦ 🔗 Seinät ja huonekalut seuraavat huonetta ¦ 🔗 A falak és a bútorok követik a helyiséget
+🧱 Murs de la pièce ¦ 🧱 Huoneen seinät ¦ 🧱 A helyiség falai
+Sol ¦ Lattia ¦ Padló
+Salle commune ¦ Tupa ¦ Nagyszoba
+Chambre des parents ¦ Vanhempien makuuhuone ¦ A szülők hálószobája
+Chambre des enfants ¦ Lastenhuone ¦ Gyerekszoba
+Salle à manger ¦ Ruokasali ¦ Ebédlő
+Grenier ¦ Vintti ¦ Padlás
+Cellier ¦ Ruokakomero ¦ Kamra
+Étable ¦ Navetta ¦ Istálló
+Grange ¦ Lato ¦ Csűr
+Fournil ¦ Leivintupa ¦ Sütőház
+Boutique ¦ Kauppa ¦ Bolt
+Couloir ¦ Käytävä ¦ Folyosó
+Cour ¦ Piha ¦ Udvar
+Jardin ¦ Puutarha ¦ Kert
+Potager ¦ Kasvimaa ¦ Konyhakert
+Basse-cour ¦ Kanala ¦ Baromfiudvar
+🕯 Souvenirs de la pièce ¦ 🕯 Huoneen muistot ¦ 🕯 A helyiség emlékei
+La chambre où est née Marie en 1890 ; la veillée… ¦ Huone, jossa Marie syntyi vuonna 1890; iltaistunnot… ¦ A szoba, ahol Marie 1890-ben született; az esti összejövetelek…
+Les personnes de la pièce ¦ Huoneen henkilöt ¦ A helyiség személyei
+Leurs années dans cette pièce ¦ Heidän vuotensa tässä huoneessa ¦ Az ebben a helyiségben töltött éveik
+années : 1890 – 1925 ¦ vuodet: 1890 – 1925 ¦ évek: 1890 – 1925
+🪜 Escalier ¦ 🪜 Portaat ¦ 🪜 Lépcső
+✓ confortable (60 à 66 cm) ¦ ✓ mukava (60–66 cm) ¦ ✓ kényelmes (60–66 cm)
+⚠️ un peu raide : allonge l’escalier ou choisis un escalier tournant ¦ ⚠️ hieman jyrkkä: pidennä portaita tai valitse kääntyvät portaat ¦ ⚠️ kicsit meredek: hosszabbítsd meg a lépcsőt, vagy válassz forduló lépcsőt
+⚠️ marches très longues : raccourcis l’escalier ¦ ⚠️ hyvin pitkät askelmat: lyhennä portaita ¦ ⚠️ nagyon hosszú fokok: rövidítsd meg a lépcsőt
+Quart tournant ¦ Neljänneskäännös ¦ Negyedfordulós
+Vers la gauche ¦ Vasemmalle ¦ Balra
+Vers la droite ¦ Oikealle ¦ Jobbra
+Le haut devient le bas ¦ Ylä- ja alapää vaihtavat paikkaa ¦ A teteje lesz az alja
+⇅ Inverser le sens de montée ¦ ⇅ Käännä noususuunta ¦ ⇅ Feljárási irány megfordítása
+Pas d’étage au-dessus : ajoute-le avec ＋ en haut. ¦ Yläpuolella ei ole kerrosta: lisää se ylhäältä ＋-painikkeella. ¦ Nincs fölötte szint: add hozzá fent a ＋ gombbal.
+Pour les maisons dessinées avant : chaque escalier perce le plancher de l’étage du dessus ¦ Aiemmin piirretyille taloille: jokainen portaikko puhkaisee yläpuolisen kerroksen lattian ¦ A korábban rajzolt házakhoz: minden lépcső átüti a fölötte lévő szint födémét
+Ouvrir les trémies de tous les escaliers ¦ Avaa kaikkien portaikkojen aukot ¦ Az összes lépcső nyílásának megnyitása
+Du sol ¦ Lattiasta ¦ A padlótól
+Les prochains objets de ce modèle seront posés à cette taille ¦ Tämän mallin seuraavat esineet sijoitetaan tähän kokoon ¦ A modell következő tárgyai ekkora méretben kerülnek le
+💾 Garder pour ce modèle ¦ 💾 Säilytä tälle mallille ¦ 💾 Megtartás ehhez a modellhez
+Le poser sur le meuble qui est dessous (table, commode, cheminée…) ¦ Aseta se alla olevan huonekalun päälle (pöytä, lipasto, takka…) ¦ Rátevés az alatta lévő bútorra (asztal, komód, kandalló…)
+⬆ Sur l’objet dessous ¦ ⬆ Alla olevan esineen päälle ¦ ⬆ Az alatta lévő tárgyra
+⬇ Au sol ¦ ⬇ Lattialle ¦ ⬇ A padlóra
+Plusieurs copies d’un coup : en ligne, en grille, ou en cercle autour d’un objet (6 chaises autour d’une table) ¦ Useita kopioita kerralla: rivissä, ruudukossa tai ympyrässä esineen ympärillä (6 tuolia pöydän ympärillä) ¦ Több másolat egyszerre: sorban, rácsban vagy körben egy tárgy körül (6 szék egy asztal körül)
+Pieds ¦ Jalat ¦ Lábak
+Pieds, poignées, filets, ferrures ¦ Jalat, kahvat, listat, helat ¦ Lábak, fogantyúk, díszlécek, veretek
+Sans deuxième couleur ¦ Ei toista väriä ¦ Második szín nélkül
+Époque, style ¦ Aikakausi, tyyli ¦ Korszak, stílus
+Effets : pieds et détails ¦ Tehosteet: jalat ja yksityiskohdat ¦ Effektek: lábak és részletek
+🏷 Souvenirs de cet objet ¦ 🏷 Tämän esineen muistot ¦ 🏷 A tárgy emlékei
+Son histoire (objet de famille) ¦ Sen tarina (suvun esine) ¦ A története (családi tárgy)
+Flèche vers un point ¦ Nuoli pisteeseen ¦ Nyíl egy pontra
+Couleur de la flèche ¦ Nuolen väri ¦ A nyíl színe
+Police de départ ¦ Oletusfontti ¦ Alapértelmezett betűtípus
+Des versions de la maison selon les années ou des dates : la voir évoluer, rattacher une époque à un recensement ¦ Talon versiot vuosien tai päivämäärien mukaan: katso sen kehitystä, yhdistä aikakausi henkikirjaan ¦ A ház változatai évek vagy dátumok szerint: nézd meg, hogyan változik, kapcsolj egy korszakot népszámláláshoz
+🕰 Époques ¦ 🕰 Aikakaudet ¦ 🕰 Korszakok
+L’époque d’avant ¦ Edellinen aikakausi ¦ Az előző korszak
+L’époque montrée (plan 2D et vue 3D) ¦ Näytetty aikakausi (2D-pohjapiirros ja 3D-näkymä) ¦ A megjelenített korszak (2D alaprajz és 3D nézet)
+L’époque d’après ¦ Seuraava aikakausi ¦ A következő korszak
+⋯ Gérer les époques… ¦ ⋯ Hallitse aikakausia… ¦ ⋯ Korszakok kezelése…
+▶ Voir évoluer : les époques l’une après l’autre ¦ ▶ Katso muutos: aikakaudet peräkkäin ¦ ▶ A változás megtekintése: a korszakok egymás után
+MAISON · ÉPOQUES ¦ TALO · AIKAKAUDET ¦ HÁZ · KORSZAKOK
+MAISON ¦ TALO ¦ HÁZ
+Créer l’époque ¦ Luo aikakausi ¦ Korszak létrehozása
+La maison telle qu’elle est dessinée maintenant devient la première époque : donne-lui un nom et une date. La nouvelle époque part d’une copie, que tu changes ensuite (une pièce ajoutée, un mur abattu, d’autres meubles…). ¦ Talosta sellaisena kuin se nyt on piirretty tulee ensimmäinen aikakausi: anna sille nimi ja päivämäärä. Uusi aikakausi alkaa kopiosta, jota sitten muutat (lisätty huone, purettu seinä, muut huonekalut…). ¦ A ház, ahogy most meg van rajzolva, lesz az első korszak: adj neki nevet és dátumot. Az új korszak egy másolatból indul, amelyet aztán módosítasz (egy hozzáépített helyiség, egy lebontott fal, más bútorok…).
+La maison dessinée maintenant ¦ Talo sellaisena kuin se nyt on piirretty ¦ A ház, ahogy most meg van rajzolva
+Année ou date ¦ Vuosi tai päivämäärä ¦ Év vagy dátum
+La nouvelle époque ¦ Uusi aikakausi ¦ Az új korszak
+ex. Après l’agrandissement ¦ esim. Laajennuksen jälkeen ¦ pl. A bővítés után
+Rattachée au recensement ¦ Yhdistetty henkikirjaan ¦ Népszámláláshoz kapcsolva
+Pour la rattacher à un recensement : onglet Maison → « 📋 Les recensements » → ＋ Un recensement. ¦ Yhdistä se henkikirjaan näin: Talo-välilehti → ”📋 Henkikirjat” → ＋ Henkikirja. ¦ Népszámláláshoz így kapcsolhatod: Ház lap → „📋 A népszámlálások” → ＋ Népszámlálás.
+Donne un nom ou une date à cette époque. ¦ Anna tälle aikakaudelle nimi tai päivämäärä. ¦ Adj nevet vagy dátumot ennek a korszaknak.
+Nouvelle époque créée (copie) : change ce qui était différent. « ‹ › » en haut pour passer d’une époque à l’autre. ¦ Uusi aikakausi luotu (kopio): muuta se, mikä oli toisin. Siirry aikakaudesta toiseen ylhäältä ”‹ ›”. ¦ Új korszak létrehozva (másolat): változtasd meg, ami más volt. Fent a „‹ ›” gombokkal válthatsz a korszakok között.
+Époque supprimée ¦ Aikakausi poistettu ¦ Korszak törölve
+Crée au moins deux époques (＋ Nouvelle époque) pour voir la maison évoluer. ¦ Luo vähintään kaksi aikakautta (＋ Uusi aikakausi) nähdäksesi talon kehittyvän. ¦ Hozz létre legalább két korszakot (＋ Új korszak), hogy lásd a ház változását.
+＋ Un recensement ¦ ＋ Henkikirja ¦ ＋ Népszámlálás
+Recensements à rattacher ¦ Yhdistettävät henkikirjat ¦ Kapcsolandó népszámlálások
+Ajouter aussi les personnes du foyer comme habitants ¦ Lisää myös talouden jäsenet asukkaiksi ¦ A háztartás tagjainak felvétele lakóként is
+À l’époque ¦ Aikakaudella ¦ Korszak
+Choisis au moins un recensement. ¦ Valitse vähintään yksi henkikirja. ¦ Válassz ki legalább egy népszámlálást.
+Clique sur un mur. ¦ Napsauta seinää. ¦ Kattints egy falra.
+Une étiquette à flèche ¦ Nuolellinen merkintä ¦ Egy nyilas címke
+La note (ex. « Double vitrage posé en 1978 », « Ici était le puits ») ¦ Huomautus (esim. ”Kaksinkertaiset ikkunat asennettu 1978”, ”Tässä oli kaivo”) ¦ A megjegyzés (pl. „Hőszigetelt üveg 1978-ban beépítve”, „Itt volt a kút”)
+Étiquette à flèche ¦ Nuolellinen merkintä ¦ Nyilas címke
+Un texte sur le plan ¦ Teksti pohjapiirroksessa ¦ Szöveg az alaprajzon
+Le texte à écrire (nom d’une pièce, d’un lieu, une remarque…) ¦ Kirjoitettava teksti (huoneen tai paikan nimi, huomautus…) ¦ A beírandó szöveg (egy helyiség, egy hely neve, egy megjegyzés…)
+Mur modifié ¦ Seinä muutettu ¦ Fal módosítva
+Pièce modifiée ¦ Huone muutettu ¦ Helyiség módosítva
+Flèche déplacée ¦ Nuoli siirretty ¦ Nyíl áthelyezve
+Objet tourné ¦ Esine käännetty ¦ Tárgy elforgatva
+Plan ancien déplacé ¦ Vanha pohjapiirros siirretty ¦ Régi alaprajz áthelyezve
+Une pièce d’au moins 50 cm de côté. ¦ Huoneen sivun on oltava vähintään 50 cm. ¦ A helyiség minden oldala legalább 50 cm legyen.
+Un vide d’au moins 40 cm de côté. ¦ Avoimen tilan sivun on oltava vähintään 40 cm. ¦ A légtér minden oldala legalább 40 cm legyen.
+Ce vide est à l’étage le plus bas : il n’ouvre sur rien. Pour une mezzanine, dessine le vide à l’étage du dessus. ¦ Tämä avoin tila on alimmassa kerroksessa: se ei avaudu mihinkään. Parvea varten piirrä avoin tila yläkerrokseen. ¦ Ez a légtér a legalsó szinten van: semmire sem nyílik. Galériához a légteret a fölötte lévő szinten rajzold meg.
+Choisis d’abord la pièce (le séjour) sur le plan. ¦ Valitse ensin huone (olohuone) pohjapiirroksesta. ¦ Előbb jelöld ki a helyiséget (a nappalit) az alaprajzon.
+La pièce est un peu petite pour une mezzanine (au moins 2,5 m × 4 m). ¦ Huone on hieman pieni parvelle (vähintään 2,5 m × 4 m). ¦ A helyiség kicsit kicsi egy galériához (legalább 2,5 m × 4 m).
+Clic : choisir · glisser : déplacer · poignées : allonger un mur, déformer une pièce · ⌫ : supprimer ¦ Napsautus: valitse · vedä: siirrä · kahvat: pidennä seinää, muotoile huonetta · ⌫: poista ¦ Kattintás: kijelölés · húzás: mozgatás · fogantyúk: fal hosszabbítása, helyiség alakítása · ⌫: törlés
+Glisser pour déplacer la vue ¦ Vedä siirtääksesi näkymää ¦ Húzd a nézet mozgatásához
+Glisse en diagonale : une pièce rectangulaire avec ses quatre murs (la surface s’affiche) ¦ Vedä vinottain: suorakulmainen huone neljine seinineen (pinta-ala näytetään) ¦ Húzd átlósan: téglalap alakú helyiség a négy falával (a terület megjelenik)
+Glisse en diagonale : un vide sans plancher (mezzanine, double hauteur, trémie) ; un garde-corps se pose tout seul le long des bords sans mur ¦ Vedä vinottain: avoin tila ilman lattiaa (parvi, kaksinkertainen korkeus, portaikon aukko); kaide asettuu itsestään seinättömille reunoille ¦ Húzd átlósan: födém nélküli légtér (galéria, dupla belmagasság, lépcsőnyílás); a fal nélküli szélek mentén magától korlát kerül
+Un clic par coin (aimant : grille, coins, angles droits ; Alt : libre) · double-clic ou Entrée : finir · clic sur le 1er point : fermer (et créer la pièce) ¦ Yksi napsautus kulmaa kohden (magneetti: ruudukko, kulmat, suorat kulmat; Alt: vapaa) · kaksoisnapsautus tai Enter: lopeta · napsautus 1. pisteeseen: sulje (ja luo huone) ¦ Sarkonként egy kattintás (igazítás: rács, sarkok, derékszögek; Alt: szabad) · dupla kattintás vagy Enter: befejezés · kattintás az 1. pontra: bezárás (és a helyiség létrehozása)
+Une pièce de forme libre (sans murs) : un clic par coin, double-clic pour finir ¦ Vapaamuotoinen huone (ilman seiniä): yksi napsautus kulmaa kohden, lopeta kaksoisnapsautuksella ¦ Szabad alakú helyiség (falak nélkül): sarkonként egy kattintás, dupla kattintás a befejezéshez
+Clic sur un mur : une porte (glisse-la ensuite le long du mur) ¦ Napsauta seinää: ovi (liu’uta se sitten seinää pitkin) ¦ Kattintás egy falra: ajtó (aztán csúsztasd a fal mentén)
+Clic sur un mur : une fenêtre ¦ Napsauta seinää: ikkuna ¦ Kattintás egy falra: ablak
+Deux clics : une cote (la distance s’affiche) ¦ Kaksi napsautusta: mitta (etäisyys näytetään) ¦ Két kattintás: méretvonal (a távolság megjelenik)
+Clic : écrire un texte sur le plan ¦ Napsautus: kirjoita teksti pohjapiirrokseen ¦ Kattintás: szöveg írása az alaprajzra
+Clic sur le point à montrer (le puits, une fenêtre…), puis clic là où écrire la note ¦ Napsauta näytettävää pistettä (kaivo, ikkuna…) ja sitten kohtaa, johon huomautus kirjoitetaan ¦ Kattints a megmutatandó pontra (a kút, egy ablak…), aztán oda, ahová a megjegyzést írod
+largeur x profondeur (ex. 420 x 350, 4,2 x 3,5 m) ↵ ¦ leveys x syvyys (esim. 420 x 350, 4,2 x 3,5 m) ↵ ¦ szélesség x mélység (pl. 420 x 350, 4,2 x 3,5 m) ↵
+longueur (cm, ou 3,5 m) puis @angle ↵ ¦ pituus (cm tai 3,5 m) ja sitten @kulma ↵ ¦ hossz (cm, vagy 3,5 m), majd @szög ↵
+Écris largeur x profondeur : 420 x 350 (cm) ou 4,2 x 3,5 m (50 cm au moins). ¦ Kirjoita leveys x syvyys: 420 x 350 (cm) tai 4,2 x 3,5 m (vähintään 50 cm). ¦ Írd be: szélesség x mélység: 420 x 350 (cm) vagy 4,2 x 3,5 m (legalább 50 cm).
+Clique d’abord le point de départ sur le plan, puis tape la longueur. ¦ Napsauta ensin aloituspistettä pohjapiirroksessa ja kirjoita sitten pituus. ¦ Előbb kattints a kezdőpontra az alaprajzon, aztán írd be a hosszt.
+Longueur incomprise : 350, 3,5 m, ou 350 @ 90 pour l’angle. ¦ Pituutta ei ymmärretty: 350, 3,5 m tai 350 @ 90 kulmalle. ¦ A hossz nem értelmezhető: 350, 3,5 m, vagy 350 @ 90 a szöghöz.
+Angle incompris (en degrés : 0 à droite, 90 en haut). ¦ Kulmaa ei ymmärretty (asteina: 0 oikealle, 90 ylös). ¦ A szög nem értelmezhető (fokban: 0 jobbra, 90 felfelé).
+Grille ¦ Ruudukko ¦ Rács
+Coins des murs et des pièces ¦ Seinien ja huoneiden kulmat ¦ A falak és helyiségek sarkai
+Milieu des murs ¦ Seinien keskipisteet ¦ A falak felezőpontjai
+Le long des murs (au cm) ¦ Seiniä pitkin (sentin tarkkuudella) ¦ A falak mentén (centiméterre)
+Alignements (lignes de rappel) ¦ Tasaukset (apuviivat) ¦ Igazítások (segédvonalak)
+Pas des angles ¦ Kulmien porrastus ¦ Szöglépték
+Alt : aucun aimant (au mm près) · ⇧ : angles à 45° · flèches : décaler ce qui est choisi de 1 cm (⇧ : d’un pas de grille) · en traçant, tape la longueur au clavier. ¦ Alt: ei magneettikohdistusta (millin tarkkuudella) · ⇧: 45° kulmat · nuolet: siirrä valittua 1 cm (⇧: ruudukon välin verran) · piirtäessä kirjoita pituus näppäimistöllä. ¦ Alt: igazítás nélkül (milliméterre) · ⇧: 45°-os szögek · nyilak: a kijelölés eltolása 1 cm-rel (⇧: egy rácsosztással) · rajzolás közben a hosszt a billentyűzeten írhatod be.
+Décalé ¦ Siirretty ¦ Eltolva
+Il faut un fichier OBJ, STL, GLB ou glTF. ¦ Tarvitaan OBJ-, STL-, GLB- tai glTF-tiedosto. ¦ OBJ, STL, GLB vagy glTF fájl kell.
+Lecture du modèle… ¦ Luetaan mallia… ¦ A modell beolvasása…
+Objet importé ¦ Esine tuotu ¦ Tárgy importálva
+Objet 3D importé : il est aussi dans Mobilier → « Mes objets », pour toutes les maisons. ¦ 3D-esine tuotu: se on myös kohdassa Huonekalut → ”Omat esineeni” kaikkia taloja varten. ¦ 3D tárgy importálva: a Bútorok → „Saját tárgyaim” között is megtalálod, minden házhoz.
+Objet posé (vue de dessus) : règle sa taille réelle dans Propriétés. ¦ Esine sijoitettu (ylhäältä): aseta sen todellinen koko Ominaisuuksissa. ¦ Tárgy elhelyezve (felülnézet): a valódi méretét a Tulajdonságokban állíthatod be.
+Envoi de l’image dans les médias… ¦ Lähetetään kuvaa mediaan… ¦ A kép küldése a médiába…
+MAISON · PLAN ANCIEN ¦ TALO · VANHA POHJAPIIRROS ¦ HÁZ · RÉGI ALAPRAJZ
+Le plan à calquer ¦ Jäljennettävä pohjapiirros ¦ Az átrajzolandó alaprajz
+Un cadastre napoléonien, un plan ancien, un croquis… « 📁 Importer » en prend un sur l’ordinateur (il entre dans les médias). ¦ Napoleoninen maarekisterikartta, vanha pohjapiirros, luonnos… ”📁 Tuo” ottaa sellaisen tietokoneelta (se siirtyy mediaan). ¦ Napóleoni kataszter, régi alaprajz, vázlat… A „📁 Importálás” a számítógépről vesz egyet (bekerül a médiába).
+Poser ce plan ¦ Sijoita tämä pohjapiirros ¦ Alaprajz elhelyezése
+Cette image ne peut pas servir de plan. ¦ Tätä kuvaa ei voi käyttää pohjapiirroksena. ¦ Ez a kép nem használható alaprajzként.
+Plan ancien posé ¦ Vanha pohjapiirros sijoitettu ¦ Régi alaprajz elhelyezve
+📏 Clique les deux bouts d’une longueur connue sur le plan ancien (un mur, l’échelle dessinée) ¦ 📏 Napsauta vanhassa pohjapiirroksessa tunnetun pituuden molempia päitä (seinä, piirretty mittakaava) ¦ 📏 Kattints a régi alaprajzon egy ismert hosszúság két végére (egy fal, a rajzolt méretarány)
+Les deux points sont trop proches. ¦ Pisteet ovat liian lähellä toisiaan. ¦ A két pont túl közel van egymáshoz.
+📏 Mettre le plan à l’échelle ¦ 📏 Skaalaa pohjapiirros ¦ 📏 Az alaprajz méretarányának beállítása
+Mettre à l’échelle ¦ Skaalaa ¦ Méretarány beállítása
+Quelle est la vraie longueur entre ces deux points ? ¦ Mikä on näiden kahden pisteen todellinen etäisyys? ¦ Mekkora a valódi távolság a két pont között?
+Le cadastre napoléonien est souvent au 1/2500 ou au 1/1250 ; les plans anciens comptent en toises (6 pieds, 1,949 m) et en pieds du roi (32,48 cm) : écris le nombre, la conversion se fait toute seule. ¦ Napoleoninen maarekisterikartta on usein mittakaavassa 1:2500 tai 1:1250; vanhoissa piirustuksissa käytetään toiseja (6 jalkaa, 1,949 m) ja pieds du roi -jalkoja (32,48 cm): kirjoita luku, muunnos tehdään itsestään. ¦ A napóleoni kataszter gyakran 1:2500 vagy 1:1250 méretarányú; a régi tervek toise-ban (6 láb, 1,949 m) és pied du roi-ban (32,48 cm) számolnak: írd be a számot, az átváltás magától megtörténik.
+Écris une longueur, par exemple 12 ou 3,5. ¦ Kirjoita pituus, esimerkiksi 12 tai 3,5. ¦ Írj be egy hosszt, például 12 vagy 3,5.
+Plan ancien mis à l’échelle ¦ Vanha pohjapiirros skaalattu ¦ Régi alaprajz méretaránya beállítva
+↻ Clique deux points le long d’un mur du plan ancien : il deviendra droit ¦ ↻ Napsauta kahta pistettä vanhan pohjapiirroksen seinää pitkin: siitä tulee suora ¦ ↻ Kattints két pontra a régi alaprajz egy fala mentén: egyenes lesz
+Ce mur est déjà droit. ¦ Tämä seinä on jo suora. ¦ Ez a fal már egyenes.
+↻ Redresser ¦ ↻ Suorista ¦ ↻ Kiegyenesítés
+✥ Déplacer ¦ ✥ Siirrä ¦ ✥ Mozgatás
+✏️ Décalque : un clic par coin de mur, en suivant le plan ancien · double-clic ou Entrée pour finir un mur · ⬚ pour une pièce entière ¦ ✏️ Jäljennys: yksi napsautus seinän kulmaa kohden vanhaa pohjapiirrosta seuraten · kaksoisnapsautus tai Enter lopettaa seinän · ⬚ koko huoneelle ¦ ✏️ Átrajzolás: falsarkonként egy kattintás, a régi alaprajzot követve · dupla kattintás vagy Enter egy fal befejezéséhez · ⬚ egy teljes helyiséghez
+Photo, document ¦ Valokuva, asiakirja ¦ Fotó, dokumentum
+Récit ¦ Kertomus ¦ Történet
+Souvenir de famille ¦ Suvun muisto ¦ Családi emlék
+Objet de famille ¦ Suvun esine ¦ Családi tárgy
+Voir ce souvenir ¦ Näytä tämä muisto ¦ Emlék megtekintése
+Retirer ce souvenir (sans le supprimer de la base) ¦ Irrota tämä muisto (poistamatta sitä tietokannasta) ¦ Emlék eltávolítása (az adatbázisból nem törlődik)
+Aucun souvenir rattaché : une photo, un récit, une personne… ¦ Ei yhdistettyjä muistoja: valokuva, kertomus, henkilö… ¦ Nincs kapcsolt emlék: egy fotó, egy történet, egy személy…
+Aucun souvenir ne correspond. ¦ Yksikään muisto ei vastaa hakua. ¦ Nincs megfelelő emlék.
+Aucun souvenir de famille pour l’instant ¦ Ei vielä suvun muistoja ¦ Még nincs családi emlék
+Essaie un autre mot. ¦ Kokeile toista sanaa. ¦ Próbálj egy másik szót.
+Listes → Mémoire familiale (recettes, expressions, chansons…) ou Objets de famille. ¦ Luettelot → Suvun muisti (reseptit, sanonnat, laulut…) tai Suvun esineet. ¦ Listák → Családi emlékezet (receptek, szólások, dalok…) vagy Családi tárgyak.
+MAISON · SOUVENIRS ¦ TALO · MUISTOT ¦ HÁZ · EMLÉKEK
+📜 Un souvenir de famille ¦ 📜 Suvun muisto ¦ 📜 Egy családi emlék
+Chercher… (recette, montre, surnom) ¦ Hae… (resepti, kello, lempinimi) ¦ Keresés… (recept, óra, becenév)
+Chercher un souvenir ¦ Hae muistoa ¦ Emlék keresése
+Choisis d’abord un meuble, un objet ou une pièce. ¦ Valitse ensin huonekalu, esine tai huone. ¦ Előbb jelölj ki egy bútort, tárgyat vagy helyiséget.
+🖼 Une photo, un document ¦ 🖼 Valokuva, asiakirja ¦ 🖼 Egy fotó, egy dokumentum
+pris dans les médias (ou importé depuis l’ordinateur) ¦ otettu mediasta (tai tuotu tietokoneelta) ¦ a médiából (vagy a számítógépről importálva)
+✍ Un récit ¦ ✍ Kertomus ¦ ✍ Egy történet
+ce qui s’est passé ici, ce qu’on en raconte ¦ mitä täällä tapahtui, mitä siitä kerrotaan ¦ ami itt történt, amit mesélnek róla
+👤 Une personne ¦ 👤 Henkilö ¦ 👤 Egy személy
+qui a vécu ici, qui s’en servait ¦ joka asui täällä, joka käytti sitä ¦ aki itt élt, aki használta
+une recette, une expression, un objet de famille… ¦ resepti, sanonta, suvun esine… ¦ egy recept, egy szólás, egy családi tárgy…
+ex. La veillée de Noël 1912 ¦ esim. Jouluaatto 1912 ¦ pl. Karácsony este, 1912
+Ce qui s’est passé ici, ce qu’on en raconte… ¦ Mitä täällä tapahtui, mitä siitä kerrotaan… ¦ Ami itt történt, amit mesélnek róla…
+Le récit ¦ Kertomus ¦ A történet
+Écris un titre ou un récit. ¦ Kirjoita otsikko tai kertomus. ¦ Írj egy címet vagy egy történetet.
+Souvenir rattaché ¦ Muisto yhdistetty ¦ Emlék összekapcsolva
+Ce média n’existe plus. ¦ Tätä mediaa ei ole enää olemassa. ¦ Ez a médiaelem már nem létezik.
+La maison non enregistrée sera perdue (💾 d’abord). ¦ Tallentamaton talo menetetään (💾 ensin). ¦ A nem mentett ház elvész (előbb 💾).
+Ouvrir la fiche ? ¦ Avataanko kortti? ¦ Megnyitod az adatlapot?
+les aimants, la grille, l’épaisseur des murs, la hauteur des yeux et la lumière ¦ magneettikohdistus, ruudukko, seinien paksuus, silmien korkeus ja valo ¦ a mágneses igazítás, a rács, a falvastagság, a szemmagasság és a fény
+Fichier prêt : il s’importe dans 🧲 Aimants → « ⤒ Importer ». ¦ Tiedosto valmis: tuo se kohdassa 🧲 Magneettikohdistus → ”⤒ Tuo”. ¦ A fájl kész: importáld itt: 🧲 Mágneses igazítás → „⤒ Importálás”.
+Ce fichier n’est pas lisible (il faut un fichier .json de réglage). ¦ Tätä tiedostoa ei voi lukea (tarvitaan .json-asetustiedosto). ¦ Ez a fájl nem olvasható (.json beállításfájl kell).
+Ce fichier n’est pas un réglage LCNDA (⤓ Exporter un réglage, dans un outil). ¦ Tämä tiedosto ei ole LCNDA-asetus (⤓ Vie asetus jossakin työkalussa). ¦ Ez a fájl nem LCNDA-beállítás (⤓ Beállítás exportálása, egy eszközben).
+Le plan de cet étage est vide. ¦ Tämän kerroksen pohjapiirros on tyhjä. ¦ Ennek a szintnek az alaprajza üres.
+le plan de l’étage ¦ kerroksen pohjapiirros ¦ a szint alaprajza
+le plan, plus léger ¦ pohjapiirros, kevyempi ¦ az alaprajz, kisebb méretben
+le plan sur une page A4 ¦ pohjapiirros A4-sivulla ¦ az alaprajz egy A4-es oldalon
+le plan, en dessin ¦ pohjapiirros piirroksena ¦ az alaprajz, rajzként
+le plan, tout de suite ¦ pohjapiirros heti ¦ az alaprajz, azonnal
+le plan de l’étage pour AutoCAD, LibreCAD… (calques, en cm) ¦ kerroksen pohjapiirros AutoCADille, LibreCADille… (tasot, senttimetreinä) ¦ a szint alaprajza AutoCAD-hez, LibreCAD-hez… (rétegek, cm-ben)
+image de la vue 3D ¦ kuva 3D-näkymästä ¦ kép a 3D nézetről
+🧊 Vue 3D ¦ 🧊 3D-näkymä ¦ 🧊 3D nézet
+💾 Fichier de la maison ¦ 💾 Talon tiedosto ¦ 💾 A ház fájlja
+à réimporter (⤒ Importer) ¦ tuotavaksi uudelleen (⤒ Tuo) ¦ újraimportáláshoz (⤒ Importálás)
+Ce fichier DXF n’est pas lisible. ¦ Tätä DXF-tiedostoa ei voi lukea. ¦ Ez a DXF fájl nem olvasható.
+Aucun trait trouvé dans ce DXF (un DXF « binaire » ne se lit pas : enregistre-le en DXF texte, ASCII). ¦ Tästä DXF:stä ei löytynyt viivoja (”binääristä” DXF:ää ei voi lukea: tallenna se teksti-DXF:nä, ASCII). ¦ Ebben a DXF-ben nincs vonal („bináris” DXF nem olvasható: mentsd szöveges DXF-ként, ASCII).
+MAISON · IMPORT DXF ¦ TALO · DXF-TUONTI ¦ HÁZ · DXF IMPORTÁLÁS
+Importer le plan ¦ Tuo pohjapiirros ¦ Alaprajz importálása
+Unité du dessin ¦ Piirroksen yksikkö ¦ A rajz mértékegysége
+Épaisseur des murs ¦ Seinien paksuus ¦ Falvastagság
+Où le mettre ¦ Mihin se laitetaan ¦ Hová kerüljön
+Un nouvel étage ¦ Uusi kerros ¦ Egy új szint
+Calques à prendre ¦ Otettavat tasot ¦ Átveendő rétegek
+Un plan exporté d’ici : ses murs sont repris par leur axe (MURS_AXES). ¦ Täältä viety pohjapiirros: sen seinät otetaan keskilinjansa mukaan (MURS_AXES). ¦ Innen exportált alaprajz: a falait a tengelyük szerint veszi át (MURS_AXES).
+Un plan d’architecte dessine souvent chaque mur avec deux traits : garde une petite épaisseur, ou décoche les calques de meubles, de cotes et de hachures. ¦ Arkkitehdin piirustuksessa jokainen seinä on usein piirretty kahdella viivalla: pidä paksuus pienenä tai poista valinta huonekalujen, mittojen ja viivoitusten tasoilta. ¦ Az építészi tervek gyakran két vonallal rajzolnak meg minden falat: tarts meg kis vastagságot, vagy vedd ki a pipát a bútorok, méretvonalak és vonalkázások rétegeiből.
+Coche au moins un calque. ¦ Valitse vähintään yksi taso. ¦ Jelölj be legalább egy réteget.
+Rien à reprendre dans ces calques. ¦ Näistä tasoista ei ole otettavaa. ¦ Ezekből a rétegekből nincs mit átvenni.
+Plan importé ¦ Tuotu pohjapiirros ¦ Importált alaprajz
+Plan DXF importé ¦ DXF-pohjapiirros tuotu ¦ DXF alaprajz importálva
+Nombre en tout ¦ Kokonaismäärä ¦ Összesen
+Espace entre deux ¦ Väli kahden välillä ¦ Két elem közötti távolság
+Pas la place sur ce mur : moins d’espace, ou déplace la première vers le début du mur. ¦ Seinällä ei ole tilaa: pienennä väliä tai siirrä ensimmäistä kohti seinän alkua. ¦ Nincs elég hely ezen a falon: kisebb távolság, vagy tedd az elsőt közelebb a fal elejéhez.
+Répété ¦ Toistettu ¦ Megismételve
+Choisis d’abord un objet, une porte ou une fenêtre. ¦ Valitse ensin esine, ovi tai ikkuna. ¦ Előbb jelölj ki egy tárgyat, ajtót vagy ablakot.
+En ligne ¦ Rivissä ¦ Sorban
+En grille (rangées) ¦ Ruudukossa (rivit) ¦ Rácsban (sorok)
+En cercle (autour d’un objet) ¦ Ympyrässä (esineen ympärillä) ¦ Körben (egy tárgy körül)
+Sens (en ligne) ¦ Suunta (rivissä) ¦ Irány (sorban)
+→ vers la droite ¦ → oikealle ¦ → jobbra
+↓ vers le bas ¦ ↓ alas ¦ ↓ lefelé
+← vers la gauche ¦ ← vasemmalle ¦ ← balra
+↑ vers le haut ¦ ↑ ylös ¦ ↑ felfelé
+Par rangée (en grille) ¦ Riviä kohden (ruudukko) ¦ Soronként (rács)
+Autour de (en cercle) ¦ Ympärillä (ympyrä) ¦ Körülötte (kör)
+Un point, au rayon ci-dessous ¦ Piste alla olevalla säteellä ¦ Egy pont, az alábbi sugárral
+Rayon (si autour d’un point) ¦ Säde (jos pisteen ympärillä) ¦ Sugár (ha egy pont körül)
+En cercle : place d’abord un seul objet (une chaise) à sa place autour de la table, choisis-le, puis répète : les copies tournent autour de la table et regardent vers elle, comme la première. ¦ Ympyrässä: sijoita ensin yksi esine (tuoli) paikalleen pöydän ympärille, valitse se ja toista: kopiot kiertävät pöydän ympäri ja katsovat sitä kohti kuten ensimmäinen. ¦ Körben: előbb tegyél le egyetlen tárgyat (egy széket) a helyére az asztal körül, jelöld ki, majd ismételd: a másolatok körbejárják az asztalt, és felé néznek, mint az első.
+Ce fichier n’est pas lisible. ¦ Tätä tiedostoa ei voi lukea. ¦ Ez a fájl nem olvasható.
+Ce fichier n’est pas une maison LCNDA (⤓ Exporter → 💾 Fichier de la maison). ¦ Tämä tiedosto ei ole LCNDA-talo (⤓ Vie → 💾 Talon tiedosto). ¦ Ez a fájl nem LCNDA-ház (⤓ Exportálás → 💾 A ház fájlja).
+Le plan dessiné ici sera remplacé par celui du fichier (↶ pour revenir en arrière). ¦ Tähän piirretty pohjapiirros korvataan tiedoston pohjapiirroksella (↶ palaa takaisin). ¦ Az itt rajzolt alaprajzot felváltja a fájlban lévő (↶ a visszalépéshez).
+Remplacer le plan par celui du fichier ? ¦ Korvataanko pohjapiirros tiedoston pohjapiirroksella? ¦ Lecseréled az alaprajzot a fájlban lévőre?
+Remplacer le plan ¦ Korvaa pohjapiirros ¦ Alaprajz cseréje
+Maison importée ¦ Talo tuotu ¦ Ház importálva
+Dépose une image, un objet 3D (OBJ, STL, glTF, GLB) ou un fichier de maison. ¦ Pudota kuva, 3D-esine (OBJ, STL, glTF, GLB) tai talon tiedosto. ¦ Húzz ide egy képet, egy 3D tárgyat (OBJ, STL, glTF, GLB) vagy egy ház fájlt.
+📁 Que faire de cette image ? ¦ 📁 Mitä tällä kuvalla tehdään? ¦ 📁 Mi legyen ezzel a képpel?
+🖼 L’image de ce tableau, de ce cadre ¦ 🖼 Tämän maalauksen, tämän kehyksen kuva ¦ 🖼 A festmény, a keret képe
+posée sur l’objet choisi, en 2D et en 3D ¦ sijoitettu valittuun esineeseen 2D:nä ja 3D:nä ¦ a kijelölt tárgyra helyezve, 2D-ben és 3D-ben
+📐 Un plan ancien, un cadastre, à calquer ¦ 📐 Vanha pohjapiirros tai maarekisteri jäljennettäväksi ¦ 📐 Régi alaprajz, kataszter átrajzoláshoz
+posé en fond, à mettre à l’échelle ¦ sijoitettu taustaksi, skaalattavaksi ¦ háttérbe helyezve, méretarányt kell beállítani
+🖼 Un objet vu de dessus ¦ 🖼 Esine ylhäältä nähtynä ¦ 🖼 Egy felülről látott tárgy
+posé sur le plan comme un meuble ¦ sijoitettu pohjapiirrokseen huonekalun tapaan ¦ az alaprajzra helyezve, mint egy bútor
+🏷 Un souvenir pour ce qui est choisi ¦ 🏷 Muisto valitulle ¦ 🏷 Egy emlék a kijelölthöz
+rattaché au meuble ou à la pièce ¦ yhdistetty huonekaluun tai huoneeseen ¦ a bútorhoz vagy a helyiséghez kapcsolva
+Construction de la maison en 3D… ¦ Rakennetaan taloa 3D:nä… ¦ A ház felépítése 3D-ben…
+Vue 3D indisponible. ¦ 3D-näkymä ei ole käytettävissä. ¦ A 3D nézet nem érhető el.
+Glisser : tourner · clic droit ou ⇧ glisser : déplacer · molette : approcher · ☀️ Lumière : l’heure et la saison · 🚶 Visiter : Z Q S D ou flèches · ✦ : un souvenir ¦ Vedä: kierrä · oikea napsautus tai ⇧ vedä: siirrä · rulla: lähennä · ☀️ Valo: kellonaika ja vuodenaika · 🚶 Kierrä: W A S D tai nuolet · ✦: muisto ¦ Húzás: forgatás · jobb kattintás vagy ⇧ + húzás: mozgatás · görgő: közelítés · ☀️ Fény: napszak és évszak · 🚶 Bejárás: W A S D vagy nyilak · ✦: egy emlék
+Les dernières modifications de la maison seront perdues. ¦ Talon viimeisimmät muutokset menetetään. ¦ A ház legutóbbi módosításai elvesznek.
+Fermer sans enregistrer la maison ? ¦ Suljetaanko tallentamatta taloa? ¦ Bezárod a házat mentés nélkül?
+Supprimé ¦ Poistettu ¦ Törölve
+Dupliqué ¦ Monistettu ¦ Megkettőzve
+Sens de l’escalier ¦ Portaiden suunta ¦ A lépcső iránya
+Tous les escaliers ouvrent déjà le plancher. ¦ Kaikki portaikot avaavat jo lattian. ¦ Már minden lépcső megnyitja a födémet.
+Verrière ajoutée ¦ Lasikatto lisätty ¦ Üvegtető hozzáadva
+Édicule ajouté ¦ Kattorakennelma lisätty ¦ Tetőfelépítmény hozzáadva
+Lanterneau ajouté ¦ Kattolyhty lisätty ¦ Felülvilágító hozzáadva
+Fenêtre de toit ajoutée ¦ Kattoikkuna lisätty ¦ Tetőablak hozzáadva
+Lucarne ajoutée ¦ Kattolyhty lisätty ¦ Manzárdablak hozzáadva
+Chien-assis ajouté ¦ Kattolape lisätty ¦ Kutyaól tetőablak hozzáadva
+✓ Elle se voit dans la vue 3D, avec le toit. ¦ ✓ Se näkyy 3D-näkymässä katon kanssa. ¦ ✓ Látszik a 3D nézetben, a tetővel együtt.
+Retiré du toit ¦ Poistettu katolta ¦ Eltávolítva a tetőről
+Fenêtre de toit ou lucarne retirée ¦ Kattoikkuna tai kattolyhty poistettu ¦ Tetőablak vagy manzárdablak eltávolítva
+Rien sous cet objet : glisse-le d’abord au-dessus du meuble (une table, une commode…). ¦ Tämän esineen alla ei ole mitään: vedä se ensin huonekalun päälle (pöytä, lipasto…). ¦ Nincs semmi a tárgy alatt: előbb húzd a bútor fölé (asztal, komód…).
+Taille hors limites (de 1 cm à 50 m). ¦ Koko rajojen ulkopuolella (1 cm – 50 m). ¦ A méret a határokon kívül esik (1 cm és 50 m között).
+Agrandi ¦ Suurennettu ¦ Nagyítva
+Réduit ¦ Pienennetty ¦ Kicsinyítve
+Taille gardée pour ce modèle : les prochains seront posés comme celui-ci. ¦ Koko säilytetty tälle mallille: seuraavat sijoitetaan tämän kokoisina. ¦ Méret megtartva ehhez a modellhez: a következők ugyanígy kerülnek le.
+Sens d’ouverture ¦ Avautumissuunta ¦ Nyitásirány
+Côté d’ouverture ¦ Avautumispuoli ¦ Nyitási oldal
+Mur coupé ¦ Seinä jaettu ¦ Fal kettévágva
+＋ Un étage ¦ ＋ Kerros ¦ ＋ Szint
+Hauteur sous plafond ¦ Huonekorkeus ¦ Belmagasság
+Gérer les étages… ¦ Hallitse kerroksia… ¦ Szintek kezelése…
+Renommer, hauteur sous plafond, supprimer ¦ Nimeä uudelleen, huonekorkeus, poista ¦ Átnevezés, belmagasság, törlés
+Ajouter un étage… ¦ Lisää kerros… ¦ Szint hozzáadása…
+Les étages ¦ Kerrokset ¦ A szintek
+Du plus haut au plus bas. Renomme, change la hauteur, ou supprime un étage (avec tout ce qu’il contient). ¦ Ylimmästä alimpaan. Nimeä uudelleen, muuta korkeutta tai poista kerros (kaikkineen). ¦ A legfelsőtől a legalsóig. Nevezd át, módosítsd a magasságot, vagy törölj egy szintet (mindennel együtt, ami rajta van).
+Niveau ¦ Taso ¦ Szint
+Il faut au moins un étage. ¦ Vähintään yksi kerros tarvitaan. ¦ Legalább egy szintre szükség van.
+{names} supprimés avec ce qu’ils contenaient ¦ {names} poistettu sisältöineen ¦ {names} törölve a tartalmukkal együtt
+{names} supprimé avec ce qu’il contenait ¦ {names} poistettu sisältöineen ¦ {names} törölve a tartalmával együtt
+Étage supprimé ¦ Kerros poistettu ¦ Szint törölve
+Étage renommé ¦ Kerros nimetty uudelleen ¦ Szint átnevezve
+Renommer l’étage ¦ Nimeä kerros uudelleen ¦ Szint átnevezése
+✥ Glisse le plan ancien (sur un endroit vide du plan) ; reclique « ✥ Déplacer » pour finir. ¦ ✥ Vedä vanhaa pohjapiirrosta (pohjapiirroksen tyhjästä kohdasta); lopeta napsauttamalla uudelleen ”✥ Siirrä”. ¦ ✥ Húzd a régi alaprajzot (az alaprajz egy üres pontján); a befejezéshez kattints újra a „✥ Mozgatás” gombra.
+Plan ancien retiré ¦ Vanha pohjapiirros poistettu ¦ Régi alaprajz eltávolítva
+Plan ancien retiré du fond (l’image reste dans les médias) ¦ Vanha pohjapiirros poistettu taustalta (kuva jää mediaan) ¦ Régi alaprajz eltávolítva a háttérből (a kép a médiában marad)
+Plan ancien sous cet étage ¦ Vanha pohjapiirros tämän kerroksen alla ¦ Régi alaprajz e szint alatt
+Plan ancien ¦ Vanha pohjapiirros ¦ Régi alaprajz
+Plan ancien verrouillé ¦ Vanha pohjapiirros lukittu ¦ Régi alaprajz zárolva
+Plan ancien déverrouillé ¦ Vanhan pohjapiirroksen lukitus avattu ¦ Régi alaprajz zárolása feloldva
+Un habitant de la maison ¦ Talon asukas ¦ A ház egy lakója
+Habitant ajouté ¦ Asukas lisätty ¦ Lakó hozzáadva
+Habitant retiré ¦ Asukas irrotettu ¦ Lakó eltávolítva
+Une personne liée à cette pièce ¦ Tähän huoneeseen liittyvä henkilö ¦ A helyiséghez kapcsolódó személy
+Personne liée à la pièce ¦ Henkilö yhdistetty huoneeseen ¦ Személy a helyiséghez kapcsolva
+Le plan est vide. ¦ Pohjapiirros on tyhjä. ¦ Az alaprajz üres.
+Fenêtre bloquée. ¦ Ikkuna estetty. ¦ Az ablak le van tiltva.
+Ce recensement n’est relié à aucune fiche. ¦ Tätä henkikirjaa ei ole yhdistetty mihinkään korttiin. ¦ Ez a népszámlálás nincs adatlaphoz kapcsolva.
+Recensement retiré ¦ Henkikirja irrotettu ¦ Népszámlálás eltávolítva
+Personne retirée ¦ Henkilö irrotettu ¦ Személy eltávolítva
+Souvenir retiré ¦ Muisto irrotettu ¦ Emlék eltávolítva
+Légende des époques ¦ Aikakausien selite ¦ A korszakok jelmagyarázata
+Personnes de la pièce ¦ Huoneen henkilöt ¦ A helyiség személyei
+Flèche ajoutée ¦ Nuoli lisätty ¦ Nyíl hozzáadva
+Flèche retirée ¦ Nuoli poistettu ¦ Nyíl eltávolítva
+Lumière ¦ Valo ¦ Fény
+Années de la personne ¦ Henkilön vuodet ¦ A személy évei
+Recensement rattaché à l’époque ¦ Henkikirja yhdistetty aikakauteen ¦ Népszámlálás a korszakhoz kapcsolva
+Revêtement du mur ¦ Seinän pinnoite ¦ A fal burkolata
+Murs de la pièce ¦ Huoneen seinät ¦ A helyiség falai
+Autre époque en 3D ¦ Toinen aikakausi 3D:nä ¦ Másik korszak 3D-ben
+📍 Un arrêt de la visite guidée ¦ 📍 Opastetun kierroksen pysähdys ¦ 📍 A vezetett bejárás egy állomása
+Ce qu’on dit ici (lu à voix haute pendant la visite guidée) : ¦ Mitä tässä kerrotaan (luetaan ääneen opastetun kierroksen aikana): ¦ Amit itt elmondunk (a vezetett bejárás alatt felolvasva):
+Ici, la salle commune : on y veillait l’hiver… ¦ Tässä on tupa: talvi-iltaisin täällä istuttiin yhdessä… ¦ Itt a nagyszoba: télen itt tartották az esti összejöveteleket…
+Ajouter l’arrêt ¦ Lisää pysähdys ¦ Állomás hozzáadása
+MAISON · PHOTO D’ÉPOQUE ¦ TALO · AIKAKAUDEN VALOKUVA ¦ HÁZ · KORABELI FOTÓ
+La photo prise d’ici ¦ Täältä otettu valokuva ¦ Az innen készült fotó
+La photo ancienne prise à cet endroit, dans cette direction : tu pourras la comparer avec la maison (curseur Autrefois ⟷ Aujourd’hui). ¦ Vanha valokuva, joka on otettu tästä kohdasta tähän suuntaan: voit verrata sitä taloon (liukusäädin Ennen ⟷ Nyt). ¦ A régi fotó, amely ezen a helyen, ebbe az irányba készült: összevetheted a házzal (Régen ⟷ Ma csúszka).
+Poser la photo ¦ Sijoita valokuva ¦ Fotó elhelyezése
+Cette image ne peut pas servir ici. ¦ Tätä kuvaa ei voi käyttää tässä. ¦ Ez a kép itt nem használható.
+Photo d’époque ¦ Aikakauden valokuva ¦ Korabeli fotó
+Photo d’époque posée ¦ Aikakauden valokuva sijoitettu ¦ Korabeli fotó elhelyezve
+Le nord du plan : clic pour le régler (☀️ Orientation et lumière) ¦ Pohjapiirroksen pohjoinen: napsauta asettaaksesi (☀️ Suunta ja valo) ¦ Az alaprajz északi iránya: kattints a beállításhoz (☀️ Tájolás és fény)
+Aucune maison ne correspond. ¦ Yksikään talo ei vastaa hakua. ¦ Nincs megfelelő ház.
+Époques ¦ Aikakaudet ¦ Korszakok
+🏰 Notice Mérimée (patrimoine)… ¦ 🏰 Mérimée-tietue (kulttuuriperintö)… ¦ 🏰 Mérimée-adatlap (műemlék)…
+🏠 Maisons ¦ 🏠 Talot ¦ 🏠 Házak
+Les plans des maisons de la famille, en 2D et en 3D : leurs pièces, leurs meubles, leurs habitants, leurs recensements, leurs époques et leurs souvenirs. ¦ Suvun talojen pohjapiirrokset 2D:nä ja 3D:nä: niiden huoneet, huonekalut, asukkaat, henkikirjat, aikakaudet ja muistot. ¦ A családi házak alaprajzai 2D-ben és 3D-ben: helyiségeik, bútoraik, lakóik, népszámlálásaik, korszakaik és emlékeik.
+Renommer la maison ¦ Nimeä talo uudelleen ¦ Ház átnevezése
+Ouvrir la maison ¦ Avaa talo ¦ Ház megnyitása
+↗ Ouvrir la maison ¦ ↗ Avaa talo ¦ ↗ Ház megnyitása
+Cette maison est déjà rattachée. ¦ Tämä talo on jo yhdistetty. ¦ Ez a ház már kapcsolódik.
+🏠 Maison ¦ 🏠 Talo ¦ 🏠 Ház
+Enregistre d’abord le recensement : tu pourras ensuite lui rattacher la maison où vivait le foyer (et l’époque de la maison). ¦ Tallenna ensin henkikirja: voit sitten yhdistää siihen talon, jossa talous asui (ja talon aikakauden). ¦ Előbb mentsd a népszámlálást: aztán hozzákapcsolhatod azt a házat, ahol a háztartás élt (és a ház korszakát).
+Détacher la maison de ce recensement ¦ Irrota talo tästä henkikirjasta ¦ A ház leválasztása erről a népszámlálásról
+Relier une maison : nom, lieu… ¦ Yhdistä talo: nimi, paikka… ¦ Ház összekapcsolása: név, hely…
+Époque de la maison ¦ Talon aikakausi ¦ A ház korszaka
+Dessiner la maison de ce foyer ¦ Piirrä tämän talouden talo ¦ A háztartás házának megrajzolása
+Rattachée tout de suite (sans attendre « Enregistrer »). Dans la maison : onglet Maison → « 📋 Les recensements ». ¦ Yhdistetään heti (”Tallenna”-painiketta ei tarvita). Talossa: Talo-välilehti → ”📋 Henkikirjat”. ¦ Azonnal összekapcsolva (nem kell „Mentés”). A házban: Ház lap → „📋 A népszámlálások”.
+— époque de la maison — ¦ — talon aikakausi — ¦ — a ház korszaka —
+Le recensement a des changements non enregistrés. ¦ Henkikirjassa on tallentamattomia muutoksia. ¦ A népszámlálásban nem mentett módosítások vannak.
+Ouvrir la maison quand même ? ¦ Avataanko talo silti? ¦ Mégis megnyitod a házat?
+Maison détachée du recensement. ¦ Talo irrotettu henkikirjasta. ¦ Ház leválasztva a népszámlálásról.
+Choisis une maison. ¦ Valitse talo. ¦ Válassz egy házat.
+Maison rattachée au recensement. ¦ Talo yhdistetty henkikirjaan. ¦ Ház összekapcsolva a népszámlálással.
+La longueur et la largeur de tout l’étage, sous le plan et à sa gauche (en plus des cotes de chaque mur). ¦ Koko kerroksen pituus ja leveys pohjapiirroksen alla ja vasemmalla puolella (kunkin seinän mittojen lisäksi). ¦ Az egész szint hossza és szélessége, az alaprajz alatt és bal oldalán (az egyes falak méretein felül).
+Un tableau posé à droite du plan : chaque pièce et sa surface, et le total. Il se met à jour tout seul et part avec le plan (image, PDF, impression). ¦ Pohjapiirroksen oikealle puolelle sijoitettu taulukko: jokainen huone ja sen pinta-ala sekä yhteensä. Se päivittyy itsestään ja kulkee pohjapiirroksen mukana (kuva, PDF, tuloste). ¦ Egy táblázat az alaprajztól jobbra: minden helyiség a területével, és az összesen. Magától frissül, és az alaprajzzal együtt kerül ki (kép, PDF, nyomtatás).
+Le cadre en bas à droite des vrais plans : le nom de la maison, le lieu, l’époque, l’étage et la date du jour. ¦ Oikeiden pohjapiirrosten oikean alakulman ruutu: talon nimi, paikka, aikakausi, kerros ja päivämäärä. ¦ A valódi tervek jobb alsó sarkában lévő keret: a ház neve, a hely, a korszak, a szint és a mai dátum.
+Le plan en clair sur fond sombre, comme dans un logiciel de dessin technique. Seulement à l’écran : les images, PDF et impressions restent sur fond blanc. ¦ Pohjapiirros vaalein viivoin tummalla pohjalla kuten teknisen piirtämisen ohjelmissa. Vain näytöllä: kuvat, PDF:t ja tulosteet pysyvät valkoisella pohjalla. ¦ Az alaprajz világos vonalakkal, sötét háttéren, mint egy műszaki rajzprogramban. Csak a képernyőn: a képek, PDF-ek és nyomatok fehér hátteresek maradnak.
+L’étage du dessous (ou du dessus) apparaît en transparence sous celui-ci : pratique pour poser les murs du 1er étage juste au-dessus de ceux du rez-de-chaussée. 🕰 Une autre époque : le même étage, tel qu’il était (ou sera), en sépia. ¦ Alempi (tai ylempi) kerros näkyy läpikuultavana tämän alla: kätevää, kun asetat 1. kerroksen seinät suoraan pohjakerroksen seinien yläpuolelle. 🕰 Toinen aikakausi: sama kerros sellaisena kuin se oli (tai tulee olemaan) seepiana. ¦ Az alatta (vagy fölötte) lévő szint átlátszik ez alatt: hasznos, hogy az 1. emelet falait pontosan a földszintiek fölé tedd. 🕰 Másik korszak: ugyanaz a szint, ahogy volt (vagy lesz), szépiában.
+Clique les deux bouts d’une longueur connue sur l’image (un mur, l’échelle du plan), puis donne sa vraie longueur : en mètres, ou en toises et pieds anciens (convertis tout seuls). ¦ Napsauta kuvassa tunnetun pituuden molempia päitä (seinä, pohjapiirroksen mittakaava) ja anna sen todellinen pituus: metreinä tai vanhoina toiseina ja jalkoina (muunnetaan itsestään). ¦ Kattints a képen egy ismert hosszúság két végére (egy fal, az alaprajz méretaránya), majd add meg a valódi hosszát: méterben, vagy régi toise-ban és lábban (magától átváltva).
+Le plafond suit la pente du toit (vue 3D, coupe, visite) ; la surface « loi Carrez » ne compte que là où la hauteur fait au moins 1,80 m. ¦ Katto seuraa katon kaltevuutta (3D-näkymä, leikkaus, kierros); ”Carrez-lain” pinta-ala lasketaan vain siellä, missä korkeus on vähintään 1,80 m. ¦ A mennyezet követi a tető lejtését (3D nézet, metszet, bejárás); a „Carrez-törvény” szerinti terület csak ott számít, ahol a magasság legalább 1,80 m.
+Le mur bas sous la pente (le « jambage ») : 0 si le toit part du plancher, 100 cm souvent. ¦ Matala seinä kaltevuuden alla (”polvimuuri”): 0, jos katto alkaa lattiasta, usein 100 cm. ¦ A lejtés alatti alacsony fal (a „térdfal”): 0, ha a tető a padlótól indul, gyakran 100 cm.
+Pour une maison en L, en T ou en U : un toit par aile, à la même pente ; les noues (là où deux toits se rejoignent) se font toutes seules. Les ailes suivent les pièces de l’étage du haut. ¦ L-, T- tai U-muotoiselle talolle: yksi katto siipeä kohden samalla kaltevuudella; jiirit (kohdat, joissa kaksi kattoa kohtaa) syntyvät itsestään. Siivet seuraavat ylimmän kerroksen huoneita. ¦ L, T vagy U alakú házhoz: szárnyanként egy tető, azonos hajlásszöggel; a vápák (ahol két tető találkozik) maguktól elkészülnek. A szárnyak a legfelső szint helyiségeit követik.
+Tourne le plan par rapport au nord : 0° = le haut du plan est au nord, 90° = le haut du plan regarde l’est. Le soleil et les ombres de la vue 3D suivent. ¦ Kiertää pohjapiirrosta pohjoiseen nähden: 0° = pohjapiirroksen yläreuna on pohjoisessa, 90° = yläreuna on itään päin. 3D-näkymän aurinko ja varjot seuraavat. ¦ Elforgatja az alaprajzot észak szerint: 0° = az alaprajz teteje északra néz, 90° = az alaprajz teteje keletre néz. A 3D nézet napja és árnyékai követik.
+La hauteur de tes yeux pendant la visite (🚶 Visiter, vue 3D) : 1,60 m pour un adulte, 1 m pour voir comme un enfant. ¦ Silmiesi korkeus kierroksen aikana (🚶 Kierrä, 3D-näkymä): 1,60 m aikuiselle, 1 m nähdäksesi kuin lapsi. ¦ A szemed magassága a bejárás alatt (🚶 Bejárás, 3D nézet): 1,60 m egy felnőttnek, 1 m, ha gyerekszemmel akarsz látni.
+La hauteur de tes yeux dans la maison : 1,60 m pour un adulte, 1 m pour voir comme un enfant. ¦ Silmiesi korkeus talossa: 1,60 m aikuiselle, 1 m nähdäksesi kuin lapsi. ¦ A szemed magassága a házban: 1,60 m egy felnőttnek, 1 m, ha gyerekszemmel akarsz látni.
+De combien le milieu du mur sort de la ligne droite : + d’un côté, − de l’autre ; 0 = un mur droit. Pour une tour ronde, une abside, un mur cintré. ¦ Kuinka paljon seinän keskikohta poikkeaa suorasta: + yhteen suuntaan, − toiseen; 0 = suora seinä. Pyöreään torniin, apsikseen, kaarevaan seinään. ¦ Mennyire domborodik ki a fal közepe az egyenesből: + az egyik irányba, − a másikba; 0 = egyenes fal. Kerek toronyhoz, apszishoz, íves falhoz.
+Agrandit ou rapetisse le motif (briques, pierres, papier peint) sur ce mur : 100 % = taille réelle. ¦ Suurentaa tai pienentää kuviota (tiilet, kivet, tapetti) tällä seinällä: 100 % = todellinen koko. ¦ Nagyítja vagy kicsinyíti a mintát (tégla, kő, tapéta) ezen a falon: 100% = valódi méret.
+La hauteur du bas de la fenêtre au-dessus du plancher (souvent 90 cm). ¦ Ikkunan alareunan korkeus lattiasta (usein 90 cm). ¦ Az ablak aljának magassága a padló fölött (gyakran 90 cm).
+Une zone sans plancher : on voit l’étage du dessous (mezzanine, séjour en double hauteur, cage d’escalier). En 3D le plancher est percé, et pendant la visite on ne peut pas y marcher. ¦ Alue ilman lattiaa: alempi kerros näkyy (parvi, kaksinkertaisen korkeuden olohuone, porraskuilu). 3D:ssä lattia on puhkaistu, eikä kierroksen aikana sinne voi kävellä. ¦ Födém nélküli terület: látszik az alatta lévő szint (galéria, dupla belmagasságú nappali, lépcsőház). 3D-ben a födém át van törve, és a bejárás során nem lehet rá lépni.
+Posé tout seul le long des bords du vide qui ne touchent pas un mur (et laissé ouvert là où arrive un escalier). ¦ Sijoitetaan itsestään niille avoimen tilan reunoille, jotka eivät kosketa seinää (ja jätetään auki sieltä, mihin portaat saapuvat). ¦ Magától kerül a légtér azon szélei mentén, amelyek nem érnek falhoz (és nyitva marad ott, ahová a lépcső érkezik).
+En déplaçant la pièce, ses murs (portes et fenêtres comprises), ses meubles et ses textes suivent. ⇧ en glissant : la pièce seule. ¦ Kun huonetta siirretään, sen seinät (ovineen ja ikkunoineen), huonekalut ja tekstit seuraavat. ⇧ vedettäessä: vain huone. ¦ A helyiség mozgatásakor a falai (ajtókkal és ablakokkal), a bútorai és a szövegei is vele mennek. ⇧ húzás közben: csak a helyiség.
+La hauteur à monter : celle de l’étage plus l’épaisseur du plancher (réglée dans l’onglet Maison). Décoche pour la fixer à la main dans « Hauteur ». ¦ Noustava korkeus: kerroksen korkeus plus välipohjan paksuus (asetetaan Talo-välilehdellä). Poista valinta asettaaksesi sen käsin kohdassa ”Korkeus”. ¦ A megmászandó magasság: a szint magassága plusz a födém vastagsága (a Ház lapon állítható). Vedd ki a pipát, ha kézzel akarod megadni a „Magasság” mezőben.
+Perce le plancher de l’étage du dessus au-dessus de l’escalier (la trémie), avec un garde-corps autour sauf du côté de l’arrivée. ¦ Puhkaisee yläkerroksen lattian portaiden kohdalta (portaikon aukko) ja lisää kaiteen ympärille paitsi saapumispuolelle. ¦ Átüti a fölötte lévő szint födémét a lépcső fölött (lépcsőnyílás), körben korláttal, kivéve az érkezés oldalán.
+La hauteur du dessous de l’objet au-dessus du plancher : 0 pour un meuble posé au sol, 140 pour une horloge accrochée au mur. ¦ Esineen alareunan korkeus lattiasta: 0 lattialla olevalle huonekalulle, 140 seinälle ripustetulle kellolle. ¦ A tárgy aljának magassága a padló fölött: 0 a padlón álló bútornál, 140 egy falra akasztott óránál.
+Agrandit ou réduit l’objet en gardant ses proportions : pratique pour un modèle importé arrivé trop petit ou trop grand. ¦ Suurentaa tai pienentää esinettä mittasuhteet säilyttäen: kätevää, jos tuotu malli on liian pieni tai liian suuri. ¦ Arányosan nagyítja vagy kicsinyíti a tárgyat: hasznos, ha egy importált modell túl kicsi vagy túl nagy lett.
+Une flèche du texte vers un point du plan (le puits, une fenêtre, une cheminée…). Glisse la poignée rouge pour la pointer. ¦ Nuoli tekstistä pohjapiirroksen pisteeseen (kaivo, ikkuna, takka…). Vedä punaista kahvaa osoittaaksesi sillä. ¦ Nyíl a szövegtől az alaprajz egy pontjáig (a kút, egy ablak, egy kandalló…). Húzd a piros fogantyút, hogy odamutasson.
+Quand l’aimant des angles est mis, un mur tracé se cale sur des angles de ce pas : 90° = seulement des angles droits, 45° = aussi les diagonales, 15° = plus fin. ¦ Kun kulmien magneettikohdistus on päällä, piirretty seinä asettuu tämän porrastuksen kulmiin: 90° = vain suorat kulmat, 45° = myös vinot, 15° = tarkempi. ¦ Ha a szögek szerinti igazítás be van kapcsolva, a megrajzolt fal ilyen lépésű szögekhez igazodik: 90° = csak derékszög, 45° = átlók is, 15° = finomabb.
+Glisse : la maison prend l’époque la plus proche de l’année (avant ou égale). ¦ Liu’uta: talo saa vuotta lähimmän aikakauden (aiemman tai saman). ¦ Csúsztasd: a ház az évhez legközelebbi korszakot veszi fel (korábbit vagy azonosat).
+Tourne le plan par rapport au nord : 0° = le haut du plan est au nord, 90° = le haut du plan regarde l’est. Les ombres suivent. ¦ Kiertää pohjapiirrosta pohjoiseen nähden: 0° = pohjapiirroksen yläreuna on pohjoisessa, 90° = yläreuna on itään päin. Varjot seuraavat. ¦ Elforgatja az alaprajzot észak szerint: 0° = az alaprajz teteje északra néz, 90° = a teteje keletre néz. Az árnyékok követik.
+Licence : {x} ¦ Lisenssi: {x} ¦ Licenc: {x}
+Auteur : {x} ¦ Tekijä: {x} ¦ Szerző: {x}
+Source : {x} ¦ Lähde: {x} ¦ Forrás: {x}
+🕰 ancien ¦ 🕰 vanha ¦ 🕰 régi
+Forme « {name} » ¦ Muoto ”{name}” ¦ „{name}” forma
+{w} × {d} cm, {h} cm de haut, à {elev} cm du sol ¦ {w} × {d} cm, {h} cm korkea, {elev} cm lattiasta ¦ {w} × {d} cm, {h} cm magas, {elev} cm-re a padlótól
+{w} × {d} cm, {h} cm de haut ¦ {w} × {d} cm, {h} cm korkea ¦ {w} × {d} cm, {h} cm magas
+{name} (à moi) ¦ {name} (oma) ¦ {name} (saját)
+Comme « {name} » ¦ Kuten ”{name}” ¦ Mint „{name}”
+Supprimer l’objet « {name} » de la bibliothèque ? ¦ Poistetaanko esine ”{name}” kirjastosta? ¦ Törlöd a(z) „{name}” tárgyat a könyvtárból?
+« {name} » est dans « {cat} » : clique-le pour le poser. ¦ ”{name}” on kohdassa ”{cat}”: napsauta sitä sijoittaaksesi sen. ¦ „{name}” itt található: „{cat}”; kattints rá az elhelyezéshez.
+Supprimer « {name} » de « Mes objets » ? ¦ Poistetaanko ”{name}” kohdasta ”Omat esineeni”? ¦ Törlöd a(z) „{name}” elemet a „Saját tárgyaim” közül?
+Des modèles 3D <b>libres de droit</b> (CC0 : domaine public, utilisables sans condition) à poser dans tes maisons. Ils arrivent dans <b>Mobilier → « Mes objets »</b>, avec leur licence, leur auteur et leur source. ¦ <b>Vapaasti käytettäviä</b> 3D-malleja (CC0: vapaasti käytettävä, ilman ehtoja) taloihisi. Ne tulevat kohtaan <b>Huonekalut → ”Omat esineeni”</b> lisenssinsä, tekijänsä ja lähteensä kanssa. ¦ <b>Jogdíjmentes</b> 3D modellek (CC0: közkincs, feltétel nélkül használható) a házaidba. A <b>Bútorok → „Saját tárgyaim”</b> közé kerülnek, a licencükkel, szerzőjükkel és forrásukkal.
+Modèles fournis par {ph} (Powered by Poly Haven) — licence {cc0}. Le téléchargement passe par ton serveur (environ 1 à 10 Mo par modèle, textures comprises). ¦ Mallit tarjoaa {ph} (Powered by Poly Haven) — lisenssi {cc0}. Lataus kulkee palvelimesi kautta (noin 1–10 Mt mallia kohden tekstuureineen). ¦ A modelleket a(z) {ph} biztosítja (Powered by Poly Haven) — licenc: {cc0}. A letöltés a szervereden keresztül történik (modellenként kb. 1–10 MB, textúrákkal együtt).
+Télécharge d’abord un pack <b>CC0</b> sur le site de son auteur (un fichier .zip), puis choisis-le ici : tu coches les modèles à garder (GLB, glTF, OBJ, STL). ¦ Lataa ensin <b>CC0</b>-paketti tekijän sivustolta (.zip-tiedosto) ja valitse se sitten tästä: valitse säilytettävät mallit (GLB, glTF, OBJ, STL). ¦ Előbb tölts le egy <b>CC0</b> csomagot a szerzője oldaláról (.zip fájl), aztán válaszd ki itt: pipáld be a megtartandó modelleket (GLB, glTF, OBJ, STL).
+{models} (les {n} plus téléchargés sur {total}) ¦ {models} ({n} ladatuinta {total} joukosta) ¦ {models} (a(z) {n} legtöbbet letöltött, összesen {total})
+« {name} » est dans Mobilier → « Mes objets » (CC0, Poly Haven). ¦ ”{name}” on kohdassa Huonekalut → ”Omat esineeni” (CC0, Poly Haven). ¦ „{name}” a Bútorok → „Saját tárgyaim” között van (CC0, Poly Haven).
+Licence trouvée dans le pack ¦ Paketista löytynyt lisenssi ¦ A csomagban talált licenc
+Mesure et vignettes… ¦ Mitataan ja tehdään pienoiskuvia… ¦ Mérés és bélyegképek…
+{models} dans « Mes objets ». ¦ {models} kohdassa ”Omat esineeni”. ¦ {models} a „Saját tárgyaim” között.
+Renommer, ranger, voir la licence, supprimer ¦ Nimeä uudelleen, järjestä, näytä lisenssi, poista ¦ Átnevezés, rendezés, licenc megtekintése, törlés
+Modifier ou supprimer cet objet ¦ Muokkaa tai poista tämä esine ¦ Tárgy szerkesztése vagy törlése
+Rien ne correspond. ＋ Crée l’objet, ou cherche-le dans la 📦 Bibliothèque en ligne. ¦ Mikään ei vastaa hakua. ＋ Luo esine tai etsi sitä 📦 Verkkokirjastosta. ¦ Nincs találat. ＋ Hozd létre a tárgyat, vagy keresd az 📦 Online könyvtárban.
+Ici : les objets que tu crées (＋ Créer un objet), ceux téléchargés dans la 📦 Bibliothèque en ligne, et les fichiers 3D importés (⤒ Importer, en haut). ¦ Täällä: luomasi esineet (＋ Luo esine), 📦 Verkkokirjastosta ladatut ja tuodut 3D-tiedostot (⤒ Tuo, ylhäällä). ¦ Itt: az általad létrehozott tárgyak (＋ Tárgy létrehozása), az 📦 Online könyvtárból letöltöttek és az importált 3D fájlok (⤒ Importálás, fent).
+Rien d’ancien dans cette catégorie (décoche « 🕰 Ancien seulement »). ¦ Tässä luokassa ei ole mitään vanhaa (poista valinta ”🕰 Vain vanhat”). ¦ Ebben a kategóriában nincs semmi régi (vedd ki a pipát: „🕰 Csak régi”).
+Aucun objet montré dans cette catégorie (⚙️ Ranger pour en remontrer). ¦ Tässä luokassa ei näytetä esineitä (⚙️ Järjestä näyttääksesi niitä uudelleen). ¦ Ebben a kategóriában nincs látható tárgy (⚙️ Rendezés, hogy újra megjelenjenek).
+Chercher… lit, lampe, piano, vache, salon… ¦ Hae… sänky, lamppu, piano, lehmä, olohuone… ¦ Keresés… ágy, lámpa, zongora, tehén, nappali…
+Chercher un objet ¦ Hae esinettä ¦ Tárgy keresése
+Un objet à toi : nom, taille, couleur, forme, image ¦ Oma esine: nimi, koko, väri, muoto, kuva ¦ Saját tárgy: név, méret, szín, forma, kép
+Des modèles 3D libres de droit (CC0) à télécharger ¦ Ladattavia vapaasti käytettäviä (CC0) 3D-malleja ¦ Letölthető jogdíjmentes (CC0) 3D modellek
+Montrer, cacher, ranger les catégories et les objets ¦ Näytä, piilota ja järjestä luokat ja esineet ¦ Kategóriák és tárgyak megjelenítése, elrejtése, rendezése
+Ne montrer que le mobilier et les objets d’autrefois ¦ Näytä vain menneiden aikojen huonekalut ja esineet ¦ Csak a régi idők bútorainak és tárgyainak megjelenítése
+＋ Créer un objet ¦ ＋ Luo esine ¦ ＋ Tárgy létrehozása
+📦 Bibliothèque en ligne ¦ 📦 Verkkokirjasto ¦ 📦 Online könyvtár
+⚙️ Ranger ¦ ⚙️ Järjestä ¦ ⚙️ Rendezés
+🕰 Ancien seulement ¦ 🕰 Vain vanhat ¦ 🕰 Csak régi
+Ovale ¦ Soikio ¦ Ovális
+Triangle ¦ Kolmio ¦ Háromszög
+En L ¦ L-muotoinen ¦ L alakú
+Lit simple ¦ Yhden hengen sänky ¦ Egyszemélyes ágy
+Lit clos ¦ Kaappisänky ¦ Szekrényágy
+Meuble à portes ¦ Ovellinen kaappi ¦ Ajtós szekrény
+Banc-coffre à dossier ¦ Selkänojallinen penkkiarkku ¦ Támlás ládapad
+Horloge ¦ Kello ¦ Óra
+Cheminée à manteau ¦ Takka reunuksineen ¦ Párkányos kandalló
+Cheminée à manteau (hotte) ¦ Takka reunuksineen (huuva) ¦ Párkányos kandalló (füstfogó)
+Poêle ¦ Uuni ¦ Kályha
+Cuisinière ¦ Liesi ¦ Tűzhely
+Évier ¦ Tiskiallas ¦ Mosogató
+Lavabo, toilette ¦ Pesuallas, pesupöytä ¦ Mosdó, mosdóasztal
+Maie, pétrin ¦ Taikinakaukalo ¦ Dagasztóteknő
+Broc et cuvette ¦ Kannu ja pesuvati ¦ Kancsó és mosdótál
+Fontaine ¦ Suihkulähde ¦ Kút
+Baratte ¦ Kirnu ¦ Köpülő
+Lampe ¦ Lamppu ¦ Lámpa
+Bougeoir ¦ Kynttilänjalka ¦ Gyertyatartó
+Chenets ¦ Takkatelineet ¦ Tűzbak
+Fer à repasser ¦ Silitysrauta ¦ Vasaló
+Banc d’école ¦ Koulun penkki ¦ Iskolapad
+Miroir, cadre au mur ¦ Peili, seinäkehys ¦ Tükör, falikeret
+Statue ¦ Patsas ¦ Szobor
+Animal ¦ Eläin ¦ Állat
+Cabane ¦ Maja ¦ Kunyhó
+Cône, tipi ¦ Kartio, tiipii ¦ Kúp, tipi
+Bloc (boîte pleine) ¦ Kappale (umpinainen laatikko) ¦ Tömb (tömör doboz)
+Cylindre ¦ Lieriö ¦ Henger
+Bassine, baquet (ouvert) ¦ Vati, saavi (avoin) ¦ Lavór, dézsa (nyitott)
+Table (plateau et 4 pieds) ¦ Pöytä (levy ja 4 jalkaa) ¦ Asztal (lap és 4 láb)
+Table ovale ¦ Soikea pöytä ¦ Ovális asztal
+Caisson sur pieds ¦ Jalallinen kaappi ¦ Lábakon álló szekrényke
+Comptoir, plan de travail ¦ Tiski, työtaso ¦ Pult, munkalap
+Buffet deux-corps, vaisselier ¦ Kaksiosainen astiakaappi ¦ Kétrészes tálalószekrény
+Vitrine ¦ Vitriini ¦ Vitrin
+Armoire (corniche) ¦ Vaatekaappi (karniisi) ¦ Ruhásszekrény (párkány)
+Commode à tiroirs ¦ Laatikosto, lipasto ¦ Fiókos komód
+Coffre à couvercle ¦ Kannellinen arkku ¦ Fedeles láda
+Étagère ouverte ¦ Avohylly ¦ Nyitott polc
+Lit ¦ Sänky ¦ Ágy
+Poêle rond (Godin) ¦ Pyöreä kamiina (Godin) ¦ Kerek kályha (Godin)
+Crémaillère et chaudron ¦ Patakoukku ja pata ¦ Üstakasztó és üst
+Baignoire sur pieds ¦ Jalallinen kylpyamme ¦ Lábas fürdőkád
+Lavabo sur colonne ¦ Jalallinen pesuallas ¦ Oszlopos mosdó
+Fontaine sur support ¦ Telineellinen vesiastia ¦ Állványos vizeskút
+Baratte à piston ¦ Mäntäkirnu ¦ Dugattyús köpülő
+Lampe à pétrole ¦ Öljylamppu ¦ Petróleumlámpa
+Bougeoir, chandelier ¦ Kynttilänjalka, kynttelikkö ¦ Gyertyatartó, kandeláber
+Poste TSF ¦ Radiovastaanotin ¦ Rádiókészülék
+Phonographe ¦ Fonografi ¦ Fonográf
+Machine à coudre à pédale ¦ Poljettava ompelukone ¦ Lábhajtásos varrógép
+Banc d’école à pupitre ¦ Koulun pulpettipenkki ¦ Iskolapad pulttal
+Pressoir, presse ¦ Puristin, prässi ¦ Prés
+Miroir ¦ Peili ¦ Tükör
+Cadre au mur ¦ Seinäkehys ¦ Falikeret
+Statue sur socle ¦ Patsas jalustalla ¦ Szobor talapzaton
+Plante en pot ¦ Ruukkukasvi ¦ Cserepes növény
+Boule ¦ Pallo ¦ Gömb
+Cône ¦ Kartio ¦ Kúp
+Cabane (toit) ¦ Maja (katto) ¦ Kunyhó (tető)
+À plat (tapis) ¦ Litteä (matto) ¦ Lapos (szőnyeg)
+Plateau avec l’image dessus ¦ Levy, jonka päällä on kuva ¦ Lap, rajta a képpel
+MAISON · MOBILIER ¦ TALO · HUONEKALUT ¦ HÁZ · BÚTOROK
+MAISON · MES OBJETS ¦ TALO · OMAT ESINEENI ¦ HÁZ · SAJÁT TÁRGYAIM
+Créer l’objet ¦ Luo esine ¦ Tárgy létrehozása
+Partir d’un objet existant (facultatif) ¦ Aloita olemassa olevasta esineestä (valinnainen) ¦ Kiindulás egy meglévő tárgyból (nem kötelező)
+— un objet vide — ¦ — tyhjä esine — ¦ — üres tárgy —
+ex. Armoire de la grand-mère, pressoir du moulin… ¦ esim. Isoäidin vaatekaappi, myllyn puristin… ¦ pl. A nagymama szekrénye, a malom prése…
+Nouvelle catégorie… ¦ Uusi luokka… ¦ Új kategória…
+ex. Grenier ¦ esim. Vintti ¦ pl. Padlás
+Vu de dessus (2D) ¦ Ylhäältä (2D) ¦ Felülnézet (2D)
+En volume (3D) ¦ Kolmiulotteinen (3D) ¦ Térben (3D)
+2ᵉ couleur (pieds, poignées, filets) ¦ 2. väri (jalat, kahvat, listat) ¦ 2. szín (lábak, fogantyúk, díszlécek)
+2ᵉ couleur ¦ 2. väri ¦ 2. szín
+Une deuxième couleur ¦ Toinen väri ¦ Egy második szín
+Posé au sol (0), sur une table (75), accroché au mur (140)… ¦ Lattialla (0), pöydällä (75), seinällä (140)… ¦ A padlón (0), asztalon (75), falra akasztva (140)…
+Tourné de ¦ Käännetty ¦ Elforgatva
+Image vue de dessus (facultatif) ¦ Kuva ylhäältä (valinnainen) ¦ Felülnézeti kép (nem kötelező)
+🖼️ Une photo des médias… ¦ 🖼️ Kuva mediasta… ¦ 🖼️ Egy fotó a médiából…
+Retirer l’image ¦ Irrota kuva ¦ Kép eltávolítása
+Note (souvenir, provenance) ¦ Huomautus (muisto, alkuperä) ¦ Megjegyzés (emlék, eredet)
+Aperçu en 3D ¦ 3D-esikatselu ¦ 3D előnézet
+⏳ Mesure… ¦ ⏳ Mitataan… ¦ ⏳ Mérés…
+Une photo de l’objet (vue de dessus) ¦ Valokuva esineestä (ylhäältä) ¦ Fotó a tárgyról (felülnézet)
+L’image se pose sur le plan, à la taille de l’objet. ¦ Kuva sijoitetaan pohjapiirrokseen esineen kokoisena. ¦ A kép a tárgy méretében kerül az alaprajzra.
+Ceux déjà posés dans les maisons restent. ¦ Taloihin jo sijoitetut säilyvät. ¦ A házakban már elhelyezettek megmaradnak.
+Donne un nom à la nouvelle catégorie. ¦ Anna uudelle luokalle nimi. ¦ Adj nevet az új kategóriának.
+Objet modifié (ceux déjà posés gardent leur ancienne forme). ¦ Esine muutettu (jo sijoitetut säilyttävät vanhan muotonsa). ¦ Tárgy módosítva (a már elhelyezettek megtartják a régi formájukat).
+Montrer aussi dans la catégorie ¦ Näytä myös luokassa ¦ Megjelenítés ebben a kategóriában is
+— seulement dans « Mes objets » — ¦ — vain kohdassa ”Omat esineeni” — ¦ — csak a „Saját tárgyaim” között —
+« Mes objets » seulement ¦ Vain ”Omat esineeni” ¦ Csak „Saját tárgyaim”
+Licence ¦ Lisenssi ¦ Licenc
+non précisée (fichier importé) ¦ ei määritetty (tuotu tiedosto) ¦ nincs megadva (importált fájl)
+Le fichier 3D est supprimé : là où il est posé, il redevient une simple boîte. ¦ 3D-tiedosto poistetaan: siellä, minne se on sijoitettu, siitä tulee taas pelkkä laatikko. ¦ A 3D fájl törlődik: ahol el van helyezve, ott újra egyszerű doboz lesz.
+Aucun objet. ¦ Ei esineitä. ¦ Nincs tárgy.
+⚙️ Ranger le mobilier ¦ ⚙️ Järjestä huonekalut ¦ ⚙️ Bútorok rendezése
+Coche ce que tu veux voir et range avec ↑ ↓ : les catégories, puis les objets de chaque catégorie. ¦ Valitse, mitä haluat nähdä, ja järjestä ↑ ↓: ensin luokat, sitten kunkin luokan esineet. ¦ Pipáld be, amit látni szeretnél, és rendezd ↑ ↓ gombokkal: a kategóriákat, aztán az egyes kategóriák tárgyait.
+Objets de ¦ Luokan esineet: ¦ Tárgyak ebben:
+Mobilier remis comme au départ. ¦ Huonekalut palautettu alkuperäisiksi. ¦ Bútorok visszaállítva alapra.
+Garde au moins une catégorie. ¦ Säilytä vähintään yksi luokka. ¦ Tarts meg legalább egy kategóriát.
+Kenney — tous les packs 3D ¦ Kenney — kaikki 3D-paketit ¦ Kenney — minden 3D csomag
+OpenGameArt — filtre « CC0 » ¦ OpenGameArt — suodatin ”CC0” ¦ OpenGameArt — „CC0” szűrő
+📦 Bibliothèque en ligne (libre de droit) ¦ 📦 Verkkokirjasto (vapaasti käytettävä) ¦ 📦 Online könyvtár (jogdíjmentes)
+Chercher (en français ou en anglais) : chaise, tonneau, lampe, vase… ¦ Hae (ranskaksi tai englanniksi): tuoli, tynnyri, lamppu, maljakko… ¦ Keresés (franciául vagy angolul): szék, hordó, lámpa, váza…
+🌐 Poly Haven (en ligne) ¦ 🌐 Poly Haven (verkossa) ¦ 🌐 Poly Haven (online)
+🗜️ Un pack ZIP (Kenney, Quaternius…) ¦ 🗜️ ZIP-paketti (Kenney, Quaternius…) ¦ 🗜️ ZIP csomag (Kenney, Quaternius…)
+Ranger aussi dans ¦ Lisää myös luokkaan ¦ Besorolás ide is
+Chargement de la liste… ¦ Ladataan luetteloa… ¦ A lista betöltése…
+Recherche… ¦ Haetaan… ¦ Keresés…
+🗜️ Choisir le fichier ZIP… ¦ 🗜️ Valitse ZIP-tiedosto… ¦ 🗜️ ZIP fájl kiválasztása…
+Voir sur Poly Haven ¦ Näytä Poly Havenissa ¦ Megtekintés a Poly Havenen
+Aucun modèle ne correspond. ¦ Yksikään malli ei vastaa hakua. ¦ Nincs megfelelő modell.
+Sans internet, tu peux toujours importer un pack ZIP déjà téléchargé (onglet à côté), ou ＋ créer tes objets. ¦ Ilman internetiä voit silti tuoda jo ladatun ZIP-paketin (viereinen välilehti) tai ＋ luoda omia esineitä. ¦ Internet nélkül is importálhatsz egy már letöltött ZIP csomagot (a szomszédos lap), vagy ＋ létrehozhatod a saját tárgyaidat.
+Un téléchargement est en cours… ¦ Lataus on käynnissä… ¦ Letöltés folyamatban…
+⏳ Téléchargement… ¦ ⏳ Ladataan… ¦ ⏳ Letöltés…
+✓ Dans « Mes objets » ¦ ✓ Kohdassa ”Omat esineeni” ¦ ✓ A „Saját tárgyaim” között
+Envoi et lecture du pack… ¦ Lähetetään ja luetaan pakettia… ¦ A csomag küldése és beolvasása…
+Envoi impossible (fichier trop gros pour le serveur ?). ¦ Lähetys epäonnistui (tiedosto liian suuri palvelimelle?). ¦ A feltöltés nem sikerült (túl nagy a fájl a szervernek?).
+Envoi impossible. ¦ Lähetys epäonnistui. ¦ A feltöltés nem sikerült.
+Image impossible. ¦ Kuva epäonnistui. ¦ A kép nem sikerült.
+Aucun fichier de licence dans le pack : vérifie sur le site de l’auteur qu’il est bien libre de droit. ¦ Paketissa ei ole lisenssitiedostoa: tarkista tekijän sivustolta, että se on todella vapaasti käytettävä. ¦ A csomagban nincs licencfájl: ellenőrizd a szerző oldalán, hogy valóban jogdíjmentes-e.
+Auteur, source ¦ Tekijä, lähde ¦ Szerző, forrás
+Adresse du pack (facultatif) ¦ Paketin osoite (valinnainen) ¦ A csomag címe (nem kötelező)
+⤒ Importer les modèles cochés ¦ ⤒ Tuo valitut mallit ¦ ⤒ A bejelölt modellek importálása
+Coche au moins un modèle. ¦ Valitse vähintään yksi malli. ¦ Jelölj be legalább egy modellt.
+Indique la licence du pack (par exemple CC0 1.0). ¦ Ilmoita paketin lisenssi (esimerkiksi CC0 1.0). ¦ Add meg a csomag licencét (például CC0 1.0).
+Surface (m²) ¦ Pinta-ala (m²) ¦ Terület (m²)
+Loi Carrez ≥ 1,80 m (m²) ¦ Carrez-laki ≥ 1,80 m (m²) ¦ Carrez-törvény ≥ 1,80 m (m²)
+Hauteur mini (cm) ¦ Vähimmäiskorkeus (cm) ¦ Legkisebb magasság (cm)
+Hauteur maxi (cm) ¦ Enimmäiskorkeus (cm) ¦ Legnagyobb magasság (cm)
+Un mur de moins de 5 cm (un double-clic de trop ?) ¦ Alle 5 cm:n seinä (yksi kaksoisnapsautus liikaa?) ¦ 5 cm-nél rövidebb fal (egy dupla kattintással több?)
+« {name} » n’a pas de porte ¦ Huoneessa ”{name}” ei ole ovea ¦ „{name}” helyiségnek nincs ajtaja
+=Escalier un peu raide : {n} marches de {rise} cm, giron {going} cm (2 h + g = {sum} cm) ¦ Portaat hieman jyrkät: {n} askelma, nousu {rise} cm, etenemä {going} cm (2 n + e = {sum} cm)|Portaat hieman jyrkät: {n} askelmaa, nousu {rise} cm, etenemä {going} cm (2 n + e = {sum} cm) ¦ Kicsit meredek lépcső: {n} lépcsőfok, {rise} cm magas, belépő {going} cm (2 m + b = {sum} cm)|Kicsit meredek lépcső: {n} lépcsőfok, {rise} cm magas, belépő {going} cm (2 m + b = {sum} cm)
+Un escalier sans étage au-dessus ¦ Portaat ilman yläkerrosta ¦ Lépcső, fölötte szint nélkül
+L’escalier ne perce pas le plancher de « {name} » (Propriétés → « Ouvrir le plancher au-dessus ») ¦ Portaat eivät puhkaise kerroksen ”{name}” lattiaa (Ominaisuudet → ”Avaa yläpuolinen lattia”) ¦ A lépcső nem töri át a(z) „{name}” szint födémét (Tulajdonságok → „A fölötte lévő födém megnyitása”)
+Un vide à l’étage le plus bas : il n’ouvre sur rien ¦ Avoin tila alimmassa kerroksessa: se ei avaudu mihinkään ¦ Légtér a legalsó szinten: semmire sem nyílik
+Des pièces sans aucun mur ¦ Huoneita ilman yhtään seinää ¦ Helyiségek falak nélkül
+maison|Mur ¦ Seinä ¦ Fal
+maison|Ouverture ¦ Aukko ¦ Nyílás
+maison|Combles ¦ Ullakko ¦ Tetőtér
+maison|Pièce ¦ Huone ¦ Helyiség
+maison|Escalier ¦ Portaat ¦ Lépcső
+maison|Étage ¦ Kerros ¦ Szint
+Mur ¦ Seinä ¦ Fal
+Escalier ¦ Portaat ¦ Lépcső
+Combles ¦ Ullakko ¦ Tetőtér
+Plans ¦ Pohjapiirrokset ¦ Alaprajzok
+▶ Visite guidée ¦ ▶ Opastettu kierros ¦ ▶ Vezetett bejárás
+Visite en lecture seule, ouverte sans l’application. Souris ou doigt pour tourner, molette pour zoomer, « 🚶 Visiter » pour marcher (Z Q S D ou flèches). ¦ Vain luku -kierros, avataan ilman sovellusta. Kierrä hiirellä tai sormella, zoomaa rullalla, ”🚶 Kierrä” kävelläksesi (W A S D tai nuolet). ¦ Csak olvasható bejárás, az alkalmazás nélkül is megnyílik. Forgatás egérrel vagy ujjal, nagyítás görgővel, „🚶 Bejárás” a sétához (W A S D vagy nyilak).
+📐 Surfaces ¦ 📐 Pinta-alat ¦ 📐 Területek
+Surfaces ¦ Pinta-alat ¦ Területek
+⚠️ Vérifier le plan ¦ ⚠️ Tarkista pohjapiirros ¦ ⚠️ Alaprajz ellenőrzése
+🗺 Visite guidée ¦ 🗺 Opastettu kierros ¦ 🗺 Vezetett bejárás
+aucun arrêt ¦ ei pysähdyksiä ¦ nincs állomás
+📷 Photos d’époque ¦ 📷 Aikakauden valokuvat ¦ 📷 Korabeli fotók
+🏘 Le hameau ¦ 🏘 Kylänraitti ¦ 🏘 A tanyacsoport
+cette maison seule ¦ vain tämä talo ¦ csak ez a ház
+foyer n° {n} ¦ talous nro {n} ¦ {n}. háztartás
+{a} à {b} m ¦ {a}–{b} m ¦ {a}–{b} m
+un clic : aller à l’endroit ¦ yksi napsautus: siirry kohtaan ¦ egy kattintás: ugrás a helyre
+{name} — coupe ¦ {name} — leikkaus ¦ {name} — metszet
+Texte de l’arrêt {n} ¦ Pysähdyksen {n} teksti ¦ A(z) {n}. állomás szövege
+Texte de l’arrêt ¦ Pysähdyksen teksti ¦ Az állomás szövege
+⤓ Exporter la vidéo en {fmt} ¦ ⤓ Vie video muodossa {fmt} ¦ ⤓ Videó exportálása, formátum: {fmt}
+{stops} : la caméra glisse de l’un à l’autre, et le texte de chaque arrêt s’affiche en sous-titre. La vidéo se fait en temps réel (environ {s} secondes) : laisse la fenêtre ouverte. ¦ {stops}: kamera liukuu yhdestä toiseen, ja kunkin pysähdyksen teksti näkyy tekstityksenä. Video tehdään reaaliajassa (noin {s} sekuntia): pidä ikkuna auki. ¦ {stops}: a kamera egyikről a másikra siklik, és minden állomás szövege feliratként jelenik meg. A videó valós időben készül (kb. {s} másodperc): hagyd nyitva az ablakot.
+Une fenêtre est posée sur un mur qui n’existe plus ¦ Ikkuna on sijoitettu seinälle, jota ei enää ole ¦ Egy ablak olyan falon van, amely már nem létezik
+Une porte est posée sur un mur qui n’existe plus ¦ Ovi on sijoitettu seinälle, jota ei enää ole ¦ Egy ajtó olyan falon van, amely már nem létezik
+Une fenêtre est plus large que son mur ¦ Ikkuna on leveämpi kuin sen seinä ¦ Egy ablak szélesebb a falánál
+Une porte est plus large que son mur ¦ Ovi on leveämpi kuin sen seinä ¦ Egy ajtó szélesebb a falánál
+Une fenêtre dépasse le plafond ({top} cm pour {wall} cm de mur) : elle est coupée par le plancher ¦ Ikkuna ulottuu katon yli ({top} cm, seinä {wall} cm): välipohja leikkaa sen ¦ Egy ablak túlnyúlik a mennyezeten ({top} cm egy {wall} cm-es falon): a födém elvágja
+Une porte dépasse le plafond ({top} cm pour {wall} cm de mur) : elle est coupée par le plancher ¦ Ovi ulottuu katon yli ({top} cm, seinä {wall} cm): välipohja leikkaa sen ¦ Egy ajtó túlnyúlik a mennyezeten ({top} cm egy {wall} cm-es falon): a födém elvágja
+Une fenêtre passe sous la pente du toit à cet endroit ¦ Ikkuna menee tässä kohdassa katon kaltevuuden alle ¦ Egy ablak ezen a helyen a tetőlejtés alá kerül
+Une porte passe sous la pente du toit à cet endroit ¦ Ovi menee tässä kohdassa katon kaltevuuden alle ¦ Egy ajtó ezen a helyen a tetőlejtés alá kerül
+🧰 Outils de la maison ¦ 🧰 Talon työkalut ¦ 🧰 A ház eszközei
+Le tableau des surfaces, ouvert dans le 🧾 Tableur ¦ Pinta-alataulukko avattuna 🧾 Taulukkolaskennassa ¦ A területtáblázat a 🧾 Táblázatkezelőben megnyitva
+Clique deux points sur le plan : la ligne de coupe ¦ Napsauta kahta pistettä pohjapiirroksessa: leikkauslinja ¦ Kattints két pontra az alaprajzon: a metszetvonal
+📐 Surfaces par pièce ¦ 📐 Pinta-alat huoneittain ¦ 📐 Területek helyiségenként
+✂ Tracer la ligne de coupe ¦ ✂ Piirrä leikkauslinja ¦ ✂ Metszetvonal megrajzolása
+✂ Voir la coupe ¦ ✂ Näytä leikkaus ¦ ✂ Metszet megtekintése
+🕰 L’année ¦ 🕰 Vuosi ¦ 🕰 Az év
+Pendant que tu glisses l’année, l’époque d’avant reste visible en pointillés sépia ¦ Kun liu’utat vuotta, edellinen aikakausi pysyy näkyvissä seepianvärisinä katkoviivoina ¦ Amíg az évet csúsztatod, az előző korszak szépia pontozott vonalakkal látható marad
+👻 Voir l’époque d’avant en fantôme ¦ 👻 Näytä edellinen aikakausi haamuna ¦ 👻 Az előző korszak megjelenítése szellemként
+La visite guidée en vidéo, toute faite : on glisse d’un arrêt à l’autre, le texte en sous-titre ¦ Opastettu kierros valmiina videona: liukuen pysähdyksestä toiseen, teksti tekstityksenä ¦ A vezetett bejárás kész videóként: állomásról állomásra siklik, a szöveg feliratként
+Une image par arrêt et les textes, dans un fichier .zip : à glisser dans le 🎬 Montage ¦ Yksi kuva pysähdystä kohden ja tekstit .zip-tiedostossa: vedettäväksi 🎬 Leikkaukseen ¦ Állomásonként egy kép és a szövegek egy .zip fájlban: a 🎬 Vágásba húzható
+✎ Les arrêts ¦ ✎ Pysähdykset ¦ ✎ Az állomások
+🎬 Vidéo de la visite… ¦ 🎬 Kierroksen video… ¦ 🎬 A bejárás videója…
+⤓ Images de la visite ¦ ⤓ Kierroksen kuvat ¦ ⤓ A bejárás képei
+Les arrêts et les photos se posent pendant la visite (🚶 Visiter, vue 3D) ¦ Pysähdykset ja kuvat sijoitetaan kierroksen aikana (🚶 Kierrä, 3D-näkymä) ¦ Az állomásokat és a fotókat a bejárás közben lehet elhelyezni (🚶 Bejárás, 3D nézet)
+＋ Arrêt, 📷 photo… ¦ ＋ Pysähdys, 📷 kuva… ¦ ＋ Állomás, 📷 fotó…
+Un fichier .html à envoyer : la maison en 3D et ses plans, sans l’app, en lecture seule (sans personnes ni souvenirs) ¦ Lähetettävä .html-tiedosto: talo 3D:nä ja sen pohjapiirrokset ilman sovellusta, vain luku (ilman henkilöitä ja muistoja) ¦ Elküldhető .html fájl: a ház 3D-ben és az alaprajzai, az alkalmazás nélkül, csak olvasható (személyek és emlékek nélkül)
+🏘 Bâtiments du terrain… ¦ 🏘 Tontin rakennukset… ¦ 🏘 A telek épületei…
+📤 Partager la visite ¦ 📤 Jaa kierros ¦ 📤 Bejárás megosztása
+Aucune pièce dessinée. ¦ Huoneita ei ole piirretty. ¦ Nincs megrajzolt helyiség.
+Toute la maison ¦ Koko talo ¦ Az egész ház
+Loi Carrez ¦ Carrez-laki ¦ Carrez-törvény
+Surface ¦ Pinta-ala ¦ Terület
+Loi Carrez : seules comptent les parties où l’on tient debout (hauteur sous plafond d’au moins 1,80 m, combles comprises). Les vides et les escaliers ne comptent pas. ¦ Carrez-laki: vain ne osat lasketaan, joissa voi seistä (huonekorkeus vähintään 1,80 m, ullakot mukaan lukien). Avoimia tiloja ja portaita ei lasketa. ¦ Carrez-törvény: csak azok a részek számítanak, ahol fel lehet állni (legalább 1,80 m belmagasság, a tetőteret is beleértve). A légterek és a lépcsők nem számítanak.
+Le Tableur n’est pas prêt. ¦ Taulukkolaskenta ei ole valmis. ¦ A Táblázatkezelő nem áll készen.
+Rien à signaler : portes, fenêtres, escaliers et pièces sont cohérents. ¦ Ei huomautettavaa: ovet, ikkunat, portaat ja huoneet ovat johdonmukaisia. ¦ Nincs észrevétel: az ajtók, ablakok, lépcsők és helyiségek rendben vannak.
+✓ Rien à signaler. ¦ ✓ Ei huomautettavaa. ¦ ✓ Nincs észrevétel.
+✂ Clique les deux bouts de la ligne de coupe sur le plan ¦ ✂ Napsauta leikkauslinjan molempia päitä pohjapiirroksessa ¦ ✂ Kattints a metszetvonal két végére az alaprajzon
+Ligne de coupe ¦ Leikkauslinja ¦ Metszetvonal
+Trace d’abord la ligne de coupe sur le plan. ¦ Piirrä ensin leikkauslinja pohjapiirrokseen. ¦ Előbb rajzold meg a metszetvonalat az alaprajzon.
+✂ Coupe de la maison ¦ ✂ Talon leikkaus ¦ ✂ A ház metszete
+⤓ Exporter en SVG ¦ ⤓ Vie SVG-muodossa ¦ ⤓ Exportálás SVG-be
+⤓ Exporter en PNG ¦ ⤓ Vie PNG-muodossa ¦ ⤓ Exportálás PNG-be
+Ouvre la vue 3D, puis « 🚶 Visiter » : en bas de la visite, « 📍 Arrêt ici » pose un arrêt (avec un texte lu à voix haute) et « 📷 Photo d’époque ici » pose une photo prise de cet endroit. ¦ Avaa 3D-näkymä ja sitten ”🚶 Kierrä”: kierroksen alaosassa ”📍 Pysähdys tähän” lisää pysähdyksen (ääneen luettavan tekstin kanssa) ja ”📷 Aikakauden valokuva tähän” lisää tästä kohdasta otetun valokuvan. ¦ Nyisd meg a 3D nézetet, majd „🚶 Bejárás”: a bejárás alján a „📍 Állomás itt” egy állomást helyez el (felolvasott szöveggel), a „📷 Korabeli fotó itt” pedig egy innen készült fotót.
+🗺 Les arrêts de la visite guidée ¦ 🗺 Opastetun kierroksen pysähdykset ¦ 🗺 A vezetett bejárás állomásai
+Arrêt retiré ¦ Pysähdys poistettu ¦ Állomás eltávolítva
+Arrêts rangés ¦ Pysähdykset järjestetty ¦ Állomások átrendezve
+Impossible de faire les images. ¦ Kuvia ei voitu tehdä. ¦ Nem sikerült elkészíteni a képeket.
+Une image par arrêt… ¦ Yksi kuva pysähdystä kohden… ¦ Állomásonként egy kép…
+Pose d’abord des arrêts : vue 3D → 🚶 Visiter → 📍 Arrêt ici. ¦ Lisää ensin pysähdyksiä: 3D-näkymä → 🚶 Kierrä → 📍 Pysähdys tähän. ¦ Előbb helyezz el állomásokat: 3D nézet → 🚶 Bejárás → 📍 Állomás itt.
+🎬 La vidéo de la visite guidée ¦ 🎬 Opastetun kierroksen video ¦ 🎬 A vezetett bejárás videója
+Paysage 1280 × 720 (écran) ¦ Vaaka 1280 × 720 (näyttö) ¦ Fekvő 1280 × 720 (képernyő)
+Carré 1080 × 1080 (messageries) ¦ Neliö 1080 × 1080 (viestisovellukset) ¦ Négyzet 1080 × 1080 (üzenetküldők)
+Titre au début ¦ Otsikko alussa ¦ Cím az elején
+⛔ Ce navigateur ne sait pas enregistrer de vidéo : garde « ⤓ Images de la visite ». ¦ ⛔ Tämä selain ei pysty tallentamaan videota: käytä ”⤓ Kierroksen kuvat”. ¦ ⛔ Ez a böngésző nem tud videót rögzíteni: maradj a „⤓ A bejárás képei” lehetőségnél.
+🔴 Enregistrement de la visite… ¦ 🔴 Tallennetaan kierrosta… ¦ 🔴 A bejárás rögzítése…
+fenêtre des médias indisponible ¦ median ikkuna ei ole käytettävissä ¦ a média ablaka nem érhető el
+✓ Vidéo exportée, et une copie rangée dans les médias. ¦ ✓ Video viety, ja kopio tallennettu mediaan. ¦ ✓ Videó exportálva, és egy másolat a médiába került.
+✓ Vidéo exportée. ¦ ✓ Video viety. ¦ ✓ Videó exportálva.
+Photo retirée ¦ Kuva poistettu ¦ Fotó eltávolítva
+Fichier prêt : envoie-le, il s’ouvre d’un double-clic dans un navigateur, sans l’app. ¦ Tiedosto valmis: lähetä se, se avautuu kaksoisnapsautuksella selaimessa ilman sovellusta. ¦ A fájl kész: küldd el, dupla kattintással megnyílik egy böngészőben, az alkalmazás nélkül.
+Retirer du terrain ¦ Poista tontilta ¦ Eltávolítás a telekről
+🏘 Le hameau : les bâtiments du terrain ¦ 🏘 Kylänraitti: tontin rakennukset ¦ 🏘 A tanyacsoport: a telek épületei
+La ferme, la grange, le four, le puits, les maisons voisines : chacune est une maison de la liste « 🏠 Maisons de famille », posée ici à côté (en 3D et en pointillés sur le plan). ¦ Maatila, lato, uuni, kaivo, naapuritalot: kukin on talo luettelosta ”🏠 Suvun talot”, sijoitettuna tähän viereen (3D:nä ja katkoviivoin pohjapiirroksessa). ¦ A tanya, a csűr, a kemence, a kút, a szomszéd házak: mindegyik egy ház a „🏠 Családi házak” listából, ide melléjük helyezve (3D-ben, és pontozva az alaprajzon).
+＋ Ajouter un bâtiment ¦ ＋ Lisää rakennus ¦ ＋ Épület hozzáadása
+N° de foyer au recensement (facultatif) ¦ Talouden nro henkikirjassa (valinnainen) ¦ A háztartás száma a népszámlálásban (nem kötelező)
+Bâtiment ajouté ¦ Rakennus lisätty ¦ Épület hozzáadva
+Bâtiment déplacé ¦ Rakennus siirretty ¦ Épület áthelyezve
+Bâtiment retiré ¦ Rakennus poistettu ¦ Épület eltávolítva
+Soleil à {deg}° de haut, au {dir} ¦ Aurinko {deg}° korkeudella, suunta: {dir} ¦ A nap {deg}° magasan, irány: {dir}
+boussole|nord ¦ pohjoinen ¦ észak
+boussole|nord-est ¦ koillinen ¦ északkelet
+boussole|est ¦ itä ¦ kelet
+boussole|sud-est ¦ kaakko ¦ délkelet
+boussole|sud ¦ etelä ¦ dél
+boussole|sud-ouest ¦ lounas ¦ délnyugat
+boussole|ouest ¦ länsi ¦ nyugat
+boussole|nord-ouest ¦ luode ¦ északnyugat
+🌙 Nuit ¦ 🌙 Yö ¦ 🌙 Éjszaka
+Crépuscule ¦ Hämärä ¦ Szürkület
+(pose une lampe pour éclairer) ¦ (sijoita lamppu valaistukseksi) ¦ (tegyél le egy lámpát a világításhoz)
+nuit polaire ¦ kaamos ¦ sarki éjszaka
+soleil de minuit ¦ keskiyön aurinko ¦ éjféli nap
+lever {rise}, coucher {set} ¦ nousu {rise}, lasku {set} ¦ napkelte {rise}, napnyugta {set}
+France (lieu de la maison inconnu) ¦ Ranska (talon paikka tuntematon) ¦ Franciaország (a ház helye ismeretlen)
+au sol {len} ¦ maassa {len} ¦ a talajon {len}
+🗺 Arrêt {n} sur {total} ¦ 🗺 Pysähdys {n}/{total} ¦ 🗺 {n}. állomás / {total}
+🪜 Un escalier : ¦ 🪜 Portaat: ¦ 🪜 Egy lépcső:
+⬆ Monter (E) ¦ ⬆ Nouse (E) ¦ ⬆ Fel (E)
+⬇ Descendre (C) ¦ ⬇ Laskeudu (C) ¦ ⬇ Le (C)
+Ce glTF utilise des fichiers à part : exporte-le plutôt en GLB (un seul fichier). ¦ Tämä glTF käyttää erillisiä tiedostoja: vie se mieluummin GLB-muodossa (yksi tiedosto). ¦ Ez a glTF külön fájlokat használ: inkább GLB-be exportáld (egyetlen fájl).
+Format 3D inconnu. ¦ Tuntematon 3D-muoto. ¦ Ismeretlen 3D formátum.
+✦ Les souvenirs de la pièce ¦ ✦ Huoneen muistot ¦ ✦ A helyiség emlékei
+☀️ Lumière du jour ¦ ☀️ Päivänvalo ¦ ☀️ Napfény
+Le soleil passe d’une heure à l’autre ¦ Aurinko siirtyy tunnista toiseen ¦ A nap óráról órára halad
+À cette heure-ci, du 1er janvier au 31 décembre : les ombres s’allongent l’hiver ¦ Tähän kellonaikaan 1. tammikuuta – 31. joulukuuta: varjot pitenevät talvella ¦ Ebben az órában, január 1-jétől december 31-ig: télen megnyúlnak az árnyékok
+▶ Voir la journée ¦ ▶ Katso päivä ¦ ▶ A nap lejátszása
+▶ Voir l’année ¦ ▶ Katso vuosi ¦ ▶ Az év lejátszása
+❄️ Hiver ¦ ❄️ Talvi ¦ ❄️ Tél
+🌱 Printemps ¦ 🌱 Kevät ¦ 🌱 Tavasz
+☀️ Été ¦ ☀️ Kesä ¦ ☀️ Nyár
+🍂 Automne ¦ 🍂 Syksy ¦ 🍂 Ősz
+📅 Aujourd’hui ¦ 📅 Tänään ¦ 📅 Ma
+Ombres portées ¦ Heittovarjot ¦ Vetett árnyékok
+🚶 Visite ¦ 🚶 Kierros ¦ 🚶 Bejárás
+Monter à l’étage du dessus (E ou Page ↑) ¦ Nouse yläkerrokseen (E tai Page ↑) ¦ Fel a fölötte lévő szintre (E vagy Page ↑)
+Descendre à l’étage du dessous (C ou Page ↓) ¦ Laskeudu alakerrokseen (C tai Page ↓) ¦ Le az alatta lévő szintre (C vagy Page ↓)
+Yeux à ¦ Silmät korkeudella ¦ Szemmagasság
+Un arrêt de la visite guidée, ici, regardant par là (avec un texte lu à voix haute) ¦ Opastetun kierroksen pysähdys tässä, katse tuohon suuntaan (ääneen luettavan tekstin kanssa) ¦ A vezetett bejárás egy állomása itt, arra nézve (felolvasott szöveggel)
+Une photo ancienne prise de cet endroit, dans cette direction : on la compare avec la maison d’aujourd’hui ¦ Vanha valokuva tästä kohdasta tähän suuntaan: sitä verrataan nykyiseen taloon ¦ Egy régi fotó erről a helyről, ebbe az irányba: összevetjük a mai házzal
+📍 Arrêt ici ¦ 📍 Pysähdys tähän ¦ 📍 Állomás itt
+📷 Photo d’époque ici ¦ 📷 Aikakauden valokuva tähän ¦ 📷 Korabeli fotó itt
+Petite carte : clic pour t’y rendre ¦ Pikkukartta: napsauta siirtyäksesi sinne ¦ Kis térkép: kattints, hogy odamenj
+Z Q S D, W A S D ou flèches : marcher · Maj : courir · la souris regarde · Échap : libérer la souris ¦ W A S D tai nuolet: kävele · Vaihto: juokse · hiiri katselee · Esc: vapauta hiiri ¦ W A S D vagy nyilak: séta · Shift: futás · az egérrel nézelődsz · Esc: az egér elengedése
+Le rond en bas à gauche : marcher · glisser sur la vue : regarder · ✦ : toucher pour voir le souvenir ¦ Ympyrä vasemmassa alakulmassa: kävele · vedä näkymää: katsele · ✦: kosketa nähdäksesi muiston ¦ A kör bal alul: séta · húzás a nézeten: nézelődés · ✦: koppints az emlék megtekintéséhez
+Z Q S D, W A S D ou flèches : marcher · clic sur la vue : regarder avec la souris · ✦ : clic pour voir le souvenir · Échap : sortir ¦ W A S D tai nuolet: kävele · napsauta näkymää: katsele hiirellä · ✦: napsauta nähdäksesi muiston · Esc: poistu ¦ W A S D vagy nyilak: séta · kattintás a nézetre: nézelődés az egérrel · ✦: kattints az emlék megtekintéséhez · Esc: kilépés
+✋ Arrêter la visite ¦ ✋ Lopeta kierros ¦ ✋ Bejárás leállítása
+Autrefois ¦ Ennen ¦ Régen
+Autrefois ou aujourd’hui ¦ Ennen tai nyt ¦ Régen vagy ma
+Arrêt suivant ¦ Seuraava pysähdys ¦ Következő állomás
+Arrêter la visite guidée ¦ Lopeta opastettu kierros ¦ Vezetett bejárás leállítása
+Pose d’abord des arrêts (🚶 Visiter → 📍 Arrêt ici). ¦ Lisää ensin pysähdyksiä (🚶 Kierrä → 📍 Pysähdys tähän). ¦ Előbb helyezz el állomásokat (🚶 Bejárás → 📍 Állomás itt).
+Ce navigateur ne sait pas enregistrer de vidéo. ¦ Tämä selain ei pysty tallentamaan videota. ¦ Ez a böngésző nem tud videót rögzíteni.
+Remettre la vue comme au départ ¦ Palauta näkymä alkuperäiseksi ¦ Nézet visszaállítása alapra
+L’image du média n° {n} est introuvable : une toile neutre la remplace. ¦ Median nro {n} kuvaa ei löydy: neutraali kangas korvaa sen. ¦ A(z) {n}. számú média képe nem található: egy semleges vászon helyettesíti.
+Cadre {n} : une image ¦ Kehys {n}: kuva ¦ {n}. keret: egy kép
+Cadre {n} : vide ¦ Kehys {n}: tyhjä ¦ {n}. keret: üres
+Image du cadre {n} ¦ Kehyksen {n} kuva ¦ A(z) {n}. keret képe
+Prise dans les médias ¦ Otettu mediasta ¦ A médiából
+L’image de « {name} » ¦ Kuva kohteelle ”{name}” ¦ „{name}” képe
+🖼 Déposer sur « {name} » (cadre {n}) ¦ 🖼 Pudota kohteeseen ”{name}” (kehys {n}) ¦ 🖼 Ráhúzás erre: „{name}” ({n}. keret)
+🖼 Déposer sur « {name} » ¦ 🖼 Pudota kohteeseen ”{name}” ¦ 🖼 Ráhúzás erre: „{name}”
+Remplir (recadrer) ¦ Täytä (rajaa) ¦ Kitöltés (vágással)
+Ajuster (toute l’image) ¦ Sovita (koko kuva) ¦ Igazítás (a teljes kép)
+Centrer (taille réelle) ¦ Keskitä (todellinen koko) ¦ Középre (valódi méret)
+Pas d’image. ¦ Ei kuvaa. ¦ Nincs kép.
+Image introuvable ¦ Kuvaa ei löydy ¦ A kép nem található
+Le cadre ¦ Kehys ¦ A keret
+MAISON · IMAGE ¦ TALO · KUVA ¦ HÁZ · KÉP
+Poser cette image ¦ Sijoita tämä kuva ¦ Kép elhelyezése
+Ou un souvenir de cet objet : ¦ Tai tämän esineen muisto: ¦ Vagy a tárgy egy emléke:
+La rattacher aussi aux souvenirs de cet objet ¦ Yhdistä se myös tämän esineen muistoihin ¦ A tárgy emlékeihez is kapcsolva
+🏷 Garder aussi comme souvenir ¦ 🏷 Säilytä myös muistona ¦ 🏷 Megtartás emlékként is
+⚠️ Cette image est introuvable dans les médias : une toile neutre la remplace. Choisis-en une autre. ¦ ⚠️ Tätä kuvaa ei löydy mediasta: neutraali kangas korvaa sen. Valitse toinen. ¦ ⚠️ Ez a kép nem található a médiában: egy semleges vászon helyettesíti. Válassz egy másikat.
+Aperçu : glisse pour déplacer l’image, molette pour zoomer ¦ Esikatselu: vedä siirtääksesi kuvaa, rulla zoomaa ¦ Előnézet: húzd a kép mozgatásához, görgővel nagyíts
+Glisse pour déplacer l’image · molette pour zoomer ¦ Vedä siirtääksesi kuvaa · rulla zoomaa ¦ Húzd a kép mozgatásához · görgővel nagyíts
+Dans le cadre ¦ Kehyksessä ¦ A keretben
+Remettre l’image au centre, sans zoom ¦ Palauta kuva keskelle ilman zoomausta ¦ A kép visszaállítása középre, nagyítás nélkül
+↺ Recadrage de départ ¦ ↺ Alkuperäinen rajaus ¦ ↺ Alap képkivágás
+Recadrage de départ ¦ Alkuperäinen rajaus ¦ Alap képkivágás
+Sa couleur ¦ Sen väri ¦ A színe
+Passe-partout ¦ Paspis ¦ Paszpartu
+🖼 Images des cadres ¦ 🖼 Kehysten kuvat ¦ 🖼 A keretek képei
+🖼 Image ¦ 🖼 Kuva ¦ 🖼 Kép
+📁 Tu peux aussi glisser une image de l’ordinateur sur l’objet, dans le plan ou dans la vue 3D : elle entre dans les médias. ¦ 📁 Voit myös vetää kuvan tietokoneelta esineen päälle pohjapiirroksessa tai 3D-näkymässä: se siirtyy mediaan. ¦ 📁 A számítógépről is ráhúzhatsz egy képet a tárgyra, az alaprajzon vagy a 3D nézetben: bekerül a médiába.
+Image posée ¦ Kuva sijoitettu ¦ Kép elhelyezve
+Image retirée ¦ Kuva poistettu ¦ Kép eltávolítva
+Import de l’image… ¦ Tuodaan kuvaa… ¦ A kép importálása…
+Image déposée sur l’objet ¦ Kuva pudotettu esineeseen ¦ Kép a tárgyra húzva
+✓ L’image est rangée dans les médias et posée sur l’objet. ¦ ✓ Kuva on tallennettu mediaan ja sijoitettu esineeseen. ¦ ✓ A kép bekerült a médiába, és a tárgyra került.
+Image prise dans les souvenirs ¦ Kuva otettu muistoista ¦ Kép az emlékek közül
+Image tournée ¦ Kuva käännetty ¦ Kép elforgatva
