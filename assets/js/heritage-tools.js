@@ -136,6 +136,8 @@
     ];
     const MONTHS = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
     const WEEKDAYS = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'];
+    // 🌐 le jour à l'écran dans la langue choisie (le 1er janvier 2001 était un lundi) ; le reste de la mention (nom de la fête) reste comme dans l'acte
+    const showWeekday = w => { const I = typeof window !== 'undefined' ? window.LCNDA_I18N : null, i = WEEKDAYS.indexOf(w); if (!I || I.lang === 'fr' || i < 0) return w; try { return new Intl.DateTimeFormat(I.locale(), {weekday: 'long', timeZone: 'UTC'}).format(new Date(Date.UTC(2001, 0, 1 + i))); } catch (_) { return w; } };
     const dateText = ([y, m, d]) => `${d === 1 ? '1er' : d} ${MONTHS[m - 1]} ${y}`;
     /**
      * « le jour de la Pentecôte 1754 », « lundi de Pâques 1690 », « le lendemain de la Saint-Martin 1702 » → date exacte.
@@ -183,7 +185,7 @@
     ext.feastDate = feastDate;
     function feastResultHtml(r, original) {
         if (!r) return `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📭</span><span class="empty-line-text">${i18n('Aucune fête reconnue (il faut le nom de la fête et l’année, ex. « le jour de la Pentecôte 1754 »).')}</span></p>`;
-        return `<p class="h-feast-result"><strong>${esc(r.weekday)} ${esc(r.date)}</strong> — ${esc(r.label)}${r.julian ? ` <small>${i18n('(calendrier julien, en usage en France avant décembre 1582 ; soit le {gregorian} dans le calendrier grégorien)', {gregorian: esc(r.gregorian)})}</small>` : ''}<br><small class="muted">${i18n('Pâques {x} : {easter}.', {x: esc(r.date.slice(-4)), easter: esc(r.easter)})}${original ? ` ${i18n('Écrit : « {original} ».', {original: esc(original)})}` : ''}</small></p>`;
+        return `<p class="h-feast-result"><strong>${esc(showWeekday(r.weekday))} ${esc(r.date)}</strong> — <span data-i18n-off>${esc(r.label)}</span>${r.julian ? ` <small>${i18n('(calendrier julien, en usage en France avant décembre 1582 ; soit le {gregorian} dans le calendrier grégorien)', {gregorian: esc(r.gregorian)})}</small>` : ''}<br><small class="muted">${i18n('Pâques {x} : {easter}.', {x: esc(r.date.slice(-4)), easter: esc(r.easter)})}${original ? ` ${i18n('Écrit : « {original} ».', {original: esc(original)})}` : ''}</small></p>`;
     }
     ext.calendarPanels.push(() => `<section class="maintenance-panel" id="h-feast-panel"><h3>${i18n('Fêtes religieuses → date exacte')}</h3>
         <p>${i18n('Les curés écrivaient souvent « le jour de la Pentecôte 1754 », « le lendemain de la Saint-Martin », « le lundi après la Saint-Martin 1650 » ou « trois jours avant Pâques 1702 ». Écris la mention : l’app calcule la vraie date (Pâques selon le comput julien avant 1583, grégorien ensuite).')}</p>
@@ -204,7 +206,7 @@
         const r = /p[aâ]que|pentec|ascension|rameaux|cendres|tous?saint|no[eë]l|saint|sainte|st[e]? |trinit|f[eê]te|chandeleur|assomption|[ée]piphanie|rois|quasimodo|vigile|lendemain|veille/i.test(input.value) ? feastDate(input.value) : null;
         if (!r) { hint?.remove(); return; }
         if (!hint) { hint = document.createElement('div'); hint.className = 'h-feast-hint'; input.insertAdjacentElement('afterend', hint); }
-        hint.innerHTML = `📅 ${esc(r.label)} = <strong>${esc(r.weekday)} ${esc(r.date)}</strong>${r.julian ? ' <small>(julien)</small>' : ''} <button type="button" class="button small secondary" data-h-feast-use="${esc(r.date)}">${i18n('Utiliser cette date')}</button>`;
+        hint.innerHTML = `📅 <span data-i18n-off>${esc(r.label)}</span> = <strong>${esc(showWeekday(r.weekday))} ${esc(r.date)}</strong>${r.julian ? ` <small>(${i18n('julien')})</small>` : ''} <button type="button" class="button small secondary" data-h-feast-use="${esc(r.date)}">${i18n('Utiliser cette date')}</button>`;
         hint.dataset.original = input.value;
     });
     document.addEventListener('click', event => {

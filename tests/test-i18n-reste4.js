@@ -1,0 +1,162 @@
+'use strict';
+/**
+ * 🌐 Zone « reste4 » (balayage final) : Réglages → Calendrier / mesures (heritage-calendar-more.js, fêtes de heritage-tools.js)
+ * et la grille d’icônes L4 (app-icones.js, rubriques des Types d’événements). Traductions : assets/i18n/src/reste4.tsv.
+ *     node tests/test-i18n-reste4.js
+ *  1. sans navigateur : reste4.tsv a 8 colonnes, pas de clé en double ni déjà ailleurs, chaque clé dans les 7 langues
+ *     (mêmes variables) ; les i18n('…') des 3 fichiers sont traduits ; les mots des actes (fêtes, mesures, livres) restent en français ;
+ *  2. navigateur (Playwright, port 20720) : en de, pl, en, les écrans de la zone n’ont presque plus de français, en français rien
+ *     ne change, à 390 px rien ne déborde en allemand, aucune erreur JS ; la grille d’icônes s’ouvre traduite.
+ */
+const assert = require('node:assert/strict');
+const fs = require('node:fs'), os = require('node:os'), path = require('node:path');
+const { spawn, spawnSync } = require('node:child_process');
+const { findPhp, devBundledPhp, phpRuntimeArgs } = require('../electron/php-server');
+const REMAIN = require('../scripts/i18n-remaining.js');
+const appRoot = path.resolve(__dirname, '..');
+const FILES = ['heritage-calendar-more.js', 'heritage-tools.js', 'app-icones.js'];
+const LANGS = ['en', 'es', 'de', 'it', 'pt', 'pl', 'nl'];
+const MAX_PER_SCREEN = 16; // calendrier : aides de lecture des actes (alphabets, gardées en français), titre de la source INSEE
+let failed = 0;
+const t = async (name, fn) => { try { await fn(); console.log('✓', name); } catch (e) { failed++; console.error('✗', name, '\n ', e && e.stack || e); } };
+
+(async () => {
+    const dicts = Object.fromEntries(LANGS.map(l => [l, JSON.parse(fs.readFileSync(path.join(appRoot, 'assets/i18n', `${l}.json`), 'utf8'))]));
+    const tsv = fs.readFileSync(path.join(appRoot, 'assets/i18n/src/reste4.tsv'), 'utf8').split('\n');
+    const own = new Set(tsv.filter(l => l && l[0] !== '#' && !l.startsWith('fr ¦')).map(l => l.split(/\t| ¦ /)[0].replace(/^=/, '')));
+    await t('reste4.tsv : 8 colonnes, pas de clé en double ni déjà ailleurs', () => {
+        const dir = path.join(appRoot, 'assets/i18n/src'), other = new Set();
+        for (const f of fs.readdirSync(dir)) if (f.endsWith('.tsv') && f !== 'reste4.tsv') fs.readFileSync(path.join(dir, f), 'utf8').split('\n').forEach(l => { if (l && l[0] !== '#') other.add(l.split(/\t| ¦ /)[0]); });
+        const seen = new Map(), bad = [];
+        tsv.forEach((l, i) => {
+            if (!l || l[0] === '#' || l.startsWith('fr ¦')) return;
+            const cells = l.split(/\t| ¦ /), k = cells[0];
+            if (cells.length !== 8) bad.push(`ligne ${i + 1} : ${cells.length} colonnes`);
+            if (seen.has(k)) bad.push(`« ${k} » en double`);
+            if (other.has(k)) bad.push(`« ${k} » déjà dans un autre .tsv`);
+            seen.set(k, i + 1);
+        });
+        assert.deepEqual(bad, []);
+    });
+    await t('chaque clé de reste4.tsv est dans les 7 langues, mêmes variables', () => {
+        const vars = s => (String(s).match(/\{[a-z_][a-z0-9_]*\}/gi) || []).sort().join(',');
+        const miss = [];
+        for (const k of own) for (const l of LANGS) {
+            const v = dicts[l][k];
+            if (v == null) { miss.push(`[${l}] ${k}`); continue; }
+            const one = typeof v === 'object' ? Object.values(v)[0] : v;
+            if (vars(one) !== vars(k.replace(/^[a-z]+\|/, ''))) miss.push(`[${l}] variables : ${k}`);
+        }
+        assert.deepEqual(miss, []);
+    });
+    await t('les i18n(\'…\') des 3 fichiers sont traduits (clé exacte, 7 langues)', () => {
+        const miss = [];
+        for (const f of FILES) {
+            const src = fs.readFileSync(path.join(appRoot, 'assets/js', f), 'utf8');
+            const re = /\bi18n\(\s*'((?:\\.|[^'\\])*)'\s*(?:,\s*\{\s*ctx:\s*'([^']+)')?/g; let m;
+            while ((m = re.exec(src))) {
+                const k = (m[2] ? m[2] + '|' : '') + m[1].replace(/\\(.)/g, '$1');
+                for (const l of LANGS) if (dicts[l][k] == null) miss.push(`${f} [${l}] ${k}`);
+            }
+        }
+        assert.deepEqual(miss, []);
+    });
+    await t('les mots des actes restent en français ; les calculs ne changent pas', () => {
+        const vm = require('node:vm');
+        const sb = { window: {}, localStorage: { getItem: () => null, setItem() {} }, document: { addEventListener() {}, getElementById: () => null }, setTimeout: () => 0, Intl, console };
+        vm.createContext(sb); vm.runInContext(fs.readFileSync(path.join(appRoot, 'assets/js/heritage-calendar-more.js'), 'utf8'), sb);
+        const C = sb.window.LCNDA_EXT.calendarMore;
+        assert.equal(C.lsd(5.225), '5 livres 4 sols 6 deniers');
+        assert.ok(C.movableFeasts(2024).some(x => x.name === 'Mercredi des Cendres'));
+        assert.equal(dicts.de['Mercredi des Cendres'], undefined);
+        assert.equal(dicts.de['Heures canoniques'], 'Kanonische Stunden');
+    });
+
+    /* ═════ 2. Navigateur ═════ */
+    let pw = null; for (const m of ['playwright', '/opt/node-tools/node_modules/playwright']) { try { pw = require(m); break; } catch (_) {} }
+    const phpPath = findPhp([devBundledPhp()]);
+    if (!pw || !phpPath) { console.log('— Playwright ou PHP absent : navigateur sauté'); if (failed) process.exit(1); return; }
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'carnet-reste4-')); fs.mkdirSync(path.join(tmp, 'media'));
+    const env = { ...process.env, GENEALOGY_DATA_DIR: tmp, GENEALOGY_MEDIA_DIR: path.join(tmp, 'media'), GENEALOGY_SKIP_REFERENCE: '1' };
+    const seed = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), path.join(__dirname, 'tresors-seed.php')], { cwd: appRoot, encoding: 'utf8', env });
+    if (seed.status !== 0 || !/ok$/.test(seed.stdout)) throw new Error(seed.stderr || seed.stdout);
+    const port = 20720, base = `http://127.0.0.1:${port}/`;
+    const srv = spawn(phpPath, [...phpRuntimeArgs(phpPath), '-S', `127.0.0.1:${port}`, '-t', appRoot, path.join(appRoot, 'router.php')], { cwd: appRoot, env, stdio: 'ignore' });
+    for (let i = 0; i < 100; i++) { try { await fetch(base + 'api.php?action=kiosk_state'); break; } catch (_) { await new Promise(res => setTimeout(res, 100)); } }
+    const browser = await pw.chromium.launch();
+    const open = async (lang, width = 1300) => {
+        const ctx = await browser.newContext({ viewport: { width, height: 900 } });
+        await ctx.addInitScript(l => { try { localStorage.setItem('lcnda-langue', l); localStorage.setItem('genealogie-visite-guidee', JSON.stringify({ never: true, done: true })); } catch (_) {} }, lang);
+        const page = await ctx.newPage(), errors = []; page.on('pageerror', e => errors.push(e.message)); page.on('dialog', d => d.dismiss());
+        await page.goto(base); await page.waitForFunction(() => window.LCNDA_APP?.state?.csrf && window.LCNDA_EXT?.lists?.field_trips && window.LCNDA_EXT?.maintenance?.my_lists, null, { timeout: 30000 });
+        return { page, errors, ctx };
+    };
+    const textsOf = (page, sel) => page.evaluate(sel => {
+        const out = [];
+        for (const root of document.querySelectorAll(sel)) {
+            const off = el => el.closest('[data-i18n-off],script,style,code,textarea,kbd,pre,[data-person-id],.person-name,.table-link,select');
+            const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT); let n;
+            while ((n = w.nextNode())) { const el = n.parentElement; if (!el || off(el) || !el.getClientRects().length) continue; const x = n.textContent.replace(/\s+/g, ' ').trim(); if (x) out.push(x); }
+            root.querySelectorAll('[title],[aria-label],[placeholder]').forEach(el => { if (off(el)) return; ['title', 'aria-label', 'placeholder'].forEach(a => { const v = el.getAttribute(a); if (v) out.push(v.trim()); }); });
+        }
+        return out;
+    }, sel);
+    const settings = tab => async p => { await p.evaluate(async tab => { document.querySelectorAll('dialog[open]').forEach(d => d.close()); const A = window.LCNDA_APP; A.state.maintenanceTab = tab; await A.setModule('maintenance'); }, tab); await p.waitForTimeout(1500); return '#workspace'; };
+    const list = id => async p => { await p.evaluate(async id => { document.querySelectorAll('dialog[open]').forEach(d => d.close()); const A = window.LCNDA_APP; A.state.listType = id; await A.setModule('listes'); }, id); await p.waitForTimeout(1500); return '#workspace'; };
+    const SCREENS = [
+        ['calendrier / mesures', settings('calendar_measures')],
+        ['types d’événements', settings('event_types')],
+    ];
+
+    try {
+        await t('français : rien ne change, aucune erreur', async () => {
+            const { page, errors, ctx } = await open('fr');
+            await SCREENS[0][1](page);
+            const txt = (await textsOf(page, '#workspace')).join(' | ');
+            for (const x of [/Mesures anciennes par région/, /Calculateur de générations/, /Heures canoniques/, /début du Carême : plus de mariages/]) assert.match(txt, x);
+            await page.fill('#h-cm-weekday-form [name=date]', '14/07/1789');
+            assert.match(await page.textContent('#h-cm-weekday-out'), /C’était un mardi/);
+            assert.deepEqual(errors, []); await ctx.close();
+        });
+        for (const [lang, re] of [['de', /Alte Maße nach Region/], ['pl', /Dawne miary według regionu/], ['en', /Old measures by region/]]) {
+            await t(`${lang} : écrans de la zone traduits, aucune erreur JS`, async () => {
+                const { page, errors, ctx } = await open(lang), isFr = REMAIN.make(lang), report = [], bad = [];
+                for (const [name, show] of SCREENS) {
+                    const sel = await show(page);
+                    const texts = await textsOf(page, sel);
+                    if (name === 'calendrier / mesures') assert.match(texts.join(' '), re);
+                    const fr = [...new Set(texts.filter(isFr))];
+                    if (fr.length) report.push(`${name} (${fr.length}) : ${(process.env.I18N_PROBE ? fr : fr.slice(0, 6)).join(' | ')}`);
+                    if (fr.length > MAX_PER_SCREEN) bad.push(`${lang} · ${name} : ${fr.length} textes restés en français`);
+                }
+                if (report.length) console.log(`  ${lang} : français restant\n   ` + report.join('\n   '));
+                assert.deepEqual(bad, []);
+                assert.deepEqual(errors, []); await ctx.close();
+            });
+        }
+        await t('de : jour de la semaine, fêtes (noms gardés), grille d’icônes traduits', async () => {
+            const { page, errors, ctx } = await open('de');
+            await SCREENS[0][1](page);
+            await page.fill('#h-cm-weekday-form [name=date]', '14/07/1789');
+            assert.match(await page.textContent('#h-cm-weekday-out'), /Es war ein Dienstag/);
+            const feasts = await page.textContent('#h-cm-feasts-out');
+            assert.match(feasts, /Mercredi des Cendres/); assert.match(feasts, /Beginn der Fastenzeit/);
+            await page.fill('#h-cm-diff-form [name=a]', '14/07/1789'); await page.fill('#h-cm-diff-form [name=b]', '09/11/1799');
+            assert.match(await page.textContent('#h-cm-diff-out'), /Jahre/);
+            await page.evaluate(() => window.LCNDA_UI.iconPicker({set: 'event', items: [{v: 'star', g: '★', l: 'Étoile', grp: 'vie'}, {v: 'diamond', g: '◆', l: 'Losange', grp: 'forme'}]}));
+            const grid = await page.textContent('.ui-ig');
+            assert.match(grid, /Symbol wählen/); assert.match(grid, /Formen und Markierungen/); assert.match(grid, /Alles/);
+            assert.deepEqual(errors, []); await ctx.close();
+        });
+        await t('de à 390 px : calendrier / mesures et types d’événements ne débordent pas', async () => {
+            const { page, errors, ctx } = await open('de', 390);
+            for (const [name, show] of SCREENS) {
+                await show(page);
+                assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 2), `${name} déborde`);
+            }
+            assert.deepEqual(errors, []); await ctx.close();
+        });
+    } finally { await browser.close(); srv.kill(); fs.rmSync(tmp, { recursive: true, force: true }); }
+    if (failed) { console.error(`${failed} échec(s)`); process.exit(1); }
+    console.log('✓ test-i18n-reste4 : tout passe');
+})().catch(e => { console.error(e); process.exit(1); });

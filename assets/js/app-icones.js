@@ -27,6 +27,7 @@
     const PICTO = /\p{Extended_Pictographic}|\p{Regional_Indicator}/u;
     const SKIN = /[\u{1F3FB}-\u{1F3FF}]/u;
     const plural = (n, one, many) => `${Number(n).toLocaleString('fr-FR')} ${Math.abs(n) < 2 ? one : (many || one + 's')}`;
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : (v ? String(s).replace(/\{(\w+)\}/g, (m, k) => (k in v ? v[k] : m)) : s)); // 🌐 docs/I18N.md
 
     /* ═════ Récentes (partagées par tous les outils du même jeu) ═════ */
     const RECENT = 'genealogie-recent-icons';
@@ -69,7 +70,7 @@
         const groups = [], items = [], seen = new Set();
         const list = src && typeof src === 'object' ? Object.entries(src) : [['Emojis', Object.keys(FR).join(' ')]];
         list.forEach(([g, s]) => {
-            const id = 'emoji:' + g; groups.push({id, label: g, icon: EMOJI_GROUP_ICONS[g] || '😀'});
+            const id = 'emoji:' + g; groups.push({id, label: i18n(g), icon: EMOJI_GROUP_ICONS[g] || '😀'});
             String(s).split(' ').filter(Boolean).forEach(e => {
                 if (SKIN.test(e)) return; // les teintes de peau : on les colle dans la case de recherche si besoin
                 items.push({v: e, g: e, l: nameOf(e), k: frName(e) + ' ' + g, grp: id, dup: seen.has(e)});
@@ -100,7 +101,7 @@
         medical: 'santé médecine hôpital', hermes: 'commerce marchand', shield: 'protection militaire', hammerPick: 'outils artisan métier', pick: 'mine travail', comet: 'long voyage', target: 'lieu position', camera: 'photographie photo',
         art: 'peinture arts', book: 'livre publication', movie: 'film cinéma', mask: 'théâtre scène', poem: 'poème écriture', dance: 'danse spectacle', stage: 'rôle acteur', music: 'musique', telephone: 'téléphone', clock: 'horloge heure', hourglass: 'sablier temps'};
     const evGroup = v => Object.keys(EV).find(k => EV[k][2].split(' ').includes(v)) || 'forme';
-    SETS.event = {what: 'icône', groups: Object.entries(EV).map(([id, [icon, label]]) => ({id, label, icon})),
+    SETS.event = {what: 'icône', get groups() { return Object.entries(EV).map(([id, [icon, label]]) => ({id, label: i18n(label), icon})); },
         fromOption: (o, it) => ({...it, grp: evGroup(it.v), k: EV_WORDS[it.v] || ''})};
 
     // Fonds de carte : la vignette est une vraie tuile du fond, centrée sur sa région
@@ -113,7 +114,7 @@
         try { return f(bg, ...tileFor(lat, lon, z)) || ''; } catch (_) { return ''; }
     }
     const MAP_GROUP_ICONS = {standard: '🗺', historical: '📜', ign_fr: '🇫🇷', nls_gb: '🇬🇧', usgs: '🇺🇸', nasa: '🛰', ign_es: '🇪🇸'};
-    SETS.mapbg = {what: 'fond', kind: 'bg', title: 'Choisir un fond de carte',
+    SETS.mapbg = {what: 'fond', kind: 'bg', get title() { return i18n('Choisir un fond de carte'); },
         fromOption: (o, it) => { const m = it.l.match(/^(.*?)\s*\(([^)]+)\)\s*$/); return {...it, g: '', l: m ? m[1] : it.l, sub: m ? m[2] : '', k: it.l + ' ' + it.v.replace(/_/g, ' ') + (/(satellite|ortho|photo|landsat|modis|imagery)/i.test(it.l + it.v) ? ' satellite photo aérienne' : '') + (/(relief|topo|physique)/i.test(it.l) ? ' relief montagne' : ''), img: mapThumb(it.v)}; },
         groupIcon: label => { const s = fold(label); return /histor/.test(s) ? '📜' : /ign/.test(s) && /france/.test(s) ? '🇫🇷' : /bretagne|nls/.test(s) ? '🇬🇧' : /usgs|etats/.test(s) ? '🇺🇸' : /nasa/.test(s) ? '🛰' : /espagne/.test(s) ? '🇪🇸' : '🗺'; }};
     UI._mapGroupIcons = MAP_GROUP_ICONS;
@@ -153,7 +154,7 @@
         const em = wantEmoji ? emojiItems() : {groups: [], items: []};
         em.items.forEach(x => { if (!x._k) x._k = fold(`${x.l} ${x.k} ${x.v}`); });
         const emojiOnly = wantEmoji && !curated.length;
-        const groups = emojiOnly ? em.groups : wantEmoji ? [...cGroups, {id: '*emoji', label: 'Tous les emojis', icon: '😀'}] : cGroups;
+        const groups = emojiOnly ? em.groups : wantEmoji ? [...cGroups, {id: '*emoji', label: i18n('Tous les emojis'), icon: '😀'}] : cGroups;
         const recentKey = o.recentKey || (wantEmoji ? 'emoji' : (typeof o.set === 'string' ? o.set : 'icons'));
         const all = emojiOnly ? em.items.filter(x => !x.dup) : curated;
         const byV = new Map(); [...curated, ...em.items].forEach(x => { if (!byV.has(x.v)) byV.set(x.v, x); });
@@ -164,16 +165,16 @@
         const host = o.anchor?.closest?.('dialog[open]') || document.body;
         const pop = document.createElement('div');
         pop.className = `ui-ig${kind === 'bg' ? ' is-bg' : ''}`;
-        pop.setAttribute('role', 'dialog'); pop.setAttribute('aria-label', o.title || set.title || (kind === 'bg' ? 'Choisir un fond' : 'Choisir une icône'));
+        pop.setAttribute('role', 'dialog'); pop.setAttribute('aria-label', o.title || set.title || (kind === 'bg' ? i18n('Choisir un fond') : i18n('Choisir une icône')));
         pop.dataset.ctxOff = '1';
-        const title = o.title || set.title || (kind === 'bg' ? 'Choisir un fond' : 'Choisir une icône');
-        pop.innerHTML = `<div class="ui-ig-head"><b>${esc(title)}</b><button type="button" class="ui-ig-x" aria-label="Fermer" title="Fermer (Échap)">×</button></div>
+        const title = o.title || set.title || (kind === 'bg' ? i18n('Choisir un fond') : i18n('Choisir une icône'));
+        pop.innerHTML = `<div class="ui-ig-head"><b>${esc(title)}</b><button type="button" class="ui-ig-x" aria-label="${esc(i18n('Fermer'))}" title="${esc(i18n('Fermer (Échap)'))}">×</button></div>
             <div class="ui-ig-top"><span class="ui-ig-srch"></span><div class="ui-filters ui-ig-chips" role="tablist"></div></div>
             <div class="ui-ig-body" role="listbox" aria-label="${esc(title)}"></div>
-            <div class="ui-ig-ft"><span class="ui-ig-keys"><kbd>↑</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd> choisir · <kbd>Entrée</kbd> valider · <kbd>Échap</kbd> fermer</span>${o.allowNone ? `<button type="button" class="link-button ui-ig-none" data-ig-none>${esc(o.noneLabel || (fem ? 'Aucune icône' : 'Aucun fond'))}</button>` : ''}</div>`;
-        const ph = kind === 'bg' ? 'Chercher un fond… (ex. Cassini, relief, 1850)' : wantEmoji ? 'Chercher… (ex. coeur, bateau, chien)' : 'Chercher… (ex. église, mariage, étoile)';
+            <div class="ui-ig-ft"><span class="ui-ig-keys"><kbd>↑</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd> ${esc(i18n('choisir'))} · <kbd>${esc(i18n('Entrée'))}</kbd> ${esc(i18n('valider'))} · <kbd>${esc(i18n('Échap'))}</kbd> ${esc(i18n('fermer'))}</span>${o.allowNone ? `<button type="button" class="link-button ui-ig-none" data-ig-none>${esc(o.noneLabel || (fem ? i18n('Aucune icône') : i18n('Aucun fond')))}</button>` : ''}</div>`;
+        const ph = kind === 'bg' ? i18n('Chercher un fond… (ex. Cassini, relief, 1850)') : wantEmoji ? i18n('Chercher… (ex. coeur, bateau, chien)') : i18n('Chercher… (ex. église, mariage, étoile)');
         let input;
-        if (UI.searchField) { const sf = UI.searchField({placeholder: ph, label: 'Chercher ' + (fem ? 'une icône' : 'un fond')}); input = sf.input; pop.querySelector('.ui-ig-srch').replaceWith(sf); sf.classList.add('ui-ig-srch'); }
+        if (UI.searchField) { const sf = UI.searchField({placeholder: ph, label: fem ? i18n('Chercher une icône') : i18n('Chercher un fond')}); input = sf.input; pop.querySelector('.ui-ig-srch').replaceWith(sf); sf.classList.add('ui-ig-srch'); }
         else { input = document.createElement('input'); input.type = 'search'; input.placeholder = ph; pop.querySelector('.ui-ig-srch').appendChild(input); }
         input.classList.add('ui-ig-q');
         const body = pop.querySelector('.ui-ig-body'), chips = pop.querySelector('.ui-ig-chips');
@@ -186,24 +187,24 @@
             const inChip = x => st.chip === 'all' ? true : st.chip === 'recent' ? rec.includes(x) : st.chip === '*emoji' ? false : x.grp === st.chip;
             if (q) {
                 const out = [];
-                if (wantEmoji && PICTO.test(q) && !byV.has(q.trim()) && q.trim().length <= 16) out.push({title: '', items: [{v: q.trim(), g: q.trim(), l: 'Utiliser « ' + q.trim() + ' »', k: '', own: true}]});
+                if (wantEmoji && PICTO.test(q) && !byV.has(q.trim()) && q.trim().length <= 16) out.push({title: '', items: [{v: q.trim(), g: q.trim(), l: i18n('Utiliser « {x} »', {x: q.trim()}), k: '', own: true}]});
                 const exact = byV.get(q.trim());
                 const pool = st.chip === 'recent' ? rec : st.chip === '*emoji' ? [] : (emojiOnly ? em.items.filter(x => !x.dup && inChip(x)) : curated.filter(inChip));
                 let found = pool.filter(x => matches(x, words) || x.v === q.trim());
                 if (exact && !found.includes(exact) && st.chip === 'all') found.unshift(exact);
                 const more = wantEmoji && !emojiOnly && (st.chip === 'all' || st.chip === '*emoji') ? em.items.filter(x => !x.dup && !found.includes(x) && (matches(x, words) || x.v === q.trim())) : [];
                 const n = found.length + more.length;
-                out.push({title: n ? `${plural(n, what)} pour « ${q} »` : '', items: found});
-                if (more.length) out.push({title: found.length ? 'Autres emojis' : '', items: more});
+                out.push({title: n ? (what === 'icône' ? (n === 1 ? i18n('1 icône pour « {q} »', {q}) : i18n('{n} icônes pour « {q} »', {n, q})) : what === 'fond' ? (n === 1 ? i18n('1 fond pour « {q} »', {q}) : i18n('{n} fonds pour « {q} »', {n, q})) : `${plural(n, what)} pour « ${q} »`) : '', items: found});
+                if (more.length) out.push({title: found.length ? i18n('Autres emojis') : '', items: more});
                 return out;
             }
-            if (st.chip === 'recent') return [{title: '🕘 Récentes', items: rec}];
+            if (st.chip === 'recent') return [{title: '🕘 ' + i18n('Récentes'), items: rec}];
             if (st.chip === '*emoji') return em.groups.map(g => ({title: `${g.icon} ${g.label}`, items: em.items.filter(x => x.grp === g.id)}));
             if (st.chip !== 'all') return [{title: '', items: (emojiOnly ? em.items : curated).filter(x => x.grp === st.chip)}];
-            const out = rec.length ? [{title: '🕘 Récentes', items: rec}] : [];
+            const out = rec.length ? [{title: '🕘 ' + i18n('Récentes'), items: rec}] : [];
             if (emojiOnly) em.groups.forEach(g => out.push({title: `${g.icon} ${g.label}`, items: em.items.filter(x => x.grp === g.id && !x.dup)}));
-            else if (cGroups.length) { cGroups.forEach(g => out.push({title: `${g.icon ? g.icon + ' ' : ''}${g.label}`, items: curated.filter(x => x.grp === g.id)})); const loose = curated.filter(x => !cGroups.some(g => g.id === x.grp)); if (loose.length) out.push({title: 'Autres', items: loose}); }
-            else out.push({title: rec.length ? (fem ? 'Toutes' : 'Tous') : '', items: curated});
+            else if (cGroups.length) { cGroups.forEach(g => out.push({title: `${g.icon ? g.icon + ' ' : ''}${g.label}`, items: curated.filter(x => x.grp === g.id)})); const loose = curated.filter(x => !cGroups.some(g => g.id === x.grp)); if (loose.length) out.push({title: i18n('Autres'), items: loose}); }
+            else out.push({title: rec.length ? (fem ? i18n('Toutes') : i18n('Tous')) : '', items: curated});
             return out;
         }
         const hl = (txt, words) => { let h = esc(txt); if (!words.length) return h; const f = fold(txt); const marks = []; words.forEach(w => { let i = f.indexOf(w); if (i >= 0) marks.push([i, i + w.length]); }); if (!marks.length) return h; marks.sort((a, b) => a[0] - b[0]); let out = '', p = 0; marks.forEach(([a, b]) => { if (a < p) return; out += esc(txt.slice(p, a)) + '<mark>' + esc(txt.slice(a, b)) + '</mark>'; p = b; }); return out + esc(txt.slice(p)); };
@@ -216,14 +217,14 @@
             const rec = recentOf(recentKey).filter(v => byV.has(v) || (wantEmoji && PICTO.test(v)));
             const count = id => id === '*emoji' ? em.items.filter(x => !x.dup).length : (emojiOnly ? em.items : curated).filter(x => x.grp === id).length;
             const b = (id, label, n) => `<button type="button" role="tab" class="${st.chip === id ? 'is-active' : ''}" aria-selected="${st.chip === id}" data-ig-chip="${esc(id)}">${esc(label)}${n != null ? ` (${n})` : ''}</button>`;
-            chips.innerHTML = b('all', 'Tout', all.length) + (rec.length ? b('recent', '🕘 Récentes', null) : '') + groups.map(g => b(g.id, `${g.icon ? g.icon + ' ' : ''}${g.label}`, count(g.id))).join('');
+            chips.innerHTML = b('all', i18n('Tout'), all.length) + (rec.length ? b('recent', '🕘 ' + i18n('Récentes'), null) : '') + groups.map(g => b(g.id, `${g.icon ? g.icon + ' ' : ''}${g.label}`, count(g.id))).join('');
         }
         function draw(keepCur) {
             const words = fold(st.q).split(/\s+/).filter(Boolean);
             const secs = sections().filter(s => s.items.length);
             flat = [];
             body.innerHTML = secs.length ? secs.map(s => `${s.title ? `<div class="ui-ig-lb">${esc(s.title)}</div>` : ''}<div class="ui-ig-tiles">${s.items.map(x => { flat.push(x); return tile(x, flat.length - 1, words); }).join('')}</div>`).join('')
-                : `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔍</span><span class="empty-line-text">${st.q ? `Rien pour « ${esc(st.q)} ». Vérifie l’orthographe, ou essaie un autre mot.` : 'Rien ici pour l’instant.'}</span></p>`;
+                : `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔍</span><span class="empty-line-text">${st.q ? i18n('Rien pour « {q} ». Vérifie l’orthographe, ou essaie un autre mot.', {q: esc(st.q)}) : i18n('Rien ici pour l’instant.')}</span></p>`;
             if (!keepCur) st.cur = st.q ? (flat.length ? 0 : -1) : flat.findIndex(x => String(x.v) === String(o.value ?? ''));
             mark(false);
         }
@@ -296,9 +297,9 @@
     /* ═════ La pastille (même dessin que le menu de choix) ═════ */
     function chipHtml(it, {kind, allowNone, what, label}) {
         const fem = (what || 'icône') === 'icône';
-        if (!it) return `<button type="button" class="button small secondary ui-icf-empty" data-icf="change">${kind === 'bg' ? '🗺 Choisir un fond…' : `🔣 Choisir ${fem ? 'une icône' : 'un ' + esc(what)}…`}</button>`;
+        if (!it) return `<button type="button" class="button small secondary ui-icf-empty" data-icf="change">${kind === 'bg' ? '🗺 ' + i18n('Choisir un fond…') : fem ? '🔣 ' + i18n('Choisir une icône…') : `🔣 Choisir un ${esc(what)}…`}</button>`;
         const pic = kind === 'bg' ? `<span class="pk-ic ui-icf-img">${it.img ? `<img src="${esc(it.img)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : ''}</span>` : `<span class="pk-ic ui-icf-ic" aria-hidden="true">${esc(it.g || it.v)}</span>`;
-        return `<span class="pk-chip ui-icf-chip">${pic}<span><b>${esc(it.l || nameOf(it.g || it.v) || label || it.v)}</b>${it.sub || it.grpLabel ? ` <small>${esc(it.sub || it.grpLabel)}</small>` : ''}</span><button type="button" class="go" data-icf="change" data-ia-done="1">✎ Changer</button>${allowNone ? `<button type="button" class="x" data-icf="clear" data-ia-done="1" title="Retirer" aria-label="Retirer ${fem ? 'l’icône' : 'le ' + esc(what)}">×</button>` : ''}</span>`;
+        return `<span class="pk-chip ui-icf-chip">${pic}<span><b>${esc(it.l || nameOf(it.g || it.v) || label || it.v)}</b>${it.sub || it.grpLabel ? ` <small>${esc(it.sub || it.grpLabel)}</small>` : ''}</span><button type="button" class="go" data-icf="change" data-ia-done="1">✎ ${i18n('Changer')}</button>${allowNone ? `<button type="button" class="x" data-icf="clear" data-ia-done="1" title="${esc(i18n('Retirer'))}" aria-label="${esc(fem ? i18n('Retirer l’icône') : what === 'fond' ? i18n('Retirer le fond') : 'Retirer le ' + what)}">×</button>` : ''}</span>`;
     }
     /** m : {get(), set(v), list() → {items, groups, none}, kind, what, emoji, set, allowNone, title} */
     function mountField(w, m) {
@@ -306,7 +307,7 @@
         const paint = () => {
             const L = m.list(), v = String(m.get() ?? '');
             let it = v ? L.items.find(x => String(x.v) === v) : null;
-            if (!it && v && (m.emoji || PICTO.test(v))) it = {v, g: v, l: nameOf(v) || 'Icône'};
+            if (!it && v && (m.emoji || PICTO.test(v))) it = {v, g: v, l: nameOf(v) || i18n('Icône')};
             if (it && !it.grpLabel) { const g = L.groups.find(x => x.id === it.grp); if (g && m.kind !== 'bg') it = {...it, grpLabel: g.label}; }
             const box = w.querySelector(':scope > .ui-icf-box') || w.appendChild(Object.assign(document.createElement('span'), {className: 'ui-icf-box'}));
             box.innerHTML = chipHtml(it, {kind: m.kind, allowNone: m.allowNone && !!it, what: m.what});
@@ -387,7 +388,7 @@
         `<input type="hidden" ${name ? `name="${esc(name)}" ` : ''}data-ui-icon="${esc(set)}" value="${esc(value)}"${allowNone != null ? ` data-ui-icon-none="${allowNone ? 1 : 0}"` : ''} ${attrs}>`;
 
     /* ═════ Remplacer « ext.pickEmoji » (l'ancienne petite fenêtre à onglets) : la même grille ═════ */
-    UI.pickEmojiGrid = (input, onPick, opts = {}) => UI.iconPicker({anchor: input, emoji: true, value: input?.value || '', first: opts.first || '', title: opts.title || 'Choisir une icône',
+    UI.pickEmojiGrid = (input, onPick, opts = {}) => UI.iconPicker({anchor: input, emoji: true, value: input?.value || '', first: opts.first || '', title: opts.title || i18n('Choisir une icône'),
         onPick: v => { if (input && 'value' in input) { input.value = v; fire(input, 'input'); fire(input, 'change'); } onPick?.(v); }});
 
     /* ═════ Habillage automatique ═════ */

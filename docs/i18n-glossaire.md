@@ -632,3 +632,20 @@ Noms des provinces et des départements de 1790, sociétés de test, titres des 
 | copie chez un cousin / coffre | copy at a cousin’s / vault | copia en casa de un primo / cofre | Kopie bei einem Cousin / Tresor | copia da un cugino / cassaforte | cópia em casa de um primo / cofre | kopia u kuzyna / sejf | kopie bij een neef / kluis |
 | moteur de lecture (Kraken) | reading engine | motor de lectura | Leseerkennung | motore di lettura | motor de leitura | silnik odczytu | leesherkenning |
 | harmoniser les écritures | harmonise the spellings | armonizar las escrituras | Schreibweisen vereinheitlichen | armonizzare le grafie | harmonizar as escritas | ujednolicić pisownię | schrijfwijzen harmoniseren |
+
+## Zone « reste4 » (Calendrier / mesures, grille d’icônes)
+
+Les noms des fêtes (Septuagésime, Mercredi des Cendres…), des heures canoniques (Matines, Vêpres…), des mesures anciennes (pied du roi, toise, arpent…) et les livres, sols, deniers tournois restent en français : ce sont les mots des actes.
+
+| fr | en | es | de | it | pt | pl | nl |
+|---|---|---|---|---|---|---|---|
+| calendrier julien / grégorien | Julian / Gregorian calendar | calendario juliano / gregoriano | julianischer / gregorianischer Kalender | calendario giuliano / gregoriano | calendário juliano / gregoriano | kalendarz juliański / gregoriański | juliaanse / gregoriaanse kalender |
+| fêtes mobiles | movable feasts | fiestas móviles | bewegliche Feste | feste mobili | festas móveis | święta ruchome | veranderlijke feesten |
+| heures canoniques | canonical hours | horas canónicas | kanonische Stunden | ore canoniche | horas canónicas | godziny kanoniczne | getijden |
+| comput | computus | cómputo | Komputistik | computo | cômputo | komput | computus |
+| jour maigre | fast day | día de vigilia | Fasttag | giorno di magro | dia de abstinência | dzień postny | vastendag |
+| monnaie de compte | money of account | moneda de cuenta | Rechnungsmünze | moneta di conto | moeda de conta | pieniądz obrachunkowy | rekenmunt |
+| implexe | pedigree collapse | implexo | Ahnenverlust | implesso | implexo | implex | kwartierverlies |
+| lignée masculine / féminine | male / female line | línea masculina / femenina | männliche / weibliche Linie | linea maschile / femminile | linha masculina / feminina | linia męska / żeńska | mannelijke / vrouwelijke lijn |
+| icône (grille L4) | icon | icono | Symbol | icona | ícone | ikona | pictogram |
+| fond (de carte) | background | fondo | Hintergrund | sfondo | fundo | tło / podkład | achtergrond |
