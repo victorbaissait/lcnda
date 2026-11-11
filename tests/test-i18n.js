@@ -1,7 +1,7 @@
 'use strict';
 /* 🌐 Traduction de l'app (vague 1 : le socle et le cadre). Mode d'emploi : docs/I18N.md.
  *     node tests/test-i18n.js            (I18N_SHOTS=dossier pour garder des captures)
- * 1. Node : t() avec repli sur le français, contexte, variables ; pluriels des 8 langues (Intl.PluralRules) ; nombres ;
+ * 1. Node : t() avec repli sur le français, contexte, variables ; pluriels des 8 premières langues (cs, sv, da : test-i18n-nord.js) (Intl.PluralRules) ; nombres ;
  *    fichiers de langue complets et à jour (scripts/i18n-check.js) ; bandeau IA dans chaque langue ; i18n-extract.
  * 2. Serveur : lib/i18n.php traduit les messages d'erreur (en-tête X-LCNDA-Lang), le français ne change pas.
  * 3. Navigateur (Playwright, sinon sauté) : en français rien ne change (pas de bandeau, html lang="fr") ; choisir la
@@ -134,11 +134,20 @@ $p->exec("INSERT INTO persons(first_name,last_name,gender,living_status) VALUES(
 require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding: 'utf8', env: envFor(tmp)});
     if (seed.status !== 0) { console.error(seed.stderr || seed.stdout); process.exit(1); }
     const freePort = () => new Promise(res => { const s = net.createServer(); s.listen(0, '127.0.0.1', () => { const p = s.address().port; s.close(() => res(p)); }); });
-    const port = Number(process.env.I18N_PORT) || await freePort(), port2 = await freePort();
-    const proc = spawn(phpPath, [...phpRuntimeArgs(phpPath), '-S', `127.0.0.1:${port}`, '-t', root, path.join(root, 'router.php')], {cwd: root, env: envFor(tmp), stdio: 'ignore'});
-    const proc2 = spawn(phpPath, [...phpRuntimeArgs(phpPath), '-S', `127.0.0.1:${port2}`, '-t', root, path.join(root, 'router.php')], {cwd: root, env: envFor(tmpEmpty), stdio: 'ignore'});
+    // I18N_PORT donné : un seul port (la base vide du premier lancement prend la place de l'autre à la fin) ; sinon deux ports libres
+    const onePort = !!Number(process.env.I18N_PORT);
+    const port = Number(process.env.I18N_PORT) || await freePort(), port2 = onePort ? port : await freePort();
+    let proc = spawn(phpPath, [...phpRuntimeArgs(phpPath), '-S', `127.0.0.1:${port}`, '-t', root, path.join(root, 'router.php')], {cwd: root, env: envFor(tmp), stdio: 'ignore'});
+    let proc2 = null;
+    const startEmpty = async () => {
+        if (proc2) return;
+        if (onePort) { proc.kill(); await new Promise(res => setTimeout(res, 400)); }
+        proc2 = spawn(phpPath, [...phpRuntimeArgs(phpPath), '-S', `127.0.0.1:${port2}`, '-t', root, path.join(root, 'router.php')], {cwd: root, env: envFor(tmpEmpty), stdio: 'ignore'});
+        for (let i = 0; i < 100; i++) { try { await fetch(base2 + 'api.php?action=kiosk_state'); break; } catch (_) { await new Promise(res => setTimeout(res, 100)); } }
+    };
     const base = `http://127.0.0.1:${port}/`, base2 = `http://127.0.0.1:${port2}/`;
-    for (const b of [base, base2]) for (let i = 0; i < 100; i++) { try { await fetch(b + 'api.php?action=kiosk_state'); break; } catch (_) { await new Promise(res => setTimeout(res, 100)); } }
+    for (let i = 0; i < 100; i++) { try { await fetch(base + 'api.php?action=kiosk_state'); break; } catch (_) { await new Promise(res => setTimeout(res, 100)); } }
+    if (!onePort) await startEmpty();
     const browser = await chromium.launch();
     const errs = [];
     const watch = (page, tag) => { page.on('pageerror', e => errs.push(`${tag} : ${e.message}`)); page.on('console', m => { if (m.type() === 'error' && !/Failed to load resource|net::ERR/.test(m.text())) errs.push(`${tag} console : ${m.text()}`); }); page.on('dialog', d => d.dismiss()); };
@@ -181,7 +190,7 @@ require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding: 'utf8', e
             const first = await page.evaluate(() => { const g = document.querySelector('#workspace .design-primary-grid'); const l = g && [...g.children].find(c => c.offsetParent); return l ? l.hasAttribute('data-lc-lang-field') : false; });
             assert.ok(first, 'la langue est le premier réglage du premier cadre');
             const opts = await page.$$eval('select[data-lc-lang] option', o => o.map(x => x.value + ':' + x.textContent));
-            assert.equal(opts.length, 8); assert.ok(opts.some(o => /^de:.*Deutsch/.test(o)) && opts.some(o => /^pl:.*Polski/.test(o)));
+            assert.equal(opts.length, 11); assert.ok(opts.some(o => /^de:.*Deutsch/.test(o)) && opts.some(o => /^pl:.*Polski/.test(o)) && opts.some(o => /^cs:.*Čeština/.test(o)));
             await page.selectOption('select[data-lc-lang]', 'en');
             await page.waitForFunction(() => /✓ Saved/.test(document.querySelector('#workspace .page-header .ui-ph-saved')?.textContent || '') && [...document.querySelectorAll('.toast')].some(x => /↶ Undo/.test(x.innerText)), null, {timeout: 6000}).catch(() => {});
             const en = await page.evaluate(() => ({lang: document.documentElement.lang, nav: document.querySelector('.main-nav').innerText, banner: document.getElementById('lc-i18n-banner')?.innerText || '', saved: localStorage.getItem('lcnda-langue'), cookie: document.cookie, toast: [...document.querySelectorAll('.toast')].map(x => x.innerText).join(' | ')}));
@@ -260,6 +269,7 @@ require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding: 'utf8', e
             await page.context().close();
         });
         await t('premier lancement : le menu des langues, l’écran traduit tout de suite', async () => {
+            await startEmpty();
             const page = await open({url: base2});
             assert.ok(await page.$('#install-screen select[data-lc-lang-pick]'), 'menu des langues sur l’écran d’installation');
             assert.ok(/La base généalogique doit être importée/.test(await page.locator('#install-screen').innerText()));
@@ -273,7 +283,7 @@ require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding: 'utf8', e
         });
         await t('aucune erreur JavaScript', () => { assert.deepEqual(errs, []); });
     } finally {
-        await browser.close(); proc.kill(); proc2.kill();
+        await browser.close(); proc.kill(); if (proc2) proc2.kill();
         fs.rmSync(tmp, {recursive: true, force: true}); fs.rmSync(tmpEmpty, {recursive: true, force: true});
     }
     console.log(`${failed ? '✗' : '✓'} traduction : ${count} vérifications`);

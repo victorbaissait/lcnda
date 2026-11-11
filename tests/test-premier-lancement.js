@@ -35,7 +35,9 @@ const q = (db, sql) => { const r = php(`$p=new PDO('sqlite:'.getenv('DB'));echo 
 async function server(dir) {
     fs.mkdirSync(path.join(dir, 'media'), {recursive: true});
     const env = {...process.env, GENEALOGY_DATA_DIR: dir, GENEALOGY_MEDIA_DIR: path.join(dir, 'media'), GENEALOGY_SKIP_REFERENCE: '1'};
-    const port = await new Promise(res => { const s = net.createServer(); s.listen(0, '127.0.0.1', () => { const p = s.address().port; s.close(() => res(p)); }); });
+    // PREMIER_PORT donné : un seul port, le serveur d'avant est arrêté (les étapes se suivent)
+    if (Number(process.env.PREMIER_PORT) && procs.length) { procs.forEach(p => p.kill()); await new Promise(r => setTimeout(r, 400)); }
+    const port = Number(process.env.PREMIER_PORT) || await new Promise(res => { const s = net.createServer(); s.listen(0, '127.0.0.1', () => { const p = s.address().port; s.close(() => res(p)); }); });
     const proc = spawn(phpPath, [...phpRuntimeArgs(phpPath), '-S', `127.0.0.1:${port}`, '-t', appRoot, path.join(appRoot, 'router.php')], {cwd: appRoot, env, stdio: 'ignore'});
     procs.push(proc);
     const base = `http://127.0.0.1:${port}/`;

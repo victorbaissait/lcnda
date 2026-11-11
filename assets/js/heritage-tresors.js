@@ -10,6 +10,8 @@
     const A = () => window.LCNDA_APP;
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
+    const LNG = () => window.LCNDA_I18N?.lang || 'fr';
     ext.tresorFeatures = ext.tresorFeatures || [];
     const GROUPS = [['memoire', '🕯️ Garder la mémoire'], ['decouvrir', '🔭 Découvrir'], ['jouer', '🎲 Jouer en famille'], ['creer', '🎨 Créer et fabriquer'], ['lieux', '🗺️ Lieux et voyages'], ['outils', '🧰 Outils malins']];
     const MONTHS = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
@@ -17,7 +19,11 @@
     /* ═════════ Les aides communes ═════════ */
     let treeP = null, treeAt = 0;
     const T = {
-        esc, MONTHS,
+        esc, MONTHS, i18n, lang: LNG,
+        /** 🌐 une phrase entière par sexe : g(p, 'Il est né.', 'Elle est née.', vars) — les deux textes sont des clés */
+        g: (p, m, f, v) => i18n(p?.gender === 'female' ? f : m, v),
+        /** 🌐 « 3 ancêtres » : en français comme avant (chiffres bruts, « s » au-delà de 1), sinon plural() de la langue */
+        pl: (n, one, many = '') => (LNG() === 'fr' ? `${n} ${n > 1 ? (many || (/[sxz]$/.test(one) ? one : one.replace(/^(\S+)/, '$1s'))) : one}` : A().plural(n, one, many)),
         toast: (...a) => A().toast(...a),
         api: (...a) => A().api(...a),
         post: (action, body) => A().api(action, {}, {method: 'POST', body}),
@@ -31,11 +37,23 @@
             }).catch(err => { treeP = null; throw err; }); }
             return treeP;
         },
-        name: p => (p ? p.name || [p.first, p.last].filter(Boolean).join(' ') || 'Sans nom' : '?'),
+        name: p => (p ? p.name || [p.first, p.last].filter(Boolean).join(' ') || i18n('Sans nom') : '?'),
         life: p => (p ? (p.by || p.dy ? `${p.by || '?'} – ${p.dy || (p.living ? '' : '?')}` : '') : ''),
         place: (tr, id) => (id && tr.places[id] ? tr.places[id].name : ''),
         /** « 12 mars 1890 », « 1890 » */
-        dateFr: (d, y) => { if (d) { const [yy, m, dd] = d.split('-').map(Number); return `${dd === 1 ? '1er' : dd} ${MONTHS[m - 1]} ${yy}`; } return y ? String(y) : ''; },
+        dateFr: (d, y) => { if (d) { const [yy, m, dd] = d.split('-').map(Number);
+            if (LNG() !== 'fr' && window.LCNDA_I18N?.fmtDate) { const x = new Date(2000, (m || 1) - 1, dd || 1); x.setFullYear(yy); return window.LCNDA_I18N.fmtDate(x, {day: 'numeric', month: 'long', year: 'numeric'}); }
+            return `${dd === 1 ? '1er' : dd} ${MONTHS[m - 1]} ${yy}`; } return y ? String(y) : ''; },
+        /** « le 12 mars 1890 » / « en 1890 » (dans la langue choisie) */
+        on: (d, y) => (d ? (LNG() !== 'fr' ? i18n('le {date} (jour)', {date: T.dateFr(d, y)}) : `le ${T.dateFr(d, y)}`) : y ? (LNG() !== 'fr' ? i18n('en {date} (année)', {date: String(y)}) : `en ${y}`) : ''),
+        /** « à Tulle » (dans la langue choisie) */
+        at: pl => (pl ? (LNG() !== 'fr' ? i18n('à {place} (lieu)', {place: pl}) : `à ${pl}`) : ''),
+        /** « 1er mars », « 12 juin » (jour et mois, dans la langue choisie) */
+        dayMonth: (m, d) => (LNG() !== 'fr' && window.LCNDA_I18N?.fmtDate ? window.LCNDA_I18N.fmtDate(new Date(2000, m - 1, d), {day: 'numeric', month: 'long'}) : `${d === 1 ? '1er' : d} ${MONTHS[m - 1]}`),
+        /** « Jean et Marie » (en français comme avant ; Intl.ListFormat dans une autre langue) */
+        and: list => { if (LNG() === 'fr' || list.length < 2) return list.join(' et '); try { return new Intl.ListFormat(window.LCNDA_I18N.locale(), {type: 'conjunction'}).format(list); } catch (_) { return list.join(', '); } },
+        /** le nom d'un mois (1–12) dans la langue choisie */
+        month: m => (LNG() !== 'fr' && window.LCNDA_I18N?.fmtDate ? window.LCNDA_I18N.fmtDate(new Date(2000, m - 1, 1), {month: 'long'}) : MONTHS[m - 1]),
         /** l'âge à une date (années pleines, ou à l'année près) */
         ageAt(p, d, y) {
             if (!p?.by) return null;
@@ -58,9 +76,9 @@
         /** choisir une personne (le menu de choix unique) → numéro, ou null */
         pickPerson(title = 'Choisir une personne', value = null) {
             return new Promise(res => { let done = false;
-                ext.openDialog({eyebrow: 'TRÉSORS', title, submitLabel: 'Choisir', body: `<div class="form-grid"><div class="span-2"><span class="pk-lab">Personne</span>${window.LCNDA_PICKER.pickerField({name: 'tr_pp', kind: 'person', value})}</div></div>`,
+                ext.openDialog({eyebrow: i18n('TRÉSORS'), title: i18n(title), submitLabel: i18n('Choisir'), body: `<div class="form-grid"><div class="span-2"><span class="pk-lab">${i18n('Personne')}</span>${window.LCNDA_PICKER.pickerField({name: 'tr_pp', kind: 'person', value})}</div></div>`,
                     onOpen: d => d.addEventListener('close', () => { if (!done) res(null); }, {once: true}),
-                    onSubmit: form => { const id = Number(form.elements.tr_pp?.value) || 0; if (!id) { window.LCNDA_UI?.fail?.(form.elements.tr_pp, 'Choisis la personne.'); return false; } done = true; res(id); }}); });
+                    onSubmit: form => { const id = Number(form.elements.tr_pp?.value) || 0; if (!id) { window.LCNDA_UI?.fail?.(form.elements.tr_pp, i18n('Choisis la personne.')); return false; } done = true; res(id); }}); });
         },
         personField: (name, value = null) => window.LCNDA_PICKER.pickerField({name, kind: 'person', value}),
         items: (kind, personId = 0) => A().api('tresors', {kind, ...(personId ? {person_id: personId} : {})}).then(r => r.items || []),
@@ -69,22 +87,22 @@
         download(name, blob) { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 60000); },
         /** un nombre au hasard qui dépend d'une graine (le même tirage à chaque fois) */
         rng(seed) { let s = (Number(seed) || 1) % 2147483647; if (s <= 0) s += 2147483646; return () => (s = s * 16807 % 2147483647) / 2147483647; },
-        /** quelques phrases sur une vie, tirées de l'arbre (naissance, métier, mariages, enfants, décès) */
+        /** quelques phrases sur une vie, tirées de l'arbre (naissance, métier, mariages, enfants, décès) ; .kids = la phrase des enfants */
         story(tr, p) {
             if (!p) return [];
-            const f = p.gender === 'female', il = f ? 'Elle' : 'Il', x = s => s.replace(/·e/g, f ? 'e' : ''), out = [];
-            if (p.by) out.push(x(`${il} est né·e ${p.bd ? 'le ' : 'en '}${T.dateFr(p.bd, p.by)}${p.bplace ? ` à ${T.place(tr, p.bplace)}` : ''}.`));
-            if (p.occ) out.push(`${il} était ${p.occ}.`);
-            (tr.fams.get(p.id) || []).forEach(fa => { const o = tr.byId.get(fa.a === p.id ? fa.b : fa.a); if (o) out.push(`${il} a épousé ${T.name(o)}${fa.my ? ` ${fa.md ? 'le' : 'en'} ${T.dateFr(fa.md, fa.my)}` : ''}${fa.mplace ? ` à ${T.place(tr, fa.mplace)}` : ''}.`); });
-            const kids = [...new Set(tr.kids.get(p.id) || [])].map(k => tr.byId.get(k)).filter(Boolean);
-            if (kids.length) out.push(`${il} a eu ${kids.length === 1 ? 'un enfant' : `${kids.length} enfants`} : ${kids.map(k => k.first || T.name(k)).join(', ')}.`);
-            if (p.dy) { const a = T.ageAt(p, p.dd, p.dy); out.push(x(`${il} est mort·e ${p.dd ? 'le ' : 'en '}${T.dateFr(p.dd, p.dy)}${a != null ? `, à ${a} ans` : ''}${p.dplace ? `, à ${T.place(tr, p.dplace)}` : ''}.`)); }
+            const g = (m, f, v) => T.g(p, m, f, v), out = [], at = id => (id ? ' ' + T.at(T.place(tr, id)) : '');
+            if (p.by) out.push(g('Il est né {when}{where}.', 'Elle est née {when}{where}.', {when: T.on(p.bd, p.by), where: at(p.bplace)}));
+            if (p.occ) out.push(g('Il était {occ}.', 'Elle était {occ}.', {occ: p.occ}));
+            (tr.fams.get(p.id) || []).forEach(fa => { const o = tr.byId.get(fa.a === p.id ? fa.b : fa.a); if (o) out.push(g('Il a épousé {name}{when}{where}.', 'Elle a épousé {name}{when}{where}.', {name: T.name(o), when: fa.my ? ' ' + T.on(fa.md, fa.my) : '', where: at(fa.mplace)})); });
+            const kids = [...new Set(tr.kids.get(p.id) || [])].map(k => tr.byId.get(k)).filter(Boolean), kl = kids.map(k => k.first || T.name(k)).join(', ');
+            if (kids.length) out.push(out.kids = kids.length === 1 ? g('Il a eu un enfant : {list}.', 'Elle a eu un enfant : {list}.', {list: kl}) : g('Il a eu {n} enfants : {list}.', 'Elle a eu {n} enfants : {list}.', {n: String(kids.length), list: kl}));
+            if (p.dy) { const a = T.ageAt(p, p.dd, p.dy); out.push(g('Il est mort {when}{age}{where}.', 'Elle est morte {when}{age}{where}.', {when: T.on(p.dd, p.dy), age: a != null ? i18n(', à {n} ans', {n: String(a)}) : '', where: p.dplace ? ', ' + T.at(T.place(tr, p.dplace)) : ''})); }
             return out;
         },
         /** lire à voix haute (la voix française du système) → une promesse tenue à la fin de la lecture */
         say(text, {rate = 0.95} = {}) {
             return new Promise(res => { const s = window.speechSynthesis; if (!s || !text) return res(false);
-                const u = new SpeechSynthesisUtterance(text); u.lang = 'fr-FR'; u.rate = rate; const v = s.getVoices().find(x => /^fr/i.test(x.lang)); if (v) u.voice = v;
+                const u = new SpeechSynthesisUtterance(text); const lg = LNG(); u.lang = lg === 'fr' ? 'fr-FR' : (window.LCNDA_I18N?.locale?.() || lg); u.rate = rate; const v = s.getVoices().find(x => x.lang.toLowerCase().startsWith(lg)); if (v) u.voice = v;
                 u.onend = () => res(true); u.onerror = () => res(false); s.speak(u); });
         },
         hush: () => { try { window.speechSynthesis?.cancel(); } catch (_) {} },
@@ -98,7 +116,7 @@
         /** 📐 ouvrir une création (image PNG/SVG en data:) dans l'atelier de mise en page, façon InDesign : une page à son format,
          *  l'image dans un cadre modifiable, et un titre en texte (facultatif) ; on y ajoute ensuite ce qu'on veut, et on enregistre */
         async toLayout(name, src, {w = 210, h = 297, title = '', caption = ''} = {}) {
-            const K = ext.layoutKit; if (!K?.openEditor) { T.toast('L’atelier de mise en page n’est pas disponible ici.', 'error'); return false; }
+            const K = ext.layoutKit; if (!K?.openEditor) { T.toast(i18n('L’atelier de mise en page n’est pas disponible ici.'), 'error'); return false; }
             if (src instanceof Blob) src = await new Promise(r => { const fr = new FileReader(); fr.onload = () => r(fr.result); fr.readAsDataURL(src); });
             if (/^data:image\/svg\+xml;(charset=[^,;]+)?,/.test(src)) src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(decodeURIComponent(src.slice(src.indexOf(',') + 1)))));
             const d = K.defaults(), th = {titleFont: d.titleFont, bodyFont: d.bodyFont, bodySize: d.bodySize, lead: d.lead, accent: d.accent, paper: d.paper}, m = 10;
@@ -168,21 +186,21 @@
             const kind = media.kind || (/^video/.test(blob.type) ? 'video' : /^audio/.test(blob.type) ? 'audio' : 'image');
             const tt = typeof media.title === 'function' ? media.title() : media.title || title, m = await T.upload(blob, kind, tt, name || 'tresor.png');
             const pid = typeof media.person === 'function' ? media.person() : media.person; if (pid) await T.post('tresor_write', {op: 'link_media', media_id: m.media_id, person_id: pid}).catch(() => {});
-            toast(`Une copie est rangée dans les médias${pid ? ' (et sur la fiche)' : ''} : « ${tt} ».`, 'success');
+            toast(pid ? i18n('Une copie est rangée dans les médias (et sur la fiche) : « {title} ».', {title: tt}) : i18n('Une copie est rangée dans les médias : « {title} ».', {title: tt}), 'success');
         };
         if (exps.length || o.layout || media) {
-            const b = btn('button secondary h-tr-export', '⤓ Exporter ▾', 'data-tr-export aria-haspopup="menu"', 'Enregistrer un fichier sur l’ordinateur, ou ranger une copie dans les médias');
+            const b = btn('button secondary h-tr-export', i18n('⤓ Exporter ▾'), 'data-tr-export aria-haspopup="menu"', i18n('Enregistrer un fichier sur l’ordinateur, ou ranger une copie dans les médias'));
             b.addEventListener('click', () => {
                 const items = [...exps.map(x => ({icon: x.icon || '⤓', label: x.label, help: x.help || '', run: safe(() => download(x))})),
-                    ...(o.layout ? ['-', {icon: '📐', label: 'Ouvrir dans la mise en page', help: 'Pour tout retravailler (textes, cadres, pages)', run: safe(o.layout)}] : []),
-                    ...(media ? ['-', {icon: '📁', label: 'Ranger une copie dans les médias', help: media.help || '', run: safe(toMedia)}] : [])];
-                if (UI.menuAt) UI.menuAt(b, items, {title: '⤓ Exporter'}); else items.find(i => i && i.run)?.run();
+                    ...(o.layout ? ['-', {icon: '📐', label: i18n('Ouvrir dans la mise en page'), help: i18n('Pour tout retravailler (textes, cadres, pages)'), run: safe(o.layout)}] : []),
+                    ...(media ? ['-', {icon: '📁', label: i18n('Ranger une copie dans les médias'), help: media.help || '', run: safe(toMedia)}] : [])];
+                if (UI.menuAt) UI.menuAt(b, items, {title: i18n('⤓ Exporter')}); else items.find(i => i && i.run)?.run();
             });
             out.push(b);
         }
         const prints = [].concat(o.print || []).filter(Boolean).map(p => (typeof p === 'function' ? {run: p} : p));
-        if (prints.length === 1) { const p = prints[0], b = btn('button secondary h-tr-print', '🖨 Imprimer', `data-tr-print ${p.attrs || ''}`, p.title || p.label || 'Aperçu, A4 ou A5, ⤓ PDF'); b.addEventListener('click', safe(p.run)); out.push(b); }
-        else if (prints.length > 1) { const b = btn('button secondary h-tr-print', '🖨 Imprimer ▾', 'data-tr-print aria-haspopup="menu"'); b.addEventListener('click', () => UI.menuAt?.(b, prints.map(p => ({icon: '🖨', label: p.label, help: p.help || '', run: safe(p.run)})), {title: '🖨 Imprimer'})); out.push(b); }
+        if (prints.length === 1) { const p = prints[0], b = btn('button secondary h-tr-print', i18n('🖨 Imprimer'), `data-tr-print ${p.attrs || ''}`, p.title || p.label || i18n('Aperçu, A4 ou A5, ⤓ PDF')); b.addEventListener('click', safe(p.run)); out.push(b); }
+        else if (prints.length > 1) { const b = btn('button secondary h-tr-print', i18n('🖨 Imprimer ▾'), 'data-tr-print aria-haspopup="menu"'); b.addEventListener('click', () => UI.menuAt?.(b, prints.map(p => ({icon: '🖨', label: p.label, help: p.help || '', run: safe(p.run)})), {title: i18n('🖨 Imprimer')})); out.push(b); }
         (o.more || []).filter(Boolean).forEach(m => { const b = btn('button secondary', m.label, m.attrs || '', m.title || ''); if (m.run) b.addEventListener('click', safe(m.run)); out.push(b); });
         const star = acts.querySelector(':scope > [data-sc-star]');
         out.forEach(b => (star ? acts.insertBefore(b, star) : acts.appendChild(b)));
@@ -208,9 +226,9 @@
     const sg = () => {
         if (SG || !window.LCNDA_SIDEGROUPS || !ext.tresorFeatures?.length) return SG;
         const fOf = k => ext.tresorFeatures.find(f => f.key === k);
-        SG = window.LCNDA_SIDEGROUPS({name: 'tresors', panelTitle: 'Les trésors et leurs dossiers', key: 'lcnda-tresors-groups', eyebrow: 'TRÉSORS', what: 'trésors', defaultEnabled: true,
+        SG = window.LCNDA_SIDEGROUPS({name: 'tresors', panelTitle: i18n('Les trésors et leurs dossiers'), key: 'lcnda-tresors-groups', eyebrow: i18n('TRÉSORS'), what: i18n('trésors'), defaultEnabled: true,
             defaults: GROUPS.map(([g, label]) => { const [icon, ...rest] = label.split(' '); return ['g_' + g, icon, rest.join(' '), ordered().filter(f => f.group === g).map(f => f.key)]; }),
-            allKeys: () => ext.tresorFeatures.map(f => f.key), label: k => { const f = fOf(k); return f ? `${f.icon} ${f.title}` : k; },
+            allKeys: () => ext.tresorFeatures.map(f => f.key), label: k => { const f = fOf(k); return f ? `${f.icon} ${i18n(f.title)}` : k; },
             flatOrder: () => ordered().map(f => f.key), flatDefaults: () => ext.tresorFeatures.map(f => f.key),
             setFlatOrder: keys => { try { localStorage.setItem(PREF_KEY, JSON.stringify({...prefs(), order: keys})); } catch (_) {} },
             canHide: true, hidden: () => prefs().hidden, setHidden: keys => { try { localStorage.setItem(PREF_KEY, JSON.stringify({...prefs(), hidden: keys})); } catch (_) {} },
@@ -232,22 +250,22 @@
     }
     function openSettingsFlat() {
         const hidden = prefs().hidden, glabel = g => (GROUPS.find(x => x[0] === g)?.[1] || '').replace(/^\S+\s/, '');
-        const row = f => ({key: f.key, label: `${f.icon} ${f.title} — ${glabel(f.group)}`, hidden: hidden.includes(f.key)});
-        A().openSideReorderDialog({eyebrow: 'TRÉSORS', title: 'Réordonner les trésors', canHide: true, rows: ordered().map(row),
+        const row = f => ({key: f.key, label: `${f.icon} ${i18n(f.title)} — ${i18n(glabel(f.group))}`, hidden: hidden.includes(f.key)});
+        A().openSideReorderDialog({eyebrow: i18n('TRÉSORS'), title: i18n('Réordonner les trésors'), canHide: true, rows: ordered().map(row),
             defaults: ext.tresorFeatures.map(f => ({...row(f), hidden: false})),
             save: rows => {
-                if (rows.every(r => r.hidden)) { A().toast('Garde au moins un trésor affiché.', 'error'); return false; }
+                if (rows.every(r => r.hidden)) { A().toast(i18n('Garde au moins un trésor affiché.'), 'error'); return false; }
                 try { localStorage.setItem(PREF_KEY, JSON.stringify({order: rows.map(r => r.key), hidden: rows.filter(r => r.hidden).map(r => r.key)})); } catch (_) {}
                 if (A().state.module === 'tresors' && A().$('#workspace .h-tr:not(.h-tr-page)')) A().$('#workspace').innerHTML = hub();
-                A().toast('Ordre et trésors affichés enregistrés.');
+                A().toast(i18n('Ordre et trésors affichés enregistrés.'));
             }});
     }
     function hub() {
         const {hidden} = prefs(), list = ordered().filter(f => !hidden.includes(f.key)), nHid = ext.tresorFeatures.filter(f => hidden.includes(f.key)).length;
         return `<section class="page h-tr">
-            ${window.LCNDA_UI?.pageHeader ? window.LCNDA_UI.pageHeader({where: 'Trésors', icon: '✨', title: 'Trésors de famille', help: 'Pour s’émerveiller, jouer, créer et garder la mémoire, à partir de ton arbre.', actions: [`<button type="button" class="button secondary" data-tr-settings title="Les dossiers des trésors (les renommer, en créer, en effacer, choisir ce qui va dedans), l’ordre, ce qui s’affiche${nHid ? ` (en ce moment : ${A().plural(nHid, 'trésor caché')})` : ''}">⚙️ Réglages</button>`]})
+            ${window.LCNDA_UI?.pageHeader ? window.LCNDA_UI.pageHeader({where: i18n('Trésors'), icon: '✨', title: i18n('Trésors de famille'), help: i18n('Pour s’émerveiller, jouer, créer et garder la mémoire, à partir de ton arbre.'), actions: [`<button type="button" class="button secondary" data-tr-settings title="${esc(nHid ? i18n('Les dossiers des trésors (les renommer, en créer, en effacer, choisir ce qui va dedans), l’ordre, ce qui s’affiche (en ce moment : {n})', {n: A().plural(nHid, 'trésor caché')}) : i18n('Les dossiers des trésors (les renommer, en créer, en effacer, choisir ce qui va dedans), l’ordre, ce qui s’affiche'))}">${i18n('⚙️ Réglages')}</button>`]})
                 : `<div class="page-header"><div><span class="eyebrow">Trésors</span><h2>✨ Trésors de famille</h2></div><div class="page-actions"><button type="button" class="button secondary" data-tr-settings>⚙️ Réglages</button></div></div>`}
-            ${folders().map(([label, fs]) => { void list; return !fs.length ? (label ? `<h2 class="h-tr-group">${esc(label)}</h2>${A().empty('Dossier vide', {icon: '📂', hint: '⚙️ Réglages pour y ranger des trésors (ou l’effacer).'})}` : '') : `${label ? `<h2 class="h-tr-group">${esc(label)}</h2>` : ''}<div class="h-tr-grid">${fs.map(f => `<button type="button" class="h-tr-card" data-tr-open="${esc(f.key)}"><span class="h-tr-ic" aria-hidden="true">${esc(f.icon)}</span><b>${esc(f.title)}</b><small>${esc(f.desc)}</small></button>`).join('')}</div>`; }).join('')}
+            ${folders().map(([label, fs]) => { void list; return !fs.length ? (label ? `<h2 class="h-tr-group">${esc(i18n(label))}</h2>${A().empty(i18n('Dossier vide'), {icon: '📂', hint: i18n('⚙️ Réglages pour y ranger des trésors (ou l’effacer).')})}` : '') : `${label ? `<h2 class="h-tr-group">${esc(i18n(label))}</h2>` : ''}<div class="h-tr-grid">${fs.map(f => `<button type="button" class="h-tr-card" data-tr-open="${esc(f.key)}"><span class="h-tr-ic" aria-hidden="true">${esc(f.icon)}</span><b>${esc(i18n(f.title))}</b><small>${esc(i18n(f.desc))}</small></button>`).join('')}</div>`; }).join('')}
         </section>`;
     }
     async function render(token) {
@@ -262,14 +280,14 @@
         if (push && location.hash !== `#tresors/${key}`) history.pushState(null, '', `#tresors/${key}`);
         // K5 : un seul en-tête pour toutes les pages des Trésors — « ← Tous les trésors » (et la liste qui va avec) au-dessus,
         // sur-titre « Trésors · la famille du trésor », l'icône à part du nom, une phrase d'aide ; les boutons à droite (T.actions)
-        const fam = GROUPS.find(g => g[0] === f.group)?.[1].replace(/^\S+\s/, '') || '';
-        const back = `<nav class="h-tr-back" aria-label="Trésors"><button type="button" class="link-button" data-tr-home>← Tous les trésors</button>${(ext.tresorRelated?.[key] || []).map(([l], i) => `<button type="button" class="link-button" data-tr-rel="${esc(key)}:${i}">${esc(l)}</button>`).join('')}</nav>`;
-        const head = window.LCNDA_UI?.pageHeader ? window.LCNDA_UI.pageHeader({where: fam ? `Trésors · ${fam}` : 'Trésors', icon: f.icon, title: f.title, help: esc(f.desc), back, cls: 'h-tr-head', attrs: `data-tr-head="${esc(key)}"`})
-            : `<header class="page-header h-tr-head" data-tr-head="${esc(key)}"><div>${back}<span class="eyebrow">${esc(fam ? `Trésors · ${fam}` : 'Trésors')}</span><h2>${esc(f.icon)} ${esc(f.title)}</h2><p>${esc(f.desc)}</p></div><div class="page-actions"></div></header>`;
+        const fam = i18n(GROUPS.find(g => g[0] === f.group)?.[1].replace(/^\S+\s/, '') || '');
+        const back = `<nav class="h-tr-back" aria-label="Trésors"><button type="button" class="link-button" data-tr-home>${i18n('← Tous les trésors')}</button>${(ext.tresorRelated?.[key] || []).map(([l], i) => `<button type="button" class="link-button" data-tr-rel="${esc(key)}:${i}">${esc(l)}</button>`).join('')}</nav>`;
+        const head = window.LCNDA_UI?.pageHeader ? window.LCNDA_UI.pageHeader({where: fam ? i18n('Trésors · {fam}', {fam}) : i18n('Trésors'), icon: f.icon, title: i18n(f.title), help: esc(i18n(f.desc)), back, cls: 'h-tr-head', attrs: `data-tr-head="${esc(key)}"`})
+            : `<header class="page-header h-tr-head" data-tr-head="${esc(key)}"><div>${back}<span class="eyebrow">${esc(fam ? i18n('Trésors · {fam}', {fam}) : i18n('Trésors'))}</span><h2>${esc(f.icon)} ${esc(i18n(f.title))}</h2><p>${esc(i18n(f.desc))}</p></div><div class="page-actions"></div></header>`;
         ws.innerHTML = `<section class="page h-tr h-tr-page" data-tr-page="${esc(key)}">${head}<div class="h-tr-body" data-tr-body></div></section>`;
         const host = ws.querySelector('[data-tr-body]');
         // l'arbre relu à chaque ouverture : les fiches changées ailleurs y sont
-        try { await T.tree(true); await f.render(host, T); } catch (err) { host.innerHTML = A().empty(`Impossible d’ouvrir : ${err.message || err}`, {icon: '⛔'}); console.error(err); }
+        try { await T.tree(true); await f.render(host, T); } catch (err) { host.innerHTML = A().empty(i18n('Impossible d’ouvrir : {err}', {err: err.message || err}), {icon: '⛔'}); console.error(err); }
     }
     document.addEventListener('click', e => {
         const o = e.target.closest('[data-tr-open]'); if (o && o.closest('.h-tr')) { e.preventDefault(); openFeature(o.dataset.trOpen); return; }
@@ -283,15 +301,15 @@
     const readOnly = () => document.body.classList.contains('is-kiosk') || document.documentElement.classList.contains('base-readonly'); // consultation, base en lecture seule
     ext.personBlocks.tresors = (index, detail, opts = {}) => {
         const pid = Number(detail?.person?.id); if (!pid || detail.person.kind === 'animal') return '';
-        return A().card(index, '✨ Trésors', '', `<div class="h-tr-block" data-tr-block="${pid}">${window.LCNDA_UI?.spinner ? window.LCNDA_UI.spinner('Lecture…') : '<p class="muted">…</p>'}</div>`, 'span-12', readOnly() ? '' : `<button type="button" class="button small secondary" data-tr-open-k="sens">＋ Souvenir</button> <button type="button" class="button small secondary" data-tr-open-k="lettres">＋ Lettre</button>`);
+        return A().card(index, i18n('✨ Trésors'), '', `<div class="h-tr-block" data-tr-block="${pid}">${window.LCNDA_UI?.spinner ? window.LCNDA_UI.spinner(i18n('Lecture…')) : '<p class="muted">…</p>'}</div>`, 'span-12', readOnly() ? '' : `<button type="button" class="button small secondary" data-tr-open-k="sens">${i18n('＋ Souvenir')}</button> <button type="button" class="button small secondary" data-tr-open-k="lettres">${i18n('＋ Lettre')}</button>`);
     };
     async function fillBlock(detail) {
         const pid = Number(detail?.person?.id), el = document.querySelector(`#workspace [data-tr-block="${pid}"]`); if (!el) return;
-        let items = []; try { const [a, b] = await Promise.all([T.items('', pid), T.api('tresor_memories', {person_id: pid}).then(r => r.items || []).catch(() => [])]); items = [...a, ...b]; } catch (_) { el.innerHTML = A().empty('Les trésors n’ont pas pu être lus.', {icon: '⚠️'}); return; }
-        if (!items.length) { el.innerHTML = A().empty('Aucun trésor pour l’instant', {icon: '✨', hint: 'Un souvenir (une odeur, un bruit), une recette, une chanson, une lettre pour plus tard, un entretien enregistré… tout se garde dans l’onglet ✨ Trésors.'}); return; }
+        let items = []; try { const [a, b] = await Promise.all([T.items('', pid), T.api('tresor_memories', {person_id: pid}).then(r => r.items || []).catch(() => [])]); items = [...a, ...b]; } catch (_) { el.innerHTML = A().empty(i18n('Les trésors n’ont pas pu être lus.'), {icon: '⚠️'}); return; }
+        if (!items.length) { el.innerHTML = A().empty(i18n('Aucun trésor pour l’instant'), {icon: '✨', hint: i18n('Un souvenir (une odeur, un bruit), une recette, une chanson, une lettre pour plus tard, un entretien enregistré… tout se garde dans l’onglet ✨ Trésors.')}); return; }
         const by = new Map(); items.forEach(x => { if (!by.has(x.kind)) by.set(x.kind, []); by.get(x.kind).push(x); });
         el.innerHTML = [...by].map(([k, l]) => { const [ic, label, key] = KIND_INFO[k] || ['✨', k, ''];
-            return `<div class="h-tr-bk"><b>${ic} ${esc(label)}</b> ${l.map(x => `<span class="h-tr-pill">${x.sealed ? `🔒 ${esc(x.title)} — s’ouvre le ${esc(T.dateFr(x.open_at))}` : esc(x.title)}</span>`).join(' ')}${key ? ` <button type="button" class="h-tr-link" data-tr-open-k="${key}">Voir</button>` : ''}</div>`; }).join('');
+            return `<div class="h-tr-bk"><b>${ic} ${esc(i18n(label))}</b> ${l.map(x => `<span class="h-tr-pill">${x.sealed ? i18n('🔒 {title} — s’ouvre le {date}', {title: esc(x.title), date: esc(T.dateFr(x.open_at))}) : esc(x.title)}</span>`).join(' ')}${key ? ` <button type="button" class="h-tr-link" data-tr-open-k="${key}">${i18n('Voir')}</button>` : ''}</div>`; }).join('');
     }
     ext.afterPerson = ext.afterPerson || [];
     ext.afterPerson.push(detail => { fillBlock(detail); });

@@ -1,0 +1,452 @@
+fr ¦ cs ¦ sv ¦ da
+# ═════ Maison (zone « maison ») ═════
+Rez-de-chaussée ¦ Přízemí ¦ Bottenvåning ¦ Stueetage
+Cave ¦ Sklep ¦ Källare ¦ Kælder
+1er étage ¦ 1. patro ¦ Våning 1 ¦ 1. sal
+{level}e étage ¦ {level}. patro ¦ Våning {level} ¦ {level}. sal
+Maison de famille ¦ Rodinný dům ¦ Släktgård ¦ Slægtens hus
+Époque sans nom ¦ Období bez názvu ¦ Namnlös period ¦ Periode uden navn
+Barre du haut ¦ Horní lišta ¦ Övre fältet ¦ Øverste bjælke
+Barre de la vue 3D ¦ Lišta 3D zobrazení ¦ 3D-vyns fält ¦ 3D-visningens bjælke
+Vues dessus / face / côté ¦ Pohled shora / zepředu / z boku ¦ Vyer ovanifrån / framifrån / från sidan ¦ Visninger ovenfra / forfra / fra siden
+Revêtement sur {what} de mur ¦ Obklad na {what} zdi ¦ Väggbeklädnad på {what} ¦ Vægbeklædning på {what}
+=face ¦ strana|strany|stran ¦ sida|sidor ¦ side|sider
+=mur ¦ zeď|zdi|zdí ¦ vägg|väggar ¦ væg|vægge
+=étage ¦ patro|patra|pater ¦ våning|våningar ¦ etage|etager
+=trait ¦ čára|čáry|čar ¦ linje|linjer ¦ streg|streger
+=objet trouvé ¦ nalezený předmět|nalezené předměty|nalezených předmětů ¦ föremål hittat|föremål hittade ¦ genstand fundet|genstande fundet
+Aucune pièce tracée ¦ Žádná místnost není nakreslena ¦ Inget rum ritat ¦ Intet rum tegnet
+Pièces et surfaces ¦ Místnosti a plochy ¦ Rum och ytor ¦ Rum og arealer
+Plan du ¦ Plán z ¦ Plan daterad ¦ Plan dateret
+double hauteur (vide au-dessus) ¦ dvojnásobná výška (volný prostor nad) ¦ dubbel takhöjd (öppet ovanför) ¦ dobbelt højde (åbent ovenover)
+trémie de l’escalier ¦ schodišťový otvor ¦ trapphål ¦ trappehul
+escalier (plancher fermé) ¦ schodiště (strop uzavřený) ¦ trappa (bjälklaget stängt) ¦ trappe (etageadskillelsen lukket)
+VIDE ¦ VOLNÝ PROSTOR ¦ ÖPPET ¦ ÅBENT
+vide sur {name} ¦ volný prostor nad {name} ¦ öppet mot {name} ¦ åbent mod {name}
+maison|Vide ¦ Volný prostor ¦ Öppen yta ¦ Åbent rum
+sans plancher ¦ bez podlahy ¦ utan bjälklag ¦ uden gulv
+m² Carrez ¦ m² Carrez ¦ m² Carrez ¦ m² Carrez
+Moins de 1,80 m sous la pente du toit ¦ Méně než 1,80 m pod šikmou střechou ¦ Mindre än 1,80 m under takets lutning ¦ Mindre end 1,80 m under tagets hældning
+🕰 Fantôme : {name} ¦ 🕰 Duch: {name} ¦ 🕰 Spöke: {name} ¦ 🕰 Spøgelse: {name}
+⌒ {len} · flèche {arrow} ¦ ⌒ {len} · vzepětí {arrow} ¦ ⌒ {len} · pilhöjd {arrow} ¦ ⌒ {len} · pilhøjde {arrow}
+{len} pour fermer en rectangle ¦ {len} k uzavření do obdélníku ¦ {len} för att stänga som en rektangel ¦ {len} for at lukke som et rektangel
+départ (clic : fermer) ¦ začátek (klik: uzavřít) ¦ start (klick: stäng) ¦ start (klik: luk)
+maison|départ ¦ začátek ¦ start ¦ start
+Posé sous l’étage « {name} ». ¦ Umístěno pod patrem „{name}“. ¦ Placerad under våningen ”{name}”. ¦ Placeret under etagen »{name}«.
+📐 {area} m² au sol ¦ 📐 {area} m² podlahy ¦ 📐 {area} m² golvyta ¦ 📐 {area} m² gulvareal
+{area} m² au sol ¦ {area} m² podlahy ¦ {area} m² golvyta ¦ {area} m² gulvareal
+{carrez} m² loi Carrez ¦ {carrez} m² podle zákona Carrez ¦ {carrez} m² enligt Carrez-lagen ¦ {carrez} m² efter Carrez-loven
+{area} m² loi Carrez (hauteur ≥ 1,80 m) ¦ {area} m² podle zákona Carrez (výška ≥ 1,80 m) ¦ {area} m² enligt Carrez-lagen (höjd ≥ 1,80 m) ¦ {area} m² efter Carrez-loven (højde ≥ 1,80 m)
+(là où l’on tient debout : 1,80 m et plus, hachuré sur le plan) ¦ (kde se dá stát: 1,80 m a více, na plánu šrafováno) ¦ (där man kan stå: 1,80 m och mer, skrafferat på planen) ¦ (hvor man kan stå: 1,80 m og mere, skraveret på planen)
+Habitant : {role} — ouvrir la fiche ¦ Obyvatel: {role} — otevřít kartu ¦ Invånare: {role} — öppna posten ¦ Beboer: {role} — åbn posten
+Habitant — ouvrir la fiche ¦ Obyvatel — otevřít kartu ¦ Invånare — öppna posten ¦ Beboer — åbn posten
+Liée à la pièce « {room} » — ouvrir la fiche ¦ Propojeno s místností „{room}“ — otevřít kartu ¦ Kopplad till rummet ”{room}” — öppna posten ¦ Forbundet med rummet »{room}« — åbn posten
+{label} — époque : {era} — ouvrir la fiche où il est ¦ {label} — období: {era} — otevřít kartu, kde je ¦ {label} — period: {era} — öppna posten där den finns ¦ {label} — periode: {era} — åbn posten, hvor den er
+{label} — ouvrir la fiche où il est ¦ {label} — otevřít kartu, kde je ¦ {label} — öppna posten där den finns ¦ {label} — åbn posten, hvor den er
+🏷 Les souvenirs de la maison ¦ 🏷 Vzpomínky domu ¦ 🏷 Husets minnen ¦ 🏷 Husets minder
+Aller à « {where} » et voir le souvenir ¦ Přejít na „{where}“ a zobrazit vzpomínku ¦ Gå till ”{where}” och se minnet ¦ Gå til »{where}« og se mindet
+Soleil calculé pour {place} ({lat}° N). ¦ Slunce spočítáno pro {place} ({lat}° s. š.). ¦ Solen beräknad för {place} ({lat}° N). ¦ Solen beregnet for {place} ({lat}° N).
+le lieu de la maison ¦ místo domu ¦ husets plats ¦ husets sted
+Le lieu de la maison n’a pas de coordonnées : soleil calculé pour le centre de la France. ¦ Místo domu nemá souřadnice: slunce je spočítáno pro střed Francie. ¦ Husets plats saknar koordinater: solen beräknas för Frankrikes mitt. ¦ Husets sted har ingen koordinater: solen beregnes for Frankrigs midte.
+La nuit, les lampes posées s’allument (Vue 3D → ☀️ Lumière). ¦ V noci se umístěné lampy rozsvítí (3D zobrazení → ☀️ Světlo). ¦ På natten tänds de utplacerade lamporna (3D-vy → ☀️ Ljus). ¦ Om natten tændes de placerede lamper (3D-visning → ☀️ Lys).
+Pour commencer : ⬚ <b>glisse une pièce</b> (ses murs se font tout seuls), ou ▬ trace les murs un par un. ▨ Un <b>vide</b> (mezzanine, double hauteur) se dessine à l’étage du dessus. Puis 🚪 portes et 🪟 fenêtres (un clic sur un mur), et le <b>mobilier</b> (onglet à côté). ¦ Na začátek: ⬚ <b>přetáhni místnost</b> (zdi se udělají samy), nebo ▬ kresli zdi jednu po druhé. ▨ <b>Volný prostor</b> (galerie, dvojnásobná výška) se kreslí v patře nad ním. Pak 🚪 dveře a 🪟 okna (klik na zeď) a <b>nábytek</b> (vedlejší karta). ¦ För att börja: ⬚ <b>dra ut ett rum</b> (väggarna kommer av sig själva), eller ▬ rita väggarna en och en. ▨ En <b>öppen yta</b> (loftgång, dubbel takhöjd) ritas på våningen ovanför. Sedan 🚪 dörrar och 🪟 fönster (ett klick på en vägg), och <b>möblerna</b> (fliken bredvid). ¦ For at begynde: ⬚ <b>træk et rum</b> (væggene kommer af sig selv), eller ▬ tegn væggene én ad gangen. ▨ Et <b>åbent rum</b> (hems, dobbelt højde) tegnes på etagen ovenover. Derefter 🚪 døre og 🪟 vinduer (et klik på en væg) og <b>møblerne</b> (fanen ved siden af).
+{area} m² habitables ¦ {area} m² obytné plochy ¦ {area} m² boyta ¦ {area} m² boligareal
+Face côté {rooms} ¦ Strana směrem k {rooms} ¦ Sida mot {rooms} ¦ Side mod {rooms}
+Face extérieure (façade) ¦ Vnější strana (fasáda) ¦ Utsida (fasad) ¦ Yderside (facade)
+Les murs de « {name} » ¦ Zdi místnosti „{name}“ ¦ Väggarna i ”{name}” ¦ Væggene i »{name}«
+la pièce ¦ místnost ¦ rummet ¦ rummet
+Les murs de toutes les pièces de cet étage ¦ Zdi všech místností tohoto patra ¦ Väggarna i alla rum på våningen ¦ Væggene i alle rum på etagen
+Toutes les façades de cet étage ¦ Všechny fasády tohoto patra ¦ Alla fasader på våningen ¦ Alle facader på etagen
+Les murs de toutes les pièces de la maison (tous les étages) ¦ Zdi všech místností domu (všechna patra) ¦ Väggarna i alla rum i huset (alla våningar) ¦ Væggene i alle rum i huset (alle etager)
+Toutes les façades de la maison (tous les étages) ¦ Všechny fasády domu (všechna patra) ¦ Alla husets fasader (alla våningar) ¦ Alle husets facader (alle etager)
+Vide sur « {room} » ({floor}). ¦ Volný prostor nad „{room}“ ({floor}). ¦ Öppet mot ”{room}” ({floor}). ¦ Åbent mod »{room}« ({floor}).
+Vide sur l’étage « {floor} ». ¦ Volný prostor nad patrem „{floor}“. ¦ Öppet mot våningen ”{floor}”. ¦ Åbent mod etagen »{floor}«.
+⚠️ C’est l’étage le plus bas : ce vide n’ouvre sur rien. ¦ ⚠️ Tohle je nejnižší patro: tento volný prostor nikam nevede. ¦ ⚠️ Det här är den lägsta våningen: den öppna ytan öppnar sig mot ingenting. ¦ ⚠️ Det er den laveste etage: det åbne rum åbner ikke mod noget.
+{w} × {d} hors tout · périmètre {p} ¦ {w} × {d} celkově · obvod {p} ¦ {w} × {d} totalt · omkrets {p} ¦ {w} × {d} i alt · omkreds {p}
+La face de {walls} tournée vers la pièce. ¦ Strana {walls} obrácená do místnosti. ¦ Sidan av {walls} som vetter mot rummet. ¦ Siden af {walls}, der vender mod rummet.
+Années de {name} ¦ Roky: {name} ¦ År för {name} ¦ År for {name}
+Hauteur : celle de l’étage + le plancher ({h}) ¦ Výška: výška patra + strop ({h}) ¦ Höjd: våningens + bjälklaget ({h}) ¦ Højde: etagens + etageadskillelsen ({h})
+={n} marches de {rise} cm, giron {going} cm · 2 h + g = {sum} cm ¦ {n} schod výšky {rise} cm, stupnice {going} cm · 2 v + s = {sum} cm|{n} schody výšky {rise} cm, stupnice {going} cm · 2 v + s = {sum} cm|{n} schodů výšky {rise} cm, stupnice {going} cm · 2 v + s = {sum} cm ¦ {n} trappsteg på {rise} cm, steglängd {going} cm · 2 h + s = {sum} cm|{n} trappsteg på {rise} cm, steglängd {going} cm · 2 h + s = {sum} cm ¦ {n} trin på {rise} cm, grund {going} cm · 2 s + g = {sum} cm|{n} trin på {rise} cm, grund {going} cm · 2 s + g = {sum} cm
+Ouvrir le plancher au-dessus (« {name} ») ¦ Otevřít strop nad tím („{name}“) ¦ Öppna bjälklaget ovanför (”{name}”) ¦ Åbn etageadskillelsen ovenover (»{name}«)
+Ouvrir le plancher au-dessus ¦ Otevřít strop nad tím ¦ Öppna bjälklaget ovanför ¦ Åbn etageadskillelsen ovenover
+posé sur « {name} » : il le suit ¦ položeno na „{name}“: pohybuje se s ním ¦ placerad på ”{name}”: den följer med ¦ placeret på »{name}«: den følger med
+un objet ¦ předmět ¦ ett föremål ¦ en genstand
+Georgia (de départ) ¦ Georgia (výchozí) ¦ Georgia (standard) ¦ Georgia (standard)
+État d’origine ¦ Původní stav ¦ Ursprungligt skick ¦ Oprindelig tilstand
+Époque modifiée ¦ Období upraveno ¦ Perioden ändrad ¦ Perioden ændret
+Nouvelle époque : {name} ¦ Nové období: {name} ¦ Ny period: {name} ¦ Ny periode: {name}
+Époques retirées (le plan « {name} » reste, sans date) ¦ Období odebrána (plán „{name}“ zůstává, bez data) ¦ Perioderna borttagna (planen ”{name}” finns kvar, utan datum) ¦ Perioderne fjernet (planen »{name}« bliver, uden dato)
+Époque « {name} » supprimée avec son plan ¦ Období „{name}“ smazáno i s plánem ¦ Perioden ”{name}” raderad med sin plan ¦ Perioden »{name}« slettet med sin plan
+{name} est déjà rattaché. ¦ {name} už je propojen(a). ¦ {name} är redan kopplad. ¦ {name} er allerede forbundet.
+🏠 un habitant y est ¦ 🏠 je tu obyvatel ¦ 🏠 en invånare finns där ¦ 🏠 en beboer er der
+Posé sur « {name} » ¦ Položeno na „{name}“ ¦ Placerad på ”{name}” ¦ Placeret på »{name}«
+Posé au sol ¦ Položeno na zemi ¦ Placerad på golvet ¦ Placeret på gulvet
+Pièce {n} ¦ Místnost {n} ¦ Rum {n} ¦ Rum {n}
+Pièce de {area} m² ¦ Místnost {area} m² ¦ Rum på {area} m² ¦ Rum på {area} m²
+Vide sur {name} ¦ Volný prostor nad {name} ¦ Öppet mot {name} ¦ Åbent mod {name}
+Mezzanine ¦ Galerie ¦ Loftgång ¦ Hems
+🏗 Mezzanine posée (étage « Mezzanine » ajouté) : vide sur {room}, garde-corps et escalier. ¦ 🏗 Galerie umístěna (přidáno patro „Galerie“): volný prostor nad {room}, zábradlí a schodiště. ¦ 🏗 Loftgång utplacerad (våningen ”Loftgång” tillagd): öppet mot {room}, räcke och trappa. ¦ 🏗 Hems placeret (etagen »Hems« tilføjet): åbent mod {room}, rækværk og trappe.
+🏗 Mezzanine posée à l’étage « {floor} » : vide sur {room}, garde-corps et escalier. ¦ 🏗 Galerie umístěna v patře „{floor}“: volný prostor nad {room}, zábradlí a schodiště. ¦ 🏗 Loftgång utplacerad på våningen ”{floor}”: öppet mot {room}, räcke och trappa. ¦ 🏗 Hems placeret på etagen »{floor}«: åbent mod {room}, rækværk og trappe.
+{len} cm, c’est trop court : pour des mètres, écris « {typed} m ». ¦ {len} cm je příliš krátké: pro metry napiš „{typed} m“. ¦ {len} cm är för kort: för meter, skriv ”{typed} m”. ¦ {len} cm er for kort: for meter, skriv »{typed} m«.
+{name} posé ¦ {name} umístěno ¦ {name} utplacerad ¦ {name} placeret
+{msg} — et maintenant le deuxième point. ¦ {msg} — a teď druhý bod. ¦ {msg} — och nu den andra punkten. ¦ {msg} — og nu det andet punkt.
+À l’échelle : la longueur choisie mesure {len}. Puis « ✏️ Décalquer les murs » (onglet Étage). ¦ V měřítku: zvolená délka měří {len}. Pak „✏️ Obkreslit zdi“ (karta Patro). ¦ Skalenlig: den valda längden mäter {len}. Sedan ”✏️ Kalkera väggarna” (fliken Våning). ¦ I skala: den valgte længde måler {len}. Derefter »✏️ Kalkér væggene« (fanen Etage).
+Plan ancien redressé ({deg}°) ¦ Starý plán narovnán ({deg}°) ¦ Gammal plan uträtad ({deg}°) ¦ Gammel plan rettet op ({deg}°)
+Souvenir ¦ Vzpomínka ¦ Minne ¦ Minde
+🔗 Relier un souvenir à « {name} » ¦ 🔗 Propojit vzpomínku s „{name}“ ¦ 🔗 Koppla ett minne till ”{name}” ¦ 🔗 Forbind et minde med »{name}«
+Un souvenir pour « {name} » ¦ Vzpomínka pro „{name}“ ¦ Ett minne för ”{name}” ¦ Et minde for »{name}«
+✍ Un récit pour « {name} » ¦ ✍ Vyprávění pro „{name}“ ¦ ✍ En berättelse för ”{name}” ¦ ✍ En fortælling for »{name}«
+👤 Une personne liée à « {name} » ¦ 👤 Osoba propojená s „{name}“ ¦ 👤 En person kopplad till ”{name}” ¦ 👤 En person forbundet med »{name}«
+Ce qui s’y est passé ¦ Co se tu stalo ¦ Vad som hände där ¦ Hvad der skete der
+Réglage « {name} » appliqué ¦ Nastavení „{name}“ použito ¦ Inställningen ”{name}” har tillämpats ¦ Indstillingen »{name}« er anvendt
+Ce réglage est celui d’un autre outil (« {tool} ») : importe-le dans cet outil-là, pas dans la Maison. ¦ Toto nastavení patří jinému nástroji („{tool}“): importuj ho tam, ne do Domu. ¦ Inställningen hör till ett annat verktyg (”{tool}”): importera den där, inte i Huset. ¦ Indstillingen hører til et andet værktøj (»{tool}«): importér den der, ikke i Huset.
+Un réglage s’appelle déjà « {name} ». Nom du réglage importé : ¦ Nastavení „{name}“ už existuje. Název importovaného nastavení: ¦ En inställning heter redan ”{name}”. Namn på den importerade inställningen: ¦ En indstilling hedder allerede »{name}«. Navn på den importerede indstilling:
+{lines} et {texts}. ¦ {lines} a {texts}. ¦ {lines} och {texts}. ¦ {lines} og {texts}.
+Chaque trait devient un mur ; un contour fermé sur un calque « pièce / room » devient une pièce, nommée par le texte posé dedans. ¦ Každá čára se stane zdí; uzavřený obrys ve vrstvě „pièce / room“ se stane místností pojmenovanou podle textu uvnitř. ¦ Varje linje blir en vägg; en sluten kontur på lagret ”pièce / room” blir ett rum, döpt efter texten inuti. ¦ Hver streg bliver en væg; en lukket kontur på laget »pièce / room« bliver et rum, opkaldt efter teksten indeni.
+Pas repris : {what}. ¦ Nepřevzato: {what}. ¦ Inte med: {what}. ¦ Ikke medtaget: {what}.
+Cet étage ({name}), en plus de ce qui y est ¦ Toto patro ({name}), navíc k tomu, co tam je ¦ Den här våningen ({name}), utöver det som redan finns ¦ Denne etage ({name}), ud over det, der allerede er der
+{walls}, {rooms} et {texts} importés. ¦ Importováno: {walls}, {rooms} a {texts}. ¦ {walls}, {rooms} och {texts} importerade. ¦ {walls}, {rooms} og {texts} importeret.
+🔁 Répéter cette fenêtre ¦ 🔁 Opakovat toto okno ¦ 🔁 Upprepa det här fönstret ¦ 🔁 Gentag dette vindue
+🔁 Répéter cette porte ¦ 🔁 Opakovat tyto dveře ¦ 🔁 Upprepa den här dörren ¦ 🔁 Gentag denne dør
+Des copies le long du même mur, vers son autre bout (mur de {len}). ¦ Kopie podél stejné zdi směrem k jejímu druhému konci (zeď {len}). ¦ Kopior längs samma vägg, mot dess andra ände (vägg på {len}). ¦ Kopier langs samme væg mod dens anden ende (væg på {len}).
+🔁 Répéter « {name} » ¦ 🔁 Opakovat „{name}“ ¦ 🔁 Upprepa ”{name}” ¦ 🔁 Gentag »{name}«
+{name} (à {len}) ¦ {name} (ve vzdálenosti {len}) ¦ {name} ({len} bort) ¦ {name} ({len} væk)
+{copies} de « {name} ». ¦ {copies} „{name}“. ¦ {copies} av ”{name}”. ¦ {copies} af »{name}«.
+Vue 3D ¦ 3D zobrazení ¦ 3D-vy ¦ 3D-visning
+Au-dessus : {name} ¦ Nad: {name} ¦ Ovanför: {name} ¦ Ovenover: {name}
+En dessous : {name} (cave, sous-sol) ¦ Pod: {name} (sklep, suterén) ¦ Under: {name} (källare, souterräng) ¦ Nedenunder: {name} (kælder, souterrain)
+Reprendre les murs de « {name} » (et ses fenêtres) ¦ Převzít zdi z „{name}“ (i s okny) ¦ Kopiera väggarna från ”{name}” (och fönstren) ¦ Kopiér væggene fra »{name}« (og vinduerne)
+{name} ajouté ¦ {name} přidáno ¦ {name} tillagd ¦ {name} tilføjet
+Étages ¦ Patra ¦ Våningar ¦ Etager
+{name} (murs repris) ¦ {name} (zdi převzaty) ¦ {name} (väggar kopierade) ¦ {name} (vægge kopieret)
+Étage « {name} » supprimé ¦ Patro „{name}“ smazáno ¦ Våningen ”{name}” raderad ¦ Etagen »{name}« slettet
+Maison de {place} ¦ Dům v {place} ¦ Hus i {place} ¦ Hus i {place}
+✓ Toit retiré ¦ ✓ Střecha odebrána ¦ ✓ Taket borttaget ¦ ✓ Taget fjernet
+✓ Toit ajouté : il se voit depuis « {name} », l’étage du haut ¦ ✓ Střecha přidána: je vidět od „{name}“, nejvyššího patra ¦ ✓ Tak tillagt: det syns från ”{name}”, den översta våningen ¦ ✓ Tag tilføjet: det ses fra »{name}«, den øverste etage
+✓ Toit ajouté : il se pose sur les murs (aucun mur pour l’instant) ¦ ✓ Střecha přidána: posadí se na zdi (zatím žádné zdi) ¦ ✓ Tak tillagt: det vilar på väggarna (inga väggar än) ¦ ✓ Tag tilføjet: det hviler på væggene (ingen vægge endnu)
+✓ Toit ajouté ¦ ✓ Střecha přidána ¦ ✓ Tak tillagt ¦ ✓ Tag tilføjet
+Arrêt {n} de la visite guidée ¦ Zastávka {n} prohlídky ¦ Stopp {n} i den guidade turen ¦ Stop {n} på rundvisningen
+{label} — ouvrir la fiche ¦ {label} — otevřít kartu ¦ {label} — öppna posten ¦ {label} — åbn posten
+Habitant ¦ Obyvatel ¦ Invånare ¦ Beboer
+{label} — époque : {era} ¦ {label} — období: {era} ¦ {label} — period: {era} ¦ {label} — periode: {era}
+{what} sur {total} ¦ {what} z {total} ¦ {what} av {total} ¦ {what} af {total}
+Supprimer la maison « {name} » ? ¦ Smazat dům „{name}“? ¦ Radera huset ”{name}”? ¦ Slet huset »{name}«?
+Supprimer la maison ¦ Smazat dům ¦ Radera huset ¦ Slet huset
+🕰 époque : {name} ¦ 🕰 období: {name} ¦ 🕰 period: {name} ¦ 🕰 periode: {name}
+aucune époque choisie ¦ žádné období nevybráno ¦ ingen period vald ¦ ingen periode valgt
+mètres ¦ metry ¦ meter ¦ meter
+centimètres ¦ centimetry ¦ centimeter ¦ centimeter
+millimètres ¦ milimetry ¦ millimeter ¦ millimeter
+pieds ¦ stopy ¦ fot ¦ fod
+toises (1,949 m) ¦ sáhy (1,949 m) ¦ toiser (1,949 m) ¦ toiser (1,949 m)
+pieds du roi (32,48 cm) ¦ královské stopy (32,48 cm) ¦ kungliga fot (32,48 cm) ¦ kongelige fod (32,48 cm)
+aunes de Paris (1,188 m) ¦ pařížské lokte (1,188 m) ¦ Paris-alnar (1,188 m) ¦ Paris-alen (1,188 m)
+perches de Paris (18 pieds, 5,847 m) ¦ pařížské pruty (18 stop, 5,847 m) ¦ Paris-stänger (18 fot, 5,847 m) ¦ Paris-stænger (18 fod, 5,847 m)
+perches royales (22 pieds, 7,146 m) ¦ královské pruty (22 stop, 7,146 m) ¦ kungliga stänger (22 fot, 7,146 m) ¦ kongelige stænger (22 fod, 7,146 m)
+pas (environ 75 cm) ¦ kroky (asi 75 cm) ¦ steg (ungefär 75 cm) ¦ skridt (omkring 75 cm)
+Plâtre blanc ¦ Bílá sádrová omítka ¦ Vit gips ¦ Hvid gips
+Enduit à la chaux ¦ Vápenná omítka ¦ Kalkputs ¦ Kalkpuds
+Pierre apparente ¦ Přiznaný kámen ¦ Synlig sten ¦ Synlig sten
+Brique ¦ Cihla ¦ Tegel ¦ Mursten
+Colombage (pans de bois) ¦ Hrázděné zdivo ¦ Korsvirke ¦ Bindingsværk
+Lambris de bois ¦ Dřevěné obložení ¦ Träpanel ¦ Træpanel
+Papier peint ¦ Tapeta ¦ Tapet ¦ Tapet
+Carrelage ¦ Obklady ¦ Kakel ¦ Fliser
+Béton ¦ Beton ¦ Betong ¦ Beton
+Torchis ¦ Mazanice ¦ Lerklining ¦ Lerklining
+Enduit, crépi ¦ Omítka, břízolit ¦ Puts, spritputs ¦ Puds, sprøjtepuds
+Pierre de taille ¦ Tesaný kámen ¦ Huggen sten ¦ Tilhugget sten
+Papier peint à rayures ¦ Pruhovaná tapeta ¦ Randig tapet ¦ Stribet tapet
+Papier peint à fleurs ¦ Květovaná tapeta ¦ Blommig tapet ¦ Blomstret tapet
+Toile de Jouy ¦ Toile de Jouy ¦ Toile de Jouy ¦ Toile de Jouy
+Parquet ¦ Parkety ¦ Parkett ¦ Parket
+Parquet à bâtons rompus ¦ Parkety rybí kost ¦ Fiskbensparkett ¦ Sildebensparket
+Tomettes ¦ Terakotové dlaždice ¦ Terrakottaplattor ¦ Terrakottafliser
+Carreaux de ciment ¦ Cementové dlaždice ¦ Cementplattor ¦ Cementfliser
+Damier noir et blanc ¦ Černobílá šachovnice ¦ Svart och vitt schackrutigt ¦ Sort og hvidt skakternet
+Dalles de pierre ¦ Kamenné desky ¦ Stenplattor ¦ Stenfliser
+Terre battue ¦ Udusaná hlína ¦ Stampat jordgolv ¦ Stampet lergulv
+Moquette, tapis ¦ Koberec, předložka ¦ Heltäckningsmatta, matta ¦ Gulvtæppe, tæppe
+Herbe (extérieur) ¦ Tráva (venku) ¦ Gräs (utomhus) ¦ Græs (udendørs)
+Gravier, cour ¦ Štěrk, dvůr ¦ Grus, gårdsplan ¦ Grus, gårdsplads
+Bois clair (hêtre, pin) ¦ Světlé dřevo (buk, borovice) ¦ Ljust trä (bok, furu) ¦ Lyst træ (bøg, fyr)
+Chêne ¦ Dub ¦ Ek ¦ Eg
+Noyer ¦ Ořech ¦ Valnöt ¦ Valnød
+Merisier ¦ Třešeň ¦ Körsbärsträ ¦ Kirsebærtræ
+Bois foncé (ébène, bois ciré) ¦ Tmavé dřevo (eben, voskované dřevo) ¦ Mörkt trä (ebenholts, vaxat trä) ¦ Mørkt træ (ibenholt, voksbehandlet træ)
+Bois peint ¦ Natřené dřevo ¦ Målat trä ¦ Malet træ
+Métal, acier ¦ Kov, ocel ¦ Metall, stål ¦ Metal, stål
+Fonte, fer forgé ¦ Litina, kované železo ¦ Gjutjärn, smidesjärn ¦ Støbejern, smedejern
+Laiton, bronze, doré ¦ Mosaz, bronz, zlacení ¦ Mässing, brons, förgyllt ¦ Messing, bronze, forgyldt
+Zinc, fer-blanc ¦ Zinek, plech ¦ Zink, bleck ¦ Zink, blik
+Pierre ¦ Kámen ¦ Sten ¦ Sten
+Marbre ¦ Mramor ¦ Marmor ¦ Marmor
+Grès, terre cuite ¦ Kamenina, terakota ¦ Stengods, terrakotta ¦ Stentøj, terrakotta
+Faïence, porcelaine, émail ¦ Fajáns, porcelán, smalt ¦ Fajans, porslin, emalj ¦ Fajance, porcelæn, emalje
+Tissu ¦ Látka ¦ Tyg ¦ Stof
+Velours ¦ Samet ¦ Sammet ¦ Fløjl
+Cuir ¦ Kůže ¦ Läder ¦ Læder
+Osier, rotin ¦ Proutí, ratan ¦ Korg, rotting ¦ Kurv, rattan
+Paille ¦ Sláma ¦ Halm ¦ Halm
+Verre ¦ Sklo ¦ Glas ¦ Glas
+Sans pieds ¦ Bez nohou ¦ Utan ben ¦ Uden ben
+Pieds droits ¦ Rovné nohy ¦ Raka ben ¦ Lige ben
+Pieds tournés ¦ Soustružené nohy ¦ Svarvade ben ¦ Drejede ben
+Pieds boules (miches) ¦ Kulové nohy ¦ Bollfötter ¦ Kuglefødder
+Patins ¦ Ližiny ¦ Medar ¦ Meder
+Roulettes ¦ Kolečka ¦ Hjul ¦ Hjul
+Barreaux de bois ¦ Dřevěné příčky ¦ Träspjälor ¦ Træbalustre
+Métal (barreaux fins) ¦ Kov (tenké příčky) ¦ Metall (tunna spjälor) ¦ Metal (tynde tremmer)
+Muret plein ¦ Plná zídka ¦ Hel låg mur ¦ Massiv lav mur
+Métiers, ferme ¦ Řemesla, statek ¦ Hantverk, gård ¦ Håndværk, gård
+Extérieur ¦ Venku ¦ Utomhus ¦ Udendørs
+sa chambre ¦ jeho/její pokoj ¦ sitt sovrum ¦ sit soveværelse
+né ici ¦ narodil se zde ¦ född här ¦ født her
+née ici ¦ narodila se zde ¦ född här ¦ født her
+y a vécu ¦ žil(a) zde ¦ bodde här ¦ boede her
+y est mort ¦ zemřel zde ¦ dog här ¦ døde her
+y est morte ¦ zemřela zde ¦ dog här ¦ døde her
+les parents ¦ rodiče ¦ föräldrarna ¦ forældrene
+les enfants ¦ děti ¦ barnen ¦ børnene
+locataire ¦ nájemník ¦ hyresgäst ¦ lejer
+fermier ¦ pachtýř ¦ arrendator ¦ forpagter
+domestique ¦ sluha ¦ tjänare ¦ tjenestefolk
+servante ¦ služka ¦ piga ¦ tjenestepige
+valet ¦ čeledín ¦ dräng ¦ karl
+nourrice ¦ kojná ¦ amma ¦ amme
+pensionnaire ¦ strávník ¦ inackordering ¦ pensionær
+atelier ¦ dílna ¦ verkstad ¦ værksted
+boutique ¦ obchod ¦ butik ¦ butik
+Nom de la maison ¦ Název domu ¦ Husets namn ¦ Husets navn
+Réglages de l’aimant : grille, coins, angles, précision et 💾 réglages enregistrés ¦ Nastavení přichytávání: mřížka, rohy, úhly, přesnost a 💾 uložená nastavení ¦ Inställningar för fästning: rutnät, hörn, vinklar, precision och 💾 sparade inställningar ¦ Indstillinger for fastgørelse: gitter, hjørner, vinkler, præcision og 💾 gemte indstillinger
+Réglages de l’aimant ¦ Nastavení přichytávání ¦ Inställningar för fästning ¦ Indstillinger for fastgørelse
+📐 Un plan ancien, un cadastre, à calquer… ¦ 📐 Starý plán, katastrální mapa k obkreslení… ¦ 📐 En gammal plan, en lantmäterikarta, att kalkera… ¦ 📐 En gammel plan, et matrikelkort, at kalkere…
+🖼️ Un objet en image (vue de dessus)… ¦ 🖼️ Předmět jako obrázek (pohled shora)… ¦ 🖼️ Ett föremål som bild (vy ovanifrån)… ¦ 🖼️ En genstand som billede (set ovenfra)…
+🧊 Un objet 3D (OBJ, STL, glTF, GLB)… ¦ 🧊 3D předmět (OBJ, STL, glTF, GLB)… ¦ 🧊 Ett 3D-föremål (OBJ, STL, glTF, GLB)… ¦ 🧊 En 3D-genstand (OBJ, STL, glTF, GLB)…
+🏠 Une maison (fichier .json)… ¦ 🏠 Dům (soubor .json)… ¦ 🏠 Ett hus (.json-fil)… ¦ 🏠 Et hus (.json-fil)…
+📐 Un plan DXF (AutoCAD, LibreCAD, architecte, notaire)… ¦ 📐 Plán DXF (AutoCAD, LibreCAD, architekt, notář)… ¦ 📐 En DXF-plan (AutoCAD, LibreCAD, arkitekt, notarie)… ¦ 📐 En DXF-plan (AutoCAD, LibreCAD, arkitekt, notar)…
+Le plan (PNG, JPG, PDF, SVG, impression), la vue 3D, le fichier de la maison ¦ Plán (PNG, JPG, PDF, SVG, tisk), 3D zobrazení, soubor domu ¦ Planen (PNG, JPG, PDF, SVG, utskrift), 3D-vyn, husets fil ¦ Planen (PNG, JPG, PDF, SVG, udskrift), 3D-visningen, husets fil
+Choisir, déplacer ¦ Vybrat, přesunout ¦ Välj, flytta ¦ Vælg, flyt
+Déplacer la vue, ou barre d’espace ¦ Posunout pohled, nebo mezerník ¦ Flytta vyn, eller mellanslag ¦ Flyt visningen, eller mellemrum
+Pièce rectangulaire, murs compris : glisser ¦ Obdélníková místnost včetně zdí: táhnout ¦ Rektangulärt rum, väggar inräknade: dra ¦ Rektangulært rum med vægge: træk
+Vide, trémie, double hauteur : glisser, sans murs ¦ Volný prostor, otvor, dvojnásobná výška: táhnout, bez zdí ¦ Öppen yta, trapphål, dubbel takhöjd: dra, utan väggar ¦ Åbent rum, trappehul, dobbelt højde: træk, uden vægge
+Mur : un clic par coin, double-clic ou Entrée pour finir ¦ Zeď: jeden klik na roh, dvojklik nebo Enter pro dokončení ¦ Vägg: ett klick per hörn, dubbelklick eller Retur för att avsluta ¦ Væg: ét klik pr. hjørne, dobbeltklik eller Enter for at afslutte
+Pièce de forme libre, sans murs : un clic par coin ¦ Místnost volného tvaru, bez zdí: jeden klik na roh ¦ Rum med fri form, utan väggar: ett klick per hörn ¦ Rum med fri form, uden vægge: ét klik pr. hjørne
+Porte : clic sur un mur ¦ Dveře: klik na zeď ¦ Dörr: klicka på en vägg ¦ Dør: klik på en væg
+Fenêtre : clic sur un mur ¦ Okno: klik na zeď ¦ Fönster: klicka på en vägg ¦ Vindue: klik på en væg
+Cote, mesure : deux clics ¦ Kóta, míra: dva kliky ¦ Måttsättning, mätning: två klick ¦ Mål, måling: to klik
+Étiquette à flèche : un clic sur le point, un clic où écrire ¦ Popisek se šipkou: klik na bod, klik tam, kde psát ¦ Etikett med pil: ett klick på punkten, ett klick där texten ska stå ¦ Etiket med pil: ét klik på punktet, ét klik hvor der skal skrives
+Une autre époque de la maison en fantôme (celle du calque 🕰, sinon l’époque d’avant) : murs très transparents, arêtes en pointillés ¦ Jiné období domu jako duch (období z vrstvy 🕰, jinak předchozí období): velmi průhledné zdi, tečkované hrany ¦ En annan period av huset som spöke (lagrets 🕰 period, annars den föregående): mycket genomskinliga väggar, prickade kanter ¦ En anden periode af huset som spøgelse (lagets 🕰 periode, ellers den forrige): meget gennemsigtige vægge, prikkede kanter
+Deux clics sur la maison : la distance (et la hauteur entre les deux points) ¦ Dva kliky na dům: vzdálenost (a výškový rozdíl mezi body) ¦ Två klick på huset: avståndet (och höjden mellan punkterna) ¦ To klik på huset: afstanden (og højden mellem de to punkter)
+Tous les étages ¦ Všechna patra ¦ Alla våningar ¦ Alle etager
+Murs coupés (voir dedans) ¦ Řez zdmi (vidět dovnitř) ¦ Kapade väggar (se in) ¦ Skårne vægge (se ind)
+Murs coupés ¦ Řez zdmi ¦ Kapade väggar ¦ Skårne vægge
+🕰 Autre époque ¦ 🕰 Jiné období ¦ 🕰 Annan period ¦ 🕰 Anden periode
+Vue de dessus ¦ Pohled shora ¦ Vy ovanifrån ¦ Set ovenfra
+Vue de face ¦ Pohled zepředu ¦ Vy framifrån ¦ Set forfra
+Vue de côté ¦ Pohled z boku ¦ Vy från sidan ¦ Set fra siden
+Dessus ¦ Shora ¦ Ovan ¦ Ovenfra
+Face ¦ Zepředu ¦ Framifrån ¦ Forfra
+Le soleil selon l’heure, la date et le lieu ; la nuit, les lampes ¦ Slunce podle času, data a místa; v noci lampy ¦ Solen efter tid, datum och plats; på natten lamporna ¦ Solen efter tid, dato og sted; om natten lamperne
+Visiter la maison à hauteur d’yeux ¦ Prohlédnout si dům ve výšce očí ¦ Besök huset i ögonhöjd ¦ Besøg huset i øjenhøjde
+☀️ Lumière ¦ ☀️ Světlo ¦ ☀️ Ljus ¦ ☀️ Lys
+🚶 Visiter ¦ 🚶 Prohlídka ¦ 🚶 Besök ¦ 🚶 Besøg
+📏 Mesurer ¦ 📏 Měřit ¦ 📏 Mät ¦ 📏 Mål
+Plan 2D ¦ 2D plán ¦ 2D-plan ¦ 2D-plan
+Toit ¦ Střecha ¦ Tak ¦ Tag
+Cotes ¦ Kóty ¦ Mått ¦ Mål
+Mobilier ¦ Nábytek ¦ Möbler ¦ Møbler
+Propriétés de l’élément choisi ¦ Vlastnosti vybraného prvku ¦ Egenskaper för det valda objektet ¦ Egenskaber for det valgte element
+Mobilier : meubles, portes, fenêtres à poser ¦ Nábytek: kusy nábytku, dveře, okna k umístění ¦ Möbler: möbler, dörrar, fönster att placera ¦ Møbler: møbler, døre, vinduer at placere
+L’étage affiché : niveaux, hauteur, sol ¦ Zobrazené patro: úrovně, výška, podlaha ¦ Den visade våningen: nivåer, höjd, golv ¦ Den viste etage: niveauer, højde, gulv
+La maison : nom, époque, réglages généraux ¦ Dům: název, období, obecná nastavení ¦ Huset: namn, period, allmänna inställningar ¦ Huset: navn, periode, generelle indstillinger
+la maison est fermée ¦ dům je zavřený ¦ huset är stängt ¦ huset er lukket
+d’autres changements ont suivi : utilise ↶ dans la barre du haut ¦ následovaly další změny: použij ↶ v horní liště ¦ andra ändringar har följt: använd ↶ i övre fältet ¦ andre ændringer er fulgt efter: brug ↶ i den øverste bjælke
+Aimanter : grille, coins et milieux des murs, angles (Alt pour s’en passer) ¦ Přichytávat: mřížka, rohy a středy zdí, úhly (Alt pro vypnutí) ¦ Fäst: rutnät, väggarnas hörn och mittpunkter, vinklar (Alt för att slippa) ¦ Fastgør: gitter, væggenes hjørner og midtpunkter, vinkler (Alt for at undgå det)
+{walls} ajouté depuis {when} ¦ {walls} přidáno od {when} ¦ {walls} tillagd sedan {when} ¦ {walls} tilføjet siden {when}
+{walls} ajoutés depuis {when} ¦ {walls} přidány od {when} ¦ {walls} tillagda sedan {when} ¦ {walls} tilføjet siden {when}
+{walls} disparu depuis {when} ¦ {walls} zmizelo od {when} ¦ {walls} borta sedan {when} ¦ {walls} forsvundet siden {when}
+{walls} disparus depuis {when} ¦ {walls} zmizely od {when} ¦ {walls} borta sedan {when} ¦ {walls} forsvundet siden {when}
+{walls} plus là en {when} ¦ {walls} už nebyly v {when} ¦ {walls} inte kvar {when} ¦ {walls} ikke længere der i {when}
+{walls} ajouté en {when} ¦ {walls} přidáno v {when} ¦ {walls} tillagd {when} ¦ {walls} tilføjet i {when}
+{walls} ajoutés en {when} ¦ {walls} přidány v {when} ¦ {walls} tillagda {when} ¦ {walls} tilføjet i {when}
+={n} souvenir : clic pour voir ¦ {n} vzpomínka: klikni a uvidíš|{n} vzpomínky: klikni a uvidíš|{n} vzpomínek: klikni a uvidíš ¦ {n} minne: klicka för att se|{n} minnen: klicka för att se ¦ {n} minde: klik for at se|{n} minder: klik for at se
+={n} souvenirs : clic pour voir ¦ {n} vzpomínka: klikni a uvidíš|{n} vzpomínky: klikni a uvidíš|{n} vzpomínek: klikni a uvidíš ¦ {n} minne: klicka för att se|{n} minnen: klicka för att se ¦ {n} minde: klik for at se|{n} minder: klik for at se
+Glisser : la pointe de la flèche ¦ Táhnout: hrot šipky ¦ Dra: pilens spets ¦ Træk: pilens spids
+Voir un autre étage, ou le même étage à une autre époque, en transparence ¦ Zobrazit jiné patro nebo stejné patro v jiném období, průhledně ¦ Se en annan våning, eller samma våning i en annan period, genomskinligt ¦ Se en anden etage, eller samme etage i en anden periode, gennemsigtigt
+Calque d’un autre étage ou d’une autre époque ¦ Vrstva jiného patra nebo jiného období ¦ Lager från en annan våning eller en annan period ¦ Lag fra en anden etage eller en anden periode
+Calque d’un autre étage ou d’une époque ¦ Vrstva jiného patra nebo období ¦ Lager från en annan våning eller en period ¦ Lag fra en anden etage eller en periode
+👻 Calque : non ¦ 👻 Vrstva: žádná ¦ 👻 Lager: inget ¦ 👻 Lag: intet
+👻 Dessous ¦ 👻 Pod ¦ 👻 Under ¦ 👻 Under
+👻 Dessus ¦ 👻 Nad ¦ 👻 Över ¦ 👻 Over
+👻 Les deux ¦ 👻 Obojí ¦ 👻 Båda ¦ 👻 Begge
+🕰 Époque d’avant ¦ 🕰 Předchozí období ¦ 🕰 Föregående period ¦ 🕰 Forrige periode
+🕰 Époque d’après ¦ 🕰 Následující období ¦ 🕰 Nästa period ¦ 🕰 Næste periode
+🕰 Choisir une époque… ¦ 🕰 Vybrat období… ¦ 🕰 Välj en period… ¦ 🕰 Vælg en periode…
+Ajouter un étage ou une cave ¦ Přidat patro nebo sklep ¦ Lägg till en våning eller en källare ¦ Tilføj en etage eller en kælder
+Les étages : gérer, ajouter, dupliquer, supprimer ¦ Patra: spravovat, přidat, duplikovat, smazat ¦ Våningar: hantera, lägg till, duplicera, radera ¦ Etager: administrér, tilføj, duplikér, slet
+Plus d’actions sur les étages ¦ Další akce pro patra ¦ Fler åtgärder för våningarna ¦ Flere handlinger for etagerne
+Chercher : lit, poêle, rouet… ¦ Hledat: postel, kamna, kolovrat… ¦ Sök: säng, kamin, spinnrock… ¦ Søg: seng, kakkelovn, spinderok…
+Mes objets ¦ Moje předměty ¦ Mina föremål ¦ Mine genstande
+Aucun objet importé pour l’instant ¦ Zatím žádný importovaný předmět ¦ Inga importerade föremål än ¦ Ingen importerede genstande endnu
+« ⤒ Importer » (en haut) un fichier 3D (OBJ, STL, glTF, GLB) ou une image. ¦ „⤒ Importovat“ (nahoře) 3D soubor (OBJ, STL, glTF, GLB) nebo obrázek. ¦ ”⤒ Importera” (högst upp) en 3D-fil (OBJ, STL, glTF, GLB) eller en bild. ¦ »⤒ Importér« (øverst) en 3D-fil (OBJ, STL, glTF, GLB) eller et billede.
+Clic sur un objet : il se pose au milieu de la vue ; glisse-le ensuite à sa place (R ou la poignée ronde pour tourner). ¦ Klik na předmět: umístí se doprostřed pohledu; pak ho přetáhni na místo (R nebo kulatý úchyt pro otočení). ¦ Klicka på ett föremål: det hamnar mitt i vyn; dra det sedan till sin plats (R eller det runda handtaget för att rotera). ¦ Klik på en genstand: den lander midt i visningen; træk den så på plads (R eller det runde håndtag for at rotere).
+Nom de l’étage ¦ Název patra ¦ Våningens namn ¦ Etagens navn
+Épaisseur des nouveaux murs ¦ Tloušťka nových zdí ¦ Tjocklek på nya väggar ¦ Tykkelse på nye vægge
+Épaisseur des planchers ¦ Tloušťka stropů ¦ Bjälklagens tjocklek ¦ Etageadskillelsernes tykkelse
+Pas de la grille ¦ Krok mřížky ¦ Rutnätets steg ¦ Gitterets trin
+⧉ Dupliquer cet étage (murs) ¦ ⧉ Duplikovat toto patro (zdi) ¦ ⧉ Duplicera våningen (väggar) ¦ ⧉ Duplikér etagen (vægge)
+Supprimer l’étage ¦ Smazat patro ¦ Radera våningen ¦ Slet etagen
+Cotes des murs ¦ Kóty zdí ¦ Väggarnas mått ¦ Væggenes mål
+Cotes d’ensemble ¦ Celkové kóty ¦ Totalmått ¦ Samlede mål
+Tableau des pièces sur le plan ¦ Tabulka místností na plánu ¦ Rumstabell på planen ¦ Rumtabel på planen
+Cartouche (nom, lieu, époque, étage) ¦ Popisové pole (název, místo, období, patro) ¦ Namnruta (namn, plats, period, våning) ¦ Titelfelt (navn, sted, periode, etage)
+Affichage sombre (dessin technique) ¦ Tmavé zobrazení (technický výkres) ¦ Mörk visning (teknisk ritning) ¦ Mørk visning (teknisk tegning)
+Plafond (visite 3D) ¦ Strop (3D prohlídka) ¦ Tak (3D-besök) ¦ Loft (3D-besøg)
+Aucun (ouvert) ¦ Žádný (otevřený) ¦ Inget (öppet) ¦ Intet (åbent)
+Plafond uni ¦ Hladký strop ¦ Slätt innertak ¦ Glat loft
+Poutres apparentes ¦ Viditelné trámy ¦ Synliga bjälkar ¦ Synlige bjælker
+Couleur du plafond ¦ Barva stropu ¦ Innertakets färg ¦ Loftets farve
+Légende : ― ajouté · ┄ disparu ¦ Legenda: ― přidáno · ┄ zmizelo ¦ Teckenförklaring: ― tillagt · ┄ borta ¦ Signaturforklaring: ― tilføjet · ┄ forsvundet
+Transparence du calque ¦ Průhlednost vrstvy ¦ Lagrets genomskinlighet ¦ Lagets gennemsigtighed
+📐 Plan ancien, cadastre ¦ 📐 Starý plán, katastr ¦ 📐 Gammal plan, lantmäterikarta ¦ 📐 Gammel plan, matrikelkort
+Un cadastre napoléonien, un plan ancien, un croquis : pose-le en fond, mets-le à l’échelle, puis décalque les murs par-dessus. ¦ Napoleonský katastr, starý plán, náčrt: dej ho do pozadí, nastav měřítko a pak přes něj obkresli zdi. ¦ En napoleonsk lantmäterikarta, en gammal plan, en skiss: lägg den i bakgrunden, skala den och kalkera sedan väggarna ovanpå. ¦ Et napoleonsk matrikelkort, en gammel plan, en skitse: læg den i baggrunden, skalér den, og kalkér så væggene ovenpå.
+🖼 Choisir l’image… ¦ 🖼 Vybrat obrázek… ¦ 🖼 Välj bilden… ¦ 🖼 Vælg billedet…
+Le mettre sous cet étage ¦ Dát ho pod toto patro ¦ Lägg den under våningen ¦ Læg den under etagen
+Visible ¦ Viditelné ¦ Synlig ¦ Synlig
+🔒 Verrouillé ¦ 🔒 Zamčeno ¦ 🔒 Låst ¦ 🔒 Låst
+📏 Mettre à l’échelle ¦ 📏 Nastavit měřítko ¦ 📏 Skala ¦ 📏 Skalér
+Deux clics le long d’un mur de l’image : il devient droit (horizontal ou vertical) ¦ Dva kliky podél zdi na obrázku: srovná se (vodorovně nebo svisle) ¦ Två klick längs en vägg i bilden: den blir rak (vågrät eller lodrät) ¦ To klik langs en væg i billedet: den bliver lige (vandret eller lodret)
+✓ Fin du décalque ¦ ✓ Konec obkreslování ¦ ✓ Sluta kalkera ¦ ✓ Stop kalkering
+✏️ Décalquer les murs ¦ ✏️ Obkreslit zdi ¦ ✏️ Kalkera väggarna ¦ ✏️ Kalkér væggene
+🖼 Changer d’image… ¦ 🖼 Změnit obrázek… ¦ 🖼 Byt bild… ¦ 🖼 Skift billede…
+🏠 Combles (sous le toit) ¦ 🏠 Podkroví (pod střechou) ¦ 🏠 Vind (under taket) ¦ 🏠 Loft (under taget)
+Pour l’étage le plus haut, sous un toit en pente (onglet Étage → 🏠 Toit) : le plafond suit alors la pente, et la hauteur sous plafond se lit partout sur le plan. ¦ Pro nejvyšší patro pod šikmou střechou (karta Patro → 🏠 Střecha): strop pak sleduje sklon a světlá výška se dá všude odečíst z plánu. ¦ För den översta våningen, under ett sluttande tak (fliken Våning → 🏠 Tak): innertaket följer då lutningen, och takhöjden kan läsas överallt på planen. ¦ For den øverste etage under et skråtag (fanen Etage → 🏠 Tag): loftet følger så hældningen, og lofthøjden kan aflæses overalt på planen.
+Combles : le plafond suit la pente du toit ¦ Podkroví: strop sleduje sklon střechy ¦ Vind: innertaket följer takets lutning ¦ Loft: loftet følger tagets hældning
+Hauteur des murs sous le toit ¦ Výška zdí pod střechou ¦ Väggarnas höjd under taket ¦ Væggenes højde under taget
+🏠 Toit (vue 3D) ¦ 🏠 Střecha (3D zobrazení) ¦ 🏠 Tak (3D-vy) ¦ 🏠 Tag (3D-visning)
+Un toit sur l’étage le plus haut ¦ Střecha na nejvyšším patře ¦ Ett tak på den översta våningen ¦ Et tag på den øverste etage
+Deux pans (pignons) ¦ Sedlová (štíty) ¦ Sadeltak (gavlar) ¦ Saddeltag (gavle)
+Quatre pans (croupes) ¦ Valbová ¦ Valmat tak ¦ Valmtag
+Pavillon (pointe) ¦ Stanová (špička) ¦ Tältak (spets) ¦ Pyramidetag (spids)
+Un pan (appentis) ¦ Pultová ¦ Pulpettak ¦ Halvtag
+Mansardé ¦ Mansardová ¦ Mansardtak ¦ Mansardtag
+Plat (toit-terrasse) ¦ Plochá (terasa) ¦ Platt (takterrass) ¦ Fladt (tagterrasse)
+Faîtage ¦ Hřeben ¦ Nock ¦ Tagryg
+Dans la longueur ¦ Po délce ¦ På längden ¦ På langs
+Dans la largeur ¦ Po šířce ¦ På bredden ¦ På tværs
+Est – ouest ¦ Východ – západ ¦ Öst – väst ¦ Øst – vest
+Nord – sud ¦ Sever – jih ¦ Nord – syd ¦ Nord – syd
+Débord ¦ Přesah ¦ Takutsprång ¦ Udhæng
+Couverture ¦ Krytina ¦ Taktäckning ¦ Tagdækning
+Tuiles canal ¦ Prejzy ¦ Munk-och-nunnetegel ¦ Munke-nonne-tegl
+Tuiles plates ¦ Bobrovky ¦ Plattegel ¦ Bævertegl
+Tuiles vernissées ¦ Glazované tašky ¦ Glaserat tegel ¦ Glaseret tegl
+Ardoises ¦ Břidlice ¦ Skiffer ¦ Skifer
+Lauzes (pierre) ¦ Kamenné desky ¦ Stenflis ¦ Stenheller
+Chaume ¦ Došky ¦ Halmtak ¦ Stråtag
+Zinc ¦ Zinek ¦ Zink ¦ Zink
+Bac acier ¦ Ocelový trapézový plech ¦ Profilerad stålplåt ¦ Trapezplade af stål
+Pignons, acrotères ¦ Štíty, atiky ¦ Gavlar, bröstningar ¦ Gavle, brystninger
+Acrotère (toit plat) ¦ Atika (plochá střecha) ¦ Bröstning (platt tak) ¦ Brystning (fladt tag)
+Une cheminée ¦ Komín ¦ En skorsten ¦ En skorsten
+Place de la cheminée ¦ Umístění komína ¦ Skorstenens placering ¦ Skorstenens placering
+Gouttières et descentes ¦ Okapy a svody ¦ Takrännor och stuprör ¦ Tagrender og nedløbsrør
+Un toit par aile (maison en L, en T, en U) ¦ Střecha pro každé křídlo (dům do L, T, U) ¦ Ett tak per flygel (L-, T-, U-format hus) ¦ Ét tag pr. fløj (L-, T-, U-formet hus)
+Verrières, lanterneaux et édicules ¦ Prosklené střechy, světlíky a nástavby ¦ Glastak, takljus och takhus ¦ Glastage, ovenlys og tagopbygninger
+Fenêtres de toit et lucarnes ¦ Střešní okna a vikýře ¦ Takfönster och takkupor ¦ Tagvinduer og kviste
+🪟 Verrière ¦ 🪟 Prosklená střecha ¦ 🪟 Glastak ¦ 🪟 Glastag
+🚪 Édicule (sortie sur le toit) ¦ 🚪 Nástavba (výstup na střechu) ¦ 🚪 Takhus (utgång till taket) ¦ 🚪 Tagopbygning (udgang til taget)
+🔆 Lanterneau ¦ 🔆 Světlík ¦ 🔆 Takljus ¦ 🔆 Ovenlys
+🪟 Fenêtre de toit ¦ 🪟 Střešní okno ¦ 🪟 Takfönster ¦ 🪟 Tagvindue
+🏠 Lucarne ¦ 🏠 Vikýř ¦ 🏠 Takkupa ¦ 🏠 Kvist
+🏚 Chien-assis ¦ 🏚 Pultový vikýř ¦ 🏚 Släpkupa ¦ 🏚 Slæbkvist
+Lucarne ¦ Vikýř ¦ Takkupa ¦ Kvist
+Aile ¦ Křídlo ¦ Flygel ¦ Fløj
+Arrière ¦ Zadní ¦ Bak ¦ Bag
+En travers ¦ Napříč ¦ Tvärs ¦ På tværs
+Vers l’égout ¦ Ke okapu ¦ Mot takfoten ¦ Mod tagfoden
+Profondeur ¦ Hloubka ¦ Djup ¦ Dybde
+＋ Verrière ¦ ＋ Prosklená střecha ¦ ＋ Glastak ¦ ＋ Glastag
+＋ Édicule ¦ ＋ Nástavba ¦ ＋ Takhus ¦ ＋ Tagopbygning
+＋ Lanterneau ¦ ＋ Světlík ¦ ＋ Takljus ¦ ＋ Ovenlys
+＋ Fenêtre de toit ¦ ＋ Střešní okno ¦ ＋ Takfönster ¦ ＋ Tagvindue
+＋ Lucarne ¦ ＋ Vikýř ¦ ＋ Takkupa ¦ ＋ Kvist
+＋ Chien-assis ¦ ＋ Pultový vikýř ¦ ＋ Släpkupa ¦ ＋ Slæbkvist
+Rien pour l’instant : ajoute des habitants et des recensements (plus bas). ¦ Zatím nic: přidej obyvatele a sčítání (níže). ¦ Inget än: lägg till invånare och folkräkningar (längre ner). ¦ Intet endnu: tilføj beboere og folketællinger (længere nede).
+📍 Lieu et époque ¦ 📍 Místo a období ¦ 📍 Plats och period ¦ 📍 Sted og periode
+Époque (en quelques mots) ¦ Období (několika slovy) ¦ Period (med några ord) ¦ Periode (med få ord)
+Aucun souvenir posé pour l’instant ¦ Zatím není umístěna žádná vzpomínka ¦ Inga minnen utplacerade än ¦ Ingen minder placeret endnu
+Clic sur un meuble ou une pièce, puis « 🔗 Relier un souvenir » : une photo, un récit, une personne, un souvenir de famille. ¦ Klikni na kus nábytku nebo místnost a pak „🔗 Propojit vzpomínku“: fotka, vyprávění, osoba, rodinná vzpomínka. ¦ Klicka på en möbel eller ett rum, sedan ”🔗 Koppla ett minne”: ett foto, en berättelse, en person, ett familjeminne. ¦ Klik på et møbel eller et rum, og så »🔗 Forbind et minde«: et foto, en fortælling, en person, et familieminde.
+☀️ Orientation et lumière ¦ ☀️ Orientace a světlo ¦ ☀️ Orientering och ljus ¦ ☀️ Orientering og lys
+Nord du plan ¦ Sever plánu ¦ Planens norr ¦ Planens nord
+Heure ¦ Čas ¦ Klockslag ¦ Klokkeslæt
+Jour ¦ Den ¦ Dag ¦ Dag
+Jour de l’année ¦ Den v roce ¦ Dag på året ¦ Dag i året
+Hauteur des yeux pour la visite ¦ Výška očí pro prohlídku ¦ Ögonhöjd för besöket ¦ Øjenhøjde for besøget
+👥 Les habitants ¦ 👥 Obyvatelé ¦ 👥 Invånarna ¦ 👥 Beboerne
+rôle, années (né ici, 1880–1920…) ¦ role, roky (narodil se zde, 1880–1920…) ¦ roll, år (född här, 1880–1920…) ¦ rolle, år (født her, 1880–1920…)
+＋ Ajouter un habitant… ¦ ＋ Přidat obyvatele… ¦ ＋ Lägg till en invånare… ¦ ＋ Tilføj en beboer…
+📋 Les recensements ¦ 📋 Sčítání lidu ¦ 📋 Folkräkningarna ¦ 📋 Folketællingerne
+Ouvrir la fiche où est ce recensement ¦ Otevřít kartu s tímto sčítáním ¦ Öppna posten där folkräkningen finns ¦ Åbn posten, hvor folketællingen er
+L’époque de la maison qui correspond à ce recensement ¦ Období domu, které odpovídá tomuto sčítání ¦ Husets period som motsvarar folkräkningen ¦ Husets periode, der svarer til folketællingen
+— époque — ¦ — období — ¦ — period — ¦ — periode —
+Aucun recensement rattaché. ¦ Žádné propojené sčítání. ¦ Ingen folkräkning kopplad. ¦ Ingen folketælling forbundet.
+＋ Ajouter un recensement… ¦ ＋ Přidat sčítání… ¦ ＋ Lägg till en folkräkning… ¦ ＋ Tilføj en folketælling…
+🕰 Les époques ¦ 🕰 Období ¦ 🕰 Perioderna ¦ 🕰 Perioderne
+Montrer la maison à cette époque ¦ Ukázat dům v tomto období ¦ Visa huset under den här perioden ¦ Vis huset i denne periode
+Renommer, changer la date, rattacher à un recensement ¦ Přejmenovat, změnit datum, propojit se sčítáním ¦ Byt namn, ändra datum, koppla till en folkräkning ¦ Omdøb, skift dato, forbind med en folketælling
+Supprimer cette époque ¦ Smazat toto období ¦ Radera den här perioden ¦ Slet denne periode
+La maison a changé avec le temps ? Crée une époque par année ou par date (1850, 1900, 1936…), chacune avec son plan : tu la verras évoluer, et chacune peut être rattachée à un recensement. ¦ Změnil se dům v průběhu času? Vytvoř období pro každý rok nebo datum (1850, 1900, 1936…), každé s vlastním plánem: uvidíš, jak se vyvíjel, a každé lze propojit se sčítáním. ¦ Har huset förändrats med tiden? Skapa en period per år eller datum (1850, 1900, 1936…), var och en med sin plan: du ser hur det förändras, och varje period kan kopplas till en folkräkning. ¦ Har huset ændret sig med tiden? Opret en periode pr. år eller dato (1850, 1900, 1936…), hver med sin plan: du ser det udvikle sig, og hver kan forbindes med en folketælling.
+＋ Nouvelle époque (copie de celle-ci) ¦ ＋ Nové období (kopie tohoto) ¦ ＋ Ny period (kopia av den här) ¦ ＋ Ny periode (kopi af denne)
+＋ Nouvelle époque (copie de celle-ci)… ¦ ＋ Nové období (kopie tohoto)… ¦ ＋ Ny period (kopia av den här)… ¦ ＋ Ny periode (kopi af denne)…
+▶ Voir évoluer ¦ ▶ Sledovat vývoj ¦ ▶ Se förändringen ¦ ▶ Se udviklingen
+⏹ Arrêter ¦ ⏹ Zastavit ¦ ⏹ Stoppa ¦ ⏹ Stop
+📖 Histoire de la maison ¦ 📖 Historie domu ¦ 📖 Husets historia ¦ 📖 Husets historie
+Histoire de la maison ¦ Historie domu ¦ Husets historia ¦ Husets historie
+Construite par…, agrandie en…, vendue en… ¦ Postavil…, rozšířen v…, prodán v… ¦ Byggt av…, utbyggt…, sålt… ¦ Bygget af…, udvidet i…, solgt i…
+Clic sur un mur, une pièce, un meuble : ses réglages viennent ici (matériau, couleur, taille, nom, souvenirs). Molette : zoomer ; barre d’espace : déplacer la vue ; Alt : sans aimant. ¦ Klikni na zeď, místnost, kus nábytku: jeho nastavení se objeví zde (materiál, barva, velikost, název, vzpomínky). Kolečko: přiblížit; mezerník: posunout pohled; Alt: bez přichytávání. ¦ Klicka på en vägg, ett rum, en möbel: dess inställningar visas här (material, färg, storlek, namn, minnen). Mushjul: zooma; mellanslag: flytta vyn; Alt: utan fästning. ¦ Klik på en væg, et rum, et møbel: dets indstillinger vises her (materiale, farve, størrelse, navn, minder). Hjul: zoom; mellemrum: flyt visningen; Alt: uden fastgørelse.
+Cet étage ¦ Toto patro ¦ Den här våningen ¦ Denne etage
+={n} pièce ¦ {n} místnost|{n} místnosti|{n} místností ¦ {n} rum|{n} rum ¦ {n} rum|{n} rum
+={n} pièces ¦ {n} místnost|{n} místnosti|{n} místností ¦ {n} rum|{n} rum ¦ {n} rum|{n} rum
+={n} étage ¦ {n} patro|{n} patra|{n} pater ¦ {n} våning|{n} våningar ¦ {n} etage|{n} etager
+={n} étages ¦ {n} patro|{n} patra|{n} pater ¦ {n} våning|{n} våningar ¦ {n} etage|{n} etager
+={n} habitant ¦ {n} obyvatel|{n} obyvatelé|{n} obyvatel ¦ {n} invånare|{n} invånare ¦ {n} beboer|{n} beboere
+={n} habitants ¦ {n} obyvatel|{n} obyvatelé|{n} obyvatel ¦ {n} invånare|{n} invånare ¦ {n} beboer|{n} beboere
+={n} époque ¦ {n} období|{n} období|{n} období ¦ {n} period|{n} perioder ¦ {n} periode|{n} perioder
+={n} époques ¦ {n} období|{n} období|{n} období ¦ {n} period|{n} perioder ¦ {n} periode|{n} perioder
+={n} arrêt ¦ {n} zastávka|{n} zastávky|{n} zastávek ¦ {n} stopp|{n} stopp ¦ {n} stop|{n} stop
+={n} arrêts ¦ {n} zastávka|{n} zastávky|{n} zastávek ¦ {n} stopp|{n} stopp ¦ {n} stop|{n} stop
+={n} modèle ¦ {n} model|{n} modely|{n} modelů ¦ {n} modell|{n} modeller ¦ {n} model|{n} modeller
+={n} modèles ¦ {n} model|{n} modely|{n} modelů ¦ {n} modell|{n} modeller ¦ {n} model|{n} modeller
+={n} recensement rattaché ¦ {n} propojené sčítání|{n} propojená sčítání|{n} propojených sčítání ¦ {n} folkräkning kopplad|{n} folkräkningar kopplade ¦ {n} folketælling forbundet|{n} folketællinger forbundet
+={n} recensements rattachés ¦ {n} propojené sčítání|{n} propojená sčítání|{n} propojených sčítání ¦ {n} folkräkning kopplad|{n} folkräkningar kopplade ¦ {n} folketælling forbundet|{n} folketællinger forbundet
+={n} habitant ajouté depuis le recensement. ¦ {n} obyvatel přidán ze sčítání.|{n} obyvatelé přidáni ze sčítání.|{n} obyvatel přidáno ze sčítání. ¦ {n} invånare tillagd från folkräkningen.|{n} invånare tillagda från folkräkningen. ¦ {n} beboer tilføjet fra folketællingen.|{n} beboere tilføjet fra folketællingen.
+={n} habitants ajoutés depuis le recensement. ¦ {n} obyvatel přidán ze sčítání.|{n} obyvatelé přidáni ze sčítání.|{n} obyvatel přidáno ze sčítání. ¦ {n} invånare tillagd från folkräkningen.|{n} invånare tillagda från folkräkningen. ¦ {n} beboer tilføjet fra folketællingen.|{n} beboere tilføjet fra folketællingen.
+={n} trémie ouverte ¦ {n} otevřený otvor|{n} otevřené otvory|{n} otevřených otvorů ¦ {n} trapphål öppnat|{n} trapphål öppnade ¦ {n} trappehul åbnet|{n} trappehuller åbnet
+={n} trémies ouvertes ¦ {n} otevřený otvor|{n} otevřené otvory|{n} otevřených otvorů ¦ {n} trapphål öppnat|{n} trapphål öppnade ¦ {n} trappehul åbnet|{n} trappehuller åbnet
+={n} étage supprimé ¦ {n} smazané patro|{n} smazaná patra|{n} smazaných pater ¦ {n} våning raderad|{n} våningar raderade ¦ {n} etage slettet|{n} etager slettet
+={n} étages supprimés ¦ {n} smazané patro|{n} smazaná patra|{n} smazaných pater ¦ {n} våning raderad|{n} våningar raderade ¦ {n} etage slettet|{n} etager slettet
+={n} copie seulement : le mur est trop court pour plus. ¦ Jen {n} kopie: zeď je na víc příliš krátká.|Jen {n} kopie: zeď je na víc příliš krátká.|Jen {n} kopií: zeď je na víc příliš krátká. ¦ Bara {n} kopia: väggen är för kort för fler.|Bara {n} kopior: väggen är för kort för fler. ¦ Kun {n} kopi: væggen er for kort til flere.|Kun {n} kopier: væggen er for kort til flere.
+={n} copies seulement : le mur est trop court pour plus. ¦ Jen {n} kopie: zeď je na víc příliš krátká.|Jen {n} kopie: zeď je na víc příliš krátká.|Jen {n} kopií: zeď je na víc příliš krátká. ¦ Bara {n} kopia: väggen är för kort för fler.|Bara {n} kopior: väggen är för kort för fler. ¦ Kun {n} kopi: væggen er for kort til flere.|Kun {n} kopier: væggen er for kort til flere.
+={n} lampe allumée ¦ {n} rozsvícená lampa|{n} rozsvícené lampy|{n} rozsvícených lamp ¦ {n} lampa tänd|{n} lampor tända ¦ {n} lampe tændt|{n} lamper tændt
+={n} lampes allumées ¦ {n} rozsvícená lampa|{n} rozsvícené lampy|{n} rozsvícených lamp ¦ {n} lampa tänd|{n} lampor tända ¦ {n} lampe tændt|{n} lamper tændt
+={n} refusé : {list} ¦ {n} odmítnut: {list}|{n} odmítnuty: {list}|{n} odmítnuto: {list} ¦ {n} nekad: {list}|{n} nekade: {list} ¦ {n} afvist: {list}|{n} afvist: {list}
+={n} refusés : {list} ¦ {n} odmítnut: {list}|{n} odmítnuty: {list}|{n} odmítnuto: {list} ¦ {n} nekad: {list}|{n} nekade: {list} ¦ {n} afvist: {list}|{n} afvist: {list}
+=✓ {n} image : à glisser dans le 🎬 Montage pour en faire un film (avec les textes en voix off). ¦ ✓ {n} obrázek: přetáhni ho do 🎬 Střihu a udělej z něj film (s texty jako hlasem mimo obraz).|✓ {n} obrázky: přetáhni je do 🎬 Střihu a udělej z nich film (s texty jako hlasem mimo obraz).|✓ {n} obrázků: přetáhni je do 🎬 Střihu a udělej z nich film (s texty jako hlasem mimo obraz). ¦ ✓ {n} bild: dra den till 🎬 Klippning för att göra en film (med texterna som berättarröst).|✓ {n} bilder: dra dem till 🎬 Klippning för att göra en film (med texterna som berättarröst). ¦ ✓ {n} billede: træk det ind i 🎬 Klipning for at lave en film (med teksterne som speak).|✓ {n} billeder: træk dem ind i 🎬 Klipning for at lave en film (med teksterne som speak).
+=✓ {n} images : à glisser dans le 🎬 Montage pour en faire un film (avec les textes en voix off). ¦ ✓ {n} obrázek: přetáhni ho do 🎬 Střihu a udělej z něj film (s texty jako hlasem mimo obraz).|✓ {n} obrázky: přetáhni je do 🎬 Střihu a udělej z nich film (s texty jako hlasem mimo obraz).|✓ {n} obrázků: přetáhni je do 🎬 Střihu a udělej z nich film (s texty jako hlasem mimo obraz). ¦ ✓ {n} bild: dra den till 🎬 Klippning för att göra en film (med texterna som berättarröst).|✓ {n} bilder: dra dem till 🎬 Klippning för att göra en film (med texterna som berättarröst). ¦ ✓ {n} billede: træk det ind i 🎬 Klipning for at lave en film (med teksterne som speak).|✓ {n} billeder: træk dem ind i 🎬 Klipning for at lave en film (med teksterne som speak).
+🔗 Relier un souvenir… ¦ 🔗 Propojit vzpomínku… ¦ 🔗 Koppla ett minne… ¦ 🔗 Forbind et minde…
+Angle (°, 0 = vers la droite, 90 = vers le haut) ¦ Úhel (°, 0 = doprava, 90 = nahoru) ¦ Vinkel (°, 0 = åt höger, 90 = uppåt) ¦ Vinkel (°, 0 = til højre, 90 = opad)
+Début X ¦ Začátek X ¦ Start X ¦ Start X
+Début Y ¦ Začátek Y ¦ Start Y ¦ Start Y
+Fin X ¦ Konec X ¦ Slut X ¦ Slut X
+Fin Y ¦ Konec Y ¦ Slut Y ¦ Slut Y
+Hauteur (cm, vide = celle de l’étage) ¦ Výška (cm, prázdné = výška patra) ¦ Höjd (cm, tom = våningens) ¦ Højde (cm, tom = etagens)
+⌒ Courbure (flèche) ¦ ⌒ Zakřivení (vzepětí) ¦ ⌒ Krökning (pilhöjd) ¦ ⌒ Krumning (pilhøjde)
+✂ Couper en deux ¦ ✂ Rozdělit na dvě ¦ ✂ Dela i två ¦ ✂ Del i to
+Revêtement ¦ Obklad ¦ Beklädnad ¦ Beklædning
+Pareil pour : ¦ Stejně pro: ¦ Samma för: ¦ Det samme for:
+tout l’étage ¦ celé patro ¦ hela våningen ¦ hele etagen
+toute la maison ¦ celý dům ¦ hela huset ¦ hele huset
+Couleur et texture ¦ Barva a textura ¦ Färg och struktur ¦ Farve og tekstur
+Taille du motif ¦ Velikost vzoru ¦ Mönstrets storlek ¦ Mønstrets størrelse

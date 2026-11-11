@@ -2,7 +2,8 @@
 
 À suivre pour toute traduction de LCNDA (mode d’emploi : `docs/I18N.md`). Un mot de l’app se traduit **toujours de la
 même façon** dans une langue. Ton : on tutoie partout (en : *you* ; es : *tú* ; de : *du* ; it : *tu* ; pt : *tu* ;
-pl : *ty* ; nl : *je*). Phrases courtes et simples, comme en français.
+pl : *ty* ; nl : *je* ; cs : *ty* ; sv : *du* ; da : *du*). Phrases courtes et simples, comme en français.
+Le tchèque, le suédois et le danois ont leur propre section à la fin (« Langues ajoutées ensuite »).
 
 ## Généalogie
 
@@ -434,3 +435,96 @@ garde aussi les mots français. Les mots qui changent selon l’endroit ont un c
 `motif|`, `piste|`, `liaison|`, `bouton|` (lettres G, I, S des boutons de style), `lien|libre`, `rangement|libre`, `présentation|Fin`.
 Le contenu de la personne (titres, notes, textes posés, commentaires, contenu des diapositives) est marqué `data-i18n-off` et
 n’est jamais traduit ; les noms des nouveaux objets se traduisent au moment où ils sont créés.
+
+## Zone « Récits » (récits des Trésors, « Récit d’une vie » du diaporama)
+
+| Français | English | Español | Deutsch | Italiano | Português | Polski | Nederlands |
+|---|---|---|---|---|---|---|---|
+| faire-part | announcement card | participación | Anzeige | partecipazione | participação | zawiadomienie | aankondiging |
+| la veillée | the evening gathering | la velada | der Erzählabend | la veglia | o serão | wieczór wspomnień | de vertelavond |
+| arrière-grand-père | great-grandfather | bisabuelo | Urgroßvater | bisnonno | bisavô | pradziadek | overgrootvader |
+| Récit d’une vie | A life story | Relato de una vida | Lebensgeschichte | Racconto di una vita | Relato de uma vida | Opowieść o życiu | Levensverhaal |
+
+## Langues ajoutées ensuite : tchèque (cs), suédois (sv), danois (da)
+
+Fichiers à part : `assets/i18n/src/nord/<zone>.tsv` (1re ligne `fr ¦ cs ¦ sv ¦ da`, même clé que `<zone>.tsv`).
+Ton : on tutoie (cs : *ty*, impératif à la 2e personne du singulier « Vyber », « Klikni » ; sv : *du* ; da : *du*).
+Guillemets : cs „…“, sv ”…”, da »…«. Pluriels : cs `1|2 à 4|5 et plus` (osoba|osoby|osob, comme le polonais),
+sv et da `one|other`. Les verbes des boutons à l’infinitif en cs (« Uložit »), à l’impératif en sv / da (« Spara », « Gem »).
+
+| Français | Čeština | Svenska | Dansk |
+|---|---|---|---|
+| Sosa (numéro Sosa) | číslo Sosa (vývod) | anntavlenummer (Sosa) | anenummer (Sosa) |
+| SOSA (liste) | Sosa | Sosa | Sosa |
+| fiche (d’une personne) | karta | post | post |
+| 📒 Fiches (sujets) | 📒 Poznámkové karty | 📒 Anteckningskort | 📒 Notekort |
+| généalogie (la base de la personne) | rodokmen | släktforskning / släktträd | slægtsforskning / slægtstræ |
+| acte | záznam (matriční záznam) | handling | dokument (kirkebogsindførsel) |
+| état civil | matrika | folkbokföring | civilregistrering |
+| registre paroissial | farní matrika | kyrkbok | kirkebog |
+| baptême / naissance | křest / narození | dop / födelse | dåb / fødsel |
+| mariage | sňatek | vigsel | vielse |
+| décès / sépulture | úmrtí / pohřeb | död / begravning | død / begravelse |
+| parrain / marraine | kmotr / kmotra | gudfar / gudmor | gudfar / gudmor |
+| témoin | svědek | vittne | vidne |
+| déclarant | oznamovatel | anmälare | anmelder |
+| ascendants / descendants | předkové / potomci | anfäder / ättlingar | aner / efterkommere |
+| arbre des ascendants / descendants | vývod z předků / rozrod | antavla / stamtavla | anetavle / efterslægtstavle |
+| branche | větev | gren | gren |
+| implexe | implex | anförlust | anetab |
+| recensement | sčítání lidu | folkräkning | folketælling |
+| inventaire après décès | pozůstalostní inventář | bouppteckning | skifte |
+| dépouillement | výpis | register | registrering |
+| cote (d’archive) | signatura | signum | signatur |
+| mur de brique | slepá ulička | återvändsgränd | blindgyde |
+| cousinade | rodinné setkání | släktträff | slægtsstævne |
+| commune / ville | obec / město | ort / stad | by / by |
+| catalogue raisonné | soupis díla | verkförteckning | værkfortegnelse |
+| Tableau de bord | Přehled | Översikt | Oversigt |
+| Personnes | Osoby | Personer | Personer |
+| Graphiques / Diagrammes | Grafy / Diagramy | Diagram / Schema | Diagrammer / Skemaer |
+| Carte | Mapa | Karta | Kort |
+| Listes | Seznamy | Listor | Lister |
+| Chronologie | Časová osa | Tidslinje | Tidslinje |
+| Recherche | Výzkum | Forskning | Forskning |
+| Enquêtes | Pátrání | Undersökningar | Undersøgelser |
+| Trésors | Poklady | Skatter | Skatte |
+| Réglages | Nastavení | Inställningar | Indstillinger |
+| Apparence | Vzhled | Utseende | Udseende |
+| Médias | Média | Media | Medier |
+| Source | Pramen | Källa | Kilde |
+| Étiquette | Štítek | Etikett | Etiket |
+| Battue | Hromadné pátrání | Sökinsats | Eftersøgning |
+| Mode simple | Jednoduchý režim | Enkelt läge | Enkel tilstand |
+| Mode consultation | Režim prohlížení | Visningsläge | Visningstilstand |
+| Sauvegarde | Záloha | Säkerhetskopia | Sikkerhedskopi |
+| Enregistrer / ✓ Enregistré | Uložit / ✓ Uloženo | Spara / ✓ Sparat | Gem / ✓ Gemt |
+| Annuler (bouton) | Zrušit | Avbryt | Annuller |
+| ↶ Annuler / ↷ Rétablir | ↶ Vrátit zpět / ↷ Znovu | ↶ Ångra / ↷ Gör om | ↶ Fortryd / ↷ Gentag |
+| Fermer | Zavřít | Stäng | Luk |
+| Supprimer | Smazat | Radera | Slet |
+| Retirer (détacher) | Odebrat | Ta bort | Fjern |
+| Modifier | Upravit | Redigera | Rediger |
+| Créer / Ajouter | Vytvořit / Přidat | Skapa / Lägg till | Opret / Tilføj |
+| Relier | Propojit | Koppla | Forbind |
+| ↺ Remettre comme au départ | ↺ Obnovit výchozí stav | ↺ Återställ som från början | ↺ Nulstil som fra start |
+| Réessayer | Zkusit znovu | Försök igen | Prøv igen |
+| ⤒ Importer / ⤓ Exporter | ⤒ Importovat / ⤓ Exportovat | ⤒ Importera / ⤓ Exportera | ⤒ Importér / ⤓ Eksportér |
+| 🖨 Imprimer | 🖨 Tisknout | 🖨 Skriv ut | 🖨 Udskriv |
+| Chercher / Filtrer ▾ / Trier : | Hledat / Filtrovat ▾ / Řadit: | Sök / Filtrera ▾ / Sortera: | Søg / Filtrér ▾ / Sortér: |
+| ✓ Compris : | ✓ Rozumím: | ✓ Uppfattat: | ✓ Forstået: |
+| Aimanter | Přichytávat | Fäst | Fastgør |
+| Liste \| Fiches (affichage) | Seznam \| Karty | Lista \| Kort | Liste \| Kort |
+
+## Zone « tresors-ui » (étiquettes et fenêtres des pages Trésors)
+
+| Français | English | Español | Deutsch | Italiano | Português | Polski | Nederlands |
+|---|---|---|---|---|---|---|---|
+| relevé (publié) | abstract | vaciado | Auszug | spoglio | levantamento | wypis | index |
+| signalement | description | filiación | Personenbeschreibung | connotati | sinais | rysopis | signalement |
+| passeport intérieur | internal passport | pasaporte interior | Inlandspass | passaporto interno | passaporte interno | paszport wewnętrzny | binnenlands paspoort |
+| cachette (chasse au trésor) | hiding place | escondite | Versteck | nascondiglio | esconderijo | kryjówka | bergplaats |
+| ambiance sonore | soundscape | ambiente sonoro | Klangwelt | atmosfera sonora | ambiente sonoro | nastrój dźwiękowy | sfeer |
+| couche (d’une ambiance) | layer | capa | Ebene | strato | camada | warstwa | laag |
+| Jeu des 7 familles | Happy Families | Juego de las 7 familias | Quartett | Gioco delle 7 famiglie | Jogo das 7 famílias | Gra w 7 rodzin | Kwartet |
+| les vieux mots des actes | old words in records | palabras antiguas de las actas | alte Wörter in Urkunden | parole antiche degli atti | palavras antigas dos registos | dawne słowa z aktów | oude woorden in akten |

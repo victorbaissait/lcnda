@@ -12,6 +12,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : s);
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const R = ext.diagramRender; if (!R?.KINDS) return;
     const A = () => window.LCNDA_APP;
@@ -49,7 +50,7 @@
     const MAX_SERIES = 40, MAX_CATS = 300;
     /** catégories × séries (comme les colonnes des autres types) */
     function table(spec) {
-        const series = (Array.isArray(spec.series) && spec.series.length ? spec.series : [{name: 'Valeur'}]).slice(0, MAX_SERIES).map((s, j) => ({name: String(s?.name || `Série ${j + 1}`), color: pick(spec, j, s?.color)}));
+        const series = (Array.isArray(spec.series) && spec.series.length ? spec.series : [{name: 'Valeur'}]).slice(0, MAX_SERIES).map((s, j) => ({name: String(s?.name || i18n('Série {n}', {n: String(j + 1)})), color: pick(spec, j, s?.color)}));
         const cats = rowsOf(spec, 'rows', MAX_CATS).map((r, i) => ({label: String(r.label ?? ''), color: r.color, i, v: series.map((_, j) => isNum(r['s' + j]) ? val(r['s' + j]) : null)}));
         return {series, cats};
     }
@@ -88,7 +89,7 @@
         c = String(key).trim().toUpperCase().replace(/^CHR(OMOSOME)?\s*/, ''); if (c === '23') c = 'X'; c = CHR_LEN.has(c) ? c : ''; if (CHR_MEMO.size < 500) CHR_MEMO.set(key, c); return c; };
     const f1 = n => String(Math.round(n * 10) / 10).replace('.', ','); // rapide, pour les milliers de bulles
     const sideOf = v => { const t = fold(v); if (!t) return ''; if (/^(p|pat|pere|paternal|paternel|father|cote pere|cote du pere)/.test(t)) return 'P'; if (/^(m|mat|mere|maternal|maternel|mother|cote mere|cote de la mere)/.test(t)) return 'M'; if (/^(both|les deux|deux|b)$/.test(t)) return 'B'; return ''; };
-    const SIDE_NAME = {P: 'côté père', M: 'côté mère', B: 'des deux côtés', '': 'côté inconnu'};
+    const SIDE_NAME = new Proxy({P: 'côté père', M: 'côté mère', B: 'des deux côtés', '': 'côté inconnu'}, {get: (o, k) => (k in o ? i18n(o[k]) : undefined)});
     // Shared cM Project (Blaine Bettinger, v4, 2020) : relation, code, moyenne, minimum, maximum — comme l'onglet ADN
     const SCP_OWN = [['Parent / enfant', 'P', 3485, 2376, 3720], ['Frère ou sœur', 'FS', 2613, 1613, 3488], ['Demi-frère ou demi-sœur', 'HS', 1759, 1160, 2436], ['Grand-parent / petit-enfant', 'GP', 1754, 984, 2462],
         ['Oncle, tante / neveu, nièce', 'AU', 1741, 1201, 2282], ['Arrière-grand-parent', 'GGP', 887, 485, 1486], ['Grand-oncle, grand-tante', 'GAU', 850, 330, 1467], ['Demi-oncle, demi-tante', 'HAU', 871, 492, 1315],
@@ -138,18 +139,18 @@
         const genome = list.reduce((a, c) => a + c[1], 0);
         const cov = side => list.reduce((a, [c]) => a + covered((byChr.get(c) || []).filter(s => s.side === side || s.side === 'B' || (!pair && side === 'any')).map(s => [s.a, s.b])), 0) / genome * 100;
         const pP = cov('P'), pM = cov('M'), pAny = pair ? 0 : cov('any');
-        let svg = T(0, fs * .6, (pair ? `Peint : ${fmt(pP)} % côté père · ${fmt(pM)} % côté mère` : `Peint : ${fmt(pAny)} % du génome`) + (hidden ? ` (${fmt(hidden, 0)} petits segments non montrés)` : ''), {size: fs * .85, op: .75})
+        let svg = T(0, fs * .6, (pair ? i18n('Peint : {p} % côté père · {m} % côté mère', {p: fmt(pP), m: fmt(pM)}) : i18n('Peint : {p} % du génome', {p: fmt(pAny)})) + (hidden ? ' ' + i18n('({n} petits segments non montrés)', {n: fmt(hidden, 0)}) : ''), {size: fs * .85, op: .75})
             + (pair ? T(W, fs * .6, '▲ père  ▼ mère', {size: fs * .78, anchor: 'end', op: .6}) : '');
         const labels = o.labels !== false, wCache = new Map(), nameW = m => { let w = wCache.get(m); if (w === undefined) { w = textW(m, fs * .7); wCache.set(m, w); } return w; };
         list.forEach(([c, L], idx) => {
             const col = Math.floor(idx / per), row = idx % per, x0 = col * (colW + gapC), y0 = head + row * rowH, bx = x0 + labW, bw = L * k;
             svg += T(x0 + labW - 6, y0 + inner / 2, c, {size: fs * .85, anchor: 'end', weight: 600});
             const track = (y, h, t) => `<rect x="${r2(bx)}" y="${r2(y)}" width="${r2(bw)}" height="${r2(h)}" rx="${r2(Math.min(h / 2, 6))}" fill="currentColor" fill-opacity=".09" stroke="currentColor" stroke-opacity=".22" stroke-width=".7">${tip(t)}</rect>`;
-            if (pair) svg += track(y0, barH, `Chromosome ${c} — copie reçue du père (${fmt(L)} Mb)`) + track(y0 + barH + 2, barH, `Chromosome ${c} — copie reçue de la mère`);
-            else svg += track(y0, barH, `Chromosome ${c} (${fmt(L)} Mb)`);
+            if (pair) svg += track(y0, barH, i18n('Chromosome {c} — copie reçue du père ({mb} Mb)', {c: String(c), mb: fmt(L)})) + track(y0 + barH + 2, barH, i18n('Chromosome {c} — copie reçue de la mère', {c: String(c)}));
+            else svg += track(y0, barH, i18n('Chromosome {c} ({mb} Mb)', {c: String(c), mb: fmt(L)}));
             (byChr.get(c) || []).sort((x, y) => (y.b - y.a) - (x.b - x.a)).forEach(s => { // les plus longs dessous, les petits restent visibles
                 const fill = colOf(s), x = bx + s.a * k, w = Math.max(1.5, (s.b - s.a) * k);
-                const t = `${s.match} — chromosome ${c} : ${f1(s.a)} à ${f1(s.b)} Mb${s.cm ? `, ${f1(s.cm)} cM` : ''}${s.branch ? ' · ' + s.branch : ''} · ${SIDE_NAME[s.side]}${s.pid ? ' (clic : sa fiche)' : ''}`;
+                const t = `${s.match} — ${i18n('chromosome {c} : {a} à {b} Mb', {c: String(c), a: f1(s.a), b: f1(s.b)})}${s.cm ? `, ${f1(s.cm)} cM` : ''}${s.branch ? ' · ' + s.branch : ''} · ${SIDE_NAME[s.side]}${s.pid ? ' ' + i18n('(clic : sa fiche)') : ''}`;
                 const ys = !pair ? [[y0, barH, 1]] : s.side === 'P' ? [[y0, barH, 1]] : s.side === 'M' ? [[y0 + barH + 2, barH, 1]] : s.side === 'B' ? [[y0, barH, 1], [y0 + barH + 2, barH, 1]] : [[y0, barH * 2 + 2, .45]];
                 svg += `<g${who1(s.pid)}>${ys.map(([y, h, op]) => `<rect x="${r2(x)}" y="${r2(y)}" width="${r2(w)}" height="${r2(h)}" fill="${fill}" fill-opacity="${op === 1 ? .9 : op}"${op < 1 ? ` stroke="${fill}" stroke-dasharray="2 2" stroke-width=".8"` : ''}/>`).join('')}${tip(t)}`;
                 if (labels && barH >= fs * .75 && w > fs * 2 && w > nameW(s.match) + 6) svg += T(x + w / 2, ys[0][0] + ys[0][1] / 2 + .5, s.match, {size: fs * .7, anchor: 'middle', fill: contrast(fill)});
@@ -158,17 +159,17 @@
         });
         const h = head + per * rowH;
         let legend;
-        if (by === 'side') legend = [{label: 'Côté père', color: patC}, {label: 'Côté mère', color: matC}, ...(segs.some(s => s.side === 'B') ? [{label: 'Les deux', color: '#8e6bb8'}] : []), ...(segs.some(s => !s.side) ? [{label: 'Côté inconnu', color: noneC}] : [])];
+        if (by === 'side') legend = [{label: i18n('Côté père'), color: patC}, {label: i18n('Côté mère'), color: matC}, ...(segs.some(s => s.side === 'B') ? [{label: i18n('Les deux'), color: '#8e6bb8'}] : []), ...(segs.some(s => !s.side) ? [{label: i18n('Côté inconnu'), color: noneC}] : [])];
         else if (by === 'match') { const seen = new Map(); segs.forEach(s => { if (!seen.has(s.match) && seen.size < 20) seen.set(s.match, s.col || hashColor(spec, s.match)); }); legend = [...seen].map(([label, c]) => ({label, color: c})); }
-        else legend = [...bOrder.slice(0, 20).map(k2 => ({label: segs.find(s => fold(s.branch) === k2).branch, color: bColor.get(k2)})), ...(segs.some(s => !s.branch) ? [{label: 'Branche inconnue', color: noneC}] : [])];
+        else legend = [...bOrder.slice(0, 20).map(k2 => ({label: segs.find(s => fold(s.branch) === k2).branch, color: bColor.get(k2)})), ...(segs.some(s => !s.branch) ? [{label: i18n('Branche inconnue'), color: noneC}] : [])];
         const nMatch = new Set(segs.map(s => s.match)).size;
-        return {h, svg, legend, desc: `Peinture des chromosomes : ${segs.length} segment${segs.length > 1 ? 's' : ''} de ${nMatch} correspondance${nMatch > 1 ? 's' : ''}${pair ? `, ${fmt(pP)} % du génome côté père et ${fmt(pM)} % côté mère` : ''}.`};
+        return {h, svg, legend, desc: i18n('Peinture des chromosomes : {s} de {m}', {s: plural(segs.length, 'segment'), m: plural(nMatch, 'correspondance')}) + (pair ? ', ' + i18n('{p} % du génome côté père et {m} % côté mère', {p: fmt(pP), m: fmt(pM)}) : '') + '.'};
     }
 
     /* ═════════ 📏 Règle des cM ═════════ */
     function cmRuler(spec, W, fs) {
         const o = spec.o || {}, logS = o.scale !== 'lin';
-        const matches = rowsOf(spec, 'rows', 3000).map((r, i) => ({i, name: str(r.name, 120) || `Correspondance ${i + 1}`, cm: clamp(num(r.cm), 0, 4000), side: sideOf(r.side), known: str(r.known, 120), pid: pidOf(r)})).filter(m => m.cm > 0);
+        const matches = rowsOf(spec, 'rows', 3000).map((r, i) => ({i, name: str(r.name, 120) || i18n('Correspondance {n}', {n: String(i + 1)}), cm: clamp(num(r.cm), 0, 4000), side: sideOf(r.side), known: str(r.known, 120), pid: pidOf(r)})).filter(m => m.cm > 0);
         const rels = SCP().filter(r => o.set === 'all' || MAIN_REL.has(r[1]));
         const maxCm = clamp(num(o.maxCm) || 3720, 50, 4000), minLog = 5;
         const hl = fold(o.highlight), hm = hl ? matches.find(m => fold(m.name).includes(hl)) : null, probs = hm ? new Map(guess(hm.cm).map(g => [g.code, g.p])) : null;
@@ -190,7 +191,7 @@
         placed.forEach(({m, x, lv}, k) => {
             const y = stripH - rad - lv * rad * 2.1, c = dotC(m), g3 = guess(m.cm).slice(0, 3).map(g => `${g.name} ${fmt(g.p * 100, 0)} %`).join(' · ');
             const dim = hm && hm !== m;
-            svg += `<g${who1(m.pid)}${dim ? ' opacity=".35"' : ''}><circle cx="${r2(x)}" cy="${r2(y)}" r="${r2(rad)}" fill="${c}" stroke="#fff" stroke-width=".8">${tip(`${m.name} : ${fmt(m.cm)} cM${m.known ? ` — parenté connue : ${m.known}` : ''}${g3 ? ` — parentés possibles : ${g3}` : ''}${m.pid ? ' (clic : sa fiche)' : ''}`)}</circle></g>`;
+            svg += `<g${who1(m.pid)}${dim ? ' opacity=".35"' : ''}><circle cx="${r2(x)}" cy="${r2(y)}" r="${r2(rad)}" fill="${c}" stroke="#fff" stroke-width=".8">${tip(`${m.name} : ${fmt(m.cm)} cM${m.known ? ' — ' + i18n('parenté connue : {k}', {k: m.known}) : ''}${g3 ? ' — ' + i18n('parentés possibles : {k}', {k: g3}) : ''}${m.pid ? ' ' + i18n('(clic : sa fiche)') : ''}`)}</circle></g>`;
             if (k < nLab || m === hm) { const w = textW(m.name, labFs), bx = Math.min(x - w / 2, W - w), by = y - rad - labFs * .75 - (lv ? 0 : 0);
                 if (lv === top || m === hm) { const box = [bx, by - labFs * .6, w, labFs * 1.2]; if (!boxes.some(b => box[0] < b[0] + b[2] + 3 && box[0] + box[2] + 3 > b[0] && box[1] < b[1] + b[3] && box[1] + box[3] > b[1])) { boxes.push(box); labs += T(Math.max(0, bx), by, cut(m.name, W, labFs), {size: labFs, weight: m === hm ? 700 : 400}); } }
                 else { const box = [x + rad + 2, y - labFs * .6, w, labFs * 1.2]; if (box[0] + w < W && !boxes.some(b => box[0] < b[0] + b[2] + 3 && box[0] + box[2] + 3 > b[0] && box[1] < b[1] + b[3] && box[1] + box[3] > b[1]) && !placed.some(p => p !== placed[k] && Math.abs(p.x - (x + rad + 2 + w / 2)) < w / 2 + rad && Math.abs((stripH - rad - p.lv * rad * 2.1) - y) < rad * 1.5)) { boxes.push(box); labs += T(box[0], y, m.name, {size: labFs}); } } }
@@ -201,15 +202,15 @@
             const p = probs?.get(r[1]) || 0, on = !probs || p > 0, x1 = X(Math.max(r[3], logS ? minLog : 0)), x2 = X(r[4]), xa = X(r[2]);
             const n = matches.filter(m => m.cm >= r[3] && m.cm <= r[4]).length, c = probs ? (on ? mix(bandC, '#1f6feb', .75) : bandC) : bandC;
             svg += `<g opacity="${on ? 1 : .35}">` + T(labW - 6, y + bh / 2, cut(r[0], labW - 8, fs * .82), {size: fs * .82, anchor: 'end', weight: probs && p >= .15 ? 700 : 400})
-                + `<rect x="${r2(x1)}" y="${r2(y)}" width="${r2(Math.max(2, x2 - x1))}" height="${r2(bh)}" rx="${r2(bh / 2)}" fill="${c}" fill-opacity="${probs && on ? .45 + p * .5 : .3}">${tip(`${r[0]} : en moyenne ${fmt(r[2], 0)} cM, de ${fmt(r[3], 0)} à ${fmt(r[4], 0)} cM — ${n} de tes correspondances dans cette fourchette${probs ? ` — pour ${hm.name} : ${fmt(p * 100, 0)} %` : ''}`)}</rect>`
+                + `<rect x="${r2(x1)}" y="${r2(y)}" width="${r2(Math.max(2, x2 - x1))}" height="${r2(bh)}" rx="${r2(bh / 2)}" fill="${c}" fill-opacity="${probs && on ? .45 + p * .5 : .3}">${tip(i18n('{rel} : en moyenne {avg} cM, de {min} à {max} cM — {n} de tes correspondances dans cette fourchette', {rel: r[0], avg: fmt(r[2], 0), min: fmt(r[3], 0), max: fmt(r[4], 0), n}) + (probs ? ' — ' + i18n('pour {name} : {p} %', {name: hm.name, p: fmt(p * 100, 0)}) : ''))}</rect>`
                 + (o.showAvg !== false ? `<line x1="${r2(xa)}" y1="${r2(y - 1)}" x2="${r2(xa)}" y2="${r2(y + bh + 1)}" stroke="${mix(c, '#000000', .45)}" stroke-width="2"/>` : '')
                 + (probs && p >= .01 ? T(labW + plotW + 4, y + bh / 2, `${fmt(p * 100, 0)} %`, {size: fs * .75, weight: 700}) : '') + '</g>';
             y += fs * 1.75;
         });
         if (hm) { const x = X(hm.cm); svg += `<line x1="${r2(x)}" y1="${r2(stripH - rad)}" x2="${r2(x)}" y2="${r2(y)}" stroke="#1f6feb" stroke-width="1.6" stroke-dasharray="4 3"/>`; }
         if (!matches.length) svg += T(labW + plotW / 2, fs * .4, 'Ajoute tes correspondances (nom, cM) : elles se placent sur la règle.', {size: fs * .85, anchor: 'middle', op: .6});
-        const legend = o.colorBy === 'one' ? [] : [{label: 'Côté père', color: patC, s: 'P'}, {label: 'Côté mère', color: matC, s: 'M'}, {label: 'Les deux', color: '#8e6bb8', s: 'B'}, {label: 'Côté inconnu', color: oneC, s: ''}].filter(l => matches.some(m => m.side === l.s)).map(({label, color: c}) => ({label, color: c}));
-        return {h: y + fs * .3, svg: `<g transform="translate(0 ${r2(fs * .2)})">${svg}${labs}</g>`, legend, desc: `Règle des cM : ${matches.length} correspondance${matches.length > 1 ? 's' : ''} placée${matches.length > 1 ? 's' : ''} sur une échelle ${logS ? 'logarithmique' : 'linéaire'} de ${rels.length} parentés (Shared cM Project).`};
+        const legend = o.colorBy === 'one' ? [] : [{label: i18n('Côté père'), color: patC, s: 'P'}, {label: i18n('Côté mère'), color: matC, s: 'M'}, {label: i18n('Les deux'), color: '#8e6bb8', s: 'B'}, {label: i18n('Côté inconnu'), color: oneC, s: ''}].filter(l => matches.some(m => m.side === l.s)).map(({label, color: c}) => ({label, color: c}));
+        return {h: y + fs * .3, svg: `<g transform="translate(0 ${r2(fs * .2)})">${svg}${labs}</g>`, legend, desc: i18n(logS ? 'Règle des cM : {n} sur une échelle logarithmique de {r} parentés (Shared cM Project).' : 'Règle des cM : {n} sur une échelle linéaire de {r} parentés (Shared cM Project).', {n: matches.length > 1 ? i18n('{n} correspondances placées', {n: matches.length}) : i18n('{n} correspondance placée', {n: matches.length}), r: rels.length})};
     }
 
     /* ═════════ 🏔 Vagues (ridgeline) ═════════ */
@@ -250,14 +251,14 @@
             const pts = g.d.map((d, k) => [labW + plotW * k / (n - 1), base - d / g.peak * H]);
             const c = one || (grad ? mix(c0, c1, gs.length > 1 ? i / (gs.length - 1) : 1) : pick(spec, g.i, g.color));
             const mean = g.vals.reduce((a, b) => a + b, 0) / g.vals.length;
-            svg += `<g${whoN(g.pids, `${g.name} — ${g.vals.length} personne${g.vals.length > 1 ? 's' : ''}`)}><path d="${smooth(pts)}L${r2(labW + plotW)} ${r2(base)}L${r2(labW)} ${r2(base)}Z" fill="${c}" fill-opacity="${op}" stroke="${o.bg === 'transparent' ? c : '#ffffff'}" stroke-width="1.4">${tip(`${g.name} : ${g.vals.length} valeur${g.vals.length > 1 ? 's' : ''}, médiane ${fmt(g.md)}${u}, moyenne ${fmt(mean)}${u}, de ${fmt(g.sorted[0])} à ${fmt(g.sorted[g.sorted.length - 1])}${u}${g.pids.length ? ' (clic : la liste)' : ''}`)}</path>`
+            svg += `<g${whoN(g.pids, `${g.name} — ${(A()?.plural || ((n, w) => `${n} ${w}`))(g.vals.length, 'personne')}`)}><path d="${smooth(pts)}L${r2(labW + plotW)} ${r2(base)}L${r2(labW)} ${r2(base)}Z" fill="${c}" fill-opacity="${op}" stroke="${o.bg === 'transparent' ? c : '#ffffff'}" stroke-width="1.4">${tip(i18n('{name} : {n}, médiane {med}, moyenne {mean}, de {min} à {max}', {name: g.name, n: plural(g.vals.length, 'valeur'), med: fmt(g.md) + u, mean: fmt(mean) + u, min: fmt(g.sorted[0]), max: fmt(g.sorted[g.sorted.length - 1]) + u}) + (g.pids.length ? ' ' + i18n('(clic : la liste)') : ''))}</path>`
                 + `<path d="${smooth(pts)}" fill="none" stroke="${mix(c, '#000000', .35)}" stroke-width="1.2"/></g>`;
-            if (o.median !== false) { const x = X(g.md), k = clamp(Math.round((g.md - lo) / (hi - lo) * (n - 1)), 0, n - 1), yTop = base - g.d[k] / g.peak * H; svg += `<line x1="${r2(x)}" y1="${r2(base)}" x2="${r2(x)}" y2="${r2(yTop)}" stroke="${contrast(c) === '#ffffff' ? '#ffffff' : '#1d1d1f'}" stroke-width="1.6" stroke-dasharray="3 2">${tip(`${g.name} : médiane ${fmt(g.md)}${u}`)}</line>`; }
+            if (o.median !== false) { const x = X(g.md), k = clamp(Math.round((g.md - lo) / (hi - lo) * (n - 1)), 0, n - 1), yTop = base - g.d[k] / g.peak * H; svg += `<line x1="${r2(x)}" y1="${r2(base)}" x2="${r2(x)}" y2="${r2(yTop)}" stroke="${contrast(c) === '#ffffff' ? '#ffffff' : '#1d1d1f'}" stroke-width="1.6" stroke-dasharray="3 2">${tip(i18n('{name} : médiane {v}', {name: g.name, v: fmt(g.md) + u}))}</line>`; }
             svg += T(labW - 6, base - fs * .45, cut(g.name, labW - 8, fs), {size: fs, anchor: 'end', weight: 600}) + (o.counts !== false ? T(labW - 6, base + fs * .45, `${fmt(g.vals.length, 0)}`, {size: fs * .7, anchor: 'end', op: .6}) : '');
         });
         let h = top + gs.length * rowH + fs * 1.8;
         if (o.xLabel) { svg += T(labW + plotW / 2, h + fs * .3, o.xLabel, {size: fs * .85, anchor: 'middle', weight: 600}); h += fs * 1.4; }
-        return {h, svg, legend: [], desc: `Vagues : ${gs.length} groupe${gs.length > 1 ? 's' : ''}, ${all.length} valeurs, de ${fmt(Math.min(...all))} à ${fmt(Math.max(...all))}${u}.`};
+        return {h, svg, legend: [], desc: i18n('Vagues : {g}, {n} valeurs, de {min} à {max}.', {g: plural(gs.length, 'groupe'), n: all.length, min: fmt(Math.min(...all)), max: fmt(Math.max(...all)) + u})};
     }
 
     /* ═════════ 🧱 Mosaïque à largeur variable (Marimekko) ═════════ */
@@ -273,7 +274,7 @@
         cols.forEach(c => {
             const w = Math.max(1, c.tot / grand * usable); let y = plotH;
             series.forEach((s, j) => { const v = Math.max(0, c.v[j] || 0); if (!v) return; const h = v / c.tot * plotH; y -= h;
-                svg += `<rect x="${r2(x)}" y="${r2(y)}" width="${r2(w)}" height="${r2(h)}" fill="${s.color}" stroke="${o.border === false ? 'none' : color(o.borderColor, '#ffffff')}" stroke-width=".8">${tip(`${c.label} · ${s.name} : ${fmt(v)}${u} (${fmt(v / c.tot * 100)} % de ${c.label}, ${fmt(v / grand * 100)} % du tout)`)}</rect>`;
+                svg += `<rect x="${r2(x)}" y="${r2(y)}" width="${r2(w)}" height="${r2(h)}" fill="${s.color}" stroke="${o.border === false ? 'none' : color(o.borderColor, '#ffffff')}" stroke-width=".8">${tip(`${c.label} · ${s.name} : ${fmt(v)}${u} ` + i18n('({p} % de {label}, {t} % du tout)', {p: fmt(v / c.tot * 100), label: c.label, t: fmt(v / grand * 100)}))}</rect>`;
                 if (showV && w > textW('100 %', vf) + 4 && h > vf * 1.3) svg += T(x + w / 2, y + h / 2, o.values === 'num' ? fmt(v) : `${fmt(v / c.tot * 100, 0)} %`, {size: vf, anchor: 'middle', fill: contrast(s.color)});
                 else if (showV && w > vf * 1.4 && h > textW('100 %', vf) + 4) svg += T(x + w / 2, y + h / 2, o.values === 'num' ? fmt(v) : `${fmt(v / c.tot * 100, 0)} %`, {size: vf, anchor: 'middle', fill: contrast(s.color), rotate: -90});
             });
@@ -282,7 +283,7 @@
             if (o.widths !== false && w > textW('100 %', fs * .72)) svg += T(x + w / 2, plotH + fs * 2.05, `${fmt(c.tot / grand * 100, 0)} %`, {size: fs * .72, anchor: 'middle', op: .6});
             x += w + gap;
         });
-        return {h: plotH + fs * (o.widths !== false ? 2.8 : 1.8), svg, legend: series.map(s => ({label: s.name, color: s.color})), desc: `Mosaïque de ${cols.length} colonnes (largeur = part du total ${fmt(grand)}${u}) et ${series.length} séries.`};
+        return {h: plotH + fs * (o.widths !== false ? 2.8 : 1.8), svg, legend: series.map(s => ({label: s.name, color: s.color})), desc: i18n('Mosaïque de {c} colonnes (largeur = part du total {t}) et {s} séries.', {c: cols.length, t: fmt(grand) + u, s: series.length})};
     }
 
     /* ═════════ ⚫ Échelle de points (Cleveland) ═════════ */
@@ -308,14 +309,14 @@
             g += T(labW - 6, y, cut(c.label, labW - 8, fs * .92), {size: fs * .92, anchor: 'end', weight: dim ? 400 : 600});
             vs.forEach(([v, j]) => { const col = series.length === 1 ? color(c.color, color(o.dotColor, series[0].color)) : series[j].color;
                 g += `<circle cx="${r2(X(v))}" cy="${r2(y)}" r="${r2(rad)}" fill="${col}" stroke="#ffffff" stroke-width="1">${tip(`${c.label}${series.length > 1 ? ' · ' + series[j].name : ''} : ${fmt(v)}${u}`)}</circle>`; });
-            if (o.values !== false && vs.length) { const mx = vs.reduce((a, b) => (b[0] > a[0] ? b : a)); const tx = X(mx[0]) + rad + 4; const txt = vs.length === 2 && series.length === 2 && o.showGap !== false ? `${fmt(mx[0])}${u} (écart ${fmt(Math.abs(vs[1][0] - vs[0][0]))})` : `${fmt(mx[0])}${u}`;
+            if (o.values !== false && vs.length) { const mx = vs.reduce((a, b) => (b[0] > a[0] ? b : a)); const tx = X(mx[0]) + rad + 4; const txt = vs.length === 2 && series.length === 2 && o.showGap !== false ? `${fmt(mx[0])}${u} ` + i18n('(écart {v})', {v: fmt(Math.abs(vs[1][0] - vs[0][0]))}) : `${fmt(mx[0])}${u}`;
                 const mn = vs.reduce((a, b) => (b[0] < a[0] ? b : a)), lx = X(mn[0]) - rad - 4, tw = textW(txt, fs * .75);
                 if (tx + tw < W) g += T(tx, y, txt, {size: fs * .75, op: .8}); else if (lx - tw > labW) g += T(lx, y, txt, {size: fs * .75, anchor: 'end', op: .8}); }
             svg += g + '</g>';
         });
         let h = top + list.length * rowH + fs * 1.5;
         if (o.xLabel) { svg += T(labW + plotW / 2, h + fs * .4, o.xLabel, {size: fs * .85, anchor: 'middle', weight: 600}); h += fs * 1.4; }
-        return {h, svg, legend: series.length > 1 ? series.map(s => ({label: s.name, color: s.color})) : [], desc: `Échelle de points : ${list.length} lignes, ${series.length} série${series.length > 1 ? 's' : ''}.`};
+        return {h, svg, legend: series.length > 1 ? series.map(s => ({label: s.name, color: s.color})) : [], desc: i18n('Échelle de points : {n} lignes, {s}.', {n: list.length, s: plural(series.length, 'série')})};
     }
 
     /* ═════════ 🌹 Rose de Nightingale (aires polaires) ═════════ */
@@ -334,7 +335,7 @@
         list.forEach((c, i) => {
             const b0 = a0 + i * step + padA, b1 = a0 + (i + 1) * step - padA;
             if (stack) { let acc = 0; series.forEach((s, j) => { const v = Math.max(0, c.v[j] || 0); if (!v) return; const r0 = rad(acc), r1 = rad(acc + v); acc += v;
-                svg += `<path d="${wedge(cx, cy, r0, r1, b0, b1)}" fill="${s.color}" fill-opacity=".88" stroke="${o.bg === 'transparent' && !o.lineColor ? 'none' : color(o.lineColor, '#ffffff')}" stroke-width=".8">${tip(`${c.label}${series.length > 1 ? ' · ' + s.name : ''} : ${fmt(v)}${u}${series.length > 1 ? ` (total ${fmt(totals[i])}${u})` : ''}`)}</path>`; }); }
+                svg += `<path d="${wedge(cx, cy, r0, r1, b0, b1)}" fill="${s.color}" fill-opacity=".88" stroke="${o.bg === 'transparent' && !o.lineColor ? 'none' : color(o.lineColor, '#ffffff')}" stroke-width=".8">${tip(`${c.label}${series.length > 1 ? ' · ' + s.name : ''} : ${fmt(v)}${u}${series.length > 1 ? ' ' + i18n('(total {v})', {v: fmt(totals[i]) + u}) : ''}`)}</path>`; }); }
             else series.map((s, j) => [s, Math.max(0, c.v[j] || 0)]).filter(([, v]) => v > 0).sort((x, y) => y[1] - x[1]).forEach(([s, v]) => {
                 svg += `<path d="${wedge(cx, cy, hole, rad(v), b0, b1)}" fill="${s.color}" fill-opacity=".62" stroke="${s.color}" stroke-width="1">${tip(`${c.label} · ${s.name} : ${fmt(v)}${u}`)}</path>`; });
             const am = (b0 + b1) / 2;
@@ -343,12 +344,12 @@
         });
         if (hole > fs) svg += `<circle cx="${r2(cx)}" cy="${r2(cy)}" r="${r2(hole)}" fill="currentColor" fill-opacity=".05"/>`;
         svg += ringLab;
-        return {h: cy + Rm + labR + 2, svg, legend: series.length > 1 ? series.map(s => ({label: s.name, color: s.color})) : [], desc: `Rose de Nightingale : ${n} parts, ${series.length} série${series.length > 1 ? 's' : ''}${areaS ? ', l’aire de chaque part suit le chiffre' : ''}.`};
+        return {h: cy + Rm + labR + 2, svg, legend: series.length > 1 ? series.map(s => ({label: s.name, color: s.color})) : [], desc: i18n(areaS ? 'Rose de Nightingale : {n} parts, {s}, l’aire de chaque part suit le chiffre.' : 'Rose de Nightingale : {n} parts, {s}.', {n, s: plural(series.length, 'série')})};
     }
 
     /* ═════════ 🔁 Tableau de mobilité (métier du père × métier de l'enfant) ═════════ */
     function mobility(spec, W, fs) {
-        const o = spec.o || {}, kid = str(o.childWord, 30) || 'l’enfant', mode = o.mode || 'row';
+        const o = spec.o || {}, kid = str(o.childWord, 30) || i18n('l’enfant'), mode = o.mode || 'row';
         const groups = rowsOf(spec, 'groups', 300).filter(g => str(g.job) && str(g.group)).map(g => [fold(g.job), str(g.group, 60)]);
         const grp = s => { const f = fold(s); if (!f) return ''; const g = groups.find(([k]) => f === k) || groups.find(([k]) => f.includes(k)); return g ? g[1] : str(s, 60); };
         const cell = new Map(), names = new Map(), rowT = new Map(), colT = new Map(); let total = 0;
@@ -372,9 +373,9 @@
         const lowC = color(o.lowColor, '#eef3fb'), highC = color(o.highColor, '#1f4e8c'), diagC = color(o.diagColor, '#e8a33d'), statY = fs * .7, y0 = statY + fs * 1.2 + headH, x0 = labW;
         const share = (x, a, b) => mode === 'row' ? x.n / (rT.get(a) || 1) : mode === 'col' ? x.n / (cT.get(b) || 1) : x.n / (shown || 1);
         let maxS = 0; M.forEach((x, k) => { const [a, b] = k.split('\u0001'); maxS = Math.max(maxS, mode === 'count' ? x.n : share(x, a, b)); });
-        let svg = T(0, statY, `Même métier que le père : ${fmt(same, 0)} sur ${fmt(total, 0)} (${fmt(same / total * 100)} %)`, {size: fs * .85, weight: 600});
+        let svg = T(0, statY, i18n('Même métier que le père : {n} sur {t} ({p} %)', {n: fmt(same, 0), t: fmt(total, 0), p: fmt(same / total * 100)}), {size: fs * .85, weight: 600});
         axis.forEach((k, j) => { const x = x0 + (j + .5) * cs; svg += T(x, y0 - 6, cut(label(k), 130, lf), {size: lf, anchor: 'start', rotate: -45, weight: 600, fill: 'currentColor'}); });
-        svg += T(x0 - 6, y0 - 6, 'Père ↓ · ' + kid + ' →', {size: fs * .72, anchor: 'end', op: .65});
+        svg += T(x0 - 6, y0 - 6, i18n('Père ↓ · {kid} →', {kid}), {size: fs * .72, anchor: 'end', op: .65});
         axis.forEach((a, i) => {
             const y = y0 + i * cs;
             svg += T(x0 - 6, y + cs / 2, cut(label(a), labW - 8, lf), {size: lf, anchor: 'end', weight: 600});
@@ -383,18 +384,18 @@
                 if (!c) { svg += `<rect x="${r2(x + .5)}" y="${r2(y + .5)}" width="${r2(cs - 1)}" height="${r2(cs - 1)}" fill="currentColor" fill-opacity=".03"${diag ? ` stroke="${diagC}" stroke-width="1.5"` : ''}/>`; return; }
                 const s = share(c, a, b), t = (mode === 'count' ? c.n : s) / (maxS || 1), fill = mix(lowC, highC, Math.sqrt(t));
                 const txt = mode === 'count' ? fmt(c.n, 0) : `${fmt(s * 100, s < .1 ? 1 : 0)}`;
-                svg += `<g${whoN(c.pids, `Père ${label(a)} → ${kid} ${label(b)}`)}><rect x="${r2(x + .5)}" y="${r2(y + .5)}" width="${r2(cs - 1)}" height="${r2(cs - 1)}" fill="${fill}"${diag ? ` stroke="${diagC}" stroke-width="2.2"` : ''}>${tip(`Père ${label(a)} → ${kid} ${label(b)} : ${fmt(c.n, 0)} — ${fmt(c.n / (rT.get(a) || 1) * 100)} % des enfants de ${label(a).toLowerCase()}, ${fmt(c.n / (shown || 1) * 100)} % du tout${c.pids.length ? ' (clic : la liste)' : ''}`)}</rect>`
+                svg += `<g${whoN(c.pids, `Père ${label(a)} → ${kid} ${label(b)}`)}><rect x="${r2(x + .5)}" y="${r2(y + .5)}" width="${r2(cs - 1)}" height="${r2(cs - 1)}" fill="${fill}"${diag ? ` stroke="${diagC}" stroke-width="2.2"` : ''}>${tip(i18n('Père {a} → {kid} {b} : {n}', {a: label(a), kid, b: label(b), n: fmt(c.n, 0)}) + ' — ' + i18n('{p} % des enfants de {job}, {t} % du tout', {p: fmt(c.n / (rT.get(a) || 1) * 100), job: label(a).toLowerCase(), t: fmt(c.n / (shown || 1) * 100)}) + (c.pids.length ? ' ' + i18n('(clic : la liste)') : ''))}</rect>`
                     + (o.values !== false && cs >= textW(txt, fs * .72) + 4 && cs >= fs * 1.2 ? T(x + cs / 2, y + cs / 2 + .5, txt, {size: fs * .72, anchor: 'middle', fill: contrast(fill)}) : '') + '</g>';
             });
             if (totW) svg += T(x0 + n * cs + 6, y + cs / 2, fmt(rT.get(a) || 0, 0), {size: fs * .75, op: .7});
         });
         let h = y0 + n * cs;
         if (totW) { axis.forEach((b, j) => { svg += T(x0 + (j + .5) * cs, h + fs * .8, fmt(cT.get(b) || 0, 0), {size: fs * .72, anchor: 'middle', op: .7}); }); svg += T(x0 + n * cs + 6, h + fs * .8, fmt(shown, 0), {size: fs * .75, weight: 700}) + T(x0 - 6, h + fs * .8, 'Total', {size: fs * .72, anchor: 'end', op: .7}); h += fs * 1.5; }
-        const unitTxt = mode === 'row' ? `en % des enfants de chaque métier du père` : mode === 'col' ? `en % de chaque métier de ${kid}` : mode === 'all' ? 'en % du tout' : 'en nombre';
-        const note = `Chiffres ${unitTxt} ; cadre de couleur : même métier que le père.`;
+        const unitTxt = mode === 'row' ? i18n('Chiffres en % des enfants de chaque métier du père') : mode === 'col' ? i18n('Chiffres en % de chaque métier de {kid}', {kid}) : mode === 'all' ? i18n('Chiffres en % du tout') : i18n('Chiffres en nombre');
+        const note = `${unitTxt} ; ${i18n('cadre de couleur : même métier que le père.')}`;
         if (textW(note, fs * .72) <= W) { svg += T(0, h + fs * .8, note, {size: fs * .72, op: .65}); h += fs * 1.5; }
-        else { svg += T(0, h + fs * .8, cut(`Chiffres ${unitTxt}.`, W, fs * .72), {size: fs * .72, op: .65}) + T(0, h + fs * 1.8, 'Cadre de couleur : même métier que le père.', {size: fs * .72, op: .65}); h += fs * 2.5; }
-        return {h, svg, legend: [], desc: `Tableau de mobilité : ${fmt(total, 0)} couples père et ${kid}, ${n} métiers ; ${fmt(same / total * 100)} % font le métier du père.`};
+        else { svg += T(0, h + fs * .8, cut(`${unitTxt}.`, W, fs * .72), {size: fs * .72, op: .65}) + T(0, h + fs * 1.8, i18n('Cadre de couleur : même métier que le père.'), {size: fs * .72, op: .65}); h += fs * 2.5; }
+        return {h, svg, legend: [], desc: i18n('Tableau de mobilité : {t} couples père et {kid}, {n} métiers ; {p} % font le métier du père.', {t: fmt(total, 0), kid, n, p: fmt(same / total * 100)})};
     }
 
     /* ═════════ Données prises dans l'arbre ═════════ */
@@ -408,7 +409,7 @@
         let rows = items.map(x => ({label: x.name, value: x.value, group: by === 'sex' ? x.group : x.century, pid: x.id}));
         if (by !== 'sex') rows.sort((a, b) => romanN(a.group) - romanN(b.group));
         const lbl = {ages_death: 'Âge au décès', ages_marriage: 'Âge au mariage'}[what] || '';
-        spec.rows = rows; spec.o = {...(spec.o || {}), title: lbl + (by === 'sex' ? ', femmes et hommes' : what === 'ages_marriage' ? ', par siècle du mariage' : ', par siècle de naissance'), unit: 'ans', xLabel: lbl, min: 0, max: '', source: `D’après ${plural(r.total || items.length, 'personne')} de l’arbre`};
+        spec.rows = rows; spec.o = {...(spec.o || {}), title: lbl + (by === 'sex' ? i18n(', femmes et hommes') : what === 'ages_marriage' ? i18n(', par siècle du mariage') : i18n(', par siècle de naissance')), unit: i18n('ans'), xLabel: lbl, min: 0, max: '', source: i18n('D’après {n} de l’arbre', {n: plural(r.total || items.length, 'personne')})};
         return spec;
     }
     async function fillTableN(spec, key) {
@@ -416,22 +417,22 @@
         if (!r.rows?.length) throw new Error('Aucune donnée dans l’arbre pour ce choix.');
         const st = Number(r.step) || 100, cen = y => { const c = Math.floor((Number(y) - 1) / 100) + 2; return st === 100 && Number(y) % 100 === 0 ? `${cents[c] || c}e s.` : `${y}–${Number(y) + st - 1}`; };
         spec.series = r.series.map(name => ({name})); spec.rows = r.rows.map(x => ({...x, label: cen(x.label)}));
-        spec.o = {...(spec.o || {}), title: {occupations: 'Les métiers de la famille, siècle par siècle', births_places: 'Les communes de naissance, siècle par siècle', births_surnames: 'Les noms de famille, siècle par siècle'}[what] || '', subtitle: 'largeur : le nombre de personnes de la période ; hauteur : la part de chacun', source: 'D’après les fiches de l’arbre'};
+        spec.o = {...(spec.o || {}), title: i18n({occupations: 'Les métiers de la famille, siècle par siècle', births_places: 'Les communes de naissance, siècle par siècle', births_surnames: 'Les noms de famille, siècle par siècle'}[what] || ''), subtitle: i18n('largeur : le nombre de personnes de la période ; hauteur : la part de chacun'), source: i18n('D’après les fiches de l’arbre')};
         return spec;
     }
     async function fillMeans(spec, by) {
         const r = await api('diagram_adn_numbers', {what: 'means', by}, spec);
         if (!r.rows?.length) throw new Error('Pas assez de dates de naissance et de décès (ou de mariage) pour ce choix.');
-        spec.series = [{name: 'Femmes', color: spec.series?.[0]?.color || '#e15759'}, {name: 'Hommes', color: spec.series?.[1]?.color || '#4e79a7'}];
+        spec.series = [{name: i18n('Femmes'), color: spec.series?.[0]?.color || '#e15759'}, {name: i18n('Hommes'), color: spec.series?.[1]?.color || '#4e79a7'}];
         spec.rows = r.rows.map(x => ({label: `${x.label}`, s0: x.s0, s1: x.s1}));
-        spec.o = {...(spec.o || {}), unit: 'ans', title: {death_century: 'Âge moyen au décès, par siècle de naissance', marriage_century: 'Âge moyen au mariage, par siècle', death_place: 'Âge moyen au décès, par commune de naissance', death_surname: 'Âge moyen au décès, par nom de famille'}[by], subtitle: 'femmes et hommes', source: `D’après ${plural(r.rows.reduce((a, x) => a + (x.n || 0), 0), 'personne')} de l’arbre`, ...(by.endsWith('century') ? {sort: ''} : {sort: 'desc'})};
+        spec.o = {...(spec.o || {}), unit: 'ans', title: i18n({death_century: 'Âge moyen au décès, par siècle de naissance', marriage_century: 'Âge moyen au mariage, par siècle', death_place: 'Âge moyen au décès, par commune de naissance', death_surname: 'Âge moyen au décès, par nom de famille'}[by] || ''), subtitle: i18n('femmes et hommes'), source: i18n('D’après {n} de l’arbre', {n: plural(r.rows.reduce((a, x) => a + (x.n || 0), 0), 'personne')}), ...(by.endsWith('century') ? {sort: ''} : {sort: 'desc'})};
         return spec;
     }
     async function fillMonths(spec, key) {
         const [by, type] = key.split(':'), r = await api('diagram_adn_numbers', {what: 'months', by, type}, spec);
         if (!r.rows?.length) throw new Error('Aucune date au mois près dans l’arbre pour ce choix.');
         spec.series = r.series.map((name, j) => ({name, color: by === 'type' ? ['#59a14f', '#f28e2b', '#5f6b7a'][j] : spec.series?.[j]?.color})); spec.rows = r.rows;
-        spec.o = {...(spec.o || {}), title: by === 'type' ? 'Naissances, mariages et décès, mois par mois' : {births: 'Les naissances, mois par mois', marriages: 'Les mariages, mois par mois', deaths: 'Les décès, mois par mois', conceptions: 'Les conceptions (naissance − 9 mois), mois par mois'}[type] + ', par siècle', source: `D’après ${plural(r.total, 'date')} au mois près`};
+        spec.o = {...(spec.o || {}), title: by === 'type' ? i18n('Naissances, mariages et décès, mois par mois') : i18n({births: 'Les naissances, mois par mois', marriages: 'Les mariages, mois par mois', deaths: 'Les décès, mois par mois', conceptions: 'Les conceptions (naissance − 9 mois), mois par mois'}[type] || '') + i18n(', par siècle'), source: i18n('D’après {n} au mois près', {n: plural(r.total, 'date')})};
         return spec;
     }
     async function fillMobility(spec, who) {
@@ -439,7 +440,7 @@
         if (!r.rows?.length) throw new Error('Aucun couple père / enfant dont les deux métiers sont connus.');
         spec.rows = r.rows.map(x => ({from: x.from, to: x.to, count: x.count, pids: (x.pids || []).slice(0, 60)}));
         const w = {sons: 'le fils', daughters: 'la fille', children: 'l’enfant'}[who] || 'l’enfant';
-        spec.o = {...(spec.o || {}), childWord: w, title: `Métier du père, métier ${w === 'l’enfant' ? 'de l’enfant' : w === 'le fils' ? 'du fils' : 'de la fille'}`, source: `D’après ${plural(r.pairs, 'couple')} père et ${w.replace(/^l[ea’]\s?/, '')} dont les deux métiers sont connus`};
+        spec.o = {...(spec.o || {}), childWord: w, title: i18n(w === 'l’enfant' ? 'Métier du père, métier de l’enfant' : w === 'le fils' ? 'Métier du père, métier du fils' : 'Métier du père, métier de la fille'), source: i18n('D’après {n} père et {kid} dont les deux métiers sont connus', {n: plural(r.pairs, 'couple'), kid: w.replace(/^l[ea’]\s?/, '')})};
         return spec;
     }
     const APP = {
@@ -485,8 +486,8 @@
                 if (g && !x.ancestor) used.set(g.name, g.color);
                 return {chr: x.chromosome, start: fmt(mb(x.start), 2).replace(/\s/g, ''), end: fmt(mb(x.end), 2).replace(/\s/g, ''), cm: x.cm || '', match: m?.name || x.label || 'Correspondance', side: x.side || m?.side || '', branch, color: x.color || '', pid: m?.person_id || 0}; });
             s.branches = [...used].map(([name, c]) => ({name, color: c}));
-            const k = d.kits.find(x => x.id === kit); s.o = {...s.o, title: `Peinture des chromosomes — ${kitName(k || {})}`, colorBy: s.branches.length || s.rows.some(r => r.branch) ? 'branch' : 'side', minCm: 0, source: 'D’après l’onglet ADN (segments partagés)'};
-            return `${plural(s.rows.length, 'segment')} pris dans l’onglet ADN.`;
+            const k = d.kits.find(x => x.id === kit); s.o = {...s.o, title: i18n('Peinture des chromosomes — {name}', {name: kitName(k || {})}), colorBy: s.branches.length || s.rows.some(r => r.branch) ? 'branch' : 'side', minCm: 0, source: i18n('D’après l’onglet ADN (segments partagés)')};
+            return i18n('{n} pris dans l’onglet ADN.', {n: plural(s.rows.length, 'segment')});
         }),
     };
     const cmApp = {
@@ -498,7 +499,7 @@
             if (!ms.length) throw new Error('Aucune correspondance avec des cM pour ce test (ou au-dessus du minimum choisi).');
             s.rows = ms.map(m => ({name: m.person_name || m.name, cm: m.shared_cm, side: m.side || '', known: m.relationship || m.data?.company_relationship || '', pid: m.person_id || 0}));
             const k = d.kits.find(x => x.id === kit); s.o = {...s.o, title: `Mes correspondances ADN — ${kitName(k || {})}`, source: 'Fourchettes : Shared cM Project (B. Bettinger, v4) — indicatives'};
-            return `${plural(s.rows.length, 'correspondance')} prise${s.rows.length > 1 ? 's' : ''} dans l’onglet ADN.`;
+            return i18n('{n} prises dans l’onglet ADN.', {n: plural(s.rows.length, 'correspondance')});
         }),
     };
 
@@ -510,21 +511,21 @@
         const rows = [];
         for (let i = 0; i < 46; i++) { const c = CHR[Math.floor(rnd(i) * 23)], L = c[1], len = 8 + rnd(i + 99) * 45, a = rnd(i + 7) * (L - len), b = B[i % 4], m = M2[(i * 3) % 8];
             rows.push({chr: c[0], start: fmt(a, 1).replace(/\s/g, ''), end: fmt(a + len, 1).replace(/\s/g, ''), cm: Math.round(len * (.9 + rnd(i + 3) * .5)), match: m, side: b[1] === 'P' ? 'Paternel' : 'Maternel', branch: b[0]}); }
-        return {o: {title: 'Mes chromosomes peints', subtitle: 'segments partagés, colorés par branche', colorBy: 'branch'}, rows, branches: [{name: 'MARTIN × DURAND', color: '#4e79a7'}, {name: 'ROUX × PETIT', color: '#76b7b2'}, {name: 'LEROY × BLANC', color: '#e15759'}, {name: 'GIRARD × MOREL', color: '#f28e2b'}]};
+        return {o: {title: i18n('Mes chromosomes peints'), subtitle: i18n('segments partagés, colorés par branche'), colorBy: 'branch'}, rows, branches: [{name: 'MARTIN × DURAND', color: '#4e79a7'}, {name: 'ROUX × PETIT', color: '#76b7b2'}, {name: 'LEROY × BLANC', color: '#e15759'}, {name: 'GIRARD × MOREL', color: '#f28e2b'}]};
     }
-    const sampleCm = () => ({o: {title: 'Mes cousins ADN sur la règle des cM', labels: 8, highlight: ''}, rows: [['Maman', 3460, 'Maternel', 'Mère'], ['Lucie B.', 2610, 'Les deux', 'Sœur'], ['Paul R.', 1780, 'Paternel', ''], ['Claire D.', 890, 'Paternel', ''], ['Marc G.', 612, 'Maternel', ''], ['Hélène L.', 402, 'Maternel', ''], ['Sophie M.', 236, 'Paternel', ''], ['Yves P.', 198, 'Paternel', ''],
+    const sampleCm = () => ({o: {title: i18n('Mes cousins ADN sur la règle des cM'), labels: 8, highlight: ''}, rows: [['Maman', 3460, 'Maternel', 'Mère'], ['Lucie B.', 2610, 'Les deux', 'Sœur'], ['Paul R.', 1780, 'Paternel', ''], ['Claire D.', 890, 'Paternel', ''], ['Marc G.', 612, 'Maternel', ''], ['Hélène L.', 402, 'Maternel', ''], ['Sophie M.', 236, 'Paternel', ''], ['Yves P.', 198, 'Paternel', ''],
         ['Alain M.', 141, 'Maternel', ''], ['Odile T.', 112, '', ''], ['Bruno V.', 88, 'Paternel', ''], ['Agnès C.', 74, 'Maternel', ''], ['Denis F.', 61, '', ''], ['Émile H.', 52, 'Paternel', ''], ['Inès K.', 44, '', ''], ['Jules N.', 38, 'Maternel', ''], ['Karine S.', 31, '', ''], ['Léon W.', 27, 'Paternel', ''], ['Mona Z.', 22, '', ''], ['Noé A.', 18, '', ''], ['Olga E.', 14, '', ''], ['Pia I.', 11, '', '']].map(([name, cm, side, known]) => ({name, cm, side, known}))});
     const AGES = {'XVIIe s.': [0, 1, 0, 2, 5, 38, 45, 52, 33, 61, 27, 49, 0, 1, 57, 64, 40, 3, 0, 55, 46, 69, 30], 'XVIIIe s.': [0, 0, 1, 3, 48, 55, 62, 41, 70, 66, 35, 58, 1, 0, 72, 50, 44, 63, 2, 67, 59, 74, 39, 53], 'XIXe s.': [0, 1, 2, 58, 64, 71, 69, 45, 77, 73, 62, 80, 56, 0, 75, 68, 60, 83, 66, 70, 52, 79, 72, 65],
         'XXe s.': [72, 78, 81, 84, 69, 88, 76, 91, 80, 74, 86, 83, 67, 79, 90, 85, 77, 82, 73, 87, 89, 94, 75, 0]};
-    const sampleRidge = () => ({o: {title: 'Âge au décès', subtitle: 'par siècle de naissance', unit: 'ans', xLabel: 'Âge au décès', min: 0, overlap: 120}, rows: Object.entries(AGES).flatMap(([group, vs], k) => vs.map((value, i) => ({group, value, label: NAMES[(i + k) % NAMES.length]})))});
+    const sampleRidge = () => ({o: {title: i18n('Âge au décès'), subtitle: i18n('par siècle de naissance'), unit: i18n('ans'), xLabel: i18n('Âge au décès'), min: 0, overlap: 120}, rows: Object.entries(AGES).flatMap(([group, vs], k) => vs.map((value, i) => ({group, value, label: NAMES[(i + k) % NAMES.length]})))});
     const sampleMari = () => { const jobs = ['Laboureur', 'Tisserand', 'Artisan', 'Ouvrier', 'Employé'], per = [['XVIIe s.', [48, 18, 10, 0, 1]], ['XVIIIe s.', [70, 30, 18, 2, 3]], ['XIXe s.', [62, 22, 30, 38, 12]], ['XXe s.', [12, 2, 20, 46, 40]]];
-        return {o: {title: 'Les métiers, siècle par siècle', subtitle: 'largeur : nombre de personnes ; hauteur : part du métier'}, series: jobs.map(name => ({name})), rows: per.map(([label, v]) => { const row = {label}; v.forEach((x, j) => { row['s' + j] = x; }); return row; })}; };
-    const sampleDot = () => ({o: {title: 'Âge moyen au décès', subtitle: 'par commune de naissance, femmes et hommes', unit: 'ans', sort: 'desc'}, series: [{name: 'Femmes', color: '#e15759'}, {name: 'Hommes', color: '#4e79a7'}],
+        return {o: {title: i18n('Les métiers, siècle par siècle'), subtitle: i18n('largeur : nombre de personnes ; hauteur : part du métier')}, series: jobs.map(name => ({name})), rows: per.map(([label, v]) => { const row = {label}; v.forEach((x, j) => { row['s' + j] = x; }); return row; })}; };
+    const sampleDot = () => ({o: {title: i18n('Âge moyen au décès'), subtitle: i18n('par commune de naissance, femmes et hommes'), unit: i18n('ans'), sort: 'desc'}, series: [{name: i18n('Femmes'), color: '#e15759'}, {name: i18n('Hommes'), color: '#4e79a7'}],
         rows: [['Rennes', 64, 58], ['Vitré', 61, 59], ['Fougères', 57, 55], ['Redon', 66, 60], ['Nantes', 59, 52], ['Saint-Malo', 63, 57], ['Laval', 60, 61], ['Angers', 62, 54]].map(([label, s0, s1]) => ({label, s0, s1}))});
     const MONTHS = ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'];
-    const sampleRose = () => ({o: {title: 'Les mois de la vie', subtitle: 'naissances, mariages et décès'}, series: [{name: 'Naissances', color: '#59a14f'}, {name: 'Mariages', color: '#f28e2b'}, {name: 'Décès', color: '#5f6b7a'}],
+    const sampleRose = () => ({o: {title: i18n('Les mois de la vie'), subtitle: i18n('naissances, mariages et décès')}, series: [{name: i18n('Naissances'), color: '#59a14f'}, {name: i18n('Mariages'), color: '#f28e2b'}, {name: i18n('Décès'), color: '#5f6b7a'}],
         rows: MONTHS.map((label, i) => ({label, s0: [42, 45, 51, 39, 33, 30, 28, 31, 36, 40, 38, 44][i], s1: [28, 34, 4, 9, 12, 16, 14, 10, 8, 11, 26, 3][i], s2: [38, 36, 34, 30, 26, 22, 24, 31, 35, 28, 30, 37][i]}))});
-    const sampleMob = () => ({o: {title: 'Métier du père, métier du fils', childWord: 'le fils', top: 8}, rows: [['Laboureur', 'Laboureur', 64], ['Laboureur', 'Journalier', 22], ['Laboureur', 'Tisserand', 9], ['Laboureur', 'Ouvrier', 14], ['Journalier', 'Journalier', 28], ['Journalier', 'Laboureur', 11], ['Journalier', 'Ouvrier', 19], ['Tisserand', 'Tisserand', 17],
+    const sampleMob = () => ({o: {title: i18n('Métier du père, métier du fils'), childWord: 'le fils', top: 8}, rows: [['Laboureur', 'Laboureur', 64], ['Laboureur', 'Journalier', 22], ['Laboureur', 'Tisserand', 9], ['Laboureur', 'Ouvrier', 14], ['Journalier', 'Journalier', 28], ['Journalier', 'Laboureur', 11], ['Journalier', 'Ouvrier', 19], ['Tisserand', 'Tisserand', 17],
         ['Tisserand', 'Ouvrier', 12], ['Tisserand', 'Laboureur', 4], ['Meunier', 'Meunier', 6], ['Meunier', 'Laboureur', 3], ['Ouvrier', 'Ouvrier', 21], ['Ouvrier', 'Employé', 9], ['Ouvrier', 'Cheminot', 7], ['Cheminot', 'Cheminot', 5], ['Cheminot', 'Employé', 6], ['Employé', 'Employé', 8], ['Employé', 'Instituteur', 4], ['Instituteur', 'Instituteur', 3], ['Forgeron', 'Forgeron', 5], ['Forgeron', 'Ouvrier', 4]].map(([from, to, count]) => ({from, to, count}))});
 
     /* ═════════ Les sortes : tableaux, réglages ═════════ */
@@ -597,7 +598,7 @@
         try { return window.LCNDA_UI?.avatarOr ? window.LCNDA_UI.avatarOr(p, 34, old) : old; } catch (_) { return old; } };
     async function openPeople(ids, title) {
         const dlg = document.createElement('dialog'); dlg.className = 'modal small-modal dac-people';
-        dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">📊 DIAGRAMME</span><h2>${esc(title || 'Les personnes')}</h2></div><button type="button" class="icon-button" data-x aria-label="Fermer">×</button></div>
+        dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">📊 DIAGRAMME</span><h2>${esc(title || i18n('Les personnes'))}</h2></div><button type="button" class="icon-button" data-x aria-label="Fermer">×</button></div>
             <div class="dac-people-list" data-list>${window.LCNDA_UI.spinner('Chargement des personnes…')}</div><div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-x>Fermer</button></div>`;
         document.body.appendChild(dlg);
         dlg.addEventListener('close', () => dlg.remove());
@@ -605,14 +606,14 @@
         dlg.showModal();
         try {
             const r = await api('diagram_people', {ids: ids.join(',')}), list = r.people || [];
-            dlg.querySelector('[data-list]').innerHTML = list.length ? `<p class="muted">${esc(plural(list.length, 'personne'))}${ids.length >= 300 ? ' (les 300 premières)' : ''} — clic : la fiche.</p><ul>${list.map(p => `<li><button type="button" class="dac-person" data-open="${Number(p.id)}">${ava(p)}<span class="dac-pname">${esc(p.name || '?')}</span><span class="dac-years">${esc([yearOf(p.birth) && '° ' + yearOf(p.birth), yearOf(p.death) && '† ' + yearOf(p.death)].filter(Boolean).join(' · '))}</span><span class="dac-go" aria-hidden="true">↗</span></button></li>`).join('')}</ul>`
+            dlg.querySelector('[data-list]').innerHTML = list.length ? `<p class="muted">${esc(plural(list.length, 'personne'))}${ids.length >= 300 ? ' ' + esc(i18n('(les 300 premières)')) : ''} — ${esc(i18n('clic : la fiche.'))}</p><ul>${list.map(p => `<li><button type="button" class="dac-person" data-open="${Number(p.id)}">${ava(p)}<span class="dac-pname">${esc(p.name || '?')}</span><span class="dac-years">${esc([yearOf(p.birth) && '° ' + yearOf(p.birth), yearOf(p.death) && '† ' + yearOf(p.death)].filter(Boolean).join(' · '))}</span><span class="dac-go" aria-hidden="true">↗</span></button></li>`).join('')}</ul>`
                 : (A()?.emptyState ? A().emptyState({icon: '👥', text: 'Ces personnes ne sont plus dans la base.'}) : '<p class="muted">Ces personnes ne sont plus dans la base.</p>');
         } catch (e) { dlg.querySelector('[data-list]').innerHTML = `<p class="ui-msg is-error">⛔ ${esc(e.message || e)}</p>`; }
     }
     if (typeof document !== 'undefined' && document.addEventListener) document.addEventListener('click', e => {
         const one = e.target.closest?.('[data-dac-pid]'), many = !one && e.target.closest?.('[data-dac-pids]'), c = one || many;
         if (!c || c.closest('.h-dg-mini')) return;
-        if (c.closest('.h-dg-dlg')) { A()?.toast?.(`${(c.querySelector('title')?.textContent || 'Cette partie').split(' — ')[0].split(' : ')[0]} : ferme l’éditeur et clique à nouveau pour ${one ? 'ouvrir sa fiche' : 'voir la liste des personnes'}.`); return; }
+        if (c.closest('.h-dg-dlg')) { A()?.toast?.(i18n(one ? '{name} : ferme l’éditeur et clique à nouveau pour ouvrir sa fiche.' : '{name} : ferme l’éditeur et clique à nouveau pour voir la liste des personnes.', {name: (c.querySelector('title')?.textContent || i18n('Cette partie')).split(' — ')[0].split(' : ')[0]})); return; }
         e.preventDefault();
         if (one) A()?.openPersonById?.(Number(c.dataset.dacPid));
         else openPeople(String(c.dataset.dacPids || '').split(',').map(Number).filter(n => n > 0).slice(0, 300), c.dataset.dacTitle || '');

@@ -1,0 +1,202 @@
+fr ¦ cs ¦ sv ¦ da
+# ═════ Tableaux (zone « tableaux ») ═════
+piste|Confirmée ¦ Potvrzená ¦ Bekräftad ¦ Bekræftet
+piste|Fausse ¦ Mylná ¦ Falsk ¦ Falsk
+Fiche #{id} ¦ Karta #{id} ¦ Post #{id} ¦ Post #{id}
+Tableau verrouillé : 🔒 en haut pour le déverrouiller. ¦ Tabule je zamčená: odemkni ji pomocí 🔒 nahoře. ¦ Tavlan är låst: 🔒 överst för att låsa upp den. ¦ Tavlen er låst: 🔒 øverst for at låse den op.
+H ou Espace ¦ H nebo mezerník ¦ H eller blanksteg ¦ H eller mellemrum
+Formes ¦ Tvary ¦ Former ¦ Former
+Dessin à main levée ¦ Kresba od ruky ¦ Frihandsteckning ¦ Frihåndstegning
+Gomme ¦ Guma ¦ Suddgummi ¦ Viskelæder
+{owner} : {name} ¦ {owner}: {name} ¦ {owner}: {name} ¦ {owner}: {name}
+Tableau libre ¦ Volná tabule ¦ Fri tavla ¦ Fri tavle
+changer ¦ změnit ¦ ändra ¦ skift
+Police du thème ¦ Písmo motivu ¦ Temats typsnitt ¦ Temaets skrifttype
+PDF · double-clic pour l’ouvrir ¦ PDF · dvojklikem otevřeš ¦ PDF · dubbelklicka för att öppna ¦ PDF · dobbeltklik for at åbne
+Dossier ¦ Složka ¦ Mapp ¦ Mappe
+double-clic pour ouvrir ¦ dvojklikem otevřeš ¦ dubbelklicka för att öppna ¦ dobbeltklik for at åbne
+Recueil ¦ Sborník ¦ Samling ¦ Samling
+Recueil · double-clic pour l’ouvrir ¦ Sborník · dvojklikem otevřeš ¦ Samling · dubbelklicka för att öppna ¦ Samling · dobbeltklik for at åbne
+Frise ¦ Časová osa ¦ Tidslinje ¦ Tidslinje
+Chargement de la frise… ¦ Načítání časové osy… ¦ Läser in tidslinjen… ¦ Indlæser tidslinjen…
+Cadre ¦ Rámec ¦ Ram ¦ Ramme
+Chargement du widget… ¦ Načítání widgetu… ¦ Läser in widgeten… ¦ Indlæser widgetten…
+Écran de l’app · double-clic pour l’ouvrir ¦ Obrazovka aplikace · dvojklikem otevřeš ¦ Appskärm · dubbelklicka för att öppna ¦ App-skærm · dobbeltklik for at åbne
+mort à {age} ¦ zemřel(a) ve věku {age} ¦ död vid {age} ¦ død som {age}
+Choisis la personne à droite. ¦ Vyber osobu vpravo. ¦ Välj personen till höger. ¦ Vælg personen til højre.
+Choisir ce groupe ¦ Vybrat tuto skupinu ¦ Välj den här gruppen ¦ Vælg denne gruppe
+Groupe {n} ¦ Skupina {n} ¦ Grupp {n} ¦ Gruppe {n}
+le tableau est fermé ¦ tabule je zavřená ¦ tavlan är stängd ¦ tavlen er lukket
+d’autres changements ont suivi : utilise ↶ dans la barre du tableau ¦ následovaly další změny: použij ↶ v liště tabule ¦ andra ändringar har följt: använd ↶ i tavlans fält ¦ andre ændringer er fulgt efter: brug ↶ i tavlens bjælke
+Ce tableau ¦ Tato tabule ¦ Den här tavlan ¦ Denne tavle
+Choisir le pinceau ¦ Vybrat štětec ¦ Välj pensel ¦ Vælg pensel
+Dureté du bord : 100 % net, moins = flou ¦ Tvrdost okraje: 100 % ostrý, méně = rozmazaný ¦ Kantens hårdhet: 100 % skarp, mindre = suddig ¦ Kantens hårdhed: 100 % skarp, mindre = sløret
+Les gommes n’effacent que les dessins à main levée. ¦ Gumy mažou jen kresby od ruky. ¦ Suddgummin suddar bara ut frihandsteckningar. ¦ Viskelæder sletter kun frihåndstegninger.
+Clique où écrire. ¦ Klikni, kam chceš psát. ¦ Klicka där du vill skriva. ¦ Klik, hvor du vil skrive.
+Tire un trait ; posé sur un élément, il s’y accroche. ¦ Táhni čáru; položená na prvek se k němu připojí. ¦ Dra en linje; släppt på ett element fäster den vid det. ¦ Træk en streg; sluppet på et element hæfter den sig til det.
+Un lien tout prêt : légende, couleur et style ¦ Hotové spojení: popisek, barva a styl ¦ En färdig länk: etikett, färg och stil ¦ En færdig forbindelse: tekst, farve og stil
+lien|libre ¦ volné ¦ fri ¦ fri
+Pointes ¦ Hroty ¦ Pilspetsar ¦ Pilespidser
+Pointes de la même couleur que le trait ¦ Hroty ve stejné barvě jako čára ¦ Pilspetsar i samma färg som linjen ¦ Pilespidser i samme farve som stregen
+Tire une flèche d’un élément à un autre : elle les suit. ¦ Táhni šipku od jednoho prvku k druhému: bude je sledovat. ¦ Dra en pil från ett element till ett annat: den följer dem. ¦ Træk en pil fra et element til et andet: den følger dem.
+Toutes les formes, et créer la sienne ¦ Všechny tvary, a vytvořit vlastní ¦ Alla former, och skapa en egen ¦ Alle former, og lav din egen
+Toutes les formes ¦ Všechny tvary ¦ Alla former ¦ Alle former
+Nom;Année;Lieu ¦ Jméno;Rok;Místo ¦ Namn;År;Plats ¦ Navn;År;Sted
+Tableau repris du tableur. ¦ Tabulka převzata z tabulkového editoru. ¦ Tabellen hämtad tillbaka från kalkylarket. ¦ Tabellen hentet tilbage fra regnearket.
+{n}. Choisis un élément pour le régler. ¦ {n}. Vyber prvek a nastav ho. ¦ {n}. Välj ett element för att justera det. ¦ {n}. Vælg et element for at justere det.
+Réglages de la légende ¦ Nastavení legendy ¦ Inställningar för förklaringen ¦ Indstillinger for signaturforklaringen
+Cellule <strong>{a}</strong> à <strong>{b}</strong> ¦ Buňky <strong>{a}</strong> až <strong>{b}</strong> ¦ Cell <strong>{a}</strong> till <strong>{b}</strong> ¦ Celle <strong>{a}</strong> til <strong>{b}</strong>
+Cellule <strong>{a}</strong> ¦ Buňka <strong>{a}</strong> ¦ Cell <strong>{a}</strong> ¦ Celle <strong>{a}</strong>
+Clique une cellule pour la choisir ¦ Klikni na buňku a vyber ji ¦ Klicka på en cell för att välja den ¦ Klik på en celle for at vælge den
+⇧ + clic : plusieurs · double-clic : écrire ¦ ⇧ + klik: více · dvojklik: psát ¦ ⇧ + klick: flera · dubbelklick: skriv ¦ ⇧ + klik: flere · dobbeltklik: skriv
+Simple note ¦ Prostá poznámka ¦ Enkel anteckning ¦ Simpel note
+Lieux de… ¦ Místa osoby… ¦ Platser för… ¦ Steder for…
+Enlever ce repère ¦ Odebrat tuto značku ¦ Ta bort den här markören ¦ Fjern denne markør
+Enlever : {n} ¦ Odebrat: {n} ¦ Ta bort: {n} ¦ Fjern: {n}
+Aucune forme. ¦ Žádný tvar. ¦ Ingen form. ¦ Ingen form.
+🧩 À partir d’une forme ¦ 🧩 Z tvaru ¦ 🧩 Utifrån en form ¦ 🧩 Ud fra en form
+Comment tracer avec la plume ¦ Jak kreslit perem ¦ Hur man ritar med pennan ¦ Sådan tegner du med pennen
+<strong>Clic</strong> : un point d’angle (trait droit). ¦ <strong>Klik</strong>: rohový bod (rovná čára). ¦ <strong>Klick</strong>: en hörnpunkt (rak linje). ¦ <strong>Klik</strong>: et hjørnepunkt (lige streg).
+<strong>Cliquer-glisser</strong> : un point arrondi ; tire pour régler la courbe. ¦ <strong>Klik a tažení</strong>: zaoblený bod; tažením nastavíš křivku. ¦ <strong>Klicka och dra</strong>: en rundad punkt; dra för att justera kurvan. ¦ <strong>Klik og træk</strong>: et afrundet punkt; træk for at justere kurven.
+<strong>Clic sur le premier point</strong> (jaune) : la forme se ferme. ¦ <strong>Klik na první bod</strong> (žlutý): tvar se uzavře. ¦ <strong>Klick på första punkten</strong> (gul): formen sluts. ¦ <strong>Klik på det første punkt</strong> (gult): formen lukkes.
+Glisser un point pour le <strong>déplacer</strong> ; glisser une poignée (rond rouge) pour <strong>courber</strong> ; avec <kbd>⌥</kbd> / <kbd>Alt</kbd>, les deux poignées deviennent indépendantes. ¦ Přetažením bodu ho <strong>přesuneš</strong>; přetažením úchytu (červené kolečko) <strong>ohneš</strong>; s <kbd>⌥</kbd> / <kbd>Alt</kbd> se oba úchyty stanou nezávislými. ¦ Dra en punkt för att <strong>flytta</strong> den; dra ett handtag (röd prick) för att <strong>böja</strong>; med <kbd>⌥</kbd> / <kbd>Alt</kbd> blir de två handtagen oberoende. ¦ Træk et punkt for at <strong>flytte</strong> det; træk et håndtag (rød prik) for at <strong>bøje</strong>; med <kbd>⌥</kbd> / <kbd>Alt</kbd> bliver de to håndtag uafhængige.
+<kbd>⌥</kbd> / <kbd>Alt</kbd> + clic sur un point : angle ↔ arrondi ; <strong>double-clic</strong> : le supprimer. ¦ <kbd>⌥</kbd> / <kbd>Alt</kbd> + klik na bod: roh ↔ oblouk; <strong>dvojklik</strong>: smazat ho. ¦ <kbd>⌥</kbd> / <kbd>Alt</kbd> + klick på en punkt: hörn ↔ rundad; <strong>dubbelklick</strong>: radera den. ¦ <kbd>⌥</kbd> / <kbd>Alt</kbd> + klik på et punkt: hjørne ↔ afrundet; <strong>dobbeltklik</strong>: slet det.
+Une forme fermée, puis un nouveau tracé à l’intérieur : un <strong>trou</strong>. ¦ Uzavřený tvar a pak nová cesta uvnitř: <strong>díra</strong>. ¦ En sluten form, sedan en ny bana inuti: ett <strong>hål</strong>. ¦ En lukket form, derefter en ny sti indeni: et <strong>hul</strong>.
+{n} sur le tableau : chaque trait devient une partie remplie de la forme. ¦ {n} na tabuli: každá čára se stane vyplněnou částí tvaru. ¦ {n} på tavlan: varje streck blir en fylld del av formen. ¦ {n} på tavlen: hver streg bliver en fyldt del af formen.
+Choisis d’abord un ou plusieurs dessins à main levée sur le tableau (outil ✍︎), puis reviens ici. ¦ Nejdřív vyber na tabuli jednu nebo více kreseb od ruky (nástroj ✍︎), pak se sem vrať. ¦ Välj först en eller flera frihandsteckningar på tavlan (verktyget ✍︎) och kom sedan tillbaka hit. ¦ Vælg først en eller flere frihåndstegninger på tavlen (værktøjet ✍︎), og kom så tilbage hertil.
+Nom de la forme ¦ Název tvaru ¦ Formens namn ¦ Formens navn
+Ce dessin est trop détaillé pour devenir une forme : prends un dessin plus simple (ou moins de traits). ¦ Tato kresba je příliš podrobná, aby se stala tvarem: vezmi jednodušší kresbu (nebo méně čar). ¦ Teckningen är för detaljerad för att bli en form: ta en enklare teckning (eller färre streck). ¦ Tegningen er for detaljeret til at blive en form: tag en enklere tegning (eller færre streger).
+Forme « {name} » créée : elle est dans « Mes formes ». ¦ Tvar „{name}“ vytvořen: je v „Moje tvary“. ¦ Formen ”{name}” skapad: den finns i ”Mina former”. ¦ Formen »{name}« oprettet: den er i »Mine former«.
+Ce navigateur ne lit pas les polices de l’ordinateur : tape le nom de la police (ou fais des listes dans Réglages → Tableaux). ¦ Tento prohlížeč nečte písma počítače: napiš název písma (nebo si udělej seznamy v Nastavení → Tabule). ¦ Webbläsaren kan inte läsa datorns typsnitt: skriv typsnittets namn (eller gör listor i Inställningar → Tavlor). ¦ Browseren kan ikke læse computerens skrifttyper: skriv skrifttypens navn (eller lav lister i Indstillinger → Tavler).
+{n} de l’ordinateur lues : leurs graisses exactes sont proposées (et « Aa Toutes les polices… » les montre toutes). ¦ Načteno z počítače: {n}; nabízejí se jejich přesné řezy (a „Aa Všechna písma…“ je ukáže všechny). ¦ {n} lästa från datorn: deras exakta vikter erbjuds (och ”Aa Alla typsnitt…” visar alla). ¦ {n} læst fra computeren: deres præcise vægte tilbydes (og »Aa Alle skrifttyper…« viser dem alle).
+Lecture des polices refusée : {error} ¦ Čtení písem odmítnuto: {error} ¦ Läsning av typsnitt nekad: {error} ¦ Læsning af skrifttyper afvist: {error}
+Ce fichier n’est pas un tableau exporté. ¦ Tento soubor není exportovaná tabule. ¦ Filen är inte en exporterad tavla. ¦ Filen er ikke en eksporteret tavle.
+Ce fichier n’est pas un tableau exporté de l’app. ¦ Tento soubor není tabule exportovaná z aplikace. ¦ Filen är inte en tavla exporterad från appen. ¦ Filen er ikke en tavle eksporteret fra appen.
+Import : vérification des fiches et médias… ¦ Import: kontrola karet a médií… ¦ Import: kontrollerar poster och media… ¦ Import: kontrollerer poster og medier…
+Média absent ici : {name} ¦ Médium tu chybí: {name} ¦ Mediefil saknas här: {name} ¦ Mediefil mangler her: {name}
+{name} (fiche absente ici) ¦ {name} (karta tu chybí) ¦ {name} (posten saknas här) ¦ {name} (posten mangler her)
+{name} (absent ici) ¦ {name} (tu chybí) ¦ {name} (saknas här) ¦ {name} (mangler her)
+{name} (dossier non importé) ¦ {name} (složka neimportována) ¦ {name} (mappen inte importerad) ¦ {name} (mappen ikke importeret)
+Tableau importé ¦ Importovaná tabule ¦ Importerad tavla ¦ Importeret tavle
+Associations reprises. ¦ Propojení převzata. ¦ Kopplingar behållna. ¦ Forbindelser bevaret.
+{n} sur {total} reprises (les autres visent une autre base). ¦ Převzato {n} z {total} (ostatní míří na jinou databázi). ¦ {n} av {total} behållna (de andra pekar på en annan databas). ¦ {n} af {total} bevaret (de andre peger på en anden database).
+Les associations visent une autre base : non reprises. ¦ Propojení míří na jinou databázi: nepřevzata. ¦ Kopplingarna pekar på en annan databas: inte behållna. ¦ Forbindelserne peger på en anden database: ikke bevaret.
+Import des photos : {n} / {total}… ¦ Import fotek: {n} / {total}… ¦ Importerar foton: {n} / {total}… ¦ Importerer fotos: {n} / {total}…
+Média non importé : {name} ¦ Médium neimportováno: {name} ¦ Mediefil inte importerad: {name} ¦ Mediefil ikke importeret: {name}
+Tableau importé. {n} (fiche, média, recueil ou dossier) devenus des notes. ¦ Tabule importována. {n} (karta, médium, sborník nebo složka) se změnilo na poznámky. ¦ Tavlan importerad. {n} (post, mediefil, samling eller mapp) blev anteckningar. ¦ Tavlen importeret. {n} (post, mediefil, samling eller mappe) blev til noter.
+Une adresse qui commence par https:// ¦ Adresa začínající https:// ¦ En adress som börjar med https:// ¦ En adresse, der begynder med https://
+Choisis un écran (pour une fiche ou une commune, passe par « Une fiche » ou l’Éditeur de widgets). ¦ Vyber obrazovku (pro kartu nebo obec použij „Karta“ nebo Editor widgetů). ¦ Välj en skärm (för en post eller en ort, använd ”En post” eller Widgetredigeraren). ¦ Vælg en skærm (for en post eller en by, brug »En post« eller Widgeteditoren).
+Ne plus associer ¦ Zrušit propojení ¦ Ta bort kopplingen ¦ Fjern forbindelsen
+Le tableau garde son rangement ({where}) ; il apparaît en plus là où tu l’associes (sur la fiche de la personne, dans l’enquête…). ¦ Tabule si ponechá své umístění ({where}); navíc se objeví tam, kam ji propojíš (na kartě osoby, v pátrání…). ¦ Tavlan behåller sin plats ({where}); den visas också där du kopplar den (på personens post, i undersökningen…). ¦ Tavlen beholder sin plads ({where}); den vises også der, hvor du forbinder den (på personens post, i undersøgelsen…).
+rangement|libre ¦ volné ¦ fri ¦ fri
+(aucun pour l’instant) ¦ (zatím žádné) ¦ (inga än) ¦ (ingen endnu)
+Choisis à quoi associer le tableau. ¦ Vyber, s čím tabuli propojit. ¦ Välj vad tavlan ska kopplas till. ¦ Vælg, hvad tavlen skal forbindes med.
+Déjà associé. ¦ Už propojeno. ¦ Redan kopplad. ¦ Allerede forbundet.
+Tableau associé. ¦ Tabule propojena. ¦ Tavlan kopplad. ¦ Tavlen forbundet.
+le tableau à l’écran ¦ tabule na obrazovce ¦ tavlan på skärmen ¦ tavlen på skærmen
+Pas d’image pour cet instantané. ¦ Pro tento snímek není obrázek. ¦ Ingen bild för den här ögonblicksbilden. ¦ Intet billede til dette øjebliksbillede.
+📸 Prendre un instantané ¦ 📸 Pořídit snímek stavu ¦ 📸 Ta en ögonblicksbild ¦ 📸 Tag et øjebliksbillede
+Un nom (facultatif) : ¦ Název (nepovinný): ¦ Ett namn (valfritt): ¦ Et navn (valgfrit):
+avant la visite aux archives ¦ před návštěvou archivu ¦ före arkivbesöket ¦ før arkivbesøget
+Instantané pris. ¦ Snímek stavu pořízen. ¦ Ögonblicksbild tagen. ¦ Øjebliksbillede taget.
+↺ Revenir à cet état ¦ ↺ Vrátit se k tomuto stavu ¦ ↺ Gå tillbaka till det här läget ¦ ↺ Gå tilbage til denne tilstand
+⧉ En faire un tableau ¦ ⧉ Udělat z toho tabuli ¦ ⧉ Gör en tavla av den ¦ ⧉ Lav en tavle af det
+Aucun instantané pour l’instant ¦ Zatím žádný snímek stavu ¦ Inga ögonblicksbilder än ¦ Ingen øjebliksbilleder endnu
+Versions automatiques ({n}) ¦ Automatické verze ({n}) ¦ Automatiska versioner ({n}) ¦ Automatiske versioner ({n})
+une par jour de travail au plus, les 30 dernières gardées ¦ nejvýš jedna za pracovní den, uchováno posledních 30 ¦ högst en per arbetsdag, de 30 senaste sparas ¦ højst én pr. arbejdsdag, de seneste 30 gemmes
+Nom du nouveau tableau ¦ Název nové tabule ¦ Den nya tavlans namn ¦ Den nye tavles navn
+même rangement ({where}) et mêmes associations ¦ stejné umístění ({where}) a stejná propojení ¦ samma plats ({where}) och samma kopplingar ¦ samme plads ({where}) og samme forbindelser
+Le contenu de l’instantané est recopié dans un tableau à part ; l’original ne change pas. Les dossiers posés dedans restent ceux de l’original. ¦ Obsah snímku se zkopíruje do samostatné tabule; originál se nemění. Složky v ní zůstávají složkami originálu. ¦ Ögonblicksbildens innehåll kopieras till en separat tavla; originalet ändras inte. Mapparna i den förblir originalets. ¦ Øjebliksbilledets indhold kopieres til en separat tavle; originalen ændres ikke. Mapperne i den forbliver originalens.
+Tout le contenu actuel est recopié dans un tableau à part ; l’original ne change pas. Les dossiers posés dedans restent ceux de l’original. ¦ Celý současný obsah se zkopíruje do samostatné tabule; originál se nemění. Složky v ní zůstávají složkami originálu. ¦ Allt nuvarande innehåll kopieras till en separat tavla; originalet ändras inte. Mapparna i den förblir originalets. ¦ Alt det nuværende indhold kopieres til en separat tavle; originalen ændres ikke. Mapperne i den forbliver originalens.
+Nouveau tableau créé. ¦ Nová tabule vytvořena. ¦ Ny tavla skapad. ¦ Ny tavle oprettet.
+État du tableau changé. ¦ Stav tabule změněn. ¦ Tavlans läge ändrat. ¦ Tavlens tilstand ændret.
+(avec photos) ¦ (s fotkami) ¦ (med foton) ¦ (med fotos)
+(sélection) ¦ (výběr) ¦ (markering) ¦ (markering)
+Fichier du tableau enregistré ({size}) : « ＋ Ajouter → Importer un tableau » le rouvre. ¦ Soubor tabule uložen ({size}): „＋ Přidat → Importovat tabuli“ ho znovu otevře. ¦ Tavlans fil sparad ({size}): ”＋ Lägg till → Importera en tavla” öppnar den igen. ¦ Tavlens fil gemt ({size}): »＋ Tilføj → Importér en tavle« åbner den igen.
+{n} Mo ¦ {n} MB ¦ {n} MB ¦ {n} MB
+{n} ko ¦ {n} kB ¦ {n} kB ¦ {n} kB
+Préparation… ¦ Příprava… ¦ Förbereder… ¦ Forbereder…
+image impossible (une image d’un autre site l’empêche, ou le tableau est trop grand) ¦ obrázek nelze vytvořit (brání tomu obrázek z jiného webu, nebo je tabule příliš velká) ¦ bild inte möjlig (en bild från en annan webbplats hindrar det, eller så är tavlan för stor) ¦ billede ikke muligt (et billede fra et andet websted forhindrer det, eller tavlen er for stor)
+Une copie de l’image est rangée dans les médias. ¦ Kopie obrázku je uložená v médiích. ¦ En kopia av bilden finns i media. ¦ En kopi af billedet er lagt i medier.
+Copie dans les médias impossible : {error} ¦ Kopie do médií není možná: {error} ¦ Kopia till media inte möjlig: {error} ¦ Kopi til medier ikke mulig: {error}
+💾 Fichier léger ¦ 💾 Lehký soubor ¦ 💾 Lätt fil ¦ 💾 Let fil
+sans les photos : petit, pour garder une copie ¦ bez fotek: malý, pro uchování kopie ¦ utan foton: liten, för att spara en kopia ¦ uden fotos: lille, til at gemme en kopi
+💾 Fichier complet ¦ 💾 Úplný soubor ¦ 💾 Komplett fil ¦ 💾 Komplet fil
+avec {n} : pour une autre base ¦ s {n}: pro jinou databázi ¦ med {n}: för en annan databas ¦ med {n}: til en anden database
+pareil : pas de photo de l’app ¦ stejné: žádná fotka z aplikace ¦ samma: inget foto från appen ¦ det samme: intet foto fra appen
+⤓ Exporter le tableau… (PDF, image, impression, fichier) ¦ ⤓ Exportovat tabuli… (PDF, obrázek, tisk, soubor) ¦ ⤓ Exportera tavlan… (PDF, bild, utskrift, fil) ¦ ⤓ Eksportér tavlen… (PDF, billede, udskrift, fil)
+⤓ Exporter la sélection en image… ¦ ⤓ Exportovat výběr jako obrázek… ¦ ⤓ Exportera markeringen som bild… ¦ ⤓ Eksportér markeringen som billede…
+⭐ En faire un modèle (pour les nouveaux tableaux) ¦ ⭐ Udělat z ní šablonu (pro nové tabule) ¦ ⭐ Gör den till en mall (för nya tavlor) ¦ ⭐ Gør den til en skabelon (til nye tavler)
+Ajuster à la sélection ¦ Přizpůsobit výběru ¦ Anpassa till markeringen ¦ Tilpas til markeringen
+Adapter le contenu à la fenêtre ¦ Přizpůsobit obsah oknu ¦ Anpassa innehållet till fönstret ¦ Tilpas indholdet til vinduet
+Pour répartir, choisis au moins trois éléments. ¦ K rozmístění vyber aspoň tři prvky. ¦ För att fördela, välj minst tre element. ¦ For at fordele skal du vælge mindst tre elementer.
+{todo} à vérifier · {ok} · {no} — clic : aller à la suivante à vérifier ¦ {todo} k ověření · {ok} · {no} — klik: přejít na další k ověření ¦ {todo} att kontrollera · {ok} · {no} — klick: gå till nästa att kontrollera ¦ {todo} at tjekke · {ok} · {no} — klik: gå til den næste at tjekke
+Plus rien à vérifier : bravo ! ¦ Už není co ověřovat: výborně! ¦ Inget kvar att kontrollera: bra jobbat! ¦ Intet mere at tjekke: godt gået!
+Question ¦ Otázka ¦ Fråga ¦ Spørgsmål
+Idée ¦ Nápad ¦ Idé ¦ Idé
+Source ? ¦ Pramen? ¦ Källa? ¦ Kilde?
+Important ¦ Důležité ¦ Viktigt ¦ Vigtigt
+Réglé ¦ Vyřešeno ¦ Löst ¦ Løst
+Pas encore de commentaire sur cet élément. ¦ K tomuto prvku zatím není komentář. ¦ Ingen kommentar på det här elementet än. ¦ Ingen kommentar til dette element endnu.
+(sans mot) ¦ (bez slova) ¦ (utan ord) ¦ (uden ord)
+＋ un autre mot… ¦ ＋ jiné slovo… ¦ ＋ ett annat ord… ¦ ＋ et andet ord…
+Retirer ce mot ¦ Odebrat toto slovo ¦ Ta bort det här ordet ¦ Fjern dette ord
+Écris un commentaire ou choisis un mot. ¦ Napiš komentář nebo vyber slovo. ¦ Skriv en kommentar eller välj ett ord. ¦ Skriv en kommentar eller vælg et ord.
+La personne de la frise ¦ Osoba z časové osy ¦ Tidslinjens person ¦ Tidslinjens person
+Les lieux de… ¦ Místa osoby… ¦ Platserna för… ¦ Stederne for…
+Repère « {name} » posé. ¦ Značka „{name}“ umístěna. ¦ Markören ”{name}” placerad. ¦ Markøren »{name}« placeret.
+Cette enquête ne porte pas sur une personne : choisis-en une autre. ¦ Toto pátrání se netýká osoby: vyber jiné. ¦ Den här undersökningen gäller inte en person: välj en annan. ¦ Denne undersøgelse handler ikke om en person: vælg en anden.
+Aucun lieu avec ses coordonnées. ¦ Žádné místo se souřadnicemi. ¦ Ingen plats med koordinater. ¦ Intet sted med koordinater.
+Enquête n° {n} ¦ Pátrání č. {n} ¦ Undersökning nr {n} ¦ Undersøgelse nr. {n}
+Choisis la personne (ou « seulement mes repères »). ¦ Vyber osobu (nebo „jen moje značky“). ¦ Välj personen (eller ”bara mina markörer”). ¦ Vælg personen (eller »kun mine markører«).
+Les lieux de {name} ¦ Místa osoby {name} ¦ Platserna för {name} ¦ Stederne for {name}
+Arbre : lecture des fiches… ¦ Strom: čtení karet… ¦ Träd: läser poster… ¦ Træ: læser poster…
+Arbre posé : {n}. Chaque carte reste liée à sa fiche (double-clic pour l’ouvrir). ¦ Strom umístěn: {n}. Každá kartička zůstává propojená se svou kartou (dvojklikem ji otevřeš). ¦ Träd placerat: {n}. Varje kort förblir kopplat till sin post (dubbelklicka för att öppna den). ¦ Træ placeret: {n}. Hvert kort forbliver knyttet til sin post (dobbeltklik for at åbne den).
+Arbre posé : {n} (limite atteinte). Chaque carte reste liée à sa fiche (double-clic pour l’ouvrir). ¦ Strom umístěn: {n} (dosažen limit). Každá kartička zůstává propojená se svou kartou (dvojklikem ji otevřeš). ¦ Träd placerat: {n} (gränsen nådd). Varje kort förblir kopplat till sin post (dubbelklicka för att öppna den). ¦ Træ placeret: {n} (grænsen nået). Hvert kort forbliver knyttet til sin post (dobbeltklik for at åbne den).
+Pas de micro disponible ici. ¦ Tady není k dispozici mikrofon. ¦ Ingen mikrofon tillgänglig här. ¦ Ingen mikrofon tilgængelig her.
+Titre du mémo ¦ Název poznámky ¦ Memots titel ¦ Memoens titel
+Mémo du {date} ¦ Poznámka z {date} ¦ Memo från {date} ¦ Memo fra {date}
+Le son est rangé avec ce tableau (et dans les médias de l’app). ¦ Zvuk je uložen s touto tabulí (a v médiích aplikace). ¦ Ljudet sparas med den här tavlan (och i appens media). ¦ Lyden gemmes med denne tavle (og i appens medier).
+Micro refusé : autorise-le dans les réglages de l’ordinateur. ¦ Mikrofon odmítnut: povol ho v nastavení počítače. ¦ Mikrofonen nekad: tillåt den i datorns inställningar. ¦ Mikrofon afvist: tillad den i computerens indstillinger.
+Arrête d’abord l’enregistrement. ¦ Nejdřív zastav nahrávání. ¦ Stoppa inspelningen först. ¦ Stop optagelsen først.
+Enregistre d’abord ton mémo. ¦ Nejdřív nahraj svou poznámku. ¦ Spela in ditt memo först. ¦ Optag din memo først.
+Mémo vocal ¦ Hlasová poznámka ¦ Röstmemo ¦ Talememo
+{n}, en colonnes (un bout de tableur). ¦ {n}, ve sloupcích (kousek tabulky). ¦ {n}, i kolumner (en bit kalkylark). ¦ {n}, i kolonner (et stykke regneark).
+Mon modèle ¦ Moje šablona ¦ Min mall ¦ Min skabelon
+Modèle trop lourd pour être gardé (des formes faites d’une image ?). ¦ Šablona je příliš velká na uložení (tvary vytvořené z obrázku?). ¦ Mallen är för tung för att sparas (former gjorda av en bild?). ¦ Skabelonen er for tung til at gemme (former lavet af et billede?).
+Modèle « {name} » enregistré : il est dans « Nouveau tableau ». ¦ Šablona „{name}“ uložena: je v „Nová tabule“. ¦ Mallen ”{name}” sparad: den finns i ”Ny tavla”. ¦ Skabelonen »{name}« gemt: den er i »Ny tavle«.
+Calque « {name} » supprimé (ses éléments restent sur le calque principal) ¦ Vrstva „{name}“ smazána (její prvky zůstávají na hlavní vrstvě) ¦ Lagret ”{name}” raderat (dess element finns kvar på huvudlagret) ¦ Laget »{name}« slettet (dets elementer bliver på hovedlaget)
+Calque supprimé (ses éléments restent sur le calque principal) ¦ Vrstva smazána (její prvky zůstávají na hlavní vrstvě) ¦ Lagret raderat (dess element finns kvar på huvudlagret) ¦ Laget slettet (dets elementer bliver på hovedlaget)
+▶ Lancer la présentation ({n}) ¦ ▶ Spustit prezentaci ({n}) ¦ ▶ Starta presentationen ({n}) ¦ ▶ Start præsentationen ({n})
+▶ Lancer la présentation ¦ ▶ Spustit prezentaci ¦ ▶ Starta presentationen ¦ ▶ Start præsentationen
+＋ La vue actuelle comme étape ¦ ＋ Současný pohled jako krok ¦ ＋ Den aktuella vyn som steg ¦ ＋ Den aktuelle visning som trin
+＋ La sélection comme étape ¦ ＋ Výběr jako krok ¦ ＋ Markeringen som steg ¦ ＋ Markeringen som trin
+＋ Une étape par cadre ¦ ＋ Jeden krok na rámec ¦ ＋ Ett steg per ram ¦ ＋ Ét trin pr. ramme
+☰ Les étapes (renommer, ordre…) ¦ ☰ Kroky (přejmenovat, pořadí…) ¦ ☰ Stegen (byt namn, ordning…) ¦ ☰ Trinene (omdøb, rækkefølge…)
+▶ Les étapes de la présentation ¦ ▶ Kroky prezentace ¦ ▶ Presentationens steg ¦ ▶ Præsentationens trin
+Étape {n} ¦ Krok {n} ¦ Steg {n} ¦ Trin {n}
+{n} dans la présentation. ¦ {n} v prezentaci. ¦ {n} i presentationen. ¦ {n} i præsentationen.
+Aucune étape. ¦ Žádný krok. ¦ Inga steg. ¦ Ingen trin.
+Étape remplacée par la vue actuelle. ¦ Krok nahrazen současným pohledem. ¦ Steget ersatt med den aktuella vyn. ¦ Trinnet erstattet med den aktuelle visning.
+Ajoute d’abord des étapes (▶ Présenter → ＋ La vue actuelle comme étape) ou des cadres. ¦ Nejdřív přidej kroky (▶ Prezentovat → ＋ Současný pohled jako krok) nebo rámce. ¦ Lägg först till steg (▶ Presentera → ＋ Den aktuella vyn som steg) eller ramar. ¦ Tilføj først trin (▶ Præsentér → ＋ Den aktuelle visning som trin) eller rammer.
+Étape d’avant ¦ Předchozí krok ¦ Föregående steg ¦ Forrige trin
+Étape suivante ¦ Další krok ¦ Nästa steg ¦ Næste trin
+→ ou Espace ¦ → nebo mezerník ¦ → eller blanksteg ¦ → eller mellemrum
+Quitter ¦ Ukončit ¦ Avsluta ¦ Afslut
+Remplacer par la vue actuelle ¦ Nahradit současným pohledem ¦ Ersätt med den aktuella vyn ¦ Erstat med den aktuelle visning
+Supprimer le tableau « {name} » et tous ses dossiers ? Les photos, sons et fiches posés dessus restent dans l’app. ¦ Smazat tabuli „{name}“ a všechny její složky? Fotky, zvuky a karty na ní zůstanou v aplikaci. ¦ Radera tavlan ”{name}” och alla dess mappar? Foton, ljud och poster på den finns kvar i appen. ¦ Slet tavlen »{name}« og alle dens mapper? Fotos, lyde og poster på den bliver i appen.
+sans titre ¦ bez názvu ¦ utan titel ¦ uden titel
+Tableau et dossiers supprimés. ¦ Tabule a složky smazány. ¦ Tavlan och mapparna raderade. ¦ Tavlen og mapperne slettet.
+Tableau supprimé. ¦ Tabule smazána. ¦ Tavlan raderad. ¦ Tavlen slettet.
+Ce qu’on sait ¦ Co víme ¦ Det vi vet ¦ Det vi ved
+Sources à voir ¦ Prameny k prohlédnutí ¦ Källor att se ¦ Kilder at se
+Idée centrale ¦ Ústřední myšlenka ¦ Central idé ¦ Central idé
+Branche {n} ¦ Větev {n} ¦ Gren {n} ¦ Gren {n}
+Date {n} ¦ Datum {n} ¦ Datum {n} ¦ Dato {n}
+Arbre à la main ¦ Ručně kreslený strom ¦ Handritat träd ¦ Håndtegnet træ
+Enfant ¦ Dítě ¦ Barn ¦ Barn
+Une toile libre. ¦ Volné plátno. ¦ En fri duk. ¦ Et frit lærred.
+Mur d’indices ¦ Stěna stop ¦ Ledtrådsvägg ¦ Spor-væg
+Fond de liège, une question au centre, des notes autour. ¦ Korkové pozadí, otázka uprostřed, poznámky kolem. ¦ Korkbakgrund, en fråga i mitten, anteckningar runt omkring. ¦ Korkbaggrund, et spørgsmål i midten, noter rundt om.
+Carte mentale ¦ Myšlenková mapa ¦ Tankekarta ¦ Tankekort
+Une idée au centre, des branches. ¦ Myšlenka uprostřed, větve. ¦ En idé i mitten, grenar. ¦ En idé i midten, grene.

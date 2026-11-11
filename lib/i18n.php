@@ -4,13 +4,13 @@ declare(strict_types=1);
  * 🌐 Traduction côté serveur (même dictionnaire que assets/js/app-i18n.js ; mode d'emploi : docs/I18N.md).
  *
  *  - i18n_lang() : la langue de la page — en-tête « X-LCNDA-Lang » envoyé par app.js (api()), sinon le cookie lcnda_lang ;
- *    toujours une des 8 langues (fr par défaut).
+ *    toujours une des 11 langues (fr par défaut).
  *  - i18n_t('Texte français', ['n' => 3]) : le texte dans cette langue, sinon le français (variables {x} remplacées).
  *  - json_response() passe le message « error » par i18n_t() : un message d'erreur connu arrive traduit ; en français,
  *    rien ne change.
  */
 
-const I18N_LANGS = ['fr', 'en', 'es', 'de', 'it', 'pt', 'pl', 'nl'];
+const I18N_LANGS = ['fr', 'en', 'es', 'de', 'it', 'pt', 'pl', 'nl', 'cs', 'sv', 'da'];
 
 function i18n_lang(): string
 {

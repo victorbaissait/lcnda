@@ -9,14 +9,16 @@
     'use strict';
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const F = ext.tresorFeatures = ext.tresorFeatures || [];
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
+    const gx = (p, m, f, v) => i18n(p?.gender === 'female' ? f : m, v); // 🌐 une phrase par sexe
     const COLORS = ['#c0392b', '#2471a3', '#1e8449', '#b9770e', '#7d3c98', '#117a65', '#a04000', '#2e4053', '#b03a2e', '#1f618d'];
     /** K13 : la fenêtre « Imprimer » de l'app (aperçu, A4 / A5, sens, ⤓ PDF) pour toutes les créations des Trésors */
     function printWindow(title, css, body, opts = {}) {
         const plain = String(title).replace(/<[^>]*>/g, '').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#0?39;/g, "'").replace(/&amp;/g, '&');
-        const doc = `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>${title}</title><base href="${location.href.replace(/[^/]*$/, '')}"><style>body{margin:0;font-family:system-ui,sans-serif}${css}</style></head><body>${body}</body></html>`;
+        const doc = `<!doctype html><html lang="${window.LCNDA_I18N?.lang || 'fr'}"><head><meta charset="utf-8"><title>${title}</title><base href="${location.href.replace(/[^/]*$/, '')}"><style>body{margin:0;font-family:system-ui,sans-serif}${css}</style></head><body>${body}</body></html>`;
         const UI = window.LCNDA_UI;
         if (UI?.openPrintDialog) { UI.openPrintDialog({title: plain, html: doc, photos: false, ...opts}); return null; }
-        throw new Error('la fenêtre d’impression n’est pas prête.');
+        throw new Error(i18n('la fenêtre d’impression n’est pas prête.'));
     }
     ext.tresorPrint = printWindow;
 
@@ -29,13 +31,13 @@
             // la génération de « têtes de branche » qui donne le plus de familles d'au moins six (avec leurs frères et sœurs)
             const branch = h => { const hp = tr.byId.get(h.id), ids = new Set([h.id, ...T.ancestors(tr, h.id, 12).map(a => a.id)]); [...ids].forEach(id => { const p = tr.byId.get(id); [p.father, p.mother].filter(Boolean).forEach(par => (tr.kids.get(par) || []).forEach(k => ids.add(k))); }); return [hp, [...ids].map(i => tr.byId.get(i)).filter(p => p && !p.living && !p.mem)]; };
             const tries = [4, 3, 2, 1].map(g => T.ancestors(tr, st.id, g).filter(a => a.gen === g).map(branch)), best = tries.sort((a, b) => b.filter(x => x[1].length >= 6).length - a.filter(x => x[1].length >= 6).length)[0] || [];
-            best.forEach(([hp, l]) => l.forEach(p => add(`Branche ${hp.last || T.name(hp)}${hp.first ? ` (${hp.first})` : ''}`, p)));
+            best.forEach(([hp, l]) => l.forEach(p => add(hp.first ? i18n('Branche {name} ({first})', {name: hp.last || T.name(hp), first: hp.first}) : i18n('Branche {name}', {name: hp.last || T.name(hp)}), p)));
         } else tr.people.forEach(p => { if (!p.living && !p.mem && p.last) add(p.last.toUpperCase(), p); });
         const score = p => (p.portrait ? 3 : 0) + (p.by ? 1 : 0) + (p.occ ? 1 : 0) + (p.dy ? 0.5 : 0);
         return [...groups.entries()].filter(([, l]) => l.length >= 6).map(([k, l]) => ({name: k, people: l.sort((a, b) => score(b) - score(a)).slice(0, 6).sort((a, b) => (a.by || 9999) - (b.by || 9999))}))
             .sort((a, b) => b.people.reduce((s, p) => s + score(p), 0) - a.people.reduce((s, p) => s + score(p), 0)).slice(0, n);
     }
-    const ROLE = (i, p) => [['Le grand-père', 'La grand-mère'], ['Le grand-père', 'La grand-mère'], ['Le père', 'La mère'], ['Le père', 'La mère'], ['Le fils', 'La fille'], ['Le fils', 'La fille']][i][p.gender === 'female' ? 1 : 0];
+    const ROLE = (i, p) => i18n([['Le grand-père', 'La grand-mère'], ['Le grand-père', 'La grand-mère'], ['Le père', 'La mère'], ['Le père', 'La mère'], ['Le fils', 'La fille'], ['Le fils', 'La fille']][i][p.gender === 'female' ? 1 : 0]);
     /* Les réglages du jeu (sur cet ordinateur) : le style, les couleurs, ce qui s'écrit, et la photo choisie et recadrée de chacun */
     const SEVEN_KEY = 'lcnda-7familles';
     const SEVEN_STYLES = {classique: '🃏 Classique', ancien: '📜 Ancien (papier jauni)', moderne: '◻️ Moderne (grande photo)', enfant: '🧸 Pour les petits', artdeco: '🎩 Années folles', bois: '🪵 Bois gravé'};
@@ -47,12 +49,12 @@
     function cardHtml(T, tr, fam, i, color, prefs = sevenPrefs(), edit = false) {
         const p = fam.people[i], ph = photoOf(T, p, prefs), sh = prefs.show;
         return `<div class="card s-${prefs.style} fx-${prefs.fx}" style="--c:${color}"><div class="head"><span>${T.esc(fam.name)}</span><b>${i + 1}</b></div>
-            <div class="ph">${ph ? imgTag(ph) : `<span>${p.gender === 'female' ? '👩' : '👨'}</span>`}${edit ? `<button type="button" class="ph-edit" data-7-ph="${p.id}" title="Choisir et recadrer la photo de ${T.esc(T.name(p))}">📷</button>` : ''}</div>
+            <div class="ph">${ph ? imgTag(ph) : `<span>${p.gender === 'female' ? '👩' : '👨'}</span>`}${edit ? `<button type="button" class="ph-edit" data-7-ph="${p.id}" title="${T.esc(i18n('Choisir et recadrer la photo de {name}', {name: T.name(p)}))}">📷</button>` : ''}</div>
             <div class="role">${T.esc(ROLE(i, p))}</div><div class="nm">${T.esc(T.name(p))}</div>
             <div class="info">${T.esc([sh.dates && T.life(p), sh.occ && p.occ, sh.place && T.place(tr, p.bplace)].filter(Boolean).join(' · '))}</div>
             ${sh.others ? `<ol class="others">${fam.people.map((q, k) => `<li class="${k === i ? 'me' : ''}">${T.esc(q.first || T.name(q))}</li>`).join('')}</ol>` : ''}</div>`;
     }
-    const backHtml = (title, color, prefs) => `<div class="card back s-${prefs.style}" style="--c:${color}"><div class="back-in"><b>${title}</b><small>Jeu des familles</small></div></div>`;
+    const backHtml = (title, color, prefs) => `<div class="card back s-${prefs.style}" style="--c:${color}"><div class="back-in"><b>${title}</b><small>${i18n('Jeu des familles')}</small></div></div>`;
     const CARD_CSS = `.sheet{display:grid;grid-template-columns:repeat(3,63mm);gap:2mm;justify-content:center;padding:0;background:#fff;width:100%;max-width:200mm;box-sizing:border-box;margin:0 auto;break-after:page}
         .sheet.backs{direction:rtl}
         .card{box-sizing:border-box;width:63mm;height:88mm;border:1.2mm solid var(--c);border-radius:4mm;padding:2.5mm;display:flex;flex-direction:column;gap:1.2mm;font-size:8.5pt;color:#111;background:#fff;break-inside:avoid;position:relative;overflow:hidden;direction:ltr}
@@ -75,18 +77,18 @@
     /** 📷 choisir la photo d'une carte, puis la recadrer (glisser pour déplacer, molette ou curseur pour zoomer) */
     async function pickPhoto(T, tr, p, prefs, done) {
         let photos = []; try { photos = (await T.api('tresor_photos', {person_id: p.id})).photos || []; } catch (_) {}
-        const cur = prefs.photos[p.id] || {}, por = p.portrait ? {id: 0, filename: p.portrait, thumbnail: p.portrait, title: 'Portrait de la fiche', face: null} : null;
+        const cur = prefs.photos[p.id] || {}, por = p.portrait ? {id: 0, filename: p.portrait, thumbnail: p.portrait, title: i18n('Portrait de la fiche'), face: null} : null;
         const list = [...(por ? [por] : []), ...photos.filter(x => x.filename !== p.portrait)];
         let sel = cur.none ? null : list.find(x => x.filename === cur.file) || list[0] || null, x = cur.x ?? 50, y = cur.y ?? 40, z = cur.z ?? 1;
         const fromFace = ph => { if (!ph?.face) { x = 50; y = 35; z = 1; return; } const f = ph.face; x = Math.max(0, Math.min(100, f.x + f.w / 2)); y = Math.max(0, Math.min(100, f.y + f.h / 2)); z = Math.max(1, Math.min(4, 45 / Math.max(5, f.h))); };
         if (sel && !cur.file) fromFace(sel);
-        ext.openDialog({eyebrow: '🃏 7 FAMILLES', title: `La photo de ${T.esc(T.name(p))}`, submitLabel: 'Garder', body: `<div class="h-tr-7ph">
-            <div class="h-tr-7ph-list" role="listbox" aria-label="Les photos">${list.map((m, k) => `<button type="button" class="h-tr-7ph-t${sel === m ? ' is-on' : ''}" data-k="${k}" title="${T.esc(m.title || '')}${m.face ? ' (visage repéré)' : ''}"><img src="media/${encodeURIComponent(m.thumbnail || m.filename)}" alt=""></button>`).join('')}<button type="button" class="h-tr-7ph-t${sel ? '' : ' is-on'}" data-k="-1" title="Sans photo">🚫</button></div>
-            ${list.length ? '' : T.empty('Aucune photo jointe à cette fiche, ni de visage encadré sur une photo', {hint: 'Ajoute-en depuis sa fiche (Médias), puis reviens ici.'})}
-            <div class="h-tr-7ph-crop" data-crop tabindex="0" aria-label="Le cadrage : glisse pour déplacer, molette ou + et − pour zoomer"></div>
-            <label>🔍 Zoom<input type="range" min="1" max="4" step="0.05" data-zoom></label><p class="h-tr-muted">Glisse la photo dans le cadre pour la placer ; la molette (ou + et −) zoome. ${list.some(m => m.face) ? 'Les photos marquées d’un visage se recadrent toutes seules sur lui.' : ''}</p></div>`,
+        ext.openDialog({eyebrow: i18n('🃏 7 FAMILLES'), title: i18n('La photo de {name}', {name: T.esc(T.name(p))}), submitLabel: i18n('Garder'), body: `<div class="h-tr-7ph">
+            <div class="h-tr-7ph-list" role="listbox" aria-label="${T.esc(i18n('Les photos'))}">${list.map((m, k) => `<button type="button" class="h-tr-7ph-t${sel === m ? ' is-on' : ''}" data-k="${k}" title="${T.esc(m.title || '')}${m.face ? ' ' + T.esc(i18n('(visage repéré)')) : ''}"><img src="media/${encodeURIComponent(m.thumbnail || m.filename)}" alt=""></button>`).join('')}<button type="button" class="h-tr-7ph-t${sel ? '' : ' is-on'}" data-k="-1" title="${T.esc(i18n('Sans photo'))}">🚫</button></div>
+            ${list.length ? '' : T.empty(i18n('Aucune photo jointe à cette fiche, ni de visage encadré sur une photo'), {hint: i18n('Ajoute-en depuis sa fiche (Médias), puis reviens ici.')})}
+            <div class="h-tr-7ph-crop" data-crop tabindex="0" aria-label="${T.esc(i18n('Le cadrage : glisse pour déplacer, molette ou + et − pour zoomer'))}"></div>
+            <label>${i18n('🔍 Zoom')}<input type="range" min="1" max="4" step="0.05" data-zoom></label><p class="h-tr-muted">${i18n('Glisse la photo dans le cadre pour la placer ; la molette (ou + et −) zoome.')} ${list.some(m => m.face) ? i18n('Les photos marquées d’un visage se recadrent toutes seules sur lui.') : ''}</p></div>`,
             onOpen: d => { const box = d.querySelector('[data-crop]'), zoom = d.querySelector('[data-zoom]');
-                const draw = () => { zoom.value = z; box.innerHTML = sel ? imgTag({src: `media/${encodeURIComponent(sel.filename)}`, x, y, z}) : '<span>🚫 Sans photo</span>'; };
+                const draw = () => { zoom.value = z; box.innerHTML = sel ? imgTag({src: `media/${encodeURIComponent(sel.filename)}`, x, y, z}) : `<span>🚫 ${i18n('Sans photo')}</span>`; };
                 d.querySelector('.h-tr-7ph-list').addEventListener('click', e => { const b = e.target.closest('[data-k]'); if (!b) return; const k = Number(b.dataset.k); sel = k < 0 ? null : list[k]; if (sel) fromFace(sel); d.querySelectorAll('.h-tr-7ph-t').forEach(t => t.classList.toggle('is-on', t === b)); draw(); });
                 zoom.addEventListener('input', () => { z = Number(zoom.value); draw(); });
                 box.addEventListener('wheel', e => { e.preventDefault(); z = Math.max(1, Math.min(4, z - Math.sign(e.deltaY) * 0.1)); draw(); }, {passive: false});
@@ -99,20 +101,20 @@
     }
     async function renderSeven(host, T) {
         const tr = await T.tree(), prefs = sevenPrefs();
-        const opt = (o, cur) => Object.entries(o).map(([k, l]) => `<option value="${k}"${k === cur ? ' selected' : ''}>${T.esc(l)}</option>`).join('');
-        host.innerHTML = `<div class="h-tr-split"><div class="h-tr-panel h-tr-noprint" data-7-opts><div class="h-tr-row"><label>Les familles<select name="mode"><option value="surname">par nom de famille</option><option value="branch">par branche (arrière-grands-parents)</option></select></label>
-                <label>Le style<select name="style">${opt(SEVEN_STYLES, prefs.style)}</select></label><label>Les photos<select name="fx">${opt({sepia: 'Sépia', nb: 'Noir et blanc', couleur: 'Couleurs d’origine'}, prefs.fx)}</select></label>
-                <label>Le dos<select name="back">${opt({motif: 'Un dos à motif (à imprimer au verso)', aucun: 'Sans dos'}, prefs.back)}</select></label></div>
-            <div class="h-tr-row">${[['dates', 'Les dates'], ['occ', 'Le métier'], ['place', 'Le lieu de naissance'], ['others', 'La liste de la famille']].map(([k, l]) => `<label class="checkbox-line"><input type="checkbox" name="sh-${k}"${prefs.show[k] ? ' checked' : ''}> ${l}</label>`).join('')}</div>
+        const opt = (o, cur) => Object.entries(o).map(([k, l]) => `<option value="${k}"${k === cur ? ' selected' : ''}>${T.esc(i18n(l))}</option>`).join('');
+        host.innerHTML = `<div class="h-tr-split"><div class="h-tr-panel h-tr-noprint" data-7-opts><div class="h-tr-row"><label>${i18n('Les familles')}<select name="mode"><option value="surname">${i18n('par nom de famille')}</option><option value="branch">${i18n('par branche (arrière-grands-parents)')}</option></select></label>
+                <label>${i18n('Le style')}<select name="style">${opt(SEVEN_STYLES, prefs.style)}</select></label><label>${i18n('Les photos')}<select name="fx">${opt({sepia: 'Sépia', nb: 'Noir et blanc', couleur: 'Couleurs d’origine'}, prefs.fx)}</select></label>
+                <label>${i18n('Le dos')}<select name="back">${opt({motif: 'Un dos à motif (à imprimer au verso)', aucun: 'Sans dos'}, prefs.back)}</select></label></div>
+            <div class="h-tr-row">${[['dates', 'Les dates'], ['occ', 'Le métier'], ['place', 'Le lieu de naissance'], ['others', 'La liste de la famille']].map(([k, l]) => `<label class="checkbox-line"><input type="checkbox" name="sh-${k}"${prefs.show[k] ? ' checked' : ''}> ${i18n(l)}</label>`).join('')}</div>
             <div class="h-tr-row h-tr-7-cols" data-7-cols></div>
-            <div class="h-tr-row"><button type="button" class="button secondary" data-7-reset title="Les photos choisies, les couleurs et le style de départ">↺ Remettre comme au départ</button><span class="h-tr-muted">📷 sur une carte : choisir et recadrer sa photo.</span></div></div><div class="h-tr-view" data-7-out></div></div>`;
+            <div class="h-tr-row"><button type="button" class="button secondary" data-7-reset title="${T.esc(i18n('Les photos choisies, les couleurs et le style de départ'))}">${i18n('↺ Remettre comme au départ')}</button><span class="h-tr-muted">${i18n('📷 sur une carte : choisir et recadrer sa photo.')}</span></div></div><div class="h-tr-view" data-7-out></div></div>`;
         const out = host.querySelector('[data-7-out]'), o = host.querySelector('[data-7-opts]'), mode = o.querySelector('[name=mode]');
         const colorOf = (f, fi) => prefs.colors[f.name] || COLORS[fi % COLORS.length];
         let fams = [];
         const draw = () => { fams = buildFamilies(T, tr, mode.value);
             o.querySelector('[data-7-cols]').innerHTML = fams.map((f, fi) => `<label class="h-tr-7-col"><input type="color" value="${colorOf(f, fi)}" data-7-col="${T.esc(f.name)}"> ${T.esc(f.name)}</label>`).join('');
-            out.innerHTML = fams.length < 2 ? T.empty('Pas encore assez de familles', {icon: '🃏', hint: 'Il faut au moins deux familles d’au moins six personnes (décédées) : complète l’arbre, ou essaie « par branche ».'})
-                : `<p class="h-tr-muted">${fams.length} famille${fams.length > 1 ? 's' : ''} de 6 cartes (${fams.length * 6} cartes).</p><style>${scopeCss(CARD_CSS, '.h-tr-7')}</style>${fams.map((f, fi) => `<h3 class="h-tr-7-fam">${T.esc(f.name)}</h3><div class="h-tr-7" style="display:flex;flex-wrap:wrap;gap:10px">${f.people.map((_, i) => cardHtml(T, tr, f, i, colorOf(f, fi), prefs, true)).join('')}${prefs.back === 'motif' ? backHtml(T.esc(f.name), colorOf(f, fi), prefs) : ''}</div>`).join('')}`;
+            out.innerHTML = fams.length < 2 ? T.empty(i18n('Pas encore assez de familles'), {icon: '🃏', hint: i18n('Il faut au moins deux familles d’au moins six personnes (décédées) : complète l’arbre, ou essaie « par branche ».')})
+                : `<p class="h-tr-muted">${fams.length > 1 ? i18n('{n} familles de 6 cartes ({total} cartes).', {n: String(fams.length), total: String(fams.length * 6)}) : i18n('{n} famille de 6 cartes ({total} cartes).', {n: String(fams.length), total: String(fams.length * 6)})}</p><style>${scopeCss(CARD_CSS, '.h-tr-7')}</style>${fams.map((f, fi) => `<h3 class="h-tr-7-fam">${T.esc(f.name)}</h3><div class="h-tr-7" style="display:flex;flex-wrap:wrap;gap:10px">${f.people.map((_, i) => cardHtml(T, tr, f, i, colorOf(f, fi), prefs, true)).join('')}${prefs.back === 'motif' ? backHtml(T.esc(f.name), colorOf(f, fi), prefs) : ''}</div>`).join('')}`;
             return fams; };
         o.addEventListener('change', e => { const t = e.target;
             if (t.name === 'style' || t.name === 'fx' || t.name === 'back') prefs[t.name] = t.value;
@@ -121,12 +123,13 @@
         o.addEventListener('input', e => { const t = e.target.closest('[data-7-col]'); if (!t) return; prefs.colors[t.dataset['7Col']] = t.value; sevenSave(prefs); out.querySelectorAll('.h-tr-7').forEach((g, k) => { if (fams[k]?.name === t.dataset['7Col']) g.querySelectorAll('.card').forEach(c => c.style.setProperty('--c', t.value)); }); });
         out.addEventListener('click', e => { const b = e.target.closest('[data-7-ph]'); if (!b) return; const p = tr.byId.get(Number(b.dataset['7Ph'])); if (p) pickPhoto(T, tr, p, prefs, draw); });
         o.querySelector('[data-7-reset]').addEventListener('click', () => { const before = JSON.stringify(prefs); Object.assign(prefs, {style: 'classique', fx: 'sepia', show: {dates: true, occ: true, place: true, others: true}, colors: {}, photos: {}, back: 'motif'}); sevenSave(prefs); renderSeven(host, T);
-            A().undoToast?.('Jeu remis comme au départ.', {undo: () => { try { localStorage.setItem(SEVEN_KEY, before); } catch (_) {} renderSeven(host, T); }}); });
+            A().undoToast?.(i18n('Jeu remis comme au départ.'), {undo: () => { try { localStorage.setItem(SEVEN_KEY, before); } catch (_) {} renderSeven(host, T); }}); });
         draw();
-        T.actions(host, {print: {attrs: 'data-7-print', title: 'Les planches de cartes (et leurs dos), avec la règle du jeu', run: () => { draw(); if (fams.length < 2) return;
+        T.actions(host, {print: {attrs: 'data-7-print', title: i18n('Les planches de cartes (et leurs dos), avec la règle du jeu'), run: () => { draw(); if (fams.length < 2) return;
             const cards = fams.flatMap((f, fi) => f.people.map((_, i) => [cardHtml(T, tr, f, i, colorOf(f, fi), prefs), backHtml(T.esc(f.name), colorOf(f, fi), prefs)])), sheets = [];
             for (let i = 0; i < cards.length; i += 9) { const page = cards.slice(i, i + 9); sheets.push(`<div class="sheet" data-k-page>${page.map(c => c[0]).join('')}</div>`); if (prefs.back === 'motif') sheets.push(`<div class="sheet backs" data-k-page>${page.map(c => c[1]).join('')}</div>`); }
-            printWindow('Jeu des 7 familles', CARD_CSS + '@media screen{.rules,.sheet{min-height:287mm}}', `<div class="rules" data-k-page><h2>🃏 Le jeu des ${fams.length} familles</h2><p>Distribuez 6 cartes à chacun, le reste fait la pioche. À ton tour, demande à un joueur une carte d’une famille dont tu as déjà une carte (« Dans la famille ${T.esc(fams[0].name)}, je voudrais ${T.esc(ROLE(2, fams[0].people[2]).toLowerCase())} »). S’il l’a, il te la donne et tu rejoues ; sinon, « Pioche ! ». Une famille complète se pose devant soi. Celui qui a le plus de familles a gagné.</p><p>Les familles : ${fams.map(f => `<b>${T.esc(f.name)}</b> (${f.people.map(p => T.esc(p.first || T.name(p))).join(', ')})`).join(' ; ')}.</p>${prefs.back === 'motif' ? '<p><i>Impression recto verso (bord long) : chaque page de dos suit sa page de cartes, déjà retournée pour tomber pile derrière.</i></p>' : ''}</div>${sheets.join('')}`, {margin: 5}); }}}); // 3 cartes de 63 mm (193 mm) : marges de 5 mm pour tenir sur la feuille A4
+            const role = ROLE(2, fams[0].people[2]), lc = (window.LCNDA_I18N?.lang === 'de' ? role : role.toLowerCase());
+            printWindow(i18n('Jeu des 7 familles'), CARD_CSS + '@media screen{.rules,.sheet{min-height:287mm}}', `<div class="rules" data-k-page><h2>${i18n('🃏 Le jeu des {n} familles', {n: String(fams.length)})}</h2><p>${i18n('Distribuez 6 cartes à chacun, le reste fait la pioche. À ton tour, demande à un joueur une carte d’une famille dont tu as déjà une carte (« Dans la famille {fam}, je voudrais {role} »). S’il l’a, il te la donne et tu rejoues ; sinon, « Pioche ! ». Une famille complète se pose devant soi. Celui qui a le plus de familles a gagné.', {fam: T.esc(fams[0].name), role: T.esc(lc)})}</p><p>${i18n('Les familles : {list}.', {list: fams.map(f => `<b>${T.esc(f.name)}</b> (${f.people.map(p => T.esc(p.first || T.name(p))).join(', ')})`).join(' ; ')})}</p>${prefs.back === 'motif' ? `<p><i>${i18n('Impression recto verso (bord long) : chaque page de dos suit sa page de cartes, déjà retournée pour tomber pile derrière.')}</i></p>` : ''}</div>${sheets.join('')}`, {margin: 5}); }}}); // 3 cartes de 63 mm (193 mm) : marges de 5 mm pour tenir sur la feuille A4
     }
     F.push({key: 'sept-familles', group: 'jouer', icon: '🃏', title: 'Jeu des 7 familles', desc: 'Les cartes faites depuis ton arbre : la photo de chacun au choix et recadrée, six styles de cartes, les couleurs, le dos ; à imprimer et découper.', render: renderSeven});
     ext.tresorSeven = {buildFamilies, cardHtml, sevenPrefs, SEVEN_STYLES};
@@ -148,7 +151,7 @@
         const flower = (x, y, r) => `${[...Array(8)].map((_, i) => `<ellipse cx="${x}" cy="${y - r * 0.95}" rx="${r * 0.42}" ry="${r * 0.62}" transform="rotate(${i * 45} ${x} ${y})"/>`).join('')}<circle cx="${x}" cy="${y}" r="${r * 0.78}"/>`;
         const butterfly = (x, y) => `<path d="M${x} ${y}c-30 -40 -60 -10 -40 10c-20 20 10 40 40 0c30 40 60 20 40 0c20 -20 -10 -50 -40 -10Z"/><path d="M${x} ${y - 14}l-10 -20M${x} ${y - 14}l10 -20" fill="none"/>`;
         const star = (x, y, r) => `<path d="${[...Array(10)].map((_, i) => { const a = -Math.PI / 2 + i * Math.PI / 5, rr = i % 2 ? r * 0.45 : r; return `${i ? 'L' : 'M'}${(x + Math.cos(a) * rr).toFixed(1)} ${(y + Math.sin(a) * rr).toFixed(1)}`; }).join('')}Z"/>`;
-        const title = o.title || `L’arbre de ${T.name(root)}`;
+        const title = o.title || i18n('L’arbre de {name}', {name: T.name(root)});
         if (design === 'eventail' || design === 'rosace') {
             // des anneaux : la personne au centre, chaque génération une couronne de cases
             const full = design === 'rosace', cx = W / 2, cy = full ? 640 : 1040, r0 = full ? 95 : 120, ring = full ? (520 - r0) / (gens - 1) : (900 - r0) / (gens - 1);
@@ -202,25 +205,25 @@
         return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}"><rect width="${W}" height="${H}" fill="#fff"/><g fill="#fff" stroke="#000" stroke-width="${sw}" stroke-linejoin="round" stroke-linecap="round">${s.join('')}</g></svg>`;
     }
     async function renderColoring(host, T) {
-        const tr = await T.tree(), st = T.start(tr); if (!st) { host.innerHTML = T.empty('L’arbre est vide', {icon: '🌳', hint: 'Ajoute des personnes pour dessiner leur arbre.'}); return; }
+        const tr = await T.tree(), st = T.start(tr); if (!st) { host.innerHTML = T.empty(i18n('L’arbre est vide'), {icon: '🌳', hint: i18n('Ajoute des personnes pour dessiner leur arbre.')}); return; }
         const KEY = 'lcnda-coloriage', saved = (() => { try { return JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (_) { return {}; } })();
-        const sel = (name, opts, cur) => `<select name="${name}">${Object.entries(opts).map(([k, l]) => `<option value="${k}"${String(cur) === k ? ' selected' : ''}>${T.esc(l)}</option>`).join('')}</select>`;
-        host.innerHTML = `<div class="h-tr-split"><form class="h-tr-panel h-tr-noprint" data-co><div class="h-tr-row"><div style="min-width:260px"><span class="pk-lab">L’enfant (ou la personne) au pied de l’arbre</span>${T.personField('who', st.id)}</div>
-                <label>Générations${sel('g', {3: '3', 4: '4', 5: '5 (petites cases)'}, saved.g || 4)}</label></div>
-            <div class="h-tr-co-designs" role="radiogroup" aria-label="Le dessin">${Object.entries(CO_DESIGNS).map(([k, l]) => `<label class="h-tr-co-d"><input type="radio" name="design" value="${k}"${(saved.design || 'arbre') === k ? ' checked' : ''}><span>${T.esc(l)}</span></label>`).join('')}</div>
-            <div class="h-tr-row"><label>Les noms${sel('label', {prenom: 'Le prénom seul (petits)', nom: 'Prénom et nom', complet: 'Prénom, nom et année'}, saved.label || 'complet')}</label>
-                <label>L’écriture${sel('font', {serif: 'Classique', ecole: 'D’écolier', baton: 'Bâton (lettres rondes)'}, saved.font || 'serif')}</label>
-                <label>Le trait${sel('stroke', {2: 'Fin (grands)', 3: 'Moyen', 5: 'Épais (petits, gros feutres)'}, saved.stroke || 3)}</label>
-                <label>Le cadre${sel('frame', {aucun: 'Sans', simple: 'Double trait', feuilles: 'Guirlande de feuilles', etoiles: 'Étoiles'}, saved.frame || 'aucun')}</label>
-                <label>Le titre<input name="title" value="${T.esc(saved.title || '')}" placeholder="L’arbre de …" maxlength="60"></label></div>
-            <div class="h-tr-row"><button class="button secondary" type="submit">Dessiner</button></div></form><div class="h-tr-view" data-co-out style="max-width:min(720px, 100%)"></div></div>`;
+        const sel = (name, opts, cur) => `<select name="${name}">${Object.entries(opts).map(([k, l]) => `<option value="${k}"${String(cur) === k ? ' selected' : ''}>${T.esc(i18n(l))}</option>`).join('')}</select>`;
+        host.innerHTML = `<div class="h-tr-split"><form class="h-tr-panel h-tr-noprint" data-co><div class="h-tr-row"><div style="min-width:260px"><span class="pk-lab">${i18n('L’enfant (ou la personne) au pied de l’arbre')}</span>${T.personField('who', st.id)}</div>
+                <label>${i18n('Générations')}${sel('g', {3: '3', 4: '4', 5: '5 (petites cases)'}, saved.g || 4)}</label></div>
+            <div class="h-tr-co-designs" role="radiogroup" aria-label="${T.esc(i18n('Le dessin'))}">${Object.entries(CO_DESIGNS).map(([k, l]) => `<label class="h-tr-co-d"><input type="radio" name="design" value="${k}"${(saved.design || 'arbre') === k ? ' checked' : ''}><span>${T.esc(i18n(l))}</span></label>`).join('')}</div>
+            <div class="h-tr-row"><label>${i18n('Les noms')}${sel('label', {prenom: 'Le prénom seul (petits)', nom: 'Prénom et nom', complet: 'Prénom, nom et année'}, saved.label || 'complet')}</label>
+                <label>${i18n('L’écriture')}${sel('font', {serif: 'Classique', ecole: 'D’écolier', baton: 'Bâton (lettres rondes)'}, saved.font || 'serif')}</label>
+                <label>${i18n('Le trait')}${sel('stroke', {2: 'Fin (grands)', 3: 'Moyen', 5: 'Épais (petits, gros feutres)'}, saved.stroke || 3)}</label>
+                <label>${i18n('Le cadre')}${sel('frame', {aucun: 'Sans', simple: 'Double trait', feuilles: 'Guirlande de feuilles', etoiles: 'Étoiles'}, saved.frame || 'aucun')}</label>
+                <label>${i18n('Le titre')}<input name="title" value="${T.esc(saved.title || '')}" placeholder="${T.esc(i18n('L’arbre de …'))}" maxlength="60"></label></div>
+            <div class="h-tr-row"><button class="button secondary" type="submit">${i18n('Dessiner')}</button></div></form><div class="h-tr-view" data-co-out style="max-width:min(720px, 100%)"></div></div>`;
         const form = host.querySelector('[data-co]'), out = host.querySelector('[data-co-out]'); let svg = '';
         const opts = () => { const e = form.elements; return {design: e.design.value, label: e.label.value, font: e.font.value, stroke: e.stroke.value, frame: e.frame.value, title: e.title.value.trim(), g: e.g.value}; };
         const draw = () => { const o = opts(); try { localStorage.setItem(KEY, JSON.stringify(o)); } catch (_) {} svg = coloringSvg(T, tr, Number(form.elements.who.value) || st.id, Number(o.g), o); out.innerHTML = svg.replace('<svg ', '<svg class="h-tr-canvas" style="width:100%;height:auto" '); };
         form.addEventListener('submit', e => { e.preventDefault(); draw(); }); form.addEventListener('change', draw);
         const fn = ext => `arbre-a-colorier-${form.elements.design.value}.${ext}`;
-        T.actions(host, {print: {attrs: 'data-co-print', run: () => { draw(); printWindow('Arbre à colorier', '@page{size:A4;margin:8mm}.pg{background:#fff;width:190mm;margin:12px auto}.pg svg{width:100%;height:auto}', `<div class="pg">${svg}</div>`); }},
-            exports: [{icon: '🖼', label: 'Image PNG', name: () => fn('png'), make: () => { draw(); return T.svgPng(svg, 2200); }}, {icon: '✒️', label: 'Dessin SVG', name: () => fn('svg'), make: () => { draw(); return svg; }}], media: true});
+        T.actions(host, {print: {attrs: 'data-co-print', run: () => { draw(); printWindow(i18n('Arbre à colorier'), '@page{size:A4;margin:8mm}.pg{background:#fff;width:190mm;margin:12px auto}.pg svg{width:100%;height:auto}', `<div class="pg">${svg}</div>`); }},
+            exports: [{icon: '🖼', label: i18n('Image PNG'), name: () => fn('png'), make: () => { draw(); return T.svgPng(svg, 2200); }}, {icon: '✒️', label: i18n('Dessin SVG'), name: () => fn('svg'), make: () => { draw(); return svg; }}], media: true});
         draw();
     }
     F.push({key: 'coloriage', group: 'jouer', icon: '🖍️', title: 'Arbre à colorier', desc: 'Les vrais ancêtres d’un enfant en traits noirs : un arbre, un jardin de fleurs, un village, des blasons, des montgolfières, une ruche, un éventail ou une rosace.', render: renderColoring});
@@ -234,49 +237,49 @@
         const places = [...new Set(ppl.map(p => T.place(tr, p.bplace)).filter(Boolean))], jobs = [...new Set(ppl.map(p => p.occ).filter(Boolean))];
         const opts = (good, pool, k = 4) => { const others = shuffle(pool.filter(x => x !== good)).slice(0, k - 1); if (!others.length) return null; const all = shuffle([good, ...others]); return {options: all, answer: all.indexOf(good)}; };
         const makers = [
-            () => { const p = pick(ppl.filter(x => x.by)); if (!p) return null; const ys = new Set([p.by]); while (ys.size < 4) ys.add(p.by + (Math.floor(R() * 25) + 3) * (R() < 0.5 ? -1 : 1)); const o = opts(p.by, [...ys]); return o && {q: e(`En quelle année est né·e ${T.name(p)} ?`, p), ...o, why: T.story(tr, p)[0]}; },
-            () => { const p = pick(ppl.filter(x => x.bplace)); if (!p || places.length < 2) return null; const o = opts(T.place(tr, p.bplace), places); return o && {q: e(`Où est né·e ${T.name(p)} ?`, p), ...o, why: T.story(tr, p)[0]}; },
-            () => { const p = pick(ppl.filter(x => x.occ)); if (!p || jobs.length < 2) return null; const o = opts(p.occ, jobs); return o && {q: `Quel était le métier de ${T.name(p)} ?`, ...o, why: `${T.name(p)} était ${p.occ}.`}; },
+            () => { const p = pick(ppl.filter(x => x.by)); if (!p) return null; const ys = new Set([p.by]); while (ys.size < 4) ys.add(p.by + (Math.floor(R() * 25) + 3) * (R() < 0.5 ? -1 : 1)); const o = opts(p.by, [...ys]); return o && {q: gx(p, 'En quelle année est né {name} ?', 'En quelle année est née {name} ?', {name: T.name(p)}), ...o, why: T.story(tr, p)[0]}; },
+            () => { const p = pick(ppl.filter(x => x.bplace)); if (!p || places.length < 2) return null; const o = opts(T.place(tr, p.bplace), places); return o && {q: gx(p, 'Où est né {name} ?', 'Où est née {name} ?', {name: T.name(p)}), ...o, why: T.story(tr, p)[0]}; },
+            () => { const p = pick(ppl.filter(x => x.occ)); if (!p || jobs.length < 2) return null; const o = opts(p.occ, jobs); return o && {q: i18n('Quel était le métier de {name} ?', {name: T.name(p)}), ...o, why: gx(p, '{name} était {occ}.', '{name} était {occ}.', {name: T.name(p), occ: p.occ})}; },
             () => { const f = pick(tr.families.filter(x => x.a && x.b)); if (!f) return null; const a = tr.byId.get(f.a), b = tr.byId.get(f.b); if (!a || !b) return null;
-                const pool = ppl.filter(x => x.gender === b.gender && x.id !== a.id).map(x => T.name(x)); const o = opts(T.name(b), pool); return o && {q: `Qui a épousé ${T.name(a)} ?`, ...o, why: `${T.name(a)} et ${T.name(b)} se sont mariés${f.my ? ` en ${f.my}` : ''}${f.mplace ? ` à ${T.place(tr, f.mplace)}` : ''}.`}; },
+                const pool = ppl.filter(x => x.gender === b.gender && x.id !== a.id).map(x => T.name(x)); const o = opts(T.name(b), pool); return o && {q: i18n('Qui a épousé {name} ?', {name: T.name(a)}), ...o, why: i18n('{a} et {b} se sont mariés{when}{where}.', {a: T.name(a), b: T.name(b), when: f.my ? ' ' + T.on(null, f.my) : '', where: f.mplace ? ' ' + T.at(T.place(tr, f.mplace)) : ''})}; },
             () => { const p = pick(ppl.filter(x => x.father || x.mother)); if (!p) return null; const par = tr.byId.get(p.mother && R() < 0.5 ? p.mother : p.father || p.mother); if (!par) return null;
-                const pool = ppl.filter(x => x.gender === par.gender && x.id !== p.id).map(x => T.name(x)); const o = opts(T.name(par), pool); return o && {q: `Qui est ${fem(par) ? 'la mère' : 'le père'} de ${T.name(p)} ?`, ...o, why: `${T.name(p)} est ${fem(p) ? 'la fille' : 'le fils'} de ${T.name(par)}.`}; },
+                const pool = ppl.filter(x => x.gender === par.gender && x.id !== p.id).map(x => T.name(x)); const o = opts(T.name(par), pool); return o && {q: gx(par, 'Qui est le père de {name} ?', 'Qui est la mère de {name} ?', {name: T.name(p)}), ...o, why: gx(p, '{name} est le fils de {parent}.', '{name} est la fille de {parent}.', {name: T.name(p), parent: T.name(par)})}; },
             () => { const p = pick(ppl.filter(x => (tr.kids.get(x.id) || []).length)); if (!p) return null; const k = new Set(tr.kids.get(p.id)).size, nums = new Set([k]); while (nums.size < 4) nums.add(Math.max(0, k + Math.floor(R() * 7) - 3));
-                const o = opts(k, [...nums]); return o && {q: `Combien d’enfants a eus ${T.name(p)} ?`, ...o, why: T.story(tr, p).find(s => /enfant/.test(s)) || ''}; },
+                const o = opts(k, [...nums]); return o && {q: i18n('Combien d’enfants a eus {name} ?', {name: T.name(p)}), ...o, why: T.story(tr, p).kids || ''}; },
             () => { const p = pick(ppl.filter(x => x.by && x.dy && x.dy - x.by > 3)); if (!p) return null; const a = T.ageAt(p, p.dd, p.dy), ages = new Set([a]); while (ages.size < 4) ages.add(Math.max(1, a + (Math.floor(R() * 15) + 2) * (R() < 0.5 ? -1 : 1)));
-                const o = opts(a, [...ages]); return o && {q: `À quel âge est ${e('mort·e', p)} ${T.name(p)} ?`, ...o, why: T.story(tr, p).at(-1)}; },
+                const o = opts(a, [...ages]); return o && {q: gx(p, 'À quel âge est mort {name} ?', 'À quel âge est morte {name} ?', {name: T.name(p)}), ...o, why: T.story(tr, p).at(-1)}; },
             () => { const two = shuffle(ppl.filter(x => x.by)).slice(0, 2); if (two.length < 2 || two[0].by === two[1].by) return null; const old = two[0].by < two[1].by ? two[0] : two[1];
-                return {q: 'Qui est né le premier ?', options: two.map(x => T.name(x)), answer: two.indexOf(old), why: `${T.name(two[0])} : ${two[0].by} ; ${T.name(two[1])} : ${two[1].by}.`}; }];
+                return {q: i18n('Qui est né le premier ?'), options: two.map(x => T.name(x)), answer: two.indexOf(old), why: `${T.name(two[0])} : ${two[0].by} ; ${T.name(two[1])} : ${two[1].by}.`}; }];
         const out = [], seen = new Set();
         for (let tries = 0; out.length < n && tries < n * 30; tries++) { const q = makers[Math.floor(R() * makers.length)](); if (q && q.options?.length >= 2 && !seen.has(q.q)) { seen.add(q.q); out.push(q); } }
         return out;
     }
     async function renderQuizTv(host, T) {
         const tr = await T.tree(), st = T.start(tr);
-        host.innerHTML = `<form class="h-tr-panel" data-qz-form><div class="h-tr-row"><label style="flex:1;min-width:280px">Les équipes (séparées par des virgules)<input name="teams" value="Les ${T.esc(st?.last || 'Martin')}, Les cousins"></label>
-            <label>Questions<input type="number" name="n" min="3" max="60" value="12" style="width:5em"></label><label>Secondes pour répondre<input type="number" name="sec" min="0" max="120" value="20" style="width:5em"></label>
+        host.innerHTML = `<form class="h-tr-panel" data-qz-form><div class="h-tr-row"><label style="flex:1;min-width:280px">${i18n('Les équipes (séparées par des virgules)')}<input name="teams" value="${T.esc(i18n('Les {name}, Les cousins', {name: st?.last || 'Martin'}))}"></label>
+            <label>${i18n('Questions')}<input type="number" name="n" min="3" max="60" value="12" style="width:5em"></label><label>${i18n('Secondes pour répondre')}<input type="number" name="sec" min="0" max="120" value="20" style="width:5em"></label>
 </div>
-            <p class="h-tr-muted">Branche l’ordinateur sur la télé : la question et les quatre réponses s’affichent en grand ; à la fin du compte à rebours (ou avec <b>Entrée</b>), la bonne réponse apparaît, puis on donne le point à l’équipe qui a trouvé (touches <b>1</b> à <b>9</b>). Répondre depuis les téléphones demanderait que l’application soit joignable depuis tout le réseau de la maison : ce n’est pas possible pour l’instant, on joue devant l’écran.</p></form>
+            <p class="h-tr-muted">${i18n('Branche l’ordinateur sur la télé : la question et les quatre réponses s’affichent en grand ; à la fin du compte à rebours (ou avec <b>Entrée</b>), la bonne réponse apparaît, puis on donne le point à l’équipe qui a trouvé (touches <b>1</b> à <b>9</b>). Répondre depuis les téléphones demanderait que l’application soit joignable depuis tout le réseau de la maison : ce n’est pas possible pour l’instant, on joue devant l’écran.')}</p></form>
             <div data-qz-prev></div>`;
         const form = host.querySelector('[data-qz-form]');
-        T.actions(host, {primary: {label: '📺 Lancer le quiz', attrs: 'data-qz-go', run: () => form.requestSubmit()}});
-        host.querySelector('[data-qz-prev]').innerHTML = `<h3>Un avant-goût</h3><ol>${quizQuestions(T, tr, 3, 7).map(q => `<li>${T.esc(q.q)}</li>`).join('')}</ol>`;
+        T.actions(host, {primary: {label: i18n('📺 Lancer le quiz'), attrs: 'data-qz-go', run: () => form.requestSubmit()}});
+        host.querySelector('[data-qz-prev]').innerHTML = `<h3>${i18n('Un avant-goût')}</h3><ol>${quizQuestions(T, tr, 3, 7).map(q => `<li>${T.esc(q.q)}</li>`).join('')}</ol>`;
         form.addEventListener('submit', e => {
             e.preventDefault();
             const teams = form.elements.teams.value.split(',').map(s => s.trim()).filter(Boolean).slice(0, 9), qs = quizQuestions(T, tr, Number(form.elements.n.value) || 12), sec = Math.max(0, Number(form.elements.sec.value) || 0);
-            if (!teams.length) return T.fail(form.elements.teams, 'Donne au moins une équipe.'); if (!qs.length) return T.toast('L’arbre est trop petit pour faire des questions.', 'error');
+            if (!teams.length) return T.fail(form.elements.teams, i18n('Donne au moins une équipe.')); if (!qs.length) return T.toast(i18n('L’arbre est trop petit pour faire des questions.'), 'error');
             const score = teams.map(() => 0), ov = document.createElement('div'); ov.className = 'h-tr-veillee h-tr-quiz'; document.body.appendChild(ov);
             let i = 0, shown = false, left = sec, timer = null, alive = true, given = false;
             const L = 'ABCDEFGH', close = () => { alive = false; clearInterval(timer); document.removeEventListener('keydown', key, true); if (document.fullscreenElement) document.exitFullscreen().catch(() => {}); ov.remove(); };
             const board = () => `<div class="h-tr-qz-score">${teams.map((t, k) => `<button type="button" data-qz-pt="${k}" ${shown && !given ? '' : 'disabled'}><small>${k + 1}</small> ${T.esc(t)} <b>${score[k]}</b></button>`).join('')}</div>`;
             const draw = () => {
                 if (i >= qs.length) { const best = Math.max(...score), win = teams.filter((t, k) => score[k] === best);
-                    ov.innerHTML = `<div class="h-tr-vl-slide"><div class="h-tr-vl-ini">🏆</div><h2>${win.length > 1 ? 'Égalité !' : `${T.esc(win[0])} gagne !`}</h2><ol class="h-tr-qz-final">${teams.map((t, k) => [t, score[k]]).sort((a, b) => b[1] - a[1]).map(([t, s]) => `<li>${T.esc(t)} — ${s} point${s > 1 ? 's' : ''}</li>`).join('')}</ol></div><div class="h-tr-vl-bar"><button type="button" data-qz="close">✕ Fermer</button></div>`; return; }
+                    ov.innerHTML = `<div class="h-tr-vl-slide"><div class="h-tr-vl-ini">🏆</div><h2>${win.length > 1 ? i18n('Égalité !') : i18n('{name} gagne !', {name: T.esc(win[0])})}</h2><ol class="h-tr-qz-final">${teams.map((t, k) => [t, score[k]]).sort((a, b) => b[1] - a[1]).map(([t, s]) => `<li>${T.esc(t)} — ${s > 1 ? i18n('{n} points', {n: String(s)}) : i18n('{n} point', {n: String(s)})}</li>`).join('')}</ol></div><div class="h-tr-vl-bar"><button type="button" data-qz="close">${i18n('✕ Fermer')}</button></div>`; return; }
                 const q = qs[i];
-                ov.innerHTML = `<div class="h-tr-qz"><div class="h-tr-qz-top"><span>Question ${i + 1} / ${qs.length}</span>${sec && !shown ? `<b class="h-tr-qz-time">${left}</b>` : ''}</div><h2>${T.esc(q.q)}</h2>
+                ov.innerHTML = `<div class="h-tr-qz"><div class="h-tr-qz-top"><span>${i18n('Question {n} / {total}', {n: String(i + 1), total: String(qs.length)})}</span>${sec && !shown ? `<b class="h-tr-qz-time">${left}</b>` : ''}</div><h2>${T.esc(q.q)}</h2>
                     <div class="h-tr-qz-opts">${q.options.map((o, k) => `<div class="h-tr-qz-opt ${shown ? (k === q.answer ? 'is-good' : 'is-bad') : ''}"><b>${L[k]}</b> ${T.esc(o)}</div>`).join('')}</div>
                     ${shown && q.why ? `<p class="h-tr-qz-why">${T.esc(q.why)}</p>` : ''}${board()}
-                    <div class="h-tr-vl-bar">${shown ? `<button type="button" data-qz="next">Question suivante ▶</button>` : `<button type="button" data-qz="show">Voir la réponse (Entrée)</button>`}<button type="button" data-qz="close">✕ Fin</button></div></div>`;
+                    <div class="h-tr-vl-bar">${shown ? `<button type="button" data-qz="next">${i18n('Question suivante ▶')}</button>` : `<button type="button" data-qz="show">${i18n('Voir la réponse (Entrée)')}</button>`}<button type="button" data-qz="close">${i18n('✕ Fin')}</button></div></div>`;
             };
             const reveal = () => { clearInterval(timer); shown = true; given = false; draw(); };
             const next = () => { i++; shown = false; given = false; left = sec; draw(); clearInterval(timer); if (sec && i < qs.length) timer = setInterval(() => { left--; if (left <= 0) reveal(); else { const t = ov.querySelector('.h-tr-qz-time'); if (t) t.textContent = left; } }, 1000); };

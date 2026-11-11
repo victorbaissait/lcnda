@@ -1600,7 +1600,7 @@ Complète « 📮 Actes à demander » (lib/heritage_more.php) et le Registre de
 ## 🌐 Langue de l’app (app-i18n.js, lib/i18n.php, assets/i18n/)
 
 Mode d’emploi complet : `docs/I18N.md` ; glossaire : `docs/i18n-glossaire.md` ; test : `tests/test-i18n.js`.
-- **8 langues** : français (référence, rien ne change), English, Español, Deutsch, Italiano, Português, Polski, Nederlands.
+- **11 langues** : français (référence, rien ne change), English, Español, Deutsch, Italiano, Português, Polski, Nederlands, et, en cours de traduction, Čeština, Svenska, Dansk (fichiers `assets/i18n/src/nord/`, repli sur le français ; voir `docs/I18N.md`, « Ajouter une langue »).
   Choix : Réglages → Apparence → « Thème et couleurs », tout en haut (« 🌐 Langue de l’app », menu simple : drapeau, nom dans
   sa langue, code) et l’écran du premier lancement (`<span data-lc-lang-slot>` ; tout `select[data-lc-lang-pick]`).
   Gardé tout de suite (K2, « ↶ Annuler » remet aussi la langue) dans `lcnda-langue` (cet ordinateur, pas la base ni le
