@@ -2399,3 +2399,1420 @@ Selon le rôle ¦ Roolin mukaan ¦ Szerep szerint
 Légère ¦ Ohut ¦ Vékony
 Normale ¦ Normaali ¦ Normál
 Demi-grasse ¦ Puolilihava ¦ Félkövér
+forme|Sac de courses ¦ Ostoskassi ¦ Bevásárlótáska
+forme|Soldes ¦ Alennusmyynti ¦ Leárazás
+forme|Reçu ¦ Kuitti ¦ Nyugta
+forme|Télescope ¦ Kaukoputki ¦ Távcső
+forme|Bécher ¦ Dekantterilasi ¦ Főzőpohár
+forme|Ballon de chimie ¦ Kolvi ¦ Lombik
+forme|Éprouvette ¦ Koeputki ¦ Kémcső
+forme|Atome ¦ Atomi ¦ Atom
+forme|Molécule ¦ Molekyyli ¦ Molekula
+forme|Tableau périodique ¦ Jaksollinen järjestelmä ¦ Periódusos rendszer
+forme|Lunettes de protection ¦ Suojalasit ¦ Védőszemüveg
+forme|Menottes ¦ Käsiraudat ¦ Bilincs
+forme|Extincteur ¦ Sammutin ¦ Tűzoltó készülék
+forme|Bouche d’incendie ¦ Palopostin ¦ Tűzcsap
+forme|Pupitre ¦ Puhujanpönttö ¦ Szónoki pulpitus
+forme|Présentation ¦ Esitys ¦ Bemutató
+forme|Présentation projetée ¦ Heijastettu esitys ¦ Kivetített bemutató
+forme|Courrier ¦ Posti ¦ Posta
+forme|Musique ¦ Musiikki ¦ Zene
+forme|Note de musique ¦ Nuotti ¦ Hangjegy
+forme|Clé de sol ¦ G-avain ¦ G-kulcs
+forme|Piano ¦ Piano ¦ Zongora
+forme|Guitare ¦ Kitara ¦ Gitár
+forme|Violon ¦ Viulu ¦ Hegedű
+forme|Trompette ¦ Trumpetti ¦ Trombita
+forme|Saxophone ¦ Saksofoni ¦ Szaxofon
+forme|Clairon ¦ Merkkitorvi ¦ Kürt
+forme|Micro ancien ¦ Vanha mikrofoni ¦ Régi mikrofon
+forme|Casque audio ¦ Kuulokkeet ¦ Fejhallgató
+forme|Roi ¦ Kuningas ¦ Király
+forme|échecs ¦ shakki ¦ sakk
+forme|Dame ¦ Kuningatar ¦ Vezér
+forme|Fou ¦ Lähetti ¦ Futó
+forme|Pion ¦ Sotilas ¦ Gyalog
+forme|Cartes à jouer ¦ Pelikortit ¦ Játékkártyák
+forme|cartes ¦ kortit ¦ kártyák
+forme|Pique ¦ Pata ¦ Pikk
+forme|Carreau ¦ Ruutu ¦ Káró
+forme|Dé ¦ Noppa ¦ Dobókocka
+forme|Puzzle ¦ Palapeli ¦ Kirakó
+forme|Cerf-volant ¦ Leija ¦ Sárkány
+forme|Ballon de football ¦ Jalkapallo ¦ Futball-labda
+forme|Ballon de basket ¦ Koripallo ¦ Kosárlabda
+forme|Tennis ¦ Tennis ¦ Tenisz
+forme|Ballon de rugby ¦ Rugbypallo ¦ Rögbilabda
+forme|Cycliste ¦ Pyöräilijä ¦ Kerékpáros
+forme|Nageur ¦ Uimari ¦ Úszó
+forme|Skieur ¦ Hiihtäjä ¦ Síelő
+forme|Coupe ¦ Pokaali ¦ Kupa
+forme|Trophée ¦ Palkinto ¦ Trófea
+forme|Ticket ¦ Lippu ¦ Jegy
+forme|Clap de cinéma ¦ Elokuvaklaffi ¦ Csapó
+forme|Nuancier ¦ Värikartta ¦ Színminta
+forme|Livre ouvert ¦ Avoin kirja ¦ Nyitott könyv
+forme|Manette ¦ Peliohjain ¦ Játékvezérlő
+forme|Guitare électrique ¦ Sähkökitara ¦ Elektromos gitár
+forme|Médiator ¦ Plektra ¦ Pengető
+forme|Ocarina ¦ Okariina ¦ Okarina
+forme|instrument ¦ soitin ¦ hangszer
+forme|Métronome ¦ Metronomi ¦ Metronóm
+forme|Microphone ¦ Mikrofoni ¦ Mikrofon
+forme|Amplificateur ¦ Vahvistin ¦ Erősítő
+forme|Enceinte ¦ Kaiutin ¦ Hangszóró
+forme|Partition encadrée ¦ Kehystetty nuotti ¦ Bekeretezett kotta
+forme|Croche ¦ Kahdeksasosanuotti ¦ Nyolcadhang
+forme|Blanche ¦ Puolinuotti ¦ Félhang
+forme|Noire ¦ Neljäsosanuotti ¦ Negyedhang
+forme|Double croche ¦ Kuudestoistaosanuotti ¦ Tizenhatodhang
+forme|Ronde ¦ Kokonuotti ¦ Egészhang
+forme|Clé de fa ¦ F-avain ¦ F-kulcs
+forme|Clé d’ut ¦ C-avain ¦ C-kulcs
+forme|Dièse ¦ Ylennysmerkki ¦ Kereszt (módosítójel)
+forme|musique ¦ musiikki ¦ zene
+forme|Bémol ¦ Alennusmerkki ¦ Bé (módosítójel)
+forme|Bécarre ¦ Palautusmerkki ¦ Feloldójel
+forme|Pause ¦ Kokotauko ¦ Egész szünet
+forme|Demi-pause ¦ Puolitauko ¦ Fél szünet
+forme|Soupir ¦ Neljäsosatauko ¦ Negyed szünet
+forme|Demi-soupir ¦ Kahdeksasosatauko ¦ Nyolcad szünet
+forme|Recueil de chansons ¦ Laulukirja ¦ Daloskönyv
+forme|Écouteurs ¦ Nappikuulokkeet ¦ Fülhallgató
+forme|Danse de salon ¦ Seuratanssi ¦ Társastánc
+forme|Billet ¦ Lippu ¦ Jegy
+forme|Jeu de cartes ¦ Korttipakka ¦ Kártyapakli
+forme|Carte de cœur ¦ Hertta-kortti ¦ Kőr kártya
+forme|Carte de pique ¦ Pata-kortti ¦ Pikk kártya
+forme|Carte de trèfle ¦ Risti-kortti ¦ Treff kártya
+forme|Carte de carreau ¦ Ruutu-kortti ¦ Káró kártya
+forme|Jeton de poker ¦ Pokerimerkki ¦ Pókerzseton
+forme|Machine à sous ¦ Peliautomaatti ¦ Nyerőgép
+forme|Dés ¦ Nopat ¦ Dobókockák
+forme|Dé à vingt faces ¦ Kaksikymmentätahkoinen noppa ¦ Húszoldalú dobókocka
+forme|Damier ¦ Tammilauta ¦ Dámatábla
+forme|Pièce de puzzle et cœur ¦ Palapelin pala ja sydän ¦ Kirakódarab és szív
+forme|Tangram ¦ Tangram ¦ Tangram
+forme|Moulin à vent ¦ Tuulimylly ¦ Szélmalom
+forme|jouet ¦ lelu ¦ játék
+forme|Bascule ¦ Keinulauta ¦ Mérleghinta
+forme|jeu ¦ peli ¦ játék
+forme|Toboggan ¦ Liukumäki ¦ Csúszda
+forme|Boule de cristal ¦ Kristallipallo ¦ Kristálygömb
+forme|Baguette magique ¦ Taikasauva ¦ Varázspálca
+forme|Feu d’artifice ¦ Ilotulitus ¦ Tűzijáték
+forme|Bowling ¦ Keilailu ¦ Bowling
+forme|Billard ¦ Biljardi ¦ Biliárd
+forme|Triangle de billard ¦ Biljardikolmio ¦ Biliárdháromszög
+forme|Golf ¦ Golf ¦ Golf
+forme|Balle de base-ball ¦ Baseball-pallo ¦ Baseball-labda
+forme|Batte de base-ball ¦ Baseball-maila ¦ Baseballütő
+forme|Panier de basket ¦ Koripallokori ¦ Kosárlabdapalánk
+forme|Ballon de volley ¦ Lentopallo ¦ Röplabda
+forme|Ballon de football américain ¦ Amerikkalainen jalkapallo ¦ Amerikaifutball-labda
+forme|Casque de football américain ¦ Amerikkalaisen jalkapallon kypärä ¦ Amerikaifutball-sisak
+forme|Balle de tennis ¦ Tennispallo ¦ Teniszlabda
+forme|Badminton ¦ Sulkapallo ¦ Tollaslabda
+forme|Tennis de table ¦ Pöytätennis ¦ Asztalitenisz
+forme|Crosses de hockey ¦ Jääkiekkomailat ¦ Hokiütők
+forme|Handball ¦ Käsipallo ¦ Kézilabda
+forme|Polo ¦ Poolo ¦ Lovaspóló
+forme|Curling ¦ Curling ¦ Curling
+forme|Arc et flèche ¦ Jousi ja nuoli ¦ Íj és nyíl
+forme|Flèche dans la cible ¦ Nuoli maalitaulussa ¦ Nyíl a célban
+forme|Cible de tir ¦ Ampumataulu ¦ Céltábla
+forme|Escrime ¦ Miekkailu ¦ Vívás
+forme|Karaté ¦ Karate ¦ Karate
+forme|Gant de boxe ¦ Nyrkkeilyhansikas ¦ Bokszkesztyű
+forme|Gymnastique ¦ Voimistelu ¦ Torna
+forme|Haltérophile ¦ Painonnostaja ¦ Súlyemelő
+forme|Haltère ¦ Käsipaino ¦ Súlyzó
+forme|Corde à sauter ¦ Hyppynaru ¦ Ugrókötél
+forme|Sprinteur ¦ Pikajuoksija ¦ Sprinter
+forme|Randonneur ¦ Retkeilijä ¦ Túrázó
+forme|Ski de fond ¦ Murtomaahiihto ¦ Sífutás
+forme|Ski nautique ¦ Vesihiihto ¦ Vízisí
+forme|Planche à neige ¦ Lumilauta ¦ Snowboard
+forme|Raquettes à neige ¦ Lumikengät ¦ Hótalp
+forme|Luge ¦ Kelkka ¦ Szánkó
+forme|Patin à glace ¦ Luistin ¦ Korcsolya
+forme|Patin à roulettes ¦ Rullaluistin ¦ Görkorcsolya
+forme|Roller en ligne ¦ Rullaluistin (inline) ¦ Egysoros görkorcsolya
+forme|Planche à roulettes ¦ Rullalauta ¦ Gördeszka
+forme|Skateur ¦ Rullalautailija ¦ Gördeszkás
+forme|Surfeur ¦ Surffaaja ¦ Szörfös
+forme|Plongeur ¦ Sukeltaja ¦ Búvár
+forme|Plongée sous-marine ¦ Laitesukellus ¦ Búvárkodás
+forme|Masque de plongée ¦ Sukellusmaski ¦ Búvármaszk
+forme|Tuba ¦ Snorkkeli ¦ Légzőcső
+forme|Casque de course ¦ Kilpa-ajokypärä ¦ Versenysisak
+forme|Sifflet ¦ Pilli ¦ Síp
+forme|Tableau des scores ¦ Tulostaulu ¦ Eredményjelző
+forme|Médaille d’or ¦ Kultamitali ¦ Aranyérem
+forme|Trophée brisé ¦ Rikkoutunut palkinto ¦ Törött trófea
+forme|Tournoi ¦ Turnaus ¦ Torna (verseny)
+forme|Flambeau ¦ Soihtu ¦ Fáklya
+forme|Jumelles ¦ Kiikari ¦ Látcső
+forme|Panorama ¦ Panoraama ¦ Panoráma
+forme|un ¦ yksi ¦ egy
+forme|deux ¦ kaksi ¦ kettő
+forme|trois ¦ kolme ¦ három
+forme|quatre ¦ neljä ¦ négy
+forme|six ¦ kuusi ¦ hat
+forme|cinéma ¦ elokuva ¦ mozi
+forme|Médaille d’argent ¦ Hopeamitali ¦ Ezüstérem
+forme|Médaille de bronze ¦ Pronssimitali ¦ Bronzérem
+forme|Cricket ¦ Kriketti ¦ Krikett
+forme|Liste de chansons ¦ Kappalelista ¦ Dallista
+forme|Étoile de David ¦ Daavidin tähti ¦ Dávid-csillag
+forme|Ménorah ¦ Menora ¦ Menóra
+forme|Croissant et étoile ¦ Kuunsirppi ja tähti ¦ Félhold és csillag
+forme|Om ¦ Om ¦ Om
+forme|Roue du dharma ¦ Dharman pyörä ¦ Dharmakerék
+forme|Yin et yang ¦ Yin ja yang ¦ Jin és jang
+forme|Paix ¦ Rauha ¦ Béke
+forme|Cœur brisé ¦ Särkynyt sydän ¦ Összetört szív
+forme|Éternité ¦ Ikuisuus ¦ Örökkévalóság
+forme|Khanda ¦ Khanda ¦ Khanda
+forme|Ménorah allumée ¦ Sytytetty menora ¦ Meggyújtott menóra
+forme|Hexagramme ¦ Heksagrammi ¦ Hexagram
+forme|Boule de Noël ¦ Joulupallo ¦ Karácsonyfagömb
+forme|Halloween ¦ Halloween ¦ Halloween
+forme|Citrouille ¦ Kurpitsa ¦ Tök
+forme|Document ¦ Asiakirja ¦ Dokumentum
+forme|Documents ¦ Asiakirjat ¦ Dokumentumok
+forme|Note écrite ¦ Kirjoitettu muistiinpano ¦ Írott jegyzet
+forme|Livres ¦ Kirjat ¦ Könyvek
+forme|Carnet ¦ Muistikirja ¦ Jegyzetfüzet
+forme|Journal ¦ Sanomalehti ¦ Újság
+forme|Gazette ¦ Lehti ¦ Hírlap
+forme|Lettre {x} ¦ Kirjain {x} ¦ {x} betű
+forme|Timbre ¦ Postimerkki ¦ Bélyeg
+forme|Archives ¦ Arkisto ¦ Archívum
+forme|Dossier ¦ Kansio ¦ Mappa
+forme|Dossier ouvert ¦ Avoin kansio ¦ Nyitott mappa
+forme|Presse-papiers ¦ Leikepöytä ¦ Írótábla
+forme|Calendrier ¦ Kalenteri ¦ Naptár
+forme|Date heureuse ¦ Iloinen päivä ¦ Boldog nap
+forme|Date importante ¦ Tärkeä päivä ¦ Fontos dátum
+forme|Stylo ¦ Kynä ¦ Toll
+forme|Stylo-plume ¦ Täytekynä ¦ Töltőtoll
+forme|Signature ¦ Allekirjoitus ¦ Aláírás
+forme|Guillemet ¦ Lainausmerkki ¦ Idézőjel
+forme|Marque-page ¦ Kirjanmerkki ¦ Könyvjelző
+forme|Punaise ¦ Nasta ¦ Rajzszög
+forme|Trombone ¦ Paperiliitin ¦ Gemkapocs
+forme|Post-it ¦ Muistilappu ¦ Öntapadós cetli
+forme|Bulle de message ¦ Viestikupla ¦ Üzenetbuborék
+forme|Discussion ¦ Keskustelu ¦ Beszélgetés
+forme|Traduction ¦ Käännös ¦ Fordítás
+forme|Alphabet ¦ Aakkoset ¦ Ábécé
+forme|Document à modifier ¦ Muokattava asiakirja ¦ Szerkesztendő dokumentum
+forme|Document signé ¦ Allekirjoitettu asiakirja ¦ Aláírt dokumentum
+forme|Classeur à tiroirs ¦ Arkistokaappi ¦ Iratszekrény
+forme|Document douteux ¦ Epävarma asiakirja ¦ Kétes dokumentum
+forme|Document daté ¦ Päivätty asiakirja ¦ Keltezett dokumentum
+forme|Document important ¦ Tärkeä asiakirja ¦ Fontos dokumentum
+forme|Document lié ¦ Yhdistetty asiakirja ¦ Kapcsolt dokumentum
+forme|Partition ¦ Nuotit ¦ Kotta
+forme|Dossiers ¦ Kansiot ¦ Mappák
+forme|Dossier de la maison ¦ Talon kansio ¦ A ház mappája
+forme|Dossier favori ¦ Suosikkikansio ¦ Kedvenc mappa
+forme|Dossier important ¦ Tärkeä kansio ¦ Fontos mappa
+forme|Dossier de textes ¦ Tekstikansio ¦ Szövegmappa
+forme|Recherche de dossier ¦ Kansiohaku ¦ Mappakeresés
+forme|Dossier daté ¦ Päivätty kansio ¦ Keltezett mappa
+forme|Dossier mystère ¦ Mysteerikansio ¦ Rejtélyes mappa
+forme|Recherche aux archives ¦ Arkistotutkimus ¦ Levéltári kutatás
+forme|Archive précieuse ¦ Arvokas arkisto ¦ Értékes irat
+forme|Livre ouvert vierge ¦ Tyhjä avoin kirja ¦ Üres nyitott könyv
+forme|pages ¦ sivut ¦ oldalak
+forme|Abécédaire ¦ Aapinen ¦ Ábécéskönyv
+forme|Recherche dans un livre ¦ Haku kirjasta ¦ Keresés a könyvben
+forme|Livre daté ¦ Päivätty kirja ¦ Keltezett könyv
+forme|Livre et repère ¦ Kirja ja merkki ¦ Könyv és jelölő
+forme|Livre en écriture ¦ Kirjoitettava kirja ¦ Készülő könyv
+forme|Marque-pages ¦ Kirjanmerkit ¦ Könyvjelzők
+forme|Carnets ¦ Muistikirjat ¦ Jegyzetfüzetek
+forme|Lettres ¦ Kirjeet ¦ Levelek
+forme|Bulletin ¦ Tiedote ¦ Közlöny
+forme|Presse-papiers vide ¦ Tyhjä leikepöytä ¦ Üres írótábla
+forme|Liste sur presse-papiers ¦ Lista leikepöydällä ¦ Lista az írótáblán
+forme|Fiche de personne ¦ Henkilön kortti ¦ Személy adatlapja
+forme|Liste validée ¦ Tarkistettu lista ¦ Kipipált lista
+forme|Calendrier vierge ¦ Tyhjä kalenteri ¦ Üres naptár
+forme|Mois ¦ Kuukausi ¦ Hónap
+forme|Aujourd’hui ¦ Tänään ¦ Ma
+forme|Période ¦ Ajanjakso ¦ Időszak
+forme|Agenda ¦ Kalenterimuistio ¦ Határidőnapló
+forme|Date et heure ¦ Päivämäärä ja aika ¦ Dátum és idő
+forme|Date inconnue ¦ Tuntematon päivämäärä ¦ Ismeretlen dátum
+forme|Date incertaine ¦ Epävarma päivämäärä ¦ Bizonytalan dátum
+forme|Date confirmée ¦ Vahvistettu päivämäärä ¦ Megerősített dátum
+forme|Date de début ¦ Alkupäivä ¦ Kezdő dátum
+forme|Date de fin ¦ Loppupäivä ¦ Záró dátum
+forme|Notes ¦ Muistiinpanot ¦ Jegyzetek
+forme|Écrire une note ¦ Kirjoita muistiinpano ¦ Jegyzet írása
+forme|Autocollant ¦ Tarra ¦ Matrica
+forme|Notes écrites ¦ Kirjoitetut muistiinpanot ¦ Írott jegyzetek
+forme|Pièce jointe ¦ Liite ¦ Melléklet
+forme|Étiquettes ¦ Tunnisteet ¦ Címkék
+forme|Étiquette écrite ¦ Kirjoitettu tunniste ¦ Feliratos címke
+forme|Étiquette favorite ¦ Suosikkitunniste ¦ Kedvenc címke
+forme|Message écrit ¦ Kirjoitettu viesti ¦ Írott üzenet
+forme|Question ¦ Kysymys ¦ Kérdés
+forme|Conversation ¦ Keskustelu ¦ Társalgás
+forme|Commentaire ¦ Kommentti ¦ Megjegyzés
+forme|Commentaire écrit ¦ Kirjoitettu kommentti ¦ Írott megjegyzés
+forme|Citation ¦ Lainaus ¦ Idézet
+forme|Commentaires ¦ Kommentit ¦ Megjegyzések
+forme|Témoignage ¦ Todistus ¦ Tanúvallomás
+forme|Bulle de pensée ¦ Ajatuskupla ¦ Gondolatbuborék
+forme|Guillemet fermant ¦ Loppulainausmerkki ¦ Záró idézőjel
+forme|Alphabet latin ¦ Latinalaiset aakkoset ¦ Latin ábécé
+forme|Alphabet grec ¦ Kreikkalaiset aakkoset ¦ Görög ábécé
+forme|Alphabet cyrillique ¦ Kyrilliset aakkoset ¦ Cirill ábécé
+forme|Alphabet hébreu ¦ Heprealaiset aakkoset ¦ Héber ábécé
+forme|Alphabet arabe ¦ Arabialaiset aakkoset ¦ Arab ábécé
+forme|Idéogramme ¦ Ideogrammi ¦ Ideogramma
+forme|Braille ¦ Pistekirjoitus ¦ Braille-írás
+forme|stylo ¦ kynä ¦ toll
+forme|Signature écrite ¦ Käsin kirjoitettu allekirjoitus ¦ Kézzel írt aláírás
+forme|Crayon encadré ¦ Kehystetty lyijykynä ¦ Bekeretezett ceruza
+forme|Gomme ¦ Pyyhekumi ¦ Radír
+forme|Carte de visite ¦ Käyntikortti ¦ Névjegykártya
+forme|Carte nominative ¦ Nimikortti ¦ Névkártya
+forme|Répertoire ¦ Osoitekirja ¦ Címjegyzék
+forme|Fichier rotatif ¦ Pyörivä kortisto ¦ Forgó kartoték
+forme|Passeport biométrique ¦ Biometrinen passi ¦ Biometrikus útlevél
+forme|Licence ¦ Lupa ¦ Engedély
+forme|Bulletin de vote ¦ Äänestyslippu ¦ Szavazólap
+forme|Vote ¦ Äänestys ¦ Szavazás
+forme|Liste à puces ¦ Luettelomerkitty lista ¦ Felsorolásjeles lista
+forme|Liste numérotée ¦ Numeroitu lista ¦ Számozott lista
+forme|Tableau ¦ Taulukko ¦ Táblázat
+forme|Scanner ¦ Skanneri ¦ Szkenner
+forme|Copie ¦ Kopio ¦ Másolat
+forme|Semaine ¦ Viikko ¦ Hét
+forme|Fin de semaine ¦ Viikonloppu ¦ Hétvége
+forme|Enveloppe ¦ Kirjekuori ¦ Boríték
+forme|Réponse ¦ Vastaus ¦ Válasz
+forme|Texte long ¦ Pitkä teksti ¦ Hosszú szöveg
+forme|Battement de cœur ¦ Sydämenlyönti ¦ Szívverés
+forme|Pansement ¦ Laastari ¦ Sebtapasz
+forme|Croix médicale ¦ Lääkintäristi ¦ Orvosi kereszt
+forme|Ambulance ¦ Ambulanssi ¦ Mentőautó
+forme|Dent ¦ Hammas ¦ Fog
+forme|Cerveau ¦ Aivot ¦ Agy
+forme|Poumons ¦ Keuhkot ¦ Tüdő
+forme|Estomac ¦ Vatsa ¦ Gyomor
+forme|Œil ¦ Silmä ¦ Szem
+forme|Oreille ¦ Korva ¦ Fül
+forme|Virus ¦ Virus ¦ Vírus
+forme|Bactérie ¦ Bakteeri ¦ Baktérium
+forme|ADN ¦ DNA ¦ DNS
+forme|Mortier ¦ Huhmar ¦ Mozsár
+forme|Tête de mort ¦ Pääkallo ¦ Halálfej
+forme|Défibrillateur ¦ Defibrillaattori ¦ Defibrillátor
+forme|Pouls ¦ Pulssi ¦ Pulzus
+forme|Pilules ¦ Pillerit ¦ Tabletták
+forme|Médicament ¦ Lääke ¦ Gyógyszer
+forme|Ordonnance ¦ Resepti ¦ Recept
+forme|Perfusion ¦ Tiputus ¦ Infúzió
+forme|Poche de sang ¦ Veripussi ¦ Vérzsák
+forme|Diabète ¦ Diabetes ¦ Cukorbetegség
+forme|Allergie ¦ Allergia ¦ Allergia
+forme|Radiographie ¦ Röntgenkuva ¦ Röntgenkép
+forme|Scanner du crâne ¦ Pään kuvaus ¦ Koponyafelvétel
+forme|Brosse à dents ¦ Hammasharja ¦ Fogkefe
+forme|Brosse à dents et dentifrice ¦ Hammasharja ja hammastahna ¦ Fogkefe és fogkrém
+forme|Surdité ¦ Kuurous ¦ Siketség
+forme|Œil fermé ¦ Suljettu silmä ¦ Csukott szem
+forme|Cécité ¦ Sokeus ¦ Vakság
+forme|Dossier médical ¦ Potilaskertomus ¦ Kórlap
+forme|Reproduction ¦ Lisääntyminen ¦ Szaporodás
+forme|Malade ¦ Sairas ¦ Beteg
+forme|Fièvre ¦ Kuume ¦ Láz
+forme|Mortier et pilon ¦ Huhmar ja survin ¦ Mozsár és mozsártörő
+forme|Potion de soin ¦ Parannusjuoma ¦ Gyógyitál
+forme|Poison ¦ Myrkky ¦ Méreg
+forme|Boucle auditive ¦ Induktiosilmukka ¦ Indukciós hurok
+forme|Tache de liquide ¦ Nestetahra ¦ Folyadékfolt
+forme|Cœur arrêté ¦ Pysähtynyt sydän ¦ Megállt szív
+forme|Véhicule sanitaire ¦ Sairaankuljetusajoneuvo ¦ Betegszállító jármű
+forme|Étoile ronde ¦ Pyöreä tähti ¦ Kerek csillag
+forme|Demi-cœur ¦ Puolikas sydän ¦ Félszív
+forme|Pouce levé ¦ Peukku ylös ¦ Felfelé mutató hüvelykujj
+forme|Pouce baissé ¦ Peukku alas ¦ Lefelé mutató hüvelykujj
+forme|Validé ¦ Hyväksytty ¦ Jóváhagyva
+forme|Refusé ¦ Hylätty ¦ Elutasítva
+forme|Plus rond ¦ Pyöreä plus ¦ Kerek plusz
+forme|Moins rond ¦ Pyöreä miinus ¦ Kerek mínusz
+forme|Question ronde ¦ Pyöreä kysymysmerkki ¦ Kerek kérdőjel
+forme|Attention ¦ Huomio ¦ Figyelem
+forme|Alerte ¦ Hälytys ¦ Riasztás
+forme|Stop ¦ Seis ¦ Stop
+forme|Info ronde ¦ Pyöreä info ¦ Kerek info
+forme|Bouclier ¦ Kilpi ¦ Pajzs
+forme|Bouclier validé ¦ Hyväksytty kilpi ¦ Pipás pajzs
+forme|Recyclage ¦ Kierrätys ¦ Újrahasznosítás
+forme|Copyright ¦ Tekijänoikeus ¦ Szerzői jog
+forme|Arobase ¦ At-merkki ¦ Kukac
+forme|Pourcentage ¦ Prosentti ¦ Százalék
+forme|Dollar ¦ Dollari ¦ Dollár
+forme|Pi ¦ Pii ¦ Pi
+forme|Somme ¦ Summa ¦ Összeg
+forme|Danger biologique ¦ Biovaara ¦ Biológiai veszély
+forme|Radioactif ¦ Radioaktiivinen ¦ Radioaktív
+forme|Content ¦ Iloinen ¦ Vidám
+forme|Triste ¦ Surullinen ¦ Szomorú
+forme|Neutre ¦ Neutraali ¦ Semleges
+forme|Ravi ¦ Innoissaan ¦ Elragadtatott
+forme|Pleure ¦ Itkee ¦ Sír
+forme|Fâché ¦ Vihainen ¦ Mérges
+forme|Clin d’œil ¦ Silmänisku ¦ Kacsintás
+forme|Bisou ¦ Pusu ¦ Puszi
+forme|Fantôme ¦ Kummitus ¦ Szellem
+forme|Robot ¦ Robotti ¦ Robot
+forme|Hexagones ¦ Kuusikulmiot ¦ Hatszögek
+forme|Cible ¦ Maalitaulu ¦ Célpont
+forme|Mille ¦ Napakymppi ¦ Telitalálat
+forme|Engrenage ¦ Hammaspyörä ¦ Fogaskerék
+forme|Aimant ¦ Magneetti ¦ Mágnes
+forme|Ondes ¦ Aallot ¦ Hullámok
+forme|Bluetooth ¦ Bluetooth ¦ Bluetooth
+forme|Fanion ¦ Viiri ¦ Zászlócska
+forme|Récompense ¦ Palkinto ¦ Jutalom
+forme|Chiffre {x} ¦ Numero {x} ¦ {x} számjegy
+forme|Demi-étoile ¦ Puolikas tähti ¦ Félcsillag
+forme|Étoile souriante ¦ Hymyilevä tähti ¦ Mosolygó csillag
+forme|Étoile encadrée ¦ Kehystetty tähti ¦ Bekeretezett csillag
+forme|Décagramme ¦ Dekagrammi ¦ Dekagram
+forme|Octogramme ¦ Oktagrammi ¦ Oktagram
+forme|Sceau validé ¦ Hyväksytty sinetti ¦ Jóváhagyó pecsét
+forme|Pour et contre ¦ Puolesta ja vastaan ¦ Mellette és ellene
+forme|Coche épaisse ¦ Paksu valintamerkki ¦ Vastag pipa
+forme|Double coche ¦ Kaksoisvalintamerkki ¦ Dupla pipa
+forme|Croix de refus ¦ Hylkäysrasti ¦ Elutasító X
+forme|Croix épaisse ¦ Paksu rasti ¦ Vastag X
+forme|Interdit octogonal ¦ Kahdeksankulmainen kielto ¦ Nyolcszögletű tilalom
+forme|Plus épais ¦ Paksu plus ¦ Vastag plusz
+forme|Moins épais ¦ Paksu miinus ¦ Vastag mínusz
+forme|Plus ou moins ¦ Plus-miinus ¦ Plusz-mínusz
+forme|Égal ¦ Yhtäsuuruus ¦ Egyenlő
+forme|Question en losange ¦ Kysymys vinoneliössä ¦ Kérdés rombuszban
+forme|Alerte en losange ¦ Hälytys vinoneliössä ¦ Riasztás rombuszban
+forme|Interdit ¦ Kielletty ¦ Tilos
+forme|Sens interdit ¦ Ajo kielletty ¦ Behajtani tilos
+forme|Demi-bouclier ¦ Puolikas kilpi ¦ Félpajzs
+forme|Bouclier étoilé ¦ Tähtikilpi ¦ Csillagos pajzs
+forme|Esperluette ¦ Et-merkki ¦ És-jel
+forme|Astérisque ¦ Tähtimerkki ¦ Csillag (jel)
+forme|Oméga ¦ Omega ¦ Omega
+forme|Chiffre romain I ¦ Roomalainen numero I ¦ I. római szám
+forme|Chiffre romain II ¦ Roomalainen numero II ¦ II. római szám
+forme|Chiffre romain III ¦ Roomalainen numero III ¦ III. római szám
+forme|Chiffre romain IV ¦ Roomalainen numero IV ¦ IV. római szám
+forme|Chiffre romain V ¦ Roomalainen numero V ¦ V. római szám
+forme|Chiffre romain VI ¦ Roomalainen numero VI ¦ VI. római szám
+forme|Chiffre romain VII ¦ Roomalainen numero VII ¦ VII. római szám
+forme|Chiffre romain VIII ¦ Roomalainen numero VIII ¦ VIII. római szám
+forme|Chiffre romain IX ¦ Roomalainen numero IX ¦ IX. római szám
+forme|Chiffre romain X ¦ Roomalainen numero X ¦ X. római szám
+forme|Bâton ¦ Laskuviiva ¦ Strigula
+forme|Bâtons ¦ Laskuviivat ¦ Strigulák
+forme|cinq ¦ viisi ¦ öt
+forme|Bélier ¦ Oinas ¦ Kos
+forme|zodiaque ¦ eläinrata ¦ állatöv
+forme|Taureau ¦ Härkä ¦ Bika
+forme|Gémeaux ¦ Kaksoset ¦ Ikrek
+forme|Cancer ¦ Rapu ¦ Rák
+forme|Lion ¦ Leijona ¦ Oroszlán
+forme|Vierge ¦ Neitsyt ¦ Szűz
+forme|Scorpion ¦ Skorpioni ¦ Skorpió
+forme|Sagittaire ¦ Jousimies ¦ Nyilas
+forme|Capricorne ¦ Kauris ¦ Bak
+forme|Verseau ¦ Vesimies ¦ Vízöntő
+forme|Poissons ¦ Kalat ¦ Halak
+forme|Visage souriant ¦ Hymyilevät kasvot ¦ Mosolygó arc
+forme|Visage décontracté ¦ Rentoutuneet kasvot ¦ Nyugodt arc
+forme|Perplexe ¦ Hämmentynyt ¦ Tanácstalan
+forme|Visage évanoui ¦ Pyörtyvät kasvot ¦ Ájuló arc
+forme|Diablotin ¦ Pikkupiru ¦ Ördögfióka
+forme|Mort de rire ¦ Nauraa katketakseen ¦ Dől a nevetéstől
+forme|Extraterrestre ¦ Avaruusolento ¦ Földönkívüli
+forme|Pentagramme ¦ Pentagrammi ¦ Pentagramma
+forme|Losange plein ¦ Täytetty vinoneliö ¦ Teli rombusz
+forme|Losange moyen ¦ Keskikokoinen vinoneliö ¦ Közepes rombusz
+forme|Disque plein ¦ Täytetty ympyrä ¦ Teli korong
+forme|Cercle ¦ Ympyrä ¦ Kör
+forme|Moitié de disque ¦ Puoliympyrä ¦ Félkorong
+forme|Petit disque ¦ Pieni ympyrä ¦ Kis korong
+forme|Disques ¦ Ympyrät ¦ Korongok
+forme|Ellipse ¦ Ellipsi ¦ Ellipszis
+forme|Carré ¦ Neliö ¦ Négyzet
+forme|Carré arrondi ¦ Pyöristetty neliö ¦ Lekerekített négyzet
+forme|Petit carré ¦ Pieni neliö ¦ Kis négyzet
+forme|Triangle pointe en bas ¦ Alaspäin osoittava kolmio ¦ Lefelé mutató háromszög
+forme|Sphère ¦ Pallo ¦ Gömb
+forme|Formes ¦ Muodot ¦ Alakzatok
+forme|Case pleine ¦ Täytetty ruutu ¦ Teli négyzet
+forme|Case vide ¦ Tyhjä ruutu ¦ Üres négyzet
+forme|Case cochée ¦ Valittu ruutu ¦ Bejelölt négyzet
+forme|Pastille ¦ Piste ¦ Pötty
+forme|Pastille cochée ¦ Valittu piste ¦ Bejelölt pötty
+forme|Points de suspension ¦ Kolme pistettä ¦ Három pont
+forme|Points verticaux ¦ Pystypisteet ¦ Függőleges pontok
+forme|Grille de points ¦ Pisteruudukko ¦ Pontrács
+forme|Trois points en triangle ¦ Kolme pistettä kolmiossa ¦ Három pont háromszögben
+forme|Quadrillage ¦ Ruudukko ¦ Rács
+forme|Goutte bicolore ¦ Kaksivärinen pisara ¦ Kétszínű csepp
+forme|Bombe ¦ Pommi ¦ Bomba
+forme|Épée ¦ Miekka ¦ Kard
+forme|Épées croisées ¦ Ristikkäiset miekat ¦ Keresztbe tett kardok
+forme|Lance ¦ Keihäs ¦ Lándzsa
+forme|Masse d’armes ¦ Nuija ¦ Buzogány
+forme|Couteau de combat ¦ Taisteluveitsi ¦ Harci kés
+forme|Étoile de ninja ¦ Ninjatähti ¦ Dobócsillag
+forme|Boomerang ¦ Bumerangi ¦ Bumeráng
+forme|Pistolet ¦ Pistooli ¦ Pisztoly
+forme|Munitions ¦ Ammukset ¦ Lőszer
+forme|Char d’assaut ¦ Panssarivaunu ¦ Harckocsi
+forme|Lien ¦ Linkki ¦ Hivatkozás
+forme|Maillon ¦ Ketjun lenkki ¦ Láncszem
+forme|Empreinte digitale ¦ Sormenjälki ¦ Ujjlenyomat
+forme|Drapeau à hampe ¦ Lippu salossa ¦ Zászló rúdon
+forme|Marque déposée ¦ Rekisteröity tavaramerkki ¦ Bejegyzett védjegy
+forme|Marque commerciale ¦ Tavaramerkki ¦ Védjegy
+forme|Supérieur à ¦ Suurempi kuin ¦ Nagyobb mint
+forme|Inférieur à ¦ Pienempi kuin ¦ Kisebb mint
+forme|Multiplication ¦ Kertolasku ¦ Szorzás
+forme|Division ¦ Jakolasku ¦ Osztás
+forme|Lien rompu ¦ Katkennut linkki ¦ Megszakadt hivatkozás
+forme|Sommeil ¦ Uni ¦ Alvás
+forme|Flèche épaisse droite ¦ Paksu nuoli oikealle ¦ Vastag nyíl jobbra
+forme|Flèche épaisse gauche ¦ Paksu nuoli vasemmalle ¦ Vastag nyíl balra
+forme|Flèche épaisse haut ¦ Paksu nuoli ylös ¦ Vastag nyíl fel
+forme|Flèche épaisse bas ¦ Paksu nuoli alas ¦ Vastag nyíl le
+forme|Flèche en coin ¦ Kulmanuoli ¦ Sarokba mutató nyíl
+forme|Flèche pleine ¦ Täytetty nuoli ¦ Teli nyíl
+forme|Flèche dans un rond ¦ Nuoli ympyrässä ¦ Nyíl körben
+forme|Double flèche épaisse ¦ Paksu kaksoisnuoli ¦ Vastag kettős nyíl
+forme|Toutes directions ¦ Kaikki suunnat ¦ Minden irány
+forme|Agrandir ¦ Laajenna ¦ Kinyitás
+forme|Rassembler ¦ Kokoa ¦ Összecsukás
+forme|Double chevron ¦ Kaksoiskulmanuoli ¦ Dupla nyílhegy
+forme|Triple chevron ¦ Kolmoiskulmanuoli ¦ Tripla nyílhegy
+forme|Retour en U ¦ U-käännös takaisin ¦ U-alakú visszafordulás
+forme|Flèche montante ¦ Nouseva nuoli ¦ Emelkedő nyíl
+forme|Flèche descendante ¦ Laskeva nuoli ¦ Csökkenő nyíl
+forme|Retour en haut ¦ Takaisin ylös ¦ Vissza a tetejére
+forme|Rotation ¦ Kierto ¦ Forgatás
+forme|Rotation inverse ¦ Käänteinen kierto ¦ Fordított forgatás
+forme|Revenir ¦ Palaa ¦ Visszalépés
+forme|Recharger ¦ Lataa uudelleen ¦ Újratöltés
+forme|Synchroniser ¦ Synkronoi ¦ Szinkronizálás
+forme|Échange ¦ Vaihto ¦ Csere
+forme|Échange vertical ¦ Pystysuora vaihto ¦ Függőleges csere
+forme|Séparation ¦ Erottaminen ¦ Szétválasztás
+forme|Réunion ¦ Yhdistäminen ¦ Egyesítés
+forme|Embranchement ¦ Haarautuminen ¦ Elágazás
+forme|Fourche ¦ Haarukka ¦ Villa
+forme|Bifurcation ¦ Kahtiajako ¦ Kettéágazás
+forme|Décision ¦ Päätös ¦ Döntés
+forme|Mélange ¦ Sekoitus ¦ Keverés
+forme|Transfert ¦ Siirto ¦ Átvitel
+forme|Suivant ¦ Seuraava ¦ Következő
+forme|Lecture ¦ Toisto ¦ Lejátszás
+forme|Avance rapide ¦ Pikakelaus eteenpäin ¦ Gyors előretekerés
+forme|Pointe à droite ¦ Kärki oikealle ¦ Jobbra mutató hegy
+forme|Navigation ¦ Navigointi ¦ Navigáció
+forme|Flèche haut ¦ Nuoli ylös ¦ Nyíl fel
+forme|Flèche bas ¦ Nuoli alas ¦ Nyíl le
+forme|Flèche gauche ¦ Nuoli vasemmalle ¦ Nyíl balra
+forme|Flèche droite ¦ Nuoli oikealle ¦ Nyíl jobbra
+forme|Flèche haut gauche ¦ Nuoli ylös vasemmalle ¦ Nyíl balra fel
+forme|Flèche haut droite ¦ Nuoli ylös oikealle ¦ Nyíl jobbra fel
+forme|Flèche bas gauche ¦ Nuoli alas vasemmalle ¦ Nyíl balra le
+forme|Flèche bas droite ¦ Nuoli alas oikealle ¦ Nyíl jobbra le
+forme|Flèche pleine haut ¦ Täytetty nuoli ylös ¦ Teli nyíl fel
+forme|Flèche pleine bas ¦ Täytetty nuoli alas ¦ Teli nyíl le
+forme|Flèche pleine gauche ¦ Täytetty nuoli vasemmalle ¦ Teli nyíl balra
+forme|Flèche pleine haut gauche ¦ Täytetty nuoli ylös vasemmalle ¦ Teli nyíl balra fel
+forme|Flèche pleine haut droite ¦ Täytetty nuoli ylös oikealle ¦ Teli nyíl jobbra fel
+forme|Flèche pleine bas gauche ¦ Täytetty nuoli alas vasemmalle ¦ Teli nyíl balra le
+forme|Flèche pleine bas droite ¦ Täytetty nuoli alas oikealle ¦ Teli nyíl jobbra le
+forme|Flèche gauche dans un rond ¦ Nuoli vasemmalle ympyrässä ¦ Balra mutató nyíl körben
+forme|Flèche haut dans un rond ¦ Nuoli ylös ympyrässä ¦ Felfelé mutató nyíl körben
+forme|Flèche bas dans un rond ¦ Nuoli alas ympyrässä ¦ Lefelé mutató nyíl körben
+forme|Double flèche verticale fine ¦ Ohut pystysuora kaksoisnuoli ¦ Vékony függőleges kettős nyíl
+forme|Double flèche diagonale ¦ Vino kaksoisnuoli ¦ Átlós kettős nyíl
+forme|Double flèche diagonale inverse ¦ Käänteinen vino kaksoisnuoli ¦ Fordított átlós kettős nyíl
+forme|Flèche coudée haut gauche ¦ Taittuva nuoli ylös vasemmalle ¦ Megtört nyíl balra fel
+forme|Flèche coudée haut droite ¦ Taittuva nuoli ylös oikealle ¦ Megtört nyíl jobbra fel
+forme|Flèche coudée bas gauche ¦ Taittuva nuoli alas vasemmalle ¦ Megtört nyíl balra le
+forme|Flèche coudée bas droite ¦ Taittuva nuoli alas oikealle ¦ Megtört nyíl jobbra le
+forme|Flèche coudée vers le bas ¦ Alaspäin taittuva nuoli ¦ Lefelé megtört nyíl
+forme|Demi-tour à gauche ¦ U-käännös vasemmalle ¦ Visszafordulás balra
+forme|Demi-tour à droite ¦ U-käännös oikealle ¦ Visszafordulás jobbra
+forme|Réduire ¦ Pienennä ¦ Kicsinyítés
+forme|Étendre ¦ Venytä ¦ Kiterjesztés
+forme|Rapprocher ¦ Tuo lähemmäs ¦ Közelítés
+forme|Écarter ¦ Siirrä erilleen ¦ Széthúzás
+forme|Va-et-vient ¦ Edestakaisin ¦ Oda-vissza
+forme|Flèche d’archer ¦ Jousiammuntanuoli ¦ Íjásznyíl
+forme|Chevron haut ¦ Kulmanuoli ylös ¦ Nyílhegy fel
+forme|Chevron bas ¦ Kulmanuoli alas ¦ Nyílhegy le
+forme|Chevron gauche ¦ Kulmanuoli vasemmalle ¦ Nyílhegy balra
+forme|Chevron droite ¦ Kulmanuoli oikealle ¦ Nyílhegy jobbra
+forme|Double chevron haut ¦ Kaksoiskulmanuoli ylös ¦ Dupla nyílhegy fel
+forme|Double chevron bas ¦ Kaksoiskulmanuoli alas ¦ Dupla nyílhegy le
+forme|Double chevron gauche ¦ Kaksoiskulmanuoli vasemmalle ¦ Dupla nyílhegy balra
+forme|Pointe en haut ¦ Kärki ylös ¦ Hegy fel
+forme|Pointe en bas ¦ Kärki alas ¦ Hegy le
+forme|Pointe à gauche ¦ Kärki vasemmalle ¦ Hegy balra
+forme|Échange fin ¦ Ohut vaihto ¦ Vékony csere
+forme|Échange vertical fin ¦ Ohut pystysuora vaihto ¦ Vékony függőleges csere
+forme|Hausse ¦ Nousu ¦ Emelkedés
+forme|Baisse ¦ Lasku ¦ Csökkenés
+forme|Stable ¦ Vakaa ¦ Stabil
+forme|Annuler ¦ Kumoa ¦ Visszavonás
+forme|Rétablir ¦ Tee uudelleen ¦ Újra
+forme|Répondre ¦ Vastaa ¦ Válasz
+forme|Partager ¦ Jaa ¦ Megosztás
+forme|Actualiser ¦ Päivitä ¦ Frissítés
+forme|Cycle ¦ Kierros ¦ Ciklus
+forme|Répéter ¦ Toista ¦ Ismétlés
+forme|Rotation complète ¦ Täysi kierros ¦ Teljes forgás
+forme|Orbite ¦ Kiertorata ¦ Pálya
+forme|Rotation à gauche ¦ Kierto vasemmalle ¦ Forgatás balra
+forme|Rotation à droite ¦ Kierto oikealle ¦ Forgatás jobbra
+forme|Mélanger ¦ Sekoita ¦ Keverés
+forme|Flèche sortante ¦ Lähtevä nuoli ¦ Kimenő nyíl
+forme|Flèche entrante ¦ Saapuva nuoli ¦ Bejövő nyíl
+forme|Sous-niveau à droite ¦ Alataso oikealle ¦ Alszint jobbra
+forme|Sous-niveau à gauche ¦ Alataso vasemmalle ¦ Alszint balra
+forme|Fusion ¦ Yhdistyminen ¦ Összeolvadás
+forme|Étape ¦ Vaihe ¦ Lépés
+forme|Fusionner ¦ Yhdistä ¦ Egyesítés
+forme|Segment ¦ Jana ¦ Szakasz
+forme|Détour ¦ Kiertotie ¦ Kerülőút
+forme|Connexion ¦ Kirjautuminen ¦ Bejelentkezés
+forme|Entrée ¦ Sisäänkäynti ¦ Bejárat
+forme|Sortie ¦ Uloskäynti ¦ Kijárat
+forme|Sortie de secours ¦ Hätäuloskäynti ¦ Vészkijárat
+forme|Précédent ¦ Edellinen ¦ Előző
+forme|Lecture ronde ¦ Pyöreä toisto ¦ Kerek lejátszás
+forme|Position actuelle ¦ Nykyinen sijainti ¦ Jelenlegi hely
+forme|Main pointeur ¦ Osoittava käsi ¦ Mutató kéz
+forme|Plein écran ¦ Koko näyttö ¦ Teljes képernyő
+forme|Flèche haut ronde ¦ Pyöreä nuoli ylös ¦ Kerek nyíl fel
+forme|Flèche bas ronde ¦ Pyöreä nuoli alas ¦ Kerek nyíl le
+forme|Flèche gauche ronde ¦ Pyöreä nuoli vasemmalle ¦ Kerek nyíl balra
+forme|Flèche droite ronde ¦ Pyöreä nuoli oikealle ¦ Kerek nyíl jobbra
+forme|Chevron gauche rond ¦ Pyöreä kulmanuoli vasemmalle ¦ Kerek nyílhegy balra
+forme|Chevron droite rond ¦ Pyöreä kulmanuoli oikealle ¦ Kerek nyílhegy jobbra
+forme|Rejouer ¦ Toista uudelleen ¦ Újrajátszás
+forme|Renouvellement ¦ Uusiminen ¦ Megújítás
+forme|Télécharger ¦ Lataa ¦ Letöltés
+forme|Envoyer ¦ Lähetä ¦ Feltöltés
+forme|Importer ¦ Tuo ¦ Importálás
+forme|Exporter ¦ Vie ¦ Exportálás
+forme|Arrêt ¦ Pysäytä ¦ Leállítás
+forme|piste ¦ raita ¦ sáv
+forme|Retour rapide ¦ Pikakelaus taaksepäin ¦ Visszatekerés
+forme|Enregistrement ¦ Tallennus ¦ Felvétel
+forme|Gland ¦ Terho ¦ Makk
+forme|trait fin ¦ ohut viiva ¦ vékony vonal
+forme|plein ¦ täytetty ¦ teli
+forme|Carnet d’adresses ¦ Osoitekirja ¦ Címjegyzék
+forme|Répertoire à onglets ¦ Välilehdellinen osoitekirja ¦ Regiszteres címjegyzék
+forme|Tour de contrôle ¦ Lennonjohtotorni ¦ Irányítótorony
+forme|Avion en vol ¦ Lentokone ilmassa ¦ Repülő a levegőben
+forme|Avion qui atterrit ¦ Laskeutuva lentokone ¦ Leszálló repülő
+forme|Avion qui décolle ¦ Nouseva lentokone ¦ Felszálló repülő
+forme|Avion au sol ¦ Lentokone maassa ¦ Repülő a földön
+forme|Avion penché ¦ Kallistunut lentokone ¦ Megdőlt repülő
+forme|Ancre simple ¦ Yksinkertainen ankkuri ¦ Egyszerű horgony
+forme|Angle ¦ Kulma ¦ Szög
+forme|boîte ¦ laatikko ¦ doboz
+forme|Flèche en arc vers la gauche ¦ Kaarinuoli vasemmalle ¦ Íves nyíl balra
+forme|Flèche en arc vers la droite ¦ Kaarinuoli oikealle ¦ Íves nyíl jobbra
+forme|Double flèche courbée ¦ Kaareva kaksoisnuoli ¦ Ívelt kettős nyíl
+forme|haut ¦ ylös ¦ fel
+forme|Flèche courbée ¦ Kaareva nuoli ¦ Ívelt nyíl
+forme|bas ¦ alas ¦ le
+forme|Flèche ronde vers le bas ¦ Pyöreä nuoli alas ¦ Kerek nyíl lefelé
+forme|Flèche ronde vers le bas à gauche ¦ Pyöreä nuoli alas vasemmalle ¦ Kerek nyíl balra lefelé
+forme|Flèche ronde vers le bas à droite ¦ Pyöreä nuoli alas oikealle ¦ Kerek nyíl jobbra lefelé
+forme|Flèche ronde vers la gauche ¦ Pyöreä nuoli vasemmalle ¦ Kerek nyíl balra
+forme|Flèche ronde vers la droite ¦ Pyöreä nuoli oikealle ¦ Kerek nyíl jobbra
+forme|Flèche ronde vers le haut ¦ Pyöreä nuoli ylös ¦ Kerek nyíl felfelé
+forme|Flèche ronde vers le haut à gauche ¦ Pyöreä nuoli ylös vasemmalle ¦ Kerek nyíl balra felfelé
+forme|Flèche ronde vers le haut à droite ¦ Pyöreä nuoli ylös oikealle ¦ Kerek nyíl jobbra felfelé
+forme|Flèche tournante ¦ Pyörivä nuoli ¦ Forgó nyíl
+forme|sens des aiguilles ¦ myötäpäivään ¦ az óramutató járásával egyezően
+forme|sens inverse ¦ vastapäivään ¦ az óramutató járásával ellentétesen
+forme|Flèche vers le bas ¦ Nuoli alaspäin ¦ Nyíl lefelé
+forme|Flèche vers le bas à gauche ¦ Nuoli alas vasemmalle ¦ Nyíl balra lefelé
+forme|Flèche vers le bas à droite ¦ Nuoli alas oikealle ¦ Nyíl jobbra lefelé
+forme|Flèche en équerre ¦ Suorakulmainen nuoli ¦ Derékszögű nyíl
+forme|Flèche en équerre vers la gauche ¦ Suorakulmainen nuoli vasemmalle ¦ Derékszögű nyíl balra
+forme|Flèche en équerre vers la droite ¦ Suorakulmainen nuoli oikealle ¦ Derékszögű nyíl jobbra
+forme|Grosse flèche vers le bas ¦ Iso nuoli alaspäin ¦ Nagy nyíl lefelé
+forme|Grosse flèche vers la gauche ¦ Iso nuoli vasemmalle ¦ Nagy nyíl balra
+forme|Grosse flèche à un trait vers le bas ¦ Iso viivallinen nuoli alaspäin ¦ Nagy nyíl egy vonallal, lefelé
+forme|Grosse flèche à un trait vers la gauche ¦ Iso viivallinen nuoli vasemmalle ¦ Nagy nyíl egy vonallal, balra
+forme|Grosse flèche à un trait vers la droite ¦ Iso viivallinen nuoli oikealle ¦ Nagy nyíl egy vonallal, jobbra
+forme|Grosse flèche à un trait vers le haut ¦ Iso viivallinen nuoli ylöspäin ¦ Nagy nyíl egy vonallal, felfelé
+forme|Grosse flèche à traits vers le bas ¦ Iso moniviivainen nuoli alaspäin ¦ Nagy nyíl vonalakkal, lefelé
+forme|Grosse flèche à traits vers la gauche ¦ Iso moniviivainen nuoli vasemmalle ¦ Nagy nyíl vonalakkal, balra
+forme|Grosse flèche à traits vers la droite ¦ Iso moniviivainen nuoli oikealle ¦ Nagy nyíl vonalakkal, jobbra
+forme|Grosse flèche à traits vers le haut ¦ Iso moniviivainen nuoli ylöspäin ¦ Nagy nyíl vonalakkal, felfelé
+forme|Grosse flèche vers la droite ¦ Iso nuoli oikealle ¦ Nagy nyíl jobbra
+forme|Grosse flèche vers le haut ¦ Iso nuoli ylöspäin ¦ Nagy nyíl felfelé
+forme|Flèche vers la gauche ¦ Nuoli vasemmalle ¦ Nyíl balra
+forme|Flèche jusqu’au trait vers le bas ¦ Nuoli viivaan asti alaspäin ¦ Nyíl vonalig, lefelé
+forme|Flèche jusqu’au trait vers le bas à gauche ¦ Nuoli viivaan asti alas vasemmalle ¦ Nyíl vonalig, balra lefelé
+forme|Flèche jusqu’au trait vers le bas à droite ¦ Nuoli viivaan asti alas oikealle ¦ Nyíl vonalig, jobbra lefelé
+forme|Flèche jusqu’au trait vers la gauche ¦ Nuoli viivaan asti vasemmalle ¦ Nyíl vonalig, balra
+forme|Flèche jusqu’au trait vers la droite ¦ Nuoli viivaan asti oikealle ¦ Nyíl vonalig, jobbra
+forme|Flèche jusqu’au trait vers le haut ¦ Nuoli viivaan asti ylöspäin ¦ Nyíl vonalig, felfelé
+forme|Flèche jusqu’au trait vers le haut à gauche ¦ Nuoli viivaan asti ylös vasemmalle ¦ Nyíl vonalig, balra felfelé
+forme|Flèche jusqu’au trait vers le haut à droite ¦ Nuoli viivaan asti ylös oikealle ¦ Nyíl vonalig, jobbra felfelé
+forme|Flèche vers la droite ¦ Nuoli oikealle ¦ Nyíl jobbra
+forme|Flèche carrée vers le bas ¦ Neliönuoli alaspäin ¦ Négyzetes nyíl lefelé
+forme|Flèche carrée vers le bas à gauche ¦ Neliönuoli alas vasemmalle ¦ Négyzetes nyíl balra lefelé
+forme|Flèche carrée vers le bas à droite ¦ Neliönuoli alas oikealle ¦ Négyzetes nyíl jobbra lefelé
+forme|Flèche carrée vers la gauche ¦ Neliönuoli vasemmalle ¦ Négyzetes nyíl balra
+forme|Flèche carrée vers la droite ¦ Neliönuoli oikealle ¦ Négyzetes nyíl jobbra
+forme|Flèche carrée vers le haut ¦ Neliönuoli ylöspäin ¦ Négyzetes nyíl felfelé
+forme|Flèche carrée vers le haut à gauche ¦ Neliönuoli ylös vasemmalle ¦ Négyzetes nyíl balra felfelé
+forme|Flèche carrée vers le haut à droite ¦ Neliönuoli ylös oikealle ¦ Négyzetes nyíl jobbra felfelé
+forme|Flèche en U ¦ U-nuoli ¦ U alakú nyíl
+forme|Flèche vers le haut ¦ Nuoli ylöspäin ¦ Nyíl felfelé
+forme|Flèche vers le haut à gauche ¦ Nuoli ylös vasemmalle ¦ Nyíl balra felfelé
+forme|Flèche vers le haut à droite ¦ Nuoli ylös oikealle ¦ Nyíl jobbra felfelé
+forme|Flèches tournantes ¦ Pyörivät nuolet ¦ Forgó nyilak
+forme|Flèches haut et bas ¦ Nuolet ylös ja alas ¦ Fel és le mutató nyilak
+forme|Flèches gauche et droite ¦ Nuolet vasemmalle ja oikealle ¦ Balra és jobbra mutató nyilak
+forme|écartées ¦ erillään ¦ széttartó
+forme|Flèches vers le centre ¦ Nuolet keskelle ¦ Középre mutató nyilak
+forme|4 côtés ¦ 4 sivua ¦ 4 oldal
+forme|Flèches vers un trait ¦ Nuolet viivaa kohti ¦ Vonal felé mutató nyilak
+forme|debout ¦ pystyssä ¦ álló
+forme|couché ¦ makaava ¦ fekvő
+forme|Flèches qui se rejoignent ¦ Yhtyvät nuolet ¦ Összetartó nyilak
+forme|Flèches vers l’extérieur ¦ Nuolet ulospäin ¦ Kifelé mutató nyilak
+forme|Flèches qui s’écartent d’un trait ¦ Viivasta poispäin osoittavat nuolet ¦ Vonaltól távolodó nyilak
+forme|Flèches qui se séparent ¦ Erkanevat nuolet ¦ Szétváló nyilak
+forme|Article ¦ Artikkeli ¦ Cikk
+forme|Article illustré ¦ Kuvitettu artikkeli ¦ Illusztrált cikk
+forme|Bâton d’Asclépios ¦ Asklepioksen sauva ¦ Aszklépiosz-bot
+forme|Avocat ¦ Avokado ¦ Avokádó
+forme|fruit ¦ hedelmä ¦ gyümölcs
+forme|Sac simple ¦ Yksinkertainen laukku ¦ Egyszerű táska
+forme|Ballon de baudruche ¦ Ilmapallo ¦ Lufi
+forme|Pansements ¦ Laastarit ¦ Sebtapaszok
+forme|Code-barres ¦ Viivakoodi ¦ Vonalkód
+forme|Barrière de chantier ¦ Työmaa-aita ¦ Építési korlát
+forme|Casquette ¦ Lippalakki ¦ Baseballsapka
+forme|Casque de base-ball ¦ Baseball-kypärä ¦ Baseballsisak
+forme|Pile chargée ¦ Täysi akku ¦ Feltöltött elem
+forme|Pile vide ¦ Tyhjä akku ¦ Lemerült elem
+forme|Ballon de plage ¦ Rantapallo ¦ Strandlabda
+forme|Bonnet ¦ Pipo ¦ Sapka
+forme|Bouteille de bière ¦ Olutpullo ¦ Sörösüveg
+forme|Chope de bière ¦ Oluttuoppi ¦ Söröskorsó
+forme|Clochette ¦ Kello (pieni) ¦ Csengő
+forme|Clochette qui sonne ¦ Soiva kello ¦ Csilingelő csengő
+forme|Ceinture ¦ Vyö ¦ Öv
+forme|Plan d’architecte ¦ Arkkitehdin piirustus ¦ Építészeti terv
+forme|Livre avec marque-page ¦ Kirja ja kirjanmerkki ¦ Könyv könyvjelzővel
+forme|Livre ouvert écrit ¦ Avoin kirja tekstillä ¦ Nyitott könyv szöveggel
+forme|Livre de la personne ¦ Henkilön kirja ¦ A személy könyve
+forme|Marque-page simple ¦ Yksinkertainen kirjanmerkki ¦ Egyszerű könyvjelző
+forme|Marque-pages simples ¦ Yksinkertaiset kirjanmerkit ¦ Egyszerű könyvjelzők
+forme|Botte ¦ Saapas ¦ Csizma
+forme|Boules ¦ Kuulat ¦ Golyók
+forme|pétanque ¦ pétanque ¦ pétanque
+forme|Bol de nourriture ¦ Ruokakuppi ¦ Ételes tál
+forme|Bol fumant ¦ Höyryävä kulho ¦ Gőzölgő tál
+forme|Boule de bowling ¦ Keilapallo ¦ Bowlinggolyó
+forme|Verre de cognac ¦ Konjakkilasi ¦ Konyakos pohár
+forme|Pain ¦ Leipä ¦ Kenyér
+forme|Mallette en métal ¦ Metallisalkku ¦ Fém koffer
+forme|Scarabée ¦ Kovakuoriainen ¦ Bogár
+forme|Immeuble d’appartements ¦ Kerrostalo ¦ Lakóház
+forme|Bureaux ¦ Toimistot ¦ Irodák
+forme|Immeubles ¦ Rakennukset ¦ Épületek
+forme|Téléphérique ¦ Köysirata ¦ Kötélpálya
+forme|Calendrier coché ¦ Valittu kalenteri ¦ Kipipált naptár
+forme|Calendrier avec un jour ¦ Kalenteri ja päivä ¦ Naptár egy nappal
+forme|Calendrier avec des jours ¦ Kalenteri ja päivät ¦ Naptár napokkal
+forme|Calendrier avec un cœur ¦ Kalenteri ja sydän ¦ Naptár szívvel
+forme|Calendrier avec une étoile ¦ Kalenteri ja tähti ¦ Naptár csillaggal
+forme|Calendrier barré ¦ Yliviivattu kalenteri ¦ Áthúzott naptár
+forme|Sonnette de comptoir ¦ Tiskikello ¦ Pultcsengő
+forme|Appareil photo plus ¦ Kamera plus ¦ Fényképezőgép plusz
+forme|Appareil photo tourner ¦ Kamera kierto ¦ Fényképezőgép forgatás
+forme|Appareil photo barré ¦ Yliviivattu kamera ¦ Áthúzott fényképezőgép
+forme|Batterie de voiture ¦ Auton akku ¦ Autóakkumulátor
+forme|Voiture simple ¦ Yksinkertainen auto ¦ Egyszerű autó
+forme|Porte-cartes ¦ Korttikotelo ¦ Kártyatartó
+forme|Cartes ¦ Kortit ¦ Kártyák
+forme|Trois cartes ¦ Kolme korttia ¦ Három kártya
+forme|Double chevron rond vers le bas ¦ Pyöreä kaksoiskulmanuoli alaspäin ¦ Kerek dupla nyílhegy lefelé
+forme|Double chevron rond vers la gauche ¦ Pyöreä kaksoiskulmanuoli vasemmalle ¦ Kerek dupla nyílhegy balra
+forme|Double chevron rond vers la droite ¦ Pyöreä kaksoiskulmanuoli oikealle ¦ Kerek dupla nyílhegy jobbra
+forme|Double chevron rond vers le haut ¦ Pyöreä kaksoiskulmanuoli ylöspäin ¦ Kerek dupla nyílhegy felfelé
+forme|Chevron rond vers le bas ¦ Pyöreä kulmanuoli alaspäin ¦ Kerek nyílhegy lefelé
+forme|Chevron rond vers la gauche ¦ Pyöreä kulmanuoli vasemmalle ¦ Kerek nyílhegy balra
+forme|Chevron rond vers la droite ¦ Pyöreä kulmanuoli oikealle ¦ Kerek nyílhegy jobbra
+forme|Chevron rond vers le haut ¦ Pyöreä kulmanuoli ylöspäin ¦ Kerek nyílhegy felfelé
+forme|Chevrons haut et bas ¦ Kulmanuolet ylös ja alas ¦ Fel és le mutató nyílhegyek
+forme|Double chevron vers le bas ¦ Kaksoiskulmanuoli alaspäin ¦ Dupla nyílhegy lefelé
+forme|Double chevron vers la gauche ¦ Kaksoiskulmanuoli vasemmalle ¦ Dupla nyílhegy balra
+forme|Double chevron vers la droite ¦ Kaksoiskulmanuoli oikealle ¦ Dupla nyílhegy jobbra
+forme|Double chevron vers le haut ¦ Kaksoiskulmanuoli ylöspäin ¦ Dupla nyílhegy felfelé
+forme|Chevron vers le bas ¦ Kulmanuoli alaspäin ¦ Nyílhegy lefelé
+forme|Chevron vers la gauche ¦ Kulmanuoli vasemmalle ¦ Nyílhegy balra
+forme|Chevron jusqu’au trait vers le bas ¦ Kulmanuoli viivaan asti alaspäin ¦ Nyílhegy vonalig, lefelé
+forme|Chevron jusqu’au trait vers la gauche ¦ Kulmanuoli viivaan asti vasemmalle ¦ Nyílhegy vonalig, balra
+forme|Chevron jusqu’au trait vers la droite ¦ Kulmanuoli viivaan asti oikealle ¦ Nyílhegy vonalig, jobbra
+forme|Chevron jusqu’au trait vers le haut ¦ Kulmanuoli viivaan asti ylöspäin ¦ Nyílhegy vonalig, felfelé
+forme|Chevron vers la droite ¦ Kulmanuoli oikealle ¦ Nyílhegy jobbra
+forme|Chevron vers le haut ¦ Kulmanuoli ylöspäin ¦ Nyílhegy felfelé
+forme|Caisse enregistreuse ¦ Kassakone ¦ Pénztárgép
+forme|Cassette audio ¦ C-kasetti ¦ Magnókazetta
+forme|Tour de château ¦ Linnan torni ¦ Vártorony
+forme|Diplôme ¦ Tutkintotodistus ¦ Oklevél
+forme|Tableau noir ¦ Liitutaulu ¦ Iskolai tábla
+forme|Tableau noir simple ¦ Yksinkertainen liitutaulu ¦ Egyszerű iskolai tábla
+forme|Instituteur au tableau ¦ Opettaja taululla ¦ Tanító a táblánál
+forme|Champagne ¦ Samppanja ¦ Pezsgő
+forme|Graphique en barres ¦ Pylväskaavio ¦ Oszlopdiagram
+forme|Courbe ¦ Viivakaavio ¦ Vonaldiagram
+forme|Bulle centrée ¦ Keskitetty kupla ¦ Középre igazított buborék
+forme|points ¦ pisteet ¦ pontok
+forme|texte ¦ teksti ¦ szöveg
+forme|Bulle goutte ¦ Pisarakupla ¦ Csepp alakú buborék
+forme|Deux bulles ¦ Kaksi kuplaa ¦ Két buborék
+forme|Coche ronde ¦ Pyöreä valintamerkki ¦ Kerek pipa
+forme|Grosse coche ¦ Iso valintamerkki ¦ Nagy pipa
+forme|Case cochée débordante ¦ Yli menevä valintaruutu ¦ Kilógó pipás négyzet
+forme|Trinquer ¦ Kilistys ¦ Koccintás
+forme|Toque de cuisinier ¦ Kokin hattu ¦ Szakácssapka
+forme|Cercle en pointillés ¦ Pisteviivaympyrä ¦ Pontozott kör
+forme|Demi-cercle plein ¦ Täytetty puoliympyrä ¦ Teli félkör
+forme|Demi-cercle penché ¦ Kallistunut puoliympyrä ¦ Megdőlt félkör
+forme|Cercle ouvert ¦ Avoin ympyrä ¦ Nyitott kör
+forme|Quatre cercles ¦ Neljä ympyrää ¦ Négy kör
+forme|Trois cercles ¦ Kolme ympyrää ¦ Három kör
+forme|Trois cercles et un plus ¦ Kolme ympyrää ja plus ¦ Három kör és egy plusz
+forme|Porte-bloc ¦ Kirjoitusalusta ¦ Írótábla
+forme|Porte-bloc écrit ¦ Kirjoitusalusta tekstillä ¦ Írótábla szöveggel
+forme|après-midi ¦ iltapäivä ¦ délután
+forme|Horloge en avant ¦ Kello eteenpäin ¦ Óra előre
+forme|Compte à rebours ¦ Lähtölaskenta ¦ Visszaszámlálás
+forme|Horloge en arrière ¦ Kello taaksepäin ¦ Óra hátra
+forme|Heure de la personne ¦ Henkilön aika ¦ A személy ideje
+forme|Nuage flèche en bas ¦ Pilvi ja nuoli alas ¦ Felhő lefelé mutató nyíllal
+forme|Nuage flèche en haut ¦ Pilvi ja nuoli ylös ¦ Felhő felfelé mutató nyíllal
+forme|Nuage coché ¦ Pilvi ja valintamerkki ¦ Felhő pipával
+forme|Éclaircie ¦ Poutapilvi ¦ Felszakadozó felhőzet
+forme|Nuage attention ¦ Pilvi ja varoitus ¦ Felhő figyelmeztetéssel
+forme|Nuage barré ¦ Yliviivattu pilvi ¦ Áthúzott felhő
+forme|Trèfle à quatre feuilles ¦ Neliapila ¦ Négylevelű lóhere
+forme|Grain de café ¦ Kahvipapu ¦ Kávészem
+forme|Pièce de monnaie ¦ Kolikko ¦ Érme
+forme|tranche ¦ syrjä ¦ él
+forme|Pièces de monnaie ¦ Kolikot ¦ Érmék
+forme|Confettis ¦ Konfetti ¦ Konfetti
+forme|Terrain de basket ¦ Koripallokenttä ¦ Kosárlabdapálya
+forme|Chapeau de cow-boy ¦ Cowboyhattu ¦ Cowboykalap
+forme|oiseau ¦ lintu ¦ madár
+forme|Grue de chantier ¦ Rakennusnosturi ¦ Toronydaru
+forme|Viseur simple ¦ Yksinkertainen tähtäin ¦ Egyszerű célkereszt
+forme|Couronne à la croix ¦ Ristillinen kruunu ¦ Keresztes korona
+forme|Couronne simple ¦ Yksinkertainen kruunu ¦ Egyszerű korona
+forme|meuble ¦ huonekalu ¦ bútor
+forme|Ordinateur ¦ Tietokone ¦ Számítógép
+forme|Tablette ¦ Tabletti ¦ Táblagép
+forme|Quatre losanges ¦ Neljä vinoneliötä ¦ Négy rombusz
+forme|Robe ¦ Mekko ¦ Ruha
+forme|Goutte à moitié ¦ Puolikas pisara ¦ Félcsepp
+forme|Goutte simple ¦ Yksinkertainen pisara ¦ Egyszerű csepp
+forme|Œuf fêlé ¦ Haljennut muna ¦ Repedt tojás
+forme|Enveloppe ouverte ¦ Avoin kirjekuori ¦ Nyitott boríték
+forme|Enveloppe simple ¦ Yksinkertainen kirjekuori ¦ Egyszerű boríték
+forme|Enveloppe simple ouverte ¦ Yksinkertainen avoin kirjekuori ¦ Egyszerű nyitott boríték
+forme|Escalier roulant ¦ Liukuportaat ¦ Mozgólépcső
+forme|descente ¦ alas ¦ lefelé
+forme|montée ¦ ylös ¦ felfelé
+forme|Examen ¦ Koe ¦ Vizsga
+forme|Deux yeux ¦ Kaksi silmää ¦ Két szem
+forme|Masque de soin ¦ Kasvonaamio ¦ Arcpakolás
+forme|Ferme ¦ Maatila ¦ Tanya
+forme|Fichier ¦ Tiedosto ¦ Fájl
+forme|Fichier d’archives ¦ Arkistotiedosto ¦ Archív fájl
+forme|Fichier son ¦ Äänitiedosto ¦ Hangfájl
+forme|Fichier image ¦ Kuvatiedosto ¦ Képfájl
+forme|Chercher dans un document ¦ Hae asiakirjasta ¦ Keresés a dokumentumban
+forme|Fichier PDF ¦ PDF-tiedosto ¦ PDF-fájl
+forme|Document écrit ¦ Kirjoitettu asiakirja ¦ Írott dokumentum
+forme|Fichier vidéo ¦ Videotiedosto ¦ Videófájl
+forme|Fichier compressé ¦ Pakattu tiedosto ¦ Tömörített fájl
+forme|Fichiers ¦ Tiedostot ¦ Fájlok
+forme|Scénario ¦ Käsikirjoitus ¦ Forgatókönyv
+forme|Empreinte digitale simple ¦ Yksinkertainen sormenjälki ¦ Egyszerű ujjlenyomat
+forme|Flamme ¦ Liekki ¦ Láng
+forme|Croix de secours ¦ Ensiapuristi ¦ Elsősegély-kereszt
+forme|Trousse de secours ¦ Ensiapulaukku ¦ Elsősegélydoboz
+forme|Poisson simple ¦ Yksinkertainen kala ¦ Egyszerű hal
+forme|Fanion plié ¦ Taitettu viiri ¦ Hajtott zászlócska
+forme|drapeau ¦ lippu ¦ zászló
+forme|Flamme vive ¦ Kirkas liekki ¦ Lobogó láng
+forme|Lampe de poche ¦ Taskulamppu ¦ Zseblámpa
+forme|dos ¦ takaa ¦ hátulnézet
+forme|Flèche de parcours ¦ Reittinuoli ¦ Útvonalnyíl
+forme|Lotus ¦ Lootus ¦ Lótusz
+forme|Dossier simple ¦ Yksinkertainen kansio ¦ Egyszerű mappa
+forme|Dossier de la personne ¦ Henkilön kansio ¦ A személy mappája
+forme|Dossier à l’étoile ¦ Kansio ja tähti ¦ Mappa csillaggal
+forme|Dossier personnel ¦ Henkilökohtainen kansio ¦ Személyes mappa
+forme|Fourchette et couteau ¦ Haarukka ja veitsi ¦ Villa és kés
+forme|Coins de cadre ¦ Kehyksen kulmat ¦ Keretsarkok
+forme|Bidon d’essence ¦ Bensiinikanisteri ¦ Benzineskanna
+forme|Pompe à essence ¦ Bensiinipumppu ¦ Benzinkút
+forme|Jauge ¦ Mittari ¦ Mérőóra
+forme|Engrenage fin ¦ Ohut hammaspyörä ¦ Vékony fogaskerék
+forme|Engrenage à six dents ¦ Kuusihampainen hammaspyörä ¦ Hatfogú fogaskerék
+forme|Symbole femme ¦ Naisen symboli ¦ Női szimbólum
+forme|Symbole intersexe ¦ Intersukupuolisuuden symboli ¦ Interszex szimbólum
+forme|Symbole homme ¦ Miehen symboli ¦ Férfi szimbólum
+forme|Symbole neutre ¦ Neutraali symboli ¦ Semleges szimbólum
+forme|Symbole transgenre ¦ Transsukupuolisuuden symboli ¦ Transznemű szimbólum
+forme|Europe ¦ Eurooppa ¦ Európa
+forme|Afrique ¦ Afrikka ¦ Afrika
+forme|Amériques ¦ Amerikat ¦ Amerika
+forme|Globe simple ¦ Yksinkertainen maapallo ¦ Egyszerű földgömb
+forme|Globe terrestre sur pied ¦ Karttapallo jalustalla ¦ Földgömb állványon
+forme|Lunettes de natation ¦ Uimalasit ¦ Úszószemüveg
+forme|Toque de diplômé ¦ Ylioppilaslakki ¦ Diplomás kalap
+forme|Épis de blé ¦ Vehnän tähkät ¦ Búzakalászok
+forme|Réseau de points ¦ Pisteverkko ¦ Pontháló
+forme|Grille de quatre ¦ Neljän ruudukko ¦ Négyes rács
+forme|Grille de neuf ¦ Yhdeksän ruudukko ¦ Kilences rács
+forme|Main et pièces ¦ Käsi ja kolikot ¦ Kéz és érmék
+forme|Main et œil ¦ Käsi ja silmä ¦ Kéz és szem
+forme|Poing ¦ Nyrkki ¦ Ököl
+forme|Main qui attrape ¦ Tarttuva käsi ¦ Megragadó kéz
+forme|Paume ¦ Kämmen ¦ Tenyér
+forme|Signe de paix ¦ Rauhanmerkki ¦ Békejel
+forme|Main qui montre ¦ Osoittava käsi ¦ Mutató kéz
+forme|Savon liquide ¦ Nestesaippua ¦ Folyékony szappan
+forme|Sac à main simple ¦ Yksinkertainen käsilaukku ¦ Egyszerű kézitáska
+forme|Phares ¦ Ajovalot ¦ Fényszórók
+forme|Casque micro ¦ Mikrofonikuulokkeet ¦ Headset
+forme|Cœur droit ¦ Suora sydän ¦ Egyenes szív
+forme|Cœur droit brisé ¦ Suora särkynyt sydän ¦ Egyenes összetört szív
+forme|Surligneur ¦ Korostuskynä ¦ Szövegkiemelő
+forme|Hockey ¦ Jääkiekko ¦ Jégkorong
+forme|Sweat à capuche ¦ Huppari ¦ Kapucnis pulóver
+forme|début ¦ alku ¦ eleje
+forme|fin ¦ loppu ¦ vége
+forme|milieu ¦ keskikohta ¦ közepe
+forme|Sablier simple ¦ Yksinkertainen tiimalasi ¦ Egyszerű homokóra
+forme|Maison au trait ¦ Talon ääriviiva ¦ Körvonalas ház
+forme|Maison simple ¦ Yksinkertainen talo ¦ Egyszerű ház
+forme|Badge ¦ Merkki ¦ Kitűző
+forme|Image ¦ Kuva ¦ Kép
+forme|Images ¦ Kuvat ¦ Képek
+forme|Facture ¦ Lasku ¦ Számla
+forme|Bocal ¦ Purkki ¦ Befőttesüveg
+forme|Bocal étiqueté ¦ Nimetty purkki ¦ Címkés befőttesüveg
+forme|Jeep ¦ Jeeppi ¦ Terepjáró
+forme|Clavier ¦ Näppäimistö ¦ Billentyűzet
+forme|Trou de serrure ¦ Avaimenreikä ¦ Kulcslyuk
+forme|Échelle simple ¦ Yksinkertaiset tikkaat ¦ Egyszerű létra
+forme|Suspension ¦ Riippuvalaisin ¦ Függőlámpa
+forme|Ordinateur portable ¦ Kannettava tietokone ¦ Laptop
+forme|Bouée ¦ Pelastusrengas ¦ Mentőöv
+forme|Ampoule à filament ¦ Hehkulamppu ¦ Izzószálas villanykörte
+forme|Liste ¦ Lista ¦ Lista
+forme|Liste de favoris ¦ Suosikkilista ¦ Kedvencek listája
+forme|Cadenas fermé ¦ Suljettu riippulukko ¦ Zárt lakat
+forme|Cadenas à clé ¦ Riippulukko ja avain ¦ Lakat kulccsal
+forme|Casiers ¦ Säilytyslokerot ¦ Öltözőszekrények
+forme|Aimant droit ¦ Sauvamagneetti ¦ Rúdmágnes
+forme|Repère sur la carte ¦ Karttamerkki ¦ Térképjelölő
+forme|Repère et zone ¦ Merkki ja alue ¦ Jelölő és terület
+forme|Repère au sol ¦ Maamerkki ¦ Földi jelölő
+forme|Carte dépliée ¦ Avattu kartta ¦ Kihajtott térkép
+forme|Masque joyeux ¦ Iloinen naamio ¦ Vidám maszk
+forme|Masque triste ¦ Surullinen naamio ¦ Szomorú maszk
+forme|Médaille militaire ¦ Sotilasmitali ¦ Katonai érem
+forme|Porte-voix ¦ Megafoni ¦ Megafon
+forme|Porte-voix simple ¦ Yksinkertainen megafoni ¦ Egyszerű megafon
+forme|Météore ¦ Meteori ¦ Meteor
+forme|Micro ¦ Mikki ¦ Mikrofon
+forme|Micro de scène ¦ Lavamikrofoni ¦ Színpadi mikrofon
+forme|Moins carré ¦ Neliön miinus ¦ Négyzetes mínusz
+forme|Billet ondulé ¦ Aaltoileva seteli ¦ Hullámos bankjegy
+forme|Écran ¦ Näyttö ¦ Képernyő
+forme|Lune et étoiles ¦ Kuu ja tähdet ¦ Hold és csillagok
+forme|Mobylette ¦ Mopo ¦ Moped
+forme|de face ¦ edestä ¦ elölnézet
+forme|Souris ¦ Hiiri ¦ Egér
+forme|ordinateur ¦ tietokone ¦ számítógép
+forme|Note simple ¦ Yksinkertainen nuotti ¦ Egyszerű hangjegy
+forme|Notes de musique ¦ Nuotit ¦ Hangjegyek
+forme|Notes moins ¦ Nuotit miinus ¦ Hangjegyek mínusz
+forme|Notes plus ¦ Nuotit plus ¦ Hangjegyek plusz
+forme|Notes simples ¦ Yksinkertaiset nuotit ¦ Egyszerű hangjegyek
+forme|Flèche de navigation ¦ Navigointinuoli ¦ Navigációs nyíl
+forme|Aiguille à coudre ¦ Ompeluneula ¦ Varrótű
+forme|Coupure de presse ¦ Lehtileike ¦ Újságkivágás
+forme|Note ¦ Muistiinpano ¦ Jegyzet
+forme|Note vierge ¦ Tyhjä muistiinpano ¦ Üres jegyzet
+forme|Note et crayon ¦ Muistiinpano ja lyijykynä ¦ Jegyzet és ceruza
+forme|Bloc-notes ¦ Muistilehtiö ¦ Jegyzettömb
+forme|Fauteuil de bureau ¦ Työtuoli ¦ Irodai szék
+forme|Onigiri ¦ Onigiri ¦ Onigiri
+forme|Orange ¦ Appelsiini ¦ Narancs
+forme|Tranche d’orange ¦ Appelsiinilohko ¦ Narancsszelet
+forme|Four ¦ Uuni ¦ Sütő
+forme|Brosse de peintre ¦ Maalarin sivellin ¦ Ecset
+forme|Palette ¦ Paletti ¦ Paletta
+forme|Pantalon ¦ Housut ¦ Nadrág
+forme|Avion en papier ¦ Paperilennokki ¦ Papírrepülő
+forme|Avion en papier penché ¦ Kallistunut paperilennokki ¦ Megdőlt papírrepülő
+forme|Trombone couché ¦ Vaakasuora paperiliitin ¦ Fekvő gemkapocs
+forme|Pied-de-mouche ¦ Kappalemerkki ¦ Bekezdésjel
+forme|Parc ¦ Puisto ¦ Park
+forme|Chemin ¦ Polku ¦ Ösvény
+forme|Empreinte de patte ¦ Tassunjälki ¦ Mancsnyom
+forme|Symbole de paix ¦ Rauhan symboli ¦ Békeszimbólum
+forme|Plume de stylo ¦ Kynänterä ¦ Tollhegy
+forme|Crayon simple ¦ Yksinkertainen lyijykynä ¦ Egyszerű ceruza
+forme|Poivron ¦ Paprika ¦ Paprika
+forme|Personne bras ouverts ¦ Henkilö kädet levitettyinä ¦ Tárt karú személy
+forme|Personne simple ¦ Yksinkertainen henkilö ¦ Egyszerű személy
+forme|Personne dans un rond ¦ Henkilö ympyrässä ¦ Személy körben
+forme|Surfeur des neiges ¦ Lumilautailija ¦ Snowboardos
+forme|Tai-chi ¦ Taiji ¦ Tajcsi
+forme|Lanceur ¦ Syöttäjä ¦ Dobójátékos
+forme|Téléphone qui sonne ¦ Soiva puhelin ¦ Csörgő telefon
+forme|Clavier de piano ¦ Pianon koskettimisto ¦ Zongorabillentyűzet
+forme|Table de pique-nique ¦ Piknikpöytä ¦ Piknikasztal
+forme|Verre à bière ¦ Olutlasi ¦ Söröspohár
+forme|Pipe ¦ Piippu ¦ Pipa
+forme|Planète ¦ Planeetta ¦ Bolygó
+forme|Lecture-pause ¦ Toisto-tauko ¦ Lejátszás-szünet
+forme|Liste de lecture ¦ Soittolista ¦ Lejátszási lista
+forme|Prise électrique ¦ Pistorasia ¦ Konnektor
+forme|Fiches électriques ¦ Pistokkeet ¦ Villásdugók
+forme|Plus carré ¦ Neliön plus ¦ Négyzetes plusz
+forme|Jeton de jeu ¦ Pelimerkki ¦ Játékzseton
+forme|Voiture de police ¦ Poliisiauto ¦ Rendőrautó
+forme|Polygone ¦ Monikulmio ¦ Sokszög
+forme|Plante en pot ¦ Ruukkukasvi ¦ Cserepes növény
+forme|Marche-arrêt ¦ Virta päälle/pois ¦ Be-ki
+forme|Tableau de présentation ¦ Esitystaulu ¦ Prezentációs tábla
+forme|Punaise simple ¦ Yksinkertainen nasta ¦ Egyszerű rajzszög
+forme|Pièce de puzzle ¦ Palapelin pala ¦ Kirakódarab
+forme|Guillemets ¦ Lainausmerkit ¦ Idézőjelek
+forme|Raquette ¦ Maila ¦ Ütő
+forme|Poste de radio ¦ Radio ¦ Rádiókészülék
+forme|Arc-en-ciel et nuage ¦ Sateenkaari ja pilvi ¦ Szivárvány és felhő
+forme|Enregistrer ¦ Tallenna ¦ Mentés
+forme|Rectangle en pointillés ¦ Pisteviivasuorakulmio ¦ Pontozott téglalap
+forme|Fusée au décollage ¦ Nouseva raketti ¦ Felszálló rakéta
+forme|Sceau dentelé ¦ Hammastettu sinetti ¦ Fogazott pecsét
+forme|Siège ¦ Istuin ¦ Ülés
+forme|grosse flèche ¦ iso nuoli ¦ nagy nyíl
+forme|Écu simple ¦ Yksinkertainen vaakunakilpi ¦ Egyszerű címerpajzs
+forme|Écu coché ¦ Vaakunakilpi ja valintamerkki ¦ Címerpajzs pipával
+forme|Écu écartelé ¦ Neljään osaan jaettu kilpi ¦ Négyelt pajzs
+forme|Écu au chevron ¦ Kilpi ja kattoviiste ¦ Pajzs ékkel
+forme|Écu à la croix ¦ Kilpi ja risti ¦ Pajzs kereszttel
+forme|Écu à la barre ¦ Kilpi ja vasen vinopalkki ¦ Pajzs balharántpólyával
+forme|Écu à l’étoile ¦ Kilpi ja tähti ¦ Pajzs csillaggal
+forme|Écu au point d’exclamation ¦ Kilpi ja huutomerkki ¦ Pajzs felkiáltójellel
+forme|Conteneur ¦ Kontti ¦ Konténer
+forme|Chemise pliée ¦ Taiteltu paita ¦ Összehajtott ing
+forme|Sac de courses ouvert ¦ Avoin ostoskassi ¦ Nyitott bevásárlótáska
+forme|Chariot simple ¦ Yksinkertainen ostoskärry ¦ Egyszerű bevásárlókocsi
+forme|Crevette ¦ Katkarapu ¦ Garnélarák
+forme|Sigma ¦ Sigma ¦ Szigma
+forme|Panneau indicateur ¦ Opaste ¦ Útjelző tábla
+forme|Gyrophare ¦ Vilkkuva valo ¦ Villogó
+forme|Diaporama ¦ Diaesitys ¦ Diavetítés
+forme|Visage en colère ¦ Vihaiset kasvot ¦ Dühös arc
+forme|Visage sans expression ¦ Ilmeettömät kasvot ¦ Kifejezéstelen arc
+forme|Visage blasé ¦ Kyllästyneet kasvot ¦ Unott arc
+forme|Visage qui fond ¦ Sulavat kasvot ¦ Olvadó arc
+forme|Visage nerveux ¦ Hermostuneet kasvot ¦ Ideges arc
+forme|Visage triste ¦ Surulliset kasvot ¦ Szomorú arc
+forme|Visage KO ¦ Tyrmätyt kasvot ¦ Kiütött arc
+forme|chaussure ¦ kenkä ¦ cipő
+forme|Basket en marche ¦ Kävelevä lenkkari ¦ Lépő sportcipő
+forme|Flocon de neige ¦ Lumihiutale ¦ Hópehely
+forme|Ballon de foot ¦ Jalkapallo ¦ Focilabda
+forme|Chaussette ¦ Sukka ¦ Zokni
+forme|Étincelle ¦ Kipinä ¦ Szikra
+forme|Haut-parleur ¦ Kaiutin ¦ Hangszóró
+forme|Spirale ¦ Spiraali ¦ Spirál
+forme|Carré à moitié ¦ Puolikas neliö ¦ Félnégyzet
+forme|Quatre carrés ¦ Neljä neliötä ¦ Négy négyzet
+forme|Étoile à quatre branches ¦ Nelisakarainen tähti ¦ Négyágú csillag
+forme|Marches ¦ Portaat ¦ Lépcsőfokok
+forme|carré ¦ neliö ¦ négyzet
+forme|Stratégie ¦ Strategia ¦ Stratégia
+forme|Élève ¦ Oppilas ¦ Tanuló
+forme|Valise à roulettes ¦ Pyörillä kulkeva matkalaukku ¦ Gurulós bőrönd
+forme|Valise simple ¦ Yksinkertainen matkalaukku ¦ Egyszerű bőrönd
+forme|Soleil voilé ¦ Utuinen aurinko ¦ Fátyolos nap
+forme|Lever de soleil ¦ Auringonnousu ¦ Napfelkelte
+forme|Seringue ¦ Ruisku ¦ Fecskendő
+forme|Tee-shirt ¦ T-paita ¦ Póló
+forme|grille ¦ ruudukko ¦ rács
+forme|Étiquette en chevron ¦ Kulmikas tunniste ¦ Csúcsos címke
+forme|Étiquette simple ¦ Yksinkertainen tunniste ¦ Egyszerű címke
+forme|Sachet de thé ¦ Teepussi ¦ Teafilter
+forme|Thermomètre froid ¦ Kylmä lämpömittari ¦ Hideg hőmérő
+forme|Thermomètre chaud ¦ Kuuma lämpömittari ¦ Meleg hőmérő
+forme|Thermomètre simple ¦ Yksinkertainen lämpömittari ¦ Egyszerű hőmérő
+forme|Pouce en bas ¦ Peukalo alas ¦ Hüvelykujj le
+forme|Pouce en haut ¦ Peukalo ylös ¦ Hüvelykujj fel
+forme|Billet d’entrée ¦ Pääsylippu ¦ Belépőjegy
+forme|Chronomètre ¦ Sekuntikello ¦ Stopperóra
+forme|Pot à pourboires ¦ Tippipurkki ¦ Borravalós üveg
+forme|Tipi ¦ Tiipii ¦ Indián sátor
+forme|Cabas ¦ Kangaskassi ¦ Vászontáska
+forme|Cabas simple ¦ Yksinkertainen kangaskassi ¦ Egyszerű vászontáska
+forme|Serviette ¦ Pyyhe ¦ Törölköző
+forme|Cône de chantier ¦ Liikennekartio ¦ Közlekedési bója
+forme|Panneau routier ¦ Liikennemerkki ¦ Közlekedési tábla
+forme|Train régional ¦ Taajamajuna ¦ Regionális vonat
+forme|Train simple ¦ Yksinkertainen juna ¦ Egyszerű vonat
+forme|Traduire ¦ Käännä ¦ Fordítás
+forme|Poubelle simple ¦ Yksinkertainen roskakori ¦ Egyszerű szemetes
+forme|Plateau ¦ Tarjotin ¦ Tálca
+forme|Courbe qui baisse ¦ Laskeva käyrä ¦ Csökkenő görbe
+forme|Courbe qui monte ¦ Nouseva käyrä ¦ Emelkedő görbe
+forme|Triangle en pointillés ¦ Pisteviivakolmio ¦ Pontozott háromszög
+forme|chariot ¦ kärry ¦ kocsi
+forme|Chariot à bagages ¦ Matkatavarakärry ¦ Poggyászkocsi
+forme|Parapluie simple ¦ Yksinkertainen sateenvarjo ¦ Egyszerű esernyő
+forme|buste ¦ rintakuva ¦ mellkép
+forme|Personne vérifiée ¦ Vahvistettu henkilö ¦ Ellenőrzött személy
+forme|Personne moins ¦ Henkilö miinus ¦ Személy mínusz
+forme|Personne plus ¦ Henkilö plus ¦ Személy plusz
+forme|Liste de personnes ¦ Henkilölista ¦ Személyek listája
+forme|Personne dans un carré ¦ Henkilö neliössä ¦ Személy négyzetben
+forme|Quatre personnes ¦ Neljä henkilöä ¦ Négy személy
+forme|Trois personnes ¦ Kolme henkilöä ¦ Három személy
+forme|Vidéo ¦ Video ¦ Videó
+forme|Caméra ¦ Videokamera ¦ Videókamera
+forme|Disque vinyle ¦ Vinyylilevy ¦ Bakelitlemez
+forme|Mur de briques ¦ Tiiliseinä ¦ Téglafal
+forme|triangle ¦ kolmio ¦ háromszög
+forme|losange ¦ vinoneliö ¦ rombusz
+forme|octogone ¦ kahdeksankulmio ¦ nyolcszög
+forme|Onde ¦ Aalto ¦ Hullám
+forme|Son ¦ Ääni ¦ Hang
+forme|onde ¦ aalto ¦ hullám
+forme|Fauteuil roulant en mouvement ¦ Liikkuva pyörätuoli ¦ Mozgó kerekesszék
+forme|Wi-Fi ¦ Wi-Fi ¦ Wi-Fi
+forme|Clé plate ¦ Kiintoavain ¦ Villáskulcs
+forme|Pelote de laine ¦ Lankakerä ¦ Gombolyag
+forme|seule ¦ yksin ¦ egyedül
+forme|seul ¦ yksin ¦ egyedül
+forme|Lettre {x} minuscule ¦ Pieni kirjain {x} ¦ Kis {x} betű
+forme|Point ¦ Piste ¦ Pont
+forme|Virgule ¦ Pilkku ¦ Vessző
+forme|Point-virgule ¦ Puolipiste ¦ Pontosvessző
+forme|Deux-points ¦ Kaksoispiste ¦ Kettőspont
+forme|Point d’exclamation renversé ¦ Ylösalainen huutomerkki ¦ Fordított felkiáltójel
+forme|Point d’interrogation renversé ¦ Ylösalainen kysymysmerkki ¦ Fordított kérdőjel
+forme|Apostrophe ¦ Heittomerkki ¦ Aposztróf
+forme|Guillemet droit ¦ Suora lainausmerkki ¦ Egyenes idézőjel
+forme|Guillemet ouvrant ¦ Alkulainausmerkki ¦ Nyitó idézőjel
+forme|Parenthèse ouvrante ¦ Alkusulje ¦ Nyitó zárójel
+forme|Parenthèse fermante ¦ Loppusulje ¦ Záró zárójel
+forme|Crochet ouvrant ¦ Alkuhakasulje ¦ Nyitó szögletes zárójel
+forme|Crochet fermant ¦ Loppuhakasulje ¦ Záró szögletes zárójel
+forme|Trait d’union ¦ Yhdysmerkki ¦ Kötőjel
+forme|Tiret ¦ Ajatusviiva ¦ Gondolatjel
+forme|et ¦ ja ¦ és
+forme|numéro ¦ numero ¦ szám
+forme|Pour cent ¦ Prosentti ¦ Százalék
+forme|naissance ¦ syntymä ¦ születés
+forme|Barre oblique ¦ Kauttaviiva ¦ Perjel
+forme|Paragraphe ¦ Pykälämerkki ¦ Paragrafusjel
+forme|Degré ¦ Aste ¦ Fok
+forme|naissance ° ¦ syntymä ° ¦ születés °
+forme|décès † ¦ kuolema † ¦ halál †
+forme|Double croix ¦ Kaksoisristi ¦ Kettős kereszt
+forme|Numéro ¦ Numeromerkki ¦ Számjel
+forme|Nombre {x} ¦ Luku {x} ¦ {x} szám
+forme|Signe de naissance ¦ Syntymän merkki ¦ Születés jele
+forme|Étoile de naissance ¦ Syntymän tähti ¦ Születés csillaga
+forme|Croix de décès ¦ Kuoleman risti ¦ Halál keresztje
+forme|Signe du mariage ¦ Avioliiton merkki ¦ Házasság jele
+forme|Signe du divorce ¦ Avioeron merkki ¦ Válás jele
+forme|Union libre ¦ Avoliitto ¦ Élettársi kapcsolat
+forme|mariage ¦ avioliitto ¦ házasság
+forme|inhumation ¦ hautaus ¦ temetés
+forme|Urne ¦ Uurna ¦ Urna
+forme|crémation ¦ tuhkaus ¦ hamvasztás
+forme|mort au combat ¦ kaatunut taistelussa ¦ hősi halott
+forme|Fleuron ¦ Kukkakoriste ¦ Virágdísz
+forme|vers la gauche ¦ vasemmalle ¦ balra
+forme|Feuille de vigne ¦ Viinilehti ¦ Szőlőlevél
+forme|ornement ¦ koriste ¦ díszítés
+forme|Croix ombrée ¦ Varjostettu risti ¦ Árnyékolt kereszt
+forme|Croix à contour ¦ Ääriviivaristi ¦ Körvonalas kereszt
+forme|Chrisme ¦ Kristusmonogrammi ¦ Krisztus-monogram
+forme|Croix de Jérusalem ¦ Jerusalemin risti ¦ Jeruzsálemi kereszt
+forme|Ankh ¦ Ankh ¦ Ankh
+forme|croix ansée ¦ korvallinen risti ¦ füles kereszt
+forme|Symbole de Farsi ¦ Farsi-symboli ¦ Fárszi szimbólum
+forme|Croix pattée à contour ¦ Ääriviivainen tassuristi ¦ Körvonalas talpas kereszt
+forme|Croix grecque épaisse ¦ Paksu kreikkalainen risti ¦ Vastag görög kereszt
+forme|Croix à centre ouvert ¦ Risti, jonka keskusta on avoin ¦ Nyitott közepű kereszt
+forme|Croix à centre rond ¦ Risti, jonka keskusta on pyöreä ¦ Kerek közepű kereszt
+forme|Reine ¦ Kuningatar ¦ Királynő
+forme|Marteau et pic ¦ Vasara ja hakku ¦ Kalapács és csákány
+forme|justice ¦ oikeus ¦ igazság
+forme|Bâton d’Esculape ¦ Asklepioksen sauva ¦ Aszklépiosz-bot
+forme|Alambic ¦ Tislauslaite ¦ Lepárlólombik
+forme|Roue dentée ¦ Hammaspyörä ¦ Fogaskerék
+forme|Caducée d’Hermès ¦ Hermeksen sauva ¦ Hermész-bot
+forme|Caducée ¦ Kaduceus ¦ Caduceus
+forme|Main qui écrit ¦ Kirjoittava käsi ¦ Író kéz
+forme|note ¦ nuotti ¦ hangjegy
+forme|Deux croches ¦ Kaksi kahdeksasosanuottia ¦ Két nyolcadhang
+forme|Doubles croches ¦ Kuudestoistaosanuotit ¦ Tizenhatodhangok
+forme|Dé un ¦ Noppa: yksi ¦ Kocka: egy
+forme|Dé deux ¦ Noppa: kaksi ¦ Kocka: kettő
+forme|Dé trois ¦ Noppa kolme ¦ Dobókocka hármas
+forme|Dé quatre ¦ Noppa neljä ¦ Dobókocka négyes
+forme|Dé cinq ¦ Noppa viisi ¦ Dobókocka ötös
+forme|Dé six ¦ Noppa kuusi ¦ Dobókocka hatos
+forme|Comète ¦ Komeetta ¦ Üstökös
+forme|Soleil à rayons ¦ Säteilevä aurinko ¦ Sugaras nap
+forme|Flocon ciselé ¦ Kaiverrettu lumihiutale ¦ Áttört hópehely
+forme|Flocon épais ¦ Paksu lumihiutale ¦ Vastag hópehely
+forme|Trèfle irlandais ¦ Irlantilainen apila ¦ Ír lóhere
+forme|Fleur à cinq pétales ¦ Viisiterälehtinen kukka ¦ Ötszirmú virág
+forme|Fleur ornée ¦ Koristeellinen kukka ¦ Díszes virág
+forme|Fleur étoilée ¦ Tähtikukka ¦ Csillagvirág
+forme|Fleur à six pétales ¦ Kuusiterälehtinen kukka ¦ Hatszirmú virág
+forme|Fleur en goutte ¦ Pisaranmuotoinen kukka ¦ Csepp alakú virág
+forme|Étoile pleine ¦ Täytetty tähti ¦ Teli csillag
+forme|Étoile vide ¦ Tyhjä tähti ¦ Üres csillag
+forme|Étoile à quatre pointes ¦ Nelisakarainen tähti ¦ Négyágú csillag
+forme|Étoile à contour ¦ Ääriviivatähti ¦ Körvonalas csillag
+forme|Étoile dans un rond ¦ Tähti ympyrässä ¦ Csillag körben
+forme|Étoile à centre ouvert ¦ Tähti, jossa avoin keskusta ¦ Nyitott közepű csillag
+forme|Étoile à centre noir ¦ Tähti, jossa musta keskusta ¦ Fekete közepű csillag
+forme|Étoile ombrée ¦ Varjostettu tähti ¦ Árnyékolt csillag
+forme|Étoile en hélice ¦ Potkuritähti ¦ Légcsavaros csillag
+forme|Étoile en relief ¦ Kohokuvioitu tähti ¦ Dombornyomott csillag
+forme|Astérisque épais ¦ Paksu asteriski ¦ Vastag csillagjel
+forme|Astérisque à centre ouvert ¦ Asteriski, jossa avoin keskusta ¦ Nyitott közepű csillagjel
+forme|Astérisque à huit branches ¦ Kahdeksanhaarainen asteriski ¦ Nyolcágú csillagjel
+forme|Étoile à huit branches ¦ Kahdeksansakarainen tähti ¦ Nyolcágú csillag
+forme|Étoile tourbillon ¦ Pyörretähti ¦ Örvénylő csillag
+forme|Étoile à six branches ¦ Kuusisakarainen tähti ¦ Hatágú csillag
+forme|Étoile à huit branches fine ¦ Ohut kahdeksansakarainen tähti ¦ Vékony nyolcágú csillag
+forme|Étoile à huit branches épaisse ¦ Paksu kahdeksansakarainen tähti ¦ Vastag nyolcágú csillag
+forme|Étoile à douze branches ¦ Kaksitoistasakarainen tähti ¦ Tizenkétágú csillag
+forme|Étoile à seize branches ¦ Kuusitoistasakarainen tähti ¦ Tizenhatágú csillag
+forme|Astérisque en gouttes ¦ Pisara-asteriski ¦ Cseppes csillagjel
+forme|Soleil rond ¦ Pyöreä aurinko ¦ Kerek nap
+forme|Trois astérisques ¦ Kolme asteriskia ¦ Három csillagjel
+forme|Main qui montre à droite ¦ Oikealle osoittava käsi ¦ Jobbra mutató kéz
+forme|Main qui montre à gauche ¦ Vasemmalle osoittava käsi ¦ Balra mutató kéz
+forme|Main qui montre en haut ¦ Ylös osoittava käsi ¦ Felfelé mutató kéz
+forme|Main qui montre en bas ¦ Alas osoittava käsi ¦ Lefelé mutató kéz
+forme|deux doigts ¦ kaksi sormea ¦ két ujj
+forme|Sourire ¦ Hymy ¦ Mosoly
+forme|Sourire plein ¦ Täytetty hymy ¦ Teli mosoly
+forme|Tristesse ¦ Suru ¦ Szomorúság
+forme|Cœur penché ¦ Kallistettu sydän ¦ Döntött szív
+forme|Haute tension ¦ Suurjännite ¦ Nagyfeszültség
+forme|Tasse fumante ¦ Höyryävä kuppi ¦ Gőzölgő csésze
+forme|Source chaude ¦ Kuuma lähde ¦ Hőforrás
+forme|Coche fine ¦ Ohut valintamerkki ¦ Vékony pipa
+forme|Croix tracée ¦ Piirretty risti ¦ Rajzolt x-jel
+forme|Croix tracée épaisse ¦ Paksu piirretty risti ¦ Vastag rajzolt x-jel
+forme|Losange à quatre pointes ¦ Nelisakarainen vinoneliö ¦ Négyágú rombusz
+forme|Marque de référence ¦ Viitemerkki ¦ Hivatkozási jel
+forme|Marque ¦ Merkki ¦ Jel
+forme|Plus dans un rond ¦ Plus ympyrässä ¦ Plusz körben
+forme|Croix dans un rond ¦ Risti ympyrässä ¦ X körben
+forme|Point dans un rond ¦ Piste ympyrässä ¦ Pont körben
+forme|Rond dans un rond ¦ Ympyrä ympyrässä ¦ Kör a körben
+forme|Rond à moitié ¦ Puoliksi täytetty ympyrä ¦ Félig kitöltött kör
+forme|Rond au quart ¦ Neljännekseltä täytetty ympyrä ¦ Negyedig kitöltött kör
+forme|Rond aux trois quarts ¦ Kolme neljännestä täytetty ympyrä ¦ Háromnegyedig kitöltött kör
+forme|astronomie ¦ tähtitiede ¦ csillagászat
+forme|Premier croissant ¦ Kasvava kuunsirppi ¦ Növekvő holdsarló
+forme|Dernier croissant ¦ Vähenevä kuunsirppi ¦ Fogyó holdsarló
+forme|Jupiter ¦ Jupiter ¦ Jupiter
+forme|Saturne ¦ Saturnus ¦ Szaturnusz
+forme|Mercure ¦ Merkurius ¦ Merkúr
+forme|Écu français ¦ Ranskalainen kilpi ¦ Francia pajzs
+forme|Écu ancien ¦ Vanha kilpi ¦ Régi pajzs
+forme|Écu espagnol ¦ Espanjalainen kilpi ¦ Spanyol pajzs
+forme|Écu en losange ¦ Vinoneliön muotoinen kilpi ¦ Rombusz alakú pajzs
+forme|dames ¦ naiset ¦ hölgyek
+forme|Écu ovale ¦ Soikea kilpi ¦ Ovális pajzs
+forme|ecclésiastique ¦ kirkollinen ¦ egyházi
+forme|Écu rond ¦ Pyöreä kilpi ¦ Kerek pajzs
+forme|Bannière carrée ¦ Neliönmuotoinen lippu ¦ Négyzetes zászló
+forme|coupé en deux debout ¦ jaettu kahtia pystysuunnassa ¦ függőlegesen kettéosztva
+forme|Écu coupé ¦ Vaakajaettu kilpi ¦ Vízszintesen vágott pajzs
+forme|en deux couché ¦ kahtia vaakasuunnassa ¦ vízszintesen kettéosztva
+forme|Écu tranché ¦ Vinojaettu kilpi ¦ Jobbról ferdén osztott pajzs
+forme|en diagonale ¦ vinottain ¦ átlósan
+forme|Écu taillé ¦ Vasemmalta vinojaettu kilpi ¦ Balról ferdén osztott pajzs
+forme|en quatre ¦ neljään osaan ¦ négy részre
+forme|Écu écartelé en sautoir ¦ Vinoristin mukaan neljännetty kilpi ¦ Andráskereszt szerint negyedelt pajzs
+forme|Écu tiercé en pal ¦ Pystysuunnassa kolmeen jaettu kilpi ¦ Függőlegesen hármas osztású pajzs
+forme|trois bandes debout ¦ kolme pystyraitaa ¦ három függőleges sáv
+forme|Écu tiercé en fasce ¦ Vaakasuunnassa kolmeen jaettu kilpi ¦ Vízszintesen hármas osztású pajzs
+forme|trois bandes couchées ¦ kolme vaakaraitaa ¦ három vízszintes sáv
+forme|Écu chef ¦ Kilpi, jossa lakio ¦ Pajzs pajzsfővel
+forme|bande en haut ¦ raita ylhäällä ¦ sáv felül
+forme|Écu champagne ¦ Kilpi, jossa kanta ¦ Pajzs pajzstalppal
+forme|bande en bas ¦ raita alhaalla ¦ sáv alul
+forme|Écu fasce ¦ Kilpi, jossa vyö ¦ Pajzs pólyával
+forme|Écu pal ¦ Kilpi, jossa paalu ¦ Pajzs cölöppel
+forme|Écu bande ¦ Kilpi, jossa oikea vinopalkki ¦ Pajzs jobb harántpólyával
+forme|Écu barre ¦ Kilpi, jossa vasen vinopalkki ¦ Pajzs bal harántpólyával
+forme|Écu croix ¦ Kilpi, jossa risti ¦ Pajzs kereszttel
+forme|Écu sautoir ¦ Kilpi, jossa vinoristi ¦ Pajzs andráskereszttel
+forme|croix de Saint-André ¦ Andreaksen risti ¦ Szent András-kereszt
+forme|Écu chevron ¦ Kilpi, jossa kurki ¦ Pajzs szarufával
+forme|Écu franc-quartier ¦ Kilpi, jossa vapaaneljännes ¦ Pajzs szabad negyeddel
+forme|carré en haut à gauche ¦ neliö ylhäällä vasemmalla ¦ négyzet bal felül
+forme|Écu pairle ¦ Kilpi, jossa haarukkaristi ¦ Pajzs villás kereszttel
+forme|en Y ¦ Y:n muotoinen ¦ Y alakú
+forme|Écu burelé ¦ Monivyöinen kilpi ¦ Sűrűn pólyázott pajzs
+forme|bandes couchées ¦ vaakaraidat ¦ vízszintes sávok
+forme|Écu palé ¦ Monipaaluinen kilpi ¦ Sűrűn cölöpözött pajzs
+forme|bandes debout ¦ pystyraidat ¦ függőleges sávok
+forme|Écu échiqueté ¦ Shakkiruudukas kilpi ¦ Sakktáblás pajzs
+forme|damier ¦ shakkilauta ¦ sakktábla
+forme|Écu losange ¦ Kilpi, jossa vinoneliö ¦ Pajzs rombusszal
+forme|en cœur ¦ keskellä ¦ középen
+forme|Écu bordure ¦ Kilpi, jossa reunus ¦ Pajzs szegéllyel
+forme|Couronne de comte ¦ Kreivin kruunu ¦ Grófi korona
+forme|perles ¦ helmet ¦ gyöngyök
+forme|Couronne murale ¦ Muurikruunu ¦ Falkorona
+forme|ville ¦ kaupunki ¦ város
+forme|Heaume ¦ Kypärä ¦ Sisak
+forme|Lambrequins ¦ Kypäräpeite ¦ Sisaktakaró
+forme|manteau ¦ viitta ¦ palást
+forme|Listel ¦ Tunnuslausenauha ¦ Jelmondatszalag
+forme|devise ¦ tunnuslause ¦ jelmondat
+forme|Cadre double ¦ Kaksoiskehys ¦ Dupla keret
+forme|Cadre épais ¦ Paksu kehys ¦ Vastag keret
+forme|Cadre arrondi double ¦ Pyöristetty kaksoiskehys ¦ Dupla lekerekített keret
+forme|Médaillon double ¦ Kaksoismedaljonki ¦ Dupla medalion
+forme|Cadre rond ¦ Pyöreä kehys ¦ Kerek keret
+forme|Cadre rond double ¦ Pyöreä kaksoiskehys ¦ Dupla kerek keret
+forme|Cadre octogonal ¦ Kahdeksankulmainen kehys ¦ Nyolcszögletű keret
+forme|Cadre hexagonal ¦ Kuusikulmainen kehys ¦ Hatszögletű keret
+forme|Cadre en losange ¦ Vinoneliön muotoinen kehys ¦ Rombusz alakú keret
+forme|Cadre en arche ¦ Kaarikehys ¦ Íves keret
+forme|Cadre en ogive ¦ Suippokaarikehys ¦ Csúcsíves keret
+forme|Cartouche à coins rentrants ¦ Kartussi, jossa sisäänvedetyt kulmat ¦ Kartus behúzott sarkokkal
+forme|Cadre à coins coupés ¦ Kehys, jossa viistetyt kulmat ¦ Levágott sarkú keret
+forme|Cadre ticket ¦ Pääsylippukehys ¦ Jegy alakú keret
+forme|Cadre en cœur ¦ Sydämenmuotoinen kehys ¦ Szív alakú keret
+forme|Cadre en écu ¦ Kilvenmuotoinen kehys ¦ Pajzs alakú keret
+forme|Cadre festonné ¦ Kaarireunainen kehys ¦ Csipkés szélű keret
+forme|Cadre timbre-poste ¦ Postimerkkikehys ¦ Bélyeg alakú keret
+forme|Cadre perlé ¦ Helmikehys ¦ Gyöngyös keret
+forme|Cadre en étoile ¦ Tähdenmuotoinen kehys ¦ Csillag alakú keret
+forme|Cadre sceau dentelé ¦ Hammastettu sinettikehys ¦ Fogazott pecsétkeret
+forme|Cadre rosace ¦ Ruusukekehys ¦ Rozettakeret
+forme|Quatre coins ¦ Neljä kulmaa ¦ Négy sarok
+forme|Coins de photo ¦ Valokuvakulmat ¦ Fotósarkok
+forme|Coins arrondis ornés ¦ Koristeelliset pyöristetyt kulmat ¦ Díszes lekerekített sarkok
+forme|Filet ¦ Viiva ¦ Vonal
+forme|Double filet ¦ Kaksoisviiva ¦ Dupla vonal
+forme|Ligne de points ¦ Pisteviiva ¦ Pontozott vonal
+forme|Frise en vagues ¦ Aaltoreunus ¦ Hullámos szegély
+forme|Frise en zigzag ¦ Siksakreunus ¦ Cikcakkos szegély
+forme|Frise grecque ¦ Kreikkalainen meanderireunus ¦ Görög meanderszegély
+forme|Séparateur orné ¦ Koristeellinen erotin ¦ Díszes elválasztó
+forme|Étiquette à trou ¦ Reiällinen lappu ¦ Lyukas címke
+forme|Étiquette arrondie ¦ Pyöristetty etiketti ¦ Lekerekített címke
+forme|Étiquette rectangle ¦ Suorakulmainen etiketti ¦ Téglalap alakú címke
+forme|Étiquette à encoches ¦ Lovettu etiketti ¦ Bevágott címke
+forme|Étiquette flèche ¦ Nuolietiketti ¦ Nyíl alakú címke
+forme|Étiquette flèche gauche ¦ Vasemmalle osoittava nuolietiketti ¦ Balra mutató nyíl alakú címke
+forme|Ruban à bouts pliés ¦ Nauha, jossa taitetut päät ¦ Szalag hajtott végekkel
+forme|Ruban courbé ¦ Kaareva nauha ¦ Ívelt szalag
+forme|Signet ¦ Kirjanmerkki ¦ Könyvjelző
+forme|Fanion triangulaire ¦ Kolmion muotoinen viiri ¦ Háromszög alakú zászlócska
+forme|Étiquette ovale ¦ Soikea etiketti ¦ Ovális címke
+forme|Étiquette ovale à bord ¦ Reunustettu soikea etiketti ¦ Szegélyes ovális címke
+forme|Étiquette à bord ¦ Reunustettu etiketti ¦ Szegélyes címke
+forme|Étiquette de prix ¦ Hintalappu ¦ Árcédula
+forme|Pastille festonnée ¦ Kaarireunainen merkki ¦ Csipkés szélű jelvény
+forme|Pastille « nouveau » ¦ Merkki ”uusi” ¦ „Új” jelvény
+forme|Rosette à rubans ¦ Nauharuusuke ¦ Szalagos rozetta
+forme|Étiquette suspendue ¦ Riippuva lappu ¦ Függő címke
+forme|Onglet ¦ Välilehti ¦ Lap
+forme|Cartouche ¦ Kartussi ¦ Kartus
+forme|Cartouche à bord ¦ Reunustettu kartussi ¦ Szegélyes kartus
+forme|Gommette ¦ Tarra ¦ Matrica
+forme|Flamme verticale ¦ Pystysuora viiri ¦ Függőleges lobogó
+forme|Étiquette double ¦ Kaksoisetiketti ¦ Dupla címke
+forme|Drapeau uni ¦ Yksivärinen lippu ¦ Egyszínű zászló
+forme|à colorier ¦ väritettävä ¦ kiszínezhető
+forme|Drapeau à trois bandes debout ¦ Lippu, jossa kolme pystyraitaa ¦ Zászló három függőleges sávval
+forme|Drapeau à bande centrale debout ¦ Lippu, jossa pystysuora keskiraita ¦ Zászló függőleges középsávval
+forme|Drapeau à trois bandes couchées ¦ Lippu, jossa kolme vaakaraitaa ¦ Zászló három vízszintes sávval
+forme|Drapeau à bande centrale couchée ¦ Lippu, jossa vaakasuora keskiraita ¦ Zászló vízszintes középsávval
+forme|Drapeau à deux bandes couchées ¦ Lippu, jossa kaksi vaakaraitaa ¦ Zászló két vízszintes sávval
+forme|Drapeau à deux bandes debout ¦ Lippu, jossa kaksi pystyraitaa ¦ Zászló két függőleges sávval
+forme|Drapeau à croix scandinave ¦ Skandinaavinen ristilippu ¦ Skandináv keresztes zászló
+forme|Drapeau à croix centrée ¦ Lippu, jossa keskitetty risti ¦ Zászló középre helyezett kereszttel
+forme|Drapeau à croix droite ¦ Lippu, jossa suora risti ¦ Zászló egyenes kereszttel
+forme|Drapeau à croix en X ¦ Lippu, jossa X-risti ¦ Zászló X alakú kereszttel
+forme|Drapeau à disque ¦ Lippu, jossa kiekko ¦ Zászló koronggal
+forme|Drapeau au croissant et à l’étoile ¦ Lippu, jossa kuunsirppi ja tähti ¦ Zászló félholddal és csillaggal
+forme|Drapeau à l’étoile ¦ Lippu, jossa tähti ¦ Zászló csillaggal
+forme|Drapeau étoilé à rayures ¦ Tähti- ja raitalippu ¦ Csillagos-sávos zászló
+forme|Drapeau au triangle ¦ Lippu, jossa kolmio ¦ Zászló háromszöggel
+forme|Drapeau en diagonale ¦ Vinottain jaettu lippu ¦ Átlósan osztott zászló
+forme|Drapeau à canton ¦ Lippu, jossa kantoni ¦ Zászló kantonnal
+forme|Drapeau à croix doubles ¦ Lippu, jossa kaksoisristit ¦ Zászló kettős keresztekkel
+forme|Drapeau à bandes et canton ¦ Lippu, jossa raidat ja kantoni ¦ Zászló sávokkal és kantonnal
+forme|Drapeau à queue d’aronde ¦ Kolmikielinen lippu ¦ Fecskefarkú zászló
+forme|Drapeau flottant ¦ Liehuva lippu ¦ Lobogó zászló
+forme|Drapeau sur mât ¦ Lippu salossa ¦ Zászló rúdon
+forme|Drapeau tricolore sur mât ¦ Trikolori salossa ¦ Trikolór rúdon
+forme|Lien parent → un enfant ¦ Yhteys vanhempi → yksi lapsi ¦ Összekötés: szülő → egy gyermek
+forme|Lien parent → {x} enfants ¦ Yhteys vanhempi → {x} lasta ¦ Összekötés: szülő → {x} gyermek
+forme|Lien de couple ¦ Pariskunnan yhteys ¦ Pár összekötése
+forme|Couple et enfants ¦ Pariskunta ja lapset ¦ Pár és gyermekek
+forme|Accolade ¦ Aaltosulje ¦ Kapcsos zárójel
+forme|vers la droite ¦ oikealle ¦ jobbra
+forme|vers le bas ¦ alaspäin ¦ lefelé
+forme|Branches d’ascendance ¦ Esivanhempien haarat ¦ Felmenői ágak
+forme|Case de personne ¦ Henkilöruutu ¦ Személydoboz
+forme|Médaillon de personne ¦ Henkilömedaljonki ¦ Személymedalion
+forme|Éventail généalogique ¦ Sukuviuhka ¦ Családfa-legyező
+forme|Deux alliances entrelacées ¦ Kaksi toisiinsa kietoutunutta vihkisormusta ¦ Két egymásba fonódó jegygyűrű
+forme|Arbre et racines ¦ Puu ja juuret ¦ Fa és gyökerek
