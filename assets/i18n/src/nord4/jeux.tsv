@@ -1,0 +1,1201 @@
+fr ¦ fi ¦ hu
+Jeu de l’oie / Serpents et échelles / Petits chevaux / Puzzle / Labyrinthe ¦ Hanhipeli / Käärmeet ja tikkaat / Kimble / Palapeli / Labyrintti ¦ Libajáték / Kígyók és létrák / Ki nevet a végén? / Kirakós / Labirintus
+Jeu de l’oie ¦ Hanhipeli ¦ Libajáték
+Serpents et échelles ¦ Käärmeet ja tikkaat ¦ Kígyók és létrák
+Petits chevaux ¦ Kimble ¦ Ki nevet a végén?
+🧩 Puzzle ¦ 🧩 Palapeli ¦ 🧩 Kirakós
+Puzzle ¦ Palapeli ¦ Kirakós
+🌀 Labyrinthe ¦ 🌀 Labyrintti ¦ 🌀 Labirintus
+Labyrinthe ¦ Labyrintti ¦ Labirintus
+🕵️ Qui est-ce ? des ancêtres ¦ 🕵️ Arvaa kuka? esivanhemmilla ¦ 🕵️ Ki az? – felmenőkkel
+🃏 Memory des portraits ¦ 🃏 Muotokuvamuistipeli ¦ 🃏 Portrés memóriajáték
+📅 La bonne date ¦ 📅 Oikea päivämäärä ¦ 📅 A helyes dátum
+❌ Morpion à règles libres ¦ ❌ Ristinolla omilla säännöillä ¦ ❌ Amőba saját szabályokkal
+⚓ Bataille navale ¦ ⚓ Laivanupotus ¦ ⚓ Torpedó
+🔌 Les câbles (Netwalk) ¦ 🔌 Kaapelit (Netwalk) ¦ 🔌 Kábelek (Netwalk)
+🂠 Patiences (jeux de cartes) ¦ 🂠 Pasianssit (korttipelit) ¦ 🂠 Pasziánszok (kártyajátékok)
+🂡 Jeux de cartes à plusieurs ¦ 🂡 Korttipelit usealle ¦ 🂡 Többszemélyes kártyajátékok
+♟️ Échecs ¦ ♟️ Shakki ¦ ♟️ Sakk
+⛀ Dames ¦ ⛀ Tammi ¦ ⛀ Dáma
+🁫 Dominos ¦ 🁫 Domino ¦ 🁫 Dominó
+🎲 Yams ¦ 🎲 Yatzy ¦ 🎲 Yahtzee
+Dames ¦ Tammi ¦ Dáma
+Dominos ¦ Domino ¦ Dominó
+Yams ¦ Yatzy ¦ Yahtzee
+jeu|Nouvelle partie ¦ Uusi peli ¦ Új játék
+jeu|Échelle ¦ Tikkaat ¦ Létra
+Oie ¦ Hanhi ¦ Liba
+Pont ¦ Silta ¦ Híd
+Auberge ¦ Majatalo ¦ Fogadó
+Prison ¦ Vankila ¦ Börtön
+Mort ¦ Kuolema ¦ Halál
+Serpent ¦ Käärme ¦ Kígyó
+Case spéciale ¦ Erikoisruutu ¦ Különleges mező
+Avance ¦ Eteenpäin ¦ Előre
+cet événement ¦ tämä tapahtuma ¦ ez az esemény
+Jaune ¦ Keltainen ¦ Sárga
+Violet ¦ Violetti ¦ Lila
+Orange ¦ Oranssi ¦ Narancs
+Rose ¦ Vaaleanpunainen ¦ Rózsaszín
+Turquoise ¦ Turkoosi ¦ Türkiz
+Marron ¦ Ruskea ¦ Barna
+réponse avant le lancer ¦ vastaus ennen heittoa ¦ válasz a dobás előtt
+une bonne réponse donne un seul lancer bonus ¦ oikea vastaus antaa yhden lisäheiton ¦ egy jó válasz egyetlen bónuszdobást ad
+réponse pour rejouer ¦ vastaus uutta heittoa varten ¦ válasz az újabb dobásért
+Bonne réponse : lancez les dés. ¦ Oikea vastaus: heitä noppia. ¦ Jó válasz: dobj a kockákkal.
+Bonne réponse : un seul lancer bonus. ¦ Oikea vastaus: yksi lisäheitto. ¦ Jó válasz: egy bónuszdobás.
+Bonne réponse : vous rejouez. ¦ Oikea vastaus: heität uudelleen. ¦ Jó válasz: újra dobhatsz.
+Branche {name} ¦ Haara {name} ¦ {name} ág
+Liste {name} ¦ Luettelo {name} ¦ {name} lista
+Toute la généalogie ¦ Koko sukututkimus ¦ Az egész családfa
+Qui correspond à la date de <strong>{event}</strong> : <strong>{date}</strong> ? ¦ Kuka vastaa tapahtuman <strong>{event}</strong> päivämäärää <strong>{date}</strong>? ¦ Kihez illik ez a dátum – <strong>{event}</strong>: <strong>{date}</strong>?
+Quelle est la date de <strong>{event}</strong> de <strong>{who}</strong> ? ¦ Mikä on henkilön <strong>{who}</strong> tapahtuman <strong>{event}</strong> päivämäärä? ¦ Mi a dátuma ennek: <strong>{who}</strong> – <strong>{event}</strong>?
+ÉCURIE ¦ TALLI ¦ ISTÁLLÓ
+{name} · cheval {n} ¦ {name} · hevonen {n} ¦ {name} · {n}. ló
+ARRIVÉE ¦ MAALI ¦ CÉL
+Case {n} ¦ Ruutu {n} ¦ {n}. mező
+SERPENTS &<br>ÉCHELLES ¦ KÄÄRMEET &<br>TIKKAAT ¦ KÍGYÓK &<br>LÉTRÁK
+JEU<br>DE L’OIE ¦ HANHI-<br>PELI ¦ LIBA-<br>JÁTÉK
+Suivez les flèches ¦ Seuraa nuolia ¦ Kövesd a nyilakat
+DÉPART ¦ LÄHTÖ ¦ START
+{what} vers la case {n} ¦ {what} ruutuun {n} ¦ {what} a(z) {n}. mezőre
+CASE ¦ RUUTU ¦ MEZŐ
+=arrivée ¦ maalissa|maalissa ¦ célban|célban
+{stable} à l’écurie · {done} ¦ {stable} tallissa · {done} ¦ {stable} az istállóban · {done}
+Le lancer bonus est terminé : au joueur suivant. ¦ Lisäheitto on käytetty: seuraavan pelaajan vuoro. ¦ A bónuszdobás véget ért: a következő játékos jön.
+Une bonne réponse donne un seul lancer bonus. ¦ Oikea vastaus antaa yhden lisäheiton. ¦ Egy jó válasz egyetlen bónuszdobást ad.
+Répondez pour rejouer. ¦ Vastaa heittääksesi uudelleen. ¦ Válaszolj, hogy újra dobhass.
+{name} sort de l’écurie, case 1. ¦ {name} lähtee tallista, ruutu 1. ¦ {name} kijön az istállóból, 1. mező.
+{name} avance jusqu’à la case {n}. ¦ {name} etenee ruutuun {n}. ¦ {name} a(z) {n}. mezőig lép.
+{names} retournent à l’écurie. ¦ {names} palaavat talliin. ¦ {names} visszakerülnek az istállóba.
+{names} retourne à l’écurie. ¦ {names} palaa talliin. ¦ {names} visszakerül az istállóba.
+{name} amène ses quatre chevaux à l’arrivée. ¦ {name} vie kaikki neljä hevostaan maaliin. ¦ {name} mind a négy lovát célba juttatja.
+Oie : rejouez. ¦ Hanhi: heitä uudelleen. ¦ Liba: dobj újra.
+{what} : un tour est passé. ¦ {what}: yksi vuoro jää väliin. ¦ {what}: kimarad egy kör.
+{what} : retour au départ. ¦ {what}: takaisin lähtöön. ¦ {what}: vissza a startra.
+{what} : case {n}. ¦ {what}: ruutu {n}. ¦ {what}: {n}. mező.
+Tour de {name} ¦ Vuorossa: {name} ¦ {name} következik
+Partie terminée ¦ Peli päättyi ¦ A játéknak vége
+Cases choisies ¦ Valitut ruudut ¦ Kiválasztott mezők
+Avancer, reculer ou retour au départ. ¦ Eteenpäin, taaksepäin tai takaisin lähtöön. ¦ Előre, hátra vagy vissza a startra.
+Case ¦ Ruutu ¦ Mező
+Effet ¦ Vaikutus ¦ Hatás
+Avancer vers… ¦ Eteenpäin ruutuun… ¦ Előre ide…
+Revenir à… ¦ Takaisin ruutuun… ¦ Vissza ide…
+Retour au départ ¦ Takaisin lähtöön ¦ Vissza a startra
+Destination ¦ Kohde ¦ Cél
+Case {n} · départ ¦ Ruutu {n} · lähtö ¦ {n}. mező · start
+Case {n} · retour {to} ¦ Ruutu {n} · takaisin ruutuun {to} ¦ {n}. mező · vissza ide: {to}
+Case {n} · avance {to} ¦ Ruutu {n} · eteenpäin ruutuun {to} ¦ {n}. mező · előre ide: {to}
+Aucune case ajoutée. ¦ Ruutuja ei ole lisätty. ¦ Nincs hozzáadott mező.
+TABLE DE JEU · NOIR & BLANC ¦ PELIPÖYTÄ · MUSTAVALKOINEN ¦ JÁTÉKASZTAL · FEKETE-FEHÉR
+Crée une partie de 2 à 6 joueurs. Elle est conservée dans ce navigateur, même après actualisation. ¦ Luo peli 2–6 pelaajalle. Se säilyy tässä selaimessa myös päivityksen jälkeen. ¦ Hozz létre egy játékot 2–6 játékosnak. Ebben a böngészőben megmarad, frissítés után is.
+Nom de la partie ¦ Pelin nimi ¦ A játék neve
+Partie du {date} ¦ Peli {date} ¦ {date} játék
+Nombre de cases ¦ Ruutujen määrä ¦ Mezők száma
+Dés ¦ Nopat ¦ Kockák
+2 dés ¦ 2 noppaa ¦ 2 kocka
+3 dés ¦ 3 noppaa ¦ 3 kocka
+{n} dés ¦ {n} noppaa ¦ {n} kocka
+Questions ¦ Kysymykset ¦ Kérdések
+Bonne réponse pour lancer les dés ¦ Oikea vastaus noppien heittämiseksi ¦ Jó válasz a dobáshoz
+Lancer puis bonne réponse pour rejouer ¦ Heitä, sitten oikea vastaus uutta heittoa varten ¦ Dobás, majd jó válasz az újabb dobásért
+Lancer puis une seule bonne réponse = un lancer bonus ¦ Heitä, sitten yksi oikea vastaus = yksi lisäheitto ¦ Dobás, majd egy jó válasz = egy bónuszdobás
+Périmètre des questions ¦ Kysymysten laajuus ¦ A kérdések köre
+Une branche / un patronyme ¦ Haara / sukunimi ¦ Egy ág / egy vezetéknév
+Personnes choisies ¦ Valitut henkilöt ¦ Kiválasztott személyek
+=personne choisie ¦ valittu henkilö|valittua henkilöä ¦ kiválasztott személy|kiválasztott személy
+Liste : {name} ({n}) ¦ Luettelo: {name} ({n}) ¦ Lista: {name} ({n})
+Branche / patronyme ¦ Haara / sukunimi ¦ Ág / vezetéknév
+Ex : Dupont ¦ Esim. Dupont ¦ Pl. Dupont
+Joueurs ¦ Pelaajat ¦ Játékosok
+Joueur {n} ¦ Pelaaja {n} ¦ {n}. játékos
+Joueur {n} (facultatif) ¦ Pelaaja {n} (valinnainen) ¦ {n}. játékos (nem kötelező)
+Personnalisée… ¦ Mukautettu… ¦ Egyéni…
+Couleur personnalisée du joueur {n} ¦ Pelaajan {n} mukautettu väri ¦ A(z) {n}. játékos egyéni színe
+Enregistrer cette sélection comme liste ¦ Tallenna tämä valinta luettelona ¦ A kijelölés mentése listaként
+Nom de la liste ¦ Luettelon nimi ¦ A lista neve
+Ex : Ascendance maternelle ¦ Esim. Äidin puoli ¦ Pl. Anyai ág
+Règles classiques incluses : oies tous les 6, pont, auberge, puits, labyrinthe, prison et mort. ¦ Klassiset säännöt mukana: hanhet joka 6. ruudussa, silta, majatalo, kaivo, labyrintti, vankila ja kuolema. ¦ Klasszikus szabályok: liba minden 6. mezőn, híd, fogadó, kút, labirintus, börtön és halál.
+Règles incluses : les échelles et serpents mènent directement à la case indiquée. ¦ Säännöt mukana: tikkaat ja käärmeet vievät suoraan ilmoitettuun ruutuun. ¦ Szabályok: a létrák és a kígyók egyenesen a jelzett mezőre visznek.
+Règles Petits chevaux : 56 cases, 2 à 4 joueurs, quatre chevaux chacun, couleurs au choix. ¦ Kimblen säännöt: 56 ruutua, 2–4 pelaajaa, kullakin neljä hevosta, vapaasti valittavat värit. ¦ Ki nevet a végén? szabályai: 56 mező, 2–4 játékos, mindenkinek négy lova, szabadon választható színek.
+Démarrer la partie ¦ Aloita peli ¦ A játék indítása
+case {n} ¦ ruutu {n} ¦ {n}. mező
+passe {n} tour ¦ jättää {n} vuoroa väliin ¦ {n} körből kimarad
+Cheval {n} · écurie → case {to} ¦ Hevonen {n} · talli → ruutu {to} ¦ {n}. ló · istálló → {to}. mező
+Cheval {n} · case {from} → case {to} ¦ Hevonen {n} · ruutu {from} → ruutu {to} ¦ {n}. ló · {from}. mező → {to}. mező
+{name} a gagné. ¦ {name} voitti. ¦ {name} nyert.
+La partie est terminée. ¦ Peli on päättynyt. ¦ A játéknak vége.
+Quel cheval veux-tu déplacer ? ¦ Minkä hevosen haluat siirtää? ¦ Melyik lovat szeretnéd léptetni?
+Lancer {n} dés ¦ Heitä {n} noppaa ¦ Dobás {n} kockával
+Question pour {name} ¦ Kysymys pelaajalle {name} ¦ Kérdés neki: {name}
+Question pour jouer ¦ Kysymys pelaamista varten ¦ Kérdés a játékhoz
+PARTIE EN COURS · {scope} ¦ PELI KÄYNNISSÄ · {scope} ¦ FOLYAMATBAN LÉVŐ JÁTÉK · {scope}
+Règles du plateau ¦ Pelilaudan säännöt ¦ A tábla szabályai
+Aucune partie pour l’instant ¦ Ei vielä pelejä ¦ Még nincs játék
+« ＋ Nouvelle partie » juste au-dessus pour lancer la première. ¦ ”＋ Uusi peli” yläpuolella aloittaa ensimmäisen. ¦ A fenti „＋ Új játék” gombbal indíthatod az elsőt.
+Maximum : 5 parties et 30 puzzles en cours, 10 labyrinthes, 10 parties des autres jeux. ¦ Enintään: 5 peliä ja 30 palapeliä kesken, 10 labyrinttia, 10 muiden pelien peliä. ¦ Legfeljebb: 5 játék és 30 folyamatban lévő kirakós, 10 labirintus, 10 játszma a többi játékból.
+Maximum : 5 parties et 30 puzzles en cours, 10 labyrinthes. ¦ Enintään: 5 peliä ja 30 palapeliä kesken, 10 labyrinttia. ¦ Legfeljebb: 5 játék és 30 folyamatban lévő kirakós, 10 labirintus.
+Maximum : 5 parties et 30 puzzles en cours, 10 parties des autres jeux. ¦ Enintään: 5 peliä ja 30 palapeliä kesken, 10 muiden pelien peliä. ¦ Legfeljebb: 5 játék és 30 folyamatban lévő kirakós, 10 játszma a többi játékból.
+Maximum : 5 parties et 30 puzzles en cours. ¦ Enintään: 5 peliä ja 30 palapeliä kesken. ¦ Legfeljebb: 5 játék és 30 folyamatban lévő kirakós.
+Maximum : 5 parties sauvegardées. ¦ Enintään: 5 tallennettua peliä. ¦ Legfeljebb: 5 mentett játék.
+Lancez les dés pour commencer. ¦ Heitä noppia aloittaaksesi. ¦ Dobj a kockákkal a kezdéshez.
+Les 5 emplacements sont utilisés : supprime une partie pour en créer une autre. ¦ Kaikki 5 paikkaa ovat käytössä: poista peli luodaksesi uuden. ¦ Mind az 5 hely foglalt: törölj egy játékot, hogy újat hozhass létre.
+Jeu ¦ Peli ¦ Játék
+Supprime une partie avant d’en créer une autre. ¦ Poista peli ennen uuden luomista. ¦ Törölj egy játékot, mielőtt újat hozol létre.
+Il faut au moins deux joueurs. ¦ Tarvitaan vähintään kaksi pelaajaa. ¦ Legalább két játékos kell.
+Chaque joueur doit avoir une couleur différente. ¦ Jokaisella pelaajalla on oltava eri väri. ¦ Minden játékosnak más színűnek kell lennie.
+Aucun SOSA n’est calculé. ¦ SOSA-numeroita ei ole laskettu. ¦ Nincs kiszámított SOSA-szám.
+Indique une branche ou un patronyme. ¦ Anna haara tai sukunimi. ¦ Adj meg egy ágat vagy egy vezetéknevet.
+Répondez à la question pour commencer. ¦ Vastaa kysymykseen aloittaaksesi. ¦ Válaszolj a kérdésre a kezdéshez.
+La partie et sa progression seront supprimées. ¦ Peli ja sen eteneminen poistetaan. ¦ A játék és az állása törlődik.
+Supprimer la partie ¦ Poista peli ¦ Játék törlése
+Choisissez la bonne réponse. ¦ Valitse oikea vastaus. ¦ Válaszd ki a jó választ.
+Aucune question exploitable : lancez les dés. ¦ Ei käyttökelpoista kysymystä: heitä noppia. ¦ Nincs használható kérdés: dobj a kockákkal.
+Question indisponible : vous pouvez lancer les dés. ¦ Kysymys ei ole saatavilla: voit heittää noppia. ¦ A kérdés nem érhető el: dobhatsz a kockákkal.
+inconnue ¦ tuntematon ¦ ismeretlen
+Mauvaise réponse. La bonne réponse était : {answer}. {name} passe la main. ¦ Väärä vastaus. Oikea vastaus oli: {answer}. {name} antaa vuoron seuraavalle. ¦ Rossz válasz. A jó válasz ez volt: {answer}. {name} átadja a kört.
+{name} ne peut déplacer aucun cheval. ¦ {name} ei voi siirtää yhtään hevosta. ¦ {name} egyik lovával sem léphet.
+{name} a plusieurs chevaux à déplacer. ¦ {name}: useita hevosia siirrettävänä. ¦ {name} több lóval is léphet.
+{name} atteint la dernière case. ¦ {name} saavuttaa viimeisen ruudun. ¦ {name} eléri az utolsó mezőt.
+{name} avance de {n}. ¦ {name} etenee {n} ruutua. ¦ {name} {n} mezőt lép.
+{n} cases ¦ {n} ruutua ¦ {n} mező
+jeu|arrivée ¦ maalissa ¦ célban
+Plus de place dans ce navigateur pour garder la partie. ¦ Selaimessa ei ole enää tilaa pelin säilyttämiseen. ¦ Ebben a böngészőben nincs több hely a játék megőrzéséhez.
+Données illisibles. ¦ Lukukelvottomat tiedot. ¦ Olvashatatlan adatok.
+Les ancêtres de {name} ¦ Henkilön {name} esivanhemmat ¦ {name} felmenői
+Les ancêtres de la personne choisie ¦ Valitun henkilön esivanhemmat ¦ A kiválasztott személy felmenői
+TABLE DE JEU · {what} ¦ PELIPÖYTÄ · {what} ¦ JÁTÉKASZTAL · {what}
+La partie se garde dans ce navigateur. ¦ Peli säilyy tässä selaimessa. ¦ A játék ebben a böngészőben marad meg.
+Les {n} parties de ces jeux sont gardées : supprimes-en une pour en commencer une autre. ¦ Näiden pelien kaikki {n} peliä on tallessa: poista yksi aloittaaksesi uuden. ¦ Ezekből a játékokból mind a(z) {n} játszma meg van őrizve: törölj egyet, hogy újat kezdhess.
+Les personnes du jeu ¦ Pelin henkilöt ¦ A játék személyei
+Une génération ¦ Yksi sukupolvi ¦ Egy nemzedék
+Les ancêtres d’une personne ¦ Henkilön esivanhemmat ¦ Egy személy felmenői
+Les personnes vivantes et les fiches confidentielles ne sont jamais dans les jeux. ¦ Elävät henkilöt ja luottamukselliset kortit eivät ole koskaan peleissä. ¦ Élő személyek és bizalmas adatlapok soha nem kerülnek a játékokba.
+Les joueurs ¦ Pelaajat ¦ A játékosok
+{a} à {b} ¦ {a}–{b} ¦ {a}–{b}
+Ajouter un joueur ¦ Lisää pelaaja ¦ Játékos hozzáadása
+Commencer la partie ¦ Aloita peli ¦ A játék kezdése
+Retirer ce joueur ¦ Irrota tämä pelaaja ¦ A játékos eltávolítása
+{what} pour ce jeu · sans les vivants ni les fiches confidentielles. ¦ {what} tähän peliin · ilman eläviä ja luottamuksellisia kortteja. ¦ {what} ehhez a játékhoz · élők és bizalmas adatlapok nélkül.
+Génération (1 = parents, 2 = grands-parents…) ¦ Sukupolvi (1 = vanhemmat, 2 = isovanhemmat…) ¦ Nemzedék (1 = szülők, 2 = nagyszülők…)
+les réglages de ce jeu ({name}) ¦ tämän pelin asetukset ({name}) ¦ a játék beállításai ({name})
+Réglage « {name} » supprimé. ¦ Asetus ”{name}” poistettu. ¦ „{name}” beállítás törölve.
+« {name} » appliqué. ¦ ”{name}” otettu käyttöön. ¦ „{name}” alkalmazva.
+Supprime une partie avant d’en commencer une autre. ¦ Poista peli ennen uuden aloittamista. ¦ Törölj egy játékot, mielőtt újat kezdesz.
+Choisis la personne dont on prend les ancêtres. ¦ Valitse henkilö, jonka esivanhempia käytetään. ¦ Válaszd ki a személyt, akinek a felmenőit használjuk.
+Donne un nom à ce joueur. ¦ Anna tälle pelaajalle nimi. ¦ Adj nevet ennek a játékosnak.
+Donne un nom à chaque joueur. ¦ Anna jokaiselle pelaajalle nimi. ¦ Adj nevet minden játékosnak.
+{game} du {date} ¦ {game} {date} ¦ {game} – {date}
+Une nouvelle partie avec les mêmes réglages ¦ Uusi peli samoilla asetuksilla ¦ Új játék ugyanazokkal a beállításokkal
+Rejouer ¦ Pelaa uudelleen ¦ Újra
+« {name} » est supprimée. ¦ ”{name}” on poistettu. ¦ „{name}” törölve.
+Cette partie ne peut pas s’ouvrir : {err} ¦ Tätä peliä ei voi avata: {err} ¦ Ez a játék nem nyitható meg: {err}
+Reprendre cette partie ¦ Jatka tätä peliä ¦ A játék folytatása
+terminée ¦ päättynyt ¦ befejezve
+Les règles ¦ Säännöt ¦ A szabályok
+Ex : La partie du dimanche ¦ Esim. Sunnuntain peli ¦ Pl. A vasárnapi játék
+Qui est-ce ? des ancêtres ¦ Arvaa kuka? esivanhemmilla ¦ Ki az? – felmenőkkel
+QUI EST-CE ? ¦ ARVAA KUKA? ¦ KI AZ?
+=ancêtre ¦ esivanhempi|esivanhempaa ¦ felmenő|felmenő
+Un ancêtre est caché parmi les portraits : pose des questions (« Née avant 1800 ? », « Laboureur ? », « Du côté de ton père ? ») et trouve-le avec le moins de questions possible. ¦ Esivanhempi on piilossa muotokuvien joukossa: kysy kysymyksiä (”Syntynyt ennen vuotta 1800?”, ”Maanviljelijä?”, ”Isäsi puolelta?”) ja löydä hänet mahdollisimman vähillä kysymyksillä. ¦ Egy felmenő elrejtőzött a portrék között: tegyél fel kérdéseket („1800 előtt született?”, „Földműves?”, „Apai ágon?”), és találd meg minél kevesebb kérdéssel.
+Les portraits qui ne collent plus avec les réponses se grisent tout seuls. Une mauvaise proposition compte 2 questions. ¦ Muotokuvat, jotka eivät enää sovi vastauksiin, harmaantuvat itsestään. Väärä arvaus lasketaan 2 kysymykseksi. ¦ A válaszokhoz már nem illő portrék maguktól elszürkülnek. Egy rossz tipp 2 kérdésnek számít.
+Pour les enfants ¦ Lapsille ¦ Gyerekeknek
+9 portraits, l’app cache l’ancêtre ¦ 9 muotokuvaa, sovellus piilottaa esivanhemman ¦ 9 portré, az alkalmazás rejti el a felmenőt
+Duel à deux ¦ Kaksinkamppailu ¦ Párbaj kettesben
+20 portraits, chacun cache un ancêtre à l’autre ¦ 20 muotokuvaa, kumpikin piilottaa esivanhemman toiselta ¦ 20 portré, mindkét játékos elrejt egy felmenőt a másik elől
+Grand plateau ¦ Suuri pelilauta ¦ Nagy tábla
+30 portraits de toute la généalogie ¦ 30 muotokuvaa koko sukututkimuksesta ¦ 30 portré az egész családfából
+À deux, l’ancêtre caché est ¦ Kahdella pelaajalla piilotettu esivanhempi on ¦ Két játékosnál az elrejtett felmenőt
+🎲 tiré au hasard ¦ 🎲 arvottu ¦ 🎲 véletlenszerűen húzzuk
+🤫 choisi par l’autre joueur ¦ 🤫 toisen pelaajan valitsema ¦ 🤫 a másik játékos választja
+Avec un seul joueur, l’app cache toujours l’ancêtre. Ajoute un 2ᵉ joueur pour un duel. ¦ Yhdellä pelaajalla sovellus piilottaa aina esivanhemman. Lisää 2. pelaaja kaksinkamppailua varten. ¦ Egy játékosnál mindig az alkalmazás rejti el a felmenőt. Párbajhoz adj hozzá egy 2. játékost.
+Nombre de portraits sur le plateau ¦ Muotokuvien määrä pelilaudalla ¦ Portrék száma a táblán
+Il faut au moins 4 personnes (sans les vivants ni les fiches confidentielles) dans cet ensemble. Choisis « Toute la généalogie » ou une autre génération. ¦ Tässä joukossa on oltava vähintään 4 henkilöä (ilman eläviä ja luottamuksellisia kortteja). Valitse ”Koko sukututkimus” tai toinen sukupolvi. ¦ Ebben a készletben legalább 4 személy kell (élők és bizalmas adatlapok nélkül). Válaszd „Az egész családfa” lehetőséget vagy egy másik nemzedéket.
+À toi de jouer ¦ Sinun vuorosi ¦ Te jössz
+🏁 {name} a gagné ! ¦ 🏁 {name} voitti! ¦ 🏁 {name} nyert!
+🏁 Trouvé ! ¦ 🏁 Löytyi! ¦ 🏁 Megvan!
+🏁 Partie terminée ¦ 🏁 Peli päättyi ¦ 🏁 A játéknak vége
+Au tour de {name} ¦ Vuorossa: {name} ¦ {name} következik
+=portrait encore possible ¦ muotokuva yhä mahdollinen|muotokuvaa yhä mahdollisia ¦ még lehetséges portré|még lehetséges portré
+Les portraits ¦ Muotokuvat ¦ A portrék
+{name} (écarté) ¦ {name} (suljettu pois) ¦ {name} (kizárva)
+{n} raté ¦ {n} ohi ¦ {n} tévedés
+Clique sur le portrait que tu proposes ¦ Napsauta muotokuvaa, jota arvaat ¦ Kattints a portréra, amelyre tippelsz
+Je propose une réponse ¦ Arvaan ¦ Tippelek
+Pose une question ¦ Kysy kysymys ¦ Tegyél fel egy kérdést
+Chercher… (née, laboureur, Auch) ¦ Hae… (syntynyt, maanviljelijä, Auch) ¦ Keresés… (született, földműves, Auch)
+Chercher une question ¦ Hae kysymystä ¦ Kérdés keresése
+Plus de question utile : propose ta réponse ! ¦ Ei enää hyödyllisiä kysymyksiä: arvaa! ¦ Nincs több hasznos kérdés: tippelj!
+Clique sur un portrait pour l’écarter toi-même (ou le remettre). ¦ Napsauta muotokuvaa sulkeaksesi sen itse pois (tai palauttaaksesi sen). ¦ Kattints egy portréra, hogy magad zárd ki (vagy visszahozd).
+Questions déjà posées ({n}) ¦ Jo kysytyt kysymykset ({n}) ¦ Már feltett kérdések ({n})
+jeu|oui ¦ kyllä ¦ igen
+jeu|non ¦ ei ¦ nem
+jeu|inconnu ¦ tuntematon ¦ ismeretlen
+jeu|Qui ¦ Kuka ¦ Ki
+jeu|Quand ¦ Milloin ¦ Mikor
+jeu|Où ¦ Missä ¦ Hol
+jeu|Métier ¦ Ammatti ¦ Foglalkozás
+jeu|Famille ¦ Perhe ¦ Család
+jeu|Nom ¦ Nimi ¦ Név
+L’ancêtre caché pour {name} ¦ Piilotettu esivanhempi pelaajalle {name} ¦ Az elrejtett felmenő neki: {name}
+L’ancêtre caché ¦ Piilotettu esivanhempi ¦ Az elrejtett felmenő
+née à {town} ¦ syntynyt paikassa {town} ¦ született: {town}
+{name} a trouvé en {what} ! ¦ {name} löysi sen: {what}! ¦ {name} megtalálta, {what} alatt!
+Trouvé en {what} ! ¦ Löytyi: {what}! ¦ Megvan, {what} alatt!
+{a} choisit l’ancêtre que {b} devra trouver ¦ {a} valitsee esivanhemman, joka pelaajan {b} on löydettävä ¦ {a} kiválasztja a felmenőt, akit {b} játékosnak meg kell találnia
+{a} : choisis en secret l’ancêtre que {b} devra trouver. {b}, ne regarde pas ! ¦ {a}: valitse salaa esivanhempi, joka pelaajan {b} on löydettävä. {b}, älä katso! ¦ {a}: válaszd ki titokban a felmenőt, akit {b} játékosnak meg kell találnia. {b}, ne nézz oda!
+Cacher {name} ¦ Piilota {name} ¦ {name} elrejtése
+C’est caché. Au suivant ! ¦ Piilotettu. Seuraava! ¦ Elrejtve. Jöhet a következő!
+C’est caché : la partie commence. ¦ Piilotettu: peli alkaa. ¦ Elrejtve: kezdődik a játék.
+🎉 C’est bien {name} ! ¦ 🎉 Se on todella {name}! ¦ 🎉 Valóban {name}!
+Proposition : {name} ¦ Arvaus: {name} ¦ Tipp: {name}
+Raté : ce n’est pas ce portrait. ¦ Ohi: se ei ole tämä muotokuva. ¦ Nem talált: nem ez a portré.
+Est-ce une femme ? ¦ Onko se nainen? ¦ Nő az illető?
+A-t-on son portrait (une photo) ? ¦ Onko hänestä muotokuva (valokuva)? ¦ Van portrénk róla (fénykép)?
+Cette personne est-elle née avant {year} ? ¦ Syntyikö tämä henkilö ennen vuotta {year}? ¦ {year} előtt született ez a személy?
+A-t-elle vécu plus de {n} ans ? ¦ Elikö hän yli {n} vuotta? ¦ Több mint {n} évet élt?
+Est-elle née à {town} ? ¦ Syntyikö hän paikassa {town}? ¦ Itt született: {town}?
+Est-elle morte à {town} ? ¦ Kuoliko hän paikassa {town}? ¦ Itt halt meg: {town}?
+Était-elle {job} ? ¦ Oliko hän ammatiltaan {job}? ¦ A foglalkozása {job} volt?
+Est-ce du côté de ton père ? ¦ Onko se isäsi puolelta? ¦ Apai ágon van?
+Est-ce un parent ? ¦ Onko se vanhempi? ¦ Szülő?
+Est-ce un grand-parent ? ¦ Onko se isovanhempi? ¦ Nagyszülő?
+Est-ce un arrière-grand-parent ? ¦ Onko se isoisovanhempi? ¦ Dédszülő?
+Est-ce un ancêtre de la génération {n} ? ¦ Onko se esivanhempi sukupolvesta {n}? ¦ A(z) {n}. nemzedékbe tartozó felmenő?
+Son nom commence-t-il par {letter} ? ¦ Alkaako hänen sukunimensä kirjaimella {letter}? ¦ {letter} betűvel kezdődik a vezetékneve?
+un grand-parent ¦ isovanhempi ¦ egy nagyszülő
+un arrière-grand-parent ¦ isoisovanhempi ¦ egy dédszülő
+un ancêtre de la génération {n} ¦ esivanhempi sukupolvesta {n} ¦ egy felmenő a(z) {n}. nemzedékből
+Naissance de {name} ¦ Syntymä: {name} ¦ {name} születése
+Décès de {name} ¦ Kuolema: {name} ¦ {name} halála
+Mariage de {a} et {b} ¦ Avioliitto: {a} ja {b} ¦ {a} és {b} házassága
+Mariage de {name} ¦ Avioliitto: {name} ¦ {name} házassága
+Memory des portraits ¦ Muotokuvamuistipeli ¦ Portrés memóriajáték
+Memory ¦ Muistipeli ¦ Memóriajáték
+MEMORY ¦ MUISTIPELI ¦ MEMÓRIAJÁTÉK
+=paire possible ¦ mahdollinen pari|mahdollista paria ¦ lehetséges pár|lehetséges pár
+Retourne deux cartes à la fois et retrouve les paires : un portrait et son nom, une personne et son village, son métier ou son année de naissance. ¦ Käännä kaksi korttia kerrallaan ja etsi parit: muotokuva ja sen nimi, henkilö ja hänen kylänsä, ammattinsa tai syntymävuotensa. ¦ Fordíts fel egyszerre két kártyát, és keresd meg a párokat: egy portré és a neve, egy személy és a faluja, a foglalkozása vagy a születési éve.
+Une paire trouvée : la carte reste visible et le même joueur rejoue. ¦ Pari löytyi: kortit jäävät näkyviin ja sama pelaaja jatkaa. ¦ Megvan egy pár: a kártyák felfordítva maradnak, és ugyanaz a játékos folytatja.
+🖼 Portrait ↔ nom ¦ 🖼 Muotokuva ↔ nimi ¦ 🖼 Portré ↔ név
+📍 Personne ↔ village ¦ 📍 Henkilö ↔ kylä ¦ 📍 Személy ↔ falu
+🛠 Personne ↔ métier ¦ 🛠 Henkilö ↔ ammatti ¦ 🛠 Személy ↔ foglalkozás
+📅 Personne ↔ année ¦ 📅 Henkilö ↔ vuosi ¦ 📅 Személy ↔ év
+Portrait ↔ nom ¦ Muotokuva ↔ nimi ¦ Portré ↔ név
+Personne ↔ village de naissance ¦ Henkilö ↔ syntymäkylä ¦ Személy ↔ szülőfalu
+Personne ↔ métier ¦ Henkilö ↔ ammatti ¦ Személy ↔ foglalkozás
+Personne ↔ année de naissance ¦ Henkilö ↔ syntymävuosi ¦ Személy ↔ születési év
+Petit memory ¦ Pieni muistipeli ¦ Kis memóriajáték
+6 paires portrait ↔ nom ¦ 6 paria muotokuva ↔ nimi ¦ 6 pár portré ↔ név
+Les villages ¦ Kylät ¦ A falvak
+10 paires personne ↔ village ¦ 10 paria henkilö ↔ kylä ¦ 10 pár személy ↔ falu
+Grand memory ¦ Suuri muistipeli ¦ Nagy memóriajáték
+18 paires de toute la généalogie ¦ 18 paria koko sukututkimuksesta ¦ 18 pár az egész családfából
+Les paires ¦ Parit ¦ A párok
+Nombre de paires ¦ Parien määrä ¦ Párok száma
+Pas assez de personnes avec un village de naissance dans cet ensemble (il faut au moins 3 paires différentes). Choisis un ensemble plus grand ou une autre sorte de paires. ¦ Tässä joukossa ei ole tarpeeksi henkilöitä, joiden syntymäkylä tunnetaan (tarvitaan vähintään 3 eri paria). Valitse suurempi joukko tai toisenlaiset parit. ¦ Ebben a készletben nincs elég személy ismert szülőfaluval (legalább 3 különböző pár kell). Válassz nagyobb készletet vagy másfajta párokat.
+Pas assez de personnes avec un métier dans cet ensemble (il faut au moins 3 paires différentes). Choisis un ensemble plus grand ou une autre sorte de paires. ¦ Tässä joukossa ei ole tarpeeksi henkilöitä, joiden ammatti tunnetaan (tarvitaan vähintään 3 eri paria). Valitse suurempi joukko tai toisenlaiset parit. ¦ Ebben a készletben nincs elég személy ismert foglalkozással (legalább 3 különböző pár kell). Válassz nagyobb készletet vagy másfajta párokat.
+Pas assez de personnes avec une année de naissance dans cet ensemble (il faut au moins 3 paires différentes). Choisis un ensemble plus grand ou une autre sorte de paires. ¦ Tässä joukossa ei ole tarpeeksi henkilöitä, joiden syntymävuosi tunnetaan (tarvitaan vähintään 3 eri paria). Valitse suurempi joukko tai toisenlaiset parit. ¦ Ebben a készletben nincs elég személy ismert születési évvel (legalább 3 különböző pár kell). Válassz nagyobb készletet vagy másfajta párokat.
+Pas assez de personnes dans cet ensemble (il faut au moins 3 paires différentes). Choisis un ensemble plus grand ou une autre sorte de paires. ¦ Tässä joukossa ei ole tarpeeksi henkilöitä (tarvitaan vähintään 3 eri paria). Valitse suurempi joukko tai toisenlaiset parit. ¦ Ebben a készletben nincs elég személy (legalább 3 különböző pár kell). Válassz nagyobb készletet vagy másfajta párokat.
+{a} / {b} paires ¦ {a} / {b} paria ¦ {a} / {b} pár
+📍 village ¦ 📍 kylä ¦ 📍 falu
+🛠 métier ¦ 🛠 ammatti ¦ 🛠 foglalkozás
+📅 née en ¦ 📅 syntynyt ¦ 📅 született
+=paire ¦ pari|paria ¦ pár|pár
+=coup ¦ siirto|siirtoa ¦ lépés|lépés
+au tour de {name} ¦ vuorossa: {name} ¦ {name} következik
+Les cartes ¦ Kortit ¦ A kártyák
+Carte retournée ¦ Kuvapuoli alaspäin ¦ Lefordított kártya
+Retourne une deuxième carte. ¦ Käännä toinen kortti. ¦ Fordíts fel egy második kártyát.
+Retourne deux cartes. ¦ Käännä kaksi korttia. ¦ Fordíts fel két kártyát.
+Clavier : flèches pour bouger, Entrée ou Espace pour retourner. ¦ Näppäimistö: nuolet liikkumiseen, Enter tai välilyönti kääntämiseen. ¦ Billentyűzet: nyilak a mozgáshoz, Enter vagy Szóköz a felfordításhoz.
+Égalité : {names} ! ¦ Tasapeli: {names}! ¦ Döntetlen: {names}!
+{name} gagne ! ¦ {name} voittaa! ¦ {name} nyer!
+Toutes les paires ! ¦ Kaikki parit! ¦ Az összes pár megvan!
+{moves} en {time}. ¦ {moves} ajassa {time}. ¦ {moves}, idő: {time}.
+La bonne date ¦ Oikea päivämäärä ¦ A helyes dátum
+LA BONNE DATE ¦ OIKEA PÄIVÄMÄÄRÄ ¦ A HELYES DÁTUM
+Pose chaque événement de la famille à sa place sur la frise, de la plus ancienne à la plus récente : naissances, mariages, décès, et si tu veux des dates de l’histoire de France. ¦ Sijoita jokainen suvun tapahtuma paikalleen aikajanalle vanhimmasta uusimpaan: syntymät, avioliitot, kuolemat ja halutessasi päivämääriä Ranskan historiasta. ¦ Tedd a család minden eseményét a helyére az idővonalon, a legrégebbitől a legújabbig: születések, házasságok, halálozások, és ha szeretnéd, dátumok Franciaország történelméből.
+Juste : la carte reste et tu marques un point. Faux : elle se range à sa vraie place et tu perds une vie. ¦ Oikein: kortti jää ja saat pisteen. Väärin: se siirtyy oikealle paikalleen ja menetät yhden elämän. ¦ Jó: a kártya ott marad, és kapsz egy pontot. Rossz: a valódi helyére kerül, és elveszítesz egy életet.
+5 ans ¦ 5 vuotta ¦ 5 év
+10 ans ¦ 10 vuotta ¦ 10 év
+25 ans ¦ 25 vuotta ¦ 25 év
+👶 Naissances ¦ 👶 Syntymät ¦ 👶 Születések
+💍 Mariages ¦ 💍 Avioliitot ¦ 💍 Házasságok
+✝ Décès ¦ ✝ Kuolemat ¦ ✝ Halálozások
+Facile ¦ Helppo ¦ Könnyű
+8 cartes, au moins 25 ans d’écart ¦ 8 korttia, vähintään 25 vuoden välein ¦ 8 kártya, legalább 25 év különbséggel
+Avec l’histoire ¦ Historian kanssa ¦ Történelemmel
+La famille et les grandes dates de France ¦ Suku ja Ranskan historian merkkipäivät ¦ A család és Franciaország nagy dátumai
+Champion ¦ Mestari ¦ Bajnok
+25 cartes, dates proches, 1 vie ¦ 25 korttia, läheiset päivämäärät, 1 elämä ¦ 25 kártya, közeli dátumok, 1 élet
+📜 Ajouter des dates de l’histoire de France (Révolution, guerres, école obligatoire…) ¦ 📜 Lisää päivämääriä Ranskan historiasta (vallankumous, sodat, oppivelvollisuus…) ¦ 📜 Dátumok hozzáadása Franciaország történelméből (forradalom, háborúk, tankötelezettség…)
+Écart minimum entre deux cartes ¦ Vähimmäisväli kahden kortin välillä ¦ Legkisebb különbség két kártya között
+Nombre de cartes ¦ Korttien määrä ¦ Kártyák száma
+Vies par joueur (0 = sans vies, on compte les points) ¦ Elämiä pelaajaa kohden (0 = ei elämiä, pisteet lasketaan) ¦ Életek játékosonként (0 = nincs élet, a pontok számítanak)
+Garde au moins une sorte d’événement. ¦ Pidä vähintään yksi tapahtumalaji. ¦ Tarts meg legalább egyféle eseményt.
+Pas assez d’événements datés avec ces réglages (il en faut au moins 5). Ajoute les dates de l’histoire, un écart plus petit ou un ensemble plus grand. ¦ Näillä asetuksilla ei ole tarpeeksi päivättyjä tapahtumia (tarvitaan vähintään 5). Lisää historian päivämääriä, pienempi väli tai suurempi joukko. ¦ Ezekkel a beállításokkal nincs elég datált esemény (legalább 5 kell). Adj hozzá történelmi dátumokat, kisebb különbséget vagy nagyobb készletet.
+{a} / {b} cartes ¦ {a} / {b} korttia ¦ {a} / {b} kártya
+{what} sur {n} ¦ {what} / {n} ¦ {what} / {n}
+Poser ici, avant tout ¦ Aseta tähän, kaiken edelle ¦ Ide tedd, mindennél előrébb
+Poser ici, après tout ¦ Aseta tähän, kaiken jälkeen ¦ Ide tedd, minden után
+Poser ici, entre « {a} » et « {b} » ¦ Aseta tähän, korttien ”{a}” ja ”{b}” väliin ¦ Ide tedd, „{a}” és „{b}” közé
+Ici ¦ Tähän ¦ Ide
+{name}, pose cette carte : ¦ {name}, aseta tämä kortti: ¦ {name}, tedd le ezt a kártyát:
+Pose cette carte à sa place : ¦ Aseta tämä kortti paikalleen: ¦ Tedd a helyére ezt a kártyát:
+Glisse-la sur « ⬇ Ici », ou clique (Tab puis Entrée) sur la bonne place. ¦ Vedä se kohtaan ”⬇ Tähän” tai napsauta (Tab ja sitten Enter) oikeaa kohtaa. ¦ Húzd az „⬇ Ide” részre, vagy kattints (Tab, majd Enter) a megfelelő helyre.
+plus de vie ¦ ei elämiä jäljellä ¦ nincs több élet
+✓ Bien placé ! ¦ ✓ Oikein sijoitettu! ¦ ✓ Jó helyen!
+✗ Pas tout à fait ¦ ✗ Ei aivan ¦ ✗ Nem egészen
+La frise, de la plus ancienne à la plus récente ¦ Aikajana vanhimmasta uusimpaan ¦ Az idővonal a legrégebbitől a legújabbig
+plus ancien ¦ vanhin ¦ legrégebbi
+plus récent ¦ uusin ¦ legújabb
+{what} sur la frise. ¦ {what} aikajanalla. ¦ {what} az idővonalon.
+=carte posée ¦ kortti asetettu|korttia asetettu ¦ lerakott kártya|lerakott kártya
+=carte ¦ kortti|korttia ¦ kártya|kártya
+Bataille de Marignan ¦ Marignanon taistelu ¦ A marignanói csata
+Ordonnance de Villers-Cotterêts : les curés tiennent les registres en français ¦ Villers-Cotterêts’n asetus: papit pitävät kirkonkirjoja ranskaksi ¦ A Villers-Cotterêts-i rendelet: a papok franciául vezetik az anyakönyveket
+Massacre de la Saint-Barthélemy ¦ Pärttylinyö ¦ A Szent Bertalan-éj
+Édit de Nantes ¦ Nantesin edikti ¦ A nantes-i ediktum
+Assassinat d’Henri IV ¦ Henrik IV:n murha ¦ IV. Henrik meggyilkolása
+Louis XIV devient roi ¦ Ludvig XIV:stä tulee kuningas ¦ XIV. Lajos király lesz
+Ordonnance de Saint-Germain-en-Laye : registres en double ¦ Saint-Germain-en-Layen asetus: kirkonkirjat kahtena kappaleena ¦ A Saint-Germain-en-Laye-i rendelet: anyakönyvek két példányban
+Révocation de l’édit de Nantes ¦ Nantesin ediktin kumoaminen ¦ A nantes-i ediktum visszavonása
+Le « Grand Hiver » ¦ ”Suuri talvi” ¦ A „nagy tél”
+Mort de Louis XIV ¦ Ludvig XIV:n kuolema ¦ XIV. Lajos halála
+Début de la guerre de Sept Ans ¦ Seitsenvuotisen sodan alku ¦ A hétéves háború kezdete
+Prise de la Bastille ¦ Bastiljin valtaus ¦ A Bastille ostroma
+L’état civil est confié aux mairies ¦ Väestökirjanpito siirretään kunnille ¦ Az anyakönyvezést a polgármesteri hivatalokra bízzák
+Napoléon Ier, empereur ¦ Napoleon I, keisari ¦ I. Napóleon császár
+Bataille de Waterloo ¦ Waterloon taistelu ¦ A waterlooi csata
+Révolution de Juillet ¦ Heinäkuun vallankumous ¦ A júliusi forradalom
+Grande épidémie de choléra ¦ Suuri koleraepidemia ¦ Nagy kolerajárvány
+Suffrage universel masculin, fin de l’esclavage ¦ Yleinen äänioikeus miehille, orjuuden loppu ¦ Általános férfi választójog, a rabszolgaság vége
+Second Empire ¦ Toinen keisarikunta ¦ A második császárság
+Nouvelle épidémie de choléra ¦ Uusi koleraepidemia ¦ Újabb kolerajárvány
+Guerre franco-prussienne ¦ Ranskan–Preussin sota ¦ A porosz–francia háború
+La Commune de Paris ¦ Pariisin kommuuni ¦ A párizsi kommün
+École gratuite, laïque et obligatoire ¦ Maksuton, maallinen ja pakollinen koulu ¦ Ingyenes, világi és kötelező iskola
+Tour Eiffel ¦ Eiffel-torni ¦ Az Eiffel-torony
+Séparation des Églises et de l’État ¦ Kirkon ja valtion erottaminen ¦ Az egyház és az állam szétválasztása
+Début de la Première Guerre mondiale ¦ Ensimmäisen maailmansodan alku ¦ Az első világháború kezdete
+Armistice du 11 novembre ¦ 11. marraskuuta solmittu aselepo ¦ A november 11-i fegyverszünet
+Grippe espagnole ¦ Espanjantauti ¦ A spanyolnátha
+Premiers congés payés ¦ Ensimmäiset palkalliset lomat ¦ Az első fizetett szabadság
+Début de la Seconde Guerre mondiale ¦ Toisen maailmansodan alku ¦ A második világháború kezdete
+Droit de vote des femmes ¦ Naisten äänioikeus ¦ A nők választójoga
+Fin de la Seconde Guerre mondiale ¦ Toisen maailmansodan loppu ¦ A második világháború vége
+Ve République ¦ Viides tasavalta ¦ Az Ötödik Köztársaság
+Mai 68 ¦ Toukokuu 68 ¦ 1968 májusa
+Premiers pas sur la Lune ¦ Ensimmäiset askeleet Kuussa ¦ Az első lépések a Holdon
+Abolition de la peine de mort ¦ Kuolemanrangaistuksen poistaminen ¦ A halálbüntetés eltörlése
+L’euro en pièces et billets ¦ Euro kolikkoina ja seteleinä ¦ Az euró érmékben és bankjegyekben
+Morpion à règles libres ¦ Ristinolla omilla säännöillä ¦ Amőba saját szabályokkal
+Morpion ¦ Ristinolla ¦ Amőba
+MORPION ¦ RISTINOLLA ¦ AMŐBA
+Aligne tes symboles avant les autres : choisis la taille de la grille, combien à la suite, le nombre de joueurs et vos symboles (ou le portrait d’un ancêtre). ¦ Saa symbolisi riviin ennen muita: valitse ruudukon koko, montako peräkkäin, pelaajien määrä ja symbolinne (tai esivanhemman muotokuva). ¦ Rakd ki a jeleidet egy sorba a többiek előtt: válaszd ki a rács méretét, hogy hányat kell egymás mellé, a játékosok számát és a jeleiteket (vagy egy felmenő portréját).
+Le premier qui aligne le nombre demandé (en ligne, en colonne et, si on veut, en diagonale) gagne la manche. ¦ Ensimmäinen, joka saa vaaditun määrän riviin (vaakaan, pystyyn ja halutessa vinottain), voittaa erän. ¦ Aki elsőként rak ki egy sorba a kért számú jelet (vízszintesen, függőlegesen és, ha szeretnéd, átlósan), megnyeri a kört.
+Ex : Le grand tournoi ¦ Esim. Suuri turnaus ¦ Pl. A nagy bajnokság
+La grille et les règles ¦ Ruudukko ja säännöt ¦ A rács és a szabályok
+🙂 Une personne ¦ 🙂 Henkilö ¦ 🙂 Egy személy
+🤖 Ordinateur (simple) ¦ 🤖 Tietokone (helppo) ¦ 🤖 Számítógép (könnyű)
+🤖 Ordinateur (moyen) ¦ 🤖 Tietokone (keskitaso) ¦ 🤖 Számítógép (közepes)
+Morpion classique ¦ Klassinen ristinolla ¦ Klasszikus amőba
+3×3, aligner 3 ¦ 3×3, kolme riviin ¦ 3×3, három egy sorba
+Puissance 4 ¦ Neljän suora ¦ Négy a sorban
+6 lignes × 7 colonnes, gravité, aligner 4 ¦ 6 riviä × 7 saraketta, painovoima, neljä riviin ¦ 6 sor × 7 oszlop, gravitáció, négy egy sorba
+Cinq à la suite ¦ Viisi riviin ¦ Öt egy sorba
+15×15, aligner 5 ¦ 15×15, viisi riviin ¦ 15×15, öt egy sorba
+Grille sans fin ¦ Loputon ruudukko ¦ Végtelen rács
+Commence en 5×5 et s’agrandit, aligner 5 ¦ Alkaa 5×5:stä ja kasvaa, viisi riviin ¦ 5×5-ről indul és nő, öt egy sorba
+Jusqu’à remplir la grille ¦ Kunnes ruudukko on täynnä ¦ Amíg meg nem telik a rács
+10×10, on compte les alignements de 4 ¦ 10×10, neljän rivit lasketaan ¦ 10×10, a négyes sorokat számoljuk
+⬇ Gravité (les pions tombent, comme au « puissance 4 ») ¦ ⬇ Painovoima (nappulat putoavat kuten ”neljän suorassa”) ¦ ⬇ Gravitáció (a korongok leesnek, mint a „Négy a sorban” játékban)
+↗ Les diagonales comptent ¦ ↗ Vinorivit lasketaan ¦ ↗ Az átlók is számítanak
+⤢ La grille s’agrandit quand on joue au bord (sans la gravité) ¦ ⤢ Ruudukko kasvaa, kun pelataan reunalla (ilman painovoimaa) ¦ ⤢ A rács nő, ha a szélén játszol (gravitáció nélkül)
+🧮 Jouer jusqu’à remplir la grille : chaque alignement compte un point (une suite deux fois plus longue en vaut deux), le plus de points gagne ¦ 🧮 Pelaa, kunnes ruudukko on täynnä: jokainen rivi antaa pisteen (kaksi kertaa pidempi antaa kaksi), eniten pisteitä voittaa ¦ 🧮 Játék a rács megteltéig: minden sor egy pontot ér (egy kétszer olyan hosszú kettőt), a legtöbb pont nyer
+Combien à la suite pour gagner ¦ Montako riviin voittaakseen ¦ Hányat kell egy sorba rakni a győzelemhez
+à la suite ¦ riviin ¦ egy sorba
+lignes ¦ riviä ¦ sor
+colonnes ¦ saraketta ¦ oszlop
+Symbole ¦ Symboli ¦ Jel
+Une lettre… ¦ Kirjain… ¦ Egy betű…
+Le portrait d’un ancêtre… ¦ Esivanhemman muotokuva… ¦ Egy felmenő portréja…
+Qui joue ¦ Kuka pelaa ¦ Ki játszik
+Il faut au moins une personne pour jouer (sinon les ordinateurs jouent tout seuls). ¦ Tarvitaan vähintään yksi ihmispelaaja (muuten tietokoneet pelaavat keskenään). ¦ Legalább egy emberi játékos kell (különben a számítógépek maguk között játszanak).
+Choisis l’ancêtre de chaque joueur qui a le symbole « portrait ». ¦ Valitse esivanhempi jokaiselle pelaajalle, jolla on ”muotokuva”-symboli. ¦ Válaszd ki a felmenőt minden „portré” jelű játékosnak.
+Deux joueurs ont le même symbole : choisis-en un différent pour chacun. ¦ Kahdella pelaajalla on sama symboli: valitse kullekin eri symboli. ¦ Két játékosnak ugyanaz a jele: válassz mindegyiknek másikat.
+Manche en cours ¦ Erä käynnissä ¦ Folyamatban lévő kör
+Manche {n} ¦ Erä {n} ¦ {n}. kör
+aligner {n} ¦ {n} riviin ¦ {n} egy sorba
+gravité ¦ painovoima ¦ gravitáció
+sans diagonales ¦ ilman vinorivejä ¦ átlók nélkül
+grille qui s’agrandit ¦ kasvava ruudukko ¦ növekvő rács
+jusqu’à remplir la grille ¦ kunnes ruudukko on täynnä ¦ amíg meg nem telik a rács
+La grille ¦ Ruudukko ¦ A rács
+Ligne {r}, colonne {c} : {name} ¦ Rivi {r}, sarake {c}: {name} ¦ {r}. sor, {c}. oszlop: {name}
+Ligne {r}, colonne {c} ¦ Rivi {r}, sarake {c} ¦ {r}. sor, {c}. oszlop
+=manche gagnée ¦ voitettu erä|voitettua erää ¦ megnyert kör|megnyert kör
+🎉 {name} gagne la manche avec {pts} ! ¦ 🎉 {name} voittaa erän: {pts}! ¦ 🎉 {name} megnyeri a kört: {pts}!
+🎉 {name} gagne la manche ! ¦ 🎉 {name} voittaa erän! ¦ 🎉 {name} megnyeri a kört!
+🤝 Égalité : la grille est pleine, même nombre de points. ¦ 🤝 Tasapeli: ruudukko on täynnä, yhtä paljon pisteitä. ¦ 🤝 Döntetlen: a rács megtelt, egyenlő a pontszám.
+🤝 Match nul : la grille est pleine. ¦ 🤝 Tasapeli: ruudukko on täynnä. ¦ 🤝 Döntetlen: a rács megtelt.
+À {name} de jouer (l’ordinateur réfléchit…). ¦ Vuorossa {name} (tietokone miettii…). ¦ {name} következik (a számítógép gondolkodik…).
+À {name} de jouer. ¦ Vuorossa {name}. ¦ {name} következik.
+« ↻ Rejouer » en haut : une nouvelle manche, les scores de la soirée sont gardés. ¦ ”↻ Pelaa uudelleen” ylhäällä: uusi erä, illan pisteet säilyvät. ¦ „↻ Újra” fent: új kör, az esti pontszámok megmaradnak.
+Annuler le dernier coup ¦ Kumoa viimeinen siirto ¦ Az utolsó lépés visszavonása
+Clavier : flèches puis Entrée. Avec la gravité, une case de la colonne suffit : le pion tombe. ¦ Näppäimistö: nuolet ja sitten Enter. Painovoiman kanssa mikä tahansa sarakkeen ruutu käy: nappula putoaa. ¦ Billentyűzet: nyilak, majd Enter. Gravitációnál az oszlop bármelyik mezője jó: a korong leesik.
+Clavier : flèches puis Entrée. ¦ Näppäimistö: nuolet ja sitten Enter. ¦ Billentyűzet: nyilak, majd Enter.
+{name} a gagné ¦ {name} voitti ¦ {name} nyert
+{name} a gagné ({pts}) ¦ {name} voitti ({pts}) ¦ {name} nyert ({pts})
+Égalité ¦ Tasapeli ¦ Döntetlen
+Match nul ¦ Tasapeli ¦ Döntetlen
+Bataille navale ¦ Laivanupotus ¦ Torpedó
+BATAILLE NAVALE ¦ LAIVANUPOTUS ¦ TORPEDÓ
+Coule la flotte de l’autre avant qu’il ne coule la tienne : contre l’ordinateur, ou à deux sur le même écran. Les navires peuvent porter le nom de tes ancêtres. ¦ Upota toisen laivasto ennen kuin hän upottaa sinun: tietokonetta vastaan tai kaksin samalla näytöllä. Laivat voivat kantaa esivanhempiesi nimiä. ¦ Süllyeszd el a másik flottáját, mielőtt ő a tiédet: a számítógép ellen vagy kettesben ugyanazon a képernyőn. A hajók viselhetik a felmenőid nevét.
+Un clic sur la grille de l’adversaire pour tirer : « à l’eau », « touché » ou « coulé ». Le premier qui coule toute la flotte gagne. ¦ Ammu napsauttamalla vastustajan ruudukkoa: ”ohi”, ”osui” tai ”upposi”. Ensimmäinen, joka upottaa koko laivaston, voittaa. ¦ A lövéshez kattints az ellenfél rácsára: „víz”, „talált” vagy „elsüllyedt”. Aki elsőként süllyeszti el az egész flottát, nyer.
+Ex : La revanche de Mamie ¦ Esim. Mummon revanssi ¦ Pl. Nagyi visszavág
+La mer et la flotte ¦ Meri ja laivasto ¦ A tenger és a flotta
+🤖 Ordinateur (malin) ¦ 🤖 Tietokone (ovela) ¦ 🤖 Számítógép (ravasz)
+Porte-avions ¦ Lentotukialus ¦ Repülőgép-hordozó
+Croiseur ¦ Risteilijä ¦ Cirkáló
+Frégate ¦ Fregatti ¦ Fregatt
+Sous-marin ¦ Sukellusvene ¦ Tengeralattjáró
+Navire ¦ Alus ¦ Hajó
+=navire ¦ alus|alusta ¦ hajó|hajó
+=navire coulé ¦ upotettu alus|upotettua alusta ¦ elsüllyesztett hajó|elsüllyesztett hajó
+Petite mer ¦ Pieni meri ¦ Kis tenger
+7×7, petite flotte ¦ 7×7, pieni laivasto ¦ 7×7, kis flotta
+Bataille classique ¦ Klassinen taistelu ¦ Klasszikus csata
+10×10, 5 navires ¦ 10×10, 5 alusta ¦ 10×10, 5 hajó
+Grande escadre ¦ Suuri eskaaderi ¦ Nagy hajóraj
+14×14, 7 navires ¦ 14×14, 7 alusta ¦ 14×14, 7 hajó
+En rafale ¦ Sarjatuli ¦ Sortűz
+10×10, on rejoue quand on touche ¦ 10×10, osuman jälkeen ammutaan uudelleen ¦ 10×10, találat után újra lőhetsz
+La flotte ne tient pas dans cette grille : prends une grille plus grande ou une flotte plus petite. ¦ Laivasto ei mahdu tähän ruudukkoon: valitse suurempi ruudukko tai pienempi laivasto. ¦ A flotta nem fér el ebben a rácsban: válassz nagyobb rácsot vagy kisebb flottát.
+La flotte ¦ Laivasto ¦ A flotta
+Petite (4 navires) ¦ Pieni (4 alusta) ¦ Kicsi (4 hajó)
+Classique (5) ¦ Klassinen (5) ¦ Klasszikus (5)
+Grande (7) ¦ Suuri (7) ¦ Nagy (7)
+🎯 On rejoue quand on touche ¦ 🎯 Osuman jälkeen ammutaan uudelleen ¦ 🎯 Találat után újra lőhetsz
+⚓ Les navires portent le nom d’ancêtres ¦ ⚓ Laivat kantavat esivanhempien nimiä ¦ ⚓ A hajók felmenők nevét viselik
+Taille de la mer ¦ Meren koko ¦ A tenger mérete
+cases de côté ¦ ruutua sivulla ¦ mező oldalanként
+Il faut au moins une personne pour jouer. ¦ Tarvitaan vähintään yksi ihmispelaaja. ¦ Legalább egy emberi játékos kell.
+le {name} ¦ {name} ¦ {name}
+Bataille en cours ¦ Taistelu käynnissä ¦ Folyamatban lévő csata
+à l’eau ¦ ohi ¦ víz
+touché ¦ osui ¦ talált
+touché ! ¦ osui! ¦ talált!
+coulé ¦ upposi ¦ elsüllyedt
+coulé : {ship} ({kind}) ¦ upposi: {ship} ({kind}) ¦ elsüllyedt: {ship} ({kind})
+on rejoue quand on touche ¦ osuman jälkeen ammutaan uudelleen ¦ találat után újra lőhetsz
+{a}, à toi : que {b} détourne les yeux. ¦ {a}, sinun vuorosi: {b}, katso muualle. ¦ {a}, te jössz: {b}, nézz félre.
+Je suis {name} : voir ma mer ¦ Olen {name}: näytä mereni ¦ Én vagyok {name}: mutasd a tengeremet
+La mer de {name} ¦ Pelaajan {name} meri ¦ {name} tengere
+Ta flotte ({name}) ¦ Laivastosi ({name}) ¦ A flottád ({name})
+Ta flotte ¦ Laivastosi ¦ A flottád
+🎉 {name} a coulé toute la flotte ! ¦ 🎉 {name} upotti koko laivaston! ¦ 🎉 {name} elsüllyesztette az egész flottát!
+À toi de tirer, {a} : clique sur la mer de {b}. ¦ Sinun vuorosi ampua, {a}: napsauta pelaajan {b} merta. ¦ Te lősz, {a}: kattints {b} tengerére.
+{name} vise… ¦ {name} tähtää… ¦ {name} céloz…
+« ↻ Rejouer » en haut : une nouvelle manche, les scores sont gardés. ¦ ”↻ Pelaa uudelleen” ylhäällä: uusi erä, pisteet säilyvät. ¦ „↻ Újra” fent: új kör, a pontszámok megmaradnak.
+{name} a gagné en {n} tirs ¦ {name} voitti {n} laukauksella ¦ {name} {n} lövéssel nyert
+Câbles ¦ Kaapelit ¦ Kábelek
+Les câbles ¦ Kaapelit ¦ A kábelek
+LES CÂBLES ¦ KAAPELIT ¦ KÁBELEK
+Tourne les bouts de câble pour relier tous les postes au serveur, sans câble dans le vide. Avec ou sans bords qui se rejoignent. ¦ Käännä kaapelinpätkiä yhdistääksesi kaikki tietokoneet palvelimeen ilman irtonaisia päitä. Reunat yhdistyvät tai eivät. ¦ Forgasd a kábeldarabokat, hogy minden gépet a szerverhez kapcsolj, szabad végek nélkül. Összeérő szélekkel vagy anélkül.
+Clic : tourner d’un quart de tour (clic droit ou Maj : dans l’autre sens). Alt+clic ou le mode 🔒 : verrouiller une case sûre. ¦ Napsautus: käännä neljännes kierrosta (oikea napsautus tai vaihto: toiseen suuntaan). Alt+napsautus tai 🔒-tila: lukitse ruutu, josta olet varma. ¦ Kattintás: negyed fordulat (jobb kattintás vagy Shift: a másik irányba). Alt+kattintás vagy a 🔒 mód: egy biztos mező zárolása.
+Ex : Le réseau de la famille ¦ Esim. Suvun verkosto ¦ Pl. A család hálózata
+Le réseau ¦ Verkko ¦ A hálózat
+Débutant ¦ Aloittelija ¦ Kezdő
+Expert : bords qui se rejoignent ¦ Asiantuntija: reunat yhdistyvät ¦ Szakértő: összeérő szélek
+9×9, un câble peut passer d’un bord à l’autre ¦ 9×9, kaapeli voi kulkea reunalta toiselle ¦ 9×9, egy kábel átmehet az egyik szélről a másikra
+Géant ¦ Jättiläinen ¦ Óriás
+13×13, bords qui se rejoignent ¦ 13×13, reunat yhdistyvät ¦ 13×13, összeérő szélek
+🔁 Les bords se rejoignent (un câble qui sort à droite revient à gauche, en haut revient en bas) ¦ 🔁 Reunat yhdistyvät (oikealta lähtevä kaapeli palaa vasemmalta, ylhäältä lähtevä alhaalta) ¦ 🔁 A szélek összeérnek (a jobbra kilépő kábel balról jön vissza, a felül kilépő alul)
+👪 Les postes portent le nom d’ancêtres ¦ 👪 Tietokoneet kantavat esivanhempien nimiä ¦ 👪 A gépek felmenők nevét viselik
+Réseau à relier ¦ Yhdistettävä verkko ¦ Összekapcsolandó hálózat
+bords qui se rejoignent ¦ reunat yhdistyvät ¦ összeérő szélek
+Le serveur ¦ Palvelin ¦ A szerver
+Case {r}, {c} (serveur) ¦ Ruutu {r}, {c} (palvelin) ¦ {r}, {c} mező (szerver)
+Case {r}, {c} (poste) ¦ Ruutu {r}, {c} (tietokone) ¦ {r}, {c} mező (gép)
+Case {r}, {c} ¦ Ruutu {r}, {c} ¦ {r}, {c} mező
+, reliée ¦ , yhdistetty ¦ , csatlakoztatva
+🎉 Tout est relié en {moves} et {time} ! ¦ 🎉 Kaikki yhdistetty: {moves}, {time}! ¦ 🎉 Minden összekapcsolva: {moves}, {time}!
+{a} / {b} cases reliées ¦ {a} / {b} ruutua yhdistetty ¦ {a} / {b} mező csatlakoztatva
+=bout dans le vide ¦ irtonainen pää|irtonaista päätä ¦ szabad vég|szabad vég
+record {moves}, {time} ¦ ennätys {moves}, {time} ¦ rekord {moves}, {time}
+Mode verrou (actif) ¦ Lukitustila (päällä) ¦ Zároló mód (bekapcsolva)
+Mode verrou ¦ Lukitustila ¦ Zároló mód
+Les bords se rejoignent : un câble qui sort d’un côté continue de l’autre côté. ¦ Reunat yhdistyvät: toiselta puolelta lähtevä kaapeli jatkuu toisella puolella. ¦ A szélek összeérnek: az egyik oldalon kilépő kábel a másik oldalon folytatódik.
+=ancêtre relié ¦ yhdistetty esivanhempi|yhdistettyä esivanhempaa ¦ csatlakoztatott felmenő|csatlakoztatott felmenő
+Case verrouillée (Alt+clic pour la déverrouiller). ¦ Ruutu lukittu (Alt+napsautus avaa lukituksen). ¦ Zárolt mező (Alt+kattintás a feloldáshoz).
+Relié en {n} coups ¦ Yhdistetty {n} siirrolla ¦ {n} lépésben összekapcsolva
+🤖 Ordinateur facile ¦ 🤖 Helppo tietokone ¦ 🤖 Könnyű számítógép
+🤖 Ordinateur moyen ¦ 🤖 Keskitason tietokone ¦ 🤖 Közepes számítógép
+🤖 Ordinateur difficile ¦ 🤖 Vaikea tietokone ¦ 🤖 Nehéz számítógép
+niveau|facile ¦ helppo ¦ könnyű
+niveau|moyen ¦ keskitaso ¦ közepes
+niveau|difficile ¦ vaikea ¦ nehéz
+Difficile ¦ Vaikea ¦ Nehéz
+=victoire ¦ voitto|voittoa ¦ győzelem|győzelem
+=nulle ¦ tasapeli|tasapeliä ¦ döntetlen|döntetlen
+=défaite ¦ tappio|tappiota ¦ vereség|vereség
+record : {what} ¦ ennätys: {what} ¦ rekord: {what}
+{what} : ¦ {what}: ¦ {what}:
+LES RÈGLES ¦ SÄÄNNÖT ¦ A SZABÁLYOK
+La partie ¦ Peli ¦ A játék
+Le temps de la partie (sans les pauses) ¦ Peliaika (ilman taukoja) ¦ Játékidő (szünetek nélkül)
+Un conseil (touche H) ¦ Vihje (näppäin H) ¦ Tipp (H billentyű)
+Reprendre (Échap) ¦ Jatka (Esc) ¦ Folytatás (Esc)
+Pause (Échap) ¦ Tauko (Esc) ¦ Szünet (Esc)
+Reprendre ¦ Jatka ¦ Folytatás
+Pause ¦ Tauko ¦ Szünet
+Les règles de {name} ¦ Pelin {name} säännöt ¦ {name} szabályai
+Les règles de ce jeu ¦ Tämän pelin säännöt ¦ A játék szabályai
+Le chrono est arrêté. Échap ou le bouton pour reprendre. ¦ Kello on pysäytetty. Jatka Esc-näppäimellä tai painikkeella. ¦ Az óra megállt. A folytatáshoz nyomd meg az Esc-et vagy a gombot.
+Les règles : {name} ¦ Säännöt: {name} ¦ Szabályok: {name}
+ÉCHECS ¦ SHAKKI ¦ SAKK
+Le jeu d’échecs avec toutes ses règles : à deux sur le même écran ou contre l’ordinateur (facile, moyen ou difficile), pendule si tu veux. ¦ Shakki kaikkine sääntöineen: kaksin samalla näytöllä tai tietokonetta vastaan (helppo, keskitaso tai vaikea), halutessasi kellon kanssa. ¦ Sakk az összes szabályával: kettesben ugyanazon a képernyőn vagy a számítógép ellen (könnyű, közepes vagy nehéz), ha szeretnéd, sakkórával.
+Les blancs commencent. Clique une pièce puis sa case (ou glisse-la). Les règles complètes sont dans le « ? » de la partie. ¦ Valkea aloittaa. Napsauta nappulaa ja sitten sen ruutua (tai vedä se). Täydelliset säännöt ovat pelin ”?”-kohdassa. ¦ Világos kezd. Kattints egy bábura, majd a mezőjére (vagy húzd oda). A teljes szabályok a játék „?” gombja alatt vannak.
+Ex : La revanche de Papi ¦ Esim. Vaarin revanssi ¦ Pl. Nagypapa visszavág
+Partie tranquille ¦ Rauhallinen peli ¦ Nyugodt játszma
+Sans pendule, 3 conseils ¦ Ilman kelloa, 3 vihjettä ¦ Óra nélkül, 3 tipp
+Partie longue ¦ Pitkä peli ¦ Hosszú játszma
+30 minutes chacun ¦ 30 minuuttia kummallekin ¦ 30 perc fejenként
+Partie rapide ¦ Pikapeli ¦ Rapid játszma
+15 minutes chacun, + 10 secondes par coup ¦ 15 minuuttia kummallekin, + 10 sekuntia siirrolta ¦ 15 perc fejenként, + 10 másodperc lépésenként
+Blitz ¦ Salamashakki ¦ Villámsakk
+5 minutes chacun, + 2 secondes par coup ¦ 5 minuuttia kummallekin, + 2 sekuntia siirrolta ¦ 5 perc fejenként, + 2 másodperc lépésenként
+Chaque joueur a 16 pièces. Les blancs commencent. On gagne en <b>mettant le roi adverse échec et mat</b> : il est attaqué et ne peut plus s’échapper. ¦ Kummallakin pelaajalla on 16 nappulaa. Valkea aloittaa. Voitat <b>tekemällä vastustajan kuninkaalle shakkimatin</b>: sitä uhataan, eikä se pääse enää pakoon. ¦ Mindkét játékosnak 16 bábuja van. Világos kezd. Az nyer, aki <b>mattot ad az ellenfél királyának</b>: támadás alatt áll, és már nem tud elmenekülni.
+<b>Roi ♚</b> : une case dans tous les sens. <b>Dame ♛</b> : autant de cases qu’on veut, en ligne, en colonne et en diagonale. <b>Tour ♜</b> : en ligne et en colonne. <b>Fou ♝</b> : en diagonale. <b>Cavalier ♞</b> : en « L », il saute par-dessus les pièces. <b>Pion ♟</b> : avance d’une case (deux au premier coup), prend en diagonale. ¦ <b>Kuningas ♚</b>: yksi ruutu mihin suuntaan tahansa. <b>Kuningatar ♛</b>: niin monta ruutua kuin haluat, vaaka- ja pystysuunnassa sekä vinottain. <b>Torni ♜</b>: vaaka- ja pystysuunnassa. <b>Lähetti ♝</b>: vinottain. <b>Ratsu ♞</b>: ”L”-muodossa, hyppää nappuloiden yli. <b>Sotilas ♟</b>: yksi ruutu eteenpäin (kaksi ensimmäisellä siirrolla), lyö vinottain. ¦ <b>Király ♚</b>: egy mezőt bármely irányba. <b>Vezér ♛</b>: akárhány mezőt, vízszintesen, függőlegesen és átlósan. <b>Bástya ♜</b>: vízszintesen és függőlegesen. <b>Futó ♝</b>: átlósan. <b>Huszár ♞</b>: „L” alakban, átugorja a bábukat. <b>Gyalog ♟</b>: egy mezőt előre (az első lépésnél kettőt), átlósan üt.
+<b>Roque</b> : le roi va de deux cases vers une tour, la tour passe de l’autre côté. Impossible si le roi ou cette tour ont déjà bougé, si le roi est en échec, ou s’il passe ou arrive sur une case attaquée. ¦ <b>Linnoitus</b>: kuningas siirtyy kaksi ruutua tornia kohti, ja torni siirtyy sen toiselle puolelle. Ei sallittu, jos kuningas tai kyseinen torni on jo liikkunut, jos kuningas on shakissa tai jos se kulkee uhatun ruudun kautta tai päätyy sellaiseen. ¦ <b>Sáncolás</b>: a király két mezőt lép egy bástya felé, a bástya pedig átkerül a másik oldalára. Nem lehet, ha a király vagy az a bástya már lépett, ha a király sakkban áll, vagy ha támadott mezőn haladna át vagy érkezne meg.
+<b>Prise en passant</b> : un pion qui avance de deux cases à côté d’un pion adverse peut être pris comme s’il n’avait avancé que d’une case, mais seulement au coup suivant. ¦ <b>Ohestalyönti</b>: sotilas, joka siirtyy kaksi ruutua vastustajan sotilaan viereen, voidaan lyödä ikään kuin se olisi siirtynyt vain yhden ruudun, mutta vain heti seuraavalla siirrolla. ¦ <b>En passant</b>: az ellenfél gyalogja mellé két mezőt lépő gyalogot úgy lehet leütni, mintha csak egyet lépett volna, de csak a rögtön következő lépésben.
+<b>Promotion</b> : un pion qui arrive au bout devient la pièce qu’on choisit (dame, tour, fou ou cavalier). ¦ <b>Korotus</b>: viimeiselle riville päässyt sotilas muuttuu valitsemaksesi nappulaksi (kuningatar, torni, lähetti tai ratsu). ¦ <b>Átváltozás</b>: a túlsó szélre érő gyalog a választott bábuvá változik (vezér, bástya, futó vagy huszár).
+<b>Pat</b> : celui qui doit jouer n’est pas en échec mais n’a aucun coup possible : partie nulle. ¦ <b>Patti</b>: siirtovuorossa oleva ei ole shakissa, mutta hänellä ei ole yhtään sallittua siirtoa: tasapeli. ¦ <b>Patt</b>: a soron lévő játékos nem áll sakkban, de nincs szabályos lépése: döntetlen.
+<b>Autres nulles</b> : la même position trois fois ; 50 coups de chaque côté sans prise ni pion avancé ; plus assez de pièces pour mater (roi seul, roi et fou, roi et cavalier…). ¦ <b>Muut tasapelit</b>: sama asema kolme kertaa; 50 siirtoa kummaltakin ilman lyöntiä tai sotilaan siirtoa; liian vähän nappuloita matin tekemiseen (pelkkä kuningas, kuningas ja lähetti, kuningas ja ratsu…). ¦ <b>Más döntetlenek</b>: ugyanaz az állás háromszor; mindkét oldalon 50 lépés ütés és gyaloglépés nélkül; nincs elég bábu a mattadáshoz (magányos király, király és futó, király és huszár…).
+<b>Pendule</b> (si on l’a choisie) : chacun a son temps ; celui dont le temps tombe à zéro perd (nulle si l’autre ne peut plus mater). ¦ <b>Kello</b> (jos valittu): kummallakin on oma aikansa; se, jonka aika loppuu, häviää (tasapeli, jos toinen ei voi enää tehdä mattia). ¦ <b>Sakkóra</b> (ha választottad): mindenkinek saját ideje van; akinek lejár az ideje, veszít (döntetlen, ha a másik már nem tud mattot adni).
+<b>Notation</b> : R roi, D dame, T tour, F fou, C cavalier ; « x » une prise, « + » échec, « # » mat, « O-O » petit roque, « O-O-O » grand roque. ¦ <b>Merkintätapa</b> (ranskalaiset kirjaimet): R kuningas, D kuningatar, T torni, F lähetti, C ratsu; ”x” lyönti, ”+” shakki, ”#” matti, ”O-O” lyhyt linnoitus, ”O-O-O” pitkä linnoitus. ¦ <b>Jelölés</b> (francia betűkkel): R király, D vezér, T bástya, F futó, C huszár; „x” ütés, „+” sakk, „#” matt, „O-O” rövid sánc, „O-O-O” hosszú sánc.
+<b>Jouer</b> : clique (ou touche) une pièce puis sa case, ou glisse-la. Au clavier : flèches, Entrée pour prendre la pièce puis Entrée sur sa case. ↶ (⌘Z) défait un coup, 💡 (H) montre un bon coup, Échap met en pause. ¦ <b>Pelaaminen</b>: napsauta (tai kosketa) nappulaa ja sitten sen ruutua, tai vedä se. Näppäimistöllä: nuolet, Enter nappulan ottamiseen ja Enter sen ruudulla. ↶ (⌘Z) kumoaa siirron, 💡 (H) näyttää hyvän siirron, Esc keskeyttää. ¦ <b>Játék</b>: kattints (vagy koppints) egy bábura, majd a mezőjére, vagy húzd oda. Billentyűzettel: nyilak, Enter a bábu felvételéhez, majd Enter a mezőjén. ↶ (⌘Z) visszavon egy lépést, 💡 (H) mutat egy jó lépést, az Esc szünetet tart.
+La pendule ¦ Kello ¦ A sakkóra
+pendule|Sans ¦ Ei ¦ Nincs
+Ajout par coup ¦ Lisäaika siirtoa kohden ¦ Lépésenkénti többletidő
+Conseils ¦ Vihjeet ¦ Tippek
+👪 Les pièces portent le nom d’ancêtres (le roi, la dame, puis les autres) ¦ 👪 Nappulat kantavat esivanhempien nimiä (kuningas, kuningatar, sitten muut) ¦ 👪 A bábuk felmenők nevét viselik (a király, a vezér, majd a többiek)
+• Montrer les cases où la pièce peut aller ¦ • Näytä ruudut, joihin nappula voi liikkua ¦ • Mutassa a mezőket, ahová a bábu léphet
+Blancs ¦ Valkea ¦ Világos
+Noirs ¦ Musta ¦ Sötét
+blancs ¦ valkea ¦ világos
+noirs ¦ musta ¦ sötét
+Partie en cours ¦ Peli käynnissä ¦ Folyamatban lévő játszma
+Retourner le plateau ¦ Käännä lauta ¦ A tábla megfordítása
+Copier les coups ¦ Kopioi siirrot ¦ A lépések másolása
+La partie en notation, à coller ailleurs ¦ Peli merkintätavalla, liitettäväksi muualle ¦ A játszma jelöléssel, máshová beillesztéshez
+Proposer la nulle ¦ Tarjoa tasapeliä ¦ Döntetlen ajánlása
+Nulle d’un commun accord ¦ Tasapeli yhteisellä sopimuksella ¦ Közös megegyezéses döntetlen
+Abandonner ¦ Luovuta ¦ Feladás
+{name} a gagné ({why}) ¦ {name} voitti ({why}) ¦ {name} nyert ({why})
+Nulle ({why}) ¦ Tasapeli ({why}) ¦ Döntetlen ({why})
+mat en {n} coups ¦ matti {n} siirrolla ¦ matt {n} lépésben
+🏆 Nouveau record ! ¦ 🏆 Uusi ennätys! ¦ 🏆 Új rekord!
+Aux blancs ¦ Valkean siirto ¦ Világos lép
+Aux noirs ¦ Mustan siirto ¦ Sötét lép
+échec ¦ shakki ¦ sakk
+Coups copiés. ¦ Siirrot kopioitu. ¦ Lépések másolva.
+🤖 L’ordinateur refuse la nulle : il croit encore pouvoir gagner. ¦ 🤖 Tietokone kieltäytyy tasapelistä: se uskoo yhä voivansa voittaa. ¦ 🤖 A számítógép nem fogadja el a döntetlent: még úgy hiszi, nyerhet.
+{name} abandonne : la partie est perdue. ¦ {name} luovuttaa: peli on hävitty. ¦ {name} felad: a játszma elveszett.
+Abandonner la partie ? ¦ Luovutetaanko peli? ¦ Feladod a játszmát?
+Abandonner la partie ¦ Luovuta peli ¦ A játszma feladása
+Partie {n} ¦ Peli {n} ¦ {n}. játszma
+pendule {m} min + {s} s ¦ kello {m} min + {s} s ¦ sakkóra {m} perc + {s} mp
+pendule {m} min ¦ kello {m} min ¦ sakkóra {m} perc
+sans pendule ¦ ilman kelloa ¦ sakkóra nélkül
+{a} (blancs) contre {b} (noirs) ¦ {a} (valkea) vastaan {b} (musta) ¦ {a} (világos) – {b} (sötét)
+ (coup possible) ¦ (mahdollinen siirto) ¦ (lehetséges lépés)
+Le temps qui reste ¦ Jäljellä oleva aika ¦ Hátralévő idő
+{name} gagne : {why} ! ¦ {name} voittaa: {why}! ¦ {name} nyer: {why}!
+À {name} de jouer (l’ordinateur réfléchit…) ¦ Vuorossa {name} (tietokone miettii…) ¦ {name} következik (a számítógép gondolkodik…)
+À {name} de jouer ¦ Vuorossa {name} ¦ {name} következik
+Échec ! ¦ Shakki! ¦ Sakk!
+Pièces prises ¦ Lyödyt nappulat ¦ Leütött bábuk
+L’échiquier ¦ Shakkilauta ¦ A sakktábla
+Promotion ¦ Korotus ¦ Átváltozás
+<b>Ton pion arrive au bout :</b> choisis ce qu’il devient. ¦ <b>Sotilaasi on päässyt perille:</b> valitse, miksi se muuttuu. ¦ <b>A gyalogod a túlsó szélre ért:</b> válaszd ki, mivé változzon.
+{a} prend {b}. ¦ {a} lyö {b}. ¦ {a} leüti ezt: {b}.
+Les coups joués ¦ Pelatut siirrot ¦ A megtett lépések
+« ↻ Rejouer » en haut : une revanche, les couleurs changent. ¦ ”↻ Pelaa uudelleen” ylhäällä: revanssi, värit vaihtuvat. ¦ „↻ Újra” fent: visszavágó, a színek felcserélődnek.
+Contre l’ordinateur {level} ¦ Tietokonetta vastaan ({level}) ¦ A számítógép ellen ({level})
+Clic ou toucher : la pièce, puis sa case (ou glisse-la). Clavier : flèches, Entrée. ⌘Z annule, H un conseil, Échap pause. ¦ Napsauta tai kosketa: nappula, sitten sen ruutu (tai vedä se). Näppäimistö: nuolet, Enter. ⌘Z kumoaa, H antaa vihjeen, Esc keskeyttää. ¦ Kattints vagy koppints: a bábu, majd a mezője (vagy húzd oda). Billentyűzet: nyilak, Enter. ⌘Z visszavon, H tippet ad, Esc szünet.
+échec et mat ¦ shakkimatti ¦ sakk-matt
+pat (plus de coup possible sans être en échec) ¦ patti (ei sallittua siirtoa, vaikka ei ole shakissa) ¦ patt (nincs szabályos lépés, bár nincs sakkban)
+Pat (plus de coup possible sans être en échec) ¦ Patti (ei sallittua siirtoa, vaikka ei ole shakissa) ¦ Patt (nincs szabályos lépés, bár nincs sakkban)
+nulle par triple répétition ¦ tasapeli kolminkertaisella toistolla ¦ döntetlen háromszori ismétléssel
+Nulle : par triple répétition ¦ Tasapeli: kolminkertainen toisto ¦ Döntetlen: háromszori ismétlés
+nulle : 50 coups sans prise ni pion avancé ¦ tasapeli: 50 siirtoa ilman lyöntiä tai sotilaan siirtoa ¦ döntetlen: 50 lépés ütés és gyaloglépés nélkül
+Nulle : 50 coups sans prise ni pion avancé ¦ Tasapeli: 50 siirtoa ilman lyöntiä tai sotilaan siirtoa ¦ Döntetlen: 50 lépés ütés és gyaloglépés nélkül
+nulle : plus assez de pièces pour mater ¦ tasapeli: liian vähän nappuloita matin tekemiseen ¦ döntetlen: nincs elég bábu a mattadáshoz
+Nulle : plus assez de pièces pour mater ¦ Tasapeli: liian vähän nappuloita matin tekemiseen ¦ Döntetlen: nincs elég bábu a mattadáshoz
+temps écoulé ¦ aika loppui ¦ lejárt az idő
+Temps écoulé ¦ Aika loppui ¦ Lejárt az idő
+abandon ¦ luovutus ¦ feladás
+nulle d’un commun accord ¦ tasapeli yhteisellä sopimuksella ¦ közös megegyezéses döntetlen
+Nulle : d’un commun accord ¦ Tasapeli: yhteisellä sopimuksella ¦ Döntetlen: közös megegyezéssel
+roi blanc ¦ valkea kuningas ¦ világos király
+roi noir ¦ musta kuningas ¦ sötét király
+dame blanc ¦ valkea kuningatar ¦ világos vezér
+dame noir ¦ musta kuningatar ¦ sötét vezér
+tour blanc ¦ valkea torni ¦ világos bástya
+tour noir ¦ musta torni ¦ sötét bástya
+fou blanc ¦ valkea lähetti ¦ világos futó
+fou noir ¦ musta lähetti ¦ sötét futó
+cavalier blanc ¦ valkea ratsu ¦ világos huszár
+cavalier noir ¦ musta ratsu ¦ sötét huszár
+pion blanc ¦ valkea sotilas ¦ világos gyalog
+pion noir ¦ musta sotilas ¦ sötét gyalog
+echecs|Roi ¦ Kuningas ¦ Király
+echecs|Dame ¦ Kuningatar ¦ Vezér
+echecs|Tour ¦ Torni ¦ Bástya
+echecs|Fou ¦ Lähetti ¦ Futó
+echecs|Cavalier ¦ Ratsu ¦ Huszár
+echecs|Pion ¦ Sotilas ¦ Gyalog
+DAMES ¦ TAMMI ¦ DÁMA
+Le jeu de dames : règles internationales sur 10 × 10 (prise majoritaire, dames volantes) ou dames anglaises sur 8 × 8. À deux ou contre l’ordinateur. ¦ Tammipeli: kansainväliset säännöt 10 × 10 -laudalla (enemmistölyönti, lentävät kuninkaat) tai englantilainen tammi 8 × 8 -laudalla. Kaksin tai tietokonetta vastaan. ¦ Dámajáték: nemzetközi szabályok 10 × 10-es táblán (többségi ütés, repülő dámák) vagy angol dáma 8 × 8-as táblán. Kettesben vagy a számítógép ellen.
+Prendre est obligatoire. Les règles complètes sont dans le « ? » de la partie. ¦ Lyöminen on pakollista. Täydelliset säännöt ovat pelin ”?”-kohdassa. ¦ Az ütés kötelező. A teljes szabályok a játék „?” gombja alatt vannak.
+Ex : Le tournoi du dimanche ¦ Esim. Sunnuntain turnaus ¦ Pl. A vasárnapi bajnokság
+Le damier et les règles ¦ Lauta ja säännöt ¦ A tábla és a szabályok
+Dames internationales ¦ Kansainvälinen tammi ¦ Nemzetközi dáma
+10 × 10, prise majoritaire, dames volantes ¦ 10 × 10, enemmistölyönti, lentävät kuninkaat ¦ 10 × 10, többségi ütés, repülő dámák
+Dames anglaises ¦ Englantilainen tammi ¦ Angol dáma
+8 × 8, dames d’une case, prise en avant ¦ 8 × 8, kuninkaat liikkuvat yhden ruudun, lyönti eteenpäin ¦ 8 × 8, a dámák egy mezőt lépnek, ütés előre
+Petit damier ¦ Pieni lauta ¦ Kis tábla
+8 × 8 avec les règles internationales ¦ 8 × 8 kansainvälisillä säännöillä ¦ 8 × 8 nemzetközi szabályokkal
+Internationales (10 × 10) ¦ Kansainvälinen (10 × 10) ¦ Nemzetközi (10 × 10)
+8 × 8 internationales ¦ 8 × 8 kansainvälinen ¦ 8 × 8 nemzetközi
+Anglaises (8 × 8) ¦ Englantilainen (8 × 8) ¦ Angol (8 × 8)
+Internationales sur 8 × 8 (brésiliennes) ¦ Kansainvälinen 8 × 8 -laudalla (brasilialainen) ¦ Nemzetközi 8 × 8-as táblán (brazil)
+Anglaises (8 × 8, checkers) ¦ Englantilainen (8 × 8, checkers) ¦ Angol (8 × 8, checkers)
+On joue sur les cases foncées. Les pions avancent en diagonale, d’une case, vers l’autre camp. Les noirs commencent. ¦ Pelataan tummilla ruuduilla. Nappulat liikkuvat vinottain yhden ruudun vastapuolta kohti. Musta aloittaa. ¦ A sötét mezőkön játszunk. A korongok átlósan, egy mezőt lépnek a másik tábor felé. Sötét kezd.
+On joue sur les cases foncées. Les pions avancent en diagonale, d’une case, vers l’autre camp. Les blancs commencent. ¦ Pelataan tummilla ruuduilla. Nappulat liikkuvat vinottain yhden ruudun vastapuolta kohti. Valkea aloittaa. ¦ A sötét mezőkön játszunk. A korongok átlósan, egy mezőt lépnek a másik tábor felé. Világos kezd.
+<b>Prendre</b> : on saute par-dessus une pièce adverse qui touche la sienne, si la case derrière est libre ; on peut enchaîner plusieurs sauts (une <b>rafle</b>). <b>Prendre est obligatoire.</b> ¦ <b>Lyönti</b>: hypätään viereisen vastustajan nappulan yli, jos sen takana oleva ruutu on vapaa; useita hyppyjä voi ketjuttaa (<b>monilyönti</b>). <b>Lyöminen on pakollista.</b> ¦ <b>Ütés</b>: átugrod a szomszédos ellenséges korongot, ha mögötte szabad a mező; több ugrást is összefűzhetsz (<b>sorozatütés</b>). <b>Az ütés kötelező.</b>
+Les pions prennent <b>seulement en avant</b>. On peut choisir la prise, mais une rafle commencée se joue jusqu’au bout. ¦ Nappulat lyövät <b>vain eteenpäin</b>. Lyönnin saa valita, mutta aloitettu monilyönti on vietävä loppuun. ¦ A korongok <b>csak előre</b> ütnek. Az ütést választhatod, de egy megkezdett sorozatütést végig kell vinni.
+Un pion qui arrive sur la dernière ligne devient <b>dame</b> (le coup s’arrête là). La dame avance et recule <b>d’une case</b>. ¦ Viimeiselle riville päässyt nappula muuttuu <b>kuninkaaksi</b> (siirto päättyy siihen). Kuningas liikkuu eteen ja taakse <b>yhden ruudun</b>. ¦ Az utolsó sorra érő korong <b>dámává</b> válik (a lépés ott véget ér). A dáma előre és hátra lép <b>egy mezőt</b>.
+<b>Nulle</b> : la même position trois fois, ou 40 coups chacun sans prise ni pion avancé. ¦ <b>Tasapeli</b>: sama asema kolme kertaa tai 40 siirtoa kummaltakin ilman lyöntiä tai nappulan siirtoa eteenpäin. ¦ <b>Döntetlen</b>: ugyanaz az állás háromszor, vagy fejenként 40 lépés ütés és előrelépő korong nélkül.
+Les pions prennent <b>en avant et en arrière</b>. <b>Prise majoritaire</b> : il faut choisir la rafle qui prend le plus de pièces (une dame compte comme un pion). ¦ Nappulat lyövät <b>eteen- ja taaksepäin</b>. <b>Enemmistölyönti</b>: on valittava lyönti, joka vie eniten nappuloita (kuningas lasketaan yhdeksi nappulaksi). ¦ A korongok <b>előre és hátra</b> is ütnek. <b>Többségi ütés</b>: azt az ütést kell választani, amely a legtöbb bábut viszi le (egy dáma egy korongnak számít).
+Pendant une rafle, les pièces prises restent sur le plateau jusqu’à la fin du coup : on ne peut pas sauter deux fois la même. ¦ Monilyönnin aikana lyödyt nappulat jäävät laudalle siirron loppuun asti: samaa ei voi hypätä kahdesti. ¦ Sorozatütés közben a leütött bábuk a lépés végéig a táblán maradnak: ugyanazt nem lehet kétszer átugrani.
+Un pion devient <b>dame</b> s’il <b>termine</b> son coup sur la dernière ligne (s’il ne fait qu’y passer pendant une rafle, il reste pion). ¦ Nappulasta tulee <b>kuningas</b>, jos se <b>päättää</b> siirtonsa viimeiselle riville (jos se vain kulkee sen kautta monilyönnin aikana, se pysyy nappulana). ¦ Egy korong akkor lesz <b>dáma</b>, ha az utolsó sorban <b>fejezi be</b> a lépését (ha sorozatütés közben csak áthalad rajta, korong marad).
+La <b>dame vole</b> : elle glisse d’autant de cases qu’elle veut en diagonale, prend à distance et peut s’arrêter sur n’importe quelle case libre derrière la pièce prise. ¦ <b>Kuningas lentää</b>: se liukuu vinottain niin monta ruutua kuin haluaa, lyö kaukaa ja voi pysähtyä mihin tahansa vapaaseen ruutuun lyödyn nappulan takana. ¦ <b>A dáma repül</b>: átlósan akárhány mezőt csúszhat, távolról üt, és a leütött bábu mögötti bármely szabad mezőn megállhat.
+<b>Nulle</b> : la même position trois fois, ou 25 coups chacun en ne bougeant que des dames, sans prise. ¦ <b>Tasapeli</b>: sama asema kolme kertaa tai 25 siirtoa kummaltakin pelkillä kuninkailla ilman lyöntiä. ¦ <b>Döntetlen</b>: ugyanaz az állás háromszor, vagy fejenként 25 lépés csak dámákkal, ütés nélkül.
+<b>On perd</b> quand on n’a plus de pièce ou plus de coup possible. ¦ <b>Häviät</b>, kun sinulla ei ole enää nappuloita tai mahdollisia siirtoja. ¦ <b>Veszítesz</b>, ha nem marad bábud vagy lehetséges lépésed.
+<b>Notation</b> : les cases foncées sont numérotées de 1 (en haut à gauche) à {n} ; « 32-28 » un déplacement, « 28x19 » une prise. ¦ <b>Merkintätapa</b>: tummat ruudut on numeroitu 1:stä (ylhäällä vasemmalla) {n}:ään; ”32-28” on siirto, ”28x19” lyönti. ¦ <b>Jelölés</b>: a sötét mezők 1-től (bal felül) {n}-ig vannak számozva; „32-28” egy lépés, „28x19” egy ütés.
+<b>Jouer</b> : touche un pion puis sa case d’arrivée (ou glisse-le). Pour une rafle à plusieurs chemins, touche les cases une à une. Clavier : flèches, Entrée. ↶ (⌘Z) défait, 💡 (H) un conseil, Échap pause. ¦ <b>Pelaaminen</b>: kosketa nappulaa ja sitten sen kohderuutua (tai vedä se). Monilyönnissä, jossa on useita reittejä, kosketa ruutuja yksi kerrallaan. Näppäimistö: nuolet, Enter. ↶ (⌘Z) kumoaa, 💡 (H) vihje, Esc keskeyttää. ¦ <b>Játék</b>: koppints egy korongra, majd a célmezőjére (vagy húzd oda). Több útvonalú sorozatütésnél koppints egyenként a mezőkre. Billentyűzet: nyilak, Enter. ↶ (⌘Z) visszavon, 💡 (H) tipp, Esc szünet.
+👪 Les pions portent le nom d’ancêtres ¦ 👪 Nappulat kantavat esivanhempien nimiä ¦ 👪 A bábuk felmenők nevét viselik
+• Montrer les cases où le pion peut aller ¦ • Näytä ruudut, joihin nappula voi liikkua ¦ • Mutassa a mezőket, ahová a korong léphet
+⬇ Commence (en bas) ¦ ⬇ Aloittaa (alhaalla) ¦ ⬇ Kezd (lent)
+⬆ En haut ¦ ⬆ Ylhäällä ¦ ⬆ Fent
+Retourner le damier ¦ Käännä lauta ¦ A tábla megfordítása
+Partie nulle ¦ Tasapeli ¦ Döntetlen
+gagné en {n} coups ¦ voitettu {n} siirrolla ¦ {n} lépésben megnyerve
+{a} ({ca}) contre {b} ({cb}) ¦ {a} ({ca}) vastaan {b} ({cb}) ¦ {a} ({ca}) – {b} ({cb})
+ (case possible) ¦ (mahdollinen ruutu) ¦ (lehetséges mező)
+{name} gagne ({why}) ! ¦ {name} voittaa ({why})! ¦ {name} nyer ({why})!
+prise obligatoire ({n} pièces) ¦ pakollinen lyönti ({n} nappulaa) ¦ kötelező ütés ({n} bábu)
+prise obligatoire ¦ pakollinen lyönti ¦ kötelező ütés
+Le damier ¦ Lauta ¦ A tábla
+La rafle continue : touche la case suivante (ou la dernière case pour revenir en arrière). ¦ Monilyönti jatkuu: kosketa seuraavaa ruutua (tai viimeistä ruutua palataksesi). ¦ A sorozatütés folytatódik: koppints a következő mezőre (vagy az utolsóra a visszalépéshez).
+« ↻ Rejouer » en haut : une revanche, on change de côté. ¦ ”↻ Pelaa uudelleen” ylhäällä: revanssi, puolet vaihtuvat. ¦ „↻ Újra” fent: visszavágó, oldalcserével.
+Touche un pion puis sa case (ou glisse-le). Clavier : flèches, Entrée. ⌘Z annule, H un conseil, Échap pause. ¦ Kosketa nappulaa ja sitten sen ruutua (tai vedä se). Näppäimistö: nuolet, Enter. ⌘Z kumoaa, H vihje, Esc keskeyttää. ¦ Koppints egy korongra, majd a mezőjére (vagy húzd oda). Billentyűzet: nyilak, Enter. ⌘Z visszavon, H tipp, Esc szünet.
+Plusieurs rafles mènent ici : touche les cases une à une. ¦ Useat lyönnit johtavat tänne: kosketa ruutuja yksi kerrallaan. ¦ Több ütés is ide vezet: koppints egyenként a mezőkre.
+Une prise est obligatoire (celle qui prend le plus de pièces). ¦ Lyönti on pakollinen (se, joka vie eniten nappuloita). ¦ Az ütés kötelező (az, amelyik a legtöbb bábut viszi le).
+Une prise est obligatoire. ¦ Lyönti on pakollinen. ¦ Az ütés kötelező.
+Ce pion ne peut pas bouger. ¦ Tämä nappula ei voi liikkua. ¦ Ez a korong nem tud lépni.
+{list} sont pris. ¦ {list} on lyöty. ¦ {list} leütve.
+{list} est pris. ¦ {list} on lyöty. ¦ {list} leütve.
+la dame {name} ¦ kuningas {name} ¦ {name} dáma
+le pion {name} ¦ nappula {name} ¦ {name} korong
+=pion ¦ nappula|nappulaa ¦ korong|korong
+=dame ¦ kuningas|kuningasta ¦ dáma|dáma
+plus aucune pièce ¦ ei enää nappuloita ¦ nem maradt bábu
+plus aucun coup possible ¦ ei enää mahdollisia siirtoja ¦ nincs több lehetséges lépés
+nulle : la même position trois fois ¦ tasapeli: sama asema kolme kertaa ¦ döntetlen: ugyanaz az állás háromszor
+Nulle : la même position trois fois ¦ Tasapeli: sama asema kolme kertaa ¦ Döntetlen: ugyanaz az állás háromszor
+nulle : trop de coups de dames sans prise ¦ tasapeli: liian monta kuninkaan siirtoa ilman lyöntiä ¦ döntetlen: túl sok dámalépés ütés nélkül
+Nulle : trop de coups de dames sans prise ¦ Tasapeli: liian monta kuninkaan siirtoa ilman lyöntiä ¦ Döntetlen: túl sok dámalépés ütés nélkül
+dames|pion blanc ¦ valkea nappula ¦ világos korong
+dames|pion noir ¦ musta nappula ¦ sötét korong
+dames|dame blanc ¦ valkea kuningas ¦ világos dáma
+dames|dame noir ¦ musta kuningas ¦ sötét dáma
+dames|Dame ¦ Kuningas ¦ Dáma
+dames|Pion ¦ Nappula ¦ Korong
+DOMINOS ¦ DOMINO ¦ DOMINÓ
+Les dominos double-six, avec ou sans pioche : contre 1 à 3 ordinateurs, ou entre vous sur le même écran. Le comptage se fait tout seul. ¦ Domino tupla-kuutosilla, nostopinon kanssa tai ilman: 1–3 tietokonetta vastaan tai keskenänne samalla näytöllä. Pisteet lasketaan automaattisesti. ¦ Dupla hatos dominó, húzással vagy anélkül: 1–3 számítógép ellen, vagy egymás között ugyanazon a képernyőn. A pontszámítás magától megy.
+Pose un domino qui a le même nombre qu’un bout de la chaîne. Les règles complètes sont dans le « ? » de la partie. ¦ Laita pala, jossa on sama luku kuin ketjun toisessa päässä. Täydelliset säännöt ovat pelin ”?”-kohdassa. ¦ Tegyél le egy dominót, amelyen ugyanaz a szám van, mint a lánc egyik végén. A teljes szabályok a játék „?” gombja alatt vannak.
+Ex : Les dominos de Mémé ¦ Esim. Mummon domino ¦ Pl. Nagyi dominója
+Avec pioche, en 100 points ¦ Nostopinon kanssa, 100 pisteeseen ¦ Húzással, 100 pontig
+La partie la plus courante ¦ Tavallisin peli ¦ A leggyakoribb játék
+En 100 points ¦ 100 pisteeseen ¦ 100 pontig
+Une seule manche ¦ Yksi erä ¦ Egyetlen kör
+Un jeu de <b>28 dominos</b>, de 0-0 (blanc-blanc) à 6-6 (double-six). À deux, chacun reçoit 7 dominos ; à trois ou quatre, 6. Le reste forme la <b>pioche</b>. ¦ Sarja, jossa on <b>28 palaa</b>, 0-0:sta (tupla-tyhjä) 6-6:een (tupla-kuutonen). Kahdella pelaajalla kukin saa 7 palaa; kolmella tai neljällä 6. Loput muodostavat <b>nostopinon</b>. ¦ Egy <b>28 dominóból</b> álló készlet, 0-0-tól (dupla üres) 6-6-ig (dupla hatos). Két játékosnál mindenki 7 dominót kap, háromnál vagy négynél 6-ot. A maradék a <b>húzópakli</b>.
+À la première manche, celui qui a le <b>plus gros double</b> le pose pour commencer (s’il n’y a pas de double, le plus gros domino). Ensuite, c’est le gagnant de la manche d’avant qui commence. ¦ Ensimmäisessä erässä se, jolla on <b>suurin tupla</b>, aloittaa laittamalla sen (jos tuplaa ei ole, suurin pala). Sen jälkeen edellisen erän voittaja aloittaa. ¦ Az első körben az kezd, akinél a <b>legnagyobb dupla</b> van, azt teszi le (ha nincs dupla, a legnagyobb dominót). Utána mindig az előző kör nyertese kezd.
+Chacun son tour, on pose un domino qui a le <b>même nombre</b> qu’un des deux bouts de la chaîne. ¦ Vuorotellen laitetaan pala, jossa on <b>sama luku</b> kuin jommassakummassa ketjun päässä. ¦ Felváltva olyan dominót tesztek le, amelyen <b>ugyanaz a szám</b> van, mint a lánc valamelyik végén.
+Si on ne peut pas jouer : <b>avec pioche</b>, on pioche jusqu’à pouvoir jouer (pioche vide : on passe) ; <b>sans pioche</b>, on passe (« on boude »). ¦ Jos et voi pelata: <b>nostopinon kanssa</b> nostat, kunnes voit pelata (tyhjä pino: passaat); <b>ilman nostopinoa</b> passaat. ¦ Ha nem tudsz rakni: <b>húzással</b> addig húzol, amíg nem tudsz (üres pakli: passzolsz); <b>húzás nélkül</b> passzolsz.
+La manche s’arrête quand quelqu’un pose son dernier domino (« Domino ! »), ou quand plus personne ne peut jouer (partie <b>bloquée</b> : celui qui a le moins de points en main gagne). ¦ Erä päättyy, kun joku laittaa viimeisen palansa (”Domino!”) tai kun kukaan ei voi enää pelata (<b>lukkiutunut</b> peli: se, jolla on vähiten pisteitä kädessä, voittaa). ¦ A kör véget ér, amikor valaki leteszi az utolsó dominóját („Dominó!”), vagy amikor már senki nem tud rakni (<b>elakadt</b> játék: akinek a legkevesebb pont van a kezében, nyer).
+<b>Comptage</b> : le gagnant de la manche marque les points (le total des points noirs) qui restent dans les mains des autres. Le premier qui atteint le score choisi gagne la partie. ¦ <b>Pisteenlasku</b>: erän voittaja saa pisteet (silmien summan), jotka jäävät muiden käsiin. Ensimmäinen, joka saavuttaa valitun pistemäärän, voittaa pelin. ¦ <b>Pontszámítás</b>: a kör nyertese megkapja a többiek kezében maradt pontokat (a pöttyök összegét). Aki elsőként éri el a választott pontszámot, megnyeri a játékot.
+<b>Jouer</b> : touche un domino de ta main ; s’il va des deux côtés, touche ensuite le bout de la chaîne (◀ ou ▶). Clavier : flèches dans ta main, Entrée. ↶ (⌘Z) défait, 💡 (H) un conseil, Échap pause. ¦ <b>Pelaaminen</b>: kosketa palaa kädessäsi; jos se sopii molempiin päihin, kosketa sitten ketjun päätä (◀ tai ▶). Näppäimistö: nuolet kädessä, Enter. ↶ (⌘Z) kumoaa, 💡 (H) vihje, Esc keskeyttää. ¦ <b>Játék</b>: koppints egy dominóra a kezedben; ha mindkét végére illik, koppints utána a lánc végére (◀ vagy ▶). Billentyűzet: nyilak a kezedben, Enter. ↶ (⌘Z) visszavon, 💡 (H) tipp, Esc szünet.
+La pioche ¦ Nostopino ¦ A húzópakli
+Avec pioche ¦ Nostopinon kanssa ¦ Húzással
+Sans pioche (on boude) ¦ Ilman nostopinoa (passaa, kun et voi pelata) ¦ Húzás nélkül (passz, ha elakadsz)
+La partie se joue ¦ Peliä pelataan ¦ A játék menete
+En une manche ¦ Yhdessä erässä ¦ Egy körben
+En {n} points ¦ {n} pisteeseen ¦ {n} pontig
+👪 Les ordinateurs portent le nom d’ancêtres ¦ 👪 Tietokoneet kantavat esivanhempien nimiä ¦ 👪 A számítógépek felmenők nevét viselik
+La partie s’arrête ici, comptée perdue. ¦ Peli päättyy tähän ja lasketaan hävityksi. ¦ A játék itt véget ér, és vereségnek számít.
+{n} points en une manche ¦ {n} pistettä yhdessä erässä ¦ {n} pont egy körben
+🏆 Nouveau record : ta plus grosse manche ! ¦ 🏆 Uusi ennätys: suurin eräsi! ¦ 🏆 Új rekord: a legnagyobb köröd!
+Manche {n} finie ¦ Erä {n} päättyi ¦ A(z) {n}. kör véget ért
+Poser ici ¦ Laita tähän ¦ Ide tedd
+Pose ton domino ici ¦ Laita palasi tähän ¦ Ide tedd a dominódat
+{name} commence avec le double {tile} (pas de double : le plus gros domino). ¦ {name} aloittaa tuplalla {tile} (ei tuplaa: suurin pala). ¦ {name} kezd a(z) {tile} duplával (nincs dupla: a legnagyobb dominó).
+{name} commence avec le double {tile}. ¦ {name} aloittaa tuplalla {tile}. ¦ {name} kezd a(z) {tile} duplával.
+La chaîne est vide. ¦ Ketju on tyhjä. ¦ A lánc üres.
+Poser au bout gauche ({n}) ¦ Laita vasempaan päähän ({n}) ¦ A bal végére ({n})
+Bout gauche ¦ Vasen pää ¦ Bal vég
+Poser au bout droit ({n}) ¦ Laita oikeaan päähän ({n}) ¦ A jobb végére ({n})
+Bout droit ¦ Oikea pää ¦ Jobb vég
+avec pioche ¦ nostopinon kanssa ¦ húzással
+sans pioche ¦ ilman nostopinoa ¦ húzás nélkül
+en {n} points ¦ {n} pisteeseen ¦ {n} pontig
+une seule manche ¦ yksi erä ¦ egyetlen kör
+=joueur ¦ pelaaja|pelaajaa ¦ játékos|játékos
+{name}, à toi : que les autres détournent les yeux. ¦ {name}, sinun vuorosi: muut, katsokaa muualle. ¦ {name}, te jössz: a többiek nézzenek félre.
+Je suis {name} : voir mes dominos ¦ Olen {name}: näytä palani ¦ Én vagyok {name}: mutasd a dominóimat
+🔒 Partie bloquée : {name} gagne la manche et marque {pts}. ¦ 🔒 Lukkiutunut peli: {name} voittaa erän ja saa {pts}. ¦ 🔒 Elakadt játék: {name} megnyeri a kört, és ennyit szerez: {pts}.
+🁫 Domino ! {name} gagne la manche et marque {pts}. ¦ 🁫 Domino! {name} voittaa erän ja saa {pts}. ¦ 🁫 Dominó! {name} megnyeri a kört, és ennyit szerez: {pts}.
+🔒 Partie bloquée : {name} gagne la manche. ¦ 🔒 Lukkiutunut peli: {name} voittaa erän. ¦ 🔒 Elakadt játék: {name} megnyeri a kört.
+🁫 Domino ! {name} gagne la manche. ¦ 🁫 Domino! {name} voittaa erän. ¦ 🁫 Dominó! {name} megnyeri a kört.
+🔒 Partie bloquée, égalité : personne ne marque. ¦ 🔒 Lukkiutunut peli, tasapeli: kukaan ei saa pisteitä. ¦ 🔒 Elakadt játék, döntetlen: senki nem kap pontot.
+Joueur ¦ Pelaaja ¦ Játékos
+En main ¦ Kädessä ¦ Kézben
+{name} gagne la partie avec {pts} ! ¦ {name} voittaa pelin: {pts}! ¦ {name} megnyeri a játékot: {pts}!
+Égalité. ¦ Tasapeli. ¦ Döntetlen.
+« ↻ Rejouer » en haut : une nouvelle partie. ¦ ”↻ Pelaa uudelleen” ylhäällä: uusi peli. ¦ „↻ Újra” fent: új játék.
+Manche suivante ¦ Seuraava erä ¦ Következő kör
+Ce domino va des deux côtés : touche ◀ ou ▶ sur la chaîne. ¦ Tämä pala sopii molempiin päihin: kosketa ketjun ◀ tai ▶. ¦ Ez a dominó mindkét végre illik: koppints a láncon a ◀ vagy ▶ jelre.
+À toi, {name} : pose un domino. ¦ Sinun vuorosi, {name}: laita pala. ¦ Te jössz, {name}: tegyél le egy dominót.
+Tu ne peux pas jouer : pioche. ¦ Et voi pelata: nosta. ¦ Nem tudsz rakni: húzz.
+Tu ne peux pas jouer : passe ton tour. ¦ Et voi pelata: passaa vuorosi. ¦ Nem tudsz rakni: passzolj.
+{name} réfléchit… ¦ {name} miettii… ¦ {name} gondolkodik…
+Pioche : {what} ¦ Nostopino: {what} ¦ Húzópakli: {what}
+Sans pioche ¦ Ilman nostopinoa ¦ Húzás nélkül
+=domino ¦ pala|palaa ¦ dominó|dominó
+Les dominos de {name} ¦ Pelaajan {name} palat ¦ {name} dominói
+Tes dominos ¦ Palasi ¦ A dominóid
+{pts} en main ¦ {pts} kädessä ¦ {pts} a kézben
+Ta main ¦ Kätesi ¦ A kezed
+Domino {tile}, jouable ¦ Pala {tile}, pelattavissa ¦ {tile} dominó, letehető
+Domino {tile} ¦ Pala {tile} ¦ {tile} dominó
+Piocher ¦ Nosta ¦ Húzás
+Passer mon tour ¦ Passaa vuoroni ¦ Passz
+Manche finie ¦ Erä päättyi ¦ A kör véget ért
+Le score (en {n}) ¦ Pisteet ({n} asti) ¦ Az állás ({n} pontig)
+Le score ¦ Pisteet ¦ Az állás
+Touche un domino jouable (encadré), puis ◀ ou ▶ s’il va des deux côtés. Clavier : ← → dans ta main, Entrée. ⌘Z annule, H un conseil, Échap pause. ¦ Kosketa pelattavaa palaa (kehystetty), sitten ◀ tai ▶, jos se sopii molempiin päihin. Näppäimistö: ← → kädessä, Enter. ⌘Z kumoaa, H vihje, Esc keskeyttää. ¦ Koppints egy letehető (keretezett) dominóra, majd a ◀ vagy ▶ jelre, ha mindkét végre illik. Billentyűzet: ← → a kezedben, Enter. ⌘Z visszavon, H tipp, Esc szünet.
+Ce domino ne va sur aucun bout de la chaîne. ¦ Tämä pala ei sovi kumpaankaan ketjun päähän. ¦ Ez a dominó a lánc egyik végére sem illik.
+YAMS ¦ YATZY ¦ YAHTZEE
+Yahtzee ¦ Yahtzee ¦ Yahtzee
+Le Yams (Yahtzee) : 5 dés, 3 lancers et la feuille de marque complète avec la prime. Seul, à plusieurs sur le même écran ou contre l’ordinateur. ¦ Yatzy (Yahtzee): 5 noppaa, 3 heittoa ja täydellinen pöytäkirja bonuksineen. Yksin, useampi samalla näytöllä tai tietokonetta vastaan. ¦ Yahtzee (Yams): 5 kocka, 3 dobás és a teljes pontozólap a bónusszal. Egyedül, többen ugyanazon a képernyőn vagy a számítógép ellen.
+Lance, garde les dés qui t’intéressent, relance deux fois au plus, puis remplis une case. Les règles complètes sont dans le « ? » de la partie. ¦ Heitä, pidä haluamasi nopat, heitä uudelleen enintään kahdesti ja täytä sitten ruutu. Täydelliset säännöt ovat pelin ”?”-kohdassa. ¦ Dobj, tartsd meg a neked tetsző kockákat, dobj újra legfeljebb kétszer, majd tölts ki egy rovatot. A teljes szabályok a játék „?” gombja alatt vannak.
+Ex : Le Yams de Noël ¦ Esim. Joulun Yatzy ¦ Pl. Karácsonyi Yahtzee
+La feuille ¦ Pöytäkirja ¦ A pontozólap
+Yams à la française ¦ Ranskalainen Yatzy ¦ Francia Yahtzee
+Brelan et carré : les dés pareils ¦ Kolmoset ja neloset: samanlaiset nopat ¦ Hármas és póker: az egyforma kockák
+Yahtzee (américain) ¦ Yahtzee (amerikkalainen) ¦ Yahtzee (amerikai)
+Brelan et carré : la somme des 5 dés, joker ¦ Kolmoset ja neloset: kaikkien 5 nopan summa, jokeri ¦ Hármas és póker: mind az 5 kocka összege, joker
+yams|As (les 1) ¦ Ykköset ¦ Egyesek
+yams|Les 2 ¦ Kakkoset ¦ Kettesek
+yams|Les 3 ¦ Kolmoset ¦ Hármasok
+yams|Les 4 ¦ Neloset ¦ Négyesek
+yams|Les 5 ¦ Vitoset ¦ Ötösök
+yams|Les 6 ¦ Kuutoset ¦ Hatosok
+yams|Brelan ¦ Kolme samaa ¦ Drill
+yams|Carré ¦ Neljä samaa ¦ Póker
+yams|Full ¦ Täyskäsi ¦ Full
+yams|Petite suite ¦ Pieni suora ¦ Kis sor
+yams|Grande suite ¦ Suuri suora ¦ Nagy sor
+yams|Yams ¦ Yatzy ¦ Yahtzee
+yams|Chance ¦ Sattuma ¦ Esély
+La somme des 1 ¦ Ykkösten summa ¦ Az egyesek összege
+La somme des 2 ¦ Kakkosten summa ¦ A kettesek összege
+La somme des 3 ¦ Kolmosten summa ¦ A hármasok összege
+La somme des 4 ¦ Nelosten summa ¦ A négyesek összege
+La somme des 5 ¦ Vitosten summa ¦ Az ötösök összege
+La somme des 6 ¦ Kuutosten summa ¦ A hatosok összege
+3 dés pareils : 3 × leur valeur ¦ 3 samaa noppaa: 3 × niiden arvo ¦ 3 egyforma kocka: 3 × az értékük
+4 dés pareils : 4 × leur valeur ¦ 4 samaa noppaa: 4 × niiden arvo ¦ 4 egyforma kocka: 4 × az értékük
+3 pareils + 2 pareils : 25 ¦ 3 samaa + 2 samaa: 25 ¦ 3 egyforma + 2 egyforma: 25
+4 dés qui se suivent : 30 ¦ 4 peräkkäistä noppaa: 30 ¦ 4 egymást követő kocka: 30
+5 dés qui se suivent : 40 ¦ 5 peräkkäistä noppaa: 40 ¦ 5 egymást követő kocka: 40
+5 dés pareils : 50 ¦ 5 samaa noppaa: 50 ¦ 5 egyforma kocka: 50
+La somme des 5 dés ¦ Kaikkien 5 nopan summa ¦ Mind az 5 kocka összege
+3 dés pareils : la somme des 5 dés ¦ 3 samaa noppaa: kaikkien 5 nopan summa ¦ 3 egyforma kocka: mind az 5 kocka összege
+4 dés pareils : la somme des 5 dés ¦ 4 samaa noppaa: kaikkien 5 nopan summa ¦ 4 egyforma kocka: mind az 5 kocka összege
+5 dés pareils : 50 (un autre : 100 de prime) ¦ 5 samaa noppaa: 50 (seuraava: 100 bonusta) ¦ 5 egyforma kocka: 50 (minden további: 100 bónusz)
+Chacun son tour, on lance <b>5 dés</b>. On peut relancer <b>deux fois</b> : avant chaque relance, on garde les dés qu’on veut (touche un dé pour le garder, il passe en bleu). ¦ Vuorotellen heitetään <b>5 noppaa</b>. Saa heittää uudelleen <b>kahdesti</b>: ennen kutakin uusintaheittoa pidetään haluamasi nopat (kosketa noppaa pitääksesi sen, se muuttuu siniseksi). ¦ Felváltva dobtok <b>5 kockával</b>. <b>Kétszer</b> lehet újradobni: minden újradobás előtt megtarthatod a kívánt kockákat (koppints egy kockára a megtartásához, kék lesz).
+Après le dernier lancer (ou avant, si on est content), on <b>inscrit son résultat dans une case libre</b> de sa colonne. Chaque case ne sert qu’une fois ; si rien ne va, on met 0 dans une case. La partie finit quand les 13 cases sont remplies : le plus gros total gagne. ¦ Viimeisen heiton jälkeen (tai aiemmin, jos olet tyytyväinen) <b>kirjaat tuloksen vapaaseen ruutuun</b> sarakkeessasi. Kutakin ruutua käytetään vain kerran; jos mikään ei sovi, laitat 0 johonkin ruutuun. Peli päättyy, kun kaikki 13 ruutua on täytetty: suurin summa voittaa. ¦ Az utolsó dobás után (vagy korábban, ha elégedett vagy) <b>beírod az eredményt az oszlopod egy szabad rovatába</b>. Minden rovat csak egyszer használható; ha semmi sem illik, egy rovatba 0-t írsz. A játék akkor ér véget, ha mind a 13 rovat kitöltött: a legnagyobb összeg nyer.
+<b>Prime</b> : si les cases du haut (1 à 6) font <b>63 points ou plus</b> (par exemple trois dés de chaque chiffre), on gagne <b>35 points</b> de plus. ¦ <b>Bonus</b>: jos yläruudut (1–6) tuottavat <b>63 pistettä tai enemmän</b> (esimerkiksi kolme noppaa kutakin lukua), saat <b>35 lisäpistettä</b>. ¦ <b>Bónusz</b>: ha a felső rovatok (1–6) összege <b>63 pont vagy több</b> (például minden számból három kocka), <b>35 pontot</b> kapsz pluszban.
+<b>Yahtzee de plus</b> : si la case Yams contient déjà 50, chaque nouveau Yahtzee rapporte 100 points de prime ; il doit aller dans la case du haut de son chiffre si elle est libre, sinon il peut servir de Full, de Petite ou de Grande suite au maximum (« joker »). ¦ <b>Lisä-Yatzy</b>: jos Yatzy-ruudussa on jo 50, jokainen uusi Yatzy tuo 100 pisteen bonuksen; se on laitettava lukunsa yläruutuun, jos se on vapaa, muuten se voi käydä täysimääräisenä täyskätenä, pienenä tai suurena suorana (”jokeri”). ¦ <b>További Yahtzee</b>: ha a Yahtzee rovatban már 50 áll, minden új Yahtzee 100 pont bónuszt ér; a száma szerinti felső rovatba kell kerülnie, ha az szabad, különben maximális Fullként, Kis vagy Nagy sorként is beírható („joker”).
+<b>Jouer</b> : « 🎲 Lancer » (ou la touche L), touche les dés à garder (ou les touches 1 à 5), puis touche une case de ta colonne. Clavier : flèches dans la feuille, Entrée. ↶ (⌘Z) défait la dernière case remplie, 💡 (H) un conseil, Échap pause. ¦ <b>Pelaaminen</b>: ”🎲 Heitä” (tai näppäin L), kosketa pidettäviä noppia (tai näppäimiä 1–5), sitten ruutua sarakkeessasi. Näppäimistö: nuolet pöytäkirjassa, Enter. ↶ (⌘Z) kumoaa viimeksi täytetyn ruudun, 💡 (H) vihje, Esc keskeyttää. ¦ <b>Játék</b>: „🎲 Dobás” (vagy az L billentyű), koppints a megtartandó kockákra (vagy az 1–5 billentyűkre), majd egy rovatra az oszlopodban. Billentyűzet: nyilak a lapon, Enter. ↶ (⌘Z) visszavonja az utoljára kitöltött rovatot, 💡 (H) tipp, Esc szünet.
+La feuille de marque ¦ Pöytäkirja ¦ Pontozólap
+Française (Yams) ¦ Ranskalainen (Yams) ¦ Francia (Yams)
+Américaine (Yahtzee) ¦ Amerikkalainen (Yahtzee) ¦ Amerikai (Yahtzee)
+(+ {n} de prime Yahtzee !) ¦ (+ {n} Yatzy-bonusta!) ¦ (+ {n} Yahtzee-bónusz!)
+Tour {n} sur 13 ¦ Kierros {n}/13 ¦ {n}. kör a 13-ból
+{name} gagne ({n}) ¦ {name} voittaa ({n}) ¦ {name} nyer ({n})
+Égalité ({n}) ¦ Tasapeli ({n}) ¦ Döntetlen ({n})
+{n} points ({name}) ¦ {n} pistettä ({name}) ¦ {n} pont ({name})
+🏆 Nouveau record : {n} points ! ¦ 🏆 Uusi ennätys: {n} pistettä! ¦ 🏆 Új rekord: {n} pont!
+Lance les dés pour commencer ton tour. ¦ Heitä noppia aloittaaksesi vuorosi. ¦ Dobj a kockákkal a köröd kezdéséhez.
+Garde tout : mets-le dans « {box} » ({pts}). ¦ Pidä kaikki: laita se ruutuun ”{box}” ({pts}). ¦ Tarts meg mindent: írd ide: „{box}” ({pts}).
+Garde {dice} et relance le reste. ¦ Pidä {dice} ja heitä loput uudelleen. ¦ Tartsd meg ezeket: {dice}, és dobd újra a többit.
+Relance tous les dés. ¦ Heitä kaikki nopat uudelleen. ¦ Dobd újra az összes kockát.
+Mets-le dans « {box} » ({pts}). ¦ Laita se ruutuun ”{box}” ({pts}). ¦ Írd ide: „{box}” ({pts}).
+Total du haut ¦ Yläosan summa ¦ Felső összeg
+Prime (63 → 35) ¦ Bonus (63 → 35) ¦ Bónusz (63 → 35)
+il manque {n} ¦ puuttuu {n} ¦ még {n} kell
+Prime Yahtzee ¦ Yatzy-bonus ¦ Yahtzee-bónusz
+Dé {i} : {v} ¦ Noppa {i}: {v} ¦ {i}. kocka: {v}
+Dé {i} : {v}, gardé ¦ Noppa {i}: {v}, pidetty ¦ {i}. kocka: {v}, megtartva
+gardé ¦ pidetty ¦ megtartva
+{name} gagne avec {pts} ! ¦ {name} voittaa: {pts}! ¦ {name} nyer: {pts}!
+Égalité à {pts} ! ¦ Tasapeli: {pts}! ¦ Döntetlen: {pts}!
+{name} : garde des dés et relance ({n} encore), ou remplis une case. ¦ {name}: pidä noppia ja heitä uudelleen ({n} jäljellä) tai täytä ruutu. ¦ {name}: tarts meg kockákat és dobj újra (még {n}), vagy tölts ki egy rovatot.
+{name} : remplis une case de ta colonne. ¦ {name}: täytä ruutu sarakkeessasi. ¦ {name}: tölts ki egy rovatot az oszlopodban.
+À {name} : lance les dés. ¦ {name}: heitä noppia. ¦ {name}: dobj a kockákkal.
+{name} joue… ¦ {name} pelaa… ¦ {name} játszik…
+Les dés ¦ Nopat ¦ A kockák
+Relancer ¦ Heitä uudelleen ¦ Újradobás
+Lancer ¦ Heitä ¦ Dobás
+=lancer ¦ heitto|heittoa ¦ dobás|dobás
+=lancer restant ¦ heitto jäljellä|heittoa jäljellä ¦ hátralévő dobás|hátralévő dobás
+=partie gagnée ¦ voitettu peli|voitettua peliä ¦ megnyert játék|megnyert játék
+« ↻ Rejouer » en haut : une nouvelle partie, le compte des victoires est gardé. ¦ ”↻ Pelaa uudelleen” ylhäällä: uusi peli, voittojen määrä säilyy. ¦ „↻ Újra” fent: új játék, a győzelmek száma megmarad.
+« 🎲 Lancer » (L), touche les dés à garder (1 à 5), puis une case de ta colonne. ⌘Z défait la dernière case, H un conseil, Échap pause. ¦ ”🎲 Heitä” (L), kosketa pidettäviä noppia (1–5), sitten ruutua sarakkeessasi. ⌘Z kumoaa viimeisen ruudun, H vihje, Esc keskeyttää. ¦ „🎲 Dobás” (L), koppints a megtartandó kockákra (1–5), majd egy rovatra az oszlopodban. ⌘Z visszavonja az utolsó rovatot, H tipp, Esc szünet.
+Soif ¦ Jano ¦ Szomjúság
+Faim ¦ Nälkä ¦ Éhség
+Sommeil ¦ Uni ¦ Alvás
+Hygiène ¦ Hygienia ¦ Higiénia
+Toilettes ¦ WC ¦ Vécé
+Eau potable ¦ Juomavesi ¦ Ivóvíz
+Eau de pluie (à filtrer) ¦ Sadevesi (suodatettava) ¦ Esővíz (szűrni kell)
+Plantes ¦ Kasvit ¦ Növények
+Nourriture ¦ Ruoka ¦ Élelem
+rations ¦ annosta ¦ adag
+Essence ¦ Bensiini ¦ Benzin
+Clous et vis ¦ Naulat ja ruuvit ¦ Szögek és csavarok
+Corde ¦ Köysi ¦ Kötél
+Colle ¦ Liima ¦ Ragasztó
+Plastique ¦ Muovi ¦ Műanyag
+Caoutchouc ¦ Kumi ¦ Gumi
+Fil de cuivre ¦ Kuparilanka ¦ Rézdrót
+Composants électroniques ¦ Elektroniikkaosat ¦ Elektronikai alkatrészek
+Piles et batteries ¦ Paristot ja akut ¦ Elemek és akkumulátorok
+Charbon ¦ Hiili ¦ Szén
+Fil à tisser ¦ Kudelanka ¦ Szövőfonal
+Blé ¦ Vehnä ¦ Búza
+Farine ¦ Jauhot ¦ Liszt
+Vêtements chauds ¦ Lämpimät vaatteet ¦ Meleg ruhák
+Grille-pain cassé ¦ Rikkinäinen leivänpaahdin ¦ Törött kenyérpirító
+Vieille radio en panne ¦ Vanha rikkinäinen radio ¦ Régi, elromlott rádió
+Télévision cassée ¦ Rikkinäinen televisio ¦ Törött televízió
+Ordinateur hors d’usage ¦ Käyttökelvoton tietokone ¦ Használhatatlan számítógép
+Vieux téléphone ¦ Vanha puhelin ¦ Régi telefon
+Aspirateur ¦ Pölynimuri ¦ Porszívó
+Rouleau de câbles abîmés ¦ Rulla vaurioituneita kaapeleita ¦ Egy tekercs sérült kábel
+Batterie de voiture usée ¦ Kulunut auton akku ¦ Elhasznált autóakkumulátor
+Vélo rouillé ¦ Ruosteinen polkupyörä ¦ Rozsdás bicikli
+Pneu crevé ¦ Puhjennut rengas ¦ Defektes gumi
+Chaise cassée ¦ Rikkinäinen tuoli ¦ Törött szék
+Palette en bois ¦ Puulava ¦ Fa raklap
+Vieux matelas ¦ Vanha patja ¦ Régi matrac
+Rideaux déchirés ¦ Revenneet verhot ¦ Szakadt függönyök
+Parapluie cassé ¦ Rikkinäinen sateenvarjo ¦ Törött esernyő
+Caisse de bouteilles vides ¦ Laatikko tyhjiä pulloja ¦ Rekesz üres üveg
+Bocaux ébréchés ¦ Lohkeilleet purkit ¦ Csorba befőttesüvegek
+Jouets en plastique ¦ Muovilelut ¦ Műanyag játékok
+Casserole trouée ¦ Reikäinen kattila ¦ Lyukas lábas
+Boîtes de conserve vides ¦ Tyhjät säilyketölkit ¦ Üres konzervdobozok
+Seau percé ¦ Vuotava ämpäri ¦ Lyukas vödör
+Machine à coudre bloquée ¦ Jumittunut ompelukone ¦ Beragadt varrógép
+Montre arrêtée ¦ Pysähtynyt kello ¦ Megállt karóra
+Réveil cassé ¦ Rikkinäinen herätyskello ¦ Törött ébresztőóra
+Tuyau d’arrosage fendu ¦ Haljennut puutarhaletku ¦ Repedt locsolótömlő
+Filet de pêche emmêlé ¦ Sotkeutunut kalaverkko ¦ Összegabalyodott halászháló
+Tuiles et gravats ¦ Kattotiiliä ja romua ¦ Cserepek és törmelék
+Vieux cartable ¦ Vanha koululaukku ¦ Régi iskolatáska
+Pots de colle à moitié secs ¦ Puoliksi kuivuneita liimapurkkeja ¦ Félig kiszáradt ragasztós tégelyek
+Boîte de vis mélangées ¦ Laatikko sekalaisia ruuveja ¦ Doboz vegyes csavar
+Barbecue rouillé ¦ Ruosteinen grilli ¦ Rozsdás grillsütő
+Réfrigérateur mort ¦ Kuollut jääkaappi ¦ Döglött hűtő
+Sèche-cheveux grillé ¦ Palanut hiustenkuivaaja ¦ Kiégett hajszárító
+Guitare sans manche ¦ Kitara ilman kaulaa ¦ Nyak nélküli gitár
+Panneau de signalisation ¦ Liikennemerkki ¦ Közlekedési tábla
+Fenêtre arrachée ¦ Irti revitty ikkuna ¦ Kiszakított ablak
+Tonneau défoncé ¦ Rikottu tynnyri ¦ Beszakadt hordó
+Rouet cassé ¦ Rikkinäinen rukki ¦ Törött rokka
+Chaudron percé ¦ Vuotava pata ¦ Lyukas üst
+Lanterne brisée ¦ Rikkinäinen lyhty ¦ Törött lámpás
+Vieux sabots ¦ Vanhat puukengät ¦ Régi facipők
+Roue de charrette ¦ Kärryn pyörä ¦ Szekérkerék
+Harnais usé ¦ Kulunut valjaat ¦ Kopott lószerszám
+Radio ¦ Radio ¦ Rádió
+Parler avec ceux qui sont partis en ville (il faut de l’électricité). ¦ Puhu niiden kanssa, jotka lähtivät kaupunkiin (vaatii sähköä). ¦ Beszélgetés azokkal, akik a városba mentek (áram kell hozzá).
+Fait l’électricité avec l’essence (¼ L par heure). ¦ Tekee sähköä bensiinistä (¼ L tunnissa). ¦ Benzinből termel áramot (óránként ¼ L).
+On y construit les objets dont on a le plan (il faut de l’électricité). ¦ Täällä rakennetaan esineet, joihin on piirustukset (vaatii sähköä). ¦ Itt készülnek azok a tárgyak, amelyeknek megvan a terve (áram kell hozzá).
+Le crieur et la gazette ¦ Kuuluttaja ja lehti ¦ A kikiáltó és a hírlap
+Un gamin du quartier porte les nouvelles de ceux qui sont dehors ; le crieur annonce le marché. ¦ Korttelin poika tuo uutisia ulkona olevilta; kuuluttaja ilmoittaa torista. ¦ Egy környékbeli kölyök hozza a kint lévők híreit; a kikiáltó a piacot hirdeti.
+La cheminée ¦ Takka ¦ A kandalló
+Elle chauffe l’abri l’hiver (du bois) et on y cuit les plats. On s’éclaire à la chandelle. ¦ Se lämmittää suojaa talvella (puilla), ja sillä laitetaan ruokaa. Valoa saadaan kynttilöistä. ¦ Télen fűti a menedéket (fával), és ezen főznek. Gyertyával világítanak.
+Sans toilettes, on se soulage dans un coin : l’hygiène en prend un coup. ¦ Ilman WC:tä tarpeet tehdään nurkkaan: hygienia kärsii. ¦ Vécé nélkül egy sarokban könnyítenek magukon: a higiénia megsínyli.
+Une douche : 3 L d’eau et de l’électricité pour la pompe. ¦ Suihku: 3 L vettä ja sähköä pumppua varten. ¦ Egy zuhany: 3 L víz és áram a szivattyúhoz.
++30 rations de place. ¦ +30 annoksen tila. ¦ +30 adag hely.
+On dort deux fois mieux dans un lit (un dormeur par lit). ¦ Sängyssä nukkuu kaksi kertaa paremmin (yksi nukkuja sänkyä kohden). ¦ Ágyban kétszer olyan jól lehet aludni (ágyanként egy alvó).
+Étagères ¦ Hyllyt ¦ Polcok
++10 de place pour chaque réserve. ¦ +10 tilaa jokaiselle varastolle. ¦ +10 hely minden készlethez.
+Stockage ¦ Varastointi ¦ Tárolás
++25 de place pour chaque réserve. ¦ +25 tilaa jokaiselle varastolle. ¦ +25 hely minden készlethez.
+Cuve d’eau de pluie ¦ Sadevesisäiliö ¦ Esővíztartály
++30 L de place pour l’eau de pluie ; quand il pleut, elle se remplit toute seule (+2 L par heure). À passer au filtre avant de la boire. ¦ +30 L tilaa sadevedelle; sateella se täyttyy itsestään (+2 L tunnissa). Suodata ennen juomista. ¦ +30 L hely az esővíznek; esőben magától megtelik (óránként +2 L). Ivás előtt szűrni kell.
+Citerne ¦ Vesisäiliö ¦ Ciszterna
++60 L d’eau de place. ¦ +60 L tilaa vedelle. ¦ +60 L víztároló hely.
+Filtre à eau ¦ Vedensuodatin ¦ Vízszűrő
+Sable, charbon de bois et tissu : rend l’eau de pluie potable (3 L par heure). Il faut 1 tissu tous les 30 L pour le nettoyer. ¦ Hiekka, puuhiili ja kangas: tekee sadevedestä juotavaa (3 L tunnissa). Puhdistukseen tarvitaan 1 kangas 30 litran välein. ¦ Homok, faszén és szövet: ihatóvá teszi az esővizet (óránként 3 L). A tisztításához 30 literenként 1 szövet kell.
+Quand on n’a rien à faire, on joue : le moral remonte. ¦ Kun ei ole muuta tekemistä, pelataan: mieliala nousee. ¦ Ha nincs mit csinálni, játszanak: javul a hangulat.
+Porte renforcée ¦ Vahvistettu ovi ¦ Megerősített ajtó
+Les pillards ont bien plus de mal à entrer. ¦ Ryöstäjien on paljon vaikeampi päästä sisään. ¦ A fosztogatók sokkal nehezebben jutnak be.
+Pièges dans l’entrée ¦ Ansoja sisäänkäynnissä ¦ Csapdák a bejáratnál
+Des surprises pour qui force la trappe. ¦ Yllätyksiä luukun murtajalle. ¦ Meglepetések annak, aki feltöri a csapóajtót.
+L’hiver, il chauffe le bunker (1 bois toutes les 4 heures). Sans lui, on a froid : on dort mal et le moral baisse. ¦ Talvella se lämmittää bunkkeria (1 puu 4 tunnin välein). Ilman sitä on kylmä: nukutaan huonosti ja mieliala laskee. ¦ Télen fűti a bunkert (4 óránként 1 fa). Nélküle hideg van: rosszul alszanak, és romlik a hangulat.
+Dynamo à pédales ¦ Poljindynamo ¦ Pedálos dinamó
+Quelqu’un pédale (travail « Pédaler ») : de l’électricité sans essence, mais on se fatigue. ¦ Joku polkee (työ ”Polje”): sähköä ilman bensiiniä, mutta se väsyttää. ¦ Valaki teker (a „Tekerés” munka): áram benzin nélkül, de fárasztó.
+Pour accueillir un bébé (sans berceau, pas de naissance au bunker). ¦ Vauvan vastaanottamiseen (ilman kehtoa ei synny lapsia bunkkerissa). ¦ Egy baba fogadásához (bölcső nélkül nincs születés a bunkerben).
+Tourne-disque ¦ Levysoitin ¦ Lemezjátszó
+De la musique (il faut de l’électricité) : le moral remonte deux fois plus vite qu’avec les jeux. ¦ Musiikkia (vaatii sähköä): mieliala nousee kaksi kertaa nopeammin kuin peleillä. ¦ Zene (áram kell hozzá): a hangulat kétszer olyan gyorsan javul, mint a játékoktól.
+Panneau solaire ¦ Aurinkopaneeli ¦ Napelem
+De l’électricité le jour, quand il ne pleut pas. ¦ Sähköä päivällä, kun ei sada. ¦ Áram nappal, amikor nem esik.
+Petite éolienne ¦ Pieni tuuliturbiini ¦ Kis szélturbina
+De l’électricité quand il y a du vent. ¦ Sähköä, kun tuulee. ¦ Áram, amikor fúj a szél.
+Récupérateur de pluie ¦ Sadevedenkeräin ¦ Esővízgyűjtő
+La pluie remplit l’eau trois fois plus vite (bidons du toit et cuves). ¦ Sade täyttää vedet kolme kertaa nopeammin (katon kanisterit ja säiliöt). ¦ Az eső háromszor gyorsabban tölti fel a vizet (tetőn lévő kannák és tartályok).
+Potager sous lampe ¦ Kasvatuslampun alla oleva kasvimaa ¦ Lámpás veteményes
+Une ration toutes les 8 h (deux avec un bon jardinier), avec 1 L d’eau et de l’électricité ; et des plantes pour les remèdes. ¦ Yksi annos 8 tunnin välein (kaksi hyvän puutarhurin kanssa), 1 L vettä ja sähköä; ja kasveja lääkkeisiin. ¦ 8 óránként egy adag (jó kertésszel kettő), 1 L vízzel és árammal; és növények a gyógyszerekhez.
+Infirmerie ¦ Sairastupa ¦ Gyengélkedő
+La santé remonte deux fois plus vite. ¦ Terveys palautuu kaksi kertaa nopeammin. ¦ Az egészség kétszer olyan gyorsan javul.
+Groupe économe ¦ Säästeliäs generaattori ¦ Takarékos aggregát
+L’électricité coûte moitié moins d’essence. ¦ Sähkö kuluttaa puolet vähemmän bensiiniä. ¦ Az áram feleannyi benzinbe kerül.
+Pour démonter le bric-à-brac : deux fois plus vite, et sans abîmer les pièces (un composant de plus, parfois). ¦ Romun purkamiseen: kaksi kertaa nopeammin ja vahingoittamatta osia (joskus yksi osa lisää). ¦ A lom szétszedéséhez: kétszer olyan gyorsan, az alkatrészek sérülése nélkül (néha egy alkatrész pluszban).
+Débarras ¦ Romuhuone ¦ Lomtár
++20 places pour le bric-à-brac à démonter. ¦ +20 paikkaa purettavalle romulle. ¦ +20 hely a szétszedendő lomnak.
+Boîtes à composants ¦ Osalaatikot ¦ Alkatrészdobozok
+De la place en plus pour tous les composants. ¦ Lisää tilaa kaikille osille. ¦ Több hely minden alkatrésznek.
+Barricade ¦ Barrikadi ¦ Barikád
+Des planches clouées en travers de l’entrée. ¦ Lankkuja naulattuna sisäänkäynnin poikki. ¦ A bejáraton keresztbe szögelt deszkák.
+Une toilette rapide de temps en temps : l’hygiène baisse moins vite (et un peu d’eau de pluie). ¦ Nopea pesu silloin tällöin: hygienia laskee hitaammin (ja vähän sadevettä). ¦ Egy gyors mosakodás néha: lassabban romlik a higiénia (és kell hozzá egy kis esővíz).
+Coin lecture ¦ Lukunurkkaus ¦ Olvasósarok
+Des livres et un fauteuil : le moral remonte, sans électricité. ¦ Kirjoja ja nojatuoli: mieliala nousee ilman sähköä. ¦ Könyvek és egy fotel: javul a hangulat, áram nélkül.
+L’arbre de famille au mur ¦ Sukupuu seinällä ¦ A családfa a falon
+L’arbre peint au mur, avec les noms de tous : le moral s’use moins vite. ¦ Seinälle maalattu puu kaikkien nimineen: mieliala kuluu hitaammin. ¦ A falra festett fa mindenki nevével: lassabban kopik a hangulat.
+Bac à compost ¦ Kompostilaatikko ¦ Komposztláda
+Les épluchures deviennent du terreau : 1 plante toutes les 12 h. ¦ Kuoret muuttuvat mullaksi: 1 kasvi 12 tunnin välein. ¦ A héjakból föld lesz: 12 óránként 1 növény.
+Guitare ¦ Kitara ¦ Gitár
+Quelqu’un joue le soir : le moral remonte presque autant qu’avec la musique, sans électricité. ¦ Joku soittaa illalla: mieliala nousee lähes yhtä paljon kuin musiikilla, ilman sähköä. ¦ Valaki esténként játszik: a hangulat majdnem annyit javul, mint zenétől, áram nélkül.
+On se défoule : le moral remonte. ¦ Purkautumista: mieliala nousee. ¦ Kiadhatják magukból: javul a hangulat.
+Télévision et cassettes ¦ Televisio ja kasetit ¦ Televízió és kazetták
+Des films d’avant (il faut de l’électricité) : le moral remonte très vite. ¦ Vanhoja elokuvia (vaatii sähköä): mieliala nousee hyvin nopeasti. ¦ Régi filmek (áram kell hozzá): a hangulat nagyon gyorsan javul.
+Regarder les poissons calme tout le monde (il faut de l’électricité pour la pompe). ¦ Kalojen katselu rauhoittaa kaikkia (pumppu vaatii sähköä). ¦ A halak nézése mindenkit megnyugtat (a szivattyúhoz áram kell).
+Banc de batteries ¦ Akkupankki ¦ Akkumulátortelep
+Garde l’électricité en réserve (8 h) : quand il n’y a ni soleil, ni vent, ni essence, le bunker reste éclairé. ¦ Varastoi sähköä (8 h): kun ei ole aurinkoa, tuulta eikä bensiiniä, bunkkeri pysyy valaistuna. ¦ Tartalékolja az áramot (8 óra): ha nincs se nap, se szél, se benzin, a bunker kivilágítva marad.
+Ampoules économes ¦ Energiansäästölamput ¦ Energiatakarékos izzók
+L’électricité coûte un quart d’essence en moins. ¦ Sähkö kuluttaa neljänneksen vähemmän bensiiniä. ¦ Az áram negyedével kevesebb benzinbe kerül.
+Chaudière à charbon ¦ Hiilikattila ¦ Széntüzelésű kazán
+L’hiver, elle chauffe avec du charbon (¼ toutes les heures) quand le poêle n’a plus de bois. ¦ Talvella se lämmittää hiilellä (¼ tunnissa), kun kamiinasta loppuvat puut. ¦ Télen szénnel fűt (óránként ¼), ha a kályhában elfogyott a fa.
+Ventilateur du conduit ¦ Kanavan tuuletin ¦ Légcsatorna-ventilátor
+L’air s’encrasse moins vite (il faut de l’électricité). ¦ Ilma pilaantuu hitaammin (vaatii sähköä). ¦ Lassabban romlik a levegő (áram kell hozzá).
+Filtre à air au charbon ¦ Hiili-ilmansuodatin ¦ Szénszűrős légszűrő
+L’air reste bon bien plus longtemps (il faut de l’électricité). ¦ Ilma pysyy hyvänä paljon pidempään (vaatii sähköä). ¦ A levegő sokkal tovább marad jó (áram kell hozzá).
+Serre sous verrière ¦ Kasvihuone kattoikkunan alla ¦ Üvegház a tetőablak alatt
+Sous le puits de lumière : 1 ration et 1 plante toutes les 12 h, sans électricité (de l’eau de pluie pour arroser). ¦ Valokuilun alla: 1 annos ja 1 kasvi 12 tunnin välein ilman sähköä (sadevettä kasteluun). ¦ A világítóakna alatt: 12 óránként 1 adag és 1 növény, áram nélkül (öntözéshez esővíz).
+Champignonnière ¦ Sienikellari ¦ Gombapince
+Dans le noir, sur du bois mouillé : 1 ration toutes les 12 h, sans électricité. ¦ Pimeässä, kostealla puulla: 1 annos 12 tunnin välein ilman sähköä. ¦ Sötétben, nedves fán: 12 óránként 1 adag, áram nélkül.
+3 rations par jour s’il y a 1 plante pour les nourrir. ¦ 3 annosta päivässä, jos on 1 kasvi niiden ruokkimiseen. ¦ Napi 3 adag, ha van 1 növény az etetésükhöz.
+Des œufs : 1 ration toutes les 12 h (un peu de plantes pour le grain). ¦ Munia: 1 annos 12 tunnin välein (vähän kasveja rehuksi). ¦ Tojás: 12 óránként 1 adag (egy kis növény takarmánynak).
+Bouilleur d’eau ¦ Vedenkeitin ¦ Vízforraló
+Fait bouillir l’eau de pluie au feu de bois : 2 L d’eau potable par heure, sans tissu ni électricité. ¦ Keittää sadeveden puutulella: 2 L juomavettä tunnissa ilman kangasta ja sähköä. ¦ Fatűzön forralja az esővizet: óránként 2 L ivóvíz, szövet és áram nélkül.
+Petit laboratoire ¦ Pieni laboratorio ¦ Kis laboratórium
+Des plantes, on tire des médicaments : 1 toutes les 12 h (il faut de l’électricité). ¦ Kasveista tehdään lääkkeitä: 1 12 tunnin välein (vaatii sähköä). ¦ Növényekből gyógyszert készítenek: 12 óránként 1 (áram kell hozzá).
+Fourneau de cuisine ¦ Keittiön liesi ¦ Konyhai tűzhely
+Une bonne cuisine fait durer les réserves : 2 rations de plus par jour avec 1 plante (deux fois plus avec un cuisinier). ¦ Hyvä ruoanlaitto saa varastot riittämään: 2 annosta lisää päivässä 1 kasvilla (kaksinkertaisesti kokin kanssa). ¦ A jó főzés kíméli a készleteket: napi 2 adaggal több 1 növénnyel (szakáccsal kétszer annyi).
+Coin couture ¦ Ompelunurkkaus ¦ Varrósarok
+Des sacs plastique tressés : 1 tissu et 1 corde toutes les 12 h. ¦ Punotuista muovipusseista: 1 kangas ja 1 köysi 12 tunnin välein. ¦ Font műanyag zacskók: 12 óránként 1 szövet és 1 kötél.
+Petite forge ¦ Pieni paja ¦ Kis kovácsműhely
+Démonter va plus vite ; et avec du charbon, on forge des clous (3 toutes les 8 h). ¦ Purkaminen sujuu nopeammin; ja hiilellä taotaan nauloja (3 8 tunnin välein). ¦ Gyorsabban megy a szétszedés; és szénnel szöget kovácsolnak (8 óránként 3-at).
+Lit d’infirmerie ¦ Sairasvuode ¦ Betegágy
+Les malades guérissent plus vite. ¦ Sairaat paranevat nopeammin. ¦ A betegek gyorsabban gyógyulnak.
+Périscope ¦ Periskooppi ¦ Periszkóp
+On voit qui frappe à la trappe avant d’ouvrir : bien plus dur de nous surprendre. ¦ Näkee, kuka koputtaa luukkuun ennen avaamista: meitä on paljon vaikeampi yllättää. ¦ Nyitás előtt látjuk, ki kopog a csapóajtón: sokkal nehezebb meglepni minket.
+Alarme de la trappe ¦ Luukun hälytin ¦ A csapóajtó riasztója
+Un fil tendu et une sonnerie : personne n’entre sans qu’on le sache. ¦ Viritetty lanka ja kello: kukaan ei pääse sisään meidän tietämättämme. ¦ Egy kifeszített drót és egy csengő: senki nem jut be a tudtunk nélkül.
+Talkies-walkies ¦ Radiopuhelimet ¦ Adó-vevők
+On entend ceux qui sont dehors même sans électricité au bunker. ¦ Ulkona olevat kuuluvat, vaikka bunkkerissa ei ole sähköä. ¦ Halljuk a kint lévőket, akkor is, ha nincs áram a bunkerben.
+Grande carte de la ville ¦ Suuri kaupungin kartta ¦ Nagy várostérkép
+Une fois finie : tous les lieux de la ville sont marqués, même ceux où personne n’est allé. ¦ Kun se on valmis: kaikki kaupungin paikat on merkitty, myös ne, joissa kukaan ei ole käynyt. ¦ Ha kész: a város minden helye jelölve van, azok is, ahol még senki sem járt.
+Vélo réparé ¦ Korjattu polkupyörä ¦ Megjavított bicikli
+On va et on revient en ville bien plus vite. ¦ Kaupunkiin ja takaisin pääsee paljon nopeammin. ¦ Sokkal gyorsabban lehet a városba menni és visszajönni.
+On rapporte 10 de plus à chaque sortie. ¦ Jokaiselta retkeltä tuodaan 10 enemmän. ¦ Minden kiruccanásról 10-zel többet hoznak.
+Sacs à dos cousus ¦ Ommellut reput ¦ Varrt hátizsákok
+Des sacs solides pour chacun : on rapporte 4 de plus à chaque sortie. ¦ Tukevat laukut kaikille: jokaiselta retkeltä tuodaan 4 enemmän. ¦ Erős zsákok mindenkinek: minden kiruccanásról 4-gyel többet hoznak.
+Hotte en osier ¦ Selkäkori pajusta ¦ Fonott puttony
+Sur le dos, comme les vendangeurs : on rapporte 6 de plus. ¦ Selässä kuten rypäleenpoimijoilla: tuodaan 6 enemmän. ¦ Háton, mint a szüretelőknél: 6-tal többet hoznak.
+On rapporte 8 de plus à chaque sortie. ¦ Jokaiselta retkeltä tuodaan 8 enemmän. ¦ Minden kiruccanásról 8-cal többet hoznak.
+Remorque de vélo ¦ Polkupyörän peräkärry ¦ Biciklis utánfutó
+Accrochée au vélo réparé : on rapporte 15 de plus (sans vélo, elle ne sert à rien). ¦ Kiinnitettynä korjattuun pyörään: tuodaan 15 enemmän (ilman pyörää se on hyödytön). ¦ A megjavított biciklire akasztva: 15-tel többet hoznak (bicikli nélkül haszontalan).
+Garde-manger frais ¦ Viileä ruokakomero ¦ Hűvös kamra
++50 rations et +15 plantes de place. ¦ +50 annoksen ja +15 kasvin tila. ¦ +50 adag és +15 növény hely.
+Bidons d’essence ¦ Bensiinikanisterit ¦ Benzineskannák
++40 L d’essence de place. ¦ +40 L tilaa bensiinille. ¦ +40 L hely a benzinnek.
+Pièges à rats ¦ Rotanloukut ¦ Patkánycsapdák
+Les rats et les cafards reculent : ils mangent bien moins de réserves. ¦ Rotat ja torakat perääntyvät: ne syövät paljon vähemmän varastoja. ¦ A patkányok és csótányok visszavonulnak: sokkal kevesebbet esznek a készletekből.
+Bocaux hermétiques ¦ Ilmatiiviit purkit ¦ Légmentes befőttesüvegek
+Les réserves bien fermées : les nuisibles en mangent deux fois moins. ¦ Hyvin suljetut varastot: tuholaiset syövät niistä puolet vähemmän. ¦ Jól lezárt készletek: a kártevők feleannyit esznek belőlük.
+Extincteur ¦ Sammutin ¦ Tűzoltó készülék
+Un départ de feu est éteint tout de suite (option « incendies »). ¦ Alkava palo sammutetaan heti (vaihtoehto ”tulipalot”). ¦ A keletkező tüzet azonnal eloltják („tüzek” lehetőség).
+Coin des bêtes ¦ Eläinnurkkaus ¦ Állatsarok
+Une niche, un panier, un perchoir : les animaux restent, et ça fait plaisir à tout le monde. ¦ Koppi, kori, orsi: eläimet jäävät, ja se ilahduttaa kaikkia. ¦ Egy kutyaól, egy kosár, egy ülőrúd: az állatok maradnak, és ennek mindenki örül.
+Des fibres de plantes, on file : 2 fils toutes les 8 h (1 plante). ¦ Kasvikuiduista kehrätään: 2 lankaa 8 tunnin välein (1 kasvi). ¦ Növényi rostokból fonnak: 8 óránként 2 fonal (1 növény).
+Du fil, on tisse : 2 tissus toutes les 12 h (3 fils). ¦ Langasta kudotaan: 2 kangasta 12 tunnin välein (3 lankaa). ¦ Fonalból szőnek: 12 óránként 2 szövet (3 fonal).
+Coin du tailleur ¦ Räätälin nurkkaus ¦ Szabósarok
+Des vêtements chauds (2 tissus et 1 fil par jour) : l’hiver, le froid fait bien moins de mal. ¦ Lämpimiä vaatteita (2 kangasta ja 1 lanka päivässä): talvella kylmä tekee paljon vähemmän haittaa. ¦ Meleg ruhák (napi 2 szövet és 1 fonal): télen a hideg sokkal kevesebbet árt.
+Champ sous verrière ¦ Pelto kattoikkunan alla ¦ Szántó a tetőablak alatt
+Du blé sous le puits de lumière : 2 toutes les 12 h, le jour (1 L d’eau de pluie). ¦ Vehnää valokuilun alla: 2 12 tunnin välein päivällä (1 L sadevettä). ¦ Búza a világítóakna alatt: 12 óránként 2, nappal (1 L esővíz).
+Moulin à bras ¦ Käsimylly ¦ Kézi malom
+Le blé devient farine : 2 toutes les 6 h. ¦ Vehnästä tulee jauhoja: 2 6 tunnin välein. ¦ A búzából liszt lesz: 6 óránként 2.
+Du pain : 4 rations toutes les 12 h (2 farines et un peu de bois). ¦ Leipää: 4 annosta 12 tunnin välein (2 jauhoa ja vähän puuta). ¦ Kenyér: 12 óránként 4 adag (2 liszt és egy kis fa).
+Armoire à pharmacie ¦ Lääkekaappi ¦ Gyógyszeres szekrény
++15 médicaments et +15 plantes de place. ¦ +15 lääkkeen ja +15 kasvin tila. ¦ +15 gyógyszer és +15 növény hely.
+Puits creusé ¦ Kaivettu kaivo ¦ Ásott kút
+L’eau de la nappe : 1 L toutes les 2 h, même sans pluie (à filtrer avant de la boire). ¦ Pohjavettä: 1 L 2 tunnin välein, myös ilman sadetta (suodata ennen juomista). ¦ Talajvíz: 2 óránként 1 L, eső nélkül is (ivás előtt szűrni kell).
+Fumoir ¦ Savustamo ¦ Füstölő
+On fume et on sèche ce qu’on a : 1,5 ration toutes les 12 h (1 plante, un peu de bois). ¦ Savustetaan ja kuivataan, mitä on: 1,5 annosta 12 tunnin välein (1 kasvi, vähän puuta). ¦ Füstölik és szárítják, amijük van: 12 óránként 1,5 adag (1 növény, egy kis fa).
+Du miel : 1 ration par jour, et de quoi soigner (le miel sur les plaies). Le bourdonnement fait du bien. ¦ Hunajaa: 1 annos päivässä ja jotain parantamiseen (hunajaa haavoille). Surina tekee hyvää. ¦ Méz: napi 1 adag, és valami a gyógyításhoz (méz a sebekre). A zümmögés jólesik.
+Pressoir à fruits ¦ Hedelmäpuristin ¦ Gyümölcsprés
+Du jus et de la compote : 1 ration et 1 L à boire toutes les 12 h (2 plantes). ¦ Mehua ja hilloketta: 1 annos ja 1 L juotavaa 12 tunnin välein (2 kasvia). ¦ Gyümölcslé és kompót: 12 óránként 1 adag és 1 L innivaló (2 növény).
+Édredons de plume ¦ Untuvapeitot ¦ Dunyhák
+L’hiver, on a moins froid (comme avec des vêtements chauds), et on dort mieux. ¦ Talvella palelee vähemmän (kuten lämpimillä vaatteilla), ja nukkuu paremmin. ¦ Télen kevésbé fáznak (mint meleg ruhákban), és jobban alszanak.
+Lanternes à huile ¦ Öljylyhdyt ¦ Olajlámpások
+On y voit clair même sans électricité : le moral tient mieux. ¦ Näkee hyvin myös ilman sähköä: mieliala kestää paremmin. ¦ Áram nélkül is jól látni: jobban tart a hangulat.
+Le tic-tac rassure : on dort mieux, on garde le fil des jours. ¦ Tikitys rauhoittaa: nukkuu paremmin ja pysyy päivien tasalla. ¦ A ketyegés megnyugtat: jobban alszanak, és követik a napokat.
+On danse dans la cave : le moral remonte plus vite qu’avec la musique du tourne-disque, sans électricité. ¦ Kellarissa tanssitaan: mieliala nousee nopeammin kuin levysoittimen musiikilla, ilman sähköä. ¦ Táncolnak a pincében: a hangulat gyorsabban javul, mint a lemezjátszó zenéjétől, áram nélkül.
+Jeu d’échecs ¦ Shakkipeli ¦ Sakkészlet
+De longues parties le soir : le moral remonte, sans électricité. ¦ Pitkiä pelejä iltaisin: mieliala nousee ilman sähköä. ¦ Hosszú játszmák esténként: javul a hangulat, áram nélkül.
+Jardin de simples ¦ Yrttitarha ¦ Gyógynövénykert
+Sauge, thym, camomille : 1 plante toutes les 12 h (un peu d’eau de pluie), pour les remèdes. ¦ Salvia, timjami, kamomilla: 1 kasvi 12 tunnin välein (vähän sadevettä) lääkkeisiin. ¦ Zsálya, kakukkfű, kamilla: 12 óránként 1 növény (egy kis esővíz), a gyógyszerekhez.
+Pharmacie de grand-mère ¦ Mummon lääkekaappi ¦ Nagymama patikája
+Des bocaux d’onguents et de tisanes : les malades guérissent plus vite. ¦ Voidepurkkeja ja yrttiteetä: sairaat paranevat nopeammin. ¦ Kenőcsös tégelyek és gyógyteák: a betegek gyorsabban gyógyulnak.
+Gouttières ¦ Rännit ¦ Ereszcsatornák
+Le toit renvoie l’eau vers les bidons : +1,5 L par heure quand il pleut. ¦ Katto ohjaa veden kanistereihin: +1,5 L tunnissa sateella. ¦ A tető a kannákba vezeti a vizet: esőben óránként +1,5 L.
+Fosse piégée ¦ Ansakuoppa ¦ Verem
+Un trou couvert de branches devant la trappe : les pillards y tombent. ¦ Oksilla peitetty kuoppa luukun edessä: ryöstäjät putoavat siihen. ¦ Ágakkal letakart gödör a csapóajtó előtt: a fosztogatók beleesnek.
+Meurtrières et arbalète ¦ Ampumareiät ja varsijousi ¦ Lőrések és számszeríj
+On tire sans ouvrir : les pillards reculent. ¦ Ammutaan avaamatta: ryöstäjät perääntyvät. ¦ Nyitás nélkül lőnek: a fosztogatók meghátrálnak.
+Brancard et attelles ¦ Paarit ja lastat ¦ Hordágy és sínek
+Les blessés sont bien installés : ils guérissent plus vite. ¦ Haavoittuneet ovat hyvässä asennossa: he paranevat nopeammin. ¦ A sebesültek jól el vannak helyezve: gyorsabban gyógyulnak.
+Boussole et carnet de route ¦ Kompassi ja reittivihko ¦ Iránytű és útinapló
+Les raccourcis notés au fil des sorties : on va et on revient plus vite. ¦ Oikotiet kirjattu retki retkeltä: menee ja palaa nopeammin. ¦ A kiruccanások során feljegyzett rövidítések: gyorsabban oda és vissza.
+Traîneau ¦ Reki ¦ Szánkó
+On tire la charge derrière soi : on rapporte 7 de plus à chaque sortie. ¦ Kuorma vedetään perässä: jokaiselta retkeltä tuodaan 7 enemmän. ¦ A terhet maguk után húzzák: minden kiruccanásról 7-tel többet hoznak.
+Nasses et filets ¦ Merrat ja verkot ¦ Varsák és hálók
+Posées dans le canal : 2 rations de poisson par jour. ¦ Laskettu kanavaan: 2 annosta kalaa päivässä. ¦ A csatornába téve: napi 2 adag hal.
+Le linge propre : l’hygiène baisse moins vite. ¦ Puhdas pyykki: hygienia laskee hitaammin. ¦ Tiszta ruha: lassabban romlik a higiénia.
+Des pigeons voyageurs : on a des nouvelles de ceux qui sont dehors, même sans électricité. ¦ Kirjekyyhkyjä: uutisia ulkona olevilta, myös ilman sähköä. ¦ Postagalambok: hírek a kint lévőktől, áram nélkül is.
+Cave à vin ¦ Viinikellari ¦ Borospince
+Un petit verre les soirs de fête : le moral tient bien mieux. ¦ Pieni lasi juhlailtoina: mieliala kestää paljon paremmin. ¦ Egy kis pohárka ünnepi estéken: sokkal jobban tart a hangulat.
+Four solaire ¦ Aurinkouuni ¦ Napkemence
+Sous le puits de lumière : on cuit les plats sans bois (pour les recettes). ¦ Valokuilun alla: ruoka valmistetaan ilman puuta (resepteihin). ¦ A világítóakna alatt: fa nélkül főznek (a receptekhez).
+Malle à bretelles ¦ Remmein varustettu arkku ¦ Hevederes láda
+Sur le dos de chacun, en plus du reste : +3 à porter. ¦ Jokaisen selässä muun lisäksi: +3 kannettavaa. ¦ Mindenki hátán, a többi mellett: +3 teher.
+Bâts et sangles ¦ Kantosatulat ja hihnat ¦ Málhanyergek és hevederek
+Sur chaque âne : +5 de charge. Sans bête de bât, ils ne servent à rien. ¦ Jokaisella aasilla: +5 kuormaa. Hyödyttömiä ilman kantoeläintä. ¦ Minden szamáron: +5 teher. Málhás állat nélkül haszontalanok.
+Vélo cargo (triporteur) ¦ Tavarapyörä (kolmipyörä) ¦ Teherbicikli (tricikli)
+Un vélo avec une grande caisse : +14. Mauvais dans la boue et la neige. ¦ Pyörä, jossa on iso laatikko: +14. Huono mudassa ja lumessa. ¦ Bicikli egy nagy ládával: +14. Sárban és hóban gyenge.
+Caddie de supermarché ¦ Ostoskärry ¦ Bevásárlókocsi
++9 sur la route ; presque rien sur les chemins, la boue ou la neige. S’use vite. ¦ +9 tiellä; lähes ei mitään poluilla, mudassa tai lumessa. Kuluu nopeasti. ¦ +9 úton; ösvényen, sárban vagy hóban szinte semmi. Gyorsan elhasználódik.
+Poussette renforcée ¦ Vahvistetut lastenrattaat ¦ Megerősített babakocsi
++6, plutôt sur la route. S’use vite. ¦ +6, lähinnä tiellä. Kuluu nopeasti. ¦ +6, főleg úton. Gyorsan elhasználódik.
+Carriole attelée ¦ Hevoskärryt ¦ Lovaskocsi
+La plus grosse charge (+25), tirée par un cheval (il faut un cheval). ¦ Suurin kuorma (+25), hevosen vetämä (vaatii hevosen). ¦ A legnagyobb teher (+25), ló húzza (ló kell hozzá).
+Barque ¦ Soutuvene ¦ Csónak
+Seulement sur l’eau : +20 dans les rues inondées et au bord des rivières, rien ailleurs. ¦ Vain vedessä: +20 tulvivilla kaduilla ja jokien varsilla, muualla ei mitään. ¦ Csak vízen: +20 elárasztott utcákon és folyópartokon, máshol semmi.
+Chariot de mine ¦ Kaivosvaunu ¦ Csille
+Une fois les rails posés vers un lieu proche (4 cases au plus) : on y va deux fois plus vite et on en rapporte 30 de plus. ¦ Kun kiskot on laskettu läheiseen paikkaan (enintään 4 ruutua): sinne mennään kaksi kertaa nopeammin ja sieltä tuodaan 30 enemmän. ¦ Ha a sín egy közeli helyig le van fektetve (legfeljebb 4 mező): kétszer olyan gyorsan jutnak oda, és 30-cal többet hoznak.
+Petite turbine hydraulique ¦ Pieni vesiturbiini ¦ Kis vízturbina
+Quand il pleut, l’eau qui ruisselle dans le conduit fait de l’électricité. ¦ Sateella kanavassa valuva vesi tuottaa sähköä. ¦ Esőben a csatornában lefolyó víz áramot termel.
+Pelle ¦ Lapio ¦ Lapát
+creuser deux fois plus vite ¦ kaiva kaksi kertaa nopeammin ¦ kétszer olyan gyors ásás
+Scie ¦ Saha ¦ Fűrész
+construire plus vite ¦ rakenna nopeammin ¦ gyorsabb építés
+Clé à molette ¦ Jakoavain ¦ Franciakulcs
+obligatoire pour certains plans ¦ pakollinen joissakin piirustuksissa ¦ néhány tervhez kötelező
+Grand sac ¦ Iso säkki ¦ Nagy zsák
+rapporter deux fois plus ¦ tuo kaksi kertaa enemmän ¦ kétszer annyit hoz
+Lampe torche ¦ Taskulamppu ¦ Zseblámpa
+marcher de nuit aussi vite que de jour ¦ kävele yöllä yhtä nopeasti kuin päivällä ¦ éjjel ugyanolyan gyors járás, mint nappal
+Supermarché ¦ Supermarket ¦ Szupermarket
+Station-service ¦ Huoltoasema ¦ Benzinkút
+Quincaillerie ¦ Rautakauppa ¦ Vasbolt
+Menuiserie ¦ Puusepänverstas ¦ Asztalosműhely
+Pharmacie ¦ Apteekki ¦ Gyógyszertár
+Maison abandonnée ¦ Hylätty talo ¦ Elhagyott ház
+Décharge ¦ Kaatopaikka ¦ Szeméttelep
+Magasin d’électroménager ¦ Kodinkoneliike ¦ Háztartásigép-bolt
+Droguerie ¦ Taloustavarakauppa ¦ Háztartási bolt
+Usine abandonnée ¦ Hylätty tehdas ¦ Elhagyott gyár
+Ferme ¦ Maatila ¦ Tanya
+Gare ¦ Rautatieasema ¦ Vasútállomás
+Port de pêche ¦ Kalasatama ¦ Halászkikötő
+Hôpital ¦ Sairaala ¦ Kórház
+Construire ¦ Rakenna ¦ Építés
+Soigner ¦ Hoida ¦ Gyógyítás
+Cultiver ¦ Viljele ¦ Termesztés
+Cuisiner ¦ Laita ruokaa ¦ Főzés
+Fouiller ¦ Etsi ¦ Kutatás
+Défendre ¦ Puolusta ¦ Védekezés
+Raconter ¦ Kertominen ¦ Mesélés
+Été ¦ Kesä ¦ Nyár
+Automne ¦ Syksy ¦ Ősz
+Hiver ¦ Talvi ¦ Tél
+on construit 20 % plus vite ¦ rakennetaan 20 % nopeammin ¦ 20%-kal gyorsabb építés
+les histoires du soir font plus de bien ¦ iltasadut tekevät enemmän hyvää ¦ az esti történetek jobban esnek
+le moral baisse moins vite ¦ mieliala laskee hitaammin ¦ lassabban romlik a hangulat
++3 tissu, et on dort mieux ¦ +3 kangasta, ja nukutaan paremmin ¦ +3 szövet, és jobban alszanak
+les repas nourrissent davantage ¦ ateriat ravitsevat enemmän ¦ az ételek laktatóbbak
+le moral de départ est meilleur ¦ mieliala on alussa parempi ¦ jobb a kezdeti hangulat
+l’histoire du loup qui avait peur du noir ¦ tarina sudesta, joka pelkäsi pimeää ¦ a mese a farkasról, aki félt a sötétben
+la légende de la dame blanche du moulin ¦ tarina myllyn valkoisesta naisesta ¦ a malom fehér asszonyának legendája
+le jour où l’oncle a vendu la vache deux fois ¦ päivä, jona setä myi lehmän kahdesti ¦ az a nap, amikor a nagybácsi kétszer adta el a tehenet
+la grande crue, quand l’eau est montée jusqu’à l’église ¦ suuri tulva, kun vesi nousi kirkolle asti ¦ a nagy árvíz, amikor a víz a templomig ért
+le bal du 14 juillet où tout le monde s’est rencontré ¦ heinäkuun 14. päivän tanssit, joissa kaikki tapasivat ¦ a július 14-i bál, ahol mindenki megismerkedett
+la recette perdue du gâteau de la grand-mère ¦ mummon kadonnut kakkuresepti ¦ nagymama elveszett süteményreceptje
+Courageux·se ¦ Rohkea ¦ Bátor
+se défend mieux, se blesse moins dehors ¦ puolustautuu paremmin, loukkaantuu vähemmän ulkona ¦ jobban védekezik, kint kevésbé sérül meg
+Peureux·se ¦ Pelokas ¦ Félénk
+se défend moins bien, le moral chute quand on frappe à la trappe ¦ puolustautuu huonommin, mieliala romahtaa, kun luukkuun koputetaan ¦ rosszabbul védekezik, összeomlik a hangulata, ha kopognak a csapóajtón
+Gourmand·e ¦ Herkkusuu ¦ Ínyenc
+a faim plus vite, mais un repas lui remonte le moral ¦ tulee nälkäiseksi nopeammin, mutta ateria piristää ¦ hamarabb megéhezik, de egy étel feldobja
+Bricoleur·se ¦ Kätevä ¦ Ezermester
+construit et répare plus vite ¦ rakentaa ja korjaa nopeammin ¦ gyorsabban épít és javít
+Optimiste ¦ Optimistinen ¦ Optimista
+le moral baisse deux fois moins vite ¦ mieliala laskee puolet hitaammin ¦ feleolyan gyorsan romlik a hangulata
+Ronchon·ne ¦ Äreä ¦ Morcos
+le moral baisse plus vite, se fâche facilement ¦ mieliala laskee nopeammin, suuttuu helposti ¦ gyorsabban romlik a hangulata, könnyen megharagszik
+Gros·se dormeur·se ¦ Unikeko ¦ Nagy alvó
+a besoin de plus de sommeil ¦ tarvitsee enemmän unta ¦ több alvásra van szüksége
+Sociable ¦ Seurallinen ¦ Társaságkedvelő
+se fait vite des amis ¦ saa nopeasti ystäviä ¦ gyorsan barátkozik
