@@ -3252,6 +3252,7 @@
  "⚠️ Je ne trouve pas d’année.": "⚠️ No encuentro ningún año.",
  "⚠️ Je ne trouve pas d’années (ex. « actif de 1862 à 1895 »).": "⚠️ No encuentro años (p. ej. «activo de 1862 a 1895»).",
  "⚠️ la date « {date} » est impossible, vérifie-la.": "⚠️ la fecha «{date}» es imposible, compruébala.",
+ "⚠️ Le mot de passe n’est enregistré nulle part : <strong>sans lui, la copie est illisible, même pour toi</strong>. Note-le sur papier. La copie contient la base (fiches, notes, sources), sans les photos.": "⚠️ La contraseña no se guarda en ningún sitio: <strong>sin ella, la copia es ilegible, incluso para ti</strong>. Anótala en papel. La copia contiene la base (fichas, notas, fuentes), sin las fotos.",
  "⚠️ Les vivants cochés seront proposés au cousin : vérifie qu’ils sont d’accord.": "⚠️ Las personas vivas marcadas se propondrán al primo: comprueba que están de acuerdo.",
  "⚠️ Lieu non placé sur la carte.": "⚠️ Lugar no situado en el mapa.",
  "⚠ Lieux sans position : {list}": "⚠ Lugares sin posición: {list}",

@@ -3207,6 +3207,7 @@
  "⚠️ Je ne trouve pas d’année.": "⚠️ Ik vind geen jaar.",
  "⚠️ Je ne trouve pas d’années (ex. « actif de 1862 à 1895 »).": "⚠️ Ik vind geen jaren (bijv. ‘actief van 1862 tot 1895’).",
  "⚠️ la date « {date} » est impossible, vérifie-la.": "⚠️ de datum ‘{date}’ is onmogelijk, controleer hem.",
+ "⚠️ Le mot de passe n’est enregistré nulle part : <strong>sans lui, la copie est illisible, même pour toi</strong>. Note-le sur papier. La copie contient la base (fiches, notes, sources), sans les photos.": "⚠️ Het wachtwoord wordt nergens bewaard: <strong>zonder is de kopie onleesbaar, zelfs voor jou</strong>. Schrijf het op papier. De kopie bevat de database (profielen, notities, bronnen), zonder de foto’s.",
  "⚠️ Les vivants cochés seront proposés au cousin : vérifie qu’ils sont d’accord.": "⚠️ De aangevinkte levenden worden aan je neef voorgesteld: controleer of ze akkoord zijn.",
  "⚠️ Lieu non placé sur la carte.": "⚠️ Plaats niet op de kaart.",
  "⚠ Lieux sans position : {list}": "⚠ Plaatsen zonder positie: {list}",

@@ -3207,6 +3207,7 @@
  "⚠️ Je ne trouve pas d’année.": "⚠️ I can’t find a year.",
  "⚠️ Je ne trouve pas d’années (ex. « actif de 1862 à 1895 »).": "⚠️ I can’t find any years (e.g. “active from 1862 to 1895”).",
  "⚠️ la date « {date} » est impossible, vérifie-la.": "⚠️ the date “{date}” is impossible, check it.",
+ "⚠️ Le mot de passe n’est enregistré nulle part : <strong>sans lui, la copie est illisible, même pour toi</strong>. Note-le sur papier. La copie contient la base (fiches, notes, sources), sans les photos.": "⚠️ The password is stored nowhere: <strong>without it, the copy is unreadable, even for you</strong>. Write it down on paper. The copy contains the database (records, notes, sources), without the photos.",
  "⚠️ Les vivants cochés seront proposés au cousin : vérifie qu’ils sont d’accord.": "⚠️ The ticked living people will be suggested to your cousin: check that they agree.",
  "⚠️ Lieu non placé sur la carte.": "⚠️ Place not on the map.",
  "⚠ Lieux sans position : {list}": "⚠ Places without a position: {list}",
