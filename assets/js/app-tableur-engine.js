@@ -13,6 +13,9 @@
     if (typeof window !== 'undefined') window.LCNDA_SHEET = S;
 })(typeof globalThis !== 'undefined' ? globalThis : this, function (G) {
     'use strict';
+    /** 🌐 les textes de l’interface (explications d’erreur, aide des fonctions, messages des fichiers) : traduits par app-i18n.js
+     *  (docs/I18N.md) ; dans Node ou en français, le texte tel quel. Les noms des fonctions et les codes d’erreur ne changent jamais. */
+    const i18n = (s, v) => (G && G.LCNDA_I18N && typeof G.LCNDA_I18N.t === 'function' ? G.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m)));
 
     /* ═════════ Limites (un fichier piégé ou un calcul fou ne doivent rien bloquer) ═════════ */
     const LIMITS = {
@@ -550,23 +553,41 @@
     const ERR_EN = {'#DIV/0!': '#DIV/0!', '#NOM?': '#NAME?', '#VALEUR!': '#VALUE!', '#REF!': '#REF!', '#N/A': '#N/A', '#NOMBRE!': '#NUM!', '#BOUCLE!': '#REF!', '#DATE?': '#VALUE!', '#SYNTAXE!': '#NAME?', '#DEBORD!': '#SPILL!', '#TROP!': '#NUM!'};
     function explain(e) {
         if (!isErr(e)) return '';
-        const i = e.info || {}, at = e.cell ? ` (cellule ${e.cell})` : '';
+        const i = e.info || {}, str = x => String(x ?? ''), W = x => i18n(str(x)), cap = x => x.charAt(0).toUpperCase() + x.slice(1);
+        const cell = e.cell ? str(e.cell) : '';
         switch (e.code) {
-            case '#DIV/0!': return i.ref ? `Tu divises par zéro : ${i.ref} est vide ou vaut 0. Astuce : =SI.ERREUR(…;"") laisse la case vide.` : `Tu divises par zéro${i.why ? ` : ${i.why}` : ''}. Astuce : =SI.ERREUR(…;"") laisse la case vide.`;
-            case '#NOM?': return i.name ? `Je ne connais pas « ${i.name} ».${i.sugg ? ` Voulais-tu dire ${i.sugg} ?` : ' Tape les premières lettres : la liste des fonctions s’ouvre.'}` : 'Un nom inconnu dans la formule.';
-            case '#VALEUR!': return i.text !== undefined ? `« ${i.text} » n’est pas un nombre${at} : on ne peut pas faire de calcul avec.` : `${i.why ? i.why.charAt(0).toUpperCase() + i.why.slice(1) : 'Une valeur ne convient pas'}${at}.`;
-            case '#REF!': return `La formule montre ${i.what ? `quelque chose qui n’existe pas : ${i.what}` : 'une cellule qui a été supprimée'}.`;
-            case '#N/A': return i.what !== undefined ? `${i.fn || 'La recherche'} n’a pas trouvé « ${i.what} »${i.where ? ` dans ${i.where}` : ''}.` : `${i.why ? i.why.charAt(0).toUpperCase() + i.why.slice(1) : 'Valeur introuvable'}.`;
-            case '#BOUCLE!': return i.path ? `${i.path} : la formule tourne en rond.` : 'La formule a besoin d’elle-même : elle tourne en rond.';
-            case '#DATE?': return i.why ? `${i.text ? `« ${i.text} » : ` : ''}${i.why}.` : `Je ne comprends pas ${i.what || 'cette date'}${i.text ? ` (« ${i.text} »)` : ''}. Exemples : 7 mai 1925, vers 1784, an II, entre 1880 et 1885.`;
-            case '#SYNTAXE!': return `Je ne comprends pas la formule${i.near ? ` près de « ${i.near} »` : ''}${i.why ? ` : ${i.why}` : ' : vérifie les parenthèses, les guillemets et les « ; »'}.`;
-            case '#NOMBRE!': return `${i.why ? i.why.charAt(0).toUpperCase() + i.why.slice(1) : 'Nombre impossible'}.`;
-            case '#DEBORD!': return `Le résultat a besoin de ${i.size || 'plusieurs cases'} vers le bas et la droite, mais ${i.cell || 'une case'} n’est pas vide : vide-la pour voir tout le résultat.`;
-            case '#TROP!': return `Trop gros pour être calculé : ${typeof e.info === 'string' ? e.info : 'réduis la plage'}.`;
-            default: return 'Erreur dans la formule.';
+            case '#DIV/0!': return i.ref ? i18n('Tu divises par zéro : {ref} est vide ou vaut 0. Astuce : =SI.ERREUR(…;"") laisse la case vide.', {ref: str(i.ref)})
+                : i.why ? i18n('Tu divises par zéro : {why}. Astuce : =SI.ERREUR(…;"") laisse la case vide.', {why: W(i.why)}) : i18n('Tu divises par zéro. Astuce : =SI.ERREUR(…;"") laisse la case vide.');
+            case '#NOM?': return i.name ? (i.sugg ? i18n('Je ne connais pas « {name} ». Voulais-tu dire {sugg} ?', {name: str(i.name), sugg: str(i.sugg)}) : i18n('Je ne connais pas « {name} ». Tape les premières lettres : la liste des fonctions s’ouvre.', {name: str(i.name)})) : i18n('Un nom inconnu dans la formule.');
+            case '#VALEUR!': {
+                if (i.text !== undefined) return cell ? i18n('« {text} » n’est pas un nombre (cellule {cell}) : on ne peut pas faire de calcul avec.', {text: str(i.text), cell}) : i18n('« {text} » n’est pas un nombre : on ne peut pas faire de calcul avec.', {text: str(i.text)});
+                const what = i.why ? cap(W(i.why)) : i18n('Une valeur ne convient pas');
+                return cell ? i18n('{what} (cellule {cell}).', {what, cell}) : `${what}.`;
+            }
+            case '#REF!': return i.what ? i18n('La formule montre quelque chose qui n’existe pas : {what}.', {what: W(i.what)}) : i18n('La formule montre une cellule qui a été supprimée.');
+            case '#N/A': {
+                if (i.what === undefined) return `${i.why ? cap(W(i.why)) : i18n('Valeur introuvable')}.`;
+                const v = {fn: i.fn ? str(i.fn) : i18n('La recherche'), what: str(i.what), where: str(i.where)};
+                return i.where ? i18n('{fn} n’a pas trouvé « {what} » dans {where}.', v) : i18n('{fn} n’a pas trouvé « {what} ».', v);
+            }
+            case '#BOUCLE!': return i.path ? i18n('{path} : la formule tourne en rond.', {path: str(i.path)}) : i18n('La formule a besoin d’elle-même : elle tourne en rond.');
+            case '#DATE?': {
+                if (i.why) return i.text ? i18n('« {text} » : {why}.', {text: str(i.text), why: W(i.why)}) : `${W(i.why)}.`;
+                const what = i.what ? W(i.what) : i18n('cette date');
+                return i.text ? i18n('Je ne comprends pas {what} (« {text} »). Exemples : 7 mai 1925, vers 1784, an II, entre 1880 et 1885.', {what, text: str(i.text)}) : i18n('Je ne comprends pas {what}. Exemples : 7 mai 1925, vers 1784, an II, entre 1880 et 1885.', {what});
+            }
+            case '#SYNTAXE!': {
+                const near = i.near ? str(i.near) : '';
+                if (i.why) return near ? i18n('Je ne comprends pas la formule près de « {near} » : {why}.', {near, why: W(i.why)}) : i18n('Je ne comprends pas la formule : {why}.', {why: W(i.why)});
+                return near ? i18n('Je ne comprends pas la formule près de « {near} » : vérifie les parenthèses, les guillemets et les « ; ».', {near}) : i18n('Je ne comprends pas la formule : vérifie les parenthèses, les guillemets et les « ; ».');
+            }
+            case '#NOMBRE!': return `${i.why ? cap(W(i.why)) : i18n('Nombre impossible')}.`;
+            case '#DEBORD!': return i18n('Le résultat a besoin de {size} vers le bas et la droite, mais {cell} n’est pas vide : vide-la pour voir tout le résultat.', {size: i.size ? W(i.size) : i18n('plusieurs cases'), cell: i.cell ? str(i.cell) : i18n('une case')});
+            case '#TROP!': return i18n('Trop gros pour être calculé : {why}.', {why: typeof e.info === 'string' ? W(e.info) : i18n('réduis la plage')});
+            default: return i18n('Erreur dans la formule.');
         }
     }
-    const errHint = e => (e?.code === '#DIV/0!' ? 'Astuce : =SI.ERREUR(A4/B4;"")' : '');
+    const errHint = e => (e?.code === '#DIV/0!' ? i18n('Astuce : =SI.ERREUR(A4/B4;"")') : '');
 
     /* ═════════ Le calcul d'un classeur : graphe de dépendances, recalcul de ce qui change seulement ═════════ */
     const ROWKEY = (si, r, c) => `${si}:${r}:${c}`;
@@ -1129,7 +1150,7 @@
     /** texte XML → {n, a, c} ; refuse DOCTYPE et ENTITY (bombes d'entités, fichiers externes) */
     function parseXml(text, {maxNodes = LIMITS.xmlNodes} = {}) {
         const s = String(text);
-        if (/<!DOCTYPE|<!ENTITY/i.test(s.slice(0, 4096)) || /<!ENTITY/i.test(s)) throw new Error('fichier refusé : il contient des déclarations XML (DOCTYPE ou ENTITY) qu’un document de bureau n’utilise pas');
+        if (/<!DOCTYPE|<!ENTITY/i.test(s.slice(0, 4096)) || /<!ENTITY/i.test(s)) throw new Error(i18n('fichier refusé : il contient des déclarations XML (DOCTYPE ou ENTITY) qu’un document de bureau n’utilise pas'));
         const root = {n: '#root', a: {}, c: []}, stack = [root]; let i = 0, nodes = 0; const n = s.length;
         while (i < n) {
             const lt = s.indexOf('<', i);
@@ -1138,18 +1159,18 @@
             if (s.startsWith('<!--', lt)) { const e = s.indexOf('-->', lt + 4); i = e < 0 ? n : e + 3; continue; }
             if (s.startsWith('<![CDATA[', lt)) { const e = s.indexOf(']]>', lt + 9); stack[stack.length - 1].c.push(s.slice(lt + 9, e < 0 ? n : e)); i = e < 0 ? n : e + 3; continue; }
             if (s[lt + 1] === '?' || s[lt + 1] === '!') { const e = s.indexOf('>', lt); i = e < 0 ? n : e + 1; continue; }
-            const gt = s.indexOf('>', lt); if (gt < 0) throw new Error('fichier XML abîmé');
+            const gt = s.indexOf('>', lt); if (gt < 0) throw new Error(i18n('fichier XML abîmé'));
             let tag = s.slice(lt + 1, gt);
             // un « > » dans une valeur d'attribut : on va chercher le vrai bout de la balise
-            let q = (tag.match(/"/g) || []).length; let end = gt; while (q % 2) { const g2 = s.indexOf('>', end + 1); if (g2 < 0) throw new Error('fichier XML abîmé'); tag = s.slice(lt + 1, g2); end = g2; q = (tag.match(/"/g) || []).length; }
+            let q = (tag.match(/"/g) || []).length; let end = gt; while (q % 2) { const g2 = s.indexOf('>', end + 1); if (g2 < 0) throw new Error(i18n('fichier XML abîmé')); tag = s.slice(lt + 1, g2); end = g2; q = (tag.match(/"/g) || []).length; }
             i = end + 1;
             if (tag[0] === '/') { if (stack.length > 1) stack.pop(); continue; }
-            if (++nodes > maxNodes) throw new Error('fichier refusé : trop d’éléments');
+            if (++nodes > maxNodes) throw new Error(i18n('fichier refusé : trop d’éléments'));
             const self = tag.endsWith('/'); if (self) tag = tag.slice(0, -1);
             const sp = tag.search(/\s/), name = sp < 0 ? tag : tag.slice(0, sp), el = {n: name, a: {}, c: []};
             if (sp >= 0) { const rx = /([^\s=]+)\s*=\s*("([^"]*)"|'([^']*)')/g; let m; const at = tag.slice(sp); while ((m = rx.exec(at))) el.a[m[1]] = xmlDecode(m[3] ?? m[4] ?? ''); }
             stack[stack.length - 1].c.push(el);
-            if (!self) { stack.push(el); if (stack.length > 200) throw new Error('fichier refusé : XML trop imbriqué'); }
+            if (!self) { stack.push(el); if (stack.length > 200) throw new Error(i18n('fichier refusé : XML trop imbriqué')); }
         }
         return root;
     }
@@ -1198,11 +1219,11 @@
     async function unzip(buf, {maxTotal = LIMITS.unzipBytes, maxEntry = LIMITS.unzipEntry, maxEntries = LIMITS.zipEntries, maxFile = LIMITS.fileBytes} = {}) { // maxFile : ⤒ Importer des photos (export Google Photos)
         const ab = buf instanceof ArrayBuffer ? buf : buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength);
         const u8 = new Uint8Array(ab), dv = new DataView(ab); let e = -1;
-        if (u8.length > maxFile) throw new Error(`fichier trop gros (plus de ${Math.round(maxFile / 1048576)} Mo)`);
+        if (u8.length > maxFile) throw new Error(i18n('fichier trop gros (plus de {n} Mo)', {n: String(Math.round(maxFile / 1048576))}));
         for (let i = u8.length - 22; i >= Math.max(0, u8.length - 65600); i--) if (dv.getUint32(i, true) === 0x06054b50) { e = i; break; }
-        if (e < 0) throw new Error('ce n’est pas un fichier zip valide');
+        if (e < 0) throw new Error(i18n('ce n’est pas un fichier zip valide'));
         const n = dv.getUint16(e + 10, true); let p = dv.getUint32(e + 16, true);
-        if (n > maxEntries) throw new Error('fichier refusé : trop d’éléments dans le zip');
+        if (n > maxEntries) throw new Error(i18n('fichier refusé : trop d’éléments dans le zip'));
         const files = new Map(), dec = new TextDecoder();
         for (let k = 0; k < n; k++) {
             if (p + 46 > u8.length || dv.getUint32(p, true) !== 0x02014b50) break;
@@ -1212,20 +1233,20 @@
         let total = 0;
         const read = async name => {
             const f = files.get(name); if (!f) return null;
-            if (f.flags & 1) throw new Error('fichier chiffré : ouvre-le d’abord dans son tableur et enregistre-le sans mot de passe');
-            if (f.off + 30 > u8.length || dv.getUint32(f.off, true) !== 0x04034b50) throw new Error('fichier zip abîmé');
+            if (f.flags & 1) throw new Error(i18n('fichier chiffré : ouvre-le d’abord dans son tableur et enregistre-le sans mot de passe'));
+            if (f.off + 30 > u8.length || dv.getUint32(f.off, true) !== 0x04034b50) throw new Error(i18n('fichier zip abîmé'));
             const start = f.off + 30 + dv.getUint16(f.off + 26, true) + dv.getUint16(f.off + 28, true), data = u8.subarray(start, start + f.csize);
-            if (f.usize > maxEntry || total + f.usize > maxTotal) throw new Error('fichier refusé : trop gros une fois décompressé');
-            if (f.usize > 1048576 && f.csize > 0 && f.usize / f.csize > LIMITS.zipRatio) throw new Error('fichier refusé : il se décompresse en beaucoup trop gros (bombe zip)');
+            if (f.usize > maxEntry || total + f.usize > maxTotal) throw new Error(i18n('fichier refusé : trop gros une fois décompressé'));
+            if (f.usize > 1048576 && f.csize > 0 && f.usize / f.csize > LIMITS.zipRatio) throw new Error(i18n('fichier refusé : il se décompresse en beaucoup trop gros (bombe zip)'));
             let out;
             if (f.method === 0) out = data;
             else if (f.method === 8) {
-                if (typeof DecompressionStream !== 'function') throw new Error('ce navigateur ne sait pas ouvrir les fichiers zip (mets-le à jour)');
+                if (typeof DecompressionStream !== 'function') throw new Error(i18n('ce navigateur ne sait pas ouvrir les fichiers zip (mets-le à jour)'));
                 const reader = new Blob([data]).stream().pipeThrough(new DecompressionStream('deflate-raw')).getReader(), chunks = []; let got = 0;
                 const cap = Math.min(maxEntry, f.usize + 1024, maxTotal - total + 1024);
-                for (;;) { const {done, value} = await reader.read(); if (done) break; got += value.length; if (got > cap) { try { await reader.cancel(); } catch (_) {} throw new Error('fichier refusé : il se décompresse en beaucoup trop gros (bombe zip)'); } chunks.push(value); }
+                for (;;) { const {done, value} = await reader.read(); if (done) break; got += value.length; if (got > cap) { try { await reader.cancel(); } catch (_) {} throw new Error(i18n('fichier refusé : il se décompresse en beaucoup trop gros (bombe zip)')); } chunks.push(value); }
                 out = new Uint8Array(got); let o = 0; chunks.forEach(c => { out.set(c, o); o += c.length; });
-            } else throw new Error('compression inconnue dans le fichier');
+            } else throw new Error(i18n('compression inconnue dans le fichier'));
             total += out.length;
             return out;
         };
@@ -1473,7 +1494,7 @@
     /** un fichier .xlsx (ArrayBuffer) → classeur ; refuse les fichiers piégés (taille, bombe zip, XML externe) */
     async function fromXlsx(buf) {
         const z = await unzip(buf);
-        const wbXml = await z.text('xl/workbook.xml'); if (!wbXml) throw new Error('ce n’est pas un fichier Excel (.xlsx) : xl/workbook.xml manque');
+        const wbXml = await z.text('xl/workbook.xml'); if (!wbXml) throw new Error(i18n('ce n’est pas un fichier Excel (.xlsx) : xl/workbook.xml manque'));
         const W = parseXml(wbXml), rels = parseXml(await z.text('xl/_rels/workbook.xml.rels') || '<Relationships/>');
         const relMap = new Map(findAll(rels, 'Relationship').map(r => [r.a.Id, relTarget('xl/workbook.xml', r.a.Target || '')]));
         const shared = []; { const t = await z.text('xl/sharedStrings.xml'); if (t) findAll(parseXml(t), 'si').forEach(si => shared.push(findAll(si, 't').filter(x => !findAll(si, 'rPh').some(rp => rp.c.includes(x) || findAll(rp, 't').includes(x))).map(xtext).join(''))); }
@@ -1500,7 +1521,7 @@
         const sIx = xfStyle.map(st => styleId(wb, st)), dateXf = new Set(xfStyle.map((s, i) => (s.fmt === 'date' ? i : -1)).filter(i => i >= 0));
         let total = 0;
         const sheetEls = findAll(W, 'sheet');
-        if (sheetEls.length > LIMITS.sheets) throw new Error('fichier refusé : trop de feuilles');
+        if (sheetEls.length > LIMITS.sheets) throw new Error(i18n('fichier refusé : trop de feuilles'));
         for (const se of sheetEls) {
             const path = relMap.get(se.a['r:id']); const txt = path ? await z.text(path) : null; if (txt == null) continue;
             const X = parseXml(txt), sh = newSheet(cleanSheetName(se.a.name, wb.sheets.map(s => s.name)));
@@ -1513,7 +1534,7 @@
                 if ((row.a.hidden === '1' || row.a.hidden === 'true') && rr >= 0) (sh.rows[String(rr + 1)] = sh.rows[String(rr + 1)] || {}).hidden = true;
                 for (const c of kids(row, 'c')) {
                     const p = parseAddr(c.a.r || ''); if (!p) continue;
-                    if (++total > LIMITS.cells) throw new Error('fichier refusé : trop de cellules');
+                    if (++total > LIMITS.cells) throw new Error(i18n('fichier refusé : trop de cellules'));
                     const t = c.a.t || 'n', vEl = kid(c, 'v'), fEl = kid(c, 'f'), sxf = Number(c.a.s) || 0;
                     let v = null;
                     if (t === 's') v = shared[Number(xtext(vEl))] ?? '';
@@ -1668,7 +1689,7 @@
     }
     async function fromOdsFile(buf) {
         const z = await unzip(buf);
-        const txt = await z.text('content.xml'); if (!txt) throw new Error('ce n’est pas un fichier LibreOffice (.ods) : content.xml manque');
+        const txt = await z.text('content.xml'); if (!txt) throw new Error(i18n('ce n’est pas un fichier LibreOffice (.ods) : content.xml manque'));
         const X = parseXml(txt), wb = newWorkbook(); wb.sheets = [];
         // styles automatiques
         const dataFmt = {}; ['number-style', 'percentage-style', 'currency-style', 'date-style'].forEach(k => findAll(X, k).forEach(n => { dataFmt[n.a['style:name']] = k === 'percentage-style' ? {fmt: 'pct'} : k === 'currency-style' ? {fmt: 'eur'} : k === 'date-style' ? {fmt: 'date'} : (() => { const nn = findAll(n, 'number')[0]; const d = Number(nn?.a['number:decimal-places'] || 0); return nn?.a['number:grouping'] === 'true' ? {fmt: 'num', dec: d} : d ? {dec: d} : {}; })(); }));
@@ -1691,7 +1712,7 @@
         let total = 0;
         const valDefs = {}; findAll(X, 'content-validation').slice(0, 500).forEach(v => { const name = v.a['table:name'], cond = v.a['table:condition'] || '', em = kid(v, 'error-message'), free = em ? em.a['table:display'] === 'false' || (em.a['table:message-type'] && em.a['table:message-type'] !== 'stop') : true; const list = odsList(cond); if (list?.length) { valDefs[name] = {kind: 'list', list, ...(free ? {allowFree: true} : {})}; return; } if (/cell-content-is-(decimal-number|whole-number)/.test(cond)) { const o = {kind: 'number'}; const b = /between\(\s*(-?[\d.]+)\s*[;,]\s*(-?[\d.]+)\s*\)/.exec(cond), ge = /cell-content\(\)\s*>=?\s*(-?[\d.]+)/.exec(cond), le = /cell-content\(\)\s*<=?\s*(-?[\d.]+)/.exec(cond); if (b) { o.min = Number(b[1]); o.max = Number(b[2]); } if (ge) o.min = Number(ge[1]); if (le) o.max = Number(le[1]); if (free) o.allowFree = true; valDefs[name] = o; } });
         const tables = findAll(X, 'table').filter(t => t.n === 'table:table' || local(t.n) === 'table');
-        if (tables.length > LIMITS.sheets) throw new Error('fichier refusé : trop de feuilles');
+        if (tables.length > LIMITS.sheets) throw new Error(i18n('fichier refusé : trop de feuilles'));
         for (const tb of tables) {
             const sh = newSheet(cleanSheetName(tb.a['table:name'], wb.sheets.map(s => s.name))), valBox = {};
             const markVal = (name, r, cc, n) => { if (!name || !valDefs[name]) return; const b = valBox[name] || (valBox[name] = {r0: r, c0: cc, r1: r, c1: cc}); b.r0 = Math.min(b.r0, r); b.c0 = Math.min(b.c0, cc); b.r1 = Math.max(b.r1, r); b.c1 = Math.max(b.c1, cc + n - 1); };
@@ -1715,7 +1736,7 @@
                         if (!has && !ce.a['table:style-name']) { cc += crep; continue; }
                         const n = has ? Math.min(crep, 1024) : 0;
                         for (let j = 0; j < n && cc < LIMITS.cols; j++, cc++) {
-                            if (++total > LIMITS.cells) throw new Error('fichier refusé : trop de cellules');
+                            if (++total > LIMITS.cells) throw new Error(i18n('fichier refusé : trop de cellules'));
                             let v = null;
                             if (vt === 'float' || vt === 'percentage' || vt === 'currency') v = Number(ce.a['office:value']);
                             else if (vt === 'boolean') v = ce.a['office:boolean-value'] === 'true';
@@ -1754,7 +1775,7 @@
     function toJsonData(wb, calc) { calc = calc || new Calc(wb); return {format: 'lcnda-tableur-donnees', sheets: wb.sheets.map((sh, si) => ({name: sh.name, rows: matrix(wb, calc, si)}))}; }
     /** un JSON reçu : classeur de l'app, {sheets:[{name, rows}]}, tableau de lignes, ou liste d'objets (les clés deviennent les titres) */
     function fromJson(text) {
-        let j; try { j = typeof text === 'string' ? JSON.parse(text) : text; } catch (e) { throw new Error('ce fichier n’est pas un JSON valide'); }
+        let j; try { j = typeof text === 'string' ? JSON.parse(text) : text; } catch (e) { throw new Error(i18n('ce fichier n’est pas un JSON valide')); }
         if (j && typeof j === 'object' && !Array.isArray(j) && j.format === 'lcnda-tableur' && j.workbook) j = j.workbook;
         if (j && typeof j === 'object' && Array.isArray(j.sheets) && j.sheets.some(s => s && s.cells)) return normalize(j);
         const fromRows = (name, rows) => { const sh = newSheet(name); sh.cells = rowsToCells(rows.map(r => (Array.isArray(r) ? r : [r]).map(v => (v != null && typeof v === 'object' ? JSON.stringify(v) : v)))); return sh; };
@@ -1762,21 +1783,21 @@
         const asRows = d => (Array.isArray(d) && d.every(x => x && typeof x === 'object' && !Array.isArray(x)) ? objs(d) : Array.isArray(d) ? d : null);
         const wb = newWorkbook(); wb.sheets = [];
         if (j && typeof j === 'object' && Array.isArray(j.sheets)) j.sheets.slice(0, LIMITS.sheets).forEach((s, i) => { const rows = asRows(s?.rows || s?.data || []); if (rows) wb.sheets.push(fromRows(cleanSheetName(s?.name || `Feuille ${i + 1}`, wb.sheets.map(x => x.name)), rows)); });
-        else { const rows = asRows(j); if (!rows) throw new Error('je ne trouve pas de tableau dans ce JSON (il faut une liste de lignes ou d’objets)'); wb.sheets.push(fromRows('Feuille 1', rows)); }
+        else { const rows = asRows(j); if (!rows) throw new Error(i18n('je ne trouve pas de tableau dans ce JSON (il faut une liste de lignes ou d’objets)')); wb.sheets.push(fromRows('Feuille 1', rows)); }
         if (!wb.sheets.length) wb.sheets.push(newSheet('Feuille 1'));
         return normalize(wb);
     }
     /** un fichier reçu (nom + ArrayBuffer) → {wb, kind, info} : xlsx, ods, json, csv / tsv / txt */
     async function readFile(name, buf, {encoding = 'auto', sep = null} = {}) {
         const low = String(name || '').toLowerCase(), u8 = new Uint8Array(buf);
-        if (u8.length > LIMITS.fileBytes) throw new Error(`fichier trop gros (plus de ${Math.round(LIMITS.fileBytes / 1048576)} Mo)`);
+        if (u8.length > LIMITS.fileBytes) throw new Error(i18n('fichier trop gros (plus de {n} Mo)', {n: String(Math.round(LIMITS.fileBytes / 1048576))}));
         const isZip = u8[0] === 0x50 && u8[1] === 0x4b;
-        if (/\.xls$/.test(low) && !isZip) throw new Error('les anciens fichiers Excel (.xls) ne sont pas lus : ouvre-le dans Excel ou LibreOffice et enregistre-le en .xlsx');
+        if (/\.xls$/.test(low) && !isZip) throw new Error(i18n('les anciens fichiers Excel (.xls) ne sont pas lus : ouvre-le dans Excel ou LibreOffice et enregistre-le en .xlsx'));
         if (isZip) {
             const z = await unzip(buf);
             if (z.has('xl/workbook.xml')) return {wb: await fromXlsx(buf), kind: 'xlsx'};
             if (z.has('content.xml')) return {wb: await fromOdsFile(buf), kind: 'ods'};
-            throw new Error('ce fichier compressé n’est ni un .xlsx ni un .ods');
+            throw new Error(i18n('ce fichier compressé n’est ni un .xlsx ni un .ods'));
         }
         const d = decodeBytes(u8, encoding);
         if (/\.json$/.test(low) || /^\s*[\[{]/.test(d.text.slice(0, 50)) && !/\.(csv|tsv|txt)$/.test(low)) return {wb: fromJson(d.text), kind: 'json', encoding: d.encoding};

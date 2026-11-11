@@ -7,6 +7,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : s);
     const A = () => window.LCNDA_APP;
     const UI = () => window.LCNDA_UI;
     const T = () => window.LCNDA_TEXT;
@@ -53,14 +54,14 @@
                 UI()?.savedStatus?.(this.dlg, 'saving');
                 try {
                     const r = await post('save_textdoc', {id: asNew ? 0 : this.id, name, kind, data: this.docData(), rev: asNew ? '' : this.rev, force}), res = r.result || r, id = Number(res.id || 0);
-                    if (!asNew) { const first = !this.id; this.id = id; this.rev = res.rev || ''; this.dirty = false; this.savedAt = Date.now(); UI()?.savedStatus?.(this.dlg, 'saved'); if (first && !quiet) toast('Rangé dans Listes → 🛠️ Outils de modification → 📝 Traitement de texte.'); }
-                    else { UI()?.savedStatus?.(this.dlg, this.dirty ? 'dirty' : 'saved'); toast(kind === 'template' ? `Modèle « ${name} » enregistré (Partir d’un modèle → Mes modèles).` : `Copie « ${name} » enregistrée.`); }
+                    if (!asNew) { const first = !this.id; this.id = id; this.rev = res.rev || ''; this.dirty = false; this.savedAt = Date.now(); UI()?.savedStatus?.(this.dlg, 'saved'); if (first && !quiet) toast(i18n('Rangé dans Listes → 🛠️ Outils de modification → 📝 Traitement de texte.')); }
+                    else { UI()?.savedStatus?.(this.dlg, this.dirty ? 'dirty' : 'saved'); toast(kind === 'template' ? i18n('Modèle « {name} » enregistré (Partir d’un modèle → Mes modèles).', {name}) : i18n('Copie « {name} » enregistrée.', {name})); }
                     this.ctx.onSaved?.(this.id);
                     return id;
                 } catch (e) {
                     UI()?.savedStatus?.(this.dlg, 'error');
-                    if (/modifié ailleurs/.test(e.message || '')) { if (await A().confirmBox('Une autre fenêtre a enregistré ce document entre-temps. Garder ta version effacera la sienne.', {title: 'Document modifié ailleurs', okLabel: 'Garder ma version', danger: true})) return this._saveNow({asNew, kind, name, quiet, force: true}); return 0; }
-                    toast(`Impossible d’enregistrer : ${e.message}`, 'error', {retry: () => this.save({asNew, kind, name})}); return 0;
+                    if (e.conflict || /modifié ailleurs/.test(e.message || '')) { if (await A().confirmBox(i18n('Une autre fenêtre a enregistré ce document entre-temps. Garder ta version effacera la sienne.'), {title: i18n('Document modifié ailleurs'), okLabel: i18n('Garder ma version'), danger: true})) return this._saveNow({asNew, kind, name, quiet, force: true}); return 0; }
+                    toast(i18n('Impossible d’enregistrer : {error}', {error: e.message}), 'error', {retry: () => this.save({asNew, kind, name})}); return 0;
                 }
             },
             async close() {
@@ -68,7 +69,7 @@
                 // un enregistrement en cours (⌘S, 💾, automatique) : on attend sa fin avant de demander ; réussi → on ferme sans question
                 if (this._saving) { try { await this._saving; } catch (_) {} }
                 if (this.dirty) {
-                    const ask = A().confirmBox('Les changements faits depuis le dernier enregistrement seront perdus.', {title: 'Fermer sans enregistrer ?', okLabel: 'Fermer sans enregistrer', danger: true});
+                    const ask = A().confirmBox(i18n('Les changements faits depuis le dernier enregistrement seront perdus.'), {title: i18n('Fermer sans enregistrer ?'), okLabel: i18n('Fermer sans enregistrer'), danger: true});
                     // un enregistrement qui se termine bien pendant la question : elle disparaît et la fenêtre se ferme
                     const box = [...document.querySelectorAll('dialog.confirm-box-dialog[open]')].pop();
                     const watch = setInterval(() => { if (!this.dirty && box?.open) { clearInterval(watch); this._closeAfterSave = true; box.close(); } }, 250);
@@ -108,18 +109,18 @@
             },
             exportDialog(value = '') {
                 const base = A().safeExportFilename ? A().safeExportFilename(this.name, 'document') : 'document';
-                UI().openExportDialog({title: this.name, defaultName: this.name, quality: false, saveCopy: true, value, info: `${plural(this.totalPages || 1, 'page')} · ${plural(this.wordCount(), 'mot')}. Word et LibreOffice gardent les styles, les listes, les tableaux, les images, les notes, l’en-tête et le pied, les commentaires et les modifications suivies.`,
+                UI().openExportDialog({title: this.name, defaultName: this.name, quality: false, saveCopy: true, value, info: i18n('{pages} · {words}. Word et LibreOffice gardent les styles, les listes, les tableaux, les images, les notes, l’en-tête et le pied, les commentaires et les modifications suivies.', {pages: plural(this.totalPages || 1, 'page'), words: plural(this.wordCount(), 'mot')}),
                     formats: [
-                        {id: 'docx', label: '📘 Word (.docx)', hint: 'Word, Pages, Google Docs', ext: 'docx', run: async o => { const b = await this.fileOf('docx'); download(b, o.filename); if (o.saveCopy) await this.toMedia(b, 'docx'); }},
-                        {id: 'odt', label: '📗 LibreOffice (.odt)', hint: 'LibreOffice, OpenOffice', ext: 'odt', run: async o => { const b = await this.fileOf('odt'); download(b, o.filename); if (o.saveCopy) await this.toMedia(b, 'odt'); }},
-                        {id: 'pdf', label: '📄 PDF', hint: 'à lire, à envoyer', ext: '', copy: false, run: async () => { toast('Dans la fenêtre d’impression, choisis « Enregistrer au format PDF ».'); return UI().printDocument(await this.pagedHtml()); }},
+                        {id: 'docx', label: i18n('📘 Word (.docx)'), hint: i18n('Word, Pages, Google Docs'), ext: 'docx', run: async o => { const b = await this.fileOf('docx'); download(b, o.filename); if (o.saveCopy) await this.toMedia(b, 'docx'); }},
+                        {id: 'odt', label: i18n('📗 LibreOffice (.odt)'), hint: i18n('LibreOffice, OpenOffice'), ext: 'odt', run: async o => { const b = await this.fileOf('odt'); download(b, o.filename); if (o.saveCopy) await this.toMedia(b, 'odt'); }},
+                        {id: 'pdf', label: i18n('📄 PDF'), hint: i18n('à lire, à envoyer'), ext: '', copy: false, run: async () => { toast(i18n('Dans la fenêtre d’impression, choisis « Enregistrer au format PDF ».')); return UI().printDocument(await this.pagedHtml()); }},
                         {id: 'print', copy: false, run: async () => UI().printDocument(await this.pagedHtml())},
-                        {id: 'rtf', label: '📝 RTF', hint: 'tous les traitements de texte', ext: 'rtf', copy: false, run: async o => download(await this.fileOf('rtf'), o.filename)},
-                        {id: 'md', label: '✳️ Markdown (.md)', hint: 'texte avec les titres', ext: 'md', copy: false, run: async o => download(await this.fileOf('md'), o.filename)},
-                        {id: 'txt', label: '🧾 Texte (.txt)', hint: 'le texte seul', ext: 'txt', copy: false, run: async o => download(await this.fileOf('txt'), o.filename)},
-                        {id: 'html', label: '🌐 Page web (.html)', hint: 'à ouvrir dans un navigateur', ext: 'html', copy: false, run: async o => download(await this.fileOf('html'), o.filename)},
-                        {id: 'file', label: '💾 Fichier de l’outil', hint: '.lcnda-texte (tout est gardé)', ext: 'lcnda-texte', copy: false, run: async o => download(await this.fileOf('file'), o.filename)},
-                    ]}).then(r => { if (r && !['pdf', 'print'].includes(r.format)) toast(`Exporté : ${r.filename || base}`); });
+                        {id: 'rtf', label: i18n('📝 RTF'), hint: i18n('tous les traitements de texte'), ext: 'rtf', copy: false, run: async o => download(await this.fileOf('rtf'), o.filename)},
+                        {id: 'md', label: i18n('✳️ Markdown (.md)'), hint: i18n('texte avec les titres'), ext: 'md', copy: false, run: async o => download(await this.fileOf('md'), o.filename)},
+                        {id: 'txt', label: i18n('🧾 Texte (.txt)'), hint: i18n('le texte seul'), ext: 'txt', copy: false, run: async o => download(await this.fileOf('txt'), o.filename)},
+                        {id: 'html', label: i18n('🌐 Page web (.html)'), hint: i18n('à ouvrir dans un navigateur'), ext: 'html', copy: false, run: async o => download(await this.fileOf('html'), o.filename)},
+                        {id: 'file', label: i18n('💾 Fichier de l’outil'), hint: i18n('.lcnda-texte (tout est gardé)'), ext: 'lcnda-texte', copy: false, run: async o => download(await this.fileOf('file'), o.filename)},
+                    ]}).then(r => { if (r && !['pdf', 'print'].includes(r.format)) toast(i18n('Exporté : {name}', {name: r.filename || base})); });
             },
             /** pour imprimer et le PDF : chaque page comme à l'écran (en-tête, pied, notes, filigrane) */
             async pagedHtml() {
@@ -152,8 +153,8 @@
             async toMedia(blob, fmt = 'docx') {
                 try { const b = blob || await this.fileOf('docx'); const u8 = new Uint8Array(await b.arrayBuffer());
                     const r = await post('textdoc_to_media', {file: T().toB64(u8), format: fmt, title: this.name, thumb: this.thumbPng()}); const res = r.result || r;
-                    toast(`Copie rangée dans les médias (${fmt.toUpperCase()}).`, '', {action: {label: '↗ Ouvrir', run: () => A().openMedia?.(res.media_id) || window.LCNDA_PICKER?.openMedia?.(res.media_id)}}); return res;
-                } catch (e) { toast(`Copie impossible : ${e.message}`, 'error'); return null; }
+                    toast(i18n('Copie rangée dans les médias ({format}).', {format: fmt.toUpperCase()}), '', {action: {label: i18n('↗ Ouvrir'), run: () => A().openMedia?.(res.media_id) || window.LCNDA_PICKER?.openMedia?.(res.media_id)}}); return res;
+                } catch (e) { toast(i18n('Copie impossible : {error}', {error: e.message}), 'error'); return null; }
             },
             thumbPng() {
                 try { const c = document.createElement('canvas'), g = this.secs[0]?.geo || {W: 794, H: 1123}, k = 300 / g.W; c.width = 300; c.height = Math.round(g.H * k); const x = c.getContext('2d'); x.fillStyle = this.doc.page.color || '#fff'; x.fillRect(0, 0, c.width, c.height);
@@ -167,7 +168,7 @@
                 this.docEl.innerHTML = ''; this.secs = []; this.measureBox = null; (d.sections || [{html: ''}]).forEach(s => this.addSection(s, null)); this.applyStyles(); this.layout(); this.paintPanel?.();
             },
             saveAs(template = false) {
-                A().askText({title: template ? 'Enregistrer comme modèle' : 'Enregistrer une copie', message: template ? 'Le nom du modèle (le texte reste : vide-le avant si tu veux un modèle vierge) :' : 'Le nom de la copie :', value: template ? this.name : `${this.name} (copie)`, okLabel: 'Enregistrer'}).then(n => { n = String(n || '').trim(); if (n) this.save({asNew: true, kind: template ? 'template' : 'doc', name: n.slice(0, 200)}); });
+                A().askText({title: template ? i18n('Enregistrer comme modèle') : i18n('Enregistrer une copie'), message: template ? i18n('Le nom du modèle (le texte reste : vide-le avant si tu veux un modèle vierge) :') : i18n('Le nom de la copie :'), value: template ? this.name : i18n('{name} (copie)', {name: this.name}), okLabel: i18n('Enregistrer')}).then(n => { n = String(n || '').trim(); if (n) this.save({asNew: true, kind: template ? 'template' : 'doc', name: n.slice(0, 200)}); });
             },
         });
     }
@@ -190,48 +191,48 @@
             case 'print': return ed.exportDialog('print');
             case 'tomedia': return ed.toMedia();
             case 'tolayout': return toLayout(ed);
-            default: toast(`Commande inconnue : ${cmd}`, 'error');
+            default: toast(i18n('Commande inconnue : {cmd}', {cmd}), 'error');
         }
     };
 
     /* ═════════ Versions et comparaison ═════════ */
     async function saveVersion(ed, label = '') {
         if (!ed.id) { const id = await ed.save(); if (!id) return; }
-        const name = label || await A().askText({title: '🕘 Nouvelle version', message: 'Un nom pour cette version (facultatif) :', value: `Version du ${new Date().toLocaleDateString('fr-FR')}`, okLabel: 'Enregistrer'}); if (name === null) return;
-        try { await post('save_textdoc_version', {doc_id: ed.id, label: String(name || '').trim().slice(0, 120), data: ed.docData()}); toast('Version enregistrée (Fichier → 🕘 Versions…).'); } catch (e) { toast(e.message, 'error'); }
+        const name = label || await A().askText({title: i18n('🕘 Nouvelle version'), message: i18n('Un nom pour cette version (facultatif) :'), value: i18n('Version du {date}', {date: window.LCNDA_I18N?.fmtDate ? window.LCNDA_I18N.fmtDate(new Date(), {day: '2-digit', month: '2-digit', year: 'numeric'}) : new Date().toLocaleDateString('fr-FR')}), okLabel: i18n('Enregistrer')}); if (name === null) return;
+        try { await post('save_textdoc_version', {doc_id: ed.id, label: String(name || '').trim().slice(0, 120), data: ed.docData()}); toast(i18n('Version enregistrée (Fichier → 🕘 Versions…).')); } catch (e) { toast(e.message, 'error'); }
     }
     const textOfData = data => { const d = document.createElement('div'); d.innerHTML = (data?.sections || []).map(s => K().cleanHtml(s.html || '').html).join(''); d.querySelectorAll('del, sup.wp-fn').forEach(x => x.remove()); d.querySelectorAll('p, h1, h2, h3, h4, h5, h6, li, tr').forEach(x => x.append('\n\n')); return d.textContent.replace(/\n{3,}/g, '\n\n').trim(); };
     /** L3 — la fenêtre commune « 🕘 Versions » (app-versions.js) : liste, aperçu, comparaison mot à mot, revenir (l'actuelle gardée d'abord) */
     async function versionsDialog(ed) {
-        if (!ed.id) return toast('Enregistre d’abord le document (💾) : ses versions seront gardées avec lui.');
-        if (!UI()?.openVersions) return toast('La fenêtre des versions n’est pas chargée.', 'error');
+        if (!ed.id) return toast(i18n('Enregistre d’abord le document (💾) : ses versions seront gardées avec lui.'));
+        if (!UI()?.openVersions) return toast(i18n('La fenêtre des versions n’est pas chargée.'), 'error');
         const full = new Map(); const get = async id => { if (!full.has(id)) full.set(id, await api('textdoc_version', {id})); return full.get(id); };
         const words = t => (String(t).match(/\S+/g) || []).length;
-        return UI().openVersions({title: ed.name || 'Document', tool: 'Traitement de texte', kind: 'text',
+        return UI().openVersions({title: ed.name || i18n('Document'), tool: i18n('Traitement de texte'), kind: 'text',
             list: async () => ((await api('textdoc_versions', {doc_id: ed.id})).items || []).map(v => ({...v, auto: !!v.auto, info: plural(v.words || 0, 'mot')})),
-            now: () => ({info: plural(words(textOfData(ed.docData())), 'mot'), hint: 'le texte à l’écran'}),
+            now: () => ({info: plural(words(textOfData(ed.docData())), 'mot'), hint: i18n('le texte à l’écran')}),
             preview: async v => ({text: textOfData(v ? (await get(v.id)).data : ed.docData())}),
             keepNow: label => post('save_textdoc_version', {doc_id: ed.id, label, data: ed.docData(), auto: 1}),
             restore: async v => { const x = await get(v.id); ed.commit(); const at0 = ed.hpos; ed.restoreData(x.data); ed.commit(); const at = ed.hpos;
-                return {undo: () => { if (ed.hpos !== at) throw new Error('d’autres changements ont suivi : utilise ↶ dans le document'); while (ed.hpos > at0) ed.undo(); }, redo: () => ed.redo()}; },
+                return {undo: () => { if (ed.hpos !== at) throw new Error(i18n('d’autres changements ont suivi : utilise ↶ dans le document')); while (ed.hpos > at0) ed.undo(); }, redo: () => ed.redo()}; },
             rename: (v, label) => post('rename_textdoc_version', {id: v.id, label}),
             copy: async v => { const x = await get(v.id); const r = await post('save_textdoc', {name: `${ed.name} — ${v.label}`.slice(0, 200), kind: 'doc', data: x.data}); const id = Number((r.result || r).id || 0);
-                toast(`Copie enregistrée : « ${ed.name} — ${v.label} ».`, 'success', id ? {action: {label: '↗ Ouvrir', run: () => openDoc({id})}} : {}); },
+                toast(i18n('Copie enregistrée : « {name} ».', {name: `${ed.name} — ${v.label}`}), 'success', id ? {action: {label: i18n('↗ Ouvrir'), run: () => openDoc({id})}} : {}); },
             exportOne: async v => { const x = await get(v.id); const base = A().safeExportFilename ? A().safeExportFilename(`${ed.name} — ${v.label}`, 'version') : 'version'; download(new Blob([JSON.stringify({format: 'lcnda-texte', version: 1, name: `${ed.name} — ${v.label}`, data: x.data})], {type: 'application/json'}), `${base}.lcnda-texte`); },
             remove: async v => { const r = await post('delete_textdoc_version', {id: v.id}); full.delete(v.id); return {undo: () => post('restore_textdoc_version', {version: (r.result || r).version})}; },
             saveNow: () => saveVersion(ed)});
     }
     /** « ⇄ Comparer deux versions… » : la même fenêtre (coche deux versions) */
-    async function compareDialog(ed) { const d = await versionsDialog(ed); if (d) toast('Coche deux versions (ou « Maintenant ») pour les comparer.'); return d; }
+    async function compareDialog(ed) { const d = await versionsDialog(ed); if (d) toast(i18n('Coche deux versions (ou « Maintenant ») pour les comparer.')); return d; }
     function showDiff(title, a, b) {
         const d = ext.biography?.diffHtml ? ext.biography.diffHtml(a, b) : {html: `<del>${esc(a)}</del><ins>${esc(b)}</ins>`};
-        ext.openDialog({eyebrow: 'COMPARER', title: `⇄ ${title}`, wide: true, submitLabel: 'Fermer', body: `<p class="muted">${d.added != null ? `${plural(d.added, 'mot')} ajouté${d.added > 1 ? 's' : ''}, ${plural(d.removed || 0, 'mot')} retiré${d.removed > 1 ? 's' : ''}.` : ''}</p><div class="wp-diff">${d.html || d}</div>`, onSubmit: () => {}});
+        ext.openDialog({eyebrow: i18n('COMPARER'), title: `⇄ ${title}`, wide: true, submitLabel: i18n('Fermer'), body: `<p class="muted">${d.added != null ? esc(i18n(d.added > 1 ? (d.removed > 1 ? '{added} ajoutés, {removed} retirés.' : '{added} ajoutés, {removed} retiré.') : (d.removed > 1 ? '{added} ajouté, {removed} retirés.' : '{added} ajouté, {removed} retiré.'), {added: plural(d.added, 'mot'), removed: plural(d.removed || 0, 'mot')})) : ''}</p><div class="wp-diff">${d.html || d}</div>`, onSubmit: () => {}});
     }
 
     /* ═════════ Ouvrir, créer, modèles ═════════ */
     async function openDoc(ctx = {}) {
-        if (!T() || !K()) return toast('Le traitement de texte n’est pas chargé.', 'error');
-        let id = 0, name = ctx.name || 'Mon document', kind = 'doc', data = ctx.data || null, rev = '';
+        if (!T() || !K()) return toast(i18n('Le traitement de texte n’est pas chargé.'), 'error');
+        let id = 0, name = ctx.name || i18n('Mon document'), kind = 'doc', data = ctx.data || null, rev = '';
         if (ctx.id) { try { const r = await api('textdoc', {id: ctx.id}); id = r.id; name = r.name; kind = r.kind; data = r.data; rev = r.rev; } catch (e) { return toast(e.message, 'error'); } }
         return new (K().Editor)({...ctx, id, name, kind, data, rev, dirty: !!ctx.data && !ctx.id}).open();
     }
@@ -241,29 +242,29 @@
     tools.dataOf = dataOf;
     async function chooseTemplate(ctx = {}) {
         let mine = []; try { mine = (await api('textdocs', {kind: 'template'})).items || []; } catch (_) {}
-        ext.openDialog({eyebrow: 'TRAITEMENT DE TEXTE', title: '📋 Partir d’un modèle', wide: true, submitLabel: 'Fermer',
-            body: `<div class="wp-tpls">${tools.TEMPLATES.map(t => `<button type="button" class="wp-tpl" data-tpl="${t.key}"><b>${t.icon} ${esc(t.name)}</b><small>${esc(t.hint)}</small></button>`).join('')}</div>
-                <h4>Mes modèles</h4>${mine.length ? `<div class="wp-tpls">${mine.map(t => `<button type="button" class="wp-tpl" data-mine="${t.id}"><b>📝 ${esc(t.name)}</b><small>${esc(plural(t.info?.words || 0, 'mot'))} · ${UI()?.whenText ? esc(UI().whenText(t.updated_at, {label: 'Modifié'})) : ''}</small></button>`).join('')}</div>` : A().empty('Pas encore de modèle à toi : dans un document, Fichier → « Enregistrer comme modèle… ».', {icon: '📋'})}`,
+        ext.openDialog({eyebrow: i18n('TRAITEMENT DE TEXTE'), title: i18n('📋 Partir d’un modèle'), wide: true, submitLabel: i18n('Fermer'),
+            body: `<div class="wp-tpls">${tools.TEMPLATES.map(t => `<button type="button" class="wp-tpl" data-tpl="${t.key}"><b>${t.icon} ${esc(i18n(t.name))}</b><small>${esc(i18n(t.hint))}</small></button>`).join('')}</div>
+                <h4>${esc(i18n('Mes modèles'))}</h4>${mine.length ? `<div class="wp-tpls">${mine.map(t => `<button type="button" class="wp-tpl" data-mine="${t.id}"><b data-i18n-off>📝 ${esc(t.name)}</b><small>${esc(plural(t.info?.words || 0, 'mot'))} · ${UI()?.whenText ? esc(UI().whenText(t.updated_at, {label: i18n('Modifié')})) : ''}</small></button>`).join('')}</div>` : A().empty(i18n('Pas encore de modèle à toi : dans un document, Fichier → « Enregistrer comme modèle… ».'), {icon: '📋'})}`,
             onOpen: d => d.addEventListener('click', async e => {
                 const b = e.target.closest('[data-tpl], [data-mine]'); if (!b) return; d.close();
                 try {
                     if (b.dataset.mine) { const r = await api('textdoc', {id: Number(b.dataset.mine)}); return openDoc({...ctx, data: r.data, name: r.name}); }
                     const t = tools.TEMPLATES.find(x => x.key === b.dataset.tpl); let pid = ctx.personId || 0;
-                    if (t.person && !pid) { const it = await (window.LCNDA_PICKER || A()).openPicker({kind: 'person', title: t.ask || 'Le récit de qui ?'}); if (!it) return; pid = it.id; }
-                    const html = await t.html(pid); return openDoc({...ctx, data: dataOf(html, {tpl: t.key}), name: t.key === 'blank' ? 'Mon document' : t.name});
+                    if (t.person && !pid) { const it = await (window.LCNDA_PICKER || A()).openPicker({kind: 'person', title: i18n(t.ask || 'Le récit de qui ?')}); if (!it) return; pid = it.id; }
+                    const html = await t.html(pid); return openDoc({...ctx, data: dataOf(html, {tpl: t.key}), name: t.key === 'blank' ? i18n('Mon document') : i18n(t.name)});
                 } catch (err) { toast(err.message, 'error'); }
             }), onSubmit: () => {}});
     }
     tools.chooseTemplate = chooseTemplate;
     /** depuis une fiche : « 📝 Écrire sur cette personne » (la biographie F5 déjà posée) */
-    tools.writeAbout = async (pid, ctx = {}) => { try { const t = tools.TEMPLATES.find(x => x.key === 'recit'); const html = await t.html(pid); const ppl = await api('textdoc_people', {ids: String(pid)}).catch(() => ({people: {}})); return openDoc({...ctx, data: dataOf(html, {tpl: 'recit'}), name: `Récit — ${ppl.people?.[pid]?.name || 'un ancêtre'}`}); } catch (e) { toast(e.message, 'error'); } };
+    tools.writeAbout = async (pid, ctx = {}) => { try { const t = tools.TEMPLATES.find(x => x.key === 'recit'); const html = await t.html(pid); const ppl = await api('textdoc_people', {ids: String(pid)}).catch(() => ({people: {}})); return openDoc({...ctx, data: dataOf(html, {tpl: 'recit'}), name: i18n('Récit — {name}', {name: ppl.people?.[pid]?.name || i18n('un ancêtre')})}); } catch (e) { toast(e.message, 'error'); } };
 
     /* ═════════ ⤒ Importer (K13) : un nouveau document fait du fichier ═════════ */
     async function readAny(file) {
         const buf = await file.arrayBuffer();
-        if (/\.lcnda-texte$/i.test(file.name)) { const j = JSON.parse(new TextDecoder().decode(buf)); if (j?.format !== 'lcnda-texte' || !j.data?.sections) throw new Error('ce n’est pas un fichier du traitement de texte'); return {kind: 'lcnda', data: j.data, name: j.name, notices: []}; }
+        if (/\.lcnda-texte$/i.test(file.name)) { const j = JSON.parse(new TextDecoder().decode(buf)); if (j?.format !== 'lcnda-texte' || !j.data?.sections) throw new Error(i18n('ce n’est pas un fichier du traitement de texte')); return {kind: 'lcnda', data: j.data, name: j.name, notices: []}; }
         const r = await T().readFile(file.name, buf);
-        if (r.kind === 'html') { const c = K().cleanHtml(r.html.replace(/^[\s\S]*?<body[^>]*>|<\/body>[\s\S]*$/gi, '')); const notes = []; if (c.dropped) notes.push(`${plural(c.dropped, 'élément')} du fichier (scripts, formulaires, cadres…) retiré${c.dropped > 1 ? 's' : ''} : ils ne sont jamais lancés.`); if (c.extImg) notes.push(`${plural(c.extImg, 'image')} du web non reprise${c.extImg > 1 ? 's' : ''}.`); return {kind: 'html', data: dataOf(c.html), notices: notes}; }
+        if (r.kind === 'html') { const c = K().cleanHtml(r.html.replace(/^[\s\S]*?<body[^>]*>|<\/body>[\s\S]*$/gi, '')); const notes = []; if (c.dropped) notes.push(i18n(c.dropped > 1 ? '{n} du fichier (scripts, formulaires, cadres…) retirés : ils ne sont jamais lancés.' : '{n} du fichier (scripts, formulaires, cadres…) retiré : ils ne sont jamais lancés.', {n: plural(c.dropped, 'élément')})); if (c.extImg) notes.push(i18n(c.extImg > 1 ? '{n} du web non reprises.' : '{n} du web non reprise.', {n: plural(c.extImg, 'image')})); return {kind: 'html', data: dataOf(c.html), notices: notes}; }
         const im = r.doc, ed0 = new (K().Editor)({data: null}), base = ed0.doc;
         const data = {...base, page: {...base.page, ...im.page, cols: 1, size: undefined}, sections: im.sections.map(s => ({html: T().htmlOf(s), ...(s.page ? {page: {...s.page, cols: 1}} : {})})),
             header: {html: T().blocksHtml(im.header?.blocks || []), first: !!im.header?.first, firstHtml: T().blocksHtml(im.header?.firstBlocks || [])}, footer: {html: T().blocksHtml(im.footer?.blocks || []), first: !!im.footer?.first, firstHtml: T().blocksHtml(im.footer?.firstBlocks || [])},
@@ -272,21 +273,21 @@
     }
     tools.readAny = readAny;
     function importDialog(again, file) {
-        const KINDS = {docx: 'Word (.docx)', odt: 'LibreOffice (.odt)', rtf: 'RTF', md: 'Markdown', txt: 'texte', html: 'page web', lcnda: 'fichier du traitement de texte'};
-        return UI().openImportDialog({title: '⤒ Importer un document', accept: ACCEPT, noun: 'mot', what: 'Word, LibreOffice, RTF, Markdown, texte, HTML', files: file ? [file] : undefined,
+        const KINDS = {docx: 'Word (.docx)', odt: 'LibreOffice (.odt)', rtf: 'RTF', md: 'Markdown', txt: i18n('texte'), html: i18n('page web'), lcnda: i18n('fichier du traitement de texte')};
+        return UI().openImportDialog({title: i18n('⤒ Importer un document'), accept: ACCEPT, noun: 'mot', what: 'Word, LibreOffice, RTF, Markdown, texte, HTML', files: file ? [file] : undefined,
             analyze: async files => {
                 const f = files[0]; const r = await readAny(f); const d = document.createElement('div'); d.innerHTML = r.data.sections.map(s => K().cleanHtml(s.html).html).join('');
                 const words = T().wordCount(d.textContent), notes = d.querySelectorAll('sup.wp-fn').length, imgs = d.querySelectorAll('img').length, tables = d.querySelectorAll('table').length, heads = d.querySelectorAll('h1, h2, h3').length, tc = d.querySelectorAll('ins[data-tc], del[data-tc]').length;
                 const notices = (r.notices || []).map(t => ({kind: 'warn', text: t}));
                 const bits = [heads && plural(heads, 'titre'), tables && plural(tables, 'tableau'), imgs && plural(imgs, 'image'), notes && plural(notes, 'note'), r.data.comments?.length && plural(r.data.comments.length, 'commentaire'), tc && plural(tc, 'modification suivie'), r.data.sections.length > 1 && plural(r.data.sections.length, 'section')].filter(Boolean);
-                if (bits.length) notices.push({kind: 'ok', text: `✓ Repris : ${bits.join(', ')}.`});
-                if (r.data.header?.html || r.data.footer?.html) notices.push({kind: 'ok', text: '✓ En-tête et pied de page repris.'});
-                return {count: words, allowEmpty: true, summaryHtml: `<b>${plural(words, 'mot')}</b> · ${esc(KINDS[r.kind] || r.kind)}${r.encoding ? ` · ${esc(window.LCNDA_SHEET?.ENC_LABEL?.[r.encoding] || r.encoding)}` : ''}`, notices, preview: `<div class="wp-diff" style="max-height:200px">${esc(d.textContent.trim().slice(0, 800))}${d.textContent.length > 800 ? '…' : ''}</div>`, data: {...r, name: (r.name || f.name.replace(/\.[^.]+$/, '')).slice(0, 160) || 'Document importé'}, goLabel: '⤒ Importer le document'};
+                if (bits.length) notices.push({kind: 'ok', text: i18n('✓ Repris : {list}.', {list: bits.join(', ')})});
+                if (r.data.header?.html || r.data.footer?.html) notices.push({kind: 'ok', text: i18n('✓ En-tête et pied de page repris.')});
+                return {count: words, allowEmpty: true, summaryHtml: `<b>${plural(words, 'mot')}</b> · ${esc(KINDS[r.kind] || r.kind)}${r.encoding ? ` · ${esc(window.LCNDA_SHEET?.ENC_LABEL?.[r.encoding] || r.encoding)}` : ''}`, notices, preview: `<div class="wp-diff" style="max-height:200px">${esc(d.textContent.trim().slice(0, 800))}${d.textContent.length > 800 ? '…' : ''}</div>`, data: {...r, name: (r.name || f.name.replace(/\.[^.]+$/, '')).slice(0, 160) || i18n('Document importé')}, goLabel: i18n('⤒ Importer le document')};
             },
             run: async an => {
                 const r = await post('save_textdoc', {name: an.data.name, kind: 'doc', data: an.data.data}), id = Number((r.result || r).id || 0);
                 again?.(); setTimeout(() => openDoc({id, onSaved: again, onClose: again}).then(ed => ed && tools.adoptImages?.(ed)), 50);
-                return {message: `Document « ${an.data.name} » importé (${plural(an.count, 'mot')})`, undo: async () => { await post('delete_textdoc', {id}); again?.(); }};
+                return {message: i18n('Document « {name} » importé ({words})', {name: an.data.name, words: plural(an.count, 'mot')}), undo: async () => { await post('delete_textdoc', {id}); again?.(); }};
             }});
     }
     tools.importDialog = importDialog;
@@ -305,14 +306,14 @@
         }).join('');
     }
     async function toLayout(ed) {
-        const Kit = ext.layoutKit; if (!Kit) return toast('La mise en page n’est pas chargée.', 'error');
-        const dlg = ext.openDialog({eyebrow: 'MISE EN PAGE', title: '📐 Envoyer vers la mise en page', submitLabel: 'Envoyer', body: `<p class="muted">Le texte devient des pages d’un livre (Mise en page) : les titres 1 deviennent des chapitres, les images des pages d’images avec leur légende, les notes une partie « Notes » à la fin. Ton document reste tel quel ici.</p>
-            <div class="form-grid one-column"><label class="checkbox-line"><input type="radio" name="to" value="new" checked> Un nouveau livre</label><label class="checkbox-line"><input type="radio" name="to" value="end"> À la fin d’un livre existant</label><div data-ly-pick hidden>${(window.LCNDA_PICKER || A()).pickerField({name: 'ly', kind: 'layout', inline: true})}</div>
-            <label>Design<select name="th">${(Kit.THEMES || []).map(t => `<option value="${esc(t.id)}">${esc(t.name || t.id)}</option>`).join('')}</select></label></div>`,
+        const Kit = ext.layoutKit; if (!Kit) return toast(i18n('La mise en page n’est pas chargée.'), 'error');
+        const dlg = ext.openDialog({eyebrow: i18n('MISE EN PAGE'), title: i18n('📐 Envoyer vers la mise en page'), submitLabel: i18n('Envoyer'), body: `<p class="muted">${esc(i18n('Le texte devient des pages d’un livre (Mise en page) : les titres 1 deviennent des chapitres, les images des pages d’images avec leur légende, les notes une partie « Notes » à la fin. Ton document reste tel quel ici.'))}</p>
+            <div class="form-grid one-column"><label class="checkbox-line"><input type="radio" name="to" value="new" checked> ${esc(i18n('Un nouveau livre'))}</label><label class="checkbox-line"><input type="radio" name="to" value="end"> ${esc(i18n('À la fin d’un livre existant'))}</label><div data-ly-pick hidden>${(window.LCNDA_PICKER || A()).pickerField({name: 'ly', kind: 'layout', inline: true})}</div>
+            <label>${esc(i18n('Design'))}<select name="th">${(Kit.THEMES || []).map(t => `<option value="${esc(t.id)}">${esc(t.name || t.id)}</option>`).join('')}</select></label></div>`,
             onOpen: d => d.addEventListener('change', e => { if (e.target.name === 'to') d.querySelector('[data-ly-pick]').hidden = e.target.value !== 'end'; }),
             onSubmit: async f => {
                 const toEnd = f.elements.to.value === 'end'; let lyId = 0, doc, name = ed.name, rev;
-                if (toEnd) { lyId = Number(f.elements.ly.value); if (!lyId) return UI().fail(f.querySelector('[data-ly-pick] input') || f.elements.ly, 'Choisis le livre.'); const r = await api('layout_doc', {id: lyId}); doc = r.doc; name = r.name; rev = r.rev; }
+                if (toEnd) { lyId = Number(f.elements.ly.value); if (!lyId) return UI().fail(f.querySelector('[data-ly-pick] input') || f.elements.ly, i18n('Choisis le livre.')); const r = await api('layout_doc', {id: lyId}); doc = r.doc; name = r.name; rev = r.rev; }
                 else { const th = Kit.THEMES.find(t => t.id === f.elements.th.value) || Kit.THEMES[0], g = ed.secs[0].geo; doc = Kit.themeDoc(th, '', {w: Math.round(g.wmm), h: Math.round(g.hmm)}); doc.title = ed.name; doc.pages = []; Kit.baseStyles({titleFont: th.titleFont, bodyFont: th.bodyFont, bodySize: 11}).forEach(s => { if (!doc.paraStyles.some(x => x.id === s.id)) doc.paraStyles.push(s); }); }
                 const im = ed.imOf(), notes = [], all = im.sections.flatMap(s => s.blocks);
                 let chunk = [], n = 0;
@@ -329,7 +330,7 @@
                 walk(all); flushText();
                 if (notes.length) { const pg = page(), bx = Kit.box(doc, doc.pages.length - 1); pg.items.push(Kit.textItem({x: bx.x, y: bx.y, w: bx.w, h: 18, html: '<p data-ps="ps-chapter">Notes</p>', name: 'Chapitre'})); pg.flowTop = bx.y + 20; Kit.flow(doc, notes.map((t, i) => ({ps: 'ps-list', lead: `${i + 1}.`, text: t})), {first: pg}); delete pg.flowTop; }
                 Kit.openEditor({id: lyId, name, doc, rev});
-                toast(`${plural(n, 'paragraphe')} envoyé${n > 1 ? 's' : ''} vers la mise en page : vérifie, puis enregistre le livre.`);
+                toast(i18n(n > 1 ? '{n} envoyés vers la mise en page : vérifie, puis enregistre le livre.' : '{n} envoyé vers la mise en page : vérifie, puis enregistre le livre.', {n: plural(n, 'paragraphe')}));
             }});
         void dlg;
     }
@@ -337,13 +338,13 @@
     /* ═════════ Dans 🛠️ Outils de modification ═════════ */
     const mini = d => `<span class="wp-mini${d.info?.page?.orient === 'landscape' ? ' is-land' : ''}"><b>${esc((d.info?.heads || [])[0] || d.name)}</b>${esc(String(d.info?.preview || '').slice(0, 260))}</span>`;
     ext.editToolsExtra = ext.editToolsExtra || [];
-    ext.editToolsExtra.push({key: 'textdoc', icon: '📝', label: 'Traitement de texte', what: 'document',
-        load: async () => ((await api('textdocs')).items || []).map(d => ({id: d.id, name: d.name, date: d.updated_at, thumb: mini(d), info: [plural(d.info?.words || 0, 'mot'), plural(d.info?.pages || 1, 'page'), d.info?.comments ? plural(d.info.comments, 'commentaire') : '', d.info?.tracked ? '✍ modifications à relire' : ''].filter(Boolean).join(' · ')})),
+    ext.editToolsExtra.push({key: 'textdoc', icon: '📝', label: i18n('Traitement de texte'), what: 'document',
+        load: async () => ((await api('textdocs')).items || []).map(d => ({id: d.id, name: d.name, date: d.updated_at, thumb: mini(d), info: [plural(d.info?.words || 0, 'mot'), plural(d.info?.pages || 1, 'page'), d.info?.comments ? plural(d.info.comments, 'commentaire') : '', d.info?.tracked ? i18n('✍ modifications à relire') : ''].filter(Boolean).join(' · ')})),
         open: (id, again) => openDoc({id, onSaved: again, onClose: again}),
         create: again => openDoc({onSaved: again, onClose: again}),
         rename: (id, name) => post('rename_textdoc', {id, name}),
-        remove: id => post('delete_textdoc', {id}), createLabel: '＋ Nouveau document',
-        extra: '<button type="button" class="button secondary" data-et-x="tpl" title="Lettre aux archives, demande d’acte, récit d’un ancêtre, compte rendu de visite, rapport de recherche…">📋 Partir d’un modèle</button><button type="button" class="button secondary" data-et-x="import" title="Word (.docx), LibreOffice (.odt), RTF, Markdown, texte, HTML">⤒ Importer…</button>',
+        remove: id => post('delete_textdoc', {id}), createLabel: i18n('＋ Nouveau document'),
+        get extra() { return `<button type="button" class="button secondary" data-et-x="tpl" title="${esc(i18n('Lettre aux archives, demande d’acte, récit d’un ancêtre, compte rendu de visite, rapport de recherche…'))}">${esc(i18n('📋 Partir d’un modèle'))}</button><button type="button" class="button secondary" data-et-x="import" title="Word (.docx), LibreOffice (.odt), RTF, Markdown, texte, HTML">${esc(i18n('⤒ Importer…'))}</button>`; },
         onExtra: (k, again) => { if (k === 'tpl') return chooseTemplate({onSaved: again, onClose: again}); if (k === 'import') return importDialog(again); }});
 
     /* ═════════ Les liens depuis le reste de l'app ═════════ */
@@ -352,7 +353,7 @@
     ext.afterPerson.push(detail => {
         const p = detail?.person; if (!p?.id) return;
         const row = document.querySelector('#workspace .person-hero-actions'); if (!row || row.querySelector('[data-wp-write]')) return;
-        row.insertAdjacentHTML('afterbegin', `<button type="button" class="icon-action" data-wp-write="${Number(p.id)}" title="📝 Écrire sur cette personne : un document du traitement de texte, avec sa biographie déjà posée" aria-label="Écrire sur cette personne">📝</button>`);
+        row.insertAdjacentHTML('afterbegin', `<button type="button" class="icon-action" data-wp-write="${Number(p.id)}" title="${esc(i18n('📝 Écrire sur cette personne : un document du traitement de texte, avec sa biographie déjà posée'))}" aria-label="${esc(i18n('Écrire sur cette personne'))}">📝</button>`);
     });
     document.addEventListener('click', e => { const b = e.target.closest?.('[data-wp-write]'); if (!b) return; e.preventDefault(); tools.writeAbout(Number(b.dataset.wpWrite)); });
     /** 🗓 un compte rendu fait des lignes du Journal des recherches (celles qui sont montrées) */
@@ -371,7 +372,7 @@
     // le planificateur de visites (app-listes.js) : « 📝 Compte rendu » sur chaque feuille de mission
     const addVisitButtons = () => document.querySelectorAll('#workspace .archive-visit-plan[data-archive-visit-plan]').forEach(card => {
         if (card.querySelector('[data-wp-visit]')) return; const host = card.querySelector('header .page-actions, header > div:last-child, header') || card;
-        const b = document.createElement('button'); b.type = 'button'; b.className = 'button small secondary'; b.dataset.wpVisit = card.dataset.archiveVisitPlan; b.textContent = '📝 Compte rendu'; b.title = 'Un compte rendu de cette visite dans le traitement de texte (cotes, résultats, la suite)'; host.appendChild(b);
+        const b = document.createElement('button'); b.type = 'button'; b.className = 'button small secondary'; b.dataset.wpVisit = card.dataset.archiveVisitPlan; b.textContent = i18n('📝 Compte rendu'); b.title = i18n('Un compte rendu de cette visite dans le traitement de texte (cotes, résultats, la suite)'); host.appendChild(b);
     });
     let visitT = 0; new MutationObserver(() => { if (visitT) return; visitT = requestAnimationFrame(() => { visitT = 0; if (document.querySelector('#workspace .archive-visit-plan[data-archive-visit-plan]:not(:has([data-wp-visit]))')) addVisitButtons(); }); }).observe(document.getElementById('workspace') || document.body, {childList: true, subtree: true});
     document.addEventListener('click', async e => { const b = e.target.closest?.('[data-wp-visit]'); if (!b) return; e.preventDefault(); try { const d = await api('archive_visit_plans'); const plan = (d.plans || []).find(p => Number(p.id) === Number(b.dataset.wpVisit)); if (plan) tools.reportFromVisit(plan); } catch (err) { toast(err.message, 'error'); } });

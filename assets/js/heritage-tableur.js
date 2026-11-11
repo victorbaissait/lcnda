@@ -41,6 +41,7 @@
     const cssFont = f => { const v = String(f || '').replace(/[^\w\s,'\-À-ÿ.]/g, '').trim(); return v ? `'${v.replace(/'/g, '')}', sans-serif` : ''; };
     const download = (blob, name) => { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); };
     const kbd = k => (A()?.keys?.text ? A().keys.text(k) : k);
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const FORMATS = [['', 'Automatique'], ['num', 'Nombre 0,00'], ['int', 'Nombre entier'], ['eur', 'Monnaie (€)'], ['pct', 'Pourcentage'], ['date', 'Date courte'], ['actdate', 'Date d’acte'], ['text', 'Texte']];
 
     /* ═════════ Modèles de classeurs (écran H) ═════════ */
@@ -86,8 +87,8 @@
      * data : un classeur déjà prêt (modèle, import, vague 2 : données d'un autre outil) ; sinon id (lu en base) ; sinon un classeur vide.
      */
     async function openWorkbook(ctx = {}) {
-        if (!X()) return toast('Le moteur du tableur n’est pas chargé.', 'error');
-        let id = 0, name = ctx.name || 'Mon classeur', kind = ctx.kind === 'template' ? 'template' : 'book', wb;
+        if (!X()) return toast(i18n('Le moteur du tableur n’est pas chargé.'), 'error');
+        let id = 0, name = ctx.name || i18n('Mon classeur'), kind = ctx.kind === 'template' ? 'template' : 'book', wb;
         let rev = '';
         if (ctx.id) { try { const r = await api('workbook', {id: ctx.id}); id = r.id; name = r.name; kind = r.kind; rev = r.rev || ''; wb = X().normalize(r.data); } catch (e) { return toast(e.message, 'error'); } }
         else wb = X().normalize(ctx.data || X().newWorkbook());
@@ -154,10 +155,10 @@
             this.recalc({structural: t.structural, changed});
             this.touch(); this.hiddenRows.clear(); this.refreshFilter();
         }
-        undo() { if (this.edit) return; const t = this.undoStack.pop(); if (!t) return toast('Rien à annuler.'); this.apply(t, 'before'); this.redoStack.push(t); this.render(); }
-        redo() { if (this.edit) return; const t = this.redoStack.pop(); if (!t) return toast('Rien à rétablir.'); this.apply(t, 'after'); this.undoStack.push(t); this.render(); }
+        undo() { if (this.edit) return; const t = this.undoStack.pop(); if (!t) return toast(i18n('Rien à annuler.')); this.apply(t, 'before'); this.redoStack.push(t); this.render(); }
+        redo() { if (this.edit) return; const t = this.redoStack.pop(); if (!t) return toast(i18n('Rien à rétablir.')); this.apply(t, 'after'); this.undoStack.push(t); this.render(); }
         /** H7 : un message avec « ↶ Annuler » pour la dernière action */
-        undoable(msg, t) { A().undoToast(msg, {undo: () => { if (this.undoStack[this.undoStack.length - 1] !== t) throw new Error('d’autres changements ont suivi : utilise ↶ (' + kbd('⌘Z') + ')'); this.undo(); }, redo: () => this.redo()}); }
+        undoable(msg, t) { A().undoToast(msg, {undo: () => { if (this.undoStack[this.undoStack.length - 1] !== t) throw new Error(i18n('d’autres changements ont suivi : utilise ↶ ({key})', {key: kbd('⌘Z')})); this.undo(); }, redo: () => this.redo()}); }
         touch() { this.dirty = true; UI()?.savedStatus?.(this.dlg, 'dirty'); this.histBtns(); }
         histBtns() { const u = this.$('[data-ui-cmd="undo"]'), r = this.$('[data-ui-cmd="redo"]'); if (u) u.disabled = !this.undoStack.length; if (r) r.disabled = !this.redoStack.length; }
         $(s) { return this.dlg?.querySelector(s); }
@@ -195,23 +196,24 @@
     ];
     // ext.sheetMenuExtra : [{menu: 'Données', cmd, label, key}] — des lignes ajoutées par d'autres fichiers (heritage-tableur-cibles.js…), leur commande dans ext.sheetCommands
     const menuItems = (title, base) => { const more = (ext.sheetMenuExtra || []).filter(x => x && x.menu === title && x.cmd); return more.length ? [...base, '-', ...more.map(x => M(x.cmd, x.label, x.key || ''))] : base; };
-    const menusHtml = () => MENUS.map(([title, base]) => [title, menuItems(title, base)]).map(([title, items]) => `<details class="xl-menu" data-xl-menu="${esc(title)}"><summary>${esc(title)}</summary><div class="xl-menu-list" role="menu">${items.map(it => (it === '-' ? '<hr>' : `<button type="button" role="menuitem" data-xl-cmd="${esc(it.cmd)}"><span>${esc(it.label)}</span>${it.key ? `<kbd>${esc(kbd(it.key))}</kbd>` : ''}</button>`)).join('')}</div></details>`).join('');
-    const toolsHtml = () => toolsHtml0().replace(/<span class="xl-g" data-tb="([\w-]+)" data-tb-label="([^"]*)"/g, (m, k, l) => `${m} data-tbg="xl-g-${k}" data-tbg-label="Barre d’outils · ${l}"`); // chaque bouton d'un groupe se range aussi un par un (⚙️ Personnaliser)
-    const toolsHtml0 = () => `<div class="xl-tools" data-tbg="xl-tools" data-tbg-label="Barre d’outils">
-        <span class="xl-g" data-tb="text" data-tb-label="Police et gras"><button type="button" class="button small secondary xl-fontbtn" data-xl-cmd="font" title="Police (E5)" aria-label="Police">Police</button><input type="number" class="xl-fs" data-xl-fs data-unit="px" min="6" max="72" step="1" placeholder="13" aria-label="Taille du texte" title="Taille du texte"><button type="button" class="icon-button small" data-xl-cmd="bold" title="Gras" data-shortcut="⌘B"><b>G</b></button><button type="button" class="icon-button small" data-xl-cmd="italic" title="Italique" data-shortcut="⌘I"><i>I</i></button><button type="button" class="icon-button small" data-xl-cmd="underline" title="Souligné" data-shortcut="⌘U"><u>S</u></button><button type="button" class="icon-button small" data-xl-cmd="wrap" title="Renvoi à la ligne">↵</button><button type="button" class="icon-button small" data-xl-cmd="merge" title="Fusionner / séparer">⊞</button><button type="button" class="icon-button small" data-xl-cmd="al:left" title="Aligner à gauche">⟸</button><button type="button" class="icon-button small" data-xl-cmd="al:center" title="Centrer">≡</button><button type="button" class="icon-button small" data-xl-cmd="al:right" title="Aligner à droite">⟹</button></span>
-        <span class="xl-g" data-tb="colors" data-tb-label="Couleurs (C2)"><button type="button" class="icon-button small xl-colbtn" data-xl-cmd="color:color" title="Couleur du texte"><b>A</b><i data-xl-sw="color"></i></button><button type="button" class="icon-button small xl-colbtn" data-xl-cmd="color:fill" title="Couleur du fond">◧<i data-xl-sw="fill"></i></button></span>
-        <span class="xl-g" data-tb="format" data-tb-label="Format de cellule"><select data-xl-fmt aria-label="Format de la cellule" title="Format de la cellule">${FORMATS.map(([k, l]) => `<option value="${k}">${esc(l)}</option>`).join('')}</select><button type="button" class="icon-button small" data-xl-cmd="dec-" title="Une décimale de moins">.0</button><button type="button" class="icon-button small" data-xl-cmd="dec+" title="Une décimale de plus">.00</button></span>
-        <span class="xl-g" data-tb="borders" data-tb-label="Bordures"><button type="button" class="icon-button small" data-xl-cmd="bd:all" title="Bordures : tout">▦</button><button type="button" class="icon-button small" data-xl-cmd="bd:out" title="Bordures : contour">▭</button><button type="button" class="icon-button small" data-xl-cmd="bd:bottom" title="Bordure du bas">▁</button><button type="button" class="icon-button small" data-xl-cmd="bd:none" title="Sans bordure">⊘</button></span>
-        <span class="xl-g" data-tb="chart" data-tb-label="Graphique"><button type="button" class="button small secondary" data-xl-cmd="chart" title="Un diagramme avec les chiffres de la sélection : les types conseillés pour cette plage">📊 Graphique ▾</button><button type="button" class="button small secondary" data-xl-cmd="fn" title="Choisir une fonction">ƒ Fonction</button></span>
+    const menusHtml = () => MENUS.map(([title, base]) => [title, menuItems(title, base)]).map(([title, items]) => `<details class="xl-menu" data-xl-menu="${esc(title)}"><summary>${esc(i18n(title))}</summary><div class="xl-menu-list" role="menu">${items.map(it => (it === '-' ? '<hr>' : `<button type="button" role="menuitem" data-xl-cmd="${esc(it.cmd)}"><span>${esc(i18n(it.label))}</span>${it.key ? `<kbd>${esc(kbd(it.key))}</kbd>` : ''}</button>`)).join('')}</div></details>`).join('');
+    const toolsHtml = () => toolsHtml0().replace(/<span class="xl-g" data-tb="([\w-]+)" data-tb-label="([^"]*)"/g, (m, k, l) => `${m} data-tbg="xl-g-${k}" data-tbg-label="${esc(i18n('Barre d’outils · {group}', {group: i18n(l)}))}"`); // chaque bouton d'un groupe se range aussi un par un (⚙️ Personnaliser)
+    const toolsHtml0 = () => `<div class="xl-tools" data-tbg="xl-tools" data-tbg-label="${esc(i18n('Barre d’outils'))}">
+        <span class="xl-g" data-tb="text" data-tb-label="${esc(i18n('Police et gras'))}"><button type="button" class="button small secondary xl-fontbtn" data-xl-cmd="font" title="${esc(i18n('Police (E5)'))}" aria-label="${esc(i18n('Police'))}">${esc(i18n('Police'))}</button><input type="number" class="xl-fs" data-xl-fs data-unit="px" min="6" max="72" step="1" placeholder="13" aria-label="${esc(i18n('Taille du texte'))}" title="${esc(i18n('Taille du texte'))}"><button type="button" class="icon-button small" data-xl-cmd="bold" title="${esc(i18n('Gras'))}" data-shortcut="⌘B"><b>G</b></button><button type="button" class="icon-button small" data-xl-cmd="italic" title="${esc(i18n('Italique'))}" data-shortcut="⌘I"><i>I</i></button><button type="button" class="icon-button small" data-xl-cmd="underline" title="${esc(i18n('Souligné'))}" data-shortcut="⌘U"><u>S</u></button><button type="button" class="icon-button small" data-xl-cmd="wrap" title="${esc(i18n('Renvoi à la ligne'))}">↵</button><button type="button" class="icon-button small" data-xl-cmd="merge" title="${esc(i18n('Fusionner / séparer'))}">⊞</button><button type="button" class="icon-button small" data-xl-cmd="al:left" title="${esc(i18n('Aligner à gauche'))}">⟸</button><button type="button" class="icon-button small" data-xl-cmd="al:center" title="${esc(i18n('Centrer'))}">≡</button><button type="button" class="icon-button small" data-xl-cmd="al:right" title="${esc(i18n('Aligner à droite'))}">⟹</button></span>
+        <span class="xl-g" data-tb="colors" data-tb-label="${esc(i18n('Couleurs (C2)'))}"><button type="button" class="icon-button small xl-colbtn" data-xl-cmd="color:color" title="${esc(i18n('Couleur du texte'))}"><b>A</b><i data-xl-sw="color"></i></button><button type="button" class="icon-button small xl-colbtn" data-xl-cmd="color:fill" title="${esc(i18n('Couleur du fond'))}">◧<i data-xl-sw="fill"></i></button></span>
+        <span class="xl-g" data-tb="format" data-tb-label="${esc(i18n('Format de cellule'))}"><select data-xl-fmt aria-label="${esc(i18n('Format de la cellule'))}" title="${esc(i18n('Format de la cellule'))}">${FORMATS.map(([k, l]) => `<option value="${k}">${esc(i18n(l))}</option>`).join('')}</select><button type="button" class="icon-button small" data-xl-cmd="dec-" title="${esc(i18n('Une décimale de moins'))}">.0</button><button type="button" class="icon-button small" data-xl-cmd="dec+" title="${esc(i18n('Une décimale de plus'))}">.00</button></span>
+        <span class="xl-g" data-tb="borders" data-tb-label="${esc(i18n('Bordures'))}"><button type="button" class="icon-button small" data-xl-cmd="bd:all" title="${esc(i18n('Bordures : tout'))}">▦</button><button type="button" class="icon-button small" data-xl-cmd="bd:out" title="${esc(i18n('Bordures : contour'))}">▭</button><button type="button" class="icon-button small" data-xl-cmd="bd:bottom" title="${esc(i18n('Bordure du bas'))}">▁</button><button type="button" class="icon-button small" data-xl-cmd="bd:none" title="${esc(i18n('Sans bordure'))}">⊘</button></span>
+        <span class="xl-g" data-tb="chart" data-tb-label="${esc(i18n('Graphique'))}"><button type="button" class="button small secondary" data-xl-cmd="chart" title="${esc(i18n('Un diagramme avec les chiffres de la sélection : les types conseillés pour cette plage'))}">📊 ${esc(i18n('Graphique'))} ▾</button><button type="button" class="button small secondary" data-xl-cmd="fn" title="${esc(i18n('Choisir une fonction'))}">ƒ ${esc(i18n('Fonction'))}</button></span>
     </div>`;
     /** K19 : la colonne d’outils de 36 px — chercher et trier · calculer et mettre une fiche · voir (les mêmes commandes que les menus) ;
      *  ↕ Trier, ⚲ Filtrer et Σ ont quitté la barre d’outils du haut pour elle (et restent dans le menu Données et le clic droit) */
     const RAIL = [['find', '🔍', 'Rechercher et remplacer', '⌘F'], ['filter', '⚲', 'Filtrer (barre de recherche et filtres au-dessus)', '⇧⌘L'], ['sortmenu', '↕', 'Trier la plage'],
         ['fn', 'ƒ', 'Choisir une fonction', '⇧F3'], ['summenu', 'Σ', 'Somme, moyenne, nombre…'], ['person', '👤', 'Une personne de la base dans la cellule', '⌘K'], ['place', '📍', 'Un lieu de la base dans la cellule'], ['comment', '💬', 'Note sur la cellule'],
         ['chart', '📊', 'Graphique avec les chiffres de la sélection'], ['cf', '🎨', 'Mise en forme conditionnelle'], ['formulas', '=', 'Montrer les formules', '⌘`'], ['panel', '◫', 'Panneau de droite']];
-    const railHtml = () => `<nav class="xl-rail" data-xl-rail aria-label="Outils">${RAIL.map(([cmd, icon, title, key]) => `<button type="button" class="ed-tool" data-xl-cmd="${cmd}" title="${esc(title)}" aria-label="${esc(title)}"${key ? ` data-shortcut="${key}"` : ''}>${icon}</button>`).join('')}</nav>`;
-    const HELP_GRID = 'Tape pour écrire · = pour calculer · double-clic pour modifier · clic droit pour les actions · glisse le petit carré pour recopier';
-    const HELP_EDIT = 'Entrée valide · Tab : case à droite · Échap annule · pendant une formule, clique ou glisse sur des cellules pour les y mettre';
+    const railHtml = () => `<nav class="xl-rail" data-xl-rail aria-label="${esc(i18n('Outils'))}">${RAIL.map(([cmd, icon, title, key]) => `<button type="button" class="ed-tool" data-xl-cmd="${cmd}" title="${esc(i18n(title))}" aria-label="${esc(i18n(title))}"${key ? ` data-shortcut="${key}"` : ''}>${icon}</button>`).join('')}</nav>`;
+    const HELP_GRID0 = 'Tape pour écrire · = pour calculer · double-clic pour modifier · clic droit pour les actions · glisse le petit carré pour recopier';
+    const HELP_EDIT0 = 'Entrée valide · Tab : case à droite · Échap annule · pendant une formule, clique ou glisse sur des cellules pour les y mettre';
+    const HELP_GRID = () => i18n(HELP_GRID0), HELP_EDIT = () => i18n(HELP_EDIT0);
 
     Object.assign(Editor.prototype, {
         /* ── K18 : le zoom commun [− 100 % ▾ +] (⌘0, ⌘1, ⌘+, ⌘−, ⌘ + molette) : la grille et sa case d’écriture grossissent ensemble ── */
@@ -234,17 +236,17 @@
             const U = UI(), dlg = this.dlg = document.createElement('dialog');
             dlg.className = 'modal xl-dlg'; dlg.dataset.ownClose = '1'; dlg.dataset.noFoot = '1'; dlg.setAttribute('data-no-foot', '');
             const top = U.editorTopbar({icon: '🧾', name: this.name, nameAttrs: 'data-xl-name', menus: [{html: `<nav class="xl-menus">${menusHtml()}</nav>`}], undo: true, status: this.id && !this.dirty ? 'saved' : '',
-                buttons: {customize: ext.tbButton ? {html: '⚙️ Personnaliser', attrs: 'data-tb-config="sheet"'} : null, export: {attrs: 'data-xl-cmd="export"', title: 'XLSX, ODS, CSV, TSV, JSON, PDF, impression'}, save: this.ctx.back ? {attrs: 'data-xl-cmd="save" data-xl-back-save', html: '✓ Enregistrer et revenir', title: this.ctx.back.title || 'Renvoyer les données là d’où elles viennent'} : {attrs: 'data-xl-cmd="save"'}, full: ext.fullButton ? {attrs: 'data-full-toggle="sheet"', title: 'Plein écran (⛶)'} : null, close: {attrs: 'data-xl-cmd="close"'}}});
+                buttons: {customize: ext.tbButton ? {html: i18n('⚙️ Personnaliser'), attrs: 'data-tb-config="sheet"'} : null, export: {attrs: 'data-xl-cmd="export"', title: i18n('XLSX, ODS, CSV, TSV, JSON, PDF, impression')}, save: this.ctx.back ? {attrs: 'data-xl-cmd="save" data-xl-back-save', html: i18n('✓ Enregistrer et revenir'), title: this.ctx.back.title || i18n('Renvoyer les données là d’où elles viennent')} : {attrs: 'data-xl-cmd="save"'}, full: ext.fullButton ? {attrs: 'data-full-toggle="sheet"', title: i18n('Plein écran (⛶)')} : null, close: {attrs: 'data-xl-cmd="close"'}}});
             // « 🧾 Modifier les données » d'un autre outil (vague 2) : le bandeau dit d'où viennent les données et ce qu'on y attend
-            const back = this.ctx.back ? `<div class="xl-back" data-xl-backbar role="note"><span class="xl-back-txt">${this.ctx.back.html || esc(this.ctx.back.label || 'Données d’un autre outil')}</span><span class="xl-back-btns"><button type="button" class="button small secondary" data-xl-cmd="close">Annuler</button><button type="button" class="button small" data-xl-cmd="save">✓ Enregistrer et revenir</button></span></div>` : '';
+            const back = this.ctx.back ? `<div class="xl-back" data-xl-backbar role="note"><span class="xl-back-txt">${this.ctx.back.html || esc(this.ctx.back.label || i18n('Données d’un autre outil'))}</span><span class="xl-back-btns"><button type="button" class="button small secondary" data-xl-cmd="close">${esc(i18n('Annuler'))}</button><button type="button" class="button small" data-xl-cmd="save">${esc(i18n('✓ Enregistrer et revenir'))}</button></span></div>` : '';
             dlg.innerHTML = `<div class="xl">${top}${back}${toolsHtml()}
-                <div class="xl-fbar"><input class="xl-nbox" data-xl-nbox aria-label="Adresse (tape D12 ou un nom pour y aller)" title="Tape une adresse (D12, B2:C9) ou un nom pour y aller" spellcheck="false"><span class="xl-fxlab" aria-hidden="true">fx</span><textarea class="xl-fx" data-xl-fx rows="1" aria-label="Contenu ou formule de la cellule" spellcheck="false"></textarea></div>
+                <div class="xl-fbar"><input class="xl-nbox" data-xl-nbox aria-label="${esc(i18n('Adresse (tape D12 ou un nom pour y aller)'))}" title="${esc(i18n('Tape une adresse (D12, B2:C9) ou un nom pour y aller'))}" spellcheck="false"><span class="xl-fxlab" aria-hidden="true">fx</span><textarea class="xl-fx" data-xl-fx rows="1" aria-label="${esc(i18n('Contenu ou formule de la cellule'))}" spellcheck="false"></textarea></div>
                 <div class="xl-ac" data-xl-ac hidden role="listbox"></div>
                 <div class="xl-filterbar" data-xl-filter hidden></div>
-                <div class="xl-body${pref('panel', true) && innerWidth > 760 ? '' : ' no-panel'}">${railHtml()}<div class="xl-vpwrap" data-xl-wrap><div class="xl-vp" data-xl-vp data-ui-off data-ctx-off tabindex="-1" role="grid" aria-label="Feuille de calcul"><div class="xl-inner" data-xl-inner></div></div><textarea class="xl-kbd" data-xl-kbd aria-label="Feuille de calcul : tape pour écrire dans la cellule choisie" autocomplete="off" spellcheck="false"></textarea><textarea class="xl-ed" data-xl-ed hidden rows="1" spellcheck="false" aria-label="Écrire dans la cellule"></textarea></div>
+                <div class="xl-body${pref('panel', true) && innerWidth > 760 ? '' : ' no-panel'}">${railHtml()}<div class="xl-vpwrap" data-xl-wrap><div class="xl-vp" data-xl-vp data-ui-off data-ctx-off tabindex="-1" role="grid" aria-label="${esc(i18n('Feuille de calcul'))}"><div class="xl-inner" data-xl-inner></div></div><textarea class="xl-kbd" data-xl-kbd aria-label="${esc(i18n('Feuille de calcul : tape pour écrire dans la cellule choisie'))}" autocomplete="off" spellcheck="false"></textarea><textarea class="xl-ed" data-xl-ed hidden rows="1" spellcheck="false" aria-label="${esc(i18n('Écrire dans la cellule'))}"></textarea></div>
                     <div class="xl-help" data-xl-help aria-live="polite" hidden></div>
-                    <aside class="xl-panel" data-xl-panel data-tbg="xl-panel" data-tbg-label="Panneau de droite"></aside></div>
-                <div class="xl-bottom"><div class="xl-tabs" data-xl-tabs role="tablist" aria-label="Feuilles"></div></div></div>`;
+                    <aside class="xl-panel" data-xl-panel data-tbg="xl-panel" data-tbg-label="${esc(i18n('Panneau de droite'))}"></aside></div>
+                <div class="xl-bottom"><div class="xl-tabs" data-xl-tabs role="tablist" aria-label="${esc(i18n('Feuilles'))}"></div></div></div>`;
             document.body.appendChild(dlg);
             ext.fullInit?.(dlg, 'sheet', true);
             dlg.showModal();
@@ -253,12 +255,12 @@
             // K19 : la colonne d’outils (36 px, groupes séparés) ; K18 : la barre du bas commune (où l’on est · l’aide · le zoom) ;
             // K19 / E1 : les autres façons d’enregistrer dans « 💾 Enregistrer ▾ », seulement en haut
             U.editorRail?.(this.$('[data-xl-rail]'), {breaks: ['[data-xl-cmd="fn"]', '[data-xl-cmd="chart"]']});
-            const where = document.createElement('button'); where.type = 'button'; where.className = 'xl-where'; where.setAttribute('data-xl-status', ''); where.title = 'Clique pour choisir ce qu’on y voit (somme, moyenne…)';
+            const where = document.createElement('button'); where.type = 'button'; where.className = 'xl-where'; where.setAttribute('data-xl-status', ''); where.title = i18n('Clique pour choisir ce qu’on y voit (somme, moyenne…)');
             this.status = U.editorStatus({where, help: '', zoom: {get: () => this.zoom, set: k => this.setZoom(k), fit: () => this.zoomFit(), min: ZMIN, max: ZMAX}, wheel: this.wrap});
             this.$('.xl').appendChild(this.status);
             this.setZoom(this.zoom, false);
             const saveBtn = this.$('.ui-topbar [data-xl-cmd="save"]:not([role="menuitem"])');
-            U.saveMenu?.(saveBtn, () => [{icon: '⧉', label: this.ctx.back ? 'Enregistrer une copie dans le Tableur…' : 'Enregistrer une copie…', run: () => this.run('saveas')}, {icon: '📋', label: 'Enregistrer comme modèle…', run: () => this.run('savetpl')}, '-', {icon: '⤓', label: 'Exporter (XLSX, ODS, CSV, PDF…)…', shortcut: '⇧⌘E', run: () => this.run('export')}]);
+            U.saveMenu?.(saveBtn, () => [{icon: '⧉', label: this.ctx.back ? i18n('Enregistrer une copie dans le Tableur…') : i18n('Enregistrer une copie…'), run: () => this.run('saveas')}, {icon: '📋', label: i18n('Enregistrer comme modèle…'), run: () => this.run('savetpl')}, '-', {icon: '⤓', label: i18n('Exporter (XLSX, ODS, CSV, PDF…)…'), shortcut: '⇧⌘E', run: () => this.run('export')}]);
             this.buildPanel();
             this.bind();
             ext.tbApply?.(dlg, 'sheet');
@@ -285,7 +287,7 @@
             this.inner.style.width = `${RW + g.W}px`; this.inner.style.height = `${HH + g.H}px`;
             this.inner.classList.toggle('xl-nogrid', pref('grid', true) === false);
             this.win = null; this.paint(true); this.paintTabs(); this.paintStatus(); this.syncBar(); this.syncPanel(); this.syncTools();
-            this.vp.setAttribute('aria-label', `Feuille « ${sh.name} »`);
+            this.vp.setAttribute('aria-label', i18n('Feuille « {name} »', {name: sh.name}));
         },
         /** dessine les volets ; force : même si la fenêtre visible n'a pas changé */
         paint(force = false) {
@@ -307,7 +309,7 @@
             H.push(`<div class="xl-pane xl-p-colh" style="width:${RW + g.W}px;height:${HH}px">${colh.join('')}</div>`);
             H.push(`<div class="xl-pane xl-p-rowh" style="width:${RW}px;height:${HH + g.H}px">${rowh.join('')}</div>`);
             // le coin : coin, en-têtes des colonnes et lignes figées, cases figées des deux côtés
-            const corner = [`<div class="xl-corner" data-xl-corner title="Tout sélectionner" style="width:${RW}px;height:${HH}px"></div>`];
+            const corner = [`<div class="xl-corner" data-xl-corner title="${esc(i18n('Tout sélectionner'))}" style="width:${RW}px;height:${HH}px"></div>`];
             for (let c = 0; c < g.fc; c++) { const w = g.colX[c + 1] - g.colX[c]; if (w) corner.push(`<div class="xl-hc is-col${c >= sel.c0 && c <= sel.c1 ? ' is-sel' : ''}" style="left:${RW + g.colX[c]}px;top:0;width:${w}px;height:${HH}px">${X().colName(c)}${filt.has(c) ? '<span class="xl-flt">⚲</span>' : ''}</div>`); }
             for (let r = 0; r < g.fr; r++) { const h = g.rowY[r + 1] - g.rowY[r]; if (h) corner.push(`<div class="xl-hc is-row${r >= sel.r0 && r <= sel.r1 ? ' is-sel' : ''}" style="left:0;top:${HH + g.rowY[r]}px;width:${RW}px;height:${h}px">${r + 1}</div>`); }
             if (g.fr && g.fc) corner.push(this.cellsHtml(0, g.fr - 1, 0, g.fc - 1, RW, HH, ctx), this.overlay('corner', RW, HH));
@@ -368,9 +370,9 @@
                 if (st.bd) { const b = `${st.bs === 'thick' ? 2 : st.bs === 'double' ? 3 : 1}px ${st.bs === 'double' ? 'double' : 'solid'} ${S.safeCol(st.bc) || 'currentColor'}`; if (st.bd.includes('t')) css += `border-top:${b};`; if (st.bd.includes('b')) css += `border-bottom:${b};`; if (st.bd.includes('l')) css += `border-left:${b};`; if (st.bd.includes('r')) css += `border-right:${b};`; }
                 // une personne ou un lieu choisi avec le menu de choix
                 const dv = ctx.dv.find(d => r >= d.g.r0 && r <= d.g.r1 && c >= d.g.c0 && c <= d.g.c1);
-                if (cell?.ref) { const ini = String(raw || '?').split(/[\s-]+/).filter(Boolean).map(x => x[0]).join('').slice(0, 2).toUpperCase(); const icon = cell.ref.kind === 'place' ? '📍' : ini; inner += `<span class="xl-chip" data-xl-ref="${r}:${c}" title="Clic : ouvrir la fiche"><span class="xl-av${cell.ref.kind === 'place' ? ' is-place' : ''}">${esc(icon)}</span>${esc(txt)}</span>`; txt = ''; }
-                else if (dv && (dv.kind === 'person' || dv.kind === 'place') && raw != null && raw !== '' && !S.isFormula(raw)) { inner += `<span class="xl-chip is-free" title="Pas encore relié à une fiche"><span class="xl-av is-free">?</span>${esc(txt)}</span>`; txt = ''; }
-                else if (dv && (dv.kind === 'person' || dv.kind === 'place') && (raw == null || raw === '')) inner += `<span class="xl-pick">🔍 Choisir…</span>`;
+                if (cell?.ref) { const ini = String(raw || '?').split(/[\s-]+/).filter(Boolean).map(x => x[0]).join('').slice(0, 2).toUpperCase(); const icon = cell.ref.kind === 'place' ? '📍' : ini; inner += `<span class="xl-chip" data-xl-ref="${r}:${c}" title="${esc(i18n('Clic : ouvrir la fiche'))}"><span class="xl-av${cell.ref.kind === 'place' ? ' is-place' : ''}">${esc(icon)}</span>${esc(txt)}</span>`; txt = ''; }
+                else if (dv && (dv.kind === 'person' || dv.kind === 'place') && raw != null && raw !== '' && !S.isFormula(raw)) { inner += `<span class="xl-chip is-free" title="${esc(i18n('Pas encore relié à une fiche'))}"><span class="xl-av is-free">?</span>${esc(txt)}</span>`; txt = ''; }
+                else if (dv && (dv.kind === 'person' || dv.kind === 'place') && (raw == null || raw === '')) inner += `<span class="xl-pick">🔍 ${esc(i18n('Choisir…'))}</span>`;
                 if (dv?.kind === 'list') inner += '<span class="xl-dd" aria-hidden="true">▾</span>';
                 if (cell?.note) inner += '<span class="xl-note" aria-hidden="true"></span>';
                 const tip = cell?.note ? ` title="${esc(cell.note)}"` : S.isErr(v) ? ` title="${esc(S.explain(v))}"` : '';
@@ -408,7 +410,7 @@
             const m = this.mergeOf(this.act[0], this.act[1]) || {r0: this.act[0], c0: this.act[1], r1: this.act[0], c1: this.act[1]};
             out.push(box('xl-act', inPane(m.r0, m.c0, m.r1, m.c1)));
             const all = inPane(s.r0, s.c0, s.r1, s.c1);
-            if (all?.end && !this.edit) out.push(`<span class="xl-handle" data-xl-handle style="left:${all.x + all.w - 5}px;top:${all.y + all.h - 5}px" title="Tire pour recopier ou continuer une suite"></span>`);
+            if (all?.end && !this.edit) out.push(`<span class="xl-handle" data-xl-handle style="left:${all.x + all.w - 5}px;top:${all.y + all.h - 5}px" title="${esc(i18n('Tire pour recopier ou continuer une suite'))}"></span>`);
             return out.join('');
         },
         /** position d'une case à l'écran (dans .xl-vpwrap), en tenant compte des volets figés */
@@ -658,9 +660,9 @@
             if (S.isFormula(text)) { let d = 0, q = false; for (const ch of text) { if (ch === '"') q = !q; else if (!q && ch === '(') d++; else if (!q && ch === ')') d--; } if (d > 0 && d < 20 && !q) text += ')'.repeat(d); }
             const dv = this.dvAt(E.r, E.c, sh);
             if (text !== '' && dv && !S.isFormula(text)) { // validation
-                const bad = dv.kind === 'list' && dv.list?.length && !dv.allowFree && !dv.list.some(x => S.fold(x) === S.fold(text.trim())) ? `« ${text.trim()} » n’est pas dans la liste : ${dv.list.slice(0, 8).join(', ')}${dv.list.length > 8 ? '…' : ''}`
-                    : dv.kind === 'number' && (S.toNum(text) === null || (dv.min != null && S.toNum(text) < dv.min) || (dv.max != null && S.toNum(text) > dv.max)) ? `Il faut un nombre${dv.min != null ? ` d’au moins ${dv.min}` : ''}${dv.max != null ? ` et au plus ${dv.max}` : ''}.`
-                    : dv.kind === 'date' && (!S.readActDate(text) || S.readActDate(text).error) ? `Je ne comprends pas cette date (${S.readActDate(text)?.error || 'exemples : 7 mai 1925, vers 1784, an II'}).` : '';
+                const bad = dv.kind === 'list' && dv.list?.length && !dv.allowFree && !dv.list.some(x => S.fold(x) === S.fold(text.trim())) ? i18n('« {text} » n’est pas dans la liste : {list}', {text: text.trim(), list: dv.list.slice(0, 8).join(', ') + (dv.list.length > 8 ? '…' : '')})
+                    : dv.kind === 'number' && (S.toNum(text) === null || (dv.min != null && S.toNum(text) < dv.min) || (dv.max != null && S.toNum(text) > dv.max)) ? (dv.min != null && dv.max != null ? i18n('Il faut un nombre d’au moins {min} et au plus {max}.', {min: String(dv.min), max: String(dv.max)}) : dv.min != null ? i18n('Il faut un nombre d’au moins {min}.', {min: String(dv.min)}) : dv.max != null ? i18n('Il faut un nombre et au plus {max}.', {max: String(dv.max)}) : i18n('Il faut un nombre.'))
+                    : dv.kind === 'date' && (!S.readActDate(text) || S.readActDate(text).error) ? i18n('Je ne comprends pas cette date ({why}).', {why: S.readActDate(text)?.error || i18n('exemples : 7 mai 1925, vers 1784, an II')}) : '';
                 if (bad) { this.showHelp('err', `⛔ ${esc(bad)}`); (E.from === 'bar' ? this.fx : this.ed).focus(); return false; }
             }
             if (text !== E.orig || (text === '' && old)) {
@@ -729,7 +731,7 @@
         },
         paintAc() {
             const S = X(), w = this.acWord || '';
-            this.ac.innerHTML = `<div class="xl-ac-head"><span>${plural(this.acItems.length, 'fonction')}</span><span>Tab = compléter</span></div>` + this.acItems.map((n, i) => { const f = S.FN[n], cut = S.fold(n).toUpperCase().startsWith(S.fold(w).toUpperCase()) ? w.length : 0; return `<div class="xl-ac-item${i === this.acIdx ? ' is-on' : ''}" data-fn="${esc(n)}" role="option" aria-selected="${i === this.acIdx}"><b><mark>${esc(n.slice(0, cut))}</mark>${esc(n.slice(cut))}</b>${f.en && f.en !== n ? ` <small style="display:inline">· ${esc(f.en)}</small>` : ''}<small>${esc(f.desc)}</small></div>`; }).join('');
+            this.ac.innerHTML = `<div class="xl-ac-head"><span>${plural(this.acItems.length, 'fonction')}</span><span>${esc(i18n('Tab = compléter'))}</span></div>` + this.acItems.map((n, i) => { const f = S.FN[n], cut = S.fold(n).toUpperCase().startsWith(S.fold(w).toUpperCase()) ? w.length : 0; return `<div class="xl-ac-item${i === this.acIdx ? ' is-on' : ''}" data-fn="${esc(n)}" role="option" aria-selected="${i === this.acIdx}"><b><mark>${esc(n.slice(0, cut))}</mark>${esc(n.slice(cut))}</b>${f.en && f.en !== n ? ` <small style="display:inline">· ${esc(f.en)}</small>` : ''}<small>${esc(i18n(f.desc))}</small></div>`; }).join('');
             this.ac.querySelector('.is-on')?.scrollIntoView({block: 'nearest'});
         },
         pickFn(name) {
@@ -746,22 +748,22 @@
                 if (!v) return this.showHelp();
                 const d = /\d|\ban\s/i.test(v) && S.toNum(v) === null ? S.readActDate(v) : null;
                 if (d?.error) return this.showHelp('err', `⚠️ ${esc(d.error)}`);
-                if (d) return this.showHelp('ok', `✓ Compris comme une date d’acte : <b>${esc(d.label)}</b>${d.approx ? ' (approximative : les calculs montreront ≈)' : ''}`);
-                return this.showHelp('', 'Texte ou nombre. Commence par <b>=</b> pour calculer.');
+                if (d) return this.showHelp('ok', d.approx ? i18n('✓ Compris comme une date d’acte : <b>{date}</b> (approximative : les calculs montreront ≈)', {date: esc(d.label)}) : i18n('✓ Compris comme une date d’acte : <b>{date}</b>', {date: esc(d.label)}));
+                return this.showHelp('', i18n('Texte ou nombre. Commence par <b>=</b> pour calculer.'));
             }
             const before = v.slice(0, el.selectionStart), stack = []; let q = false;
             for (let i = 0; i < before.length; i++) { const ch = before[i]; if (ch === '"') q = !q; if (q) continue; if (ch === '(') { const m = /([A-Za-zÀ-ÿ][A-Za-zÀ-ÿ.]*)$/.exec(before.slice(0, i)); stack.push({name: m ? m[1] : '', arg: 0}); } else if (ch === ')') stack.pop(); else if ((ch === ';' || ch === ',') && stack.length) stack[stack.length - 1].arg++; }
             const top = stack[stack.length - 1], key = top && S.fnKey(top.name);
-            if (key) { const f = S.FN[key], sig = f.sig, inner = sig.slice(sig.indexOf('(') + 1, -1).split(';'); const parts = inner.map((p, i) => (i === Math.min(top.arg, inner.length - 1) ? `<u><b>${esc(p.trim())}</b></u>` : esc(p.trim()))); return this.showHelp('sig', `<span class="xl-sig">${esc(key)}(${parts.join(' ; ')})</span><span>— ${esc(f.desc)}</span><button type="button" class="link-button" data-xl-cmd="fnhelp:${esc(key)}">?</button>`); }
-            this.showHelp('sig', 'ƒ Formule : clique ou glisse sur des cellules pour les mettre, ou tape le nom d’une fonction (en français ou en anglais). <kbd>F4</kbd> : $A$1.');
+            if (key) { const f = S.FN[key], sig = f.sig, inner = sig.slice(sig.indexOf('(') + 1, -1).split(';'); const parts = inner.map((p, i) => (i === Math.min(top.arg, inner.length - 1) ? `<u><b>${esc(p.trim())}</b></u>` : esc(p.trim()))); return this.showHelp('sig', `<span class="xl-sig" data-i18n-off>${esc(key)}(${parts.join(' ; ')})</span><span>— ${esc(i18n(f.desc))}</span><button type="button" class="link-button" data-xl-cmd="fnhelp:${esc(key)}">?</button>`); }
+            this.showHelp('sig', i18n('ƒ Formule : clique ou glisse sur des cellules pour les mettre, ou tape le nom d’une fonction (en français ou en anglais). <kbd>F4</kbd> : $A$1.'));
         },
         showHelp(kind = '', html = null) {
             const h = this.help; h.className = `xl-help${kind ? ' is-' + kind : ''}`; h.hidden = false;
-            this.status?.setHelp(this.edit ? HELP_EDIT : HELP_GRID); // K18 : l’aide de l’outil au milieu de la barre du bas
+            this.status?.setHelp(this.edit ? HELP_EDIT() : HELP_GRID()); // K18 : l’aide de l’outil au milieu de la barre du bas
             if (html !== null) { h.innerHTML = html; return; }
             const S = X(), [r, c] = this.act, v = this.calc.val(this.si, r, c);
-            if (S.isErr(v)) { h.className = 'xl-help is-err'; h.innerHTML = `<b>⛔ ${esc(v.code)}</b> <span>→ ${esc(S.explain(v))}</span>${v.code === '#NOM?' && v.info?.sugg ? ` <button type="button" class="link-button" data-xl-cmd="fixname">Corriger en ${esc(v.info.sugg)}</button>` : ''}`; return; }
-            if (this.calc.isApprox(this.si, r, c)) { h.className = 'xl-help is-sig'; h.innerHTML = '≈ <span>Résultat approché : une des dates est approximative (« vers », « avant », « an … » sans jour).</span>'; return; }
+            if (S.isErr(v)) { h.className = 'xl-help is-err'; h.innerHTML = `<b>⛔ ${esc(v.code)}</b> <span>→ ${esc(S.explain(v))}</span>${v.code === '#NOM?' && v.info?.sugg ? ` <button type="button" class="link-button" data-xl-cmd="fixname">${i18n('Corriger en {name}', {name: esc(v.info.sugg)})}</button>` : ''}`; return; }
+            if (this.calc.isApprox(this.si, r, c)) { h.className = 'xl-help is-sig'; h.innerHTML = `≈ <span>${i18n('Résultat approché : une des dates est approximative (« vers », « avant », « an … » sans jour).')}</span>`; return; }
             h.innerHTML = ''; h.hidden = true; // rien à dire sur cette case : l’astuce est dans la barre du bas (K18)
         },
         /** la barre de formule et la case d'adresse suivent la case choisie */
@@ -777,8 +779,8 @@
             const named = !S.parseRange(ref) && Object.entries(this.wb.names || {}).find(([k]) => S.fold(k) === S.fold(ref));
             if (named) { m = /^(?:'((?:[^']|'')+)'|([^'!]+))!(.+)$/.exec(named[1]); sheet = m ? (m[1] || m[2]) : null; ref = m ? m[3] : named[1]; }
             const g = S.parseRange(String(ref).replace(/\$/g, ''));
-            if (!g) { if (/^[A-Za-zÀ-ÿ_][\wÀ-ÿ.]{0,60}$/.test(s)) { this.defineName(s); return; } return toast(`« ${s} » : ni une adresse (D12, B2:C9), ni un nom du classeur.`, 'error'); }
-            if (sheet) { const i = this.wb.sheets.findIndex(x => S.fold(x.name) === S.fold(sheet.replace(/''/g, "'"))); if (i < 0) return toast(`Pas de feuille « ${sheet} ».`, 'error'); if (i !== this.si) this.showSheet(i); }
+            if (!g) { if (/^[A-Za-zÀ-ÿ_][\wÀ-ÿ.]{0,60}$/.test(s)) { this.defineName(s); return; } return toast(i18n('« {text} » : ni une adresse (D12, B2:C9), ni un nom du classeur.', {text: s}), 'error'); }
+            if (sheet) { const i = this.wb.sheets.findIndex(x => S.fold(x.name) === S.fold(sheet.replace(/''/g, "'"))); if (i < 0) return toast(i18n('Pas de feuille « {name} ».', {name: sheet}), 'error'); if (i !== this.si) this.showSheet(i); }
             this.act = [g.r0, g.c0]; this.anchor = [g.r0, g.c0]; this.setSel(g.r0, g.c0, g.r1, g.c1, true); this.reveal(g.r0, g.c0); this.afterSel(); this.focusGrid();
         },
     });
@@ -812,7 +814,7 @@
                 case 'export': return this.exportDialog();
                 case 'print': return this.printDialog();
                 case 'settings': return this.settingsDialog();
-                case 'cut': case 'copy': return toast(`Utilise ${kbd(p === 'cut' ? '⌘X' : '⌘C')} dans la grille (le navigateur ne laisse pas un bouton écrire dans le presse-papiers).`);
+                case 'cut': case 'copy': return toast(i18n('Utilise {key} dans la grille (le navigateur ne laisse pas un bouton écrire dans le presse-papiers).', {key: kbd(p === 'cut' ? '⌘X' : '⌘C')}));
                 case 'paste': case 'pastevalues': return this.pasteFromButton(p === 'pastevalues');
                 case 'clear': return this.clearSel(false);
                 case 'clearall': return this.clearSel(true);
@@ -848,25 +850,25 @@
                 case 'bd': return this.styleSel((s, r, c, g) => { let b = s.bd || ''; if (arg === 'all') b = 'tblr'; else if (arg === 'none') b = ''; else if (arg === 'bottom') { if (r === g.r1) b += 'b'; } else if (arg === 'out') { if (r === g.r0) b += 't'; if (r === g.r1) b += 'b'; if (c === g.c0) b += 'l'; if (c === g.c1) b += 'r'; } b = [...new Set(b)].join(''); if (b) s.bd = b; else { delete s.bd; delete s.bs; } }, 'Bordures');
                 case 'color': return this.colorBox(arg, btn);
                 case 'font': return this.fontBox();
-                case 'fontsize': { const f = this.$('[data-xl-fs]'); if (f && f.offsetParent) { f.focus(); f.select?.(); return; } return A().askText({title: 'Taille du texte', message: 'En pixels (6 à 72) :', value: String(st.fs || 13), okLabel: 'Enregistrer'}).then(v => { if (v != null && String(v).trim() !== '') this.setFontSize(v); }); }
+                case 'fontsize': { const f = this.$('[data-xl-fs]'); if (f && f.offsetParent) { f.focus(); f.select?.(); return; } return A().askText({title: i18n('Taille du texte'), message: i18n('En pixels (6 à 72) :'), value: String(st.fs || 13), okLabel: i18n('Enregistrer')}).then(v => { if (v != null && String(v).trim() !== '') this.setFontSize(v); }); }
                 case 'zoom': return arg === 'fit' ? this.status?.zoom?.fit() : this.status?.zoom?.actual();
                 case 'merge': return this.toggleMerge();
                 case 'colwidth': case 'rowheight': return this.sizeDialog(p === 'colwidth');
                 case 'autofit': { const s = this.sel; this.begin('Largeur'); for (let c = s.c0; c <= Math.min(s.c1, s.c0 + 60); c++) this.autofit(c, true); this.commit(); return this.render(); }
-                case 'hiderows': case 'hidecols': { const s = this.selClip(), rows = p === 'hiderows'; this.begin('Masquer'); this.meta(sh); if (rows) for (let r = s.r0; r <= Math.min(s.r1, s.r0 + 5000); r++) sh.rows[String(r + 1)] = {...(sh.rows[String(r + 1)] || {}), hidden: true}; else for (let c = s.c0; c <= Math.min(s.c1, s.c0 + 500); c++) sh.cols[S.colName(c)] = {...(sh.cols[S.colName(c)] || {}), hidden: true}; const t = this.commit(); this.render(); return t && this.undoable(rows ? 'Lignes masquées (Format → Tout remontrer)' : 'Colonnes masquées (Format → Tout remontrer)', t); }
+                case 'hiderows': case 'hidecols': { const s = this.selClip(), rows = p === 'hiderows'; this.begin('Masquer'); this.meta(sh); if (rows) for (let r = s.r0; r <= Math.min(s.r1, s.r0 + 5000); r++) sh.rows[String(r + 1)] = {...(sh.rows[String(r + 1)] || {}), hidden: true}; else for (let c = s.c0; c <= Math.min(s.c1, s.c0 + 500); c++) sh.cols[S.colName(c)] = {...(sh.cols[S.colName(c)] || {}), hidden: true}; const t = this.commit(); this.render(); return t && this.undoable(rows ? i18n('Lignes masquées (Format → Tout remontrer)') : i18n('Colonnes masquées (Format → Tout remontrer)'), t); }
                 case 'showall': { this.begin('Tout remontrer'); this.meta(sh); Object.values(sh.rows).forEach(x => delete x.hidden); Object.values(sh.cols).forEach(x => delete x.hidden); this.commit(); return this.render(); }
                 case 'cf': return this.cfDialog();
                 case 'zebra': { this.begin('Une ligne sur deux'); this.meta(sh); if (sh.zebra) delete sh.zebra; else sh.zebra = true; this.commit(); return this.render(); }
                 case 'clearfmt': return this.styleSel(s => { Object.keys(s).forEach(k => delete s[k]); }, 'Mise en forme effacée');
                 case 'sortaz': case 'sortza': return this.quickSort(p === 'sortza');
-                case 'sortmenu': return UI().menuAt(btn, [{icon: '↕', label: 'Trier A → Z (sur la colonne choisie)', run: () => this.quickSort(false)}, {icon: '↕', label: 'Trier Z → A', run: () => this.quickSort(true)}, '-', {icon: '⚙️', label: 'Trier sur plusieurs colonnes…', run: () => this.sortDialog()}]);
-                case 'summenu': return UI().menuAt(btn, [['SOMME', 'Σ Somme'], ['MOYENNE', 'Moyenne'], ['NB', 'Nombre'], ['MIN', 'Minimum'], ['MAX', 'Maximum']].map(([f, l]) => ({label: l, run: () => this.autoFn(f)})));
+                case 'sortmenu': return UI().menuAt(btn, [{icon: '↕', label: i18n('Trier A → Z (sur la colonne choisie)'), run: () => this.quickSort(false)}, {icon: '↕', label: i18n('Trier Z → A'), run: () => this.quickSort(true)}, '-', {icon: '⚙️', label: i18n('Trier sur plusieurs colonnes…'), run: () => this.sortDialog()}]);
+                case 'summenu': return UI().menuAt(btn, [['SOMME', 'Σ Somme'], ['MOYENNE', 'Moyenne'], ['NB', 'Nombre'], ['MIN', 'Minimum'], ['MAX', 'Maximum']].map(([f, l]) => ({label: i18n(l), run: () => this.autoFn(f)})));
                 case 'sort': return this.sortDialog();
                 case 'filter': return this.toggleFilter();
                 case 'dedupe': return this.dedupeDialog();
                 case 'split': return this.splitDialog();
                 case 'validate': return this.validateDialog();
-                case 'trim': { const s = this.selClip(); this.begin('Espaces'); cellsOf(s).forEach(([r, c]) => { const k = S.addr(r, c), cell = sh.cells[k]; if (typeof cell?.v === 'string' && !S.isFormula(cell.v)) { const t = cell.v.replace(/\s+/g, ' ').trim(); if (t !== cell.v) this.put(sh, k, {...cell, v: t}); } }); const t = this.commit(); this.render(); return t ? toast('Espaces en trop retirés.') : toast('Rien à retirer.'); }
+                case 'trim': { const s = this.selClip(); this.begin('Espaces'); cellsOf(s).forEach(([r, c]) => { const k = S.addr(r, c), cell = sh.cells[k]; if (typeof cell?.v === 'string' && !S.isFormula(cell.v)) { const t = cell.v.replace(/\s+/g, ' ').trim(); if (t !== cell.v) this.put(sh, k, {...cell, v: t}); } }); const t = this.commit(); this.render(); return t ? toast(i18n('Espaces en trop retirés.')) : toast(i18n('Rien à retirer.')); }
                 case 'fz': { this.begin('Volets'); this.meta(sh); sh.freeze = arg === 'row' ? {r: 1, c: 0} : arg === 'col' ? {r: 0, c: 1} : arg === 'here' ? {r: this.act[0], c: this.act[1]} : {r: 0, c: 0}; this.commit(); this.vp.scrollTop = 0; this.vp.scrollLeft = 0; return this.render(); }
                 case 'panel': { const on = this.$('.xl-body').classList.toggle('no-panel'); setPrefs({...prefs(), panel: !on}); this.win = null; return this.render(); }
                 case 'formulas': this.showFormulas = !this.showFormulas; return this.render();
@@ -885,10 +887,10 @@
         /** E5 : la police des cellules choisies, par la liste unique des polices (UI.openFontPicker) */
         async fontBox() {
             const st = this.curStyle(), v = this.calc.val(this.si, ...this.act), sample = typeof v === 'string' && v.trim() ? v.trim().slice(0, 40) : 'Louise Borie, 1836';
-            const f = await UI().openFontPicker?.({value: st.font || '', sample, title: 'Police des cellules'});
+            const f = await UI().openFontPicker?.({value: st.font || '', sample, title: i18n('Police des cellules')});
             if (!f) return this.focusGrid();
             const name = String(f).replace(/["]/g, '').trim();
-            if (!/^[\w\s,'\-À-ÿ.]{1,60}$/.test(name)) return toast('Cette police a un nom que le tableur ne sait pas garder.', 'error');
+            if (!/^[\w\s,'\-À-ÿ.]{1,60}$/.test(name)) return toast(i18n('Cette police a un nom que le tableur ne sait pas garder.'), 'error');
             this.styleSel(s => { s.font = name; }, 'Police'); this.focusGrid();
         },
         /** la taille du texte des cellules choisies (6 à 72 px ; 13 = la taille de départ) */
@@ -897,8 +899,8 @@
             if (!Number.isFinite(n) || n < 6 || n > 72) { // K1 : la phrase sous la case, la taille d'avant gardée (jamais un message par essai)
                 const st = this.curStyle();
                 if (fsIn) fsIn.value = st.fs ? String(st.fs) : '';
-                if (shown && UI()?.fieldError) UI().fieldError(fsIn, `Une taille entre 6 et 72 px (« ${String(v ?? '').trim().slice(0, 12)} » ne va pas).`, {toastIfMissing: false});
-                else toast('Une taille entre 6 et 72 px.', 'error');
+                if (shown && UI()?.fieldError) UI().fieldError(fsIn, i18n('Une taille entre 6 et 72 px (« {value} » ne va pas).', {value: String(v ?? '').trim().slice(0, 12)}), {toastIfMissing: false});
+                else toast(i18n('Une taille entre 6 et 72 px.'), 'error');
                 return false;
             }
             if (fsIn) UI()?.clearFieldError?.(fsIn);
@@ -912,15 +914,15 @@
             const S = X(), sh = this.S(), s = this.sel, inter = (sh.merges || []).filter(m => { const g = S.parseRange(m); return g.r1 >= s.r0 && g.r0 <= s.r1 && g.c1 >= s.c0 && g.c0 <= s.c1; });
             this.begin('Fusion'); this.meta(sh);
             if (inter.length) { sh.merges = sh.merges.filter(m => !inter.includes(m)); this.commit(); return this.render(); }
-            if (s.r0 === s.r1 && s.c0 === s.c1) { this.commit(); return toast('Choisis d’abord plusieurs cases à fusionner.'); }
+            if (s.r0 === s.r1 && s.c0 === s.c1) { this.commit(); return toast(i18n('Choisis d’abord plusieurs cases à fusionner.')); }
             let lost = 0; cellsOf(s, 20000).forEach(([r, c]) => { if (r === s.r0 && c === s.c0) return; const k = S.addr(r, c); if (sh.cells[k]?.v != null) { lost++; this.put(sh, k, null); } });
             sh.merges = [...(sh.merges || []), S.rangeStr(s)];
             const t = this.commit(); this.render();
-            if (lost && t) this.undoable(`Cases fusionnées : ${plural(lost, 'valeur')} en plus de la première retirée${lost > 1 ? 's' : ''}`, t);
+            if (lost && t) this.undoable(i18n('Cases fusionnées : {n}', {n: plural(lost, 'valeur en plus de la première retirée', 'valeurs en plus de la première retirées')}), t);
         },
         sizeDialog(col) {
             const S = X(), sh = this.S(), s = this.sel, cur = col ? this.colW(s.c0) : this.rowH(s.r0);
-            A().askText({title: col ? 'Largeur de colonne' : 'Hauteur de ligne', message: `En pixels (${col ? '16 à 1200' : '12 à 600'}) :`, value: String(cur), okLabel: 'Enregistrer'}).then(v => {
+            A().askText({title: col ? i18n('Largeur de colonne') : i18n('Hauteur de ligne'), message: col ? i18n('En pixels (16 à 1200) :') : i18n('En pixels (12 à 600) :'), value: String(cur), okLabel: i18n('Enregistrer')}).then(v => {
                 const n = Math.round(Number(String(v ?? '').replace(',', '.'))); if (!v || !Number.isFinite(n)) return;
                 this.begin(col ? 'Largeur' : 'Hauteur'); this.meta(sh);
                 if (col) for (let c = s.c0; c <= Math.min(s.c1, s.c0 + 500); c++) sh.cols[S.colName(c)] = {...(sh.cols[S.colName(c)] || {}), w: Math.max(16, Math.min(1200, n))};
@@ -949,33 +951,33 @@
         },
         defineName(given) {
             const S = X(), ref = `${S.quoteSheet(this.S().name)}!${S.rangeStr(this.sel)}`;
-            const go = n => { n = String(n || '').trim(); if (!n) return; if (!/^[A-Za-zÀ-ÿ_][\wÀ-ÿ.]{0,60}$/.test(n) || S.parseAddr(n)) return toast('Un nom commence par une lettre, sans espace (ex. Total, Âges_1836).', 'error'); this.begin('Nom'); this.wb.names = {...(this.wb.names || {}), [n]: ref}; this.commit(); toast(`Nom « ${n} » = ${ref} : tape =SOMME(${n}) dans une formule.`); this.render(); };
+            const go = n => { n = String(n || '').trim(); if (!n) return; if (!/^[A-Za-zÀ-ÿ_][\wÀ-ÿ.]{0,60}$/.test(n) || S.parseAddr(n)) return toast(i18n('Un nom commence par une lettre, sans espace (ex. Total, Âges_1836).'), 'error'); this.begin('Nom'); this.wb.names = {...(this.wb.names || {}), [n]: ref}; this.commit(); toast(i18n('Nom « {name} » = {ref} : tape =SOMME({name}) dans une formule.', {name: n, ref})); this.render(); };
             if (given) return go(given);
-            A().askText({title: 'Nom pour la plage', message: `Un nom pour ${ref} (pour écrire =SOMME(Total) au lieu de =SOMME(D2:D40)) :`, value: '', okLabel: 'Enregistrer'}).then(go);
+            A().askText({title: i18n('Nom pour la plage'), message: i18n('Un nom pour {ref} (pour écrire =SOMME(Total) au lieu de =SOMME(D2:D40)) :', {ref}), value: '', okLabel: i18n('Enregistrer')}).then(go);
         },
         noteDialog() {
             const S = X(), sh = this.S(), k = S.addr(...this.act), cell = sh.cells[k];
-            A().askText({title: `💬 Note sur ${k}`, message: 'La note s’affiche au survol de la case (un petit coin orange). Vide = pas de note.', value: cell?.note || '', okLabel: 'Enregistrer'}).then(v => { if (v == null) return; this.begin('Note'); const n = {...(cell || {v: null})}; if (String(v).trim()) n.note = String(v).slice(0, 2000); else delete n.note; this.put(sh, k, n); this.commit(); this.render(); });
+            A().askText({title: i18n('💬 Note sur {cell}', {cell: k}), message: i18n('La note s’affiche au survol de la case (un petit coin orange). Vide = pas de note.'), value: cell?.note || '', okLabel: i18n('Enregistrer')}).then(v => { if (v == null) return; this.begin('Note'); const n = {...(cell || {v: null})}; if (String(v).trim()) n.note = String(v).slice(0, 2000); else delete n.note; this.put(sh, k, n); this.commit(); this.render(); });
         },
         keysDialog() {
             try { localStorage.setItem('genealogie-editor-shortcuts-tab', 'sheet'); } catch (_) {}
-            ext.openDialog({eyebrow: 'TABLEUR', title: '⌨️ Raccourcis du tableur', wide: true, body: '<div data-xl-keys></div>', onOpen: d => { const box = d.querySelector('[data-xl-keys]'); if (ext.editorKeysPanel) ext.editorKeysPanel(box); else box.innerHTML = A().empty('Raccourcis indisponibles.'); }});
+            ext.openDialog({eyebrow: i18n('TABLEUR'), title: i18n('⌨️ Raccourcis du tableur'), wide: true, body: '<div data-xl-keys></div>', onOpen: d => { const box = d.querySelector('[data-xl-keys]'); if (ext.editorKeysPanel) ext.editorKeysPanel(box); else box.innerHTML = A().empty(i18n('Raccourcis indisponibles.')); }});
         },
         /** K2 : les réglages du tableur sont gardés tout de suite (UI.autoSaveDialog) — pas de bouton « Enregistrer », « Fermer » seul,
          *  « ✓ Enregistré » en haut, message H7 « ↶ Annuler », « ↺ Remettre comme au départ » sans question */
         settingsDialog() {
             const p = prefs(), want = p.status || ['sum', 'avg', 'count'];
-            const tog = (k, l, on) => UI().toggleHtml ? UI().toggleHtml(l, {checked: on, attrs: `name="${k}"`}) : `<label class="ui-toggle"><input type="checkbox" name="${k}"${on ? ' checked' : ''}><i></i>${esc(l)}</label>`;
-            ext.openDialog({eyebrow: 'TABLEUR', title: '⚙️ Réglages du tableur', submitLabel: 'Fermer', body: `<div class="xl-set-top"><button type="button" class="link-button" data-ui-reset>↺ Remettre comme au départ</button></div><div class="form-grid">
-                <label>Après la touche Entrée, aller<select name="enter"><option value="down"${p.enter !== 'right' ? ' selected' : ''}>vers le bas</option><option value="right"${p.enter === 'right' ? ' selected' : ''}>vers la droite (saisie de relevés en ligne)</option></select></label>
-                <label>Séparateur des fichiers CSV<select name="csv"><option value=";"${(p.csv || ';') === ';' ? ' selected' : ''}>point-virgule « ; » (Excel en français)</option><option value=","${p.csv === ',' ? ' selected' : ''}>virgule « , »</option><option value="\t"${p.csv === '\t' ? ' selected' : ''}>tabulation</option></select></label>
-                <label>Largeur des colonnes d’une feuille neuve<input type="number" data-unit="px" name="colw" min="40" max="300" value="${esc(p.colw || DEF_W)}"></label>
+            const tog = (k, l0, on, l = i18n(l0)) => UI().toggleHtml ? UI().toggleHtml(l, {checked: on, attrs: `name="${k}"`}) : `<label class="ui-toggle"><input type="checkbox" name="${k}"${on ? ' checked' : ''}><i></i>${esc(l)}</label>`;
+            ext.openDialog({eyebrow: i18n('TABLEUR'), title: i18n('⚙️ Réglages du tableur'), submitLabel: i18n('Fermer'), body: `<div class="xl-set-top"><button type="button" class="link-button" data-ui-reset>${esc(i18n('↺ Remettre comme au départ'))}</button></div><div class="form-grid">
+                <label>${esc(i18n('Après la touche Entrée, aller'))}<select name="enter"><option value="down"${p.enter !== 'right' ? ' selected' : ''}>${esc(i18n('vers le bas'))}</option><option value="right"${p.enter === 'right' ? ' selected' : ''}>${esc(i18n('vers la droite (saisie de relevés en ligne)'))}</option></select></label>
+                <label>${esc(i18n('Séparateur des fichiers CSV'))}<select name="csv"><option value=";"${(p.csv || ';') === ';' ? ' selected' : ''}>${esc(i18n('point-virgule « ; » (Excel en français)'))}</option><option value=","${p.csv === ',' ? ' selected' : ''}>${esc(i18n('virgule « , »'))}</option><option value="\t"${p.csv === '\t' ? ' selected' : ''}>${esc(i18n('tabulation'))}</option></select></label>
+                <label>${esc(i18n('Largeur des colonnes d’une feuille neuve'))}<input type="number" data-unit="px" name="colw" min="40" max="300" value="${esc(p.colw || DEF_W)}"></label>
                 ${tog('grid', 'Quadrillage', p.grid !== false)}${tog('panel', 'Panneau de droite ouvert', p.panel !== false)}</div>
-                <fieldset class="xl-set-status"><legend>Dans la barre du bas, pour les cellules choisies</legend>${[['sum', 'Somme'], ['avg', 'Moyenne'], ['count', 'Nombre'], ['min', 'Minimum'], ['max', 'Maximum']].map(([k, l]) => `<label class="checkbox-line"><input type="checkbox" name="st_${k}"${want.includes(k) ? ' checked' : ''}> ${l}</label>`).join('')}</fieldset>`,
+                <fieldset class="xl-set-status"><legend>${esc(i18n('Dans la barre du bas, pour les cellules choisies'))}</legend>${[['sum', 'Somme'], ['avg', 'Moyenne'], ['count', 'Nombre'], ['min', 'Minimum'], ['max', 'Maximum']].map(([k, l]) => `<label class="checkbox-line"><input type="checkbox" name="st_${k}"${want.includes(k) ? ' checked' : ''}> ${esc(i18n(l))}</label>`).join('')}</fieldset>`,
                 onOpen: d => {
                     const save = () => { const f = d.querySelector('form'); if (!f) return; const q = {...prefs(), enter: f.elements.enter.value, csv: f.elements.csv.value, grid: f.elements.grid.checked, panel: f.elements.panel.checked, status: ['sum', 'avg', 'count', 'min', 'max'].filter(k => f.elements['st_' + k]?.checked)};
                         const w = Number(f.elements.colw.value); if (Number.isFinite(w) && w >= 40 && w <= 300) q.colw = Math.round(w); setPrefs(q); };
-                    UI().autoSaveDialog?.(d, {keys: [PREF_KEY], save, label: 'Réglages du tableur', reload: () => { d.close(); this.settingsDialog(); },
+                    UI().autoSaveDialog?.(d, {keys: [PREF_KEY], save, label: i18n('Réglages du tableur'), reload: () => { d.close(); this.settingsDialog(); },
                         reset: () => { const z = prefs().zoom; setPrefs(z && z !== 1 ? {zoom: z} : {}); }, onChange: () => this.applyPrefs()});
                 },
                 onSubmit: () => {}});
@@ -1019,7 +1021,7 @@
         /* ── lignes et colonnes insérées / supprimées : les formules suivent ── */
         shiftSheet(axis, at, n) {
             const S = X(), sh = this.S(), name = sh.name; if (!n) return;
-            if (n < 0 && axis === 'row' && -n > 100000 || n < 0 && axis === 'col' && -n > 5000) return toast('Trop de lignes ou de colonnes d’un coup.', 'error');
+            if (n < 0 && axis === 'row' && -n > 100000 || n < 0 && axis === 'col' && -n > 5000) return toast(i18n('Trop de lignes ou de colonnes d’un coup.'), 'error');
             const pos = p => { if (n > 0) return p >= at ? p + n : p; if (p >= at && p < at - n) return null; return p >= at - n ? p + n : p; };
             const adj = f => S.adjustFormula(f, {own: name, target: name, axis, at, n});
             this.begin(n > 0 ? 'Insertion' : 'Suppression');
@@ -1035,7 +1037,7 @@
             if (sh.filter) { const r = rng(sh.filter.range); if (r) sh.filter = {range: r}; else delete sh.filter; }
             Object.entries(this.wb.names || {}).forEach(([k, v]) => { const m = /^(?:'((?:[^']|'')+)'|([^'!]+))!(.+)$/.exec(v); if (m && S.fold((m[1] || m[2]).replace(/''/g, "'")) === S.fold(name)) { const r = rng(m[3]); if (r) this.wb.names[k] = `${S.quoteSheet(name)}!${r}`; else delete this.wb.names[k]; } });
             const t = this.commit(); this.hiddenRows.delete(sh.id); this.refreshFilter(); this.render();
-            if (t && n < 0) this.undoable(`${plural(-n, axis === 'row' ? 'ligne' : 'colonne')} supprimée${-n > 1 ? 's' : ''}`, t);
+            if (t && n < 0) this.undoable(axis === 'row' ? plural(-n, 'ligne supprimée', 'lignes supprimées') : plural(-n, 'colonne supprimée', 'colonnes supprimées'), t);
         },
 
         /* ── trier ── */
@@ -1061,12 +1063,12 @@
             rows.forEach((row, i) => { const to = r0 + i; for (let c = g.c0; c <= g.c1; c++) { const src = snap[S.addr(row.r, c)]; let cell = src ? {...src} : null; if (cell && S.isFormula(cell.v) && to !== row.r) cell.v = S.shiftFormula(cell.v, to - row.r, 0); const k = S.addr(to, c); if ((sh.cells[k] || null) !== (src || null) || to !== row.r) this.put(sh, k, cell); } });
             this.commit(); this.render();
         },
-        quickSort(desc) { const g = this.sortTarget(), c = this.act[1]; if (c < g.c0 || c > g.c1) return; this.sortRange(g, [{c, desc}], this.hasHeader(g)); toast(`Trié ${desc ? 'Z → A' : 'A → Z'} sur la colonne ${X().colName(c)}${this.hasHeader(g) ? ' (la 1re ligne, ce sont les titres)' : ''}.`); },
+        quickSort(desc) { const g = this.sortTarget(), c = this.act[1]; if (c < g.c0 || c > g.c1) return; this.sortRange(g, [{c, desc}], this.hasHeader(g)); toast(this.hasHeader(g) ? i18n('Trié {dir} sur la colonne {col} (la 1re ligne, ce sont les titres).', {dir: desc ? 'Z → A' : 'A → Z', col: X().colName(c)}) : i18n('Trié {dir} sur la colonne {col}.', {dir: desc ? 'Z → A' : 'A → Z', col: X().colName(c)})); },
         sortDialog() {
-            const S = X(), g = this.sortTarget(), header = this.hasHeader(g), cols = []; for (let c = g.c0; c <= g.c1; c++) cols.push([c, header ? S.toStr(this.calc.val(this.si, g.r0, c)) || S.colName(c) : `Colonne ${S.colName(c)}`]);
-            const sel = (n, v) => `<select name="k${n}"><option value="">—</option>${cols.map(([c, l]) => `<option value="${c}"${v === c ? ' selected' : ''}>${esc(l)}</option>`).join('')}</select><select name="d${n}"><option value="">A → Z (croissant)</option><option value="1">Z → A (décroissant)</option></select>`;
-            ext.openDialog({eyebrow: 'DONNÉES', title: 'Trier', submitLabel: 'Trier', body: `<p class="muted">Plage ${S.rangeStr(g)} · les dates d’actes (« vers 1784 », « an II ») se rangent à leur date.</p><label class="checkbox-line"><input type="checkbox" name="h"${header ? ' checked' : ''}> La première ligne, ce sont les titres</label><div class="field">Trier par ${sel(1, this.act[1])}</div><div class="field">Puis par ${sel(2)}</div><div class="field">Puis par ${sel(3)}</div>`,
-                onSubmit: f => { const keys = [1, 2, 3].map(i => ({c: f.elements['k' + i].value === '' ? null : Number(f.elements['k' + i].value), desc: !!f.elements['d' + i].value})).filter(x => x.c !== null); if (!keys.length) return UI().fail(f.elements.k1, 'Choisis au moins une colonne.'); this.sortRange(g, keys, f.elements.h.checked); }});
+            const S = X(), g = this.sortTarget(), header = this.hasHeader(g), cols = []; for (let c = g.c0; c <= g.c1; c++) cols.push([c, header ? S.toStr(this.calc.val(this.si, g.r0, c)) || S.colName(c) : i18n('Colonne {col}', {col: S.colName(c)})]);
+            const sel = (n, v) => `<select name="k${n}"><option value="">—</option>${cols.map(([c, l]) => `<option value="${c}"${v === c ? ' selected' : ''}>${esc(l)}</option>`).join('')}</select><select name="d${n}"><option value="">${esc(i18n('A → Z (croissant)'))}</option><option value="1">${esc(i18n('Z → A (décroissant)'))}</option></select>`;
+            ext.openDialog({eyebrow: i18n('DONNÉES'), title: i18n('Trier'), submitLabel: i18n('Trier'), body: `<p class="muted">${esc(i18n('Plage {range} · les dates d’actes (« vers 1784 », « an II ») se rangent à leur date.', {range: S.rangeStr(g)}))}</p><label class="checkbox-line"><input type="checkbox" name="h"${header ? ' checked' : ''}> ${esc(i18n('La première ligne, ce sont les titres'))}</label><div class="field">${esc(i18n('Trier par'))} ${sel(1, this.act[1])}</div><div class="field">${esc(i18n('Puis par'))} ${sel(2)}</div><div class="field">${esc(i18n('Puis par'))} ${sel(3)}</div>`,
+                onSubmit: f => { const keys = [1, 2, 3].map(i => ({c: f.elements['k' + i].value === '' ? null : Number(f.elements['k' + i].value), desc: !!f.elements['d' + i].value})).filter(x => x.c !== null); if (!keys.length) return UI().fail(f.elements.k1, i18n('Choisis au moins une colonne.')); this.sortRange(g, keys, f.elements.h.checked); }});
         },
 
         /* ── filtrer : la barre H10 au-dessus de la grille ── */
@@ -1074,7 +1076,7 @@
         toggleFilter() {
             const sh = this.S(); this.begin('Filtre'); this.meta(sh);
             if (sh.filter) { delete sh.filter; this.hiddenRows.delete(sh.id); }
-            else { const g = this.sel.r0 !== this.sel.r1 ? this.selClip() : this.region(); if (g.r1 <= g.r0) { this.commit(); return toast('Choisis un tableau avec une ligne de titres et des lignes en dessous.'); } sh.filter = {range: X().rangeStr(g)}; }
+            else { const g = this.sel.r0 !== this.sel.r1 ? this.selClip() : this.region(); if (g.r1 <= g.r0) { this.commit(); return toast(i18n('Choisis un tableau avec une ligne de titres et des lignes en dessous.')); } sh.filter = {range: X().rangeStr(g)}; }
             this.commit(); this.refreshFilter(); this.render();
         },
         refreshFilter() {
@@ -1083,13 +1085,13 @@
             box.innerHTML = ''; box.hidden = !g; if (!g) return;
             const cols = [], filters = [];
             for (let c = g.c0; c <= g.c1; c++) {
-                const label = S.toStr(this.calc.val(this.si, g.r0, c)) || `Colonne ${S.colName(c)}`, count = new Map();
+                const label = S.toStr(this.calc.val(this.si, g.r0, c)) || i18n('Colonne {col}', {col: S.colName(c)}), count = new Map();
                 for (let r = g.r0 + 1; r <= g.r1; r++) { const v = S.formatValue(this.calc.val(this.si, r, c), this.wb.styles[sh.cells[S.addr(r, c)]?.s] || {}); count.set(v, (count.get(v) || 0) + 1); }
-                const opts = [...count.entries()].sort((a, b) => b[1] - a[1]).slice(0, 40).map(([v, n]) => [v === '' ? '∅' : v, `${v === '' ? '(vide)' : v} (${n})`]);
-                cols.push([c, label]); if (opts.length > 1) filters.push({id: 'c' + c, label, type: 'check', options: opts, chip: v => `${label} : ${[].concat(v).map(x => (x === '∅' ? '(vide)' : x)).join(', ')}`});
+                const opts = [...count.entries()].sort((a, b) => b[1] - a[1]).slice(0, 40).map(([v, n]) => [v === '' ? '∅' : v, `${v === '' ? i18n('(vide)') : v} (${n})`]);
+                cols.push([c, label]); if (opts.length > 1) filters.push({id: 'c' + c, label, type: 'check', options: opts, chip: v => `${label} : ${[].concat(v).map(x => (x === '∅' ? i18n('(vide)') : x)).join(', ')}`});
             }
-            const bar = this.fbar = UI().listBar({key: `tableur:${this.id || 'nouveau'}:${sh.id}`, search: {placeholder: 'Chercher dans le tableau… (nom, métier)'}, filters,
-                sort: {options: [['', 'Dans l’ordre du tableau'], ...cols.flatMap(([c, l]) => [[`${c}:a`, `${l}, A → Z`], [`${c}:z`, `${l}, Z → A`]])], value: ''}, count: {n: 0, label: 'ligne'},
+            const bar = this.fbar = UI().listBar({key: `tableur:${this.id || 'nouveau'}:${sh.id}`, search: {placeholder: i18n('Chercher dans le tableau… (nom, métier)')}, filters,
+                sort: {options: [['', i18n('Dans l’ordre du tableau')], ...cols.flatMap(([c, l]) => [[`${c}:a`, `${l}, A → Z`], [`${c}:z`, `${l}, Z → A`]])], value: ''}, count: {n: 0, label: 'ligne'},
                 onChange: (st, {what} = {}) => { if (what === 'sort' && st.sort) { const [c, d] = st.sort.split(':'); this.sortRange(S.parseRange(sh.filter.range), [{c: Number(c), desc: d === 'z'}], true); } this.applyFilter(st); }});
             box.appendChild(bar); this.applyFilter(bar.state, false);
         },
@@ -1103,7 +1105,7 @@
                 if (ok) shown++; else hidden.add(r);
             }
             this.hiddenRows.set(sh.id, hidden); this.geo = null;
-            this.fbar?.setCount?.(`${plural(shown, 'ligne')} sur ${g.r1 - g.r0}`);
+            this.fbar?.setCount?.(i18n('{n} sur {total}', {n: plural(shown, 'ligne'), total: g.r1 - g.r0}));
             if (draw) this.render();
         },
 
@@ -1112,43 +1114,43 @@
             const S = X(), sh = this.S(), g = this.sortTarget(), header = this.hasHeader(g), r0 = g.r0 + (header ? 1 : 0);
             const cols = []; for (let c = g.c0; c <= g.c1; c++) cols.push([c, header ? S.toStr(this.calc.val(this.si, g.r0, c)) : `Colonne ${S.colName(c)}`]);
             const dups = keep => { const seen = new Set(), out = []; for (let r = r0; r <= g.r1; r++) { const k = keep.map(c => S.fold(S.toStr(this.calc.val(this.si, r, c)).trim())).join('\u0001'); if (seen.has(k)) out.push(r); else seen.add(k); } return out; };
-            ext.openDialog({eyebrow: 'DONNÉES', title: 'Supprimer les doublons', submitLabel: 'Supprimer les doublons',
-                body: `<p class="muted">Plage ${S.rangeStr(g)}${header ? ' · la 1re ligne, ce sont les titres' : ''}. La première ligne de chaque groupe reste.</p><div class="xl-cols">Compare les colonnes : ${cols.map(([c, l]) => `<label class="checkbox-line"><input type="checkbox" name="c${c}" checked> ${esc(l)}</label>`).join('')}</div><div data-xl-dn></div>`,
-                onOpen: d => { const upd = () => { const keep = cols.filter(([c]) => d.querySelector(`[name=c${c}]`).checked).map(([c]) => c), list = keep.length ? dups(keep) : []; d.querySelector('[data-xl-dn]').innerHTML = UI().notice(list.length ? 'info' : 'ok', list.length ? `${plural(list.length, 'ligne')} en double (ligne${list.length > 1 ? 's' : ''} ${list.slice(0, 12).map(r => r + 1).join(', ')}${list.length > 12 ? '…' : ''}).` : 'Aucune ligne en double.'); const b = d.querySelector('[type=submit]'); b.textContent = list.length ? `Supprimer ${plural(list.length, 'ligne')}` : 'Supprimer les doublons'; b.disabled = !list.length; }; d.addEventListener('change', upd); upd(); },
+            ext.openDialog({eyebrow: i18n('DONNÉES'), title: i18n('Supprimer les doublons'), submitLabel: i18n('Supprimer les doublons'),
+                body: `<p class="muted">${esc(header ? i18n('Plage {range} · la 1re ligne, ce sont les titres. La première ligne de chaque groupe reste.', {range: S.rangeStr(g)}) : i18n('Plage {range}. La première ligne de chaque groupe reste.', {range: S.rangeStr(g)}))}</p><div class="xl-cols">${esc(i18n('Compare les colonnes :'))} ${cols.map(([c, l]) => `<label class="checkbox-line"><input type="checkbox" name="c${c}" checked> ${esc(l)}</label>`).join('')}</div><div data-xl-dn></div>`,
+                onOpen: d => { const upd = () => { const keep = cols.filter(([c]) => d.querySelector(`[name=c${c}]`).checked).map(([c]) => c), list = keep.length ? dups(keep) : []; d.querySelector('[data-xl-dn]').innerHTML = UI().notice(list.length ? 'info' : 'ok', list.length ? (list.length > 1 ? i18n('{n} en double (lignes {rows}).', {n: plural(list.length, 'ligne'), rows: list.slice(0, 12).map(r => r + 1).join(', ') + (list.length > 12 ? '…' : '')}) : i18n('{n} en double (ligne {rows}).', {n: plural(list.length, 'ligne'), rows: String(list[0] + 1)})) : i18n('Aucune ligne en double.')); const b = d.querySelector('[type=submit]'); b.textContent = list.length ? i18n('Supprimer {n}', {n: plural(list.length, 'ligne')}) : i18n('Supprimer les doublons'); b.disabled = !list.length; }; d.addEventListener('change', upd); upd(); },
                 onSubmit: f => {
-                    const keep = cols.filter(([c]) => f.elements['c' + c].checked).map(([c]) => c); if (!keep.length) return UI().fail(f.elements['c' + cols[0][0]], 'Coche au moins une colonne.');
+                    const keep = cols.filter(([c]) => f.elements['c' + c].checked).map(([c]) => c); if (!keep.length) return UI().fail(f.elements['c' + cols[0][0]], i18n('Coche au moins une colonne.'));
                     const drop = new Set(dups(keep)); if (!drop.size) return;
                     this.begin('Doublons'); const snap = {}; for (let r = r0; r <= g.r1; r++) for (let c = g.c0; c <= g.c1; c++) snap[S.addr(r, c)] = sh.cells[S.addr(r, c)] || null;
                     let to = r0; for (let r = r0; r <= g.r1; r++) { if (drop.has(r)) continue; for (let c = g.c0; c <= g.c1; c++) { let cell = snap[S.addr(r, c)]; if (cell && S.isFormula(cell.v) && to !== r) cell = {...cell, v: S.shiftFormula(cell.v, to - r, 0)}; if (to !== r) this.put(sh, S.addr(to, c), cell ? {...cell} : null); } to++; }
                     for (let r = to; r <= g.r1; r++) for (let c = g.c0; c <= g.c1; c++) this.put(sh, S.addr(r, c), null);
-                    const t = this.commit(); this.render(); if (t) this.undoable(`${plural(drop.size, 'ligne')} en double supprimée${drop.size > 1 ? 's' : ''}`, t);
+                    const t = this.commit(); this.render(); if (t) this.undoable(plural(drop.size, 'ligne en double supprimée', 'lignes en double supprimées'), t);
                 }});
         },
         splitDialog() {
             const S = X(), sh = this.S(), s = this.selClip(), c = this.act[1], rows = [];
             for (let r = s.r0; r <= s.r1; r++) { const v = sh.cells[S.addr(r, c)]?.v; if (typeof v === 'string' && !S.isFormula(v)) rows.push([r, v]); }
-            if (!rows.length) return toast('Choisis des cases de texte dans une colonne (ex. « MARTIN Jean, 34 ans, laboureur »).');
+            if (!rows.length) return toast(i18n('Choisis des cases de texte dans une colonne (ex. « MARTIN Jean, 34 ans, laboureur »).'));
             let sep = ',';
             const cut = (v, f) => { let parts = sep === 'space' ? v.trim().split(/\s+/) : v.split(sep === 'tab' ? '\t' : sep === 'other' ? (f.elements.other.value || '|') : sep); parts = parts.map(x => x.trim()); if (f.elements.ans.checked) parts = parts.map(x => x.replace(/^(\d+)\s*ans?$/i, '$1')); if (f.elements.caps.checked && parts.length) { const m = /^((?:[A-ZÀ-Ý][A-ZÀ-Ý'’-]+\s*)+)\s+(.+)$/.exec(parts[0]); if (m) parts.splice(0, 1, m[1].trim(), m[2].trim()); } return parts; };
             const prev = f => { const data = rows.slice(0, 8).map(([, v]) => cut(v, f)), w = Math.max(...data.map(p => p.length)); return `<div class="xl-prev"><table><tbody>${data.map(p => `<tr>${Array.from({length: w}, (_, i) => `<td>${esc(p[i] ?? '')}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`; };
-            ext.openDialog({eyebrow: 'DONNÉES', title: 'Convertir le texte en colonnes', submitLabel: 'Convertir',
-                body: `<div class="field">Couper à :<div class="xl-seps">${[[',', ', virgule'], [';', '; point-virgule'], ['space', 'espace'], ['tab', 'tabulation'], ['other', 'Autre…']].map(([k, l]) => `<button type="button" class="button small secondary${k === ',' ? ' is-active' : ''}" data-sep="${k}">${esc(l)}</button>`).join('')}<input name="other" placeholder="|" maxlength="5" style="width:70px"></div></div>
-                    <label class="checkbox-line"><input type="checkbox" name="ans" checked> « 34 ans » devient 34</label><label class="checkbox-line"><input type="checkbox" name="caps" checked> Le nom en capitales devient une colonne à part (« MARTIN Jean » → MARTIN | Jean)</label><div data-xl-sp></div><p class="muted">Les morceaux vont dans la colonne ${S.colName(c)} et les suivantes (ce qui s’y trouve est remplacé ; ↶ pour revenir).</p>`,
+            ext.openDialog({eyebrow: i18n('DONNÉES'), title: i18n('Convertir le texte en colonnes'), submitLabel: i18n('Convertir'),
+                body: `<div class="field">${esc(i18n('Couper à :'))}<div class="xl-seps">${[[',', ', virgule'], [';', '; point-virgule'], ['space', 'espace'], ['tab', 'tabulation'], ['other', 'Autre…']].map(([k, l]) => `<button type="button" class="button small secondary${k === ',' ? ' is-active' : ''}" data-sep="${k}">${esc(i18n(l))}</button>`).join('')}<input name="other" placeholder="|" maxlength="5" style="width:70px"></div></div>
+                    <label class="checkbox-line"><input type="checkbox" name="ans" checked> ${esc(i18n('« 34 ans » devient 34'))}</label><label class="checkbox-line"><input type="checkbox" name="caps" checked> ${esc(i18n('Le nom en capitales devient une colonne à part (« MARTIN Jean » → MARTIN | Jean)'))}</label><div data-xl-sp></div><p class="muted">${esc(i18n('Les morceaux vont dans la colonne {col} et les suivantes (ce qui s’y trouve est remplacé ; ↶ pour revenir).', {col: S.colName(c)}))}</p>`,
                 onOpen: d => { const f = d.querySelector('form'), up = () => { d.querySelector('[data-xl-sp]').innerHTML = prev(f); }; d.addEventListener('click', e => { const b = e.target.closest('[data-sep]'); if (!b) return; sep = b.dataset.sep; d.querySelectorAll('[data-sep]').forEach(x => x.classList.toggle('is-active', x === b)); up(); }); d.addEventListener('input', up); d.addEventListener('change', up); up(); },
-                onSubmit: f => { this.begin('Texte en colonnes'); rows.forEach(([r, v]) => cut(v, f).forEach((part, i) => { const k = S.addr(r, c + i), old = sh.cells[k]; this.put(sh, k, {...(old || {}), v: S.parseInput(part).v}); })); const t = this.commit(); this.render(); if (t) this.undoable(`${plural(rows.length, 'ligne')} coupée${rows.length > 1 ? 's' : ''} en colonnes`, t); }});
+                onSubmit: f => { this.begin('Texte en colonnes'); rows.forEach(([r, v]) => cut(v, f).forEach((part, i) => { const k = S.addr(r, c + i), old = sh.cells[k]; this.put(sh, k, {...(old || {}), v: S.parseInput(part).v}); })); const t = this.commit(); this.render(); if (t) this.undoable(plural(rows.length, 'ligne coupée en colonnes', 'lignes coupées en colonnes'), t); }});
         },
         validateDialog() {
             const S = X(), sh = this.S(), s = this.sel.r1 - this.sel.r0 > 100000 ? this.selClip() : this.sel, range = S.rangeStr(s), cur = this.dvAt(...this.act);
-            ext.openDialog({eyebrow: 'DONNÉES', title: 'Validation des données', submitLabel: 'Enregistrer', onDelete: cur ? () => { this.begin('Validation'); this.meta(sh); sh.dv = sh.dv.filter(d => d !== cur); this.commit(); this.render(); } : null,
-                body: `<p class="muted">Pour ${esc(range)} : ce qu’on peut écrire dans ces cases.</p>
-                    <label class="field">Autoriser<select name="kind"><option value="list">Une liste de choix (menu ▾)</option><option value="person">👤 Une personne de la base (menu de choix)</option><option value="place">📍 Un lieu de la base (menu de choix)</option><option value="number">Un nombre entre…</option><option value="date">Une date d’acte (vers 1784, an II…)</option></select></label>
-                    <label class="field" data-k="list">Les choix (un par ligne)<textarea name="list" rows="5">${esc((cur?.list || []).join('\n'))}</textarea></label>
-                    <div data-k="number" class="field">Entre <input type="number" name="min" value="${esc(cur?.min ?? '')}" style="width:100px"> et <input type="number" name="max" value="${esc(cur?.max ?? '')}" style="width:100px"></div>
-                    <label class="checkbox-line" data-k="free"><input type="checkbox" name="free"${cur?.allowFree ? ' checked' : ''}> Garder aussi un texte libre (sans fiche, ou hors de la liste)</label>`,
+            ext.openDialog({eyebrow: i18n('DONNÉES'), title: i18n('Validation des données'), submitLabel: i18n('Enregistrer'), onDelete: cur ? () => { this.begin('Validation'); this.meta(sh); sh.dv = sh.dv.filter(d => d !== cur); this.commit(); this.render(); } : null,
+                body: `<p class="muted">${i18n('Pour {range} : ce qu’on peut écrire dans ces cases.', {range: esc(range)})}</p>
+                    <label class="field">${esc(i18n('Autoriser'))}<select name="kind"><option value="list">${esc(i18n('Une liste de choix (menu ▾)'))}</option><option value="person">${esc(i18n('👤 Une personne de la base (menu de choix)'))}</option><option value="place">${esc(i18n('📍 Un lieu de la base (menu de choix)'))}</option><option value="number">${esc(i18n('Un nombre entre…'))}</option><option value="date">${esc(i18n('Une date d’acte (vers 1784, an II…)'))}</option></select></label>
+                    <label class="field" data-k="list">${esc(i18n('Les choix (un par ligne)'))}<textarea name="list" rows="5">${esc((cur?.list || []).join('\n'))}</textarea></label>
+                    <div data-k="number" class="field">${esc(i18n('Entre'))} <input type="number" name="min" value="${esc(cur?.min ?? '')}" style="width:100px"> ${esc(i18n('et'))} <input type="number" name="max" value="${esc(cur?.max ?? '')}" style="width:100px"></div>
+                    <label class="checkbox-line" data-k="free"><input type="checkbox" name="free"${cur?.allowFree ? ' checked' : ''}> ${esc(i18n('Garder aussi un texte libre (sans fiche, ou hors de la liste)'))}</label>`,
                 onOpen: d => { const k = d.querySelector('[name=kind]'); if (cur) k.value = cur.kind; const up = () => { d.querySelectorAll('[data-k]').forEach(x => { x.hidden = !(x.dataset.k === k.value || (x.dataset.k === 'free' && ['list', 'person', 'place'].includes(k.value))); }); }; k.addEventListener('change', up); up(); },
                 onSubmit: f => {
                     const kind = f.elements.kind.value, d = {range, kind}; if (f.elements.free.checked) d.allowFree = true;
-                    if (kind === 'list') { d.list = f.elements.list.value.split('\n').map(x => x.trim()).filter(Boolean).slice(0, 300); if (!d.list.length) return UI().fail(f.elements.list, 'Écris au moins un choix.'); }
+                    if (kind === 'list') { d.list = f.elements.list.value.split('\n').map(x => x.trim()).filter(Boolean).slice(0, 300); if (!d.list.length) return UI().fail(f.elements.list, i18n('Écris au moins un choix.')); }
                     if (kind === 'number') { if (f.elements.min.value !== '') d.min = Number(f.elements.min.value); if (f.elements.max.value !== '') d.max = Number(f.elements.max.value); }
                     this.begin('Validation'); this.meta(sh); sh.dv = [...(sh.dv || []).filter(x => x.range !== range && x !== cur), d].slice(-60); this.commit(); this.render();
                 }});
@@ -1158,34 +1160,35 @@
             if (dv.kind === 'person' || dv.kind === 'place') return this.openPicker(dv.kind, '', dv.allowFree !== false);
             if (dv.kind !== 'list') return;
             const rc = this.cellRect(...this.act), box = this.vp.getBoundingClientRect();
-            const q = this.zq(); UI().menuAt({x: box.left + rc.x * q, y: box.top + (rc.y + rc.h) * q}, dv.list.map(v => ({label: v, run: () => { const sh = this.S(), k = S.addr(...this.act); this.begin('Choix'); this.put(sh, k, {...(sh.cells[k] || {}), v: S.parseInput(v).v}); this.commit(); this.render(); this.focusGrid(); }})), {title: 'Choisir'});
+            const q = this.zq(); UI().menuAt({x: box.left + rc.x * q, y: box.top + (rc.y + rc.h) * q}, dv.list.map(v => ({label: v, run: () => { const sh = this.S(), k = S.addr(...this.act); this.begin('Choix'); this.put(sh, k, {...(sh.cells[k] || {}), v: S.parseInput(v).v}); this.commit(); this.render(); this.focusGrid(); }})), {title: i18n('Choisir')});
         },
         cfDialog() {
             const S = X(), sh = this.S(), range = S.rangeStr(this.sel.r1 - this.sel.r0 > 100000 ? this.selClip() : this.sel);
-            const OPS = [['>', 'plus grande que'], ['<', 'plus petite que'], ['>=', 'au moins'], ['<=', 'au plus'], ['=', 'égale à'], ['<>', 'différente de'], ['between', 'entre'], ['contains', 'contient le texte'], ['empty', 'est vide'], ['notempty', 'n’est pas vide'], ['dup', 'est en double'], ['baddate', 'est une date impossible'], ['scale', 'barres dans la cellule']];
+            const OPS = [['>', 'plus grande que'], ['<', 'plus petite que'], ['>=', 'au moins'], ['<=', 'au plus'], ['=', 'égale à'], ['<>', 'différente de'], ['between', 'entre'], ['contains', 'contient le texte'], ['empty', 'est vide'], ['notempty', 'n’est pas vide'], ['dup', 'est en double'], ['baddate', 'est une date impossible'], ['scale', 'barres dans la cellule']].map(([k, l]) => [k, i18n(l)]);
             const FILLS = [['#fff1a8', 'Jaune'], ['#ffd6d6', 'Rouge'], ['#d8f3dc', 'Vert'], ['#dbe8ff', 'Bleu'], ['#ffe2bf', 'Orange'], ['#ead9ff', 'Violet']];
-            ext.openDialog({eyebrow: 'FORMAT', title: 'Mise en forme conditionnelle', submitLabel: 'Ajouter la règle', wide: true,
-                body: `<p class="muted">Une couleur quand la valeur le demande : l’erreur ou la valeur étrange saute aux yeux.</p>
-                    <div class="xl-cols">Prêtes à l’emploi : <button type="button" class="button small secondary" data-pre="age">« âge > 100 ans »</button><button type="button" class="button small secondary" data-pre="bad">« date impossible »</button><button type="button" class="button small secondary" data-pre="dup">« doublons »</button><button type="button" class="button small secondary" data-pre="bars">« barres »</button></div>
-                    <label class="field">Plage<input name="range" value="${esc(range)}" required></label>
-                    <div class="field">Si la valeur <select name="op">${OPS.map(([k, l]) => `<option value="${k}">${esc(l)}</option>`).join('')}</select> <input name="v" style="width:120px"> <span data-two hidden>et <input name="v2" style="width:120px"></span></div>
-                    <div class="field">alors <select name="fill">${FILLS.map(([c, l]) => `<option value="${c}">fond ${esc(l.toLowerCase())}</option>`).join('')}</select> <label class="checkbox-line" style="display:inline-flex"><input type="checkbox" name="b"> en gras</label></div>`,
+            const FILL_TXT = {Jaune: 'fond jaune', Rouge: 'fond rouge', Vert: 'fond vert', Bleu: 'fond bleu', Orange: 'fond orange', Violet: 'fond violet'};
+            ext.openDialog({eyebrow: i18n('FORMAT'), title: i18n('Mise en forme conditionnelle'), submitLabel: i18n('Ajouter la règle'), wide: true,
+                body: `<p class="muted">${esc(i18n('Une couleur quand la valeur le demande : l’erreur ou la valeur étrange saute aux yeux.'))}</p>
+                    <div class="xl-cols">${esc(i18n('Prêtes à l’emploi :'))} <button type="button" class="button small secondary" data-pre="age">${esc(i18n('« âge > 100 ans »'))}</button><button type="button" class="button small secondary" data-pre="bad">${esc(i18n('« date impossible »'))}</button><button type="button" class="button small secondary" data-pre="dup">${esc(i18n('« doublons »'))}</button><button type="button" class="button small secondary" data-pre="bars">${esc(i18n('« barres »'))}</button></div>
+                    <label class="field">${esc(i18n('Plage'))}<input name="range" value="${esc(range)}" required></label>
+                    <div class="field">${esc(i18n('Si la valeur'))} <select name="op">${OPS.map(([k, l]) => `<option value="${k}">${esc(l)}</option>`).join('')}</select> <input name="v" style="width:120px"> <span data-two hidden>${esc(i18n('et'))} <input name="v2" style="width:120px"></span></div>
+                    <div class="field">${esc(i18n('alors'))} <select name="fill">${FILLS.map(([c, l]) => `<option value="${c}">${esc(i18n(FILL_TXT[l]))}</option>`).join('')}</select> <label class="checkbox-line" style="display:inline-flex"><input type="checkbox" name="b"> ${esc(i18n('en gras'))}</label></div>`,
                 onOpen: d => { const f = d.querySelector('form'), up = () => { const op = f.elements.op.value; d.querySelector('[data-two]').hidden = op !== 'between'; f.elements.v.hidden = ['empty', 'notempty', 'dup', 'baddate', 'scale'].includes(op); };
                     f.elements.op.addEventListener('change', up); up();
                     d.addEventListener('click', e => { const b = e.target.closest('[data-pre]'); if (!b) return; const p = {age: ['>', '100', '#fff1a8'], bad: ['baddate', '', '#ffd6d6'], dup: ['dup', '', '#ffe2bf'], bars: ['scale', '', '#dbe8ff']}[b.dataset.pre]; f.elements.op.value = p[0]; f.elements.v.value = p[1]; f.elements.fill.value = p[2]; up(); }); },
-                onSubmit: f => { const g = S.parseRange(f.elements.range.value); if (!g) return UI().fail(f.elements.range, 'Une plage comme D2:D40.'); const op = f.elements.op.value; if (['>', '<', '>=', '<=', 'between'].includes(op) && S.toNum(f.elements.v.value) === null) return UI().fail(f.elements.v, 'Écris un nombre.');
+                onSubmit: f => { const g = S.parseRange(f.elements.range.value); if (!g) return UI().fail(f.elements.range, i18n('Une plage comme D2:D40.')); const op = f.elements.op.value; if (['>', '<', '>=', '<=', 'between'].includes(op) && S.toNum(f.elements.v.value) === null) return UI().fail(f.elements.v, i18n('Écris un nombre.'));
                     this.begin('Règle'); this.meta(sh); sh.cf = [...(sh.cf || []), {range: S.rangeStr(g), op, v: f.elements.v.value, v2: f.elements.v2.value, style: {fill: f.elements.fill.value, color: '', b: f.elements.b.checked ? 1 : 0}}].slice(-60); this.commit(); this.render(); }});
         },
         findDialog() {
             const S = X();
-            ext.openDialog({eyebrow: 'ÉDITION', title: '🔍 Rechercher et remplacer', submitLabel: 'Remplacer tout',
-                body: `<label class="field">Chercher<input name="q" type="text" required data-ui-off></label><label class="field">Remplacer par<input name="to" type="text"></label><label class="checkbox-line"><input type="checkbox" name="all"> Dans toutes les feuilles</label><label class="checkbox-line"><input type="checkbox" name="case"> Respecter les capitales</label><button type="button" class="button small secondary" data-next>Chercher le suivant</button> <span class="muted" data-found></span>`,
-                onOpen: d => { const f = d.querySelector('form'); d.querySelector('[data-next]').addEventListener('click', () => { const hit = this.findNext(f.elements.q.value, f.elements.case.checked, f.elements.all.checked); d.querySelector('[data-found]').textContent = hit ? `Trouvé en ${hit}` : 'Rien trouvé.'; }); },
+            ext.openDialog({eyebrow: i18n('ÉDITION'), title: i18n('🔍 Rechercher et remplacer'), submitLabel: i18n('Remplacer tout'),
+                body: `<label class="field">${esc(i18n('Chercher'))}<input name="q" type="text" required data-ui-off></label><label class="field">${esc(i18n('Remplacer par'))}<input name="to" type="text"></label><label class="checkbox-line"><input type="checkbox" name="all"> ${esc(i18n('Dans toutes les feuilles'))}</label><label class="checkbox-line"><input type="checkbox" name="case"> ${esc(i18n('Respecter les capitales'))}</label><button type="button" class="button small secondary" data-next>${esc(i18n('Chercher le suivant'))}</button> <span class="muted" data-found></span>`,
+                onOpen: d => { const f = d.querySelector('form'); d.querySelector('[data-next]').addEventListener('click', () => { const hit = this.findNext(f.elements.q.value, f.elements.case.checked, f.elements.all.checked); d.querySelector('[data-found]').textContent = hit ? i18n('Trouvé en {cell}', {cell: hit}) : i18n('Rien trouvé.'); }); },
                 onSubmit: f => {
-                    const q = f.elements.q.value; if (!q) return UI().fail(f.elements.q, 'Écris ce qu’il faut chercher.');
+                    const q = f.elements.q.value; if (!q) return UI().fail(f.elements.q, i18n('Écris ce qu’il faut chercher.'));
                     const rx = new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), f.elements.case.checked ? 'g' : 'gi'); let n = 0;
                     this.begin('Remplacer'); (f.elements.all.checked ? this.wb.sheets : [this.S()]).forEach(sh => { for (const k in sh.cells) { const v = sh.cells[k]?.v; if (typeof v === 'string' && rx.test(v)) { rx.lastIndex = 0; const w = v.replace(rx, f.elements.to.value); if (w !== v) { n++; this.put(sh, k, {...sh.cells[k], v: w}); } } rx.lastIndex = 0; } });
-                    const t = this.commit(); this.render(); if (t) this.undoable(`${plural(n, 'case')} modifiée${n > 1 ? 's' : ''}`, t); else toast('Rien à remplacer.');
+                    const t = this.commit(); this.render(); if (t) this.undoable(plural(n, 'case modifiée', 'cases modifiées'), t); else toast(i18n('Rien à remplacer.'));
                 }});
         },
         findNext(q, cs, all) {
@@ -1197,18 +1200,18 @@
         },
         fnDialog(focus = '') {
             const S = X(), fams = [...new Set(Object.values(S.FN).map(f => f.fam))];
-            const list = q => { const w = S.fold(q); return fams.map(fam => { const items = Object.values(S.FN).filter(f => f.fam === fam && (!w || S.fold(`${f.name} ${f.en} ${f.desc}`).includes(w))); return items.length ? `<div class="xl-fam">${esc(fam)}</div>${items.map(f => `<button type="button" data-fn="${esc(f.name)}"><b>${esc(f.sig)}</b>${f.en ? ` <span class="muted">· ${esc(f.en)}</span>` : ''}<small>${esc(f.desc)}</small></button>`).join('')}` : ''; }).join('') || A().empty('Aucune fonction ne correspond.'); };
-            ext.openDialog({eyebrow: 'INSERTION', title: 'ƒ Choisir une fonction', body: `<input type="search" name="q" placeholder="Chercher… (âge, somme, recherche)" value="${esc(focus)}"><div class="xl-fnlist" data-fl>${list(focus)}</div>`,
+            const list = q => { const w = S.fold(q); return fams.map(fam => { const items = Object.values(S.FN).filter(f => f.fam === fam && (!w || S.fold(`${f.name} ${f.en} ${f.desc} ${i18n(f.desc)}`).includes(w))); return items.length ? `<div class="xl-fam">${esc(i18n(fam))}</div>${items.map(f => `<button type="button" data-fn="${esc(f.name)}"><b data-i18n-off>${esc(f.sig)}</b>${f.en ? ` <span class="muted">· ${esc(f.en)}</span>` : ''}<small>${esc(i18n(f.desc))}</small></button>`).join('')}` : ''; }).join('') || A().empty(i18n('Aucune fonction ne correspond.')); };
+            ext.openDialog({eyebrow: i18n('INSERTION'), title: i18n('ƒ Choisir une fonction'), body: `<input type="search" name="q" placeholder="${esc(i18n('Chercher… (âge, somme, recherche)'))}" value="${esc(focus)}"><div class="xl-fnlist" data-fl>${list(focus)}</div>`,
                 onOpen: d => { d.querySelector('[name=q]').addEventListener('input', e => { d.querySelector('[data-fl]').innerHTML = list(e.target.value); }); d.addEventListener('click', e => { const b = e.target.closest('[data-fn]'); if (!b) return; d.close(); if (this.edit) { const el = this.edit.from === 'bar' ? this.fx : this.ed; el.focus(); el.setRangeText(b.dataset.fn + '(', el.selectionStart, el.selectionEnd, 'end'); el.dispatchEvent(new Event('input')); } else this.startEdit('=' + b.dataset.fn + '('); }); }});
         },
 
         /* ── une personne ou un lieu dans une cellule : le menu de choix unique (pickerField), tel quel ── */
         openPicker(kind, initial = '', allowFree = true) {
             this.closePicker();
-            const P = window.LCNDA_PICKER || A(); if (!P?.pickerField) return toast('Le menu de choix n’est pas chargé.', 'error');
+            const P = window.LCNDA_PICKER || A(); if (!P?.pickerField) return toast(i18n('Le menu de choix n’est pas chargé.'), 'error');
             const S = X(), [r, c] = this.act, k = S.addr(r, c), rc = this.cellRect(r, c), wrap = this.$('.xl-vpwrap');
             const box = this.pickBox = document.createElement('div'); box.className = 'xl-pickbox';
-            box.innerHTML = `<div class="xl-pick-h"><span>${kind === 'place' ? '📍 Un lieu' : '👤 Une personne'} pour ${esc(k)}</span><button type="button" class="icon-button small" data-xl-pickx aria-label="Fermer">×</button></div>${P.pickerField({name: '', hiddenName: false, kind, allowFree, inline: true})}`;
+            box.innerHTML = `<div class="xl-pick-h"><span>${kind === 'place' ? i18n('📍 Un lieu pour {cell}', {cell: esc(k)}) : i18n('👤 Une personne pour {cell}', {cell: esc(k)})}</span><button type="button" class="icon-button small" data-xl-pickx aria-label="${esc(i18n('Fermer'))}">×</button></div>${P.pickerField({name: '', hiddenName: false, kind, allowFree, inline: true})}`;
             box.style.left = `${Math.max(4, Math.min(rc.x, wrap.clientWidth - 370))}px`; box.style.top = `${Math.max(4, Math.min(rc.y + rc.h, wrap.clientHeight - 60))}px`;
             wrap.appendChild(box);
             box.addEventListener('click', e => { if (e.target.closest('[data-xl-pickx]')) this.closePicker(); });
@@ -1231,30 +1234,30 @@
     const OPL = {'>': 'plus grande que', '<': 'plus petite que', '>=': 'au moins', '<=': 'au plus', '=': 'égale à', '<>': 'différente de', between: 'entre', contains: 'contient', empty: 'vide', notempty: 'pas vide', dup: 'en double', baddate: 'date impossible', scale: 'barres'};
     Object.assign(Editor.prototype, {
         buildPanel() {
-            const U = UI(), sec = (key, title, body, open = true) => U.panelSection({title, key: 'xl-' + key, open, body}).replace('<details', `<details data-tb="${key}" data-tb-label="${esc(title)}"`);
+            const U = UI(), sec = (key, title, body, open = true) => U.panelSection({title: i18n(title), key: 'xl-' + key, open, body}).replace('<details', `<details data-tb="${key}" data-tb-label="${esc(i18n(title))}"`);
             this.$('[data-xl-panel]').innerHTML = sec('cell', 'Cellule', '<div data-xl-p="cell"></div>') + sec('num', 'Nombre et date', '<div data-xl-p="num"></div>') + sec('color', 'Couleur et bordures', '<div data-xl-p="color"></div>', false) + sec('cf', 'Mise en forme conditionnelle', '<div data-xl-p="cf"></div>') + sec('dv', 'Validation', '<div data-xl-p="dv"></div>', false);
         },
         syncPanel() {
             const P = s => this.$(`[data-xl-p="${s}"]`); if (!P('cell')) return;
             const S = X(), sh = this.S(), [r, c] = this.act, k = S.addr(r, c), cell = sh.cells[k], raw = cell?.v ?? null, v = this.calc.val(this.si, r, c), st = this.wb.styles[cell?.s] || {};
-            const row = (l, h) => `<div class="xl-r"><span>${esc(l)}</span><span>${h}</span></div>`;
-            P('cell').innerHTML = row('Adresse', `<b>${esc(sh.name)} ! ${esc(k)}</b>`) + row('Valeur', esc(v == null ? '—' : S.formatValue(v, st, {approx: this.calc.isApprox(this.si, r, c)}))) + row('Formule', S.isFormula(raw) ? `<code>${esc(raw)}</code>` : '—') + row('Sorte', esc(cell?.ref ? (cell.ref.kind === 'place' ? '📍 Lieu de la base' : '👤 Personne de la base') : S.kindOf(raw, v)))
+            const row = (l, h) => `<div class="xl-r"><span>${esc(i18n(l))}</span><span>${h}</span></div>`;
+            P('cell').innerHTML = row('Adresse', `<b>${esc(sh.name)} ! ${esc(k)}</b>`) + row('Valeur', esc(v == null ? '—' : S.formatValue(v, st, {approx: this.calc.isApprox(this.si, r, c)}))) + row('Formule', S.isFormula(raw) ? `<code>${esc(raw)}</code>` : '—') + row('Sorte', esc(cell?.ref ? (cell.ref.kind === 'place' ? i18n('📍 Lieu de la base') : i18n('👤 Personne de la base')) : i18n(S.kindOf(raw, v))))
                 + (S.isErr(v) ? `<p class="xl-help is-err" style="margin:6px 0 0">${esc(S.explain(v))}</p>` : '') + (cell?.note ? row('Note', esc(cell.note)) : '')
-                + (cell?.ref ? `<button type="button" class="button small secondary" data-xl-pcmd="openref">↗ ${cell.ref.kind === 'place' ? 'Lieu' : 'Fiche'}</button>` : '');
+                + (cell?.ref ? `<button type="button" class="button small secondary" data-xl-pcmd="openref">↗ ${esc(cell.ref.kind === 'place' ? i18n('Lieu') : i18n('Fiche'))}</button>` : '');
             const dateOk = typeof raw === 'string' && /\d|\ban\s/i.test(raw) && !S.isFormula(raw) ? S.readActDate(raw) : null;
-            P('num').innerHTML = row('Format', `<select data-xl-pfmt aria-label="Format">${FORMATS.map(([f, l]) => `<option value="${f}"${(st.fmt || '') === f ? ' selected' : ''}>${esc(l)}</option>`).join('')}</select>`) + row('Décimales', `<input type="number" min="0" max="10" data-xl-pdec value="${Number.isInteger(st.dec) ? st.dec : ''}" placeholder="auto" aria-label="Décimales">`)
-                + (dateOk ? row('Date d’acte', dateOk.error ? `⚠️ ${esc(dateOk.error)}` : `✓ « ${esc(raw)} » est comprise${dateOk.approx ? ' (≈)' : ''}`) : '');
+            P('num').innerHTML = row('Format', `<select data-xl-pfmt aria-label="${esc(i18n('Format'))}">${FORMATS.map(([f, l]) => `<option value="${f}"${(st.fmt || '') === f ? ' selected' : ''}>${esc(i18n(l))}</option>`).join('')}</select>`) + row('Décimales', `<input type="number" min="0" max="10" data-xl-pdec value="${Number.isInteger(st.dec) ? st.dec : ''}" placeholder="${esc(i18n('auto'))}" aria-label="${esc(i18n('Décimales'))}">`)
+                + (dateOk ? row('Date d’acte', dateOk.error ? `⚠️ ${esc(i18n(dateOk.error))}` : dateOk.approx ? i18n('✓ « {text} » est comprise (≈)', {text: esc(raw)}) : i18n('✓ « {text} » est comprise', {text: esc(raw)})) : '');
             const sw = c2 => `<span class="xl-sw" style="display:inline-block;width:14px;height:14px;vertical-align:middle;border:1.5px solid currentColor;${c2 ? `background:${S.safeCol(c2)}` : 'background:repeating-linear-gradient(45deg,transparent 0 3px,#999 3px 4px)'}"></span>`;
-            P('color').innerHTML = row('Texte', `<button type="button" class="button small secondary" data-xl-cmd="color:color">${sw(st.color || '#000000')} ${esc(st.color || 'Noir')}</button>`) + row('Fond', `<button type="button" class="button small secondary" data-xl-cmd="color:fill">${sw(st.fill)} ${esc(st.fill || 'Aucune')}</button>`)
-                + row('Bordures', `<span class="xl-bd"><button type="button" class="icon-button small" data-xl-cmd="bd:all" title="Tout">▦</button><button type="button" class="icon-button small" data-xl-cmd="bd:out" title="Contour">▭</button><button type="button" class="icon-button small" data-xl-cmd="bd:bottom" title="En bas">▁</button><button type="button" class="icon-button small" data-xl-cmd="bd:none" title="Aucune">⊘</button></span>`);
-            P('cf').innerHTML = ((sh.cf || []).map((x, i) => `<div class="xl-rule"><span class="xl-sw" style="background:${S.safeCol(x.style?.fill) || 'transparent'}"></span><span>${esc(x.range)} : ${esc(OPL[x.op] || x.op)}${x.v !== '' && !['empty', 'notempty', 'dup', 'baddate', 'scale'].includes(x.op) ? ' ' + esc(x.v) : ''}${x.op === 'between' ? ' et ' + esc(x.v2) : ''}</span><button type="button" class="icon-button small" data-xl-pcmd="cfdel:${i}" title="Retirer la règle" aria-label="Retirer la règle">✕</button></div>`).join('') || A().empty('Aucune règle sur cette feuille.', {icon: '🎨'})) + '<button type="button" class="button small secondary" data-xl-cmd="cf">＋ Ajouter une règle…</button>';
+            P('color').innerHTML = row('Texte', `<button type="button" class="button small secondary" data-xl-cmd="color:color">${sw(st.color || '#000000')} ${esc(st.color || i18n('Noir'))}</button>`) + row('Fond', `<button type="button" class="button small secondary" data-xl-cmd="color:fill">${sw(st.fill)} ${esc(st.fill || i18n('Aucune'))}</button>`)
+                + row('Bordures', `<span class="xl-bd"><button type="button" class="icon-button small" data-xl-cmd="bd:all" title="${esc(i18n('Tout'))}">▦</button><button type="button" class="icon-button small" data-xl-cmd="bd:out" title="${esc(i18n('Contour'))}">▭</button><button type="button" class="icon-button small" data-xl-cmd="bd:bottom" title="${esc(i18n('En bas'))}">▁</button><button type="button" class="icon-button small" data-xl-cmd="bd:none" title="${esc(i18n('Aucune'))}">⊘</button></span>`);
+            P('cf').innerHTML = ((sh.cf || []).map((x, i) => `<div class="xl-rule"><span class="xl-sw" style="background:${S.safeCol(x.style?.fill) || 'transparent'}"></span><span>${esc(x.range)} : ${esc(OPL[x.op] ? i18n(OPL[x.op], {ctx: 'règle'}) : x.op)}${x.v !== '' && !['empty', 'notempty', 'dup', 'baddate', 'scale'].includes(x.op) ? ' ' + esc(x.v) : ''}${x.op === 'between' ? ' ' + esc(i18n('et')) + ' ' + esc(x.v2) : ''}</span><button type="button" class="icon-button small" data-xl-pcmd="cfdel:${i}" title="${esc(i18n('Retirer la règle'))}" aria-label="${esc(i18n('Retirer la règle'))}">✕</button></div>`).join('') || A().empty(i18n('Aucune règle sur cette feuille.'), {icon: '🎨'})) + `<button type="button" class="button small secondary" data-xl-cmd="cf">${esc(i18n('＋ Ajouter une règle…'))}</button>`;
             const dv = this.dvAt(r, c);
-            P('dv').innerHTML = (dv ? row('Autorise', esc({list: 'Une liste : ' + (dv.list || []).slice(0, 6).join(', '), person: '👤 Une personne de la base', place: '📍 Un lieu de la base', number: `Un nombre${dv.min != null ? ' ≥ ' + dv.min : ''}${dv.max != null ? ' ≤ ' + dv.max : ''}`, date: 'Une date d’acte'}[dv.kind])) + row('Plage', esc(dv.range)) + (dv.allowFree ? row('Sinon', 'Garder le texte') : '') : A().empty('Pas de validation ici.', {icon: '✓'})) + '<button type="button" class="button small secondary" data-xl-cmd="validate">Validation des données…</button>';
+            P('dv').innerHTML = (dv ? row('Autorise', esc({list: i18n('Une liste : {list}', {list: (dv.list || []).slice(0, 6).join(', ')}), person: i18n('👤 Une personne de la base'), place: i18n('📍 Un lieu de la base'), number: i18n('Un nombre') + (dv.min != null ? ' ≥ ' + dv.min : '') + (dv.max != null ? ' ≤ ' + dv.max : ''), date: i18n('Une date d’acte')}[dv.kind])) + row('Plage', esc(dv.range)) + (dv.allowFree ? row('Sinon', esc(i18n('Garder le texte'))) : '') : A().empty(i18n('Pas de validation ici.'), {icon: '✓'})) + `<button type="button" class="button small secondary" data-xl-cmd="validate">${esc(i18n('Validation des données…'))}</button>`;
         },
         panelCmd(cmd) {
             const S = X(), sh = this.S(), cell = sh.cells[S.addr(...this.act)];
-            if (cmd === 'openref' && cell?.ref) { if (cell.ref.kind === 'person') { if (this.dirty) return toast('Enregistre d’abord le classeur (💾), puis ouvre la fiche.'); this.dlg.close(); A().openPersonById?.(cell.ref.id); } else toast(`${cell.v} : lieu n° ${cell.ref.id} de ta base.`); return; }
-            const m = /^cfdel:(\d+)$/.exec(cmd); if (m) { this.begin('Règle retirée'); this.meta(sh); const rule = sh.cf[Number(m[1])]; sh.cf = sh.cf.filter((_, i) => i !== Number(m[1])); const t = this.commit(); this.render(); if (t) this.undoable(`Règle « ${rule.range} » retirée`, t); }
+            if (cmd === 'openref' && cell?.ref) { if (cell.ref.kind === 'person') { if (this.dirty) return toast(i18n('Enregistre d’abord le classeur (💾), puis ouvre la fiche.')); this.dlg.close(); A().openPersonById?.(cell.ref.id); } else toast(i18n('{name} : lieu n° {id} de ta base.', {name: cell.v, id: String(cell.ref.id)})); return; }
+            const m = /^cfdel:(\d+)$/.exec(cmd); if (m) { this.begin('Règle retirée'); this.meta(sh); const rule = sh.cf[Number(m[1])]; sh.cf = sh.cf.filter((_, i) => i !== Number(m[1])); const t = this.commit(); this.render(); if (t) this.undoable(i18n('Règle « {range} » retirée', {range: rule.range}), t); }
         },
         syncTools() {
             const st = this.curStyle(), on = (cmd, v) => this.dlg.querySelectorAll(`.xl-tools [data-xl-cmd="${cmd}"]`).forEach(b => b.classList.toggle('is-on', !!v));
@@ -1262,15 +1265,15 @@
             on('merge', !!this.mergeOf(...this.act)); on('filter', !!this.S().filter);
             const rail = (cmd, v) => { const b = this.$(`.xl-rail [data-xl-cmd="${cmd}"]`); if (b) { b.classList.toggle('is-active', !!v); b.setAttribute('aria-pressed', v ? 'true' : 'false'); } };
             rail('filter', !!this.S().filter); rail('formulas', this.showFormulas); rail('panel', !this.$('.xl-body').classList.contains('no-panel'));
-            const fb = this.$('.xl-tools [data-xl-cmd="font"]'); if (fb) { fb.textContent = st.font || 'Police'; fb.style.fontFamily = st.font ? cssFont(st.font) : ''; fb.title = `Police (E5) : ${st.font || 'celle de départ'}`; }
+            const fb = this.$('.xl-tools [data-xl-cmd="font"]'); if (fb) { fb.textContent = st.font || i18n('Police'); fb.style.fontFamily = st.font ? cssFont(st.font) : ''; fb.title = i18n('Police (E5) : {font}', {font: st.font || i18n('celle de départ')}); }
             const fs = this.$('[data-xl-fs]'); if (fs && document.activeElement !== fs) fs.value = st.fs ? String(st.fs) : '';
             const f = this.$('[data-xl-fmt]'); if (f) f.value = st.fmt || '';
             const sw = k => { const i = this.$(`[data-xl-sw="${k}"]`); if (i) i.style.background = X().safeCol(st[k]) || (k === 'color' ? '#000' : 'transparent'); }; sw('color'); sw('fill');
-            const p = this.$('[data-xl-cmd="panel"]'); if (p) p.querySelector('span').textContent = this.$('.xl-body').classList.contains('no-panel') ? 'Panneau de droite : montrer' : 'Panneau de droite : cacher';
+            const p = this.$('[data-xl-cmd="panel"]'); if (p) p.querySelector('span').textContent = this.$('.xl-body').classList.contains('no-panel') ? i18n('Panneau de droite : montrer') : i18n('Panneau de droite : cacher');
         },
         paintTabs() {
             const box = this.$('[data-xl-tabs]');
-            box.innerHTML = this.wb.sheets.map((s, i) => `<button type="button" role="tab" draggable="true" aria-selected="${i === this.si}" class="xl-tab${i === this.si ? ' is-active' : ''}" data-xl-sheet="${i}" title="Double-clic : renommer · clic droit : plus d’actions"${s.color ? ` style="border-bottom-color:${X().safeCol(s.color)}"` : ''}>${esc(s.name)}</button>`).join('') + '<button type="button" class="xl-tab-add" data-xl-sheet="add" title="Ajouter une feuille" aria-label="Ajouter une feuille">＋</button>';
+            box.innerHTML = this.wb.sheets.map((s, i) => `<button type="button" role="tab" draggable="true" aria-selected="${i === this.si}" class="xl-tab${i === this.si ? ' is-active' : ''}" data-xl-sheet="${i}" title="${esc(i18n('Double-clic : renommer · clic droit : plus d’actions'))}"${s.color ? ` style="border-bottom-color:${X().safeCol(s.color)}"` : ''}>${esc(s.name)}</button>`).join('') + `<button type="button" class="xl-tab-add" data-xl-sheet="add" title="${esc(i18n('Ajouter une feuille'))}" aria-label="${esc(i18n('Ajouter une feuille'))}">＋</button>`;
             box.querySelector('.is-active')?.scrollIntoView({block: 'nearest', inline: 'nearest'});
         },
         showSheet(i, keepEdit = false) {
@@ -1283,13 +1286,13 @@
             if (this.edit) { this.placeEditor(); (this.edit.hiddenEd ? this.fx : this.ed).focus({preventScroll: true}); } else this.focusGrid();
         },
         addSheet() {
-            this.begin('Nouvelle feuille'); const sh = X().newSheet(X().cleanSheetName(`Feuille ${this.wb.sheets.length + 1}`, this.wb.sheets.map(s => s.name)));
+            this.begin('Nouvelle feuille'); const sh = X().newSheet(X().cleanSheetName(i18n('Feuille {n}', {n: String(this.wb.sheets.length + 1)}), this.wb.sheets.map(s => s.name)));
             const w = pref('colw', DEF_W); if (w !== DEF_W) for (let c = 0; c < 26; c++) sh.cols[X().colName(c)] = {w};
             this.wb.sheets.splice(this.si + 1, 0, sh); this.commit(); this.showSheet(this.si + 1); this.render();
         },
         renameSheet(i) {
             const S = X(), sh = this.wb.sheets[i];
-            A().askText({title: 'Renommer la feuille', message: 'Nouveau nom :', value: sh.name, okLabel: 'Renommer'}).then(n => {
+            A().askText({title: i18n('Renommer la feuille'), message: i18n('Nouveau nom :'), value: sh.name, okLabel: i18n('Renommer')}).then(n => {
                 n = String(n || '').trim(); if (!n || n === sh.name) return;
                 const name = S.cleanSheetName(n, this.wb.sheets.filter(s => s !== sh).map(s => s.name)), old = sh.name;
                 this.begin('Renommer'); this.meta(sh); sh.name = name;
@@ -1304,27 +1307,27 @@
             this.begin('Dupliquer'); this.wb.sheets.splice(i + 1, 0, copy); this.commit(); this.showSheet(i + 1); this.render();
         },
         deleteSheet(i) {
-            if (this.wb.sheets.length < 2) return toast('Un classeur garde au moins une feuille.');
+            if (this.wb.sheets.length < 2) return toast(i18n('Un classeur garde au moins une feuille.'));
             const name = this.wb.sheets[i].name; this.begin('Supprimer la feuille'); this.wb.sheets.splice(i, 1); this.si = Math.max(0, Math.min(this.si >= i ? this.si - (this.si > i ? 1 : 0) : this.si, this.wb.sheets.length - 1)); if (this.si >= this.wb.sheets.length) this.si = this.wb.sheets.length - 1;
-            const t = this.commit(); this.geo = null; this.refreshFilter(); this.render(); if (t) this.undoable(`Feuille « ${name} » supprimée`, t);
+            const t = this.commit(); this.geo = null; this.refreshFilter(); this.render(); if (t) this.undoable(i18n('Feuille « {name} » supprimée', {name}), t);
         },
         moveSheet(from, to) { this.begin('Ranger les feuilles'); const [sh] = this.wb.sheets.splice(from, 1); this.wb.sheets.splice(to, 0, sh); const cur = this.S(); this.si = this.wb.sheets.indexOf(this.si === from ? sh : cur); if (this.si < 0) this.si = to; this.commit(); this.si = this.wb.sheets.indexOf(sh); this.geo = null; this.render(); },
         sheetMenu(i, e) {
             const sh = this.wb.sheets[i];
-            UI().contextMenu(e, [{icon: '✎', label: 'Renommer', run: () => this.renameSheet(i)}, {icon: '⧉', label: 'Dupliquer', run: () => this.dupSheet(i)}, {icon: '🎨', label: 'Couleur de l’onglet…', run: () => { const b = this.$(`[data-xl-sheet="${i}"]`); UI().openColorBox(b, {allowNone: true, get: () => sh.color || '', set: (v, fin) => { if (!fin) return; this.begin('Couleur'); this.meta(sh); if (v) sh.color = v.slice(0, 7); else delete sh.color; this.commit(); this.render(); }}); }},
-                {icon: '←', label: 'Déplacer à gauche', disabled: i === 0, run: () => this.moveSheet(i, i - 1)}, {icon: '→', label: 'Déplacer à droite', disabled: i === this.wb.sheets.length - 1, run: () => this.moveSheet(i, i + 1)}, '-', {icon: '🗑', label: 'Supprimer la feuille', danger: true, disabled: this.wb.sheets.length < 2, run: () => this.deleteSheet(i)}], {title: `« ${sh.name} »`});
+            UI().contextMenu(e, [{icon: '✎', label: i18n('Renommer'), run: () => this.renameSheet(i)}, {icon: '⧉', label: i18n('Dupliquer'), run: () => this.dupSheet(i)}, {icon: '🎨', label: i18n('Couleur de l’onglet…'), run: () => { const b = this.$(`[data-xl-sheet="${i}"]`); UI().openColorBox(b, {allowNone: true, get: () => sh.color || '', set: (v, fin) => { if (!fin) return; this.begin('Couleur'); this.meta(sh); if (v) sh.color = v.slice(0, 7); else delete sh.color; this.commit(); this.render(); }}); }},
+                {icon: '←', label: i18n('Déplacer à gauche'), disabled: i === 0, run: () => this.moveSheet(i, i - 1)}, {icon: '→', label: i18n('Déplacer à droite'), disabled: i === this.wb.sheets.length - 1, run: () => this.moveSheet(i, i + 1)}, '-', {icon: '🗑', label: i18n('Supprimer la feuille'), danger: true, disabled: this.wb.sheets.length < 2, run: () => this.deleteSheet(i)}], {title: `« ${sh.name} »`});
         },
         paintStatus() {
             const S = X(), s = this.sel, n = (s.r1 - s.r0 + 1) * (s.c1 - s.c0 + 1), want = pref('status', ['sum', 'avg', 'count']);
             let sum = 0, cnt = 0, min = Infinity, max = -Infinity, vals = 0; const g = n > 1 ? this.selClip() : s;
             if (n > 1 || true) for (let r = g.r0; r <= g.r1 && vals < 600000; r++) { if (this.hiddenRows.get(this.S().id)?.has(r)) continue; for (let c = g.c0; c <= g.c1; c++) { vals++; const v = this.calc.val(this.si, r, c); const x = typeof v === 'number' ? v : v instanceof S.SDate ? v.serial : null; if (x !== null) { sum += x; cnt++; if (x < min) min = x; if (x > max) max = x; } } }
             const where = `<b>${esc(this.S().name)} ! ${n > 1 ? S.rangeStr(s) : S.addr(...this.act)}</b>${n > 1 ? ` · ${plural(n, 'cellule')}` : ''}`; // K18 : à gauche, où l’on est (la feuille et la cellule)
-            const parts = cnt ? [want.includes('sum') ? `Somme <b>${fmtN(sum)}</b>` : '', want.includes('avg') ? `Moyenne <b>${fmtN(sum / cnt)}</b>` : '', want.includes('count') ? `Nb <b>${cnt}</b>` : '', want.includes('min') ? `Min <b>${fmtN(min)}</b>` : '', want.includes('max') ? `Max <b>${fmtN(max)}</b>` : ''].filter(Boolean) : [];
+            const parts = cnt ? [want.includes('sum') ? i18n('Somme <b>{v}</b>', {v: fmtN(sum)}) : '', want.includes('avg') ? i18n('Moyenne <b>{v}</b>', {v: fmtN(sum / cnt)}) : '', want.includes('count') ? i18n('Nb <b>{v}</b>', {v: String(cnt)}) : '', want.includes('min') ? i18n('Min <b>{v}</b>', {v: fmtN(min)}) : '', want.includes('max') ? i18n('Max <b>{v}</b>', {v: fmtN(max)}) : ''].filter(Boolean) : [];
             this.$('[data-xl-status]').innerHTML = [where, ...parts].join(' · ');
         },
         statusMenu(el) {
             const want = pref('status', ['sum', 'avg', 'count']), tog = k => { const w = want.includes(k) ? want.filter(x => x !== k) : [...want, k]; setPrefs({...prefs(), status: w}); this.paintStatus(); };
-            UI().menuAt(el, [['sum', 'Somme'], ['avg', 'Moyenne'], ['count', 'Nombre'], ['min', 'Minimum'], ['max', 'Maximum']].map(([k, l]) => ({icon: want.includes(k) ? '✓' : ' ', label: l, run: () => tog(k)})), {title: 'Dans la barre d’état'});
+            UI().menuAt(el, [['sum', 'Somme'], ['avg', 'Moyenne'], ['count', 'Nombre'], ['min', 'Minimum'], ['max', 'Maximum']].map(([k, l]) => ({icon: want.includes(k) ? '✓' : ' ', label: i18n(l), run: () => tog(k)})), {title: i18n('Dans la barre d’état')});
         },
         onContext(e) {
             const h = this.hit(e); if (!h) return; e.preventDefault(); e.stopPropagation();
@@ -1333,7 +1336,7 @@
             if (rows && !(h.r >= this.sel.r0 && h.r <= this.sel.r1 && this.sel.c1 - this.sel.c0 > 20)) this.clickAt(h, {shiftKey: false});
             if (cols && !(h.c >= this.sel.c0 && h.c <= this.sel.c1 && this.sel.r1 - this.sel.r0 > 100)) this.clickAt(h, {shiftKey: false});
             const items = [
-                {icon: '📋', label: 'Copier', shortcut: '⌘C', run: () => toast(`Utilise ${kbd('⌘C')} : le navigateur ne laisse pas un menu écrire dans le presse-papiers.`)},
+                {icon: '📋', label: 'Copier', shortcut: '⌘C', run: () => toast(i18n('Utilise {key} : le navigateur ne laisse pas un menu écrire dans le presse-papiers.', {key: kbd('⌘C')}))},
                 {icon: '📋', label: 'Coller les valeurs seulement', shortcut: '⇧⌘V', run: () => this.run('pastevalues')}, '-',
                 ...(cols ? [] : [{icon: '＋', label: 'Insérer une ligne au-dessus', run: () => this.run('rowabove')}, {icon: '＋', label: 'Insérer une ligne en dessous', run: () => this.run('rowbelow')}]),
                 ...(rows ? [] : [{icon: '＋', label: 'Insérer une colonne à gauche', run: () => this.run('colleft')}, {icon: '＋', label: 'Insérer une colonne à droite', run: () => this.run('colright')}]), '-',
@@ -1344,18 +1347,18 @@
                 ...(cols ? [] : [{icon: '🗑', label: 'Supprimer les lignes', danger: true, run: () => this.run('delrows')}]),
                 ...(rows ? [] : [{icon: '🗑', label: 'Supprimer les colonnes', danger: true, run: () => this.run('delcols')}]),
             ];
-            UI().contextMenu(e, items);
+            UI().contextMenu(e, items.map(x => (x === '-' ? x : {...x, label: i18n(x.label)})));
         },
 
         /* ═════════ Copier, couper, coller (aussi depuis Excel ou Google Sheets : TSV et HTML) ═════════ */
         onCopy(e, cut) {
             const S = X(), sh = this.S(), g = this.selClip(), rows = [], html = [], cells = [];
-            if ((g.r1 - g.r0 + 1) * (g.c1 - g.c0 + 1) > 500000) { e.preventDefault(); return toast('Sélection trop grande pour le presse-papiers.', 'error'); }
+            if ((g.r1 - g.r0 + 1) * (g.c1 - g.c0 + 1) > 500000) { e.preventDefault(); return toast(i18n('Sélection trop grande pour le presse-papiers.'), 'error'); }
             for (let r = g.r0; r <= g.r1; r++) { const tr = [], th = []; if (this.hiddenRows.get(sh.id)?.has(r)) continue; for (let c = g.c0; c <= g.c1; c++) { const k = S.addr(r, c), cell = sh.cells[k], st = this.wb.styles[cell?.s] || {}, v = this.calc.val(this.si, r, c), t = S.formatValue(v, st); tr.push(/[\t\n"]/.test(t) ? `"${t.replace(/"/g, '""')}"` : t); th.push(`<td style="${st.b ? 'font-weight:bold;' : ''}${st.i ? 'font-style:italic;' : ''}${st.fill ? `background:${S.safeCol(st.fill)};` : ''}${st.color ? `color:${S.safeCol(st.color)};` : ''}${st.h ? `text-align:${st.h};` : ''}">${esc(t)}</td>`); if (cell) cells.push({dr: r - g.r0, dc: c - g.c0, cell: {...cell}, r, c}); } rows.push(tr.join('\t')); html.push(`<tr>${th.join('')}</tr>`); }
             const tsv = rows.join('\n');
             e.preventDefault(); e.clipboardData.setData('text/plain', tsv); e.clipboardData.setData('text/html', `<table>${html.join('')}</table>`);
             this.clip = {sheet: sh, g, tsv, cells, cut}; this.paint(true);
-            toast(cut ? 'Coupé : choisis où coller, puis ' + kbd('⌘V') + '.' : `${plural((g.r1 - g.r0 + 1) * (g.c1 - g.c0 + 1), 'cellule')} copiée${(g.r1 - g.r0 + 1) * (g.c1 - g.c0 + 1) > 1 ? 's' : ''}.`);
+            toast(cut ? i18n('Coupé : choisis où coller, puis {key}.', {key: kbd('⌘V')}) : plural((g.r1 - g.r0 + 1) * (g.c1 - g.c0 + 1), 'cellule copiée', 'cellules copiées') + '.');
         },
         onPaste(e) {
             const text = e.clipboardData?.getData('text/plain') || '', html = e.clipboardData?.getData('text/html') || '';
@@ -1365,7 +1368,7 @@
             this.pasteData(text, html, false);
         },
         async pasteFromButton(valuesOnly) {
-            let text = ''; try { text = await navigator.clipboard.readText(); } catch (_) { return toast(`Utilise ${kbd('⌘V')} dans la grille pour coller.`); }
+            let text = ''; try { text = await navigator.clipboard.readText(); } catch (_) { return toast(i18n('Utilise {key} dans la grille pour coller.', {key: kbd('⌘V')})); }
             this.pasteData(text, '', valuesOnly);
         },
         pasteData(text, html, valuesOnly) {
@@ -1380,11 +1383,11 @@
             }
             const {rows, styles} = S.parseClipboard(text, valuesOnly ? '' : html);
             if (!rows.length) { this.commit(); return; }
-            if (rows.length * Math.max(...rows.map(x => x.length)) > S.LIMITS.cells) { this.commit(); return toast('Trop de cellules à coller.', 'error'); }
+            if (rows.length * Math.max(...rows.map(x => x.length)) > S.LIMITS.cells) { this.commit(); return toast(i18n('Trop de cellules à coller.'), 'error'); }
             const wide = Math.max(...rows.map(x => x.length));
             rows.forEach((row, i) => row.forEach((t, j) => { const k = S.addr(r0 + i, c0 + j), old = sh.cells[k], ost = this.wb.styles[old?.s] || {}; const p = valuesOnly && this.clip ? {v: (() => { const v = this.calc.val(this.si, r0 + i, c0 + j); return v; })()} : S.parseInput(t, {fmt: ost.fmt}); const cell = {...(old || {}), v: valuesOnly ? S.parseInput(t, {fmt: ost.fmt}).v : p.v}; delete cell.ref; const st = styles?.[i]?.[j]; if (st || p.fmt) cell.s = S.styleId(this.wb, {...ost, ...(st || {}), ...(p.fmt && !ost.fmt ? {fmt: p.fmt} : {})}); this.put(sh, k, cell.v == null && !cell.s ? null : cell); }));
             const t = this.commit(); this.setSel(r0, c0, r0 + rows.length - 1, c0 + wide - 1, true); this.render();
-            if (t && rows.length * wide > 1) toast(`${plural(rows.length, 'ligne')} collée${rows.length > 1 ? 's' : ''}${styles?.length ? ' (avec le gras et les couleurs)' : ''}.`);
+            if (t && rows.length * wide > 1) toast(styles?.length ? i18n('{n} (avec le gras et les couleurs).', {n: plural(rows.length, 'ligne collée', 'lignes collées')}) : plural(rows.length, 'ligne collée', 'lignes collées') + '.');
         },
 
         /* ═════════ 📊 Graphique depuis la sélection : l'éditeur de diagrammes existant, avec les données ═════════ */
@@ -1397,34 +1400,34 @@
             const labelCol = body.every(r => !isN(r[0]) || (r[0] > 1000 && r[0] < 2200 && Number.isInteger(r[0]))) && cols > 1 ? 0 : -1;
             const serCols = []; for (let c = 0; c < cols; c++) if (c !== labelCol && body.some(r => isN(r[c]))) serCols.push(c);
             if (!serCols.length) return null;
-            const series = serCols.map(c => ({name: head ? S.toStr(m[0][c]) : `Série ${serCols.indexOf(c) + 1}`}));
+            const series = serCols.map(c => ({name: head ? S.toStr(m[0][c]) : i18n('Série {n}', {n: String(serCols.indexOf(c) + 1)})}));
             const rows = body.map((r, i) => { const o = {label: labelCol >= 0 ? S.toStr(r[labelCol]) : String(i + 1)}; serCols.forEach((c, j) => { o['s' + j] = isN(r[c]) ? r[c] : 0; }); return o; });
             return {series, rows, title: head && labelCol >= 0 ? S.toStr(m[0][labelCol]) : this.S().name, range: S.rangeStr(g)};
         },
         chartMenu(btn) {
-            const d = this.chartData(); if (!d) return toast('Choisis une plage avec des nombres (par exemple : Décennie, Hommes, Femmes).');
-            if (!ext.openDiagramEditor) return toast('L’éditeur de diagrammes n’est pas chargé.', 'error');
+            const d = this.chartData(); if (!d) return toast(i18n('Choisis une plage avec des nombres (par exemple : Décennie, Hommes, Femmes).'));
+            if (!ext.openDiagramEditor) return toast(i18n('L’éditeur de diagrammes n’est pas chargé.'), 'error');
             const open = kind => ext.openDiagramEditor(null, {spec: {kind, o: {title: d.title}, series: d.series, rows: d.rows}, name: `${d.title} (${this.S().name} ! ${d.range})`});
-            const items = [{icon: '📊', label: d.series.length > 1 ? 'Colonnes groupées' : 'Colonnes', run: () => open('columns')}, {icon: '📶', label: 'Barres horizontales', run: () => open('bars')}, {icon: '📈', label: 'Courbe', run: () => open('line')}];
-            if (d.series.length === 1) items.push({icon: '🥧', label: 'Camembert', run: () => open('pie')});
+            const items = [{icon: '📊', label: d.series.length > 1 ? i18n('Colonnes groupées') : i18n('Colonnes'), run: () => open('columns')}, {icon: '📶', label: i18n('Barres horizontales'), run: () => open('bars')}, {icon: '📈', label: i18n('Courbe'), run: () => open('line')}];
+            if (d.series.length === 1) items.push({icon: '🥧', label: i18n('Camembert'), run: () => open('pie')});
             const anchor = btn && btn.isConnected && btn.offsetParent ? btn : this.$('[data-xl-cmd="chart"]');
-            UI().menuAt(anchor || {x: innerWidth / 2, y: 120}, items, {title: `Conseillés pour ${d.range}`});
+            UI().menuAt(anchor || {x: innerWidth / 2, y: 120}, items, {title: i18n('Conseillés pour {range}', {range: d.range})});
         },
 
         /* ═════════ Importer (K13), exporter (E3), imprimer (K13) ═════════ */
         importFile(file) {
             const S = X(), ACCEPT = '.csv,.tsv,.txt,.xlsx,.ods,.json,.lcnda-tableur';
-            const kinds = {csv: 'CSV', tsv: 'TSV (tabulations)', xlsx: 'Excel (.xlsx)', ods: 'LibreOffice (.ods)', json: 'JSON'};
-            const go = files => UI().openImportDialog({title: '⤒ Importer un tableau', accept: ACCEPT, noun: 'ligne', feminine: true, files,
+            const kinds = {csv: 'CSV', tsv: i18n('TSV (tabulations)'), xlsx: 'Excel (.xlsx)', ods: 'LibreOffice (.ods)', json: 'JSON'};
+            const go = files => UI().openImportDialog({title: i18n('⤒ Importer un tableau'), accept: ACCEPT, noun: 'ligne', feminine: true, files,
                 analyze: async files => {
                     const f = files[0], r = await S.readFile(f.name, await f.arrayBuffer());
                     const sh0 = r.wb.sheets[0], g = S.usedRange(sh0), rowsN = r.wb.sheets.reduce((n, s) => n + ((S.usedRange(s)?.r1 ?? -1) + 1), 0);
                     const calc = new S.Calc(r.wb), m = g ? S.matrix(r.wb, calc, 0, {r0: 0, c0: 0, r1: Math.min(g.r1, 7), c1: Math.min(g.c1, 7)}, {display: true}) : [];
                     const accents = (() => { const t = Object.values(sh0.cells).map(c => (typeof c.v === 'string' ? c.v : '')).join(' '); return [...new Set((t.match(/[\p{L}-]*[àâäéèêëîïôöùûüçœÀÂÉÈÊÎÔÛÇ][\p{L}-]*/gu) || []))].slice(0, 3); })();
                     const notices = [];
-                    if (r.kind === 'csv' || r.kind === 'tsv') notices.push({kind: 'info', text: `Séparateur deviné : ${r.sep === ';' ? 'point-virgule (;)' : r.sep === ',' ? 'virgule (,)' : r.sep === '\t' ? 'tabulation' : r.sep} · Encodage : ${S.ENC_LABEL[r.encoding] || r.encoding}`});
-                    if (accents.length) notices.push({kind: 'ok', text: `✓ Accents corrects : « ${accents.join(' », « ')} ».`});
-                    return {count: rowsN, summaryHtml: `<b>${plural(rowsN, 'ligne')}</b> dans ${plural(r.wb.sheets.length, 'feuille')} · ${esc(kinds[r.kind] || r.kind)}`, notices,
+                    if (r.kind === 'csv' || r.kind === 'tsv') notices.push({kind: 'info', text: i18n('Séparateur deviné : {sep} · Encodage : {enc}', {sep: r.sep === ';' ? i18n('point-virgule (;)') : r.sep === ',' ? i18n('virgule (,)') : r.sep === '\t' ? i18n('tabulation') : r.sep, enc: i18n(S.ENC_LABEL[r.encoding] || r.encoding)})});
+                    if (accents.length) notices.push({kind: 'ok', text: i18n('✓ Accents corrects : « {list} ».', {list: accents.join(' », « ')})});
+                    return {count: rowsN, summaryHtml: i18n('<b>{rows}</b> dans {sheets}', {rows: plural(rowsN, 'ligne'), sheets: plural(r.wb.sheets.length, 'feuille')}) + ` · ${esc(kinds[r.kind] || r.kind)}`, notices,
                         preview: m.length ? `<div class="xl-prev"><table><tbody>${m.map((row, i) => `<tr>${row.map(v => `<${i ? 'td' : 'th'}>${esc(v)}</${i ? 'td' : 'th'}>`).join('')}</tr>`).join('')}</tbody></table></div>` : '', data: r};
                 },
                 run: async an => {
@@ -1438,7 +1441,7 @@
                     // un classeur vide au départ : on garde seulement ce qui arrive
                     const first = this.wb.sheets[0]; if (this.wb.sheets.length > added.length && !Object.keys(first.cells).length && this.wb.sheets.indexOf(first) === 0 && !this.id && !this.undoStack.length) this.wb.sheets.splice(0, 1);
                     const t = this.commit(); this.showSheet(this.wb.sheets.indexOf(added[0])); this.render();
-                    return {message: `${plural(added.length, 'feuille')} importée${added.length > 1 ? 's' : ''} (${plural(an.count, 'ligne')})`, undo: () => { if (this.undoStack[this.undoStack.length - 1] === t) this.undo(); }};
+                    return {message: i18n('{sheets} ({rows})', {sheets: plural(added.length, 'feuille importée', 'feuilles importées'), rows: plural(an.count, 'ligne')}), undo: () => { if (this.undoStack[this.undoStack.length - 1] === t) this.undo(); }};
                 }});
             go(file ? [file] : undefined); // un fichier collé ou déposé : la même fenêtre, déjà à l'étape 2
         },
@@ -1446,22 +1449,22 @@
             const S = X(), base = A().safeExportFilename ? A().safeExportFilename(this.name, 'classeur') : 'classeur', sep = pref('csv', ';');
             const sheetRows = () => S.matrix(this.wb, this.calc, this.si);
             const text = (name, t, type) => download(new Blob([t], {type}), name);
-            UI().openExportDialog({title: this.name, defaultName: this.name, quality: false, info: 'CSV et TSV : la feuille ouverte. Les autres : tout le classeur. Une cellule qui commence par « = » est protégée dans un CSV (pas de formule glissée).',
+            UI().openExportDialog({title: this.name, defaultName: this.name, quality: false, info: i18n('CSV et TSV : la feuille ouverte. Les autres : tout le classeur. Une cellule qui commence par « = » est protégée dans un CSV (pas de formule glissée).'),
                 formats: [
                     {id: 'xlsx', label: '📗 XLSX', hint: 'Excel, Numbers', ext: 'xlsx', run: async o => download(await S.toXlsx(this.wb, this.calc), o.filename)},
                     {id: 'ods', label: '📘 ODS', hint: 'LibreOffice', ext: 'ods', run: async o => download(await S.toOds(this.wb, this.calc), o.filename)},
-                    {id: 'csv', label: '🧾 CSV', hint: 'tout tableur', ext: 'csv', run: async o => text(o.filename, S.toCSV(sheetRows(), {sep}), 'text/csv;charset=utf-8')},
-                    {id: 'tsv', label: '⇥ TSV', hint: 'tabulations', ext: 'tsv', run: async o => text(o.filename, S.toCSV(sheetRows(), {sep: '\t', bom: false}), 'text/tab-separated-values;charset=utf-8')},
-                    {id: 'json', label: '{ } JSON', hint: 'données', ext: 'json', run: async o => text(o.filename, JSON.stringify(S.toJsonData(this.wb, this.calc), null, 1), 'application/json')},
-                    {id: 'pdf', label: '📄 PDF', hint: 'à lire', ext: '', quality: false, run: async () => this.printDialog()},
+                    {id: 'csv', label: '🧾 CSV', hint: i18n('tout tableur'), ext: 'csv', run: async o => text(o.filename, S.toCSV(sheetRows(), {sep}), 'text/csv;charset=utf-8')},
+                    {id: 'tsv', label: '⇥ TSV', hint: i18n('tabulations'), ext: 'tsv', run: async o => text(o.filename, S.toCSV(sheetRows(), {sep: '\t', bom: false}), 'text/tab-separated-values;charset=utf-8')},
+                    {id: 'json', label: '{ } JSON', hint: i18n('données'), ext: 'json', run: async o => text(o.filename, JSON.stringify(S.toJsonData(this.wb, this.calc), null, 1), 'application/json')},
+                    {id: 'pdf', label: '📄 PDF', hint: i18n('à lire'), ext: '', quality: false, run: async () => this.printDialog()},
                     {id: 'print', run: async () => UI().printDocument ? UI().printDocument(this.printHtml({all: false, grid: true})) : this.printDialog()},
-                    {id: 'file', label: '💾 Fichier de l’outil', hint: '.lcnda-tableur', ext: 'lcnda-tableur', run: async o => text(o.filename, JSON.stringify({format: 'lcnda-tableur', name: this.name, workbook: S.compact(this.wb)}), 'application/json')},
-                ]}).then(r => { if (r && !['pdf', 'print'].includes(r.format)) toast(`Exporté : ${r.filename || base}`); });
+                    {id: 'file', label: i18n('💾 Fichier de l’outil'), hint: '.lcnda-tableur', ext: 'lcnda-tableur', run: async o => text(o.filename, JSON.stringify({format: 'lcnda-tableur', name: this.name, workbook: S.compact(this.wb)}), 'application/json')},
+                ]}).then(r => { if (r && !['pdf', 'print'].includes(r.format)) toast(i18n('Exporté : {name}', {name: r.filename || base})); });
         },
         printHtml({all = false, grid = true} = {}) {
             const S = X(), sheets = all ? this.wb.sheets.map((s, i) => i) : [this.si];
             const parts = sheets.map(si => {
-                const sh = this.wb.sheets[si], g = S.usedRange(sh); if (!g) return `<h2>${esc(sh.name)}</h2><p>(feuille vide)</p>`;
+                const sh = this.wb.sheets[si], g = S.usedRange(sh); if (!g) return `<h2>${esc(sh.name)}</h2><p>${esc(i18n('(feuille vide)'))}</p>`;
                 const merges = new Map(), cov = new Set(); (sh.merges || []).forEach(m => { const q = S.parseRange(m); merges.set(q.r0 + ':' + q.c0, q); for (let r = q.r0; r <= q.r1; r++) for (let c = q.c0; c <= q.c1; c++) if (r !== q.r0 || c !== q.c0) cov.add(r + ':' + c); });
                 const hidC = c => sh.cols[S.colName(c)]?.hidden, fr = sh.freeze?.r || 0, hidR = r => sh.rows[String(r + 1)]?.hidden || this.hiddenRows.get(sh.id)?.has(r);
                 const rowHtml = r => `<tr>${Array.from({length: g.c1 + 1}, (_, c) => { if (hidC(c) || cov.has(r + ':' + c)) return ''; const k = S.addr(r, c), cell = sh.cells[k], st = this.wb.styles[cell?.s] || {}, v = this.calc.val(si, r, c), m = merges.get(r + ':' + c); const css = `${st.b || r < fr ? 'font-weight:bold;' : ''}${st.i ? 'font-style:italic;' : ''}${st.fill ? `background:${S.safeCol(st.fill)};` : ''}${st.color ? `color:${S.safeCol(st.color)};` : ''}text-align:${st.h || (typeof v === 'number' ? 'right' : 'left')};${st.wrap ? 'white-space:pre-wrap;' : ''}`; return `<td${m ? ` colspan="${m.c1 - m.c0 + 1}" rowspan="${m.r1 - m.r0 + 1}"` : ''} style="${css}">${esc(S.formatValue(v, st, {approx: this.calc.isApprox(si, r, c)}))}</td>`; }).join('')}</tr>`;
@@ -1473,7 +1476,7 @@
         },
         printDialog() {
             UI().openPrintDialog({title: this.name, html: (o = {}) => this.printHtml({all: !!o.all, grid: o.grid !== false}),
-                options: [{key: 'all', label: 'Toutes les feuilles', checked: false}, {key: 'grid', label: 'Quadrillage', checked: true}]});
+                options: [{key: 'all', label: i18n('Toutes les feuilles'), checked: false}, {key: 'grid', label: i18n('Quadrillage'), checked: true}]});
         },
 
         /* ═════════ Enregistrer, fermer ═════════ */
@@ -1496,28 +1499,28 @@
             try {
                 const own = !asNew && this.id;
                 const r = await post('save_workbook', {id: asNew ? 0 : this.id, name, kind, data: S.compact(this.wb), ...(own && this.rev ? {base_rev: this.rev} : {}), ...(force ? {force: 1} : {})}), id = Number(r.result?.id || 0);
-                if (!asNew) { const first = !this.id; this.id = id; this.rev = r.result?.rev || ''; this.dirty = false; UI()?.savedStatus?.(this.dlg, 'saved'); if (first) toast('Rangé dans Listes → Outils de modification → 🧾 Tableur.'); }
-                else { UI()?.savedStatus?.(this.dlg, this.dirty ? 'dirty' : 'saved'); toast(kind === 'template' ? `Modèle « ${name} » enregistré (Partir d’un modèle → Mes modèles).` : `Copie « ${name} » enregistrée.`); }
+                if (!asNew) { const first = !this.id; this.id = id; this.rev = r.result?.rev || ''; this.dirty = false; UI()?.savedStatus?.(this.dlg, 'saved'); if (first) toast(i18n('Rangé dans Listes → Outils de modification → 🧾 Tableur.')); }
+                else { UI()?.savedStatus?.(this.dlg, this.dirty ? 'dirty' : 'saved'); toast(kind === 'template' ? i18n('Modèle « {name} » enregistré (Partir d’un modèle → Mes modèles).', {name}) : i18n('Copie « {name} » enregistrée.', {name})); }
                 this.ctx.onSaved?.(this.id);
                 document.dispatchEvent(new CustomEvent('lcnda:workbook-saved', {detail: {id: this.id || id}})); // les diagrammes liés à une plage se redessinent
                 return id;
             } catch (e) {
                 UI()?.savedStatus?.(this.dlg, 'error');
                 if (e.conflict && !asNew) { // un autre onglet a enregistré ce classeur entre-temps
-                    const choice = await (A().conflictBox?.({what: 'Ce classeur'}) ?? Promise.resolve(null));
+                    const choice = await (A().conflictBox?.({what: i18n('Ce classeur')}) ?? Promise.resolve(null));
                     if (choice === 'overwrite') return this._saveNow({asNew, kind, name, force: true});
                     if (choice === 'reload') { const keep = this.id; this.dirty = false; this.dlg.close(); setTimeout(() => openWorkbook({...this.ctx, id: keep, data: undefined}), 50); }
                     return 0;
                 }
-                toast(`Impossible d’enregistrer : ${e.message}`, 'error', {retry: () => this.save({asNew, kind, name})}); return 0;
+                toast(i18n('Impossible d’enregistrer : {error}', {error: e.message}), 'error', {retry: () => this.save({asNew, kind, name})}); return 0;
             }
         },
         saveAs(template = false) {
-            A().askText({title: template ? 'Enregistrer comme modèle' : 'Enregistrer une copie', message: template ? 'Le nom du modèle (les données restent : vide-les avant si tu veux un modèle vierge) :' : 'Le nom de la copie :', value: template ? this.name : `${this.name} (copie)`, okLabel: 'Enregistrer'}).then(n => { n = String(n || '').trim(); if (n) this.save({asNew: true, kind: template ? 'template' : 'book', name: n.slice(0, 200)}); });
+            A().askText({title: template ? i18n('Enregistrer comme modèle') : i18n('Enregistrer une copie'), message: template ? i18n('Le nom du modèle (les données restent : vide-les avant si tu veux un modèle vierge) :') : i18n('Le nom de la copie :'), value: template ? this.name : i18n('{name} (copie)', {name: this.name}), okLabel: i18n('Enregistrer')}).then(n => { n = String(n || '').trim(); if (n) this.save({asNew: true, kind: template ? 'template' : 'book', name: n.slice(0, 200)}); });
         },
         async close(after) {
             if (this.edit && !this.commitEdit(0, 0)) return;
-            if (this.dirty && !await A().confirmBox('Les changements faits depuis le dernier enregistrement seront perdus.', {title: 'Fermer sans enregistrer ?', okLabel: 'Fermer sans enregistrer', danger: true})) return;
+            if (this.dirty && !await A().confirmBox(i18n('Les changements faits depuis le dernier enregistrement seront perdus.'), {title: i18n('Fermer sans enregistrer ?'), okLabel: i18n('Fermer sans enregistrer'), danger: true})) return;
             this.dlg.close(); after?.();
         },
     });
@@ -1525,12 +1528,12 @@
     /* ═════════ « 📋 Partir d'un modèle » (modèles fournis + Mes modèles) ═════════ */
     async function chooseTemplate(ctx = {}) {
         let mine = []; try { mine = (await api('workbooks', {kind: 'template'})).items || []; } catch (_) {}
-        ext.openDialog({eyebrow: 'TABLEUR', title: '📋 Partir d’un modèle', wide: true,
-            body: `<div class="xl-tpls">${TEMPLATES.map(t => `<button type="button" class="xl-tpl" data-tpl="${t.key}"><b>${t.icon} ${esc(t.name)}</b><small>${esc(t.hint)}</small></button>`).join('')}</div>
-                <h4>Mes modèles</h4>${mine.length ? `<div class="xl-tpls">${mine.map(t => `<button type="button" class="xl-tpl" data-mine="${t.id}"><b>🧾 ${esc(t.name)}</b><small>${esc(plural(t.info?.sheets || 1, 'feuille'))} · ${UI()?.whenText ? esc(UI().whenText(t.updated_at, {label: 'Modifié'})) : ''}</small></button>`).join('')}</div>` : A().empty('Pas encore de modèle à toi : dans un classeur, Fichier → « Enregistrer comme modèle… ».', {icon: '📋'})}`,
+        ext.openDialog({eyebrow: i18n('TABLEUR'), title: i18n('📋 Partir d’un modèle'), wide: true,
+            body: `<div class="xl-tpls">${TEMPLATES.map(t => `<button type="button" class="xl-tpl" data-tpl="${t.key}"><b>${t.icon} ${esc(i18n(t.name))}</b><small>${esc(i18n(t.hint))}</small></button>`).join('')}</div>
+                <h4>${esc(i18n('Mes modèles'))}</h4>${mine.length ? `<div class="xl-tpls">${mine.map(t => `<button type="button" class="xl-tpl" data-mine="${t.id}"><b>🧾 ${esc(t.name)}</b><small>${esc(plural(t.info?.sheets || 1, 'feuille'))} · ${UI()?.whenText ? esc(UI().whenText(t.updated_at, {label: i18n('Modifié')})) : ''}</small></button>`).join('')}</div>` : A().empty(i18n('Pas encore de modèle à toi : dans un classeur, Fichier → « Enregistrer comme modèle… ».'), {icon: '📋'})}`,
             onOpen: d => d.addEventListener('click', async e => {
                 const b = e.target.closest('[data-tpl], [data-mine]'); if (!b) return; d.close();
-                if (b.dataset.tpl) { const t = TEMPLATES.find(x => x.key === b.dataset.tpl); return openWorkbook({...ctx, id: 0, data: t.make(), name: t.name}); }
+                if (b.dataset.tpl) { const t = TEMPLATES.find(x => x.key === b.dataset.tpl); return openWorkbook({...ctx, id: 0, data: t.make(), name: i18n(t.name)}); }
                 try { const r = await api('workbook', {id: Number(b.dataset.mine)}); openWorkbook({...ctx, id: 0, data: r.data, name: r.name}); } catch (err) { toast(err.message, 'error'); }
             })});
     }
@@ -1538,21 +1541,21 @@
     /** ⤒ Importer… depuis la liste : un nouveau classeur fait du fichier, rangé tout de suite */
     function importNew(again) {
         const S = X();
-        UI().openImportDialog({title: '⤒ Importer un tableau', accept: '.csv,.tsv,.txt,.xlsx,.ods,.json,.lcnda-tableur', noun: 'ligne', feminine: true,
-            analyze: async files => { const f = files[0], r = await S.readFile(f.name, await f.arrayBuffer()), n = r.wb.sheets.reduce((k, s) => k + ((S.usedRange(s)?.r1 ?? -1) + 1), 0); return {count: n, summaryHtml: `<b>${plural(n, 'ligne')}</b> dans ${plural(r.wb.sheets.length, 'feuille')} (${esc(f.name)})${r.kind === 'csv' ? ` · séparateur « ${r.sep === '\t' ? 'tabulation' : r.sep} » · ${esc(S.ENC_LABEL[r.encoding] || r.encoding)}` : ''}`, data: {wb: r.wb, name: f.name.replace(/\.[^.]+$/, '').slice(0, 120) || 'Classeur importé'}}; },
-            run: async an => { const r = await post('save_workbook', {name: an.data.name, kind: 'book', data: S.compact(an.data.wb)}), id = Number(r.result?.id || 0); again?.(); setTimeout(() => openWorkbook({id, onSaved: again, onClose: again}), 50); return {message: `Classeur « ${an.data.name} » créé (${plural(an.count, 'ligne')})`, undo: async () => { await post('delete_workbook', {id}); again?.(); }}; }});
+        UI().openImportDialog({title: i18n('⤒ Importer un tableau'), accept: '.csv,.tsv,.txt,.xlsx,.ods,.json,.lcnda-tableur', noun: 'ligne', feminine: true,
+            analyze: async files => { const f = files[0], r = await S.readFile(f.name, await f.arrayBuffer()), n = r.wb.sheets.reduce((k, s) => k + ((S.usedRange(s)?.r1 ?? -1) + 1), 0); return {count: n, summaryHtml: i18n('<b>{rows}</b> dans {sheets}', {rows: plural(n, 'ligne'), sheets: plural(r.wb.sheets.length, 'feuille')}) + ` (${esc(f.name)})${r.kind === 'csv' ? ' · ' + esc(i18n('séparateur « {sep} »', {sep: r.sep === '\t' ? i18n('tabulation') : r.sep})) + ` · ${esc(i18n(S.ENC_LABEL[r.encoding] || r.encoding))}` : ''}`, data: {wb: r.wb, name: f.name.replace(/\.[^.]+$/, '').slice(0, 120) || i18n('Classeur importé')}}; },
+            run: async an => { const r = await post('save_workbook', {name: an.data.name, kind: 'book', data: S.compact(an.data.wb)}), id = Number(r.result?.id || 0); again?.(); setTimeout(() => openWorkbook({id, onSaved: again, onClose: again}), 50); return {message: i18n('Classeur « {name} » créé ({rows})', {name: an.data.name, rows: plural(an.count, 'ligne')}), undo: async () => { await post('delete_workbook', {id}); again?.(); }}; }});
     }
 
     /* ═════════ Dans 🛠️ Outils de modification (écran J) ═════════ */
     const mini = p => (Array.isArray(p) && p.some(r => r.some(v => v !== '' && v != null)) ? `<span class="xl-mini"><table>${p.map(r => `<tr>${r.map(v => `<td>${esc(typeof v === 'number' ? v.toLocaleString('fr-FR') : v)}</td>`).join('')}</tr>`).join('')}</table></span>` : '<span class="h-et-ico">🧾</span>');
     ext.editToolsExtra = ext.editToolsExtra || [];
-    ext.editToolsExtra.push({key: 'sheet', icon: '🧾', label: 'Tableur', what: 'classeur',
+    ext.editToolsExtra.push({key: 'sheet', icon: '🧾', label: i18n('Tableur'), what: i18n('classeur'),
         load: async () => ((await api('workbooks')).items || []).map(w => ({id: w.id, name: w.name, date: w.updated_at, thumb: mini(w.info?.preview), info: [plural(w.info?.sheets || 1, 'feuille'), plural(w.info?.rows || 0, 'ligne'), (w.info?.names || []).slice(0, 3).join(', ')].filter(Boolean).join(' · ')})),
         open: (id, again) => openWorkbook({id, onSaved: again, onClose: again}),
         create: again => openWorkbook({onSaved: again, onClose: again}),
         rename: (id, name) => post('rename_workbook', {id, name}),
-        remove: id => post('delete_workbook', {id}), createLabel: '＋ Nouveau classeur',
-        extra: '<button type="button" class="button secondary" data-et-x="tpl" title="Relevé de recensement, registre paroissial, budget de la recherche, suivi des courriers…">📋 Partir d’un modèle</button><button type="button" class="button secondary" data-et-x="import" title="CSV, TSV, Excel (.xlsx), LibreOffice (.ods), JSON">⤒ Importer…</button>',
+        remove: id => post('delete_workbook', {id}), createLabel: i18n('＋ Nouveau classeur'),
+        extra: `<button type="button" class="button secondary" data-et-x="tpl" title="${esc(i18n('Relevé de recensement, registre paroissial, budget de la recherche, suivi des courriers…'))}">${esc(i18n('📋 Partir d’un modèle'))}</button><button type="button" class="button secondary" data-et-x="import" title="CSV, TSV, Excel (.xlsx), LibreOffice (.ods), JSON">${esc(i18n('⤒ Importer…'))}</button>`,
         onExtra: (k, again) => { if (k === 'tpl') return chooseTemplate({onSaved: again, onClose: again}); if (k === 'import') return importNew(again); }});
     ext.tableurInternals = {Editor, TEMPLATES, openWorkbook, chooseTemplate}; // pour les essais
 })();

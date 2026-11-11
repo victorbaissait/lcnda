@@ -10,6 +10,7 @@
  */
 (function (root) {
     'use strict';
+    const i18n = (s, v) => { const I = typeof window !== 'undefined' && window.LCNDA_I18N; return I ? I.t(s, v) : (v ? String(s).replace(/\{(\w+)\}/g, (m, k) => (k in v ? String(v[k]) : m)) : s); }; // 🌐 traduction (docs/I18N.md)
     const ext = root.LCNDA_EXT = root.LCNDA_EXT || {};
     /** moyenne dans un carré de rayon r (images intégrales) */
     function boxMean(a, W, H, r) {
@@ -53,7 +54,7 @@
         c.dlg.querySelector('.h-rt-liq')?.remove();
         const pn = document.createElement('div'); pn.className = 'h-rt-liq h-rt-refine';
         const sl = (k, l, a, b, v, u = '') => `<label>${l} <input type="range" data-rf="${k}" min="${a}" max="${b}" value="${v}"><output data-rf-o="${k}">${v}${u}</output></label>`;
-        pn.innerHTML = `<header><b>✨ Affiner le bord</b><small>Masque de « ${String(node.name || 'Photo').replace(/[<>&"]/g, '')} »</small></header>
+        pn.innerHTML = `<header><b>✨ Affiner le bord</b><small>${i18n('Masque de « {name} »', {name: String(node.name || i18n('Photo')).replace(/[<>&"]/g, '')})}</small></header>
             <div class="h-rt-liq-opts">${sl('smart', 'Rayon intelligent', 0, 40, 8, ' px')}${sl('smooth', 'Lisser', 0, 20, 2, ' px')}${sl('contrast', 'Contraste', 0, 100, 10, ' %')}${sl('shift', 'Décaler le bord', -20, 20, 0, ' px')}</div>
             <div class="h-rt-liq-tools"><label class="ui-toggle"><input type="checkbox" data-rf-view><i></i>Voir le masque seul (blanc : gardé)</label></div>
             <div class="h-rt-liq-stage"><canvas data-rf-canvas width="${W}" height="${H}"></canvas></div>

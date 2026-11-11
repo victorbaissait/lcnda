@@ -9,6 +9,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (typeof window !== 'undefined' && window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : (v ? String(s).replace(/\{(\w+)\}/g, (m, k) => (k in v ? String(v[k]) : m)) : s)); // 🌐 traduction (docs/I18N.md)
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const A = () => window.LCNDA_APP;
     const UI = () => window.LCNDA_UI || {};
@@ -497,7 +498,7 @@
         }
         function paintProps() {
             const s = show.slides[cur], box = $('[data-ss-props]'), th = THEMES[show.theme] || THEMES.classique;
-            const doc = sec('doc', '🎞️ Tout le diaporama', `${F('Police des textes', `<button type="button" class="button small secondary h-ss-fontbtn" data-ss-cmd="font" style="font-family:${esc(fontOf(show, th))}">${esc(show.font || `Police du style (${th.label})`)} ▾</button>`, 'La police de tous les titres et légendes. Sans choix, c’est celle du style (Classique, Album ancien…).')}${show.font ? '<button type="button" class="link-button" data-ss-cmd="fontreset">↺ Revenir à la police du style</button>' : ''}${F('Musique de fond', '<span class="h-ss-music" data-ss-music></span>')}<p class="muted">${plural(show.slides.length, 'diapositive')} · ${fmt(eng.total())}</p><button type="button" class="button small secondary" data-ss-cmd="tokeynote" title="Une présentation façon Keynote faite de ces diapositives (textes, formes, animations, mode présentateur…) ; le diaporama reste tel quel">🎤 En faire une présentation…</button>`, true);
+            const doc = sec('doc', '🎞️ Tout le diaporama', `${F('Police des textes', `<button type="button" class="button small secondary h-ss-fontbtn" data-ss-cmd="font" style="font-family:${esc(fontOf(show, th))}">${esc(show.font || i18n('Police du style ({name})', {name: i18n(th.label)}))} ▾</button>`, 'La police de tous les titres et légendes. Sans choix, c’est celle du style (Classique, Album ancien…).')}${show.font ? '<button type="button" class="link-button" data-ss-cmd="fontreset">↺ Revenir à la police du style</button>' : ''}${F('Musique de fond', '<span class="h-ss-music" data-ss-music></span>')}<p class="muted">${plural(show.slides.length, 'diapositive')} · ${fmt(eng.total())}</p><button type="button" class="button small secondary" data-ss-cmd="tokeynote" title="Une présentation façon Keynote faite de ces diapositives (textes, formes, animations, mode présentateur…) ; le diaporama reste tel quel">🎤 En faire une présentation…</button>`, true);
             if (!s) { box.innerHTML = `<p class="muted">Choisis une diapositive (à gauche) pour régler sa durée, sa transition, son texte, sa voix.</p>${doc}`; paintMusic(); return; }
             const h = [`<h4>${ICON[s.type]} Diapositive ${cur + 1}</h4>`];
             // Couleur
@@ -525,7 +526,7 @@
             h.push(sec('notes', '📝 Notes', F('Notes (sources, rappels)', `<textarea rows="3" data-ss-p="notes" placeholder="Pour toi : les sources, ce qu’il reste à vérifier…">${esc(s.notes || '')}</textarea>`, 'Les notes ne se voient pas pendant la lecture ; elles suivent la diapositive quand on en fait une présentation (notes de l’orateur).'), !!s.notes));
             box.innerHTML = h.join('') + doc; paintMusic();
         }
-        function paint() { paintList(); paintProps(); drawAt(t); ssBar?.setWhere(show.slides.length ? `Diapositive ${cur + 1} / ${show.slides.length}` : 'Aucune diapositive'); ssBar?.sync(); }
+        function paint() { paintList(); paintProps(); drawAt(t); ssBar?.setWhere(show.slides.length ? i18n('Diapositive {k} / {n}', {k: String(cur + 1), n: String(show.slides.length)}) : i18n('Aucune diapositive')); ssBar?.sync(); }
         function drawAt(tt) { t = clamp(tt, 0, eng.total()); const i = eng.frame(t); if (i >= 0 && playing && i !== cur) { cur = i; paintList(); paintProps(); } const tot = eng.total() || 1; $('[data-ss-seek]').value = Math.round(t / tot * 1000); $('[data-ss-time]').textContent = `${fmt(t)} / ${fmt(eng.total())}`; }
         const goSlide = i => { cur = clamp(i, 0, Math.max(0, show.slides.length - 1)); t = (eng.starts()[cur] || 0) + .9; paint(); };
         /* ─── son : musique et voix ─── */
@@ -563,7 +564,7 @@
             try {
                 for (const f of imgs.slice(0, 60)) { const r = await toMedia(f, f.name, 'image', f.name.replace(/\.[^.]+$/, '')); added.push({media_id: Number(r.media_id), filename: r.filename, title: f.name.replace(/\.[^.]+$/, '')}); }
                 if (snd[0]) { const f = snd[0], r = await toMedia(f, f.name, 'audio', f.name.replace(/\.[^.]+$/, '')); show.music = {media_id: Number(r.media_id), filename: r.filename, title: f.name.replace(/\.[^.]+$/, '')}; music?.pause(); music = null; touch(); paintMusic(); }
-                await addPhotoList(added); progress(''); toast(`${plural(imgs.length + (snd.length ? 1 : 0), 'fichier ajouté', 'fichiers ajoutés')} aux Médias${snd.length ? ' (le son devient la musique)' : ''}.`);
+                await addPhotoList(added); progress(''); toast(snd.length ? i18n('{what} aux Médias (le son devient la musique).', {what: plural(imgs.length + 1, 'fichier ajouté', 'fichiers ajoutés')}) : i18n('{what} aux Médias.', {what: plural(imgs.length, 'fichier ajouté', 'fichiers ajoutés')}));
             } catch (e) { progress(''); toast(e.message, 'error'); }
         }
         ui.bindFileDrop?.($('.h-ss-main'), dropFiles, {accept: 'image/*,audio/*'});
@@ -591,7 +592,7 @@
                 const st = await lifeStory(o); progress('');
                 if (!st.show.slides.length) return toast('Rien à raconter pour cette personne.', 'error');
                 let replace = !show.slides.length;
-                if (!replace) replace = await A().confirmBox(`${plural(st.count, 'diapositive est prête', 'diapositives sont prêtes')}. Elles peuvent remplacer celles du diaporama ou venir à la suite.`, {title: 'Remplacer le diaporama par le récit ?', okLabel: 'Remplacer', cancelLabel: 'Ajouter à la suite', danger: false});
+                if (!replace) replace = await A().confirmBox(i18n('{what}. Elles peuvent remplacer celles du diaporama ou venir à la suite.', {what: plural(st.count, 'diapositive est prête', 'diapositives sont prêtes')}), {title: i18n('Remplacer le diaporama par le récit ?'), okLabel: i18n('Remplacer'), cancelLabel: i18n('Ajouter à la suite'), danger: false});
                 if (replace) { show = st.show; cur = 0; } else { show.slides.push(...st.show.slides); if (!show.music && st.show.music) show.music = st.show.music; show.story = st.show.story; cur = show.slides.length - st.show.slides.length; }
                 if (replace || name === 'Mon diaporama') { name = st.name; $('[data-ss-name]').value = name; }
                 music?.pause(); music = null; syncTop(); touch(); await rebuild(); drawAt(.9);

@@ -17,6 +17,7 @@
     const PK = () => window.LCNDA_PICKER || A();
     const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
     const toast = (...a) => A()?.toast?.(...a);
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s).replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? String(v[k]) : m))); // 🌐 traduction (docs/I18N.md)
     const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
     const num = (v, a, b, d) => { const n = Number(v); return Number.isFinite(n) ? clamp(n, a, b) : d; };
     const isHex = v => /^#[0-9a-f]{6}$/i.test(String(v || ''));
@@ -136,7 +137,7 @@
             neutralMat ??= picMat(T, texOpts(T, new T.CanvasTexture(neutral(false))));
             const me = new T.Mesh(new T.PlaneGeometry(w, h), neutralMat); me.position.z = .0012; me.receiveShadow = true; me.userData.picOf = i; mk.add(me);
             matFor(T, p, w, h).then(m => { me.material = m; }, () => { missingMat ??= picMat(T, texOpts(T, new T.CanvasTexture(neutral(true)))); me.material = missingMat;
-                if (!warned.has(p.m)) { warned.add(p.m); toast(`L’image du média n° ${p.m} est introuvable : une toile neutre la remplace.`); } });
+                if (!warned.has(p.m)) { warned.add(p.m); toast(i18n('L’image du média n° {n} est introuvable : une toile neutre la remplace.', {n: String(p.m)})); } });
         });
     }
 
@@ -169,8 +170,8 @@
         const inf = infoOf(o); if (!inf || typeof sec !== 'function') return '';
         const n = inf.n, i = curSlot(o), p = get(o, i), miss = p && ready.get(p.m) === false, mp = memPics(o);
         const meta = p ? META.get(p.m) : null, val = p ? (meta ? {id: p.m, title: meta.title, thumb: thumbOf(meta), year: meta.year || ''} : p.m) : null;
-        const tabs = n > 1 ? `<div class="h-hs-picslots" role="group" aria-label="Le cadre">${Array.from({length: n}, (_, k) => `<button type="button" class="${k === i ? 'is-active' : ''}" data-hs-picslot="${k}" title="Cadre ${k + 1}${has(o, k) ? ' : une image' : ' : vide'}">${has(o, k) ? '🖼' : '▢'} ${k + 1}</button>`).join('')}</div>` : '';
-        const field = `<div data-hs-picfield><span class="pk-lab">${n > 1 ? `Image du cadre ${i + 1}` : 'Prise dans les médias'}</span>${PK()?.mediaField ? PK().mediaField({name: '', types: ['image'], person: person && person.id ? person : null, value: val, eyebrow: 'MAISON · IMAGE', title: `L’image de « ${String(name).slice(0, 60)} »`, okLabel: 'Poser cette image'}) : ''}</div>`;
+        const tabs = n > 1 ? `<div class="h-hs-picslots" role="group" aria-label="Le cadre">${Array.from({length: n}, (_, k) => `<button type="button" class="${k === i ? 'is-active' : ''}" data-hs-picslot="${k}" title="${has(o, k) ? i18n('Cadre {n} : une image', {n: k + 1}) : i18n('Cadre {n} : vide', {n: k + 1})}">${has(o, k) ? '🖼' : '▢'} ${k + 1}</button>`).join('')}</div>` : '';
+        const field = `<div data-hs-picfield><span class="pk-lab">${n > 1 ? i18n('Image du cadre {n}', {n: i + 1}) : i18n('Prise dans les médias')}</span>${PK()?.mediaField ? PK().mediaField({name: '', types: ['image'], person: person && person.id ? person : null, value: val, eyebrow: 'MAISON · IMAGE', title: i18n('L’image de « {name} »', {name: String(name).slice(0, 60)}), okLabel: 'Poser cette image'}) : ''}</div>`;
         const mems = mp.length ? `<div class="h-hs-picmem"><small class="muted">Ou un souvenir de cet objet :</small>${mp.slice(0, 8).map(m => `<button type="button" class="h-hs-picmemb${p && p.m === Number(m.mid) ? ' is-active' : ''}" data-hs-picmem="${Number(m.mid)}" title="${esc(m.title || 'Souvenir')}">${/^media\/[\w.%()-]+$/.test(m.src || '') ? `<img src="${esc(m.src)}" alt="">` : '🖼'}<span>${esc(String(m.title || 'Souvenir').slice(0, 40))}</span></button>`).join('')}</div>` : '';
         const keepMem = p && !mp.some(m => Number(m.mid) === p.m) ? '<button type="button" class="button small secondary" data-hs-piccmd="mem" title="La rattacher aussi aux souvenirs de cet objet">🏷 Garder aussi comme souvenir</button>' : '';
         const opt = (list, cur) => list.map(([k, l]) => `<option value="${k}" ${cur === k ? 'selected' : ''}>${esc(l)}</option>`).join('');
@@ -225,8 +226,8 @@
         if (t?.g) { hiEl = t.g; hiEl.classList.add('is-picdrop'); }
         if (!t) { tip?.remove(); tip = null; return; }
         if (!tip) { tip = document.createElement('div'); tip.className = 'h-hs-piptip'; ED.stage.appendChild(tip); }
-        const r = ED.stage.getBoundingClientRect(), nm = t.it.name || libOf(t.it.kind)?.[1] || 'cet objet';
-        tip.textContent = `🖼 Déposer sur « ${nm} »${count(t.it) > 1 ? ` (cadre ${t.i + 1})` : ''}`; tip.style.left = `${e.clientX - r.left + 14}px`; tip.style.top = `${e.clientY - r.top + 14}px`;
+        const r = ED.stage.getBoundingClientRect(), nm = t.it.name || i18n(libOf(t.it.kind)?.[1] || 'cet objet');
+        tip.textContent = count(t.it) > 1 ? i18n('🖼 Déposer sur « {name} » (cadre {n})', {name: nm, n: t.i + 1}) : i18n('🖼 Déposer sur « {name} »', {name: nm}); tip.style.left = `${e.clientX - r.left + 14}px`; tip.style.top = `${e.clientY - r.top + 14}px`;
     }
     async function dropOn(file, iid, i = null) {
         const it = ED?.findItem(iid); if (!it || !count(it)) return false;

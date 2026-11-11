@@ -31,7 +31,7 @@ let n = 0; const ok = (c, m) => { assert.ok(c, m); n++; }; const eq = (a, b, m) 
     ['editorStatus', 'editorRail', 'saveMenu', 'openFontPicker', 'autoSaveDialog'].forEach(f => ok(new RegExp(`\\b${f}\\?*\\.?\\(`).test(src), `heritage-tableur.js utilise UI.${f}`));
     ok(!/class="xl-status"/.test(src), 'plus de barre d’état à part (.xl-status)');
     const set = src.slice(src.indexOf('settingsDialog() {'), src.indexOf('applyPrefs() {'));
-    ok(set.length > 100 && !/submitLabel: 'Enregistrer'/.test(set) && /submitLabel: 'Fermer'/.test(set) && /data-ui-reset/.test(set), 'réglages : « Fermer » seul et ↺, sans « Enregistrer »');
+    ok(set.length > 100 && !/submitLabel: (?:i18n\()?'Enregistrer'/.test(set) && /submitLabel: (?:i18n\()?'Fermer'/.test(set) && /data-ui-reset/.test(set), 'réglages : « Fermer » seul et ↺, sans « Enregistrer »');
     const css = fs.readFileSync(path.join(appRoot, 'assets/css/tableur.css'), 'utf8');
     ok(!/^\.xl-status\b/m.test(css) && /\.xl-rail \{ grid-column: 1/.test(css), 'tableur.css : colonne d’outils, plus de .xl-status');
     const idx = fs.readFileSync(path.join(appRoot, 'index.php'), 'utf8');

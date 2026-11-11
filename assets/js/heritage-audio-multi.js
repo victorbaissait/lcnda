@@ -8,6 +8,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (typeof window !== 'undefined' && window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : (v ? String(s).replace(/\{(\w+)\}/g, (m, k) => (k in v ? String(v[k]) : m)) : s)); // 🌐 traduction (docs/I18N.md)
     const A = () => window.LCNDA_APP;
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const UI = () => window.LCNDA_UI || {};
@@ -60,7 +61,7 @@
         function build() {
             const opts = M.tracks.map(t => `<option value="${esc(t.id)}">${esc(t.icon + ' ' + t.name)}</option>`).join('');
             box.innerHTML = `<div class="h-am-duck"><label class="ui-toggle"><input type="checkbox" data-am-duck ${M.duck.on ? 'checked' : ''}><i></i>🔉 <b>Baisser la musique sous la voix</b></label>
-                    <span>piste <select data-am-dfrom aria-label="Piste de la voix">${opts}</select> → piste <select data-am-dto aria-label="Piste qui baisse">${opts}</select> · de <input type="number" data-am-ddb min="-40" max="0" step="1" value="${M.duck.db}" data-unit="dB" aria-label="Baisse en dB"> · retour en <input type="number" data-am-dret min="0.1" max="5" step="0.1" value="${M.duck.ret}" data-unit="s" aria-label="Retour en secondes"></span></div>
+                    <span>${i18n('piste', {ctx: 'son'})} <select data-am-dfrom aria-label="${i18n('Piste de la voix')}">${opts}</select> → ${i18n('piste', {ctx: 'son'})} <select data-am-dto aria-label="${i18n('Piste qui baisse')}">${opts}</select> · ${i18n('de', {ctx: 'baisse'})} <input type="number" data-am-ddb min="-40" max="0" step="1" value="${M.duck.db}" data-unit="dB" aria-label="${i18n('Baisse en dB')}"> · ${i18n('retour en')} <input type="number" data-am-dret min="0.1" max="5" step="0.1" value="${M.duck.ret}" data-unit="s" aria-label="Retour en secondes"></span></div>
                 <div class="h-am-grid"><div class="h-am-corner">Pistes</div><canvas class="h-am-ruler" data-am-ruler></canvas>
                 ${M.tracks.map(t => `<div class="h-am-th" data-am-track="${esc(t.id)}"><div class="h-am-thtop"><b>${esc(t.icon)} <input class="h-am-tname" data-am-tname value="${esc(t.name)}" maxlength="40" aria-label="Nom de la piste"></b><span class="h-am-msr"><button type="button" class="${t.mute ? 'is-on' : ''}" data-am-m title="Muet" aria-label="Muet" aria-pressed="${t.mute}">M</button><button type="button" class="${t.solo ? 'is-on' : ''}" data-am-s title="Solo" aria-label="Solo" aria-pressed="${t.solo}">S</button><button type="button" class="h-am-arm${t.arm ? ' is-on' : ''}" data-am-arm title="Armer : la piste qui enregistre au micro" aria-label="Armer pour le micro" aria-pressed="${t.arm}">●</button></span></div>
                     <label class="h-am-sl">Vol.<input type="range" min="0" max="1.5" step="0.01" value="${t.vol}" data-am-vol aria-label="Volume de ${esc(t.name)}"></label><label class="h-am-sl">Pan.<input type="range" min="-1" max="1" step="0.05" value="${t.pan}" data-am-pan aria-label="Panoramique de ${esc(t.name)}"></label>
@@ -107,7 +108,7 @@
             const th = e.target.closest('[data-am-track]'), t = th && trackOf(th.dataset.amTrack);
             if (t && e.target.closest('[data-am-m]')) { t.mute = !t.mute; save(`${t.name} : ${t.mute ? 'muet' : 'son'}`); build(); draw(); return; }
             if (t && e.target.closest('[data-am-s]')) { t.solo = !t.solo; save(`${t.name} : solo`); build(); draw(); return; }
-            if (t && e.target.closest('[data-am-arm]')) { const on = !t.arm; M.tracks.forEach(x => { x.arm = false; }); t.arm = on; save(on ? `${t.name} : armée pour le micro` : `${t.name} : désarmée`); build(); draw(); return; }
+            if (t && e.target.closest('[data-am-arm]')) { const on = !t.arm; M.tracks.forEach(x => { x.arm = false; }); t.arm = on; save(on ? i18n('{name} : armée pour le micro', {name: t.name}) : i18n('{name} : désarmée', {name: t.name})); build(); draw(); return; }
             if (e.target.closest('[data-am-addtrack]')) { M.tracks.push({id: nid('p'), name: `Piste ${M.tracks.length + 1}`, icon: '🎵', vol: 1, pan: 0, mute: false, solo: false, arm: false, show: 'vol', clips: [], auto: {vol: [], pan: []}}); save('Nouvelle piste'); build(); draw(); return; }
             if (e.target.closest('[data-am-addclip]')) { S.dl.querySelector('[data-as-addfile]')?.click(); return; }
             if (e.target.closest('[data-am-snap]')) { try { localStorage.setItem(SNAP_KEY, snapOn() ? '0' : '1'); } catch (_) {} e.target.closest('[data-am-snap]').classList.toggle('is-active', snapOn()); }
@@ -116,8 +117,8 @@
         box.addEventListener('change', async e => {
             const th = e.target.closest('[data-am-track]'), t = th && trackOf(th.dataset.amTrack);
             if (t && e.target.matches('[data-am-vol],[data-am-pan]')) return save(`${t.name} : ${e.target.matches('[data-am-vol]') ? 'volume' : 'panoramique'}`);
-            if (t && e.target.matches('[data-am-tname]')) { t.name = e.target.value.trim().slice(0, 40) || t.name; return save(`Renommer la piste « ${t.name} »`); }
-            if (t && e.target.matches('[data-am-show]')) { t.show = e.target.value; save(`${t.name} : courbe du ${t.show === 'pan' ? 'panoramique' : 'volume'}`); return draw(); }
+            if (t && e.target.matches('[data-am-tname]')) { t.name = e.target.value.trim().slice(0, 40) || t.name; return save(i18n('Renommer la piste « {name} »', {name: t.name})); }
+            if (t && e.target.matches('[data-am-show]')) { t.show = e.target.value; save(t.show === 'pan' ? i18n('{name} : courbe du panoramique', {name: t.name}) : i18n('{name} : courbe du volume', {name: t.name})); return draw(); }
             if (e.target.matches('[data-am-duck],[data-am-dfrom],[data-am-dto],[data-am-ddb],[data-am-dret]')) {
                 M.duck = {on: box.querySelector('[data-am-duck]').checked, from: box.querySelector('[data-am-dfrom]').value, to: box.querySelector('[data-am-dto]').value, db: clamp(Number(box.querySelector('[data-am-ddb]').value) || -12, -40, 0), ret: clamp(Number(box.querySelector('[data-am-dret]').value) || 0.8, 0.1, 5)};
                 await applyDuck(); save(M.duck.on ? 'Baisser la musique sous la voix' : 'Ne plus baisser la musique'); draw();
@@ -143,18 +144,18 @@
                 const up = () => { lane.removeEventListener('pointermove', mv); lane.removeEventListener('pointerup', up); save(`${t.name} : point de la courbe`); };
                 lane.addEventListener('pointermove', mv); lane.addEventListener('pointerup', up); return; }
             const clip = t.clips.find(c => p.t >= c.start && p.t <= c.start + c.dur);
-            if (clip && S.tool() === 'razor') { const at = p.t - clip.start; if (at < 0.05 || clip.dur - at < 0.05) return; const b = {...clip, id: nid('c'), start: clip.start + at, offset: clip.offset + at, dur: clip.dur - at}; clip.dur = at; t.clips.splice(t.clips.indexOf(clip) + 1, 0, b); selClip = b.id; save(`Couper « ${clip.name || 'le morceau'} » à ${fmt(p.t)}`); draw(); return; }
+            if (clip && S.tool() === 'razor') { const at = p.t - clip.start; if (at < 0.05 || clip.dur - at < 0.05) return; const b = {...clip, id: nid('c'), start: clip.start + at, offset: clip.offset + at, dur: clip.dur - at}; clip.dur = at; t.clips.splice(t.clips.indexOf(clip) + 1, 0, b); selClip = b.id; save(i18n('Couper « {name} » à {time}', {name: clip.name || i18n('le morceau'), time: fmt(p.t)})); draw(); return; }
             if (!clip) { selClip = null; S.setCursor(Math.max(0, p.t)); draw(); return; }
             selClip = clip.id; lane.setPointerCapture(e.pointerId); const dx0 = p.t - clip.start, s0 = clip.start; let moved = false;
             const edges = () => [0, S.cursor(), ...M.tracks.flatMap(x => x.clips.filter(c => c !== clip).flatMap(c => [c.start, c.start + c.dur]))];
             const mv = ev => { const q = laneAt(ev, lane); let ns = Math.max(0, q.t - dx0); if (snapOn() && !ev.altKey) { const tol = view.dur / q.r.width * 8; for (const ed of edges()) { if (Math.abs(ns - ed) < tol) { ns = ed; break; } if (Math.abs(ns + clip.dur - ed) < tol) { ns = ed - clip.dur; break; } } } moved = moved || Math.abs(ns - s0) > 1e-3; clip.start = Math.max(0, ns); mixCache = null; draw(); };
-            const up = () => { lane.removeEventListener('pointermove', mv); lane.removeEventListener('pointerup', up); if (moved) save(`Déplacer « ${clip.name || 'le morceau'} »`); else draw(); };
+            const up = () => { lane.removeEventListener('pointermove', mv); lane.removeEventListener('pointerup', up); if (moved) save(i18n('Déplacer « {name} »', {name: clip.name || i18n('le morceau')})); else draw(); };
             lane.addEventListener('pointermove', mv); lane.addEventListener('pointerup', up);
         });
         box.addEventListener('dblclick', e => { const lane = e.target.closest('[data-am-lane]'); if (!lane) return; const t = trackOf(lane.dataset.amLane), p = laneAt(e, lane), pts = t.auto[t.show];
-            if (!pts.length) pts.push({t: 0, v: t.show === 'pan' ? t.pan : 1}); pts.push({t: Math.max(0, p.t), v: vOf(t, p.y, p.r.height)}); pts.sort((a, b) => a.t - b.t); save(`${t.name} : point ajouté à ${fmt(p.t)}`); draw(); });
+            if (!pts.length) pts.push({t: 0, v: t.show === 'pan' ? t.pan : 1}); pts.push({t: Math.max(0, p.t), v: vOf(t, p.y, p.r.height)}); pts.sort((a, b) => a.t - b.t); save(i18n('{name} : point ajouté à {time}', {name: t.name, time: fmt(p.t)})); draw(); });
         box.addEventListener('contextmenu', e => { const lane = e.target.closest('[data-am-lane]'); if (!lane || e.shiftKey || !UI().contextMenu) return; const t = trackOf(lane.dataset.amLane), p = laneAt(e, lane), pi = hitPoint(t, p, lane), clip = t.clips.find(c => p.t >= c.start && p.t <= c.start + c.dur);
-            const items = []; if (pi >= 0) items.push({icon: '🗑', label: 'Retirer ce point', danger: true, run: () => { t.auto[t.show].splice(pi, 1); save(`${t.name} : point retiré`); draw(); }});
+            const items = []; if (pi >= 0) items.push({icon: '🗑', label: 'Retirer ce point', danger: true, run: () => { t.auto[t.show].splice(pi, 1); save(i18n('{name} : point retiré', {name: t.name})); draw(); }});
             if (clip) items.push({icon: '✂️', label: 'Couper ici', run: () => { const at = p.t - clip.start; const b = {...clip, id: nid('c'), start: clip.start + at, offset: clip.offset + at, dur: clip.dur - at}; clip.dur = at; t.clips.push(b); save('Couper le morceau'); draw(); }}, {icon: '🔊', label: 'Volume du morceau…', run: async () => { const v = await A().askText({title: 'Volume du morceau', message: 'En pourcentage (100 = tel quel) :', value: String(Math.round(clip.gain * 100)), okLabel: 'Enregistrer', inputMode: 'numeric'}); if (v == null) return; clip.gain = clamp(Number(String(v).replace(',', '.')) / 100 || 1, 0, 4); save('Volume du morceau'); }}, '-', {icon: '🗑', label: 'Retirer le morceau', danger: true, run: () => { selClip = clip.id; delSel(); }});
             items.push({icon: '◆', label: 'Remettre la courbe à plat', disabled: !t.auto[t.show].length, run: () => { t.auto[t.show] = []; save(`${t.name} : courbe à plat`); draw(); }});
             UI().contextMenu(e, items, {title: t.name}); });
@@ -169,7 +170,7 @@
             const f = S.files.find(x => x.key === key), t = track || M.tracks.find(x => x.arm) || trackOf('musique') || M.tracks[0];
             const c = {id: nid('c'), key, name: f?.title || 'Son', src: f?.src || (f?.media?.filename ? `media/${encodeURIComponent(f.media.filename)}` : undefined), mediaId: f?.media?.id, start: at ?? S.cursor(), offset: 0, dur: b.duration, gain: 1};
             t.clips.push(c); selClip = c.id; if (M.duck.on && M.duck.from === t.id) await applyDuck();
-            view.dur = Math.max(view.dur, total() * 1.08); save(`Ajouter « ${c.name} » sur ${t.name}`); draw();
+            view.dur = Math.max(view.dur, total() * 1.08); save(i18n('Ajouter « {name} » sur {track}', {name: c.name, track: t.name})); draw();
         }
         async function addRecording(file, buffer) {
             const t = M.tracks.find(x => x.arm); if (!t) return;
@@ -180,7 +181,7 @@
                 await addClip(key, t, S.cursor()); toast(`${title} posée sur la piste « ${t.name} » (et rangée dans les médias).`); }
             catch (e) { toast(e.message, 'error'); }
         }
-        function delSel() { if (!selClip) return; const t = M.tracks.find(x => x.clips.some(c => c.id === selClip)); if (!t) return; const c = t.clips.find(x => x.id === selClip); t.clips = t.clips.filter(x => x !== c); selClip = null; save(`Retirer « ${c.name || 'le morceau'} »`); draw(); A().undoToast?.(`Morceau « ${c.name || 'son'} » retiré`, {undo: () => S.dl._as?.runCmd('undo'), redo: () => S.dl._as?.runCmd('redo')}); }
+        function delSel() { if (!selClip) return; const t = M.tracks.find(x => x.clips.some(c => c.id === selClip)); if (!t) return; const c = t.clips.find(x => x.id === selClip); t.clips = t.clips.filter(x => x !== c); selClip = null; save(i18n('Retirer « {name} »', {name: c.name || i18n('le morceau')})); draw(); A().undoToast?.(i18n('Morceau « {name} » retiré', {name: c.name || i18n('son')}), {undo: () => S.dl._as?.runCmd('undo'), redo: () => S.dl._as?.runCmd('redo')}); }
         reload();
         return {draw, reload, mix, tracks: () => M.tracks.filter(t => t.clips.length).map(t => ({id: t.id, name: t.name})), addClip, addRecording, armed: () => M?.tracks.some(t => t.arm), delSel, model: () => M, applyDuck};
     }

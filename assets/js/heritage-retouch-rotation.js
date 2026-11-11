@@ -16,6 +16,7 @@
     if (typeof window !== 'undefined') { window.LCNDA_EXT = window.LCNDA_EXT || {}; window.LCNDA_EXT.rtOrient = O; }
 })(typeof self !== 'undefined' ? self : this, function () {
     'use strict';
+    const i18n = (s, v) => { const I = typeof window !== 'undefined' && window.LCNDA_I18N; return I ? I.t(s, v) : (v ? String(s).replace(/\{(\w+)\}/g, (m, k) => (k in v ? String(v[k]) : m)) : s); }; // 🌐 traduction (docs/I18N.md)
     const norm = a => { let v = ((Number(a) || 0) % 360 + 360) % 360; if (v > 180) v -= 360; return Math.abs(v) < 1e-9 ? 0 : Math.round(v * 1e6) / 1e6; };
     const isFlip = s => s && (s.f === 'h' || s.f === 'v');
     const isRot = s => s && typeof s.r === 'number' && Number.isFinite(s.r);
@@ -248,8 +249,8 @@
         return {o, applied, steps: exifSteps(o)};
     }
 
-    const label = s => { const c = clean(s); if (!c) return ''; if (c.f) return c.f === 'h' ? 'Symétrie horizontale de l’image' : 'Symétrie verticale de l’image'; if (c.p) return 'Perspective figée';
-        const q = isQuarter(c) ? quarterOf(c) : -1; return q === 1 ? 'Rotation de l’image : 90° horaire' : q === 3 ? 'Rotation de l’image : 90° antihoraire' : q === 2 ? 'Rotation de l’image : 180°' : `Rotation de l’image : ${String(Math.abs(c.r)).replace('.', ',')}° ${c.r > 0 ? 'horaire' : 'antihoraire'}`; };
+    const label = s => { const c = clean(s); if (!c) return ''; if (c.f) return c.f === 'h' ? i18n('Symétrie horizontale de l’image') : i18n('Symétrie verticale de l’image'); if (c.p) return i18n('Perspective figée');
+        const q = isQuarter(c) ? quarterOf(c) : -1; return q === 1 ? i18n('Rotation de l’image : 90° horaire') : q === 3 ? i18n('Rotation de l’image : 90° antihoraire') : q === 2 ? i18n('Rotation de l’image : 180°') : (c.r > 0 ? i18n('Rotation de l’image : {a}° horaire', {a: String(Math.abs(c.r)).replace('.', ',')}) : i18n('Rotation de l’image : {a}° antihoraire', {a: String(Math.abs(c.r)).replace('.', ',')})); };
 
     return {norm, clean, cleanList, isQuarter, dims, matrix, push, mapper, xfOp, xfStroke, xfNode, xfFilters, xfPersp, xfCrop, doc, innerRect,
         canvasStep, applySteps, exifOrientation, jpegSize, exifSteps, exifState, label};

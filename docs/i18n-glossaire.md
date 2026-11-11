@@ -227,3 +227,186 @@ Le français « de / d’ » devant un nom (« enfant de Pierre », « enfant d�
 | fiche sur un sujet | sheet | ficha | Blatt | scheda | ficha | karta | fiche |
 | cousinade | family reunion | encuentro familiar | Familientreffen | rimpatriata | encontro de família | zjazd rodzinny | familiereünie |
 | Trésors | Treasures | Tesoros | Schätze | Tesori | Tesouros | Skarby | Schatten |
+
+## Zone « traitement-texte » (📝 Traitement de texte)
+Le contenu des documents ne se traduit jamais : modèles de lettres, comptes rendus, sommaire / index / bibliographie posés dans
+le texte, champs de fusion déjà écrits. Les noms des styles de départ (« Titre 1 »…) ne sont traduits qu’à l’écran
+(`LCNDA_TEXT.styleLabel`), le nom enregistré reste en français ; un nom choisi par la personne ne bouge pas. La relecture
+(typographie, synonymes) suit les règles et le dictionnaire français.
+| Français | English | Español | Deutsch | Italiano | Português | Polski | Nederlands |
+|---|---|---|---|---|---|---|---|
+| traitement de texte | word processor | procesador de textos | Textverarbeitung | elaboratore di testi | processador de texto | edytor tekstu | tekstverwerker |
+| style (de paragraphe) | style | estilo | Format | stile | estilo | styl | stijl |
+| jeu de styles | style set | conjunto de estilos | Formatsatz | set di stili | conjunto de estilos | zestaw stylów | stijlset |
+| Titre 1 (style) | Heading 1 | Título 1 | Überschrift 1 | Titolo 1 | Título 1 | Nagłówek 1 | Kop 1 |
+| suivi des modifications | track changes | control de cambios | Änderungen nachverfolgen | revisioni | registar alterações | śledzenie zmian | wijzigingen bijhouden |
+| modification suivie | tracked change | cambio registrado | nachverfolgte Änderung | revisione | alteração registada | śledzona zmiana | bijgehouden wijziging |
+| commentaire | comment | comentario | Kommentar | commento | comentário | komentarz | opmerking |
+| note de bas de page / de fin | footnote / endnote | nota al pie / final | Fußnote / Endnote | nota a piè di pagina / di chiusura | nota de rodapé / final | przypis dolny / końcowy | voetnoot / eindnoot |
+| en-tête / pied de page | header / footer | encabezado / pie de página | Kopfzeile / Fußzeile | intestazione / piè di pagina | cabeçalho / rodapé | nagłówek / stopka | koptekst / voettekst |
+| sommaire | table of contents | índice | Inhaltsverzeichnis | sommario | índice | spis treści | inhoudsopgave |
+| index (de fin de livre) | index | índice alfabético | Register | indice analitico | índice remissivo | indeks | register |
+| interligne | line spacing | interlineado | Zeilenabstand | interlinea | entrelinha | interlinia | regelafstand |
+| retrait | indent | sangría | Einzug | rientro | avanço | wcięcie | inspringing |
+| lettrine | drop cap | letra capital | Initiale | capolettera | capitular | inicjał | initiaal |
+| habillage (d’une image) | text wrapping | ajuste | Textumbruch | testo a capo | moldagem | opływanie | tekstterugloop |
+| champ de fusion / publipostage | merge field / mail merge | campo de combinación / combinar correspondencia | Seriendruckfeld / Serienbrief | campo unione / stampa unione | campo de impressão em série / impressão em série | pole korespondencji / korespondencja seryjna | samenvoegveld / standaardbrief |
+| modèle (de document) | template | plantilla | Vorlage | modello | modelo | szablon | sjabloon |
+| onglet (d’un document) | tab | pestaña | Reiter | scheda | separador | karta | tabblad |
+| Mise en page (outil) | Layout | Maquetación | Layout | Impaginazione | Paginação | Skład | Opmaak |
+| Tableur (outil) | Spreadsheet | Hoja de cálculo | Tabellenkalkulation | Foglio di calcolo | Folha de cálculo | Arkusz | Rekenblad |
+
+## Zone « tableur » (🧾 Tableur)
+
+| Français | English | Español | Deutsch | Italiano | Português | Polski | Nederlands |
+|---|---|---|---|---|---|---|---|
+| Tableur | Spreadsheet | Hoja de cálculo | Tabellenkalkulation | Foglio di calcolo | Folha de cálculo | Arkusz kalkulacyjny | Rekenblad |
+| classeur | workbook | libro | Arbeitsmappe | cartella di lavoro | livro | skoroszyt | werkmap |
+| feuille | sheet | hoja | Blatt | foglio | folha | arkusz | blad |
+| cellule / case | cell | celda | Zelle | cella | célula | komórka | cel |
+| plage | range | rango | Bereich | intervallo | intervalo | zakres | bereik |
+| formule | formula | fórmula | Formel | formula | fórmula | formuła | formule |
+| tableau croisé dynamique | pivot table | tabla dinámica | Pivot-Tabelle | tabella pivot | tabela dinâmica | tabela przestawna | draaitabel |
+| mini-graphique | sparkline | minigráfico | Sparkline | grafico sparkline | gráfico sparkline | wykres przebiegu | sparkline |
+| valeur cible | goal seek | buscar objetivo | Zielwertsuche | ricerca obiettivo | atingir objetivo | szukaj wyniku | doel zoeken |
+| remplissage instantané | flash fill | relleno rápido | Blitzvorschau | riempimento istantaneo | preenchimento instantâneo | wypełnianie błyskawiczne | snel aanvullen |
+| Tenir à jour (plage liée) | Keep up to date | Mantener al día | Aktuell halten | Mantieni aggiornato | Manter atualizado | Aktualizuj na bieżąco | Bijhouden |
+| Préparer pour… | Prepare for… | Preparar para… | Vorbereiten für… | Prepara per… | Preparar para… | Przygotuj dla… | Voorbereiden voor… |
+| date d’acte | record date | fecha de acta | Urkundendatum | data d’atto | data de ato | data aktu | aktedatum |
+
+Les noms des fonctions (SOMME, AGE, ANNEE.ACTE…), leurs paramètres dans l’aide (`plage; critère`), les codes d’erreur
+(#DIV/0!…) et les mots attendus dans les formules (« ans », « courbe », « vers 1784 ») restent en français : c’est la langue des
+formules. Le contenu des modèles de classeurs (titres de colonnes, listes de choix) est une donnée et reste aussi en français.
+
+## Zone « mise-en-page » (atelier de mise en page : livres, livrets, designs)
+
+| Français | English | Español | Deutsch | Italiano | Português | Polski | Nederlands |
+|---|---|---|---|---|---|---|---|
+| gabarit (page de fond) | master page | página maestra | Musterseite | pagina mastro | página-mestre | strona wzorcowa | basispagina |
+| calque | layer | capa | Ebene | livello | camada | warstwa | laag |
+| bloc de texte | text frame | bloque de texto | Textrahmen | blocco di testo | bloco de texto | ramka tekstowa | tekstkader |
+| cadre d’image | image frame | marco de imagen | Bildrahmen | cornice immagine | moldura de imagem | ramka obrazu | afbeeldingskader |
+| chaîner / chaînage | thread / threading | encadenar | verketten / Verkettung | concatenare | encadear | połączyć / połączenie | schakelen / schakeling |
+| faire couler le texte | flow the text | hacer fluir el texto | Text fließen lassen | far scorrere il testo | fazer fluir o texto | rozlać tekst | tekst laten doorlopen |
+| fond perdu | bleed | sangrado | Beschnitt | abbondanza | sangria | spad | afloop |
+| traits de coupe | crop marks | marcas de corte | Schnittmarken | segni di taglio | marcas de corte | znaczniki cięcia | snijtekens |
+| ligne-bloc | slug | línea de bloque | Infobereich | area informativa | linha de bloco | pole informacyjne | infostrook |
+| petit fond / grand fond | inside / outside margin | margen interior / exterior | Innen- / Außenrand | margine interno / esterno | margem interior / exterior | margines wewnętrzny / zewnętrzny | binnen- / buitenmarge |
+| gouttière | gutter | medianil | Spaltenabstand | spazio tra colonne | medianiz | odstęp między łamami | kolomafstand |
+| nuancier / nuance | swatches / swatch | muestras / muestra | Farbfelder / Farbfeld | campioni / campione | amostras / amostra | próbki / próbka | stalen / staal |
+| dégradé | gradient | degradado | Verlauf | sfumatura | degradê | gradient | kleurverloop |
+| habillage du texte | text wrap | ceñir texto | Textumfluss | contorno del testo | contorno de texto | oblewanie tekstem | tekstomloop |
+| objet dynamique | live object | objeto dinámico | dynamisches Objekt | oggetto dinamico | objeto dinâmico | obiekt dynamiczny | dynamisch object |
+| publipostage | mail merge | combinación | Serienseiten | stampa unione | mala direta | korespondencja seryjna | samenvoegen |
+| Relecture (menu, onglet) | Review | Revisión | Korrektur | Revisione | Revisão | Korekta | Revisie |
+| design (modèle de livre) | design | diseño | Design | design | design | wzór | ontwerp |
+| livret à plier | booklet to fold | cuadernillo para plegar | Heft zum Falten | libretto da piegare | livreto para dobrar | broszura do złożenia | boekje om te vouwen |
+| note de bas de page / appel de note | footnote / note reference | nota al pie / llamada de nota | Fußnote / Fußnotenzeichen | nota a piè di pagina / richiamo di nota | nota de rodapé / chamada de nota | przypis / odnośnik | voetnoot / notenverwijzing |
+| Contrôle avant impression | Pre-print check | Control antes de imprimir | Prüfung vor dem Druck | Controllo prima della stampa | Verificação antes de imprimir | Kontrola przed drukiem | Controle vóór het afdrukken |
+
+Les menus et onglets de l’atelier passent par `i18n(…, {ctx: 'ly'})` (clés `ly|Relecture`, `ly|Liens`…) pour garder ces mots-là
+même si un autre outil traduit autrement le même mot. Le contenu des pages (`.ly-page`, `data-i18n-off`) n’est jamais retouché ;
+les clés de publipostage (`{prénom}`, `{nom}`…) et `{titre}` restent en français : ce sont des champs, pas des textes.
+
+## Zone « retouche » (retouche des photos, retouche rapide, restauration, Assembler, PSD)
+
+| fr | en | es | de | it | pt | pl | nl |
+|---|---|---|---|---|---|---|---|
+| calque | layer | capa | Ebene | livello | camada | warstwa | laag |
+| calque de réglage | adjustment layer | capa de ajuste | Einstellungsebene | livello di regolazione | camada de ajuste | warstwa korekcyjna | aanpassingslaag |
+| masque (d’un calque) | mask | máscara | Maske | maschera | máscara | maska | masker |
+| masque d’écrêtage | clipping mask | máscara de recorte | Schnittmaske | maschera di ritaglio | máscara de recorte | maska przycinająca | uitknipmasker |
+| réglages (de la photo) | adjustments | ajustes | Korrekturen | regolazioni | ajustes | korekty | aanpassingen |
+| préréglage | preset | ajuste preestablecido | Vorgabe | preimpostazione | predefinição | ustawienie | voorinstelling |
+| mode de fusion | blend mode | modo de fusión | Füllmethode | metodo di fusione | modo de mistura | tryb mieszania | overvloeimodus |
+| dégradé | gradient | degradado | Verlauf | sfumatura | gradiente | gradient | verloop |
+| motif | pattern | motivo | Muster | motivo | padrão | wzorek | patroon |
+| correcteur de taches | spot healing | corrector de manchas | Bereichsreparatur | correttore macchie | corretor de manchas | korektor plam | vlekcorrectie |
+| tampon | clone stamp | tampón | Kopierstempel | timbro clone | carimbo | stempel | kloonstempel |
+| recadrer / redresser | crop / straighten | recortar / enderezar | zuschneiden / gerade richten | ritagliare / raddrizzare | recortar / endireitar | kadrować / prostować | uitsnijden / rechtzetten |
+| zone de travail | canvas | lienzo | Arbeitsfläche | area di lavoro | área de trabalho | obszar roboczy | canvas |
+| objet dynamique | smart object | objeto inteligente | Smartobjekt | oggetto avanzato | objeto inteligente | obiekt inteligentny | slim object |
+| pixelliser | rasterise | rasterizar | rastern | rasterizzare | rasterizar | rasteryzować | rasteren |
+| détourer | cut out | recortar | freistellen | scontornare | recortar | wyciąć | uitknippen |
+| fluidité | liquify | licuar | verflüssigen | fluidifica | liquidificar | skraplanie | uitvloeien |
+| pli, rayure, déchirure | crease, scratch, tear | pliegue, arañazo, desgarro | Knick, Kratzer, Riss | piega, graffio, strappo | vinco, risco, rasgão | zagięcie, rysa, rozdarcie | vouw, kras, scheur |
+| jaunissement | yellowing | amarilleo | Vergilbung | ingiallimento | amarelado | zażółcenie | vergeling |
+| coloriser | colourise | colorear | kolorieren | colorare | colorizar | koloryzować | inkleuren |
+| rideau (avant / après) | curtain | cortina | Vorhang | tendina | cortina | kurtyna | gordijn |
+| photo d’identité | ID photo | foto de carné | Passfoto | foto tessera | fotografia tipo passe | zdjęcie legitymacyjne | pasfoto |
+| assembler (des photos) | combine | montar | zusammenfügen | unire | juntar | połączyć | samenvoegen |
+
+Mots qui se traduisent autrement dans la retouche (clés à contexte) : `photo|Exposition` (exposure, pas une exposition), `photo|Luminosité`,
+`texte|Caractère` (le caractère d’un texte, pas celui d’un animal), `photo|Restaurer`, `menu|Sélection`, `retouche|Courbe`, `photo|Légende`
+(légende d’une photo), `motif|D’après`, `pinceau|Feuille`. Les nombres de lignes et d’étapes : `pli|{n} lignes`, `retouche|{n} étapes`.
+Les noms des calques donnés par défaut (« Calque 2 », « Annotations », « ✨ Retouches… ») se traduisent à leur création ; ceux qu’on tape
+ou qui viennent d’un PSD, jamais.
+
+## Zone « son-video » (montage, son, diaporama, Scène)
+
+| Français | English | Español | Deutsch | Italiano | Português | Polski | Nederlands |
+|---|---|---|---|---|---|---|---|
+| rush (montage) | clip | clip | Clip | clip | clip | klip | clip |
+| morceau (sur la frise / une piste) | segment | fragmento | Abschnitt | spezzone | segmento | fragment | fragment |
+| frise (montage) | timeline | línea de tiempo | Zeitleiste | timeline | linha do tempo | oś czasu | tijdlijn |
+| tête de lecture | playhead | cabezal | Abspielposition | testina | cabeça de leitura | głowica | afspeelkop |
+| piste (son, vidéo) | track | pista | Spur | traccia | pista | ścieżka | spoor |
+| image clé | keyframe | fotograma clave | Keyframe | fotogramma chiave | fotograma-chave | klatka kluczowa | keyframe |
+| incrustation | picture-in-picture | superposición | Bild im Bild | sovrimpressione | sobreposição | obraz w obrazie | beeld-in-beeld |
+| fondu | fade | fundido | Blende | dissolvenza | desvanecimento | przejście | overgang / fade |
+| voix off | voice-over | voz en off | Sprecherstimme | voce fuori campo | voz off | lektor | voice-over |
+| Aimanter (K18) | Snap | Imantar | Magnet | Calamita | Íman | Przyciągaj | Magneet |
+| rack d’effets | effects rack | rack de efectos | Effekt-Rack | rack degli effetti | rack de efeitos | zestaw efektów | effectenrek |
+| zone / marqueur (son) | region / marker | zona / marcador | Bereich / Marker | zona / indicatore | zona / marcador | obszar / znacznik | gebied / markering |
+| souffle / bourdonnement | hiss / hum | soplido / zumbido | Rauschen / Brummen | fruscio / ronzio | sopro / zumbido | szum / buczenie | ruis / brom |
+| sonie | loudness | sonoridad | Lautheit | loudness | sonoridade | głośność | luidheid |
+| ⚡ Son rapide / 🎚️ Studio son | ⚡ Quick sound / 🎚️ Sound studio | ⚡ Sonido rápido / 🎚️ Estudio de sonido | ⚡ Schneller Ton / 🎚️ Tonstudio | ⚡ Suono rapido / 🎚️ Studio audio | ⚡ Som rápido / 🎚️ Estúdio de som | ⚡ Szybki dźwięk / 🎚️ Studio dźwięku | ⚡ Snel geluid / 🎚️ Geluidsstudio |
+| diaporama / diapositive | slideshow / slide | pase de diapositivas / diapositiva | Diashow / Folie | presentazione / diapositiva | diaporama / diapositivo | pokaz slajdów / slajd | diavoorstelling / dia |
+| récit d’une vie | life story | relato de una vida | Lebensgeschichte | racconto di una vita | relato de uma vida | opowieść o życiu | levensverhaal |
+| setlist | setlist | setlist | Setlist | scaletta | setlist | setlista | setlist |
+| soir (Scène) | evening | noche | Abend | sera | noite | wieczór | avond |
+| tournée | tour | gira | Tournee | tournée | digressão | trasa | tournee |
+
+## Zone « site-vecto » (Site web, Dessin vectoriel, faire-part, arbre décoratif, sceaux)
+
+| Français | English | Español | Deutsch | Italiano | Português | Polski | Nederlands |
+|---|---|---|---|---|---|---|---|
+| Ceci est… (panneau du site) | This is… | Esto es… | Das ist… | Questo è… | Isto é… | To jest… | Dit is… |
+| aide-mémoire | cheat sheet | chuleta | Spickzettel | promemoria | cábula | ściąga | spiekbriefje |
+| écran (@media) | screen | pantalla | Bildschirm | schermo | ecrã | ekran | scherm |
+| aperçu | preview | vista previa | Vorschau | anteprima | pré-visualização | podgląd | voorbeeld |
+| jeton (Netlify, GitHub) | token | token | Token | token | token | token | token |
+| plan de travail | artboard | mesa de trabajo | Zeichenfläche | tavola | prancheta | obszar roboczy | tekengebied |
+| calque / groupe | layer / group | capa / grupo | Ebene / Gruppe | livello / gruppo | camada / grupo | warstwa / grupa | laag / groep |
+| tracé | path | trazo | Pfad | tracciato | traçado | ścieżka | pad |
+| mode Plan (cartes) | Map mode | modo Plano | Planmodus | modalità Pianta | modo Planta | tryb Plan | plattegrondmodus |
+| blason / émail / meuble | coat of arms / tincture / charge | blasón / esmalte / mueble | Wappen / Tinktur / Figur | blasone / smalto / figura | brasão / esmalte / móvel | herb / barwa / figura | wapen / tinctuur / stuk |
+| faire-part | card | participación | Karte | partecipazione | participação | zawiadomienie | kaart |
+| arbre décoratif | decorative tree | árbol decorativo | Zierstammbaum | albero decorativo | árvore decorativa | drzewo ozdobne | sierstamboom |
+
+Le contenu des sites (blocs, modèles), des faire-part et de l’arbre décoratif (textes posés dans le dessin) et le blasonnement restent
+en français : c’est le contenu de la personne. Le site a un réglage « Langue » (attribut lang du site exporté) ; les textes fixes que
+lib/website.php met dans les blocs exportés restent en français pour l’instant (à brancher sur ce réglage plus tard).
+
+## Zone « maison » (🏠 plan de la maison, 3D, visite)
+
+| Français | English | Español | Deutsch | Italiano | Português | Polski | Nederlands |
+|---|---|---|---|---|---|---|---|
+| pièce (d’une maison) | room | habitación | Raum | stanza | divisão | pomieszczenie | kamer |
+| étage | floor | planta | Stockwerk | piano | andar | piętro | verdieping |
+| vide (sans plancher) | open space | vacío | Luftraum | vuoto | vazio | pustka | vide |
+| trémie (d’escalier) | stairwell opening | hueco | Treppenöffnung | vano scala | vão | otwór | trapgat |
+| époque (version du plan) | period | época | Epoche | epoca | época | epoka | tijdperk |
+| combles | attic | desván | Dachboden | sottotetto | sótão | poddasze | zolder |
+| lucarne / chien-assis | dormer / shed dormer | buharda / buhardilla | Gaube / Schleppgaube | abbaino | trapeira / água-furtada | lukarna / wole oko | dakkapel / sleepdakkapel |
+| plan ancien (à calquer) | old plan | plano antiguo | alter Plan | pianta antica | planta antiga | stary plan | oude plattegrond |
+| décalquer | trace | calcar | nachzeichnen | ricalcare | decalcar | odrysować | overtrekken |
+| visite guidée / arrêt | guided tour / stop | visita guiada / parada | Führung / Station | visita guidata / tappa | visita guiada / paragem | zwiedzanie / przystanek | rondleiding / halte |
+| Mes objets | My objects | Mis objetos | Meine Objekte | I miei oggetti | Os meus objetos | Moje obiekty | Mijn objecten |
+| loi Carrez | Carrez law | ley Carrez | Carrez-Gesetz | legge Carrez | lei Carrez | ustawa Carrez | wet-Carrez |
+
+Les mots qui se traduisent autrement ailleurs passent par `i18n(…, {ctx: 'maison'})` (`maison|Vide`, `maison|Genre`, `maison|Avant`,
+`maison|Poser`, `maison|Écurie`…) ; les points cardinaux de la lumière du jour par `{ctx: 'boussole'}`. Les nombres variables par
+`nW(n, '{n} pièce', '{n} pièces')` (clés de pluriel `={n} pièce`), car le mot « pièce » se traduit ailleurs par « morceau ».
+Les mots-clés de recherche du catalogue (kw) et les objets de heritage-house-metiers.js restent en français ; le contenu de la
+personne (noms des pièces, des étages, souvenirs, textes de la visite guidée lus à voix haute) n’est jamais traduit.

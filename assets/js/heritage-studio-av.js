@@ -11,6 +11,8 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (typeof window !== 'undefined' && window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : (v ? String(s).replace(/\{(\w+)\}/g, (m, k) => (k in v ? String(v[k]) : m)) : s)); // 🌐 traduction (docs/I18N.md)
+    const UIL = () => (window.LCNDA_I18N && window.LCNDA_I18N.lang !== 'fr' ? window.LCNDA_I18N.locale() : 'fr-FR'); // 🌐 nombres selon la langue
     const A = () => window.LCNDA_APP;
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const UIx = () => window.LCNDA_UI || {};
@@ -55,6 +57,7 @@
         dl.innerHTML = bar ? `<div class="modal-head h-avx-bar"><div class="h-avx-titlebox">${bar.icon ? `<span class="ui-topbar-icon" aria-hidden="true">${esc(bar.icon)}</span>` : ''}<span class="h-avx-namebox"><span class="eyebrow">${esc(eyebrow)}</span><input class="h-avx-name" data-avx-name value="${esc(title)}" maxlength="160" aria-label="Nom du projet" title="Le nom du projet (pour le retrouver dans 📂 Projets…)"></span>${bar.undo || ''}</div>
                 <span class="h-avx-headbtns"><span class="ui-status" data-ui-status></span>${id && ext.tbButton ? ext.tbButton(id) : ''}${bar.exportAttrs ? `<button type="button" class="button small secondary" ${bar.exportAttrs} title="Exporter un fichier (et, si tu veux, une copie dans les médias)">⤓ Exporter ▾</button>` : ''}${bar.saveAttrs ? `<button type="button" class="button small" ${bar.saveAttrs} data-shortcut="⌘S" title="${esc(bar.saveTitle || 'Enregistrer')}">💾 Enregistrer</button>` : ''}${id && ext.fullButton ? ext.fullButton(id) : ''}<button type="button" class="icon-button" data-avx-close aria-label="Fermer" title="Fermer">×</button></span></div><div class="h-avx-body">${body}</div>`
             : `<div class="modal-head"><div><span class="eyebrow">${esc(eyebrow)}</span><h2>${esc(title)}</h2></div><span class="h-avx-headbtns">${id && ext.fullButton ? ext.fullButton(id) : ''}<button type="button" class="icon-button" data-avx-close aria-label="Fermer">×</button></span></div><div class="h-avx-body">${body}</div>`;
+        window.LCNDA_I18N?.translate?.(dl); // 🌐 les textes fixes traduits tout de suite (la colonne d’outils les recopie)
         if (id) ext.fullInit?.(dl, id);
         document.body.appendChild(dl);
         if (id) ext.editorKeysAttach?.(dl, id === 'video' ? 'montage' : id); // ⌨️ raccourcis à soi
@@ -112,10 +115,10 @@
         return j.result;
     }
     const saveOptionsHtml = (media, formats) => `<fieldset class="h-rc-modes"><legend>Format</legend>${formats.map((f, i) => `<label class="checkbox-line"><input type="radio" name="fmt" value="${f.key}" ${i ? '' : 'checked'}> <b>${esc(f.label)}</b> <small class="muted">${esc(f.help)}</small></label>`).join('')}</fieldset>
-        ${!media.id ? `<input type="hidden" name="mode" value="new"><div class="form-grid"><label>Titre ${kindOf(media) === 'video' ? 'de la vidéo' : 'du son'}<input name="title" value="${esc(media.title || '')}" maxlength="200"></label><label>Note <small class="muted">(facultatif)</small><input name="note" maxlength="120"></label></div><p class="muted" data-avx-progress></p>` : `<fieldset class="h-rc-modes"><legend>Comment le garder ?</legend>
-            <label class="checkbox-line"><input type="radio" name="mode" value="show" checked> <b>Nouvelle version, montrée partout</b> <small class="muted">(l’original reste gardé : on peut y revenir)</small></label>
-            <label class="checkbox-line"><input type="radio" name="mode" value="version"> Nouvelle version, <b>sans la montrer</b> pour l’instant</label>
-            <label class="checkbox-line"><input type="radio" name="mode" value="copy"> <b>Une copie à part</b> (${kindOf(media) === 'video' ? 'une autre vidéo' : 'un autre son'}, rattaché${kindOf(media) === 'video' ? 'e' : ''} aux mêmes fiches) <small class="muted">: l’original ne change pas du tout</small></label></fieldset>
+        ${!media.id ? `<input type="hidden" name="mode" value="new"><div class="form-grid"><label>${kindOf(media) === 'video' ? i18n('Titre de la vidéo') : i18n('Titre du son')}<input name="title" value="${esc(media.title || '')}" maxlength="200"></label><label>Note <small class="muted">(facultatif)</small><input name="note" maxlength="120"></label></div><p class="muted" data-avx-progress></p>` : `<fieldset class="h-rc-modes"><legend>Comment le garder ?</legend>
+            <label class="checkbox-line"><input type="radio" name="mode" value="show" checked> <b>${i18n('Nouvelle version, montrée partout')}</b> <small class="muted">${i18n('(l’original reste gardé : on peut y revenir)')}</small></label>
+            <label class="checkbox-line"><input type="radio" name="mode" value="version"> ${i18n('Nouvelle version, <b>sans la montrer</b> pour l’instant')}</label>
+            <label class="checkbox-line"><input type="radio" name="mode" value="copy"> ${kindOf(media) === 'video' ? i18n('<b>Une copie à part</b> (une autre vidéo, rattachée aux mêmes fiches)') : i18n('<b>Une copie à part</b> (un autre son, rattaché aux mêmes fiches)')} <small class="muted">${i18n(': l’original ne change pas du tout')}</small></label></fieldset>
         <div class="form-grid"><label>Note de version <small class="muted">(facultatif)</small><input name="note" maxlength="120" placeholder="sans les blancs, voix plus nette…"></label><label data-avx-copytitle hidden>Titre de la copie<input name="title" value="${esc((media.title || '') + ' (montage)')}"></label></div>
         <p class="muted" data-avx-progress></p>`}`;
 
@@ -125,7 +128,7 @@
         if (media.id) try { v = (await A().api('media_versions', {id: media.id})).versions || []; } catch (_) {}
         if (v.length < 2) return {html: '', versions: v};
         // L3 : une ligne ; tout le reste (écouter, comparer A / B, montrer, renommer, supprimer) dans la fenêtre commune « 🕘 Versions »
-        return {versions: v, html: `<p class="h-avx-versions ui-vers-line"><button type="button" class="button small secondary" data-avx-vwin title="Écouter, comparer, montrer partout, renommer, supprimer">🕘 Versions (${v.length})…</button><small>l’original est toujours gardé · montrée : ${esc((v.find(x => x.shown) || v[0]).label || 'Original')}</small></p>`};
+        return {versions: v, html: `<p class="h-avx-versions ui-vers-line"><button type="button" class="button small secondary" data-avx-vwin title="Écouter, comparer, montrer partout, renommer, supprimer">${i18n('🕘 Versions ({n})…', {n: v.length})}</button><small>${i18n('l’original est toujours gardé · montrée : {name}', {name: esc((v.find(x => x.shown) || v[0]).label || i18n('Original'))})}</small></p>`};
     }
     function bindVersions(root, media, kind, after) {
         root.querySelector('[data-avx-vwin]')?.addEventListener('click', () => {
@@ -193,7 +196,7 @@
             UIx()?.saveMenu?.($('[data-au-saveproj]'), () => [{icon: '💾', label: 'Enregistrer le projet son (pour continuer plus tard)', shortcut: '⌘S', run: () => $('[data-au-saveproj]')?.click()}, {icon: '🎧', label: 'Garder dans les médias (le son fini)…', run: () => $('[data-avx-save]')?.click()}, '-', {icon: '📂', label: 'Projets…', run: () => $('[data-au-projects]')?.click()}]);
         }
         // 🎚️ Studio son : le travail suit (le son tel qu'il est, les réglages du Studio, les zones) ; au retour, la pastille dit ce qui reste appliqué
-        const paintRack = () => { const el = $('[data-au-rackpill]'); if (!el) return; el.hidden = !rack.length; el.innerHTML = rack.length ? `<span>⚠️ ${esc(A().plural(rack.length, 'réglage du Studio reste appliqué', 'réglages du Studio restent appliqués'))} (${esc(rack.map(x => (AE.FX[x.type]?.label || x.type).toLowerCase()).join(', '))}).</span> <button type="button" class="link-button" data-au-studio>↗ Les voir dans le Studio</button>` : ''; };
+        const paintRack = () => { const el = $('[data-au-rackpill]'); if (!el) return; el.hidden = !rack.length; el.innerHTML = rack.length ? `<span>⚠️ ${esc(A().plural(rack.length, 'réglage du Studio reste appliqué', 'réglages du Studio restent appliqués'))} (${esc(rack.map(x => i18n(AE.FX[x.type]?.label || x.type).toLowerCase()).join(', '))}).</span> <button type="button" class="link-button" data-au-studio>↗ Les voir dans le Studio</button>` : ''; };
         paintRack();
         dl.addEventListener('click', e => {
             if (!e.target.closest('[data-au-studio]')) return; stop();
@@ -232,10 +235,10 @@
             const run = f => async o => { const go = document.querySelector('dialog.ui-export[open] [data-ui-go]'); const blob = await enc(f, x => { if (go) go.textContent = `Compression… ${Math.round(x * 100)} %`; });
                 const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = o.filename; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 60000);
                 if (o.saveCopy && f !== 'aiff') { await uploadResult(media, blob, f, {mode: 'copy', duration: buf.duration, title: `${nm} (${f.toUpperCase()})`}); toast('Fichier téléchargé, et une copie est rangée dans les médias.'); onDone?.(); } };
-            const formats = [{id: 'mp3', label: '🎵 MP3', hint: `lu partout · ~${mb(16000)} Mo`, ext: 'mp3', run: run('mp3')}, {id: 'wav', label: '🎚 WAV', hint: `sans perte · ~${mb(pcm)} Mo`, ext: 'wav', run: run('wav')}, {id: 'flac', label: '🗜 FLAC', hint: `sans perte, léger · ~${mb(pcm * .55)} Mo`, ext: 'flac', run: run('flac')}];
-            if (await opusSupported()) formats.push({id: 'ogg', label: '🗣 Ogg Opus', hint: `le plus léger · ~${mb(buf.numberOfChannels > 1 ? 16000 : 9000)} Mo`, ext: 'ogg', run: run('ogg')});
-            formats.push({id: 'aiff', label: '🍎 AIFF', hint: 'GarageBand, Logic', ext: 'aiff', run: run('aiff')}, {id: 'base', label: '💾 Dans les médias…', hint: 'nouvelle version, copie (réglages)', ext: '', run: async () => { setTimeout(() => $('[data-avx-save]').click(), 50); }});
-            await UIx().openExportDialog({title: nm, defaultName: nm, quality: false, saveCopy: true, info: `${fmt(buf.duration, false)} · ${buf.numberOfChannels > 1 ? 'stéréo' : 'mono'} · ${(buf.sampleRate / 1000).toLocaleString('fr-FR')} kHz${media.id ? ' · la copie est rattachée aux mêmes fiches' : ''}`, formats});
+            const formats = [{id: 'mp3', label: '🎵 MP3', hint: i18n('lu partout · ~{n} Mo', {n: mb(16000)}), ext: 'mp3', run: run('mp3')}, {id: 'wav', label: '🎚 WAV', hint: i18n('sans perte · ~{n} Mo', {n: mb(pcm)}), ext: 'wav', run: run('wav')}, {id: 'flac', label: '🗜 FLAC', hint: i18n('sans perte, léger · ~{n} Mo', {n: mb(pcm * .55)}), ext: 'flac', run: run('flac')}];
+            if (await opusSupported()) formats.push({id: 'ogg', label: '🗣 Ogg Opus', hint: i18n('le plus léger · ~{n} Mo', {n: mb(buf.numberOfChannels > 1 ? 16000 : 9000)}), ext: 'ogg', run: run('ogg')});
+            formats.push({id: 'aiff', label: '🍎 AIFF', hint: 'GarageBand, Logic', ext: 'aiff', run: run('aiff')}, {id: 'base', label: i18n('💾 Dans les médias…'), hint: i18n('nouvelle version, copie (réglages)'), ext: '', run: async () => { setTimeout(() => $('[data-avx-save]').click(), 50); }});
+            await UIx().openExportDialog({title: nm, defaultName: nm, quality: false, saveCopy: true, info: `${fmt(buf.duration, false)} · ${buf.numberOfChannels > 1 ? i18n('stéréo') : 'mono'} · ${(buf.sampleRate / 1000).toLocaleString(UIL())} kHz${media.id ? ' · ' + i18n('la copie est rattachée aux mêmes fiches') : ''}`, formats});
         });
         $('[data-avx-name]')?.addEventListener('input', () => { dirty = true; showProj(); });
         $('[data-au-projects]').addEventListener('click', () => audioProjectsDialog({current: projId, onOpen: async p => { if (dirty && !await A().confirmBox('Les modifications du son seront perdues.', {title: 'Ouvrir un autre projet sans enregistrer ce son ?', okLabel: 'Ouvrir sans enregistrer', danger: true})) return false; dirty = false; dl.close(); await ext.openAudioProject(p.id, onDone); }}));
@@ -355,7 +358,7 @@
                 if (k === 'insert') {
                     const other = await pickOther('audio'); if (!other) return;
                     const ab = await (await fetch(other.src)).arrayBuffer(), ob = await resample(await ctx.decodeAudioData(ab), sr, ch);
-                    const pos = await choose2('', {title: `Où mettre « ${other.title} » ?`, a: 'À la fin', b: `Au repère orange (${fmt(cursor)})`}); if (!pos) return;
+                    const pos = await choose2('', {title: i18n('Où mettre « {name} » ?', {name: other.title}), a: i18n('À la fin'), b: i18n('Au repère orange ({time})', {time: fmt(cursor)})}); if (!pos) return;
                     const where = pos === 'a' ? buf.length : Math.round(cursor * sr);
                     setBuf(concatBufs([sliceBuf(buf, 0, where), ob, sliceBuf(buf, where, buf.length)].filter(b => b.length > 1), ch, sr));
                     sel = {a: where / sr, b: where / sr + ob.duration}; draw();
@@ -382,16 +385,16 @@
             const mb = bytesPerSec => Math.max(1, Math.round(buf.duration * bytesPerSec / 1048576));
             const pcm = buf.sampleRate * buf.numberOfChannels * 2;
             const formats = [
-                {key: 'mp3', label: 'MP3', help: `lu absolument partout (téléphones, voitures, Mac, Windows) · environ ${mb(16000)} Mo en 128 kbit/s`},
-                {key: 'wav', label: 'WAV', help: `sans perte, lu partout (Mac, Windows, Audacity) · environ ${mb(pcm)} Mo`},
-                {key: 'flac', label: 'FLAC', help: `sans perte et environ deux fois plus léger que le WAV · environ ${mb(pcm * 0.55)} Mo · lu par les navigateurs, VLC, Windows ; pas par QuickTime`},
+                {key: 'mp3', label: 'MP3', help: i18n('lu absolument partout (téléphones, voitures, Mac, Windows) · environ {n} Mo en 128 kbit/s', {n: mb(16000)})},
+                {key: 'wav', label: 'WAV', help: i18n('sans perte, lu partout (Mac, Windows, Audacity) · environ {n} Mo', {n: mb(pcm)})},
+                {key: 'flac', label: 'FLAC', help: i18n('sans perte et environ deux fois plus léger que le WAV · environ {n} Mo · lu par les navigateurs, VLC, Windows ; pas par QuickTime', {n: mb(pcm * 0.55)})},
             ];
-            if (await opusSupported()) formats.push({key: 'ogg', label: 'Ogg Opus', help: `le plus léger pour la voix · environ ${mb(buf.numberOfChannels > 1 ? 16000 : 9000)} Mo · QuickTime ne le lit pas`});
-            formats.push({key: 'aiff', label: 'AIFF', help: `sans perte, pour GarageBand, Logic, QuickTime · environ ${mb(pcm)} Mo · à télécharger seulement (l’app ne le lit pas)`});
+            if (await opusSupported()) formats.push({key: 'ogg', label: 'Ogg Opus', help: i18n('le plus léger pour la voix · environ {n} Mo · QuickTime ne le lit pas', {n: mb(buf.numberOfChannels > 1 ? 16000 : 9000)})});
+            formats.push({key: 'aiff', label: 'AIFF', help: i18n('sans perte, pour GarageBand, Logic, QuickTime · environ {n} Mo · à télécharger seulement (l’app ne le lit pas)', {n: mb(pcm)})});
             const quality = `<fieldset class="h-rc-modes"><legend>Réglages</legend><div class="form-grid">
                 <label data-avx-kbps>Qualité MP3 <select name="kbps"><option value="96">96 kbit/s (voix, léger)</option><option value="128" selected>128 kbit/s (bon)</option><option value="192">192 kbit/s (très bon)</option><option value="256">256 kbit/s</option><option value="320">320 kbit/s (le meilleur)</option></select></label>
-                <label>Canaux <select name="channels"><option value="keep">comme l’original (${buf.numberOfChannels > 1 ? 'stéréo' : 'mono'})</option>${buf.numberOfChannels > 1 ? '<option value="1">mono (moitié moins lourd)</option>' : ''}</select></label>
-                <label>Fréquence <select name="rate"><option value="keep">comme l’original (${(buf.sampleRate / 1000).toLocaleString('fr-FR')} kHz)</option>${[48000, 44100, 32000, 22050, 16000].filter(r => r !== buf.sampleRate).map(r => `<option value="${r}">${(r / 1000).toLocaleString('fr-FR')} kHz${r <= 22050 ? ' (voix, plus léger)' : ''}</option>`).join('')}</select></label>
+                <label>Canaux <select name="channels"><option value="keep">${buf.numberOfChannels > 1 ? i18n('comme l’original (stéréo)') : i18n('comme l’original (mono)')}</option>${buf.numberOfChannels > 1 ? '<option value="1">mono (moitié moins lourd)</option>' : ''}</select></label>
+                <label>Fréquence <select name="rate"><option value="keep">${i18n('comme l’original ({n} kHz)', {n: (buf.sampleRate / 1000).toLocaleString(UIL())})}</option>${[48000, 44100, 32000, 22050, 16000].filter(r => r !== buf.sampleRate).map(r => `<option value="${r}">${(r / 1000).toLocaleString(UIL())} kHz${r <= 22050 ? ' ' + i18n('(voix, plus léger)') : ''}</option>`).join('')}</select></label>
                 <label>Nom du fichier téléchargé <input name="filename" value="${esc((media.title || 'son').replace(/[\\/:*?"<>|]+/g, ' ').trim().slice(0, 80) || 'son')}"></label></div></fieldset>`;
             const body = saveOptionsHtml(media, formats).replace('<fieldset class="h-rc-modes"><legend>Comment le garder ?</legend>', quality + '<fieldset class="h-rc-modes"><legend>Comment le garder ?</legend>')
                 .replace('<label class="checkbox-line"><input type="radio" name="mode" value="copy">', '<label class="checkbox-line"><input type="radio" name="mode" value="download"> <b>Seulement télécharger le fichier</b> sur l’ordinateur <small class="muted">(rien ne change dans la base)</small></label><label class="checkbox-line"><input type="radio" name="mode" value="copy">');
@@ -420,7 +423,7 @@
                     if (f.mode === 'download') {
                         const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `${(f.filename || 'son').trim() || 'son'}.${extn}`; document.body.appendChild(a); a.click(); a.remove();
                         setTimeout(() => URL.revokeObjectURL(a.href), 60000);
-                        toast(`Fichier ${extn.toUpperCase()} téléchargé (${(blob.size / 1048576).toFixed(1)} Mo). Rien n’a changé dans la base.`);
+                        toast(i18n('Fichier {fmt} téléchargé ({n} Mo). Rien n’a changé dans la base.', {fmt: extn.toUpperCase(), n: (blob.size / 1048576).toFixed(1)}));
                         return; // la fenêtre de montage reste ouverte
                     }
                     prog.textContent = `Envoi (${(blob.size / 1048576).toFixed(1)} Mo)…`;
@@ -909,8 +912,8 @@
     /** 📢 Le niveau qui amène le mélange à la sonie visée (LUFS ; 0 = ne rien changer), mesuré hors ligne avant l'enregistrement */
     async function levelFor(P, target, say) {
         if (!Number(target) || !ext.montageLoud) return 1;
-        const m = await ext.montageLoud.gainFor(P, Number(target), {onStep: p => say?.(`📢 Mesure du volume… ${Math.round(p * 100)} %`)}); if (!isFinite(m.lufs)) return 1;
-        toast(`📢 Volume mesuré : ${m.lufs.toFixed(1).replace('.', ',')} LUFS → ${m.after.toFixed(1).replace('.', ',')} LUFS${m.limited ? ' (crêtes tenues par le limiteur)' : ''}.`); return m.gain;
+        const m = await ext.montageLoud.gainFor(P, Number(target), {onStep: p => say?.(i18n('📢 Mesure du volume… {n} %', {n: Math.round(p * 100)}))}); if (!isFinite(m.lufs)) return 1;
+        toast(m.limited ? i18n('📢 Volume mesuré : {a} LUFS → {b} LUFS (crêtes tenues par le limiteur).', {a: m.lufs.toFixed(1).replace('.', ','), b: m.after.toFixed(1).replace('.', ',')}) : i18n('📢 Volume mesuré : {a} LUFS → {b} LUFS.', {a: m.lufs.toFixed(1).replace('.', ','), b: m.after.toFixed(1).replace('.', ',')})); return m.gain;
     }
     /** Enregistre le montage (en temps réel) : l'image du moteur et son mélange de sons. */
     async function recordMontage(P, mime, onStep, {height = 0, quality = 5, fps = 30, abr = 128, level = 1} = {}) {
@@ -1096,7 +1099,7 @@
                     <button type="button" class="button small secondary" data-mt-op="chapter" title="Un chapitre commence à la tête de lecture">🔖 Chapitre ici</button>
                 </div>
                 <div class="h-mt-tl" data-mt-tl></div>
-                <p class="muted h-avx-help ed-old-hidden">Clique sur la frise pour te placer, sur un élément pour le choisir ; glisse un élément pour le déplacer dans le temps, ou sur une autre piste du même genre (vidéos et photos vont sur toutes les pistes vidéo, texte ↔ texte, son ↔ son). Espace = lire / pause · ⌫ ou Suppr = enlever · B = couper ici · ◇ = image clé · 🧲 un élément glissé se colle aux autres (Alt / Option : sans aimant) · 🔒 une piste verrouillée ne bouge plus.</p>
+                <p class="muted h-avx-help ed-old-hidden">${i18n('Clique sur la frise pour te placer, sur un élément pour le choisir ; glisse un élément pour le déplacer dans le temps, ou sur une autre piste du même genre (vidéos et photos vont sur toutes les pistes vidéo, texte ↔ texte, son ↔ son). Espace = lire / pause · ⌫ ou Suppr = enlever · B = couper ici · ◇ = image clé · 🧲 un élément glissé se colle aux autres (Alt / Option : sans aimant) · 🔒 une piste verrouillée ne bouge plus.')}</p>
                 ${ver.html}
                 <div class="modal-actions ed-old-hidden" aria-hidden="true"><button type="button" class="button secondary" data-mt-projects title="Rouvrir un montage enregistré">📂 Projets…</button><span class="h-mt-projname" data-mt-projname></span><span class="spacer"></span><button type="button" class="button secondary" data-avx-cancel>Fermer</button><button type="button" class="button" data-avx-save title="Fabrique le fichier vidéo (MP4 ou WebM, plusieurs formats d’image) et le range dans les médias : nouvelle version, copie ou nouvelle vidéo">💾 Garder dans les médias…</button></div></div>`});
         dl.classList.add('h-avx-montage'); dl.classList.toggle('mt-left', MP.side === 'left'); dl.classList.toggle('mt-nohelp', !MP.help);
@@ -1149,8 +1152,8 @@
         // frise : une ligne par piste
         function drawTl(pane = true) {
             const L = layoutV1(P), T = montageEnd(P), W = Math.max(600, T * pxs + 160);
-            const kfMarks = c => { const ts = [...new Set(Object.values(c.kf || {}).flat().map(k => Math.round(k.t * 100) / 100))]; return ts.map(t => `<i class="h-mt-kfm" style="left:${(t - (c.from || 0)) / spd(c) * pxs}px" title="Image clé ${fmt(t - (c.from || 0))}"></i>`).join(''); };
-            const block = (tr, c, at, len, label, cls = '') => `<button type="button" class="h-mt-clip ${cls} ${isImg(c) ? 'is-img' : ''} ${sel && sel.track === tr && sel.id === c.id ? 'is-sel' : ''}" style="left:${OFF + at * pxs}px;width:${Math.max(6, len * pxs)}px" data-mt-clip="${tr}:${c.id}" title="${esc(label)} · ${fmt(at)} → ${fmt(at + len)}">${isImg(c) ? '🖼️ ' : ''}${esc(label)}${kfMarks(c)}${tr === 'audio' ? beatMarks(c) : ''}</button>`;
+            const kfMarks = c => { const ts = [...new Set(Object.values(c.kf || {}).flat().map(k => Math.round(k.t * 100) / 100))]; return ts.map(t => `<i class="h-mt-kfm" style="left:${(t - (c.from || 0)) / spd(c) * pxs}px" title="${i18n('Image clé {time}', {time: fmt(t - (c.from || 0))})}"></i>`).join(''); };
+            const block = (tr, c, at, len, label, cls = '') => `<button type="button" class="h-mt-clip ${cls} ${isImg(c) ? 'is-img' : ''} ${sel && sel.track === tr && sel.id === c.id ? 'is-sel' : ''}" style="left:${OFF + at * pxs}px;width:${Math.max(6, len * pxs)}px" data-mt-clip="${tr}:${c.id}" data-i18n-off title="${esc(label)} · ${fmt(at)} → ${fmt(at + len)}">${isImg(c) ? '🖼️ ' : ''}${esc(label)}${kfMarks(c)}${tr === 'audio' ? beatMarks(c) : ''}</button>`;
             // 🥁 les temps repérés d'une musique : de petits traits sur le son
             const beatMarks = c => (c.beats || []).filter(b => b >= c.from && b <= c.to).slice(0, 4000).map(b => `<i class="h-mt-beat" style="left:${(b - c.from) / spd(c) * pxs}px"></i>`).join('');
             const lane = (key, name, inner) => `<div class="h-mt-lane" data-mt-lane="${key}"><span class="h-mt-lname">${name}</span>${inner}</div>`;
@@ -1196,9 +1199,9 @@
         // 🥁 les temps d'une musique : repérés une fois, ils se voient sur la frise et attirent les éléments qu'on glisse
         const beatsHtml = c => { const job = beatJob?.id === c.id, n = (c.beats || []).filter(b => b >= c.from && b <= c.to).length;
             return `<details class="h-mt-isec h-mt-beats" open><summary><b>🥁 Temps de la musique</b><span data-help="Repère les battements (les temps) de la musique : ils s’affichent en petits traits sur le son, dans la frise ; un élément qu’on glisse s’y colle (🧲 Aimanter). On peut aussi couper la vidéo de la piste 1 sur les temps, pour un montage en rythme."></span></summary>
-                ${job ? '<p class="muted" data-mt-beatprog>Écoute de la musique…</p>' : c.beats ? `<p class="muted" data-mt-beatinfo>${n} temps repérés${c.bpm ? ` · environ ${String(c.bpm).replace('.', ',')} battements par minute` : ''}.</p>` : ''}
+                ${job ? '<p class="muted" data-mt-beatprog>Écoute de la musique…</p>' : c.beats ? `<p class="muted" data-mt-beatinfo>${c.bpm ? i18n('{n} temps repérés · environ {bpm} battements par minute.', {n, bpm: String(c.bpm).replace('.', ',')}) : i18n('{n} temps repérés.', {n})}</p>` : ''}
                 <div class="h-mt-quick"><button type="button" data-mt-beats ${job ? 'disabled' : ''}>🥁 ${c.beats ? 'Repérer de nouveau' : 'Repérer les temps'}</button>${c.beats ? '<button type="button" data-mt-beatsdel>Effacer les temps</button>' : ''}</div>
-                ${c.beats?.length ? `<div class="h-avx-row">✂️ Couper la vidéo (piste 1) <select data-mt-beatevery aria-label="Tous les combien de temps">${[1, 2, 4, 8].map(v => `<option value="${v}" ${beatEvery === v ? 'selected' : ''}>${v === 1 ? 'sur chaque temps' : `tous les ${v} temps`}</option>`).join('')}</select><button type="button" class="button small secondary" data-mt-beatcut title="Coupe les morceaux de la piste Vidéo 1 aux temps de cette musique (coupes franches)">Couper</button></div>` : ''}</details>`; };
+                ${c.beats?.length ? `<div class="h-avx-row">✂️ Couper la vidéo (piste 1) <select data-mt-beatevery aria-label="Tous les combien de temps">${[1, 2, 4, 8].map(v => `<option value="${v}" ${beatEvery === v ? 'selected' : ''}>${v === 1 ? i18n('sur chaque temps') : i18n('tous les {n} temps', {n: v})}</option>`).join('')}</select><button type="button" class="button small secondary" data-mt-beatcut title="Coupe les morceaux de la piste Vidéo 1 aux temps de cette musique (coupes franches)">Couper</button></div>` : ''}</details>`; };
         /* Inspecteur (façon Final Cut) : Composition, Transformer, Recadrer, Distorsion, Adaptation ; ◇ = image clé au moment de la tête de lecture */
         const localOf = c => { const t = eng?.t || 0; if (sel?.track === 'v1') { const x = layoutV1(P).find(y => y.c === c); if (!x) return c.from; return Math.max(c.from, Math.min(c.to, c.from + (t - x.at) * spd(c))); } return Math.max(c.from, Math.min(c.to, c.from + (t - (c.at || 0)) * spd(c))); };
         const KF_EPS = 1 / 30;
@@ -1215,7 +1218,7 @@
         const isec = (c, key, flag, title, icon, body, open = true) => `<details class="h-mt-isec" ${open ? 'open' : ''}><summary>${flag ? `<input type="checkbox" data-mt-k="${flag}" ${c[flag] !== false ? 'checked' : ''} title="Activer / couper">` : ''}<b>${title}</b><span class="h-mt-iico">${icon}</span><button type="button" class="h-mt-ireset" data-mt-ireset="${key}" title="Remettre comme au départ">↺</button></summary><div class="h-mt-ibody">${body}</div></details>`;
         function inspectorHtml(c, main) {
             const local = localOf(c), rows = key => IROWS[key].map(r => irow(c, local, r)).join('');
-            return `<div class="h-mt-insp" data-mt-insp><div class="h-mt-ihead"><b>🎛️ Réglages de l’image</b><span class="muted">◇ image clé à ${fmt(local - c.from)}</span><label class="h-mt-ease">Entre deux images clés <select data-mt-k="ease"><option value="smooth" ${c.ease !== 'linear' ? 'selected' : ''}>en douceur</option><option value="linear" ${c.ease === 'linear' ? 'selected' : ''}>régulier</option></select><span data-help="Une image clé fixe un réglage (taille, place, rotation…) à un moment du film ; entre deux images clés, l’image passe de l’une à l’autre, en douceur ou à vitesse régulière."></span></label></div>
+            return `<div class="h-mt-insp" data-mt-insp><div class="h-mt-ihead"><b>🎛️ Réglages de l’image</b><span class="muted">${i18n('◇ image clé à {time}', {time: fmt(local - c.from)})}</span><label class="h-mt-ease">Entre deux images clés <select data-mt-k="ease"><option value="smooth" ${c.ease !== 'linear' ? 'selected' : ''}>en douceur</option><option value="linear" ${c.ease === 'linear' ? 'selected' : ''}>régulier</option></select><span data-help="Une image clé fixe un réglage (taille, place, rotation…) à un moment du film ; entre deux images clés, l’image passe de l’une à l’autre, en douceur ou à vitesse régulière."></span></label></div>
                 ${isec(c, 'comp', '', 'Composition', '◐', rows('comp') + `<div class="h-mt-irow"><span>Mode de fusion</span><select data-mt-k="blend">${BLENDS.map(([k, l]) => `<option value="${k}" ${(c.blend || 'source-over') === k ? 'selected' : ''}>${l}</option>`).join('')}</select><span data-help="Comment cette image se mélange avec celle de dessous : « Produit » assombrit, « Superposition claire » éclaircit, « Normal » la pose simplement dessus."></span></div>`)}
                 ${isec(c, 'tf', 'tfOn', 'Transformer', '⬚', rows('tf'))}
                 ${isec(c, 'crop', 'cropOn', 'Recadrer', '⌗', rows('crop'), false)}
@@ -1227,7 +1230,7 @@
             const box = dl.querySelector('[data-mt-insp]'), c = selected(); if (!box || !c) return;
             const local = localOf(c);
             box.querySelectorAll('[data-mt-tf]').forEach(el => { const k = el.dataset.mtTf, v = tfAt(c, k, local); if (document.activeElement !== el) el.value = v; const o = box.querySelector(`[data-mt-tfo="${k}"]`); if (o) o.textContent = fmtTf(k, v); const b = box.querySelector(`[data-mt-kf="${k}"]`); if (b) { const on = kfAt(c, k, local) >= 0; b.classList.toggle('on', on); b.classList.toggle('has', !!(c.kf?.[k] || []).length); b.textContent = on ? '◆' : '◇'; } });
-            const hd = box.querySelector('.h-mt-ihead .muted'); if (hd) hd.textContent = `◇ image clé à ${fmt(local - c.from)}`;
+            const hd = box.querySelector('.h-mt-ihead .muted'); if (hd) hd.textContent = i18n('◇ image clé à {time}', {time: fmt(local - c.from)});
         }
         /** Aller à l'image clé précédente / suivante de l'élément choisi */
         function jumpKf(dir) {
@@ -1240,7 +1243,7 @@
         function drawPane() {
             const c = selected(), item = $('[data-mt-pane="item"]');
             if (!c) item.innerHTML = '<p class="muted">Choisis un élément sur la frise (un morceau, une incrustation, un texte, un son).</p>';
-            else if (sel.track === 'v1') item.innerHTML = `<h4>${isImg(c) ? '🖼️ Photo' : '🎬 Morceau'} de la piste 1</h4><p class="muted">${esc(P.sources[c.s]?.title || '')} · ${isImg(c) ? `${fmt(c.to - c.from)} à l’écran` : `${fmt(c.from)} → ${fmt(c.to)}`}</p>
+            else if (sel.track === 'v1') item.innerHTML = `<h4>${isImg(c) ? i18n('🖼️ Photo de la piste 1') : i18n('🎬 Morceau de la piste 1')}</h4><p class="muted" data-i18n-off>${esc(P.sources[c.s]?.title || '')} · ${isImg(c) ? i18n('{time} à l’écran', {time: fmt(c.to - c.from)}) : `${fmt(c.from)} → ${fmt(c.to)}`}</p>
                 ${isImg(c) ? imgDur(c) + kbHtml(c) : speedHtml(c)}
                 <label class="h-avx-row">Transition avant <select data-mt-k="tr.type">${TRANS.map(([k, l]) => `<option value="${k}" ${(c.tr?.type || 'none') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>${c.tr?.type === 'color' ? `<label class="h-avx-row">Couleur du fondu <input type="color" value="${esc(/^#[0-9a-f]{6}$/i.test(c.tr.color || '') ? c.tr.color : '#7a4b22')}" data-mt-k="tr.color"></label>` : ''}${rng('tr.d', 'Durée de la transition', 0.2, 4, 0.1, c.tr?.d ?? 1, ' s')}${P.v1[0] === c && c.tr?.type && c.tr.type !== 'none' ? '<p class="muted">C’est le premier morceau : sa transition ne joue pas (il n’y a rien avant lui).</p>' : ''}
                 ${stabHtml(c)}${ext.montageKey?.html(c, rng, chk) || ''}
@@ -1268,11 +1271,11 @@
                 ${rng('x', 'Position horizontale', 0, 100, 1, c.x ?? 50, ' %')}${rng('y', 'Position verticale', 0, 100, 1, c.y ?? 80, ' %')}
                 <label class="h-avx-row">Alignement <select data-mt-k="align">${[['center', 'centré'], ['left', 'à gauche'], ['right', 'à droite']].map(([k, l]) => `<option value="${k}" ${(c.align || 'center') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
                 <label class="ui-toggle"><input type="checkbox" data-mt-k="bold" ${c.bold ? 'checked' : ''}><i></i>gras</label><label class="ui-toggle"><input type="checkbox" data-mt-k="shadow" ${c.shadow !== false ? 'checked' : ''}><i></i>ombre</label><label class="ui-toggle"><input type="checkbox" data-mt-k="fade" ${c.fade !== false ? 'checked' : ''}><i></i>entre et sort en fondu</label>`;
-            else item.innerHTML = `<h4>${c.voice ? '🎙 Voix' : '🎵 Son'}</h4><p class="muted">${esc(P.sources[c.s]?.title || '')} · ${fmt(c.from)} → ${fmt(c.to)}</p>${chk('voice', '🎙 C’est une voix (la musique baisse toute seule pendant qu’elle parle)', c.voice)}${rng('vol', 'Volume', 0, 2, 0.05, c.vol ?? 1, '%')}${rng('fadeIn', 'Fondu d’entrée', 0, 10, 0.1, c.fadeIn || 0, ' s')}${rng('fadeOut', 'Fondu de sortie', 0, 10, 0.1, c.fadeOut || 0, ' s')}
+            else item.innerHTML = `<h4>${c.voice ? '🎙 Voix' : '🎵 Son'}</h4><p class="muted" data-i18n-off>${esc(P.sources[c.s]?.title || '')} · ${fmt(c.from)} → ${fmt(c.to)}</p>${chk('voice', '🎙 C’est une voix (la musique baisse toute seule pendant qu’elle parle)', c.voice)}${rng('vol', 'Volume', 0, 2, 0.05, c.vol ?? 1, '%')}${rng('fadeIn', 'Fondu d’entrée', 0, 10, 0.1, c.fadeIn || 0, ' s')}${rng('fadeOut', 'Fondu de sortie', 0, 10, 0.1, c.fadeOut || 0, ' s')}
                 ${beatsHtml(c)}${speedHtml(c)}${trackSel('audio', c)}${clipSound(c)}`;
             $('[data-mt-pane="color"]').innerHTML = `<h4>🎨 Couleurs de tout le film</h4><p class="muted">S’ajoutent aux couleurs de chaque morceau (onglet Élément).</p>${lookHtml(P.look, 'film')}${oldHtml(P.old, 'pold', 'Vieux film (tout le film)')}`;
             $('[data-mt-pane="sound"]').innerHTML = `<h4>🔊 Le son de tout le film</h4>${rng('fx.volume', 'Volume général', 0, 3, 0.05, P.fx.volume, '%')}${soundFx('fx', P.fx)}${chk('fx.mute', '🔇 Sans le son', P.fx.mute)}<p class="muted">S’ajoute aux réglages de chaque morceau (onglet 🎯 Élément → « 🔊 Son de ce morceau »).</p>`;
-            $('[data-mt-pane="film"]').innerHTML = `<h4>🎞️ Le film</h4><div class="h-avx-row"><button type="button" class="button small secondary" data-mt-rot="-90">⟲ 90°</button><button type="button" class="button small secondary" data-mt-rot="90">⟳ 90°</button><small class="muted">${P.fx.rotate ? `tourné de ${P.fx.rotate}°` : ''}</small></div>
+            $('[data-mt-pane="film"]').innerHTML = `<h4>🎞️ Le film</h4><div class="h-avx-row"><button type="button" class="button small secondary" data-mt-rot="-90">⟲ 90°</button><button type="button" class="button small secondary" data-mt-rot="90">⟳ 90°</button><small class="muted">${P.fx.rotate ? i18n('tourné de {n}°', {n: P.fx.rotate}) : ''}</small></div>
                 <label class="ui-toggle"><input type="checkbox" data-mt-k="fadeStart" ${P.fadeStart ? 'checked' : ''}><i></i>commence par un fondu depuis le noir</label><label class="ui-toggle"><input type="checkbox" data-mt-k="fadeEnd" ${P.fadeEnd ? 'checked' : ''}><i></i>finit par un fondu au noir</label>
                 <h4>📐 Format de l’image</h4><label class="h-avx-row">Format <select data-mt-aspect>${ASPECTS.map(([k, l]) => `<option value="${k}" ${(P.aspect || '') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
                 <label class="ui-toggle"><input type="checkbox" data-mt-k="blurBars" ${P.blurBars ? 'checked' : ''}><i></i>bandes floues au lieu des bandes noires (la même image, floutée, derrière)</label>
@@ -1412,7 +1415,7 @@
             try {
                 const r = await detectBeats(so.src, c.from, c.to, p => { const el = dl.querySelector('[data-mt-beatprog]'); if (el) el.textContent = `Écoute de la musique… ${Math.round(p * 100)} %`; });
                 c = P.audio.find(x => x.id === c.id) || c; c.beats = r.beats; if (r.bpm) c.bpm = r.bpm; else delete c.bpm;
-                toast(r.beats.length ? `🥁 ${r.beats.length} temps repérés${r.bpm ? ` (environ ${String(r.bpm).replace('.', ',')} par minute)` : ''}.` : 'Aucun temps net dans ce son (il n’a peut-être pas de rythme marqué).', r.beats.length ? '' : 'error');
+                toast(r.beats.length ? (r.bpm ? i18n('🥁 {n} temps repérés (environ {bpm} par minute).', {n: r.beats.length, bpm: String(r.bpm).replace('.', ',')}) : i18n('🥁 {n} temps repérés.', {n: r.beats.length})) : 'Aucun temps net dans ce son (il n’a peut-être pas de rythme marqué).', r.beats.length ? '' : 'error');
             } catch (err) { toast(`Temps introuvables : ${err.message}`, 'error'); }
             finally { beatJob = null; if (dl.open) touch(0); }
         }
@@ -1549,7 +1552,7 @@
         // K18 : la barre du bas commune — le projet à gauche, l'aide au milieu, 🧲 et le zoom de la frise à droite (100 % = 40 points par seconde)
         // l'aide du bas dit les vraies touches (celles à soi si on en a donné : b)
         const keyName = (id, d) => { const c = ext.editorKeyOwn?.('montage', `data-mt-cmd=${id}`), K = A().shortcutKit; return c && K?.comboLabel ? K.comboLabel(c) : d; };
-        const helpText = () => `Clic sur la frise : se placer · clic sur un élément : le choisir · glisser : le déplacer · ${keyName('play', 'Espace')} : lire · ${keyName('op:split', 'B')} : couper ici · ${keyName('op:del', '⌫')} : enlever`;
+        const helpText = () => i18n('Clic sur la frise : se placer · clic sur un élément : le choisir · glisser : le déplacer · {play} : lire · {split} : couper ici · {del} : enlever', {play: keyName('play', i18n('Espace')), split: keyName('op:split', 'B'), del: keyName('op:del', '⌫')});
         const mtBar = window.LCNDA_UI?.editorStatus?.({help: helpText(),
             magnetTitle: 'Aimanter : un élément glissé se colle à la tête de lecture, aux autres éléments, aux chapitres et aux temps de la musique (Alt / Option : sans aimant)',
             magnet: {get: () => snapOn, set: () => $('[data-mt-snap]').click()},
@@ -1567,21 +1570,21 @@
         tl.addEventListener('click', async e => {
             const b = e.target.closest('[data-mt-addtrack],[data-mt-tvis],[data-mt-tlock],[data-mt-tup],[data-mt-tdown],[data-mt-tdel]'); if (!b) return;
             e.stopPropagation(); const d = b.dataset;
-            if (d.mtAddtrack) { const id = addTrack(d.mtAddtrack); toast(`Piste « ${P.tracks.find(t => t.id === id).name} » ajoutée.`); return touch(0); }
+            if (d.mtAddtrack) { const id = addTrack(d.mtAddtrack); toast(i18n('Piste « {name} » ajoutée.', {name: i18n(P.tracks.find(t => t.id === id).name)})); return touch(0); }
             const id = d.mtTvis || d.mtTlock || d.mtTup || d.mtTdown || d.mtTdel, i = trackIdx(P, id), tr = P.tracks[i]; if (!tr) return;
             if (d.mtTvis) { tr.hidden = !tr.hidden; return touch(1); }
-            if (d.mtTlock) { if (tr.locked) delete tr.locked; else tr.locked = true; toast(tr.locked ? `🔒 Piste « ${tr.name} » verrouillée : ses éléments ne bougent plus.` : `🔓 Piste « ${tr.name} » déverrouillée.`); return touch(0); }
+            if (d.mtTlock) { if (tr.locked) delete tr.locked; else tr.locked = true; toast(tr.locked ? i18n('🔒 Piste « {name} » verrouillée : ses éléments ne bougent plus.', {name: i18n(tr.name)}) : i18n('🔓 Piste « {name} » déverrouillée.', {name: i18n(tr.name)})); return touch(0); }
             if (d.mtTdel && tr.locked) return lockToast();
             if (d.mtTup || d.mtTdown) { const j = i + (d.mtTup ? -1 : 1); if (j < 0 || j >= P.tracks.length) return; [P.tracks[i], P.tracks[j]] = [P.tracks[j], P.tracks[i]]; return touch(0); }
             if (d.mtTdel && tr.kind === 'main') { // la piste de base du film reste : on la vide
                 if (!P.v1.length) return toast('Cette piste est déjà vide.');
                 const gone = new Set(P.v1.map(c => c.id)); P.v1.forEach(c => { if (c.detached) { const a = P.audio.find(x => x.id === c.detached); if (a) delete a.detached; } }); P.v1.splice(0);
-                if (sel && gone.has(sel.id)) sel = null; const r = touch(1); undoable(`Piste « ${tr.name} » vidée`); return r;
+                if (sel && gone.has(sel.id)) sel = null; const r = touch(1); undoable(i18n('Piste « {name} » vidée', {name: i18n(tr.name)})); return r;
             }
             if (d.mtTdel) {
                 const list = LISTS[tr.kind], mine = list.filter(c => trackOf(P, c, LISTNAME[tr.kind]) === id);
                 mine.forEach(c => { if (tr.kind === 'a') undetach(c); list.splice(list.indexOf(c), 1); });
-                P.tracks.splice(i, 1); if (sel && mine.some(c => c.id === sel.id)) sel = null; const r = touch(1); undoable(`Piste « ${tr.name} » supprimée${mine.length ? ` (avec ${A().plural(mine.length, 'élément')})` : ''}`); return r;
+                P.tracks.splice(i, 1); if (sel && mine.some(c => c.id === sel.id)) sel = null; const r = touch(1); undoable(mine.length ? i18n('Piste « {name} » supprimée (avec {what})', {name: i18n(tr.name), what: A().plural(mine.length, 'élément')}) : i18n('Piste « {name} » supprimée', {name: i18n(tr.name)})); return r;
             }
         });
         tl.addEventListener('dblclick', async e => { const n = e.target.closest('[data-mt-tname]'); if (!n) return; const tr = P.tracks.find(t => t.id === n.dataset.mtTname); const name = ((await window.LCNDA_APP.askText({message: 'Nom de la piste :', value: tr.name})) || '').trim().slice(0, 40); if (name) { tr.name = name; touch(0); } });
@@ -1657,11 +1660,11 @@
                 ${P.folders.length || rushDir ? `<nav class="h-mt-rcrumbs" aria-label="Dossier ouvert">${crumbs}</nav>` : ''}
                 ${here.length || dirs.length ? `<div class="h-mt-rgrid">${dirs.map(f => { const n = countIn(f.id), sub = subOf(f.id).length; return `<figure class="h-mt-rush h-mt-rfolder" draggable="true" data-mt-rfolder="${esc(f.id)}" title="Clic pour ouvrir ; glisse un rush ou un dossier dessus pour l’y ranger">
                     <div class="h-mt-rthumb is-folder"><span>📁</span>${n ? `<b class="h-mt-ruse" title="Rushes dedans (sous-dossiers compris)">${n}</b>` : ''}</div>
-                    <figcaption>${esc(f.name)}</figcaption><small class="h-mt-rfmeta">${n} rush${n > 1 ? 'es' : ''}${sub ? ` · ${sub} dossier${sub > 1 ? 's' : ''}` : ''}</small>
+                    <figcaption data-i18n-off>${esc(f.name)}</figcaption><small class="h-mt-rfmeta">${A().plural(n, 'rush', 'rushes')}${sub ? ` · ${A().plural(sub, 'dossier')}` : ''}</small>
                     <div class="h-mt-racts"><button type="button" data-mt-rfopen title="Ouvrir ce dossier">Ouvrir</button><button type="button" data-mt-rfmove title="Mettre ce dossier dans un autre">📁</button><button type="button" data-mt-rfren title="Renommer ce dossier">✎</button><button type="button" data-mt-rfdel title="Supprimer ce dossier (ce qu’il contient remonte d’un cran)">🗑</button></div></figure>`; }).join('')}${here.map(([x, i]) => { const n = usesOf(i); return `<figure class="h-mt-rush" draggable="true" data-mt-rush="${i}" title="Glisse-le sur une piste de la frise">
                     <div class="h-mt-rthumb is-${x.kind}">${thumb(x, i)}${n ? `<b class="h-mt-ruse" title="Sur la frise">${n}×</b>` : ''}</div>
-                    <figcaption>${esc(x.title || 'Sans titre')}</figcaption>
-                    <div class="h-mt-racts">${x.kind === 'audio' ? `<button type="button" data-mt-rplace="a" title="Sur une piste son, à la tête de lecture">＋ Son</button>` : `<button type="button" data-mt-rplace="v1" title="À la suite dans Vidéo 1">＋ À la suite</button><button type="button" data-mt-rplace="v2" title="En incrustation, à la tête de lecture">＋ Incruster</button>${x.kind === 'video' ? '<button type="button" data-mt-rplace="asound" title="Seulement le son de cette vidéo, sur une piste son">＋ Son seul</button>' : ''}`}<button type="button" data-mt-rmove title="Ranger ce rush dans un dossier">📁</button><button type="button" data-mt-rren title="Renommer ce rush">✎</button><button type="button" data-mt-rdel title="${n ? `Supprimer ce rush du projet (et ses ${n} passage${n > 1 ? 's' : ''} sur la frise)` : 'Supprimer ce rush du projet'}">🗑</button></div></figure>`; }).join('')}</div>`
+                    <figcaption data-i18n-off>${esc(x.title || i18n('Sans titre'))}</figcaption>
+                    <div class="h-mt-racts">${x.kind === 'audio' ? `<button type="button" data-mt-rplace="a" title="Sur une piste son, à la tête de lecture">＋ Son</button>` : `<button type="button" data-mt-rplace="v1" title="À la suite dans Vidéo 1">＋ À la suite</button><button type="button" data-mt-rplace="v2" title="En incrustation, à la tête de lecture">＋ Incruster</button>${x.kind === 'video' ? '<button type="button" data-mt-rplace="asound" title="Seulement le son de cette vidéo, sur une piste son">＋ Son seul</button>' : ''}`}<button type="button" data-mt-rmove title="Ranger ce rush dans un dossier">📁</button><button type="button" data-mt-rren title="Renommer ce rush">✎</button><button type="button" data-mt-rdel title="${n ? (n > 1 ? i18n('Supprimer ce rush du projet (et ses {n} passages sur la frise)', {n}) : i18n('Supprimer ce rush du projet (et son passage sur la frise)')) : i18n('Supprimer ce rush du projet')}">🗑</button></div></figure>`; }).join('')}</div>`
                 : P.sources.length ? `<p class="muted h-mt-rempty">Ce dossier est vide : glisse un rush sur son nom en haut, ou importe ici.</p>` : `<p class="muted h-mt-rempty">Importe tes vidéos, photos et sons : ils attendent ici, prêts à être glissés sur la frise.</p>`}`;
         }
         /** Choisir un dossier (pour y ranger un rush ou un dossier) : la liste de tous, en arbre */
@@ -1675,13 +1678,13 @@
             d.showModal();
         });
         const newFolder = async parent => {
-            const n = ((await A().askText({title: 'Nouveau dossier', message: `Nom du dossier${parent ? ` (dans « ${folderLabel(parent)} »)` : ''} :`, value: '', okLabel: 'Créer'})) || '').trim().slice(0, 80);
+            const n = ((await A().askText({title: 'Nouveau dossier', message: parent ? i18n('Nom du dossier (dans « {name} ») :', {name: folderLabel(parent)}) : i18n('Nom du dossier :'), value: '', okLabel: 'Créer'})) || '').trim().slice(0, 80);
             if (!n) return null;
             if (P.folders.length >= 300) { toast('300 dossiers au plus.', 'error'); return null; }
             let id; do id = 'F' + (++uid) + Math.random().toString(36).slice(2, 6); while (folderOf(id));
             P.folders.push({id, name: n, ...(parent ? {parent} : {})}); dirty = true; return id;
         };
-        const moveRush = (i, dir) => { const x = P.sources[i]; if (!x) return; if (dir) x.folder = dir; else delete x.folder; dirty = true; drawRush(true); toast(`« ${x.title || 'Rush'} » rangé dans ${dir ? `« ${folderLabel(dir)} »` : 'la racine'}.`); };
+        const moveRush = (i, dir) => { const x = P.sources[i]; if (!x) return; if (dir) x.folder = dir; else delete x.folder; dirty = true; drawRush(true); toast(dir ? i18n('« {name} » rangé dans « {dir} ».', {name: x.title || 'Rush', dir: folderLabel(dir)}) : i18n('« {name} » rangé dans la racine.', {name: x.title || 'Rush'})); };
         const moveFolder = (id, dir) => { const f = folderOf(id); if (!f) return; if (dir && inside(dir, id)) return toast('Un dossier ne peut pas aller dans lui-même ni dans un de ses sous-dossiers.', 'error'); if (dir) f.parent = dir; else delete f.parent; dirty = true; drawRush(true); };
         $('[data-mt-pane="rush"]').addEventListener('change', e => { const so = e.target.closest('[data-mt-rsort]'); if (!so) return; rushSort = so.value; try { localStorage.setItem('lcnda-mt-rush-sort', rushSort); } catch (_) {} drawRush(true); });
         // ranger en glissant : un rush ou un dossier, déposé sur un dossier ou sur le fil (« Tous », un dossier parent)
@@ -1693,12 +1696,12 @@
             if (r !== '') moveRush(Number(r), dir); else if (f && f !== dir) moveFolder(f, dir);
         });
         // E4 : des vidéos, photos ou sons glissés (ou collés) sur le montage deviennent des rushes ; ils entrent dans les Médias à l'enregistrement du projet
-        UIx().bindFileDrop?.(dl.querySelector('.h-mt-top'), async files => { let n = 0; for (const f of files) { const k = /^image\//.test(f.type) ? 'image' : /^video\//.test(f.type) ? 'video' : /^audio\//.test(f.type) ? 'audio' : ''; if (k && await pushSource({src: URL.createObjectURL(f), title: f.name.replace(/\.[^.]+$/, ''), file: f}, k) !== null) n++; } if (n) { $('[data-mt-tab="rush"]')?.click(); toast(`${n} rush${n > 1 ? 'es' : ''} ajouté${n > 1 ? 's' : ''} : glisse-les sur la frise. Ils entrent dans les Médias quand tu enregistres le projet.`); } }, {accept: 'video/*,image/*,audio/*'});
+        UIx().bindFileDrop?.(dl.querySelector('.h-mt-top'), async files => { let n = 0; for (const f of files) { const k = /^image\//.test(f.type) ? 'image' : /^video\//.test(f.type) ? 'video' : /^audio\//.test(f.type) ? 'audio' : ''; if (k && await pushSource({src: URL.createObjectURL(f), title: f.name.replace(/\.[^.]+$/, ''), file: f}, k) !== null) n++; } if (n) { $('[data-mt-tab="rush"]')?.click(); toast(n > 1 ? i18n('{n} rushes ajoutés : glisse-les sur la frise. Ils entrent dans les Médias quand tu enregistres le projet.', {n}) : i18n('1 rush ajouté : glisse-le sur la frise. Il entre dans les Médias quand tu enregistres le projet.')); } }, {accept: 'video/*,image/*,audio/*'});
         $('[data-mt-pane="rush"]').addEventListener('change', async e => {
             const inp = e.target.closest('[data-mt-rimport]'); if (!inp) return;
             const files = [...inp.files]; inp.value = ''; let n = 0;
-            for (const f of files) { const k = /^image\//.test(f.type) ? 'image' : /^video\//.test(f.type) ? 'video' : /^audio\//.test(f.type) ? 'audio' : ''; if (!k) { toast(`${f.name} : ni vidéo, ni photo, ni son.`, 'error'); continue; } if (await pushSource({src: URL.createObjectURL(f), title: f.name.replace(/\.[^.]+$/, ''), file: f}, k) !== null) n++; }
-            if (n) toast(`${n} rush${n > 1 ? 'es' : ''} ajouté${n > 1 ? 's' : ''} : glisse-les sur la frise.`);
+            for (const f of files) { const k = /^image\//.test(f.type) ? 'image' : /^video\//.test(f.type) ? 'video' : /^audio\//.test(f.type) ? 'audio' : ''; if (!k) { toast(i18n('{file} : ni vidéo, ni photo, ni son.', {file: f.name}), 'error'); continue; } if (await pushSource({src: URL.createObjectURL(f), title: f.name.replace(/\.[^.]+$/, ''), file: f}, k) !== null) n++; }
+            if (n) toast(n > 1 ? i18n('{n} rushes ajoutés : glisse-les sur la frise.', {n}) : i18n('1 rush ajouté : glisse-le sur la frise.'));
         });
         $('[data-mt-pane="rush"]').addEventListener('click', async e => {
             if (e.target.closest('[data-mt-rbase]')) { const list = await pickOther('any', {multiple: true, eyebrow: 'MONTAGE'}); for (const o of list || []) await pushSource(o, o.kind); return; } // plusieurs rushes d'un coup
@@ -1708,10 +1711,10 @@
             if (fo) {
                 const id = fo.dataset.mtRfolder, f = folderOf(id); if (!f) return;
                 if (e.target.closest('[data-mt-rfren]')) { const n = ((await A().askText({title: 'Renommer le dossier', message: 'Nouveau nom :', value: f.name, okLabel: 'Renommer'})) || '').trim().slice(0, 80); if (n) { f.name = n; dirty = true; drawRush(true); } return; }
-                if (e.target.closest('[data-mt-rfmove]')) { let v = await pickFolder(`Mettre « ${f.name} » dans…`, id); if (v === '__new') v = await newFolder(''); if (v !== null) moveFolder(id, v); return; }
+                if (e.target.closest('[data-mt-rfmove]')) { let v = await pickFolder(i18n('Mettre « {name} » dans…', {name: f.name}), id); if (v === '__new') v = await newFolder(''); if (v !== null) moveFolder(id, v); return; }
                 if (e.target.closest('[data-mt-rfdel]')) { // ce qu'il contient remonte d'un cran : rien ne quitte le projet
                     const n = P.sources.filter(x => x.folder === id).length + subOf(id).length;
-                    if (n && !await A().confirmBox(`Ce qu’il contient (${A().plural(n, 'élément')}) remonte dans ${f.parent ? `« ${folderOf(f.parent)?.name} »` : 'la racine'}.`, {title: `Supprimer le dossier « ${f.name} » ?`, okLabel: 'Supprimer le dossier'})) return;
+                    if (n && !await A().confirmBox(f.parent ? i18n('Ce qu’il contient ({what}) remonte dans « {dir} ».', {what: A().plural(n, 'élément'), dir: folderOf(f.parent)?.name}) : i18n('Ce qu’il contient ({what}) remonte dans la racine.', {what: A().plural(n, 'élément')}), {title: i18n('Supprimer le dossier « {name} » ?', {name: f.name}), okLabel: i18n('Supprimer le dossier')})) return;
                     P.sources.forEach(x => { if (x.folder === id) { if (f.parent) x.folder = f.parent; else delete x.folder; } });
                     subOf(id).forEach(g => { if (f.parent) g.parent = f.parent; else delete g.parent; });
                     P.folders.splice(P.folders.indexOf(f), 1); dirty = true; drawRush(true); return;
@@ -1720,18 +1723,18 @@
             }
             const fig = e.target.closest('[data-mt-rush]'); if (!fig) return; const i = Number(fig.dataset.mtRush);
             const pl = e.target.closest('[data-mt-rplace]'); if (pl) return placeRush(i, pl.dataset.mtRplace);
-            if (e.target.closest('[data-mt-rmove]')) { let v = await pickFolder(`Ranger « ${P.sources[i].title || 'ce rush'} » dans…`); if (v === '__new') v = await newFolder(rushDir); if (v !== null) moveRush(i, v); return; }
+            if (e.target.closest('[data-mt-rmove]')) { let v = await pickFolder(i18n('Ranger « {name} » dans…', {name: P.sources[i].title || i18n('ce rush')})); if (v === '__new') v = await newFolder(rushDir); if (v !== null) moveRush(i, v); return; }
             if (e.target.closest('[data-mt-rren]')) { const so = P.sources[i], n = await A().askText({title: 'Renommer le rush', message: 'Nouveau nom :', value: so.title || '', okLabel: 'Renommer'}); if (n === null || !n.trim()) return; so.title = n.trim().slice(0, 200); dirty = true; drawRush(true); drawTl(); return; }
             if (e.target.closest('[data-mt-rdel]')) {
                 const so = P.sources[i], n = usesOf(i);
-                if (!await A().confirmBox(`${n ? `Il est utilisé ${n} fois sur la frise : ces passages seront retirés aussi. ` : ''}Le fichier reste dans les Médias s’il y est.`, {title: `Supprimer « ${so.title || 'ce rush'} » du projet ?`, okLabel: 'Supprimer le rush'})) return;
+                if (!await A().confirmBox(n ? i18n('Il est utilisé {n} fois sur la frise : ces passages seront retirés aussi. Le fichier reste dans les Médias s’il y est.', {n}) : i18n('Le fichier reste dans les Médias s’il y est.'), {title: i18n('Supprimer « {name} » du projet ?', {name: so.title || i18n('ce rush')}), okLabel: i18n('Supprimer le rush')})) return;
                 // les passages de ce rush quittent la frise, les numéros des rushes suivants reculent d'un cran, aussi dans les étapes ↶ ↷
                 const drop = o => { ['v1', 'v2', 'audio'].forEach(k => { o[k] = (o[k] || []).filter(c => c.s !== i); o[k].forEach(c => { if (c.s > i) c.s--; }); }); return o; };
                 drop(P); hist = hist.map(h => JSON.stringify(drop(JSON.parse(h))));
                 if (sel && !all().some(([tr, c]) => tr === sel.track && c.id === sel.id)) sel = null;
                 P.sources.splice(i, 1); dirty = true; drawRush(true);
                 if (n) { await touch(2); record(); syncInspector?.(); }
-                toast(n ? `Rush supprimé, avec ses ${n} passage${n > 1 ? 's' : ''} sur la frise.` : 'Rush supprimé.');
+                toast(n ? (n > 1 ? i18n('Rush supprimé, avec ses {n} passages sur la frise.', {n}) : i18n('Rush supprimé, avec son passage sur la frise.')) : i18n('Rush supprimé.'));
             }
         });
         // glisser un rush sur une piste de la frise
@@ -1763,7 +1766,7 @@
             const parseT = v => { const m = String(v).trim().match(/(?:(\d+):)?(\d{1,2}):(\d{2})[,.](\d{1,3})/); return m ? (Number(m[1] || 0) * 3600 + Number(m[2]) * 60 + Number(m[3]) + Number(m[4].padEnd(3, '0')) / 1000) : null; };
             const cues = String(text).replace(/\r/g, '').replace(/^﻿?WEBVTT[^\n]*\n/, '').split(/\n{2,}/).map(b => { const lines = b.split('\n').filter(Boolean), i = lines.findIndex(l => l.includes('-->')); if (i < 0) return null; const [a, z] = lines[i].split('-->'); const t0 = parseT(a), t1 = parseT(z); if (t0 === null || t1 === null) return null; return {t0, t1, text: lines.slice(i + 1).join('\n').replace(/<[^>]+>/g, '').trim()}; }).filter(c => c && c.text);
             if (!cues.length) return toast('Aucun sous-titre reconnu (fichier .srt ou .vtt).', 'error');
-            cues.forEach(c => P.texts.push(subItem(c.t0, Math.max(0.3, c.t1 - c.t0), c.text))); touch(0); toast(`${A().plural(cues.length, 'sous-titre importé', 'sous-titres importés')} sur la piste « Sous-titres ».`);
+            cues.forEach(c => P.texts.push(subItem(c.t0, Math.max(0.3, c.t1 - c.t0), c.text))); touch(0); toast(i18n('{what} sur la piste « Sous-titres ».', {what: A().plural(cues.length, 'sous-titre importé', 'sous-titres importés')}));
         }
         function exportSubs() {
             const subs = P.texts.filter(x => x.sub || /^sous-titres/i.test(P.tracks.find(t => t.id === trackOf(P, x, 'texts'))?.name || '')), list = (subs.length ? subs : P.texts).slice().sort((a, b) => a.at - b.at);
@@ -1832,14 +1835,14 @@
                         void L0;
                     }
                     // titre au début, dates, et mot de la fin
-                    const title = {id: nid('t'), at: start + 0.2, dur: Math.min(dur * 1.4, 7), text: kind === 'life' ? `La vie de ${nm(p)}${years[0] && years[1] ? `\n${years[0]} – ${years[1]}` : years[0] ? `\n° ${years[0]}` : years[1] ? `\n† ${years[1]}` : ''}` : `La famille de ${nm(p)}`, size: 8, color: '#ffffff', bg: '', font: 'Georgia, serif', x: 50, y: 45, anim: 'zoom', align: 'center', bold: true};
+                    const title = {id: nid('t'), at: start + 0.2, dur: Math.min(dur * 1.4, 7), text: kind === 'life' ? `${i18n('La vie de {name}', {name: nm(p)})}${years[0] && years[1] ? `\n${years[0]} – ${years[1]}` : years[0] ? `\n° ${years[0]}` : years[1] ? `\n† ${years[1]}` : ''}` : i18n('La famille de {name}', {name: nm(p)}), size: 8, color: '#ffffff', bg: '', font: 'Georgia, serif', x: 50, y: 45, anim: 'zoom', align: 'center', bold: true};
                     title.track = freeTrack('t', title.at, title.dur); P.texts.push(title);
                     if (kind === 'life' && birth) { const x = {id: nid('t'), at: start + Math.min(dur * 1.4, 7) + 0.3, dur: dur, text: `Naissance : ${evText(birth)}`, size: 4.6, color: '#ffffff', bg: '#000000', font: 'Georgia, serif', x: 50, y: 12, anim: 'fade', align: 'center'}; x.track = freeTrack('t', x.at, x.dur); P.texts.push(x); }
                     const endT = layoutV1(P).at(-1).end, fin = {id: nid('t'), at: Math.max(start, endT - dur), dur, text: kind === 'life' && death ? `Décès : ${evText(death)}` : 'Fin', size: kind === 'life' && death ? 5 : 7, color: '#ffffff', bg: kind === 'life' && death ? '#000000' : '', font: 'Georgia, serif', x: 50, y: kind === 'life' && death ? 12 : 50, anim: 'fade', align: 'center'};
                     fin.track = freeTrack('t', fin.at, fin.dur); P.texts.push(fin);
                     P.fadeStart = true; P.fadeEnd = true;
                     if (f.music) { const s0 = await addSource('audio'); if (s0 !== null) { const T = montageEnd(P), k = {id: nid('a'), s: s0, from: 0, to: Math.min(P.sources[s0].dur, T - start), at: start, vol: 0.6, fadeIn: 1, fadeOut: 3}; k.track = freeTrack('a', start, k.to); P.audio.push(k); } }
-                    sel = null; await touch(2); record(); toast(`Montage fabriqué : ${A().plural(slides.length, 'photo')}. Retouche ce que tu veux, puis ⤓ Exporter.`);
+                    sel = null; await touch(2); record(); toast(i18n('Montage fabriqué : {what}. Retouche ce que tu veux, puis ⤓ Exporter.', {what: A().plural(slides.length, 'photo')}));
                 }});
         }
         dl.querySelector('.h-mt-ops').addEventListener('click', async e => {
@@ -1847,7 +1850,7 @@
             if (op === 'undo') return undoTo(hpos - 1);
             if (op === 'voice') return voiceOver(b);
             if (op === 'sub') { const k = subItem(t, 3, 'Sous-titre'); P.texts.push(k); sel = {track: 'texts', id: k.id}; touch(0); dl.querySelector('[data-mt-tab="item"]').click(); dl.querySelector('[data-mt-k="text"]')?.select(); return; }
-            if (op === 'chapter') { const n = await A().askText({title: 'Nouveau chapitre', message: `Titre du chapitre qui commence à ${fmt(t, false)} :`, value: `Chapitre ${(P.chapters || []).length + 1}`, okLabel: 'Ajouter'}); if (!n?.trim()) return; P.chapters = P.chapters || []; P.chapters.push({id: nid('c'), t, title: n.trim().slice(0, 120)}); dl.querySelector('[data-mt-tab="film"]').click(); return touch(0); }
+            if (op === 'chapter') { const n = await A().askText({title: i18n('Nouveau chapitre'), message: i18n('Titre du chapitre qui commence à {time} :', {time: fmt(t, false)}), value: i18n('Chapitre {n}', {n: String((P.chapters || []).length + 1)}), okLabel: i18n('Ajouter')}); if (!n?.trim()) return; P.chapters = P.chapters || []; P.chapters.push({id: nid('c'), t, title: n.trim().slice(0, 120)}); dl.querySelector('[data-mt-tab="film"]').click(); return touch(0); }
             if (op === 'redo') return undoTo(hpos + 1);
             if (op === 'addv1') { const s = await addSource('visual'); if (s === null) return; const k = {id: nid('v'), s, from: 0, to: srcLen(s), tr: {type: P.v1.length ? 'cross' : 'none', d: 1}, look: {}, vol: 1}; P.v1.push(k); sel = {track: 'v1', id: k.id}; return touch(1); }
             if (op === 'addv2') { const s = await addSource('visual'); if (s === null) return; const k = {id: nid('i'), s, from: 0, to: srcLen(s), at: t, w: 35, x: 62, y: 6, opacity: 100, vol: 0}; k.track = freeTrack('v', t, k.to); P.v2.push(k); sel = {track: 'v2', id: k.id}; return touch(1); }
@@ -1884,7 +1887,7 @@
                 const local = P.sources.filter(x => !/^media\//.test(x.src));
                 for (const [k, x] of local.entries()) {
                     if (!x._file) throw new Error(`Le rush « ${x.title} » n’a plus son fichier : retire-le et importe-le de nouveau.`);
-                    btn.textContent = `Envoi des rushes ${k + 1}/${local.length}…`;
+                    btn.textContent = i18n('Envoi des rushes {k}/{n}…', {k: String(k + 1), n: String(local.length)});
                     const fd = new FormData(); fd.append('file', x._file, x._file.name || 'rush'); fd.append('kind', x.kind); fd.append('title', x.title || 'Rush'); fd.append('csrf', S().csrf);
                     const r = await fetch('api.php?action=retouch_media', {method: 'POST', body: fd, headers: {'X-CSRF-Token': S().csrf}}); const j = await r.json().catch(() => ({error: 'Réponse illisible du serveur'}));
                     if (!r.ok || j.error) throw new Error(`${x.title} : ${j.error || 'envoi impossible'}`);
@@ -1895,7 +1898,7 @@
                 let res; try { res = await send(asNew ? 0 : projId); }
                 catch (err) { if (asNew || !projId || !/introuvable/i.test(err.message || '')) throw err; res = await send(0); toast('Ce projet avait été supprimé entre-temps : il est enregistré de nouveau.'); } // supprimé ailleurs (liste, autre fenêtre)
                 projId = res.result.id; projName = res.result.name; dirty = false; const ni = $('[data-avx-name]'); if (ni) ni.value = projName; showProjName();
-                if (local.length) toast(`${local.length > 1 ? `Les ${local.length} fichiers importés sont` : 'Le fichier importé est'} maintenant dans les Médias.`);
+                if (local.length) toast(local.length > 1 ? i18n('Les {n} fichiers importés sont maintenant dans les Médias.', {n: local.length}) : i18n('Le fichier importé est maintenant dans les Médias.'));
             } catch (err) { UIx().savedStatus?.(dl, 'error'); toast(err.message, 'error'); }
             finally { savingProj = false; btn.disabled = false; btn.textContent = l0; drawRush(true); }
         }
@@ -1921,7 +1924,7 @@
                 if (!P.v1.length && !P.v2.length && !P.audio.length) throw new Error('le montage est vide');
                 const go = document.querySelector('dialog.ui-export[open] [data-ui-go]'), release = holdOpen(go?.closest('dialog')); eng.destroy(); eng = null;
                 try { const level = await levelFor(P, MP2.lufs, x => { if (go) go.textContent = x; });
-                    const buf = await recordMontageAudio(P, x => { if (go) go.textContent = `Enregistrement du son… ${Math.round(x * 100)} %`; }, level);
+                    const buf = await recordMontageAudio(P, x => { if (go) go.textContent = i18n('Enregistrement du son… {n} %', {n: Math.round(x * 100)}); }, level);
                     const blob = f === 'mp3' ? await encodeMp3(buf, 192, x => { if (go) go.textContent = `Compression… ${Math.round(x * 100)} %`; }) : encodeWav(buf);
                     const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = o.filename; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 60000);
                     if (o.saveCopy) { await uploadResult({kind: 'audio'}, blob, f, {mode: 'new', duration: T, title: `${nm} (son)`}); toast('Son téléchargé, et une copie est rangée dans les médias (un nouveau son).'); onDone?.(); } }
@@ -1929,7 +1932,7 @@
             };
             formats.push({id: 'mp3', label: '🎵 Son seul (MP3)', hint: 'musiques, voix et son des vidéos', ext: 'mp3', run: aud('mp3')}, {id: 'wav', label: '🎚 Son seul (WAV)', hint: 'sans perte', ext: 'wav', run: aud('wav')});
             formats.push({id: 'srt', label: '💬 Sous-titres', hint: 'fichier .srt', ext: '', run: async () => exportSubs()}, {id: 'base', label: '💾 Dans les médias…', hint: 'plusieurs formats, nouvelle version', ext: '', run: async () => { setTimeout(() => $('[data-avx-save]').click(), 50); }});
-            await UIx().openExportDialog({title: nm, defaultName: nm, quality: false, saveCopy: true, value: MP2.fmt, info: `${fmt(T, false)} · rejoué en temps réel pour être enregistré (laisse la fenêtre ouverte) · taille, qualité, images par seconde${MP2.lufs ? ` et volume (📢 ${String(MP2.lufs).replace('-', '−')} LUFS)` : ' et volume standard'} : Réglages → Montage`, formats});
+            await UIx().openExportDialog({title: nm, defaultName: nm, quality: false, saveCopy: true, value: MP2.fmt, info: `${fmt(T, false)} · ${MP2.lufs ? i18n('rejoué en temps réel pour être enregistré (laisse la fenêtre ouverte) · taille, qualité, images par seconde et volume (📢 {n} LUFS) : Réglages → Montage', {n: String(MP2.lufs).replace('-', '−')}) : i18n('rejoué en temps réel pour être enregistré (laisse la fenêtre ouverte) · taille, qualité, images par seconde et volume standard : Réglages → Montage')}`, formats});
         });
         $('[data-mt-projects]').addEventListener('click', () => projectsDialog({current: projId, onOpen: async pr => { if (dirty && !await A().confirmBox('Les modifications du montage seront perdues.', {title: 'Ouvrir un autre projet sans enregistrer celui-ci ?', okLabel: 'Ouvrir sans enregistrer', danger: true})) return false; dirty = false; dl.close(); await openProject(pr.id, onDone); }}));
         document.addEventListener('keydown', e => { if (!dl.open || [...document.querySelectorAll('dialog[open]')].at(-1) !== dl) return; if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 's') { e.preventDefault(); saveProject(e.shiftKey); } }, {signal: keyAc.signal});
@@ -1976,9 +1979,9 @@
             if (k === 'full') return q('[data-full-toggle]');
             if (a === 'tbtn') { // a) boutons des pistes : réglage gardé tout de suite (K2), « ↶ Annuler » dans le message
                 const cur = montagePrefs().tbtn || TBTN0, nx = v === '0' ? 0 : Math.max(16, Math.min(44, cur + (v === 'up' ? 4 : -4)));
-                if ((nx || TBTN0) === cur) return toast(v === '0' ? 'Les boutons des pistes ont déjà leur taille de départ.' : `Les boutons des pistes sont déjà ${v === 'up' ? 'au plus grand' : 'au plus petit'}.`);
+                if ((nx || TBTN0) === cur) return toast(v === '0' ? i18n('Les boutons des pistes ont déjà leur taille de départ.') : v === 'up' ? i18n('Les boutons des pistes sont déjà au plus grand.') : i18n('Les boutons des pistes sont déjà au plus petit.'));
                 const redo = () => { applyTbtn(montagePrefs().tbtn); drawTl(); mtBar?.sync(); };
-                A().undoLocalChange(`Boutons des pistes : ${nx || TBTN0} px${nx ? '' : ' (taille de départ)'}`, [MT_KEY], () => { let cfg = {}; try { cfg = JSON.parse(localStorage.getItem(MT_KEY) || '{}') || {}; } catch (_) {} cfg.tbtn = nx; try { localStorage.setItem(MT_KEY, JSON.stringify(cfg)); } catch (_) {} }, redo);
+                A().undoLocalChange(nx ? i18n('Boutons des pistes : {n} px', {n: nx}) : i18n('Boutons des pistes : {n} px (taille de départ)', {n: TBTN0}), [MT_KEY], () => { let cfg = {}; try { cfg = JSON.parse(localStorage.getItem(MT_KEY) || '{}') || {}; } catch (_) {} cfg.tbtn = nx; try { localStorage.setItem(MT_KEY, JSON.stringify(cfg)); } catch (_) {} }, redo);
                 return redo();
             }
             if (k === 'keys') return keysDialog();
@@ -1987,7 +1990,7 @@
             if (k === 'chapcopy') { if (!(P.chapters || []).length) return toast('Aucun chapitre : « 🔖 Chapitre ici ».', 'error'); const txt = chaptersText(); navigator.clipboard?.writeText(txt).then(() => toast('Chapitres copiés.'), () => prompt('Copie ce texte :', txt)); return; }
             if (k === 'subimport') { const inp = document.createElement('input'); inp.type = 'file'; inp.accept = '.srt,.vtt,text/vtt,application/x-subrip'; inp.onchange = async () => { const fl = inp.files?.[0]; if (fl) importSubs(await fl.text()); }; inp.click(); return; }
             if (a === 'tpl') return templateDialog(v);
-            if (k === 'multicam') return ext.montageMulti?.dialog({P, nid, done: (n, offs) => { touch(2); toast(`🎥 ${n} plan${n > 1 ? 's' : ''} ajouté${n > 1 ? 's' : ''} à la piste 1 (décalages : ${offs.map(o => `${o.toFixed(2).replace('.', ',')} s`).join(', ')}).`, 'success'); }});
+            if (k === 'multicam') return ext.montageMulti?.dialog({P, nid, done: (n, offs) => { touch(2); toast(i18n('🎥 {what} à la piste 1 (décalages : {offs}).', {what: A().plural(n, 'plan ajouté', 'plans ajoutés'), offs: offs.map(o => `${o.toFixed(2).replace('.', ',')} s`).join(', ')}), 'success'); }});
         });
         dl.addEventListener('keydown', e => { if (e.key === 'Escape' && dl.querySelector('.h-mt-menubar details[open]')) { e.preventDefault(); e.stopPropagation(); closeMenus(); } }, true);
         const markDirty = () => showProjName(); dl.addEventListener('input', markDirty); dl.addEventListener('click', () => setTimeout(markDirty, 0));
@@ -2000,12 +2003,12 @@
             const sel2 = (name, list, v) => `<select name="${name}">${list.map(([k, l]) => `<option value="${k}" ${Number(k) === Number(v) ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select>`;
             const exportHtml = `<fieldset class="h-rc-modes"><legend>Image et son</legend><div class="form-grid">
                 <label>Taille ${sel2('height', MT_SIZES.map(([k, l]) => [k, k ? l : `${l} (${(P.sources[P.v1[0]?.s]?.w || sw)} × ${(P.sources[P.v1[0]?.s]?.h || sh)})`]), MP2.height)}</label>
-                <label>Qualité ${sel2('quality', MT_QUALITY, MP2.quality)}</label><label>Images par seconde ${sel2('fps', MT_FPS.map(f => [f, f + ' images/s']), MP2.fps)}</label>
+                <label>Qualité ${sel2('quality', MT_QUALITY, MP2.quality)}</label><label>Images par seconde ${sel2('fps', MT_FPS.map(f => [f, i18n('{n} images/s', {n: f})]), MP2.fps)}</label>
                 <label>Son ${sel2('abr', [[96, '96 kb/s'], [128, '128 kb/s'], [192, '192 kb/s'], [256, '256 kb/s']], MP2.abr)}</label>${ext.montageLoud ? `<label>📢 Volume standard ${sel2('lufs', ext.montageLoud.TARGETS, MP2.lufs)}</label>` : ''}</div>
                 <div class="h-mt-fmts"><span>Formats (un fichier par format coché, l’un après l’autre) :</span>${ASPECTS.map(([k, l]) => `<label class="checkbox-line"><input type="checkbox" name="fmt_${k || 'src'}" ${(P.aspect || '') === k ? 'checked' : ''}> ${l}</label>`).join('')}<label class="checkbox-line"><input type="checkbox" name="blurbars" ${P.blurBars ? 'checked' : ''}> bandes floues plutôt que noires</label></div>
                 <p class="muted">Réglages de départ : Réglages → Montage, retouche, mise en page et son.</p></fieldset>`;
             ext.openDialog({eyebrow: 'EXPORTER LA VIDÉO', title: projName || media.title || 'Montage', wide: true, submitLabel: '⤓ Exporter',
-                body: `<p class="h-cfg-explain">Le montage est rejoué pour être enregistré : cela prend <b>${fmt(T, false)}</b> (sa durée). Laisse la fenêtre ouverte.</p>` + saveOptionsHtml(media, types.map(([t, e2, label, help]) => ({key: t, label, help}))).replace('<fieldset class="h-rc-modes"><legend>Comment', exportHtml + '<fieldset class="h-rc-modes"><legend>Comment').replace('<input type="hidden" name="mode" value="new">', exportHtml + '<input type="hidden" name="mode" value="new">'),
+                body: `<p class="h-cfg-explain">${i18n('Le montage est rejoué pour être enregistré : cela prend <b>{time}</b> (sa durée). Laisse la fenêtre ouverte.', {time: fmt(T, false)})}</p>` + saveOptionsHtml(media, types.map(([t, e2, label, help]) => ({key: t, label, help}))).replace('<fieldset class="h-rc-modes"><legend>Comment', exportHtml + '<fieldset class="h-rc-modes"><legend>Comment').replace('<input type="hidden" name="mode" value="new">', exportHtml + '<input type="hidden" name="mode" value="new">'),
                 onOpen: d => d.querySelectorAll('[name=mode]').forEach(r => r.addEventListener('change', () => { const ct = d.querySelector('[data-avx-copytitle]'); if (ct) ct.hidden = d.querySelector('[name=mode]:checked')?.value !== 'copy'; })),
                 onSubmit: async form => {
                     const f = Object.fromEntries(new FormData(form)), prog = form.querySelector('[data-avx-progress]'), type = types.find(x => x[0] === f.fmt) || types[0];
@@ -2039,7 +2042,7 @@
             const c = P.audio.find(x => x.id === sel.id), so = c && P.sources[c.s]; if (!so) return;
             const file = decodeURIComponent(String(so.src).replace(/^media\//, ''));
             ext.openAudioStudio({id: so.mediaId || 0, filename: file, title: so.title, media_type: 'audio', src: so.src}, {onSaved: async r => {
-                if (!r?.filename) return; so.src = url(r.filename); if (r.media_id) so.mediaId = r.media_id; dirty = true; await rebuild(); drawTl(); drawRush(); toast(`« ${so.title} » est revenu du Studio son, nettoyé.`); }});
+                if (!r?.filename) return; so.src = url(r.filename); if (r.media_id) so.mediaId = r.media_id; dirty = true; await rebuild(); drawTl(); drawRush(); toast(i18n('« {name} » est revenu du Studio son, nettoyé.', {name: so.title})); }});
         });
         // le Studio son ouvre un nouveau montage avec son son déjà posé (Fichier → 🎬 Ouvrir dans le montage)
         if (ext._montageSeed && !proj) { const sd = ext._montageSeed; ext._montageSeed = null; const si = await pushSource({src: url(sd.filename), title: sd.title, media: {id: sd.mediaId}}, 'audio'); if (si !== null) placeRush(si, 'a', 0); drawTl(); }
@@ -2069,7 +2072,7 @@
     const askFile = () => new Promise(ok => { const i = document.createElement('input'); i.type = 'file'; i.accept = '.json,application/json'; i.addEventListener('change', () => ok(i.files?.[0] || null), {once: true}); i.click(); });
     /* un réglage dans un fichier : {lcnda: 'reglage', outil, nom, version: 1, donnees} → lcnda-reglage-<outil>-<nom>.json */
     const slugOf = n => String(n || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^A-Za-z0-9]+/g, '-').replace(/^-+|-+$/g, '').toLowerCase().slice(0, 50) || 'reglage';
-    const OUTIL_LABEL = o => o === 'montage-disposition' ? 'la disposition du montage' : /^boutons-/.test(o) ? `les boutons de « ${(EDITORS.find(e => e[0] === o.slice(8)) || [0, o.slice(8)])[1]} »` : `l’outil « ${o} »`;
+    const OUTIL_LABEL = o => o === 'montage-disposition' ? i18n('la disposition du montage') : /^boutons-/.test(o) ? i18n('les boutons de « {name} »', {name: i18n((EDITORS.find(e => e[0] === o.slice(8)) || [0, o.slice(8)])[1])}) : i18n('l’outil « {name} »', {name: o});
     ext.maintenance.montage_prefs = async token => {
         const st = S(), ws = A().$('#workspace');
         const lsJson = readJson;
@@ -2106,7 +2109,7 @@
                     <label>Format<select data-mtp="fmt">${opt([['mp4', 'MP4 (H.264) — lu partout'], ['webm', 'WebM — léger']], p.fmt)}</select></label>
                     <label>Taille<select data-mtp="height">${opt(MT_SIZES, p.height)}</select></label>
                     <label>Qualité<select data-mtp="quality">${opt(MT_QUALITY, p.quality)}</select></label>
-                    <label>Images par seconde<select data-mtp="fps">${opt(MT_FPS.map(f => [f, f + ' images/s']), p.fps)}</select></label>
+                    <label>Images par seconde<select data-mtp="fps">${opt(MT_FPS.map(f => [f, i18n('{n} images/s', {n: f})]), p.fps)}</select></label>
                     <label>Son<select data-mtp="abr">${opt([[96, '96 kb/s'], [128, '128 kb/s'], [192, '192 kb/s'], [256, '256 kb/s']], p.abr)}</select></label>
                     ${ext.montageLoud ? `<label>📢 Volume standard<select data-mtp="lufs">${opt(ext.montageLoud.TARGETS, p.lufs)}</select></label>` : ''}
                     </div>
@@ -2135,7 +2138,7 @@
                     <div class="form-grid h-mtp-grid"><label>Éditeur<select data-mtp-which>${opt(EDITORS, which)}</select></label></div>
                     <div data-presets-slot="toolbar"></div>
                     <p class="muted">Coche ce qu’on montre, range avec ↑ ↓ (ou en glissant ⠿). C’est aussi dans chaque éditeur : « ⚙️ Personnaliser ». Les ensembles ci-dessus sont ceux de « ${esc(edName)} ».</p>
-                    ${groups ? `<div class="h-tbcfg-body" data-mtp-groups>${groups}</div><button type="button" class="button small secondary" data-mtp-reset>↺ Remettre comme au départ</button>` : `<p class="muted">Ouvre une fois ${which === 'video' ? 'le montage vidéo (Listes → Vidéos → « 🎬 Montage »)' : which === 'retouch' ? 'la retouche d’une photo (visionneuse → « Retoucher »)' : which === 'layout' ? 'l’atelier de mise en page (Listes → 📐 Livres de famille, ou Export propre → Livre de famille)' : which === 'vector' ? 'le dessin vectoriel (Listes → Outils de modification → ✒️ Dessin vectoriel)' : which === 'house' ? 'le plan d’une maison (Listes → 🏠 Maisons de famille)' : which === 'decortree' ? 'l’arbre décoratif (Listes → Outils de modification → 🌳 Arbre décoratif → ＋)' : which === 'keynote' ? 'une présentation (Listes → Outils de modification → 🎞️ Présentation et diaporama → ＋ Nouveau → Présentation)' : which === 'textdoc' ? 'le traitement de texte (Listes → Outils de modification → 📝 Traitement de texte)' : which === 'sheet' ? 'le tableur (Listes → Outils de modification → 🧾 Tableur)' : 'la modification d’un son (Listes → Audios → ✏️)'} : ses boutons apparaîtront ici.</p>`}
+                    ${groups ? `<div class="h-tbcfg-body" data-mtp-groups>${groups}</div><button type="button" class="button small secondary" data-mtp-reset>↺ Remettre comme au départ</button>` : `<p class="muted">${i18n('Ouvre une fois {what} : ses boutons apparaîtront ici.', {what: i18n(which === 'video' ? 'le montage vidéo (Listes → Vidéos → « 🎬 Montage »)' : which === 'retouch' ? 'la retouche d’une photo (visionneuse → « Retoucher »)' : which === 'layout' ? 'l’atelier de mise en page (Listes → 📐 Livres de famille, ou Export propre → Livre de famille)' : which === 'vector' ? 'le dessin vectoriel (Listes → Outils de modification → ✒️ Dessin vectoriel)' : which === 'house' ? 'le plan d’une maison (Listes → 🏠 Maisons de famille)' : which === 'decortree' ? 'l’arbre décoratif (Listes → Outils de modification → 🌳 Arbre décoratif → ＋)' : which === 'keynote' ? 'une présentation (Listes → Outils de modification → 🎞️ Présentation et diaporama → ＋ Nouveau → Présentation)' : which === 'textdoc' ? 'le traitement de texte (Listes → Outils de modification → 📝 Traitement de texte)' : which === 'sheet' ? 'le tableur (Listes → Outils de modification → 🧾 Tableur)' : 'la modification d’un son (Listes → Audios → ✏️)')})}</p>`}
                 <div class="h-ek-panel h-mtp-keys"><h4>⌨️ Raccourcis de « ${esc(edName)} »</h4><div data-ek-box></div><p class="muted"><button type="button" class="button small secondary" data-mtp-allkeys>⌨️ Tous les raccourcis de l’app (Réglages → Raccourcis clavier)</button></p></div>
                 </section></div></section>`;
             // les raccourcis suivent l'éditeur choisi (même liste que Réglages → Raccourcis clavier)
@@ -2175,13 +2178,13 @@
                 let outil = String(data.outil || '');
                 if (outil !== op.outil()) {
                     if (op === setOps.toolbar && /^boutons-/.test(outil) && EDITORS.some(x => x[0] === outil.slice(8))) { which = st.montagePrefsEditor = outil.slice(8); }
-                    else return toast(`Ce fichier est un réglage pour ${OUTIL_LABEL(outil)}, pas pour ${OUTIL_LABEL(op.outil())} : importe-le à sa place.`, 'error');
+                    else return toast(i18n('Ce fichier est un réglage pour {a}, pas pour {b} : importe-le à sa place.', {a: OUTIL_LABEL(outil), b: OUTIL_LABEL(op.outil())}), 'error');
                 }
                 if (!data.donnees || typeof data.donnees !== 'object') return toast('Ce réglage est vide ou abîmé.', 'error');
                 const list = op.list(); let name = cleanName(data.nom) || 'Réglage importé';
-                while (list.some(y => y.name === name)) { const n = await A().askText({title: 'Ce nom est déjà pris', message: `Un réglage s’appelle déjà « ${name} ». Quel nom pour celui-ci ?`, value: window.LCNDA_UI.freeName(name, list.map(y => y.name)), okLabel: 'Importer'}); if (n === null) return; name = cleanName(n); if (!name) return; }
+                while (list.some(y => y.name === name)) { const n = await A().askText({title: i18n('Ce nom est déjà pris'), message: i18n('Un réglage s’appelle déjà « {name} ». Quel nom pour celui-ci ?', {name}), value: window.LCNDA_UI.freeName(name, list.map(y => y.name)), okLabel: 'Importer'}); if (n === null) return; name = cleanName(n); if (!name) return; }
                 list.push({name, date: new Date().toISOString(), v: op.clean(data.donnees)});
-                if (op.save(list.slice(-60))) { draw(); toast(`Réglage « ${name} » importé : « Appliquer » pour l’utiliser.`); }
+                if (op.save(list.slice(-60))) { draw(); toast(i18n('Réglage « {name} » importé : « Appliquer » pour l’utiliser.', {name})); }
                 return;
             }
             if (data?.type !== op.type) return toast(op === setOps.layout ? 'Ce fichier n’est pas une disposition du montage.' : 'Ce fichier n’est pas un réglage de boutons.', 'error');
@@ -2189,20 +2192,20 @@
             const list = op.list(), add = cleanSets(data.sets, op.clean); let n = 0;
             add.forEach(x => { let name = x.name; while (list.some(y => y.name === name)) name = `${name} (2)`.slice(0, 80); list.push({...x, name}); n++; });
             if (data.current && typeof data.current === 'object') { let name = cleanName(data.name) || 'Importé'; while (list.some(y => y.name === name)) name = `${name} (2)`.slice(0, 80); list.push({name, date: new Date().toISOString(), v: op.clean(data.current)}); n++; }
-            if (op.save(list.slice(-60))) { draw(); toast(`${A().plural(n, 'ensemble importé', 'ensembles importés')} : choisis-en un puis « Appliquer ».`); }
+            if (op.save(list.slice(-60))) { draw(); toast(i18n('{what} : choisis-en un puis « Appliquer ».', {what: A().plural(n, 'ensemble importé', 'ensembles importés')})); }
         };
         // 💾 Réglages enregistrés (le cadre commun) : la disposition du montage, les boutons de l'éditeur choisi
         mountSets = () => Object.entries(setOps).forEach(([key, op]) => {
             const slot = ws.querySelector(`[data-presets-slot="${key}"]`); if (!slot) return;
             const UI = window.LCNDA_UI, today = () => new Date().toLocaleDateString('fr-FR'), put = (list, at, it) => { if (at >= 0) list[at] = it; else list.push(it); return op.save(list.slice(-60)); };
             const fr = UI.presetsFrame({id: `montage-${key}`, what: key === 'layout' ? 'cette disposition' : 'ces boutons', list: op.list, quietApply: true,
-                apply: async i => { const x = op.list()[i]; if (!x || !await A().confirmBox('', {title: `Remplacer les réglages actuels par l’ensemble « ${x.name} » ?`, okLabel: 'Remplacer'})) return false; op.apply(x.v); draw(); toast(`Ensemble « ${x.name} » appliqué.`); return false; },
+                apply: async i => { const x = op.list()[i]; if (!x || !await A().confirmBox('', {title: i18n('Remplacer les réglages actuels par l’ensemble « {name} » ?', {name: x.name}), okLabel: i18n('Remplacer')})) return false; op.apply(x.v); draw(); toast(i18n('Ensemble « {name} » appliqué.', {name: x.name})); return false; },
                 save: name => { const list = op.list(); name = cleanName(name); return put(list, list.findIndex(x => x.name === name), {name, date: today(), v: op.now()}); },
                 replace: i => { const list = op.list(); return put(list, i, {...list[i], date: today(), v: op.now()}); },
                 rename: (i, name) => { const list = op.list(); return put(list, i, {...list[i], name: cleanName(name) || list[i].name}); },
-                duplicate: i => { const list = op.list(), name = UI.freeName(list[i].name, list.map(x => x.name)); list.splice(i + 1, 0, {...JSON.parse(JSON.stringify(list[i])), name, date: today()}); if (!op.save(list.slice(-60))) return false; toast(`Copie « ${name} » créée.`); },
+                duplicate: i => { const list = op.list(), name = UI.freeName(list[i].name, list.map(x => x.name)); list.splice(i + 1, 0, {...JSON.parse(JSON.stringify(list[i])), name, date: today()}); if (!op.save(list.slice(-60))) return false; toast(i18n('Copie « {name} » créée.', {name})); },
                 exportOne: i => { const x = op.list()[i]; if (x) { downloadJson(`lcnda-reglage-${op.outil()}-${slugOf(x.name)}.json`, {lcnda: 'reglage', outil: op.outil(), nom: x.name, version: 1, donnees: x.v}); toast('Fichier prêt : il s’importe dans Réglages → Montage, retouche, mise en page et son (« ⤒ Importer »).'); } return false; },
-                remove: i => { const list = op.list(), x = list[i]; A().undoLocalChange(`Ensemble « ${x.name} » supprimé`, [key === 'layout' ? LAYOUT_SETS : TB_SETS], () => { list.splice(i, 1); op.save(list); }, () => { if (fr.isConnected) fr.refresh(); }); },
+                remove: i => { const list = op.list(), x = list[i]; A().undoLocalChange(i18n('Ensemble « {name} » supprimé', {name: x.name}), [key === 'layout' ? LAYOUT_SETS : TB_SETS], () => { list.splice(i, 1); op.save(list); }, () => { if (fr.isConnected) fr.refresh(); }); },
                 importOne: async () => { await importSet(op); return false; }});
             slot.replaceWith(fr);
         });
@@ -2243,7 +2246,7 @@
         const dlg = document.createElement('dialog'); dlg.className = 'modal h-modal h-mt-projdlg';
         const draw = () => { dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">🎬 MONTAGE</span><h2>Projets de montage</h2></div><button type="button" class="icon-button" data-x aria-label="Fermer">×</button></div>
             ${onNew ? '<div class="h-mt-pnew"><button type="button" class="button" data-new>＋ Nouveau montage</button></div>' : ''}
-            ${list.length ? `<div class="h-mt-plist">${list.map(p => `<div class="h-mt-prow${p.id === current ? ' is-cur' : ''}"><button type="button" class="h-mt-popen" data-open="${p.id}">${p.thumb ? `<img src="${esc(p.thumb)}" alt="">` : '<span class="h-mt-pico">🎬</span>'}<span><b>${esc(p.name)}</b><small>${p.clips} morceau${p.clips > 1 ? 'x' : ''} · ${p.sources} rush${p.sources > 1 ? 'es' : ''}${p.duration ? ' · ' + fmt(p.duration, false) : ''} · ${when(p.updated_at)}</small></span></button><button type="button" class="icon-button small" data-ren="${p.id}" title="Renommer">✎</button><button type="button" class="icon-button small" data-del="${p.id}" title="Supprimer le projet (les vidéos et photos restent dans les Médias)">🗑</button></div>`).join('')}</div>`
+            ${list.length ? `<div class="h-mt-plist">${list.map(p => `<div class="h-mt-prow${p.id === current ? ' is-cur' : ''}"><button type="button" class="h-mt-popen" data-open="${p.id}">${p.thumb ? `<img src="${esc(p.thumb)}" alt="">` : '<span class="h-mt-pico">🎬</span>'}<span><b>${esc(p.name)}</b><small>${A().plural(p.clips, 'morceau', 'morceaux')} · ${A().plural(p.sources, 'rush', 'rushes')}${p.duration ? ' · ' + fmt(p.duration, false) : ''} · ${when(p.updated_at)}</small></span></button><button type="button" class="icon-button small" data-ren="${p.id}" title="Renommer">✎</button><button type="button" class="icon-button small" data-del="${p.id}" title="Supprimer le projet (les vidéos et photos restent dans les Médias)">🗑</button></div>`).join('')}</div>`
                 : A().emptyState({icon: '🎬', text: 'Aucun projet de montage pour l’instant', hint: 'Dans le montage, « 💾 Enregistrer le projet ».'})}<div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-x>Fermer</button></div>`; };
         draw(); document.body.appendChild(dlg); dlg.addEventListener('close', () => dlg.remove()); dlg.showModal();
         dlg.addEventListener('click', async e => {

@@ -9,6 +9,8 @@
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     let T = null; const three = async () => (T ??= await import('../vendor/three.module.js'));
     const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+    /** 🌐 traduction (docs/I18N.md) ; sans elle (fichier de visite partagé), le français */
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s).replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? String(v[k]) : m)));
     const M = cm => cm / 100; // le plan est en centimètres, la 3D en mètres
 
     /* ═════════ Textures dessinées (pas de fichier à télécharger) ═════════ */
@@ -235,9 +237,9 @@
         return {alt, az, tz, rise: typeof H0 === 'number' ? 12 - H0 - corr : null, set: typeof H0 === 'number' ? 12 + H0 - corr : null, polar: c0 >= 1 ? 'nuit' : c0 <= -1 ? 'jour' : ''};
     }
     const MONTHS = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
-    const dayLabel = d => { const dt = new Date(Date.UTC(2023, 0, 1) + (clamp(Math.round(d), 1, 365) - 1) * 864e5); return `${dt.getUTCDate() === 1 ? '1er' : dt.getUTCDate()} ${MONTHS[dt.getUTCMonth()]}`; };
+    const dayLabel = d => { const dt = new Date(Date.UTC(2023, 0, 1) + (clamp(Math.round(d), 1, 365) - 1) * 864e5); const I = window.LCNDA_I18N; if (I && I.lang !== 'fr' && I.fmtDate) return I.fmtDate(dt, {day: 'numeric', month: 'long', timeZone: 'UTC'}); return `${dt.getUTCDate() === 1 ? '1er' : dt.getUTCDate()} ${MONTHS[dt.getUTCMonth()]}`; };
     const hourLabel = h => { h = ((h % 24) + 24) % 24; const m = Math.round((h % 1) * 60); return `${Math.floor(h) + (m === 60 ? 1 : 0)} h ${String(m === 60 ? 0 : m).padStart(2, '0')}`; };
-    const dirName = az => ['nord', 'nord-est', 'est', 'sud-est', 'sud', 'sud-ouest', 'ouest', 'nord-ouest'][Math.round(((az / DEG) % 360) / 45) % 8];
+    const dirName = az => i18n(['nord', 'nord-est', 'est', 'sud-est', 'sud', 'sud-ouest', 'ouest', 'nord-ouest'][Math.round(((az / DEG) % 360) / 45) % 8], {ctx: 'boussole'});
     const dayOfYear = (dt = new Date()) => Math.min(365, Math.floor((Date.UTC(dt.getFullYear(), dt.getMonth(), dt.getDate()) - Date.UTC(dt.getFullYear(), 0, 1)) / 864e5) + 1);
     const SUN0 = {north: 0, hour: 15, day: 172, shadows: true};
     const sunOf = H => ({...SUN0, ...(H.sun && typeof H.sun === 'object' ? H.sun : {})});
@@ -480,8 +482,8 @@
         function showRoomCard(rm, f) {
             clearTimeout(roomT); const ppl = [...(rm?.people || [])].sort((a, b) => (b.primary !== false) - (a.primary !== false)).slice(0, 8), mem = Array.isArray(rm?.mem) && rm.mem.length;
             if (!rm || (!ppl.length && !mem && !rm.note) || o3.share) { roomCard.hidden = true; return; }
-            roomCard.innerHTML = `<div class="h-hs-rchd"><b>🚪 ${escH(rm.name || 'Pièce')}</b>${rm.period ? `<small>${escH(rm.period)}</small>` : ''}<button type="button" class="icon-button small" data-rc="close" title="Fermer" aria-label="Fermer">×</button></div>
-                ${ppl.length ? `<ul>${ppl.map(p => `<li>${Number(p.id) ? `<button type="button" class="link-button" data-rc-p="${Number(p.id)}">${p.primary !== false ? '★' : '☆'} ${escH(p.label || 'Personne')}</button>` : `<span>${p.primary !== false ? '★' : '☆'} ${escH(p.label || 'Personne')}</span>`}${p.role || p.years ? `<small>${escH([p.role, p.years].filter(Boolean).join(' · '))}</small>` : ''}</li>`).join('')}</ul>` : ''}
+            roomCard.innerHTML = `<div class="h-hs-rchd"><b>🚪 ${escH(rm.name || i18n('Pièce'))}</b>${rm.period ? `<small>${escH(rm.period)}</small>` : ''}<button type="button" class="icon-button small" data-rc="close" title="Fermer" aria-label="Fermer">×</button></div>
+                ${ppl.length ? `<ul>${ppl.map(p => `<li>${Number(p.id) ? `<button type="button" class="link-button" data-rc-p="${Number(p.id)}">${p.primary !== false ? '★' : '☆'} ${escH(p.label || i18n('Personne'))}</button>` : `<span>${p.primary !== false ? '★' : '☆'} ${escH(p.label || i18n('Personne'))}</span>`}${p.role || p.years ? `<small>${escH([p.role, p.years].filter(Boolean).join(' · '))}</small>` : ''}</li>`).join('')}</ul>` : ''}
                 ${rm.note ? `<p>${escH(String(rm.note).slice(0, 220))}${String(rm.note).length > 220 ? '…' : ''}</p>` : ''}${mem ? '<button type="button" class="button small secondary" data-rc="mem">✦ Les souvenirs de la pièce</button>' : ''}`;
             roomCard.dataset.room = rm.id; roomCard.dataset.floor = f.id; roomCard.style.top = `${under()}px`; roomCard.hidden = false; roomT = setTimeout(() => { roomCard.hidden = true; }, 9000);
         }
@@ -532,7 +534,7 @@
             const sky = new T.Color('#dfe8ef').lerp(new T.Color('#f2c49e'), gold * .75).lerp(new T.Color('#0e1828'), night); scene.background.copy(sky); scene.fog.color.copy(sky);
             groundMat.color.set('#a9b88f').lerp(new T.Color('#25301f'), night * .8);
             lampLights.forEach(l => { l.intensity = night * 9; }); bulbs.forEach(b => { b.visible = night > .3; });
-            const info = sunBox.querySelector('[data-sxo="info"]'); if (info) info.textContent = `${sp.alt > 0 ? `Soleil à ${Math.round(altD)}° de haut, au ${dirName(sp.az)}` : `${night >= 1 ? '🌙 Nuit' : 'Crépuscule'}${lampLights.length ? ` : ${lampLights.length} lampe${lampLights.length > 1 ? 's' : ''} allumée${lampLights.length > 1 ? 's' : ''}` : ' (pose une lampe pour éclairer)'}`} · ${sp.polar === 'nuit' ? 'nuit polaire' : sp.polar === 'jour' ? 'soleil de minuit' : `lever ${hourLabel(sp.rise)}, coucher ${hourLabel(sp.set)}`} · ${geo ? `${String(Math.abs(g.lat).toFixed(2)).replace('.', ',')}° ${g.lat >= 0 ? 'N' : 'S'}` : 'France (lieu de la maison inconnu)'}`;
+            const info = sunBox.querySelector('[data-sxo="info"]'); if (info) info.textContent = `${sp.alt > 0 ? i18n('Soleil à {deg}° de haut, au {dir}', {deg: String(Math.round(altD)), dir: dirName(sp.az)}) : `${night >= 1 ? i18n('🌙 Nuit') : i18n('Crépuscule')}${lampLights.length ? ` : ${i18n(lampLights.length > 1 ? '{n} lampes allumées' : '{n} lampe allumée', {n: lampLights.length})}` : ` ${i18n('(pose une lampe pour éclairer)')}`}`} · ${sp.polar === 'nuit' ? i18n('nuit polaire') : sp.polar === 'jour' ? i18n('soleil de minuit') : i18n('lever {rise}, coucher {set}', {rise: hourLabel(sp.rise), set: hourLabel(sp.set)})} · ${geo ? `${String(Math.abs(g.lat).toFixed(2)).replace('.', ',')}° ${g.lat >= 0 ? 'N' : 'S'}` : i18n('France (lieu de la maison inconnu)')}`;
             return sp;
         }
         const setSun = (patch, quiet = false) => { Hcur.sun = {...sunOf(Hcur), ...patch}; paintSunBox(); applySun(); if (!quiet) emit('h3-change', {what: 'sun'}); };
@@ -556,7 +558,7 @@
             const p = hit.point.clone(); mPts.push(p);
             const dot = new T.Mesh(new T.SphereGeometry(.04, 12, 8), new T.MeshBasicMaterial({color: '#e0457b', depthTest: false})); dot.renderOrder = 11; dot.position.copy(p); scene.add(dot); measureObjs.push(dot);
             if (mPts.length === 2) { const [a, b] = mPts, line = new T.Line(new T.BufferGeometry().setFromPoints([a, b]), new T.LineBasicMaterial({color: '#e0457b', depthTest: false})); line.renderOrder = 11; scene.add(line); measureObjs.push(line);
-                const d = a.distanceTo(b) * 100, dh = Math.abs(a.y - b.y) * 100, dxz = Math.hypot(a.x - b.x, a.z - b.z) * 100; mLabel.textContent = `${fmt3(d)}${dh > 2 ? ` · au sol ${fmt3(dxz)} · ↕ ${fmt3(dh)}` : ''}`; mLabel.hidden = false; }
+                const d = a.distanceTo(b) * 100, dh = Math.abs(a.y - b.y) * 100, dxz = Math.hypot(a.x - b.x, a.z - b.z) * 100; mLabel.textContent = `${fmt3(d)}${dh > 2 ? ` · ${i18n('au sol {len}', {len: fmt3(dxz)})} · ↕ ${fmt3(dh)}` : ''}`; mLabel.hidden = false; }
         }
         /** ✦ un souvenir sous la souris (ou au centre de la vue, souris capturée) : les repères se voient (et se cliquent) à travers les murs */
         function pickMemory(e) {
@@ -612,7 +614,7 @@
             const bb = new T.Box3().setFromObject(house), c = bb.isEmpty() ? new T.Vector3() : bb.getCenter(new T.Vector3()); return [c.x, c.z];
         }
         function paintHud() {
-            const fl = sortedFloors(), f = Hcur.floors[fiCur], i = fl.indexOf(f); hud.querySelector('[data-wk="floor"]').textContent = f.name || 'Étage';
+            const fl = sortedFloors(), f = Hcur.floors[fiCur], i = fl.indexOf(f); hud.querySelector('[data-wk="floor"]').textContent = f.name || i18n('Étage');
             hud.querySelector('[data-wk="up"]').disabled = i >= fl.length - 1; hud.querySelector('[data-wk="down"]').disabled = i <= 0;
             const eye = hud.querySelector('[data-wk="eye"]'); if (document.activeElement !== eye) eye.value = Math.round(eyeM() * 100);
             hud.querySelector('[data-wk="hint"]').textContent = document.pointerLockElement === el ? 'Z Q S D, W A S D ou flèches : marcher · Maj : courir · la souris regarde · Échap : libérer la souris' : touchy() ? 'Le rond en bas à gauche : marcher · glisser sur la vue : regarder · ✦ : toucher pour voir le souvenir' : 'Z Q S D, W A S D ou flèches : marcher · clic sur la vue : regarder avec la souris · ✦ : clic pour voir le souvenir · Échap : sortir';
@@ -670,7 +672,7 @@
         let photoCur = -1;
         function showPhoto(i) {
             const ph = (Hcur.oldPhotos || [])[i]; if (!ph?.src) return; photoCur = i; goPose(ph); roomCard.hidden = true;
-            photoBox.innerHTML = `<img alt="" data-op="img"><div class="h-hs-opbar"><b>📷 ${escH(ph.title || 'Photo d’époque')}</b><span>Autrefois</span><input type="range" min="0" max="100" value="50" data-op="mix" aria-label="Autrefois ou aujourd’hui" data-ui-off><span>Aujourd’hui</span><button type="button" class="icon-button small" data-op="close" title="Fermer" aria-label="Fermer">×</button></div>`;
+            photoBox.innerHTML = `<img alt="" data-op="img"><div class="h-hs-opbar"><b>📷 ${escH(ph.title || i18n('Photo d’époque'))}</b><span>Autrefois</span><input type="range" min="0" max="100" value="50" data-op="mix" aria-label="Autrefois ou aujourd’hui" data-ui-off><span>Aujourd’hui</span><button type="button" class="icon-button small" data-op="close" title="Fermer" aria-label="Fermer">×</button></div>`;
             const img = photoBox.querySelector('img'); img.src = ph.src; img.style.opacity = '.5'; photoBox.hidden = false; }
         photoBox.addEventListener('input', e => { if (e.target.dataset.op === 'mix') photoBox.querySelector('img').style.opacity = String(1 - Number(e.target.value) / 100); });
         photoBox.addEventListener('click', e => { if (e.target.closest('[data-op="close"]')) { photoBox.hidden = true; photoCur = -1; } });
@@ -686,7 +688,7 @@
         async function playTour(from = 0) {
             const stops = (Hcur.tour || []).filter(t => t && Hcur.floors.some(f => f.id === t.fid)); if (!stops.length) return false; touring = true; roomCard.hidden = true; photoBox.hidden = true; if (!walk) startWalk();
             for (tourI = from; tourI < stops.length && touring; tourI++) { const t = stops[tourI];
-                tourBox.innerHTML = `<div class="h-hs-tbhd"><b>🗺 Arrêt ${tourI + 1} sur ${stops.length}</b><span class="spacer"></span><button type="button" class="icon-button small" data-tb="next" title="Arrêt suivant" aria-label="Arrêt suivant">⏭</button><button type="button" class="icon-button small" data-tb="stop" title="Arrêter la visite guidée" aria-label="Arrêter">×</button></div><p>${escH(t.text || '')}</p>`; tourBox.hidden = false;
+                tourBox.innerHTML = `<div class="h-hs-tbhd"><b>${i18n('🗺 Arrêt {n} sur {total}', {n: tourI + 1, total: stops.length})}</b><span class="spacer"></span><button type="button" class="icon-button small" data-tb="next" title="Arrêt suivant" aria-label="Arrêt suivant">⏭</button><button type="button" class="icon-button small" data-tb="stop" title="Arrêter la visite guidée" aria-label="Arrêter">×</button></div><p>${escH(t.text || '')}</p>`; tourBox.hidden = false;
                 await goPose(t, tourI === from ? 0 : 1600); if (!touring) break; await say(t.text); }
             touring = false; tourBox.hidden = true; try { window.speechSynthesis?.cancel(); } catch (_) {} return true;
         }
@@ -754,7 +756,7 @@
                 cam.position.set(P.x, floorBase(Hcur, f) + eyeM(), P.z);
                 cam.lookAt(P.x - Math.sin(wyaw) * Math.cos(wpitch), cam.position.y + Math.sin(wpitch), P.z - Math.cos(wyaw) * Math.cos(wpitch));
                 if (now - stairT > 120) { stairT = now; drawMini(); const rmH = ext.housePlus?.roomAt?.(f, P.x * 100, P.z * 100) || null; if ((rmH?.id || null) !== roomCur) { roomCur = rmH?.id || null; if (!touring) showRoomCard(rmH, f); } const fl = sortedFloors(), i = fl.indexOf(f), up = stairAt(f, P.x, P.z) && fl[i + 1], down = fl[i - 1] && stairAt(fl[i - 1], P.x, P.z), s2 = up ? 1 : down ? -1 : 0;
-                    if (s2 !== onStair) { onStair = s2; const sb = hud.querySelector('[data-wk="stair"]'); sb.hidden = !s2; sb.innerHTML = s2 ? `🪜 Un escalier : ${up ? '<button type="button" class="button small" data-wk="stairup">⬆ Monter (E)</button>' : ''}${down ? '<button type="button" class="button small secondary" data-wk="stairdown">⬇ Descendre (C)</button>' : ''}` : ''; } }
+                    if (s2 !== onStair) { onStair = s2; const sb = hud.querySelector('[data-wk="stair"]'); sb.hidden = !s2; sb.innerHTML = s2 ? `${i18n('🪜 Un escalier :')} ${up ? '<button type="button" class="button small" data-wk="stairup">⬆ Monter (E)</button>' : ''}${down ? '<button type="button" class="button small secondary" data-wk="stairdown">⬇ Descendre (C)</button>' : ''}` : ''; } }
             } else place();
             placeLabel(); renderer.render(scene, cam); rec?.frame(); raf = requestAnimationFrame(loop); };
         raf = requestAnimationFrame(loop);

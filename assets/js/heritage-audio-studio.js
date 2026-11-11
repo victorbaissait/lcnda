@@ -12,6 +12,8 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (typeof window !== 'undefined' && window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : (v ? String(s).replace(/\{(\w+)\}/g, (m, k) => (k in v ? String(v[k]) : m)) : s)); // 🌐 traduction (docs/I18N.md)
+    const UIL = () => (window.LCNDA_I18N && window.LCNDA_I18N.lang !== 'fr' ? window.LCNDA_I18N.locale() : 'fr-FR'); // 🌐 nombres selon la langue
     const A = () => window.LCNDA_APP;
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const UI = () => window.LCNDA_UI || {};
@@ -59,7 +61,7 @@
                 if (opt.saveCopy && fmtId !== 'aiff' && ext._av?.uploadResult) await ext._av.uploadResult(o.media || {id: 0}, blob, ext0, {mode: o.media?.id ? 'copy' : 'new', duration: f.buf.duration, title: `${files.length > 1 ? f.name : o.title} (${fmtId.toUpperCase()})`});
                 if (files.length > 1) await new Promise(r => setTimeout(r, 350)); // plusieurs fichiers : le navigateur les prend un par un
             }
-            if (opt.saveCopy) { toast(files.length > 1 ? `${plural(files.length, 'fichier téléchargé', 'fichiers téléchargés')}, et rangés dans les médias.` : 'Fichier téléchargé, et une copie est rangée dans les médias.'); o.onDone?.(); }
+            if (opt.saveCopy) { toast(files.length > 1 ? i18n('{what}, et rangés dans les médias.', {what: plural(files.length, 'fichier téléchargé', 'fichiers téléchargés')}) : i18n('Fichier téléchargé, et une copie est rangée dans les médias.')); o.onDone?.(); }
         };
         const runText = async opt => {
             const kind = opt.fields.text || 'txt', lines = o.lines || [];
@@ -69,8 +71,8 @@
         };
         const formats = [{id: 'mp3', label: '🎵 MP3', hint: `lu partout · ~${mb(24000)} Mo`, ext: 'mp3', run: runAudio('mp3')}];
         if (m4a) formats.push({id: 'm4a', label: '🍏 M4A (AAC)', hint: `iPhone, iTunes · ~${mb(20000)} Mo`, ext: 'm4a', run: runAudio('m4a')});
-        formats.push({id: 'wav', label: '🎚 WAV', hint: `sans perte · ~${mb(pcm)} Mo`, ext: 'wav', run: runAudio('wav')}, {id: 'flac', label: '🗜 FLAC', hint: `sans perte, léger · ~${mb(pcm * .55)} Mo`, ext: 'flac', run: runAudio('flac')});
-        if (opus) formats.push({id: 'ogg', label: '🗣 Ogg Opus', hint: `le plus léger · ~${mb(12000)} Mo`, ext: 'ogg', run: runAudio('ogg')});
+        formats.push({id: 'wav', label: '🎚 WAV', hint: `sans perte · ~${mb(pcm)} Mo`, ext: 'wav', run: runAudio('wav')}, {id: 'flac', label: '🗜 FLAC', hint: i18n('sans perte, léger · ~{n} Mo', {n: mb(pcm * .55)}), ext: 'flac', run: runAudio('flac')});
+        if (opus) formats.push({id: 'ogg', label: '🗣 Ogg Opus', hint: i18n('le plus léger · ~{n} Mo', {n: mb(12000)}), ext: 'ogg', run: runAudio('ogg')});
         formats.push({id: 'aiff', label: '🍎 AIFF', hint: 'GarageBand, Logic', ext: 'aiff', run: runAudio('aiff'), copy: false},
             {id: 'text', label: '📝 Texte et repères', hint: '.txt, .srt, .vtt, .cue', ext: 'txt', run: runText, copy: false, goLabel: '⤓ Exporter le texte'});
         if (o.toMedia) formats.push({id: 'base', label: '💾 Dans les médias', hint: 'nouvelle version, copie', ext: '', run: async () => { setTimeout(() => o.toMedia(), 60); }, copy: false, goLabel: '💾 Choisir comment le garder…'});
@@ -79,14 +81,14 @@
         prev.innerHTML = `<canvas class="h-as-expwave"></canvas><button type="button" class="button small secondary" data-as-ex10>▶ Écouter 10 s du résultat</button><small class="muted" data-as-exinfo>${fmt(full.duration, false)} · ${full.numberOfChannels > 1 ? 'stéréo' : 'mono'} · ${(full.sampleRate / 1000).toLocaleString('fr-FR')} kHz</small>`;
         let s10 = null;
         prev.querySelector('[data-as-ex10]').addEventListener('click', () => { const c = E.ctx(); if (s10) { try { s10.stop(); } catch (_) {} s10 = null; return; } s10 = c.createBufferSource(); s10.buffer = full; s10.connect(c.destination); const at = Math.max(0, Math.min(full.duration - 10, full.duration * 0.3)); s10.start(0, at, 10); s10.onended = () => { s10 = null; }; });
-        setTimeout(async () => { const cv = prev.querySelector('canvas'); if (cv.isConnected) AU().drawWave(cv, {buf: full}); const pk = E.linToDb(E.peakOf(full)), L = await E.lufs(full); const i = prev.querySelector('[data-as-exinfo]'); if (i) i.textContent = `${o.sourceDuration && Math.abs(o.sourceDuration - full.duration) > 0.5 ? `${fmt(o.sourceDuration, false)} → ` : ''}${fmt(full.duration, false)} · ${full.numberOfChannels > 1 ? 'stéréo' : 'mono'} · ${(full.sampleRate / 1000).toLocaleString('fr-FR')} kHz · sonie ${Math.round(L)} LUFS · crête ${pk.toFixed(1).replace('.', ',')} dB`; }, 120);
+        setTimeout(async () => { const cv = prev.querySelector('canvas'); if (cv.isConnected) AU().drawWave(cv, {buf: full}); const pk = E.linToDb(E.peakOf(full)), L = await E.lufs(full); const i = prev.querySelector('[data-as-exinfo]'); if (i) i.textContent = `${o.sourceDuration && Math.abs(o.sourceDuration - full.duration) > 0.5 ? `${fmt(o.sourceDuration, false)} → ` : ''}${i18n('{dur} · {ch} · {khz} kHz · sonie {lufs} LUFS · crête {pk} dB', {dur: fmt(full.duration, false), ch: full.numberOfChannels > 1 ? i18n('stéréo') : 'mono', khz: (full.sampleRate / 1000).toLocaleString(UIL()), lufs: Math.round(L), pk: pk.toFixed(1).replace('.', ',')})}`; }, 120);
         const isAudio = f => !['text', 'base'].includes(f);
         const res = await U.openExportDialog({title: o.title, defaultName: o.title, quality: false, saveCopy: true, copyChecked: false, info: '', preview: () => prev, formats,
             fields: [
                 {id: 'kbps', label: 'Qualité', value: '192', options: [['192', 'Bonne (192 kbit/s)'], ['128', 'Légère (128 kbit/s)'], ['320', 'Très bonne (320 kbit/s)']], show: f => lossy.includes(f)},
-                {id: 'what', label: 'Quoi', value: 'all', options: [['all', 'Tout le son'], ...(o.getSelection?.() ? [['sel', 'La sélection']] : []), ...(zones.length ? [['zones', `Chaque zone dans un fichier (${zones.length})`]] : []), ...(o.tracks?.length ? [['tracks', `Chaque piste dans un fichier (${o.tracks.length})`]] : [])], show: isAudio},
-                {id: 'ch', label: 'Canaux', value: 'keep', options: [['keep', `Comme l’original (${full.numberOfChannels > 1 ? 'stéréo' : 'mono'})`], ['mono', 'Mono'], ['stereo', 'Stéréo']], show: isAudio},
-                {id: 'rate', label: 'Fréquence', value: '0', options: [['0', `Comme l’original (${(full.sampleRate / 1000).toLocaleString('fr-FR')} kHz)`], ['44100', '44,1 kHz'], ['48000', '48 kHz'], ['22050', '22,05 kHz (voix, plus léger)']], show: isAudio},
+                {id: 'what', label: 'Quoi', value: 'all', options: [['all', 'Tout le son'], ...(o.getSelection?.() ? [['sel', 'La sélection']] : []), ...(zones.length ? [['zones', i18n('Chaque zone dans un fichier ({n})', {n: zones.length})]] : []), ...(o.tracks?.length ? [['tracks', i18n('Chaque piste dans un fichier ({n})', {n: o.tracks.length})]] : [])], show: isAudio},
+                {id: 'ch', label: 'Canaux', value: 'keep', options: [['keep', full.numberOfChannels > 1 ? i18n('Comme l’original (stéréo)') : i18n('Comme l’original (mono)')], ['mono', 'Mono'], ['stereo', 'Stéréo']], show: isAudio},
+                {id: 'rate', label: 'Fréquence', value: '0', options: [['0', i18n('Comme l’original ({n} kHz)', {n: (full.sampleRate / 1000).toLocaleString(UIL())})], ['44100', '44,1 kHz'], ['48000', '48 kHz'], ['22050', '22,05 kHz (voix, plus léger)']], show: isAudio},
                 {id: 'text', label: 'Fichier', value: 'txt', options: [['txt', '.txt — la transcription et les zones'], ['srt', '.srt — sous-titres'], ['vtt', '.vtt — sous-titres et chapitres'], ['cue', '.cue — repères (chapitres)']], show: f => f === 'text'},
             ],
             checks: [{id: 'tags', label: 'Écrire les zones et les personnes dans le fichier (titre, chapitres)', checked: !!(o.regions || []).length, show: f => ['mp3', 'flac', 'ogg', 'm4a'].includes(f)}],
@@ -153,7 +155,7 @@
                             <div class="h-as-specwrap"><canvas data-as-spec></canvas><span class="h-as-flab" data-as-flab></span></div>
                         </div>
                         <div class="h-as-transport" data-tbg="as-transport" data-tbg-label="Lecture"><button type="button" class="button" data-as-cmd="play" data-shortcut="Espace">▶ Écouter</button><button type="button" class="button small secondary" data-as-cmd="home" title="Au début" aria-label="Au début">⏮</button><button type="button" class="button small secondary" data-as-cmd="loop" title="Lire la sélection en boucle" aria-label="Boucle">🔁</button><button type="button" class="button small secondary h-as-recbtn" data-as-cmd="rec" title="Enregistrer au micro (au repère orange ; en multipiste : sur la piste armée ●)" aria-label="Enregistrer au micro">●</button>
-                            <span class="muted h-as-tip" data-tb-label="Aide">Glisse = sélectionner · <kbd>Espace</kbd> écouter · <kbd>⌘</kbd> et molette : zoom · <kbd>M</kbd> marqueur · <kbd>A</kbd> maintenu : l’avant</span></div>
+                            <span class="muted h-as-tip" data-tb-label="Aide">${i18n('Glisse = sélectionner · <kbd>Espace</kbd> écouter · <kbd>⌘</kbd> et molette : zoom · <kbd>M</kbd> marqueur · <kbd>A</kbd> maintenu : l’avant')}</span></div>
                         <div class="h-as-vu" data-tbg="as-vu" data-tbg-label="VU-mètres"><div class="h-as-vurow" data-tb-label="VU-mètres"><span>G</span><div class="h-as-vubar"><i data-as-vu="0"></i><b data-as-vupk="0"></b></div><span>D</span><div class="h-as-vubar"><i data-as-vu="1"></i><b data-as-vupk="1"></b></div><small class="h-as-vuscale"><span>−60</span><span>−36</span><span>−18</span><span>−9</span><span>−3</span><span>0 dB</span></small></div></div>
                     </div>
                     <div class="h-as-multibox" data-as-multibox hidden></div>
@@ -176,7 +178,7 @@
         // ── la barre du bas (K18) : où l'on est, l'aide de l'outil, le zoom ──
         let sbar = null;
         if (UI().editorStatus) { sbar = UI().editorStatus({help: '', zoom: {get: () => base.duration / view.dur, set: k => { const c = view.start + view.dur / 2; view.dur = base.duration / k; view.start = c - view.dur / 2; clampView(); drawAll(); }, fit: () => { view = {start: 0, dur: base.duration}; drawAll(); }, min: 1, max: Math.max(2, base.duration / 0.05)}}); $('[data-as-statusbar]').replaceWith(sbar); }
-        const HELP = {sel: 'Glisse sur l’onde pour sélectionner ; clic = se placer ; ⇧ ← → agrandit la sélection.', brush: 'Peins sur la tache du spectre (toux, sonnerie), puis « 🩹 Réparer ». Taille : le curseur.', lasso: 'Entoure la tache sur le spectre, puis « 🩹 Réparer ».', marker: 'Clic sur l’onde : un marqueur 🚩 à cet endroit.', razor: 'Multipiste : clic sur un morceau pour le couper en deux. Sur l’onde : supprime la sélection.'};
+        const HELP = {sel: i18n('Glisse sur l’onde pour sélectionner ; clic = se placer ; ⇧ ← → agrandit la sélection.'), brush: i18n('Peins sur la tache du spectre (toux, sonnerie), puis « 🩹 Réparer ». Taille : le curseur.'), lasso: i18n('Entoure la tache sur le spectre, puis « 🩹 Réparer ».'), marker: i18n('Clic sur l’onde : un marqueur 🚩 à cet endroit.'), razor: i18n('Multipiste : clic sur un morceau pour le couper en deux. Sur l’onde : supprime la sélection.')};
         // ── E1 : les menus ──
         const fxMenu = () => Object.entries(E.FX).filter(([, d]) => !d.hidden).map(([k, d]) => ({icon: d.icon, label: d.label, run: () => addFx(k)}));
         const M = c => () => runCmd(c);
@@ -300,7 +302,7 @@
         cv.addEventListener('wheel', onWheel, {passive: false}); spc.addEventListener('wheel', onWheel, {passive: false});
         ov.addEventListener('pointerdown', e => { e.preventDefault(); ov.setPointerCapture(e.pointerId); const go = ev => { const r = ov.getBoundingClientRect(); view.start = (ev.clientX - r.left) / r.width * base.duration - view.dur / 2; clampView(); drawAll(); }; go(e); const up = () => { ov.removeEventListener('pointermove', go); ov.removeEventListener('pointerup', up); }; ov.addEventListener('pointermove', go); ov.addEventListener('pointerup', up); });
         cv.addEventListener('contextmenu', e => { if (e.shiftKey || !UI().contextMenu) return; const t = tAt(e); const r = st.regions.find(x => x.kind !== 'marker' && t >= x.start && t <= x.end); if (r) { selRegion = r.id; paintRegions(); paintLink(); }
-            UI().contextMenu(e, [...(r ? [{icon: '🔗', label: `Relier « ${r.name} » à une personne…`, run: () => linkPick('person')}, {icon: '📅', label: 'Relier à un événement…', run: () => linkPick('event')}, '-'] : []),
+            UI().contextMenu(e, [...(r ? [{icon: '🔗', label: i18n('Relier « {name} » à une personne…', {name: r.name}), run: () => linkPick('person')}, {icon: '📅', label: 'Relier à un événement…', run: () => linkPick('event')}, '-'] : []),
                 {label: 'Couper', shortcut: '⌘X', disabled: !sel, run: M('cut')}, {icon: '📋', label: 'Copier', shortcut: '⌘C', disabled: !sel, run: M('copy')}, {icon: '📋', label: 'Coller', shortcut: '⌘V', disabled: !clipboard, run: M('paste')}, {label: 'Garder seulement la sélection', disabled: !sel, run: M('keep')}, {label: 'Silence', disabled: !sel, run: M('silence')}, {icon: '＋', label: 'Nouvelle zone', disabled: !sel, run: M('zone')}, {icon: '🚩', label: 'Marqueur ici', run: () => addRegion('marker', t, t)}, '-', {icon: '🗑', label: 'Supprimer la sélection', shortcut: '⌫', danger: true, disabled: !sel, run: M('del')}], {title: 'Son'}); });
 
         // ── lecture : le résultat du rack (A maintenu : l'avant, au même endroit), VU-mètres ──
@@ -350,14 +352,14 @@
         }
         async function insertSound() {
             const o = await ext._av.pickOther('audio'); if (!o) return;
-            try { const ob = await E.resample(await E.load(o.src), sr(), base.numberOfChannels), at = cursor; shiftRegions(at, at, ob.duration); setBase(E.concatBufs([E.sliceBuf(base, 0, at * sr()), ob, E.sliceBuf(base, at * sr(), base.length)].filter(x => x.length > 1), base.numberOfChannels, sr()), `Insérer « ${o.title} »`); sel = {a: at, b: at + ob.duration}; addFile(o); drawAll(); }
+            try { const ob = await E.resample(await E.load(o.src), sr(), base.numberOfChannels), at = cursor; shiftRegions(at, at, ob.duration); setBase(E.concatBufs([E.sliceBuf(base, 0, at * sr()), ob, E.sliceBuf(base, at * sr(), base.length)].filter(x => x.length > 1), base.numberOfChannels, sr()), i18n('Insérer « {name} »', {name: o.title})); sel = {a: at, b: at + ob.duration}; addFile(o); drawAll(); }
             catch (e) { toast(e.message, 'error'); }
         }
         // ● Enregistrer au micro (forme d'onde : inséré au repère ; multipiste : sur la piste armée)
         let rec = null;
         async function record() {
             const btn = $('[data-as-cmd="rec"]');
-            if (rec) { const r0 = rec; rec = null; btn.classList.remove('is-rec'); btn.textContent = '●'; try { const {file, buffer} = await r0.stop(); if (mode === 'multi') return multi.addRecording(file, buffer); const ob = await E.resample(buffer, sr(), base.numberOfChannels), at = cursor; shiftRegions(at, at, ob.duration); setBase(E.concatBufs([E.sliceBuf(base, 0, at * sr()), ob, E.sliceBuf(base, at * sr(), base.length)].filter(x => x.length > 1), base.numberOfChannels, sr()), `Enregistrement au micro (${fmt(ob.duration, false)})`); sel = {a: at, b: at + ob.duration}; drawAll(); } catch (e) { toast(e.message, 'error'); } return; }
+            if (rec) { const r0 = rec; rec = null; btn.classList.remove('is-rec'); btn.textContent = '●'; try { const {file, buffer} = await r0.stop(); if (mode === 'multi') return multi.addRecording(file, buffer); const ob = await E.resample(buffer, sr(), base.numberOfChannels), at = cursor; shiftRegions(at, at, ob.duration); setBase(E.concatBufs([E.sliceBuf(base, 0, at * sr()), ob, E.sliceBuf(base, at * sr(), base.length)].filter(x => x.length > 1), base.numberOfChannels, sr()), i18n('Enregistrement au micro ({time})', {time: fmt(ob.duration, false)})); sel = {a: at, b: at + ob.duration}; drawAll(); } catch (e) { toast(e.message, 'error'); } return; }
             if (mode === 'multi' && !multi.armed()) return toast('Arme d’abord une piste avec ● (dans ses boutons M S ●).', 'error');
             try { rec = await E.recordMic({onLevel: v => { const w = clamp((E.linToDb(v) + 60) / 60, 0, 1) * 100; [0, 1].forEach(i => { const bar = $(`[data-as-vu="${i}"]`); if (bar) bar.style.width = w + '%'; }); }}); btn.classList.add('is-rec'); btn.textContent = '⏹'; toast('🎙 Enregistrement… clique ⏹ pour arrêter.'); if (mode === 'multi') startPlay(); }
             catch (e) { toast(e.message, 'error'); }
@@ -373,15 +375,15 @@
         }
         function paintRack() {
             const box = $('[data-as-rack]'), n = st.rack.length;
-            const sum = box.closest('details')?.querySelector('summary'); if (sum) sum.innerHTML = `🎛️ Rack d’effets <small class="h-as-count">${esc(plural(n, 'effet'))}</small>`;
-            box.innerHTML = n ? st.rack.map((x, i) => `<div class="h-as-fx${x.on === false ? ' is-off' : ''}${x.id === selFx ? ' is-sel' : ''}" data-as-fx="${esc(x.id)}" draggable="true"><span class="ui-grip" aria-hidden="true" title="Glisser pour ranger (Alt + ↑ ↓)">⠿</span><button type="button" class="h-as-fxname" data-as-fxopen>${E.FX[x.type].icon} ${esc(E.FX[x.type].label)}${x.type === 'dehum' ? ` ${x.params.freq === 'auto' ? '(auto)' : x.params.freq + ' Hz'}` : x.type === 'repair' ? ` (${x.params.masks?.length || 0})` : ''}${x.range ? ' <small>· sélection</small>' : ''}</button><button type="button" class="icon-button small" data-as-fxeye title="${x.on === false ? 'Rallumer' : 'Éteindre'}" aria-label="${x.on === false ? 'Rallumer' : 'Éteindre'} l’effet">${x.on === false ? '◌' : '👁'}</button><button type="button" class="icon-button small" data-as-fxdel title="Retirer" aria-label="Retirer l’effet">×</button></div>`).join('')
+            const sum = box.closest('details')?.querySelector('summary'); if (sum) sum.innerHTML = `${i18n('🎛️ Rack d’effets')} <small class="h-as-count">${esc(plural(n, 'effet'))}</small>`;
+            box.innerHTML = n ? st.rack.map((x, i) => `<div class="h-as-fx${x.on === false ? ' is-off' : ''}${x.id === selFx ? ' is-sel' : ''}" data-as-fx="${esc(x.id)}" draggable="true"><span class="ui-grip" aria-hidden="true" title="Glisser pour ranger (Alt + ↑ ↓)">⠿</span><button type="button" class="h-as-fxname" data-as-fxopen>${E.FX[x.type].icon} ${esc(E.FX[x.type].label)}${x.type === 'dehum' ? ` ${x.params.freq === 'auto' ? '(auto)' : x.params.freq + ' Hz'}` : x.type === 'repair' ? ` (${x.params.masks?.length || 0})` : ''}${x.range ? ' <small>· sélection</small>' : ''}</button><button type="button" class="icon-button small" data-as-fxeye title="${x.on === false ? i18n('Rallumer') : i18n('Éteindre')}" aria-label="${x.on === false ? i18n('Rallumer l’effet') : i18n('Éteindre l’effet')}">${x.on === false ? '◌' : '👁'}</button><button type="button" class="icon-button small" data-as-fxdel title="Retirer" aria-label="Retirer l’effet">×</button></div>`).join('')
                 : (A().empty ? A().empty('Aucun effet : « ＋ Ajouter un effet », ou le menu Effets.', {icon: '🎛️'}) : '<p class="empty-line"><span class="empty-line-ico">🎛️</span><span class="empty-line-text">Aucun effet</span></p>');
         }
         const fxById = id => st.rack.find(x => x.id === id);
         $('[data-as-rack]').addEventListener('click', e => {
             const row = e.target.closest('[data-as-fx]'); if (!row) return; const fx = fxById(row.dataset.asFx); if (!fx) return;
-            if (e.target.closest('[data-as-fxeye]')) { fx.on = fx.on === false; commit(`${fx.on ? 'Rallumer' : 'Éteindre'} ${E.FX[fx.type].label}`); invalidate(); paintRack(); return; }
-            if (e.target.closest('[data-as-fxdel]')) { const i = st.rack.indexOf(fx); st.rack.splice(i, 1); if (selFx === fx.id) selFx = null; commit(`Retirer ${E.FX[fx.type].label}`); invalidate(); paintRack(); paintFxSec(); const msg = `Effet « ${E.FX[fx.type].label} » retiré`; { const at = hpos; A().undoToast ? A().undoToast(msg, {undo: () => goHist(at - 1), redo: () => goHist(at)}) : toast(msg); } return; }
+            if (e.target.closest('[data-as-fxeye]')) { fx.on = fx.on === false; commit(fx.on ? i18n('Rallumer {what}', {what: i18n(E.FX[fx.type].label)}) : i18n('Éteindre {what}', {what: i18n(E.FX[fx.type].label)})); invalidate(); paintRack(); return; }
+            if (e.target.closest('[data-as-fxdel]')) { const i = st.rack.indexOf(fx); st.rack.splice(i, 1); if (selFx === fx.id) selFx = null; commit(i18n('Retirer {what}', {what: i18n(E.FX[fx.type].label)})); invalidate(); paintRack(); paintFxSec(); const msg = i18n('Effet « {name} » retiré', {name: i18n(E.FX[fx.type].label)}); { const at = hpos; A().undoToast ? A().undoToast(msg, {undo: () => goHist(at - 1), redo: () => goHist(at)}) : toast(msg); } return; }
             selFx = fx.id; paintRack(); paintFxSec(); dl.querySelector('[data-ui-section="as-fx"]')?.setAttribute('open', '');
         });
         $('[data-as-rack]').addEventListener('contextmenu', e => { const row = e.target.closest('[data-as-fx]'); if (!row || !UI().contextMenu) return; const fx = fxById(row.dataset.asFx); UI().contextMenu(e, [{icon: '✎', label: 'Régler', run: () => { selFx = fx.id; paintRack(); paintFxSec(); }}, {icon: '👁', label: fx.on === false ? 'Rallumer' : 'Éteindre', run: () => row.querySelector('[data-as-fxeye]').click()}, {icon: '⧉', label: 'Dupliquer', run: () => { const c = {...JSON.parse(JSON.stringify(fx)), id: E.newFx(fx.type).id}; st.rack.splice(st.rack.indexOf(fx) + 1, 0, c); commit(`Dupliquer ${E.FX[fx.type].label}`); invalidate(); paintRack(); }}, '-', {icon: '🗑', label: 'Retirer', danger: true, run: () => row.querySelector('[data-as-fxdel]').click()}], {title: E.FX[fx.type].label}); });
@@ -393,7 +395,7 @@
         $('[data-as-rack]').addEventListener('keydown', e => { if (!e.altKey || !['ArrowUp', 'ArrowDown'].includes(e.key)) return; const row = e.target.closest('[data-as-fx]'); if (!row) return; e.preventDefault(); const i = st.rack.findIndex(x => x.id === row.dataset.asFx), j = i + (e.key === 'ArrowUp' ? -1 : 1); if (j < 0 || j >= st.rack.length) return; [st.rack[i], st.rack[j]] = [st.rack[j], st.rack[i]]; commit('Ranger le rack'); invalidate(); paintRack(); $(`[data-as-fx="${CSS.escape(row.dataset.asFx)}"] [data-as-fxopen]`)?.focus(); });
         $('[data-as-addfx]').addEventListener('click', e => UI().menuAt?.(e.currentTarget, fxMenu(), {title: 'Ajouter un effet'}));
         // 💾 Réglages enregistrés (partagés avec le Son rapide)
-        $('[data-as-presets]').appendChild(AU().presetsFrame({id: 'studio-son', now: () => ({kind: 'rack', rack: st.rack.filter(x => x.type !== 'repair')}), apply: async p => { const d = AU().presetData(p); const rack = d.rack || E.quickToRack({...d.quick, trim: null, hum: E.detectHum(base)}).filter(x => x.type !== 'trim'); st.rack = [...st.rack.filter(x => x.type === 'repair'), ...E.cleanRack(rack)]; commit(`Réglages « ${p.name} »`); invalidate(); paintRack(); paintFxSec(); }}));
+        $('[data-as-presets]').appendChild(AU().presetsFrame({id: 'studio-son', now: () => ({kind: 'rack', rack: st.rack.filter(x => x.type !== 'repair')}), apply: async p => { const d = AU().presetData(p); const rack = d.rack || E.quickToRack({...d.quick, trim: null, hum: E.detectHum(base)}).filter(x => x.type !== 'trim'); st.rack = [...st.rack.filter(x => x.type === 'repair'), ...E.cleanRack(rack)]; commit(i18n('Réglages « {name} »', {name: p.name})); invalidate(); paintRack(); paintFxSec(); }}));
 
         // ── le réglage d'un effet (E2, curseurs C3) ──
         function paintFxSec() {
@@ -408,7 +410,7 @@
             if (fx.type === 'eqg') {
                 body.innerHTML = `<div class="h-as-eqg">${d.freqs.map((f, i) => `<label><input type="range" orient="vertical" min="-12" max="12" step="0.5" value="${p['g' + i]}" data-as-eqg="${i}" data-ui-done="1" aria-label="${f} Hz" title="${f} Hz : ${p['g' + i]} dB"><small>${f >= 1000 ? f / 1000 + 'k' : f}</small></label>`).join('')}</div><p class="muted">10 bandes · ±12 dB · ensembles : <button type="button" class="link-button" data-as-eqp="voix">Voix</button>, <button type="button" class="link-button" data-as-eqp="radio">Radio ancienne</button>, <button type="button" class="link-button" data-as-eqp="telephone">Téléphone</button>, <button type="button" class="link-button" data-as-eqp="flat">↺ à plat</button></p>`;
                 body.addEventListener('input', e => { const i = e.target.dataset.asEqg; if (i === undefined) return; p['g' + i] = Number(e.target.value); changed(); });
-                body.addEventListener('click', e => { const k = e.target.dataset.asEqp; if (!k) return; const g = k === 'flat' ? Array(10).fill(0) : d.presets[k]; g.forEach((v, i) => { p['g' + i] = v; }); body.querySelectorAll('[data-as-eqg]').forEach((r, i) => { r.value = g[i]; }); changed(`Égaliseur : ${k === 'flat' ? 'à plat' : k}`); });
+                body.addEventListener('click', e => { const k = e.target.dataset.asEqp; if (!k) return; const g = k === 'flat' ? Array(10).fill(0) : d.presets[k]; g.forEach((v, i) => { p['g' + i] = v; }); body.querySelectorAll('[data-as-eqg]').forEach((r, i) => { r.value = g[i]; }); changed(i18n('Égaliseur : {what}', {what: k === 'flat' ? i18n('à plat') : i18n(e.target.textContent.trim() || k)})); });
             } else if (fx.type === 'eqp') {
                 let bi = Math.min(1, p.bands.length - 1);
                 body.innerHTML = `<canvas class="h-as-curve" data-as-curve></canvas><div class="h-as-bandtabs" data-as-bands></div><div data-as-bandsl></div><p class="muted">Glisse les points ○ sur la courbe ; molette sur un point : sa largeur.</p>`;
@@ -425,31 +427,31 @@
                 cvq.addEventListener('wheel', e => { e.preventDefault(); const b = p.bands[bi]; if (!b) return; b.q = clamp(Math.round(b.q * (e.deltaY > 0 ? 0.9 : 1.1) * 10) / 10, 0.1, 10); changed(); }, {passive: false});
             } else if (fx.type === 'denoise') {
                 body.innerHTML = `<button type="button" class="button small secondary h-as-print" data-as-print>🎯 Prendre l’empreinte du bruit (sélection)</button><p class="muted" data-as-printtxt></p><canvas class="h-as-curve" data-as-curve></canvas><p class="muted">Gris : l’empreinte. Bleu : ce qui reste.</p>`;
-                const paintPrint = () => { const pr = p.print || E.quietest(base); body.querySelector('[data-as-printtxt]').textContent = `Empreinte : ${fmt(pr.a, false)} → ${fmt(pr.b, false)} (${String((pr.b - pr.a).toFixed(1)).replace('.', ',')} s de ${p.print ? 'bruit choisi' : 'bruit seul, trouvé tout seul'}).`; };
+                const paintPrint = () => { const pr = p.print || E.quietest(base); body.querySelector('[data-as-printtxt]').textContent = (p.print ? i18n('Empreinte : {a} → {b} ({n} s de bruit choisi).', {a: fmt(pr.a, false), b: fmt(pr.b, false), n: String((pr.b - pr.a).toFixed(1)).replace('.', ',')}) : i18n('Empreinte : {a} → {b} ({n} s de bruit seul, trouvé tout seul).', {a: fmt(pr.a, false), b: fmt(pr.b, false), n: String((pr.b - pr.a).toFixed(1)).replace('.', ',')})); };
                 body.querySelector('[data-as-print]').addEventListener('click', () => { if (!sel) return toast('Choisis d’abord un passage où l’on n’entend que le bruit (glisse sur l’onde).', 'error'); p.print = {a: sel.a, b: sel.b}; paintPrint(); changed('Empreinte du bruit'); });
                 paintPrint();
             } else if (fx.type === 'reverb') {
                 body.innerHTML = `<div class="segmented h-as-rooms">${[['piece', '🏠 Pièce'], ['eglise', '⛪ Église'], ['salle', '🎭 Salle'], ['cave', '🧱 Cave']].map(([k, l]) => `<button type="button" class="${p.room === k ? 'is-active' : ''}" data-as-room="${k}">${l}</button>`).join('')}</div>`;
-                body.addEventListener('click', e => { const k = e.target.closest('[data-as-room]')?.dataset.asRoom; if (!k) return; p.room = k; p.dur = E.ROOMS[k].dur; body.querySelectorAll('[data-as-room]').forEach(b => b.classList.toggle('is-active', b.dataset.asRoom === k)); const dr = body.querySelector('[data-as-param="dur"] input[type=range]'); if (dr) { dr.value = p.dur; dr.dispatchEvent(new Event('input')); } changed(`Réverbération : ${k}`); });
+                body.addEventListener('click', e => { const k = e.target.closest('[data-as-room]')?.dataset.asRoom; if (!k) return; p.room = k; p.dur = E.ROOMS[k].dur; body.querySelectorAll('[data-as-room]').forEach(b => b.classList.toggle('is-active', b.dataset.asRoom === k)); const dr = body.querySelector('[data-as-param="dur"] input[type=range]'); if (dr) { dr.value = p.dur; dr.dispatchEvent(new Event('input')); } changed(i18n('Réverbération : {what}', {what: (e.target.closest('[data-as-room]')?.textContent || k).replace(/^\S+\s/, '')})); });
             } else if (fx.type === 'dehum') {
                 const found = E.detectHum(base);
-                body.innerHTML = `<label class="h-as-sel">Courant <select data-as-hz><option value="auto">${found ? `${found} Hz (trouvé)` : 'Trouver tout seul'}</option><option value="50">50 Hz (Europe)</option><option value="60">60 Hz (Amérique du Nord)</option></select></label>`;
+                body.innerHTML = `<label class="h-as-sel">Courant <select data-as-hz><option value="auto">${found ? i18n('{n} Hz (trouvé)', {n: found}) : i18n('Trouver tout seul')}</option><option value="50">50 Hz (Europe)</option><option value="60">60 Hz (Amérique du Nord)</option></select></label>`;
                 const s0 = body.querySelector('[data-as-hz]'); s0.value = p.freq; s0.addEventListener('change', () => { p.freq = s0.value; changed(); });
             } else if (fx.type === 'fade') {
                 const SH = {lin: ['Droite', 'M2 30 L48 4'], fast: ['Rapide', 'M2 30 Q4 4 48 4'], slow: ['Lente', 'M2 30 Q46 30 48 4'], s: ['En S', 'M2 30 C30 30 20 4 48 4']};
-                const row = k => `<div class="h-as-shapes" role="group" aria-label="${k === 'shapeIn' ? 'Forme du fondu d’entrée' : 'Forme du fondu de sortie'}">${Object.entries(SH).map(([s0, [l, dd]]) => `<button type="button" class="${p[k] === s0 ? 'is-active' : ''}" data-as-shape="${k}:${s0}"><svg viewBox="0 0 50 34" aria-hidden="true"><path d="${k === 'shapeOut' ? dd.replace(/(\d+(?:\.\d+)?) (\d+(?:\.\d+)?)/g, (m, x, y) => `${50 - x} ${y}`) : dd}"/></svg>${l}</button>`).join('')}</div>`;
+                const row = k => `<div class="h-as-shapes" role="group" aria-label="${k === 'shapeIn' ? i18n('Forme du fondu d’entrée') : i18n('Forme du fondu de sortie')}">${Object.entries(SH).map(([s0, [l, dd]]) => `<button type="button" class="${p[k] === s0 ? 'is-active' : ''}" data-as-shape="${k}:${s0}"><svg viewBox="0 0 50 34" aria-hidden="true"><path d="${k === 'shapeOut' ? dd.replace(/(\d+(?:\.\d+)?) (\d+(?:\.\d+)?)/g, (m, x, y) => `${50 - x} ${y}`) : dd}"/></svg>${l}</button>`).join('')}</div>`;
                 body.innerHTML = `<b>Entrée</b>${row('shapeIn')}<b>Sortie</b>${row('shapeOut')}`;
                 body.addEventListener('click', e => { const v = e.target.closest('[data-as-shape]')?.dataset.asShape; if (!v) return; const [k, s0] = v.split(':'); p[k] = s0; body.querySelectorAll(`[data-as-shape^="${k}:"]`).forEach(b => b.classList.toggle('is-active', b.dataset.asShape === v)); changed('Forme du fondu'); });
             } else if (fx.type === 'comp' || fx.type === 'limit') {
                 body.innerHTML = '<canvas class="h-as-curve" data-as-curve></canvas>';
             } else if (fx.type === 'repair') {
-                body.innerHTML = `<p>${esc(plural(p.masks?.length || 0, 'zone réparée', 'zones réparées'))} au pinceau.</p><button type="button" class="button small secondary" data-as-unmask>Retirer la dernière réparation</button>`;
+                body.innerHTML = `<p>${esc(i18n('{what} au pinceau.', {what: plural(p.masks?.length || 0, 'zone réparée', 'zones réparées')}))}</p><button type="button" class="button small secondary" data-as-unmask>Retirer la dernière réparation</button>`;
                 body.querySelector('[data-as-unmask]').addEventListener('click', () => { if (!p.masks?.length) return; p.masks.pop(); changed('Retirer une réparation'); paintFxSec(); });
             } else body.innerHTML = '';
             d.params.filter(q => !(fx.type === 'eqg')).forEach(q => body.appendChild(slider(q)));
             if (d.bools) Object.entries(d.bools).forEach(([k, l]) => { const lab = document.createElement('label'); lab.className = 'ui-toggle'; lab.innerHTML = `<input type="checkbox" ${p[k] ? 'checked' : ''}><i></i>${esc(l)}`; lab.querySelector('input').addEventListener('change', e => { p[k] = e.target.checked; changed(); }); body.appendChild(lab); });
             if (help) body.insertAdjacentHTML('beforeend', help);
-            body.insertAdjacentHTML('beforeend', `<div class="h-as-fxfoot">${fx.range ? `<small class="muted">Seulement sur ${fmt(fx.range.a)} → ${fmt(fx.range.b)}</small> <button type="button" class="link-button" data-as-fxall>Tout le son</button>` : (sel && !d.lengthChange ? '<button type="button" class="link-button" data-as-fxsel>Seulement sur la sélection</button>' : '')}<span class="spacer"></span><button type="button" class="link-button" data-as-fxreset>↺ Remettre comme au départ</button></div>`);
+            body.insertAdjacentHTML('beforeend', `<div class="h-as-fxfoot">${fx.range ? `<small class="muted">${i18n('Seulement sur {a} → {b}', {a: fmt(fx.range.a), b: fmt(fx.range.b)})}</small> <button type="button" class="link-button" data-as-fxall>Tout le son</button>` : (sel && !d.lengthChange ? '<button type="button" class="link-button" data-as-fxsel>Seulement sur la sélection</button>' : '')}<span class="spacer"></span><button type="button" class="link-button" data-as-fxreset>↺ Remettre comme au départ</button></div>`);
             body.querySelector('[data-as-fxall]')?.addEventListener('click', () => { delete fx.range; changed('Effet sur tout le son'); paintFxSec(); });
             body.querySelector('[data-as-fxsel]')?.addEventListener('click', () => { fx.range = {a: sel.a, b: sel.b}; changed('Effet sur la sélection'); paintFxSec(); });
             body.querySelector('[data-as-fxreset]').addEventListener('click', () => { const keep = {masks: p.masks, print: p.print}; fx.params = {...E.fxDefaults(fx.type), ...(fx.type === 'repair' ? {masks: keep.masks} : {})}; changed(`${d.label} : remis comme au départ`); paintFxSec(); });
@@ -503,7 +505,7 @@
             if (e.target.closest('[data-as-rmore]')) regionMenu(e.target, r);
             drawAll(); paintLink(); if (!e.target.closest('input')) paintRegions();
         });
-        regionBox.addEventListener('change', e => { const inp = e.target.closest('[data-as-rname]'); if (!inp) return; const r = st.regions.find(x => x.id === inp.closest('[data-as-region]').dataset.asRegion); if (!r) return; r.name = inp.value.trim().slice(0, 160) || r.name; commit(`Renommer « ${r.name} »`); drawAll(); paintLink(); scheduleRegionSave(); });
+        regionBox.addEventListener('change', e => { const inp = e.target.closest('[data-as-rname]'); if (!inp) return; const r = st.regions.find(x => x.id === inp.closest('[data-as-region]').dataset.asRegion); if (!r) return; r.name = inp.value.trim().slice(0, 160) || r.name; commit(i18n('Renommer « {name} »', {name: r.name})); drawAll(); paintLink(); scheduleRegionSave(); });
         regionBox.addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.matches('[data-as-rname]')) { e.preventDefault(); e.target.blur(); } });
         regionBox.addEventListener('contextmenu', e => { const row = e.target.closest('[data-as-region]'); if (!row || e.target.closest('input')) return; const r = st.regions.find(x => x.id === row.dataset.asRegion); if (r) regionMenu(e, r); }); // K14 : UI.contextMenu (le menu de l'app à la souris)
         $('[data-as-zbar]').addEventListener('click', e => { const b = e.target.closest('[data-as-region]'); if (!b) return; const r = st.regions.find(x => x.id === b.dataset.asRegion); if (!r) return; selRegion = r.id; cursor = r.start; sel = r.kind === 'marker' ? null : {a: r.start, b: r.end}; paintRegions(); drawAll(); paintLink(); });
@@ -535,13 +537,13 @@
             const r = curRegion(); if (!r) return; const d = e.detail;
             if (d.kind === 'person') { const v = d.value || {}, list = (v.people || []).filter(x => x.id); const known = new Map(r.links.filter(l => l.type === 'person').map(l => [l.id, l])); r.links = [...list.map(x => ({type: 'person', id: Number(x.id), role: x.role || '', title: x.title || known.get(Number(x.id))?.title || d.items?.find(i => i.id === x.id)?.title || '', meta: ''})), ...r.links.filter(l => l.type !== 'person')]; }
             if (d.kind === 'event') { const ids = (Array.isArray(d.value) ? d.value : []).map(Number).filter(Boolean), items = d.items || []; const known = new Map(r.links.filter(l => l.type === 'event').map(l => [l.id, l])); r.links = [...r.links.filter(l => l.type !== 'event'), ...ids.map(id => ({type: 'event', id, role: '', title: items.find(i => Number(i.id) === id)?.title || known.get(id)?.title || 'Événement', meta: ''}))]; }
-            commit(`Relier « ${r.name} »`); paintRegions(); scheduleRegionSave();
+            commit(i18n('Relier « {name} »', {name: r.name})); paintRegions(); scheduleRegionSave();
         });
         async function linkPick(kind) {
             const r = curRegion(); if (!r) return toast('Choisis d’abord une zone.', 'error');
-            const it = await window.LCNDA_PICKER?.openPicker?.({kind, title: kind === 'person' ? `Relier « ${r.name} » à une personne` : `Relier « ${r.name} » à un événement`}); if (!it) return;
+            const it = await window.LCNDA_PICKER?.openPicker?.({kind, title: kind === 'person' ? i18n('Relier « {name} » à une personne', {name: r.name}) : i18n('Relier « {name} » à un événement', {name: r.name})}); if (!it) return;
             if (!r.links.some(l => l.type === kind && l.id === Number(it.id))) r.links.push({type: kind, id: Number(it.id), role: '', title: it.title, meta: ''});
-            commit(`Relier « ${r.name} » à ${it.title}`); paintRegions(); paintLink(); scheduleRegionSave();
+            commit(i18n('Relier « {name} » à {what}', {name: r.name, what: it.title})); paintRegions(); paintLink(); scheduleRegionSave();
             dl.querySelector('[data-ui-section="as-link"]')?.setAttribute('open', '');
         }
 
@@ -555,7 +557,7 @@
         let infoTok = 0;
         async function paintInfo() {
             const tok = ++infoTok, b = shown(), box = $('[data-as-info]');
-            box.innerHTML = `<p>${fmt(base.duration)} · ${base.numberOfChannels > 1 ? 'stéréo' : 'mono'} · ${(base.sampleRate / 1000).toLocaleString('fr-FR')} kHz · crête ${E.linToDb(E.peakOf(b)).toFixed(1).replace('.', ',')} dB · sonie <span data-as-lufs>…</span></p>`;
+            box.innerHTML = `<p>${i18n('{dur} · {ch} · {khz} kHz · crête {pk} dB · sonie <span data-as-lufs>…</span>', {dur: fmt(base.duration), ch: base.numberOfChannels > 1 ? i18n('stéréo') : 'mono', khz: (base.sampleRate / 1000).toLocaleString(UIL()), pk: E.linToDb(E.peakOf(b)).toFixed(1).replace('.', ',')})}</p>`;
             const L = await E.lufs(b); if (tok === infoTok) { const el = box.querySelector('[data-as-lufs]'); if (el) el.textContent = `${Math.round(L)} LUFS`; }
         }
 
@@ -714,7 +716,7 @@
         UI().bindFileDrop?.($('.h-as-wave'), async fl => {
             const f = fl[0]; if (!f) return;
             try { const fd = new FormData(); fd.append('file', f, f.name); fd.append('kind', 'audio'); fd.append('title', f.name.replace(/\.[^.]+$/, '')); fd.append('csrf', S().csrf); const r = await fetch('api.php?action=retouch_media', {method: 'POST', body: fd, headers: {'X-CSRF-Token': S().csrf}}); const j = await r.json().catch(() => ({})); if (!r.ok || j.error) throw new Error(j.error || 'envoi impossible');
-                const ob = await E.resample(await E.decode(await f.arrayBuffer()), sr(), base.numberOfChannels), at = cursor; shiftRegions(at, at, ob.duration); setBase(E.concatBufs([E.sliceBuf(base, 0, at * sr()), ob, E.sliceBuf(base, at * sr(), base.length)].filter(x => x.length > 1), base.numberOfChannels, sr()), `Insérer « ${f.name} »`); sel = {a: at, b: at + ob.duration}; addFile({title: f.name, media: {id: j.result.media_id, filename: j.result.filename}, src: url(j.result.filename)}); drawAll(); toast(`« ${f.name} » est dans les médias et inséré au repère orange.`); }
+                const ob = await E.resample(await E.decode(await f.arrayBuffer()), sr(), base.numberOfChannels), at = cursor; shiftRegions(at, at, ob.duration); setBase(E.concatBufs([E.sliceBuf(base, 0, at * sr()), ob, E.sliceBuf(base, at * sr(), base.length)].filter(x => x.length > 1), base.numberOfChannels, sr()), i18n('Insérer « {name} »', {name: f.name})); sel = {a: at, b: at + ob.duration}; addFile({title: f.name, media: {id: j.result.media_id, filename: j.result.filename}, src: url(j.result.filename)}); drawAll(); toast(`« ${f.name} » est dans les médias et inséré au repère orange.`); }
             catch (err) { toast(`${f.name} : ${err.message}`, 'error'); }
         }, {accept: 'audio/*'});
 
@@ -740,7 +742,7 @@
     ext.personBlocks.heard = (index, detail) => {
         const list = detail?.heritage?.heard || []; if (!list.length) return '';
         const groups = new Map(); list.forEach(r => { const k = `${r.media_id}|${r.filename}`; if (!groups.has(k)) groups.set(k, {title: r.media_title, media_id: r.media_id, items: []}); groups.get(k).items.push(r); });
-        const body = `<div class="h-as-heard">${[...groups.values()].map(g => `<div class="h-as-heardgrp"><b>🎧 ${esc(g.title || 'Son')}</b><ul>${g.items.map(r => `<li><button type="button" class="h-as-heardplay" data-heard-play="${esc(r.filename)}" data-a="${r.start}" data-b="${r.kind === 'marker' ? r.start + 30 : r.end}" ${r.exists ? '' : 'disabled title="Fichier introuvable"'} aria-label="Écouter « ${esc(r.name)} »">▶</button><span class="h-as-heardsw" style="--z:${esc(r.color)}"></span><span><b>${esc(r.name)}</b> <small class="muted">${fmt(r.start, false)}${r.kind === 'marker' ? '' : ' → ' + fmt(r.end, false)}${r.role ? ' · ' + esc(r.role) : ''}</small></span><button type="button" class="link-button" data-heard-open="${r.media_id}" data-heard-file="${esc(r.filename)}" title="Ouvrir ce son dans le 🎚️ Studio son">↗ Ouvrir</button></li>`).join('')}</ul></div>`).join('')}<audio data-heard-audio hidden></audio></div>`;
+        const body = `<div class="h-as-heard">${[...groups.values()].map(g => `<div class="h-as-heardgrp"><b>🎧 ${esc(g.title || 'Son')}</b><ul>${g.items.map(r => `<li><button type="button" class="h-as-heardplay" data-heard-play="${esc(r.filename)}" data-a="${r.start}" data-b="${r.kind === 'marker' ? r.start + 30 : r.end}" ${r.exists ? '' : `disabled title="${i18n('Fichier introuvable')}"`} aria-label="${i18n('Écouter « {name} »', {name: esc(r.name)})}">▶</button><span class="h-as-heardsw" style="--z:${esc(r.color)}"></span><span><b data-i18n-off>${esc(r.name)}</b> <small class="muted">${fmt(r.start, false)}${r.kind === 'marker' ? '' : ' → ' + fmt(r.end, false)}${r.role ? ' · ' + esc(r.role) : ''}</small></span><button type="button" class="link-button" data-heard-open="${r.media_id}" data-heard-file="${esc(r.filename)}" title="Ouvrir ce son dans le 🎚️ Studio son">↗ Ouvrir</button></li>`).join('')}</ul></div>`).join('')}<audio data-heard-audio hidden></audio></div>`;
         return A().card(index, '🎧 On l’entend', list.length, body, 'span-12', '');
     };
     // ▶ écouter juste ce passage ; ↗ ouvrir le son dans le Studio
@@ -773,7 +775,7 @@
             if (!mic) { try { mic = await E.recordMic({name: 'prise-micro', onLevel: v => { const el = d.querySelector('[data-vu]'); if (el) el.style.width = clamp((E.linToDb(v) + 60) / 60, 0, 1) * 100 + '%'; }}); } catch (err) { return toast(err.message, 'error'); }
                 go.textContent = '⏹ Arrêter et ouvrir dans le Studio'; go.classList.add('is-rec'); t0 = Date.now(); tm = setInterval(() => { d.querySelector('[data-t]').textContent = fmt((Date.now() - t0) / 1000, false); }, 250); return; }
             go.disabled = true; go.textContent = 'Envoi…'; clearInterval(tm);
-            try { const m0 = mic; mic = null; const {file} = await m0.stop(); const title = `Prise micro du ${new Date().toLocaleDateString('fr-FR')}`;
+            try { const m0 = mic; mic = null; const {file} = await m0.stop(); const title = i18n('Prise micro du {date}', {date: new Date().toLocaleDateString(UIL())});
                 const fd = new FormData(); fd.append('file', file, file.name); fd.append('kind', 'audio'); fd.append('title', title); fd.append('csrf', S().csrf);
                 const r = await fetch('api.php?action=retouch_media', {method: 'POST', body: fd, headers: {'X-CSRF-Token': S().csrf}}); const j = await r.json().catch(() => ({})); if (!r.ok || j.error) throw new Error(j.error || 'Envoi impossible.');
                 d.close(); onDone?.(); openAudioStudio({id: j.result.media_id, filename: j.result.filename, title, media_type: 'audio'}, {onDone}); toast('Prise micro rangée dans les médias (Listes → Audios).'); }

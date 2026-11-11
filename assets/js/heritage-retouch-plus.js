@@ -14,6 +14,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => { const I = typeof window !== 'undefined' && window.LCNDA_I18N; return I ? I.t(s, v) : (v ? String(s).replace(/\{(\w+)\}/g, (m, k) => (k in v ? String(v[k]) : m)) : s); }; // 🌐 traduction (docs/I18N.md)
     const A = () => window.LCNDA_APP;
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const esc = v => A().escapeHtml(v ?? '');
@@ -249,7 +250,7 @@
     /** Agrandir un canvas (×k) : dans un fil à part (bandes), sinon par petits morceaux ici. onProgress(0…1) ; renvoie {promise, cancel} */
     function upscaleCanvas(src, k, opt = {}, onProgress = null) {
         const W = src.width, H = src.height, W2 = W * k, H2 = H * k;
-        if (Math.max(W2, H2) > MAX_SIDE || W2 * H2 > MAX_PIXELS) throw new Error(`Trop grande : ${W2} × ${H2} points. L’agrandissement est limité à ${MAX_SIDE.toLocaleString('fr-FR')} points de côté (et ${MAX_PIXELS / 1e6} millions de points).`);
+        if (Math.max(W2, H2) > MAX_SIDE || W2 * H2 > MAX_PIXELS) throw new Error(i18n('Trop grande : {w} × {h} points. L’agrandissement est limité à {max} points de côté (et {mp} millions de points).', {w: String(W2), h: String(H2), max: MAX_SIDE.toLocaleString(window.LCNDA_I18N?.locale?.() || 'fr-FR'), mp: String(MAX_PIXELS / 1e6)}));
         const data = src.getContext('2d', {willReadFrequently: true}).getImageData(0, 0, W, H).data;
         const out = blank(W2, H2), og = out.getContext('2d');
         let cancel = () => {}, stopped = false;
@@ -290,7 +291,7 @@
         pn.innerHTML = `<header><b>${title}</b>${sub ? `<small>${sub}</small>` : ''}</header>${html}`;
         c.left.appendChild(pn); return pn;
     }
-    const slider = (k, label, mn, mx, v, unit = '', help = '') => `<label class="h-rt-slider"><span${help ? ` data-help="${esc(help)}"` : ''}>${esc(label)} <output data-o="${k}">${v}${unit}</output></span><input type="range" min="${mn}" max="${mx}" value="${v}" data-p="${k}" data-unit="${unit}"></label>`;
+    const slider = (k, label, mn, mx, v, unit = '', help = '') => `<label class="h-rt-slider"><span${help ? ` data-help="${esc(i18n(help))}"` : ''}>${esc(label)} <output data-o="${k}">${v}${unit}</output></span><input type="range" min="${mn}" max="${mx}" value="${v}" data-p="${k}" data-unit="${unit}"></label>`;
     const loadImg = src => new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = () => rej(new Error('Image illisible.')); i.src = src; });
     const blurCanvas = (src, r) => { const c = blank(src.width, src.height), g = c.getContext('2d'); if (r > 0.3) g.filter = `blur(${r}px)`; g.drawImage(src, 0, 0); return c; };
 
@@ -327,7 +328,7 @@
             c.renderLayer(lay); c.refresh();
         };
         const thumbs = SKIES.map(([k, l]) => { const t = makeSky(k, 72, 44, 0.95, 5); return `<button type="button" class="h-rt-skybtn${k === o.kind ? ' is-on' : ''}" data-sky="${k}" title="${esc(l)}"><img src="${t.toDataURL()}" alt=""><span>${esc(l)}</span></button>`; }).join('');
-        const pn = panel(c, 'h-rt-skypanel', '☁️ Remplacer le ciel', `${fromSel ? 'Ta sélection est prise comme ciel' : `Ciel trouvé : <b data-sky-cov>${Math.round(cov * 100)} %</b> de la photo`} · calques « Ciel » et « Harmonisation »`,
+        const pn = panel(c, 'h-rt-skypanel', '☁️ Remplacer le ciel', `${fromSel ? i18n('Ta sélection est prise comme ciel') : i18n('Ciel trouvé : {cov} de la photo', {cov: `<b data-sky-cov>${Math.round(cov * 100)} %</b>`})} · ${i18n('calques « Ciel » et « Harmonisation »')}`,
             `<div class="h-rt-skies">${thumbs}<button type="button" class="h-rt-skybtn" data-sky-img title="Une photo de ciel : de la base, ou de l’ordinateur"><span class="h-rt-skyico">🖼</span><span>Une image…</span></button></div>
             ${slider('scale', 'Taille du nouveau ciel', 100, 300, o.scale, ' %')}${slider('pos', 'Position verticale', 0, 100, o.pos, ' %', 'Avec une taille au-dessus de 100 % : quelle partie du ciel se voit (0 = le haut).')}${slider('xpos', 'Position horizontale', 0, 100, o.xpos, ' %')}
             ${slider('feather', 'Fondu à l’horizon', 0, 100, o.feather, '', 'Adoucit la limite entre le ciel et la terre (arbres, toits) : plus haut, plus fondu.')}${slider('harmon', 'Harmoniser le premier plan', 0, 100, o.harmon, ' %', 'Le paysage prend un peu la couleur et la lumière du nouveau ciel, pour que tout aille ensemble.')}${slider('opacity', 'Opacité du ciel', 10, 100, o.opacity, ' %')}
@@ -348,7 +349,7 @@
             }
             if (b.hasAttribute('data-sky-brush')) { c.setMaskEdit(lay.id); c.setMode('brush'); c.showTab('layers'); toast('Tu peins le masque du ciel : ⬛ cacher là où le ciel déborde (feuillage, toits), ⬜ montrer là où il manque. Puis « ✓ OK ».'); return; }
             if (b.hasAttribute('data-sky-cancel')) { pn.remove(); c.removeNode(lay.id); c.removeNode(adj.id); c.setMaskEdit(''); c.refresh(); return; }
-            if (b.hasAttribute('data-sky-ok')) { pn.remove(); c.setMaskEdit(''); c.setMode('adjust'); c.refresh(); c.commit(`Ciel remplacé (${o.kind === 'image' ? 'image' : SKIES.find(s => s[0] === o.kind)?.[1].replace(/^\S+\s/, '') || o.kind})`); toast('Ciel remplacé : calques « Ciel » et « Harmonisation du premier plan » (opacité, masque, 👁 pour comparer).'); }
+            if (b.hasAttribute('data-sky-ok')) { pn.remove(); c.setMaskEdit(''); c.setMode('adjust'); c.refresh(); c.commit(i18n('Ciel remplacé ({what})', {what: o.kind === 'image' ? i18n('image') : i18n(SKIES.find(s => s[0] === o.kind)?.[1] || o.kind).replace(/^\S+\s/, '')})); toast('Ciel remplacé : calques « Ciel » et « Harmonisation du premier plan » (opacité, masque, 👁 pour comparer).'); }
         });
         apply(); c.showTab('layers');
     };
@@ -398,7 +399,7 @@
                 cutId = c.addMask(res.mask); pn.dataset.coverage = res.coverage.toFixed(4); target = '';
                 pn.querySelector('[data-cut-out]').hidden = false; pn.querySelector('[data-cut-ok]').disabled = false; b.textContent = '✂️ Détourer à nouveau';
                 if (c.selMask()) c.clearSel();
-                c.setMode('adjust'); apply(); toast(`Personne détourée${r ? ' (dans ton rectangle)' : ''} : choisis le fond ; « Retoucher le contour » pour corriger au pinceau.`); return;
+                c.setMode('adjust'); apply(); toast(r ? i18n('Personne détourée (dans ton rectangle) : choisis le fond ; « Retoucher le contour » pour corriger au pinceau.') : i18n('Personne détourée : choisis le fond ; « Retoucher le contour » pour corriger au pinceau.')); return;
             }
             if (b.hasAttribute('data-cut-brush')) { if (!target) return; c.setMaskEdit(target); c.setMode('brush'); c.showTab('layers'); toast(choice === 'transparent' || choice === 'layer' ? 'Tu peins le masque de la personne : ⬛ cacher (du fond resté), ⬜ montrer (un bout de la personne oublié).' : 'Tu peins le masque du fond : ⬛ cacher (là c’est la personne), ⬜ montrer (là c’est du fond).'); return; }
             if (b.hasAttribute('data-cut-cancel')) { undo(); pn.remove(); c.setMaskEdit(''); c.refresh(); return; }
@@ -414,12 +415,12 @@
         c.busy('Préparation de l’image en pleine taille…'); await tick();
         let src; try { src = await c.renderFull(); } catch (err) { c.busy(''); return toast(err.message, 'error'); } finally { c.busy(''); }
         const W = src.width, H = src.height, ok = k => Math.max(W, H) * k <= MAX_SIDE && W * H * k * k <= MAX_PIXELS;
-        const fmt = n => n.toLocaleString('fr-FR');
-        const pn = panel(c, 'h-rt-uppanel', '🔍 Agrandir l’image', `${fmt(W)} × ${fmt(H)} points aujourd’hui`,
+        const fmt = n => n.toLocaleString(window.LCNDA_I18N?.locale?.() || 'fr-FR');
+        const pn = panel(c, 'h-rt-uppanel', '🔍 Agrandir l’image', i18n('{w} × {h} points aujourd’hui', {w: fmt(W), h: fmt(H)}),
             `<div class="h-rt-upk">${[2, 4].map(k => `<label class="checkbox-line"><input type="radio" name="rt-upk" value="${k}" ${ok(k) ? '' : 'disabled'} ${k === 2 && ok(2) ? 'checked' : ''}> <span>×${k} → ${fmt(W * k)} × ${fmt(H * k)}</span></label>`).join('')}</div>
-            ${!ok(2) ? `<p class="h-rt-upwarn">Cette image est déjà grande : l’agrandissement est limité à ${fmt(MAX_SIDE)} points de côté.</p>` : !ok(4) ? `<p class="muted">×4 donnerait plus de ${fmt(MAX_SIDE)} points de côté : seulement ×2.</p>` : ''}
+            ${!ok(2) ? `<p class="h-rt-upwarn">${i18n('Cette image est déjà grande : l’agrandissement est limité à {max} points de côté.', {max: fmt(MAX_SIDE)})}</p>` : !ok(4) ? `<p class="muted">${i18n('×4 donnerait plus de {max} points de côté : seulement ×2.', {max: fmt(MAX_SIDE)})}</p>` : ''}
             ${slider('sharp', 'Netteté des contours', 0, 100, 50, '', 'Renforce les contours sans faire de halo ; les aplats (ciel, peau) restent doux.')}
-            <label class="checkbox-line" data-help="Avant d’agrandir, adoucit le grain et le bruit (les contours restent) : utile pour une photo scannée granuleuse."><input type="checkbox" data-up-grain> <span>Lissage du grain</span></label>
+            <label class="checkbox-line" data-help="${esc(i18n('Avant d’agrandir, adoucit le grain et le bruit (les contours restent) : utile pour une photo scannée granuleuse.'))}"><input type="checkbox" data-up-grain> <span>Lissage du grain</span></label>
             <div class="h-rt-upprev"><canvas data-up-map title="Clique pour choisir l’endroit de l’aperçu"></canvas><figure><canvas data-up-before width="180" height="180"></canvas><figcaption>Avant (agrandi simplement)</figcaption></figure><figure><canvas data-up-after width="180" height="180"></canvas><figcaption>Après, à 100 %</figcaption></figure></div>
             <div class="h-rt-upprog" data-up-prog hidden><progress max="100" value="0"></progress> <output>0 %</output></div>
             <div class="h-rt-fxbtns h-rt-upbtns">${c.fresh ? '' : '<button type="button" class="button small" data-up-go="version" title="Une nouvelle version de la photo, affichée partout (l’original reste)">Agrandir → nouvelle version</button><button type="button" class="button small secondary" data-up-go="copy" title="Un autre média, rattaché aux mêmes fiches">→ copie séparée</button>'}${c.fresh ? '<button type="button" class="button small" data-up-go="copy">Agrandir → dans les médias</button>' : ''}<button type="button" class="button small secondary" data-up-go="download">⤓ Télécharger</button></div>
@@ -456,12 +457,12 @@
                 const type = c.hasAlpha() ? 'image/png' : 'image/jpeg';
                 const blob = await new Promise((res, rej) => big.toBlob(x => (x ? res(x) : rej(new Error('Image trop grande pour le navigateur.'))), type, 0.92));
                 const name = `${String(c.title() || 'photo').replace(/[\\/:*?"<>|]+/g, ' ').slice(0, 80)} (x${k})`;
-                if (go === 'download') { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `${name}.${type === 'image/png' ? 'png' : 'jpg'}`; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); toast(`Image agrandie téléchargée (${fmt(big.width)} × ${fmt(big.height)}).`); }
-                else if (c.fresh || go === 'copy') { const r = c.fresh ? await ext.rtUploadCopy(blob, {title: name}) : await ext.rtUploadCopy(blob, {mediaId: c.mediaId, title: name}); pn.dataset.saved = String(r?.media_id || r?.id || 1); toast(`Image agrandie ×${k} (${fmt(big.width)} × ${fmt(big.height)}) rangée dans les médias.`); }
+                if (go === 'download') { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `${name}.${type === 'image/png' ? 'png' : 'jpg'}`; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); toast(i18n('Image agrandie téléchargée ({w} × {h}).', {w: fmt(big.width), h: fmt(big.height)})); }
+                else if (c.fresh || go === 'copy') { const r = c.fresh ? await ext.rtUploadCopy(blob, {title: name}) : await ext.rtUploadCopy(blob, {mediaId: c.mediaId, title: name}); pn.dataset.saved = String(r?.media_id || r?.id || 1); toast(i18n('Image agrandie ×{k} ({w} × {h}) rangée dans les médias.', {k: String(k), w: fmt(big.width), h: fmt(big.height)})); }
                 else { const fd = new FormData(); fd.append('file', blob, 'agrandie.' + (type === 'image/png' ? 'png' : 'jpg')); fd.append('media_id', c.mediaId); fd.append('mode', 'version'); fd.append('show', '1'); fd.append('csrf', A().state.csrf);
                     const r = await fetch('api.php?action=retouch_media', {method: 'POST', body: fd, headers: {'X-CSRF-Token': A().state.csrf}}), j = await r.json().catch(() => ({error: 'Réponse illisible du serveur'}));
                     if (!r.ok || j.error) throw new Error(j.error || 'Enregistrement impossible.');
-                    pn.dataset.saved = j.result?.filename || '1'; c.applyShown?.(j.result?.filename); toast(`Nouvelle version agrandie ×${k} (${fmt(big.width)} × ${fmt(big.height)}) affichée ; l’original reste dans les versions.`); }
+                    pn.dataset.saved = j.result?.filename || '1'; c.applyShown?.(j.result?.filename); toast(i18n('Nouvelle version agrandie ×{k} ({w} × {h}) affichée ; l’original reste dans les versions.', {k: String(k), w: fmt(big.width), h: fmt(big.height)})); }
                 pn.dataset.size = `${big.width}x${big.height}`; pn.dataset.ms = String(Math.round(performance.now() - t0));
                 out.textContent = '✓ Fait';
             } catch (err) { toast(err.message, 'error'); out.textContent = ''; }

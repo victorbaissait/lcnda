@@ -13,6 +13,8 @@
     const A = () => root.LCNDA_APP, X = () => root.LCNDA_SHEET;
     const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
     const toast = (...a) => A()?.toast?.(...a);
+    const i18n = (s, v) => (root.LCNDA_I18N ? root.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js (dans Node : le français)
+    const plural = (n, w, p) => (A()?.plural ? A().plural(n, w, p) : `${n} ${n > 1 ? p || w + 's' : w}`);
     const AGG = [['count', 'Nombre de lignes'], ['sum', 'Somme'], ['avg', 'Moyenne'], ['min', 'Plus petit'], ['max', 'Plus grand'], ['distinct', 'Nombre de valeurs différentes']];
     const PCT = [['', 'Les chiffres'], ['row', 'En % de la ligne'], ['col', 'En % de la colonne'], ['all', 'En % du tout']];
     const EMPTY = '(vide)';
@@ -43,9 +45,9 @@
         const cols = ci >= 0 ? Cs : [ALL], colTotal = a => (a === ALL ? grand : valOf(a, ALL)), rowTotal = b => valOf(ALL, b);
         const pct = ['row', 'col', 'all'].includes(o.pct) && ['count', 'sum'].includes(agg) ? o.pct : '';
         const div = (v, a, b) => { if (v == null || !pct) return v; const d = pct === 'row' ? colTotal(a) : pct === 'col' ? (b === ALL ? grand : rowTotal(b)) : grand; return d ? Math.round(v / d * 10000) / 10000 : null; };
-        const aggName = (AGG.find(x => x[0] === agg) || AGG[0])[1], valName = vi >= 0 ? String(header?.[vi] ?? `Colonne ${vi + 1}`) : '';
-        const title = `${aggName}${vi >= 0 && agg !== 'count' ? ` de « ${valName} »` : ''}`;
-        const head = [String(header?.[ri] ?? 'Lignes'), ...(ci >= 0 ? Cs.map(String) : [title]), ...(ci >= 0 && totalsOk ? ['Total'] : [])];
+        const aggName = i18n((AGG.find(x => x[0] === agg) || AGG[0])[1]), valName = vi >= 0 ? String(header?.[vi] ?? i18n('Colonne {n}', {n: String(vi + 1)})) : '';
+        const title = vi >= 0 && agg !== 'count' ? i18n('{what} de « {col} »', {what: aggName, col: valName}) : aggName;
+        const head = [String(header?.[ri] ?? i18n('Lignes')), ...(ci >= 0 ? Cs.map(String) : [title]), ...(ci >= 0 && totalsOk ? [i18n('Total')] : [])];
         const body = R.map(a => [a, ...cols.map(b => div(valOf(a, b), a, b)), ...(ci >= 0 && totalsOk ? [div(colTotal(a), a, ALL)] : [])]);
         const out = [head, ...body];
         if (totalsOk) out.push(['Total', ...cols.map(b => div(ci >= 0 ? rowTotal(b) : grand, ALL, b)), ...(ci >= 0 ? [div(grand, ALL, ALL)] : [])]);
@@ -61,14 +63,14 @@
     function readTable(ed, g, si = ed.si) {
         const m = X().matrix(ed.wb, ed.calc, si, g).map(r => r.map(v => (v === '' ? null : v)));
         while (m.length && m[m.length - 1].every(v => v == null)) m.pop();
-        return {header: (m[0] || []).map((v, j) => (v == null || v === '' ? `Colonne ${X().colName(g.c0 + j)}` : String(v))), rows: m.slice(1)};
+        return {header: (m[0] || []).map((v, j) => (v == null || v === '' ? i18n('Colonne {col}', {col: X().colName(g.c0 + j)}) : String(v))), rows: m.slice(1)};
     }
     /** écrit le résultat dans la feuille sh (vidée d'abord), titres en gras et teintés, totaux en gras, % au format pourcentage */
     function writePivot(ed, sh, res, def) {
         const S = X(), bold = S.styleId(ed.wb, {b: 1, fill: '#e8eefc'}), tot = S.styleId(ed.wb, {b: 1, fill: '#f3f4f6'}), pct = S.styleId(ed.wb, {fmt: 'pct', dec: 1}), pctTot = S.styleId(ed.wb, {fmt: 'pct', dec: 1, b: 1, fill: '#f3f4f6'});
         ed.meta(sh); Object.keys(sh.cells).forEach(k => ed.put(sh, k, null));
         const top = 2, n = res.matrix.length;
-        ed.put(sh, 'A1', {v: `🔀 ${res.title}${res.colTitle ? ` · par « ${res.matrix[0][0]} » et « ${res.colTitle} »` : ` · par « ${res.matrix[0][0]} »`} — d’après ${def.srcName}!${def.range}`, s: S.styleId(ed.wb, {b: 1})});
+        ed.put(sh, 'A1', {v: '🔀 ' + (res.colTitle ? i18n('{title} · par « {rows} » et « {cols} » — d’après {src}', {title: res.title, rows: res.matrix[0][0], cols: res.colTitle, src: `${def.srcName}!${def.range}`}) : i18n('{title} · par « {rows} » — d’après {src}', {title: res.title, rows: res.matrix[0][0], src: `${def.srcName}!${def.range}`})), s: S.styleId(ed.wb, {b: 1})});
         res.matrix.forEach((row, i) => row.forEach((v, j) => {
             const isHead = i === 0 || j === 0, isTot = (res.totalRow && i === n - 1) || (res.totalCol && j === row.length - 1 && i > 0);
             const st = isHead ? (isTot ? tot : bold) : res.pct ? (isTot ? pctTot : pct) : isTot ? tot : 0;
@@ -79,20 +81,20 @@
     }
     function pivotDialog(ed) {
         const S = X(), g = rangeOf(ed), t = readTable(ed, g);
-        if (t.header.length < 1 || !t.rows.length) return toast('Choisis une plage avec une ligne de titres et des lignes de données (par exemple : Nom, Commune, Année, Âge).');
+        if (t.header.length < 1 || !t.rows.length) return toast(i18n('Choisis une plage avec une ligne de titres et des lignes de données (par exemple : Nom, Commune, Année, Âge).'));
         const opts = (sel, none) => `${none ? `<option value="-1">${esc(none)}</option>` : ''}${t.header.map((h, j) => `<option value="${j}" ${j === sel ? 'selected' : ''}>${esc(h)}</option>`).join('')}`;
         const firstNum = t.header.findIndex((h, j) => t.rows.some(r => num(r[j]) !== null)), firstText = (() => { // en lignes : la colonne de mots qui se répètent le plus (commune, métier…), pas celle des noms tous différents
             let best = 0, bestN = Infinity; t.header.forEach((h, j) => { const vals = t.rows.map(r => r[j]).filter(v => typeof v === 'string' && v.trim()); if (vals.length < t.rows.length / 2) return; const n = new Set(vals.map(v => v.trim().toLowerCase())).size; if (n > 1 && n < bestN) { best = j; bestN = n; } }); return best; })();
-        ext.openDialog({eyebrow: 'DONNÉES', title: '🔀 Tableau croisé dynamique', submitLabel: 'Créer le tableau croisé', wide: true,
-            body: `<p class="muted">D’après <b>${esc(S.rangeStr(g))}</b> (${esc(A()?.plural ? A().plural(t.rows.length, 'ligne') : t.rows.length + ' lignes')}). Le résultat va dans une nouvelle feuille ; « ↻ Actualiser le tableau croisé » (menu Données) le refait si les données changent.</p>
-                <div class="form-grid xl-pv-grid"><label>En lignes<select name="rows">${opts(firstText)}</select></label><label>En colonnes (facultatif)<select name="cols">${opts(-2, '— rien —')}</select></label>
-                <label>Calcul<select name="agg">${AGG.map(([k, l]) => `<option value="${k}">${esc(l)}</option>`).join('')}</select></label><label>Sur la colonne<select name="val">${opts(firstNum, '— (compter les lignes) —')}</select></label>
-                <label>Afficher<select name="pct">${PCT.map(([k, l]) => `<option value="${k}">${esc(l)}</option>`).join('')}</select></label><label class="checkbox-line"><input type="checkbox" name="totals" checked> Totaux</label></div>
+        ext.openDialog({eyebrow: i18n('DONNÉES'), title: i18n('🔀 Tableau croisé dynamique'), submitLabel: i18n('Créer le tableau croisé'), wide: true,
+            body: `<p class="muted">${i18n('D’après <b>{range}</b> ({n}). Le résultat va dans une nouvelle feuille ; « ↻ Actualiser le tableau croisé » (menu Données) le refait si les données changent.', {range: esc(S.rangeStr(g)), n: esc(plural(t.rows.length, 'ligne'))})}</p>
+                <div class="form-grid xl-pv-grid"><label>${esc(i18n('En lignes'))}<select name="rows">${opts(firstText)}</select></label><label>${esc(i18n('En colonnes (facultatif)'))}<select name="cols">${opts(-2, i18n('— rien —'))}</select></label>
+                <label>${esc(i18n('Calcul'))}<select name="agg">${AGG.map(([k, l]) => `<option value="${k}">${esc(i18n(l))}</option>`).join('')}</select></label><label>${esc(i18n('Sur la colonne'))}<select name="val">${opts(firstNum, i18n('— (compter les lignes) —'))}</select></label>
+                <label>${esc(i18n('Afficher'))}<select name="pct">${PCT.map(([k, l]) => `<option value="${k}">${esc(i18n(l))}</option>`).join('')}</select></label><label class="checkbox-line"><input type="checkbox" name="totals" checked> ${esc(i18n('Totaux'))}</label></div>
                 <div class="xl-pv-prev" data-pv-prev></div>`,
             onOpen: d => { const f = d.querySelector('form') || d, prev = d.querySelector('[data-pv-prev]');
                 const read = () => ({rows: Number(f.querySelector('[name=rows]').value), cols: Number(f.querySelector('[name=cols]').value), val: Number(f.querySelector('[name=val]').value), agg: f.querySelector('[name=agg]').value, pct: f.querySelector('[name=pct]').value, totals: f.querySelector('[name=totals]').checked});
                 const draw = () => { const r = compute(t.header, t.rows, read()), m = r.matrix.slice(0, 12).map(row => row.slice(0, 8));
-                    prev.innerHTML = `<p class="muted">Aperçu : ${r.rows} ligne${r.rows > 1 ? 's' : ''} × ${r.cols} colonne${r.cols > 1 ? 's' : ''}</p><table class="xl-pv-table">${m.map((row, i) => `<tr>${row.map((v, j) => `<${i === 0 || j === 0 ? 'th' : 'td'}>${esc(v == null ? '' : r.pct && i && j ? `${Math.round(v * 1000) / 10} %` : typeof v === 'number' ? v.toLocaleString('fr-FR') : v)}</${i === 0 || j === 0 ? 'th' : 'td'}>`).join('')}</tr>`).join('')}</table>`; };
+                    prev.innerHTML = `<p class="muted">${esc(i18n('Aperçu : {rows} × {cols}', {rows: plural(r.rows, 'ligne'), cols: plural(r.cols, 'colonne')}))}</p><table class="xl-pv-table">${m.map((row, i) => `<tr>${row.map((v, j) => `<${i === 0 || j === 0 ? 'th' : 'td'}>${esc(v == null ? '' : r.pct && i && j ? `${Math.round(v * 1000) / 10} %` : typeof v === 'number' ? v.toLocaleString('fr-FR') : v)}</${i === 0 || j === 0 ? 'th' : 'td'}>`).join('')}</tr>`).join('')}</table>`; };
                 f.addEventListener('change', draw); draw(); },
             onSubmit: f => {
                 const o = {rows: Number(f.elements.rows.value), cols: Number(f.elements.cols.value), val: Number(f.elements.val.value), agg: f.elements.agg.value, pct: f.elements.pct.value, totals: f.elements.totals.checked};
@@ -100,16 +102,16 @@
                 ed.begin('Tableau croisé dynamique');
                 const names = ed.wb.sheets.map(s => s.name), sh = S.newSheet(S.cleanSheetName(`TCD ${t.header[o.rows]}`.slice(0, 28), names));
                 ed.wb.sheets.splice(ed.si + 1, 0, sh); writePivot(ed, sh, res, {...o, src: src.id, srcName: src.name, range: S.rangeStr(g)});
-                ed.commit(); ed.showSheet(ed.si + 1); ed.render(); toast(`Tableau croisé créé : ${res.rows} × ${res.cols}. Données → « ↻ Actualiser le tableau croisé » pour le refaire.`);
+                ed.commit(); ed.showSheet(ed.si + 1); ed.render(); toast(i18n('Tableau croisé créé : {rows} × {cols}. Données → « ↻ Actualiser le tableau croisé » pour le refaire.', {rows: String(res.rows), cols: String(res.cols)}));
             }});
     }
     function pivotRefresh(ed) {
-        const S = X(), sh = ed.S(), pv = sh.pivot; if (!pv) return toast('Cette feuille n’est pas un tableau croisé : va sur sa feuille « TCD … ».');
-        const si = ed.wb.sheets.findIndex(s => s.id === pv.src); if (si < 0) return toast('La feuille des données n’existe plus.', 'error');
+        const S = X(), sh = ed.S(), pv = sh.pivot; if (!pv) return toast(i18n('Cette feuille n’est pas un tableau croisé : va sur sa feuille « TCD … ».'));
+        const si = ed.wb.sheets.findIndex(s => s.id === pv.src); if (si < 0) return toast(i18n('La feuille des données n’existe plus.'), 'error');
         let g = S.parseRange(pv.range); const used = ed.calc.used(si); if (g && g.r1 < used.r - 1) g = {...g, r1: used.r - 1}; // des lignes ajoutées en bas comptent aussi
         const t = readTable(ed, g, si), res = compute(t.header, t.rows, pv);
         ed.begin('Actualiser le tableau croisé'); writePivot(ed, sh, res, {...pv, srcName: ed.wb.sheets[si].name, range: S.rangeStr(g)}); ed.commit(); ed.render();
-        toast(`Tableau croisé actualisé (${res.rows} × ${res.cols}).`);
+        toast(i18n('Tableau croisé actualisé ({rows} × {cols}).', {rows: String(res.rows), cols: String(res.cols)}));
     }
 
     /* ── 📊 Graphique vivant : suit la sélection ── */
@@ -117,8 +119,8 @@
     function liveToggle(ed) {
         const old = live.get(ed); if (old) { old.box.remove(); live.delete(ed); return; }
         const host = ed.$('.xl-vpwrap') || ed.dlg; if (!host) return;
-        const box = document.createElement('div'); box.className = 'xl-live'; box.setAttribute('role', 'region'); box.setAttribute('aria-label', 'Graphique vivant');
-        box.innerHTML = `<div class="xl-live-h"><b>📊 Graphique vivant</b><select data-live-kind aria-label="Type de graphique"></select><button type="button" class="icon-button small" data-live-make title="En faire un diagramme lié à la plage">↗</button><button type="button" class="icon-button small" data-live-x title="Fermer" aria-label="Fermer">×</button></div><div class="xl-live-b" data-live-body></div><small class="muted" data-live-range></small>`;
+        const box = document.createElement('div'); box.className = 'xl-live'; box.setAttribute('role', 'region'); box.setAttribute('aria-label', i18n('Graphique vivant'));
+        box.innerHTML = `<div class="xl-live-h"><b>📊 ${esc(i18n('Graphique vivant'))}</b><select data-live-kind aria-label="${esc(i18n('Type de graphique'))}"></select><button type="button" class="icon-button small" data-live-make title="${esc(i18n('En faire un diagramme lié à la plage'))}">↗</button><button type="button" class="icon-button small" data-live-x title="${esc(i18n('Fermer'))}" aria-label="${esc(i18n('Fermer'))}">×</button></div><div class="xl-live-b" data-live-body></div><small class="muted" data-live-range></small>`;
         host.appendChild(box); const st = {box, kind: '', t: 0}; live.set(ed, st);
         box.addEventListener('click', e => { if (e.target.closest('[data-live-x]')) return liveToggle(ed); if (e.target.closest('[data-live-make]')) return ext.sheetChartMenu?.(ed, e.target.closest('button')); });
         box.addEventListener('change', e => { if (e.target.matches('[data-live-kind]')) { st.kind = e.target.value; liveDraw(ed); } });
@@ -132,10 +134,10 @@
         const st = live.get(ed); if (!st || !st.box.isConnected) { live.delete(ed); return; }
         clearTimeout(st.t); st.t = setTimeout(() => {
             const r = ext.sheetChartLive?.(ed, st.kind), body = st.box.querySelector('[data-live-body]'), sel = st.box.querySelector('[data-live-kind]');
-            if (!r) { body.innerHTML = '<p class="muted">Choisis des cases avec des nombres (et leurs noms à gauche ou en haut) : le graphique se dessine ici.</p>'; st.box.querySelector('[data-live-range]').textContent = ''; return; }
+            if (!r) { body.innerHTML = `<p class="muted">${esc(i18n('Choisis des cases avec des nombres (et leurs noms à gauche ou en haut) : le graphique se dessine ici.'))}</p>`; st.box.querySelector('[data-live-range]').textContent = ''; return; }
             sel.innerHTML = r.kinds.map(k => `<option value="${esc(k.kind)}" ${k.kind === r.kind ? 'selected' : ''}>${esc(k.icon || '')} ${esc(k.label)}</option>`).join('');
             body.innerHTML = ext.diagramRender?.svg ? ext.diagramRender.svg({...r.spec, o: {...(r.spec.o || {}), title: '', source: ''}}, 360) : '';
-            st.box.querySelector('[data-live-range]').textContent = `Plage ${r.range} · suit la sélection`;
+            st.box.querySelector('[data-live-range]').textContent = i18n('Plage {range} · suit la sélection', {range: r.range});
         }, 120);
     }
     // la sélection et les chiffres qui changent : le graphique suit

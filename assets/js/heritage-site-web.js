@@ -22,7 +22,11 @@
     const toast = (...a) => A().toast(...a);
     const api = (...a) => A().api(...a);
     const post = (action, body) => api(action, {}, {method: 'POST', body});
-    const plural = (n, w) => (A()?.plural ? A().plural(n, w) : `${n} ${w}${n > 1 ? 's' : ''}`);
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : s); // 🌐 docs/I18N.md
+    /** un champ de l'aide-mémoire fait de morceaux « a; b*; c » : chaque morceau traduit (les noms de balises restent tels quels) */
+    const i18nList = v => String(v ?? '').split(/;\s*/).map(x => { const star = /\*$/.test(x), core = x.replace(/\*$/, '').trim(); return i18n(core) + (star ? '*' : ''); }).join('; ');
+    const trVal = v => (i18n(v) === v ? i18nList(v) : i18n(v)); // une valeur entière connue, sinon morceau par morceau
+    const plural = (n, w, m) => (A()?.plural ? A().plural(n, w, m) : `${n} ${w}${n > 1 ? 's' : ''}`);
     const clamp = (v, a, b) => Math.max(a, Math.min(b, Number(v) || 0));
     const PREF_KEY = 'genealogie-site-web';
     const prefs = () => { try { const p = JSON.parse(localStorage.getItem(PREF_KEY) || '{}'); return p && typeof p === 'object' && !Array.isArray(p) ? p : {}; } catch (_) { return {}; } };
@@ -262,8 +266,8 @@
                 Insertion: () => [...k.GROUPS.flatMap(([g, gl], gi) => [...(gi ? ['-'] : []), ...k.BLOCKS.filter(b => b.group === g).map(b => ({icon: b.icon, label: b.label, run: () => this.insertBlock(b.key)}))]), '-', {icon: '📄', label: 'Nouvelle page…', run: () => this.addPage()}],
                 Affichage: () => [...[['visual', '✨ Visuel'], ['split', '◫ Visuel et code'], ['code', '</> Code']].map(([v, l]) => ({label: l, checked: this.view === v, run: () => this.setView(v)})), '-',
                     {icon: '⇄', label: 'Inverser l’aperçu et le code', run: () => this.setLayout({swap: !this.swap})}, {icon: '⬓', label: this.orientNow() === 'row' ? 'L’un au-dessus de l’autre' : 'Côte à côte', run: () => this.setLayout({orient: this.orientNow() === 'row' ? 'col' : 'row'})}, '-',
-                    ...this.bps().map(b => ({icon: b.icon, label: `${b.name} (${b.width} px)`, checked: this.device === b.id && !this.freeW, run: () => this.setDevice(b.id)})), {icon: '⚙', label: 'Gérer les écrans (@media)…', run: () => this.bpDialog()}, '-',
-                    ...(ext.siteCompat ? [{icon: '🧭', label: 'Navigateurs : vérifier le site…', run: () => this.compatDialog()}, ...[{id: '', name: 'Aucun (l’aperçu seul)', icon: '▭'}, ...ext.siteCompat.BROWSERS].map(b => ({icon: b.icon, label: b.id ? `Imiter ${b.name}` : b.name, checked: (this.imitate || '') === b.id, run: () => this.setImitate(b.id)})), '-'] : []),
+                    ...this.bps().map(b => ({icon: b.icon, label: `${i18n(b.name)} (${b.width} px)`, checked: this.device === b.id && !this.freeW, run: () => this.setDevice(b.id)})), {icon: '⚙', label: 'Gérer les écrans (@media)…', run: () => this.bpDialog()}, '-',
+                    ...(ext.siteCompat ? [{icon: '🧭', label: 'Navigateurs : vérifier le site…', run: () => this.compatDialog()}, ...[{id: '', name: 'Aucun (l’aperçu seul)', icon: '▭'}, ...ext.siteCompat.BROWSERS].map(b => ({icon: b.icon, label: b.id ? i18n('Imiter {name}', {name: b.name}) : b.name, checked: (this.imitate || '') === b.id, run: () => this.setImitate(b.id)})), '-'] : []),
                     {icon: '◧', label: 'Panneau de gauche (Blocs, Pages, Styles)', checked: !this.$('[data-sw-leftpane]')?.hidden, run: () => this.togglePane('left')}, {icon: '◨', label: 'Panneau « Ceci est… »', checked: !this.$('[data-sw-panel]')?.hidden, run: () => this.togglePane('panel')}, '-',
                     {icon: '◫', label: 'Deux fichiers (côte à côte ou l’un au-dessus de l’autre)', checked: !this.$('[data-sw-code2box]')?.hidden, run: () => this.toggleCode2()}, {icon: '🎨', label: 'CSS de la classe ou de l’id (édition rapide)', shortcut: '⌘E', run: () => this.openQuick(this.sel ? this.selSels() : this.quickAt)}, '-',
                     {label: 'Fichiers en onglets (comme Phoenix Code)', checked: this.ftStyle === 'tabs', run: () => this.setFtStyle('tabs')}, {label: 'Fichiers en trois boutons (HTML / CSS / JS)', checked: this.ftStyle !== 'tabs', run: () => this.setFtStyle('simple')}, '-',
@@ -411,7 +415,7 @@
                 this.mapPts.set(pk, pts);
                 if (!pts.length) { if (this.site.frozen[mk]) { delete this.site.frozen[mk]; changed = true; } }
                 else if (force || !this.site.frozen[mk]) { const img = await composeMap(pts, a.fond); changed = JSON.stringify(this.site.frozen[mk]?.view) !== JSON.stringify(img.view) || this.site.frozen[mk]?.credit !== img.credit || !this.site.frozen[mk]; this.site.frozen[mk] = img; }
-            } catch (e) { this.mapPts.set(pk, []); toast(`Carte : ${e.message}`, 'error'); }
+            } catch (e) { this.mapPts.set(pk, []); toast(i18n('Carte : {err}', {err: e.message}), 'error'); }
             this.mapPending.delete(mk);
             if (changed) this.frozenChanged();
             this.pushHtml();
@@ -493,7 +497,7 @@
                 }
                 case 'drop': { const key = this.dragKey; this.dragKey = ''; this.stage.classList.remove('is-drop'); if (key) this.insertBlock(key, {path: Array.isArray(m.path) ? m.path.map(Number) : null, where: m.where === 'before' ? 'before' : 'after'}); return; }
                 case 'goto': { const i = this.site.pages.findIndex(p => p.slug === String(m.slug || '')); if (i >= 0) this.goPage(i); return; }
-                case 'external': return toast(`Ce lien mène hors du site (${String(m.href || '').slice(0, 80)}) : il marchera dans le site exporté.`);
+                case 'external': return toast(i18n('Ce lien mène hors du site ({url}) : il marchera dans le site exporté.', {url: String(m.href || '').slice(0, 80)}));
                 case 'want-text': return this.setMode('text');
                 case 'move': return this.moveTo(m.from, m.to, m.where);
                 case 'key': if (m.key === 'moveup' || m.key === 'movedown') return this.move(m.key === 'moveup' ? -1 : 1); if (m.key === 's') return this.save(); if (m.key === 'z') return m.shift ? this.redo() : this.undo(); if (m.key === 'y') return this.redo(); if (m.key === 'delete') return this.remove(); return;
@@ -578,7 +582,7 @@
             this.devbox.querySelector('.swc-chrome')?.remove();
             if (this.imitate && ext.siteCompat) this.devbox.insertAdjacentHTML('afterbegin', ext.siteCompat.chrome(this.imitate, {url: `mon-site.fr/${pageFile(this.page())}`, title: this.page().title || this.page().name}));
             this.devbox.classList.toggle('has-chrome', !!this.imitate); this.reload();
-            if (this.imitate) { const b = ext.siteCompat.BROWSERS.find(x => x.id === this.imitate), n = this.compatScan().filter(r => r.browsers.some(x => x.id === this.imitate)).length; toast(`${b.icon} Comme dans ${b.name}${n ? ` : ${plural(n, 'point')} à vérifier (🧭 Navigateurs)` : ' : rien à signaler'}. L’aperçu reste celui de l’app : pour voir le vrai, ↗ Aperçu dans ce navigateur.`); }
+            if (this.imitate) { const b = ext.siteCompat.BROWSERS.find(x => x.id === this.imitate), n = this.compatScan().filter(r => r.browsers.some(x => x.id === this.imitate)).length; toast(`${b.icon} ${n ? i18n('Comme dans {name} : {what} à vérifier (🧭 Navigateurs).', {name: b.name, what: plural(n, 'point')}) : i18n('Comme dans {name} : rien à signaler.', {name: b.name})} ${i18n('L’aperçu reste celui de l’app : pour voir le vrai, ↗ Aperçu dans ce navigateur.')}`); }
         }
         compatFiles() {
             return {html: this.site.pages.map(p => ({name: pageFile(p), text: p.html})).concat(this.site.files.filter(f => f.kind === 'html' || f.kind === 'php').map(f => ({name: f.path, text: f.content}))),
@@ -591,7 +595,7 @@
         compatDialog() {
             const C = ext.siteCompat; if (!C) return toast('La vérification des navigateurs n’est pas chargée.', 'error');
             const targets = () => ({...C.DEFAULT_TARGETS, ...this.compatTargets()});
-            const body = () => `<div class="sw-row"><span>Imiter dans l’aperçu :</span>${[{id: '', name: 'Aucun', icon: '▭'}, ...C.BROWSERS].map(b => `<button type="button" class="sw-chip${(this.imitate || '') === b.id ? ' is-active' : ''}" data-cp-imit="${b.id}">${esc(b.icon)} ${esc(b.name)}</button>`).join('')}</div>
+            const body = () => `<div class="sw-row"><span>Imiter dans l’aperçu :</span>${[{id: '', name: 'Aucun', icon: '▭'}, ...C.BROWSERS].map(b => `<button type="button" class="sw-chip${(this.imitate || '') === b.id ? ' is-active' : ''}" data-cp-imit="${b.id}">${esc(b.icon)} ${esc(i18n(b.name))}</button>`).join('')}</div>
                 <details class="sw-cp-targets"><summary>Navigateurs visés (versions les plus anciennes à prendre en charge)</summary><div class="sw-row">${C.BROWSERS.map(b => { const v = targets()[b.id]; return `<label class="sw-cp-t">${esc(b.icon)} ${esc(b.name)}<input type="number" min="0" step="1" value="${v === false || v == null ? '' : v}" data-cp-target="${b.id}" placeholder="—" title="Vide : ne pas vérifier ce navigateur"></label>`; }).join('')}<button type="button" class="button small secondary" data-cp-reset>↺ Les 2 dernières années</button></div></details>
                 <div class="sw-row" data-cp-open hidden><span>↗ Ouvrir le site dans :</span></div>
                 <div data-cp-list>${C.panelHtml(this.compatScan(), {targets: this.compatTargets()})}</div>
@@ -640,25 +644,25 @@
             const EXTRAS = [['🌙 Mode sombre', {name: 'Mode sombre', icon: '🌙', query: '(prefers-color-scheme: dark)'}], ['🖨 Impression', {name: 'Impression', icon: '🖨', query: 'print', width: 794}], ['📱 Téléphone couché', {name: 'Téléphone couché', icon: '📲', width: 740, query: '(max-width: 900px) and (orientation: landscape)'}], ['👆 Écran tactile', {name: 'Tactile', icon: '👆', query: '(hover: none)'}]];
             const count = q => { const n = normMq(q); return n ? scan().filter(m => m.query === n).length : 0; };
             const row = (b, i) => {
-                const fixed = !i, k = b.mq.kind, n = count(b.was), num = (f, v) => `<input type="number" min="100" max="4000" step="1" value="${v || ''}" data-bp-${f}="${i}" aria-label="Largeur en px" style="width:78px"> px`;
+                const fixed = !i, k = b.mq.kind, n = count(b.was), num = (f, v) => `<input type="number" min="100" max="4000" step="1" value="${v || ''}" data-bp-${f}="${i}" aria-label="${i18n('Largeur en px')}" style="width:78px"> px`;
                 return `<div class="sw-bp${fixed ? ' is-base' : ''}" data-bp-row="${i}">
                     <div class="sw-bp-head"><input value="${esc(b.icon)}" data-bp-icon="${i}" maxlength="4" aria-label="Icône" class="sw-bp-ico"><input value="${esc(b.name)}" data-bp-name="${i}" maxlength="40" aria-label="Nom de l’écran" class="sw-bp-name">
-                    <label class="sw-bp-w" title="La largeur de l’aperçu quand on choisit cet écran">aperçu ${num('width', b.width)}</label>
+                    <label class="sw-bp-w" title="La largeur de l’aperçu quand on choisit cet écran">${i18n('aperçu {w}', {w: num('width', b.width)})}</label>
                     <span class="spacer"></span>${fixed ? '' : `<button type="button" class="icon-button small" data-bp-up="${i}" title="Monter" aria-label="Monter"${i < 2 ? ' disabled' : ''}>↑</button><button type="button" class="icon-button small" data-bp-down="${i}" title="Descendre" aria-label="Descendre"${i === list.length - 1 ? ' disabled' : ''}>↓</button><button type="button" class="icon-button small" data-bp-del="${i}" title="Retirer cet écran (le CSS reste)" aria-label="Retirer">🗑</button>`}</div>
                     ${fixed ? '<small class="sw-hint">L’écran de base : son CSS s’applique partout, sans @media. Les autres écrans le complètent.</small>' : `<div class="sw-bp-q"><select data-bp-kind="${i}" aria-label="Condition">${MQ_KINDS.map(([v, l]) => `<option value="${v}"${v === k ? ' selected' : ''}>${esc(l)}</option>`).join('')}</select>
-                        ${k === 'max' || k === 'min' ? num('a', b.mq.a) : k === 'range' ? `${num('a', b.mq.a)} et ${num('b', b.mq.b)}` : k === 'custom' ? `<input value="${esc(b.mq.custom)}" data-bp-custom="${i}" placeholder="(min-width: 600px) and (hover: hover)" aria-label="Requête @media" class="sw-bp-custom">` : ''}</div>
-                    <small class="sw-hint"><code>@media ${esc(b.query || '…')}</code> · ${n ? plural(n, 'bloc') + ' dans le CSS' : 'pas encore de CSS'}${b.was && normMq(b.was) !== normMq(b.query) && n ? ' · ces blocs suivront la nouvelle requête' : ''}${mqSimulated(b.query) ? ' · l’aperçu le montre même si ton appareil ne l’est pas' : ''}</small>`}</div>`;
+                        ${k === 'max' || k === 'min' ? num('a', b.mq.a) : k === 'range' ? i18n('{a} et {b}', {a: num('a', b.mq.a), b: num('b', b.mq.b)}) : k === 'custom' ? `<input value="${esc(b.mq.custom)}" data-bp-custom="${i}" placeholder="(min-width: 600px) and (hover: hover)" aria-label="Requête @media" class="sw-bp-custom">` : ''}</div>
+                    <small class="sw-hint"><code>@media ${esc(b.query || '…')}</code> · ${n ? i18n('{what} dans le CSS', {what: plural(n, 'bloc')}) : i18n('pas encore de CSS')}${b.was && normMq(b.was) !== normMq(b.query) && n ? ' · ' + i18n('ces blocs suivront la nouvelle requête') : ''}${mqSimulated(b.query) ? ' · ' + i18n('l’aperçu le montre même si ton appareil ne l’est pas') : ''}</small>`}</div>`;
             };
             const orphans = () => { const known = new Set(list.map(b => normMq(b.was)).concat(list.map(b => normMq(b.query)))); return [...new Set(scan().map(m => m.query))].filter(q => q && !known.has(q)); };
             ext.openDialog({eyebrow: 'MON SITE WEB', title: '⚙ Les écrans du site (@media)', wide: true, submitLabel: 'Appliquer',
-                body: `<p class="sw-hint" style="margin-top:0">Chaque écran est un bouton au-dessus de l’aperçu, et un choix « Écran » quand tu règles un élément : ses styles vont dans son bloc <code>@media</code> du CSS du site.</p>
+                body: `<p class="sw-hint" style="margin-top:0">${i18n('Chaque écran est un bouton au-dessus de l’aperçu, et un choix « Écran » quand tu règles un élément : ses styles vont dans son bloc {code} du CSS du site.', {code: '<code>@media</code>'})}</p>
                     <div class="sw-row"><span>Partir de :</span>${PRESETS.map(([l], j) => `<button type="button" class="button small secondary" data-bp-preset="${j}">${esc(l)}</button>`).join('')}</div>
                     <div data-bp-list class="sw-bps"></div>
-                    <div class="sw-row"><button type="button" class="button small" data-bp-add>＋ Un écran</button>${EXTRAS.map(([l], j) => `<button type="button" class="button small secondary" data-bp-extra="${j}">＋ ${esc(l)}</button>`).join('')}</div><div data-bp-orph></div>`,
+                    <div class="sw-row"><button type="button" class="button small" data-bp-add>＋ Un écran</button>${EXTRAS.map(([l], j) => `<button type="button" class="button small secondary" data-bp-extra="${j}">＋ ${esc(i18n(l))}</button>`).join('')}</div><div data-bp-orph></div>`,
                 onOpen: d => {
                     const paint = () => {
                         d.querySelector('[data-bp-list]').innerHTML = list.map(row).join('');
-                        const o = orphans(); d.querySelector('[data-bp-orph]').innerHTML = o.length ? `<p class="sw-hint">Dans le CSS, sans écran : ${o.map(q => `<button type="button" class="sw-chip" data-bp-adopt="${esc(q)}" title="En faire un écran">＋ @media ${esc(q)}</button>`).join(' ')}</p>` : '';
+                        const o = orphans(); d.querySelector('[data-bp-orph]').innerHTML = o.length ? `<p class="sw-hint">${i18n('Dans le CSS, sans écran :')} ${o.map(q => `<button type="button" class="sw-chip" data-bp-adopt="${esc(q)}" title="En faire un écran">＋ @media ${esc(q)}</button>`).join(' ')}</p>` : '';
                     };
                     const sync = i => { const b = list[i]; if (i) b.query = buildMq(b.mq); };
                     paint();
@@ -692,7 +696,7 @@
                     if (!next.some(b => b.id === this.device)) this.device = next[0].id;
                     if (this.styleScreen && !next.some(b => b.id === this.styleScreen)) this.styleScreen = 'all';
                     this.freeW = 0; this.applyDevice(); this.paintPanel(); this.changed(); this.hist.commit();
-                    toast(moved.length ? `Écrans enregistrés ; ${plural(moved.length, 'bloc @media')} du CSS ${moved.length > 1 ? 'ont' : 'a'} suivi.` : 'Écrans enregistrés.', 'success');
+                    toast(moved.length ? i18n(moved.length > 1 ? 'Écrans enregistrés ; {what} du CSS ont suivi.' : 'Écrans enregistrés ; {what} du CSS a suivi.', {what: plural(moved.length, 'bloc @media')}) : 'Écrans enregistrés.', 'success');
                 }});
         }
         label(s) { return `${s.tag}${s.id ? '#' + s.id : ''}${s.cls ? '.' + s.cls.split(/\s+/).slice(0, 3).join('.') : ''}`; }
@@ -711,22 +715,22 @@
                     <span class="sw-pageacts"><button type="button" class="icon-button small" data-sw-page="up" data-sw-pi="${i}" title="Monter" aria-label="Monter" ${i <= 1 ? 'disabled' : ''}>↑</button><button type="button" class="icon-button small" data-sw-page="down" data-sw-pi="${i}" title="Descendre" aria-label="Descendre" ${!i || i === this.site.pages.length - 1 ? 'disabled' : ''}>↓</button><button type="button" class="icon-button small" data-sw-page="rename" data-sw-pi="${i}" title="Renommer" aria-label="Renommer">✎</button><button type="button" class="icon-button small" data-sw-page="dup" data-sw-pi="${i}" title="Dupliquer" aria-label="Dupliquer">⧉</button>${i ? `<button type="button" class="icon-button small" data-sw-page="del" data-sw-pi="${i}" title="Supprimer la page" aria-label="Supprimer la page">🗑</button>` : ''}</span></div>`).join('')}</div>
                     <button type="button" class="button small" data-sw-page="add" data-sw-pi="0">＋ Nouvelle page</button>
                     ${this.filesListHtml()}
-                    <h4>Cette page : « ${esc(p.name)} »</h4><div class="form-grid one-column sw-form">
-                    <label>Format<select data-sw-pext><option value="html"${p.ext !== 'php' ? ' selected' : ''}>HTML (${esc(p.slug)}.html)</option><option value="php"${p.ext === 'php' ? ' selected' : ''}>PHP (${esc(p.slug)}.php)</option></select></label>
-                    <label>Titre dans l’onglet du navigateur<input type="text" data-sw-pf="title" maxlength="160" value="${esc(p.title)}" placeholder="${esc(p.name)}"></label>
-                    <label>Description (pour les moteurs de recherche)<textarea data-sw-pf="desc" rows="2" maxlength="300">${esc(p.desc)}</textarea></label>
-                    ${this.pageIdx ? `<label>Adresse<input type="text" data-sw-pf="slug" maxlength="60" value="${esc(p.slug)}" pattern="[a-z0-9-]+"></label>` : ''}</div>`;
+                    <h4>${i18n('Cette page : « {name} »', {name: esc(p.name)})}</h4><div class="form-grid one-column sw-form">
+                    <label>${i18n('Format')}<select data-sw-pext><option value="html"${p.ext !== 'php' ? ' selected' : ''}>HTML (${esc(p.slug)}.html)</option><option value="php"${p.ext === 'php' ? ' selected' : ''}>PHP (${esc(p.slug)}.php)</option></select></label>
+                    <label>${i18n('Titre dans l’onglet du navigateur')}<input type="text" data-sw-pf="title" maxlength="160" value="${esc(p.title)}" placeholder="${esc(p.name)}"></label>
+                    <label>${i18n('Description (pour les moteurs de recherche)')}<textarea data-sw-pf="desc" rows="2" maxlength="300">${esc(p.desc)}</textarea></label>
+                    ${this.pageIdx ? `<label>${i18n('Adresse')}<input type="text" data-sw-pf="slug" maxlength="60" value="${esc(p.slug)}" pattern="[a-z0-9-]+"></label>` : ''}</div>`;
             } else {
                 const col = (k2, l) => `<label class="sw-color">${esc(l)}<input type="color" data-sw-th="${k2}" value="${esc(t[k2])}"></label>`;
                 const range = (k2, l, a, b, unit, def) => `<label class="sw-range">${esc(l)}<input type="range" min="${a}" max="${b}" step="1" value="${Number(t[k2])}" data-sw-th="${k2}" data-unit="${unit}" data-default="${def}"></label>`;
-                pane.innerHTML = `<div class="sw-lefthead">${tabs}<button type="button" class="sw-pane-x" data-sw-toggle="left" title="Cacher ce panneau (la languette sur le bord, ou ◧, le remet)" aria-label="Cacher le panneau de gauche">⇤</button></div>` + `<p class="sw-hint">Ces réglages remplissent les variables <code>--lc-…</code> de ta feuille de styles (onglet CSS).</p>
+                pane.innerHTML = `<div class="sw-lefthead">${tabs}<button type="button" class="sw-pane-x" data-sw-toggle="left" title="Cacher ce panneau (la languette sur le bord, ou ◧, le remet)" aria-label="Cacher le panneau de gauche">⇤</button></div>` + `<p class="sw-hint">${i18n('Ces réglages remplissent les variables {code} de ta feuille de styles (onglet CSS).', {code: '<code>--lc-…</code>'})}</p>
                     <h4>Couleurs</h4><div class="sw-colors">${col('primary', 'Principale')}${col('accent', 'Accent')}${col('bg', 'Fond')}${col('text', 'Texte')}</div>
-                    <h4>Polices</h4><div class="sw-fonts"><button type="button" class="button small secondary" data-sw-font="font" style="font-family:'${esc(t.font)}'">Aa · ${esc(t.font)}</button><small>texte</small><button type="button" class="button small secondary" data-sw-font="headFont" style="font-family:'${esc(t.headFont)}'">Aa · ${esc(t.headFont)}</button><small>titres</small></div>
+                    <h4>Polices</h4><div class="sw-fonts"><button type="button" class="button small secondary" data-sw-font="font" style="font-family:'${esc(t.font)}'">Aa · ${esc(t.font)}</button><small>${i18n('texte')}</small><button type="button" class="button small secondary" data-sw-font="headFont" style="font-family:'${esc(t.headFont)}'">Aa · ${esc(t.headFont)}</button><small>${i18n('titres')}</small></div>
                     <h4>Mesures</h4>${range('size', 'Taille du texte', 11, 28, 'px', 17)}${range('width', 'Largeur du contenu', 480, 2000, 'px', 1100)}${range('radius', 'Arrondi des coins', 0, 40, 'px', 8)}
                     ${this.spacingHtml()}
-                    <h4>Le site</h4><div class="form-grid one-column sw-form"><label>Nom du site<input type="text" data-sw-sf="title" maxlength="120" value="${esc(s.title)}"></label>
-                    <label>Description<textarea data-sw-sf="desc" rows="2" maxlength="300">${esc(s.desc)}</textarea></label>
-                    <label>Langue<select data-sw-sf="lang">${[['fr', 'Français'], ['en', 'Anglais'], ['de', 'Allemand'], ['es', 'Espagnol'], ['it', 'Italien'], ['oc', 'Occitan'], ['br', 'Breton']].map(([v, l]) => `<option value="${v}"${s.lang === v ? ' selected' : ''}>${l}</option>`).join('')}</select></label></div>`;
+                    <h4>Le site</h4><div class="form-grid one-column sw-form"><label>${i18n('Nom du site')}<input type="text" data-sw-sf="title" maxlength="120" value="${esc(s.title)}"></label>
+                    <label>${i18n('Description')}<textarea data-sw-sf="desc" rows="2" maxlength="300">${esc(s.desc)}</textarea></label>
+                    <label>${i18n('Langue')}<select data-sw-sf="lang">${[['fr', 'Français'], ['en', 'Anglais'], ['de', 'Allemand'], ['es', 'Espagnol'], ['it', 'Italien'], ['oc', 'Occitan'], ['br', 'Breton']].map(([v, l]) => `<option value="${v}"${s.lang === v ? ' selected' : ''}>${l}</option>`).join('')}</select></label></div>`;
             }
             UI()?.scan?.(pane);
         }
@@ -749,11 +753,11 @@
             const sc = this.spScreen && this.bps().some(b => b.id === this.spScreen) ? this.spScreen : 'all', media = sc === 'all' ? null : this.bp(sc).query;
             const read = (sel, prop) => { const v = CODE().cssGetDecls(this.site.css, {sel, media}).get(prop); return v === undefined ? null : px(v); };
             const row = ([sel, prop, label, def, max]) => { const v = read(sel, prop), set = v !== null, clash = this.spacingClash(sel, prop, media);
-                return `${clash ? `<p class="sw-clash">⚠️ Ta règle <button type="button" class="sw-linkbtn" data-sw-quickgo="css|${clash.start}">${esc(clash.sel)} (ligne ${clash.line})</button> passe devant ce curseur : change-la, ou retire sa ligne.</p>` : ''}<label class="sw-range sw-sp${set ? ' is-set' : ''}"><span>${esc(label)} <code>${esc(sel)} { ${esc(prop)} }</code>${set ? ` <button type="button" class="sw-sp-reset" data-sw-spreset="${esc(sel)}|${esc(prop)}" title="↺ Remettre comme au départ (retire cette règle)" aria-label="Remettre comme au départ">↺</button>` : ''}</span><input type="range" min="0" max="${max}" step="1" value="${set ? v : def}" data-sw-sp="${esc(sel)}|${esc(prop)}"><output>${set ? v : def} px</output></label>`; };
+                return `${clash ? `<p class="sw-clash">⚠️ ${i18n('Ta règle {rule} passe devant ce curseur : change-la, ou retire sa ligne.', {rule: `<button type="button" class="sw-linkbtn" data-sw-quickgo="css|${clash.start}">${esc(clash.sel)} (${i18n('ligne {n}', {n: String(clash.line)})})</button>`})}</p>` : ''}<label class="sw-range sw-sp${set ? ' is-set' : ''}"><span>${esc(i18n(label))} <code>${esc(sel)} { ${esc(prop)} }</code>${set ? ` <button type="button" class="sw-sp-reset" data-sw-spreset="${esc(sel)}|${esc(prop)}" title="↺ Remettre comme au départ (retire cette règle)" aria-label="Remettre comme au départ">↺</button>` : ''}</span><input type="range" min="0" max="${max}" step="1" value="${set ? v : def}" data-sw-sp="${esc(sel)}|${esc(prop)}"><output>${set ? v : def} px</output></label>`; };
             return `<h4>Espacements <small class="sw-hint">(margin, padding, gap)</small></h4>
-                <div class="segmented sw-seg sw-spscreens" role="tablist" aria-label="Écran">${[['all', '🖥 Partout'], ...this.bps().slice(1).map(b => [b.id, `${b.icon} ${b.name}`])].map(([v, l]) => `<button type="button" data-sw-spscreen="${esc(v)}" class="${sc === v ? 'is-active' : ''}">${esc(l)}</button>`).join('')}</div>
+                <div class="segmented sw-seg sw-spscreens" role="tablist" aria-label="Écran">${[['all', '🖥 Partout'], ...this.bps().slice(1).map(b => [b.id, `${b.icon} ${i18n(b.name)}`])].map(([v, l]) => `<button type="button" data-sw-spscreen="${esc(v)}" class="${sc === v ? 'is-active' : ''}">${esc(l)}</button>`).join('')}</div>
                 ${SPACING.map(row).join('')}
-                <p class="sw-hint">${media ? `Écrit dans <code>@media ${esc(media)}</code> : seulement sur cet écran.` : 'Écrit dans le CSS du site, pour tous les écrans.'} Pour un seul élément : clique-le, section « Marges, espace intérieur et taille ».</p>`;
+                <p class="sw-hint">${media ? i18n('Écrit dans {code} : seulement sur cet écran.', {code: `<code>@media ${esc(media)}</code>`}) : i18n('Écrit dans le CSS du site, pour tous les écrans.')} ${i18n('Pour un seul élément : clique-le, section « Marges, espace intérieur et taille ».')}</p>`;
         }
         /** 📄 Pages : la liste des fichiers du site, sous les pages (un clic l'ouvre dans le code ; ✎ renommer, ⋯ le reste) */
         /** 📁 les dossiers du site : ceux des fichiers, ceux créés vides (gardés tant qu'on édite), css/ et js/ (les fichiers principaux) */
@@ -786,14 +790,14 @@
             const f = this.fileOf(key); if (!f) return toast('style.css et script.js restent les fichiers principaux : ils ne se déplacent pas.');
             const base = f.path.split('/').pop(), to = dir ? `${dir}/${base}` : base; if (to === f.path) return;
             if (f.kind === 'image' && /^images\//.test(to)) return toast('Le dossier images/ est gardé pour les images de ta généalogie à l’export : prends img/ par exemple.', 'error');
-            this.renameFile(key, to); this.paintLeft(); toast(`${base} → ${dir ? `${dir}/` : 'la racine du site'}`);
+            this.renameFile(key, to); this.paintLeft(); toast(`${base} → ${dir ? `${dir}/` : i18n('la racine du site')}`);
         }
         async newFolder(parent = '') {
-            const n = await A().askText({title: '📁 Nouveau dossier', message: parent ? `Dans ${parent}/ :` : 'Son nom (css, js, img, includes…) :', value: '', okLabel: 'Créer'}); if (!n?.trim()) return;
+            const n = await A().askText({title: '📁 Nouveau dossier', message: parent ? i18n('Dans {dir} :', {dir: `${parent}/`}) : 'Son nom (css, js, img, includes…) :', value: '', okLabel: 'Créer'}); if (!n?.trim()) return;
             const d = cleanPath(`${parent ? parent + '/' : ''}${n.trim()}`).replace(/\.+$/, ''); if (!d) return;
             if (d === 'images' || d.startsWith('images/')) return toast('Le dossier images/ est gardé pour les images de ta généalogie à l’export : prends img/ par exemple.', 'error');
             (this.emptyFolders || (this.emptyFolders = new Set())).add(d); this.closedFolders?.delete(d); this.paintLeft();
-            toast(`📁 ${d}/ : glisses-y des fichiers, ou ＋ pour en créer un dedans (un dossier vide n’est pas gardé à l’enregistrement).`);
+            toast(`📁 ${i18n('{dir} : glisses-y des fichiers, ou ＋ pour en créer un dedans (un dossier vide n’est pas gardé à l’enregistrement).', {dir: `${d}/`})}`);
         }
         async folderMenu(anchor, d) {
             UI().menuAt(anchor, [{icon: '＋', label: 'Nouveau fichier ici', run: () => this.newFileMenu(anchor, d)}, {icon: '＋', label: 'Nouveau sous-dossier…', run: () => this.newFolder(d)}, {icon: '✎', label: 'Renommer le dossier…', run: () => this.renameFolder(d)},
@@ -845,7 +849,7 @@
             if (act === 'del' && i > 0) {
                 const gone = pages.splice(i, 1)[0]; if (this.pageIdx >= pages.length) this.pageIdx = pages.length - 1; else if (this.pageIdx === i) this.pageIdx = Math.max(0, i - 1);
                 this.changed(true); this.goPage(this.pageIdx);
-                A().undoToast?.(`Page « ${gone.name} » supprimée`, {undo: () => { pages.splice(i, 0, gone); this.changed(true); this.goPage(i); }});
+                A().undoToast?.(i18n('Page « {name} » supprimée', {name: gone.name}), {undo: () => { pages.splice(i, 0, gone); this.changed(true); this.goPage(i); }});
             }
         }
         uniqueSlug(s, self) { let out = s === 'index' ? 'page' : s, k = 2; while (this.site.pages.some((p, j) => j !== self && p.slug === out)) out = `${s}-${k++}`; return out; }
@@ -860,7 +864,7 @@
             if (ext === 'php' && !this.site.files.some(f => f.path === 'includes/entete.php')) this.site.files.push({id: `f${newId().slice(1)}`, path: 'includes/entete.php', kind: 'php', content: `${head}\n`, pages: []});
             this.site.pages.push(np); this.changed(true); this.goPage(this.site.pages.length - 1);
             if (quick) { this.openTab(`p:${np.id}`); setTimeout(() => this.renameTab(`p:${np.id}`), 40); return; }
-            toast(`Page « ${name} » créée : elle est dans le menu de toutes les pages.`);
+            toast(i18n('Page « {name} » créée : elle est dans le menu de toutes les pages.', {name}));
         }
         async pickFont(key) {
             const f = await UI()?.openFontPicker?.({value: this.site.theme[key], sample: this.site.settings.title || 'Mon site'}); if (!f) return;
@@ -973,7 +977,7 @@
                 if (!(n.getAttribute('class') || '').trim()) n.setAttribute('class', cls);
             });
             this.sel = {...this.sel, tag, name, path}; this.post({type: 'select', path, report: true}); this.hist.commit();
-            toast(`C’est ton ${name.toLowerCase()} : <${tag}>${this.sel.cls ? '' : ` class="${cls}"`}, nommé « ${name} ».`);
+            toast(i18n('C’est ton {what} : {tag}, nommé « {name} ».', {what: i18n(name).toLowerCase(), tag: `<${tag}>${this.sel.cls ? '' : ` class="${cls}"`}`, name}));
         }
         move(dir) {
             if (!this.sel) return; let np = null;
@@ -1037,7 +1041,7 @@
             const X = ext.siteHtmlAttrs, i = a === '*' ? null : X?.get(a, this.sel.tag);
             if (a === '*') { const n = await A().askText({title: '🏷 Ajouter un attribut', message: 'Son nom (data-annee, aria-label…) :', value: 'data-', okLabel: 'Suivant'}); if (!n?.trim()) return; a = n.trim().toLowerCase(); }
             if ((i?.[2] || '') === 'présent ou absent') return this.setAttr(a, true, true);
-            const v = await A().askText({title: `🏷 ${a}`, message: `${i ? `${i[1]}. Valeur : ${i[2]}.` : 'Sa valeur :'}`, value: '', okLabel: 'Ajouter'}); if (v === null) return;
+            const v = await A().askText({title: `🏷 ${a}`, message: i ? i18n('{what}. Valeur : {value}.', {what: i18n(i[1]), value: trVal(i[2])}) : i18n('Sa valeur :'), value: '', okLabel: 'Ajouter'}); if (v === null) return;
             this.setAttr(a, v || (i ? '' : ''));
             if (!v) toast('Attribut vide : rien n’est ajouté.');
         }
@@ -1045,12 +1049,12 @@
         attrsSectionHtml(s, U) {
             const X = ext.siteHtmlAttrs, have = Array.isArray(s.attrs) ? s.attrs : [], names = new Set(have.map(a => a[0]));
             const info = a => X?.get(a, s.tag), isBool = a => (info(a)?.[2] || '') === 'présent ou absent';
-            const row = ([a, v]) => { const i = info(a); return `<div class="sw-attr"><label title="${esc(i ? `${i[1]} · valeur : ${i[2]}` : 'Attribut sans description dans la norme (data-…, aria-…, ou propre à ton site)')}"><code>${esc(a)}</code>${isBool(a) ? `<input type="checkbox" checked data-sw-attrbool="${esc(a)}">` : `<input type="text" value="${esc(v)}" data-sw-attrv="${esc(a)}" spellcheck="false">`}</label><button type="button" class="icon-button small" data-sw-act="attr-del" data-v="${esc(a)}" title="Retirer l’attribut" aria-label="Retirer ${esc(a)}">✕</button>${i ? `<small class="sw-hint">${esc(i[1])}</small>` : ''}</div>`; };
+            const row = ([a, v]) => { const i = info(a); return `<div class="sw-attr"><label title="${esc(i ? i18n('{what} · valeur : {value}', {what: i18n(i[1]), value: trVal(i[2])}) : i18n('Attribut sans description dans la norme (data-…, aria-…, ou propre à ton site)'))}"><code>${esc(a)}</code>${isBool(a) ? `<input type="checkbox" checked data-sw-attrbool="${esc(a)}">` : `<input type="text" value="${esc(v)}" data-sw-attrv="${esc(a)}" spellcheck="false">`}</label><button type="button" class="icon-button small" data-sw-act="attr-del" data-v="${esc(a)}" title="Retirer l’attribut" aria-label="${esc(i18n('Retirer {name}', {name: a}))}">✕</button>${i ? `<small class="sw-hint">${esc(i18n(i[1]))}</small>` : ''}</div>`; };
             const offer = X ? X.forTag(s.tag).filter(x => !names.has(x[0]) && !['class', 'id', 'style'].includes(x[0])) : [];
             const own = offer.filter(x => !x[3]), glob = offer.filter(x => x[3]);
-            const opts = l => l.map(x => `<option value="${esc(x[0])}">${esc(x[0])} — ${esc(x[1])}</option>`).join('');
-            return U.panelSection({title: `🏷 Attributs HTML${have.length ? ` (${have.length})` : ''}`, key: 'sw-attrs', open: false, body: `${have.length ? have.map(row).join('') : '<p class="sw-hint">Pas d’autre attribut que la classe et l’id.</p>'}
-                <div class="sw-attr-add"><select data-sw-attrnew aria-label="Attribut à ajouter"><option value="">＋ Ajouter un attribut…</option>${own.length ? `<optgroup label="Propres à &lt;${esc(s.tag)}&gt;">${opts(own)}</optgroup>` : ''}<optgroup label="Pour tous les éléments">${opts(glob)}</optgroup><option value="*">Autre (data-…, aria-…)…</option></select></div>
+            const opts = l => l.map(x => `<option value="${esc(x[0])}">${esc(x[0])} — ${esc(i18n(x[1]))}</option>`).join('');
+            return U.panelSection({title: `🏷 ${i18n('Attributs HTML')}${have.length ? ` (${have.length})` : ''}`, key: 'sw-attrs', open: false, body: `${have.length ? have.map(row).join('') : '<p class="sw-hint">Pas d’autre attribut que la classe et l’id.</p>'}
+                <div class="sw-attr-add"><select data-sw-attrnew aria-label="Attribut à ajouter"><option value="">${i18n('＋ Ajouter un attribut…')}</option>${own.length ? `<optgroup label="${esc(i18n('Propres à {tag}', {tag: `<${s.tag}>`}))}">${opts(own)}</optgroup>` : ''}<optgroup label="${esc(i18n('Pour tous les éléments'))}">${opts(glob)}</optgroup><option value="*">${i18n('Autre (data-…, aria-…)…')}</option></select></div>
                 <p class="sw-hint">D’après la norme HTML du WHATWG (CC BY 4.0), traduit. Les on… (onclick) vont dans le JS du site.</p>`});
         }
         /** l'aide-mémoire : HTML (norme du WHATWG), CSS (normes du W3C), JS ; par défaut celui du fichier ouvert dans le code */
@@ -1059,8 +1063,8 @@
             const R = ext.siteHtmlRef, C = ext.siteCssJsRef; if (!R) return '';
             const k = C ? this.refKind() : 'html', n = {html: R.ELEMENTS.length, attr: ext.siteHtmlAttrs?.ATTRS.length || 0, css: C?.CSS.length || 0, js: C?.JS.length || 0};
             const ph = {html: 'Chercher : titre, lien, tableau, h2…', attr: 'Chercher : alt, lien, nouvel onglet, obligatoire…', css: 'Chercher : couleur, marge, flex, grid…', js: 'Chercher : clic, cacher, charger, liste…'}[k];
-            const src = k === 'html' || k === 'attr' ? `Source : <a href="${esc(R.SOURCE.url)}" target="_blank" rel="noopener noreferrer">${esc(R.SOURCE.title)}</a>, © ${esc(R.SOURCE.by)}, licence <a href="${esc(R.SOURCE.licenseUrl)}" target="_blank" rel="noopener noreferrer">${esc(R.SOURCE.license)}</a> ; ${esc(R.SOURCE.changes)}.`
-                : k === 'css' ? `Syntaxe, valeur de départ, héritage : <a href="https://www.w3.org/Style/CSS/" target="_blank" rel="noopener noreferrer">normes CSS du W3C</a> (relevées dans w3c/webref), © World Wide Web Consortium, <a href="https://www.w3.org/copyright/software-license-2023/" target="_blank" rel="noopener noreferrer">W3C Software and Document License</a> ; seuls quelques champs sont repris, « héritée » et certains « s’applique à » sont traduits. Descriptions en français : écrites pour LCNDA. <details class="sw-ref-notice"><summary>Notice de la licence W3C</summary><small>${esc(C.W3C_NOTICE)}</small></details>`
+            const src = k === 'html' || k === 'attr' ? i18n('Source : {link}, © {by}, licence {lic} ; {changes}.', {link: `<a href="${esc(R.SOURCE.url)}" target="_blank" rel="noopener noreferrer">${esc(R.SOURCE.title)}</a>`, by: esc(R.SOURCE.by), lic: `<a href="${esc(R.SOURCE.licenseUrl)}" target="_blank" rel="noopener noreferrer">${esc(R.SOURCE.license)}</a>`, changes: esc(i18n(R.SOURCE.changes))})
+                : k === 'css' ? `${i18n('Syntaxe, valeur de départ, héritage : {link} (relevées dans w3c/webref), © World Wide Web Consortium, {lic} ; seuls quelques champs sont repris, « héritée » et certains « s’applique à » sont traduits. Descriptions en français : écrites pour LCNDA.', {link: `<a href="https://www.w3.org/Style/CSS/" target="_blank" rel="noopener noreferrer">${i18n('normes CSS du W3C')}</a>`, lic: '<a href="https://www.w3.org/copyright/software-license-2023/" target="_blank" rel="noopener noreferrer">W3C Software and Document License</a>'})} <details class="sw-ref-notice"><summary>${i18n('Notice de la licence W3C')}</summary><small>${esc(C.W3C_NOTICE)}</small></details>`
                 : 'Descriptions et exemples : écrits pour LCNDA. Chaque entrée renvoie à sa norme (WHATWG, W3C, ECMAScript) pour aller plus loin.';
             return `<section class="sw-ref" data-sw-ref><h4>📖 Aide-mémoire</h4>
                 ${C ? `<div class="segmented sw-seg sw-ref-kinds" role="tablist">${[['html', 'HTML'], ['attr', 'Attributs'], ['css', 'CSS'], ['js', 'JS']].filter(([v]) => v !== 'attr' || ext.siteHtmlAttrs).map(([v, l]) => `<button type="button" data-sw-refkind="${v}" class="${k === v ? 'is-active' : ''}">${l} <small>${n[v]}</small></button>`).join('')}</div>` : ''}
@@ -1074,43 +1078,43 @@
             if (k === 'attr') return this.attrRefList();
             if (k === 'js') return this.jsRefList();
             const R = ext.siteHtmlRef, fold = t => String(t || '').normalize('NFD').replace(/\p{M}/gu, '').toLowerCase(), q = fold(this.refQ).replace(/^<|>$/g, '').trim();
-            const list = R.ELEMENTS.filter(e => !q || e[0] === q || fold(`${e[0]} ${e[1]} ${e[5].join(' ')}`).includes(q)).sort((a, b) => (b[0] === q) - (a[0] === q));
+            const list = R.ELEMENTS.filter(e => !q || e[0] === q || fold(`${e[0]} ${e[1]} ${i18n(e[1])} ${e[5].join(' ')}`).includes(q)).sort((a, b) => (b[0] === q) - (a[0] === q));
             if (!list.length) return '<p class="sw-hint">Aucun élément ne correspond.</p>';
-            return list.slice(0, 120).map(e => `<details class="sw-ref-el"${e[0] === q ? ' open' : ''}><summary><code>&lt;${esc(e[0])}&gt;</code> ${esc(e[1])}</summary>${this.htmlRefDetails(e)}</details>`).join('');
+            return list.slice(0, 120).map(e => `<details class="sw-ref-el"${e[0] === q ? ' open' : ''}><summary><code>&lt;${esc(e[0])}&gt;</code> ${esc(i18n(e[1]))}</summary>${this.htmlRefDetails(e)}</details>`).join('');
         }
         attrRefList() {
             const X = ext.siteHtmlAttrs, fold = t => String(t || '').normalize('NFD').replace(/\p{M}/gu, '').toLowerCase(), q = fold(this.refQ).replace(/[="'\s]+$/, '').trim();
-            const els = e => (e === 'HTML elements' ? 'tous les éléments' : e.replace(/form-associated custom elements/g, 'éléments personnalisés de formulaire'));
-            const list = X.ATTRS.filter(([a, rows]) => !q || a === q || fold(`${a} ${rows.map(r => r[1] + ' ' + r[0]).join(' ')}`).includes(q)).sort((x, y) => (y[0] === q) - (x[0] === q));
+            const els = e => (e === 'HTML elements' ? i18n('tous les éléments') : e.replace(/form-associated custom elements/g, i18n('éléments personnalisés de formulaire')));
+            const list = X.ATTRS.filter(([a, rows]) => !q || a === q || fold(`${a} ${rows.map(r => r[1] + ' ' + i18n(r[1]) + ' ' + r[0]).join(' ')}`).includes(q)).sort((x, y) => (y[0] === q) - (x[0] === q));
             if (!list.length) return '<p class="sw-hint">Aucun attribut ne correspond.</p>';
-            return list.map(([a, rows]) => `<details class="sw-ref-el"${a === q ? ' open' : ''}><summary><code>${esc(a)}</code> ${esc(rows[0][1])}</summary>${rows.map(r => `<dl class="sw-ref-dl"><dt>Sur</dt><dd>${esc(els(r[0]))}</dd><dt>Rôle</dt><dd>${esc(r[1])}</dd><dt>Valeur</dt><dd>${esc(r[2])}</dd></dl>`).join('')}
+            return list.map(([a, rows]) => `<details class="sw-ref-el"${a === q ? ' open' : ''}><summary><code>${esc(a)}</code> ${esc(i18n(rows[0][1]))}</summary>${rows.map(r => `<dl class="sw-ref-dl"><dt>${i18n('Sur', {ctx: 'swref'})}</dt><dd>${esc(els(r[0]))}</dd><dt>${i18n('Rôle')}</dt><dd>${esc(i18n(r[1]))}</dd><dt>${i18n('Valeur')}</dt><dd>${esc(trVal(r[2]))}</dd></dl>`).join('')}
                 <div class="sw-row"><button type="button" class="button small secondary" data-sw-refins="${esc(a)}" data-sw-refk="attr" title="L’écrire dans le HTML, là où est le curseur (dans une balise)">&lt;/&gt; Écrire dans le code</button><button type="button" class="button small secondary" data-sw-refcopy="${esc(a)}" data-sw-refk="attr">⧉ Copier</button></div></details>`).join('');
         }
         cssRefList() {
             const C = ext.siteCssJsRef, fold = t => String(t || '').normalize('NFD').replace(/\p{M}/gu, '').toLowerCase(), q = fold(this.refQ).replace(/[:;\s]+$/, '').trim();
-            const list = C.CSS.filter(p => (q ? p[0] === q || fold(`${p[0]} ${p[1]}`).includes(q) : !!p[1])).sort((a, b) => (b[0] === q) - (a[0] === q));
+            const list = C.CSS.filter(p => (q ? p[0] === q || fold(`${p[0]} ${p[1]} ${p[1] ? i18n(p[1]) : ''}`).includes(q) : !!p[1])).sort((a, b) => (b[0] === q) - (a[0] === q));
             if (!list.length) return '<p class="sw-hint">Aucune propriété ne correspond.</p>';
-            return (q ? '' : '<p class="sw-hint">Les plus utiles ; cherche pour voir les ' + C.CSS.length + '.</p>') + list.slice(0, 150).map(p => `<details class="sw-ref-el"${p[0] === q ? ' open' : ''}><summary><code>${esc(p[0])}</code> ${esc(p[1] || '')}</summary>
-                <dl class="sw-ref-dl"><dt>Syntaxe</dt><dd><code>${esc(p[2])}</code></dd><dt>Au départ</dt><dd><code>${esc(p[3])}</code></dd><dt>Héritée</dt><dd>${esc(p[4])}</dd><dt>S’applique à</dt><dd>${esc(p[5])}</dd><dt>Norme</dt><dd><a href="${esc(p[7])}" target="_blank" rel="noopener noreferrer">${esc(p[6])}</a></dd></dl>
+            return (q ? '' : `<p class="sw-hint">${i18n('Les plus utiles ; cherche pour voir les {n}.', {n: C.CSS.length})}</p>`) + list.slice(0, 150).map(p => `<details class="sw-ref-el"${p[0] === q ? ' open' : ''}><summary><code>${esc(p[0])}</code> ${esc(p[1] ? i18n(p[1]) : '')}</summary>
+                <dl class="sw-ref-dl"><dt>Syntaxe</dt><dd><code>${esc(p[2])}</code></dd><dt>Au départ</dt><dd><code>${esc(p[3])}</code></dd><dt>Héritée</dt><dd>${esc(i18n(p[4]))}</dd><dt>S’applique à</dt><dd>${esc(trVal(p[5]))}</dd><dt>Norme</dt><dd><a href="${esc(p[7])}" target="_blank" rel="noopener noreferrer">${esc(p[6])}</a></dd></dl>
                 <div class="sw-row"><button type="button" class="button small secondary" data-sw-refins="${esc(p[0])}" data-sw-refk="css" title="L’écrire dans le CSS, là où est le curseur">&lt;/&gt; Écrire dans le CSS</button><button type="button" class="button small secondary" data-sw-refcopy="${esc(p[0])}" data-sw-refk="css">⧉ Copier</button></div></details>`).join('');
         }
         jsRefList() {
             const C = ext.siteCssJsRef, fold = t => String(t || '').normalize('NFD').replace(/\p{M}/gu, '').toLowerCase(), q = fold(this.refQ).trim();
-            const list = C.JS.filter(j => !q || fold(`${j[0]} ${j[1]} ${j[2]}`).includes(q));
+            const list = C.JS.filter(j => !q || fold(`${j[0]} ${j[1]} ${i18n(j[1])} ${j[2]}`).includes(q));
             if (!list.length) return '<p class="sw-hint">Rien ne correspond.</p>';
-            return list.map((j, i) => `<details class="sw-ref-el"><summary><code>${esc(j[0])}</code> ${esc(j[1])}</summary><pre class="sw-ref-ex"><code>${esc(j[2])}</code></pre>
+            return list.map((j, i) => `<details class="sw-ref-el"><summary><code>${esc(j[0])}</code> ${esc(i18n(j[1]))}</summary><pre class="sw-ref-ex"><code>${esc(j[2])}</code></pre>
                 <dl class="sw-ref-dl"><dt>Norme</dt><dd><a href="${esc(j[4])}" target="_blank" rel="noopener noreferrer">${esc(j[3])}</a></dd></dl>
                 <div class="sw-row"><button type="button" class="button small secondary" data-sw-refins="${C.JS.indexOf(j)}" data-sw-refk="js" title="Écrire l’exemple dans le JS du site, là où est le curseur">&lt;/&gt; Écrire dans le JS</button><button type="button" class="button small secondary" data-sw-refcopy="${C.JS.indexOf(j)}" data-sw-refk="js">⧉ Copier l’exemple</button></div></details>`).join('');
         }
         htmlRefDetails(e) {
-            return `<dl class="sw-ref-dl"><dt>Catégories</dt><dd>${esc(e[2])}</dd><dt>Peut se mettre dans</dt><dd>${esc(e[3])}</dd><dt>Peut contenir</dt><dd>${esc(e[4])}</dd><dt>Attributs</dt><dd>${e[5].length ? e[5].map(a => `<code>${esc(a)}</code>`).join(' ') + ' + ' : ''}attributs globaux (id, class, style, title, lang…)</dd></dl>
+            return `<dl class="sw-ref-dl"><dt>Catégories</dt><dd>${esc(i18nList(e[2]))}</dd><dt>Peut se mettre dans</dt><dd>${esc(i18nList(e[3]))}</dd><dt>Peut contenir</dt><dd>${esc(i18nList(e[4]))}</dd><dt>Attributs</dt><dd>${e[5].length ? e[5].map(a => `<code>${esc(a)}</code>`).join(' ') + ' + ' : ''}attributs globaux (id, class, style, title, lang…)</dd></dl>
                 <div class="sw-row"><button type="button" class="button small secondary" data-sw-refins="${esc(e[0])}" title="L’écrire dans le HTML de la page, là où est le curseur">&lt;/&gt; Écrire dans le code</button><button type="button" class="button small secondary" data-sw-refcopy="${esc(e[0])}">⧉ Copier</button></div>
                 <small class="sw-hint">* : avec des conditions, voir la norme.</small>`;
         }
         /** la ligne sous « Ceci est… » : ce qu'est cet élément, et un clic pour le détail */
         htmlRefLine(tag) {
             const e = ext.siteHtmlRef?.get(tag); if (!e) return '';
-            return `<details class="sw-ref-el sw-ref-this"><summary>📖 &lt;${esc(e[0])}&gt; : ${esc(e[1])}</summary>${this.htmlRefDetails(e).replace(/<div class="sw-row">[\s\S]*?<\/div>/, '')}<small class="sw-hint">D’après la norme HTML du WHATWG (CC BY 4.0), traduit.</small></details>`;
+            return `<details class="sw-ref-el sw-ref-this"><summary>📖 &lt;${esc(e[0])}&gt; : ${esc(i18n(e[1]))}</summary>${this.htmlRefDetails(e).replace(/<div class="sw-row">[\s\S]*?<\/div>/, '')}<small class="sw-hint">D’après la norme HTML du WHATWG (CC BY 4.0), traduit.</small></details>`;
         }
         bindHtmlRef(pane) {
             const q = pane.querySelector('[data-sw-refq]'); if (!q) return;
@@ -1122,7 +1126,7 @@
                 // ce qu'on écrit, et où se met le curseur ensuite
                 const boolAttr = kind === 'attr' && ext.siteHtmlAttrs.ATTRS.find(x => x[0] === key)?.[1].every(r => r[2] === 'présent ou absent');
                 const [snip, back] = kind === 'attr' ? (boolAttr ? [` ${key}`, 0] : [` ${key}=""`, 1]) : kind === 'css' ? [`${key}: ;`, 1] : kind === 'js' ? [`${ext.siteCssJsRef.JS[Number(key)][2]}\n`, 0] : (VOID.has(key) ? [`<${key}>`, 0] : [`<${key}></${key}>`, key.length + 3]);
-                if (cp) { const t = kind === 'js' ? snip.trim() : snip; try { await navigator.clipboard.writeText(t); toast(`${t.length > 40 ? t.slice(0, 40) + '…' : t} copié.`); } catch (_) { toast(t); } return; }
+                if (cp) { const t = kind === 'js' ? snip.trim() : snip; try { await navigator.clipboard.writeText(t); toast(i18n('{x} copié.', {x: t.length > 40 ? t.slice(0, 40) + '…' : t})); } catch (_) { toast(t); } return; }
                 if (this.view === 'visual') this.setView('split');
                 const f = this.fileOf(this.codeTab), cur = f ? f.kind : this.codeTab, tab = kind === 'html' || kind === 'attr' ? 'html' : (cur === kind ? this.codeTab : kind);
                 if (this.codeTab !== tab) this.setCodeTab(tab, true);
@@ -1135,7 +1139,7 @@
             const pane = this.$('[data-sw-panel]'), U = UI(), s = this.sel;
             if (!s) {
                 pane.innerHTML = `<div class="sw-this is-none"><button type="button" class="sw-pane-x sw-pane-x-r" data-sw-toggle="panel" title="Cacher ce panneau (la languette sur le bord, ou ◨, le remet)" aria-label="Cacher le panneau Ceci est">⇥</button><b>Ceci est…</b></div>${A().empty('Clique sur un élément de l’aperçu (ou dans le code) : il dira ce qu’il est, par exemple « header.site-entete ». Tu pourras lui donner un nom, une classe, un id, des couleurs.', {icon: '↖'})}
-                    <div class="sw-tips"><h4>Astuces</h4><ul><li><b>T Écrire</b> : clique dans un texte pour le changer, le code suit tout seul.</li><li>Dans le code, <kbd>Tab</kbd> déplie une abréviation : <code>ul&gt;li*3</code>, <code>div.carte&gt;h2+p</code>, <code>m10</code>.</li><li><b>▶ Tester</b> fait tourner tes scripts (JS) dans l’aperçu isolé.</li></ul></div>${this.htmlRefHtml()}`;
+                    <div class="sw-tips"><h4>${i18n('Astuces')}</h4><ul><li>${i18n('{b} : clique dans un texte pour le changer, le code suit tout seul.', {b: `<b>${i18n('T Écrire')}</b>`})}</li><li>${i18n('Dans le code, {key} déplie une abréviation : {ex}.', {key: '<kbd>Tab</kbd>', ex: '<code>ul&gt;li*3</code>, <code>div.carte&gt;h2+p</code>, <code>m10</code>'})}</li><li>${i18n('{b} fait tourner tes scripts (JS) dans l’aperçu isolé.', {b: `<b>${i18n('▶ Tester')}</b>`})}</li></ul></div>${this.htmlRefHtml()}`;
                 this.bindHtmlRef(pane);
                 return;
             }
@@ -1146,34 +1150,34 @@
                 if (!s.block) return '';
                 const a = s.battrs || {}, opts = [];
                 if (s.block === 'menu') opts.push('<p class="sw-hint">Le menu se fait tout seul avec les pages du site (📄 Pages).</p>');
-                if (['person', 'tree', 'timeline', 'map', 'photos'].includes(s.block)) opts.push(`<label>Personne<span class="sw-pick">${esc(a.person ? (s.name || '').replace(/^(Arbre|Fiche|Frise|Carte|Photos) de /, '') || `n° ${a.person}` : '—')} <button type="button" class="button small secondary" data-sw-act="block-person">Changer…</button></span></label>`);
+                if (['person', 'tree', 'timeline', 'map', 'photos'].includes(s.block)) opts.push(`<label>Personne<span class="sw-pick" data-i18n-off>${esc(a.person ? (s.name || '').replace(/^(Arbre|Fiche|Frise|Carte|Photos) de /, '') || `n° ${a.person}` : '—')} <button type="button" class="button small secondary" data-sw-act="block-person">Changer…</button></span></label>`);
                 if (s.block === 'tree') opts.push(`<label>Générations<select data-sw-ba="gens">${[2, 3, 4, 5].map(n => `<option${Number(a.gens) === n ? ' selected' : ''}>${n}</option>`).join('')}</select></label>`);
                 if (s.block === 'map') {
                     const fond = a.fond || 'svg', sel = A().mapBackgroundSelectHtml ? A().mapBackgroundSelectHtml(fond === 'svg' ? '' : fond) : '';
                     opts.push(`<label>Fond de carte<select data-sw-ba="fond"><option value="svg"${fond === 'svg' ? ' selected' : ''}>Sans fond (dessin simple)</option>${sel}</select></label>`);
-                    if (fond !== 'svg') opts.push(`<label class="ui-toggle"><input type="checkbox" data-sw-ba="vive" value="1"${String(a.vive) === '1' ? ' checked' : ''}><i></i>Carte interactive dans le site (on la déplace et on zoome)</label>${String(a.vive) === '1' && !LIVE_FONDS.includes(fond) ? '<p class="sw-hint">Ce fond ne se montre qu’en image : la carte interactive du site prendra le fond OpenStreetMap (avec sa mention).</p>' : ''}<p class="sw-hint">La carte est faite en image avec ce fond (et sa mention : ${esc(creditOf(fond))}), redessinée à chaque ouverture.</p>`);
+                    if (fond !== 'svg') opts.push(`<label class="ui-toggle"><input type="checkbox" data-sw-ba="vive" value="1"${String(a.vive) === '1' ? ' checked' : ''}><i></i>Carte interactive dans le site (on la déplace et on zoome)</label>${String(a.vive) === '1' && !LIVE_FONDS.includes(fond) ? '<p class="sw-hint">Ce fond ne se montre qu’en image : la carte interactive du site prendra le fond OpenStreetMap (avec sa mention).</p>' : ''}<p class="sw-hint">${i18n('La carte est faite en image avec ce fond (et sa mention : {credit}), redessinée à chaque ouverture.', {credit: esc(creditOf(fond))})}</p>`);
                 }
                 if (s.block === 'diagram') opts.push(`<div class="sw-row"><button type="button" class="button small secondary" data-sw-act="dg-pick">Changer…</button><button type="button" class="button small secondary" data-sw-act="dg-edit">✎ Modifier le diagramme</button><button type="button" class="button small secondary" data-sw-act="dg-new">＋ Nouveau diagramme</button></div><p class="sw-hint">Dessiné par Graphiques → Mes diagrammes, avec les données d’aujourd’hui, puis figé dans le site (les noms des personnes vivantes y sont retirés à l’export).</p>`);
                 if (s.block === 'map') opts.push(`<label>Lieux de<select data-sw-ba="scope"><option value="person"${a.scope !== 'ancestors' ? ' selected' : ''}>la personne seule</option><option value="ancestors"${a.scope === 'ancestors' ? ' selected' : ''}>la personne et ses ancêtres</option></select></label>`);
                 if (s.block === 'chart') opts.push(`<label>Chiffres<select data-sw-ba="chart"><option value="naissances"${a.chart !== 'prenoms' ? ' selected' : ''}>Naissances par décennie</option><option value="prenoms"${a.chart === 'prenoms' ? ' selected' : ''}>Prénoms les plus portés</option></select></label>`);
                 if (s.block === 'photos') opts.push(`<label>Au plus<select data-sw-ba="max">${[6, 12, 24, 48].map(n => `<option${Number(a.max) === n ? ' selected' : ''}>${n}</option>`).join('')}</select></label>`);
-                if (s.block === 'place') opts.push(`<label>Lieu<span class="sw-pick">${esc(a.place ? (s.name || '').replace(/^Gens de /, '') || `n° ${a.place}` : '—')} <button type="button" class="button small secondary" data-sw-act="block-place">Changer…</button></span></label>`);
-                return U.panelSection({title: `🌳 Bloc de la généalogie : ${KIND_LABEL[s.block] || s.block}`, key: 'sw-block', open: true, body: `<div class="form-grid one-column sw-form">${opts.join('')}</div><p class="sw-hint">Rempli avec ta base, figé à l’export, sans personne vivante ni fiche confidentielle.</p>`});
+                if (s.block === 'place') opts.push(`<label>Lieu<span class="sw-pick" data-i18n-off>${esc(a.place ? (s.name || '').replace(/^Gens de /, '') || `n° ${a.place}` : '—')} <button type="button" class="button small secondary" data-sw-act="block-place">Changer…</button></span></label>`);
+                return U.panelSection({title: i18n('🌳 Bloc de la généalogie : {what}', {what: i18n(KIND_LABEL[s.block] || s.block)}), key: 'sw-block', open: true, body: `<div class="form-grid one-column sw-form">${opts.join('')}</div><p class="sw-hint">Rempli avec ta base, figé à l’export, sans personne vivante ni fiche confidentielle.</p>`});
             };
-            const content = s.tag === 'img' ? U.panelSection({title: 'Image', key: 'sw-img', open: true, body: `<div class="form-grid one-column sw-form"><button type="button" class="button small secondary" data-sw-act="image">🖼 Changer l’image…</button><label>Texte de remplacement (pour qui ne voit pas l’image)<input type="text" data-sw-at="alt" value="${esc(s.alt)}" maxlength="200"></label></div>`})
-                : s.tag === 'a' ? U.panelSection({title: 'Lien', key: 'sw-link', open: true, body: `<div class="form-grid one-column sw-form"><label>Adresse<input type="text" data-sw-at="href" value="${esc(s.href)}" placeholder="page.html, https://…, mailto:…" maxlength="300"></label><div class="sw-chips">${this.site.pages.map(p => `<button type="button" class="sw-chip" data-sw-act="link" data-v="${esc(pageFile(p))}">📄 ${esc(p.name)}</button>`).join('')}</div></div>`}) : '';
-            pane.innerHTML = `<div class="sw-this"><button type="button" class="sw-pane-x sw-pane-x-r" data-sw-toggle="panel" title="Cacher ce panneau (la languette sur le bord, ou ◨, le remet)" aria-label="Cacher le panneau Ceci est">⇥</button><small>Ceci est</small><b>${esc(s.name || (s.block ? KIND_LABEL[s.block] : '') || s.tag)}</b><code>${esc(this.label(s))}</code>${s.text ? `<span class="sw-this-txt">« ${esc(s.text.slice(0, 70))}${s.text.length > 70 ? '…' : ''} »</span>` : ''}${this.htmlRefLine(s.tag)}</div>
+            const content = s.tag === 'img' ? U.panelSection({title: 'Image', key: 'sw-img', open: true, body: `<div class="form-grid one-column sw-form"><button type="button" class="button small secondary" data-sw-act="image">🖼 Changer l’image…</button><label>${i18n('Texte de remplacement (pour qui ne voit pas l’image)')}<input type="text" data-sw-at="alt" value="${esc(s.alt)}" maxlength="200"></label></div>`})
+                : s.tag === 'a' ? U.panelSection({title: 'Lien', key: 'sw-link', open: true, body: `<div class="form-grid one-column sw-form"><label>${i18n('Adresse')}<input type="text" data-sw-at="href" value="${esc(s.href)}" placeholder="page.html, https://…, mailto:…" maxlength="300"></label><div class="sw-chips">${this.site.pages.map(p => `<button type="button" class="sw-chip" data-sw-act="link" data-v="${esc(pageFile(p))}">📄 ${esc(p.name)}</button>`).join('')}</div></div>`}) : '';
+            pane.innerHTML = `<div class="sw-this"><button type="button" class="sw-pane-x sw-pane-x-r" data-sw-toggle="panel" title="Cacher ce panneau (la languette sur le bord, ou ◨, le remet)" aria-label="Cacher le panneau Ceci est">⇥</button><small>${i18n('Ceci est')}</small><b data-i18n-off>${esc(s.name || (s.block ? i18n(KIND_LABEL[s.block]) : '') || s.tag)}</b><code>${esc(this.label(s))}</code>${s.text ? `<span class="sw-this-txt" data-i18n-off>« ${esc(s.text.slice(0, 70))}${s.text.length > 70 ? '…' : ''} »</span>` : ''}${this.htmlRefLine(s.tag)}</div>
                 <div class="sw-acts"><button type="button" class="icon-button small" data-sw-act="up" title="Monter" aria-label="Monter">↑</button><button type="button" class="icon-button small" data-sw-act="down" title="Descendre" aria-label="Descendre">↓</button><button type="button" class="icon-button small" data-sw-act="dup" title="Dupliquer" aria-label="Dupliquer">⧉</button><button type="button" class="icon-button small" data-sw-act="code" title="Voir dans le code" aria-label="Voir dans le code">&lt;/&gt;</button><button type="button" class="icon-button small" data-sw-act="quickcss" title="🎨 Son CSS : les règles de ses classes et de son id, modifiables (⌘E)" aria-label="Son CSS">🎨</button><button type="button" class="icon-button small" data-sw-act="parent" title="Choisir l’élément qui le contient" aria-label="Choisir le parent">⤴</button><span class="spacer"></span><button type="button" class="icon-button small danger" data-sw-act="del" title="Supprimer l’élément" aria-label="Supprimer l’élément">🗑</button></div>
-                ${U.panelSection({title: 'Ceci est… (nom, balise, classe, id)', key: 'sw-what', open: true, body: `<p class="sw-hint">Dis ce que c’est : « c’est mon en-tête, mon menu… »</p><div class="sw-chips">${ROLES.map(([tag, name], i) => `<button type="button" class="sw-chip${s.tag === tag && s.name === name ? ' is-active' : ''}" data-sw-role="${i}" title="&lt;${tag}&gt;, nommé « ${esc(name)} »">${esc(name)}</button>`).join('')}</div>
-                    <div class="form-grid one-column sw-form"><label>Nom (pour toi)<input type="text" list="sw-names" data-sw-at="data-lc-name" value="${esc(s.name)}" maxlength="60" placeholder="En-tête, carte de la famille…"></label><datalist id="sw-names">${NAMES.map(n => `<option value="${esc(n)}">`).join('')}</datalist>
-                    <label>Balise<select data-sw-tag>${[...new Set([s.tag, ...TAG_CHOICES])].filter(Boolean).map(t => `<option value="${esc(t)}"${t === s.tag ? ' selected' : ''}>&lt;${esc(t)}&gt;</option>`).join('')}</select></label>
-                    <label>Classe(s)<input type="text" data-sw-at="class" value="${esc(s.cls)}" maxlength="200" placeholder="carte-famille" spellcheck="false"></label>
+                ${U.panelSection({title: 'Ceci est… (nom, balise, classe, id)', key: 'sw-what', open: true, body: `<p class="sw-hint">Dis ce que c’est : « c’est mon en-tête, mon menu… »</p><div class="sw-chips">${ROLES.map(([tag, name], i) => `<button type="button" class="sw-chip${s.tag === tag && s.name === name ? ' is-active' : ''}" data-sw-role="${i}" title="${esc(i18n('{tag}, nommé « {name} »', {tag: `<${tag}>`, name}))}">${esc(i18n(name))}</button>`).join('')}</div>
+                    <div class="form-grid one-column sw-form"><label>${i18n('Nom (pour toi)')}<input type="text" list="sw-names" data-sw-at="data-lc-name" value="${esc(s.name)}" maxlength="60" placeholder="En-tête, carte de la famille…"></label><datalist id="sw-names">${NAMES.map(n => `<option value="${esc(n)}">`).join('')}</datalist>
+                    <label>${i18n('Balise')}<select data-sw-tag>${[...new Set([s.tag, ...TAG_CHOICES])].filter(Boolean).map(t => `<option value="${esc(t)}"${t === s.tag ? ' selected' : ''}>&lt;${esc(t)}&gt;</option>`).join('')}</select></label>
+                    <label>${i18n('Classe(s)')}<input type="text" data-sw-at="class" value="${esc(s.cls)}" maxlength="200" placeholder="carte-famille" spellcheck="false"></label>
                     <label>id<input type="text" data-sw-at="id" value="${esc(s.id)}" maxlength="60" placeholder="haut-de-page" spellcheck="false"></label></div>`})}
                 ${blockOpts()}${content}${this.attrsSectionHtml(s, U)}
                 ${this.targetHtml()}
                 ${U.panelSection({title: 'Marges, espace intérieur et taille', key: 'sw-pos', open: false, body: this.boxHtml(cs) + range('padding', 'Espace intérieur, les 4 côtés d’un coup', 0, 120, px(cs.pt)) + range('max-width', 'Largeur au plus (0 = toute)', 0, 1600, px(st.get('max-width') || 0)) + range('border-radius', 'Arrondi', 0, 60, px(cs.radius))})}
                 ${U.panelSection({title: 'Couleur', key: 'sw-color', open: false, body: `<div class="sw-colors">${color('color', 'Texte', cs.color)}${color('background-color', 'Fond', cs.bg)}</div><button type="button" class="button small secondary" data-sw-act="nobg">Sans fond</button>`})}
-                ${U.panelSection({title: 'Texte', key: 'sw-text', open: false, body: `<div class="sw-fonts"><button type="button" class="button small secondary" data-sw-act="font">Aa · ${esc((st.get('font-family') || cs.font || '').split(',')[0].replace(/["']/g, '') || 'Police')}</button></div>${range('font-size', 'Taille', 10, 96, px(cs.size), 17)}
+                ${U.panelSection({title: 'Texte', key: 'sw-text', open: false, body: `<div class="sw-fonts"><button type="button" class="button small secondary" data-sw-act="font">Aa · ${esc((st.get('font-family') || cs.font || '').split(',')[0].replace(/["']/g, '') || i18n('Police'))}</button></div>${range('font-size', 'Taille', 10, 96, px(cs.size), 17)}
                     <div class="segmented sw-align">${[['left', '⟸ Gauche'], ['center', '≡ Centré'], ['right', 'Droite ⟹']].map(([v, l]) => `<button type="button" data-sw-act="align" data-v="${v}" class="${(st.get('text-align') || cs.align) === v ? 'is-active' : ''}">${l}</button>`).join('')}</div>
                     <label class="ui-toggle"><input type="checkbox" data-sw-st="font-weight" value="bold"${/^(bold|700|800|900)$/.test(st.get('font-weight') || '') ? ' checked' : ''}><i></i>Gras</label>`})}`;
             pane.querySelector('[data-sw-tag]')?.addEventListener('change', e => this.setTag(e.target.value));
@@ -1182,22 +1186,22 @@
         }
         /** le schéma margin / padding (comme les outils du navigateur) : 4 côtés chacun */
         boxHtml(cs) {
-            const side = (prop, v, l) => `<input type="number" class="sw-box-n" min="${prop.startsWith('margin') ? -200 : 0}" max="400" step="1" value="${px(v)}" data-sw-st="${prop}" data-unit="px" title="${esc(l)} (px)" aria-label="${esc(l)} en px">`;
-            return `<div class="sw-box" aria-label="Marges et espace intérieur"><span class="sw-box-l">margin · marge</span>
+            const side = (prop, v, l) => `<input type="number" class="sw-box-n" min="${prop.startsWith('margin') ? -200 : 0}" max="400" step="1" value="${px(v)}" data-sw-st="${prop}" data-unit="px" title="${esc(i18n(l))} (px)" aria-label="${esc(i18n('{x} en px', {x: i18n(l)}))}">`;
+            return `<div class="sw-box" aria-label="Marges et espace intérieur"><span class="sw-box-l">margin · ${i18n('marge')}</span>
                 <div class="sw-box-t">${side('margin-top', cs.mt, 'Marge en haut')}</div><div class="sw-box-r">${side('margin-right', cs.mr, 'Marge à droite')}</div><div class="sw-box-b">${side('margin-bottom', cs.mb, 'Marge en bas')}</div><div class="sw-box-lf">${side('margin-left', cs.ml, 'Marge à gauche')}</div>
-                <div class="sw-box-in"><span class="sw-box-l">padding · espace intérieur</span><div class="sw-box-t">${side('padding-top', cs.pt, 'Espace intérieur en haut')}</div><div class="sw-box-r">${side('padding-right', cs.pr, 'Espace intérieur à droite')}</div><div class="sw-box-b">${side('padding-bottom', cs.pb, 'Espace intérieur en bas')}</div><div class="sw-box-lf">${side('padding-left', cs.pl, 'Espace intérieur à gauche')}</div><div class="sw-box-c">élément</div></div></div>
+                <div class="sw-box-in"><span class="sw-box-l">padding · ${i18n('espace intérieur')}</span><div class="sw-box-t">${side('padding-top', cs.pt, 'Espace intérieur en haut')}</div><div class="sw-box-r">${side('padding-right', cs.pr, 'Espace intérieur à droite')}</div><div class="sw-box-b">${side('padding-bottom', cs.pb, 'Espace intérieur en bas')}</div><div class="sw-box-lf">${side('padding-left', cs.pl, 'Espace intérieur à gauche')}</div><div class="sw-box-c">${i18n('élément')}</div></div></div>
                 <div class="sw-row"><button type="button" class="button small secondary" data-sw-act="center" title="margin-left et margin-right : auto">↔ Centrer (marges auto)</button><button type="button" class="button small secondary" data-sw-act="nospace" title="Retirer margin et padding posés ici">↺ Marges de départ</button></div>
                 <p class="sw-hint">Alt + flèches dans une case : ±10 px. Les valeurs vont là où dit « Appliquer à » (élément, classe, écran).</p>`;
         }
         /** « Appliquer à » : cet élément ou tous ceux de sa classe ; normal ou survol ; tous les écrans, tablette ou téléphone */
         targetHtml() {
             const s = this.sel, classes = s.cls.split(/\s+/).filter(c => /^[A-Za-z_-][\w-]*$/.test(c)), to = this.styleTo || 'el', st = this.styleState || '', sc = this.styleScreen || 'all';
-            const t = to.startsWith('class:') ? `.${to.slice(6)}${st}` : (st || sc !== 'all' ? `#${s.id || '…'}${st}` : 'style="…" de l’élément');
-            const q = sc === 'all' ? '' : this.bps().find(b => b.id === sc)?.query || '', media = q ? ` dans @media ${q}` : '';
-            return `<div class="sw-target"><label>Appliquer à<select data-sw-to>${classes.map(c => `<option value="class:${esc(c)}"${to === `class:${c}` ? ' selected' : ''}>Tous les éléments .${esc(c)}</option>`).join('')}<option value="el"${to === 'el' ? ' selected' : ''}>Cet élément seulement</option></select></label>
+            const t = to.startsWith('class:') ? `.${to.slice(6)}${st}` : (st || sc !== 'all' ? `#${s.id || '…'}${st}` : i18n('style="…" de l’élément'));
+            const q = sc === 'all' ? '' : this.bps().find(b => b.id === sc)?.query || '', media = q ? ' ' + i18n('dans @media {q}', {q}) : '';
+            return `<div class="sw-target"><label>${i18n('Appliquer à')}<select data-sw-to>${classes.map(c => `<option value="class:${esc(c)}"${to === `class:${c}` ? ' selected' : ''}>${i18n('Tous les éléments {cls}', {cls: '.' + esc(c)})}</option>`).join('')}<option value="el"${to === 'el' ? ' selected' : ''}>Cet élément seulement</option></select></label>
                 <div class="segmented sw-seg" role="tablist" aria-label="État">${[['', 'Normal'], [':hover', 'Au survol']].map(([v, l]) => `<button type="button" data-sw-state="${v}" class="${st === v ? 'is-active' : ''}">${l}</button>`).join('')}</div>
-                <div class="segmented sw-seg" role="tablist" aria-label="Écran">${[['all', '🖥 Partout', 'Tous les écrans'], ...this.bps().slice(1).map(b => [b.id, `${b.icon} ${b.name}`, `@media ${b.query || '…'}`])].map(([v, l, ti]) => `<button type="button" data-sw-screen="${esc(v)}" class="${sc === v ? 'is-active' : ''}" title="${esc(ti)}">${esc(l)}</button>`).join('')}</div>
-                <small class="sw-hint">Écrit dans : <code>${esc(t)}</code>${esc(media)}${t.startsWith('style') ? '' : ' — CSS du site'}</small></div>`;
+                <div class="segmented sw-seg" role="tablist" aria-label="Écran">${[['all', '🖥 Partout', 'Tous les écrans'], ...this.bps().slice(1).map(b => [b.id, `${b.icon} ${i18n(b.name)}`, `@media ${b.query || '…'}`])].map(([v, l, ti]) => `<button type="button" data-sw-screen="${esc(v)}" class="${sc === v ? 'is-active' : ''}" title="${esc(ti)}">${esc(l)}</button>`).join('')}</div>
+                <small class="sw-hint">${i18n('Écrit dans : {where}', {where: `<code>${esc(t)}</code>${esc(media)}${t.startsWith('style') ? '' : ' — ' + i18n('CSS du site')}`})}</small></div>`;
         }
         async panelAction(act, b) {
             const s = this.sel; if (!s) return;
@@ -1275,14 +1279,14 @@
         async sitesMenu(anchor) {
             let list = []; try { list = (await api('websites')).items || []; } catch (e) { return toast(e.message, 'error'); }
             const swap = async run => { if (this.dirty) { const ok = await A().confirmBox('Enregistrer ce site avant d’en ouvrir un autre ?', {title: 'Changer de site', okLabel: '💾 Enregistrer et changer', cancelLabel: 'Annuler'}); if (!ok) return; await this.save(); if (this.dirty) return; } this.dirty = false; await this.close(); if (this.closed) run(); };
-            UI().menuAt(anchor, [...list.slice(0, 30).map(x => ({icon: '🌐', label: x.name || 'Mon site', help: [x.info?.pages ? plural(x.info.pages, 'page') : '', x.updated_at ? (window.LCNDA_UI?.whenText?.(x.updated_at, {label: 'Modifié'}) || `modifié le ${String(x.updated_at).slice(0, 10).split('-').reverse().join('/')}`) : ''].filter(Boolean).join(' · '), checked: Number(x.id) === this.id, disabled: Number(x.id) === this.id, run: () => swap(() => openSite({...this.ctx, id: x.id}))})),
+            UI().menuAt(anchor, [...list.slice(0, 30).map(x => ({icon: '🌐', label: x.name || 'Mon site', help: [x.info?.pages ? plural(x.info.pages, 'page') : '', x.updated_at ? (window.LCNDA_UI?.whenText?.(x.updated_at, {label: 'Modifié'}) || i18n('modifié le {date}', {date: String(x.updated_at).slice(0, 10).split('-').reverse().join('/')})) : ''].filter(Boolean).join(' · '), checked: Number(x.id) === this.id, disabled: Number(x.id) === this.id, run: () => swap(() => openSite({...this.ctx, id: x.id}))})),
                 ...(list.length ? ['-'] : []), {icon: '＋', label: 'Nouveau site…', run: () => swap(() => chooseTemplate(this.ctx))}, {icon: '📂', label: 'Ouvrir un dossier…', help: 'un site déjà fait : pages, CSS, JS, PHP, images', run: () => swap(() => importFolder(this.ctx))}], {title: `Mes sites (${list.length})`});
         }
         /** 🖼 une image du site : on la voit, son chemin à copier, la remplacer */
         imageDialog(f) {
             const kb = Math.round(f.content.length * 0.75 / 1024);
             ext.openDialog({eyebrow: 'MON SITE WEB', title: `🖼 ${f.path}`, submitLabel: 'Fermer',
-                body: `<div class="sw-imgview"><img src="${esc(f.content)}" alt=""></div><p class="sw-hint">${kb} Ko · dans une page : <code>&lt;img src="${esc(f.path)}" alt=""&gt;</code> · dans le CSS : <code>url(../${esc(f.path)}) depuis css/</code></p>
+                body: `<div class="sw-imgview"><img src="${esc(f.content)}" alt=""></div><p class="sw-hint">${i18n('{kb} Ko · dans une page : {html} · dans le CSS : {css}', {kb, html: `<code>&lt;img src="${esc(f.path)}" alt=""&gt;</code>`, css: `<code>url(../${esc(f.path)}) ${i18n('depuis css/')}</code>`})}</p>
                     <div class="sw-row"><button type="button" class="button small secondary" data-img-copy>⧉ Copier le chemin</button><button type="button" class="button small secondary" data-img-swap>↻ Remplacer l’image…</button></div>`,
                 onOpen: d => d.addEventListener('click', async e => {
                     if (e.target.closest('[data-img-copy]')) { try { await navigator.clipboard.writeText(f.path); toast('Chemin copié.'); } catch (_) { toast(f.path); } }
@@ -1312,12 +1316,12 @@
         }
         allFilesMenu(btn) {
             const keys = [...this.site.pages.map(p => `p:${p.id}`), 'css', 'js', ...this.site.files.slice().sort((a, b) => a.path.localeCompare(b.path)).map(f => `f:${f.id}`)];
-            UI().menuAt(btn, [...keys.map(k => { const t = this.tabInfo(k); return {icon: FILE_KINDS[t.kind].ico, label: t.file ? t.file.path : t.name, help: t.page ? `page « ${t.page.name} »` : '', run: () => this.openTab(k)}; }), '-', {icon: '＋', label: 'Nouveau fichier…', run: () => this.newFileMenu(btn)}], {title: `Fichiers du site (${keys.length})`});
+            UI().menuAt(btn, [...keys.map(k => { const t = this.tabInfo(k); return {icon: FILE_KINDS[t.kind].ico, label: t.file ? t.file.path : t.name, help: t.page ? i18n('page « {name} »', {name: t.page.name}) : '', run: () => this.openTab(k)}; }), '-', {icon: '＋', label: 'Nouveau fichier…', run: () => this.newFileMenu(btn)}], {title: i18n('Fichiers du site ({n})', {n: keys.length})});
         }
         /** double-clic sur un onglet : son nom devient un champ ; l'extension change le format (cours.html → cours.php) */
         renameTab(key) {
             const t = this.tabInfo(key); if (!t) return;
-            if (key === 'css' || key === 'js') return toast(`${t.name} garde son nom : c’est le fichier principal du site.`);
+            if (key === 'css' || key === 'js') return toast(i18n('{name} garde son nom : c’est le fichier principal du site.', {name: t.name}));
             if (this.ftStyle !== 'tabs') return this.renameAsk(key);
             const el = this.$(`[data-sw-ftab="${CSS.escape(key)}"] .sw-fname`); if (!el) return this.renameAsk(key);
             const inp = document.createElement('input'); inp.className = 'sw-fren'; inp.value = t.file ? t.file.path : t.name; inp.spellcheck = false; inp.setAttribute('aria-label', 'Nom du fichier');
@@ -1346,7 +1350,7 @@
             if (oldExt === 'php' && ext === 'html' && /<\?(php|=)/i.test(p.html)) toast('Attention : cette page contient du PHP (<?php … ?>). En .html, il ne sera pas exécuté.', 'error');
             p.slug = slug; p.ext = ext; this.relink(oldSlug, slug, oldExt, ext);
             this.changed(true); this.paintPages(); if (p === this.page()) this.setCodeTab('html', true); else this.paintTabs(); this.reload();
-            toast(`${before} → ${pageFile(p)}${ext === 'php' && oldExt !== 'php' ? ' · tu peux y écrire du PHP, par exemple <?php include \'includes/entete.php\'; ?>' : ''}`, 'success');
+            toast(`${before} → ${pageFile(p)}${ext === 'php' && oldExt !== 'php' ? ' · ' + i18n('tu peux y écrire du PHP, par exemple {code}', {code: "<?php include 'includes/entete.php'; ?>"}) : ''}`, 'success');
         }
         relinkPath(from, to) {
             if (!from || from === to) return; const q = from.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -1359,14 +1363,14 @@
             if (key !== 'css' && key !== 'js') items.push({icon: '✎', label: 'Renommer', help: 'double-clic sur l’onglet', run: () => { this.openTab(key); setTimeout(() => this.renameTab(key), 30); }});
             if (t.page) items.push(t.page.ext === 'php' ? {icon: '‹›', label: 'Passer en HTML (.html)', run: () => this.setPageFile(t.page, t.page.slug, 'html')} : {icon: 'php', label: 'Passer en PHP (.php)', help: 'pour inclure un en-tête commun…', run: () => this.setPageFile(t.page, t.page.slug, 'php')});
             if (t.file) {
-                items.push({icon: '📁', label: 'Déplacer vers…', help: `aujourd’hui : ${t.file.path.includes('/') ? t.file.path.slice(0, t.file.path.lastIndexOf('/')) + '/' : 'la racine'}`, run: () => UI().menuAt(at, [{icon: '⌂', label: 'La racine du site', run: () => this.moveFile(key, '')}, ...this.folders().map(d => ({icon: '📁', label: `${d}/`, disabled: t.file.path.startsWith(d + '/') && !t.file.path.slice(d.length + 1).includes('/'), run: () => this.moveFile(key, d)})), '-', {icon: '＋', label: 'Nouveau dossier…', run: async () => { await this.newFolder(); const d = [...(this.emptyFolders || [])].pop(); if (d) this.moveFile(key, d); }}], {title: `Déplacer ${t.name}`})}, '-');
+                items.push({icon: '📁', label: 'Déplacer vers…', help: i18n('aujourd’hui : {where}', {where: t.file.path.includes('/') ? t.file.path.slice(0, t.file.path.lastIndexOf('/')) + '/' : i18n('la racine')}), run: () => UI().menuAt(at, [{icon: '⌂', label: 'La racine du site', run: () => this.moveFile(key, '')}, ...this.folders().map(d => ({icon: '📁', label: `${d}/`, disabled: t.file.path.startsWith(d + '/') && !t.file.path.slice(d.length + 1).includes('/'), run: () => this.moveFile(key, d)})), '-', {icon: '＋', label: 'Nouveau dossier…', run: async () => { await this.newFolder(); const d = [...(this.emptyFolders || [])].pop(); if (d) this.moveFile(key, d); }}], {title: i18n('Déplacer {name}', {name: t.name})})}, '-');
                 Object.keys(FILE_KINDS).filter(k2 => k2 !== t.file.kind).forEach(k2 => items.push({icon: FILE_KINDS[k2].ico, label: `Changer en .${k2}`, run: () => this.renameFile(key, t.file.path.replace(/(\.[a-z0-9]+)?$/, `.${k2}`))}));
                 if (t.file.kind === 'css' || t.file.kind === 'js') items.push('-', {icon: '📄', label: 'Pages où il est lié…', help: t.file.pages.length ? plural(t.file.pages.length, 'page') : 'toutes les pages', run: () => this.filePagesDialog(t.file)});
                 items.push({icon: '⧉', label: 'Dupliquer', run: () => { const c = {...t.file, id: `f${newId().slice(1)}`, path: this.freePath(t.file.path), pages: [...t.file.pages]}; this.site.files.push(c); this.changed(true); this.openTab(`f:${c.id}`); this.paintLeft(); }});
             }
             if (t.page) items.push({icon: '⧉', label: 'Dupliquer la page', run: () => this.pageAction('dup', this.site.pages.indexOf(t.page))});
             items.push('-', {icon: '×', label: 'Fermer l’onglet', disabled: this.tabs.length < 2 || this.ftStyle !== 'tabs', run: () => this.closeTab(key)});
-            if (t.file) items.push({icon: '🗑', label: 'Supprimer le fichier', danger: true, run: () => { if (this.tabs.includes(key)) this.closeTab(key); if (this.codeTab === key) this.setCodeTab('html', true); this.site.files = this.site.files.filter(f => f !== t.file); this.changed(true); this.paintTabs(); this.paintLeft(); this.pushCss(); A().undoToast?.(`${t.file.path} supprimé`, {undo: () => this.undo()}); }});
+            if (t.file) items.push({icon: '🗑', label: 'Supprimer le fichier', danger: true, run: () => { if (this.tabs.includes(key)) this.closeTab(key); if (this.codeTab === key) this.setCodeTab('html', true); this.site.files = this.site.files.filter(f => f !== t.file); this.changed(true); this.paintTabs(); this.paintLeft(); this.pushCss(); A().undoToast?.(i18n('{x} supprimé', {x: t.file.path}), {undo: () => this.undo()}); }});
             if (t.page && this.site.pages.indexOf(t.page) > 0) items.push({icon: '🗑', label: 'Supprimer la page', danger: true, run: () => this.pageAction('del', this.site.pages.indexOf(t.page))});
             UI().menuAt(at, items, {title: t.file ? t.file.path : t.name});
         }
@@ -1396,9 +1400,9 @@
                     if (this.phpWant !== key) return;
                     const body = new DOMParser().parseFromString(String(r.html || ''), 'text/html').body;
                     this.phpOut = {slug, html: body ? body.innerHTML : '', errors: Array.isArray(r.errors) ? r.errors : []};
-                    this.phpNote(this.phpOut.errors.length ? `⚠️ PHP : ${this.phpOut.errors.slice(0, 2).join(' · ')}` : `🐘 PHP exécuté (${Math.round(Number(r.ms) || 0)} ms)`);
+                    this.phpNote(this.phpOut.errors.length ? `⚠️ PHP : ${this.phpOut.errors.slice(0, 2).join(' · ')}` : `🐘 ${i18n('PHP exécuté ({ms} ms)', {ms: Math.round(Number(r.ms) || 0)})}`);
                     this.reload();
-                } catch (e) { this.phpOff = /ordinateur|localhost/i.test(e.message); this.phpOut = null; this.phpNote(`🐘 ${e.message}${this.phpOff ? ' L’aperçu remplace seulement les include.' : ''}`); }
+                } catch (e) { this.phpOff = /ordinateur|localhost/i.test(e.message); this.phpOut = null; this.phpNote(`🐘 ${e.message}${this.phpOff ? ' ' + i18n('L’aperçu remplace seulement les include.') : ''}`); }
             }, 450);
         }
         phpNote(t) { this.phpMsg = t; const h = this.$('[data-sw-codehelp]'); if (h && this.codeTab === 'html' && this.isPhp()) h.textContent = t; }
@@ -1422,8 +1426,8 @@
             if (!this.code) return;
             const f = this.fileOf(tab), kind = f ? f.kind : tab === 'html' ? (this.isPhp() ? 'php' : 'html') : tab;
             this.code.setLang(codeLang(kind)); this.code.value = this.codeValue();
-            if (f) { this.$('[data-sw-codehelp]').textContent = {css: `${f.path} · lié après style.css${f.pages.length ? ` sur ${plural(f.pages.length, 'page')}` : ''} · clic droit sur l’onglet : ses pages`, js: `${f.path} · lié après script.js, tourne en ▶ Tester`, php: `${f.path} · à inclure dans une page PHP : <?php include '${f.path}'; ?>`, html: f.path, json: `${f.path} · données`, txt: f.path}[f.kind]; this.$('[data-sw-mqnav]').hidden = f.kind !== 'css'; if (!quiet) this.code.focus(); return; }
-            const help = {html: `${this.isPhp() ? `${this.phpMsg ? `${this.phpMsg} · ` : ''}PHP de « ${this.page().name} » · <?php include 'includes/entete.php'; ?> pour un en-tête commun · ` : ''}HTML de « ${this.page().name} » · Tab : Emmet (ul>li*3) · les blocs data-lc-block sont remplis tout seuls`, css: 'CSS de tout le site · Tab : m10 → margin: 10px; · les couleurs de 🎨 : var(--lc-principale)…', js: 'JS de tout le site · il tourne seulement en ▶ Tester, dans l’aperçu isolé, et dans le site exporté'};
+            if (f) { this.$('[data-sw-codehelp]').textContent = {css: `${f.path} · ${f.pages.length ? i18n('lié après style.css sur {what}', {what: plural(f.pages.length, 'page')}) : i18n('lié après style.css')} · ${i18n('clic droit sur l’onglet : ses pages')}`, js: `${f.path} · ${i18n('lié après script.js, tourne en ▶ Tester')}`, php: `${f.path} · ${i18n('à inclure dans une page PHP : {code}', {code: `<?php include '${f.path}'; ?>`})}`, html: f.path, json: `${f.path} · ${i18n('données')}`, txt: f.path}[f.kind]; this.$('[data-sw-mqnav]').hidden = f.kind !== 'css'; if (!quiet) this.code.focus(); return; }
+            const help = {html: `${this.isPhp() ? `${this.phpMsg ? `${this.phpMsg} · ` : ''}${i18n('PHP de « {name} » · {code} pour un en-tête commun', {name: this.page().name, code: "<?php include 'includes/entete.php'; ?>"})} · ` : ''}${i18n('HTML de « {name} » · Tab : Emmet (ul>li*3) · les blocs data-lc-block sont remplis tout seuls', {name: this.page().name})}`, css: i18n('CSS de tout le site · Tab : m10 → margin: 10px; · les couleurs de 🎨 : var(--lc-principale)…'), js: i18n('JS de tout le site · il tourne seulement en ▶ Tester, dans l’aperçu isolé, et dans le site exporté')};
             this.$('[data-sw-codehelp]').textContent = help[tab]; this.$('[data-sw-mqnav]').hidden = tab !== 'css';
             if (!quiet) this.code.focus();
         }
@@ -1432,7 +1436,7 @@
             const css = this.site.css, medias = CODE().cssScan(css).medias, bps = this.bps().slice(1);
             const go = (a, b) => { this.code.reveal(a, b); };
             const items = medias.map(m => { const b = bps.find(x => normMq(x.query) === m.query); const n = CODE().cssScan(css).rules.filter(r => r.start > m.open && r.close < m.close).length;
-                return {icon: b ? b.icon : '@', label: `${b ? b.name + ' · ' : ''}@media ${m.query}`, help: plural(n, 'règle'), run: () => go(m.start, m.open)}; });
+                return {icon: b ? b.icon : '@', label: `${b ? i18n(b.name) + ' · ' : ''}@media ${m.query}`, help: plural(n, 'règle'), run: () => go(m.start, m.open)}; });
             const missing = bps.filter(b => !medias.some(m => m.query === normMq(b.query)));
             UI().menuAt(btn, [...(items.length ? items : [{label: 'Pas encore de bloc @media', disabled: true}]), '-',
                 ...missing.map(b => ({icon: '＋', label: `Ajouter @media pour ${b.icon} ${b.name}`, run: () => { const v = `${this.site.css.replace(/\s*$/, '')}\n\n@media ${b.query} {\n  \n}\n`; this.site.css = v; this.code.value = v; this.pushCss(); this.changed(true); const at = v.lastIndexOf('{\n  \n}') + 4; this.code.reveal(at, at); }})),
@@ -1487,14 +1491,14 @@
             this.quickSels = sels; const box = this.$('[data-sw-quick]'); this.quickEds = [];
             const re = sels.map(x => new RegExp(`(^|[^\\w-])${x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?![\\w-])`));
             const found = []; this.cssSources().forEach(src => CODE().cssScan(src.text).rules.forEach(r => { if (re.some(x => x.test(r.sel))) found.push({...src, start: r.start, end: r.close + 1, media: r.media, line: src.text.slice(0, r.start).split('\n').length}); }));
-            box.innerHTML = `<div class="sw-quickhead"><b>🎨 CSS de ${sels.map(x => `<code>${esc(x)}</code>`).join(' ')}</b><small class="sw-hint">${found.length ? plural(found.length, 'règle') : 'aucune règle'} · modifie ici, le fichier suit</small><span class="spacer"></span>${sels.map(x => `<button type="button" class="button small secondary" data-sw-quicknew="${esc(x)}">＋ Règle ${esc(x)}</button>`).join('')}<button type="button" class="sw-fbtn" data-sw-quickx title="Fermer (Échap)" aria-label="Fermer">×</button></div>
-                <div class="sw-quicklist">${found.map((f, i) => `<div class="sw-quickrule"><div class="sw-quickwhere">${esc(f.name)} · ligne ${f.line}${f.media ? ` · <code>@media ${esc(f.media)}</code>` : ''}<button type="button" class="sw-linkbtn" data-sw-quickgo="${esc(f.key)}|${f.start}">↗ Ouvrir là</button></div><div class="sw-quickhost" data-sw-quickhost="${i}"></div></div>`).join('') || '<p class="sw-hint" style="padding:8px 10px">Pas encore de règle pour ça : « ＋ Règle » en crée une à la fin de style.css.</p>'}</div>`;
+            box.innerHTML = `<div class="sw-quickhead"><b>${i18n('🎨 CSS de {what}', {what: sels.map(x => `<code>${esc(x)}</code>`).join(' ')})}</b><small class="sw-hint">${found.length ? plural(found.length, 'règle') : i18n('aucune règle')} · ${i18n('modifie ici, le fichier suit')}</small><span class="spacer"></span>${sels.map(x => `<button type="button" class="button small secondary" data-sw-quicknew="${esc(x)}">${i18n('＋ Règle {sel}', {sel: esc(x)})}</button>`).join('')}<button type="button" class="sw-fbtn" data-sw-quickx title="Fermer (Échap)" aria-label="Fermer">×</button></div>
+                <div class="sw-quicklist">${found.map((f, i) => `<div class="sw-quickrule"><div class="sw-quickwhere">${esc(f.name)} · ${i18n('ligne {n}', {n: String(f.line)})}${f.media ? ` · <code>@media ${esc(f.media)}</code>` : ''}<button type="button" class="sw-linkbtn" data-sw-quickgo="${esc(f.key)}|${f.start}">↗ Ouvrir là</button></div><div class="sw-quickhost" data-sw-quickhost="${i}"></div></div>`).join('') || '<p class="sw-hint" style="padding:8px 10px">Pas encore de règle pour ça : « ＋ Règle » en crée une à la fin de style.css.</p>'}</div>`;
             box.hidden = false;
             found.forEach((f, i) => {
                 const host = box.querySelector(`[data-sw-quickhost="${i}"]`), text = f.text.slice(f.start, f.end);
                 host.style.height = `${Math.min(240, (text.split('\n').length + 1) * 20 + 24)}px`;
                 const ed = {f, code: null}; this.quickEds.push(ed);
-                ed.code = CODE().create(host, {lang: 'css', value: text, label: `Règle ${i + 1}`, onChange: v => {
+                ed.code = CODE().create(host, {lang: 'css', value: text, label: i18n('Règle {n}', {n: String(i + 1)}), onChange: v => {
                     const src = this.valueOf(f.key), delta = v.length - (f.end - f.start), next = src.slice(0, f.start) + v + src.slice(f.end);
                     this.quickEds.forEach(o => { if (o !== ed && o.f.key === f.key && o.f.start > f.start) { o.f.start += delta; o.f.end += delta; } });
                     f.end += delta; this.applyChange(f.key, next, 0);
@@ -1590,22 +1594,22 @@
                 if (!asNew) {
                     const first = !this.id; this.id = id; this.rev = res.rev || ''; this.dirty = false; UI()?.savedStatus?.(this.dlg, 'saved');
                     if (res.data && JSON.stringify(res.data.pages.map(p => p.html)) !== JSON.stringify(this.site.pages.map(p => p.html))) { this.site = normalizeSite({...this.site, ...res.data}); this.afterRestore(); this.dirty = false; UI()?.savedStatus?.(this.dlg, 'saved'); }
-                    if (res.removed) toast(`${plural(res.removed, 'chose')} retirée${res.removed > 1 ? 's' : ''} du HTML (scripts, cadres, attributs on…, liens javascript:) : mets ton JavaScript dans l’onglet JS.`, 'warning');
+                    if (res.removed) toast(i18n('{what} du HTML (scripts, cadres, attributs on…, liens javascript:) : mets ton JavaScript dans l’onglet JS.', {what: plural(res.removed, 'chose retirée', 'choses retirées')}), 'warning');
                     else if (first && !quiet) toast('Rangé dans Listes → 🛠️ Outils de modification → 🌐 Mon site web.');
-                } else { UI()?.savedStatus?.(this.dlg, this.dirty ? 'dirty' : 'saved'); toast(`Copie « ${name} » enregistrée.`); }
+                } else { UI()?.savedStatus?.(this.dlg, this.dirty ? 'dirty' : 'saved'); toast(i18n('Copie « {name} » enregistrée.', {name})); }
                 this.ctx.onSaved?.(this.id);
                 return id;
             } catch (e) {
                 UI()?.savedStatus?.(this.dlg, 'error');
                 if (/modifié ailleurs/.test(e.message || '')) { if (await A().confirmBox('Une autre fenêtre a enregistré ce site entre-temps. Garder ta version effacera la sienne.', {title: 'Site modifié ailleurs', okLabel: 'Garder ma version', danger: true})) return this._saveNow({asNew, name, quiet, force: true}); return 0; }
-                toast(`Impossible d’enregistrer : ${e.message}`, 'error', {retry: () => this.save({asNew, name})}); return 0;
+                toast(i18n('Impossible d’enregistrer : {err}', {err: e.message}), 'error', {retry: () => this.save({asNew, name})}); return 0;
             }
         }
         async ensureSaved() { if (this.id && !this.dirty) return true; return !!await this.save({quiet: true}); }
-        saveAs() { A().askText({title: '⧉ Enregistrer une copie', message: 'Le nom de la copie :', value: `${this.name} (copie)`, okLabel: 'Enregistrer'}).then(n => { n = String(n || '').trim(); if (n) this.save({asNew: true, name: n.slice(0, 200)}); }); }
+        saveAs() { A().askText({title: '⧉ Enregistrer une copie', message: 'Le nom de la copie :', value: i18n('{name} (copie)', {name: this.name}), okLabel: 'Enregistrer'}).then(n => { n = String(n || '').trim(); if (n) this.save({asNew: true, name: n.slice(0, 200)}); }); }
         async saveVersion() {
             if (!await this.ensureSaved()) return;
-            const label = await A().askText({title: '🕘 Nouvelle version', message: 'Un nom pour cette version (facultatif) :', value: `Version du ${new Date().toLocaleDateString('fr-FR')}`, okLabel: 'Enregistrer'}); if (label === null) return;
+            const label = await A().askText({title: '🕘 Nouvelle version', message: 'Un nom pour cette version (facultatif) :', value: i18n('Version du {date}', {date: new Date().toLocaleDateString(window.LCNDA_I18N?.locale?.() || 'fr-FR')}), okLabel: 'Enregistrer'}); if (label === null) return;
             try { await post('save_website_version', {site_id: this.id, label: String(label || '').trim().slice(0, 120), data: this.site}); toast('Version enregistrée (Fichier → 🕘 Versions…).', 'success'); } catch (e) { toast(e.message, 'error'); }
         }
         /** L3 — la fenêtre commune « 🕘 Versions » (app-versions.js) : aperçu de l'accueil (page isolée, sans script), comparaison des textes */
@@ -1619,12 +1623,12 @@
             const pagesOf = d => plural((normalizeSite(d).pages || []).length, 'page');
             return U.openVersions({title: this.name || 'Mon site', tool: 'Mon site web', kind: 'site',
                 list: async () => ((await api('website_versions', {site_id: this.id})).items || []).map(v => ({...v, auto: !!v.auto, infoAsync: async () => pagesOf((await get(v.id)).data)})),
-                now: () => ({info: pagesOf(this.site), hint: 'le site à l’écran'}),
+                now: () => ({info: pagesOf(this.site), hint: i18n('le site à l’écran')}),
                 preview: async v => look(v ? (await get(v.id)).data : this.site),
                 keepNow: label => post('save_website_version', {site_id: this.id, label, data: this.site, auto: 1}),
                 restore: async v => { const x = await get(v.id); this.hist.commit(); this.site = normalizeSite(x.data); this.pageIdx = 0; this.sel = null; this.afterRestore(); this.hist.commit(); return {undo: () => this.undo(), redo: () => this.redo()}; },
                 rename: (v, label) => post('rename_website_version', {id: v.id, label}),
-                copy: async v => { const x = await get(v.id); const r = await post('save_website', {name: `${this.name} — ${v.label}`.slice(0, 200), data: x.data}); void r; toast(`Copie enregistrée : « ${this.name} — ${v.label} » (Mes sites…).`, 'success'); },
+                copy: async v => { const x = await get(v.id); const r = await post('save_website', {name: `${this.name} — ${v.label}`.slice(0, 200), data: x.data}); void r; toast(i18n('Copie enregistrée : « {name} » (Mes sites…).', {name: `${this.name} — ${v.label}`}), 'success'); },
                 exportOne: async v => { const x = await get(v.id); const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify({format: 'lcnda-site', version: 1, name: `${this.name} — ${v.label}`, data: x.data})], {type: 'application/json'})); a.download = `${(A().safeExportFilename ? A().safeExportFilename(`${this.name} — ${v.label}`, 'site') : 'site')}.json`; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); },
                 remove: async v => { const r = await post('delete_website_version', {id: v.id}); full.delete(v.id); return {undo: () => post('restore_website_version', {version: (r.result || r).version})}; },
                 saveNow: () => this.saveVersion()});
@@ -1643,17 +1647,17 @@
             const blob = await r.blob(), a = document.createElement('a');
             a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click();
             setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 4000);
-            toast(format === 'zip' ? `Site prêt : ${name}. Décompresse-le et ouvre index.html (ou pose le dossier dans MAMP, WAMP, chez ton hébergeur) : le mode d’emploi est dans LISEZ-MOI.html.` : `Page prête : ${name} (tout est dedans, à ouvrir d’un double-clic).`, 'success');
+            toast(format === 'zip' ? i18n('Site prêt : {name}. Décompresse-le et ouvre index.html (ou pose le dossier dans MAMP, WAMP, chez ton hébergeur) : le mode d’emploi est dans LISEZ-MOI.html.', {name}) : i18n('Page prête : {name} (tout est dedans, à ouvrir d’un double-clic).', {name}), 'success');
         }
         async exportDialog() {
             if (!await this.ensureSaved()) return;
             let s = {}; try { s = (await api('website_export_check', {id: this.id})).summary || {}; } catch (e) { return toast(e.message, 'error'); }
-            const bits = [plural(s.pages || 0, 'page'), plural(s.images || 0, 'image') + ' réduite' + ((s.images || 0) > 1 ? 's' : '') + ' (sans GPS ni appareil)'];
-            if (s.refused) bits.push(`⚠️ ${plural(s.refused, 'image')} pas mise${s.refused > 1 ? 's' : ''} (une personne vivante ou confidentielle dessus${s.refused_titles?.length ? ' : ' + s.refused_titles.join(', ') : ''})`);
-            if (s.names) bits.push(`⚠️ ${plural(s.names, 'nom')} de personne vivante remplacé${s.names > 1 ? 's' : ''} par « [nom retiré] »`);
-            if (s.broken) bits.push(`⚠️ ${plural(s.broken, 'lien')} vers une page qui n’existe plus`);
-            if (s.missing) bits.push(`${plural(s.missing, 'image')} introuvable${s.missing > 1 ? 's' : ''} dans tes médias`);
-            await UI().openExportDialog({title: 'Exporter le site', defaultName: `${this.name}-${new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 10)}`, quality: false, info: bits.join(' · ') + '. Le site a sa politique de sécurité (CSP) : ses scripts viennent seulement de ses fichiers.',
+            const bits = [plural(s.pages || 0, 'page'), i18n('{what} (sans GPS ni appareil)', {what: plural(s.images || 0, 'image réduite', 'images réduites')})];
+            if (s.refused) bits.push(`⚠️ ${s.refused_titles?.length ? i18n('{what} (une personne vivante ou confidentielle dessus : {list})', {what: plural(s.refused, 'image pas mise', 'images pas mises'), list: s.refused_titles.join(', ')}) : i18n('{what} (une personne vivante ou confidentielle dessus)', {what: plural(s.refused, 'image pas mise', 'images pas mises')})}`);
+            if (s.names) bits.push(`⚠️ ${i18n('{what} par « [nom retiré] »', {what: plural(s.names, 'nom de personne vivante remplacé', 'noms de personnes vivantes remplacés')})}`);
+            if (s.broken) bits.push(`⚠️ ${i18n('{what} vers une page qui n’existe plus', {what: plural(s.broken, 'lien')})}`);
+            if (s.missing) bits.push(i18n('{what} dans tes médias', {what: plural(s.missing, 'image introuvable', 'images introuvables')}));
+            await UI().openExportDialog({title: 'Exporter le site', defaultName: `${this.name}-${new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 10)}`, quality: false, info: bits.join(' · ') + '. ' + i18n('Le site a sa politique de sécurité (CSP) : ses scripts viennent seulement de ses fichiers.'),
                 formats: [{id: 'zip', label: '📦 Tout le site en .zip', hint: 'à ouvrir partout : double-clic, MAMP, WAMP, hébergeur', ext: 'zip', run: o => this.download('zip', o?.filename), goLabel: '⤓ Exporter tout le site (.zip)'},
                     {id: 'html', label: '🌐 Cette page seule', hint: 'un seul fichier .html', ext: 'html', run: o => this.download('html', o?.filename), goLabel: '⤓ Exporter la page (.html)'}]});
         }
@@ -1664,20 +1668,20 @@
             const U = UI(), last = ['netlify', 'github', 'ftps'].includes(pref('publish', '')) ? pref('publish', '') : (st.site.last || 'netlify');
             const kept = has => (has ? 'Jeton gardé sur cet ordinateur (laisse vide pour le garder)' : 'Colle ton jeton ici');
             const tabs = [['netlify', 'Netlify'], ['github', 'GitHub Pages'], ...(st.ftps.available ? [['ftps', 'FTP sécurisé']] : [])];
-            const where = st.site.netlify_url || st.site.github_url ? `<p class="sw-hint">Déjà en ligne : ${[st.site.netlify_url, st.site.github_url].filter(Boolean).map(u => `<a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(u)}</a>`).join(' · ')}</p>` : '';
+            const where = st.site.netlify_url || st.site.github_url ? `<p class="sw-hint">${i18n('Déjà en ligne :')} ${[st.site.netlify_url, st.site.github_url].filter(Boolean).map(u => `<a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(u)}</a>`).join(' · ')}</p>` : '';
             const body = `${U.notice('info', 'Ton site est envoyé tel qu’à l’export (.zip) : sans personne vivante ni fiche confidentielle. Le jeton ou le mot de passe reste sur cet ordinateur : il n’est jamais montré, ni mis dans une sauvegarde ou dans le site.')}${where}
                 <div class="segmented sw-pubtabs" role="tablist">${tabs.map(([k, l]) => `<button type="button" data-pub-tab="${k}">${esc(l)}</button>`).join('')}</div>
                 <div class="form-grid one-column" data-pub-pane="netlify"><p class="sw-hint">Netlify héberge ton site gratuitement, à une adresse en …netlify.app. 1. Crée un compte sur netlify.com. 2. Dans « User settings → Applications → Personal access tokens », crée un jeton (« New access token »). 3. Colle-le ici.</p>
-                    <label>Jeton Netlify<input type="password" name="token_netlify" autocomplete="off" spellcheck="false" placeholder="${esc(kept(st.netlify.has_token))}"></label>${st.netlify.has_token ? '<button type="button" class="button small secondary" data-pub-forget="netlify">× Oublier le jeton Netlify</button>' : ''}</div>
+                    <label>${i18n('Jeton Netlify')}<input type="password" name="token_netlify" autocomplete="off" spellcheck="false" placeholder="${esc(kept(st.netlify.has_token))}"></label>${st.netlify.has_token ? '<button type="button" class="button small secondary" data-pub-forget="netlify">× Oublier le jeton Netlify</button>' : ''}</div>
                 <div class="form-grid one-column" data-pub-pane="github"><p class="sw-hint">GitHub Pages met ton site à l’adresse « ton-compte.github.io/nom-du-depot ». Crée un jeton dans GitHub → Settings → Developer settings → « Fine-grained tokens », avec les droits « Contents » et « Pages » en lecture et écriture (et « Administration » si le dépôt n’existe pas encore).</p>
-                    <label>Jeton GitHub<input type="password" name="token_github" autocomplete="off" spellcheck="false" placeholder="${esc(kept(st.github.has_token))}"></label>
-                    <label>Dépôt<input type="text" name="repo" maxlength="140" spellcheck="false" value="${esc(st.site.github_repo || slugOf(this.name))}" placeholder="mon-site (ou compte/mon-site)"></label>${st.github.has_token ? '<button type="button" class="button small secondary" data-pub-forget="github">× Oublier le jeton GitHub</button>' : ''}</div>
+                    <label>${i18n('Jeton GitHub')}<input type="password" name="token_github" autocomplete="off" spellcheck="false" placeholder="${esc(kept(st.github.has_token))}"></label>
+                    <label>${i18n('Dépôt')}<input type="text" name="repo" maxlength="140" spellcheck="false" value="${esc(st.site.github_repo || slugOf(this.name))}" placeholder="mon-site (ou compte/mon-site)"></label>${st.github.has_token ? '<button type="button" class="button small secondary" data-pub-forget="github">× Oublier le jeton GitHub</button>' : ''}</div>
                 ${st.ftps.available ? `<div class="form-grid one-column" data-pub-pane="ftps"><p class="sw-hint">Ton hébergeur (OVH, o2switch, Infomaniak…) te donne un serveur FTP. La connexion est toujours chiffrée (FTPS) et son certificat vérifié : un serveur sans chiffrement est refusé.</p>
-                    <label>Serveur<input type="text" name="host" maxlength="253" spellcheck="false" value="${esc(st.ftps.host)}" placeholder="ftp.mon-hebergeur.fr"></label>
-                    <label>Port<input type="number" name="port" min="1" max="65535" value="${Number(st.ftps.port) || 21}"></label>
-                    <label>Identifiant<input type="text" name="user" maxlength="120" spellcheck="false" autocomplete="off" value="${esc(st.ftps.user)}"></label>
-                    <label>Mot de passe<input type="password" name="pass" autocomplete="off" placeholder="${st.ftps.has_password ? 'Gardé sur cet ordinateur (laisse vide pour le garder)' : ''}"></label>
-                    <label>Dossier du site sur le serveur<input type="text" name="dir" maxlength="200" spellcheck="false" value="${esc(st.ftps.dir || '/www/')}"></label>${st.ftps.has ? '<button type="button" class="button small secondary" data-pub-forget="ftps">× Oublier cet accès FTP</button>' : ''}</div>` : '<p class="sw-hint">FTP sécurisé : pas disponible avec le PHP de cet ordinateur.</p>'}
+                    <label>${i18n('Serveur')}<input type="text" name="host" maxlength="253" spellcheck="false" value="${esc(st.ftps.host)}" placeholder="ftp.mon-hebergeur.fr"></label>
+                    <label>${i18n('Port')}<input type="number" name="port" min="1" max="65535" value="${Number(st.ftps.port) || 21}"></label>
+                    <label>${i18n('Identifiant')}<input type="text" name="user" maxlength="120" spellcheck="false" autocomplete="off" value="${esc(st.ftps.user)}"></label>
+                    <label>${i18n('Mot de passe')}<input type="password" name="pass" autocomplete="off" placeholder="${st.ftps.has_password ? 'Gardé sur cet ordinateur (laisse vide pour le garder)' : ''}"></label>
+                    <label>${i18n('Dossier du site sur le serveur')}<input type="text" name="dir" maxlength="200" spellcheck="false" value="${esc(st.ftps.dir || '/www/')}"></label>${st.ftps.has ? '<button type="button" class="button small secondary" data-pub-forget="ftps">× Oublier cet accès FTP</button>' : ''}</div>` : '<p class="sw-hint">FTP sécurisé : pas disponible avec le PHP de cet ordinateur.</p>'}
                 <div data-pub-out></div>`;
             let tab = last;
             ext.openDialog({eyebrow: 'MON SITE WEB', title: '📤 Publier en ligne', wide: true, submitLabel: '📤 Publier le site', body,
@@ -1707,8 +1711,8 @@
                     try {
                         const r = await post('website_publish', body2), res = r.result || r;
                         ['token_netlify', 'token_github', 'pass'].forEach(n => { if (form.elements[n]) form.elements[n].value = ''; });
-                        out.innerHTML = U.notice('ok', res.url ? `Ton site est en ligne (${res.files} fichiers). Il peut falloir une minute avant qu’il s’affiche.` : `Ton site est envoyé (${res.files} fichiers).`) + (res.url ? `<p><a class="button small" href="${esc(res.url)}" target="_blank" rel="noopener noreferrer">↗ Ouvrir ${esc(res.url)}</a></p>` : '');
-                        const cancel = form.querySelector('.modal-actions [data-h-close]'); if (cancel) cancel.textContent = 'Fermer';
+                        out.innerHTML = U.notice('ok', res.url ? i18n('Ton site est en ligne ({n} fichiers). Il peut falloir une minute avant qu’il s’affiche.', {n: res.files}) : i18n('Ton site est envoyé ({n} fichiers).', {n: res.files})) + (res.url ? `<p><a class="button small" href="${esc(res.url)}" target="_blank" rel="noopener noreferrer">${i18n('↗ Ouvrir {url}', {url: esc(res.url)})}</a></p>` : '');
+                        const cancel = form.querySelector('.modal-actions [data-h-close]'); if (cancel) cancel.textContent = i18n('Fermer');
                         toast('📤 Site publié.', 'success');
                     } catch (e) {
                         out.innerHTML = U.notice('error', e.message);
@@ -1738,8 +1742,8 @@
         const i = document.createElement('input'); i.type = 'file'; if (accept) i.accept = accept; i.multiple = multiple || folder; if (folder) { i.webkitdirectory = true; i.setAttribute('webkitdirectory', ''); }
         i.addEventListener('change', () => res([...(i.files || [])])); i.addEventListener('cancel', () => res([])); i.click();
     });
-    const readData = file => new Promise((res, no) => { if (file.size > 750000) return no(new Error(`« ${file.name} » est trop lourde (750 Ko au plus pour une image du site ; les photos de ta généalogie passent par ＋ Blocs → Image).`)); const r = new FileReader(); r.onload = () => res(String(r.result)); r.onerror = () => no(new Error(`« ${file.name} » illisible.`)); r.readAsDataURL(file); });
-    const readText = file => new Promise((res, no) => { const r = new FileReader(); r.onload = () => res(String(r.result)); r.onerror = () => no(new Error(`« ${file.name} » illisible.`)); r.readAsText(file); });
+    const readData = file => new Promise((res, no) => { if (file.size > 750000) return no(new Error(`« ${file.name} » est trop lourde (750 Ko au plus pour une image du site ; les photos de ta généalogie passent par ＋ Blocs → Image).`)); const r = new FileReader(); r.onload = () => res(String(r.result)); r.onerror = () => no(new Error(i18n('« {name} » illisible.', {name: file.name}))); r.readAsDataURL(file); });
+    const readText = file => new Promise((res, no) => { const r = new FileReader(); r.onload = () => res(String(r.result)); r.onerror = () => no(new Error(i18n('« {name} » illisible.', {name: file.name}))); r.readAsText(file); });
     /** 📂 Ouvrir un dossier : un site déjà fait (pages .html / .php, CSS, JS, morceaux PHP, images) devient un site de l'app.
      *  Les pages à la racine deviennent des pages ; le reste devient des fichiers du site, à leur chemin. Rien n'est envoyé ailleurs. */
     async function importFolder(ctx = {}, given = null) {
@@ -1792,7 +1796,7 @@
         const b = blankSite();
         const data = {...b, settings: {...b.settings, title: pages[0].title || folderName, tpl: 'import'}, css: css ?? '', js: js ?? '', pages: pages.map(({home, base, ...x}) => ({...x, id: newId()})), files: files.map(f => ({...f, id: `f${newId().slice(1)}`}))};
         const ed = await openSite({...ctx, data, name: folderName});
-        toast(`📂 « ${folderName} » : ${plural(pages.length, 'page')}, ${plural(files.length + (css !== null) + (js !== null), 'fichier')}${skipped.length ? ` ; laissé de côté : ${skipped.slice(0, 4).join(', ')}${skipped.length > 4 ? '…' : ''}` : ''}. Enregistre (💾) pour le garder.`, skipped.length ? 'info' : 'success');
+        toast(`📂 ${skipped.length ? i18n('« {name} » : {pages}, {files} ; laissé de côté : {list}. Enregistre (💾) pour le garder.', {name: folderName, pages: plural(pages.length, 'page'), files: plural(files.length + (css !== null) + (js !== null), 'fichier'), list: skipped.slice(0, 4).join(', ') + (skipped.length > 4 ? '…' : '')}) : i18n('« {name} » : {pages}, {files}. Enregistre (💾) pour le garder.', {name: folderName, pages: plural(pages.length, 'page'), files: plural(files.length + (css !== null) + (js !== null), 'fichier')})}`, skipped.length ? 'info' : 'success');
         return ed;
     }
     async function chooseTemplate(ctx = {}) {

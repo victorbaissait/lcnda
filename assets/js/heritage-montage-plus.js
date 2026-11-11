@@ -13,6 +13,7 @@
  */
 (function (root) {
     'use strict';
+    const i18n = (s, v) => (typeof window !== 'undefined' && window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : (v ? String(s).replace(/\{(\w+)\}/g, (m, k) => (k in v ? String(v[k]) : m)) : s)); // 🌐 traduction (docs/I18N.md)
     const ext = root.LCNDA_EXT = root.LCNDA_EXT || {};
 
     /* ═════════ 📢 La sonie intégrée (LUFS), selon UIT-R BS.1770-4 ═════════ */
@@ -231,7 +232,7 @@
         return pts.map(([x, y], i) => ({t: times[i], fx: x / W, fy: y / H}));
     }
     const trackHtml = c => `<details class="h-mt-isec h-mt-trk" ${c.track?.length ? 'open' : ''}><summary><b>🎯 Suivre ce qui bouge</b></summary><p class="muted">L’élément suit un point de la vidéo de la piste 1 (un visage, une voiture, un bateau) : clique « Choisir le point », puis sur ce point dans l’image.</p>
-        <div class="h-mt-quick"><button type="button" data-mt-trk="pick">🎯 Choisir le point à suivre</button>${c.track?.length ? '<button type="button" data-mt-trk="off">✕ Ne plus suivre</button>' : ''}</div>${c.track?.length ? `<p class="muted">Suivi sur ${c.track.length} positions.</p>` : ''}</details>`;
+        <div class="h-mt-quick"><button type="button" data-mt-trk="pick">🎯 Choisir le point à suivre</button>${c.track?.length ? '<button type="button" data-mt-trk="off">✕ Ne plus suivre</button>' : ''}</div>${c.track?.length ? `<p class="muted">${i18n('Suivi sur {n} positions.', {n: c.track.length})}</p>` : ''}</details>`;
     ext.montageTrack = {trackAt, trackPoints, trackVideo, html: trackHtml};
 
     /* ═════════ 🎥 Plusieurs caméras : synchronisées par le son, puis montées en passant de l'une à l'autre ═════════ */

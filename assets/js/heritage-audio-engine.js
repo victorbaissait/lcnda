@@ -15,6 +15,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (typeof window !== 'undefined' && window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : (v ? String(s).replace(/\{(\w+)\}/g, (m, k) => (k in v ? String(v[k]) : m)) : s)); // 🌐 traduction (docs/I18N.md)
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     if (ext.audioEngine) return;
     const E = ext.audioEngine = {};

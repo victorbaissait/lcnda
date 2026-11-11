@@ -850,7 +850,7 @@
     /** C8 — helpTip(text, faqQuestion) → le petit bouton « ? » */
     UI.helpTip = (text = '', faqQuestion = '') => {
         const b = h('button', 'ui-help', '?'); b.type = 'button'; b.dataset.text = text; if (faqQuestion) b.dataset.faq = faqQuestion;
-        b.title = 'Aide'; b.setAttribute('aria-label', `Aide : ${text}`);
+        b.title = i18n('Aide'); b.setAttribute('aria-label', i18n('Aide : {text}', {text: i18n(text)}));
         b.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); showHelp(b); });
         return b;
     };

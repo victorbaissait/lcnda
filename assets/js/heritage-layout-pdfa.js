@@ -91,7 +91,7 @@ ${author ? `<dc:creator><rdf:Seq><rdf:li>${xmlEsc(author)}</rdf:li></rdf:Seq></d
     const fontsCss = () => { let s = ''; for (const sh of document.styleSheets) { try { for (const r of sh.cssRules) if (r.type === CSSRule.FONT_FACE_RULE && /url\((['"]?)data:/.test(r.cssText)) s += r.cssText; } catch (_) {} } return s; };
     /** doc : le document (déjà résolu ou non) ; rend un Blob application/pdf */
     async function fromDoc(doc0, name, {dpi = 200, quality = 0.9, onStep} = {}) {
-        const K = ext.layoutKit; if (!K?.pageHtml) throw new Error('la mise en page n’est pas chargée');
+        const K = ext.layoutKit; if (!K?.pageHtml) throw new Error(window.LCNDA_I18N ? window.LCNDA_I18N.t('la mise en page n’est pas chargée') : 'la mise en page n’est pas chargée');
         const doc = K.resolveDoc(doc0), css = K.BASE_CSS + K.docCss(doc, '.lyfo') + fontsCss() + '.lyfo .ly-page{margin:0;box-shadow:none}', cache = new Map(), pages = [], k = dpi / 96;
         for (let i = 0; i < doc.pages.length; i++) {
             onStep?.(i / doc.pages.length);
@@ -101,7 +101,7 @@ ${author ? `<dc:creator><rdf:Seq><rdf:li>${xmlEsc(author)}</rdf:li></rdf:Seq></d
             const st = document.createElement('style'); st.textContent = css; wrap.prepend(st);
             const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}"><foreignObject x="0" y="0" width="${W}" height="${H}">${new XMLSerializer().serializeToString(wrap)}</foreignObject></svg>`;
             const img = new Image(); img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
-            try { await img.decode(); } catch (_) { throw new Error(`la page ${i + 1} n’a pas pu être dessinée`); }
+            try { await img.decode(); } catch (_) { throw new Error(window.LCNDA_I18N ? window.LCNDA_I18N.t('la page {n} n’a pas pu être dessinée', {n: String(i + 1)}) : 'la page ' + (i + 1) + ' n’a pas pu être dessinée'); }
             const cv = document.createElement('canvas'); cv.width = Math.round(W * k); cv.height = Math.round(H * k);
             const g = cv.getContext('2d'); g.fillStyle = '#fff'; g.fillRect(0, 0, cv.width, cv.height); g.drawImage(img, 0, 0, cv.width, cv.height);
             const blob = await new Promise(res => cv.toBlob(res, 'image/jpeg', quality)); if (!blob) throw new Error('image trop grande');

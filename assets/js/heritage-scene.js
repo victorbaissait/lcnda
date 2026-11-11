@@ -16,6 +16,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (typeof window !== 'undefined' && window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : (v ? String(s).replace(/\{(\w+)\}/g, (m, k) => (k in v ? String(v[k]) : m)) : s)); // 🌐 traduction (docs/I18N.md)
     const ART = window.LCNDA_ART; if (!ART?.define) return;
     const A = () => window.LCNDA_APP, P = () => window.LCNDA_PICKER || window.LCNDA_APP, ext = () => window.LCNDA_EXT || {};
     const U = ART.util, esc = U.esc, T = ART.ft;
@@ -159,7 +160,7 @@
             if (r.t === 'medley') notes.push('en medley avec le précédent');
             if (r.with) notes.push(`avec ${esc(r.with)}`);
             if (ART.normPeople(r.guests).length) notes.push('invité' + (ART.normPeople(r.guests).length > 1 ? 's' : ''));
-            if (r.dedic) notes.push(`dédié à ${U.personChip(r.dedic, '', ctx)}`);
+            if (r.dedic) notes.push(i18n('dédié à {who}', {who: U.personChip(r.dedic, '', ctx)}));
             if (r.unfinished) notes.push('<span class="ar-badge w">inachevé</span>');
             if (r.dur) notes.push(`<small class="ar-g">${esc(r.dur)}</small>`);
             if (r.at) notes.push(`<small class="ar-g">à ${esc(r.at)} de la captation</small>`);
@@ -183,7 +184,7 @@
     SC.slCount = slCount;
     ART.views.setlist = {
         read: (ctx, it) => { const g = SC.genreOf(it), rows = SC.rowsOf(it), mine = it.id && (!it.person_id || it.person_id === ctx.store.pid);
-            if (!rows.length) return `<div class="sc-sl-empty">${A().emptyState ? A().emptyState({icon: '📋', text: `Pas encore de ${g.list.toLowerCase()} pour ce soir`, hint: 'Note les titres dans l’ordre, avec les rappels, les reprises, les invités… ou copie la setlist d’un autre soir.', ...(mine ? {action: {label: `＋ ${g.add}`, attrs: 'data-sl-addread'}} : {})}) : ''}</div>`;
+            if (!rows.length) return `<div class="sc-sl-empty">${A().emptyState ? A().emptyState({icon: '📋', text: i18n('Pas encore de {what} pour ce soir', {what: i18n(g.list).toLowerCase()}), hint: i18n('Note les titres dans l’ordre, avec les rappels, les reprises, les invités… ou copie la setlist d’un autre soir.'), ...(mine ? {action: {label: `＋ ${i18n(g.add)}`, attrs: 'data-sl-addread'}} : {})}) : ''}</div>`;
             return `${setlistHtml(ctx, it)}<p class="ar-note">Survole un titre : combien de fois il a été joué, la 1re et la dernière fois (d’après tes fiches). Un titre sans fiche : « ＋ fiche » la crée.</p>`; },
         meta: (ctx, it) => { const c = slCount(it), g = SC.genreOf(it); return c.songs || c.enc ? esc([plural(c.songs + c.enc, g.item, g.items), c.enc && plural(c.enc, 'rappel')].filter(Boolean).join(' · ')) : ''; },
         actions: (ctx, it) => it.id && (!it.person_id || it.person_id === ctx.store.pid) ? `<button type="button" class="button small secondary" data-sl-addread>＋ ${esc(SC.genreOf(it).add)}</button><button type="button" class="button small secondary" data-sl-copy>📋 Copier la setlist d’un autre soir</button>` : '',
@@ -204,7 +205,7 @@
     ART.views.sc_press = {read: (ctx, it, f, v) => (Array.isArray(v) ? v : []).map(r => `<div class="sc-press"><span class="ar-ochip"><i>📰</i>${esc([r.paper, r.date].filter(Boolean).join(', ') || 'Article')}</span>${r.tone ? ` <span class="sc-tone ${esc(r.tone)}" title="${esc({pos: 'critique positive', neu: 'neutre', neg: 'critique négative'}[r.tone] || '')}">${{pos: '+', neu: '=', neg: '−'}[r.tone] || ''}</span>` : ''}${r.title ? ` <small class="ar-g">${esc(r.title)}</small>` : ''}${r.quote ? `<div class="sc-quote">« ${esc(r.quote)} »</div>` : ''}</div>`).join('')};
     ART.views.sc_torec = {read: (ctx, it) => { if (!it.id || !ART.defs.recording) return ''; const m = ART.mediaOf(it.data?.sound); const works = SC.rowsOf(it).filter(r => SC.isSong(r) && U.ref(r.work)?.iid && ART.defs[U.ref(r.work).kind || 'track_work']?.key === 'track_work');
         if (!works.length) return ''; const done = SC.recsOf(ctx.store, it.id).length;
-        return `<p class="ar-note">${done ? `${esc(plural(done, 'enregistrement'))} « en public » déjà ${done > 1 ? 'tirés' : 'tiré'} de ce soir. ` : ''}${m || done < works.length ? `<button type="button" class="ar-linkbtn u" data-sc-torec>→ En faire ${works.length - done > 1 ? 'des enregistrements' : 'un enregistrement'} « en public » ${works.length - done > 1 ? 'des morceaux' : 'du morceau'} (${works.length - done})</button>` : ''}</p>`; }};
+        return `<p class="ar-note">${done ? (done > 1 ? i18n('{n} enregistrements « en public » déjà tirés de ce soir.', {n: done}) : i18n('1 enregistrement « en public » déjà tiré de ce soir.')) + ' ' : ''}${m || done < works.length ? `<button type="button" class="ar-linkbtn u" data-sc-torec>${works.length - done > 1 ? i18n('→ En faire des enregistrements « en public » des morceaux ({n})', {n: works.length - done}) : i18n('→ En faire un enregistrement « en public » du morceau ({n})', {n: works.length - done})}</button>` : ''}</p>`; }};
     SC.recsOf = (store, cid) => (store.items || []).filter(r => r.kind === 'recording' && U.ref(r.data?.concert)?.iid === cid);
 
     /* ═════════ 🎤 La fiche d'un soir ═════════ */
@@ -224,7 +225,7 @@
         heading: (ctx, it) => { const d = SC.dayOf(it.data?.date), wd = SC.weekday(d), venue = [it.data?.venue, U.placeTitle(it.data?.place)].filter(Boolean).join(', ');
             return `<h2 class="ar-h2">${esc(SC.cut(it.title || 'Sans titre', 200))}</h2><p class="ar-g sc-when">${esc([[wd, SC.dayLabel(d) || it.data?.date].filter(Boolean).join(' '), venue, it.data?.show && `« ${it.data.show} »`].filter(Boolean).join(' · '))}</p>`; },
         badges: (ctx, it) => { const cur = it.data?.skind || 'concert', mine = it.id && (!it.person_id || it.person_id === ctx.store.pid);
-            return `<div class="ui-filters sc-genres" role="group" aria-label="Sorte de soirée">${GENRES.map(g => `<button type="button" class="${g.key === cur ? 'is-active' : ''}" ${mine ? `data-sc-genre="${g.key}"` : 'disabled'} title="${g.key === cur ? 'La sorte de ce soir' : `En faire : ${esc(g.label)} (la setlist s’adapte)`}">${g.icon} ${esc(g.label)}</button>`).join('')}</div>`; },
+            return `<div class="ui-filters sc-genres" role="group" aria-label="Sorte de soirée">${GENRES.map(g => `<button type="button" class="${g.key === cur ? 'is-active' : ''}" ${mine ? `data-sc-genre="${g.key}"` : 'disabled'} title="${g.key === cur ? i18n('La sorte de ce soir') : i18n('En faire : {what} (la setlist s’adapte)', {what: esc(i18n(g.label))})}">${g.icon} ${esc(i18n(g.label))}</button>`).join('')}</div>`; },
         cardLine: it => [SC.dayLabel(SC.dayOf(it.data?.date), 'short') || it.year, SC.cityOf(it)].filter(Boolean).join(' · '),
         newData: store => ({skind: 'concert', on_stage: store?.pid ? [{pid: store.pid, title: store.name, role: ''}] : []}),
         /** les fiches d'avant (programme, musiciens, tournée en texte) : remises au format de la setlist */
@@ -289,7 +290,7 @@
             if (!l.length) return `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📅</span><span class="empty-line-text">Aucune date pour l’instant.</span></p>${add}`;
             return `<div class="ar-scroll"><table class="ar-t sc-dates"><thead><tr><th>#</th><th>Date</th><th>Ville</th><th>Salle</th><th>Titres</th><th>Spectateurs</th></tr></thead><tbody>${l.map((c, i) => { const n = slCount(c);
                 return `<tr class="is-click" data-ar-row-open="${c.id}"><td class="n">${i + 1}</td><td>${esc(SC.dayLabel(SC.dayOf(c.data.date), 'short') || c.data.date || '')}</td><td>${esc(SC.cityOf(c))}</td><td>${esc(c.data.venue || '')}</td><td>${n.songs + n.enc || ''}</td><td>${esc(c.data.audience || '')}</td></tr>`; }).join('')}</tbody></table></div>${add}`; },
-        meta: (ctx, it) => { const l = SC.tourDates(ctx.store, it.id); return l.length ? esc([plural(l.length, 'date'), it.data?.planned && `${it.data.planned} prévues`, plural(new Set(l.map(SC.cityOf).filter(Boolean)).size, 'ville')].filter(Boolean).join(' · ')) : ''; },
+        meta: (ctx, it) => { const l = SC.tourDates(ctx.store, it.id); return l.length ? esc([plural(l.length, 'date'), it.data?.planned && i18n('{n} prévues', {n: it.data.planned}), plural(new Set(l.map(SC.cityOf).filter(Boolean)).size, 'ville')].filter(Boolean).join(' · ')) : ''; },
         text: (ctx, it) => { const n = SC.tourDates(ctx.store, it.id).length; return n ? plural(n, 'date') : ''; }};
     /** la setlist type : à chaque place, le titre le plus souvent joué (R1, R2… pour les rappels) */
     SC.typeSetlist = (store, list) => {
@@ -301,7 +302,7 @@
     };
     SC.typeHtml = (store, list, max = 30) => { const rows = SC.typeSetlist(store, list).slice(0, max); if (!rows.length) return '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📅</span><span class="empty-line-text">Pas encore de setlist notée pour ces dates.</span></p>';
         return `<div class="ar-scroll"><table class="ar-t sc-type"><thead><tr><th>Pos.</th><th>Titre le plus souvent à cette place</th><th>Joué</th><th></th></tr></thead><tbody>${rows.map(r => `<tr><td class="n">${esc(r.pos)}</td><td>${r.ref ? U.refChip(r.ref, '🎵') : esc(r.title)}</td><td>${r.n} / ${r.of}</td><td class="sc-barcell"><span class="sc-bar${r.pos[0] === 'R' ? ' is-enc' : ''}" style="width:${Math.round(r.n / Math.max(1, r.of) * 100)}%"></span></td></tr>`).join('')}</tbody></table></div>`; };
-    ART.views.sc_tour_type = {read: (ctx, it) => { const l = SC.tourDates(ctx.store, it.id); return l.length ? SC.typeHtml(ctx.store, l) : ''; }, meta: (ctx, it) => { const n = SC.tourDates(ctx.store, it.id).filter(c => SC.rowsOf(c).length).length; return n ? `d’après ${esc(plural(n, 'setlist'))}` : ''; }};
+    ART.views.sc_tour_type = {read: (ctx, it) => { const l = SC.tourDates(ctx.store, it.id); return l.length ? SC.typeHtml(ctx.store, l) : ''; }, meta: (ctx, it) => { const n = SC.tourDates(ctx.store, it.id).filter(c => SC.rowsOf(c).length).length; return n ? i18n('d’après {what}', {what: esc(plural(n, 'setlist'))}) : ''; }};
     ART.views.sc_tour_map = {read: (ctx, it) => SC.tourDates(ctx.store, it.id).some(c => U.place(c.data.place)?.plid) ? `<div class="sc-map" data-sc-map="tour:${it.id}">${window.LCNDA_UI.spinner('Chargement de la carte…')}</div>` : '<p class="muted">Les lieux des dates (choisis dans ta base) s’affichent ici, reliés dans l’ordre.</p>'};
     ART.define({key: 'tour', icon: '🚌', label: 'Tournée', many: 'Tournées', fem: true, domain: 'scene',
         eyebrow: (it, store) => { const n = it.id ? SC.tourDates(store, it.id).length : 0; return ['Tournée', n && plural(n, 'date'), it.data?.dates].filter(Boolean).join(' · '); },
@@ -477,20 +478,20 @@
             ext().openDialog?.({eyebrow: 'SETLIST', title: '📋 Coller une liste de titres', submitLabel: 'Ajouter ces titres',
                 body: `<p class="muted">Un titre par ligne (les numéros sont enlevés). Une ligne « Rappel : » range la suite en rappels ; « (note) » à la fin d’un titre devient sa note. Les titres déjà dans tes fiches y sont reliés.</p><textarea class="ar-in" data-sl-text rows="12" style="width:100%" placeholder="1. Paris canaille\n2. La complainte du marin (1re fois)\nRappel :\nLes cerisiers"></textarea>`,
                 onOpen: dg => setTimeout(() => dg.querySelector('[data-sl-text]')?.focus(), 30),
-                onSubmit: form => { const rows = SC.parseList(form.querySelector('[data-sl-text]').value, C.store); if (!rows.length) { A().toast('Rien à ajouter : écris un titre par ligne.', 'error'); return false; } addRows(fld, rows, false); A().toast(`${plural(rows.length, 'ligne ajoutée', 'lignes ajoutées')} à la setlist.`); setTimeout(() => b.isConnected && b.focus(), 60); return true; }});
+                onSubmit: form => { const rows = SC.parseList(form.querySelector('[data-sl-text]').value, C.store); if (!rows.length) { A().toast('Rien à ajouter : écris un titre par ligne.', 'error'); return false; } addRows(fld, rows, false); A().toast(i18n('{what} à la setlist.', {what: plural(rows.length, 'ligne ajoutée', 'lignes ajoutées')})); setTimeout(() => b.isConnected && b.focus(), 60); return true; }});
             return; }
-        if (fld && d.slCopy !== undefined) { await run(async () => { const r = await pickSetlist(C, it?.id); if (!r) return; if (!r.rows.length) { A().toast('Ce soir-là n’a pas de setlist.'); return; } addRows(fld, r.rows, false); A().toast(`${plural(r.rows.length, 'ligne copiée', 'lignes copiées')} depuis « ${r.from.title} ».`); }); setTimeout(() => b.isConnected && b.focus(), 60); return; }
+        if (fld && d.slCopy !== undefined) { await run(async () => { const r = await pickSetlist(C, it?.id); if (!r) return; if (!r.rows.length) { A().toast('Ce soir-là n’a pas de setlist.'); return; } addRows(fld, r.rows, false); A().toast(i18n('{what} depuis « {name} ».', {what: plural(r.rows.length, 'ligne copiée', 'lignes copiées'), name: r.from.title})); }); setTimeout(() => b.isConnected && b.focus(), 60); return; }
         // — en lecture —
         if (C.S.edit || !it?.id) return;
         if (d.slExpand !== undefined) { b.closest('.sc-setlist')?.classList.add('is-open'); return; }
         if (d.slAddread !== undefined) { C.startEdit(); setTimeout(() => { const f2 = C.body.querySelector('[data-fk="setlist"]'); if (f2) { f2.scrollIntoView?.({block: 'center'}); addRows(f2, [{t: 'item'}]); } }, 40); return; }
         if (d.slCopy !== undefined) { await run(async () => { const r = await pickSetlist(C, it.id); if (!r) return; if (!r.rows.length) { A().toast('Ce soir-là n’a pas de setlist.'); return; }
-            const data = {...U.clone(it.data), setlist: [...SC.rowsOf(it), ...r.rows]}; await SC.saveWithUndo(C, it, data, `Setlist de « ${r.from.title} » copiée (${plural(r.rows.length, 'ligne')})`); }); return; }
+            const data = {...U.clone(it.data), setlist: [...SC.rowsOf(it), ...r.rows]}; await SC.saveWithUndo(C, it, data, i18n('Setlist de « {name} » copiée ({what})', {name: r.from.title, what: plural(r.rows.length, 'ligne')})); }); return; }
         if (d.slMk !== undefined) { await run(async () => { const rows = U.clone(SC.rowsOf(it)), r = rows[Number(d.slMk)], ref = U.ref(r?.work); if (!ref?.txt) return;
             const g = SC.genreOf(it), kind = SC.kindsFor(g.key).find(k => ART.defs[k]) || 'track_work', def = ART.defs[kind];
             const id = await ART.saveItem(C.store, kind, 0, {title: ref.txt, ...(def.newData ? def.newData(C.store) : {}), ...(kind === 'stage_piece' && g.piece ? {pkind: g.piece} : {})});
             r.work = {iid: id, title: ref.txt, kind}; await SC.saveWithUndo(C, it, {...U.clone(it.data), setlist: rows}, `Fiche « ${ref.txt} » créée et reliée`); }); return; }
-        if (d.scGenre) { if (d.scGenre === (it.data?.skind || 'concert')) return; await run(() => SC.saveWithUndo(C, it, {...U.clone(it.data), skind: d.scGenre}, `Ce soir devient : ${SC.genre(d.scGenre).label}`)); return; }
+        if (d.scGenre) { if (d.scGenre === (it.data?.skind || 'concert')) return; await run(() => SC.saveWithUndo(C, it, {...U.clone(it.data), skind: d.scGenre}, i18n('Ce soir devient : {what}', {what: i18n(SC.genre(d.scGenre).label)}))); return; }
         if (d.scNewdate) { const t = C.store.get(Number(d.scNewdate)); if (t) C.newItem('concert', {tour: {iid: t.id, title: t.title, kind: 'tour'}, skind: t.data?.skind || 'concert', show: t.data?.show || '', ...(U.ref(t.data?.staging) ? {staging: t.data.staging} : {})}); return; }
         if (d.scNewperf) { const s = C.store.get(Number(d.scNewperf)); if (s) C.newItem('concert', {skind: 'theatre', staging: {iid: s.id, title: s.title, kind: s.kind}}); return; }
         if (d.scTorec !== undefined) { await run(async () => {
@@ -501,7 +502,7 @@
             if (!items.length) { A().toast('Tous les morceaux de ce soir ont déjà leur enregistrement « en public ».'); return; }
             const extra = await ART.needArtist(C.store); const res = await ART.write('save_items', {person_id: C.pid, items, ...extra}); await C.reload(); C.paint(true);
             const ids = res?.ids || [];
-            A().undoToast(`${plural(ids.length, 'enregistrement')} « en public » ${ids.length > 1 ? 'ajoutés' : 'ajouté'} aux morceaux`, {undo: async () => { for (const id of ids) await ART.write('delete_item', {person_id: C.pid, id}); await C.reload(); C.paint(true); }}); }); return; }
+            A().undoToast(ids.length > 1 ? i18n('{n} enregistrements « en public » ajoutés aux morceaux', {n: ids.length}) : i18n('1 enregistrement « en public » ajouté au morceau'), {undo: async () => { for (const id of ids) await ART.write('delete_item', {person_id: C.pid, id}); await C.reload(); C.paint(true); }}); }); return; }
     });
     /* « ＋ Créer la fiche « … » » sur une ligne de setlist : la bonne sorte (sketch, numéro…) selon la soirée */
     if (typeof document !== 'undefined' && document.addEventListener) document.addEventListener('picker-create', async e => {
@@ -509,7 +510,7 @@
         const gk = genreInForm(host), g = SC.genre(gk), kind = SC.kindsFor(gk).find(k => ART.defs[k]); if (!kind) return;
         e.preventDefault(); e.stopPropagation();
         const C = dlg._C, def = ART.defs[kind];
-        try { const data = {title: e.detail.text, ...(def.newData ? def.newData(C.store) : {}), ...(kind === 'stage_piece' && g.piece ? {pkind: g.piece} : {})}; const id = await ART.saveItem(C.store, kind, 0, data); await C.store.load(); e.detail.pick({id, title: e.detail.text, kind: 'artwork', art_kind: kind}); A().toast(`« ${e.detail.text} » ajouté au catalogue (${def.label.toLowerCase()}).`); }
+        try { const data = {title: e.detail.text, ...(def.newData ? def.newData(C.store) : {}), ...(kind === 'stage_piece' && g.piece ? {pkind: g.piece} : {})}; const id = await ART.saveItem(C.store, kind, 0, data); await C.store.load(); e.detail.pick({id, title: e.detail.text, kind: 'artwork', art_kind: kind}); A().toast(i18n('« {name} » ajouté au catalogue ({what}).', {name: e.detail.text, what: i18n(def.label).toLowerCase()})); }
         catch (er) { if (er.message) A().toast(er.message, 'error'); }
     }, true);
 

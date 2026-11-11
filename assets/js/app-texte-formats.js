@@ -12,6 +12,7 @@
     if (typeof module === 'object' && module.exports) module.exports = T;
 })(typeof globalThis !== 'undefined' ? globalThis : this, function (G, T) {
     'use strict';
+    const tr = (s, v) => (T && typeof T.tr === 'function' ? T.tr(s, v) : s); // 🌐 messages affichés (le français dans Node)
     const {xe, hex6, col, clamp, fontOk, nid, run, para, plainOf, toB64, dataUrl, fromDataUrl, sniffImage, imageSize, mergeRuns, BASE_STYLES} = T;
     const {local, kids, kid, xtext, attr, findAll, onOff, finish} = T._x;
     const S = () => G.LCNDA_SHEET || (typeof require === 'function' ? require('./app-tableur-engine.js') : null);
@@ -332,8 +333,8 @@
     }
     async function fromDocx(buf, opts = {}) {
         const X = S(), z = await X.unzip(buf);
-        if (!z.has('word/document.xml')) throw new Error('ce n’est pas un document Word (.docx) : il manque son texte');
-        const notices = []; if (z.names.some(n => /vbaProject\.bin$/i.test(n))) notices.push('Les macros du fichier sont ignorées (elles ne sont jamais lancées).');
+        if (!z.has('word/document.xml')) throw new Error(tr('ce n’est pas un document Word (.docx) : il manque son texte'));
+        const notices = []; if (z.names.some(n => /vbaProject\.bin$/i.test(n))) notices.push(tr('Les macros du fichier sont ignorées (elles ne sont jamais lancées).'));
         const xml = async n => { const t = await z.text(n); return t ? X.parseXml(t) : null; };
         const relsOf = async part => { const dir = part.slice(0, part.lastIndexOf('/') + 1), r = await xml(`${dir}_rels/${part.slice(dir.length)}.rels`), map = new Map();
             findAll(r, 'Relationship').forEach(e => { let t = attr(e, 'Target') || ''; const ext = attr(e, 'TargetMode') === 'External'; if (!ext) { t = t.startsWith('/') ? t.slice(1) : dir + t; const parts = []; t.split('/').forEach(x => { if (x === '..') parts.pop(); else if (x !== '.') parts.push(x); }); t = parts.join('/'); } map.set(attr(e, 'Id'), {type: String(attr(e, 'Type') || '').split('/').pop(), target: t, ext}); }); return map; };
@@ -353,8 +354,8 @@
         findAll(numX, 'num').forEach(n => nums.set(attr(n, 'w:numId'), abstract.get(attr(kid(n, 'abstractNumId'), 'w:val')) || []));
         // les images : octets → data:image (bornés)
         let imgBytes = 0, imgCount = 0;
-        const imageOf = async (rid, relMap = rels) => { const r = relMap.get(rid); if (!r || r.ext || r.type !== 'image') return null; if (++imgCount > T.LIMITS.images) return null; const u8 = await z.read(r.target); if (!u8) return null; imgBytes += u8.length; if (imgBytes > T.LIMITS.imageBytes) { if (!notices.includes('Certaines images, trop lourdes, n’ont pas été reprises.')) notices.push('Certaines images, trop lourdes, n’ont pas été reprises.'); return null; }
-            const t = sniffImage(u8); if (!['png', 'jpeg', 'gif', 'webp'].includes(t)) { if (!notices.some(x => x.startsWith('Une image'))) notices.push('Une image d’une sorte que le navigateur ne montre pas (EMF, WMF, TIFF…) a été laissée de côté.'); return null; } return {src: dataUrl(u8, t), ...(imageSize(u8) || {})}; };
+        const imageOf = async (rid, relMap = rels) => { const r = relMap.get(rid); if (!r || r.ext || r.type !== 'image') return null; if (++imgCount > T.LIMITS.images) return null; const u8 = await z.read(r.target); if (!u8) return null; imgBytes += u8.length; if (imgBytes > T.LIMITS.imageBytes) { if (!notices.includes(tr('Certaines images, trop lourdes, n’ont pas été reprises.'))) notices.push(tr('Certaines images, trop lourdes, n’ont pas été reprises.')); return null; }
+            const t = sniffImage(u8); if (!['png', 'jpeg', 'gif', 'webp'].includes(t)) { if (!notices.oddImg) { notices.oddImg = 1; notices.push(tr('Une image d’une sorte que le navigateur ne montre pas (EMF, WMF, TIFF…) a été laissée de côté.')); } return null; } return {src: dataUrl(u8, t), ...(imageSize(u8) || {})}; };
         // notes, commentaires
         const notesOf = async (part, tag) => { const x = await xml(part), m = new Map(); findAll(x, tag).forEach(n => { const id = attr(n, 'w:id'); if (Number(id) > 0) m.set(id, kids(n, 'p').map(p => findAll(p, 't').map(xtext).join('')).join(' ').trim()); }); return m; };
         const fnMap = await notesOf('word/footnotes.xml', 'footnote'), enMap = await notesOf('word/endnotes.xml', 'endnote');
@@ -364,7 +365,7 @@
         let depth = 0;
         /* les morceaux d'un paragraphe */
         async function runsOf(el, ctx, out = [], fmt = {}) {
-            if (++depth > 4000000) throw new Error('fichier refusé : trop compliqué');
+            if (++depth > 4000000) throw new Error(tr('fichier refusé : trop compliqué'));
             for (const ch of el.c || []) {
                 if (typeof ch !== 'object') continue;
                 const n = local(ch.n);
@@ -465,7 +466,7 @@
             for (const ch of el.c || []) {
                 if (typeof ch !== 'object') continue;
                 const n = local(ch.n);
-                if (out.length > T.LIMITS.blocks) throw new Error('fichier refusé : beaucoup trop de paragraphes');
+                if (out.length > T.LIMITS.blocks) throw new Error(tr('fichier refusé : beaucoup trop de paragraphes'));
                 if (n === 'p') {
                     const bl = await paraOf(ch, ctx);
                     // la lettrine de Word : sa lettre dans un cadre, puis le paragraphe
@@ -729,8 +730,8 @@
     async function fromOdt(buf) {
         const X = S(), z = await X.unzip(buf);
         const mt = await z.text('mimetype');
-        if (!z.has('content.xml') || (mt && !/opendocument\.text/.test(mt))) throw new Error(mt && /opendocument/.test(mt) ? 'ce fichier LibreOffice n’est pas un texte (c’est un classeur ou une présentation)' : 'ce n’est pas un document LibreOffice (.odt)');
-        const notices = []; if (z.names.some(n => /^Basic\//.test(n) || /^Scripts\//.test(n))) notices.push('Les macros du fichier sont ignorées (elles ne sont jamais lancées).');
+        if (!z.has('content.xml') || (mt && !/opendocument\.text/.test(mt))) throw new Error(mt && /opendocument/.test(mt) ? tr('ce fichier LibreOffice n’est pas un texte (c’est un classeur ou une présentation)') : tr('ce n’est pas un document LibreOffice (.odt)'));
+        const notices = []; if (z.names.some(n => /^Basic\//.test(n) || /^Scripts\//.test(n))) notices.push(tr('Les macros du fichier sont ignorées (elles ne sont jamais lancées).'));
         const content = X.parseXml(await z.text('content.xml')), stylesX = z.has('styles.xml') ? X.parseXml(await z.text('styles.xml')) : null;
         // tous les styles : nommés (styles.xml) et automatiques (les deux fichiers) ; un style hérite de son parent
         const styles = new Map(), pageLayouts = new Map(), masters = new Map(), listStyles = new Map();
@@ -759,12 +760,12 @@
         const changes = new Map();
         findAll(content, 'changed-region').forEach(r => { const id = attr(r, 'text:id') || attr(r, 'xml:id'), del = kid(r, 'deletion'), ins = kid(r, 'insertion'), info = kid(del || ins || kid(r, 'format-change'), 'change-info'); changes.set(id, {k: del ? 'del' : ins ? 'ins' : 'fmt', a: xtext(kid(info, 'creator')), t: xtext(kid(info, 'date')), text: del ? kids(del, 'p').concat(kids(del, 'h')).map(xtext).join('\n') : ''}); });
         let imgBytes = 0, imgCount = 0;
-        const pic = async href => { if (!href || /^(https?:|\.\.\/|\/)/i.test(href) || ++imgCount > T.LIMITS.images) return null; const u8 = await z.read(href.replace(/^\.\//, '')); if (!u8) return null; imgBytes += u8.length; if (imgBytes > T.LIMITS.imageBytes) return null; const t = sniffImage(u8); if (!['png', 'jpeg', 'gif', 'webp'].includes(t)) { if (!notices.some(x => x.startsWith('Une image'))) notices.push('Une image d’une sorte que le navigateur ne montre pas (SVG, EMF, WMF…) a été laissée de côté.'); return null; } return {src: dataUrl(u8, t), ...(imageSize(u8) || {})}; };
+        const pic = async href => { if (!href || /^(https?:|\.\.\/|\/)/i.test(href) || ++imgCount > T.LIMITS.images) return null; const u8 = await z.read(href.replace(/^\.\//, '')); if (!u8) return null; imgBytes += u8.length; if (imgBytes > T.LIMITS.imageBytes) return null; const t = sniffImage(u8); if (!['png', 'jpeg', 'gif', 'webp'].includes(t)) { if (!notices.oddImg) { notices.oddImg = 1; notices.push(tr('Une image d’une sorte que le navigateur ne montre pas (SVG, EMF, WMF…) a été laissée de côté.')); } return null; } return {src: dataUrl(u8, t), ...(imageSize(u8) || {})}; };
         const comments = [], doc = {...T.newDoc(), comments, sections: []};
         let nodes = 0;
         async function inl(el, ctx, out, fmt) {
             for (const ch of el.c || []) {
-                if (++nodes > 6000000) throw new Error('fichier refusé : trop compliqué');
+                if (++nodes > 6000000) throw new Error(tr('fichier refusé : trop compliqué'));
                 if (typeof ch === 'string') { const t = ch.replace(/[\r\n]+/g, ' ').replace(/ {2,}/g, ' '); if (t) out.push(run(t, {...fmt, ...(ctx.ins ? {tc: ctx.ins} : {}), ...(ctx.cm.size ? {cm: [...ctx.cm]} : {})})); continue; }
                 const n = local(ch.n);
                 if (n === 'span') { const f = {...fmt, ...textOf(attr(ch, 'text:style-name'))}; const cs = charStyleOf(attr(ch, 'text:style-name')); if (cs) f.cs = cs; await inl(ch, ctx, out, f); }
@@ -832,7 +833,7 @@
             const out = [];
             for (const ch of kids(el)) {
                 const n = local(ch.n);
-                if (out.length > T.LIMITS.blocks) throw new Error('fichier refusé : beaucoup trop de paragraphes');
+                if (out.length > T.LIMITS.blocks) throw new Error(tr('fichier refusé : beaucoup trop de paragraphes'));
                 if (n === 'p' || n === 'h') out.push(...await paraOf(ch, ctx));
                 else if (n === 'list') out.push(...await listOf(ch, ctx, 0));
                 else if (n === 'table') out.push(await tableOf(ch, ctx));
@@ -932,8 +933,8 @@
     const CP1252 = {128: 8364, 130: 8218, 131: 402, 132: 8222, 133: 8230, 134: 8224, 135: 8225, 136: 710, 137: 8240, 138: 352, 139: 8249, 140: 338, 142: 381, 145: 8216, 146: 8217, 147: 8220, 148: 8221, 149: 8226, 150: 8211, 151: 8212, 152: 732, 153: 8482, 154: 353, 155: 8250, 156: 339, 158: 382, 159: 376};
     function fromRtf(text) {
         const src = String(text || '');
-        if (!/^\s*\{\\rtf/.test(src)) throw new Error('ce n’est pas un fichier RTF');
-        if (src.length > T.LIMITS.textBytes) throw new Error('fichier refusé : trop gros');
+        if (!/^\s*\{\\rtf/.test(src)) throw new Error(tr('ce n’est pas un fichier RTF'));
+        if (src.length > T.LIMITS.textBytes) throw new Error(tr('fichier refusé : trop gros'));
         const doc = T.newDoc(), blocks = [], colors = [], fonts = {};
         // les noms des styles (« {\s1 … heading 1;} ») : un titre de Word ou de LibreOffice reste un titre
         const sNames = {}; { const a = src.indexOf('{\\stylesheet'); if (a >= 0 && a < 2e6) { let d = 0, b = a; for (; b < src.length && b < a + 2e6; b++) { if (src[b] === '{') d++; else if (src[b] === '}' && --d === 0) break; } const sheet = src.slice(a + 12, b); const rx = /\{(?:\\\*)?\\s(\d{1,4})\b([^{}]*(?:\{[^{}]*\}[^{}]*)*)\}/g; let m; while ((m = rx.exec(sheet))) { const name = m[2].replace(/\{[^{}]*\}/g, '').replace(/\\[a-z]+-?\d* ?/gi, '').replace(/;\s*$/, '').trim(); const k = NAME_TO_ST(name); if (k) sNames[m[1]] = k; } } }
@@ -949,9 +950,9 @@
         const DEST = new Set(['fonttbl', 'colortbl', 'stylesheet', 'info', 'header', 'footer', 'headerl', 'headerr', 'headerf', 'footerl', 'footerr', 'footerf', 'listtable', 'listoverridetable', 'revtbl', 'rsidtbl', 'generator', 'xmlnstbl', 'themedata', 'colorschememapping', 'latentstyles', 'datastore', 'object', 'objdata', 'mmathPr', 'pgdsctbl', 'fldtype', 'bkmkstart', 'bkmkend', 'listtext', 'pntext', 'pntxtb', 'pntxta']);
         let tokens = 0;
         while (i < src.length) {
-            if (++tokens > 8000000) throw new Error('fichier refusé : trop compliqué');
+            if (++tokens > 8000000) throw new Error(tr('fichier refusé : trop compliqué'));
             const c = src[i];
-            if (c === '{') { stack.push({st: {...st}, skip, dest: null, uc}); if (++depth > 200) throw new Error('fichier RTF trop imbriqué'); i++; continue; }
+            if (c === '{') { stack.push({st: {...st}, skip, dest: null, uc}); if (++depth > 200) throw new Error(tr('fichier RTF trop imbriqué')); i++; continue; }
             if (c === '}') { const top = stack.pop(); depth--; if (top) { if (top.cap && cap === top.cap) { if (cap.kind === 'listtext') para0._lt = (para0._lt || '') + cap.text; else if (cap.kind === 'annotation') { const t = cap.text.trim(); if (t && doc.comments.length < 2000) doc.comments.push({id: nid('c'), text: t.slice(0, 4000), author: '', at: ''}); } else hf[cap.kind] = hf[cap.kind] || cap.text; cap = null; } if (top.dest === 'footnote' && note) { cur.push({note: {id: nid('n'), k: 'foot', text: note.text.trim()}}); note = null; } if (top.dest === 'fldinst' && field) { field.inst = false; const hm = /HYPERLINK\s+"([^"]+)"/i.exec(field.instr); if (hm && /^(https?:\/\/|mailto:)/i.test(hm[1])) field.href = hm[1]; const fw = field.instr.trim().split(/\s+/)[0].toUpperCase(); if (fw === 'PAGE' || fw === 'NUMPAGES') field.page = fw === 'PAGE' ? 'page' : 'pages'; } if (top.dest === 'field' && field) { field = null; } if (top.dest === 'fldrslt' && field?.page) { cur = cur.filter(r => !r._fr); cur.push({field: field.page, fieldText: '1'}); } if (top.dest === 'pict' && pict) { const hx = pict.hex.replace(/[^0-9a-f]/gi, ''); if (hx.length > 16 && hx.length < 2 * T.LIMITS.imageBytes) { const u8 = new Uint8Array(hx.length >> 1); for (let k = 0; k < u8.length; k++) u8[k] = parseInt(hx.substr(k * 2, 2), 16); const t = sniffImage(u8); if (['png', 'jpeg'].includes(t)) cur.push({img: {src: dataUrl(u8, t), w: pict.w || (imageSize(u8) || {}).w || 200, alt: ''}}); } pict = null; } st = top.st; skip = top.skip; uc = top.uc; } i++; continue; }
             if (c === '\\') {
                 const n1 = src[i + 1];
@@ -1087,7 +1088,7 @@
         return out.map(r => { const o = {...r}; ['b', 'i', 's'].forEach(k => { if (!o[k]) delete o[k]; }); return o; });
     }
     function fromMarkdown(text) {
-        const src = String(text || '').replace(/\r\n?/g, '\n'); if (src.length > T.LIMITS.textBytes) throw new Error('fichier refusé : trop gros');
+        const src = String(text || '').replace(/\r\n?/g, '\n'); if (src.length > T.LIMITS.textBytes) throw new Error(tr('fichier refusé : trop gros'));
         const lines = src.split('\n'), blocks = [], notesDef = new Map(), front = {};
         lines.forEach(l => { const m = /^\[\^([^\]]+)\]:\s*(.*)$/.exec(l); if (m) notesDef.set(m[1], m[2]); });
         let i = 0, paraBuf = [];
@@ -1134,7 +1135,7 @@
         return '\ufeff' + lines.join('\r\n') + (notes.length ? '\r\n\r\nNotes :\r\n' + notes.join('\r\n') : '') + '\r\n';
     }
     function fromText(text) {
-        const src = String(text || '').replace(/^\ufeff/, '').replace(/\r\n?/g, '\n'); if (src.length > T.LIMITS.textBytes) throw new Error('fichier refusé : trop gros');
+        const src = String(text || '').replace(/^\ufeff/, '').replace(/\r\n?/g, '\n'); if (src.length > T.LIMITS.textBytes) throw new Error(tr('fichier refusé : trop gros'));
         const blocks = [];
         src.split('\n').forEach(l => {
             if (blocks.length > T.LIMITS.blocks) return;
@@ -1150,17 +1151,17 @@
 
     /** un fichier → document (selon son nom et ses premiers octets) ; HTML : rendu au navigateur (rendre {html}) */
     async function readFile(name, buf) {
-        const u8 = new Uint8Array(buf); if (u8.length > T.LIMITS.fileBytes) throw new Error(`fichier trop gros (plus de ${Math.round(T.LIMITS.fileBytes / 1048576)} Mo)`);
+        const u8 = new Uint8Array(buf); if (u8.length > T.LIMITS.fileBytes) throw new Error(tr('fichier trop gros (plus de {n} Mo)', {n: Math.round(T.LIMITS.fileBytes / 1048576)}));
         const ext = String(name || '').toLowerCase().split('.').pop(), zip = u8[0] === 0x50 && u8[1] === 0x4b;
-        if (zip) { const z = await S().unzip(buf); if (z.has('word/document.xml')) return {kind: 'docx', ...(await fromDocx(buf))}; if (z.has('content.xml')) return {kind: 'odt', ...(await fromOdt(buf))}; throw new Error('ce fichier zip n’est ni un document Word (.docx) ni un document LibreOffice (.odt)'); }
-        if (u8[0] === 0xd0 && u8[1] === 0xcf) throw new Error('les anciens fichiers Word (.doc) ne se lisent pas : ouvre-le dans Word ou LibreOffice et enregistre-le en .docx');
-        if (ext === 'pdf' || ext === 'doc' || String.fromCharCode(...u8.slice(0, 1024)).includes('%PDF-')) throw new Error(ext === 'doc' ? 'les anciens fichiers Word (.doc) ne se lisent pas : ouvre-le dans Word ou LibreOffice et enregistre-le en .docx' : 'un PDF ne se transforme pas en texte modifiable ici : ouvre la Transcription d’actes pour le recopier');
-        if (u8[0] === 0x25 && u8[1] === 0x50 && u8[2] === 0x44 && u8[3] === 0x46) throw new Error('un PDF ne se transforme pas en texte modifiable ici : ouvre la Transcription d’actes pour le recopier');
+        if (zip) { const z = await S().unzip(buf); if (z.has('word/document.xml')) return {kind: 'docx', ...(await fromDocx(buf))}; if (z.has('content.xml')) return {kind: 'odt', ...(await fromOdt(buf))}; throw new Error(tr('ce fichier zip n’est ni un document Word (.docx) ni un document LibreOffice (.odt)')); }
+        if (u8[0] === 0xd0 && u8[1] === 0xcf) throw new Error(tr('les anciens fichiers Word (.doc) ne se lisent pas : ouvre-le dans Word ou LibreOffice et enregistre-le en .docx'));
+        if (ext === 'pdf' || ext === 'doc' || String.fromCharCode(...u8.slice(0, 1024)).includes('%PDF-')) throw new Error(ext === 'doc' ? tr('les anciens fichiers Word (.doc) ne se lisent pas : ouvre-le dans Word ou LibreOffice et enregistre-le en .docx') : tr('un PDF ne se transforme pas en texte modifiable ici : ouvre la Transcription d’actes pour le recopier'));
+        if (u8[0] === 0x25 && u8[1] === 0x50 && u8[2] === 0x44 && u8[3] === 0x46) throw new Error(tr('un PDF ne se transforme pas en texte modifiable ici : ouvre la Transcription d’actes pour le recopier'));
         const dec = S().decodeBytes(u8), text = dec.text;
         if (/^\s*\{\\rtf/.test(text) || ext === 'rtf') return {kind: 'rtf', ...fromRtf(text), encoding: dec.encoding};
         if (ext === 'html' || ext === 'htm' || /^\s*(<!doctype html|<html|<body|<meta|<div|<p[\s>])/i.test(text)) return {kind: 'html', html: text, encoding: dec.encoding};
         if (ext === 'md' || ext === 'markdown') return {kind: 'md', ...fromMarkdown(text), encoding: dec.encoding};
-        if (['docx', 'odt'].includes(ext)) throw new Error(`ce fichier .${ext} est abîmé (ce n’est pas un zip)`);
+        if (['docx', 'odt'].includes(ext)) throw new Error(tr('ce fichier .{ext} est abîmé (ce n’est pas un zip)', {ext}));
         return {kind: 'txt', ...fromText(text), encoding: dec.encoding};
     }
 

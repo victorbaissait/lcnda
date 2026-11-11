@@ -25,6 +25,8 @@
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const esc = v => (A()?.escapeHtml ? A().escapeHtml(v ?? '') : String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c])));
     const toast = (...a) => A().toast(...a);
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
+    const L18 = s => i18n(s); // un libellé venu du serveur (sources, colonnes, statistiques) : traduit s'il est connu, sinon tel quel
     const api = (...a) => A().api(...a);
     const post = (action, body) => api(action, {}, {method: 'POST', body});
     const plural = (n, w, p) => (A()?.plural ? A().plural(n, w, p) : `${n} ${n > 1 ? p || w + 's' : w}`);
@@ -71,7 +73,7 @@
 
     /** un classeur neuf déjà rempli (Dépouillements, Atelier…), ouvert dans le tableur, pas encore rangé */
     async function openFilled({src, cols = [], name = 'Classeur', keep = true, sheetName = ''} = {}) {
-        if (!X() || !ext.openWorkbook) return toast('Le tableur n’est pas chargé.', 'error');
+        if (!X() || !ext.openWorkbook) return toast(i18n('Le tableur n’est pas chargé.'), 'error');
         let data; try { data = await fetchFill(src, cols); } catch (e) { return toast(e.message, 'error'); }
         const S = X(), wb = S.newWorkbook(), sh = wb.sheets[0]; sh.name = S.cleanSheetName(sheetName || data.label || name, []);
         const keys = writeBlock(wb, sh, 0, 0, data.columns, data.rows, (k, c) => { if (c) sh.cells[k] = c; else delete sh.cells[k]; });
@@ -91,20 +93,20 @@
         const srcOf = k => cat.sources.find(s => s.key === k);
         const colsFor = k => st.cols[k] || (p0.cols?.[k]?.length ? p0.cols[k] : (srcOf(k)?.columns || []).filter(c => c.def).map(c => c.k));
         const dlg = document.createElement('dialog'); dlg.className = 'modal modal-l xl-base-dlg';
-        dlg.innerHTML = `<form method="dialog"><div class="modal-head"><div><span class="eyebrow">TABLEUR · BASE</span><h2>⤒ Remplir depuis l’app</h2></div><button type="button" class="icon-button" data-bx aria-label="Fermer">×</button></div>
+        dlg.innerHTML = `<form method="dialog"><div class="modal-head"><div><span class="eyebrow">${esc(i18n('TABLEUR · BASE'))}</span><h2>${esc(i18n('⤒ Remplir depuis l’app'))}</h2></div><button type="button" class="icon-button" data-bx aria-label="${esc(i18n('Fermer'))}">×</button></div>
             <div class="h-dialog-body xl-base-body">
-                <h3 class="xl-base-h">1 · Ce qu’on prend</h3>
-                <div class="ui-filters xl-base-src" role="tablist" data-bsrc>${SRC_ORDER.map(k => { const s = srcOf(k); return s ? `<button type="button" data-bs="${k}" class="${k === st.source ? 'is-active' : ''}">${esc(s.icon)} ${esc(s.label)} (${Number(s.count).toLocaleString('fr-FR')})</button>` : ''; }).join('')}</div>
+                <h3 class="xl-base-h">${esc(i18n('1 · Ce qu’on prend'))}</h3>
+                <div class="ui-filters xl-base-src" role="tablist" data-bsrc>${SRC_ORDER.map(k => { const s = srcOf(k); return s ? `<button type="button" data-bs="${k}" class="${k === st.source ? 'is-active' : ''}">${esc(s.icon)} ${esc(L18(s.label))} (${esc(window.LCNDA_I18N ? window.LCNDA_I18N.fmtNumber(Number(s.count)) : Number(s.count).toLocaleString('fr-FR'))})</button>` : ''; }).join('')}</div>
                 <div class="xl-base-opts" data-bopts></div>
-                <label class="checkbox-line xl-base-priv"><input type="checkbox" data-bpriv ${st.privacy ? 'checked' : ''} ${kiosk() || cat.privacy_forced ? 'disabled' : ''}> 🔒 Sans les vivants ni les fiches confidentielles <small class="muted">(comme l’export pour partager)</small></label>
-                <h3 class="xl-base-h">2 · Les colonnes <small class="muted">(glisse ⠿ pour ranger)</small></h3>
+                <label class="checkbox-line xl-base-priv"><input type="checkbox" data-bpriv ${st.privacy ? 'checked' : ''} ${kiosk() || cat.privacy_forced ? 'disabled' : ''}> ${esc(i18n('🔒 Sans les vivants ni les fiches confidentielles'))} <small class="muted">${esc(i18n('(comme l’export pour partager)'))}</small></label>
+                <h3 class="xl-base-h">${esc(i18n('2 · Les colonnes'))} <small class="muted">${esc(i18n('(glisse ⠿ pour ranger)'))}</small></h3>
                 <div class="xl-base-cols" data-bcols></div>
-                <div><button type="button" class="button small secondary" data-badd>＋ Une colonne tirée des données</button></div>
-                <h3 class="xl-base-h">3 · Aperçu <small class="muted" data-bcount></small></h3>
+                <div><button type="button" class="button small secondary" data-badd>${esc(i18n('＋ Une colonne tirée des données'))}</button></div>
+                <h3 class="xl-base-h">${esc(i18n('3 · Aperçu'))} <small class="muted" data-bcount></small></h3>
                 <div class="xl-base-prev" data-bprev></div>
-                <label class="checkbox-line xl-base-keep"><input type="checkbox" data-bkeep ${st.keep ? 'checked' : ''}> 🔗 Tenir à jour <small class="muted">— les lignes changent quand la base change (à l’ouverture, ou avec ↻). Tes colonnes ajoutées à droite (formules, notes) restent sur la bonne ligne.</small></label>
+                <label class="checkbox-line xl-base-keep"><input type="checkbox" data-bkeep ${st.keep ? 'checked' : ''}> ${esc(i18n('🔗 Tenir à jour'))} <small class="muted">${esc(i18n('— les lignes changent quand la base change (à l’ouverture, ou avec ↻). Tes colonnes ajoutées à droite (formules, notes) restent sur la bonne ligne.'))}</small></label>
             </div>
-            <div class="modal-actions"><label class="xl-base-where">Où : <select data-bwhere>${L ? '<option value="same">à la même place (remplace la plage liée)</option>' : ''}<option value="new">à partir de A1 dans une nouvelle feuille</option><option value="here">à partir de ${esc(X().addr(...ed.act))} dans cette feuille</option></select></label><span class="spacer"></span><button type="button" class="button secondary" data-bx>Annuler</button><button type="submit" class="button" data-bgo disabled>⤒ Remplir</button></div></form>`;
+            <div class="modal-actions"><label class="xl-base-where">${esc(i18n('Où :'))} <select data-bwhere>${L ? `<option value="same">${esc(i18n('à la même place (remplace la plage liée)'))}</option>` : ''}<option value="new">${esc(i18n('à partir de A1 dans une nouvelle feuille'))}</option><option value="here">${esc(i18n('à partir de {cell} dans cette feuille', {cell: X().addr(...ed.act)}))}</option></select></label><span class="spacer"></span><button type="button" class="button secondary" data-bx>${esc(i18n('Annuler'))}</button><button type="submit" class="button" data-bgo disabled>${esc(i18n('⤒ Remplir'))}</button></div></form>`;
         document.body.appendChild(dlg);
         const $ = s => dlg.querySelector(s);
         $('[data-bwhere]').value = st.where;
@@ -112,11 +114,11 @@
         const evTypes = () => (A().state?.bootstrap?.eventTypes || []).filter(t => Number(t.usage_count) > 0 || (st.filters.event_types || []).map(Number).includes(Number(t.id))).map(t => [String(t.id), t.label]);
         function optsHtml() {
             const f = st.filters, s = st.source;
-            if (s === 'census') return `<div class="xl-base-row"><label>Commune <select data-bf="place_id"><option value="">Toutes</option>${cat.census.map(c => `<option value="${c.place_id}" ${String(f.place_id ?? '') === String(c.place_id) ? 'selected' : ''}>${esc(c.name)} (${plural(c.members, 'personne')})</option>`).join('')}</select></label>
-                <label>Année <select data-bf="year"><option value="">Toutes</option>${[...new Set(cat.census.flatMap(c => c.years))].sort().map(y => `<option ${String(f.year ?? '') === String(y) ? 'selected' : ''}>${y}</option>`).join('')}</select></label></div>`;
-            if (s === 'digest') return cat.digests.length ? `<div class="xl-base-row"><label>Dépouillement <select data-bf="digest_id">${cat.digests.map(d => `<option value="${d.id}" ${String(f.digest_id ?? '') === String(d.id) ? 'selected' : ''}>${esc(d.title)} (${plural(d.people, 'personne')})</option>`).join('')}</select></label><label>Page <input data-bf="page" value="${esc(f.page || '')}" placeholder="toutes" size="6"></label></div>` : A().empty('Pas encore de dépouillement : Listes → 📜 Dépouillements.', {icon: '📜'});
-            if (s === 'stats') return `<div class="xl-base-row"><label>Statistique <select data-bf="stat">${cat.stats.map(x => `<option value="${x.key}" ${(f.stat || 'first_name') === x.key ? 'selected' : ''}>${esc(x.label)}</option>`).join('')}</select></label><label class="checkbox-line"><input type="checkbox" data-bf="sex" ${f.sex ? 'checked' : ''}> Hommes et femmes à part</label></div>`;
-            if (s === 'mylist') return cat.my_lists.length ? `<div class="xl-base-row"><label>Liste <select data-bf="list_id">${cat.my_lists.map(l => `<option value="${l.id}" ${String(f.list_id ?? '') === String(l.id) ? 'selected' : ''}>${esc(l.icon)} ${esc(l.name)}</option>`).join('')}</select></label></div>` : A().empty('Pas encore de liste à toi : Listes → Mes listes.', {icon: '📋'});
+            if (s === 'census') return `<div class="xl-base-row"><label>${esc(i18n('Commune'))} <select data-bf="place_id"><option value="">${esc(i18n('Toutes'))}</option>${cat.census.map(c => `<option value="${c.place_id}" ${String(f.place_id ?? '') === String(c.place_id) ? 'selected' : ''}>${esc(c.name)} (${plural(c.members, 'personne')})</option>`).join('')}</select></label>
+                <label>${esc(i18n('Année'))} <select data-bf="year"><option value="">${esc(i18n('Toutes'))}</option>${[...new Set(cat.census.flatMap(c => c.years))].sort().map(y => `<option ${String(f.year ?? '') === String(y) ? 'selected' : ''}>${y}</option>`).join('')}</select></label></div>`;
+            if (s === 'digest') return cat.digests.length ? `<div class="xl-base-row"><label>${esc(i18n('Dépouillement'))} <select data-bf="digest_id">${cat.digests.map(d => `<option value="${d.id}" ${String(f.digest_id ?? '') === String(d.id) ? 'selected' : ''}>${esc(d.title)} (${plural(d.people, 'personne')})</option>`).join('')}</select></label><label>${esc(i18n('Page'))} <input data-bf="page" value="${esc(f.page || '')}" placeholder="${esc(i18n('toutes'))}" size="6"></label></div>` : A().empty(i18n('Pas encore de dépouillement : Listes → 📜 Dépouillements.'), {icon: '📜'});
+            if (s === 'stats') return `<div class="xl-base-row"><label>${esc(i18n('Statistique'))} <select data-bf="stat">${cat.stats.map(x => `<option value="${x.key}" ${(f.stat || 'first_name') === x.key ? 'selected' : ''}>${esc(L18(x.label))}</option>`).join('')}</select></label><label class="checkbox-line"><input type="checkbox" data-bf="sex" ${f.sex ? 'checked' : ''}> ${esc(i18n('Hommes et femmes à part'))}</label></div>`;
+            if (s === 'mylist') return cat.my_lists.length ? `<div class="xl-base-row"><label>${esc(i18n('Liste'))} <select data-bf="list_id">${cat.my_lists.map(l => `<option value="${l.id}" ${String(f.list_id ?? '') === String(l.id) ? 'selected' : ''}>${esc(l.icon)} ${esc(l.name)}</option>`).join('')}</select></label></div>` : A().empty(i18n('Pas encore de liste à toi : Listes → Mes listes.'), {icon: '📋'});
             return '<div data-bbar></div>';
         }
         function paintOpts() {
@@ -125,20 +127,20 @@
             if (['digest', 'stats', 'mylist'].includes(st.source)) { const k = {digest: 'digest_id', stats: 'stat', mylist: 'list_id'}[st.source], sel = box.querySelector(`[data-bf="${k}"]`); if (sel && !f[k]) f[k] = sel.value; }
             const host = box.querySelector('[data-bbar]'); if (!host || !UI()?.listBar) return;
             const filters = st.source === 'persons' ? [
-                {id: 'gender', group: 'Genre', label: 'Genre', type: 'check', options: [['male', 'Hommes'], ['female', 'Femmes'], ['unknown', 'Inconnu']], value: f.gender || []},
-                {id: 'sosa', group: 'Lignée', label: 'Sosa', type: 'check', text: 'Seulement mes ancêtres (Sosa)', chipLabel: 'Sosa', value: !!f.sosa},
-                {id: 'birth_place', group: 'Lieu de naissance', label: 'Lieu de naissance', type: 'place', chipPrefix: 'Né(e) à', value: f.birth_place_id ? {id: f.birth_place_id, title: f.birth_place_title || ''} : (f.birth_place ? 'txt:' + f.birth_place : '')},
-                {id: 'label_id', group: 'Étiquette', label: 'Étiquette', kind: 'label', chipPrefix: '🏷', value: f.label_id ? {id: f.label_id, title: f.label_title || ''} : ''},
-                {id: 'born_from', group: 'Naissance', label: 'Nés à partir de', placeholder: '1700', chipPrefix: 'Nés à partir de', value: f.born_from || ''},
-                {id: 'born_to', group: 'Naissance', label: 'Nés jusqu’à', placeholder: '1850', chipPrefix: 'Nés avant', value: f.born_to || ''},
+                {id: 'gender', group: i18n('Genre'), label: i18n('Genre'), type: 'check', options: [['male', i18n('Hommes')], ['female', i18n('Femmes')], ['unknown', i18n('Inconnu')]], value: f.gender || []},
+                {id: 'sosa', group: i18n('Lignée'), label: 'Sosa', type: 'check', text: i18n('Seulement mes ancêtres (Sosa)'), chipLabel: 'Sosa', value: !!f.sosa},
+                {id: 'birth_place', group: i18n('Lieu de naissance'), label: i18n('Lieu de naissance'), type: 'place', chipPrefix: i18n('Né(e) à'), value: f.birth_place_id ? {id: f.birth_place_id, title: f.birth_place_title || ''} : (f.birth_place ? 'txt:' + f.birth_place : '')},
+                {id: 'label_id', group: i18n('Étiquette'), label: i18n('Étiquette'), kind: 'label', chipPrefix: '🏷', value: f.label_id ? {id: f.label_id, title: f.label_title || ''} : ''},
+                {id: 'born_from', group: i18n('Naissance'), label: i18n('Nés à partir de'), placeholder: '1700', chipPrefix: i18n('Nés à partir de'), value: f.born_from || ''},
+                {id: 'born_to', group: i18n('Naissance'), label: i18n('Nés jusqu’à'), placeholder: '1850', chipPrefix: i18n('Nés avant'), value: f.born_to || ''},
             ] : [
-                {id: 'event_types', group: 'Sorte', label: 'Sorte', type: 'check', options: evTypes(), value: (f.event_types || []).map(String)},
-                {id: 'place', group: 'Lieu', label: 'Lieu', type: 'place', chipPrefix: '📍', value: f.place_id ? {id: f.place_id, title: f.place_title || ''} : (f.place ? 'txt:' + f.place : '')},
-                {id: 'year_from', group: 'Années', label: 'À partir de', placeholder: '1700', chipPrefix: 'Depuis', value: f.year_from || ''},
-                {id: 'year_to', group: 'Années', label: 'Jusqu’à', placeholder: '1900', chipPrefix: 'Jusqu’à', value: f.year_to || ''},
-                {id: 'sosa', group: 'Lignée', label: 'Sosa', type: 'check', text: 'Seulement mes ancêtres (Sosa)', chipLabel: 'Sosa', value: !!f.sosa},
+                {id: 'event_types', group: i18n('Sorte'), label: i18n('Sorte'), type: 'check', options: evTypes(), value: (f.event_types || []).map(String)},
+                {id: 'place', group: i18n('Lieu'), label: i18n('Lieu'), type: 'place', chipPrefix: '📍', value: f.place_id ? {id: f.place_id, title: f.place_title || ''} : (f.place ? 'txt:' + f.place : '')},
+                {id: 'year_from', group: i18n('Années'), label: i18n('À partir de'), placeholder: '1700', chipPrefix: i18n('Depuis'), value: f.year_from || ''},
+                {id: 'year_to', group: i18n('Années'), label: i18n('Jusqu’à'), placeholder: '1900', chipPrefix: i18n('Jusqu’à'), value: f.year_to || ''},
+                {id: 'sosa', group: i18n('Lignée'), label: 'Sosa', type: 'check', text: i18n('Seulement mes ancêtres (Sosa)'), chipLabel: 'Sosa', value: !!f.sosa},
             ];
-            bar = UI().listBar({key: '', remember: false, search: {placeholder: st.source === 'persons' ? 'Chercher… (nom, prénom)' : 'Chercher… (nom, sorte, lieu)', value: f.q || ''}, filters,
+            bar = UI().listBar({key: '', remember: false, search: {placeholder: st.source === 'persons' ? i18n('Chercher… (nom, prénom)') : i18n('Chercher… (nom, sorte, lieu)'), value: f.q || ''}, filters,
                 onChange: s => { readBar(s); load(); }});
             host.appendChild(bar);
         }
@@ -152,20 +154,20 @@
         function allCols() { return st.data?.columns && ['stats', 'mylist'].includes(st.source) ? st.data.columns : (srcOf(st.source)?.columns || []); }
         function paintCols() {
             const box = $('[data-bcols]'), all = allCols(), keys = ['stats', 'mylist'].includes(st.source) ? all.map(c => c.k) : colsFor(st.source);
-            const TYPE = {person: '👤 personne', place: '📍 lieu', date: '📅 date d’acte', number: 'nombre', text: ''};
-            box.innerHTML = keys.map((k, i) => { const c = all.find(x => x.k === k); if (!c) return ''; return `<div class="xl-base-col" data-bk="${esc(k)}"><span class="xl-base-cl"><span class="xl-base-cn">${esc(X().colName(i))}</span><b>${esc(c.label)}</b>${TYPE[c.type] ? ` <small class="muted">(${esc(TYPE[c.type])})</small>` : ''}</span>${['stats', 'mylist'].includes(st.source) ? '' : `<button type="button" class="icon-button small" data-bmv="-1" title="Monter" aria-label="Monter">↑</button><button type="button" class="icon-button small" data-bmv="1" title="Descendre" aria-label="Descendre">↓</button><button type="button" class="icon-button small" data-brm title="Retirer la colonne" aria-label="Retirer la colonne">✕</button>`}</div>`; }).join('') || A().empty('Aucune colonne : ajoute-en une.', {icon: '▦'});
+            const TYPE = {person: i18n('👤 personne'), place: i18n('📍 lieu'), date: i18n('📅 date d’acte'), number: i18n('nombre'), text: ''};
+            box.innerHTML = keys.map((k, i) => { const c = all.find(x => x.k === k); if (!c) return ''; return `<div class="xl-base-col" data-bk="${esc(k)}"><span class="xl-base-cl"><span class="xl-base-cn">${esc(X().colName(i))}</span><b>${esc(L18(c.label))}</b>${TYPE[c.type] ? ` <small class="muted">(${esc(TYPE[c.type])})</small>` : ''}</span>${['stats', 'mylist'].includes(st.source) ? '' : `<button type="button" class="icon-button small" data-bmv="-1" title="${esc(i18n('Monter'))}" aria-label="${esc(i18n('Monter'))}">↑</button><button type="button" class="icon-button small" data-bmv="1" title="${esc(i18n('Descendre'))}" aria-label="${esc(i18n('Descendre'))}">↓</button><button type="button" class="icon-button small" data-brm title="${esc(i18n('Retirer la colonne'))}" aria-label="${esc(i18n('Retirer la colonne'))}">✕</button>`}</div>`; }).join('') || A().empty(i18n('Aucune colonne : ajoute-en une.'), {icon: '▦'});
             $('[data-badd]').parentElement.hidden = ['stats', 'mylist'].includes(st.source);
         }
         function paintPrev() {
             const d = st.data, box = $('[data-bprev]'), go = $('[data-bgo]');
-            if (!d) { box.innerHTML = UI()?.spinner ? UI().spinner('Lecture de la base…') : 'Lecture…'; go.disabled = true; return; }
+            if (!d) { box.innerHTML = UI()?.spinner ? UI().spinner(i18n('Lecture de la base…')) : esc(i18n('Lecture…')); go.disabled = true; return; }
             const n = d.rows.length;
-            $('[data-bcount]').textContent = n ? `(${Math.min(12, n)} premières lignes sur ${n.toLocaleString('fr-FR')})` : '';
+            $('[data-bcount]').textContent = n ? i18n('({shown} premières lignes sur {n})', {shown: Math.min(12, n), n}) : '';
             const cell = (v, c) => { if (v && typeof v === 'object') { const ini = String(v.v || '?').split(/[\s-]+/).filter(Boolean).map(x => x[0]).join('').slice(0, 2).toUpperCase(); return `<span class="xl-chip"><span class="xl-av${c.type === 'place' ? ' is-place' : ''}">${c.type === 'place' ? '📍' : esc(ini)}</span>${esc(v.v)}</span>`; } return esc(typeof v === 'number' ? v.toLocaleString('fr-FR') : v ?? ''); };
-            box.innerHTML = (n ? `<div class="xl-prev"><table><thead><tr>${d.columns.map(c => `<th>${esc(c.label)}</th>`).join('')}</tr></thead><tbody>${d.rows.slice(0, 12).map(r => `<tr>${d.columns.map(c => `<td>${cell(r.cells[c.k], c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>` : A().empty('Rien ne correspond : change les filtres.', {icon: '🔍'}))
-                + (d.hidden ? notice('info', `${plural(d.hidden, 'ligne')} laissée${d.hidden > 1 ? 's' : ''} de côté (personnes vivantes ou fiches confidentielles).`) : '')
-                + (d.truncated ? notice('warn', `Seules les ${n.toLocaleString('fr-FR')} premières lignes sont prises : précise les filtres.`) : '');
-            go.disabled = !n || !d.columns.length; go.textContent = n ? `⤒ Remplir ${plural(n, 'ligne')}` : '⤒ Remplir';
+            box.innerHTML = (n ? `<div class="xl-prev"><table><thead><tr>${d.columns.map(c => `<th>${esc(L18(c.label))}</th>`).join('')}</tr></thead><tbody>${d.rows.slice(0, 12).map(r => `<tr>${d.columns.map(c => `<td>${cell(r.cells[c.k], c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>` : A().empty(i18n('Rien ne correspond : change les filtres.'), {icon: '🔍'}))
+                + (d.hidden ? notice('info', i18n('{n} de côté (personnes vivantes ou fiches confidentielles).', {n: plural(d.hidden, 'ligne laissée', 'lignes laissées')})) : '')
+                + (d.truncated ? notice('warn', i18n('Seules les {n} premières lignes sont prises : précise les filtres.', {n})) : '');
+            go.disabled = !n || !d.columns.length; go.textContent = n ? i18n('⤒ Remplir {n}', {n: plural(n, 'ligne')}) : i18n('⤒ Remplir');
         }
         let timer = 0;
         function load() {
@@ -186,8 +188,8 @@
             if (row && b.matches('[data-brm]')) return setCols(colsFor(st.source).filter(k => k !== row.dataset.bk));
             if (b.matches('[data-badd]')) {
                 const have = new Set(colsFor(st.source)), rest = allCols().filter(c => !have.has(c.k));
-                if (!rest.length) return toast('Toutes les colonnes sont déjà là.');
-                return UI().menuAt(b, rest.map(c => ({icon: c.type === 'person' ? '👤' : c.type === 'place' ? '📍' : c.k.includes(':') ? '⚙️' : '＋', label: c.label, run: () => setCols([...colsFor(st.source), c.k])})), {title: 'Une colonne tirée des données'});
+                if (!rest.length) return toast(i18n('Toutes les colonnes sont déjà là.'));
+                return UI().menuAt(b, rest.map(c => ({icon: c.type === 'person' ? '👤' : c.type === 'place' ? '📍' : c.k.includes(':') ? '⚙️' : '＋', label: L18(c.label), run: () => setCols([...colsFor(st.source), c.k])})), {title: i18n('Une colonne tirée des données')});
             }
         });
         dlg.addEventListener('change', e => {
@@ -212,7 +214,7 @@
         const S = X(); let sh = ed.S(), r0 = 0, c0 = 0, t;
         ed.begin('Remplir depuis l’app');
         if (where === 'new') {
-            sh = S.newSheet(S.cleanSheetName(data.label || 'Depuis l’app', ed.wb.sheets.map(s => s.name)));
+            sh = S.newSheet(S.cleanSheetName(data.label || i18n('Depuis l’app'), ed.wb.sheets.map(s => s.name)));
             ed.wb.sheets.splice(ed.si + 1, 0, sh); sh.freeze = {r: 1, c: 0};
         } else {
             ed.meta(sh);
@@ -225,14 +227,14 @@
         t = ed.commit();
         if (where === 'new') ed.showSheet(ed.wb.sheets.indexOf(sh));
         ed.select(r0, c0); ed.render();
-        if (t) ed.undoable(`${plural(keys.length, 'ligne')} remplie${keys.length > 1 ? 's' : ''} depuis l’app${keep ? ' (tenue' + (keys.length > 1 ? 's' : '') + ' à jour)' : ''}`, t);
+        if (t) ed.undoable(keep ? plural(keys.length, 'ligne remplie depuis l’app (tenue à jour)', 'lignes remplies depuis l’app (tenues à jour)') : plural(keys.length, 'ligne remplie depuis l’app', 'lignes remplies depuis l’app'), t);
     }
 
     /* ═════════ ↻ Tenir à jour ═════════ */
     /** relit la plage liée ; les cellules à soi à droite (ou à gauche) du bloc suivent leur ligne, celles du dessous se décalent */
     async function refresh(ed, sh = ed.S(), {quiet = false} = {}) {
-        const L = sh.link; if (!L?.src) { if (!quiet) toast('Cette feuille n’est pas liée à la base : Données → « ⤒ Remplir depuis l’app… ».'); return null; }
-        let d; try { d = await fetchFill(L.src, ['stats', 'mylist'].includes(L.src.source) ? [] : L.cols.map(c => c.k)); } catch (e) { if (!quiet) toast(`Impossible de relire la base : ${e.message}`, 'error', {retry: () => refresh(ed, sh)}); return null; }
+        const L = sh.link; if (!L?.src) { if (!quiet) toast(i18n('Cette feuille n’est pas liée à la base : Données → « ⤒ Remplir depuis l’app… ».')); return null; }
+        let d; try { d = await fetchFill(L.src, ['stats', 'mylist'].includes(L.src.source) ? [] : L.cols.map(c => c.k)); } catch (e) { if (!quiet) toast(i18n('Impossible de relire la base : {error}', {error: e.message}), 'error', {retry: () => refresh(ed, sh)}); return null; }
         if (!ed.wb.sheets.includes(sh)) return null;
         const S = X(), cols = d.columns, nc = Math.max(cols.length, L.cols.length), oldN = L.n, newN = d.rows.length, keys = d.rows.map(r => r.key);
         // rien n'a changé : la plage reste telle quelle (et le classeur n'est pas « modifié »)
@@ -240,7 +242,7 @@
         for (let i = 0; i < oldN; i++) for (let j = 0; j < L.cols.length; j++) { const c = sh.cells[S.addr(L.r0 + 1 + i, L.c0 + j)]; sig.push([L.keys[i], c?.v ?? null, c?.ref?.id || 0]); }
         d.rows.forEach((r, i) => cols.forEach(cdef => { const c = cellOf(r.cells[cdef.k], cdef.type); newSig.push([keys[i], c?.v ?? null, c?.ref?.id || 0]); }));
         const sameHead = JSON.stringify(L.cols.map(c => c.k)) === JSON.stringify(cols.map(c => c.k));
-        if (sameHead && JSON.stringify(sig) === JSON.stringify(newSig)) { L.at = new Date().toISOString(); paintBar(ed); if (!quiet) toast('🔗 Déjà à jour : rien n’a changé dans la base.'); return {same: true}; }
+        if (sameHead && JSON.stringify(sig) === JSON.stringify(newSig)) { L.at = new Date().toISOString(); paintBar(ed); if (!quiet) toast(i18n('🔗 Déjà à jour : rien n’a changé dans la base.')); return {same: true}; }
         const extra = new Map(), next = {}, delta = newN - oldN;
         for (const k in sh.cells) {
             const p = S.parseAddr(k); if (!p) continue; const [r, c] = p, cell = sh.cells[k];
@@ -265,7 +267,8 @@
         sh.link = {...L, cols, n: newN, keys: keys.slice(0, 20000), at: new Date().toISOString(), label: d.label || L.label};
         blockDv(sh, L.r0, L.c0, cols, newN);
         const t = ed.commit(); ed.render();
-        const msg = `🔗 « ${sh.name} » relue : ${[added && `${plural(added, 'ligne')} de plus`, gone && `${plural(gone, 'ligne')} de moins`, !added && !gone && 'valeurs mises à jour'].filter(Boolean).join(', ')}${lost ? ` (${plural(lost, 'ligne')} à toi sans fiche : retirée${lost > 1 ? 's' : ''})` : ''}`;
+        const what = [added && i18n('{n} de plus', {n: plural(added, 'ligne')}), gone && i18n('{n} de moins', {n: plural(gone, 'ligne')}), !added && !gone && i18n('valeurs mises à jour')].filter(Boolean).join(', ');
+        const msg = lost ? i18n('🔗 « {name} » relue : {what} ({lost})', {name: sh.name, what, lost: plural(lost, 'ligne à toi sans fiche : retirée', 'lignes à toi sans fiche : retirées')}) : i18n('🔗 « {name} » relue : {what}', {name: sh.name, what});
         if (t) ed.undoable(msg, t);
         return {added, gone, kept};
     }
@@ -299,15 +302,15 @@
             if (bar.dataset.mode === 'census' && bar.dataset.sheet === sig) return;
             bar.dataset.mode = 'census'; bar.dataset.sheet = sig;
             const yr = Number(L.year) || 1836;
-            bar.innerHTML = `<span class="xl-baselink-t">🏠 <b>Relevé de recensement</b> · les colonnes de l’année :</span><label class="xl-baselink-y">Année <select data-bl-year aria-label="Année du recensement">${CENSUS_YEARS.map(y => `<option ${y === yr ? 'selected' : ''}>${y}</option>`).join('')}</select></label>
-                <span class="xl-baselink-pk"><span class="pk-lab">Commune</span>${P()?.pickerField ? P().pickerField({name: '', hiddenName: false, kind: 'place', inline: false, value: place ? {id: Number(place.id), title: place.title || ''} : null}) : ''}</span>
-                <span class="spacer"></span><button type="button" class="button small" data-bl="push">📤 Envoyer vers la base…</button>`;
+            bar.innerHTML = `<span class="xl-baselink-t">🏠 ${i18n('<b>Relevé de recensement</b> · les colonnes de l’année :')}</span><label class="xl-baselink-y">${esc(i18n('Année'))} <select data-bl-year aria-label="${esc(i18n('Année du recensement'))}">${CENSUS_YEARS.map(y => `<option ${y === yr ? 'selected' : ''}>${y}</option>`).join('')}</select></label>
+                <span class="xl-baselink-pk"><span class="pk-lab">${esc(i18n('Commune'))}</span>${P()?.pickerField ? P().pickerField({name: '', hiddenName: false, kind: 'place', inline: false, value: place ? {id: Number(place.id), title: place.title || ''} : null}) : ''}</span>
+                <span class="spacer"></span><button type="button" class="button small" data-bl="push">${esc(i18n('📤 Envoyer vers la base…'))}</button>`;
             return;
         }
         bar.dataset.mode = 'link'; bar.dataset.sheet = '';
         const when = UI()?.whenText ? UI().whenText(L.at, {}) : new Date(L.at).toLocaleDateString('fr-FR');
-        bar.innerHTML = `<span class="xl-baselink-t">🔗 Tenue à jour : <b>${esc(L.label || 'la base')}</b> · ${esc(plural(L.n, 'ligne'))} · relue ${esc(when)}</span><span class="spacer"></span>
-            <button type="button" class="button small secondary" data-bl="sync" title="Relire depuis la base">↻ Relire</button><button type="button" class="icon-button small" data-bl="more" title="Plus d’actions" aria-label="Plus d’actions">⋯</button>`;
+        bar.innerHTML = `<span class="xl-baselink-t">${i18n('🔗 Tenue à jour : <b>{what}</b> · {n} · relue {when}', {what: esc(L.label ? L18(L.label) : i18n('la base')), n: esc(plural(L.n, 'ligne')), when: esc(when)})}</span><span class="spacer"></span>
+            <button type="button" class="button small secondary" data-bl="sync" title="${esc(i18n('Relire depuis la base'))}">${esc(i18n('↻ Relire'))}</button><button type="button" class="icon-button small" data-bl="more" title="${esc(i18n('Plus d’actions'))}" aria-label="${esc(i18n('Plus d’actions'))}">⋯</button>`;
     }
     function bindBar(ed, bar) {
         bar.addEventListener('click', e => {
@@ -315,8 +318,8 @@
             const sh = ed.S();
             if (b.dataset.bl === 'sync') return refresh(ed, sh);
             if (b.dataset.bl === 'push') return pushDialog(ed);
-            if (b.dataset.bl === 'more') return UI().menuAt(b, [{icon: '⤒', label: 'Changer la source ou les colonnes…', run: () => fillDialog(ed, {edit: true})}, {icon: '📤', label: 'Envoyer vers la base…', run: () => pushDialog(ed)}, '-',
-                {icon: '×', label: 'Ne plus tenir à jour (garder les valeurs)', run: () => { ed.begin('Ne plus tenir à jour'); ed.meta(sh); delete sh.link; const t = ed.commit(); ed.render(); if (t) ed.undoable(`« ${sh.name} » n’est plus tenue à jour`, t); }}]);
+            if (b.dataset.bl === 'more') return UI().menuAt(b, [{icon: '⤒', label: i18n('Changer la source ou les colonnes…'), run: () => fillDialog(ed, {edit: true})}, {icon: '📤', label: i18n('Envoyer vers la base…'), run: () => pushDialog(ed)}, '-',
+                {icon: '×', label: i18n('Ne plus tenir à jour (garder les valeurs)'), run: () => { ed.begin('Ne plus tenir à jour'); ed.meta(sh); delete sh.link; const t = ed.commit(); ed.render(); if (t) ed.undoable(i18n('« {name} » n’est plus tenue à jour', {name: sh.name}), t); }}]);
         });
         bar.addEventListener('change', e => { if (e.target.matches('[data-bl-year]')) censusYear(ed, Number(e.target.value)); });
         bar.addEventListener('picker-change', e => {
@@ -374,7 +377,7 @@
         ed.begin('Année du relevé'); ed.meta(sh); ed.swap(sh, next);
         sh.cols = Object.fromEntries(Object.entries(parts.widths).map(([k, w]) => [k, {w}])); sh.dv = parts.dv; sh.link = {...L, year};
         const t = ed.commit(); setPref('censusYear', year); ed.dlg.querySelector('[data-xl-baselink]')?.setAttribute('data-sheet', ''); ed.render();
-        if (t) ed.undoable(`Relevé : colonnes de ${year}`, t);
+        if (t) ed.undoable(i18n('Relevé : colonnes de {year}', {year: String(year)}), t);
     }
 
     /* ═════════ 📤 Envoyer vers la base ═════════ */
@@ -417,9 +420,9 @@
         return out;
     }
     async function pushDialog(ed) {
-        if (kiosk()) return toast('Mode consultation : rien ne peut être envoyé vers la base.', 'error');
+        if (kiosk()) return toast(i18n('Mode consultation : rien ne peut être envoyé vers la base.'), 'error');
         const S = X(), sh = ed.S(), g = findTable(ed);
-        if (!g || g.r1 <= g.r0) return toast('Choisis le tableau à envoyer (sa ligne de titres et ses lignes), puis recommence.');
+        if (!g || g.r1 <= g.r0) return toast(i18n('Choisis le tableau à envoyer (sa ligne de titres et ses lignes), puis recommence.'));
         const heads = []; for (let c = g.c0; c <= g.c1; c++) heads.push({c, head: S.toStr(ed.calc.val(ed.si, g.r0, c) ?? '').trim()});
         const refCol = c => { for (let r = g.r0 + 1; r <= Math.min(g.r1, g.r0 + 60); r++) { const cell = sh.cells[S.addr(r, c)]; if (cell?.ref) return cell.ref.kind; } return ''; };
         const ctx0 = contextAbove(ed, g);
@@ -428,25 +431,25 @@
         let fields = map(), analysis = null, decisions = {}, token = '', payload = null;
         const dlg = document.createElement('dialog'); dlg.className = 'modal modal-l xl-base-dlg xl-push-dlg';
         const range = `${S.addr(g.r0 + 1, g.c0)}:${S.addr(g.r1, g.c1)}`;
-        dlg.innerHTML = `<form method="dialog" novalidate><div class="modal-head"><div><span class="eyebrow">TABLEUR · BASE</span><h2>📤 Envoyer vers la base — ${esc(sh.name)}, lignes ${g.r0 + 2} à ${g.r1 + 1}</h2></div><button type="button" class="icon-button" data-px aria-label="Fermer">×</button></div>
-            <ol class="xl-steps" data-psteps><li class="is-active">1. Les colonnes</li><li>2. Voilà ce qui va entrer</li><li>3. Envoyer</li></ol>
+        dlg.innerHTML = `<form method="dialog" novalidate><div class="modal-head"><div><span class="eyebrow">${esc(i18n('TABLEUR · BASE'))}</span><h2>${esc(i18n('📤 Envoyer vers la base — {name}, lignes {from} à {to}', {name: sh.name, from: String(g.r0 + 2), to: String(g.r1 + 1)}))}</h2></div><button type="button" class="icon-button" data-px aria-label="${esc(i18n('Fermer'))}">×</button></div>
+            <ol class="xl-steps" data-psteps><li class="is-active">${esc(i18n('1. Les colonnes'))}</li><li>${esc(i18n('2. Voilà ce qui va entrer'))}</li><li>${esc(i18n('3. Envoyer'))}</li></ol>
             <div class="h-dialog-body xl-base-body" data-pbody></div>
-            <div class="modal-actions"><button type="button" class="button secondary" data-pback hidden>← Retour</button><span class="xl-push-sum muted" data-psum></span><span class="spacer"></span><button type="button" class="button secondary" data-px>Annuler</button><button type="submit" class="button" data-pgo>Voir ce qui va entrer</button></div></form>`;
+            <div class="modal-actions"><button type="button" class="button secondary" data-pback hidden>${esc(i18n('← Retour'))}</button><span class="xl-push-sum muted" data-psum></span><span class="spacer"></span><button type="button" class="button secondary" data-px>${esc(i18n('Annuler'))}</button><button type="submit" class="button" data-pgo>${esc(i18n('Voir ce qui va entrer'))}</button></div></form>`;
         document.body.appendChild(dlg);
         const $ = s => dlg.querySelector(s), body = $('[data-pbody]'), go = $('[data-pgo]');
         let step = 1;
-        const setStep = n => { step = n; dlg.querySelectorAll('[data-psteps] li').forEach((li, i) => { li.classList.toggle('is-active', i === n - 1); li.classList.toggle('is-done', i < n - 1); li.textContent = (i < n - 1 ? '✓ ' : '') + ['1. Les colonnes', '2. Voilà ce qui va entrer', '3. Envoyer'][i]; }); $('[data-pback]').hidden = n !== 2; };
+        const setStep = n => { step = n; dlg.querySelectorAll('[data-psteps] li').forEach((li, i) => { li.classList.toggle('is-active', i === n - 1); li.classList.toggle('is-done', i < n - 1); li.textContent = (i < n - 1 ? '✓ ' : '') + i18n(['1. Les colonnes', '2. Voilà ce qui va entrer', '3. Envoyer'][i]); }); $('[data-pback]').hidden = n !== 2; };
         const sample = c => { for (let r = g.r0 + 1; r <= Math.min(g.r1, g.r0 + 20); r++) { const v = ed.calc.val(ed.si, r, c); if (v != null && v !== '') return S.formatValue(v, ed.wb.styles[sh.cells[S.addr(r, c)]?.s] || {}); } return ''; };
         function step1() {
-            setStep(1); go.textContent = 'Voir ce qui va entrer'; go.disabled = false; $('[data-psum]').textContent = `${plural(g.r1 - g.r0, 'ligne')} (${range})`;
-            body.innerHTML = `<div class="xl-push-target"><span>Ce que ça crée :</span><div class="segmented" role="tablist">${[['persons', '👤 Des fiches'], ['census', '🏠 Un recensement (foyers)'], ['events', '📅 Des événements']].map(([k, l]) => `<button type="button" data-pt="${k}" class="${k === target ? 'is-active' : ''}" aria-pressed="${k === target}">${l}</button>`).join('')}</div></div>
-                <div class="xl-push-ctx" data-pctx ${target === 'census' ? '' : 'hidden'}><label>Année du recensement <input type="number" name="year" min="1700" max="2100" value="${esc(ctx0.year || '')}" placeholder="1836"></label>
-                    <span><span class="pk-lab">Commune</span>${P()?.pickerField ? P().pickerField({name: '', hiddenName: false, kind: 'place', value: ctx0.place?.id ? (ctx0.place.title ? {id: ctx0.place.id, title: ctx0.place.title} : ctx0.place.id) : ctx0.place?.title ? 'txt:' + ctx0.place.title : null, allowFree: true, inline: true}) : ''}</span></div>
-                <table class="xl-prep-map xl-push-map"><thead><tr><th>Colonne</th><th>Exemple</th><th>Va dans</th></tr></thead><tbody>${heads.map((h, i) => `<tr><td><b>${esc(S.colName(h.c))}</b> · ${esc(h.head || '(sans titre)')}</td><td><small>${esc(sample(h.c))}</small></td><td><select data-pf="${i}" aria-label="Champ pour la colonne ${esc(S.colName(h.c))}">${FIELDS.map(([k, l]) => `<option value="${k}" ${fields[i] === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></td></tr>`).join('')}</tbody></table>
+            setStep(1); go.textContent = i18n('Voir ce qui va entrer'); go.disabled = false; $('[data-psum]').textContent = `${plural(g.r1 - g.r0, 'ligne')} (${range})`;
+            body.innerHTML = `<div class="xl-push-target"><span>${esc(i18n('Ce que ça crée :'))}</span><div class="segmented" role="tablist">${[['persons', '👤 Des fiches'], ['census', '🏠 Un recensement (foyers)'], ['events', '📅 Des événements']].map(([k, l]) => `<button type="button" data-pt="${k}" class="${k === target ? 'is-active' : ''}" aria-pressed="${k === target}">${esc(i18n(l))}</button>`).join('')}</div></div>
+                <div class="xl-push-ctx" data-pctx ${target === 'census' ? '' : 'hidden'}><label>${esc(i18n('Année du recensement'))} <input type="number" name="year" min="1700" max="2100" value="${esc(ctx0.year || '')}" placeholder="1836"></label>
+                    <span><span class="pk-lab">${esc(i18n('Commune'))}</span>${P()?.pickerField ? P().pickerField({name: '', hiddenName: false, kind: 'place', value: ctx0.place?.id ? (ctx0.place.title ? {id: ctx0.place.id, title: ctx0.place.title} : ctx0.place.id) : ctx0.place?.title ? 'txt:' + ctx0.place.title : null, allowFree: true, inline: true}) : ''}</span></div>
+                <table class="xl-prep-map xl-push-map"><thead><tr><th>${esc(i18n('Colonne'))}</th><th>${esc(i18n('Exemple'))}</th><th>${esc(i18n('Va dans'))}</th></tr></thead><tbody>${heads.map((h, i) => `<tr><td><b>${esc(S.colName(h.c))}</b> · ${esc(h.head || i18n('(sans titre)'))}</td><td><small>${esc(sample(h.c))}</small></td><td><select data-pf="${i}" aria-label="${esc(i18n('Champ pour la colonne {col}', {col: S.colName(h.c)}))}">${FIELDS.map(([k, l]) => `<option value="${k}" ${fields[i] === k ? 'selected' : ''}>${esc(i18n(l))}</option>`).join('')}</select></td></tr>`).join('')}</tbody></table>
                 <p class="muted xl-push-line" data-pline></p>`;
             paintLine();
         }
-        const paintLine = () => { const l = $('[data-pline]'); if (l) l.textContent = 'Colonnes : ' + (heads.map((h, i) => (fields[i] ? `${S.colName(h.c)} → ${FLABEL[fields[i]]}` : '')).filter(Boolean).join(' · ') || 'aucune pour l’instant'); };
+        const paintLine = () => { const l = $('[data-pline]'); if (l) l.textContent = i18n('Colonnes : {list}', {list: heads.map((h, i) => (fields[i] ? `${S.colName(h.c)} → ${i18n(FLABEL[fields[i]])}` : '')).filter(Boolean).join(' · ') || i18n('aucune pour l’instant')}); };
         const ctxNow = () => {
             const y = Number(dlg.querySelector('[name=year]')?.value || ctx0.year || 0), pk = dlg.querySelector('[data-pctx] .pk'), v = pk && P()?.pickerValue ? P().pickerValue(pk) : null;
             return {year: target === 'census' ? y : 0, place_id: typeof v === 'number' || /^\d+$/.test(String(v ?? '')) ? Number(v) : 0, place_name: typeof v === 'string' && v.startsWith('txt:') ? v.slice(4) : '', digest_id: sh.link?.src?.source === 'digest' ? Number(sh.link.src.filters?.digest_id) || 0 : 0};
@@ -472,7 +475,7 @@
             }
             return out;
         }
-        const BADGE = {linked: ['Déjà dans la base', 'green'], new: ['Nouvelle fiche', 'blue'], check: ['À vérifier', 'yellow'], problem: ['Problème', 'red'], skip: ['Laissée de côté', 'grey']};
+        const BADGE = {linked: [i18n('Déjà dans la base'), 'green'], new: [i18n('Nouvelle fiche'), 'blue'], check: [i18n('À vérifier'), 'yellow'], problem: [i18n('Problème'), 'red'], skip: [i18n('Laissée de côté'), 'grey']};
         function counts() {
             const c = {new: 0, linked: 0, check: 0, problem: 0, skip: 0};
             analysis.rows.forEach(a => { const d = decisions[a.i]; const s = d ? (d.action === 'skip' ? 'skip' : d.action === 'new' ? 'new' : 'linked') : a.status; c[s]++; });
@@ -482,33 +485,33 @@
             const c = counts(), left = c.check + c.problem + c.skip;
             $('[data-psum]').textContent = [c.new && plural(c.new, 'nouvelle fiche', 'nouvelles fiches'), c.linked && plural(c.linked, 'reliée', 'reliées'), target === 'census' && analysis.households && plural(analysis.households, 'foyer'), left && plural(left, 'laissée', 'laissées')].filter(Boolean).join(' · ');
             go.disabled = !c.new && !c.linked;
-            go.textContent = target === 'persons' ? (c.new ? `📤 Créer ${plural(c.new, 'fiche')}` : '📤 Rien de nouveau') : `📤 ${c.new ? `Créer ${plural(c.new, 'fiche')}${c.linked ? ' et ' : ''}` : ''}${c.linked ? `${c.new ? 'en relier' : 'Relier'} ${c.linked}` : ''}`.trim();
-            if (go.textContent === '📤') go.textContent = '📤 Envoyer';
+            go.textContent = target === 'persons' ? (c.new ? i18n('📤 Créer {n}', {n: plural(c.new, 'fiche')}) : i18n('📤 Rien de nouveau'))
+                : c.new && c.linked ? i18n('📤 Créer {n} et en relier {m}', {n: plural(c.new, 'fiche'), m: c.linked}) : c.new ? i18n('📤 Créer {n}', {n: plural(c.new, 'fiche')}) : c.linked ? i18n('📤 Relier {m}', {m: c.linked}) : i18n('📤 Envoyer');
         }
         async function step2() {
             const ctx = ctxNow();
-            if (!fields.some(Boolean)) return UI()?.fail ? UI().fail(dlg.querySelector('[data-pf]'), 'Choisis au moins une colonne à envoyer (le nom, par exemple).') : toast('Choisis au moins une colonne.');
-            if (target === 'census' && !(ctx.year >= 1700 && ctx.year <= 2100)) return UI()?.fail ? UI().fail(dlg.querySelector('[name=year]'), 'Donne l’année du recensement (par exemple 1836).') : toast('Donne l’année du recensement.');
-            if (!fields.some(f => ['name', 'last_name', 'first_name'].includes(f))) return UI()?.fail ? UI().fail(dlg.querySelector('[data-pf]'), 'Il faut une colonne pour le nom (ou « Nom et prénom »).') : toast('Il faut une colonne pour le nom.');
-            if (target === 'events' && !fields.includes('event_type')) return UI()?.fail ? UI().fail(dlg.querySelectorAll('[data-pf]')[fields.indexOf('') >= 0 ? fields.indexOf('') : 0], 'Choisis la colonne qui dit la sorte d’événement (Baptême, Décès…).') : toast('Il manque la sorte d’événement.');
-            const rows = rowsNow(); if (!rows.length) return toast('Ces lignes sont vides.');
+            if (!fields.some(Boolean)) return UI()?.fail ? UI().fail(dlg.querySelector('[data-pf]'), i18n('Choisis au moins une colonne à envoyer (le nom, par exemple).')) : toast(i18n('Choisis au moins une colonne.'));
+            if (target === 'census' && !(ctx.year >= 1700 && ctx.year <= 2100)) return UI()?.fail ? UI().fail(dlg.querySelector('[name=year]'), i18n('Donne l’année du recensement (par exemple 1836).')) : toast(i18n('Donne l’année du recensement.'));
+            if (!fields.some(f => ['name', 'last_name', 'first_name'].includes(f))) return UI()?.fail ? UI().fail(dlg.querySelector('[data-pf]'), i18n('Il faut une colonne pour le nom (ou « Nom et prénom »).')) : toast(i18n('Il faut une colonne pour le nom.'));
+            if (target === 'events' && !fields.includes('event_type')) return UI()?.fail ? UI().fail(dlg.querySelectorAll('[data-pf]')[fields.indexOf('') >= 0 ? fields.indexOf('') : 0], i18n('Choisis la colonne qui dit la sorte d’événement (Baptême, Décès…).')) : toast(i18n('Il manque la sorte d’événement.'));
+            const rows = rowsNow(); if (!rows.length) return toast(i18n('Ces lignes sont vides.'));
             payload = {target, rows, context: ctx, name: `${sh.name}${ed.name && ed.name !== sh.name ? ' (' + ed.name + ')' : ''}`, workbook_id: ed.id || 0};
-            setStep(2); go.disabled = true; body.innerHTML = UI()?.spinner ? UI().spinner('Je compare avec ta base…') : 'Comparaison…';
+            setStep(2); go.disabled = true; body.innerHTML = UI()?.spinner ? UI().spinner(i18n('Je compare avec ta base…')) : esc(i18n('Comparaison…'));
             try { analysis = (await post('sheet_push', {...payload, dry: 1})).result; } catch (e) { body.innerHTML = notice('error', e.message); return; }
             decisions = {};
-            const opt = (a) => a.status !== 'check' ? '' : `<select data-pd="${a.i}" aria-label="Choisir la fiche de la ligne ${a.row}"><option value="">choisis ▾</option>${a.candidates.map(c => `<option value="link:${c.id}">Relier à ${esc(c.title)} (${esc(c.meta)})</option>`).join('')}<option value="new">＋ Nouvelle fiche</option><option value="skip">Laisser de côté</option></select>`;
-            body.innerHTML = `${analysis.rows.some(a => a.status === 'check') ? notice('warn', 'Des lignes ressemblent à plusieurs fiches : choisis la bonne (sinon elles sont laissées de côté).') : ''}
-                <div class="xl-push-tablewrap"><table class="xl-prep-map xl-push-res"><thead><tr><th>Ligne</th><th>Ce qui va se passer</th><th></th></tr></thead><tbody>${analysis.rows.map(a => `<tr data-pr="${a.i}" data-ps="${a.status}"><td><b>${a.row}</b> <small>${esc(a.line)}</small></td><td>${esc(a.text)}${a.person && a.status === 'linked' ? ` <small class="muted">${esc(a.person.meta)}</small>` : ''} ${opt(a)}</td><td data-pb>${badge(...BADGE[a.status])}</td></tr>`).join('')}</tbody></table></div>`;
+            const opt = (a) => a.status !== 'check' ? '' : `<select data-pd="${a.i}" aria-label="${esc(i18n('Choisir la fiche de la ligne {row}', {row: String(a.row)}))}"><option value="">${esc(i18n('choisis ▾'))}</option>${a.candidates.map(c => `<option value="link:${c.id}">${esc(i18n('Relier à {name} ({meta})', {name: c.title, meta: c.meta}))}</option>`).join('')}<option value="new">${esc(i18n('＋ Nouvelle fiche'))}</option><option value="skip">${esc(i18n('Laisser de côté'))}</option></select>`;
+            body.innerHTML = `${analysis.rows.some(a => a.status === 'check') ? notice('warn', i18n('Des lignes ressemblent à plusieurs fiches : choisis la bonne (sinon elles sont laissées de côté).')) : ''}
+                <div class="xl-push-tablewrap"><table class="xl-prep-map xl-push-res"><thead><tr><th>${esc(i18n('Ligne'))}</th><th>${esc(i18n('Ce qui va se passer'))}</th><th></th></tr></thead><tbody>${analysis.rows.map(a => `<tr data-pr="${a.i}" data-ps="${a.status}"><td><b>${a.row}</b> <small>${esc(a.line)}</small></td><td>${esc(i18n(a.text))}${a.person && a.status === 'linked' ? ` <small class="muted">${esc(a.person.meta)}</small>` : ''} ${opt(a)}</td><td data-pb>${badge(...BADGE[a.status])}</td></tr>`).join('')}</tbody></table></div>`;
             paintSum();
         }
         async function step3() {
             setStep(3); const label = go.textContent; go.disabled = true; go.innerHTML = `<span class="ui-spin" aria-hidden="true"></span>${esc(label)}`;
             const send = async () => (await post('sheet_push', {...payload, decisions})).result;
-            let r; try { r = await send(); } catch (e) { setStep(2); go.disabled = false; go.textContent = label; body.insertAdjacentHTML('afterbegin', notice('error', `Impossible d’envoyer : ${e.message}`)); return; }
+            let r; try { r = await send(); } catch (e) { setStep(2); go.disabled = false; go.textContent = label; body.insertAdjacentHTML('afterbegin', notice('error', i18n('Impossible d’envoyer : {error}', {error: e.message}))); return; }
             token = r.token; dlg.close();
             const again = () => { if (sh.link?.src && ed.dlg?.open) refresh(ed, sh, {quiet: true}); };
             again();
-            A().undoToast(r.message, {icon: '📤', undo: async () => { await post('sheet_push_undo', {token}); again(); }, redo: async () => { const x = await send(); token = x.token; again(); }});
+            A().undoToast(i18n(r.message), {icon: '📤', undo: async () => { await post('sheet_push_undo', {token}); again(); }, redo: async () => { const x = await send(); token = x.token; again(); }});
             ext.sheetBase.lastPush = {token, result: r};
         }
         dlg.addEventListener('click', e => {
@@ -544,7 +547,7 @@
         const open0 = PR.open; PR.open = function (...a) { const out = open0.apply(this, a); setTimeout(() => onOpen(this), 0); return out; };
         // le modèle « Relevé de recensement » : les colonnes de l'année choisie (dernière année retenue)
         const tpl = (I.TEMPLATES || ext.sheetTemplates || []).find(t => t.key === 'census');
-        if (tpl) { tpl.make = () => censusBook(); tpl.hint = 'colonnes de l’année (1836 → 1936) · foyers · 📤 vers la base'; }
+        if (tpl) { tpl.make = () => censusBook(); tpl.hint = 'colonnes de l’année (1836 → 1936) · foyers · 📤 vers la base'; } // traduit à l’affichage (i18n dans chooseTemplate)
         return true;
     }
     hook(); document.addEventListener('DOMContentLoaded', hook);

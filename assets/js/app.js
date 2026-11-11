@@ -4474,7 +4474,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         const raw=combo==='+'?['+']:combo.endsWith('++')?[...combo.slice(0,-2).split('+').filter(Boolean),'+']:combo.split('+');
         const key=raw[raw.length-1],mods=raw.slice(0,-1);
         if(IS_MAC){const g={Ctrl:'⌃',Alt:'⌥',Shift:'⇧',Mod:'⌘'};return mods.map(m=>g[m]||m).join('')+(keyNames[key]||key);}
-        const g={Mod:'Ctrl',Alt:'Alt',Shift:'Maj',Meta:'Win'};return [...mods.map(m=>g[m]||m),keyNames[key]||key].join('+');
+        const tk=x=>(window.LCNDA_I18N&&/\p{L}{2}/u.test(x)?window.LCNDA_I18N.t(x,{ctx:'touche'}):x);const g={Mod:'Ctrl',Alt:'Alt',Shift:'Maj',Meta:'Win'};return [...mods.map(m=>tk(g[m]||m)),tk(keyNames[key]||key)].join('+');
     }
     const kbd=combo=>{const K=window.LCNDA_APP?.keys,t=comboLabel(combo);return K&&combo&&K.parts(t).length?K.html(t).replace('class="k-keys"','class="shortcut-kbd k-keys"'):`<kbd class="shortcut-kbd">${escapeHtml(t)}</kbd>`;}; // K12 : les touches dessinées, pour cet ordinateur
     /* ⌨️ Le raccourci d'un bouton se lit dans sa bulle d'aide (data-shortcut, mis en forme par app-harmony.js).

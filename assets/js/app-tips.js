@@ -27,6 +27,8 @@
     const SHOW = IS_MAC
         ? {MOD: '⌘', CTRL: '⌃', ALT: '⌥', SHIFT: '⇧', META: '⌘', ENTER: '↩', ESC: 'Échap', SPACE: 'Espace', BACK: '⌫', DEL: 'Suppr', TAB: 'Tab', PGUP: 'Page↑', PGDN: 'Page↓', HOME: 'Début', END: 'Fin'}
         : {MOD: 'Ctrl', CTRL: 'Ctrl', ALT: 'Alt', SHIFT: 'Maj', META: 'Win', ENTER: 'Entrée', ESC: 'Échap', SPACE: 'Espace', BACK: '⌫', DEL: 'Suppr', TAB: 'Tab', PGUP: 'Page↑', PGDN: 'Page↓', HOME: 'Début', END: 'Fin'};
+    // 🌐 noms des touches dans la langue de l'app (Maj → Shift, Entrée → Enter…) ; en français rien ne change
+    if (window.LCNDA_I18N && window.LCNDA_I18N.getLang() !== 'fr') Object.keys(SHOW).forEach(k => { if (/\p{L}{2}/u.test(SHOW[k])) SHOW[k] = window.LCNDA_I18N.t(SHOW[k], {ctx: 'touche'}); });
     const ORDER = IS_MAC ? ['CTRL', 'ALT', 'SHIFT', 'MOD', 'META'] : ['MOD', 'CTRL', 'META', 'ALT', 'SHIFT'];
     /** « ⌘V / Ctrl+V », « ⌘ ou Ctrl » : on garde l'écriture de cet ordinateur */
     function pickAlt(s) {

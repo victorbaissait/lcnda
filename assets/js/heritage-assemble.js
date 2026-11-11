@@ -7,6 +7,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => { const I = typeof window !== 'undefined' && window.LCNDA_I18N; return I ? I.t(s, v) : (v ? String(s).replace(/\{(\w+)\}/g, (m, k) => (k in v ? String(v[k]) : m)) : s); }; // 🌐 traduction (docs/I18N.md)
     const A = () => window.LCNDA_APP;
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const esc = v => A().escapeHtml(v ?? '');
@@ -113,14 +114,14 @@
                 <div class="h-as-hint muted">Clique une photo pour la choisir, glisse pour la déplacer · Maj + molette : taille · Alt + molette : rotation · molette : zoom · flèches : 1 px (Maj : 10 px) · glisse ici une photo de l’ordinateur pour l’ajouter</div></div>
                 <aside class="h-as-side">
                     ${sec('Position et taille', 'as-pos', '<div data-as-props></div>')}
-                    ${sec('Couleur', 'as-color', '<label class="checkbox-line" data-help="Coché : le fond autour des photos est blanc. Décoché, il reste transparent (seulement en PNG ; le JPG met toujours du blanc)."><input type="checkbox" data-as-bg checked> Fond blanc (sinon transparent en PNG)</label>', false)}
-                    ${sec('Effets', 'as-fx', '<div data-as-fx></div><label class="ui-toggle" title="Ce qui se superpose bien devient noir : idéal pour aligner deux photos du même endroit" data-help="Les parties identiques des deux photos deviennent noires : quand l’écriture disparaît presque, elles sont parfaitement alignées."><input type="checkbox" data-as-diff><i></i>Mode différence</label>')}
+                    ${sec('Couleur', 'as-color', '<label class="checkbox-line" data-help="' + esc(i18n('Coché : le fond autour des photos est blanc. Décoché, il reste transparent (seulement en PNG ; le JPG met toujours du blanc).')) + '"><input type="checkbox" data-as-bg checked> Fond blanc (sinon transparent en PNG)</label>', false)}
+                    ${sec('Effets', 'as-fx', '<div data-as-fx></div><label class="ui-toggle" title="Ce qui se superpose bien devient noir : idéal pour aligner deux photos du même endroit" data-help="' + esc(i18n('Les parties identiques des deux photos deviennent noires : quand l’écriture disparaît presque, elles sont parfaitement alignées.')) + '"><input type="checkbox" data-as-diff><i></i>Mode différence</label>')}
                     ${sec('Photos', 'as-photos', `<div class="h-as-tools" data-tbg="as-tools" data-tbg-label="Boutons des photos"><button type="button" class="button small" data-as-add>＋ Photos</button><button type="button" class="button small secondary" data-as-fit>⤢ Tout voir</button></div>
                         <div class="h-as-autobar"><button type="button" class="button small" data-as-auto title="Panorama, page photographiée en deux fois : chaque photo est posée sur la précédente là où elles se recouvrent (décalage, petite rotation)">🪄 Aligner tout seul</button></div><div class="h-as-layers" data-as-layers></div>`)}
                     ${sec('Image enregistrée', 'as-out', `<div class="h-as-out"><label>Format<select data-as-fmt><option value="image/jpeg">JPEG (léger)</option><option value="image/png">PNG (sans perte)</option></select></label>
-                        <label class="checkbox-line" data-help="Là où deux photos se recouvrent, le bord de celle du dessus s’efface en douceur : pas de marche visible au raccord."><input type="checkbox" data-as-feather ${opts.pano ? 'checked' : ''}> Fondre les raccords</label>
+                        <label class="checkbox-line" data-help="${esc(i18n('Là où deux photos se recouvrent, le bord de celle du dessus s’efface en douceur : pas de marche visible au raccord.'))}"><input type="checkbox" data-as-feather ${opts.pano ? 'checked' : ''}> Fondre les raccords</label>
                         <label class="h-avx-row"><span>Largeur du fondu</span><input type="range" min="2" max="30" value="8" data-as-fw> <output data-as-fwo>8 %</output></label>
-                        <label class="checkbox-line" data-help="Garde le plus grand rectangle entièrement couvert par les photos : plus de coins blancs autour d’un panorama."><input type="checkbox" data-as-crop ${opts.pano ? 'checked' : ''}> Rogner aux parties couvertes (sans coins vides)</label>
+                        <label class="checkbox-line" data-help="${esc(i18n('Garde le plus grand rectangle entièrement couvert par les photos : plus de coins blancs autour d’un panorama.'))}"><input type="checkbox" data-as-crop ${opts.pano ? 'checked' : ''}> Rogner aux parties couvertes (sans coins vides)</label>
                         <p class="muted" data-as-msg></p></div>`, !!opts.pano)}
                 </aside></div>`;
         document.body.appendChild(dl);
@@ -169,7 +170,7 @@
         function paintProps() {
             const L = layers[sel], box = $('[data-as-props]'), fx = $('[data-as-fx]');
             if (!L) { box.innerHTML = '<p class="muted">Clique une photo pour la régler.</p>'; fx.innerHTML = ''; box.dataset.for = ''; return; }
-            const row = (k, label, min, max, step, val, unit, help = '') => `<label class="h-avx-row"><span${help ? ` data-help="${esc(help)}"` : ''}>${label}</span><input type="range" data-as-p="${k}" min="${min}" max="${max}" step="${step}" value="${val}"><input type="number" data-as-n="${k}" min="${min}" max="${max}" step="${step}" value="${Math.round(val * 100) / 100}" class="h-as-num">${unit}</label>`;
+            const row = (k, label, min, max, step, val, unit, help = '') => `<label class="h-avx-row"><span${help ? ` data-help="${esc(i18n(help))}"` : ''}>${label}</span><input type="range" data-as-p="${k}" min="${min}" max="${max}" step="${step}" value="${val}"><input type="number" data-as-n="${k}" min="${min}" max="${max}" step="${step}" value="${Math.round(val * 100) / 100}" class="h-as-num">${unit}</label>`;
             if (box.dataset.for === String(sel) && (box.contains(document.activeElement) || fx.contains(document.activeElement))) { [box, fx].forEach(bx => bx.querySelectorAll('[data-as-p],[data-as-n]').forEach(el => { if (el !== document.activeElement) { const k = el.dataset.asP || el.dataset.asN; el.value = k === 'o' ? Math.round(L.o * 100) : k === 's' ? Math.round(L.s * 1000) / 10 : Math.round(L.r * 10) / 10; } })); return; }
             box.dataset.for = String(sel);
             box.innerHTML = `<h4>${esc(L.name)}</h4>${row('s', 'Taille', 2, 400, 0.1, Math.round(L.s * 1000) / 10, '%', 'La taille de la photo par rapport à ses vrais points : pour mettre deux photos à la même échelle.')}${row('r', 'Rotation', -180, 180, 0.1, Math.round(L.r * 10) / 10, '°')}
@@ -226,7 +227,7 @@
         function renderCanvas(fmt = $('[data-as-fmt]').value) {
             const vis = layers.filter(l => l.vis); if (!vis.length) throw new Error('Aucune photo visible.');
             const b = bounds(vis), W = Math.ceil(b.x1 - b.x0), H = Math.ceil(b.y1 - b.y0);
-            if (W * H > 140e6 || W > 16000 || H > 16000) throw new Error(`Image trop grande (${W} × ${H} points) : réduis la taille des photos.`);
+            if (W * H > 140e6 || W > 16000 || H > 16000) throw new Error(i18n('Image trop grande ({w} × {h} points) : réduis la taille des photos.', {w: String(W), h: String(H)}));
             const out = document.createElement('canvas'); out.width = W; out.height = H; const c = out.getContext('2d');
             const feather = $('[data-as-feather]').checked && vis.length > 1, cropOn = $('[data-as-crop]').checked;
             const place = (ctx, L) => { ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.translate(-b.x0, -b.y0); ctx.translate(L.x, L.y); ctx.rotate(rad(L.r)); ctx.scale(L.s, L.s); };
@@ -273,18 +274,18 @@
             let done = 0, weak = [];
             try {
                 for (let i = 1; i < layers.length; i++) {
-                    btn.textContent = `Recherche… (${i}/${layers.length - 1})`; await new Promise(r => setTimeout(r, 20));
+                    btn.textContent = i18n('Recherche… ({i}/{total})', {i: String(i), total: String(layers.length - 1)}); await new Promise(r => setTimeout(r, 20));
                     const A0 = layers[i - 1], B = layers[i], r = await alignPair(A0.img, B.img, {s0: B.s / A0.s});
                     if (!r || r.ncc < 0.3) { weak.push(B.name); continue; }
                     const dx = (r.cx - A0.img.naturalWidth / 2) * A0.s, dy = (r.cy - A0.img.naturalHeight / 2) * A0.s, c = Math.cos(rad(A0.r)), s = Math.sin(rad(A0.r));
                     B.x = A0.x + dx * c - dy * s; B.y = A0.y + dx * s + dy * c; B.s = A0.s * r.s; B.r = A0.r + r.rot; B.o = 1; done++;
-                    if (msg) msg.textContent = `« ${B.name} » : décalage ${Math.round(r.cx - A0.img.naturalWidth / 2)} × ${Math.round(r.cy - A0.img.naturalHeight / 2)} points, rotation ${r.rot.toFixed(2).replace('.', ',')}°, ressemblance ${Math.round(r.ncc * 100)} %.`;
+                    if (msg) msg.textContent = i18n('« {name} » : décalage {dx} × {dy} points, rotation {rot}°, ressemblance {pct} %.', {name: B.name, dx: String(Math.round(r.cx - A0.img.naturalWidth / 2)), dy: String(Math.round(r.cy - A0.img.naturalHeight / 2)), rot: r.rot.toFixed(2).replace('.', ','), pct: String(Math.round(r.ncc * 100))});
                     dl.dataset.lastAlign = JSON.stringify({cx: r.cx, cy: r.cy, rot: r.rot, s: r.s, ncc: r.ncc});
                 }
             } finally { btn.disabled = false; btn.textContent = label; }
             dirty = true; $('[data-as-props]').dataset.for = ''; fit(); commit();
-            if (weak.length) toast(`Pas de partie commune sûre pour ${weak.map(n => `« ${n} »`).join(', ')} : place-la à la main (glisser, flèches ; « Mode différence » pour vérifier).`, 'error');
-            else toast(`${done > 1 ? 'Photos alignées' : 'Photo alignée'} : vérifie (glisser, flèches pour ajuster). « Fondre les raccords » adoucit la jonction à l’enregistrement.`);
+            if (weak.length) toast(i18n('Pas de partie commune sûre pour {names} : place-la à la main (glisser, flèches ; « Mode différence » pour vérifier).', {names: weak.map(n => `« ${n} »`).join(', ')}), 'error');
+            else toast(done > 1 ? i18n('Photos alignées : vérifie (glisser, flèches pour ajuster). « Fondre les raccords » adoucit la jonction à l’enregistrement.') : i18n('Photo alignée : vérifie (glisser, flèches pour ajuster). « Fondre les raccords » adoucit la jonction à l’enregistrement.'));
         }
         $('[data-as-auto]').addEventListener('click', autoAlign);
         $('[data-as-fw]').addEventListener('input', e => { $('[data-as-fwo]').textContent = e.target.value + ' %'; });
@@ -302,12 +303,12 @@
             const msg = $('[data-as-msg]'), btn = $('[data-as-save]'); btn.disabled = true; msg.textContent = 'Création de l’image…'; UI?.savedStatus?.(statusEl, 'saving');
             try {
                 const r = await render();
-                msg.textContent = `Envoi (${r.W} × ${r.H} points, ${(r.blob.size / 1048576).toFixed(1)} Mo)…`;
+                msg.textContent = i18n('Envoi ({w} × {h} points, {size} Mo)…', {w: String(r.W), h: String(r.H), size: (r.blob.size / 1048576).toFixed(1)});
                 const fd = new FormData(); fd.append('file', r.blob, 'assemblage.' + r.ext); fd.append('media_id', base.media.id); fd.append('mode', 'copy'); fd.append('show', '0'); fd.append('title', $('[data-as-title]').value.trim() || 'Assemblage');
                 const res = await fetch('api.php?action=retouch_media', {method: 'POST', body: fd, headers: {'X-CSRF-Token': S().csrf}});
                 const j = await res.json().catch(() => ({error: 'Réponse illisible du serveur'}));
                 if (!res.ok || j.error) throw new Error(j.error || 'Enregistrement impossible.');
-                toast('Image assemblée enregistrée, rattachée aux mêmes fiches que « ' + base.name + ' ». Les photos d’origine restent.');
+                toast(i18n('Image assemblée enregistrée, rattachée aux mêmes fiches que « {name} ». Les photos d’origine restent.', {name: base.name}));
                 dirty = false; dl.close();
                 await opts.onSaved?.(j.result.media_id);
                 if (!opts.onSaved) ext.refreshView?.();

@@ -7,6 +7,7 @@
  */
 (function (root) {
     'use strict';
+    const i18n = (s, v) => { const I = typeof window !== 'undefined' && window.LCNDA_I18N; return I ? I.t(s, v) : (v ? String(s).replace(/\{(\w+)\}/g, (m, k) => (k in v ? String(v[k]) : m)) : s); }; // 🌐 traduction (docs/I18N.md)
     const ext = root.LCNDA_EXT = root.LCNDA_EXT || {};
 
     /** ce qui part (255 = effacé) en cliquant en (x, y) ; tol de 0 à 100 */

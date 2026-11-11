@@ -10,6 +10,7 @@
     const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
     const api = (...a) => A().api(...a);
     const toast = (...a) => A().toast(...a);
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : s); // 🌐 docs/I18N.md
     const n2 = v => Math.round((Number(v) || 0) * 100) / 100;
     const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
     const mediaUrl = f => `media/${encodeURIComponent(f)}`;
@@ -206,7 +207,7 @@
             body: `<div class="h-sl">
                 <div class="h-sl-tabs" role="tablist"><button type="button" data-sl-mode="sign">✍️ La signature d’un acte</button><button type="button" data-sl-mode="seal">🔏 Monogramme, cachet, tampon</button></div>
                 <section data-sl-pane="sign">
-                    <p class="muted">Choisis l’image d’un acte, puis <b>encadre la signature</b> en glissant. Le papier, les taches et les lignes s’effacent ; l’encre devient un tracé net, à agrandir sans perte, à imprimer ou à graver.</p>
+                    <p class="muted">${i18n('Choisis l’image d’un acte, puis {b} en glissant. Le papier, les taches et les lignes s’effacent ; l’encre devient un tracé net, à agrandir sans perte, à imprimer ou à graver.', {b: `<b>${i18n('encadre la signature')}</b>`})}</p>
                     <div class="h-sl-src"><button type="button" class="button small" data-sl-media>📷 Un acte des médias…</button><button type="button" class="button small secondary" data-sl-known title="Une signature déjà encadrée dans la visionneuse (Signatures identifiées)">✍️ Une signature déjà repérée…</button><label class="button small secondary">💻 De l’ordinateur<input type="file" accept="image/*" data-sl-file hidden></label><span class="muted" data-sl-name></span></div>
                     <div class="h-sl-work"><div class="h-sl-stage" data-sl-stage><p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🖼️</span><span class="empty-line-text">Aucune image pour l’instant.</span></p></div>
                         <div class="h-sl-side"><div class="h-sl-prev" data-sl-prev><p class="muted">L’aperçu de la signature s’affiche ici.</p></div>
@@ -290,9 +291,9 @@
                 if (pbox) $('[data-sl-presets]').appendChild(pbox);
                 // E4 : une image d'acte déposée (ou collée) sur la zone entre dans les médias, puis s'ouvre ici
                 const U = window.LCNDA_UI || A().ui, P2 = window.LCNDA_PICKER || A();
-                U?.bindFileDrop?.(stage, async files => { const f2 = files[0]; if (!f2) return; try { const m = P2?.importMediaFile ? await P2.importMediaFile(f2, ['image']) : null; if (m?.filename) { await loadImg(mediaUrl(m.filename), m.title || f2.name); toast('Image rangée dans les médias.'); return; } } catch (e) { toast(`Pas rangée dans les médias : ${e.message}`, 'error'); }
+                U?.bindFileDrop?.(stage, async files => { const f2 = files[0]; if (!f2) return; try { const m = P2?.importMediaFile ? await P2.importMediaFile(f2, ['image']) : null; if (m?.filename) { await loadImg(mediaUrl(m.filename), m.title || f2.name); toast('Image rangée dans les médias.'); return; } } catch (e) { toast(i18n('Pas rangée dans les médias : {err}', {err: e.message}), 'error'); }
                     const r = new FileReader(); r.onload = () => loadImg(r.result, f2.name); r.readAsDataURL(f2); }, {accept: 'image/*'});
-                if (!img) stage.innerHTML = '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🖼️</span><span class="empty-line-text">Aucune image pour l’instant : choisis un acte, ou glisse une image ici (⌘V pour la coller).</span></p>';
+                if (!img) stage.innerHTML = '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🖼️</span><span class="empty-line-text">' + i18n('Aucune image pour l’instant : choisis un acte, ou glisse une image ici (⌘V pour la coller).') + '</span></p>';
                 setMode(mode);
             },
             onSubmit: async form => {
@@ -303,7 +304,7 @@
                 const m = inkMask(f, {thr: Number(o.thr), speck: Number(o.speck), grow: Number(o.grow), lines: !!o.lines});
                 try {
                     const name = person ? `Signature ${deName(person.name)}` : 'Signature', doc = await signatureDoc(f, m, {ink: o.ink, caption: String(o.caption || '').trim(), name});
-                    if (person && o.tomedia) await toMedia(maskCanvas(f, m, o.ink), person, name).catch(e => toast(`Image non rangée : ${e.message}`, 'error'));
+                    if (person && o.tomedia) await toMedia(maskCanvas(f, m, o.ink), person, name).catch(e => toast(i18n('Image non rangée : {err}', {err: e.message}), 'error'));
                     ext.openVectorEditor({doc, name, onSaved: onDone, onClose: onDone});
                 } catch (e) { toast(e.message, 'error'); return false; }
             }});
@@ -314,7 +315,7 @@
         const fd = new FormData(); fd.append('person_id', person.id); fd.append('title', title); fd.append('csrf', A().state.csrf); fd.append('files[]', new File([blob], `${title.replace(/[^\p{L}\d]+/gu, '-').toLowerCase()}.png`, {type: 'image/png'}));
         const r = await fetch('upload.php', {method: 'POST', body: fd}); const j = await r.json().catch(() => ({error: 'Réponse illisible du serveur'}));
         if (!r.ok || j.error) throw new Error(j.error || 'envoi impossible');
-        toast(`Signature rangée dans les médias ${deName(person.name)}.`);
+        toast(i18n(/^d’/.test(deName(person.name)) ? 'Signature rangée dans les médias d’{name}.' : 'Signature rangée dans les médias de {name}.', {name: String(person.name || '').trim()}));
     }
     const pickMedia = () => ext.pickImage({eyebrow: 'SIGNATURES', title: 'L’image d’un acte', intro: 'Clique sur l’image ; tu encadreras ensuite la signature. Le filtre « Avec une signature repérée » montre les actes où une signature a déjà été identifiée.'});
     /** ✍️ les signatures déjà repérées sur les images (visionneuse → Signatures identifiées) */
