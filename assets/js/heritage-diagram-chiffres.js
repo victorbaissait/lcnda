@@ -9,6 +9,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s).replace(/\{(\w+)\}/g, (m, k) => (v && k in v ? String(v[k]) : m)));
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const DR = ext.diagramRender; if (!DR?.KINDS) return;
     const A = () => window.LCNDA_APP;
@@ -31,7 +32,7 @@
     const T = (x, y, s, {size = 12, anchor = 'start', weight = 400, fill = 'currentColor', rotate = 0, baseline = 'middle', style = '', opacity = 1} = {}) =>
         `<text x="${r2(x)}" y="${r2(y)}" font-size="${r2(size)}" text-anchor="${anchor}" dominant-baseline="${baseline}" font-weight="${weight}" fill="${fill}"${opacity < 1 ? ` fill-opacity="${opacity}"` : ''}${rotate ? ` transform="rotate(${rotate} ${r2(x)} ${r2(y)})"` : ''}${style ? ` font-style="${style}"` : ''}>${esc(s)}</text>`;
     const tip = s => `<title>${esc(s)}</title>`;
-    const empty = (W, fs, msg) => ({h: 60, svg: T(W / 2, 30, msg, {anchor: 'middle', size: fs, fill: '#888'})});
+    const empty = (W, fs, msg) => ({h: 60, svg: T(W / 2, 30, i18n(msg), {anchor: 'middle', size: fs, fill: '#888'})});
     const rowsOf = (spec, key = 'rows', max = 5000) => (Array.isArray(spec[key]) ? spec[key] : []).filter(r => r && typeof r === 'object').slice(0, max);
     const MAX_CATS = 300, MAX_SERIES = 40;
     /** catégories × séries (comme les colonnes) ; vide = null */
@@ -193,7 +194,7 @@
         for (let k = 0; k <= nb; k += every) svg += `<line x1="${r2(left + k * band)}" y1="${r2(plotH)}" x2="${r2(left + k * band)}" y2="${r2(plotH + 4)}" stroke="currentColor" stroke-opacity=".5"/>` + T(left + k * band, plotH + fs, fmt(start + k * bw), {size: fs * .85, anchor: 'middle'});
         const sorted = vals.flatMap(x => x.w === 1 ? [x.v] : Array(Math.min(10000, Math.round(x.w))).fill(x.v)).slice(0, 200000).sort((a, b) => a - b);
         let marks = 0; const mark = (v, lab, dash) => { const x = left + (v - start) / (nb * bw) * plotW; return `<line x1="${r2(x)}" y1="${r2(-pad)}" x2="${r2(x)}" y2="${r2(plotH)}" stroke="currentColor" stroke-width="1.5" stroke-dasharray="${dash}"/>` + T(x + 4, -pad + fs * .6 + (marks++) * fs, `${lab} ${fmt(v, 1)}${u}`, {size: fs * .8, weight: 600}); };
-        if (o.median && sorted.length) svg += mark(quant(sorted, .5), 'médiane', '5 4');
+        if (o.median && sorted.length) svg += mark(quant(sorted, .5), i18n('médiane'), '5 4');
         if (o.mean && sorted.length) svg += mark(sorted.reduce((a, b) => a + b, 0) / sorted.length, 'moyenne', '2 3');
         let h = plotH + fs * 1.8;
         if (o.xLabel) { svg += T(left + plotW / 2, h + fs * .4, o.xLabel, {size: fs * .85, anchor: 'middle', weight: 600}); h += fs * 1.4; }
@@ -227,10 +228,10 @@
             if (o.points) g.xs.slice(0, 2000).forEach((x, k) => { const [px, py] = at(c + (jitter(x.i + k) - .5) * bw * .9, x.v); svg += `<circle cx="${r2(px)}" cy="${r2(py)}" r="${r2(Math.max(1.5, fs * .2))}" fill="${col}" fill-opacity=".45">${tip(`${x.label ? x.label + ' — ' : ''}${fmt(x.v)}${u}`)}</circle>`; });
             svg += seg(s.lo, s.q1, c, c) + seg(s.q3, s.hi, c, c) + seg(s.lo, s.lo, c - bw / 4, c + bw / 4) + seg(s.hi, s.hi, c - bw / 4, c + bw / 4);
             const [ax, ay] = at(c - bw / 2, s.q3), [bx, by] = at(c + bw / 2, s.q1);
-            svg += `<rect x="${r2(Math.min(ax, bx))}" y="${r2(Math.min(ay, by))}" width="${r2(Math.abs(bx - ax))}" height="${r2(Math.max(1, Math.abs(by - ay)))}" fill="${col}" fill-opacity=".3" stroke="${col}" stroke-width="1.6">${tip(`${g.name} — ${s.n} valeur${s.n > 1 ? 's' : ''} : médiane ${fmt(s.md, 1)}${u}, quartiles ${fmt(s.q1, 1)} et ${fmt(s.q3, 1)}, de ${fmt(s.min, 1)} à ${fmt(s.max, 1)}${u}, moyenne ${fmt(s.mean, 1)}`)}</rect>`;
+            svg += `<rect x="${r2(Math.min(ax, bx))}" y="${r2(Math.min(ay, by))}" width="${r2(Math.abs(bx - ax))}" height="${r2(Math.max(1, Math.abs(by - ay)))}" fill="${col}" fill-opacity=".3" stroke="${col}" stroke-width="1.6">${tip(i18n(s.n > 1 ? '{name} — {n} valeurs : médiane {md}{u}, quartiles {q1} et {q3}, de {min} à {max}{u}, moyenne {mean}' : '{name} — {n} valeur : médiane {md}{u}, quartiles {q1} et {q3}, de {min} à {max}{u}, moyenne {mean}', {name: g.name, n: s.n, md: fmt(s.md, 1), u, q1: fmt(s.q1, 1), q3: fmt(s.q3, 1), min: fmt(s.min, 1), max: fmt(s.max, 1), mean: fmt(s.mean, 1)}))}</rect>`;
             svg += seg(s.md, s.md, c - bw / 2, c + bw / 2).replace('stroke-width="1.6"', 'stroke-width="3"');
-            if (o.mean) { const [mx2, my2] = at(c, s.mean); svg += `<path d="M${r2(mx2)} ${r2(my2 - 5)}l5 5l-5 5l-5 -5z" fill="#fff" stroke="${col}" stroke-width="1.5">${tip(`moyenne ${fmt(s.mean, 1)}${u}`)}</path>`; }
-            s.out.slice(0, 300).forEach(v => { const [px, py] = at(c, v), who = g.xs.find(x => x.v === v)?.label; svg += `<circle cx="${r2(px)}" cy="${r2(py)}" r="3" fill="none" stroke="${col}" stroke-width="1.4">${tip(`${who ? who + ' — ' : ''}${fmt(v)}${u} (valeur à part)`)}</circle>`; });
+            if (o.mean) { const [mx2, my2] = at(c, s.mean); svg += `<path d="M${r2(mx2)} ${r2(my2 - 5)}l5 5l-5 5l-5 -5z" fill="#fff" stroke="${col}" stroke-width="1.5">${tip(i18n('moyenne {v}{u}', {v: fmt(s.mean, 1), u}))}</path>`; }
+            s.out.slice(0, 300).forEach(v => { const [px, py] = at(c, v), who = g.xs.find(x => x.v === v)?.label; svg += `<circle cx="${r2(px)}" cy="${r2(py)}" r="3" fill="none" stroke="${col}" stroke-width="1.4">${tip(`${who ? who + ' — ' : ''}${i18n('{v}{u} (valeur à part)', {v: fmt(v), u})}`)}</circle>`; });
             if (o.values !== false) { const [tx, ty] = at(c + bw / 2 + 4, s.md); svg += horiz ? T(at(c, s.md)[0], c - bw / 2 - fs * .55, fmt(s.md, 1), {size: fs * .78, anchor: 'middle', weight: 600}) : T(tx, ty, fmt(s.md, 1), {size: fs * .78, weight: 600}); }
             if (horiz) svg += T(labW - 6, c - fs * .3, cut(g.name, labW - 8, fs), {size: fs, anchor: 'end'}) + T(labW - 6, c + fs * .75, `${s.n} val.`, {size: fs * .72, anchor: 'end', fill: '#888'});
             else svg += T(c, plotH + fs, cut(g.name, band - 2, fs * .9), {size: fs * .9, anchor: 'middle'}) + T(c, plotH + fs * 2.1, `${s.n} val.`, {size: fs * .72, anchor: 'middle', fill: '#888'});
@@ -262,7 +263,7 @@
                 if (o.values !== false) { const left = (k === 0) === ((a ?? 0) <= (b ?? 0)); svg += T(X(v) + (left ? -rad - 4 : rad + 4), y, fmt(v), {size: fs * .75, anchor: left ? 'end' : 'start', fill: col, weight: 600}); } });
             if (gapW && a !== null && b !== null) svg += T(W - 4, y, sgn(gap(c), 1), {size: fs * .8, anchor: 'end', weight: 600, fill: gap(c) > 0 ? cb : gap(c) < 0 ? ca : '#888'});
         });
-        if (gapW) svg += T(W - 4, -fs * .1, 'écart', {size: fs * .72, anchor: 'end', fill: '#888'});
+        if (gapW) svg += T(W - 4, -fs * .1, i18n('écart'), {size: fs * .72, anchor: 'end', fill: '#888'});
         let h = plotH + fs * 1.8;
         if (o.xLabel) { svg += T(labW + plotW / 2, h + fs * .3, o.xLabel, {size: fs * .85, anchor: 'middle', weight: 600}); h += fs * 1.4; }
         return {h, svg, legend: [{label: series[0]?.name || 'Avant', color: ca}, {label: series[1]?.name || 'Après', color: cb}]};
@@ -383,13 +384,13 @@
         }
         const k = spread > maxH ? maxH / spread : 1, top = o.median !== false ? fs * 1.4 : 0, H = Math.max(Math.min(spread, maxH) + 4, fs * 4) + top, mid = top + (H - top) / 2;
         let svg = '<style>.lc-bs circle:hover{stroke:#000;stroke-width:2;stroke-opacity:1}</style>' + xAxis(tk, left, 0, plotW, H, fs, v => fmt(v));
-        if (o.median !== false) { const s = vals.map(x => x.v).sort((a, b) => a - b), m = quant(s, .5); svg += `<line x1="${r2(X(m))}" y1="0" x2="${r2(X(m))}" y2="${r2(H)}" stroke="currentColor" stroke-width="1.5" stroke-dasharray="5 4"/>` + T(X(m) + 4, fs * .6, `médiane ${fmt(m, 1)}${u}`, {size: fs * .8, weight: 600}); }
+        if (o.median !== false) { const s = vals.map(x => x.v).sort((a, b) => a - b), m = quant(s, .5); svg += `<line x1="${r2(X(m))}" y1="0" x2="${r2(X(m))}" y2="${r2(H)}" stroke="currentColor" stroke-width="1.5" stroke-dasharray="5 4"/>` + T(X(m) + 4, fs * .6, i18n('médiane {v}{u}', {v: fmt(m, 1), u}), {size: fs * .8, weight: 600}); }
         svg += '<g class="lc-bs">' + vals.map((x, i) => { const c = x.color ? color(x.color, pick(spec, 0)) : pick(spec, groups.length ? gi(x.group) : 0);
             return `<circle cx="${r2(xs[i])}" cy="${r2(mid + ys[i] * k)}" r="${r2(rad)}" fill="${c}" fill-opacity=".85" stroke="${o.bg === 'transparent' ? 'none' : '#fff'}" stroke-width="${rad > 3 ? .8 : 0}">${tip(`${x.label || 'Sans nom'} — ${fmt(x.v)}${u}${x.group ? ` (${x.group})` : ''}`)}</circle>`; }).join('') + '</g>';
         let h = H + fs * 1.8;
         if (o.xLabel) { svg += T(left + plotW / 2, h + fs * .3, o.xLabel, {size: fs * .85, anchor: 'middle', weight: 600}); h += fs * 1.4; }
         const n = rowsOf(spec, 'rows', 1e6).length;
-        if (n > 5000) { svg += T(left, h + fs * .3, `5 000 premiers points sur ${fmt(n, 0)}`, {size: fs * .75, fill: '#888'}); h += fs * 1.3; }
+        if (n > 5000) { svg += T(left, h + fs * .3, i18n('5 000 premiers points sur {n}', {n: fmt(n, 0)}), {size: fs * .75, fill: '#888'}); h += fs * 1.3; }
         return {h, svg, legend: groups.map(g => ({label: g, color: pick(spec, gi(g))}))};
     }
 
@@ -484,29 +485,29 @@
     const centuryOrder = g => romanN(g) ?? 999;
     async function fillValues(spec, key, groupBy) {
         const [what, gender] = sourceKey(key), r = await fetchN(what, gender ? {gender} : {}, spec), items = r.items || [];
-        if (!items.length) throw new Error('Aucune donnée dans l’arbre pour ce choix (dates manquantes ?).');
+        if (!items.length) throw new Error(i18n('Aucune donnée dans l’arbre pour ce choix (dates manquantes ?).'));
         const g = groupBy === 'century' ? x => x.century : groupBy === 'sex' ? x => x.group : () => '';
         let rows = items.map(x => ({label: x.name, value: x.value, group: g(x)}));
         if (groupBy === 'century') rows.sort((a, b) => centuryOrder(a.group) - centuryOrder(b.group));
         const lbl = valuesSources().find(([k]) => k === key)?.[1] || '';
-        spec.rows = rows; spec.o = {...(spec.o || {}), title: lbl + (groupBy === 'century' ? (what === 'ages_marriage' ? ', par siècle du mariage' : ', par siècle de naissance') : ''), unit: what === 'birth_years' ? '' : 'ans', source: `D’après ${fmt(r.total || items.length, 0)} personnes de l’arbre`};
+        spec.rows = rows; spec.o = {...(spec.o || {}), title: i18n(lbl) + (groupBy === 'century' ? (what === 'ages_marriage' ? i18n(', par siècle du mariage') : i18n(', par siècle de naissance')) : ''), unit: what === 'birth_years' ? '' : i18n('ans', {ctx: 'unite'}), source: i18n('D’après {n} personnes de l’arbre', {n: fmt(r.total || items.length, 0)})};
         if (spec.kind === 'histogram') spec.o.bin = what === 'birth_years' ? 10 : 5;
-        if (spec.kind === 'beeswarm') spec.o.xLabel = what === 'birth_years' ? 'Année de naissance' : lbl;
+        if (spec.kind === 'beeswarm') spec.o.xLabel = what === 'birth_years' ? i18n('Année de naissance') : i18n(lbl);
         return spec;
     }
     async function fillTable(spec, key) { // périodes × noms (courants, petites courbes)
         const [what, step] = sourceKey(key), r = await fetchN(what, step ? {step} : {}, spec);
-        if (!r.rows?.length) throw new Error('Aucune donnée dans l’arbre pour ce choix.');
+        if (!r.rows?.length) throw new Error(i18n('Aucune donnée dans l’arbre pour ce choix.'));
         spec.series = r.series.map(name => ({name})); spec.rows = r.rows;
-        spec.o = {...(spec.o || {}), title: {occupations: 'Les métiers de la famille', births_places: 'Naissances par commune', births_surnames: 'Naissances par nom de famille'}[what] || '', subtitle: `par tranches de ${r.step} ans`, source: 'D’après les fiches de l’arbre'};
+        spec.o = {...(spec.o || {}), title: {occupations: i18n('Les métiers de la famille'), births_places: i18n('Naissances par commune'), births_surnames: i18n('Naissances par nom de famille')}[what] || '', subtitle: i18n('par tranches de {n} ans', {n: r.step}), source: i18n('D’après les fiches de l’arbre')};
         return spec;
     }
     const APP = {
-        bump: {sources: GENDER.map(([g, l]) => [`firstnames:${g}`, `Prénoms les plus donnés par décennie (${l})`]),
-            fill: async (spec, key) => { const [, gender] = sourceKey(key), r = await fetchN('firstnames', gender ? {gender} : {}, spec); if (!r.rows?.length) throw new Error('Pas assez de naissances datées.');
+        bump: {sources: GENDER.map(([g, l]) => [`firstnames:${g}`, i18n('Prénoms les plus donnés par décennie ({who})', {who: i18n(l)})]),
+            fill: async (spec, key) => { const [, gender] = sourceKey(key), r = await fetchN('firstnames', gender ? {gender} : {}, spec); if (!r.rows?.length) throw new Error(i18n('Pas assez de naissances datées.'));
                 const names = [...new Set(r.rows.map(x => x[1]))]; spec.series = r.periods.map(name => ({name}));
                 spec.rows = names.map(n => { const row = {label: n}; r.periods.forEach((p, j) => { const hit = r.rows.find(x => x[0] === p && x[1] === n); row['s' + j] = hit ? hit[2] : ''; }); return row; });
-                spec.o = {...(spec.o || {}), mode: 'value', top: 10, title: 'Les 10 prénoms les plus donnés par décennie', source: 'D’après les naissances de l’arbre'}; return spec; }},
+                spec.o = {...(spec.o || {}), mode: 'value', top: 10, title: i18n('Les 10 prénoms les plus donnés par décennie'), source: i18n('D’après les naissances de l’arbre')}; return spec; }},
         stream: {sources: [['occupations:25', 'Métiers (par 25 ans)'], ['occupations:50', 'Métiers (par 50 ans)'], ['births_surnames:10', 'Naissances par nom de famille (par décennie)'], ['births_places:25', 'Naissances par commune (par 25 ans)']], fill: fillTable},
         smallmult: {sources: [['births_surnames:10', 'Naissances par nom de famille (par décennie)'], ['births_places:10', 'Naissances par commune (par décennie)'], ['occupations:25', 'Métiers (par 25 ans)']], fill: fillTable},
         histogram: {sources: valuesSources(), fill: (s, k) => fillValues(s, k, '')},
@@ -514,27 +515,27 @@
         boxplot: {sources: [['ages_death:', 'Âge au décès, par siècle de naissance'], ['ages_marriage:', 'Âge au mariage, par siècle'], ['ages_death:|sex', 'Âge au décès, femmes et hommes'], ['ages_marriage:|sex', 'Âge au mariage, femmes et hommes']],
             fill: (s, k) => fillValues(s, k.split('|')[0], k.endsWith('|sex') ? 'sex' : 'century')},
         dumbbell: {sources: [['couples:25', 'Âges des époux au mariage (25 couples les plus récents)'], ['couples:50', 'Âges des époux au mariage (50 couples)']],
-            fill: async (spec, key) => { const r = await fetchN('couples', {}, spec), n = Number(sourceKey(key)[1]) || 25; if (!r.items?.length) throw new Error('Aucun couple marié avec les deux dates de naissance.');
-                spec.series = [{name: 'Lui', color: spec.series?.[0]?.color || '#4e79a7'}, {name: 'Elle', color: spec.series?.[1]?.color || '#e15759'}];
-                spec.rows = r.items.slice(0, n).map(x => ({label: `${x.label} (${x.year})`, s0: x.a, s1: x.b})); spec.o = {...(spec.o || {}), title: 'Âge des époux au mariage', unit: 'ans', source: 'D’après les mariages de l’arbre'}; return spec; }},
+            fill: async (spec, key) => { const r = await fetchN('couples', {}, spec), n = Number(sourceKey(key)[1]) || 25; if (!r.items?.length) throw new Error(i18n('Aucun couple marié avec les deux dates de naissance.'));
+                spec.series = [{name: i18n('Lui'), color: spec.series?.[0]?.color || '#4e79a7'}, {name: i18n('Elle'), color: spec.series?.[1]?.color || '#e15759'}];
+                spec.rows = r.items.slice(0, n).map(x => ({label: `${x.label} (${x.year})`, s0: x.a, s1: x.b})); spec.o = {...(spec.o || {}), title: i18n('Âge des époux au mariage'), unit: i18n('ans', {ctx: 'unite'}), source: i18n('D’après les mariages de l’arbre')}; return spec; }},
         slope: {sources: [['births_places:100', 'Naissances par commune : un siècle et le suivant']],
             fill: async (spec) => { const r = await fetchN('births_places', {step: 100}, spec); const rows = (r.rows || []).filter(x => r.series.some((_, j) => x['s' + j]));
-                if (rows.length < 2) throw new Error('Il faut des naissances sur au moins deux siècles.');
-                const a = rows[rows.length - 2], b = rows[rows.length - 1], cn = y => { const c = Math.floor((Number(y) - 1) / 100) + 2; return `${['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV', 'XV', 'XVI', 'XVII', 'XVIII', 'XIX', 'XX', 'XXI'][c - 1] || c}e siècle`; };
+                if (rows.length < 2) throw new Error(i18n('Il faut des naissances sur au moins deux siècles.'));
+                const a = rows[rows.length - 2], b = rows[rows.length - 1], cn = y => { const c = Math.floor((Number(y) - 1) / 100) + 2; return i18n('{n}e siècle', {n: String(['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV', 'XV', 'XVI', 'XVII', 'XVIII', 'XIX', 'XX', 'XXI'][c - 1] || c)}); };
                 spec.series = [{name: cn(a.label)}, {name: cn(b.label)}]; spec.rows = r.series.map((name, j) => ({label: name, s0: a['s' + j] || 0, s1: b['s' + j] || 0}));
-                spec.o = {...(spec.o || {}), title: 'Naissances par commune, d’un siècle à l’autre', source: 'D’après les naissances de l’arbre'}; return spec; }},
+                spec.o = {...(spec.o || {}), title: i18n('Naissances par commune, d’un siècle à l’autre'), source: i18n('D’après les naissances de l’arbre')}; return spec; }},
         waterfall: {sources: [['living:50', 'Naissances et décès dans l’arbre (par 50 ans)'], ['living:25', 'Naissances et décès dans l’arbre (par 25 ans)'], ['living:100', 'Naissances et décès dans l’arbre (par siècle)']],
-            fill: async (spec, key) => { const r = await fetchN('living', {step: sourceKey(key)[1] || 50}, spec); if (!r.rows?.length) throw new Error('Aucune naissance datée.');
-                spec.rows = r.rows; spec.o = {...(spec.o || {}), title: 'Les vivants de l’arbre, période par période', subtitle: 'naissances (+) et décès (−) ; décès inconnu d’une naissance ancienne : compté 60 ans après', source: 'D’après les fiches de l’arbre'}; return spec; }},
+            fill: async (spec, key) => { const r = await fetchN('living', {step: sourceKey(key)[1] || 50}, spec); if (!r.rows?.length) throw new Error(i18n('Aucune naissance datée.'));
+                spec.rows = r.rows; spec.o = {...(spec.o || {}), title: i18n('Les vivants de l’arbre, période par période'), subtitle: i18n('naissances (+) et décès (−) ; décès inconnu d’une naissance ancienne : compté 60 ans après'), source: i18n('D’après les fiches de l’arbre')}; return spec; }},
         kpi: {sources: [['counters', 'Les compteurs de ma base (personnes, familles, médias…)']],
             fill: async (spec) => { const [r, s] = await Promise.all([fetchN('counters'), fetchN('sosa').catch(() => ({rows: []}))]);
-                spec.rows = (r.items || []).map(x => ({label: x.label, value: x.value, previous: x.previous, prevLabel: 'il y a un mois', spark: (x.spark || []).join(' ')}));
+                spec.rows = (r.items || []).map(x => ({label: x.label, value: x.value, previous: x.previous, prevLabel: i18n('il y a un mois'), spark: (x.spark || []).join(' ')}));
                 const g8 = (s.rows || []).filter(x => Number(String(x.label).replace(/\D/g, '')) <= 8), f = g8.reduce((a, x) => a + x.found, 0), e = g8.reduce((a, x) => a + x.expected, 0);
-                if (e) spec.rows.push({label: 'Ancêtres trouvés (8 générations)', value: Math.round(f / e * 1000) / 10, unit: '%', good: 75, bad: 40, spark: g8.map(x => x.value).join(' '), note: `${f} sur ${e}`});
-                spec.o = {...(spec.o || {}), title: 'Ma base en chiffres', subtitle: 'mini-courbes : les 12 derniers mois', source: ''}; return spec; }},
+                if (e) spec.rows.push({label: i18n('Ancêtres trouvés (8 générations)'), value: Math.round(f / e * 1000) / 10, unit: '%', good: 75, bad: 40, spark: g8.map(x => x.value).join(' '), note: i18n('{a} sur {b}', {a: f, b: e})});
+                spec.o = {...(spec.o || {}), title: i18n('Ma base en chiffres'), subtitle: i18n('mini-courbes : les 12 derniers mois'), source: ''}; return spec; }},
         bullet: {sources: [['sosa', 'Ancêtres trouvés par génération (SOSA)']],
-            fill: async (spec) => { const r = await fetchN('sosa'); if (!r.rows?.length) throw new Error('Pas d’ascendance SOSA : choisis une personne de départ.');
-                spec.rows = r.rows.map(x => ({label: x.label.replace('Génération', 'Génér.'), value: x.value, target: 75, max: 100, zones: '50;75'})); spec.o = {...(spec.o || {}), unit: ' %', title: 'Ancêtres trouvés, génération par génération', subtitle: r.root ? `à partir de ${r.root}` : '', source: 'Objectif : 75 % (à changer dans le tableau)'}; return spec; }},
+            fill: async (spec) => { const r = await fetchN('sosa'); if (!r.rows?.length) throw new Error(i18n('Pas d’ascendance SOSA : choisis une personne de départ.'));
+                spec.rows = r.rows.map(x => ({label: x.label.replace('Génération', i18n('Génér.')), value: x.value, target: 75, max: 100, zones: '50;75'})); spec.o = {...(spec.o || {}), unit: ' %', title: i18n('Ancêtres trouvés, génération par génération'), subtitle: r.root ? i18n('à partir de {name}', {name: r.root}) : '', source: i18n('Objectif : 75 % (à changer dans le tableau)')}; return spec; }},
     };
 
     /* ═════════ Les sortes : tableaux, réglages, exemples ═════════ */
@@ -552,31 +553,31 @@
     const NAMES = ['Jean Martin', 'Marie Durand', 'Pierre Petit', 'Anne Moreau', 'Louis Garnier', 'Jeanne Roux', 'Joseph Fournier', 'Rose Girard', 'François Bonnet', 'Louise Lambert'];
     const sample = {
         bump: () => { const trend = [[40, 12], [45, 20], [25, 10], [22, 15], [31, 5], [13, 6], [28, 17], [16, 3], [9, 17], [7, 19], [4, 22], [1, 25], [0, 15, 14]];
-            return {o: {title: 'Les prénoms les plus donnés, décennie par décennie', top: 8, subtitle: 'rang de 1 (le plus donné) à 8 ; dans le tableau : le nombre de naissances'}, series: decades.map(name => ({name: name + 's'})),
+            return {o: {title: i18n('Les prénoms les plus donnés, décennie par décennie'), top: 8, subtitle: i18n('rang de 1 (le plus donné) à 8 ; dans le tableau : le nombre de naissances')}, series: decades.map(name => ({name: name + 's'})),
                 rows: FIRST.map((label, i) => { const [a, b, peak = 0] = trend[i], row = {label}; decades.forEach((_, j) => { row['s' + j] = Math.max(0, Math.round(a + (b - a) * j / 9 + peak * Math.sin(Math.PI * j / 9))); }); return row; })}; },
-        stream: () => { const per = ['1750', '1775', '1800', '1825', '1850', '1875', '1900', '1925', '1950']; const jobs = [['Laboureur', [30, 34, 31, 26, 18, 11, 6, 3, 1]], ['Tisserand', [12, 15, 18, 14, 8, 3, 1, 0, 0]], ['Meunier', [3, 4, 4, 5, 4, 2, 1, 0, 0]], ['Ouvrier', [0, 1, 2, 6, 14, 20, 24, 18, 10]], ['Cheminot', [0, 0, 0, 0, 2, 6, 9, 8, 5]], ['Instituteur', [0, 0, 1, 1, 3, 5, 7, 9, 8]], ['Employé', [0, 0, 0, 1, 2, 5, 9, 15, 22]]];
-            return {o: {title: 'Les métiers de la famille sur 200 ans', subtitle: 'nombre de personnes, par tranches de 25 ans'}, series: jobs.map(([name]) => ({name})), rows: per.map((label, j) => { const row = {label}; jobs.forEach(([, v], i) => { row['s' + i] = v[j]; }); return row; })}; },
-        histogram: () => ({o: {title: 'Âge au décès', subtitle: 'par tranches de 5 ans', bin: 5, unit: 'ans', median: true}, rows: SAMPLE_AGES.map((value, i) => ({label: NAMES[i % NAMES.length], value}))}),
+        stream: () => { const per = ['1750', '1775', '1800', '1825', '1850', '1875', '1900', '1925', '1950']; const jobs = [[i18n('Laboureur'), [30, 34, 31, 26, 18, 11, 6, 3, 1]], [i18n('Tisserand'), [12, 15, 18, 14, 8, 3, 1, 0, 0]], ['Meunier', [3, 4, 4, 5, 4, 2, 1, 0, 0]], ['Ouvrier', [0, 1, 2, 6, 14, 20, 24, 18, 10]], ['Cheminot', [0, 0, 0, 0, 2, 6, 9, 8, 5]], [i18n('Instituteur'), [0, 0, 1, 1, 3, 5, 7, 9, 8]], [i18n('Employé'), [0, 0, 0, 1, 2, 5, 9, 15, 22]]];
+            return {o: {title: i18n('Les métiers de la famille sur 200 ans'), subtitle: i18n('nombre de personnes, par tranches de 25 ans')}, series: jobs.map(([name]) => ({name})), rows: per.map((label, j) => { const row = {label}; jobs.forEach(([, v], i) => { row['s' + i] = v[j]; }); return row; })}; },
+        histogram: () => ({o: {title: i18n('Âge au décès'), subtitle: i18n('par tranches de 5 ans'), bin: 5, unit: i18n('ans'), median: true}, rows: SAMPLE_AGES.map((value, i) => ({label: NAMES[i % NAMES.length], value}))}),
         boxplot: () => { const by = {'XVIIe s.': [19, 21, 22, 24, 25, 23, 27, 30, 20, 26, 35], 'XVIIIe s.': [22, 24, 25, 26, 27, 28, 25, 29, 31, 23, 40], 'XIXe s.': [21, 23, 24, 25, 26, 27, 28, 26, 30, 33, 24, 45], 'XXe s.': [22, 23, 24, 25, 26, 27, 28, 29, 31, 33, 35]};
-            return {o: {title: 'Âge au mariage, par siècle', unit: 'ans', points: true}, rows: Object.entries(by).flatMap(([group, vs], k) => vs.map((value, i) => ({group, value, label: NAMES[(i + k) % NAMES.length]})))}; },
-        dumbbell: () => ({o: {title: 'Âge des époux au mariage', unit: 'ans', sort: ''}, series: [{name: 'Lui', color: '#4e79a7'}, {name: 'Elle', color: '#e15759'}],
-            rows: [['Jean et Marie (1789)', 27, 22], ['Pierre et Anne (1812)', 31, 24], ['Louis et Rose (1838)', 25, 26], ['Joseph et Jeanne (1861)', 34, 19], ['François et Louise (1889)', 28, 25], ['Henri et Germaine (1919)', 24, 21], ['André et Simone (1946)', 26, 23]].map(([label, s0, s1]) => ({label, s0, s1}))}),
-        slope: () => ({o: {title: 'Naissances par commune, d’un siècle à l’autre'}, series: [{name: 'XVIIIe siècle'}, {name: 'XIXe siècle'}],
+            return {o: {title: i18n('Âge au mariage, par siècle'), unit: i18n('ans'), points: true}, rows: Object.entries(by).flatMap(([group, vs], k) => vs.map((value, i) => ({group, value, label: NAMES[(i + k) % NAMES.length]})))}; },
+        dumbbell: () => ({o: {title: i18n('Âge des époux au mariage'), unit: i18n('ans'), sort: ''}, series: [{name: i18n('Lui'), color: '#4e79a7'}, {name: i18n('Elle'), color: '#e15759'}],
+            rows: [[i18n('Jean et Marie (1789)'), 27, 22], [i18n('Pierre et Anne (1812)'), 31, 24], [i18n('Louis et Rose (1838)'), 25, 26], [i18n('Joseph et Jeanne (1861)'), 34, 19], [i18n('François et Louise (1889)'), 28, 25], [i18n('Henri et Germaine (1919)'), 24, 21], [i18n('André et Simone (1946)'), 26, 23]].map(([label, s0, s1]) => ({label, s0, s1}))}),
+        slope: () => ({o: {title: i18n('Naissances par commune, d’un siècle à l’autre')}, series: [{name: i18n('XVIIIe siècle')}, {name: i18n('XIXe siècle')}],
             rows: [['Rennes', 18, 42], ['Vitré', 25, 14], ['Fougères', 12, 15], ['Redon', 9, 3], ['Nantes', 4, 21], ['Saint-Malo', 7, 7]].map(([label, s0, s1]) => ({label, s0, s1}))}),
-        waterfall: () => ({o: {title: 'Les vivants de la famille', subtitle: 'naissances (+), décès et départs (−)'}, rows: [['En 1800', 40, 'start'], ['Naissances 1800-1849', 85, ''], ['Décès 1800-1849', -60, ''], ['En 1850', '', 'subtotal'], ['Naissances 1850-1899', 70, ''], ['Départs (Amérique)', -15, ''], ['Décès 1850-1899', -52, ''], ['En 1900', '', 'total']].map(([label, value, type]) => ({label, value, type}))}),
-        lollipop: () => ({o: {title: 'Métiers les plus fréquents', sort: 'desc'}, series: [{name: 'Personnes'}], rows: [['Laboureur', 64], ['Journalier', 41], ['Tisserand', 22], ['Domestique', 17], ['Meunier', 9], ['Charpentier', 7], ['Marchand', 6], ['Forgeron', 4]].map(([label, s0]) => ({label, s0}))}),
-        lollipop_v: () => ({o: {title: 'Naissances par mois'}, series: [{name: 'Naissances'}], rows: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'].map((label, i) => ({label, s0: [42, 45, 51, 39, 33, 30, 28, 31, 36, 40, 38, 44][i]}))}),
-        beeswarm: () => ({o: {title: 'Âge au décès : une personne, un point', unit: 'ans', xLabel: 'Âge au décès', dot: 6}, rows: SAMPLE_AGES.map((value, i) => ({label: NAMES[i % NAMES.length] + (i >= NAMES.length ? ` (${Math.floor(i / NAMES.length) + 1})` : ''), value, group: i % 2 ? 'Femmes' : 'Hommes'}))}),
+        waterfall: () => ({o: {title: i18n('Les vivants de la famille'), subtitle: i18n('naissances (+), décès et départs (−)')}, rows: [[i18n('En 1800'), 40, 'start'], [i18n('Naissances 1800-1849'), 85, ''], [i18n('Décès 1800-1849'), -60, ''], [i18n('En 1850'), '', 'subtotal'], [i18n('Naissances 1850-1899'), 70, ''], [i18n('Départs (Amérique)'), -15, ''], [i18n('Décès 1850-1899'), -52, ''], [i18n('En 1900'), '', 'total']].map(([label, value, type]) => ({label, value, type}))}),
+        lollipop: () => ({o: {title: i18n('Métiers les plus fréquents'), sort: 'desc'}, series: [{name: i18n('Personnes')}], rows: [[i18n('Laboureur'), 64], [i18n('Journalier'), 41], [i18n('Tisserand'), 22], [i18n('Domestique'), 17], ['Meunier', 9], ['Charpentier', 7], ['Marchand', 6], ['Forgeron', 4]].map(([label, s0]) => ({label, s0}))}),
+        lollipop_v: () => ({o: {title: i18n('Naissances par mois')}, series: [{name: i18n('Naissances')}], rows: ['Janv.', i18n('Févr.'), i18n('Mars'), i18n('Avril'), i18n('Mai'), i18n('Juin'), 'Juil.', i18n('Août'), 'Sept.', 'Oct.', 'Nov.', i18n('Déc.')].map((label, i) => ({label, s0: [42, 45, 51, 39, 33, 30, 28, 31, 36, 40, 38, 44][i]}))}),
+        beeswarm: () => ({o: {title: i18n('Âge au décès : une personne, un point'), unit: i18n('ans'), xLabel: i18n('Âge au décès'), dot: 6}, rows: SAMPLE_AGES.map((value, i) => ({label: NAMES[i % NAMES.length] + (i >= NAMES.length ? ` (${Math.floor(i / NAMES.length) + 1})` : ''), value, group: i % 2 ? 'Femmes' : 'Hommes'}))}),
         smallmult: () => { const per = ['1800', '1820', '1840', '1860', '1880', '1900', '1920', '1940']; const br = [['Martin', [4, 6, 9, 11, 8, 6, 3, 2]], ['Durand', [2, 3, 3, 5, 7, 9, 8, 6]], ['Petit', [7, 5, 4, 3, 2, 2, 1, 1]], ['Moreau', [1, 2, 4, 4, 5, 4, 5, 6]], ['Garnier', [3, 3, 2, 4, 6, 3, 2, 1]], ['Roux', [0, 1, 1, 2, 3, 5, 6, 8]]];
-            return {o: {title: 'Naissances par branche', subtitle: 'tous les 20 ans, même échelle'}, series: br.map(([name]) => ({name})), rows: per.map((label, j) => { const row = {label}; br.forEach(([, v], i) => { row['s' + i] = v[j]; }); return row; })}; },
-        kpi: () => ({o: {title: 'Ma généalogie en chiffres'}, rows: [
-            {label: 'Personnes', value: 1284, previous: 1190, prevLabel: 'l’an dernier', spark: '980 1010 1040 1060 1090 1120 1150 1190 1210 1240 1262 1284'},
-            {label: 'Familles', value: 432, previous: 415, prevLabel: 'l’an dernier', spark: '360 370 381 390 398 405 411 415 420 426 430 432'},
-            {label: 'Ancêtres trouvés (8 générations)', value: 64, unit: '%', previous: 58, good: 75, bad: 40, spark: '41 44 47 50 52 55 58 60 61 62 63 64'},
-            {label: 'Actes numérisés', value: 318, previous: 290, good: 300, bad: 150, spark: '120 150 180 200 230 250 270 290 300 305 312 318'},
-            {label: 'Fiches sans source', value: 212, previous: 240, better: 'low', good: 100, bad: 300, spark: '320 310 300 290 280 270 260 250 240 230 220 212'},
-            {label: 'Photos légendées', value: 88, unit: '%', previous: 88, prevLabel: 'pareil', spark: '70 72 75 78 80 82 85 86 87 88 88 88'}]}),
-        bullet: () => ({o: {title: 'Ancêtres trouvés, génération par génération', unit: ' %', source: 'Objectif : 75 %'}, rows: [['Génér. 2 (parents)', 100], ['Génér. 3', 100], ['Génér. 4', 87.5], ['Génér. 5', 81], ['Génér. 6', 75], ['Génér. 7', 70], ['Génér. 8', 64], ['Génér. 9', 41]].map(([label, value]) => ({label, value, target: 75, max: 100, zones: '50;75'}))}),
+            return {o: {title: i18n('Naissances par branche'), subtitle: i18n('tous les 20 ans, même échelle')}, series: br.map(([name]) => ({name})), rows: per.map((label, j) => { const row = {label}; br.forEach(([, v], i) => { row['s' + i] = v[j]; }); return row; })}; },
+        kpi: () => ({o: {title: i18n('Ma généalogie en chiffres')}, rows: [
+            {label: i18n('Personnes'), value: 1284, previous: 1190, prevLabel: i18n('l’an dernier'), spark: '980 1010 1040 1060 1090 1120 1150 1190 1210 1240 1262 1284'},
+            {label: i18n('Familles'), value: 432, previous: 415, prevLabel: i18n('l’an dernier'), spark: '360 370 381 390 398 405 411 415 420 426 430 432'},
+            {label: i18n('Ancêtres trouvés (8 générations)'), value: 64, unit: '%', previous: 58, good: 75, bad: 40, spark: '41 44 47 50 52 55 58 60 61 62 63 64'},
+            {label: i18n('Actes numérisés'), value: 318, previous: 290, good: 300, bad: 150, spark: '120 150 180 200 230 250 270 290 300 305 312 318'},
+            {label: i18n('Fiches sans source'), value: 212, previous: 240, better: 'low', good: 100, bad: 300, spark: '320 310 300 290 280 270 260 250 240 230 220 212'},
+            {label: i18n('Photos légendées'), value: 88, unit: '%', previous: 88, prevLabel: i18n('pareil'), spark: '70 72 75 78 80 82 85 86 87 88 88 88'}]}),
+        bullet: () => ({o: {title: i18n('Ancêtres trouvés, génération par génération'), unit: ' %', source: i18n('Objectif : 75 %')}, rows: [[i18n('Génér. 2 (parents)'), 100], [i18n('Génér. 3'), 100], [i18n('Génér. 4'), 87.5], [i18n('Génér. 5'), 81], [i18n('Génér. 6'), 75], [i18n('Génér. 7'), 70], [i18n('Génér. 8'), 64], [i18n('Génér. 9'), 41]].map(([label, value]) => ({label, value, target: 75, max: 100, zones: '50;75'}))}),
     };
     const SORT_DUMB = C('sort', 'Ordre des lignes', 'select', {choices: [['', 'Comme dans le tableau'], ['gap', 'Par écart'], ['a', 'Par la 1re valeur'], ['b', 'Par la 2e valeur']]});
     const LOLLI = [O.values, C('sort', 'Ordre', 'select', {choices: [['', 'Comme dans le tableau'], ['desc', 'Du plus grand au plus petit'], ['asc', 'Du plus petit au plus grand']]}), C('dot', 'Taille des ronds', 'range', {unit: 'px', min: 2, max: 30, def: 7}),

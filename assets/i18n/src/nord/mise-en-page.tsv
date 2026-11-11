@@ -259,3 +259,273 @@ Mettre les notes en fin de chapitre ? ¦ Dát poznámky na konec kapitoly? ¦ L�
 Oui, en fin de chapitre ¦ Ano, na konec kapitoly ¦ Ja, i slutet av kapitlet ¦ Ja, sidst i kapitlet
 Non, garder en bas des blocs ¦ Ne, nechat dole v blocích ¦ Nej, behåll dem nederst i blocken ¦ Nej, behold dem nederst i blokkene
 🗒 Les notes du chapitre se rangent ici toutes seules. ¦ 🗒 Poznámky kapitoly se sem umístí samy. ¦ 🗒 Kapitlets noter placeras här av sig själva. ¦ 🗒 Kapitlets noter placeres her af sig selv.
+📚 La bibliographie se remplit avec les sources citées en note. ¦ 📚 Seznam literatury se plní prameny citovanými v poznámkách. ¦ 📚 Litteraturlistan fylls med källorna som citeras i noterna. ¦ 📚 Litteraturlisten udfyldes med de kilder, der citeres i noterne.
+Lieu à indexer ¦ Místo do rejstříku ¦ Ort att registrera ¦ Sted til indekset
+Métier à indexer ¦ Povolání do rejstříku ¦ Yrke att registrera ¦ Erhverv til indekset
+Sinon : seulement les mots marqués avec le style de caractère « {name} ». ¦ Jinak: jen slova označená znakovým stylem „{name}“. ¦ Annars: bara orden märkta med teckenformatet ”{name}”. ¦ Ellers: kun ordene markeret med tegntypografien »{name}«.
+Chercher aussi les lieux de ta généalogie ? ¦ Hledat i místa z tvého rodokmenu? ¦ Söka även efter orterna i ditt släktträd? ¦ Søg også efter stederne i dit slægtstræ?
+Chercher aussi les métiers de ta généalogie ? ¦ Hledat i povolání z tvého rodokmenu? ¦ Söka även efter yrkena i ditt släktträd? ¦ Søg også efter erhvervene i dit slægtstræ?
+Oui, les chercher ¦ Ano, hledat je ¦ Ja, sök efter dem ¦ Ja, søg efter dem
+Non, seulement les mots marqués ¦ Ne, jen označená slova ¦ Nej, bara de märkta orden ¦ Nej, kun de markerede ord
+{what} : rangé de A à Z, avec les pages. S’il est long : Objet → Faire couler le texte. ¦ {what}: seřazeno od A do Z, se stránkami. Je-li dlouhý: Objekt → Nechat text téct. ¦ {what}: sorterat A till Ö, med sidorna. Om det är långt: Objekt → Låt texten flöda. ¦ {what}: sorteret A til Å, med siderne. Hvis det er langt: Objekt → Lad teksten flyde.
+Nom à indexer ¦ Jméno do rejstříku ¦ Namn att registrera ¦ Navn til indekset
+Sinon : seulement les noms marqués avec le style de caractère « Nom à indexer ». ¦ Jinak: jen jména označená znakovým stylem „Jméno do rejstříku“. ¦ Annars: bara namnen märkta med teckenformatet ”Namn att registrera”. ¦ Ellers: kun navnene markeret med tegntypografien »Navn til indekset«.
+Chercher aussi les noms des personnes de la généalogie ? ¦ Hledat i jména osob z rodokmenu? ¦ Söka även efter namnen på personerna i släktträdet? ¦ Søg også efter navnene på personerne i slægtstræet?
+Oui, chercher les noms ¦ Ano, hledat jména ¦ Ja, sök efter namnen ¦ Ja, søg efter navnene
+Non, seulement les noms marqués ¦ Ne, jen označená jména ¦ Nej, bara de märkta namnen ¦ Nej, kun de markerede navne
+Sommaire : il suit les paragraphes en style « Chapitre » (d’autres styles dans Objet). S’il est long : Objet → Faire couler le texte. ¦ Obsah: sleduje odstavce ve stylu „Kapitola“ (jiné styly v nabídce Objekt). Je-li dlouhý: Objekt → Nechat text téct. ¦ Innehållsförteckning: den följer styckena med formatet ”Kapitel” (andra format i Objekt). Om den är lång: Objekt → Låt texten flöda. ¦ Indholdsfortegnelse: den følger afsnittene med typografien »Kapitel« (andre typografier i Objekt). Hvis den er lang: Objekt → Lad teksten flyde.
+Index : rangé par nom, avec les pages. S’il est long : Objet → Faire couler le texte. ¦ Rejstřík: seřazený podle jména, se stránkami. Je-li dlouhý: Objekt → Nechat text téct. ¦ Register: sorterat efter namn, med sidorna. Om det är långt: Objekt → Låt texten flöda. ¦ Indeks: sorteret efter navn, med siderne. Hvis det er langt: Objekt → Lad teksten flyde.
+Termine d’abord le texte en cours (Échap), puis recommence. ¦ Nejdřív dokonči rozepsaný text (Esc) a zkus to znovu. ¦ Avsluta först den pågående texten (Esc) och försök igen. ¦ Afslut først den aktuelle tekst (Esc), og prøv igen.
+Aucun objet dynamique dans ce document (photos liées, textes de fiches, diagrammes, arbres). ¦ V tomto dokumentu není žádný dynamický objekt (propojené fotky, texty karet, diagramy, stromy). ¦ Inga dynamiska objekt i dokumentet (länkade foton, posttexter, scheman, träd). ¦ Ingen dynamiske objekter i dokumentet (forbundne fotos, posttekster, skemaer, træer).
+Objets dynamiques mis à jour ¦ Dynamické objekty aktualizovány ¦ Dynamiska objekt uppdaterade ¦ Dynamiske objekter opdateret
+{n} mis à jour ¦ Aktualizováno: {n} ¦ {n} uppdaterade ¦ {n} opdateret
+tout est à jour ¦ vše je aktuální ¦ allt är uppdaterat ¦ alt er opdateret
+Cette image n’est pas liée à une photo de l’app. ¦ Tento obrázek není propojený s fotkou v aplikaci. ¦ Bilden är inte länkad till ett foto i appen. ¦ Billedet er ikke forbundet med et foto i appen.
+Photo introuvable dans l’app. ¦ Fotka v aplikaci nenalezena. ¦ Fotot hittades inte i appen. ¦ Fotoet blev ikke fundet i appen.
+Insérer un diagramme ¦ Vložit diagram ¦ Infoga ett schema ¦ Indsæt et skema
+Diagramme inséré ¦ Diagram vložen ¦ Schema infogat ¦ Skema indsat
+La météo d’autrefois n’est pas prête. ¦ Počasí z dávných dob není připravené. ¦ Forna tiders väder är inte redo. ¦ Fortidens vejr er ikke klar.
+Encadré météo ¦ Rámeček s počasím ¦ Väderruta ¦ Vejrboks
+Insérer un encadré météo ¦ Vložit rámeček s počasím ¦ Infoga en väderruta ¦ Indsæt en vejrboks
+Mettre à jour ¦ Aktualizovat ¦ Uppdatera ¦ Opdatér
+L’encadré dit le temps qu’il faisait le jour de l’événement (icône, phrase et source, qui suit à l’export). « ↻ Mettre à jour les objets dynamiques » le refait. ¦ Rámeček říká, jaké bylo počasí v den události (ikona, věta a zdroj, který jde i do exportu). „↻ Aktualizovat dynamické objekty“ ho vytvoří znovu. ¦ Rutan berättar hur vädret var på händelsens dag (ikon, mening och källa, som följer med vid export). ”↻ Uppdatera dynamiska objekt” gör om den. ¦ Boksen fortæller, hvordan vejret var på begivenhedens dag (ikon, sætning og kilde, der følger med ved eksport). »↻ Opdatér dynamiske objekter« laver den igen.
+Choisis un événement. ¦ Vyber událost. ¦ Välj en händelse. ¦ Vælg en begivenhed.
+Texte lié à une fiche ¦ Text propojený s kartou ¦ Text länkad till en post ¦ Tekst forbundet med en post
+Insérer le texte d’une fiche ¦ Vložit text karty ¦ Infoga texten från en post ¦ Indsæt teksten fra en post
+Le texte suit la fiche : si elle change dans la généalogie, « 🔗 Mettre à jour les liens » (ou la réouverture du document) le refait. ¦ Text sleduje kartu: když se v rodokmenu změní, „🔗 Aktualizovat odkazy“ (nebo nové otevření dokumentu) ho vytvoří znovu. ¦ Texten följer posten: om den ändras i släktträdet gör ”🔗 Uppdatera länkarna” (eller att dokumentet öppnas igen) om den. ¦ Teksten følger posten: hvis den ændres i slægtstræet, laver »🔗 Opdatér forbindelserne« (eller genåbning af dokumentet) den igen.
+Ce qu’il faut montrer ¦ Co ukázat ¦ Vad som ska visas ¦ Hvad der skal vises
+Coche au moins une chose à montrer. ¦ Zaškrtni aspoň jednu věc k zobrazení. ¦ Bocka för minst en sak att visa. ¦ Sæt flueben ved mindst én ting at vise.
+Le générateur de QR codes n’est pas encore prêt. ¦ Generátor QR kódů ještě není připravený. ¦ QR-kodgeneratorn är inte redo än. ¦ QR-kodegeneratoren er ikke klar endnu.
+▦ Modifier le QR code ¦ ▦ Upravit QR kód ¦ ▦ Redigera QR-koden ¦ ▦ Redigér QR-koden
+▦ Insérer un QR code ¦ ▦ Vložit QR kód ¦ ▦ Infoga en QR-kod ¦ ▦ Indsæt en QR-kode
+Ce que le QR code ouvre ¦ Co QR kód otevře ¦ Vad QR-koden öppnar ¦ Hvad QR-koden åbner
+👤 Une fiche de la généalogie ¦ 👤 Karta z rodokmenu ¦ 👤 En post i släktträdet ¦ 👤 En post fra slægtstræet
+🌐 Une adresse web ¦ 🌐 Webová adresa ¦ 🌐 En webbadress ¦ 🌐 En webadresse
+🔤 Un texte ¦ 🔤 Text ¦ 🔤 En text ¦ 🔤 En tekst
+Le contenu ¦ Obsah ¦ Innehållet ¦ Indholdet
+(choisis d’abord la personne) ¦ (nejdřív vyber osobu) ¦ (välj först personen) ¦ (vælg først personen)
+Les fiches de l’app restent sur cet ordinateur : le QR code mène aux fiches en ligne de la personne (Geneanet, Filae…, notées dans sa fiche) ou à FamilySearch ; sinon, il contient son identité en texte (lisible par n’importe quel téléphone). ¦ Karty aplikace zůstávají v tomto počítači: QR kód vede na online karty osoby (Geneanet, Filae…, zapsané v její kartě) nebo na FamilySearch; jinak obsahuje její identitu jako text (čitelný jakýmkoli telefonem). ¦ Appens poster stannar på den här datorn: QR-koden leder till personens poster på nätet (Geneanet, Filae…, noterade i posten) eller till FamilySearch; annars innehåller den personens identitet som text (läsbar med vilken telefon som helst). ¦ Appens poster bliver på denne computer: QR-koden fører til personens poster online (Geneanet, Filae…, noteret i posten) eller til FamilySearch; ellers indeholder den personens identitet som tekst (kan læses af enhver telefon).
+Rien à coder pour l’instant. ¦ Zatím není co zakódovat. ¦ Inget att koda än. ¦ Intet at kode endnu.
+{n} octets · version {v} ({s} × {s} modules) · correction d’erreurs M ¦ {n} bajtů · verze {v} ({s} × {s} modulů) · oprava chyb M ¦ {n} byte · version {v} ({s} × {s} moduler) · felkorrigering M ¦ {n} byte · version {v} ({s} × {s} moduler) · fejlkorrektion M
+Choisis la personne (et ce que le QR code contient). ¦ Vyber osobu (a co QR kód obsahuje). ¦ Välj personen (och vad QR-koden innehåller). ¦ Vælg personen (og hvad QR-koden indeholder).
+Écris ce que le QR code doit contenir. ¦ Napiš, co má QR kód obsahovat. ¦ Skriv vad QR-koden ska innehålla. ¦ Skriv, hvad QR-koden skal indeholde.
+QR code modifié ¦ QR kód upraven ¦ QR-koden redigerad ¦ QR-koden redigeret
+QR code inséré ¦ QR kód vložen ¦ QR-koden infogad ¦ QR-koden indsat
+▦ QR code : tire un coin pour la taille (il reste carré) ; double-clic pour le modifier. ¦ ▦ QR kód: tažením za roh změníš velikost (zůstane čtvercový); dvojklikem ho upravíš. ¦ ▦ QR-kod: dra i ett hörn för storleken (den förblir kvadratisk); dubbelklicka för att redigera. ¦ ▦ QR-kode: træk i et hjørne for størrelsen (den forbliver kvadratisk); dobbeltklik for at redigere den.
+🪪 Son identité en texte : « {x} » ¦ 🪪 Identita jako text: „{x}“ ¦ 🪪 Identiteten som text: ”{x}” ¦ 🪪 Identiteten som tekst: »{x}«
+Repères ¦ Milníky ¦ Hållpunkter ¦ Milepæle
+Page modèle de publipostage ¦ Vzorová stránka hromadné korespondence ¦ Mallsida för dokumentkoppling ¦ Skabelonside til brevfletning
+📨 Page modèle posée : change la mise en forme à ton goût, puis Page → « Publipostage ». ¦ 📨 Vzorová stránka vložena: uprav formátování podle sebe, pak Stránka → „Hromadná korespondence“. ¦ 📨 Mallsida placerad: ändra formateringen som du vill, sedan Sida → ”Dokumentkoppling”. ¦ 📨 Skabelonside placeret: ændr formateringen, som du vil, derefter Side → »Brevfletning«.
+Gabarit « {name} » ¦ Vzorová stránka „{name}“ ¦ Mallsida ”{name}” ¦ Masterside »{name}«
+📨 Une page par personne ¦ 📨 Jedna stránka na osobu ¦ 📨 En sida per person ¦ 📨 Én side pr. person
+Créer les pages ¦ Vytvořit stránky ¦ Skapa sidorna ¦ Opret siderne
+Page modèle ¦ Vzorová stránka ¦ Mallsida ¦ Skabelonside
+les ancêtres de… ¦ předkové osoby… ¦ anfäderna till… ¦ anerne til…
+les descendants de… ¦ potomci osoby… ¦ ättlingarna till… ¦ efterkommerne til…
+ancêtres et descendants de… ¦ předkové a potomci osoby… ¦ anfäder och ättlingar till… ¦ aner og efterkommere til…
+une liste de fiches ¦ seznam karet ¦ en lista med poster ¦ en liste med poster
+les fiches d’une étiquette ¦ karty se štítkem ¦ posterna med en etikett ¦ posterne med en etiket
+Les fiches ¦ Karty ¦ Posterna ¦ Posterne
+celui de l’arbre (Sosa, d’Aboville) ¦ pořadí stromu (Sosa, d’Aboville) ¦ trädets ordning (Sosa, d’Aboville) ¦ træets rækkefølge (Sosa, d’Aboville)
+par naissance ¦ podle narození ¦ efter födelse ¦ efter fødsel
+après la page modèle ¦ za vzorovou stránkou ¦ efter mallsidan ¦ efter skabelonsiden
+retirer la page modèle ensuite ¦ potom odebrat vzorovou stránku ¦ ta bort mallsidan efteråt ¦ fjern skabelonsiden bagefter
+Champs trouvés : {list} ¦ Nalezená pole: {list} ¦ Hittade fält: {list} ¦ Fundne felter: {list}
+⚠️ Aucun champ sur cette page : Page → « Page modèle de publipostage » en pose une toute prête. ¦ ⚠️ Na této stránce není žádné pole: Stránka → „Vzorová stránka hromadné korespondence“ vloží hotovou. ¦ ⚠️ Inget fält på sidan: Sida → ”Mallsida för dokumentkoppling” placerar en färdig. ¦ ⚠️ Intet felt på siden: Side → »Skabelonside til brevfletning« placerer en færdig.
+→ {what} (seulement les {n} premières). ¦ → {what} (jen prvních {n}). ¦ → {what} (bara de första {n}). ¦ → {what} (kun de første {n}).
+=page sera créée ¦ stránka bude vytvořena|stránky budou vytvořeny|stránek bude vytvořeno ¦ sida skapas|sidor skapas ¦ side oprettes|sider oprettes
+pages seront créées ¦ stránek bude vytvořeno ¦ sidor skapas ¦ sider oprettes
+Choisis les personnes. ¦ Vyber osoby. ¦ Välj personerna. ¦ Vælg personerne.
+(aucune étiquette) ¦ (žádný štítek) ¦ (ingen etikett) ¦ (ingen etiket)
+Aucune personne dans ce choix. ¦ V tomto výběru není nikdo. ¦ Ingen i det här urvalet. ¦ Ingen i dette udvalg.
+📨 {what} (une par personne). ↶ pour tout défaire. ¦ 📨 {what} (jedna na osobu). ↶ vrátí vše zpět. ¦ 📨 {what} (en per person). ↶ för att ångra allt. ¦ 📨 {what} (én pr. person). ↶ for at fortryde det hele.
+=page créée ¦ vytvořená stránka|vytvořené stránky|vytvořených stránek ¦ sida skapad|sidor skapade ¦ side oprettet|sider oprettet
+pages créées ¦ vytvořené stránky ¦ sidor skapade ¦ sider oprettet
+Double-clic dans un bloc de texte, place le curseur où va l’appel de note, puis recommence. ¦ Dvojklikni do textového bloku, dej kurzor tam, kam patří odkaz na poznámku, a zkus to znovu. ¦ Dubbelklicka i en textram, sätt markören där nothänvisningen ska stå och försök igen. ¦ Dobbeltklik i en tekstramme, sæt markøren, hvor notehenvisningen skal stå, og prøv igen.
+¹ Note ajoutée : tous les numéros se remettent dans l’ordre quand tu sors du texte (Échap). ¦ ¹ Poznámka přidána: všechna čísla se seřadí, až opustíš text (Esc). ¦ ¹ Not tillagd: alla nummer ordnas igen när du lämnar texten (Esc). ¦ ¹ Note tilføjet: alle numre kommer i orden igen, når du forlader teksten (Esc).
+Texte de la note (il s’écrit en bas du bloc, ou en fin de chapitre) : ¦ Text poznámky (píše se dole v bloku nebo na konci kapitoly): ¦ Notens text (den hamnar längst ned i blocket eller i slutet av kapitlet): ¦ Notens tekst (den kommer nederst i blokken eller sidst i kapitlet):
+Ajouter la note ¦ Přidat poznámku ¦ Lägg till noten ¦ Tilføj noten
+Comme les archives (« AD Corrèze, 3 E 123, f° 12 ») ¦ Jako archivy („AD Corrèze, 3 E 123, f° 12“) ¦ Som arkiven (”AD Corrèze, 3 E 123, f° 12”) ¦ Som arkiverne (»AD Corrèze, 3 E 123, f° 12«)
+NOTE · SOURCE ¦ POZNÁMKA · PRAMEN ¦ NOT · KÄLLA ¦ NOTE · KILDE
+📚 Citer une source ¦ 📚 Citovat pramen ¦ 📚 Citera en källa ¦ 📚 Citér en kilde
+Écrire la note ¦ Napsat poznámku ¦ Skriv noten ¦ Skriv noten
+La référence s’écrit en note, à l’endroit du curseur, dans le style choisi ; la source entre dans la bibliographie (Objet → Insérer la bibliographie). ¦ Odkaz se zapíše jako poznámka na místě kurzoru ve zvoleném stylu; pramen přejde do seznamu literatury (Objekt → Vložit seznam literatury). ¦ Hänvisningen skrivs som en not vid markören, i valt format; källan hamnar i litteraturlistan (Objekt → Infoga litteraturlistan). ¦ Henvisningen skrives som en note ved markøren i den valgte typografi; kilden kommer med i litteraturlisten (Objekt → Indsæt litteraturlisten).
+AD Corrèze ¦ AD Corrèze ¦ AD Corrèze ¦ AD Corrèze
+acte de baptême de Jean ¦ záznam o křtu Jeana ¦ Jeans dophandling ¦ Jeans dåbsindførsel
+Dépôt (archives) ¦ Uložení (archiv) ¦ Förvaringsplats (arkiv) ¦ Opbevaringssted (arkiv)
+Folio, page ou vue ¦ Folio, stránka nebo snímek ¦ Folio, sida eller bild ¦ Folio, side eller billede
+À ajouter (facultatif) ¦ K doplnění (nepovinné) ¦ Att lägga till (valfritt) ¦ Til tilføjelse (valgfrit)
+Choisis une source : la note s’écrit ici. ¦ Vyber pramen: poznámka se napíše sem. ¦ Välj en källa: noten skrivs här. ¦ Vælg en kilde: noten skrives her.
+Choisis une source. ¦ Vyber pramen. ¦ Välj en källa. ¦ Vælg en kilde.
+📚 Citation ajoutée en note (et dans la bibliographie). ¦ 📚 Citace přidána do poznámky (a do seznamu literatury). ¦ 📚 Citat tillagt som not (och i litteraturlistan). ¦ 📚 Citat tilføjet som note (og i litteraturlisten).
+Note retirée ¦ Poznámka odebrána ¦ Not borttagen ¦ Note fjernet
+¹ Modifier la note ¦ ¹ Upravit poznámku ¦ ¹ Redigera noten ¦ ¹ Redigér noten
+Texte de la note : ¦ Text poznámky: ¦ Notens text: ¦ Notens tekst:
+Note modifiée ¦ Poznámka upravena ¦ Not redigerad ¦ Note redigeret
+🌳 Modifier l’arbre ¦ 🌳 Upravit strom ¦ 🌳 Redigera trädet ¦ 🌳 Redigér træet
+🌳 Insérer un arbre généalogique ¦ 🌳 Vložit rodokmen ¦ 🌳 Infoga ett släktträd ¦ 🌳 Indsæt et slægtstræ
+Mettre à jour l’arbre ¦ Aktualizovat strom ¦ Uppdatera trädet ¦ Opdatér træet
+Insérer l’arbre ¦ Vložit strom ¦ Infoga trädet ¦ Indsæt træet
+L’arbre est dessiné d’après la base : il se refait tout seul à l’ouverture du document et avec « ↻ Mettre à jour les objets dynamiques ». Il s’imprime et passe dans le PDF comme une image nette. ¦ Strom se kreslí podle databáze: znovu se vytvoří sám při otevření dokumentu a přes „↻ Aktualizovat dynamické objekty“. Tiskne se a do PDF jde jako ostrý obrázek. ¦ Trädet ritas utifrån databasen: det ritas om av sig självt när dokumentet öppnas och med ”↻ Uppdatera dynamiska objekt”. Det skrivs ut och hamnar i PDF-filen som en skarp bild. ¦ Træet tegnes ud fra databasen: det tegnes igen af sig selv, når dokumentet åbnes, og med »↻ Opdatér dynamiske objekter«. Det udskrives og kommer med i PDF'en som et skarpt billede.
+Style des cases ¦ Styl polí ¦ Rutornas stil ¦ Feltstil
+Photos des fiches ¦ Fotky z karet ¦ Posternas foton ¦ Posternes fotos
+Choisis la personne de l’arbre. ¦ Vyber osobu stromu. ¦ Välj personen för trädet. ¦ Vælg personen til træet.
+🌳 Je dessine l’arbre… ¦ 🌳 Kreslím strom… ¦ 🌳 Ritar trädet… ¦ 🌳 Tegner træet…
+Arbre modifié ¦ Strom upraven ¦ Trädet redigerat ¦ Træet redigeret
+Arbre inséré ¦ Strom vložen ¦ Trädet infogat ¦ Træet indsat
+💬 Ton nom ¦ 💬 Tvoje jméno ¦ 💬 Ditt namn ¦ 💬 Dit navn
+Ton prénom (il signe tes commentaires) : ¦ Tvoje křestní jméno (podepisuje tvé komentáře): ¦ Ditt förnamn (det signerar dina kommentarer): ¦ Dit fornavn (det underskriver dine kommentarer):
+Choisis d’abord les mots à changer : double-clic dans le texte, puis sélectionne-les. ¦ Nejdřív vyber slova ke změně: dvojklik do textu, pak je označ. ¦ Välj först orden som ska ändras: dubbelklicka i texten och markera dem. ¦ Vælg først de ord, der skal ændres: dobbeltklik i teksten, og markér dem.
+Choisis un objet, ou des mots dans un texte (double-clic), puis « 💬 Commenter ». ¦ Vyber objekt nebo slova v textu (dvojklik), pak „💬 Okomentovat“. ¦ Välj ett objekt eller ord i en text (dubbelklick), sedan ”💬 Kommentera”. ¦ Vælg et objekt eller ord i en tekst (dobbeltklik), derefter »💬 Kommentér«.
+✎ Suggérer une modification ¦ ✎ Navrhnout změnu ¦ ✎ Föreslå en ändring ¦ ✎ Foreslå en ændring
+Remplacer « {x} » par : ¦ Nahradit „{x}“ čím: ¦ Ersätt ”{x}” med: ¦ Erstat »{x}« med:
+Suggérer ¦ Navrhnout ¦ Föreslå ¦ Foreslå
+Ton commentaire sur « {x} » : ¦ Tvůj komentář k „{x}“: ¦ Din kommentar om ”{x}”: ¦ Din kommentar til »{x}«:
+Ton commentaire sur cet objet : ¦ Tvůj komentář k tomuto objektu: ¦ Din kommentar om objektet: ¦ Din kommentar til dette objekt:
+Ajouter le commentaire ¦ Přidat komentář ¦ Lägg till kommentaren ¦ Tilføj kommentaren
+Suggestion ajoutée ¦ Návrh přidán ¦ Förslag tillagt ¦ Forslag tilføjet
+Commentaire ajouté ¦ Komentář přidán ¦ Kommentar tillagd ¦ Kommentar tilføjet
+✎ Suggestion notée : elle s’accepte ou se refuse dans Relecture. ¦ ✎ Návrh zaznamenán: přijmout nebo odmítnout ho lze v Revizi. ¦ ✎ Förslaget noterat: det godkänns eller avvisas i Granskning. ¦ ✎ Forslag noteret: det accepteres eller afvises i Gennemgang.
+💬 Commentaire ajouté. ¦ 💬 Komentář přidán. ¦ 💬 Kommentar tillagd. ¦ 💬 Kommentar tilføjet.
+Le passage a changé depuis : la suggestion ne peut plus s’appliquer toute seule. Change le texte à la main, puis « Résoudre ». ¦ Pasáž se mezitím změnila: návrh se už nemůže použít sám. Změň text ručně a pak „Vyřešit“. ¦ Avsnittet har ändrats sedan dess: förslaget kan inte längre tillämpas av sig självt. Ändra texten för hand och sedan ”Lös”. ¦ Passagen er ændret siden: forslaget kan ikke længere anvendes af sig selv. Ændr teksten i hånden, og derefter »Løs«.
+Suggestion acceptée ¦ Návrh přijat ¦ Förslaget godkänt ¦ Forslaget accepteret
+Suggestion refusée ¦ Návrh odmítnut ¦ Förslaget avvisat ¦ Forslaget afvist
+remplacer « {a} » par « {b} » ¦ nahradit „{a}“ za „{b}“ ¦ ersätt ”{a}” med ”{b}” ¦ erstat »{a}« med »{b}«
+📨 Fichier de relecture prêt : envoie-le à ton cousin. Il l’importe dans 📐 Mise en page, commente, puis te renvoie le sien (Relecture → Importer). ¦ 📨 Soubor ke kontrole je připravený: pošli ho bratranci. Importuje ho do 📐 Sazby, okomentuje a pošle ti zpět svůj (Revize → Importovat). ¦ 📨 Granskningsfilen är klar: skicka den till din kusin. Hen importerar den i 📐 Layout, kommenterar och skickar tillbaka sin (Granskning → Importera). ¦ 📨 Gennemsynsfilen er klar: send den til din fætter eller kusine. De importerer den i 📐 Layout, kommenterer og sender deres egen tilbage (Gennemgang → Importér).
+Ce fichier n’est pas un fichier de relecture LCNDA. ¦ Tento soubor není soubor ke kontrole LCNDA. ¦ Filen är inte en LCNDA-granskningsfil. ¦ Filen er ikke en LCNDA-gennemsynsfil.
+C’est un fichier de réglage, pas un fichier de relecture. ¦ Je to soubor nastavení, ne soubor ke kontrole. ¦ Det är en inställningsfil, inte en granskningsfil. ¦ Det er en indstillingsfil, ikke en gennemsynsfil.
+Ce fichier n’est pas un fichier de relecture LCNDA (📨 Envoyer à un cousin). ¦ Tento soubor není soubor ke kontrole LCNDA (📨 Poslat bratranci). ¦ Filen är inte en LCNDA-granskningsfil (📨 Skicka till en kusin). ¦ Filen er ikke en LCNDA-gennemsynsfil (📨 Send til en fætter eller kusine).
+Ce fichier de relecture a été fait pour un autre document. Importer quand même ses commentaires ? ¦ Tento soubor ke kontrole byl vytvořen pro jiný dokument. Přesto importovat jeho komentáře? ¦ Granskningsfilen gjordes för ett annat dokument. Importera ändå dess kommentarer? ¦ Gennemsynsfilen blev lavet til et andet dokument. Importér alligevel dens kommentarer?
+Un autre document ? ¦ Jiný dokument? ¦ Ett annat dokument? ¦ Et andet dokument?
+Rien de nouveau dans ce fichier : ses commentaires sont déjà là. ¦ V tomto souboru není nic nového: jeho komentáře už tu jsou. ¦ Inget nytt i filen: dess kommentarer finns redan här. ¦ Intet nyt i filen: dens kommentarer er her allerede.
+Commentaires importés ¦ Komentáře importovány ¦ Kommentarer importerade ¦ Kommentarer importeret
+=commentaire ajouté ¦ přidaný komentář|přidané komentáře|přidaných komentářů ¦ kommentar tillagd|kommentarer tillagda ¦ kommentar tilføjet|kommentarer tilføjet
+commentaires ajoutés ¦ přidané komentáře ¦ kommentarer tillagda ¦ kommentarer tilføjet
+=réponse ajoutée ¦ přidaná odpověď|přidané odpovědi|přidaných odpovědí ¦ svar tillagt|svar tillagda ¦ svar tilføjet|svar tilføjet
+réponses ajoutées ¦ přidané odpovědi ¦ svar tillagda ¦ svar tilføjet
+✓ acceptée ¦ ✓ přijato ¦ ✓ godkänt ¦ ✓ accepteret
+✕ refusée ¦ ✕ odmítnuto ¦ ✕ avvisat ¦ ✕ afvist
+sur un objet de la page ¦ k objektu na stránce ¦ om ett objekt på sidan ¦ om et objekt på siden
+✎ Remplacer par « <b>{x}</b> » ¦ ✎ Nahradit za „<b>{x}</b>“ ¦ ✎ Ersätt med ”<b>{x}</b>” ¦ ✎ Erstat med »<b>{x}</b>«
+↩ Répondre ¦ ↩ Odpovědět ¦ ↩ Svara ¦ ↩ Svar
+✓ Résoudre ¦ ✓ Vyřešit ¦ ✓ Lös ¦ ✓ Løs
+Supprimer le commentaire ¦ Smazat komentář ¦ Radera kommentaren ¦ Slet kommentaren
+Choisis des mots (double-clic dans un texte) ou un objet, puis « 💬 Commenter » ou « ✎ Suggérer ». Les bulles au bord des pages montrent où ils sont. ¦ Vyber slova (dvojklik do textu) nebo objekt, pak „💬 Okomentovat“ nebo „✎ Navrhnout“. Bubliny na okraji stránek ukazují, kde jsou. ¦ Välj ord (dubbelklick i en text) eller ett objekt, sedan ”💬 Kommentera” eller ”✎ Föreslå”. Bubblorna i sidornas kant visar var de finns. ¦ Vælg ord (dobbeltklik i en tekst) eller et objekt, derefter »💬 Kommentér« eller »✎ Foreslå«. Boblerne i sidernes kant viser, hvor de er.
+✎ Suggérer ¦ ✎ Navrhnout ¦ ✎ Föreslå ¦ ✎ Foreslå
+Résolus ¦ Vyřešené ¦ Lösta ¦ Løste
+Aucun commentaire résolu ¦ Žádný vyřešený komentář ¦ Ingen löst kommentar ¦ Ingen løst kommentar
+Aucun commentaire ¦ Žádný komentář ¦ Ingen kommentar ¦ Ingen kommentar
+Choisis des mots dans un texte, puis « 💬 Commenter ». ¦ Vyber slova v textu, pak „💬 Okomentovat“. ¦ Välj ord i en text, sedan ”💬 Kommentera”. ¦ Vælg ord i en tekst, derefter »💬 Kommentér«.
+Aucun commentaire. ¦ Žádné komentáře. ¦ Inga kommentarer. ¦ Ingen kommentarer.
+Envoyer à un cousin ¦ Poslat bratranci ¦ Skicka till en kusin ¦ Send til en fætter eller kusine
+Le fichier de relecture contient le livre : ton cousin l’importe dans son LCNDA (📐 Mise en page → Importer), ajoute ses commentaires, puis te renvoie le sien. Ou envoie-lui le PDF annoté, à lire sur papier. ¦ Soubor ke kontrole obsahuje knihu: bratranec ho importuje do svého LCNDA (📐 Sazba → Importovat), přidá komentáře a pošle ti zpět svůj. Nebo mu pošli PDF s poznámkami ke čtení na papíře. ¦ Granskningsfilen innehåller boken: din kusin importerar den i sin LCNDA (📐 Layout → Importera), lägger till sina kommentarer och skickar tillbaka sin. Eller skicka den kommenterade PDF-filen, att läsa på papper. ¦ Gennemsynsfilen indeholder bogen: din fætter eller kusine importerer den i sin LCNDA (📐 Layout → Importér), tilføjer sine kommentarer og sender sin egen tilbage. Eller send den kommenterede PDF til læsning på papir.
+⤒ Importer ses commentaires… ¦ ⤒ Importovat jeho komentáře… ¦ ⤒ Importera hens kommentarer… ¦ ⤒ Importér deres kommentarer…
+📝 PDF annoté… ¦ 📝 PDF s poznámkami… ¦ 📝 Kommenterad PDF… ¦ 📝 Kommenteret PDF…
+Ton nom ¦ Tvoje jméno ¦ Ditt namn ¦ Dit navn
+il signe tes commentaires ¦ podepisuje tvé komentáře ¦ det signerar dina kommentarer ¦ det underskriver dine kommentarer
+L’envoi des images n’est pas encore prêt. Réessaie dans un instant. ¦ Odesílání obrázků ještě není připravené. Zkus to za chvíli znovu. ¦ Uppladdning av bilder är inte redo än. Försök igen om en stund. ¦ Upload af billeder er ikke klar endnu. Prøv igen om lidt.
+Seules les images se posent sur la page. ¦ Na stránku lze položit jen obrázky. ¦ Bara bilder kan släppas på sidan. ¦ Kun billeder kan lægges på siden.
+Envoi de {what} dans les médias… ¦ Posílám {what} do médií… ¦ Skickar {what} till medierna… ¦ Sender {what} til medierne…
+=image déposée ¦ vložený obrázek|vložené obrázky|vložených obrázků ¦ släppt bild|släppta bilder ¦ lagt billede|lagte billeder
+images déposées ¦ vložené obrázky ¦ släppta bilder ¦ lagte billeder
+🖼️ {what} dans les médias et sur la page (liées). ¦ 🖼️ {what} v médiích a na stránce (propojené). ¦ 🖼️ {what} bland medierna och på sidan (länkade). ¦ 🖼️ {what} i medierne og på siden (forbundet).
+🖼️ {what} dans les médias et sur la page (liée). ¦ 🖼️ {what} v médiích a na stránce (propojený). ¦ 🖼️ {what} bland medierna och på sidan (länkad). ¦ 🖼️ {what} i medierne og på siden (forbundet).
+Plus de place : supprime un ensemble. ¦ Už není místo: smaž některou sadu. ¦ Inget utrymme kvar: radera en uppsättning. ¦ Ikke mere plads: slet et sæt.
+les styles de ce document ¦ styly tohoto dokumentu ¦ dokumentets format ¦ dokumentets typografier
+{a} de paragraphe · {b} de caractère ¦ {a} odstavcových · {b} znakových ¦ {a} för stycken · {b} för tecken ¦ {a} til afsnit · {b} til tegn
+Styles « {name} » mis dans le document ¦ Styly „{name}“ vloženy do dokumentu ¦ Formaten ”{name}” lagda i dokumentet ¦ Typografierne »{name}« sat ind i dokumentet
+Styles mis dans le document : tout le texte qui les utilise suit. ¦ Styly vloženy do dokumentu: všechen text, který je používá, se přizpůsobí. ¦ Formaten lagda i dokumentet: all text som använder dem följer med. ¦ Typografierne sat ind i dokumentet: al tekst, der bruger dem, følger med.
+Copie « {name} » créée. ¦ Kopie „{name}“ vytvořena. ¦ Kopian ”{name}” skapad. ¦ Kopien »{name}« oprettet.
+Styles « {name} » supprimés ¦ Styly „{name}“ smazány ¦ Formaten ”{name}” raderade ¦ Typografierne »{name}« slettet
+les styles de la mise en page ¦ styly sazby ¦ layoutens format ¦ layoutets typografier
+Ce réglage ne contient aucun style. ¦ Toto nastavení neobsahuje žádný styl. ¦ Inställningen innehåller inga format. ¦ Indstillingen indeholder ingen typografier.
+Réglage « {name} » importé. ¦ Nastavení „{name}“ importováno. ¦ Inställningen ”{name}” importerad. ¦ Indstillingen »{name}« importeret.
+🎨 Mes styles, pour tous mes documents ¦ 🎨 Moje styly, pro všechny mé dokumenty ¦ 🎨 Mina format, för alla mina dokument ¦ 🎨 Mine typografier, til alle mine dokumenter
+Garde les styles de paragraphe et de caractère (et les couleurs du nuancier qu’ils utilisent) de ce document, pour les remettre dans un autre (« Appliquer »). Les styles du même nom sont remplacés, les autres ajoutés. ¦ Uchová odstavcové a znakové styly tohoto dokumentu (i barvy ze vzorníku, které používají), abys je mohl dát do jiného („Použít“). Styly se stejným názvem se nahradí, ostatní se přidají. ¦ Sparar dokumentets stycke- och teckenformat (och färgerna i färgprovet som de använder), för att lägga in dem i ett annat (”Använd”). Format med samma namn ersätts, de andra läggs till. ¦ Gemmer dokumentets afsnits- og tegntypografier (og farverne fra farvepaletten, de bruger) for at sætte dem ind i et andet (»Anvend«). Typografier med samme navn erstattes, de andre tilføjes.
+=texte qui déborde ¦ přetékající text|přetékající texty|přetékajících textů ¦ text som flödar över|texter som flödar över ¦ tekst, der flyder over|tekster, der flyder over
+textes qui débordent ¦ přetékající texty ¦ texter som flödar över ¦ tekster, der flyder over
+=fait contredit par les fiches ¦ fakt v rozporu s kartami|fakta v rozporu s kartami|faktů v rozporu s kartami ¦ uppgift som motsägs av posterna|uppgifter som motsägs av posterna ¦ oplysning modsagt af posterne|oplysninger modsagt af posterne
+faits contredits par les fiches ¦ fakta v rozporu s kartami ¦ uppgifter som motsägs av posterna ¦ oplysninger modsagt af posterne
+{n} à vérifier ¦ Ke kontrole: {n} ¦ {n} att kontrollera ¦ {n} at kontrollere
+Aucune erreur ¦ Žádná chyba ¦ Inga fel ¦ Ingen fejl
+Aucun texte ne déborde, aucun fait contredit par les fiches ¦ Žádný text nepřetéká, žádný fakt není v rozporu s kartami ¦ Ingen text flödar över, inga uppgifter motsägs av posterna ¦ Ingen tekst flyder over, ingen oplysninger modsiges af posterne
+Contrôle en cours… ¦ Probíhá kontrola… ¦ Kontrollerar… ¦ Kontrollerer…
+Texte qui déborde (alors qu’il est chaîné : vérifie le bloc suivant). ¦ Přetékající text (přestože je zřetězený: zkontroluj další blok). ¦ Text som flödar över (trots att den är länkad: kontrollera nästa block). ¦ Tekst, der flyder over (selvom den er kædet: kontrollér næste blok).
+Texte qui déborde de son bloc (⊞) : agrandis le bloc, chaîne-le, ou « Faire couler le texte ». ¦ Text přetéká ze svého bloku (⊞): zvětši blok, zřetěz ho nebo „Nechat text téct“. ¦ Text som flödar över sitt block (⊞): förstora blocket, länka det eller ”Låt texten flöda”. ¦ Tekst, der flyder ud over sin blok (⊞): forstør blokken, kæd den, eller »Lad teksten flyde«.
+Texte hors des marges : il risque d’être coupé ou trop près du bord. ¦ Text mimo okraje: může se oříznout nebo být příliš u kraje. ¦ Text utanför marginalerna: den kan bli avskuren eller hamna för nära kanten. ¦ Tekst uden for margenerne: den kan blive skåret af eller komme for tæt på kanten.
+Cadre d’image vide. ¦ Prázdný rámeček obrázku. ¦ Tom bildram. ¦ Tom billedramme.
+Photo liée introuvable dans l’app. ¦ Propojená fotka v aplikaci nenalezena. ¦ Den länkade bilden hittades inte i appen. ¦ Det forbundne foto blev ikke fundet i appen.
+Image trop petite pour l’impression : {n} points par pouce à cette taille (il en faut 300 pour une belle impression, 150 au minimum). ¦ Obrázek je na tisk příliš malý: {n} bodů na palec v této velikosti (pro pěkný tisk je potřeba 300, minimálně 150). ¦ Bilden är för liten för utskrift: {n} punkter per tum i den här storleken (300 behövs för en fin utskrift, minst 150). ¦ Billedet er for lille til udskrift: {n} punkter pr. tomme i denne størrelse (300 kræves for en flot udskrift, mindst 150).
+Touche le bord de la page sans aller jusqu’au fond perdu ({n} mm) : un liseré blanc peut apparaître à la coupe. ¦ Dotýká se okraje stránky, ale nesahá do spadávky ({n} mm): při ořezu se může objevit bílý proužek. ¦ Rör sidans kant utan att nå utfallet ({n} mm): en vit kant kan synas vid beskärningen. ¦ Rører sidens kant uden at nå beskæringen ({n} mm): en hvid kant kan vise sig ved beskæringen.
+Vérification des faits impossible pour le moment (la base ne répond pas). ¦ Ověření faktů teď nejde (databáze neodpovídá). ¦ Faktakontroll går inte just nu (databasen svarar inte). ¦ Faktatjek er ikke muligt lige nu (databasen svarer ikke).
+Appel de note sans texte : Texte → « Notes de ce bloc » pour l’écrire. ¦ Odkaz na poznámku bez textu: Text → „Poznámky tohoto bloku“ a napiš ho. ¦ Nothänvisning utan text: Text → ”Noter i det här blocket” för att skriva den. ¦ Notehenvisning uden tekst: Tekst → »Noter i denne blok« for at skrive den.
+Les notes vont « en fin de chapitre », mais aucun bloc ne les reçoit : Objet → « Insérer les notes du chapitre » (ou Document → Notes : en bas du bloc). ¦ Poznámky jdou „na konec kapitoly“, ale žádný blok je nepřijímá: Objekt → „Vložit poznámky kapitoly“ (nebo Dokument → Poznámky: dole v bloku). ¦ Noterna ska ”i slutet av kapitlet”, men inget block tar emot dem: Objekt → ”Infoga kapitlets noter” (eller Dokument → Noter: längst ned i blocket). ¦ Noterne skal »sidst i kapitlet«, men ingen blok modtager dem: Objekt → »Indsæt kapitlets noter« (eller Dokument → Noter: nederst i blokken).
+{what} pas encore résolus (onglet 💬 Relecture). Ils ne s’impriment pas. ¦ Ještě nevyřešeno: {what} (karta 💬 Revize). Netisknou se. ¦ {what} inte lösta än (fliken 💬 Granskning). De skrivs inte ut. ¦ {what} ikke løst endnu (fanen 💬 Gennemgang). De udskrives ikke.
+{what} pas encore résolu (onglet 💬 Relecture). Ils ne s’impriment pas. ¦ Ještě nevyřešeno: {what} (karta 💬 Revize). Netisknou se. ¦ {what} inte löst än (fliken 💬 Granskning). De skrivs inte ut. ¦ {what} ikke løst endnu (fanen 💬 Gennemgang). De udskrives ikke.
+Police « {name} » absente de cet ordinateur : une autre la remplace à l’impression. ¦ Písmo „{name}“ v tomto počítači chybí: při tisku ho nahradí jiné. ¦ Teckensnittet ”{name}” saknas på den här datorn: ett annat ersätter det vid utskrift. ¦ Skrifttypen »{name}« mangler på denne computer: en anden erstatter den ved udskrift.
+Pas de fond perdu (Document → Fond perdu, 3 à 5 mm) : nécessaire si des images ou couleurs vont jusqu’au bord. ¦ Bez spadávky (Dokument → Spadávka, 3 až 5 mm): nutná, pokud obrázky nebo barvy sahají až k okraji. ¦ Inget utfall (Dokument → Utfall, 3 till 5 mm): behövs om bilder eller färger går ända ut till kanten. ¦ Ingen beskæring (Dokument → Beskæring, 3 til 5 mm): nødvendig, hvis billeder eller farver går helt ud til kanten.
+CONTRÔLE AVANT IMPRESSION ¦ KONTROLA PŘED TISKEM ¦ KONTROLL FÖRE UTSKRIFT ¦ KONTROL FØR UDSKRIFT
+{what} à corriger ¦ K opravě: {what} ¦ {what} att rätta ¦ {what} at rette
+=problème ¦ problém|problémy|problémů ¦ problem|problem ¦ problem|problemer
+Prêt pour l’impression ({what}) ¦ Připraveno k tisku ({what}) ¦ Klar för utskrift ({what}) ¦ Klar til udskrift ({what})
+Prêt pour l’impression ¦ Připraveno k tisku ¦ Klar för utskrift ¦ Klar til udskrift
+{a} · {b} · {c}. Clique sur « Aller » pour voir l’objet. Pour l’imprimeur : Fichier → « PDF avec fond perdu et traits de coupe ». ¦ {a} · {b} · {c}. Klikni na „Přejít“ a uvidíš objekt. Pro tiskárnu: Soubor → „PDF se spadávkou a ořezovými značkami“. ¦ {a} · {b} · {c}. Klicka på ”Gå” för att se objektet. För tryckeriet: Arkiv → ”PDF med utfall och skärmärken”. ¦ {a} · {b} · {c}. Klik på »Gå« for at se objektet. Til trykkeriet: Filer → »PDF med beskæring og skæremærker«.
+✅ Rien à signaler. ¦ ✅ Nic k hlášení. ¦ ✅ Inget att anmärka. ¦ ✅ Intet at bemærke.
+Ajuster le cadre ¦ Přizpůsobit rámeček ¦ Anpassa ramen ¦ Tilpas rammen
+Placer une image ¦ Vložit obrázek ¦ Placera en bild ¦ Placér et billede
+Page ajoutée à la fin ¦ Stránka přidána na konec ¦ Sida tillagd sist ¦ Side tilføjet til sidst
+Pages insérées ¦ Stránky vloženy ¦ Sidor infogade ¦ Sider indsat
+Page dupliquée ¦ Stránka zdvojena ¦ Sidan duplicerad ¦ Side duplikeret
+Page supprimée ¦ Stránka smazána ¦ Sidan raderad ¦ Side slettet
+🧲 Aimanter : oui. ¦ 🧲 Přichytávat: ano. ¦ 🧲 Fäst: på. ¦ 🧲 Fastgør: til.
+🧲 Aimanter : arrêté. ¦ 🧲 Přichytávat: vypnuto. ¦ 🧲 Fäst: av. ¦ 🧲 Fastgør: fra.
+Ce bloc est déjà chaîné (« Couper le chaînage » d’abord). ¦ Tento blok je už zřetězený (nejdřív „Zrušit zřetězení“). ¦ Blocket är redan länkat (”Bryt länkningen” först). ¦ Blokken er allerede kædet (»Bryd kædningen« først).
+➜ Clique sur le bloc de texte qui reçoit la suite (sur n’importe quelle page). Échap : annuler. ¦ ➜ Klikni na textový blok, který přijme pokračování (na libovolné stránce). Esc: zrušit. ¦ ➜ Klicka på textramen som tar emot fortsättningen (på vilken sida som helst). Esc: avbryt. ¦ ➜ Klik på den tekstramme, der modtager fortsættelsen (på en hvilken som helst side). Esc: annullér.
+Ce bloc n’est pas chaîné vers un autre. ¦ Tento blok není zřetězený s jiným. ¦ Blocket är inte länkat till något annat. ¦ Blokken er ikke kædet til en anden.
+Chaînage coupé ¦ Zřetězení zrušeno ¦ Länkningen bruten ¦ Kædning brudt
+Choisis un objet. ¦ Vyber objekt. ¦ Välj ett objekt. ¦ Vælg et objekt.
+Déplacement au clavier ¦ Posun klávesnicí ¦ Flytt med tangentbordet ¦ Flytning med tastaturet
+Nom du design (il sera proposé pour les prochains livres) : ¦ Název designu (nabídne se u dalších knih): ¦ Designens namn (det erbjuds för nästa böcker): ¦ Designets navn (det tilbydes til de næste bøger):
+Nom de la copie : ¦ Název kopie: ¦ Kopians namn: ¦ Kopiens navn:
+Design « {name} » enregistré : il est proposé pour les nouveaux livres. ¦ Design „{name}“ uložen: nabídne se u nových knih. ¦ Designen ”{name}” sparad: den erbjuds för nya böcker. ¦ Designet »{name}« gemt: det tilbydes til nye bøger.
+Les dernières modifications seront perdues. ¦ Poslední změny se ztratí. ¦ De senaste ändringarna går förlorade. ¦ De seneste ændringer går tabt.
+{what} · {w} × {h} mm. Dans la fenêtre du navigateur, garde « Taille réelle (100 %) ». ¦ {what} · {w} × {h} mm. V okně prohlížeče ponech „Skutečná velikost (100 %)“. ¦ {what} · {w} × {h} mm. I webbläsarens fönster, behåll ”Verklig storlek (100 %)”. ¦ {what} · {w} × {h} mm. I browserens vindue skal du beholde »Faktisk størrelse (100 %)«.
+Planches (pages en vis-à-vis) ¦ Dvojstrany (protilehlé stránky) ¦ Uppslag (motstående sidor) ¦ Opslag (modstående sider)
+Livret plié ¦ Skládaná brožurka ¦ Vikt häfte ¦ Foldet hæfte
+(pages remises dans l’ordre, 2 par face) ¦ (stránky seřazené, 2 na stranu) ¦ (sidorna i ordning, 2 per sida) ¦ (siderne i rækkefølge, 2 pr. side)
+Notes et commentaires ({n}) ¦ Poznámky a komentáře ({n}) ¦ Anteckningar och kommentarer ({n}) ¦ Noter og kommentarer ({n})
+Notes et commentaires ¦ Poznámky a komentáře ¦ Anteckningar och kommentarer ¦ Noter og kommentarer
+Préparation du fichier HTML (les images sont intégrées)… ¦ Připravuji soubor HTML (obrázky jsou vložené)… ¦ Förbereder HTML-filen (bilderna bäddas in)… ¦ Forbereder HTML-filen (billederne indlejres)…
+Préparation du livre numérique (ePub)… ¦ Připravuji elektronickou knihu (ePub)… ¦ Förbereder e-boken (ePub)… ¦ Forbereder e-bogen (ePub)…
+📱 ePub prêt ({n} Ko) : il s’ouvre dans Livres, Kobo, Calibre… ¦ 📱 ePub připraven ({n} kB): otevře se v Knihách, Kobo, Calibre… ¦ 📱 ePub klar ({n} kB): den öppnas i Böcker, Kobo, Calibre… ¦ 📱 ePub klar ({n} kB): den kan åbnes i Bøger, Kobo, Calibre…
+🗄️ PDF/A : dessin des pages… ¦ 🗄️ PDF/A: kreslím stránky… ¦ 🗄️ PDF/A: ritar sidorna… ¦ 🗄️ PDF/A: tegner siderne…
+🗄️ PDF/A : dessin des pages… {n} % ¦ 🗄️ PDF/A: kreslím stránky… {n} % ¦ 🗄️ PDF/A: ritar sidorna… {n} % ¦ 🗄️ PDF/A: tegner siderne… {n} %
+🗄️ PDF/A prêt ({n} Mo) : fait pour être gardé longtemps (archives, notaire, dépôt). ¦ 🗄️ PDF/A připraveno ({n} MB): určené k dlouhému uchování (archivy, notář, uložení). ¦ 🗄️ PDF/A klar ({n} MB): gjord för att bevaras länge (arkiv, notarie, deposition). ¦ 🗄️ PDF/A klar ({n} MB): lavet til at blive bevaret længe (arkiver, notar, deponering).
+par l’impression ¦ přes tisk ¦ via utskrift ¦ via udskrift
+📖 Livret à plier ¦ 📖 Brožurka ke skládání ¦ 📖 Häfte att vika ¦ 📖 Hæfte til foldning
+pages remises dans l’ordre, 2 par face ¦ stránky seřazené, 2 na stranu ¦ sidorna i ordning, 2 per sida ¦ siderne i rækkefølge, 2 pr. side
+archivage (ISO 19005), pages en image ¦ archivace (ISO 19005), stránky jako obrázky ¦ arkivering (ISO 19005), sidorna som bilder ¦ arkivering (ISO 19005), siderne som billeder
+liseuse, téléphone, tablette ¦ čtečka, telefon, tablet ¦ läsplatta, telefon, surfplatta ¦ e-bogslæser, telefon, tablet
+une page, photos comprises ¦ jedna stránka i s fotkami ¦ en sida, med foton ¦ én side, med fotos
+📝 PDF annoté ¦ 📝 PDF s poznámkami ¦ 📝 Kommenterad PDF ¦ 📝 Kommenteret PDF
+avec les commentaires ¦ s komentáři ¦ med kommentarerna ¦ med kommentarerne
+à envoyer à un cousin ¦ k odeslání bratranci ¦ att skicka till en kusin ¦ til at sende til en fætter eller kusine
+le document (.json) ¦ dokument (.json) ¦ dokumentet (.json) ¦ dokumentet (.json)
+Aucun gabarit ¦ Žádná vzorová stránka ¦ Ingen mallsida ¦ Ingen masterside
+Le gabarit est un fond commun à plusieurs pages (numéro de page, titre courant, filets) : ce qui est posé sur le gabarit apparaît sur toutes ses pages. ¦ Vzorová stránka je společné pozadí několika stránek (číslo stránky, živé záhlaví, linky): co se na ni umístí, objeví se na všech jejích stránkách. ¦ En mallsida är en gemensam bakgrund för flera sidor (sidnummer, löpande rubrik, linjer): det som placeras på den syns på alla dess sidor. ¦ En masterside er en fælles baggrund for flere sider (sidenummer, klumme, streger): det, der placeres på den, vises på alle dens sider.
+Ajouter, enlever ou remplacer le gabarit de cette page ¦ Přidat, odebrat nebo nahradit vzorovou stránku této stránky ¦ Lägg till, ta bort eller ersätt sidans mallsida ¦ Tilføj, fjern eller erstat sidens masterside
+Mettre, enlever ou remplacer un gabarit sur plusieurs pages ¦ Použít, odebrat nebo nahradit vzorovou stránku na více stránkách ¦ Använd, ta bort eller ersätt en mallsida på flera sidor ¦ Anvend, fjern eller erstat en masterside på flere sider
+Appliquer à la page {n} ¦ Použít na stránku {n} ¦ Använd på sida {n} ¦ Anvend på side {n}
+Les éléments du gabarit deviennent modifiables sur cette page ¦ Prvky vzorové stránky lze na této stránce upravovat ¦ Mallsidans objekt blir redigerbara på den här sidan ¦ Mastersidens elementer kan redigeres på denne side
+＋ Nouveau gabarit ¦ ＋ Nová vzorová stránka ¦ ＋ Ny mallsida ¦ ＋ Ny masterside
+Détacher les éléments ¦ Odpojit prvky ¦ Koppla loss objekten ¦ Løsn elementerne
+Avancer la page ¦ Posunout stránku dopředu ¦ Flytta sidan framåt ¦ Flyt siden frem
+Reculer la page ¦ Posunout stránku dozadu ¦ Flytta sidan bakåt ¦ Flyt siden tilbage
+＋ Page à la fin ¦ ＋ Stránka na konec ¦ ＋ Sida sist ¦ ＋ Side til sidst
+＋ Insérer… ¦ ＋ Vložit… ¦ ＋ Infoga… ¦ ＋ Indsæt…
+Aller à ¦ Přejít na ¦ Gå till ¦ Gå til
+Le calque du haut est devant. Nouveaux objets : calque choisi (●). ¦ Horní vrstva je vpředu. Nové objekty: vybraná vrstva (●). ¦ Det översta lagret ligger framför. Nya objekt: valt lager (●). ¦ Det øverste lag ligger forrest. Nye objekter: valgt lag (●).
+Double-clic : renommer ¦ Dvojklik: přejmenovat ¦ Dubbelklick: byt namn ¦ Dobbeltklik: omdøb
+Sélection vers ¦ Výběr do ¦ Flytta markeringen till ¦ Flyt markeringen til
+Objets de la page ¦ Objekty na stránce ¦ Objekt på sidan ¦ Objekter på siden
+Cadre d’image ¦ Rámeček obrázku ¦ Bildram ¦ Billedramme

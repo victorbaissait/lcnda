@@ -10,6 +10,8 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s).replace(/\{(\w+)\}/g, (m, k) => (v && k in v ? String(v[k]) : m)));
+    const plural = (n, one, many) => (window.LCNDA_APP?.plural ? window.LCNDA_APP.plural(n, one, many) : `${n} ${n > 1 ? many || one + 's' : one}`);
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const R = ext.diagramRender; if (!R) return;
     const A = () => window.LCNDA_APP;
@@ -36,7 +38,7 @@
     const str = (v, n = 200) => String(v ?? '').trim().slice(0, n);
     const isNumText = v => /^\s*[-+]?[\d\s ]*[.,]?\d+\s*%?\s*$/.test(String(v ?? ''));
     const C = (k, label, type = 'text', extra = {}) => ({k, label, type, ...extra});
-    const empty = (W, fs, msg) => ({h: 60, svg: T(W / 2, 30, msg, {anchor: 'middle', size: fs, fill: '#888'}), legend: [], desc: msg});
+    const empty = (W, fs, msg) => { msg = i18n(msg); return {h: 60, svg: T(W / 2, 30, msg, {anchor: 'middle', size: fs, fill: '#888'}), legend: [], desc: msg}; };
     const P = (cx, cy, r, a) => [cx + r * Math.cos(a), cy + r * Math.sin(a)];
     /** une part d'anneau (r0 = 0 : une part de disque ; 360° : un anneau entier) */
     function wedge(cx, cy, r0, r1, a0, a1) {
@@ -115,7 +117,7 @@
         if (shape === 'half' && o.genLabels !== false) for (let g = 1; g < gens; g++) { const ri = r0 + (g - .5) * ring; if (ring > fs * .9) { svg += T(cx - ri, cy + fs * .9, `${g + 1}`, {size: fs * .75, anchor: 'middle', fill: '#888'}) + T(cx + ri, cy + fs * .9, `${g + 1}`, {size: fs * .75, anchor: 'middle', fill: '#888'}); } }
         const H = shape === 'half' ? Rm + fs * 2 : shape === 'three' ? Rm * kh + 2 : Rm * 2 + 2;
         const legend = sc.legend.length ? sc.legend.map(it => ({...it, label: sc.numeric && o.unit ? `${it.label} ${o.unit}` : it.label})) : [];
-        return {h: H, svg, legend, desc: `Éventail d’ascendance de ${gens} générations : ${filled} ancêtre${filled > 1 ? 's' : ''} sur ${2 ** gens - 1} places.`};
+        return {h: H, svg, legend, desc: i18n('Éventail d’ascendance de {g} générations : {n} sur {max} places.', {g: gens, n: plural(filled, 'ancêtre'), max: 2 ** gens - 1})};
     }
     const FIRST_M = ['Jean', 'Pierre', 'Louis', 'François', 'Joseph', 'Jacques', 'Julien', 'René', 'Mathurin', 'Guillaume', 'Yves', 'Michel', 'Nicolas', 'Étienne', 'Charles', 'Antoine'];
     const FIRST_F = ['Marie', 'Anne', 'Jeanne', 'Françoise', 'Perrine', 'Julienne', 'Louise', 'Catherine', 'Marguerite', 'Rose', 'Madeleine', 'Élisabeth', 'Renée', 'Victoire', 'Agathe', 'Hélène'];
@@ -142,11 +144,11 @@
             const by = val(pane, 'by'), r = await get({what: 'fan', root: rootOf(pane), gens: val(pane, 'gens')});
             if (!r.rows?.length) throw new Error('Aucun ancêtre trouvé pour cette personne.');
             const roman = n => { const v = [[10, 'X'], [9, 'IX'], [5, 'V'], [4, 'IV'], [1, 'I']]; let s = '', x = n; for (const [a, b] of [[20, 'XX'], ...v]) while (x >= a) { s += b; x -= a; } return s; };
-            const value = p => by === 'score' ? String(p.score) : by === 'century' ? (p.birth_year ? `${roman(Math.ceil(p.birth_year / 100))}e siècle` : '') : by === 'gender' ? ({male: 'Homme', female: 'Femme'}[p.gender] || 'Inconnu') : str(p[by], 80);
+            const value = p => by === 'score' ? String(p.score) : by === 'century' ? (p.birth_year ? i18n('{n}e siècle', {n: roman(Math.ceil(p.birth_year / 100))}) : '') : by === 'gender' ? ({male: i18n('Homme'), female: i18n('Femme')}[p.gender] || i18n('Inconnu')) : str(p[by], 80);
             const s = io.spec(), detail = p => [p.birth ? `° ${String(p.birth).replace(/-00/g, '').slice(0, 10)}${p.birth_place ? ' ' + p.birth_place : ''}` : '', p.death ? `† ${String(p.death).replace(/-00/g, '').slice(0, 10)}` : ''].filter(Boolean).join(' · ');
             s.rows = r.rows.map(p => ({sosa: p.sosa, name: p.name, value: value(p), detail: detail(p)}));
             s.cats = by === 'gender' ? ['Homme', 'Femme', 'Inconnu'].map(v => ({value: v, color: KNOWN[fold(v)]})) : []; s.o = {...s.o, gens: r.gens, scale: by === 'score' ? 'num' : 'cat', ...(by === 'score' ? {min: 0, max: 100, unit: '%', lowColor: '#f6d5d0', highColor: '#2e7d32'} : {min: '', max: '', unit: ''}), title: `Ascendance de ${r.root_name} — ${pane.querySelector('[data-gn="by"]').selectedOptions[0].textContent.replace(/\s*\(.*$/, '').toLowerCase()}`};
-            io.apply(s); return `${r.rows.length} ancêtres pris dans l’app.`;
+            io.apply(s); return i18n('{n} ancêtres pris dans l’app.', {n: r.rows.length});
         }),
     };
 
@@ -199,7 +201,7 @@
             if (name) svg += T(cx, y0 - f * .6, cut(name, hole * 1.8, f), {size: f, anchor: 'middle', weight: 700});
             svg += T(cx, y0 + f * .7, fmt(total), {size: f * .95, anchor: 'middle', fill: '#666'});
         }
-        return {h: half ? Rm + 2 : Rm * 2 + 2, svg, legend: o.colorBy === 'depth' ? [] : legend, desc: `Soleil de ${count} parts sur ${depth} anneaux, total ${fmt(total)}.`};
+        return {h: half ? Rm + 2 : Rm * 2 + 2, svg, legend: o.colorBy === 'depth' ? [] : legend, desc: i18n('Soleil de {n} parts sur {d} anneaux, total {t}.', {n: count, d: depth, t: fmt(total)})};
     }
     function sampleSun() {
         const rows = [{name: 'Jean MARTIN (1792)', parent: ''}], kids = [['Pierre', 4], ['Marie', 2], ['Louis', 3], ['Rose', 1]];
@@ -221,7 +223,7 @@
             const used = new Set(); label.forEach((v, k) => { let x = v; if (used.has(x)) x = `${v} · n° ${k}`; used.add(x); label.set(k, x); });
             const s = io.spec(); s.rows = r.nodes.map(n => ({name: label.get(n.id), parent: n.parent ? label.get(n.parent) || '' : '', value: ''}));
             s.o = {...s.o, sizeBy: 'desc', depth: Number(val(pane, 'gens')), title: `Descendance de ${r.nodes[0].name}`};
-            io.apply(s); return `${r.nodes.length} personnes prises dans l’app${r.truncated ? ' (les 3 000 premières)' : ''}.`;
+            io.apply(s); return r.truncated ? i18n('{n} personnes prises dans l’app (les 3 000 premières).', {n: r.nodes.length}) : i18n('{n} personnes prises dans l’app.', {n: r.nodes.length});
         }),
     };
 
@@ -322,7 +324,7 @@
             nodes += `<g data-n="${i}" transform="translate(${r2(X(i))} ${r2(Y(i))})"><circle r="${r2(r)}" fill="${nc.col[i]}" stroke="#fff" stroke-width="1.2"/><title>${esc(`${n.name}${n.group ? ' · ' + n.group : ''} : ${n.deg} lien${n.deg > 1 ? 's' : ''}`)}</title>${lab ? T(0, r + fs * .75, cut(n.name, fs * 12, fs * .85), {size: fs * .85, anchor: 'middle', weight: n.deg === maxDeg ? 700 : 500}) : ''}</g>`; });
         const svg = `<g data-gn-net="${st.key}" data-fit="${r2(ox)} ${r2(oy)} ${r2(s)}"><rect width="${r2(W)}" height="${r2(H)}" fill="#fff" fill-opacity="0" data-gn-bg=""/><g data-gn-vp=""><g>${edges}</g><g>${nodes}</g></g></g>`;
         const legend = [...nc.legend, ...(o.edgeKinds === false ? [] : kc.kinds.filter(Boolean).slice(0, 12).map(k => ({label: k, color: kc.m.get(k), type: 'line', width: 3})))];
-        return {h: H, svg, legend, desc: `Réseau de ${g.nodes.length} personnes et ${g.links.length} liens.`};
+        return {h: H, svg, legend, desc: i18n('Réseau de {n} personnes et {k} liens.', {n: g.nodes.length, k: g.links.length})};
     }
     function sampleNet() {
         const L = [['Jean MARTIN', 'Pierre DURAND', 'témoin'], ['Jean MARTIN', 'Anne PETIT', 'parrain'], ['Marie ROUX', 'Anne PETIT', 'marraine'], ['Jean MARTIN', 'Marie ROUX', 'voisin'], ['Pierre DURAND', 'Louis DURAND', 'témoin'], ['Louis DURAND', 'Rose DURAND', 'parrain'],
@@ -337,8 +339,8 @@
         const r = await get(q);
         if (!r.links?.length) throw new Error(src === 'witness' ? 'Aucun témoin, parrain ou marraine noté dans les actes de ces personnes.' : src === 'implexe' ? 'Pas d’implexe : aucun ancêtre n’apparaît deux fois.' : 'Aucun mariage entre deux familles.');
         const s = io.spec(); s.rows = r.links.map(l => ({a: l.a, b: l.b, kind: l.kind, weight: l.weight === 1 ? '' : String(l.weight)})); s.nodes = (r.nodes || []).map(n => ({name: n.name, group: n.group || ''}));
-        s.o = {...s.o, title: src === 'witness' ? 'Témoins, parrains et marraines' : src === 'implexe' ? `Implexe : ${r.total || 0} ancêtre${r.total > 1 ? 's' : ''} à plusieurs places` : 'Mariages entre familles', ...(src === 'implexe' ? {order: 'number', colorBy: 'group'} : src === 'marriages' ? {order: 'degree', colorBy: 'community'} : {colorBy: 'group'})};
-        io.apply(s); return `${r.links.length} lien${r.links.length > 1 ? 's' : ''} pris dans l’app.`;
+        s.o = {...s.o, title: src === 'witness' ? i18n('Témoins, parrains et marraines') : src === 'implexe' ? i18n('Implexe : {n} à plusieurs places', {n: plural(r.total || 0, 'ancêtre')}) : i18n('Mariages entre familles'), ...(src === 'implexe' ? {order: 'number', colorBy: 'group'} : src === 'marriages' ? {order: 'degree', colorBy: 'community'} : {colorBy: 'group'})};
+        io.apply(s); return i18n(r.links.length > 1 ? '{n} liens pris dans l’app.' : '{n} lien pris dans l’app.', {n: r.links.length});
     };
     const netApp = {
         html: () => `<div class="h-dg-app gn-app"><h4>🕸 Témoins, parrains, marraines</h4><p class="muted">Les personnes notées dans les actes (témoins, parrains, déclarants…) et celles pour qui elles l’ont été. Couleur = nom de famille.</p>
@@ -374,7 +376,7 @@
             svg += `<circle cx="${r2(pos[i])}" cy="${r2(base)}" r="${r2(r)}" fill="${nc.col[i]}" stroke="#fff"><title>${esc(`${nd.name}${nd.group ? ' · ' + nd.group : ''} : ${nd.deg} lien${nd.deg > 1 ? 's' : ''}`)}</title></circle>`;
             if (o.labels !== 'none' && k % every === 0) svg += T(pos[i] + fs * .25, labTop, cut(nd.name, labH / .87, fs * .85), {size: fs * .85, anchor: 'end', rotate: -60, baseline: 'middle'}); });
         const legend = [...nc.legend, ...(o.edgeKinds === false ? [] : kinds.filter(Boolean).slice(0, 12).map(k => ({label: k, color: kc.m.get(k), type: 'line', width: 3})))];
-        return {h: labTop + (o.labels === 'none' ? 0 : labH), svg, legend, desc: `Arcs : ${n} personnes et ${g.links.length} liens.`};
+        return {h: labTop + (o.labels === 'none' ? 0 : labH), svg, legend, desc: i18n('Arcs : {n} personnes et {k} liens.', {n, k: g.links.length})};
     }
     function sampleArcs() {
         const fam = ['MARTIN', 'DURAND', 'PETIT', 'MOREAU', 'GARNIER', 'ROUX', 'LAMBERT', 'ROBIN', 'GIRARD', 'BONNET'];
@@ -449,11 +451,11 @@
                 const lab = pane.querySelector('[name="gn_labels"]')?.value || '', labels = lab.split(',').map(Number).filter(Boolean).map(id => ({key: 'label:' + id, label: ''}));
                 labels.forEach(l => { l.label = names.get(Number(l.key.slice(6))) || 'Étiquette'; });
                 const chosen = [...labels, ...[...box.querySelectorAll('input:checked')].map(c => ({key: c.value, label: c.dataset.label}))];
-                if (chosen.length < 2 || chosen.length > 4) throw new Error(`Choisis 2 à 4 ensembles (là : ${chosen.length}).`);
+                if (chosen.length < 2 || chosen.length > 4) throw new Error(i18n('Choisis 2 à 4 ensembles (là : {n}).', {n: chosen.length}));
                 const r = await get({what: 'venn', keys: chosen.map(c => c.key).join(','), root: rootOf(pane)});
                 const s = io.spec(); s.sets = chosen.map((c, i) => ({name: c.label, color: s.sets?.[i]?.color || ''}));
                 s.rows = ZONES(chosen.length).map(z => ({region: z, value: String(r.regions?.[z] || 0)})); s.o = {...s.o, title: chosen.map(c => c.label).join(' · ')};
-                const n = Object.values(r.regions || {}).reduce((a, b) => a + b, 0); io.apply(s); return `${fmt(n, 0)} personne${n > 1 ? 's' : ''} comptée${n > 1 ? 's' : ''}.`;
+                const n = Object.values(r.regions || {}).reduce((a, b) => a + b, 0); io.apply(s); return i18n(n > 1 ? '{n} personnes comptées.' : '{n} personne comptée.', {n: fmt(n, 0)});
             });
         },
     };
@@ -504,6 +506,7 @@
 
     /* ═════════ 🗓 Calendrier coloré ═════════ */
     const MN = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+    const monthL = i => { const t = i18n(MN[i]); return window.LCNDA_I18N?.lang === 'de' ? t : t.toLowerCase(); };
     const MS = ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
     function yearsWanted(text) { const out = new Set(); String(text || '').split(/[,;\s]+/).forEach(p => { const m = p.match(/^(\d{3,4})(?:-(\d{3,4}))?$/); if (!m) return; const a = +m[1], b = m[2] ? +m[2] : a; for (let y = Math.min(a, b); y <= Math.max(a, b) && out.size < 30; y++) out.add(y); }); return [...out].sort((a, b) => a - b).slice(0, 12); }
     function calendar(spec, W, fs) {
@@ -526,7 +529,7 @@
                 let doy = 0;
                 for (let m = 1; m <= 12; m++) { for (let d = 1; d <= dim(m, y); d++, doy++) { const idx = doy + off, wk = Math.floor(idx / 7), wd = idx % 7, v = byDay.get(`${y}-${m}-${d}`) || 0; shownSum += v;
                         const fill = v ? mix(low, high, o.scale === 'linear' ? v / max : Math.sqrt(v / max)) : none;
-                        svg += `<rect x="${r2(lab + wk * cs)}" y="${r2(top + fs * 1.5 + wd * cs)}" width="${r2(cs - gap)}" height="${r2(cs - gap)}" rx="${r2(cs * .18)}" fill="${fill}"><title>${esc(`${d === 1 ? '1er' : d} ${MN[m - 1].toLowerCase()} ${y} : ${fmt(v)}`)}</title></rect>`;
+                        svg += `<rect x="${r2(lab + wk * cs)}" y="${r2(top + fs * 1.5 + wd * cs)}" width="${r2(cs - gap)}" height="${r2(cs - gap)}" rx="${r2(cs * .18)}" fill="${fill}"><title>${esc(i18n('{d} {month} {y} : {v}', {d: d === 1 ? i18n('1er', {ctx: 'jour'}) : String(d), month: monthL(m - 1), y: String(y), v: fmt(v)}))}</title></rect>`;
                         if (d === 1 && cs * 4.3 > textW(MS[m - 1], fs * .8)) svg += T(lab + Math.floor(idx / 7) * cs, top + fs * .8, MS[m - 1], {size: fs * .8, fill: '#777'}); } }
                 if (cs > fs * .7) ['L', 'M', 'M', 'J', 'V', 'S', 'D'].forEach((t, i) => { if (i % 2 === 0) svg += T(lab - 4, top + fs * 1.5 + i * cs + cs / 2, t, {size: Math.min(fs * .7, cs), anchor: 'end', fill: '#999'}); });
                 H = top + fs * 1.5 + cs * 7; });
@@ -537,13 +540,13 @@
             for (let d = 1; d <= 31; d++) if (cs > fs * 1.1 || d % 5 === 0 || d === 1) svg += T(lab + (d - .5) * cs, fs * .7, String(d), {size: Math.min(fs * .75, cs * .8), anchor: 'middle', fill: '#888'});
             for (let m = 1; m <= 12; m++) { const y0 = fs * 1.5 + (m - 1) * cs; svg += T(lab - 6, y0 + cs / 2, MS[m - 1], {size: Math.min(fs * .9, cs * .9), anchor: 'end'});
                 for (let d = 1; d <= dim(m, null); d++) { const v = sum.get(`${m}-${d}`) || 0; shownSum += v; const fill = v ? mix(low, high, o.scale === 'linear' ? v / max : Math.sqrt(v / max)) : none;
-                    svg += `<rect x="${r2(lab + (d - 1) * cs)}" y="${r2(y0)}" width="${r2(cs - gap)}" height="${r2(cs - gap)}" rx="${r2(cs * .15)}" fill="${fill}"><title>${esc(`${d === 1 ? '1er' : d} ${MN[m - 1].toLowerCase()} : ${fmt(v)}`)}</title></rect>`;
+                    svg += `<rect x="${r2(lab + (d - 1) * cs)}" y="${r2(y0)}" width="${r2(cs - gap)}" height="${r2(cs - gap)}" rx="${r2(cs * .15)}" fill="${fill}"><title>${esc(i18n('{d} {month} : {v}', {d: d === 1 ? i18n('1er', {ctx: 'jour'}) : String(d), month: monthL(m - 1), v: fmt(v)}))}</title></rect>`;
                     if (o.values && v && cs > fs * 1.5) svg += T(lab + (d - 1) * cs + (cs - gap) / 2, y0 + (cs - gap) / 2, fmt(v, 0), {size: Math.min(fs * .75, cs * .42), anchor: 'middle', fill: contrast(fill)}); } }
             H = fs * 1.5 + 12 * cs;
         }
         const legend = [{label: 'Aucun', color: '#e6e8eb'}, ...[.15, .4, .7, 1].map(t => { const v = Math.max(1, Math.round(o.scale === 'linear' ? max * t : max * t * t)); return {label: fmt(v, 0), color: mix(low, high, o.scale === 'linear' ? v / max : Math.sqrt(v / max))}; })].filter((it, i, a) => i < 2 || it.label !== a[i - 1].label);
-        if (noDay && o.noDayNote !== false) { svg += T(0, H + fs * 1.2, `${fmt(noDay, 0)} date${noDay > 1 ? 's' : ''} sans jour précis (non montrée${noDay > 1 ? 's' : ''})`, {size: fs * .8, fill: '#888', style: 'italic'}); H += fs * 1.8; }
-        return {h: H, svg, legend, desc: `Calendrier : ${fmt(shownSum, 0)} événement${shownSum > 1 ? 's' : ''} montré${shownSum > 1 ? 's' : ''}, au plus ${fmt(max, 0)} le même jour.`};
+        if (noDay && o.noDayNote !== false) { svg += T(0, H + fs * 1.2, i18n(noDay > 1 ? '{n} dates sans jour précis (non montrées)' : '{n} date sans jour précis (non montrée)', {n: fmt(noDay, 0)}), {size: fs * .8, fill: '#888', style: 'italic'}); H += fs * 1.8; }
+        return {h: H, svg, legend, desc: i18n(shownSum > 1 ? 'Calendrier : {n} événements montrés, au plus {m} le même jour.' : 'Calendrier : {n} événement montré, au plus {m} le même jour.', {n: fmt(shownSum, 0), m: fmt(max, 0)})};
     }
     function sampleCal() {
         const out = []; let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
@@ -564,12 +567,12 @@
             const s = io.spec(), year = s.o?.layout === 'year', wanted = yearsWanted(s.o?.years);
             let days = r.days;
             // assez peu de jours : les dates complètes (les deux présentations marchent) ; sinon, l'essentiel pour la présentation choisie
-            if (days.length <= 15000 && !wanted.length) { s.rows = days.map(([d, t, n]) => ({date: d.split('-').reverse().join('/'), value: String(n), label: TYPE_FR[t] || t})); s.o = {...s.o, title: `${types.map(t => TYPE_FR[t]).join(', ')} jour par jour`}; io.apply(s); return `${fmt(r.total - r.no_day, 0)} dates complètes prises (${fmt(r.no_day, 0)} sans jour précis laissées de côté).`; }
+            if (days.length <= 15000 && !wanted.length) { s.rows = days.map(([d, t, n]) => ({date: d.split('-').reverse().join('/'), value: String(n), label: TYPE_FR[t] ? i18n(TYPE_FR[t]) : t})); s.o = {...s.o, title: i18n('{what} jour par jour', {what: types.map(t => i18n(TYPE_FR[t])).join(', ')})}; io.apply(s); return i18n('{n} dates complètes prises ({k} sans jour précis laissées de côté).', {n: fmt(r.total - r.no_day, 0), k: fmt(r.no_day, 0)}); }
             if (year) { const per = new Map(); days.forEach(([d, , n]) => { const y = +d.slice(0, 4); per.set(y, (per.get(y) || 0) + n); }); const keep = new Set(wanted.length ? wanted : [...per.entries()].sort((a, b) => b[1] - a[1]).slice(0, 6).map(([y]) => y)); days = days.filter(([d]) => keep.has(+d.slice(0, 4))); }
             else { const m = new Map(); days.forEach(([d, t, n]) => { if (wanted.length && !wanted.includes(+d.slice(0, 4))) return; const k = d.slice(5) + '|' + t; m.set(k, (m.get(k) || 0) + n); }); days = [...m.entries()].map(([k, n]) => { const [md, t] = k.split('|'); const [mo, d] = md.split('-').map(Number); return [`${d === 1 ? '1er' : d} ${MN[mo - 1].toLowerCase()}`, t, n]; }); }
-            s.rows = days.slice(0, 15000).map(([d, t, n]) => ({date: year ? d.split('-').reverse().join('/') : d, value: String(n), label: TYPE_FR[t] || t}));
-            s.o = {...s.o, title: `${types.map(t => TYPE_FR[t]).join(', ')} jour par jour`};
-            io.apply(s); return `${fmt(r.total - r.no_day, 0)} dates complètes prises (${fmt(r.no_day, 0)} sans jour précis laissées de côté).`;
+            s.rows = days.slice(0, 15000).map(([d, t, n]) => ({date: year ? d.split('-').reverse().join('/') : d, value: String(n), label: TYPE_FR[t] ? i18n(TYPE_FR[t]) : t}));
+            s.o = {...s.o, title: i18n('{what} jour par jour', {what: types.map(t => i18n(TYPE_FR[t])).join(', ')})};
+            io.apply(s); return i18n('{n} dates complètes prises ({k} sans jour précis laissées de côté).', {n: fmt(r.total - r.no_day, 0), k: fmt(r.no_day, 0)});
         }),
     };
 
@@ -594,11 +597,11 @@
             else if (stack) { let acc = 0; ser.forEach((s, j) => { const v = V[m][j]; if (v > 0) { svg += `<path d="${wedge(cx, cy, acc ? rr(acc) : r0, rr(acc + v), a0, a1)}" fill="${s.color}" stroke="#fff" stroke-width=".8"><title>${esc(`${MN[m]} · ${s.name} : ${fmt(v)}`)}</title></path>`; acc += v; } }); }
             else ser.map((s, j) => [s, V[m][j]]).sort((a, b) => b[1] - a[1]).forEach(([s, v]) => { if (v > 0) svg += `<path d="${wedge(cx, cy, r0, rr(v), a0, a1)}" fill="${s.color}" fill-opacity="${ser.length > 1 ? .55 : .9}" stroke="${s.color}"><title>${esc(`${MN[m]} · ${s.name} : ${fmt(v)}`)}</title></path>`; });
             const [lx, ly] = P(cx, cy, Rm + labR * .55, (a0 + a1) / 2);
-            svg += T(lx, ly, o.short === false ? MN[m] : MS[m], {size: fs * .9, anchor: 'middle', weight: 600});
+            svg += T(lx, ly, i18n(o.short === false ? MN[m] : MS[m]), {size: fs * .9, anchor: 'middle', weight: 600});
             if (o.values && ser.length === 1 && V[m][0] > 0) { const [vx, vy] = P(cx, cy, Math.max(r0 + fs, rr(V[m][0]) - fs * .9), (a0 + a1) / 2); svg += T(vx, vy, fmt(V[m][0], 0), {size: fs * .78, anchor: 'middle', fill: contrast(ser[0].color), weight: 600}); }
         }
         const tot = ser.map((_, j) => V.reduce((a, v) => a + v[j], 0)), top = ser.map((_, j) => V.reduce((b, v, m) => (v[j] > V[b][j] ? m : b), 0));
-        return {h: cy + Rm + labR, svg, legend: ser.length > 1 || o.legend ? ser.map(s => ({label: s.name, color: s.color})) : [], desc: `Rose des mois : ${ser.map((s, j) => `${s.name} ${fmt(tot[j], 0)} (le plus en ${MN[top[j]].toLowerCase()})`).join(' ; ')}.`};
+        return {h: cy + Rm + labR, svg, legend: ser.length > 1 || o.legend ? ser.map(s => ({label: s.name, color: s.color})) : [], desc: i18n('Rose des mois : {list}.', {list: ser.map((s, j) => i18n('{name} {n} (le plus en {month})', {name: s.name, n: fmt(tot[j], 0), month: monthL(top[j])})).join(' ; ')})};
     }
     const sampleRose = () => ({series: [{name: 'Naissances'}, {name: 'Mariages'}, {name: 'Décès'}], rows: MN.map((label, i) => ({label, s0: [48, 52, 55, 49, 44, 40, 38, 37, 42, 45, 43, 46][i], s1: [38, 40, 6, 12, 16, 22, 18, 14, 16, 18, 34, 5][i], s2: [52, 48, 44, 38, 32, 28, 30, 36, 40, 38, 42, 50][i]}))});
     const roseApp = {
@@ -647,11 +650,11 @@
         if (maxLab) [...pts2, ...segs].slice(0, 2000).forEach(p => { if (placed.length >= maxLab || !p.label) return; const a = ang(p.a), [x, y] = at(p.a, gap * .35), f = fs * .78, w = textW(p.label, f), right = Math.cos(a) >= 0, bx = right ? x + 4 : x - 4 - w, box = [bx, y - f * .6, w, f * 1.2];
             if (placed.some(b => box[0] < b[0] + b[2] && box[0] + box[2] > b[0] && box[1] < b[1] + b[3] && box[1] + box[3] > b[1]) || bx < -fs * 1.5 || bx + w > W + fs * 1.5) return; placed.push(box);
             svg += T(right ? x + 4 : x - 4, y, cut(p.label, fs * 14, f), {size: f, anchor: right ? 'start' : 'end'}); });
-        return {h: cy + Rm + fs * 2, svg, legend: kinds.slice(0, 16).map(k => ({label: k, color: kcol.get(k)})), desc: `Spirale du temps de ${Math.round(t0)} à ${Math.round(t0 + turns * per)}, ${per} ans par tour : ${list.length} événement${list.length > 1 ? 's' : ''}.`};
+        return {h: cy + Rm + fs * 2, svg, legend: kinds.slice(0, 16).map(k => ({label: k, color: kcol.get(k)})), desc: i18n('Spirale du temps de {a} à {b}, {per} ans par tour : {n}.', {a: String(Math.round(t0)), b: String(Math.round(t0 + turns * per)), per, n: plural(list.length, 'événement')})};
     }
-    const sampleSpiral = () => [['1715', '', 'Mort de Louis XIV', 'Histoire'], ['1789', '', 'Révolution', 'Histoire'], ['1804', '', 'Code civil', 'Histoire'], ['1870', '', 'Guerre de 1870', 'Histoire'], ['1914', '1918', 'Grande Guerre', 'Histoire'], ['1939', '1945', 'Seconde Guerre mondiale', 'Histoire'],
-        ['1742', '1801', 'Jean MARTIN', 'Vie'], ['1768', '1832', 'Pierre MARTIN', 'Vie'], ['1801', '1867', 'Louis MARTIN', 'Vie'], ['1830', '1899', 'Rose MARTIN', 'Vie'], ['1862', '1931', 'Joseph MARTIN', 'Vie'], ['1895', '1972', 'Marie MARTIN', 'Vie'], ['1921', '2004', 'René MARTIN', 'Vie'],
-        ['1792', '', 'Mariage à Rennes', 'Famille'], ['1846', '', 'Départ pour Nantes', 'Famille'], ['1903', '', 'Achat de la ferme', 'Famille'], ['1956', '', 'Arrivée à Paris', 'Famille']].map(([start, end, label, kind]) => ({start, end, label, kind}));
+    const sampleSpiral = () => [['1715', '', 'Mort de Louis XIV', i18n('Histoire')], ['1789', '', 'Révolution', i18n('Histoire')], ['1804', '', 'Code civil', i18n('Histoire')], ['1870', '', 'Guerre de 1870', i18n('Histoire')], ['1914', '1918', 'Grande Guerre', i18n('Histoire')], ['1939', '1945', 'Seconde Guerre mondiale', i18n('Histoire')],
+        ['1742', '1801', 'Jean MARTIN', i18n('Vie')], ['1768', '1832', 'Pierre MARTIN', i18n('Vie')], ['1801', '1867', 'Louis MARTIN', i18n('Vie')], ['1830', '1899', 'Rose MARTIN', i18n('Vie')], ['1862', '1931', 'Joseph MARTIN', i18n('Vie')], ['1895', '1972', 'Marie MARTIN', i18n('Vie')], ['1921', '2004', 'René MARTIN', i18n('Vie')],
+        ['1792', '', i18n('Mariage à Rennes'), i18n('Famille')], ['1846', '', i18n('Départ pour Nantes'), i18n('Famille')], ['1903', '', i18n('Achat de la ferme'), i18n('Famille')], ['1956', '', i18n('Arrivée à Paris'), i18n('Famille')]].map(([start, end, label, kind]) => ({start, end, label, kind}));
     const spiralApp = {
         html: () => `<div class="h-dg-app gn-app"><h4>🌀 Des vies et des événements de l’app</h4><label>Quoi<select data-gn="what"><option value="lives">Les vies (de la naissance au décès)</option><option value="events">Des événements (points)</option></select></label>${TYPES_HTML(['birth', 'marriage', 'death'])}${SCOPE_HTML()}
             <button type="button" class="button small" data-gn-go>Prendre ces dates</button><p class="muted" data-gn-msg aria-live="polite"></p></div>`,
@@ -659,8 +662,8 @@
             const what = val(pane, 'what') === 'events' ? 'events' : 'lives', types = typesOf(pane);
             const r = await get({what, types: types.join(','), scope: val(pane, 'scope'), root: rootOf(pane)}), s = io.spec();
             if (what === 'lives') { if (!r.people?.length) throw new Error('Aucune personne avec une date de naissance ou de décès.'); s.rows = r.people.map(p => ({start: p.birth || p.death, end: p.birth && p.death ? p.death : '', label: p.name, kind: {male: 'Homme', female: 'Femme'}[p.gender] || 'Personne'})); s.o = {...s.o, title: 'Vies de la famille'}; }
-            else { if (!r.events?.length) throw new Error('Aucun événement daté.'); s.rows = r.events.map(e => ({start: e.date, end: '', label: e.label, kind: e.kind})); s.o = {...s.o, title: 'Les événements de la famille'}; }
-            io.apply(s); return `${s.rows.length} ligne${s.rows.length > 1 ? 's' : ''} prise${s.rows.length > 1 ? 's' : ''} dans l’app.`;
+            else { if (!r.events?.length) throw new Error(i18n('Aucun événement daté.')); s.rows = r.events.map(e => ({start: e.date, end: '', label: e.label, kind: e.kind})); s.o = {...s.o, title: i18n('Les événements de la famille')}; }
+            io.apply(s); return i18n(s.rows.length > 1 ? '{n} lignes prises dans l’app.' : '{n} ligne prise dans l’app.', {n: s.rows.length});
         }),
     };
 
@@ -693,47 +696,47 @@
                 C('lowColor', 'Couleur des petits chiffres', 'color', {def: '#fde0c5', when: s => s.o?.scale !== 'cat'}), C('highColor', 'Couleur des grands chiffres', 'color', {def: '#b3261e', when: s => s.o?.scale !== 'cat'}),
                 C('min', 'Dégradé : minimum (vide = auto)', 'number', {when: s => s.o?.scale !== 'cat'}), C('max', 'Dégradé : maximum (vide = auto)', 'number', {when: s => s.o?.scale !== 'cat'}), C('unit', 'Unité (%, ans…)', 'text', {when: s => s.o?.scale !== 'cat'}),
                 C('center', 'Taille du centre', 'range', {unit: '%', min: 6, max: 40, def: 16}), C('border', 'Traits blancs entre les cases', 'check', {def: true}), C('genLabels', 'Numéro des générations', 'check', {def: true, when: s => (s.o?.shape || 'half') === 'half'}), H_OPT],
-            sample: () => ({o: {title: 'Origines de mes ancêtres', shape: 'half', gens: 5, scale: 'cat'}, rows: sampleAncestors(5), cats: [{value: 'Bretagne', color: '#4e79a7'}, {value: 'Normandie', color: '#59a14f'}, {value: 'Anjou', color: '#f28e2b'}, {value: 'Poitou', color: '#b07aa1'}, {value: 'Paris', color: '#e15759'}]})},
+            sample: () => ({o: {title: i18n('Origines de mes ancêtres'), shape: 'half', gens: 5, scale: 'cat'}, rows: sampleAncestors(5), cats: [{value: 'Bretagne', color: '#4e79a7'}, {value: 'Normandie', color: '#59a14f'}, {value: 'Anjou', color: '#f28e2b'}, {value: 'Poitou', color: '#b07aa1'}, {value: 'Paris', color: '#e15759'}]})},
         sunburst: {icon: '🌞', label: 'Soleil des lignées (anneaux)', group: 'Généalogie', render: sunburst, legend: 'bottom', fromApp: sunApp,
             grids: [{key: 'rows', label: 'Les parts (parent → enfant → chiffre)', cols: [C('name', 'Nom (unique)'), C('parent', 'Au-dessus (vide = au centre)'), C('value', 'Chiffre', 'number'), C('color', 'Couleur', 'color')]}],
             options: [C('sizeBy', 'Taille des parts', 'select', {choices: [['value', 'Le chiffre (ou la somme des parts)'], ['desc', 'Le nombre de descendants'], ['leaves', 'Le nombre de bouts de branche']], def: 'value'}),
                 C('angle', 'Forme', 'select', {choices: [['', 'Cercle complet'], ['half', 'Demi-cercle']]}), C('depth', 'Anneaux au plus', 'range', {min: 1, max: 12, def: 6}), C('hole', 'Trou au centre', 'range', {unit: '%', min: 0, max: 60, def: 18}),
                 C('colorBy', 'Couleurs', 'select', {choices: [['', 'Une par branche (plus clair vers l’extérieur)'], ['depth', 'Une par anneau']]}), C('labels', 'Noms', 'select', {choices: [['', 'Le nom'], ['value', 'Le nom et le chiffre'], ['none', 'Aucun']]}),
                 C('sort', 'Ordre des parts', 'select', {choices: [['', 'Comme dans le tableau'], ['size', 'De la plus grande à la plus petite']]}), C('centerText', 'Texte au centre'), C('border', 'Traits blancs entre les parts', 'check', {def: true}), H_OPT],
-            sample: () => ({o: {title: 'Descendance de Jean Martin', sizeBy: 'desc'}, rows: sampleSun()})},
+            sample: () => ({o: {title: i18n('Descendance de Jean Martin'), sizeBy: 'desc'}, rows: sampleSun()})},
         network: {icon: '🕸️', label: 'Réseau de relations (témoins, parrains…)', group: 'Généalogie', render: network, legend: 'bottom', fromApp: netApp,
             grids: [LINKS_GRID, NODES_GRID, KINDS_GRID],
             options: [COLORBY, C('cluster', 'Rapprocher les points de même couleur', 'check'), C('edgeKinds', 'Liens colorés selon leur sorte', 'check', {def: true}), LABELS, C('sizeBy', 'Taille des points', 'select', {choices: [['', 'Selon le nombre de liens'], ['same', 'Tous pareils']]}),
                 C('nodeSize', 'Taille des points', 'range', {min: 3, max: 30, def: 9}), C('strength', 'Écartement', 'range', {min: .2, max: 4, step: .1, def: 1}), C('height', 'Hauteur', 'number', {unit: 'px', min: 220, max: 2400})],
-            sample: () => ({o: {title: 'Témoins et parrains au village'}, ...sampleNet()})},
+            sample: () => ({o: {title: i18n('Témoins et parrains au village')}, ...sampleNet()})},
         arcs: {icon: '🌈', label: 'Arcs de liens (implexe, mariages entre familles)', group: 'Généalogie', render: arcs, legend: 'bottom', fromApp: arcsApp,
             grids: [LINKS_GRID, {...NODES_GRID, label: 'Les personnes, dans l’ordre de la ligne (facultatif)'}, KINDS_GRID],
             options: [C('order', 'Ordre sur la ligne', 'select', {choices: [['', 'Comme dans les tableaux'], ['group', 'Par groupe'], ['degree', 'Les plus reliés d’abord'], ['az', 'A → Z'], ['number', 'Par numéro (Sosa 2, 3, 10…)']]}),
                 C('side', 'Arcs', 'select', {choices: [['', 'Au-dessus'], ['kind', 'Au-dessus et en dessous selon la sorte'], ['below', 'En dessous']]}), C('arcHeight', 'Hauteur des arcs', 'range', {unit: '%', min: 10, max: 120, def: 55}),
                 {...COLORBY, choices: COLORBY.choices}, C('edgeKinds', 'Arcs colorés selon leur sorte', 'check', {def: true}), C('labels', 'Noms', 'select', {choices: [['', 'Sous la ligne'], ['none', 'Aucun']]})],
-            sample: () => ({o: {title: 'Mariages entre familles du village', order: 'degree', colorBy: 'community'}, rows: sampleArcs(), nodes: []})},
+            sample: () => ({o: {title: i18n('Mariages entre familles du village'), order: 'degree', colorBy: 'community'}, rows: sampleArcs(), nodes: []})},
         venn: {icon: '⭕', label: 'Diagramme de Venn (2 à 4 ensembles)', group: 'Généalogie', render: venn, noLegend: true, fromApp: vennApp,
             grids: [{key: 'sets', label: 'Les ensembles (2 à 4) : A, B, C, D', max: 4, cols: [C('name', 'Nom'), C('color', 'Couleur', 'color')]},
                 {key: 'rows', label: 'Ce qu’on écrit dans chaque zone (AB = dans A et B, pas dans les autres)', fixed: spec => ZONES(clamp(rows(spec, 'sets').length, 2, 4)), cols: [C('region', 'Zone', 'readonly'), C('value', 'Nombre ou texte')]}],
             options: [C('pct', 'Ajouter le pourcentage', 'check'), C('totals', 'Total de chaque ensemble à côté de son nom', 'check', {def: true}), C('opacity', 'Transparence des formes', 'range', {unit: '%', min: 5, max: 80, def: 30}), H_OPT],
-            sample: () => ({o: {title: 'Mes sources'}, sets: [{name: 'État civil'}, {name: 'Registres paroissiaux'}, {name: 'Notaires'}, {name: 'Recensements'}], rows: ZONES(4).map((region, i) => ({region, value: String([120, 85, 30, 64, 40, 12, 22, 9, 15, 11, 5, 6, 4, 3, 2][i])}))})},
+            sample: () => ({o: {title: i18n('Mes sources')}, sets: [{name: i18n('État civil')}, {name: i18n('Registres paroissiaux')}, {name: i18n('Notaires')}, {name: i18n('Recensements')}], rows: ZONES(4).map((region, i) => ({region, value: String([120, 85, 30, 64, 40, 12, 22, 9, 15, 11, 5, 6, 4, 3, 2][i])}))})},
         calendar: {icon: '🗓️', label: 'Calendrier coloré (jour par jour)', group: 'Frises', render: calendar, legend: 'bottom', fromApp: calApp,
             grids: [{key: 'rows', label: 'Les dates (une ligne par événement, ou une date et un nombre)', cols: [C('date', 'Date', 'text', {ph: '7 mai 1925, 08/12/1960, 12 thermidor an II'}), C('value', 'Nombre (vide = 1)', 'number'), C('label', 'Quoi')]}],
             options: [C('layout', 'Présentation', 'select', {choices: [['', 'Toutes années ensemble (12 mois × 31 jours)'], ['year', 'Une ligne par année (semaines)']]}), C('years', 'Années (ex. 1890-1895, 1900 ; vide = auto)'),
                 C('lowColor', 'Couleur de « peu »', 'color', {def: '#e3ecfb'}), C('highColor', 'Couleur de « beaucoup »', 'color', {def: '#1e4fd8'}), C('scale', 'Dégradé', 'select', {choices: [['', 'Doux (racine carrée)'], ['linear', 'Proportionnel']]}),
                 C('values', 'Écrire les nombres dans les cases', 'check', {when: s => s.o?.layout !== 'year'}), C('noDayNote', 'Dire combien de dates n’ont pas de jour', 'check', {def: true})],
-            sample: () => ({o: {title: 'Jours de naissance de mes ancêtres'}, rows: sampleCal()})},
+            sample: () => ({o: {title: i18n('Jours de naissance de mes ancêtres')}, rows: sampleCal()})},
         monthrose: {icon: '🌸', label: 'Rose des mois (12 parts)', group: 'Frises', render: monthrose, legend: 'bottom', fromApp: roseApp,
             grids: [{key: 'rows', label: 'Les mois (janvier à décembre)', series: true, cols: [C('label', 'Mois')]}],
             options: [C('style', 'Plusieurs séries', 'select', {choices: [['side', 'Côte à côte'], ['stack', 'Empilées'], ['overlap', 'Superposées (transparentes)']], def: 'side'}), C('scale', 'Longueur des rayons', 'select', {choices: [['', 'Surface juste (racine carrée)'], ['linear', 'Proportionnelle']]}),
                 C('hole', 'Trou au centre', 'range', {unit: '%', min: 0, max: 60, def: 10}), C('values', 'Écrire les nombres (une seule série)', 'check'), C('short', 'Mois en abrégé', 'check', {def: true}), H_OPT],
-            sample: () => ({o: {title: 'Naissances, mariages et décès par mois'}, ...sampleRose()})},
+            sample: () => ({o: {title: i18n('Naissances, mariages et décès par mois')}, ...sampleRose()})},
         spiral: {icon: '🌀', label: 'Spirale du temps (une spire par siècle)', group: 'Frises', render: spiral, legend: 'bottom', fromApp: spiralApp,
             grids: [{key: 'rows', label: 'Les événements (une date = un point ; un début et une fin = un trait)', cols: [C('start', 'Date ou début', 'text', {ph: '1789, 7 mai 1925'}), C('end', 'Fin (facultatif)'), C('label', 'Nom'), C('kind', 'Sorte (couleur)'), C('color', 'Couleur', 'color')]}],
             options: [C('turn', 'Un tour de spirale', 'select', {choices: [['', 'Un siècle'], ['decade', 'Une décennie'], ['custom', 'Autant d’années que…']]}), C('years', 'Années par tour', 'number', {min: 1, max: 1000, def: 50, when: s => s.o?.turn === 'custom'}),
                 C('from', 'Début (année, vide = auto)', 'number'), C('to', 'Fin (année, vide = auto)', 'number'), C('labels', 'Noms', 'select', {choices: [['', 'Quelques-uns (sans chevauchement)'], ['all', 'Tous (sans chevauchement)'], ['none', 'Aucun']]}),
                 C('segWidth', 'Épaisseur des traits', 'range', {min: 1, max: 30, def: 6}), C('dot', 'Taille des points', 'range', {min: 1.5, max: 14, step: .5, def: 4.5}), H_OPT],
-            sample: () => ({o: {title: 'Trois siècles de la famille Martin'}, rows: sampleSpiral()})},
+            sample: () => ({o: {title: i18n('Trois siècles de la famille Martin')}, rows: sampleSpiral()})},
     };
     // l'ancien Venn (2 ou 3 ensembles) est remplacé : mêmes données, une zone de plus par ensemble ajouté
     delete K.venn;

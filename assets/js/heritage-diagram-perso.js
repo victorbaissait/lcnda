@@ -25,6 +25,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s).replace(/\{(\w+)\}/g, (m, k) => (v && k in v ? String(v[k]) : m)));
     const root = typeof window !== 'undefined' ? window : globalThis;
     const ext = root.LCNDA_EXT = root.LCNDA_EXT || {};
     const R = () => ext.diagramRender;
@@ -120,14 +121,14 @@
             ser.forEach((s, j) => {
                 const c = j % cols; if (c === 0 && j) { y += rowH + gap; rowH = 0; }
                 const sc = col(s?.color, own[j % own.length]);
-                const sub = {kind: sp.kind, series: [{name: String(s?.name || `Série ${j + 1}`), color: sc}], rows: rows.map(r => ({label: r.label, s0: r['s' + j], color: sc, ...(r.__off === true ? {__off: true} : {})})),
+                const sub = {kind: sp.kind, series: [{name: String(s?.name || i18n('Série {num}', {num: j + 1})), color: sc}], rows: rows.map(r => ({label: r.label, s0: r['s' + j], color: sc, ...(r.__off === true ? {__off: true} : {})})),
                     o: {...o, title: '', subtitle: '', source: '', legend: 'none', bg: 'transparent', facet: '', notes: [], __year: undefined, __lo: lo, __hi: hi, width: pw, height: num(o.height) > 0 ? num(o.height) * .6 : Math.max(110, pw * .5), values: n > 4 ? false : o.values, ...(sp.kind === 'radar' ? {max: hi} : {})}};
                 const inner = R().svg(sub, pw), m = inner.match(/viewBox="0 0 ([\d.]+) ([\d.]+)"/), h = Number(m?.[2]) || 120, x = c * (pw + gap);
-                svg += `<g class="dgp-facet" data-facet="${j}"><text x="${r2(x + pw / 2)}" y="${r2(y + fs)}" font-size="${r2(fs * 1.05)}" font-weight="700" text-anchor="middle" fill="${sc}">${esc(String(s?.name || `Série ${j + 1}`).slice(0, 80))}</text>`
+                svg += `<g class="dgp-facet" data-facet="${j}"><text x="${r2(x + pw / 2)}" y="${r2(y + fs)}" font-size="${r2(fs * 1.05)}" font-weight="700" text-anchor="middle" fill="${sc}">${esc(String(s?.name || i18n('Série {num}', {num: j + 1})).slice(0, 80))}</text>`
                     + nest(inner, x, y + fs * 1.6) + '</g>';
                 rowH = Math.max(rowH, h + fs * 1.6);
             });
-            return {h: y + rowH, svg, legend: [], desc: `${n} petits diagrammes, même échelle (de ${fmt(lo)} à ${fmt(hi)})`};
+            return {h: y + rowH, svg, legend: [], desc: i18n('{n} petits diagrammes, même échelle (de {lo} à {hi})', {n, lo: fmt(lo), hi: fmt(hi)})};
         }};
     }
     /** le dessin commun appelle prepare avant d'assembler : style par défaut, petits multiples */
@@ -298,9 +299,9 @@
         box.after(bar);
         const range = bar.querySelector('input[type=range]'), out = bar.querySelector('output'), pb = bar.querySelector('[data-dgp-p]');
         const show = k => { i = clamp(k, 0, T.years.length - 1); range.value = String(i); out.textContent = fmt(T.years[i], 0); box.innerHTML = R().svg(T.at(T.years[i])); };
-        const stop = () => { if (timer) clearInterval(timer); timer = 0; pb.textContent = '▶'; pb.setAttribute('aria-label', 'Lire les années'); };
+        const stop = () => { if (timer) clearInterval(timer); timer = 0; pb.textContent = '▶'; pb.setAttribute('aria-label', i18n('Lire les années')); };
         const tick = () => { if (!box.isConnected || !bar.isConnected) return stop(); if (i >= T.years.length - 1) { if (loop) return show(0); stop(); onStop?.(); return; } show(i + 1); };
-        const start = () => { if (i >= T.years.length - 1) show(0); pb.textContent = '⏸'; pb.setAttribute('aria-label', 'Mettre en pause'); timer = setInterval(tick, calm() ? Math.max(speed, 1200) : speed); };
+        const start = () => { if (i >= T.years.length - 1) show(0); pb.textContent = '⏸'; pb.setAttribute('aria-label', i18n('Mettre en pause')); timer = setInterval(tick, calm() ? Math.max(speed, 1200) : speed); };
         pb.addEventListener('click', () => (timer ? stop() : start()));
         range.addEventListener('input', () => { stop(); show(Number(range.value)); });
         bar.querySelector('[data-dgp-speed]').addEventListener('change', e => { speed = SPEEDS.find(s => s[0] === e.target.value)?.[2] || 450; if (timer) { stop(); start(); } });
@@ -315,7 +316,7 @@
      *  → {blob, ext ('mp4' | 'webm'), mime}. Sert aussi à 🗺 la Carte de la vie (heritage-carte-vie.js). */
     async function recordSvgs(frames, {per = 450, hold = 900, maxW = 1600, onProgress = null, bg = '#ffffff'} = {}) {
         if (typeof MediaRecorder === 'undefined') throw new Error('ce navigateur ne sait pas enregistrer de vidéo');
-        const list = (frames || []).map(f => (typeof f === 'string' ? {svg: f} : f)).filter(f => f && f.svg); if (!list.length) throw new Error('rien à filmer');
+        const list = (frames || []).map(f => (typeof f === 'string' ? {svg: f} : f)).filter(f => f && f.svg); if (!list.length) throw new Error(i18n('rien à filmer'));
         const m = list[0].svg.match(/viewBox="0 0 ([\d.]+) ([\d.]+)"/), w0 = Number(m?.[1]) || 900, h0 = Number(m?.[2]) || 600, k = Math.min(2, maxW / w0);
         const cv = document.createElement('canvas'); cv.width = Math.round(w0 * k / 2) * 2; cv.height = Math.round(h0 * k / 2) * 2; const g = cv.getContext('2d');
         const mime = ['video/mp4;codecs=avc1.42E01E', 'video/mp4', 'video/webm;codecs=vp9', 'video/webm;codecs=vp8', 'video/webm'].find(x => MediaRecorder.isTypeSupported?.(x)) || '';
@@ -338,8 +339,8 @@
             const {blob, ext: ext2} = await recordSvgs(T.years.map(y => R().svg(T.at(y))), {per: Math.max(120, speed), onProgress: k => { btn.textContent = `🔴 ${Math.round(k * 100)} %`; }});
             const name = (A()?.safeExportFilename ? A().safeExportFilename(spec.o?.title || 'diagramme', 'diagramme') : 'diagramme') + '-annees.' + ext2;
             const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000);
-            toast(`✓ Vidéo exportée (${ext2.toUpperCase()}).`);
-        } catch (e) { toast('Vidéo impossible : ' + (e.message || e), 'error'); }
+            toast(i18n('✓ Vidéo exportée ({format}).', {format: ext2.toUpperCase()}));
+        } catch (e) { toast(i18n('Vidéo impossible : {err}', {err: e.message || e}), 'error'); }
         finally { btn.disabled = false; btn.textContent = old; }
     }
     /** un diagramme posé (page Graphiques, fiche, tableau de bord) : le curseur des années s'il est demandé */
@@ -358,7 +359,7 @@
         return `<div class="h-dgp-cards">${cards}<button type="button" class="h-dgp-card${cur === 'none' ? ' is-active' : ''}" data-dgp-style="none" title="Les couleurs et réglages du type, comme avant"><span class="h-dgp-sw"></span><b>Comme avant</b></button></div>
             <div class="h-dgp-grid">
                 <div class="h-dgp-row"><span>Palette</span><span class="h-dgp-pal">${pal.map((c, j) => `<span class="h-dgp-pc"><input type="color" value="${esc(/^#[0-9a-f]{6}$/i.test(c) ? c : '#888888')}" data-dgp-pc="${j}" aria-label="Couleur ${j + 1}"><button type="button" class="h-dg-x" data-dgp-pcdel="${j}" aria-label="Retirer cette couleur" title="Retirer">×</button></span>`).join('')}<button type="button" class="link-button" data-dgp-pcadd>＋ Couleur</button></span></div>
-                <div class="h-dgp-row"><span>Police</span><button type="button" class="button small secondary" data-dgp-font style="font-family:${v('font') ? `'${esc(v('font'))}', ` : ''}inherit">Aa ${esc(v('font') || 'Police de l’app')}</button>${o.font ? '<button type="button" class="link-button" data-dgp-fontreset>↺ Police de l’app</button>' : ''}</div>
+                <div class="h-dgp-row"><span>Police</span><button type="button" class="button small secondary" data-dgp-font style="font-family:${v('font') ? `'${esc(v('font'))}', ` : ''}inherit">Aa ${esc(v('font') || i18n('Police de l’app'))}</button>${o.font ? `<button type="button" class="link-button" data-dgp-fontreset>${i18n('↺ Police de l’app')}</button>` : ''}</div>
                 <label class="h-dgp-row"><span>Fond</span>${sel('data-dgp-k="bg"', [['', 'Blanc'], ['transparent', 'Transparent'], ['custom', 'Couleur…']], v('bg'))}${v('bg') === 'custom' ? `<input type="color" data-dgp-k="bgColor" value="${esc(/^#[0-9a-f]{6}$/i.test(v('bgColor') || '') ? v('bgColor') : '#fdf8ee')}" aria-label="Couleur du fond">` : ''}</label>
                 <label class="h-dgp-row"><span>Couleur des textes</span><input type="color" data-dgp-k="fg" value="${esc(/^#[0-9a-f]{6}$/i.test(v('fg') || '') ? v('fg') : '#1d1d1f')}"></label>
                 <label class="h-dgp-row"><span>Épaisseur des traits</span><input type="range" min="0.5" max="8" step="0.5" value="${esc(v('lineW') ?? 2.5)}" data-dgp-k="lineW" data-unit="px"></label>
@@ -383,14 +384,14 @@
         const o = spec.o || {}, refs = Array.isArray(o.refs) ? o.refs : [], ser = seriesOf(spec), k = spec.kind;
         const row = (r, i) => { const K = REF_KINDS.find(x => x[0] === r.t) || REF_KINDS[0], calc = r.t === 'mean' || r.t === 'median';
             return `<li class="h-dgp-note" data-i="${i}">${sel('data-dgp-r="t"', REF_KINDS.map(x => [x[0], x[1]]), r.t)}
-                ${calc ? (ser.length > 1 ? sel('data-dgp-r="series"', [['', 'Toutes les séries'], ...ser.map((s, j) => [String(j), s?.name || `Série ${j + 1}`])], r.series ?? '') : '') : `<input data-dgp-r="v" value="${esc(r.v ?? '')}" inputmode="decimal" placeholder="Valeur" aria-label="Valeur" class="h-dgp-date">`}
+                ${calc ? (ser.length > 1 ? sel('data-dgp-r="series"', [['', 'Toutes les séries'], ...ser.map((s, j) => [String(j), s?.name || i18n('Série {num}', {num: j + 1})])], r.series ?? '') : '') : `<input data-dgp-r="v" value="${esc(r.v ?? '')}" inputmode="decimal" placeholder="Valeur" aria-label="Valeur" class="h-dgp-date">`}
                 <input data-dgp-r="label" value="${esc(r.label || '')}" placeholder="${esc(K[1])}" maxlength="60" aria-label="Nom de la ligne">
                 <input type="color" data-dgp-r="color" value="${esc(/^#[0-9a-f]{6}$/i.test(r.color || '') ? r.color : K[2])}" aria-label="Couleur">
                 <button type="button" class="icon-button small" data-dgp-rdel="${i}" aria-label="Retirer la ligne" title="Retirer">×</button></li>`; };
         return `<div class="h-dgp-adds">${REF_KINDS.map(([t, l]) => `<button type="button" class="button small secondary" data-dgp-radd="${t}">＋ ${esc(l)}</button>`).join('')}</div>
             ${refs.length ? `<ul class="h-dgp-notes">${refs.map(row).join('')}</ul>` : ''}
             <div class="h-dgp-grid">${canAxes(k, 'log') ? `<label class="ui-toggle"><input type="checkbox" data-dgp-o="log" ${o.log ? 'checked' : ''}><i></i>Échelle logarithmique (très grands écarts)</label>` : ''}
-            ${canAxes(k, 'y2') && ser.length > 1 ? `<label class="h-dgp-row"><span>Deuxième axe (à droite)</span>${sel('data-dgp-o="y2"', [['', 'Aucun'], ...ser.map((s, j) => [String(j), `${s?.name || `Série ${j + 1}`} (en courbe)`])], o.y2 ?? '')}</label>` : ''}</div>`;
+            ${canAxes(k, 'y2') && ser.length > 1 ? `<label class="h-dgp-row"><span>Deuxième axe (à droite)</span>${sel('data-dgp-o="y2"', [['', 'Aucun'], ...ser.map((s, j) => [String(j), i18n('{name} (en courbe)', {name: s?.name || i18n('Série {num}', {num: j + 1})})])], o.y2 ?? '')}</label>` : ''}</div>`;
     }
     const FACETS = [['series', 'Les séries du tableau'], ['sex', 'Le sexe'], ['century', 'Le siècle'], ['branch', 'La branche (côté père / côté mère)'], ['county', 'Le lieu (département)'], ['country', 'Le lieu (pays)'], ['generation', 'La génération']];
     function facetSec(spec) {
@@ -402,11 +403,11 @@
     }
     function timeSec(spec) {
         const T = timeInfo(spec), tm = spec.o?.time || {};
-        return `<p class="ui-hint">Les données vont de ${esc(fmt(T.from, 0))} à ${esc(fmt(T.to, 0))} : le curseur ▶ sous l’aperçu les fait apparaître année après année.</p>
+        return `<p class="ui-hint">${i18n('Les données vont de {a} à {b} : le curseur ▶ sous l’aperçu les fait apparaître année après année.', {a: esc(fmt(T.from, 0)), b: esc(fmt(T.to, 0))})}</p>
             <label class="ui-toggle"><input type="checkbox" data-dgp-t="show" ${tm.show ? 'checked' : ''}><i></i>Montrer aussi le curseur ▶ là où le diagramme est posé (Graphiques, fiches, tableau de bord)</label>
             <label class="h-dgp-row"><span>Vitesse</span>${sel('data-dgp-t="speed"', SPEEDS.map(([k, l]) => [k, l]), tm.speed || '')}</label>
             <label class="ui-toggle"><input type="checkbox" data-dgp-t="loop" ${tm.loop ? 'checked' : ''}><i></i>Recommencer au début (boucle)</label>
-            <label class="h-dgp-row"><span>Un pas de</span><input type="number" min="0" max="500" step="1" value="${esc(tm.step ?? '')}" placeholder="auto" data-dgp-t="step" data-unit="ans"></label>
+            <label class="h-dgp-row"><span>Un pas de</span><input type="number" min="0" max="500" step="1" value="${esc(tm.step ?? '')}" placeholder="auto" data-dgp-t="step" data-unit="${i18n('ans', {ctx: 'unite'})}"></label>
             ${calm() ? '<p class="ui-hint">« Réduire les animations » est demandé : la lecture avance d’une étape par seconde, sans glisser.</p>' : ''}`;
     }
     /** le panneau dans l'onglet « ⚙️ Personnaliser » ; api = {spec(), set(patch), changed()} (heritage-diagrams.js) */
@@ -448,7 +449,7 @@
             t.disabled = true;
             try { const nq = {...q, series: v}, res = await DGO.count(nq); if (!res?.rows?.length) throw new Error('Aucun chiffre pour ce découpage.');
                 const ns = DGO.toSpec(s, res, s.live.label); ['rows', 'series'].forEach(k => { s[k] = ns[k]; }); s.live = {...s.live, q: nq}; o().facet = 'series';
-                A()?.toast?.(`${seriesOf(s).length} petits diagrammes, même échelle.`); changed(); }
+                A()?.toast?.(i18n('{n} petits diagrammes, même échelle.', {n: seriesOf(s).length})); changed(); }
             catch (err) { A()?.toast?.(err.message || String(err), 'error'); t.disabled = false; }
         }, sig);
         el.addEventListener('click', async e => {
@@ -457,14 +458,14 @@
             if (b.dataset.dgpStyle !== undefined) { const id = b.dataset.dgpStyle; applyStyle(spec(), id === 'none' ? null : styleById(id)); return changed(); }
             if (b.hasAttribute('data-dgp-pcadd')) { mineStyle(); const c = ownColors(); if (c.length < 16) c.push(['#4e79a7', '#f28e2b', '#e15759', '#76b7b2', '#59a14f', '#edc948'][c.length % 6]); delete o().palette; return changed(); }
             if (b.dataset.dgpPcdel !== undefined) { mineStyle(); const c = ownColors(); if (c.length > 1) c.splice(Number(b.dataset.dgpPcdel), 1); return changed(); }
-            if (b.hasAttribute('data-dgp-font')) { const f = await UI()?.openFontPicker?.({value: o().font || '', sample: o().title || 'Baptêmes et sépultures', title: 'Police du diagramme'}); if (f) { mineStyle(); o().font = String(f).replace(/[^\p{L}\p{N} _-]/gu, '').slice(0, 60); changed(); } return; }
+            if (b.hasAttribute('data-dgp-font')) { const f = await UI()?.openFontPicker?.({value: o().font || '', sample: o().title || i18n('Baptêmes et sépultures'), title: i18n('Police du diagramme')}); if (f) { mineStyle(); o().font = String(f).replace(/[^\p{L}\p{N} _-]/gu, '').slice(0, 60); changed(); } return; }
             if (b.hasAttribute('data-dgp-fontreset')) { delete o().font; return changed(); }
-            if (b.hasAttribute('data-dgp-def')) { const st = currentStyle(spec()); setDefault(st); toast(`⭐ « ${st.name} » : style par défaut des nouveaux diagrammes et de ceux sans style à eux.`); return changed(); }
-            if (b.hasAttribute('data-dgp-nodef')) { const before = defStyle; setDefault(null); A()?.undoToast ? A().undoToast('Plus de style par défaut', {undo: () => { setDefault(before); changed(); }, redo: () => { setDefault(null); changed(); }}) : null; return changed(); }
+            if (b.hasAttribute('data-dgp-def')) { const st = currentStyle(spec()); setDefault(st); toast(i18n('⭐ « {name} » : style par défaut des nouveaux diagrammes et de ceux sans style à eux.', {name: i18n(st.name)})); return changed(); }
+            if (b.hasAttribute('data-dgp-nodef')) { const before = defStyle; setDefault(null); A()?.undoToast ? A().undoToast(i18n('Plus de style par défaut'), {undo: () => { setDefault(before); changed(); }, redo: () => { setDefault(null); changed(); }}) : null; return changed(); }
             if (b.hasAttribute('data-dgp-all')) return applyToAll(currentStyle(spec()), changed);
-            if (b.dataset.dgpAdd) { const oo = o(); oo.notes = Array.isArray(oo.notes) ? oo.notes : []; if (oo.notes.length >= 60) return toast('60 annotations au plus.', 'error');
+            if (b.dataset.dgpAdd) { const oo = o(); oo.notes = Array.isArray(oo.notes) ? oo.notes : []; if (oo.notes.length >= 60) return toast(i18n('60 annotations au plus.'), 'error');
                 const t = b.dataset.dgpAdd, k = oo.notes.length % 5 * .05, T = timeInfo(spec());
-                const n = {t, color: NOTE_COLOR[t], text: t === 'date' ? (T && T.from <= 1914 && T.to >= 1914 ? 'Guerre de 14' : 'Mon repère') : t === 'text' ? 'Mon texte' : '',
+                const n = {t, color: NOTE_COLOR[t], text: t === 'date' ? (T && T.from <= 1914 && T.to >= 1914 ? i18n('Guerre de 14') : i18n('Mon repère')) : t === 'text' ? i18n('Mon texte') : '',
                     ...(t === 'text' ? {x: .45 + k, y: .2 + k} : t === 'arrow' ? {x1: .3 + k, y1: .2 + k, x2: .5 + k, y2: .45 + k} : t === 'rect' ? {x1: .3 + k, y1: .3, x2: .55 + k, y2: .6} : t === 'vband' ? {x1: .4 + k, x2: .5 + k} : t === 'hband' ? {y1: .35 + k, y2: .45 + k} : {date: T && T.from <= 1914 && T.to >= 1914 ? '1914' : String(Math.round(T ? (T.from + T.to) / 2 : 1914)), to: T && T.from <= 1918 && T.to >= 1918 ? '1918' : '', x: .5})};
                 oo.notes.push(n); const s = el.querySelector('[data-dgp-sec="notes"]'); if (s) s.open = true; changed(); el.querySelector(`.h-dgp-note[data-i="${oo.notes.length - 1}"] input`)?.focus(); return; }
             if (b.dataset.dgpNdel !== undefined) return removeNote(api, Number(b.dataset.dgpNdel), changed);
@@ -472,7 +473,7 @@
                 const ax = lastAx, guess = ax ? +((ax.lo + ax.hi) * .6).toPrecision(2) : 0;
                 oo.refs.push({t, ...(t === 'goal' || t === 'value' ? {v: guess} : {})}); return changed(); }
             if (b.dataset.dgpRdel !== undefined) { const oo = o(), i = Number(b.dataset.dgpRdel), was = oo.refs[i]; oo.refs.splice(i, 1); changed();
-                A()?.undoToast?.('Ligne de repère retirée', {undo: () => { oo.refs.splice(i, 0, was); changed(); }, redo: () => { oo.refs.splice(i, 1); changed(); }}); }
+                A()?.undoToast?.(i18n('Ligne de repère retirée'), {undo: () => { oo.refs.splice(i, 0, was); changed(); }, redo: () => { oo.refs.splice(i, 1); changed(); }}); }
         }, sig);
         paint();
         return {paint};
@@ -480,13 +481,13 @@
     function removeNote(api, i, changed) {
         const oo = api.spec().o || {}, was = oo.notes?.[i]; if (!was) return;
         oo.notes.splice(i, 1); changed();
-        A()?.undoToast?.('Annotation retirée', {undo: () => { oo.notes.splice(Math.min(i, oo.notes.length), 0, was); changed(); }, redo: () => { const j = oo.notes.indexOf(was); if (j >= 0) oo.notes.splice(j, 1); changed(); }});
+        A()?.undoToast?.(i18n('Annotation retirée'), {undo: () => { oo.notes.splice(Math.min(i, oo.notes.length), 0, was); changed(); }, redo: () => { const j = oo.notes.indexOf(was); if (j >= 0) oo.notes.splice(j, 1); changed(); }});
     }
     /** le style tel qu'il est sur ce diagramme (prêt, à moi, ou retouché) */
     function currentStyle(s) {
         const o = s.o || {}, id = String(o.style || '').replace(/\*$/, ''), base = styleById(id);
         const v = cleanStyle({...(!o.style && defStyle ? defStyle.v : {}), ...ownStyle(o)});
-        return {id: base && !String(o.style).endsWith('*') ? base.id : 'custom', name: base ? base.name + (String(o.style).endsWith('*') ? ' (retouché)' : '') : 'Mon style', v};
+        return {id: base && !String(o.style).endsWith('*') ? base.id : 'custom', name: base ? base.name + (String(o.style).endsWith('*') ? ' ' + i18n('(retouché)') : '') : 'Mon style', v};
     }
     /** « Appliquer à tous » : chaque diagramme enregistré prend ce style (↶ Annuler remet le style d'avant de chacun) */
     async function applyToAll(st, changed) {
@@ -497,21 +498,21 @@
         const after = before.map(d => ({...d, spec: applyStyle(clone(d.spec), st)}));
         try { await write(after); setDefault(st); changed(); }
         catch (e) { return A()?.toast?.(e.message, 'error'); }
-        A()?.undoToast?.(`Style « ${st.name} » appliqué à ${mineList.length} diagramme${mineList.length > 1 ? 's' : ''}`, {undo: async () => { await write(before); changed(); }, redo: async () => { await write(after); changed(); }});
+        A()?.undoToast?.(i18n(mineList.length > 1 ? 'Style « {name} » appliqué à {n} diagrammes' : 'Style « {name} » appliqué à {n} diagramme', {name: i18n(st.name), n: mineList.length}), {undo: async () => { await write(before); changed(); }, redo: async () => { await write(after); changed(); }});
     }
     /** 💾 Réglages enregistrés : mes styles (enregistrer, appliquer à ce diagramme, renommer, dupliquer, exporter, importer, supprimer) */
     function presetsFrame(spec, changed) {
         const U = UI(), today = () => new Date().toISOString();
-        const frame = U.presetsFrame({id: 'diagram-styles', title: 'Mes styles enregistrés', what: 'ce style (palette, police, fond, traits, coins, taille du texte, quadrillage)', defaultName: () => currentStyle(spec()).name.replace(/ \(retouché\)$/, '') + ' 2',
+        const frame = U.presetsFrame({id: 'diagram-styles', title: i18n('Mes styles enregistrés'), what: i18n('ce style (palette, police, fond, traits, coins, taille du texte, quadrillage)'), defaultName: () => currentStyle(spec()).name.replace(/ \(retouché\)$/, '') + ' 2',
             list: () => mine().map(x => ({name: x.name, date: x.date})), quietApply: true,
-            apply: i => { const x = mine()[i]; if (!x) return false; applyStyle(spec(), {id: 'mine:' + x.name, name: x.name, v: x.v}); changed(); A()?.toast?.(`Style « ${x.name} » appliqué à ce diagramme.`); return false; },
+            apply: i => { const x = mine()[i]; if (!x) return false; applyStyle(spec(), {id: 'mine:' + x.name, name: x.name, v: x.v}); changed(); A()?.toast?.(i18n('Style « {name} » appliqué à ce diagramme.', {name: x.name})); return false; },
             save: name => { const l = mine(), it = {name, date: today(), v: currentStyle(spec()).v}, i = l.findIndex(x => x.name === name); if (i >= 0) l[i] = it; else l.push(it); putMine(l); spec().o.style = 'mine:' + name; changed(); },
             replace: i => { const l = mine(); if (!l[i]) return false; l[i] = {...l[i], date: today(), v: currentStyle(spec()).v}; putMine(l); },
             rename: (i, name) => { const l = mine(); if (!l[i]) return false; l[i].name = name; putMine(l); changed(); },
             duplicate: i => { const l = mine(), x = l[i]; if (!x) return false; l.splice(i + 1, 0, {name: U.freeName ? U.freeName(x.name, l.map(y => y.name)) : x.name + ' (copie)', date: today(), v: x.v}); putMine(l); changed(); },
             exportOne: i => { const x = mine()[i]; if (x) A()?.exportSettingFile?.('diagram-style', x.name, {v: x.v}); return false; },
-            remove: i => { const l = mine(), x = l[i]; if (!x) return false; if (A()?.undoLocalChange) A().undoLocalChange(`Style « ${x.name} » supprimé`, [MINE_KEY], () => { l.splice(i, 1); putMine(l); }, () => changed()); else { l.splice(i, 1); putMine(l); } changed(); },
-            importOne: async () => { const got = await A()?.importSettingFile?.('diagram-style', {names: mine().map(x => x.name), check: d => d && typeof d.v === 'object'}); if (!got) return false; const l = mine(); l.push({name: String(got.nom).slice(0, 60), date: today(), v: cleanStyle(got.donnees.v)}); putMine(l); changed(); A()?.toast?.(`Style « ${got.nom} » importé.`); }});
+            remove: i => { const l = mine(), x = l[i]; if (!x) return false; if (A()?.undoLocalChange) A().undoLocalChange(i18n('Style « {name} » supprimé', {name: x.name}), [MINE_KEY], () => { l.splice(i, 1); putMine(l); }, () => changed()); else { l.splice(i, 1); putMine(l); } changed(); },
+            importOne: async () => { const got = await A()?.importSettingFile?.('diagram-style', {names: mine().map(x => x.name), check: d => d && typeof d.v === 'object'}); if (!got) return false; const l = mine(); l.push({name: String(got.nom).slice(0, 60), date: today(), v: cleanStyle(got.donnees.v)}); putMine(l); changed(); A()?.toast?.(i18n('Style « {name} » importé.', {name: got.nom})); }});
         return frame;
     }
 
@@ -521,7 +522,7 @@
         const svg = prev.querySelector('svg'); if (!svg) return;
         const vb = svg.viewBox?.baseVal, W = vb?.width || 900, H = vb?.height || 600;
         const toUser = ev => { const p = svg.createSVGPoint(); p.x = ev.clientX; p.y = ev.clientY; const m = svg.getScreenCTM(); if (!m) return {x: 0, y: 0}; const q = p.matrixTransform(m.inverse()); return {x: q.x, y: q.y}; };
-        svg.querySelectorAll('.dg-note').forEach(g => { g.setAttribute('tabindex', '0'); g.setAttribute('role', 'button'); g.setAttribute('aria-label', 'Annotation : glisser pour la déplacer, Suppr pour la retirer'); });
+        svg.querySelectorAll('.dg-note').forEach(g => { g.setAttribute('tabindex', '0'); g.setAttribute('role', 'button'); g.setAttribute('aria-label', i18n('Annotation : glisser pour la déplacer, Suppr pour la retirer')); });
         svg.addEventListener('pointerdown', ev => {
             const g = ev.target.closest?.('.dg-note'); if (!g) return;
             const i = Number(g.dataset.dgn), n = api.spec().o?.notes?.[i]; if (!n) return;
@@ -540,7 +541,7 @@
         });
         svg.addEventListener('dblclick', async ev => {
             const g = ev.target.closest?.('.dg-note'); if (!g) return; const n = api.spec().o?.notes?.[Number(g.dataset.dgn)]; if (!n) return;
-            let t = null; try { t = await A()?.askText?.({title: 'Modifier l’annotation', message: 'Texte de l’annotation', value: n.text || '', okLabel: 'Enregistrer'}); } catch (_) {} if (t == null || t === false) return;
+            let t = null; try { t = await A()?.askText?.({title: i18n('Modifier l’annotation'), message: i18n('Texte de l’annotation'), value: n.text || '', okLabel: 'Enregistrer'}); } catch (_) {} if (t == null || t === false) return;
             n.text = String(t).slice(0, 120); api.changed(); api.repaintPerso?.();
         });
         svg.addEventListener('keydown', ev => {

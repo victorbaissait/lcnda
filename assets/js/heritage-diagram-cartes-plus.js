@@ -12,6 +12,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s).replace(/\{(\w+)\}/g, (m, k) => (v && k in v ? String(v[k]) : m)));
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const DR = ext.diagramRender, GC = ext.diagramCartes; if (!DR?.KINDS || !GC) return;
     const K = DR.KINDS, A = () => window.LCNDA_APP;
@@ -31,7 +32,7 @@
     const tip = s => `<title>${esc(s)}</title>`;
     const pidsAttr = list => [...new Set(list.map(Number).filter(x => x > 0))].slice(0, 500).join(',');
     const HEAT = ['#ffffcc', '#fed976', '#fd8d3c', '#e31a1c', '#800026'];
-    const siecle = y => { const c = Math.floor(y / 100) + 1; return `${c}${c === 1 ? 'er' : 'e'} siècle`; };
+    const siecle = y => { const c = Math.floor(y / 100) + 1; return c === 1 ? i18n('1er siècle') : i18n('{n}e siècle', {n: String(c), ctx: 'nombre'}); };
     let seq = 0;
 
     /* ═════════ Le fond (celui des cartes de Graphiques) ═════════ */
@@ -62,8 +63,8 @@
         });
         return {pts: out, unknown: [...unknown]};
     }
-    const missing = (unknown, y, fs) => unknown.length ? T(0, y + fs * .7, `⚠ Lieux sans position : ${unknown.slice(0, 6).join(', ')}${unknown.length > 6 ? '…' : ''}`, {size: fs * .78, fill: '#a5552a'}) : '';
-    const emptyMsg = (w, h, fs, msg) => T(w / 2, h / 2, msg, {anchor: 'middle', size: fs, fill: '#555', halo: '#ffffffcc'});
+    const missing = (unknown, y, fs) => unknown.length ? T(0, y + fs * .7, i18n('⚠ Lieux sans position : {list}', {list: unknown.slice(0, 6).join(', ') + (unknown.length > 6 ? '…' : '')}), {size: fs * .78, fill: '#a5552a'}) : '';
+    const emptyMsg = (w, h, fs, msg) => T(w / 2, h / 2, i18n(msg), {anchor: 'middle', size: fs, fill: '#555', halo: '#ffffffcc'});
     /** la période montrée : l'année du curseur ▶ (o.__year) ou celle choisie (o.at) ; step = 10 (décennie) ou 100 (siècle) */
     const atOf = (o, step) => { const y = Number.isFinite(o.__year) ? o.__year : String(o.at ?? '').trim() !== '' ? num(o.at) : NaN; return Number.isFinite(y) ? Math.floor(y / step) * step : null; };
     const timeOf = step => ({
@@ -104,10 +105,10 @@
         if (word) svg += T(10, 18, word, {size: fs * 1.3, weight: 800, fill: '#1d1d1f', halo: '#ffffffd9'});
         svg += F.close;
         let H = h;
-        if (zones && dep.size && o.legend !== 'none') { const L = gradientLegend(F.uid, stops, w, h + fs * .8, fs, 1, maxD, 'mentions par département'); svg += L.svg; H = L.h; }
+        if (zones && dep.size && o.legend !== 'none') { const L = gradientLegend(F.uid, stops, w, h + fs * .8, fs, 1, maxD, i18n('mentions par département')); svg += L.svg; H = L.h; }
         if (all.unknown.length && o.showMissing !== false) { svg += missing(all.unknown, H, fs); H += fs * 1.5; }
-        if (!pts.length) svg += emptyMsg(w, h, fs, all.pts.length ? `Aucune mention ${word ? 'au ' + word : 'pour ce nom'}.` : 'Choisis un nom dans « Depuis l’app » (ou tape des lieux et des dates).');
-        return {h: H, svg, legend: [], geo: F.geo, desc: `Carte du nom ${o.surname || ''} : ${pl(pts.length, 'mention')}${word ? ' au ' + word : ''}${zones ? ` dans ${pl(dep.size, 'département')}` : ''}.`};
+        if (!pts.length) svg += emptyMsg(w, h, fs, all.pts.length ? (word ? i18n('Aucune mention au {when}.', {when: word}) : i18n('Aucune mention pour ce nom.')) : 'Choisis un nom dans « Depuis l’app » (ou tape des lieux et des dates).');
+        return {h: H, svg, legend: [], geo: F.geo, desc: i18n(word ? (zones ? 'Carte du nom {name} : {n} au {when} dans {d}.' : 'Carte du nom {name} : {n} au {when}.') : (zones ? 'Carte du nom {name} : {n} dans {d}.' : 'Carte du nom {name} : {n}.'), {name: o.surname || '', n: pl(pts.length, 'mention'), when: word, d: pl(dep.size, 'département')})};
     }
 
     /* ═════════ 🔥 Carte de chaleur dans le temps ═════════ */
@@ -132,13 +133,13 @@
         let svg = `<g data-c2-total="${pts.length}"></g>` + F.open + `<defs><filter id="${F.uid}b" x="-5%" y="-5%" width="110%" height="110%"><feGaussianBlur stdDeviation="${r2(cell * .7)}"/></filter></defs><g filter="url(#${F.uid}b)" opacity="${r2(opa)}">`;
         for (let j = 0; j < ny; j++) for (let i = 0; i < nx; i++) { const v = out[j * nx + i] / max; if (v < .04) continue; const t = clamp(Math.sqrt(v), 0, 1); svg += `<rect x="${r1(i * cell)}" y="${r1(j * cell)}" width="${r1(cell + .6)}" height="${r1(cell + .6)}" fill="${GC.rampAt(stops, t)}" fill-opacity="${r2(.25 + .75 * t)}"/>`; }
         svg += '</g>';
-        const word = at === null ? '' : cumul ? `jusqu’en ${at + 9}` : `années ${at}`;
+        const word = at === null ? '' : cumul ? i18n('jusqu’en {y}', {y: String(at + 9)}) : i18n('années {y}', {y: String(at)});
         if (word && (!Number.isFinite(o.__year) || cumul)) svg += T(10, 18, word, {size: fs * 1.3, weight: 800, fill: '#1d1d1f', halo: '#ffffffd9'}); // pendant la lecture ▶, l'année est déjà écrite dans le coin
         svg += F.close;
-        let H = h; if (o.legend !== 'none') { const L = gradientLegend(F.uid, stops, w, h + fs * .8, fs, 0, 1, 'peu → beaucoup'); svg += L.svg.replace(/>0</, '>peu<').replace(/>1</, '>beaucoup<'); H = L.h; }
+        let H = h; if (o.legend !== 'none') { const L = gradientLegend(F.uid, stops, w, h + fs * .8, fs, 0, 1, i18n('peu → beaucoup')); svg += L.svg.replace(/>0</, '>' + esc(i18n('peu')) + '<').replace(/>1</, '>' + esc(i18n('beaucoup')) + '<'); H = L.h; }
         if (all.unknown.length && o.showMissing !== false) { svg += missing(all.unknown, H, fs); H += fs * 1.5; }
         if (!all.pts.length) svg += emptyMsg(w, h, fs, 'Prends les événements de ton arbre (« Depuis l’app »).');
-        return {h: H, svg, legend: [], geo: F.geo, desc: `Carte de chaleur : ${pl(pts.length, 'événement')}${word ? ' (' + word + ')' : ''}.`};
+        return {h: H, svg, legend: [], geo: F.geo, desc: word ? i18n('Carte de chaleur : {n} ({when}).', {n: pl(pts.length, 'événement'), when: word}) : i18n('Carte de chaleur : {n}.', {n: pl(pts.length, 'événement')})};
     }
 
     /* ═════════ 🧬 Carte des cousins ADN ═════════ */
@@ -165,7 +166,7 @@
         if (byCm && cms.length) { const L = gradientLegend(F.uid, stops, w, h + fs * .8, fs, lo, hi, 'cM partagés'); svg += L.svg; H = L.h; }
         if (all.unknown.length && o.showMissing !== false) { svg += missing(all.unknown, H, fs); H += fs * 1.5; }
         if (!all.pts.length) svg += emptyMsg(w, h, fs, 'Relie des correspondances ADN à leur fiche (onglet ADN), puis « Depuis l’app ».');
-        return {h: H, svg, legend, geo: F.geo, desc: `Carte des cousins ADN : ${pl(all.pts.length, 'lieu d’ancêtre commun', 'lieux d’ancêtres communs')}.`};
+        return {h: H, svg, legend, geo: F.geo, desc: i18n('Carte des cousins ADN : {n}.', {n: pl(all.pts.length, 'lieu d’ancêtre commun', 'lieux d’ancêtres communs')})};
     }
 
     /* ═════════ 🔎 Carte de tes recherches ═════════ */
@@ -200,15 +201,15 @@
             const [cx, cy] = pr.p(c.lon, c.lat); if (!Number.isFinite(cx)) return;
             const n = c.items.length, rr = R0 * (1 + Math.min(1.4, Math.log10(n + 1)));
             const seen = c.items.filter(r => r.state === 'seen').length;
-            svg += `<g class="cpr-c" data-cpr-i="${i}" tabindex="0" role="button" aria-label="${esc(c.name)} : ${esc(SC[c.state][1])}">${tip(`${c.name} — ${SC[c.state][1]}\n${pl(seen, 'recherche vue', 'recherches vues')}, ${pl(n - seen, 'à faire ou à revoir', 'à faire ou à revoir')}\nClic : le détail`)}<circle cx="${r1(cx)}" cy="${r1(cy)}" r="${r2(rr)}" fill="${SC[c.state][0]}" fill-opacity=".88" stroke="#fff" stroke-width="1.2"/></g>`;
+            svg += `<g class="cpr-c" data-cpr-i="${i}" tabindex="0" role="button" aria-label="${esc(c.name)} : ${esc(i18n(SC[c.state][1]))}">${tip(`${c.name} — ${i18n(SC[c.state][1])}\n${pl(seen, 'recherche vue', 'recherches vues')}, ${pl(n - seen, 'à faire ou à revoir', 'à faire ou à revoir')}\n${i18n('Clic : le détail')}`)}<circle cx="${r1(cx)}" cy="${r1(cy)}" r="${r2(rr)}" fill="${SC[c.state][0]}" fill-opacity=".88" stroke="#fff" stroke-width="1.2"/></g>`;
             if (o.placeLabels !== 'none' && (o.placeLabels === 'all' || c.state === 'red' || n > 2)) svg += T(cx + rr + 3, cy, c.name, {size: clamp(fs * .72, 7, 15), weight: 600, fill: '#1d1d1f', halo: 'rgba(255,255,255,.85)'});
         });
         svg += '</g>' + F.close;
         let H = h; if (R.unknown.length && o.showMissing !== false) { svg += missing(R.unknown, H, fs); H += fs * 1.5; }
         if (!R.list.length) svg += emptyMsg(w, h, fs, rows(spec).length ? 'Rien pour ce choix (sorte d’acte, période).' : 'Prends tes dépouillements, battues et trous (« Depuis l’app »).');
         const cnt = s => R.list.filter(c => c.state === s).length;
-        return {h: H, svg, legend: ['green', 'orange', 'red'].map(s => ({label: `${SC[s][1]} (${cnt(s)})`, color: SC[s][0]})), geo: F.geo,
-            desc: `Carte de tes recherches : ${pl(R.list.length, 'commune')} — ${cnt('green')} tout vu, ${cnt('orange')} en partie, ${cnt('red')} avec des trous.`};
+        return {h: H, svg, legend: ['green', 'orange', 'red'].map(s => ({label: `${i18n(SC[s][1])} (${cnt(s)})`, color: SC[s][0]})), geo: F.geo,
+            desc: i18n('Carte de tes recherches : {n} — {g} tout vu, {o} en partie, {r} avec des trous.', {n: pl(R.list.length, 'commune'), g: cnt('green'), o: cnt('orange'), r: cnt('red')})};
     }
     /** un clic sur une commune : ce qui a été vu, ce qui manque */
     function researchDialog(g) {
@@ -216,12 +217,12 @@
         const line = r => { const s = STATE[r.state] || STATE.missing, y = [r.from, r.to].filter(v => String(v ?? '').trim()).filter((v, i, a) => a.indexOf(v) === i).join('–');
             let open = ''; try { const op = JSON.parse(r.open || 'null'); if (Array.isArray(op) && op[0] && Number(op[1])) open = `<button type="button" class="link-button" data-rj-open="${esc(JSON.stringify({kind: op[0], id: Number(op[1])}))}">↗ Ouvrir</button>`; } catch (_) {}
             if (!open && Number(r.pid) > 0) open = `<button type="button" class="link-button" data-cpr-person="${Number(r.pid)}">↗ Fiche</button>`;
-            return `<li><span class="cpr-dot" style="background:${s[0]}"></span><span><b>${esc(r.act || RTYPES.find(x => x[0] === r.type)?.[1] || 'Recherche')}</b>${y ? ` · ${esc(y)}` : ''} — ${esc(s[1])}<br><small class="muted">${esc([r.src, r.what].filter(Boolean).join(' · '))}</small></span>${open}</li>`; };
+            return `<li><span class="cpr-dot" style="background:${s[0]}"></span><span><b>${esc(r.act ? i18n(r.act) : i18n(RTYPES.find(x => x[0] === r.type)?.[1] || 'Recherche'))}</b>${y ? ` · ${esc(y)}` : ''} — ${esc(i18n(s[1]))}<br><small class="muted">${esc([r.src, r.what].filter(Boolean).join(' · '))}</small></span>${open}</li>`; };
         const seen = c.items.filter(r => r.state === 'seen'), rest = c.items.filter(r => r.state !== 'seen');
-        const body = `<div class="cpr-dialog"><p>${window.LCNDA_UI?.badge ? window.LCNDA_UI.badge(SC[c.state][1], c.state === 'green' ? 'green' : c.state === 'orange' ? 'yellow' : 'red') : esc(SC[c.state][1])}</p>
-            <h3>✓ Ce qui a été vu</h3>${seen.length ? `<ul class="cpr-list">${seen.map(line).join('')}</ul>` : (A()?.empty ? A().empty('Rien de vu ici pour l’instant.', {icon: '🔎'}) : '<p>Rien de vu ici pour l’instant.</p>')}
-            <h3>⚠️ Ce qui manque ou reste à revoir</h3>${rest.length ? `<ul class="cpr-list">${rest.map(line).join('')}</ul>` : (A()?.empty ? A().empty('Rien ne manque ici.', {icon: '✓'}) : '<p>Rien ne manque ici.</p>')}</div>`;
-        if (ext.openDialog) ext.openDialog({eyebrow: 'CARTE DE TES RECHERCHES', title: c.name, body, submitLabel: 'Fermer', onSubmit: () => true});
+        const body = `<div class="cpr-dialog"><p>${window.LCNDA_UI?.badge ? window.LCNDA_UI.badge(i18n(SC[c.state][1]), c.state === 'green' ? 'green' : c.state === 'orange' ? 'yellow' : 'red') : esc(i18n(SC[c.state][1]))}</p>
+            <h3>✓ Ce qui a été vu</h3>${seen.length ? `<ul class="cpr-list">${seen.map(line).join('')}</ul>` : (A()?.empty ? A().empty(i18n('Rien de vu ici pour l’instant.'), {icon: '🔎'}) : `<p>${i18n('Rien de vu ici pour l’instant.')}</p>`)}
+            <h3>⚠️ Ce qui manque ou reste à revoir</h3>${rest.length ? `<ul class="cpr-list">${rest.map(line).join('')}</ul>` : (A()?.empty ? A().empty(i18n('Rien ne manque ici.'), {icon: '✓'}) : `<p>${i18n('Rien ne manque ici.')}</p>`)}</div>`;
+        if (ext.openDialog) ext.openDialog({eyebrow: i18n('CARTE DE TES RECHERCHES'), title: c.name, body, submitLabel: i18n('Fermer'), onSubmit: () => true});
     }
     if (typeof document !== 'undefined') {
         document.addEventListener('click', e => {
@@ -240,11 +241,11 @@
         Object.entries(places).forEach(([id, p]) => { const n = cnt.get(fold(p[0])) > 1 && p[4] ? `${p[0]} (${p[4]})` : p[0]; names.set(Number(id), n); spec.places[fold(n)] = {lat: p[2], lon: p[3], n}; });
         return names;
     }
-    const pane = (title, help, form) => `<div class="h-dg-app cp-app"><h4>${title}</h4><p class="muted">${help}</p><div class="c2-form">${form}<button type="button" class="button small" data-cp-go>Prendre ces données</button><p class="c2-msg" data-cp-msg role="status"></p></div></div>`;
+    const pane = (title, help, form) => `<div class="h-dg-app cp-app"><h4>${i18n(title)}</h4><p class="muted">${i18n(help)}</p><div class="c2-form">${form}<button type="button" class="button small" data-cp-go>Prendre ces données</button><p class="c2-msg" data-cp-msg role="status"></p></div></div>`;
     function bindGo(box, run) {
         const b = box.querySelector('[data-cp-go]'), msg = box.querySelector('[data-cp-msg]');
-        b?.addEventListener('click', async () => { b.disabled = true; msg.innerHTML = window.LCNDA_UI.spinner('Lecture de ta généalogie…', {inline: true});
-            try { const t = await run(); if (msg.isConnected) msg.textContent = t ? '✓ ' + t : ''; A().toast?.(t ? '✓ ' + t : 'Données prises dans l’app.'); } catch (e) { msg.textContent = '⚠️ ' + (e.message || e); } finally { b.disabled = false; } });
+        b?.addEventListener('click', async () => { b.disabled = true; msg.innerHTML = window.LCNDA_UI.spinner(i18n('Lecture de ta généalogie…'), {inline: true});
+            try { const t = await run(); if (msg.isConnected) msg.textContent = t ? '✓ ' + t : ''; A().toast?.(t ? '✓ ' + t : i18n('Données prises dans l’app.')); } catch (e) { msg.textContent = '⚠️ ' + (e.message || e); } finally { b.disabled = false; } });
     }
     const EV = '<label>Quels événements<select data-cp="ev"><option value="all">Naissances, mariages, décès, résidences</option><option value="births">Naissances (ou baptêmes)</option><option value="marriages">Mariages</option><option value="deaths">Décès (ou sépultures)</option><option value="residences">Résidences et recensements</option></select></label>';
     const surnameApp = {
@@ -257,13 +258,13 @@
             box.addEventListener('picker-change', async e => { const it = e.detail?.item; if (!it || e.detail.name !== 'cp_person' || !Number(it.id)) return;
                 try { const d = await A().api('person', {id: Number(it.id)}); const n = String(d?.person?.last_name || '').toUpperCase(); if (n) { if (![...sel.options].some(x => fold(x.value) === fold(n))) sel.insertAdjacentHTML('afterbegin', `<option value="${esc(n)}">${esc(n)}</option>`); sel.value = [...sel.options].find(x => fold(x.value) === fold(n)).value; } } catch (_) {} });
             bindGo(box, async () => {
-                const name = sel.value; if (!name) throw new Error('Choisis un nom.');
+                const name = sel.value; if (!name) throw new Error(i18n('Choisis un nom.'));
                 const r = await get({what: 'surname', name, ev: box.querySelector('[data-cp="ev"]').value, variants: box.querySelector('[data-cp="variants"]').checked ? 1 : ''});
                 const s = io.spec(), names = placesOf(s, r.places || {});
                 s.rows = (r.events || []).filter(e => names.has(e[1])).map(([p, plc, y]) => ({label: names.get(plc), date: y === null ? '' : String(y), name: r.people?.[p] || '', pid: p, zone: (r.places[plc] || [])[1] || '', surname: r.name}));
-                s.o = {...(s.o || {}), surname: r.name, title: `Le nom ${r.name}, siècle par siècle`, subtitle: r.variants?.length ? `Avec ${r.variants.join(', ')}` : '', time: {...(s.o?.time || {}), show: true, step: 100}};
-                if (!s.rows.length) throw new Error('Aucun événement avec un lieu pour ce nom.');
-                io.apply(s); return `${pl(s.rows.length, 'mention')} du nom ${r.name}.`;
+                s.o = {...(s.o || {}), surname: r.name, title: i18n('Le nom {name}, siècle par siècle', {name: r.name}), subtitle: r.variants?.length ? i18n('Avec {list}', {list: r.variants.join(', ')}) : '', time: {...(s.o?.time || {}), show: true, step: 100}};
+                if (!s.rows.length) throw new Error(i18n('Aucun événement avec un lieu pour ce nom.'));
+                io.apply(s); return i18n('{n} du nom {name}.', {n: pl(s.rows.length, 'mention'), name: r.name});
             });
         },
     };
@@ -273,7 +274,7 @@
             const r = await get({what: 'heat', ev: box.querySelector('[data-cp="ev"]').value});
             const s = io.spec(), names = placesOf(s, r.places || {});
             s.rows = (r.events || []).filter(e => names.has(e[1])).map(([p, plc, y]) => ({label: names.get(plc), date: String(y), name: r.people?.[p] || '', pid: p}));
-            if (!s.rows.length) throw new Error('Aucun événement daté avec un lieu.');
+            if (!s.rows.length) throw new Error(i18n('Aucun événement daté avec un lieu.'));
             s.o = {...(s.o || {}), time: {...(s.o?.time || {}), show: true, step: 10}}; io.apply(s); return `${pl(s.rows.length, 'événement')}.`;
         }),
     };
@@ -289,7 +290,7 @@
                 (r.matches || []).forEach(m => m.anc.forEach(a => (r.anc_places?.[a.id] || []).forEach(([plc, y]) => { if (!names.has(plc)) return;
                     const g = r.groups?.[m.group]; s.rows.push({label: names.get(plc), date: y === null ? '' : String(y), ancestor: a.name, match: m.name, group: g?.name || '', color: g?.color || '', cm: m.cm, pid: a.id}); })));
                 const seen = new Set(); s.rows = s.rows.filter(x => { const k = `${x.label}|${x.ancestor}|${x.match}`; if (seen.has(k)) return false; seen.add(k); return true; });
-                if (!s.rows.length) throw new Error('Aucun ancêtre commun avec un lieu : relie des correspondances à leur fiche dans l’onglet ADN.');
+                if (!s.rows.length) throw new Error(i18n('Aucun ancêtre commun avec un lieu : relie des correspondances à leur fiche dans l’onglet ADN.'));
                 io.apply(s); return `${pl((r.matches || []).length, 'correspondance')}, ${pl(s.rows.length, 'lieu', 'lieux')}.`;
             });
         },
@@ -299,7 +300,7 @@
         bind: (box, io) => bindGo(box, async () => {
             const r = await get({what: 'research'}); const s = io.spec(); s.places = {}; s.rows = [];
             (r.communes || []).forEach(c => { s.places[fold(c.name)] = {lat: c.lat, lon: c.lon, n: c.name}; c.items.forEach(it => s.rows.push({label: c.name, type: it.type, act: it.label || '', from: it.from ?? '', to: it.to ?? '', state: it.state, src: it.src || '', what: it.what || '', open: it.open ? JSON.stringify(it.open) : '', pid: it.pid || ''})); });
-            if (!s.rows.length) throw new Error('Aucune recherche ni aucun trou avec une commune placée.');
+            if (!s.rows.length) throw new Error(i18n('Aucune recherche ni aucun trou avec une commune placée.'));
             io.apply(s); return `${pl((r.communes || []).length, 'commune')}, ${pl(s.rows.length, 'ligne')}.`;
         }),
     };
@@ -311,10 +312,10 @@
     const sampleSurname = () => { const out = []; const plan = [[1620, ['Lectoure', 'Lectoure', 'Condom']], [1710, ['Lectoure', 'Auch', 'Condom', 'Mirande', 'Auch']], [1790, ['Auch', 'Auch', 'Mirande', 'Toulouse', 'Agen', 'Tarbes']], [1850, ['Toulouse', 'Toulouse', 'Bordeaux', 'Auch', 'Montauban', 'Pau', 'Agen']], [1920, ['Paris', 'Toulouse', 'Bordeaux', 'Lyon', 'Paris', 'Paris']]];
         plan.forEach(([y, l]) => l.forEach((n, i) => out.push({label: sp(n), date: String(y + i * 9), name: `Jean DUPOUY`, zone: ZONE[n], surname: 'DUPOUY'}))); return out; };
     const sampleHeat = () => { const out = []; Object.keys(SAMPLE_PLACES).forEach((n, k) => { for (let i = 0; i < 4 + (k % 4) * 3; i++) out.push({label: sp(n), date: String(1700 + ((k * 37 + i * 23) % 230)), name: ''}); }); return out; };
-    const sampleDna = () => [['Lectoure', 'Pierre DUPOUY', 'Correspondance n° 1', 'Côté père', '#4e79a7', 212, 1745], ['Auch', 'Marie LABARTHE', 'Correspondance n° 2', 'Côté père', '#4e79a7', 96, 1760], ['Agen', 'Jeanne SOUBIRAN', 'Correspondance n° 3', 'Côté mère', '#e15759', 54, 1788],
-        ['Tarbes', 'Bernard CASTÉRA', 'Correspondance n° 4', 'Côté mère', '#e15759', 31, 1702], ['Lectoure', 'Pierre DUPOUY', 'Correspondance n° 5', 'Côté père', '#4e79a7', 140, 1745]].map(([p, a, m, g, c, cm, y]) => ({label: sp(p), ancestor: a, match: m, group: g, color: c, cm, date: String(y)}));
-    const sampleResearch = () => [['Lectoure', 'naissance', 1780, 1792, 'seen', 'Registres paroissiaux'], ['Lectoure', 'mariage', 1793, 1802, 'missing', 'À chercher'], ['Auch', 'deces', 1850, 1860, 'seen', 'État civil'], ['Condom', 'naissance', 1700, 1720, 'partial', 'Registre abîmé'],
-        ['Mirande', 'recensement', 1836, 1872, 'missing', 'À chercher'], ['Agen', 'mariage', 1810, 1820, 'todo', 'Prévu'], ['Tarbes', 'tables', 1802, 1812, 'seen', 'Tables décennales']].map(([p, type, from, to, state, src]) => ({label: sp(p), type, from: String(from), to: String(to), state, src, act: RTYPES.find(x => x[0] === type)?.[1] || ''}));
+    const sampleDna = () => [['Lectoure', 'Pierre DUPOUY', i18n('Correspondance n° 1'), i18n('Côté père'), '#4e79a7', 212, 1745], ['Auch', 'Marie LABARTHE', i18n('Correspondance n° 2'), i18n('Côté père'), '#4e79a7', 96, 1760], ['Agen', 'Jeanne SOUBIRAN', i18n('Correspondance n° 3'), i18n('Côté mère'), '#e15759', 54, 1788],
+        ['Tarbes', 'Bernard CASTÉRA', i18n('Correspondance n° 4'), i18n('Côté mère'), '#e15759', 31, 1702], ['Lectoure', 'Pierre DUPOUY', i18n('Correspondance n° 5'), i18n('Côté père'), '#4e79a7', 140, 1745]].map(([p, a, m, g, c, cm, y]) => ({label: sp(p), ancestor: a, match: m, group: g, color: c, cm, date: String(y)}));
+    const sampleResearch = () => [['Lectoure', 'naissance', 1780, 1792, 'seen', i18n('Registres paroissiaux')], ['Lectoure', 'mariage', 1793, 1802, 'missing', i18n('À chercher')], ['Auch', 'deces', 1850, 1860, 'seen', i18n('État civil')], ['Condom', 'naissance', 1700, 1720, 'partial', i18n('Registre abîmé')],
+        ['Mirande', 'recensement', 1836, 1872, 'missing', i18n('À chercher')], ['Agen', 'mariage', 1810, 1820, 'todo', i18n('Prévu')], ['Tarbes', 'tables', 1802, 1812, 'seen', i18n('Tables décennales')]].map(([p, type, from, to, state, src]) => ({label: sp(p), type, from: String(from), to: String(to), state, src, act: RTYPES.find(x => x[0] === type)?.[1] || ''}));
 
     /* ═════════ Les sortes ═════════ */
     async function resolve(spec) {
@@ -335,28 +336,28 @@
             options: [C('surname', 'Nom montré (vide = toutes les lignes)'), C('geopat', '🔤 Ce nom sur Géopatronyme (1891-1990) ↗', 'link', {href: s => s.o?.surname && window.LCNDA_SO4 ? window.LCNDA_SO4.url('geopatronyme', {last: s.o.surname}, (() => { try { return JSON.parse(localStorage.getItem('genealogie-sources-ouvertes-4-sites') || '{}'); } catch (_) { return {}; } })()) : '', hint: 'Choisis un nom : un lien ouvrira sa répartition en France de 1891 à 1990 (Géopatronyme).'}), C('show', 'Dessin', 'select', {choices: [['', 'Départements colorés'], ['dots', 'Des ronds par lieu']]}), C('at', 'Siècle montré (une année ; vide = tous)', 'text', {ph: '1700'}),
                 C('values', 'Écrire le nombre sur les départements', 'check', {def: true, when: s => s.o?.show !== 'dots'}), C('dotSize', 'Taille des ronds', 'range', {min: .3, max: 3, step: .1, def: 1, when: s => s.o?.show === 'dots'}),
                 RAMP, ...PERSO, C('legend', 'Légende', 'select', {choices: [['', 'En dessous'], ['none', 'Aucune']]}), ...mapOpts, ...COMMON],
-            sample: () => ({o: {title: 'Le nom DUPOUY, siècle par siècle', surname: 'DUPOUY', map: 'fr', time: {show: true, step: 100}}, rows: sampleSurname()}),
-            resolve, afterDraw, fromApp: surnameApp, describe: spec => `Carte des patronymes : ${rows(spec).length} mentions.`},
+            sample: () => ({o: {title: i18n('Le nom {name}, siècle par siècle', {name: 'DUPOUY'}), surname: 'DUPOUY', map: 'fr', time: {show: true, step: 100}}, rows: sampleSurname()}),
+            resolve, afterDraw, fromApp: surnameApp, describe: spec => i18n('Carte des patronymes : {n} mentions.', {n: rows(spec).length})},
         heatdecades: {icon: '🔥', label: 'Carte de chaleur dans le temps (décennie par décennie)', group: 'Cartes', render: GC.remember(heatdecades), noLegend: true, time: timeOf(10),
             grids: [{key: 'rows', label: 'Les événements (un par ligne)', cols: [C('label', 'Lieu (« Auch », « Auch 43.65, 0.59 »)'), C('date', 'Date ou année', 'text', {ph: '1745'}), C('name', 'Personne')]}],
             options: [C('at', 'Décennie montrée (une année ; vide = toutes)', 'text', {ph: '1780'}), C('window', 'Chaque image montre', 'select', {choices: [['', 'La décennie seule'], ['cumul', 'Tout jusqu’à cette décennie']]}),
                 C('scale', 'Échelle', 'select', {choices: [['', 'La même pour toutes les décennies'], ['each', 'Propre à chaque décennie']]}), C('cells', 'Finesse (cases sur la largeur)', 'range', {min: 20, max: 160, def: 70}),
                 C('radius', 'Étalement', 'range', {min: 1, max: 6, def: 2}), C('opacity', 'Opacité', 'range', {unit: '%', min: 10, max: 100, def: 85}), RAMP, ...PERSO, C('legend', 'Légende', 'select', {choices: [['', 'En dessous'], ['none', 'Aucune']]}), ...mapOpts, ...COMMON],
-            sample: () => ({o: {title: 'Où vivait la famille, décennie par décennie', map: 'fr', time: {show: true, step: 10}}, rows: sampleHeat()}),
-            resolve, afterDraw, fromApp: heatApp, describe: spec => `Carte de chaleur : ${rows(spec).length} événements.`},
+            sample: () => ({o: {title: i18n('Où vivait la famille, décennie par décennie'), map: 'fr', time: {show: true, step: 10}}, rows: sampleHeat()}),
+            resolve, afterDraw, fromApp: heatApp, describe: spec => i18n('Carte de chaleur : {n} événements.', {n: rows(spec).length})},
         dnamap: {icon: '🧬', label: 'Carte des cousins ADN (lieux des ancêtres communs)', group: 'Cartes', render: GC.remember(dnamap), legend: 'bottom',
             grids: [{key: 'rows', label: 'Les lieux des ancêtres communs', cols: [C('label', 'Lieu'), C('ancestor', 'Ancêtre commun'), C('match', 'Correspondance'), C('group', 'Groupe'), C('color', 'Couleur du groupe', 'color'), C('cm', 'cM partagés', 'number'), C('date', 'Année')]}],
             options: [C('colorBy', 'Couleur', 'select', {choices: [['', 'Selon le groupe'], ['cm', 'Selon les cM partagés']]}), C('dotSize', 'Taille des ronds', 'range', {min: .4, max: 3, step: .1, def: 1}),
                 C('placeLabels', 'Noms des lieux', 'select', {choices: [['', 'Là où plusieurs correspondances'], ['all', 'Tous'], ['none', 'Aucun']]}), RAMP, ...PERSO, ...mapOpts, ...COMMON],
-            sample: () => ({o: {title: 'Mes cousins ADN : où vivaient nos ancêtres communs', map: 'fr'}, rows: sampleDna()}),
-            resolve, afterDraw, fromApp: dnaApp, describe: spec => `Carte des cousins ADN : ${rows(spec).length} lieux.`},
+            sample: () => ({o: {title: i18n('Mes cousins ADN : où vivaient nos ancêtres communs'), map: 'fr'}, rows: sampleDna()}),
+            resolve, afterDraw, fromApp: dnaApp, describe: spec => i18n('Carte des cousins ADN : {n} lieux.', {n: rows(spec).length})},
         researchmap: {icon: '🔎', label: 'Carte de tes recherches (vu, en partie, trous)', group: 'Cartes', render: GC.remember(researchmap), legend: 'bottom',
             grids: [{key: 'rows', label: 'Les recherches, commune par commune', cols: [C('label', 'Commune'), C('type', 'Sorte', 'select', {choices: RTYPES.slice(1)}), C('act', 'Acte'), C('from', 'De l’année'), C('to', 'À l’année'),
                 C('state', 'État', 'select', {choices: [['seen', 'Vu'], ['partial', 'En partie, à revoir'], ['todo', 'Prévu, pas fait'], ['missing', 'À chercher']]}), C('src', 'D’où'), C('what', 'Détail')]}],
             options: [C('rtype', 'Sorte d’acte', 'select', {choices: RTYPES}), C('from', 'De l’année', 'number', {min: 1000, max: 2100}), C('to', 'À l’année', 'number', {min: 1000, max: 2100}), C('dotSize', 'Taille des ronds', 'range', {min: .4, max: 3, step: .1, def: 1}),
                 C('placeLabels', 'Noms des communes', 'select', {choices: [['', 'Les trous et les plus remplies'], ['all', 'Toutes'], ['none', 'Aucune']]}), ...mapOpts, ...COMMON],
-            sample: () => ({o: {title: 'Mes recherches dans le Gers', map: 'fr'}, rows: sampleResearch()}),
-            resolve, afterDraw, fromApp: researchApp, describe: spec => `Carte de tes recherches : ${rows(spec).length} lignes.`},
+            sample: () => ({o: {title: i18n('Mes recherches dans le Gers'), map: 'fr'}, rows: sampleResearch()}),
+            resolve, afterDraw, fromApp: researchApp, describe: spec => i18n('Carte de tes recherches : {n} lignes.', {n: rows(spec).length})},
     };
     for (const [k, kind] of Object.entries(NEW)) { if (!K[k]) K[k] = kind; }
     ext.diagramCartesPlus = {surnamemap, heatdecades, dnamap, researchmap, researchCommunes, timeOf, atOf, RESEARCH};

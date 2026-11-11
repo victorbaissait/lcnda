@@ -19,6 +19,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s).replace(/\{(\w+)\}/g, (m, k) => (v && k in v ? String(v[k]) : m)));
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const DR = ext.diagramRender; if (!DR?.KINDS) return;
     const A = () => window.LCNDA_APP;
@@ -463,7 +464,7 @@
             const label = r.label ?? r.zone; if (String(label ?? '').trim() === '') return;
             const m = zoneOfRow(spec, base, label), z = m.z;
             if (!z) { if (missing.length < 40) { const cb = !base.communes && !m.why ? comFor(base.id) : null, why = m.why || (cb && matchCommune(cb, label).why) || ''; // une ville tapée : homonymes ?
-                missing.push(String(label).slice(0, 40) + (why === 'homonymes' ? (base.communes ? ` (homonymes : précise ${PARENT_WORD[base.id] || 'le département'})` : ' (plusieurs villes de ce nom : choisis-en une)') : '')); } return; }
+                missing.push(String(label).slice(0, 40) + (why === 'homonymes' ? (base.communes ? ' ' + i18n('(homonymes : précise {what})', {what: i18n(PARENT_WORD[base.id] || 'le département')}) : ' ' + i18n('(plusieurs villes de ce nom : choisis-en une)')) : '')); } return; }
             const blankV = r.s0 === undefined || r.s0 === null || String(r.s0).trim() === '';
             const e = byZone.get(z) || {v: 0, has: false, notes: []}; if (!blankV) { e.v += num(r.s0); e.has = true; } if (r.note) e.notes.push(String(r.note).slice(0, 120)); byZone.set(z, e);
         });
@@ -485,8 +486,8 @@
         const vals = [...byZone.values()].filter(e => e.has).map(e => e.v), sc = vals.length ? scaleOf(vals, o) : null, noData = color(o.noData, '#e4e4e7');
         const hoverAll = o.hoverAll ?? !base.communes; // 35 000 bulles : seulement si on le demande
         const nameOf = z => `${z.name}${z.id && !/^x-/.test(z.id) ? ` (${z.old ? 'ancienne commune, ' : ''}${z.id})` : ''}`;
-        const fillOf = z => { const e = byZone.get(z); if (!e) return {fill: noData, title: hoverAll ? `${nameOf(z)} : pas de chiffre` : ''};
-            return {fill: e.has && sc ? sc.color(e.v) : noData, title: `${nameOf(z)} : ${e.has ? fmt(e.v) + unit : 'pas de chiffre'}${series && e.has ? ' — ' + series : ''}${e.notes.length ? '\n' + e.notes.join('\n') : ''}`, v: e.has ? e.v : null}; };
+        const fillOf = z => { const e = byZone.get(z); if (!e) return {fill: noData, title: hoverAll ? i18n('{name} : pas de chiffre', {name: nameOf(z)}) : ''};
+            return {fill: e.has && sc ? sc.color(e.v) : noData, title: `${e.has ? `${nameOf(z)} : ${fmt(e.v) + unit}` : i18n('{name} : pas de chiffre', {name: nameOf(z)})}${series && e.has ? ' — ' + series : ''}${e.notes.length ? '\n' + e.notes.join('\n') : ''}`, v: e.has ? e.v : null}; };
         pr.allOutre = o.frame === 'custom' || (o.frame && o.frame !== '') || !MAPS[mapOf(o)].insets || o.insets === false;
         const B = drawBase(spec, base, ctx, pr, w, h, fillOf, uid);
         let svg = `<g data-geo-map="${uid}">${B.svg}`, boxes = [];
@@ -521,7 +522,7 @@
             const title = [series, o.unit && !fold(series).includes(fold(o.unit)) && !fold(o.unit).includes(fold(series)) ? `(${String(o.unit).slice(0, 30)})` : ''].filter(Boolean).join(' ');
             const hasNo = B.zones.some(x => !byZone.get(x.z)?.has);
             if (sc.classes) {
-                const items = sc.cols.map((c, i) => ({c, t: i === 0 ? `moins de ${fmt(sc.br[0])}` : i === sc.cols.length - 1 ? `${fmt(sc.br[i - 1])} et plus` : `de ${fmt(sc.br[i - 1])} à moins de ${fmt(sc.br[i])}`}));
+                const items = sc.cols.map((c, i) => ({c, t: i === 0 ? i18n('moins de {a}', {a: fmt(sc.br[0])}) : i === sc.cols.length - 1 ? i18n('{a} et plus', {a: fmt(sc.br[i - 1])}) : i18n('de {a} à moins de {b}', {a: fmt(sc.br[i - 1]), b: fmt(sc.br[i])})}));
                 if (hasNo) items.push({c: noData, t: 'pas de chiffre'});
                 if (legPos === 'right') { let y = 0; if (title) { leg += T(0, fs * .7, title, {size: fs * .9, weight: 600}); y = fs * 1.6; } items.forEach(it => { leg += `<rect x="0" y="${r1(y)}" width="${r1(fs * 1.4)}" height="${r1(fs)}" rx="2" fill="${it.c}" stroke="#0002"/>` + T(fs * 1.8, y + fs / 2, it.t, {size: fs * .85}); y += fs * 1.55; }); legH = y; }
                 else { let x = 0, y = title ? fs * 1.6 : 0; if (title) leg += T(0, fs * .7, title, {size: fs * .9, weight: 600}); items.forEach(it => { const iw = fs * 1.9 + textW(it.t, fs * .85) + fs; if (x > 0 && x + iw > W) { x = 0; y += fs * 1.6; } leg += `<rect x="${r1(x)}" y="${r1(y)}" width="${r1(fs * 1.4)}" height="${r1(fs)}" rx="2" fill="${it.c}" stroke="#0002"/>` + T(x + fs * 1.8, y + fs / 2, it.t, {size: fs * .85}); x += iw; }); legH = y + fs * 1.4; }
@@ -534,21 +535,21 @@
                     leg += `<defs><linearGradient id="${gid}" x1="0" y1="1" x2="0" y2="0">${stops}</linearGradient></defs>`; let y0 = 0; if (title) { leg += T(0, fs * .7, title, {size: fs * .9, weight: 600}); y0 = fs * 1.6; }
                     leg += `<rect x="0" y="${r1(y0)}" width="${r1(bw)}" height="${r1(bh)}" fill="url(#${gid})" stroke="#0002"/>`;
                     tv.forEach(v => { const y = y0 + bh * (1 - pos(v)); leg += `<line x1="${r1(bw)}" x2="${r1(bw + 4)}" y1="${r1(y)}" y2="${r1(y)}" stroke="currentColor" stroke-opacity=".5"/>` + T(bw + 7, y, fmt(v), {size: fs * .8}); });
-                    legH = y0 + bh; if (hasNo) { leg += `<rect x="0" y="${r1(legH + fs * .8)}" width="${r1(bw)}" height="${r1(fs)}" fill="${noData}" stroke="#0002"/>` + T(bw + 7, legH + fs * 1.3, 'pas de chiffre', {size: fs * .8}); legH += fs * 2; }
+                    legH = y0 + bh; if (hasNo) { leg += `<rect x="0" y="${r1(legH + fs * .8)}" width="${r1(bw)}" height="${r1(fs)}" fill="${noData}" stroke="#0002"/>` + T(bw + 7, legH + fs * 1.3, i18n('pas de chiffre'), {size: fs * .8}); legH += fs * 2; }
                 } else {
                     leg += `<defs><linearGradient id="${gid}" x1="0" y1="0" x2="1" y2="0">${stops}</linearGradient></defs>`; const x0 = (W - bw) / 2; let y0 = 0;
                     if (title) { leg += T(W / 2, fs * .7, title, {size: fs * .9, weight: 600, anchor: 'middle'}); y0 = fs * 1.6; }
                     leg += `<rect x="${r1(x0)}" y="${r1(y0)}" width="${r1(bw)}" height="${r1(bh)}" fill="url(#${gid})" stroke="#0002"/>`;
                     tv.forEach(v => { const x = x0 + bw * pos(v); leg += `<line x1="${r1(x)}" x2="${r1(x)}" y1="${r1(y0 + bh)}" y2="${r1(y0 + bh + 4)}" stroke="currentColor" stroke-opacity=".5"/>` + T(x, y0 + bh + fs * .95, fmt(v), {size: fs * .8, anchor: 'middle'}); });
                     legH = y0 + bh + fs * 1.6;
-                    if (hasNo) { leg += `<rect x="${r1(x0 + bw + fs)}" y="${r1(y0)}" width="${r1(fs * 1.3)}" height="${r1(bh)}" fill="${noData}" stroke="#0002"/>` + T(x0 + bw + fs * 2.6, y0 + bh / 2, 'pas de chiffre', {size: fs * .8}); }
+                    if (hasNo) { leg += `<rect x="${r1(x0 + bw + fs)}" y="${r1(y0)}" width="${r1(fs * 1.3)}" height="${r1(bh)}" fill="${noData}" stroke="#0002"/>` + T(x0 + bw + fs * 2.6, y0 + bh / 2, i18n('pas de chiffre'), {size: fs * .8}); }
                 }
             }
         }
         const below = belowSvg ? idf.below : 0; // l'encart sous la carte (téléphone)
         let out = svg + belowSvg, H = h + below;
         if (leg) { if (legPos === 'right') out += `<g transform="translate(${r1(w + fs)} ${r1(Math.max(0, h / 2 - legH / 2))})">${leg}</g>`; else { out += `<g transform="translate(0 ${r1(h + below + fs * .9)})">${leg}</g>`; H = h + below + fs * .9 + legH; } }
-        if (missing.length && o.showMissing !== false) { out += T(0, H + fs * .9, `⚠ Pas trouvé sur ce fond : ${missing.slice(0, 12).join(', ')}${missing.length > 12 ? '…' : ''}`, {size: fs * .78, fill: '#a5552a'}); H += fs * 1.6; }
+        if (missing.length && o.showMissing !== false) { out += T(0, H + fs * .9, i18n('⚠ Pas trouvé sur ce fond : {list}', {list: missing.slice(0, 12).join(', ') + (missing.length > 12 ? '…' : '')}), {size: fs * .78, fill: '#a5552a'}); H += fs * 1.6; }
         if (!rowsOf(spec).length) { out += T(w / 2, h / 2, 'Ajoute des zones et leurs chiffres (onglet Données ou « Depuis l’app »).', {anchor: 'middle', size: fs, fill: '#555', halo: '#ffffffcc'}); }
         return {h: H, svg: out, geo: {uid, pr, w, h, insets: insetGeo}};
     }
@@ -636,7 +637,7 @@
             vals.forEach(v => { const sw = Math.max(minW, maxW * v / max); leg += `<line x1="${r1(x + sw / 2)}" x2="${r1(x + fs * 3 + sw / 2)}" y1="${r1(y)}" y2="${r1(y)}" stroke="${base0}" stroke-opacity="${r2(opa)}" stroke-width="${r2(sw)}" stroke-linecap="round"/>` + T(x + fs * 3 + sw + 6, y, `${fmt(v)} ${unitFor(v, unit)}`, {size: fs * .85}); x += fs * 3 + sw + 6 + textW(`${fmt(v)} ${unitFor(v, unit)}`, fs * .85) + fs * 1.4; });
             svg += `<g transform="translate(${r1(Math.max(0, (W - x) / 2))} ${r1(h + fs * .6)})">${leg}</g>`; H += y * 2 + fs * .8;
         }
-        if (F.unknown.length && o.showMissing !== false) { svg += T(0, H + fs * .7, `⚠ Lieux sans position : ${F.unknown.slice(0, 10).join(', ')}${F.unknown.length > 10 ? '…' : ''} — « Depuis l’app » → Lieux`, {size: fs * .78, fill: '#a5552a'}); H += fs * 1.5; }
+        if (F.unknown.length && o.showMissing !== false) { svg += T(0, H + fs * .7, i18n('⚠ Lieux sans position : {list} — « Depuis l’app » → Lieux', {list: F.unknown.slice(0, 10).join(', ') + (F.unknown.length > 10 ? '…' : '')}), {size: fs * .78, fill: '#a5552a'}); H += fs * 1.5; }
         if (!F.flows.length) svg += T(w / 2, h / 2, 'Ajoute des flux : départ, arrivée, combien.', {anchor: 'middle', size: fs, fill: '#555', halo: '#ffffffcc'});
         return {h: H, svg, geo: {uid, pr, w, h}};
     }
@@ -686,9 +687,9 @@
             const title = String(spec.series?.[0]?.name || o.legendTitle || '').slice(0, 60); if (title) leg += T(cx + R0 * 2 + fs * 5, by - R0, title, {size: fs * .9, weight: 600});
             svg += `<g data-dgm-legend="">${leg}</g>`; H = by + fs * .6;
         }
-        if (F.unknown.length && o.showMissing !== false) { svg += T(0, H + fs * .7, `⚠ Lieux sans position : ${F.unknown.slice(0, 10).join(', ')}${F.unknown.length > 10 ? '…' : ''} — tape « Nom 48.11, -1.68 » ou « Depuis l’app »`, {size: fs * .78, fill: '#a5552a'}); H += fs * 1.5; }
+        if (F.unknown.length && o.showMissing !== false) { svg += T(0, H + fs * .7, i18n('⚠ Lieux sans position : {list} — tape « Nom 48.11, -1.68 » ou « Depuis l’app »', {list: F.unknown.slice(0, 10).join(', ') + (F.unknown.length > 10 ? '…' : '')}), {size: fs * .78, fill: '#a5552a'}); H += fs * 1.5; }
         if (!F.pts.length) svg += T(w / 2, h / 2, 'Ajoute des lieux (ou des zones) et leurs chiffres.', {anchor: 'middle', size: fs, fill: '#555', halo: '#ffffffcc'});
-        return {h: H, svg, geo: {uid, pr, w, h}, desc: `Carte à symboles proportionnels : ${pts.length} ronds, le plus gros vaut ${fmt(max)}.`};
+        return {h: H, svg, geo: {uid, pr, w, h}, desc: i18n('Carte à symboles proportionnels : {n} ronds, le plus gros vaut {max}.', {n: pts.length, max: fmt(max)})};
     }
 
     /* ═════════ Réglages, exemples ═════════ */
@@ -731,13 +732,13 @@
         C('maxRadius', 'Rayon du plus gros rond (px, vide = auto)', 'number', {min: 3, max: 200}), C('bubbleColor', 'Couleur des ronds', 'color', {def: '#e15759'}), C('opacity', 'Opacité des ronds', 'range', {unit: '%', min: 10, max: 100, def: 60}),
         C('placeLabels', 'Noms des lieux', 'select', {choices: [['', 'Les 15 plus gros (sans se chevaucher)'], ['all', 'Tous (sans se chevaucher)'], ['none', 'Aucun']]}), C('valueLabels', 'Chiffre à côté du nom', 'check', {def: true}), C('labelSize', 'Taille des noms', 'range', {min: .5, max: 2.5, step: .1, def: 1}),
         C('zoneColor', 'Couleur des terres', 'color', {def: LAND}), C('borderColor', 'Couleur des limites', 'color', {def: '#cfcabe'}), C('unit', 'Unité (ex. : naissances)'), C('showMissing', 'Signaler les lieux sans position', 'check', {def: true})];
-    const BUBBLE_SAMPLE = () => ({o: {title: 'Où sont nés mes ancêtres', subtitle: 'un rond par commune', map: 'fr', level: 'dep', unit: 'naissances'}, series: [{name: 'Naissances'}],
+    const BUBBLE_SAMPLE = () => ({o: {title: i18n('Où sont nés mes ancêtres'), subtitle: i18n('un rond par commune'), map: 'fr', level: 'dep', unit: i18n('naissances')}, series: [{name: i18n('Naissances')}],
         places: Object.fromEntries(Object.entries(CITY).map(([n, [lat, lon]]) => [fold(n), {lat, lon, n}])),
         rows: [['Rennes', 46], ['Vitré', 28], ['Fougères', 17], ['Nantes', 12], ['Laval', 9], ['Saint-Brieuc', 7], ['Paris', 6], ['Brest', 3], ['Le Havre', 2], ['Lyon', 1]].map(([label, s0]) => ({label, s0}))});
-    const CHORO_SAMPLE = () => ({o: {title: 'Où sont nés mes ancêtres', subtitle: 'naissances par département', map: 'fr', level: 'dep', unit: 'naissances', colorMode: 'classes', classes: 5, ramp: 'oranges', labels: ''},
+    const CHORO_SAMPLE = () => ({o: {title: i18n('Où sont nés mes ancêtres'), subtitle: i18n('naissances par département'), map: 'fr', level: 'dep', unit: i18n('naissances'), colorMode: 'classes', classes: 5, ramp: 'oranges', labels: ''},
         series: [{name: 'Naissances'}], rows: [['Ille-et-Vilaine', 42], ['Côtes-d’Armor', 25], ['Morbihan', 18], ['Loire-Atlantique', 15], ['Finistère', 12], ['Paris', 11], ['Mayenne', 9], ['Manche', 7], ['Maine-et-Loire', 6], ['Calvados', 3], ['Sarthe', 4], ['Gironde', 3], ['Rhône', 2], ['Bouches-du-Rhône', 2], ['Nord', 1], ['Guadeloupe', 1]].map(([label, s0]) => ({label, s0}))});
     const CITY = {Rennes: [48.1147, -1.6794], Paris: [48.8566, 2.3522], Nantes: [47.2184, -1.5536], 'Vitré': [48.1236, -1.2094], 'Saint-Brieuc': [48.5136, -2.7653], Brest: [48.3904, -4.4861], 'Le Havre': [49.4944, .1079], 'Fougères': [48.3525, -1.1986], Laval: [48.0707, -.7734], Lyon: [45.764, 4.8357]};
-    const FLOW_SAMPLE = () => ({o: {title: 'Les migrations de la famille', subtitle: 'du lieu de naissance au lieu de décès', map: 'fr', level: 'dep', unit: 'personnes'},
+    const FLOW_SAMPLE = () => ({o: {title: i18n('Les migrations de la famille'), subtitle: i18n('du lieu de naissance au lieu de décès'), map: 'fr', level: 'dep', unit: i18n('personnes')},
         places: Object.fromEntries(Object.entries(CITY).map(([n, [lat, lon]]) => [fold(n), {lat, lon, n}])),
         rows: [['Vitré', 'Rennes', 15], ['Rennes', 'Paris', 12], ['Rennes', 'Nantes', 8], ['Saint-Brieuc', 'Rennes', 6], ['Fougères', 'Rennes', 5], ['Nantes', 'Paris', 5], ['Laval', 'Paris', 4], ['Brest', 'Le Havre', 3], ['Rennes', 'Lyon', 2]].map(([from, to, value]) => ({from, to, value}))});
 
@@ -914,12 +915,12 @@
     }
 
     /* ═════════ L'onglet « Depuis l'app » ═════════ */
-    const typeOptions = sel => eventTypes().map(t => `<option value="${t.id}" ${Number(sel) === t.id ? 'selected' : ''}>${esc(t.ic)} ${esc(t.label)}${t.scope === 'family' ? ' (famille)' : ''}${t.n ? ` — ${t.n}` : ' — pas encore utilisée'}</option>`).join('') || '<option value="">Chargement des sortes d’événements…</option>';
+    const typeOptions = sel => eventTypes().map(t => `<option value="${t.id}" ${Number(sel) === t.id ? 'selected' : ''}>${esc(t.ic)} ${esc(t.label)}${t.scope === 'family' ? ' ' + i18n('(famille)') : ''}${t.n ? ` — ${t.n}` : ' — ' + i18n('pas encore utilisée')}</option>`).join('') || `<option value="">${i18n('Chargement des sortes d’événements…')}</option>`;
     function appPane(box, api) {
         const put = s => (api.set || api.apply)(s);
         const spec = api.spec(), flows = spec.kind === 'flowmap', bub = spec.kind === 'bubblemap', srcs = flows ? SRC_FLOWS : SRC_ZONES, cur = parseLive(spec.live?.key) || {};
         const P = window.LCNDA_PICKER;
-        box.innerHTML = `<h4>📍 ${flows ? 'Les migrations de ton arbre' : 'Les lieux de ton arbre'}</h4>
+        box.innerHTML = `<h4>📍 ${flows ? i18n('Les migrations de ton arbre') : i18n('Les lieux de ton arbre')}</h4>
             <p class="muted">${bub ? 'Chaque lieu de ta base devient un rond, plus gros quand plus de personnes y sont nées (mariées, décédées). Les lieux avec des coordonnées sont placés exactement ; les autres sont cherchés par leur nom sur la carte. Le tableau est remplacé.' : flows ? 'Chaque personne relie deux lieux de ta base (ceux qui ont des coordonnées, ou une zone de la carte reconnue). Le tableau est remplacé.' : 'Chaque lieu de ta base est rattaché à sa zone (d’après ses coordonnées, sinon son département, sa région ou son pays ; pour les communes : son code INSEE, puis son nom et son département), puis les zones sont comptées. Le tableau est remplacé.'}</p>
             <div class="dgm-form"><label>Quoi<select data-dgm-what>${flows ? srcs.map(([k, l]) => `<option value="${k}" ${cur.what === k ? 'selected' : ''}>${esc(l)}</option>`).join('')
                 : SRC_GROUPS.map(([g, items]) => `<optgroup label="${esc(g)}">${items.map(([k, l]) => `<option value="${k}" ${cur.what === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</optgroup>`).join('')}</select></label>
@@ -938,13 +939,13 @@
             const b = e.currentTarget, q = query(); if (q.what === 'type' && !q.type) return msg('Choisis d’abord une sorte d’événement.');
             b.disabled = true; msg('⏳ Lecture de l’arbre…');
             try {
-                const s = api.spec(), prevLabel = box._lastLabel || s.live?.label || '', label = srcLabel(q).replace(/…$/, '') + (q.ancestors ? ' (mes ancêtres)' : '') + (q.from || q.to ? ` ${q.from ?? '…'}–${q.to ?? '…'}` : '');
+                const s = api.spec(), prevLabel = box._lastLabel || s.live?.label || '', label = srcLabel(q).replace(/…$/, '') + (q.ancestors ? ' ' + i18n('(mes ancêtres)') : '') + (q.from || q.to ? ` ${q.from ?? '…'}–${q.to ?? '…'}` : '');
                 const rep = flows ? await fillFlows(s, q) : bub ? await fillBubbles(s, q) : await fillZones(s, q);
                 if (box.querySelector('[data-dgm-live]').checked) { const dg = Object.fromEntries(Object.entries(q).filter(([k]) => k.startsWith('dg_'))); s.live = {key: liveKey(q), label, ...(Object.keys(dg).length ? {dg} : {})}; } else delete s.live;
                 const smp = (flows ? FLOW_SAMPLE() : bub ? BUBBLE_SAMPLE() : CHORO_SAMPLE()).o; if (!s.o.title || s.o.title === smp.title || (prevLabel && s.o.title === prevLabel)) s.o.title = label; box._lastLabel = label; if (s.o.subtitle === smp.subtitle) s.o.subtitle = ''; if (s.o.unit === smp.unit && !flows) s.o.unit = '';
-                if (bub) msg(rep.points ? `✓ ${pl(rep.points, 'lieu')} pris dans l’arbre.${rep.lost ? ` ${pl(rep.lost, 'lieu sans coordonnées', 'lieux sans coordonnées')} : cherché${rep.lost > 1 ? 's' : ''} par leur nom sur la carte.` : ''}` : 'Aucun lieu dans ton arbre pour ce choix.');
-                else if (flows) { if (!rep.flows) { msg('Aucun déplacement trouvé (il faut deux lieux différents pour une même personne).'); } else msg(`✓ ${pl(rep.flows, 'flux')} pris dans l’arbre.${rep.lost ? ` ${pl(rep.lost, 'lieu sans coordonnées', 'lieux sans coordonnées')} : voir « Les lieux du tableau ».` : ''}`); }
-                else msg(rep.zones ? `✓ ${pl(rep.places - rep.lost, 'lieu rattaché', 'lieux rattachés')} à ${pl(rep.zones, 'zone')}${rep.avg ? ` (âge moyen sur ${pl(rep.people, 'personne')} ; la carte montre des années, pas un nombre)` : ''}.${rep.lost ? ` ${pl(rep.lost, 'lieu', 'lieux')} hors de cette carte ou sans position (${rep.lostNames.join(', ')}${rep.lost > rep.lostNames.length ? '…' : ''}).` : ''}` : 'Aucun lieu de ton arbre ne tombe sur cette carte : change de carte ou de niveau dans Réglages.');
+                if (bub) msg(rep.points ? '✓ ' + i18n('{n} pris dans l’arbre.', {n: pl(rep.points, 'lieu')}) + (rep.lost ? ' ' + i18n(rep.lost > 1 ? '{n} : cherchés par leur nom sur la carte.' : '{n} : cherché par leur nom sur la carte.', {n: pl(rep.lost, 'lieu sans coordonnées', 'lieux sans coordonnées')}) : '') : i18n('Aucun lieu dans ton arbre pour ce choix.'));
+                else if (flows) { if (!rep.flows) { msg(i18n('Aucun déplacement trouvé (il faut deux lieux différents pour une même personne).')); } else msg('✓ ' + i18n('{n} pris dans l’arbre.', {n: i18n('{n} flux', {n: rep.flows, ctx: 'migration'})}) + (rep.lost ? ' ' + i18n('{n} : voir « Les lieux du tableau ».', {n: pl(rep.lost, 'lieu sans coordonnées', 'lieux sans coordonnées')}) : '')); }
+                else msg(rep.zones ? '✓ ' + (rep.avg ? i18n('{n} à {z} (âge moyen sur {p} ; la carte montre des années, pas un nombre).', {n: pl(rep.places - rep.lost, 'lieu rattaché', 'lieux rattachés'), z: pl(rep.zones, 'zone'), p: pl(rep.people, 'personne')}) : i18n('{n} à {z}.', {n: pl(rep.places - rep.lost, 'lieu rattaché', 'lieux rattachés'), z: pl(rep.zones, 'zone')})) + (rep.lost ? ' ' + i18n('{n} hors de cette carte ou sans position ({list}).', {n: pl(rep.lost, 'lieu', 'lieux'), list: rep.lostNames.join(', ') + (rep.lost > rep.lostNames.length ? '…' : '')}) : '') : i18n('Aucun lieu de ton arbre ne tombe sur cette carte : change de carte ou de niveau dans Réglages.'));
                 put(s);
             } catch (err) { msg('⛔ ' + (err.message || 'Lecture impossible.')); } finally { b.disabled = false; }
         });
@@ -953,7 +954,7 @@
             const s = api.spec(), o = s.o || {}, list = box.querySelector('[data-dgm-places]');
             const ids = [baseIdOf(o, viewOf(o)), 'monde-110m']; await Promise.all(ids.map(id => load(id).catch(() => {}))); const bases = ids.map(loaded).filter(Boolean);
             const names = [...new Set(rowsOf(s).flatMap(r => [r.from, r.to]).map(x => String(x ?? '').trim()).filter(Boolean))].slice(0, 200);
-            list.innerHTML = names.length ? `<ul class="dgm-places">${names.map((n, i) => { const p = placeOf(s, n, bases); return `<li data-i="${i}"><span class="dgm-pl-n">${p ? '📍' : '⚠️'} ${esc(n)}</span>${p ? `<small class="muted">${r2(p[1])}, ${r2(p[0])}</small>` : `<span class="dgm-pl-pk" data-dgm-pk="${esc(n)}">${window.LCNDA_PICKER.pickerField({name: '', hiddenName: false, kind: 'place', inline: true, placeholder: `Où est « ${n.slice(0, 30)} » ?`})}</span>`}</li>`; }).join('')}</ul>` : '<p class="muted">Le tableau n’a pas encore de lieux.</p>';
+            list.innerHTML = names.length ? `<ul class="dgm-places">${names.map((n, i) => { const p = placeOf(s, n, bases); return `<li data-i="${i}"><span class="dgm-pl-n">${p ? '📍' : '⚠️'} ${esc(n)}</span>${p ? `<small class="muted">${r2(p[1])}, ${r2(p[0])}</small>` : `<span class="dgm-pl-pk" data-dgm-pk="${esc(n)}">${window.LCNDA_PICKER.pickerField({name: '', hiddenName: false, kind: 'place', inline: true, placeholder: i18n('Où est « {name} » ?', {name: n.slice(0, 30)})})}</span>`}</li>`; }).join('')}</ul>` : `<p class="muted">${i18n('Le tableau n’a pas encore de lieux.')}</p>`;
         };
         const setPlace = (s, name, it) => { const lat = Number(it?.lat), lon = Number(it?.lon); if (it?.lat === null || it?.lon === null || !Number.isFinite(lat) || !Number.isFinite(lon)) { A().toast('Ce lieu n’a pas de coordonnées : choisis-en un autre, ou tape ses coordonnées dans le tableau.', 'error'); return false; } s.places = {...(s.places || {}), [fold(name)]: {lat, lon, n: String(it.title || name).slice(0, 80)}}; return true; };
         box.querySelector('[data-dgm-places]').addEventListener('picker-change', e => { const host = e.target.closest('[data-dgm-pk]'); const it = e.detail?.item; if (!host || !it) return; const s = api.spec(); if (setPlace(s, host.dataset.dgmPk, it)) { put(s); paintPlaces(); } });
@@ -962,7 +963,7 @@
             try { const s = api.spec(), o = s.o || {}, bases = [baseIdOf(o, viewOf(o)), 'monde-110m'].map(loaded).filter(Boolean);
                 const miss = [...new Set(rowsOf(s).flatMap(r => [r.from, r.to]).map(x => String(x ?? '').trim()).filter(n => n && !placeOf(s, n, bases)))].slice(0, 40);
                 for (const n of miss) { try { const r = await A().api('picker_search', {kind: 'place', q: n.replace(/\(.*\)$/, '').trim(), limit: 5}); const it = (r.groups || []).flatMap(g => g.items || []).find(x => Number.isFinite(Number(x.lat)) && Number.isFinite(Number(x.lon)) && x.lat !== null); if (it) { s.places = {...(s.places || {}), [fold(n)]: {lat: Number(it.lat), lon: Number(it.lon), n: String(it.title || n).slice(0, 80)}}; found++; } } catch (_) {} }
-                A().toast(found ? `${pl(found, 'lieu retrouvé', 'lieux retrouvés')} : vérifie-les sur la carte.` : 'Aucun lieu retrouvé : choisis-les un par un.'); if (found) put(s); paintPlaces();
+                A().toast(found ? i18n('{n} : vérifie-les sur la carte.', {n: pl(found, 'lieu retrouvé', 'lieux retrouvés')}) : i18n('Aucun lieu retrouvé : choisis-les un par un.')); if (found) put(s); paintPlaces();
             } finally { b.disabled = false; }
         });
         box.querySelector('[data-dgm-addflow]').addEventListener('click', () => {
@@ -992,7 +993,7 @@
     const LV = {com: ['ville', 0, 'sa commune', 'leur commune', 'une ville'], dep: ['département', 1, 'son département', 'leur département', 'un département'], prov: ['province', 1, 'sa province', 'leur province', 'une province'],
         cant: ['canton', 1, 'son canton', 'leur canton', 'un canton'], nuts2: ['région', 1, 'sa région', 'leur région', 'une région'], reg: ['région', 2, 'sa région', 'leur région', 'une région'],
         nuts1: ['grande région', 2, 'sa grande région', 'leur grande région', 'une grande région'], pays: ['pays', 3, 'son pays', 'leur pays', 'un pays'], cont: ['continent', 4, 'son continent', 'leur continent', 'un continent']};
-    const levelWord = (map, lv) => map === 'ch' && lv === 'reg' ? LV.nuts1 : LV[lv] || ['zone', 1, 'sa zone', 'leur zone', 'une zone'];
+    const levelWord = (map, lv) => { const w = map === 'ch' && lv === 'reg' ? LV.nuts1 : LV[lv] || ['zone', 1, 'sa zone', 'leur zone', 'une zone']; return [i18n(w[0], {ctx: 'niveau'}), w[1], i18n(w[2]), i18n(w[3]), i18n(w[4])]; };
     const ICON = lv => lv === 'com' ? '🏘' : lv === 'pays' || lv === 'cont' ? '🌍' : '🏛';
     /** les niveaux de la carte choisie, avec leur fond ; here = le niveau dessiné, com = celui des communes (ou null) */
     function zoneCtx(spec) {
@@ -1034,9 +1035,9 @@
         return out.slice(0, max).map(it => {
             const pz = parentZone(C, it), value = valueOf(C, it, pz), com = it.L.lv === 'com', coarse = !com && it.L.word[1] > C.here.word[1];
             const ppz = com && pz && C.map === 'fr' ? loaded('fr-regions')?.zones.find(z => z.id === pz.parent) : null;
-            const meta = com ? [pz?.name, ppz?.name, it.alt ? `aussi « ${it.alt} »` : ''].filter(Boolean).join(' · ')
-                : [it.z.id && !/^x-/.test(it.z.id) && fold(it.z.id) !== fold(it.z.name) ? it.z.id : '', pz?.name, it.alt ? `aussi « ${it.alt} »` : '', coarse ? `autre niveau : « ${it.L.name} »` : ''].filter(Boolean).join(' · ');
-            return {value, title: com ? (value === (it.b.pfx || '') + it.z.id ? `${it.z.name} — ${value}` : value) : it.z.name, meta, kind: com && it.z.old ? 'ancienne commune' : it.L.word[0], icon: ICON(it.L.lv), L: it.L, b: it.b, z: it.z, cur: it.L.cur, coarse, remember: com || (!it.L.cur && !coarse)};
+            const meta = com ? [pz?.name, ppz?.name, it.alt ? i18n('aussi « {name} »', {name: it.alt}) : ''].filter(Boolean).join(' · ')
+                : [it.z.id && !/^x-/.test(it.z.id) && fold(it.z.id) !== fold(it.z.name) ? it.z.id : '', pz?.name, it.alt ? i18n('aussi « {name} »', {name: it.alt}) : '', coarse ? i18n('autre niveau : « {name} »', {name: i18n(it.L.name)}) : ''].filter(Boolean).join(' · ');
+            return {value, title: com ? (value === (it.b.pfx || '') + it.z.id ? `${it.z.name} — ${value}` : value) : it.z.name, meta, kind: com && it.z.old ? i18n('ancienne commune') : it.L.word[0], icon: ICON(it.L.lv), L: it.L, b: it.b, z: it.z, cur: it.L.cur, coarse, remember: com || (!it.L.cur && !coarse)};
         });
     }
     /** une ville (ou une zone plus fine) choisie : sa position, pour la compter dans sa zone à tous les niveaux */
@@ -1052,7 +1053,7 @@
         Object.keys(spec.places).forEach(k => { if (!used.has(k)) delete spec.places[k]; }); if (!Object.keys(spec.places).length) delete spec.places;
     }
     const homonymsMsg = (b, s) => { const head = String(s).replace(/\(.*\)\s*$/, '').split(',')[0].trim(), n = (b.byName.get(nameKey(head)) || []).filter(z => !z.old).length;
-        return `Plusieurs villes s’appellent ${head}${n > 1 ? ` (${n})` : ''} : choisis-en une dans la liste.`; };
+        return n > 1 ? i18n('Plusieurs villes s’appellent {name} ({n}) : choisis-en une dans la liste.', {name: head, n}) : i18n('Plusieurs villes s’appellent {name} : choisis-en une dans la liste.', {name: head}); };
     /** l'état d'une ligne : {ok} ; {auto} (une ville, ou une zone plus fine, à retenir) ; {why, msg} (homonymes, autre niveau, inconnue) */
     function rowStatus(spec, raw) {
         const C = zoneCtx(spec), base = loaded(C.here.id), s = String(raw ?? '').trim();
@@ -1064,7 +1065,7 @@
         for (const L of C.levels) {
             if (L.cur || L.lv === 'com') continue; const b = loaded(L.id), z = b && matchZone(b, s); if (!z) continue;
             if (L.word[1] < C.here.word[1]) return {auto: {L, b, z}}; // plus fin que la carte : compte dans sa zone
-            return {why: 'niveau', msg: `${z.name} est ${L.word[4]}, mais la carte montre le niveau « ${C.here.name} » : choisis ${C.here.word[4]} dans la liste, ou change le niveau de détail (Réglages).`};
+            return {why: 'niveau', msg: i18n('{name} est {a}, mais la carte montre le niveau « {level} » : choisis {b} dans la liste, ou change le niveau de détail (Réglages).', {name: z.name, a: L.word[4], level: i18n(C.here.name), b: C.here.word[4]})};
         }
         if (cb && !base.communes) { const mc = matchCommune(cb, s); if (mc.z) return {auto: {L: C.com, b: cb, z: mc.z}}; if (mc.why === 'homonymes') return {why: 'homonymes', msg: homonymsMsg(cb, s)}; }
         return {why: 'inconnu', msg: `Pas trouvé sur cette carte : vérifie l’orthographe, ou choisis dans la liste.`, pending: !!(C.com && !cb && /[a-z]{2}/i.test(fold(s)))};
@@ -1086,7 +1087,7 @@
             if (st.why) { dot.title = st.msg; dot.setAttribute('aria-label', st.msg); dot.dataset.why = st.why; }
         });
         const hint = pane.querySelector('[data-dgm-zhint]');
-        if (hint) { hint.hidden = !viaCom; if (viaCom) hint.innerHTML = `🏘 ${viaCom > 1 ? `${viaCom} villes comptent dans ${esc(C.here.word[3])}` : `1 ville compte dans ${esc(C.here.word[2])}`} sur cette carte (niveau « ${esc(C.here.name)} »).${C.com ? ` <button type="button" class="link-button" data-dgm-tocom>Colorer les villes elles-mêmes</button>` : ''}`; }
+        if (hint) { hint.hidden = !viaCom; if (viaCom) hint.innerHTML = '🏘 ' + esc(i18n(viaCom > 1 ? '{n} villes comptent dans {where} sur cette carte (niveau « {level} »).' : '1 ville compte dans {where} sur cette carte (niveau « {level} »).', {n: viaCom, where: viaCom > 1 ? C.here.word[3] : C.here.word[2], level: i18n(C.here.name)})) + (C.com ? ` <button type="button" class="link-button" data-dgm-tocom>${i18n('Colorer les villes elles-mêmes')}</button>` : ''); }
         if (changed) api.changed();
         if (pending && C.com && !store.get(C.com.id)?.error) load(C.com.id).then(() => { if (pane.isConnected) refreshZoneCells(pane, api); }).catch(() => {});
     }
@@ -1114,7 +1115,7 @@
                 <span class="pk-badge2${it.cur ? ' blue' : ''}">${esc(it.kind)}</span></div>`).join('')}
             ${!items.length && !loading ? '<div class="pk-empty">Rien de ce nom sur cette carte.</div>' : ''}</div>
             ${loading ? '<div class="pk-loading" data-dgm-acload><span class="pk-spin"></span> chargement des communes…</div>' : ''}
-            <div class="pk-hint">${hasCom && C.here.lv !== 'com' ? `🏘 Une ville compte dans ${esc(C.here.word[2])} sur cette carte. <button type="button" class="link-button" data-dgm-tocom>Colorer les villes elles-mêmes</button>` : '↑ ↓ pour choisir · Entrée pour valider · Échap pour fermer'}</div>`;
+            <div class="pk-hint">${hasCom && C.here.lv !== 'com' ? `🏘 ${esc(i18n('Une ville compte dans {where} sur cette carte.', {where: C.here.word[2]}))} <button type="button" class="link-button" data-dgm-tocom>Colorer les villes elles-mêmes</button>` : '↑ ↓ pour choisir · Entrée pour valider · Échap pour fermer'}</div>`;
         input.setAttribute('aria-controls', lid); if (AC.on >= 0) input.setAttribute('aria-activedescendant', `${lid}-${AC.on}`); else input.removeAttribute('aria-activedescendant');
         acPlace();
     }
@@ -1177,15 +1178,15 @@
         choropleth: {icon: '🗺️', label: 'Carte colorée par zones (départements, régions, pays…)', group: 'Cartes', render: remember(choropleth), noLegend: true,
             grids: [{key: 'rows', label: 'Les zones et leurs chiffres', series: 1, cols: [C('label', 'Zone (nom ou code : 35, FRH03, BE, Vaud…)'), C('note', 'Note (dans la bulle)')]}],
             options: CHORO_OPTS, sample: CHORO_SAMPLE, resolve, afterDraw, fromApp: FROM_APP, dataPane,
-            describe: spec => `Carte colorée : ${rowsOf(spec).length} zones (${MAPS[mapOf(spec.o || {})].label}, ${levelOf(spec.o || {})[2].toLowerCase()}).`},
+            describe: spec => i18n('Carte colorée : {n} zones ({map}, {level}).', {n: rowsOf(spec).length, map: i18n(MAPS[mapOf(spec.o || {})].label), level: i18n(levelOf(spec.o || {})[2]).toLowerCase()})},
         flowmap: {icon: '🧭', label: 'Carte des migrations (flèches d’un lieu à un autre)', group: 'Cartes', render: remember(flowmap), noLegend: true,
             grids: [{key: 'rows', label: 'Les flux (départ → arrivée)', cols: [C('from', 'Départ (lieu)'), C('to', 'Arrivée (lieu)'), C('value', 'Combien', 'number'), C('color', 'Couleur', 'color')]}],
             options: FLOW_OPTS, sample: FLOW_SAMPLE, resolve, afterDraw, fromApp: FROM_APP,
-            describe: spec => `Carte des migrations : ${rowsOf(spec).length} flux.`},
+            describe: spec => i18n('Carte des migrations : {n} flux.', {n: rowsOf(spec).length})},
         bubblemap: {icon: '⚪', label: 'Carte à symboles proportionnels (ronds par lieu)', group: 'Cartes', render: remember(bubblemap), noLegend: true,
             grids: [{key: 'rows', label: 'Les lieux (ou zones) et leurs chiffres', series: 1, cols: [C('label', 'Lieu ou zone (« Rennes », « Rennes 48.11, -1.68 », « 35 »…)'), C('note', 'Note (dans la bulle)')]}],
             options: BUBBLE_OPTS, sample: BUBBLE_SAMPLE, resolve, afterDraw, fromApp: FROM_APP,
-            describe: spec => `Carte à symboles proportionnels : ${rowsOf(spec).length} lieux.`},
+            describe: spec => i18n('Carte à symboles proportionnels : {n} lieux.', {n: rowsOf(spec).length})},
     };
     for (const [k, kind] of Object.entries(KINDS)) { if (!DR.KINDS[k]) DR.KINDS[k] = kind; }
     ext.diagramCartes = {MAPS, FRAMES_WORLD, FRAMES_FR, load, loaded, decode, makeProj, fitProj, matchZone, matchCommune, joinRows, zoneOfRow, zoneSuggest, rowStatus, rememberPick, zoneOfPlace, placeOf, flowsOf, breaksOf, scaleOf, resolve, parseLive, liveKey, inZone, idfOf, SRC_GROUPS, bubblesOf,

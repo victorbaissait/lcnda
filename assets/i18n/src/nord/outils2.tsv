@@ -640,3 +640,163 @@ Toute la transcription, en grand (et les actes transcrits dans l’outil) ¦ Cel
 Lire en entier ¦ Číst celé ¦ Läs hela ¦ Læs det hele
 Ouvrir l’outil Transcription d’actes sur cette image (zones, noms, dates) ¦ Otevřít nástroj Přepis záznamů na tomto obrázku (oblasti, jména, data) ¦ Öppna verktyget Transkribering av handlingar på den här bilden (områden, namn, datum) ¦ Åbn værktøjet Transskription af dokumenter på dette billede (områder, navne, datoer)
 Nouvelle ¦ Nová ¦ Ny ¦ Ny
+Transcrire dans l’outil ¦ Přepsat v nástroji ¦ Transkribera i verktyget ¦ Transskribér i værktøjet
+Ouvrir dans Transcription d’actes ¦ Otevřít v Přepisu záznamů ¦ Öppna i Transkribering av handlingar ¦ Åbn i Transskription af dokumenter
+Aucun acte transcrit dans l’outil pour cette image. ¦ Pro tento obrázek není v nástroji přepsán žádný záznam. ¦ Ingen handling har transkriberats i verktyget för den här bilden. ¦ Intet dokument er transskriberet i værktøjet for dette billede.
+Rien d’écrit pour l’instant dans la visionneuse. ¦ V prohlížeči zatím není nic napsáno. ¦ Inget skrivet i visaren ännu. ¦ Endnu intet skrevet i fremviseren.
+Personnes : ¦ Osoby: ¦ Personer: ¦ Personer:
+Le calcul de l’image s’est arrêté (image trop grande ?). ¦ Výpočet obrázku se zastavil (příliš velký obrázek?). ¦ Bildberäkningen stoppade (för stor bild?). ¦ Billedberegningen stoppede (for stort billede?).
+Calcul impossible ici. ¦ Tady výpočet nejde. ¦ Beräkningen går inte här. ¦ Beregningen er ikke mulig her.
+Outil fermé. ¦ Nástroj zavřen. ¦ Verktyget stängt. ¦ Værktøjet er lukket.
+Faire ressortir l’encre ¦ Zvýraznit inkoust ¦ Framhäv bläcket ¦ Fremhæv blækket
+{label} — double-clic : valeur de départ ¦ {label} — dvojklik: výchozí hodnota ¦ {label} — dubbelklick: startvärde ¦ {label} — dobbeltklik: startværdi
+Netteté (et son rayon) ¦ Ostrost (a její poloměr) ¦ Skärpa (och dess radie) ¦ Skarphed (og dens radius)
+Canal de couleur ¦ Barevný kanál ¦ Färgkanal ¦ Farvekanal
+Un seul canal : l’encre ferro-gallique ressort souvent mieux sur le rouge ou le bleu ¦ Jen jeden kanál: duběnkový inkoust často lépe vynikne v červeném nebo modrém ¦ En enda kanal: järngallusbläck framträder ofta bättre i rött eller blått ¦ Én kanal: jerngallusblæk træder ofte bedre frem i rød eller blå
+Toutes les couleurs ¦ Všechny barvy ¦ Alla färger ¦ Alle farver
+Effacer le fond ¦ Vymazat pozadí ¦ Ta bort bakgrunden ¦ Fjern baggrunden
+Jaunissement et taches : le papier redevient blanc, l’encre reste ¦ Zažloutnutí a skvrny: papír znovu zbělá, inkoust zůstane ¦ Gulning och fläckar: papperet blir vitt igen, bläcket blir kvar ¦ Gulning og pletter: papiret bliver hvidt igen, blækket bliver
+Seuil noir et blanc ¦ Práh černobílé ¦ Svartvit tröskel ¦ Sort-hvid-tærskel
+Redresser (au degré près) ¦ Narovnat (na stupeň přesně) ¦ Räta upp (på graden när) ¦ Ret op (på graden)
+Négatif : encre claire sur fond sombre ¦ Negativ: světlý inkoust na tmavém pozadí ¦ Negativ: ljust bläck på mörk bakgrund ¦ Negativ: lyst blæk på mørk baggrund
+Retourner l’image : pour lire un texte vu par transparence (le verso) ¦ Převrátit obrázek: pro čtení textu prosvítajícího z druhé strany (rub) ¦ Spegelvänd bilden: för att läsa en text som syns igenom (baksidan) ¦ Spejlvend billedet: for at læse en tekst, der skinner igennem (bagsiden)
+Retenir pour cet acte ¦ Uložit pro tento záznam ¦ Spara för den här handlingen ¦ Gem for dette dokument
+Ces réglages de l’image sont enregistrés avec l’acte et reviennent à la prochaine ouverture ¦ Tato nastavení obrázku se uloží se záznamem a vrátí se při příštím otevření ¦ De här bildinställningarna sparas med handlingen och kommer tillbaka nästa gång den öppnas ¦ Disse billedindstillinger gemmes med dokumentet og kommer igen, næste gang det åbnes
+Remettre l’image d’origine (tous les réglages de l’image à zéro) ¦ Vrátit původní obrázek (všechna nastavení obrázku na nulu) ¦ Återställ originalbilden (alla bildinställningar nollställs) ¦ Sæt originalbilledet tilbage (alle billedindstillinger nulstilles)
+Plus de place pour garder ce réglage. ¦ Na uložení tohoto nastavení už není místo. ¦ Det finns inte plats att spara den här inställningen. ¦ Der er ikke plads til at gemme denne indstilling.
+Les autres réglages de l’image : contraste local, netteté, canal, seuil, niveaux, redresser… ¦ Další nastavení obrázku: místní kontrast, ostrost, kanál, práh, úrovně, narovnání… ¦ Bildens övriga inställningar: lokal kontrast, skärpa, kanal, tröskel, nivåer, räta upp… ¦ Billedets øvrige indstillinger: lokal kontrast, skarphed, kanal, tærskel, niveauer, ret op…
+Écran étroit : les réglages sont rangés dans « 🎚️ Mieux voir » ¦ Úzká obrazovka: nastavení jsou v „🎚️ Lépe vidět“ ¦ Smal skärm: inställningarna finns i ”🎚️ Se bättre” ¦ Smal skærm: indstillingerne ligger i »🎚️ Se bedre«
+Ranger, montrer ou cacher les boutons de cette barre ; disposition A ou B (aussi dans Réglages → Montage, retouche, mise en page et son) ¦ Uspořádat, zobrazit nebo skrýt tlačítka této lišty; rozvržení A nebo B (také v Nastavení → Střih, úpravy, sazba a zvuk) ¦ Ordna, visa eller dölj knapparna i det här fältet; layout A eller B (även i Inställningar → Redigering, retuschering, layout och ljud) ¦ Arrangér, vis eller skjul knapperne i denne bjælke; layout A eller B (også i Indstillinger → Redigering, retouchering, layout og lyd)
+Personnaliser la barre ¦ Přizpůsobit lištu ¦ Anpassa fältet ¦ Tilpas bjælken
+Montrer dans la barre ¦ Zobrazit v liště ¦ Visa i fältet ¦ Vis i bjælken
+Où va {label} ¦ Kam patří {label} ¦ Var {label} hamnar ¦ Hvor {label} skal være
+Dans la barre, ou dans le panneau « 🎚️ Mieux voir » ¦ V liště, nebo v panelu „🎚️ Lépe vidět“ ¦ I fältet eller i panelen ”🎚️ Se bättre” ¦ I bjælken eller i panelet »🎚️ Se bedre«
+Dans la barre ¦ V liště ¦ I fältet ¦ I bjælken
+Dans « Mieux voir » ¦ V „Lépe vidět“ ¦ I ”Se bättre” ¦ I »Se bedre«
+Disposition de la barre ¦ Rozvržení lišty ¦ Fältets layout ¦ Bjælkens layout
+Tous les réglages dans la barre ; elle passe à la ligne s’il le faut ¦ Všechna nastavení v liště; v případě potřeby se zalomí na další řádek ¦ Alla inställningar i fältet; det radbryts vid behov ¦ Alle indstillinger i bjælken; den går på næste linje, hvis det er nødvendigt
+A · Tout dans la barre ¦ A · Vše v liště ¦ A · Allt i fältet ¦ A · Alt i bjælken
+Une barre courte ; les autres réglages dans le panneau « 🎚️ Mieux voir », rangés en trois rubriques ¦ Krátká lišta; ostatní nastavení v panelu „🎚️ Lépe vidět“, rozdělená do tří oddílů ¦ Ett kort fält; övriga inställningar i panelen ”🎚️ Se bättre”, ordnade i tre avsnitt ¦ En kort bjælke; de øvrige indstillinger i panelet »🎚️ Se bedre«, ordnet i tre afsnit
+B · Barre courte + « 🎚️ Mieux voir » ¦ B · Krátká lišta + „🎚️ Lépe vidět“ ¦ B · Kort fält + ”🎚️ Se bättre” ¦ B · Kort bjælke + »🎚️ Se bedre«
+Coche ce qu’on montre (👁), range avec ↑ ↓ (ou en glissant ⠿){x}. Gardé aussitôt ; l’outil ouvert suit tout de suite. ¦ Zaškrtni, co se má zobrazit (👁), uspořádej pomocí ↑ ↓ (nebo tažením ⠿){x}. Uloží se hned; otevřený nástroj se okamžitě přizpůsobí. ¦ Markera vad som visas (👁), ordna med ↑ ↓ (eller genom att dra ⠿){x}. Sparas direkt; det öppna verktyget följer med genast. ¦ Markér, hvad der vises (👁), arrangér med ↑ ↓ (eller ved at trække ⠿){x}. Gemmes med det samme; det åbne værktøj følger straks med.
+, et choisis ce qui va dans la barre ou dans le panneau « 🎚️ Mieux voir » ¦ , a vyber, co patří do lišty a co do panelu „🎚️ Lépe vidět“ ¦ , och välj vad som ska ligga i fältet eller i panelen ”🎚️ Se bättre” ¦ , og vælg, hvad der skal ligge i bjælken eller i panelet »🎚️ Se bedre«
+cette barre (disposition, ordre, boutons montrés) ¦ tuto lištu (rozvržení, pořadí, zobrazená tlačítka) ¦ det här fältet (layout, ordning, visade knappar) ¦ denne bjælke (layout, rækkefølge, viste knapper)
+Réglages « {nom} » importés : « Appliquer » pour les utiliser. ¦ Nastavení „{nom}“ importována: použiješ je přes „Použít“. ¦ Inställningarna ”{nom}” har importerats: ”Tillämpa” för att använda dem. ¦ Indstillingerne »{nom}« er importeret: »Anvend« for at bruge dem.
+Barre de la transcription remise comme au départ ¦ Lišta přepisu vrácena do výchozího stavu ¦ Transkriberingsfältet återställt som från början ¦ Transskriptionsbjælken er nulstillet som fra start
+Barre de la transcription ¦ Lišta přepisu ¦ Transkriberingsfältet ¦ Transskriptionsbjælken
+={n} réglages actifs dans « Mieux voir » ¦ {n} aktivní nastavení v „Lépe vidět“|{n} aktivní nastavení v „Lépe vidět“|{n} aktivních nastavení v „Lépe vidět“ ¦ {n} aktiv inställning i ”Se bättre”|{n} aktiva inställningar i ”Se bättre” ¦ {n} aktiv indstilling i »Se bedre«|{n} aktive indstillinger i »Se bedre«
+{n} réglage actif dans « Mieux voir » ¦ {n} aktivní nastavení v „Lépe vidět“ ¦ {n} aktiv inställning i ”Se bättre” ¦ {n} aktiv indstilling i »Se bedre«
+={n} éléments repérés ¦ {n} nalezená položka|{n} nalezené položky|{n} nalezených položek ¦ {n} hittat element|{n} hittade element ¦ {n} fundet element|{n} fundne elementer
+{n} élément repéré ¦ {n} nalezená položka ¦ {n} hittat element ¦ {n} fundet element
+={n} lignes lues (à relire) ¦ {n} přečtený řádek (ke kontrole)|{n} přečtené řádky (ke kontrole)|{n} přečtených řádků (ke kontrole) ¦ {n} läst rad (läs igenom)|{n} lästa rader (läs igenom) ¦ {n} læst linje (skal læses igennem)|{n} læste linjer (skal læses igennem)
+{n} ligne lue (à relire) ¦ {n} přečtený řádek (ke kontrole) ¦ {n} läst rad (läs igenom) ¦ {n} læst linje (skal læses igennem)
+Nouvelle transcription ¦ Nový přepis ¦ Ny transkribering ¦ Ny transskription
+le tilde remplace un m ou un n ¦ vlnovka nahrazuje m nebo n ¦ tilden ersätter ett m eller ett n ¦ tilden erstatter et m eller et n
+æ = ae ¦ æ = ae ¦ æ = ae ¦ æ = ae
+& = et ¦ & = et (a) ¦ & = et (och) ¦ & = et (og)
+7bre = septembre, 8bre = octobre, 9bre = novembre, Xbre = décembre ¦ 7bre = září, 8bre = říjen, 9bre = listopad, Xbre = prosinec ¦ 7bre = september, 8bre = oktober, 9bre = november, Xbre = december ¦ 7bre = september, 8bre = oktober, 9bre = november, Xbre = december
+« {s} » est une abréviation de « {exp} » ¦ „{s}“ je zkratka slova „{exp}“ ¦ ”{s}” är en förkortning av ”{exp}” ¦ »{s}« er en forkortelse af »{exp}«
+on lit « {x} » ¦ čte se „{x}“ ¦ man läser ”{x}” ¦ man læser »{x}«
+« u » et « n » ont les mêmes jambages ¦ „u“ a „n“ mají stejné nožky ¦ ”u” och ”n” har samma staplar ¦ »u« og »n« har de samme stave
+« m » et « rn » se ressemblent ¦ „m“ a „rn“ jsou si podobné ¦ ”m” och ”rn” liknar varandra ¦ »m« og »rn« ligner hinanden
+« m » et « nn » ont le même nombre de jambages ¦ „m“ a „nn“ mají stejný počet nožek ¦ ”m” och ”nn” har lika många staplar ¦ »m« og »nn« har lige mange stave
+« m » et « in » ont le même nombre de jambages ¦ „m“ a „in“ mají stejný počet nožek ¦ ”m” och ”in” har lika många staplar ¦ »m« og »in« har lige mange stave
+« n » et « ri » se ressemblent ¦ „n“ a „ri“ jsou si podobné ¦ ”n” och ”ri” liknar varandra ¦ »n« og »ri« ligner hinanden
+« u » et « ii » se ressemblent ¦ „u“ a „ii“ jsou si podobné ¦ ”u” och ”ii” liknar varandra ¦ »u« og »ii« ligner hinanden
+« a » et « o » se confondent quand la boucle est fermée ¦ „a“ a „o“ se pletou, když je klička zavřená ¦ ”a” och ”o” förväxlas när öglan är stängd ¦ »a« og »o« forveksles, når løkken er lukket
+« e » et « c » se confondent quand la boucle est petite ¦ „e“ a „c“ se pletou, když je klička malá ¦ ”e” och ”c” förväxlas när öglan är liten ¦ »e« og »c« forveksles, når løkken er lille
+« i » sans point ressemble à « l » ¦ „i“ bez tečky vypadá jako „l“ ¦ ”i” utan prick liknar ”l” ¦ »i« uden prik ligner »l«
+« i » et « t » sans barre se confondent ¦ „i“ a „t“ bez příčky se pletou ¦ ”i” och ”t” utan tvärstreck förväxlas ¦ »i« og »t« uden tværstreg forveksles
+« l » et « t » sans barre se confondent ¦ „l“ a „t“ bez příčky se pletou ¦ ”l” och ”t” utan tvärstreck förväxlas ¦ »l« og »t« uden tværstreg forveksles
+le s long « ſ » ressemble à « f » ¦ dlouhé s „ſ“ vypadá jako „f“ ¦ det långa s:et ”ſ” liknar ”f” ¦ det lange s »ſ« ligner »f«
+« v » et « r » se confondent ¦ „v“ a „r“ se pletou ¦ ”v” och ”r” förväxlas ¦ »v« og »r« forveksles
+« cl » collé ressemble à « d » ¦ spojené „cl“ vypadá jako „d“ ¦ hopskrivet ”cl” liknar ”d” ¦ sammenskrevet »cl« ligner »d«
+« h » et « b » se confondent ¦ „h“ a „b“ se pletou ¦ ”h” och ”b” förväxlas ¦ »h« og »b« forveksles
+« h » et « k » se confondent ¦ „h“ a „k“ se pletou ¦ ”h” och ”k” förväxlas ¦ »h« og »k« forveksles
+les majuscules anciennes « S » et « L » se ressemblent ¦ stará velká písmena „S“ a „L“ jsou si podobná ¦ de gamla versalerna ”S” och ”L” liknar varandra ¦ de gamle store bogstaver »S« og »L« ligner hinanden
+les majuscules anciennes « I » et « J » sont la même lettre ¦ stará velká písmena „I“ a „J“ jsou totéž písmeno ¦ de gamla versalerna ”I” och ”J” är samma bokstav ¦ de gamle store bogstaver »I« og »J« er det samme bogstav
+les majuscules anciennes « T » et « F » se ressemblent ¦ stará velká písmena „T“ a „F“ jsou si podobná ¦ de gamla versalerna ”T” och ”F” liknar varandra ¦ de gamle store bogstaver »T« og »F« ligner hinanden
+« g » et « q » se confondent ¦ „g“ a „q“ se pletou ¦ ”g” och ”q” förväxlas ¦ »g« og »q« forveksles
+« y » et « g » se confondent ¦ „y“ a „g“ se pletou ¦ ”y” och ”g” förväxlas ¦ »y« og »g« forveksles
+« e » et « o » se confondent ¦ „e“ a „o“ se pletou ¦ ”e” och ”o” förväxlas ¦ »e« og »o« forveksles
+« o » ouvert ressemble à « u » ¦ otevřené „o“ vypadá jako „u“ ¦ ett öppet ”o” liknar ”u” ¦ et åbent »o« ligner »u«
+« c » et « o » se confondent ¦ „c“ a „o“ se pletou ¦ ”c” och ”o” förväxlas ¦ »c« og »o« forveksles
+« {x} » lu au lieu de « {y} » : {x2} ¦ „{x}“ přečteno místo „{y}“: {x2} ¦ ”{x}” läst i stället för ”{y}”: {x2} ¦ »{x}« læst i stedet for »{y}«: {x2}
+« {p} » lu au lieu de « {q} » : {x} ¦ „{p}“ přečteno místo „{q}“: {x} ¦ ”{p}” läst i stället för ”{q}”: {x} ¦ »{p}« læst i stedet for »{q}«: {x}
+« {y} » oublié à la lecture ¦ „{y}“ při čtení vynecháno ¦ ”{y}” glömdes vid läsningen ¦ »{y}« blev glemt ved læsningen
+« {x} » en trop ¦ „{x}“ navíc ¦ ”{x}” för mycket ¦ »{x}« for meget
+« {x} » lu au lieu de « {y} » ¦ „{x}“ přečteno místo „{y}“ ¦ ”{x}” läst i stället för ”{y}” ¦ »{x}« læst i stedet for »{y}«
+« {x} » lu au lieu de « {r} » ¦ „{x}“ přečteno místo „{r}“ ¦ ”{x}” läst i stället för ”{r}” ¦ »{x}« læst i stedet for »{r}«
+« {x} » veut dire « idem » : la même chose qu’à la ligne au-dessus. ¦ „{x}“ znamená „idem“: totéž co na řádku výše. ¦ ”{x}” betyder ”idem”: samma sak som på raden ovanför. ¦ »{x}« betyder »idem«: det samme som på linjen ovenfor.
+la valeur de la ligne {x} ¦ hodnota z řádku {x} ¦ värdet från rad {x} ¦ værdien fra linje {x}
+« {role} » est la nationalité ¦ „{role}“ je státní příslušnost ¦ ”{role}” är nationaliteten ¦ »{role}« er nationaliteten
+« {occupation} » est le lien avec le chef ¦ „{occupation}“ je vztah k hlavě domácnosti ¦ ”{occupation}” är relationen till hushållsföreståndaren ¦ »{occupation}« er forholdet til husstandens overhoved
+« {employer} » est sans doute la profession ¦ „{employer}“ je nejspíš povolání ¦ ”{employer}” är troligen yrket ¦ »{employer}« er nok erhvervet
+Colonnes décalées : « {role} » dans la case du lien ressemble à la nationalité{x}. Remets chaque valeur dans sa colonne. ¦ Posunuté sloupce: „{role}“ v poli vztahu vypadá jako státní příslušnost{x}. Vrať každou hodnotu do jejího sloupce. ¦ Förskjutna kolumner: ”{role}” i rutan för relation liknar nationaliteten{x}. Flytta tillbaka varje värde till sin kolumn. ¦ Forskudte kolonner: »{role}« i feltet for forhold ligner nationaliteten{x}. Sæt hver værdi tilbage i sin kolonne.
+, et « {occupation} » dans la case de la profession est un lien de parenté ¦ a „{occupation}“ v poli povolání je příbuzenský vztah ¦ , och ”{occupation}” i rutan för yrke är en släktrelation ¦ , og »{occupation}« i feltet for erhverv er et slægtskabsforhold
+« {occupation} » dans la case de la profession est un lien de parenté : la colonne a glissé. ¦ „{occupation}“ v poli povolání je příbuzenský vztah: sloupec se posunul. ¦ ”{occupation}” i rutan för yrke är en släktrelation: kolumnen har glidit. ¦ »{occupation}« i feltet for erhverv er et slægtskabsforhold: kolonnen er forskudt.
+c’est le lien avec le chef ¦ je to vztah k hlavě domácnosti ¦ det är relationen till hushållsföreståndaren ¦ det er forholdet til husstandens overhoved
+la case suivante est sans doute la profession ¦ další pole je nejspíš povolání ¦ nästa ruta är troligen yrket ¦ det næste felt er nok erhvervet
+« {civil_status} » dans la case de l’état civil est un lien de parenté : mal rangé. ¦ „{civil_status}“ v poli rodinného stavu je příbuzenský vztah: špatně zařazeno. ¦ ”{civil_status}” i rutan för civilstånd är en släktrelation: fel placerat. ¦ »{civil_status}« i feltet for civilstand er et slægtskabsforhold: forkert placeret.
+« {civil_status} » veut dire « veuve » (ou « veuf ») : abréviation non développée. ¦ „{civil_status}“ znamená „vdova“ (nebo „vdovec“): nerozepsaná zkratka. ¦ ”{civil_status}” betyder ”änka” (eller ”änkling”): förkortningen är inte utskriven. ¦ »{civil_status}« betyder »enke« (eller »enkemand«): forkortelsen er ikke skrevet ud.
+« {x} » devant le nom veut dire « veuve » : le nom est « {x2} ». ¦ „{x}“ před jménem znamená „vdova“: jméno je „{x2}“. ¦ ”{x}” framför namnet betyder ”änka”: namnet är ”{x2}”. ¦ »{x}« foran navnet betyder »enke«: navnet er »{x2}«.
+le nom sans « veuve » ¦ jméno bez „vdova“ ¦ namnet utan ”änka” ¦ navnet uden »enke«
+« {x} » = veuve ¦ „{x}“ = vdova ¦ ”{x}” = änka ¦ »{x}« = enke
+« {v} » est sans doute « {joined} » mal lu (lettres qui se ressemblent). ¦ „{v}“ je nejspíš špatně přečtené „{joined}“ (podobná písmena). ¦ ”{v}” är troligen ett feläst ”{joined}” (bokstäver som liknar varandra). ¦ »{v}« er nok et fejllæst »{joined}« (bogstaver, der ligner hinanden).
+forme connue la plus proche ¦ nejbližší známý tvar ¦ närmaste kända form ¦ nærmeste kendte form
+« {u} » ressemble à « {x} » ¦ „{u}“ se podobá „{x}“ ¦ ”{u}” liknar ”{x}” ¦ »{u}« ligner »{x}«
+« {v} » ne ressemble à aucun métier connu : lecture sans doute illisible, regarde l’image. ¦ „{v}“ se nepodobá žádnému známému povolání: nejspíš nečitelné, podívej se na obrázek. ¦ ”{v}” liknar inget känt yrke: troligen oläsligt, titta på bilden. ¦ »{v}« ligner intet kendt erhverv: nok ulæseligt, se på billedet.
+Employeur « {employer} » : lecture douteuse, regarde l’image. ¦ Zaměstnavatel „{employer}“: pochybné čtení, podívej se na obrázek. ¦ Arbetsgivare ”{employer}”: osäker läsning, titta på bilden. ¦ Arbejdsgiver »{employer}«: tvivlsom læsning, se på billedet.
+(non développée par la lecture automatique). ¦ (automatické čtení ji nerozepsalo). ¦ (inte utskriven av den automatiska läsningen). ¦ (ikke skrevet ud af den automatiske læsning).
+« {first} » ressemble à une profession : la colonne a pu être décalée. ¦ „{first}“ vypadá jako povolání: sloupec se mohl posunout. ¦ ”{first}” liknar ett yrke: kolumnen kan ha förskjutits. ¦ »{first}« ligner et erhverv: kolonnen kan være forskudt.
+« {last} » est aussi le nom d’une commune : la colonne du lieu a pu glisser dans celle du nom. ¦ „{last}“ je i název obce: sloupec místa mohl sklouznout do sloupce jména. ¦ ”{last}” är också namnet på en ort: kolumnen för plats kan ha glidit in i namnkolumnen. ¦ »{last}« er også navnet på en by: kolonnen for sted kan være gledet ind i navnekolonnen.
+Le mari s’appelle « {last} », l’épouse « {last2} » : au recensement, l’épouse est en général inscrite sous le nom du mari (lettres mal lues ?). ¦ Manžel se jmenuje „{last}“, manželka „{last2}“: při sčítání lidu se manželka obvykle zapisuje pod jménem manžela (špatně přečtená písmena?). ¦ Maken heter ”{last}”, makan ”{last2}”: i folkräkningen skrivs makan oftast in under makens namn (fel lästa bokstäver?). ¦ Manden hedder »{last}«, hustruen »{last2}«: i folketællingen er hustruen som regel skrevet under mandens navn (fejllæste bogstaver?).
+le nom du chef du ménage ¦ jméno hlavy domácnosti ¦ hushållsföreståndarens namn ¦ navnet på husstandens overhoved
+Le chef du ménage s’appelle « {last} » : {x}. ¦ Hlava domácnosti se jmenuje „{last}“: {x}. ¦ Hushållsföreståndaren heter ”{last}”: {x}. ¦ Husstandens overhoved hedder »{last}«: {x}.
+Le chef du ménage s’appelle « {last} », ici « {last2} » : les membres d’un ménage portent en général le même nom (lettres mal lues ?). ¦ Hlava domácnosti se jmenuje „{last}“, tady „{last2}“: členové domácnosti mají obvykle stejné příjmení (špatně přečtená písmena?). ¦ Hushållsföreståndaren heter ”{last}”, här ”{last2}”: medlemmarna i ett hushåll har oftast samma namn (fel lästa bokstäver?). ¦ Husstandens overhoved hedder »{last}«, her »{last2}«: medlemmerne af en husstand har som regel samme navn (fejllæste bogstaver?).
+« {last} » n’est pas dans ta base, mais {x} oui : {x2}. ¦ „{last}“ ve tvé databázi není, ale {x} ano: {x2}. ¦ ”{last}” finns inte i din databas, men {x} gör det: {x2}. ¦ »{last}« er ikke i din database, men {x} er: {x2}.
+Prénom peu courant « {w} » : {x} ? ({x2}) ¦ Neobvyklé křestní jméno „{w}“: {x}? ({x2}) ¦ Ovanligt förnamn ”{w}”: {x}? ({x2}) ¦ Usædvanligt fornavn »{w}«: {x}? ({x2})
+la forme lue {x} fois sur la page ¦ tvar přečtený na stránce {x}× ¦ formen som lästs {x} gånger på sidan ¦ formen, der er læst {x} gange på siden
+la commune connue la plus proche ¦ nejbližší známá obec ¦ närmaste kända ort ¦ den nærmeste kendte by
+« {commune} » : sur la même page, ce lieu est lu « {best} » {x}{x2} — sans doute le même lieu mal lu. ¦ „{commune}“: na stejné stránce je toto místo přečteno jako „{best}“ {x}{x2} — nejspíš stejné, špatně přečtené místo. ¦ ”{commune}”: på samma sida läses platsen ”{best}” {x}{x2} — troligen samma plats feläst. ¦ »{commune}«: på samme side læses stedet »{best}« {x}{x2} — nok det samme sted, fejllæst.
+aussi ¦ také ¦ också ¦ også
+commune connue ¦ známá obec ¦ känd ort ¦ kendt by
+Commune inconnue « {birth_place} » : peut-être {x} (à vérifier, plusieurs choix possibles). ¦ Neznámá obec „{birth_place}“: možná {x} (ověř, je víc možností). ¦ Okänd ort ”{birth_place}”: kanske {x} (kontrollera, flera alternativ är möjliga). ¦ Ukendt by »{birth_place}«: måske {x} (kontrollér, flere muligheder).
+Âge illisible « {age} ». ¦ Nečitelný věk „{age}“. ¦ Oläslig ålder ”{age}”. ¦ Ulæselig alder »{age}«.
+{age} ans en {year} veut dire né vers {x}, pas {by} : un des deux chiffres a été mal lu. ¦ {age} let v roce {year} znamená narození kolem {x}, ne {by}: jedno z čísel bylo špatně přečteno. ¦ {age} år {year} betyder född omkring {x}, inte {by}: en av siffrorna har lästs fel. ¦ {age} år i {year} betyder født omkring {x}, ikke {by}: et af tallene er læst forkert.
+{age} ans : âge très rare, un chiffre a pu être mal lu. ¦ {age} let: velmi vzácný věk, číslice mohla být špatně přečtena. ¦ {age} år: mycket ovanlig ålder, en siffra kan ha lästs fel. ¦ {age} år: meget sjælden alder, et ciffer kan være læst forkert.
+{role} de {age} ans pour un chef de {chefAge} ans : impossible, un âge a pu être mal lu. ¦ {role} ve věku {age} let u hlavy domácnosti ve věku {chefAge} let: nemožné, věk mohl být špatně přečten. ¦ {role} på {age} år för en föreståndare på {chefAge} år: omöjligt, en ålder kan ha lästs fel. ¦ {role} på {age} år for et overhoved på {chefAge} år: umuligt, en alder kan være læst forkert.
+{role} de {age} ans : impossible, un chiffre a été mal lu. ¦ {role} ve věku {age} let: nemožné, číslice byla špatně přečtena. ¦ {role} på {age} år: omöjligt, en siffra har lästs fel. ¦ {role} på {age} år: umuligt, et ciffer er læst forkert.
+{x} ans d’écart entre les époux : c’est rare, vérifie les âges. ¦ {x} let rozdílu mezi manželi: to je vzácné, ověř věky. ¦ {x} års skillnad mellan makarna: det är ovanligt, kontrollera åldrarna. ¦ {x} års forskel mellem ægtefællerne: det er sjældent, kontrollér alderen.
+Lien avec le chef de ménage vide : la case a pu être sautée. ¦ Vztah k hlavě domácnosti je prázdný: pole mohlo být přeskočeno. ¦ Relationen till hushållsföreståndaren är tom: rutan kan ha hoppats över. ¦ Forholdet til husstandens overhoved er tomt: feltet kan være sprunget over.
+Née en {by}, après le recensement de {year} : un chiffre a été mal lu. ¦ Narozena v roce {by}, po sčítání lidu v roce {year}: číslice byla špatně přečtena. ¦ Född {by}, efter folkräkningen {year}: en siffra har lästs fel. ¦ Født i {by}, efter folketællingen i {year}: et ciffer er læst forkert.
+Né en {by}, après le recensement de {year} : un chiffre a été mal lu. ¦ Narozen v roce {by}, po sčítání lidu v roce {year}: číslice byla špatně přečtena. ¦ Född {by}, efter folkräkningen {year}: en siffra har lästs fel. ¦ Født i {by}, efter folketællingen i {year}: et ciffer er læst forkert.
+{role} de {age} ans, plus âgée que le chef du ménage ({chefAge} ans) : un âge a pu être mal lu. ¦ {role} ve věku {age} let, starší než hlava domácnosti ({chefAge} let): věk mohl být špatně přečten. ¦ {role} på {age} år, äldre än hushållsföreståndaren ({chefAge} år): en ålder kan ha lästs fel. ¦ {role} på {age} år, ældre end husstandens overhoved ({chefAge} år): en alder kan være læst forkert.
+{role} de {age} ans, plus âgé que le chef du ménage ({chefAge} ans) : un âge a pu être mal lu. ¦ {role} ve věku {age} let, starší než hlava domácnosti ({chefAge} let): věk mohl být špatně přečten. ¦ {role} på {age} år, äldre än hushållsföreståndaren ({chefAge} år): en ålder kan ha lästs fel. ¦ {role} på {age} år, ældre end husstandens overhoved ({chefAge} år): en alder kan være læst forkert.
+Au recensement de {year}, née vers {ob} ; ici vers {mine}. ¦ Při sčítání lidu v roce {year} narozena kolem {ob}; tady kolem {mine}. ¦ I folkräkningen {year} född omkring {ob}; här omkring {mine}. ¦ I folketællingen i {year} født omkring {ob}; her omkring {mine}.
+Au recensement de {year}, né vers {ob} ; ici vers {mine}. ¦ Při sčítání lidu v roce {year} narozen kolem {ob}; tady kolem {mine}. ¦ I folkräkningen {year} född omkring {ob}; här omkring {mine}. ¦ I folketællingen i {year} født omkring {ob}; her omkring {mine}.
+« {role} » pour « {x} », un prénom {x2} : le lien ou le prénom a été mal lu. ¦ „{role}“ u „{x}“, což je křestní jméno {x2}: vztah nebo jméno bylo špatně přečteno. ¦ ”{role}” för ”{x}”, ett förnamn {x2}: relationen eller förnamnet har lästs fel. ¦ »{role}« for »{x}«, et fornavn {x2}: forholdet eller fornavnet er læst forkert.
+de femme ¦ pro ženy ¦ för kvinnor ¦ til kvinder
+d’homme ¦ pro muže ¦ för män ¦ til mænd
+« {role} » pour {x} : le lien ou le genre a été mal lu. ¦ „{role}“ u {x}: vztah nebo pohlaví bylo špatně přečteno. ¦ ”{role}” för {x}: relationen eller könet har lästs fel. ¦ »{role}« for {x}: forholdet eller kønnet er læst forkert.
+une femme ¦ ženy ¦ en kvinna ¦ en kvinde
+un homme ¦ muže ¦ en man ¦ en mand
+le lien qui va avec le genre ¦ vztah, který odpovídá pohlaví ¦ relationen som passar till könet ¦ det forhold, der passer til kønnet
+« {role} » d’un chef de ménage {x} : le lien ou le genre a été mal lu. ¦ „{role}“ u hlavy domácnosti ({x}): vztah nebo pohlaví bylo špatně přečteno. ¦ ”{role}” för en hushållsföreståndare ({x}): relationen eller könet har lästs fel. ¦ »{role}« for et husstandsoverhoved ({x}): forholdet eller kønnet er læst forkert.
+« {last} » et « {x} » dans le même ménage : sans doute le même nom mal lu. ¦ „{last}“ a „{x}“ ve stejné domácnosti: nejspíš totéž, špatně přečtené jméno. ¦ ”{last}” och ”{x}” i samma hushåll: troligen samma namn feläst. ¦ »{last}« og »{x}« i samme husstand: nok det samme navn, fejllæst.
+lu {x} fois dans le ménage ¦ přečteno v domácnosti {x}× ¦ läst {x} gånger i hushållet ¦ læst {x} gange i husstanden
+le nom d’un autre membre du ménage ¦ jméno jiného člena domácnosti ¦ namnet på en annan medlem i hushållet ¦ navnet på et andet medlem af husstanden
+Deux « chef » dans le même ménage : deux ménages ont pu être mis ensemble, ou le lien a été mal lu. ¦ Dvě „hlavy“ ve stejné domácnosti: mohly být spojeny dvě domácnosti, nebo byl vztah špatně přečten. ¦ Två ”föreståndare” i samma hushåll: två hushåll kan ha slagits ihop, eller så har relationen lästs fel. ¦ To »overhoveder« i samme husstand: to husstande kan være slået sammen, eller forholdet er læst forkert.
+Même nom, même prénom que la ligne {x} : la même personne lue deux fois ? ¦ Stejné příjmení i křestní jméno jako na řádku {x}: tatáž osoba přečtená dvakrát? ¦ Samma efternamn och förnamn som rad {x}: samma person läst två gånger? ¦ Samme efternavn og fornavn som linje {x}: den samme person læst to gange?
+Ce ménage commence en haut d’une page sans chef : c’est sans doute la suite du ménage de la page d’avant (ménage coupé au changement de page). ¦ Tato domácnost začíná nahoře na stránce bez hlavy: nejspíš je to pokračování domácnosti z předchozí stránky (domácnost rozdělená na přelomu stránky). ¦ Det här hushållet börjar högst upp på en sida utan föreståndare: det är troligen fortsättningen på hushållet från föregående sida (hushållet delades vid sidbytet). ¦ Denne husstand begynder øverst på en side uden overhoved: det er nok fortsættelsen af husstanden fra siden før (husstanden er delt ved sideskiftet).
+Ce ménage n’a pas de chef : il a pu être coupé en deux (changement de page) ou mal découpé. ¦ Tato domácnost nemá hlavu: mohla být rozdělena na dvě (přelom stránky) nebo špatně rozčleněna. ¦ Det här hushållet har ingen föreståndare: det kan ha delats i två (sidbyte) eller delats upp fel. ¦ Denne husstand har intet overhoved: den kan være delt i to (sideskift) eller opdelt forkert.
+{role} « {last} » dans le ménage de {last2}, mais le ménage d’avant s’appelle {last3} : rattaché au mauvais ménage ? ¦ {role} „{last}“ v domácnosti {last2}, ale předchozí domácnost se jmenuje {last3}: přiřazeno ke špatné domácnosti? ¦ {role} ”{last}” i hushållet {last2}, men det föregående hushållet heter {last3}: kopplat till fel hushåll? ¦ {role} »{last}« i husstanden {last2}, men den forrige husstand hedder {last3}: knyttet til den forkerte husstand?
+« {w} » ressemble à {x} : {x2} ¦ „{w}“ se podobá {x}: {x2} ¦ ”{w}” liknar {x}: {x2} ¦ »{w}« ligner {x}: {x2}
+Copié. ¦ Zkopírováno. ¦ Kopierat. ¦ Kopieret.
+Un nombre en lettres ou en chiffres ¦ Číslo slovy nebo číslicemi ¦ Ett tal med bokstäver eller siffror ¦ Et tal med bogstaver eller cifre
+Écris « {x} » ou « 1852 ». ¦ Napiš „{x}“ nebo „1852“. ¦ Skriv ”{x}” eller ”1852”. ¦ Skriv »{x}« eller »1852«.
+Un nombre entre 1 et 999 999. ¦ Číslo mezi 1 a 999 999. ¦ Ett tal mellan 1 och 999 999. ¦ Et tal mellem 1 og 999 999.
+Ce ne sont pas des lettres-nombres connues (exemples : {x}). ¦ Nejsou to známá písmena-číslice (příklady: {x}). ¦ Det är inte kända bokstavssiffror (exempel: {x}). ¦ Det er ikke kendte bogstavtal (eksempler: {x}).
+L’alphabet ({n} lettres) ¦ Abeceda ({n} písmen) ¦ Alfabetet ({n} bokstäver) ¦ Alfabetet ({n} bogstaver)
+Sources : {x}. ¦ Prameny: {x}. ¦ Källor: {x}. ¦ Kilder: {x}.
+L’aide à la lecture n’a pas pu se charger (fichier app-aide-lecture.js manquant ?). ¦ Pomoc se čtením se nepodařilo načíst (chybí soubor app-aide-lecture.js?). ¦ Läshjälpen kunde inte laddas (saknas filen app-aide-lecture.js?). ¦ Læsehjælpen kunne ikke indlæses (mangler filen app-aide-lecture.js?).

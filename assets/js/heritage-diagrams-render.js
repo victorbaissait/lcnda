@@ -8,6 +8,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s).replace(/\{(\w+)\}/g, (m, k) => (v && k in v ? String(v[k]) : m)));
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
     const PALETTE = ['#4e79a7', '#f28e2b', '#e15759', '#76b7b2', '#59a14f', '#edc948', '#b07aa1', '#ff9da7', '#9c755f', '#bab0ac', '#1f77b4', '#d62728', '#2ca02c', '#9467bd', '#17becf', '#bcbd22'];
@@ -171,7 +172,7 @@
         const shape = o.shape || 'circle';
         const colorAt = []; parties.forEach(p => { for (let k = 0; k < p.n; k++) colorAt.push(p); });
         const legend = parties.filter(p => p.n > 0 || o.showEmpty).map(p => ({label: o.legendSeats === false ? p.name : `${p.name} (${fmt(p.n, 0)})`, color: p.color}));
-        if (!N) return {h: 60, svg: T(W / 2, 30, 'Ajoute des groupes et leur nombre de sièges.', {anchor: 'middle', size: fs, fill: '#888'}), legend};
+        if (!N) return {h: 60, svg: T(W / 2, 30, i18n('Ajoute des groupes et leur nombre de sièges.'), {anchor: 'middle', size: fs, fill: '#888'}), legend};
         const seatSvg = (x, y, d, p, extra = '') => { const s = d * (1 - gap), tip = `<title>${esc(p.name)} — ${fmt(p.n, 0)} siège${p.n > 1 ? 's' : ''}</title>`;
             if (shape === 'square' || shape === 'rounded') return `<rect x="${r2(x - s / 2)}" y="${r2(y - s / 2)}" width="${r2(s)}" height="${r2(s)}" rx="${shape === 'rounded' ? r2(s * .25) : 0}" fill="${p.color}"${extra}>${tip}</rect>`;
             return `<circle cx="${r2(x)}" cy="${r2(y)}" r="${r2(s / 2)}" fill="${p.color}"${extra}>${tip}</circle>`; };
@@ -216,15 +217,15 @@
             sS.forEach((p, i) => { svg += seatSvg(s / 2, totalH / 2 + (i - (count('speaker') - 1) / 2) * s, s, p, stroke); });
             if (count('cross')) { const cx0 = sp + colsMain * s + s * 1.5, cr = Math.ceil(count('cross') / crossC); sC.forEach((p, i) => { svg += seatSvg(cx0 + (i % crossC) * s + s / 2, totalH / 2 - cr * s / 2 + Math.floor(i / crossC) * s + s / 2, s, p, stroke); }); }
             h = totalH;
-            if (o.total !== false) svg += T(sp + colsMain * s / 2, gov.h + s * .8, o.centerText || `${fmt(N, 0)} sièges`, {size: fs * 1.1, anchor: 'middle', weight: 700});
+            if (o.total !== false) svg += T(sp + colsMain * s / 2, gov.h + s * .8, o.centerText || i18n('{n} sièges', {n: fmt(N, 0)}), {size: fs * 1.1, anchor: 'middle', weight: 700});
         } else { // salle de classe / amphithéâtre droit, face à la tribune
             const R = clamp(Math.round(num(o.rows)) || Math.max(1, Math.round(Math.sqrt(N / 2.4))), 1, 80), C = Math.ceil(N / R);
             const s = Math.min(W / C, fs * 3), x0 = (W - C * s) / 2, top = s * 2.2;
-            svg += `<rect x="${r2(W / 2 - s * 3)}" y="0" width="${r2(s * 6)}" height="${r2(s * 1.1)}" rx="${r2(s * .2)}" fill="none" stroke="currentColor" stroke-width="1.2"/>` + T(W / 2, s * .58, o.centerText || `Tribune · ${fmt(N, 0)} sièges`, {size: Math.min(fs, s * .55), anchor: 'middle'});
+            svg += `<rect x="${r2(W / 2 - s * 3)}" y="0" width="${r2(s * 6)}" height="${r2(s * 1.1)}" rx="${r2(s * .2)}" fill="none" stroke="currentColor" stroke-width="1.2"/>` + T(W / 2, s * .58, o.centerText || i18n('Tribune · {n} sièges', {n: fmt(N, 0)}), {size: Math.min(fs, s * .55), anchor: 'middle'});
             for (let i = 0; i < N; i++) { const c = Math.floor(i / R), rr = i % R; svg += seatSvg(x0 + c * s + s / 2, top + rr * s + s / 2, s, colorAt[i], stroke); }
             h = top + R * s;
         }
-        if (o.majority && o.majority !== 'none') { svg += T(W / 2, h + fs * 1.2, `Majorité absolue : ${fmt(majority, 0)} sièges`, {size: fs, anchor: 'middle'}); h += fs * 2; }
+        if (o.majority && o.majority !== 'none') { svg += T(W / 2, h + fs * 1.2, i18n('Majorité absolue : {n} sièges', {n: fmt(majority, 0)}), {size: fs, anchor: 'middle'}); h += fs * 2; }
         return {h, svg, legend};
     }
 
@@ -245,7 +246,7 @@
         if (o.order === 'start') lines.sort((x, y) => Math.min(...x.stints.map(s => s.a)) - Math.min(...y.stints.map(s => s.a)));
         const evs = rows(spec, 'events').map(e => ({at: when(e.date, false), label: String(e.label || ''), kind: e.kind || 'album', color: e.color})).filter(e => e.at !== null);
         const all = [...lines.flatMap(l => l.stints.flatMap(s => [s.a, s.b])), ...evs.map(e => e.at)];
-        if (!all.length) return {h: 60, svg: T(W / 2, 30, 'Ajoute des lignes : un nom, des rôles, une date de début et de fin.', {anchor: 'middle', size: fs, fill: '#888'}), legend: []};
+        if (!all.length) return {h: 60, svg: T(W / 2, 30, i18n('Ajoute des lignes : un nom, des rôles, une date de début et de fin.'), {anchor: 'middle', size: fs, fill: '#888'}), legend: []};
         let from = when(o.from, false) ?? Math.floor(Math.min(...all)), to = when(o.to, false) ?? Math.ceil(Math.max(...all) + .001);
         if (to <= from) to = from + 1;
         const nameW = Math.min(W * .35, Math.max(...lines.map(l => textW(l.name, fs)), 20) + 12);
@@ -281,7 +282,7 @@
     /* ═════════ 📅 Frise chronologique ═════════ */
     function chrono(spec, W, fs) {
         const o = spec.o || {}, evs = rows(spec).map((e, i) => ({at: when(e.date, false), date: String(e.date || ''), label: String(e.label || ''), color: pick(spec, i, e.color)})).filter(e => e.at !== null).sort((a, b) => a.at - b.at);
-        if (!evs.length) return {h: 60, svg: T(W / 2, 30, 'Ajoute des dates et ce qui s’est passé.', {anchor: 'middle', size: fs, fill: '#888'})};
+        if (!evs.length) return {h: 60, svg: T(W / 2, 30, i18n('Ajoute des dates et ce qui s’est passé.'), {anchor: 'middle', size: fs, fill: '#888'})};
         let from = evs[0].at, to = evs[evs.length - 1].at; if (to - from < 1) { from -= .5; to += .5; }
         if (Number.isFinite(o.__t0) && Number.isFinite(o.__t1) && o.__t1 > o.__t0) { from = o.__t0; to = o.__t1; } // ▶ lecture dans le temps : la frise garde toute sa longueur
         const padX = Math.min(W * .12, 80), X = v => padX + (v - from) / (to - from) * (W - 2 * padX);
@@ -320,7 +321,7 @@
     }
     function cartesian(spec, W, fs, mode) {
         const o = spec.o || {}, {series, cats} = table(spec), horiz = mode === 'bars', stacked = mode === 'stacked' || mode === 'stacked100', pct = mode === 'stacked100';
-        if (!cats.length) return {h: 60, svg: T(W / 2, 30, 'Ajoute des lignes de chiffres.', {anchor: 'middle', size: fs, fill: '#888'})};
+        if (!cats.length) return {h: 60, svg: T(W / 2, 30, i18n('Ajoute des lignes de chiffres.'), {anchor: 'middle', size: fs, fill: '#888'})};
         const single = series.length === 1 && !['line', 'area'].includes(mode);
         const vals = cats.map(c => pct ? c.v.map(v => { const t = c.v.reduce((a, b) => a + Math.max(0, b), 0) || 1; return Math.max(0, v) / t * 100; }) : c.v);
         // ⚙️ deuxième axe (à droite) : une série dessinée en courbe, avec sa propre échelle (colonnes, courbe, aire)
@@ -394,7 +395,7 @@
     }
     function pie(spec, W, fs, mode) {
         const o = spec.o || {}, {cats} = table(spec), items = cats.filter(c => c.v[0] > 0), tot = items.reduce((a, c) => a + c.v[0], 0);
-        if (!tot) return {h: 60, svg: T(W / 2, 30, 'Ajoute des valeurs positives.', {anchor: 'middle', size: fs, fill: '#888'})};
+        if (!tot) return {h: 60, svg: T(W / 2, 30, i18n('Ajoute des valeurs positives.'), {anchor: 'middle', size: fs, fill: '#888'})};
         const half = mode === 'halfdonut', R = Math.min(W / 2 - 4, (num(o.height) || W * (half ? .3 : .42)) / (half ? 1 : 2)), cx = W / 2, cy = half ? R + 4 : R + 4;
         const hole = mode === 'pie' ? 0 : clamp(num(o.hole ?? 55), 10, 90) / 100 * R, span = half ? Math.PI : 2 * Math.PI;
         let a = half ? Math.PI : -Math.PI / 2, svg = '';
@@ -412,7 +413,7 @@
     }
     function waffle(spec, W, fs) {
         const o = spec.o || {}, {cats} = table(spec), items = cats.filter(c => c.v[0] > 0), tot = items.reduce((a, c) => a + c.v[0], 0);
-        if (!tot) return {h: 60, svg: T(W / 2, 30, 'Ajoute des valeurs positives.', {anchor: 'middle', size: fs, fill: '#888'})};
+        if (!tot) return {h: 60, svg: T(W / 2, 30, i18n('Ajoute des valeurs positives.'), {anchor: 'middle', size: fs, fill: '#888'})};
         const cols = clamp(Math.round(num(o.cols) || 10), 2, 50), cells = cols * clamp(Math.round(num(o.cellRows) || 10), 1, 50);
         const per = apportion(cells, items.map(c => c.v[0])), s = Math.min(W / cols, fs * 3.2);
         let k = 0, svg = '';
@@ -433,7 +434,7 @@
     }
     function funnel(spec, W, fs) {
         const {cats} = table(spec), max = Math.max(0, ...cats.map(c => c.v[0]));
-        if (!max) return {h: 60, svg: T(W / 2, 30, 'Ajoute des valeurs.', {anchor: 'middle', size: fs, fill: '#888'})};
+        if (!max) return {h: 60, svg: T(W / 2, 30, i18n('Ajoute des valeurs.'), {anchor: 'middle', size: fs, fill: '#888'})};
         const h = fs * 2.6, cx = W / 2; let svg = '';
         cats.forEach((c, i) => { const w = Math.max(4, c.v[0] / max * W * .9), nw = i < cats.length - 1 ? Math.max(4, cats[i + 1].v[0] / max * W * .9) : w * .8, y = i * (h + 3);
             svg += `<path d="M${r2(cx - w / 2)} ${r2(y)}H${r2(cx + w / 2)}L${r2(cx + nw / 2)} ${r2(y + h)}H${r2(cx - nw / 2)}Z" fill="${c.color}"><title>${esc(c.label)} : ${fmt(c.v[0])}</title></path>` ; const lab = `${c.label} — ${fmt(c.v[0])}${i ? ` (${fmt(c.v[0] / (cats[0].v[0] || 1) * 100, 0)} %)` : ''}`;
@@ -454,7 +455,7 @@
     }
     function treemap(spec, W, fs) {
         const o = spec.o || {}, {cats} = table(spec), items = cats.filter(c => c.v[0] > 0).map(c => ({...c, v: c.v[0]})).sort((a, b) => b.v - a.v), tot = items.reduce((a, b) => a + b.v, 0);
-        if (!tot) return {h: 60, svg: T(W / 2, 30, 'Ajoute des valeurs positives.', {anchor: 'middle', size: fs, fill: '#888'})};
+        if (!tot) return {h: 60, svg: T(W / 2, 30, i18n('Ajoute des valeurs positives.'), {anchor: 'middle', size: fs, fill: '#888'})};
         const H = clamp(num(o.height) || W * .55, 100, 2000); let svg = '';
         squarify(items, 0, 0, W, H).forEach(r => { svg += `<rect x="${r2(r.x + 1)}" y="${r2(r.y + 1)}" width="${r2(Math.max(0, r.w - 2))}" height="${r2(Math.max(0, r.h - 2))}" fill="${r.color}"><title>${esc(r.label)} : ${fmt(r.v)} (${fmt(r.v / tot * 100, 1)} %)</title></rect>`;
             if (r.w > fs * 3 && r.h > fs * 2.4) svg += T(r.x + 6, r.y + fs, cut(r.label, r.w - 10, fs), {size: fs, weight: 600, fill: contrast(r.color)}) + T(r.x + 6, r.y + fs * 2.2, `${fmt(r.v)} · ${fmt(r.v / tot * 100, 0)} %`, {size: fs * .85, fill: contrast(r.color)}); });
@@ -462,7 +463,7 @@
     }
     function pyramid(spec, W, fs) {
         const o = spec.o || {}, {series, cats} = table(spec);
-        if (!cats.length) return {h: 60, svg: T(W / 2, 30, 'Ajoute des tranches (âges…) et deux séries (hommes, femmes…).', {anchor: 'middle', size: fs, fill: '#888'})};
+        if (!cats.length) return {h: 60, svg: T(W / 2, 30, i18n('Ajoute des tranches (âges…) et deux séries (hommes, femmes…).'), {anchor: 'middle', size: fs, fill: '#888'})};
         const list = o.firstBottom === false ? cats : [...cats].reverse();
         const max = ticks(0, Math.max(1, ...cats.flatMap(c => [c.v[0], c.v[1] || 0])), 3).hi, labW = Math.max(...cats.map(c => textW(c.label, fs))) + 14;
         const half = (W - labW) / 2, bh = clamp(fs * 1.7, 10, 30); let svg = '';
@@ -476,7 +477,7 @@
     }
     function heatmap(spec, W, fs) {
         const o = spec.o || {}, {series, cats} = table(spec);
-        if (!cats.length) return {h: 60, svg: T(W / 2, 30, 'Ajoute des lignes et des colonnes de chiffres.', {anchor: 'middle', size: fs, fill: '#888'})};
+        if (!cats.length) return {h: 60, svg: T(W / 2, 30, i18n('Ajoute des lignes et des colonnes de chiffres.'), {anchor: 'middle', size: fs, fill: '#888'})};
         const all = cats.flatMap(c => c.v), mn = Math.min(...all), mx = Math.max(...all);
         const hex = h => { const m = color(h, '#000').match(/^#([0-9a-f]{6})$/i); return m ? [0, 2, 4].map(i => parseInt(m[1].slice(i, i + 2), 16)) : [0, 0, 0]; };
         const lo = hex(color(o.lowColor, '#eef3ff').length === 7 ? color(o.lowColor, '#eef3ff') : '#eef3ff'), hi = hex(color(o.highColor, '#1e4fd8').length === 7 ? color(o.highColor, '#1e4fd8') : '#1e4fd8');
@@ -491,7 +492,7 @@
     }
     function scatter(spec, W, fs) {
         const o = spec.o || {}, pts = rows(spec).map((r, i) => ({label: String(r.label || ''), x: num(r.x), y: num(r.y), s: Math.max(0, num(r.size)), color: pick(spec, o.oneColor ? 0 : i, r.color)}));
-        if (!pts.length) return {h: 60, svg: T(W / 2, 30, 'Ajoute des points : X, Y (et une taille pour des bulles).', {anchor: 'middle', size: fs, fill: '#888'})};
+        if (!pts.length) return {h: 60, svg: T(W / 2, 30, i18n('Ajoute des points : X, Y (et une taille pour des bulles).'), {anchor: 'middle', size: fs, fill: '#888'})};
         const tx = ticks(Math.min(...pts.map(p => p.x)), Math.max(...pts.map(p => p.x)), 6), ty = ticks(Math.min(...pts.map(p => p.y)), Math.max(...pts.map(p => p.y)), 5);
         const left = Math.max(...ty.ticks.map(v => textW(fmt(v), fs * .85))) + 12, H = clamp(num(o.height) || W * .5, 120, 1600), plotW = W - left - 10;
         const X = v => left + (v - tx.lo) / (tx.hi - tx.lo || 1) * plotW, Y = v => H - (v - ty.lo) / (ty.hi - ty.lo || 1) * H;
@@ -508,7 +509,7 @@
     /* ═════════ 🔀 Flux (Sankey) ═════════ */
     function sankey(spec, W, fs) {
         const o = spec.o || {}, links = rows(spec).map(r => ({s: String(r.from || '').trim(), t: String(r.to || '').trim(), v: Math.max(0, num(r.value)), color: r.color})).filter(l => l.s && l.t && l.v > 0 && l.s !== l.t).slice(0, 400);
-        if (!links.length) return {h: 60, svg: T(W / 2, 30, 'Ajoute des flux : de, vers, combien.', {anchor: 'middle', size: fs, fill: '#888'})};
+        if (!links.length) return {h: 60, svg: T(W / 2, 30, i18n('Ajoute des flux : de, vers, combien.'), {anchor: 'middle', size: fs, fill: '#888'})};
         const names = [...new Set(links.flatMap(l => [l.s, l.t]))], N = new Map(names.map((n, i) => [n, {name: n, i, col: 0, inV: 0, outV: 0, color: pick(spec, i)}]));
         links.forEach(l => { N.get(l.s).outV += l.v; N.get(l.t).inV += l.v; });
         for (let pass = 0; pass < names.length; pass++) { let moved = false; links.forEach(l => { const a = N.get(l.s), b = N.get(l.t); if (b.col < a.col + 1 && a.col + 1 < names.length) { b.col = a.col + 1; moved = true; } }); if (!moved) break; } // une boucle s'arrête d'elle-même
@@ -528,7 +529,7 @@
     /* ═════════ 🧭 Organigramme / arbre ═════════ */
     function orgchart(spec, W, fs) {
         const o = spec.o || {}, list = rows(spec).map((r, i) => ({name: String(r.name || '').trim(), parent: String(r.parent || '').trim(), detail: String(r.detail || ''), color: pick(spec, o.oneColor ? 0 : i, r.color), kids: []})).filter(n => n.name);
-        if (!list.length) return {h: 60, svg: T(W / 2, 30, 'Ajoute des cases : un nom et, pour chacune, sa case « au-dessus ».', {anchor: 'middle', size: fs, fill: '#888'})};
+        if (!list.length) return {h: 60, svg: T(W / 2, 30, i18n('Ajoute des cases : un nom et, pour chacune, sa case « au-dessus ».'), {anchor: 'middle', size: fs, fill: '#888'})};
         const by = new Map(); list.forEach(n => { if (!by.has(n.name)) by.set(n.name, n); });
         const roots = [];
         list.forEach(n => { const p = n.parent && n.parent !== n.name ? by.get(n.parent) : null; let a = p, safe = 0; while (a && a !== n && safe++ < 500) a = a.parent ? by.get(a.parent) : null; (p && a !== n ? p.kids : roots).push(n); });
@@ -564,7 +565,7 @@
     /* ═════════ ☁️ Nuage de mots ═════════ */
     function wordcloud(spec, W, fs) {
         const o = spec.o || {}, words = rows(spec).map((r, i) => ({w: String(r.word || '').trim(), v: Math.max(0, num(r.weight) || 1), color: pick(spec, i, r.color)})).filter(x => x.w).sort((a, b) => b.v - a.v).slice(0, 200);
-        if (!words.length) return {h: 60, svg: T(W / 2, 30, 'Ajoute des mots (noms, prénoms, lieux…) et leur poids.', {anchor: 'middle', size: fs, fill: '#888'})};
+        if (!words.length) return {h: 60, svg: T(W / 2, 30, i18n('Ajoute des mots (noms, prénoms, lieux…) et leur poids.'), {anchor: 'middle', size: fs, fill: '#888'})};
         const H = clamp(num(o.height) || W * .5, 100, 1600), max = words[0].v, min = words[words.length - 1].v, placed = []; let svg = '';
         const big = clamp(num(o.maxFont) || W / 9, 12, 140), small = Math.max(9, big / 7);
         words.forEach((x, i) => {
@@ -579,7 +580,7 @@
     /* ═════════ ⏱️ Jauges ═════════ */
     function gauges(spec, W, fs) {
         const list = rows(spec).map((r, i) => ({label: String(r.label || ''), v: num(r.value), max: num(r.max) || 100, color: pick(spec, i, r.color)})).slice(0, 24);
-        if (!list.length) return {h: 60, svg: T(W / 2, 30, 'Ajoute une jauge : un nom, une valeur, un maximum.', {anchor: 'middle', size: fs, fill: '#888'})};
+        if (!list.length) return {h: 60, svg: T(W / 2, 30, i18n('Ajoute une jauge : un nom, une valeur, un maximum.'), {anchor: 'middle', size: fs, fill: '#888'})};
         const per = clamp(Math.floor(W / Math.max(140, fs * 12)), 1, list.length), w = W / per, R = Math.min(w * .42, 140); let svg = '';
         list.forEach((g, i) => { const cx = w * (i % per) + w / 2, cy = Math.floor(i / per) * (R * 1.5 + fs * 2) + R + 4, f = clamp(g.v / g.max, 0, 1);
             const arc = (a0, a1, col, sw) => { const p = a => [cx + R * Math.cos(Math.PI + a * Math.PI), cy + R * Math.sin(Math.PI + a * Math.PI)], [x1, y1] = p(a0), [x2, y2] = p(a1); return `<path d="M${r2(x1)} ${r2(y1)}A${r2(R)} ${r2(R)} 0 0 1 ${r2(x2)} ${r2(y2)}" fill="none" stroke="${col}" stroke-width="${sw}" stroke-linecap="round"/>`; };
@@ -589,7 +590,7 @@
     /* ═════════ 👤 Pictogrammes ═════════ */
     function pictogram(spec, W, fs) {
         const o = spec.o || {}, list = rows(spec).map((r, i) => ({label: String(r.label || ''), v: Math.max(0, num(r.value)), icon: String(r.icon || '●').slice(0, 4), color: pick(spec, i, r.color)})).slice(0, 60);
-        if (!list.length) return {h: 60, svg: T(W / 2, 30, 'Ajoute des lignes : un nom, un nombre, un symbole (👤, 👶, ⚓…).', {anchor: 'middle', size: fs, fill: '#888'})};
+        if (!list.length) return {h: 60, svg: T(W / 2, 30, i18n('Ajoute des lignes : un nom, un nombre, un symbole (👤, 👶, ⚓…).'), {anchor: 'middle', size: fs, fill: '#888'})};
         const unit = num(o.unit) > 0 ? num(o.unit) : 1, s = clamp(num(o.iconSize) || fs * 1.8, 8, 60), labW = Math.min(W * .32, Math.max(...list.map(x => textW(x.label, fs))) + 12);
         const perRow = Math.max(1, Math.floor((W - labW - 60) / s)); let y = 0, svg = '';
         list.forEach(x => { const n = Math.min(2000, x.v / unit), whole = Math.floor(n), part = n - whole, lines = Math.max(1, Math.ceil(Math.ceil(n) / perRow));
@@ -632,13 +633,13 @@
                 {key: 'events', label: 'Les traits verticaux (albums, tournées, événements)', cols: [C('date', 'Date'), C('label', 'Nom'), C('kind', 'Sorte', 'select', {choices: [['album', 'Album studio (noir)'], ['live', 'Album live (gris)'], ['single', 'Single (gris clair)'], ['tour', 'Tournée (rouge, pointillés)'], ['autre', 'Autre (bleu, pointillés)']]}), C('color', 'Couleur', 'color')]}],
             options: [C('from', 'Début de la frise (vide = auto)'), C('to', 'Fin de la frise (vide = auto)'), C('step', 'Un repère tous les … ans (vide = auto)', 'number'), C('barHeight', 'Épaisseur des barres', 'range', {min: 6, max: 60, def: 18}), C('rowGap', 'Espace entre les lignes', 'range', {min: 0, max: 40, def: 6}),
                 C('order', 'Ordre des lignes', 'select', {choices: [['', 'Comme dans le tableau'], ['start', 'Par date d’arrivée']]}), C('eventLabels', 'Écrire le nom des traits verticaux', 'check'), C('defaultRole', 'Rôle par défaut (si vide)')],
-            sample: () => ({o: {title: 'Les Cousins — membres'}, rows: [{name: 'Paul', roles: 'Chant, Guitare rythmique', start: '1978', end: ''}, {name: 'Marc', roles: 'Guitare solo', start: '1978', end: '1986'}, {name: 'Marc', roles: 'Guitare solo, Chœurs', start: '1994', end: ''}, {name: 'Léa', roles: 'Basse', start: '1980', end: '2001'}, {name: 'Hugo', roles: 'Basse', start: '2001', end: ''}, {name: 'Jean', roles: 'Batterie', start: '1978', end: '1990'}, {name: 'Sam', roles: 'Batterie', start: '1990', end: ''}],
+            sample: () => ({o: {title: i18n('Les Cousins — membres')}, rows: [{name: 'Paul', roles: 'Chant, Guitare rythmique', start: '1978', end: ''}, {name: 'Marc', roles: 'Guitare solo', start: '1978', end: '1986'}, {name: 'Marc', roles: 'Guitare solo, Chœurs', start: '1994', end: ''}, {name: 'Léa', roles: 'Basse', start: '1980', end: '2001'}, {name: 'Hugo', roles: 'Basse', start: '2001', end: ''}, {name: 'Jean', roles: 'Batterie', start: '1978', end: '1990'}, {name: 'Sam', roles: 'Batterie', start: '1990', end: ''}],
                 roles: [{role: 'Chant', color: '#e15759'}, {role: 'Guitare rythmique', color: '#59a14f'}, {role: 'Guitare solo', color: '#76b7b2'}, {role: 'Chœurs', color: '#f2c94c'}, {role: 'Basse', color: '#4e79a7'}, {role: 'Batterie', color: '#b07aa1'}],
                 events: [{date: '1981', label: 'Premier album', kind: 'album'}, {date: '1984', label: 'Deuxième', kind: 'album'}, {date: '1988', label: 'Live à l’Olympia', kind: 'live'}, {date: '1996', label: 'Retour', kind: 'album'}, {date: '2005', label: 'Tournée', kind: 'tour'}, {date: '2012', label: 'Dernier album', kind: 'album'}]})},
         chrono: {icon: '📅', label: 'Frise chronologique (dates clés)', group: 'Frises', render: chrono, noLegend: true,
             grids: [{key: 'rows', label: 'Les événements', cols: [C('date', 'Date'), C('label', 'Ce qui s’est passé'), C('color', 'Couleur', 'color')]}],
             options: [C('side', 'Textes', 'select', {choices: [['', 'En alternance dessus / dessous'], ['above', 'Tous au-dessus'], ['below', 'Tous en dessous']]}), C('lanes', 'Étages au plus (pour éviter les chevauchements)', 'range', {min: 1, max: 8, def: 3})],
-            sample: () => ({o: {title: 'La famille Martin'}, rows: [{date: '1792', label: 'Naissance de Jean'}, {date: '1815', label: 'Mariage à Rennes'}, {date: '1832', label: 'Départ pour Nantes'}, {date: '1848', label: 'Achat de la ferme'}, {date: '1870', label: 'Guerre'}, {date: '1889', label: 'Décès de Jean'}]})},
+            sample: () => ({o: {title: i18n('La famille Martin')}, rows: [{date: '1792', label: 'Naissance de Jean'}, {date: '1815', label: 'Mariage à Rennes'}, {date: '1832', label: 'Départ pour Nantes'}, {date: '1848', label: 'Achat de la ferme'}, {date: '1870', label: 'Guerre'}, {date: '1889', label: 'Décès de Jean'}]})},
         columns: {icon: '📊', label: 'Colonnes', group: 'Chiffres', render: (s, W, fs) => cartesian(s, W, fs, 'columns'), grids: [TABLE_GRID], options: [O.values, O.height, O.unit, O.yLabel, C('min', 'Axe : minimum'), C('max', 'Axe : maximum')], sample: () => sampleTable(true)},
         bars: {icon: '📶', label: 'Barres horizontales', group: 'Chiffres', render: (s, W, fs) => cartesian(s, W, fs, 'bars'), grids: [TABLE_GRID], options: [O.values, O.unit, O.yLabel], sample: () => sampleTable(false)},
         stacked: {icon: '🧱', label: 'Colonnes empilées', group: 'Chiffres', render: (s, W, fs) => cartesian(s, W, fs, 'stacked'), grids: [TABLE_GRID], options: [O.values, O.height, O.unit, O.yLabel], sample: () => sampleTable(true)},
@@ -649,30 +650,30 @@
         donut: {icon: '🍩', label: 'Anneau', group: 'Parts', render: (s, W, fs) => pie(s, W, fs, 'donut'), grids: [ONE_SERIES], legend: 'right', options: [O.values, O.hole, O.total, O.centerText, O.height], sample: () => sampleParts()},
         halfdonut: {icon: '🌗', label: 'Demi-anneau', group: 'Parts', render: (s, W, fs) => pie(s, W, fs, 'halfdonut'), grids: [ONE_SERIES], options: [O.values, O.hole, O.total, O.centerText, O.height], sample: () => sampleParts()},
         waffle: {icon: '🧇', label: 'Mosaïque (100 carrés)', group: 'Parts', render: waffle, grids: [ONE_SERIES], options: [C('cols', 'Carrés par ligne', 'range', {min: 2, max: 50, def: 10}), C('cellRows', 'Nombre de lignes', 'range', {min: 1, max: 50, def: 10})], sample: () => sampleParts()},
-        treemap: {icon: '🟪', label: 'Carte proportionnelle (rectangles)', group: 'Parts', render: treemap, noLegend: true, grids: [ONE_SERIES], options: [O.height], sample: () => ({o: {title: 'Lieux de naissance'}, series: [{name: 'Naissances'}], rows: [['Rennes', 42], ['Nantes', 25], ['Vitré', 14], ['Fougères', 9], ['Redon', 7], ['Saint-Malo', 5], ['Paris', 3]].map(([label, s0]) => ({label, s0}))})},
-        funnel: {icon: '🔻', label: 'Entonnoir', group: 'Parts', render: funnel, noLegend: true, grids: [ONE_SERIES], options: [], sample: () => ({o: {title: 'Où en sont mes recherches'}, series: [{name: 'Personnes'}], rows: [['Personnes trouvées', 820], ['Avec une date de naissance', 610], ['Avec un acte', 402], ['Acte vérifié', 255], ['Sourcées', 140]].map(([label, s0]) => ({label, s0}))})},
-        radar: {icon: '🕸️', label: 'Radar (toile)', group: 'Chiffres', render: radar, grids: [TABLE_GRID], options: [C('max', 'Maximum de l’échelle (vide = auto)'), O.height], sample: () => ({o: {title: 'Complétude par branche'}, series: [{name: 'Paternelle'}, {name: 'Maternelle'}], rows: [['Naissances', 90, 70], ['Mariages', 80, 85], ['Décès', 60, 75], ['Recensements', 40, 55], ['Militaire', 30, 20], ['Photos', 50, 35]].map(([label, s0, s1]) => ({label, s0, s1}))})},
-        pyramid: {icon: '🔺', label: 'Pyramide (des âges…)', group: 'Chiffres', render: pyramid, grids: [{...TABLE_GRID, series: 2}], options: [O.values, C('firstBottom', 'Première ligne en bas', 'check', {def: true})], sample: () => ({o: {title: 'Âge au décès'}, series: [{name: 'Hommes', color: '#4e79a7'}, {name: 'Femmes', color: '#e15759'}], rows: [['0-9', 31, 28], ['10-19', 6, 7], ['20-29', 9, 12], ['30-39', 10, 13], ['40-49', 11, 10], ['50-59', 13, 12], ['60-69', 15, 16], ['70-79', 12, 15], ['80+', 6, 9]].map(([label, s0, s1]) => ({label, s0, s1}))})},
+        treemap: {icon: '🟪', label: 'Carte proportionnelle (rectangles)', group: 'Parts', render: treemap, noLegend: true, grids: [ONE_SERIES], options: [O.height], sample: () => ({o: {title: i18n('Lieux de naissance')}, series: [{name: 'Naissances'}], rows: [['Rennes', 42], ['Nantes', 25], ['Vitré', 14], ['Fougères', 9], ['Redon', 7], ['Saint-Malo', 5], ['Paris', 3]].map(([label, s0]) => ({label, s0}))})},
+        funnel: {icon: '🔻', label: 'Entonnoir', group: 'Parts', render: funnel, noLegend: true, grids: [ONE_SERIES], options: [], sample: () => ({o: {title: i18n('Où en sont mes recherches')}, series: [{name: 'Personnes'}], rows: [['Personnes trouvées', 820], ['Avec une date de naissance', 610], ['Avec un acte', 402], ['Acte vérifié', 255], ['Sourcées', 140]].map(([label, s0]) => ({label, s0}))})},
+        radar: {icon: '🕸️', label: 'Radar (toile)', group: 'Chiffres', render: radar, grids: [TABLE_GRID], options: [C('max', 'Maximum de l’échelle (vide = auto)'), O.height], sample: () => ({o: {title: i18n('Complétude par branche')}, series: [{name: 'Paternelle'}, {name: 'Maternelle'}], rows: [['Naissances', 90, 70], ['Mariages', 80, 85], ['Décès', 60, 75], ['Recensements', 40, 55], ['Militaire', 30, 20], ['Photos', 50, 35]].map(([label, s0, s1]) => ({label, s0, s1}))})},
+        pyramid: {icon: '🔺', label: 'Pyramide (des âges…)', group: 'Chiffres', render: pyramid, grids: [{...TABLE_GRID, series: 2}], options: [O.values, C('firstBottom', 'Première ligne en bas', 'check', {def: true})], sample: () => ({o: {title: i18n('Âge au décès')}, series: [{name: 'Hommes', color: '#4e79a7'}, {name: 'Femmes', color: '#e15759'}], rows: [['0-9', 31, 28], ['10-19', 6, 7], ['20-29', 9, 12], ['30-39', 10, 13], ['40-49', 11, 10], ['50-59', 13, 12], ['60-69', 15, 16], ['70-79', 12, 15], ['80+', 6, 9]].map(([label, s0, s1]) => ({label, s0, s1}))})},
         heatmap: {icon: '🟧', label: 'Carte de chaleur (tableau coloré)', group: 'Chiffres', render: heatmap, noLegend: true, grids: [TABLE_GRID], options: [O.values, C('lowColor', 'Couleur des petites valeurs', 'color', {def: '#eef3ff'}), C('highColor', 'Couleur des grandes valeurs', 'color', {def: '#1e4fd8'})],
-            sample: () => ({o: {title: 'Naissances par mois et par siècle'}, series: ['XVIIe', 'XVIIIe', 'XIXe'].map(name => ({name})), rows: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'].map((label, i) => ({label, s0: 3 + (i * 7) % 9, s1: 8 + (i * 5) % 11, s2: 12 + (i * 3) % 10}))})},
+            sample: () => ({o: {title: i18n('Naissances par mois et par siècle')}, series: ['XVIIe', 'XVIIIe', 'XIXe'].map(name => ({name})), rows: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'].map((label, i) => ({label, s0: 3 + (i * 7) % 9, s1: 8 + (i * 5) % 11, s2: 12 + (i * 3) % 10}))})},
         scatter: {icon: '🫧', label: 'Nuage de points / bulles', group: 'Chiffres', render: scatter, noLegend: true, grids: [{key: 'rows', label: 'Les points', cols: [C('label', 'Nom'), C('x', 'X', 'number'), C('y', 'Y', 'number'), C('size', 'Taille (bulles)', 'number'), C('color', 'Couleur', 'color')]}],
             options: [O.values, O.height, C('xLabel', 'Nom de l’axe X'), C('yLabel', 'Nom de l’axe Y'), C('maxBubble', 'Taille de la plus grosse bulle', 'range', {min: 4, max: 120, def: 30}), C('oneColor', 'Une seule couleur', 'check')],
-            sample: () => ({o: {title: 'Âge au mariage et nombre d’enfants', xLabel: 'Âge au mariage', yLabel: 'Enfants'}, rows: [['Jean', 24, 8, 3], ['Marie', 19, 11, 2], ['Pierre', 31, 4, 1], ['Anne', 22, 9, 4], ['Louis', 27, 6, 2], ['Rose', 35, 2, 1]].map(([label, x, y, size]) => ({label, x, y, size}))})},
+            sample: () => ({o: {title: i18n('Âge au mariage et nombre d’enfants'), xLabel: 'Âge au mariage', yLabel: 'Enfants'}, rows: [['Jean', 24, 8, 3], ['Marie', 19, 11, 2], ['Pierre', 31, 4, 1], ['Anne', 22, 9, 4], ['Louis', 27, 6, 2], ['Rose', 35, 2, 1]].map(([label, x, y, size]) => ({label, x, y, size}))})},
         sankey: {icon: '🔀', label: 'Flux (Sankey) : migrations, métiers…', group: 'Liens', render: sankey, noLegend: true, grids: [{key: 'rows', label: 'Les flux', cols: [C('from', 'De'), C('to', 'Vers'), C('value', 'Combien', 'number'), C('color', 'Couleur', 'color')]}], options: [O.values, O.height],
-            sample: () => ({o: {title: 'D’où venaient les conjoints'}, rows: [['Bretagne', 'Rennes', 30], ['Bretagne', 'Nantes', 12], ['Normandie', 'Rennes', 8], ['Normandie', 'Paris', 10], ['Anjou', 'Nantes', 9], ['Rennes', 'Paris', 6]].map(([from, to, value]) => ({from, to, value}))})},
+            sample: () => ({o: {title: i18n('D’où venaient les conjoints')}, rows: [['Bretagne', 'Rennes', 30], ['Bretagne', 'Nantes', 12], ['Normandie', 'Rennes', 8], ['Normandie', 'Paris', 10], ['Anjou', 'Nantes', 9], ['Rennes', 'Paris', 6]].map(([from, to, value]) => ({from, to, value}))})},
         orgchart: {icon: '🧭', label: 'Organigramme / arbre', group: 'Liens', render: orgchart, noLegend: true, grids: [{key: 'rows', label: 'Les cases', cols: [C('name', 'Nom (unique)'), C('parent', 'Au-dessus (nom de la case)'), C('detail', 'Détail'), C('color', 'Couleur', 'color')]}],
             options: [C('direction', 'Sens', 'select', {choices: [['', 'De haut en bas'], ['right', 'De gauche à droite']]}), C('boxWidth', 'Largeur des cases (vide = auto)', 'number'), C('oneColor', 'Une seule couleur', 'check')],
-            sample: () => ({o: {title: 'Association des Amis du village', oneColor: true}, rows: [['Présidente', '', 'Marie Durand'], ['Trésorier', 'Présidente', 'Paul Martin'], ['Secrétaire', 'Présidente', 'Anne Petit'], ['Archives', 'Secrétaire', '3 bénévoles'], ['Fêtes', 'Trésorier', '5 bénévoles']].map(([name, parent, detail]) => ({name, parent, detail}))})},
+            sample: () => ({o: {title: i18n('Association des Amis du village'), oneColor: true}, rows: [['Présidente', '', 'Marie Durand'], ['Trésorier', 'Présidente', 'Paul Martin'], ['Secrétaire', 'Présidente', 'Anne Petit'], ['Archives', 'Secrétaire', '3 bénévoles'], ['Fêtes', 'Trésorier', '5 bénévoles']].map(([name, parent, detail]) => ({name, parent, detail}))})},
         venn: {icon: '⭕', label: 'Diagramme de Venn (2 ou 3 ensembles)', group: 'Liens', render: venn, noLegend: true,
             grids: [{key: 'sets', label: 'Les ensembles (2 ou 3)', max: 3, cols: [C('name', 'Nom'), C('color', 'Couleur', 'color')]}, {key: 'rows', label: 'Ce qu’on écrit dans chaque zone', fixed: ['A', 'B', 'C', 'AB', 'AC', 'BC', 'ABC'], cols: [C('region', 'Zone', 'readonly'), C('value', 'Texte ou nombre')]}],
-            options: [O.height], sample: () => ({o: {title: 'Mes sources'}, sets: [{name: 'État civil'}, {name: 'Registres paroissiaux'}, {name: 'Notaires'}], rows: [['A', '120'], ['B', '85'], ['C', '30'], ['AB', '40'], ['AC', '12'], ['BC', '9'], ['ABC', '5']].map(([region, value]) => ({region, value}))})},
+            options: [O.height], sample: () => ({o: {title: i18n('Mes sources')}, sets: [{name: 'État civil'}, {name: 'Registres paroissiaux'}, {name: 'Notaires'}], rows: [['A', '120'], ['B', '85'], ['C', '30'], ['AB', '40'], ['AC', '12'], ['BC', '9'], ['ABC', '5']].map(([region, value]) => ({region, value}))})},
         wordcloud: {icon: '☁️', label: 'Nuage de mots', group: 'Liens', render: wordcloud, noLegend: true, grids: [{key: 'rows', label: 'Les mots', cols: [C('word', 'Mot'), C('weight', 'Poids', 'number'), C('color', 'Couleur', 'color')]}], options: [O.height, C('maxFont', 'Taille du plus gros mot', 'range', {min: 12, max: 140, def: 80})],
-            sample: () => ({o: {title: 'Les noms de famille'}, rows: [['Martin', 40], ['Durand', 28], ['Petit', 22], ['Lefèvre', 18], ['Moreau', 15], ['Garnier', 12], ['Roux', 10], ['Fournier', 9], ['Girard', 8], ['Bonnet', 7], ['Lambert', 6], ['Fontaine', 5], ['Chevalier', 5], ['Robin', 4], ['Masson', 3]].map(([word, weight]) => ({word, weight}))})},
+            sample: () => ({o: {title: i18n('Les noms de famille')}, rows: [['Martin', 40], ['Durand', 28], ['Petit', 22], ['Lefèvre', 18], ['Moreau', 15], ['Garnier', 12], ['Roux', 10], ['Fournier', 9], ['Girard', 8], ['Bonnet', 7], ['Lambert', 6], ['Fontaine', 5], ['Chevalier', 5], ['Robin', 4], ['Masson', 3]].map(([word, weight]) => ({word, weight}))})},
         gauge: {icon: '⏱️', label: 'Jauges (objectifs)', group: 'Parts', render: gauges, noLegend: true, grids: [{key: 'rows', label: 'Les jauges', cols: [C('label', 'Nom'), C('value', 'Valeur', 'number'), C('max', 'Maximum', 'number'), C('color', 'Couleur', 'color')]}], options: [],
-            sample: () => ({o: {title: 'Mes objectifs'}, rows: [['Ancêtres trouvés (8 générations)', 180, 255], ['Actes numérisés', 320, 500], ['Photos légendées', 90, 120]].map(([label, value, max]) => ({label, value, max}))})},
+            sample: () => ({o: {title: i18n('Mes objectifs')}, rows: [['Ancêtres trouvés (8 générations)', 180, 255], ['Actes numérisés', 320, 500], ['Photos légendées', 90, 120]].map(([label, value, max]) => ({label, value, max}))})},
         pictogram: {icon: '👤', label: 'Pictogrammes (symboles répétés)', group: 'Parts', render: pictogram, grids: [{key: 'rows', label: 'Les lignes', cols: [C('label', 'Nom'), C('value', 'Nombre', 'number'), C('icon', 'Symbole (👤 👶 ⚓ ✝…)'), C('color', 'Couleur', 'color')]}],
             options: [C('unit', 'Un symbole vaut', 'number', {def: 1}), C('iconSize', 'Taille des symboles', 'range', {min: 8, max: 60, def: 22})],
-            sample: () => ({o: {title: 'Enfants par couple'}, rows: [['Jean et Marie', 11, '👶'], ['Pierre et Anne', 7, '👶'], ['Louis et Rose', 3, '👶']].map(([label, value, icon]) => ({label, value, icon}))})},
+            sample: () => ({o: {title: i18n('Enfants par couple')}, rows: [['Jean et Marie', 11, '👶'], ['Pierre et Anne', 7, '👶'], ['Louis et Rose', 3, '👶']].map(([label, value, icon]) => ({label, value, icon}))})},
     };
     function sampleTable(time) {
         return time ? {o: {title: 'Baptêmes et sépultures'}, series: [{name: 'Baptêmes'}, {name: 'Sépultures'}], rows: [['1700', 32, 25], ['1710', 28, 41], ['1720', 35, 22], ['1730', 38, 27], ['1740', 30, 36], ['1750', 41, 24]].map(([label, s0, s1]) => ({label, s0, s1}))}

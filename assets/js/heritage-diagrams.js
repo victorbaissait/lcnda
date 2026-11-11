@@ -8,6 +8,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s).replace(/\{(\w+)\}/g, (m, k) => (v && k in v ? String(v[k]) : m)));
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const A = () => window.LCNDA_APP;
     const R = () => ext.diagramRender;
@@ -139,7 +140,7 @@
         if (fmt === 'copy') { try { const b = await new Promise(r => c.toBlob(r, 'image/png')); await navigator.clipboard.write([new ClipboardItem({'image/png': b})]); toast('Image copiée : colle-la où tu veux (⌘V).'); } catch (_) { toast('Copie impossible ici : utilise « Image PNG ».', 'error'); } return; }
         const blob = await new Promise(r => c.toBlob(r, fmt === 'jpg' ? 'image/jpeg' : 'image/png', .92)); if (!blob) throw new Error('image trop grande : baisse la qualité');
         const fname = o.filename || fileName(name) + (fmt === 'jpg' ? '.jpg' : '.png'); download(blob, fname);
-        if (o.saveCopy && A().importMediaFile) { try { await A().importMediaFile(new File([blob], fname, {type: blob.type}), ['image']); toast('Une copie est rangée dans les médias.'); } catch (e) { toast('Copie dans les médias impossible : ' + e.message, 'error'); } }
+        if (o.saveCopy && A().importMediaFile) { try { await A().importMediaFile(new File([blob], fname, {type: blob.type}), ['image']); toast(i18n('Une copie est rangée dans les médias.')); } catch (e) { toast(i18n('Copie dans les médias impossible : {err}', {err: e.message}), 'error'); } }
     }
     // E3 : la fenêtre d'export commune (PNG, JPG, SVG, Imprimer / PDF, CSV, fichier du diagramme, copier l'image)
     function exportDialog(name, getSpec) {
@@ -148,7 +149,7 @@
         UI.openExportDialog({title: name || 'Diagramme', defaultName: fileName(name), quality: 192, saveCopy: !!A().importMediaFile,
             preview: async () => { const box = document.createElement('div'); box.className = 'h-dg-svg'; box.innerHTML = drawSpec(await resolveLive(getSpec())); return box; },
             formats: [{id: 'png', run: run('png')}, {id: 'jpg', run: run('jpg')}, {id: 'svg', hint: 'net à toutes les tailles', run: run('svg')},
-                {id: 'pdf', hint: 'par l’impression : « Enregistrer en PDF »', ext: '', quality: false, run: run('print')}, {id: 'print', quality: false, run: run('print')},
+                {id: 'pdf', hint: i18n('par l’impression : « Enregistrer en PDF »'), ext: '', quality: false, run: run('print')}, {id: 'print', quality: false, run: run('print')},
                 {id: 'csv', label: '📄 CSV', hint: 'les chiffres, pour un tableur', ext: 'csv', quality: false, run: run('csv')},
                 ...(ext.openSheetEditor ? [{id: 'sheet', label: '🧾 Tableur', hint: 'ouvrir les chiffres dans le tableur', ext: '', quality: false, copy: false, goLabel: '🧾 Ouvrir dans le tableur', run: async () => { const sp = await resolveLive(getSpec()); setTimeout(() => ext.openRowsInSheet ? (() => { const t = ext.sheetTargets?.diagram?.fromData(sp); const sh = t?.sheets?.[0]; if (sh) ext.openRowsInSheet({name: name || 'Diagramme', rows: [sh.header, ...sh.rows]}); })() : null, 30); }}] : []),
                 {id: 'file', label: '💾 Fichier', hint: 'du diagramme, à réimporter', ext: 'diagramme.json', run: run('json')},
@@ -179,7 +180,7 @@
         };
         return rows.slice(from, to).map((r, k) => { const ri = from + k; return `<tr>${cols.map(c => cell(c, r, ri)).join('')}<td class="h-dg-rowtools">${g.fixed ? '' : `<button type="button" data-dg-row="up" data-g="${gi}" data-r="${ri}" title="Monter">↑</button><button type="button" data-dg-row="down" data-g="${gi}" data-r="${ri}" title="Descendre">↓</button><button type="button" data-dg-row="dup" data-g="${gi}" data-r="${ri}" title="Dupliquer">⧉</button><button type="button" data-dg-row="del" data-g="${gi}" data-r="${ri}" title="Supprimer">✕</button>`}</td></tr>`; }).join('');
     }
-    const moreHtml = (gi, shown, total) => (total > shown ? `<div class="h-dg-more" data-dg-morebar="${gi}"><span class="muted">${shown.toLocaleString('fr-FR')} lignes sur ${total.toLocaleString('fr-FR')} (toutes comptent dans le dessin)</span><button type="button" class="button small secondary" data-dg-more="${gi}">Voir les ${Math.min(GRID_SHOWN, total - shown).toLocaleString('fr-FR')} suivantes ↓</button><button type="button" class="link-button" data-dg-moreall="${gi}">Tout voir</button>${ext.openSheetEditor ? '<button type="button" class="link-button" data-dg-sheet>🧾 Tout voir dans le tableur</button>' : ''}</div>` : '');
+    const moreHtml = (gi, shown, total) => (total > shown ? `<div class="h-dg-more" data-dg-morebar="${gi}"><span class="muted">${i18n('{a} lignes sur {b} (toutes comptent dans le dessin)', {a: shown, b: total})}</span><button type="button" class="button small secondary" data-dg-more="${gi}">${i18n('Voir les {n} suivantes ↓', {n: Math.min(GRID_SHOWN, total - shown)})}</button><button type="button" class="link-button" data-dg-moreall="${gi}">Tout voir</button>${ext.openSheetEditor ? '<button type="button" class="link-button" data-dg-sheet>🧾 Tout voir dans le tableur</button>' : ''}</div>` : '');
     function gridHtml(g, gi, spec, shown = GRID_SHOWN) {
         ensureFixed(g, spec);
         const cols = gridCols(g, spec), rows = spec[g.key] = Array.isArray(spec[g.key]) ? spec[g.key] : [];
@@ -264,7 +265,7 @@
         if (t.o?.layout === 'classroom' || t.o?.layout === 'circle') { s.o.title = 'Conseil municipal'; s.rows = [{name: 'Liste du maire', seats: 19, color: '#4e79a7'}, {name: 'Opposition', seats: 6, color: '#e15759'}, {name: 'Sans étiquette', seats: 2, color: '#bab0ac'}]; }
         if (t.preset === 'lives') Object.assign(s, {o: {title: 'Vies de la famille', order: 'start'}, rows: [{name: 'Jean Martin', roles: 'Homme', start: '1792', end: '1868'}, {name: 'Marie Durand', roles: 'Femme', start: '1798', end: '1871'}, {name: 'Pierre Martin', roles: 'Homme', start: '1820', end: '1890'}, {name: 'Rose Martin', roles: 'Femme', start: '1823', end: '1901'}],
             roles: [{role: 'Homme', color: '#4e79a7'}, {role: 'Femme', color: '#e15759'}], events: [{date: '1815', label: 'Mariage', kind: 'autre'}, {date: '1870', label: 'Guerre', kind: 'tour'}]});
-        if (t.preset === 'gantt') Object.assign(s, {o: {title: 'Planning de recherche', defaultRole: 'Tâche'}, rows: [{name: 'Relevés paroissiaux', roles: 'Archives', start: '2026-01', end: '2026-04'}, {name: 'Recensements', roles: 'En ligne', start: '2026-03', end: '2026-06'}, {name: 'Visite aux AD', roles: 'Déplacement', start: '2026-06-10', end: '2026-06-20'}, {name: 'Rédaction', roles: 'Écriture', start: '2026-07', end: '2026-12'}],
+        if (t.preset === 'gantt') Object.assign(s, {o: {title: i18n('Planning de recherche'), defaultRole: i18n('Tâche')}, rows: [{name: i18n('Relevés paroissiaux'), roles: i18n('Archives'), start: '2026-01', end: '2026-04'}, {name: i18n('Recensements'), roles: i18n('En ligne'), start: '2026-03', end: '2026-06'}, {name: i18n('Visite aux AD'), roles: i18n('Déplacement'), start: '2026-06-10', end: '2026-06-20'}, {name: i18n('Rédaction'), roles: i18n('Écriture'), start: '2026-07', end: '2026-12'}],
             roles: [{role: 'Archives', color: '#9c755f'}, {role: 'En ligne', color: '#4e79a7'}, {role: 'Déplacement', color: '#f28e2b'}, {role: 'Écriture', color: '#59a14f'}], events: [{date: '2026-06-15', label: 'Rendez-vous', kind: 'autre'}]});
         return s;
     }
@@ -323,7 +324,7 @@
         const paint = () => {
             dlg.querySelector('[data-dg-type]').textContent = `${kindOf().icon} ${kindOf().label} ▾`;
             dlg.querySelectorAll('[data-dg-tab]').forEach(b => b.classList.toggle('is-active', b.dataset.dgTab === tab));
-            if (tab === 'data') pane.innerHTML = (spec.live?.sheet && ext.sheetLink ? ext.sheetLink.bannerHtml(spec) : spec.live ? `<p class="h-dg-live">🔄 Chiffres tenus à jour depuis « ${esc(spec.live.label || 'l’app')} » : ils sont relus à chaque affichage. <button type="button" class="link-button" data-dg-unlive>Les figer (les modifier à la main)</button></p>` : ext.openSheetEditor && !kindOf().noSheet ? '<div class="h-dg-sheetbar"><button type="button" class="button small secondary" data-dg-sheet title="Le tableur en grand, préparé avec les colonnes de ce diagramme : formules, tri, coller depuis Excel… puis « ✓ Enregistrer et revenir »">🧾 Modifier les données</button><small class="muted">dans le tableur (formules, tri, Excel…)</small></div>' : '') + kindOf().grids.map((g, gi) => gridHtml(g, gi, spec, shownRows[gi] || GRID_SHOWN)).join('');
+            if (tab === 'data') pane.innerHTML = (spec.live?.sheet && ext.sheetLink ? ext.sheetLink.bannerHtml(spec) : spec.live ? `<p class="h-dg-live">${esc(i18n('🔄 Chiffres tenus à jour depuis « {src} » : ils sont relus à chaque affichage.', {src: spec.live.label || i18n('l’app')}))} <button type="button" class="link-button" data-dg-unlive>Les figer (les modifier à la main)</button></p>` : ext.openSheetEditor && !kindOf().noSheet ? '<div class="h-dg-sheetbar"><button type="button" class="button small secondary" data-dg-sheet title="Le tableur en grand, préparé avec les colonnes de ce diagramme : formules, tri, coller depuis Excel… puis « ✓ Enregistrer et revenir »">🧾 Modifier les données</button><small class="muted">dans le tableur (formules, tri, Excel…)</small></div>' : '') + kindOf().grids.map((g, gi) => gridHtml(g, gi, spec, shownRows[gi] || GRID_SHOWN)).join('');
             else if (tab === 'opts') pane.innerHTML = `<div class="h-dg-opts"><h4>${esc(kindOf().label)}</h4>${kindOf().options.map(o => optHtml(o, spec)).join('') || '<p class="muted">Pas de réglage particulier.</p>'}<h4>Présentation</h4>${R().COMMON.map(o => optHtml(o, spec)).join('')}</div>`;
             else if (tab === 'app') pane.innerHTML = appPaneHtml();
             else if (tab === 'perso') { pane.innerHTML = ''; if (ext.diagramPerso) ext.diagramPerso.pane(pane, kindApi); else pane.innerHTML = '<p class="muted">Personnaliser n’est pas chargé.</p>'; }
@@ -336,7 +337,7 @@
         const sortBars = () => pane.querySelectorAll('[data-dg-sortbar]').forEach(ph => {
             const UI = window.LCNDA_UI; if (!UI?.sortBar) return ph.remove();
             const g = grid(ph.dataset.dgSortbar), cols = gridCols(g, spec), numC = cols.find(x => x.type === 'number'), txtC = cols.find(x => x.type !== 'number' && x.type !== 'color');
-            const opts = [['', 'Dans l’ordre du tableau'], ...(numC ? [['big', `${numC.label} : du plus grand au plus petit`], ['small', `${numC.label} : du plus petit au plus grand`]] : []), ...(txtC ? [['az', `${txtC.label} : A → Z`], ['za', `${txtC.label} : Z → A`]] : [])];
+            const opts = [['', 'Dans l’ordre du tableau'], ...(numC ? [['big', i18n('{col} : du plus grand au plus petit', {col: i18n(numC.label)})], ['small', i18n('{col} : du plus petit au plus grand', {col: i18n(numC.label)})]] : []), ...(txtC ? [['az', `${i18n(txtC.label)} : A → Z`], ['za', `${i18n(txtC.label)} : Z → A`]] : [])];
             if (opts.length < 2) return ph.remove();
             ph.replaceWith(UI.sortBar({count: Number(ph.dataset.count) || 0, label: 'ligne', feminine: true, value: '', options: opts, onChange: v => {
                 const rows = spec[g.key] || [], t = r => String(r[txtC?.k] ?? '');
@@ -403,7 +404,7 @@
             const labelOf = key => sel.querySelector(`option[value="${CSS.escape(key)}"]`)?.textContent || presetOf(key)?.[1] || '';
             const cfgFor = key => { const locked = !key.startsWith('q:'), redo = O.FROM_APPSTAT[key];
                 return {fields: fieldsFor(), kind: k, period: 'event', locked, source: labelOf(key), liveAttr: 'data-dg-srclive',
-                    note: locked ? `Ces chiffres sont déjà comptés : tu peux les trier, garder les premiers, montrer « Inconnu » ou les passer en %. Pour choisir ce qu’on compte, le groupe de personnes ou la période, prends « 🧮 Compter dans ma base »${redo ? ` : <button type="button" class="link-button" data-dgo-redo="${esc(redo)}">🧮 Refaire avec « Compter dans ma base »</button>` : '.'}` : ''}; };
+                    note: locked ? i18n('Ces chiffres sont déjà comptés : tu peux les trier, garder les premiers, montrer « Inconnu » ou les passer en %. Pour choisir ce qu’on compte, le groupe de personnes ou la période, prends « 🧮 Compter dans ma base »') + (redo ? ` : <button type="button" class="link-button" data-dgo-redo="${esc(redo)}">${i18n('🧮 Refaire avec « Compter dans ma base »')}</button>` : '.') : ''}; };
             const paintHost = () => {
                 if (!shost || !O) return;
                 const cfg = cfgFor(srcKey); shost.innerHTML = O.html(draft, cfg);
@@ -417,7 +418,7 @@
                 foundT = setTimeout(() => O.count(q).then(res => { if (draft !== q && JSON.stringify(O.params(draft)) !== JSON.stringify(O.params(q))) return; if (Number.isFinite(res?.people)) setSum(O.summary(q, {...cfg, found: res.people})); }).catch(() => {}), 450); };
             // « 🧮 Compter dans ma base » rangé par rubrique ; ce qui n'a pas de sens pour ce diagramme est grisé (« pas pour ce diagramme »)
             const fillSel = src => { const g = {};
-                (O ? O.PRESETS : []).forEach(([id, l, , rub, shape]) => { const fit = O.fits(k, shape) || srcKey === 'q:' + id; (g['🧮 Compter dans ma base' + (rub ? ' · ' + rub : '')] ||= []).push(['q:' + id, fit ? l : l + ' — pas pour ce diagramme', !fit]); });
+                (O ? O.PRESETS : []).forEach(([id, l, , rub, shape]) => { const fit = O.fits(k, shape) || srcKey === 'q:' + id; (g['🧮 Compter dans ma base' + (rub ? ' · ' + rub : '')] ||= []).push(['q:' + id, fit ? l : i18n('{name} — pas pour ce diagramme', {name: i18n(l)}), !fit]); });
                 src.forEach(([key, label, grp]) => { (g[grp] = g[grp] || []).push([key, label]); });
                 sel.innerHTML = Object.entries(g).filter(([, items]) => items.length).map(([grp, items]) => `<optgroup label="${esc(grp)}">${items.map(([key, label, off]) => `<option value="${esc(key)}" ${srcKey === key ? 'selected' : ''} ${off ? 'disabled' : ''}>${esc(label)}</option>`).join('')}</optgroup>`).join('');
                 if (sel.value !== srcKey) srcKey = sel.value; paintHost(); };
@@ -444,7 +445,7 @@
                         if (q.live) spec.live = {key, label, q, preset: preset[0], sum: O.summary(q, cfg)}; else delete spec.live;
                         appSum = O.summary(q, {...cfg, found: res.people});
                         if (!spec.o.title || spec.o.title === kindOf().sample().o?.title) spec.o.title = label;
-                        tab = 'data'; paint(); later(); toast(`${res.rows.length} valeur${res.rows.length > 1 ? 's' : ''} prise${res.rows.length > 1 ? 's' : ''} dans ta base${res.counted ? ` (${res.counted} compté${res.counted > 1 ? 's' : ''})` : ''}.`);
+                        tab = 'data'; paint(); later(); toast(res.counted ? i18n(res.rows.length > 1 ? '{n} valeurs prises dans ta base ({k} comptés).' : '{n} valeur prise dans ta base ({k} comptés).', {n: res.rows.length, k: res.counted}) : i18n(res.rows.length > 1 ? '{n} valeurs prises dans ta base.' : '{n} valeur prise dans ta base.', {n: res.rows.length}));
                         return;
                     }
                     let pairs = await ext.diagramStatRows(key); if (!pairs.length) return toast('Aucun chiffre pour ce graphique.', 'error');
@@ -453,7 +454,7 @@
                     if (q.live) { spec.live = {key, label}; const po = O?.postOf(q); if (po) { spec.live.post = po; spec.live.sum = O.summary(q, cfg); } } else delete spec.live;
                     appSum = O ? O.summary(q, cfg) : '';
                     if (!spec.o.title || spec.o.title === kindOf().sample().o?.title) spec.o.title = label;
-                    tab = 'data'; paint(); later(); toast(`${pairs.length} valeur${pairs.length > 1 ? 's' : ''} prise${pairs.length > 1 ? 's' : ''} dans l’app.`);
+                    tab = 'data'; paint(); later(); toast(i18n(pairs.length > 1 ? '{n} valeurs prises dans l’app.' : '{n} valeur prise dans l’app.', {n: pairs.length}));
                 } catch (err) { toast(err.message, 'error'); } finally { b.disabled = false; }
             });
             const box = pane.querySelector('[data-dg-pq]'); if (!box) return;
@@ -463,15 +464,15 @@
                 const r = await api('diagram_people', {ids: String(pid)}).catch(err => { toast(err.message, 'error'); return null; }); const p = r?.people?.[0]; if (!p) return;
                 const y = v => String(v || '').replace(/-00/g, '').replace(/^(\d{4})-(\d{2})-(\d{2})$/, '$3/$2/$1').replace(/^(\d{4})-(\d{2})$/, '$2/$1');
                 if (spec.kind === 'timeline') {
-                    if (!p.birth) return toast(`${p.name} : pas de date de naissance dans sa fiche.`, 'error');
+                    if (!p.birth) return toast(i18n('{name} : pas de date de naissance dans sa fiche.', {name: p.name}), 'error');
                     const by = Number(String(p.birth).slice(0, 4)), alive = !p.death && new Date().getFullYear() - by < 105;
                     const role = p.gender === 'male' ? 'Homme' : p.gender === 'female' ? 'Femme' : 'Vie';
                     spec.rows = [...(spec.rows || []).filter(r => r.name), {name: p.name, roles: role, start: y(p.birth), end: p.death ? y(p.death) : alive ? '' : y(p.birth), note: !p.death && !alive ? 'décès inconnu' : ''}];
                     spec.roles = spec.roles || []; [['Homme', '#4e79a7'], ['Femme', '#e15759']].forEach(([role2, c]) => { if (!spec.roles.some(x => x.role === role2)) spec.roles.push({role: role2, color: c}); });
                 } else {
-                    spec.rows = [...(spec.rows || []), ...(p.birth ? [{date: y(p.birth), label: `Naissance de ${p.name}`}] : []), ...(p.death ? [{date: y(p.death), label: `Décès de ${p.name}`}] : [])];
+                    spec.rows = [...(spec.rows || []), ...(p.birth ? [{date: y(p.birth), label: i18n('Naissance de {name}', {name: p.name})}] : []), ...(p.death ? [{date: y(p.death), label: i18n('Décès de {name}', {name: p.name})}] : [])];
                 }
-                later(); toast(`${p.name} ${(window.LCNDA_ACCORD?.accord || ((_, t) => t.replace('(e)', '')))(p.gender, 'ajouté(e)', {before: 'ajouté'})}.`); });
+                later(); toast(i18n({ajouté: '{name} ajouté.', ajoutée: '{name} ajoutée.'}[(window.LCNDA_ACCORD?.accord || ((_, t) => t.replace('(e)', '')))(p.gender, 'ajouté(e)', {before: 'ajouté'})] || '{name} ajouté(e).', {name: p.name})); });
         }
         /* rattacher à des personnes, enquêtes, parties d'enquête, projets de l'Atelier */
         const lchip = l => `<span class="h-pr-lchip" data-type="${esc(l.type)}" data-id="${Number(l.id)}">${LINK_IC[l.type] || '🔗'} ${esc(l.name)} <button type="button" data-dg-unlink aria-label="Retirer">×</button></span>`;
@@ -533,8 +534,8 @@
                 if (b.dataset.dgRow === 'del') rows.splice(i, 1); else if (b.dataset.dgRow === 'dup') rows.splice(i + 1, 0, clone(rows[i]));
                 else { const j = b.dataset.dgRow === 'up' ? i - 1 : i + 1; if (j >= 0 && j < rows.length) [rows[i], rows[j]] = [rows[j], rows[i]]; }
                 return keep(); }
-            if (b.dataset.dgAddser !== undefined) { spec.series = [...(spec.series?.length ? spec.series : [{name: 'Série 1'}]), {name: `Série ${(spec.series?.length || 1) + 1}`}]; return keep(); }
-            if (b.dataset.dgDelser !== undefined) { const j = Number(b.dataset.dgDelser); if (!await A().confirmBox(`Supprimer la série « ${spec.series[j]?.name || j + 1} » et ses chiffres ?`, {title: 'Supprimer la série', okLabel: 'Supprimer la série'})) return;
+            if (b.dataset.dgAddser !== undefined) { spec.series = [...(spec.series?.length ? spec.series : [{name: i18n('Série {num}', {num: 1})}]), {name: i18n('Série {num}', {num: (spec.series?.length || 1) + 1})}]; return keep(); }
+            if (b.dataset.dgDelser !== undefined) { const j = Number(b.dataset.dgDelser); if (!await A().confirmBox(i18n('Supprimer la série « {name} » et ses chiffres ?', {name: spec.series[j]?.name || j + 1}), {title: i18n('Supprimer la série'), okLabel: i18n('Supprimer la série')})) return;
                 spec.series.splice(j, 1); (spec.rows || []).forEach(r => { for (let k = j; k < spec.series.length + 1; k++) r['s' + k] = r['s' + (k + 1)]; delete r['s' + spec.series.length]; }); return keep(); }
             if (b.hasAttribute('data-dg-autocolor')) { const g = grid(b.dataset.g); delete spec[g.key][Number(b.dataset.r)][b.dataset.k]; return keep(); }
             if (b.dataset.dgSort !== undefined) { const g = grid(b.dataset.dgSort), c = gridCols(g, spec).find(x => x.type === 'number'); spec[g.key].sort((x, y) => R().num(y[c.k]) - R().num(x[c.k])); return keep(); }
@@ -564,7 +565,7 @@
             const g = grid(gi);
             if (r.mode === 'link' && gi === 0) { spec.live = {sheet: r.link, label: `« ${r.link.name} » ! ${r.link.range}`}; const s = await resolveLive(spec); spec[g.key] = s[g.key]; if (s.series) spec.series = s.series; spec.live = s.live; }
             else { pasteInto(g, spec, r.cells); if (gi === 0) delete spec.live; }
-            appSum = ''; showSum(''); dirty = true; tab = 'data'; paint(); later(); toast(r.mode === 'link' ? 'Données liées au classeur : elles suivent le Tableur.' : `${r.cells.length.toLocaleString('fr-FR')} lignes copiées du classeur.`);
+            appSum = ''; showSum(''); dirty = true; tab = 'data'; paint(); later(); toast(r.mode === 'link' ? i18n('Données liées au classeur : elles suivent le Tableur.') : i18n('{n} lignes copiées du classeur.', {n: r.cells.length}));
         }
         /* 🧾 Modifier les données : le tableur préparé (une feuille par tableau), ou le classeur de la plage liée */
         async function openSheet() {
@@ -684,12 +685,12 @@
         const shown = d ? await resolveLive(specOf(d)) : null;
         if (token !== S().workspaceToken || S().module !== 'graphiques') return;
         if (!d) { ws.innerHTML = `<section class="page"><header class="page-header"><div><span class="eyebrow">MES DIAGRAMMES</span><h2>Créer un diagramme</h2><p>Hémicycle d’une assemblée, fer à cheval, frise des membres d’un groupe de musique façon Wikipédia, frise de vies, camembert, flux de migrations, organigramme, nuage de noms… avec tes propres chiffres ou ceux de l’app. Ils se posent ensuite partout : tableau de bord, fiches, fiche d’une personne, enquêtes, Atelier, mise en page.</p></div><div class="page-actions"><button type="button" class="button" data-dg-new>＋ Nouveau diagramme</button><label class="button secondary h-dg-file">⤒ Importer un fichier<input type="file" accept=".json,application/json" data-dg-import hidden></label></div></header></section>`; bindPage(ws, null); return; }
-        ws.innerHTML = `<section class="page h-dg-page"><header class="page-header"><div><span class="eyebrow">MES DIAGRAMMES · ${esc(R().KINDS[d.kind]?.label || '')}</span><h2>${esc(d.name)}</h2>${followId(d.spec) ? `<p>📈 Ce diagramme montre ton graphique « ${esc(d.name)} » (Éditeur de graphiques) : son dessin et ses chiffres le suivent, partout où il est posé.</p>` : d.spec?.live?.sheet ? `<p>🔗 Données : ${esc(d.spec.live.label || 'un classeur du Tableur')} · tenu à jour.</p>` : d.spec?.live ? `<p>🔄 Chiffres tenus à jour depuis « ${esc(d.spec.live.label || 'l’app')} ».</p>` : ''}</div>
+        ws.innerHTML = `<section class="page h-dg-page"><header class="page-header"><div><span class="eyebrow">${i18n('MES DIAGRAMMES')} · ${esc(i18n(R().KINDS[d.kind]?.label || ''))}</span><h2>${esc(d.name)}</h2>${followId(d.spec) ? `<p>${esc(i18n('📈 Ce diagramme montre ton graphique « {name} » (Éditeur de graphiques) : son dessin et ses chiffres le suivent, partout où il est posé.', {name: d.name}))}</p>` : d.spec?.live?.sheet ? `<p>${esc(i18n('🔗 Données : {src} · tenu à jour.', {src: d.spec.live.label || i18n('un classeur du Tableur')}))}</p>` : d.spec?.live ? `<p>${esc(i18n('🔄 Chiffres tenus à jour depuis « {src} ».', {src: d.spec.live.label || i18n('l’app')}))}</p>` : ''}</div>
             <div class="page-actions"><button type="button" class="button" data-dg-edit="${d.id}">${followId(d.spec) ? '✎ Modifier le graphique' : '✎ Modifier'}</button><button type="button" class="button secondary" data-dg-dup title="${followId(d.spec) ? 'Une copie figée, à retoucher comme un diagramme' : 'Une copie à modifier'}">⧉ Dupliquer</button>${window.LCNDA_SIDE_FOLDERS && !document.body.classList.contains('is-kiosk') ? window.LCNDA_SIDE_FOLDERS.rangeButtonHtml('diagram', d.id, d.name) : ''}<button type="button" class="button secondary" data-dg-dash title="Le poser sur le tableau de bord, comme un widget">＋ Tableau de bord</button><button type="button" class="button danger" data-dg-del>Supprimer</button></div></header>
             <div class="h-dg-pagetools"><button type="button" class="button small secondary" data-dg-pexpdlg title="PNG, JPG, SVG, PDF, impression, CSV, fichier du diagramme">⤓ Exporter</button></div>
             <div class="card h-dg-big"><div class="h-dg-svg" data-dg-pagesvg>${drawSpec(shown)}</div></div>
             ${d.links?.length ? `<div class="h-dg-linked"><span class="section-label">Rattaché à</span>${d.links.map(l => `<button type="button" class="h-pr-lchip" data-dg-golink="${esc(l.type)}:${l.id}:${l.inv || 0}">${LINK_IC[l.type] || '🔗'} ${esc(l.name)}</button>`).join('')}</div>` : ''}
-            <p class="muted h-dg-where">Pour le poser ailleurs : <b>Réglages → Éditeur de widgets</b> (partie « Diagramme ») pour le tableau de bord ou un onglet, un bloc « 📊 Diagramme » dans une <b>Fiche</b>, « Relier » (onglet de l’éditeur) pour la fiche d’une personne, une enquête ou un projet de l’Atelier, et « Insérer → Diagramme » dans la <b>mise en page</b>. Tous tes graphiques et diagrammes : <b>Listes → Graphiques et diagrammes</b>.</p></section>`;
+            <p class="muted h-dg-where">${i18n('Pour le poser ailleurs : <b>Réglages → Éditeur de widgets</b> (partie « Diagramme ») pour le tableau de bord ou un onglet, un bloc « 📊 Diagramme » dans une <b>Fiche</b>, « Relier » (onglet de l’éditeur) pour la fiche d’une personne, une enquête ou un projet de l’Atelier, et « Insérer → Diagramme » dans la <b>mise en page</b>. Tous tes graphiques et diagrammes : <b>Listes → Graphiques et diagrammes</b>.')}</p></section>`;
         bindPage(ws, d);
         ext.diagramPerso?.mount(ws.querySelector('[data-dg-pagesvg]'), shown); // ▶ curseur des années (⚙️ Personnaliser → Lecture dans le temps)
     };
@@ -700,7 +701,7 @@
         ws.querySelector('[data-dg-pexpdlg]').addEventListener('click', () => exportDialog(d.name, () => specOf(d)));
         ws.querySelector('[data-dg-dup]').addEventListener('click', async () => { try { const frozen = followId(d.spec) ? await resolveLive(specOf(d)) : null; if (frozen?.kind === '_missing') throw new Error('Rien à copier : le graphique est introuvable.'); const {kind: fk, live: _l, ...fspec} = frozen || {};
             const r = await post('save_diagram', frozen ? {name: d.name + ' (copie)', kind: fk, spec: fspec} : {name: d.name + ' (copie)', kind: d.kind, spec: d.spec}); await list(true); S().graphDiagramId = Number(r.result?.id); A().setModule('graphiques'); toast('Copie créée.'); } catch (e) { toast(e.message, 'error'); } });
-        ws.querySelector('[data-dg-del]').addEventListener('click', async () => { if (!await A().confirmBox(`Supprimer le diagramme « ${d.name} » ? Il disparaît aussi des widgets, fiches et enquêtes où il est posé.`, {title: 'Supprimer le diagramme', okLabel: 'Supprimer le diagramme'})) return; try { await post('delete_diagram', {id: d.id}); window.LCNDA_SIDE_FOLDERS?.forget('diagram', d.id); await list(true); S().graphDiagramId = cache[0]?.id || 0; if (!cache.length) S().graphMode = 'diagram'; A().setModule('graphiques'); toast('Diagramme supprimé.'); } catch (e) { toast(e.message, 'error'); } });
+        ws.querySelector('[data-dg-del]').addEventListener('click', async () => { if (!await A().confirmBox(i18n('Supprimer le diagramme « {name} » ? Il disparaît aussi des widgets, fiches et enquêtes où il est posé.', {name: d.name}), {title: i18n('Supprimer le diagramme'), okLabel: i18n('Supprimer le diagramme')})) return; try { await post('delete_diagram', {id: d.id}); window.LCNDA_SIDE_FOLDERS?.forget('diagram', d.id); await list(true); S().graphDiagramId = cache[0]?.id || 0; if (!cache.length) S().graphMode = 'diagram'; A().setModule('graphiques'); toast(i18n('Diagramme supprimé.')); } catch (e) { toast(e.message, 'error'); } });
         ws.querySelector('[data-dg-dash]').addEventListener('click', () => addToDashboard(d));
         ws.querySelectorAll('[data-dg-golink]').forEach(b => b.addEventListener('click', () => { const [type, id, inv] = b.dataset.dgGolink.split(':'); goLink(type, Number(id), Number(inv)); }));
     }
