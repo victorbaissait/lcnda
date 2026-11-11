@@ -1,0 +1,429 @@
+fr ¦ sk ¦ nb
+=invité ¦ hosť|hostia|hostí ¦ gjest|gjester
+=descendant vivant ¦ žijúci potomok|žijúci potomkovia|žijúcich potomkov ¦ levende etterkommer|levende etterkommere
+=conjoint ¦ manžel(ka)|manželia|manželov ¦ ektefelle|ektefeller
+=fiche confidentielle ¦ dôverná karta|dôverné karty|dôverných kariet ¦ fortrolig oppføring|fortrolige oppføringer
+=invité trouvé ¦ nájdený hosť|nájdení hostia|nájdených hostí ¦ gjest funnet|gjester funnet
+=nouvel invité ¦ nový hosť|noví hostia|nových hostí ¦ ny gjest|nye gjester
+=invitée ¦ pozvaná|pozvané|pozvaných ¦ invitert|inviterte
+=invité déjà là ¦ hosť už je v zozname|hostia už sú v zozname|hostí už je v zozname ¦ gjest er allerede der|gjester er allerede der
+=colonne ¦ stĺpec|stĺpce|stĺpcov ¦ kolonne|kolonner
+=invité ajouté ¦ pridaný hosť|pridaní hostia|pridaných hostí ¦ gjest lagt til|gjester lagt til
+=invité complété ¦ doplnený hosť|doplnení hostia|doplnených hostí ¦ gjest fylt ut|gjester fylt ut
+=foyer ¦ domácnosť|domácnosti|domácností ¦ husstand|husstander
+=avec adresse ¦ s adresou|s adresou|s adresou ¦ med adresse|med adresse
+=avec courriel ¦ s e-mailom|s e-mailom|s e-mailom ¦ med e-post|med e-post
+=badge ¦ menovka|menovky|menoviek ¦ navneskilt|navneskilt
+=présent ¦ prítomný|prítomní|prítomných ¦ til stede|til stede
+=personne attendue ¦ očakávaná osoba|očakávané osoby|očakávaných osôb ¦ forventet person|forventede personer
+=table ¦ stôl|stoly|stolov ¦ bord|bord
+=personne placée ¦ usadená osoba|usadené osoby|usadených osôb ¦ plassert person|plasserte personer
+=photo ajoutée ¦ pridaná fotka|pridané fotky|pridaných fotiek ¦ bilde lagt til|bilder lagt til
+=personne présente ¦ prítomná osoba|prítomné osoby|prítomných osôb ¦ person til stede|personer til stede
+Sans réponse ¦ Bez odpovede ¦ Ikke svart
+👥 Invités ¦ 👥 Hostia ¦ 👥 Gjester
+✉️ Invitations ¦ ✉️ Pozvánky ¦ ✉️ Invitasjoner
+🏷 Badges ¦ 🏷 Menovky ¦ 🏷 Navneskilt
+🌳 Grand arbre ¦ 🌳 Veľký strom ¦ 🌳 Stort tre
+📅 Jour J ¦ 📅 Veľký deň ¦ 📅 Den store dagen
+Réunir les descendants d’un ancêtre : invités, invitations, badges, grand arbre, jour J. ¦ Zvolať potomkov predka: hostia, pozvánky, menovky, veľký strom, veľký deň. ¦ Samle etterkommerne etter en ane: gjester, invitasjoner, navneskilt, stort tre, den store dagen.
+＋ Nouvelle cousinade ¦ ＋ Nové rodinné stretnutie ¦ ＋ Nytt slektstreff
+Nouvelle cousinade ¦ Nové rodinné stretnutie ¦ Nytt slektstreff
+Lecture des cousinades… ¦ Načítavam rodinné stretnutia… ¦ Laster inn slektstreff…
+Aucune cousinade pour l’instant ¦ Zatiaľ žiadne rodinné stretnutie ¦ Ingen slektstreff ennå
+Choisis un ancêtre (ou un couple) : l’app trouve ses descendants vivants, branche par branche, et prépare la liste des invités. ¦ Vyber predka (alebo pár): aplikácia nájde jeho žijúcich potomkov, vetvu po vetve, a pripraví zoznam hostí. ¦ Velg en ane (eller et par): appen finner de levende etterkommerne, gren for gren, og lager gjestelisten.
+Chercher… (ex. Martin, 2026, Tulle) ¦ Hľadať… (napr. Martin, 2026, Tulle) ¦ Søk… (f.eks. Martin, 2026, Tulle)
+{n} oui ¦ {n} áno ¦ {n} ja
+{n} sans réponse ¦ {n} bez odpovede ¦ {n} uten svar
+Aucune cousinade ne correspond. ¦ Žiadne rodinné stretnutie nezodpovedá. ¦ Ingen slektstreff passer.
+Renommer la cousinade ¦ Premenovať rodinné stretnutie ¦ Gi slektstreffet nytt navn
+Cousinade renommée. ¦ Rodinné stretnutie premenované. ¦ Slektstreffet har fått nytt navn.
+Cousinade supprimée : « {name} » ¦ Rodinné stretnutie vymazané: „{name}“ ¦ Slektstreff slettet: «{name}»
+Modifier la cousinade ¦ Upraviť rodinné stretnutie ¦ Rediger slektstreffet
+L’ancêtre dont on réunit les descendants ¦ Predok, ktorého potomkov zvolávame ¦ Anen som etterkommerne samles rundt
+Avec son conjoint (le couple) — facultatif ¦ S manželom či manželkou (pár) — nepovinné ¦ Med ektefellen (paret) — valgfritt
+Seulement les enfants du couple. Vide : tous les enfants de l’ancêtre. ¦ Len deti páru. Prázdne: všetky deti predka. ¦ Bare parets barn. Tomt: alle barna til anen.
+Nom de la cousinade ¦ Názov rodinného stretnutia ¦ Navn på slektstreffet
+Personne de référence pour les liens de parenté ¦ Referenčná osoba pre príbuzenské vzťahy ¦ Referanseperson for slektskapet
+Chaque invité aura son lien avec elle (« cousin issu de germains de … »). Toi, le plus souvent. ¦ Každý hosť dostane svoj vzťah k nej („bratranec z druhého kolena …“). Najčastejšie ty. ¦ Hver gjest får sitt slektskap til denne personen («tremenning av …»). Som oftest deg.
+Inviter aussi les conjoints des descendants ¦ Pozvať aj manželov a manželky potomkov ¦ Inviter også etterkommernes ektefeller
+🔒 Les fiches confidentielles ne sont jamais montrées. Les adresses des vivants restent dans ce projet. ¦ 🔒 Dôverné karty sa nikdy nezobrazujú. Adresy žijúcich zostávajú v tomto projekte. ¦ 🔒 Fortrolige oppføringer vises aldri. Adressene til levende personer blir i dette prosjektet.
+Choisis l’ancêtre : l’app cherche ses descendants vivants. ¦ Vyber predka: aplikácia hľadá jeho žijúcich potomkov. ¦ Velg anen: appen ser etter de levende etterkommerne.
+Recherche des descendants vivants… ¦ Hľadám žijúcich potomkov… ¦ Ser etter levende etterkommere…
+{who} dans {branches}, et {spouses}. ¦ {who} vo vetvách: {branches}, a {spouses}. ¦ {who} i {branches}, og {spouses}.
+{who} dans {branches}. ¦ {who} vo vetvách: {branches}. ¦ {who} i {branches}.
+{n} sans décès noté, née il y a moins de 100 ans : marquée « vivant ? ». ¦ {n} bez zapísaného úmrtia, narodené pred menej ako 100 rokmi: označené „žije?“. ¦ {n} uten registrert dødsfall, født for under 100 år siden: merket «levende?».
+{n} laissées de côté. ¦ Vynechané: {n}. ¦ {n} utelatt.
+{n} laissée de côté. ¦ Vynechané: {n}. ¦ {n} utelatt.
+Choisis l’ancêtre dont on réunit les descendants. ¦ Vyber predka, ktorého potomkov zvolávame. ¦ Velg anen som etterkommerne skal samles rundt.
+Cousinade créée : {n}. ¦ Rodinné stretnutie vytvorené: {n}. ¦ Slektstreff opprettet: {n}.
+Cousinade enregistrée : {n}. ¦ Rodinné stretnutie uložené: {n}. ¦ Slektstreff lagret: {n}.
+Cousinade enregistrée. ¦ Rodinné stretnutie uložené. ¦ Slektstreffet er lagret.
+Lecture de la cousinade… ¦ Načítavam rodinné stretnutie… ¦ Laster inn slektstreffet…
+← Toutes les cousinades ¦ ← Všetky rodinné stretnutia ¦ ← Alle slektstreff
+↻ Chercher les nouveaux descendants ¦ ↻ Hľadať nových potomkov ¦ ↻ Søk etter nye etterkommere
+Chercher les nouveaux descendants ¦ Hľadať nových potomkov ¦ Søk etter nye etterkommere
+↗ Fiche de l’ancêtre ¦ ↗ Karta predka ¦ ↗ Anens oppføring
+{n} n’apparaissent plus : sa fiche est devenue confidentielle (ou a été supprimée). ¦ {n} sa už nezobrazujú: karta sa stala dôvernou (alebo bola vymazaná). ¦ {n} vises ikke lenger: oppføringen er blitt fortrolig (eller slettet).
+{n} n’apparaît plus : sa fiche est devenue confidentielle (ou a été supprimée). ¦ {n} sa už nezobrazuje: karta sa stala dôvernou (alebo bola vymazaná). ¦ {n} vises ikke lenger: oppføringen er blitt fortrolig (eller slettet).
+la personne de référence ¦ referenčná osoba ¦ referansepersonen
+Liens de parenté avec ¦ Príbuzenské vzťahy k ¦ Slektskap med
+＋ Ajouter un invité ¦ ＋ Pridať hosťa ¦ ＋ Legg til en gjest
+⤒ Importer une liste… ¦ ⤒ Importovať zoznam… ¦ ⤒ Importer en liste…
+Aucun invité pour l’instant ¦ Zatiaľ žiadni hostia ¦ Ingen gjester ennå
+Aucun descendant vivant trouvé. Ajoute les invités à la main, importe une liste, ou complète l’arbre puis « ↻ Chercher les nouveaux descendants ». ¦ Nenašiel sa žiadny žijúci potomok. Pridaj hostí ručne, importuj zoznam alebo doplň strom a potom „↻ Hľadať nových potomkov“. ¦ Ingen levende etterkommere funnet. Legg til gjester manuelt, importer en liste, eller fyll ut treet og bruk deretter «↻ Søk etter nye etterkommere».
+Chercher… (ex. Martin, Brive, végétarien) ¦ Hľadať… (napr. Martin, Brive, vegetarián) ¦ Søk… (f.eks. Martin, Brive, vegetarianer)
+Invités (cochés) ¦ Pozvaní (začiarknutí) ¦ Inviterte (avkrysset)
+Pas invités ¦ Nepozvaní ¦ Ikke inviterte
+Seulement « vivant ? » ¦ Len „žije?“ ¦ Bare «levende?»
+Par branche et par foyer ¦ Podľa vetvy a domácnosti ¦ Etter gren og husstand
+Par génération ¦ Podľa generácie ¦ Etter generasjon
+Par réponse ¦ Podľa odpovede ¦ Etter svar
+{n} · {inv} en tout ¦ {n} · celkom {inv} ¦ {n} · {inv} i alt
+Aucun invité ne correspond. ¦ Žiadny hosť nezodpovedá. ¦ Ingen gjester passer.
+Pas invité ¦ Nepozvaný ¦ Ikke invitert
+Invité (coché) ¦ Pozvaný (začiarknuté) ¦ Invitert (avkrysset)
+Régime ¦ Strava ¦ Kosthold
+Rien de noté sur son décès, née il y a moins de 100 ans : vérifie avant d’inviter ¦ Nič zapísané o úmrtí, narodená pred menej ako 100 rokmi: over si to pred pozvaním ¦ Ingenting notert om dødsfall, født for under 100 år siden: sjekk før du inviterer
+Sans fiche ¦ Bez karty ¦ Uten oppføring
+Pas d’adresse ¦ Bez adresy ¦ Ingen adresse
+Nombre de personnes ¦ Počet osôb ¦ Antall personer
+{name} est invitée. ¦ {name} je pozvaná. ¦ {name} er invitert.
+{name} est invité. ¦ {name} je pozvaný. ¦ {name} er invitert.
+{name} n’est plus invitée. ¦ {name} už nie je pozvaná. ¦ {name} er ikke lenger invitert.
+{name} n’est plus invité. ¦ {name} už nie je pozvaný. ¦ {name} er ikke lenger invitert.
+Réponse de {name} : {answer}. ¦ Odpoveď od {name}: {answer}. ¦ Svar fra {name}: {answer}.
+Inviter les {n} affichées ¦ Pozvať zobrazené ({n}) ¦ Inviter de {n} som vises
+{n} invitées. ¦ Pozvané: {n}. ¦ {n} invitert.
+{n} invitée. ¦ Pozvané: {n}. ¦ {n} invitert.
+Ne plus inviter les personnes affichées ¦ Už nepozývať zobrazené osoby ¦ Slutt å invitere personene som vises
+{n} retirées des invitations. ¦ Odobrané z pozvánok: {n}. ¦ {n} fjernet fra invitasjonene.
+{n} retirée des invitations. ¦ Odobrané z pozvánok: {n}. ¦ {n} fjernet fra invitasjonene.
+Tableau des invités (CSV)… ¦ Tabuľka hostí (CSV)… ¦ Gjestetabell (CSV)…
+Imprimer la liste des invités… ¦ Vytlačiť zoznam hostí… ¦ Skriv ut gjestelisten…
+Écrire un courriel ¦ Napísať e-mail ¦ Skriv en e-post
+Retirer de la liste ¦ Odobrať zo zoznamu ¦ Fjern fra listen
+🗑 Retirer de la liste ¦ 🗑 Odobrať zo zoznamu ¦ 🗑 Fjern fra listen
+{name} retirée de la liste. ¦ {name} odobraná zo zoznamu. ¦ {name} er fjernet fra listen.
+{name} retiré de la liste. ¦ {name} odobraný zo zoznamu. ¦ {name} er fjernet fra listen.
+Aucun nouveau descendant vivant : la liste est à jour. ¦ Žiadny nový žijúci potomok: zoznam je aktuálny. ¦ Ingen nye levende etterkommere: listen er oppdatert.
+{n} ajoutés. ¦ Pridané: {n}. ¦ {n} lagt til.
+{n} ajouté. ¦ Pridané: {n}. ¦ {n} lagt til.
+Son propre foyer ¦ Vlastná domácnosť ¦ Egen husstand
+Garder son foyer ¦ Ponechať domácnosť ¦ Behold husstanden
+🎉 COUSINADE · INVITÉ ¦ 🎉 RODINNÉ STRETNUTIE · HOSŤ ¦ 🎉 SLEKTSTREFF · GJEST
+🎉 COUSINADE ¦ 🎉 RODINNÉ STRETNUTIE ¦ 🎉 SLEKTSTREFF
+Nouvel invité ¦ Nový hosť ¦ Ny gjest
+Une fiche de ta généalogie (facultatif) ¦ Karta z tvojho rodokmeňa (nepovinné) ¦ En oppføring fra slektstreet ditt (valgfritt)
+Sinon, écris le prénom et le nom ci-dessous. ¦ Inak napíš meno a priezvisko nižšie. ¦ Ellers skriver du fornavn og etternavn nedenfor.
+Foyer (une invitation par foyer) ¦ Domácnosť (jedna pozvánka na domácnosť) ¦ Husstand (én invitasjon per husstand)
+12 rue des Écoles ¦ Školská 12 ¦ Skolegata 12
+Régime, allergies ¦ Strava, alergie ¦ Kosthold, allergier
+végétarien, sans gluten… ¦ vegetarián, bez lepku… ¦ vegetarianer, glutenfri…
+Mettre aussi l’adresse, le courriel et le téléphone dans le répertoire des vivants (sa fiche) ¦ Uložiť adresu, e-mail a telefón aj do adresára žijúcich (jeho karta) ¦ Legg også adresse, e-post og telefon i registeret over levende (personens oppføring)
+Décoché : seulement dans cette cousinade. ¦ Nezačiarknuté: len v tomto rodinnom stretnutí. ¦ Ikke avkrysset: bare i dette slektstreffet.
+Écris au moins un prénom ou un nom (ou choisis une fiche). ¦ Napíš aspoň meno alebo priezvisko (alebo vyber kartu). ¦ Skriv minst et fornavn eller et etternavn (eller velg en oppføring).
+Ce courriel n’a pas la bonne forme (exemple : prenom.nom@exemple.fr). ¦ Tento e-mail nemá správny tvar (príklad: meno.priezvisko@priklad.sk). ¦ E-postadressen har ikke riktig form (eksempel: fornavn.etternavn@eksempel.no).
+Invité ajouté. ¦ Hosť pridaný. ¦ Gjest lagt til.
+Enregistré, et aussi dans le répertoire des vivants. ¦ Uložené, aj v adresári žijúcich. ¦ Lagret, også i registeret over levende.
+Le lecteur de tableaux n’est pas chargé. ¦ Čítačka tabuliek nie je načítaná. ¦ Tabelleseren er ikke lastet inn.
+Importer une liste d’invités ¦ Importovať zoznam hostí ¦ Importer en gjesteliste
+Un tableau avec une ligne de titres : Prénom, Nom, Courriel, Téléphone, Adresse, Code postal, Ville, Réponse (oui / non / peut-être), Nombre, Régime, Note. ¦ Tabuľka s riadkom nadpisov: Meno, Priezvisko, E-mail, Telefón, Adresa, PSČ, Obec, Odpoveď (áno / nie / možno), Počet, Strava, Poznámka. ¦ En tabell med en overskriftsrad: Fornavn, Etternavn, E-post, Telefon, Adresse, Postnummer, Sted, Svar (ja / nei / kanskje), Antall, Kosthold, Notat.
+Je ne trouve ni prénom ni nom : la première ligne doit donner les titres des colonnes (Prénom, Nom, Courriel…). ¦ Nenachádzam meno ani priezvisko: prvý riadok musí obsahovať nadpisy stĺpcov (Meno, Priezvisko, E-mail…). ¦ Jeg finner verken fornavn eller etternavn: den første raden må gi kolonneoverskriftene (Fornavn, Etternavn, E-post…).
+{n} (coordonnées et réponse complétées) ¦ {n} (kontakty a odpoveď doplnené) ¦ {n} (kontaktopplysninger og svar fylt ut)
+{n} non reconnues : laissées de côté. ¦ Nerozpoznané: {n}, vynechané. ¦ {n} ikke gjenkjent: utelatt.
+{n} non reconnue : laissée de côté. ¦ Nerozpoznané: {n}, vynechané. ¦ {n} ikke gjenkjent: utelatt.
+⤓ Exporter le tableau des invités ¦ ⤓ Exportovať tabuľku hostí ¦ ⤓ Eksporter gjestetabellen
+Un fichier CSV (tableur) avec les invités, leur branche, leur lien de parenté et leur réponse. ¦ Súbor CSV (tabuľka) s hosťami, ich vetvou, príbuzenským vzťahom a odpoveďou. ¦ En CSV-fil (regneark) med gjestene, grenen deres, slektskapet og svaret.
+Avec les adresses, courriels et téléphones ¦ S adresami, e-mailmi a telefónmi ¦ Med adresser, e-postadresser og telefonnumre
+🔒 Ce sont des données de personnes vivantes : ne partage ce fichier qu’avec ceux qui organisent. ¦ 🔒 Sú to údaje žijúcich osôb: zdieľaj tento súbor len s organizátormi. ¦ 🔒 Dette er opplysninger om levende personer: del filen bare med dem som arrangerer.
+Seulement les invités cochés ¦ Len začiarknutí hostia ¦ Bare avkryssede gjester
+Lien avec l’ancêtre ¦ Vzťah k predkovi ¦ Slektskap med anen
+Lien avec la référence ¦ Vzťah k referenčnej osobe ¦ Slektskap med referansepersonen
+Tableau exporté, avec les coordonnées. ¦ Tabuľka exportovaná, s kontaktmi. ¦ Tabellen er eksportert, med kontaktopplysninger.
+Tableau exporté, sans les coordonnées. ¦ Tabuľka exportovaná, bez kontaktov. ¦ Tabellen er eksportert, uten kontaktopplysninger.
+Invités — {name} ¦ Hostia — {name} ¦ Gjester — {name}
+Liste des invités ¦ Zoznam hostí ¦ Gjesteliste
+Les invités cochés ¦ Začiarknutí hostia ¦ Avkryssede gjester
+Ceux qui viennent ¦ Tí, čo prídu ¦ De som kommer
+Avec les coordonnées ¦ S kontaktmi ¦ Med kontaktopplysninger
+Le texte de l’invitation ¦ Text pozvánky ¦ Teksten i invitasjonen
+Une invitation par foyer. Ces mots se remplacent tout seuls : ¦ Jedna pozvánka na domácnosť. Tieto slová sa nahradia samy: ¦ Én invitasjon per husstand. Disse ordene byttes ut automatisk:
+Répondre avant le ¦ Odpovedať do ¦ Svar innen
+Contact pour répondre ¦ Kontakt na odpoveď ¦ Kontakt for svar
+Objet du courriel ¦ Predmet e-mailu ¦ Emne for e-posten
+🖨 Imprimer les invitations… ¦ 🖨 Vytlačiť pozvánky… ¦ 🖨 Skriv ut invitasjonene…
+📝 Dans le traitement de texte ¦ 📝 V textovom editore ¦ 📝 I tekstbehandleren
+📁 Copie dans les médias ¦ 📁 Kópia v médiách ¦ 📁 Kopi i medier
+{n} à inviter ¦ Na pozvanie: {n} ¦ {n} å invitere
+✉️ Un courriel à tous (en copie cachée) ¦ ✉️ Jeden e-mail všetkým (v skrytej kópii) ¦ ✉️ Én e-post til alle (som blindkopi)
+Ta messagerie s’ouvre avec le texte prêt : rien n’est envoyé par l’app. ¦ Otvorí sa tvoj e-mailový program s pripraveným textom: aplikácia nič neodosiela. ¦ E-postprogrammet ditt åpnes med teksten klar: appen sender ingenting.
+✉️ Courriel prêt ¦ ✉️ E-mail pripravený ¦ ✉️ E-post klar
+Aucun invité coché : coche des invités dans l’onglet « 👥 Invités ». ¦ Žiadny hosť nie je začiarknutý: začiarkni hostí na karte „👥 Hostia“. ¦ Ingen gjester er avkrysset: kryss av gjester i fanen «👥 Gjester».
+Aucun foyer à inviter : coche des invités d’abord. ¦ Žiadna domácnosť na pozvanie: najprv začiarkni hostí. ¦ Ingen husstander å invitere: kryss av gjester først.
+L’adresse du foyer en haut à droite (enveloppe à fenêtre) ¦ Adresa domácnosti vpravo hore (obálka s okienkom) ¦ Husstandens adresse øverst til høyre (vinduskonvolutt)
+Le traitement de texte n’est pas chargé. ¦ Textový editor nie je načítaný. ¦ Tekstbehandleren er ikke lastet inn.
+Les faire-part ne sont pas chargés. ¦ Oznámenia nie sú načítané. ¦ Kunngjøringene er ikke lastet inn.
+Tous les descendants de {name} ¦ Všetci potomkovia osoby {name} ¦ Alle etterkommerne etter {name}
+Réponse avant le {date} ¦ Odpoveď do {date} ¦ Svar innen {date}
+Envoi vers les médias indisponible. ¦ Odoslanie do médií nie je k dispozícii. ¦ Det er ikke mulig å sende til medier.
+Une copie de l’invitation est rangée dans les médias. ¦ Kópia pozvánky je uložená v médiách. ¦ En kopi av invitasjonen er lagt i medier.
+Copie non rangée dans les médias : {err} ¦ Kópia nebola uložená do médií: {err} ¦ Kopien ble ikke lagt i medier: {err}
+Le lien écrit sous le nom ¦ Vzťah napísaný pod menom ¦ Slektskapet skrevet under navnet
+Avec l’ancêtre ¦ K predkovi ¦ Med anen
+Avec la référence ¦ K referenčnej osobe ¦ Med referansepersonen
+Pour qui ¦ Pre koho ¦ For hvem
+Invités cochés ¦ Začiarknutí hostia ¦ Avkryssede gjester
+Qui viennent ¦ Kto príde ¦ Som kommer
+Présents ¦ Prítomní ¦ Til stede
+Par page A4 ¦ Na stranu A4 ¦ Per A4-side
+Petite photo (si la fiche en a une) ¦ Malá fotka (ak ju karta má) ¦ Lite bilde (hvis oppføringen har et)
+QR code (nom, branche et lien, lu par un téléphone) ¦ QR kód (meno, vetva a vzťah, prečíta ho telefón) ¦ QR-kode (navn, gren og slektskap, leses av en telefon)
+Chaque branche a sa couleur (onglet « 📊 Chiffres » pour la changer). ¦ Každá vetva má svoju farbu (zmeníš ju na karte „📊 Čísla“). ¦ Hver gren har sin farge (fanen «📊 Tall» for å endre den).
+Personne à qui faire un badge. ¦ Nie je nikto, komu urobiť menovku. ¦ Ingen å lage navneskilt til.
+L’arbre décoratif n’est pas chargé. ¦ Dekoratívny strom nie je načítaný. ¦ Det dekorative treet er ikke lastet inn.
+Toute la descendance de {name}, en grand, une couleur par branche, à afficher le jour de la cousinade. Le dessin s’ouvre ensuite pour tout retoucher, puis « ⤓ Exporter » (PDF pour l’imprimeur, avec fond perdu et traits de coupe, PNG, SVG…). ¦ Celý rozrod osoby {name}, vo veľkom, jedna farba na vetvu, na vyvesenie v deň rodinného stretnutia. Kresba sa potom otvorí na úpravy, potom „⤓ Exportovať“ (PDF pre tlačiareň, so spadávkou a orezovými značkami, PNG, SVG…). ¦ Alle etterkommerne etter {name}, i stort format, én farge per gren, til å henge opp på dagen for slektstreffet. Tegningen åpnes deretter så du kan rette alt, og så «⤓ Eksporter» (PDF til trykkeriet, med utfallende kant og skjæremerker, PNG, SVG…).
+l’ancêtre ¦ predok ¦ anen
+Les conjoints sous chaque nom ¦ Manželia pod každým menom ¦ Ektefeller under hvert navn
+Une place pour coller les photos du jour (à côté des vivants) ¦ Miesto na nalepenie fotiek z toho dňa (vedľa žijúcich) ¦ En plass til å lime inn dagens bilder (ved siden av de levende)
+🌳 Fabriquer le grand arbre ¦ 🌳 Vytvoriť veľký strom ¦ 🌳 Lag det store treet
+Fabrication du grand arbre… ¦ Vytváram veľký strom… ¦ Lager det store treet…
+Aucune descendance pour cet ancêtre. ¦ Tento predok nemá žiadnych potomkov. ¦ Ingen etterkommere etter denne anen.
+Cet ancêtre est confidentiel. ¦ Tento predok je dôverný. ¦ Denne anen er fortrolig.
+Photos du jour ¦ Fotky z toho dňa ¦ Dagens bilder
+✅ Présence ¦ ✅ Prítomnosť ¦ ✅ Oppmøte
+{here} sur {n} ¦ {here} z {n} ¦ {here} av {n}
+🖨 Imprimer la liste de présence… ¦ 🖨 Vytlačiť prezenčnú listinu… ¦ 🖨 Skriv ut oppmøtelisten…
+Personne n’a encore dit oui : les réponses se notent dans « 👥 Invités ». ¦ Zatiaľ nikto nepovedal áno: odpovede sa zapisujú v „👥 Hostia“. ¦ Ingen har sagt ja ennå: svarene noteres under «👥 Gjester».
+{name} est là. ¦ {name} je tu. ¦ {name} er her.
+{name} n’est plus notée présente. ¦ {name} už nie je zapísaná ako prítomná. ¦ {name} er ikke lenger notert som til stede.
+{name} n’est plus noté présent. ¦ {name} už nie je zapísaný ako prítomný. ¦ {name} er ikke lenger notert som til stede.
+Présence — {name} ¦ Prítomnosť — {name} ¦ Oppmøte — {name}
+{name} — présence ¦ {name} — prítomnosť ¦ {name} — oppmøte
+Liste de présence ¦ Prezenčná listina ¦ Oppmøteliste
+Places par table ¦ Miest pri stole ¦ Plasser per bord
+Compter aussi les « peut-être » ¦ Počítať aj „možno“ ¦ Tell også «kanskje»
+Les petites branches partagent une table ¦ Malé vetvy zdieľajú stôl ¦ Små grener deler bord
+✨ Faire le plan par branche ¦ ✨ Urobiť zasadací poriadok podľa vetiev ¦ ✨ Lag bordplanen etter gren
+🖨 Imprimer le plan… ¦ 🖨 Vytlačiť zasadací poriadok… ¦ 🖨 Skriv ut bordplanen…
+Un foyer n’est jamais séparé. Change la table d’une personne avec sa case ; ↶ Annuler défait le plan. ¦ Domácnosť sa nikdy nerozdeľuje. Stôl osoby zmeníš v jej políčku; ↶ Späť zruší zasadací poriadok. ¦ En husstand blir aldri delt. Bytt bord for en person i feltet; ↶ Angre fjerner bordplanen.
+Pas encore de plan de table : note les réponses, puis « ✨ Faire le plan par branche ». ¦ Zatiaľ žiadny zasadací poriadok: zapíš odpovede, potom „✨ Urobiť zasadací poriadok podľa vetiev“. ¦ Ingen bordplan ennå: noter svarene, deretter «✨ Lag bordplanen etter gren».
+{name} va à la table {no}. ¦ {name} ide k stolu {no}. ¦ {name} sitter ved bord {no}.
+Personne ne vient encore : note les réponses « Oui » d’abord. ¦ Zatiaľ nikto nepríde: najprv zapíš odpovede „Áno“. ¦ Ingen kommer ennå: noter «Ja»-svarene først.
+＋ Ajouter des photos… ¦ ＋ Pridať fotky… ¦ ＋ Legg til bilder…
+Retirer de l’album ¦ Odobrať z albumu ¦ Fjern fra albumet
+L’album est vide ¦ Album je prázdny ¦ Albumet er tomt
+Les photos du jour : importe-les depuis l’ordinateur ou choisis-les dans les médias. ¦ Fotky z toho dňa: importuj ich z počítača alebo ich vyber v médiách. ¦ Dagens bilder: importer dem fra datamaskinen eller velg dem i medier.
+＋ Ajouter des photos ¦ ＋ Pridať fotky ¦ ＋ Legg til bilder
+Les photos de la cousinade ¦ Fotky z rodinného stretnutia ¦ Bildene fra slektstreffet
+Ajouter à l’album ¦ Pridať do albumu ¦ Legg til i albumet
+{n} à l’album. ¦ Do albumu: {n}. ¦ {n} til albumet.
+Photo retirée de l’album (elle reste dans les médias). ¦ Fotka odobraná z albumu (zostáva v médiách). ¦ Bildet er fjernet fra albumet (det blir i medier).
+invités ¦ hostia ¦ gjester
+oui ¦ áno ¦ ja
+peut-être ¦ možno ¦ kanskje
+non ¦ nie ¦ nei
+sans réponse ¦ bez odpovede ¦ uten svar
+personnes attendues ¦ očakávané osoby ¦ forventede personer
+Par branche ¦ Podľa vetvy ¦ Etter gren
+Invités ¦ Hostia ¦ Gjester
+Réponses ¦ Odpovede ¦ Svar
+Couleur de la branche {name} ¦ Farba vetvy {name} ¦ Farge for grenen {name}
+{yes} oui, {maybe} peut-être, {no} non, {wait} sans réponse ¦ {yes} áno, {maybe} možno, {no} nie, {wait} bez odpovede ¦ {yes} ja, {maybe} kanskje, {no} nei, {wait} uten svar
+Régimes et allergies (de ceux qui viennent) ¦ Strava a alergie (tých, čo prídu) ¦ Kosthold og allergier (for dem som kommer)
+Le jour J : {n}. ¦ Vo veľký deň: {n}. ¦ På den store dagen: {n}.
+Couleur de la branche enregistrée. ¦ Farba vetvy uložená. ¦ Grenens farge er lagret.
+Organiser une cousinade… ¦ Usporiadať rodinné stretnutie… ¦ Arranger et slektstreff…
+Descendants de {name} · {n} ¦ Potomkovia osoby {name} · {n} ¦ Etterkommere etter {name} · {n}
+=passage dans les médias ¦ zmienka v médiách|zmienky v médiách|zmienok v médiách ¦ medieomtale|medieomtaler
+passages dans les médias ¦ zmienky v médiách ¦ medieomtaler
+1980 et après ¦ 1980 a neskôr ¦ 1980 og senere
+avant 1900 ¦ pred rokom 1900 ¦ før 1900
+Ajoute un fichier MP3, M4A, WAV, AIFF ou OGG sur une fiche, une battue, une enquête… (ou glisse-le ici) et il apparaîtra ici. ¦ Pridaj súbor MP3, M4A, WAV, AIFF alebo OGG ku karte, hromadnému pátraniu, pátraniu… (alebo ho sem pretiahni) a objaví sa tu. ¦ Legg til en MP3-, M4A-, WAV-, AIFF- eller OGG-fil på en oppføring, en leteaksjon, en undersøkelse… (eller slipp den her), så vises den her.
+Ajoute un fichier MP4, MOV ou WEBM sur une fiche, une battue, une enquête… (ou glisse-le ici) et elle apparaîtra ici. ¦ Pridaj súbor MP4, MOV alebo WEBM ku karte, hromadnému pátraniu, pátraniu… (alebo ho sem pretiahni) a objaví sa tu. ¦ Legg til en MP4-, MOV- eller WEBM-fil på en oppføring, en leteaksjon, en undersøkelse… (eller slipp den her), så vises den her.
+Ajoute une carte : l’image de la vue, celle du dos, puis le lieu montré pour la retrouver sur la Carte. ¦ Pridaj pohľadnicu: obrázok pohľadu, zadnú stranu a potom zobrazené miesto, aby si ju našiel na Mape. ¦ Legg til et postkort: bildet av utsikten, baksiden og deretter stedet som vises, så du finner det igjen på Kartet.
+Ajoute-les sur la fiche d’une personne (bloc 🛂 Passeports) ou dans ✨ Trésors → Les passeports, où l’on peut aussi importer un relevé. ¦ Pridaj ich na kartu osoby (blok 🛂 Pasy) alebo do ✨ Poklady → Pasy, kde sa dá aj importovať výpis. ¦ Legg dem til på en persons oppføring (blokken 🛂 Pass) eller i ✨ Skatter → Passene, der du også kan importere en registrering.
+Allume-en une dans ✨ Trésors → Allumer une bougie. ¦ Zapáľ jednu v ✨ Poklady → Zapáliť sviečku. ¦ Tenn et i ✨ Skatter → Tenn et lys.
+Amérique du Nord ¦ Severná Amerika ¦ Nord-Amerika
+Assembler et retoucher des sons ¦ Skladať a upravovať zvuky ¦ Sette sammen og rette lyder
+Aucun acte pour l’instant ¦ Zatiaľ žiadny záznam ¦ Ingen dokumenter ennå
+Aucun dossier de preuve ¦ Žiadna zložka dôkazov ¦ Ingen bevismappe
+Aucun lieu dans l’arbre pour l’instant ¦ Zatiaľ žiadne miesto v strome ¦ Ingen steder i treet ennå
+Aucun livret pour l’instant ¦ Zatiaľ žiadna brožúra ¦ Ingen hefter ennå
+Aucun nom indexé pour l’instant ¦ Zatiaľ žiadne zaindexované meno ¦ Ingen indekserte navn ennå
+Aucun partage pour l’instant ¦ Zatiaľ žiadne zdieľanie ¦ Ingen deling ennå
+Aucun passage dans les médias pour l’instant ¦ Zatiaľ žiadna zmienka v médiách ¦ Ingen medieomtale ennå
+Aucun passeport pour l’instant ¦ Zatiaľ žiadny pas ¦ Ingen pass ennå
+Aucun projet de montage pour l’instant ¦ Zatiaľ žiadny projekt strihu ¦ Ingen redigeringsprosjekter ennå
+Aucun questionnaire pour l’instant ¦ Zatiaľ žiadny dotazník ¦ Ingen spørreskjemaer ennå
+Aucun rattachement pour l’instant ¦ Zatiaľ žiadna príslušnosť k farnosti ¦ Ingen sognetilhørighet ennå
+Aucun recueil pour l’instant ¦ Zatiaľ žiadny zborník ¦ Ingen samlinger ennå
+Aucun son pour l’instant ¦ Zatiaľ žiadny zvuk ¦ Ingen lyder ennå
+Aucune annonce pour l’instant ¦ Zatiaľ žiadny inzerát ¦ Ingen annonser ennå
+Aucune bougie au registre ¦ Žiadna sviečka v knihe ¦ Ingen lys i registeret
+Aucune carte d’électeur pour l’instant ¦ Zatiaľ žiadny volebný preukaz ¦ Ingen valgkort ennå
+Aucune carte postale pour l’instant ¦ Zatiaľ žiadna pohľadnica ¦ Ingen postkort ennå
+Aucune création ni carrière pour l’instant ¦ Zatiaľ žiadna tvorba ani kariéra ¦ Ingen verk eller karrierer ennå
+Aucune demande : ouvre une photo et clique « 📤 Demander qui c’est ». ¦ Žiadna žiadosť: otvor fotku a klikni na „📤 Spýtať sa, kto to je“. ¦ Ingen forespørsler: åpne et bilde og klikk på «📤 Spør hvem det er».
+Aucune demande pour l’instant ¦ Zatiaľ žiadna žiadosť ¦ Ingen forespørsler ennå
+Aucune gazette pour l’instant ¦ Zatiaľ žiadny spravodaj ¦ Ingen blad ennå
+Aucune image de lieu pour l’instant ¦ Zatiaľ žiadny obrázok miesta ¦ Ingen stedsbilder ennå
+Aucune langue notée pour l’instant ¦ Zatiaľ nie je zapísaný žiadny jazyk ¦ Ingen språk notert ennå
+Aucune lettre pour l’instant ¦ Zatiaľ žiadny list ¦ Ingen brev ennå
+Aucune maison pour l’instant : « ＋ Nouvelle maison ». ¦ Zatiaľ žiadny dom: „＋ Nový dom“. ¦ Ingen hus ennå: «＋ Nytt hus».
+Aucune personne n’a encore de profil ¦ Zatiaľ nikto nemá profil ¦ Ingen har en profil ennå
+Aucune règle pour l’instant ¦ Zatiaľ žiadne pravidlá ¦ Ingen regler ennå
+Aucune récompense pour l’instant ¦ Zatiaľ žiadne ocenenie ¦ Ingen utmerkelser ennå
+Aucune transcription d’acte pour l’instant ¦ Zatiaľ žiadny prepis záznamu ¦ Ingen avskrifter av dokumenter ennå
+Aucune vidéo pour l’instant ¦ Zatiaľ žiadne video ¦ Ingen videoer ennå
+Auteur, réalisation ¦ Autor, réžia ¦ Forfatter, regi
+Bravo ! L’assistant peut chercher plus loin (jusqu’à 12 générations). ¦ Výborne! Asistent môže hľadať ďalej (až 12 generácií). ¦ Bra jobbet! Assistenten kan søke lenger tilbake (opptil 12 generasjoner).
+Carte du droit de vote ¦ Mapa volebného práva ¦ Kart over stemmeretten
+Cette liste est cachée ¦ Tento zoznam je skrytý ¦ Denne listen er skjult
+Ce que tu notes ici reprend les actes : ce n’est pas un conseil juridique. ¦ Čo tu zapíšeš, vychádza zo záznamov: nie je to právna rada. ¦ Det du noterer her, bygger på dokumentene: det er ikke juridisk rådgivning.
+Ce sont des informations privées : montre-les d’abord dans les Réglages. ¦ Sú to súkromné informácie: najprv ich zobraz v Nastaveniach. ¦ Dette er private opplysninger: vis dem først i Innstillinger.
+Chercher un nom, une commune… ¦ Hľadať meno, obec… ¦ Søk etter et navn, et sted…
+Chercher un projet… (nom, photo, détails) ¦ Hľadať projekt… (názov, fotka, podrobnosti) ¦ Søk etter et prosjekt… (navn, bilde, detaljer)
+Chercher un questionnaire… (ex. Anne, guerre, Marie) ¦ Hľadať dotazník… (napr. Anne, vojna, Marie) ¦ Søk etter et spørreskjema… (f.eks. Anne, krig, Marie)
+Chercher une carte… (ex. Bretagne, 1978, Lucie) ¦ Hľadať mapu… (napr. Bretónsko, 1978, Lucie) ¦ Søk etter et kart… (f.eks. Bretagne, 1978, Lucie)
+Chercher une maison… (nom, lieu, époque, personne, recensement) ¦ Hľadať dom… (názov, miesto, obdobie, osoba, sčítanie obyvateľov) ¦ Søk etter et hus… (navn, sted, periode, person, folketelling)
+Chercher une personne… (ex. Martin, maire, sportif) ¦ Hľadať osobu… (napr. Martin, starosta, športovec) ¦ Søk etter en person… (f.eks. Martin, ordfører, idrettsutøver)
+Chercher… (commune, cote, année, service d’archives) ¦ Hľadať… (obec, signatúra, rok, archív) ¦ Søk… (sted, signatur, år, arkiv)
+Chercher… (commune, section, numéro, lieu-dit, propriétaire) ¦ Hľadať… (obec, oddiel, číslo, miestny názov, vlastník) ¦ Søk… (sted, seksjon, nummer, stedsnavn, eier)
+Chercher… (personne, bien, notaire, lieu, cote) ¦ Hľadať… (osoba, majetok, notár, miesto, signatúra) ¦ Søk… (person, eiendom, notar, sted, signatur)
+Chercher… (titre, auteur, lieu, nom cité, ce qu’on voit, notes) ¦ Hľadať… (názov, autor, miesto, uvedené meno, čo je vidieť, poznámky) ¦ Søk… (tittel, forfatter, sted, nevnt navn, hva man ser, notater)
+Chercher… (titre, lieu) ¦ Hľadať… (názov, miesto) ¦ Søk… (tittel, sted)
+Chercher… (titre, personne, lieu, année) ¦ Hľadať… (názov, osoba, miesto, rok) ¦ Søk… (tittel, person, sted, år)
+Chercher… (titre, texte, personne, lieu, cote) ¦ Hľadať… (názov, text, osoba, miesto, signatúra) ¦ Søk… (tittel, tekst, person, sted, signatur)
+Choisir la personne, puis la sorte de fiche ¦ Vybrať osobu, potom druh karty ¦ Velg personen, deretter typen oppføring
+Choisir les colonnes (« ⚙️ Champs affichés », onglet « La liste ») ¦ Vybrať stĺpce („⚙️ Zobrazené polia“, karta „Zoznam“) ¦ Velg kolonnene («⚙️ Viste felt», fanen «Listen»)
+Choisir une personne, puis cocher ce qu’elle était (artiste, sportif, élu…) ¦ Vybrať osobu, potom začiarknuť, čím bola (umelec, športovec, volený zástupca…) ¦ Velg en person, og kryss deretter av for hva personen var (kunstner, idrettsutøver, folkevalgt…)
+Choisis la personne de départ (Sosa 1) et ajoute ses parents. ¦ Vyber východiskovú osobu (Sosa 1) a pridaj jej rodičov. ¦ Velg startpersonen (Sosa 1) og legg til foreldrene.
+Choisis la personne, puis la sorte de fiche : elle se range sur sa page et apparaît ici. ¦ Vyber osobu, potom druh karty: uloží sa na jej stránku a objaví sa tu. ¦ Velg personen, deretter typen oppføring: den legges på personens side og vises her.
+Choisis l’image d’un acte (baptême, mariage, sépulture…) et transcris-le à côté. ¦ Vyber obrázok záznamu (krst, sobáš, pohreb…) a prepíš ho vedľa. ¦ Velg bildet av et dokument (dåp, vielse, begravelse…) og skriv det av ved siden av.
+Clique sur un pays pour voir ses dates (et les cantons suisses, les provinces canadiennes…). ¦ Klikni na krajinu a uvidíš jej dátumy (aj švajčiarske kantóny, kanadské provincie…). ¦ Klikk på et land for å se datoene (og sveitsiske kantoner, kanadiske provinser…).
+Clubs et équipes, résultats, records, saisons. ¦ Kluby a tímy, výsledky, rekordy, sezóny. ¦ Klubber og lag, resultater, rekorder, sesonger.
+Commence par « ＋ Numéro », « ＋ Livre » ou « ＋ Documentaire », en haut de la page. ¦ Začni tlačidlom „＋ Číslo“, „＋ Kniha“ alebo „＋ Dokument“ hore na stránke. ¦ Begynn med «＋ Nummer», «＋ Bok» eller «＋ Dokumentar» øverst på siden.
+Commence-en un : il apparaîtra ici, avec les autres, pour le rouvrir plus tard. ¦ Začni nejaký: objaví sa tu s ostatnými, aby si ho mohol neskôr znova otvoriť. ¦ Begynn på et: det vises her sammen med de andre, så du kan åpne det igjen senere.
+Commune, section, numéro ¦ Obec, oddiel, číslo ¦ Sted, seksjon, nummer
+Crée d’abord ton type (« ＋ Créer mon propre type… » dans « ＋ Nouvelle œuvre »), puis ses fiches. ¦ Najprv vytvor svoj typ („＋ Vytvoriť vlastný typ…“ v „＋ Nové dielo“), potom jeho karty. ¦ Opprett først typen din («＋ Opprett min egen type…» i «＋ Nytt verk»), deretter oppføringene.
+Crée le recueil (registre, liste, cahier…), puis ajoute tes photos : chaque photo devient une page. ¦ Vytvor zborník (matrika, zoznam, zošit…), potom pridaj fotky: každá fotka sa stane stranou. ¦ Opprett samlingen (protokoll, liste, hefte…), og legg så til bildene dine: hvert bilde blir en side.
+Crée une carte, puis ajoute des photos de l’app ou importe-les : celles qui ont des coordonnées GPS se placent toutes seules. ¦ Vytvor mapu, potom pridaj fotky z aplikácie alebo ich importuj: tie so súradnicami GPS sa umiestnia samy. ¦ Opprett et kart, og legg så til bilder fra appen eller importer dem: de med GPS-koordinater plasserer seg selv.
+Créer ce jour-là ¦ Vytvoriť v tento deň ¦ Opprett den dagen
+Date (récent d’abord) ¦ Dátum (najnovšie najprv) ¦ Dato (nyeste først)
+Date de l’acte ¦ Dátum záznamu ¦ Dokumentets dato
+Date pour les femmes ¦ Dátum pre ženy ¦ Dato for kvinner
+Date pour les hommes ¦ Dátum pre mužov ¦ Dato for menn
+Décennie ¦ Desaťročie ¦ Tiår
+Siècle ¦ Storočie ¦ Århundre
+Précédent ¦ Predchádzajúci ¦ Forrige
+Elles s’ajoutent sur la fiche d’une personne (bloc Cartes d’électeur). ¦ Pridávajú sa na kartu osoby (blok Volebné preukazy). ¦ De legges til på en persons oppføring (blokken Valgkort).
+Ensuite par ¦ Potom podľa ¦ Deretter etter
+Grouper par catégorie ¦ Zoskupiť podľa kategórie ¦ Grupper etter kategori
+Héritages et successions ¦ Dedičstvá a pozostalosti ¦ Arv og dødsbo
+Il faut des dates dans l’arbre : une naissance, un mariage, un décès… ¦ Strom potrebuje dátumy: narodenie, sobáš, úmrtie… ¦ Treet trenger datoer: en fødsel, en vielse, et dødsfall…
+Index des noms ¦ Register mien ¦ Navneregister
+Inventions et leurs brevets, découvertes (espèce, comète, site…), publications scientifiques. ¦ Vynálezy a ich patenty, objavy (druh, kométa, nálezisko…), vedecké publikácie. ¦ Oppfinnelser og patentene deres, oppdagelser (art, komet, funnsted…), vitenskapelige publikasjoner.
+La liste « Palmarès » ¦ Zoznam „Ocenenia“ ¦ Listen «Priser»
+La liste « Revue de presse » ¦ Zoznam „Prehľad tlače“ ¦ Listen «Presseklipp»
+Palmarès ¦ Ocenenia ¦ Priser
+🏆 Palmarès ¦ 🏆 Ocenenia ¦ 🏆 Priser
+Langue des actes et des documents ¦ Jazyk záznamov a dokumentov ¦ Språk i dokumenter og papirer
+Le cercle autour des ancêtres ¦ Kruh okolo predkov ¦ Sirkelen rundt anene
+Le plus de fiches ¦ Najviac kariet ¦ Flest oppføringer
+Le plus de photos ¦ Najviac fotiek ¦ Flest bilder
+Le plus de profils ¦ Najviac profilov ¦ Flest profiler
+Les autres listes ¦ Ostatné zoznamy ¦ De andre listene
+Les lieux viennent des naissances, mariages et décès de l’arbre. ¦ Miesta pochádzajú z narodení, sobášov a úmrtí v strome. ¦ Stedene kommer fra fødsler, vielser og dødsfall i treet.
+Les plus grandes ¦ Najväčšie ¦ Største først
+Lettres aux descendants ¦ Listy potomkom ¦ Brev til etterkommerne
+L’ordre des outils, et ceux qu’on montre ¦ Poradie nástrojov a ktoré sa zobrazujú ¦ Rekkefølgen på verktøyene og hvilke som vises
+Marquer dans les transcriptions ¦ Označiť v prepisoch ¦ Marker i avskriftene
+Mes annonces et courriers ¦ Moje inzeráty a listy ¦ Mine annonser og brev
+Mettre ce qui est affiché dans un projet de l’Atelier ¦ Vložiť zobrazené do projektu Dielne ¦ Legg det som vises, i et prosjekt i Verkstedet
+Modifiés récemment ¦ Nedávno upravené ¦ Nylig redigert
+Monter des vidéos : morceaux, titres, fondus, incrustations, musiques ¦ Strihať videá: klipy, titulky, prelínačky, prekryvy, hudba ¦ Rediger videoer: klipp, titler, overtoninger, overlegg, musikk
+Morceaux, albums et disques, enregistrements, concerts, tournées, œuvres de musique savante. ¦ Skladby, albumy a platne, nahrávky, koncerty, turné, diela vážnej hudby. ¦ Låter, album og plater, innspillinger, konserter, turneer, klassiske verk.
+Note de quelle paroisse dépendait chaque hameau ou village avant la Révolution. ¦ Zapíš, ku ktorej farnosti patrila každá osada alebo dedina pred Francúzskou revolúciou. ¦ Noter hvilket sogn hver grend eller bygd hørte til før den franske revolusjonen.
+Numéro, tome, épisode ¦ Číslo, zväzok, diel ¦ Nummer, bind, episode
+Ou « 📷 Lire une capture des règles » pour les remplir toutes seules. ¦ Alebo „📷 Prečítať snímku pravidiel“, aby sa vyplnili samy. ¦ Eller «📷 Les et skjermbilde av reglene» for å fylle dem ut automatisk.
+Où j’en suis ¦ Kde som ¦ Hvor jeg er
+Par commune ¦ Podľa obce ¦ Etter sted
+Par date de l’œuvre ¦ Podľa dátumu diela ¦ Etter verkets dato
+Par date, récentes d’abord ¦ Podľa dátumu, najnovšie najprv ¦ Etter dato, nyeste først
+Par personne ¦ Podľa osoby ¦ Etter person
+Par période ¦ Podľa obdobia ¦ Etter periode
+Partage une branche dans ✨ Trésors → Partager une branche (pour un temps). ¦ Zdieľaj vetvu v ✨ Poklady → Zdieľať vetvu (na určitý čas). ¦ Del en gren i ✨ Skatter → Del en gren (for en tid).
+Pas encore de lignée ¦ Zatiaľ žiadna línia ¦ Ingen slektslinje ennå
+Passeport des lieux ¦ Pas miest ¦ Stedspass
+Peintures, dessins, gravures, sculptures et fontes, photographies, affiches, expositions… ¦ Obrazy, kresby, rytiny, sochy a odliatky, fotografie, plagáty, výstavy… ¦ Malerier, tegninger, stikk, skulpturer og avstøpninger, fotografier, plakater, utstillinger…
+Plus anciens ¦ Najstaršie ¦ Eldste
+Priorité d’achat ¦ Priorita nákupu ¦ Kjøpsprioritet
+Précisions ¦ Upresnenia ¦ Detaljer
+Ranger les fiches par sorte, avec un intertitre pour chacune ¦ Zoradiť karty podľa druhu, s medzititulkom pre každý ¦ Sorter oppføringene etter type, med en mellomtittel for hver
+Ranger par sorte ¦ Zoradiť podľa druhu ¦ Sorter etter type
+Revenir sur un son en cours de travail ¦ Vrátiť sa k zvuku, na ktorom pracuješ ¦ Gå tilbake til en lyd du jobber med
+Revue, collection, série ¦ Časopis, edícia, séria ¦ Tidsskrift, samling, serie
+＋ Revue, collection, série ¦ ＋ Časopis, edícia, séria ¦ ＋ Tidsskrift, samling, serie
+Rien ne manque sur 5 générations ¦ V 5 generáciách nič nechýba ¦ Ingenting mangler over 5 generasjoner
+Règles des journaux ¦ Pravidlá novín ¦ Avisenes regler
+Région, puis pays ¦ Región, potom krajina ¦ Region, deretter land
+Pays (A → Z) ¦ Krajina (A → Z) ¦ Land (A → Å)
+Tous les pays, dans l’ordre que tu veux ¦ Všetky krajiny, v poradí, aké chceš ¦ Alle land, i den rekkefølgen du vil
+Un fichier .ics à ouvrir dans ton calendrier (Apple, Google, Outlook…) ¦ Súbor .ics na otvorenie v tvojom kalendári (Apple, Google, Outlook…) ¦ En .ics-fil som du åpner i kalenderen din (Apple, Google, Outlook…)
+Un son de la base ou de l’ordinateur, à travailler et à garder comme projet ¦ Zvuk z databázy alebo z počítača, na úpravu a uloženie ako projekt ¦ En lyd fra databasen eller datamaskinen, som du kan jobbe med og lagre som prosjekt
+Une fiche rassemble texte, images, personnes, cartes et listes sur un sujet. ¦ Poznámková karta zhromažďuje text, obrázky, osoby, mapy a zoznamy k jednej téme. ¦ Et notatkort samler tekst, bilder, personer, kart og lister om et emne.
+Voir qui pouvait voter en ¦ Zobraziť, kto mohol voliť v roku ¦ Se hvem som kunne stemme i
+pas de date ¦ bez dátumu ¦ ingen dato
+Écart ¦ Rozdiel ¦ Forskjell
+↔ Écart ¦ ↔ Rozdiel ¦ ↔ Forskjell
+Écart hommes / femmes ¦ Rozdiel muži / ženy ¦ Forskjell menn / kvinner
+Écoles, études et apprentissages, diplômes, établissements. ¦ Školy, štúdium a učňovská príprava, diplomy, inštitúcie. ¦ Skoler, studier og læretid, vitnemål, læresteder.
+Écris ton annonce et vois tout de suite combien elle coûtera d’après les règles du journal. ¦ Napíš svoj inzerát a hneď uvidíš, koľko bude stáť podľa pravidiel novín. ¦ Skriv annonsen din og se med en gang hva den vil koste etter avisens regler.
+Écris ton annonce, vois tout de suite combien elle coûtera d’après les règles du journal, et suis ce qu’elle devient. ¦ Napíš svoj inzerát, hneď uvidíš, koľko bude stáť podľa pravidiel novín, a sleduj, čo sa s ním deje. ¦ Skriv annonsen din, se med en gang hva den vil koste etter avisens regler, og følg med på hva som skjer med den.
+Écris-en une dans ✨ Trésors → Lettres aux descendants : « pour les 18 ans de Léa », « en 2050 ». ¦ Napíš nejaký v ✨ Poklady → Listy potomkom: „k 18. narodeninám Léy“, „v roku 2050“. ¦ Skriv et i ✨ Skatter → Brev til etterkommerne: «til Léas 18-årsdag», «i 2050».
+↗ Ouvrir dans Recherche ¦ ↗ Otvoriť vo Výskume ¦ ↗ Åpne i Forskning
+⚙️ Ouvrir les Réglages ¦ ⚙️ Otvoriť Nastavenia ¦ ⚙️ Åpne Innstillinger
+⚙️ Ranger les outils ¦ ⚙️ Usporiadať nástroje ¦ ⚙️ Ordne verktøyene
+✅ Tâches de l’Atelier ¦ ✅ Úlohy Dielne ¦ ✅ Verkstedets oppgaver
+✉️ Courriers envoyés ¦ ✉️ Odoslané listy ¦ ✉️ Sendte brev
+✉️ Ouvrir les lettres dans ✨ Trésors ¦ ✉️ Otvoriť listy v ✨ Pokladoch ¦ ✉️ Åpne brevene i ✨ Skatter
+✝️ Décès, sépultures ¦ ✝️ Úmrtia, pohreby ¦ ✝️ Dødsfall, begravelser
+👶 Naissances, baptêmes ¦ 👶 Narodenia, krsty ¦ 👶 Fødsler, dåp
+❓ Ce qu’on peut récupérer (licences) ¦ ❓ Čo sa dá prevziať (licencie) ¦ ❓ Hva man kan hente (lisenser)
+❓ Comment noter un héritage ? ¦ ❓ Ako zapísať dedičstvo? ¦ ❓ Hvordan noterer jeg en arv?
+⤒ Importer des relevés ¦ ⤒ Importovať výpisy ¦ ⤒ Importer registreringer
+⤒ Importer les réponses ¦ ⤒ Importovať odpovede ¦ ⤒ Importer svarene
+⤓ Exporter les anniversaires (.ics) ¦ ⤓ Exportovať výročia (.ics) ¦ ⤓ Eksporter merkedagene (.ics)
+＋ Ajouter une image ¦ ＋ Pridať obrázok ¦ ＋ Legg til et bilde
+＋ Ajouter une parcelle ¦ ＋ Pridať parcelu ¦ ＋ Legg til en parsell
+＋ Annonce ou courrier ¦ ＋ Inzerát alebo list ¦ ＋ Annonse eller brev
+＋ Nouveau dossier de preuve ¦ ＋ Nová zložka dôkazov ¦ ＋ Ny bevismappe
+＋ Nouveau livret ¦ ＋ Nová brožúra ¦ ＋ Nytt hefte
+＋ Nouveau montage ¦ ＋ Nový strih ¦ ＋ Ny redigering
+＋ Nouveau passage dans les médias ¦ ＋ Nová zmienka v médiách ¦ ＋ Ny medieomtale
+＋ Nouveau passeport ¦ ＋ Nový pas ¦ ＋ Nytt pass
+＋ Nouveau projet son ¦ ＋ Nový zvukový projekt ¦ ＋ Nytt lydprosjekt
+＋ Nouveau questionnaire ¦ ＋ Nový dotazník ¦ ＋ Nytt spørreskjema
+＋ Nouveau recueil ¦ ＋ Nový zborník ¦ ＋ Ny samling
+＋ Nouvelle carte ¦ ＋ Nová mapa ¦ ＋ Nytt kart
+＋ Nouvelle carte postale ¦ ＋ Nová pohľadnica ¦ ＋ Nytt postkort
+＋ Nouvelle demande… ¦ ＋ Nová žiadosť… ¦ ＋ Ny forespørsel…
+＋ Nouvelle maison ¦ ＋ Nový dom ¦ ＋ Nytt hus
+＋ Nouvelle transcription ¦ ＋ Nový prepis ¦ ＋ Ny avskrift
+＋ Règles d’un journal ¦ ＋ Pravidlá novín ¦ ＋ Regler for en avis
+＋ Épisode ¦ ＋ Diel ¦ ＋ Episode
+🌍 Le droit de vote dans le monde ¦ 🌍 Volebné právo vo svete ¦ 🌍 Stemmeretten i verden
+📂 Projets son ¦ 📂 Zvukové projekty ¦ 📂 Lydprosjekter
+📚 Vers l’Atelier ¦ 📚 Do Dielne ¦ 📚 Til Verkstedet
+📷 Lire une capture des règles ¦ 📷 Prečítať snímku pravidiel ¦ 📷 Les et skjermbilde av reglene
+🔍 Ouvrir l’assistant ¦ 🔍 Otvoriť asistenta ¦ 🔍 Åpne assistenten
+🔍 Ouvrir l’assistant « Que manque-t-il ? » ¦ 🔍 Otvoriť asistenta „Čo chýba?“ ¦ 🔍 Åpne assistenten «Hva mangler?»
+🔍 Qui est sur cette photo ? ¦ 🔍 Kto je na tejto fotke? ¦ 🔍 Hvem er på dette bildet?
+🔍 Rappels d’enquête ¦ 🔍 Pripomienky pátrania ¦ 🔍 Påminnelser om undersøkelser
+🔗 Partager une branche ¦ 🔗 Zdieľať vetvu ¦ 🔗 Del en gren
+🕯️ Allumer une bougie ¦ 🕯️ Zapáliť sviečku ¦ 🕯️ Tenn et lys
+🖼️ Tous les médias ¦ 🖼️ Všetky médiá ¦ 🖼️ Alle medier
+🗺 Toutes mes cartes ¦ 🗺 Všetky moje mapy ¦ 🗺 Alle kartene mine
+🛂 Ouvrir dans ✨ Trésors ¦ 🛂 Otvoriť v ✨ Pokladoch ¦ 🛂 Åpne i ✨ Skatter
+🛡 Les règles ¦ 🛡 Pravidlá ¦ 🛡 Reglene
