@@ -19984,7 +19984,12 @@
  "Fiabilité": "Wiarygodność",
  "Fiabilité : {x}": "Wiarygodność: {x}",
  "Fiabilité du fait": "Wiarygodność faktu",
- "fiche": "karta",
+ "fiche": {
+  "one": "karta",
+  "few": "karty",
+  "many": "kart",
+  "other": "karty"
+ },
  "Fiche": "Karta",
  "Fiche : {x}": "Karta: {x}",
  "Fiche : ce qu’elle montre": "Karta: co pokazuje",

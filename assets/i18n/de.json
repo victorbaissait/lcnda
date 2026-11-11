@@ -19426,7 +19426,10 @@
  "Fiabilité": "Zuverlässigkeit",
  "Fiabilité : {x}": "Verlässlichkeit: {x}",
  "Fiabilité du fait": "Verlässlichkeit der Angabe",
- "fiche": "Eintrag",
+ "fiche": {
+  "one": "Eintrag",
+  "other": "Einträge"
+ },
  "Fiche": "Eintrag",
  "Fiche : {x}": "Eintrag: {x}",
  "Fiche : ce qu’elle montre": "Eintrag: was er zeigt",

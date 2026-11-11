@@ -19984,7 +19984,12 @@
  "Fiabilité": "Spolehlivost",
  "Fiabilité : {x}": "Spolehlivost: {x}",
  "Fiabilité du fait": "Spolehlivost údaje",
- "fiche": "karta",
+ "fiche": {
+  "one": "karta",
+  "few": "karty",
+  "many": "karty",
+  "other": "karet"
+ },
  "Fiche": "Karta",
  "Fiche : {x}": "Karta: {x}",
  "Fiche : ce qu’elle montre": "Karta: co ukazuje",

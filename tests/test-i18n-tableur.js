@@ -46,8 +46,8 @@ const DIALOGS = ['settings', 'sort', 'dedupe', 'split', 'validate', 'cf', 'find'
             const dict = X.loadDict(l), miss = [];
             for (const f of ZONE_FILES) {
                 const src = fs.readFileSync(f, 'utf8'); let m;
-                const rx = /\bi18n\(\s*'((?:[^'\\]|\\.)*)'/g;
-                while ((m = rx.exec(src))) { const s = un(m[1]); if (dict[s] == null) miss.push(`${path.basename(f)} ${s}`); }
+                const rx = /\bi18n\(\s*'((?:[^'\\]|\\.)*)'(?:\s*,\s*\{\s*ctx:\s*'([^']+)'\s*\})?/g;
+                while ((m = rx.exec(src))) { const s = (m[2] ? m[2] + '|' : '') + un(m[1]); if (dict[s] == null) miss.push(`${path.basename(f)} ${s}`); }
                 const rp = /\bplural\([^,()]*(?:\([^()]*\)[^,()]*)*,\s*'((?:[^'\\]|\\.)*)'/g;
                 while ((m = rp.exec(src))) { const s = un(m[1]); if (!dict[s] || typeof dict[s] !== 'object') miss.push(`${path.basename(f)} pluriel ${s}`); }
             }

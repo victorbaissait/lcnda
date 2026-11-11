@@ -19705,7 +19705,11 @@
  "Fiabilité": "Fiabilidade",
  "Fiabilité : {x}": "Fiabilidade: {x}",
  "Fiabilité du fait": "Fiabilidade do facto",
- "fiche": "ficha",
+ "fiche": {
+  "one": "ficha",
+  "other": "fichas",
+  "many": "fichas"
+ },
  "Fiche": "Ficha",
  "Fiche : {x}": "Ficha: {x}",
  "Fiche : ce qu’elle montre": "Ficha: o que mostra",

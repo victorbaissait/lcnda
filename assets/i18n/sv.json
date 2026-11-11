@@ -19426,7 +19426,10 @@
  "Fiabilité": "Tillförlitlighet",
  "Fiabilité : {x}": "Tillförlitlighet: {x}",
  "Fiabilité du fait": "Uppgiftens tillförlitlighet",
- "fiche": "post",
+ "fiche": {
+  "one": "post",
+  "other": "poster"
+ },
  "Fiche": "Post",
  "Fiche : {x}": "Post: {x}",
  "Fiche : ce qu’elle montre": "Post: vad den visar",

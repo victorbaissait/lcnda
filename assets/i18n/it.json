@@ -19705,7 +19705,11 @@
  "Fiabilité": "Affidabilità",
  "Fiabilité : {x}": "Affidabilità: {x}",
  "Fiabilité du fait": "Affidabilità del fatto",
- "fiche": "scheda",
+ "fiche": {
+  "one": "scheda",
+  "other": "schede",
+  "many": "schede"
+ },
  "Fiche": "Scheda",
  "Fiche : {x}": "Scheda: {x}",
  "Fiche : ce qu’elle montre": "Scheda: cosa mostra",
