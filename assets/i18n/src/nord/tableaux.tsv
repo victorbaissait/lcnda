@@ -3050,3 +3050,253 @@ forme|Flèche ronde vers le bas à droite ¦ Kulatá šipka dolů doprava ¦ Run
 forme|Flèche ronde vers la gauche ¦ Kulatá šipka doleva ¦ Rund pil åt vänster ¦ Rund pil mod venstre
 forme|Flèche ronde vers la droite ¦ Kulatá šipka doprava ¦ Rund pil åt höger ¦ Rund pil mod højre
 forme|Flèche ronde vers le haut ¦ Kulatá šipka nahoru ¦ Rund pil uppåt ¦ Rund pil opad
+forme|Flèche ronde vers le haut à gauche ¦ Kulatá šipka nahoru doleva ¦ Rund pil uppåt vänster ¦ Rund pil opad venstre
+forme|Flèche ronde vers le haut à droite ¦ Kulatá šipka nahoru doprava ¦ Rund pil uppåt höger ¦ Rund pil opad højre
+forme|Flèche tournante ¦ Otáčivá šipka ¦ Roterande pil ¦ Roterende pil
+forme|sens des aiguilles ¦ po směru hodinových ručiček ¦ medurs ¦ med uret
+forme|sens inverse ¦ proti směru hodinových ručiček ¦ moturs ¦ mod uret
+forme|Flèche vers le bas ¦ Šipka dolů ¦ Pil nedåt ¦ Pil nedad
+forme|Flèche vers le bas à gauche ¦ Šipka dolů doleva ¦ Pil nedåt vänster ¦ Pil nedad venstre
+forme|Flèche vers le bas à droite ¦ Šipka dolů doprava ¦ Pil nedåt höger ¦ Pil nedad højre
+forme|Flèche en équerre ¦ Pravoúhlá šipka ¦ Vinkelpil ¦ Vinkelpil
+forme|Flèche en équerre vers la gauche ¦ Pravoúhlá šipka doleva ¦ Vinkelpil åt vänster ¦ Vinkelpil mod venstre
+forme|Flèche en équerre vers la droite ¦ Pravoúhlá šipka doprava ¦ Vinkelpil åt höger ¦ Vinkelpil mod højre
+forme|Grosse flèche vers le bas ¦ Velká šipka dolů ¦ Stor pil nedåt ¦ Stor pil nedad
+forme|Grosse flèche vers la gauche ¦ Velká šipka doleva ¦ Stor pil åt vänster ¦ Stor pil mod venstre
+forme|Grosse flèche à un trait vers le bas ¦ Velká šipka s čárou dolů ¦ Stor pil med ett streck nedåt ¦ Stor pil med én streg nedad
+forme|Grosse flèche à un trait vers la gauche ¦ Velká šipka s čárou doleva ¦ Stor pil med ett streck åt vänster ¦ Stor pil med én streg mod venstre
+forme|Grosse flèche à un trait vers la droite ¦ Velká šipka s čárou doprava ¦ Stor pil med ett streck åt höger ¦ Stor pil med én streg mod højre
+forme|Grosse flèche à un trait vers le haut ¦ Velká šipka s čárou nahoru ¦ Stor pil med ett streck uppåt ¦ Stor pil med én streg opad
+forme|Grosse flèche à traits vers le bas ¦ Velká šipka s čarami dolů ¦ Stor pil med streck nedåt ¦ Stor pil med streger nedad
+forme|Grosse flèche à traits vers la gauche ¦ Velká šipka s čarami doleva ¦ Stor pil med streck åt vänster ¦ Stor pil med streger mod venstre
+forme|Grosse flèche à traits vers la droite ¦ Velká šipka s čarami doprava ¦ Stor pil med streck åt höger ¦ Stor pil med streger mod højre
+forme|Grosse flèche à traits vers le haut ¦ Velká šipka s čarami nahoru ¦ Stor pil med streck uppåt ¦ Stor pil med streger opad
+forme|Grosse flèche vers la droite ¦ Velká šipka doprava ¦ Stor pil åt höger ¦ Stor pil mod højre
+forme|Grosse flèche vers le haut ¦ Velká šipka nahoru ¦ Stor pil uppåt ¦ Stor pil opad
+forme|Flèche vers la gauche ¦ Šipka doleva ¦ Pil åt vänster ¦ Pil mod venstre
+forme|Flèche jusqu’au trait vers le bas ¦ Šipka k čáře dolů ¦ Pil mot streck nedåt ¦ Pil til streg nedad
+forme|Flèche jusqu’au trait vers le bas à gauche ¦ Šipka k čáře dolů doleva ¦ Pil mot streck nedåt vänster ¦ Pil til streg nedad venstre
+forme|Flèche jusqu’au trait vers le bas à droite ¦ Šipka k čáře dolů doprava ¦ Pil mot streck nedåt höger ¦ Pil til streg nedad højre
+forme|Flèche jusqu’au trait vers la gauche ¦ Šipka k čáře doleva ¦ Pil mot streck åt vänster ¦ Pil til streg mod venstre
+forme|Flèche jusqu’au trait vers la droite ¦ Šipka k čáře doprava ¦ Pil mot streck åt höger ¦ Pil til streg mod højre
+forme|Flèche jusqu’au trait vers le haut ¦ Šipka k čáře nahoru ¦ Pil mot streck uppåt ¦ Pil til streg opad
+forme|Flèche jusqu’au trait vers le haut à gauche ¦ Šipka k čáře nahoru doleva ¦ Pil mot streck uppåt vänster ¦ Pil til streg opad venstre
+forme|Flèche jusqu’au trait vers le haut à droite ¦ Šipka k čáře nahoru doprava ¦ Pil mot streck uppåt höger ¦ Pil til streg opad højre
+forme|Flèche vers la droite ¦ Šipka doprava ¦ Pil åt höger ¦ Pil mod højre
+forme|Flèche carrée vers le bas ¦ Hranatá šipka dolů ¦ Fyrkantig pil nedåt ¦ Firkantet pil nedad
+forme|Flèche carrée vers le bas à gauche ¦ Hranatá šipka dolů doleva ¦ Fyrkantig pil nedåt vänster ¦ Firkantet pil nedad venstre
+forme|Flèche carrée vers le bas à droite ¦ Hranatá šipka dolů doprava ¦ Fyrkantig pil nedåt höger ¦ Firkantet pil nedad højre
+forme|Flèche carrée vers la gauche ¦ Hranatá šipka doleva ¦ Fyrkantig pil åt vänster ¦ Firkantet pil mod venstre
+forme|Flèche carrée vers la droite ¦ Hranatá šipka doprava ¦ Fyrkantig pil åt höger ¦ Firkantet pil mod højre
+forme|Flèche carrée vers le haut ¦ Hranatá šipka nahoru ¦ Fyrkantig pil uppåt ¦ Firkantet pil opad
+forme|Flèche carrée vers le haut à gauche ¦ Hranatá šipka nahoru doleva ¦ Fyrkantig pil uppåt vänster ¦ Firkantet pil opad venstre
+forme|Flèche carrée vers le haut à droite ¦ Hranatá šipka nahoru doprava ¦ Fyrkantig pil uppåt höger ¦ Firkantet pil opad højre
+forme|Flèche en U ¦ Šipka do U ¦ U-pil ¦ U-pil
+forme|Flèche vers le haut ¦ Šipka nahoru ¦ Pil uppåt ¦ Pil opad
+forme|Flèche vers le haut à gauche ¦ Šipka nahoru doleva ¦ Pil uppåt vänster ¦ Pil opad venstre
+forme|Flèche vers le haut à droite ¦ Šipka nahoru doprava ¦ Pil uppåt höger ¦ Pil opad højre
+forme|Flèches tournantes ¦ Otáčivé šipky ¦ Roterande pilar ¦ Roterende pile
+forme|Flèches haut et bas ¦ Šipky nahoru a dolů ¦ Pilar upp och ned ¦ Pile op og ned
+forme|Flèches gauche et droite ¦ Šipky doleva a doprava ¦ Pilar vänster och höger ¦ Pile venstre og højre
+forme|écartées ¦ od sebe ¦ isär ¦ fra hinanden
+forme|Flèches vers le centre ¦ Šipky ke středu ¦ Pilar mot mitten ¦ Pile mod midten
+forme|4 côtés ¦ 4 strany ¦ 4 sidor ¦ 4 sider
+forme|Flèches vers un trait ¦ Šipky k čáře ¦ Pilar mot ett streck ¦ Pile mod en streg
+forme|debout ¦ svisle ¦ stående ¦ stående
+forme|couché ¦ vodorovně ¦ liggande ¦ liggende
+forme|Flèches qui se rejoignent ¦ Sbíhající se šipky ¦ Pilar som möts ¦ Pile der mødes
+forme|Flèches vers l’extérieur ¦ Šipky ven ¦ Pilar utåt ¦ Pile udad
+forme|Flèches qui s’écartent d’un trait ¦ Šipky od čáry ¦ Pilar som går ut från ett streck ¦ Pile der går ud fra en streg
+forme|Flèches qui se séparent ¦ Rozbíhající se šipky ¦ Pilar som delar sig ¦ Pile der deler sig
+forme|Article ¦ Článek ¦ Artikel ¦ Artikel
+forme|Article illustré ¦ Ilustrovaný článek ¦ Illustrerad artikel ¦ Illustreret artikel
+forme|Bâton d’Asclépios ¦ Asklépiova hůl ¦ Asklepiosstav ¦ Asklepiosstav
+forme|Avocat ¦ Avokádo ¦ Avokado ¦ Avocado
+forme|fruit ¦ ovoce ¦ frukt ¦ frugt
+forme|Sac simple ¦ Jednoduchá taška ¦ Enkel väska ¦ Enkel taske
+forme|Ballon de baudruche ¦ Nafukovací balónek ¦ Ballong ¦ Ballon
+forme|Pansements ¦ Náplasti ¦ Plåster ¦ Plastre
+forme|Code-barres ¦ Čárový kód ¦ Streckkod ¦ Stregkode
+forme|Barrière de chantier ¦ Stavební zábrana ¦ Byggstaket ¦ Byggepladsafspærring
+forme|Casquette ¦ Kšiltovka ¦ Keps ¦ Kasket
+forme|Casque de base-ball ¦ Baseballová helma ¦ Basebollhjälm ¦ Baseballhjelm
+forme|Pile chargée ¦ Nabitá baterie ¦ Laddat batteri ¦ Opladet batteri
+forme|Pile vide ¦ Vybitá baterie ¦ Tomt batteri ¦ Tomt batteri
+forme|Ballon de plage ¦ Plážový míč ¦ Badboll ¦ Badebold
+forme|Bonnet ¦ Čepice ¦ Mössa ¦ Hue
+forme|Bouteille de bière ¦ Láhev piva ¦ Ölflaska ¦ Ølflaske
+forme|Chope de bière ¦ Půllitr piva ¦ Ölsejdel ¦ Ølkrus
+forme|Clochette ¦ Zvoneček ¦ Bjällra ¦ Lille klokke
+forme|Clochette qui sonne ¦ Zvonící zvoneček ¦ Ringande bjällra ¦ Ringende lille klokke
+forme|Ceinture ¦ Pásek ¦ Bälte ¦ Bælte
+forme|Plan d’architecte ¦ Architektonický plán ¦ Arkitektritning ¦ Arkitekttegning
+forme|Livre avec marque-page ¦ Kniha se záložkou ¦ Bok med bokmärke ¦ Bog med bogmærke
+forme|Livre ouvert écrit ¦ Otevřená popsaná kniha ¦ Öppen skriven bok ¦ Åben skrevet bog
+forme|Livre de la personne ¦ Kniha osoby ¦ Personens bok ¦ Personens bog
+forme|Marque-page simple ¦ Jednoduchá záložka ¦ Enkelt bokmärke ¦ Enkelt bogmærke
+forme|Marque-pages simples ¦ Jednoduché záložky ¦ Enkla bokmärken ¦ Enkle bogmærker
+forme|Botte ¦ Holínka ¦ Stövel ¦ Støvle
+forme|Boules ¦ Koule ¦ Klot ¦ Kugler
+forme|pétanque ¦ pétanque ¦ boule ¦ petanque
+forme|Bol de nourriture ¦ Miska jídla ¦ Matskål ¦ Madskål
+forme|Bol fumant ¦ Kouřící miska ¦ Rykande skål ¦ Dampende skål
+forme|Boule de bowling ¦ Bowlingová koule ¦ Bowlingklot ¦ Bowlingkugle
+forme|Verre de cognac ¦ Sklenka koňaku ¦ Konjaksglas ¦ Cognacglas
+forme|Pain ¦ Chléb ¦ Bröd ¦ Brød
+forme|Mallette en métal ¦ Kovový kufřík ¦ Metallväska ¦ Metalkuffert
+forme|Scarabée ¦ Brouk ¦ Skalbagge ¦ Bille
+forme|Immeuble d’appartements ¦ Bytový dům ¦ Hyreshus ¦ Boligblok
+forme|Bureaux ¦ Kanceláře ¦ Kontor ¦ Kontorer
+forme|Immeubles ¦ Budovy ¦ Byggnader ¦ Bygninger
+forme|Téléphérique ¦ Lanovka ¦ Linbana ¦ Svævebane
+forme|Calendrier coché ¦ Zaškrtnutý kalendář ¦ Avbockad kalender ¦ Afkrydset kalender
+forme|Calendrier avec un jour ¦ Kalendář s jedním dnem ¦ Kalender med en dag ¦ Kalender med en dag
+forme|Calendrier avec des jours ¦ Kalendář s dny ¦ Kalender med dagar ¦ Kalender med dage
+forme|Calendrier avec un cœur ¦ Kalendář se srdcem ¦ Kalender med hjärta ¦ Kalender med hjerte
+forme|Calendrier avec une étoile ¦ Kalendář s hvězdou ¦ Kalender med stjärna ¦ Kalender med stjerne
+forme|Calendrier barré ¦ Přeškrtnutý kalendář ¦ Överstruken kalender ¦ Overstreget kalender
+forme|Sonnette de comptoir ¦ Recepční zvonek ¦ Receptionsklocka ¦ Skrankeklokke
+forme|Appareil photo plus ¦ Fotoaparát plus ¦ Kamera plus ¦ Kamera plus
+forme|Appareil photo tourner ¦ Otočit fotoaparát ¦ Vänd kameran ¦ Vend kameraet
+forme|Appareil photo barré ¦ Přeškrtnutý fotoaparát ¦ Överstruken kamera ¦ Overstreget kamera
+forme|Batterie de voiture ¦ Autobaterie ¦ Bilbatteri ¦ Bilbatteri
+forme|Voiture simple ¦ Jednoduché auto ¦ Enkel bil ¦ Enkel bil
+forme|Porte-cartes ¦ Pouzdro na karty ¦ Korthållare ¦ Kortholder
+forme|Cartes ¦ Karty ¦ Kort ¦ Kort
+forme|Trois cartes ¦ Tři karty ¦ Tre kort ¦ Tre kort
+forme|Double chevron rond vers le bas ¦ Kulatá dvojitá šipka dolů ¦ Rund dubbel vinkel nedåt ¦ Rund dobbelt vinkel nedad
+forme|Double chevron rond vers la gauche ¦ Kulatá dvojitá šipka doleva ¦ Rund dubbel vinkel åt vänster ¦ Rund dobbelt vinkel mod venstre
+forme|Double chevron rond vers la droite ¦ Kulatá dvojitá šipka doprava ¦ Rund dubbel vinkel åt höger ¦ Rund dobbelt vinkel mod højre
+forme|Double chevron rond vers le haut ¦ Kulatá dvojitá šipka nahoru ¦ Rund dubbel vinkel uppåt ¦ Rund dobbelt vinkel opad
+forme|Chevron rond vers le bas ¦ Kulatá šipka dolů (chevron) ¦ Rund vinkel nedåt ¦ Rund vinkel nedad
+forme|Chevron rond vers la gauche ¦ Kulatá šipka doleva (chevron) ¦ Rund vinkel åt vänster ¦ Rund vinkel mod venstre
+forme|Chevron rond vers la droite ¦ Kulatá šipka doprava (chevron) ¦ Rund vinkel åt höger ¦ Rund vinkel mod højre
+forme|Chevron rond vers le haut ¦ Kulatá šipka nahoru (chevron) ¦ Rund vinkel uppåt ¦ Rund vinkel opad
+forme|Chevrons haut et bas ¦ Šipky nahoru a dolů (chevrony) ¦ Vinklar upp och ned ¦ Vinkler op og ned
+forme|Double chevron vers le bas ¦ Dvojitá šipka dolů ¦ Dubbel vinkel nedåt ¦ Dobbelt vinkel nedad
+forme|Double chevron vers la gauche ¦ Dvojitá šipka doleva ¦ Dubbel vinkel åt vänster ¦ Dobbelt vinkel mod venstre
+forme|Double chevron vers la droite ¦ Dvojitá šipka doprava ¦ Dubbel vinkel åt höger ¦ Dobbelt vinkel mod højre
+forme|Double chevron vers le haut ¦ Dvojitá šipka nahoru ¦ Dubbel vinkel uppåt ¦ Dobbelt vinkel opad
+forme|Chevron vers le bas ¦ Šipka dolů (chevron) ¦ Vinkel nedåt ¦ Vinkel nedad
+forme|Chevron vers la gauche ¦ Šipka doleva (chevron) ¦ Vinkel åt vänster ¦ Vinkel mod venstre
+forme|Chevron jusqu’au trait vers le bas ¦ Šipka k čáře dolů (chevron) ¦ Vinkel mot streck nedåt ¦ Vinkel til streg nedad
+forme|Chevron jusqu’au trait vers la gauche ¦ Šipka k čáře doleva (chevron) ¦ Vinkel mot streck åt vänster ¦ Vinkel til streg mod venstre
+forme|Chevron jusqu’au trait vers la droite ¦ Šipka k čáře doprava (chevron) ¦ Vinkel mot streck åt höger ¦ Vinkel til streg mod højre
+forme|Chevron jusqu’au trait vers le haut ¦ Šipka k čáře nahoru (chevron) ¦ Vinkel mot streck uppåt ¦ Vinkel til streg opad
+forme|Chevron vers la droite ¦ Šipka doprava (chevron) ¦ Vinkel åt höger ¦ Vinkel mod højre
+forme|Chevron vers le haut ¦ Šipka nahoru (chevron) ¦ Vinkel uppåt ¦ Vinkel opad
+forme|Caisse enregistreuse ¦ Registrační pokladna ¦ Kassaapparat ¦ Kasseapparat
+forme|Cassette audio ¦ Audiokazeta ¦ Ljudkassett ¦ Lydkassette
+forme|Tour de château ¦ Zámecká věž ¦ Slottstorn ¦ Slotstårn
+forme|Diplôme ¦ Diplom ¦ Diplom ¦ Diplom
+forme|Tableau noir ¦ Školní tabule ¦ Svarta tavlan ¦ Sort tavle
+forme|Tableau noir simple ¦ Jednoduchá tabule ¦ Enkel svart tavla ¦ Enkel sort tavle
+forme|Instituteur au tableau ¦ Učitel u tabule ¦ Lärare vid tavlan ¦ Lærer ved tavlen
+forme|Champagne ¦ Šampaňské ¦ Champagne ¦ Champagne
+forme|Graphique en barres ¦ Sloupcový graf ¦ Stapeldiagram ¦ Søjlediagram
+forme|Courbe ¦ Křivka ¦ Kurva ¦ Kurve
+forme|Bulle centrée ¦ Vystředěná bublina ¦ Centrerad bubbla ¦ Centreret boble
+forme|points ¦ tečky ¦ punkter ¦ prikker
+forme|texte ¦ text ¦ text ¦ tekst
+forme|Bulle goutte ¦ Kapkovitá bublina ¦ Droppbubbla ¦ Dråbeboble
+forme|Deux bulles ¦ Dvě bubliny ¦ Två bubblor ¦ To bobler
+forme|Coche ronde ¦ Kulatá fajfka ¦ Rund bock ¦ Rundt flueben
+forme|Grosse coche ¦ Velká fajfka ¦ Stor bock ¦ Stort flueben
+forme|Case cochée débordante ¦ Přetékající zaškrtnuté pole ¦ Överfylld markerad ruta ¦ Overfyldt afkrydset felt
+forme|Trinquer ¦ Přípitek ¦ Skåla ¦ Skåle
+forme|Toque de cuisinier ¦ Kuchařská čepice ¦ Kockmössa ¦ Kokkehue
+forme|Cercle en pointillés ¦ Tečkovaný kruh ¦ Prickad cirkel ¦ Prikket cirkel
+forme|Demi-cercle plein ¦ Plný půlkruh ¦ Fylld halvcirkel ¦ Fyldt halvcirkel
+forme|Demi-cercle penché ¦ Nakloněný půlkruh ¦ Lutande halvcirkel ¦ Skrå halvcirkel
+forme|Cercle ouvert ¦ Otevřený kruh ¦ Öppen cirkel ¦ Åben cirkel
+forme|Quatre cercles ¦ Čtyři kruhy ¦ Fyra cirklar ¦ Fire cirkler
+forme|Trois cercles ¦ Tři kruhy ¦ Tre cirklar ¦ Tre cirkler
+forme|Trois cercles et un plus ¦ Tři kruhy a plus ¦ Tre cirklar och ett plus ¦ Tre cirkler og et plus
+forme|Porte-bloc ¦ Psací podložka ¦ Skrivplatta ¦ Clipboard
+forme|Porte-bloc écrit ¦ Popsaná psací podložka ¦ Skrivplatta med text ¦ Clipboard med tekst
+forme|après-midi ¦ odpoledne ¦ eftermiddag ¦ eftermiddag
+forme|Horloge en avant ¦ Hodiny vpřed ¦ Klocka framåt ¦ Ur fremad
+forme|Compte à rebours ¦ Odpočítávání ¦ Nedräkning ¦ Nedtælling
+forme|Horloge en arrière ¦ Hodiny vzad ¦ Klocka bakåt ¦ Ur bagud
+forme|Heure de la personne ¦ Čas osoby ¦ Personens tid ¦ Personens tid
+forme|Nuage flèche en bas ¦ Mrak se šipkou dolů ¦ Moln med pil nedåt ¦ Sky med pil nedad
+forme|Nuage flèche en haut ¦ Mrak se šipkou nahoru ¦ Moln med pil uppåt ¦ Sky med pil opad
+forme|Nuage coché ¦ Mrak s fajfkou ¦ Moln med bock ¦ Sky med flueben
+forme|Éclaircie ¦ Vyjasnění ¦ Uppklarnande ¦ Opklaring
+forme|Nuage attention ¦ Mrak s výstrahou ¦ Moln med varning ¦ Sky med advarsel
+forme|Nuage barré ¦ Přeškrtnutý mrak ¦ Överstruket moln ¦ Overstreget sky
+forme|Trèfle à quatre feuilles ¦ Čtyřlístek ¦ Fyrklöver ¦ Firkløver
+forme|Grain de café ¦ Kávové zrno ¦ Kaffeböna ¦ Kaffebønne
+forme|Pièce de monnaie ¦ Mince ¦ Mynt ¦ Mønt
+forme|tranche ¦ hrana ¦ kant ¦ kant
+forme|Pièces de monnaie ¦ Mince ¦ Mynt ¦ Mønter
+forme|Confettis ¦ Konfety ¦ Konfetti ¦ Konfetti
+forme|Terrain de basket ¦ Basketbalové hřiště ¦ Basketplan ¦ Basketbane
+forme|Chapeau de cow-boy ¦ Kovbojský klobouk ¦ Cowboyhatt ¦ Cowboyhat
+forme|oiseau ¦ pták ¦ fågel ¦ fugl
+forme|Grue de chantier ¦ Stavební jeřáb ¦ Byggkran ¦ Byggekran
+forme|Viseur simple ¦ Jednoduchý zaměřovač ¦ Enkelt sikte ¦ Enkelt sigte
+forme|Couronne à la croix ¦ Koruna s křížem ¦ Krona med kors ¦ Krone med kors
+forme|Couronne simple ¦ Jednoduchá koruna ¦ Enkel krona ¦ Enkel krone
+forme|meuble ¦ nábytek ¦ möbel ¦ møbel
+forme|Ordinateur ¦ Počítač ¦ Dator ¦ Computer
+forme|Tablette ¦ Tablet ¦ Surfplatta ¦ Tablet
+forme|Quatre losanges ¦ Čtyři kosočtverce ¦ Fyra romber ¦ Fire romber
+forme|Robe ¦ Šaty ¦ Klänning ¦ Kjole
+forme|Goutte à moitié ¦ Napůl plná kapka ¦ Halvfylld droppe ¦ Halvfyldt dråbe
+forme|Goutte simple ¦ Jednoduchá kapka ¦ Enkel droppe ¦ Enkel dråbe
+forme|Œuf fêlé ¦ Prasklé vejce ¦ Sprucket ägg ¦ Revnet æg
+forme|Enveloppe ouverte ¦ Otevřená obálka ¦ Öppet kuvert ¦ Åben kuvert
+forme|Enveloppe simple ¦ Jednoduchá obálka ¦ Enkelt kuvert ¦ Enkel kuvert
+forme|Enveloppe simple ouverte ¦ Jednoduchá otevřená obálka ¦ Enkelt öppet kuvert ¦ Enkel åben kuvert
+forme|Escalier roulant ¦ Pohyblivé schody ¦ Rulltrappa ¦ Rulletrappe
+forme|descente ¦ dolů ¦ nedåt ¦ ned
+forme|montée ¦ nahoru ¦ uppåt ¦ op
+forme|Examen ¦ Vyšetření ¦ Undersökning ¦ Undersøgelse
+forme|Deux yeux ¦ Dvě oči ¦ Två ögon ¦ To øjne
+forme|Masque de soin ¦ Pleťová maska ¦ Ansiktsmask ¦ Ansigtsmaske
+forme|Ferme ¦ Statek ¦ Bondgård ¦ Bondegård
+forme|Fichier ¦ Soubor ¦ Fil ¦ Fil
+forme|Fichier d’archives ¦ Archivní soubor ¦ Arkivfil ¦ Arkivfil
+forme|Fichier son ¦ Zvukový soubor ¦ Ljudfil ¦ Lydfil
+forme|Fichier image ¦ Obrázkový soubor ¦ Bildfil ¦ Billedfil
+forme|Chercher dans un document ¦ Hledat v dokumentu ¦ Sök i ett dokument ¦ Søg i et dokument
+forme|Fichier PDF ¦ Soubor PDF ¦ PDF-fil ¦ PDF-fil
+forme|Document écrit ¦ Psaný dokument ¦ Skrivet dokument ¦ Skrevet dokument
+forme|Fichier vidéo ¦ Video soubor ¦ Videofil ¦ Videofil
+forme|Fichier compressé ¦ Komprimovaný soubor ¦ Komprimerad fil ¦ Komprimeret fil
+forme|Fichiers ¦ Soubory ¦ Filer ¦ Filer
+forme|Scénario ¦ Scénář ¦ Manus ¦ Manuskript
+forme|Empreinte digitale simple ¦ Jednoduchý otisk prstu ¦ Enkelt fingeravtryck ¦ Enkelt fingeraftryk
+forme|Flamme ¦ Plamen ¦ Låga ¦ Flamme
+forme|Croix de secours ¦ Kříž první pomoci ¦ Förstahjälpenkors ¦ Førstehjælpskors
+forme|Trousse de secours ¦ Lékárnička ¦ Förbandslåda ¦ Førstehjælpskasse
+forme|Poisson simple ¦ Jednoduchá ryba ¦ Enkel fisk ¦ Enkel fisk
+forme|Fanion plié ¦ Složený praporek ¦ Vikt vimpel ¦ Foldet vimpel
+forme|drapeau ¦ vlajka ¦ flagga ¦ flag
+forme|Flamme vive ¦ Živý plamen ¦ Livlig låga ¦ Livlig flamme
+forme|Lampe de poche ¦ Baterka ¦ Ficklampa ¦ Lommelygte
+forme|dos ¦ záda ¦ rygg ¦ ryg
+forme|Flèche de parcours ¦ Šipka trasy ¦ Ruttpil ¦ Rutepil
+forme|Lotus ¦ Lotos ¦ Lotus ¦ Lotus
+forme|Dossier simple ¦ Jednoduchá složka ¦ Enkel mapp ¦ Enkel mappe
+forme|Dossier de la personne ¦ Složka osoby ¦ Personens mapp ¦ Personens mappe
+forme|Dossier à l’étoile ¦ Složka s hvězdou ¦ Mapp med stjärna ¦ Mappe med stjerne
+forme|Dossier personnel ¦ Osobní složka ¦ Personlig mapp ¦ Personlig mappe
+forme|Fourchette et couteau ¦ Vidlička a nůž ¦ Gaffel och kniv ¦ Gaffel og kniv
+forme|Coins de cadre ¦ Rohy rámečku ¦ Ramhörn ¦ Rammehjørner
+forme|Bidon d’essence ¦ Kanystr benzínu ¦ Bensindunk ¦ Benzindunk
+forme|Pompe à essence ¦ Benzínová pumpa ¦ Bensinpump ¦ Benzinpumpe
+forme|Jauge ¦ Ukazatel ¦ Mätare ¦ Måler
+forme|Engrenage fin ¦ Jemné ozubené kolo ¦ Fint kugghjul ¦ Fint tandhjul
+forme|Engrenage à six dents ¦ Šestizubé kolo ¦ Kugghjul med sex kuggar ¦ Tandhjul med seks tænder
+forme|Symbole femme ¦ Symbol ženy ¦ Kvinnosymbol ¦ Kvindesymbol
+forme|Symbole intersexe ¦ Intersex symbol ¦ Intersexsymbol ¦ Interkønssymbol
+forme|Symbole homme ¦ Symbol muže ¦ Mansymbol ¦ Mandesymbol
+forme|Symbole neutre ¦ Neutrální symbol ¦ Neutral symbol ¦ Neutralt symbol
+forme|Symbole transgenre ¦ Transgender symbol ¦ Transsymbol ¦ Transkønnet symbol
+forme|Europe ¦ Evropa ¦ Europa ¦ Europa
+forme|Afrique ¦ Afrika ¦ Afrika ¦ Afrika
+forme|Amériques ¦ Amerika ¦ Amerika ¦ Amerika
+forme|Globe simple ¦ Jednoduchý glóbus ¦ Enkel jordglob ¦ Enkel globus
+forme|Globe terrestre sur pied ¦ Glóbus na stojanu ¦ Jordglob på fot ¦ Globus på fod

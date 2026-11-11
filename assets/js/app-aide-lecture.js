@@ -20,6 +20,7 @@
     if (root) root.LCNDA_AIDE_LECTURE = api;
 })(typeof window !== 'undefined' ? window : null, function (root) {
     'use strict';
+    const i18n = (s, v) => { const I = (typeof window !== 'undefined' ? window : globalThis).LCNDA_I18N; if (v) v = Object.fromEntries(Object.entries(v).map(([k, x]) => [k, typeof x === 'number' ? String(x) : x])); return I ? I.t(s, v) : (v ? String(s).replace(/\{(\w+)\}/g, (m, k) => (k in v ? v[k] : m)) : s); }; // 🌐 textes traduits (docs/I18N.md) ; nombres gardés tels quels
     /** pour chercher et comparer : sans accents, sans majuscules, ſ = s, æ = ae, œ = oe, & = et */
     const fold = s => String(s ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase()
         .replace(/ſ/g, 's').replace(/æ/g, 'ae').replace(/œ/g, 'oe').replace(/ł/g, 'l').replace(/ß/g, 'ss').replace(/ø/g, 'o').replace(/đ/g, 'd').replace(/ı/g, 'i')
@@ -165,8 +166,8 @@
             ['a déclaré ne savoir signer', 'ne savait pas écrire son nom'],
         ]),
     ];
-    const KINDS = {mot: '📖 Mots des actes', formule: '📜 Formules', abrev: '✂️ Abréviations', mois: '📅 Mois', nombre: '🔢 Nombres et âges', parente: '👪 Parenté', metier: '🔨 Métiers', vieux: '📖 Vieux mots'};
-    const ACTES = {bapteme: '👶 Baptême', mariage: '💍 Mariage', sepulture: '⚱️ Décès, sépulture', recensement: '🏠 Recensement', general: 'Tous les actes', notaire: '🖋 Notaire'};
+    const KINDS = {mot: `📖 ${i18n('Mots des actes')}`, formule: `📜 ${i18n('Formules')}`, abrev: `✂️ ${i18n('Abréviations')}`, mois: `📅 ${i18n('Mois')}`, nombre: `🔢 ${i18n('Nombres et âges')}`, parente: `👪 ${i18n('Parenté')}`, metier: `🔨 ${i18n('Métiers')}`, vieux: `📖 ${i18n('Vieux mots')}`};
+    const ACTES = {bapteme: `👶 ${i18n('Baptême')}`, mariage: `💍 ${i18n('Mariage')}`, sepulture: `⚱️ ${i18n('Décès, sépulture')}`, recensement: `🏠 ${i18n('Recensement')}`, general: i18n('Tous les actes'), notaire: `🖋 ${i18n('Notaire')}`};
     const FR = {code: 'fr', name: 'Français', script: 'latine', dir: 'ltr', ocr: ['fra'], builtin: true};
 
     /* ═════════ Le registre des langues (assets/js/aide-langues/<code>.js) ═════════ */
@@ -359,12 +360,12 @@
         if (/ꝑ/.test(s)) out.push('ꝑ = par / per');
         if (/ꝓ/.test(s)) out.push('ꝓ = pro');
         if (/ꝰ/.test(s)) out.push('ꝰ = -us');
-        if (/[ãõñẽ]/.test(s)) out.push('le tilde remplace un m ou un n');
-        if (/æ/.test(s)) out.push('æ = ae');
-        if (/^&$/.test(s)) out.push('& = et');
-        if (/^\d+bre$/i.test(s)) out.push('7bre = septembre, 8bre = octobre, 9bre = novembre, Xbre = décembre');
-        if (/\.$|°$/.test(s) && !out.length) out.push(`« ${s} » est une abréviation de « ${exp} »`);
-        if (/^(fe|fs|vve|jliere|jlière)$/i.test(fold(s))) out.push(`« ${s} » est une abréviation de « ${exp} »`);
+        if (/[ãõñẽ]/.test(s)) out.push(i18n('le tilde remplace un m ou un n'));
+        if (/æ/.test(s)) out.push(i18n('æ = ae'));
+        if (/^&$/.test(s)) out.push(i18n('& = et'));
+        if (/^\d+bre$/i.test(s)) out.push(i18n('7bre = septembre, 8bre = octobre, 9bre = novembre, Xbre = décembre'));
+        if (/\.$|°$/.test(s) && !out.length) out.push(i18n('« {s} » est une abréviation de « {exp} »', {s, exp}));
+        if (/^(fe|fs|vve|jliere|jlière)$/i.test(fold(s))) out.push(i18n('« {s} » est une abréviation de « {exp} »', {s, exp}));
         return out.join(' ; ');
     }
     /**
@@ -383,7 +384,7 @@
         while (i < n || j < m) {
             if (i < n && j < m && match(exp[i], got[j])) { words.push({exp: exp[i].exp, got: got[j], st: 'ok', shown: exp[i].shown}); i++; j++; continue; }
             // un mot remplacé par un autre (faux) plutôt qu'un oublié + un en trop, quand les deux suites avancent ensemble
-            if (i < n && j < m && L[i + 1][j + 1] === L[i][j]) { words.push({exp: exp[i].exp, got: got[j], st: 'faux', shown: exp[i].shown, hint: hintFor(exp[i].shown, exp[i].exp, notes) || `on lit « ${exp[i].exp} »`}); i++; j++; continue; }
+            if (i < n && j < m && L[i + 1][j + 1] === L[i][j]) { words.push({exp: exp[i].exp, got: got[j], st: 'faux', shown: exp[i].shown, hint: hintFor(exp[i].shown, exp[i].exp, notes) || i18n('on lit « {x} »', {x: exp[i].exp})}); i++; j++; continue; }
             if (i < n && (j >= m || L[i + 1][j] >= L[i][j + 1])) { words.push({exp: exp[i].exp, got: '', st: 'manque', shown: exp[i].shown, hint: hintFor(exp[i].shown, exp[i].exp, notes)}); i++; continue; }
             words.push({exp: '', got: got[j], st: 'trop'}); j++;
         }
@@ -395,7 +396,7 @@
     /** les entrées en plus quand elles sont chargées : vieux mots des Trésors, abréviations de la lecture automatique */
     function extraEntries() {
         const out = [], W = root?.LCNDA_EXT?.tresorWords?.WORDS || [], AB = root?.LCNDA_LECTURE?.ABBREV || {};
-        W.forEach(([t, d]) => out.push({t, d, k: 'vieux', a: 'general', ex: '', src: 'Trésors', lang: 'fr'}));
+        W.forEach(([t, d]) => out.push({t, d, k: 'vieux', a: 'general', ex: '', src: i18n('Trésors'), lang: 'fr'}));
         Object.entries(AB).forEach(([t, d]) => { if (t.length > 1) out.push({t: `${t}.`, d, k: 'abrev', a: 'recensement', ex: '', src: 'lecture automatique', lang: 'fr'}); });
         return out;
     }

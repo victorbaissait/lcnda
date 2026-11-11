@@ -23,21 +23,22 @@
 })(typeof window !== 'undefined' ? window : null, function () {
     'use strict';
 
+    const i18n = (s, v) => { const I = (typeof window !== 'undefined' ? window : globalThis).LCNDA_I18N; if (v) v = Object.fromEntries(Object.entries(v).map(([k, x]) => [k, typeof x === 'number' ? String(x) : x])); return I ? I.t(s, v) : (v ? String(s).replace(/\{(\w+)\}/g, (m, k) => (k in v ? v[k] : m)) : s); }; // 🌐 textes traduits (docs/I18N.md) ; nombres gardés tels quels
     const norm = s => String(s ?? '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/ſ/g, 's').replace(/[’']/g, "'").replace(/\s+/g, ' ').trim();
     /** même chose, en gardant le ſ (s long) pour reconnaître la confusion ſ/f */
     const low = s => String(s ?? '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[’']/g, "'").replace(/\s+/g, ' ').trim();
 
     /* ── Lettres qui se ressemblent dans une écriture à la main (dans les deux sens) ── */
     const CONFUSIONS = [
-        ['u', 'n', '« u » et « n » ont les mêmes jambages'], ['m', 'rn', '« m » et « rn » se ressemblent'], ['m', 'nn', '« m » et « nn » ont le même nombre de jambages'],
-        ['m', 'in', '« m » et « in » ont le même nombre de jambages'], ['n', 'ri', '« n » et « ri » se ressemblent'], ['u', 'ii', '« u » et « ii » se ressemblent'],
-        ['a', 'o', '« a » et « o » se confondent quand la boucle est fermée'], ['e', 'c', '« e » et « c » se confondent quand la boucle est petite'],
-        ['i', 'l', '« i » sans point ressemble à « l »'], ['i', 't', '« i » et « t » sans barre se confondent'], ['l', 't', '« l » et « t » sans barre se confondent'],
-        ['ſ', 'f', 'le s long « ſ » ressemble à « f »'], ['s', 'f', 'le s long « ſ » ressemble à « f »'], ['v', 'r', '« v » et « r » se confondent'],
-        ['cl', 'd', '« cl » collé ressemble à « d »'], ['h', 'b', '« h » et « b » se confondent'], ['h', 'k', '« h » et « k » se confondent'],
-        ['s', 'l', 'les majuscules anciennes « S » et « L » se ressemblent'], ['i', 'j', 'les majuscules anciennes « I » et « J » sont la même lettre'],
-        ['t', 'f', 'les majuscules anciennes « T » et « F » se ressemblent'], ['g', 'q', '« g » et « q » se confondent'], ['y', 'g', '« y » et « g » se confondent'],
-        ['e', 'o', '« e » et « o » se confondent'], ['o', 'u', '« o » ouvert ressemble à « u »'], ['c', 'o', '« c » et « o » se confondent'],
+        ['u', 'n', i18n('« u » et « n » ont les mêmes jambages')], ['m', 'rn', i18n('« m » et « rn » se ressemblent')], ['m', 'nn', i18n('« m » et « nn » ont le même nombre de jambages')],
+        ['m', 'in', i18n('« m » et « in » ont le même nombre de jambages')], ['n', 'ri', i18n('« n » et « ri » se ressemblent')], ['u', 'ii', i18n('« u » et « ii » se ressemblent')],
+        ['a', 'o', i18n('« a » et « o » se confondent quand la boucle est fermée')], ['e', 'c', i18n('« e » et « c » se confondent quand la boucle est petite')],
+        ['i', 'l', i18n('« i » sans point ressemble à « l »')], ['i', 't', i18n('« i » et « t » sans barre se confondent')], ['l', 't', i18n('« l » et « t » sans barre se confondent')],
+        ['ſ', 'f', i18n('le s long « ſ » ressemble à « f »')], ['s', 'f', i18n('le s long « ſ » ressemble à « f »')], ['v', 'r', i18n('« v » et « r » se confondent')],
+        ['cl', 'd', i18n('« cl » collé ressemble à « d »')], ['h', 'b', i18n('« h » et « b » se confondent')], ['h', 'k', i18n('« h » et « k » se confondent')],
+        ['s', 'l', i18n('les majuscules anciennes « S » et « L » se ressemblent')], ['i', 'j', i18n('les majuscules anciennes « I » et « J » sont la même lettre')],
+        ['t', 'f', i18n('les majuscules anciennes « T » et « F » se ressemblent')], ['g', 'q', i18n('« g » et « q » se confondent')], ['y', 'g', i18n('« y » et « g » se confondent')],
+        ['e', 'o', i18n('« e » et « o » se confondent')], ['o', 'u', i18n('« o » ouvert ressemble à « u »')], ['c', 'o', i18n('« c » et « o » se confondent')],
     ];
     const CONF = new Map();
     CONFUSIONS.forEach(([a, b, w]) => { CONF.set(a + '>' + b, w); CONF.set(b + '>' + a, w); });
@@ -70,14 +71,14 @@
         let i = 0; while (i < a.length && i < b.length && a[i] === b[i]) i++;
         let ea = a.length, eb = b.length; while (ea > i && eb > i && a[ea - 1] === b[eb - 1]) { ea--; eb--; }
         const x = a.slice(i, ea), y = b.slice(i, eb);
-        if (CONF.has(x + '>' + y)) return `« ${x} » lu au lieu de « ${y} » : ${CONF.get(x + '>' + y)}`;
+        if (CONF.has(x + '>' + y)) return i18n('« {x} » lu au lieu de « {y} » : {x2}', {x, y, x2: CONF.get(x + '>' + y)});
         for (let k = 0; k < Math.min(x.length, y.length); k++) for (const la of [1, 2]) for (const lb of [1, 2]) {
             const p = x.slice(k, k + la), q = y.slice(k, k + lb);
-            if (p && q && p !== q && CONF.has(p + '>' + q)) return `« ${p} » lu au lieu de « ${q} » : ${CONF.get(p + '>' + q)}`;
+            if (p && q && p !== q && CONF.has(p + '>' + q)) return i18n('« {p} » lu au lieu de « {q} » : {x}', {p, q, x: CONF.get(p + '>' + q)});
         }
-        if (!x && y) return `« ${y} » oublié à la lecture`;
-        if (x && !y) return `« ${x} » en trop`;
-        return `« ${x} » lu au lieu de « ${y} »`;
+        if (!x && y) return i18n('« {y} » oublié à la lecture', {y});
+        if (x && !y) return i18n('« {x} » en trop', {x});
+        return i18n('« {x} » lu au lieu de « {y} »', {x, y});
     }
 
     /** Les mots les plus proches d'un dictionnaire (tableau de textes ou de {value, weight}). Plusieurs choix, jamais un seul imposé. */
@@ -105,7 +106,7 @@
         for (let i = 0; i < s.length; i++) for (const r of DIGITS[s[i]] || []) {
             const v = s.slice(0, i) + r + s.slice(i + 1);
             if (v[0] === '0' && v.length > 1) continue;
-            out.push({value: Number(v), why: `« ${s[i]} » lu au lieu de « ${r} »`});
+            out.push({value: Number(v), why: i18n('« {x} » lu au lieu de « {r} »', {x: s[i], r})});
         }
         return out;
     }
@@ -222,65 +223,65 @@
         rows.forEach((r, i) => {
             // id. / d° : la même valeur que la ligne au-dessus
             for (const f of ['last', 'first', 'occupation', 'birth_place', 'nationality', 'role']) {
-                if (r[f] && isIdem(r[f])) push(i, f, 'yellow', `« ${r[f]} » veut dire « idem » : la même chose qu’à la ligne au-dessus.`, r[f], (() => { for (let k = i - 1; k >= 0; k--) if (rows[k][f] && !isIdem(rows[k][f])) return [{value: (expandAbbrev(rows[k][f], ctx.abbrev) || {value: rows[k][f]}).value, why: `la valeur de la ligne ${k + 1}`}]; return []; })());
+                if (r[f] && isIdem(r[f])) push(i, f, 'yellow', i18n('« {x} » veut dire « idem » : la même chose qu’à la ligne au-dessus.', {x: r[f]}), r[f], (() => { for (let k = i - 1; k >= 0; k--) if (rows[k][f] && !isIdem(rows[k][f])) return [{value: (expandAbbrev(rows[k][f], ctx.abbrev) || {value: rows[k][f]}).value, why: i18n('la valeur de la ligne {x}', {x: k + 1})}]; return []; })());
             }
             // colonnes décalées d'un cran : la nationalité (« F », « P ») dans le lien, le lien (« chef », « épouse ») dans la profession,
             // la profession dans l'employeur → chaque valeur remise dans sa colonne (proposé, jamais fait tout seul)
             const natLike = v => /^(f|p|fr|fse|francaise?|e|etr|etranger|etrangere|b|belge|i|it|italien(ne)?|e?spagnol(e)?)\.?$/i.test(norm(v));
             const occRole = r.occupation && (roleOf(r.occupation) && !roleOf(r.occupation).other || isChef(r.occupation));
             if (r.role && natLike(r.role) && (occRole || !r.nationality)) {
-                const props = [{field: 'nationality', value: r.role, why: `« ${r.role} » est la nationalité`}];
-                if (occRole) props.unshift({field: 'role', value: r.occupation, why: `« ${r.occupation} » est le lien avec le chef`});
-                if (occRole && r.employer && !/^(patron|patronne)$/i.test(norm(r.employer))) props.push({field: 'occupation', value: MISREADS[norm(r.employer)] || r.employer, why: `« ${r.employer} » est sans doute la profession${MISREADS[norm(r.employer)] ? ' (mal lue)' : ''}`});
-                push(i, 'role', 'orange', `Colonnes décalées : « ${r.role} » dans la case du lien ressemble à la nationalité${occRole ? `, et « ${r.occupation} » dans la case de la profession est un lien de parenté` : ''}. Remets chaque valeur dans sa colonne.`, r.role, props);
-            } else if (occRole && !r.role) push(i, 'occupation', 'orange', `« ${r.occupation} » dans la case de la profession est un lien de parenté : la colonne a glissé.`, r.occupation, [{field: 'role', value: r.occupation, why: 'c’est le lien avec le chef'}, ...(r.employer ? [{field: 'occupation', value: r.employer, why: 'la case suivante est sans doute la profession'}] : [])]);
+                const props = [{field: 'nationality', value: r.role, why: i18n('« {role} » est la nationalité', {role: r.role})}];
+                if (occRole) props.unshift({field: 'role', value: r.occupation, why: i18n('« {occupation} » est le lien avec le chef', {occupation: r.occupation})});
+                if (occRole && r.employer && !/^(patron|patronne)$/i.test(norm(r.employer))) props.push({field: 'occupation', value: MISREADS[norm(r.employer)] || r.employer, why: `${i18n('« {employer} » est sans doute la profession', {employer: r.employer})}${MISREADS[norm(r.employer)] ? ' (mal lue)' : ''}`});
+                push(i, 'role', 'orange', i18n('Colonnes décalées : « {role} » dans la case du lien ressemble à la nationalité{x}. Remets chaque valeur dans sa colonne.', {role: r.role, x: occRole ? i18n(', et « {occupation} » dans la case de la profession est un lien de parenté', {occupation: r.occupation}) : ''}), r.role, props);
+            } else if (occRole && !r.role) push(i, 'occupation', 'orange', i18n('« {occupation} » dans la case de la profession est un lien de parenté : la colonne a glissé.', {occupation: r.occupation}), r.occupation, [{field: 'role', value: r.occupation, why: i18n('c’est le lien avec le chef')}, ...(r.employer ? [{field: 'occupation', value: r.employer, why: i18n('la case suivante est sans doute la profession')}] : [])]);
             // l'état civil qui contient un lien (« Neveu ») : rangé dans la mauvaise case
-            if (r.civil_status && roleOf(r.civil_status) && !/^(veuve?|veuf)$/.test(norm(r.civil_status))) push(i, 'civil_status', 'yellow', `« ${r.civil_status} » dans la case de l’état civil est un lien de parenté : mal rangé.`, r.civil_status, [{field: 'role', value: r.civil_status, why: 'c’est le lien avec le chef'}]);
-            if (r.civil_status && /^v\.?$/i.test(String(r.civil_status).trim())) push(i, 'civil_status', 'yellow', `« ${r.civil_status} » veut dire « veuve » (ou « veuf ») : abréviation non développée.`, r.civil_status, [{value: genderOf(r) === 'h' ? 'veuf' : 'veuve', why: 'V = veuve / veuf'}]);
+            if (r.civil_status && roleOf(r.civil_status) && !/^(veuve?|veuf)$/.test(norm(r.civil_status))) push(i, 'civil_status', 'yellow', i18n('« {civil_status} » dans la case de l’état civil est un lien de parenté : mal rangé.', {civil_status: r.civil_status}), r.civil_status, [{field: 'role', value: r.civil_status, why: i18n('c’est le lien avec le chef')}]);
+            if (r.civil_status && /^v\.?$/i.test(String(r.civil_status).trim())) push(i, 'civil_status', 'yellow', i18n('« {civil_status} » veut dire « veuve » (ou « veuf ») : abréviation non développée.', {civil_status: r.civil_status}), r.civil_status, [{value: genderOf(r) === 'h' ? 'veuf' : 'veuve', why: 'V = veuve / veuf'}]);
             // le nom précédé de « V », « Ve », « Vve » : la veuve d'un tel → le nom sans le préfixe, et l'état civil « veuve »
             { const m = String(r.last || '').match(/^(v|ve|vve|vv)\.?\s+(\S.*)$/i);
-              if (m) push(i, 'last', 'yellow', `« ${m[1]} » devant le nom veut dire « veuve » : le nom est « ${m[2]} ».`, r.last, [{field: 'last', value: m[2], why: 'le nom sans « veuve »'}, ...(r.civil_status && /veuv|^v$/i.test(r.civil_status) ? [] : [{field: 'civil_status', value: genderOf(r) === 'h' ? 'veuf' : 'veuve', why: `« ${m[1]} » = veuve`}])]); }
+              if (m) push(i, 'last', 'yellow', i18n('« {x} » devant le nom veut dire « veuve » : le nom est « {x2} ».', {x: m[1], x2: m[2]}), r.last, [{field: 'last', value: m[2], why: i18n('le nom sans « veuve »')}, ...(r.civil_status && /veuv|^v$/i.test(r.civil_status) ? [] : [{field: 'civil_status', value: genderOf(r) === 'h' ? 'veuf' : 'veuve', why: i18n('« {x} » = veuve', {x: m[1]})}])]); }
             // mots déformés connus et métiers illisibles
             for (const f of ['occupation', 'role', 'birth_place', 'employer']) {
                 const v = String(r[f] || '').trim(); if (!v || NEANT_RX.test(v) || isIdem(v) || out.some(d => d.row === i && d.field === f)) continue;
                 const words = v.split(/\s+/);
                 const fixed = words.map(w => { const k = norm(w).replace(/[.]/g, ''); return MISREADS[k] ? MISREADS[k] : w; });
                 const joined = MISREADS[norm(v)] || fixed.join(' ');
-                if (norm(joined) !== norm(v)) { push(i, f, 'yellow', `« ${v} » est sans doute « ${joined} » mal lu (lettres qui se ressemblent).`, v, [{value: joined, why: 'forme connue la plus proche'}]); continue; }
+                if (norm(joined) !== norm(v)) { push(i, f, 'yellow', i18n('« {v} » est sans doute « {joined} » mal lu (lettres qui se ressemblent).', {v, joined}), v, [{value: joined, why: i18n('forme connue la plus proche')}]); continue; }
                 if (f !== 'occupation' || expandAbbrev(v, ctx.abbrev)) continue;
                 const known = [...COMMON_TRADES, ...trades.map(t => typeof t === 'string' ? t : t?.name || '')].map(norm);
                 const unknown = words.filter(w => { const n = norm(w).replace(/[.]/g, ''); return n.length >= 3 && !LINK_WORDS.has(n) && !known.includes(n) && !known.some(k => k.split(' ').includes(n)) && !expandAbbrev(w); });
                 if (!unknown.length) continue;
                 const sug = unknown.map(w => [w, suggest(w, [...COMMON_TRADES, ...trades], {max: 2, maxCost: 1.3})]);
-                if (sug.every(([, x]) => x.length)) { const val = words.map(w => { const h = sug.find(([u]) => u === w); return h ? h[1][0].value : w; }).join(' '); push(i, f, 'yellow', `« ${v} » : ${sug.map(([u, x]) => `« ${u} » ressemble à « ${x[0].value} »`).join(', ')}.`, v, [{value: val, why: sug[0][1][0].why}]); }
-                else if (unknown.length * 2 >= words.filter(w => norm(w).length >= 3).length) push(i, f, 'yellow', `« ${v} » ne ressemble à aucun métier connu : lecture sans doute illisible, regarde l’image.`, v);
+                if (sug.every(([, x]) => x.length)) { const val = words.map(w => { const h = sug.find(([u]) => u === w); return h ? h[1][0].value : w; }).join(' '); push(i, f, 'yellow', `« ${v} » : ${sug.map(([u, x]) => i18n('« {u} » ressemble à « {x} »', {u, x: x[0].value})).join(', ')}.`, v, [{value: val, why: sug[0][1][0].why}]); }
+                else if (unknown.length * 2 >= words.filter(w => norm(w).length >= 3).length) push(i, f, 'yellow', i18n('« {v} » ne ressemble à aucun métier connu : lecture sans doute illisible, regarde l’image.', {v}), v);
             }
-            if (r.employer && !NEANT_RX.test(r.employer) && !out.some(d => d.row === i && d.field === 'employer') && !occRole && String(r.employer).split(/\s+/).some(w => norm(w).length >= 8 && !COMMON_TRADES.map(norm).includes(norm(w)) && !trades.some(t => norm(typeof t === 'string' ? t : t?.name) === norm(w)))) push(i, 'employer', 'yellow', `Employeur « ${r.employer} » : lecture douteuse, regarde l’image.`, r.employer);
+            if (r.employer && !NEANT_RX.test(r.employer) && !out.some(d => d.row === i && d.field === 'employer') && !occRole && String(r.employer).split(/\s+/).some(w => norm(w).length >= 8 && !COMMON_TRADES.map(norm).includes(norm(w)) && !trades.some(t => norm(typeof t === 'string' ? t : t?.name) === norm(w)))) push(i, 'employer', 'yellow', i18n('Employeur « {employer} » : lecture douteuse, regarde l’image.', {employer: r.employer}), r.employer);
             // abréviations non développées
             for (const f of ['occupation', 'role', 'nationality']) {
                 const e = r[f] && !isIdem(r[f]) && !out.some(d => d.row === i && d.field === f) ? expandAbbrev(r[f], ctx.abbrev) : null;
-                if (e) push(i, f, 'yellow', e.why + ' (non développée par la lecture automatique).', r[f], [e]);
+                if (e) push(i, f, 'yellow', e.why + ` ${i18n('(non développée par la lecture automatique).')}`, r[f], [e]);
             }
             // colonnes décalées : une profession dans la case du prénom, un lieu dans la case du nom
-            if (r.first && looksLikeTrade(r.first, trades)) push(i, 'first', 'orange', `« ${r.first} » ressemble à une profession : la colonne a pu être décalée.`, r.first);
-            if (r.last && places.some(p => norm(typeof p === 'string' ? p : p.value) === norm(r.last)) && !surnames.some(s => norm(typeof s === 'string' ? s : s.value) === norm(r.last))) push(i, 'last', 'yellow', `« ${r.last} » est aussi le nom d’une commune : la colonne du lieu a pu glisser dans celle du nom.`, r.last);
+            if (r.first && looksLikeTrade(r.first, trades)) push(i, 'first', 'orange', i18n('« {first} » ressemble à une profession : la colonne a pu être décalée.', {first: r.first}), r.first);
+            if (r.last && places.some(p => norm(typeof p === 'string' ? p : p.value) === norm(r.last)) && !surnames.some(s => norm(typeof s === 'string' ? s : s.value) === norm(r.last))) push(i, 'last', 'yellow', i18n('« {last} » est aussi le nom d’une commune : la colonne du lieu a pu glisser dans celle du nom.', {last: r.last}), r.last);
             // le nom de famille : pareil que le chef pour la famille (sauf l'épouse, les domestiques, la belle-famille…)
-            if (chef && i !== chefIdx && r.last && chef.last && roleOf(r.role)?.spouse && norm(r.last) !== norm(chef.last) && (readingCost(r.last, chef.last) <= 1.3 || lev(r.last, chef.last) <= 2)) push(i, 'last', 'yellow', `Le mari s’appelle « ${chef.last} », l’épouse « ${r.last} » : au recensement, l’épouse est en général inscrite sous le nom du mari (lettres mal lues ?).`, r.last, [{value: chef.last, why: 'le nom du chef du ménage'}]);
+            if (chef && i !== chefIdx && r.last && chef.last && roleOf(r.role)?.spouse && norm(r.last) !== norm(chef.last) && (readingCost(r.last, chef.last) <= 1.3 || lev(r.last, chef.last) <= 2)) push(i, 'last', 'yellow', i18n('Le mari s’appelle « {last} », l’épouse « {last2} » : au recensement, l’épouse est en général inscrite sous le nom du mari (lettres mal lues ?).', {last: chef.last, last2: r.last}), r.last, [{value: chef.last, why: i18n('le nom du chef du ménage')}]);
             if (chef && i !== chefIdx && r.last && chef.last && !SAME_NAME_EXCEPT(r) && norm(r.last) !== norm(chef.last)) {
                 const c = readingCost(r.last, chef.last);
-                if (c <= 1.3) push(i, 'last', 'orange', `Le chef du ménage s’appelle « ${chef.last} » : ${why(r.last, chef.last)}.`, r.last, [{value: chef.last, why: 'le nom du chef du ménage'}]);
-                else if (norm(r.last).length >= 4 && Math.abs(norm(r.last).length - norm(chef.last).length) <= 2 && lev(r.last, chef.last) <= 2) push(i, 'last', 'yellow', `Le chef du ménage s’appelle « ${chef.last} », ici « ${r.last} » : les membres d’un ménage portent en général le même nom (lettres mal lues ?).`, r.last, [{value: chef.last, why: 'le nom du chef du ménage'}]);
+                if (c <= 1.3) push(i, 'last', 'orange', i18n('Le chef du ménage s’appelle « {last} » : {x}.', {last: chef.last, x: why(r.last, chef.last)}), r.last, [{value: chef.last, why: i18n('le nom du chef du ménage')}]);
+                else if (norm(r.last).length >= 4 && Math.abs(norm(r.last).length - norm(chef.last).length) <= 2 && lev(r.last, chef.last) <= 2) push(i, 'last', 'yellow', i18n('Le chef du ménage s’appelle « {last} », ici « {last2} » : les membres d’un ménage portent en général le même nom (lettres mal lues ?).', {last: chef.last, last2: r.last}), r.last, [{value: chef.last, why: i18n('le nom du chef du ménage')}]);
             }
             // noms et prénoms proches de ceux de ta base ou de la liste des prénoms
             if (r.last && !isIdem(r.last) && surnames.length && !out.some(d => d.row === i && d.field === 'last')) {
                 const s = suggest(r.last, surnames, {max: 3});
-                if (s.length) push(i, 'last', 'yellow', `« ${r.last} » n’est pas dans ta base, mais ${s.map(x => `« ${x.value} »`).join(', ')} oui : ${s[0].why}.`, r.last, s);
+                if (s.length) push(i, 'last', 'yellow', `${i18n('« {last} » n’est pas dans ta base, mais {x} oui : {x2}.', {last: r.last, x: s.map(x => `« ${x.value} »`).join(', '), x2: s[0].why})}`, r.last, s);
             }
             if (r.first && !isIdem(r.first) && firstNames.length && !looksLikeTrade(r.first, trades)) {
                 const words = String(r.first).split(/[\s,-]+/).filter(Boolean);
                 words.forEach(w => {
                     const s = suggest(w, firstNames, {max: 3});
-                    if (s.length) push(i, 'first', 'yellow', `Prénom peu courant « ${w} » : ${s.map(x => `« ${x.value} »`).join(' ou ')} ? (${s[0].why})`, r.first, s.map(x => ({value: words.map(y => y === w ? x.value : y).join(' '), why: x.why})));
+                    if (s.length) push(i, 'first', 'yellow', `${i18n('Prénom peu courant « {w} » : {x} ? ({x2})', {w, x: s.map(x => `« ${x.value} »`).join(' ou '), x2: s[0].why})}`, r.first, s.map(x => ({value: words.map(y => y === w ? x.value : y).join(' '), why: x.why})));
                 });
             }
             // le lieu de naissance : plusieurs formes d'un même lieu sur la page (« Hérisson », « Heinon », « Herisses ») → la forme la plus lue
@@ -292,41 +293,41 @@
                 const bestKey = Object.keys(counts).sort((a, b) => (inBase(forms[b]) - inBase(forms[a])) || counts[b] - counts[a])[0], best = bestKey ? forms[bestKey] : '';
                 if (best && norm(best) !== norm(bp.commune) && (counts[bestKey] >= 2 || inBase(best))) {
                     const off = places.length ? suggest(best, places, {max: 1, maxCost: 1.6}) : [];
-                    const props = [{value: best + (bp.dept ? ' ' + bp.dept : ''), why: `la forme lue ${counts[bestKey]} fois sur la page`}, ...off.filter(o => norm(o.value) !== norm(best)).map(o => ({value: o.value + (bp.dept ? ' ' + bp.dept : ''), why: 'la commune connue la plus proche'}))];
-                    push(i, 'birth_place', 'yellow', `« ${bp.commune} » : sur la même page, ce lieu est lu « ${best} » ${counts[bestKey] > 1 ? counts[bestKey] + ' fois' : 'aussi'}${inBase(best) ? ' (commune connue)' : ''} — sans doute le même lieu mal lu.`, r.birth_place, props);
+                    const props = [{value: best + (bp.dept ? ' ' + bp.dept : ''), why: i18n('la forme lue {x} fois sur la page', {x: counts[bestKey]})}, ...off.filter(o => norm(o.value) !== norm(best)).map(o => ({value: o.value + (bp.dept ? ' ' + bp.dept : ''), why: i18n('la commune connue la plus proche')}))];
+                    push(i, 'birth_place', 'yellow', i18n('« {commune} » : sur la même page, ce lieu est lu « {best} » {x}{x2} — sans doute le même lieu mal lu.', {commune: bp.commune, best, x: counts[bestKey] > 1 ? i18n('{n} fois', {n: counts[bestKey]}) : i18n('aussi'), x2: inBase(best) ? ` (${i18n('commune connue')})` : ''}), r.birth_place, props);
                 }
             }
             if (r.birth_place && !isIdem(r.birth_place) && places.length && !out.some(d => d.row === i && d.field === 'birth_place')) {
                 const s = suggest((bp.commune || String(r.birth_place)).replace(/^st\b\.?/i, 'Saint').replace(/^ste\b\.?/i, 'Sainte'), places, {max: 3}).map(x => ({...x, value: x.value + (bp.dept ? ' ' + bp.dept : '')}));
-                if (s.length) push(i, 'birth_place', 'yellow', `Commune inconnue « ${r.birth_place} » : peut-être ${s.map(x => `« ${x.value} »`).join(', ')} (à vérifier, plusieurs choix possibles).`, r.birth_place, s);
+                if (s.length) push(i, 'birth_place', 'yellow', `${i18n('Commune inconnue « {birth_place} » : peut-être {x} (à vérifier, plusieurs choix possibles).', {birth_place: r.birth_place, x: s.map(x => `« ${x.value} »`).join(', ')})}`, r.birth_place, s);
             }
             // âges et années
             const age = ageOf(r), by = r.birth_year ? Number(r.birth_year) : yearOf(r.birth_text);
-            if (r.age !== undefined && r.age !== '' && r.age !== null && age === null) push(i, 'age', 'orange', `Âge illisible « ${r.age} ».`, r.age);
-            if (year && by && by > year) push(i, 'birth_year', 'orange', `Né${genderOf(r) === 'f' ? 'e' : ''} en ${by}, après le recensement de ${year} : un chiffre a été mal lu.`, by, digitVariants(by).filter(v => v.value <= year && v.value >= year - 110));
+            if (r.age !== undefined && r.age !== '' && r.age !== null && age === null) push(i, 'age', 'orange', i18n('Âge illisible « {age} ».', {age: r.age}), r.age);
+            if (year && by && by > year) push(i, 'birth_year', 'orange', i18n(genderOf(r) === 'f' ? 'Née en {by}, après le recensement de {year} : un chiffre a été mal lu.' : 'Né en {by}, après le recensement de {year} : un chiffre a été mal lu.', {by, year}), by, digitVariants(by).filter(v => v.value <= year && v.value >= year - 110));
             if (year && by && age !== null && Math.abs(year - by - age) > 2) {
                 const fix = [...digitVariants(age).filter(v => Math.abs(year - by - v.value) <= 1).map(v => ({value: v.value, why: v.why, field: 'age'})), ...digitVariants(by).filter(v => Math.abs(year - v.value - age) <= 1).map(v => ({value: v.value, why: v.why, field: 'birth_year'}))];
-                push(i, 'age', 'orange', `${age} ans en ${year} veut dire né vers ${year - age}, pas ${by} : un des deux chiffres a été mal lu.`, age, fix);
+                push(i, 'age', 'orange', i18n('{age} ans en {year} veut dire né vers {x}, pas {by} : un des deux chiffres a été mal lu.', {age, year, x: year - age, by}), age, fix);
             }
-            if (age !== null && age > 105) push(i, 'age', 'orange', `${age} ans : âge très rare, un chiffre a pu être mal lu.`, age, digitVariants(age).filter(v => v.value <= 100));
+            if (age !== null && age > 105) push(i, 'age', 'orange', i18n('{age} ans : âge très rare, un chiffre a pu être mal lu.', {age}), age, digitVariants(age).filter(v => v.value <= 100));
             const ro = roleOf(r.role), g = genderOf(r) || firstNameGender(r.first), gFromName = !genderOf(r) && !!g;
             // l'âge et le lien de parenté
-            if (chef && i !== chefIdx && ro?.child && age !== null && chefAge !== null && age >= chefAge) push(i, 'age', 'orange', `${r.role} de ${age} ans, plus âgé${g === 'f' ? 'e' : ''} que le chef du ménage (${chefAge} ans) : un âge a pu être mal lu.`, age, digitVariants(age).filter(v => v.value < chefAge - 12));
-            if (ro?.parent && age !== null && chefAge !== null && age <= chefAge + 12) push(i, 'age', 'orange', `${r.role} de ${age} ans pour un chef de ${chefAge} ans : impossible, un âge a pu être mal lu.`, age, digitVariants(age).filter(v => v.value > chefAge + 14));
-            if ((ro?.spouse || /mere|mère/.test(roleKey(r.role))) && age !== null && age < 14) push(i, 'age', 'orange', `${r.role} de ${age} ans : impossible, un chiffre a été mal lu.`, age, digitVariants(age).filter(v => v.value >= 14));
-            if (ro?.spouse && age !== null && chefAge !== null && Math.abs(age - chefAge) > 40) push(i, 'age', 'yellow', `${Math.abs(age - chefAge)} ans d’écart entre les époux : c’est rare, vérifie les âges.`, age, digitVariants(age).filter(v => Math.abs(v.value - chefAge) <= 25));
+            if (chef && i !== chefIdx && ro?.child && age !== null && chefAge !== null && age >= chefAge) push(i, 'age', 'orange', i18n(g === 'f' ? '{role} de {age} ans, plus âgée que le chef du ménage ({chefAge} ans) : un âge a pu être mal lu.' : '{role} de {age} ans, plus âgé que le chef du ménage ({chefAge} ans) : un âge a pu être mal lu.', {role: r.role, age, chefAge}), age, digitVariants(age).filter(v => v.value < chefAge - 12));
+            if (ro?.parent && age !== null && chefAge !== null && age <= chefAge + 12) push(i, 'age', 'orange', i18n('{role} de {age} ans pour un chef de {chefAge} ans : impossible, un âge a pu être mal lu.', {role: r.role, age, chefAge}), age, digitVariants(age).filter(v => v.value > chefAge + 14));
+            if ((ro?.spouse || /mere|mère/.test(roleKey(r.role))) && age !== null && age < 14) push(i, 'age', 'orange', i18n('{role} de {age} ans : impossible, un chiffre a été mal lu.', {role: r.role, age}), age, digitVariants(age).filter(v => v.value >= 14));
+            if (ro?.spouse && age !== null && chefAge !== null && Math.abs(age - chefAge) > 40) push(i, 'age', 'yellow', i18n('{x} ans d’écart entre les époux : c’est rare, vérifie les âges.', {x: Math.abs(age - chefAge)}), age, digitVariants(age).filter(v => Math.abs(v.value - chefAge) <= 25));
             // les autres recensements de la même personne
             for (const o of (ctx.others?.[i] || [])) {
                 const ob = o.birth_year ? Number(o.birth_year) : (o.age != null && o.year ? Number(o.year) - Number(o.age) : null), mine = bornOf(r, year);
-                if (ob && mine && Math.abs(ob - mine) > 3) push(i, 'age', Math.abs(ob - mine) > 8 ? 'orange' : 'yellow', `Au recensement de ${o.year}, né${g === 'f' ? 'e' : ''} vers ${ob} ; ici vers ${mine}.`, r.age ?? r.birth_year, age !== null && year ? digitVariants(age).filter(v => Math.abs(year - v.value - ob) <= 2) : []);
+                if (ob && mine && Math.abs(ob - mine) > 3) push(i, 'age', Math.abs(ob - mine) > 8 ? 'orange' : 'yellow', i18n(g === 'f' ? 'Au recensement de {year}, née vers {ob} ; ici vers {mine}.' : 'Au recensement de {year}, né vers {ob} ; ici vers {mine}.', {year: o.year, ob, mine}), r.age ?? r.birth_year, age !== null && year ? digitVariants(age).filter(v => Math.abs(year - v.value - ob) <= 2) : []);
             }
             // le lien de parenté
-            if (!String(r.role || '').trim() && rows.length > 1) push(i, 'role', 'yellow', 'Lien avec le chef de ménage vide : la case a pu être sautée.', '');
+            if (!String(r.role || '').trim() && rows.length > 1) push(i, 'role', 'yellow', i18n('Lien avec le chef de ménage vide : la case a pu être sautée.'), '');
             if (ro && ro.g && g && ro.g !== g) {
                 const other = {fils: 'fille', fille: 'fils', 'épouse': 'époux', 'époux': 'épouse', 'père': 'mère', 'mère': 'père', 'frère': 'sœur', 'sœur': 'frère', neveu: 'nièce', 'nièce': 'neveu', 'petit-fils': 'petite-fille', 'petite-fille': 'petit-fils', 'beau-fils': 'belle-fille', 'belle-fille': 'beau-fils', 'grand-mère': 'grand-père', 'grand mère': 'grand-père', 'grand-père': 'grand-mère', 'grand père': 'grand-mère'}[roleKey(r.role)];
-                push(i, 'role', gFromName ? 'yellow' : 'orange', gFromName ? `« ${r.role} » pour « ${String(r.first).split(/\s+/)[0]} », un prénom ${g === 'f' ? 'de femme' : 'd’homme'} : le lien ou le prénom a été mal lu.` : `« ${r.role} » pour ${g === 'f' ? 'une femme' : 'un homme'} : le lien ou le genre a été mal lu.`, r.role, other ? [{value: other, why: 'le lien qui va avec le genre'}] : []);
+                push(i, 'role', gFromName ? 'yellow' : 'orange', gFromName ? i18n('« {role} » pour « {x} », un prénom {x2} : le lien ou le prénom a été mal lu.', {role: r.role, x: String(r.first).split(/\s+/)[0], x2: g === 'f' ? i18n('de femme') : i18n('d’homme')}) : i18n('« {role} » pour {x} : le lien ou le genre a été mal lu.', {role: r.role, x: g === 'f' ? i18n('une femme') : i18n('un homme')}), r.role, other ? [{value: other, why: i18n('le lien qui va avec le genre')}] : []);
             }
-            if (ro?.spouse && chef && i !== chefIdx && genderOf(chef) && ro.g && genderOf(chef) === ro.g) push(i, 'role', 'orange', `« ${r.role} » d’un chef de ménage ${genderOf(chef) === 'f' ? 'femme' : 'homme'} : le lien ou le genre a été mal lu.`, r.role);
+            if (ro?.spouse && chef && i !== chefIdx && genderOf(chef) && ro.g && genderOf(chef) === ro.g) push(i, 'role', 'orange', i18n('« {role} » d’un chef de ménage {x} : le lien ou le genre a été mal lu.', {role: r.role, x: genderOf(chef) === 'f' ? 'femme' : 'homme'}), r.role);
         });
         // variantes d'un même nom entre les membres (« Chévenet » / « Théveuet ») : proposer l'autre forme
         const bare = n => String(n || '').replace(/^(v|ve|vve|vv)\.?\s+/i, '');
@@ -338,14 +339,14 @@
             const top = Math.max(...Object.values(counts)), mine = counts[norm(me)] || 0;
             if (Object.keys(counts).length < 2 || mine > top || (mine === top && Object.values(counts).filter(n => n === top).length === 1)) return;
             const best = Object.keys(counts).filter(k => k !== norm(me) && counts[k] >= mine).sort((a, b) => counts[b] - counts[a] || (chef && norm(bare(chef.last)) === b) - (chef && norm(bare(chef.last)) === a));
-            if (best.length) push(i, 'last', 'yellow', `« ${r.last} » et « ${best.map(k => forms[k]).join(' », « ')} » dans le même ménage : sans doute le même nom mal lu.`, r.last, best.map(k => ({value: forms[k], why: counts[k] > 1 ? `lu ${counts[k]} fois dans le ménage` : 'le nom d’un autre membre du ménage'})));
+            if (best.length) push(i, 'last', 'yellow', i18n('« {last} » et « {x} » dans le même ménage : sans doute le même nom mal lu.', {last: r.last, x: best.map(k => forms[k]).join(' », « ')}), r.last, best.map(k => ({value: forms[k], why: counts[k] > 1 ? i18n('lu {x} fois dans le ménage', {x: counts[k]}) : i18n('le nom d’un autre membre du ménage')})));
         });
         // deux chefs dans le même ménage
         const chefs = rows.map((r, i) => isChef(r.role) ? i : -1).filter(i => i >= 0);
-        if (chefs.length > 1) chefs.slice(1).forEach(i => push(i, 'role', 'orange', `Deux « chef » dans le même ménage : deux ménages ont pu être mis ensemble, ou le lien a été mal lu.`, rows[i].role));
+        if (chefs.length > 1) chefs.slice(1).forEach(i => push(i, 'role', 'orange', i18n('Deux « chef » dans le même ménage : deux ménages ont pu être mis ensemble, ou le lien a été mal lu.'), rows[i].role));
         // la même personne deux fois
         rows.forEach((r, i) => rows.slice(0, i).forEach((o, j) => {
-            if (r.first && r.last && norm(r.first) === norm(o.first) && norm(r.last) === norm(o.last) && (ageOf(r) === ageOf(o) || norm(r.role) === norm(o.role))) push(i, 'first', 'orange', `Même nom, même prénom que la ligne ${j + 1} : la même personne lue deux fois ?`, r.first);
+            if (r.first && r.last && norm(r.first) === norm(o.first) && norm(r.last) === norm(o.last) && (ageOf(r) === ageOf(o) || norm(r.role) === norm(o.role))) push(i, 'first', 'orange', i18n('Même nom, même prénom que la ligne {x} : la même personne lue deux fois ?', {x: j + 1}), r.first);
         }));
         return out;
     }
@@ -361,13 +362,13 @@
             if (!rows.some(r => isChef(r.role) || isChef(r.occupation)) && rows.length) {
                 const pRows = prev ? (prev.rows || prev.members || []) : [];
                 const samePageEnd = prev && (num(rows[0].page) !== null && num(pRows[pRows.length - 1]?.page) !== null && num(rows[0].page) === num(pRows[pRows.length - 1].page) + 1);
-                res[k].push({row: 0, field: 'role', level: samePageEnd ? 'orange' : 'yellow', why: samePageEnd ? 'Ce ménage commence en haut d’une page sans chef : c’est sans doute la suite du ménage de la page d’avant (ménage coupé au changement de page).' : 'Ce ménage n’a pas de chef : il a pu être coupé en deux (changement de page) ou mal découpé.', value: rows[0].role || '', proposals: []});
+                res[k].push({row: 0, field: 'role', level: samePageEnd ? 'orange' : 'yellow', why: samePageEnd ? i18n('Ce ménage commence en haut d’une page sans chef : c’est sans doute la suite du ménage de la page d’avant (ménage coupé au changement de page).') : i18n('Ce ménage n’a pas de chef : il a pu être coupé en deux (changement de page) ou mal découpé.'), value: rows[0].role || '', proposals: []});
             }
             const chef = rows.find(r => isChef(r.role));
             const pChef = prev ? (prev.rows || prev.members || []).find(r => isChef(r.role)) : null;
             rows.forEach((r, i) => {
                 const ro = roleOf(r.role);
-                if (ro?.child && chef && pChef && r.last && norm(r.last) !== norm(chef.last) && readingCost(r.last, chef.last) > 1.3 && norm(r.last) === norm(pChef.last)) res[k].push({row: i, field: 'last', level: 'yellow', why: `${r.role} « ${r.last} » dans le ménage de ${chef.last}, mais le ménage d’avant s’appelle ${pChef.last} : rattaché au mauvais ménage ?`, value: r.last, proposals: []});
+                if (ro?.child && chef && pChef && r.last && norm(r.last) !== norm(chef.last) && readingCost(r.last, chef.last) > 1.3 && norm(r.last) === norm(pChef.last)) res[k].push({row: i, field: 'last', level: 'yellow', why: i18n('{role} « {last} » dans le ménage de {last2}, mais le ménage d’avant s’appelle {last3} : rattaché au mauvais ménage ?', {role: r.role, last: r.last, last2: chef.last, last3: pChef.last}), value: r.last, proposals: []});
             });
         });
         return res;
@@ -383,7 +384,7 @@
             if (e && /[.°]|^[a-z]{2,6}$/i.test(w)) { out.push({word: w, level: 'yellow', why: e.why, proposals: [e]}); continue; }
             if (/^[A-ZÀ-Ý]/.test(w) && w.length >= 4 && ctx.surnames?.length) {
                 const s = suggest(w, [...(ctx.surnames || []), ...(ctx.firstNames || [])], {max: 3});
-                if (s.length) out.push({word: w, level: 'yellow', why: `« ${w} » ressemble à ${s.map(x => `« ${x.value} »`).join(', ')} : ${s[0].why}`, proposals: s});
+                if (s.length) out.push({word: w, level: 'yellow', why: `${i18n('« {w} » ressemble à {x} : {x2}', {w, x: s.map(x => `« ${x.value} »`).join(', '), x2: s[0].why})}`, proposals: s});
             }
         }
         return out;

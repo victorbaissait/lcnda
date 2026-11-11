@@ -7,6 +7,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => { const I = (typeof window !== 'undefined' ? window : globalThis).LCNDA_I18N; if (v) v = Object.fromEntries(Object.entries(v).map(([k, x]) => [k, typeof x === 'number' ? String(x) : x])); return I ? I.t(s, v) : (v ? String(s).replace(/\{(\w+)\}/g, (m, k) => (k in v ? v[k] : m)) : s); }; // 🌐 textes traduits (docs/I18N.md) ; nombres gardés tels quels
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const A = () => window.LCNDA_APP;
     const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
@@ -16,7 +17,7 @@
     const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
     let seq = 0; const zid = () => 'z' + Date.now().toString(36) + (++seq);
 
-    const KINDS = [['bapteme', 'Baptême'], ['naissance', 'Naissance'], ['mariage', 'Mariage'], ['deces', 'Décès'], ['sepulture', 'Sépulture'], ['notarial', 'Acte notarié'], ['recensement', 'Recensement'], ['militaire', 'Registre militaire'], ['lettre', 'Lettre'], ['autre', 'Autre']];
+    const KINDS = [['bapteme', i18n('Baptême')], ['naissance', 'Naissance'], ['mariage', 'Mariage'], ['deces', i18n('Décès')], ['sepulture', i18n('Sépulture')], ['notarial', i18n('Acte notarié')], ['recensement', 'Recensement'], ['militaire', 'Registre militaire'], ['lettre', 'Lettre'], ['autre', 'Autre']];
     const COLORS = ['#f6c343', '#7cc4f0', '#9be08f', '#f59ab0', '#c3a6f2', '#f7a35c', '#6fd6c8', '#e6e15a'];
     // des modèles d'acte, pour ne pas partir d'une page blanche
     const TEMPLATES = {
@@ -130,7 +131,7 @@
     }
 
     /* La langue du texte (lecture automatique + « 📜 Aide à la lecture » ouverte sur cette langue) : retenue d'une fois sur l'autre */
-    const TX_BASE = [['fra', 'Français'], ['lat', 'Latin'], ['fra+lat', 'Français + latin'], ['eng', 'Anglais'], ['deu', 'Allemand'], ['ita', 'Italien'], ['spa', 'Espagnol'], ['pol', 'Polonais'], ['nld', 'Néerlandais'], ['grc', 'Grec ancien'], ['ell', 'Grec moderne']];
+    const TX_BASE = [['fra', i18n('Français')], ['lat', 'Latin'], ['fra+lat', i18n('Français + latin')], ['eng', 'Anglais'], ['deu', 'Allemand'], ['ita', 'Italien'], ['spa', 'Espagnol'], ['pol', 'Polonais'], ['nld', i18n('Néerlandais')], ['grc', 'Grec ancien'], ['ell', 'Grec moderne']];
     /** la liste + les langues de l'aide à la lecture (aide-langues/<code>.js, leur champ `ocr`) qui n'y sont pas encore */
     const txLangs = () => { const out = TX_BASE.slice(), have = new Set(out.map(([k]) => k));
         (window.LCNDA_AIDE_LECTURE?.langs?.() || []).forEach(l => (l.ocr || []).forEach(c => { if (/^[a-z]{3}(\+[a-z]{3})?$/.test(c) && !have.has(c)) { have.add(c); out.push([c, String(l.name || c)]); } }));
@@ -150,26 +151,26 @@
         let dirty = false, tool = 'pan', fitMode = 'page', fitOn = true, zoom = 1, panX = 0, panY = 0, selZone = null, found = [], imgW = 0, imgH = 0, matchCache = new Map();
         const dlg = document.createElement('dialog'); dlg.className = 'modal h-tx-dlg';
         dlg.innerHTML = `<div class="h-tx">
-            <header class="h-tx-top"><span class="h-tx-logo">📜</span><nav class="h-tx-menus" data-tx-menus></nav><span class="ui-topbar-hist h-tx-hist"><button type="button" class="icon-button small" data-tx-hist="undo" title="Annuler" data-shortcut="⌘Z" disabled>↶</button><button type="button" class="icon-button small" data-tx-hist="redo" title="Rétablir" data-shortcut="⇧⌘Z" disabled>↷</button></span><input data-tx="title" class="h-tx-title" maxlength="200" placeholder="Titre de l’acte (ex. Baptême de Jean Martin, 1790)" value="${esc(t.title)}">
-                <select data-tx="kind" title="Genre d’acte">${KINDS.map(([k, l]) => `<option value="${k}" ${t.kind === k ? 'selected' : ''}>${l}</option>`).join('')}</select>
-                <input data-tx="date_text" placeholder="Date" value="${esc(t.date_text)}" title="Date de l’acte"><input data-tx="place" placeholder="Lieu" value="${esc(t.place)}" title="Paroisse, commune"><input data-tx="source" placeholder="Source (AD, cote, vue)" value="${esc(t.source)}" title="Archives, cote, numéro de vue">
-                <select data-tx-state title="Où en est cette transcription (pour la liste « Transcriptions d’actes »)">${[['todo', 'À faire'], ['doing', 'En cours'], ['done', 'Finie']].map(([k, l]) => `<option value="${k}" ${t.data.status === k ? 'selected' : ''}>${l}</option>`).join('')}</select>
+            <header class="h-tx-top"><span class="h-tx-logo">📜</span><nav class="h-tx-menus" data-tx-menus></nav><span class="ui-topbar-hist h-tx-hist"><button type="button" class="icon-button small" data-tx-hist="undo" title="${esc(i18n('Annuler'))}" data-shortcut="⌘Z" disabled>↶</button><button type="button" class="icon-button small" data-tx-hist="redo" title="${esc(i18n('Rétablir'))}" data-shortcut="⇧⌘Z" disabled>↷</button></span><input data-tx="title" class="h-tx-title" maxlength="200" placeholder="${esc(i18n('Titre de l’acte (ex. Baptême de Jean Martin, 1790)'))}" value="${esc(t.title)}">
+                <select data-tx="kind" title="${esc(i18n('Genre d’acte'))}">${KINDS.map(([k, l]) => `<option value="${k}" ${t.kind === k ? 'selected' : ''}>${l}</option>`).join('')}</select>
+                <input data-tx="date_text" placeholder="Date" value="${esc(t.date_text)}" title="${esc(i18n('Date de l’acte'))}"><input data-tx="place" placeholder="${esc(i18n('Lieu'))}" value="${esc(t.place)}" title="Paroisse, commune"><input data-tx="source" placeholder="${esc(i18n('Source (AD, cote, vue)'))}" value="${esc(t.source)}" title="${esc(i18n('Archives, cote, numéro de vue'))}">
+                <select data-tx-state title="${esc(i18n('Où en est cette transcription (pour la liste « Transcriptions d’actes »)'))}">${[['todo', i18n('À faire')], ['doing', i18n('En cours')], ['done', 'Finie']].map(([k, l]) => `<option value="${k}" ${t.data.status === k ? 'selected' : ''}>${l}</option>`).join('')}</select>
                 <span class="spacer"></span><span class="muted h-tx-status" data-tx-status data-ui-status></span>
-                <button type="button" class="button small secondary" data-tx-cmd="export" title="Le texte (.txt), l’impression ou un PDF (image + texte)">⤓ Exporter ▾</button><button type="button" class="button small" data-tx-cmd="save" title="Enregistrer" data-shortcut="${esc(ext.shortcutLabel?.('⌘S') || '⌘S')}">💾 Enregistrer</button>${ext.fullButton ? ext.fullButton('transcribe') : ''}<button type="button" class="icon-button" data-tx-cmd="close" title="Fermer">×</button></header>
+                <button type="button" class="button small secondary" data-tx-cmd="export" title="${esc(i18n('Le texte (.txt), l’impression ou un PDF (image + texte)'))}">⤓ ${i18n('Exporter ▾')}</button><button type="button" class="button small" data-tx-cmd="save" title="${esc(i18n('Enregistrer'))}" data-shortcut="${esc(ext.shortcutLabel?.('⌘S') || '⌘S')}">💾 ${i18n('Enregistrer')}</button>${ext.fullButton ? ext.fullButton('transcribe') : ''}<button type="button" class="icon-button" data-tx-cmd="close" title="${esc(i18n('Fermer'))}">×</button></header>
             <div class="h-tx-main">
-                <nav class="h-tx-rail" data-tx-rail aria-label="Outils"><button type="button" data-tx-tool="pan" title="Déplacer l’image, ou barre d’espace" aria-label="Déplacer l’image" data-shortcut="H">✋</button><button type="button" data-tx-tool="zone" title="Dessiner une zone : choisis un passage dans le texte, puis dessine son rectangle sur l’image (les deux restent liés)" aria-label="Dessiner une zone" data-shortcut="Z">▭</button><button type="button" data-tx-cmd="loupe" title="Loupe qui suit la souris (la molette change le grossissement)" aria-label="Loupe" data-shortcut="L">🔍</button><button type="button" data-tx-cmd="rot" title="Tourner l’image de 90°" aria-label="Tourner de 90°">⟳</button><button type="button" data-tx-cmd="image" title="Choisir l’image de l’acte (base ou ordinateur)" aria-label="Image de l’acte">🖼️</button></nav>
+                <nav class="h-tx-rail" data-tx-rail aria-label="Outils"><button type="button" data-tx-tool="pan" title="${esc(i18n('Déplacer l’image, ou barre d’espace'))}" aria-label="${esc(i18n('Déplacer l’image'))}" data-shortcut="H">✋</button><button type="button" data-tx-tool="zone" title="${esc(i18n('Dessiner une zone : choisis un passage dans le texte, puis dessine son rectangle sur l’image (les deux restent liés)'))}" aria-label="${esc(i18n('Dessiner une zone'))}" data-shortcut="Z">▭</button><button type="button" data-tx-cmd="loupe" title="${esc(i18n('Loupe qui suit la souris (la molette change le grossissement)'))}" aria-label="Loupe" data-shortcut="L">🔍</button><button type="button" data-tx-cmd="rot" title="${esc(i18n('Tourner l’image de 90°'))}" aria-label="${esc(i18n('Tourner de 90°'))}">⟳</button><button type="button" data-tx-cmd="image" title="${esc(i18n('Choisir l’image de l’acte (base ou ordinateur)'))}" aria-label="${esc(i18n('Image de l’acte'))}">🖼️</button></nav>
                 <section class="h-tx-left">
                     <div class="h-tx-barwrap" data-tx-barwrap>${TV.toolbarHtml(t.data.view)}</div>
-                    <div class="h-tx-stage" data-tx-stage tabindex="-1"><svg data-tx-svg><g data-tx-world><image data-tx-img/><g data-tx-zones></g><g data-tx-handles></g><rect data-tx-draw class="h-tx-draw" hidden/></g></svg><canvas class="h-tx-loupe" data-tx-loupe hidden aria-hidden="true"></canvas><p class="h-tx-empty" data-tx-empty>Choisis l’image de l’acte : « 🖼️ Image… » (une photo de la base, ou un fichier de l’ordinateur).</p></div>
+                    <div class="h-tx-stage" data-tx-stage tabindex="-1"><svg data-tx-svg><g data-tx-world><image data-tx-img/><g data-tx-zones></g><g data-tx-handles></g><rect data-tx-draw class="h-tx-draw" hidden/></g></svg><canvas class="h-tx-loupe" data-tx-loupe hidden aria-hidden="true"></canvas><p class="h-tx-empty" data-tx-empty>${i18n('Choisis l’image de l’acte : « 🖼️ Image… » (une photo de la base, ou un fichier de l’ordinateur).')}</p></div>
                     <div class="h-tx-zonebar" data-tx-zonebar hidden></div>
                 </section>
                 <section class="h-tx-right">
-                    <div class="h-tx-tools"><button type="button" data-tx-cmd="ocr" title="Lire un texte imprimé ou tapé (pose aussi les zones ligne par ligne)">🔎 Lire (imprimé)</button><button type="button" data-tx-cmd="htr" title="Lire l’écriture à la main : toute la page, ou seulement la zone choisie (▭). Le texte est proposé ligne par ligne, à relire." data-help="La lecture d’une écriture à la main (HTR), sur cet ordinateur : le texte est proposé ligne par ligne à côté de l’image, les mots peu sûrs surlignés. Elle s’installe une fois dans les Réglages. Relis toujours : elle se trompe sur les noms." data-help-faq="Lire l’acte">✨ Lire l’acte</button><span class="h-tx-htrrun" data-tx-htrrun hidden>${window.LCNDA_UI.spinner('', {inline: true})}<button type="button" class="button small secondary" data-tx-cmd="htrstop" title="Arrêter la lecture">■ Arrêter</button></span>
-                        <select data-tx-lang title="Langue du texte : sert à la lecture automatique, et « 📜 Aide à la lecture » s’ouvre sur cette langue">${txLangs().map(([v, l]) => `<option value="${esc(v)}" ${txLang() === v ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select>
-                        <button type="button" data-tx-cmd="template" title="Un modèle d’acte à compléter">📋 Modèle</button><button type="button" data-tx-cmd="aide" title="Le latin des registres, les abréviations, les anciennes lettres (ſ, ꝑ…) et des exercices : choisis d’abord un mot dans le texte pour le chercher">📜 Aide à la lecture</button><button type="button" data-tx-cmd="detect" title="Repérer les noms, dates, lieux et métiers" data-help="Cherche dans le texte les noms (avec leur rôle : parrain, témoin…), les dates (même en toutes lettres ou au calendrier républicain), les lieux et les métiers, pour les relier aux fiches.">🧭 Repérer</button><span class="spacer"></span>
-                        <details class="h-tx-more"><summary>Plus ▾</summary><div><button type="button" data-tx-cmd="tomedia">↪ Mettre le texte dans le média</button><button type="button" data-tx-cmd="copy">📋 Copier le texte</button><label class="ui-toggle h-tx-useenh" title="La lecture (imprimé et manuscrit) et l’export prennent l’image avec les réglages « Mieux voir » (contraste, netteté, canal, seuil…), sinon l’image d’origine"><input type="checkbox" data-tx-useenh ${useEnh() ? 'checked' : ''}><i></i>Lire et exporter l’image améliorée</label></div></details></div>
-                    <div class="h-tx-chars">${SPECIAL.map(c => `<button type="button" data-tx-char="${esc(c)}" title="Insérer ${esc(c)}">${esc(c)}</button>`).join('')}</div>
-                    <div class="h-tx-editor"><div class="h-tx-mirror" data-tx-mirror aria-hidden="true"></div><textarea data-tx-body spellcheck="false" placeholder="La transcription, ligne à ligne comme sur l’acte. Choisis un passage, puis dessine sa zone sur l’image (▭ Zone) : les deux restent liés.">${esc(t.body)}</textarea></div>
+                    <div class="h-tx-tools"><button type="button" data-tx-cmd="ocr" title="${esc(i18n('Lire un texte imprimé ou tapé (pose aussi les zones ligne par ligne)'))}">🔎 ${i18n('Lire (imprimé)')}</button><button type="button" data-tx-cmd="htr" title="${esc(i18n('Lire l’écriture à la main : toute la page, ou seulement la zone choisie (▭). Le texte est proposé ligne par ligne, à relire.'))}" data-help="${esc(i18n('La lecture d’une écriture à la main (HTR), sur cet ordinateur : le texte est proposé ligne par ligne à côté de l’image, les mots peu sûrs surlignés. Elle s’installe une fois dans les Réglages. Relis toujours : elle se trompe sur les noms.'))}" data-help-faq="Lire l’acte">✨ ${i18n('Lire l’acte')}</button><span class="h-tx-htrrun" data-tx-htrrun hidden>${window.LCNDA_UI.spinner('', {inline: true})}<button type="button" class="button small secondary" data-tx-cmd="htrstop" title="${esc(i18n('Arrêter la lecture'))}">■ ${i18n('Arrêter')}</button></span>
+                        <select data-tx-lang title="${esc(i18n('Langue du texte : sert à la lecture automatique, et « 📜 Aide à la lecture » s’ouvre sur cette langue'))}">${txLangs().map(([v, l]) => `<option value="${esc(v)}" ${txLang() === v ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select>
+                        <button type="button" data-tx-cmd="template" title="${esc(i18n('Un modèle d’acte à compléter'))}">📋 ${i18n('Modèle')}</button><button type="button" data-tx-cmd="aide" title="${esc(i18n('Le latin des registres, les abréviations, les anciennes lettres (ſ, ꝑ…) et des exercices : choisis d’abord un mot dans le texte pour le chercher'))}">📜 ${i18n('Aide à la lecture')}</button><button type="button" data-tx-cmd="detect" title="${esc(i18n('Repérer les noms, dates, lieux et métiers'))}" data-help="${esc(i18n('Cherche dans le texte les noms (avec leur rôle : parrain, témoin…), les dates (même en toutes lettres ou au calendrier républicain), les lieux et les métiers, pour les relier aux fiches.'))}">🧭 ${i18n('Repérer')}</button><span class="spacer"></span>
+                        <details class="h-tx-more"><summary>${i18n('Plus ▾')}</summary><div><button type="button" data-tx-cmd="tomedia">↪ ${i18n('Mettre le texte dans le média')}</button><button type="button" data-tx-cmd="copy">📋 ${i18n('Copier le texte')}</button><label class="ui-toggle h-tx-useenh" title="${esc(i18n('La lecture (imprimé et manuscrit) et l’export prennent l’image avec les réglages « Mieux voir » (contraste, netteté, canal, seuil…), sinon l’image d’origine'))}"><input type="checkbox" data-tx-useenh ${useEnh() ? 'checked' : ''}><i></i>${i18n('Lire et exporter l’image améliorée')}</label></div></details></div>
+                    <div class="h-tx-chars">${SPECIAL.map(c => `<button type="button" data-tx-char="${esc(c)}" title="${esc(i18n('Insérer {c}', {c: esc(c)}))}">${esc(c)}</button>`).join('')}</div>
+                    <div class="h-tx-editor"><div class="h-tx-mirror" data-tx-mirror aria-hidden="true"></div><textarea data-tx-body spellcheck="false" placeholder="${esc(i18n('La transcription, ligne à ligne comme sur l’acte. Choisis un passage, puis dessine sa zone sur l’image (▭ Zone) : les deux restent liés.'))}">${esc(t.body)}</textarea></div>
                     <div class="h-tx-found" data-tx-found></div>
                 </section>
             </div></div>`;
@@ -179,13 +180,13 @@
         const status = s => { const el = $('[data-tx-status]'); el.title = s || ''; if (STATES[s] && UI.savedStatus) UI.savedStatus(el, STATES[s]); else el.textContent = s || ''; };
         let commitT = 0, HX = null, txBar = null; // E1 : un vrai historique ↶ ↷ (texte, zones, personnes, réglages de l'image, fiche de l'acte) ; K18 : la barre du bas
         const flushCommit = () => { if (commitT) { clearTimeout(commitT); commitT = 0; } HX?.commit(); };
-        const touch = () => { dirty = true; status('modifié'); clearTimeout(commitT); commitT = setTimeout(() => { commitT = 0; HX?.commit(); }, 450); };
+        const touch = () => { dirty = true; status(i18n('modifié')); clearTimeout(commitT); commitT = setTimeout(() => { commitT = 0; HX?.commit(); }, 450); };
         // E4 : une image glissée (ou collée) sur l'acte entre dans les Médias et devient l'image de l'acte
         UI.bindFileDrop?.(stage, async files => {
             const f = files[0], fd = new FormData(); fd.append('file', f, f.name); fd.append('kind', 'image'); fd.append('title', f.name.replace(/\.[^.]+$/, '')); fd.append('csrf', A().state.csrf);
             try { const r = await fetch('api.php?action=retouch_media', {method: 'POST', body: fd, headers: {'X-CSRF-Token': A().state.csrf}}), j = await r.json().catch(() => ({})); if (!r.ok || j.error) throw new Error(j.error || 'envoi impossible');
-                if (t.data.zones.length && !await A().confirmBox('Elles étaient posées pour l’ancienne image.', {title: 'Garder les zones déjà posées ?', okLabel: 'Garder les zones', cancelLabel: 'Les retirer', danger: false})) { snap(); t.data.zones = []; }
-                t.media_id = Number(j.result.media_id); t.filename = j.result.filename; touch(); await loadImage(); toast('L’image est dans les Médias et devient l’image de l’acte.');
+                if (t.data.zones.length && !await A().confirmBox(i18n('Elles étaient posées pour l’ancienne image.'), {title: i18n('Garder les zones déjà posées ?'), okLabel: i18n('Garder les zones'), cancelLabel: i18n('Les retirer'), danger: false})) { snap(); t.data.zones = []; }
+                t.media_id = Number(j.result.media_id); t.filename = j.result.filename; touch(); await loadImage(); toast(i18n('L’image est dans les Médias et devient l’image de l’acte.'));
             } catch (e) { toast(`${f.name} : ${e.message}`, 'error'); }
         }, {accept: 'image/*'});
         /* ─── l'image ─── */
@@ -208,8 +209,8 @@
             if (before) { const [ax, ay] = rotPt(cx, cy); panX += (before[0] - ax) * zoom; panY += (before[1] - ay) * zoom; } // le centre de l'image ne bouge pas à l'écran
         }
         const rotWH = () => WH;
-        const FIT = {page: 'Toute l’image', width: 'Largeur', real: '100 %'}, FIT_NEXT = {page: 'width', width: 'real', real: 'page'};
-        const FIT_HELP = {page: 'Toute l’image', width: 'Largeur (l’image prend toute la largeur, le mieux pour lire)', real: 'Taille réelle (100 %)'};
+        const FIT = {page: i18n('Toute l’image'), width: 'Largeur', real: '100 %'}, FIT_NEXT = {page: 'width', width: 'real', real: 'page'};
+        const FIT_HELP = {page: i18n('Toute l’image'), width: i18n('Largeur (l’image prend toute la largeur, le mieux pour lire)'), real: i18n('Taille réelle (100 %)')};
         const fitZoom = mode => { const r = stage.getBoundingClientRect(), [w, h] = rotWH(); return mode === 'real' ? 1 : clamp(mode === 'width' ? (r.width - 20) / w : Math.min((r.width - 20) / w, (r.height - 20) / h), .02, 20); };
         function paintZoomLabel() {
             const b = $('[data-tx-zoomlab]'); if (!b) return;
@@ -249,12 +250,12 @@
             if (TV.needsPixels(v)) {
                 getEnh();
                 if (enh.ok && srcFailed !== t.filename) {
-                    const wasReady = enhFor === t.filename && enh.hasSource(); if (!wasReady) status('Préparation de l’image…');
+                    const wasReady = enhFor === t.filename && enh.hasSource(); if (!wasReady) status(i18n('Préparation de l’image…'));
                     const ready = await ensureSource(); if (!wasReady) status('');
                     if (!dlg.isConnected) return; // l'outil a été fermé pendant la préparation
                     if (ready) { enh.render(t.data.view, {preview}); paintBadge(); return; }
-                    if (srcFailed !== t.filename) { srcFailed = t.filename; toast('« Mieux voir » : cette image n’a pas pu être préparée (trop grande ou abîmée) ; seuls contraste, luminosité, négatif et gris s’appliquent.', 'error'); }
-                } else if (!enh.ok && !applyImage.warned) { applyImage.warned = true; toast('Ce navigateur ne sait pas calculer ces réglages : seuls contraste, luminosité, négatif et gris s’appliquent.', 'error'); }
+                    if (srcFailed !== t.filename) { srcFailed = t.filename; toast(i18n('« Mieux voir » : cette image n’a pas pu être préparée (trop grande ou abîmée) ; seuls contraste, luminosité, négatif et gris s’appliquent.'), 'error'); }
+                } else if (!enh.ok && !applyImage.warned) { applyImage.warned = true; toast(i18n('Ce navigateur ne sait pas calculer ces réglages : seuls contraste, luminosité, négatif et gris s’appliquent.'), 'error'); }
             }
             processed = false; setHref(origSrc()); img.style.filter = TV.cssFilter(v); paintBadge();
         }
@@ -271,12 +272,12 @@
             dlg.querySelectorAll('[data-tx-chan]').forEach(b => { const on = b.dataset.txChan === v.channel; b.classList.toggle('is-active', on); b.setAttribute('aria-pressed', String(on)); });
             paintBadge();
         }
-        function paintBadge() { const b = $('[data-tx-badge]'); if (!b) return; const n = TV.changedCount(t.data.view, TV.panelKeys(TV.barCfg(), narrow)); b.hidden = !n; b.textContent = String(n); b.title = n ? `${n} réglage${n > 1 ? 's' : ''} actif${n > 1 ? 's' : ''} dans « Mieux voir »` : ''; }
+        function paintBadge() { const b = $('[data-tx-badge]'); if (!b) return; const n = TV.changedCount(t.data.view, TV.panelKeys(TV.barCfg(), narrow)); b.hidden = !n; b.textContent = String(n); b.title = n ? i18n(n > 1 ? '{n} réglages actifs dans « Mieux voir »' : '{n} réglage actif dans « Mieux voir »', {n}) : ''; }
         async function loadImage() {
             const has = !!t.filename; $('[data-tx-empty]').hidden = has; img.style.display = has ? '' : 'none'; if (!has) return;
             const src = origSrc();
             imgW = imgH = 0; srcEl = null; enhFor = ''; // une autre image : rien de l'ancienne ne reste (taille, préparation « Mieux voir »)
-            await new Promise(res => { const i = new Image(); i.onload = () => { imgW = i.naturalWidth; imgH = i.naturalHeight; srcEl = i; res(); }; i.onerror = () => { toast('Image de l’acte illisible.', 'error'); res(); }; i.src = src; });
+            await new Promise(res => { const i = new Image(); i.onload = () => { imgW = i.naturalWidth; imgH = i.naturalHeight; srcEl = i; res(); }; i.onerror = () => { toast(i18n('Image de l’acte illisible.'), 'error'); res(); }; i.src = src; });
             if (!dlg.isConnected) return;
             img.setAttribute('width', imgW); img.setAttribute('height', imgH); geom({keepCenter: false}); setHref(src); applyFit('page'); await applyImage(); drawZones();
         }
@@ -284,7 +285,7 @@
         const colorOf = (z, i) => z.c || COLORS[i % COLORS.length];
         function paintZoneRects() {
             const g = $('[data-tx-zones]'), sw = 2 / zoom;
-            g.innerHTML = t.data.zones.map((z, i) => `<rect data-tx-zone="${esc(z.id)}"${selZone === z.id ? ' class="is-sel"' : ''} x="${z.x}" y="${z.y}" width="${z.w}" height="${z.h}" fill="${colorOf(z, i)}" fill-opacity="${selZone === z.id ? .38 : .2}" stroke="${colorOf(z, i)}" stroke-width="${selZone === z.id ? sw * 2 : sw}"><title>${esc(t.body.slice(z.s, z.e).slice(0, 120) || z.note || 'Zone non reliée')}${selZone === z.id ? ' — glisse pour la déplacer, tire une poignée pour la redimensionner (flèches, Maj + flèches)' : ''}</title></rect>`).join('');
+            g.innerHTML = t.data.zones.map((z, i) => `<rect data-tx-zone="${esc(z.id)}"${selZone === z.id ? ' class="is-sel"' : ''} x="${z.x}" y="${z.y}" width="${z.w}" height="${z.h}" fill="${colorOf(z, i)}" fill-opacity="${selZone === z.id ? .38 : .2}" stroke="${colorOf(z, i)}" stroke-width="${selZone === z.id ? sw * 2 : sw}"><title>${esc(t.body.slice(z.s, z.e).slice(0, 120) || z.note || i18n('Zone non reliée'))}${selZone === z.id ? ` ${i18n('— glisse pour la déplacer, tire une poignée pour la redimensionner (flèches, Maj + flèches)')}` : ''}</title></rect>`).join('');
             paintHandles();
         }
         function drawZones() { paintZoneRects(); paintMirror(); paintZoneBar(); paintTxBar(); }
@@ -299,7 +300,7 @@
             const g = $('[data-tx-handles]'), z = t.data.zones.find(q => q.id === selZone);
             if (!z || !imgW) { g.innerHTML = ''; return; }
             const hpx = coarse ? 20 : HANDLE_PX, hs = hpx / zoom, sw = 1.5 / zoom;
-            if (!g.firstChild) g.innerHTML = '<polygon class="h-tx-sel-frame"/>' + HANDLES.map(([k]) => `<rect class="h-tx-handle" data-tx-h="${k}"><title>Tirer pour redimensionner</title></rect>`).join('');
+            if (!g.firstChild) g.innerHTML = '<polygon class="h-tx-sel-frame"/>' + HANDLES.map(([k]) => `<rect class="h-tx-handle" data-tx-h="${k}"><title>${i18n('Tirer pour redimensionner')}</title></rect>`).join('');
             const set = (el, o) => Object.entries(o).forEach(([a, v]) => el.setAttribute(a, v)); // les mêmes éléments, déplacés (pas de clignotement sous le doigt)
             const at = (fx, fy) => rotPt(z.x + z.w * fx, z.y + z.h * fy);
             set(g.firstChild, {points: [[0, 0], [1, 0], [1, 1], [0, 1]].map(([fx, fy]) => at(fx, fy).join(',')).join(' '), 'stroke-width': sw, 'stroke-dasharray': `${4 / zoom} ${3 / zoom}`});
@@ -322,9 +323,9 @@
         function paintZoneBar() {
             const bar = $('[data-tx-zonebar]'), z = t.data.zones.find(q => q.id === selZone); bar.hidden = !z; if (!z) return;
             const linked = z.e > z.s;
-            bar.innerHTML = `<b>Zone</b> ${linked ? `« ${esc(t.body.slice(z.s, z.e).slice(0, 60))}${z.e - z.s > 60 ? '…' : ''} »` : '<span class="muted">pas encore reliée au texte</span>'}
-                <button type="button" class="button small secondary" data-tx-zlink title="Relier cette zone au passage choisi dans le texte">🔗 Au passage choisi</button><input data-tx-znote placeholder="Note (mot illisible, signature…)" value="${esc(z.note || '')}" maxlength="300"><input type="color" data-tx-zcolor value="${esc(z.c || COLORS[t.data.zones.indexOf(z) % COLORS.length])}" title="Couleur"><button type="button" class="button small secondary" data-tx-cmd="htrzone" title="Lire l’écriture à la main dans cette zone seulement">✨ Lire cette zone</button><button type="button" class="button small danger" data-tx-zdel title="Supprimer la zone (Suppr) — « ↶ Annuler » la remet">🗑</button>
-                <small class="muted h-tx-zkeys" title="Glisse la zone pour la déplacer, tire une des 8 poignées pour changer sa taille">↔ glisser · poignées · flèches · Maj + flèches · ⌘Z</small>`;
+            bar.innerHTML = `<b>Zone</b> ${linked ? `« ${esc(t.body.slice(z.s, z.e).slice(0, 60))}${z.e - z.s > 60 ? '…' : ''} »` : `<span class="muted">${i18n('pas encore reliée au texte')}</span>`}
+                <button type="button" class="button small secondary" data-tx-zlink title="${esc(i18n('Relier cette zone au passage choisi dans le texte'))}">🔗 ${i18n('Au passage choisi')}</button><input data-tx-znote placeholder="Note (mot illisible, signature…)" value="${esc(z.note || '')}" maxlength="300"><input type="color" data-tx-zcolor value="${esc(z.c || COLORS[t.data.zones.indexOf(z) % COLORS.length])}" title="Couleur"><button type="button" class="button small secondary" data-tx-cmd="htrzone" title="${esc(i18n('Lire l’écriture à la main dans cette zone seulement'))}">✨ ${i18n('Lire cette zone')}</button><button type="button" class="button small danger" data-tx-zdel title="${esc(i18n('Supprimer la zone (Suppr) — « ↶ Annuler » la remet'))}">🗑</button>
+                <small class="muted h-tx-zkeys" title="${esc(i18n('Glisse la zone pour la déplacer, tire une des 8 poignées pour changer sa taille'))}">↔ ${i18n('glisser · poignées · flèches · Maj + flèches · ⌘Z')}</small>`;
         }
         /* ─── ⌘Z / ⇧⌘Z pour les zones (le texte garde l'annulation de la case) ─── */
         const hist = {undo: [], redo: []}, cloneZones = () => t.data.zones.map(z => ({...z}));
@@ -332,7 +333,7 @@
         const snap = () => flushCommit(); // l'état d'avant est gardé dans l'historique
         function undoZones(redo = false) {
             flushCommit(); const ok = HX ? (redo ? HX.redo() : HX.undo()) : false;
-            status(ok ? (redo ? '↷ Rétabli' : '↶ Annulé') : (redo ? 'Rien à rétablir' : 'Rien à annuler')); return ok;
+            status(ok ? (redo ? `↷ ${i18n('Rétabli')}` : `↶ ${i18n('Annulé')}`) : (redo ? i18n('Rien à rétablir') : i18n('Rien à annuler'))); return ok;
         }
         /** H7 : la zone part tout de suite, « ↶ Annuler » la remet à sa place (liée au même passage) */
         function deleteZone(id = selZone) {
@@ -340,7 +341,7 @@
             snap(); t.data.zones.splice(i, 1); if (selZone === id) selZone = null; touch(); drawZones();
             const put = () => { if (!t.data.zones.some(q => q.id === gone.id)) { snap(); t.data.zones.splice(Math.min(i, t.data.zones.length), 0, {...gone}); selZone = gone.id; touch(); drawZones(); } };
             const del = () => { if (t.data.zones.some(q => q.id === gone.id)) { snap(); t.data.zones = t.data.zones.filter(q => q.id !== gone.id); if (selZone === gone.id) selZone = null; touch(); drawZones(); } };
-            (A().undoToast || toast)('Zone supprimée', {undo: put, redo: del});
+            (A().undoToast || toast)(i18n('Zone supprimée'), {undo: put, redo: del});
         }
         /** garder les liens quand on écrit : les passages après la modification se décalent */
         let before = area.value;
@@ -411,13 +412,13 @@
         const endPointer = e => {
             pointers.delete(e.pointerId); if (pinch) { if (pointers.size < 2) pinch = null; drag = null; return; }
             const d = drag; drag = null; delete stage.dataset.drag; $('[data-tx-draw]').hidden = true; if (!d) return;
-            if (d.edit) { if (d.moved && e.type !== 'pointercancel') { hist.undo.push(d.before); hist.redo = []; touch(); drawZones(); status(d.edit === 'move' ? 'Zone déplacée (⌘Z pour annuler)' : 'Zone redimensionnée (⌘Z pour annuler)'); } else if (d.moved) { Object.assign(d.z, d.orig); drawZones(); } return; }
+            if (d.edit) { if (d.moved && e.type !== 'pointercancel') { hist.undo.push(d.before); hist.redo = []; touch(); drawZones(); status(d.edit === 'move' ? i18n('Zone déplacée (⌘Z pour annuler)') : i18n('Zone redimensionnée (⌘Z pour annuler)')); } else if (d.moved) { Object.assign(d.z, d.orig); drawZones(); } return; }
             if (!d.zone || e.type === 'pointercancel') return;
             const x = clamp(Math.min(d.x0, d.x1), 0, imgW), y = clamp(Math.min(d.y0, d.y1), 0, imgH), w = Math.min(imgW - x, Math.abs(d.x1 - d.x0)), h = Math.min(imgH - y, Math.abs(d.y1 - d.y0));
             if (w < 4 || h < 4) return;
             const s = area.selectionStart, e2 = area.selectionEnd, z = {id: zid(), x: Math.round(x), y: Math.round(y), w: Math.round(w), h: Math.round(h), s: e2 > s ? s : 0, e: e2 > s ? e2 : 0, note: '', c: ''};
             snap(); t.data.zones.push(z); selZone = z.id; touch(); drawZones(); stage.focus({preventScroll: true});
-            status(e2 > s ? 'Zone reliée au passage choisi' : 'Zone posée : choisis son passage dans le texte, puis « 🔗 Au passage choisi »');
+            status(e2 > s ? i18n('Zone reliée au passage choisi') : i18n('Zone posée : choisis son passage dans le texte, puis « 🔗 Au passage choisi »'));
         };
         svg.addEventListener('pointerup', endPointer); svg.addEventListener('pointercancel', endPointer);
         stage.addEventListener('wheel', e => { e.preventDefault(); if (loupe.on && !lc.hidden) { loupe.mag = clamp(loupe.mag * Math.exp(-e.deltaY * .002), 1.5, 12); paintLoupe(e.clientX, e.clientY); return; } const r = svg.getBoundingClientRect(), cx = e.clientX - r.left, cy = e.clientY - r.top; if (e.ctrlKey || e.metaKey || !e.deltaX) zoomAt(zoom * Math.exp(-e.deltaY * .0022), cx, cy); else { panX -= e.deltaX; panY -= e.deltaY; applyView(); } }, {passive: false});
@@ -432,35 +433,35 @@
             const corner = resize ? [['nw', 0, 0], ['ne', 1, 0], ['se', 1, 1], ['sw', 0, 1]].map(([k, fx, fy]) => { const [X, Y] = rotPt(z.x + z.w * fx, z.y + z.h * fy); return [k, X + Y]; }).sort((a, b) => b[1] - a[1])[0][0] : 'move';
             setGeom(z, editRect({x: z.x, y: z.y, w: z.w, h: z.h}, corner, dx, dy)); touch(); paintZoneRects(); reveal(z);
         }
-        const TOOL_HELP = {pan: 'Glisse pour déplacer l’image (ou barre d’espace) · molette : zoomer · clic sur une zone : la choisir', zone: 'Choisis un passage dans le texte, puis dessine son rectangle sur l’image : les deux restent liés'};
-        function paintTxBar() { if (!txBar) return; txBar.setHelp(TOOL_HELP[tool] || ''); txBar.setWhere(imgW ? `${imgW} × ${imgH} px · ${A().plural ? A().plural(t.data.zones.length, 'zone') : t.data.zones.length + ' zones'}` : 'Pas encore d’image'); txBar.sync(); }
+        const TOOL_HELP = {pan: i18n('Glisse pour déplacer l’image (ou barre d’espace) · molette : zoomer · clic sur une zone : la choisir'), zone: i18n('Choisis un passage dans le texte, puis dessine son rectangle sur l’image : les deux restent liés')};
+        function paintTxBar() { if (!txBar) return; txBar.setHelp(TOOL_HELP[tool] || ''); txBar.setWhere(imgW ? `${imgW} × ${imgH} px · ${A().plural ? A().plural(t.data.zones.length, 'zone') : t.data.zones.length + ' zones'}` : i18n('Pas encore d’image')); txBar.sync(); }
         const setTool = k => { tool = k; dlg.querySelectorAll('[data-tx-tool]').forEach(b => { b.classList.toggle('is-active', b.dataset.txTool === k); b.setAttribute('aria-pressed', String(b.dataset.txTool === k)); }); stage.dataset.tool = k; paintTxBar(); };
         setTool('pan');
         /* ─── ce qui est repéré : noms (et fiches), dates, lieux, métiers ─── */
         function paintPeople() {
             const box = $('[data-tx-found]'), people = t.data.people;
-            const kept = people.length ? `<h4>Personnes de l’acte</h4><ul class="h-tx-people">${people.map((p, i) => `<li><button type="button" class="link-button" data-tx-goto="${p.s}:${p.e}">${esc(p.name)}</button>
-                <select data-tx-prole="${i}" title="Rôle dans l’acte">${['', 'sujet', 'parent', 'conjoint', 'conjoint défunt', 'défunt', 'parrain', 'marraine', 'témoin', 'déclarant', 'officiant', 'officier', 'notaire', 'autre'].map(r => `<option value="${r}" ${p.role === r ? 'selected' : ''}>${r || '— rôle —'}</option>`).join('')}</select>
-                ${p.person_id ? `<button type="button" class="h-tx-linked" data-tx-popen="${p.person_id}" title="Ouvrir la fiche">👤 fiche n° ${p.person_id}</button><button type="button" class="link-button" data-tx-punlink="${i}">délier</button>` : `<button type="button" class="button small secondary" data-tx-plink="${i}">🔗 Fiche…</button>`}<button type="button" class="icon-button" data-tx-pdel="${i}" title="Retirer">×</button></li>`).join('')}</ul>` : '';
-            const groups = [['person', '👤 Noms repérés'], ['date', '📅 Dates'], ['place', '📍 Lieux'], ['job', '🔨 Métiers']].map(([k, l]) => { const list = found.filter(f => f.type === k); if (!list.length) return '';
-                return `<h4>${l} <small class="muted">${list.length}</small>${k === 'person' ? ' <button type="button" class="link-button" data-tx-keepall>tout garder</button>' : ''}</h4><div class="h-tx-chips">${list.map(f => `<span class="h-tx-chip is-${k}"><button type="button" data-tx-goto="${f.s}:${f.e}" title="Montrer dans le texte">${esc(f.label)}${f.role ? ` <i>${esc(f.role)}</i>` : ''}</button>${k === 'person' ? `${(matchCache.get(f.label) || []).slice(0, 2).map(m => `<button type="button" class="h-tx-match" data-tx-match="${found.indexOf(f)}:${m.id}" title="Garder et relier à cette fiche">↔ ${esc(m.name)} <small>${esc(m.years)}</small></button>`).join('')}<button type="button" data-tx-keep="${found.indexOf(f)}" title="Garder dans les personnes de l’acte">＋</button>` : k === 'date' && f.iso ? `<button type="button" data-tx-setdate="${esc(f.label)}" title="Date de l’acte">⇢ date</button>` : k === 'place' ? `<button type="button" data-tx-setplace="${esc(f.label)}" title="Lieu de l’acte">⇢ lieu</button>` : ''}</span>`).join('')}</div>`; }).join('');
+            const kept = people.length ? `<h4>${i18n('Personnes de l’acte')}</h4><ul class="h-tx-people">${people.map((p, i) => `<li><button type="button" class="link-button" data-tx-goto="${p.s}:${p.e}">${esc(p.name)}</button>
+                <select data-tx-prole="${i}" title="${esc(i18n('Rôle dans l’acte'))}">${['', 'sujet', 'parent', 'conjoint', 'conjoint défunt', 'défunt', 'parrain', 'marraine', 'témoin', 'déclarant', 'officiant', 'officier', 'notaire', 'autre'].map(r => `<option value="${r}" ${p.role === r ? 'selected' : ''}>${r ? esc(i18n(r, {ctx: 'role'})) : i18n('— rôle —')}</option>`).join('')}</select>
+                ${p.person_id ? `<button type="button" class="h-tx-linked" data-tx-popen="${p.person_id}" title="${esc(i18n('Ouvrir la fiche'))}">👤 ${i18n('fiche n° {person_id}', {person_id: p.person_id})}</button><button type="button" class="link-button" data-tx-punlink="${i}">${i18n('délier')}</button>` : `<button type="button" class="button small secondary" data-tx-plink="${i}">🔗 ${i18n('Fiche…')}</button>`}<button type="button" class="icon-button" data-tx-pdel="${i}" title="${esc(i18n('Retirer'))}">×</button></li>`).join('')}</ul>` : '';
+            const groups = [['person', `👤 ${i18n('Noms repérés')}`], ['date', '📅 Dates'], ['place', `📍 ${i18n('Lieux')}`], ['job', `🔨 ${i18n('Métiers')}`]].map(([k, l]) => { const list = found.filter(f => f.type === k); if (!list.length) return '';
+                return `<h4>${l} <small class="muted">${list.length}</small>${k === 'person' ? ` <button type="button" class="link-button" data-tx-keepall>${i18n('tout garder')}</button>` : ''}</h4><div class="h-tx-chips">${list.map(f => `<span class="h-tx-chip is-${k}"><button type="button" data-tx-goto="${f.s}:${f.e}" title="${esc(i18n('Montrer dans le texte'))}">${esc(f.label)}${f.role ? ` <i>${esc(f.role)}</i>` : ''}</button>${k === 'person' ? `${(matchCache.get(f.label) || []).slice(0, 2).map(m => `<button type="button" class="h-tx-match" data-tx-match="${found.indexOf(f)}:${m.id}" title="${esc(i18n('Garder et relier à cette fiche'))}">↔ ${esc(m.name)} <small>${esc(m.years)}</small></button>`).join('')}<button type="button" data-tx-keep="${found.indexOf(f)}" title="${esc(i18n('Garder dans les personnes de l’acte'))}">＋</button>` : k === 'date' && f.iso ? `<button type="button" data-tx-setdate="${esc(f.label)}" title="${esc(i18n('Date de l’acte'))}">⇢ date</button>` : k === 'place' ? `<button type="button" data-tx-setplace="${esc(f.label)}" title="${esc(i18n('Lieu de l’acte'))}">⇢ ${i18n('lieu')}</button>` : ''}</span>`).join('')}</div>`; }).join('');
             const lg = aideLang($('[data-tx-lang]').value), kw = lg && found.length + people.length ? (window.LCNDA_AIDE_LECTURE?.known?.(area.value, lg) || []) : [];
-            const words = kw.length ? `<h4>📜 Mots connus (${esc(langName(lg).toLowerCase())}) <small class="muted">${kw.length}</small></h4><div class="h-tx-chips">${kw.map(w => `<span class="h-tx-chip is-word"><button type="button" data-tx-lookword="${esc(String(w.item.t).split(',')[0].trim())}" title="Ouvrir dans 📜 Aide à la lecture">${esc(w.word)} <i>${esc(w.item.d.length > 48 ? `${w.item.d.slice(0, 46)}…` : w.item.d)}</i></button></span>`).join('')}</div>` : '';
-            box.innerHTML = kept + groups + words || '<p class="muted h-tx-hint">« 🧭 Repérer » cherche dans le texte les noms (et leur rôle : parrain, témoin, fils de…), les dates (même en toutes lettres, ou au calendrier républicain), les lieux et les métiers, et propose les fiches de ta base qui leur ressemblent.</p>';
+            const words = kw.length ? `<h4>📜 Mots connus (${esc(langName(lg).toLowerCase())}) <small class="muted">${kw.length}</small></h4><div class="h-tx-chips">${kw.map(w => `<span class="h-tx-chip is-word"><button type="button" data-tx-lookword="${esc(String(w.item.t).split(',')[0].trim())}" title="${esc(i18n('Ouvrir dans 📜 Aide à la lecture'))}">${esc(w.word)} <i>${esc(w.item.d.length > 48 ? `${w.item.d.slice(0, 46)}…` : w.item.d)}</i></button></span>`).join('')}</div>` : '';
+            box.innerHTML = kept + groups + words || `<p class="muted h-tx-hint">${i18n('« 🧭 Repérer » cherche dans le texte les noms (et leur rôle : parrain, témoin, fils de…), les dates (même en toutes lettres, ou au calendrier républicain), les lieux et les métiers, et propose les fiches de ta base qui leur ressemblent.')}</p>`;
         }
         async function runDetect() {
             found = detect(area.value);
             const names = [...new Set(found.filter(f => f.type === 'person').map(f => f.label))].filter(n => !matchCache.has(n));
             if (names.length) { try { const r = await post('act_match_people', {names}); (r.result || []).forEach((list, i) => matchCache.set(names[i], list)); } catch (_) {} }
-            paintMirror(); paintPeople(); status(`${found.length} élément${found.length > 1 ? 's' : ''} repéré${found.length > 1 ? 's' : ''}`);
+            paintMirror(); paintPeople(); status(i18n(found.length > 1 ? '{n} éléments repérés' : '{n} élément repéré', {n: found.length}));
         }
         const keep = (f, personId = 0) => { if (t.data.people.some(p => p.s === f.s && p.e === f.e)) { if (personId) t.data.people.find(p => p.s === f.s && p.e === f.e).person_id = personId; } else t.data.people.push({name: f.label, role: f.role || '', person_id: personId, s: f.s, e: f.e}); touch(); paintPeople(); };
         function linkPerson(i) {
             const p = t.data.people[i];
-            ext.openDialog({eyebrow: 'TRANSCRIPTION', title: `Relier « ${p.name} » à une fiche`, submitLabel: 'Relier',
-                body: `<div class="h-pk-solo"><span class="pk-lab">Personne</span>${(window.LCNDA_PICKER || A()).pickerField({name: 'tx_pick', kind: 'person', value: p.person_id || null})}</div>`,
+            ext.openDialog({eyebrow: 'TRANSCRIPTION', title: i18n('Relier « {name} » à une fiche', {name: p.name}), submitLabel: i18n('Relier'),
+                body: `<div class="h-pk-solo"><span class="pk-lab">${i18n('Personne')}</span>${(window.LCNDA_PICKER || A()).pickerField({name: 'tx_pick', kind: 'person', value: p.person_id || null})}</div>`,
                 onOpen: dg => { const q = dg.querySelector('.pk-search:not([hidden]) .pk-input'); if (!q) return; q.value = p.name; setTimeout(() => { q.focus(); q.dispatchEvent(new Event('input', {bubbles: true})); }, 30); }, // les fiches du nom lu s’affichent tout de suite
-                onSubmit: f => { const chosen = Number(f.elements.tx_pick?.value) || 0; if (!chosen) return window.LCNDA_UI.fail(f.elements.tx_pick, 'Choisis une fiche.'); p.person_id = chosen; touch(); paintPeople(); }});
+                onSubmit: f => { const chosen = Number(f.elements.tx_pick?.value) || 0; if (!chosen) return window.LCNDA_UI.fail(f.elements.tx_pick, i18n('Choisis une fiche.')); p.person_id = chosen; touch(); paintPeople(); }});
         }
         $('[data-tx-found]').addEventListener('click', async e => {
             const b = e.target.closest('button'); if (!b) return; const d = b.dataset;
@@ -468,13 +469,13 @@
             if (d.txGoto) { const [s, en] = d.txGoto.split(':').map(Number); selectText({s, e: en}); const z = t.data.zones.find(q => q.s < en && s < q.e); if (z) { selZone = z.id; drawZones(); reveal(z); } return; }
             if (d.txKeep) return keep(found[Number(d.txKeep)]);
             if (d.txKeepall !== undefined) { found.filter(f => f.type === 'person').forEach(f => keep(f)); return; }
-            if (d.txMatch) { const [fi, pid] = d.txMatch.split(':').map(Number); keep(found[fi], pid); toast('Personne gardée et reliée à sa fiche.'); return; }
+            if (d.txMatch) { const [fi, pid] = d.txMatch.split(':').map(Number); keep(found[fi], pid); toast(i18n('Personne gardée et reliée à sa fiche.')); return; }
             if (d.txSetdate) { t.date_text = d.txSetdate; $('[data-tx="date_text"]').value = d.txSetdate; touch(); return; }
             if (d.txSetplace) { t.place = d.txSetplace; $('[data-tx="place"]').value = d.txSetplace; touch(); return; }
             if (d.txPlink) return linkPerson(Number(d.txPlink));
             if (d.txPunlink) { t.data.people[Number(d.txPunlink)].person_id = 0; touch(); paintPeople(); return; }
             if (d.txPdel) { t.data.people.splice(Number(d.txPdel), 1); touch(); paintPeople(); return; }
-            if (d.txPopen) { if (dirty && !await A().confirmBox('La transcription non enregistrée sera perdue (💾 d’abord).', {title: 'Ouvrir la fiche ?', okLabel: 'Ouvrir sans enregistrer', danger: true})) return; teardown(); A().openPersonById?.(Number(d.txPopen)); }
+            if (d.txPopen) { if (dirty && !await A().confirmBox(i18n('La transcription non enregistrée sera perdue (💾 d’abord).'), {title: i18n('Ouvrir la fiche ?'), okLabel: i18n('Ouvrir sans enregistrer'), danger: true})) return; teardown(); A().openPersonById?.(Number(d.txPopen)); }
         });
         $('[data-tx-found]').addEventListener('change', e => { const s = e.target.closest('[data-tx-prole]'); if (s) { t.data.people[Number(s.dataset.txProle)].role = s.value; touch(); } });
         /* ─── lecture automatique ─── */
@@ -482,28 +483,28 @@
          *  Sans redressement ni miroir : les zones posées par la lecture restent en pixels de l'image. */
         async function filteredCanvas({gray = true} = {}) {
             const v = t.data.view, enhanced = useEnh();
-            if (!imgW || !imgH) throw new Error('Image de l’acte illisible.');
-            let i = await new Promise((ok, ko) => { const im = new Image(); im.onload = () => ok(im); im.onerror = () => ko(new Error('Image de l’acte illisible.')); im.src = origSrc(); });
-            if (enhanced && TV.needsPixels(v) && getEnh().ok) { srcEl = srcEl || i; if (!await ensureSource()) throw new Error('« Mieux voir » : cette image n’a pas pu être préparée.'); i = await createImageBitmap(await enh.full(v)); }
+            if (!imgW || !imgH) throw new Error(i18n('Image de l’acte illisible.'));
+            let i = await new Promise((ok, ko) => { const im = new Image(); im.onload = () => ok(im); im.onerror = () => ko(new Error(i18n('Image de l’acte illisible.'))); im.src = origSrc(); });
+            if (enhanced && TV.needsPixels(v) && getEnh().ok) { srcEl = srcEl || i; if (!await ensureSource()) throw new Error(i18n('« Mieux voir » : cette image n’a pas pu être préparée.')); i = await createImageBitmap(await enh.full(v)); }
             const c = document.createElement('canvas'); c.width = imgW; c.height = imgH; const g = c.getContext('2d');
             const css = enhanced && !TV.needsPixels(v) ? TV.cssFilter(v) : '';
             g.filter = `${css}${gray ? ' grayscale(1)' : ''}`.trim() || 'none'; g.drawImage(i, 0, 0, imgW, imgH); return c;
         }
         const viewChanged = () => Object.entries(TV.DEFAULT_VIEW).some(([k, d]) => k !== 'rot' && k !== 'tilt' && k !== 'mirror' && String(t.data.view[k]) !== String(d));
         async function runOcr() {
-            if (!t.filename) return toast('Choisis d’abord l’image de l’acte.', 'error');
-            const lang = $('[data-tx-lang]').value; status('Chargement du lecteur…');
+            if (!t.filename) return toast(i18n('Choisis d’abord l’image de l’acte.'), 'error');
+            const lang = $('[data-tx-lang]').value; status(i18n('Chargement du lecteur…'));
             try {
-                const T = await A().loadOcrEngine(); status('Lecture de l’image…');
+                const T = await A().loadOcrEngine(); status(i18n('Lecture de l’image…'));
                 const r = await T.recognize(await filteredCanvas(), lang);
                 const dd = r?.data || {}, lines = (dd.lines?.length ? dd.lines : (dd.blocks || []).flatMap(bl => (bl.paragraphs || []).flatMap(pg => pg.lines || []))).filter(l => (l.text || '').trim() && l.bbox);
-                if (!lines.length) { const plain = String(dd.text || '').trim(); if (!plain) { status(''); return toast('Aucun texte lu sur cette image (essaie le contraste, ou « Lire (manuscrit) »).', 'error'); }
-                    area.value += (area.value.trim() ? '\n\n' : '') + plain; before = area.value; t.body = area.value; touch(); paintMirror(); status('Texte lu (à relire)'); return; }
+                if (!lines.length) { const plain = String(dd.text || '').trim(); if (!plain) { status(''); return toast(i18n('Aucun texte lu sur cette image (essaie le contraste, ou « Lire (manuscrit) »).'), 'error'); }
+                    area.value += (area.value.trim() ? '\n\n' : '') + plain; before = area.value; t.body = area.value; touch(); paintMirror(); status(i18n('Texte lu (à relire)')); return; }
                 let text = area.value; if (text.trim()) text += '\n\n'; const start = text.length;
                 const made = [];
                 lines.forEach(l => { const s = text.length, line = l.text.replace(/\s+$/, ''); text += line + '\n'; const b = l.bbox; made.push({id: zid(), x: b.x0, y: b.y0, w: b.x1 - b.x0, h: b.y1 - b.y0, s, e: s + line.length, note: '', c: ''}); });
                 area.value = text; before = text; t.body = text; snap(); t.data.zones.push(...made); touch(); drawZones();
-                status(`${lines.length} ligne${lines.length > 1 ? 's' : ''} lue${lines.length > 1 ? 's' : ''} (à relire)`); toast('Texte lu et zones posées ligne par ligne : relis et corrige.'); void start;
+                status(i18n(lines.length > 1 ? '{n} lignes lues (à relire)' : '{n} ligne lue (à relire)', {n: lines.length})); toast(i18n('Texte lu et zones posées ligne par ligne : relis et corrige.')); void start;
             } catch (e) { status(''); toast(e.message || 'Lecture impossible.', 'error'); }
         }
         /* ─── ✨ Lire l'acte (écriture à la main) : en arrière-plan, puis le texte proposé ligne par ligne à relire ─── */
@@ -511,19 +512,19 @@
         const HTR_MODEL_KEY = 'genealogie-htr-model', UNSURE = .75;
         const htrRunEl = () => $('[data-tx-htrrun]');
         function htrBusy(on, text = '') { const el = htrRunEl(); if (!el) return; el.hidden = !on; if (on) el.querySelector('.ui-spinner > span:last-child').textContent = text; $('[data-tx-cmd="htr"]').disabled = on; }
-        function htrStop(silent = false) { if (!htrJob) return; clearTimeout(htrJob.timer); const id = htrJob.id; htrJob = null; htrBusy(false); if (id) post('htr_read_cancel', {id}).catch(() => {}); if (!silent) status('Lecture arrêtée'); }
+        function htrStop(silent = false) { if (!htrJob) return; clearTimeout(htrJob.timer); const id = htrJob.id; htrJob = null; htrBusy(false); if (id) post('htr_read_cancel', {id}).catch(() => {}); if (!silent) status(i18n('Lecture arrêtée')); }
         /** la zone choisie (en pixels de l'image), sinon toute la page */
         const htrArea = () => { const z = t.data.zones.find(q => q.id === selZone); return z && z.w > 8 && z.h > 8 ? {x: Math.max(0, Math.round(z.x)), y: Math.max(0, Math.round(z.y)), w: Math.round(z.w), h: Math.round(z.h)} : null; };
         async function runHtr({model = '', zone} = {}) {
-            if (!t.media_id) return toast('Choisis d’abord l’image de l’acte.', 'error');
-            if (htrJob) return toast('Une lecture est déjà en cours.', 'error');
+            if (!t.media_id) return toast(i18n('Choisis d’abord l’image de l’acte.'), 'error');
+            if (htrJob) return toast(i18n('Une lecture est déjà en cours.'), 'error');
             let st; try { st = await api('htr_setup_status'); } catch (e) { return toast(e.message, 'error'); }
             const installed = (st.models || []).filter(m => m.present);
-            if (!st.ready || !installed.length) return toast('La lecture d’écriture manuscrite n’est pas encore installée : Réglages → Reconnaissance d’écriture (HTR) (une seule fois, l’assistant explique tout).', 'error');
+            if (!st.ready || !installed.length) return toast(i18n('La lecture d’écriture manuscrite n’est pas encore installée : Réglages → Reconnaissance d’écriture (HTR) (une seule fois, l’assistant explique tout).'), 'error');
             let pick = model; if (!pick) { try { pick = localStorage.getItem(HTR_MODEL_KEY) || ''; } catch (_) {} }
             if (!installed.some(m => m.file === pick)) pick = (installed.find(m => m.recommended) || installed[0]).file;
             const box = zone === undefined ? htrArea() : zone;
-            htrBusy(true, box ? 'Lecture de la zone…' : 'Lecture de l’acte…'); status('');
+            htrBusy(true, box ? i18n('Lecture de la zone…') : i18n('Lecture de l’acte…')); status('');
             try {
                 const body = {media_id: t.media_id, model_file: pick, language: $('[data-tx-lang]').value};
                 if (box || (useEnh() && viewChanged())) { // la zone découpée, et/ou l'image améliorée (« Mieux voir »)
@@ -538,12 +539,12 @@
                     if (!htrJob || !dlg.isConnected) return;
                     let j; try { j = await api('htr_read_job', {id: htrJob.id}); } catch (e) { htrJob = null; htrBusy(false); return toast(e.message, 'error'); }
                     if (!htrJob) return;
-                    if (j.state === 'running') { htrBusy(true, `${box ? 'Lecture de la zone' : 'Lecture de l’acte'}… ${j.elapsed} s`); htrJob.timer = setTimeout(poll, 1200); return; }
+                    if (j.state === 'running') { htrBusy(true, `${box ? i18n('Lecture de la zone') : i18n('Lecture de l’acte')}… ${j.elapsed} s`); htrJob.timer = setTimeout(poll, 1200); return; }
                     htrJob = null; htrBusy(false);
-                    if (j.state === 'error') return toast(j.error || 'La lecture n’a pas abouti.', 'error');
+                    if (j.state === 'error') return toast(j.error || i18n('La lecture n’a pas abouti.'), 'error');
                     if (j.state !== 'done') return;
                     try { localStorage.setItem(HTR_MODEL_KEY, j.model_file || pick); } catch (_) {}
-                    if (!(j.lines || []).length) return toast('Aucune ligne d’écriture trouvée : essaie « 🎚️ Mieux voir » (contraste), ou une zone plus serrée.', 'error');
+                    if (!(j.lines || []).length) return toast(i18n('Aucune ligne d’écriture trouvée : essaie « 🎚️ Mieux voir » (contraste), ou une zone plus serrée.'), 'error');
                     htrReview(j.lines, box, j.model_file || pick, installed);
                 };
                 htrJob.timer = setTimeout(poll, 700);
@@ -555,18 +556,18 @@
             let im = null; try { im = await new Promise((ok, ko) => { const i = new Image(); i.onload = () => ok(i); i.onerror = ko; i.src = origSrc(); }); } catch (_) {}
             const crop = b => { if (!im || !b) return ''; const [x0, y0, x1, y1] = b, w = Math.max(1, x1 - x0), h = Math.max(1, y1 - y0), k = Math.min(1, 52 / h, 900 / w); const c = document.createElement('canvas'); c.width = Math.max(1, Math.round(w * k)); c.height = Math.max(1, Math.round(h * k)); c.getContext('2d').drawImage(im, x0 + ox, y0 + oy, w, h, 0, 0, c.width, c.height); try { return c.toDataURL('image/jpeg', .85); } catch (_) { return ''; } };
             const pct = c => Math.round(c * 100);
-            const lineHtml = l => (l.words?.length ? l.words : String(l.text || '').split(/\s+/).map(w => ({t: w, c: null}))).filter(w => w.t).map(w => w.c != null && w.c < UNSURE ? `<mark class="h-htr-unsure" title="Sûr à ${pct(w.c)} % — clique pour le corriger">${esc(w.t)}</mark>` : esc(w.t)).join(' ');
+            const lineHtml = l => (l.words?.length ? l.words : String(l.text || '').split(/\s+/).map(w => ({t: w, c: null}))).filter(w => w.t).map(w => w.c != null && w.c < UNSURE ? `<mark class="h-htr-unsure" title="${esc(i18n('Sûr à {x} % — clique pour le corriger', {x: pct(w.c)}))}">${esc(w.t)}</mark>` : esc(w.t)).join(' ');
             const unsure = lines.reduce((n, l) => n + (l.words || []).filter(w => w.c != null && w.c < UNSURE).length, 0);
             const name = f => installed.find(m => m.file === f)?.title || f;
-            const dlgR = ext.openDialog({eyebrow: 'LECTURE AUTOMATIQUE · À RELIRE', title: '✨ Le texte lu, ligne par ligne', wide: true, submitLabel: `✓ Mettre ${lines.length > 1 ? `les ${lines.length} lignes` : 'la ligne'} dans le texte`,
-                body: `<div class="h-htr-rev-head"><span>${A().plural ? A().plural(lines.length, 'ligne') : lines.length + ' lignes'} · ${unsure ? `<mark class="h-htr-unsure">${A().plural ? A().plural(unsure, 'mot peu sûr', 'mots peu sûrs') : unsure + ' mots peu sûrs'}</mark> (sûrs à moins de ${pct(UNSURE)} %)` : 'aucun mot peu sûr'}</span>
-                    <label class="h-htr-rev-model">Modèle <select data-htr-rmodel>${installed.map(m => `<option value="${esc(m.file)}" ${m.file === modelFile ? 'selected' : ''}>${esc(m.title)}</option>`).join('')}</select></label><button type="button" class="button small secondary" data-htr-reread>↻ Relire avec ce modèle</button></div>
-                    <ol class="h-htr-rev">${lines.map((l, i) => { const src = crop(l.bbox); return `<li data-i="${i}"><label class="checkbox-line h-htr-keep" title="Garder cette ligne"><input type="checkbox" data-htr-keep checked></label>
-                        <div class="h-htr-rev-body">${src ? `<img class="h-htr-crop" src="${src}" alt="Ligne ${i + 1} sur l’image">` : '<span class="h-htr-crop is-none">pas d’image pour cette ligne</span>'}
+            const dlgR = ext.openDialog({eyebrow: i18n('LECTURE AUTOMATIQUE · À RELIRE'), title: `✨ ${i18n('Le texte lu, ligne par ligne')}`, wide: true, submitLabel: `✓ ${i18n('Mettre {x} dans le texte', {x: lines.length > 1 ? i18n('les {n} lignes', {n: lines.length}) : i18n('la ligne')})}`,
+                body: `<div class="h-htr-rev-head"><span>${A().plural ? A().plural(lines.length, 'ligne') : lines.length + ' lignes'} · ${unsure ? `<mark class="h-htr-unsure">${A().plural ? A().plural(unsure, 'mot peu sûr', 'mots peu sûrs') : unsure + ` ${i18n('mots peu sûrs')}`}</mark> ${i18n('(sûrs à moins de {x} %)', {x: pct(UNSURE)})}` : i18n('aucun mot peu sûr')}</span>
+                    <label class="h-htr-rev-model">${i18n('Modèle')} <select data-htr-rmodel>${installed.map(m => `<option value="${esc(m.file)}" ${m.file === modelFile ? 'selected' : ''}>${esc(m.title)}</option>`).join('')}</select></label><button type="button" class="button small secondary" data-htr-reread>↻ ${i18n('Relire avec ce modèle')}</button></div>
+                    <ol class="h-htr-rev">${lines.map((l, i) => { const src = crop(l.bbox); return `<li data-i="${i}"><label class="checkbox-line h-htr-keep" title="${esc(i18n('Garder cette ligne'))}"><input type="checkbox" data-htr-keep checked></label>
+                        <div class="h-htr-rev-body">${src ? `<img class="h-htr-crop" src="${src}" alt="${esc(i18n('Ligne {x} sur l’image', {x: i + 1}))}">` : `<span class="h-htr-crop is-none">${i18n('pas d’image pour cette ligne')}</span>`}
                         <div class="h-htr-line" contenteditable="plaintext-only" spellcheck="false" role="textbox" aria-label="Ligne ${i + 1}" data-htr-line>${lineHtml(l)}</div></div>
                         <small class="h-htr-conf ${l.conf != null && l.conf < UNSURE ? 'is-low' : ''}">${l.conf != null ? `${pct(l.conf)} %` : ''}</small></li>`; }).join('')}</ol>
                     <div class="h-htr-lx" data-htr-lx hidden></div><div class="h-htr-lx h-htr-known" data-htr-known hidden></div>
-                    <p class="ui-hint">Corrige directement dans les lignes (clique un mot surligné pour le remplacer) · Entrée : ligne suivante · décoche une ligne pour la laisser de côté. Lu par « ${esc(name(modelFile))} », sur cet ordinateur. Ensuite, « 🧭 Repérer » cherche tout seul les noms, dates et lieux.</p>`,
+                    <p class="ui-hint">${i18n('Corrige directement dans les lignes (clique un mot surligné pour le remplacer) · Entrée : ligne suivante · décoche une ligne pour la laisser de côté. Lu par « {x} », sur cet ordinateur. Ensuite, « 🧭 Repérer » cherche tout seul les noms, dates et lieux.', {x: esc(name(modelFile))})}</p>`,
                 onOpen: d => {
                     d.querySelector('.h-htr-line')?.focus();
                     d.addEventListener('click', e => { const mk = e.target.closest('.h-htr-unsure'); if (mk && mk.closest('[data-htr-line]')) { const r = document.createRange(); r.selectNodeContents(mk); const s = getSelection(); s.removeAllRanges(); s.addRange(r); } });
@@ -577,7 +578,7 @@
                     // 📜 les mots connus de la langue choisie (allemand, latin, grec…), avec leur traduction : aide à relire
                     const lg = aideLang($('[data-tx-lang]').value), kBox = d.querySelector('[data-htr-known]');
                     const drawKnown = () => { if (!lg || !kBox) return; const kw = window.LCNDA_AIDE_LECTURE?.known?.([...d.querySelectorAll('[data-htr-line]')].map(x => x.textContent).join('\n'), lg) || [];
-                        kBox.hidden = !kw.length; kBox.innerHTML = kw.length ? `<h4>📜 Mots connus (${esc(langName(lg).toLowerCase())})</h4><ul>${kw.slice(0, 16).map(w => `<li><b>${esc(w.word)}</b> = ${esc(w.item.d)} <button type="button" class="link-button" data-htr-aide="${esc(String(w.item.t).split(',')[0].trim())}">↗ Aide</button></li>`).join('')}</ul>` : ''; };
+                        kBox.hidden = !kw.length; kBox.innerHTML = kw.length ? `<h4>📜 Mots connus (${esc(langName(lg).toLowerCase())})</h4><ul>${kw.slice(0, 16).map(w => `<li><b>${esc(w.word)}</b> = ${esc(w.item.d)} <button type="button" class="link-button" data-htr-aide="${esc(String(w.item.t).split(',')[0].trim())}">↗ ${i18n('Aide')}</button></li>`).join('')}</ul>` : ''; };
                     drawKnown(); d.addEventListener('input', e => { if (e.target.closest('[data-htr-line]')) { clearTimeout(drawKnown.t); drawKnown.t = setTimeout(drawKnown, 400); } });
                     kBox?.addEventListener('click', e => { const b = e.target.closest('[data-htr-aide]'); if (b) ext.readingAid?.open({q: b.dataset.htrAide, lang: lg}); });
                     // 🔍 les erreurs typiques d'une lecture automatique (même moteur que SocFace : app-lecture-auto.js) : abréviations, noms proches de ceux de la base
@@ -588,7 +589,7 @@
                             const text = [...d.querySelectorAll('[data-htr-line]')].map(x => x.textContent).join('\n');
                             const ws = LX.checkWords(text, {surnames: ctx.surnames || [], firstNames: ctx.firstNames || []}).slice(0, 12);
                             host.hidden = !ws.length;
-                            host.innerHTML = ws.length ? `<h4>🔍 Lectures à vérifier</h4><ul>${ws.map(w => `<li>🟡 ${esc(w.why)} ${w.proposals.map(p => `<button type="button" class="button small secondary" data-htr-lx-word="${esc(w.word)}" data-htr-lx-value="${esc(p.value)}">Utiliser « ${esc(p.value)} »</button>`).join(' ')}</li>`).join('')}</ul>` : '';
+                            host.innerHTML = ws.length ? `<h4>🔍 ${i18n('Lectures à vérifier')}</h4><ul>${ws.map(w => `<li>🟡 ${esc(w.why)} ${w.proposals.map(p => `<button type="button" class="button small secondary" data-htr-lx-word="${esc(w.word)}" data-htr-lx-value="${esc(p.value)}">${i18n('Utiliser « {value} »', {value: esc(p.value)})}</button>`).join(' ')}</li>`).join('')}</ul>` : '';
                         };
                         draw();
                         host.addEventListener('click', e => {
@@ -603,23 +604,23 @@
                 },
                 onSubmit: f => {
                     const kept = [...f.querySelectorAll('.h-htr-rev > li')].filter(li => li.querySelector('[data-htr-keep]').checked).map(li => ({l: lines[Number(li.dataset.i)], text: li.querySelector('[data-htr-line]').textContent.replace(/\s+/g, ' ').trim()})).filter(k => k.text);
-                    if (!kept.length) { toast('Aucune ligne gardée.'); return; }
+                    if (!kept.length) { toast(i18n('Aucune ligne gardée.')); return; }
                     let text = area.value; if (text.trim()) text += '\n\n';
                     const made = [];
-                    kept.forEach(({l, text: line}) => { const s = text.length; text += line + '\n'; if (l.bbox) { const [x0, y0, x1, y1] = l.bbox; made.push({id: zid(), x: x0 + ox, y: y0 + oy, w: x1 - x0, h: y1 - y0, s, e: s + line.length, note: l.conf != null && l.conf < UNSURE ? `Lu automatiquement (sûr à ${pct(l.conf)} %)` : '', c: ''}); } });
+                    kept.forEach(({l, text: line}) => { const s = text.length; text += line + '\n'; if (l.bbox) { const [x0, y0, x1, y1] = l.bbox; made.push({id: zid(), x: x0 + ox, y: y0 + oy, w: x1 - x0, h: y1 - y0, s, e: s + line.length, note: l.conf != null && l.conf < UNSURE ? i18n('Lu automatiquement (sûr à {x} %)', {x: pct(l.conf)}) : '', c: ''}); } });
                     area.value = text; before = text; t.body = text; snap(); t.data.zones.push(...made); touch(); drawZones();
-                    status(`${A().plural ? A().plural(kept.length, 'ligne lue', 'lignes lues') : kept.length + ' lignes lues'} (à relire)`);
-                    runDetect().then(() => toast('Texte mis dans la transcription, zones posées ligne par ligne ; noms, dates et lieux repérés à droite.'));
+                    status(i18n('{x} (à relire)', {x: A().plural ? A().plural(kept.length, 'ligne lue', 'lignes lues') : kept.length + ' lignes lues'}));
+                    runDetect().then(() => toast(i18n('Texte mis dans la transcription, zones posées ligne par ligne ; noms, dates et lieux repérés à droite.')));
                 }});
             return dlgR;
         }
         /* ─── image : de la base ou de l'ordinateur ─── */
         async function pickImage() {
-            const m = await ext.pickImage({eyebrow: 'TRANSCRIPTION', title: 'Image de l’acte', intro: 'Clique sur l’image de l’acte. Une image de l’ordinateur est ajoutée aux Médias.'}); if (!m) return;
+            const m = await ext.pickImage({eyebrow: 'TRANSCRIPTION', title: i18n('Image de l’acte'), intro: i18n('Clique sur l’image de l’acte. Une image de l’ordinateur est ajoutée aux Médias.')}); if (!m) return;
             t.media_id = Number(m.id); t.filename = m.filename;
             if (!t.title && m.title && !m.imported) { t.title = m.title; $('[data-tx="title"]').value = t.title; }
             if (!area.value.trim() && m.transcription) { area.value = m.transcription; before = area.value; t.body = area.value; }
-            if (t.data.zones.length && !await A().confirmBox('Elles étaient posées pour l’ancienne image.', {title: 'Garder les zones déjà posées ?', okLabel: 'Garder les zones', cancelLabel: 'Les retirer', danger: false})) { snap(); t.data.zones = []; }
+            if (t.data.zones.length && !await A().confirmBox(i18n('Elles étaient posées pour l’ancienne image.'), {title: i18n('Garder les zones déjà posées ?'), okLabel: i18n('Garder les zones'), cancelLabel: i18n('Les retirer'), danger: false})) { snap(); t.data.zones = []; }
             touch(); await loadImage();
         }
         /* ─── enregistrer, exporter ─── */
@@ -633,63 +634,63 @@
             ['title', 'kind', 'date_text', 'place', 'source'].forEach(k => { t[k] = $(`[data-tx="${k}"]`).value; }); t.body = area.value; t.data.status = $('[data-tx-state]').value;
             if (!t.title.trim()) { const subj = t.data.people.find(p => p.role === 'sujet' || p.role === 'défunt'); t.title = `${KINDS.find(k => k[0] === t.kind)?.[1] || 'Acte'}${subj ? ` de ${subj.name}` : ''}${t.date_text ? `, ${t.date_text}` : ''}`; $('[data-tx="title"]').value = t.title; }
             status('Enregistrement…');
-            try { const r = await post('save_act_transcription', {id: t.id, title: t.title, kind: t.kind, media_id: t.media_id, date_text: t.date_text, place: t.place, source: t.source, body: t.body, data: t.data, to_media: toMedia ? 1 : 0}); t.id = r.result.id; dirty = false; status('✓ Enregistré'); if (toMedia) toast('Enregistré, et le texte est dans la transcription du média.'); ctx.onSaved?.(t.id); }
+            try { const r = await post('save_act_transcription', {id: t.id, title: t.title, kind: t.kind, media_id: t.media_id, date_text: t.date_text, place: t.place, source: t.source, body: t.body, data: t.data, to_media: toMedia ? 1 : 0}); t.id = r.result.id; dirty = false; status(`✓ ${i18n('Enregistré')}`); if (toMedia) toast(i18n('Enregistré, et le texte est dans la transcription du média.')); ctx.onSaved?.(t.id); }
             catch (e) { status(''); toast(e.message, 'error'); }
         }
         /** L1 : la fenêtre « Imprimer » commune — image et texte côte à côte, l'un puis l'autre, ou le texte seul ; image améliorée ; personnes et rôles */
         async function printIt() {
-            const UI2 = window.LCNDA_UI; if (!UI2?.openPrintDialog) return toast('La fenêtre « Imprimer » n’est pas chargée.', 'error');
+            const UI2 = window.LCNDA_UI; if (!UI2?.openPrintDialog) return toast(i18n('La fenêtre « Imprimer » n’est pas chargée.'), 'error');
             const plainUrl = t.filename ? `${location.origin}${location.pathname.replace(/[^/]*$/, '')}media/${encodeURIComponent(t.filename)}` : '';
             let enhUrl = '';
             const canEnh = !!t.filename && viewChanged();
             const imgFor = async c => { if (!c.enh || !canEnh) return plainUrl; if (!enhUrl) { try { const cv = await filteredCanvas({gray: false}); enhUrl = URL.createObjectURL(await new Promise(r2 => cv.toBlob(r2, 'image/png'))); setTimeout(() => URL.revokeObjectURL(enhUrl), 300000); } catch (_) { return plainUrl; } } return enhUrl; };
             const title = $('[data-tx="title"]').value || 'Transcription', meta = [KINDS.find(k => k[0] === $('[data-tx="kind"]').value)?.[1], $('[data-tx="date_text"]').value, $('[data-tx="place"]').value, $('[data-tx="source"]').value].filter(Boolean).join(' · ');
             UI2.openPrintDialog({title, key: 'transcription', zone: 'Transcription', photos: false, margin: 14,
-                options: [{key: 'lay', type: 'radio', value: 'side', choices: [['side', 'Image + texte côte à côte'], ['stack', 'Image puis texte'], ['text', 'Texte seul']]},
-                    ...(canEnh ? [{key: 'enh', label: 'Image améliorée', checked: useEnh(), show: c => c.lay !== 'text'}] : []), {key: 'people', label: 'Personnes et rôles', checked: true}],
+                options: [{key: 'lay', type: 'radio', value: 'side', choices: [['side', i18n('Image + texte côte à côte')], ['stack', 'Image puis texte'], ['text', 'Texte seul']]},
+                    ...(canEnh ? [{key: 'enh', label: i18n('Image améliorée'), checked: useEnh(), show: c => c.lay !== 'text'}] : []), {key: 'people', label: i18n('Personnes et rôles'), checked: true}],
                 html: async c => { const img = c.lay === 'text' ? '' : await imgFor(c);
                     return `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>${esc(title)}</title><style>body{font:14px/1.5 Georgia,serif;margin:0;color:#111}h1{font-size:20px;margin:0 0 4px}.m{color:#555;margin:0 0 12px}.g{display:grid;gap:16px;align-items:start}.g.side{grid-template-columns:1fr 1fr}img{max-width:100%;border:1px solid #ccc;display:block}.g.stack img{max-height:150mm;margin:0 auto 4mm;object-fit:contain}pre{white-space:pre-wrap;font:inherit;margin:0}ul{padding-left:18px}</style></head><body>
-                        <h1>${esc(title)}</h1><p class="m">${esc(meta)}</p><div class="g ${c.lay}">${img ? `<img src="${esc(img)}" alt="">` : ''}<div><pre>${esc(area.value)}</pre>${c.people && t.data.people.length ? `<h3>Personnes</h3><ul>${t.data.people.map(p => `<li>${esc(p.name)}${p.role ? ` — ${esc(p.role)}` : ''}</li>`).join('')}</ul>` : ''}</div></div></body></html>`; }});
+                        <h1>${esc(title)}</h1><p class="m">${esc(meta)}</p><div class="g ${c.lay}">${img ? `<img src="${esc(img)}" alt="">` : ''}<div><pre>${esc(area.value)}</pre>${c.people && t.data.people.length ? `<h3>${i18n('Personnes')}</h3><ul>${t.data.people.map(p => `<li>${esc(p.name)}${p.role ? ` — ${esc(p.role)}` : ''}</li>`).join('')}</ul>` : ''}</div></div></body></html>`; }});
         }
         window.LCNDA_UI?.onPrintKey?.(dlg, () => printIt()); // L1 : ⌘P
         dlg.addEventListener('click', async e => {
             const tl = e.target.closest('[data-tx-tool]'); if (tl) return setTool(tl.dataset.txTool);
             const chan = e.target.closest('[data-tx-chan]'); if (chan) { setView('channel', chan.dataset.txChan); syncControls(); return; }
             const ch = e.target.closest('[data-tx-char]'); if (ch) { const s = area.selectionStart, en = area.selectionEnd, c = ch.dataset.txChar; area.setRangeText(c, s, en, 'end'); area.dispatchEvent(new Event('input')); area.focus(); return; }
-            if (e.target.closest('[data-tx-zlink]')) { const z = t.data.zones.find(q => q.id === selZone), s = area.selectionStart, en = area.selectionEnd; if (!z) return; if (en <= s) return toast('Choisis d’abord un passage dans le texte.', 'error'); snap(); z.s = s; z.e = en; touch(); drawZones(); return; }
+            if (e.target.closest('[data-tx-zlink]')) { const z = t.data.zones.find(q => q.id === selZone), s = area.selectionStart, en = area.selectionEnd; if (!z) return; if (en <= s) return toast(i18n('Choisis d’abord un passage dans le texte.'), 'error'); snap(); z.s = s; z.e = en; touch(); drawZones(); return; }
             if (e.target.closest('[data-tx-zdel]')) return deleteZone();
             const c = e.target.closest('[data-tx-cmd]'); if (!c) return; c.closest('details')?.removeAttribute('open');
             const k = c.dataset.txCmd;
             if (k === 'close') return close();
             if (k === 'save') return save();
-            if (k === 'tomedia') { if (!t.media_id) return toast('Il n’y a pas d’image de la base.', 'error'); return save(true); }
+            if (k === 'tomedia') { if (!t.media_id) return toast(i18n('Il n’y a pas d’image de la base.'), 'error'); return save(true); }
             if (k === 'image') return pickImage();
             if (k === 'zin' || k === 'zout') { if (!imgW) return; const r = stage.getBoundingClientRect(); zoomAt(zoom * (k === 'zin' ? 1.25 : .8), r.width / 2, r.height / 2); return; }
             if (k === 'fit') { if (!imgW) return; applyFit(fitOn ? FIT_NEXT[fitMode] : 'page'); return; }
             if (k === 'rot') { if (!fitOn) { fitOn = true; fitMode = 'page'; } setView('rot', ((t.data.view.rot || 0) + 90) % 360); drawZones(); return; }
-            if (k === 'loupe') { loupe.on = !loupe.on; paintLoupeBtn(); if (!loupe.on) lc.hidden = true; status(loupe.on ? '🔍 Loupe : la molette change le grossissement' : ''); return; }
+            if (k === 'loupe') { loupe.on = !loupe.on; paintLoupeBtn(); if (!loupe.on) lc.hidden = true; status(loupe.on ? `🔍 ${i18n('Loupe : la molette change le grossissement')}` : ''); return; }
             if (k === 'better') { togglePanel(); return; }
             if (k === 'barcfg') { TV.openBarDialog(dlg); return; }
-            if (k === 'keepview') { await save(); if (!dirty) toast('Réglages de l’image retenus pour cet acte : ils reviennent à la prochaine ouverture.'); return; }
+            if (k === 'keepview') { await save(); if (!dirty) toast(i18n('Réglages de l’image retenus pour cet acte : ils reviennent à la prochaine ouverture.')); return; }
             if (k === 'resetview') { const before = {...t.data.view}, origin = () => { t.data.view = TV.viewOf(); fitOn = true; fitMode = 'page'; syncControls(); geom({keepCenter: false}); applyFit('page'); applyImage(); touch(); };
-                if (!Object.entries(TV.DEFAULT_VIEW).some(([kk, d]) => String(before[kk]) !== String(d))) return status('L’image est déjà d’origine');
-                origin(); A().undoToast?.('Image remise d’origine', {undo: () => { t.data.view = TV.viewOf(before); syncControls(); geom({keepCenter: false}); applyFit(fitMode); applyImage(); touch(); }, redo: origin}); return; }
+                if (!Object.entries(TV.DEFAULT_VIEW).some(([kk, d]) => String(before[kk]) !== String(d))) return status(i18n('L’image est déjà d’origine'));
+                origin(); A().undoToast?.(i18n('Image remise d’origine'), {undo: () => { t.data.view = TV.viewOf(before); syncControls(); geom({keepCenter: false}); applyFit(fitMode); applyImage(); touch(); }, redo: origin}); return; }
             if (k === 'ocr') return runOcr();
             if (k === 'htr') return runHtr();
             if (k === 'htrstop') return htrStop();
             if (k === 'htrzone') return runHtr({zone: htrArea()});
             if (k === 'detect') return runDetect();
-            if (k === 'aide') { const sel = area.value.slice(area.selectionStart, area.selectionEnd).trim().slice(0, 40); return ext.readingAid ? ext.readingAid.open({q: /\n/.test(sel) ? '' : sel, lang: aideLang($('[data-tx-lang]').value)}) : toast('L’aide à la lecture n’est pas chargée.', 'error'); } // heritage-lecture-autrefois.js : ouverte sur la langue du texte
-            if (k === 'template') { const tp = TEMPLATES[$('[data-tx="kind"]').value]; if (!tp) return toast('Pas de modèle pour ce genre d’acte.', 'error'); if (area.value.trim() && !await A().confirmBox('Le texte déjà écrit est gardé.', {title: 'Ajouter le modèle à la fin du texte ?', okLabel: 'Ajouter le modèle'})) return; area.value += (area.value.trim() ? '\n\n' : '') + tp; area.dispatchEvent(new Event('input')); return; }
+            if (k === 'aide') { const sel = area.value.slice(area.selectionStart, area.selectionEnd).trim().slice(0, 40); return ext.readingAid ? ext.readingAid.open({q: /\n/.test(sel) ? '' : sel, lang: aideLang($('[data-tx-lang]').value)}) : toast(i18n('L’aide à la lecture n’est pas chargée.'), 'error'); } // heritage-lecture-autrefois.js : ouverte sur la langue du texte
+            if (k === 'template') { const tp = TEMPLATES[$('[data-tx="kind"]').value]; if (!tp) return toast(i18n('Pas de modèle pour ce genre d’acte.'), 'error'); if (area.value.trim() && !await A().confirmBox(i18n('Le texte déjà écrit est gardé.'), {title: i18n('Ajouter le modèle à la fin du texte ?'), okLabel: i18n('Ajouter le modèle')})) return; area.value += (area.value.trim() ? '\n\n' : '') + tp; area.dispatchEvent(new Event('input')); return; }
             if (k === 'txt') { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([area.value], {type: 'text/plain;charset=utf-8'})); a.download = `${(A().safeExportFilename ? A().safeExportFilename($('[data-tx="title"]').value || 'transcription', 'transcription') : 'transcription')}.txt`; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 3000); return; }
-            if (k === 'copy') { navigator.clipboard?.writeText(area.value).then(() => toast('Texte copié.')).catch(() => toast('Copie impossible ici.', 'error')); return; }
+            if (k === 'copy') { navigator.clipboard?.writeText(area.value).then(() => toast(i18n('Texte copié.'))).catch(() => toast(i18n('Copie impossible ici.'), 'error')); return; }
             if (k === 'print') return printIt();
             if (k === 'export') { // E3 : une seule fenêtre d'export
                 if (!UI.openExportDialog) return printIt();
                 const nm = $('[data-tx="title"]').value || 'transcription';
-                return UI.openExportDialog({title: nm, defaultName: nm, quality: false, info: `${area.value.trim().split(/\s+/).filter(Boolean).length} mots${t.filename ? ' · avec l’image de l’acte' : ''}`, formats: [
-                    {id: 'file', label: '📝 Texte', hint: 'le texte seul (.txt)', ext: 'txt', run: async o => { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([area.value], {type: 'text/plain;charset=utf-8'})); a.download = o.filename; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 3000); }},
-                    {id: 'pdf', hint: 'image + texte (« Enregistrer en PDF »)', ext: '', run: async () => printIt()},
+                return UI.openExportDialog({title: nm, defaultName: nm, quality: false, info: `${area.value.trim().split(/\s+/).filter(Boolean).length} mots${t.filename ? ` · ${i18n('avec l’image de l’acte')}` : ''}`, formats: [
+                    {id: 'file', label: '📝 Texte', hint: i18n('le texte seul (.txt)'), ext: 'txt', run: async o => { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([area.value], {type: 'text/plain;charset=utf-8'})); a.download = o.filename; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 3000); }},
+                    {id: 'pdf', hint: i18n('image + texte (« Enregistrer en PDF »)'), ext: '', run: async () => printIt()},
                     {id: 'print', hint: 'image + texte', run: async () => printIt()}]});
             }
         });
@@ -748,7 +749,7 @@
         document.addEventListener('keydown', onKey, true); document.addEventListener('keyup', onKeyUp, true);
         /** l'outil s'en va (× ou Échap, ou « ↗ Fiche » d'une personne) : touches, worker « Mieux voir », observateurs, fenêtre */
         function teardown() { if (!dlg.isConnected) return; htrStop(true); document.removeEventListener('keydown', onKey, true); document.removeEventListener('keyup', onKeyUp, true); window.removeEventListener('lcnda-txbar-change', onBar); enh?.stop(); ro.disconnect(); roBar.disconnect(); dlg.close(); dlg.remove(); ctx.onClose?.(); }
-        async function close() { if (dirty && !await A().confirmBox('Les dernières modifications de la transcription seront perdues.', {title: 'Fermer sans enregistrer la transcription ?', okLabel: 'Fermer sans enregistrer', danger: true})) return; teardown(); }
+        async function close() { if (dirty && !await A().confirmBox(i18n('Les dernières modifications de la transcription seront perdues.'), {title: i18n('Fermer sans enregistrer la transcription ?'), okLabel: i18n('Fermer sans enregistrer'), danger: true})) return; teardown(); }
         dlg.dataset.ownClose = '1'; // Échap : l'outil demande lui-même s'il faut (une seule question « Fermer sans enregistrer ? »)
         dlg.addEventListener('cancel', e => { e.preventDefault(); close(); });
         // la fenêtre change de taille (⛶, panneau) : l'ajustement choisi (toute l'image, largeur) suit
@@ -760,16 +761,16 @@
             set: o => { F_KEYS.forEach(k => { $(`[data-tx="${k}"]`).value = o.f[k] ?? ''; t[k] = o.f[k] ?? ''; }); $('[data-tx-state]').value = o.st; t.data.status = o.st;
                 area.value = o.body; before = o.body; t.body = o.body; t.data.zones = o.zones || []; t.data.people = o.people || []; if (!t.data.zones.some(z => z.id === selZone)) selZone = null;
                 const vOld = JSON.stringify(t.data.view); t.data.view = TV.viewOf(o.view); syncControls(); if (JSON.stringify(t.data.view) !== vOld) { geom(); applyImage(); }
-                dirty = true; status('modifié'); drawZones(); paintMirror(); paintPeople(); },
+                dirty = true; status(i18n('modifié')); drawZones(); paintMirror(); paintPeople(); },
             onChange: h => { $('[data-tx-hist="undo"]').disabled = !h.canUndo(); $('[data-tx-hist="redo"]').disabled = !h.canRedo(); }});
         HX?.reset();
         dlg.addEventListener('click', e => { const hb = e.target.closest('[data-tx-hist]'); if (hb) undoZones(hb.dataset.txHist === 'redo'); });
         const cmdOf = k => () => { const b = document.createElement('button'); b.type = 'button'; b.hidden = true; b.dataset.txCmd = k; dlg.appendChild(b); b.click(); b.remove(); };
         UI.editorMenus?.($('[data-tx-menus]'), {
-            Fichier: () => [{icon: '💾', label: 'Enregistrer', shortcut: '⌘S', run: cmdOf('save')}, {icon: '⤓', label: 'Exporter (texte, PDF, imprimer)…', run: cmdOf('export')}, '-', {icon: '🖼️', label: 'Image de l’acte…', run: cmdOf('image')}, {icon: '↪', label: 'Mettre le texte dans le média', run: cmdOf('tomedia')}, {icon: '📋', label: 'Copier le texte', run: cmdOf('copy')}, '-', {icon: '×', label: 'Fermer', run: cmdOf('close')}],
-            Édition: () => [{icon: '↶', label: 'Annuler', shortcut: '⌘Z', disabled: !HX?.canUndo(), run: () => undoZones(false)}, {icon: '↷', label: 'Rétablir', shortcut: '⇧⌘Z', disabled: !HX?.canRedo(), run: () => undoZones(true)}, '-', {icon: '📋', label: 'Modèle d’acte', run: cmdOf('template')}, {icon: '🧭', label: 'Repérer les noms, dates, lieux', run: cmdOf('detect')}, {icon: '🔎', label: 'Lire (imprimé)', run: cmdOf('ocr')}, {icon: '✨', label: 'Lire l’acte (écriture à la main)', run: cmdOf('htr')}],
-            Outils: () => [{icon: '✋', label: 'Déplacer l’image', shortcut: 'H', run: () => setTool('pan')}, {icon: '▭', label: 'Dessiner une zone', shortcut: 'Z', run: () => setTool('zone')}, {icon: '🔍', label: 'Loupe', shortcut: 'L', run: cmdOf('loupe')}, '-', {icon: '📜', label: 'Aide à la lecture…', run: cmdOf('aide')}, {icon: '🪙', label: 'Convertisseur d’autrefois…', run: () => ext.autrefois?.open()}],
-            Affichage: () => [{icon: '⤢', label: 'Ajuster à la fenêtre', shortcut: '⌘0', run: () => txBar?.zoom.fit()}, {icon: '↔', label: 'Toute la largeur (pour lire)', run: () => imgW && applyFit('width')}, {label: '100 %', shortcut: '⌘1', run: () => txBar?.zoom.actual()}, {icon: '＋', label: 'Zoom avant', shortcut: '⌘+', run: () => txBar?.zoom.in()}, {icon: '−', label: 'Zoom arrière', shortcut: '⌘−', run: () => txBar?.zoom.out()}, '-', {icon: '⟳', label: 'Tourner de 90°', run: cmdOf('rot')}, {icon: '↺', label: 'Image d’origine', run: cmdOf('resetview')}]});
+            Fichier: () => [{icon: '💾', label: i18n('Enregistrer'), shortcut: '⌘S', run: cmdOf('save')}, {icon: '⤓', label: i18n('Exporter (texte, PDF, imprimer)…'), run: cmdOf('export')}, '-', {icon: '🖼️', label: i18n('Image de l’acte…'), run: cmdOf('image')}, {icon: '↪', label: i18n('Mettre le texte dans le média'), run: cmdOf('tomedia')}, {icon: '📋', label: i18n('Copier le texte'), run: cmdOf('copy')}, '-', {icon: '×', label: i18n('Fermer'), run: cmdOf('close')}],
+            Édition: () => [{icon: '↶', label: i18n('Annuler'), shortcut: '⌘Z', disabled: !HX?.canUndo(), run: () => undoZones(false)}, {icon: '↷', label: i18n('Rétablir'), shortcut: '⇧⌘Z', disabled: !HX?.canRedo(), run: () => undoZones(true)}, '-', {icon: '📋', label: i18n('Modèle d’acte'), run: cmdOf('template')}, {icon: '🧭', label: i18n('Repérer les noms, dates, lieux'), run: cmdOf('detect')}, {icon: '🔎', label: i18n('Lire (imprimé)'), run: cmdOf('ocr')}, {icon: '✨', label: i18n('Lire l’acte (écriture à la main)'), run: cmdOf('htr')}],
+            Outils: () => [{icon: '✋', label: i18n('Déplacer l’image'), shortcut: 'H', run: () => setTool('pan')}, {icon: '▭', label: i18n('Dessiner une zone'), shortcut: 'Z', run: () => setTool('zone')}, {icon: '🔍', label: 'Loupe', shortcut: 'L', run: cmdOf('loupe')}, '-', {icon: '📜', label: i18n('Aide à la lecture…'), run: cmdOf('aide')}, {icon: '🪙', label: i18n('Convertisseur d’autrefois…'), run: () => ext.autrefois?.open()}],
+            Affichage: () => [{icon: '⤢', label: i18n('Ajuster à la fenêtre'), shortcut: '⌘0', run: () => txBar?.zoom.fit()}, {icon: '↔', label: i18n('Toute la largeur (pour lire)'), run: () => imgW && applyFit('width')}, {label: '100 %', shortcut: '⌘1', run: () => txBar?.zoom.actual()}, {icon: '＋', label: 'Zoom avant', shortcut: '⌘+', run: () => txBar?.zoom.in()}, {icon: '−', label: i18n('Zoom arrière'), shortcut: '⌘−', run: () => txBar?.zoom.out()}, '-', {icon: '⟳', label: i18n('Tourner de 90°'), run: cmdOf('rot')}, {icon: '↺', label: i18n('Image d’origine'), run: cmdOf('resetview')}]});
         UI.editorRail?.($('[data-tx-rail]'), {breaks: ['[data-tx-cmd="loupe"]', '[data-tx-cmd="image"]']});
         if (UI.editorStatus) { // K18 : l'image à gauche, l'aide de l'outil au milieu, le zoom à droite (⌘ + molette, ⌘0, ⌘1)
             txBar = UI.editorStatus({zoom: {get: () => zoom, set: k => { if (!imgW) return; const r = stage.getBoundingClientRect(); zoomAt(k, r.width / 2, r.height / 2); }, fit: () => imgW && applyFit('page'), min: .02, max: 20}});
@@ -792,8 +793,8 @@
         lbFor = Number(it.id); const n = ++lbSeq;
         try { lbActs = (await api('act_transcriptions_media', {media_id: it.id})).items || []; } catch (_) { lbActs = []; }
         if (n !== lbSeq) return;
-        box.innerHTML = `<div class="lb-acts-head"><span class="section-label">📜 Transcription d’actes</span><span class="lb-acts-btns"><button type="button" class="button small secondary" data-lbact-read title="Toute la transcription, en grand (et les actes transcrits dans l’outil)">📖 Lire en entier</button><button type="button" class="button small secondary" data-lbact-new title="Ouvrir l’outil Transcription d’actes sur cette image (zones, noms, dates)">${lbActs.length ? '＋ Nouvelle' : '📜 Transcrire dans l’outil'}</button></span></div>
-            ${lbActs.length ? `<ul class="lb-acts-list">${lbActs.map(a => `<li><button type="button" class="link-button" data-lbact-open="${a.id}" title="Ouvrir dans Transcription d’actes">📜 ${esc(a.title || kindLabel(a.kind))}</button> <small class="muted">${esc([kindLabel(a.kind), a.date_text, a.place].filter(Boolean).join(' · '))}${a.people?.length ? ` · ${a.people.length} personne${a.people.length > 1 ? 's' : ''}` : ''}</small></li>`).join('')}</ul>` : '<p class="empty-line small"><span class="empty-line-ico" aria-hidden="true">🖼️</span><span class="empty-line-text">Aucun acte transcrit dans l’outil pour cette image.</span></p>'}`;
+        box.innerHTML = `<div class="lb-acts-head"><span class="section-label">📜 ${i18n('Transcription d’actes')}</span><span class="lb-acts-btns"><button type="button" class="button small secondary" data-lbact-read title="${esc(i18n('Toute la transcription, en grand (et les actes transcrits dans l’outil)'))}">📖 ${i18n('Lire en entier')}</button><button type="button" class="button small secondary" data-lbact-new title="${esc(i18n('Ouvrir l’outil Transcription d’actes sur cette image (zones, noms, dates)'))}">${lbActs.length ? `＋ ${i18n('Nouvelle')}` : `📜 ${i18n('Transcrire dans l’outil')}`}</button></span></div>
+            ${lbActs.length ? `<ul class="lb-acts-list">${lbActs.map(a => `<li><button type="button" class="link-button" data-lbact-open="${a.id}" title="${esc(i18n('Ouvrir dans Transcription d’actes'))}">📜 ${esc(a.title || kindLabel(a.kind))}</button> <small class="muted">${esc([kindLabel(a.kind), a.date_text, a.place].filter(Boolean).join(' · '))}${a.people?.length ? ` · ${A().plural(a.people.length, 'personne')}` : ''}</small></li>`).join('')}</ul>` : `<p class="empty-line small"><span class="empty-line-ico" aria-hidden="true">🖼️</span><span class="empty-line-text">${i18n('Aucun acte transcrit dans l’outil pour cette image.')}</span></p>`}`;
     }
     function lbOpenTool(id) {
         const it = lbItem(); if (!it) return;
@@ -804,16 +805,16 @@
         const it = lbItem(); if (!it) return; const txt = document.getElementById('lightbox-transcription')?.value || it.transcription || '';
         const people = a => (a.people || []).filter(p => p.name).map(p => `${esc(p.name)}${p.role ? ` <small class="muted">(${esc(p.role)})</small>` : ''}`).join(', ');
         const body = `<div class="lb-read"><figure class="lb-read-img"><img src="media/${encodeURIComponent(it.filename)}" alt=""></figure><div class="lb-read-txt">
-            <h3>Transcription du document</h3>${txt.trim() ? `<pre class="lb-read-pre">${esc(txt)}</pre>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📝</span><span class="empty-line-text">Rien d’écrit pour l’instant dans la visionneuse.</span></p>'}
-            ${lbActs.map(a => `<section class="lb-read-act"><h3>📜 ${esc(a.title || kindLabel(a.kind))}</h3><p class="muted">${esc([kindLabel(a.kind), a.date_text, a.place, a.source].filter(Boolean).join(' · '))}</p>${a.people?.length ? `<p><b>Personnes :</b> ${people(a)}</p>` : ''}${a.body?.trim() ? `<pre class="lb-read-pre">${esc(a.body)}</pre>` : ''}<button type="button" class="button small secondary" data-lbact-open="${a.id}">Ouvrir dans Transcription d’actes</button></section>`).join('')}</div></div>`;
-        ext.openDialog({eyebrow: 'TRANSCRIPTION', title: `📖 ${it.title || 'Document'}`, wide: true, submitLabel: '🖨 Imprimer', body,
+            <h3>${i18n('Transcription du document')}</h3>${txt.trim() ? `<pre class="lb-read-pre">${esc(txt)}</pre>` : `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📝</span><span class="empty-line-text">${i18n('Rien d’écrit pour l’instant dans la visionneuse.')}</span></p>`}
+            ${lbActs.map(a => `<section class="lb-read-act"><h3>📜 ${esc(a.title || kindLabel(a.kind))}</h3><p class="muted">${esc([kindLabel(a.kind), a.date_text, a.place, a.source].filter(Boolean).join(' · '))}</p>${a.people?.length ? `<p><b>${i18n('Personnes :')}</b> ${people(a)}</p>` : ''}${a.body?.trim() ? `<pre class="lb-read-pre">${esc(a.body)}</pre>` : ''}<button type="button" class="button small secondary" data-lbact-open="${a.id}">${i18n('Ouvrir dans Transcription d’actes')}</button></section>`).join('')}</div></div>`;
+        ext.openDialog({eyebrow: 'TRANSCRIPTION', title: `📖 ${it.title || 'Document'}`, wide: true, submitLabel: `🖨 ${i18n('Imprimer')}`, body,
             onOpen: dg => { dg.classList.add('lb-read-dlg'); dg.addEventListener('click', e => { const b = e.target.closest('[data-lbact-open]'); if (b) { dg.close(); lbOpenTool(Number(b.dataset.lbactOpen)); } }); },
-            onSubmit: f => { const UI2 = window.LCNDA_UI; if (!UI2?.openPrintDialog) { toast('La fenêtre « Imprimer » n’est pas chargée.', 'error'); return false; } // L1 : la fenêtre « Imprimer » commune
+            onSubmit: f => { const UI2 = window.LCNDA_UI; if (!UI2?.openPrintDialog) { toast(i18n('La fenêtre « Imprimer » n’est pas chargée.'), 'error'); return false; } // L1 : la fenêtre « Imprimer » commune
                 const src = f.querySelector('.lb-read-txt').cloneNode(true); src.querySelectorAll('button').forEach(b => b.remove());
                 const noPeople = src.cloneNode(true); noPeople.querySelectorAll('.lb-read-act p').forEach(p => { if (/Personnes/.test(p.textContent)) p.remove(); });
                 const imgUrl = `media/${encodeURIComponent(it.filename)}`;
                 UI2.openPrintDialog({title: it.title || 'Transcription', key: 'transcription', zone: 'Transcription', photos: false, margin: 14,
-                    options: [{key: 'lay', type: 'radio', value: 'side', choices: [['side', 'Image + texte côte à côte'], ['stack', 'Image puis texte'], ['text', 'Texte seul']]}, {key: 'people', label: 'Personnes et rôles', checked: true}],
+                    options: [{key: 'lay', type: 'radio', value: 'side', choices: [['side', i18n('Image + texte côte à côte')], ['stack', 'Image puis texte'], ['text', 'Texte seul']]}, {key: 'people', label: i18n('Personnes et rôles'), checked: true}],
                     html: c => `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>${esc(it.title || 'Transcription')}</title><style>body{font:14px/1.5 Georgia,serif;margin:0}pre{white-space:pre-wrap;font:inherit}h3{margin:18px 0 4px}small,.muted{color:#666}.g{display:grid;gap:16px;align-items:start}.g.side{grid-template-columns:1fr 1fr}img{max-width:100%;display:block;border:1px solid #ccc}.g.stack img{max-height:150mm;margin:0 auto;object-fit:contain}</style></head><body><h2>${esc(it.title || 'Transcription')}</h2><div class="g ${c.lay}">${c.lay === 'text' ? '' : `<img src="${esc(imgUrl)}" alt="">`}<div>${(c.people ? src : noPeople).innerHTML}</div></div></body></html>`});
                 return false; }});
     }
@@ -835,12 +836,12 @@
     ext.actDetect = detect; ext.actWordsToNumber = wordsToNumber; ext.actFindDates = findDates;
 
     ext.editToolsExtra = ext.editToolsExtra || [];
-    ext.editToolsExtra.push({key: 'acts', icon: '📜', label: 'Transcription d’actes', what: 'transcription',
+    ext.editToolsExtra.push({key: 'acts', icon: '📜', label: i18n('Transcription d’actes'), what: 'transcription',
         load: async () => ((await api('act_transcriptions')).items || []).map(r => ({id: r.id, name: r.title, date: r.updated_at, thumb: r.thumb ? `<img src="media/${esc(encodeURIComponent(r.thumb))}" alt="">` : '<span class="h-et-ico">📜</span>', info: [KINDS.find(k => k[0] === r.kind)?.[1], r.date_text, r.place, `${r.people} personne${r.people > 1 ? 's' : ''}`].filter(Boolean).join(' · ')})),
         open: (id, again) => open({id, onSaved: again, onClose: again}),
         create: again => open({onSaved: again, onClose: again}),
         rename: (id, name) => post('rename_act_transcription', {id, name}),
-        remove: id => post('delete_act_transcription', {id}), createLabel: '＋ Nouvelle transcription',
-        extra: '<button type="button" class="button secondary" data-et-x="aide">📜 Aide à la lecture</button><button type="button" class="button secondary" data-et-x="autrefois">🪙 Convertisseur d’autrefois</button>',
+        remove: id => post('delete_act_transcription', {id}), createLabel: `＋ ${i18n('Nouvelle transcription')}`,
+        extra: `<button type="button" class="button secondary" data-et-x="aide">📜 ${i18n('Aide à la lecture')}</button><button type="button" class="button secondary" data-et-x="autrefois">🪙 ${i18n('Convertisseur d’autrefois')}</button>`,
         onExtra: k => (k === 'aide' ? ext.readingAid?.open() : ext.autrefois?.open())});
 })();

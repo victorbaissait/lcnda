@@ -10,6 +10,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => { const I = (typeof window !== 'undefined' ? window : globalThis).LCNDA_I18N; if (v) v = Object.fromEntries(Object.entries(v).map(([k, x]) => [k, typeof x === 'number' ? String(x) : x])); return I ? I.t(s, v) : (v ? String(s).replace(/\{(\w+)\}/g, (m, k) => (k in v ? v[k] : m)) : s); }; // 🌐 textes traduits (docs/I18N.md) ; nombres gardés tels quels
     const A = () => window.LCNDA_APP || {};
     const UI = () => window.LCNDA_UI || {};
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
@@ -22,9 +23,9 @@
     const badge = (t, k) => UI().badge ? UI().badge(t, k) : `<span class="ui-badge is-${k}">${esc(t)}</span>`;
     const emptyLine = (text, icon = '🔍') => `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">${icon}</span><span class="empty-line-text">${esc(text)}</span></p>`;
     async function copyText(text) {
-        try { await navigator.clipboard.writeText(text); toast('Copié.'); } catch (_) {
+        try { await navigator.clipboard.writeText(text); toast(i18n('Copié.')); } catch (_) {
             const t = document.createElement('textarea'); t.value = text; t.style.position = 'fixed'; t.style.opacity = '0'; document.body.appendChild(t); t.select();
-            try { document.execCommand('copy'); toast('Copié.'); } catch (__) { toast('Copie impossible ici.', 'error'); } t.remove();
+            try { document.execCommand('copy'); toast(i18n('Copié.')); } catch (__) { toast(i18n('Copie impossible ici.'), 'error'); } t.remove();
         }
     }
     /** les lettres tapées surlignées (sans tenir compte des accents ni du ſ) */
@@ -41,7 +42,7 @@
 
     /* ═════════════════════════ 📜 Aide à la lecture ═════════════════════════ */
     const LA_TAB = 'lcnda-aide-lecture-tab', LA_BEST = 'lcnda-aide-lecture-scores', LA_LANG = 'lcnda-aide-lecture-lang';
-    const LA_TABS = [['dict', '🔍 Dictionnaire'], ['lettres', '✍️ Les lettres'], ['exos', '🎓 Exercices']];
+    const LA_TABS = [['dict', '🔍 Dictionnaire'], ['lettres', `✍️ ${i18n('Les lettres')}`], ['exos', '🎓 Exercices']];
     const KIND_BADGE = {mot: 'blue', formule: 'green', abrev: 'yellow', vieux: 'grey', mois: 'blue', nombre: 'blue', parente: 'blue', metier: 'blue'};
     /** la langue d'une ligne : attributs lang et dir (hébreu, arabe : de droite à gauche) */
     const langAttrs = code => { const l = L().langOf?.(code); return l ? ` lang="${esc(code === 'grc' ? 'grc' : code)}" dir="${l.dir === 'rtl' ? 'rtl' : 'auto'}"` : ''; };
@@ -49,30 +50,30 @@
     function numeralsHtml(l) {
         const N = l?.numerals; if (!N || typeof N.to !== 'function') return '';
         return `<section class="la-num" data-la-num><h4>🔢 ${esc(N.label || 'Nombres')}</h4>
-            <label class="la-num-field"><span>Un nombre en lettres ou en chiffres</span><input type="text" data-la-num-in autocomplete="off" spellcheck="false" placeholder="${esc((N.examples || []).join(', '))}"${langAttrs(l.code)}><span data-la-num-out><span class="ui-hint">Écris « ${esc((N.examples || ['1852'])[0])} » ou « 1852 ».</span></span></label>
+            <label class="la-num-field"><span>${i18n('Un nombre en lettres ou en chiffres')}</span><input type="text" data-la-num-in autocomplete="off" spellcheck="false" placeholder="${esc((N.examples || []).join(', '))}"${langAttrs(l.code)}><span data-la-num-out><span class="ui-hint">${i18n('Écris « {x} » ou « 1852 ».', {x: esc((N.examples || ['1852'])[0])})}</span></span></label>
             ${(N.examples || []).length ? `<p class="af-examples">Exemples : ${N.examples.map(x => `<button type="button" class="link-button" data-la-num-ex="${esc(x)}"${langAttrs(l.code)}>${esc(x)}</button>`).join(' · ')}</p>` : ''}</section>`;
     }
     function numeralsRead(l, v) {
         const N = l?.numerals, t = String(v || '').trim(); if (!N || !t) return '';
-        if (/^\d{1,6}$/.test(t)) { const g = N.to(Number(t)); return g ? `<span class="ui-hint is-ok">✓ ${esc(t)} = <b${langAttrs(l.code)}>${esc(g)}</b></span>` : `<span class="ui-hint is-warn">⚠️ Un nombre entre 1 et 999 999.</span>`; }
+        if (/^\d{1,6}$/.test(t)) { const g = N.to(Number(t)); return g ? `<span class="ui-hint is-ok">✓ ${esc(t)} = <b${langAttrs(l.code)}>${esc(g)}</b></span>` : `<span class="ui-hint is-warn">⚠️ ${i18n('Un nombre entre 1 et 999 999.')}</span>`; }
         const n = typeof N.from === 'function' ? N.from(t) : null;
-        return n != null ? `<span class="ui-hint is-ok">✓ Compris : <b>${esc(t)}</b> = <b>${nf(n, 0)}</b></span>` : `<span class="ui-hint is-warn">⚠️ Ce ne sont pas des lettres-nombres connues (exemples : ${esc((N.examples || []).join(', '))}).</span>`;
+        return n != null ? `<span class="ui-hint is-ok">✓ Compris : <b>${esc(t)}</b> = <b>${nf(n, 0)}</b></span>` : `<span class="ui-hint is-warn">⚠️ ${i18n('Ce ne sont pas des lettres-nombres connues (exemples : {x}).', {x: esc((N.examples || []).join(', '))})}</span>`;
     }
     /** l'alphabet d'une langue (grec…) : majuscule, minuscules, nom, lettres latines, valeur de nombre */
-    const alphabetHtml = l => (!Array.isArray(l?.alphabet) || !l.alphabet.length ? '' : `<details class="la-alpha" open><summary>🔤 L’alphabet (${l.alphabet.length} lettres)</summary><table class="af-table la-alpha-table"><thead><tr><th>Lettre</th><th>Nom</th><th>Se lit</th><th>Nombre</th></tr></thead><tbody>${l.alphabet.map(a => `<tr><td${langAttrs(l.code)}><b>${esc(a.big)}</b> ${esc(a.small)}</td><td>${esc(a.name)}</td><td>${esc(a.latin)}</td><td>${a.value != null ? nf(a.value, 0) : ''}</td></tr>`).join('')}</tbody></table></details>`);
+    const alphabetHtml = l => (!Array.isArray(l?.alphabet) || !l.alphabet.length ? '' : `<details class="la-alpha" open><summary>🔤 ${i18n('L’alphabet ({n} lettres)', {n: l.alphabet.length})}</summary><table class="af-table la-alpha-table"><thead><tr><th>Lettre</th><th>Nom</th><th>Se lit</th><th>Nombre</th></tr></thead><tbody>${l.alphabet.map(a => `<tr><td${langAttrs(l.code)}><b>${esc(a.big)}</b> ${esc(a.small)}</td><td>${esc(a.name)}</td><td>${esc(a.latin)}</td><td>${a.value != null ? nf(a.value, 0) : ''}</td></tr>`).join('')}</tbody></table></details>`);
     /** sous la liste : d'où viennent les mots de cette langue */
-    const sourcesHtml = l => (!l || l.builtin || !(l.sources || []).length ? '' : `<p class="ui-hint la-sources">Sources : ${l.sources.map(x => /^https:\/\//.test(String(x.url || '')) ? `<a href="${esc(x.url)}" target="_blank" rel="noopener noreferrer">${esc(x.label)}</a>` : esc(x.label)).join(' · ')}.</p>`);
+    const sourcesHtml = l => (!l || l.builtin || !(l.sources || []).length ? '' : `<p class="ui-hint la-sources">${i18n('Sources : {x}.', {x: l.sources.map(x => /^https:\/\//.test(String(x.url || '')) ? `<a href="${esc(x.url)}" target="_blank" rel="noopener noreferrer">${esc(x.label)}</a>` : esc(x.label)).join(' · ')})}</p>`);
     const LEVEL_BADGE = {facile: 'green', moyen: 'yellow', difficile: 'red'};
     function mountReading(host, {tab = '', q = '', lang} = {}) {
-        if (!L()) { host.innerHTML = emptyLine('L’aide à la lecture n’a pas pu se charger (fichier app-aide-lecture.js manquant ?).', '⚠️'); return null; }
+        if (!L()) { host.innerHTML = emptyLine(i18n('L’aide à la lecture n’a pas pu se charger (fichier app-aide-lecture.js manquant ?).'), '⚠️'); return null; }
         const st = {tab: tab || (q ? 'dict' : store.get(LA_TAB, 'dict')), q: String(q || ''), kind: '', acte: '', shown: 60, exo: '', lang: lang != null ? String(lang) : q ? '' : store.get(LA_LANG, '')}; // un mot cherché : dans toutes les langues
         if (st.lang && !L().langOf?.(st.lang)) st.lang = '';
         if (!LA_TABS.some(([k]) => k === st.tab)) st.tab = 'dict';
         host.classList.add('la');
         host.innerHTML = `${tabsHtml(LA_TABS, st.tab, 'data-la-tab')}<div class="la-search" data-la-search></div><div class="la-filters" data-la-filters></div><div class="la-body" data-la-body aria-live="polite"></div>`;
         const $ = s => host.querySelector(s), body = $('[data-la-body]');
-        const field = UI().searchField ? UI().searchField({placeholder: 'Chercher… ex. vve, feu, filius, ſ, cult., d°', value: st.q, label: 'Chercher dans l’aide à la lecture', delay: 120, onInput: v => { st.q = v; st.shown = 60; draw(); }}) : null;
-        if (field) $('[data-la-search]').appendChild(field); else $('[data-la-search]').innerHTML = `<input type="search" data-la-q value="${esc(st.q)}" placeholder="Chercher…">`;
+        const field = UI().searchField ? UI().searchField({placeholder: i18n('Chercher… ex. vve, feu, filius, ſ, cult., d°'), value: st.q, label: i18n('Chercher dans l’aide à la lecture'), delay: 120, onInput: v => { st.q = v; st.shown = 60; draw(); }}) : null;
+        if (field) $('[data-la-search]').appendChild(field); else $('[data-la-search]').innerHTML = `<input type="search" data-la-q value="${esc(st.q)}" placeholder="${esc(i18n('Chercher…'))}">`;
         $('[data-la-q]')?.addEventListener('input', e => { st.q = e.target.value; st.shown = 60; draw(); });
         const pill = (attr, v, label, n, cur, extra = '') => `<button type="button" ${attr}="${esc(v)}" class="${cur === v ? 'is-active' : ''}"${extra}>${esc(label)}${n == null ? '' : ` (${nf(n, 0)})`}</button>`;
         /** C5 : « Langue » — Toutes, Français, Latin, Grec, Allemand… avec le nombre trouvé (pour l'onglet affiché) */
@@ -83,15 +84,15 @@
             // beaucoup de langues : les plus courantes d'abord, les autres derrière « ＋ N autres langues » (dépliées si l'une est choisie)
             const MAIN = ['fr', 'la', 'grc', 'de', 'it', 'es', 'nl', 'pl', 'pt', 'en'];
             const main = ls.length > 12 && !st.allLangs ? ls.filter(l => MAIN.includes(l.code) || l.code === st.lang) : ls, rest = ls.length - main.length;
-            return `<div class="ui-filters la-langs" role="group" aria-label="Langue">${pill('data-la-lang', '', 'Toutes les langues', c.all, st.lang)}${main.map(l => pill('data-la-lang', l.code, l.name, c[l.code], st.lang, ` title="${esc(l.native || l.name)}"`)).join('')}${rest > 0 ? `<button type="button" class="la-langs-more" data-la-langs-more aria-expanded="false">＋ ${rest} autre${rest > 1 ? 's' : ''} langue${rest > 1 ? 's' : ''}</button>` : ls.length > 12 ? '<button type="button" class="la-langs-more" data-la-langs-more aria-expanded="true">− Moins de langues</button>' : ''}</div>`;
+            return `<div class="ui-filters la-langs" role="group" aria-label="Langue">${pill('data-la-lang', '', i18n('Toutes les langues'), c.all, st.lang)}${main.map(l => pill('data-la-lang', l.code, l.name, c[l.code], st.lang, ` title="${esc(l.native || l.name)}"`)).join('')}${rest > 0 ? `<button type="button" class="la-langs-more" data-la-langs-more aria-expanded="false">＋ ${rest} autre${rest > 1 ? 's' : ''} langue${rest > 1 ? 's' : ''}</button>` : ls.length > 12 ? `<button type="button" class="la-langs-more" data-la-langs-more aria-expanded="true">− ${i18n('Moins de langues')}</button>` : ''}</div>`;
         }
         function filters() {
             if (st.tab === 'exos' && st.exo) { $('[data-la-filters]').innerHTML = ''; return; }
             if (st.tab !== 'dict') { $('[data-la-filters]').innerHTML = langPills(); return; }
             const c = L().counts(st.q, st.acte, st.lang), K = L().KINDS, AC = L().ACTES;
             const nEntries = Object.keys(K).reduce((n, k) => n + (c[k] || 0), 0);
-            $('[data-la-filters]').innerHTML = `${langPills()}<div class="ui-filters" role="group" aria-label="Sorte">${pill('data-la-kind', '', 'Tout', nEntries, st.kind)}${Object.entries(K).filter(([k]) => c[k] || st.kind === k).map(([k, l]) => pill('data-la-kind', k, l, c[k], st.kind)).join('')}</div>
-                <div class="ui-filters la-actes" role="group" aria-label="Sorte d’acte">${pill('data-la-acte', '', 'Tous les actes', null, st.acte)}${['bapteme', 'mariage', 'sepulture', 'recensement'].map(k => pill('data-la-acte', k, AC[k], null, st.acte)).join('')}</div>`;
+            $('[data-la-filters]').innerHTML = `${langPills()}<div class="ui-filters" role="group" aria-label="Sorte">${pill('data-la-kind', '', i18n('Tout'), nEntries, st.kind)}${Object.entries(K).filter(([k]) => c[k] || st.kind === k).map(([k, l]) => pill('data-la-kind', k, l, c[k], st.kind)).join('')}</div>
+                <div class="ui-filters la-actes" role="group" aria-label="${esc(i18n('Sorte d’acte'))}">${pill('data-la-acte', '', i18n('Tous les actes'), null, st.acte)}${['bapteme', 'mariage', 'sepulture', 'recensement'].map(k => pill('data-la-acte', k, AC[k], null, st.acte)).join('')}</div>`;
         }
         /** en tête de la liste d'une langue : une phrase, et son convertisseur de nombres s'il y en a un */
         const langHead = (withNum = true) => { const l = st.lang ? L().langOf?.(st.lang) : null; return !l || l.builtin ? '' : `${l.intro ? `<p class="la-intro">${l.icon ? `<span aria-hidden="true">${esc(l.icon)}</span> ` : ''}${esc(l.intro)}</p>` : ''}${withNum ? numeralsHtml(l) : ''}`; };
@@ -99,12 +100,12 @@
         function drawDict() {
             const all = L().search(st.q, {kind: st.kind, acte: st.acte, lang: st.lang}).filter(r => r.type === 'entry'), rows = all.slice(0, st.shown);
             const head = langHead();
-            if (!all.length) { body.innerHTML = head + emptyLine(st.q ? `Rien pour « ${st.q} »${st.lang ? ` en ${(L().langOf?.(st.lang)?.name || '').toLowerCase()}` : ''}. Vérifie l’orthographe, cherche un morceau du mot (« vv », « legit »…), ou choisis « Toutes les langues ».` : 'Rien dans cette rubrique.'); bindNum(); return; }
+            if (!all.length) { body.innerHTML = head + emptyLine(st.q ? `${i18n('Rien pour « {q} »{x}. Vérifie l’orthographe, cherche un morceau du mot (« vv », « legit »…), ou choisis « Toutes les langues ».', {q: st.q, x: st.lang ? ` ${i18n('en {lang}', {lang: (L().langOf?.(st.lang)?.name || '').toLowerCase()})}` : ''})}` : i18n('Rien dans cette rubrique.')); bindNum(); return; }
             const langName = code => (st.lang ? '' : L().langOf?.(code)?.name || '');
-            body.innerHTML = `${head}<p class="la-count">${nf(all.length, 0)} ${all.length > 1 ? 'mots et formules' : 'mot'}</p><dl class="la-dict">${rows.map(({item: e}) => `<div class="la-row">
+            body.innerHTML = `${head}<p class="la-count">${nf(all.length, 0)} ${all.length > 1 ? i18n('mots et formules') : 'mot'}</p><dl class="la-dict" data-i18n-off>${rows.map(({item: e}) => `<div class="la-row">
                 <dt${langAttrs(e.lang)}>${mark(e.t, st.q)}${e.tr?.length ? `<small class="la-tr" lang="fr">${esc(e.tr[0])}</small>` : ''}</dt><dd>${mark(e.d, st.q)}${e.ex ? `<small class="la-ex"${langAttrs(e.lang)}>${esc(e.ex)}</small>` : ''}</dd>
-                <span class="la-row-tags">${badge(L().KINDS[e.k]?.replace(/^\S+\s/, '') || e.k, KIND_BADGE[e.k] || 'grey')}${langName(e.lang) && e.lang !== 'fr' ? ` <small class="la-acte la-lang">${esc(langName(e.lang))}</small>` : ''}${e.a && e.a !== 'general' ? ` <small class="la-acte">${esc(L().ACTES[e.a] || '')}</small>` : ''}${e.src ? ` <small class="la-acte" title="Repris de ${esc(e.src)}">${esc(e.src)}</small>` : ''}</span>
-                <button type="button" class="icon-button small la-copy" data-la-copy="${esc(`${e.t} : ${e.d}`)}" title="Copier" aria-label="Copier « ${esc(e.t)} »">📋</button></div>`).join('')}</dl>`;
+                <span class="la-row-tags">${badge(L().KINDS[e.k]?.replace(/^\S+\s/, '') || e.k, KIND_BADGE[e.k] || 'grey')}${langName(e.lang) && e.lang !== 'fr' ? ` <small class="la-acte la-lang">${esc(langName(e.lang))}</small>` : ''}${e.a && e.a !== 'general' ? ` <small class="la-acte">${esc(L().ACTES[e.a] || '')}</small>` : ''}${e.src ? ` <small class="la-acte" title="${esc(i18n('Repris de {src}', {src: esc(e.src)}))}">${esc(e.src)}</small>` : ''}</span>
+                <button type="button" class="icon-button small la-copy" data-la-copy="${esc(`${e.t} : ${e.d}`)}" title="${esc(i18n('Copier'))}" aria-label="${esc(i18n('Copier « {t} »', {t: esc(e.t)}))}">📋</button></div>`).join('')}</dl>`;
             if (all.length > st.shown && UI().moreButton) body.appendChild(UI().moreButton({remaining: all.length - st.shown, step: 60, onClick: () => { st.shown += 60; drawDict(); }}));
             if (langFoot()) body.insertAdjacentHTML('beforeend', langFoot());
             bindNum();
@@ -112,15 +113,15 @@
         function bindNum() {
             const box = body.querySelector('[data-la-num]'); if (!box) return;
             const l = L().langOf?.(st.lang), inp = box.querySelector('[data-la-num-in]');
-            inp.addEventListener('input', () => { const o = box.querySelector('[data-la-num-out]'); o.innerHTML = numeralsRead(l, inp.value) || `<span class="ui-hint">Écris « ${esc((l.numerals.examples || ['1852'])[0])} » ou « 1852 ».</span>`; });
+            inp.addEventListener('input', () => { const o = box.querySelector('[data-la-num-out]'); o.innerHTML = numeralsRead(l, inp.value) || `<span class="ui-hint">${i18n('Écris « {x} » ou « 1852 ».', {x: esc((l.numerals.examples || ['1852'])[0])})}</span>`; });
             box.addEventListener('click', e => { const b = e.target.closest('[data-la-num-ex]'); if (b) { inp.value = b.dataset.laNumEx; inp.dispatchEvent(new Event('input')); } });
         }
         function drawLetters() {
             const list = L().search(st.q, {kind: 'lettre', lang: st.lang}).map(r => r.item).sort((a, b) => (st.lang && !st.q ? (b.lang === st.lang) - (a.lang === st.lang) : 0)), cur = st.lang ? L().langOf?.(st.lang) : null;
             const head = langHead() + (cur && !st.q ? alphabetHtml(cur) : '');
-            if (!list.length) { body.innerHTML = head + emptyLine(st.q ? `Aucune lettre pour « ${st.q} ». Essaie « s long », « r rond », « u n », « ligature », « kurrent ».` : 'Pas encore de lettres dessinées pour cette langue : elle s’écrit comme le français. Regarde ses mots dans 🔍 Dictionnaire.', '✍️'); bindNum(); return; }
-            body.innerHTML = `${head}<p class="la-count">${nf(list.length, 0)} forme${list.length > 1 ? 's' : ''} de lettres · trait dessiné à la main, comme dans les registres</p><div class="la-letters">${list.map(l => `<article class="la-letter" data-la-letter="${esc(l.id)}">
-                <div class="la-letter-draw"><figure>${L().glyphSvg(l.seen, {title: `${l.name} : se lit ${l.read}`})}<figcaption>on voit</figcaption></figure>${l.cmp.length ? `<figure class="is-cmp">${L().glyphSvg(l.cmp, {title: 'à ne pas confondre'})}<figcaption>à ne pas confondre</figcaption></figure>` : ''}</div>
+            if (!list.length) { body.innerHTML = head + emptyLine(st.q ? i18n('Aucune lettre pour « {q} ». Essaie « s long », « r rond », « u n », « ligature », « kurrent ».', {q: st.q}) : i18n('Pas encore de lettres dessinées pour cette langue : elle s’écrit comme le français. Regarde ses mots dans 🔍 Dictionnaire.'), '✍️'); bindNum(); return; }
+            body.innerHTML = `${head}<p class="la-count">${i18n(list.length > 1 ? '{n} formes de lettres · trait dessiné à la main, comme dans les registres' : '{n} forme de lettres · trait dessiné à la main, comme dans les registres', {n: nf(list.length, 0)})}</p><div class="la-letters">${list.map(l => `<article class="la-letter" data-la-letter="${esc(l.id)}">
+                <div class="la-letter-draw"><figure>${L().glyphSvg(l.seen, {title: `${l.name} : se lit ${l.read}`})}<figcaption>${i18n('on voit')}</figcaption></figure>${l.cmp.length ? `<figure class="is-cmp">${L().glyphSvg(l.cmp, {title: i18n('à ne pas confondre')})}<figcaption>${i18n('à ne pas confondre')}</figcaption></figure>` : ''}</div>
                 <h4>${mark(l.name, st.q)}${!st.lang && l.lang !== 'fr' ? ` <small class="la-acte la-lang">${esc(L().langOf?.(l.lang)?.name || '')}</small>` : ''}</h4><p class="la-read">se lit <b${langAttrs(l.lang)}>${esc(l.read)}</b></p><p class="la-note">${mark(l.note, st.q)}</p></article>`).join('')}</div>${langFoot()}`;
             bindNum();
         }
@@ -132,17 +133,17 @@
         function drawExos() {
             if (st.exo) return drawExo(L().EXERCISES.find(x => x.id === st.exo));
             const list = L().search(st.q, {kind: 'exercice', lang: st.lang}).map(r => r.item);
-            body.innerHTML = !list.length && !st.q && st.lang ? emptyLine('Pas encore d’exercice dans cette langue : choisis « Toutes les langues ».', '🎓') : list.length ? `<p class="la-count">${nf(list.length, 0)} exercice${list.length > 1 ? 's' : ''} · lis le texte comme sur le registre, écris ta lecture (abréviations développées), puis « ✓ Corriger »</p><div class="la-exos">${list.map(exoCard).join('')}</div>
-                <p class="ui-hint">Textes modèles écrits pour l’app, sur le modèle des registres de l’époque (formules authentiques, personnes d’exemple, toutes nées bien avant 1950).</p>` : emptyLine(`Aucun exercice pour « ${st.q} ».`);
+            body.innerHTML = !list.length && !st.q && st.lang ? emptyLine(i18n('Pas encore d’exercice dans cette langue : choisis « Toutes les langues ».'), '🎓') : list.length ? `<p class="la-count">${i18n(list.length > 1 ? '{n} exercices · lis le texte comme sur le registre, écris ta lecture (abréviations développées), puis « ✓ Corriger »' : '{n} exercice · lis le texte comme sur le registre, écris ta lecture (abréviations développées), puis « ✓ Corriger »', {n: nf(list.length, 0)})}</p><div class="la-exos">${list.map(exoCard).join('')}</div>
+                <p class="ui-hint">${i18n('Textes modèles écrits pour l’app, sur le modèle des registres de l’époque (formules authentiques, personnes d’exemple, toutes nées bien avant 1950).')}</p>` : emptyLine(i18n('Aucun exercice pour « {q} ».', {q: st.q}));
         }
         function drawExo(x) {
             if (!x) { st.exo = ''; return drawExos(); }
             const P = L().parseExercise(x);
             body.innerHTML = `<div class="la-exo">
-                <div class="la-exo-head"><button type="button" class="button small secondary" data-la-back>← Tous les exercices</button><h4>${x.icon} ${esc(x.title)}</h4>${badge(x.level, LEVEL_BADGE[x.level] || 'grey')}</div>
-                <div class="la-old"${langAttrs(x.lang || 'fr')} aria-label="Le texte comme sur le registre">${esc(P.shown)}</div>
-                <label class="la-answer"><span>Ta lecture <small class="muted">(développe les abréviations : « par. » → paroisse)</small></span><textarea data-la-answer dir="auto" rows="5" spellcheck="false" placeholder="Écris ici ce que tu lis, mot après mot…"></textarea></label>
-                <div class="la-exo-actions"><button type="button" class="button" data-la-correct>✓ Corriger</button><button type="button" class="button secondary" data-la-hint>💡 Un indice</button><button type="button" class="button secondary" data-la-solution>👁 Voir la solution</button><button type="button" class="button secondary" data-la-reset>↻ Recommencer</button></div>
+                <div class="la-exo-head"><button type="button" class="button small secondary" data-la-back>← ${i18n('Tous les exercices')}</button><h4>${x.icon} ${esc(x.title)}</h4>${badge(x.level, LEVEL_BADGE[x.level] || 'grey')}</div>
+                <div class="la-old"${langAttrs(x.lang || 'fr')} aria-label="${esc(i18n('Le texte comme sur le registre'))}">${esc(P.shown)}</div>
+                <label class="la-answer"><span>${i18n('Ta lecture')} <small class="muted">${i18n('(développe les abréviations : « par. » → paroisse)')}</small></span><textarea data-la-answer dir="auto" rows="5" spellcheck="false" placeholder="${esc(i18n('Écris ici ce que tu lis, mot après mot…'))}"></textarea></label>
+                <div class="la-exo-actions"><button type="button" class="button" data-la-correct>✓ Corriger</button><button type="button" class="button secondary" data-la-hint>💡 ${i18n('Un indice', {ctx: 'exercice'})}</button><button type="button" class="button secondary" data-la-solution>👁 ${i18n('Voir la solution')}</button><button type="button" class="button secondary" data-la-reset>↻ Recommencer</button></div>
                 <div data-la-tip hidden class="ui-hint">💡 ${esc(x.tip)}</div>
                 <div class="la-result" data-la-result aria-live="polite"></div></div>`;
             body.querySelector('[data-la-answer]').focus();
@@ -151,10 +152,10 @@
             const r = L().correct(x, answer), out = body.querySelector('[data-la-result]'); if (!out) return;
             const best = store.get(LA_BEST, {}); if (best[x.id] == null || r.score > best[x.id]) { best[x.id] = r.score; store.set(LA_BEST, best); }
             const miss = r.words.filter(w => w.st === 'faux' || w.st === 'manque').length;
-            out.innerHTML = `${UI().notice ? UI().notice(r.score >= 90 ? 'ok' : r.score >= 60 ? 'info' : 'warn', `${r.ok} mot${r.ok > 1 ? 's' : ''} juste${r.ok > 1 ? 's' : ''} sur ${r.total} (${r.score} %)${miss ? ` · ${miss} à revoir` : ' · bravo !'}${r.extra ? ` · ${r.extra} en trop` : ''}`) : ''}
-                <p class="la-legend"><span class="la-w is-ok">juste</span> <span class="la-w is-faux">à revoir</span> <span class="la-w is-manque">oublié</span> <span class="la-w is-trop">en trop</span> — passe la souris sur un mot à revoir pour l’explication.</p>
-                <div class="la-words">${r.words.map(w => w.st === 'ok' ? `<span class="la-w is-ok">${esc(w.got)}</span>` : w.st === 'trop' ? `<span class="la-w is-trop" title="Ce mot n’est pas dans le texte">${esc(w.got)}</span>`
-                    : `<span class="la-w is-${w.st}" title="${esc([`On lit « ${w.exp} »`, w.hint].filter(Boolean).join(' — '))}">${w.st === 'faux' ? `<s>${esc(w.got)}</s> ` : ''}<b>${esc(w.exp)}</b>${w.hint ? `<small>${esc(w.hint)}</small>` : ''}</span>`).join(' ')}</div>`;
+            out.innerHTML = `${UI().notice ? UI().notice(r.score >= 90 ? 'ok' : r.score >= 60 ? 'info' : 'warn', `${i18n(r.ok > 1 ? '{ok} mots justes sur {total} ({score} %)' : '{ok} mot juste sur {total} ({score} %)', {ok: r.ok, n: r.ok, total: r.total, score: r.score})}${miss ? ` · ${i18n('{miss} à revoir', {miss})}` : ` · ${i18n('bravo !')}`}${r.extra ? ` · ${i18n('{extra} en trop', {extra: r.extra})}` : ''}`) : ''}
+                <p class="la-legend"><span class="la-w is-ok">juste</span> <span class="la-w is-faux">${i18n('à revoir')}</span> <span class="la-w is-manque">${i18n('oublié')}</span> <span class="la-w is-trop">${i18n('en trop')}</span> ${i18n('— passe la souris sur un mot à revoir pour l’explication.')}</p>
+                <div class="la-words">${r.words.map(w => w.st === 'ok' ? `<span class="la-w is-ok">${esc(w.got)}</span>` : w.st === 'trop' ? `<span class="la-w is-trop" title="${esc(i18n('Ce mot n’est pas dans le texte'))}">${esc(w.got)}</span>`
+                    : `<span class="la-w is-${w.st}" title="${esc([i18n('On lit « {exp} »', {exp: w.exp}), w.hint].filter(Boolean).join(' — '))}">${w.st === 'faux' ? `<s>${esc(w.got)}</s> ` : ''}<b>${esc(w.exp)}</b>${w.hint ? `<small>${esc(w.hint)}</small>` : ''}</span>`).join(' ')}</div>`;
             out.scrollIntoView?.({block: 'nearest', behavior: 'smooth'});
         }
         function draw() {
@@ -173,7 +174,7 @@
             if (e.target.closest('[data-la-back]')) { st.exo = ''; draw(); return; }
             const cur = L().EXERCISES.find(z => z.id === st.exo); if (!cur) return;
             const ta = body.querySelector('[data-la-answer]');
-            if (e.target.closest('[data-la-correct]')) { if (!ta.value.trim()) { if (UI().fail) UI().fail(ta, 'Écris d’abord ta lecture du texte.'); else toast('Écris d’abord ta lecture du texte.', 'error'); return; } showCorrection(cur, ta.value); }
+            if (e.target.closest('[data-la-correct]')) { if (!ta.value.trim()) { if (UI().fail) UI().fail(ta, i18n('Écris d’abord ta lecture du texte.')); else toast(i18n('Écris d’abord ta lecture du texte.'), 'error'); return; } showCorrection(cur, ta.value); }
             if (e.target.closest('[data-la-hint]')) body.querySelector('[data-la-tip]').hidden = false;
             if (e.target.closest('[data-la-solution]')) { ta.value = L().parseExercise(cur).answer; showCorrection(cur, ta.value); }
             if (e.target.closest('[data-la-reset]')) { ta.value = ''; body.querySelector('[data-la-result]').innerHTML = ''; ta.focus(); }
@@ -188,15 +189,15 @@
     /** open({tab, q, lang}) : lang = « de », « la », « grc »… (ou « deu », « fra+lat » : la langue choisie dans la transcription) */
     function openReading({tab = '', q = '', lang} = {}) {
         if (lang && !L()?.langOf?.(lang)) lang = L()?.langForOcr?.(lang) || '';
-        if (!ext.openDialog) return toast('La fenêtre n’est pas encore prête : réessaie dans un instant.', 'error');
-        return ext.openDialog({eyebrow: 'AIDE · LECTURE DES ACTES', title: '📜 Aide à la lecture des actes anciens', wide: true, submitLabel: 'Fermer', onSubmit: () => true,
+        if (!ext.openDialog) return toast(i18n('La fenêtre n’est pas encore prête : réessaie dans un instant.'), 'error');
+        return ext.openDialog({eyebrow: i18n('AIDE · LECTURE DES ACTES'), title: `📜 ${i18n('Aide à la lecture des actes anciens')}`, wide: true, submitLabel: i18n('Fermer'), onSubmit: () => true,
             body: '<div data-la-host></div>', onOpen: dg => { dg.classList.add('la-dialog'); mountReading(dg.querySelector('[data-la-host]'), {tab, q, lang}); setTimeout(() => dg.querySelector('.la-search input')?.focus(), 30); }});
     }
     ext.readingAid = {open: openReading, mount: mountReading, search: (q, o) => L()?.search(q, o) || []};
 
     /* ═════════════════════════ 🪙 Convertisseur d'autrefois ═════════════════════════ */
     const AF_TAB = 'lcnda-autrefois-tab', AF_REGION = 'lcnda-autrefois-region';
-    const AF_TABS = [['argent', '💰 Argent'], ['mesures', '📏 Mesures anciennes'], ['calendrier', '📅 Calendrier républicain']];
+    const AF_TABS = [['argent', '💰 Argent'], ['mesures', '📏 Mesures anciennes'], ['calendrier', `📅 ${i18n('Calendrier républicain')}`]];
     /** l'année d'un texte : « 1780 », « vers 1780 », « 12 mars 1780 », « an X » (an X = 1801-1802 : on garde 1802, comme les champs de date) */
     function yearOf(text) {
         const s = String(text || '').toLowerCase(); let m;
@@ -205,7 +206,7 @@
     }
     const hintLine = (r, okText) => !r ? '' : r.ok ? `<span class="ui-hint is-ok">✓ Compris : <b>${esc(okText ?? r.label)}</b></span>` : `<span class="ui-hint is-warn">⚠️ ${esc(String(r.text || '').charAt(0).toUpperCase() + String(r.text || '').slice(1))}</span>`;
     function mountConverter(host, {tab = '', value = '', year = ''} = {}) {
-        if (!F()) { host.innerHTML = emptyLine('Le convertisseur n’a pas pu se charger (fichier app-autrefois-engine.js manquant ?).', '⚠️'); return null; }
+        if (!F()) { host.innerHTML = emptyLine(i18n('Le convertisseur n’a pas pu se charger (fichier app-autrefois-engine.js manquant ?).'), '⚠️'); return null; }
         const st = {tab: tab || store.get(AF_TAB, 'argent'), region: store.get(AF_REGION, 'paris')};
         if (!AF_TABS.some(([k]) => k === st.tab)) st.tab = 'argent';
         host.classList.add('af');
@@ -214,48 +215,48 @@
         const init = {argent: st.tab === 'argent' ? value : '', mesures: st.tab === 'mesures' ? value : '', calendrier: st.tab === 'calendrier' ? value : ''};
         host.innerHTML = `${tabsHtml(AF_TABS, st.tab, 'data-af-tab')}
             <section class="af-pane" data-af-pane="argent">
-                <div class="af-fields"><label class="af-field"><span>La somme</span><input type="text" data-af-sum autocomplete="off" spellcheck="false" placeholder="12 livres 10 sous, 1 200 francs, 45 NF…" value="${esc(init.argent)}"><span data-af-sum-hint></span></label>
-                    <label class="af-field af-year"><span>L’année</span><input type="text" data-af-year autocomplete="off" placeholder="1780, an X, 1955…" value="${esc(year || '')}"><span data-af-year-hint></span></label></div>
+                <div class="af-fields"><label class="af-field"><span>${i18n('La somme')}</span><input type="text" data-af-sum autocomplete="off" spellcheck="false" placeholder="12 livres 10 sous, 1 200 francs, 45 NF…" value="${esc(init.argent)}"><span data-af-sum-hint></span></label>
+                    <label class="af-field af-year"><span>${i18n('L’année')}</span><input type="text" data-af-year autocomplete="off" placeholder="1780, an X, 1955…" value="${esc(year || '')}"><span data-af-year-hint></span></label></div>
                 <p class="af-examples">Exemples : ${[['300 livres', '1780'], ['12 livres 10 sous 6 deniers', '1750'], ['1 200 francs', '1880'], ['5 000 francs', '1955'], ['45 NF', '1965'], ['100 F', '1995']].map(([s, y]) => `<button type="button" class="link-button" data-af-ex-sum="${esc(s)}" data-af-ex-year="${y}">${esc(s)} en ${y}</button>`).join(' · ')}</p>
                 <div class="af-out" data-af-out="argent" aria-live="polite"></div></section>
             <section class="af-pane" data-af-pane="mesures">
-                <div class="af-fields"><label class="af-field"><span>La mesure</span><input type="text" data-af-measure autocomplete="off" spellcheck="false" placeholder="3 arpents, 12 toises 3 pieds, 2 boisseaux, 1,5 ha…" value="${esc(init.mesures)}"><span data-af-measure-hint></span></label>
-                    <label class="af-field"><span>Région, ville</span><select data-af-region>${regs.map(r => `<option value="${esc(r.id)}"${r.id === st.region ? ' selected' : ''}>${esc(r.label)}</option>`).join('')}</select><span class="ui-hint">Les mesures changeaient d’une province à l’autre : choisis celle de l’acte.</span></label></div>
+                <div class="af-fields"><label class="af-field"><span>${i18n('La mesure')}</span><input type="text" data-af-measure autocomplete="off" spellcheck="false" placeholder="3 arpents, 12 toises 3 pieds, 2 boisseaux, 1,5 ha…" value="${esc(init.mesures)}"><span data-af-measure-hint></span></label>
+                    <label class="af-field"><span>${i18n('Région, ville')}</span><select data-af-region>${regs.map(r => `<option value="${esc(r.id)}"${r.id === st.region ? ' selected' : ''}>${esc(r.label)}</option>`).join('')}</select><span class="ui-hint">${i18n('Les mesures changeaient d’une province à l’autre : choisis celle de l’acte.')}</span></label></div>
                 <p class="af-examples">Exemples : ${['3 arpents', '12 toises 3 pieds', '2 setiers', '5 aunes', '1 lieue', '4 journaux', '1,5 ha'].map(s => `<button type="button" class="link-button" data-af-ex-measure="${esc(s)}">${esc(s)}</button>`).join(' · ')}</p>
                 <div class="af-out" data-af-out="mesures" aria-live="polite"></div></section>
             <section class="af-pane" data-af-pane="calendrier">
-                <div class="af-fields"><label class="af-field af-wide"><span>La date (républicaine ou de tous les jours)</span><input type="text" data-af-date autocomplete="off" spellcheck="false" placeholder="12 thermidor an II, 14 juillet 1794, 14/07/1794…" value="${esc(init.calendrier)}"><span data-af-date-hint></span></label></div>
-                <p class="af-examples">Exemples : ${['9 thermidor an II', '18 brumaire an VIII', '1er vendémiaire an I', '14 juillet 1794', '25/12/1800'].map(s => `<button type="button" class="link-button" data-af-ex-date="${esc(s)}">${esc(s)}</button>`).join(' · ')}</p>
+                <div class="af-fields"><label class="af-field af-wide"><span>${i18n('La date (républicaine ou de tous les jours)')}</span><input type="text" data-af-date autocomplete="off" spellcheck="false" placeholder="12 thermidor an II, 14 juillet 1794, 14/07/1794…" value="${esc(init.calendrier)}"><span data-af-date-hint></span></label></div>
+                <p class="af-examples">Exemples : ${['9 thermidor an II', '18 brumaire an VIII', i18n('1er vendémiaire an I'), '14 juillet 1794', '25/12/1800'].map(s => `<button type="button" class="link-button" data-af-ex-date="${esc(s)}">${esc(s)}</button>`).join(' · ')}</p>
                 <div class="af-out" data-af-out="calendrier" aria-live="polite"></div></section>
-            <p class="af-source ui-hint">Tout est calculé ici, sans internet. Argent : ${esc(F().SOURCE)} à partir de 1901 ; avant, un ordre de grandeur. Les résultats sont des repères (≈), pas des valeurs exactes.</p>`;
+            <p class="af-source ui-hint">${i18n('Tout est calculé ici, sans internet. Argent : {x} à partir de 1901 ; avant, un ordre de grandeur. Les résultats sont des repères (≈), pas des valeurs exactes.', {x: esc(F().SOURCE)})}</p>`;
         const $ = s => host.querySelector(s);
-        const copyBtn = text => `<button type="button" class="button small secondary af-copy" data-af-copy="${esc(text)}">📋 Copier</button>`;
+        const copyBtn = text => `<button type="button" class="button small secondary af-copy" data-af-copy="${esc(text)}">📋 ${i18n('Copier')}</button>`;
         function drawMoney() {
             const sumIn = $('[data-af-sum]'), yIn = $('[data-af-year]'), out = $('[data-af-out="argent"]');
             const sum = sumIn.value.trim() ? F().readSum(sumIn.value) : null, y = yearOf(yIn.value);
             $('[data-af-sum-hint]').innerHTML = hintLine(sum);
-            const yr = !yIn.value.trim() ? null : y >= 1300 && y <= 2025 ? {ok: true, label: `${y}${/\ban\s/i.test(yIn.value) ? ' (année républicaine)' : ''}`} : y > 2025 ? {ok: false, text: 'une année d’aujourd’hui ou d’avant (jusqu’à 2025)'} : {ok: false, text: 'une année entre 1300 et 2025 (exemples : 1780, an X, 1955)'};
+            const yr = !yIn.value.trim() ? null : y >= 1300 && y <= 2025 ? {ok: true, label: `${y}${/\ban\s/i.test(yIn.value) ? ` ${i18n('(année républicaine)')}` : ''}`} : y > 2025 ? {ok: false, text: i18n('une année d’aujourd’hui ou d’avant (jusqu’à 2025)')} : {ok: false, text: i18n('une année entre 1300 et 2025 (exemples : 1780, an X, 1955)')};
             $('[data-af-year-hint]').innerHTML = hintLine(yr);
             sumIn.classList.toggle('is-invalid', !!sum && !sum.ok); yIn.classList.toggle('is-invalid', !!yr && !yr.ok);
-            if (!sum?.ok || !yr?.ok) { out.innerHTML = emptyLine(!sum ? 'Écris une somme et son année : « 300 livres » en « 1780 ».' : !yr ? 'Écris aussi l’année de la somme.' : 'Corrige la case marquée ⚠️ ci-dessus.', '💰'); return; }
+            if (!sum?.ok || !yr?.ok) { out.innerHTML = emptyLine(!sum ? i18n('Écris une somme et son année : « 300 livres » en « 1780 ».') : !yr ? i18n('Écris aussi l’année de la somme.') : i18n('Corrige la case marquée ⚠️ ci-dessus.'), '💰'); return; }
             const w = F().worth(sum, y, {wageSols: A().journalierWageSols}); if (!w) { out.innerHTML = ''; return; }
-            const txt = `${sum.label} en ${y} ${F().euroText(w.euros)} d’aujourd’hui (${w.source === 'insee' ? 'indice des prix de l’INSEE' : 'ordre de grandeur'})`;
-            out.innerHTML = `<div class="af-big"><small>En euros d’aujourd’hui</small><strong>${esc(F().euroText(w.euros))}</strong>${badge(w.source === 'insee' ? 'INSEE' : 'Ordre de grandeur', w.source === 'insee' ? 'green' : 'yellow')}${copyBtn(txt)}</div>
-                <div class="af-cards"><div><small>Dans la monnaie de ${y}</small><b>${esc(w.nativeText)}</b></div><div><small>En pain</small><b>🥖 ${nf(w.bread, w.bread < 10 ? 1 : 0)} kg</b></div>${w.days != null ? `<div><small>En journées de travail</small><b>🔨 ${nf(w.days, 1)}</b><small>d’un journalier en ${y}</small></div>` : ''}</div>
+            const txt = i18n('{label} en {y} {x} d’aujourd’hui ({x2})', {label: sum.label, y, x: F().euroText(w.euros), x2: w.source === 'insee' ? i18n('indice des prix de l’INSEE') : i18n('ordre de grandeur')});
+            out.innerHTML = `<div class="af-big"><small>${i18n('En euros d’aujourd’hui')}</small><strong>${esc(F().euroText(w.euros))}</strong>${badge(w.source === 'insee' ? 'INSEE' : i18n('Ordre de grandeur'), w.source === 'insee' ? 'green' : 'yellow')}${copyBtn(txt)}</div>
+                <div class="af-cards"><div><small>${i18n('Dans la monnaie de {y}', {y})}</small><b>${esc(w.nativeText)}</b></div><div><small>${i18n('En pain')}</small><b>🥖 ${nf(w.bread, w.bread < 10 ? 1 : 0)} kg</b></div>${w.days != null ? `<div><small>${i18n('En journées de travail')}</small><b>🔨 ${nf(w.days, 1)}</b><small>${i18n('d’un journalier en {y}', {y})}</small></div>` : ''}</div>
                 ${w.warn.map(t => UI().notice ? UI().notice('warn', t.charAt(0).toUpperCase() + t.slice(1) + '.') : '').join('')}
-                <details class="af-steps"><summary>Le calcul, pas à pas</summary><ol>${w.steps.map(s => `<li>${esc(s)}</li>`).join('')}</ol><p class="ui-hint">Source : <a href="${esc(F().SOURCE_URL)}" target="_blank" rel="noopener noreferrer">${esc(F().SOURCE)}</a>. Parités exactes : 1 livre = 20 sous = 240 deniers · 81 livres = 80 francs (franc germinal, 1795) · 1 nouveau franc = 100 anciens francs (1960) · 1 € = 6,55957 F (1999).</p></details>
+                <details class="af-steps"><summary>${i18n('Le calcul, pas à pas')}</summary><ol>${w.steps.map(s => `<li>${esc(s)}</li>`).join('')}</ol><p class="ui-hint">${i18n('Source :')} <a href="${esc(F().SOURCE_URL)}" target="_blank" rel="noopener noreferrer">${esc(F().SOURCE)}</a>. Parités exactes : 1 livre = 20 sous = 240 deniers · 81 livres = 80 francs (franc germinal, 1795) · 1 nouveau franc = 100 anciens francs (1960) · 1 € = 6,55957 F (1999).</p></details>
 `;
         }
         function drawMeasure() {
             const inp = $('[data-af-measure]'), out = $('[data-af-out="mesures"]');
             const r = inp.value.trim() ? F().readMeasure(inp.value, st.region) : null;
-            $('[data-af-measure-hint]').innerHTML = hintLine(r, r?.ok ? `${r.label}${r.fromRegion ? ` (mesure de ${r.fromRegion})` : ''}` : '');
+            $('[data-af-measure-hint]').innerHTML = hintLine(r, r?.ok ? `${r.label}${r.fromRegion ? ` ${i18n('(mesure de {fromRegion})', {fromRegion: r.fromRegion})}` : ''}` : '');
             inp.classList.toggle('is-invalid', !!r && !r.ok);
-            if (!r?.ok) { out.innerHTML = emptyLine(!r ? 'Écris une mesure : « 3 arpents », « 12 toises 3 pieds », « 2 boisseaux »… ou « 1,5 ha » pour l’inverse.' : 'Corrige la case marquée ⚠️ ci-dessus.', '📏'); return; }
+            if (!r?.ok) { out.innerHTML = emptyLine(!r ? i18n('Écris une mesure : « 3 arpents », « 12 toises 3 pieds », « 2 boisseaux »… ou « 1,5 ha » pour l’inverse.') : i18n('Corrige la case marquée ⚠️ ci-dessus.'), '📏'); return; }
             const txt = `${r.label} ${r.approx ? '≈' : '='} ${r.metric}`;
-            out.innerHTML = `<div class="af-big"><small>${esc(r.kindName)} · ${esc(r.region)}</small><strong>${r.approx ? '≈ ' : '= '}${esc(r.metric)}</strong>${r.approx ? badge('Valeur approchée', 'yellow') : ''}${copyBtn(txt)}</div>
-                ${r.units.length ? `<h4 class="af-h">Dans les autres mesures de la région</h4><table class="af-table"><tbody>${r.units.map(u => `<tr><td>${u.approx ? '≈ ' : ''}${nf(u.value, u.value < 10 ? 3 : 1)}</td><td>${esc(u.label)}${u.note ? ` <small class="muted">(${esc(u.note)})</small>` : ''}</td></tr>`).join('')}</tbody></table>` : ''}
-                ${r.elsewhere.length ? `<h4 class="af-h">La même mesure ailleurs (pour 1)</h4><table class="af-table"><tbody>${r.elsewhere.map(u => `<tr><td>${u.approx ? '≈ ' : ''}${esc(u.metric)}</td><td>${esc(u.label)} <small class="muted">— ${esc(u.region)}</small></td></tr>`).join('')}</tbody></table>` : ''}
+            out.innerHTML = `<div class="af-big"><small>${esc(r.kindName)} · ${esc(r.region)}</small><strong>${r.approx ? '≈ ' : '= '}${esc(r.metric)}</strong>${r.approx ? badge(i18n('Valeur approchée'), 'yellow') : ''}${copyBtn(txt)}</div>
+                ${r.units.length ? `<h4 class="af-h">${i18n('Dans les autres mesures de la région')}</h4><table class="af-table"><tbody>${r.units.map(u => `<tr><td>${u.approx ? '≈ ' : ''}${nf(u.value, u.value < 10 ? 3 : 1)}</td><td>${esc(u.label)}${u.note ? ` <small class="muted">(${esc(u.note)})</small>` : ''}</td></tr>`).join('')}</tbody></table>` : ''}
+                ${r.elsewhere.length ? `<h4 class="af-h">${i18n('La même mesure ailleurs (pour 1)')}</h4><table class="af-table"><tbody>${r.elsewhere.map(u => `<tr><td>${u.approx ? '≈ ' : ''}${esc(u.metric)}</td><td>${esc(u.label)} <small class="muted">— ${esc(u.region)}</small></td></tr>`).join('')}</tbody></table>` : ''}
 `;
         }
         function drawDate() {
@@ -263,10 +264,10 @@
             const r = inp.value.trim() ? F().republican(inp.value) : null;
             $('[data-af-date-hint]').innerHTML = hintLine(r, r?.ok ? r.from : '');
             inp.classList.toggle('is-invalid', !!r && !r.ok);
-            if (!r?.ok) { out.innerHTML = emptyLine(!r ? 'Écris une date républicaine (« 12 thermidor an II ») ou de tous les jours (« 14 juillet 1794 ») : la conversion se fait dans les deux sens.' : 'Corrige la case marquée ⚠️ ci-dessus.', '📅'); return; }
+            if (!r?.ok) { out.innerHTML = emptyLine(!r ? i18n('Écris une date républicaine (« 12 thermidor an II ») ou de tous les jours (« 14 juillet 1794 ») : la conversion se fait dans les deux sens.') : i18n('Corrige la case marquée ⚠️ ci-dessus.'), '📅'); return; }
             const an = r.rep.an, months = F().republicanYear(an);
-            out.innerHTML = `<div class="af-big"><small>${r.dir === 'rep2greg' ? 'Dans notre calendrier' : 'Dans le calendrier républicain'}</small><strong>= ${esc(r.to)}</strong><span class="af-sub">${esc(r.weekday)}${r.decade ? ` · ${esc(r.decade)} (jour ${((r.rep.d - 1) % 10) + 1} de la décade)` : ''}</span>${copyBtn(r.text)}</div>
-                <h4 class="af-h">L’an ${esc(F().toRoman(an))} mois par mois</h4><table class="af-table af-months"><tbody>${months.map((m, i) => `<tr class="${i + 1 === r.rep.mo ? 'is-cur' : ''}"><td>${esc(m.name)}</td><td>${esc(m.start)} → ${esc(m.end)}</td><td class="muted">${m.days} jours</td></tr>`).join('')}</tbody></table>
+            out.innerHTML = `<div class="af-big"><small>${r.dir === 'rep2greg' ? i18n('Dans notre calendrier') : i18n('Dans le calendrier républicain')}</small><strong>= ${esc(r.to)}</strong><span class="af-sub">${esc(r.weekday)}${r.decade ? ` · ${i18n('{decade} (jour {x} de la décade)', {decade: esc(r.decade), x: ((r.rep.d - 1) % 10) + 1})}` : ''}</span>${copyBtn(r.text)}</div>
+                <h4 class="af-h">${i18n('L’an {x} mois par mois', {x: esc(F().toRoman(an))})}</h4><table class="af-table af-months"><tbody>${months.map((m, i) => `<tr class="${i + 1 === r.rep.mo ? 'is-cur' : ''}"><td>${esc(m.name)}</td><td>${esc(m.start)} → ${esc(m.end)}</td><td class="muted">${m.days} jours</td></tr>`).join('')}</tbody></table>
 `;
         }
         function show() {
@@ -292,8 +293,8 @@
         return {set(o = {}) { if (o.tab) st.tab = o.tab; const i = {argent: '[data-af-sum]', mesures: '[data-af-measure]', calendrier: '[data-af-date]'}[st.tab]; if (o.value != null && i) $(i).value = o.value; show(); }};
     }
     function openConverter({tab = '', value = '', year = ''} = {}) {
-        if (!ext.openDialog) return toast('La fenêtre n’est pas encore prête : réessaie dans un instant.', 'error');
-        return ext.openDialog({eyebrow: 'OUTILS · CONVERTIR', title: '🪙 Convertisseur d’autrefois', wide: true, submitLabel: 'Fermer', onSubmit: () => true,
+        if (!ext.openDialog) return toast(i18n('La fenêtre n’est pas encore prête : réessaie dans un instant.'), 'error');
+        return ext.openDialog({eyebrow: 'OUTILS · CONVERTIR', title: `🪙 ${i18n('Convertisseur d’autrefois')}`, wide: true, submitLabel: i18n('Fermer'), onSubmit: () => true,
             body: '<div data-af-host></div>', onOpen: dg => { dg.classList.add('af-dialog'); mountConverter(dg.querySelector('[data-af-host]'), {tab, value, year}); setTimeout(() => dg.querySelector('.af-pane:not([hidden]) input')?.focus(), 30); }});
     }
     ext.autrefois = {open: openConverter, mount: mountConverter, yearOf};

@@ -12,6 +12,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => { const I = (typeof window !== 'undefined' ? window : globalThis).LCNDA_I18N; if (v) v = Object.fromEntries(Object.entries(v).map(([k, x]) => [k, typeof x === 'number' ? String(x) : x])); return I ? I.t(s, v) : (v ? String(s).replace(/\{(\w+)\}/g, (m, k) => (k in v ? v[k] : m)) : s); }; // 🌐 textes traduits (docs/I18N.md) ; nombres gardés tels quels
     const A = () => window.LCNDA_APP;
     const UI = () => window.LCNDA_UI;
     const C = () => window.LCNDA_CALC;
@@ -33,47 +34,47 @@
     const saveSettings = s => ls.set(KEY, clean(s));
     const K = () => window.LCNDA_APP?.keys;
     const kbd = k => (K()?.html ? K().html(k) : `<kbd>${esc(k)}</kbd>`);
-    const ANGLES = [['deg', 'DEG', 'Degrés (un tour = 360°)'], ['rad', 'RAD', 'Radians (un tour = 2π)'], ['grad', 'GRAD', 'Grades (un tour = 400 gr)']];
+    const ANGLES = [['deg', 'DEG', i18n('Degrés (un tour = 360°)')], ['rad', 'RAD', i18n('Radians (un tour = 2π)')], ['grad', 'GRAD', i18n('Grades (un tour = 400 gr)')]];
     const COLORS = ['#055dff', '#d0182f', '#1a7f3c', '#b35c00', '#7b3fd1', '#008b8b'];
 
     /* ═════════ Les rubriques du mode scientifique ═════════ */
     // [libellé, texte inséré (| = place du curseur), bulle]
     const k = (label, ins, tip = '') => ({label, ins: ins ?? label, tip});
     const GROUPS = [
-        {id: 'fn', label: 'Fonctions', keys: [k('sin', 'sin(|)', 'Sinus'), k('cos', 'cos(|)', 'Cosinus'), k('tan', 'tan(|)', 'Tangente'), k('x²', '^2', 'Au carré'), k('xʸ', '^', 'Puissance'), k('√', '√(|)', 'Racine carrée'),
-            k('asin', 'asin(|)', 'Arc sinus'), k('acos', 'acos(|)', 'Arc cosinus'), k('atan', 'atan(|)', 'Arc tangente'), k('x³', '^3', 'Au cube'), k('ⁿ√', 'root(|; )', 'Racine n-ième : root(x ; n)'), k('∛', 'cbrt(|)', 'Racine cubique'),
-            k('sinh', 'sinh(|)', 'Sinus hyperbolique'), k('cosh', 'cosh(|)', 'Cosinus hyperbolique'), k('tanh', 'tanh(|)', 'Tangente hyperbolique'), k('ln', 'ln(|)', 'Logarithme népérien'), k('log', 'log(|)', 'Logarithme décimal ; log(x ; b) en base b'), k('eˣ', 'exp(|)', 'Exponentielle'),
-            k('x!', '!', 'Factorielle'), k('|x|', 'abs(|)', 'Valeur absolue'), k('1/x', '1/(|)', 'Inverse'), k('π', 'π', 'Pi = 3,14159…'), k('e', 'e', 'e = 2,71828…'), k('φ', 'φ', 'Nombre d’or = 1,61803…'),
-            k('10ˣ', '10^', 'Puissance de 10'), k('mod', ' mod ', 'Reste de la division'), k('%', '%', 'Pour cent (200 + 10 % = 220)'), k('°', '°', 'Degrés, même en mode RAD'), k(';', ' ; ', 'Sépare les nombres d’une fonction'), k('ans', 'ans', 'Le résultat précédent')],
+        {id: 'fn', label: i18n('Fonctions'), keys: [k('sin', 'sin(|)', i18n('Sinus')), k('cos', 'cos(|)', i18n('Cosinus')), k('tan', 'tan(|)', i18n('Tangente')), k('x²', '^2', i18n('Au carré')), k('xʸ', '^', i18n('Puissance')), k('√', '√(|)', i18n('Racine carrée')),
+            k('asin', 'asin(|)', i18n('Arc sinus')), k('acos', 'acos(|)', i18n('Arc cosinus')), k('atan', 'atan(|)', i18n('Arc tangente')), k('x³', '^3', i18n('Au cube')), k('ⁿ√', 'root(|; )', i18n('Racine n-ième : root(x ; n)')), k('∛', 'cbrt(|)', i18n('Racine cubique')),
+            k('sinh', 'sinh(|)', i18n('Sinus hyperbolique')), k('cosh', 'cosh(|)', i18n('Cosinus hyperbolique')), k('tanh', 'tanh(|)', i18n('Tangente hyperbolique')), k('ln', 'ln(|)', i18n('Logarithme népérien')), k('log', 'log(|)', i18n('Logarithme décimal ; log(x ; b) en base b')), k('eˣ', 'exp(|)', i18n('Exponentielle')),
+            k('x!', '!', i18n('Factorielle')), k('|x|', 'abs(|)', i18n('Valeur absolue')), k('1/x', '1/(|)', i18n('Inverse')), k('π', 'π', i18n('Pi = 3,14159…')), k('e', 'e', 'e = 2,71828…'), k('φ', 'φ', i18n('Nombre d’or = 1,61803…')),
+            k('10ˣ', '10^', i18n('Puissance de 10')), k('mod', ' mod ', i18n('Reste de la division')), k('%', '%', i18n('Pour cent (200 + 10 % = 220)')), k('°', '°', i18n('Degrés, même en mode RAD')), k(';', ' ; ', i18n('Sépare les nombres d’une fonction')), k('ans', 'ans', i18n('Le résultat précédent'))],
             ex: ['sin(30)² + cos(30)²', '√2 × √8', '2^10', 'ln(e^3)', '5!']},
-        {id: 'cx', label: 'Complexes', keys: [k('i', 'i', 'i² = −1'), k('re', 're(|)', 'Partie réelle'), k('im', 'im(|)', 'Partie imaginaire'), k('module', 'module(|)', 'Module |z|'), k('arg', 'arg(|)', 'Argument (angle)'), k('conj', 'conj(|)', 'Conjugué')],
-            ex: ['(1 + 2i)(3 − i)', '√(−4)', 'module(3 + 4i)', 'e^(iπ)', '1/(1 + i)'], help: 'Écris un complexe a + bi : (3 + 4i) × 2, √(−9), i^2.'},
-        {id: 'ar', label: 'Arithmétique', keys: [k('pgcd', 'pgcd(|; )', 'Plus grand commun diviseur'), k('ppcm', 'ppcm(|; )', 'Plus petit commun multiple'), k('C', 'C(|; )', 'Combinaisons : C(n ; k)'), k('A', 'A(|; )', 'Arrangements : A(n ; k)'),
-            k('premier', 'premier(|)', 'Est-ce un nombre premier ?'), k('facteurs', 'facteurs(|)', 'Décomposition en facteurs premiers'), k('arrondi', 'arrondi(|; 2)', 'Arrondi à 2 chiffres après la virgule'), k('ent', 'ent(|)', 'Partie entière'),
-            k('plafond', 'plafond(|)', 'Arrondi vers le haut'), k('frac', 'frac(|)', 'En fraction'), k('dec', 'dec(|)', 'En nombre à virgule'), k('quotient', 'quotient(|; )', 'Quotient entier')],
+        {id: 'cx', label: i18n('Complexes'), keys: [k('i', 'i', 'i² = −1'), k('re', 're(|)', i18n('Partie réelle')), k('im', 'im(|)', i18n('Partie imaginaire')), k('module', 'module(|)', i18n('Module |z|')), k('arg', 'arg(|)', i18n('Argument (angle)')), k('conj', 'conj(|)', i18n('Conjugué'))],
+            ex: ['(1 + 2i)(3 − i)', '√(−4)', 'module(3 + 4i)', 'e^(iπ)', '1/(1 + i)'], help: i18n('Écris un complexe a + bi : (3 + 4i) × 2, √(−9), i^2.')},
+        {id: 'ar', label: i18n('Arithmétique'), keys: [k('pgcd', 'pgcd(|; )', i18n('Plus grand commun diviseur')), k('ppcm', 'ppcm(|; )', i18n('Plus petit commun multiple')), k('C', 'C(|; )', i18n('Combinaisons : C(n ; k)')), k('A', 'A(|; )', i18n('Arrangements : A(n ; k)')),
+            k('premier', 'premier(|)', i18n('Est-ce un nombre premier ?')), k('facteurs', 'facteurs(|)', i18n('Décomposition en facteurs premiers')), k('arrondi', 'arrondi(|; 2)', i18n('Arrondi à 2 chiffres après la virgule')), k('ent', 'ent(|)', i18n('Partie entière')),
+            k('plafond', 'plafond(|)', i18n('Arrondi vers le haut')), k('frac', 'frac(|)', i18n('En fraction')), k('dec', 'dec(|)', i18n('En nombre à virgule')), k('quotient', 'quotient(|; )', i18n('Quotient entier'))],
             ex: ['1/3 + 1/6', 'pgcd(84 ; 120)', 'facteurs(360)', 'C(49 ; 6)', 'frac(0,875)']},
-        {id: 'base', label: 'Bases', keys: [k('bin', 'bin(|)', 'En binaire'), k('oct', 'oct(|)', 'En octal'), k('hex', 'hex(|)', 'En hexadécimal'), k('base', 'base(|; )', 'Dans une base de 2 à 36'), k('0b', '0b', 'Un nombre binaire : 0b1010'), k('0x', '0x', 'Un nombre hexadécimal : 0xFF')],
+        {id: 'base', label: i18n('Bases'), keys: [k('bin', 'bin(|)', i18n('En binaire')), k('oct', 'oct(|)', i18n('En octal')), k('hex', 'hex(|)', i18n('En hexadécimal')), k('base', 'base(|; )', i18n('Dans une base de 2 à 36')), k('0b', '0b', i18n('Un nombre binaire : 0b1010')), k('0x', '0x', i18n('Un nombre hexadécimal : 0xFF'))],
             ex: ['hex(255)', 'bin(42)', '0xFF + 0b11', '255 en binaire', 'base(100 ; 3)']},
-        {id: 'st', label: 'Statistiques', keys: [k('[ ]', '[|]', 'Une liste : [12 ; 15 ; 9]'), k(';', ' ; ', 'Sépare les nombres'), k('moyenne', 'moyenne(|)', 'Moyenne'), k('médiane', 'mediane(|)', 'Médiane'), k('σ', 'ecarttype(|)', 'Écart-type (population)'), k('s', 'ecarttype_e(|)', 'Écart-type d’un échantillon'),
-            k('variance', 'variance(|)', 'Variance'), k('somme', 'somme(|)', 'Somme'), k('min', 'min(|)', 'Le plus petit'), k('max', 'max(|)', 'Le plus grand'), k('Q1', 'q1(|)', '1er quartile'), k('Q3', 'q3(|)', '3e quartile')],
-            ex: ['moyenne([12 ; 15 ; 9 ; 18])', 'mediane([3 ; 1 ; 4 ; 1 ; 5])', 'ecarttype([2 ; 4 ; 4 ; 4 ; 5 ; 5 ; 7 ; 9])'], help: 'Mets tes nombres entre crochets, séparés par « ; ».'},
-        {id: 'mat', label: 'Matrices', keys: [k('▦', '', 'Écrire une matrice dans une grille'), k('[[ ]]', '[[|]]', 'Une matrice : [[1 ; 2] ; [3 ; 4]]'), k('det', 'det(|)', 'Déterminant'), k('inverse', 'inverse(|)', 'Matrice inverse'), k('transp', 'transp(|)', 'Transposée'), k('trace', 'trace(|)', 'Trace'),
-            k('identité', 'identite(|)', 'Matrice identité'), k('rang', 'rang(|)', 'Rang'), k('×', ' × ', 'Produit de deux matrices'), k('^−1', '^-1', 'Inverse')],
-            ex: ['det([[1 ; 2] ; [3 ; 4]])', 'inverse([[2 ; 1] ; [1 ; 1]])', '[[1 ; 2] ; [3 ; 4]] × [[5 ; 6] ; [7 ; 8]]'], help: 'Une matrice = des lignes entre crochets : [[1 ; 2] ; [3 ; 4]].', grid: true},
-        {id: 'eq', label: 'Équations', keys: [k('x', 'x'), k('y', 'y'), k('z', 'z'), k('=', ' = ', 'Le signe égal d’une équation'), k('résoudre', 'resoudre(|)', 'Résout une équation ou un système'), k('racines', 'racines(|; ; )', 'Racines d’un polynôme : ses coefficients'), k('système', 'systeme(|; )', 'Système A·X = B')],
-            ex: ['x^2 − 3x + 2 = 0', 'x^3 − 6x^2 + 11x − 6 = 0', 'resoudre(2x + y = 3 ; x − y = 0)', 'resoudre(cos(x) = x)', 'racines(1 ; 0 ; 1)'], help: 'Tape l’équation avec « = » : la calculette la résout (jusqu’au 4e degré exactement).'},
-        {id: 'an', label: 'Analyse', keys: [k('dérivée', 'derivee(|; )', 'Nombre dérivé : derivee(f(x) ; a)'), k('intégrale', 'integrale(|; ; )', 'Intégrale : integrale(f(x) ; a ; b)'), k('limite', 'limite(|; )', 'Limite : limite(f(x) ; a)'), k('Σ', 'somme(|; k; 1; 10)', 'Somme d’une suite'), k('x', 'x')],
-            ex: ['derivee(x^3 ; 2)', 'integrale(x^2 ; 0 ; 3)', 'integrale(sin(x) ; 0 ; π)', 'limite(sin(x)/x ; 0)', 'somme(k^2 ; k ; 1 ; 10)'], help: 'Les dérivées, intégrales et limites se calculent en radians.'},
-        {id: 'un', label: 'Unités', units: true, ex: ['3 toises en m', '5 arpents en ha', '12 pieds en m', '785 deniers en livres', '3 livres 5 sous en deniers', '1 livre poids en g', '100 °F en °C'], help: 'Écris « 3 toises en m » ; les mesures anciennes suivent la région choisie dans ⚙️.'},
-        {id: 'dt', label: 'Dates', dates: true, ex: ['3 frimaire an XII', '14 juillet 1794 en républicain', '7 mai 1925 → 8 décembre 1960', 'du 1er mars 1802 au 12/06/1851'], help: 'Les dates s’écrivent comme dans un acte (C4) : 7 mai 1925, 14/07/1789, vers 1784, 3 frimaire an XII.'},
+        {id: 'st', label: i18n('Statistiques'), keys: [k('[ ]', '[|]', i18n('Une liste : [12 ; 15 ; 9]')), k(';', ' ; ', i18n('Sépare les nombres')), k('moyenne', 'moyenne(|)', i18n('Moyenne', {ctx: 'calc'})), k('médiane', 'mediane(|)', i18n('Médiane')), k('σ', 'ecarttype(|)', i18n('Écart-type (population)')), k('s', 'ecarttype_e(|)', i18n('Écart-type d’un échantillon')),
+            k('variance', 'variance(|)', i18n('Variance')), k('somme', 'somme(|)', i18n('Somme')), k('min', 'min(|)', i18n('Le plus petit')), k('max', 'max(|)', i18n('Le plus grand')), k('Q1', 'q1(|)', '1er quartile'), k('Q3', 'q3(|)', '3e quartile')],
+            ex: ['moyenne([12 ; 15 ; 9 ; 18])', 'mediane([3 ; 1 ; 4 ; 1 ; 5])', 'ecarttype([2 ; 4 ; 4 ; 4 ; 5 ; 5 ; 7 ; 9])'], help: i18n('Mets tes nombres entre crochets, séparés par « ; ».')},
+        {id: 'mat', label: i18n('Matrices'), keys: [k('▦', '', i18n('Écrire une matrice dans une grille')), k('[[ ]]', '[[|]]', i18n('Une matrice : [[1 ; 2] ; [3 ; 4]]')), k('det', 'det(|)', i18n('Déterminant')), k('inverse', 'inverse(|)', i18n('Matrice inverse')), k('transp', 'transp(|)', i18n('Transposée')), k('trace', 'trace(|)', i18n('Trace')),
+            k('identité', 'identite(|)', i18n('Matrice identité')), k('rang', 'rang(|)', i18n('Rang')), k('×', ' × ', i18n('Produit de deux matrices')), k('^−1', '^-1', i18n('Inverse'))],
+            ex: ['det([[1 ; 2] ; [3 ; 4]])', 'inverse([[2 ; 1] ; [1 ; 1]])', '[[1 ; 2] ; [3 ; 4]] × [[5 ; 6] ; [7 ; 8]]'], help: i18n('Une matrice = des lignes entre crochets : [[1 ; 2] ; [3 ; 4]].'), grid: true},
+        {id: 'eq', label: i18n('Équations'), keys: [k('x', 'x'), k('y', 'y'), k('z', 'z'), k('=', ' = ', i18n('Le signe égal d’une équation')), k('résoudre', 'resoudre(|)', i18n('Résout une équation ou un système')), k('racines', 'racines(|; ; )', i18n('Racines d’un polynôme : ses coefficients')), k('système', 'systeme(|; )', i18n('Système A·X = B'))],
+            ex: ['x^2 − 3x + 2 = 0', 'x^3 − 6x^2 + 11x − 6 = 0', 'resoudre(2x + y = 3 ; x − y = 0)', 'resoudre(cos(x) = x)', 'racines(1 ; 0 ; 1)'], help: i18n('Tape l’équation avec « = » : la calculette la résout (jusqu’au 4e degré exactement).')},
+        {id: 'an', label: i18n('Analyse'), keys: [k(i18n('dérivée'), 'derivee(|; )', i18n('Nombre dérivé : derivee(f(x) ; a)')), k('intégrale', 'integrale(|; ; )', i18n('Intégrale : integrale(f(x) ; a ; b)')), k('limite', 'limite(|; )', i18n('Limite : limite(f(x) ; a)')), k('Σ', 'somme(|; k; 1; 10)', i18n('Somme d’une suite')), k('x', 'x')],
+            ex: ['derivee(x^3 ; 2)', 'integrale(x^2 ; 0 ; 3)', 'integrale(sin(x) ; 0 ; π)', 'limite(sin(x)/x ; 0)', 'somme(k^2 ; k ; 1 ; 10)'], help: i18n('Les dérivées, intégrales et limites se calculent en radians.')},
+        {id: 'un', label: i18n('Unités'), units: true, ex: ['3 toises en m', '5 arpents en ha', '12 pieds en m', '785 deniers en livres', '3 livres 5 sous en deniers', '1 livre poids en g', '100 °F en °C'], help: i18n('Écris « 3 toises en m » ; les mesures anciennes suivent la région choisie dans ⚙️.')},
+        {id: 'dt', label: i18n('Dates'), dates: true, ex: ['3 frimaire an XII', '14 juillet 1794 en républicain', '7 mai 1925 → 8 décembre 1960', 'du 1er mars 1802 au 12/06/1851'], help: i18n('Les dates s’écrivent comme dans un acte (C4) : 7 mai 1925, 14/07/1789, vers 1784, 3 frimaire an XII.')},
     ];
     const SIMPLE_KEYS = [
-        ['C', 'clear', 'Tout effacer (Échap)', 'fn'], ['(', '(', '', 'op'], [')', ')', '', 'op'], ['⌫', 'back', 'Effacer le dernier signe', 'fn'],
+        ['C', 'clear', i18n('Tout effacer (Échap)'), 'fn'], ['(', '(', '', 'op'], [')', ')', '', 'op'], ['⌫', 'back', i18n('Effacer le dernier signe'), 'fn'],
         ['7', '7'], ['8', '8'], ['9', '9'], ['÷', '/', 'Diviser', 'op'],
         ['4', '4'], ['5', '5'], ['6', '6'], ['×', '*', 'Multiplier', 'op'],
         ['1', '1'], ['2', '2'], ['3', '3'], ['−', '-', 'Soustraire', 'op'],
-        ['0', '0'], [',', 'DEC', 'Virgule', ''], ['%', '%', 'Pour cent', 'op'], ['+', '+', 'Ajouter', 'op'],
-        ['±', 'neg', 'Changer le signe', 'fn'], ['x²', '^2', 'Au carré', 'op'], ['√', '√(', 'Racine carrée', 'op'], ['=', 'eval', 'Calculer (Entrée)', 'eq'],
+        ['0', '0'], [',', 'DEC', 'Virgule', ''], ['%', '%', i18n('Pour cent'), 'op'], ['+', '+', i18n('Ajouter'), 'op'],
+        ['±', 'neg', i18n('Changer le signe'), 'fn'], ['x²', '^2', i18n('Au carré'), 'op'], ['√', '√(', i18n('Racine carrée'), 'op'], ['=', 'eval', i18n('Calculer (Entrée)'), 'eq'],
     ];
 
     /* ═════════ La fenêtre ═════════ */
@@ -92,39 +93,39 @@
         win.dataset.ctxOff = ''; // les cases du calcul ont data-ui-off ; les dates (C4) sont habillées
         win.innerHTML = `
             <header class="cm-head" data-cm-drag>
-                <span class="cm-title" title="Glisser pour déplacer la calculette"><span aria-hidden="true">🧮</span> Calculette</span>
-                <div class="segmented cm-tabs" role="tablist" aria-label="Mode de la calculette">
-                    <button type="button" role="tab" data-cm-tab="simple" title="Grosses touches, ruban, mémoire">🔢 Simple</button>
-                    <button type="button" role="tab" data-cm-tab="sci" title="Fonctions, complexes, matrices, équations, unités, dates">🧪 Scientifique</button>
-                    <button type="button" role="tab" data-cm-tab="plot" title="Tracer des courbes y = f(x)">📈 Courbes</button>
+                <span class="cm-title" title="${esc(i18n('Glisser pour déplacer la calculette'))}"><span aria-hidden="true">🧮</span> Calculette</span>
+                <div class="segmented cm-tabs" role="tablist" aria-label="${esc(i18n('Mode de la calculette'))}">
+                    <button type="button" role="tab" data-cm-tab="simple" title="${esc(i18n('Grosses touches, ruban, mémoire'))}">🔢 Simple</button>
+                    <button type="button" role="tab" data-cm-tab="sci" title="${esc(i18n('Fonctions, complexes, matrices, équations, unités, dates'))}">🧪 Scientifique</button>
+                    <button type="button" role="tab" data-cm-tab="plot" title="${esc(i18n('Tracer des courbes y = f(x)'))}">📈 Courbes</button>
                 </div>
                 <span class="cm-head-sp"></span>
-                <button type="button" class="icon-button small cm-ib" data-cm-settings title="Réglages de la calculette" aria-label="Réglages de la calculette">⚙️</button>
-                <button type="button" class="icon-button small cm-ib" data-cm-close title="Fermer la calculette" aria-label="Fermer la calculette" data-shortcut="Échap">×</button>
+                <button type="button" class="icon-button small cm-ib" data-cm-settings title="${esc(i18n('Réglages de la calculette'))}" aria-label="${esc(i18n('Réglages de la calculette'))}">⚙️</button>
+                <button type="button" class="icon-button small cm-ib" data-cm-close title="${esc(i18n('Fermer la calculette'))}" aria-label="${esc(i18n('Fermer la calculette'))}" data-shortcut="Échap">×</button>
             </header>
             <div class="cm-body">
                 <section class="cm-calc" data-cm-calc>
                     <div class="cm-tape-wrap">
-                        <div class="cm-tape-bar"><span class="cm-tape-t">Ruban</span><span class="cm-tape-n" data-cm-tape-n></span><span class="cm-head-sp"></span><button type="button" class="link-button cm-tape-clear" data-cm-tape-clear title="Vider le ruban (on peut l’annuler juste après)">🗑 Vider</button></div>
-                        <ol class="cm-tape" data-cm-tape aria-label="Calculs déjà faits : un clic reprend le résultat"></ol>
+                        <div class="cm-tape-bar"><span class="cm-tape-t">Ruban</span><span class="cm-tape-n" data-cm-tape-n></span><span class="cm-head-sp"></span><button type="button" class="link-button cm-tape-clear" data-cm-tape-clear title="${esc(i18n('Vider le ruban (on peut l’annuler juste après)'))}">🗑 Vider</button></div>
+                        <ol class="cm-tape" data-cm-tape aria-label="${esc(i18n('Calculs déjà faits : un clic reprend le résultat'))}"></ol>
                     </div>
                     <div class="cm-screen">
                         <div class="cm-pretty" data-cm-pretty aria-hidden="true"></div>
-                        <div class="cm-line"><input type="text" class="cm-input" data-cm-input data-ui-off autocomplete="off" autocapitalize="off" spellcheck="false" inputmode="text" aria-label="Calcul à faire" placeholder="Tape un calcul…"></div>
+                        <div class="cm-line"><input type="text" class="cm-input" data-cm-input data-ui-off autocomplete="off" autocapitalize="off" spellcheck="false" inputmode="text" aria-label="${esc(i18n('Calcul à faire'))}" placeholder="${esc(i18n('Tape un calcul…'))}"></div>
                         <div class="cm-result" data-cm-result>
                             <output class="cm-out" data-cm-out aria-live="polite"></output>
-                            <button type="button" class="icon-button small cm-ib cm-copy" data-cm-copy title="Copier le résultat" aria-label="Copier le résultat" data-shortcut="⌘C">📋</button>
+                            <button type="button" class="icon-button small cm-ib cm-copy" data-cm-copy title="${esc(i18n('Copier le résultat'))}" aria-label="${esc(i18n('Copier le résultat'))}" data-shortcut="⌘C">📋</button>
                         </div>
                         <div class="cm-alt" data-cm-alt></div>
                         <div class="cm-err" data-cm-err role="alert" hidden></div>
                     </div>
                     <div class="cm-row cm-memrow">
-                        <div class="cm-mem" role="group" aria-label="Mémoire">
-                            <button type="button" class="cm-mk" data-cm-mem="mc" title="Effacer la mémoire">MC</button><button type="button" class="cm-mk" data-cm-mem="mr" title="Reprendre le nombre gardé en mémoire">MR</button><button type="button" class="cm-mk" data-cm-mem="m+" title="Ajouter le résultat à la mémoire">M+</button><button type="button" class="cm-mk" data-cm-mem="m-" title="Retirer le résultat de la mémoire">M−</button>
+                        <div class="cm-mem" role="group" aria-label="${esc(i18n('Mémoire'))}">
+                            <button type="button" class="cm-mk" data-cm-mem="mc" title="${esc(i18n('Effacer la mémoire'))}">MC</button><button type="button" class="cm-mk" data-cm-mem="mr" title="${esc(i18n('Reprendre le nombre gardé en mémoire'))}">MR</button><button type="button" class="cm-mk" data-cm-mem="m+" title="${esc(i18n('Ajouter le résultat à la mémoire'))}">M+</button><button type="button" class="cm-mk" data-cm-mem="m-" title="${esc(i18n('Retirer le résultat de la mémoire'))}">M−</button>
                         </div>
                         <span class="cm-memv" data-cm-memv></span>
                         <span class="cm-head-sp"></span>
-                        <div class="segmented cm-angle" role="radiogroup" aria-label="Unité des angles" data-cm-angle>${ANGLES.map(([kk, l, t]) => `<button type="button" data-cm-ang="${kk}" title="${esc(t)}">${l}</button>`).join('')}</div>
+                        <div class="segmented cm-angle" role="radiogroup" aria-label="${esc(i18n('Unité des angles'))}" data-cm-angle>${ANGLES.map(([kk, l, t]) => `<button type="button" data-cm-ang="${kk}" title="${esc(t)}">${l}</button>`).join('')}</div>
                     </div>
                     <div class="cm-sci" data-cm-sci>
                         <div class="cm-groups" role="tablist" aria-label="Rubriques">${GROUPS.map(g => `<button type="button" class="cm-chip" data-cm-group="${g.id}">${esc(g.label)}</button>`).join('')}</div>
@@ -134,12 +135,12 @@
                 </section>
                 <section class="cm-plot" data-cm-plot hidden>
                     <div class="cm-curves" data-cm-curves></div>
-                    <div class="cm-plotbar"><button type="button" class="button small secondary" data-cm-curve-add>＋ Ajouter une courbe</button><span class="cm-head-sp"></span><span data-cm-zoom></span><button type="button" class="icon-button small cm-ib" data-cm-png title="Exporter l’image du graphique (PNG)" aria-label="Exporter en PNG">⤓</button></div>
-                    <div class="cm-canvas-wrap" data-cm-cw><canvas class="cm-canvas" data-cm-canvas aria-label="Graphique des courbes"></canvas><div class="cm-trace" data-cm-trace hidden></div></div>
-                    <p class="cm-plot-help">Glisse pour te déplacer · molette pour zoomer · survole une courbe pour lire ses valeurs · x en radians.</p>
+                    <div class="cm-plotbar"><button type="button" class="button small secondary" data-cm-curve-add>＋ ${i18n('Ajouter une courbe')}</button><span class="cm-head-sp"></span><span data-cm-zoom></span><button type="button" class="icon-button small cm-ib" data-cm-png title="${esc(i18n('Exporter l’image du graphique (PNG)'))}" aria-label="${esc(i18n('Exporter en PNG'))}">⤓</button></div>
+                    <div class="cm-canvas-wrap" data-cm-cw><canvas class="cm-canvas" data-cm-canvas aria-label="${esc(i18n('Graphique des courbes'))}"></canvas><div class="cm-trace" data-cm-trace hidden></div></div>
+                    <p class="cm-plot-help">${i18n('Glisse pour te déplacer · molette pour zoomer · survole une courbe pour lire ses valeurs · x en radians.')}</p>
                 </section>
             </div>
-            <span class="cm-grip" data-cm-resize title="Glisser pour agrandir ou réduire" aria-hidden="true"></span>`;
+            <span class="cm-grip" data-cm-resize title="${esc(i18n('Glisser pour agrandir ou réduire'))}" aria-hidden="true"></span>`;
         input = win.querySelector('[data-cm-input]');
         bind();
         document.body.appendChild(win);
@@ -167,7 +168,7 @@
         win.querySelector('[data-cm-plot]').hidden = st.mode !== 'plot';
         win.querySelector('[data-cm-angle]').hidden = st.mode !== 'sci';
         win.querySelectorAll('[data-cm-dec]').forEach(s => { s.textContent = st.dec; });
-        win.querySelector('[data-cm-key="DEC"]')?.setAttribute('title', st.dec === ',' ? 'Virgule' : 'Point décimal');
+        win.querySelector('[data-cm-key="DEC"]')?.setAttribute('title', st.dec === ',' ? 'Virgule' : i18n('Point décimal'));
         if (st.mode === 'sci') drawGroup();
         if (st.mode === 'plot') { drawCurves(); requestAnimationFrame(plotDraw); }
         topButton();
@@ -221,7 +222,7 @@
     function compute() {
         let src = input.value.trim();
         if (!src && last) return; // Entrée deux fois : rien à refaire
-        if (!src) { showError({error: 'Tape un calcul.', hint: 'Par exemple 12 × 3,5, ou 1/3 + 1/6.'}); return; }
+        if (!src) { showError({error: i18n('Tape un calcul.'), hint: i18n('Par exemple 12 × 3,5, ou 1/3 + 1/6.')}); return; }
         const r = C().evaluate(src, evalOpts());
         win.querySelector('[data-cm-pretty]').innerHTML = r.inputHtml || esc(src);
         if (!r.ok) { showResult(null); showError(r); return; }
@@ -237,20 +238,20 @@
         const box = win.querySelector('[data-cm-tape]'), t = tape();
         win.querySelector('[data-cm-tape-n]').textContent = t.length ? `· ${A()?.plural ? A().plural(t.length, 'calcul') : t.length + ' calculs'}` : '';
         win.querySelector('[data-cm-tape-clear]').hidden = !t.length;
-        box.innerHTML = t.length ? t.map((x, i) => `<li class="cm-tr"><button type="button" class="cm-tr-main" data-cm-reuse="${i}" title="Reprendre ce résultat dans le calcul"><span class="cm-tr-e">${x.h || esc(x.e)}</span><span class="cm-tr-r">${x.x ? '≈' : '='} ${x.r}</span></button><span class="cm-tr-act"><button type="button" class="icon-button small cm-ib" data-cm-redo="${i}" title="Reprendre ce calcul pour le modifier" aria-label="Reprendre ce calcul">✎</button><button type="button" class="icon-button small cm-ib" data-cm-tcopy="${i}" title="Copier ce résultat" aria-label="Copier ce résultat">📋</button></span></li>`).join('')
-            : `<li class="empty-line cm-tape-empty"><span class="empty-line-ico" aria-hidden="true">🧾</span><span class="empty-line-text">Tes calculs s’écriront ici.</span></li>`;
+        box.innerHTML = t.length ? t.map((x, i) => `<li class="cm-tr"><button type="button" class="cm-tr-main" data-cm-reuse="${i}" title="${esc(i18n('Reprendre ce résultat dans le calcul'))}"><span class="cm-tr-e">${x.h || esc(x.e)}</span><span class="cm-tr-r">${x.x ? '≈' : '='} ${x.r}</span></button><span class="cm-tr-act"><button type="button" class="icon-button small cm-ib" data-cm-redo="${i}" title="${esc(i18n('Reprendre ce calcul pour le modifier'))}" aria-label="${esc(i18n('Reprendre ce calcul'))}">✎</button><button type="button" class="icon-button small cm-ib" data-cm-tcopy="${i}" title="${esc(i18n('Copier ce résultat'))}" aria-label="${esc(i18n('Copier ce résultat'))}">📋</button></span></li>`).join('')
+            : `<li class="empty-line cm-tape-empty"><span class="empty-line-ico" aria-hidden="true">🧾</span><span class="empty-line-text">${i18n('Tes calculs s’écriront ici.')}</span></li>`;
         if (scroll || !box.dataset.scrolled) { box.scrollTop = box.scrollHeight; box.dataset.scrolled = '1'; }
     }
     function clearTape() {
         const doClear = () => ls.set(TAPE, []);
-        if (A()?.undoLocalChange) A().undoLocalChange('Ruban de la calculette vidé', [TAPE], doClear, () => win && drawTape());
+        if (A()?.undoLocalChange) A().undoLocalChange(i18n('Ruban de la calculette vidé'), [TAPE], doClear, () => win && drawTape());
         else doClear();
         drawTape();
     }
-    async function copy(text, what = 'Résultat copié') {
-        if (!text) { toast('Il n’y a pas encore de résultat à copier.'); return; }
+    async function copy(text, what = i18n('Résultat copié')) {
+        if (!text) { toast(i18n('Il n’y a pas encore de résultat à copier.')); return; }
         try { await navigator.clipboard.writeText(text); toast(`📋 ${what} : ${text.length > 60 ? text.slice(0, 60) + '…' : text}`); }
-        catch (_) { const ta = document.createElement('textarea'); ta.value = text; ta.style.cssText = 'position:fixed;opacity:0'; win.appendChild(ta); ta.select(); try { document.execCommand('copy'); toast(`📋 ${what}.`); } catch (__) { toast('La copie n’a pas marché : choisis le résultat et copie-le à la main.', 'error'); } ta.remove(); input.focus(); }
+        catch (_) { const ta = document.createElement('textarea'); ta.value = text; ta.style.cssText = 'position:fixed;opacity:0'; win.appendChild(ta); ta.select(); try { document.execCommand('copy'); toast(`📋 ${what}.`); } catch (__) { toast(i18n('La copie n’a pas marché : choisis le résultat et copie-le à la main.'), 'error'); } ta.remove(); input.focus(); }
     }
     const copyText = () => (last?.text ? (st.dec === ',' ? last.text : last.text) : (() => { const src = input.value.trim(); if (!src) return ''; const r = C().evaluate(src, evalOpts()); return r.ok ? r.text : ''; })());
 
@@ -260,7 +261,7 @@
         win.querySelectorAll('[data-cm-mem="mc"], [data-cm-mem="mr"]').forEach(b => { b.disabled = !m; });
         if (!m) { el.innerHTML = ''; return; }
         const r = C().evaluate(m, {...evalOpts(), dec: '.'});
-        el.innerHTML = r.ok ? `<span class="cm-memb" title="Nombre gardé en mémoire">M</span> ${r.html}` : '';
+        el.innerHTML = r.ok ? `<span class="cm-memb" title="${esc(i18n('Nombre gardé en mémoire'))}">M</span> ${r.html}` : '';
     }
     function memory(op) {
         const m = memText();
@@ -268,7 +269,7 @@
         if (op === 'mr') { if (!m) return; const r = C().evaluate(m, {...evalOpts(), dec: '.'}); if (r.ok) insert(C().asInput(r.value, {dec: st.dec})); return; }
         let v = null; const src = input.value.trim();
         if (src) { const r = C().evaluate(src, evalOpts()); if (!r.ok) { showError(r); return; } v = C().reusable(r.value); } else v = last?.value ?? null;
-        if (v == null) { toast('Calcule d’abord un nombre à garder en mémoire.'); return; }
+        if (v == null) { toast(i18n('Calcule d’abord un nombre à garder en mémoire.')); return; }
         const cur = m ? C().evaluate(m, {...evalOpts(), dec: '.'}) : null, base = cur?.ok ? C().reusable(cur.value) : null;
         try { const nv = base == null ? (op === 'm-' ? C().mul(v, C().fr(-1)) : v) : (op === 'm+' ? C().add(base, v) : C().sub(base, v)); ls.set(MEM, C().asInput(nv, {dec: '.'})); }
         catch (e) { showError({error: e.message, hint: e.hint || ''}); return; }
@@ -291,7 +292,7 @@
         if (g.units) fillUnits();
         UI()?.scan?.(body);
     }
-    const matrixHelper = () => `<details class="cm-mx" data-cm-mx><summary>▦ Écrire une matrice dans une grille</summary><div class="cm-mx-in"><label>Lignes <select data-cm-mx-r>${[1, 2, 3, 4, 5].map(n => `<option${n === 2 ? ' selected' : ''}>${n}</option>`).join('')}</select></label><label>Colonnes <select data-cm-mx-c>${[1, 2, 3, 4, 5].map(n => `<option${n === 2 ? ' selected' : ''}>${n}</option>`).join('')}</select></label></div><div class="cm-mx-grid" data-cm-mx-grid></div><button type="button" class="button small" data-cm-mx-ins>＋ Ajouter au calcul</button></details>`;
+    const matrixHelper = () => `<details class="cm-mx" data-cm-mx><summary>▦ ${i18n('Écrire une matrice dans une grille')}</summary><div class="cm-mx-in"><label>Lignes <select data-cm-mx-r>${[1, 2, 3, 4, 5].map(n => `<option${n === 2 ? ' selected' : ''}>${n}</option>`).join('')}</select></label><label>Colonnes <select data-cm-mx-c>${[1, 2, 3, 4, 5].map(n => `<option${n === 2 ? ' selected' : ''}>${n}</option>`).join('')}</select></label></div><div class="cm-mx-grid" data-cm-mx-grid></div><button type="button" class="button small" data-cm-mx-ins>＋ ${i18n('Ajouter au calcul')}</button></details>`;
     function drawMatrixGrid() {
         const box = win.querySelector('[data-cm-mx-grid]'); if (!box) return;
         const r = Number(win.querySelector('[data-cm-mx-r]').value), c = Number(win.querySelector('[data-cm-mx-c]').value), old = [...box.querySelectorAll('input')].map(x => x.value);
@@ -311,10 +312,10 @@
         const syncTo = () => { const kind = from.selectedOptions[0]?.dataset.kind; const keep = to.value; to.innerHTML = (kinds[kind] || []).map(opt).join(''); if ([...to.options].some(o => o.value === keep)) to.value = keep; else { const m = [...to.options].find(o => /^b:(m|ha|l|g|denier|s)$/.test(o.value) || o.value === 't:c'); if (m) to.value = m.value; } };
         from.onchange = syncTo; syncTo();
         const cm = window.LCNDA_EXT?.calendarMore, reg = cm?.REGIONS?.find(r => r.id === st.region);
-        win.querySelector('[data-cm-region]').textContent = reg ? `Mesures anciennes : ${reg.label} (à changer dans ⚙️). Pour les mesures et monnaies d’autres régions : Réglages → Calendrier / mesures.` : '';
+        win.querySelector('[data-cm-region]').textContent = reg ? i18n('Mesures anciennes : {label} (à changer dans ⚙️). Pour les mesures et monnaies d’autres régions : Réglages → Calendrier / mesures.', {label: reg.label}) : '';
     }
-    const datesHelper = () => `<div class="cm-dates"><form class="cm-dform" data-cm-age><span class="cm-dt">🎂 Âge ou écart entre deux dates</span><label>De<input name="a" data-ui-date="nocal" placeholder="7 mai 1925" autocomplete="off"></label><label>À<input name="b" data-ui-date="nocal" placeholder="8 décembre 1960" autocomplete="off"></label><button type="submit" class="button small">Calculer l’écart</button></form>
-        <form class="cm-dform" data-cm-rep><span class="cm-dt">🗓 Calendrier républicain ↔ grégorien</span><label>Date<input name="d" data-ui-date="nocal" placeholder="3 frimaire an XII ou 14/07/1794" autocomplete="off"></label><button type="submit" class="button small">Convertir</button></form></div>`;
+    const datesHelper = () => `<div class="cm-dates"><form class="cm-dform" data-cm-age><span class="cm-dt">🎂 ${i18n('Âge ou écart entre deux dates')}</span><label>${i18n('De', {ctx: 'date'})}<input name="a" data-ui-date="nocal" placeholder="7 mai 1925" autocomplete="off"></label><label>${i18n('À', {ctx: 'date'})}<input name="b" data-ui-date="nocal" placeholder="${esc('8 décembre 1960')}" autocomplete="off"></label><button type="submit" class="button small">${i18n('Calculer l’écart')}</button></form>
+        <form class="cm-dform" data-cm-rep><span class="cm-dt">🗓 ${i18n('Calendrier républicain ↔ grégorien')}</span><label>${i18n('Date')}<input name="d" data-ui-date="nocal" placeholder="${esc(i18n('3 frimaire an XII ou 14/07/1794'))}" autocomplete="off"></label><button type="submit" class="button small">Convertir</button></form></div>`;
 
     /* ─── 📈 Courbes ─── */
     let view = null, plotFns = [];
@@ -322,8 +323,8 @@
     const saveCurves = list => ls.set(CURVES, list.slice(0, 6));
     function drawCurves() {
         const box = win.querySelector('[data-cm-curves]'), list = curves();
-        box.innerHTML = list.map((f, i) => `<div class="cm-cv"><span class="cm-cv-dot" style="background:${COLORS[i % COLORS.length]}" aria-hidden="true"></span><label class="cm-cv-l"><span>y =</span><input type="text" data-cm-cv-in="${i}" value="${esc(f)}" data-ui-off autocomplete="off" spellcheck="false" aria-label="Courbe ${i + 1} : y ="></label><button type="button" class="icon-button small cm-ib" data-cm-cv-del="${i}" title="Retirer cette courbe" aria-label="Retirer cette courbe">×</button><div class="cm-cv-err" data-cm-cv-err="${i}" hidden></div></div>`).join('')
-            || '<div class="empty-line"><span class="empty-line-ico">📈</span><span class="empty-line-text">Aucune courbe.</span></div>';
+        box.innerHTML = list.map((f, i) => `<div class="cm-cv"><span class="cm-cv-dot" style="background:${COLORS[i % COLORS.length]}" aria-hidden="true"></span><label class="cm-cv-l"><span>y =</span><input type="text" data-cm-cv-in="${i}" value="${esc(f)}" data-ui-off autocomplete="off" spellcheck="false" aria-label="Courbe ${i + 1} : y ="></label><button type="button" class="icon-button small cm-ib" data-cm-cv-del="${i}" title="${esc(i18n('Retirer cette courbe'))}" aria-label="${esc(i18n('Retirer cette courbe'))}">×</button><div class="cm-cv-err" data-cm-cv-err="${i}" hidden></div></div>`).join('')
+            || `<div class="empty-line"><span class="empty-line-ico">📈</span><span class="empty-line-text">${i18n('Aucune courbe.')}</span></div>`;
         win.querySelector('[data-cm-curve-add]').disabled = list.length >= 6;
         compileCurves();
     }
@@ -377,7 +378,7 @@
     function setupZoom() {
         const slot = win.querySelector('[data-cm-zoom]'); if (!slot) return;
         const get = () => (view || defaultView()).sx / 40, set = z => { view = view || defaultView(); view.sx = Math.max(0.04, Math.min(40000, 40 * z)); plotDraw(); };
-        if (UI()?.zoomControl) { zoomBar = UI().zoomControl({get, set, fit: () => { view = defaultView(); plotDraw(); }, min: 0.001, max: 1000, fitLabel: 'Revenir à la vue de départ'}); slot.appendChild(zoomBar); }
+        if (UI()?.zoomControl) { zoomBar = UI().zoomControl({get, set, fit: () => { view = defaultView(); plotDraw(); }, min: 0.001, max: 1000, fitLabel: i18n('Revenir à la vue de départ')}); slot.appendChild(zoomBar); }
         else { slot.innerHTML = '<button type="button" class="icon-button small" data-z="-">−</button><button type="button" class="icon-button small" data-z="+">+</button>'; slot.addEventListener('click', e => { const b = e.target.closest('[data-z]'); if (b) set(get() * (b.dataset.z === '+' ? 1.25 : 0.8)); }); }
     }
     function bindPlot() {
@@ -411,7 +412,7 @@
     function exportPng() {
         const cv = win.querySelector('[data-cm-canvas]'); plotDraw();
         const name = (A()?.safeExportFilename ? A().safeExportFilename('Courbes') : 'Courbes') + '.png';
-        cv.toBlob(b => { if (!b) return; const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); toast(`⤓ Image « ${name} » téléchargée.`); }, 'image/png');
+        cv.toBlob(b => { if (!b) return; const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); toast(`⤓ ${i18n('Image « {name} » téléchargée.', {name})}`); }, 'image/png');
     }
 
     /* ─── déplacer, agrandir ─── */
@@ -480,12 +481,12 @@
             if (d.cmMem) return memory(d.cmMem);
             if (d.cmCopy !== undefined) return copy(copyText());
             if (d.cmTapeClear !== undefined) return clearTape();
-            if (d.cmReuse) { const x = tape()[Number(d.cmReuse)]; if (!x) return; if (!x.v) { toast('Ce résultat ne se reprend pas dans un calcul (c’est un texte).'); return; } const r = C().evaluate(x.v, {dec: '.', angle: 'rad'}); if (r.ok) { if (last) last.fresh = false; insert(C().asInput(r.value, {dec: st.dec})); } return; }
+            if (d.cmReuse) { const x = tape()[Number(d.cmReuse)]; if (!x) return; if (!x.v) { toast(i18n('Ce résultat ne se reprend pas dans un calcul (c’est un texte).')); return; } const r = C().evaluate(x.v, {dec: '.', angle: 'rad'}); if (r.ok) { if (last) last.fresh = false; insert(C().asInput(r.value, {dec: st.dec})); } return; }
             if (d.cmRedo) { const x = tape()[Number(d.cmRedo)]; if (!x) return; input.value = x.e; if (last) last.fresh = false; input.focus(); input.setSelectionRange(x.e.length, x.e.length); preview(); return; }
             if (d.cmTcopy) { const x = tape()[Number(d.cmTcopy)]; if (x) copy(x.t); return; }
             if (d.cmMxIns !== undefined) { const r = Number(win.querySelector('[data-cm-mx-r]').value), c = Number(win.querySelector('[data-cm-mx-c]').value), cells = [...win.querySelectorAll('.cm-mx-cell')].map(x => x.value.trim() || '0'); const rows = Array.from({length: r}, (_, i) => `[${cells.slice(i * c, i * c + c).join(' ; ')}]`); insert(r === 1 ? rows[0] : `[${rows.join(' ; ')}]`); return; }
             if (d.cmCurveAdd !== undefined) { const l = curves(); l.push(''); saveCurves(l); drawCurves(); win.querySelector(`[data-cm-cv-in="${l.length - 1}"]`)?.focus(); plotDraw(); return; }
-            if (d.cmCvDel !== undefined) { const l = curves(), i = Number(d.cmCvDel), old = l.slice(); l.splice(i, 1); saveCurves(l.length ? l : ['']); drawCurves(); plotDraw(); (A()?.undoToast || toast)?.('Courbe retirée.', {undo: () => { saveCurves(old); drawCurves(); plotDraw(); }}); return; }
+            if (d.cmCvDel !== undefined) { const l = curves(), i = Number(d.cmCvDel), old = l.slice(); l.splice(i, 1); saveCurves(l.length ? l : ['']); drawCurves(); plotDraw(); (A()?.undoToast || toast)?.(i18n('Courbe retirée.'), {undo: () => { saveCurves(old); drawCurves(); plotDraw(); }}); return; }
             if (d.cmPng !== undefined) return exportPng();
         });
         win.addEventListener('input', e => {
@@ -497,8 +498,8 @@
         win.addEventListener('submit', e => {
             e.preventDefault(); const f = e.target;
             if (f.matches('[data-cm-conv]')) { const v = f.querySelector('[data-cm-cv]').value.trim() || '1', a = f.querySelector('[data-cm-cfrom]').selectedOptions[0], b = f.querySelector('[data-cm-cto]').selectedOptions[0]; if (!a || !b) return; input.value = `${v} ${a.dataset.name} en ${b.dataset.name}`; compute(); return; }
-            if (f.matches('[data-cm-age]')) { const a = f.a.value.trim(), b = f.b.value.trim(); if (!a) return UI()?.fail ? UI().fail(f.a, 'Écris la première date.') : null; if (!b) return UI()?.fail ? UI().fail(f.b, 'Écris la deuxième date.') : null; input.value = `${a} → ${b}`; compute(); return; }
-            if (f.matches('[data-cm-rep]')) { const d = f.d.value.trim(); if (!d) return UI()?.fail ? UI().fail(f.d, 'Écris une date.') : null; input.value = /\ban\s+[ivx\d]+/i.test(d) ? `${d} en grégorien` : `${d} en républicain`; compute(); return; }
+            if (f.matches('[data-cm-age]')) { const a = f.a.value.trim(), b = f.b.value.trim(); if (!a) return UI()?.fail ? UI().fail(f.a, i18n('Écris la première date.')) : null; if (!b) return UI()?.fail ? UI().fail(f.b, i18n('Écris la deuxième date.')) : null; input.value = `${a} → ${b}`; compute(); return; }
+            if (f.matches('[data-cm-rep]')) { const d = f.d.value.trim(); if (!d) return UI()?.fail ? UI().fail(f.d, i18n('Écris une date.')) : null; input.value = /\ban\s+[ivx\d]+/i.test(d) ? i18n('{d} en grégorien', {d}) : i18n('{d} en républicain', {d}); compute(); return; }
         });
         win.addEventListener('pointerdown', () => win.classList.add('is-front'));
         bindMove(); bindPlot();
@@ -520,21 +521,21 @@
         const cm = window.LCNDA_EXT?.calendarMore, s = settings(), T = UI()?.toggleHtml;
         const sel = (name, opts, v) => `<select name="${name}">${opts.map(([kk, l]) => `<option value="${kk}"${kk === v ? ' selected' : ''}>${esc(l)}</option>`).join('')}</select>`;
         const body = `<div class="form-grid cm-set">
-            <label>Thème${sel('theme', [['app', 'Comme l’app (clair ou sombre)'], ['light', 'Toujours clair'], ['dark', 'Toujours sombre']], s.theme)}</label>
-            <label>Unité des angles${sel('angle', ANGLES.map(([kk, , t]) => [kk, t]), s.angle)}</label>
-            <label>Chiffres affichés<input type="number" name="digits" min="4" max="15" step="1" value="${s.digits}" data-unit="chiffres"></label>
-            <label>Séparateur décimal${sel('dec', [[',', 'Virgule : 2,5 (et « ; » entre les nombres)'], ['.', 'Point : 2.5 (et « , » ou « ; » entre les nombres)']], s.dec)}</label>
-            <label class="span-2">Mesures anciennes${sel('region', (cm?.REGIONS || [{id: 'paris', label: 'Paris, Île-de-France (mesures du roi)'}]).map(r => [r.id, r.label]), s.region)}</label>
-            <div class="span-2">${T ? T('Fractions exactes quand c’est possible (1/3 au lieu de 0,333…)', {checked: s.frac, attrs: 'name="frac"'}) : `<label class="ui-toggle"><input type="checkbox" name="frac"${s.frac ? ' checked' : ''}><i></i>Fractions exactes</label>`}</div>
-            <div class="span-2">${T ? T('Bouton 🧮 dans la barre du haut', {checked: s.topButton, attrs: 'name="topButton"', sub: `La calculette s’ouvre aussi avec ${kbd('⇧⌘Y')} (à changer dans Réglages → Raccourcis). Sa place parmi les boutons du haut : Réglages → Apparence → « Boutons en haut à droite ».`, html: true}) : ''}</div>
+            <label>${i18n('Thème')}${sel('theme', [['app', i18n('Comme l’app (clair ou sombre)')], ['light', 'Toujours clair'], ['dark', 'Toujours sombre']], s.theme)}</label>
+            <label>${i18n('Unité des angles')}${sel('angle', ANGLES.map(([kk, , t]) => [kk, t]), s.angle)}</label>
+            <label>${i18n('Chiffres affichés')}<input type="number" name="digits" min="4" max="15" step="1" value="${s.digits}" data-unit="chiffres"></label>
+            <label>${i18n('Séparateur décimal')}${sel('dec', [[',', i18n('Virgule : 2,5 (et « ; » entre les nombres)')], ['.', i18n('Point : 2.5 (et « , » ou « ; » entre les nombres)')]], s.dec)}</label>
+            <label class="span-2">${i18n('Mesures anciennes')}${sel('region', (cm?.REGIONS || [{id: 'paris', label: 'Paris, Île-de-France (mesures du roi)'}]).map(r => [r.id, r.label]), s.region)}</label>
+            <div class="span-2">${T ? T(i18n('Fractions exactes quand c’est possible (1/3 au lieu de 0,333…)'), {checked: s.frac, attrs: 'name="frac"'}) : `<label class="ui-toggle"><input type="checkbox" name="frac"${s.frac ? ' checked' : ''}><i></i>${i18n('Fractions exactes')}</label>`}</div>
+            <div class="span-2">${T ? T(i18n('Bouton 🧮 dans la barre du haut'), {checked: s.topButton, attrs: 'name="topButton"', sub: i18n('La calculette s’ouvre aussi avec {x} (à changer dans Réglages → Raccourcis). Sa place parmi les boutons du haut : Réglages → Apparence → « Boutons en haut à droite ».', {x: kbd('⇧⌘Y')}), html: true}) : ''}</div>
             </div>
-            <div class="cm-set-foot"><button type="button" class="button small secondary" data-ui-reset>↺ Remettre comme au départ</button></div>
+            <div class="cm-set-foot"><button type="button" class="button small secondary" data-ui-reset>↺ ${i18n('Remettre comme au départ')}</button></div>
             <div data-cm-presets></div>`;
-        ext.openDialog({eyebrow: 'CALCULETTE', title: '⚙️ Réglages de la calculette', body, onOpen: dg => {
+        ext.openDialog({eyebrow: i18n('CALCULETTE'), title: `⚙️ ${i18n('Réglages de la calculette')}`, body, onOpen: dg => {
             const f = dg.querySelector('form');
             const read = () => ({...settings(), theme: f.theme.value, angle: f.angle.value, digits: Number(f.digits.value) || 10, dec: f.dec.value, region: f.region.value, frac: f.frac.checked, topButton: f.topButton ? f.topButton.checked : true});
             const fill = () => { const v = settings(); f.theme.value = v.theme; f.angle.value = v.angle; f.digits.value = v.digits; f.digits.dispatchEvent(new Event('lcnda:sync')); f.dec.value = v.dec; f.region.value = v.region; f.frac.checked = v.frac; if (f.topButton) f.topButton.checked = v.topButton; };
-            UI()?.autoSaveDialog?.(dg, {keys: [KEY], label: 'Réglage de la calculette', save: () => saveSettings(read()), reload: fill, reset: () => ls.set(KEY, {...DEF, mode: settings().mode}), onChange: () => { st = settings(); unitCacheReset(); applyState(); preview(); drawMem(); }});
+            UI()?.autoSaveDialog?.(dg, {keys: [KEY], label: i18n('Réglage de la calculette'), save: () => saveSettings(read()), reload: fill, reset: () => ls.set(KEY, {...DEF, mode: settings().mode}), onChange: () => { st = settings(); unitCacheReset(); applyState(); preview(); drawMem(); }});
             presets(dg.querySelector('[data-cm-presets]'), fill);
         }});
     }
@@ -545,15 +546,15 @@
         const put = l => ls.set(PRESETS, l.slice(0, 60)), today = () => new Date().toISOString();
         const now = () => { const s = settings(); return {theme: s.theme, mode: s.mode, angle: s.angle, digits: s.digits, dec: s.dec, frac: s.frac, region: s.region}; };
         const use = data => { saveSettings({...settings(), ...clean({...settings(), ...data})}); st = settings(); unitCacheReset(); applyState(); fill(); preview(); };
-        const frame = U.presetsFrame({id: 'calculette', what: 'les réglages de la calculette (thème, mode, angle, précision)', list: () => list().map(x => ({name: x.name, date: x.date})),
+        const frame = U.presetsFrame({id: 'calculette', what: i18n('les réglages de la calculette (thème, mode, angle, précision)'), list: () => list().map(x => ({name: x.name, date: x.date})),
             apply: i => { const x = list()[i]; if (!x) return false; use(x.data); },
             save: name => { const l = list(), it = {name, date: today(), data: now()}, i = l.findIndex(x => x.name === name); if (i >= 0) l[i] = it; else l.push(it); put(l); },
             replace: i => { const l = list(); if (!l[i]) return false; l[i] = {...l[i], date: today(), data: now()}; put(l); },
             rename: (i, name) => { const l = list(); if (!l[i]) return false; l[i].name = name; put(l); },
             duplicate: i => { const l = list(), x = l[i]; if (!x) return false; l.splice(i + 1, 0, {name: U.freeName ? U.freeName(x.name, l.map(y => y.name)) : `${x.name} (copie)`, date: today(), data: x.data}); put(l); },
             exportOne: i => { const x = list()[i]; if (x) A()?.exportSettingFile?.('calculette', x.name, {data: x.data}); return false; },
-            remove: i => { const l = list(), x = l[i]; if (!x) return false; if (A()?.undoLocalChange) A().undoLocalChange(`Réglage « ${x.name} » supprimé`, [PRESETS], () => { l.splice(i, 1); put(l); }, () => frame.isConnected && frame.refresh()); else { l.splice(i, 1); put(l); } },
-            importOne: async () => { const got = await A()?.importSettingFile?.('calculette', {names: list().map(x => x.name), check: dd => dd && typeof dd.data === 'object'}); if (!got) return false; const l = list(); l.push({name: got.nom, date: today(), data: clean(got.donnees.data)}); put(l); toast(`Réglage « ${got.nom} » importé : clique « Appliquer » pour t’en servir.`); },
+            remove: i => { const l = list(), x = l[i]; if (!x) return false; if (A()?.undoLocalChange) A().undoLocalChange(i18n('Réglage « {name} » supprimé', {name: x.name}), [PRESETS], () => { l.splice(i, 1); put(l); }, () => frame.isConnected && frame.refresh()); else { l.splice(i, 1); put(l); } },
+            importOne: async () => { const got = await A()?.importSettingFile?.('calculette', {names: list().map(x => x.name), check: dd => dd && typeof dd.data === 'object'}); if (!got) return false; const l = list(); l.push({name: got.nom, date: today(), data: clean(got.donnees.data)}); put(l); toast(i18n('Réglage « {nom} » importé : clique « Appliquer » pour t’en servir.', {nom: got.nom})); },
         });
         slot.appendChild(frame);
     }
@@ -577,7 +578,7 @@
     /* ─── ouvrir, fermer ─── */
     function open({expr = '', mode = null} = {}) {
         if (document.documentElement.classList.contains('ms-open')) return; // 🧓 mode simple : jamais de fenêtre par-dessus
-        if (!C()) { toast('La calculette n’est pas encore chargée. Réessaie dans un instant.', 'error'); return; }
+        if (!C()) { toast(i18n('La calculette n’est pas encore chargée. Réessaie dans un instant.'), 'error'); return; }
         if (!win) build(); else { win.hidden = false; st = settings(); applyState(); }
         if (mode) setState({mode});
         follow(); win.classList.add('is-open'); ls.set(OPEN, 1);
@@ -605,13 +606,13 @@
     ext.dashboard.calc_widget = {load: () => Promise.resolve(null), render: (index, widget, span) => A().card(index, '🧮 Calculette', '',
         `<form class="cw-form" data-cw autocomplete="off"><input name="q" class="cw-q" aria-label="Calcul" placeholder="2 × (3 + 4), 15 % × 80, 2/3 + 1/6…" spellcheck="false">
             <output class="cw-out" aria-live="polite"></output><ul class="cw-hist">${wHistHtml()}</ul>
-            <div class="cw-ft"><span class="muted">Entrée : calculer · ↑ : reprendre le dernier</span><button type="button" class="button small secondary" data-calculette-open>⛶ Ouvrir la calculette</button></div></form>`, span)};
+            <div class="cw-ft"><span class="muted">${i18n('Entrée : calculer · ↑ : reprendre le dernier')}</span><button type="button" class="button small secondary" data-calculette-open>⛶ ${i18n('Ouvrir la calculette')}</button></div></form>`, span)};
     document.addEventListener('submit', e => {
         const f = e.target.closest?.('form[data-cw]'); if (!f) return; e.preventDefault();
         const q = f.querySelector('.cw-q'), out = f.querySelector('.cw-out'), s0 = q.value.trim(); if (!s0) return;
         let r; try { r = ext.calculator.compute(s0); } catch (x) { r = {ok: false, error: String(x?.message || x)}; }
         if (r?.ok) { out.className = 'cw-out'; out.textContent = '= ' + r.text; ls.set(WTAPE, [[s0, r.text], ...wHist().filter(h => h[0] !== s0)].slice(0, 5)); document.querySelectorAll('form[data-cw] .cw-hist').forEach(u => { u.innerHTML = wHistHtml(); }); }
-        else { out.className = 'cw-out is-err'; out.textContent = '⚠️ ' + (r?.error || 'Je ne comprends pas ce calcul.'); }
+        else { out.className = 'cw-out is-err'; out.textContent = '⚠️ ' + (r?.error || i18n('Je ne comprends pas ce calcul.')); }
     });
     document.addEventListener('click', e => { const b = e.target.closest?.('[data-cw-reuse]'); if (!b) return; const h = wHist()[Number(b.dataset.cwReuse)], q = b.closest('form[data-cw]')?.querySelector('.cw-q'); if (h && q) { q.value = h[0]; q.focus(); } });
     document.addEventListener('keydown', e => { if (e.key !== 'ArrowUp' || !e.target.matches?.('form[data-cw] .cw-q') || e.target.value) return; const h = wHist()[0]; if (h) { e.preventDefault(); e.target.value = h[0]; } });
