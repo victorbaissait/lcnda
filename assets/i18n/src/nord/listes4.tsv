@@ -1960,3 +1960,543 @@ Ajouter des questions ¦ Přidat otázky ¦ Lägg till frågor ¦ Tilføj spørg
 Ajouter les questions cochées ¦ Přidat zaškrtnuté otázky ¦ Lägg till de ikryssade frågorna ¦ Tilføj de markerede spørgsmål
 Coche au moins une question (ou écris la tienne en dessous). ¦ Zaškrtni aspoň jednu otázku (nebo napiš vlastní níže). ¦ Kryssa i minst en fråga (eller skriv din egen nedan). ¦ Markér mindst ét spørgsmål (eller skriv dit eget nedenfor).
 Supprimer cette question de mes questions ¦ Smazat tuto otázku z mých otázek ¦ Radera frågan från mina frågor ¦ Slet spørgsmålet fra mine spørgsmål
+Pas encore de question à toi : écris-la juste en dessous. ¦ Zatím nemáš vlastní otázku: napiš ji hned níže. ¦ Ingen egen fråga än: skriv den precis nedanför. ¦ Intet eget spørgsmål endnu: skriv det lige nedenfor.
+＋ Écrire ma question ¦ ＋ Napsat vlastní otázku ¦ ＋ Skriv min fråga ¦ ＋ Skriv mit spørgsmål
+Question gardée dans « Mes questions ». ¦ Otázka uložena do „Moje otázky“. ¦ Frågan sparad i ”Mina frågor”. ¦ Spørgsmålet gemt i »Mine spørgsmål«.
+Question supprimée de mes questions ¦ Otázka smazána z mých otázek ¦ Frågan raderad från mina frågor ¦ Spørgsmålet slettet fra mine spørgsmål
+Où la ranger ¦ Kam ji uložit ¦ Var den ska sparas ¦ Hvor det skal gemmes
+Sur la fiche de ¦ Na kartu osoby ¦ I posten för ¦ I posten for
+Importer les réponses ¦ Importovat odpovědi ¦ Importera svaren ¦ Importér svarene
+le fichier « reponses-….json » ¦ soubor „reponses-….json“ ¦ filen ”reponses-….json” ¦ filen »reponses-….json«
+Le fichier de réponses que ton proche t’a renvoyé (il s’appelle « reponses-… .json »). ¦ Soubor s odpověďmi, který ti příbuzný poslal zpět (jmenuje se „reponses-… .json“). ¦ Svarsfilen som din anhörige skickade tillbaka (den heter ”reponses-… .json”). ¦ Svarfilen, som din slægtning sendte tilbage (den hedder »reponses-… .json«).
+Aucun fichier. ¦ Žádný soubor. ¦ Ingen fil. ¦ Ingen fil.
+ce fichier est trop gros pour un fichier de réponses (600 Ko au plus). ¦ tento soubor je na soubor s odpověďmi příliš velký (nejvýše 600 kB). ¦ filen är för stor för en svarsfil (högst 600 kB). ¦ filen er for stor til en svarfil (højst 600 kB).
+Aucune réponse écrite dans ce fichier ¦ V tomto souboru není žádná napsaná odpověď ¦ Inget skrivet svar i filen ¦ Intet skrevet svar i filen
+à une question retirée depuis l’envoi : mise de côté. ¦ na otázku odebranou po odeslání: odloženo. ¦ på en fråga som tagits bort sedan utskicket: lagd åt sidan. ¦ på et spørgsmål, der er fjernet siden afsendelsen: lagt til side.
+Choisis la personne concernée (ou « Mémoire familiale »). ¦ Vyber dotčenou osobu (nebo „Rodinná paměť“). ¦ Välj den berörda personen (eller ”Släktminne”). ¦ Vælg den berørte person (eller »Familieminde«).
+Réponses gardées avec le questionnaire. ¦ Odpovědi uloženy s dotazníkem. ¦ Svaren sparade med frågeformuläret. ¦ Svarene gemt med spørgeskemaet.
+Coller une réponse reçue par e-mail ¦ Vložit odpověď přijatou e-mailem ¦ Klistra in ett svar som kommit med e-post ¦ Indsæt et svar modtaget via e-mail
+Elle répond à ¦ Odpovídá na ¦ Det besvarar ¦ Det besvarer
+Tout le message (une seule réponse) ¦ Celá zpráva (jedna odpověď) ¦ Hela meddelandet (ett enda svar) ¦ Hele beskeden (ét svar)
+Le texte reçu ¦ Přijatý text ¦ Den mottagna texten ¦ Den modtagne tekst
+Reçue le ¦ Přijato dne ¦ Mottaget den ¦ Modtaget den
+Colle le texte de la réponse. ¦ Vlož text odpovědi. ¦ Klistra in svarets text. ¦ Indsæt svarets tekst.
+réponse collée.txt ¦ vložená odpověď.txt ¦ inklistrat svar.txt ¦ indsat svar.txt
+=récompense ¦ ocenění|ocenění|ocenění ¦ utmärkelse|utmärkelser ¦ udmærkelse|udmærkelser
+=première place ¦ první místo|první místa|prvních míst ¦ förstaplats|förstaplatser ¦ førsteplads|førstepladser
+… et {x} : « Palmarès ». ¦ … a {x}: „Úspěchy“. ¦ … och {x}: ”Meriter”. ¦ … og {x}: »Resultatliste«.
+💄 Beauté ¦ 💄 Krása ¦ 💄 Skönhet ¦ 💄 Skønhed
+Départemental ¦ Departementní ¦ Departements- ¦ Departements-
+Régional ¦ Regionální ¦ Regional ¦ Regional
+Aucune récompense ne cite encore ce concours. ¦ Tuto soutěž zatím nezmiňuje žádné ocenění. ¦ Ingen utmärkelse nämner tävlingen än. ¦ Ingen udmærkelse nævner konkurrencen endnu.
+Récompense ¦ Ocenění ¦ Utmärkelse ¦ Udmærkelse
+Récompenses ¦ Ocenění ¦ Utmärkelser ¦ Udmærkelser
+Il faut le nom de la récompense (ex. « Concours Lépine · médaille d’or »). ¦ Je potřeba název ocenění (např. „Soutěž Lépine · zlatá medaile“). ¦ Utmärkelsens namn behövs (t.ex. ”Lépinetävlingen · guldmedalj”). ¦ Udmærkelsens navn skal angives (f.eks. »Lépine-konkurrencen · guldmedalje«).
+Qui a reçu cette récompense ? ¦ Kdo obdržel toto ocenění? ¦ Vem fick utmärkelsen? ¦ Hvem modtog udmærkelsen?
+La récompense ¦ Ocenění ¦ Utmärkelsen ¦ Udmærkelsen
+Concours Lépine · médaille d’or, Chevalier du Mérite agricole… ¦ Soutěž Lépine · zlatá medaile, rytíř Řádu zemědělských zásluh… ¦ Lépinetävlingen · guldmedalj, riddare av Jordbruksförtjänstorden… ¦ Lépine-konkurrencen · guldmedalje, ridder af Landbrugsfortjenstordenen…
+(sa fiche réunit tout son palmarès) ¦ (jeho karta sdružuje všechny oceněné) ¦ (dess post samlar alla pristagare) ¦ (dens post samler alle vindere)
+moustache à l’ancienne, 100 m, triplette… ¦ knír po staru, 100 m, trojice… ¦ mustasch av gammal stil, 100 m, trippel… ¦ gammeldags overskæg, 100 m, triple…
+18 / 20, 2,4 kg en 10 min, 11 s 2… ¦ 18 / 20, 2,4 kg za 10 min, 11,2 s… ¦ 18 / 20, 2,4 kg på 10 min, 11,2 s… ¦ 18 / 20, 2,4 kg på 10 min, 11,2 s…
+1er sur 22 ¦ 1. z 22 ¦ 1:a av 22 ¦ 1. af 22
+Moustache d’or 1971, champion de France… ¦ Zlatý knír 1971, mistr Francie… ¦ Guldmustaschen 1971, fransk mästare… ¦ Guldoverskægget 1971, fransk mester…
+500 F, un jambon, une coupe… ¦ 500 F, šunka, pohár… ¦ 500 F, en skinka, en pokal… ¦ 500 F, en skinke, et pokal…
+Comité des fêtes, FFR, confrérie… ¦ Výbor slavností, ragbyový svaz, bratrstvo… ¦ Festkommitté, rugbyförbund, brödraskap… ¦ Festudvalg, rugbyforbund, broderskab…
+Jury, équipiers, partenaires ¦ Porota, spoluhráči, partneři ¦ Jury, lagkamrater, partner ¦ Jury, holdkammerater, partnere
+président du jury ¦ předseda poroty ¦ juryns ordförande ¦ juryformand
+équipier ¦ spoluhráč ¦ lagkamrat ¦ holdkammerat
+remis par ¦ předal(a) ¦ överlämnad av ¦ overrakt af
+promotion du 14 juillet 1955 ¦ jmenování ze 14. července 1955 ¦ utnämningar den 14 juli 1955 ¦ udnævnelser den 14. juli 1955
+Journal officiel ¦ Úřední věstník ¦ Officiella tidningen ¦ Officiel tidende
+décret du 12 juillet 1955, JO p. 7012 ¦ dekret z 12. července 1955, Úř. věst. s. 7012 ¦ dekret av den 12 juli 1955, OT s. 7012 ¦ dekret af 12. juli 1955, OT s. 7012
+Dossier (base Léonore…) ¦ Spis (databáze Léonore…) ¦ Akt (databasen Léonore…) ¦ Sag (databasen Léonore…)
+Trophée, photo, coupure ¦ Trofej, fotografie, výstřižek ¦ Trofé, foto, urklipp ¦ Trofæ, foto, udklip
+Récompense quoi ¦ Za co ¦ Belönar vad ¦ Belønner hvad
+Une œuvre, une invention, une équipe… (fiche) ¦ Dílo, vynález, tým… (karta) ¦ Ett verk, en uppfinning, ett lag… (post) ¦ Et værk, en opfindelse, et hold… (post)
+Un animal 🐾 (ou une autre personne) ¦ Zvíře 🐾 (nebo jiná osoba) ¦ Ett djur 🐾 (eller en annan person) ¦ Et dyr 🐾 (eller en anden person)
+récompensé ¦ oceněný ¦ belönad ¦ belønnet
+Où c’est écrit ¦ Kde je to napsáno ¦ Var det står ¦ Hvor det står
+La Montagne, 17 août 1971 · JO n°, page ¦ La Montagne, 17. srpna 1971 · Úř. věst. č., strana ¦ La Montagne, 17 augusti 1971 · OT nr, sida ¦ La Montagne, 17. august 1971 · OT nr., side
+performance ¦ výkon ¦ prestation ¦ præstation
+organisateur ¦ pořadatel ¦ arrangör ¦ arrangør
+Seulement les premières places (or, 1er) ¦ Jen první místa (zlato, 1.) ¦ Bara förstaplatser (guld, 1:a) ¦ Kun førstepladser (guld, 1.)
+concours, titre, lieu, organisateur ¦ soutěž, titul, místo, pořadatel ¦ tävling, titel, plats, arrangör ¦ konkurrence, titel, sted, arrangør
+Prix, décorations, championnats, concours sérieux ou insolites de toutes les personnes (filtre « Personne » pour une seule). ¦ Ceny, vyznamenání, mistrovství, vážné i kuriózní soutěže všech osob (filtr „Osoba“ pro jednu). ¦ Priser, utmärkelser, mästerskap, seriösa eller udda tävlingar för alla personer (filtret ”Person” för en enda). ¦ Priser, dekorationer, mesterskaber, seriøse eller usædvanlige konkurrencer for alle personer (filteret »Person« for en enkelt).
+« ＋ Nouvelle récompense » : un championnat, une médaille, le certificat d’études premier du canton, la plus belle moustache… ¦ „＋ Nové ocenění“: mistrovství, medaile, nejlepší závěrečné vysvědčení v okrese, nejkrásnější knír… ¦ ”＋ Ny utmärkelse”: ett mästerskap, en medalj, bäst i kantonen på avgångsbetyget, den vackraste mustaschen… ¦ »＋ Ny udmærkelse«: et mesterskab, en medalje, bedst i kantonen til afgangseksamen, det flotteste overskæg…
+🏆 Frise du palmarès ¦ 🏆 Časová osa úspěchů ¦ 🏆 Tidslinje över meriter ¦ 🏆 Tidslinje over resultater
+fiche qui relie ¦ propojující karta ¦ länkande post ¦ forbindende post
+Il faut le nom du concours. ¦ Je potřeba název soutěže. ¦ Tävlingens namn behövs. ¦ Konkurrencens navn skal angives.
+À la fiche de qui ranger ce concours ? (l’organisateur, ou une personne qui y a participé) ¦ Ke kartě koho tuto soutěž uložit? (pořadatel, nebo osoba, která se zúčastnila) ¦ I vems post ska tävlingen sparas? (arrangören, eller en person som deltog) ¦ I hvis post skal konkurrencen gemmes? (arrangøren eller en person, der deltog)
+Le concours ¦ Soutěž ¦ Tävlingen ¦ Konkurrencen
+Nom du concours ¦ Název soutěže ¦ Tävlingens namn ¦ Konkurrencens navn
+Plus belle moustache de Corrèze, Concours Lépine… ¦ Nejkrásnější knír v Corrèze, soutěž Lépine… ¦ Vackraste mustaschen i Corrèze, Lépinetävlingen… ¦ Flotteste overskæg i Corrèze, Lépine-konkurrencen…
+Fréquence ¦ Četnost ¦ Frekvens ¦ Hyppighed
+chaque année, le 15 août… ¦ každý rok 15. srpna… ¦ varje år, den 15 augusti… ¦ hvert år den 15. august…
+Palmarès de ce concours ¦ Vítězové této soutěže ¦ Tävlingens pristagare ¦ Konkurrencens vindere
+Trophée ¦ Trofej ¦ Trofé ¦ Trofæ
+Un concours se crée aussi depuis une récompense (champ « Concours » → « ＋ Créer »). ¦ Soutěž lze vytvořit i z ocenění (pole „Soutěž“ → „＋ Vytvořit“). ¦ En tävling kan också skapas från en utmärkelse (fältet ”Tävling” → ”＋ Skapa”). ¦ En konkurrence kan også oprettes fra en udmærkelse (feltet »Konkurrence« → »＋ Opret«).
+Aucun prix, aucune décoration pour l’instant ¦ Zatím žádná cena ani vyznamenání ¦ Inga priser eller utmärkelser än ¦ Ingen priser eller dekorationer endnu
+Un championnat, une médaille, un concours de belote, le certificat d’études premier du canton, la plus belle moustache… ¦ Mistrovství, medaile, karetní turnaj, nejlepší závěrečné vysvědčení v okrese, nejkrásnější knír… ¦ Ett mästerskap, en medalj, en kortspelsturnering, bäst i kantonen på avgångsbetyget, den vackraste mustaschen… ¦ Et mesterskab, en medalje, en kortturnering, bedst i kantonen til afgangseksamen, det flotteste overskæg…
+＋ Ajouter une récompense ¦ ＋ Přidat ocenění ¦ ＋ Lägg till en utmärkelse ¦ ＋ Tilføj en udmærkelse
+Le palmarès de cette personne ¦ Úspěchy této osoby ¦ Personens meriter ¦ Personens resultater
+📘 Collège, cours complémentaire ¦ 📘 Druhý stupeň, doplňovací kurz ¦ 📘 Högstadium, fortsättningsskola ¦ 📘 Overbygning, fortsættelsesskole
+🎒 Lycée ¦ 🎒 Gymnázium ¦ 🎒 Gymnasium ¦ 🎒 Gymnasium
+🎓 Université, grande école ¦ 🎓 Univerzita, prestižní vysoká škola ¦ 🎓 Universitet, elitskola ¦ 🎓 Universitet, eliteskole
+Apprenti, en alternance ¦ Učeň, duální studium ¦ Lärling, varvad utbildning ¦ Lærling, vekseluddannelse
+À distance, par correspondance ¦ Na dálku, korespondenčně ¦ Distans, korrespondens ¦ Fjernundervisning, korrespondance
+Certificat d’études primaires ¦ Vysvědčení o ukončení obecné školy ¦ Folkskolebetyg ¦ Afgangsbevis fra folkeskolen
+Brevet élémentaire ¦ Základní osvědčení ¦ Elementärt betyg ¦ Elementært bevis
+Brevet supérieur ¦ Vyšší osvědčení ¦ Högre betyg ¦ Højere bevis
+BEPC, brevet des collèges ¦ BEPC, závěrečná zkouška druhého stupně ¦ BEPC, högstadiebetyg ¦ BEPC, afgangsprøve fra overbygningen
+Baccalauréat ¦ Maturita ¦ Studentexamen ¦ Studentereksamen
+Master, maîtrise, DEA ¦ Magisterský titul, maîtrise, DEA ¦ Master, maîtrise, DEA ¦ Kandidatgrad, maîtrise, DEA
+Diplôme de grande école ¦ Diplom prestižní vysoké školy ¦ Examen från elitskola ¦ Eksamen fra eliteskole
+Diplôme professionnel ¦ Odborný diplom ¦ Yrkesexamen ¦ Erhvervsuddannelse
+Brevet de la marine ¦ Námořní osvědčení ¦ Marincertifikat ¦ Søfartscertifikat
+Diplôme de langue ¦ Jazykový diplom ¦ Språkdiplom ¦ Sprogdiplom
+Diplôme de musique (conservatoire) ¦ Hudební diplom (konzervatoř) ¦ Musikdiplom (konservatorium) ¦ Musikdiplom (konservatorium)
+Diplôme sportif (BE, BPJEPS…) ¦ Sportovní diplom (trenérské licence…) ¦ Idrottsdiplom (tränarlicenser…) ¦ Sportsdiplom (trænercertifikater…)
+Autre (écris-le dans « Diplôme ») ¦ Jiný (napiš ho do „Diplom“) ¦ Annat (skriv det i ”Diplom”) ¦ Andet (skriv det i »Eksamensbevis«)
+École primaire ¦ Obecná škola ¦ Folkskola ¦ Folkeskole
+Collège, cours complémentaire ¦ Druhý stupeň, doplňovací kurz ¦ Högstadium, fortsättningsskola ¦ Overbygning, fortsættelsesskole
+Lycée ¦ Gymnázium ¦ Gymnasium ¦ Gymnasium
+Université ¦ Univerzita ¦ Universitet ¦ Universitet
+Grande école ¦ Prestižní vysoká škola ¦ Elitskola ¦ Eliteskole
+Centre d’apprentissage, chambre des métiers ¦ Učiliště, řemeslná komora ¦ Lärlingscenter, hantverkskammare ¦ Lærlingecenter, håndværkskammer
+Régiment, école militaire ¦ Pluk, vojenská škola ¦ Regemente, militärskola ¦ Regiment, militærskole
+Pension, internat, séminaire ¦ Penzionát, internát, seminář ¦ Pension, internatskola, seminarium ¦ Pension, kostskole, seminarium
+frère ¦ bratr ¦ bror ¦ bror
+sœur ¦ sestra ¦ syster ¦ søster
+Personne de ta base n’y est encore rattaché. ¦ Zatím k ní není připojen nikdo z tvé databáze. ¦ Ingen i din databas är kopplad dit än. ¦ Ingen i din database er knyttet dertil endnu.
+Étape ou diplôme ¦ Etapa nebo diplom ¦ Etapp eller diplom ¦ Etape eller eksamensbevis
+Étape de scolarité ¦ Etapa vzdělávání ¦ Skoletapp ¦ Skoleetape
+Étapes de scolarité ¦ Etapy vzdělávání ¦ Skoletapper ¦ Skoleetaper
+Scolarité et formation ¦ Školní docházka a vzdělání ¦ Skolgång och utbildning ¦ Skolegang og uddannelse
+Donne un nom à cette étape, ou choisis l’établissement. ¦ Pojmenuj tuto etapu, nebo vyber zařízení. ¦ Ge etappen ett namn, eller välj läroanstalten. ¦ Giv etapen et navn, eller vælg institutionen.
+Le parcours de qui ? ¦ Čí vzdělávací dráha? ¦ Vems väg? ¦ Hvis forløb?
+L’étape ¦ Etapa ¦ Etappen ¦ Etapen
+Nom de l’étape ¦ Název etapy ¦ Etappens namn ¦ Etapens navn
+École de Laguenne, Tour de France des compagnons… ¦ Škola v Laguenne, tovaryšská pouť po Francii… ¦ Skolan i Laguenne, gesällvandringen genom Frankrike… ¦ Skolen i Laguenne, svendevandringen gennem Frankrig…
+(sa fiche réunit tous ceux qui y sont passés) ¦ (jeho karta sdružuje všechny, kdo jím prošli) ¦ (dess post samlar alla som gått där) ¦ (dens post samler alle, der har gået der)
+Classe ou niveau ¦ Třída nebo stupeň ¦ Klass eller nivå ¦ Klasse eller niveau
+CP → CM2, 2e année, terminale… ¦ 1. → 5. třída, 2. ročník, maturitní ročník… ¦ Åk 1 → åk 5, år 2, sista året… ¦ 1. → 5. klasse, 2. år, sidste år…
+Interne ou externe ¦ Internista, nebo dojíždějící ¦ Internatelev eller extern ¦ Kostelev eller dagelev
+Maîtres et professeurs ¦ Učitelé a profesoři ¦ Lärare och professorer ¦ Lærere og professorer
+Maîtres ¦ Učitelé ¦ Lärare ¦ Lærere
+Matières ¦ Předměty ¦ Ämnen ¦ Fag
+Prix de fin d’année (🏆) ¦ Ceny na konci roku (🏆) ¦ Premier vid läsårets slut (🏆) ¦ Præmier ved skoleårets afslutning (🏆)
+Diplômes passés pendant cette étape ¦ Diplomy získané během této etapy ¦ Diplom tagna under etappen ¦ Eksamensbeviser taget i etapen
+Livrets et bulletins ¦ Vysvědčení a výkazy ¦ Betyg och skolrapporter ¦ Karakterbøger og skolerapporter
+Ajouter un bulletin, un livret… ¦ Přidat vysvědčení, výkaz… ¦ Lägg till ett betyg, en rapport… ¦ Tilføj en karakterbog, en rapport…
+Avec une photo de classe ¦ S třídní fotografií ¦ Med ett klassfoto ¦ Med et klassebillede
+école, lieu, classe, camarade ¦ škola, místo, třída, spolužák ¦ skola, plats, klass, klasskamrat ¦ skole, sted, klasse, klassekammerat
+« ＋ Nouvelle étape » : l’école du village, le cours complémentaire, l’apprentissage, le service militaire… ¦ „＋ Nová etapa“: vesnická škola, doplňovací kurz, učení, vojenská služba… ¦ ”＋ Ny etapp”: byskolan, fortsättningsskolan, lärlingstiden, militärtjänsten… ¦ »＋ Ny etape«: landsbyskolen, fortsættelsesskolen, læretiden, militærtjenesten…
+🏫 Frise du parcours ¦ 🏫 Časová osa vzdělávací dráhy ¦ 🏫 Tidslinje över vägen ¦ 🏫 Tidslinje over forløbet
+Choisis le diplôme dans la liste, ou écris son nom. ¦ Vyber diplom ze seznamu, nebo napiš jeho název. ¦ Välj diplomet i listan, eller skriv dess namn. ¦ Vælg eksamensbeviset på listen, eller skriv dets navn.
+Le diplôme de qui ? ¦ Čí diplom? ¦ Vems diplom? ¦ Hvis eksamensbevis?
+Le diplôme ¦ Diplom ¦ Diplomet ¦ Eksamensbeviset
+Diplôme (liste prête) ¦ Diplom (připravený seznam) ¦ Diplom (färdig lista) ¦ Eksamensbevis (færdig liste)
+Certificat d’études primaires, CAP de ferronnier… ¦ Vysvědčení o ukončení obecné školy, výuční list kováře… ¦ Folkskolebetyg, yrkesexamen som smed… ¦ Afgangsbevis fra folkeskolen, svendebrev som smed…
+ferronnier, série C, catégorie B… ¦ kovář, řada C, kategorie B… ¦ smed, linje C, kategori B… ¦ smed, linje C, kategori B…
+Lieu (centre d’examen) ¦ Místo (zkušební středisko) ¦ Plats (examenscenter) ¦ Sted (eksamenscenter)
+bien, 1er du canton… ¦ chvalitebně, 1. v okrese… ¦ väl godkänd, bäst i kantonen… ¦ godt, bedst i kantonen…
+Pendant l’étape ¦ Během etapy ¦ Under etappen ¦ Under etapen
+Le diplôme (scan, photo) ¦ Diplom (sken, fotografie) ¦ Diplomet (skanning, foto) ¦ Eksamensbeviset (scanning, foto)
+diplôme, spécialité, établissement ¦ diplom, obor, zařízení ¦ diplom, inriktning, läroanstalt ¦ eksamensbevis, speciale, institution
+« ＋ Nouveau diplôme » : certificat d’études, CAP, bac, permis de conduire, brevet militaire… ¦ „＋ Nový diplom“: vysvědčení, výuční list, maturita, řidičský průkaz, vojenské osvědčení… ¦ ”＋ Nytt diplom”: folkskolebetyg, yrkesexamen, studentexamen, körkort, militärcertifikat… ¦ »＋ Nyt eksamensbevis«: afgangsbevis, svendebrev, studentereksamen, kørekort, militærcertifikat…
+Établissements ¦ Zařízení ¦ Läroanstalter ¦ Institutioner
+école ¦ škola ¦ skola ¦ skole
+concours ¦ soutěž ¦ tävling ¦ konkurrence
+Il faut le nom de l’établissement. ¦ Je potřeba název zařízení. ¦ Läroanstaltens namn behövs. ¦ Institutionens navn skal angives.
+À la fiche de qui ranger cet établissement ? (une personne qui y est passée) ¦ Ke kartě koho toto zařízení uložit? (osoba, která jím prošla) ¦ I vems post ska läroanstalten sparas? (en person som gått där) ¦ I hvis post skal institutionen gemmes? (en person, der har gået der)
+L’établissement ¦ Zařízení ¦ Läroanstalten ¦ Institutionen
+École de Laguenne, lycée Edmond-Perrier… ¦ Škola v Laguenne, gymnázium Edmond-Perrier… ¦ Skolan i Laguenne, gymnasiet Edmond-Perrier… ¦ Skolen i Laguenne, gymnasiet Edmond-Perrier…
+ouverte en 1882, fermée en 1971 ¦ otevřena v roce 1882, uzavřena v roce 1971 ¦ öppnad 1882, stängd 1971 ¦ åbnet i 1882, lukket i 1971
+Ceux qui y sont passés ¦ Ti, kdo jím prošli ¦ De som gått där ¦ Dem, der har gået der
+Façade ¦ Průčelí ¦ Fasad ¦ Facade
+Un établissement se crée aussi depuis une étape (champ « Établissement » → « ＋ Créer »). ¦ Zařízení lze vytvořit i z etapy (pole „Zařízení“ → „＋ Vytvořit“). ¦ En läroanstalt kan också skapas från en etapp (fältet ”Läroanstalt” → ”＋ Skapa”). ¦ En institution kan også oprettes fra en etape (feltet »Institution« → »＋ Opret«).
+années pas encore notées ¦ roky zatím nezapsány ¦ år inte noterade än ¦ år ikke noteret endnu
+📄 le diplôme ¦ 📄 diplom ¦ 📄 diplomet ¦ 📄 eksamensbeviset
+Aucune école, aucun diplôme pour l’instant ¦ Zatím žádná škola ani diplom ¦ Ingen skola eller diplom än ¦ Ingen skole eller eksamensbevis endnu
+L’école du village, le certificat d’études, l’apprentissage, le service militaire, les photos de classe et les camarades… ¦ Vesnická škola, vysvědčení, učení, vojenská služba, třídní fotografie a spolužáci… ¦ Byskolan, folkskolebetyget, lärlingstiden, militärtjänsten, klassfotona och klasskamraterna… ¦ Landsbyskolen, afgangsbeviset, læretiden, militærtjenesten, klassebillederne og klassekammeraterne…
+＋ Une étape de scolarité ¦ ＋ Etapa vzdělávání ¦ ＋ En skoletapp ¦ ＋ En skoleetape
+Maître ¦ Učitel ¦ Lärare ¦ Lærer
+📒 Livrets et bulletins ¦ 📒 Vysvědčení a výkazy ¦ 📒 Betyg och skolrapporter ¦ 📒 Karakterbøger og skolerapporter
+👥 Camarade, maître… chez d’autres ¦ 👥 Spolužák, učitel… u jiných ¦ 👥 Klasskamrat, lärare… hos andra ¦ 👥 Klassekammerat, lærer… hos andre
+Parcours scolaire et formation ¦ Školní dráha a vzdělání ¦ Skolgång och utbildning ¦ Skoleforløb og uddannelse
+Aucun diplôme noté. ¦ Žádný diplom není zapsaný. ¦ Inget diplom noterat. ¦ Intet eksamensbevis noteret.
+Photos, cartes anciennes, scans, PDF ¦ Fotografie, staré mapy, skeny, PDF ¦ Foton, gamla kartor, skanningar, PDF ¦ Fotos, gamle kort, scanninger, PDF
+Des fiches de la base liées au sujet ¦ Karty z databáze související s tématem ¦ Poster i databasen kopplade till ämnet ¦ Poster i databasen knyttet til emnet
+Les dates clés, dans l’ordre ¦ Klíčová data v pořadí ¦ Nyckeldatum, i ordning ¦ Nøgledatoer, i rækkefølge
+Un extrait, avec sa source ¦ Úryvek s pramenem ¦ Ett utdrag, med sin källa ¦ Et uddrag med sin kilde
+Sites, archives en ligne, articles ¦ Weby, online archivy, články ¦ Webbplatser, arkiv på nätet, artiklar ¦ Websteder, onlinearkiver, artikler
+Un titre pour séparer les parties ¦ Nadpis pro oddělení částí ¦ En rubrik för att skilja delarna åt ¦ En overskrift til at adskille delene
+Carte, arbre, liste, Mes listes, fiche d’une personne, village… ¦ Mapa, strom, seznam, Moje seznamy, karta osoby, vesnice… ¦ Karta, träd, lista, Mina listor, en persons post, by… ¦ Kort, træ, liste, Mine lister, en persons post, landsby…
+Un de « Mes diagrammes » : hémicycle, frise d’un groupe, camembert… ¦ Jeden z „Mých diagramů“: půlkruh, časová osa skupiny, koláčový graf… ¦ Ett av ”Mina scheman”: halvcirkel, en grupps tidslinje, cirkeldiagram… ¦ Et af »Mine skemaer«: halvcirkel, en gruppes tidslinje, lagkagediagram…
+Widget ou graphique à soi ¦ Vlastní widget nebo graf ¦ Egen widget eller graf ¦ Egen widget eller graf
+Ceux de l’Éditeur de widgets / de graphiques ¦ Ty z Editoru widgetů / grafů ¦ De från widget- / grafredigeraren ¦ Dem fra widget- / grafeditoren
+Une de tes cartes de photos (ou toutes), avec sa période ¦ Jedna z tvých map fotografií (nebo všechny) s jejím obdobím ¦ En av dina fotokartor (eller alla), med sin period ¦ Et af dine fotokort (eller alle) med sin periode
+Sujet d’histoire ¦ Historické téma ¦ Historiskt ämne ¦ Historisk emne
+Le contexte historique d’une époque ou d’un pays ¦ Historický kontext období nebo země ¦ Det historiska sammanhanget för en epok eller ett land ¦ Den historiske kontekst for en epoke eller et land
+Ce qu’il faut savoir en quelques lignes. ¦ Co je třeba vědět, v několika řádcích. ¦ Det man behöver veta, på några rader. ¦ Det, man skal vide, på nogle få linjer.
+Les dates clés ¦ Klíčová data ¦ Nyckeldatum ¦ Nøgledatoer
+Le contexte ¦ Kontext ¦ Sammanhanget ¦ Konteksten
+Cartes et documents ¦ Mapy a dokumenty ¦ Kartor och dokument ¦ Kort og dokumenter
+Mes ancêtres concernés ¦ Moji dotčení předkové ¦ Mina berörda anfäder ¦ Mine berørte aner
+Pour aller plus loin ¦ Chceš-li vědět víc ¦ För den som vill veta mer ¦ Hvis du vil vide mere
+Un village, une ville, une région ¦ Vesnice, město, region ¦ En by, en stad, en region ¦ En landsby, en by, en region
+Ceux qui y ont vécu ¦ Ti, kdo tam žili ¦ De som bodde där ¦ Dem, der boede der
+Archives en ligne ¦ Online archivy ¦ Arkiv på nätet ¦ Onlinearkiver
+Un métier d’autrefois ¦ Povolání z dob minulých ¦ Ett gammalt yrke ¦ Et gammelt erhverv
+Le métier ¦ Povolání ¦ Yrket ¦ Erhvervet
+Mes ancêtres qui l’ont exercé ¦ Moji předkové, kteří ho vykonávali ¦ Mina anfäder som utövade det ¦ Mine aner, der udøvede det
+Fiche vide ¦ Prázdná karta ¦ Tomt kort ¦ Tomt kort
+Aucune fiche. ¦ Žádná karta. ¦ Inget kort. ¦ Intet kort.
+Une fiche par sujet : l’histoire d’un pays à une époque, un lieu, un métier, une guerre, une coutume… Tu y mets ce que tu veux : du texte, des images et des documents, des personnes de la base, une frise de dates, des citations, des liens, et tout ce que l’app sait montrer (carte, arbre, listes, Mes listes, widgets et graphiques à toi). ¦ Jedna karta na téma: dějiny země v určitém období, místo, povolání, válka, zvyk… Vlož do ní, co chceš: text, obrázky a dokumenty, osoby z databáze, časovou osu, citace, odkazy a vše, co aplikace umí zobrazit (mapa, strom, seznamy, Moje seznamy, tvé widgety a grafy). ¦ Ett kort per ämne: ett lands historia under en epok, en plats, ett yrke, ett krig, en sed… Lägg in vad du vill: text, bilder och dokument, personer från databasen, en tidslinje, citat, länkar och allt som appen kan visa (karta, träd, listor, Mina listor, egna widgetar och grafer). ¦ Ét kort pr. emne: et lands historie i en epoke, et sted, et erhverv, en krig, en skik… Læg det ind, du vil: tekst, billeder og dokumenter, personer fra databasen, en tidslinje, citater, links og alt, hvad appen kan vise (kort, træ, lister, Mine lister, dine egne widgets og grafer).
+Aucune fiche pour l’instant ¦ Zatím žádná karta ¦ Inga kort än ¦ Ingen kort endnu
+⭐ Mes modèles ¦ ⭐ Moje šablony ¦ ⭐ Mina mallar ¦ ⭐ Mine skabeloner
+— des fiches toutes prêtes à remplir, proposées dans « Nouvelle fiche » ¦ — hotové karty k vyplnění, nabízené v „Nová karta“ ¦ — färdiga kort att fylla i, som erbjuds i ”Nytt kort” ¦ — færdige kort til udfyldning, der tilbydes i »Nyt kort«
+Rien : tu ajoutes les blocs toi-même ¦ Nic: bloky přidáš sám ¦ Inget: du lägger till blocken själv ¦ Intet: du tilføjer selv blokkene
+Modifier le modèle ¦ Upravit šablonu ¦ Redigera mallen ¦ Rediger skabelonen
+Supprimer le modèle ¦ Smazat šablonu ¦ Radera mallen ¦ Slet skabelonen
+Aucun modèle pour l’instant : dans une fiche, « ⧉ Dupliquer » → « ⭐ En faire un modèle ». ¦ Zatím žádná šablona: v kartě „⧉ Duplikovat“ → „⭐ Udělat z ní šablonu“. ¦ Inga mallar än: i ett kort, ”⧉ Duplicera” → ”⭐ Gör det till en mall”. ¦ Ingen skabeloner endnu: i et kort, »⧉ Duplikér« → »⭐ Gør det til en skabelon«.
+La Pologne avant les guerres napoléoniennes ¦ Polsko před napoleonskými válkami ¦ Polen före Napoleonkrigen ¦ Polen før Napoleonskrigene
+Supprimer le modèle « {nm} » ? (les fiches déjà créées avec lui ne changent pas) ¦ Smazat šablonu „{nm}“? (karty, které podle ní už vznikly, se nezmění) ¦ Radera mallen ”{nm}”? (kort som redan skapats med den ändras inte) ¦ Slet skabelonen »{nm}«? (kort, der allerede er oprettet med den, ændres ikke)
+Modèle supprimé. ¦ Šablona smazána. ¦ Mallen raderad. ¦ Skabelonen slettet.
+MODÈLE ¦ ŠABLONA ¦ MALL ¦ SKABELON
+Une copie du modèle ¦ Kopie šablony ¦ En kopia av mallen ¦ En kopi af skabelonen
+Pour faire une variante du modèle ¦ K vytvoření varianty šablony ¦ För att göra en variant av mallen ¦ For at lave en variant af skabelonen
+Une fiche avec ce modèle ¦ Karta s touto šablonou ¦ Ett kort med denna mall ¦ Et kort med denne skabelon
+Une nouvelle fiche, blocs dans le même ordre ¦ Nová karta, bloky ve stejném pořadí ¦ Ett nytt kort, blocken i samma ordning ¦ Et nyt kort, blokkene i samme rækkefølge
+Une copie complète ¦ Úplná kopie ¦ En fullständig kopia ¦ En fuld kopi
+Tout le contenu (les images restent sur l’original) ¦ Celý obsah (obrázky zůstanou v originálu) ¦ Allt innehåll (bilderna stannar på originalet) ¦ Alt indhold (billederne bliver på originalen)
+Le même ordre de blocs ¦ Stejné pořadí bloků ¦ Samma blockordning ¦ Samme blokrækkefølge
+Une nouvelle fiche avec les mêmes blocs, mais vides ¦ Nová karta se stejnými bloky, ale prázdnými ¦ Ett nytt kort med samma block, men tomma ¦ Et nyt kort med de samme blokke, men tomme
+En faire un modèle ¦ Udělat z ní šablonu ¦ Gör det till en mall ¦ Gør det til en skabelon
+Proposé dans « Nouvelle fiche » → « Mes modèles » ¦ Nabízeno v „Nová karta“ → „Moje šablony“ ¦ Erbjuds i ”Nytt kort” → ”Mina mallar” ¦ Tilbydes i »Nyt kort« → »Mine skabeloner«
+garder aussi les textes, citations, dates, liens et personnes (les images ne vont pas dans un modèle) ¦ ponechat i texty, citace, data, odkazy a osoby (obrázky do šablony nepatří) ¦ behåll även texter, citat, datum, länkar och personer (bilder ingår inte i en mall) ¦ behold også tekster, citater, datoer, links og personer (billeder indgår ikke i en skabelon)
+Fiche dupliquée (les images restent sur l’original). ¦ Karta zduplikována (obrázky zůstanou v originálu). ¦ Kortet duplicerat (bilderna stannar på originalet). ¦ Kortet duplikeret (billederne bliver på originalen).
+Nouvelle fiche avec le même ordre de blocs. ¦ Nová karta se stejným pořadím bloků. ¦ Nytt kort med samma blockordning. ¦ Nyt kort med samme blokrækkefølge.
+Modèle dupliqué. ¦ Šablona zduplikována. ¦ Mallen duplicerad. ¦ Skabelonen duplikeret.
+⭐ Modèle créé : tu le retrouves dans « Nouvelle fiche » → « Mes modèles ». ¦ ⭐ Šablona vytvořena: najdeš ji v „Nová karta“ → „Moje šablony“. ¦ ⭐ Mallen skapad: du hittar den i ”Nytt kort” → ”Mina mallar”. ¦ ⭐ Skabelonen oprettet: du finder den i »Nyt kort« → »Mine skabeloner«.
+Texte vide : ✎ pour l’écrire. ¦ Prázdný text: ✎ a napiš ho. ¦ Tom text: ✎ för att skriva den. ¦ Tom tekst: ✎ for at skrive den.
+Citation vide : ✎ pour l’écrire. ¦ Prázdná citace: ✎ a napiš ji. ¦ Tomt citat: ✎ för att skriva det. ¦ Tomt citat: ✎ for at skrive det.
+Aucune image : ✎ pour en ajouter (de l’ordinateur ou déjà dans l’app). ¦ Žádný obrázek: ✎ a přidej je (z počítače nebo z aplikace). ¦ Ingen bild: ✎ för att lägga till (från datorn eller redan i appen). ¦ Intet billede: ✎ for at tilføje (fra computeren eller allerede i appen).
+Aucune personne : ✎ pour en ajouter. ¦ Žádná osoba: ✎ a přidej je. ¦ Inga personer: ✎ för att lägga till. ¦ Ingen personer: ✎ for at tilføje.
+Aucune date : ✎ pour en ajouter. ¦ Žádné datum: ✎ a přidej je. ¦ Inga datum: ✎ för att lägga till. ¦ Ingen datoer: ✎ for at tilføje.
+Aucun lien : ✎ pour en ajouter. ¦ Žádný odkaz: ✎ a přidej je. ¦ Inga länkar: ✎ för att lägga till. ¦ Ingen links: ✎ for at tilføje.
+Écran indisponible. ¦ Obrazovka není k dispozici. ¦ Skärmen är inte tillgänglig. ¦ Skærmen er ikke tilgængelig.
+Cet écran n’existe plus : ✎ pour en choisir un autre. ¦ Tato obrazovka už neexistuje: ✎ a vyber jinou. ¦ Skärmen finns inte längre: ✎ för att välja en annan. ¦ Skærmen findes ikke længere: ✎ for at vælge en anden.
+Aucun diagramme choisi : ✎ pour en choisir un. ¦ Není vybrán žádný diagram: ✎ a vyber ho. ¦ Inget schema valt: ✎ för att välja ett. ¦ Intet skema valgt: ✎ for at vælge et.
+Aucun widget choisi : ✎ pour en choisir un. ¦ Není vybrán žádný widget: ✎ a vyber ho. ¦ Ingen widget vald: ✎ för att välja en. ¦ Ingen widget valgt: ✎ for at vælge en.
+Ouvrir en grand ¦ Otevřít ve velkém ¦ Öppna i stort format ¦ Åbn i stort format
+⭐ MODÈLE DE FICHE ¦ ⭐ ŠABLONA KARTY ¦ ⭐ KORTMALL ¦ ⭐ KORTSKABELON
+⚙️ Titre, icône, couleur ¦ ⚙️ Název, ikona, barva ¦ ⚙️ Titel, ikon, färg ¦ ⚙️ Titel, ikon, farve
+＋ Créer une fiche avec ce modèle ¦ ＋ Vytvořit kartu s touto šablonou ¦ ＋ Skapa ett kort med denna mall ¦ ＋ Opret et kort med denne skabelon
+Copie complète, même ordre de blocs, ou modèle ¦ Úplná kopie, stejné pořadí bloků, nebo šablona ¦ Fullständig kopia, samma blockordning eller mall ¦ Fuld kopi, samme blokrækkefølge eller skabelon
+Fiche vide : « ＋ Bloc » pour ajouter du texte, des images, des personnes, une carte, une liste… ¦ Prázdná karta: „＋ Blok“ a přidej text, obrázky, osoby, mapu, seznam… ¦ Tomt kort: ”＋ Block” för att lägga till text, bilder, personer, en karta, en lista… ¦ Tomt kort: »＋ Blok« for at tilføje tekst, billeder, personer, et kort, en liste…
+＋ Ajouter un bloc ¦ ＋ Přidat blok ¦ ＋ Lägg till ett block ¦ ＋ Tilføj en blok
+Carte de photos indisponible. ¦ Mapa fotografií není k dispozici. ¦ Fotokartan är inte tillgänglig. ¦ Fotokortet er ikke tilgængeligt.
+Fiche créée avec ce modèle : change son titre dans « ⚙️ Titre, icône, couleur ». ¦ Karta vytvořena s touto šablonou: změň její název v „⚙️ Název, ikona, barva“. ¦ Kortet skapat med denna mall: ändra titeln i ”⚙️ Titel, ikon, färg”. ¦ Kortet oprettet med denne skabelon: skift titlen i »⚙️ Titel, ikon, farve«.
+Supprimer la fiche « {nm} » ? (les images restent dans les médias de l’app) ¦ Smazat kartu „{nm}“? (obrázky zůstanou v médiích aplikace) ¦ Radera kortet ”{nm}”? (bilderna finns kvar i appens media) ¦ Slet kortet »{nm}«? (billederne bliver i appens medier)
+la fiche n’est plus ouverte ¦ karta už není otevřená ¦ kortet är inte längre öppet ¦ kortet er ikke længere åbent
+Bloc « {nm} » supprimé ¦ Blok „{nm}“ smazán ¦ Blocket ”{nm}” raderat ¦ Blokken »{nm}« slettet
+Titre du bloc ¦ Název bloku ¦ Blockets titel ¦ Blokkens titel
+Mémoires de…, p. 12 ¦ Paměti…, s. 12 ¦ Memoarer av…, s. 12 ¦ Erindringer af…, s. 12
+une grande image ¦ jeden velký obrázek ¦ en stor bild ¦ ét stort billede
+bandeau qui défile ¦ posuvný pás ¦ rullande band ¦ rullende bånd
+Une date par ligne (ex. « 1772 », « 3 mai 1791 ») et ce qui s’est passé. Elles sont rangées dans l’ordre que tu leur donnes. ¦ Jedno datum na řádek (např. „1772“, „3. května 1791“) a co se stalo. Řadí se v pořadí, které jim dáš. ¦ Ett datum per rad (t.ex. ”1772”, ”3 maj 1791”) och vad som hände. De ordnas i den ordning du ger dem. ¦ Én dato pr. linje (f.eks. »1772«, »3. maj 1791«) og hvad der skete. De ordnes i den rækkefølge, du giver dem.
+(pour « Fiche d’une personne ») ¦ (pro „Karta osoby“) ¦ (för ”En persons post”) ¦ (for »En persons post«)
+avec sa colonne de gauche (menus de l’écran) ¦ s levým sloupcem (nabídky obrazovky) ¦ med vänsterkolumnen (skärmens menyer) ¦ med venstre kolonne (skærmens menuer)
+Mes listes, les listes de l’app, la carte, les arbres, les statistiques, la fiche d’une personne, un village… : tout écran de l’app se met dans la fiche, à jour. ¦ Moje seznamy, seznamy aplikace, mapa, stromy, statistiky, karta osoby, vesnice…: každá obrazovka aplikace se vloží do karty, průběžně aktualizovaná. ¦ Mina listor, appens listor, kartan, träden, statistiken, en persons post, en by…: varje skärm i appen kan läggas i kortet, uppdaterad. ¦ Mine lister, appens lister, kortet, træerne, statistikken, en persons post, en landsby…: enhver skærm i appen kan lægges i kortet, opdateret.
+Graphiques → Mes diagrammes : le bloc montre toujours sa dernière version. ¦ Grafy → Moje diagramy: blok vždy ukazuje jeho poslední verzi. ¦ Diagram → Mina scheman: blocket visar alltid den senaste versionen. ¦ Diagrammer → Mine skemaer: blokken viser altid den seneste version.
+Cartes de photos indisponibles. ¦ Mapy fotografií nejsou k dispozici. ¦ Fotokartorna är inte tillgängliga. ¦ Fotokortene er ikke tilgængelige.
+Widget ou graphique ¦ Widget nebo graf ¦ Widget eller graf ¦ Widget eller graf
+Chercher un widget ou un graphique… ¦ Hledat widget nebo graf… ¦ Sök en widget eller en graf… ¦ Søg en widget eller en graf…
+Pour en créer un : Réglages → Éditeur de widgets ou Éditeur de graphiques. ¦ K vytvoření: Nastavení → Editor widgetů nebo Editor grafů. ¦ För att skapa en: Inställningar → Widgetredigerare eller Grafredigerare. ¦ For at oprette en: Indstillinger → Widgeteditor eller Grafeditor.
+Aucun widget ni graphique à toi pour l’instant : Réglages → Éditeur de widgets ou Éditeur de graphiques. ¦ Zatím nemáš vlastní widget ani graf: Nastavení → Editor widgetů nebo Editor grafů. ¦ Inga egna widgetar eller grafer än: Inställningar → Widgetredigerare eller Grafredigerare. ¦ Ingen egne widgets eller grafer endnu: Indstillinger → Widgeteditor eller Grafeditor.
+Une adresse doit commencer par http:// ou https:// ¦ Adresa musí začínat http:// nebo https:// ¦ En adress måste börja med http:// eller https:// ¦ En adresse skal begynde med http:// eller https://
+Nouveau bloc ¦ Nový blok ¦ Nytt block ¦ Ny blok
+Réglages du bloc ¦ Nastavení bloku ¦ Blockets inställningar ¦ Blokkens indstillinger
+Modifier le bloc ¦ Upravit blok ¦ Redigera blocket ¦ Rediger blokken
+🖼️ Image de couverture (la vignette de la fiche dans la liste ; sinon la première image de la fiche) ¦ 🖼️ Titulní obrázek (náhled karty v seznamu; jinak první obrázek karty) ¦ 🖼️ Omslagsbild (kortets miniatyr i listan; annars kortets första bild) ¦ 🖼️ Forsidebillede (kortets miniature på listen; ellers kortets første billede)
+(écran de l’app : à voir dans LCNDA) ¦ (obrazovka aplikace: k zobrazení v LCNDA) ¦ (appskärm: visas i LCNDA) ¦ (appskærm: vises i LCNDA)
+Textes et images ¦ Texty a obrázky ¦ Texter och bilder ¦ Tekster og billeder
+Personnes et dates ¦ Osoby a data ¦ Personer och datum ¦ Personer og datoer
+Écrans et widgets (en titre) ¦ Obrazovky a widgety (jako nadpis) ¦ Skärmar och widgetar (som rubrik) ¦ Skærme og widgets (som overskrift)
+Citations et liens ¦ Citace a odkazy ¦ Citat och länkar ¦ Citater og links
+Les fiches sur un sujet (onglet « Fiches ») : clique sur une fiche pour l’ouvrir. ¦ Karty na téma (karta „Karty“): klikni na kartu a otevři ji. ¦ Kort om ett ämne (fliken ”Kort”): klicka på ett kort för att öppna det. ¦ Kort om et emne (fanen »Kort«): klik på et kort for at åbne det.
+Aucune fiche pour « {nm} » ¦ Pro „{nm}“ není žádná karta ¦ Inget kort för ”{nm}” ¦ Intet kort for »{nm}«
+Aucune fiche ne correspond ¦ Žádná karta neodpovídá ¦ Inget kort matchar ¦ Intet kort passer
+Vérifie l’orthographe, ou cherche un autre mot (titre, sous-titre). ¦ Zkontroluj pravopis, nebo hledej jiné slovo (název, podnázev). ¦ Kontrollera stavningen, eller sök ett annat ord (titel, undertitel). ¦ Tjek stavemåden, eller søg et andet ord (titel, undertitel).
+Retire un filtre. ¦ Odeber filtr. ¦ Ta bort ett filter. ¦ Fjern et filter.
+Fiche sans titre ¦ Karta bez názvu ¦ Kort utan titel ¦ Kort uden titel
+Modifiée ¦ Upraveno ¦ Ändrad ¦ Ændret
+Chercher une fiche… (titre, sous-titre) ¦ Hledat kartu… (název, podnázev) ¦ Sök ett kort… (titel, undertitel) ¦ Søg et kort… (titel, undertitel)
+=ligne lue ¦ přečtený řádek|přečtené řádky|přečtených řádků ¦ läst rad|lästa rader ¦ læst række|læste rækker
+Supprimer la fiche ¦ Smazat kartu ¦ Radera kortet ¦ Slet kortet
+Fait prisonnier le ¦ Zajat dne ¦ Tillfångatagen den ¦ Taget til fange den
+Fait prisonnier à ¦ Zajat v ¦ Tillfångatagen i ¦ Taget til fange i
+Armée ¦ Armáda ¦ Armé ¦ Hær
+Département, circonscription ¦ Departement, volební obvod ¦ Departement, valkrets ¦ Departement, valgkreds
+N° du brevet ¦ Č. patentu ¦ Patentnr ¦ Patentnr.
+Inventeur (déposant) ¦ Vynálezce (přihlašovatel) ¦ Uppfinnare (sökande) ¦ Opfinder (ansøger)
+Faculté ¦ Fakulta ¦ Fakultet ¦ Fakultet
+Sociétés savantes ¦ Učené společnosti ¦ Lärda sällskap ¦ Lærde selskaber
+Matériaux, techniques ¦ Materiály, techniky ¦ Material, tekniker ¦ Materialer, teknikker
+Comté de naissance ¦ Hrabství narození ¦ Födelsegrevskap ¦ Fødselsgrevskab
+Personnes sauvées ¦ Zachráněné osoby ¦ Räddade personer ¦ Reddede personer
+🏛 Ajouter un mandat (profil « Homme / femme politique ») ¦ 🏛 Přidat mandát (profil „Politik / politička“) ¦ 🏛 Lägg till ett uppdrag (profilen ”Politiker”) ¦ 🏛 Tilføj et mandat (profilen »Politiker«)
+💡 Ajouter l’invention et son brevet (profil « Inventeur ») ¦ 💡 Přidat vynález a jeho patent (profil „Vynálezce“) ¦ 💡 Lägg till uppfinningen och dess patent (profilen ”Uppfinnare”) ¦ 💡 Tilføj opfindelsen og dens patent (profilen »Opfinder«)
+🎓 Ajouter le diplôme (Diplômes et formation) ¦ 🎓 Přidat diplom (Diplomy a vzdělání) ¦ 🎓 Lägg till diplomet (Diplom och utbildning) ¦ 🎓 Tilføj eksamensbeviset (Eksamensbeviser og uddannelse)
+🎓 Ajouter l’École polytechnique (Diplômes et formation) ¦ 🎓 Přidat École polytechnique (Diplomy a vzdělání) ¦ 🎓 Lägg till École polytechnique (Diplom och utbildning) ¦ 🎓 Tilføj École polytechnique (Eksamensbeviser og uddannelse)
+🏆 Ajouter « Juste parmi les nations » (Concours et récompenses) ¦ 🏆 Přidat „Spravedlivý mezi národy“ (Soutěže a ocenění) ¦ 🏆 Lägg till ”Rättfärdig bland folken” (Tävlingar och utmärkelser) ¦ 🏆 Tilføj »Retfærdig blandt folkene« (Konkurrencer og udmærkelser)
+Fichier de données : les lignes cochées deviennent des événements ; le fichier lui-même n’est pas gardé. ¦ Datový soubor: zaškrtnuté řádky se stanou událostmi; samotný soubor se neukládá. ¦ Datafil: de ikryssade raderna blir händelser; själva filen sparas inte. ¦ Datafil: de markerede rækker bliver begivenheder; selve filen gemmes ikke.
+ici : une image, un PDF, une page enregistrée (.html), un texte (.txt) ou un fichier de données (.json, .csv) ¦ sem: obrázek, PDF, uloženou stránku (.html), text (.txt) nebo datový soubor (.json, .csv) ¦ hit: en bild, en PDF, en sparad sida (.html), en text (.txt) eller en datafil (.json, .csv) ¦ hertil: et billede, en PDF, en gemt side (.html), en tekst (.txt) eller en datafil (.json, .csv)
+Rien de la fiche n’est remplacé : une naissance, un baptême, un décès ou une inhumation déjà sur la fiche est gardé tel quel, et « ↶ Annuler » retire tout ce que l’import a ajouté. ¦ Na kartě se nic nenahradí: narození, křest, úmrtí nebo pohřeb, který už na kartě je, zůstane beze změny, a „↶ Vrátit zpět“ odebere vše, co import přidal. ¦ Inget i posten ersätts: en födelse, ett dop, en död eller en begravning som redan finns i posten behålls som den är, och ”↶ Ångra” tar bort allt som importen lade till. ¦ Intet i posten erstattes: en fødsel, en dåb, et dødsfald eller en begravelse, der allerede er i posten, beholdes, som den er, og »↶ Fortryd« fjerner alt, hvad importen tilføjede.
+Rôle : {nm} ¦ Role: {nm} ¦ Roll: {nm} ¦ Rolle: {nm}
+Aucune ligne lue. ¦ Nebyl přečten žádný řádek. ¦ Ingen rad läst. ¦ Ingen række læst.
+· coche celles qui parlent de cette personne (le même nom est coché d’office). ¦ · zaškrtni ty, které se týkají této osoby (stejné jméno je zaškrtnuto automaticky). ¦ · kryssa i de som handlar om denna person (samma namn är ikryssat från början). ¦ · markér dem, der handler om denne person (samme navn er markeret på forhånd).
+Ajouter cette ligne ¦ Přidat tento řádek ¦ Lägg till raden ¦ Tilføj rækken
+(dans la famille) ¦ (v rodině) ¦ (i släkten) ¦ (i familien)
+Archives des persécutions : elles restent sobres sur la fiche, et ne sont jamais reprises dans les jeux. ¦ Archivy perzekucí: na kartě zůstávají střízlivé a nikdy se nepoužívají ve hrách. ¦ Arkiv om förföljelser: de visas sakligt i posten och används aldrig i spel. ¦ Arkiver om forfølgelser: de forbliver nøgterne i posten og bruges aldrig i spil.
+Les lignes lues dans le fichier ou la page copiée. ¦ Řádky přečtené ze souboru nebo zkopírované stránky. ¦ Raderna lästa i filen eller den kopierade sidan. ¦ Rækkerne læst i filen eller den kopierede side.
+Lien vers la fiche ou la notice ¦ Odkaz na záznam nebo heslo ¦ Länk till posten eller beskrivningen ¦ Link til posten eller beskrivelsen
+Il faut un fichier, un lien, le texte du document ou une ligne cochée. ¦ Je potřeba soubor, odkaz, text dokumentu nebo zaškrtnutý řádek. ¦ Det behövs en fil, en länk, dokumentets text eller en ikryssad rad. ¦ Der skal bruges en fil, et link, dokumentets tekst eller en markeret række.
+Importer depuis les archives de France et d’ailleurs ¦ Importovat z archivů ve Francii i jinde ¦ Importera från arkiv i Frankrike och på andra håll ¦ Importér fra arkiver i Frankrig og andre steder
+image, PDF, page enregistrée, texte ou fichier de données ¦ obrázek, PDF, uložená stránka, text nebo datový soubor ¦ bild, PDF, sparad sida, text eller datafil ¦ billede, PDF, gemt side, tekst eller datafil
+Ce que tu as téléchargé ou enregistré : une fiche en image ou en PDF, la page enregistrée par ton navigateur (« Enregistrer sous… »), un texte copié (fiche du CICR, de Sycomore, d’un brevet, d’une tombe, page de résultats FreeBMD…) ou le fichier de données ouvertes d’Open Archives (JSON ou CSV). Rien n’est demandé au site : seul ton fichier est lu. Pas de fichier ? « 📋 Coller un texte ». ¦ Co jsi stáhl nebo uložil: záznam jako obrázek nebo PDF, stránku uloženou prohlížečem („Uložit jako…“), zkopírovaný text (záznam MVČK, Sycomore, patentu, hrobu, stránka výsledků FreeBMD…) nebo soubor otevřených dat Open Archives (JSON nebo CSV). Od webu se nic nepožaduje: čte se jen tvůj soubor. Nemáš soubor? „📋 Vložit text“. ¦ Det du har laddat ner eller sparat: en post som bild eller PDF, sidan sparad av din webbläsare (”Spara som…”), kopierad text (en post från ICRC, Sycomore, ett patent, en grav, en resultatsida från FreeBMD…) eller Open Archives fil med öppna data (JSON eller CSV). Inget hämtas från webbplatsen: bara din fil läses. Ingen fil? ”📋 Klistra in en text”. ¦ Det, du har downloadet eller gemt: en post som billede eller PDF, siden gemt af din browser (»Gem som…«), kopieret tekst (en post fra ICRC, Sycomore, et patent, en grav, en resultatside fra FreeBMD…) eller Open Archives' fil med åbne data (JSON eller CSV). Intet hentes fra webstedet: kun din fil læses. Ingen fil? »📋 Indsæt en tekst«.
+🌍 Archives de France et d’ailleurs… ¦ 🌍 Archivy ve Francii i jinde… ¦ 🌍 Arkiv i Frankrike och på andra håll… ¦ 🌍 Arkiver i Frankrig og andre steder…
+🌍 Archives du pays d’arrivée… ¦ 🌍 Archivy cílové země… ¦ 🌍 Arkiv i ankomstlandet… ¦ 🌍 Arkiver i ankomstlandet…
+🌍 Brevets d’invention (INPI)… ¦ 🌍 Patenty (INPI)… ¦ 🌍 Patent (INPI)… ¦ 🌍 Patenter (INPI)…
+🌍 Thèses, Polytechnique… ¦ 🌍 Disertace, Polytechnique… ¦ 🌍 Avhandlingar, Polytechnique… ¦ 🌍 Afhandlinger, Polytechnique…
+🌍 Sycomore, Sénat… ¦ 🌍 Sycomore, Senát… ¦ 🌍 Sycomore, senaten… ¦ 🌍 Sycomore, senatet…
+🌍 Musées (Joconde)… ¦ 🌍 Muzea (Joconde)… ¦ 🌍 Museer (Joconde)… ¦ 🌍 Museer (Joconde)…
+🌍 Livres et archives sur ce lieu… ¦ 🌍 Knihy a archivy o tomto místě… ¦ 🌍 Böcker och arkiv om platsen… ¦ 🌍 Bøger og arkiver om stedet…
+Ouvre la recherche dans ton navigateur, nom et années déjà remplis ¦ Otevře hledání v prohlížeči s už vyplněným jménem a roky ¦ Öppnar sökningen i webbläsaren, med namn och år redan ifyllda ¦ Åbner søgningen i browseren med navn og år allerede udfyldt
+Chercher un site… (Italie, presse, Justes…) ¦ Hledat web… (Itálie, tisk, Spravedliví…) ¦ Sök en webbplats… (Italien, press, Rättfärdiga…) ¦ Søg et websted… (Italien, presse, Retfærdige…)
+{x} sur {n} ¦ {x} z {n} ¦ {x} av {n} ¦ {x} af {n}
+Archives : {nm} ¦ Archivy: {nm} ¦ Arkiv: {nm} ¦ Arkiver: {nm}
+vol. {nm} p. {x2} ¦ sv. {nm} s. {x2} ¦ vol. {nm} s. {x2} ¦ bd. {nm} s. {x2}
+France — prisonniers de la Grande Guerre ¦ Francie — zajatci první světové války ¦ Frankrike — krigsfångar under första världskriget ¦ Frankrig — krigsfanger under Første Verdenskrig
+France — députés et sénateurs ¦ Francie — poslanci a senátoři ¦ Frankrike — parlamentsledamöter och senatorer ¦ Frankrig — parlamentsmedlemmer og senatorer
+France — inventeurs, médecins, polytechniciens, savants ¦ Francie — vynálezci, lékaři, absolventi Polytechniky, učenci ¦ Frankrike — uppfinnare, läkare, polytekniker, lärda ¦ Frankrig — opfindere, læger, polyteknikere, lærde
+France — musées et livres d’histoire locale ¦ Francie — muzea a knihy o místní historii ¦ Frankrike — museer och lokalhistoriska böcker ¦ Frankrig — museer og lokalhistoriske bøger
+Mémoire de la Shoah et des persécutions ¦ Památka šoa a perzekucí ¦ Minnet av Förintelsen och förföljelserna ¦ Mindet om Holocaust og forfølgelserne
+Prisonniers de la Grande Guerre (CICR) ¦ Zajatci první světové války (MVČK) ¦ Krigsfångar under första världskriget (ICRC) ¦ Krigsfanger under Første Verdenskrig (ICRC)
+La page de recherche existe (vue en anglais : /en/File/Search) ; le nom ne passe pas dans l’adresse : il est copié, colle-le dans la case. ¦ Stránka hledání existuje (v angličtině: /en/File/Search); jméno se do adresy nepředává: zkopíruje se, vlož ho do pole. ¦ Söksidan finns (sedd på engelska: /en/File/Search); namnet följer inte med i adressen: det kopieras, klistra in det i rutan. ¦ Søgesiden findes (set på engelsk: /en/File/Search); navnet kommer ikke med i adressen: det kopieres, indsæt det i feltet.
+Sycomore — anciens députés (Assemblée nationale) ¦ Sycomore — bývalí poslanci (Národní shromáždění) ¦ Sycomore — tidigare parlamentsledamöter (nationalförsamlingen) ¦ Sycomore — tidligere parlamentsmedlemmer (nationalforsamlingen)
+Fiches « /sycomore/fiche/… » et liste alphabétique vues ; la recherche passe par Google limité à la base. ¦ Záznamy „/sycomore/fiche/…“ a abecední seznam ověřeny; hledá se přes Google omezený na databázi. ¦ Poster ”/sycomore/fiche/…” och alfabetisk lista har setts; sökningen görs via Google begränsat till databasen. ¦ Poster »/sycomore/fiche/…« og alfabetisk liste er set; søgningen sker via Google begrænset til databasen.
+Anciens sénateurs (Sénat, IIIe à Ve République) ¦ Bývalí senátoři (Senát, III. až V. republika) ¦ Tidigare senatorer (senaten, tredje till femte republiken) ¦ Tidligere senatorer (senatet, Tredje til Femte Republik)
+sénateur ¦ senátor ¦ senator ¦ senator
+Brevets d’invention 1791-1902 (INPI) ¦ Patenty 1791–1902 (INPI) ¦ Patent 1791–1902 (INPI) ¦ Patenter 1791–1902 (INPI)
+Base des brevets du XIXe siècle (≈ 400 000 dossiers) ; l’INPI l’annonce aussi sur data.inpi.fr. Adresse à confirmer. ¦ Databáze patentů 19. století (≈ 400 000 spisů); INPI ji ohlašuje i na data.inpi.fr. Adresa k potvrzení. ¦ Databas över 1800-talets patent (≈ 400 000 akter); INPI anger den också på data.inpi.fr. Adressen ska bekräftas. ¦ Database over 1800-tallets patenter (≈ 400.000 sager); INPI nævner den også på data.inpi.fr. Adressen skal bekræftes.
+Thèses de médecine (Sudoc + BIU Santé) ¦ Lékařské disertace (Sudoc + BIU Santé) ¦ Medicinska avhandlingar (Sudoc + BIU Santé) ¦ Medicinske afhandlinger (Sudoc + BIU Santé)
+Recherche par auteur dans le Sudoc (catalogue des bibliothèques universitaires) ; les thèses anciennes de Paris sont à la BIU Santé. ¦ Hledání podle autora v Sudoc (katalog univerzitních knihoven); staré pařížské disertace jsou v BIU Santé. ¦ Sökning efter författare i Sudoc (universitetsbibliotekens katalog); gamla avhandlingar från Paris finns på BIU Santé. ¦ Søgning efter forfatter i Sudoc (universitetsbibliotekernes katalog); gamle afhandlinger fra Paris findes på BIU Santé.
+Base biographique des médecins (BIU Santé) ¦ Biografická databáze lékařů (BIU Santé) ¦ Biografisk databas över läkare (BIU Santé) ¦ Biografisk database over læger (BIU Santé)
+Registres de l’École polytechnique (« famille polytechnicienne ») ¦ Matriky École polytechnique („polytechnická rodina“) ¦ École polytechniques register (”polyteknikerfamiljen”) ¦ École polytechniques registre (»polyteknikerfamilien«)
+≈ 50 000 fiches matricules d’élèves ; la base des anciens élèves change souvent d’adresse : recherche Google sur le site. ¦ ≈ 50 000 matričních karet studentů; databáze absolventů často mění adresu: hledání Googlem na webu. ¦ ≈ 50 000 elevkort; alumnidatabasen byter ofta adress: Googlesökning på webbplatsen. ¦ ≈ 50.000 elevkort; alumnedatabasen skifter ofte adresse: Google-søgning på webstedet.
+Annuaire prosopographique « La France savante » (CTHS) ¦ Prosopografický adresář „La France savante“ (CTHS) ¦ Prosopografisk katalog ”La France savante” (CTHS) ¦ Prosopografisk fortegnelse »La France savante« (CTHS)
+Les fiches « cths.fr/an/savant.php?id=… » existent ; la recherche passe par Google limité à l’annuaire. ¦ Záznamy „cths.fr/an/savant.php?id=…“ existují; hledá se přes Google omezený na adresář. ¦ Posterna ”cths.fr/an/savant.php?id=…” finns; sökningen görs via Google begränsat till katalogen. ¦ Posterne »cths.fr/an/savant.php?id=…« findes; søgningen sker via Google begrænset til fortegnelsen.
+Archives de Paris — état civil reconstitué (avant 1860) ¦ Pařížský archiv — rekonstruované matriky (před 1860) ¦ Paris arkiv — rekonstruerad folkbokföring (före 1860) ¦ Paris' arkiv — rekonstrueret civilregistrering (før 1860)
+Fichiers alphabétiques de l’état civil reconstitué après l’incendie de 1871 : on cherche par nom, puis on tourne les pages. ¦ Abecední kartotéky matrik rekonstruovaných po požáru v roce 1871: hledá se podle jména, pak se listuje stránkami. ¦ Alfabetiska kortregister över folkbokföringen som rekonstruerades efter branden 1871: man söker efter namn och bläddrar sedan i sidorna. ¦ Alfabetiske kartoteker over civilregistreringen, der blev rekonstrueret efter branden i 1871: man søger efter navn og bladrer så i siderne.
+Archives de Paris — listes électorales (1860-1932) ¦ Pařížský archiv — seznamy voličů (1860–1932) ¦ Paris arkiv — röstlängder (1860–1932) ¦ Paris' arkiv — valglister (1860–1932)
+Joconde — collections des musées de France (POP) ¦ Joconde — sbírky francouzských muzeí (POP) ¦ Joconde — de franska museernas samlingar (POP) ¦ Joconde — de franske museers samlinger (POP)
+« search/list?base=[…Joconde…] » vu dans le guide du ministère ; le paramètre du texte cherché (mainSearch) n’est pas confirmé. ¦ „search/list?base=[…Joconde…]“ v příručce ministerstva; parametr hledaného textu (mainSearch) není potvrzen. ¦ ”search/list?base=[…Joconde…]” har setts i ministeriets guide; parametern för söktexten (mainSearch) är inte bekräftad. ¦ »search/list?base=[…Joconde…]« set i ministeriets vejledning; parameteren for søgeteksten (mainSearch) er ikke bekræftet.
+Internet Archive — livres d’histoire locale ¦ Internet Archive — knihy o místní historii ¦ Internet Archive — lokalhistoriska böcker ¦ Internet Archive — lokalhistoriske bøger
+Persée — revues savantes (histoire locale) ¦ Persée — odborné časopisy (místní historie) ¦ Persée — vetenskapliga tidskrifter (lokalhistoria) ¦ Persée — videnskabelige tidsskrifter (lokalhistorie)
+La page « Cerca per nome » (?type=name) est confirmée ; les noms des paramètres (cognome, nome) ne le sont pas. ¦ Stránka „Cerca per nome“ (?type=name) je potvrzena; názvy parametrů (cognome, nome) nikoli. ¦ Sidan ”Cerca per nome” (?type=name) är bekräftad; parametrarnas namn (cognome, nome) är det inte. ¦ Siden »Cerca per nome« (?type=name) er bekræftet; parameternavnene (cognome, nome) er ikke.
+PARES — archives d’État espagnoles (et émigration) ¦ PARES — španělské státní archivy (a vystěhovalectví) ¦ PARES — spanska statsarkiv (och emigration) ¦ PARES — spanske statsarkiver (og udvandring)
+Adresse du portail confirmée (pares.cultura.gob.es) ; la recherche simple garde le texte dans un formulaire : il est copié. ¦ Adresa portálu potvrzena (pares.cultura.gob.es); jednoduché hledání drží text ve formuláři: zkopíruje se. ¦ Portalens adress bekräftad (pares.cultura.gob.es); den enkla sökningen håller texten i ett formulär: den kopieras. ¦ Portalens adresse bekræftet (pares.cultura.gob.es); den enkle søgning holder teksten i en formular: den kopieres.
+Arolsen Archives — persécutions nazies (fiches et documents) ¦ Arolsen Archives — nacistické perzekuce (karty a dokumenty) ¦ Arolsen Archives — nazistiska förföljelser (kort och dokument) ¦ Arolsen Archives — nazistiske forfølgelser (kort og dokumenter)
+Forme « /search?s=… » déjà utilisée par l’app (en anglais) ; ici en français. ¦ Tvar „/search?s=…“ už aplikace používá (anglicky); zde francouzsky. ¦ Formen ”/search?s=…” används redan av appen (på engelska); här på franska. ¦ Formen »/search?s=…« bruges allerede af appen (på engelsk); her på fransk.
+Open Archives — Pays-Bas et Flandre (données ouvertes) ¦ Open Archives — Nizozemsko a Flandry (otevřená data) ¦ Open Archives — Nederländerna och Flandern (öppna data) ¦ Open Archives — Nederlandene og Flandern (åbne data)
+L’API publique (api.openarchieven.nl/1.1/records/search.json?name=…) est documentée ; la page de recherche prend les mêmes paramètres. ¦ Veřejné API (api.openarchieven.nl/1.1/records/search.json?name=…) je zdokumentované; stránka hledání přijímá stejné parametry. ¦ Det öppna API:et (api.openarchieven.nl/1.1/records/search.json?name=…) är dokumenterat; söksidan tar samma parametrar. ¦ Det offentlige API (api.openarchieven.nl/1.1/records/search.json?name=…) er dokumenteret; søgesiden tager de samme parametre.
+Geneteka — index des actes (Pologne) ¦ Geneteka — rejstřík záznamů (Polsko) ¦ Geneteka — register över handlingar (Polen) ¦ Geneteka — register over kirkebogsindførsler (Polen)
+Paramètres op=gt, search_lastname, search_name vus dans des liens publics ; « bdm » (B naissances, S mariages, D décès) et la région « w » non confirmés. ¦ Parametry op=gt, search_lastname, search_name viděny ve veřejných odkazech; „bdm“ (B narození, S sňatky, D úmrtí) a region „w“ nepotvrzeny. ¦ Parametrarna op=gt, search_lastname, search_name har setts i offentliga länkar; ”bdm” (B födslar, S vigslar, D dödsfall) och regionen ”w” är inte bekräftade. ¦ Parametrene op=gt, search_lastname, search_name er set i offentlige links; »bdm« (B fødsler, S vielser, D dødsfald) og regionen »w« er ikke bekræftet.
+FreeBMD — naissances, mariages, décès (Angleterre et Galles, 1837 →) ¦ FreeBMD — narození, sňatky, úmrtí (Anglie a Wales, 1837 →) ¦ FreeBMD — födslar, vigslar, dödsfall (England och Wales, 1837 →) ¦ FreeBMD — fødsler, vielser, dødsfald (England og Wales, 1837 →)
+Page d’aide et formulaire confirmés (champs Surname / Given name) ; la recherche se fait par formulaire : le nom est copié. ¦ Stránka nápovědy a formulář potvrzeny (pole Surname / Given name); hledá se formulářem: jméno se zkopíruje. ¦ Hjälpsida och formulär bekräftade (fälten Surname / Given name); sökningen görs med formulär: namnet kopieras. ¦ Hjælpeside og formular bekræftet (felterne Surname / Given name); søgningen sker via formular: navnet kopieres.
+BAnQ — Archives nationales du Québec (Advitam) ¦ BAnQ — Národní archiv Québecu (Advitam) ¦ BAnQ — Quebecs nationalarkiv (Advitam) ¦ BAnQ — Québecs nationalarkiv (Advitam)
+Bibliothèque et Archives Canada — généalogie ¦ Knihovna a archiv Kanady — genealogie ¦ Library and Archives Canada — släktforskning ¦ Library and Archives Canada — slægtsforskning
+« /eng/Home/Search?q=… » vu ; la version française et le filtre DataSource=Genealogy ne sont pas confirmés. ¦ „/eng/Home/Search?q=…“ ověřeno; francouzská verze a filtr DataSource=Genealogy nejsou potvrzeny. ¦ ”/eng/Home/Search?q=…” har setts; den franska versionen och filtret DataSource=Genealogy är inte bekräftade. ¦ »/eng/Home/Search?q=…« set; den franske version og filteret DataSource=Genealogy er ikke bekræftet.
+NARA — Archives nationales des États-Unis ¦ NARA — Národní archiv USA ¦ NARA — USA:s nationalarkiv ¦ NARA — USA's nationalarkiv
+Le catalogue et sa recherche avancée sont confirmés ; la forme « /search?q=… » ne l’est pas. ¦ Katalog a jeho rozšířené hledání jsou potvrzeny; tvar „/search?q=…“ nikoli. ¦ Katalogen och dess avancerade sökning är bekräftade; formen ”/search?q=…” är det inte. ¦ Kataloget og dets avancerede søgning er bekræftet; formen »/search?q=…« er ikke.
+Yad Vashem — Justes parmi les nations ¦ Jad vašem — Spravedliví mezi národy ¦ Yad Vashem — Rättfärdiga bland folken ¦ Yad Vashem — Retfærdige blandt folkene
+Paramètres search, searchType=righteous_only et language vus dans un lien public. ¦ Parametry search, searchType=righteous_only a language viděny ve veřejném odkazu. ¦ Parametrarna search, searchType=righteous_only och language har setts i en offentlig länk. ¦ Parametrene search, searchType=righteous_only og language er set i et offentligt link.
+Personne principale ¦ Hlavní osoba ¦ Huvudperson ¦ Hovedperson
+Mariée ¦ Nevěsta ¦ Brud ¦ Brud
+Marié ¦ Ženich ¦ Brudgum ¦ Brudgom
+Défunt ¦ Zesnulý ¦ Avliden ¦ Afdød
+Baptisé ¦ Pokřtěný ¦ Döpt ¦ Døbt
+Ce fichier JSON est abîmé : enregistre de nouveau la page de résultats. ¦ Tento soubor JSON je poškozený: ulož stránku výsledků znovu. ¦ JSON-filen är skadad: spara resultatsidan igen. ¦ JSON-filen er beskadiget: gem resultatsiden igen.
+Ce fichier ne contient pas de lignes de résultats. ¦ Tento soubor neobsahuje řádky s výsledky. ¦ Filen innehåller inga resultatrader. ¦ Filen indeholder ingen resultatrækker.
+Je ne trouve pas la colonne du nom (« Naam », « Name » ou « Nom »). ¦ Nenacházím sloupec se jménem („Naam“, „Name“ nebo „Nom“). ¦ Jag hittar inte namnkolumnen (”Naam”, ”Name” eller ”Nom”). ¦ Jeg kan ikke finde navnekolonnen (»Naam«, »Name« eller »Nom«).
+4e trimestre (octobre-décembre) ¦ 4. čtvrtletí (říjen–prosinec) ¦ 4:e kvartalet (oktober–december) ¦ 4. kvartal (oktober–december)
+Déclaré au ¦ Ohlášeno v ¦ Registrerad i ¦ Registreret i
+Je ne reconnais pas une page de résultats FreeBMD (titres « Births Mar 1872 », puis les lignes). ¦ Nepoznávám stránku výsledků FreeBMD (nadpisy „Births Mar 1872“, pak řádky). ¦ Jag känner inte igen en resultatsida från FreeBMD (rubriker ”Births Mar 1872”, sedan raderna). ¦ Jeg genkender ikke en resultatside fra FreeBMD (overskrifter »Births Mar 1872«, derefter rækkerne).
+Fiche de prisonnier (CICR) ¦ Karta zajatce (MVČK) ¦ Fångkort (ICRC) ¦ Fangekort (ICRC)
+Fiche d’élu ¦ Karta voleného zástupce ¦ Post för förtroendevald ¦ Post for folkevalgt
+Brevet d’invention ¦ Patent ¦ Patent ¦ Patent
+Thèse de médecine ¦ Lékařská disertace ¦ Medicinsk avhandling ¦ Medicinsk afhandling
+Registre de l’École polytechnique ¦ Matrika École polytechnique ¦ École polytechniques register ¦ École polytechniques register
+Annuaire des sociétés savantes (CTHS) ¦ Adresář učených společností (CTHS) ¦ Katalog över lärda sällskap (CTHS) ¦ Fortegnelse over lærde selskaber (CTHS)
+Œuvre d’un musée (Joconde) ¦ Muzejní dílo (Joconde) ¦ Museiverk (Joconde) ¦ Museumsværk (Joconde)
+Juste parmi les nations (Yad Vashem) ¦ Spravedlivý mezi národy (Jad vašem) ¦ Rättfärdig bland folken (Yad Vashem) ¦ Retfærdig blandt folkene (Yad Vashem)
+Document des Arolsen Archives ¦ Dokument z Arolsen Archives ¦ Dokument från Arolsen Archives ¦ Dokument fra Arolsen Archives
+Acte d’état civil ou paroissial ¦ Matriční nebo farní záznam ¦ Folkbokförings- eller kyrkobokshandling ¦ Civilregistrerings- eller kirkebogsindførsel
+Liste électorale ¦ Seznam voličů ¦ Röstlängd ¦ Valgliste
+Livre ou article ¦ Kniha nebo článek ¦ Bok eller artikel ¦ Bog eller artikel
+Unité : {nm} ¦ Jednotka: {nm} ¦ Förband: {nm} ¦ Enhed: {nm}
+Profil « politique » ¦ Profil „politik“ ¦ Profilen ”politiker” ¦ Profilen »politiker«
+Durée : {nm} ¦ Trvání: {nm} ¦ Varaktighet: {nm} ¦ Varighed: {nm}
+D’après le brevet ¦ Podle patentu ¦ Enligt patentet ¦ Ifølge patentet
+Doctorat en médecine (thèse) ¦ Doktorát z medicíny (disertace) ¦ Doktorsexamen i medicin (avhandling) ¦ Doktorgrad i medicin (afhandling)
+École polytechnique ¦ École polytechnique ¦ École polytechnique ¦ École polytechnique
+Membre de sociétés savantes : {nm} ¦ Člen učených společností: {nm} ¦ Ledamot av lärda sällskap: {nm} ¦ Medlem af lærde selskaber: {nm}
+Âge : {nm} ¦ Věk: {nm} ¦ Ålder: {nm} ¦ Alder: {nm}
+Né à ¦ Narozen v ¦ Född i ¦ Født i
+Juste parmi les nations ¦ Spravedlivý mezi národy ¦ Rättfärdig bland folken ¦ Retfærdig blandt folkene
+Domicile (liste électorale) ¦ Bydliště (seznam voličů) ¦ Bostad (röstlängd) ¦ Bopæl (valgliste)
+Père : {nm} ¦ Otec: {nm} ¦ Far: {nm} ¦ Far: {nm}
+Mère : {nm} ¦ Matka: {nm} ¦ Mor: {nm} ¦ Mor: {nm}
+Grade : {nm} ¦ Hodnost: {nm} ¦ Grad: {nm} ¦ Grad: {nm}
+Camp : {nm} ¦ Tábor: {nm} ¦ Läger: {nm} ¦ Lejr: {nm}
+Prisonnier, camp : {nm} ¦ Zajatec, tábor: {nm} ¦ Fånge, läger: {nm} ¦ Fange, lejr: {nm}
+Adresse : {nm} ¦ Adresa: {nm} ¦ Adress: {nm} ¦ Adresse: {nm}
+Sortie : {nm} ¦ Absolvování: {nm} ¦ Examen: {nm} ¦ Dimission: {nm}
+Emplacement : {nm} ¦ Místo: {nm} ¦ Gravplats: {nm} ¦ Gravsted: {nm}
+Find a Grave n° {nm} ¦ Find a Grave č. {nm} ¦ Find a Grave nr {nm} ¦ Find a Grave nr. {nm}
+Lien : {nm} ¦ Vztah: {nm} ¦ Relation: {nm} ¦ Relation: {nm}
+Profession : {nm} ¦ Povolání: {nm} ¦ Yrke: {nm} ¦ Erhverv: {nm}
+Pays : {nm} ¦ Země: {nm} ¦ Land: {nm} ¦ Land: {nm}
+Dossier : {nm} ¦ Spis: {nm} ¦ Akt: {nm} ¦ Sag: {nm}
+Conjoint : {nm} ¦ Manžel(ka): {nm} ¦ Make/maka: {nm} ¦ Ægtefælle: {nm}
+Cote : {nm} ¦ Signatura: {nm} ¦ Signum: {nm} ¦ Signatur: {nm}
+=année ¦ rok|roky|let ¦ år|år ¦ år|år
+=année déjà là gardée ¦ už existující rok ponechán|už existující roky ponechány|už existujících let ponecháno ¦ år som redan fanns behållet|år som redan fanns behållna ¦ år, der allerede fandtes, beholdt|år, der allerede fandtes, beholdt
+=année de population ¦ rok s počtem obyvatel|roky s počtem obyvatel|let s počtem obyvatel ¦ befolkningsår|befolkningsår ¦ befolkningsår|befolkningsår
+=ancien nom ¦ dřívější název|dřívější názvy|dřívějších názvů ¦ tidigare namn|tidigare namn ¦ tidligere navn|tidligere navne
+Les monuments aux morts relevés par les bénévoles de MémorialGenWeb (noms, photos du monument, souvent une biographie), les morts de la guerre de 1870-1871 et les victimes civiles de 1939-1945. Les sites ne gardent pas la recherche dans leur adresse : la recherche passe par Google, limitée au site. ¦ Pomníky padlým zaznamenané dobrovolníky MémorialGenWeb (jména, fotografie pomníku, často životopis), padlí ve válce 1870–1871 a civilní oběti 1939–1945. Weby neukládají hledání do adresy: hledá se přes Google omezený na web. ¦ Krigsmonument registrerade av frivilliga i MémorialGenWeb (namn, foton av monumentet, ofta en biografi), de döda i kriget 1870–1871 och de civila offren 1939–1945. Webbplatserna sparar inte sökningen i adressen: sökningen görs via Google begränsat till webbplatsen. ¦ Mindesmærker for faldne registreret af frivillige i MémorialGenWeb (navne, fotos af mindesmærket, ofte en biografi), de døde i krigen 1870–1871 og de civile ofre 1939–1945. Webstederne gemmer ikke søgningen i adressen: søgningen sker via Google begrænset til webstedet.
+Les tombes photographiées et relevées par des bénévoles : Cimetières de France, BillionGraves (avec la position GPS), les relevés de Geneanet (Find a Grave est avec les archives américaines). La photo de la tombe se range dans le bloc Cimetière. ¦ Hroby vyfotografované a zaznamenané dobrovolníky: Cimetières de France, BillionGraves (s polohou GPS), záznamy Geneanet (Find a Grave je mezi americkými archivy). Fotografie hrobu se ukládá do bloku Hřbitov. ¦ Gravar fotograferade och registrerade av frivilliga: Cimetières de France, BillionGraves (med GPS-position), Geneanets registreringar (Find a Grave finns bland de amerikanska arkiven). Fotot av graven läggs i blocket Kyrkogård. ¦ Grave fotograferet og registreret af frivillige: Cimetières de France, BillionGraves (med GPS-position), Geneanets registreringer (Find a Grave er blandt de amerikanske arkiver). Fotoet af graven lægges i blokken Kirkegård.
+La commune (population depuis 1793 et anciens noms, EHESS) et le nom de famille (où il vivait entre 1891 et 1990, Géopatronyme). ¦ Obec (počet obyvatel od roku 1793 a dřívější názvy, EHESS) a příjmení (kde se vyskytovalo v letech 1891–1990, Géopatronyme). ¦ Kommunen (befolkning sedan 1793 och tidigare namn, EHESS) och efternamnet (var det fanns mellan 1891 och 1990, Géopatronyme). ¦ Kommunen (befolkning siden 1793 og tidligere navne, EHESS) og efternavnet (hvor det fandtes mellem 1891 og 1990, Géopatronyme).
+Les protestants partis après la révocation de l’édit de Nantes (1685), et les marins de la marine marchande (rôles d’équipage, rangés par port aux Archives départementales et au Service historique de la Défense). ¦ Protestanti, kteří odešli po zrušení ediktu nantského (1685), a námořníci obchodního loďstva (seznamy posádek, řazené podle přístavů v departementních archivech a v Historické službě ministerstva obrany). ¦ Protestanterna som lämnade landet efter upphävandet av ediktet i Nantes (1685), och handelsflottans sjömän (besättningslistor, ordnade efter hamn i departementsarkiven och Försvarets historiska tjänst). ¦ Protestanterne, der rejste efter ophævelsen af Nantes-ediktet (1685), og handelsflådens sømænd (mandskabslister, ordnet efter havn i departementsarkiverne og Forsvarets historiske tjeneste).
+Les registres d’Europe, gratuits : Matricula (paroisses d’Allemagne, d’Autriche, de Pologne… — on cherche par lieu), Norvège, Suède, Danemark, Irlande, Porta fontium (Bohême, Bavière), Hongrie, JewishGen (gratuit avec un compte). ¦ Evropské matriky zdarma: Matricula (farnosti v Německu, Rakousku, Polsku… — hledá se podle místa), Norsko, Švédsko, Dánsko, Irsko, Porta fontium (Čechy, Bavorsko), Maďarsko, JewishGen (zdarma s účtem). ¦ Europas kyrkböcker, gratis: Matricula (församlingar i Tyskland, Österrike, Polen… — man söker efter plats), Norge, Sverige, Danmark, Irland, Porta fontium (Böhmen, Bayern), Ungern, JewishGen (gratis med ett konto). ¦ Europas kirkebøger, gratis: Matricula (sogne i Tyskland, Østrig, Polen… — man søger efter sted), Norge, Sverige, Danmark, Irland, Porta fontium (Bøhmen, Bayern), Ungarn, JewishGen (gratis med en konto).
+Les journaux étrangers numérisés et gratuits : États-Unis, Australie, Nouvelle-Zélande, Pays-Bas. Un article trouvé entre dans « 📰 Dans les médias », comme un article de Gallica. ¦ Digitalizované zahraniční noviny zdarma: USA, Austrálie, Nový Zéland, Nizozemsko. Nalezený článek se uloží do „📰 V médiích“ jako článek z Gallica. ¦ Digitaliserade utländska tidningar, gratis: USA, Australien, Nya Zeeland, Nederländerna. En hittad artikel läggs i ”📰 I medierna”, som en artikel från Gallica. ¦ Digitaliserede udenlandske aviser, gratis: USA, Australien, New Zealand, Nederlandene. En fundet artikel lægges i »📰 I medierne«, som en artikel fra Gallica.
+🎖 Monument aux morts ¦ 🎖 Pomník padlým ¦ 🎖 Krigsmonument ¦ 🎖 Mindesmærke for faldne
+🌍 Journal étranger ¦ 🌍 Zahraniční noviny ¦ 🌍 Utländsk tidning ¦ 🌍 Udenlandsk avis
+Lu : « {nm} » — choisis le lieu (ou crée-le). ¦ Přečteno: „{nm}“ — vyber místo (nebo ho vytvoř). ¦ Läst: ”{nm}” — välj platsen (eller skapa den). ¦ Læst: »{nm}« — vælg stedet (eller opret det).
+tué à l’ennemi, bombardement… ¦ padl v boji, bombardování… ¦ stupad i strid, bombning… ¦ dræbt i kamp, bombning…
+Biographie (gardée dans la source) ¦ Životopis (uložen v pramenu) ¦ Biografi (sparas i källan) ¦ Biografi (gemmes i kilden)
+cimetière du Puy-Saint-Clair ¦ hřbitov Puy-Saint-Clair ¦ Puy-Saint-Clair-kyrkogården ¦ Puy-Saint-Clair-kirkegården
+Emplacement (carré, allée…) ¦ Místo (oddělení, alej…) ¦ Plats (kvarter, gång…) ¦ Placering (afdeling, gang…)
+Date de décès (sur la tombe) ¦ Datum úmrtí (na hrobu) ¦ Dödsdatum (på graven) ¦ Dødsdato (på graven)
+Inscription de la tombe ¦ Nápis na hrobě ¦ Gravinskrift ¦ Gravskrift
+Lieu (paroisse, commune) ¦ Místo (farnost, obec) ¦ Plats (församling, kommun) ¦ Sted (sogn, kommune)
+Profession, rôle ¦ Povolání, role ¦ Yrke, roll ¦ Erhverv, rolle
+Navire (rôle d’équipage) ¦ Loď (seznam posádky) ¦ Fartyg (besättningslista) ¦ Skib (mandskabsliste)
+Ajouter le décès — la fiche a déjà un décès ({nm}) : il est gardé ¦ Přidat úmrtí — karta už úmrtí má ({nm}): ponechá se ¦ Lägg till döden — posten har redan en död ({nm}): den behålls ¦ Tilføj dødsfaldet — posten har allerede et dødsfald ({nm}): det beholdes
+Ajouter le décès ¦ Přidat úmrtí ¦ Lägg till döden ¦ Tilføj dødsfaldet
+Cocher « Mort pour la France » — déjà coché ¦ Zaškrtnout „Padl za Francii“ — už zaškrtnuto ¦ Kryssa i ”Död för Frankrike” — redan ikryssad ¦ Markér »Faldet for Frankrig« — allerede markeret
+Cocher « Mort pour la France » — la fiche dit « non » : change-la toi-même ¦ Zaškrtnout „Padl za Francii“ — karta říká „ne“: změň ji sám ¦ Kryssa i ”Död för Frankrike” — posten säger ”nej”: ändra den själv ¦ Markér »Faldet for Frankrig« — posten siger »nej«: ret den selv
+Cocher « Mort pour la France » sur la fiche (si le monument le dit) ¦ Zaškrtnout na kartě „Padl za Francii“ (pokud to uvádí pomník) ¦ Kryssa i ”Död för Frankrike” i posten (om monumentet säger det) ¦ Markér »Faldet for Frankrig« i posten (hvis mindesmærket siger det)
+Ajouter son unité au bloc « Poilu 14-18 » (guerre de 1914-1918, si elle n’y est pas) ¦ Přidat jeho jednotku do bloku „Voják 1914–18“ (válka 1914–1918, pokud tam není) ¦ Lägg till hans förband i blocket ”Soldat 1914–18” (kriget 1914–1918, om det inte finns där) ¦ Tilføj hans enhed til blokken »Soldat 1914–18« (krigen 1914–1918, hvis den ikke er der)
+La fiche a déjà une sépulture ({nm}) : la photo s’ajoute à ses « Photos datées », ses cases ne changent pas. ¦ Karta už má hrob ({nm}): fotografie se přidá k jeho „Datovaným fotografiím“, jeho pole se nezmění. ¦ Posten har redan en grav ({nm}): fotot läggs till dess ”Daterade foton”, dess fält ändras inte. ¦ Posten har allerede en grav ({nm}): fotoet føjes til dens »Daterede fotos«, dens felter ændres ikke.
+cimetière ¦ hřbitov ¦ kyrkogård ¦ kirkegård
+Créer la sépulture (bloc Cimetière) avec le cimetière, la commune, l’emplacement et la position ¦ Vytvořit hrob (blok Hřbitov) se hřbitovem, obcí, místem a polohou ¦ Skapa graven (blocket Kyrkogård) med kyrkogården, kommunen, platsen och positionen ¦ Opret graven (blokken Kirkegård) med kirkegården, kommunen, placeringen og positionen
+Ajouter l’inhumation — la fiche en a déjà une ({nm}) : elle est gardée ¦ Přidat pohřeb — karta už ho má ({nm}): ponechá se ¦ Lägg till begravningen — posten har redan en ({nm}): den behålls ¦ Tilføj begravelsen — posten har allerede en ({nm}): den beholdes
+Ajouter l’inhumation dans cette commune ¦ Přidat pohřeb v této obci ¦ Lägg till begravningen i denna kommun ¦ Tilføj begravelsen i denne kommune
+Ajouter l’événement « {nm} » — la fiche en a déjà un ({x2}) : il est gardé ¦ Přidat událost „{nm}“ — karta už ji má ({x2}): ponechá se ¦ Lägg till händelsen ”{nm}” — posten har redan en ({x2}): den behålls ¦ Tilføj begivenheden »{nm}« — posten har allerede en ({x2}): den beholdes
+Ajouter l’événement « {nm} » (avec la date et le lieu) ¦ Přidat událost „{nm}“ (s datem a místem) ¦ Lägg till händelsen ”{nm}” (med datum och plats) ¦ Tilføj begivenheden »{nm}« (med dato og sted)
+Rien de la fiche n’est remplacé : un événement ou une sépulture déjà là est gardé, et « ↶ Annuler » retire tout ce que l’import a ajouté. ¦ Na kartě se nic nenahradí: událost nebo hrob, který už existuje, se ponechá, a „↶ Vrátit zpět“ odebere vše, co import přidal. ¦ Inget i posten ersätts: en händelse eller grav som redan finns behålls, och ”↶ Ångra” tar bort allt som importen lade till. ¦ Intet i posten erstattes: en begivenhed eller grav, der allerede findes, beholdes, og »↶ Fortryd« fjerner alt, hvad importen tilføjede.
+Lien vers la fiche, la tombe ou l’article ¦ Odkaz na záznam, hrob nebo článek ¦ Länk till posten, graven eller artikeln ¦ Link til posten, graven eller artiklen
+la fiche d’un soldat ou la photo d’un monument ¦ záznam vojáka nebo fotografii pomníku ¦ en soldats post eller ett foto av ett monument ¦ en soldats post eller et foto af et mindesmærke
+la photo d’une tombe ¦ fotografii hrobu ¦ ett foto av en grav ¦ et foto af en grav
+Ce que tu as téléchargé ou enregistré : {nm} en image ou en PDF, la page enregistrée par ton navigateur (« Enregistrer sous… »), ou un texte copié. Rien n’est demandé au site : seul ton fichier est lu. Pas de fichier ? « 🔗 Coller un lien » dans la fenêtre de recherche. ¦ Co jsi stáhl nebo uložil: {nm} jako obrázek nebo PDF, stránku uloženou prohlížečem („Uložit jako…“) nebo zkopírovaný text. Od webu se nic nepožaduje: čte se jen tvůj soubor. Nemáš soubor? „🔗 Vložit odkaz“ v okně hledání. ¦ Det du har laddat ner eller sparat: {nm} som bild eller PDF, sidan sparad av din webbläsare (”Spara som…”) eller kopierad text. Inget hämtas från webbplatsen: bara din fil läses. Ingen fil? ”🔗 Klistra in en länk” i sökfönstret. ¦ Det, du har downloadet eller gemt: {nm} som billede eller PDF, siden gemt af din browser (»Gem som…«) eller kopieret tekst. Intet hentes fra webstedet: kun din fil læses. Ingen fil? »🔗 Indsæt et link« i søgevinduet.
+Aucun ancien nom connu pour cette commune. ¦ Pro tuto obec není znám žádný dřívější název. ¦ Inget tidigare namn känt för kommunen. ¦ Intet tidligere navn kendt for kommunen.
+Aucun ancien nom saisi. Les frontières anciennes de l’INSEE ne sont pas installées (Réglages → « 🏛 Frontières anciennes »). ¦ Není zadán žádný dřívější název. Historické hranice INSEE nejsou nainstalovány (Nastavení → „🏛 Historické hranice“). ¦ Inget tidigare namn inskrivet. INSEE:s historiska gränser är inte installerade (Inställningar → ”🏛 Historiska gränser”). ¦ Intet tidligere navn indtastet. INSEE's historiske grænser er ikke installeret (Indstillinger → »🏛 Historiske grænser«).
+Code officiel géographique (frontières anciennes de l’app) ¦ Úřední geografický kód (historické hranice aplikace) ¦ Officiell geografisk kod (appens historiska gränser) ¦ Officiel geografisk kode (appens historiske grænser)
+Lu sur le site de l’EHESS ou saisi ¦ Přečteno na webu EHESS nebo zadáno ¦ Läst på EHESS webbplats eller inskrivet ¦ Læst på EHESS' websted eller indtastet
+COMMUNE · CASSINI (EHESS) ET INSEE ¦ OBEC · CASSINI (EHESS) A INSEE ¦ KOMMUN · CASSINI (EHESS) OCH INSEE ¦ KOMMUNE · CASSINI (EHESS) OG INSEE
+🏘 Population et anciens noms ¦ 🏘 Počet obyvatel a dřívější názvy ¦ 🏘 Befolkning och tidigare namn ¦ 🏘 Befolkning og tidligere navne
+Ce que la base sait de la commune… ¦ Co databáze ví o obci… ¦ Vad databasen vet om kommunen… ¦ Hvad databasen ved om kommunen…
+↗ Ouvrir la commune sur le site de l’EHESS ¦ ↗ Otevřít obec na webu EHESS ¦ ↗ Öppna kommunen på EHESS webbplats ¦ ↗ Åbn kommunen på EHESS' websted
+⤒ Importer le tableau… ¦ ⤒ Importovat tabulku… ¦ ⤒ Importera tabellen… ¦ ⤒ Importér tabellen…
+✎ Recopier à la main ¦ ✎ Opsat ručně ¦ ✎ Skriv av för hand ¦ ✎ Skriv af manuelt
+Une année par ligne : « 1793 : 512 », « 1806 1 203 » ; un ancien nom : « 1793 : Montagne-sur-Loire » ¦ Jeden rok na řádek: „1793: 512“, „1806 1 203“; dřívější název: „1793: Montagne-sur-Loire“ ¦ Ett år per rad: ”1793: 512”, ”1806 1 203”; ett tidigare namn: ”1793: Montagne-sur-Loire” ¦ Ét år pr. linje: »1793: 512«, »1806 1 203«; et tidligere navn: »1793: Montagne-sur-Loire«
+Rien de compris pour l’instant. ¦ Zatím nic nerozpoznáno. ¦ Inget förstått än. ¦ Intet forstået endnu.
+Ajouter à la commune ¦ Přidat k obci ¦ Lägg till i kommunen ¦ Tilføj til kommunen
+Le tableau ¦ Tabulka ¦ Tabellen ¦ Tabellen
+D’où ¦ Odkud ¦ Varifrån ¦ Hvorfra
+Pas encore de population pour cette commune : importe le tableau de l’EHESS ou recopie-le. ¦ Pro tuto obec zatím není počet obyvatel: importuj tabulku EHESS nebo ji opiš. ¦ Ingen befolkning för kommunen än: importera EHESS tabell eller skriv av den. ¦ Ingen befolkning for kommunen endnu: importér EHESS' tabel, eller skriv den af.
+rapprochés des changements de l’INSEE depuis 1943 ¦ spárováno se změnami INSEE od roku 1943 ¦ matchade mot INSEE:s ändringar sedan 1943 ¦ afstemt med INSEE's ændringer siden 1943
+Importer la population d’une commune ¦ Importovat počet obyvatel obce ¦ Importera en kommuns befolkning ¦ Importér en kommunes befolkning
+tableau CSV, page enregistrée ou texte ¦ tabulka CSV, uložená stránka nebo text ¦ CSV-tabell, sparad sida eller text ¦ CSV-tabel, gemt side eller tekst
+Le tableau de population de la commune, enregistré depuis le site de l’EHESS (page « Enregistrer sous… », tableau copié dans un fichier .txt, ou CSV). Rien n’est demandé au site : seul ton fichier est lu. Une année déjà là n’est pas remplacée. ¦ Tabulka obyvatel obce uložená z webu EHESS (stránka „Uložit jako…“, tabulka zkopírovaná do souboru .txt, nebo CSV). Od webu se nic nepožaduje: čte se jen tvůj soubor. Už existující rok se nenahradí. ¦ Kommunens befolkningstabell, sparad från EHESS webbplats (sidan ”Spara som…”, tabell kopierad till en .txt-fil, eller CSV). Inget hämtas från webbplatsen: bara din fil läses. Ett år som redan finns ersätts inte. ¦ Kommunens befolkningstabel, gemt fra EHESS' websted (siden »Gem som…«, tabel kopieret til en .txt-fil, eller CSV). Intet hentes fra webstedet: kun din fil læses. Et år, der allerede findes, erstattes ikke.
+Range la photo ou le document trouvé, crée la source et propose ce qu’il dit ¦ Uloží nalezenou fotografii nebo dokument, vytvoří pramen a navrhne, co v něm stojí ¦ Sparar det hittade fotot eller dokumentet, skapar källan och föreslår vad det säger ¦ Gemmer det fundne foto eller dokument, opretter kilden og foreslår, hvad det siger
+🗿 Monument aux morts (MémorialGenWeb) ¦ 🗿 Pomník padlým (MémorialGenWeb) ¦ 🗿 Krigsmonument (MémorialGenWeb) ¦ 🗿 Mindesmærke for faldne (MémorialGenWeb)
+Ouvre MémorialGenWeb dans ton navigateur, avec son nom et son prénom ¦ Otevře MémorialGenWeb v prohlížeči s jeho příjmením a jménem ¦ Öppnar MémorialGenWeb i webbläsaren, med hans efternamn och förnamn ¦ Åbner MémorialGenWeb i browseren med hans efternavn og fornavn
+⤒ Importer le relevé… ¦ ⤒ Importovat záznam… ¦ ⤒ Importera registreringen… ¦ ⤒ Importér registreringen…
+🔍 Chercher la tombe ¦ 🔍 Hledat hrob ¦ 🔍 Sök graven ¦ 🔍 Søg graven
+Cimetières de France, BillionGraves, relevés collaboratifs : nom et années déjà remplis ¦ Cimetières de France, BillionGraves, kolektivní záznamy: jméno a roky už vyplněné ¦ Cimetières de France, BillionGraves, gemensamma registreringar: namn och år redan ifyllda ¦ Cimetières de France, BillionGraves, fælles registreringer: navn og år allerede udfyldt
+⤒ Importer une photo de tombe… ¦ ⤒ Importovat fotografii hrobu… ¦ ⤒ Importera ett gravfoto… ¦ ⤒ Importér et gravfoto…
+🌍 Presse étrangère ¦ 🌍 Zahraniční tisk ¦ 🌍 Utländsk press ¦ 🌍 Udenlandsk presse
+Chronicling America, Trove, Papers Past, Delpher : nom et années déjà remplis ¦ Chronicling America, Trove, Papers Past, Delpher: jméno a roky už vyplněné ¦ Chronicling America, Trove, Papers Past, Delpher: namn och år redan ifyllda ¦ Chronicling America, Trove, Papers Past, Delpher: navn og år allerede udfyldt
+⤒ Importer (étranger)… ¦ ⤒ Importovat (zahraničí)… ¦ ⤒ Importera (utland)… ¦ ⤒ Importér (udland)…
+🏘 Population depuis 1793 et anciens noms ¦ 🏘 Počet obyvatel od roku 1793 a dřívější názvy ¦ 🏘 Befolkning sedan 1793 och tidigare namn ¦ 🏘 Befolkning siden 1793 og tidligere navne
+🪦 Cimetières de France ¦ 🪦 Cimetières de France ¦ 🪦 Cimetières de France ¦ 🪦 Cimetières de France
+Guerres et monuments aux morts ¦ Války a pomníky padlým ¦ Krig och krigsmonument ¦ Krige og mindesmærker for faldne
+Cimetières et tombes ¦ Hřbitovy a hroby ¦ Kyrkogårdar och gravar ¦ Kirkegårde og grave
+Communes et noms de famille ¦ Obce a příjmení ¦ Kommuner och efternamn ¦ Kommuner og efternavne
+Lieux et noms ¦ Místa a jména ¦ Platser och namn ¦ Steder og navne
+Protestants et gens de mer ¦ Protestanti a námořníci ¦ Protestanter och sjöfolk ¦ Protestanter og søfolk
+Religion et métiers ¦ Náboženství a povolání ¦ Religion och yrken ¦ Religion og erhverv
+Registres et archives ¦ Matriky a archivy ¦ Kyrkböcker och arkiv ¦ Kirkebøger og arkiver
+Presse étrangère ¦ Zahraniční tisk ¦ Utländsk press ¦ Udenlandsk presse
+MémorialGenWeb — monuments aux morts ¦ MémorialGenWeb — pomníky padlým ¦ MémorialGenWeb — krigsmonument ¦ MémorialGenWeb — mindesmærker for faldne
+Relevés des monuments aux morts, avec photos et biographies des soldats. ¦ Záznamy pomníků padlým s fotografiemi a životopisy vojáků. ¦ Registreringar av krigsmonument, med foton och soldaternas biografier. ¦ Registreringer af mindesmærker for faldne med fotos og soldaternes biografier.
+MémorialGenWeb — le monument de la commune ¦ MémorialGenWeb — pomník obce ¦ MémorialGenWeb — kommunens monument ¦ MémorialGenWeb — kommunens mindesmærke
+Les monuments et plaques d’une commune, avec la liste des noms. ¦ Pomníky a pamětní desky obce se seznamem jmen. ¦ En kommuns monument och minnestavlor, med namnlistan. ¦ En kommunes mindesmærker og mindeplader med navnelisten.
+Soldats morts en 1870-1871 (relevés de MémorialGenWeb et du Souvenir français). ¦ Vojáci padlí v letech 1870–1871 (záznamy MémorialGenWeb a Souvenir français). ¦ Soldater som dog 1870–1871 (registreringar av MémorialGenWeb och Souvenir français). ¦ Soldater, der døde 1870–1871 (registreringer af MémorialGenWeb og Souvenir français).
+Civils morts du fait de la guerre (bombardements, déportation, fusillés) : Mémoire des hommes et MémorialGenWeb. ¦ Civilisté zemřelí v důsledku války (bombardování, deportace, popravy): Mémoire des hommes a MémorialGenWeb. ¦ Civila som dog till följd av kriget (bombningar, deportation, arkebuseringar): Mémoire des hommes och MémorialGenWeb. ¦ Civile, der døde som følge af krigen (bombninger, deportation, henrettelser): Mémoire des hommes og MémorialGenWeb.
+Cimetières de France ¦ Cimetières de France ¦ Cimetières de France ¦ Cimetières de France
+Cimetières, tombes et concessions, commune par commune. ¦ Hřbitovy, hroby a hrobová místa, obec po obci. ¦ Kyrkogårdar, gravar och gravrätter, kommun för kommun. ¦ Kirkegårde, grave og gravsteder, kommune for kommune.
+Photos de tombes prises par des bénévoles, avec leur position GPS. ¦ Fotografie hrobů pořízené dobrovolníky, s jejich polohou GPS. ¦ Gravfoton tagna av frivilliga, med GPS-position. ¦ Gravfotos taget af frivillige med deres GPS-position.
+Relevés de tombes (Geneanet, collaboratif) ¦ Záznamy hrobů (Geneanet, kolektivní) ¦ Gravregistreringar (Geneanet, gemensamma) ¦ Gravregistreringer (Geneanet, fælles)
+Le projet « Sauvons nos tombes » : photos et relevés de cimetières par des bénévoles. ¦ Projekt „Zachraňme naše hroby“: fotografie a záznamy hřbitovů od dobrovolníků. ¦ Projektet ”Rädda våra gravar”: foton och kyrkogårdsregistreringar av frivilliga. ¦ Projektet »Red vores grave«: fotos og kirkegårdsregistreringer af frivillige.
+Des villages de Cassini aux communes d’aujourd’hui (EHESS) ¦ Od vesnic Cassiniho k dnešním obcím (EHESS) ¦ Från Cassinis byar till dagens kommuner (EHESS) ¦ Fra Cassinis landsbyer til nutidens kommuner (EHESS)
+La population de chaque commune depuis 1793 et ses changements de nom. ¦ Počet obyvatel každé obce od roku 1793 a změny jejího názvu. ¦ Varje kommuns befolkning sedan 1793 och dess namnbyten. ¦ Hver kommunes befolkning siden 1793 og dens navneskift.
+Géopatronyme — où vivait ce nom (1891-1990) ¦ Géopatronyme — kde se toto jméno vyskytovalo (1891–1990) ¦ Géopatronyme — var namnet fanns (1891–1990) ¦ Géopatronyme — hvor navnet fandtes (1891–1990)
+La répartition d’un nom de famille en France, par département, de 1891 à 1990 (naissances). ¦ Rozšíření příjmení ve Francii podle departementů v letech 1891 až 1990 (narození). ¦ Ett efternamns fördelning i Frankrike, per departement, 1891–1990 (födslar). ¦ Et efternavns fordeling i Frankrig, pr. departement, 1891–1990 (fødsler).
+Huguenots réfugiés (le Refuge huguenot) ¦ Uprchlí hugenoti (hugenotský Refuge) ¦ Hugenottiska flyktingar (det hugenottiska Refuge) ¦ Huguenotflygtninge (det huguenotiske Refuge)
+Les protestants français partis en Suisse, en Allemagne, aux Pays-Bas… après 1685. ¦ Francouzští protestanti, kteří po roce 1685 odešli do Švýcarska, Německa, Nizozemska… ¦ Franska protestanter som flydde till Schweiz, Tyskland, Nederländerna… efter 1685. ¦ Franske protestanter, der flygtede til Schweiz, Tyskland, Nederlandene… efter 1685.
+Rôles d’équipage — marine marchande (Archives départementales, SHD) ¦ Seznamy posádek — obchodní loďstvo (departementní archivy, SHD) ¦ Besättningslistor — handelsflottan (departementsarkiven, SHD) ¦ Mandskabslister — handelsflåden (departementsarkiverne, SHD)
+Les listes des marins de chaque navire, rangées par port (Archives départementales et Service historique de la Défense). ¦ Seznamy námořníků každé lodi, řazené podle přístavů (departementní archivy a Historická služba ministerstva obrany). ¦ Listorna över sjömännen på varje fartyg, ordnade efter hamn (departementsarkiven och Försvarets historiska tjänst). ¦ Listerne over sømændene på hvert skib, ordnet efter havn (departementsarkiverne og Forsvarets historiske tjeneste).
+Les registres des paroisses catholiques et protestantes, rangés par diocèse : on cherche par lieu. ¦ Katolické a evangelické farní matriky řazené podle diecézí: hledá se podle místa. ¦ Katolska och protestantiska kyrkböcker, ordnade efter stift: man söker efter plats. ¦ Katolske og protestantiske kirkebøger, ordnet efter stift: man søger efter sted.
+Norvège — Digitalarkivet ¦ Norsko — Digitalarkivet ¦ Norge — Digitalarkivet ¦ Norge — Digitalarkivet
+Recensements, registres paroissiaux et émigrants de Norvège, gratuits. ¦ Norská sčítání lidu, farní matriky a vystěhovalci, zdarma. ¦ Norska folkräkningar, kyrkböcker och emigranter, gratis. ¦ Norske folketællinger, kirkebøger og udvandrere, gratis.
+Suède — Riksarkivet ¦ Švédsko — Riksarkivet ¦ Sverige — Riksarkivet ¦ Sverige — Riksarkivet
+Les archives nationales suédoises : recensements, registres de paroisse (husförhör), gratuits. ¦ Švédský národní archiv: sčítání lidu, farní matriky (husförhör), zdarma. ¦ Riksarkivet: folkräkningar, kyrkböcker (husförhör), gratis. ¦ Det svenske rigsarkiv: folketællinger, kirkebøger (husförhör), gratis.
+Recensements et registres paroissiaux danois transcrits. ¦ Přepsaná dánská sčítání lidu a farní matriky. ¦ Transkriberade danska folkräkningar och kyrkböcker. ¦ Transskriberede danske folketællinger og kirkebøger.
+Naissances, mariages et décès de l’état civil irlandais, et registres d’églises, gratuits. ¦ Narození, sňatky a úmrtí z irských civilních matrik a církevní matriky, zdarma. ¦ Födslar, vigslar och dödsfall i den irländska folkbokföringen, och kyrkböcker, gratis. ¦ Fødsler, vielser og dødsfald i den irske civilregistrering og kirkebøger, gratis.
+Porta fontium — Bohême, Bavière, Autriche ¦ Porta fontium — Čechy, Bavorsko, Rakousko ¦ Porta fontium — Böhmen, Bayern, Österrike ¦ Porta fontium — Bøhmen, Bayern, Østrig
+Registres paroissiaux et livres terriers de part et d’autre de la frontière tchéco-bavaroise. ¦ Farní matriky a pozemkové knihy z obou stran česko-bavorské hranice. ¦ Kyrkböcker och jordeböcker på båda sidor om den tjeckisk-bayerska gränsen. ¦ Kirkebøger og jordebøger på begge sider af den tjekkisk-bayerske grænse.
+Archives, cadastres, livres et journaux hongrois numérisés. ¦ Digitalizované maďarské archivy, katastry, knihy a noviny. ¦ Digitaliserade ungerska arkiv, fastighetskartor, böcker och tidningar. ¦ Digitaliserede ungarske arkiver, matrikler, bøger og aviser.
+JewishGen — familles juives (gratuit avec un compte) ¦ JewishGen — židovské rodiny (zdarma s účtem) ¦ JewishGen — judiska familjer (gratis med ett konto) ¦ JewishGen — jødiske familier (gratis med en konto)
+Gratuit, mais il faut créer un compte (adresse e-mail) avant de chercher. ¦ Zdarma, ale před hledáním je třeba vytvořit účet (e-mailová adresa). ¦ Gratis, men du måste skapa ett konto (e-postadress) innan du söker. ¦ Gratis, men du skal oprette en konto (e-mailadresse), før du søger.
+Journaux américains de 1756 à 1963 (Bibliothèque du Congrès), gratuits. ¦ Americké noviny z let 1756 až 1963 (Kongresová knihovna), zdarma. ¦ Amerikanska tidningar 1756–1963 (Library of Congress), gratis. ¦ Amerikanske aviser 1756–1963 (Library of Congress), gratis.
+Journaux australiens numérisés (Bibliothèque nationale d’Australie), gratuits. ¦ Digitalizované australské noviny (Národní knihovna Austrálie), zdarma. ¦ Digitaliserade australiska tidningar (National Library of Australia), gratis. ¦ Digitaliserede australske aviser (National Library of Australia), gratis.
+Journaux néo-zélandais de 1839 à 1989, gratuits. ¦ Novozélandské noviny z let 1839 až 1989, zdarma. ¦ Nyzeeländska tidningar 1839–1989, gratis. ¦ New Zealandske aviser 1839–1989, gratis.
+Journaux, livres et revues néerlandais numérisés, gratuits. ¦ Digitalizované nizozemské noviny, knihy a časopisy, zdarma. ¦ Digitaliserade nederländska tidningar, böcker och tidskrifter, gratis. ¦ Digitaliserede nederlandske aviser, bøger og tidsskrifter, gratis.
+Deux chiffres pour {nm} ({x2} et {x3}) : le premier est gardé. ¦ Dvě čísla pro {nm} ({x2} a {x3}): ponechá se první. ¦ Två siffror för {nm} ({x2} och {x3}): den första behålls. ¦ To tal for {nm} ({x2} og {x3}): det første beholdes.
+Chronicling America (Bibliothèque du Congrès) ¦ Chronicling America (Kongresová knihovna) ¦ Chronicling America (Library of Congress) ¦ Chronicling America (Library of Congress)
+Trove (Bibliothèque nationale d’Australie) ¦ Trove (Národní knihovna Austrálie) ¦ Trove (National Library of Australia) ¦ Trove (National Library of Australia)
+Papers Past (Bibliothèque nationale de Nouvelle-Zélande) ¦ Papers Past (Národní knihovna Nového Zélandu) ¦ Papers Past (National Library of New Zealand) ¦ Papers Past (National Library of New Zealand)
+Delpher (Bibliothèque royale des Pays-Bas) ¦ Delpher (Královská knihovna Nizozemska) ¦ Delpher (Nederländernas kungliga bibliotek) ¦ Delpher (Nederlandenes Kongelige Bibliotek)
+=site ajouté ¦ web přidán|weby přidány|webů přidáno ¦ webbplats tillagd|webbplatser tillagda ¦ websted tilføjet|websteder tilføjet
+vers {nm} ¦ do {nm} ¦ till {nm} ¦ til {nm}
+déjà sur la fiche : gardé tel quel ¦ už na kartě: ponecháno beze změny ¦ redan i posten: behålls som det är ¦ allerede i posten: beholdes, som det er
+un mariage se range dans la famille : il reste dans la source ¦ sňatek se ukládá do rodiny: zůstane v pramenu ¦ en vigsel hör till familjen: den stannar i källan ¦ en vielse hører til familien: den bliver i kilden
+Resté tel quel : {nm} ¦ Ponecháno beze změny: {nm} ¦ Lämnat som det var: {nm} ¦ Ladt, som det var: {nm}
+{n} à « Mes sites » ¦ {n} do „Moje weby“ ¦ {n} till ”Mina webbplatser” ¦ {n} til »Mine websteder«
+Ces sites sont déjà dans « Mes sites » ¦ Tyto weby už jsou v „Moje weby“ ¦ Webbplatserna finns redan i ”Mina webbplatser” ¦ Webstederne er allerede i »Mine websteder«
+Photographe actif de {a} à {b} : mis dans la photo. ¦ Fotograf činný v letech {a} až {b}: přidáno k fotografii. ¦ Fotograf verksam {a}–{b}: tillagt i fotot. ¦ Fotograf aktiv {a}–{b}: tilføjet til fotoet.

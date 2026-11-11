@@ -1,0 +1,601 @@
+fr ¦ cs ¦ sv ¦ da
+son {x} (lien) ¦ jeho {x} ¦ hans {x} ¦ hans {x}
+sa {x} (lien) ¦ její {x} ¦ hennes {x} ¦ hendes {x}
+père ¦ otec ¦ far ¦ far
+mère ¦ matka ¦ mor ¦ mor
+grand-père ¦ dědeček ¦ farfar/morfar ¦ bedstefar
+grand-mère ¦ babička ¦ farmor/mormor ¦ bedstemor
+arrière-grand-père ¦ pradědeček ¦ gammelfarfar ¦ oldefar
+arrière-grand-mère ¦ prababička ¦ gammelfarmor ¦ oldemor
+arrière-arrière-grand-père ¦ prapradědeček ¦ farfars farfar ¦ tipoldefar
+arrière-arrière-grand-mère ¦ praprababička ¦ farfars farmor ¦ tipoldemor
+arrière-arrière-arrière-grand-père ¦ praprapradědeček ¦ anfader i sjätte led ¦ tiptipoldefar
+arrière-arrière-arrière-grand-mère ¦ prapraprababička ¦ anmoder i sjätte led ¦ tiptipoldemor
+ancêtre à la {n}e génération ¦ předek v {n}. generaci ¦ anfader i generation {n} ¦ ane i {n}. generation
+{kin} de {name} ¦ {kin} osoby {name} ¦ {kin} till {name} ¦ {kin} til {name}
+Il est né {when}{where}. ¦ Narodil se {when}{where}. ¦ Han föddes {when}{where}. ¦ Han blev født {when}{where}.
+Elle est née {when}{where}. ¦ Narodila se {when}{where}. ¦ Hon föddes {when}{where}. ¦ Hun blev født {when}{where}.
+Il était {occ}. ¦ Byl {occ}. ¦ Han var {occ}. ¦ Han var {occ}.
+Elle était {occ}. ¦ Byla {occ}. ¦ Hon var {occ}. ¦ Hun var {occ}.
+Il a épousé {name}{when}{where}. ¦ Oženil se s {name}{when}{where}. ¦ Han gifte sig med {name}{when}{where}. ¦ Han giftede sig med {name}{when}{where}.
+Elle a épousé {name}{when}{where}. ¦ Vdala se za {name}{when}{where}. ¦ Hon gifte sig med {name}{when}{where}. ¦ Hun giftede sig med {name}{when}{where}.
+Il a eu un enfant : {list}. ¦ Měl jedno dítě: {list}. ¦ Han fick ett barn: {list}. ¦ Han fik ét barn: {list}.
+Elle a eu un enfant : {list}. ¦ Měla jedno dítě: {list}. ¦ Hon fick ett barn: {list}. ¦ Hun fik ét barn: {list}.
+Il a eu {n} enfants : {list}. ¦ Měl {n} dětí: {list}. ¦ Han fick {n} barn: {list}. ¦ Han fik {n} børn: {list}.
+Elle a eu {n} enfants : {list}. ¦ Měla {n} dětí: {list}. ¦ Hon fick {n} barn: {list}. ¦ Hun fik {n} børn: {list}.
+Il est mort {when}{age}{where}. ¦ Zemřel {when}{age}{where}. ¦ Han dog {when}{age}{where}. ¦ Han døde {when}{age}{where}.
+Elle est morte {when}{age}{where}. ¦ Zemřela {when}{age}{where}. ¦ Hon dog {when}{age}{where}. ¦ Hun døde {when}{age}{where}.
+, à {n} ans ¦ , ve věku {n} let ¦ , {n} år gammal ¦ , {n} år gammel
+, à {n} an ¦ , ve věku {n} roku ¦ , {n} år gammal ¦ , {n} år gammel
+avec {name} ¦ s {name} ¦ med {name} ¦ med {name}
+se mariait{with}{where}{date} ¦ se ženil/vdávala{with}{where}{date} ¦ gifte sig{with}{where}{date} ¦ blev gift{with}{where}{date}
+se mariait civilement{with}{where}{date} ¦ uzavíral(a) civilní sňatek{with}{where}{date} ¦ gifte sig borgerligt{with}{where}{date} ¦ blev borgerligt gift{with}{where}{date}
+se mariait religieusement{with}{where}{date} ¦ uzavíral(a) církevní sňatek{with}{where}{date} ¦ gifte sig i kyrkan{with}{where}{date} ¦ blev kirkeligt gift{with}{where}{date}
+mourait{with}{where}{date} ¦ umíral(a){with}{where}{date} ¦ dog{with}{where}{date} ¦ døde{with}{where}{date}
+était inhumé{with}{where}{date} ¦ byl pohřben{with}{where}{date} ¦ begravdes{with}{where}{date} ¦ blev begravet{with}{where}{date}
+était inhumée{with}{where}{date} ¦ byla pohřbena{with}{where}{date} ¦ begravdes{with}{where}{date} ¦ blev begravet{with}{where}{date}
+habitait{with}{where}{date} ¦ bydlel(a){with}{where}{date} ¦ bodde{with}{where}{date} ¦ boede{with}{where}{date}
+travaillait comme{what}{with}{where}{date} ¦ pracoval(a) jako{what}{with}{where}{date} ¦ arbetade som{what}{with}{where}{date} ¦ arbejdede som{what}{with}{where}{date}
+partait{with}{where}{date} ¦ odcházel(a){with}{where}{date} ¦ reste iväg{with}{where}{date} ¦ rejste{with}{where}{date}
+arrivait{with}{where}{date} ¦ přicházel(a){with}{where}{date} ¦ kom{with}{where}{date} ¦ ankom{with}{where}{date}
+était recensé{with}{where}{date} ¦ byl sečten{with}{where}{date} ¦ fanns med i folkräkningen{with}{where}{date} ¦ var med i folketællingen{with}{where}{date}
+était recensée{with}{where}{date} ¦ byla sečtena{with}{where}{date} ¦ fanns med i folkräkningen{with}{where}{date} ¦ var med i folketællingen{with}{where}{date}
+était sous les drapeaux{with}{where}{date} ¦ sloužil(a) v armádě{with}{where}{date} ¦ var inkallad{with}{where}{date} ¦ var indkaldt{with}{where}{date}
+obtenait un diplôme{with}{where}{date} ¦ získával(a) diplom{with}{where}{date} ¦ tog examen{with}{where}{date} ¦ tog eksamen{with}{where}{date}
+devenait français{with}{where}{date} ¦ se stával Francouzem{with}{where}{date} ¦ blev fransk medborgare{with}{where}{date} ¦ blev fransk statsborger{with}{where}{date}
+devenait française{with}{where}{date} ¦ se stávala Francouzkou{with}{where}{date} ¦ blev fransk medborgare{with}{where}{date} ¦ blev fransk statsborger{with}{where}{date}
+était baptisé{with}{where}{date} ¦ byl pokřtěn{with}{where}{date} ¦ döptes{with}{where}{date} ¦ blev døbt{with}{where}{date}
+était baptisée{with}{where}{date} ¦ byla pokřtěna{with}{where}{date} ¦ döptes{with}{where}{date} ¦ blev døbt{with}{where}{date}
+faisait sa confirmation{with}{where}{date} ¦ byl(a) biřmován(a){with}{where}{date} ¦ konfirmerades{with}{where}{date} ¦ blev konfirmeret{with}{where}{date}
+était à l’école{with}{where}{date} ¦ chodil(a) do školy{with}{where}{date} ¦ gick i skolan{with}{where}{date} ¦ gik i skole{with}{where}{date}
+vivait un événement ({label}){where}{date} ¦ prožíval(a) událost ({label}){where}{date} ¦ var med om en händelse ({label}){where}{date} ¦ oplevede en begivenhed ({label}){where}{date}
+devenait père de {name}{where}{date} ¦ se stal otcem {name}{where}{date} ¦ blev far till {name}{where}{date} ¦ blev far til {name}{where}{date}
+devenait mère de {name}{where}{date} ¦ se stala matkou {name}{where}{date} ¦ blev mor till {name}{where}{date} ¦ blev mor til {name}{where}{date}
+n’était plus là : il était mort à {n} ans ¦ už nežil: zemřel ve věku {n} let ¦ levde inte längre: han hade dött {n} år gammal ¦ levede ikke længere: han var død {n} år gammel
+n’était plus là : elle était morte à {n} ans ¦ už nežila: zemřela ve věku {n} let ¦ levde inte längre: hon hade dött {n} år gammal ¦ levede ikke længere: hun var død {n} år gammel
+vivait sans doute du côté de {place} en {y}{occ} ¦ žil(a) asi v okolí {place} v roce {y}{occ} ¦ bodde troligen nära {place} år {y}{occ} ¦ boede formentlig nær {place} i {y}{occ}
+vivait sa vie en {y}{occ} ¦ žil(a) svůj život v roce {y}{occ} ¦ levde sitt liv år {y}{occ} ¦ levede sit liv i {y}{occ}
+À {n} ans… ¦ Ve věku {n} let… ¦ Vid {n} års ålder… ¦ Som {n}-årig…
+À {n} ans, il {facts}. ¦ Ve věku {n} let {facts}. ¦ Vid {n} års ålder {facts} han. ¦ Som {n}-årig {facts} han.
+À {n} ans, elle {facts}. ¦ Ve věku {n} let {facts}. ¦ Vid {n} års ålder {facts} hon. ¦ Som {n}-årig {facts} hun.
+{who} de {name} dont on connaît la naissance. ¦ {who} osoby {name} se známým narozením. ¦ {who} till {name} med känd födelse. ¦ {who} til {name} med kendt fødsel.
+{who} de {name} dont on connaît la naissance ({k} sans date de naissance ne sont pas comptés). ¦ {who} osoby {name} se známým narozením ({k} bez data narození se nepočítá). ¦ {who} till {name} med känd födelse ({k} utan födelsedatum räknas inte). ¦ {who} til {name} med kendt fødsel ({k} uden fødselsdato tælles ikke med).
+{who}{y}, comme {kin} {from}{fy} ¦ {who}{y}, jako {kin} {from}{fy} ¦ {who}{y}, liksom {kin} {from}{fy} ¦ {who}{y}, ligesom {kin} {from}{fy}
+C’est un homme. ¦ Je to muž. ¦ Det är en man. ¦ Det er en mand.
+C’est une femme. ¦ Je to žena. ¦ Det är en kvinna. ¦ Det er en kvinde.
+C’est un homme, né au XVIIIe siècle ou avant. ¦ Je to muž narozený v 18. století nebo dříve. ¦ Det är en man, född på 1700-talet eller tidigare. ¦ Det er en mand, født i 1700-tallet eller før.
+C’est un homme, né au XIXe siècle. ¦ Je to muž narozený v 19. století. ¦ Det är en man, född på 1800-talet. ¦ Det er en mand, født i 1800-tallet.
+C’est un homme, né au XXe siècle. ¦ Je to muž narozený ve 20. století. ¦ Det är en man, född på 1900-talet. ¦ Det er en mand, født i 1900-tallet.
+C’est une femme, née au XVIIIe siècle ou avant. ¦ Je to žena narozená v 18. století nebo dříve. ¦ Det är en kvinna, född på 1700-talet eller tidigare. ¦ Det er en kvinde, født i 1700-tallet eller før.
+C’est une femme, née au XIXe siècle. ¦ Je to žena narozená v 19. století. ¦ Det är en kvinna, född på 1800-talet. ¦ Det er en kvinde, født i 1800-tallet.
+C’est une femme, née au XXe siècle. ¦ Je to žena narozená ve 20. století. ¦ Det är en kvinna, född på 1900-talet. ¦ Det er en kvinde, født i 1900-tallet.
+Il est né à {place}. ¦ Narodil se v místě {place}. ¦ Han föddes i {place}. ¦ Han blev født i {place}.
+Elle est née à {place}. ¦ Narodila se v místě {place}. ¦ Hon föddes i {place}. ¦ Hun blev født i {place}.
+Son métier : {occ}. ¦ Povolání: {occ}. ¦ Yrke: {occ}. ¦ Erhverv: {occ}.
+Il a vécu {n} ans. ¦ Dožil se {n} let. ¦ Han levde i {n} år. ¦ Han levede i {n} år.
+Elle a vécu {n} ans. ¦ Dožila se {n} let. ¦ Hon levde i {n} år. ¦ Hun levede i {n} år.
+Il a eu {n} enfant. ¦ Měl {n} dítě. ¦ Han fick {n} barn. ¦ Han fik {n} barn.
+Elle a eu {n} enfant. ¦ Měla {n} dítě. ¦ Hon fick {n} barn. ¦ Hun fik {n} barn.
+Il a eu {n} enfants. ¦ Měl {n} dětí. ¦ Han fick {n} barn. ¦ Han fik {n} børn.
+Elle a eu {n} enfants. ¦ Měla {n} dětí. ¦ Hon fick {n} barn. ¦ Hun fik {n} børn.
+On ne lui connaît pas d’enfant. ¦ Žádné děti nejsou známy. ¦ Inga kända barn. ¦ Ingen kendte børn.
+Né dans les années {y}. ¦ Narozen v {y}. letech. ¦ Född på {y}-talet. ¦ Født i {y}'erne.
+Née dans les années {y}. ¦ Narozena v {y}. letech. ¦ Född på {y}-talet. ¦ Født i {y}'erne.
+Sa femme s’appelait {name}. ¦ Jeho žena se jmenovala {name}. ¦ Hans hustru hette {name}. ¦ Hans kone hed {name}.
+Son mari s’appelait {name}. ¦ Její muž se jmenoval {name}. ¦ Hennes make hette {name}. ¦ Hendes mand hed {name}.
+Un de ses enfants s’appelait {name}. ¦ Jedno z dětí se jmenovalo {name}. ¦ Ett av barnen hette {name}. ¦ Et af børnene hed {name}.
+Son nom commence par {l}… et compte {n} lettres. ¦ Příjmení začíná na {l}… a má {n} písmen. ¦ Efternamnet börjar på {l}… och har {n} bokstäver. ¦ Efternavnet begynder med {l}… og har {n} bogstaver.
+Ta naissance ¦ Tvé narození ¦ Din födelse ¦ Din fødsel
+Tu es {name}. ¦ Jsi {name}. ¦ Du är {name}. ¦ Du er {name}.
+Tu nais {when}{where}{parents}. ¦ Rodíš se {when}{where}{parents}. ¦ Du föds {when}{where}{parents}. ¦ Du bliver født {when}{where}{parents}.
+fils de {names} ¦ syn {names} ¦ son till {names} ¦ søn af {names}
+fille de {names} ¦ dcera {names} ¦ dotter till {names} ¦ datter af {names}
+{a} et de {b} ¦ {a} a {b} ¦ {a} och {b} ¦ {a} og {b}
+Ton père est {occ}. ¦ Tvůj otec je {occ}. ¦ Din far är {occ}. ¦ Din far er {occ}.
+Le métier ¦ Řemeslo ¦ Yrket ¦ Erhvervet
+Tu as quinze ans, c’est l’année {y}. Il faut gagner ta vie. Que vas-tu faire ? ¦ Je ti patnáct, píše se rok {y}. Musíš si vydělávat na živobytí. Co budeš dělat? ¦ Du är femton, det är år {y}. Du måste försörja dig. Vad ska du göra? ¦ Du er femten, det er år {y}. Du skal tjene til livet. Hvad vil du gøre?
+Tu as quinze ans. Il faut gagner ta vie. Que vas-tu faire ? ¦ Je ti patnáct. Musíš si vydělávat na živobytí. Co budeš dělat? ¦ Du är femton. Du måste försörja dig. Vad ska du göra? ¦ Du er femten. Du skal tjene til livet. Hvad vil du gøre?
+Devenir {occ} ¦ Stát se: {occ} ¦ Bli {occ} ¦ Blive {occ}
+Dans la vraie vie, {name} est devenu {occ}. ¦ Ve skutečnosti se {name} stal: {occ}. ¦ I verkligheten blev {name} {occ}. ¦ I virkeligheden blev {name} {occ}.
+Dans la vraie vie, {name} est devenue {occ}. ¦ Ve skutečnosti se {name} stala: {occ}. ¦ I verkligheten blev {name} {occ}. ¦ I virkeligheden blev {name} {occ}.
+L’amour ¦ Láska ¦ Kärleken ¦ Kærligheden
+Tu as {n} ans. ¦ Je ti {n} let. ¦ Du är {n} år. ¦ Du er {n} år.
+À {place}, deux personnes ont attiré ton regard… ¦ V místě {place} tě zaujali dva lidé… ¦ I {place} har två personer fångat din blick… ¦ I {place} har to personer fanget dit blik…
+deux personnes ont attiré ton regard… ¦ dva lidé tě zaujali… ¦ två personer har fångat din blick… ¦ to personer har fanget dit blik…
+Épouser {name} ¦ Vzít si {name} ¦ Gifta dig med {name} ¦ Gifte dig med {name}
+Rester libre encore un peu ¦ Zůstat ještě chvíli volný ¦ Förbli fri en liten stund till ¦ Forblive fri lidt endnu
+Dans la vraie vie, {first} a épousé {name}{when}{where}. ¦ Ve skutečnosti {first} uzavřel(a) sňatek s {name}{when}{where}. ¦ I verkligheten gifte sig {first} med {name}{when}{where}. ¦ I virkeligheden giftede {first} sig med {name}{when}{where}.
+Partir ? ¦ Odejít? ¦ Ge sig av? ¦ Rejse væk?
+La vie est dure{where}. On parle de partir… ¦ Život je těžký{where}. Mluví se o odchodu… ¦ Livet är hårt{where}. Man talar om att ge sig av… ¦ Livet er hårdt{where}. Man taler om at rejse…
+Partir pour {place} ¦ Odejít do: {place} ¦ Resa till {place} ¦ Rejse til {place}
+Rester au pays ¦ Zůstat doma ¦ Stanna kvar hemma ¦ Blive hjemme
+Dans la vraie vie, {name} a fini sa route à {place}. ¦ Ve skutečnosti {name} skončil(a) svou cestu v místě {place}. ¦ I verkligheten slutade {name} sin färd i {place}. ¦ I virkeligheden endte {name} sin rejse i {place}.
+On parle de partir pour la ville… ¦ Mluví se o odchodu do města… ¦ Man talar om att flytta till staden… ¦ Man taler om at flytte til byen…
+Partir ¦ Odejít ¦ Ge dig av ¦ Rejse
+Rester à {place} ¦ Zůstat v místě {place} ¦ Stanna i {place} ¦ Blive i {place}
+Dans la vraie vie, {name} est resté à {place}. ¦ Ve skutečnosti {name} zůstal v místě {place}. ¦ I verkligheten stannade {name} i {place}. ¦ I virkeligheden blev {name} i {place}.
+Dans la vraie vie, {name} est restée à {place}. ¦ Ve skutečnosti {name} zůstala v místě {place}. ¦ I verkligheten stannade {name} i {place}. ¦ I virkeligheden blev {name} i {place}.
+Les enfants ¦ Děti ¦ Barnen ¦ Børnene
+Un enfant arrive : {list}. Tu les regardes grandir. ¦ Přichází dítě: {list}. Díváš se, jak roste. ¦ Ett barn kommer: {list}. Du ser det växa upp. ¦ Et barn kommer: {list}. Du ser det vokse op.
+{n} enfants arrivent : {list}. Tu les regardes grandir. ¦ Přichází děti ({n}): {list}. Díváš se, jak rostou. ¦ {n} barn kommer: {list}. Du ser dem växa upp. ¦ {n} børn kommer: {list}. Du ser dem vokse op.
+La fin du voyage ¦ Konec cesty ¦ Resans slut ¦ Rejsens afslutning
+Tu t’éteins {when}{where}{age}. ¦ Odcházíš {when}{where}{age}. ¦ Du somnar in {when}{where}{age}. ¦ Du sover ind {when}{where}{age}.
+Ton histoire continue… ¦ Tvůj příběh pokračuje… ¦ Din berättelse fortsätter… ¦ Din historie fortsætter…
+{n} personnes nées un {date} : {list}. ¦ Osoby narozené {date} ({n}): {list}. ¦ {n} personer födda den {date}: {list}. ¦ {n} personer født den {date}: {list}.
+{name} est mort le jour de son anniversaire, à {n} ans ({date}). ¦ {name} zemřel v den svých narozenin ve věku {n} let ({date}). ¦ {name} dog på sin födelsedag, {n} år gammal ({date}). ¦ {name} døde på sin fødselsdag, {n} år gammel ({date}).
+{name} est morte le jour de son anniversaire, à {n} ans ({date}). ¦ {name} zemřela v den svých narozenin ve věku {n} let ({date}). ¦ {name} dog på sin födelsedag, {n} år gammal ({date}). ¦ {name} døde på sin fødselsdag, {n} år gammel ({date}).
+{name} est né un {date}, jour anniversaire de la mort de {kin} {who} ({y}). ¦ {name} se narodil {date}, v den výročí úmrtí: {kin} {who} ({y}). ¦ {name} föddes den {date}, på årsdagen av dödsfallet för {kin} {who} ({y}). ¦ {name} blev født den {date}, på årsdagen for dødsfaldet for {kin} {who} ({y}).
+{name} est née un {date}, jour anniversaire de la mort de {kin} {who} ({y}). ¦ {name} se narodila {date}, v den výročí úmrtí: {kin} {who} ({y}). ¦ {name} föddes den {date}, på årsdagen av dödsfallet för {kin} {who} ({y}). ¦ {name} blev født den {date}, på årsdagen for dødsfaldet for {kin} {who} ({y}).
+son ancêtre ¦ jeho/její předek ¦ hens anfader ¦ vedkommendes ane
+{n} mariages le même jour de l’année : {list}. ¦ Sňatky ve stejný den roku ({n}): {list}. ¦ {n} vigslar på samma dag på året: {list}. ¦ {n} vielser på samme dag i året: {list}.
+{a} et {b} sont nés à {n} ans pile d’écart, jour pour jour ({y1} et {y2}). ¦ {a} a {b} se narodili přesně {n} let od sebe, den na den ({y1} a {y2}). ¦ {a} och {b} föddes exakt {n} år isär, på dagen ({y1} och {y2}). ¦ {a} og {b} blev født præcis {n} år fra hinanden, på dagen ({y1} og {y2}).
+{name} est né le jour de Noël {y}. ¦ {name} se narodil na Boží hod vánoční {y}. ¦ {name} föddes på juldagen {y}. ¦ {name} blev født juledag {y}.
+{name} est née le jour de Noël {y}. ¦ {name} se narodila na Boží hod vánoční {y}. ¦ {name} föddes på juldagen {y}. ¦ {name} blev født juledag {y}.
+{name} est né le jour de l’An {y}. ¦ {name} se narodil na Nový rok {y}. ¦ {name} föddes på nyårsdagen {y}. ¦ {name} blev født nytårsdag {y}.
+{name} est née le jour de l’An {y}. ¦ {name} se narodila na Nový rok {y}. ¦ {name} föddes på nyårsdagen {y}. ¦ {name} blev født nytårsdag {y}.
+{name} est né un vendredi 13 ({date}). ¦ {name} se narodil v pátek 13. ({date}). ¦ {name} föddes en fredag den 13:e ({date}). ¦ {name} blev født en fredag den 13. ({date}).
+{name} est née un vendredi 13 ({date}). ¦ {name} se narodila v pátek 13. ({date}). ¦ {name} föddes en fredag den 13:e ({date}). ¦ {name} blev født en fredag den 13. ({date}).
+{name} s’est marié à {n} ans, au même âge que son père {father}. ¦ {name} se oženil ve věku {n} let, stejně jako jeho otec {father}. ¦ {name} gifte sig vid {n} års ålder, samma ålder som sin far {father}. ¦ {name} blev gift som {n}-årig, samme alder som sin far {father}.
+{name} s’est mariée à {n} ans, au même âge que son père {father}. ¦ {name} se vdala ve věku {n} let, stejně jako její otec {father}. ¦ {name} gifte sig vid {n} års ålder, samma ålder som sin far {father}. ¦ {name} blev gift som {n}-årig, samme alder som sin far {father}.
+En quelle année est né {name} ? ¦ V kterém roce se narodil {name}? ¦ Vilket år föddes {name}? ¦ Hvilket år blev {name} født?
+En quelle année est née {name} ? ¦ V kterém roce se narodila {name}? ¦ Vilket år föddes {name}? ¦ Hvilket år blev {name} født?
+Où est né {name} ? ¦ Kde se narodil {name}? ¦ Var föddes {name}? ¦ Hvor blev {name} født?
+Où est née {name} ? ¦ Kde se narodila {name}? ¦ Var föddes {name}? ¦ Hvor blev {name} født?
+Quel était le métier de {name} ? ¦ Jaké bylo povolání osoby {name}? ¦ Vilket yrke hade {name}? ¦ Hvilket erhverv havde {name}?
+{name} était {occ}. ¦ {name}: {occ}. ¦ {name} var {occ}. ¦ {name} var {occ}.
+Qui a épousé {name} ? ¦ Kdo uzavřel sňatek s {name}? ¦ Vem gifte sig med {name}? ¦ Hvem giftede sig med {name}?
+{a} et {b} se sont mariés{when}{where}. ¦ {a} a {b} uzavřeli sňatek{when}{where}. ¦ {a} och {b} gifte sig{when}{where}. ¦ {a} og {b} blev gift{when}{where}.
+Qui est le père de {name} ? ¦ Kdo je otcem osoby {name}? ¦ Vem är far till {name}? ¦ Hvem er far til {name}?
+Qui est la mère de {name} ? ¦ Kdo je matkou osoby {name}? ¦ Vem är mor till {name}? ¦ Hvem er mor til {name}?
+{name} est le fils de {parent}. ¦ {name} je syn {parent}. ¦ {name} är son till {parent}. ¦ {name} er søn af {parent}.
+{name} est la fille de {parent}. ¦ {name} je dcera {parent}. ¦ {name} är dotter till {parent}. ¦ {name} er datter af {parent}.
+Combien d’enfants a eus {name} ? ¦ Kolik dětí měl(a) {name}? ¦ Hur många barn fick {name}? ¦ Hvor mange børn fik {name}?
+À quel âge est mort {name} ? ¦ V kolika letech zemřel {name}? ¦ Hur gammal var {name} vid sin död? ¦ Hvor gammel var {name}, da han døde?
+À quel âge est morte {name} ? ¦ V kolika letech zemřela {name}? ¦ Hur gammal var {name} vid sin död? ¦ Hvor gammel var {name}, da hun døde?
+Qui est né le premier ? ¦ Kdo se narodil dřív? ¦ Vem föddes först? ¦ Hvem blev født først?
+Ici est né {name}, {when}. ¦ Zde se narodil {name}, {when}. ¦ Här föddes {name}, {when}. ¦ Her blev {name} født, {when}.
+Ici est née {name}, {when}. ¦ Zde se narodila {name}, {when}. ¦ Här föddes {name}, {when}. ¦ Her blev {name} født, {when}.
+C’est aussi ici que est né {name}, {when}. ¦ Zde se také narodil {name}, {when}. ¦ Det är också här som {name} föddes, {when}. ¦ Det er også her, {name} blev født, {when}.
+C’est aussi ici que est née {name}, {when}. ¦ Zde se také narodila {name}, {when}. ¦ Det är också här som {name} föddes, {when}. ¦ Det er også her, {name} blev født, {when}.
+Ici est né {name}, {when} ; il sera {occ}. ¦ Zde se narodil {name}, {when}; bude z něj {occ}. ¦ Här föddes {name}, {when}; han skulle bli {occ}. ¦ Her blev {name} født, {when}; han skulle blive {occ}.
+Ici est née {name}, {when} ; elle sera {occ}. ¦ Zde se narodila {name}, {when}; bude z ní {occ}. ¦ Här föddes {name}, {when}; hon skulle bli {occ}. ¦ Her blev {name} født, {when}; hun skulle blive {occ}.
+C’est aussi ici que est né {name}, {when} ; il sera {occ}. ¦ Zde se také narodil {name}, {when}; bude z něj {occ}. ¦ Det är också här som {name} föddes, {when}; han skulle bli {occ}. ¦ Det er også her, {name} blev født, {when}; han skulle blive {occ}.
+C’est aussi ici que est née {name}, {when} ; elle sera {occ}. ¦ Zde se také narodila {name}, {when}; bude z ní {occ}. ¦ Det är också här som {name} föddes, {when}; hon skulle bli {occ}. ¦ Det er også her, {name} blev født, {when}; hun skulle blive {occ}.
+Ici, {when}, {name} : {label}{what}. ¦ Zde, {when}, {name}: {label}{what}. ¦ Här, {when}, {name}: {label}{what}. ¦ Her, {when}, {name}: {label}{what}.
+Puis, {when}, {name} : {label}{what}. ¦ Potom, {when}, {name}: {label}{what}. ¦ Sedan, {when}, {name}: {label}{what}. ¦ Derefter, {when}, {name}: {label}{what}.
+Ici, {when}, {name} a épousé {other}. ¦ Zde, {when}, uzavřel(a) {name} sňatek s {other}. ¦ Här, {when}, gifte sig {name} med {other}. ¦ Her, {when}, giftede {name} sig med {other}.
+Puis, {when}, {name} a épousé {other}. ¦ Potom, {when}, uzavřel(a) {name} sňatek s {other}. ¦ Sedan, {when}, gifte sig {name} med {other}. ¦ Derefter, {when}, giftede {name} sig med {other}.
+Ici est mort {name}, {when}{age}. ¦ Zde zemřel {name}, {when}{age}. ¦ Här dog {name}, {when}{age}. ¦ Her døde {name}, {when}{age}.
+Ici est morte {name}, {when}{age}. ¦ Zde zemřela {name}, {when}{age}. ¦ Här dog {name}, {when}{age}. ¦ Her døde {name}, {when}{age}.
+C’est aussi ici que est mort {name}, {when}{age}. ¦ Zde také zemřel {name}, {when}{age}. ¦ Det är också här som {name} dog, {when}{age}. ¦ Det er også her, {name} døde, {when}{age}.
+C’est aussi ici que est morte {name}, {when}{age}. ¦ Zde také zemřela {name}, {when}{age}. ¦ Det är också här som {name} dog, {when}{age}. ¦ Det er også her, {name} døde, {when}{age}.
+son conjoint ¦ jeho/její manžel(ka) ¦ hens make/maka ¦ vedkommendes ægtefælle
+Naissance ({date}) ¦ Narození ({date}) ¦ Födelse ({date}) ¦ Fødsel ({date})
+Mariage avec {name} ({date}) ¦ Sňatek s {name} ({date}) ¦ Vigsel med {name} ({date}) ¦ Vielse med {name} ({date})
+Mariage avec {name} ¦ Sňatek s {name} ¦ Vigsel med {name} ¦ Vielse med {name}
+Mariage ({date}) ¦ Sňatek ({date}) ¦ Vigsel ({date}) ¦ Vielse ({date})
+Décès ({date}) ¦ Úmrtí ({date}) ¦ Död ({date}) ¦ Død ({date})
+ont la joie de vous annoncer la naissance de leur fils ¦ s radostí oznamují narození svého syna ¦ har glädjen att meddela att deras son har fötts ¦ har glæden at meddele fødslen af deres søn
+ont la joie de vous annoncer la naissance de leur fille ¦ s radostí oznamují narození své dcery ¦ har glädjen att meddela att deras dotter har fötts ¦ har glæden at meddele fødslen af deres datter
+a la joie de vous annoncer la naissance de son fils ¦ s radostí oznamuje narození svého syna ¦ har glädjen att meddela att en son har fötts ¦ har glæden at meddele fødslen af en søn
+a la joie de vous annoncer la naissance de sa fille ¦ s radostí oznamuje narození své dcery ¦ har glädjen att meddela att en dotter har fötts ¦ har glæden at meddele fødslen af en datter
+a la joie de vous annoncer la naissance de ¦ s radostí oznamuje narození ¦ har glädjen att meddela födelsen av ¦ har glæden at meddele fødslen af
+On nous prie d’annoncer le décès de ¦ Se zármutkem oznamujeme úmrtí ¦ Vi har den sorgliga plikten att meddela att ¦ Vi må med sorg meddele, at
+survenu {when}{age} ¦ k němuž došlo {when}{age} ¦ som avled {when}{age} ¦ som døde {when}{age}
+survenue {when}{age} ¦ k němuž došlo {when}{age} ¦ som avled {when}{age} ¦ som døde {when}{age}
+, dans sa {n}e année ¦ , ve svém {n}. roce života ¦ , i sitt {n}:e levnadsår ¦ , i sit {n}. leveår
+De la part de ¦ Za ¦ Från ¦ Fra
+Monsieur {name}, son époux ¦ pan {name}, její manžel ¦ Herr {name}, hennes make ¦ Hr. {name}, hendes mand
+Madame {name}, son épouse ¦ paní {name}, jeho manželka ¦ Fru {name}, hans maka ¦ Fru {name}, hans hustru
+{names}, ses enfants ¦ {names}, děti ¦ {names}, barnen ¦ {names}, børnene
+{names}, son fils ¦ {names}, syn ¦ {names}, sonen ¦ {names}, sønnen
+{names}, sa fille ¦ {names}, dcera ¦ {names}, dottern ¦ {names}, datteren
+ont l’honneur de vous faire part du mariage de leurs enfants ¦ mají tu čest oznámit sňatek svých dětí ¦ har äran att tillkännage sina barns vigsel ¦ har den ære at meddele deres børns bryllup
+ont la joie de vous faire part de leur mariage ¦ s radostí oznamují svůj sňatek ¦ har glädjen att meddela sin vigsel ¦ har glæden at meddele deres bryllup
+célébré {when} ¦ který se konal {when} ¦ som ägde rum {when} ¦ som fandt sted {when}
+{names} se sont dit oui ! ¦ {names} si řekli ano! ¦ {names} sa ja! ¦ {names} sagde ja!
+Bienvenue à {name} ! ¦ Vítej, {name}! ¦ Välkommen, {name}! ¦ Velkommen, {name}!
+Adieu à {name} ¦ Sbohem, {name} ¦ Farväl, {name} ¦ Farvel, {name}
+Une année tranquille ¦ Klidný rok ¦ Ett lugnt år ¦ Et stille år
+C’est {when} que {a} a épousé {b}. ¦ Bylo to {when}, kdy {a} uzavřel(a) sňatek s {b}. ¦ Det var {when} som {a} gifte sig med {b}. ¦ Det var {when}, at {a} giftede sig med {b}.
+{name} est le fils de {parents} ¦ {name} je syn {parents} ¦ {name} är son till {parents} ¦ {name} er søn af {parents}
+{name} est la fille de {parents} ¦ {name} je dcera {parents} ¦ {name} är dotter till {parents} ¦ {name} er datter af {parents}
+Tous nos vœux de bonheur aux jeunes époux. ¦ Novomanželům přejeme hodně štěstí. ¦ Vi önskar det nygifta paret all lycka. ¦ Vi ønsker de nygifte alt godt.
+Les heureux parents, {names}, reçoivent les félicitations de toute la famille. ¦ Šťastní rodiče, {names}, přijímají gratulace celé rodiny. ¦ De lyckliga föräldrarna, {names}, tar emot gratulationer från hela släkten. ¦ De lykkelige forældre, {names}, modtager lykønskninger fra hele familien.
+Rien de notable à signaler cette année dans la famille, ce qui est aussi une bonne nouvelle. ¦ Letos se v rodině nestalo nic zvláštního, což je také dobrá zpráva. ¦ Inget särskilt att rapportera från familjen i år, vilket också är goda nyheter. ¦ Intet særligt at berette fra familien i år, og det er også en god nyhed.
+{name} fête ses {n} ans. ¦ {name} slaví {n} let. ¦ {name} fyller {n} år. ¦ {name} fylder {n} år.
+{names} : {n} ans de mariage ! ¦ {names}: {n} let manželství! ¦ {names}: {n} år som gifta! ¦ {names}: {n} års ægteskab!
+Né il y a {n} ans, jour pour jour. ¦ Narozen přesně před {n} lety. ¦ Född för {n} år sedan, på dagen. ¦ Født for {n} år siden, på dagen.
+Née il y a {n} ans, jour pour jour. ¦ Narozena přesně před {n} lety. ¦ Född för {n} år sedan, på dagen. ¦ Født for {n} år siden, på dagen.
+Disparu il y a {n} ans, jour pour jour. ¦ Zemřel přesně před {n} lety. ¦ Gick bort för {n} år sedan, på dagen. ¦ Gik bort for {n} år siden, på dagen.
+Disparue il y a {n} ans, jour pour jour. ¦ Zemřela přesně před {n} lety. ¦ Gick bort för {n} år sedan, på dagen. ¦ Gik bort for {n} år siden, på dagen.
+Fils de {names}. ¦ Syn {names}. ¦ Son till {names}. ¦ Søn af {names}.
+Fille de {names}. ¦ Dcera {names}. ¦ Dotter till {names}. ¦ Datter af {names}.
+{name}, son frère, est né {when} : moins de neuf mois d’écart (des jumeaux auraient la même date). ¦ {name}, bratr, se narodil {when}: méně než devět měsíců rozdílu (dvojčata by měla stejné datum). ¦ {name}, brodern, föddes {when}: mindre än nio månader emellan (tvillingar skulle ha samma datum). ¦ {name}, broderen, blev født {when}: mindre end ni måneder imellem (tvillinger ville have samme dato).
+{name}, sa sœur, est née {when} : moins de neuf mois d’écart (des jumeaux auraient la même date). ¦ {name}, sestra, se narodila {when}: méně než devět měsíců rozdílu (dvojčata by měla stejné datum). ¦ {name}, systern, föddes {when}: mindre än nio månader emellan (tvillingar skulle ha samma datum). ¦ {name}, søsteren, blev født {when}: mindre end ni måneder imellem (tvillinger ville have samme dato).
+{name} est mort {when}, avant ce mariage. ¦ {name} zemřel {when}, před tímto sňatkem. ¦ {name} dog {when}, före denna vigsel. ¦ {name} døde {when}, før denne vielse.
+{name} est morte {when}, avant ce mariage. ¦ {name} zemřela {when}, před tímto sňatkem. ¦ {name} dog {when}, före denna vigsel. ¦ {name} døde {when}, før denne vielse.
+La même année, {label} à {place}, à {km} km : possible, mais à vérifier. ¦ Téhož roku {label} v místě {place}, {km} km odtud: možné, ale ověř to. ¦ Samma år, {label} i {place}, {km} km bort: möjligt, men kontrollera det. ¦ Samme år, {label} i {place}, {km} km væk: muligt, men tjek det.
+Un métier à {n} ans : c’est jeune. ¦ Povolání ve {n} letech: to je brzy. ¦ Ett yrke vid {n} års ålder: det är ungt. ¦ Et erhverv som {n}-årig: det er ungt.
+🔎 À regarder aussi ¦ 🔎 Podívej se také ¦ 🔎 Titta också på ¦ 🔎 Se også
+{name} naît {when} {where}. ¦ {name} se rodí {when} {where}. ¦ {name} föds {when} {where}. ¦ {name} bliver født {when} {where}.
+Ses parents : {list}. ¦ Rodiče: {list}. ¦ Föräldrar: {list}. ¦ Forældre: {list}.
+Parent connu : {list}. ¦ Známý rodič: {list}. ¦ Känd förälder: {list}. ¦ Kendt forælder: {list}.
+Son frère ou sa sœur ¦ Bratr nebo sestra ¦ Bror eller syster ¦ Bror eller søster
+{name} reçoit le baptême {when} {where}. ¦ {name} je pokřtěn(a) {when} {where}. ¦ {name} döps {when} {where}. ¦ {name} bliver døbt {when} {where}.
+Présents : {list}. ¦ Přítomni: {list}. ¦ Närvarande: {list}. ¦ Til stede: {list}.
+Le mariage religieux est célébré {when} {where}. ¦ Církevní sňatek se koná {when} {where}. ¦ Kyrkvigseln äger rum {when} {where}. ¦ Det kirkelige bryllup finder sted {when} {where}.
+Le mariage civil est célébré {when} {where}. ¦ Civilní sňatek se koná {when} {where}. ¦ Den borgerliga vigseln äger rum {when} {where}. ¦ Det borgerlige bryllup finder sted {when} {where}.
+{name} se marie avec {who} {when} {where}. ¦ {name} uzavírá sňatek s {who} {when} {where}. ¦ {name} gifter sig med {who} {when} {where}. ¦ {name} gifter sig med {who} {when} {where}.
+{name} se marie {when} {where}. ¦ {name} uzavírá sňatek {when} {where}. ¦ {name} gifter sig {when} {where}. ¦ {name} gifter sig {when} {where}.
+{name} meurt {when} {where}{age}. ¦ {name} umírá {when} {where}{age}. ¦ {name} dör {when} {where}{age}. ¦ {name} dør {when} {where}{age}.
+Cause notée : {cause}. ¦ Zapsaná příčina: {cause}. ¦ Angiven orsak: {cause}. ¦ Angivet årsag: {cause}.
+{name} repose {where} ¦ {name} odpočívá {where} ¦ {name} vilar {where} ¦ {name} hviler {where}
+{name} est inhumé ¦ {name} je pohřben ¦ {name} är begravd ¦ {name} er begravet
+{name} est inhumée ¦ {name} je pohřbena ¦ {name} är begravd ¦ {name} er begravet
+{name} est inhumé(e) ¦ {name} je pohřben(a) ¦ {name} är begravd ¦ {name} er begravet
+(inhumation {when}) ¦ (pohřeb {when}) ¦ (begravning {when}) ¦ (begravelse {when})
+{kind} {when} {where}. ¦ {kind} {when} {where}. ¦ {kind} {when} {where}. ¦ {kind} {when} {where}.
+{name} exerce le métier de {job}{where}. ¦ {name} pracuje jako {job}{where}. ¦ {name} arbetar som {job}{where}. ¦ {name} arbejder som {job}{where}.
+{name} s’installe {where}{addr}. ¦ {name} se usazuje {where}{addr}. ¦ {name} bosätter sig {where}{addr}. ¦ {name} slår sig ned {where}{addr}.
+{name} habite {where}{addr}. ¦ {name} bydlí {where}{addr}. ¦ {name} bor {where}{addr}. ¦ {name} bor {where}{addr}.
+Au recensement de {y}, {name} vit {where}{desc}. ¦ Při sčítání lidu v roce {y} žije {name} {where}{desc}. ¦ Vid folkräkningen {y} bor {name} {where}{desc}. ¦ Ved folketællingen i {y} bor {name} {where}{desc}.
+Au recensement {when}, {name} vit {where}{desc}. ¦ Při sčítání lidu {when} žije {name} {where}{desc}. ¦ Vid folkräkningen {when} bor {name} {where}{desc}. ¦ Ved folketællingen {when} bor {name} {where}{desc}.
+à l’adresse « {ad} » ¦ na adrese „{ad}“ ¦ på adressen ”{ad}” ¦ på adressen »{ad}«
+Métier noté : {job}. ¦ Zapsané povolání: {job}. ¦ Angivet yrke: {job}. ¦ Angivet erhverv: {job}.
+Le foyer compte {who}. ¦ Domácnost tvoří {who}. ¦ Hushållet består av {who}. ¦ Husstanden består af {who}.
+{label} {when} {where}. ¦ {label} {when} {where}. ¦ {label} {when} {where}. ¦ {label} {when} {where}.
+Recensement de {y} ¦ Sčítání lidu {y} ¦ Folkräkningen {y} ¦ Folketællingen {y}
+Déménagement ¦ Stěhování ¦ Flytt ¦ Flytning
+Domicile ¦ Bydliště ¦ Bostad ¦ Bopæl
+Crémation ¦ Kremace ¦ Kremering ¦ Kremering
+{n} enfants connus : {list}. ¦ Známé děti ({n}): {list}. ¦ {n} kända barn: {list}. ¦ {n} kendte børn: {list}.
+Un enfant connu : {list}. ¦ Jedno známé dítě: {list}. ¦ Ett känt barn: {list}. ¦ Ét kendt barn: {list}.
+Pendant sa vie ¦ Během života ¦ Under livet ¦ I løbet af livet
+Sa vie en quelques mots ¦ Život v několika slovech ¦ Ett liv med några ord ¦ Et liv med få ord
+Ta version de la biographie (📖 sur la fiche). ¦ Tvoje verze životopisu (📖 na kartě). ¦ Din version av levnadsbeskrivningen (📖 på posten). ¦ Din version af biografien (📖 på posten).
+Biographie écrite par l’app d’après la fiche. ¦ Životopis napsaný aplikací podle karty. ¦ Levnadsbeskrivning skriven av appen utifrån posten. ¦ Biografi skrevet af appen ud fra posten.
+Les lieux de sa vie ¦ Místa jeho/jejího života ¦ Platserna i ett liv ¦ Stederne i et liv
+Sa descendance ¦ Potomstvo ¦ Ättlingar ¦ Efterkommere
+{list} dans la généalogie. ¦ {list} v rodokmenu. ¦ {list} i släktträdet. ¦ {list} i slægtstræet.
+Récit d’une vie — {name} ¦ Příběh života — {name} ¦ En levnadsberättelse — {name} ¦ En livshistorie — {name}
+=petit-enfant ¦ vnouče|vnoučata|vnoučat ¦ barnbarn|barnbarn ¦ barnebarn|børnebørn
+=arrière-petit-enfant ¦ pravnouče|pravnoučata|pravnoučat ¦ barnbarnsbarn|barnbarnsbarn ¦ oldebarn|oldebørn
+=autre descendant ¦ další potomek|další potomci|dalších potomků ¦ annan ättling|andra ättlingar ¦ anden efterkommer|andre efterkommere
+=signature ¦ podpis|podpisy|podpisů ¦ namnteckning|namnteckningar ¦ underskrift|underskrifter
+=visage ¦ tvář|tváře|tváří ¦ ansikte|ansikten ¦ ansigt|ansigter
+=trésor caché ¦ skrytý poklad|skryté poklady|skrytých pokladů ¦ gömd skatt|gömda skatter ¦ skjult skat|skjulte skatte
+Garder la mémoire ¦ Uchovat vzpomínky ¦ Bevara minnen ¦ Bevare minder
+← Tous les trésors ¦ ← Všechny poklady ¦ ← Alla skatter ¦ ← Alle skatte
+Trésors · {fam} ¦ Poklady · {fam} ¦ Skatter · {fam} ¦ Skatte · {fam}
+Un texte, un son ou une vidéo qui ne s’ouvre qu’à une date : « pour les 18 ans de Léa », « en 2050 ». ¦ Text, zvuk nebo video, které se otevře až v určitý den: „k 18. narozeninám Léy“, „v roce 2050“. ¦ En text, ett ljud eller en video som öppnas först ett visst datum: ”till Léas 18-årsdag”, ”år 2050”. ¦ En tekst, en lyd eller en video, der først åbner på en bestemt dato: »til Léas 18-års fødselsdag«, »i 2050«.
+{n} scellée ¦ {n} zapečetěno ¦ {n} förseglat ¦ {n} forseglet
+{n} ouverte ¦ {n} otevřeno ¦ {n} öppnat ¦ {n} åbnet
+📬 Ouvertes ¦ 📬 Otevřené ¦ 📬 Öppnade ¦ 📬 Åbnede
+Aucune lettre ouverte pour l’instant ¦ Zatím žádný otevřený dopis ¦ Inga öppnade brev än ¦ Ingen åbnede breve endnu
+Une lettre scellée s’ouvre toute seule le jour venu. ¦ Zapečetěný dopis se v daný den otevře sám. ¦ Ett förseglat brev öppnas av sig självt när dagen kommer. ¦ Et forseglet brev åbner af sig selv, når dagen kommer.
+Souvenirs des sens ¦ Vzpomínky smyslů ¦ Sinnesminnen ¦ Sansernes minder
+L’odeur de la cire, le bruit du moulin, le goût des confitures : ce qu’aucun acte ne garde. ¦ Vůně vosku, zvuk mlýna, chuť marmelády: to, co žádný záznam neuchová. ¦ Doften av vax, ljudet från kvarnen, smaken av sylt: det som ingen handling bevarar. ¦ Duften af voks, lyden af møllen, smagen af syltetøj: det, som intet dokument gemmer.
+Le sens ¦ Smysl ¦ Sinnet ¦ Sansen
+👃 Une odeur ¦ 👃 Vůně ¦ 👃 En doft ¦ 👃 En duft
+👂 Un son ¦ 👂 Zvuk ¦ 👂 Ett ljud ¦ 👂 En lyd
+👅 Un goût ¦ 👅 Chuť ¦ 👅 En smak ¦ 👅 En smag
+✋ Au toucher ¦ ✋ Na dotek ¦ ✋ En känsla vid beröring ¦ ✋ Ved berøring
+👁 Une image ¦ 👁 Obraz ¦ 👁 En bild ¦ 👁 Et billede
+Les souvenirs qui ne tiennent dans aucun acte : une odeur, un bruit, un goût. Joins-y un son enregistré ou une photo si tu en as. ¦ Vzpomínky, které se nevejdou do žádného záznamu: vůně, zvuk, chuť. Přidej k nim nahraný zvuk nebo fotku, jestli nějakou máš. ¦ Minnen som inte ryms i någon handling: en doft, ett ljud, en smak. Lägg till ett inspelat ljud eller ett foto om du har. ¦ Minder, der ikke passer ind i noget dokument: en duft, en lyd, en smag. Tilføj en optaget lyd eller et foto, hvis du har.
+Noter un souvenir ¦ Zapsat vzpomínku ¦ Skriv ner ett minne ¦ Skriv et minde ned
+📋 Voir dans Listes › Mémoire familiale ¦ 📋 Zobrazit v Seznamy › Rodinná paměť ¦ 📋 Visa i Listor › Släktens minne ¦ 📋 Se i Lister › Familiens minde
+Rangé avec les expressions, surnoms, traditions et témoignages ¦ Uloženo spolu s rčeními, přezdívkami, tradicemi a svědectvími ¦ Sparas tillsammans med uttryck, smeknamn, traditioner och vittnesmål ¦ Gemt sammen med udtryk, kælenavne, traditioner og vidnesbyrd
+Aucun souvenir noté pour l’instant : l’odeur de la cire dans l’escalier, le bruit du moulin, le goût des confitures de Mémé… ¦ Zatím žádná zapsaná vzpomínka: vůně vosku na schodech, zvuk mlýna, chuť babiččiny marmelády… ¦ Inga minnen nedskrivna än: doften av vax i trappan, ljudet från kvarnen, smaken av mormors sylt… ¦ Ingen minder skrevet ned endnu: duften af voks på trappen, lyden af møllen, smagen af mormors syltetøj…
+Le livre de recettes ¦ Kniha receptů ¦ Receptboken ¦ Opskriftsbogen
+Les recettes de la famille, avec qui les faisait et leur histoire, puis un vrai livre à imprimer. ¦ Rodinné recepty, kdo je vařil a jejich příběh, a pak skutečná kniha k tisku. ¦ Släktens recept, vem som lagade dem och deras historia, sedan en riktig bok att skriva ut. ¦ Familiens opskrifter, hvem der lavede dem og deres historie, og så en rigtig bog at udskrive.
+Rubrique ¦ Oddíl ¦ Avsnitt ¦ Afsnit
+Entrées et soupes ¦ Předkrmy a polévky ¦ Förrätter och soppor ¦ Forretter og supper
+Plats ¦ Hlavní jídla ¦ Huvudrätter ¦ Hovedretter
+Desserts et gâteaux ¦ Dezerty a koláče ¦ Efterrätter och kakor ¦ Desserter og kager
+Confitures et conserves ¦ Marmelády a zavařeniny ¦ Sylt och konserver ¦ Syltetøj og konserves
+Boissons ¦ Nápoje ¦ Drycker ¦ Drikkevarer
+Ajouter une recette ¦ Přidat recept ¦ Lägg till ett recept ¦ Tilføj en opskrift
+Imprimer le livre ¦ Vytisknout knihu ¦ Skriv ut boken ¦ Udskriv bogen
+{label} : couverture, sommaire, une page chacun ¦ {label}: obálka, obsah, každý na jedné stránce ¦ {label}: omslag, innehåll, en sida var ¦ {label}: forside, indhold, en side hver
+Aucune recette pour l’instant : le far de Mamie, la soupe aux choux du dimanche… ¦ Zatím žádný recept: babiččin koláč, nedělní zelňačka… ¦ Inga recept än: mormors pannkaka, söndagens kålsoppa… ¦ Ingen opskrifter endnu: mormors æblekage, søndagens kålsuppe…
+Rien à mettre dans le livre pour l’instant : commence par « ＋ {what} ». ¦ Zatím není co dát do knihy: začni tlačítkem „＋ {what}“. ¦ Inget att lägga i boken än: börja med ”＋ {what}”. ¦ Intet at lægge i bogen endnu: begynd med »＋ {what}«.
+Les chansons de la famille ¦ Rodinné písně ¦ Släktens sånger ¦ Familiens sange
+Berceuses, chansons de banquet, de conscrits : paroles, air, qui la chantait, l’enregistrement, et un carnet à imprimer. ¦ Ukolébavky, písně z hostin, odvodní písně: slova, nápěv, kdo ji zpíval, nahrávka a zpěvník k tisku. ¦ Vaggvisor, festsånger, sånger från mönstringen: text, melodi, vem som sjöng den, inspelningen och ett sånghäfte att skriva ut. ¦ Vuggeviser, festsange, soldatersange: tekst, melodi, hvem der sang den, optagelsen og et sanghæfte at udskrive.
+Berceuses ¦ Ukolébavky ¦ Vaggvisor ¦ Vuggeviser
+Chansons de fête et de repas ¦ Písně k oslavám a ke stolu ¦ Fest- och bordsvisor ¦ Fest- og bordsange
+Chansons de travail ¦ Pracovní písně ¦ Arbetssånger ¦ Arbejdssange
+Conscrits et soldats ¦ Odvedenci a vojáci ¦ Värnpliktiga och soldater ¦ Soldater og rekrutter
+Noël ¦ Vánoce ¦ Jul ¦ Jul
+En patois ¦ V nářečí ¦ På dialekt ¦ På dialekt
+Les paroles, l’air, qui la chantait — et, si tu peux, l’enregistrement (un son choisi dans les médias). ¦ Slova, nápěv, kdo ji zpíval — a pokud můžeš, i nahrávku (zvuk vybraný z médií). ¦ Texten, melodin, vem som sjöng den — och om du kan, inspelningen (ett ljud valt bland medierna). ¦ Teksten, melodien, hvem der sang den — og hvis du kan, optagelsen (en lyd valgt blandt medierne).
+Ajouter une chanson ¦ Přidat píseň ¦ Lägg till en sång ¦ Tilføj en sang
+Imprimer le carnet ¦ Vytisknout zpěvník ¦ Skriv ut sånghäftet ¦ Udskriv sanghæftet
+Aucune chanson pour l’instant : la berceuse de Mémé, la chanson des fins de banquet… ¦ Zatím žádná píseň: babiččina ukolébavka, píseň na konci hostiny… ¦ Inga sånger än: mormors vaggvisa, sången i slutet av kalaset… ¦ Ingen sange endnu: mormors vuggevise, sangen sidst på festen…
+L’entretien guidé ¦ Řízený rozhovor ¦ Den guidade intervjun ¦ Det guidede interview
+Les bonnes questions à poser à un grand-parent, lues à voix haute ; l’enregistrement est rangé sur sa fiche, avec un repère par question. ¦ Správné otázky pro babičku či dědečka, čtené nahlas; nahrávka se uloží na jeho kartu se značkou u každé otázky. ¦ De rätta frågorna att ställa till en mor- eller farförälder, upplästa; inspelningen sparas på hens post, med en markering för varje fråga. ¦ De rigtige spørgsmål at stille en bedsteforælder, læst højt; optagelsen gemmes på vedkommendes post, med en markør for hvert spørgsmål.
+Les questions s’affichent en grand (et peuvent être lues à voix haute) ; l’entretien s’enregistre au micro, chaque question est marquée dans l’enregistrement, puis le son est rangé dans les médias de la fiche. ¦ Otázky se zobrazí velkým písmem (a lze je číst nahlas); rozhovor se nahrává mikrofonem, každá otázka je v nahrávce označena a zvuk se pak uloží do médií karty. ¦ Frågorna visas i stor stil (och kan läsas upp); intervjun spelas in med mikrofonen, varje fråga markeras i inspelningen, sedan sparas ljudet bland postens media. ¦ Spørgsmålene vises med stor skrift (og kan læses højt); interviewet optages med mikrofonen, hvert spørgsmål markeres i optagelsen, og lyden gemmes derefter i postens medier.
+La personne interrogée ¦ Dotazovaná osoba ¦ Den intervjuade ¦ Den interviewede
+Lire les questions à voix haute ¦ Číst otázky nahlas ¦ Läs upp frågorna ¦ Læs spørgsmålene højt
+Les thèmes ¦ Témata ¦ Teman ¦ Temaer
+🧒 L’enfance ¦ 🧒 Dětství ¦ 🧒 Barndomen ¦ 🧒 Barndommen
+✏️ L’école ¦ ✏️ Škola ¦ ✏️ Skolan ¦ ✏️ Skolen
+👪 La famille ¦ 👪 Rodina ¦ 👪 Familjen ¦ 👪 Familien
+🔨 Le travail ¦ 🔨 Práce ¦ 🔨 Arbetet ¦ 🔨 Arbejdet
+💞 L’amour ¦ 💞 Láska ¦ 💞 Kärleken ¦ 💞 Kærligheden
+🪖 La guerre ¦ 🪖 Válka ¦ 🪖 Kriget ¦ 🪖 Krigen
+🏡 La maison ¦ 🏡 Dům ¦ 🏡 Huset ¦ 🏡 Huset
+🎉 Les fêtes ¦ 🎉 Svátky ¦ 🎉 Högtiderna ¦ 🎉 Højtiderne
+💬 Pour plus tard ¦ 💬 Na později ¦ 💬 Till senare ¦ 💬 Til senere
+Les entretiens enregistrés ¦ Nahrané rozhovory ¦ Inspelade intervjuer ¦ Optagne interviews
+🎙️ Commencer l’entretien ¦ 🎙️ Začít rozhovor ¦ 🎙️ Starta intervjun ¦ 🎙️ Start interviewet
+Les questions sur papier, avec la place pour noter les réponses ¦ Otázky na papíře s místem na odpovědi ¦ Frågorna på papper, med plats för svaren ¦ Spørgsmålene på papir, med plads til svarene
+Aucun entretien pour l’instant ¦ Zatím žádný rozhovor ¦ Inga intervjuer än ¦ Ingen interviews endnu
+Choisis la personne et les thèmes, puis « 🎙️ Commencer l’entretien ». ¦ Vyber osobu a témata, pak „🎙️ Začít rozhovor“. ¦ Välj personen och teman, sedan ”🎙️ Starta intervjun”. ¦ Vælg personen og temaerne, derefter »🎙️ Start interviewet«.
+La veillée en un clic ¦ Večer vyprávění jedním kliknutím ¦ Berättarkvällen med ett klick ¦ Fortælleaftenen med ét klik
+En plein écran, les portraits d’une branche défilent, chaque vie est racontée à voix haute, avec une musique douce. ¦ Na celé obrazovce se střídají portréty jedné větve, každý život je vyprávěn nahlas, s tichou hudbou. ¦ I helskärm visas porträtten från en gren, varje liv berättas högt, med lugn musik. ¦ I fuld skærm glider portrætterne fra en gren forbi, hvert liv fortælles højt, med stille musik.
+Autour de ¦ Kolem ¦ Kring ¦ Omkring
+Secondes par vie ¦ Sekund na život ¦ Sekunder per liv ¦ Sekunder pr. liv
+Raconter à voix haute ¦ Vyprávět nahlas ¦ Berätta högt ¦ Fortæl højt
+Musique douce ¦ Tichá hudba ¦ Lugn musik ¦ Stille musik
+En plein écran : les portraits défilent, chaque vie est racontée. Espace = pause, flèches = avant / après, Échap = fin. ¦ Na celé obrazovce: portréty se střídají, každý život je vyprávěn. Mezerník = pauza, šipky = zpět / dál, Esc = konec. ¦ I helskärm: porträtten visas ett efter ett, varje liv berättas. Mellanslag = paus, pilar = bakåt / framåt, Esc = slut. ¦ I fuld skærm: portrætterne glider forbi, hvert liv fortælles. Mellemrum = pause, pile = tilbage / frem, Esc = slut.
+La veillée de la famille {name} ¦ Večer rodiny {name} ¦ Familjen {name}s kväll ¦ Familien {name}s aften
+Ce soir, on raconte {n} vies de la famille de {name}. ¦ Dnes večer vyprávíme {n} životů z rodiny {name}. ¦ I kväll berättar vi {n} liv ur {name}s släkt. ¦ I aften fortæller vi {n} liv fra {name}s familie.
+Bonne nuit ¦ Dobrou noc ¦ God natt ¦ Godnat
+Et maintenant, à vous de raconter ce dont vous vous souvenez. ¦ A teď je řada na vás: vyprávějte, co si pamatujete. ¦ Och nu är det er tur att berätta det ni minns. ¦ Og nu er det jeres tur til at fortælle det, I husker.
+{n} vies à raconter : {list} ¦ Životy k vyprávění ({n}): {list} ¦ {n} liv att berätta: {list} ¦ {n} liv at fortælle: {list}
+🕯️ Lancer la veillée ¦ 🕯️ Spustit večer ¦ 🕯️ Starta kvällen ¦ 🕯️ Start aftenen
+Découvrir ¦ Objevovat ¦ Upptäck ¦ Opdag
+À ton âge… ¦ Ve tvém věku… ¦ I din ålder… ¦ I din alder…
+Ce que faisait chaque ancêtre au même âge que toi : il se mariait, partait, devenait parent… ¦ Co dělal každý předek ve stejném věku jako ty: ženil se, odcházel, stával se rodičem… ¦ Vad varje anfader gjorde i samma ålder som du: gifte sig, flyttade, blev förälder… ¦ Hvad hver ane gjorde i samme alder som dig: blev gift, rejste, blev forælder…
+L’âge ¦ Věk ¦ Ålder ¦ Alder
+Mon âge ¦ Můj věk ¦ Min ålder ¦ Min alder
+Aperçu, A4 ou A5, ⤓ PDF ¦ Náhled, A4 nebo A5, ⤓ PDF ¦ Förhandsvisning, A4 eller A5, ⤓ PDF ¦ Forhåndsvisning, A4 eller A5, ⤓ PDF
+Les prénoms qui sautent une génération ¦ Jména, která přeskočí generaci ¦ Förnamn som hoppar över en generation ¦ Fornavne, der springer en generation over
+Henri comme son grand-père, Rose comme son arrière-grand-mère : les prénoms transmis par-dessus les parents. ¦ Henri po dědečkovi, Rose po prababičce: jména předaná přes hlavu rodičů. ¦ Henri som sin farfar, Rose som sin gammelmormor: namn som förts vidare förbi föräldrarna. ¦ Henri som sin bedstefar, Rose som sin oldemor: navne givet videre hen over forældrene.
+Un prénom qui « saute » une génération : l’enfant le reçoit d’un grand-parent (ou d’un arrière-grand-parent), alors que ni son père ni sa mère ne le portaient. La popularité de chaque prénom en France (INSEE) est dans <b>Patrimoine → Prénoms</b>. ¦ Jméno, které „přeskočí“ generaci: dítě ho dostane po prarodiči (nebo praprarodiči), ačkoli ho nenosil ani otec, ani matka. Oblíbenost každého jména ve Francii (INSEE) najdeš v <b>Dědictví → Křestní jména</b>. ¦ Ett namn som ”hoppar över” en generation: barnet får det från en mor- eller farförälder (eller gammelförälder), fast varken far eller mor bar det. Hur populärt varje namn är i Frankrike (INSEE) finns i <b>Arv → Förnamn</b>. ¦ Et navn, der »springer« en generation over: barnet får det fra en bedsteforælder (eller oldeforælder), selvom hverken far eller mor bar det. Hvor populært hvert navn er i Frankrig (INSEE), står i <b>Arv → Fornavne</b>.
+{n} prénom transmis par-dessus une génération ¦ Jména předaná přes generaci: {n} ¦ {n} namn fört vidare över en generation ¦ {n} navn givet videre over en generation
+{n} fois ¦ {n}× ¦ {n} gånger ¦ {n} gange
+Les prénoms qui reviennent ¦ Opakující se jména ¦ Återkommande förnamn ¦ Tilbagevendende fornavne
+Le pouvoir d’achat d’autrefois ¦ Kupní síla v minulosti ¦ Köpkraften förr ¦ Købekraften i gamle dage
+Une dot de 1 200 francs en 1880 : combien d’euros d’aujourd’hui, de kilos de pain, de journées de travail ? ¦ Věno 1 200 franků v roce 1880: kolik je to dnešních eur, kilogramů chleba, dní práce? ¦ En hemgift på 1 200 franc år 1880: hur många euro i dag, kilo bröd, dagsverken? ¦ En medgift på 1.200 franc i 1880: hvor mange euro i dag, kilo brød, arbejdsdage?
+La somme ¦ Částka ¦ Beloppet ¦ Beløbet
+livres (ou francs de l’époque) ¦ livry (nebo dobové franky) ¦ livres (eller dåtidens franc) ¦ livres (eller datidens franc)
+sous (1/20 de livre ou de franc) ¦ sous (1/20 livru nebo franku) ¦ sous (1/20 livre eller franc) ¦ sous (1/20 livre eller franc)
+deniers (1/240 de livre) ¦ deniéry (1/240 livru) ¦ deniers (1/240 livre) ¦ deniers (1/240 livre)
+anciens francs (après 1960) ¦ staré franky (po roce 1960) ¦ gamla franc (efter 1960) ¦ gamle franc (efter 1960)
+centimes ¦ centimy ¦ centimer ¦ centimer
+euros ¦ eura ¦ euro ¦ euro
+Repères : à partir de 1901, l’indice des prix de l’INSEE ; avant, un ordre de grandeur d’après le prix des denrées. Le pain : prix moyen du kilo de pain ordinaire. Les journées : le salaire d’un journalier. Un écu = 3 livres. ¦ Vodítka: od roku 1901 cenový index INSEE; předtím řádový odhad podle cen potravin. Chléb: průměrná cena kila obyčejného chleba. Dny: mzda nádeníka. Jeden écu = 3 livry. ¦ Riktmärken: från 1901 INSEE:s prisindex; dessförinnan en grov uppskattning utifrån livsmedelspriser. Bröd: medelpris för ett kilo vanligt bröd. Dagar: en daglönares lön. En écu = 3 livres. ¦ Pejlemærker: fra 1901 INSEE's prisindeks; før det et groft skøn ud fra fødevarepriser. Brød: gennemsnitsprisen på et kilo almindeligt brød. Dage: en daglejers løn. En écu = 3 livres.
+🪙 Le calcul pas à pas dans le Convertisseur d’autrefois ↗ ¦ 🪙 Výpočet krok za krokem v Převodníku starých měn ↗ ¦ 🪙 Beräkningen steg för steg i Omvandlaren för gamla mynt ↗ ¦ 🪙 Udregningen trin for trin i Omregneren for gamle mønter ↗
+Les sommes de ton arbre ¦ Částky z tvého rodokmenu ¦ Belopp i ditt släktträd ¦ Beløb i dit slægtstræ
+{sum} en {y} ¦ {sum} v roce {y} ¦ {sum} år {y} ¦ {sum} i {y}
+≈ {eur} d’aujourd’hui ¦ ≈ {eur} v dnešních penězích ¦ ≈ {eur} i dag ¦ ≈ {eur} i dag
+{kg} kg de pain ¦ {kg} kg chleba ¦ {kg} kg bröd ¦ {kg} kg brød
+{d} journées de travail ¦ {d} dní práce ¦ {d} dagsverken ¦ {d} arbejdsdage
+En euros d’aujourd’hui ¦ V dnešních eurech ¦ I dagens euro ¦ I nutidens euro
+En pain ¦ V chlebu ¦ I bröd ¦ I brød
+soit {n} baguettes d’aujourd’hui ¦ tj. {n} dnešních baget ¦ alltså {n} baguetter i dag ¦ altså {n} flutes i dag
+En journées de travail ¦ Ve dnech práce ¦ I dagsverken ¦ I arbejdsdage
+d’un journalier en {y} ¦ nádeníka v roce {y} ¦ för en daglönare år {y} ¦ for en daglejer i {y}
+≈ {eur} au SMIC d’aujourd’hui ¦ ≈ {eur} při dnešní minimální mzdě ¦ ≈ {eur} med dagens minimilön ¦ ≈ {eur} med nutidens mindsteløn
+francs ¦ franky ¦ franc ¦ franc
+{n} {unit} de {y}. ¦ {n} {unit} z roku {y}. ¦ {n} {unit} från {y}. ¦ {n} {unit} fra {y}.
+Les deux chiffres ne disent pas la même chose : le pain coûtait proportionnellement bien plus cher autrefois, le travail beaucoup moins. ¦ Obě čísla neříkají totéž: chléb byl kdysi poměrně mnohem dražší, práce mnohem levnější. ¦ De två siffrorna säger inte samma sak: bröd var förr relativt mycket dyrare, arbete mycket billigare. ¦ De to tal siger ikke det samme: brød var dengang forholdsvis meget dyrere, arbejde meget billigere.
+Les vieux mots des actes ¦ Stará slova ze záznamů ¦ Gamla ord i handlingarna ¦ Gamle ord i dokumenterne
+Laboureur, ondoyé, brumaire, douaire… Colle un acte : les mots anciens sont surlignés et expliqués. ¦ Laboureur, ondoyé, brumaire, douaire… Vlož záznam: stará (francouzská) slova se zvýrazní a vysvětlí. ¦ Laboureur, ondoyé, brumaire, douaire… Klistra in en handling: de gamla (franska) orden markeras och förklaras. ¦ Laboureur, ondoyé, brumaire, douaire… Indsæt et dokument: de gamle (franske) ord fremhæves og forklares.
+Colle ici le texte d’un acte ¦ Sem vlož text záznamu ¦ Klistra in texten från en handling här ¦ Indsæt teksten fra et dokument her
+Dans ton arbre ¦ Ve tvém rodokmenu ¦ I ditt släktträd ¦ I dit slægtstræ
+Chercher un mot ¦ Hledat slovo ¦ Sök ett ord ¦ Søg et ord
+{n} mots ¦ Slov: {n} ¦ {n} ord ¦ {n} ord
+📜 Le latin, les abréviations et les anciennes lettres ↗ ¦ 📜 Latina, zkratky a stará písmena ↗ ¦ 📜 Latin, förkortningar och gamla bokstäver ↗ ¦ 📜 Latin, forkortelser og gamle bogstaver ↗
+Ces mots et leurs explications sont ceux des actes français : ils restent en français. ¦ Tato slova a jejich vysvětlení pocházejí z francouzských záznamů: zůstávají ve francouzštině. ¦ Dessa ord och deras förklaringar kommer från franska handlingar: de förblir på franska. ¦ Disse ord og deres forklaringer stammer fra franske dokumenter: de forbliver på fransk.
+Jouer en famille ¦ Hrát s rodinou ¦ Spela med familjen ¦ Spil med familien
+Jeu des 7 familles ¦ Kvarteto ¦ Kvartett ¦ Kvartet
+Les cartes faites depuis ton arbre : la photo de chacun au choix et recadrée, six styles de cartes, les couleurs, le dos ; à imprimer et découper. ¦ Karty vytvořené z tvého rodokmenu: fotka každého podle výběru a oříznutá, šest stylů karet, barvy, rub; k vytištění a vystřižení. ¦ Kort gjorda från ditt släktträd: allas foto valt och beskuret, sex kortstilar, färger, baksida; att skriva ut och klippa ut. ¦ Kort lavet ud fra dit slægtstræ: alles foto valgt og beskåret, seks kortstile, farver, bagside; til at udskrive og klippe ud.
+Les familles ¦ Rodiny ¦ Familjerna ¦ Familierne
+par nom de famille ¦ podle příjmení ¦ efter efternamn ¦ efter efternavn
+par branche (arrière-grands-parents) ¦ podle větve (praprarodiče) ¦ efter gren (gammelföräldrar) ¦ efter gren (oldeforældre)
+Le style ¦ Styl ¦ Stil ¦ Stil
+🃏 Classique ¦ 🃏 Klasický ¦ 🃏 Klassisk ¦ 🃏 Klassisk
+📜 Ancien (papier jauni) ¦ 📜 Starobylý (zažloutlý papír) ¦ 📜 Gammaldags (gulnat papper) ¦ 📜 Gammeldags (gulnet papir)
+◻️ Moderne (grande photo) ¦ ◻️ Moderní (velká fotka) ¦ ◻️ Modern (stort foto) ¦ ◻️ Moderne (stort foto)
+🧸 Pour les petits ¦ 🧸 Pro nejmenší ¦ 🧸 För de små ¦ 🧸 Til de små
+🎩 Années folles ¦ 🎩 Bláznivá dvacátá léta ¦ 🎩 Glada tjugotalet ¦ 🎩 De glade tyvere
+🪵 Bois gravé ¦ 🪵 Dřevoryt ¦ 🪵 Träsnitt ¦ 🪵 Træsnit
+Couleurs d’origine ¦ Původní barvy ¦ Ursprungliga färger ¦ Oprindelige farver
+Le dos ¦ Rub ¦ Baksidan ¦ Bagsiden
+Un dos à motif (à imprimer au verso) ¦ Rub se vzorem (k tisku na zadní stranu) ¦ En mönstrad baksida (att skriva ut på baksidan) ¦ En mønstret bagside (til at udskrive på bagsiden)
+Sans dos ¦ Bez rubu ¦ Ingen baksida ¦ Ingen bagside
+Le lieu de naissance ¦ Místo narození ¦ Födelseort ¦ Fødested
+La liste de la famille ¦ Seznam rodiny ¦ Familjelistan ¦ Familielisten
+Les photos choisies, les couleurs et le style de départ ¦ Vybrané fotky, barvy a výchozí styl ¦ De valda fotona, färgerna och startstilen ¦ De valgte fotos, farverne og startstilen
+📷 sur une carte : choisir et recadrer sa photo. ¦ 📷 na kartě: vybrat a oříznout její fotku. ¦ 📷 på ett kort: välj och beskär dess foto. ¦ 📷 på et kort: vælg og beskær dets foto.
+{n} familles de 6 cartes ({total} cartes). ¦ Rodin po 6 kartách: {n} ({total} karet). ¦ {n} familjer med 6 kort ({total} kort). ¦ {n} familier med 6 kort ({total} kort).
+Choisir et recadrer la photo de {name} ¦ Vybrat a oříznout fotku osoby {name} ¦ Välj och beskär {name}s foto ¦ Vælg og beskær {name}s foto
+Le grand-père ¦ Dědeček ¦ Farfadern ¦ Bedstefaren
+Le fils ¦ Syn ¦ Sonen ¦ Sønnen
+Jeu des familles ¦ Kvarteto ¦ Kvartett ¦ Kvartet
+La grand-mère ¦ Babička ¦ Farmodern ¦ Bedstemoren
+La fille ¦ Dcera ¦ Dottern ¦ Datteren
+Les planches de cartes (et leurs dos), avec la règle du jeu ¦ Archy karet (a jejich rub) s pravidly hry ¦ Kortarken (och deras baksidor), med spelreglerna ¦ Kortarkene (og deres bagsider), med spillereglerne
+Arbre à colorier ¦ Strom k vybarvení ¦ Träd att färglägga ¦ Træ til at farvelægge
+Les vrais ancêtres d’un enfant en traits noirs : un arbre, un jardin de fleurs, un village, des blasons, des montgolfières, une ruche, un éventail ou une rosace. ¦ Skuteční předkové dítěte v černých obrysech: strom, květinová zahrada, vesnice, erby, horkovzdušné balony, úl, vějíř nebo rozeta. ¦ Ett barns verkliga anfäder i svarta konturer: ett träd, en blomsterträdgård, en by, vapensköldar, luftballonger, en bikupa, en solfjäder eller ett rosettfönster. ¦ Et barns virkelige aner i sorte streger: et træ, en blomsterhave, en landsby, våbenskjolde, luftballoner, en bikube, en vifte eller et rosetvindue.
+L’enfant (ou la personne) au pied de l’arbre ¦ Dítě (nebo osoba) u paty stromu ¦ Barnet (eller personen) vid trädets fot ¦ Barnet (eller personen) ved træets fod
+5 (petites cases) ¦ 5 (malá políčka) ¦ 5 (små rutor) ¦ 5 (små felter)
+Le dessin ¦ Kresba ¦ Teckningen ¦ Tegningen
+🌳 Le grand arbre ¦ 🌳 Velký strom ¦ 🌳 Det stora trädet ¦ 🌳 Det store træ
+🌷 Le jardin de fleurs ¦ 🌷 Květinová zahrada ¦ 🌷 Blomsterträdgården ¦ 🌷 Blomsterhaven
+🏡 Le village (une maison chacun) ¦ 🏡 Vesnice (každý svůj dům) ¦ 🏡 Byn (ett hus var) ¦ 🏡 Landsbyen (et hus hver)
+🛡️ Les blasons ¦ 🛡️ Erby ¦ 🛡️ Vapensköldarna ¦ 🛡️ Våbenskjoldene
+🎈 Les montgolfières ¦ 🎈 Horkovzdušné balony ¦ 🎈 Luftballongerna ¦ 🎈 Luftballonerne
+🐝 La ruche (alvéoles) ¦ 🐝 Úl (buňky) ¦ 🐝 Bikupan (celler) ¦ 🐝 Bikuben (celler)
+🪭 L’éventail ¦ 🪭 Vějíř ¦ 🪭 Solfjädern ¦ 🪭 Viften
+🏵️ La rosace ¦ 🏵️ Rozeta ¦ 🏵️ Rosettfönstret ¦ 🏵️ Rosetvinduet
+Le prénom seul (petits) ¦ Jen křestní jméno (malí) ¦ Bara förnamnet (de små) ¦ Kun fornavnet (de små)
+Prénom et nom ¦ Jméno a příjmení ¦ Förnamn och efternamn ¦ Fornavn og efternavn
+Prénom, nom et année ¦ Jméno, příjmení a rok ¦ Förnamn, efternamn och år ¦ Fornavn, efternavn og år
+L’écriture ¦ Písmo ¦ Skrift ¦ Skrift
+D’écolier ¦ Školní ¦ Skrivstil ¦ Skønskrift
+Bâton (lettres rondes) ¦ Tiskací (kulatá písmena) ¦ Textade (runda bokstäver) ¦ Blokbogstaver (runde bogstaver)
+Le trait ¦ Čára ¦ Linjen ¦ Stregen
+Fin (grands) ¦ Tenká (větší děti) ¦ Tunn (större barn) ¦ Tynd (større børn)
+Épais (petits, gros feutres) ¦ Silná (malí, tlusté fixy) ¦ Tjock (små barn, tjocka tuschpennor) ¦ Tyk (små børn, tykke tuscher)
+Sans ¦ Žádný ¦ Ingen ¦ Ingen
+Double trait ¦ Dvojitá čára ¦ Dubbel linje ¦ Dobbelt streg
+Guirlande de feuilles ¦ Girlanda z listů ¦ Lövgirlang ¦ Bladguirlande
+Le titre ¦ Název ¦ Titeln ¦ Titlen
+L’arbre de … ¦ Strom osoby … ¦ Trädet för … ¦ Træet for …
+Dessiner ¦ Kreslit ¦ Rita ¦ Tegn
+Enregistrer un fichier sur l’ordinateur, ou ranger une copie dans les médias ¦ Uložit soubor do počítače, nebo uložit kopii do médií ¦ Spara en fil på datorn, eller lägg en kopia bland medierna ¦ Gem en fil på computeren, eller læg en kopi i medierne
+L’arbre de {name} ¦ Strom osoby {name} ¦ {name}s träd ¦ {name}s træ
+Le quiz du repas ¦ Kvíz u jídla ¦ Middagsquizet ¦ Middagsquizzen
+Sur la télé, en équipes : des questions tirées de l’arbre (qui a épousé qui, où, quel métier), compte à rebours et scores. ¦ Na televizi, v týmech: otázky z rodokmenu (kdo si vzal koho, kde, jaké povolání), odpočet a skóre. ¦ På tv:n, i lag: frågor hämtade ur släktträdet (vem gifte sig med vem, var, vilket yrke), nedräkning och poäng. ¦ På tv'et, i hold: spørgsmål hentet fra slægtstræet (hvem giftede sig med hvem, hvor, hvilket erhverv), nedtælling og point.
+Les équipes (séparées par des virgules) ¦ Týmy (oddělené čárkami) ¦ Lagen (åtskilda med kommatecken) ¦ Holdene (adskilt med kommaer)
+Les {name}, Les cousins ¦ Rodina {name}, Bratranci ¦ Familjen {name}, Kusinerna ¦ Familien {name}, Fætre og kusiner
+Secondes pour répondre ¦ Sekund na odpověď ¦ Sekunder att svara ¦ Sekunder til at svare
+Branche l’ordinateur sur la télé : la question et les quatre réponses s’affichent en grand ; à la fin du compte à rebours (ou avec <b>Entrée</b>), la bonne réponse apparaît, puis on donne le point à l’équipe qui a trouvé (touches <b>1</b> à <b>9</b>). Répondre depuis les téléphones demanderait que l’application soit joignable depuis tout le réseau de la maison : ce n’est pas possible pour l’instant, on joue devant l’écran. ¦ Připoj počítač k televizi: otázka a čtyři odpovědi se zobrazí velkým písmem; po skončení odpočtu (nebo klávesou <b>Enter</b>) se objeví správná odpověď a bod dostane tým, který ji uhodl (klávesy <b>1</b> až <b>9</b>). Odpovídat z telefonů by vyžadovalo, aby aplikace byla dostupná z celé domácí sítě: to zatím nejde, hraje se před obrazovkou. ¦ Koppla datorn till tv:n: frågan och de fyra svaren visas i stor stil; när nedräkningen är slut (eller med <b>Enter</b>) visas rätt svar, sedan ger du poängen till laget som hade rätt (tangenterna <b>1</b> till <b>9</b>). Att svara från telefonerna skulle kräva att appen nås från hela hemmanätverket: det går inte än, så ni spelar framför skärmen. ¦ Tilslut computeren til tv'et: spørgsmålet og de fire svar vises med stor skrift; når nedtællingen er slut (eller med <b>Enter</b>), vises det rigtige svar, og så giver du pointet til det hold, der gættede det (tasterne <b>1</b> til <b>9</b>). At svare fra telefonerne ville kræve, at appen kan nås fra hele hjemmets netværk: det er ikke muligt endnu, så I spiller foran skærmen.
+📺 Lancer le quiz ¦ 📺 Spustit kvíz ¦ 📺 Starta quizet ¦ 📺 Start quizzen
+Un avant-goût ¦ Ochutnávka ¦ Ett smakprov ¦ En forsmag
+Créer et fabriquer ¦ Tvořit a vyrábět ¦ Skapa och tillverka ¦ Skab og fremstil
+Le faire-part d’un événement ¦ Oznámení o události ¦ Ett tillkännagivande om en händelse ¦ Et kort om en begivenhed
+Une naissance, un mariage ou un décès de l’arbre : le faire-part se compose tout seul, dans le style de l’époque. ¦ Narození, sňatek nebo úmrtí z rodokmenu: oznámení se sestaví samo, ve stylu doby. ¦ En födelse, vigsel eller ett dödsfall i släktträdet: tillkännagivandet skrivs av sig självt, i tidens stil. ¦ En fødsel, et bryllup eller et dødsfald fra slægtstræet: kortet skriver sig selv, i tidens stil.
+L’événement ¦ Událost ¦ Händelsen ¦ Begivenheden
+Classique (1900) ¦ Klasický (1900) ¦ Klassisk (1900) ¦ Klassisk (1900)
+Art déco (1925) ¦ Art deco (1925) ¦ Art déco (1925) ¦ Art deco (1925)
+Fleuri ¦ Květinový ¦ Blommigt ¦ Blomstret
+Deuil (liseré noir) ¦ Smuteční (černý lem) ¦ Sorg (svart kant) ¦ Sorg (sort kant)
+Romantique (dentelle, 1880) ¦ Romantický (krajka, 1880) ¦ Romantisk (spets, 1880) ¦ Romantisk (blonde, 1880)
+Art nouveau (1900) ¦ Secese (1900) ¦ Jugend (1900) ¦ Art nouveau (1900)
+Champêtre (papier kraft) ¦ Venkovský (balicí papír) ¦ Lantligt (kraftpapper) ¦ Landligt (kraftpapir)
+Bleu et or ¦ Modrá a zlatá ¦ Blått och guld ¦ Blå og guld
+Layette (naissance) ¦ Pro miminko (narození) ¦ Bebis (födelse) ¦ Baby (fødsel)
+Épuré ¦ Střídmý ¦ Avskalat ¦ Enkelt
+🎨 Plus d’options ¦ 🎨 Více možností ¦ 🎨 Fler alternativ ¦ 🎨 Flere muligheder
+Le format ¦ Formát ¦ Format ¦ Format
+Carte A6 (portrait) ¦ Karta A6 (na výšku) ¦ A6-kort (stående) ¦ A6-kort (stående)
+Marque-page ¦ Záložka do knihy ¦ Bokmärke ¦ Bogmærke
+Celle du style ¦ Podle stylu ¦ Stilens egen ¦ Stilens egen
+Écriture à la plume ¦ Psáno perem ¦ Skrivet med penna ¦ Skrevet med pen
+Élégante (Didot) ¦ Elegantní (Didot) ¦ Elegant (Didot) ¦ Elegant (Didot)
+Bâton ¦ Bezpatkové ¦ Sans serif ¦ Sans serif
+Les ornements ¦ Ozdoby ¦ Ornament ¦ Ornamenter
+Ceux du style ¦ Podle stylu ¦ Stilens egna ¦ Stilens egne
+Mes couleurs ¦ Moje barvy ¦ Mina färger ¦ Mine farver
+La photo de la personne ¦ Fotka osoby ¦ Personens foto ¦ Personens foto
+Sa forme ¦ Její tvar ¦ Dess form ¦ Dens form
+Couleurs de la photo ¦ Barvy fotky ¦ Fotots färger ¦ Fotoets farver
+D’origine ¦ Původní ¦ Original ¦ Original
+Le texte (une ligne par ligne ; * devant une ligne = en grand) ¦ Text (řádek po řádku; * před řádkem = velké písmo) ¦ Texten (rad för rad; * före en rad = stort) ¦ Teksten (linje for linje; * foran en linje = stort)
+Le mur des signatures ¦ Zeď podpisů ¦ Namnteckningarnas vägg ¦ Underskrifternes væg
+Toutes les signatures repérées sur les actes, découpées et rangées par époque : l’écriture de chaque génération. ¦ Všechny podpisy nalezené v záznamech, vystřižené a seřazené podle doby: písmo každé generace. ¦ Alla namnteckningar som hittats i handlingarna, utklippta och ordnade efter tid: varje generations handstil. ¦ Alle underskrifter fundet i dokumenterne, klippet ud og ordnet efter tid: hver generations håndskrift.
+La Belle Époque ¦ Belle Époque ¦ Belle Époque ¦ Belle Époque
+L’affiche (image PNG) ¦ Plakát (obrázek PNG) ¦ Affischen (PNG-bild) ¦ Plakatet (PNG-billede)
+Lieux et voyages ¦ Místa a cesty ¦ Platser och resor ¦ Steder og rejser
+Le film des migrations ¦ Film o stěhování ¦ Migrationsfilmen ¦ Migrationsfilmen
+Année après année, chacun se déplace sur la carte, de sa naissance à sa mort ; le film s’enregistre en vidéo. ¦ Rok po roce se každý pohybuje po mapě, od narození do smrti; film se uloží jako video. ¦ År efter år förflyttar sig var och en på kartan, från födelse till död; filmen sparas som video. ¦ År efter år bevæger alle sig hen over kortet, fra fødsel til død; filmen gemmes som video.
+Durée du film ¦ Délka filmu ¦ Filmens längd ¦ Filmens længde
+Sans carte ¦ Bez mapy ¦ Utan karta ¦ Uden kort
+▶ Jouer ¦ ▶ Přehrát ¦ ▶ Spela ¦ ▶ Afspil
+{n} parcours, de {y0} à {y1} ¦ Cesty: {n}, od {y0} do {y1} ¦ {n} färdvägar, från {y0} till {y1} ¦ {n} ruter, fra {y0} til {y1}
+famille {name} ¦ rodina {name} ¦ familjen {name} ¦ familien {name}
+Le fond de carte se charge… ¦ Podkladová mapa se načítá… ¦ Bakgrundskartan laddas… ¦ Baggrundskortet indlæses…
+{n} personne en vie ¦ Žijících osob: {n} ¦ {n} person vid liv ¦ {n} person i live
+Fond de carte © OpenStreetMap, Esri ¦ Podkladová mapa © OpenStreetMap, Esri ¦ Bakgrundskarta © OpenStreetMap, Esri ¦ Baggrundskort © OpenStreetMap, Esri
+La vidéo (WebM) ¦ Video (WebM) ¦ Videon (WebM) ¦ Videoen (WebM)
+Le film se joue une fois pendant l’enregistrement ¦ Film se během nahrávání přehraje jednou ¦ Filmen spelas en gång under inspelningen ¦ Filmen afspilles én gang under optagelsen
+Cette image (PNG) ¦ Tento obrázek (PNG) ¦ Den här bilden (PNG) ¦ Dette billede (PNG)
+Le film des migrations — {title} ¦ Film o stěhování — {title} ¦ Migrationsfilmen — {title} ¦ Migrationsfilmen — {title}
+La vidéo, enregistrée pendant que le film se joue ¦ Video nahrané během přehrávání filmu ¦ Videon, inspelad medan filmen spelas ¦ Videoen, optaget mens filmen afspilles
+Le village des ancêtres sur la carte de Cassini et sur la carte d’aujourd’hui, avec un rideau à faire glisser. ¦ Vesnice předků na Cassiniho mapě a na dnešní mapě, s posuvnou oponou. ¦ Anfädernas by på Cassinis karta och på dagens karta, med en ridå att dra. ¦ Anernes landsby på Cassinis kort og på nutidens kort, med et gardin at trække.
+Hier ¦ Kdysi ¦ Då ¦ Dengang
+Carte de Cassini (XVIIIe s.) ¦ Cassiniho mapa (18. stol.) ¦ Cassinis karta (1700-talet) ¦ Cassinis kort (1700-tallet)
+Cassini, exemplaire du roi ¦ Cassini, královský exemplář ¦ Cassini, kungens exemplar ¦ Cassini, kongens eksemplar
+Carte d’État-major (1820-1866) ¦ Francouzská generálštábní mapa (1820-1866) ¦ Franska generalstabskartan (1820-1866) ¦ Fransk generalstabskort (1820-1866)
+OpenHistoricalMap ¦ OpenHistoricalMap ¦ OpenHistoricalMap ¦ OpenHistoricalMap
+Fais glisser le rideau (ou les flèches du clavier). ¦ Posuň oponu (nebo použij šipky na klávesnici). ¦ Dra ridån (eller använd piltangenterna). ¦ Træk gardinet (eller brug piletasterne).
+Rideau entre la carte d’hier et celle d’aujourd’hui ¦ Opona mezi dávnou a dnešní mapou ¦ Ridå mellan gårdagens och dagens karta ¦ Gardin mellem fortidens og nutidens kort
+Cartes : Géoplateforme IGN (Cassini, État-major), © OpenStreetMap, Esri. Dans l’onglet Carte, le mode « superposition » compare aussi deux fonds avec l’opacité. ¦ Mapy: Géoplateforme IGN (Cassini, generální štáb), © OpenStreetMap, Esri. Na kartě Mapa umí režim „překrytí“ porovnat dva podklady i pomocí průhlednosti. ¦ Kartor: IGN Géoplateforme (Cassini, generalstaben), © OpenStreetMap, Esri. På fliken Karta jämför läget ”överlagring” också två bakgrunder med opacitet. ¦ Kort: IGN Géoplateforme (Cassini, generalstaben), © OpenStreetMap, Esri. På fanen Kort sammenligner tilstanden »overlejring« også to baggrunde med gennemsigtighed.
+La promenade guidée ¦ Procházka s průvodcem ¦ Den guidade promenaden ¦ Den guidede gåtur
+Les lieux d’une vie dans l’ordre, l’histoire de chaque étape lue à voix haute — même toute seule, en arrivant sur place. ¦ Místa jednoho života popořadě, příběh každé zastávky čtený nahlas — i sám, když dorazíš na místo. ¦ Platserna i ett liv i ordning, berättelsen om varje stopp uppläst — även av sig själv när du kommer fram. ¦ Stederne i et liv i rækkefølge, historien om hvert stop læst højt — også af sig selv, når du når frem.
+La promenade de ¦ Procházka osoby ¦ Promenaden för ¦ Gåturen for
+Le parcours ¦ Trasa ¦ Rutten ¦ Ruten
+les lieux de sa vie ¦ místa jeho/jejího života ¦ platserna i hens liv ¦ stederne i vedkommendes liv
+les villages de ses ancêtres ¦ vesnice jeho/jejích předků ¦ hens anfäders byar ¦ vedkommendes aners landsbyer
+🔊 Tout le guide ¦ 🔊 Celý průvodce ¦ 🔊 Hela guiden ¦ 🔊 Hele guiden
+📍 Me guider en marchant ¦ 📍 Veď mě při chůzi ¦ 📍 Guida mig medan jag går ¦ 📍 Guid mig, mens jeg går
+⏹ Silence ¦ ⏹ Ticho ¦ ⏹ Tyst ¦ ⏹ Stille
+Le guide de la promenade, étape par étape ¦ Průvodce procházkou, zastávka po zastávce ¦ Promenadguiden, steg för steg ¦ Gåturens guide, trin for trin
+🔊 Écouter ¦ 🔊 Poslechnout ¦ 🔊 Lyssna ¦ 🔊 Lyt
+🧭 Itinéraire ¦ 🧭 Trasa ¦ 🧭 Vägbeskrivning ¦ 🧭 Rutevejledning
+{km} km en tout (à vol d’oiseau) ¦ Celkem {km} km (vzdušnou čarou) ¦ {km} km totalt (fågelvägen) ¦ {km} km i alt (i luftlinje)
+Outils malins ¦ Šikovné nástroje ¦ Smarta verktyg ¦ Smarte værktøjer
+Dater une vieille photo ¦ Datovat starou fotku ¦ Datera ett gammalt foto ¦ Datér et gammelt foto
+Le support, le carton, les vêtements, les coiffures : une fourchette d’années, et qui de l’arbre ça peut être. ¦ Podklad, kartón, oblečení, účesy: rozmezí let a kdo z rodokmenu to může být. ¦ Underlaget, kartongen, kläderna, frisyrerna: ett spann av år, och vem i släktträdet det kan vara. ¦ Underlaget, kartonen, tøjet, frisurerne: et årsinterval, og hvem i slægtstræet det kan være.
+Coche ce que tu vois sur la photo (une ou plusieurs réponses par question, ou rien si tu ne sais pas). Les repères sont volontairement larges. ¦ Zaškrtni, co na fotce vidíš (jednu nebo více odpovědí na otázku, nebo nic, pokud nevíš). Rozmezí jsou záměrně široká. ¦ Kryssa för det du ser på fotot (ett eller flera svar per fråga, eller inget om du inte vet). Spannen är medvetet breda. ¦ Sæt kryds ved det, du ser på fotoet (et eller flere svar pr. spørgsmål, eller intet, hvis du ikke ved det). Intervallerne er bevidst brede.
+Le support ¦ Podklad ¦ Underlaget ¦ Underlaget
+Plaque de métal argentée, comme un miroir, dans un écrin ¦ Postříbřená kovová destička jako zrcadlo, v pouzdře ¦ Försilvrad metallplåt, som en spegel, i ett etui ¦ Forsølvet metalplade, som et spejl, i et etui
+Image sur verre, dans un écrin (ambrotype) ¦ Obraz na skle, v pouzdře (ambrotypie) ¦ Bild på glas, i ett etui (ambrotypi) ¦ Billede på glas, i et etui (ambrotypi)
+Image sur une fine plaque de fer, sombre (ferrotype) ¦ Obraz na tenkém železném plechu, tmavý (ferrotypie) ¦ Bild på en tunn järnplåt, mörk (ferrotypi) ¦ Billede på en tynd jernplade, mørkt (ferrotypi)
+Petite carte (6 × 10 cm) collée sur un carton : carte de visite ¦ Malá karta (6 × 10 cm) nalepená na kartonu: vizitka (carte de visite) ¦ Litet kort (6 × 10 cm) uppklistrat på kartong: visitkortsporträtt ¦ Lille kort (6 × 10 cm) klæbet på karton: visitkortfotografi
+Grande carte (11 × 16 cm) sur carton : carte cabinet ¦ Velká karta (11 × 16 cm) na kartonu: kabinetka ¦ Stort kort (11 × 16 cm) på kartong: kabinettskort ¦ Stort kort (11 × 16 cm) på karton: kabinetkort
+Carte postale photo (dos imprimé « carte postale ») ¦ Fotografická pohlednice (na rubu natištěno „pohlednice“) ¦ Fotovykort (baksidan tryckt ”vykort”) ¦ Fotopostkort (bagsiden påtrykt »postkort«)
+Tirage papier aux bords dentelés ¦ Papírová fotka s vroubkovanými okraji ¦ Papperskopia med tandade kanter ¦ Papirkopi med takkede kanter
+Petit tirage papier noir et blanc sans carton, bords blancs droits ¦ Malá černobílá papírová fotka bez kartonu, rovné bílé okraje ¦ Liten svartvit papperskopia utan kartong, raka vita kanter ¦ Lille sort-hvid papirkopi uden karton, lige hvide kanter
+Photo couleur aux couleurs passées (orange, magenta) ¦ Barevná fotka s vybledlými barvami (oranžová, purpurová) ¦ Färgfoto med blekta färger (orange, magenta) ¦ Farvefoto med falmede farver (orange, magenta)
+Tirage carré à bord blanc large (type Polaroid / Instamatic) ¦ Čtvercová fotka se širokým bílým okrajem (typ Polaroid / Instamatic) ¦ Kvadratisk kopia med bred vit kant (typ Polaroid / Instamatic) ¦ Kvadratisk kopi med bred hvid kant (type Polaroid / Instamatic)
+Le carton (carte de visite ou cabinet) ¦ Karton (vizitka nebo kabinetka) ¦ Kartongen (visitkort eller kabinettskort) ¦ Kartonen (visitkort eller kabinetkort)
+Coins carrés, carton fin et clair ¦ Hranaté rohy, tenký a světlý karton ¦ Raka hörn, tunn och ljus kartong ¦ Lige hjørner, tynd og lys karton
+Carton épais et coloré (crème, noir, bordeaux), tranche dorée ¦ Silný barevný karton (krémový, černý, vínový), zlacená ořízka ¦ Tjock färgad kartong (gräddvit, svart, vinröd), förgylld kant ¦ Tyk farvet karton (creme, sort, bordeaux), forgyldt kant
+Nom du photographe en grandes lettres décorées au dos, médailles ¦ Jméno fotografa velkými zdobenými písmeny na rubu, medaile ¦ Fotografens namn med stora dekorerade bokstäver på baksidan, medaljer ¦ Fotografens navn med store dekorerede bogstaver på bagsiden, medaljer
+Bord biseauté doré ¦ Zlacený zkosený okraj ¦ Förgylld fasad kant ¦ Forgyldt facetslebet kant
+Les vêtements des femmes ¦ Ženské oblečení ¦ Kvinnornas kläder ¦ Kvindernes tøj
+Jupe très large en cloche (crinoline), épaules tombantes ¦ Velmi široká zvonovitá sukně (krinolína), svažitá ramena ¦ Mycket vid klockformad kjol (krinolin), sluttande axlar ¦ Meget vid klokkeformet nederdel (krinoline), faldende skuldre
+Jupe plate devant et gonflée derrière (tournure) ¦ Sukně vpředu rovná a vzadu nadýchaná (turnýra) ¦ Kjol slät fram och uppbyggd bak (turnyr) ¦ Nederdel flad foran og pustet op bagtil (turnure)
+Manches très bouffantes en haut (gigot) ¦ Rukávy nahoře velmi nabírané (skopové kýty) ¦ Ärmar mycket puffiga upptill (gigotärmar) ¦ Ærmer meget pustede foroven (skinkeærmer)
+Silhouette en S, col montant, grand chapeau ¦ Silueta ve tvaru S, vysoký límec, velký klobouk ¦ S-formad siluett, hög krage, stor hatt ¦ S-formet silhuet, høj krave, stor hat
+Robe droite, taille basse, jupe au genou ¦ Rovné šaty, nízký pas, sukně ke kolenům ¦ Rak klänning, låg midja, knälång kjol ¦ Lige kjole, lav talje, knælang nederdel
+Épaules carrées, jupe sous le genou ¦ Hranatá ramena, sukně pod kolena ¦ Fyrkantiga axlar, kjol nedanför knät ¦ Firkantede skuldre, nederdel under knæet
+Jupe ample et taille fine (New Look) ¦ Široká sukně a útlý pas (New Look) ¦ Vid kjol och smal midja (New Look) ¦ Vid nederdel og smal talje (New Look)
+Coiffe régionale ou bonnet de paysanne ¦ Krojový čepec nebo selský čepec ¦ Regional huvudbonad eller bondmössa ¦ Egnsbestemt hovedtøj eller bondekone-hue
+Les coiffures ¦ Účesy ¦ Frisyrer ¦ Frisurer
+Raie au milieu, cheveux plaqués sur les oreilles ¦ Pěšinka uprostřed, vlasy přilehlé přes uši ¦ Mittbena, håret slätt över öronen ¦ Midterskilning, håret glat over ørerne
+Frange frisée sur le front ¦ Kudrnatá ofina na čele ¦ Lockig lugg i pannan ¦ Krøllet pandehår
+Chignon haut et volumineux ¦ Vysoký objemný drdol ¦ Hög, voluminös knut ¦ Høj, fyldig knold
+Cheveux courts « à la garçonne » ¦ Krátké vlasy „na chlapečka“ ¦ Kort ”pagefrisyr” ¦ Kort »pagehår«
+Mise en plis ondulée ¦ Vlnitá ondulace ¦ Vågig läggning ¦ Bølget frisure
+Les hommes ¦ Muži ¦ Männen ¦ Mændene
+Haut-de-forme ¦ Cylindr ¦ Cylinderhatt ¦ Høj hat
+Canotier (chapeau de paille plat) ¦ Slamák (plochý slaměný klobouk) ¦ Kanotier (platt halmhatt) ¦ Stråhat (flad stråhat)
+Moustache fournie, sans barbe ¦ Hustý knír, bez vousů ¦ Kraftig mustasch, inget skägg ¦ Kraftigt overskæg, intet fuldskæg
+Barbe entière fournie ¦ Plnovous ¦ Helskägg ¦ Fuldskæg
+Col cassé et nœud papillon ¦ Lámaný límec a motýlek ¦ Vingkrage och fluga ¦ Flipkrave og butterfly
+Uniforme bleu horizon ¦ Uniforma barvy horizontové modři ¦ Horisontblå uniform ¦ Horisontblå uniform
+Costume trois-pièces large, chapeau mou ¦ Volný třídílný oblek, měkký klobouk ¦ Vid tredelad kostym, mjuk hatt ¦ Løst tredelt jakkesæt, blød hat
+Pantalon pattes d’éléphant, cheveux longs ¦ Kalhoty do zvonu, dlouhé vlasy ¦ Utsvängda byxor, långt hår ¦ Udsvejfede bukser, langt hår
+Le décor ¦ Prostředí ¦ Miljön ¦ Omgivelserne
+Fond peint, colonne, balustrade, rideau drapé ¦ Malované pozadí, sloup, balustráda, řasená opona ¦ Målad fond, kolonn, balustrad, draperad ridå ¦ Malet baggrund, søjle, balustrade, draperet forhæng
+Fond uni, simple chaise ¦ Jednobarevné pozadí, obyčejná židle ¦ Enfärgad bakgrund, enkel stol ¦ Ensfarvet baggrund, enkel stol
+Dehors, photo prise sur le vif (pas en atelier) ¦ Venku, momentka (ne v ateliéru) ¦ Utomhus, en ögonblicksbild (inte i ateljé) ¦ Udendørs, et øjebliksbillede (ikke i atelier)
+Et toi, que sais-tu ? ¦ A co víš ty? ¦ Och vad vet du? ¦ Og hvad ved du?
+Photographe ou date notée : de ¦ Fotograf nebo zapsané datum: od ¦ Fotograf eller angivet datum: från ¦ Fotograf eller angivet dato: fra
+Âge apparent de la personne ¦ Zdánlivý věk osoby ¦ Personens synbara ålder ¦ Personens tilsyneladende alder
+C’est ¦ Je to ¦ Det är ¦ Det er
+un homme, un garçon ¦ muž, chlapec ¦ en man, en pojke ¦ en mand, en dreng
+une femme, une fille ¦ žena, dívka ¦ en kvinna, en flicka ¦ en kvinde, en pige
+Lieu (nom du photographe, ville) ¦ Místo (jméno fotografa, město) ¦ Plats (fotografens namn, stad) ¦ Sted (fotografens navn, by)
+Coche au moins un indice ¦ Zaškrtni aspoň jednu stopu ¦ Kryssa för minst en ledtråd ¦ Sæt kryds ved mindst ét spor
+Les rappels de recherche ¦ Připomínky výzkumu ¦ Forskningspåminnelser ¦ Forskningspåmindelser
+« Tu n’as pas touché à la branche FAURE depuis 8 mois » : les branches endormies, ce qui y manque, un rappel en un clic. ¦ „Větve FAURE ses nedotkl už 8 měsíců“: spící větve, co v nich chybí, připomínka jedním kliknutím. ¦ ”Du har inte rört grenen FAURE på 8 månader”: vilande grenar, vad som saknas där, en påminnelse med ett klick. ¦ »Du har ikke rørt grenen FAURE i 8 måneder«: sovende grene, hvad der mangler, en påmindelse med ét klik.
+Les branches de ¦ Větve osoby ¦ Grenarna för ¦ Grenene for
+Endormie depuis au moins ¦ Spící nejméně ¦ Vilande i minst ¦ Sovende i mindst
+peu importe ¦ libovolně ¦ spelar ingen roll ¦ ligegyldigt
+La date est celle de la dernière modification d’une fiche de la branche. Un rappel se crée en un clic : il rejoint les rappels de l’application (Listes → Rappels) et le widget « À venir ». ¦ Datum je datum poslední úpravy některé karty ve větvi. Připomínka se vytvoří jedním kliknutím: přidá se k připomínkám aplikace (Seznamy → Připomínky) a k widgetu „Nadcházející“. ¦ Datumet är när en post i grenen senast ändrades. En påminnelse skapas med ett klick: den läggs till appens påminnelser (Listor → Påminnelser) och widgeten ”På gång”. ¦ Datoen er seneste ændring af en post i grenen. En påmindelse oprettes med ét klik: den kommer med i appens påmindelser (Lister → Påmindelser) og widgetten »Kommende«.
+Branche {name} ({first}) ¦ Větev {name} ({first}) ¦ Grenen {name} ({first}) ¦ Grenen {name} ({first})
+Reprendre la branche {name} ({first}) ¦ Vrátit se k větvi {name} ({first}) ¦ Ta upp grenen {name} ({first}) igen ¦ Genoptag grenen {name} ({first})
+Aucune branche endormie depuis aussi longtemps ¦ Žádná větev nespí tak dlouho ¦ Ingen gren har vilat så länge ¦ Ingen gren har sovet så længe
+Les actes manquants ¦ Chybějící záznamy ¦ Saknade handlingar ¦ Manglende dokumenter
+Ce qui manque à la lignée, rangé par archives où chercher (l’assistant de l’onglet Recherche). ¦ Co v linii chybí, seřazené podle archivů, kde hledat (průvodce na kartě Výzkum). ¦ Vad som saknas i släktlinjen, ordnat efter arkiv att söka i (assistenten på fliken Forskning). ¦ Hvad der mangler i slægtslinjen, ordnet efter arkiver at søge i (assistenten på fanen Forskning).
+Je regarde ce qui manque… ¦ Zjišťuji, co chybí… ¦ Jag ser efter vad som saknas… ¦ Jeg ser efter, hvad der mangler…
+L’assistant <b>« Que manque-t-il ? »</b> (onglet Recherche) liste les actes qui manquent à la lignée, rangés par service d’archives, avec la commune, les années et les séries à consulter (état civil, tables décennales, registres paroissiaux, notaires, recensements, registres matricules), et un lien vers FranceArchives. ¦ Průvodce <b>„Co chybí?“</b> (karta Výzkum) vypíše záznamy, které v linii chybějí, seřazené podle archivu, s obcí, roky a fondy ke studiu (matriky, desetileté rejstříky, farní matriky, notáři, sčítání lidu, vojenské kmenové listy) a s odkazem na FranceArchives. ¦ Assistenten <b>”Vad saknas?”</b> (fliken Forskning) listar de handlingar som saknas i släktlinjen, ordnade efter arkiv, med ort, år och serier att söka i (folkbokföring, tioårsregister, kyrkböcker, notarier, folkräkningar, rullor) och en länk till FranceArchives. ¦ Assistenten <b>»Hvad mangler?«</b> (fanen Forskning) viser de dokumenter, der mangler i slægtslinjen, ordnet efter arkiv, med by, år og serier at se i (civilregistrering, tiårsregistre, kirkebøger, notarer, folketællinger, lægdsruller) og et link til FranceArchives.
+{n} recherches à faire sur 6 générations ¦ Hledání k provedení na 6 generacích: {n} ¦ {n} sökningar att göra över 6 generationer ¦ {n} søgninger at lave over 6 generationer

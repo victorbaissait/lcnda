@@ -443,7 +443,6 @@ Boutons encadrés ¦ Orámovaná tlačítka ¦ Inramade knappar ¦ Indrammede kn
 Cache les outils avancés ou rarement utilisés : ADN, comparaison, animaux, écran divisé, nouvelle fenêtre, réglages du tableau de bord, supprimer / verrouiller une fiche, historique, filtres avancés de la carte… ¦ Skryje pokročilé nebo málo používané nástroje: DNA, porovnání, zvířata, rozdělená obrazovka, nové okno, nastavení přehledu, smazání / zamčení karty, historie, pokročilé filtry mapy… ¦ Döljer avancerade eller sällan använda verktyg: DNA, jämförelse, djur, delad skärm, nytt fönster, översiktens inställningar, radera / låsa en post, historik, kartans avancerade filter… ¦ Skjuler avancerede eller sjældent brugte værktøjer: DNA, sammenligning, dyr, delt skærm, nyt vindue, oversigtens indstillinger, slet / lås en post, historik, kortets avancerede filtre…
 Caché ¦ Skryté ¦ Dold ¦ Skjult
 Caché : le mode simple s’ouvre d’ici, ou par le widget du tableau de bord. ¦ Skryté: jednoduchý režim se otevírá odsud nebo widgetem na přehledu. ¦ Dold: enkelt läge öppnas härifrån eller via widgeten på översikten. ¦ Skjult: enkel tilstand åbnes herfra eller via widgetten på oversigten.
-Calendrier de cette date ¦ Kalendář tohoto data ¦ Kalender för det här datumet ¦ Kalender for denne dato
 Calendrier républicain ¦ Republikánský kalendář ¦ Republikanska kalendern ¦ Den republikanske kalender
 Calendrier source ¦ Zdrojový kalendář ¦ Källkalender ¦ Kildekalender
 Calendrier utilisé par défaut dans les champs de date ¦ Výchozí kalendář v polích data ¦ Standardkalender i datumfälten ¦ Standardkalender i datofelterne
@@ -500,7 +499,6 @@ Couleurs et daltonisme ¦ Barvy a barvoslepost ¦ Färger och färgblindhet ¦ F
 Couleurs seulement affaiblies (léger) ¦ Barvy jen oslabené (mírné) ¦ Färgerna bara försvagade (lätt) ¦ Farverne kun svækket (let)
 Créer / modifier une branche ¦ Vytvořit / upravit větev ¦ Skapa / redigera en gren ¦ Opret / rediger en gren
 Créer / modifier une étiquette ¦ Vytvořit / upravit štítek ¦ Skapa / redigera en etikett ¦ Opret / rediger en etiket
-Créer le type ¦ Vytvořit typ ¦ Skapa typen ¦ Opret typen
 Créer un type ¦ Vytvořit typ ¦ Skapa en typ ¦ Opret en type
 Créer une copie de test ¦ Vytvořit zkušební kopii ¦ Skapa en testkopia ¦ Opret en testkopi
 Créer une forme ¦ Vytvořit tvar ¦ Skapa en form ¦ Opret en form
@@ -571,7 +569,6 @@ Garder les dernières ¦ Ponechat poslední ¦ Behåll de senaste ¦ Behold de s
 Gouvernement du Québec ¦ Vláda Québecu ¦ Québecs regering ¦ Québecs regering
 Gravité ¦ Závažnost ¦ Allvarlighetsgrad ¦ Alvorlighed
 Grosse flèche de souris ¦ Velký kurzor myši ¦ Stor muspekare ¦ Stor musemarkør
-Grégorien ¦ Gregoriánský ¦ Gregoriansk ¦ Gregoriansk
 Hauteur des boutons ¦ Výška tlačítek ¦ Knapparnas höjd ¦ Knappernes højde
 Hauteur des cadres ¦ Výška dlaždic ¦ Rutornas höjd ¦ Felternes højde
 Hauteur des lignes ¦ Výška řádků ¦ Radhöjd ¦ Rækkehøjde
@@ -613,7 +610,6 @@ Les anniversaires ¦ Narozeniny ¦ Födelsedagarna ¦ Fødselsdagene
 Les blocs se détachent un peu moins du fond. ¦ Bloky méně vystupují z pozadí. ¦ Blocken sticker ut lite mindre från bakgrunden. ¦ Blokkene skiller sig lidt mindre ud fra baggrunden.
 Les couleurs de l’app, sans changement. ¦ Barvy aplikace, beze změny. ¦ Appens färger, oförändrade. ¦ Appens farver, uændrede.
 Les dates seules (comme avant) ¦ Jen data (jako dřív) ¦ Bara datum (som förut) ¦ Kun datoer (som før)
-Les deux ¦ Obojí ¦ Båda ¦ Begge
 Les fiches marquées « confidentielles » ne sont jamais montrées. ¦ Karty označené jako „důvěrné“ se nikdy nezobrazují. ¦ Poster markerade som ”konfidentiella” visas aldrig. ¦ Poster markeret som »fortrolige« vises aldrig.
 Les gros boutons ¦ Velká tlačítka ¦ De stora knapparna ¦ De store knapper
 Les modifications effectuées depuis ce site sont enregistrées ici. ¦ Změny provedené z tohoto webu se zaznamenávají sem. ¦ Ändringar som görs från den här webbplatsen registreras här. ¦ Ændringer foretaget fra dette websted registreres her.
@@ -676,7 +672,6 @@ Personnes identifiées ¦ Identifikované osoby ¦ Identifierade personer ¦ Ide
 Personnes vivantes ¦ Žijící osoby ¦ Levande personer ¦ Levende personer
 Petit écran ¦ Malá obrazovka ¦ Liten skärm ¦ Lille skærm
 Peut se confondre avec un lien ; demande un peu d’habitude. ¦ Může se splést s odkazem; chce to trochu zvyku. ¦ Kan förväxlas med en länk; kräver lite tillvänjning. ¦ Kan forveksles med et link; kræver lidt tilvænning.
-Photo de la personne ¦ Fotka osoby ¦ Personens foto ¦ Personens foto
 Photo des cases de l’arbre ¦ Fotka v polích stromu ¦ Foto i trädets rutor ¦ Foto i træets felter
 Photos retirées ¦ Odebrané fotky ¦ Borttagna foton ¦ Fjernede fotos
 Pictogrammes des tableaux ¦ Piktogramy tabulí ¦ Tavlornas piktogram ¦ Tavlernes piktogrammer
@@ -688,7 +683,6 @@ Plus d’espace : on touche moins souvent le bouton d’à côté. ¦ Víc míst
 Plus grandes, elles se voient de loin ; plus petites, les barres d’outils prennent moins de place. ¦ Větší jsou vidět zdaleka; menší panely nástrojů zabírají méně místa. ¦ Större syns de på avstånd; mindre tar verktygsfälten mindre plats. ¦ Større kan de ses på afstand; mindre fylder værktøjslinjerne mindre.
 Plus haut, la photo se voit mieux ; plus bas, la fiche commence plus tôt. Seulement pour le bandeau photo. ¦ Vyšší: fotka je lépe vidět; nižší: karta začíná dřív. Jen pro fotopruh. ¦ Högre syns fotot bättre; lägre börjar posten tidigare. Bara för fotobanderollen. ¦ Højere ses fotoet bedre; lavere begynder posten tidligere. Kun for fotobanneret.
 Police des cadres ¦ Písmo dlaždic ¦ Rutornas typsnitt ¦ Felternes skrifttype
-Portée ¦ Rozsah ¦ Omfattning ¦ Omfang
 Pour la dyslexie : choisis celle qui te va ¦ Pro dyslexii: vyber, co ti vyhovuje ¦ För dyslexi: välj den som passar dig ¦ For ordblindhed: vælg den, der passer dig
 Pour quitter ¦ K opuštění ¦ För att lämna ¦ For at forlade
 Pour tout le monde ¦ Pro všechny ¦ För alla ¦ For alle
@@ -718,7 +712,6 @@ Récit d’une vie (diaporama tout fait) ¦ Příběh života (hotová prezentac
 Réduire les mouvements ¦ Omezit pohyby ¦ Minska rörelser ¦ Reducér bevægelser
 Réglages de base ¦ Základní nastavení ¦ Grundinställningar ¦ Grundindstillinger
 Réglages et export ¦ Nastavení a export ¦ Inställningar och export ¦ Indstillinger og eksport
-Républicain ¦ Republikánský ¦ Republikansk ¦ Republikansk
 Sans couleur, il faut parfois une seconde de plus pour les reconnaître. ¦ Bez barvy je někdy potřeba vteřina navíc, abys je poznal(a). ¦ Utan färg tar det ibland en sekund till att känna igen dem. ¦ Uden farve tager det nogle gange et sekund mere at genkende dem.
 Se lit comme un acte ¦ Čte se jako matriční záznam ¦ Läses som en handling ¦ Læses som et dokument
 Ses photos, ceux qui y sont nés ¦ Jeho fotky, ti, kdo se tam narodili ¦ Dess foton, de som föddes där ¦ Dets fotos, dem der blev født der
@@ -1359,7 +1352,6 @@ Naissances par décennie ¦ Narození podle desetiletí ¦ Födslar per decenniu
 Prénoms les plus donnés ¦ Nejčastěji dávaná jména ¦ Vanligaste förnamnen ¦ Mest givne fornavne
 Âge au mariage ¦ Věk při sňatku ¦ Ålder vid vigsel ¦ Alder ved vielse
 Liste | Fiches ¦ Seznam | Karty ¦ Lista | Kort ¦ Liste | Kort
-Minguo (Taïwan) ¦ Min-kuo (Tchaj-wan) ¦ Minguo (Taiwan) ¦ Minguo (Taiwan)
 Tailte Éireann ¦ Tailte Éireann ¦ Tailte Éireann ¦ Tailte Éireann
 💾 Enregistrer le projet ¦ 💾 Uložit projekt ¦ 💾 Spara projektet ¦ 💾 Gem projektet
 ⤓ Exporter la vidéo (MP4 / WebM, plusieurs formats)… ¦ ⤓ Exportovat video (MP4 / WebM, více formátů)… ¦ ⤓ Exportera videon (MP4 / WebM, flera format)… ¦ ⤓ Eksportér videoen (MP4 / WebM, flere formater)…
