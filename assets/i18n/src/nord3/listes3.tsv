@@ -1,0 +1,992 @@
+fr ¦ ro
+⤒ Importer une fiche… ¦ ⤒ Importă o fișă…
+{nm}. Le document entre « À vérifier ». ¦ {nm}. Documentul intră la „De verificat”.
+{nm} — à vérifier sur le document. ¦ {nm} — de verificat pe document.
+Déjà sur la fiche : {val} (gardé) ¦ Deja pe fișă: {val} (păstrat)
+Nationalité d’avant : {nm} ¦ Cetățenia anterioară: {nm}
+Notaire : {nm} ¦ Notar: {nm}
+Peine : {nm} ¦ Pedeapsă: {nm}
+quartier de {nm} ¦ cartierul maritim {nm}
+inscrit le {nm} ¦ înscris la {nm}
+Convoi n° {nm} ¦ Convoiul nr. {nm}
+Navire : {nm} ¦ Navă: {nm}
+parti de {nm} ¦ plecat din {nm}
+âge déclaré : {nm} ¦ vârsta declarată: {nm}
+Ces événements s’écrivent sobrement sur la fiche. Une fiche qui porte une déportation, un décès en déportation ou « Fusillé » n’apparaît plus dans les jeux ni dans les Trésors à jouer. ¦ Aceste evenimente se scriu sobru pe fișă. O fișă care are o deportare, un deces în deportare sau „Executat prin împușcare” nu mai apare în jocuri și nici în Comorile de jucat.
+Les décrets de naturalisation de 1883 à 1930 (série BB/11, et BB/34 pour les réintégrations) et les actes des notaires de Paris (Minutier central : contrats de mariage, inventaires après décès, testaments). La recherche se fait dans les inventaires des Archives nationales publiés sur FranceArchives ; les noms y sont écrits « Nom, Prénom ». ¦ Decretele de naturalizare din 1883 până în 1930 (seria BB/11, și BB/34 pentru reintegrări) și actele notarilor din Paris (Minutier central: contracte de căsătorie, inventare succesorale, testamente). Căutarea se face în inventarele Arhivelor Naționale publicate pe FranceArchives; numele sunt scrise acolo „Nume, Prenume”.
+Les Archives nationales d’outre-mer (Aix-en-Provence) : l’état civil des anciennes colonies (Algérie, Antilles, Guyane, Réunion, Indochine, Afrique…) et les registres matricules et dossiers des bagnards (Guyane, Nouvelle-Calédonie). La base d’état civil se cherche par territoire, commune et année. ¦ Arhivele Naționale de peste mări (Aix-en-Provence): starea civilă a fostelor colonii (Algeria, Antile, Guyana, Réunion, Indochina, Africa…) și registrele matricole și dosarele ocnașilor (Guyana, Noua Caledonie). Baza de stare civilă se caută după teritoriu, localitate și an.
+Le Service historique de la Défense : les registres de l’inscription maritime (les marins, quartier par quartier) et les dossiers individuels des officiers. La recherche se fait dans ses inventaires publiés sur FranceArchives. ¦ Serviciul istoric al Apărării: registrele înscrierii maritime (marinarii, cartier cu cartier) și dosarele individuale ale ofițerilor. Căutarea se face în inventarele sale publicate pe FranceArchives.
+Le Journal officiel publiait chaque naturalisation, chaque nomination dans la Légion d’honneur et les autres décorations, et les changements de nom autorisés. Gallica (BnF) en garde les numéros anciens. ¦ Journal officiel publica fiecare naturalizare, fiecare numire în Legiunea de Onoare și celelalte decorații, precum și schimbările de nume autorizate. Gallica (BnF) îi păstrează numerele vechi.
+Les annuaires (Bottin, annuaires départementaux, almanachs du commerce) donnent, année par année, le métier et l’adresse des commerçants et des artisans. Cherche le nom de famille et la commune : un prénom y est rarement écrit en entier. ¦ Anuarele (Bottin, anuare departamentale, almanahuri comerciale) dau, an de an, meseria și adresa comercianților și meșteșugarilor. Caută numele de familie și localitatea: un prenume e rar scris întreg acolo.
+Les bases du ministère de la Culture (POP) : Mérimée pour les monuments (églises, châteaux, maisons, fermes…) et Palissy pour les objets (cloches, retables, mobilier, tableaux d’église). Leur notice peut compléter la fiche d’un lieu, d’une maison ou d’un objet de famille. ¦ Bazele Ministerului Culturii (POP): Mérimée pentru monumente (biserici, castele, case, ferme…) și Palissy pentru obiecte (clopote, retabluri, mobilier, tablouri de biserică). Fișa lor poate completa fișa unui loc, a unei case sau a unui obiect de familie.
+Les Archives de l’État en Belgique (recherche de personnes dans l’état civil et les registres), les archives des cantons suisses (une par canton) et les listes des passagers arrivés à Ellis Island, à New York (1892-1954 : il faut un compte gratuit sur le site de la fondation). ¦ Arhivele Statului din Belgia (căutare de persoane în starea civilă și registre), arhivele cantoanelor elvețiene (câte una pe canton) și listele pasagerilor sosiți la Ellis Island, la New York (1892-1954: îți trebuie un cont gratuit pe site-ul fundației).
+Nom lu sur le document ¦ Nume citit pe document
+Prénoms lus ¦ Prenume citite
+Naissance lue (date, lieu) ¦ Naștere citită (dată, loc)
+un document ¦ un document
+Rien n’est remplacé : on ajoute, ou on remplit une case vide. « ↶ Annuler » retire tout ce que l’import a ajouté. ¦ Nimic nu este înlocuit: se adaugă, sau se completează o căsuță goală. „↶ Anulează” scoate tot ce a adăugat importul.
+Ce qui sera ajouté (rien n’est remplacé) ¦ Ce va fi adăugat (nimic nu este înlocuit)
+Le lieu ou la maison à compléter ¦ Locul sau casa de completat
+Lien vers le document ou la notice ¦ Link către document sau fișă
+Oui, c’est bien elle : ajouter à sa fiche ce qui est coché ¦ Da, chiar ea este: adaugă pe fișa ei ce e bifat
+Pas sûr : garder seulement le document et la source, sans rien ajouter à la fiche ¦ Nu sunt sigur: păstrează doar documentul și sursa, fără să adaugi nimic pe fișă
+Choisis le lieu ou la maison à compléter. ¦ Alege locul sau casa de completat.
+Importer depuis d’autres archives ¦ Importă din alte arhive
+Ce que tu as téléchargé ou enregistré : un décret, un acte, une notice, une page de registre en image ou en PDF, la page enregistrée par ton navigateur (« Enregistrer sous… »), ou un texte copié. Rien n’est demandé au site : seul ton fichier est lu. Pas de fichier ? « 🔗 Coller un lien ». ¦ Ce ai descărcat sau salvat: un decret, un act, o fișă, o pagină de registru ca imagine sau PDF, pagina salvată de browserul tău („Salvează ca…”), sau un text copiat. Nu se cere nimic site-ului: doar fișierul tău este citit. Nu ai fișier? „🔗 Lipește un link”.
+Range le document trouvé, crée la source et propose ce qu’il dit ¦ Pune deoparte documentul găsit, creează sursa și propune ce spune
+Ouvre les inventaires du Service historique de la Défense dans ton navigateur ¦ Deschide inventarele Serviciului istoric al Apărării în browserul tău
+⤒ Importer (SHD)… ¦ ⤒ Importă (SHD)…
+Les décrets de naturalisation (Archives nationales) ¦ Decretele de naturalizare (Arhivele Naționale)
+Les passagers d’Ellis Island et les archives étrangères ¦ Pasagerii de la Ellis Island și arhivele străine
+Les actes des notaires de Paris (Archives nationales) ¦ Actele notarilor din Paris (Arhivele Naționale)
+⤒ Importer un acte… ¦ ⤒ Importă un act…
+🕯 Mémoire de la déportation et des fusillés ¦ 🕯 Memoria deportării și a celor executați
+Mémoire de la déportation et des fusillés ¦ Memoria deportării și a celor executați
+Mémorial de la Shoah, Livre-Mémorial des déportés, Maitron des fusillés ¦ Mémorial de la Shoah, Livre-Mémorial des déportés, Maitron des fusillés
+⤒ Importer une notice… ¦ ⤒ Importă o fișă…
+📜 Description et notices ¦ 📜 Descriere și fișe
+🏰 Mérimée, Palissy (patrimoine) ¦ 🏰 Mérimée, Palissy (patrimoniu)
+Décrets de naturalisation (1883-1930) et Minutier central des notaires de Paris. ¦ Decrete de naturalizare (1883-1930) și Minutier central al notarilor din Paris.
+Archives nationales d’outre-mer ¦ Arhivele Naționale de peste mări
+État civil des anciennes colonies (Algérie, Antilles, Indochine…) et registres des bagnards. ¦ Starea civilă a fostelor colonii (Algeria, Antile, Indochina…) și registrele ocnașilor.
+Service historique de la Défense ¦ Serviciul istoric al Apărării
+Inscrits maritimes et dossiers d’officiers. ¦ Înscriși maritimi și dosare de ofițeri.
+Ces bases gardent les noms des personnes déportées, mortes en déportation ou fusillées. Elles sont faites pour que l’on se souvienne d’elles : prends le temps de lire chaque notice. ¦ Aceste baze păstrează numele persoanelor deportate, moarte în deportare sau executate prin împușcare. Sunt făcute ca să ne amintim de ele: ia-ți timp să citești fiecare fișă.
+Naturalisations, décorations et changements de nom publiés au Journal officiel. ¦ Naturalizări, decorații și schimbări de nume publicate în Journal officiel.
+Bottin et annuaires départementaux : le métier et l’adresse d’un commerçant ou d’un artisan une année donnée. ¦ Bottin și anuare departamentale: meseria și adresa unui comerciant sau a unui meșteșugar într-un anumit an.
+Patrimoine (Mérimée, Palissy) ¦ Patrimoniu (Mérimée, Palissy)
+Les notices des monuments et des objets protégés : église, château, maison, mobilier, objet de famille. ¦ Fișele monumentelor și obiectelor protejate: biserică, castel, casă, mobilier, obiect de familie.
+Archives à l’étranger ¦ Arhive din străinătate
+Belgique, cantons suisses, arrivées à Ellis Island (New York). ¦ Belgia, cantoane elvețiene, sosiri la Ellis Island (New York).
+Décrets de naturalisation 1883-1930 ¦ Decrete de naturalizare 1883-1930
+Salle des inventaires virtuelle (SIV) ¦ Sala virtuală a inventarelor (SIV)
+État civil des anciennes colonies (ANOM) ¦ Starea civilă a fostelor colonii (ANOM)
+ANOM sur FranceArchives (inventaires) ¦ ANOM pe FranceArchives (inventare)
+Registres et dossiers des bagnards (ANOM) ¦ Registrele și dosarele ocnașilor (ANOM)
+Journal officiel de la République française ¦ Journal officiel de la République française
+Annuaires départementaux (Gallica) ¦ Anuare departamentale (Gallica)
+Bottin — Annuaire-almanach du commerce (Gallica) ¦ Bottin — Anuar-almanah al comerțului (Gallica)
+Annuaire-almanach du commerce ¦ Anuar-almanah al comerțului
+Mérimée — monuments (POP) ¦ Mérimée — monumente (POP)
+Patrimoine architectural (Mérimée) ¦ Patrimoniu arhitectural (Mérimée)
+Palissy — objets et mobilier (POP) ¦ Palissy — obiecte și mobilier (POP)
+Archives de l’État en Belgique (personnes) ¦ Arhivele Statului din Belgia (persoane)
+Décret de naturalisation ¦ Decret de naturalizare
+Date du décret ¦ Data decretului
+Numéro du dossier ou du décret ¦ Numărul dosarului sau al decretului
+Nationalité d’avant ¦ Cetățenia anterioară
+Acte notarié (Minutier central) ¦ Act notarial (Minutier central)
+Notaire, étude ¦ Notar, birou notarial
+Cote (MC/ET/…) ¦ Cotă (MC/ET/…)
+Acte d’état civil des colonies ¦ Act de stare civilă din colonii
+Territoire (Algérie, Martinique…) ¦ Teritoriu (Algeria, Martinica…)
+Cote ou référence ¦ Cotă sau referință
+Registre ou dossier de bagnard ¦ Registru sau dosar de ocnaș
+Date de la condamnation ¦ Data condamnării
+Bagne (Guyane, Nouvelle-Calédonie…) ¦ Ocnă (Guyana, Noua Caledonie…)
+Libération ou décès ¦ Eliberare sau deces
+Folio, numéro ¦ Folio, număr
+Date d’inscription ¦ Data înscrierii
+Dossier d’officier ¦ Dosar de ofițer
+Carrière ¦ Carieră
+Notice de déportation ¦ Fișă de deportare
+Convoi (numéro) ¦ Convoi (număr)
+Date du départ ¦ Data plecării
+Lieu de départ (Drancy, Compiègne…) ¦ Locul plecării (Drancy, Compiègne…)
+Camp d’arrivée ¦ Lagărul de destinație
+Date du décès (si connue) ¦ Data decesului (dacă e cunoscută)
+Devenir (rentré, décédé…) ¦ Soarta (întors, decedat…)
+Notice du Maitron des fusillés ¦ Fișă din Maitron des fusillés
+Ce que dit la notice ¦ Ce spune fișa
+Ce que publie le Journal officiel ¦ Ce publică Journal officiel
+Date du Journal officiel ¦ Data din Journal officiel
+Détail (décoration, nouveau nom…) ¦ Detaliu (decorație, nume nou…)
+Année de l’annuaire ¦ Anul anuarului
+Notice du patrimoine ¦ Fișă de patrimoniu
+Référence (PA…, IA…, PM…) ¦ Referință (PA…, IA…, PM…)
+Titre de la notice ¦ Titlul fișei
+Protection (classé, inscrit…) ¦ Protecție (clasat, înscris…)
+Texte de la notice ¦ Textul fișei
+Acte trouvé à l’étranger ¦ Act găsit în străinătate
+Arrivée à Ellis Island ¦ Sosire la Ellis Island
+Date d’arrivée ¦ Data sosirii
+Port de départ ¦ Portul de plecare
+Âge déclaré ¦ Vârsta declarată
+Le décret dit la date de la naturalisation. ¦ Decretul spune data naturalizării.
+Départs et émigration : date de la naturalisation ¦ Plecări și emigrare: data naturalizării
+Remplie seulement si la case est vide. ¦ Completată doar dacă căsuța e goală.
+Sa fiche n’a pas encore de départ noté. ¦ Fișa ei nu are încă o plecare notată.
+Ajouté à son union. ¦ Adăugat la uniunea ei.
+Sa fiche n’a pas d’union : relie d’abord le conjoint. ¦ Fișa ei nu are nicio uniune: leagă mai întâi soțul sau soția.
+Rangé avec les autres inventaires après décès. ¦ Pus împreună cu celelalte inventare succesorale.
+Acte notarié ¦ Act notarial
+À cocher si tu sais ce que dit la date (libération ou décès). ¦ Bifează dacă știi la ce se referă data (eliberare sau deces).
+Ajouté à la fin des notes du bloc militaire (rien n’est remplacé). ¦ Adăugat la sfârșitul notelor blocului militar (nimic nu este înlocuit).
+Bloc militaire : dossier d’officier ¦ Blocul militar: dosar de ofițer
+Dossier d’officier (SHD) ¦ Dosar de ofițer (SHD)
+Le départ du convoi. ¦ Plecarea convoiului.
+Inscrit comme décès en déportation. ¦ Înscris ca deces în deportare.
+À cocher si la notice donne une date de décès officielle. ¦ Bifează dacă fișa dă o dată oficială a decesului.
+Sa fiche n’a pas encore de décès. ¦ Fișa ei nu are încă un deces.
+La date du Journal officiel suit de peu celle du décret. ¦ Data din Journal officiel urmează la scurt timp după cea a decretului.
+Le nom de la fiche ne change pas tout seul. ¦ Numele fișei nu se schimbă singur.
+L’adresse donnée par l’annuaire cette année-là. ¦ Adresa dată de anuar în acel an.
+Le métier donné par l’annuaire. ¦ Meseria dată de anuar.
+Ajouter la notice à la fiche choisie (texte et image) ¦ Adaugă fișa la fișa aleasă (text și imagine)
+Le texte est ajouté à la suite de la description (rien n’est remplacé). ¦ Textul este adăugat după descriere (nimic nu este înlocuit).
+New York (Ellis Island), États-Unis ¦ New York (Ellis Island), Statele Unite
+Départs et émigration : nouveau départ ¦ Plecări și emigrare: plecare nouă
+Un départ ajouté au bloc (navire, port, arrivée à New York). ¦ O plecare adăugată în bloc (navă, port, sosire la New York).
+Genève ¦ Geneva
+Bâle-Ville ¦ Basel-Oraș
+Bâle-Campagne ¦ Basel-Țară
+Appenzell Rhodes-Intérieures ¦ Appenzell Rhoden-Interior
+Appenzell Rhodes-Extérieures ¦ Appenzell Rhoden-Exterior
+=carte postale ¦ carte poștală|cărți poștale|de cărți poștale
+=zone ¦ zonă|zone|de zone
+=ligne transcrite ¦ rând transcris|rânduri transcrise|de rânduri transcrise
+CARTE POSTALE ¦ CARTE POȘTALĂ
+Nouvelle carte postale ¦ Carte poștală nouă
+Recto (la vue) ¦ Față (imaginea)
+Le recto de la carte postale ¦ Fața cărții poștale
+Verso (le dos écrit) ¦ Verso (spatele scris)
+Le verso de la carte postale ¦ Versoul cărții poștale
+(sinon celui de l’image) ¦ (altfel cel al imaginii)
+Brive — La place de la Guierle ¦ Brive — La place de la Guierle
+Éd. Lévy et fils, ND Phot… ¦ Éd. Lévy et fils, ND Phot…
+12 août 1912, vers 1905… ¦ 12 août 1912, vers 1905…
+Cachet de la poste ¦ Ștampila poștei
+Brive (Corrèze) 12-8-12 ¦ Brive (Corrèze) 12-8-12
+Écrite par ¦ Scrisă de
+À (destinataire) ¦ Către (destinatar)
+Madame Borie, rue du Lycée, Tulle ¦ Madame Borie, rue du Lycée, Tulle
+L’atelier de transcription : l’image du dos à gauche, le texte à droite, lecture automatique, repérage des noms ¦ Atelierul de transcriere: imaginea spatelui în stânga, textul în dreapta, citire automată, depistarea numelor
+« Ma chère cousine, nous voici bien arrivés… » ¦ „Draga mea verișoară, iată-ne ajunși cu bine…”
+Texte écrit au dos ¦ Text scris pe spate
+📜 Transcrire dans l’atelier ¦ 📜 Transcrie în atelier
+C’est la transcription de l’image du verso : la même que dans la visionneuse et la recherche. ¦ Este transcrierea imaginii de pe verso: aceeași ca în vizualizator și în căutare.
+C’est la transcription de l’image du dos : la même que dans la visionneuse et la recherche. ¦ Este transcrierea imaginii de pe spate: aceeași ca în vizualizator și în căutare.
+Lieu montré sur la carte ¦ Locul arătat pe carte
+Lieu montré ¦ Locul arătat
+Plusieurs lieux possibles, une zone, la certitude, les indices, comparer avec aujourd’hui, demander de l’aide ¦ Mai multe locuri posibile, o zonă, certitudinea, indiciile, compară cu ziua de azi, cere ajutor
+📍 Plusieurs lieux possibles, zone, certitude… ¦ 📍 Mai multe locuri posibile, zonă, certitudine…
+(facultatif : d’où la photo a été prise et dans quelle direction) ¦ (opțional: de unde a fost făcută fotografia și în ce direcție)
+Préciser le point d’où la vue a été prise ¦ Precizează punctul din care a fost luată imaginea
+Vide = le lieu montré. Tu peux copier les coordonnées depuis la Carte (clic droit) ou un site de cartes. ¦ Gol = locul arătat. Poți copia coordonatele din Hartă (clic dreapta) sau de pe un site de hărți.
+Choisis d’abord l’image du verso (ou du recto). ¦ Alege mai întâi imaginea de pe verso (sau de pe față).
+L’atelier de transcription n’est pas encore chargé. ¦ Atelierul de transcriere nu este încă încărcat.
+Carte postale — {title} ¦ Carte poștală — {title}
+texte du dos ¦ textul de pe spate
+Le texte de l’atelier est repris dans « Texte écrit au dos ». ¦ Textul din atelier este preluat în „Text scris pe spate”.
+Choisis l’image du recto (la vue). ¦ Alege imaginea de pe față (imaginea).
+Le verso doit être une autre image que le recto. ¦ Versoul trebuie să fie o altă imagine decât fața.
+Donne la latitude et la longitude, ou aucune des deux. ¦ Dă latitudinea și longitudinea, sau niciuna dintre ele.
+Carte postale ajoutée. ¦ Carte poștală adăugată.
+Fiche de la carte « {nm} » supprimée (les images restent dans les Médias) ¦ Fișa cărții „{nm}” a fost ștearsă (imaginile rămân în Media)
+Pas encore de fiche ¦ Încă nicio fișă
+Voir le recto et le verso en grand ¦ Vezi fața și versoul mărite
+🗑 Supprimer la fiche ¦ 🗑 Șterge fișa
+Les cartes postales anciennes : la vue et le dos écrit, l’éditeur, la date d’envoi, qui l’a écrite et à qui, le lieu montré — retrouvées sur la Carte et dans la fiche du lieu. ¦ Cărțile poștale vechi: imaginea și spatele scris, editorul, data trimiterii, cine a scris-o și cui, locul arătat — regăsite pe Hartă și în fișa locului.
+{count} de tes médias n’ont pas encore de fiche : elles sont marquées « À compléter ». ¦ {count} dintre fișierele tale media nu au încă o fișă: sunt marcate „De completat”.
+{count} de tes médias n’a pas encore de fiche : elles sont marquées « À compléter ». ¦ {count} dintre fișierele tale media nu are încă o fișă: este marcat „De completat”.
+Aucune carte ne correspond ¦ Nicio carte nu corespunde
+Chercher une carte… (titre, lieu, éditeur, texte du dos, Borie) ¦ Caută o carte… (titlu, loc, editor, textul de pe spate, Borie)
+Avec sa fiche ¦ Cu fișa ei
+Texte du dos ¦ Textul de pe spate
+Pas encore transcrit ¦ Netranscris încă
+Par date d’envoi ¦ După data trimiterii
+— vue vers le {dir} ¦ — vedere spre {dir}
+vue vers le {dir} ¦ vedere spre {dir}
+envoyée {dt} ¦ trimisă {dt}
+＋ Ajouter une carte postale ¦ ＋ Adaugă o carte poștală
+Ouvrir la fiche de la carte ¦ Deschide fișa cărții
+Aucune carte postale de ce lieu. ¦ Nicio carte poștală din acest loc.
+Supprimer cette transcription (« ↶ Annuler » la remet) ¦ Șterge această transcriere („↶ Anulează” o readuce)
+Pas encore de texte ¦ Încă niciun text
+ARCHIVES ET SOURCES ¦ ARHIVE ȘI SURSE
+Les actes transcrits dans l’atelier : l’image à gauche, le texte à droite, les zones reliées, les noms repérés. Un clic rouvre l’acte dans l’outil. ¦ Actele transcrise în atelier: imaginea în stânga, textul în dreapta, zonele legate, numele depistate. Un clic redeschide actul în unealtă.
+Aucune transcription ne correspond. ¦ Nicio transcriere nu corespunde.
+Retire un filtre, ou cherche autrement. ¦ Scoate un filtru sau caută altfel.
+Personne et lieu ¦ Persoană și loc
+Une personne reliée ¦ O persoană legată
+Tous les états ¦ Toate stările
+Avec des zones ¦ Cu zone
+Avec des zones sur l’image ¦ Cu zone pe imagine
+Reliée à une fiche ¦ Legată de o fișă
+Avec une personne reliée à sa fiche ¦ Cu o persoană legată de fișa ei
+Image de l’acte ¦ Imaginea actului
+Clique sur l’image de l’acte à transcrire. Une image de l’ordinateur est ajoutée aux Médias. ¦ Fă clic pe imaginea actului de transcris. O imagine de pe calculator este adăugată în Media.
+Transcription « {title} » supprimée ¦ Transcrierea „{title}” a fost ștearsă
+Acte ¦ Act
+=information reportée ¦ informație preluată|informații preluate|de informații preluate
+{count} sur les fiches. ¦ {count} pe fișe.
+Père de l’époux ¦ Tatăl mirelui
+Mère de l’époux ¦ Mama mirelui
+Père de l’épouse ¦ Tatăl miresei
+Mère de l’épouse ¦ Mama miresei
+Modèle de 1877 (livret « bleu ») ¦ Modelul din 1877 (livretul „albastru”)
+Modèle de 1975 (époux, épouse, enfants) ¦ Modelul din 1975 (soț, soție, copii)
+Autre (étranger, colonial…) ¦ Altul (străin, colonial…)
+Commune et date à compléter ¦ Localitate și dată de completat
+La transcription complète des livrets de famille : délivrance, époux et épouse, leurs parents, le mariage, les enfants et toutes les mentions. Relie chaque personne à sa fiche : le livret y apparaît, et ses dates peuvent y être reportées. ¦ Transcrierea completă a livretelor de familie: eliberarea, soțul și soția, părinții lor, căsătoria, copiii și toate mențiunile. Leagă fiecare persoană de fișa ei: livretul apare acolo, iar datele lui pot fi preluate.
+Aucun livret ne correspond. ¦ Niciun livret nu corespunde.
+Tu recopies ce qui est écrit, page par page, et tu relies les personnes à leurs fiches. ¦ Copiezi ce e scris, pagină cu pagină, și legi persoanele de fișele lor.
+pas encore relié à une fiche ¦ încă nelegat de o fișă
+délivré le {dt} ¦ eliberat la {dt}
+Les étiquettes de ce livret ¦ Etichetele acestui livret
+← Tous les livrets ¦ ← Toate livretele
+🗂 Reporter sur les fiches ¦ 🗂 Preia pe fișe
+Reporter sur les fiches ¦ Preia pe fișe
+RÉPUBLIQUE FRANÇAISE ¦ REPUBLICA FRANCEZĂ
+Délivré le ¦ Eliberat la
+Officier d’état civil ¦ Ofițer de stare civilă
+Détenteur ¦ Deținător
+Conservé ¦ Păstrat
+💍 Le mariage ¦ 💍 Căsătoria
+Date et lieu du mariage à recopier. ¦ Data și locul căsătoriei de copiat.
+Époux ¦ Soț
+Épouse ¦ Soție
+👶 Les enfants ({n}) ¦ 👶 Copiii ({n})
+👶 Les enfants ¦ 👶 Copiii
+Enfant n°{nm} ¦ Copilul nr. {nm}
+garçon ¦ băiat
+fille ¦ fată
+Aucun enfant recopié. ¦ Niciun copil copiat.
+👥 Autres personnes citées ¦ 👥 Alte persoane menționate
+Témoin / autre ¦ Martor / altul
+✍️ Transcription intégrale ¦ ✍️ Transcriere integrală
+🗒️ Notes et sources ¦ 🗒️ Note și surse
+📷 Les pages ¦ 📷 Paginile
+Ajoute les photos des pages avec « ✎ Modifier ». ¦ Adaugă fotografiile paginilor cu „✎ Modifică”.
+Supprimer « {nm} » ? Les fiches des personnes et les photos restent. ¦ Ștergi „{nm}”? Fișele persoanelor și fotografiile rămân.
+Supprimer le livret ¦ Șterge livretul
+Livret supprimé. ¦ Livret șters.
+Bordeaux et or ¦ Bordo și auriu
+Sobre, noir et blanc ¦ Sobru, alb-negru
+Machine à écrire ¦ Mașină de scris
+📘 Couverture et délivrance ¦ 📘 Copertă și eliberare
+👨‍👩 Époux, épouse et leurs parents ¦ 👨‍👩 Soț, soție și părinții lor
+Supprimer cette apparence ¦ Șterge acest aspect
+Aucune pour l’instant. ¦ Niciunul deocamdată.
+🎨 Apparence du livret ¦ 🎨 Aspectul livretului
+Tout se voit tout de suite sur le livret. « Enregistrer » le garde pour ce livret ; coche la case du bas pour en faire l’apparence de tous tes livrets. ¦ Totul se vede imediat pe livret. „Salvează” îl păstrează pentru acest livret; bifează căsuța de jos ca să devină aspectul tuturor livretelor tale.
+💾 Enregistrer cette apparence sous un nom ¦ 💾 Salvează acest aspect sub un nume
+Montrer l’image ¦ Arată imaginea
+en vignette sur la couverture ¦ ca miniatură pe copertă
+en fond de la couverture ¦ ca fundal al copertei
+Ajoute d’abord des photos au livret (« ✎ Modifier » → les pages) : tu pourras en choisir une pour la couverture. ¦ Adaugă mai întâi fotografii în livret („✎ Modifică” → paginile): vei putea alege una pentru copertă.
+Texte de la couverture ¦ Textul copertei
+Taille des titres ¦ Mărimea titlurilor
+Aa Toutes les polices pour les titres… ¦ Aa Toate fonturile pentru titluri…
+Aa Toutes les polices pour le texte… ¦ Aa Toate fonturile pentru text…
+Mise en page ¦ Așezare în pagină
+deux pages côte à côte ¦ două pagini una lângă alta
+une page sous l’autre ¦ o pagină sub cealaltă
+Cadre des pages ¦ Chenarul paginilor
+Les parties, dans l’ordre ¦ Părțile, în ordine
+Coche ce qui est montré ; range avec ⠿ ou ↑ ↓. ¦ Bifează ce se arată; ordonează cu ⠿ sau ↑ ↓.
+Utiliser cette apparence pour ¦ Folosește acest aspect pentru
+mes livrets (ceux qui n’ont pas la leur) ¦ livretele mele (cele care nu au unul propriu)
+Apparence « {nm} » appliquée (« Enregistrer » pour la garder sur ce livret). ¦ Aspectul „{nm}” a fost aplicat („Salvează” ca să-l păstrezi pe acest livret).
+Apparence « {nm} » supprimée ¦ Aspectul „{nm}” a fost șters
+Apparence « {nm} » enregistrée : elle est dans « Mes apparences ». ¦ Aspectul „{nm}” a fost salvat: este în „Aspectele mele”.
+Enregistrer cette apparence ¦ Salvează acest aspect
+Nom de l’apparence ¦ Numele aspectului
+Elle sera proposée dans « Mes apparences », pour tous les livrets (sans l’image de couverture, propre à chaque livret). ¦ Va fi propus în „Aspectele mele”, pentru toate livretele (fără imaginea de copertă, proprie fiecărui livret).
+Impossible de garder l’apparence. ¦ Aspectul nu a putut fi păstrat.
+Apparence de départ remise. ¦ Aspectul inițial a fost readus.
+Apparence enregistrée, pour ce livret et pour tous les autres. ¦ Aspect salvat, pentru acest livret și pentru toate celelalte.
+Apparence du livret enregistrée. ¦ Aspectul livretului a fost salvat.
+Nom et prénoms (tels qu’écrits) ¦ Nume și prenume (așa cum sunt scrise)
+＋ créer la fiche avec ce qui est écrit ¦ ＋ creează fișa cu ce e scris
+Décédé(e) le ¦ Decedat(ă) la
+Décès le ¦ Deces la
+marié le … à … avec … ¦ căsătorit la … în … cu …
+Reconnaissance, légitimation ¦ Recunoaștere, legitimare
+Nouveau livret ¦ Livret nou
+📘 Délivrance ¦ 📘 Eliberare
+👨 Époux ¦ 👨 Soț
+👩 Épouse ¦ 👩 Soție
+📘 Délivrance du livret ¦ 📘 Eliberarea livretului
+Livret de Jean Martin et Marie Petit ¦ Livretul lui Jean Martin și al lui Marie Petit
+Officier d’état civil (signature) ¦ Ofițer de stare civilă (semnătură)
+Qui l’a aujourd’hui ¦ Cine îl are azi
+Où il est conservé ¦ Unde este păstrat
+boîte à papiers, grenier… ¦ cutie cu acte, pod…
+Mariage civil le ¦ Căsătorie civilă la
+Contrat de mariage le ¦ Contract de căsătorie la
+Mariage religieux le ¦ Căsătorie religioasă la
+Divorce le ¦ Divorț la
+👨 L’époux ¦ 👨 Soțul
+Son père ¦ Tatăl său
+Sa mère ¦ Mama sa
+👩 L’épouse ¦ 👩 Soția
+(témoins, enfant décédé avant…) ¦ (martori, copil decedat înainte…)
+Mentions (décès, divorce, rectifications, tampons…) ¦ Mențiuni (deces, divorț, rectificări, ștampile…)
+Transcription intégrale, page par page ¦ Transcriere integrală, pagină cu pagină
+📷 Photos des pages ¦ 📷 Fotografiile paginilor
+Pages du livret ¦ Paginile livretului
+Les recueils se relient au livret une fois enregistré (en bas de sa page). ¦ Culegerile se leagă de livret după ce este salvat (în josul paginii lui).
+Écris d’abord le nom et les prénoms. ¦ Scrie mai întâi numele și prenumele.
+Cette case est déjà reliée à une fiche. En créer une autre ? ¦ Această căsuță este deja legată de o fișă. Creezi alta?
+Case déjà reliée ¦ Căsuță deja legată
+Créer une autre fiche ¦ Creează altă fișă
+Fiche créée pour {nm}. « Reporter sur les fiches » ajoutera ses dates. ¦ Fișă creată pentru {nm}. „Preia pe fișe” îi va adăuga datele.
+Livret enregistré. ¦ Livret salvat.
+Reporter ce qui est coché ¦ Preia ce e bifat
+Ce que le livret apporte aux fiches reliées et qui leur manque. Rien n’est écrasé ; chaque date ajoutée garde la mention « D’après le livret de famille ». ¦ Ce aduce livretul fișelor legate și le lipsește. Nimic nu este suprascris; fiecare dată adăugată păstrează mențiunea „După livretul de familie”.
+Rien à reporter : relie d’abord les personnes à leurs fiches (ou crée-les), ou bien les fiches ont déjà ces informations. ¦ Nimic de preluat: leagă mai întâi persoanele de fișele lor (sau creează-le), ori fișele au deja aceste informații.
+Rien de coché. ¦ Nimic bifat.
+écrit : « {nm} » ¦ scris: „{nm}”
+=annonce ¦ anunț|anunțuri|de anunțuri
+=mot ¦ cuvânt|cuvinte|de cuvinte
+=forfait ¦ tarif fix|tarife fixe|de tarife fixe
+=règle reconnue ¦ regulă recunoscută|reguli recunoscute|de reguli recunoscute
+Minimum : {count} comptés (tu en as {n}) ¦ Minimum: {count} numărate (tu ai {n})
+Trop long : {count} pour {max} au maximum. ¦ Prea lung: {count} pentru maximum {max}.
+{count} : vérifie les cases en jaune. ¦ {count}: verifică căsuțele cu galben.
+📅 À envoyer avant : {dt} ¦ 📅 De trimis înainte de: {dt}
+Prix de l’option « {nm} » pas indiqué dans les règles. ¦ Prețul opțiunii „{nm}” nu este indicat în reguli.
+Remise {nm} % (dès {x2} parutions) ¦ Reducere {nm} % (de la {x2} apariții)
+{nm} premiers gratuits ¦ primele {nm} gratuite
+Lecture… {nm} % ¦ Citire… {nm} %
+Supprimer les règles « {nm} » ? (les annonces restent) ¦ Ștergi regulile „{nm}”? (anunțurile rămân)
+Supprimer « {nm} » ? ¦ Ștergi „{nm}”?
+au mot ¦ pe cuvânt
+à la ligne ¦ pe rând
+au caractère ¦ pe caracter
+au forfait (prix fixe) ¦ tarif fix (preț fix)
+Forfait ¦ Tarif fix
+(adhérent) ¦ (membru)
+Titre en tête ¦ Titlu în antet
+Mots en gras ¦ Cuvinte îngroșate
+Encadré ¦ Încadrat
+Réponse au journal (domiciliation) ¦ Răspuns prin ziar (căsuță de răspuns)
+Aussi sur internet ¦ Și pe internet
+Tarif adhérent / abonné ¦ Tarif membru / abonat
+Choisis ou crée les règles du journal pour calculer le prix. ¦ Alege sau creează regulile ziarului ca să calculezi prețul.
+Prix minimum d’une parution ¦ Prețul minim al unei apariții
+Aucune annonce ne correspond ¦ Niciun anunț nu corespunde
+Prix calculé ¦ Preț calculat
+Payé ¦ Plătit
+Rattachée à ¦ Legată de
+Chercher une annonce… (titre, texte, journal) ¦ Caută un anunț… (titlu, text, ziar)
+tarif pas indiqué ¦ tarif neindicat
+le mot ¦ cuvântul
+la ligne ¦ rândul
+le caractère ¦ caracterul
+caractères ¦ caractere
+adhérent ¦ membru
+Comment c’est compté ¦ Cum se numără
+Prix (€ par mot / ligne / caractère, ou forfait) ¦ Preț (€ pe cuvânt / rând / caracter, sau tarif fix)
+Prix adhérent / abonné ¦ Preț membru / abonat
+Caractères par ligne ¦ Caractere pe rând
+Les espaces comptent ¦ Spațiile se numără
+Minimum compté (mots / lignes) ¦ Minimum numărat (cuvinte / rânduri)
+Option encadré ¦ Opțiunea încadrat
+Remise à partir de ¦ Reducere începând de la
+Prix déjà TTC ¦ Preț deja cu TVA
+Date limite d’envoi ¦ Termen-limită de trimitere
+Où envoyer (courriel, adresse) ¦ Unde trimiți (e-mail, adresă)
+Paiement (chèque, en ligne…) ¦ Plată (cec, online…)
+Autres règles (abréviations, interdits…) ¦ Alte reguli (abrevieri, interdicții…)
+RÈGLES D’UN JOURNAL ¦ REGULILE UNUI ZIAR
+Nouvelles règles ¦ Reguli noi
+Ouest-France, petites annonces du dimanche… ¦ Ouest-France, mica publicitate de duminică…
+Revue de la liste « Revues » ¦ Revistă din lista „Reviste”
+📷 Remplir à partir d’une capture d’écran des règles ¦ 📷 Completează dintr-o captură de ecran a regulilor
+Choisis ou colle (⌘V) une capture de la page des tarifs : le texte est lu, les règles reconnues sont remplies ci-dessous ¦ Alege sau lipește (⌘V) o captură a paginii cu tarife: textul este citit, regulile recunoscute sunt completate mai jos
+en jaune ¦ cu galben
+Choisir une capture ¦ Alege o captură
+Texte des règles (lu sur la capture, ou copié-collé de la page du journal) ¦ Textul regulilor (citit de pe captură, sau copiat de pe pagina ziarului)
+Remplir à partir de ce texte ¦ Completează din acest text
+Aucune règle reconnue : complète à la main (le texte lu est ci-dessous). ¦ Nicio regulă recunoscută: completează de mână (textul citit este mai jos).
+Lecture de la capture… ¦ Se citește captura…
+Règles enregistrées. ¦ Reguli salvate.
+Supprimer les règles ¦ Șterge regulile
+🖼️ Photo à identifier ¦ 🖼️ Fotografie de identificat
+✉️ Courrier des lecteurs ¦ ✉️ Scrisorile cititorilor
+ANNONCE OU COURRIER ¦ ANUNȚ SAU SCRISOARE
+Nouvelle annonce ¦ Anunț nou
+Titre (pour toi) ¦ Titlu (pentru tine)
+Journal (liste des revues) ¦ Ziar (lista revistelor)
+ou autre journal ¦ sau alt ziar
+Le Courrier de l’Ouest… ¦ Le Courrier de l’Ouest…
+Règles de tarif ¦ Reguli de tarif
+— aucune (pas de calcul) — ¦ — niciuna (fără calcul) —
+Le texte tel qu’il sera publié ¦ Textul așa cum va fi publicat
+Texte de l’annonce ¦ Textul anunțului
+Envoyée le ¦ Trimis la
+Parution le / prévue le ¦ Apărut la / prevăzut la
+Numéro ou édition parue ¦ Numărul sau ediția apărută
+n° 254, édition de Rennes… ¦ nr. 254, ediția de Rennes…
+chèque n°…, carte, en ligne ¦ cec nr.…, card, online
+Contact au journal ¦ Contact la ziar
+Qui a répondu, quand, ce qu’on a appris… ¦ Cine a răspuns, când, ce s-a aflat…
+Réponses reçues ¦ Răspunsuri primite
+📸 Captures : l’annonce publiée, le justificatif, les réponses ¦ 📸 Capturi: anunțul publicat, dovada, răspunsurile
+Ajouter une personne ou une enquête… ¦ Adaugă o persoană sau o investigație…
+Autres règles du journal ¦ Alte reguli ale ziarului
+Remplacer le texte par ce modèle ? ¦ Înlocuiești textul cu acest model?
+Utiliser ce modèle ¦ Folosește acest model
+Remplacer le texte ¦ Înlocuiește textul
+Annonce enregistrée. ¦ Anunț salvat.
+Supprimer l’annonce ¦ Șterge anunțul
+Aucun type pour « {nm} » ¦ Niciun tip pentru „{nm}”
+Type « {nm} » supprimé ¦ Tipul „{nm}” a fost șters
+Type « {nm} » importé : il est dans « ✎ Mes types ». ¦ Tipul „{nm}” a fost importat: este în „✎ Tipurile mele”.
+Ce type a encore {count} : supprime-les d’abord. ¦ Acest tip mai are {count}: șterge-le mai întâi.
+Chaînes : Gravure → états → tirages · Sculpture → modèle → fontes · Photo → négatif → tirages → éditions · Installation → lieux successifs ¦ Lanțuri: Gravură → stări → tiraje · Sculptură → model → turnări · Fotografie → negativ → tiraje → ediții · Instalație → locuri succesive
+Chaîne : Œuvre → mouvements → interprétations → enregistrements → parutions ¦ Lanț: Operă → mișcări → interpretări → înregistrări → apariții
+Scène ¦ Scenă
+Chaîne : Œuvre → mise en scène / production → représentations (setlist, distribution du soir) → tournée ¦ Lanț: Operă → punere în scenă / producție → reprezentații (setlist, distribuția serii) → turneu
+Écrit ¦ Scris
+Chaînes : Texte → éditions → exemplaires · BD : série → albums → planches originales ¦ Lanțuri: Text → ediții → exemplare · BD: serie → albume → planșe originale
+Image animée et son ¦ Imagine în mișcare și sunet
+Chaîne : Série → saisons → épisodes → diffusions ¦ Lanț: Serial → sezoane → episoade → difuzări
+Fiches détaillées : affiche, ferronnerie ; chaque métier de la liste officielle propose son type d’œuvre (bouton ci-dessus) ¦ Fișe detaliate: afiș, feronerie; fiecare meserie din lista oficială își propune tipul ei de operă (butonul de mai sus)
+Espace et paysage ¦ Spațiu și peisaj
+Chaîne : Projet → plans → chantier → états successifs (transformations, démolition) ¦ Lanț: Proiect → planuri → șantier → stări succesive (transformări, demolare)
+Chaîne : Œuvre → versions / éditions / extensions → plateformes ¦ Lanț: Operă → versiuni / ediții / extensii → platforme
+Maquette : échelle, matériaux, kit (marque, réf.), heures de travail, concours ¦ Machetă: scară, materiale, kit (marcă, ref.), ore de lucru, concursuri
+Ingrédients, millésimes, médailles aux concours, étiquettes (images) ¦ Ingrediente, ani de recoltă, medalii la concursuri, etichete (imagini)
+Fiches qui relient ¦ Fișe care leagă
+Ce ne sont pas des œuvres : elles regroupent des œuvres et des personnes ¦ Nu sunt opere: grupează opere și persoane
+Tes types ont les mêmes outils que les autres (champs affichés, liste, export, catalogue) ¦ Tipurile tale au aceleași unelte ca celelalte (câmpuri afișate, listă, export, catalog)
+enluminure ¦ miniatură iluminată
+Opéra (partition) ¦ Operă (partitură)
+Musique de scène · de ballet ¦ Muzică de scenă · de balet
+Partition éditée ¦ Partitură publicată
+Concert · tournée ¦ Concert · turneu
+Pièce de théâtre ¦ Piesă de teatru
+Opéra (production) ¦ Operă (producție)
+Comédie musicale ¦ Musical
+Seul en scène · humour ¦ One-man show · umor
+Arts du cirque ¦ Arte circului
+Conte · récit ¦ Basm · povestire
+Lecture · mise en voix ¦ Lectură · punere în voce
+Son et lumière · fête ¦ Sunet și lumină · sărbătoare
+Représentation (setlist) ¦ Reprezentație (setlist)
+Tournée ¦ Turneu
+Livre (édition) ¦ Carte (ediție)
+Texte (roman, nouvelle…) ¦ Text (roman, nuvelă…)
+Recueil de poésie ¦ Culegere de poezie
+Poème ¦ Poem
+Essai · thèse · mémoire ¦ Eseu · teză · lucrare de diplomă
+Scénario ¦ Scenariu
+Livret (opéra, ballet) ¦ Libret (operă, balet)
+Bande dessinée ¦ Bandă desenată
+Correspondance publiée ¦ Corespondență publicată
+Revue · fanzine fondé ¦ Revistă · fanzin fondat
+Court métrage ¦ Scurtmetraj
+Cinéma d’animation ¦ Film de animație
+Série TV ¦ Serial TV
+Émission de télévision ¦ Emisiune de televiziune
+Émission de radio ¦ Emisiune de radio
+Clip vidéo ¦ Videoclip
+Vidéo en ligne ¦ Video online
+Logo · identité visuelle ¦ Logo · identitate vizuală
+Design d’objet ¦ Design de obiect
+Mode (collection → modèle) ¦ Modă (colecție → model)
+Ferronnerie d’art ¦ Feronerie artistică
+Céramique · faïence · porcelaine ¦ Ceramică · faianță · porțelan
+Orfèvrerie · bijou ¦ Orfevrărie · bijuterie
+Ébénisterie · marqueterie ¦ Ebenisterie · marchetărie
+Lutherie · facture d’instruments ¦ Lutierie · confecționare de instrumente
+sceau ¦ sigiliu
+Architecture · bâtiment ¦ Arhitectură · clădire
+Urbanisme · aménagement ¦ Urbanism · amenajare
+Monument · mémorial ¦ Monument · memorial
+Décor · scénographie ¦ Decor · scenografie
+Décoration intérieure ¦ Decorațiuni interioare
+Ouvrage d’art (pont…) ¦ Lucrare de artă inginerească (pod…)
+Jeu vidéo ¦ Joc video
+Jeu de société ¦ Joc de societate
+Jeu de rôle · scénario ¦ Joc de rol · scenariu
+Art numérique · génératif ¦ Artă digitală · generativă
+Modèle 3D ¦ Model 3D
+Maquette · modèle réduit ¦ Machetă · model la scară redusă
+Réseau ferroviaire miniature ¦ Rețea feroviară în miniatură
+Création florale ¦ Creație florală
+Recette · plat créé ¦ Rețetă · fel de mâncare creat
+Cuvée · spiritueux ¦ Vin de cupaj · băutură spirtoasă
+Produit du terroir ¦ Produs local tradițional
+Variété créée (rose, pomme…) ¦ Soi creat (trandafir, măr…)
+collection ¦ colecție
+Commande · mécène ¦ Comandă · mecena
+Calculé (ligne) ¦ Calculat (rând)
+calculé tout seul ¦ calculat automat
+Personnes et rôles (en ligne) ¦ Persoane și roluri (pe un rând)
+nommé ¦ nominalizat
+médaille d’or ¦ medalie de aur
+médaille d’argent ¦ medalie de argint
+médaille de bronze ¦ medalie de bronz
+Crédits ¦ Credite
+rôle (auteur, interprète…) ¦ rol (autor, interpret…)
+Une ligne ¦ Un rând
+Collection privée, musée… ¦ Colecție privată, muzeu…
+Pièce, réserve, cote ¦ Sală, depozit, cotă
+États et restaurations ¦ Stări și restaurări
+États ¦ Stări
+Valeur et assurance ¦ Valoare și asigurare
+Estimée ¦ Estimată
+Par ¦ De către
+Assurée ¦ Asigurată
+Œuvres liées ¦ Opere legate
+Une œuvre liée ¦ O operă legată
+étude pour, d’après… ¦ studiu pentru, după…
+Prix et concours ¦ Premii și concursuri
+Décerné par ¦ Acordat de
+Un prix ¦ Un premiu
+Un lien ¦ Un link
+Pièce (dessin, devis, lettre, contrat…) ¦ Piesă (desen, deviz, scrisoare, contract…)
+Où, cote ¦ Unde, cotă
+Un document ¦ Un document
+Enregistre d’abord la fiche, puis ajoute ses parties. ¦ Salvează mai întâi fișa, apoi adaugă-i părțile.
+ŒUVRES ¦ OPERE
+Cacher les types qui ne te servent jamais, modifier, exporter ou importer tes types ¦ Ascunde tipurile pe care nu le folosești niciodată, modifică, exportă sau importă tipurile tale
+Chercher un type… (ex. : bronze, opéra, affiche, ferronnerie, podcast) ¦ Caută un tip… (ex.: bronz, operă, afiș, feronerie, podcast)
+Chercher un type ¦ Caută un tip
+Quelle sorte d’œuvre ? ¦ Ce fel de operă?
+☰ Voir la liste ¦ ☰ Vezi lista
+Voir la liste ¦ Vezi lista
+⚙️ Gérer les types ¦ ⚙️ Gestionează tipurile
+＋ Créer mon propre type… ¦ ＋ Creează-mi propriul tip…
+validé ¦ validat
+déjà dans les fiches de base ¦ deja în fișele de bază
+fiche détaillée ¦ fișă detaliată
+créé par toi ¦ creat de tine
+Montrer les types cachés ¦ Arată tipurile ascunse
+Pas encore de type à toi. ¦ Încă niciun tip al tău.
+⚒️ Les 16 domaines des métiers d’art… ¦ ⚒️ Cele 16 domenii ale meseriilor de artă…
+⤒ Importer un type ¦ ⤒ Importă un tip
+Vérifie l’orthographe, ou crée ton propre type. ¦ Verifică ortografia sau creează-ți propriul tip.
+⚒️ Métiers d’art ¦ ⚒️ Meserii de artă
+— le reste est dans « ⚙️ Champs affichés » ¦ — restul este în „⚙️ Câmpuri afișate”
+Modifier ce type ¦ Modifică acest tip
+⤓ Exporter le type (pour le donner) ¦ ⤓ Exportă tipul (ca să-l dai cuiva)
+👁 cache un type qui ne te sert jamais (ses fiches restent). Tes types : ✎ modifier, ⤓ exporter pour le donner à un cousin, 🗑 supprimer. ¦ 👁 ascunde un tip pe care nu-l folosești niciodată (fișele lui rămân). Tipurile tale: ✎ modifică, ⤓ exportă ca să-l dai unui văr, 🗑 șterge.
+Autres œuvres ¦ Alte opere
+Sculptures, affiches, pièces, concertos, ferronnerie… : « ＋ Nouvelle œuvre ». ¦ Sculpturi, afișe, piese, concerte, feronerie…: „＋ Operă nouă”.
+＋ Nouvelle œuvre ¦ ＋ Operă nouă
+=édition ¦ ediție|ediții|de ediții
+SA PAGE ¦ PAGINA SA
+CATALOGUE ¦ CATALOG
+Aucune {kind} pour l’instant ¦ Niciun element {kind} deocamdată
+Aucun {kind} pour l’instant ¦ Niciun element {kind} deocamdată
+＋ Nouvelle {kind} ¦ ＋ {kind} nou
+＋ Nouveau {kind} ¦ ＋ {kind} nou
+Nouvelle {kind} « {nm} » ajoutée au catalogue. ¦ Element nou {kind} „{nm}” adăugat în catalog.
+Nouveau {kind} « {nm} » ajouté au catalogue. ¦ Element nou {kind} „{nm}” adăugat în catalog.
+… et {n} de plus (« Tout voir »). ¦ … și încă {n} („Vezi tot”).
+Lié à ¦ Legat de
+Fiches et personnes liées ¦ Fișe și persoane legate
+📚 Livres et textes ¦ 📚 Cărți și texte
+🎬 Films et spectacles ¦ 🎬 Filme și spectacole
+Films et spectacles ¦ Filme și spectacole
+Rien d’écrit pour l’instant : « ✎ Modifier ». ¦ Nimic scris deocamdată: „✎ Modifică”.
+Masqués : ¦ Ascunse:
+Afficher ce champ (comme 👁 dans « ⚙️ Champs affichés ») ¦ Afișează acest câmp (ca 👁 din „⚙️ Câmpuri afișate”)
+＋ Ajouter un champ ¦ ＋ Adaugă un câmp
+La fiche de {nm} n’est pas encore cochée « Artiste ». La cocher pour ranger ce catalogue ? ¦ Fișa lui {nm} nu este încă bifată „Artist”. O bifezi ca să pui deoparte acest catalog?
+🎨 Cocher « Artiste » ? ¦ 🎨 Bifezi „Artist”?
+Cocher « Artiste » ¦ Bifează „Artist”
+« {nm} » supprimée ¦ „{nm}” a fost ștearsă
+« {nm} » supprimé ¦ „{nm}” a fost șters
+🖼️ Œuvres et inventaire ¦ 🖼️ Opere și inventar
+pour l’instant ¦ deocamdată
+Tout voir, modifier ¦ Vezi tot, modifică
+Son catalogue est vide pour l’instant. ¦ Catalogul său este gol deocamdată.
+↗ Ouvrir la page de l’artiste ¦ ↗ Deschide pagina artistului
+Les modifications de cette fiche seront perdues. ¦ Modificările acestei fișe se vor pierde.
+Quitter sans enregistrer ? ¦ Ieși fără să salvezi?
+Quitter sans enregistrer ¦ Ieși fără să salvezi
+Fiche verrouillée : déverrouille la fiche de la personne pour la modifier. ¦ Fișă blocată: deblochează fișa persoanei ca s-o modifici.
+Rien ne peut être modifié ici ¦ Nimic nu poate fi modificat aici
+Fiche verrouillée ¦ Fișă blocată
+Afficher, masquer, ranger les champs ; ajouter les tiens ¦ Afișează, ascunde, ordonează câmpurile; adaugă-le pe ale tale
+⚙️ Champs affichés ¦ ⚙️ Câmpuri afișate
+La fiche en PDF, à imprimer, ou en fichier ¦ Fișa în PDF, de tipărit, sau ca fișier
+CATALOGUE RAISONNÉ ¦ CATALOG RAȚIONAT
+Les autres sortes de fiches, et créer la tienne ¦ Celelalte feluri de fișe, și creează-l pe al tău
+Le catalogue raisonné ou la discographie en livre, dans la mise en page ¦ Catalogul raționat sau discografia ca o carte, în așezarea în pagină
+📖 Créer le livre… ¦ 📖 Creează cartea…
+Tableur, PDF, impression, fichier (réimportable) ¦ Tabel, PDF, tipărire, fișier (care se poate reimporta)
+Toutes les sortes d’œuvres, rangées par familles ¦ Toate felurile de opere, grupate pe familii
+Ranger, cacher les sections, choisir leur largeur ¦ Ordonează, ascunde secțiunile, alege-le lățimea
+⚙️ Organiser la page ¦ ⚙️ Organizează pagina
+Jeton Discogs, clé TMDb (facultatifs, gardés dans ce navigateur) ¦ Token Discogs, cheie TMDb (opționale, păstrate în acest browser)
+catalogue d’un autre artiste ¦ catalogul altui artist
+catalogue de {nm} ¦ catalogul lui {nm}
+Il faut un titre. ¦ Trebuie un titlu.
+Ce lieu est dans ta base : ouvre-le depuis « Lieux ». ¦ Acest loc este în baza ta: deschide-l din „Locuri”.
+Toutes les sortes de fiches ¦ Toate felurile de fișe
+Une sorte qui manque (sculpture, affiche, opéra…) ? Crée-la : tu choisis ses champs (ou tu les reprends d’une autre sorte). ¦ Lipsește un fel (sculptură, afiș, operă…)? Creează-l: îi alegi câmpurile (sau le preiei de la alt fel).
+＋ Créer une sorte de fiche… ¦ ＋ Creează un fel de fișă…
+titre, nom, lieu, année ¦ titlu, nume, loc, an
+« ＋ Nouveau », ou « ⤒ Importer » (Discogs, MusicBrainz, Open Library, Wikidata, TMDb, un tableau, un fichier). ¦ „＋ Nou”, sau „⤒ Importă” (Discogs, MusicBrainz, Open Library, Wikidata, TMDb, un tabel, un fișier).
+Glisser pour ranger ¦ Trage ca să ordonezi
+(avec durées) ¦ (cu durate)
+La fenêtre « Imprimer » n’est pas chargée. ¦ Fereastra „Tipărește” nu este încărcată.
+Index des œuvres ¦ Indexul operelor
+Notices complètes ¦ Fișe complete
+Liste en tableau ¦ Listă în tabel
+Une œuvre par page ¦ O operă pe pagină
+les notices illustrées (« Enregistrer en PDF ») ¦ fișele ilustrate („Salvează ca PDF”)
+les notices illustrées ¦ fișele ilustrate
+pour une autre base : « ⤒ Importer » → « Un fichier exporté d’ici » ¦ pentru altă bază: „⤒ Importă” → „Un fișier exportat de aici”
+les champs de l’onglet « L’export » (⚙️ Champs affichés) ¦ câmpurile din fila „Exportul” (⚙️ Câmpuri afișate)
+la notice (« Enregistrer en PDF ») ¦ fișa („Salvează ca PDF”)
+la notice ¦ fișa
+réimportable (« ⤒ Importer ») ¦ se poate reimporta („⤒ Importă”)
+Long métrage ¦ Lungmetraj
+Téléfilm ¦ Film de televiziune
+Publicité ¦ Reclamă
+Opéra, ballet ¦ Operă, balet
+rôle : {nm} ¦ rol: {nm}
+acteur, réalisation, scénario… ¦ actor, regie, scenariu…
+Rôle (personnage) ¦ Rol (personaj)
+réalisation ¦ regie
+Un acteur, une actrice ¦ Un actor, o actriță
+personnage, métier ¦ personaj, meserie
+Une sortie ¦ O lansare
+Festivals et prix ¦ Festivaluri și premii
+Un festival, un prix ¦ Un festival, un premiu
+Lauréat ou nommé ¦ Laureat sau nominalizat
+Lauréat ¦ Laureat
+Nommé ¦ Nominalizat
+Une version ¦ O versiune
+Saisons et épisodes, ou mises en scène et représentations ¦ Sezoane și episoade, sau puneri în scenă și reprezentații
+Un épisode, une représentation ¦ Un episod, o reprezentație
+Musique du film ¦ Muzica filmului
+Identifiants et liens ¦ Identificatori și linkuri
+Oui / non ¦ Da / nu
+☐ Oui / non ¦ ☐ Da / nu
+Autre fiche ¦ Altă fișă
+Autres fiches ¦ Alte fișe
+rôle (chant, accordéon…) ¦ rol (voce, acordeon…)
+Seulement sur certaines pistes (A1, B2…) ; vide = tout le disque ¦ Doar pe unele piese (A1, B2…); gol = tot discul
+Personnes et rôles ¦ Persoane și roluri
+👤 rôles ¦ 👤 roluri
+Image / son ¦ Imagine / sunet
+🖼 Image / son ¦ 🖼 Imagine / sunet
+Ce son ne se lit pas (fichier introuvable ?). ¦ Acest sunet nu se redă (fișier negăsit?).
+légende ¦ legendă
+L’image n’a pas été rapatriée : réessayer ¦ Imaginea nu a fost adusă: încearcă din nou
+↻ Réessayer de rapatrier ¦ ↻ Încearcă din nou s-o aduci
+La fenêtre des images : choisir dans la base, ou glisser, coller, importer depuis l’ordinateur ¦ Fereastra imaginilor: alege din bază, sau trage, lipește, importă de pe calculator
+de la base, ou importées (glisser, coller ⌘V) ¦ din bază, sau importate (trage, lipește ⌘V)
+Plus ¦ Mai mult
+précision (toile 10 F paysage…) ¦ precizare (pânză 10 F peisaj…)
+encadré (62 × 71 cm) ¦ înrămat (62 × 71 cm)
+· encadré ¦ · înrămat
+Calculé ¦ Calculat
+début ¦ început
+Mesure + unité ¦ Măsură + unitate
+⚖ Mesure + unité ¦ ⚖ Măsură + unitate
+🖼 Image · son · vidéo ¦ 🖼 Imagine · sunet · video
+Photos de la fiche ¦ Fotografiile fișei
+Ajouter ces photos ¦ Adaugă aceste fotografii
+Les liens se voient des deux côtés : chaque fiche liée, et la fiche de chaque personne, montrent celle-ci. ¦ Legăturile se văd din ambele părți: fiecare fișă legată, și fișa fiecărei persoane, o arată pe aceasta.
+De lui / d’elle (auteur) ¦ De el / de ea (autor)
+Sur lui / sur elle ¦ Despre el / despre ea
+Préface ¦ Prefață
+préface ¦ prefață
+Catalogue d’exposition ¦ Catalog de expoziție
+Revue, numéro spécial ¦ Revistă, număr special
+Mémoires ¦ Memorii
+Le texte ¦ Textul
+Un auteur ¦ Un autor
+Éditions ¦ Ediții
+Ses éditions ¦ Edițiile sale
+Une adaptation ¦ O adaptare
+Film, morceau, pièce… ¦ Film, piesă muzicală, piesă de teatru…
+Aucune édition rattachée : sur la fiche d’un livre, choisis ce texte dans « Texte (l’œuvre) ». ¦ Nicio ediție legată: pe fișa unei cărți, alege acest text în „Text (opera)”.
+Le livre ¦ Cartea
+Lien avec l’artiste ¦ Legătura cu artistul
+Texte (l’œuvre) ¦ Text (opera)
+Édition (1re, 2e…) ¦ Ediție (1, a 2-a…)
+Dépôt légal ¦ Depozit legal
+Où le trouver ¦ Unde o găsești
+bibliothèque, cote, chez nous… ¦ bibliotecă, cotă, la noi…
+Quatrième ¦ Coperta a patra
+Dédicace ¦ Dedicație
+dédicace ¦ dedicație
+Une critique ¦ O recenzie
+Œuvres citées ¦ Opere citate
+Une œuvre citée ¦ O operă citată
+Œuvre, disque, film ¦ Operă, disc, film
+Rangé ¦ Pus deoparte
+Dédicacé à ¦ Dedicat lui
+Un exemplaire de plus ¦ Încă un exemplar
+Résumé, notes ¦ Rezumat, note
+Musée ¦ Muzeu
+=prise ¦ dublă|duble|de duble
+=mixage ¦ mixaj|mixaje|de mixaje
+=remaster ¦ remaster|remastere|de remastere
+=enregistrement ¦ înregistrare|înregistrări|de înregistrări
+=parution ¦ apariție|apariții|de apariții
+=œuvre ¦ operă|opere|de opere
+=musée ¦ muzeu|muzee|de muzee
+=catalogue ¦ catalog|cataloage|de cataloage
+=date ¦ dată|date|de date
+=disque ¦ disc|discuri|de discuri
+=film ¦ film|filme|de filme
+valeur estimée {amount} € ¦ valoare estimată {amount} €
+Réglage « {nm} » importé : « Appliquer » pour t’en servir. ¦ Setarea „{nm}” a fost importată: „Aplică” ca s-o folosești.
+Champ « {nm} » enlevé ¦ Câmpul „{nm}” a fost scos
+Les champs de « {nm} » reviennent comme au départ (ordre, affichés, colonnes). Tes propres champs restent. ¦ Câmpurile din „{nm}” revin la starea inițială (ordine, afișate, coloane). Câmpurile tale proprii rămân.
+✎ La sorte « {nm} » ¦ ✎ Felul „{nm}”
+Sorte « {nm} » créée : ajoute ses champs avec « ⚙️ Champs affichés ». ¦ Felul „{nm}” a fost creat: adaugă-i câmpurile cu „⚙️ Câmpuri afișate”.
+Signé, daté {nm} ¦ Semnat, datat {nm}
+{nm}, catalogue raisonné ¦ {nm}, catalog raționat
+{nm}, discographie ¦ {nm}, discografie
+Notice — {nm} ¦ Fișă — {nm}
+Image — {nm} ¦ Imagine — {nm}
+En public (live) ¦ În public (live)
+En public ¦ În public
+Réédition ¦ Reeditare
+réédition ¦ reeditare
+Très bon (VG+) ¦ Foarte bun (VG+)
+Intérieur ¦ Interior
+(toutes éditions) ¦ (toate edițiile)
+Artiste crédité ¦ Artist creditat
+Format et détails ¦ Format și detalii
+Album (toutes éditions) ¦ Album (toate edițiile)
+Pistes et crédits ¦ Piese și credite
+Pistes (avec durées) ¦ Piese (cu durate)
+Une piste ¦ O piesă
+Coller une liste de titres… ¦ Lipește o listă de titluri…
+Coller une liste de titres ¦ Lipește o listă de titluri
+Crédits de la piste ¦ Creditele piesei
+Crédits, paroles, notes de la piste ¦ Credite, versuri, note ale piesei
+Crédits du disque ¦ Creditele discului
+Un crédit ¦ Un credit
+crédit ¦ credit
+Éditions et pressages ¦ Ediții și presări
+Une édition ¦ O ediție
+Titre (si différent) ¦ Titlu (dacă e diferit)
+Les photos du disque ¦ Fotografiile discului
+(échelle Goldmine) ¦ (scara Goldmine)
+Bon (G+) · coin corné ¦ Bun (G+) · colț îndoit
+Valeur estimée le ¦ Valoare estimată la
+Édition / pressage ¦ Ediție / presare
+Avec les crédits ¦ Cu creditele
+Pas encore de pistes : « ✎ Modifier » → « ＋ Une piste » ou « 📋 Coller une liste de titres ». ¦ Încă nicio piesă: „✎ Modifică” → „＋ O piesă” sau „📋 Lipește o listă de titluri”.
+L’enregistrement (et son morceau) ¦ Înregistrarea (și piesa ei)
+les noms de ta généalogie sont des pastilles cliquables ¦ numele din genealogia ta sunt etichete pe care poți face clic
+même album, autres parutions ¦ același album, alte apariții
+＋ Ajouter une édition ¦ ＋ Adaugă o ediție
+Une seule édition connue. « ＋ Ajouter une édition » (même album, autre pays, autre format, réédition…). ¦ O singură ediție cunoscută. „＋ Adaugă o ediție” (același album, altă țară, alt format, reeditare…).
+Ouvrir cette édition ¦ Deschide această ediție
+Un titre par ligne, avec si tu veux la position devant et la durée à la fin : « A1. Paris canaille 2:41 ». ¦ Un titlu pe rând, cu poziția în față și durata la sfârșit dacă vrei: „A1. Paris canaille 2:41”.
+Première sortie ¦ Prima lansare
+Toutes ses éditions ¦ Toate edițiile sale
+Aucune parution rattachée : sur la fiche d’un disque, choisis cet album dans « Album (toutes éditions) ». ¦ Nicio apariție legată: pe fișa unui disc, alege acest album în „Album (toate edițiile)”.
+Morceau (œuvre musicale) ¦ Piesă (operă muzicală)
+L’œuvre ¦ Opera
+Écrite ¦ Scrisă
+Dépôt SACEM ¦ Înregistrare SACEM
+Tonalité ¦ Tonalitate
+D’après ¦ După
+Partitions et paroles ¦ Partituri și versuri
+Une partition ¦ O partitură
+Paroles (couplets annotés) ¦ Versuri (strofe adnotate)
+Reprises par d’autres ¦ Preluări de alții
+Une reprise ¦ O preluare
+Interprète ¦ Interpret
+Précision (instrumental…) ¦ Precizare (instrumental…)
+＋ Ajouter un enregistrement ¦ ＋ Adaugă o înregistrare
+Aucun enregistrement ¦ Nicio înregistrare
+Une prise, un mixage, une version, en public… Sur un disque, chaque piste peut ensuite pointer vers l’un d’eux. ¦ O dublă, un mixaj, o versiune, în public… Pe un disc, fiecare piesă poate apoi trimite la una dintre ele.
+non retenue ¦ nepăstrată
+Fait d’après ¦ Făcut după
+(le mixage d’une prise, le remaster d’un mixage…) ¦ (mixajul unei duble, remasterul unui mixaj…)
+Studio, lieu ¦ Studio, loc
+mixé par…, couplet 3 coupé, bande amateur ¦ mixat de…, strofa 3 tăiată, bandă de amator
+Fichier son ¦ Fișier de sunet
+Figure sur ¦ Apare pe
+Sur aucun disque pour l’instant : sur la fiche d’un disque, une piste peut pointer vers cet enregistrement. ¦ Pe niciun disc deocamdată: pe fișa unui disc, o piesă poate trimite la această înregistrare.
+Concerts et tournées ¦ Concerte și turnee
+Un morceau ¦ O piesă muzicală
+Céramique ¦ Ceramică
+Œuvre certaine ¦ Operă sigură
+Attribuée ¦ Atribuită
+Dans la famille ¦ În familie
+dans la famille ¦ în familie
+Musée, collection publique ¦ Muzeu, colecție publică
+Collection privée ¦ Colecție privată
+Prêtée ¦ Împrumutată
+prêtée ¦ împrumutată
+En dépôt ¦ În depozit
+en dépôt ¦ în depozit
+Détruite ¦ Distrusă
+Où ? inconnu ¦ Unde? necunoscut
+où ? inconnu ¦ unde? necunoscut
+à restaurer ¦ de restaurat
+restauré ¦ restaurat
+l’artiste ¦ artistul
+donnée ¦ dăruită
+achetée, rachetée ¦ cumpărată, răscumpărată
+par héritage ¦ prin moștenire
+volée ¦ furată
+étude pour ¦ studiu pentru
+réplique ¦ replică
+gravure d’après ¦ gravură după
+même série ¦ aceeași serie
+Œuvres ¦ Opere
+Huile sur toile ¦ Ulei pe pânză
+Signé, daté ¦ Semnat, datat
+en bas à droite « J. Martin 21 » ¦ jos în dreapta „J. Martin 21”
+Lieu peint ¦ Loc pictat
+Où est l’œuvre ¦ Unde este opera
+Les photos de l’œuvre ¦ Fotografiile operei
+Une étape ¦ O etapă
+Qui (personne, galerie, musée) ¦ Cine (persoană, galerie, muzeu)
+pour son mariage, lot 112… ¦ pentru nunta sa, lotul 112…
+Pièce (lettre, facture…) ¦ Piesă (scrisoare, factură…)
+Une exposition ¦ O expoziție
+N° au catalogue ¦ Nr. în catalog
+N° du catalogue ¦ Nr. catalogului
+Prêtée par ¦ Împrumutată de
+Bibliographie de l’œuvre ¦ Bibliografia operei
+Une référence ¦ O referință
+Pièce, réserve ¦ Sală, depozit
+Un constat ¦ Un raport de stare
+Tirages et fontes ¦ Tiraje și turnări
+Un tirage ¦ Un tiraj
+Matière, papier ¦ Material, hârtie
+Où, à qui ¦ Unde, al cui
+Attribuée, atelier, entourage ¦ Atribuită, atelier, anturaj
+Douteuse, rejetée ¦ Îndoielnică, respinsă
+Exposée au moins une fois ¦ Expusă cel puțin o dată
+Citée dans un livre ¦ Citată într-o carte
+qui l’a eue, quand, comment ¦ cine a avut-o, când, cum
+＋ Ajouter une étape ¦ ＋ Adaugă o etapă
+chaque exposition est une fiche, reliée à toutes ses œuvres ¦ fiecare expoziție este o fișă, legată de toate operele ei
+＋ Ajouter à une exposition… ¦ ＋ Adaugă la o expoziție…
+Liens : étude pour, esquisse, réplique, variante, gravure d’après, pendant, même série… ¦ Legături: studiu pentru, schiță, replică, variantă, gravură după, pandant, aceeași serie…
+Salle, musée ¦ Sală, muzeu
+Œuvres exposées ¦ Opere expuse
+Carton d’invitation ¦ Invitație
+Aucune œuvre : sur la fiche d’une œuvre, « Expositions » → choisis celle-ci. ¦ Nicio operă: pe fișa unei opere, „Expoziții” → alege-o pe aceasta.
+Profil d’artiste ¦ Profil de artist
+Identité artistique ¦ Identitate artistică
+Nom d’artiste principal ¦ Numele de artist principal
+Noms de scène ¦ Nume de scenă
+Un nom de scène ¦ Un nume de scenă
+Un groupe ¦ O formație
+Rôle, instrument ¦ Rol, instrument
+Éditeurs ¦ Edituri
+Une école, un maître ¦ O școală, un maestru
+École, atelier ¦ Școală, atelier
+Élève de ¦ Elev al lui
+Prix et distinctions ¦ Premii și distincții
+Pour l’œuvre ¦ Pentru opera
+Presse et critiques ¦ Presă și critici
+Un article ¦ Un articol
+Pas encore de biographie : « … » pour l’écrire. ¦ Încă nicio biografie: „…” ca s-o scrii.
+Noms de scène, groupes, labels, galeries, formation… : « … » pour les écrire. ¦ Nume de scenă, formații, case de discuri, galerii, formare…: „…” ca să le scrii.
+(nommé) ¦ (nominalizat)
+Aucun prix noté. ¦ Niciun premiu notat.
+Aucun disque. ¦ Niciun disc.
+Morceaux (œuvres musicales) ¦ Piese (opere muzicale)
+Aucun morceau. ¦ Nicio piesă.
+Œuvres · catalogue raisonné ¦ Opere · catalog raționat
+Aucune œuvre. ¦ Nicio operă.
+Aucune exposition. ¦ Nicio expoziție.
+sur lui ¦ despre el
+Aucun livre. ¦ Nicio carte.
+Aucun film. ¦ Niciun film.
+Aucun concert. ¦ Niciun concert.
+Spectacles et rôles ¦ Spectacole și roluri
+Aucun spectacle. ¦ Niciun spectacol.
+Aucune photographie. ¦ Nicio fotografie.
+Aucun article noté. ¦ Niciun articol notat.
+en-tête ¦ antet
+toute la ligne ¦ tot rândul
+Couleur du liseré de la section ¦ Culoarea chenarului secțiunii
+Revenir à la couleur de départ ¦ Revino la culoarea inițială
+Vide : « … » pour l’écrire. ¦ Gol: „…” ca să-l scrii.
+Ranger : ⚙️ Organiser la page ¦ Ordonează: ⚙️ Organizează pagina
+de l’artiste ¦ al artistului
+Glisse ⠿ (ou ↑ ↓) pour ranger, 👁 pour cacher. La largeur : toute la ligne, ½, ⅓, ¼, ⅔ ou ¾ ; la pastille : la couleur du liseré. ¦ Trage ⠿ (sau ↑ ↓) ca să ordonezi, 👁 ca să ascunzi. Lățimea: tot rândul, ½, ⅓, ¼, ⅔ sau ¾; buleta: culoarea chenarului.
+Modèle de départ selon la discipline ¦ Model de pornire după disciplină
+＋ Ajouter une section ¦ ＋ Adaugă o secțiune
+Modèles de départ selon la discipline (Musicien, Peintre, Écrivain, Cinéaste, Photographe, Sculpteur, Architecte…) ; tout se change ensuite. Gardé dans « 💾 Réglages enregistrés » (outil « artistes ») : « ⚙️ Champs affichés » d’une fiche. ¦ Modele de pornire după disciplină (Muzician, Pictor, Scriitor, Cineast, Fotograf, Sculptor, Arhitect…); totul se poate schimba apoi. Păstrat în „💾 Setări salvate” (unealta „artiști”): „⚙️ Câmpuri afișate” ale unei fișe.
+Son nom (ex. « Ses instruments ») ; tu l’écris ensuite avec « … ». ¦ Numele ei (ex. „Instrumentele sale”); o scrii apoi cu „…”.
+La liste ¦ Lista
+Les vignettes ¦ Miniaturile
+L’export ¦ Exportul
+Enlever ce champ (il se remet avec « Remettre un champ enlevé ») ¦ Scoate acest câmp (revine cu „Pune la loc un câmp scos”)
+Aucun champ. ¦ Niciun câmp.
+Sorte de fiche ¦ Fel de fișă
+Chercher un champ… ¦ Caută un câmp…
+Le formulaire suit cet ordre : mêmes groupes, même ordre. Un champ masqué garde ce qui y est écrit. À la lecture, un champ vide ne s’affiche jamais. ¦ Formularul urmează această ordine: aceleași grupuri, aceeași ordine. Un câmp ascuns păstrează ce e scris în el. La citire, un câmp gol nu se afișează niciodată.
+Les colonnes de la liste, dans l’ordre. ¦ Coloanele listei, în ordine.
+Les lignes grises sous chaque vignette (affichage « Fiches »). ¦ Rândurile gri de sub fiecare miniatură (afișarea „Fișe”).
+Ce qu’on met dans une notice : export, impression, livre du catalogue raisonné. ¦ Ce se pune într-o fișă: export, tipărire, cartea catalogului raționat.
+＋ Ajouter un groupe ¦ ＋ Adaugă un grup
+Remettre un champ enlevé… ▾ ¦ Pune la loc un câmp scos… ▾
+Cacher les champs vides à la lecture ¦ Ascunde câmpurile goale la citire
+Réglage propre à ¦ Setare proprie pentru
+Revenir aux champs de départ de cette sorte ¦ Revino la câmpurile inițiale ale acestui fel
+(sinon : pour tous) ¦ (altfel: pentru toți)
+les champs affichés, l’ordre, les colonnes, tes champs et la page de l’artiste ¦ câmpurile afișate, ordinea, coloanele, câmpurile tale și pagina artistului
+Renommer le champ ¦ Redenumește câmpul
+Le nouveau nom (ce qui est écrit dans les fiches reste). ¦ Noul nume (ce e scris în fișe rămâne).
+Le nom du groupe (il apparaît dans la colonne de droite de la fiche, avec ses champs). ¦ Numele grupului (apare în coloana din dreapta a fișei, cu câmpurile sale).
+Ajouter le groupe ¦ Adaugă grupul
+↺ Remettre comme au départ ? ¦ ↺ Readu la starea inițială?
+Ajouter le champ ¦ Adaugă câmpul
+Écouté sur, Acheté par, Souvenir… ¦ Ascultat pe, Cumpărat de, Amintire…
+Choix (un par ligne) ¦ Opțiuni (una pe rând)
+Dans le groupe ¦ În grupul
+de tous les artistes ¦ al tuturor artiștilor
+Donne un nom au champ. ¦ Dă un nume câmpului.
+Proposées ¦ Propuse
+Icône de la sorte ¦ Pictograma felului
+＋ Créer une sorte de fiche ¦ ＋ Creează un fel de fișă
+Créer la sorte ¦ Creează felul
+Au pluriel ¦ La plural
+Rien (titre, date, photos, notes) ¦ Nimic (titlu, dată, fotografii, note)
+(ses champs) ¦ (câmpurile sale)
+Ensuite, « ⚙️ Champs affichés » : ajoute tes champs (texte, date, période, personne + rôle, lieu, fiche liée, image, tableau…), range-les, cache-les. ¦ Apoi, „⚙️ Câmpuri afișate”: adaugă-ți câmpurile (text, dată, perioadă, persoană + rol, loc, fișă legată, imagine, tabel…), ordonează-le, ascunde-le.
+Sorte enregistrée. ¦ Fel salvat.
+Notices des œuvres ¦ Fișele operelor
+(par période) ¦ (pe perioade)
+Liste des expositions ¦ Lista expozițiilor
+Bibliographie générale ¦ Bibliografie generală
+Index des titres, des lieux, des propriétaires ¦ Indexul titlurilor, locurilor, proprietarilor
+Œuvres non retrouvées (en annexe) ¦ Opere negăsite (în anexă)
+Œuvres non retrouvées ¦ Opere negăsite
+Les disques ¦ Discurile
+(une double page par album : pochette, pistes, crédits, éditions) ¦ (o pagină dublă pe album: copertă, piese, credite, ediții)
+Index des morceaux ¦ Indexul pieselor
+Index des musiciens et des crédits ¦ Indexul muzicienilor și al creditelor
+Musiciens et crédits ¦ Muzicieni și credite
+Concordance des numéros de catalogue ¦ Concordanța numerelor de catalog
+1 œuvre par page (grande image) ¦ 1 operă pe pagină (imagine mare)
+Une double page par œuvre (image à gauche, notice à droite) ¦ O pagină dublă pe operă (imaginea în stânga, fișa în dreapta)
+2 œuvres par page ¦ 2 opere pe pagină
+4 œuvres par page (inventaire) ¦ 4 opere pe pagină (inventar)
+Carré (21 × 21 cm) ¦ Pătrat (21 × 21 cm)
+A4 à l’italienne ¦ A4 orizontal
+collection particulière ¦ colecție particulară
+Propriétaire actuel ¦ Proprietarul actual
+Œuvres en rapport ¦ Opere înrudite
+NOUVEAU DOCUMENT ¦ DOCUMENT NOU
+📖 Un catalogue raisonné ¦ 📖 Un catalog raționat
+💿 Une discographie ¦ 💿 O discografie
+Créer le livre ¦ Creează cartea
+Les parties du livre ¦ Părțile cărții
+Dans chaque notice ¦ În fiecare fișă
+(le panneau « ⚙️ Champs affichés », onglet « L’export ») ¦ (panoul „⚙️ Câmpuri afișate”, fila „Exportul”)
+Mise en page des notices ¦ Așezarea în pagină a fișelor
+Cacher le nom des propriétaires vivants (« collection particulière ») ¦ Ascunde numele proprietarilor în viață („colecție particulară”)
+(filtres de la liste) ¦ (filtrele listei)
+Choisis d’abord l’artiste. ¦ Alege mai întâi artistul.
+Choisis l’artiste. ¦ Alege artistul.
+L’aperçu d’une double page s’affiche ici. ¦ Previzualizarea unei pagini duble apare aici.
+Aucune œuvre à mettre dans le livre. ¦ Nicio operă de pus în carte.
+Aucun disque à mettre dans le livre. ¦ Niciun disc de pus în carte.
