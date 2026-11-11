@@ -329,7 +329,7 @@ Déplacer la section « {name} » : glisse, ou Alt + ↑ / ↓ ¦ Siirrä osio �
 cachée ¦ piilotettu ¦ rejtett
 repliée au départ ¦ aluksi suljettu ¦ kezdetben összecsukva
 Au clavier : Tab jusqu’à ⠿ puis {a} / {b} ¦ Näppäimistöllä: Tab kohtaan ⠿, sitten {a} / {b} ¦ Billentyűzettel: Tab a ⠿ jelig, majd {a} / {b}
-⋯ d’une section : Renommer, Changer l’icône, Monter, Descendre, Supprimer (↶ Annuler). ¦ Osion ⋯: Nimeä uudelleen, Vaihda kuvake, Siirrä ylös, Siirrä alas, Poista (↶ Kumoa). ¦ Szakasz ⋯ menüje: Átnevezés, Ikon cseréje, Feljebb, Lejjebb, Törlés (↶ Visszavonás).
+⋯ d’une section : Renommer, Changer l’icône, Monter, Descendre, Supprimer (↶ Annuler). ¦ ⋯ osiolle: Nimeä uudelleen, Vaihda kuvake, Siirrä ylös, Siirrä alas, Poista (↶ Kumoa). ¦ ⋯ egy szakasznál: Átnevezés, Ikon cseréje, Feljebb, Lejjebb, Törlés (↶ Visszavonás).
 Section « {nm} » créée ¦ Osio ”{nm}” luotu ¦ „{nm}” szakasz létrehozva
 ici ¦ tässä ¦ itt
 « {a} » va dans « {b} » ¦ ”{a}” siirtyy kohtaan ”{b}” ¦ „{a}” ide kerül: „{b}”
