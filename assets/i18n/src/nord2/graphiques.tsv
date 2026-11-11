@@ -598,3 +598,1203 @@ Chargement des personnes… ¦ Načítavam osoby… ¦ Laster inn personer…
 Aucune fiche trouvée. ¦ Nenašla sa žiadna karta. ¦ Ingen oppføring funnet.
 Frères et sœurs ¦ Súrodenci ¦ Søsken
 Plier cette branche ¦ Zbaliť túto vetvu ¦ Fold sammen denne grenen
+Règle un diagramme puis enregistre-le comme vue pour le retrouver ici. ¦ Nastav diagram a potom ho ulož ako pohľad, aby si ho tu našiel. ¦ Still inn et skjema, og lagre det som en visning for å finne det her.
+Vue enregistrée supprimée ¦ Uložený pohľad je vymazaný ¦ Lagret visning slettet
+Première personne ¦ Prvá osoba ¦ Første person
+Deuxième personne ¦ Druhá osoba ¦ Andre person
+Afficher le lien ¦ Zobraziť vzťah ¦ Vis slektskapet
+Année non renseignée ¦ Rok nie je uvedený ¦ År ikke oppgitt
+Adresse non renseignée ¦ Adresa nie je uvedená ¦ Adresse ikke oppgitt
+Membre du foyer ¦ Člen domácnosti ¦ Husstandsmedlem
+Aucun membre relevé. ¦ Žiadny zapísaný člen. ¦ Ingen medlemmer registrert.
+Aucune maisonnée recensée pour cette personne. ¦ Pre túto osobu nie je zapísaná žiadna domácnosť zo sčítania obyvateľov. ¦ Ingen husstand fra folketelling for denne personen.
+Ajoute des recensements depuis sa fiche. ¦ Pridaj sčítania obyvateľov z jej karty. ¦ Legg til folketellinger fra oppføringen.
+Aucun déplacement entre deux lieux géocodés n’est encore disponible pour cette branche. ¦ Pre túto vetvu zatiaľ nie je k dispozícii žiadny presun medzi dvoma lokalizovanými miestami. ¦ Ingen flytting mellom to geokodede steder er tilgjengelig ennå for denne grenen.
+Pas encore assez de liens renseignés pour dessiner ce graphe. ¦ Zatiaľ nie je vyplnených dosť väzieb na nakreslenie tohto grafu. ¦ Ikke nok forbindelser er fylt ut ennå til å tegne denne grafen.
+Réseau social ¦ Sociálna sieť ¦ Sosialt nettverk
+Métiers transmis ¦ Odovzdávané povolania ¦ Nedarvede yrker
+Migrations de la branche ¦ Migrácie vetvy ¦ Grenens flyttinger
+Réseau ¦ Sieť ¦ Nettverk
+=nœud ¦ uzol|uzly|uzlov ¦ node|noder
+{nodes} · {links}. Survole un lien pour voir sa nature et clique sur une personne pour ouvrir sa fiche. ¦ {nodes} · {links}. Prejdi myšou na väzbu a uvidíš, o čo ide; kliknutím na osobu otvoríš jej kartu. ¦ {nodes} · {links}. Hold musen over en forbindelse for å se hva den er, og klikk på en person for å åpne oppføringen.
+Tous les actes ¦ Všetky záznamy ¦ Alle dokumenter
+Actes rattachés ¦ Pripojené záznamy ¦ Tilknyttede dokumenter
+Actes liés ¦ Prepojené záznamy ¦ Koblede dokumenter
+Sépultures ¦ Pohreby ¦ Begravelser
+Aucun acte pour ces filtres. ¦ Pre tieto filtre žiadny záznam. ¦ Ingen dokumenter for disse filtrene.
+Sans précision ¦ Bez spresnenia ¦ Uten detaljer
+Aucun recensement pour ces filtres. ¦ Pre tieto filtre žiadne sčítanie obyvateľov. ¦ Ingen folketelling for disse filtrene.
+Aucun dépouillement enregistré pour ces filtres. ¦ Pre tieto filtre žiadny uložený výpis. ¦ Ingen lagret registrering for disse filtrene.
+GRAPHIQUES · LIEUX ¦ GRAFY · MIESTA ¦ DIAGRAMMER · STEDER
+SYNTHÈSE LOCALE ¦ MIESTNY PREHĽAD ¦ LOKAL OVERSIKT
+Regroupe les sources et recherches déjà rattachées à un même lieu. ¦ Zhromažďuje pramene a výskumy už pripojené k jednému miestu. ¦ Samler kilder og forskning som allerede er knyttet til samme sted.
+Choisis une commune pour afficher les actes, dépouillements, battues et sépultures liés à ce lieu. ¦ Vyber obec a zobrazia sa záznamy, výpisy, hromadné pátrania a pohreby spojené s týmto miestom. ¦ Velg et sted for å vise dokumenter, registreringer, leteaksjoner og begravelser knyttet til stedet.
+génération {list} ¦ generácia {list} ¦ generasjon {list}
+générations {list} ¦ generácie {list} ¦ generasjoner {list}
+est {list} ¦ je {list} ¦ er {list}
+(… {n} places en tout) ¦ (… spolu {n} miest) ¦ (… {n} plasser i alt)
+Ancêtres répétés de {name} ¦ Opakujúci sa predkovia osoby {name} ¦ Gjentatte aner til {name}
+Voir aussi leurs ancêtres répétés ({n}) ¦ Zobraziť aj ich opakujúcich sa predkov ({n}) ¦ Se også deres gjentatte aner ({n})
+Quand deux ancêtres sont cousins, leurs propres ancêtres apparaissent plusieurs fois dans l’arbre : c’est l’implexe. Seules les filiations biologiques comptent. Le taux = 1 − personnes différentes ÷ places connues. ¦ Keď sú dvaja predkovia bratranci, ich vlastní predkovia sa v strome objavia viackrát: to je implex. Počítajú sa iba biologické väzby. Miera = 1 − rôzne osoby ÷ známe miesta. ¦ Når to aner er søskenbarn, dukker deres egne aner opp flere ganger i treet: det er anetap. Bare biologiske slektsledd teller. Graden = 1 − forskjellige personer ÷ kjente plasser.
+Places théoriques ¦ Teoretické miesta ¦ Teoretiske plasser
+Places connues ¦ Známe miesta ¦ Kjente plasser
+places connues ¦ známe miesta ¦ kjente plasser
+Personnes différentes ¦ Rôzne osoby ¦ Forskjellige personer
+Implexe ¦ Implex ¦ Anetap
+IMPLEXE ¦ IMPLEX ¦ ANETAP
+Implexe cumulé ¦ Kumulatívny implex ¦ Akkumulert anetap
+implexe global ¦ celkový implex ¦ samlet anetap
+ancêtres différents ¦ rôzni predkovia ¦ forskjellige aner
+ancêtres répétés ¦ opakujúci sa predkovia ¦ gjentatte aner
+Calcul arrêté : arbre trop grand. ¦ Výpočet zastavený: strom je príliš veľký. ¦ Beregningen er stoppet: treet er for stort.
+Les couples communs les plus proches ¦ Najbližšie spoločné páry ¦ De nærmeste felles parene
+C’est ici que les branches se rejoignent ; leurs ancêtres sont répétés à leur suite. ¦ Tu sa vetvy spájajú; ich predkovia sa potom opakujú. ¦ Her møtes grenene; anene deres gjentas etter dem.
+Aucun ancêtre répété : chaque ancêtre connu n’apparaît qu’une fois. ¦ Žiadny opakujúci sa predok: každý známy predok sa objaví iba raz. ¦ Ingen gjentatte aner: hver kjente ane dukker bare opp én gang.
+LIENS DE PARENTÉ ¦ PRÍBUZENSKÉ VZŤAHY ¦ SLEKTSKAP
+Choisis deux personnes ¦ Vyber dve osoby ¦ Velg to personer
+Recherche les deux individus dans la colonne de gauche pour afficher le chemin familial le plus court. ¦ Vyhľadaj obe osoby v ľavom stĺpci a zobrazí sa najkratšia rodinná cesta. ¦ Søk opp begge personene i venstre kolonne for å vise den korteste slektsveien.
+lié à ¦ spojený s ¦ koblet til
+{links} entre les deux personnes. ¦ {links} medzi oboma osobami. ¦ {links} mellom de to personene.
+Aucun chemin familial trouvé entre ces deux personnes. ¦ Medzi týmito dvoma osobami sa nenašla žiadna rodinná cesta. ¦ Ingen slektsvei funnet mellom disse to personene.
+Aucune relation disponible. ¦ Žiadny vzťah nie je k dispozícii. ¦ Ingen relasjon tilgjengelig.
+Ajoute des parents, conjoints ou enfants sur la fiche. ¦ Pridaj na kartu rodičov, manželov alebo deti. ¦ Legg til foreldre, ektefeller eller barn i oppføringen.
+Molette : zoomer · Maj + molette ou glisser : déplacer ¦ Koliesko: priblížiť · Shift + koliesko alebo ťahanie: posunúť ¦ Musehjul: zoom · Shift + musehjul eller dra: flytt
+Choisir dans Personnes ¦ Vybrať v Osobách ¦ Velg i Personer
+Aucune ascendance disponible. ¦ Žiadni predkovia nie sú k dispozícii. ¦ Ingen aner tilgjengelig.
+Ajoute des parents sur la fiche pour voir l’arbre. ¦ Pridaj na kartu rodičov, aby si videl strom. ¦ Legg til foreldre i oppføringen for å se treet.
+♂ Masculin ¦ ♂ Muž ¦ ♂ Mann
+♀ Féminin ¦ ♀ Žena ¦ ♀ Kvinne
+□ Masculin ¦ □ Muž ¦ □ Mann
+○ Féminin ¦ ○ Žena ¦ ○ Kvinne
+◇ Sexe non renseigné ¦ ◇ Pohlavie nie je uvedené ¦ ◇ Kjønn ikke oppgitt
+Les traits relient les générations connues. ¦ Čiary spájajú známe generácie. ¦ Linjene forbinder de kjente generasjonene.
+Distribution des noms ¦ Rozloženie priezvisk ¦ Fordeling av etternavn
+DISTRIBUTION ¦ ROZLOŽENIE ¦ FORDELING
+=naissance regroupée ¦ zoskupené narodenie|zoskupené narodenia|zoskupených narodení ¦ gruppert fødsel|grupperte fødsler
+{births} par année et patronyme. ¦ {births} podľa roku a priezviska. ¦ {births} per år og etternavn.
+Vivant·e ¦ Žijúci/a ¦ Levende
+Décédé·e ¦ Zosnulý/á ¦ Avdød
+D’autres générations existent ¦ Existujú ďalšie generácie ¦ Det finnes flere generasjoner
+Côte à côte ¦ Vedľa seba ¦ Side om side
+Dessus / dessous ¦ Nad sebou / pod sebou ¦ Over / under
+Aucune vue enregistrée pour l’instant ¦ Zatiaľ žiadny uložený pohľad ¦ Ingen lagret visning ennå
+Montrer les animaux de chacun à côté de leur maître (trait pointillé) ¦ Zobraziť zvieratá každého vedľa ich pána (bodkovaná čiara) ¦ Vis hver persons dyr ved siden av eieren (prikket linje)
+Couleur et épaisseur des traits selon la solidité de chaque lien parent-enfant ¦ Farba a hrúbka čiar podľa spoľahlivosti každej väzby rodič – dieťa ¦ Linjenes farge og tykkelse etter hvor sikker hver forelder–barn-forbindelse er
+🛡 Vue solidité ¦ 🛡 Pohľad spoľahlivosti ¦ 🛡 Sikkerhetsvisning
+Tableau des chiffres ¦ Tabuľka čísel ¦ Talltabell
+Graphique d’une statistique de l’app ¦ Graf štatistiky aplikácie ¦ Diagram over en statistikk i appen
+Ce graphique n’existe plus. ¦ Tento graf už neexistuje. ¦ Dette diagrammet finnes ikke lenger.
+Un de mes graphiques ¦ Jeden z mojich grafov ¦ Et av mine diagrammer
+📈 Un de mes graphiques ¦ 📈 Jeden z mojich grafov ¦ 📈 Et av mine diagrammer
+Un graphique de l’Éditeur de graphiques, tenu à jour ¦ Graf z Editora grafov, priebežne aktualizovaný ¦ Et diagram fra Diagramredigering, holdes oppdatert
+Données de l’app ¦ Údaje aplikácie ¦ Appens data
+🔄 Données de l’app ¦ 🔄 Údaje aplikácie ¦ 🔄 Appens data
+✍️ Mes chiffres ¦ ✍️ Moje čísla ¦ ✍️ Mine tall
+Mon diagramme ¦ Môj diagram ¦ Mitt skjema
+Posé : {where} ¦ Umiestnené: {where} ¦ Plassert i: {where}
+LISTES · GRAPHIQUES ¦ ZOZNAMY · GRAFY ¦ LISTER · DIAGRAMMER
+📈 Graphiques et diagrammes ¦ 📈 Grafy a diagramy ¦ 📈 Diagrammer og skjemaer
+Tous tes graphiques (faits dans <b>Réglages → Éditeur de graphiques</b>, avec tes propres chiffres ou ceux de l’app) et tes diagrammes (hémicycle, frise d’un groupe, camembert…). Chacun se pose partout : un widget du tableau de bord, une Fiche, une enquête, l’Atelier, la page d’une personne, la mise en page — bouton « ＋ Diagramme », puis « 📈 Un de mes graphiques ». ¦ Všetky tvoje grafy (vytvorené v <b>Nastavenia → Editor grafov</b>, s vlastnými číslami alebo číslami aplikácie) a tvoje diagramy (polkruh, časová os skupiny, koláč…). Každý sa dá umiestniť kamkoľvek: widget prehľadu, poznámková karta, pátranie, dielňa, stránka osoby, sadzba — tlačidlo „＋ Diagram“ a potom „📈 Jeden z mojich grafov“. ¦ Alle diagrammene dine (laget i <b>Innstillinger → Diagramredigering</b>, med egne tall eller appens) og skjemaene dine (halvsirkel, tidslinje for en gruppe, kakediagram …). Hvert av dem kan plasseres hvor som helst: en widget på oversikten, et notatkort, en undersøkelse, verkstedet, en persons side, layouten — knappen «＋ Skjema», deretter «📈 Et av mine diagrammer».
+＋ Nouveau diagramme ¦ ＋ Nový diagram ¦ ＋ Nytt skjema
+Aucun graphique ni diagramme pour l’instant ¦ Zatiaľ žiadny graf ani diagram ¦ Ingen diagrammer eller skjemaer ennå
+Un graphique compte ce que tu veux (tes propres chiffres, des personnes, des événements, une statistique de l’app) ; un diagramme dessine une assemblée, une frise, un organigramme… ¦ Graf počíta, čo chceš (vlastné čísla, osoby, udalosti, štatistiku aplikácie); diagram kreslí zhromaždenie, časovú os, organizačnú schému… ¦ Et diagram teller det du vil (egne tall, personer, hendelser, en statistikk i appen); et skjema tegner en forsamling, en tidslinje, et organisasjonskart …
+Rien ne correspond : retire un filtre ou change la recherche. ¦ Nič nezodpovedá: odober filter alebo zmeň hľadanie. ¦ Ingenting passer: fjern et filter eller endre søket.
+Chercher un graphique, un diagramme… (ex. naissances, Rennes) ¦ Hľadať graf, diagram… (napr. narodenia, Rennes) ¦ Søk etter et diagram, et skjema … (f.eks. fødsler, Rennes)
+Seulement ceux posés quelque part ¦ Iba tie niekde umiestnené ¦ Bare de som er plassert et sted
+Posés quelque part ¦ Niekde umiestnené ¦ Plassert et sted
+Posé nulle part pour l’instant ¦ Zatiaľ nikde neumiestnené ¦ Ikke plassert noe sted ennå
+Courbe ¦ Krivka ¦ Kurve
+Aire ¦ Plocha ¦ Areal
+Anneau ¦ Prstenec ¦ Ring
+Camembert ¦ Koláč ¦ Kakediagram
+Barres ¦ Stĺpce ¦ Søyler
+Revenir à la personne ¦ Späť k osobe ¦ Tilbake til personen
+Prénom contient ¦ Krstné meno obsahuje ¦ Fornavn inneholder
+Statut (vivant, décédé) ¦ Stav (žijúci, zosnulý) ¦ Status (levende, avdød)
+Métier contient ¦ Povolanie obsahuje ¦ Yrke inneholder
+Dans mes favoris ¦ V mojich obľúbených ¦ Blant favorittene mine
+Naissance entre (années) ¦ Narodenie medzi (roky) ¦ Født mellom (år)
+Naissance entre deux dates précises ¦ Narodenie medzi dvoma presnými dátumami ¦ Født mellom to nøyaktige datoer
+Naissance en (mois) ¦ Narodenie v (mesiac) ¦ Født i (måned)
+Décès entre (années) ¦ Úmrtie medzi (roky) ¦ Død mellom (år)
+Âge à un événement entre ¦ Vek pri udalosti medzi ¦ Alder ved en hendelse mellom
+A vécu entre … ans ¦ Dožil(a) sa medzi … rokmi ¦ Levde mellom … år
+Lieu de naissance (contient) ¦ Miesto narodenia (obsahuje) ¦ Fødested (inneholder)
+Lieu de décès ou d’inhumation (contient) ¦ Miesto úmrtia alebo pohrebu (obsahuje) ¦ Døds- eller gravsted (inneholder)
+A un événement à (lieu contient) ¦ Má udalosť v (miesto obsahuje) ¦ Har en hendelse i (sted inneholder)
+A un événement dans le département, la région ou le pays ¦ Má udalosť v departemente, regióne alebo krajine ¦ Har en hendelse i departementet, regionen eller landet
+A un événement à moins de … km de ¦ Má udalosť do … km od ¦ Har en hendelse innenfor … km fra
+A eu un événement (mariage, divorce, voyage…) ¦ Mal(a) udalosť (sobáš, rozvod, cesta…) ¦ Har hatt en hendelse (vielse, skilsmisse, reise …)
+Nombre d’événements d’un type entre ¦ Počet udalostí jedného druhu medzi ¦ Antall hendelser av én type mellom
+Nombre d’unions (mariages) entre ¦ Počet zväzkov (sobášov) medzi ¦ Antall forbindelser (ekteskap) mellom
+Nombre d’enfants entre ¦ Počet detí medzi ¦ Antall barn mellom
+Conjoint : nom ou prénom contient ¦ Manžel/ka: priezvisko alebo krstné meno obsahuje ¦ Ektefelle: etternavn eller fornavn inneholder
+Parent : nom ou prénom contient ¦ Rodič: priezvisko alebo krstné meno obsahuje ¦ Forelder: etternavn eller fornavn inneholder
+Cause de décès contient ¦ Príčina úmrtia obsahuje ¦ Dødsårsak inneholder
+Seulement mes ancêtres (Sosa) ¦ Iba moji predkovia (Sosa) ¦ Bare mine aner (Sosa)
+Par rapport à la personne de la fiche (ses ancêtres, sa famille…) ¦ Vzhľadom na osobu na karte (jej predkovia, rodina…) ¦ I forhold til personen i oppføringen (aner, familie …)
+Génération Sosa entre ¦ Generácia Sosa medzi ¦ Sosa-generasjon mellom
+Sans source ¦ Bez prameňa ¦ Uten kilde
+Nombre de sources entre ¦ Počet prameňov medzi ¦ Antall kilder mellom
+A une photo ou un document ¦ Má fotku alebo dokument ¦ Har et bilde eller et dokument
+Les filtres ci-dessus (années, limite, sexe et critères) peuvent devenir ceux de départ de ¦ Uvedené filtre (roky, limit, pohlavie a kritériá) sa môžu stať východiskovými pre ¦ Filtrene ovenfor (år, grense, kjønn og kriterier) kan bli startfiltre for
+les distributions. ¦ rozloženia. ¦ fordelingene.
+Usage des noms de famille dans la base. ¦ Výskyt priezvisk v databáze. ¦ Bruk av etternavn i databasen.
+Années de naissance (par décennie) ¦ Roky narodenia (po desaťročiach) ¦ Fødselsår (per tiår)
+Années de décès (par décennie) ¦ Roky úmrtia (po desaťročiach) ¦ Dødsår (per tiår)
+Mes ancêtres par siècle ¦ Moji predkovia podľa storočí ¦ Mine aner per århundre
+Métiers les plus fréquents ¦ Najčastejšie povolania ¦ Vanligste yrker
+Femmes et hommes ¦ Ženy a muži ¦ Kvinner og menn
+Ancêtres à sourcer ¦ Predkovia bez prameňa ¦ Aner som mangler kilde
+Toutes les personnes récentes ont au moins une source. ¦ Všetky nedávne osoby majú aspoň jeden prameň. ¦ Alle nylig lagt til personer har minst én kilde.
+Tous les événements récents ont un média. ¦ Všetky nedávne udalosti majú médium. ¦ Alle nylige hendelser har et medium.
+Aucun média. ¦ Žiadne médiá. ¦ Ingen medier.
+Aucun média isolé. ¦ Žiadne neprepojené médium. ¦ Ingen frittstående medier.
+Toutes les images récentes ont au moins une zone identifiée. ¦ Všetky nedávne obrázky majú aspoň jednu označenú oblasť. ¦ Alle nylige bilder har minst ett identifisert område.
+Aucune fiche récente avec parent manquant. ¦ Žiadna nedávna karta s chýbajúcim rodičom. ¦ Ingen nylig oppføring med manglende forelder.
+Aucun baptême récent sans parrain/marraine. ¦ Žiadny nedávny krst bez krstného otca/krstnej matky. ¦ Ingen nylig dåp uten gudfar/gudmor.
+✎ Modifier l’onglet ¦ ✎ Upraviť kartu ¦ ✎ Rediger fanen
+Aucun widget affiché ¦ Žiadny zobrazený widget ¦ Ingen widget vises
+Onglet vide ¦ Prázdna karta ¦ Tom fane
+Ajoute des widgets, tes listes ou tes graphiques depuis la colonne de gauche. ¦ Pridaj widgety, svoje zoznamy alebo grafy z ľavého stĺpca. ¦ Legg til widgeter, listene dine eller diagrammene dine fra venstre kolonne.
+Ajoute-en depuis la colonne de gauche, ou crée le tien. ¦ Pridaj nejaké z ľavého stĺpca alebo si vytvor vlastný. ¦ Legg til noen fra venstre kolonne, eller lag din egen.
+Widget « {name} » retiré du tableau de bord. ¦ Widget „{name}“ je odobratý z prehľadu. ¦ Widgeten «{name}» er fjernet fra oversikten.
+Widget retiré du tableau de bord. ¦ Widget je odobratý z prehľadu. ¦ Widgeten er fjernet fra oversikten.
+Widget supprimé du tableau de bord. ¦ Widget je vymazaný z prehľadu. ¦ Widgeten er slettet fra oversikten.
+Widget modifié. ¦ Widget je upravený. ¦ Widgeten er endret.
+Revenir au widget ¦ Späť k widgetu ¦ Tilbake til widgeten
+Enquêtes ouvertes ¦ Otvorené pátrania ¦ Åpne undersøkelser
+Battues ouvertes ¦ Otvorené hromadné pátrania ¦ Åpne leteaksjoner
+Rappels proches ¦ Blížiace sa pripomienky ¦ Kommende påminnelser
+Incohérences ¦ Nezrovnalosti ¦ Uoverensstemmelser
+Seulement les SOSA ¦ Iba predkovia Sosa ¦ Bare Sosa-aner
+Types d’évènements ¦ Druhy udalostí ¦ Hendelsestyper
+Ex : trouver la date de naissance de Jean Dupont ¦ Napr.: nájsť dátum narodenia Jeana Duponta ¦ F.eks.: finn fødselsdatoen til Jean Dupont
+Personne liée (facultatif) ¦ Prepojená osoba (nepovinné) ¦ Koblet person (valgfritt)
+Réglages du widget ¦ Nastavenia widgetu ¦ Widgetens innstillinger
+Statistique affichée ¦ Zobrazená štatistika ¦ Statistikk som vises
+Dernière fiche consultée ¦ Naposledy prezeraná karta ¦ Sist viste oppføring
+Les descendants ¦ Potomkovia ¦ Etterkommerne
+Les ascendants ¦ Predkovia ¦ Anene
+Sites affichés ¦ Zobrazené weby ¦ Nettsteder som vises
+Prendre cette image ¦ Použiť tento obrázok ¦ Bruk dette bildet
+Provenance affichée ¦ Zobrazený pôvod ¦ Opprinnelse som vises
+Ex : Jean Dupont · Enquête ¦ Napr.: Jean Dupont · Pátranie ¦ F.eks.: Jean Dupont · Undersøkelse
+Personne affichée ¦ Zobrazená osoba ¦ Person som vises
+Aléatoire ¦ Náhodne ¦ Tilfeldig
+Personne précise ¦ Konkrétna osoba ¦ Bestemt person
+📁 ou glisse une image ici, ou colle-la (⌘V). ¦ 📁 alebo sem presuň obrázok, alebo ho vlož (⌘V). ¦ 📁 eller dra et bilde hit, eller lim det inn (⌘V).
+Pages du suivi ¦ Stránky sledovania ¦ Oppfølgingens sider
+Pages du tableau de bord ¦ Stránky prehľadu ¦ Oversiktens sider
+Chaque page a ses widgets ; les boutons des pages sont en haut du Suivi des animaux. La page cochée s’affiche à l’ouverture. ¦ Každá stránka má svoje widgety; tlačidlá stránok sú hore v Sledovaní zvierat. Začiarknutá stránka sa zobrazí pri otvorení. ¦ Hver side har sine widgeter; sideknappene er øverst i Dyreoppfølging. Siden som er krysset av, vises ved åpning.
+Chaque page a ses widgets ; les boutons des pages sont en haut du tableau de bord. La page cochée s’affiche à l’ouverture. ¦ Každá stránka má svoje widgety; tlačidlá stránok sú hore v prehľade. Začiarknutá stránka sa zobrazí pri otvorení. ¦ Hver side har sine widgeter; sideknappene er øverst i oversikten. Siden som er krysset av, vises ved åpning.
+Ranger ses widgets ¦ Usporiadať jej widgety ¦ Ordne sidens widgeter
+✎ en cours ¦ ✎ upravuje sa ¦ ✎ redigeres
+Titre de l’ensemble ¦ Názov skupiny ¦ Gruppens tittel
+Un niveau plus haut ¦ O úroveň vyššie ¦ Ett nivå opp
+Sous-ensemble (un niveau plus bas) ¦ Podskupina (o úroveň nižšie) ¦ Undergruppe (ett nivå ned)
+SUIVI DES ANIMAUX ¦ SLEDOVANIE ZVIERAT ¦ DYREOPPFØLGING
+MON ONGLET ¦ MOJA KARTA ¦ MIN FANE
+Son widget sera supprimé avec elle. ¦ Jej widget sa vymaže spolu s ňou. ¦ Widgeten dens slettes sammen med den.
+Ses {widgets} seront supprimés avec elle. ¦ Jej {widgets} sa vymažú spolu s ňou. ¦ Dens {widgets} slettes sammen med den.
+=widget ¦ widget|widgety|widgetov ¦ widget|widgeter
+Supprimer la page « {name} » ? ¦ Vymazať stránku „{name}“? ¦ Slette siden «{name}»?
+Page ¦ Stránka ¦ Side
+Pages du suivi enregistrées. ¦ Stránky sledovania sú uložené. ¦ Oppfølgingens sider er lagret.
+Tableau de bord enregistré. ¦ Prehľad je uložený. ¦ Oversikten er lagret.
+=fiche créée ¦ vytvorená karta|vytvorené karty|vytvorených kariet ¦ opprettet oppføring|opprettede oppføringer
+=événement ajouté ¦ pridaná udalosť|pridané udalosti|pridaných udalostí ¦ lagt til hendelse|lagt til hendelser
+=source ajoutée ¦ pridaný prameň|pridané pramene|pridaných prameňov ¦ lagt til kilde|lagt til kilder
+=recensement ajouté ¦ pridané sčítanie obyvateľov|pridané sčítania obyvateľov|pridaných sčítaní obyvateľov ¦ lagt til folketelling|lagt til folketellinger
+=nouvel ancêtre Sosa ¦ nový predok Sosa|noví predkovia Sosa|nových predkov Sosa ¦ ny Sosa-ane|nye Sosa-aner
+=battue terminée ¦ dokončené hromadné pátranie|dokončené hromadné pátrania|dokončených hromadných pátraní ¦ fullført leteaksjon|fullførte leteaksjoner
+=enquête terminée ¦ dokončené pátranie|dokončené pátrania|dokončených pátraní ¦ fullført undersøkelse|fullførte undersøkelser
+=évènement ¦ udalosť|udalosti|udalostí ¦ hendelse|hendelser
+=doublon ¦ duplikát|duplikáty|duplikátov ¦ duplikat|duplikater
+pas encore de modification ce mois-ci ¦ tento mesiac zatiaľ žiadna zmena ¦ ingen endringer ennå denne måneden
+rien pour l’instant ¦ zatiaľ nič ¦ ingenting ennå
+En {month} : ¦ V {month}: ¦ I {month}:
+En {year} : ¦ V roku {year}: ¦ I {year}:
+{days} de recherche. ¦ {days} výskumu. ¦ {days} med forskning.
+{days} de recherche, {changes}. ¦ {days} výskumu, {changes}. ¦ {days} med forskning, {changes}.
+↑ plus actif que le mois dernier ¦ ↑ aktívnejší než minulý mesiac ¦ ↑ mer aktiv enn forrige måned
+Modifications par mois sur un an ¦ Zmeny po mesiacoch za rok ¦ Endringer per måned over et år
+D’après le journal des modifications : le travail fait à la main (les imports de fichiers ne comptent pas comme fiches créées). ¦ Podľa denníka zmien: práca urobená ručne (importy súborov sa nepočítajú ako vytvorené karty). ¦ Ifølge endringsloggen: arbeid gjort for hånd (filimporter teller ikke som opprettede oppføringer).
+Bilan indisponible. ¦ Prehľad nie je k dispozícii. ¦ Oversikten er ikke tilgjengelig.
+dernière fiche consultée ¦ naposledy prezeraná karta ¦ sist viste oppføring
+Aucun anniversaire aujourd’hui. ¦ Dnes žiadne výročie. ¦ Ingen merkedager i dag.
+Aucune personne verrouillée récemment. ¦ Nedávno nebola zamknutá žiadna osoba. ¦ Ingen person er låst nylig.
+Aucune personne disponible pour ce widget. ¦ Pre tento widget nie je k dispozícii žiadna osoba. ¦ Ingen person tilgjengelig for denne widgeten.
+Aucun événement renseigné. ¦ Žiadna vyplnená udalosť. ¦ Ingen hendelse fylt ut.
+Aucune note. ¦ Žiadna poznámka. ¦ Ingen notater.
+Aucun recensement. ¦ Žiadne sčítanie obyvateľov. ¦ Ingen folketelling.
+Aucune source ou citation. ¦ Žiadny prameň ani citácia. ¦ Ingen kilde eller kildehenvisning.
+Bloc surtout utile pour une fiche féminine. ¦ Blok užitočný hlavne pre kartu ženy. ¦ Blokken er mest nyttig for en kvinnes oppføring.
+Aucune enquête ou battue liée. ¦ Žiadne prepojené pátranie ani hromadné pátranie. ¦ Ingen koblet undersøkelse eller leteaksjon.
+Aucun détail ¦ Žiadne podrobnosti ¦ Ingen detaljer
+Décision ¦ Rozhodnutie ¦ Beslutning
+Bureau ¦ Úrad ¦ Kontor
+Œuvre ¦ Dielo ¦ Verk
+Ouvrir fiche ¦ Otvoriť kartu ¦ Åpne oppføring
+Tous les événements récents ont une source. ¦ Všetky nedávne udalosti majú prameň. ¦ Alle nylige hendelser har en kilde.
+Aucun lieu prioritaire à compléter. ¦ Žiadne prioritné miesto na doplnenie. ¦ Ingen prioriterte steder å fylle ut.
+Coordonnées ou pays à compléter ¦ Doplniť súradnice alebo krajinu ¦ Koordinater eller land må fylles ut
+Aucun couple prioritaire sans mariage. ¦ Žiadny prioritný pár bez sobáša. ¦ Ingen prioriterte par uten vielse.
+Personne 1 ¦ Osoba 1 ¦ Person 1
+Personne 2 ¦ Osoba 2 ¦ Person 2
+Aucune incohérence de dates détectée. ¦ Nenašla sa žiadna nezrovnalosť v dátumoch. ¦ Ingen uoverensstemmelser i datoer funnet.
+Incohérences et conflits ¦ Nezrovnalosti a konflikty ¦ Uoverensstemmelser og konflikter
+Vérifier ¦ Overiť ¦ Sjekk
+Aucun SOSA manquant proche. ¦ Žiadny blízky chýbajúci predok Sosa. ¦ Ingen nær manglende Sosa-ane.
+Aucune battue prioritaire. ¦ Žiadne prioritné hromadné pátranie. ¦ Ingen prioritert leteaksjon.
+Commune de départ inconnue ¦ Východisková obec je neznáma ¦ Startsted ukjent
+Aucune action prioritaire pour le moment. ¦ Momentálne žiadna prioritná akcia. ¦ Ingen prioritert handling akkurat nå.
+À traiter ¦ Na vybavenie ¦ Skal behandles
+Liste de travail quotidienne ¦ Denný pracovný zoznam ¦ Daglig arbeidsliste
+Aucune archive disponible. ¦ Žiadny archív nie je k dispozícii. ¦ Ingen arkiv tilgjengelig.
+Aucune racine SOSA définie. ¦ Nie je nastavený koreň Sosa. ¦ Ingen Sosa-rot er angitt.
+Aucun doublon probable repéré. ¦ Nenašiel sa žiadny pravdepodobný duplikát. ¦ Ingen sannsynlige duplikater funnet.
+Aucun point géographique exploitable. ¦ Žiadny použiteľný zemepisný bod. ¦ Ingen brukbare geografiske punkter.
+Aperçu cartographique ¦ Náhľad mapy ¦ Forhåndsvisning av kart
+Aucune personne avec lieux datés. ¦ Žiadna osoba s datovanými miestami. ¦ Ingen personer med daterte steder.
+Aucune personne disponible. ¦ Žiadna osoba nie je k dispozícii. ¦ Ingen personer tilgjengelig.
+Aucun événement daté. ¦ Žiadna datovaná udalosť. ¦ Ingen daterte hendelser.
+Éléments datés ou localisés ¦ Datované alebo lokalizované položky ¦ Daterte eller stedfestede elementer
+Documents et images ¦ Dokumenty a obrázky ¦ Dokumenter og bilder
+Sources enregistrées ¦ Uložené pramene ¦ Lagrede kilder
+En cours ou en pause ¦ Prebiehajúce alebo pozastavené ¦ Pågår eller satt på pause
+Recherches commune par commune ¦ Hľadanie obec po obci ¦ Søk sted for sted
+À vérifier dans maintenance ¦ Na overenie v Nastaveniach ¦ Må sjekkes i Innstillinger
+100 fiches ¦ 100 kariet ¦ 100 oppføringer
+Au moins 100 personnes enregistrées ¦ Aspoň 100 uložených osôb ¦ Minst 100 lagrede personer
+100 médias ¦ 100 médií ¦ 100 medier
+Au moins 100 documents conservés ¦ Aspoň 100 uložených dokumentov ¦ Minst 100 lagrede dokumenter
+Au moins la moitié des fiches sourcées ¦ Aspoň polovica kariet s prameňom ¦ Minst halvparten av oppføringene har kilde
+Illustrée ¦ Ilustrovaná ¦ Illustrert
+Au moins la moitié des fiches avec un média ¦ Aspoň polovica kariet s médiom ¦ Minst halvparten av oppføringene har et medium
+5 générations SOSA ¦ 5 generácií Sosa ¦ 5 Sosa-generasjoner
+Cinq générations complètes ¦ Päť úplných generácií ¦ Fem fullstendige generasjoner
+Au moins une battue créée ¦ Aspoň jedno vytvorené hromadné pátranie ¦ Minst én leteaksjon opprettet
+Aucune suppression récente. ¦ Žiadne nedávne vymazanie. ¦ Ingen nylige slettinger.
+Aucune modification récente. ¦ Žiadna nedávna zmena. ¦ Ingen nylige endringer.
+Aucun événement exploitable pour ce quiz avec les filtres choisis. ¦ S vybranými filtrami nie je pre tento kvíz žiadna použiteľná udalosť. ¦ Ingen brukbare hendelser for denne quizen med filtrene som er valgt.
+Pas assez de dates distinctes pour générer des propositions. ¦ Nie je dosť rôznych dátumov na vytvorenie možností. ¦ Ikke nok forskjellige datoer til å lage svaralternativer.
+Quelle est la date de <strong>{what}</strong> de <strong>{name}</strong> ? ¦ Aký je dátum udalosti <strong>{what}</strong> osoby <strong>{name}</strong>? ¦ Hvilken dato er <strong>{what}</strong> for <strong>{name}</strong>?
+Aucune image disponible. ¦ Žiadny obrázok nie je k dispozícii. ¦ Ingen bilder tilgjengelig.
+Choisis une image dans les réglages du widget. ¦ Vyber obrázok v nastaveniach widgetu. ¦ Velg et bilde i widgetens innstillinger.
+Choisis deux personnes dans les réglages du widget. ¦ Vyber dve osoby v nastaveniach widgetu. ¦ Velg to personer i widgetens innstillinger.
+Personne liée ¦ Prepojená osoba ¦ Koblet person
+Ouvre Comparaison pour analyser le lien. ¦ Otvor Porovnanie a analyzuj vzťah. ¦ Åpne Sammenligning for å analysere slektskapet.
+Aucune personne favorite. ¦ Žiadna obľúbená osoba. ¦ Ingen favorittpersoner.
+Rappels à traiter ¦ Pripomienky na vybavenie ¦ Påminnelser å behandle
+Alertes cohérence ¦ Upozornenia na nezrovnalosti ¦ Konsistensvarsler
+Naissance renseignée ¦ Narodenie vyplnené ¦ Fødsel fylt ut
+Décès renseigné ¦ Úmrtie vyplnené ¦ Død fylt ut
+Au moins un média ¦ Aspoň jedno médium ¦ Minst ett medium
+Au moins une source ¦ Aspoň jeden prameň ¦ Minst én kilde
+Aucun lieu renseigné. ¦ Žiadne vyplnené miesto. ¦ Ingen steder fylt ut.
+Ajoute un objectif dans les réglages du widget. ¦ Pridaj cieľ v nastaveniach widgetu. ¦ Legg til et mål i widgetens innstillinger.
+Ajouter {what} ¦ Pridať {what} ¦ Legg til {what}
+Aucun rappel à venir. ¦ Žiadna nadchádzajúca pripomienka. ¦ Ingen kommende påminnelser.
+Aucune fiche consultée sur ce navigateur. ¦ V tomto prehliadači nebola prezeraná žiadna karta. ¦ Ingen oppføringer vist i denne nettleseren.
+Aucun média à transcrire. ¦ Žiadne médium na prepis. ¦ Ingen medier å transkribere.
+Aucune signature identifiée à comparer. ¦ Žiadny rozpoznaný podpis na porovnanie. ¦ Ingen identifiserte underskrifter å sammenligne.
+Aucune commune de battue à reprendre. ¦ Žiadna obec hromadného pátrania na pokračovanie. ¦ Ingen sted i en leteaksjon å ta opp igjen.
+Aucune source ou piste à vérifier. ¦ Žiadny prameň ani stopa na overenie. ¦ Ingen kilder eller spor å sjekke.
+Rien à relire pour le moment. ¦ Momentálne nič na kontrolu. ¦ Ingenting å gå gjennom akkurat nå.
+Aucun départ enregistré : coche « Départs / émigration » sur une fiche. ¦ Žiadny uložený odchod: začiarkni na karte „Odchody / vysťahovanie“. ¦ Ingen avreiser lagret: kryss av for «Avreiser / utvandring» i en oppføring.
+Aucun enfant placé enregistré. ¦ Žiadne uložené dieťa v pestúnskej starostlivosti. ¦ Ingen fosterbarn lagret.
+Aucune armoirie. ¦ Žiadny erb. ¦ Ingen våpenskjold.
+Ajouter des armoiries ¦ Pridať erb ¦ Legg til et våpenskjold
+Aucun poilu : coche « Poilu 14-18 » sur une fiche. ¦ Žiadny vojak 1914 – 18: začiarkni na karte „Poilu 14-18“. ¦ Ingen soldat 1914–18: kryss av for «Poilu 14-18» i en oppføring.
+Aucune recherche enregistrée (Recherche → Recherche multicritère). ¦ Žiadne uložené hľadanie (Výskum → Hľadanie podľa viacerých kritérií). ¦ Ingen lagrede søk (Forskning → Søk på flere kriterier).
+Aucun circuit à faire. ¦ Žiadna cesta na uskutočnenie. ¦ Ingen turer å ta.
+Préparer un circuit ¦ Pripraviť cestu ¦ Planlegg en tur
+⚠ Aucun dossier hors de cet ordinateur n’est réglé : si le Mac est volé ou tombe en panne, tout part avec lui. ¦ ⚠ Nie je nastavený žiadny priečinok mimo tohto počítača: ak Mac niekto ukradne alebo sa pokazí, všetko zmizne s ním. ¦ ⚠ Ingen mappe utenfor denne datamaskinen er satt opp: hvis Mac-en blir stjålet eller går i stykker, forsvinner alt med den.
+Régler ¦ Nastaviť ¦ Still inn
+Aucun dossier surveillé pour l’instant ¦ Zatiaľ žiadny sledovaný priečinok ¦ Ingen overvåket mappe ennå
+Choisir un dossier ¦ Vybrať priečinok ¦ Velg en mappe
+Aucun nom indexé dans les transcriptions. ¦ V prepisoch nie je indexované žiadne meno. ¦ Ingen navn indeksert i transkripsjonene.
+Rien de prévu sur les 7 prochains jours. ¦ Na najbližších 7 dní nie je nič naplánované. ¦ Ingenting planlagt de neste 7 dagene.
+Aucune date récurrente repérée dans les 7 prochains jours. ¦ V najbližších 7 dňoch sa nenašiel žiadny opakujúci sa dátum. ¦ Ingen gjentakende datoer funnet de neste 7 dagene.
+Texte vide : écris-le avec le crayon ✎. ¦ Prázdny text: napíš ho ceruzkou ✎. ¦ Tom tekst: skriv den med blyanten ✎.
+↗ Ouvrir mon agenda ¦ ↗ Otvoriť môj diár ¦ ↗ Åpne kalenderen min
+Ce mois-ci ¦ Tento mesiac ¦ Denne måneden
+Voir le mois ¦ Zobraziť mesiac ¦ Vis måneden
+Qui ¦ Kto ¦ Hvem
+Entrée : calculer · ↑ : reprendre le dernier ¦ Enter: vypočítať · ↑: použiť posledný ¦ Enter: beregn · ↑: bruk den siste på nytt
+⛶ Ouvrir la calculette ¦ ⛶ Otvoriť kalkulačku ¦ ⛶ Åpne kalkulatoren
+Fond de carte indisponible (pas d’Internet ?) : les photos restent à leur place. ¦ Podkladová mapa nie je k dispozícii (bez internetu?): fotky zostanú na svojom mieste. ¦ Bakgrunnskartet er ikke tilgjengelig (ikke internett?): bildene blir der de er.
+Pas précédent ¦ Predchádzajúci krok ¦ Forrige trinn
+Pas suivant ¦ Ďalší krok ¦ Neste trinn
+Aucune date pour l’instant. ¦ Zatiaľ žiadny dátum. ¦ Ingen datoer ennå.
+Frise : glisse pour choisir une période, molette pour zoomer, double-clic pour tout voir ¦ Časová os: ťahaním vyber obdobie, kolieskom priblíž, dvojklikom zobraz všetko ¦ Tidslinje: dra for å velge en periode, musehjul for å zoome, dobbeltklikk for å se alt
+Choisis une carte dans les réglages du widget (✎). ¦ Vyber mapu v nastaveniach widgetu (✎). ¦ Velg et kart i widgetens innstillinger (✎).
+Des barres ou un camembert : par métier, par lieu, par décennie, par siècle… ¦ Stĺpce alebo koláč: podľa povolania, miesta, desaťročia, storočia… ¦ Søyler eller kakediagram: per yrke, sted, tiår, århundre …
+Écran de l’app ¦ Obrazovka aplikácie ¦ Appskjerm
+Une liste, un diagramme, une statistique, la fiche d’une personne, la carte… tel quel. ¦ Zoznam, diagram, štatistika, karta osoby, mapa… tak, ako sú. ¦ En liste, et skjema, en statistikk, en persons oppføring, kartet … som de er.
+Un pense-bête, une citation, une consigne, avec des émojis. ¦ Pripomienka, citát, pokyn, s emoji. ¦ En huskelapp, et sitat, en instruks, med emojier.
+Raccourcis ¦ Skratky ¦ Snarveier
+Des boutons vers les écrans, les listes ou des sites que tu utilises souvent. ¦ Tlačidlá na obrazovky, zoznamy alebo weby, ktoré často používaš. ¦ Knapper til skjermer, lister eller nettsteder du bruker ofte.
+Parcours jour par jour ¦ Cesta deň po dni ¦ Reise dag for dag
+Widget de l’app habillé ¦ Upravený widget aplikácie ¦ Tilpasset app-widget
+Widget de l’app ¦ Widget aplikácie ¦ App-widget
+toute la largeur ¦ celá šírka ¦ hele bredden
+Mosaïque (carrés proportionnels) ¦ Mozaika (úmerné štvorce) ¦ Mosaikk (proporsjonale ruter)
+Aire (courbe remplie) ¦ Plocha (vyplnená krivka) ¦ Areal (fylt kurve)
+cliquer pour voir qui ¦ klikni a uvidíš kto ¦ klikk for å se hvem
+Tout voir ({n}) ¦ Zobraziť všetko ({n}) ¦ Se alt ({n})
+{n} autres valeurs ¦ {n} ďalších hodnôt ¦ {n} andre verdier
+Aucune ligne. ¦ Žiadny riadok. ¦ Ingen rader.
+Personne ne correspond. ¦ Nikto nezodpovedá. ¦ Ingen passer.
+=personne différente ¦ rôzna osoba|rôzne osoby|rôznych osôb ¦ forskjellig person|forskjellige personer
+{people} pour {n} comptés (les 3 000 premières lignes seulement). ¦ {people} na {n} započítaných (iba prvých 3 000 riadkov). ¦ {people} for {n} talte (bare de første 3 000 radene).
+{people} pour {n} comptés : une même personne peut compter plusieurs fois (deux événements, deux étiquettes…). ¦ {people} na {n} započítaných: jedna osoba sa môže započítať viackrát (dve udalosti, dva štítky…). ¦ {people} for {n} talte: samme person kan telle flere ganger (to hendelser, to etiketter …).
+Chercher un nom, un métier… ¦ Hľadať meno, povolanie… ¦ Søk etter et navn, et yrke …
+Par nom, A → Z ¦ Podľa mena, A → Z ¦ Etter navn, A → Å
+Par nom, Z → A ¦ Podľa mena, Z → A ¦ Etter navn, Å → A
+Par naissance, les plus anciennes ¦ Podľa narodenia, najstaršie ¦ Etter fødsel, eldste først
+Par naissance, les plus récentes ¦ Podľa narodenia, najnovšie ¦ Etter fødsel, nyeste først
+Aucun raccourci. ¦ Žiadna skratka. ¦ Ingen snarveier.
+Frise verticale ¦ Zvislá časová os ¦ Loddrett tidslinje
+Frise horizontale (défile) ¦ Vodorovná časová os (posúva sa) ¦ Vannrett tidslinje (ruller)
+Cartes en grille ¦ Karty v mriežke ¦ Kort i rutenett
+Liste compacte ¦ Kompaktný zoznam ¦ Kompakt liste
+jusqu’au… (facultatif) ¦ do… (nepovinné) ¦ til og med … (valgfritt)
+Titre de l’étape ¦ Názov zastávky ¦ Etappens tittel
+Couleur de l’étape ¦ Farba zastávky ¦ Etappens farge
+Ce qui s’est passé ce jour-là ¦ Čo sa v ten deň stalo ¦ Hva som skjedde den dagen
+Aucun événement daté pour cette personne. ¦ Pre túto osobu žiadna datovaná udalosť. ¦ Ingen daterte hendelser for denne personen.
+Étape ¦ Zastávka ¦ Etappe
+Ancêtres trouvés (Sosa) ¦ Nájdení predkovia (Sosa) ¦ Funne aner (Sosa)
+Ancêtres sans source ¦ Predkovia bez prameňa ¦ Aner uten kilde
+décès avant 1800 ¦ úmrtia pred rokom 1800 ¦ dødsfall før 1800
+Pense-bête ¦ Pripomienka ¦ Huskelapp
+Crée tes propres graphiques, sans rien programmer : avec ¦ Vytvor si vlastné grafy bez programovania: s ¦ Lag dine egne diagrammer uten å programmere: med
+tes propres chiffres ¦ vlastnými číslami ¦ dine egne tall
+＋ Nouveau widget ¦ ＋ Nový widget ¦ ＋ Ny widget
+Importer un widget reçu ¦ Importovať prijatý widget ¦ Importer en mottatt widget
+Un fichier « .lcnda-widget.json » envoyé par un proche : seul le modèle du widget est partagé, jamais les données. ¦ Súbor „.lcnda-widget.json“ od niekoho blízkeho: zdieľa sa iba šablóna widgetu, nikdy nie údaje. ¦ En fil «.lcnda-widget.json» sendt av en av de nærmeste: bare widgetens mal deles, aldri dataene.
+sur le tableau de bord ¦ na prehľade ¦ på oversikten
+↗ Ouvrir dans Graphiques ¦ ↗ Otvoriť v Grafoch ¦ ↗ Åpne i Diagrammer
+＋ Ajouter au tableau de bord ¦ ＋ Pridať na prehľad ¦ ＋ Legg til på oversikten
+Widget supprimé. ¦ Widget je vymazaný. ¦ Widgeten er slettet.
+Mon widget ¦ Môj widget ¦ Min widget
+Supprimer le widget ¦ Vymazať widget ¦ Slett widgeten
+Supprimer le widget « {name} » ? Il disparaît aussi du tableau de bord. ¦ Vymazať widget „{name}“? Zmizne aj z prehľadu. ¦ Slette widgeten «{name}»? Den forsvinner også fra oversikten.
+Supprimer le widget « {name} » ? Il disparaît aussi du tableau de bord et de tous les endroits où ce graphique est posé (fiches, enquêtes, mise en page…). ¦ Vymazať widget „{name}“? Zmizne aj z prehľadu a zo všetkých miest, kde je tento graf umiestnený (karty, pátrania, sadzba…). ¦ Slette widgeten «{name}»? Den forsvinner også fra oversikten og fra alle steder der dette diagrammet er plassert (oppføringer, undersøkelser, layout …).
+« {name} » importé : il est dans Graphiques → « Mes graphiques ». ¦ „{name}“ je importovaný: nájdeš ho v Grafy → „Moje grafy“. ¦ «{name}» er importert: den ligger i Diagrammer → «Mine diagrammer».
+Widget « {name} » importé : ajoute-le au tableau de bord. ¦ Widget „{name}“ je importovaný: pridaj ho na prehľad. ¦ Widgeten «{name}» er importert: legg den til på oversikten.
+📌 Le poser aussi sur… ¦ 📌 Umiestniť ho aj na… ¦ 📌 Plasser den også på …
+(à l’enregistrement) ¦ (pri uložení) ¦ (når du lagrer)
+Posé nulle part pour l’instant. ¦ Zatiaľ nikde neumiestnené. ¦ Ikke plassert noe sted ennå.
+La page d’une personne, une enquête… ¦ Stránka osoby, pátranie… ¦ En persons side, en undersøkelse …
+Graphique posé : {name}. ¦ Graf je umiestnený: {name}. ¦ Diagram plassert: {name}.
+Graphique retiré de cet endroit ¦ Graf je odobratý z tohto miesta ¦ Diagrammet er fjernet fra dette stedet
+L’ouvrir dans Graphiques ¦ Otvoriť ho v Grafoch ¦ Åpne det i Diagrammer
+… et {n} autres (Listes → Graphiques et diagrammes) ¦ … a {n} ďalších (Zoznamy → Grafy a diagramy) ¦ … og {n} til (Lister → Diagrammer og skjemaer)
+Widget ajouté au tableau de bord. ¦ Widget je pridaný na prehľad. ¦ Widgeten er lagt til på oversikten.
+NOUVEAU WIDGET ¦ NOVÝ WIDGET ¦ NY WIDGET
+NOUVEAU GRAPHIQUE ¦ NOVÝ GRAF ¦ NYTT DIAGRAM
+Par quoi commencer ? ¦ Čím začať? ¦ Hvor vil du begynne?
+Partir de rien ¦ Začať od nuly ¦ Start fra bunnen av
+Partir d’un élément de l’app ¦ Vyjsť z položky aplikácie ¦ Ta utgangspunkt i et element i appen
+N’importe quel écran devient un widget : une liste (fiche d’un village, recensements, rappels…), un diagramme, une statistique, une de tes listes, la fiche d’une personne, la carte, un outil des Réglages. ¦ Widgetom sa môže stať akákoľvek obrazovka: zoznam (karta dediny, sčítania obyvateľov, pripomienky…), diagram, štatistika, jeden z tvojich zoznamov, karta osoby, mapa, nástroj z Nastavení. ¦ Hvilken som helst skjerm kan bli en widget: en liste (en bygds oppføring, folketellinger, påminnelser …), et skjema, en statistikk, en av listene dine, en persons oppføring, kartet, et verktøy i Innstillinger.
+Créer ce widget ¦ Vytvoriť tento widget ¦ Opprett denne widgeten
+Partir d’un widget de l’app ¦ Vyjsť z widgetu aplikácie ¦ Ta utgangspunkt i en app-widget
+Partir d’un de mes widgets ¦ Vyjsť z jedného z mojich widgetov ¦ Ta utgangspunkt i en av mine widgeter
+Avec mes propres chiffres ¦ S vlastnými číslami ¦ Med mine egne tall
+Un tableau à remplir (des noms et des chiffres, en une ou plusieurs séries), collé d’un tableur ou importé d’un fichier CSV. ¦ Tabuľka na vyplnenie (názvy a čísla v jednom alebo viacerých radoch), vložená z tabuľkového procesora alebo importovaná zo súboru CSV. ¦ En tabell å fylle ut (navn og tall, i én eller flere serier), limt inn fra et regneark eller importert fra en CSV-fil.
+Mes propres chiffres ¦ Moje vlastné čísla ¦ Mine egne tall
+Un diagramme ¦ Diagram ¦ Et skjema
+Hémicycle d’une assemblée, frise des membres d’un groupe, organigramme, flux, nuage de mots… (Mes diagrammes). ¦ Polkruh zhromaždenia, časová os členov skupiny, organizačná schéma, tok, oblak slov… (Moje diagramy). ¦ Halvsirkel for en forsamling, tidslinje over medlemmene i en gruppe, organisasjonskart, flyt, ordsky … (Mine skjemaer).
+Partir de rien, avec les données de l’app ¦ Začať od nuly, s údajmi aplikácie ¦ Start fra bunnen av, med appens data
+Un ou plusieurs nombres : combien de personnes, d’événements, de lieux… répondent à tes critères. ¦ Jedno alebo viac čísel: koľko osôb, udalostí, miest… zodpovedá tvojim kritériám. ¦ Ett eller flere tall: hvor mange personer, hendelser, steder … som passer med kriteriene dine.
+Les premières lignes d’une liste, avec les colonnes et l’ordre que tu veux. ¦ Prvé riadky zoznamu so stĺpcami a poradím, aké chceš. ¦ De første radene i en liste, med kolonnene og rekkefølgen du vil.
+Partir d’une statistique de l’app ¦ Vyjsť zo štatistiky aplikácie ¦ Ta utgangspunkt i en statistikk i appen
+Les mêmes chiffres que dans Graphiques → Statistiques, avec ton dessin (barres, camembert, courbe, mosaïque…), tes couleurs, et autant de critères que tu veux : métier, lieu et rayon en km, dates précises, mariage, nombre d’enfants, durée de vie, divorce, voyage… ¦ Rovnaké čísla ako v Grafy → Štatistiky, s tvojím zobrazením (stĺpce, koláč, krivka, mozaika…), tvojimi farbami a toľkými kritériami, koľko chceš: povolanie, miesto a okruh v km, presné dátumy, sobáš, počet detí, dĺžka života, rozvod, cesta… ¦ De samme tallene som i Diagrammer → Statistikk, med din tegning (søyler, kakediagram, kurve, mosaikk …), dine farger og så mange kriterier du vil: yrke, sted og radius i km, nøyaktige datoer, vielse, antall barn, levealder, skilsmisse, reise …
+D’une statistique de l’app ¦ Zo štatistiky aplikácie ¦ Fra en statistikk i appen
+Partir d’un de mes widgets ou de mes graphiques ¦ Vyjsť z jedného z mojich widgetov alebo grafov ¦ Ta utgangspunkt i en av mine widgeter eller diagrammer
+── ou des données de l’app ── ¦ ── alebo z údajov aplikácie ── ¦ ── eller appens data ──
+Listes de l’app ¦ Zoznamy aplikácie ¦ Appens lister
+Aucun critère : toute la base. ¦ Žiadne kritérium: celá databáza. ¦ Ingen kriterier: hele databasen.
+Toutes les lignes de cette liste de l’app. ¦ Všetky riadky tohto zoznamu aplikácie. ¦ Alle radene i denne listen i appen.
+(ce que montre cette partie, affichée dessous) ¦ (čo táto časť ukazuje, zobrazené pod ňou) ¦ (det denne delen viser, vist under den)
+Ex. : Les baptêmes de la paroisse, du plus ancien au plus récent ¦ Napr.: Krsty vo farnosti, od najstaršieho po najnovší ¦ F.eks.: Dåp i sognet, fra eldste til nyeste
+✨ Proposer une légende d’après les critères ¦ ✨ Navrhnúť popis podľa kritérií ¦ ✨ Foreslå en bildetekst ut fra kriteriene
+Tableau vide : « ＋ Ligne » ou « 📋 Coller un tableau ». ¦ Prázdna tabuľka: „＋ Riadok“ alebo „📋 Vložiť tabuľku“. ¦ Tom tabell: «＋ Rad» eller «📋 Lim inn en tabell».
+＋ Série (colonne de chiffres) ¦ ＋ Rad (stĺpec čísel) ¦ ＋ Serie (kolonne med tall)
+Recopier les chiffres d’un graphique (à toi, un exemple, ou une statistique de l’app) pour les retoucher ¦ Skopírovať čísla z grafu (tvojho, ukážkového alebo zo štatistiky aplikácie) a upraviť ich ¦ Kopier tallene fra et diagram (ditt eget, et eksempel eller en statistikk i appen) for å justere dem
+📋 Coller un tableau ¦ 📋 Vložiť tabuľku ¦ 📋 Lim inn en tabell
+📊 Partir d’un graphique ¦ 📊 Vyjsť z grafu ¦ 📊 Ta utgangspunkt i et diagram
+🧾 Modifier les données ¦ 🧾 Upraviť údaje ¦ 🧾 Rediger dataene
+Fichier trop gros (5 Mo au plus). ¦ Súbor je príliš veľký (najviac 5 MB). ¦ Filen er for stor (maks. 5 MB).
+Ligne retirée ¦ Riadok je odobratý ¦ Raden er fjernet
+Tableau vidé ¦ Tabuľka je vyprázdnená ¦ Tabellen er tømt
+Remplacer le tableau ¦ Nahradiť tabuľku ¦ Erstatt tabellen
+La première ligne ¦ Prvý riadok ¦ Første rad
+à deviner ¦ odhadnúť ¦ skal gjettes
+donne les titres (noms des séries) ¦ obsahuje nadpisy (názvy radov) ¦ gir overskriftene (seriens navn)
+est une ligne de chiffres ¦ je riadok čísel ¦ er en rad med tall
+Aucun graphique disponible. ¦ Žiadny graf nie je k dispozícii. ¦ Ingen diagrammer tilgjengelig.
+Recopier ces chiffres ¦ Skopírovať tieto čísla ¦ Kopier disse tallene
+Aucun chiffre pour ce graphique. ¦ Pre tento graf žiadne čísla. ¦ Ingen tall for dette diagrammet.
+=valeur recopiée ¦ skopírovaná hodnota|skopírované hodnoty|skopírovaných hodnôt ¦ kopiert verdi|kopierte verdier
+=série ¦ rad|rady|radov ¦ serie|serier
+Série {num} ¦ Rad {num} ¦ Serie {num}
+Nom de la série {num} ¦ Názov radu {num} ¦ Navn på serie {num}
+Tableau importé ({rows}) ¦ Tabuľka je importovaná ({rows}) ¦ Tabell importert ({rows})
+Série « {name} » retirée ¦ Rad „{name}“ je odobratý ¦ Serien «{name}» er fjernet
+Chiffres repris du tableur ({rows}) ¦ Čísla prevzaté z tabuľkového editora ({rows}) ¦ Tall hentet fra regnearket ({rows})
+Tableau collé ({rows}) ¦ Tabuľka je vložená ({rows}) ¦ Tabell limt inn ({rows})
+Retirer cette série ¦ Odobrať tento rad ¦ Fjern denne serien
+(type masqué) ¦ (skrytý typ) ¦ (skjult type)
+Dessins simples ¦ Jednoduché kresby ¦ Enkle tegninger
+Sépia (photos anciennes) ¦ Sépia (staré fotky) ¦ Sepia (gamle bilder)
+Une couleur en dégradé ¦ Jedna farba v prechode ¦ Én farge i overgang
+Couleur du dégradé ¦ Farba prechodu ¦ Overgangens farge
+Les valeurs apparaissent ici après le calcul de l’aperçu. ¦ Hodnoty sa tu objavia po výpočte náhľadu. ¦ Verdiene vises her når forhåndsvisningen er beregnet.
+Valeurs les plus fréquentes ¦ Najčastejšie hodnoty ¦ Vanligste verdier
+Écrans indisponibles. ¦ Obrazovky nie sú k dispozícii. ¦ Skjermene er ikke tilgjengelige.
+(date précise ou année, facultatif) ¦ (presný dátum alebo rok, nepovinné) ¦ (nøyaktig dato eller år, valgfritt)
+Nés à partir du ¦ Narodení od ¦ Født fra
+12 mars 1750 ou 1700 ¦ 12. marca 1750 alebo 1700 ¦ 12. mars 1750 eller 1700
+jusqu’au ¦ do ¦ til og med
+31/12/1850 ou 1900 ¦ 31/12/1850 alebo 1900 ¦ 31/12/1850 eller 1900
+Cette statistique garde ses seuls filtres (années, sexe, lignée). ¦ Táto štatistika si ponechá iba vlastné filtre (roky, pohlavie, línia). ¦ Denne statistikken beholder bare sine egne filtre (år, kjønn, slektslinje).
+ne pas montrer les valeurs vides ¦ nezobrazovať prázdne hodnoty ¦ ikke vis tomme verdier
+Libellé ¦ Popis ¦ Etikett
+retirer ce chiffre ¦ odobrať toto číslo ¦ fjern dette tallet
+ordre de la liste ¦ poradie zoznamu ¦ listens rekkefølge
+croissant ¦ vzostupne ¦ stigende
+décroissant ¦ zostupne ¦ synkende
+Compter par ¦ Počítať podľa ¦ Tell etter
+Regrouper ¦ Zoskupiť ¦ Grupper
+par valeur ¦ podľa hodnoty ¦ etter verdi
+par année ¦ podľa roku ¦ per år
+par décennie ¦ podľa desaťročia ¦ per tiår
+par tranche (de … ans, ou de … pour un nombre) ¦ podľa pásma (po … rokoch alebo po … pri čísle) ¦ per intervall (på … år, eller på … for et tall)
+par siècle ¦ podľa storočia ¦ per århundre
+par mois de l’année ¦ podľa mesiaca v roku ¦ per måned i året
+Tranche de ¦ Pásmo po ¦ Intervall på
+Seulement du ¦ Iba od ¦ Bare fra
+12 mars 1750 ou 1750 ¦ 12. marca 1750 alebo 1750 ¦ 12. mars 1750 eller 1750
+au ¦ do ¦ til
+31/12/1800 ou 1800 ¦ 31/12/1800 alebo 1800 ¦ 31/12/1800 eller 1800
+ne pas compter les cases vides ¦ nepočítať prázdne bunky ¦ ikke tell tomme celler
+Les étapes viennent ¦ Zastávky pochádzajú ¦ Etappene kommer
+écrites à la main ¦ napísané ručne ¦ skrevet for hånd
+des événements d’une personne ¦ z udalostí osoby ¦ fra en persons hendelser
+Présentation ¦ Zobrazenie ¦ Presentasjon
+par date ¦ podľa dátumu ¦ etter dato
+dans l’ordre écrit ¦ v napísanom poradí ¦ i den skrevne rekkefølgen
+Hauteur de la carte ¦ Výška mapy ¦ Kartets høyde
+Carte du parcours ¦ Mapa cesty ¦ Kart over reisen
+« Jour 1, Jour 2… » ¦ „Deň 1, Deň 2…“ ¦ «Dag 1, Dag 2 …»
+Textes des étapes ¦ Texty zastávok ¦ Etappenes tekster
+Seulement les événements avec un lieu ¦ Iba udalosti s miestom ¦ Bare hendelser med et sted
+✎ Modifier ce diagramme ¦ ✎ Upraviť tento diagram ¦ ✎ Rediger dette skjemaet
+Le widget montre toujours la dernière version du diagramme (Graphiques → Mes diagrammes). ¦ Widget vždy ukazuje poslednú verziu diagramu (Grafy → Moje diagramy). ¦ Widgeten viser alltid den nyeste versjonen av skjemaet (Diagrammer → Mine skjemaer).
+Un pense-bête, une citation… Les émojis marchent 🌳 ¦ Pripomienka, citát… Emoji fungujú 🌳 ¦ En huskelapp, et sitat … Emojier fungerer 🌳
+Un site internet… ¦ Webová stránka… ¦ Et nettsted …
+Texte du bouton ¦ Text tlačidla ¦ Knappetekst
+Sous-titre de cette partie ¦ Podnadpis tejto časti ¦ Undertittel for denne delen
+Ex. : À faire, Mes chiffres, Liens utiles ¦ Napr.: Na urobenie, Moje čísla, Užitočné odkazy ¦ F.eks.: Å gjøre, Mine tall, Nyttige lenker
+ÉDITEUR DE GRAPHIQUES ¦ EDITOR GRAFOV ¦ DIAGRAMREDIGERING
+ÉDITEUR DE WIDGETS ¦ EDITOR WIDGETOV ¦ WIDGETREDIGERING
+Nouveau widget ¦ Nový widget ¦ Ny widget
+Règle ton widget à gauche ; l’aperçu se met à jour à droite. ¦ Nastav widget vľavo; náhľad vpravo sa aktualizuje. ¦ Still inn widgeten til venstre; forhåndsvisningen oppdateres til høyre.
+1. Le widget ¦ 1. Widget ¦ 1. Widgeten
+Mes ancêtres bretons ¦ Moji bretónski predkovia ¦ Mine bretonske aner
+Texte en haut du widget ¦ Text hore vo widgete ¦ Tekst øverst i widgeten
+Une phrase pour expliquer ce widget ¦ Veta, ktorá vysvetľuje tento widget ¦ En setning som forklarer widgeten
+Où l’afficher ¦ Kde ho zobraziť ¦ Hvor den skal vises
+Enregistrer et ouvrir dans Graphiques ¦ Uložiť a otvoriť v Grafoch ¦ Lagre og åpne i Diagrammer
+Enregistrer et ajouter au tableau de bord ¦ Uložiť a pridať na prehľad ¦ Lagre og legg til på oversikten
+la courbe ¦ krivka ¦ kurven
+Aucune valeur. ¦ Žiadna hodnota. ¦ Ingen verdi.
+remettre les couleurs de la palette ¦ obnoviť farby palety ¦ tilbakestill palettfargene
+Donne un titre au widget. ¦ Daj widgetu názov. ¦ Gi widgeten en tittel.
+Widget enregistré : ajoute-le depuis la colonne de gauche du tableau de bord. ¦ Widget je uložený: pridaj ho z ľavého stĺpca prehľadu. ¦ Widgeten er lagret: legg den til fra venstre kolonne i oversikten.
+Graphique enregistré : il est dans Graphiques → Statistiques, rubrique « Mes graphiques ». ¦ Graf je uložený: nájdeš ho v Grafy → Štatistiky, sekcia „Moje grafy“. ¦ Diagrammet er lagret: det ligger i Diagrammer → Statistikk, delen «Mine diagrammer».
+ce n’est pas un widget LCNDA. ¦ toto nie je widget LCNDA. ¦ dette er ikke en LCNDA-widget.
+Liste absente de ta base ({name}) : remplacée par « Personnes ». ¦ Zoznam vo tvojej databáze chýba ({name}): nahradený „Osobami“. ¦ Listen finnes ikke i databasen din ({name}): erstattet med «Personer».
+Widget importé ¦ Importovaný widget ¦ Importert widget
+Ce widget n’existe plus. ¦ Tento widget už neexistuje. ¦ Denne widgeten finnes ikke lenger.
+Statistiques de l’app ¦ Štatistiky aplikácie ¦ Appens statistikk
+Source introuvable (graphique supprimé ?). ¦ Zdroj sa nenašiel (graf vymazaný?). ¦ Kilden ble ikke funnet (diagrammet slettet?).
+MES GRAPHIQUES ¦ MOJE GRAFY ¦ MINE DIAGRAMMER
+Graphique introuvable ¦ Graf sa nenašiel ¦ Diagrammet ble ikke funnet
+Il a peut-être été supprimé. ¦ Možno bol vymazaný. ¦ Det kan ha blitt slettet.
+Image PNG ou JPG, PDF, impression, tableau CSV ¦ Obrázok PNG alebo JPG, PDF, tlač, tabuľka CSV ¦ PNG- eller JPG-bilde, PDF, utskrift, CSV-tabell
+léger, pour un courriel ¦ malý, pre e-mail ¦ lett, for e-post
+les chiffres, pour un tableur ¦ čísla pre tabuľkový procesor ¦ tallene, for et regneark
+Fenêtre d’impression bloquée. ¦ Okno tlače bolo zablokované. ¦ Utskriftsvinduet ble blokkert.
+Une photo de tes médias, une nouvelle chaque jour. ¦ Fotka z tvojich médií, každý deň nová. ¦ Et bilde fra mediene dine, et nytt hver dag.
+Compte à rebours ¦ Odpočítavanie ¦ Nedtelling
+Les jours qui restent avant une date : la cousinade, un anniversaire, un voyage aux archives… ¦ Dni zostávajúce do dátumu: rodinné stretnutie, narodeniny, cesta do archívu… ¦ Dagene som er igjen til en dato: slektstreffet, en bursdag, en tur til arkivet …
+Le widget n’a pas pu être fabriqué. ¦ Widget sa nepodarilo vytvoriť. ¦ Widgeten kunne ikke lages.
+Widget prêt : {file}. Ouvre-le d’un double-clic et garde l’onglet ouvert (ou épingle-le) : il change tout seul chaque jour. ¦ Widget je pripravený: {file}. Otvor ho dvojklikom a nechaj kartu otvorenú (alebo ju pripni): každý deň sa sám zmení. ¦ Widgeten er klar: {file}. Åpne den med et dobbeltklikk og la fanen være åpen (eller fest den): den oppdateres av seg selv hver dag.
+La cousinade ¦ Rodinné stretnutie ¦ Slektstreffet
+ton ordinateur ¦ tvoj počítač ¦ datamaskinen din
+Toujours au-dessus ¦ Vždy navrchu ¦ Alltid øverst
+× Retirer du bureau ¦ × Odobrať z pracovnej plochy ¦ × Fjern fra skrivebordet
+⤓ Télécharger le widget (.html) ¦ ⤓ Stiahnuť widget (.html) ¦ ⤓ Last ned widgeten (.html)
+Démarrer avec l’ordinateur (les widgets s’ouvrent seuls, sans la grande fenêtre) ¦ Spúšťať s počítačom (widgety sa otvoria samy, bez hlavného okna) ¦ Start sammen med datamaskinen (widgetene åpnes av seg selv, uten hovedvinduet)
+⛔ Je ne comprends pas cette date : écris par exemple « 14 juillet 2027 » ou « 14/07/2027 ». ¦ ⛔ Tomuto dátumu nerozumiem: napíš napríklad „14. júla 2027“ alebo „14/07/2027“. ¦ ⛔ Jeg forstår ikke denne datoen: skriv for eksempel «14. juli 2027» eller «14/07/2027».
+⛔ Donne la date du compte à rebours. ¦ ⛔ Zadaj dátum odpočítavania. ¦ ⛔ Oppgi datoen for nedtellingen.
+Donne la date. ¦ Zadaj dátum. ¦ Oppgi datoen.
+Le widget n’a pas pu s’ouvrir. ¦ Widget sa nepodarilo otvoriť. ¦ Widgeten kunne ikke åpnes.
+Retiré du bureau. ¦ Odobraté z pracovnej plochy. ¦ Fjernet fra skrivebordet.
+« {name} » retiré du bureau ¦ „{name}“ je odobratý z pracovnej plochy ¦ «{name}» er fjernet fra skrivebordet
+Les widgets démarreront avec l’ordinateur. ¦ Widgety sa budú spúšťať s počítačom. ¦ Widgetene starter sammen med datamaskinen.
+Les widgets ne démarreront plus avec l’ordinateur. ¦ Widgety sa už nebudú spúšťať s počítačom. ¦ Widgetene starter ikke lenger sammen med datamaskinen.
+🪟 Mettre sur le bureau (« {name} », une petite fenêtre à part) ¦ 🪟 Dať na pracovnú plochu („{name}“, malé samostatné okno) ¦ 🪟 Legg på skrivebordet («{name}», et lite eget vindu)
+🪟 Mettre sur le bureau (« {name} » : un fichier .html autonome dans un navigateur) ¦ 🪟 Dať na pracovnú plochu („{name}“: samostatný súbor .html v prehliadači) ¦ 🪟 Legg på skrivebordet («{name}»: en frittstående .html-fil i en nettleser)
+Retirer {name} ¦ Odobrať {name} ¦ Fjern {name}
+Aucune personne ¦ Žiadna osoba ¦ Ingen person
+Flèches ¦ Šípky ¦ Piler
+▶ Carte de la vie animée ¦ ▶ Animovaná mapa života ¦ ▶ Animert livskart
+Ajoute une personne. ¦ Pridaj osobu. ¦ Legg til en person.
+Aucun lieu daté. ¦ Žiadne datované miesto. ¦ Ingen daterte steder.
+Comparer avec ¦ Porovnať s ¦ Sammenlign med
+Opacité ¦ Nepriehľadnosť ¦ Opasitet
+Année de ¦ Rok od ¦ År fra
+Âge de ¦ Vek od ¦ Alder fra
+Famille / groupe ¦ Rodina / skupina ¦ Familie / gruppe
+Fond ¦ Pozadie ¦ Bakgrunn
+Recentrer ¦ Znova vycentrovať ¦ Sentrer igjen
+carte|sépulture ¦ pohreby ¦ begravelser
+carte|évt ¦ udalosti ¦ hendelser
+contributeurs OpenStreetMap ¦ prispievatelia OpenStreetMap ¦ OpenStreetMap-bidragsytere
+· connexion requise pour les tuiles ¦ · na dlaždice je potrebné pripojenie ¦ · tilkobling kreves for kartflisene
+connexion requise pour les tuiles ¦ na dlaždice je potrebné pripojenie ¦ tilkobling kreves for kartflisene
+Aucun événement dans cette zone ¦ V tejto oblasti žiadna udalosť ¦ Ingen hendelser i dette området
+⤢ Voir tout ¦ ⤢ Zobraziť všetko ¦ ⤢ Vis alt
+Lieu non précisé ¦ Miesto nie je upresnené ¦ Sted ikke angitt
+Voir la tombe ¦ Zobraziť hrob ¦ Vis graven
+Événement non rattaché ¦ Nepriradená udalosť ¦ Ukoblet hendelse
+🚢 voyage ¦ 🚢 cesta ¦ 🚢 reise
+👶 placement ¦ 👶 umiestnenie do starostlivosti ¦ 👶 plassering i fosterhjem
+🎖 armée ¦ 🎖 armáda ¦ 🎖 hær
+💞 conjoint ¦ 💞 manžel/ka ¦ 💞 ektefelle
+👶 enfant ¦ 👶 dieťa ¦ 👶 barn
+🏫 école ¦ 🏫 škola ¦ 🏫 skole
+École ¦ Škola ¦ Skole
+Les étapes ¦ Zastávky ¦ Etappene
+📍 Lieux sans position ¦ 📍 Miesta bez polohy ¦ 📍 Steder uten posisjon
+🗓 Sans lieu ¦ 🗓 Bez miesta ¦ 🗓 Uten sted
+CARTE · LA VIE D’UNE PERSONNE ¦ MAPA · ŽIVOT OSOBY ¦ KART · EN PERSONS LIV
+Carte de sa vie ¦ Mapa jej života ¦ Kart over livet
+👪 Avec la famille (le couple, les enfants) ¦ 👪 S rodinou (pár, deti) ¦ 👪 Med familien (paret, barna)
+Les étapes l’une après l’autre, en vidéo (MP4 ou WebM) ¦ Zastávky jedna po druhej ako video (MP4 alebo WebM) ¦ Etappene etter hverandre som video (MP4 eller WebM)
+Ce navigateur ne sait pas enregistrer de vidéo ¦ Tento prehliadač nevie nahrávať video ¦ Denne nettleseren kan ikke ta opp video
+🎬 Exporter en vidéo ¦ 🎬 Exportovať ako video ¦ 🎬 Eksporter som video
+Chargement de la carte… ¦ Načítava sa mapa… ¦ Laster inn kartet …
+La carte de sa vie se remplit avec ses événements, ses résidences, ses recensements, ses voyages… ¦ Mapa jej života sa napĺňa udalosťami, bydliskami, sčítaniami obyvateľov, cestami… ¦ Kartet over livet fylles med hendelser, bosteder, folketellinger, reiser …
+🗺 La vie de {name} ¦ 🗺 Život osoby {name} ¦ 🗺 Livet til {name}
+La vie de {name} ¦ Život osoby {name} ¦ Livet til {name}
+Aucun lieu dans cette vie ¦ V tomto živote žiadne miesto ¦ Ingen steder i dette livet
+Ajoute un lieu à ses événements (naissance, mariage, résidence…) pour voir sa vie sur la carte. ¦ Pridaj k jej udalostiam miesto (narodenie, sobáš, bydlisko…) a uvidíš jej život na mape. ¦ Legg til et sted på hendelsene (fødsel, vielse, bosted …) for å se livet på kartet.
+Le moteur vidéo n’est pas chargé. ¦ Video modul nie je načítaný. ¦ Videomotoren er ikke lastet inn.
+Durée d’une étape ¦ Dĺžka jednej zastávky ¦ Varighet for én etappe
+aucune étape avec un lieu. ¦ žiadna zastávka s miestom. ¦ ingen etapper med et sted.
+🎬 Vidéo {file} ¦ 🎬 Video {file} ¦ 🎬 Video {file}
+les étapes animées ¦ animované zastávky ¦ de animerte etappene
+⤓ Exporter la vidéo en {file} ¦ ⤓ Exportovať video ako {file} ¦ ⤓ Eksporter videoen som {file}
+Vidéo exportée, mais pas rangée dans les médias : {err} ¦ Video je exportované, ale neuložené do médií: {err} ¦ Videoen er eksportert, men ikke lagret i mediene: {err}
+✓ Vidéo exportée ({file}). ¦ ✓ Video je exportované ({file}). ¦ ✓ Videoen er eksportert ({file}).
+Montrer la même vie, étape par étape, avec la lecture ▶ et la vidéo ¦ Ukázať ten istý život krok za krokom, s prehrávaním ▶ a videom ¦ Vis det samme livet etappe for etappe, med avspilling ▶ og video
+Comparer deux époques ¦ Porovnať dve obdobia ¦ Sammenlign to perioder
+Fermer la comparaison ¦ Zavrieť porovnanie ¦ Lukk sammenligningen
+Glisse le trait (← →) ¦ Posuň čiaru (← →) ¦ Dra linjen (← →)
+Transparence ¦ Priehľadnosť ¦ Gjennomsiktighet
+Deux fonds sur la même zone : un trait à glisser, côte à côte ou en transparence ¦ Dve pozadia na tej istej oblasti: posuvná čiara, vedľa seba alebo priehľadne ¦ To bakgrunner over samme område: en linje å dra, side om side eller gjennomsiktig
+Fond des départements introuvable. ¦ Podklad departementov sa nenašiel. ¦ Departementsbakgrunnen ble ikke funnet.
+supprimée (partagée entre ses voisines) ¦ zrušená (rozdelená medzi susedné obce) ¦ nedlagt (delt mellom nabokommunene)
+fusionnée ¦ zlúčená ¦ sammenslått
+fusionnée (fusion-association) ¦ zlúčená (pridruženie) ¦ sammenslått (assosiert sammenslåing)
+disparue ¦ zaniknutá ¦ forsvunnet
+renommée ¦ premenovaná ¦ omdøpt
+renommée « {name} » le {date} ¦ premenovaná na „{name}“ dňa {date} ¦ omdøpt til «{name}» den {date}
+{what} le {date} ¦ {what} dňa {date} ¦ {what} den {date}
+dans {name} ¦ do {name} ¦ inn i {name}
+(devenue commune {name}) ¦ (stala sa obcou {name}) ¦ (ble kommunen {name})
+Aujourd’hui : <b>{name}</b> ¦ Dnes: <b>{name}</b> ¦ I dag: <b>{name}</b>
+Rétablie le {date}. ¦ Obnovená dňa {date}. ¦ Gjenopprettet den {date}.
+Position approximative : le centre de la commune d’aujourd’hui. ¦ Približná poloha: stred dnešnej obce. ¦ Omtrentlig posisjon: midten av dagens kommune.
+Source : INSEE, Code officiel géographique (depuis 1943). ¦ Prameň: INSEE, Úradný geografický kód (od roku 1943). ¦ Kilde: INSEE, offisiell geografisk kode (siden 1943).
+{name}, commune renommée ¦ {name}, premenovaná obec ¦ {name}, omdøpt kommune
+{name}, commune disparue ¦ {name}, zaniknutá obec ¦ {name}, forsvunnet kommune
+{name} — renommée en {year} ¦ {name} — premenovaná v roku {year} ¦ {name} — omdøpt i {year}
+{name} — disparue en {year} ¦ {name} — zanikla v roku {year} ¦ {name} — forsvunnet i {year}
+🏛 Frontières ▾ ¦ 🏛 Hranice ▾ ¦ 🏛 Grenser ▾
+Provinces, départements de 1790, communes disparues ¦ Provincie, departementy z roku 1790, zaniknuté obce ¦ Provinser, departementer fra 1790, forsvunne kommuner
+Tracé approximatif, d’après les départements d’aujourd’hui ¦ Približný priebeh podľa dnešných departementov ¦ Omtrentlig forløp ut fra dagens departementer
+Frontières anciennes ¦ Historické hranice ¦ Gamle grenser
+Provinces d’Ancien Régime (≈ 1789) ¦ Provincie starého režimu (≈ 1789) ¦ Provinser under Ancien Régime (≈ 1789)
+Approximatif : d’après les départements d’aujourd’hui. ¦ Približné: podľa dnešných departementov. ¦ Omtrentlig: ut fra dagens departementer.
+Départements de 1790 ¦ Departementy z roku 1790 ¦ Departementer fra 1790
+Les 83 départements, noms d’alors ; approximatif. ¦ 83 departementov s vtedajšími názvami; približné. ¦ De 83 departementene med datidens navn; omtrentlig.
+Communes disparues ou fusionnées ¦ Zaniknuté alebo zlúčené obce ¦ Forsvunne eller sammenslåtte kommuner
+🏚 Communes disparues ou fusionnées ¦ 🏚 Zaniknuté alebo zlúčené obce ¦ 🏚 Forsvunne eller sammenslåtte kommuner
+Depuis 1943 (INSEE). Zoome sur une région. ¦ Od roku 1943 (INSEE). Priblíž si región. ¦ Siden 1943 (INSEE). Zoom inn på en region.
+Avec les communes renommées ¦ Vrátane premenovaných obcí ¦ Med omdøpte kommuner
+Les communes disparues se téléchargent une fois : ¦ Zaniknuté obce sa sťahujú raz: ¦ Forsvunne kommuner lastes ned én gang:
+Réglages → Frontières anciennes ↗ ¦ Nastavenia → Historické hranice ↗ ¦ Innstillinger → Gamle grenser ↗
+Pas encore téléchargé ¦ Zatiaľ nestiahnuté ¦ Ikke lastet ned ennå
+Téléchargé ¦ Stiahnuté ¦ Lastet ned
+Installé ¦ Nainštalované ¦ Installert
+Pas installé ¦ Nenainštalované ¦ Ikke installert
+=commune disparue ¦ zaniknutá obec|zaniknuté obce|zaniknutých obcí ¦ forsvunnet kommune|forsvunne kommuner
+=commune renommée ¦ premenovaná obec|premenované obce|premenovaných obcí ¦ omdøpt kommune|omdøpte kommuner
+=placée sur la carte ¦ umiestnená na mape|umiestnené na mape|umiestnených na mape ¦ plassert på kartet|plassert på kartet
+L’historique officiel des communes de l’INSEE (depuis 1943) : chaque commune disparue avec sa date et sa commune d’aujourd’hui. Livré avec l’app (5,5 Mo, Licence Ouverte 2.0 de l’INSEE) : installé tout seul, sans Internet. Les anciens noms aident aussi le menu de choix des lieux (« anc. « … » »). ¦ Oficiálna história obcí INSEE (od roku 1943): každá zaniknutá obec s dátumom a dnešnou obcou. Dodáva sa s aplikáciou (5,5 MB, Licence Ouverte 2.0 INSEE): nainštaluje sa sama, bez internetu. Staré názvy pomáhajú aj ponuke výberu miest („anc. ‚…‘“). ¦ INSEEs offisielle kommunehistorikk (siden 1943): hver forsvunnet kommune med dato og dagens kommune. Følger med appen (5,5 MB, INSEEs Licence Ouverte 2.0): installeres av seg selv, uten internett. De gamle navnene hjelper også stedsvelgeren («anc. ‘…’»).
+⤓ Télécharger de nouveau (mise à jour) ¦ ⤓ Stiahnuť znova (aktualizácia) ¦ ⤓ Last ned på nytt (oppdatering)
+🗑 Retirer ¦ 🗑 Odobrať ¦ 🗑 Fjern
+⤓ Installer les frontières anciennes ¦ ⤓ Nainštalovať historické hranice ¦ ⤓ Installer gamle grenser
+(taille…) ¦ (veľkosť…) ¦ (størrelse …)
+dossier des données ¦ priečinok údajov ¦ datamappen
+Rangé dans le {name}, commun à toutes tes généalogies. ¦ Uložené v {name}, spoločné pre všetky tvoje rodokmene. ¦ Lagret i {name}, felles for alle slektstrærne dine.
+Téléchargement et vérification… ¦ Sťahuje sa a overuje… ¦ Laster ned og sjekker …
+Frontières anciennes retirées ¦ Historické hranice sú odobraté ¦ Gamle grenser er fjernet
+pas d’Internet ¦ bez internetu ¦ ikke internett
+Adresse de téléchargement injoignable pour l’instant ({err}). ¦ Adresa na stiahnutie je momentálne nedostupná ({err}). ¦ Nedlastingsadressen kan ikke nås akkurat nå ({err}).
+✓ Frontières anciennes installées : {n}. ¦ ✓ Historické hranice sú nainštalované: {n}. ¦ ✓ Gamle grenser er installert: {n}.
+Départ, voyage ¦ Odchod, cesta ¦ Avreise, reise
+Tous les autres ¦ Všetky ostatné ¦ Alle andre
+Couvert ¦ Zamračené ¦ Overskyet
+Pluie toute la journée ¦ Celý deň dážď ¦ Regn hele dagen
+Pluie faible ¦ Slabý dážď ¦ Lett regn
+Matin de brouillard glacé ¦ Ráno mrznúca hmla ¦ Iskald tåke om morgenen
+Brouillard le matin ¦ Ráno hmla ¦ Tåke om morgenen
+Il faisait très froid ¦ Bola veľká zima ¦ Det var veldig kaldt
+Grand soleil et chaleur ¦ Slnečno a horúco ¦ Strålende sol og varme
+Gris et frais ¦ Sivo a chladno ¦ Grått og kjølig
+Nuages et éclaircies ¦ Oblačno so slnečnými intervalmi ¦ Skyer og solgløtt
+Froid mais ensoleillé ¦ Chladno, ale slnečno ¦ Kaldt, men solrikt
+Beau temps ¦ Pekné počasie ¦ Fint vær
+Neige ¦ Sneh ¦ Snø
+Orage ¦ Búrka ¦ Tordenvær
+Mesuré ¦ Namerané ¦ Målt
+Station à moins de 15 km (et moins de 150 m d’écart d’altitude) ¦ Stanica bližšie než 15 km (a výškový rozdiel pod 150 m) ¦ Stasjon mindre enn 15 km unna (og under 150 m høydeforskjell)
+Station à {n} km ¦ Stanica vo vzdialenosti {n} km ¦ Stasjon {n} km unna
+Station entre 15 et 40 km : indicatif (la pluie change vite d’un village à l’autre) ¦ Stanica vo vzdialenosti 15 až 40 km: orientačné (dážď sa medzi dedinami rýchlo mení) ¦ Stasjon 15–40 km unna: veiledende (regnet skifter raskt fra bygd til bygd)
+Estimé (carreau ≈ 30 km) ¦ Odhadnuté (štvorec ≈ 30 km) ¦ Anslått (rute ≈ 30 km)
+Réanalyse ERA5 : aucune station à moins de 40 km ¦ Reanalýza ERA5: žiadna stanica do 40 km ¦ ERA5-reanalyse: ingen stasjon innenfor 40 km
+Reconstitution grossière (≈ 100 km) ¦ Hrubá rekonštrukcia (≈ 100 km) ¦ Grov rekonstruksjon (≈ 100 km)
+Réanalyse 20CR (1836–1939) : une idée du temps, pas une mesure ¦ Reanalýza 20CR (1836 – 1939): predstava o počasí, nie meranie ¦ 20CR-reanalyse (1836–1939): en idé om været, ikke en måling
+Les données météo ne sont pas installées. ¦ Meteorologické údaje nie sú nainštalované. ¦ Værdataene er ikke installert.
+Le lieu n’a pas de coordonnées : place-le sur la carte pour avoir sa météo. ¦ Miesto nemá súradnice: umiestni ho na mapu a získaš jeho počasie. ¦ Stedet har ingen koordinater: plasser det på kartet for å få været.
+La date n’est pas connue au jour près. ¦ Dátum nie je známy presne na deň. ¦ Datoen er ikke kjent på dagen.
+Pas de météo pour ce lieu : les données installées couvrent la France, la Belgique, la Suisse et le Luxembourg (le pack Europe ajoute le reste). ¦ Pre toto miesto nie je počasie: nainštalované údaje pokrývajú Francúzsko, Belgicko, Švajčiarsko a Luxembursko (balík Európa pridá zvyšok). ¦ Ikke vær for dette stedet: de installerte dataene dekker Frankrike, Belgia, Sveits og Luxembourg (Europa-pakken legger til resten).
+Pas de relevé connu près d’ici avant {year} (première station : {name}). ¦ Pred rokom {year} tu nie je známe žiadne meranie (prvá stanica: {name}). ¦ Ingen kjent måling i nærheten før {year} (første stasjon: {name}).
+Pas de relevé connu près d’ici avant {year}. ¦ Pred rokom {year} tu nie je známe žiadne meranie. ¦ Ingen kjent måling i nærheten før {year}.
+Cliquer pour le détail ¦ Klikni pre podrobnosti ¦ Klikk for detaljer
+À propos des données ¦ O údajoch ¦ Om dataene
+🙈 Météo masquée pour cet événement ¦ 🙈 Počasie pre túto udalosť je skryté ¦ 🙈 Været er skjult for denne hendelsen
+🙈 Météo masquée pour cette personne ¦ 🙈 Počasie pre túto osobu je skryté ¦ 🙈 Været er skjult for denne personen
+{what} (la retrouver : Réglages → 🌦 Météo d’autrefois) ¦ {what} (nájdeš ho v: Nastavenia → 🌦 Počasie v minulosti) ¦ {what} (finn det igjen: Innstillinger → 🌦 Fortidens vær)
+Ton lieu ¦ Tvoje miesto ¦ Stedet ditt
+(carte du relief) ¦ (výšková mapa) ¦ (høydekart)
+Fiabilité ¦ Spoľahlivosť ¦ Pålitelighet
+3 jours avant · 3 jours après ¦ 3 dni pred · 3 dni po ¦ 3 dager før · 3 dager etter
+Tout le détail… ¦ Všetky podrobnosti… ¦ Alle detaljer …
+⛰ Altitude du lieu ¦ ⛰ Nadmorská výška miesta ¦ ⛰ Stedets høyde over havet
+Lecture des données météo… ¦ Čítajú sa meteorologické údaje… ¦ Leser værdata …
+Météo ¦ Počasie ¦ Vær
+🌦 MÉTÉO D’AUTREFOIS ¦ 🌦 POČASIE V MINULOSTI ¦ 🌦 FORTIDENS VÆR
+Le lieu, la station et le carreau ¦ Miesto, stanica a štvorec ¦ Stedet, stasjonen og ruten
+↺ Altitude remise à celle de la carte ¦ ↺ Výška je vrátená na hodnotu z mapy ¦ ↺ Høyden er tilbakestilt til kartets
+⛰ Altitude enregistrée : {n} ¦ ⛰ Výška je uložená: {n} ¦ ⛰ Høyde lagret: {n}
+⛰ LIEU ¦ ⛰ MIESTO ¦ ⛰ STED
+Altitude de {name} ¦ Nadmorská výška: {name} ¦ Høyde over havet for {name}
+ce lieu ¦ toto miesto ¦ dette stedet
+Ce qu’elle donne ¦ Čo poskytuje ¦ Hva den gir
+Licence et mention ¦ Licencia a uvedenie zdroja ¦ Lisens og kildeangivelse
+Une météo ancienne reste une estimation : elle aide à imaginer la journée, elle ne remplace pas ce que dit l’acte ou un journal de l’époque. ¦ Historické počasie je iba odhad: pomáha si deň predstaviť, nenahrádza to, čo hovorí záznam alebo dobové noviny. ¦ Fortidens vær er alltid et anslag: det hjelper deg å forestille deg dagen, men erstatter ikke det dokumentet eller en avis fra tiden sier.
+Rien n’est envoyé sur Internet : toutes ces données sont dans l’app ou dans les packs importés. Les règles de fiabilité : station à moins de 15 km et moins de 150 m d’écart d’altitude → « Mesuré » ; de 15 à 40 km → « Station à … km » ; sinon la réanalyse ERA5 (1940 →) → « Estimé » ; de 1836 à 1939 la reconstitution 20CR → « Reconstitution grossière ». ¦ Nič sa neposiela na internet: všetky tieto údaje sú v aplikácii alebo v importovaných balíkoch. Pravidlá spoľahlivosti: stanica bližšie než 15 km a výškový rozdiel pod 150 m → „Namerané“; 15 až 40 km → „Stanica vo vzdialenosti … km“; inak reanalýza ERA5 (1940 →) → „Odhadnuté“; v rokoch 1836 až 1939 rekonštrukcia 20CR → „Hrubá rekonštrukcia“. ¦ Ingenting sendes over internett: alle disse dataene ligger i appen eller i de importerte pakkene. Reglene for pålitelighet: stasjon mindre enn 15 km unna og under 150 m høydeforskjell → «Målt»; 15 til 40 km → «Stasjon … km unna»; ellers ERA5-reanalysen (1940 →) → «Anslått»; fra 1836 til 1939 20CR-rekonstruksjonen → «Grov rekonstruksjon».
+Comment les obtenir ¦ Ako ich získať ¦ Slik får du dem
+Comment l’obtenir ¦ Ako ho získať ¦ Slik får du det
+(avant 1940, la météo montre la journée) ¦ (pred rokom 1940 počasie ukazuje celý deň) ¦ (før 1940 viser været hele dagen)
+Socle inclus ¦ Zahrnutý základ ¦ Inkludert grunnpakke
+Pack complet ¦ Úplný balík ¦ Full pakke
+Pack Europe ¦ Balík Európa ¦ Europa-pakke
+Pack ¦ Balík ¦ Pakke
+1836 à 2025 · France, Belgique, Suisse, Luxembourg · ≈ 300 stations chaque jour, 4 heures par jour depuis 1940 · ≈ 550 Mo ¦ 1836 až 2025 · Francúzsko, Belgicko, Švajčiarsko, Luxembursko · ≈ 300 staníc denne, 4 hodiny denne od roku 1940 · ≈ 550 MB ¦ 1836 til 2025 · Frankrike, Belgia, Sveits, Luxembourg · ≈ 300 stasjoner hver dag, 4 timer om dagen siden 1940 · ≈ 550 MB
+Toutes les stations (≈ 14 700), heure par heure depuis 1950 · ≈ 3 Go ¦ Všetky stanice (≈ 14 700), hodinu po hodine od roku 1950 · ≈ 3 GB ¦ Alle stasjoner (≈ 14 700), time for time siden 1950 · ≈ 3 GB
+🗑 Supprimer le pack ¦ 🗑 Vymazať balík ¦ 🗑 Slett pakken
+⤒ Importer le fichier… ¦ ⤒ Importovať súbor… ¦ ⤒ Importer filen …
+🗑 {name} supprimé ¦ 🗑 {name} je vymazaný ¦ 🗑 {name} er slettet
+Le temps qu’il faisait le jour de chaque événement, sans Internet. ¦ Počasie v deň každej udalosti, bez internetu. ¦ Været på dagen for hver hendelse, uten internett.
+Météo sur les fiches ¦ Počasie na kartách ¦ Vær i oppføringene
+Au survol ¦ Pri prejdení myšou ¦ Når musen holdes over
+Au clic sur la pastille ¦ Po kliknutí na odznak ¦ Ved klikk på merket
+Fenêtre ¦ Okno ¦ Vindu
+Sous l’événement ¦ Pod udalosťou ¦ Under hendelsen
+Températures ¦ Teploty ¦ Temperaturer
+Pluie ¦ Dážď ¦ Regn
+pouces ¦ palce ¦ tommer
+La phrase simple ¦ Jednoduchá veta ¦ Den enkle setningen
+« Il faisait froid : −4 °C au matin… » ¦ „Bola zima: ráno −4 °C…“ ¦ «Det var kaldt: −4 °C om morgenen …»
+Comparer à la normale ¦ Porovnať s normálom ¦ Sammenlign med normalen
+Ligne des sources sous le détail ¦ Riadok zdrojov pod podrobnosťami ¦ Kildelinje under detaljene
+Obligatoire pour certaines licences : elle reste dans le détail et à l’export. ¦ Pre niektoré licencie povinný: zostáva v podrobnostiach aj pri exporte. ¦ Påkrevd for enkelte lisenser: den blir værende i detaljene og ved eksport.
+Bloc « 🌦 Météo de sa vie » sur les fiches ¦ Blok „🌦 Počasie jej života“ na kartách ¦ Blokken «🌦 Været i livet» i oppføringene
+Phrases curieuses (« Né le jour le plus froid… ») ¦ Zaujímavosti („Narodil sa v najchladnejší deň…“) ¦ Kuriositeter («Født på den kaldeste dagen …»)
+Dans « Ce jour-là » et le tableau de bord ¦ V „V ten deň“ a na prehľade ¦ I «Den dagen» og på oversikten
+Montrer aussi les reconstitutions grossières (avant 1940) ¦ Zobraziť aj hrubé rekonštrukcie (pred rokom 1940) ¦ Vis også grove rekonstruksjoner (før 1940)
+Pour quels événements ¦ Pre ktoré udalosti ¦ For hvilke hendelser
+Tous les types d’événements de ta base (avec leur nombre). Décoche ceux qui n’ont pas besoin de la météo. ¦ Všetky druhy udalostí v tvojej databáze (s ich počtom). Zruš začiarknutie pri tých, ktoré počasie nepotrebujú. ¦ Alle hendelsestypene i databasen din (med antall). Fjern haken ved dem som ikke trenger været.
+Météo masquée ¦ Skryté počasie ¦ Skjult vær
+Remontrer la météo ¦ Znova zobraziť počasie ¦ Vis været igjen
+Rien n’est masqué. ¦ Nič nie je skryté. ¦ Ingenting er skjult.
+Sur une fiche : clic droit sur la pastille météo (ou ⋯ du détail) → « Masquer la météo ». ¦ Na karte: pravé kliknutie na odznak počasia (alebo ⋯ v podrobnostiach) → „Skryť počasie“. ¦ I en oppføring: høyreklikk på værmerket (eller ⋯ i detaljene) → «Skjul været».
+Les données dans l’app ¦ Údaje v aplikácii ¦ Dataene i appen
+Le téléchargement se fait une fois, depuis n’importe quel ordinateur. Ensuite on importe le fichier ici et l’app n’a plus besoin d’Internet. ¦ Sťahuje sa raz, z ľubovoľného počítača. Potom súbor importuješ sem a aplikácia už internet nepotrebuje. ¦ Nedlastingen gjøres én gang, fra hvilken som helst datamaskin. Deretter importerer du filen her, og appen trenger ikke lenger internett.
+le socle ¦ základ ¦ grunnpakken
+le pack complet ¦ úplný balík ¦ den fulle pakken
+le pack Europe ¦ balík Európa ¦ Europa-pakken
+le pack ¦ balík ¦ pakken
+Obtenir {name} ¦ Získať {name} ¦ Hent {name}
+Importer un pack météo ¦ Importovať meteorologický balík ¦ Importer en værpakke
+aucun fichier ¦ žiadny súbor ¦ ingen fil
+l’en-tête du pack est abîmé. ¦ hlavička balíka je poškodená. ¦ pakkens hode er skadet.
+le fichier est incomplet (téléchargement interrompu ?). ¦ súbor je neúplný (prerušené sťahovanie?). ¦ filen er ufullstendig (avbrutt nedlasting?).
+heure par heure ¦ hodinu po hodine ¦ time for time
+sur le disque ¦ na disku ¦ på disken
+Le socle reste : le pack s’ajoute par-dessus. ¦ Základ zostáva: balík sa pridá navrch. ¦ Grunnpakken blir værende: pakken legges oppå.
+Vérifié ¦ Overené ¦ Kontrollert
+Envoi du fichier… ¦ Odosiela sa súbor… ¦ Sender filen …
+Envoi du fichier… {n} % ¦ Odosiela sa súbor… {n} % ¦ Sender filen … {n} %
+réponse illisible ¦ nečitateľná odpoveď ¦ uleselig svar
+Vérification du pack… ¦ Overuje sa balík… ¦ Kontrollerer pakken …
+La météo est masquée ici (Réglages → 🌦 Météo d’autrefois). ¦ Počasie je tu skryté (Nastavenia → 🌦 Počasie v minulosti). ¦ Været er skjult her (Innstillinger → 🌦 Fortidens vær).
+Aucun anniversaire rond avec une météo connue aujourd’hui. ¦ Dnes žiadne okrúhle výročie so známym počasím. ¦ Ingen runde merkedager med kjent vær i dag.
+Bague métal lue ¦ Kovový krúžok prečítaný ¦ Metallring avlest
+Photo-identifié ¦ Identifikované z fotky ¦ Fotoidentifisert
+(pas tout lu) ¦ (neprečítané všetko) ¦ (ikke alt avlest)
+Éloigner ¦ Oddialiť ¦ Zoom ut
+Le temps ¦ Čas ¦ Tiden
+1 heure par seconde ¦ 1 hodina za sekundu ¦ 1 time per sekund
+1 jour par seconde ¦ 1 deň za sekundu ¦ 1 dag per sekund
+1 semaine par seconde ¦ 1 týždeň za sekundu ¦ 1 uke per sekund
+1 mois par seconde ¦ 1 mesiac za sekundu ¦ 1 måned per sekund
+↗ Ouvrir l’observation ¦ ↗ Otvoriť pozorovanie ¦ ↗ Åpne observasjonen
+cette année ¦ tento rok ¦ i år
+période choisie ¦ zvolené obdobie ¦ valgt periode
+La journée (ou la nuit) d’un animal qui porte une balise ou un collier GPS. ¦ Deň (alebo noc) zvieraťa, ktoré nosí vysielačku alebo obojok GPS. ¦ Dagen (eller natten) til et dyr med GPS-sender eller GPS-halsbånd.
+Animaux vus par mois, distance parcourue, zone fréquentée, jamais revus. ¦ Zvieratá videné za mesiac, prejdená vzdialenosť, navštevovaná oblasť, už nikdy nevidené. ¦ Dyr sett per måned, tilbakelagt avstand, brukt område, aldri sett igjen.
+Une case pour retrouver un animal par ses couleurs, un code gravé, une bague métal, une puce, un tatouage ou une boucle. ¦ Pole na nájdenie zvieraťa podľa farieb, vyrytého kódu, kovového krúžku, čipu, tetovania alebo ušnej známky. ¦ Et felt for å finne et dyr ut fra farger, en inngravert kode, en metallring, en brikke, en tatovering eller et øremerke.
+Déposer un fichier GPX, KML ou CSV d’une balise ou d’un collier. ¦ Vložiť súbor GPX, KML alebo CSV z vysielačky alebo obojku. ¦ Slipp en GPX-, KML- eller CSV-fil fra en sender eller et halsbånd.
+Le suivi n’a pas pu se charger. ¦ Sledovanie sa nepodarilo načítať. ¦ Oppfølgingen kunne ikke lastes inn.
+dernière position GPS ¦ posledná poloha GPS ¦ siste GPS-posisjon
+Aucune observation pour l’instant. ¦ Zatiaľ žiadne pozorovanie. ¦ Ingen observasjoner ennå.
+Tous ont été revus récemment. ¦ Všetky boli nedávno znova videné. ¦ Alle er sett igjen nylig.
+Tous ont été revus. ¦ Všetky boli znova videné. ¦ Alle er sett igjen.
+pas encore vu ¦ zatiaľ nevidené ¦ ikke sett ennå
+Aucun animal suivi pour l’instant. ¦ Zatiaľ žiadne sledované zviera. ¦ Ingen fulgte dyr ennå.
+Ouvre la fiche d’un animal (Listes → Animaux) et ajoute-lui une marque ou une observation. ¦ Otvor kartu zvieraťa (Zoznamy → Zvieratá) a pridaj mu značku alebo pozorovanie. ¦ Åpne et dyrs oppføring (Lister → Dyr), og legg til et merke eller en observasjon.
+Le plus suivi ¦ Najsledovanejšie ¦ Mest fulgt
+Code, couleurs ou numéro ¦ Kód, farby alebo číslo ¦ Kode, farger eller nummer
+Chercher… (« 7K », « vert rouge », n° de puce) ¦ Hľadať… („7K“, „zelená červená“, č. čipu) ¦ Søk … («7K», «grønn rød», brikkenr.)
+Couleurs (« vert rouge »), code gravé, bague métal, puce, tatouage, boucle. « ? » = pas lu, [K|X] = j’hésite. ¦ Farby („zelená červená“), vyrytý kód, kovový krúžok, čip, tetovanie, ušná známka. „?“ = neprečítané, [K|X] = váham. ¦ Farger («grønn rød»), inngravert kode, metallring, brikke, tatovering, øremerke. «?» = ikke avlest, [K|X] = usikker.
+Aucun trajet GPS pour l’instant. ¦ Zatiaľ žiadna trasa GPS. ¦ Ingen GPS-spor ennå.
+＋ Nouveau site ¦ ＋ Nová lokalita ¦ ＋ Ny lokalitet
+＋ Nouveau site de suivi ¦ ＋ Nová sledovaná lokalita ¦ ＋ Ny oppfølgingslokalitet
+Nouveau site de suivi ¦ Nová sledovaná lokalita ¦ Ny oppfølgingslokalitet
+Aucun site de suivi pour l’instant. ¦ Zatiaľ žiadna sledovaná lokalita. ¦ Ingen oppfølgingslokaliteter ennå.
+Aucun comptage. ¦ Žiadne sčítanie. ¦ Ingen telling.
+↗ Le site ¦ ↗ Lokalita ¦ ↗ Lokaliteten
+La météo… ¦ Počasie… ¦ Været …
+Dernier événement ¦ Posledná udalosť ¦ Siste hendelse
+Aucun groupe pour l’instant. ¦ Zatiaľ žiadna skupina. ¦ Ingen grupper ennå.
+🪺 Nids occupés ¦ 🪺 Obsadené hniezda ¦ 🪺 Bebodde reir
+🐣 Poussins bagués ¦ 🐣 Okrúžkované mláďatá ¦ 🐣 Ringmerkede unger
+Courbe des comptages ¦ Krivka sčítaní ¦ Tellingskurve
+Cette année ¦ Tento rok ¦ I år
+Montrer les trajets GPS ¦ Zobraziť trasy GPS ¦ Vis GPS-spor
+Pas revus depuis ¦ Nevidené od ¦ Ikke sett siden
+Le même seuil que « 👁 Vu la dernière fois » des fiches d’animaux. ¦ Rovnaký prah ako „👁 Naposledy videné“ na kartách zvierat. ¦ Samme grense som «👁 Sist sett» i dyreoppføringene.
+Seulement ceux qui ne vont pas bien ¦ Iba tie, ktorým nie je dobre ¦ Bare de som ikke har det bra
+Réglages du bloc remis comme au départ. ¦ Nastavenia bloku sú obnovené do východiskového stavu. ¦ Blokkens innstillinger er tilbakestilt som fra start.
+un site ¦ lokalita ¦ en lokalitet
+⤒ Recevoir un suivi partagé… ¦ ⤒ Prijať zdieľané sledovanie… ¦ ⤒ Motta delt oppfølging …
+Toutes les espèces ¦ Všetky druhy ¦ Alle arter
+Corneilles, Hérissons, Chats du quartier… ¦ Vrany, Ježkovia, Mačky z okolia… ¦ Kråker, Pinnsvin, Nabolagets katter …
+Corneille noire, Hérisson d’Europe… ¦ Vrana čierna, Jež západný… ¦ Svartkråke, Pinnsvin …
+Renommer la page ¦ Premenovať stránku ¦ Gi siden nytt navn
+Un émoji : 🐦 🦔 🐈 🐬 🐺… ¦ Emoji: 🐦 🦔 🐈 🐬 🐺… ¦ En emoji: 🐦 🦔 🐈 🐬 🐺 …
+Icône changée. ¦ Ikona je zmenená. ¦ Ikonet er endret.
+Espèce et site par défaut… ¦ Predvolený druh a lokalita… ¦ Standard art og lokalitet …
+Dupliquer la page ¦ Duplikovať stránku ¦ Dupliser siden
+Bloc dupliqué. ¦ Blok je duplikovaný. ¦ Blokken er duplisert.
+Copier vers une autre page… ¦ Kopírovať na inú stránku… ¦ Kopier til en annen side …
+Copier vers la page… ¦ Kopírovať na stránku… ¦ Kopier til siden …
+Pages rangées. ¦ Stránky sú zoradené. ¦ Sidene er ordnet.
+📁 Glisse ici un trajet (GPX, KML, CSV), colle-le (⌘V) ou choisis-le ¦ 📁 Presuň sem trasu (GPX, KML, CSV), vlož ju (⌘V) alebo ju vyber ¦ 📁 Dra et spor hit (GPX, KML, CSV), lim det inn (⌘V) eller velg det
+Balises de la faune sauvage (Movebank…) ou colliers (Tractive, Weenect, Invoxia, Kippy…). ¦ Vysielačky voľne žijúcich zvierat (Movebank…) alebo obojky (Tractive, Weenect, Invoxia, Kippy…). ¦ Sendere på ville dyr (Movebank …) eller halsbånd (Tractive, Weenect, Invoxia, Kippy …).
+Aucune observation datée et placée. ¦ Žiadne datované a umiestnené pozorovanie. ¦ Ingen daterte og plasserte observasjoner.
+Aucun événement de santé pour l’instant. ¦ Zatiaľ žiadna zdravotná udalosť. ¦ Ingen helsehendelser ennå.
+Aucun passage sur cette période. ¦ V tomto období žiadny prechod. ¦ Ingen passeringer i denne perioden.
+Ce mois ¦ Tento mesiac ¦ Denne måneden
+Météo trouvée ¦ Počasie nájdené ¦ Vær funnet
+=animal trouvé ¦ nájdené zviera|nájdené zvieratá|nájdených zvierat ¦ funnet dyr|funne dyr
+SUIVI DES ANIMAUX · EN GRAND ¦ SLEDOVANIE ZVIERAT · VO VEĽKOM ¦ DYREOPPFØLGING · I STORT FORMAT
+SUIVI DES ANIMAUX · CHIFFRES ¦ SLEDOVANIE ZVIERAT · ČÍSLA ¦ DYREOPPFØLGING · TALL
+Par animal ¦ Podľa zvieraťa ¦ Per dyr
+Par année ¦ Podľa roku ¦ Per år
+relié dans l’ordre ¦ spojené po poradí ¦ koblet i rekkefølge
+Les chiffres… ¦ Čísla… ¦ Tallene …
+Tous les animaux ¦ Všetky zvieratá ¦ Alle dyr
+Par site · observations ¦ Podľa lokality · pozorovania ¦ Per lokalitet · observasjoner
+Aucune observation. ¦ Žiadne pozorovanie. ¦ Ingen observasjoner.
+Zone fréquentée ¦ Navštevovaná oblasť ¦ Brukt område
+enveloppe des points vus ¦ obrys videných bodov ¦ omriss av punktene som er sett
+Il faut au moins 3 points pour une zone. ¦ Na oblasť sú potrebné aspoň 3 body. ¦ Et område trenger minst 3 punkter.
+Délai ¦ Lehota ¦ Tidsgrense
+Ce qu’il faisait ¦ Čo robilo ¦ Hva det gjorde
+Vu par ¦ Videl ¦ Sett av
+Avec qui ¦ S kým ¦ Med hvem
+Chaque caractère du code ¦ Každý znak kódu ¦ Hvert tegn i koden
+Pas lu : clique pour dire « j’hésite entre… » ¦ Neprečítané: klikni a povedz „váham medzi…“ ¦ Ikke avlest: klikk for å si «usikker mellom …»
+J’hésite : clique pour dire que c’est sûr ¦ Váham: klikni a povedz, že je to isté ¦ Usikker: klikk for å si at det er sikkert
+Sûr : clique pour dire « pas lu » ¦ Isté: klikni a povedz „neprečítané“ ¦ Sikkert: klikk for å si «ikke avlest»
+un clic : sûr → pas lu → j’hésite entre… ¦ jedno kliknutie: isté → neprečítané → váham medzi… ¦ ett klikk: sikkert → ikke avlest → usikker mellom …
+Modifier l’observation ¦ Upraviť pozorovanie ¦ Rediger observasjonen
+Nouvelle observation ¦ Nové pozorovanie ¦ Ny observasjon
+Retrouver l’animal · selon l’espèce : ¦ Nájsť zviera · podľa druhu: ¦ Finn dyret · etter art:
+Photos, sons ou vidéos ¦ Fotky, zvuky alebo videá ¦ Bilder, lyder eller videoer
+Dis quand tu l’as vu. ¦ Povedz, kedy si ho videl. ¦ Si når du så det.
+Dis où tu l’as vu (un lieu, un site, ou 📍 Ma position). ¦ Povedz, kde si ho videl (miesto, lokalita alebo 📍 Moja poloha). ¦ Si hvor du så det (et sted, en lokalitet eller 📍 Min posisjon).
+Observation enregistrée. ¦ Pozorovanie je uložené. ¦ Observasjonen er lagret.
+Observation créée. ¦ Pozorovanie je vytvorené. ¦ Observasjonen er opprettet.
+🌊 En mer ¦ 🌊 Na mori ¦ 🌊 Til sjøs
+Taille du groupe ¦ Veľkosť skupiny ¦ Gruppens størrelse
+📷 Piège photo ¦ 📷 Fotopasca ¦ 📷 Viltkamera
+Vu par un piège photo ¦ Zachytené fotopascou ¦ Sett av et viltkamera
+Piège n° ¦ Pasca č. ¦ Kamera nr.
+mise toute seule d’après ce que tu as cliqué ¦ doplnené samo podľa toho, na čo si klikol ¦ fylt ut automatisk ut fra det du klikket på
+＋ Créer la fiche d’un nouvel animal ¦ ＋ Vytvoriť kartu nového zvieraťa ¦ ＋ Opprett en oppføring for et nytt dyr
+✎ Garder sans fiche ¦ ✎ Ponechať bez karty ¦ ✎ Behold uten oppføring
+Deux animaux correspondent autant : la lecture sera marquée « Doute ». ¦ Dve zvieratá zodpovedajú rovnako: čítanie bude označené „Pochybnosť“. ¦ To dyr passer like godt: avlesningen merkes «Tvil».
+Couleurs des bagues ¦ Farby krúžkov ¦ Ringenes farger
+Bague vue mais couleur pas sûre ¦ Krúžok videný, ale farba neistá ¦ Ring sett, men fargen er usikker
+Une autre couleur (pipette, code #…) ¦ Iná farba (kvapkadlo, kód #…) ¦ En annen farge (pipette, #-kode …)
+Pas regardé ¦ Nepozreté ¦ Ikke sett på
+J’hésite entre… ¦ Váham medzi… ¦ Usikker mellom …
+L’observation sera gardée sans fiche, avec la lecture. ¦ Pozorovanie sa uloží bez karty, s čítaním. ¦ Observasjonen lagres uten oppføring, med avlesningen.
+Son nom (ou un code : « 7K », « Sans nom 2C9 ») ¦ Jeho meno (alebo kód: „7K“, „Bez mena 2C9“) ¦ Navnet (eller en kode: «7K», «Uten navn 2C9»)
+En quelques mots (« se baigne », « chasse un goéland »…) ¦ Niekoľkými slovami („kúpe sa“, „naháňa čajku“…) ¦ Med noen få ord («bader», «jager en måke» …)
+Cet appareil ne donne pas sa position. ¦ Toto zariadenie neposkytuje svoju polohu. ¦ Denne enheten oppgir ikke posisjonen sin.
+La fenêtre d’import n’est pas chargée. ¦ Okno importu nie je načítané. ¦ Importvinduet er ikke lastet inn.
+Un trajet GPS ¦ Trasa GPS ¦ Et GPS-spor
+Fichier trop gros (40 Mo au plus). ¦ Súbor je príliš veľký (najviac 40 MB). ¦ Filen er for stor (maks. 40 MB).
+Fichier trop gros (200 Mo au plus). ¦ Súbor je príliš veľký (najviac 200 MB). ¦ Filen er for stor (maks. 200 MB).
+{rows} sans date ou sans position seront sautées. ¦ {rows} bez dátumu alebo polohy sa preskočia. ¦ {rows} uten dato eller posisjon hoppes over.
+{rows} sans date ou sans position sera sautée. ¦ {rows} bez dátumu alebo polohy sa preskočí. ¦ {rows} uten dato eller posisjon hoppes over.
+=point importé ¦ importovaný bod|importované body|importovaných bodov ¦ importert punkt|importerte punkter
+{points} pour {name} ¦ {points} pre {name} ¦ {points} for {name}
+({n} déjà là, sautés) ¦ ({n} už existuje, preskočené) ¦ ({n} fantes allerede, hoppet over)
+({n} déjà là, sauté) ¦ ({n} už existuje, preskočený) ¦ ({n} fantes allerede, hoppet over)
+{points} en tout ¦ spolu {points} ¦ {points} i alt
+{name} a déjà {points} : ils restent, ce fichier s’y ajoute (un instant déjà là n’est pas repris deux fois). ¦ {name} už má {points}: zostanú, tento súbor sa k nim pridá (okamih, ktorý už existuje, sa neprevezme dvakrát). ¦ {name} har allerede {points}: de blir værende, og denne filen legges til (et tidspunkt som allerede finnes, tas ikke med to ganger).
+l’animal ¦ zviera ¦ dyret
+Ne va pas bien ¦ Nie je mu dobre ¦ Har det ikke bra
+Chercher… (nom, code « 7K », bague EA…, lieu, observateur) ¦ Hľadať… (meno, kód „7K“, krúžok EA…, miesto, pozorovateľ) ¦ Søk … (navn, kode «7K», ring EA …, sted, observatør)
+Chercher… (nom, code « 7K », puce…) ¦ Hľadať… (meno, kód „7K“, čip…) ¦ Søk … (navn, kode «7K», brikke …)
+Vus récemment ¦ Nedávno videné ¦ Sett nylig
+＋ Nouveau comptage ¦ ＋ Nové sčítanie ¦ ＋ Ny telling
+Nouveau comptage ¦ Nové sčítanie ¦ Ny telling
+＋ Nouvelle observation ici ¦ ＋ Nové pozorovanie tu ¦ ＋ Ny observasjon her
+🗑 Supprimer le site ¦ 🗑 Vymazať lokalitu ¦ 🗑 Slett lokaliteten
+Aucun comptage pour l’instant. ¦ Zatiaľ žiadne sčítanie. ¦ Ingen tellinger ennå.
+? Non identifiés ¦ ? Neidentifikované ¦ ? Uidentifiserte
+Personne encore. ¦ Zatiaľ nikto. ¦ Ingen ennå.
+contour du site ¦ obrys lokality ¦ lokalitetens omriss
+Site enregistré. ¦ Lokalita je uložená. ¦ Lokaliteten er lagret.
+Site créé. ¦ Lokalita je vytvorená. ¦ Lokaliteten er opprettet.
+île, colonie nord… ¦ ostrov, severná kolónia… ¦ øy, nordlig koloni …
+Ce qu’on compte ¦ Čo sa počíta ¦ Hva som telles
+Donne la date du comptage. ¦ Zadaj dátum sčítania. ¦ Oppgi datoen for tellingen.
+Comptage enregistré. ¦ Sčítanie je uložené. ¦ Tellingen er lagret.
+Comptage supprimé. ¦ Sčítanie je vymazané. ¦ Tellingen er slettet.
+＋ Ajouter un membre ¦ ＋ Pridať člena ¦ ＋ Legg til et medlem
+Aucun membre pour l’instant. ¦ Zatiaľ žiadny člen. ¦ Ingen medlemmer ennå.
+Membres passés ¦ Bývalí členovia ¦ Tidligere medlemmer
+Personne n’est parti. ¦ Nikto neodišiel. ¦ Ingen har dratt.
+Frise du groupe ¦ Časová os skupiny ¦ Gruppens tidslinje
+🗑 Supprimer le groupe ¦ 🗑 Vymazať skupinu ¦ 🗑 Slett gruppen
+Loup gris, chimpanzé, orque… ¦ Vlk dravý, šimpanz, kosatka… ¦ Ulv, sjimpanse, spekkhogger …
+Territoire ¦ Teritórium ¦ Territorium
+Donne un nom au groupe. ¦ Pomenuj skupinu. ¦ Gi gruppen et navn.
+Groupe enregistré. ¦ Skupina je uložená. ¦ Gruppen er lagret.
+Groupe créé. ¦ Skupina je vytvorená. ¦ Gruppen er opprettet.
+Groupe supprimé (son histoire aussi). ¦ Skupina je vymazaná (aj jej história). ¦ Gruppen er slettet (også historikken).
+✓ Onglet « 🐾 Suivi des animaux » affiché ¦ ✓ Karta „🐾 Sledovanie zvierat“ je zobrazená ¦ ✓ Fanen «🐾 Dyreoppfølging» vises
+Tu suis des animaux sauvages ou un chat avec un collier GPS ? ¦ Sleduješ voľne žijúce zvieratá alebo mačku s obojkom GPS? ¦ Følger du ville dyr eller en katt med GPS-halsbånd?
+L’onglet « 🐾 Suivi des animaux » est caché. Pour l’afficher : Réglages → Apparence → Onglets du haut. ¦ Karta „🐾 Sledovanie zvierat“ je skrytá. Zobrazíš ju v: Nastavenia → Vzhľad → Horné karty. ¦ Fanen «🐾 Dyreoppfølging» er skjult. Slik viser du den: Innstillinger → Utseende → Faner øverst.
+↗ Afficher l’onglet ¦ ↗ Zobraziť kartu ¦ ↗ Vis fanen
+Observation dupliquée. ¦ Pozorovanie je duplikované. ¦ Observasjonen er duplisert.
+Observation supprimée. ¦ Pozorovanie je vymazané. ¦ Observasjonen er slettet.
+Voir les {n} autres médias ¦ Zobraziť ďalších {n} médií ¦ Se de {n} andre mediene
+{n} sans bague ¦ {n} bez krúžku ¦ {n} uten ring
+Animal sans fiche ¦ Zviera bez karty ¦ Dyr uten oppføring
+pas revus depuis {days} ¦ nevidené {days} ¦ ikke sett på {days}
+Suivi des animaux · Page « {name} » ¦ Sledovanie zvierat · Stránka „{name}“ ¦ Dyreoppfølging · Siden «{name}»
+Cette page montre seulement : <b>{what}</b>. Tous ses blocs s’y règlent d’office (un bloc peut garder son propre choix). ¦ Táto stránka ukazuje iba: <b>{what}</b>. Všetky jej bloky sa tomu automaticky prispôsobia (blok si môže ponechať vlastnú voľbu). ¦ Denne siden viser bare: <b>{what}</b>. Alle blokkene på den følger dette automatisk (en blokk kan beholde sitt eget valg).
+Cette page montre seulement : <b>{what}</b> · tous les sites. Tous ses blocs s’y règlent d’office (un bloc peut garder son propre choix). ¦ Táto stránka ukazuje iba: <b>{what}</b> · všetky lokality. Všetky jej bloky sa tomu automaticky prispôsobia (blok si môže ponechať vlastnú voľbu). ¦ Denne siden viser bare: <b>{what}</b> · alle lokaliteter. Alle blokkene på den følger dette automatisk (en blokk kan beholde sitt eget valg).
+Nouvelle page ¦ Nová stránka ¦ Ny side
+Espèce et site de la page « {name} » ¦ Druh a lokalita stránky „{name}“ ¦ Art og lokalitet for siden «{name}»
+Page « {name} » créée. ¦ Stránka „{name}“ je vytvorená. ¦ Siden «{name}» er opprettet.
+Page « {name} » supprimée (ses blocs, pas les animaux). ¦ Stránka „{name}“ je vymazaná (jej bloky, nie zvieratá). ¦ Siden «{name}» er slettet (blokkene, ikke dyrene).
+Bloc copié vers « {name} ». ¦ Blok je skopírovaný na „{name}“. ¦ Blokken er kopiert til «{name}».
+Aucun animal pour « {q} ». ¦ Žiadne zviera pre „{q}“. ¦ Ingen dyr for «{q}».
+première observation ¦ prvé pozorovanie ¦ første observasjon
+dernière : {date} ¦ posledné: {date} ¦ siste: {date}
+parcourus par {name} ({from} → {to}) ¦ prejdené zvieraťom {name} ({from} → {to}) ¦ tilbakelagt av {name} ({from} → {to})
+pas de trajet GPS ¦ žiadna trasa GPS ¦ ingen GPS-spor
+Fiche de « {name} » créée. ¦ Karta „{name}“ je vytvorená. ¦ Oppføring for «{name}» er opprettet.
+vu sur {sites} ¦ videné na {sites} ¦ sett ved {sites}
+Pas revu depuis {when} ¦ Nevidené od {when} ¦ Ikke sett siden {when}
+Jamais vu ¦ Nikdy nevidené ¦ Aldri sett
+Suivi en cours ¦ Sledovanie prebieha ¦ Oppfølging pågår
+Ce qu’on partage ¦ Čo sa zdieľa ¦ Hva som deles
+Des animaux choisis ¦ Vybrané zvieratá ¦ Valgte dyr
+Tous les animaux d’une espèce ¦ Všetky zvieratá jedného druhu ¦ Alle dyr av én art
+Les animaux d’un site ¦ Zvieratá jednej lokality ¦ Dyrene på en lokalitet
+Les points GPS ¦ Body GPS ¦ GPS-punktene
+Choisis au moins un animal. ¦ Vyber aspoň jedno zviera. ¦ Velg minst ett dyr.
+Choisis l’espèce. ¦ Vyber druh. ¦ Velg arten.
+📤 Fichier prêt : {animals}. ¦ 📤 Súbor je pripravený: {animals}. ¦ 📤 Filen er klar: {animals}.
+📤 Fichier prêt : {animals} (sans les noms des observateurs). ¦ 📤 Súbor je pripravený: {animals} (bez mien pozorovateľov). ¦ 📤 Filen er klar: {animals} (uten observatørenes navn).
+Ce fichier n’est pas un suivi partagé (suivi.json manque). ¦ Tento súbor nie je zdieľané sledovanie (chýba suivi.json). ¦ Denne filen er ikke en delt oppfølging (suivi.json mangler).
+Fichier abîmé : il ne se lit pas. ¦ Poškodený súbor: nedá sa prečítať. ¦ Skadet fil: den kan ikke leses.
+Ce fichier n’est pas un suivi d’animaux partagé (format inconnu). ¦ Tento súbor nie je zdieľané sledovanie zvierat (neznámy formát). ¦ Denne filen er ikke en delt dyreoppfølging (ukjent format).
+Un suivi partagé ¦ Zdieľané sledovanie ¦ En delt oppfølging
+=nouvel animal ¦ nové zviera|nové zvieratá|nových zvierat ¦ nytt dyr|nye dyr
+=animal déjà là ¦ zviera, ktoré už existuje|zvieratá, ktoré už existujú|zvierat, ktoré už existujú ¦ dyr som allerede finnes|dyr som allerede finnes
+=ligne nouvelle ¦ nový riadok|nové riadky|nových riadkov ¦ ny rad|nye rader
+=ligne déjà là, écartée ¦ existujúci riadok, vynechaný|existujúce riadky, vynechané|existujúcich riadkov, vynechaných ¦ rad som allerede finnes, utelatt|rader som allerede finnes, utelatt
+=conflit ¦ konflikt|konflikty|konfliktov ¦ konflikt|konflikter
+<b>{new}</b>, {known} (à compléter), <b>{rows}</b> (observations, marques, santé, groupes) ¦ <b>{new}</b>, {known} (na doplnenie), <b>{rows}</b> (pozorovania, značky, zdravie, skupiny) ¦ <b>{new}</b>, {known} (skal fylles ut), <b>{rows}</b> (observasjoner, merker, helse, grupper)
+{n} points GPS ¦ {n} bodov GPS ¦ {n} GPS-punkter
+{rows} (doublons exacts). ¦ {rows} (presné duplikáty). ¦ {rows} (nøyaktige duplikater).
+{conflicts} : tu choisiras pour chacun, à l’étape suivante. ¦ {conflicts}: pri každom vyberieš v ďalšom kroku. ¦ {conflicts}: du velger for hver enkelt i neste trinn.
+{name} chez toi (reconnu par {how}) ¦ {name} u teba (rozpoznané podľa {how}) ¦ {name} hos deg (gjenkjent via {how})
+reçu · chez toi : {name} (reconnu par {how}) ¦ prijaté · u teba: {name} (rozpoznané podľa {how}) ¦ mottatt · hos deg: {name} (gjenkjent via {how})
+Comparer et fusionner… ¦ Porovnať a zlúčiť… ¦ Sammenlign og slå sammen …
+⤒ Importer {animals} ¦ ⤒ Importovať {animals} ¦ ⤒ Importer {animals}
+Suivi reçu : {what} ¦ Sledovanie je prijaté: {what} ¦ Oppfølging mottatt: {what}
+conflit restant ¦ zostávajúci konflikt ¦ gjenstående konflikt
+conflits restants ¦ zostávajúce konflikty ¦ gjenstående konflikter
+nouveaux ¦ nové ¦ nye
+lignes nouvelles ¦ nové riadky ¦ nye rader
+doublons écartés ¦ vynechané duplikáty ¦ utelatte duplikater
+média reçu non importé ¦ prijaté médium neimportované ¦ mottatt medium ikke importert
+Fusionner avec ma fiche ¦ Zlúčiť s mojou kartou ¦ Slå sammen med min oppføring
+En faire une nouvelle fiche ¦ Urobiť z toho novú kartu ¦ Gjør det til en ny oppføring
+Ne pas le prendre ¦ Neprevziať ¦ Ikke ta det med
+Le mien : ¦ Môj: ¦ Min:
+Le sien : ¦ Jeho: ¦ Den andres:
+Observation modifiée ¦ Pozorovanie je zmenené ¦ Observasjonen er endret
+Marque modifiée ¦ Značka je zmenená ¦ Merket er endret
+Événement de santé modifié ¦ Zdravotná udalosť je zmenená ¦ Helsehendelsen er endret
+Rôle dans le groupe ¦ Rola v skupine ¦ Rolle i gruppen
+Choisis d’abord pour chaque conflit ¦ Najprv rozhodni pri každom konflikte ¦ Velg først for hver konflikt
+Fusionner ¦ Zlúčiť ¦ Slå sammen
+vert foncé ¦ tmavozelená ¦ mørkegrønn
+bleu foncé ¦ tmavomodrá ¦ mørkeblå
+métal ¦ kov ¦ metall
+👥 En groupe ¦ 👥 V skupine ¦ 👥 I gruppe
+💤 Au dortoir ¦ 💤 Na nocovisku ¦ 💤 Ved overnattingsplassen
+🕊 En vol ¦ 🕊 V lete ¦ 🕊 I flukt
+💞 En couple ¦ 💞 V páre ¦ 💞 I par
+🏠 Rentré ¦ 🏠 Vrátil sa ¦ 🏠 Kommet hjem
+🐄 En troupeau ¦ 🐄 V stáde ¦ 🐄 I flokk
+😴 Au repos ¦ 😴 Odpočíva ¦ 😴 Hviler
+🌊 En surface ¦ 🌊 Pri hladine ¦ 🌊 I overflaten
+⛵ À la proue ¦ ⛵ Pri prove ¦ ⛵ Ved baugen
+🧭 Marque son territoire ¦ 🧭 Značkuje teritórium ¦ 🧭 Markerer territoriet
+🍼 Avec des jeunes ¦ 🍼 S mláďatami ¦ 🍼 Med unger
+🪵 Utilise un outil ¦ 🪵 Používa nástroj ¦ 🪵 Bruker et redskap
+🔖 Bague changée ¦ 🔖 Krúžok vymenený ¦ 🔖 Ring byttet
+🪤 Piège ¦ 🪤 Pasca ¦ 🪤 Felle
+🚧 Clôture ¦ 🚧 Plot ¦ 🚧 Gjerde
+🌬 Éolienne ¦ 🌬 Veterná elektráreň ¦ 🌬 Vindturbin
+🏖 Échouage ¦ 🏖 Uviaznutie na brehu ¦ 🏖 Stranding
+⚔️ Conflit avec un autre ¦ ⚔️ Stret s iným ¦ ⚔️ Konflikt med en annen
+Bonne santé ¦ Dobré zdravie ¦ God helse
+Blessé ¦ Zranený ¦ Skadet
+En soins ¦ V starostlivosti ¦ Under behandling
+Relâché ¦ Vypustený ¦ Sluppet fri
+Mammifère sauvage ¦ Voľne žijúci cicavec ¦ Vilt pattedyr
+Vache, mouton, chèvre ¦ Krava, ovca, koza ¦ Ku, sau, geit
+Format inconnu : GPX, KML, GeoJSON ou CSV. ¦ Neznámy formát: GPX, KML, GeoJSON alebo CSV. ¦ Ukjent format: GPX, KML, GeoJSON eller CSV.
+Le tableau est vide. ¦ Tabuľka je prázdna. ¦ Tabellen er tom.
+Fichier refusé : il contient une déclaration DOCTYPE ou ENTITY. ¦ Súbor je odmietnutý: obsahuje deklaráciu DOCTYPE alebo ENTITY. ¦ Filen er avvist: den inneholder en DOCTYPE- eller ENTITY-erklæring.
+3 février 2026 ¦ 3. februára 2026 ¦ 3. februar 2026
+⚖️ Mise en garde : en France, les tests ADN « récréatifs » ne sont pas légaux ¦ ⚖️ Upozornenie: vo Francúzsku nie sú „rekreačné“ testy DNA legálne ¦ ⚖️ Advarsel: i Frankrike er «fritids»-DNA-tester ikke lovlige
+En France, l’examen des caractéristiques génétiques d’une personne n’est permis <b>qu’à des fins médicales ou de recherche scientifique</b>, avec son <b>consentement écrit</b> (Code civil, article 16-10). L’identification par empreintes génétiques est réservée à la justice et à quelques cas prévus par la loi (article 16-11). <b>Demander</b> un tel examen hors de ces cas — par exemple commander un test généalogique sur internet — est puni d’une <b>amende de 3 750 €</b> (Code pénal, article 226-28-1), même si le laboratoire est à l’étranger. ¦ Vo Francúzsku je skúmanie genetických vlastností osoby povolené <b>iba na lekárske účely alebo na vedecký výskum</b>, s jej <b>písomným súhlasom</b> (Občiansky zákonník, článok 16-10). Identifikácia pomocou genetických odtlačkov je vyhradená súdom a niekoľkým prípadom stanoveným zákonom (článok 16-11). <b>Požiadať</b> o takéto vyšetrenie mimo týchto prípadov — napríklad si objednať genealogický test na internete — sa trestá <b>pokutou 3 750 €</b> (Trestný zákonník, článok 226-28-1), aj keď je laboratórium v zahraničí. ¦ I Frankrike er undersøkelse av en persons genetiske egenskaper bare tillatt <b>for medisinske formål eller vitenskapelig forskning</b>, med personens <b>skriftlige samtykke</b> (Code civil, artikkel 16-10). Identifisering ved genetiske fingeravtrykk er forbeholdt rettsvesenet og noen få tilfeller fastsatt i loven (artikkel 16-11). Å <b>be om</b> en slik undersøkelse utenfor disse tilfellene — for eksempel å bestille en slektsforskningstest på nettet — straffes med en <b>bot på 3 750 €</b> (Code pénal, artikkel 226-28-1), selv om laboratoriet ligger i utlandet.
+<b>Vérifie toujours le texte en vigueur</b> sur Légifrance : la loi peut changer (les débats sur la généalogie génétique sont réguliers). Cet onglet ne donne pas de conseil juridique. ¦ <b>Vždy si over platné znenie</b> na Légifrance: zákon sa môže zmeniť (o genetickej genealógii sa pravidelne diskutuje). Táto karta neposkytuje právne poradenstvo. ¦ <b>Sjekk alltid gjeldende tekst</b> på Légifrance: loven kan endres (genetisk slektsforskning debatteres jevnlig). Denne fanen gir ikke juridiske råd.
+<b>Ce que fait LCNDA</b> : rien n’est analysé ni envoyé. L’onglet sert à <b>ranger des informations</b> (par exemple des résultats obtenus légalement à l’étranger, par un parent résidant hors de France, dans un cadre médical ou de recherche, ou des renseignements donnés par d’autres personnes) et à <b>comprendre</b> ce que signifient des cM, des segments, un haplogroupe. ¦ <b>Čo robí LCNDA</b>: nič sa neanalyzuje ani neodosiela. Karta slúži na <b>ukladanie informácií</b> (napríklad výsledkov získaných legálne v zahraničí, príbuzným žijúcim mimo Francúzska, v lekárskom alebo výskumnom rámci, alebo údajov od iných ľudí) a na <b>pochopenie</b>, čo znamenajú cM, segmenty a haploskupina. ¦ <b>Hva LCNDA gjør</b>: ingenting analyseres eller sendes. Fanen brukes til å <b>ordne opplysninger</b> (for eksempel resultater innhentet lovlig i utlandet, av en slektning bosatt utenfor Frankrike, i en medisinsk sammenheng eller forskningssammenheng, eller opplysninger fra andre personer) og til å <b>forstå</b> hva cM, segmenter og en haplogruppe betyr.
+<b>Données sensibles</b> : l’ADN révèle des choses sur toi <i>et sur ta famille</i> (parents, frères et sœurs, enfants, cousins), qui n’ont pas consenti. Il peut révéler un secret de famille : naissance hors mariage, adoption, don de gamètes, parent inconnu. Prends le temps d’y penser avant de partager. ¦ <b>Citlivé údaje</b>: DNA prezrádza veci o tebe <i>aj o tvojej rodine</i> (rodičia, súrodenci, deti, bratranci a sesternice), ktorí nedali súhlas. Môže odhaliť rodinné tajomstvo: narodenie mimo manželstva, adopciu, darovanie gamét, neznámeho rodiča. Kým niečo zdieľaš, dobre si to premysli. ¦ <b>Sensitive opplysninger</b>: DNA avslører ting om deg <i>og om familien din</i> (foreldre, søsken, barn, søskenbarn), som ikke har samtykket. Det kan avsløre en familiehemmelighet: fødsel utenfor ekteskap, adopsjon, donasjon av kjønnsceller, ukjent forelder. Ta deg tid til å tenke over det før du deler.
+<b>Les sociétés de test</b> gardent les données selon leurs conditions (vente de société, fuites de données, demandes de la justice dans certains pays). Lis leurs conditions, choisis ce que tu partages, supprime ce que tu ne veux plus voir conservé. ¦ <b>Testovacie spoločnosti</b> uchovávajú údaje podľa svojich podmienok (predaj spoločnosti, úniky údajov, žiadosti súdov v niektorých krajinách). Prečítaj si ich podmienky, vyber, čo zdieľaš, a vymaž, čo už nechceš uchovávať. ¦ <b>Testselskapene</b> lagrer data etter sine vilkår (salg av selskapet, datalekkasjer, krav fra rettsvesenet i enkelte land). Les vilkårene deres, velg hva du deler, og slett det du ikke lenger vil ha lagret.
+<b>Personnes vivantes</b> : les noms, cM et contacts de correspondances sont des données personnelles. Garde-les pour ta recherche, ne les publie pas sans accord. ¦ <b>Žijúce osoby</b>: mená, cM a kontakty zhôd sú osobné údaje. Nechaj si ich pre svoj výskum a bez súhlasu ich nezverejňuj. ¦ <b>Levende personer</b>: navn, cM og kontaktopplysninger for treffene er personopplysninger. Behold dem til forskningen din, og ikke publiser dem uten samtykke.
+Textes officiels ¦ Úradné texty ¦ Offisielle tekster
+Lire la mise en garde complète et les textes officiels → ¦ Prečítať celé upozornenie a úradné texty → ¦ Les hele advarselen og de offisielle tekstene →
+Commencer ¦ Začíname ¦ Kom i gang
+Lis la <button type="button" class="link-button" data-dna-go="law">mise en garde sur la loi française</button>. ¦ Prečítaj si <button type="button" class="link-button" data-dna-go="law">upozornenie na francúzsky zákon</button>. ¦ Les <button type="button" class="link-button" data-dna-go="law">advarselen om fransk lov</button>.
+« 🧬 Mes tests » : ajoute le test d’une personne (société, type, haplogroupes, origines). ¦ „🧬 Moje testy“: pridaj test osoby (spoločnosť, typ, haploskupiny, pôvod). ¦ «🧬 Mine tester»: legg til en persons test (selskap, type, haplogrupper, opprinnelse).
+« 👥 Correspondances » : importe le fichier CSV de la société, ou ajoute-les à la main. ¦ „👥 Zhody“: importuj súbor CSV od spoločnosti alebo ich pridaj ručne. ¦ «👥 Treff»: importer selskapets CSV-fil, eller legg dem til for hånd.
+Le calculateur de cM, la méthode de Leeds et le navigateur de chromosomes t’aident à placer chacun dans l’arbre. ¦ Kalkulačka cM, Leedsova metóda a prehliadač chromozómov ti pomôžu každého umiestniť do stromu. ¦ cM-kalkulatoren, Leeds-metoden og kromosomvisningen hjelper deg med å plassere hver enkelt i treet.
+Tes tests, tes correspondances et où tu en es. Tout se règle dans « ⚙️ Réglages » (rubriques montrées, ordre, colonnes, couleurs). ¦ Tvoje testy, zhody a kde sa nachádzaš. Všetko sa nastavuje v „⚙️ Nastavenia“ (zobrazené sekcie, poradie, stĺpce, farby). ¦ Testene dine, treffene dine og hvor du står. Alt stilles inn i «⚙️ Innstillinger» (viste deler, rekkefølge, kolonner, farger).
+🧬 Synthèse ¦ 🧬 Prehľad ¦ 🧬 Sammendrag
+Loi et mises en garde ¦ Zákon a upozornenia ¦ Lov og advarsler
+⚖️ Loi et mises en garde ¦ ⚖️ Zákon a upozornenia ¦ ⚖️ Lov og advarsler
+À lire avant d’utiliser cet onglet. ¦ Prečítaj si pred použitím tejto karty. ¦ Les dette før du bruker denne fanen.
+Mes tests ¦ Moje testy ¦ Mine tester
+Correspondances ¦ Zhody ¦ Treff
+Groupes (méthode de Leeds) ¦ Skupiny (Leedsova metóda) ¦ Grupper (Leeds-metoden)
+🗂️ Groupes (méthode de Leeds) ¦ 🗂️ Skupiny (Leedsova metóda) ¦ 🗂️ Grupper (Leeds-metoden)
+Groupes automatiques ¦ Automatické skupiny ¦ Automatiske grupper
+Placer un cousin ¦ Umiestniť bratranca ¦ Plasser et søskenbarn
+📍 Placer un cousin ¦ 📍 Umiestniť bratranca ¦ 📍 Plasser et søskenbarn
+Chromosomes et segments ¦ Chromozómy a segmenty ¦ Kromosomer og segmenter
+🧩 Chromosomes et segments ¦ 🧩 Chromozómy a segmenty ¦ 🧩 Kromosomer og segmenter
+Calculateur de cM ¦ Kalkulačka cM ¦ cM-kalkulator
+📐 Calculateur de cM ¦ 📐 Kalkulačka cM ¦ 📐 cM-kalkulator
+Lignées Y, mt et X ¦ Línie Y, mt a X ¦ Y-, mt- og X-linjer
+🌳 Lignées Y, mt et X ¦ 🌳 Línie Y, mt a X ¦ 🌳 Y-, mt- og X-linjer
+Origines estimées ¦ Odhadovaný pôvod ¦ Anslått opprinnelse
+🌍 Origines estimées ¦ 🌍 Odhadovaný pôvod ¦ 🌍 Anslått opprinnelse
+Comprendre l’ADN ¦ Porozumieť DNA ¦ Forstå DNA
+📚 Comprendre l’ADN ¦ 📚 Porozumieť DNA ¦ 📚 Forstå DNA
+cM partagés ¦ Zdieľané cM ¦ Delte cM
+% partagé ¦ % zdieľané ¦ % delt
+Plus long segment ¦ Najdlhší segment ¦ Lengste segment
+Relation (société) ¦ Vzťah (spoločnosť) ¦ Slektskap (selskapet)
+Relation probable ¦ Pravdepodobný vzťah ¦ Sannsynlig slektskap
+Fiche liée ¦ Prepojená karta ¦ Koblet oppføring
+Ancêtre commun ¦ Spoločný predok ¦ Felles ane
+Noms en commun ¦ Spoločné priezviská ¦ Felles etternavn
+Des deux côtés ¦ Z oboch strán ¦ På begge sider
+Contacté ¦ Kontaktovaný ¦ Kontaktet
+A répondu ¦ Odpovedal ¦ Har svart
+Arbre échangé ¦ Strom vymenený ¦ Tre utvekslet
+Placé dans l’arbre ✓ ¦ Umiestnený v strome ✓ ¦ Plassert i treet ✓
+À ignorer ¦ Ignorovať ¦ Skal ignoreres
+Placées dans l’arbre ¦ Umiestnené v strome ¦ Plassert i treet
+Tests ¦ Testy ¦ Tester
+Correspondances par nombre de cM ¦ Zhody podľa počtu cM ¦ Treff etter antall cM
+Par côté ¦ Podľa strany ¦ Per side
+Les plus proches ¦ Najbližšie ¦ De nærmeste
+Autosomal (atDNA) : tous les ancêtres récents ¦ Autozomálna (atDNA): všetci nedávni predkovia ¦ Autosomalt (atDNA): alle nære aner
+ADN-Y : lignée paternelle directe ¦ Y-DNA: priama otcovská línia ¦ Y-DNA: direkte farslinje
+ADN mitochondrial : lignée maternelle directe ¦ Mitochondriálna DNA: priama materská línia ¦ Mitokondrielt DNA: direkte morslinje
+Nebula / séquençage complet ¦ Nebula / celkové sekvenovanie ¦ Nebula / full sekvensering
+Labo médical ¦ Lekárske laboratórium ¦ Medisinsk laboratorium
+Parent / enfant ¦ Rodič / dieťa ¦ Forelder / barn
+Frère ou sœur ¦ Brat alebo sestra ¦ Bror eller søster
+Demi-frère ou demi-sœur ¦ Nevlastný brat alebo nevlastná sestra ¦ Halvbror eller halvsøster
+Grand-parent / petit-enfant ¦ Starý rodič / vnúča ¦ Besteforelder / barnebarn
+Oncle, tante / neveu, nièce ¦ Strýko, teta / synovec, neter ¦ Onkel, tante / nevø, niese
+Arrière-grand-parent ¦ Prastarý rodič ¦ Oldeforelder
+Grand-oncle, grand-tante ¦ Prastrýko, prateta ¦ Grandonkel, grandtante
+Cousin germain (1C) ¦ Bratranec/sesternica (1C) ¦ Søskenbarn (1C)
+Cousin germain, une génération d’écart (1C1R) ¦ Bratranec/sesternica, o jednu generáciu posunutý (1C1R) ¦ Søskenbarn, én generasjon forskjøvet (1C1R)
+Cousin germain, deux générations d’écart (1C2R) ¦ Bratranec/sesternica, o dve generácie posunutý (1C2R) ¦ Søskenbarn, to generasjoner forskjøvet (1C2R)
+Demi-cousin germain ¦ Nevlastný bratranec/sesternica ¦ Halvsøskenbarn
+Demi-cousin germain, une génération d’écart ¦ Nevlastný bratranec/sesternica, o jednu generáciu posunutý ¦ Halvsøskenbarn, én generasjon forskjøvet
+Cousin issu de germain (2C) ¦ Bratranec z druhého kolena (2C) ¦ Tremenning (2C)
+Cousin issu de germain, une génération d’écart (2C1R) ¦ Bratranec z druhého kolena, o jednu generáciu posunutý (2C1R) ¦ Tremenning, én generasjon forskjøvet (2C1R)
+Cousin issu de germain, deux générations d’écart (2C2R) ¦ Bratranec z druhého kolena, o dve generácie posunutý (2C2R) ¦ Tremenning, to generasjoner forskjøvet (2C2R)
+Demi-cousin issu de germain ¦ Nevlastný bratranec z druhého kolena ¦ Halv tremenning
+Cousin au 3e degré (3C, issu d’issu de germain) ¦ Bratranec z tretieho kolena (3C) ¦ Firmenning (3C)
+Demi-cousin au 3e degré ¦ Nevlastný bratranec z tretieho kolena ¦ Halv firmenning
+Cousin au 4e degré (4C) ¦ Bratranec zo štvrtého kolena (4C) ¦ Femmenning (4C)
+Cousin au 5e degré (5C) ¦ Bratranec z piateho kolena (5C) ¦ Seksmenning (5C)
+Cousin au 6e degré ou plus ¦ Bratranec zo šiesteho kolena alebo vzdialenejší ¦ Sjumenning eller fjernere
+Noté. ¦ Zapísané. ¦ Notert.
+Nouveau test ¦ Nový test ¦ Ny test
+Personne testée ¦ Testovaná osoba ¦ Testet person
+Nom du test ¦ Názov testu ¦ Testens navn
+(si la personne n’est pas dans l’arbre) ¦ (ak osoba nie je v strome) ¦ (hvis personen ikke er i treet)
+Test supprimé. ¦ Test je vymazaný. ¦ Testen er slettet.
+Test enregistré. ¦ Test je uložený. ¦ Testen er lagret.
+les voir ¦ zobraziť ich ¦ se dem
+Tous les tests ¦ Všetky testy ¦ Alle tester
+Tous les côtés ¦ Všetky strany ¦ Alle sider
+Tout suivi ¦ Akékoľvek sledovanie ¦ All oppfølging
+Tous les groupes ¦ Všetky skupiny ¦ Alle grupper
+Sans groupe ¦ Bez skupiny ¦ Uten gruppe
+Côté… ¦ Strana… ¦ Side …
+Étoiles ¦ Hviezdičky ¦ Stjerner
+Afficher la suite ¦ Zobraziť ďalšie ¦ Vis flere
+Ajoute d’abord un test (« 🧬 Mes tests »). ¦ Najprv pridaj test („🧬 Moje testy“). ¦ Legg først til en test («🧬 Mine tester»).
+Ajoute d’abord un test. ¦ Najprv pridaj test. ¦ Legg først til en test.
+Nouvelle correspondance ¦ Nová zhoda ¦ Nytt treff
+Fiche dans l’arbre ¦ Karta v strome ¦ Oppføring i treet
+Si tu sais qui c’est… ¦ Ak vieš, kto to je… ¦ Hvis du vet hvem det er …
+Tape les cM partagés : la relation probable s’affiche ici. ¦ Zadaj zdieľané cM: pravdepodobný vzťah sa zobrazí tu. ¦ Skriv inn delte cM: det sannsynlige slektskapet vises her.
+Supprimée. ¦ Vymazané. ¦ Slettet.
+Correspondance enregistrée. ¦ Zhoda je uložená. ¦ Treffet er lagret.
+Importer des segments ADN ¦ Importovať segmenty DNA ¦ Importer DNA-segmenter
+Importer des correspondances ADN ¦ Importovať zhody DNA ¦ Importer DNA-treff
+Fichier vide ou illisible. ¦ Prázdny alebo nečitateľný súbor. ¦ Tom eller uleselig fil.
+Colonnes reconnues (à vérifier) ¦ Rozpoznané stĺpce (na overenie) ¦ Gjenkjente kolonner (må sjekkes)
+— ne pas prendre — ¦ — nepoužiť — ¦ — ikke bruk —
+=correspondance ajoutée ¦ pridaná zhoda|pridané zhody|pridaných zhôd ¦ lagt til treff|lagt til treff
+=segment importé ¦ importovaný segment|importované segmenty|importovaných segmentov ¦ importert segment|importerte segmenter
+=groupe créé ¦ vytvorená skupina|vytvorené skupiny|vytvorených skupín ¦ opprettet gruppe|opprettede grupper
+=cochée ¦ začiarknutá|začiarknuté|začiarknutých ¦ avkrysset|avkryssede
+=ancêtre possible ¦ možný predok|možní predkovia|možných predkov ¦ mulig ane|mulige aner
+Un groupe range ensemble les correspondances d’une même branche. ¦ Skupina združuje zhody z jednej vetvy. ¦ En gruppe samler treffene fra samme gren.
+arrière-grands-parents ¦ prastarí rodičia ¦ oldeforeldre
+🎯 Ancêtres communs ¦ 🎯 Spoloční predkovia ¦ 🎯 Felles aner
+🤔 Ancêtres probables ¦ 🤔 Pravdepodobní predkovia ¦ 🤔 Sannsynlige aner
+Ancêtre commun encore inconnu ¦ Spoločný predok zatiaľ neznámy ¦ Felles ane ennå ukjent
+📍 Placer un cousin dans l’arbre ¦ 📍 Umiestniť bratranca do stromu ¦ 📍 Plasser et søskenbarn i treet
+Hors des valeurs connues. ¦ Mimo známych hodnôt. ¦ Utenfor de kjente verdiene.
+Probabilité ¦ Pravdepodobnosť ¦ Sannsynlighet
+Couple d’ancêtres ¦ Pár predkov ¦ Anepar
+(un seul des deux : demi-cousin) ¦ (iba jeden z nich: nevlastný bratranec) ¦ (bare den ene av de to: halvsøskenbarn)
+Choisis une correspondance ou entre des cM. ¦ Vyber zhodu alebo zadaj cM. ¦ Velg et treff eller skriv inn cM.
+Aucun test ¦ Žiadny test ¦ Ingen test
+Couleur par correspondance ¦ Farba podľa zhody ¦ Farge per treff
+Par groupe ¦ Podľa skupiny ¦ Per gruppe
+Aucun segment. ¦ Žiadny segment. ¦ Ingen segmenter.
+Nouveau segment ¦ Nový segment ¦ Nytt segment
+Ancêtre supposé ¦ Predpokladaný predok ¦ Antatt ane
+♂ ADN-Y — lignée paternelle directe ¦ ♂ Y-DNA — priama otcovská línia ¦ ♂ Y-DNA — direkte farslinje
+♀ ADN mitochondrial — lignée maternelle directe ¦ ♀ Mitochondriálna DNA — priama materská línia ¦ ♀ Mitokondrielt DNA — direkte morslinje
+✕ ADN-X — ancêtres possibles ¦ ✕ X-DNA — možní predkovia ¦ ✕ X-DNA — mulige aner
+Endogamie et implexe ¦ Endogamia a implex ¦ Endogami og anetap
+Placer une correspondance ¦ Umiestnenie zhody ¦ Plassering av et treff
+Confidentialité et éthique ¦ Súkromie a etika ¦ Personvern og etikk
+Colonnes du tableau des correspondances ¦ Stĺpce tabuľky zhôd ¦ Kolonner i treff-tabellen
+Chiffres et couleurs ¦ Čísla a farby ¦ Tall og farger
+⤓ Exporter tout l’ADN (JSON) ¦ ⤓ Exportovať celú DNA (JSON) ¦ ⤓ Eksporter alt DNA (JSON)
+Ouvrir l’onglet ADN → ¦ Otvoriť kartu DNA → ¦ Åpne DNA-fanen →
+Nouveau diagramme ¦ Nový diagram ¦ Nytt skjema
+Choisis un dessin : il arrive avec un exemple que tu remplaces par tes chiffres (à la main, collés d’un tableur, d’un CSV, ou pris dans l’app). ¦ Vyber zobrazenie: príde s ukážkou, ktorú nahradíš svojimi číslami (ručne, vloženými z tabuľky, z CSV alebo prevzatými z aplikácie). ¦ Velg en tegning: den kommer med et eksempel som du erstatter med tallene dine (for hånd, limt inn fra et regneark, fra en CSV-fil eller hentet fra appen).
+Ordre, types montrés ou cachés, groupes à toi ¦ Poradie, zobrazené alebo skryté typy, vlastné skupiny ¦ Rekkefølge, viste eller skjulte typer, egne grupper
+⚙️ Ranger les types ¦ ⚙️ Zoradiť typy ¦ ⚙️ Ordne typene
+Assemblées ¦ Zhromaždenia ¦ Forsamlinger
+Parlement, assemblée, conseil ¦ Parlament, zhromaždenie, rada ¦ Parlament, forsamling, råd
+Arc élargi (Assemblée en éventail) ¦ Široký oblúk (vejárovité zhromaždenie) ¦ Bred bue (vifteformet forsamling)
+Fer à cheval ¦ Podkova ¦ Hestesko
+Westminster (bancs face à face) ¦ Westminster (lavice oproti sebe) ¦ Westminster (benker overfor hverandre)
+Salle face à la tribune (conseil municipal…) ¦ Sála čelom k rečníckemu pultu (obecné zastupiteľstvo…) ¦ Sal vendt mot talerstolen (kommunestyre …)
+Frise des membres (groupe de musique, association…) ¦ Časová os členov (kapela, spolok…) ¦ Medlemmenes tidslinje (band, forening …)
+Frise de vies (des personnes de la base) ¦ Časová os životov (osoby z databázy) ¦ Tidslinje over liv (personer i databasen)
+Planning (tâches d’une enquête, Gantt) ¦ Plán (úlohy pátrania, Gantt) ¦ Planlegging (oppgavene i en undersøkelse, Gantt)
+Frise chronologique (dates clés) ¦ Časová os (kľúčové dátumy) ¦ Tidslinje (viktige datoer)
+Calendrier coloré (jour par jour) ¦ Farebný kalendár (deň po dni) ¦ Fargelagt kalender (dag for dag)
+Rose des mois (12 parts) ¦ Ružica mesiacov (12 dielov) ¦ Månedsrose (12 deler)
+Spirale du temps (une spire par siècle) ¦ Špirála času (jeden závit za storočie) ¦ Tidsspiral (én omdreining per århundre)
+Arbre en frise (vies par génération) ¦ Strom ako časová os (životy podľa generácií) ¦ Tre som tidslinje (liv per generasjon)
+Naissances, décès et crises ¦ Narodenia, úmrtia a krízy ¦ Fødsler, dødsfall og kriser
+Âges comparés d’une fratrie ¦ Porovnanie veku súrodencov ¦ Sammenlignede aldre i en søskenflokk
+Pyramide « qui vivait en … » ¦ Pyramída „kto žil v roku …“ ¦ Pyramide «hvem levde i …»
+Les vies de plusieurs générations superposées : qui a connu son arrière-petit-enfant, et combien d’années. ¦ Životy niekoľkých generácií nad sebou: kto poznal svoje pravnúča a na koľko rokov. ¦ Livene til flere generasjoner over hverandre: hvem som rakk å kjenne oldebarnet sitt, og i hvor mange år.
