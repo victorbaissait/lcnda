@@ -19,6 +19,7 @@
     const A = () => window.LCNDA_APP || {};
     const UI = () => window.LCNDA_UI || {};
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : s); // 🌐 docs/I18N.md
     const esc = v => String(v ?? '').replace(/[&<>'"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'}[c]));
     const toast = (m, k) => (A().toast ? A().toast(m, k) : console.log(m));
     const USAGE_KEY = 'genealogie-usage';
@@ -293,7 +294,7 @@
         }).join('');
         const opts = startOptions(cfg.usages);
         return `<section class="person-block-config pl-usage" id="lc-usage"><header><span class="eyebrow">APPARENCE</span><h3 data-help="Ce que tu fais avec l’app : ses onglets et son premier écran. Aucune fiche n’est supprimée." data-help-faq="usage de l’app">🧭 Usage de l’app</h3>
-            <p>Changer d’usage change <b>seulement les onglets et le premier écran</b>. Aucune fiche n’est supprimée : les personnes restent là, même quand l’onglet est caché. On peut en allumer plusieurs : leurs onglets s’additionnent.</p></header>
+            <p>${i18n('Changer d’usage change <b>seulement les onglets et le premier écran</b>. Aucune fiche n’est supprimée : les personnes restent là, même quand l’onglet est caché. On peut en allumer plusieurs : leurs onglets s’additionnent.')}</p></header>
             <div class="maintenance-panel pl-usage-panel"><div class="pl-usage-head"><button type="button" class="button small secondary" data-pl-use-reset title="« 🌳 Ma généalogie » seule">↺ Remettre comme au départ</button></div>
             <div class="pl-urows">${rows}</div>
             <label class="pl-startsel">Premier écran à l’ouverture<select data-pl-start>${opts.map(([v, l]) => `<option value="${esc(v)}"${v === cfg.start ? ' selected' : ''}>${esc(l)}</option>`).join('')}</select></label>

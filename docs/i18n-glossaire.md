@@ -649,3 +649,14 @@ Les noms des fêtes (Septuagésime, Mercredi des Cendres…), des heures canoniq
 | lignée masculine / féminine | male / female line | línea masculina / femenina | männliche / weibliche Linie | linea maschile / femminile | linha masculina / feminina | linia męska / żeńska | mannelijke / vrouwelijke lijn |
 | icône (grille L4) | icon | icono | Symbol | icona | ícone | ikona | pictogram |
 | fond (de carte) | background | fondo | Hintergrund | sfondo | fundo | tło / podkład | achtergrond |
+
+## Zone « reste5 » (Réglages → Apparence, Tableau de bord)
+
+Les exemples de l’accord des mots (« né », « née », « décédé·e »…) restent les mots français, entre « » : c’est l’app française qui les accorde.
+
+| fr | en | es | de | it | pt | pl | nl | cs | sv | da |
+|---|---|---|---|---|---|---|---|---|---|---|
+| fond (des pages) | background | fondo | Hintergrund | sfondo | fundo | tło | achtergrond | pozadí | bakgrund | baggrund |
+| papier vergé | laid paper | papel verjurado | geripptes Papier | carta vergata | papel avergoado | papier żeberkowy | gevergeerd papier | žebrovaný papír | vergépapper | vergépapir |
+| journalier (ouvrier) | day labourer | jornalero | Tagelöhner | bracciante | jornaleiro | robotnik dniówkowy | dagloner | nádeník | daglönare | daglejer |
+| usage (de l’app) | use | uso | Nutzung | uso | uso | zastosowanie | gebruik | použití | användning | brug |

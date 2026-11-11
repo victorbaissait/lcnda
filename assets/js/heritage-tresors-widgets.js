@@ -6,6 +6,7 @@
  */
 (() => {
     'use strict';
+    const LNG = () => window.LCNDA_I18N?.lang || 'fr';
     const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const A = () => window.LCNDA_APP;
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
@@ -157,7 +158,7 @@
     W('tr_word', '📜 Le vieux mot du jour', (index, w, span) => {
         const WD = ext.tresorWords?.WORDS || []; if (!WD.length) return card(index, w, '📜 Le vieux mot du jour', off('Le dictionnaire n’est pas là.'), span);
         const [mot, sens] = WD[dayN() % WD.length];
-        return card(index, w, '📜 Le vieux mot du jour', `<p class="h-trw-big h-trw-serif">${esc(mot)}</p><p>${esc(sens)}</p>`, span, open('vieux-mots', 'Tous les mots'));
+        return card(index, w, '📜 Le vieux mot du jour', `<div data-i18n-off lang="fr"${LNG() !== 'fr' ? ` title="${esc(i18n('Ces mots et leurs explications sont ceux des actes français : ils restent en français.'))}"` : ''}><p class="h-trw-big h-trw-serif">${esc(mot)}</p><p>${esc(sens)}</p></div>`, span, open('vieux-mots', 'Tous les mots'));
     }, {load: async () => true});
 
     /* 💰 Le prix d'autrefois */
@@ -166,7 +167,7 @@
         const ys = [...new Set(tr.events.map(e => e.y).filter(y => y >= 1700 && y <= 2000))].sort((a, b) => a - b), c = w.config || {};
         const Y = Number(c.year) || (ys.length ? ys[dayN() % ys.length] : 1900), v = M.worth(1, '', Y), unit = Y < 1795 ? 'livre' : Y < 2002 ? 'franc' : 'euro';
         const kg = v.bread ? (v.bread >= 10 ? Math.round(v.bread) : Math.round(v.bread * 10) / 10) : null;
-        return card(index, w, '💰 Le prix d’autrefois', `<p class="h-trw-big">1 ${unit} en ${Y}</p><p>≈ <b>${v.euros >= 10 ? Math.round(v.euros) : (Math.round(v.euros * 100) / 100).toString().replace('.', ',')} €</b> d’aujourd’hui${kg ? `<br>≈ <b>${String(kg).replace('.', ',')} kg</b> de pain` : ''}${v.days ? `<br>≈ ${(Math.round(v.days * 10) / 10).toString().replace('.', ',')} jour${v.days >= 2 ? 's' : ''} de travail d’un journalier` : ''}</p>`, span, open('pouvoir-achat', 'Calculer'));
+        return card(index, w, '💰 Le prix d’autrefois', `<p class="h-trw-big">${i18n({livre: '1 livre en {y}', franc: '1 franc en {y}', euro: '1 euro en {y}'}[unit], {y: String(Y)})}</p><p>${i18n('≈ <b>{eur} €</b> d’aujourd’hui', {eur: v.euros >= 10 ? Math.round(v.euros) : Math.round(v.euros * 100) / 100})}${kg ? `<br>${i18n('≈ <b>{kg} kg</b> de pain', {kg})}` : ''}${v.days ? `<br>${i18n(v.days >= 2 ? '≈ {n} jours de travail d’un journalier' : '≈ {n} jour de travail d’un journalier', {n: Math.round(v.days * 10) / 10})}` : ''}</p>`, span, open('pouvoir-achat', 'Calculer'));
     });
     ext.dashboardConfig.tr_money = {html: w => `<fieldset class="h-trw-cfg"><legend>Le prix d’autrefois</legend><label>L’année <small>(vide = une année de l’arbre, chaque jour)</small><input type="number" data-trw="year" min="1700" max="2001" value="${esc(w?.config?.year || '')}" style="width:7em"></label></fieldset>`, read: ed => ({year: Number(ed.querySelector('[data-trw=year]')?.value) || ''})};
 

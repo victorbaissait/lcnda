@@ -869,7 +869,7 @@
     }
     function bodyHtml(id, G) {
         const D = DEFS[id];
-        return `<div class="lcd-head"><p class="muted">${esc(D.q)} ${esc(D.help)}</p><button type="button" class="button small secondary" data-lcd-reset="${id}">↺ Remettre comme au départ</button></div>
+        return `<div class="lcd-head"><p class="muted">${esc(i18n(D.q))} ${esc(i18n(D.help))}</p><button type="button" class="button small secondary" data-lcd-reset="${id}">↺ Remettre comme au départ</button></div>
             <div class="lcd-choices ${D.cols}" role="radiogroup" aria-label="${esc(D.title)}" data-lcd-choices="${id}"></div>
             <div class="lcd-settings"><div class="lcd-settings-col"><h4 class="lcd-h"><span class="lcd-step is-small">2</span>Réglages en plus</h4><p class="muted lcd-sub">Ils partent du choix du dessus. Si tu en changes un, la carte choisie affiche « retouché ».</p><div class="lcd-set-list" data-lcd-set="${id}"></div></div>
             <aside class="lcd-preview" data-lcd-preview="${id}"><div class="lcd-preview-head"><b>👁 Aperçu vivant</b>${modeSeg(id)}</div><div class="lcd-preview-body" data-lcd-prevbody></div></aside></div>
@@ -903,7 +903,7 @@
                 const d = defOf(id, o.v)[s.k];
                 const field = UI().rangeField ? UI().rangeField({min: s.min, max: s.max, step: s.step, value: o[s.k], unit: s.unit, default: d, label: ''}) : null;
                 let inp;
-                if (field) { slot.appendChild(field); inp = field.input; field.querySelector('.ui-num-input')?.setAttribute('aria-label', `${s.label} (nombre)`); }
+                if (field) { slot.appendChild(field); inp = field.input; field.querySelector('.ui-num-input')?.setAttribute('aria-label', i18n('{label} (nombre)', {label: i18n(s.label)})); }
                 else { slot.innerHTML = `<input type="range" min="${s.min}" max="${s.max}" step="${s.step}" value="${o[s.k]}">`; inp = slot.querySelector('input'); }
                 inp.dataset.lcdK = s.k; inp.setAttribute('aria-label', s.label); if (off) { inp.disabled = true; field?.classList.add('is-disabled'); }
             }

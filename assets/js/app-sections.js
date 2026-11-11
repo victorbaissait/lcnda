@@ -332,7 +332,7 @@
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bindSheet); else bindSheet();
 
     /* ═════════════════════════ L'éditeur des sections (« Comme avant » F11, « Nouveau » F6/F10) ═════════════════════════ */
-    const blockLabel = (key, kind) => { const raw = (A().defaultPersonBlocks || []).find(r => r[0] === key)?.[1] || key; return kind === 'animal' || /^animal/.test(key) ? raw.replace(/^(\S+) Animal : (.)/, (_, ic, c) => `${ic} ${c.toUpperCase()}`) : raw; };
+    const blockLabel = (key, kind) => { const raw = (A().defaultPersonBlocks || []).find(r => r[0] === key)?.[1] || key; const out = kind === 'animal' || /^animal/.test(key) ? raw.replace(/^(\S+) Animal : (.)/, (_, ic, c) => `${ic} ${c.toUpperCase()}`) : raw; return window.LCNDA_I18N?.translateText?.(out) ?? out; }; // 🌐 le nom d'origine du bloc, traduit (symbole devant compris)
     const uid = () => 's_' + Date.now().toString(36) + Math.floor(Math.random() * 1296).toString(36);
     /** html de l'éditeur ; ctx = {kind, personId, look, id} */
     function editorHtml(ctx) {

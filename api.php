@@ -1064,13 +1064,13 @@ function dashboard_people_to_complete(PDO $pdo): array
     $rows = $pdo->query($sql)->fetchAll();
     foreach ($rows as &$row) {
         $reasons = [];
-        if (!(int)$row['has_birth']) $reasons[] = 'naissance manquante';
-        if (!(int)$row['has_death']) $reasons[] = 'décès manquant';
-        if (!(int)$row['has_parents']) $reasons[] = 'parents manquants';
-        if (!(int)$row['has_source']) $reasons[] = 'source manquante';
-        if (!(int)$row['has_media']) $reasons[] = 'aucun média';
+        if (!(int)$row['has_birth']) $reasons[] = i18n_t('naissance manquante');
+        if (!(int)$row['has_death']) $reasons[] = i18n_t('décès manquant');
+        if (!(int)$row['has_parents']) $reasons[] = i18n_t('parents manquants');
+        if (!(int)$row['has_source']) $reasons[] = i18n_t('source manquante');
+        if (!(int)$row['has_media']) $reasons[] = i18n_t('aucun média');
         $row['reasons'] = $reasons;
-        if (trim((string)$row['person_name']) === '') $row['person_name'] = 'Personne sans nom';
+        if (trim((string)$row['person_name']) === '') $row['person_name'] = i18n_t('Personne sans nom');
     }
     unset($row);
     return $rows;
