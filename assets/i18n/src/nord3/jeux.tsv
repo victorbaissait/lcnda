@@ -1,0 +1,1801 @@
+fr ¦ ro
+Jeu de l’oie / Serpents et échelles / Petits chevaux / Puzzle / Labyrinthe ¦ Jocul gâștei / Șerpi și scări / Căluții / Puzzle / Labirint
+Jeu de l’oie ¦ Jocul gâștei
+Serpents et échelles ¦ Șerpi și scări
+Petits chevaux ¦ Căluții
+🧩 Puzzle ¦ 🧩 Puzzle
+Puzzle ¦ Puzzle
+🌀 Labyrinthe ¦ 🌀 Labirint
+Labyrinthe ¦ Labirint
+🕵️ Qui est-ce ? des ancêtres ¦ 🕵️ Ghicește cine? cu strămoși
+🃏 Memory des portraits ¦ 🃏 Memory cu portrete
+📅 La bonne date ¦ 📅 Data potrivită
+❌ Morpion à règles libres ¦ ❌ X și 0 cu reguli libere
+⚓ Bataille navale ¦ ⚓ Bătălia navală
+🔌 Les câbles (Netwalk) ¦ 🔌 Cablurile (Netwalk)
+🂠 Patiences (jeux de cartes) ¦ 🂠 Pasențe (jocuri de cărți)
+🂡 Jeux de cartes à plusieurs ¦ 🂡 Jocuri de cărți în mai mulți
+♟️ Échecs ¦ ♟️ Șah
+⛀ Dames ¦ ⛀ Dame
+🁫 Dominos ¦ 🁫 Domino
+🎲 Yams ¦ 🎲 Yams
+Dames ¦ Dame
+Dominos ¦ Domino
+Yams ¦ Yams
+jeu|Nouvelle partie ¦ Partidă nouă
+jeu|Échelle ¦ Scară
+Oie ¦ Gâscă
+Pont ¦ Pod
+Auberge ¦ Han
+Prison ¦ Închisoare
+Mort ¦ Moarte
+Serpent ¦ Șarpe
+Case spéciale ¦ Căsuță specială
+Avance ¦ Înaintează
+cet événement ¦ acest eveniment
+Jaune ¦ Galben
+Violet ¦ Violet
+Orange ¦ Portocaliu
+Rose ¦ Roz
+Turquoise ¦ Turcoaz
+Marron ¦ Maro
+réponse avant le lancer ¦ răspuns înainte de aruncare
+une bonne réponse donne un seul lancer bonus ¦ un răspuns corect dă o singură aruncare bonus
+réponse pour rejouer ¦ răspuns pentru a juca din nou
+Bonne réponse : lancez les dés. ¦ Răspuns corect: aruncă zarurile.
+Bonne réponse : un seul lancer bonus. ¦ Răspuns corect: o singură aruncare bonus.
+Bonne réponse : vous rejouez. ¦ Răspuns corect: joci din nou.
+Branche {name} ¦ Ramura {name}
+Liste {name} ¦ Lista {name}
+Toute la généalogie ¦ Toată genealogia
+Qui correspond à la date de <strong>{event}</strong> : <strong>{date}</strong> ? ¦ Cine corespunde datei de <strong>{event}</strong>: <strong>{date}</strong>?
+Quelle est la date de <strong>{event}</strong> de <strong>{who}</strong> ? ¦ Care este data de <strong>{event}</strong> a lui <strong>{who}</strong>?
+ÉCURIE ¦ GRAJD
+{name} · cheval {n} ¦ {name} · calul {n}
+ARRIVÉE ¦ SOSIRE
+Case {n} ¦ Căsuța {n}
+SERPENTS &<br>ÉCHELLES ¦ ȘERPI &<br>SCĂRI
+JEU<br>DE L’OIE ¦ JOCUL<br>GÂȘTEI
+Suivez les flèches ¦ Urmează săgețile
+DÉPART ¦ START
+{what} vers la case {n} ¦ {what} spre căsuța {n}
+CASE ¦ CĂSUȚA
+=arrivée ¦ sosire|sosiri|de sosiri
+{stable} à l’écurie · {done} ¦ {stable} în grajd · {done}
+Le lancer bonus est terminé : au joueur suivant. ¦ Aruncarea bonus s-a terminat: urmează jucătorul următor.
+Une bonne réponse donne un seul lancer bonus. ¦ Un răspuns corect dă o singură aruncare bonus.
+Répondez pour rejouer. ¦ Răspunde ca să joci din nou.
+{name} sort de l’écurie, case 1. ¦ {name} iese din grajd, căsuța 1.
+{name} avance jusqu’à la case {n}. ¦ {name} înaintează până la căsuța {n}.
+{names} retournent à l’écurie. ¦ {names} se întorc în grajd.
+{names} retourne à l’écurie. ¦ {names} se întoarce în grajd.
+{name} amène ses quatre chevaux à l’arrivée. ¦ {name} își aduce cei patru cai la sosire.
+Oie : rejouez. ¦ Gâscă: joacă din nou.
+{what} : un tour est passé. ¦ {what}: stai o tură.
+{what} : retour au départ. ¦ {what}: înapoi la start.
+{what} : case {n}. ¦ {what}: căsuța {n}.
+Tour de {name} ¦ Rândul lui {name}
+Partie terminée ¦ Partidă terminată
+Cases choisies ¦ Căsuțe alese
+Avancer, reculer ou retour au départ. ¦ Înaintează, dă înapoi sau înapoi la start.
+Case ¦ Căsuță
+Effet ¦ Efect
+Avancer vers… ¦ Înaintează spre…
+Revenir à… ¦ Întoarce-te la…
+Retour au départ ¦ Înapoi la start
+Destination ¦ Destinație
+Case {n} · départ ¦ Căsuța {n} · start
+Case {n} · retour {to} ¦ Căsuța {n} · înapoi la {to}
+Case {n} · avance {to} ¦ Căsuța {n} · înainte la {to}
+Aucune case ajoutée. ¦ Nicio căsuță adăugată.
+TABLE DE JEU · NOIR & BLANC ¦ MASA DE JOC · ALB-NEGRU
+Crée une partie de 2 à 6 joueurs. Elle est conservée dans ce navigateur, même après actualisation. ¦ Creează o partidă cu 2 până la 6 jucători. Ea se păstrează în acest browser, chiar și după reîncărcare.
+Nom de la partie ¦ Numele partidei
+Partie du {date} ¦ Partida din {date}
+Nombre de cases ¦ Număr de căsuțe
+Dés ¦ Zaruri
+2 dés ¦ 2 zaruri
+3 dés ¦ 3 zaruri
+{n} dés ¦ {n} zaruri
+Questions ¦ Întrebări
+Bonne réponse pour lancer les dés ¦ Răspuns corect pentru a arunca zarurile
+Lancer puis bonne réponse pour rejouer ¦ Aruncare, apoi răspuns corect pentru a juca din nou
+Lancer puis une seule bonne réponse = un lancer bonus ¦ Aruncare, apoi un singur răspuns corect = o aruncare bonus
+Périmètre des questions ¦ Aria întrebărilor
+Une branche / un patronyme ¦ O ramură / un nume de familie
+Personnes choisies ¦ Persoane alese
+=personne choisie ¦ persoană aleasă|persoane alese|de persoane alese
+Liste : {name} ({n}) ¦ Lista: {name} ({n})
+Branche / patronyme ¦ Ramură / nume de familie
+Ex : Dupont ¦ Ex.: Dupont
+Joueurs ¦ Jucători
+Joueur {n} ¦ Jucătorul {n}
+Joueur {n} (facultatif) ¦ Jucătorul {n} (opțional)
+Personnalisée… ¦ Personalizată…
+Couleur personnalisée du joueur {n} ¦ Culoare personalizată a jucătorului {n}
+Enregistrer cette sélection comme liste ¦ Salvează această selecție ca listă
+Nom de la liste ¦ Numele listei
+Ex : Ascendance maternelle ¦ Ex.: Ascendența pe linie maternă
+Règles classiques incluses : oies tous les 6, pont, auberge, puits, labyrinthe, prison et mort. ¦ Reguli clasice incluse: gâște din 6 în 6, pod, han, fântână, labirint, închisoare și moarte.
+Règles incluses : les échelles et serpents mènent directement à la case indiquée. ¦ Reguli incluse: scările și șerpii duc direct la căsuța indicată.
+Règles Petits chevaux : 56 cases, 2 à 4 joueurs, quatre chevaux chacun, couleurs au choix. ¦ Reguli Căluții: 56 de căsuțe, 2 până la 4 jucători, câte patru cai fiecare, culori la alegere.
+Démarrer la partie ¦ Începe partida
+case {n} ¦ căsuța {n}
+passe {n} tour ¦ stă {n} tură
+Cheval {n} · écurie → case {to} ¦ Calul {n} · grajd → căsuța {to}
+Cheval {n} · case {from} → case {to} ¦ Calul {n} · căsuța {from} → căsuța {to}
+{name} a gagné. ¦ {name} a câștigat.
+La partie est terminée. ¦ Partida s-a terminat.
+Quel cheval veux-tu déplacer ? ¦ Ce cal vrei să muți?
+Lancer {n} dés ¦ Aruncă {n} zaruri
+Question pour {name} ¦ Întrebare pentru {name}
+Question pour jouer ¦ Întrebare pentru a juca
+PARTIE EN COURS · {scope} ¦ PARTIDĂ ÎN CURS · {scope}
+Règles du plateau ¦ Regulile tablei
+Aucune partie pour l’instant ¦ Nicio partidă deocamdată
+« ＋ Nouvelle partie » juste au-dessus pour lancer la première. ¦ „＋ Partidă nouă” chiar deasupra pentru a o porni pe prima.
+Maximum : 5 parties et 30 puzzles en cours, 10 labyrinthes, 10 parties des autres jeux. ¦ Maximum: 5 partide și 30 de puzzle-uri în curs, 10 labirinturi, 10 partide din celelalte jocuri.
+Maximum : 5 parties et 30 puzzles en cours, 10 labyrinthes. ¦ Maximum: 5 partide și 30 de puzzle-uri în curs, 10 labirinturi.
+Maximum : 5 parties et 30 puzzles en cours, 10 parties des autres jeux. ¦ Maximum: 5 partide și 30 de puzzle-uri în curs, 10 partide din celelalte jocuri.
+Maximum : 5 parties et 30 puzzles en cours. ¦ Maximum: 5 partide și 30 de puzzle-uri în curs.
+Maximum : 5 parties sauvegardées. ¦ Maximum: 5 partide salvate.
+Lancez les dés pour commencer. ¦ Aruncă zarurile ca să începi.
+Les 5 emplacements sont utilisés : supprime une partie pour en créer une autre. ¦ Cele 5 locuri sunt ocupate: șterge o partidă ca să creezi alta.
+Jeu ¦ Joc
+Supprime une partie avant d’en créer une autre. ¦ Șterge o partidă înainte de a crea alta.
+Il faut au moins deux joueurs. ¦ Trebuie cel puțin doi jucători.
+Chaque joueur doit avoir une couleur différente. ¦ Fiecare jucător trebuie să aibă o culoare diferită.
+Aucun SOSA n’est calculé. ¦ Niciun număr SOSA nu este calculat.
+Indique une branche ou un patronyme. ¦ Indică o ramură sau un nume de familie.
+Répondez à la question pour commencer. ¦ Răspunde la întrebare ca să începi.
+La partie et sa progression seront supprimées. ¦ Partida și progresul ei vor fi șterse.
+Supprimer la partie ¦ Șterge partida
+Choisissez la bonne réponse. ¦ Alege răspunsul corect.
+Aucune question exploitable : lancez les dés. ¦ Nicio întrebare utilizabilă: aruncă zarurile.
+Question indisponible : vous pouvez lancer les dés. ¦ Întrebare indisponibilă: poți arunca zarurile.
+inconnue ¦ necunoscută
+Mauvaise réponse. La bonne réponse était : {answer}. {name} passe la main. ¦ Răspuns greșit. Răspunsul corect era: {answer}. {name} dă mâna mai departe.
+{name} ne peut déplacer aucun cheval. ¦ {name} nu poate muta niciun cal.
+{name} a plusieurs chevaux à déplacer. ¦ {name} are mai mulți cai de mutat.
+{name} atteint la dernière case. ¦ {name} ajunge la ultima căsuță.
+{name} avance de {n}. ¦ {name} înaintează {n}.
+{n} cases ¦ {n} căsuțe
+jeu|arrivée ¦ sosire
+Plus de place dans ce navigateur pour garder la partie. ¦ Nu mai e loc în acest browser pentru a păstra partida.
+Données illisibles. ¦ Date ilizibile.
+Les ancêtres de {name} ¦ Strămoșii lui {name}
+Les ancêtres de la personne choisie ¦ Strămoșii persoanei alese
+TABLE DE JEU · {what} ¦ MASA DE JOC · {what}
+La partie se garde dans ce navigateur. ¦ Partida se păstrează în acest browser.
+Les {n} parties de ces jeux sont gardées : supprimes-en une pour en commencer une autre. ¦ Cele {n} partide ale acestor jocuri sunt păstrate: șterge una ca să începi alta.
+Les personnes du jeu ¦ Persoanele din joc
+Une génération ¦ O generație
+Les ancêtres d’une personne ¦ Strămoșii unei persoane
+Les personnes vivantes et les fiches confidentielles ne sont jamais dans les jeux. ¦ Persoanele în viață și fișele confidențiale nu apar niciodată în jocuri.
+Les joueurs ¦ Jucătorii
+{a} à {b} ¦ {a} până la {b}
+Ajouter un joueur ¦ Adaugă un jucător
+Commencer la partie ¦ Începe partida
+Retirer ce joueur ¦ Scoate acest jucător
+{what} pour ce jeu · sans les vivants ni les fiches confidentielles. ¦ {what} pentru acest joc · fără persoanele în viață și fără fișele confidențiale.
+Génération (1 = parents, 2 = grands-parents…) ¦ Generația (1 = părinți, 2 = bunici…)
+les réglages de ce jeu ({name}) ¦ setările acestui joc ({name})
+Réglage « {name} » supprimé. ¦ Setarea „{name}” a fost ștearsă.
+« {name} » appliqué. ¦ „{name}” aplicat.
+Supprime une partie avant d’en commencer une autre. ¦ Șterge o partidă înainte de a începe alta.
+Choisis la personne dont on prend les ancêtres. ¦ Alege persoana ai cărei strămoși îi folosim.
+Donne un nom à ce joueur. ¦ Dă un nume acestui jucător.
+Donne un nom à chaque joueur. ¦ Dă un nume fiecărui jucător.
+{game} du {date} ¦ {game} din {date}
+Une nouvelle partie avec les mêmes réglages ¦ O partidă nouă cu aceleași setări
+Rejouer ¦ Joacă din nou
+« {name} » est supprimée. ¦ „{name}” a fost ștearsă.
+Cette partie ne peut pas s’ouvrir : {err} ¦ Această partidă nu se poate deschide: {err}
+Reprendre cette partie ¦ Reia această partidă
+terminée ¦ terminată
+Les règles ¦ Regulile
+Ex : La partie du dimanche ¦ Ex.: Partida de duminică
+Qui est-ce ? des ancêtres ¦ Ghicește cine? cu strămoși
+QUI EST-CE ? ¦ GHICEȘTE CINE?
+=ancêtre ¦ strămoș|strămoși|de strămoși
+Un ancêtre est caché parmi les portraits : pose des questions (« Née avant 1800 ? », « Laboureur ? », « Du côté de ton père ? ») et trouve-le avec le moins de questions possible. ¦ Un strămoș e ascuns printre portrete: pune întrebări („Născută înainte de 1800?”, „Plugar?”, „Din partea tatălui tău?”) și găsește-l cu cât mai puține întrebări.
+Les portraits qui ne collent plus avec les réponses se grisent tout seuls. Une mauvaise proposition compte 2 questions. ¦ Portretele care nu se mai potrivesc cu răspunsurile devin gri singure. O propunere greșită contează cât 2 întrebări.
+Pour les enfants ¦ Pentru copii
+9 portraits, l’app cache l’ancêtre ¦ 9 portrete, aplicația ascunde strămoșul
+Duel à deux ¦ Duel în doi
+20 portraits, chacun cache un ancêtre à l’autre ¦ 20 de portrete, fiecare ascunde un strămoș celuilalt
+Grand plateau ¦ Tablă mare
+30 portraits de toute la généalogie ¦ 30 de portrete din toată genealogia
+À deux, l’ancêtre caché est ¦ În doi, strămoșul ascuns este
+🎲 tiré au hasard ¦ 🎲 tras la sorți
+🤫 choisi par l’autre joueur ¦ 🤫 ales de celălalt jucător
+Avec un seul joueur, l’app cache toujours l’ancêtre. Ajoute un 2ᵉ joueur pour un duel. ¦ Cu un singur jucător, aplicația ascunde mereu strămoșul. Adaugă un al 2-lea jucător pentru un duel.
+Nombre de portraits sur le plateau ¦ Numărul de portrete pe tablă
+Il faut au moins 4 personnes (sans les vivants ni les fiches confidentielles) dans cet ensemble. Choisis « Toute la généalogie » ou une autre génération. ¦ Trebuie cel puțin 4 persoane (fără persoanele în viață și fără fișele confidențiale) în acest ansamblu. Alege „Toată genealogia” sau altă generație.
+À toi de jouer ¦ E rândul tău
+🏁 {name} a gagné ! ¦ 🏁 {name} a câștigat!
+🏁 Trouvé ! ¦ 🏁 Găsit!
+🏁 Partie terminée ¦ 🏁 Partidă terminată
+Au tour de {name} ¦ Rândul lui {name}
+=portrait encore possible ¦ portret încă posibil|portrete încă posibile|de portrete încă posibile
+Les portraits ¦ Portretele
+{name} (écarté) ¦ {name} (eliminat)
+{n} raté ¦ {n} ratat
+Clique sur le portrait que tu proposes ¦ Fă clic pe portretul pe care îl propui
+Je propose une réponse ¦ Propun un răspuns
+Pose une question ¦ Pune o întrebare
+Chercher… (née, laboureur, Auch) ¦ Caută… (născută, plugar, Auch)
+Chercher une question ¦ Caută o întrebare
+Plus de question utile : propose ta réponse ! ¦ Nu mai e nicio întrebare utilă: propune răspunsul tău!
+Clique sur un portrait pour l’écarter toi-même (ou le remettre). ¦ Fă clic pe un portret ca să-l elimini singur (sau să-l pui la loc).
+Questions déjà posées ({n}) ¦ Întrebări deja puse ({n})
+jeu|oui ¦ da
+jeu|non ¦ nu
+jeu|inconnu ¦ necunoscut
+jeu|Qui ¦ Cine
+jeu|Quand ¦ Când
+jeu|Où ¦ Unde
+jeu|Métier ¦ Meserie
+jeu|Famille ¦ Familie
+jeu|Nom ¦ Nume
+L’ancêtre caché pour {name} ¦ Strămoșul ascuns pentru {name}
+L’ancêtre caché ¦ Strămoșul ascuns
+née à {town} ¦ născută în {town}
+{name} a trouvé en {what} ! ¦ {name} a găsit în {what}!
+Trouvé en {what} ! ¦ Găsit în {what}!
+{a} choisit l’ancêtre que {b} devra trouver ¦ {a} alege strămoșul pe care {b} va trebui să-l găsească
+{a} : choisis en secret l’ancêtre que {b} devra trouver. {b}, ne regarde pas ! ¦ {a}: alege în secret strămoșul pe care {b} va trebui să-l găsească. {b}, nu te uita!
+Cacher {name} ¦ Ascunde-l pe {name}
+C’est caché. Au suivant ! ¦ E ascuns. Următorul!
+C’est caché : la partie commence. ¦ E ascuns: partida începe.
+🎉 C’est bien {name} ! ¦ 🎉 Chiar e {name}!
+Proposition : {name} ¦ Propunere: {name}
+Raté : ce n’est pas ce portrait. ¦ Ratat: nu e acest portret.
+Est-ce une femme ? ¦ E o femeie?
+A-t-on son portrait (une photo) ? ¦ Avem portretul ei (o fotografie)?
+Cette personne est-elle née avant {year} ? ¦ S-a născut această persoană înainte de {year}?
+A-t-elle vécu plus de {n} ans ? ¦ A trăit mai mult de {n} ani?
+Est-elle née à {town} ? ¦ S-a născut în {town}?
+Est-elle morte à {town} ? ¦ A murit în {town}?
+Était-elle {job} ? ¦ Era {job}?
+Est-ce du côté de ton père ? ¦ E din partea tatălui tău?
+Est-ce un parent ? ¦ E un părinte?
+Est-ce un grand-parent ? ¦ E un bunic sau o bunică?
+Est-ce un arrière-grand-parent ? ¦ E un străbunic sau o străbunică?
+Est-ce un ancêtre de la génération {n} ? ¦ E un strămoș din generația {n}?
+Son nom commence-t-il par {letter} ? ¦ Numele începe cu {letter}?
+un grand-parent ¦ un bunic sau o bunică
+un arrière-grand-parent ¦ un străbunic sau o străbunică
+un ancêtre de la génération {n} ¦ un strămoș din generația {n}
+Naissance de {name} ¦ Nașterea lui {name}
+Décès de {name} ¦ Decesul lui {name}
+Mariage de {a} et {b} ¦ Căsătoria lui {a} cu {b}
+Mariage de {name} ¦ Căsătoria lui {name}
+Memory des portraits ¦ Memory cu portrete
+Memory ¦ Memory
+MEMORY ¦ MEMORY
+=paire possible ¦ pereche posibilă|perechi posibile|de perechi posibile
+Retourne deux cartes à la fois et retrouve les paires : un portrait et son nom, une personne et son village, son métier ou son année de naissance. ¦ Întoarce câte două cărți și găsește perechile: un portret și numele lui, o persoană și satul ei, meseria sau anul ei de naștere.
+Une paire trouvée : la carte reste visible et le même joueur rejoue. ¦ O pereche găsită: cartea rămâne vizibilă și același jucător joacă din nou.
+🖼 Portrait ↔ nom ¦ 🖼 Portret ↔ nume
+📍 Personne ↔ village ¦ 📍 Persoană ↔ sat
+🛠 Personne ↔ métier ¦ 🛠 Persoană ↔ meserie
+📅 Personne ↔ année ¦ 📅 Persoană ↔ an
+Portrait ↔ nom ¦ Portret ↔ nume
+Personne ↔ village de naissance ¦ Persoană ↔ sat natal
+Personne ↔ métier ¦ Persoană ↔ meserie
+Personne ↔ année de naissance ¦ Persoană ↔ an de naștere
+Petit memory ¦ Memory mic
+6 paires portrait ↔ nom ¦ 6 perechi portret ↔ nume
+Les villages ¦ Satele
+10 paires personne ↔ village ¦ 10 perechi persoană ↔ sat
+Grand memory ¦ Memory mare
+18 paires de toute la généalogie ¦ 18 perechi din toată genealogia
+Les paires ¦ Perechile
+Nombre de paires ¦ Număr de perechi
+Pas assez de personnes avec un village de naissance dans cet ensemble (il faut au moins 3 paires différentes). Choisis un ensemble plus grand ou une autre sorte de paires. ¦ Nu sunt destule persoane cu un sat natal în acest ansamblu (trebuie cel puțin 3 perechi diferite). Alege un ansamblu mai mare sau alt fel de perechi.
+Pas assez de personnes avec un métier dans cet ensemble (il faut au moins 3 paires différentes). Choisis un ensemble plus grand ou une autre sorte de paires. ¦ Nu sunt destule persoane cu o meserie în acest ansamblu (trebuie cel puțin 3 perechi diferite). Alege un ansamblu mai mare sau alt fel de perechi.
+Pas assez de personnes avec une année de naissance dans cet ensemble (il faut au moins 3 paires différentes). Choisis un ensemble plus grand ou une autre sorte de paires. ¦ Nu sunt destule persoane cu un an de naștere în acest ansamblu (trebuie cel puțin 3 perechi diferite). Alege un ansamblu mai mare sau alt fel de perechi.
+Pas assez de personnes dans cet ensemble (il faut au moins 3 paires différentes). Choisis un ensemble plus grand ou une autre sorte de paires. ¦ Nu sunt destule persoane în acest ansamblu (trebuie cel puțin 3 perechi diferite). Alege un ansamblu mai mare sau alt fel de perechi.
+{a} / {b} paires ¦ {a} / {b} perechi
+📍 village ¦ 📍 sat
+🛠 métier ¦ 🛠 meserie
+📅 née en ¦ 📅 născută în
+=paire ¦ pereche|perechi|de perechi
+=coup ¦ mutare|mutări|de mutări
+au tour de {name} ¦ rândul lui {name}
+Les cartes ¦ Cărțile
+Carte retournée ¦ Carte întoarsă
+Retourne une deuxième carte. ¦ Întoarce o a doua carte.
+Retourne deux cartes. ¦ Întoarce două cărți.
+Clavier : flèches pour bouger, Entrée ou Espace pour retourner. ¦ Tastatură: săgețile pentru a te mișca, Enter sau Spațiu pentru a întoarce.
+Égalité : {names} ! ¦ Egalitate: {names}!
+{name} gagne ! ¦ {name} câștigă!
+Toutes les paires ! ¦ Toate perechile!
+{moves} en {time}. ¦ {moves} în {time}.
+La bonne date ¦ Data potrivită
+LA BONNE DATE ¦ DATA POTRIVITĂ
+Pose chaque événement de la famille à sa place sur la frise, de la plus ancienne à la plus récente : naissances, mariages, décès, et si tu veux des dates de l’histoire de France. ¦ Pune fiecare eveniment din familie la locul lui pe axa timpului, de la cel mai vechi la cel mai recent: nașteri, căsătorii, decese și, dacă vrei, date din istoria Franței.
+Juste : la carte reste et tu marques un point. Faux : elle se range à sa vraie place et tu perds une vie. ¦ Corect: cartea rămâne și câștigi un punct. Greșit: se așază la locul ei adevărat și pierzi o viață.
+5 ans ¦ 5 ani
+10 ans ¦ 10 ani
+25 ans ¦ 25 de ani
+👶 Naissances ¦ 👶 Nașteri
+💍 Mariages ¦ 💍 Căsătorii
+✝ Décès ¦ ✝ Decese
+Facile ¦ Ușor
+8 cartes, au moins 25 ans d’écart ¦ 8 cărți, cel puțin 25 de ani diferență
+Avec l’histoire ¦ Cu istoria
+La famille et les grandes dates de France ¦ Familia și marile date ale Franței
+Champion ¦ Campion
+25 cartes, dates proches, 1 vie ¦ 25 de cărți, date apropiate, 1 viață
+📜 Ajouter des dates de l’histoire de France (Révolution, guerres, école obligatoire…) ¦ 📜 Adaugă date din istoria Franței (Revoluția, războaie, școala obligatorie…)
+Écart minimum entre deux cartes ¦ Diferența minimă între două cărți
+Nombre de cartes ¦ Număr de cărți
+Vies par joueur (0 = sans vies, on compte les points) ¦ Vieți pentru fiecare jucător (0 = fără vieți, se numără punctele)
+Garde au moins une sorte d’événement. ¦ Păstrează cel puțin un fel de eveniment.
+Pas assez d’événements datés avec ces réglages (il en faut au moins 5). Ajoute les dates de l’histoire, un écart plus petit ou un ensemble plus grand. ¦ Nu sunt destule evenimente datate cu aceste setări (trebuie cel puțin 5). Adaugă datele din istorie, o diferență mai mică sau un ansamblu mai mare.
+{a} / {b} cartes ¦ {a} / {b} cărți
+{what} sur {n} ¦ {what} din {n}
+Poser ici, avant tout ¦ Pune aici, înaintea tuturor
+Poser ici, après tout ¦ Pune aici, după toate
+Poser ici, entre « {a} » et « {b} » ¦ Pune aici, între „{a}” și „{b}”
+Ici ¦ Aici
+{name}, pose cette carte : ¦ {name}, pune această carte:
+Pose cette carte à sa place : ¦ Pune această carte la locul ei:
+Glisse-la sur « ⬇ Ici », ou clique (Tab puis Entrée) sur la bonne place. ¦ Trage-o pe „⬇ Aici” sau fă clic (Tab, apoi Enter) pe locul potrivit.
+plus de vie ¦ nu mai ai vieți
+✓ Bien placé ! ¦ ✓ Bine plasat!
+✗ Pas tout à fait ¦ ✗ Nu chiar
+La frise, de la plus ancienne à la plus récente ¦ Axa timpului, de la cel mai vechi la cel mai recent
+plus ancien ¦ mai vechi
+plus récent ¦ mai recent
+{what} sur la frise. ¦ {what} pe axa timpului.
+=carte posée ¦ carte pusă|cărți puse|de cărți puse
+=carte ¦ carte|cărți|de cărți
+Bataille de Marignan ¦ Bătălia de la Marignano
+Ordonnance de Villers-Cotterêts : les curés tiennent les registres en français ¦ Ordonanța de la Villers-Cotterêts: preoții țin registrele în franceză
+Massacre de la Saint-Barthélemy ¦ Masacrul din noaptea Sfântului Bartolomeu
+Édit de Nantes ¦ Edictul de la Nantes
+Assassinat d’Henri IV ¦ Asasinarea lui Henric al IV-lea
+Louis XIV devient roi ¦ Ludovic al XIV-lea devine rege
+Ordonnance de Saint-Germain-en-Laye : registres en double ¦ Ordonanța de la Saint-Germain-en-Laye: registre în două exemplare
+Révocation de l’édit de Nantes ¦ Revocarea Edictului de la Nantes
+Le « Grand Hiver » ¦ „Marea Iarnă”
+Mort de Louis XIV ¦ Moartea lui Ludovic al XIV-lea
+Début de la guerre de Sept Ans ¦ Începutul Războiului de Șapte Ani
+Prise de la Bastille ¦ Căderea Bastiliei
+L’état civil est confié aux mairies ¦ Starea civilă este încredințată primăriilor
+Napoléon Ier, empereur ¦ Napoleon I, împărat
+Bataille de Waterloo ¦ Bătălia de la Waterloo
+Révolution de Juillet ¦ Revoluția din Iulie
+Grande épidémie de choléra ¦ Marea epidemie de holeră
+Suffrage universel masculin, fin de l’esclavage ¦ Vot universal masculin, sfârșitul sclaviei
+Second Empire ¦ Al Doilea Imperiu
+Nouvelle épidémie de choléra ¦ O nouă epidemie de holeră
+Guerre franco-prussienne ¦ Războiul franco-prusac
+La Commune de Paris ¦ Comuna din Paris
+École gratuite, laïque et obligatoire ¦ Școală gratuită, laică și obligatorie
+Tour Eiffel ¦ Turnul Eiffel
+Séparation des Églises et de l’État ¦ Separarea Bisericilor de Stat
+Début de la Première Guerre mondiale ¦ Începutul Primului Război Mondial
+Armistice du 11 novembre ¦ Armistițiul din 11 noiembrie
+Grippe espagnole ¦ Gripa spaniolă
+Premiers congés payés ¦ Primele concedii plătite
+Début de la Seconde Guerre mondiale ¦ Începutul celui de-Al Doilea Război Mondial
+Droit de vote des femmes ¦ Dreptul de vot al femeilor
+Fin de la Seconde Guerre mondiale ¦ Sfârșitul celui de-Al Doilea Război Mondial
+Ve République ¦ A Cincea Republică
+Mai 68 ¦ Mai 68
+Premiers pas sur la Lune ¦ Primii pași pe Lună
+Abolition de la peine de mort ¦ Abolirea pedepsei cu moartea
+L’euro en pièces et billets ¦ Euro în monede și bancnote
+Morpion à règles libres ¦ X și 0 cu reguli libere
+Morpion ¦ X și 0
+MORPION ¦ X ȘI 0
+Aligne tes symboles avant les autres : choisis la taille de la grille, combien à la suite, le nombre de joueurs et vos symboles (ou le portrait d’un ancêtre). ¦ Aliniază-ți simbolurile înaintea celorlalți: alege mărimea grilei, câte la rând, numărul de jucători și simbolurile voastre (sau portretul unui strămoș).
+Le premier qui aligne le nombre demandé (en ligne, en colonne et, si on veut, en diagonale) gagne la manche. ¦ Primul care aliniază numărul cerut (pe rând, pe coloană și, dacă vrei, pe diagonală) câștigă runda.
+Ex : Le grand tournoi ¦ Ex.: Marele turneu
+La grille et les règles ¦ Grila și regulile
+🙂 Une personne ¦ 🙂 O persoană
+🤖 Ordinateur (simple) ¦ 🤖 Calculator (simplu)
+🤖 Ordinateur (moyen) ¦ 🤖 Calculator (mediu)
+Morpion classique ¦ X și 0 clasic
+3×3, aligner 3 ¦ 3×3, aliniază 3
+Puissance 4 ¦ 4 în linie
+6 lignes × 7 colonnes, gravité, aligner 4 ¦ 6 rânduri × 7 coloane, gravitație, aliniază 4
+Cinq à la suite ¦ Cinci la rând
+15×15, aligner 5 ¦ 15×15, aliniază 5
+Grille sans fin ¦ Grilă fără sfârșit
+Commence en 5×5 et s’agrandit, aligner 5 ¦ Începe la 5×5 și se mărește, aliniază 5
+Jusqu’à remplir la grille ¦ Până se umple grila
+10×10, on compte les alignements de 4 ¦ 10×10, se numără alinierile de 4
+⬇ Gravité (les pions tombent, comme au « puissance 4 ») ¦ ⬇ Gravitație (piesele cad, ca la „4 în linie”)
+↗ Les diagonales comptent ¦ ↗ Diagonalele contează
+⤢ La grille s’agrandit quand on joue au bord (sans la gravité) ¦ ⤢ Grila se mărește când joci la margine (fără gravitație)
+🧮 Jouer jusqu’à remplir la grille : chaque alignement compte un point (une suite deux fois plus longue en vaut deux), le plus de points gagne ¦ 🧮 Joacă până se umple grila: fiecare aliniere valorează un punct (un șir de două ori mai lung valorează două), câștigă cine are cele mai multe puncte
+Combien à la suite pour gagner ¦ Câte la rând pentru a câștiga
+à la suite ¦ la rând
+lignes ¦ rânduri
+colonnes ¦ coloane
+Symbole ¦ Simbol
+Une lettre… ¦ O literă…
+Le portrait d’un ancêtre… ¦ Portretul unui strămoș…
+Qui joue ¦ Cine joacă
+Il faut au moins une personne pour jouer (sinon les ordinateurs jouent tout seuls). ¦ Trebuie cel puțin o persoană ca să joci (altfel calculatoarele joacă singure).
+Choisis l’ancêtre de chaque joueur qui a le symbole « portrait ». ¦ Alege strămoșul fiecărui jucător care are simbolul „portret”.
+Deux joueurs ont le même symbole : choisis-en un différent pour chacun. ¦ Doi jucători au același simbol: alege câte unul diferit pentru fiecare.
+Manche en cours ¦ Rundă în curs
+Manche {n} ¦ Runda {n}
+aligner {n} ¦ aliniază {n}
+gravité ¦ gravitație
+sans diagonales ¦ fără diagonale
+grille qui s’agrandit ¦ grilă care se mărește
+jusqu’à remplir la grille ¦ până se umple grila
+La grille ¦ Grila
+Ligne {r}, colonne {c} : {name} ¦ Rândul {r}, coloana {c}: {name}
+Ligne {r}, colonne {c} ¦ Rândul {r}, coloana {c}
+=manche gagnée ¦ rundă câștigată|runde câștigate|de runde câștigate
+🎉 {name} gagne la manche avec {pts} ! ¦ 🎉 {name} câștigă runda cu {pts}!
+🎉 {name} gagne la manche ! ¦ 🎉 {name} câștigă runda!
+🤝 Égalité : la grille est pleine, même nombre de points. ¦ 🤝 Egalitate: grila e plină, același număr de puncte.
+🤝 Match nul : la grille est pleine. ¦ 🤝 Remiză: grila e plină.
+À {name} de jouer (l’ordinateur réfléchit…). ¦ E rândul lui {name} (calculatorul se gândește…).
+À {name} de jouer. ¦ E rândul lui {name}.
+« ↻ Rejouer » en haut : une nouvelle manche, les scores de la soirée sont gardés. ¦ „↻ Joacă din nou” sus: o rundă nouă, scorurile serii se păstrează.
+Annuler le dernier coup ¦ Anulează ultima mutare
+Clavier : flèches puis Entrée. Avec la gravité, une case de la colonne suffit : le pion tombe. ¦ Tastatură: săgețile, apoi Enter. Cu gravitație, ajunge o căsuță din coloană: piesa cade.
+Clavier : flèches puis Entrée. ¦ Tastatură: săgețile, apoi Enter.
+{name} a gagné ¦ {name} a câștigat
+{name} a gagné ({pts}) ¦ {name} a câștigat ({pts})
+Égalité ¦ Egalitate
+Match nul ¦ Remiză
+Bataille navale ¦ Bătălia navală
+BATAILLE NAVALE ¦ BĂTĂLIA NAVALĂ
+Coule la flotte de l’autre avant qu’il ne coule la tienne : contre l’ordinateur, ou à deux sur le même écran. Les navires peuvent porter le nom de tes ancêtres. ¦ Scufundă flota celuilalt înainte să o scufunde pe a ta: contra calculatorului sau în doi pe același ecran. Navele pot purta numele strămoșilor tăi.
+Un clic sur la grille de l’adversaire pour tirer : « à l’eau », « touché » ou « coulé ». Le premier qui coule toute la flotte gagne. ¦ Un clic pe grila adversarului ca să tragi: „apă”, „lovit” sau „scufundat”. Primul care scufundă toată flota câștigă.
+Ex : La revanche de Mamie ¦ Ex.: Revanșa Bunicii
+La mer et la flotte ¦ Marea și flota
+🤖 Ordinateur (malin) ¦ 🤖 Calculator (isteț)
+Porte-avions ¦ Portavion
+Croiseur ¦ Crucișător
+Frégate ¦ Fregată
+Sous-marin ¦ Submarin
+Navire ¦ Navă
+=navire ¦ navă|nave|de nave
+=navire coulé ¦ navă scufundată|nave scufundate|de nave scufundate
+Petite mer ¦ Mare mică
+7×7, petite flotte ¦ 7×7, flotă mică
+Bataille classique ¦ Bătălie clasică
+10×10, 5 navires ¦ 10×10, 5 nave
+Grande escadre ¦ Escadră mare
+14×14, 7 navires ¦ 14×14, 7 nave
+En rafale ¦ În rafală
+10×10, on rejoue quand on touche ¦ 10×10, joci din nou când lovești
+La flotte ne tient pas dans cette grille : prends une grille plus grande ou une flotte plus petite. ¦ Flota nu încape în această grilă: ia o grilă mai mare sau o flotă mai mică.
+La flotte ¦ Flota
+Petite (4 navires) ¦ Mică (4 nave)
+Classique (5) ¦ Clasică (5)
+Grande (7) ¦ Mare (7)
+🎯 On rejoue quand on touche ¦ 🎯 Joci din nou când lovești
+⚓ Les navires portent le nom d’ancêtres ¦ ⚓ Navele poartă numele unor strămoși
+Taille de la mer ¦ Mărimea mării
+cases de côté ¦ căsuțe pe latură
+Il faut au moins une personne pour jouer. ¦ Trebuie cel puțin o persoană ca să joci.
+le {name} ¦ {name}
+Bataille en cours ¦ Bătălie în curs
+à l’eau ¦ apă
+touché ¦ lovit
+touché ! ¦ lovit!
+coulé ¦ scufundat
+coulé : {ship} ({kind}) ¦ scufundat: {ship} ({kind})
+on rejoue quand on touche ¦ joci din nou când lovești
+{a}, à toi : que {b} détourne les yeux. ¦ {a}, e rândul tău: {b} să se uite în altă parte.
+Je suis {name} : voir ma mer ¦ Sunt {name}: vezi marea mea
+La mer de {name} ¦ Marea lui {name}
+Ta flotte ({name}) ¦ Flota ta ({name})
+Ta flotte ¦ Flota ta
+🎉 {name} a coulé toute la flotte ! ¦ 🎉 {name} a scufundat toată flota!
+À toi de tirer, {a} : clique sur la mer de {b}. ¦ E rândul tău să tragi, {a}: fă clic pe marea lui {b}.
+{name} vise… ¦ {name} țintește…
+« ↻ Rejouer » en haut : une nouvelle manche, les scores sont gardés. ¦ „↻ Joacă din nou” sus: o rundă nouă, scorurile se păstrează.
+{name} a gagné en {n} tirs ¦ {name} a câștigat din {n} lovituri
+Câbles ¦ Cabluri
+Les câbles ¦ Cablurile
+LES CÂBLES ¦ CABLURILE
+Tourne les bouts de câble pour relier tous les postes au serveur, sans câble dans le vide. Avec ou sans bords qui se rejoignent. ¦ Rotește capetele de cablu ca să legi toate posturile de server, fără cabluri în gol. Cu sau fără margini care se unesc.
+Clic : tourner d’un quart de tour (clic droit ou Maj : dans l’autre sens). Alt+clic ou le mode 🔒 : verrouiller une case sûre. ¦ Clic: rotește un sfert de tură (clic dreapta sau Shift: în sens invers). Alt+clic sau modul 🔒: blochează o căsuță sigură.
+Ex : Le réseau de la famille ¦ Ex.: Rețeaua familiei
+Le réseau ¦ Rețeaua
+Débutant ¦ Începător
+Expert : bords qui se rejoignent ¦ Expert: margini care se unesc
+9×9, un câble peut passer d’un bord à l’autre ¦ 9×9, un cablu poate trece de la o margine la alta
+Géant ¦ Uriaș
+13×13, bords qui se rejoignent ¦ 13×13, margini care se unesc
+🔁 Les bords se rejoignent (un câble qui sort à droite revient à gauche, en haut revient en bas) ¦ 🔁 Marginile se unesc (un cablu care iese în dreapta revine în stânga, cel de sus revine jos)
+👪 Les postes portent le nom d’ancêtres ¦ 👪 Posturile poartă numele unor strămoși
+Réseau à relier ¦ Rețea de legat
+bords qui se rejoignent ¦ margini care se unesc
+Le serveur ¦ Serverul
+Case {r}, {c} (serveur) ¦ Căsuța {r}, {c} (server)
+Case {r}, {c} (poste) ¦ Căsuța {r}, {c} (post)
+Case {r}, {c} ¦ Căsuța {r}, {c}
+, reliée ¦ , legată
+🎉 Tout est relié en {moves} et {time} ! ¦ 🎉 Totul e legat în {moves} și {time}!
+{a} / {b} cases reliées ¦ {a} / {b} căsuțe legate
+=bout dans le vide ¦ capăt în gol|capete în gol|de capete în gol
+record {moves}, {time} ¦ record {moves}, {time}
+Mode verrou (actif) ¦ Mod blocare (activ)
+Mode verrou ¦ Mod blocare
+Les bords se rejoignent : un câble qui sort d’un côté continue de l’autre côté. ¦ Marginile se unesc: un cablu care iese pe o parte continuă pe partea cealaltă.
+=ancêtre relié ¦ strămoș legat|strămoși legați|de strămoși legați
+Case verrouillée (Alt+clic pour la déverrouiller). ¦ Căsuță blocată (Alt+clic pentru a o debloca).
+Relié en {n} coups ¦ Legat în {n} mutări
+🤖 Ordinateur facile ¦ 🤖 Calculator ușor
+🤖 Ordinateur moyen ¦ 🤖 Calculator mediu
+🤖 Ordinateur difficile ¦ 🤖 Calculator dificil
+niveau|facile ¦ ușor
+niveau|moyen ¦ mediu
+niveau|difficile ¦ dificil
+Difficile ¦ Dificil
+=victoire ¦ victorie|victorii|de victorii
+=nulle ¦ remiză|remize|de remize
+=défaite ¦ înfrângere|înfrângeri|de înfrângeri
+record : {what} ¦ record: {what}
+{what} : ¦ {what}:
+LES RÈGLES ¦ REGULILE
+La partie ¦ Partida
+Le temps de la partie (sans les pauses) ¦ Timpul partidei (fără pauze)
+Un conseil (touche H) ¦ Un sfat (tasta H)
+Reprendre (Échap) ¦ Reia (Esc)
+Pause (Échap) ¦ Pauză (Esc)
+Reprendre ¦ Reia
+Pause ¦ Pauză
+Les règles de {name} ¦ Regulile pentru {name}
+Les règles de ce jeu ¦ Regulile acestui joc
+Le chrono est arrêté. Échap ou le bouton pour reprendre. ¦ Cronometrul e oprit. Esc sau butonul pentru a relua.
+Les règles : {name} ¦ Regulile: {name}
+ÉCHECS ¦ ȘAH
+Le jeu d’échecs avec toutes ses règles : à deux sur le même écran ou contre l’ordinateur (facile, moyen ou difficile), pendule si tu veux. ¦ Jocul de șah cu toate regulile lui: în doi pe același ecran sau contra calculatorului (ușor, mediu sau dificil), cu ceas dacă vrei.
+Les blancs commencent. Clique une pièce puis sa case (ou glisse-la). Les règles complètes sont dans le « ? » de la partie. ¦ Albul începe. Fă clic pe o piesă, apoi pe căsuța ei (sau trage-o). Regulile complete sunt în „?” al partidei.
+Ex : La revanche de Papi ¦ Ex.: Revanșa Bunicului
+Partie tranquille ¦ Partidă liniștită
+Sans pendule, 3 conseils ¦ Fără ceas, 3 sfaturi
+Partie longue ¦ Partidă lungă
+30 minutes chacun ¦ 30 de minute fiecare
+Partie rapide ¦ Partidă rapidă
+15 minutes chacun, + 10 secondes par coup ¦ 15 minute fiecare, + 10 secunde pe mutare
+Blitz ¦ Blitz
+5 minutes chacun, + 2 secondes par coup ¦ 5 minute fiecare, + 2 secunde pe mutare
+Chaque joueur a 16 pièces. Les blancs commencent. On gagne en <b>mettant le roi adverse échec et mat</b> : il est attaqué et ne peut plus s’échapper. ¦ Fiecare jucător are 16 piese. Albul începe. Câștigi <b>dând mat regelui advers</b>: e atacat și nu mai poate scăpa.
+<b>Roi ♚</b> : une case dans tous les sens. <b>Dame ♛</b> : autant de cases qu’on veut, en ligne, en colonne et en diagonale. <b>Tour ♜</b> : en ligne et en colonne. <b>Fou ♝</b> : en diagonale. <b>Cavalier ♞</b> : en « L », il saute par-dessus les pièces. <b>Pion ♟</b> : avance d’une case (deux au premier coup), prend en diagonale. ¦ <b>Rege ♚</b>: o căsuță în orice direcție. <b>Damă ♛</b>: câte căsuțe vrei, pe rând, pe coloană și pe diagonală. <b>Turn ♜</b>: pe rând și pe coloană. <b>Nebun ♝</b>: pe diagonală. <b>Cal ♞</b>: în „L”, sare peste piese. <b>Pion ♟</b>: înaintează o căsuță (două la prima mutare), ia pe diagonală.
+<b>Roque</b> : le roi va de deux cases vers une tour, la tour passe de l’autre côté. Impossible si le roi ou cette tour ont déjà bougé, si le roi est en échec, ou s’il passe ou arrive sur une case attaquée. ¦ <b>Rocada</b>: regele merge două căsuțe spre un turn, turnul trece pe partea cealaltă. Imposibilă dacă regele sau acel turn s-au mișcat deja, dacă regele e în șah sau dacă trece ori ajunge pe o căsuță atacată.
+<b>Prise en passant</b> : un pion qui avance de deux cases à côté d’un pion adverse peut être pris comme s’il n’avait avancé que d’une case, mais seulement au coup suivant. ¦ <b>Captura en passant</b>: un pion care înaintează două căsuțe lângă un pion advers poate fi luat ca și cum ar fi înaintat doar o căsuță, dar numai la mutarea următoare.
+<b>Promotion</b> : un pion qui arrive au bout devient la pièce qu’on choisit (dame, tour, fou ou cavalier). ¦ <b>Promovarea</b>: un pion care ajunge la capăt devine piesa pe care o alegi (damă, turn, nebun sau cal).
+<b>Pat</b> : celui qui doit jouer n’est pas en échec mais n’a aucun coup possible : partie nulle. ¦ <b>Pat</b>: cel care trebuie să mute nu e în șah, dar nu are nicio mutare posibilă: remiză.
+<b>Autres nulles</b> : la même position trois fois ; 50 coups de chaque côté sans prise ni pion avancé ; plus assez de pièces pour mater (roi seul, roi et fou, roi et cavalier…). ¦ <b>Alte remize</b>: aceeași poziție de trei ori; 50 de mutări de fiecare parte fără captură și fără pion mutat; nu mai sunt destule piese pentru mat (rege singur, rege și nebun, rege și cal…).
+<b>Pendule</b> (si on l’a choisie) : chacun a son temps ; celui dont le temps tombe à zéro perd (nulle si l’autre ne peut plus mater). ¦ <b>Ceasul</b> (dacă l-ai ales): fiecare are timpul lui; cel căruia îi expiră timpul pierde (remiză dacă celălalt nu mai poate da mat).
+<b>Notation</b> : R roi, D dame, T tour, F fou, C cavalier ; « x » une prise, « + » échec, « # » mat, « O-O » petit roque, « O-O-O » grand roque. ¦ <b>Notația</b>: R rege, D damă, T turn, F nebun, C cal; „x” o captură, „+” șah, „#” mat, „O-O” rocada mică, „O-O-O” rocada mare.
+<b>Jouer</b> : clique (ou touche) une pièce puis sa case, ou glisse-la. Au clavier : flèches, Entrée pour prendre la pièce puis Entrée sur sa case. ↶ (⌘Z) défait un coup, 💡 (H) montre un bon coup, Échap met en pause. ¦ <b>Joacă</b>: fă clic (sau atinge) o piesă, apoi căsuța ei, ori trage-o. De la tastatură: săgețile, Enter pentru a lua piesa, apoi Enter pe căsuța ei. ↶ (⌘Z) anulează o mutare, 💡 (H) arată o mutare bună, Esc pune pauză.
+La pendule ¦ Ceasul
+pendule|Sans ¦ Fără
+Ajout par coup ¦ Adaos pe mutare
+Conseils ¦ Sfaturi
+👪 Les pièces portent le nom d’ancêtres (le roi, la dame, puis les autres) ¦ 👪 Piesele poartă numele unor strămoși (regele, dama, apoi celelalte)
+• Montrer les cases où la pièce peut aller ¦ • Arată căsuțele unde poate merge piesa
+Blancs ¦ Albele
+Noirs ¦ Negrele
+blancs ¦ albele
+noirs ¦ negrele
+Partie en cours ¦ Partidă în curs
+Retourner le plateau ¦ Întoarce tabla
+Copier les coups ¦ Copiază mutările
+La partie en notation, à coller ailleurs ¦ Partida în notație, de lipit în altă parte
+Proposer la nulle ¦ Propune remiză
+Nulle d’un commun accord ¦ Remiză de comun acord
+Abandonner ¦ Abandonează
+{name} a gagné ({why}) ¦ {name} a câștigat ({why})
+Nulle ({why}) ¦ Remiză ({why})
+mat en {n} coups ¦ mat în {n} mutări
+🏆 Nouveau record ! ¦ 🏆 Record nou!
+Aux blancs ¦ La albe
+Aux noirs ¦ La negre
+échec ¦ șah
+Coups copiés. ¦ Mutări copiate.
+🤖 L’ordinateur refuse la nulle : il croit encore pouvoir gagner. ¦ 🤖 Calculatorul refuză remiza: crede că încă poate câștiga.
+{name} abandonne : la partie est perdue. ¦ {name} abandonează: partida e pierdută.
+Abandonner la partie ? ¦ Abandonezi partida?
+Abandonner la partie ¦ Abandonează partida
+Partie {n} ¦ Partida {n}
+pendule {m} min + {s} s ¦ ceas {m} min + {s} s
+pendule {m} min ¦ ceas {m} min
+sans pendule ¦ fără ceas
+{a} (blancs) contre {b} (noirs) ¦ {a} (albele) contra {b} (negrele)
+ (coup possible) ¦ (mutare posibilă)
+Le temps qui reste ¦ Timpul rămas
+{name} gagne : {why} ! ¦ {name} câștigă: {why}!
+À {name} de jouer (l’ordinateur réfléchit…) ¦ E rândul lui {name} (calculatorul se gândește…)
+À {name} de jouer ¦ E rândul lui {name}
+Échec ! ¦ Șah!
+Pièces prises ¦ Piese capturate
+L’échiquier ¦ Tabla de șah
+Promotion ¦ Promovare
+<b>Ton pion arrive au bout :</b> choisis ce qu’il devient. ¦ <b>Pionul tău ajunge la capăt:</b> alege ce devine.
+{a} prend {b}. ¦ {a} ia {b}.
+Les coups joués ¦ Mutările jucate
+« ↻ Rejouer » en haut : une revanche, les couleurs changent. ¦ „↻ Joacă din nou” sus: o revanșă, culorile se schimbă.
+Contre l’ordinateur {level} ¦ Contra calculatorului {level}
+Clic ou toucher : la pièce, puis sa case (ou glisse-la). Clavier : flèches, Entrée. ⌘Z annule, H un conseil, Échap pause. ¦ Clic sau atingere: piesa, apoi căsuța ei (sau trage-o). Tastatură: săgețile, Enter. ⌘Z anulează, H un sfat, Esc pauză.
+échec et mat ¦ șah mat
+pat (plus de coup possible sans être en échec) ¦ pat (nicio mutare posibilă fără a fi în șah)
+Pat (plus de coup possible sans être en échec) ¦ Pat (nicio mutare posibilă fără a fi în șah)
+nulle par triple répétition ¦ remiză prin tripla repetiție
+Nulle : par triple répétition ¦ Remiză: prin tripla repetiție
+nulle : 50 coups sans prise ni pion avancé ¦ remiză: 50 de mutări fără captură și fără pion mutat
+Nulle : 50 coups sans prise ni pion avancé ¦ Remiză: 50 de mutări fără captură și fără pion mutat
+nulle : plus assez de pièces pour mater ¦ remiză: nu mai sunt destule piese pentru mat
+Nulle : plus assez de pièces pour mater ¦ Remiză: nu mai sunt destule piese pentru mat
+temps écoulé ¦ timp expirat
+Temps écoulé ¦ Timp expirat
+abandon ¦ abandon
+nulle d’un commun accord ¦ remiză de comun acord
+Nulle : d’un commun accord ¦ Remiză: de comun acord
+roi blanc ¦ rege alb
+roi noir ¦ rege negru
+dame blanc ¦ damă albă
+dame noir ¦ damă neagră
+tour blanc ¦ turn alb
+tour noir ¦ turn negru
+fou blanc ¦ nebun alb
+fou noir ¦ nebun negru
+cavalier blanc ¦ cal alb
+cavalier noir ¦ cal negru
+pion blanc ¦ pion alb
+pion noir ¦ pion negru
+echecs|Roi ¦ Rege
+echecs|Dame ¦ Damă
+echecs|Tour ¦ Turn
+echecs|Fou ¦ Nebun
+echecs|Cavalier ¦ Cal
+echecs|Pion ¦ Pion
+DAMES ¦ DAME
+Le jeu de dames : règles internationales sur 10 × 10 (prise majoritaire, dames volantes) ou dames anglaises sur 8 × 8. À deux ou contre l’ordinateur. ¦ Jocul de dame: reguli internaționale pe 10 × 10 (captura maximă, dame zburătoare) sau dame englezești pe 8 × 8. În doi sau contra calculatorului.
+Prendre est obligatoire. Les règles complètes sont dans le « ? » de la partie. ¦ Captura e obligatorie. Regulile complete sunt în „?” al partidei.
+Ex : Le tournoi du dimanche ¦ Ex.: Turneul de duminică
+Le damier et les règles ¦ Tabla și regulile
+Dames internationales ¦ Dame internaționale
+10 × 10, prise majoritaire, dames volantes ¦ 10 × 10, captura maximă, dame zburătoare
+Dames anglaises ¦ Dame englezești
+8 × 8, dames d’une case, prise en avant ¦ 8 × 8, dame de o căsuță, captură înainte
+Petit damier ¦ Tablă mică
+8 × 8 avec les règles internationales ¦ 8 × 8 cu regulile internaționale
+Internationales (10 × 10) ¦ Internaționale (10 × 10)
+8 × 8 internationales ¦ 8 × 8 internaționale
+Anglaises (8 × 8) ¦ Englezești (8 × 8)
+Internationales sur 8 × 8 (brésiliennes) ¦ Internaționale pe 8 × 8 (braziliene)
+Anglaises (8 × 8, checkers) ¦ Englezești (8 × 8, checkers)
+On joue sur les cases foncées. Les pions avancent en diagonale, d’une case, vers l’autre camp. Les noirs commencent. ¦ Se joacă pe căsuțele închise la culoare. Pionii înaintează pe diagonală, câte o căsuță, spre tabăra cealaltă. Negrele încep.
+On joue sur les cases foncées. Les pions avancent en diagonale, d’une case, vers l’autre camp. Les blancs commencent. ¦ Se joacă pe căsuțele închise la culoare. Pionii înaintează pe diagonală, câte o căsuță, spre tabăra cealaltă. Albele încep.
+<b>Prendre</b> : on saute par-dessus une pièce adverse qui touche la sienne, si la case derrière est libre ; on peut enchaîner plusieurs sauts (une <b>rafle</b>). <b>Prendre est obligatoire.</b> ¦ <b>Captura</b>: sari peste o piesă adversă care o atinge pe a ta, dacă e liberă căsuța din spatele ei; poți înlănțui mai multe sărituri (o <b>rafală</b>). <b>Captura e obligatorie.</b>
+Les pions prennent <b>seulement en avant</b>. On peut choisir la prise, mais une rafle commencée se joue jusqu’au bout. ¦ Pionii iau <b>doar înainte</b>. Poți alege captura, dar o rafală începută se joacă până la capăt.
+Un pion qui arrive sur la dernière ligne devient <b>dame</b> (le coup s’arrête là). La dame avance et recule <b>d’une case</b>. ¦ Un pion care ajunge pe ultimul rând devine <b>damă</b> (mutarea se oprește acolo). Dama înaintează și dă înapoi <b>câte o căsuță</b>.
+<b>Nulle</b> : la même position trois fois, ou 40 coups chacun sans prise ni pion avancé. ¦ <b>Remiză</b>: aceeași poziție de trei ori sau 40 de mutări fiecare fără captură și fără pion mutat.
+Les pions prennent <b>en avant et en arrière</b>. <b>Prise majoritaire</b> : il faut choisir la rafle qui prend le plus de pièces (une dame compte comme un pion). ¦ Pionii iau <b>înainte și înapoi</b>. <b>Captura maximă</b>: trebuie aleasă rafala care ia cele mai multe piese (o damă contează cât un pion).
+Pendant une rafle, les pièces prises restent sur le plateau jusqu’à la fin du coup : on ne peut pas sauter deux fois la même. ¦ În timpul unei rafale, piesele luate rămân pe tablă până la sfârșitul mutării: nu poți sări de două ori peste aceeași.
+Un pion devient <b>dame</b> s’il <b>termine</b> son coup sur la dernière ligne (s’il ne fait qu’y passer pendant une rafle, il reste pion). ¦ Un pion devine <b>damă</b> dacă își <b>încheie</b> mutarea pe ultimul rând (dacă doar trece pe acolo în timpul unei rafale, rămâne pion).
+La <b>dame vole</b> : elle glisse d’autant de cases qu’elle veut en diagonale, prend à distance et peut s’arrêter sur n’importe quelle case libre derrière la pièce prise. ¦ <b>Dama zboară</b>: alunecă pe diagonală câte căsuțe vrea, ia de la distanță și se poate opri pe orice căsuță liberă din spatele piesei luate.
+<b>Nulle</b> : la même position trois fois, ou 25 coups chacun en ne bougeant que des dames, sans prise. ¦ <b>Remiză</b>: aceeași poziție de trei ori sau 25 de mutări fiecare mișcând doar dame, fără captură.
+<b>On perd</b> quand on n’a plus de pièce ou plus de coup possible. ¦ <b>Pierzi</b> când nu mai ai nicio piesă sau nicio mutare posibilă.
+<b>Notation</b> : les cases foncées sont numérotées de 1 (en haut à gauche) à {n} ; « 32-28 » un déplacement, « 28x19 » une prise. ¦ <b>Notația</b>: căsuțele închise la culoare sunt numerotate de la 1 (sus în stânga) la {n}; „32-28” o deplasare, „28x19” o captură.
+<b>Jouer</b> : touche un pion puis sa case d’arrivée (ou glisse-le). Pour une rafle à plusieurs chemins, touche les cases une à une. Clavier : flèches, Entrée. ↶ (⌘Z) défait, 💡 (H) un conseil, Échap pause. ¦ <b>Joacă</b>: atinge un pion, apoi căsuța lui de sosire (sau trage-l). Pentru o rafală cu mai multe drumuri, atinge căsuțele una câte una. Tastatură: săgețile, Enter. ↶ (⌘Z) anulează, 💡 (H) un sfat, Esc pauză.
+👪 Les pions portent le nom d’ancêtres ¦ 👪 Pionii poartă numele unor strămoși
+• Montrer les cases où le pion peut aller ¦ • Arată căsuțele unde poate merge pionul
+⬇ Commence (en bas) ¦ ⬇ Începe (jos)
+⬆ En haut ¦ ⬆ Sus
+Retourner le damier ¦ Întoarce tabla
+Partie nulle ¦ Remiză
+gagné en {n} coups ¦ câștigat în {n} mutări
+{a} ({ca}) contre {b} ({cb}) ¦ {a} ({ca}) contra {b} ({cb})
+ (case possible) ¦ (căsuță posibilă)
+{name} gagne ({why}) ! ¦ {name} câștigă ({why})!
+prise obligatoire ({n} pièces) ¦ captură obligatorie ({n} piese)
+prise obligatoire ¦ captură obligatorie
+Le damier ¦ Tabla de dame
+La rafle continue : touche la case suivante (ou la dernière case pour revenir en arrière). ¦ Rafala continuă: atinge căsuța următoare (sau ultima căsuță pentru a reveni).
+« ↻ Rejouer » en haut : une revanche, on change de côté. ¦ „↻ Joacă din nou” sus: o revanșă, se schimbă părțile.
+Touche un pion puis sa case (ou glisse-le). Clavier : flèches, Entrée. ⌘Z annule, H un conseil, Échap pause. ¦ Atinge un pion, apoi căsuța lui (sau trage-l). Tastatură: săgețile, Enter. ⌘Z anulează, H un sfat, Esc pauză.
+Plusieurs rafles mènent ici : touche les cases une à une. ¦ Mai multe rafale duc aici: atinge căsuțele una câte una.
+Une prise est obligatoire (celle qui prend le plus de pièces). ¦ O captură e obligatorie (cea care ia cele mai multe piese).
+Une prise est obligatoire. ¦ O captură e obligatorie.
+Ce pion ne peut pas bouger. ¦ Acest pion nu se poate mișca.
+{list} sont pris. ¦ {list} sunt luate.
+{list} est pris. ¦ {list} e luat.
+la dame {name} ¦ dama {name}
+le pion {name} ¦ pionul {name}
+=pion ¦ pion|pioni|de pioni
+=dame ¦ damă|dame|de dame
+plus aucune pièce ¦ nicio piesă rămasă
+plus aucun coup possible ¦ nicio mutare posibilă
+nulle : la même position trois fois ¦ remiză: aceeași poziție de trei ori
+Nulle : la même position trois fois ¦ Remiză: aceeași poziție de trei ori
+nulle : trop de coups de dames sans prise ¦ remiză: prea multe mutări de dame fără captură
+Nulle : trop de coups de dames sans prise ¦ Remiză: prea multe mutări de dame fără captură
+dames|pion blanc ¦ pion alb
+dames|pion noir ¦ pion negru
+dames|dame blanc ¦ damă albă
+dames|dame noir ¦ damă neagră
+dames|Dame ¦ Damă
+dames|Pion ¦ Pion
+DOMINOS ¦ DOMINO
+Les dominos double-six, avec ou sans pioche : contre 1 à 3 ordinateurs, ou entre vous sur le même écran. Le comptage se fait tout seul. ¦ Domino dublu-șase, cu sau fără rezervă: contra a 1–3 calculatoare sau între voi pe același ecran. Punctele se numără singure.
+Pose un domino qui a le même nombre qu’un bout de la chaîne. Les règles complètes sont dans le « ? » de la partie. ¦ Pune o piesă de domino care are același număr ca un capăt al lanțului. Regulile complete sunt în „?” al partidei.
+Ex : Les dominos de Mémé ¦ Ex.: Dominoul Bunicii
+Avec pioche, en 100 points ¦ Cu rezervă, la 100 de puncte
+La partie la plus courante ¦ Partida cea mai obișnuită
+En 100 points ¦ La 100 de puncte
+Une seule manche ¦ O singură rundă
+Un jeu de <b>28 dominos</b>, de 0-0 (blanc-blanc) à 6-6 (double-six). À deux, chacun reçoit 7 dominos ; à trois ou quatre, 6. Le reste forme la <b>pioche</b>. ¦ Un joc de <b>28 de piese</b>, de la 0-0 (alb-alb) la 6-6 (dublu-șase). În doi, fiecare primește 7 piese; în trei sau patru, 6. Restul formează <b>rezerva</b>.
+À la première manche, celui qui a le <b>plus gros double</b> le pose pour commencer (s’il n’y a pas de double, le plus gros domino). Ensuite, c’est le gagnant de la manche d’avant qui commence. ¦ În prima rundă, cel care are <b>dubla cea mai mare</b> o pune ca să înceapă (dacă nu există nicio dublă, piesa cea mai mare). Apoi începe câștigătorul rundei dinainte.
+Chacun son tour, on pose un domino qui a le <b>même nombre</b> qu’un des deux bouts de la chaîne. ¦ Pe rând, fiecare pune o piesă care are <b>același număr</b> ca unul dintre cele două capete ale lanțului.
+Si on ne peut pas jouer : <b>avec pioche</b>, on pioche jusqu’à pouvoir jouer (pioche vide : on passe) ; <b>sans pioche</b>, on passe (« on boude »). ¦ Dacă nu poți juca: <b>cu rezervă</b>, tragi din rezervă până poți juca (rezervă goală: treci); <b>fără rezervă</b>, treci rândul.
+La manche s’arrête quand quelqu’un pose son dernier domino (« Domino ! »), ou quand plus personne ne peut jouer (partie <b>bloquée</b> : celui qui a le moins de points en main gagne). ¦ Runda se oprește când cineva își pune ultima piesă („Domino!”) sau când nimeni nu mai poate juca (partidă <b>blocată</b>: câștigă cel care are cele mai puține puncte în mână).
+<b>Comptage</b> : le gagnant de la manche marque les points (le total des points noirs) qui restent dans les mains des autres. Le premier qui atteint le score choisi gagne la partie. ¦ <b>Punctajul</b>: câștigătorul rundei primește punctele (totalul punctelor negre) care rămân în mâinile celorlalți. Primul care atinge scorul ales câștigă partida.
+<b>Jouer</b> : touche un domino de ta main ; s’il va des deux côtés, touche ensuite le bout de la chaîne (◀ ou ▶). Clavier : flèches dans ta main, Entrée. ↶ (⌘Z) défait, 💡 (H) un conseil, Échap pause. ¦ <b>Joacă</b>: atinge o piesă din mâna ta; dacă merge pe ambele părți, atinge apoi capătul lanțului (◀ sau ▶). Tastatură: săgețile în mâna ta, Enter. ↶ (⌘Z) anulează, 💡 (H) un sfat, Esc pauză.
+La pioche ¦ Rezerva
+Avec pioche ¦ Cu rezervă
+Sans pioche (on boude) ¦ Fără rezervă (treci rândul)
+La partie se joue ¦ Partida se joacă
+En une manche ¦ Într-o rundă
+En {n} points ¦ La {n} puncte
+👪 Les ordinateurs portent le nom d’ancêtres ¦ 👪 Calculatoarele poartă numele unor strămoși
+La partie s’arrête ici, comptée perdue. ¦ Partida se oprește aici, socotită pierdută.
+{n} points en une manche ¦ {n} puncte într-o rundă
+🏆 Nouveau record : ta plus grosse manche ! ¦ 🏆 Record nou: cea mai bună rundă a ta!
+Manche {n} finie ¦ Runda {n} s-a terminat
+Poser ici ¦ Pune aici
+Pose ton domino ici ¦ Pune piesa aici
+{name} commence avec le double {tile} (pas de double : le plus gros domino). ¦ {name} începe cu dubla {tile} (nicio dublă: piesa cea mai mare).
+{name} commence avec le double {tile}. ¦ {name} începe cu dubla {tile}.
+La chaîne est vide. ¦ Lanțul e gol.
+Poser au bout gauche ({n}) ¦ Pune la capătul din stânga ({n})
+Bout gauche ¦ Capătul din stânga
+Poser au bout droit ({n}) ¦ Pune la capătul din dreapta ({n})
+Bout droit ¦ Capătul din dreapta
+avec pioche ¦ cu rezervă
+sans pioche ¦ fără rezervă
+en {n} points ¦ la {n} puncte
+une seule manche ¦ o singură rundă
+=joueur ¦ jucător|jucători|de jucători
+{name}, à toi : que les autres détournent les yeux. ¦ {name}, e rândul tău: ceilalți să se uite în altă parte.
+Je suis {name} : voir mes dominos ¦ Sunt {name}: vezi piesele mele
+🔒 Partie bloquée : {name} gagne la manche et marque {pts}. ¦ 🔒 Partidă blocată: {name} câștigă runda și primește {pts}.
+🁫 Domino ! {name} gagne la manche et marque {pts}. ¦ 🁫 Domino! {name} câștigă runda și primește {pts}.
+🔒 Partie bloquée : {name} gagne la manche. ¦ 🔒 Partidă blocată: {name} câștigă runda.
+🁫 Domino ! {name} gagne la manche. ¦ 🁫 Domino! {name} câștigă runda.
+🔒 Partie bloquée, égalité : personne ne marque. ¦ 🔒 Partidă blocată, egalitate: nimeni nu primește puncte.
+Joueur ¦ Jucător
+En main ¦ În mână
+{name} gagne la partie avec {pts} ! ¦ {name} câștigă partida cu {pts}!
+Égalité. ¦ Egalitate.
+« ↻ Rejouer » en haut : une nouvelle partie. ¦ „↻ Joacă din nou” sus: o partidă nouă.
+Manche suivante ¦ Runda următoare
+Ce domino va des deux côtés : touche ◀ ou ▶ sur la chaîne. ¦ Această piesă merge pe ambele părți: atinge ◀ sau ▶ pe lanț.
+À toi, {name} : pose un domino. ¦ E rândul tău, {name}: pune o piesă.
+Tu ne peux pas jouer : pioche. ¦ Nu poți juca: trage din rezervă.
+Tu ne peux pas jouer : passe ton tour. ¦ Nu poți juca: treci rândul.
+{name} réfléchit… ¦ {name} se gândește…
+Pioche : {what} ¦ Rezervă: {what}
+Sans pioche ¦ Fără rezervă
+=domino ¦ piesă de domino|piese de domino|de piese de domino
+Les dominos de {name} ¦ Piesele lui {name}
+Tes dominos ¦ Piesele tale
+{pts} en main ¦ {pts} în mână
+Ta main ¦ Mâna ta
+Domino {tile}, jouable ¦ Piesa {tile}, se poate juca
+Domino {tile} ¦ Piesa {tile}
+Piocher ¦ Trage din rezervă
+Passer mon tour ¦ Treci rândul
+Manche finie ¦ Rundă terminată
+Le score (en {n}) ¦ Scorul (la {n})
+Le score ¦ Scorul
+Touche un domino jouable (encadré), puis ◀ ou ▶ s’il va des deux côtés. Clavier : ← → dans ta main, Entrée. ⌘Z annule, H un conseil, Échap pause. ¦ Atinge o piesă care se poate juca (încadrată), apoi ◀ sau ▶ dacă merge pe ambele părți. Tastatură: ← → în mâna ta, Enter. ⌘Z anulează, H un sfat, Esc pauză.
+Ce domino ne va sur aucun bout de la chaîne. ¦ Această piesă nu se potrivește la niciun capăt al lanțului.
+YAMS ¦ YAMS
+Yahtzee ¦ Yahtzee
+Le Yams (Yahtzee) : 5 dés, 3 lancers et la feuille de marque complète avec la prime. Seul, à plusieurs sur le même écran ou contre l’ordinateur. ¦ Yams (Yahtzee): 5 zaruri, 3 aruncări și foaia de punctaj completă, cu prima. Singur, în mai mulți pe același ecran sau contra calculatorului.
+Lance, garde les dés qui t’intéressent, relance deux fois au plus, puis remplis une case. Les règles complètes sont dans le « ? » de la partie. ¦ Aruncă, păstrează zarurile care te interesează, aruncă din nou de cel mult două ori, apoi completează o căsuță. Regulile complete sunt în „?” al partidei.
+Ex : Le Yams de Noël ¦ Ex.: Yams-ul de Crăciun
+La feuille ¦ Foaia
+Yams à la française ¦ Yams în stil francez
+Brelan et carré : les dés pareils ¦ Trei și patru de un fel: zarurile identice
+Yahtzee (américain) ¦ Yahtzee (american)
+Brelan et carré : la somme des 5 dés, joker ¦ Trei și patru de un fel: suma celor 5 zaruri, joker
+yams|As (les 1) ¦ Asul (1-urile)
+yams|Les 2 ¦ 2-urile
+yams|Les 3 ¦ 3-urile
+yams|Les 4 ¦ 4-urile
+yams|Les 5 ¦ 5-urile
+yams|Les 6 ¦ 6-urile
+yams|Brelan ¦ Trei de un fel
+yams|Carré ¦ Careu
+yams|Full ¦ Full
+yams|Petite suite ¦ Chintă mică
+yams|Grande suite ¦ Chintă mare
+yams|Yams ¦ Yams
+yams|Chance ¦ Șansă
+La somme des 1 ¦ Suma 1-urilor
+La somme des 2 ¦ Suma 2-urilor
+La somme des 3 ¦ Suma 3-urilor
+La somme des 4 ¦ Suma 4-urilor
+La somme des 5 ¦ Suma 5-urilor
+La somme des 6 ¦ Suma 6-urilor
+3 dés pareils : 3 × leur valeur ¦ 3 zaruri identice: 3 × valoarea lor
+4 dés pareils : 4 × leur valeur ¦ 4 zaruri identice: 4 × valoarea lor
+3 pareils + 2 pareils : 25 ¦ 3 identice + 2 identice: 25
+4 dés qui se suivent : 30 ¦ 4 zaruri consecutive: 30
+5 dés qui se suivent : 40 ¦ 5 zaruri consecutive: 40
+5 dés pareils : 50 ¦ 5 zaruri identice: 50
+La somme des 5 dés ¦ Suma celor 5 zaruri
+3 dés pareils : la somme des 5 dés ¦ 3 zaruri identice: suma celor 5 zaruri
+4 dés pareils : la somme des 5 dés ¦ 4 zaruri identice: suma celor 5 zaruri
+5 dés pareils : 50 (un autre : 100 de prime) ¦ 5 zaruri identice: 50 (încă unul: 100 de primă)
+Chacun son tour, on lance <b>5 dés</b>. On peut relancer <b>deux fois</b> : avant chaque relance, on garde les dés qu’on veut (touche un dé pour le garder, il passe en bleu). ¦ Pe rând, fiecare aruncă <b>5 zaruri</b>. Poți arunca din nou de <b>două ori</b>: înainte de fiecare aruncare, păstrezi zarurile pe care le vrei (atinge un zar ca să-l păstrezi, devine albastru).
+Après le dernier lancer (ou avant, si on est content), on <b>inscrit son résultat dans une case libre</b> de sa colonne. Chaque case ne sert qu’une fois ; si rien ne va, on met 0 dans une case. La partie finit quand les 13 cases sont remplies : le plus gros total gagne. ¦ După ultima aruncare (sau înainte, dacă ești mulțumit), <b>treci rezultatul într-o căsuță liberă</b> din coloana ta. Fiecare căsuță se folosește o singură dată; dacă nimic nu merge, pui 0 într-o căsuță. Partida se termină când cele 13 căsuțe sunt completate: câștigă totalul cel mai mare.
+<b>Prime</b> : si les cases du haut (1 à 6) font <b>63 points ou plus</b> (par exemple trois dés de chaque chiffre), on gagne <b>35 points</b> de plus. ¦ <b>Prima</b>: dacă căsuțele de sus (1 până la 6) fac <b>63 de puncte sau mai mult</b> (de exemplu trei zaruri din fiecare cifră), câștigi încă <b>35 de puncte</b>.
+<b>Yahtzee de plus</b> : si la case Yams contient déjà 50, chaque nouveau Yahtzee rapporte 100 points de prime ; il doit aller dans la case du haut de son chiffre si elle est libre, sinon il peut servir de Full, de Petite ou de Grande suite au maximum (« joker »). ¦ <b>Yahtzee în plus</b>: dacă în căsuța Yams e deja 50, fiecare Yahtzee nou aduce 100 de puncte de primă; trebuie pus în căsuța de sus a cifrei lui dacă e liberă, altfel poate servi ca Full, Chintă mică sau Chintă mare la maximum („joker”).
+<b>Jouer</b> : « 🎲 Lancer » (ou la touche L), touche les dés à garder (ou les touches 1 à 5), puis touche une case de ta colonne. Clavier : flèches dans la feuille, Entrée. ↶ (⌘Z) défait la dernière case remplie, 💡 (H) un conseil, Échap pause. ¦ <b>Joacă</b>: „🎲 Aruncă” (sau tasta L), atinge zarurile de păstrat (sau tastele 1 până la 5), apoi atinge o căsuță din coloana ta. Tastatură: săgețile în foaie, Enter. ↶ (⌘Z) anulează ultima căsuță completată, 💡 (H) un sfat, Esc pauză.
+La feuille de marque ¦ Foaia de punctaj
+Française (Yams) ¦ Franceză (Yams)
+Américaine (Yahtzee) ¦ Americană (Yahtzee)
+(+ {n} de prime Yahtzee !) ¦ (+ {n} primă Yahtzee!)
+Tour {n} sur 13 ¦ Tura {n} din 13
+{name} gagne ({n}) ¦ {name} câștigă ({n})
+Égalité ({n}) ¦ Egalitate ({n})
+{n} points ({name}) ¦ {n} puncte ({name})
+🏆 Nouveau record : {n} points ! ¦ 🏆 Record nou: {n} puncte!
+Lance les dés pour commencer ton tour. ¦ Aruncă zarurile ca să-ți începi tura.
+Garde tout : mets-le dans « {box} » ({pts}). ¦ Păstrează tot: pune-l în „{box}” ({pts}).
+Garde {dice} et relance le reste. ¦ Păstrează {dice} și aruncă din nou restul.
+Relance tous les dés. ¦ Aruncă din nou toate zarurile.
+Mets-le dans « {box} » ({pts}). ¦ Pune-l în „{box}” ({pts}).
+Total du haut ¦ Total sus
+Prime (63 → 35) ¦ Primă (63 → 35)
+il manque {n} ¦ mai lipsesc {n}
+Prime Yahtzee ¦ Primă Yahtzee
+Dé {i} : {v} ¦ Zarul {i}: {v}
+Dé {i} : {v}, gardé ¦ Zarul {i}: {v}, păstrat
+gardé ¦ păstrat
+{name} gagne avec {pts} ! ¦ {name} câștigă cu {pts}!
+Égalité à {pts} ! ¦ Egalitate la {pts}!
+{name} : garde des dés et relance ({n} encore), ou remplis une case. ¦ {name}: păstrează zaruri și aruncă din nou (încă {n}) sau completează o căsuță.
+{name} : remplis une case de ta colonne. ¦ {name}: completează o căsuță din coloana ta.
+À {name} : lance les dés. ¦ {name}: aruncă zarurile.
+{name} joue… ¦ {name} joacă…
+Les dés ¦ Zarurile
+Relancer ¦ Aruncă din nou
+Lancer ¦ Aruncă
+=lancer ¦ aruncare|aruncări|de aruncări
+=lancer restant ¦ aruncare rămasă|aruncări rămase|de aruncări rămase
+=partie gagnée ¦ partidă câștigată|partide câștigate|de partide câștigate
+« ↻ Rejouer » en haut : une nouvelle partie, le compte des victoires est gardé. ¦ „↻ Joacă din nou” sus: o partidă nouă, numărul victoriilor se păstrează.
+« 🎲 Lancer » (L), touche les dés à garder (1 à 5), puis une case de ta colonne. ⌘Z défait la dernière case, H un conseil, Échap pause. ¦ „🎲 Aruncă” (L), atinge zarurile de păstrat (1 până la 5), apoi o căsuță din coloana ta. ⌘Z anulează ultima căsuță, H un sfat, Esc pauză.
+Soif ¦ Sete
+Faim ¦ Foame
+Sommeil ¦ Somn
+Hygiène ¦ Igienă
+Toilettes ¦ Toaletă
+Eau potable ¦ Apă potabilă
+Eau de pluie (à filtrer) ¦ Apă de ploaie (de filtrat)
+Plantes ¦ Plante
+Nourriture ¦ Hrană
+rations ¦ rații
+Essence ¦ Benzină
+Clous et vis ¦ Cuie și șuruburi
+Corde ¦ Frânghie
+Colle ¦ Lipici
+Plastique ¦ Plastic
+Caoutchouc ¦ Cauciuc
+Fil de cuivre ¦ Sârmă de cupru
+Composants électroniques ¦ Componente electronice
+Piles et batteries ¦ Baterii și acumulatori
+Charbon ¦ Cărbune
+Fil à tisser ¦ Fir de țesut
+Blé ¦ Grâu
+Farine ¦ Făină
+Vêtements chauds ¦ Haine groase
+Grille-pain cassé ¦ Prăjitor de pâine stricat
+Vieille radio en panne ¦ Radio vechi defect
+Télévision cassée ¦ Televizor stricat
+Ordinateur hors d’usage ¦ Calculator scos din uz
+Vieux téléphone ¦ Telefon vechi
+Aspirateur ¦ Aspirator
+Rouleau de câbles abîmés ¦ Rolă de cabluri deteriorate
+Batterie de voiture usée ¦ Baterie de mașină uzată
+Vélo rouillé ¦ Bicicletă ruginită
+Pneu crevé ¦ Cauciuc spart
+Chaise cassée ¦ Scaun stricat
+Palette en bois ¦ Palet de lemn
+Vieux matelas ¦ Saltea veche
+Rideaux déchirés ¦ Perdele rupte
+Parapluie cassé ¦ Umbrelă stricată
+Caisse de bouteilles vides ¦ Ladă cu sticle goale
+Bocaux ébréchés ¦ Borcane ciobite
+Jouets en plastique ¦ Jucării de plastic
+Casserole trouée ¦ Cratiță găurită
+Boîtes de conserve vides ¦ Cutii de conserve goale
+Seau percé ¦ Găleată spartă
+Machine à coudre bloquée ¦ Mașină de cusut blocată
+Montre arrêtée ¦ Ceas oprit
+Réveil cassé ¦ Ceas deșteptător stricat
+Tuyau d’arrosage fendu ¦ Furtun de grădină crăpat
+Filet de pêche emmêlé ¦ Plasă de pescuit încâlcită
+Tuiles et gravats ¦ Țigle și moloz
+Vieux cartable ¦ Ghiozdan vechi
+Pots de colle à moitié secs ¦ Borcane de lipici pe jumătate uscate
+Boîte de vis mélangées ¦ Cutie cu șuruburi amestecate
+Barbecue rouillé ¦ Grătar ruginit
+Réfrigérateur mort ¦ Frigider mort
+Sèche-cheveux grillé ¦ Uscător de păr ars
+Guitare sans manche ¦ Chitară fără gât
+Panneau de signalisation ¦ Indicator rutier
+Fenêtre arrachée ¦ Fereastră smulsă
+Tonneau défoncé ¦ Butoi spart
+Rouet cassé ¦ Roată de tors stricată
+Chaudron percé ¦ Ceaun găurit
+Lanterne brisée ¦ Felinar spart
+Vieux sabots ¦ Saboți vechi
+Roue de charrette ¦ Roată de căruță
+Harnais usé ¦ Ham uzat
+Radio ¦ Radio
+Parler avec ceux qui sont partis en ville (il faut de l’électricité). ¦ Vorbește cu cei care au plecat în oraș (trebuie electricitate).
+Fait l’électricité avec l’essence (¼ L par heure). ¦ Face electricitate cu benzina (¼ L pe oră).
+On y construit les objets dont on a le plan (il faut de l’électricité). ¦ Aici construiești obiectele pentru care ai planul (trebuie electricitate).
+Le crieur et la gazette ¦ Crainicul și gazeta
+Un gamin du quartier porte les nouvelles de ceux qui sont dehors ; le crieur annonce le marché. ¦ Un copil din cartier aduce vești de la cei de afară; crainicul anunță piața.
+La cheminée ¦ Șemineul
+Elle chauffe l’abri l’hiver (du bois) et on y cuit les plats. On s’éclaire à la chandelle. ¦ Încălzește adăpostul iarna (cu lemne) și pe el se gătesc mâncărurile. Lumina vine de la lumânare.
+Sans toilettes, on se soulage dans un coin : l’hygiène en prend un coup. ¦ Fără toaletă, te ușurezi într-un colț: igiena are de suferit.
+Une douche : 3 L d’eau et de l’électricité pour la pompe. ¦ Un duș: 3 L de apă și electricitate pentru pompă.
++30 rations de place. ¦ +30 de rații de spațiu.
+On dort deux fois mieux dans un lit (un dormeur par lit). ¦ Într-un pat se doarme de două ori mai bine (un om pe pat).
+Étagères ¦ Rafturi
++10 de place pour chaque réserve. ¦ +10 spațiu pentru fiecare rezervă.
+Stockage ¦ Depozitare
++25 de place pour chaque réserve. ¦ +25 spațiu pentru fiecare rezervă.
+Cuve d’eau de pluie ¦ Rezervor de apă de ploaie
++30 L de place pour l’eau de pluie ; quand il pleut, elle se remplit toute seule (+2 L par heure). À passer au filtre avant de la boire. ¦ +30 L de spațiu pentru apa de ploaie; când plouă, se umple singur (+2 L pe oră). Trebuie trecută prin filtru înainte de a fi băută.
+Citerne ¦ Cisternă
++60 L d’eau de place. ¦ +30 L de apă de spațiu.
+Filtre à eau ¦ Filtru de apă
+Sable, charbon de bois et tissu : rend l’eau de pluie potable (3 L par heure). Il faut 1 tissu tous les 30 L pour le nettoyer. ¦ Nisip, cărbune de lemn și pânză: face apa de ploaie potabilă (3 L pe oră). Trebuie 1 bucată de pânză la fiecare 30 L ca să-l cureți.
+Quand on n’a rien à faire, on joue : le moral remonte. ¦ Când nu ai nimic de făcut, te joci: moralul crește.
+Porte renforcée ¦ Ușă întărită
+Les pillards ont bien plus de mal à entrer. ¦ Jefuitorii intră mult mai greu.
+Pièges dans l’entrée ¦ Capcane la intrare
+Des surprises pour qui force la trappe. ¦ Surprize pentru cine forțează trapa.
+L’hiver, il chauffe le bunker (1 bois toutes les 4 heures). Sans lui, on a froid : on dort mal et le moral baisse. ¦ Iarna încălzește buncărul (1 lemn la fiecare 4 ore). Fără ea ți-e frig: dormi prost și moralul scade.
+Dynamo à pédales ¦ Dinam cu pedale
+Quelqu’un pédale (travail « Pédaler ») : de l’électricité sans essence, mais on se fatigue. ¦ Cineva pedalează (munca „Pedalează”): electricitate fără benzină, dar obosești.
+Pour accueillir un bébé (sans berceau, pas de naissance au bunker). ¦ Pentru a primi un bebeluș (fără leagăn, nicio naștere în buncăr).
+Tourne-disque ¦ Pick-up
+De la musique (il faut de l’électricité) : le moral remonte deux fois plus vite qu’avec les jeux. ¦ Muzică (trebuie electricitate): moralul crește de două ori mai repede decât cu jocurile.
+Panneau solaire ¦ Panou solar
+De l’électricité le jour, quand il ne pleut pas. ¦ Electricitate ziua, când nu plouă.
+Petite éolienne ¦ Turbină eoliană mică
+De l’électricité quand il y a du vent. ¦ Electricitate când bate vântul.
+Récupérateur de pluie ¦ Colector de ploaie
+La pluie remplit l’eau trois fois plus vite (bidons du toit et cuves). ¦ Ploaia umple apa de trei ori mai repede (bidoanele de pe acoperiș și rezervoarele).
+Potager sous lampe ¦ Grădină de legume sub lampă
+Une ration toutes les 8 h (deux avec un bon jardinier), avec 1 L d’eau et de l’électricité ; et des plantes pour les remèdes. ¦ O rație la fiecare 8 h (două cu un grădinar bun), cu 1 L de apă și electricitate; și plante pentru leacuri.
+Infirmerie ¦ Infirmerie
+La santé remonte deux fois plus vite. ¦ Sănătatea crește de două ori mai repede.
+Groupe économe ¦ Generator economic
+L’électricité coûte moitié moins d’essence. ¦ Electricitatea consumă de două ori mai puțină benzină.
+Pour démonter le bric-à-brac : deux fois plus vite, et sans abîmer les pièces (un composant de plus, parfois). ¦ Pentru a demonta vechiturile: de două ori mai repede și fără a strica piesele (uneori o componentă în plus).
+Débarras ¦ Debara
++20 places pour le bric-à-brac à démonter. ¦ +20 de locuri pentru vechiturile de demontat.
+Boîtes à composants ¦ Cutii pentru componente
+De la place en plus pour tous les composants. ¦ Spațiu în plus pentru toate componentele.
+Barricade ¦ Baricadă
+Des planches clouées en travers de l’entrée. ¦ Scânduri bătute în cuie de-a curmezișul intrării.
+Une toilette rapide de temps en temps : l’hygiène baisse moins vite (et un peu d’eau de pluie). ¦ O spălare rapidă din când în când: igiena scade mai încet (și puțină apă de ploaie).
+Coin lecture ¦ Colț de lectură
+Des livres et un fauteuil : le moral remonte, sans électricité. ¦ Cărți și un fotoliu: moralul crește, fără electricitate.
+L’arbre de famille au mur ¦ Arborele familiei pe perete
+L’arbre peint au mur, avec les noms de tous : le moral s’use moins vite. ¦ Arborele pictat pe perete, cu numele tuturor: moralul scade mai încet.
+Bac à compost ¦ Ladă de compost
+Les épluchures deviennent du terreau : 1 plante toutes les 12 h. ¦ Cojile devin pământ fertil: 1 plantă la fiecare 12 h.
+Guitare ¦ Chitară
+Quelqu’un joue le soir : le moral remonte presque autant qu’avec la musique, sans électricité. ¦ Cineva cântă seara: moralul crește aproape la fel de mult ca cu muzica, fără electricitate.
+On se défoule : le moral remonte. ¦ Te descarci: moralul crește.
+Télévision et cassettes ¦ Televizor și casete
+Des films d’avant (il faut de l’électricité) : le moral remonte très vite. ¦ Filme de altădată (trebuie electricitate): moralul crește foarte repede.
+Regarder les poissons calme tout le monde (il faut de l’électricité pour la pompe). ¦ Privitul peștilor îi liniștește pe toți (trebuie electricitate pentru pompă).
+Banc de batteries ¦ Banc de baterii
+Garde l’électricité en réserve (8 h) : quand il n’y a ni soleil, ni vent, ni essence, le bunker reste éclairé. ¦ Păstrează electricitatea în rezervă (8 h): când nu e nici soare, nici vânt, nici benzină, buncărul rămâne luminat.
+Ampoules économes ¦ Becuri economice
+L’électricité coûte un quart d’essence en moins. ¦ Electricitatea consumă cu un sfert mai puțină benzină.
+Chaudière à charbon ¦ Cazan pe cărbune
+L’hiver, elle chauffe avec du charbon (¼ toutes les heures) quand le poêle n’a plus de bois. ¦ Iarna încălzește cu cărbune (¼ pe oră) când soba nu mai are lemne.
+Ventilateur du conduit ¦ Ventilator pentru conductă
+L’air s’encrasse moins vite (il faut de l’électricité). ¦ Aerul se murdărește mai încet (trebuie electricitate).
+Filtre à air au charbon ¦ Filtru de aer cu cărbune
+L’air reste bon bien plus longtemps (il faut de l’électricité). ¦ Aerul rămâne bun mult mai mult timp (trebuie electricitate).
+Serre sous verrière ¦ Seră sub luminator
+Sous le puits de lumière : 1 ration et 1 plante toutes les 12 h, sans électricité (de l’eau de pluie pour arroser). ¦ Sub puțul de lumină: 1 rație și 1 plantă la fiecare 12 h, fără electricitate (apă de ploaie pentru udat).
+Champignonnière ¦ Ciupercărie
+Dans le noir, sur du bois mouillé : 1 ration toutes les 12 h, sans électricité. ¦ În întuneric, pe lemn ud: 1 rație la fiecare 12 h, fără electricitate.
+3 rations par jour s’il y a 1 plante pour les nourrir. ¦ 3 rații pe zi dacă e 1 plantă ca să le hrănești.
+Des œufs : 1 ration toutes les 12 h (un peu de plantes pour le grain). ¦ Ouă: 1 rație la fiecare 12 h (puține plante pentru grăunțe).
+Bouilleur d’eau ¦ Fierbător de apă
+Fait bouillir l’eau de pluie au feu de bois : 2 L d’eau potable par heure, sans tissu ni électricité. ¦ Fierbe apa de ploaie pe foc de lemne: 2 L de apă potabilă pe oră, fără pânză și fără electricitate.
+Petit laboratoire ¦ Laborator mic
+Des plantes, on tire des médicaments : 1 toutes les 12 h (il faut de l’électricité). ¦ Din plante obții medicamente: 1 la fiecare 12 h (trebuie electricitate).
+Fourneau de cuisine ¦ Plită de bucătărie
+Une bonne cuisine fait durer les réserves : 2 rations de plus par jour avec 1 plante (deux fois plus avec un cuisinier). ¦ O bucătărie bună face rezervele să țină mai mult: 2 rații în plus pe zi cu 1 plantă (de două ori mai mult cu un bucătar).
+Coin couture ¦ Colț de croitorie
+Des sacs plastique tressés : 1 tissu et 1 corde toutes les 12 h. ¦ Pungi de plastic împletite: 1 pânză și 1 frânghie la fiecare 12 h.
+Petite forge ¦ Forjă mică
+Démonter va plus vite ; et avec du charbon, on forge des clous (3 toutes les 8 h). ¦ Demontatul merge mai repede; și cu cărbune făurești cuie (3 la fiecare 8 h).
+Lit d’infirmerie ¦ Pat de infirmerie
+Les malades guérissent plus vite. ¦ Bolnavii se vindecă mai repede.
+Périscope ¦ Periscop
+On voit qui frappe à la trappe avant d’ouvrir : bien plus dur de nous surprendre. ¦ Vezi cine bate la trapă înainte să deschizi: e mult mai greu să fim luați prin surprindere.
+Alarme de la trappe ¦ Alarma trapei
+Un fil tendu et une sonnerie : personne n’entre sans qu’on le sache. ¦ Un fir întins și o sonerie: nimeni nu intră fără să știm.
+Talkies-walkies ¦ Stații walkie-talkie
+On entend ceux qui sont dehors même sans électricité au bunker. ¦ Îi auzi pe cei de afară chiar și fără electricitate în buncăr.
+Grande carte de la ville ¦ Harta mare a orașului
+Une fois finie : tous les lieux de la ville sont marqués, même ceux où personne n’est allé. ¦ Odată terminată: toate locurile din oraș sunt marcate, chiar și cele unde n-a mers nimeni.
+Vélo réparé ¦ Bicicletă reparată
+On va et on revient en ville bien plus vite. ¦ Mergi și te întorci din oraș mult mai repede.
+On rapporte 10 de plus à chaque sortie. ¦ Aduci 10 în plus la fiecare ieșire.
+Sacs à dos cousus ¦ Rucsacuri cusute
+Des sacs solides pour chacun : on rapporte 4 de plus à chaque sortie. ¦ Saci solizi pentru fiecare: aduci 4 în plus la fiecare ieșire.
+Hotte en osier ¦ Coș de nuiele
+Sur le dos, comme les vendangeurs : on rapporte 6 de plus. ¦ În spate, ca la cules de struguri: aduci 6 în plus.
+On rapporte 8 de plus à chaque sortie. ¦ Aduci 8 în plus la fiecare ieșire.
+Remorque de vélo ¦ Remorcă de bicicletă
+Accrochée au vélo réparé : on rapporte 15 de plus (sans vélo, elle ne sert à rien). ¦ Prinsă de bicicleta reparată: aduci 15 în plus (fără bicicletă nu folosește la nimic).
+Garde-manger frais ¦ Cămară răcoroasă
++50 rations et +15 plantes de place. ¦ +50 de rații și +15 plante de spațiu.
+Bidons d’essence ¦ Canistre de benzină
++40 L d’essence de place. ¦ +40 L de benzină de spațiu.
+Pièges à rats ¦ Capcane pentru șobolani
+Les rats et les cafards reculent : ils mangent bien moins de réserves. ¦ Șobolanii și gândacii se retrag: mănâncă mult mai puțin din rezerve.
+Bocaux hermétiques ¦ Borcane ermetice
+Les réserves bien fermées : les nuisibles en mangent deux fois moins. ¦ Rezervele bine închise: dăunătorii mănâncă de două ori mai puțin din ele.
+Extincteur ¦ Extinctor
+Un départ de feu est éteint tout de suite (option « incendies »). ¦ Un început de incendiu e stins imediat (opțiunea „incendii”).
+Coin des bêtes ¦ Colțul animalelor
+Une niche, un panier, un perchoir : les animaux restent, et ça fait plaisir à tout le monde. ¦ O cușcă, un coș, o stinghie: animalele rămân și asta le face plăcere tuturor.
+Des fibres de plantes, on file : 2 fils toutes les 8 h (1 plante). ¦ Din fibrele plantelor torci: 2 fire la fiecare 8 h (1 plantă).
+Du fil, on tisse : 2 tissus toutes les 12 h (3 fils). ¦ Din fir țeși: 2 pânze la fiecare 12 h (3 fire).
+Coin du tailleur ¦ Colțul croitorului
+Des vêtements chauds (2 tissus et 1 fil par jour) : l’hiver, le froid fait bien moins de mal. ¦ Haine groase (2 pânze și 1 fir pe zi): iarna, frigul face mult mai puțin rău.
+Champ sous verrière ¦ Câmp sub luminator
+Du blé sous le puits de lumière : 2 toutes les 12 h, le jour (1 L d’eau de pluie). ¦ Grâu sub puțul de lumină: 2 la fiecare 12 h, ziua (1 L de apă de ploaie).
+Moulin à bras ¦ Râșniță de mână
+Le blé devient farine : 2 toutes les 6 h. ¦ Grâul devine făină: 2 la fiecare 6 h.
+Du pain : 4 rations toutes les 12 h (2 farines et un peu de bois). ¦ Pâine: 4 rații la fiecare 12 h (2 de făină și puține lemne).
+Armoire à pharmacie ¦ Dulăpior de farmacie
++15 médicaments et +15 plantes de place. ¦ +15 medicamente și +15 plante de spațiu.
+Puits creusé ¦ Fântână săpată
+L’eau de la nappe : 1 L toutes les 2 h, même sans pluie (à filtrer avant de la boire). ¦ Apa din pânza freatică: 1 L la fiecare 2 h, chiar și fără ploaie (de filtrat înainte de a fi băută).
+Fumoir ¦ Afumătoare
+On fume et on sèche ce qu’on a : 1,5 ration toutes les 12 h (1 plante, un peu de bois). ¦ Afumi și usuci ce ai: 1,5 rații la fiecare 12 h (1 plantă, puține lemne).
+Du miel : 1 ration par jour, et de quoi soigner (le miel sur les plaies). Le bourdonnement fait du bien. ¦ Miere: 1 rație pe zi și ceva cu care să îngrijești (miere pe răni). Bâzâitul face bine.
+Pressoir à fruits ¦ Presă de fructe
+Du jus et de la compote : 1 ration et 1 L à boire toutes les 12 h (2 plantes). ¦ Suc și compot: 1 rație și 1 L de băut la fiecare 12 h (2 plante).
+Édredons de plume ¦ Plapume de puf
+L’hiver, on a moins froid (comme avec des vêtements chauds), et on dort mieux. ¦ Iarna ți-e mai puțin frig (ca și cu haine groase) și dormi mai bine.
+Lanternes à huile ¦ Lămpi cu ulei
+On y voit clair même sans électricité : le moral tient mieux. ¦ Vezi bine chiar și fără electricitate: moralul rezistă mai bine.
+Le tic-tac rassure : on dort mieux, on garde le fil des jours. ¦ Tic-tacul liniștește: dormi mai bine, nu pierzi șirul zilelor.
+On danse dans la cave : le moral remonte plus vite qu’avec la musique du tourne-disque, sans électricité. ¦ Se dansează în pivniță: moralul crește mai repede decât cu muzica de la pick-up, fără electricitate.
+Jeu d’échecs ¦ Joc de șah
+De longues parties le soir : le moral remonte, sans électricité. ¦ Partide lungi seara: moralul crește, fără electricitate.
+Jardin de simples ¦ Grădină de plante medicinale
+Sauge, thym, camomille : 1 plante toutes les 12 h (un peu d’eau de pluie), pour les remèdes. ¦ Salvie, cimbru, mușețel: 1 plantă la fiecare 12 h (puțină apă de ploaie), pentru leacuri.
+Pharmacie de grand-mère ¦ Farmacia bunicii
+Des bocaux d’onguents et de tisanes : les malades guérissent plus vite. ¦ Borcane cu unguente și ceaiuri: bolnavii se vindecă mai repede.
+Gouttières ¦ Jgheaburi
+Le toit renvoie l’eau vers les bidons : +1,5 L par heure quand il pleut. ¦ Acoperișul trimite apa spre bidoane: +1,5 L pe oră când plouă.
+Fosse piégée ¦ Groapă-capcană
+Un trou couvert de branches devant la trappe : les pillards y tombent. ¦ O groapă acoperită cu crengi în fața trapei: jefuitorii cad în ea.
+Meurtrières et arbalète ¦ Ambrazuri și arbaletă
+On tire sans ouvrir : les pillards reculent. ¦ Tragi fără să deschizi: jefuitorii se retrag.
+Brancard et attelles ¦ Targă și atele
+Les blessés sont bien installés : ils guérissent plus vite. ¦ Răniții sunt bine așezați: se vindecă mai repede.
+Boussole et carnet de route ¦ Busolă și carnet de drum
+Les raccourcis notés au fil des sorties : on va et on revient plus vite. ¦ Scurtăturile notate de la o ieșire la alta: mergi și te întorci mai repede.
+Traîneau ¦ Sanie
+On tire la charge derrière soi : on rapporte 7 de plus à chaque sortie. ¦ Tragi încărcătura după tine: aduci 7 în plus la fiecare ieșire.
+Nasses et filets ¦ Vârșe și plase
+Posées dans le canal : 2 rations de poisson par jour. ¦ Puse în canal: 2 rații de pește pe zi.
+Le linge propre : l’hygiène baisse moins vite. ¦ Rufele curate: igiena scade mai încet.
+Des pigeons voyageurs : on a des nouvelles de ceux qui sont dehors, même sans électricité. ¦ Porumbei voiajori: primești vești de la cei de afară, chiar și fără electricitate.
+Cave à vin ¦ Pivniță de vin
+Un petit verre les soirs de fête : le moral tient bien mieux. ¦ Un păhărel în serile de sărbătoare: moralul rezistă mult mai bine.
+Four solaire ¦ Cuptor solar
+Sous le puits de lumière : on cuit les plats sans bois (pour les recettes). ¦ Sub puțul de lumină: gătești mâncărurile fără lemne (pentru rețete).
+Malle à bretelles ¦ Cufăr cu bretele
+Sur le dos de chacun, en plus du reste : +3 à porter. ¦ În spatele fiecăruia, pe lângă rest: +3 de cărat.
+Bâts et sangles ¦ Samare și chingi
+Sur chaque âne : +5 de charge. Sans bête de bât, ils ne servent à rien. ¦ Pe fiecare măgar: +5 la încărcătură. Fără animal de povară nu folosesc la nimic.
+Vélo cargo (triporteur) ¦ Bicicletă cargo (triciclu)
+Un vélo avec une grande caisse : +14. Mauvais dans la boue et la neige. ¦ O bicicletă cu o ladă mare: +14. Proastă în noroi și zăpadă.
+Caddie de supermarché ¦ Cărucior de supermarket
++9 sur la route ; presque rien sur les chemins, la boue ou la neige. S’use vite. ¦ +9 pe șosea; aproape nimic pe drumuri de țară, în noroi sau zăpadă. Se uzează repede.
+Poussette renforcée ¦ Cărucior de copil întărit
++6, plutôt sur la route. S’use vite. ¦ +6, mai ales pe șosea. Se uzează repede.
+Carriole attelée ¦ Căruță cu atelaj
+La plus grosse charge (+25), tirée par un cheval (il faut un cheval). ¦ Cea mai mare încărcătură (+25), trasă de un cal (trebuie un cal).
+Barque ¦ Barcă
+Seulement sur l’eau : +20 dans les rues inondées et au bord des rivières, rien ailleurs. ¦ Doar pe apă: +20 pe străzile inundate și pe malul râurilor, nimic în altă parte.
+Chariot de mine ¦ Vagonet de mină
+Une fois les rails posés vers un lieu proche (4 cases au plus) : on y va deux fois plus vite et on en rapporte 30 de plus. ¦ Odată puse șinele spre un loc apropiat (cel mult 4 căsuțe): mergi acolo de două ori mai repede și aduci 30 în plus.
+Petite turbine hydraulique ¦ Turbină hidraulică mică
+Quand il pleut, l’eau qui ruisselle dans le conduit fait de l’électricité. ¦ Când plouă, apa care curge prin conductă face electricitate.
+Pelle ¦ Lopată
+creuser deux fois plus vite ¦ sapi de două ori mai repede
+Scie ¦ Ferăstrău
+construire plus vite ¦ construiești mai repede
+Clé à molette ¦ Cheie franceză
+obligatoire pour certains plans ¦ obligatorie pentru unele planuri
+Grand sac ¦ Sac mare
+rapporter deux fois plus ¦ aduci de două ori mai mult
+Lampe torche ¦ Lanternă
+marcher de nuit aussi vite que de jour ¦ mergi noaptea la fel de repede ca ziua
+Supermarché ¦ Supermarket
+Station-service ¦ Benzinărie
+Quincaillerie ¦ Magazin de feronerie
+Menuiserie ¦ Tâmplărie
+Pharmacie ¦ Farmacie
+Maison abandonnée ¦ Casă părăsită
+Décharge ¦ Groapă de gunoi
+Magasin d’électroménager ¦ Magazin de electrocasnice
+Droguerie ¦ Drogherie
+Usine abandonnée ¦ Fabrică părăsită
+Ferme ¦ Fermă
+Gare ¦ Gară
+Port de pêche ¦ Port de pescuit
+Hôpital ¦ Spital
+Construire ¦ Construiește
+Soigner ¦ Îngrijește
+Cultiver ¦ Cultivă
+Cuisiner ¦ Gătește
+Fouiller ¦ Scotocește
+Défendre ¦ Apără
+Raconter ¦ Povestește
+Été ¦ Vară
+Automne ¦ Toamnă
+Hiver ¦ Iarnă
+on construit 20 % plus vite ¦ se construiește cu 20 % mai repede
+les histoires du soir font plus de bien ¦ poveștile de seară fac mai mult bine
+le moral baisse moins vite ¦ moralul scade mai încet
++3 tissu, et on dort mieux ¦ +3 pânză și se doarme mai bine
+les repas nourrissent davantage ¦ mesele hrănesc mai mult
+le moral de départ est meilleur ¦ moralul de pornire e mai bun
+l’histoire du loup qui avait peur du noir ¦ povestea lupului căruia îi era frică de întuneric
+la légende de la dame blanche du moulin ¦ legenda doamnei albe de la moară
+le jour où l’oncle a vendu la vache deux fois ¦ ziua în care unchiul a vândut vaca de două ori
+la grande crue, quand l’eau est montée jusqu’à l’église ¦ marea revărsare, când apa a urcat până la biserică
+le bal du 14 juillet où tout le monde s’est rencontré ¦ balul de 14 iulie unde s-au cunoscut toți
+la recette perdue du gâteau de la grand-mère ¦ rețeta pierdută a prăjiturii bunicii
+Courageux·se ¦ Curajos/curajoasă
+se défend mieux, se blesse moins dehors ¦ se apără mai bine, se rănește mai puțin afară
+Peureux·se ¦ Fricos/fricoasă
+se défend moins bien, le moral chute quand on frappe à la trappe ¦ se apără mai prost, moralul cade când bate cineva la trapă
+Gourmand·e ¦ Mâncăcios/mâncăcioasă
+a faim plus vite, mais un repas lui remonte le moral ¦ i se face foame mai repede, dar o masă îi ridică moralul
+Bricoleur·se ¦ Meșter/meșteriță
+construit et répare plus vite ¦ construiește și repară mai repede
+Optimiste ¦ Optimist/optimistă
+le moral baisse deux fois moins vite ¦ moralul scade de două ori mai încet
+Ronchon·ne ¦ Bombănitor/bombănitoare
+le moral baisse plus vite, se fâche facilement ¦ moralul scade mai repede, se supără ușor
+Gros·se dormeur·se ¦ Somnoros/somnoroasă
+a besoin de plus de sommeil ¦ are nevoie de mai mult somn
+Sociable ¦ Sociabil/sociabilă
+se fait vite des amis ¦ își face repede prieteni
+Solitaire ¦ Singuratic/singuratică
+la foule lui pèse ; dehors, se débrouille mieux ¦ mulțimea îl apasă; afară se descurcă mai bine
+Maniaque ¦ Maniac/maniacă
+être sale lui mine le moral ¦ murdăria îi strică moralul
+🙂 Facile ¦ 🙂 Ușor
+😐 Normal ¦ 😐 Normal
+😬 Difficile ¦ 😬 Dificil
+💀 Extrême ¦ 💀 Extrem
+L’abri, la ville, et tenir le plus longtemps possible. ¦ Adăpostul, orașul și să rezistați cât mai mult.
+Hiver nucléaire ¦ Iarnă nucleară
+L’hiver ne finit jamais : du bois ou du charbon pour chauffer, et presque pas de soleil pour les panneaux. ¦ Iarna nu se mai termină: lemne sau cărbune pentru încălzit și aproape deloc soare pentru panouri.
+Épidémie ¦ Epidemie
+La fièvre court la ville : on peut l’attraper dehors, et même au bunker. Des médicaments au départ. ¦ Febra bântuie orașul: te poți îmbolnăvi afară și chiar în buncăr. Medicamente la început.
+Inondation ¦ Inundație
+Il pleut sans arrêt : beaucoup d’eau à filtrer, mais les étages du bas prennent l’eau. ¦ Plouă întruna: multă apă de filtrat, dar etajele de jos iau apă.
+Pénurie ¦ Penurie
+La ville a déjà été pillée : peu de choses dans les lieux, et elles reviennent lentement. ¦ Orașul a fost deja jefuit: puține lucruri prin locuri și revin încet.
+Pillards ¦ Jefuitori
+Des bandes rôdent dès le premier jour : portes, pièges et tours de garde. ¦ Bande dau târcoale din prima zi: uși, capcane și ture de pază.
+Le grand hiver de 1709 ¦ Marea iarnă din 1709
+Janvier 1709 : le froid fend les arbres et gèle la Seine. Du bois, beaucoup de bois, et le blé gelé manque partout. Ni électricité ni radio : le crieur et la gazette. ¦ Ianuarie 1709: gerul crapă copacii și îngheață Sena. Lemne, multe lemne, iar grâul înghețat lipsește peste tot. Nici electricitate, nici radio: crainicul și gazeta.
+La peste de Marseille, 1720 ¦ Ciuma din Marsilia, 1720
+Été 1720 : la peste arrive par le port. On l’attrape en ville et même à l’abri : du vinaigre, des plantes, et le moins de sorties possible. ¦ Vara lui 1720: ciuma vine prin port. Te îmbolnăvești în oraș și chiar în adăpost: oțet, plante și cât mai puține ieșiri.
+Le siège de Paris, 1870-1871 ¦ Asediul Parisului, 1870-1871
+Septembre 1870 : Paris est encerclé. Plus rien n’entre : on rationne, on mange ce qu’on trouve (même les rats), les obus tombent. Le gaz, pas l’électricité. ¦ Septembrie 1870: Parisul e încercuit. Nu mai intră nimic: se raționalizează, se mănâncă ce se găsește (chiar și șobolani), cad obuze. Gaz, nu electricitate.
+La grande crue de Paris, 1910 ¦ Marea inundație a Parisului, 1910
+Janvier 1910 : la Seine monte de huit mètres. Les caves prennent l’eau, il pleut sans fin. L’électricité, oui ; la radio, pas encore. ¦ Ianuarie 1910: Sena crește cu opt metri. Pivnițele iau apă, plouă fără sfârșit. Electricitate, da; radio, încă nu.
+L’exode de 1940 ¦ Exodul din 1940
+Juin 1940 : des millions de gens sur les routes. L’abri est une cave de ferme près d’Orléans : des réfugiés à la trappe, l’essence rare, les routes mitraillées. ¦ Iunie 1940: milioane de oameni pe drumuri. Adăpostul e o pivniță de fermă lângă Orléans: refugiați la trapă, benzină puțină, drumuri mitraliate.
+Osier ¦ Răchită
+Fil de laiton ¦ Sârmă de alamă
+Halles du marché ¦ Halele pieței
+Relais de poste ¦ Stație de poștă
+Taillanderie ¦ Atelier de unelte
+Apothicaire ¦ Spițerie
+Manufacture ¦ Manufactură
+Hôtel-Dieu ¦ Hôtel-Dieu
+Hôtel de ville ¦ Primărie
+Petite école ¦ Școală mică
+Couvent ¦ Mănăstire
+Tas de gravats ¦ Grămadă de moloz
+Droguiste ¦ Drogist
+en France ¦ în Franța
+🌸 Le dégel arrive enfin : vous avez passé le grand hiver de 1709 ! ¦ 🌸 Vine în sfârșit dezghețul: ați trecut de marea iarnă din 1709!
+en Provence ¦ în Provence
+🕊️ La peste recule : on sort de l’abri, vivants. Vous avez tenu ! ¦ 🕊️ Ciuma se retrage: ieșiți din adăpost, vii. Ați rezistat!
+en Île-de-France ¦ în Île-de-France
+🕊️ L’armistice est signé : le siège est fini, les ravitaillements arrivent. Vous avez tenu ! ¦ 🕊️ Armistițiul e semnat: asediul s-a terminat, sosesc proviziile. Ați rezistat!
+🌤️ La Seine redescend : la crue est passée. Vous avez tenu ! ¦ 🌤️ Sena coboară: inundația a trecut. Ați rezistat!
+sur la route de l’exode ¦ pe drumul exodului
+🕊️ L’armistice est signé : les routes se calment, on peut rentrer. Vous avez tenu ! ¦ 🕊️ Armistițiul e semnat: drumurile se liniștesc, vă puteți întoarce acasă. Ați rezistat!
+Une semaine sous terre ¦ O săptămână sub pământ
+Tenir 7 jours. ¦ Rezistă 7 zile.
+Un mois sous terre ¦ O lună sub pământ
+Tenir 30 jours. ¦ Rezistă 30 de zile.
+Cent jours ¦ O sută de zile
+Tenir 100 jours. ¦ Rezistă 100 de zile.
+Dix habitants ¦ Zece locuitori
+Être 10 en vie dans le bunker. ¦ Să fiți 10 în viață în buncăr.
+Aucun mort ¦ Niciun mort
+Tenir 15 jours sans perdre personne. ¦ Rezistă 15 zile fără să pierzi pe nimeni.
+Tout construire ¦ Construiește tot
+Poser au moins une fois chaque installation dont on a le plan au départ. ¦ Pune măcar o dată fiecare instalație pentru care ai planul de la început.
+Un hiver sans poêle ¦ O iarnă fără sobă
+Passer 7 jours d’hiver sans poêle, ni cheminée, ni chaudière. ¦ Petrece 7 zile de iarnă fără sobă, fără șemineu și fără cazan.
+Une naissance au bunker ¦ O naștere în buncăr
+Accueillir un bébé (il faut un berceau). ¦ Primește un bebeluș (trebuie un leagăn).
+Repousser 3 pillages ¦ Respinge 3 jafuri
+Que les pillards repartent bredouilles trois fois. ¦ Jefuitorii să plece cu mâna goală de trei ori.
+Six étages ¦ Șase etaje
+Creuser jusqu’au sixième étage. ¦ Sapă până la etajul al șaselea.
+Toute la ville ¦ Tot orașul
+Fouiller chaque lieu de la ville au moins une fois. ¦ Scotocește fiecare loc din oraș măcar o dată.
+Rien ne se perd ¦ Nimic nu se pierde
+Démonter 50 objets du bric-à-brac. ¦ Demontează 50 de obiecte din vechituri.
+Trente veillées ¦ Treizeci de seri de povești
+Raconter 30 histoires du soir. ¦ Spune 30 de povești de seară.
+Dix échanges ¦ Zece schimburi
+Conclure 10 marchés (à la trappe ou par la radio). ¦ Încheie 10 târguri (la trapă sau prin radio).
+La ménagerie ¦ Menajeria
+Avoir 4 animaux en même temps. ¦ Ai 4 animale în același timp.
+Aux archives ¦ La arhive
+Retrouver 5 documents d’ancêtres (missions généalogiques). ¦ Regăsește 5 documente ale strămoșilor (misiuni genealogice).
+Du travail soigné ¦ Muncă îngrijită
+Améliorer une installation jusqu’au niveau 3. ¦ Îmbunătățește o instalație până la nivelul 3.
+Tous les plans trouvés ¦ Toate planurile găsite
+Rapporter de la ville tous les plans de l’époque. ¦ Adu din oraș toate planurile epocii.
+Dix objets fabriqués ¦ Zece obiecte fabricate
+Terminer 10 constructions à l’atelier. ¦ Termină 10 construcții la atelier.
+La petite usine ¦ Mica fabrică
+Terminer 40 constructions à l’atelier. ¦ Termină 40 de construcții la atelier.
+Sans jamais revenir en arrière ¦ Fără să te întorci vreodată
+Tenir 30 jours sans « ⏪ Reprendre au matin ». ¦ Rezistă 30 de zile fără „⏪ Reia de dimineață”.
+La joie sous terre ¦ Bucurie sub pământ
+Au moins 3 habitants, et tous au moral au-dessus de 90. ¦ Cel puțin 3 locuitori, toți cu moralul peste 90.
+Seul·e au monde ¦ Singur/singură pe lume
+Tenir 10 jours tout·e seul·e. ¦ Rezistă 10 zile de unul singur.
+Dur à cuire ¦ Tare de tot
+Tenir 15 jours en difficulté Extrême. ¦ Rezistă 15 zile la dificultatea Extrem.
+Une expédition réussie ¦ O expediție reușită
+Ramener un convoi au complet, avec des trouvailles. ¦ Adu înapoi un convoi complet, cu descoperiri.
+Grand voyageur ¦ Mare călător
+Réussir 5 expéditions dans la région. ¦ Reușește 5 expediții în regiune.
+Faire partir un convoi avec 3 moyens de transport (véhicules et bêtes). ¦ Trimite un convoi cu 3 mijloace de transport (vehicule și animale).
+Bête de somme ¦ Animal de povară
+Un âne revenu vivant de 5 expéditions. ¦ Un măgar întors viu din 5 expediții.
+Des alliés ¦ Aliați
+Qu’un groupe de survivants vous tienne pour alliés (réputation 60). ¦ Un grup de supraviețuitori să vă considere aliați (reputație 60).
+Remis en état ¦ Pus la punct
+Remettre en état un bâtiment de la ville. ¦ Repune în funcțiune o clădire din oraș.
+La ville revit ¦ Orașul renaște
+Trois bâtiments de la ville en marche en même temps. ¦ Trei clădiri din oraș în funcțiune în același timp.
+Maître et apprenti ¦ Maestru și ucenic
+Un apprenti atteint le niveau de son maître. ¦ Un ucenic ajunge la nivelul maestrului său.
+Le savoir transmis ¦ Știința transmisă
+Un maître s’éteint : son savoir reste chez son apprenti. ¦ Un maestru se stinge: știința lui rămâne la ucenicul său.
+Un couple au bunker ¦ Un cuplu în buncăr
+Deux habitants forment un couple. ¦ Doi locuitori formează un cuplu.
+Mémoire vivante ¦ Memorie vie
+Un ancêtre raconte un souvenir de sa vraie vie (option « Souvenirs des ancêtres »). ¦ Un strămoș povestește o amintire din viața lui adevărată (opțiunea „Amintirile strămoșilor”).
+Le coffre plein ¦ Cufărul plin
+Avoir 6 objets de famille dans le coffre. ¦ Ai 6 obiecte de familie în cufăr.
+Gagné : Classique ¦ Câștigat: Clasic
+Tenir 30 jours dans le scénario « Classique ». ¦ Rezistă 30 de zile în scenariul „Clasic”.
+Gagné : Hiver nucléaire ¦ Câștigat: Iarnă nucleară
+Tenir 21 jours dans le scénario « Hiver nucléaire ». ¦ Rezistă 21 de zile în scenariul „Iarnă nucleară”.
+Gagné : Épidémie ¦ Câștigat: Epidemie
+Tenir 21 jours dans le scénario « Épidémie ». ¦ Rezistă 21 de zile în scenariul „Epidemie”.
+Gagné : Inondation ¦ Câștigat: Inundație
+Tenir 21 jours dans le scénario « Inondation ». ¦ Rezistă 21 de zile în scenariul „Inundație”.
+Gagné : Pénurie ¦ Câștigat: Penurie
+Tenir 21 jours dans le scénario « Pénurie ». ¦ Rezistă 21 de zile în scenariul „Penurie”.
+Gagné : Pillards ¦ Câștigat: Jefuitori
+Tenir 21 jours dans le scénario « Pillards ». ¦ Rezistă 21 de zile în scenariul „Jefuitori”.
+Gagné : Le grand hiver de 1709 ¦ Câștigat: Marea iarnă din 1709
+Tenir 21 jours dans le scénario « Le grand hiver de 1709 ». ¦ Rezistă 21 de zile în scenariul „Marea iarnă din 1709”.
+Gagné : La peste de Marseille, 1720 ¦ Câștigat: Ciuma din Marsilia, 1720
+Tenir 28 jours dans le scénario « La peste de Marseille, 1720 ». ¦ Rezistă 28 de zile în scenariul „Ciuma din Marsilia, 1720”.
+Gagné : Le siège de Paris, 1870-1871 ¦ Câștigat: Asediul Parisului, 1870-1871
+Tenir 30 jours dans le scénario « Le siège de Paris, 1870-1871 ». ¦ Rezistă 30 de zile în scenariul „Asediul Parisului, 1870-1871”.
+Gagné : La grande crue de Paris, 1910 ¦ Câștigat: Marea inundație a Parisului, 1910
+Tenir 14 jours dans le scénario « La grande crue de Paris, 1910 ». ¦ Rezistă 14 zile în scenariul „Marea inundație a Parisului, 1910”.
+Gagné : L’exode de 1940 ¦ Câștigat: Exodul din 1940
+Tenir 14 jours dans le scénario « L’exode de 1940 ». ¦ Rezistă 14 zile în scenariul „Exodul din 1940”.
+Canicule ¦ Caniculă
+on a soif bien plus vite ¦ ți se face sete mult mai repede
+Tempête de poussière ¦ Furtună de praf
+l’air s’encrasse, dehors on se blesse, les panneaux solaires ne donnent rien ¦ aerul se murdărește, afară te rănești, panourile solare nu produc nimic
+l’eau entre par le bas : une installation de l’étage le plus profond est abîmée ¦ apa intră pe jos: o instalație de la etajul cel mai adânc e deteriorată
+Tremblement de terre ¦ Cutremur
+des installations sont abîmées, on peut se blesser ¦ unele instalații sunt deteriorate, te poți răni
+Orage électrique ¦ Furtună cu fulgere
+la foudre grille un appareil électrique ¦ fulgerul arde un aparat electric
+Vague de froid ¦ Val de frig
+il fait froid même hors de l’hiver : chauffage et vêtements ¦ e frig chiar și în afara iernii: încălzire și haine
+🚽 Construis des toilettes : clique sur une place libre ＋ du bunker, puis « Toilettes ». ¦ 🚽 Construiește o toaletă: fă clic pe un loc liber ＋ din buncăr, apoi „Toaletă”.
+🔨 Mets quelqu’un sur « Construire » (onglet 👥 Habitants) : la construction avance à l’atelier. ¦ 🔨 Pune pe cineva la „Construiește” (fila 👥 Locuitori): construcția avansează la atelier.
+🛏️ Construis un lit : on dort deux fois mieux. ¦ 🛏️ Construiește un pat: se doarme de două ori mai bine.
+⛏️ Mets quelqu’un à « Creuser » : un nouvel étage, c’est six places de plus. ¦ ⛏️ Pune pe cineva la „Sapă”: un etaj nou înseamnă șase locuri în plus.
+🗺️ Envoie quelqu’un en ville : onglet 🗺️ Ville, clique sur un lieu, choisis ce qu’il rapporte, puis « Partir ». ¦ 🗺️ Trimite pe cineva în oraș: fila 🗺️ Oraș, fă clic pe un loc, alege ce aduce, apoi „Pleacă”.
+♻️ Démonte un objet du bric-à-brac (onglet ♻️ Bric-à-brac) : on en tire des composants. ¦ ♻️ Demontează un obiect din vechituri (fila ♻️ Vechituri): scoți din el componente.
+⚗️ Construis un filtre à eau : l’eau de pluie devient potable. ¦ ⚗️ Construiește un filtru de apă: apa de ploaie devine potabilă.
+🛠️ Regarde l’onglet 🛠️ Atelier : chaque plan dit ce qu’il manque et où le trouver. ¦ 🛠️ Uită-te în fila 🛠️ Atelier: fiecare plan spune ce lipsește și unde găsești.
+🌙 Tiens jusqu’au jour 3 : surveille les barres de chacun, et le moral. ¦ 🌙 Rezistă până în ziua 3: urmărește barele fiecăruia și moralul.
+le bunker des Combes ¦ buncărul din Combes
+la ferme fortifiée du Moulin ¦ ferma fortificată de la Moară
+les cheminots de la gare ¦ feroviarii din gară
+le refuge de l’hôpital ¦ refugiul de la spital
+les sœurs du couvent ¦ surorile de la mănăstire
+la cave du notaire ¦ pivnița notarului
+les pêcheurs du port ¦ pescarii din port
+le garage des frères Roux ¦ garajul fraților Roux
+l’abri de l’école ¦ adăpostul școlii
+la tour de la radio ¦ turnul radioului
+garde la trappe (défense +2) et remonte le moral ¦ păzește trapa (apărare +2) și ridică moralul
+chasse les rats et les souris ¦ vânează șobolanii și șoarecii
+Poules ¦ Găini
+pondent : 2 rations d’œufs par jour ¦ ouă: 2 rații de ouă pe zi
+du lait : 1 ration et un peu de moral chaque jour ¦ lapte: 1 rație și puțin moral în fiecare zi
+Âne de bât ¦ Măgar de povară
+porte les charges : +12 en ville et en expédition (+5 avec des bâts) ; peut se blesser ¦ cară încărcăturile: +12 în oraș și în expediție (+5 cu samare); se poate răni
+tire la carriole (la plus grosse charge), sinon +8 ¦ trage căruța (cea mai mare încărcătură), altfel +8
+Une ration ¦ O rație
+Conserve froide ¦ Conservă rece
+Soupe de légumes ¦ Supă de legume
+Ragoût ¦ Tocană
+Compote de plantes ¦ Compot de plante
+Galettes ¦ Turte
+Gâteau ¦ Prăjitură
+La recette de famille ¦ Rețeta familiei
+Plante verte ¦ Plantă verde
+La cave ¦ Pivnița
+Le grenier ¦ Podul
+Le garage ¦ Garajul
+La réserve ¦ Cămara
+Le bureau ¦ Biroul
+L’atelier ¦ Atelierul
+l’acte de naissance ¦ actul de naștere
+l’acte de mariage ¦ actul de căsătorie
+l’acte de décès ¦ actul de deces
+une photo ¦ o fotografie
+une lettre ¦ o scrisoare
+le livret militaire ¦ livretul militar
+la feuille de recensement ¦ foaia de recensământ
+Petite ¦ Mică
+Grande ¦ Mare
+Très grande ¦ Foarte mare
+Immense (une région) ¦ Imensă (o regiune)
+chemin de terre ¦ drum de pământ
+rues inondées ¦ străzi inundate
+au bord de l’eau ¦ pe malul apei
+Ville ¦ Oraș
+Village ¦ Sat
+Grande ferme ¦ Fermă mare
+Dépôt abandonné ¦ Depozit părăsit
+Abbaye ¦ Abație
+Mine ¦ Mină
+Forêt ¦ Pădure
+Port fluvial ¦ Port fluvial
+Château en ruine ¦ Castel în ruină
+Bourg ¦ Târg
+sûre ¦ sigur
+peu sûre ¦ puțin sigur
+dangereuse ¦ periculos
+très dangereuse ¦ foarte periculos
+Voisins amis ¦ Vecini prieteni
+les familles du lavoir ¦ familiile de la spălătorie
+les gens du hameau ¦ oamenii din cătun
+Marchands ¦ Negustori
+les colporteurs du Pont ¦ negustorii ambulanți de la Pod
+les maraîchers du Val ¦ legumicultorii din Vale
+la caravane des Lefèvre ¦ caravana familiei Lefèvre
+Bande rivale ¦ Bandă rivală
+les Loups du faubourg ¦ Lupii din mahala
+la bande du Corbeau ¦ banda Corbului
+les Écorcheurs ¦ Jupuitorii
+les pillards de la nationale ¦ jefuitorii de pe drumul național
+les brigands de la forêt ¦ tâlharii din pădure
+Alliés ¦ Aliați
+Amicaux ¦ Prietenoși
+Neutres ¦ Neutri
+Méfiants ¦ Bănuitori
+Ennemis ¦ Dușmani
+Commercer ¦ Fă negoț
+Aider ¦ Ajută
+Attaquer ¦ Atacă
+RUINE ¦ RUINĂ
+CHANTIER ¦ ȘANTIER
+PRODUIT ¦ PRODUCE
+ABÎMÉ ¦ DETERIORAT
+La ferme maraîchère ¦ Ferma de legume
+La minoterie ¦ Moara de făină
+Le dispensaire ¦ Dispensarul
+L’atelier de mécanique ¦ Atelierul mecanic
+La station de pompage ¦ Stația de pompare
+La ferme ¦ Ferma
+Le moulin ¦ Moara
+La forge du village ¦ Fierăria satului
+Le puits ¦ Fântâna
+La forge ¦ Fierăria
+Le moulin à vent ¦ Moara de vânt
+L’ambulance du quartier ¦ Ambulanța cartierului
+Le puits communal ¦ Fântâna comunală
+La métairie ¦ Gospodăria arendașului
+La maison des sœurs ¦ Casa surorilor
+Lampes et pièces de TSF ¦ Lămpi și piese de radio
+Épicerie ¦ Băcănie
+Magasin de TSF ¦ Magazin de radiouri
+Pompe à essence ¦ Pompă de benzină
+Poste de TSF ¦ Aparat de radio
+Fils et ampoules ¦ Fire și becuri
+Garage à automobiles ¦ Garaj de automobile
+Magasin d’électricité ¦ Magazin de electricitate
+Remise des fiacres ¦ Șopronul birjelor
+École communale ¦ Școala comunală
+Clé de serrurier ¦ Cheie de lăcătuș
+Les données de ta généalogie n’ont pas pu être lues : {err} ¦ Datele genealogiei tale nu au putut fi citite: {err}
+Une photo de famille ¦ O fotografie de familie
+Une maison ¦ O casă
+Ta généalogie n’a que {what} pour « {kind} » : baisse le nombre d’étapes à {n}, ou choisis « Un peu de tout ». ¦ Genealogia ta are doar {what} pentru „{kind}”: scade numărul de etape la {n} sau alege „Câte puțin din toate”.
+Rien à aller chercher pour « {kind} » dans ta généalogie (les personnes vivantes et les fiches confidentielles ne sont jamais montrées). ¦ Nimic de căutat pentru „{kind}” în genealogia ta (persoanele în viață și fișele confidențiale nu sunt arătate niciodată).
+LABYRINTHE ¦ LABIRINT
+Un labyrinthe fait pour toi, et si tu veux des ancêtres, des lieux ou des souvenirs à aller chercher dedans. La partie se garde dans ce navigateur. ¦ Un labirint făcut pentru tine și, dacă vrei, cu strămoși, locuri sau amintiri de găsit în el. Partida se păstrează în acest browser.
+Les {n} labyrinthes en cours sont gardés : supprimes-en un pour en commencer un autre. ¦ Cele {n} labirinturi în curs sunt păstrate: șterge unul ca să începi altul.
+Ex : Le labyrinthe de Mamie ¦ Ex.: Labirintul Bunicii
+Graine ¦ Sămânță
+La même graine redonne le même labyrinthe : partage-la pour jouer au même ¦ Aceeași sămânță dă din nou același labirint: împarte-o ca să jucați același
+Un autre labyrinthe (nouvelle graine) ¦ Alt labirint (sămânță nouă)
+Un autre ¦ Altul
+1 · La forme ¦ 1 · Forma
+Les couloirs ¦ Culoarele
+Départ et arrivée ¦ Start și sosire
+2 · L’aspect ¦ 2 · Aspectul
+Murs ¦ Pereți
+Chemin et solution ¦ Drum și soluție
+« Aucune » : la couleur du style choisi. ¦ „Niciuna”: culoarea stilului ales.
+3 · Des choses à aller chercher ¦ 3 · Lucruri de găsit
+facultatif ¦ opțional
+Lesquels ¦ Care
+À partir de la personne ¦ Pornind de la persoana
+Les personnes à aller chercher ¦ Persoanele de găsit
+Sortir seulement après avoir tout ramassé ¦ Ieși doar după ce ai adunat tot
+Ni les personnes vivantes ni les fiches confidentielles ne sont jamais montrées. ¦ Persoanele în viață și fișele confidențiale nu sunt arătate niciodată.
+4 · Les joueurs ¦ 4 · Jucătorii
+Chacun son tour, on compare les temps ¦ Pe rând, se compară timpii
+Tous en même temps (course) ¦ Toți în același timp (cursă)
+5 · Pour corser ou aider ¦ 5 · Ca să fie mai greu sau mai ușor
+Brouillard ¦ Ceață
+on ne voit qu’autour de son pion ¦ vezi doar în jurul pionului tău
+Montrer les cases déjà parcourues ¦ Arată căsuțele deja parcurse
+Permettre les indices et la solution ¦ Permite indiciile și soluția
+Flèches ou ZQSD pour avancer · glisse ton pion à la souris ou au doigt · Espace : pause. ¦ Săgețile sau ZQSD pentru a înainta · trage pionul cu mouse-ul sau cu degetul · Spațiu: pauză.
+Aperçu du labyrinthe ¦ Previzualizarea labirintului
+solution en {what} ¦ soluție în {what}
+grand ! ¦ mare!
+Touches : {list} — ou glisse son pion. ¦ Taste: {list} — sau trage-ți pionul.
+Flèches ou Z Q S D (ou glisse le pion). Chacun joue à son tour sur le même labyrinthe. ¦ Săgețile sau Z Q S D (sau trage pionul). Fiecare joacă pe rând pe același labirint.
+Ensemble « {name} » appliqué : tu peux tout retoucher. ¦ Ansamblul „{name}” aplicat: poți retușa totul.
+les réglages du labyrinthe (forme, aspect, étapes, joueurs) ¦ setările labirintului (formă, aspect, etape, jucători)
+Labyrinthe {shape} du {date} ¦ Labirint {shape} din {date}
+LABYRINTHE TERMINÉ ¦ LABIRINT TERMINAT
+LABYRINTHE EN COURS ¦ LABIRINT ÎN CURS
+Graine <code>{seed}</code> : la même graine redonne ce labyrinthe. ¦ Sămânța <code>{seed}</code>: aceeași sămânță dă din nou acest labirint.
+Le labyrinthe : flèches ou Z Q S D pour avancer ¦ Labirintul: săgețile sau Z Q S D pentru a înainta
+Pause (Espace) ¦ Pauză (Spațiu)
+Montre quelques cases du bon chemin (H) ¦ Arată câteva căsuțe din drumul bun (H)
+🙈 Cacher la solution ¦ 🙈 Ascunde soluția
+👁 Montrer la solution ¦ 👁 Arată soluția
+Flèches ou Z Q S D · glisse le pion · Espace : pause ¦ Săgețile sau Z Q S D · trage pionul · Spațiu: pauză
+H : un indice ¦ H: un indiciu
+Labyrinthe « {name} » ¦ Labirintul „{name}”
+arrivé ¦ a ajuns
+D’abord l’étape {a}, puis celle-ci (la {b}). ¦ Mai întâi etapa {a}, apoi aceasta (a {b}-a).
+{name} a trouvé ¦ {name} a găsit
+Trouvé ! ¦ Găsit!
+étape {n} ¦ etapa {n}
+encore {what} ¦ încă {what}
+tout est ramassé : file à la sortie 🏁 ¦ ai adunat tot: fugi la ieșire 🏁
+🏁 La sortie est fermée : il te reste {what} à ramasser. ¦ 🏁 Ieșirea e închisă: mai ai de adunat {what}.
+🏁 {name} arrive en premier ! ¦ 🏁 {name} ajunge primul!
+🏁 {name} arrive {n}ᵉ ¦ 🏁 {name} ajunge al {n}-lea
+🏁 {name} est sorti en {time}. À {next} ! ¦ 🏁 {name} a ieșit în {time}. E rândul lui {next}!
+Bravo ! ¦ Bravo!
+Rencontrés en chemin ¦ Întâlniți pe drum
+Rejouer le même ¦ Joacă din nou același
+Changer les réglages ¦ Schimbă setările
+💡 Suis les points jaunes. ¦ 💡 Urmează punctele galbene.
+Image PNG ¦ Imagine PNG
+Image PNG avec la solution ¦ Imagine PNG cu soluția
+Dessin SVG ¦ Desen SVG
+Dessin SVG avec la solution ¦ Desen SVG cu soluția
+{name} — la solution ¦ {name} — soluția
+La solution ¦ Soluția
+Recommencer ce labyrinthe ¦ Reîncepe acest labirint
+Un autre labyrinthe (mêmes réglages) ¦ Alt labirint (aceleași setări)
+Supprimer cette partie ¦ Șterge această partidă
+C’est reparti ! ¦ Pornim din nou!
+⏸ En pause — Espace pour reprendre. ¦ ⏸ În pauză — Spațiu pentru a relua.
+Le labyrinthe et la progression des joueurs seront supprimés. ¦ Labirintul și progresul jucătorilor vor fi șterse.
+« {name} » est supprimé. ¦ „{name}” a fost șters.
+Reprendre ce labyrinthe ¦ Reia acest labirint
+terminé en {time} ¦ terminat în {time}
+=pas ¦ pas|pași|de pași
+=impasse ¦ fundătură|fundături|de fundături
+=indice demandé ¦ indiciu cerut|indicii cerute|de indicii cerute
+Hexagones ¦ Hexagoane
+Longs couloirs qui serpentent ¦ Culoare lungi care șerpuiesc
+Beaucoup de petites impasses ¦ Multe fundături mici
+Équilibré ¦ Echilibrat
+Tout à fait au hasard ¦ Complet la întâmplare
+Dans deux coins opposés ¦ În două colțuri opuse
+Le plus loin possible l’un de l’autre ¦ Cât mai departe unul de altul
+Départ au centre ¦ Start în centru
+Au hasard ¦ La întâmplare
+Haies ¦ Garduri vii
+Pierres ¦ Pietre
+Des ancêtres ¦ Strămoși
+Des lieux ¦ Locuri
+Des événements ¦ Evenimente
+Des maisons ¦ Case
+Des photos ¦ Fotografii
+Un peu de tout ¦ Câte puțin din toate
+Anneaux ¦ Inele
+cases ¦ căsuțe
+anneaux ¦ inele
+étapes ¦ etape
+Tous mes ancêtres (Sosa) ¦ Toți strămoșii mei (Sosa)
+Des personnes choisies ¦ Persoane alese
+De toute la généalogie ¦ Din toată genealogia
+D’une personne et de ses ancêtres ¦ Ale unei persoane și ale strămoșilor ei
+Dans l’ordre que tu veux ¦ În ordinea pe care o vrei
+De la plus ancienne à la plus récente ¦ De la cea mai veche la cea mai recentă
+Remonte ta lignée (Sosa 16 → 8 → 4 → 2) ¦ Urcă pe linia ta (Sosa 16 → 8 → 4 → 2)
+flèches ¦ săgeți
+pavé 8 4 5 6 ¦ tastatura numerică 8 4 5 6
+Boucles (plusieurs chemins) ¦ Bucle (mai multe drumuri)
+On voit à ¦ Vezi la
+🧸 Facile pour les enfants ¦ 🧸 Ușor pentru copii
+Petit, des haies, 3 photos à trouver ¦ Mic, garduri vii, 3 fotografii de găsit
+🧗 Grand défi ¦ 🧗 Mare provocare
+45 × 45, beaucoup d’impasses, dans le brouillard ¦ 45 × 45, multe fundături, în ceață
+🌳 À la recherche des ancêtres ¦ 🌳 În căutarea strămoșilor
+Remonte ta lignée, de Sosa en Sosa ¦ Urcă pe linia ta, din Sosa în Sosa
+🇫🇷 Tour de France des villages ¦ 🇫🇷 Turul Franței prin sate
+La France, et les lieux de ta famille ¦ Franța și locurile familiei tale
+Pas de connexion avec LCNDA : la partie est gardée dans ce navigateur. ¦ Nicio conexiune cu LCNDA: partida se păstrează în acest browser.
+🧩 {what} dans la base de la généalogie. ¦ 🧩 {what} în baza genealogiei.
+=partie de puzzle rangée ¦ partidă de puzzle păstrată|partide de puzzle păstrate|de partide de puzzle păstrate
+Puzzle « {name} » ¦ Puzzle „{name}”
+Mon puzzle ¦ Puzzle-ul meu
+Choisis une image et le nombre de pièces. Le chrono tourne pendant que tu joues ; la partie se garde dans ce navigateur, même après actualisation. ¦ Alege o imagine și numărul de piese. Cronometrul merge cât timp joci; partida se păstrează în acest browser, chiar și după reîncărcare.
+Les {n} puzzles en cours sont gardés : supprime-en un pour en commencer un autre. ¦ Cele {n} puzzle-uri în curs sunt păstrate: șterge unul ca să începi altul.
+Ex : La noce de 1925 ¦ Ex.: Nunta din 1925
+1 · L’image ¦ 1 · Imaginea
+Ouvre la fenêtre des images de ta base (tu peux aussi y importer ou coller une image) ¦ Deschide fereastra cu imaginile din baza ta (poți și să imporți sau să lipești o imagine acolo)
+🖼 Choisir dans la base ¦ 🖼 Alege din bază
+Choisis une personne : sa photo de fiche devient le puzzle ¦ Alege o persoană: fotografia din fișa ei devine puzzle-ul
+👤 Photo d’une personne ¦ 👤 Fotografia unei persoane
+2 · Le nombre de pièces ¦ 2 · Numărul de piese
+Nombre de pièces ¦ Număr de piese
+pièces ¦ piese
+3 · Les options ¦ 3 · Opțiunile
+Forme des pièces ¦ Forma pieselor
+Vraies formes de puzzle ¦ Forme adevărate de puzzle
+Carrés simples ¦ Pătrate simple
+carrés simples ¦ pătrate simple
+Pièces tournées (clic droit ou R pour les tourner) ¦ Piese rotite (clic dreapta sau R pentru a le roti)
+pièces tournées ¦ piese rotite
+Montrer l’image modèle ¦ Arată imaginea model
+Glisse les pièces à la souris ou au doigt ; elles s’aimantent quand elles sont au bon endroit ou contre leur voisine. Molette ou pincement pour zoomer. ¦ Trage piesele cu mouse-ul sau cu degetul; se lipesc singure când sunt la locul potrivit sau lângă vecina lor. Rotița sau ciupitul pentru zoom.
+🧩 Commencer le puzzle ¦ 🧩 Începe puzzle-ul
+Aucune image choisie ¦ Nicio imagine aleasă
+Prends une image de ta base, la photo d’une personne, ou glisse une image de l’ordinateur. ¦ Ia o imagine din baza ta, fotografia unei persoane sau trage o imagine de pe calculator.
+petite image : les pièces seront floues ¦ imagine mică: piesele vor fi neclare
+Retirer cette image ¦ Scoate această imagine
+L’image n’a pas pu être lue. ¦ Imaginea nu a putut fi citită.
+{n} pièces ¦ {n} piese
+la grille s’adaptera à la forme de l’image ¦ grila se va adapta la forma imaginii
+Lecture de l’image… ¦ Se citește imaginea…
+Cette image n’a pas pu être ouverte : {err} ¦ Această imagine nu a putut fi deschisă: {err}
+La fenêtre des images n’est pas chargée : recharge la page. ¦ Fereastra imaginilor nu e încărcată: reîncarcă pagina.
+L’image du puzzle ¦ Imaginea puzzle-ului
+Choisis une image de ta base, ou importe-la depuis l’ordinateur. ¦ Alege o imagine din baza ta sau importă-o de pe calculator.
+Le menu de choix n’est pas chargé : recharge la page. ¦ Meniul de alegere nu e încărcat: reîncarcă pagina.
+La photo de quelle personne ? ¦ Fotografia cărei persoane?
+{name} n’a pas encore de photo de fiche : choisis une de ses images. ¦ {name} nu are încă fotografie în fișă: alege una dintre imaginile sale.
+Une image de {name} ¦ O imagine cu {name}
+« {name} » n’est pas une image. ¦ „{name}” nu este o imagine.
+Ce fichier ¦ Acest fișier
+L’image entre dans les médias… ¦ Imaginea intră în media…
+Pas rangée dans les médias : gardée seulement pour ce puzzle. ¦ Nu e pusă în media: păstrată doar pentru acest puzzle.
+📁 Glisse une image ici, colle-la (⌘V) ou choisis-la sur l’ordinateur ¦ 📁 Trage o imagine aici, lipește-o (⌘V) sau alege-o de pe calculator
+Elle entre dans les médias de l’app et devient le puzzle. ¦ Intră în media aplicației și devine puzzle-ul.
+Il faut au moins {n} pièces : je compte {n}. ¦ Trebuie cel puțin {n} piese: număr {n}.
+{n} pièces au plus : je compte {n}. ¦ Cel mult {n} piese: număr {n}.
+Choisis d’abord une image : dans la base, la photo d’une personne, ou glisse-la ici. ¦ Alege mai întâi o imagine: din bază, fotografia unei persoane sau trage-o aici.
+Découpage… ¦ Se decupează…
+Le puzzle n’a pas pu commencer : {err} ¦ Puzzle-ul nu a putut începe: {err}
+Ce fichier n’est pas une image lisible. ¦ Acest fișier nu este o imagine lizibilă.
+Ouverture de la partie… ¦ Se deschide partida…
+La partie n’a pas pu être ouverte : {err} ¦ Partida nu a putut fi deschisă: {err}
+PUZZLE TERMINÉ ¦ PUZZLE TERMINAT
+PUZZLE EN COURS ¦ PUZZLE ÎN CURS
+{n} PIÈCES ({c} × {r}) ¦ {n} PIESE ({c} × {r})
+Le nom de la partie : clique pour le changer ¦ Numele partidei: fă clic ca să-l schimbi
+Recommencer ce puzzle avec la même image et le même nombre de pièces ¦ Reîncepe acest puzzle cu aceeași imagine și același număr de piese
+Préparer une autre partie ¦ Pregătește altă partidă
+Supprimer ce puzzle (tu pourras annuler) ¦ Șterge acest puzzle (vei putea anula)
+Temps passé ¦ Timp petrecut
+Enregistrer la partie maintenant (elle s’enregistre aussi toute seule) ¦ Salvează partida acum (se salvează și singură)
+Ton record : {time} ¦ Recordul tău: {time}
+Table du puzzle ¦ Masa puzzle-ului
+Pièces du puzzle ¦ Piesele puzzle-ului
+Image modèle ¦ Imaginea model
+Découpage des pièces… ¦ Se decupează piesele…
+Le chrono est arrêté. ¦ Cronometrul e oprit.
+Puzzle terminé : « ↻ Rejouer » pour le refaire. ¦ Puzzle terminat: „↻ Joacă din nou” ca să-l refaci.
+Glisse les pièces ; elles s’aimantent au bon endroit et contre leur voisine. Clic droit ou R : tourner. Espace : pause. Glisse le fond pour te déplacer. ¦ Trage piesele; se lipesc singure la locul potrivit și lângă vecina lor. Clic dreapta sau R: rotește. Spațiu: pauză. Trage fundalul ca să te deplasezi.
+Glisse les pièces ; elles s’aimantent au bon endroit et contre leur voisine. Espace : pause. Glisse le fond pour te déplacer. ¦ Trage piesele; se lipesc singure la locul potrivit și lângă vecina lor. Spațiu: pauză. Trage fundalul ca să te deplasezi.
+partie abîmée ¦ partidă deteriorată
+L’image de ce puzzle est introuvable ({err}). Elle a peut-être été supprimée des médias. ¦ Imaginea acestui puzzle nu poate fi găsită ({err}). Poate a fost ștearsă din media.
+Les pièces ne tournent pas dans ce puzzle (option « Pièces tournées » à la préparation). ¦ Piesele nu se rotesc în acest puzzle (opțiunea „Piese rotite” la pregătire).
+Tourner la pièce ¦ Rotește piesa
+Touche d’abord une pièce, puis ⟳ pour la tourner. ¦ Atinge mai întâi o piesă, apoi ⟳ ca s-o rotești.
+🔀 Pièces mélangées. ¦ 🔀 Piese amestecate.
+⇆ {what} sur les côtés. ¦ ⇆ {what} pe margini.
+=pièce rangée ¦ piesă așezată|piese așezate|de piese așezate
+Le chrono s’est arrêté pendant que tu étais ailleurs. ¦ Cronometrul s-a oprit cât timp ai fost în altă parte.
+Le chrono est arrêté et l’image cachée. ¦ Cronometrul e oprit și imaginea ascunsă.
+Mettre en pause (Espace) ¦ Pune pauză (Spațiu)
+{a} / {b} pièces posées · {pc} % ¦ {a} / {b} piese puse · {pc} %
+⚠️ Consultation : gardé ici ¦ ⚠️ Consultare: păstrat aici
+⚠️ Gardé dans ce navigateur ¦ ⚠️ Păstrat în acest browser
+Mode consultation : la base ne peut pas être modifiée. La partie est gardée dans ce navigateur. ¦ Mod consultare: baza nu poate fi modificată. Partida se păstrează în acest browser.
+Le serveur ne répond pas : la partie est gardée dans ce navigateur et partira dans la base dès que possible. ¦ Serverul nu răspunde: partida se păstrează în acest browser și va ajunge în bază cât mai curând.
+Bravo, c’est fini ! ¦ Bravo, gata!
+{what} en <b>{time}</b> ¦ {what} în <b>{time}</b>
+🏆 Nouveau record ! (avant : {time}) ¦ 🏆 Record nou! (înainte: {time})
+🏆 C’est ton premier record pour cette image. ¦ 🏆 E primul tău record pentru această imagine.
+Fermer ce message pour admirer l’image (Échap) ¦ Închide acest mesaj ca să admiri imaginea (Esc)
+Admirer l’image ¦ Admiră imaginea
+🧩 Puzzle terminé en {time} — nouveau record ! ¦ 🧩 Puzzle terminat în {time} — record nou!
+🧩 Puzzle terminé en {time} ¦ 🧩 Puzzle terminat în {time}
+Les {n} puzzles en cours sont gardés : supprime-en un pour en recommencer un. ¦ Cele {n} puzzle-uri în curs sunt păstrate: șterge unul ca să reîncepi altul.
+Le puzzle n’a pas pu recommencer : {err} ¦ Puzzle-ul nu a putut reîncepe: {err}
+Puzzle « {name} » supprimé. ¦ Puzzle-ul „{name}” a fost șters.
+Impossible de remettre ce puzzle. ¦ Nu se poate pune la loc acest puzzle.
+Reprendre ce puzzle ¦ Reia acest puzzle
+Puzzles terminés ¦ Puzzle-uri terminate
+Revoir ce puzzle terminé ¦ Revezi acest puzzle terminat
+record {time} ¦ record {time}
+Montrer ou cacher l’image modèle ¦ Arată sau ascunde imaginea model
+Ne montrer que les bords ¦ Arată doar marginile
+Mélanger les pièces sur la table ¦ Amestecă piesele pe masă
+Ranger les pièces sur les côtés ¦ Așază piesele pe margini
+Tourner la pièce choisie (R ou clic droit) ¦ Rotește piesa aleasă (R sau clic dreapta)
+Dézoomer (molette) ¦ Micșorează (rotița)
+Zoomer (molette) ¦ Mărește (rotița)
+Plein écran (Échap pour sortir) ¦ Ecran complet (Esc pentru a ieși)
+🂡 La famille Klondike ¦ 🂡 Familia Klondike
+Des colonnes en escalier, des cartes cachées à découvrir, une pioche. ¦ Coloane în scară, cărți ascunse de descoperit, un teanc de tras.
+🗃 Avec des cases libres ¦ 🗃 Cu căsuțe libere
+Tout est visible dès le départ : la réflexion compte plus que la chance. ¦ Totul e vizibil de la început: gândirea contează mai mult decât norocul.
+🕸 Les araignées ¦ 🕸 Păianjenii
+On fait des suites complètes du Roi à l’As dans une même couleur, elles s’en vont toutes seules. ¦ Faci șiruri complete de la Rege la As în aceeași culoare de carte și pleacă singure.
+🏔 La famille Yukon ¦ 🏔 Familia Yukon
+On peut déplacer n’importe quel groupe de cartes visibles. ¦ Poți muta orice grup de cărți vizibile.
+🧺 Les quarante voleurs et leurs cousins ¦ 🧺 Cei patruzeci de hoți și verii lor
+Deux jeux de cartes, beaucoup de colonnes, une seule pioche. ¦ Două pachete de cărți, multe coloane, un singur teanc.
+🏰 Châteaux et jardins ¦ 🏰 Castele și grădini
+Pas de pioche : tout est sur la table, il faut trouver le bon ordre. ¦ Fără teanc: totul e pe masă, trebuie găsită ordinea bună.
+🎯 Jeux de paires et de suites ¦ 🎯 Jocuri cu perechi și șiruri
+Des règles à part : on enlève des paires, on suit au plus ou au moins un… ¦ Reguli aparte: scoți perechi, continui cu unu în plus sau în minus…
+Klondike (1 carte) ¦ Klondike (1 carte)
+Le classique : 7 colonnes en escalier, on construit en descendant et en alternant rouge et noir. La pioche se retourne une carte à la fois, sans limite. ¦ Clasicul: 7 coloane în scară, construiești în jos alternând roșu și negru. Teancul se întoarce câte o carte, fără limită.
+Klondike (3 cartes) ¦ Klondike (3 cărți)
+Comme Klondike, mais la pioche se retourne trois cartes à la fois : seule la dernière se joue. ¦ Ca Klondike, dar teancul se întoarce câte trei cărți: se joacă doar ultima.
+Klondike en 3 passes ¦ Klondike în 3 treceri
+Trois cartes à la fois, et on ne peut repasser la pioche que deux fois. ¦ Câte trei cărți și poți trece din nou prin teanc doar de două ori.
+Klondike à découvert ¦ Klondike la vedere
+Klondike, mais toutes les cartes du tableau sont visibles dès le départ. ¦ Klondike, dar toate cărțile de pe masă sunt vizibile de la început.
+Klondike à découvert avec une pioche de trois cartes. ¦ Klondike la vedere cu un teanc de câte trei cărți.
+Tout est visible ; on descend dans la même teinte (rouge sur rouge, noir sur noir), on déplace les suites d’une même couleur de carte, une colonne vide prend n’importe quelle carte. ¦ Totul e vizibil; cobori în aceeași nuanță (roșu pe roșu, negru pe negru), muți șirurile de aceeași culoare de carte, o coloană goală primește orice carte.
+7 colonnes de 3 cartes ; la pioche distribue une carte sur chaque colonne. Une colonne vide prend n’importe quelle carte. ¦ 7 coloane de câte 3 cărți; teancul împarte câte o carte pe fiecare coloană. O coloană goală primește orice carte.
+Les As sont posés d’avance ; 10 colonnes de 3 cartes (deux cachées), une pioche d’une carte, sans nouvelle passe. ¦ Așii sunt puși dinainte; 10 coloane de câte 3 cărți (două ascunse), un teanc de câte o carte, fără nouă trecere.
+Klondike double ¦ Klondike dublu
+Avec deux jeux de cartes : 9 colonnes, 8 fondations. ¦ Cu două pachete de cărți: 9 coloane, 8 fundații.
+Deux jeux, 9 colonnes ; une colonne vide prend n’importe quelle carte, et la pioche ne repasse qu’une fois. ¦ Două pachete, 9 coloane; o coloană goală primește orice carte, iar teancul se trece din nou o singură dată.
+Une réserve de 13 cartes, 4 colonnes. La première fondation donne la carte de départ des autres ; on peut passer du Roi à l’As. Une colonne vide se remplit avec la réserve. ¦ O rezervă de 13 cărți, 4 coloane. Prima fundație dă cartea de pornire a celorlalte; poți trece de la Rege la As. O coloană goală se umple din rezervă.
+Canfield avec une pioche d’une carte, qui ne repasse que deux fois. ¦ Canfield cu un teanc de câte o carte, care se trece din nou doar de două ori.
+Canfield à découvert ¦ Canfield la vedere
+Canfield, mais on voit toute la réserve (seule la carte du dessus se joue), et une colonne vide prend n’importe quelle carte. ¦ Canfield, dar vezi toată rezerva (se joacă doar cartea de deasupra), iar o coloană goală primește orice carte.
+L’entrepôt ¦ Depozitul
+Les quatre 2 sont posés d’avance sur les fondations, qui montent dans la même couleur de carte jusqu’à l’As. Réserve de 13 cartes, on construit dans la même couleur. ¦ Cei patru de 2 sunt puși dinainte pe fundații, care urcă în aceeași culoare de carte până la As. Rezervă de 13 cărți, construiești în aceeași culoare de carte.
+Toutes les cartes visibles en 8 colonnes, 4 cases libres pour poser une carte. On descend en alternant les couleurs. ¦ Toate cărțile vizibile în 8 coloane, 4 căsuțe libere pentru a pune o carte. Cobori alternând culorile.
+FreeCell à 2 cases ¦ FreeCell cu 2 căsuțe
+FreeCell avec seulement deux cases libres : pour les experts. ¦ FreeCell cu doar două căsuțe libere: pentru experți.
+FreeCell à 6 cases ¦ FreeCell cu 6 căsuțe
+FreeCell avec six cases libres : pour se détendre. ¦ FreeCell cu șase căsuțe libere: pentru relaxare.
+Le FreeCell d’origine : on descend dans la même couleur de carte. ¦ FreeCell-ul original: cobori în aceeași culoare de carte.
+8 colonnes de 6, 8 cases libres dont 4 déjà occupées ; même couleur de carte, une colonne vide ne prend qu’un Roi. ¦ 8 coloane de câte 6, 8 căsuțe libere, dintre care 4 deja ocupate; aceeași culoare de carte, o coloană goală primește doar un Rege.
+10 colonnes de 5, 4 cases libres dont 2 déjà occupées ; même couleur de carte, Roi seulement dans une colonne vide. ¦ 10 coloane de câte 5, 4 căsuțe libere, dintre care 2 deja ocupate; aceeași culoare de carte, doar Rege într-o coloană goală.
+FreeCell double ¦ FreeCell dublu
+Deux jeux de cartes, 10 colonnes, 6 cases libres, 8 fondations. ¦ Două pachete de cărți, 10 coloane, 6 căsuțe libere, 8 fundații.
+Le manchot ¦ Pinguinul
+7 colonnes, 7 cases libres ; on descend dans la même couleur de carte et une colonne vide ne prend qu’un Roi. ¦ 7 coloane, 7 căsuțe libere; cobori în aceeași culoare de carte, iar o coloană goală primește doar un Rege.
+Araignée (1 couleur) ¦ Păianjen (1 culoare)
+Deux jeux, 10 colonnes. On descend sans s’occuper des couleurs ; une suite complète du Roi à l’As s’en va. La pioche pose une carte sur chaque colonne. ¦ Două pachete, 10 coloane. Cobori fără să ții cont de culori; un șir complet de la Rege la As pleacă. Teancul pune câte o carte pe fiecare coloană.
+Araignée (2 couleurs) ¦ Păianjen (2 culori)
+L’araignée avec deux couleurs de cartes : seules les suites d’une même couleur se déplacent ensemble. ¦ Păianjenul cu două culori de cărți: doar șirurile de aceeași culoare se mută împreună.
+Araignée (4 couleurs) ¦ Păianjen (4 culori)
+La vraie araignée, avec les quatre couleurs : très difficile. ¦ Adevăratul păianjen, cu toate cele patru culori: foarte greu.
+Petite araignée ¦ Păianjen mic
+L’araignée avec un seul jeu, en escalier comme Klondike. ¦ Păianjenul cu un singur pachet, în scară ca la Klondike.
+Feu follet ¦ Luminiță rătăcitoare
+Un seul jeu, 7 colonnes de 3 cartes (deux cachées), règles de l’araignée. ¦ Un singur pachet, 7 coloane de câte 3 cărți (două ascunse), regulile păianjenului.
+7 colonnes de 7 (les quatre premières cachent 3 cartes) ; on descend dans la même couleur de carte et on déplace n’importe quel groupe. Les 3 dernières cartes vont sur les trois premières colonnes. ¦ 7 coloane de câte 7 (primele patru ascund 3 cărți); cobori în aceeași culoare de carte și muți orice grup. Ultimele 3 cărți merg pe primele trei coloane.
+Scorpion plus gentil : une colonne vide prend n’importe quelle carte. ¦ Scorpion mai blând: o coloană goală primește orice carte.
+Un seul jeu, tout est visible en 10 colonnes (8, 8, 8, 7… 1), pas de pioche : règles de l’araignée. ¦ Un singur pachet, totul vizibil în 10 coloane (8, 8, 8, 7… 1), fără teanc: regulile păianjenului.
+Pas de pioche : tout est sur la table. On peut déplacer n’importe quel groupe de cartes visibles, pourvu que la première aille bien. ¦ Fără teanc: totul e pe masă. Poți muta orice grup de cărți vizibile, cu condiția ca prima să se potrivească.
+Solitaire russe ¦ Pasența rusească
+Yukon, mais on descend dans la même couleur de carte. ¦ Yukon, dar cobori în aceeași culoare de carte.
+Yukon où l’on construit dans la même couleur de carte, en montant ou en descendant. ¦ Yukon în care construiești în aceeași culoare de carte, urcând sau coborând.
+L’élan ¦ Elanul
+Yukon où l’on descend sur n’importe quelle couleur de carte, sauf la sienne. ¦ Yukon în care cobori pe orice culoare de carte, în afară de a ei.
+Yukon à découvert ¦ Yukon la vedere
+Yukon avec toutes les cartes visibles. ¦ Yukon cu toate cărțile vizibile.
+Yukon double ¦ Yukon dublu
+Deux jeux, 10 colonnes, 8 fondations. ¦ Două pachete, 10 coloane, 8 fundații.
+Les quarante voleurs ¦ Cei patruzeci de hoți
+Deux jeux, 10 colonnes de 4 cartes visibles ; on descend dans la même couleur de carte, une seule carte à la fois. La pioche ne passe qu’une fois. ¦ Două pachete, 10 coloane de câte 4 cărți vizibile; cobori în aceeași culoare de carte, câte o singură carte. Teancul se trece o singură dată.
+Les huit As sont posés d’avance ; 13 colonnes de 3 cartes. ¦ Cei opt Ași sunt puși dinainte; 13 coloane de câte 3 cărți.
+Numéro dix ¦ Numărul zece
+10 colonnes de 4 (deux cachées), on alterne les couleurs et on déplace des suites entières. ¦ 10 coloane de câte 4 (două ascunse), alternezi culorile și muți șiruri întregi.
+Les rues ¦ Străzile
+Les quarante voleurs, mais en alternant rouge et noir. ¦ Cei patruzeci de hoți, dar alternând roșu și negru.
+L’indienne ¦ Indianca
+10 colonnes de 3 (une cachée) ; on descend sur n’importe quelle couleur de carte sauf la sienne. ¦ 10 coloane de câte 3 (una ascunsă); cobori pe orice culoare de carte, în afară de a ei.
+Limité ¦ Limitat
+12 colonnes de 3 cartes visibles, même couleur de carte, une à la fois. ¦ 12 coloane de câte 3 cărți vizibile, aceeași culoare de carte, câte una.

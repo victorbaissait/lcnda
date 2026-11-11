@@ -1,0 +1,221 @@
+fr ¦ ro
+=masqué ¦ ascuns|ascunse|de ascunse
+=masquée ¦ ascunsă|ascunse|de ascunse
+=média ajouté ¦ fișier media adăugat|fișiere media adăugate|de fișiere media adăugate
+=média trouvé ¦ fișier media găsit|fișiere media găsite|de fișiere media găsite
+=occurrence ¦ apariție|apariții|de apariții
+=page / vue ¦ pagină / imagine|pagini / imagini|de pagini / imagini
+=page détaillée ¦ pagină detaliată|pagini detaliate|de pagini detaliate
+=pays ¦ țară|țări|de țări
+=personne importée ¦ persoană importată|persoane importate|de persoane importate
+=personne relevée ¦ persoană notată|persoane notate|de persoane notate
+=personne repérée, classée par nombre d’occurrences. ¦ persoană identificată, ordonată după numărul de apariții.|persoane identificate, ordonate după numărul de apariții.|de persoane identificate, ordonate după numărul de apariții.
+=piste ¦ pistă|piste|de piste
+=piste d’enquête ¦ pistă de investigație|piste de investigație|de piste de investigație
+=plan à moi ¦ plan propriu|planuri proprii|de planuri proprii
+=recherche ¦ căutare|căutări|de căutări
+=recherche faite ¦ căutare făcută|căutări făcute|de căutări făcute
+=référence ¦ referință|referințe|de referințe
+=résolu ¦ rezolvat|rezolvate|de rezolvate
+=résultat ¦ rezultat|rezultate|de rezultate
+=service ¦ serviciu|servicii|de servicii
+=service d’archives ¦ serviciu de arhive|servicii de arhive|de servicii de arhive
+=site déjà cherché ¦ site deja căutat|site-uri deja căutate|de site-uri deja căutate
+=site hors de son époque ¦ site din afara epocii sale|site-uri din afara epocii sale|de site-uri din afara epocii sale
+=site payant caché ¦ site cu plată ascuns|site-uri cu plată ascunse|de site-uri cu plată ascunse
+=site payant est caché ¦ site cu plată este ascuns|site-uri cu plată sunt ascunse|de site-uri cu plată sunt ascunse
+=site trouvé ¦ site găsit|site-uri găsite|de site-uri găsite
+=sorte d’élément ajoutée aux réglages de l’Atelier. ¦ tip de element adăugat la setările Atelierului.|tipuri de elemente adăugate la setările Atelierului.|de tipuri de elemente adăugate la setările Atelierului.
+=sorte à moi ¦ tip propriu|tipuri proprii|de tipuri proprii
+=sous-dossier ¦ subdosar|subdosare|de subdosare
+=suivi ¦ urmărire|urmăriri|de urmăriri
+=trouvé ¦ găsit|găsite|de găsite
+=trouvée ¦ găsită|găsite|de găsite
+=tâche à faire ¦ sarcină de făcut|sarcini de făcut|de sarcini de făcut
+=visite ¦ vizită|vizite|de vizite
+=vue à moi ¦ vizualizare proprie|vizualizări proprii|de vizualizări proprii
+=élément choisi ¦ element ales|elemente alese|de elemente alese
+=élément à toi gardé ¦ element al tău păstrat|elemente ale tale păstrate|de elemente ale tale păstrate
+Monte, descends, change l’émoji ou le nom, masque ce dont tu ne te sers pas (la Corbeille reste toujours). Une <b>vue à toi</b> regroupe les éléments selon tes critères (ex. « 📕 À lire » : les références à lire ; « 🖼 Gravures » : les images et références « gravure »). ¦ Urcă, coboară, schimbă emoji-ul sau numele, ascunde ce nu folosești (Coșul rămâne mereu). O <b>vizualizare proprie</b> grupează elementele după criteriile tale (ex. „📕 De citit”: referințele de citit; „🖼 Gravuri”: imaginile și referințele „gravură”).
+L’ordre du menu « ＋ Ajouter » et de « Toutes les sortes ». Une sorte masquée ne se propose plus, mais ce qui existe déjà reste visible. <b>Ta propre sorte</b> a les champs que tu veux (ex. « 🎞 Plaque de lanterne » : sujet, fabricant, dimensions, état, lieu de conservation…). ¦ Ordinea meniului „＋ Adaugă” și a listei „Toate tipurile”. Un tip ascuns nu mai e propus, dar ce există deja rămâne vizibil. <b>Tipul tău propriu</b> are câmpurile pe care le vrei (ex. „🎞 Diapozitiv de lanternă magică”: subiect, producător, dimensiuni, stare, loc de păstrare…).
+<b>Une sorte d’élément</b> s’ajoute dans un projet avec « ＋ Ajouter », comme une référence ou une note, avec <b>tes champs</b> : texte court ou long, lien internet, date, nombre, liste de choix, case à cocher, personne de ta base, lieu sur la carte. Elle apparaît aussi dans « Toutes les sortes ». ¦ <b>Un tip de element</b> se adaugă într-un proiect cu „＋ Adaugă”, ca o referință sau o notă, cu <b>câmpurile tale</b>: text scurt sau lung, link de internet, dată, număr, listă de opțiuni, casetă de bifat, persoană din baza ta, loc pe hartă. Apare și în „Toate tipurile”.
+Clique sur un critère pour l’ajouter, puis règle-le. Range-les avec ↑ ↓ ; « pas » garde tout <i>sauf</i> ce critère. Sans critère : tout le projet. ¦ Fă clic pe un criteriu ca să-l adaugi, apoi reglează-l. Ordonează-le cu ↑ ↓; „nu” păstrează totul <i>în afară de</i> acest criteriu. Fără criterii: tot proiectul.
+L’élément reste <b>vivant</b> : il montre toujours ce qu’il y a dans le logiciel, et « ↗ Ouvrir » y mène. ¦ Elementul rămâne <b>viu</b>: arată mereu ce există în aplicație, iar „↗ Deschide” te duce acolo.
+Tout logiciel de bibliographie : <b>BibTeX</b> (.bib) ou <b>RIS</b> (.ris). ¦ Orice program de bibliografie: <b>BibTeX</b> (.bib) sau <b>RIS</b> (.ris).
+Plan de « {name} » ¦ Planul pentru „{name}”
+Tu veux plutôt <b>une nouvelle sorte d’élément</b>, avec tes champs à remplir (texte libre, lien internet, date, personne, lieu…) ? ¦ Vrei mai degrabă <b>un tip nou de element</b>, cu câmpurile tale de completat (text liber, link de internet, dată, persoană, loc…)?
+Créer une sorte d’élément à la place → ¦ Creează în schimb un tip de element →
+<b>Une vue est un filtre</b> : une entrée du menu de gauche qui montre les éléments du projet répondant à tes critères (ex. « 📕 À lire »). Elle n’a pas de champs à remplir. ¦ <b>O vizualizare este un filtru</b>: o intrare în meniul din stânga care arată elementele proiectului ce corespund criteriilor tale (ex. „📕 De citit”). Nu are câmpuri de completat.
+personnes repérées, classées par nombre d’occurrences. ¦ persoane identificate, ordonate după numărul de apariții.
+événements ¦ evenimente
+références ¦ referințe
+Archives départementales — ¦ Arhivele departamentale —
+Ce qu’il reste à faire, avec une date. ¦ Ce mai rămâne de făcut, cu o dată.
+Prépare un formulaire standardisé à joindre au courrier, puis imprime-le quand il est prêt. ¦ Pregătește un formular standard de atașat la scrisoare, apoi tipărește-l când e gata.
+Google Photos (archive Takeout), Apple Photos ou tout dossier de photos : date, lieu, description, mots-clés et personnes nommées repris (lieux et personnes à confirmer) ¦ Google Photos (arhivă Takeout), Apple Photos sau orice dosar de fotografii: data, locul, descrierea, cuvintele-cheie și persoanele numite sunt preluate (locurile și persoanele de confirmat)
+Retrouver une photo dans la base à partir d’une autre (de la base ou de ton ordinateur), même recadrée ou zoomée ¦ Regăsește o fotografie în bază pornind de la alta (din bază sau de pe calculatorul tău), chiar decupată sau mărită
+Deux portraits côte à côte, en fondu ou en rideau, yeux alignés : chercher une ressemblance ¦ Două portrete unul lângă altul, în fondu sau cu cortină, cu ochii aliniați: caută o asemănare
+⤒ Importer des photos ¦ ⤒ Importă fotografii
+⤒ Importer des coordonnées (KML, GeoJSON) ¦ ⤒ Importă coordonate (KML, GeoJSON)
+Afficher tous les éléments ¦ Afișează toate elementele
+Masquer tous les éléments ¦ Ascunde toate elementele
+Document à consulter ¦ Document de consultat
+Cote à préciser ¦ Cotă de precizat
+Ajoute les cotes à consulter pendant cette visite. ¦ Adaugă cotele de consultat în timpul acestei vizite.
+Centre à préciser ¦ Centru de precizat
+Changer la date de la visite, ou la remettre « à faire » ¦ Schimbă data vizitei sau pune-o înapoi „de făcut”
+Prépare une feuille de mission par centre d’archives à partir des cotes déjà suivies, ou ajoute une cote libre. ¦ Pregătește o fișă de misiune pentru fiecare centru de arhive pornind de la cotele deja urmărite, sau adaugă o cotă liberă.
+Les horaires et périodes de fermeture sont à vérifier auprès du centre avant le départ, notamment pour les fermetures estivales d’août. ¦ Programul și perioadele de închidere trebuie verificate la centru înainte de plecare, mai ales închiderile de vară din august.
+Aucune feuille de mission pour l’instant ¦ Deocamdată nicio fișă de misiune
+Crée une visite pour réunir les cotes à consulter. ¦ Creează o vizită ca să aduni cotele de consultat.
+Dépouillement créé et relié à la cote. ¦ Indexare creată și legată de cotă.
+Remettre la visite « à faire » ¦ Pune vizita înapoi „de făcut”
+La visite est de nouveau « à faire ». ¦ Vizita este din nou „de făcut”.
+Ex. fermeture estivale à vérifier en août ¦ Ex. închidere de vară de verificat în august
+Ajouter une cote ¦ Adaugă o cotă
+Ajouter la cote ¦ Adaugă cota
+Cotes à consulter ¦ Cote de consultat
+Le lien sera ajouté à cette liste locale. ¦ Linkul va fi adăugat la această listă locală.
+Inscription à vérifier ¦ Înscriere de verificat
+Lien direct à compléter ¦ Link direct de completat
+Indique au moins une référence ou un document à reproduire. ¦ Indică cel puțin o referință sau un document de reprodus.
+Service destinataire à compléter ¦ Serviciul destinatar de completat
+Formulaire à joindre à votre demande de reproduction. ¦ Formular de atașat la cererea ta de reproducere.
+Implexe : cette personne est ton ancêtre par plusieurs lignées, elle a donc plusieurs numéros Sosa. C’est normal (souvent des cousins qui se sont mariés) : ce n’est pas un doublon, il n’y a rien à fusionner. ¦ Implex: această persoană este strămoșul tău pe mai multe linii, deci are mai multe numere Sosa. E normal (adesea veri care s-au căsătorit): nu e un duplicat, nu e nimic de fuzionat.
+Réglage changé : « Types de recherche » ¦ Setare schimbată: „Tipuri de căutare”
+🔍 Que manque-t-il ? (actes à chercher, où et dans quelle série) ¦ 🔍 Ce lipsește? (acte de căutat, unde și în ce serie)
+🌍 Où chercher ? (les sites à consulter pour une personne) ¦ 🌍 Unde să cauți? (site-urile de consultat pentru o persoană)
+＋ Ajouter un dépouillement ¦ ＋ Adaugă o indexare
+Aucune personne ne correspond à cette recherche. ¦ Nicio persoană nu corespunde acestei căutări.
+Période, type d’acte et références à vérifier. ¦ Perioadă, tip de act și referințe de verificat.
+Ajouter le dépouillement ¦ Adaugă indexarea
+(pour qui tu as ouvert ce registre — à part des personnes relevées dedans) ¦ (pentru cine ai deschis acest registru — separat de persoanele notate în el)
+Aucune page détaillée pour l’instant ¦ Deocamdată nicio pagină detaliată
+Médias non rattachés à une page ¦ Fișiere media nelegate de o pagină
+⤒ Importer des relevés (Nimègue…) ¦ ⤒ Importă indexări (Nimègue…)
+📜 En pages (Listes) ¦ 📜 Pe pagini (Liste)
+Actes à commander ¦ Acte de comandat
+Ajouter une page / vue ¦ Adaugă o pagină / imagine
+Ajouter une personne après l’enregistrement ¦ Adaugă o persoană după salvare
+Ajouter un média après l’enregistrement ¦ Adaugă un fișier media după salvare
+Ajouter la page ¦ Adaugă pagina
+Actes à commander ou consulter ¦ Acte de comandat sau de consultat
+Liste de travail indépendante pour les actes à commander, consulter en salle ou faire reproduire. ¦ Listă de lucru separată pentru actele de comandat, de consultat în sala de lectură sau de reprodus.
+Aucun acte à commander ou consulter. ¦ Niciun act de comandat sau de consultat.
+Acte ajouté à la liste. ¦ Act adăugat la listă.
+Transcription ligne à ligne ¦ Transcriere rând cu rând
+Choisis une image pour relier la transcription à une zone. ¦ Alege o imagine ca să legi transcrierea de o zonă.
+Ajouter la ligne ¦ Adaugă rândul
+Aucune ligne relevée pour l’instant ¦ Deocamdată niciun rând notat
+Ajouter une personne - page ¦ Adaugă o persoană - pagină
+Ajouter une personne relevée ¦ Adaugă o persoană notată
+Ajouter comme ¦ Adaugă ca
+Relier à une personne existante ¦ Leagă de o persoană existentă
+Hypothèse, rapprochement, à vérifier… ¦ Ipoteză, apropiere, de verificat…
+Non rattaché à une page ¦ Nelegat de o pagină
+Ajouter un média ¦ Adaugă un fișier media
+Ajouter le média ¦ Adaugă fișierul media
+lieux trouvés ¦ locuri găsite
+médias trouvés ¦ fișiere media găsite
+tâches à faire ¦ sarcini de făcut
+vues à moi ¦ vizualizări proprii
+sortes à moi ¦ tipuri proprii
+plans à moi ¦ planuri proprii
+éléments à toi gardés ¦ elemente ale tale păstrate
+adresses à toi ¦ adrese proprii
+sites trouvés ¦ site-uri găsite
+Données à jour jusqu'en {year}. ¦ Date actualizate până în {year}.
+Sélectionne un ou plusieurs fichiers du fichier des personnes décédées (CSV, TXT ou ZIP contenant un CSV/TXT). Chaque fichier vient s'ajouter à la base existante, rien n'est écrasé. Un même fichier déjà importé est détecté et une confirmation te sera demandée avant de le réimporter. ¦ Selectează unul sau mai multe fișiere din fișierul persoanelor decedate (CSV, TXT sau ZIP care conține un CSV/TXT). Fiecare fișier se adaugă la baza existentă, nimic nu e suprascris. Un fișier deja importat este detectat și ți se va cere o confirmare înainte de a-l reimporta.
+Aucune personne ne correspond à ces critères. ¦ Nicio persoană nu corespunde acestor criterii.
+Vérifier chaque jour à l’ouverture de l’app et importer tout seul les nouveaux fichiers ¦ Verifică în fiecare zi la deschiderea aplicației și importă singur fișierele noi
+Aucun import pour l’instant ¦ Deocamdată niciun import
+Aucun événement ne correspond à cette sélection. ¦ Niciun eveniment nu corespunde acestei selecții.
+📕 à lire ¦ 📕 de citit
+{n} (PDF…) à rajouter à la main ¦ {n} (PDF…) de adăugat din nou de mână
+⤒ Importer un projet (Zotero…) ¦ ⤒ Importă un proiect (Zotero…)
+Qui étaient les montreurs d’optique ? D’où venaient-ils, quelles images montraient-ils, à quels publics ? ¦ Cine erau prezentatorii de vederi optice? De unde veneau, ce imagini arătau, cărui public?
+Relié à d’autres éléments ¦ Legat de alte elemente
+Rien ne correspond à ta recherche. ¦ Nimic nu corespunde căutării tale.
+Le projet est vide : choisis un dossier à gauche, puis « ＋ Ajouter ». ¦ Proiectul e gol: alege un dosar în stânga, apoi „＋ Adaugă”.
+Aucun lieu placé : ajoute un « Lieu » ou un lieu à une date. ¦ Niciun loc plasat: adaugă un „Loc” sau un loc la o dată.
+Mettre à la corbeille ¦ Mută în coș
+☑️ Case à cocher ¦ ☑️ Casetă de bifat
+Ajouter un élément du logiciel ¦ Adaugă un element din aplicație
+(↗ Ouvrir mène à ce bloc) ¦ (↗ Deschide duce la acest bloc)
+Vue d’optique : la place Saint-Marc à Venise ¦ Vedere optică: Piața San Marco din Veneția
+— à la racine du projet — ¦ — la rădăcina proiectului —
+Les dossiers dans l’ordre, avec leurs notes, brouillons, citations et références : à ouvrir dans un traitement de texte ¦ Dosarele în ordine, cu notele, ciornele, citatele și referințele lor: de deschis într-un procesor de text
+Avec de vrais titres de chapitres : s’ouvre dans Word, Pages, LibreOffice ; prêt à mettre en page ¦ Cu titluri reale de capitole: se deschide în Word, Pages, LibreOffice; gata de paginat
+Le plan et les textes, mis en page, avec la bibliographie à la fin ¦ Planul și textele, paginate, cu bibliografia la sfârșit
+Les dossiers de ce projet seront proposés à la création d’un nouveau projet ¦ Dosarele acestui proiect vor fi propuse la crearea unui proiect nou
+{name} — éléments ¦ {name} — elemente
+Mis à la corbeille (on peut l’en sortir). ¦ Mutat în coș (poate fi scos de acolo).
+Étiquette à ajouter aux éléments choisis : ¦ Etichetă de adăugat la elementele alese:
+Copie impossible : sélectionne le texte à la main. ¦ Copiere imposibilă: selectează textul de mână.
+Plan enregistré : il est proposé à la création d’un projet (Réglages → Atelier pour le renommer). ¦ Plan salvat: e propus la crearea unui proiect (Setări → Atelier ca să-l redenumești).
+Faire {what} à moi à partir de celle-ci, pour la modifier (l’originale ne change pas) ¦ Fă {what} pornind de la aceasta, ca s-o modifici (originalul nu se schimbă)
+Garde tous ces réglages (menu, sortes d’éléments, dossiers, plans) sous un nom, pour y revenir plus tard, ou les envoyer à quelqu’un : il les importe ici. Les projets et leurs éléments ne sont pas dedans. ¦ Păstrează toate aceste setări (meniu, tipuri de elemente, dosare, planuri) sub un nume, ca să revii la ele mai târziu sau să le trimiți cuiva: le importă aici. Proiectele și elementele lor nu sunt incluse.
+Garder mes éléments ¦ Păstrează elementele mele
+rien à régler ¦ nimic de reglat
+Copie à modifier ¦ Copie de modificat
+Une enquête rassemble les pistes, médias et notes d’une question à résoudre. ¦ O investigație adună pistele, fișierele media și notele unei întrebări de rezolvat.
+La France est toujours disponible. Ajoute les pays utiles à tes recherches : leurs communes, leurs anciennes communes et les communes voisines de part et d’autre des frontières. Certains pays sont téléchargés la première fois qu’on les coche (il faut alors internet), puis restent sur l’ordinateur. ¦ Franța e mereu disponibilă. Adaugă țările utile cercetărilor tale: localitățile lor, fostele localități și localitățile vecine de o parte și de alta a granițelor. Unele țări sunt descărcate prima dată când le bifezi (atunci e nevoie de internet), apoi rămân pe calculator.
+Nom à chercher ¦ Nume de căutat
+Aucune piste pour l’instant ¦ Deocamdată nicio pistă
+＋ Ajouter une piste ¦ ＋ Adaugă o pistă
+Relier tout ou partie d’un recueil (registre, liste photographiée…) à ce dossier ¦ Leagă tot sau o parte dintr-o culegere (registru, listă fotografiată…) de acest dosar
+Le média reste dans l’enquête, il n’est plus lié à cette piste. ¦ Fișierul media rămâne în investigație, nu mai e legat de această pistă.
+L’événement reste dans la généalogie, il n’est plus lié à cette piste. ¦ Evenimentul rămâne în genealogie, nu mai e legat de această pistă.
+Ajouter une ligne « à faire » dans Recherche → Dépouillement d’archive ¦ Adaugă un rând „de făcut” în Cercetare → Indexare de arhivă
+Je regarde ce qui manque à la lignée… ¦ Mă uit ce lipsește liniei…
+Les trous à combler, pour aller aux archives ¦ Golurile de umplut, pentru mersul la arhive
+Reporter à demain ou à la semaine prochaine ¦ Amână pe mâine sau pe săptămâna viitoare
+Rien d’urgent : ta semaine est libre. Ajoute un rappel ou regarde ce qui manque à ton arbre. ¦ Nimic urgent: săptămâna ta e liberă. Adaugă un memento sau uită-te ce lipsește arborelui tău.
+Ce qu’il y a à faire, le plus urgent d’abord. ✓ quand c’est fait, ⏭ pour reporter : « ↶ Annuler » en bas à gauche si tu te trompes. ¦ Ce e de făcut, cel mai urgent întâi. ✓ când e gata, ⏭ ca să amâni: „↶ Anulează” jos în stânga dacă greșești.
+« {title} » remis à faire ¦ „{title}” pus înapoi de făcut
+Reporter à demain ¦ Amână pe mâine
+Reporter à la semaine prochaine ¦ Amână pe săptămâna viitoare
+Adresse à toi ¦ Adresă proprie
+Adresse à toi pour {site} ¦ Adresă proprie pentru {site}
+⤒ Importer ce que tu as trouvé ▾ ¦ ⤒ Importă ce ai găsit ▾
+⤒ Importer ce que tu as trouvé ¦ ⤒ Importă ce ai găsit
+Cette personne est peut-être vivante : ces recherches restent dans ton navigateur, rien n’est partagé. Pense à sa vie privée. ¦ Această persoană poate fi în viață: aceste căutări rămân în browserul tău, nimic nu e partajat. Gândește-te la viața ei privată.
+Chaque recherche s’ouvre dans ton navigateur. L’app n’envoie rien d’autre que ce que tu vois dans l’adresse, et ne se connecte jamais à ces sites. ¦ Fiecare căutare se deschide în browserul tău. Aplicația nu trimite nimic altceva decât ce vezi în adresă și nu se conectează niciodată la aceste site-uri.
+Ce qu’on lit sur ces sites est à vérifier : homonymes, fautes de lecture. Ensuite, enregistre le document (image, PDF, page) ou copie son lien, et fais « ⤒ Importer ce que tu as trouvé ». ¦ Ce citești pe aceste site-uri trebuie verificat: omonime, greșeli de citire. Apoi salvează documentul (imagine, PDF, pagină) sau copiază-i linkul și folosește „⤒ Importă ce ai găsit”.
+Mets {nom}, {prénom}, {nom_complet}, {lieu}, {année}, {de} ou {à} à la place de ce que tu cherches. ¦ Pune {nom}, {prénom}, {nom_complet}, {lieu}, {année}, {de} sau {à} în locul a ceea ce cauți.
+＋ Ajouter mon site ¦ ＋ Adaugă site-ul meu
+Gratuites seulement (les sites payants restent à la fin quand on décoche) ¦ Doar gratuite (site-urile cu plată rămân la sfârșit când debifezi)
+Aucun site à proposer pour cette fiche. ¦ Niciun site de propus pentru această fișă.
+Pour une personne, les sites à consulter, les plus utiles d’abord : d’après ses lieux, son époque, son métier ou sa vie (soldat, marin, émigré…) et ce qui manque. Chaque site s’ouvre dans ton navigateur avec son nom déjà rempli ; note ensuite ce que ça a donné. ¦ Pentru o persoană, site-urile de consultat, cele mai utile întâi: după locurile, epoca, meseria sau viața ei (soldat, marinar, emigrant…) și ce lipsește. Fiecare site se deschide în browserul tău cu numele deja completat; notează apoi ce a ieșit.
+Les ancêtres où tu bloques : un parent ou les deux manquent, ou tu l’as marqué « 🧱 Je bloque ici ». Pour chacun : ce qui a déjà été cherché, les sites à essayer, les indices de ta base. ¦ Strămoșii la care te-ai blocat: lipsește un părinte sau amândoi, ori l-ai marcat „🧱 Aici m-am blocat”. Pentru fiecare: ce s-a căutat deja, site-urile de încercat, indiciile din baza ta.
+＋ Ajouter un mur… ¦ ＋ Adaugă o fundătură…
+Marqués à la main ¦ Marcate de mână
+🧱 Je bloque ici (marqué à la main) ¦ 🧱 Aici m-am blocat (marcat de mână)
+Où : à préciser ¦ Unde: de precizat
+⤓ Exporter en CSV ¦ ⤓ Exportă în CSV
+Rien de cherché pour l’instant ¦ Deocamdată nimic căutat
+Prendre un livre à la bibliothèque ¦ Ia o carte de la bibliotecă
+Rendre le livre à la bibliothèque ¦ Returnează cartea la bibliotecă
+Continuer la recherche sur internet ¦ Continuă căutarea pe internet
+Se rendre à des archives ¦ Mergi la o arhivă
+Se rendre à un endroit ¦ Mergi într-un loc
+Afrique du Sud ¦ Africa de Sud
+L’INSEE publie un fichier par année (depuis 1970), puis un par mois pour l’année en cours. Quand le fichier de l’année sort, il remplace ceux des mois : l’app retire alors les mois déjà importés pour éviter les doublons. Les fichiers sont gros (60 à 150 Mo par année) : l’import peut prendre quelques minutes. ¦ INSEE publică un fișier pe an (din 1970), apoi unul pe lună pentru anul în curs. Când apare fișierul anului, înlocuiește fișierele lunare: aplicația scoate atunci lunile deja importate ca să evite duplicatele. Fișierele sunt mari (60–150 MB pe an): importul poate dura câteva minute.
+Aide : {text} ¦ Ajutor: {text}
+Garde les actes passés quelques jours avant ou après la date précise (par exemple 30 jours) : un baptême et une naissance déclarée plus tard se retrouvent ensemble. ¦ Păstrează actele făcute cu câteva zile înainte sau după data exactă (de exemplu 30 de zile): un botez și o naștere declarată mai târziu ajung împreună.
+0 km : seulement la commune choisie. En montant le curseur, les communes voisines (jusqu’à 50 km) comptent aussi : utile pour retrouver des témoins ou voisins qui revenaient souvent. ¦ 0 km: doar localitatea aleasă. Dacă urci cursorul, contează și localitățile vecine (până la 50 km): util ca să regăsești martori sau vecini care reveneau des.
+Masquer, montrer, ranger les colonnes ¦ Ascunde, arată, ordonează coloanele
+La liste telle qu’elle est affichée (mêmes colonnes, mêmes filtres) : dans le tableur ou en CSV ¦ Lista așa cum e afișată (aceleași coloane, aceleași filtre): în foaia de calcul sau în CSV
+📮 Actes à demander à la mairie ¦ 📮 Acte de cerut la primărie
+Les actes de moins de 100 ans ne sont en général pas en ligne : il faut les demander à la mairie. Naissances et mariages de moins de 75 ans : copie intégrale réservée à la personne, ses ascendants, descendants et conjoint (sinon extrait sans filiation). Décès : communicables à tous. ¦ Actele mai noi de 100 de ani nu sunt de obicei online: trebuie cerute la primărie. Nașteri și căsătorii mai noi de 75 de ani: copia integrală e rezervată persoanei, ascendenților, descendenților și soțului/soției (altfel extras fără filiație). Decese: accesibile tuturor.
+Montrer aussi ceux que j’ai déjà (copie, source) ou déjà demandés ¦ Arată și pe cele pe care le am deja (copie, sursă) sau pe care le-am cerut deja
+Aucun acte récent à demander. ¦ Niciun act recent de cerut.
+Une lettre toute prête pour demander un acte (mairie, archives, Nantes…) ¦ O scrisoare gata făcută ca să ceri un act (primărie, arhive, Nantes…)
+📮 Demander un acte ¦ 📮 Cere un act
+Payant : abonnement pour voir la plupart des documents ¦ Cu plată: abonament pentru a vedea majoritatea documentelor
+Gratuit en partie ; certains journaux et la lecture complète demandent un abonnement ¦ Gratuit în parte; unele ziare și lectura completă cer un abonament
+Gratuit ; une partie (Premium) est payante ¦ Gratuit; o parte (Premium) e cu plată
+FamilySearch — catalogue (registres filmés d’un lieu) ¦ FamilySearch — catalog (registre filmate ale unui loc)
+Antenati — recherche par nom (Italie) ¦ Antenati — căutare după nume (Italia)
+Même adresse que le bouton « WikiTree » de l’app. Avec un identifiant WikiTree (« Durand-1234 »), la fiche s’ouvre directement. ¦ Aceeași adresă ca butonul „WikiTree” al aplicației. Cu un identificator WikiTree („Durand-1234”), fișa se deschide direct.
+Même adresse que le bouton « WikiTree » de l’app. ¦ Aceeași adresă ca butonul „WikiTree” al aplicației.
