@@ -241,7 +241,7 @@
         const l = C.store.of('sp_result'), n = k => l.filter(r => r.data.outcome === k).length, by = PF.state.sp_by === '1';
         const comp = new Map(); l.forEach(r => { const k = (r.title || '').replace(/\s*\d{4}.*$/, '').trim() || 'Autre'; const o = comp.get(k) || {n: 0, V: 0, D: 0, N: 0}; o.n++; if (r.data.outcome) o[r.data.outcome]++; comp.set(k, o); });
         const matches = C.store.of('sp_season').reduce((t, s) => t + (num(s.data.stats?.matches) || 0), 0);
-        return {body: l.length || matches ? `<p>${esc(plural(Math.max(l.length, matches), 'match', 'matchs'))} · ${PF.res(`V ${n('V')}`, 'w')} ${PF.res(`D ${n('D')}`, 'l')} N ${n('N')} · <button type="button" class="ar-linkbtn" data-pf-state="sp_by:${by ? '0' : '1'}">par compétition ${by ? '▾' : '▸'}</button></p>${by ? [...comp.entries()].map(([k, o]) => `<div>${esc(k)} · ${o.n} <small class="ar-g">(V ${o.V} · D ${o.D} · N ${o.N})</small></div>`).join('') : ''}` : PF.muted('Aucun résultat noté.'),
+        return {body: l.length || matches ? `<p>${esc(plural(Math.max(l.length, matches), 'match', 'matchs'))} · ${PF.res(`V ${n('V')}`, 'w')} ${PF.res(`D ${n('D')}`, 'l')} N ${n('N')} · <button type="button" class="ar-linkbtn" data-pf-state="sp_by:${by ? '0' : '1'}">${i18n('par compétition')} ${by ? '▾' : '▸'}</button></p>${by ? [...comp.entries()].map(([k, o]) => `<div>${esc(k)} · ${o.n} <small class="ar-g">(V ${o.V} · D ${o.D} · N ${o.N})</small></div>`).join('') : ''}` : PF.muted('Aucun résultat noté.'),
             count: l.length || '', empty: !l.length && !matches, actions: `${PF.newBtn('sp_result', '＋')}${l.length ? PF.allBtn('sp_result') : ''}`};
     }};
     S.sp_people = {icon: '🧑‍🏫', label: 'Entraîneurs · coéquipiers', w: '⅓', profile: K, render: C => {

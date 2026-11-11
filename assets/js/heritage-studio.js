@@ -70,18 +70,18 @@
     const profileSummary = settings => {
         const count = key => { try { const v = JSON.parse(settings[key] || '[]'); return Array.isArray(v) ? v.length : Object.keys(v || {}).length; } catch (_) { return 0; } };
         const parts = [];
-        if (settings['genealogie-design']) parts.push('design');
-        if (settings['genealogie-menu-order'] || settings['genealogie-menu-hidden']) parts.push(`menus${count('genealogie-menu-hidden') ? ` (${A().plural(count('genealogie-menu-hidden'), 'masqué')})` : ''}`);
-        if (settings['genealogie-list-order'] || settings['genealogie-list-hidden']) parts.push('listes');
-        if (settings['genealogie-person-blocks']) parts.push('blocs des fiches');
-        if (settings['genealogie-dashboard-blocks']) parts.push('tableau de bord');
-        if (Object.keys(settings).some(k => k.startsWith('genealogie-tile'))) parts.push('fonds de carte');
-        if (Object.keys(settings).some(k => /colors/.test(k))) parts.push('couleurs');
-        if (settings['genealogie-portraits']) parts.push('portraits');
-        if (settings['genealogie-left-column']) parts.push('colonne de gauche');
-        if (settings['genealogie-accord']) parts.push('accord des mots');
-        if (settings['genealogie-designs']) parts.push('designs au choix');
-        return parts.join(' · ') || 'réglages de départ';
+        if (settings['genealogie-design']) parts.push(i18n('design'));
+        if (settings['genealogie-menu-order'] || settings['genealogie-menu-hidden']) parts.push(`${i18n('menus')}${count('genealogie-menu-hidden') ? ` (${A().plural(count('genealogie-menu-hidden'), 'masqué')})` : ''}`);
+        if (settings['genealogie-list-order'] || settings['genealogie-list-hidden']) parts.push(i18n('listes'));
+        if (settings['genealogie-person-blocks']) parts.push(i18n('blocs des fiches'));
+        if (settings['genealogie-dashboard-blocks']) parts.push(i18n('tableau de bord'));
+        if (Object.keys(settings).some(k => k.startsWith('genealogie-tile'))) parts.push(i18n('fonds de carte'));
+        if (Object.keys(settings).some(k => /colors/.test(k))) parts.push(i18n('couleurs'));
+        if (settings['genealogie-portraits']) parts.push(i18n('portraits'));
+        if (settings['genealogie-left-column']) parts.push(i18n('colonne de gauche'));
+        if (settings['genealogie-accord']) parts.push(i18n('accord des mots'));
+        if (settings['genealogie-designs']) parts.push(i18n('designs au choix'));
+        return parts.join(' · ') || i18n('réglages de départ');
     };
     /** Avant d'appliquer : la page de réglages (K2) ne doit pas réécrire, juste après, ce qu'elle montre encore (l'ancien design) */
     const holdAutoSave = () => { const p = window.LCNDA_UI?.autoSavePage?.(); if (!p) return () => {}; const save = p.save; clearTimeout(p.timer); p.pending = false; p.save = null; return () => { p.save = save; }; };
@@ -104,7 +104,7 @@
             const csrf = window.INSTALL_CSRF || S().csrf || '';
             const r = await fetch('api.php?action=save_settings', {method: 'POST', headers: {'Content-Type': 'application/json', 'X-CSRF-Token': csrf}, body: JSON.stringify({set, remove: removed, csrf})});
             if (!r.ok) throw new Error();
-        } catch (_) { release(); toast('La base n’a pas pu enregistrer la mise en page : réessaie.', 'error'); return; }
+        } catch (_) { release(); toast(i18n('La base n’a pas pu enregistrer la mise en page : réessaie.'), 'error'); return; }
         // Tout l'écran se redessine avec la nouvelle mise en page (menus, blocs, couleurs).
         location.reload();
     }
@@ -145,33 +145,33 @@
             save: name => { const list = o.list(), same = list.findIndex(p => p.name === name), entry = {name, saved: new Date().toISOString(), settings: o.current()}; if (same >= 0) list[same] = entry; else list.push(entry); return o.keep(list); },
             replace: i => { const list = o.list(); list[i] = {...list[i], saved: new Date().toISOString(), settings: o.current()}; return o.keep(list); },
             rename: (i, name) => { const list = o.list(); list[i] = {...list[i], name}; return o.keep(list); },
-            duplicate: i => { const list = o.list(), name = UI.freeName(list[i].name, list.map(x => x.name)); list.splice(i + 1, 0, {...JSON.parse(JSON.stringify(list[i])), name, saved: new Date().toISOString()}); if (!o.keep(list)) return false; toast(`Copie « ${name} » créée.`); },
+            duplicate: i => { const list = o.list(), name = UI.freeName(list[i].name, list.map(x => x.name)); list.splice(i + 1, 0, {...JSON.parse(JSON.stringify(list[i])), name, saved: new Date().toISOString()}); if (!o.keep(list)) return false; toast(i18n('Copie « {name} » créée.', {name})); },
             exportOne: i => { o.exportOne(o.list()[i]); return false; },
             // H7 : supprimé tout de suite, « ↶ Annuler » le remet (les réglages actuels ne changent pas)
             remove: i => { const list = o.list(), p = list[i]; A().undoLocalChange(o.removed(p.name), [o.key], () => { list.splice(i, 1); o.keep(list); }, () => { if (frame.isConnected) frame.refresh(); }); },
             importOne: o.importOne});
         return frame;
     };
-    ext.designPanelsEnd.push(() => `<section class="person-block-config h-layouts" id="h-layouts"><header><span class="eyebrow">APPARENCE</span><h3>💾 Réglages enregistrés : l’Apparence</h3><p>Garde <b>tous</b> les réglages de l’Apparence sous un nom : design, designs au choix, portraits, colonne de gauche, menus affichés ou masqués et leur ordre, listes, cartes, graphiques, blocs des fiches et du tableau de bord, couleurs, fonds de carte. Tu peux y revenir en un clic, ou envoyer le fichier à un autre utilisateur de LCNDA.</p></header>
+    ext.designPanelsEnd.push(() => `<section class="person-block-config h-layouts" id="h-layouts"><header><span class="eyebrow">${i18n('APPARENCE')}</span><h3>💾 ${i18n('Réglages enregistrés : l’Apparence')}</h3><p>${i18n('Garde <b>tous</b> les réglages de l’Apparence sous un nom : design, designs au choix, portraits, colonne de gauche, menus affichés ou masqués et leur ordre, listes, cartes, graphiques, blocs des fiches et du tableau de bord, couleurs, fonds de carte. Tu peux y revenir en un clic, ou envoyer le fichier à un autre utilisateur de LCNDA.')}</p></header>
             <div data-presets-slot="layouts"></div></section>`); // tout en bas de l'Apparence : on enregistre une fois tout réglé
     ext.afterDesign.push(() => {
         const slot = document.querySelector('#h-layouts [data-presets-slot="layouts"]');
         if (!slot) return;
-        slot.replaceWith(profilesFrame({id: 'apparence-mises-en-page', key: PROFILES_KEY, what: 'tous les réglages de l’Apparence', from: 'reçue de', removed: n => `Mise en page « ${n} » supprimée`,
+        slot.replaceWith(profilesFrame({id: 'apparence-mises-en-page', key: PROFILES_KEY, what: i18n('tous les réglages de l’Apparence'), from: i18n('reçue de'), removed: n => i18n('Mise en page « {name} » supprimée', {name: n}),
             list: profiles, keep: list => { saveProfiles(list); return true; }, current: currentLayout, summary: profileSummary,
             apply: async p => {
-                if (!await A().confirmBox('Tous les réglages de l’Apparence seront remplacés (pense à enregistrer la mise en page actuelle si tu veux la garder). L’écran va se recharger.', {title: `Appliquer la mise en page « ${p.name} » ?`, okLabel: 'Appliquer'})) return false;
-                toast(`Mise en page « ${p.name} » appliquée.`); applyLayout(p.settings); return false;
+                if (!await A().confirmBox(i18n('Tous les réglages de l’Apparence seront remplacés (pense à enregistrer la mise en page actuelle si tu veux la garder). L’écran va se recharger.'), {title: i18n('Appliquer la mise en page « {name} » ?', {name: p.name}), okLabel: i18n('Appliquer')})) return false;
+                toast(i18n('Mise en page « {name} » appliquée.', {name: p.name})); applyLayout(p.settings); return false;
             },
             exportOne: p => {
                 downloadText(`mise-en-page-${slug(p.name)}.lcnda-apparence.json`, JSON.stringify({type: 'lcnda-mise-en-page', version: 1, name: p.name, saved: p.saved, settings: p.settings}, null, 1));
-                toast('Fichier prêt : envoie-le à l’autre personne, elle l’importe dans Réglages → Apparence.');
+                toast(i18n('Fichier prêt : envoie-le à l’autre personne, elle l’importe dans Réglages → Apparence.'));
             },
             importOne: async () => {
                 const text = await pickFile('.json,application/json');
                 if (text === null) return false;
-                let data; try { data = JSON.parse(text); } catch (_) { toast('Ce fichier n’est pas une mise en page LCNDA.', 'error'); return false; }
-                if (data?.type !== 'lcnda-mise-en-page' || !validProfile(data)) { toast('Ce fichier n’est pas une mise en page LCNDA.', 'error'); return false; }
+                let data; try { data = JSON.parse(text); } catch (_) { toast(i18n('Ce fichier n’est pas une mise en page LCNDA.'), 'error'); return false; }
+                if (data?.type !== 'lcnda-mise-en-page' || !validProfile(data)) { toast(i18n('Ce fichier n’est pas une mise en page LCNDA.'), 'error'); return false; }
                 const settings = cleanLayout(data.settings);
                 const ignored = Object.keys(data.settings).length - Object.keys(settings).length;
                 const list = profiles();
@@ -179,7 +179,7 @@
                 if (list.some(p => p.name === name)) name = window.LCNDA_UI.freeName(name, list.map(p => p.name));
                 list.push({name, saved: new Date().toISOString(), from: String(data.author || '').slice(0, 60), settings});
                 saveProfiles(list);
-                toast(`Mise en page « ${name} » importée : clique sur « Appliquer » pour l’utiliser.${ignored > 0 ? ` (${ignored > 1 ? `${ignored} réglages illisibles laissés` : '1 réglage illisible laissé'} de côté)` : ''}`);
+                toast(i18n('Mise en page « {name} » importée : clique sur « Appliquer » pour l’utiliser.', {name}) + (ignored > 0 ? ' ' + (ignored > 1 ? i18n('({n} réglages illisibles laissés de côté)', {n: ignored}) : i18n('(1 réglage illisible laissé de côté)')) : ''));
             }}));
     });
     /* ═══════════════ 🗃️ TOUS MES RÉGLAGES (Réglages → Apparence, après les mises en page) ═══════════════ */
@@ -229,7 +229,7 @@
         for (let i = 0; i < list.length; i += 500) await A().api('graphs_write', {}, {method: 'POST', body: {op: 'save', defs: list.slice(i, i + 500)}});
     }
     const allProfiles = () => { try { const p = JSON.parse(ls(ALL_PROFILES_KEY, '[]')); return Array.isArray(p) ? p.filter(validProfile) : []; } catch (_) { return []; } };
-    const saveAllProfiles = list => { try { localStorage.setItem(ALL_PROFILES_KEY, JSON.stringify(list)); return true; } catch (_) { toast('Trop de réglages enregistrés pour la place disponible : supprimes-en un.', 'error'); return false; } };
+    const saveAllProfiles = list => { try { localStorage.setItem(ALL_PROFILES_KEY, JSON.stringify(list)); return true; } catch (_) { toast(i18n('Trop de réglages enregistrés pour la place disponible : supprimes-en un.'), 'error'); return false; } };
     const allSummary = s => { const n = Object.keys(s).length; return `${n} réglage${n > 1 ? 's' : ''}`; };
     /** Remet un ensemble : ses réglages remplacent tous les réglages actuels (les autres reviennent à ceux de départ). */
     async function applyAll(settings, {layoutOnly = false, keep = []} = {}) {
@@ -237,7 +237,7 @@
         const release = holdAutoSave();
         const removed = [];
         if (!layoutOnly && typeof settings[GRAPHS_KEY] === 'string') {
-            try { await restoreGraphs(settings[GRAPHS_KEY]); } catch (e) { release(); toast('Tes graphiques n’ont pas pu être remis : ' + e.message, 'error'); return; }
+            try { await restoreGraphs(settings[GRAPHS_KEY]); } catch (e) { release(); toast(i18n('Tes graphiques n’ont pas pu être remis : {err}', {err: e.message}), 'error'); return; }
         }
         settings = Object.fromEntries(Object.entries(settings).filter(([key]) => key !== GRAPHS_KEY));
         // le mode simple garde toujours, ici, son code de sortie, la personne qui regarde et ses photos cachées (un ensemble ne les a pas) ;
@@ -257,37 +257,37 @@
             const csrf = window.INSTALL_CSRF || S().csrf || '';
             const r = await fetch('api.php?action=save_settings', {method: 'POST', headers: {'Content-Type': 'application/json', 'X-CSRF-Token': csrf}, body: JSON.stringify({set, remove: removed.filter(k => !isListKey(k)), csrf})});
             if (!r.ok) throw new Error();
-        } catch (_) { release(); toast('La base n’a pas pu enregistrer ces réglages : réessaie.', 'error'); return; }
+        } catch (_) { release(); toast(i18n('La base n’a pas pu enregistrer ces réglages : réessaie.'), 'error'); return; }
         location.reload();
     }
     // un fichier reçu : les mêmes précautions que pour une mise en page
     const cleanAll = settings => cleanWith(isAllKey, settings);
-    ext.designPanelsEnd.push(() => `<section class="person-block-config h-layouts" id="h-allsets"><header><span class="eyebrow">TOUS LES RÉGLAGES</span><h3>💾 Réglages enregistrés : toute l’app</h3><p>Garde <b>l’intégralité</b> des réglages de l’app sous un nom : l’Apparence, mais aussi les listes et leurs colonnes, les graphiques et onglets à soi, les widgets, les tableaux, les animaux, les livrets, les raccourcis, la recherche sur internet… Tu peux y revenir en un clic, ou les passer à un autre ordinateur avec un fichier. Ne sont pas gardés : tes données, ce qui vise une fiche précise (de cujus, exceptions d’une fiche), le code pour quitter le mode simple et la personne qui regarde, et ce qui est propre à cet ordinateur.</p></header>
-            <div data-presets-slot="allsets"></div><div class="h-layouts-save"><button type="button" class="button small secondary" data-h-allset-export-now>⤓ Exporter les réglages actuels</button></div></section>`);
+    ext.designPanelsEnd.push(() => `<section class="person-block-config h-layouts" id="h-allsets"><header><span class="eyebrow">${i18n('TOUS LES RÉGLAGES')}</span><h3>💾 ${i18n('Réglages enregistrés : toute l’app')}</h3><p>${i18n('Garde <b>l’intégralité</b> des réglages de l’app sous un nom : l’Apparence, mais aussi les listes et leurs colonnes, les graphiques et onglets à soi, les widgets, les tableaux, les animaux, les livrets, les raccourcis, la recherche sur internet… Tu peux y revenir en un clic, ou les passer à un autre ordinateur avec un fichier. Ne sont pas gardés : tes données, ce qui vise une fiche précise (de cujus, exceptions d’une fiche), le code pour quitter le mode simple et la personne qui regarde, et ce qui est propre à cet ordinateur.')}</p></header>
+            <div data-presets-slot="allsets"></div><div class="h-layouts-save"><button type="button" class="button small secondary" data-h-allset-export-now>${i18n('⤓ Exporter les réglages actuels')}</button></div></section>`);
     ext.afterDesign.push(() => {
         const box = document.getElementById('h-allsets'), slot = box?.querySelector('[data-presets-slot="allsets"]');
         if (!slot) return;
         const fileOf = (name, saved, settings) => JSON.stringify({type: 'lcnda-reglages', version: 1, name, saved, settings}, null, 1);
-        box.querySelector('[data-h-allset-export-now]').addEventListener('click', () => { downloadText(`reglages-lcnda-${new Date().toISOString().slice(0, 10)}.lcnda-reglages.json`, fileOf('Mes réglages', new Date().toISOString(), currentAll())); toast('Fichier prêt : il s’importe ici, sur un autre ordinateur.'); });
-        slot.replaceWith(profilesFrame({id: 'apparence-tous-les-reglages', key: ALL_PROFILES_KEY, what: 'tous les réglages de l’app', from: 'reçu de', removed: n => `Ensemble « ${n} » supprimé`,
+        box.querySelector('[data-h-allset-export-now]').addEventListener('click', () => { downloadText(`reglages-lcnda-${new Date().toISOString().slice(0, 10)}.lcnda-reglages.json`, fileOf(i18n('Mes réglages'), new Date().toISOString(), currentAll())); toast(i18n('Fichier prêt : il s’importe ici, sur un autre ordinateur.')); });
+        slot.replaceWith(profilesFrame({id: 'apparence-tous-les-reglages', key: ALL_PROFILES_KEY, what: i18n('tous les réglages de l’app'), from: i18n('reçu de'), removed: n => i18n('Ensemble « {name} » supprimé', {name: n}),
             list: allProfiles, keep: saveAllProfiles, current: currentAll, summary: allSummary,
             apply: async p => {
-                if (!await A().confirmBox('Tous les réglages de l’app seront remplacés (pense à enregistrer les réglages actuels si tu veux les garder). Tes données ne bougent pas. L’écran va se recharger.', {title: `Appliquer l’ensemble « ${p.name} » ?`, okLabel: 'Appliquer'})) return false;
-                toast(`Ensemble « ${p.name} » appliqué.`); applyAll(p.settings, {layoutOnly: !!p.layoutOnly, keep: Array.isArray(p.keep) ? p.keep : []}); return false;
+                if (!await A().confirmBox(i18n('Tous les réglages de l’app seront remplacés (pense à enregistrer les réglages actuels si tu veux les garder). Tes données ne bougent pas. L’écran va se recharger.'), {title: i18n('Appliquer l’ensemble « {name} » ?', {name: p.name}), okLabel: i18n('Appliquer')})) return false;
+                toast(i18n('Ensemble « {name} » appliqué.', {name: p.name})); applyAll(p.settings, {layoutOnly: !!p.layoutOnly, keep: Array.isArray(p.keep) ? p.keep : []}); return false;
             },
-            exportOne: p => { downloadText(`reglages-${slug(p.name)}.lcnda-reglages.json`, fileOf(p.name, p.saved, portableAll(p.settings))); toast('Fichier prêt : il s’importe dans Réglages → Apparence → « Mes ensembles de réglages ».'); },
+            exportOne: p => { downloadText(`reglages-${slug(p.name)}.lcnda-reglages.json`, fileOf(p.name, p.saved, portableAll(p.settings))); toast(i18n('Fichier prêt : il s’importe dans Réglages → Apparence → « Mes ensembles de réglages ».')); },
             importOne: async () => {
                 const text = await pickFile('.json,application/json');
                 if (text === null) return false;
-                let data; try { data = JSON.parse(text); } catch (_) { toast('Ce fichier n’est pas un fichier de réglages LCNDA.', 'error'); return false; }
+                let data; try { data = JSON.parse(text); } catch (_) { toast(i18n('Ce fichier n’est pas un fichier de réglages LCNDA.'), 'error'); return false; }
                 // une mise en page (Apparence) s'importe aussi ici
-                if (!['lcnda-reglages', 'lcnda-mise-en-page'].includes(data?.type) || !validProfile(data)) { toast('Ce fichier n’est pas un fichier de réglages LCNDA.', 'error'); return false; }
+                if (!['lcnda-reglages', 'lcnda-mise-en-page'].includes(data?.type) || !validProfile(data)) { toast(i18n('Ce fichier n’est pas un fichier de réglages LCNDA.'), 'error'); return false; }
                 const settings = cleanAll(data.settings), dropped = Object.keys(data.settings).filter(k => !(k in settings)).slice(0, 500), ignored = dropped.length;
-                const list = allProfiles(); let name = String(data.name).slice(0, 60) || 'Réglages importés';
+                const list = allProfiles(); let name = String(data.name).slice(0, 60) || i18n('Réglages importés');
                 if (list.some(p => p.name === name)) name = window.LCNDA_UI.freeName(name, list.map(p => p.name));
                 list.push({name, saved: new Date().toISOString(), from: String(data.author || '').slice(0, 60), settings, keep: dropped.filter(k => typeof k === 'string'), layoutOnly: data.type === 'lcnda-mise-en-page'});
                 if (!saveAllProfiles(list)) return false;
-                toast(`Ensemble « ${name} » importé : clique sur « Appliquer » pour l’utiliser.${ignored > 0 ? ` (${ignored > 1 ? `${ignored} réglages illisibles laissés` : '1 réglage illisible laissé'} de côté)` : ''}`);
+                toast(i18n('Ensemble « {name} » importé : clique sur « Appliquer » pour l’utiliser.', {name}) + (ignored > 0 ? ' ' + (ignored > 1 ? i18n('({n} réglages illisibles laissés de côté)', {n: ignored}) : i18n('(1 réglage illisible laissé de côté)')) : ''));
             }}));
     });
     /* ═══════════ ⚙️ BARRES D'OUTILS À SOI (Retouche, Modifier le son, Montage vidéo) ═══════════

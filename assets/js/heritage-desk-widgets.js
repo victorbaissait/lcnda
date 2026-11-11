@@ -44,7 +44,7 @@
         const url = new URL('api.php', location.href); url.searchParams.set('action', 'desk_widget_file'); url.searchParams.set('kind', kind);
         if (opts.label) url.searchParams.set('label', opts.label); if (opts.date) url.searchParams.set('date', opts.date);
         const r = await fetch(url, {credentials: 'same-origin'});
-        if (!r.ok || !/html/.test(r.headers.get('content-type') || '')) { const j = await r.json().catch(() => ({})); throw new Error(j.error || 'Le widget n’a pas pu être fabriqué.'); }
+        if (!r.ok || !/html/.test(r.headers.get('content-type') || '')) { const j = await r.json().catch(() => ({})); throw new Error(j.error || i18n('Le widget n’a pas pu être fabriqué.')); }
         const blob = await r.blob(), a = document.createElement('a');
         a.href = URL.createObjectURL(blob); a.download = `widget-${kind}.html`; document.body.appendChild(a); a.click();
         setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 4000);
@@ -56,42 +56,42 @@
         const D = desk();
         let state = {widgets: {}, autostart: false, platform: ''};
         if (D) { try { state = await D.list() || state; } catch (_) {} }
-        const cd = {label: cdRead().label || 'La cousinade', date: cdRead().date || ''};
-        const os = {darwin: 'Mac', win32: 'Windows', linux: 'Linux'}[state.platform] || 'ton ordinateur';
+        const cd = {label: cdRead().label || i18n('La cousinade'), date: cdRead().date || ''};
+        const os = {darwin: 'Mac', win32: 'Windows', linux: 'Linux'}[state.platform] || i18n('ton ordinateur');
         const card = k => {
             const [ic, name, hint] = KINDS[k], w = state.widgets?.[k] || {}, on = !!w.open;
-            const cdFields = k === 'countdown' ? `<div class="form-grid one-column dw-count"><label>Quoi<input type="text" data-dw-cd="label" maxlength="60" value="${esc(cd.label)}"></label><label>Le<input type="text" data-dw-cd="date" data-ui-date="nocal" value="${esc(cd.date ? isoLabel(cd.date) : '')}" placeholder="14 juillet 2027"></label></div>` : '';
+            const cdFields = k === 'countdown' ? `<div class="form-grid one-column dw-count"><label>${i18n('Quoi')}<input type="text" data-dw-cd="label" maxlength="60" value="${esc(cd.label)}"></label><label>${i18n('Le')}<input type="text" data-dw-cd="date" data-ui-date="nocal" value="${esc(cd.date ? isoLabel(cd.date) : '')}" placeholder="${esc(i18n('14 juillet 2027'))}"></label></div>` : '';
             const acts = D
-                ? `<label class="ui-toggle"><input type="checkbox" data-dw-top="${k}"${w.onTop ? ' checked' : ''}><i></i>Toujours au-dessus</label><div class="dw-acts">${on ? `<button type="button" class="button small secondary" data-dw-close="${k}">× Retirer du bureau</button><button type="button" class="button small secondary" data-dw-open="${k}">↻ Remettre à jour</button>` : `<button type="button" class="button small" data-dw-open="${k}">🪟 Mettre sur le bureau</button>`}</div>`
-                : `<div class="dw-acts"><button type="button" class="button small" data-dw-file="${k}">⤓ Télécharger le widget (.html)</button></div>`;
-            return `<div class="dw-kind${on ? ' is-open' : ''}${focus === k ? ' is-focus' : ''}" data-dw-kind="${k}"><h4>${ic} ${esc(name)}</h4><p>${esc(hint)}</p>${cdFields}${acts}</div>`;
+                ? `<label class="ui-toggle"><input type="checkbox" data-dw-top="${k}"${w.onTop ? ' checked' : ''}><i></i>${i18n('Toujours au-dessus')}</label><div class="dw-acts">${on ? `<button type="button" class="button small secondary" data-dw-close="${k}">${i18n('× Retirer du bureau')}</button><button type="button" class="button small secondary" data-dw-open="${k}">${i18n('↻ Remettre à jour')}</button>` : `<button type="button" class="button small" data-dw-open="${k}">🪟 ${i18n('Mettre sur le bureau')}</button>`}</div>`
+                : `<div class="dw-acts"><button type="button" class="button small" data-dw-file="${k}">${i18n('⤓ Télécharger le widget (.html)')}</button></div>`;
+            return `<div class="dw-kind${on ? ' is-open' : ''}${focus === k ? ' is-focus' : ''}" data-dw-kind="${k}"><h4>${ic} ${esc(i18n(name))}</h4><p>${esc(i18n(hint))}</p>${cdFields}${acts}</div>`;
         };
         const intro = D
-            ? UI().notice?.('info', `Les widgets se posent sur le bureau de ${os}, dans une petite fenêtre sans cadre : glisse-la par son titre, elle retient sa place. Lecture seule : rien ne s’y modifie. Clic droit sur un widget : toujours au-dessus, ouvrir LCNDA, fermer.`) || ''
-            : UI().notice?.('warn', 'Tu utilises LCNDA dans un navigateur : les vrais widgets de bureau (petite fenêtre sans cadre, toujours au-dessus, au démarrage de l’ordinateur) demandent l’application de bureau LCNDA (PC, Mac, Linux). À la place, télécharge le widget : un fichier .html autonome, à ouvrir d’un double-clic et à garder dans un onglet ; sans personne vivante ni fiche confidentielle.') || '';
-        ext.openDialog({eyebrow: 'TABLEAU DE BORD', title: '🪟 Widgets sur le bureau', wide: true, submitLabel: 'Fermer',
-            body: `${intro}<div class="dw-kinds">${Object.keys(KINDS).map(card).join('')}</div>${D ? `<div class="dw-auto"><label class="ui-toggle"><input type="checkbox" data-dw-auto${state.autostart ? ' checked' : ''}><i></i>Démarrer avec l’ordinateur (les widgets s’ouvrent seuls, sans la grande fenêtre)</label></div>` : ''}`,
+            ? UI().notice?.('info', i18n('Les widgets se posent sur le bureau de {os}, dans une petite fenêtre sans cadre : glisse-la par son titre, elle retient sa place. Lecture seule : rien ne s’y modifie. Clic droit sur un widget : toujours au-dessus, ouvrir LCNDA, fermer.', {os})) || ''
+            : UI().notice?.('warn', i18n('Tu utilises LCNDA dans un navigateur : les vrais widgets de bureau (petite fenêtre sans cadre, toujours au-dessus, au démarrage de l’ordinateur) demandent l’application de bureau LCNDA (PC, Mac, Linux). À la place, télécharge le widget : un fichier .html autonome, à ouvrir d’un double-clic et à garder dans un onglet ; sans personne vivante ni fiche confidentielle.')) || '';
+        ext.openDialog({eyebrow: i18n('TABLEAU DE BORD'), title: '🪟 ' + i18n('Widgets sur le bureau'), wide: true, submitLabel: i18n('Fermer'),
+            body: `${intro}<div class="dw-kinds">${Object.keys(KINDS).map(card).join('')}</div>${D ? `<div class="dw-auto"><label class="ui-toggle"><input type="checkbox" data-dw-auto${state.autostart ? ' checked' : ''}><i></i>${i18n('Démarrer avec l’ordinateur (les widgets s’ouvrent seuls, sans la grande fenêtre)')}</label></div>` : ''}`,
             onOpen: dg => {
                 const repaint = async () => { if (D) { try { state = await D.list() || state; } catch (_) {} } dg.querySelector('.dw-kinds').innerHTML = Object.keys(KINDS).map(card).join(''); UI()?.scan?.(dg); };
-                const cdOpts = () => { const label = dg.querySelector('[data-dw-cd="label"]')?.value.trim().slice(0, 60) || 'La cousinade'; const raw = dg.querySelector('[data-dw-cd="date"]')?.value || ''; const date = toIso(raw); return {label, date, raw}; };
+                const cdOpts = () => { const label = dg.querySelector('[data-dw-cd="label"]')?.value.trim().slice(0, 60) || i18n('La cousinade'); const raw = dg.querySelector('[data-dw-cd="date"]')?.value || ''; const date = toIso(raw); return {label, date, raw}; };
                 const optsFor = k => { const o = {onTop: !!dg.querySelector(`[data-dw-top="${k}"]`)?.checked}; if (k === 'countdown') { const c = cdOpts(); o.label = c.label; o.date = c.date; } return o; };
                 dg.addEventListener('click', async e => {
                     const b = e.target.closest('button'); if (!b) return;
                     try {
                         if (b.dataset.dwOpen || b.dataset.dwFile) {
                             const k = b.dataset.dwOpen || b.dataset.dwFile;
-                            if (k === 'countdown') { const c = cdOpts(); if (!c.date) { const f = dg.querySelector('[data-dw-cd="date"]'); return UI()?.fail ? UI().fail(f, c.raw ? '⛔ Je ne comprends pas cette date : écris par exemple « 14 juillet 2027 » ou « 14/07/2027 ».' : '⛔ Donne la date du compte à rebours.') : toast('Donne la date.', 'error'); } cdWrite({label: c.label, date: c.date}); }
+                            if (k === 'countdown') { const c = cdOpts(); if (!c.date) { const f = dg.querySelector('[data-dw-cd="date"]'); return UI()?.fail ? UI().fail(f, c.raw ? i18n('⛔ Je ne comprends pas cette date : écris par exemple « 14 juillet 2027 » ou « 14/07/2027 ».') : i18n('⛔ Donne la date du compte à rebours.')) : toast(i18n('Donne la date.'), 'error'); } cdWrite({label: c.label, date: c.date}); }
                             if (b.dataset.dwFile) return fileFor(k, optsFor(k));
-                            const r = await D.open(k, optsFor(k)); if (!r?.ok) throw new Error(r?.error || 'Le widget n’a pas pu s’ouvrir.');
-                            toast(`${KINDS[k][0]} « ${KINDS[k][1]} » est sur le bureau.`, 'success'); return repaint();
+                            const r = await D.open(k, optsFor(k)); if (!r?.ok) throw new Error(r?.error || i18n('Le widget n’a pas pu s’ouvrir.'));
+                            toast(i18n('{icon} « {name} » est sur le bureau.', {icon: KINDS[k][0], name: i18n(KINDS[k][1])}), 'success'); return repaint();
                         }
-                        if (b.dataset.dwClose) { const k = b.dataset.dwClose; await D.close(k); A().undoToast ? A().undoToast(i18n('« {name} » retiré du bureau', {name: i18n(KINDS[k][1])}), {undo: async () => { await D.open(k, optsFor(k)); repaint(); }}) : toast('Retiré du bureau.'); return repaint(); }
+                        if (b.dataset.dwClose) { const k = b.dataset.dwClose; await D.close(k); A().undoToast ? A().undoToast(i18n('« {name} » retiré du bureau', {name: i18n(KINDS[k][1])}), {undo: async () => { await D.open(k, optsFor(k)); repaint(); }}) : toast(i18n('Retiré du bureau.')); return repaint(); }
                     } catch (err) { toast(err.message, 'error'); }
                 });
                 dg.addEventListener('change', async e => {
                     const t = e.target;
                     if (t.dataset.dwTop && D) { const k = t.dataset.dwTop; if (state.widgets?.[k]?.open) { await D.open(k, optsFor(k)); repaint(); } else { await D.set?.(k, {onTop: t.checked}); } return; }
-                    if (t.matches('[data-dw-auto]') && D) { const r = await D.autostart(t.checked); if (!r?.ok) { t.checked = !t.checked; return toast(r?.error || 'Ce réglage n’a pas pu être changé sur cet ordinateur.', 'error'); } toast(t.checked ? 'Les widgets démarreront avec l’ordinateur.' : 'Les widgets ne démarreront plus avec l’ordinateur.', 'success'); }
+                    if (t.matches('[data-dw-auto]') && D) { const r = await D.autostart(t.checked); if (!r?.ok) { t.checked = !t.checked; return toast(r?.error || i18n('Ce réglage n’a pas pu être changé sur cet ordinateur.'), 'error'); } toast(t.checked ? i18n('Les widgets démarreront avec l’ordinateur.') : i18n('Les widgets ne démarreront plus avec l’ordinateur.'), 'success'); }
                 });
                 if (focus) setTimeout(() => dg.querySelector(`[data-dw-kind="${focus}"]`)?.scrollIntoView({block: 'nearest'}), 50);
             }, onSubmit: () => {}});
@@ -112,9 +112,9 @@
         });
         // 🧮 la calculette flottante de l'app : « 🪟 Mettre sur le bureau »
         const ch = document.querySelector('#calculette .cm-head');
-        if (ch && !ch.querySelector('[data-dw-put]')) { const b = document.createElement('button'); b.type = 'button'; b.className = 'icon-button small cm-ib'; b.dataset.dwPut = 'calc'; b.title = desk() ? '🪟 Mettre la calculette sur le bureau (une petite fenêtre à part)' : '🪟 Mettre la calculette sur le bureau (un fichier .html autonome)'; b.setAttribute('aria-label', 'Mettre sur le bureau'); b.textContent = '🪟'; const x = ch.querySelector('[data-cm-close]'); if (x) x.before(b); else ch.appendChild(b); }
+        if (ch && !ch.querySelector('[data-dw-put]')) { const b = document.createElement('button'); b.type = 'button'; b.className = 'icon-button small cm-ib'; b.dataset.dwPut = 'calc'; b.title = desk() ? i18n('🪟 Mettre la calculette sur le bureau (une petite fenêtre à part)') : i18n('🪟 Mettre la calculette sur le bureau (un fichier .html autonome)'); b.setAttribute('aria-label', i18n('Mettre sur le bureau')); b.textContent = '🪟'; const x = ch.querySelector('[data-cm-close]'); if (x) x.before(b); else ch.appendChild(b); }
         const foot = document.querySelector('.dashboard-footer-actions');
-        if (foot && !foot.querySelector('[data-dw-all]')) { const b = document.createElement('button'); b.type = 'button'; b.className = 'button small secondary'; b.dataset.dwAll = '1'; b.textContent = '🪟 Widgets sur le bureau…'; b.title = 'Ce jour-là, un ancêtre, la photo du jour, un compte à rebours, la calculette : sur le bureau de l’ordinateur'; foot.appendChild(b); }
+        if (foot && !foot.querySelector('[data-dw-all]')) { const b = document.createElement('button'); b.type = 'button'; b.className = 'button small secondary'; b.dataset.dwAll = '1'; b.textContent = '🪟 ' + i18n('Widgets sur le bureau…'); b.title = i18n('Ce jour-là, un ancêtre, la photo du jour, un compte à rebours, la calculette : sur le bureau de l’ordinateur'); foot.appendChild(b); }
     };
     let raf = 0;
     new MutationObserver(() => { if (raf) return; raf = requestAnimationFrame(() => { raf = 0; decorate(); }); }).observe(document.body, {childList: true, subtree: true});

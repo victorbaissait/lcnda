@@ -715,7 +715,7 @@
         }
         function paintCrumbs() {
             const c = $('[data-vx-crumbs]'); if (!c) return; c.hidden = !scope.length; if (!scope.length) { c.innerHTML = ''; return; }
-            const names = pathName(scope); c.innerHTML = `<button type="button" data-vx-crumb="${scope.length - 1}" title="Sortir d’un niveau (Échap)">⤴</button><button type="button" data-vx-crumb="0">Dessin</button>${names.map((n, i) => `<span>›</span><button type="button" data-vx-crumb="${i + 1}" class="${i === names.length - 1 ? 'is-on' : ''}">${esc(n)}</button>`).join('')}`;
+            const names = pathName(scope); c.innerHTML = `<button type="button" data-vx-crumb="${scope.length - 1}" title="${esc(i18n('Sortir d’un niveau (Échap)'))}">⤴</button><button type="button" data-vx-crumb="0">${esc(i18n('Dessin'))}</button>${names.map((n, i) => `<span>›</span><button type="button" data-vx-crumb="${i + 1}" class="${i === names.length - 1 ? 'is-on' : ''}">${esc(/^Calque \d+$/.test(n) ? i18n('Calque {n}', {n: n.slice(7)}) : n === 'Groupe' ? i18n('Groupe') : n)}</button>`).join('')}`;
         }
         /* repères commentés : en déplaçant, les bords et centres s'aimantent à ceux des autres objets et du plan de travail (⌘ : sans) */
         const SMART_KEY = 'lcnda-vx-smart'; let smart = (() => { try { return localStorage.getItem(SMART_KEY) !== '0'; } catch (_) { return true; } })();

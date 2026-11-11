@@ -800,3 +800,810 @@ Ce ne sont pas des lettres-nombres connues (exemples : {x}). ¦ Nejsou to znám�
 L’alphabet ({n} lettres) ¦ Abeceda ({n} písmen) ¦ Alfabetet ({n} bokstäver) ¦ Alfabetet ({n} bogstaver)
 Sources : {x}. ¦ Prameny: {x}. ¦ Källor: {x}. ¦ Kilder: {x}.
 L’aide à la lecture n’a pas pu se charger (fichier app-aide-lecture.js manquant ?). ¦ Pomoc se čtením se nepodařilo načíst (chybí soubor app-aide-lecture.js?). ¦ Läshjälpen kunde inte laddas (saknas filen app-aide-lecture.js?). ¦ Læsehjælpen kunne ikke indlæses (mangler filen app-aide-lecture.js?).
+Chercher… ex. vve, feu, filius, ſ, cult., d° ¦ Hledat… např. vve, feu, filius, ſ, cult., d° ¦ Sök… t.ex. vve, feu, filius, ſ, cult., d° ¦ Søg… f.eks. vve, feu, filius, ſ, cult., d°
+Chercher dans l’aide à la lecture ¦ Hledat v pomoci se čtením ¦ Sök i läshjälpen ¦ Søg i læsehjælpen
+Toutes les langues ¦ Všechny jazyky ¦ Alla språk ¦ Alle sprog
+Moins de langues ¦ Méně jazyků ¦ Färre språk ¦ Færre sprog
+Rien pour « {q} »{x}. Vérifie l’orthographe, cherche un morceau du mot (« vv », « legit »…), ou choisis « Toutes les langues ». ¦ Nic pro „{q}“{x}. Zkontroluj pravopis, hledej část slova („vv“, „legit“…) nebo vyber „Všechny jazyky“. ¦ Inget för ”{q}”{x}. Kontrollera stavningen, sök efter en del av ordet (”vv”, ”legit”…) eller välj ”Alla språk”. ¦ Intet for »{q}«{x}. Tjek stavningen, søg efter en del af ordet (»vv«, »legit«…), eller vælg »Alle sprog«.
+en {lang} ¦ v jazyce {lang} ¦ på {lang} ¦ på {lang}
+Rien dans cette rubrique. ¦ V tomto oddílu nic není. ¦ Inget i det här avsnittet. ¦ Intet i dette afsnit.
+mots et formules ¦ slova a formule ¦ ord och formler ¦ ord og formler
+Repris de {src} ¦ Převzato z {src} ¦ Hämtat från {src} ¦ Hentet fra {src}
+Copier « {t} » ¦ Kopírovat „{t}“ ¦ Kopiera ”{t}” ¦ Kopiér »{t}«
+Aucune lettre pour « {q} ». Essaie « s long », « r rond », « u n », « ligature », « kurrent ». ¦ Žádné písmeno pro „{q}“. Zkus „s long“, „r rond“, „u n“, „ligature“, „kurrent“. ¦ Ingen bokstav för ”{q}”. Prova ”s long”, ”r rond”, ”u n”, ”ligature”, ”kurrent”. ¦ Intet bogstav for »{q}«. Prøv »s long«, »r rond«, »u n«, »ligature«, »kurrent«.
+Pas encore de lettres dessinées pour cette langue : elle s’écrit comme le français. Regarde ses mots dans 🔍 Dictionnaire. ¦ Pro tento jazyk zatím nejsou nakreslená písmena: píše se jako francouzština. Podívej se na jeho slova ve 🔍 Slovníku. ¦ Inga ritade bokstäver för det här språket ännu: det skrivs som franska. Titta på dess ord i 🔍 Ordbok. ¦ Endnu ingen tegnede bogstaver til dette sprog: det skrives som fransk. Se dets ord i 🔍 Ordbog.
+on voit ¦ vidíš ¦ man ser ¦ man ser
+à ne pas confondre ¦ nezaměnit s ¦ inte att förväxla med ¦ må ikke forveksles med
+Pas encore d’exercice dans cette langue : choisis « Toutes les langues ». ¦ V tomto jazyce zatím není cvičení: vyber „Všechny jazyky“. ¦ Inga övningar på det här språket ännu: välj ”Alla språk”. ¦ Endnu ingen øvelser på dette sprog: vælg »Alle sprog«.
+Textes modèles écrits pour l’app, sur le modèle des registres de l’époque (formules authentiques, personnes d’exemple, toutes nées bien avant 1950). ¦ Vzorové texty napsané pro aplikaci podle tehdejších matrik (autentické formule, ukázkové osoby, všechny narozené dávno před rokem 1950). ¦ Exempeltexter skrivna för appen efter tidens kyrkböcker (äkta formuleringar, exempelpersoner, alla födda långt före 1950). ¦ Eksempeltekster skrevet til appen efter tidens kirkebøger (ægte formuleringer, eksempelpersoner, alle født længe før 1950).
+Aucun exercice pour « {q} ». ¦ Žádné cvičení pro „{q}“. ¦ Ingen övning för ”{q}”. ¦ Ingen øvelse for »{q}«.
+Tous les exercices ¦ Všechna cvičení ¦ Alla övningar ¦ Alle øvelser
+Le texte comme sur le registre ¦ Text jako v matrice ¦ Texten som i kyrkboken ¦ Teksten som i kirkebogen
+Ta lecture ¦ Tvoje čtení ¦ Din läsning ¦ Din læsning
+(développe les abréviations : « par. » → paroisse) ¦ (rozepiš zkratky: „par.“ → paroisse) ¦ (skriv ut förkortningarna: ”par.” → paroisse) ¦ (skriv forkortelserne ud: »par.« → paroisse)
+Écris ici ce que tu lis, mot après mot… ¦ Napiš sem, co čteš, slovo po slovu… ¦ Skriv här vad du läser, ord för ord… ¦ Skriv her, hvad du læser, ord for ord…
+exercice|Un indice ¦ Nápověda ¦ En ledtråd ¦ Et hint
+Voir la solution ¦ Zobrazit řešení ¦ Visa lösningen ¦ Vis løsningen
+{miss} à revoir ¦ {miss} k opravě ¦ {miss} att se över ¦ {miss} skal ses igen
+bravo ! ¦ výborně! ¦ bravo! ¦ flot!
+{extra} en trop ¦ {extra} navíc ¦ {extra} för mycket ¦ {extra} for meget
+oublié ¦ vynecháno ¦ glömt ¦ glemt
+en trop ¦ navíc ¦ för mycket ¦ for meget
+— passe la souris sur un mot à revoir pour l’explication. ¦ — najeď myší na slovo k opravě a uvidíš vysvětlení. ¦ — för musen över ett ord att se över för att få förklaringen. ¦ — hold musen over et ord, der skal ses igen, for at få forklaringen.
+Ce mot n’est pas dans le texte ¦ Toto slovo v textu není ¦ Det här ordet finns inte i texten ¦ Dette ord er ikke i teksten
+On lit « {exp} » ¦ Čte se „{exp}“ ¦ Man läser ”{exp}” ¦ Man læser »{exp}«
+Écris d’abord ta lecture du texte. ¦ Nejdřív napiš, jak text čteš. ¦ Skriv först din läsning av texten. ¦ Skriv først din læsning af teksten.
+La fenêtre n’est pas encore prête : réessaie dans un instant. ¦ Okno ještě není připravené: zkus to za chvíli znovu. ¦ Fönstret är inte klart än: försök igen om en stund. ¦ Vinduet er ikke klar endnu: prøv igen om lidt.
+AIDE · LECTURE DES ACTES ¦ NÁPOVĚDA · ČTENÍ ZÁZNAMŮ ¦ HJÄLP · LÄSA HANDLINGAR ¦ HJÆLP · LÆSNING AF DOKUMENTER
+Aide à la lecture des actes anciens ¦ Pomoc se čtením starých záznamů ¦ Hjälp att läsa gamla handlingar ¦ Hjælp til at læse gamle dokumenter
+Le convertisseur n’a pas pu se charger (fichier app-autrefois-engine.js manquant ?). ¦ Převodník se nepodařilo načíst (chybí soubor app-autrefois-engine.js?). ¦ Omvandlaren kunde inte laddas (saknas filen app-autrefois-engine.js?). ¦ Omregneren kunne ikke indlæses (mangler filen app-autrefois-engine.js?).
+La mesure ¦ Míra ¦ Måttet ¦ Målet
+Région, ville ¦ Oblast, město ¦ Region, stad ¦ Region, by
+Les mesures changeaient d’une province à l’autre : choisis celle de l’acte. ¦ Míry se lišily provincie od provincie: vyber tu ze záznamu. ¦ Måtten varierade från provins till provins: välj den i handlingen. ¦ Målene varierede fra provins til provins: vælg den fra dokumentet.
+La date (républicaine ou de tous les jours) ¦ Datum (republikánské nebo běžné) ¦ Datumet (republikanskt eller vanligt) ¦ Datoen (republikansk eller almindelig)
+Tout est calculé ici, sans internet. Argent : {x} à partir de 1901 ; avant, un ordre de grandeur. Les résultats sont des repères (≈), pas des valeurs exactes. ¦ Vše se počítá tady, bez internetu. Peníze: {x} od roku 1901; předtím řádový odhad. Výsledky jsou orientační (≈), ne přesné hodnoty. ¦ Allt räknas ut här, utan internet. Pengar: {x} från 1901; före det en storleksordning. Resultaten är riktmärken (≈), inte exakta värden. ¦ Alt beregnes her uden internet. Penge: {x} fra 1901; før det en størrelsesorden. Resultaterne er pejlemærker (≈), ikke præcise værdier.
+(année républicaine) ¦ (republikánský rok) ¦ (republikanskt år) ¦ (republikansk år)
+une année d’aujourd’hui ou d’avant (jusqu’à 2025) ¦ dnešní nebo dřívější rok (do 2025) ¦ ett år i dag eller tidigare (till och med 2025) ¦ et år i dag eller tidligere (til og med 2025)
+une année entre 1300 et 2025 (exemples : 1780, an X, 1955) ¦ rok mezi 1300 a 2025 (příklady: 1780, an X, 1955) ¦ ett år mellan 1300 och 2025 (exempel: 1780, an X, 1955) ¦ et år mellem 1300 og 2025 (eksempler: 1780, an X, 1955)
+Écris une somme et son année : « 300 livres » en « 1780 ». ¦ Napiš částku a její rok: „300 livres“ v roce „1780“. ¦ Skriv ett belopp och dess år: ”300 livres” år ”1780”. ¦ Skriv et beløb og dets år: »300 livres« i »1780«.
+Écris aussi l’année de la somme. ¦ Napiš i rok částky. ¦ Skriv också beloppets år. ¦ Skriv også beløbets år.
+Corrige la case marquée ⚠️ ci-dessus. ¦ Oprav pole označené ⚠️ výše. ¦ Rätta rutan markerad med ⚠️ ovan. ¦ Ret feltet markeret med ⚠️ ovenfor.
+{label} en {y} {x} d’aujourd’hui ({x2}) ¦ {label} v roce {y} {x} v dnešních penězích ({x2}) ¦ {label} år {y} {x} i dagens pengar ({x2}) ¦ {label} i {y} {x} i dagens penge ({x2})
+indice des prix de l’INSEE ¦ cenový index INSEE ¦ INSEE:s prisindex ¦ INSEE's prisindeks
+ordre de grandeur ¦ řádový odhad ¦ storleksordning ¦ størrelsesorden
+Ordre de grandeur ¦ Řádový odhad ¦ Storleksordning ¦ Størrelsesorden
+Dans la monnaie de {y} ¦ V měně roku {y} ¦ I valutan år {y} ¦ I mønten fra {y}
+Le calcul, pas à pas ¦ Výpočet krok za krokem ¦ Beräkningen steg för steg ¦ Beregningen trin for trin
+(mesure de {fromRegion}) ¦ (míra z oblasti {fromRegion}) ¦ (mått från {fromRegion}) ¦ (mål fra {fromRegion})
+Écris une mesure : « 3 arpents », « 12 toises 3 pieds », « 2 boisseaux »… ou « 1,5 ha » pour l’inverse. ¦ Napiš míru: „3 arpents“, „12 toises 3 pieds“, „2 boisseaux“… nebo „1,5 ha“ pro opačný převod. ¦ Skriv ett mått: ”3 arpents”, ”12 toises 3 pieds”, ”2 boisseaux”… eller ”1,5 ha” för omvänd omvandling. ¦ Skriv et mål: »3 arpents«, »12 toises 3 pieds«, »2 boisseaux«… eller »1,5 ha« for den omvendte vej.
+Valeur approchée ¦ Přibližná hodnota ¦ Ungefärligt värde ¦ Tilnærmet værdi
+Dans les autres mesures de la région ¦ V ostatních mírách oblasti ¦ I regionens andra mått ¦ I regionens andre mål
+La même mesure ailleurs (pour 1) ¦ Stejná míra jinde (pro 1) ¦ Samma mått på andra håll (för 1) ¦ Samme mål andre steder (for 1)
+Écris une date républicaine (« 12 thermidor an II ») ou de tous les jours (« 14 juillet 1794 ») : la conversion se fait dans les deux sens. ¦ Napiš republikánské datum („12 thermidor an II“) nebo běžné („14 juillet 1794“): převod funguje oběma směry. ¦ Skriv ett republikanskt datum (”12 thermidor an II”) eller ett vanligt (”14 juillet 1794”): omvandlingen fungerar åt båda hållen. ¦ Skriv en republikansk dato (»12 thermidor an II«) eller en almindelig (»14 juillet 1794«): omregningen virker begge veje.
+Dans notre calendrier ¦ V našem kalendáři ¦ I vår kalender ¦ I vores kalender
+Dans le calendrier républicain ¦ V republikánském kalendáři ¦ I den republikanska kalendern ¦ I den republikanske kalender
+{decade} (jour {x} de la décade) ¦ {decade} ({x}. den dekády) ¦ {decade} (dag {x} i dekaden) ¦ {decade} (dag {x} i dekaden)
+L’an {x} mois par mois ¦ Rok {x} měsíc po měsíci ¦ År {x} månad för månad ¦ År {x} måned for måned
+={n} formes de lettres · trait dessiné à la main, comme dans les registres ¦ {n} tvar písmen · tah kreslený rukou, jako v matrikách|{n} tvary písmen · tah kreslený rukou, jako v matrikách|{n} tvarů písmen · tah kreslený rukou, jako v matrikách ¦ {n} bokstavsform · handritat streck, som i kyrkböckerna|{n} bokstavsformer · handritat streck, som i kyrkböckerna ¦ {n} bogstavform · håndtegnet streg, som i kirkebøgerne|{n} bogstavformer · håndtegnet streg, som i kirkebøgerne
+{n} forme de lettres · trait dessiné à la main, comme dans les registres ¦ {n} tvar písmen · tah kreslený rukou, jako v matrikách ¦ {n} bokstavsform · handritat streck, som i kyrkböckerna ¦ {n} bogstavform · håndtegnet streg, som i kirkebøgerne
+={n} exercices · lis le texte comme sur le registre, écris ta lecture (abréviations développées), puis « ✓ Corriger » ¦ {n} cvičení · přečti text jako v matrice, napiš své čtení (s rozepsanými zkratkami) a pak „✓ Opravit“|{n} cvičení · přečti text jako v matrice, napiš své čtení (s rozepsanými zkratkami) a pak „✓ Opravit“|{n} cvičení · přečti text jako v matrice, napiš své čtení (s rozepsanými zkratkami) a pak „✓ Opravit“ ¦ {n} övning · läs texten som i kyrkboken, skriv din läsning (förkortningar utskrivna) och sedan ”✓ Rätta”|{n} övningar · läs texten som i kyrkboken, skriv din läsning (förkortningar utskrivna) och sedan ”✓ Rätta” ¦ {n} øvelse · læs teksten som i kirkebogen, skriv din læsning (forkortelser skrevet ud), og derefter »✓ Ret«|{n} øvelser · læs teksten som i kirkebogen, skriv din læsning (forkortelser skrevet ud), og derefter »✓ Ret«
+{n} exercice · lis le texte comme sur le registre, écris ta lecture (abréviations développées), puis « ✓ Corriger » ¦ {n} cvičení · přečti text jako v matrice, napiš své čtení (s rozepsanými zkratkami) a pak „✓ Opravit“ ¦ {n} övning · läs texten som i kyrkboken, skriv din läsning (förkortningar utskrivna) och sedan ”✓ Rätta” ¦ {n} øvelse · læs teksten som i kirkebogen, skriv din læsning (forkortelser skrevet ud), og derefter »✓ Ret«
+={ok} mots justes sur {total} ({score} %) ¦ {ok} správné slovo z {total} ({score} %)|{ok} správná slova z {total} ({score} %)|{ok} správných slov z {total} ({score} %) ¦ {ok} rätt ord av {total} ({score} %)|{ok} rätta ord av {total} ({score} %) ¦ {ok} rigtigt ord ud af {total} ({score} %)|{ok} rigtige ord ud af {total} ({score} %)
+{ok} mot juste sur {total} ({score} %) ¦ {ok} správné slovo z {total} ({score} %) ¦ {ok} rätt ord av {total} ({score} %) ¦ {ok} rigtigt ord ud af {total} ({score} %)
+Plus de place pour enregistrer cette recette. ¦ Na uložení tohoto receptu už není místo. ¦ Det finns inte plats att spara det här receptet. ¦ Der er ikke plads til at gemme denne opskrift.
+aucune action ¦ žádná akce ¦ ingen åtgärd ¦ ingen handling
+nouvelle version ¦ nová verze ¦ ny version ¦ ny version
+copie dans les médias ¦ kopie v médiích ¦ kopia i media ¦ kopi i medierne
+« {name} » : fichier introuvable dans le dossier des médias ¦ „{name}“: soubor nenalezen ve složce médií ¦ ”{name}”: filen hittades inte i mediemappen ¦ »{name}«: filen blev ikke fundet i mediemappen
+le navigateur n’a pas pu écrire l’image ¦ prohlížeč nedokázal zapsat obrázek ¦ webbläsaren kunde inte skriva bilden ¦ browseren kunne ikke skrive billedet
+qualité baissée à {x} % pour tenir dans {x2} Ko ¦ kvalita snížena na {x} %, aby se vešla do {x2} kB ¦ kvaliteten sänkt till {x} % för att rymmas i {x2} kB ¦ kvaliteten sænket til {x} % for at holde sig under {x2} kB
+image réduite à {width} × {height} px pour tenir dans {x} Ko ¦ obrázek zmenšen na {width} × {height} px, aby se vešel do {x} kB ¦ bilden förminskad till {width} × {height} px för att rymmas i {x} kB ¦ billedet formindsket til {width} × {height} px for at holde sig under {x} kB
+{x} : plus lourd que {x2} Ko ¦ {x}: větší než {x2} kB ¦ {x}: större än {x2} kB ¦ {x}: større end {x2} kB
+le moteur du son n’est pas chargé ¦ zvukový modul není načtený ¦ ljudmotorn är inte laddad ¦ lydmotoren er ikke indlæst
+Ne pas tourner ¦ Neotáčet ¦ Vrid inte ¦ Drej ikke
+¼ de tour à droite ¦ ¼ otáčky doprava ¦ ¼ varv åt höger ¦ ¼ omgang til højre
+¼ de tour à gauche ¦ ¼ otáčky doleva ¦ ¼ varv åt vänster ¦ ¼ omgang til venstre
+Modèle du nom ¦ Vzor názvu ¦ Namnmall ¦ Navneskabelon
+Ajouter au modèle ¦ Přidat do vzoru ¦ Lägg till i mallen ¦ Tilføj til skabelonen
+Ajouter {t} au modèle ¦ Přidat {t} do vzoru ¦ Lägg till {t} i mallen ¦ Tilføj {t} til skabelonen
+Séquence sur ¦ Pořadové číslo na ¦ Löpnummer med ¦ Løbenummer med
+Comme tapé ¦ Jak je napsáno ¦ Som skrivet ¦ Som skrevet
+Une Majuscule Par Mot ¦ Velké Písmeno U Každého Slova ¦ Stor Bokstav I Varje Ord ¦ Stort Bogstav I Hvert Ord
+Garder les espaces ¦ Ponechat mezery ¦ Behåll mellanslagen ¦ Behold mellemrummene
+Des tirets (-) ¦ Pomlčky (-) ¦ Bindestreck (-) ¦ Bindestreger (-)
+Des soulignés (_) ¦ Podtržítka (_) ¦ Understreck (_) ¦ Understregninger (_)
+Sans accents (é → e) ¦ Bez diakritiky (é → e) ¦ Utan accenter (é → e) ¦ Uden accenter (é → e)
+Changer aussi le titre dans les médias ¦ Změnit i název v médiích ¦ Ändra också titeln i media ¦ Ændr også titlen i medierne
+Le plus grand côté ¦ Delší strana ¦ Den längsta sidan ¦ Den længste side
+La largeur ¦ Šířka ¦ Bredden ¦ Bredden
+La hauteur ¦ Výška ¦ Höjden ¦ Højden
+Un cadre largeur × hauteur ¦ Rámeček šířka × výška ¦ En ram bredd × höjd ¦ En ramme bredde × højde
+Un pourcentage ¦ Procento ¦ En procentsats ¦ En procentdel
+Plus grand côté ¦ Delší strana ¦ Längsta sidan ¦ Længste side
+Garder les proportions ¦ Zachovat poměr stran ¦ Behåll proportionerna ¦ Behold proportionerne
+Ne pas agrandir les petites images ¦ Nezvětšovat malé obrázky ¦ Förstora inte små bilder ¦ Forstør ikke små billeder
+Couper les bords ¦ Oříznout okraje ¦ Beskär kanterna ¦ Beskær kanterne
+Recadrer au format ¦ Oříznout na formát ¦ Beskär till formatet ¦ Beskær til formatet
+Sépia (photo ancienne) ¦ Sépie (stará fotka) ¦ Sepia (gammalt foto) ¦ Sepia (gammelt foto)
+Taille (de la largeur) ¦ Velikost (vzhledem k šířce) ¦ Storlek (av bredden) ¦ Størrelse (af bredden)
+AVIF (récent, très léger) ¦ AVIF (nový, velmi malý) ¦ AVIF (nytt, mycket lätt) ¦ AVIF (nyt, meget let)
+Poids au plus (0 = pas de limite) ¦ Nejvyšší velikost (0 = bez omezení) ¦ Högsta filstorlek (0 = ingen gräns) ¦ Højeste filstørrelse (0 = ingen grænse)
+JPG, WebP et AVIF. Pour un PNG, le poids baisse en réduisant l’image. ¦ JPG, WebP a AVIF. U PNG se velikost sníží zmenšením obrázku. ¦ JPG, WebP och AVIF. För en PNG minskar filstorleken genom att bilden förminskas. ¦ JPG, WebP og AVIF. For en PNG falder filstørrelsen ved at formindske billedet.
+L’appareil, la date de prise, la position GPS, les mots-clés… sont effacés. Pour un JPG ou un PNG sans autre retouche : sans perte (l’image ne change pas). ¦ Fotoaparát, datum pořízení, poloha GPS, klíčová slova… se vymažou. U JPG nebo PNG bez jiné úpravy: bezeztrátově (obrázek se nezmění). ¦ Kameran, tagningsdatum, GPS-position, nyckelord… raderas. För en JPG eller PNG utan annan redigering: förlustfritt (bilden ändras inte). ¦ Kameraet, optagelsesdatoen, GPS-positionen, nøgleordene… slettes. For en JPG eller PNG uden anden redigering: uden tab (billedet ændres ikke).
+Étiquettes à ajouter ¦ Štítky k přidání ¦ Etiketter att lägga till ¦ Etiketter, der skal tilføjes
+Relier à une personne ¦ Propojit s osobou ¦ Koppla till en person ¦ Forbind med en person
+Fiche n° {person} ¦ Karta č. {person} ¦ Post nr {person} ¦ Post nr. {person}
+Seulement pour ce qui va dans la base (nouvelle version ou copie), pas pour un ZIP. ¦ Jen pro to, co jde do databáze (nová verze nebo kopie), ne pro ZIP. ¦ Bara för det som går in i databasen (ny version eller kopia), inte för en ZIP. ¦ Kun for det, der kommer i databasen (ny version eller kopi), ikke for en ZIP.
+Nom du PDF ¦ Název PDF ¦ PDF-filens namn ¦ PDF-filens navn
+A4 (l’image centrée) ¦ A4 (obrázek na střed) ¦ A4 (bilden centrerad) ¦ A4 (billedet centreret)
+À la taille de chaque image ¦ Ve velikosti každého obrázku ¦ I varje bilds storlek ¦ I hvert billedes størrelse
+Garder aussi chaque image à part ¦ Ponechat i každý obrázek zvlášť ¦ Behåll också varje bild separat ¦ Behold også hvert billede for sig
+Glisse pour ranger (ou Alt + ↑ / ↓) ¦ Táhni pro uspořádání (nebo Alt + ↑ / ↓) ¦ Dra för att ordna (eller Alt + ↑ / ↓) ¦ Træk for at arrangere (eller Alt + ↑ / ↓)
+Ranger « {label} » (Alt + flèche haut ou bas) ¦ Přesunout „{label}“ (Alt + šipka nahoru nebo dolů) ¦ Flytta ”{label}” (Alt + pil upp eller ned) ¦ Flyt »{label}« (Alt + pil op eller ned)
+Déplier les réglages ¦ Rozbalit nastavení ¦ Fäll ut inställningarna ¦ Fold indstillingerne ud
+Replier les réglages ¦ Sbalit nastavení ¦ Fäll ihop inställningarna ¦ Fold indstillingerne sammen
+Éteindre cette étape (elle reste dans la chaîne) ¦ Vypnout tento krok (zůstane v řetězci) ¦ Stäng av det här steget (det stannar kvar i kedjan) ¦ Slå dette trin fra (det bliver i kæden)
+Rallumer cette étape ¦ Znovu zapnout tento krok ¦ Slå på det här steget igen ¦ Slå dette trin til igen
+Étape active ¦ Aktivní krok ¦ Aktivt steg ¦ Aktivt trin
+Retirer de la chaîne ¦ Odebrat z řetězce ¦ Ta bort från kedjan ¦ Fjern fra kæden
+Le moteur des traitements par lot n’est pas chargé : recharge la page. ¦ Modul hromadného zpracování není načtený: obnov stránku. ¦ Motorn för batchbearbetning är inte laddad: ladda om sidan. ¦ Motoren til batchbehandling er ikke indlæst: genindlæs siden.
+Les fichiers ¦ Soubory ¦ Filerna ¦ Filerne
+Photos, documents, classeurs et sons de la base : filtres, recherche, plusieurs à la fois ¦ Fotky, dokumenty, sešity a zvuky z databáze: filtry, hledání, víc najednou ¦ Foton, dokument, kalkylblad och ljud från databasen: filter, sökning, flera åt gången ¦ Fotos, dokumenter, regneark og lyde fra databasen: filtre, søgning, flere ad gangen
+Choisir dans les médias… ¦ Vybrat z médií… ¦ Välj från media… ¦ Vælg fra medierne…
+Fichiers du lot ¦ Soubory dávky ¦ Filer i batchen ¦ Filer i batchen
+Les actions ¦ Akce ¦ Åtgärderna ¦ Handlingerne
+Ajouter une action ▾ ¦ Přidat akci ▾ ¦ Lägg till en åtgärd ▾ ¦ Tilføj en handling ▾
+Voilà ce qui va se passer ¦ Toto se stane ¦ Det här kommer att hända ¦ Dette vil ske
+Le résultat ¦ Výsledek ¦ Resultatet ¦ Resultatet
+Nouvelle version du média ¦ Nová verze média ¦ Ny version av mediet ¦ Ny version af mediet
+l’original reste dans ses versions ¦ originál zůstane mezi verzemi ¦ originalet finns kvar bland versionerna ¦ originalen bliver blandt versionerne
+Copie dans les médias ¦ Kopie v médiích ¦ Kopia i media ¦ Kopi i medierne
+reliée aux mêmes fiches ¦ propojená se stejnými kartami ¦ kopplad till samma poster ¦ forbundet med de samme poster
+Un ZIP à télécharger ¦ ZIP ke stažení ¦ En ZIP att ladda ned ¦ En ZIP til download
+rien ne change dans la base ¦ v databázi se nic nezmění ¦ inget ändras i databasen ¦ intet ændres i databasen
+Images, documents (Word, LibreOffice, RTF, Markdown, texte, page web, PDF), classeurs (Excel, LibreOffice, CSV) et sons. ¦ Obrázky, dokumenty (Word, LibreOffice, RTF, Markdown, text, webová stránka, PDF), sešity (Excel, LibreOffice, CSV) a zvuky. ¦ Bilder, dokument (Word, LibreOffice, RTF, Markdown, text, webbsida, PDF), kalkylblad (Excel, LibreOffice, CSV) och ljud. ¦ Billeder, dokumenter (Word, LibreOffice, RTF, Markdown, tekst, webside, PDF), regneark (Excel, LibreOffice, CSV) og lyde.
+{name} (prêt) ¦ {name} (hotový) ¦ {name} (färdig) ¦ {name} (færdig)
+Recettes enregistrées ¦ Uložené recepty ¦ Sparade recept ¦ Gemte opskrifter
+cette chaîne d’actions et la sortie ¦ tento řetězec akcí a výstup ¦ den här åtgärdskedjan och resultatet ¦ denne kæde af handlinger og resultatet
+Recette « {name} » appliquée. ¦ Recept „{name}“ použit. ¦ Receptet ”{name}” har tillämpats. ¦ Opskriften »{name}« er anvendt.
+Une recette prête ne se remplace pas : enregistre-la sous un autre nom. ¦ Hotový recept nejde nahradit: ulož ho pod jiným názvem. ¦ Ett färdigt recept kan inte ersättas: spara det under ett annat namn. ¦ En færdig opskrift kan ikke erstattes: gem den under et andet navn.
+Une recette prête ne se supprime pas. ¦ Hotový recept nejde smazat. ¦ Ett färdigt recept kan inte raderas. ¦ En færdig opskrift kan ikke slettes.
+Recette « {name} » supprimée ¦ Recept „{name}“ smazán ¦ Receptet ”{name}” har raderats ¦ Opskriften »{name}« er slettet
+Ce fichier n’est pas une recette LCNDA. ¦ Tento soubor není recept LCNDA. ¦ Den här filen är inte ett LCNDA-recept. ¦ Denne fil er ikke en LCNDA-opskrift.
+Ce fichier n’est pas une recette des traitements par lot. ¦ Tento soubor není recept hromadného zpracování. ¦ Den här filen är inte ett recept för batchbearbetning. ¦ Denne fil er ikke en opskrift til batchbehandling.
+Recette importée ¦ Recept importován ¦ Receptet importerat ¦ Opskriften er importeret
+Retirer du lot ¦ Odebrat z dávky ¦ Ta bort från batchen ¦ Fjern fra batchen
+Retirer « {name} » du lot ¦ Odebrat „{name}“ z dávky ¦ Ta bort ”{name}” från batchen ¦ Fjern »{name}« fra batchen
+Aucun fichier pour l’instant ¦ Zatím žádný soubor ¦ Inga filer ännu ¦ Endnu ingen filer
+500 fichiers au plus par lot : {x} de côté. ¦ Nejvýš 500 souborů na dávku: {x} vynecháno. ¦ Högst 500 filer per batch: {x} har lagts åt sidan. ¦ Højst 500 filer pr. batch: {x} er lagt til side.
+Aucune action : ajoute-en une ¦ Žádná akce: nějakou přidej ¦ Ingen åtgärd: lägg till en ¦ Ingen handling: tilføj en
+Ajouter une action ¦ Přidat akci ¦ Lägg till en åtgärd ¦ Tilføj en handling
+Lancer sur {x} ¦ Spustit na {x} ¦ Kör på {x} ¦ Kør på {x}
+Choisis d’abord des fichiers : chaque changement s’affichera ici avant de lancer. ¦ Nejdřív vyber soubory: každá změna se tu zobrazí před spuštěním. ¦ Välj först filer: varje ändring visas här innan du kör. ¦ Vælg først filer: hver ændring vises her, før du kører.
+Nouvelle version ¦ Nová verze ¦ Ny version ¦ Ny version
+Titre et liens ¦ Název a propojení ¦ Titel och kopplingar ¦ Titel og forbindelser
+Nouveau média ¦ Nové médium ¦ Nytt medium ¦ Nyt medie
+Dans le ZIP ¦ Do ZIP ¦ I ZIP-filen ¦ I ZIP-filen
+Dans le PDF ¦ Do PDF ¦ I PDF-filen ¦ I PDF-filen
+Rien ne change ¦ Nic se nemění ¦ Inget ändras ¦ Intet ændres
+Laissé de côté ¦ Vynecháno ¦ Utelämnat ¦ Udeladt
+à la taille des images ¦ ve velikosti obrázků ¦ i bildernas storlek ¦ i billedernes størrelse
+, dans le ZIP ¦ , v ZIP ¦ , i ZIP-filen ¦ , i ZIP-filen
+, rangé dans les médias ¦ , uloženo v médiích ¦ , lagt i media ¦ , lagt i medierne
+position GPS dans la photo ¦ poloha GPS ve fotce ¦ GPS-position i fotot ¦ GPS-position i fotoet
+Lecture des fichiers… ({waiting}) ¦ Čtení souborů… ({waiting}) ¦ Läser filerna… ({waiting}) ¦ Læser filerne… ({waiting})
+On commence… ¦ Začínáme… ¦ Vi börjar… ¦ Vi begynder…
+copie rangée ¦ kopie uložena ¦ kopia sparad ¦ kopi gemt
+rangé dans les médias ¦ uloženo v médiích ¦ lagt i media ¦ lagt i medierne
+titre et liens ¦ název a propojení ¦ titel och kopplingar ¦ titel og forbindelser
+le fabricant de PDF n’est pas chargé ¦ modul pro tvorbu PDF není načtený ¦ PDF-tillverkaren är inte laddad ¦ PDF-generatoren er ikke indlæst
+Le ZIP… ¦ ZIP… ¦ ZIP-filen… ¦ ZIP-filen…
+traitement-par-lot-{x}.zip ¦ hromadne-zpracovani-{x}.zip ¦ batchbearbetning-{x}.zip ¦ batchbehandling-{x}.zip
+Le lot ¦ Dávka ¦ Batchen ¦ Batchen
+(arrêté) ¦ (zastaveno) ¦ (stoppad) ¦ (stoppet)
+{what} · ⤓ le ZIP est téléchargé. ¦ {what} · ⤓ ZIP je stažen. ¦ {what} · ⤓ ZIP-filen har laddats ned. ¦ {what} · ⤓ ZIP-filen er downloadet.
+{what} · rangé dans les médias. ¦ {what} · uloženo v médiích. ¦ {what} · lagt i media. ¦ {what} · lagt i medierne.
+Traitement par lot : {what} ¦ Hromadné zpracování: {what} ¦ Batchbearbetning: {what} ¦ Batchbehandling: {what}
+{what} · ⤓ ZIP téléchargé. ¦ {what} · ⤓ ZIP stažen. ¦ {what} · ⤓ ZIP nedladdad. ¦ {what} · ⤓ ZIP downloadet.
+TRAITEMENTS PAR LOT ¦ HROMADNÉ ZPRACOVÁNÍ ¦ BATCHBEARBETNING ¦ BATCHBEHANDLING
+Les fichiers à traiter ¦ Soubory ke zpracování ¦ Filerna som ska bearbetas ¦ Filerne, der skal behandles
+Action « {x} » retirée ¦ Akce „{x}“ odebrána ¦ Åtgärden ”{x}” borttagen ¦ Handlingen »{x}« er fjernet
+traitement par lot ¦ hromadné zpracování ¦ batchbearbetning ¦ batchbehandling
+Nouveau traitement ¦ Nové zpracování ¦ Ny bearbetning ¦ Ny behandling
+1 600 px au plus, JPG 82 %, sans la position GPS : prêtes à envoyer ou à mettre en ligne ¦ Nejvýš 1 600 px, JPG 82 %, bez polohy GPS: připravené k odeslání nebo zveřejnění ¦ Högst 1 600 px, JPG 82 %, utan GPS-position: klara att skicka eller lägga ut på nätet ¦ Højst 1 600 px, JPG 82 %, uden GPS-position: klar til at sende eller lægge på nettet
+Photos pour le web ¦ Fotky na web ¦ Foton för webben ¦ Fotos til nettet
+photo-001, photo-002… (et le titre dans les médias) ¦ photo-001, photo-002… (a název v médiích) ¦ photo-001, photo-002… (och titeln i media) ¦ photo-001, photo-002… (og titlen i medierne)
+Renommer en séquence ¦ Přejmenovat s pořadovým číslem ¦ Byt namn i nummerordning ¦ Omdøb i nummerrækkefølge
+Des scans ou des photos d’actes réunis dans un seul PDF, une page par image ¦ Skeny nebo fotky záznamů spojené do jednoho PDF, jedna stránka na obrázek ¦ Skanningar eller foton av handlingar samlade i en enda PDF, en sida per bild ¦ Scanninger eller fotos af dokumenter samlet i én PDF, én side pr. billede
+Scans en PDF ¦ Skeny do PDF ¦ Skanningar till PDF ¦ Scanninger til PDF
+=change ¦ se mění|se mění|se mění ¦ ändras|ändras ¦ ændres|ændres
+={files} traités ¦ {files} zpracováno|{files} zpracovány|{files} zpracováno ¦ {files} bearbetad|{files} bearbetade ¦ {files} behandlet|{files} behandlet
+{files} traité ¦ {files} zpracováno ¦ {files} bearbetad ¦ {files} behandlet
+={files} retirés du lot ¦ {files} odebrán z dávky|{files} odebrány z dávky|{files} odebráno z dávky ¦ {files} borttagen från batchen|{files} borttagna från batchen ¦ {files} fjernet fra batchen|{files} fjernet fra batchen
+{files} retiré du lot ¦ {files} odebrán z dávky ¦ {files} borttagen från batchen ¦ {files} fjernet fra batchen
+Garder le format ¦ Ponechat formát ¦ Behåll formatet ¦ Behold formatet
+Un nom fixe, une séquence 001, 002…, la date, le titre, la personne ou le lieu. ¦ Pevný název, pořadové číslo 001, 002…, datum, název, osoba nebo místo. ¦ Ett fast namn, ett löpnummer 001, 002…, datumet, titeln, personen eller platsen. ¦ Et fast navn, et løbenummer 001, 002…, datoen, titlen, personen eller stedet.
+Plus grand côté, largeur, hauteur, cadre ou pourcentage. ¦ Delší strana, šířka, výška, rámeček nebo procento. ¦ Längsta sidan, bredd, höjd, ram eller procent. ¦ Længste side, bredde, højde, ramme eller procent.
+Couper les bords, recadrer au format voulu (centré), tourner d’un quart de tour, retourner. ¦ Oříznout okraje, oříznout na požadovaný formát (na střed), otočit o čtvrt otáčky, převrátit. ¦ Beskär kanterna, beskär till önskat format (centrerat), vrid ett kvarts varv, spegelvänd. ¦ Beskær kanterne, beskær til det ønskede format (centreret), drej en kvart omgang, spejlvend.
+Gris ou sépia. ¦ Šedá nebo sépie. ¦ Grått eller sepia. ¦ Gråtoner eller sepia.
+Un texte posé dans un coin, au milieu ou répété. ¦ Text v rohu, uprostřed nebo opakovaný. ¦ En text i ett hörn, i mitten eller upprepad. ¦ En tekst i et hjørne, i midten eller gentaget.
+Changer de format ¦ Změnit formát ¦ Byt format ¦ Skift format
+Images, documents, classeurs et sons : chacun vers un format de sa sorte. ¦ Obrázky, dokumenty, sešity a zvuky: každý do formátu svého druhu. ¦ Bilder, dokument, kalkylblad och ljud: var och en till ett format av sin sort. ¦ Billeder, dokumenter, regneark og lyde: hver til et format af sin slags.
+Qualité et poids ¦ Kvalita a velikost ¦ Kvalitet och filstorlek ¦ Kvalitet og filstørrelse
+Qualité JPG / WebP / AVIF et un poids à ne pas dépasser. ¦ Kvalita JPG / WebP / AVIF a velikost, kterou nepřekročit. ¦ Kvalitet för JPG / WebP / AVIF och en filstorlek som inte ska överskridas. ¦ Kvalitet for JPG / WebP / AVIF og en filstørrelse, der ikke må overskrides.
+Effacer les métadonnées ¦ Vymazat metadata ¦ Radera metadata ¦ Slet metadata
+Appareil, date de prise, position GPS… : effacés (sans perte pour un JPG ou un PNG). ¦ Fotoaparát, datum pořízení, poloha GPS…: vymazány (bezeztrátově u JPG nebo PNG). ¦ Kamera, tagningsdatum, GPS-position…: raderas (förlustfritt för en JPG eller PNG). ¦ Kamera, optagelsesdato, GPS-position…: slettes (uden tab for en JPG eller PNG).
+Étiquettes et personne ¦ Štítky a osoba ¦ Etiketter och person ¦ Etiketter og person
+Ajouter des étiquettes, relier à une personne (dans la base seulement). ¦ Přidat štítky, propojit s osobou (jen v databázi). ¦ Lägg till etiketter, koppla till en person (bara i databasen). ¦ Tilføj etiketter, forbind med en person (kun i databasen).
+Assembler en un PDF ¦ Spojit do jednoho PDF ¦ Sätt ihop till en PDF ¦ Saml i én PDF
+Toutes les images dans un seul PDF, une page par image. ¦ Všechny obrázky v jednom PDF, jedna stránka na obrázek. ¦ Alla bilder i en enda PDF, en sida per bild. ¦ Alle billeder i én PDF, én side pr. billede.
+Ne pas recadrer ¦ Neořezávat ¦ Beskär inte ¦ Beskær ikke
+Répété en biais ¦ Opakovaně šikmo ¦ Upprepad diagonalt ¦ Gentaget på skrå
+Nom d’origine ¦ Původní název ¦ Ursprungligt namn ¦ Oprindeligt navn
+1 600 px au plus, JPG 82 %, sans GPS ¦ Nejvýš 1 600 px, JPG 82 %, bez GPS ¦ Högst 1 600 px, JPG 82 %, utan GPS ¦ Højst 1 600 px, JPG 82 %, uden GPS
+les images dans un seul PDF A4 ¦ obrázky v jednom PDF A4 ¦ bilderna i en enda A4-PDF ¦ billederne i én A4-PDF
+carré 1:1, 400 px, JPG ¦ čtverec 1:1, 400 px, JPG ¦ kvadrat 1:1, 400 px, JPG ¦ kvadrat 1:1, 400 px, JPG
+Partager sans la position GPS ¦ Sdílet bez polohy GPS ¦ Dela utan GPS-position ¦ Del uden GPS-position
+métadonnées effacées ¦ metadata vymazána ¦ metadata raderade ¦ metadata slettet
+Documents en Word ¦ Dokumenty do Wordu ¦ Dokument till Word ¦ Dokumenter til Word
+tous en .docx ¦ všechny do .docx ¦ alla till .docx ¦ alle til .docx
+Classeurs en CSV ¦ Sešity do CSV ¦ Kalkylblad till CSV ¦ Regneark til CSV
+la 1re feuille en CSV ¦ 1. list do CSV ¦ det 1:a bladet till CSV ¦ det 1. ark til CSV
+{x} : pas pour un {x2} ¦ {x}: ne pro {x2} ¦ {x}: inte för en {x2} ¦ {x}: ikke til en {x2}
+{x} : rien à changer ¦ {x}: není co měnit ¦ {x}: inget att ändra ¦ {x}: intet at ændre
+Ton navigateur ne sait pas écrire l’AVIF : WebP à la place ¦ Tvůj prohlížeč neumí zapsat AVIF: místo toho WebP ¦ Din webbläsare kan inte skriva AVIF: WebP i stället ¦ Din browser kan ikke skrive AVIF: WebP i stedet
+{x} ne s’écrit pas ici : PNG à la place ¦ {x} tady nejde zapsat: místo toho PNG ¦ {x} kan inte skrivas här: PNG i stället ¦ {x} kan ikke skrives her: PNG i stedet
+Un GIF n’a pas de position GPS à effacer ¦ GIF nemá polohu GPS k vymazání ¦ En GIF har ingen GPS-position att radera ¦ En GIF har ingen GPS-position at slette
+PNG : le poids baisse en réduisant la taille de l’image ¦ PNG: velikost souboru klesne zmenšením obrázku ¦ PNG: filstorleken minskar när bilden förminskas ¦ PNG: filstørrelsen falder, når billedet formindskes
+CSV : seulement la 1re feuille, sans mise en forme ¦ CSV: jen 1. list, bez formátování ¦ CSV: bara det 1:a bladet, utan formatering ¦ CSV: kun det 1. ark, uden formatering
+{x} : le texte seul, sans images ni mise en forme ¦ {x}: jen text, bez obrázků a formátování ¦ {x}: bara texten, utan bilder eller formatering ¦ {x}: kun teksten, uden billeder eller formatering
+PDF : en lecture seule (seulement renommé, étiqueté ou relié) ¦ PDF: jen pro čtení (pouze přejmenovat, označit štítkem nebo propojit) ¦ PDF: skrivskyddad (bara namnbyte, etikett eller koppling) ¦ PDF: skrivebeskyttet (kun omdøbt, mærket eller forbundet)
+{x} : seulement renommé, étiqueté ou relié ¦ {x}: pouze přejmenovat, označit štítkem nebo propojit ¦ {x}: bara namnbyte, etikett eller koppling ¦ {x}: kun omdøbt, mærket eller forbundet
+Étiquettes et personne : seulement dans la base (pas dans un ZIP) ¦ Štítky a osoba: jen v databázi (ne v ZIP) ¦ Etiketter och person: bara i databasen (inte i en ZIP) ¦ Etiketter og person: kun i databasen (ikke i en ZIP)
+Venu de l’ordinateur : rangé comme nouveau média ¦ Z počítače: uloženo jako nové médium ¦ Från datorn: sparat som nytt medium ¦ Fra computeren: gemt som nyt medie
+« Assembler en un PDF » : aucune image dans le lot ¦ „Spojit do jednoho PDF“: v dávce není žádný obrázek ¦ ”Sätt ihop till en PDF”: ingen bild i batchen ¦ »Saml i én PDF«: intet billede i batchen
+Une action en double : seule la dernière carte compte pour « Renommer » et « Changer de format » ¦ Zdvojená akce: u „Přejmenovat“ a „Změnit formát“ platí jen poslední karta ¦ En dubblerad åtgärd: bara det sista kortet gäller för ”Byt namn” och ”Byt format” ¦ En dobbelt handling: kun det sidste kort tæller for »Omdøb« og »Skift format«
+plus grand côté {long} px ¦ delší strana {long} px ¦ längsta sidan {long} px ¦ længste side {long} px
+tête en bas ¦ vzhůru nohama ¦ upp och ned ¦ på hovedet
+rien à faire ¦ není co dělat ¦ inget att göra ¦ intet at gøre
+sépia ¦ sépie ¦ sepia ¦ sepia
+rien ne change ¦ nic se nemění ¦ inget ändras ¦ intet ændres
+Ko au plus ¦ kB nejvýš ¦ kB högst ¦ kB højst
+rien de choisi ¦ nic nevybráno ¦ inget valt ¦ intet valgt
+.{ext} ne se range pas dans les médias : ⤓ ZIP seulement ¦ .{ext} nejde uložit do médií: jen ⤓ ZIP ¦ .{ext} kan inte sparas i media: bara ⤓ ZIP ¦ .{ext} kan ikke gemmes i medierne: kun ⤓ ZIP
+Ouvrir la fiche Employeurs ¦ Otevřít kartu Zaměstnavatelé ¦ Öppna posten Arbetsgivare ¦ Åbn posten Arbejdsgivere
+Fiche Employeurs ¦ Karta Zaměstnavatelé ¦ Posten Arbetsgivare ¦ Posten Arbejdsgivere
+Revues et magazines ¦ Časopisy a magazíny ¦ Tidskrifter och magasin ¦ Tidsskrifter og magasiner
+Nouvelle fiche Employeurs : « {title} ». ¦ Nová karta Zaměstnavatelé: „{title}“. ¦ Ny post Arbetsgivare: ”{title}”. ¦ Ny post Arbejdsgivere: »{title}«.
+La fiche de {name} n’est pas encore cochée « {icon} {label} ». La cocher pour y ranger cette {x2} ? ¦ Karta osoby {name} ještě nemá zaškrtnuto „{icon} {label}“. Zaškrtnout, aby sem šlo uložit: {x2}? ¦ Posten för {name} är ännu inte markerad ”{icon} {label}”. Markera den för att lägga in {x2} där? ¦ Posten for {name} er endnu ikke markeret »{icon} {label}«. Markér den for at lægge {x2} der?
+La fiche de {name} n’est pas encore cochée « {icon} {label} ». La cocher pour y ranger ce {x2} ? ¦ Karta osoby {name} ještě nemá zaškrtnuto „{icon} {label}“. Zaškrtnout, aby sem šlo uložit: {x2}? ¦ Posten för {name} är ännu inte markerad ”{icon} {label}”. Markera den för att lägga in {x2} där? ¦ Posten for {name} er endnu ikke markeret »{icon} {label}«. Markér den for at lægge {x2} der?
+Cocher « {label} » ? ¦ Zaškrtnout „{label}“? ¦ Markera ”{label}”? ¦ Markér »{label}«?
+Cocher « {label} » ¦ Zaškrtnout „{label}“ ¦ Markera ”{label}” ¦ Markér »{label}«
+Tchécoslovaquie ¦ Československo ¦ Tjeckoslovakien ¦ Tjekkoslovakiet
+Brevet européen ¦ Evropský patent ¦ Europeiskt patent ¦ Europæisk patent
+déposé ¦ podáno ¦ inlämnat ¦ indleveret
+en examen ¦ ve zkoumání ¦ under granskning ¦ under behandling
+délivré ¦ uděleno ¦ beviljat ¦ meddelt
+en vigueur ¦ v platnosti ¦ i kraft ¦ i kraft
+tombé (domaine public) ¦ propadlé (volné dílo) ¦ förfallet (allmän egendom) ¦ bortfaldet (offentlig ejendom)
+expiré ¦ vypršelo ¦ utgånget ¦ udløbet
+abandonné ¦ opuštěno ¦ övergivet ¦ opgivet
+annulé ¦ zrušeno ¦ upphävt ¦ annulleret
+idée, croquis ¦ nápad, náčrt ¦ idé, skiss ¦ idé, skitse
+breveté ¦ patentováno ¦ patenterad ¦ patenteret
+fabriqué, vendu ¦ vyrobeno, prodáno ¦ tillverkad, såld ¦ fremstillet, solgt
+on ne sait pas ¦ nevíme ¦ okänt ¦ ved ikke
+donné ¦ darováno ¦ skänkt ¦ givet væk
+cassé ¦ rozbito ¦ trasig ¦ i stykker
+détruit ¦ zničeno ¦ förstörd ¦ ødelagt
+antériorité opposée ¦ namítnuté dřívější řešení ¦ invänd tidigare teknik ¦ indsigelse om tidligere kendt teknik
+contrefaçon ¦ porušení patentu ¦ patentintrång ¦ patentkrænkelse
+action en nullité ¦ žaloba na neplatnost ¦ ogiltighetstalan ¦ ugyldighedssag
+procès ¦ soudní spor ¦ rättegång ¦ retssag
+gagné ¦ vyhráno ¦ vunnen ¦ vundet
+brevet refusé ¦ patent zamítnut ¦ patent avslaget ¦ patent afslået
+invention dérivée ¦ odvozený vynález ¦ härledd uppfinning ¦ afledt opfindelse
+perfectionnement de ¦ zdokonalení ¦ förbättring av ¦ forbedring af
+issue de la découverte ¦ vzešlá z objevu ¦ följd av upptäckten ¦ udsprunget af opdagelsen
+a mené à ¦ vedla k ¦ ledde till ¦ førte til
+fabriquée sous forme de ¦ vyráběná jako ¦ tillverkad i form av ¦ fremstillet som
+publiée dans ¦ zveřejněná v ¦ publicerad i ¦ offentliggjort i
+liée à ¦ propojená s ¦ kopplad till ¦ forbundet med
+Figure du brevet ¦ Obrázek z patentu ¦ Patentfigur ¦ Patenttegning
+Objet fabriqué ¦ Vyrobený předmět ¦ Tillverkat föremål ¦ Fremstillet genstand
+Publicité, notice ¦ Reklama, návod ¦ Reklam, bruksanvisning ¦ Reklame, vejledning
+tombé ¦ propadlé ¦ förfallet ¦ bortfaldet
+Annuités ¦ Roční poplatky ¦ Årsavgifter ¦ Årsafgifter
+Publié ¦ Zveřejněno ¦ Publicerat ¦ Offentliggjort
+Cité par ¦ Citováno v ¦ Citerat av ¦ Citeret af
+brevet ultérieur ¦ pozdější patent ¦ senare patent ¦ senere patent
+brevets ultérieurs ¦ pozdější patenty ¦ senare patent ¦ senere patenter
+Voir en ligne ¦ Zobrazit online ¦ Visa på nätet ¦ Vis online
+Ajouter un brevet ¦ Přidat patent ¦ Lägg till ett patent ¦ Tilføj et patent
+Délivrance ¦ Udělení ¦ Beviljande ¦ Meddelelse
+Déposant ¦ Přihlašovatel ¦ Sökande ¦ Ansøger
+Fabriqués ¦ Vyrobeno ¦ Tillverkade ¦ Fremstillet
+(aussi dans « 🏆 Concours et récompenses » de la personne) ¦ (také v „🏆 Soutěže a ocenění“ osoby) ¦ (även i personens ”🏆 Tävlingar och utmärkelser”) ¦ (også i personens »🏆 Konkurrencer og priser«)
+conçu en {dt} ¦ navrženo v roce {dt} ¦ utformad {dt} ¦ udtænkt i {dt}
+conçu le {dt} ¦ navrženo {dt} ¦ utformad den {dt} ¦ udtænkt den {dt}
+conçu {dt} ¦ navrženo {dt} ¦ utformad {dt} ¦ udtænkt {dt}
+L’invention ¦ Vynález ¦ Uppfinningen ¦ Opfindelsen
+Nom de l’invention ¦ Název vynálezu ¦ Uppfinningens namn ¦ Opfindelsens navn
+Première idée ¦ První nápad ¦ Första idé ¦ Første idé
+Où l’idée est notée ¦ Kde je nápad zapsán ¦ Var idén är antecknad ¦ Hvor idéen er noteret
+D’après, inspirée de ¦ Podle, inspirováno ¦ Efter, inspirerad av ¦ Efter, inspireret af
+Carnet, plan (média) ¦ Zápisník, plán (médium) ¦ Anteckningsbok, ritning (medium) ¦ Notesbog, tegning (medie)
+Figures du brevet, prototypes, objets fabriqués ¦ Obrázky z patentu, prototypy, vyrobené předměty ¦ Patentfigurer, prototyper, tillverkade föremål ¦ Patenttegninger, prototyper, fremstillede genstande
+Un inventeur ¦ Vynálezce ¦ En uppfinnare ¦ En opfinder
+Un brevet ¦ Patent ¦ Ett patent ¦ Et patent
+Titre du brevet ¦ Název patentu ¦ Patentets titel ¦ Patentets titel
+Revendications (une par ligne) ¦ Patentové nároky (jeden na řádek) ¦ Patentkrav (ett per rad) ¦ Patentkrav (ét pr. linje)
+Publié (BOPI…) ¦ Zveřejněno (BOPI…) ¦ Publicerat (BOPI…) ¦ Offentliggjort (BOPI…)
+Famille de brevets ¦ Patentová rodina ¦ Patentfamilj ¦ Patentfamilie
+Pièce (brevet complet, 4 p.…) ¦ Dokument (celý patent, 4 s.…) ¦ Dokument (fullständigt patent, 4 s.…) ¦ Dokument (fuldt patent, 4 s.…)
+Adresse en ligne ¦ Webová adresa ¦ Webbadress ¦ Webadresse
+Un prototype ¦ Prototyp ¦ En prototyp ¦ En prototype
+Présenté ¦ Představeno ¦ Presenterad ¦ Præsenteret
+Licences et exploitation ¦ Licence a využití ¦ Licenser och användning ¦ Licenser og udnyttelse
+Antériorités et procès ¦ Dřívější řešení a soudní spory ¦ Tidigare teknik och rättegångar ¦ Tidligere kendt teknik og retssager
+Une antériorité, un procès ¦ Dřívější řešení, soudní spor ¦ Tidigare teknik, en rättegång ¦ Tidligere kendt teknik, en retssag
+Objets fabriqués ¦ Vyrobené předměty ¦ Tillverkade föremål ¦ Fremstillede genstande
+Un objet ¦ Předmět ¦ Ett föremål ¦ En genstand
+Modèle, objet ¦ Model, předmět ¦ Modell, föremål ¦ Model, genstand
+Fiche de l’exemplaire ¦ Karta exempláře ¦ Exemplarets post ¦ Eksemplarets post
+Note sur les objets ¦ Poznámka k předmětům ¦ Anteckning om föremålen ¦ Note om genstandene
+Inventions et découvertes liées ¦ Propojené vynálezy a objevy ¦ Kopplade uppfinningar och upptäckter ¦ Forbundne opfindelser og opdagelser
+Liées ¦ Propojené ¦ Kopplade ¦ Forbundne
+ex. sécateur, FR 1 054 321, Lépine, 1952 ¦ např. sécateur, FR 1 054 321, Lépine, 1952 ¦ t.ex. sécateur, FR 1 054 321, Lépine, 1952 ¦ f.eks. sécateur, FR 1 054 321, Lépine, 1952
+Breveté en ¦ Patentováno v ¦ Patenterad i ¦ Patenteret i
+Avec au moins un brevet ¦ S aspoň jedním patentem ¦ Med minst ett patent ¦ Med mindst ét patent
+Brevet encore en vigueur ¦ Patent stále v platnosti ¦ Patent fortfarande i kraft ¦ Patent stadig i kraft
+Exploitée (licence) ¦ Využívaný (licence) ¦ Utnyttjad (licens) ¦ Udnyttet (licens)
+Le plus de brevets ¦ Nejvíc patentů ¦ Flest patent ¦ Flest patenter
+Espèce nouvelle (plante) ¦ Nový druh (rostlina) ¦ Ny art (växt) ¦ Ny art (plante)
+Espèce nouvelle (animal) ¦ Nový druh (živočich) ¦ Ny art (djur) ¦ Ny art (dyr)
+Comète ¦ Kometa ¦ Komet ¦ Komet
+Astéroïde, petite planète ¦ Planetka, malá planeta ¦ Asteroid, småplanet ¦ Asteroide, småplanet
+Étoile, exoplanète, galaxie ¦ Hvězda, exoplaneta, galaxie ¦ Stjärna, exoplanet, galax ¦ Stjerne, exoplanet, galakse
+Gène ¦ Gen ¦ Gen ¦ Gen
+Molécule, élément chimique ¦ Molekula, chemický prvek ¦ Molekyl, grundämne ¦ Molekyle, grundstof
+Minéral ¦ Minerál ¦ Mineral ¦ Mineral
+Site archéologique ¦ Archeologické naleziště ¦ Arkeologisk plats ¦ Arkæologisk lokalitet
+Épave ¦ Vrak ¦ Vrak ¦ Vrag
+Manuscrit, archive, trésor ¦ Rukopis, archiv, poklad ¦ Manuskript, arkiv, skatt ¦ Manuskript, arkiv, skat
+Loi, théorème, méthode ¦ Zákon, věta, metoda ¦ Lag, sats, metod ¦ Lov, sætning, metode
+Source, gisement ¦ Pramen, ložisko ¦ Källa, fyndighet ¦ Kilde, forekomst
+Lieu (col, lac, île, sommet…) ¦ Místo (průsmyk, jezero, ostrov, vrchol…) ¦ Plats (pass, sjö, ö, topp…) ¦ Sted (pas, sø, ø, top…)
+Autre découverte ¦ Jiný objev ¦ Annan upptäckt ¦ Anden opdagelse
+espèce, sous-espèce, variété ¦ druh, poddruh, odrůda ¦ art, underart, varietet ¦ art, underart, varietet
+Holotype (spécimen type) ¦ Holotyp (typový exemplář) ¦ Holotyp (typexemplar) ¦ Holotype (typeeksemplar)
+N° de collection ¦ Č. sbírky ¦ Samlingsnr ¦ Samlingsnr.
+Désignation ¦ Označení ¦ Beteckning ¦ Betegnelse
+Éclat (magnitude) ¦ Jasnost (magnituda) ¦ Ljusstyrka (magnitud) ¦ Lysstyrke (størrelsesklasse)
+Système cristallin ¦ Krystalová soustava ¦ Kristallsystem ¦ Krystalsystem
+Localité type ¦ Typová lokalita ¦ Typlokal ¦ Typelokalitet
+Objets trouvés ¦ Nalezené předměty ¦ Funna föremål ¦ Fundne genstande
+Musée, dépôt ¦ Muzeum, depozitář ¦ Museum, magasin ¦ Museum, magasin
+Développement, profondeur ¦ Délka, hloubka ¦ Utsträckning, djup ¦ Udstrækning, dybde
+Ornée, remplissage ¦ Výzdoba, výplň ¦ Utsmyckad, fyllning ¦ Udsmykket, fyld
+Objets remontés ¦ Vyzdvižené předměty ¦ Bärgade föremål ¦ Bjergede genstande
+Fonds, bibliothèque ¦ Fond, knihovna ¦ Arkivbestånd, bibliotek ¦ Arkivfond, bibliotek
+Énoncé ¦ Znění ¦ Formulering ¦ Formulering
+Preuve, démonstration ¦ Důkaz ¦ Bevis ¦ Bevis
+Débit, réserve ¦ Vydatnost, zásoba ¦ Flöde, reserv ¦ Ydelse, reserve
+Sorte (col, lac, île…) ¦ Druh (průsmyk, jezero, ostrov…) ¦ Sort (pass, sjö, ö…) ¦ Slags (pas, sø, ø…)
+Quoi exactement ¦ Co přesně ¦ Vad exakt ¦ Hvad præcist
+Ces champs changent avec la « Sorte » : comète (désignation, orbite, observatoire), gène (organisme, chromosome, n° GenBank), site archéologique (période, fouilles, musée), fossile (âge, couche, gisement)… ¦ Tato pole se mění podle „Druhu“: kometa (označení, dráha, observatoř), gen (organismus, chromozom, č. GenBank), archeologické naleziště (období, vykopávky, muzeum), fosilie (stáří, vrstva, naleziště)… ¦ De här fälten ändras med ”Sort”: komet (beteckning, bana, observatorium), gen (organism, kromosom, GenBank-nr), arkeologisk plats (period, utgrävningar, museum), fossil (ålder, lager, fyndplats)… ¦ Disse felter ændres med »Slags«: komet (betegnelse, bane, observatorium), gen (organisme, kromosom, GenBank-nr.), arkæologisk lokalitet (periode, udgravninger, museum), fossil (alder, lag, fundsted)…
+publié ¦ zveřejněno ¦ publicerat ¦ offentliggjort
+accepté ¦ přijato ¦ accepterat ¦ accepteret
+rétrogradé (sous-espèce…) ¦ přeřazeno níž (poddruh…) ¦ nedgraderat (underart…) ¦ nedgraderet (underart…)
+en attente ¦ čeká ¦ väntar ¦ afventer
+contestée ¦ zpochybněný ¦ ifrågasatt ¦ omstridt
+rétrogradée ¦ přeřazený níž ¦ nedgraderad ¦ nedgraderet
+réfutée ¦ vyvrácený ¦ vederlagd ¦ tilbagevist
+priorité contestée ¦ zpochybněná priorita ¦ ifrågasatt prioritet ¦ omstridt prioritet
+critiquée ¦ kritizovaný ¦ kritiserad ¦ kritiseret
+Première description ¦ První popis ¦ Första beskrivning ¦ Første beskrivelse
+Révision ¦ Revize ¦ Revision ¦ Revision
+découverte en même temps que ¦ objeveno současně s ¦ upptäckt samtidigt som ¦ opdaget samtidig med
+nommée d’après ¦ pojmenováno po ¦ uppkallad efter ¦ opkaldt efter
+fabriquée ¦ vyrobeno ¦ tillverkad ¦ fremstillet
+Lieu, station ¦ Místo, stanoviště ¦ Plats, lokal ¦ Sted, lokalitet
+Ce lieu n’a pas encore ses coordonnées (fiche du lieu, ou « Coordonnées » ici). ¦ Toto místo zatím nemá souřadnice (karta místa nebo „Souřadnice“ tady). ¦ Den här platsen har inga koordinater än (platsens post, eller ”Koordinater” här). ¦ Dette sted har endnu ingen koordinater (stedets post, eller »Koordinater« her).
+Nommée d’après ¦ Pojmenováno po ¦ Uppkallad efter ¦ Opkaldt efter
+Liens possibles : « publiée dans », « a mené à », « confirme », « contredit », « découverte en même temps que », « nommée d’après ». ¦ Možná propojení: „zveřejněno v“, „vedlo k“, „potvrzuje“, „vyvrací“, „objeveno současně s“, „pojmenováno po“. ¦ Möjliga kopplingar: ”publicerad i”, ”ledde till”, ”bekräftar”, ”motsäger”, ”upptäckt samtidigt som”, ”uppkallad efter”. ¦ Mulige forbindelser: »offentliggjort i«, »førte til«, »bekræfter«, »modsiger«, »opdaget samtidig med«, »opkaldt efter«.
+Découvertes ¦ Objevy ¦ Upptäckter ¦ Opdagelser
+La découverte ¦ Objev ¦ Upptäckten ¦ Opdagelsen
+Nom de la découverte ¦ Název objevu ¦ Upptäcktens namn ¦ Opdagelsens navn
+Découvreurs ¦ Objevitelé ¦ Upptäckare ¦ Opdagere
+Un découvreur ¦ Objevitel ¦ En upptäckare ¦ En opdager
+a trouvé la plante, a décrit l’espèce… ¦ našel rostlinu, popsal druh… ¦ hittade växten, beskrev arten… ¦ fandt planten, beskrev arten…
+découvreur ¦ objevitel ¦ upptäckare ¦ opdager
+Spécimen type ¦ Typový exemplář ¦ Typexemplar ¦ Typeeksemplar
+Reconnue ou contestée ¦ Uznáno nebo zpochybněno ¦ Erkänd eller ifrågasatt ¦ Anerkendt eller omstridt
+Auteur et année du nom ¦ Autor a rok názvu ¦ Namnets auktor och år ¦ Navnets autor og år
+En l’honneur de ¦ Na počest ¦ Till ära för ¦ Til ære for
+nommée en son honneur ¦ pojmenováno na jeho/její počest ¦ uppkallad till hans/hennes ära ¦ opkaldt til hans/hendes ære
+Pourquoi ce nom ¦ Proč tento název ¦ Varför det här namnet ¦ Hvorfor dette navn
+Statut du nom ¦ Stav názvu ¦ Namnets status ¦ Navnets status
+Précision du statut ¦ Upřesnění stavu ¦ Precisering av status ¦ Præcisering af status
+Spécimen, lieu, planche, étiquette ¦ Exemplář, místo, tabule, štítek ¦ Exemplar, plats, plansch, etikett ¦ Eksemplar, sted, planche, etiket
+Les images de la découverte ¦ Obrázky objevu ¦ Bilderna av upptäckten ¦ Billederne af opdagelsen
+Lieu de la découverte ¦ Místo objevu ¦ Upptäcktens plats ¦ Opdagelsens sted
+Endroit précis ¦ Přesné místo ¦ Exakt ställe ¦ Præcist sted
+Publication (fiche ou texte) ¦ Publikace (karta nebo text) ¦ Publikation (post eller text) ¦ Publikation (post eller tekst)
+Reconnaissance et controverses ¦ Uznání a spory ¦ Erkännande och kontroverser ¦ Anerkendelse og stridigheder
+Liens entre découvertes et inventions ¦ Propojení mezi objevy a vynálezy ¦ Kopplingar mellan upptäckter och uppfinningar ¦ Forbindelser mellem opdagelser og opfindelser
+ex. ophrys, comète, Laguenne, 1956 ¦ např. ophrys, kometa, Laguenne, 1956 ¦ t.ex. ophrys, komet, Laguenne, 1956 ¦ f.eks. ophrys, komet, Laguenne, 1956
+Porte le nom de quelqu’un ¦ Nese něčí jméno ¦ Bär någons namn ¦ Bærer nogens navn
+Article de revue ¦ Článek v časopise ¦ Tidskriftsartikel ¦ Tidsskriftsartikel
+Communication, congrès ¦ Příspěvek, kongres ¦ Föredrag, kongress ¦ Indlæg, kongres
+Chapitre de livre ¦ Kapitola knihy ¦ Bokkapitel ¦ Bogkapitel
+La publication ¦ Publikace ¦ Publikationen ¦ Publikationen
+Auteurs (dans l’ordre) ¦ Autoři (v pořadí) ¦ Författare (i ordning) ¦ Forfattere (i rækkefølge)
+rôle (facultatif) : dernier auteur, correspondant… ¦ role (nepovinné): poslední autor, korespondující… ¦ roll (valfritt): sista författare, korresponderande… ¦ rolle (valgfri): sidste forfatter, korresponderende…
+Éditeur, congrès ¦ Vydavatel, kongres ¦ Förlag, kongress ¦ Forlag, kongres
+PDF, tiré à part ¦ PDF, separát ¦ PDF, särtryck ¦ PDF, særtryk
+Découvertes et inventions ¦ Objevy a vynálezy ¦ Upptäckter och uppfinningar ¦ Opdagelser og opfindelser
+Fiches liées ¦ Propojené karty ¦ Kopplade poster ¦ Forbundne poster
+Avec un DOI ¦ S DOI ¦ Med en DOI ¦ Med en DOI
+Avec le PDF ¦ S PDF ¦ Med PDF-filen ¦ Med PDF-filen
+Les plus citées ¦ Nejcitovanější ¦ Mest citerade ¦ Mest citerede
+=famille de brevets ¦ patentová rodina|patentové rodiny|patentových rodin ¦ patentfamilj|patentfamiljer ¦ patentfamilie|patentfamilier
+=autre brevet détaillé ¦ další podrobný patent|další podrobné patenty|dalších podrobných patentů ¦ annat detaljerat patent|andra detaljerade patent ¦ andet detaljeret patent|andre detaljerede patenter
+=brevet ¦ patent|patenty|patentů ¦ patent|patent ¦ patent|patenter
+=prototype ¦ prototyp|prototypy|prototypů ¦ prototyp|prototyper ¦ prototype|prototyper
+élève, stagiaire ¦ žák, stážista ¦ elev, praktikant ¦ elev, praktikant
+maître, patron ¦ mistr, vedoucí ¦ mästare, handledare ¦ mester, vejleder
+conférence invitée ¦ zvaná přednáška ¦ inbjuden föreläsning ¦ inviteret foredrag
+congrès ¦ kongres ¦ kongress ¦ kongres
+séjour de recherche ¦ výzkumný pobyt ¦ forskningsvistelse ¦ forskningsophold
+espèce ¦ druh ¦ art ¦ art
+astéroïde ¦ planetka ¦ asteroid ¦ asteroide
+minéral ¦ minerál ¦ mineral ¦ mineral
+école, lycée ¦ škola, gymnázium ¦ skola, gymnasium ¦ skole, gymnasium
+laboratoire, bâtiment ¦ laboratoř, budova ¦ laboratorium, byggnad ¦ laboratorium, bygning
+carnets de laboratoire ¦ laboratorní deníky ¦ laboratoriedagböcker ¦ laboratoriejournaler
+carnets de terrain ¦ terénní deníky ¦ fältanteckningar ¦ feltnotesbøger
+notes de cours ¦ poznámky z přednášek ¦ föreläsningsanteckningar ¦ forelæsningsnoter
+Profil de scientifique ¦ Profil vědce ¦ Forskarprofil ¦ Forskerprofil
+Profils de scientifique ¦ Profily vědce ¦ Forskarprofiler ¦ Forskerprofiler
+Le scientifique ¦ Vědec ¦ Forskaren ¦ Forskeren
+Sujets de recherche ¦ Výzkumná témata ¦ Forskningsämnen ¦ Forskningsemner
+Plus haut diplôme ¦ Nejvyšší titul ¦ Högsta examen ¦ Højeste grad
+Publications en tout ¦ Publikací celkem ¦ Publikationer totalt ¦ Publikationer i alt
+(si toutes ne sont pas notées ici) ¦ (pokud tu nejsou zapsány všechny) ¦ (om inte alla är antecknade här) ¦ (hvis ikke alle er noteret her)
+Citations en tout ¦ Citací celkem ¦ Citeringar totalt ¦ Citationer i alt
+Directeur de thèse ¦ Vedoucí disertace ¦ Handledare ¦ Vejleder
+codirecteur de thèse ¦ spoluvedoucí disertace ¦ biträdande handledare ¦ medvejleder
+Un membre du jury ¦ Člen komise ¦ En ledamot i betygsnämnden ¦ Et medlem af bedømmelsesudvalget
+président, rapporteur… ¦ předseda, oponent… ¦ ordförande, opponent… ¦ formand, opponent…
+jury de thèse ¦ komise pro obhajobu ¦ betygsnämnd ¦ bedømmelsesudvalg
+Laboratoires et postes ¦ Laboratoře a pozice ¦ Laboratorier och tjänster ¦ Laboratorier og stillinger
+Filiation académique ¦ Akademický rodokmen ¦ Akademisk släktträd ¦ Akademisk stamtavle
+Un maître ¦ Učitel ¦ En lärare ¦ En læremester
+Pour elle, lui ¦ Pro ni, pro něj ¦ För henne, honom ¦ For hende, ham
+Élèves, doctorants ¦ Žáci, doktorandi ¦ Elever, doktorander ¦ Elever, ph.d.-studerende
+Un élève ¦ Žák ¦ En elev ¦ En elev
+Thèse en ¦ Disertace v roce ¦ Avhandling år ¦ Afhandling i
+Doctorants en tout ¦ Doktorandů celkem ¦ Doktorander totalt ¦ Ph.d.-studerende i alt
+Un collaborateur ¦ Spolupracovník ¦ En medarbetare ¦ En samarbejdspartner
+Missions et conférences ¦ Cesty a konference ¦ Uppdrag och konferenser ¦ Ekspeditioner og konferencer
+Missions · conférences ¦ Cesty · konference ¦ Uppdrag · konferenser ¦ Ekspeditioner · konferencer
+Une mission, une conférence ¦ Cesta, konference ¦ Ett uppdrag, en konferens ¦ En ekspedition, en konference
+Expédition ¦ Expedice ¦ Expedition ¦ Ekspedition
+Académies, sociétés, distinctions ¦ Akademie, společnosti, vyznamenání ¦ Akademier, sällskap, utmärkelser ¦ Akademier, selskaber, udmærkelser
+Académies, sociétés ¦ Akademie, společnosti ¦ Akademier, sällskap ¦ Akademier, selskaber
+Une académie, une société ¦ Akademie, společnost ¦ En akademi, ett sällskap ¦ Et akademi, et selskab
+Académie, société ¦ Akademie, společnost ¦ Akademi, sällskap ¦ Akademi, selskab
+Une distinction ¦ Vyznamenání ¦ En utmärkelse ¦ En udmærkelse
+Porte son nom ¦ Nese jeho/její jméno ¦ Bär hans/hennes namn ¦ Bærer hans/hendes navn
+Une chose à son nom ¦ Něco pojmenovaného po něm/ní ¦ Något uppkallat efter hen ¦ Noget opkaldt efter vedkommende
+Fiche de la découverte ¦ Karta objevu ¦ Upptäcktens post ¦ Opdagelsens post
+Carnets de laboratoire ¦ Laboratorní deníky ¦ Laboratoriedagböcker ¦ Laboratoriejournaler
+Des carnets ¦ Deníky ¦ Anteckningsböcker ¦ Notesbøger
+Un financement ¦ Financování ¦ En finansiering ¦ En finansiering
+Récit de carrière ¦ Příběh kariéry ¦ Karriärberättelse ¦ Karrierefortælling
+Profil d’inventeur ¦ Profil vynálezce ¦ Uppfinnarprofil ¦ Opfinderprofil
+Profils d’inventeur ¦ Profily vynálezce ¦ Uppfinnarprofiler ¦ Opfinderprofiler
+L’inventeur ¦ Vynálezce ¦ Uppfinnaren ¦ Opfinderen
+Lieu de l’atelier ¦ Místo dílny ¦ Verkstadens plats ¦ Værkstedets sted
+Associations d’inventeurs ¦ Spolky vynálezců ¦ Uppfinnarföreningar ¦ Opfinderforeninger
+thèse, postes, publications, élèves, académies, missions, nommages, découvertes ¦ disertace, pozice, publikace, žáci, akademie, cesty, pojmenování, objevy ¦ avhandling, tjänster, publikationer, elever, akademier, uppdrag, namngivningar, upptäckter ¦ afhandling, stillinger, publikationer, elever, akademier, ekspeditioner, navngivninger, opdagelser
+découverte ¦ objev ¦ upptäckt ¦ opdagelse
+inventions, brevets pays par pays, prototypes, licences, objets fabriqués, concours ¦ vynálezy, patenty podle zemí, prototypy, licence, vyrobené předměty, soutěže ¦ uppfinningar, patent land för land, prototyper, licenser, tillverkade föremål, tävlingar ¦ opfindelser, patenter land for land, prototyper, licenser, fremstillede genstande, konkurrencer
+expéditions sur la carte, membres, premières, collectes, récits, toponymes, sociétés ¦ expedice na mapě, členové, prvenství, sběry, vyprávění, místní jména, společnosti ¦ expeditioner på kartan, medlemmar, förstagångsbedrifter, insamlingar, berättelser, ortnamn, sällskap ¦ ekspeditioner på kortet, medlemmer, førstepræstationer, indsamlinger, beretninger, stednavne, selskaber
+Disciplines et domaines ¦ Obory a oblasti ¦ Discipliner och områden ¦ Discipliner og områder
+Disciplines, sujets, ORCID, IdRef… : « … » pour les écrire. ¦ Obory, témata, ORCID, IdRef…: zapíšeš je přes „…“. ¦ Discipliner, ämnen, ORCID, IdRef…: ”…” för att skriva in dem. ¦ Discipliner, emner, ORCID, IdRef…: »…« for at skrive dem.
+Titre, date, université, directeur, jury : « … » pour l’écrire. ¦ Název, datum, univerzita, vedoucí, komise: zapíšeš přes „…“. ¦ Titel, datum, universitet, handledare, betygsnämnd: ”…” för att skriva in det. ¦ Titel, dato, universitet, vejleder, bedømmelsesudvalg: »…« for at skrive det.
+les institutions sont des fiches Employeurs ¦ instituce jsou karty Zaměstnavatelé ¦ institutionerna är poster av typen Arbetsgivare ¦ institutionerne er poster af typen Arbejdsgivere
+Aucun poste noté. ¦ Žádná zapsaná pozice. ¦ Ingen tjänst antecknad. ¦ Ingen stilling noteret.
+… et {x} de plus (« Tout voir »). ¦ … a {x} dalších („Zobrazit vše“). ¦ … och {x} till (”Visa allt”). ¦ … og {x} mere (»Vis alt«).
+Aucune publication pour l’instant : importe-les par DOI, ORCID ou HAL, ou écris-les une par une. ¦ Zatím žádná publikace: importuj je přes DOI, ORCID nebo HAL, nebo je zapiš jednu po druhé. ¦ Inga publikationer ännu: importera dem via DOI, ORCID eller HAL, eller skriv in dem en i taget. ¦ Endnu ingen publikationer: importér dem via DOI, ORCID eller HAL, eller skriv dem en ad gangen.
+Importer (DOI, ORCID, HAL) ¦ Importovat (DOI, ORCID, HAL) ¦ Importera (DOI, ORCID, HAL) ¦ Importér (DOI, ORCID, HAL)
+Aucune invention pour l’instant. ¦ Zatím žádný vynález. ¦ Inga uppfinningar ännu. ¦ Endnu ingen opfindelser.
+Nouvelle invention ¦ Nový vynález ¦ Ny uppfinning ¦ Ny opfindelse
+Aucune découverte pour l’instant. ¦ Zatím žádný objev. ¦ Inga upptäckter ännu. ¦ Endnu ingen opdagelser.
+Nouvelle découverte ¦ Nový objev ¦ Ny upptäckt ¦ Ny opdagelse
+son directeur de thèse ¦ jeho/její vedoucí disertace ¦ hens handledare ¦ vedkommendes vejleder
+l’a eu(e) pour élève ¦ měl(a) ho/ji za žáka ¦ hade hen som elev ¦ havde vedkommende som elev
+Son directeur de thèse, ses maîtres, ses élèves : « … » pour les écrire. Les fiches de la base qui la, le citent comme directeur de thèse s’ajoutent toutes seules. ¦ Vedoucí disertace, učitelé, žáci: zapíšeš je přes „…“. Karty v databázi, které tuto osobu uvádějí jako vedoucího disertace, se přidají samy. ¦ Handledaren, lärarna, eleverna: ”…” för att skriva in dem. Poster i databasen som anger personen som handledare läggs till automatiskt. ¦ Vejlederen, læremestrene, eleverne: »…« for at skrive dem. Poster i databasen, der nævner personen som vejleder, tilføjes automatisk.
+maîtres de ¦ učitelé osoby ¦ lärare till ¦ læremestre for
+directeur de thèse de ¦ vedoucí disertace osoby ¦ handledare för ¦ vejleder for
+thèse {x} ¦ disertace {x} ¦ avhandling {x} ¦ afhandling {x}
+{x} de thèse de ({ns}) ¦ {x} disertace osoby ({ns}) ¦ {x} för avhandlingen av ({ns}) ¦ {x} for afhandlingen af ({ns})
+Les co-auteurs de ses publications s’ajoutent tout seuls. ¦ Spoluautoři publikací se přidají sami. ¦ Medförfattarna till publikationerna läggs till automatiskt. ¦ Medforfatterne til publikationerne tilføjes automatisk.
+Aucun financement noté. ¦ Žádné zapsané financování. ¦ Ingen finansiering antecknad. ¦ Ingen finansiering noteret.
+conférence ¦ konference ¦ konferens ¦ konference
+séjour ¦ pobyt ¦ vistelse ¦ ophold
+Missions, terrains, conférences invitées : « … » pour les écrire. ¦ Cesty, terénní práce, zvané přednášky: zapíšeš je přes „…“. ¦ Uppdrag, fältarbeten, inbjudna föreläsningar: ”…” för att skriva in dem. ¦ Ekspeditioner, feltarbejde, inviterede foredrag: »…« for at skrive dem.
+Académies, distinctions ¦ Akademie, vyznamenání ¦ Akademier, utmärkelser ¦ Akademier, udmærkelser
+Aucune académie notée. ¦ Žádná zapsaná akademie. ¦ Ingen akademi antecknad. ¦ Intet akademi noteret.
+nommée par {other} ¦ pojmenováno osobou {other} ¦ namngiven av {other} ¦ navngivet af {other}
+Espèces, astéroïdes, rues, prix à son nom : « … » pour les écrire. Les découvertes de la base « en l’honneur de » cette personne s’ajoutent toutes seules. ¦ Druhy, planetky, ulice, ceny nesoucí jeho/její jméno: zapíšeš je přes „…“. Objevy v databázi „na počest“ této osoby se přidají samy. ¦ Arter, asteroider, gator, priser uppkallade efter hen: ”…” för att skriva in dem. Upptäckter i databasen ”till ära för” personen läggs till automatiskt. ¦ Arter, asteroider, gader, priser opkaldt efter vedkommende: »…« for at skrive dem. Opdagelser i databasen »til ære for« personen tilføjes automatisk.
+Carnets de laboratoire ou de terrain : « … » pour les noter (les scans vont dans les médias). ¦ Laboratorní nebo terénní deníky: zapíšeš je přes „…“ (skeny jdou do médií). ¦ Laboratorie- eller fältanteckningar: ”…” för att anteckna dem (skanningarna hamnar i media). ¦ Laboratorie- eller feltnotesbøger: »…« for at notere dem (scanningerne kommer i medierne).
+« … » pour l’écrire. ¦ Zapíšeš přes „…“. ¦ ”…” för att skriva in det. ¦ »…« for at skrive det.
+L’inventeur et son atelier ¦ Vynálezce a jeho dílna ¦ Uppfinnaren och verkstaden ¦ Opfinderen og værkstedet
+Métier, atelier, domaines : « … » pour les écrire. ¦ Povolání, dílna, obory: zapíšeš je přes „…“. ¦ Yrke, verkstad, områden: ”…” för att skriva in dem. ¦ Erhverv, værksted, områder: »…« for at skrive dem.
+Tous ses brevets ¦ Všechny jeho/její patenty ¦ Alla hens patent ¦ Alle vedkommendes patenter
+Aucun brevet : sur la fiche d’une invention, « 📜 Brevets » → une ligne par pays. ¦ Žádný patent: na kartě vynálezu „📜 Patenty“ → jeden řádek na zemi. ¦ Inga patent: på en uppfinnings post, ”📜 Patent” → en rad per land. ¦ Ingen patenter: på en opfindelses post, »📜 Patenter« → én linje pr. land.
+Aucune licence notée. ¦ Žádná zapsaná licence. ¦ Ingen licens antecknad. ¦ Ingen licens noteret.
+Concours d’inventeurs ¦ Soutěže vynálezců ¦ Uppfinnartävlingar ¦ Opfinderkonkurrencer
+Concours Lépine, foires, expositions : sur la fiche de chaque invention. ¦ Soutěž Lépine, veletrhy, výstavy: na kartě každého vynálezu. ¦ Concours Lépine, mässor, utställningar: på varje uppfinnings post. ¦ Concours Lépine, messer, udstillinger: på hver opfindelses post.
+Aucun objet noté. ¦ Žádný zapsaný předmět. ¦ Inget föremål antecknat. ¦ Ingen genstand noteret.
+Importer les publications de {name} ¦ Importovat publikace osoby {name} ¦ Importera publikationerna för {name} ¦ Importér publikationerne for {name}
+Importer les publications cochées ¦ Importovat zaškrtnuté publikace ¦ Importera de markerade publikationerna ¦ Importér de markerede publikationer
+Ne pas reprendre celles qui sont déjà là (même DOI ou même titre) ¦ Nepřebírat ty, které už tu jsou (stejné DOI nebo stejný název) ¦ Hoppa över dem som redan finns (samma DOI eller samma titel) ¦ Spring dem over, der allerede findes (samme DOI eller samme titel)
+Relier {name} comme auteur quand son nom y est ¦ Propojit {name} jako autora, když tam je jeho/její jméno ¦ Koppla {name} som författare när namnet finns med ¦ Forbind {name} som forfatter, når navnet står der
+Compléter par Crossref (auteurs, pages, citations) quand il y a un DOI ¦ Doplnit z Crossrefu (autoři, stránky, citace), když je k dispozici DOI ¦ Komplettera via Crossref (författare, sidor, citeringar) när det finns en DOI ¦ Supplér via Crossref (forfattere, sider, citationer), når der er en DOI
+Colle un ou plusieurs DOI (un par ligne), ou leurs adresses https://doi.org/… : titre, revue, auteurs, pages et citations viennent de Crossref. ¦ Vlož jedno nebo více DOI (jedno na řádek) nebo jejich adresy https://doi.org/…: název, časopis, autoři, stránky a citace se načtou z Crossrefu. ¦ Klistra in en eller flera DOI (en per rad) eller deras adresser https://doi.org/…: titel, tidskrift, författare, sidor och citeringar hämtas från Crossref. ¦ Indsæt én eller flere DOI'er (én pr. linje) eller deres adresser https://doi.org/…: titel, tidsskrift, forfattere, sider og citationer hentes fra Crossref.
+L’identifiant ORCID (16 chiffres, ex. 0000-0002-1825-0097) ou l’adresse orcid.org/… : toute la liste des travaux déclarés. ¦ Identifikátor ORCID (16 číslic, např. 0000-0002-1825-0097) nebo adresa orcid.org/…: celý seznam uvedených prací. ¦ ORCID-identifieraren (16 siffror, t.ex. 0000-0002-1825-0097) eller adressen orcid.org/…: hela listan över registrerade arbeten. ¦ ORCID-id'et (16 cifre, f.eks. 0000-0002-1825-0097) eller adressen orcid.org/…: hele listen over registrerede værker.
+Le nom de l’auteur (ex. Anne Martin) ou son identifiant HAL (idHal, ex. anne-martin) : les dépôts de l’archive ouverte HAL. ¦ Jméno autora (např. Anne Martin) nebo jeho identifikátor HAL (idHal, např. anne-martin): záznamy z otevřeného archivu HAL. ¦ Författarens namn (t.ex. Anne Martin) eller hens HAL-identifierare (idHal, t.ex. anne-martin): poster i det öppna arkivet HAL. ¦ Forfatterens navn (f.eks. Anne Martin) eller vedkommendes HAL-id (idHal, f.eks. anne-martin): poster i det åbne arkiv HAL.
+Écris d’abord ce qu’il faut chercher. ¦ Nejdřív napiš, co hledat. ¦ Skriv först vad som ska sökas. ¦ Skriv først, hvad der skal søges efter.
+Coche les publications à importer. ¦ Zaškrtni publikace k importu. ¦ Markera publikationerna som ska importeras. ¦ Markér de publikationer, der skal importeres.
+expédition ¦ expedice ¦ expedition ¦ ekspedition
+Ouvrir sa page ¦ Otevřít jeho/její stránku ¦ Öppna sidan ¦ Åbn siden
+=publication ¦ publikace|publikace|publikací ¦ publikation|publikationer ¦ publikation|publikationer
+=invention ¦ vynález|vynálezy|vynálezů ¦ uppfinning|uppfinningar ¦ opfindelse|opfindelser
+=discovery ¦ objev|objevy|objevů ¦ upptäckt|upptäckter ¦ opdagelse|opdagelser
+=doctorant ¦ doktorand|doktorandi|doktorandů ¦ doktorand|doktorander ¦ ph.d.-studerende|ph.d.-studerende
+=expédition ¦ expedice|expedice|expedic ¦ expedition|expeditioner ¦ ekspedition|ekspeditioner
+=élève ¦ žák|žáci|žáků ¦ elev|elever ¦ elev|elever
+=mission ¦ cesta|cesty|cest ¦ uppdrag|uppdrag ¦ ekspedition|ekspeditioner
+=cours ¦ kurz|kurzy|kurzů ¦ kurs|kurser ¦ kursus|kurser
+=publication importée ¦ importovaná publikace|importované publikace|importovaných publikací ¦ importerad publikation|importerade publikationer ¦ importeret publikation|importerede publikationer
+=membre ¦ člen|členové|členů ¦ medlem|medlemmar ¦ medlem|medlemmer
+géographique, cartographie ¦ zeměpisná, kartografie ¦ geografisk, kartografi ¦ geografisk, kartografi
+maritime, océanographique ¦ námořní, oceánografická ¦ marin, oceanografisk ¦ maritim, oceanografisk
+spéléologie ¦ speleologie ¦ grottforskning ¦ huleforskning
+archéologique ¦ archeologická ¦ arkeologisk ¦ arkæologisk
+aérienne ¦ letecká ¦ flyg ¦ luft
+raid, traversée ¦ přechod, přejezd ¦ räd, korsning ¦ tur, krydsning
+Conférences ¦ Přednášky ¦ Föreläsningar ¦ Foredrag
+Radio, télévision ¦ Rozhlas, televize ¦ Radio, tv ¦ Radio, tv
+nom donné, non officiel ¦ dané jméno, neoficiální ¦ givet namn, inofficiellt ¦ givet navn, uofficielt
+disparu, remplacé ¦ zaniklé, nahrazené ¦ försvunnet, ersatt ¦ forsvundet, erstattet
+Ajouter une étape ¦ Přidat zastávku ¦ Lägg till en etapp ¦ Tilføj en etape
+Les lieux de l’itinéraire n’ont pas encore leurs coordonnées (fiche du lieu, ou colonne « Coordonnées »). ¦ Místa trasy zatím nemají souřadnice (karta místa nebo sloupec „Souřadnice“). ¦ Platserna på färdvägen har inga koordinater än (platsens post, eller kolumnen ”Koordinater”). ¦ Rutens steder har endnu ingen koordinater (stedets post, eller kolonnen »Koordinater«).
+L’expédition ¦ Expedice ¦ Expeditionen ¦ Ekspeditionen
+Nom de l’expédition ¦ Název expedice ¦ Expeditionens namn ¦ Ekspeditionens navn
+Coordonnées (si le lieu n’en a pas) ¦ Souřadnice (pokud je místo nemá) ¦ Koordinater (om platsen saknar dem) ¦ Koordinater (hvis stedet ikke har nogen)
+Une première ¦ Prvenství ¦ En förstagångsbedrift ¦ En førstepræstation
+Un membre ¦ Člen ¦ En medlem ¦ Et medlem
+chef, médecin, botaniste, guide… ¦ vedoucí, lékař, botanik, průvodce… ¦ ledare, läkare, botaniker, guide… ¦ leder, læge, botaniker, guide…
+Un moyen ¦ Dopravní prostředek ¦ Ett transportmedel ¦ Et transportmiddel
+Véhicule, animaux, matériel ¦ Vozidlo, zvířata, vybavení ¦ Fordon, djur, utrustning ¦ Køretøj, dyr, udstyr
+Un carnet, des photos… ¦ Deník, fotky… ¦ En anteckningsbok, foton… ¦ En notesbog, fotos…
+Collectes — où elles sont aujourd’hui ¦ Sběry — kde jsou dnes ¦ Insamlingar — var de finns i dag ¦ Indsamlinger — hvor de er i dag
+Une collecte ¦ Sběr ¦ En insamling ¦ En indsamling
+Où aujourd’hui ¦ Kde dnes ¦ Var i dag ¦ Hvor i dag
+Un incident ¦ Nehoda ¦ En incident ¦ En hændelse
+Les photos de l’expédition ¦ Fotky z expedice ¦ Expeditionens foton ¦ Ekspeditionens fotos
+Récits et conférences ¦ Vyprávění a přednášky ¦ Berättelser och föreläsningar ¦ Beretninger og foredrag
+Un récit, des conférences ¦ Vyprávění, přednášky ¦ En berättelse, föreläsningar ¦ En beretning, foredrag
+Fiche (livre…) ¦ Karta (kniha…) ¦ Post (bok…) ¦ Post (bog…)
+Cartes tracées ¦ Zakreslené mapy ¦ Ritade kartor ¦ Tegnede kort
+Toponymes donnés ¦ Daná místní jména ¦ Givna ortnamn ¦ Givne stednavne
+Un nom donné ¦ Dané jméno ¦ Ett givet namn ¦ Et givet navn
+Passée par ¦ Přes ¦ Via ¦ Via
+Avec une première ¦ S prvenstvím ¦ Med en förstagångsbedrift ¦ Med en førstepræstation
+Profil d’explorateur ¦ Profil cestovatele ¦ Upptäcktsresandeprofil ¦ Opdagelsesrejsendeprofil
+Profils d’explorateur ¦ Profily cestovatele ¦ Upptäcktsresandeprofiler ¦ Opdagelsesrejsendeprofiler
+L’explorateur ¦ Cestovatel ¦ Upptäcktsresanden ¦ Opdagelsesrejsende
+Régions parcourues ¦ Prozkoumané oblasti ¦ Genomresta regioner ¦ Berejste regioner
+Sociétés ¦ Společnosti ¦ Sällskap ¦ Selskaber
+Une société ¦ Společnost ¦ Ett sällskap ¦ Et selskab
+Société, club ¦ Společnost, klub ¦ Sällskap, klubb ¦ Selskab, klub
+Lieux à son nom ¦ Místa pojmenovaná po něm/ní ¦ Platser uppkallade efter hen ¦ Steder opkaldt efter vedkommende
+Un lieu à son nom ¦ Místo pojmenované po něm/ní ¦ En plats uppkallad efter hen ¦ Et sted opkaldt efter vedkommende
+Des conférences ¦ Přednášky ¦ Föreläsningar ¦ Foredrag
+Récit de vie ¦ Životní příběh ¦ Levnadsberättelse ¦ Livsfortælling
+Aucune expédition pour l’instant. ¦ Zatím žádná expedice. ¦ Inga expeditioner ännu. ¦ Endnu ingen ekspeditioner.
+Nouvelle expédition ¦ Nová expedice ¦ Ny expedition ¦ Ny ekspedition
+Carte de toutes ses expéditions ¦ Mapa všech jeho/jejích expedic ¦ Karta över alla hens expeditioner ¦ Kort over alle vedkommendes ekspeditioner
+Aucun itinéraire : sur la fiche d’une expédition, « 🗺 Itinéraire » → une ligne par étape. ¦ Žádná trasa: na kartě expedice „🗺 Trasa“ → jeden řádek na zastávku. ¦ Ingen färdväg: på en expeditions post, ”🗺 Färdväg” → en rad per etapp. ¦ Ingen rute: på en ekspeditions post, »🗺 Rute« → én linje pr. etape.
+Frise des expéditions ¦ Časová osa expedic ¦ Tidslinje för expeditionerna ¦ Tidslinje over ekspeditionerne
+Les expéditions sans date n’ont pas de place sur la frise. ¦ Expedice bez data nemají na časové ose místo. ¦ Expeditioner utan datum får ingen plats på tidslinjen. ¦ Ekspeditioner uden dato har ingen plads på tidslinjen.
+Aucune première notée. ¦ Žádné zapsané prvenství. ¦ Ingen förstagångsbedrift antecknad. ¦ Ingen førstepræstation noteret.
+Toponymes donnés ou à son nom ¦ Daná místní jména nebo jména po něm/ní ¦ Givna ortnamn eller uppkallade efter hen ¦ Givne stednavne eller opkaldt efter vedkommende
+Noms donnés ¦ Daná jména ¦ Givna namn ¦ Givne navne
+À son nom ¦ Pojmenované po něm/ní ¦ Uppkallade efter hen ¦ Opkaldt efter vedkommende
+Aucun nom de lieu noté. ¦ Žádné zapsané místní jméno. ¦ Inget ortnamn antecknat. ¦ Intet stednavn noteret.
+Collectes et où elles sont ¦ Sběry a kde jsou ¦ Insamlingar och var de finns ¦ Indsamlinger og hvor de er
+Aucune collecte notée. ¦ Žádný zapsaný sběr. ¦ Ingen insamling antecknad. ¦ Ingen indsamling noteret.
+Aucun récit noté. ¦ Žádné zapsané vyprávění. ¦ Ingen berättelse antecknad. ¦ Ingen beretning noteret.
+Sociétés et distinctions ¦ Společnosti a vyznamenání ¦ Sällskap och utmärkelser ¦ Selskaber og udmærkelser
+Société de géographie, Explorers Club, médailles… : « … » pour les écrire. ¦ Société de géographie, Explorers Club, medaile…: zapíšeš je přes „…“. ¦ Société de géographie, Explorers Club, medaljer…: ”…” för att skriva in dem. ¦ Société de géographie, Explorers Club, medaljer…: »…« for at skrive dem.
+Compagnons d’expédition ¦ Společníci na expedicích ¦ Expeditionskamrater ¦ Ekspeditionsfæller
+Personne d’autre noté dans ses expéditions. ¦ V jeho/jejích expedicích není zapsán nikdo další. ¦ Ingen annan antecknad i hens expeditioner. ¦ Ingen andre noteret i vedkommendes ekspeditioner.
+fiche ¦ karta ¦ post ¦ post
+Découverte ¦ Objev ¦ Upptäckt ¦ Opdagelse
+<strong>Mode consultation</strong> : parcours la généalogie librement, rien ne peut être modifié ni supprimé. ¦ <strong>Režim prohlížení</strong>: procházej rodokmen volně, nic nelze upravit ani smazat. ¦ <strong>Visningsläge</strong>: bläddra fritt i släktträdet, inget kan ändras eller raderas. ¦ <strong>Visningstilstand</strong>: gennemse slægtstræet frit, intet kan ændres eller slettes.
+Quitter la consultation ¦ Ukončit prohlížení ¦ Lämna visningsläget ¦ Forlad visningstilstanden
+Quitter le mode consultation (mot de passe) ¦ Ukončit režim prohlížení (heslo) ¦ Lämna visningsläget (lösenord) ¦ Forlad visningstilstanden (adgangskode)
+Encore une fois ¦ Ještě jednou ¦ En gång till ¦ En gang til
+Les deux mots de passe sont différents. ¦ Obě hesla se liší. ¦ De två lösenorden är olika. ¦ De to adgangskoder er forskellige.
+Donne le mot de passe choisi en entrant dans ce mode. ¦ Zadej heslo zvolené při vstupu do tohoto režimu. ¦ Ange lösenordet som valdes när läget startades. ¦ Angiv den adgangskode, der blev valgt, da tilstanden blev slået til.
+Mode consultation terminé. ¦ Režim prohlížení ukončen. ¦ Visningsläget avslutat. ¦ Visningstilstanden er afsluttet.
+Passer en mode consultation ¦ Přepnout do režimu prohlížení ¦ Byt till visningsläge ¦ Skift til visningstilstand
+La famille pourra parcourir ta généalogie sur cet ordinateur sans rien pouvoir modifier ni supprimer. <b>Choisis un mot de passe</b> : il sera demandé pour sortir de ce mode. (Oublié ? Supprime le fichier <code>consultation.json</code> du dossier des données.) ¦ Rodina bude moct procházet tvůj rodokmen na tomto počítači, aniž by mohla cokoli upravit nebo smazat. <b>Zvol heslo</b>: bude vyžadováno pro ukončení tohoto režimu. (Zapomenuté? Smaž soubor <code>consultation.json</code> ze složky dat.) ¦ Familjen kan bläddra i ditt släktträd på den här datorn utan att kunna ändra eller radera något. <b>Välj ett lösenord</b>: det krävs för att lämna läget. (Glömt? Radera filen <code>consultation.json</code> i datamappen.) ¦ Familien kan gennemse dit slægtstræ på denne computer uden at kunne ændre eller slette noget. <b>Vælg en adgangskode</b>: den kræves for at forlade tilstanden. (Glemt? Slet filen <code>consultation.json</code> i datamappen.)
+Mode consultation activé. ¦ Režim prohlížení zapnut. ¦ Visningsläget aktiverat. ¦ Visningstilstanden er slået til.
+Aucune fête reconnue (il faut le nom de la fête et l’année, ex. « le jour de la Pentecôte 1754 »). ¦ Žádný svátek nebyl rozpoznán (je potřeba název svátku a rok, např. „le jour de la Pentecôte 1754“). ¦ Ingen helgdag känd igen (det behövs helgdagens namn och året, t.ex. ”le jour de la Pentecôte 1754”). ¦ Ingen helligdag genkendt (der skal være helligdagens navn og året, f.eks. »le jour de la Pentecôte 1754«).
+(calendrier julien, en usage en France avant décembre 1582 ; soit le {gregorian} dans le calendrier grégorien) ¦ (juliánský kalendář, používaný ve Francii před prosincem 1582; tj. {gregorian} v gregoriánském kalendáři) ¦ (julianska kalendern, använd i Frankrike före december 1582; dvs. {gregorian} i den gregorianska kalendern) ¦ (den julianske kalender, brugt i Frankrig før december 1582; dvs. {gregorian} i den gregorianske kalender)
+Pâques {x} : {easter}. ¦ Velikonoce {x}: {easter}. ¦ Påsk {x}: {easter}. ¦ Påske {x}: {easter}.
+Écrit : « {original} ». ¦ Zapsáno: „{original}“. ¦ Skrivet: ”{original}”. ¦ Skrevet: »{original}«.
+Fêtes religieuses → date exacte ¦ Církevní svátky → přesné datum ¦ Kyrkliga helgdagar → exakt datum ¦ Kirkelige helligdage → præcis dato
+Les curés écrivaient souvent « le jour de la Pentecôte 1754 », « le lendemain de la Saint-Martin », « le lundi après la Saint-Martin 1650 » ou « trois jours avant Pâques 1702 ». Écris la mention : l’app calcule la vraie date (Pâques selon le comput julien avant 1583, grégorien ensuite). ¦ Faráři často psali „le jour de la Pentecôte 1754“, „le lendemain de la Saint-Martin“, „le lundi après la Saint-Martin 1650“ nebo „trois jours avant Pâques 1702“. Napiš zmínku: aplikace spočítá skutečné datum (Velikonoce podle juliánského výpočtu před rokem 1583, potom gregoriánského). ¦ Prästerna skrev ofta ”le jour de la Pentecôte 1754”, ”le lendemain de la Saint-Martin”, ”le lundi après la Saint-Martin 1650” eller ”trois jours avant Pâques 1702”. Skriv uppgiften: appen räknar ut det verkliga datumet (påsken enligt den julianska beräkningen före 1583, den gregorianska därefter). ¦ Præsterne skrev ofte »le jour de la Pentecôte 1754«, »le lendemain de la Saint-Martin«, »le lundi après la Saint-Martin 1650« eller »trois jours avant Pâques 1702«. Skriv angivelsen: appen beregner den rigtige dato (påsken efter den julianske beregning før 1583, den gregorianske derefter).
+Mention de l’acte ¦ Zmínka v záznamu ¦ Uppgift i handlingen ¦ Angivelse i dokumentet
+Toutes les fêtes mobiles d’une année (Septuagésime, Cendres, Pâques, Pentecôte, Fête-Dieu…) : cadre « Saint du jour et fêtes mobiles ». ¦ Všechny pohyblivé svátky roku (Devítník, Popeleční středa, Velikonoce, Letnice, Boží tělo…): rámeček „Světec dne a pohyblivé svátky“. ¦ Alla rörliga helgdagar under ett år (Septuagesima, askonsdagen, påsk, pingst, Kristi lekamens fest…): rutan ”Dagens helgon och rörliga helgdagar”. ¦ Alle årets bevægelige helligdage (Septuagesima, askeonsdag, påske, pinse, Kristi legemsfest…): rammen »Dagens helgen og bevægelige helligdage«.
+Utiliser cette date ¦ Použít toto datum ¦ Använd det här datumet ¦ Brug denne dato
+Date écrite dans l’acte : « {original} » ¦ Datum zapsané v záznamu: „{original}“ ¦ Datum skrivet i handlingen: ”{original}” ¦ Dato skrevet i dokumentet: »{original}«
+Date calculée d’après « {original} »{x}. ¦ Datum spočítané podle „{original}“{x}. ¦ Datum beräknat utifrån ”{original}”{x}. ¦ Dato beregnet ud fra »{original}«{x}.
+(mention gardée dans la description) ¦ (zmínka ponechána v popisu) ¦ (uppgiften sparad i beskrivningen) ¦ (angivelsen gemt i beskrivelsen)
+{x} par le dossier Scans : à identifier dans les médias. ¦ {x} ze složky Skeny: k identifikaci v médiích. ¦ {x} via mappen Skanningar: att identifiera i media. ¦ {x} via mappen Scanninger: skal identificeres i medierne.
+Choisis un dossier sur ton ordinateur. Chaque fichier qui y arrive (depuis le scanner, le téléphone ou AirDrop) entre tout seul dans l’app, dans les médias à identifier. Plus besoin d’importer tes photos d’archives une par une. ¦ Vyber složku na svém počítači. Každý soubor, který do ní přijde (ze skeneru, telefonu nebo přes AirDrop), se sám dostane do aplikace mezi média k identifikaci. Už nemusíš importovat archivní fotky jednu po druhé. ¦ Välj en mapp på din dator. Varje fil som kommer dit (från skannern, telefonen eller AirDrop) kommer automatiskt in i appen, bland media att identifiera. Du behöver inte längre importera dina arkivfoton ett i taget. ¦ Vælg en mappe på din computer. Hver fil, der kommer ind i den (fra scanneren, telefonen eller AirDrop), kommer automatisk ind i appen blandt medier, der skal identificeres. Du behøver ikke længere importere dine arkivfotos et ad gangen.
+Dossier surveillé ¦ Sledovaná složka ¦ Bevakad mapp ¦ Overvåget mappe
+Surveiller ce dossier (toutes les 20 secondes, tant que l’app est ouverte) ¦ Sledovat tuto složku (každých 20 sekund, dokud je aplikace otevřená) ¦ Bevaka den här mappen (var 20:e sekund, så länge appen är öppen) ¦ Overvåg denne mappe (hvert 20. sekund, så længe appen er åben)
+Ranger les fichiers importés dans le sous-dossier « Importés dans LCNDA » ¦ Přesouvat importované soubory do podsložky „Importés dans LCNDA“ ¦ Flytta importerade filer till undermappen ”Importés dans LCNDA” ¦ Flyt importerede filer til undermappen »Importés dans LCNDA«
+Formats : JPEG, PNG, WebP, GIF, PDF{x}. Conseil : un dossier réservé aux scans (AirDrop dépose dans « Téléchargements », où il y a de tout). Un même fichier n’est jamais importé deux fois. ¦ Formáty: JPEG, PNG, WebP, GIF, PDF{x}. Tip: složka jen pro skeny (AirDrop ukládá do „Stažené soubory“, kde je všechno možné). Stejný soubor se nikdy neimportuje dvakrát. ¦ Format: JPEG, PNG, WebP, GIF, PDF{x}. Tips: en mapp bara för skanningar (AirDrop lägger filer i ”Hämtade filer”, där det finns allt möjligt). Samma fil importeras aldrig två gånger. ¦ Formater: JPEG, PNG, WebP, GIF, PDF{x}. Tip: en mappe kun til scanninger (AirDrop lægger filer i »Overførsler«, hvor der er alt muligt). Den samme fil importeres aldrig to gange.
+, et HEIC (iPhone) ou TIFF, convertis en JPEG ¦ , a HEIC (iPhone) nebo TIFF, převedené na JPEG ¦ , och HEIC (iPhone) eller TIFF, omvandlade till JPEG ¦ , og HEIC (iPhone) eller TIFF, konverteret til JPEG
+(les photos HEIC de l’iPhone et les TIFF ne sont pas convertibles sur cet ordinateur : règle l’iPhone sur « Le plus compatible ») ¦ (fotky HEIC z iPhonu a TIFF nejde na tomto počítači převést: nastav iPhone na „Nejkompatibilnější“) ¦ (HEIC-foton från iPhone och TIFF kan inte omvandlas på den här datorn: ställ in iPhone på ”Mest kompatibel”) ¦ (HEIC-fotos fra iPhone og TIFF kan ikke konverteres på denne computer: indstil iPhone til »Mest kompatibel«)
+Vérifier maintenant ¦ Zkontrolovat teď ¦ Kontrollera nu ¦ Tjek nu
+{x} · {x2} en tout ¦ {x} · {x2} celkem ¦ {x} · {x2} totalt ¦ {x} · {x2} i alt
+Rien en attente ¦ Nic nečeká ¦ Inget väntar ¦ Intet venter
+dossier introuvable (disque débranché ?) ¦ složka nenalezena (odpojený disk?) ¦ mappen hittades inte (frånkopplad disk?) ¦ mappen blev ikke fundet (frakoblet disk?)
+Derniers arrivés ¦ Naposledy přišlé ¦ Senast inkomna ¦ Senest ankomne
+Voir les médias à identifier ¦ Zobrazit média k identifikaci ¦ Visa media att identifiera ¦ Vis medier, der skal identificeres
+Rien d’arrivé pour l’instant ¦ Zatím nic nepřišlo ¦ Inget har kommit ännu ¦ Endnu intet ankommet
+Dossier surveillé. ¦ Složka je sledována. ¦ Mappen bevakas. ¦ Mappen overvåges.
+Surveillé ¦ Sledováno ¦ Bevakad ¦ Overvåget
+Pas surveillé ¦ Nesledováno ¦ Inte bevakad ¦ Ikke overvåget
+Avant {until}, chercher dans les registres de la paroisse de ¦ Před rokem {until} hledat v matrikách farnosti ¦ Före {until}, sök i kyrkböckerna för församlingen ¦ Før {until}, søg i kirkebøgerne for sognet
+Beaucoup de hameaux et de villages dépendaient de la paroisse d’à côté : les baptêmes, mariages et sépultures d’avant la Révolution sont alors dans les registres d’une autre commune. Note ces rattachements au fil de tes trouvailles : l’app l’indique sur les événements des fiches, dans les battues et dans les registres en ligne. ¦ Mnoho osad a vesnic patřilo k sousední farnosti: křty, sňatky a pohřby z doby před Revolucí jsou pak v matrikách jiné obce. Zapisuj tyto příslušnosti, jak je postupně nacházíš: aplikace je ukáže u událostí na kartách, v hromadných pátráních a v online matrikách. ¦ Många byar och småorter hörde till grannförsamlingen: dop, vigslar och begravningar från före revolutionen finns då i en annan orts kyrkböcker. Anteckna de här tillhörigheterna allteftersom du hittar dem: appen visar dem vid händelserna i posterna, i sökinsatserna och i kyrkböckerna på nätet. ¦ Mange landsbyer og bebyggelser hørte under nabosognet: dåb, vielser og begravelser fra før revolutionen står så i en anden bys kirkebøger. Notér disse tilhørsforhold, efterhånden som du finder dem: appen viser dem ved begivenhederne i posterne, i eftersøgningerne og i kirkebøgerne online.
+Modifier le rattachement ¦ Upravit příslušnost ¦ Redigera tillhörigheten ¦ Rediger tilhørsforholdet
+Nouveau rattachement ¦ Nová příslušnost ¦ Ny tillhörighet ¦ Nyt tilhørsforhold
+Lieu (hameau, village, commune actuelle) ¦ Místo (osada, vesnice, dnešní obec) ¦ Plats (by, småort, nuvarande kommun) ¦ Sted (bebyggelse, landsby, nuværende kommune)
+Dépendait de la paroisse de ¦ Patřilo k farnosti ¦ Hörde till församlingen ¦ Hørte under sognet
+Nom de la paroisse (tel que dans les registres) ¦ Název farnosti (jak je v matrikách) ¦ Församlingens namn (som i kyrkböckerna) ¦ Sognets navn (som i kirkebøgerne)
+Note, source ¦ Poznámka, pramen ¦ Anteckning, källa ¦ Note, kilde
+Chercher… (lieu, paroisse, note) ¦ Hledat… (místo, farnost, poznámka) ¦ Sök… (plats, församling, anteckning) ¦ Søg… (sted, sogn, note)
+Avec des événements concernés ({withEv}) ¦ S dotčenými událostmi ({withEv}) ¦ Med berörda händelser ({withEv}) ¦ Med berørte begivenheder ({withEv})
+Avec des événements concernés ¦ S dotčenými událostmi ¦ Med berörda händelser ¦ Med berørte begivenheder
+Jusqu’en (année) ¦ Do (rok) ¦ Fram till (år) ¦ Indtil (år)
+Événements concernés ¦ Dotčené události ¦ Berörda händelser ¦ Berørte begivenheder
+Modifier ce rattachement ¦ Upravit tuto příslušnost ¦ Redigera den här tillhörigheten ¦ Rediger dette tilhørsforhold
+Supprimer ce rattachement ¦ Smazat tuto příslušnost ¦ Radera den här tillhörigheten ¦ Slet dette tilhørsforhold
+Aucun rattachement ne correspond ¦ Žádná příslušnost neodpovídá ¦ Ingen tillhörighet matchar ¦ Intet tilhørsforhold passer
+Supprimer ce rattachement ? ¦ Smazat tuto příslušnost? ¦ Radera den här tillhörigheten? ¦ Slette dette tilhørsforhold?
+Supprimer le rattachement ¦ Smazat příslušnost ¦ Radera tillhörigheten ¦ Slet tilhørsforholdet
+Rattachement enregistré. ¦ Příslušnost uložena. ¦ Tillhörigheten sparad. ¦ Tilhørsforholdet er gemt.
+Les témoins, voisins, curés, parrains qui n’ont pas de fiche. Par exemple : « Pierre Martin, tisserand, apparaît dans 7 actes entre 1781 et 1803 ». Ce cercle (famille, amis, voisins) débloque souvent une recherche. ¦ Svědci, sousedé, faráři, kmotři, kteří nemají kartu. Například: „Pierre Martin, tkadlec, se objevuje v 7 záznamech mezi lety 1781 a 1803“. Tento okruh (rodina, přátelé, sousedé) často odblokuje pátrání. ¦ Vittnen, grannar, präster, faddrar som inte har någon post. Till exempel: ”Pierre Martin, vävare, förekommer i 7 handlingar mellan 1781 och 1803”. Den här kretsen (familj, vänner, grannar) löser ofta upp en återvändsgränd. ¦ Vidner, naboer, præster, faddere, der ikke har en post. For eksempel: »Pierre Martin, væver, optræder i 7 dokumenter mellem 1781 og 1803«. Denne kreds (familie, venner, naboer) løser ofte en blindgyde op.
+Ouvre « Marquer dans les transcriptions » : sélectionne un nom dans le texte d’un acte, ou accepte les noms repérés par l’app. ¦ Otevři „Označit v přepisech“: vyber jméno v textu záznamu, nebo přijmi jména nalezená aplikací. ¦ Öppna ”Markera i transkriberingarna”: markera ett namn i texten i en handling, eller godkänn namnen som appen har hittat. ¦ Åbn »Markér i transskriptionerne«: markér et navn i teksten i et dokument, eller godkend de navne, appen har fundet.
+Aucune transcription pour l’instant ¦ Zatím žádný přepis ¦ Inga transkriberingar ännu ¦ Endnu ingen transskriptioner
+Transcris d’abord un acte : visionneuse des médias → transcription. ¦ Nejdřív přepiš záznam: prohlížeč médií → přepis. ¦ Transkribera först en handling: mediavisaren → transkribering. ¦ Transskribér først et dokument: mediefremviseren → transskription.
+Chercher… (nom, métier, lieu) ¦ Hledat… (jméno, povolání, místo) ¦ Sök… (namn, yrke, plats) ¦ Søg… (navn, erhverv, sted)
+Lieu : ¦ Místo: ¦ Plats: ¦ Sted:
+Avec une fiche ¦ S kartou ¦ Med en post ¦ Med en post
+Le plus de mentions ¦ Nejvíc zmínek ¦ Flest omnämnanden ¦ Flest omtaler
+Chercher… (titre, texte, cote) ¦ Hledat… (název, text, signatura) ¦ Sök… (titel, text, signum) ¦ Søg… (titel, tekst, signatur)
+Noms marqués ¦ Označená jména ¦ Markerade namn ¦ Markerede navne
+Aucun nom marqué ¦ Žádné označené jméno ¦ Inga markerade namn ¦ Ingen markerede navne
+Au moins un nom marqué ¦ Aspoň jedno označené jméno ¦ Minst ett markerat namn ¦ Mindst ét markeret navn
+{x} — apparaît dans ¦ {x} — objevuje se v ¦ {x} — förekommer i ¦ {x} — optræder i
+entre {from} et {to} ¦ mezi {from} a {to} ¦ mellan {from} och {to} ¦ mellem {from} og {to}
+Fiche : {x} ¦ Karta: {x} ¦ Post: {x} ¦ Post: {x}
+Les {n} mentions ¦ Všech {n} zmínek ¦ De {n} omnämnandena ¦ De {n} omtaler
+nom marqué ¦ označené jméno ¦ markerat namn ¦ markeret navn
+noms marqués ¦ označená jména ¦ markerade namn ¦ markerede navne
+aucun nom ¦ žádné jméno ¦ inget namn ¦ intet navn
+Début de la transcription ¦ Začátek přepisu ¦ Början av transkriberingen ¦ Begyndelsen af transskriptionen
+Aucun nom ne correspond ¦ Žádné jméno neodpovídá ¦ Inget namn matchar ¦ Intet navn passer
+Aucune transcription ne correspond ¦ Žádný přepis neodpovídá ¦ Ingen transkribering matchar ¦ Ingen transskription passer
+NOMS CITÉS ¦ ZMÍNĚNÁ JMÉNA ¦ NÄMNDA NAMN ¦ NÆVNTE NAVNE
+Sélectionne un nom dans le texte avec la souris : un bouton « Ajouter » apparaît. ¦ Označ myší jméno v textu: objeví se tlačítko „Přidat“. ¦ Markera ett namn i texten med musen: en knapp ”Lägg till” visas. ¦ Markér et navn i teksten med musen: en knap »Tilføj« vises.
+Noms marqués ({n}) ¦ Označená jména ({n}) ¦ Markerade namn ({n}) ¦ Markerede navne ({n})
+Noms repérés par l’app ¦ Jména nalezená aplikací ¦ Namn som appen hittat ¦ Navne fundet af appen
+À vérifier : la détection automatique n’est pas parfaite. ¦ Ke kontrole: automatické rozpoznávání není dokonalé. ¦ Att kontrollera: den automatiska igenkänningen är inte perfekt. ¦ Skal kontrolleres: den automatiske genkendelse er ikke perfekt.
+Ajouter… ¦ Přidat… ¦ Lägg till… ¦ Tilføj…
+Ajouter ce nom ¦ Přidat toto jméno ¦ Lägg till det här namnet ¦ Tilføj dette navn
+NOM CITÉ ¦ ZMÍNĚNÉ JMÉNO ¦ NÄMNT NAMN ¦ NÆVNT NAVN
+Ajouter au cercle ¦ Přidat do okruhu ¦ Lägg till i kretsen ¦ Tilføj til kredsen
+Demeurant à… ¦ Bydlící v… ¦ Boende i… ¦ Bosat i…
+C’est quelqu’un de la base ? ¦ Je to někdo z databáze? ¦ Är det någon i databasen? ¦ Er det nogen fra databasen?
+Nom ajouté au cercle. ¦ Jméno přidáno do okruhu. ¦ Namnet har lagts till i kretsen. ¦ Navnet er tilføjet til kredsen.
+à appliquer ¦ k použití ¦ att tillämpa ¦ skal anvendes
+tu as aussi modifié ¦ také jsi upravil(a) ¦ du har också ändrat ¦ du har også ændret
+déjà identique ¦ už shodné ¦ redan identiskt ¦ allerede identisk
+absent chez toi ¦ u tebe chybí ¦ saknas hos dig ¦ mangler hos dig
+Toi et un cousin, chacun sur son ordinateur, sur la même généalogie. L’app échange des « paquets de modifications » : tu reçois les siens, tu acceptes ou refuses chaque changement. On ne partage jamais la base elle-même par iCloud ou Dropbox (risque de fichier abîmé). ¦ Ty a bratranec, každý na svém počítači, na stejném rodokmenu. Aplikace si vyměňuje „balíčky změn“: dostaneš jeho balíčky a každou změnu přijmeš nebo odmítneš. Samotná databáze se nikdy nesdílí přes iCloud nebo Dropbox (hrozí poškození souboru). ¦ Du och en kusin, var och en på sin dator, med samma släktträd. Appen utbyter ”ändringspaket”: du tar emot kusinens och godkänner eller avvisar varje ändring. Själva databasen delas aldrig via iCloud eller Dropbox (risk för skadad fil). ¦ Du og en fætter eller kusine, hver på sin computer, med det samme slægtstræ. Appen udveksler »ændringspakker«: du modtager den andens og godkender eller afviser hver ændring. Selve databasen deles aldrig via iCloud eller Dropbox (risiko for beskadiget fil).
+Comment ça marche ¦ Jak to funguje ¦ Så här fungerar det ¦ Sådan virker det
+<b>Commencer</b> ici : chaque fiche reçoit un identifiant commun. ¦ <b>Začni</b> tady: každá karta dostane společný identifikátor. ¦ <b>Börja</b> här: varje post får en gemensam identifierare. ¦ <b>Start</b> her: hver post får et fælles id.
+Donner <b>une copie de ta base</b> à ton cousin (bouton ci-dessous) : il l’ouvre dans son LCNDA (Réglages → Import → ouvrir une base .db). ¦ Dej bratranci <b>kopii své databáze</b> (tlačítko níže): otevře ji ve svém LCNDA (Nastavení → Import → otevřít databázi .db). ¦ Ge <b>en kopia av din databas</b> till din kusin (knappen nedan): hen öppnar den i sin LCNDA (Inställningar → Import → öppna en databas .db). ¦ Giv <b>en kopi af din database</b> til din fætter eller kusine (knappen nedenfor): vedkommende åbner den i sin LCNDA (Indstillinger → Import → åbn en database .db).
+Ensuite, chacun travaille de son côté et envoie de temps en temps <b>un paquet de ses modifications</b> (un petit fichier, par e-mail par exemple). ¦ Potom každý pracuje sám a čas od času pošle <b>balíček svých změn</b> (malý soubor, třeba e-mailem). ¦ Sedan arbetar var och en för sig och skickar ibland <b>ett paket med sina ändringar</b> (en liten fil, till exempel via e-post). ¦ Derefter arbejder hver for sig og sender af og til <b>en pakke med sine ændringer</b> (en lille fil, f.eks. via e-mail).
+À la réception, tu <b>acceptes ou refuses</b> chaque changement. Une copie de sécurité est faite avant. ¦ Po přijetí každou změnu <b>přijmeš nebo odmítneš</b>. Předtím se vytvoří záložní kopie. ¦ När du tar emot den <b>godkänner eller avvisar</b> du varje ändring. En säkerhetskopia görs först. ¦ Ved modtagelsen <b>godkender eller afviser</b> du hver ændring. Der tages en sikkerhedskopi først.
+Ton prénom (ex. Victor) ¦ Tvoje křestní jméno (např. Victor) ¦ Ditt förnamn (t.ex. Victor) ¦ Dit fornavn (f.eks. Victor)
+Commencer le travail à deux ¦ Začít práci ve dvou ¦ Börja arbeta två ¦ Begynd at arbejde to
+Ce qui est échangé : fiches, unions, liens parents-enfants, événements, lieux, notes, sources et citations, fiches des médias et leurs liens. Les fichiers des photos et des scans voyagent seulement avec 🔄 Deux ordinateurs (dossier partagé). ¦ Co se vyměňuje: karty, svazky, vztahy rodič–dítě, události, místa, poznámky, prameny a citace, karty médií a jejich propojení. Soubory fotek a skenů se přenášejí jen přes 🔄 Dva počítače (sdílená složka). ¦ Det som utbyts: poster, förbindelser, förälder–barn-kopplingar, händelser, platser, anteckningar, källor och citat, medieposter och deras kopplingar. Filerna för foton och skanningar följer bara med via 🔄 Två datorer (delad mapp). ¦ Det, der udveksles: poster, forbindelser, forælder–barn-forbindelser, begivenheder, steder, noter, kilder og citater, medieposter og deres forbindelser. Filerne med fotos og scanninger følger kun med via 🔄 To computere (delt mappe).
+depuis le dernier paquet. ¦ od posledního balíčku. ¦ sedan det senaste paketet. ¦ siden den seneste pakke.
+Préparer le paquet ¦ Připravit balíček ¦ Förbered paketet ¦ Forbered pakken
+Copie de la base pour un cousin ¦ Kopie databáze pro bratrance ¦ Kopia av databasen till en kusin ¦ Kopi af databasen til en fætter eller kusine
+Le paquet est un fichier « .lcnda-changes.json » à envoyer à ton cousin. Une fois préparé, ces modifications ne seront plus remises dans le paquet suivant : garde-le jusqu’à ce qu’il l’ait reçu. ¦ Balíček je soubor „.lcnda-changes.json“, který pošleš bratranci. Jakmile je připravený, tyto změny už nebudou v dalším balíčku: uschovej ho, dokud ho nedostane. ¦ Paketet är en fil ”.lcnda-changes.json” som du skickar till din kusin. När det är förberett tas de här ändringarna inte med i nästa paket: spara det tills kusinen har fått det. ¦ Pakken er en fil ».lcnda-changes.json«, som du sender til din fætter eller kusine. Når den er forberedt, kommer disse ændringer ikke med i den næste pakke: gem den, indtil vedkommende har modtaget den.
+Je signe mes paquets ¦ Podepisuji své balíčky ¦ Jag signerar mina paket ¦ Jeg underskriver mine pakker
+Recevoir un paquet ¦ Přijmout balíček ¦ Ta emot ett paket ¦ Modtag en pakke
+Lire le paquet ¦ Načíst balíček ¦ Läs paketet ¦ Læs pakken
+Paquets échangés ¦ Vyměněné balíčky ¦ Utbytta paket ¦ Udvekslede pakker
+envoyé ¦ odesláno ¦ skickat ¦ sendt
+reçu ¦ přijato ¦ mottaget ¦ modtaget
+({accepted_count}/{change_count} acceptés) ¦ ({accepted_count}/{change_count} přijato) ¦ ({accepted_count}/{change_count} godkända) ¦ ({accepted_count}/{change_count} godkendt)
+Travail à deux commencé. Donne maintenant une copie de ta base à ton cousin. ¦ Práce ve dvou zahájena. Teď dej bratranci kopii své databáze. ¦ Arbetet två har börjat. Ge nu en kopia av din databas till din kusin. ¦ Arbejdet to er begyndt. Giv nu en kopi af din database til din fætter eller kusine.
+Aucun changement coché. ¦ Žádná změna není zaškrtnutá. ¦ Ingen ändring markerad. ¦ Ingen ændring markeret.
+Appliquer {x} ? Une copie de sécurité de ta base est faite avant. ¦ Použít {x}? Předtím se vytvoří záložní kopie tvé databáze. ¦ Tillämpa {x}? En säkerhetskopia av din databas görs först. ¦ Anvende {x}? Der tages først en sikkerhedskopi af din database.
+Appliquer les changements ¦ Použít změny ¦ Tillämpa ändringarna ¦ Anvend ændringerne
+; {x} (fiche verrouillée) ¦ ; {x} (zamčená karta) ¦ ; {x} (låst post) ¦ ; {x} (låst post)
+Paquet de {x} ¦ Balíček od {x} ¦ Paket från {x} ¦ Pakke fra {x}
+Ce paquet a déjà été reçu une fois. ¦ Tento balíček už byl jednou přijat. ¦ Det här paketet har redan tagits emot en gång. ¦ Denne pakke er allerede modtaget én gang.
+, dont {x} déjà identiques chez toi (ignorés) ¦ , z toho {x} už u tebe shodných (vynecháno) ¦ , varav {x} redan identiska hos dig (ignorerade) ¦ , heraf {x} allerede identiske hos dig (ignoreret)
+Tout cocher / décocher ¦ Zaškrtnout / odškrtnout vše ¦ Markera / avmarkera allt ¦ Markér / fjern markering for alt
+Rien de nouveau. ¦ Nic nového. ¦ Inget nytt. ¦ Intet nyt.
+Appliquer les changements cochés ¦ Použít zaškrtnuté změny ¦ Tillämpa de markerade ändringarna ¦ Anvend de markerede ændringer
+=fichier arrivé ¦ přišlý soubor|přišlé soubory|přišlých souborů ¦ inkommen fil|inkomna filer ¦ ankommet fil|ankomne filer
+=fichier en attente ¦ čekající soubor|čekající soubory|čekajících souborů ¦ väntande fil|väntande filer ¦ ventende fil|ventende filer
+=rattachement ¦ příslušnost|příslušnosti|příslušností ¦ tillhörighet|tillhörigheter ¦ tilhørsforhold|tilhørsforhold
+=changement appliqué ¦ použitá změna|použité změny|použitých změn ¦ tillämpad ändring|tillämpade ändringar ¦ anvendt ændring|anvendte ændringer
+=changement ignoré ¦ vynechaná změna|vynechané změny|vynechaných změn ¦ ignorerad ändring|ignorerade ändringar ¦ ignoreret ændring|ignorerede ændringer
+Une langue ¦ Jazyk ¦ Ett språk ¦ Et sprog
+Quelle langue ? ¦ Jaký jazyk? ¦ Vilket språk? ¦ Hvilket sprog?
+Cyrillique et grec ¦ Cyrilice a řečtina ¦ Kyrilliska och grekiska ¦ Kyrillisk og græsk
+Aucune langue. ¦ Žádný jazyk. ¦ Inget språk. ¦ Intet sprog.
+Sous chaque lettre : sa translittération ({x}). ¦ Pod každým písmenem: jeho přepis ({x}). ¦ Under varje bokstav: dess translitterering ({x}). ¦ Under hvert bogstav: dets translitteration ({x}).
+L’alphabet ¦ Abeceda ¦ Alfabetet ¦ Alfabetet
+lettres à accents ou propres à la langue ¦ písmena s diakritikou nebo vlastní jazyku ¦ bokstäver med accenter eller som är typiska för språket ¦ bogstaver med accenter eller særlige for sproget
+Lettres à accents et lettres spéciales ¦ Písmena s diakritikou a zvláštní písmena ¦ Bokstäver med accenter och specialbokstäver ¦ Bogstaver med accenter og specialbogstaver
+Aucune : cette langue n’a pas de lettres à accents. ¦ Žádná: tento jazyk nemá písmena s diakritikou. ¦ Inga: det här språket har inga bokstäver med accenter. ¦ Ingen: dette sprog har ingen bogstaver med accenter.
+Seulement dans les mots et les noms étrangers : ¦ Jen v cizích slovech a jménech: ¦ Bara i utländska ord och namn: ¦ Kun i fremmede ord og navne:
+Lettres anciennes et abréviations des actes ¦ Stará písmena a zkratky v záznamech ¦ Gamla bokstäver och förkortningar i handlingarna ¦ Gamle bogstaver og forkortelser i dokumenterne
+Comment la reconnaître ¦ Jak ho poznat ¦ Hur man känner igen det ¦ Sådan genkender man det
+Mots fréquents dans les actes : ¦ Častá slova v záznamech: ¦ Vanliga ord i handlingarna: ¦ Almindelige ord i dokumenterne:
+très probable ¦ velmi pravděpodobné ¦ mycket troligt ¦ meget sandsynligt
+Tape une lettre (ł, ő, ж, ω…) ou un mot entier de l’acte : les langues possibles s’affichent, les plus probables d’abord. ¦ Napiš písmeno (ł, ő, ж, ω…) nebo celé slovo ze záznamu: zobrazí se možné jazyky, nejpravděpodobnější první. ¦ Skriv en bokstav (ł, ő, ж, ω…) eller ett helt ord från handlingen: möjliga språk visas, de mest troliga först. ¦ Skriv et bogstav (ł, ő, ж, ω…) eller et helt ord fra dokumentet: de mulige sprog vises, de mest sandsynlige først.
+Tape des lettres : les chiffres, les espaces et la ponctuation ne comptent pas. ¦ Piš písmena: číslice, mezery a interpunkce se nepočítají. ¦ Skriv bokstäver: siffror, mellanslag och skiljetecken räknas inte. ¦ Skriv bogstaver: tal, mellemrum og tegnsætning tæller ikke.
+Ce caractère n’est dans aucune des langues de la liste. ¦ Tento znak není v žádném z jazyků seznamu. ¦ Det här tecknet finns inte i något av språken i listan. ¦ Dette tegn findes ikke i nogen af sprogene på listen.
+Aucune langue de la liste n’a tous ces caractères ensemble : regarde lettre par lettre ci-dessous. ¦ Žádný jazyk ze seznamu nemá všechny tyto znaky najednou: podívej se níže písmeno po písmenu. ¦ Inget språk i listan har alla de här tecknen tillsammans: titta bokstav för bokstav nedan. ¦ Intet sprog på listen har alle disse tegn samlet: se bogstav for bogstav nedenfor.
+— que des lettres simples (a à z) : tape une lettre à accent ou un mot entier pour départager. ¦ — jen jednoduchá písmena (a až z): napiš písmeno s diakritikou nebo celé slovo, aby se to rozhodlo. ¦ — bara enkla bokstäver (a till z): skriv en bokstav med accent eller ett helt ord för att avgöra. ¦ — kun simple bogstaver (a til z): skriv et bogstav med accent eller et helt ord for at afgøre det.
+{x} : seulement dans cette langue ¦ {x}: jen v tomto jazyce ¦ {x}: bara i det här språket ¦ {x}: kun i dette sprog
+mot des actes : « {x} » ¦ slovo ze záznamů: „{x}“ ¦ ord från handlingarna: ”{x}” ¦ ord fra dokumenterne: »{x}«
+Lettre par lettre ¦ Písmeno po písmenu ¦ Bokstav för bokstav ¦ Bogstav for bogstav
+ce caractère n’est dans aucune des langues de la liste ¦ tento znak není v žádném z jazyků seznamu ¦ det här tecknet finns inte i något av språken i listan ¦ dette tegn findes ikke i nogen af sprogene på listen
+lettre simple : dans {x} en lettres latines ¦ jednoduché písmeno: v {x} v latince ¦ enkel bokstav: i {x} med latinska bokstäver ¦ simpelt bogstav: i {x} med latinske bogstaver
+Majuscules (cliquer encore pour revenir aux minuscules) ¦ Velká písmena (dalším kliknutím zpět na malá) ¦ Versaler (klicka igen för att gå tillbaka till gemener) ¦ Store bogstaver (klik igen for at gå tilbage til små)
+Alphabets et langues des actes ¦ Abecedy a jazyky záznamů ¦ Alfabet och språk i handlingarna ¦ Alfabeter og sprog i dokumenterne
+Pour lire un acte écrit dans une autre langue : l’alphabet de chaque langue, ses lettres à accents, les lettres anciennes, et comment la reconnaître. ¦ Pro čtení záznamu v jiném jazyce: abeceda každého jazyka, písmena s diakritikou, stará písmena a jak jazyk poznat. ¦ För att läsa en handling på ett annat språk: varje språks alfabet, bokstäver med accenter, gamla bokstäver och hur man känner igen språket. ¦ For at læse et dokument på et andet sprog: hvert sprogs alfabet, bogstaver med accenter, gamle bogstaver og hvordan man genkender sproget.
+Lettres ou mot de l’acte ¦ Písmena nebo slovo ze záznamu ¦ Bokstäver eller ord från handlingen ¦ Bogstaver eller ord fra dokumentet
+Chercher… (ł, ő, ж, ω, natus, урожденный) ¦ Hledat… (ł, ő, ж, ω, natus, урожденный) ¦ Sök… (ł, ő, ж, ω, natus, урожденный) ¦ Søg… (ł, ő, ж, ω, natus, урожденный)
+Clique sur les lettres, ou tape ici ¦ Klikej na písmena nebo piš sem ¦ Klicka på bokstäverna eller skriv här ¦ Klik på bogstaverne, eller skriv her
+Effacer la dernière lettre ¦ Smazat poslední písmeno ¦ Radera den sista bokstaven ¦ Slet det sidste bogstav
+Cyrillique en ¦ Cyrilice v ¦ Kyrilliska på ¦ Kyrillisk på
+français courant ¦ běžné francouzštině ¦ vanlig franska ¦ almindeligt fransk
+biélorusse ¦ běloruština ¦ vitryska ¦ hviderussisk
+En lettres latines : ¦ Latinkou: ¦ Med latinska bokstäver: ¦ Med latinske bogstaver:
+cyrillique en ISO 9 ¦ cyrilice v ISO 9 ¦ kyrilliska enligt ISO 9 ¦ kyrillisk efter ISO 9
+lu comme du {x} ¦ čteno jako {x} ¦ läst som {x} ¦ læst som {x}
+Clique d’abord sur une lettre grecque, puis sur l’accent ou l’esprit. ¦ Nejdřív klikni na řecké písmeno, pak na přízvuk nebo přídech. ¦ Klicka först på en grekisk bokstav, sedan på accenten eller spiritus-tecknet. ¦ Klik først på et græsk bogstav, derefter på accenten eller spiritustegnet.
+Texte vidé ¦ Text vymazán ¦ Texten tömd ¦ Teksten er tømt
+Texte vidé. ¦ Text vymazán. ¦ Texten tömd. ¦ Teksten er tømt.
+Rien à copier : clique d’abord sur des lettres. ¦ Není co kopírovat: nejdřív klikni na písmena. ¦ Inget att kopiera: klicka först på bokstäver. ¦ Intet at kopiere: klik først på bogstaver.
+Texte copié : colle-le où tu veux (⌘V). ¦ Text zkopírován: vlož ho, kam chceš (⌘V). ¦ Texten kopierad: klistra in den var du vill (⌘V). ¦ Teksten er kopieret: indsæt den, hvor du vil (⌘V).
+Copie impossible : sélectionne le texte et fais ⌘C. ¦ Kopírování nejde: označ text a stiskni ⌘C. ¦ Kopiering går inte: markera texten och tryck ⌘C. ¦ Kopiering er ikke mulig: markér teksten, og tryk ⌘C.
+=lettre ¦ písmeno|písmena|písmen ¦ bokstav|bokstäver ¦ bogstav|bogstaver
+=langue possible ¦ možný jazyk|možné jazyky|možných jazyků ¦ möjligt språk|möjliga språk ¦ muligt sprog|mulige sprog
+=langue ¦ jazyk|jazyky|jazyků ¦ språk|språk ¦ sprog|sprog
+La lecture d’une écriture à la main (HTR), sur cet ordinateur : le texte est proposé ligne par ligne à côté de l’image, les mots peu sûrs surlignés. Elle s’installe une fois dans les Réglages. Relis toujours : elle se trompe sur les noms. ¦ Čtení rukopisu (HTR) na tomto počítači: text se nabídne řádek po řádku vedle obrázku, nejistá slova jsou zvýrazněná. Instaluje se jednou v Nastavení. Vždy po ní text zkontroluj: plete si jména. ¦ Läsning av handskrift (HTR) på den här datorn: texten föreslås rad för rad bredvid bilden, osäkra ord markeras. Den installeras en gång i Inställningar. Läs alltid igenom: den tar fel på namn. ¦ Læsning af håndskrift (HTR) på denne computer: teksten foreslås linje for linje ved siden af billedet, usikre ord markeres. Den installeres én gang i Indstillinger. Læs altid igennem: den tager fejl af navne.
+Cherche dans le texte les noms (avec leur rôle : parrain, témoin…), les dates (même en toutes lettres ou au calendrier républicain), les lieux et les métiers, pour les relier aux fiches. ¦ Hledá v textu jména (s jejich rolí: kmotr, svědek…), data (i vypsaná slovy nebo v republikánském kalendáři), místa a povolání, aby je propojil s kartami. ¦ Söker i texten efter namn (med deras roll: gudfar, vittne…), datum (även utskrivna med ord eller i republikansk kalender), platser och yrken, för att koppla dem till posterna. ¦ Søger i teksten efter navne (med deres rolle: gudfar, vidne…), datoer (også skrevet med bogstaver eller i republikansk kalender), steder og erhverv for at forbinde dem med posterne.
+Mots des actes ¦ Slova ze záznamů ¦ Ord i handlingarna ¦ Ord i dokumenterne
+Abréviations ¦ Zkratky ¦ Förkortningar ¦ Forkortelser
+Mois ¦ Měsíce ¦ Månader ¦ Måneder
+Nombres et âges ¦ Čísla a věky ¦ Tal och åldrar ¦ Tal og aldre
+Parenté ¦ Příbuzenství ¦ Släktskap ¦ Slægtskab
+Vieux mots ¦ Stará slova ¦ Gamla ord ¦ Gamle ord
+Décès, sépulture ¦ Úmrtí, pohřeb ¦ Död, begravning ¦ Død, begravelse
+Notaire ¦ Notář ¦ Notarie ¦ Notar

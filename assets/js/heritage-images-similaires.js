@@ -13,6 +13,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const A = () => window.LCNDA_APP;
     const UI = () => window.LCNDA_UI;
     const P = () => window.LCNDA_IMGPRINT;
@@ -30,7 +31,7 @@
     const isImage = row => !!row && IMG_EXT.test(String(row.filename || '')) && !['audio', 'video'].includes(String(row.media_type || '').toLowerCase());
     const kb = n => n >= 1048576 ? `${(n / 1048576).toLocaleString('fr-FR', {maximumFractionDigits: 1})} Mo` : `${Math.max(1, Math.round(n / 1024)).toLocaleString('fr-FR')} Ko`;
     const dims = it => it.w && it.h ? `${fmt(it.w)} × ${fmt(it.h)} px` : '';
-    const titleOf = it => it.title || it.filename || (it.id ? `Média n° ${it.id}` : 'Image');
+    const titleOf = it => it.title || it.filename || (it.id ? i18n('Média n° {n}', {n: String(it.id)}) : i18n('Image'));
     const SIZE_KEY = 'lcnda-imgdup-sens';
 
     /* ═════════ L'empreinte d'une image : dans un fil à part (la page reste libre), sinon ici ═════════ */
@@ -130,26 +131,26 @@
     const thumbOf = it => { if (it._local) return `<img src="${esc(it._local)}" alt="">`; const src = [it.thumbnail, it.filename].find(f => f && IMG_EXT.test(f)); return src ? `<img src="${esc(mediaUrl(src))}" alt="" loading="lazy">` : `<span class="ui-card-ico">${/audio/.test(it.media_type || '') ? '🔊' : /video/.test(it.media_type || '') ? '🎬' : '📄'}</span>`; };
     const fileLine = it => [dims(it), it.ext ? String(it.ext).toUpperCase().replace('JPEG', 'JPG') : '', it.size ? kb(it.size) : ''].filter(Boolean).join(' · ');
     const linksLine = l => {
-        if (!l || !l.n) return 'Aucun lien';
+        if (!l || !l.n) return i18n('Aucun lien');
         const parts = [[l.persons, '👤'], [l.events, '📅'], [l.families, '👪'], [l.sources, '📚'], [l.labels, '🏷'], [l.albums, '📒'], [l.portraits, '🖼'], [l.tags, '⬚'], [l.other, '🔗']].filter(([n]) => n).map(([n, i]) => `${i} ${fmt(n)}`);
         return parts.join(' · ');
     };
     const SHORT = {identique: 'Identique', proche: 'Très proche', recadree: 'Recadrée', ressemblante: 'Ressemblante'};
-    const kindBadge = r => ({text: r.kind === 'identique' ? 'Identique' : `${SHORT[r.kind] || ''} ${r.score} %`, kind: P().KINDS[r.kind]?.badge || 'grey', title: kindText(r)});
-    const kindText = r => { const K = P().KINDS[r.kind]; if (!K) return ''; if (r.kind === 'identique') return '＝ Identique (même fichier)'; if (r.kind === 'recadree') return r.sub === 'zoom' ? '⬚ Zoomée' : '⬚ Recadrée'; const sub = P().SUBS[r.sub]; return `${K.icon} ${K.label}${sub ? ` (${sub})` : ''}`; };
+    const kindBadge = r => ({text: r.kind === 'identique' ? i18n('Identique') : `${i18n(SHORT[r.kind] || '')} ${r.score} %`, kind: P().KINDS[r.kind]?.badge || 'grey', title: kindText(r)});
+    const kindText = r => { const K = P().KINDS[r.kind]; if (!K) return ''; if (r.kind === 'identique') return i18n('＝ Identique (même fichier)'); if (r.kind === 'recadree') return r.sub === 'zoom' ? '⬚ ' + i18n('Zoomée') : '⬚ ' + i18n('Recadrée'); const sub = P().SUBS[r.sub]; return `${K.icon} ${i18n(K.label)}${sub ? ` (${i18n(sub)})` : ''}`; };
     function progressHtml() {
-        if (JOB.error) return UI().notice('error', `Le calcul des empreintes s’est arrêté : ${JOB.error}`);
+        if (JOB.error) return UI().notice('error', i18n('Le calcul des empreintes s’est arrêté : {err}', {err: JOB.error}));
         if (!JOB.running) return '';
         const pct = JOB.total ? Math.round(JOB.done / JOB.total * 100) : 0;
-        return `<div class="isim-progress" role="status"><span class="ui-spin" aria-hidden="true"></span><span>Empreintes des photos : <b>${fmt(JOB.done)} / ${fmt(JOB.total)}</b> (calcul sur cet ordinateur, par petits paquets — tu peux fermer, ça reprendra). Les résultats se complètent tout seuls.</span><span class="isim-bar"><i style="width:${pct}%"></i></span></div>`;
+        return `<div class="isim-progress" role="status"><span class="ui-spin" aria-hidden="true"></span><span>${i18n('Empreintes des photos : <b>{done} / {total}</b> (calcul sur cet ordinateur, par petits paquets — tu peux fermer, ça reprendra). Les résultats se complètent tout seuls.', {done: fmt(JOB.done), total: fmt(JOB.total)})}</span><span class="isim-bar"><i style="width:${pct}%"></i></span></div>`;
     }
 
     function dialogShell(cls, eyebrow, title, intro) {
         const d = document.createElement('dialog');
         d.className = `modal modal-xl isim-dlg ${cls}`;
-        d.innerHTML = `<div class="modal-head"><div><span class="eyebrow">${esc(eyebrow)}</span><h2>${esc(title)}</h2>${intro ? `<p class="muted isim-intro">${intro}</p>` : ''}</div><button type="button" class="icon-button" data-isim-close aria-label="Fermer">×</button></div>
+        d.innerHTML = `<div class="modal-head"><div><span class="eyebrow">${esc(i18n(eyebrow))}</span><h2>${esc(title)}</h2>${intro ? `<p class="muted isim-intro">${intro}</p>` : ''}</div><button type="button" class="icon-button" data-isim-close aria-label="${esc(i18n('Fermer'))}">×</button></div>
             <div class="isim-body"></div>
-            <div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-isim-close>Fermer</button></div>`;
+            <div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-isim-close>${i18n('Fermer')}</button></div>`;
         document.body.appendChild(d);
         d.addEventListener('click', e => { if (e.target.closest('[data-isim-close]')) d.close(); });
         d.addEventListener('close', () => { d._off?.(); d.remove(); });
@@ -161,64 +162,64 @@
         A().openLightbox?.([{id: Number(it.id), filename: it.filename, thumbnail: it.thumbnail, title: titleOf(it), media_type: 'image', date_text: it.date_text || ''}], 0, true);
     }
     function compareTwo(a, b) {
-        if (!a?.id || !b?.id) return toast('« Comparer deux photos » marche avec deux photos de la base.', 'error');
-        if (!ext.openPhotoCompare) return toast('L’outil « Comparer deux photos » n’est pas encore chargé : réessaie dans un instant.', 'error');
+        if (!a?.id || !b?.id) return toast(i18n('« Comparer deux photos » marche avec deux photos de la base.'), 'error');
+        if (!ext.openPhotoCompare) return toast(i18n('L’outil « Comparer deux photos » n’est pas encore chargé : réessaie dans un instant.'), 'error');
         ext.openPhotoCompare({a: Number(a.id), b: Number(b.id)});
     }
 
     /* ═════════ 🔍 Chercher une image semblable ═════════ */
     async function openSimilar(opts = {}) {
-        if (!P()) return toast('Le moteur des images n’est pas encore chargé : réessaie dans un instant.', 'error');
-        const d = dialogShell('isim-search', 'MÉDIAS', '🔍 Chercher une image semblable', 'Retrouve une photo de la base, même recadrée, zoomée, retouchée ou dans un autre format. Tout se calcule sur cet ordinateur.');
+        if (!P()) return toast(i18n('Le moteur des images n’est pas encore chargé : réessaie dans un instant.'), 'error');
+        const d = dialogShell('isim-search', 'MÉDIAS', '🔍 ' + i18n('Chercher une image semblable'), i18n('Retrouve une photo de la base, même recadrée, zoomée, retouchée ou dans un autre format. Tout se calcule sur cet ordinateur.'));
         const body = d.querySelector('.isim-body');
         const st = {q: null, results: [], filter: 'all', sel: null, busy: false, seq: 0};
-        body.innerHTML = `<div class="isim-top"><div class="isim-query" data-isim-query></div><div class="isim-from"><button type="button" class="button secondary" data-isim-pick>🖼 Choisir dans les médias…</button><div data-isim-drop></div></div></div>
-            <div data-isim-progress></div><div class="ui-filters isim-filters" data-isim-filters role="toolbar" aria-label="Filtres"></div>
+        body.innerHTML = `<div class="isim-top"><div class="isim-query" data-isim-query></div><div class="isim-from"><button type="button" class="button secondary" data-isim-pick>🖼 ${i18n('Choisir dans les médias…')}</button><div data-isim-drop></div></div></div>
+            <div data-isim-progress></div><div class="ui-filters isim-filters" data-isim-filters role="toolbar" aria-label="${esc(i18n('Filtres'))}"></div>
             <div class="isim-main"><div class="isim-results" data-isim-results></div><aside class="isim-prev" data-isim-prev aria-live="polite"></aside></div>`;
         const $ = s => body.querySelector(s);
-        const drop = UI().dropZone({accept: 'image/*', multiple: false, text: '📁 Glisse une image ici, colle-la (⌘V) ou choisis-la sur l’ordinateur', hint: 'Elle sert seulement à chercher : elle n’entre pas dans les médias.', onFiles: files => setFile(files[0])});
+        const drop = UI().dropZone({accept: 'image/*', multiple: false, text: i18n('📁 Glisse une image ici, colle-la (⌘V) ou choisis-la sur l’ordinateur'), hint: i18n('Elle sert seulement à chercher : elle n’entre pas dans les médias.'), onFiles: files => setFile(files[0])});
         $('[data-isim-drop]').appendChild(drop);
         const paintQuery = () => {
             const q = st.q;
-            $('[data-isim-query]').innerHTML = q ? `<span class="isim-qthumb">${thumbOf(q)}</span><span class="isim-qtxt"><span class="eyebrow">${q.id ? 'Photo de la base' : 'Image de ton ordinateur'}</span><b>${esc(titleOf(q))}</b><small class="muted">${esc(fileLine(q))}</small></span>`
-                : UI().notice('info', 'Choisis une photo dans les médias, ou dépose une image de ton ordinateur : l’app cherche les photos qui lui ressemblent.');
+            $('[data-isim-query]').innerHTML = q ? `<span class="isim-qthumb">${thumbOf(q)}</span><span class="isim-qtxt"><span class="eyebrow">${q.id ? i18n('Photo de la base') : i18n('Image de ton ordinateur')}</span><b>${esc(titleOf(q))}</b><small class="muted">${esc(fileLine(q))}</small></span>`
+                : UI().notice('info', i18n('Choisis une photo dans les médias, ou dépose une image de ton ordinateur : l’app cherche les photos qui lui ressemblent.'));
         };
         const counts = () => { const c = {all: st.results.length, identique: 0, proche: 0, recadree: 0, ressemblante: 0}; st.results.forEach(r => { c[r.kind]++; }); return c; };
         const paintFilters = () => {
             const c = counts();
             const L = {all: 'Tout', identique: '＝ Identiques', proche: '≈ Très proches', recadree: '⬚ Recadrées / zoomées', ressemblante: '～ Ressemblantes'};
-            $('[data-isim-filters]').innerHTML = st.q ? Object.keys(L).map(k => `<button type="button" class="${st.filter === k ? 'is-active' : ''}" data-isim-filter="${k}">${esc(L[k])} (${fmt(c[k])})</button>`).join('') : '';
+            $('[data-isim-filters]').innerHTML = st.q ? Object.keys(L).map(k => `<button type="button" class="${st.filter === k ? 'is-active' : ''}" data-isim-filter="${k}">${esc(i18n(L[k]))} (${fmt(c[k])})</button>`).join('') : '';
         };
         const card = r => {
             const it = r.item, K = P().KINDS[r.kind];
-            return {thumb: thumbOf(it), name: titleOf(it), open: `data-isim-sel="${it.id}"`, openLabel: 'Voir', cls: st.sel === Number(it.id) ? 'is-picked' : '',
+            return {thumb: thumbOf(it), name: titleOf(it), open: `data-isim-sel="${it.id}"`, openLabel: i18n('Voir'), cls: st.sel === Number(it.id) ? 'is-picked' : '',
                 lines: [kindText(r), fileLine(it) || it.date_text],
-                badges: [{text: `${r.score} %`, kind: K?.badge || 'grey', title: 'Ressemblance'}],
-                menu: [`<button type="button" data-isim-open="${it.id}">↗ Ouvrir le média</button>`, st.q?.id ? `<button type="button" data-isim-cmp="${it.id}">🔍 Comparer deux photos</button>` : '', `<button type="button" data-isim-from="${it.id}">🔍 Chercher depuis celle-ci</button>`]};
+                badges: [{text: `${r.score} %`, kind: K?.badge || 'grey', title: i18n('Ressemblance')}],
+                menu: [`<button type="button" data-isim-open="${it.id}">↗ ${i18n('Ouvrir le média')}</button>`, st.q?.id ? `<button type="button" data-isim-cmp="${it.id}">🔍 ${i18n('Comparer deux photos')}</button>` : '', `<button type="button" data-isim-from="${it.id}">🔍 ${i18n('Chercher depuis celle-ci')}</button>`]};
         };
         const paintResults = () => {
             const box = $('[data-isim-results]');
             if (!st.q) { box.innerHTML = ''; $('[data-isim-prev]').innerHTML = ''; return; }
-            if (st.busy && !st.results.length) { box.innerHTML = UI().spinner('Recherche des photos semblables…'); return; }
+            if (st.busy && !st.results.length) { box.innerHTML = UI().spinner(i18n('Recherche des photos semblables…')); return; }
             const rows = st.results.filter(r => st.filter === 'all' || r.kind === st.filter);
             const ready = ALL?.items?.length || 0;
-            box.innerHTML = rows.length ? `<p class="muted isim-count">${plural(rows.length, 'photo trouvée', 'photos trouvées')} parmi ${plural(ready, 'photo prête', 'photos prêtes')}${JOB.running ? ' (la recherche continue)' : ''}</p>${UI().cardsHtml(rows.map(card), {size: 's'})}`
-                : A().emptyState({icon: '🔍', text: st.results.length ? 'Aucune photo de cette sorte' : 'Aucune photo semblable', hint: JOB.running ? 'Les empreintes ne sont pas toutes prêtes : la recherche se complète toute seule.' : `Parmi ${plural(ready, 'photo de la base', 'photos de la base')}.`});
+            box.innerHTML = rows.length ? `<p class="muted isim-count">${JOB.running ? i18n('{found} parmi {ready} (la recherche continue)', {found: plural(rows.length, 'photo trouvée', 'photos trouvées'), ready: plural(ready, 'photo prête', 'photos prêtes')}) : i18n('{found} parmi {ready}', {found: plural(rows.length, 'photo trouvée', 'photos trouvées'), ready: plural(ready, 'photo prête', 'photos prêtes')})}</p>${UI().cardsHtml(rows.map(card), {size: 's'})}`
+                : A().emptyState({icon: '🔍', text: st.results.length ? i18n('Aucune photo de cette sorte') : i18n('Aucune photo semblable'), hint: JOB.running ? i18n('Les empreintes ne sont pas toutes prêtes : la recherche se complète toute seule.') : i18n('Parmi {list}.', {list: plural(ready, 'photo de la base', 'photos de la base')})});
             paintPreview();
         };
         const paintPreview = () => {
             const pv = $('[data-isim-prev]'), r = st.results.find(x => Number(x.item.id) === st.sel);
-            if (!r) { pv.innerHTML = `<div class="isim-prev-empty muted">Clique sur « Voir » pour poser les deux images côte à côte.</div>`; return; }
+            if (!r) { pv.innerHTML = `<div class="isim-prev-empty muted">${i18n('Clique sur « Voir » pour poser les deux images côte à côte.')}</div>`; return; }
             const it = r.item, q = st.q;
             // la zone : où est la plus petite dans la plus grande
             const zone = r.zone && r.kind !== 'proche' && r.kind !== 'identique' ? r.zone : null;
             const onCand = zone && r.part !== 'a_in_b', onQuery = zone && r.part === 'a_in_b';
-            const box = (x, z, label) => `<figure class="isim-fig"><span class="isim-figimg">${x._local ? `<img src="${esc(x._local)}" alt="">` : `<img src="${esc(mediaUrl(x.filename))}" alt="">`}${z ? `<i class="isim-zone" style="left:${(z.x * 100).toFixed(2)}%;top:${(z.y * 100).toFixed(2)}%;width:${(z.w * 100).toFixed(2)}%;height:${(z.h * 100).toFixed(2)}%"></i>` : ''}</span><figcaption><b>${esc(label)}</b> ${esc(titleOf(x))}<small class="muted">${esc(fileLine(x))}</small></figcaption></figure>`;
-            const why = r.kind === 'recadree' ? (r.part === 'a_in_b' ? `Cette photo est un morceau de ton image (environ ${Math.round((r.cover || 0) * 100)} % de sa surface), cadre en bleu.` : `Ton image est un morceau de cette photo (environ ${Math.round((r.cover || 0) * 100)} % de sa surface), cadre en bleu.`)
-                : r.kind === 'identique' ? 'Exactement le même fichier.' : r.kind === 'proche' ? `La même image (${P().SUBS[r.sub] || 'très proche'}).` : 'Elles se ressemblent : même scène ou même document, peut-être une autre prise.';
+            const box = (x, z, label) => `<figure class="isim-fig"><span class="isim-figimg">${x._local ? `<img src="${esc(x._local)}" alt="">` : `<img src="${esc(mediaUrl(x.filename))}" alt="">`}${z ? `<i class="isim-zone" style="left:${(z.x * 100).toFixed(2)}%;top:${(z.y * 100).toFixed(2)}%;width:${(z.w * 100).toFixed(2)}%;height:${(z.h * 100).toFixed(2)}%"></i>` : ''}</span><figcaption><b>${esc(i18n(label))}</b> ${esc(titleOf(x))}<small class="muted">${esc(fileLine(x))}</small></figcaption></figure>`;
+            const why = r.kind === 'recadree' ? (r.part === 'a_in_b' ? i18n('Cette photo est un morceau de ton image (environ {pct} % de sa surface), cadre en bleu.', {pct: Math.round((r.cover || 0) * 100)}) : i18n('Ton image est un morceau de cette photo (environ {pct} % de sa surface), cadre en bleu.', {pct: Math.round((r.cover || 0) * 100)}))
+                : r.kind === 'identique' ? i18n('Exactement le même fichier.') : r.kind === 'proche' ? i18n('La même image ({how}).', {how: i18n(P().SUBS[r.sub] || 'très proche')}) : i18n('Elles se ressemblent : même scène ou même document, peut-être une autre prise.');
             pv.innerHTML = `<div class="isim-pair">${box(q, onQuery ? zone : null, 'Ton image')}${box(it, onCand ? zone : null, 'Trouvée')}</div>
                 <p class="isim-why">${UI().badge ? UI().badge(`${r.score} %`, P().KINDS[r.kind]?.badge || 'grey') : ''} <b>${esc(kindText(r))}</b><br><span class="muted">${esc(why)}</span></p>
-                <div class="isim-prev-act">${q.id ? `<button type="button" class="button small" data-isim-cmp="${it.id}">🔍 Comparer deux photos</button>` : ''}<button type="button" class="button small secondary" data-isim-open="${it.id}">↗ Ouvrir le média</button></div>`;
+                <div class="isim-prev-act">${q.id ? `<button type="button" class="button small" data-isim-cmp="${it.id}">🔍 ${i18n('Comparer deux photos')}</button>` : ''}<button type="button" class="button small secondary" data-isim-open="${it.id}">↗ ${i18n('Ouvrir le média')}</button></div>`;
         };
         const paint = () => { $('[data-isim-progress]').innerHTML = progressHtml(); paintQuery(); paintFilters(); paintResults(); };
         async function run() {
@@ -249,21 +250,21 @@
                     st.q = {...st.q, w: r.w, h: r.h, print: r.print};
                     if (!readOnly()) post('image_prints_save', {algo: P().ALGO, items: [{media_id: id, filename: st.q.filename, w: r.w, h: r.h, print: r.print}]}).then(() => { JOB.dirty = true; }).catch(() => {});
                 }
-            } catch (e) { $('[data-isim-results]').innerHTML = UI().notice('error', `Cette image n’a pas pu être lue (${e.message || e}).`); return; }
+            } catch (e) { $('[data-isim-results]').innerHTML = UI().notice('error', i18n('Cette image n’a pas pu être lue ({err}).', {err: e.message || e})); return; }
             run();
         }
         async function setFile(file) {
             if (!file) return;
-            if (!/^image\//.test(file.type || '') && !IMG_EXT.test(file.name || '')) return toast('Choisis une image (JPG, PNG, WebP…).', 'error');
+            if (!/^image\//.test(file.type || '') && !IMG_EXT.test(file.name || '')) return toast(i18n('Choisis une image (JPG, PNG, WebP…).'), 'error');
             try {
                 const r = await printFromBlob(file);
                 let sha1 = '';
                 try { const h = new Uint8Array(await crypto.subtle.digest('SHA-1', await file.arrayBuffer())); sha1 = Array.from(h, x => x.toString(16).padStart(2, '0')).join(''); } catch (_) {}
                 if (st.q?._local) URL.revokeObjectURL(st.q._local);
-                st.q = {id: 0, title: file.name || 'Image collée', filename: '', ext: String(file.name || '').split('.').pop().toLowerCase() || String(file.type).split('/')[1] || '', size: file.size, sha1, w: r.w, h: r.h, print: r.print, _local: URL.createObjectURL(file)};
+                st.q = {id: 0, title: file.name || i18n('Image collée'), filename: '', ext: String(file.name || '').split('.').pop().toLowerCase() || String(file.type).split('/')[1] || '', size: file.size, sha1, w: r.w, h: r.h, print: r.print, _local: URL.createObjectURL(file)};
                 st.results = []; st.sel = null; st.filter = 'all';
                 run();
-            } catch (e) { toast(`Cette image n’a pas pu être lue (${e.message || e}).`, 'error'); }
+            } catch (e) { toast(i18n('Cette image n’a pas pu être lue ({err}).', {err: e.message || e}), 'error'); }
         }
         body.addEventListener('click', async e => {
             const t = e.target;
@@ -274,7 +275,7 @@
             const c = t.closest('[data-isim-cmp]'); if (c) { compareTwo(st.q, byId(c.dataset.isimCmp)); return; }
             const fr = t.closest('[data-isim-from]'); if (fr) { setMedia(byId(fr.dataset.isimFrom)); return; }
             if (t.closest('[data-isim-pick]')) {
-                const it = await window.LCNDA_PICKER?.openMediaPicker?.({types: ['image', 'document'], eyebrow: 'CHERCHER UNE IMAGE SEMBLABLE', title: 'La photo de départ', okLabel: 'Chercher'});
+                const it = await window.LCNDA_PICKER?.openMediaPicker?.({types: ['image', 'document'], eyebrow: i18n('CHERCHER UNE IMAGE SEMBLABLE'), title: i18n('La photo de départ'), okLabel: i18n('Chercher')});
                 if (it) setMedia(it);
             }
         });
@@ -291,24 +292,24 @@
     const CATS = [['parfaits', '＝ Parfaits'], ['retouches', '🎨 Retouchés'], ['recadres', '⬚ Recadrés / zoomés'], ['taille', '↔ Redimensionnés'], ['format', '🗂 Autre format']];
     const pairKey = (a, b) => { a = Number(a); b = Number(b); return a < b ? `${a}:${b}` : `${b}:${a}`; };
     async function openDuplicates() {
-        if (!P()) return toast('Le moteur des images n’est pas encore chargé : réessaie dans un instant.', 'error');
-        const d = dialogShell('isim-dups', 'MÉDIAS', '👯 Doublons d’images', 'Les mêmes photos rangées plusieurs fois, même retouchées, recadrées, zoomées ou dans un autre format. Garde la meilleure : ses liens réunissent ceux des autres.');
+        if (!P()) return toast(i18n('Le moteur des images n’est pas encore chargé : réessaie dans un instant.'), 'error');
+        const d = dialogShell('isim-dups', 'MÉDIAS', '👯 ' + i18n('Doublons d’images'), i18n('Les mêmes photos rangées plusieurs fois, même retouchées, recadrées, zoomées ou dans un autre format. Garde la meilleure : ses liens réunissent ceux des autres.'));
         const body = d.querySelector('.isim-body');
         const st = {groups: [], filter: 'all', keep: new Map(), mode: ls('lcnda-imgdup-mode', 'trash') === 'version' ? 'version' : 'trash', dismissed: new Set(), dismissedList: [], merges: [], busy: true, prog: 0, seq: 0, others: []};
         const sens = () => Math.max(0, Math.min(100, Number(ls(SIZE_KEY, 50)) || 50));
-        body.innerHTML = `<div class="isim-dtop"><div data-isim-sens></div><div class="isim-mode" role="group" aria-label="Ce qu’on fait des autres photos"><span class="muted">Les autres photos :</span><span class="segmented"><button type="button" data-isim-mode="trash">🗑 À la corbeille</button><button type="button" data-isim-mode="version">🗂 En versions</button></span><span data-help="Corbeille : les autres photos sont retirées de la liste des médias (le fichier reste sur le disque) et reviennent avec « ↶ Remettre ». Versions : leur fichier devient une version de la photo gardée (visionneuse → versions)."></span></div></div>
-            <div data-isim-progress></div><div class="ui-filters isim-filters" data-isim-filters role="toolbar" aria-label="Filtres"></div><div class="isim-groups" data-isim-groups></div>`;
+        body.innerHTML = `<div class="isim-dtop"><div data-isim-sens></div><div class="isim-mode" role="group" aria-label="${esc(i18n('Ce qu’on fait des autres photos'))}"><span class="muted">${i18n('Les autres photos :')}</span><span class="segmented"><button type="button" data-isim-mode="trash">🗑 ${i18n('À la corbeille')}</button><button type="button" data-isim-mode="version">🗂 ${i18n('En versions')}</button></span><span data-help="${esc(i18n('Corbeille : les autres photos sont retirées de la liste des médias (le fichier reste sur le disque) et reviennent avec « ↶ Remettre ». Versions : leur fichier devient une version de la photo gardée (visionneuse → versions).'))}"></span></div></div>
+            <div data-isim-progress></div><div class="ui-filters isim-filters" data-isim-filters role="toolbar" aria-label="${esc(i18n('Filtres'))}"></div><div class="isim-groups" data-isim-groups></div>`;
         const $ = s => body.querySelector(s);
-        const rf = UI().rangeField({label: 'Sensibilité', min: 0, max: 100, step: 5, value: sens(), unit: '%', default: 50});
-        rf.dataset.help = 'Plus haut : l’app propose aussi des photos plus retouchées ou plus recadrées (plus de fausses alertes). Plus bas : seulement les doublons évidents.';
+        const rf = UI().rangeField({label: i18n('Sensibilité'), min: 0, max: 100, step: 5, value: sens(), unit: '%', default: 50});
+        rf.dataset.help = i18n('Plus haut : l’app propose aussi des photos plus retouchées ou plus recadrées (plus de fausses alertes). Plus bas : seulement les doublons évidents.');
         $('[data-isim-sens]').appendChild(rf);
         rf.input.addEventListener('change', () => { lsSet(SIZE_KEY, Number(rf.input.value)); compute(); });
         const paintMode = () => body.querySelectorAll('[data-isim-mode]').forEach(b => b.classList.toggle('is-active', b.dataset.isimMode === st.mode));
         paintMode();
         const catCount = c => st.groups.filter(g => g.cats.has(c)).length;
         const paintFilters = () => {
-            $('[data-isim-filters]').innerHTML = [['all', 'Tout', st.groups.length], ...CATS.map(([k, l]) => [k, l, catCount(k)]), ['dismissed', '🙈 Pas des doublons', st.dismissedList.length], ['trash', '🗑 Corbeille des doublons', st.merges.length]]
-                .map(([k, l, n]) => `<button type="button" class="${st.filter === k ? 'is-active' : ''}" data-isim-filter="${k}">${esc(l)} (${fmt(n)})</button>`).join('');
+            $('[data-isim-filters]').innerHTML = [['all', 'Tout', st.groups.length], ...CATS.map(([k, l]) => [k, l, catCount(k)]), ['dismissed', '🙈 ' + i18n('Pas des doublons'), st.dismissedList.length], ['trash', '🗑 ' + i18n('Corbeille des doublons'), st.merges.length]]
+                .map(([k, l, n]) => `<button type="button" class="${st.filter === k ? 'is-active' : ''}" data-isim-filter="${k}">${esc(i18n(l))} (${fmt(n)})</button>`).join('');
         };
         const keepOf = g => st.keep.get(g.id) || Number(g.best.id);
         const relation = (g, it) => {
@@ -322,32 +323,32 @@
                 const r = relation(g, it), kept = Number(it.id) === k;
                 return {thumb: thumbOf(it), name: titleOf(it), open: it.filename ? `data-isim-open="${it.id}"` : '', cls: kept ? 'is-kept' : '',
                     lines: [fileLine(it) || it.date_text || '', `${r ? `${kindText(r)} · ` : ''}${linksLine(it.links)}`],
-                    badges: [kept ? {text: '★ Gardée', kind: 'green'} : null, Number(it.id) === best && it.w ? {text: 'La plus grande', kind: 'blue'} : null, r ? kindBadge(r) : null].filter(Boolean),
-                    quick: kept ? '' : `<button type="button" class="button small secondary" data-isim-keep="${g.id}:${it.id}" title="Garder celle-ci à la place">★ Garder</button>`,
-                    menu: [`<button type="button" data-isim-open="${it.id}">↗ Ouvrir le média</button>`, !kept && it.w ? `<button type="button" data-isim-cmp2="${g.id}:${it.id}">🔍 Comparer avec la photo gardée</button>` : '', it.w ? `<button type="button" data-isim-similar="${it.id}">🔍 Chercher une image semblable</button>` : '', `<button type="button" data-isim-out="${g.id}:${it.id}">🙈 Pas un doublon des autres</button>`]};
+                    badges: [kept ? {text: '★ ' + i18n('Gardée'), kind: 'green'} : null, Number(it.id) === best && it.w ? {text: i18n('La plus grande'), kind: 'blue'} : null, r ? kindBadge(r) : null].filter(Boolean),
+                    quick: kept ? '' : `<button type="button" class="button small secondary" data-isim-keep="${g.id}:${it.id}" title="${esc(i18n('Garder celle-ci à la place'))}">★ ${i18n('Garder')}</button>`,
+                    menu: [`<button type="button" data-isim-open="${it.id}">↗ ${i18n('Ouvrir le média')}</button>`, !kept && it.w ? `<button type="button" data-isim-cmp2="${g.id}:${it.id}">🔍 ${i18n('Comparer avec la photo gardée')}</button>` : '', it.w ? `<button type="button" data-isim-similar="${it.id}">🔍 ${i18n('Chercher une image semblable')}</button>` : '', `<button type="button" data-isim-out="${g.id}:${it.id}">🙈 ${i18n('Pas un doublon des autres')}</button>`]};
             }), {size: 's'});
-            const cats = [...g.cats].map(c => CATS.find(x => x[0] === c)?.[1]).filter(Boolean).join(' · ');
-            return `<section class="isim-group" data-isim-group="${g.id}"><header class="isim-ghead"><div><b>Groupe ${i + 1} · ${plural(g.items.length, 'photo')}</b> <small class="muted">${esc(cats)}</small></div>
-                <div class="isim-gact"><button type="button" class="button small secondary" data-isim-notdup="${g.id}">🙈 Ce n’est pas un doublon</button><button type="button" class="button small" data-isim-merge="${g.id}">👯 Garder ★ et fusionner ${plural(g.items.length - 1, 'autre')}</button></div></header>${cards}</section>`;
+            const cats = [...g.cats].map(c => i18n(CATS.find(x => x[0] === c)?.[1] || '')).filter(Boolean).join(' · ');
+            return `<section class="isim-group" data-isim-group="${g.id}"><header class="isim-ghead"><div><b>${i18n('Groupe {n}', {n: i + 1})} · ${plural(g.items.length, 'photo')}</b> <small class="muted">${esc(cats)}</small></div>
+                <div class="isim-gact"><button type="button" class="button small secondary" data-isim-notdup="${g.id}">🙈 ${i18n('Ce n’est pas un doublon')}</button><button type="button" class="button small" data-isim-merge="${g.id}">👯 ${i18n('Garder ★ et fusionner {others}', {others: plural(g.items.length - 1, 'autre')})}</button></div></header>${cards}</section>`;
         };
         const thumbRow = list => list.map(x => `<span class="isim-mini" title="${esc(titleOf(x))}">${x.filename || x.thumbnail ? `<img src="${esc(mediaUrl(x.thumbnail || x.filename))}" alt="" loading="lazy">` : '🖼'}</span>`).join('');
         const paintGroups = () => {
             const box = $('[data-isim-groups]');
             if (st.filter === 'dismissed') {
-                box.innerHTML = st.dismissedList.length ? `<div class="ui-rows">${st.dismissedList.map(([a, b]) => { const ia = byId(a), ib = byId(b); return `<div class="ui-row"><span class="ui-row-thumb isim-pairthumbs">${thumbRow([ia || {id: a}, ib || {id: b}])}</span><div class="ui-row-main"><b class="ui-row-name">${esc(titleOf(ia || {id: a}))} ↔ ${esc(titleOf(ib || {id: b}))}</b><small class="muted">Tu as dit : ce n’est pas un doublon.</small></div><span></span><div class="ui-row-act"><button type="button" class="button small secondary" data-isim-redo="${a}:${b}">↺ Signaler de nouveau</button></div></div>`; }).join('')}</div>`
-                    : A().empty('Aucune paire écartée.', {icon: '🙈'});
+                box.innerHTML = st.dismissedList.length ? `<div class="ui-rows">${st.dismissedList.map(([a, b]) => { const ia = byId(a), ib = byId(b); return `<div class="ui-row"><span class="ui-row-thumb isim-pairthumbs">${thumbRow([ia || {id: a}, ib || {id: b}])}</span><div class="ui-row-main"><b class="ui-row-name">${esc(titleOf(ia || {id: a}))} ↔ ${esc(titleOf(ib || {id: b}))}</b><small class="muted">${i18n('Tu as dit : ce n’est pas un doublon.')}</small></div><span></span><div class="ui-row-act"><button type="button" class="button small secondary" data-isim-redo="${a}:${b}">↺ ${i18n('Signaler de nouveau')}</button></div></div>`; }).join('')}</div>`
+                    : A().empty(i18n('Aucune paire écartée.'), {icon: '🙈'});
                 return;
             }
             if (st.filter === 'trash') {
-                box.innerHTML = st.merges.length ? `<div class="ui-rows">${st.merges.map(m => `<div class="ui-row"><span class="ui-row-thumb isim-pairthumbs">${thumbRow(m.others || [])}<b aria-hidden="true">→</b>${thumbRow([m.keep])}</span><div class="ui-row-main"><b class="ui-row-name">${esc(m.summary)}</b><small class="muted">${m.mode === 'version' ? 'Gardées en versions de la photo gardée' : 'Le fichier est toujours sur le disque'}</small></div><small class="muted ui-row-date">${UI().when ? UI().when(m.created_at, {label: 'Fusionné'}) : esc(m.created_at)}</small><div class="ui-row-act"><button type="button" class="button small secondary" data-isim-undo="${esc(m.token)}">↶ Remettre</button></div></div>`).join('')}</div>`
-                    : A().empty('La corbeille des doublons est vide.', {icon: '🗑'});
+                box.innerHTML = st.merges.length ? `<div class="ui-rows">${st.merges.map(m => `<div class="ui-row"><span class="ui-row-thumb isim-pairthumbs">${thumbRow(m.others || [])}<b aria-hidden="true">→</b>${thumbRow([m.keep])}</span><div class="ui-row-main"><b class="ui-row-name">${esc(m.summary)}</b><small class="muted">${m.mode === 'version' ? i18n('Gardées en versions de la photo gardée') : i18n('Le fichier est toujours sur le disque')}</small></div><small class="muted ui-row-date">${UI().when ? UI().when(m.created_at, {label: i18n('Fusionné')}) : esc(m.created_at)}</small><div class="ui-row-act"><button type="button" class="button small secondary" data-isim-undo="${esc(m.token)}">↶ ${i18n('Remettre')}</button></div></div>`).join('')}</div>`
+                    : A().empty(i18n('La corbeille des doublons est vide.'), {icon: '🗑'});
                 return;
             }
-            if (st.busy && !st.groups.length) { box.innerHTML = UI().spinner(st.prog ? `Comparaison des photos… ${st.prog} %` : 'Comparaison des photos…'); return; }
+            if (st.busy && !st.groups.length) { box.innerHTML = UI().spinner(st.prog ? i18n('Comparaison des photos… {pct} %', {pct: st.prog}) : i18n('Comparaison des photos…')); return; }
             const rows = st.groups.filter(g => st.filter === 'all' || g.cats.has(st.filter));
             const ready = ALL?.items?.length || 0;
-            box.innerHTML = rows.length ? `<p class="muted isim-count">${plural(rows.length, 'groupe de doublons', 'groupes de doublons')} parmi ${plural(ready + st.others.length, 'média comparé', 'médias comparés')}${st.busy ? ' — comparaison en cours…' : ''}</p>${rows.map(g => groupHtml(g, st.groups.indexOf(g))).join('')}`
-                : A().emptyState({icon: '👯', text: st.groups.length ? 'Aucun groupe de cette sorte' : 'Aucun doublon trouvé', hint: JOB.running ? 'Les empreintes ne sont pas toutes prêtes : la liste se complète toute seule.' : `Parmi ${plural(ready, 'photo', 'photos')}. Monte la sensibilité pour voir les photos plus différentes.`});
+            box.innerHTML = rows.length ? `<p class="muted isim-count">${st.busy ? i18n('{groups} parmi {media} — comparaison en cours…', {groups: plural(rows.length, 'groupe de doublons', 'groupes de doublons'), media: plural(ready + st.others.length, 'média comparé', 'médias comparés')}) : i18n('{groups} parmi {media}', {groups: plural(rows.length, 'groupe de doublons', 'groupes de doublons'), media: plural(ready + st.others.length, 'média comparé', 'médias comparés')})}</p>${rows.map(g => groupHtml(g, st.groups.indexOf(g))).join('')}`
+                : A().emptyState({icon: '👯', text: st.groups.length ? i18n('Aucun groupe de cette sorte') : i18n('Aucun doublon trouvé'), hint: JOB.running ? i18n('Les empreintes ne sont pas toutes prêtes : la liste se complète toute seule.') : i18n('Parmi {list}. Monte la sensibilité pour voir les photos plus différentes.', {list: plural(ready, 'photo', 'photos')})});
         };
         const byId = id => (ALL?.items || []).find(x => Number(x.id) === Number(id)) || st.others.find(x => Number(x.id) === Number(id));
         const paint = () => { $('[data-isim-progress]').innerHTML = progressHtml(); paintFilters(); paintGroups(); };
@@ -414,10 +415,10 @@
             const c2 = t.closest('[data-isim-cmp2]'); if (c2) { const [gid, id] = c2.dataset.isimCmp2.split(':'); const g = groupOf(gid); if (g) compareTwo(byId(keepOf(g)), byId(id)); return; }
             const sm = t.closest('[data-isim-similar]'); if (sm) { openSimilar({media: byId(sm.dataset.isimSimilar)}); return; }
             const mg = t.closest('[data-isim-merge]'); if (mg) { const g = groupOf(mg.dataset.isimMerge); if (g) merge(g); return; }
-            const nd = t.closest('[data-isim-notdup]'); if (nd) { const g = groupOf(nd.dataset.isimNotdup); if (!g) return; const pairs = []; for (let i = 0; i < g.items.length; i++) for (let j = i + 1; j < g.items.length; j++) pairs.push([Number(g.items[i].id), Number(g.items[j].id)]); dismiss(pairs, `Groupe de ${plural(g.items.length, 'photo')} : ce ne sont pas des doublons`); return; }
-            const out = t.closest('[data-isim-out]'); if (out) { const [gid, id] = out.dataset.isimOut.split(':'); const g = groupOf(gid); if (!g) return; dismiss(g.items.filter(x => Number(x.id) !== Number(id)).map(x => [Number(id), Number(x.id)]), `« ${titleOf(byId(id) || {})} » n’est pas un doublon des autres`); return; }
-            const rd = t.closest('[data-isim-redo]'); if (rd) { const pair = rd.dataset.isimRedo.split(':').map(Number); try { await api('image_dup_dismiss', {}, {method: 'POST', body: {pairs: [pair], undo: true}}); } catch (er) { return toast(er.message, 'error'); } st.dismissed.delete(pairKey(...pair)); await compute(); A().undoToast('Paire signalée de nouveau', {undo: async () => { await api('image_dup_dismiss', {}, {method: 'POST', body: {pairs: [pair]}}); if (d.isConnected) compute(); }}); return; }
-            const un = t.closest('[data-isim-undo]'); if (un) { const token = un.dataset.isimUndo; un.disabled = true; try { await api('image_dup_undo', {}, {method: 'POST', body: {token}}); } catch (er) { un.disabled = false; return toast(er.message, 'error'); } st.gone = new Set(); await loadAll(true); toast('Fusion annulée : les photos sont revenues avec leurs liens.', 'success'); compute(); A().refreshScreen?.(); }
+            const nd = t.closest('[data-isim-notdup]'); if (nd) { const g = groupOf(nd.dataset.isimNotdup); if (!g) return; const pairs = []; for (let i = 0; i < g.items.length; i++) for (let j = i + 1; j < g.items.length; j++) pairs.push([Number(g.items[i].id), Number(g.items[j].id)]); dismiss(pairs, i18n('Groupe de {list} : ce ne sont pas des doublons', {list: plural(g.items.length, 'photo')})); return; }
+            const out = t.closest('[data-isim-out]'); if (out) { const [gid, id] = out.dataset.isimOut.split(':'); const g = groupOf(gid); if (!g) return; dismiss(g.items.filter(x => Number(x.id) !== Number(id)).map(x => [Number(id), Number(x.id)]), i18n('« {title} » n’est pas un doublon des autres', {title: titleOf(byId(id) || {})})); return; }
+            const rd = t.closest('[data-isim-redo]'); if (rd) { const pair = rd.dataset.isimRedo.split(':').map(Number); try { await api('image_dup_dismiss', {}, {method: 'POST', body: {pairs: [pair], undo: true}}); } catch (er) { return toast(er.message, 'error'); } st.dismissed.delete(pairKey(...pair)); await compute(); A().undoToast(i18n('Paire signalée de nouveau'), {undo: async () => { await api('image_dup_dismiss', {}, {method: 'POST', body: {pairs: [pair]}}); if (d.isConnected) compute(); }}); return; }
+            const un = t.closest('[data-isim-undo]'); if (un) { const token = un.dataset.isimUndo; un.disabled = true; try { await api('image_dup_undo', {}, {method: 'POST', body: {token}}); } catch (er) { un.disabled = false; return toast(er.message, 'error'); } st.gone = new Set(); await loadAll(true); toast(i18n('Fusion annulée : les photos sont revenues avec leurs liens.'), 'success'); compute(); A().refreshScreen?.(); }
         });
         const onJob = () => { if (!d.isConnected) return; $('[data-isim-progress]').innerHTML = progressHtml(); clearTimeout(st.jt); if (!JOB.running) st.jt = setTimeout(() => compute(), 200); };
         JOB.listeners.add(onJob); d._off = () => JOB.listeners.delete(onJob);

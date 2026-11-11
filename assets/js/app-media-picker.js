@@ -7,6 +7,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const A = () => window.LCNDA_APP || {};
     const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
     const fold = s => String(s ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
@@ -47,9 +48,9 @@
     /** Envoie un fichier de l'ordinateur dans les médias (même envoi que la retouche : api.php?action=retouch_media). */
     async function importFile(file, types) {
         const kind = /^audio\//.test(file.type) ? 'audio' : /^video\//.test(file.type) ? 'video' : /^image\//.test(file.type) ? 'image' : '';
-        if (!kind) throw new Error(`« ${file.name || 'Ce fichier'} » n’est ni une image, ni un son, ni une vidéo.`);
-        if (!types.includes(kind)) throw new Error(`Ici, il faut ${types.includes('image') ? 'une image' : types.includes('audio') ? 'un son' : 'une vidéo'}.`);
-        const csrf = A().state?.csrf || '', title = String(file.name || '').replace(/\.[^.]+$/, '') || (kind === 'image' ? 'Image collée' : 'Fichier importé');
+        if (!kind) throw new Error(i18n('« {name} » n’est ni une image, ni un son, ni une vidéo.', {name: file.name || i18n('Ce fichier')}));
+        if (!types.includes(kind)) throw new Error(i18n(`Ici, il faut ${types.includes('image') ? 'une image' : types.includes('audio') ? 'un son' : 'une vidéo'}.`));
+        const csrf = A().state?.csrf || '', title = String(file.name || '').replace(/\.[^.]+$/, '') || (kind === 'image' ? i18n('Image collée') : i18n('Fichier importé'));
         const fd = new FormData(); fd.append('file', file, file.name || `image-${Date.now()}.png`); fd.append('kind', kind); fd.append('title', title); fd.append('csrf', csrf);
         if (kind !== 'image') { const d = await avDuration(file); if (d) fd.append('duration', String(d)); }
         const r = await fetch('api.php?action=retouch_media', {method: 'POST', body: fd, headers: {'X-CSRF-Token': csrf}});
@@ -82,8 +83,8 @@
     /** Taille d'impression à 300 ppp : A4, A5, A6, sinon écran seulement. */
     function printFit(w, h) {
         const L = Math.max(w, h), S = Math.min(w, h);
-        for (const [f, l, s] of [['A4', 3508, 2480], ['A5', 2480, 1748], ['A6', 1748, 1240]]) if (L >= l && S >= s) return `assez grande pour imprimer en ${f}`;
-        return 'petite : écran seulement';
+        for (const [f, l, s] of [['A4', 3508, 2480], ['A5', 2480, 1748], ['A6', 1748, 1240]]) if (L >= l && S >= s) return i18n('assez grande pour imprimer en {f}', {f});
+        return i18n('petite : écran seulement');
     }
 
     /** Les médias d'une liste de types, pour les textes : « image », « son », « média »… */
@@ -91,7 +92,7 @@
         if (types.length === 1) return {image: ['image', 'images', true], audio: ['son', 'sons', false], video: ['vidéo', 'vidéos', true], document: ['document', 'documents', false]}[types[0]];
         return ['média', 'médias', false];
     }
-    const chosenWord = (n, fem) => `${num(n)} ${fem ? (n > 1 ? 'choisies' : 'choisie') : (n > 1 ? 'choisis' : 'choisi')}`;
+    const chosenWord = (n, fem) => i18n(fem ? (n > 1 ? '{n} choisies' : '{n} choisie') : (n > 1 ? '{n} choisis' : '{n} choisi'), {n: num(n)});
 
     // ═══════════════ la fenêtre ═══════════════
     function openMediaPicker(o = {}) {
@@ -100,7 +101,7 @@
             if (!types.length) types.push('image');
             const multiple = !!o.multiple, allowImport = o.allowImport !== false && types.some(t => t !== 'document');
             const [one, many, fem] = nouns(types);
-            const title = o.title || (multiple ? `Choisir des ${many}` : `Choisir ${fem ? 'une' : 'un'} ${one}`);
+            const title = o.title || i18n(multiple ? `Choisir des ${many}` : `Choisir ${fem ? 'une' : 'un'} ${one}`);
             const flags = o.flags ? [['notr', '📝 Pas encore transcrites'], ['tr', '✅ Déjà transcrites'], ['sig', '✍ Avec une signature repérée']] : [];
             const personIn = o.person && typeof o.person === 'object' ? o.person : Number(o.person) > 0 ? {id: Number(o.person), title: ''} : null;
             const st = {q: '', sort: 'all', person: personIn, personOn: !!personIn, recent: false, portraits: !!o.portraits, flag: flags.some(f => f[0] === o.flag) ? o.flag : '',
@@ -110,15 +111,15 @@
 
             const d = document.createElement('dialog'); d.className = 'modal mpk-dialog';
             d.setAttribute('aria-label', title);
-            d.innerHTML = `<div class="mpk-head"><div><span class="eyebrow">${esc(o.eyebrow || 'MÉDIAS DE L’APP')}</span><h2>${esc(/^\p{Extended_Pictographic}/u.test(title) ? title : `${types.length === 1 && types[0] === 'audio' ? '🎧' : types.length === 1 && types[0] === 'video' ? '🎬' : '🖼'} ${title}`)}</h2>${o.intro ? `<p class="mpk-intro">${esc(o.intro)}</p>` : ''}</div><button type="button" class="icon-button" data-mp="close" aria-label="Fermer" data-ia-done="1">×</button></div>
+            d.innerHTML = `<div class="mpk-head"><div><span class="eyebrow">${esc(o.eyebrow || i18n('MÉDIAS DE L’APP'))}</span><h2>${esc(/^\p{Extended_Pictographic}/u.test(title) ? title : `${types.length === 1 && types[0] === 'audio' ? '🎧' : types.length === 1 && types[0] === 'video' ? '🎬' : '🖼'} ${title}`)}</h2>${o.intro ? `<p class="mpk-intro">${esc(o.intro)}</p>` : ''}</div><button type="button" class="icon-button" data-mp="close" aria-label="${esc(i18n('Fermer'))}" data-ia-done="1">×</button></div>
                 <div class="mpk-bar"><div class="pk mpk-search"><div class="pk-box"><span class="pk-ico" aria-hidden="true">🔍</span><input type="text" class="pk-input" data-mpk-q autocomplete="off" spellcheck="false" placeholder="Chercher…" aria-label="Chercher : titre, cote, personne, lieu, année"><span class="pk-kbd">Titre, cote, personne, lieu, année…</span></div></div>
                     <div class="mpk-filters" data-mpk-filters role="toolbar" aria-label="Filtres"></div>
                     <select class="mpk-size" data-mpk-size aria-label="Taille des vignettes" data-ia-done="1"><option value="big">▦ Grandes</option><option value="small">▪ Petites</option><option value="list">☰ Liste</option></select></div>
                 <div class="mpk-body"><div class="mpk-gridwrap" data-mpk-scroll><div class="mpk-cnt"><span data-mpk-count>…</span><span class="mpk-keys">${multiple ? '↑ ↓ ← → · Espace : cocher · Entrée : valider' : '↑ ↓ ← → · Entrée : valider'}</span></div>
-                    <div class="mpk-grid size-${st.size}" data-mpk-grid role="listbox" tabindex="0" aria-multiselectable="${multiple}" aria-label="${esc(many)}"></div>
-                    ${allowImport ? `<div class="mpk-drop" data-mpk-drop>📁 Glisse ${fem ? 'une' : 'un'} ${esc(one)} ici, colle-${fem ? 'la' : 'le'} (⌘V) ou <button type="button" class="mpk-linkbtn" data-mp="import" data-ia-done="1">importe-${fem ? 'la' : 'le'} depuis l’ordinateur</button> : ${fem ? 'elle' : 'il'} entre dans les médias et se coche.</div>` : ''}</div>
+                    <div class="mpk-grid size-${st.size}" data-mpk-grid role="listbox" tabindex="0" aria-multiselectable="${multiple}" aria-label="${esc(i18n(many))}"></div>
+                    ${allowImport ? `<div class="mpk-drop" data-mpk-drop>📁 ${i18n(`Glisse ${fem ? 'une' : 'un'} ${one} ici, colle-${fem ? 'la' : 'le'} (⌘V) ou <button>importe-${fem ? 'la' : 'le'} depuis l’ordinateur</button> : ${fem ? 'elle' : 'il'} entre dans les médias et se coche.`).replace('<button>', '<button type="button" class="mpk-linkbtn" data-mp="import" data-ia-done="1">')}</div>` : ''}</div>
                     <aside class="mpk-prev" data-mpk-prev aria-live="polite"></aside></div>
-                <div class="mpk-foot">${allowImport ? `<button type="button" class="button secondary" data-mp="import" data-ia-done="1">📁 Importer…</button>${types.includes('image') ? '<button type="button" class="button secondary" data-mp="paste" data-ia-done="1">📋 Coller</button>' : ''}` : ''}<span class="spacer"></span><button type="button" class="button secondary" data-mp="close" data-ia-done="1">Annuler</button><button type="button" class="button" data-mp="ok" data-ia-done="1" disabled>${esc(o.okLabel || (multiple ? `Utiliser ces ${many}` : `Utiliser ${fem ? 'cette' : 'ce'} ${one}`))}</button></div>`;
+                <div class="mpk-foot">${allowImport ? `<button type="button" class="button secondary" data-mp="import" data-ia-done="1">📁 Importer…</button>${types.includes('image') ? '<button type="button" class="button secondary" data-mp="paste" data-ia-done="1">📋 Coller</button>' : ''}` : ''}<span class="spacer"></span><button type="button" class="button secondary" data-mp="close" data-ia-done="1">${i18n('Annuler')}</button><button type="button" class="button" data-mp="ok" data-ia-done="1" disabled>${esc(o.okLabel || i18n(multiple ? `Utiliser ces ${many}` : `Utiliser ${fem ? 'cette' : 'ce'} ${one}`))}</button></div>`;
             if (o.extra) { const ex = document.createElement('div'); ex.className = 'mpk-extra'; ex.innerHTML = o.extra; d.querySelector('.mpk-bar').appendChild(ex); }
             document.body.appendChild(d);
             const $ = s => d.querySelector(s), grid = $('[data-mpk-grid]'), scroller = $('[data-mpk-scroll]'), qIn = $('[data-mpk-q]'), prev = $('[data-mpk-prev]'), okBtn = $('[data-mp="ok"]');
@@ -136,11 +137,11 @@
                 const sorts = [['photo', '📷 Photos', types.includes('image')], ['document', '📄 Documents', types.includes('image') || types.includes('document')], ['audio', '🎧 Sons', types.includes('audio')], ['video', '🎬 Vidéos', types.includes('video')]].filter(s => s[2]);
                 let h = `<button type="button" class="mpk-chip${st.sort === 'all' ? ' on' : ''}" data-mpk-sort="all" aria-pressed="${st.sort === 'all'}" data-ia-done="1">Tout${n('all')}</button>`;
                 if (sorts.length > 1) h += sorts.map(([k, l]) => `<button type="button" class="mpk-chip${st.sort === k ? ' on' : ''}" data-mpk-sort="${k}" aria-pressed="${st.sort === k}" data-ia-done="1"${st.counts && !c[k] && st.sort !== k ? ' disabled' : ''}>${l}${n(k)}</button>`).join('');
-                if (st.person) h += `<span class="mpk-chip mpk-person${st.personOn ? ' on' : ''}"><button type="button" data-mp="person-toggle" aria-pressed="${st.personOn}" data-ia-done="1" title="${st.personOn ? 'Seulement ses médias' : 'Montrer seulement ses médias'}">👤 ${esc(st.person.title || '…')}</button>${st.personOn ? '<button type="button" class="x" data-mp="person-off" aria-label="Retirer le filtre de la personne" data-ia-done="1">×</button>' : ''}</span>`;
+                if (st.person) h += `<span class="mpk-chip mpk-person${st.personOn ? ' on' : ''}"><button type="button" data-mp="person-toggle" aria-pressed="${st.personOn}" data-ia-done="1" title="${esc(st.personOn ? i18n('Seulement ses médias') : i18n('Montrer seulement ses médias'))}">👤 ${esc(st.person.title || '…')}</button>${st.personOn ? `<button type="button" class="x" data-mp="person-off" aria-label="${esc(i18n('Retirer le filtre de la personne'))}" data-ia-done="1">×</button>` : ''}</span>`;
                 else h += '<button type="button" class="mpk-chip" data-mp="person-pick" data-ia-done="1">👤 Une personne…</button>';
                 h += `<button type="button" class="mpk-chip${st.recent ? ' on' : ''}" data-mp="recent" aria-pressed="${st.recent}" data-ia-done="1">🕘 Récentes${n('recent')}</button>`;
                 if (types.includes('image')) h += `<button type="button" class="mpk-chip${st.portraits ? ' on' : ''}" data-mp="portraits" aria-pressed="${st.portraits}" data-ia-done="1">⭐ Portraits${n('portraits')}</button>`;
-                h += flags.map(([k, l]) => `<button type="button" class="mpk-chip${st.flag === k ? ' on' : ''}" data-mpk-flag="${k}" aria-pressed="${st.flag === k}" data-ia-done="1">${l}</button>`).join('');
+                h += flags.map(([k, l]) => `<button type="button" class="mpk-chip${st.flag === k ? ' on' : ''}" data-mpk-flag="${k}" aria-pressed="${st.flag === k}" data-ia-done="1">${i18n(l)}</button>`).join('');
                 return h;
             }
             const renderFilters = () => { $('[data-mpk-filters]').innerHTML = filtersHtml(); };
@@ -161,7 +162,7 @@
             async function load(more = false) {
                 const my = ++st.seq; st.loading = true;
                 if (!more) { st.q = qIn.value.trim(); grid.setAttribute('aria-busy', 'true'); }
-                let r; try { r = await search(params(more)); } catch (e) { if (my === st.seq) { st.loading = false; toast(e.message || 'Recherche impossible', 'error'); } return; }
+                let r; try { r = await search(params(more)); } catch (e) { if (my === st.seq) { st.loading = false; toast(e.message || i18n('Recherche impossible'), 'error'); } return; }
                 if (my !== st.seq) return;
                 st.loading = false; grid.removeAttribute('aria-busy');
                 const got = itemsOf(r);
@@ -193,10 +194,10 @@
             function render(more) {
                 const top = scroller.scrollTop;
                 if (!st.items.length) {
-                    const what = st.q ? `Aucun${fem ? 'e' : ''} ${one} pour « ${st.q} ».` : (st.personOn || st.sort !== 'all' || st.recent || st.portraits || st.flag) ? `Aucun${fem ? 'e' : ''} ${one} avec ces filtres.` : `Aucun${fem ? 'e' : ''} ${one} dans tes médias pour l’instant.`;
-                    const hint = (st.q ? 'Vérifie l’orthographe, enlève un filtre' : st.personOn ? 'Retire le filtre de la personne' : '') + (allowImport ? `${st.q || st.personOn ? ', ou importe' : 'Importe'}-${fem ? 'la' : 'le'} depuis l’ordinateur.` : '.');
+                    const what = st.q ? i18n(`Aucun${fem ? 'e' : ''} ${one} pour « {q} ».`, {q: st.q}) : (st.personOn || st.sort !== 'all' || st.recent || st.portraits || st.flag) ? i18n(`Aucun${fem ? 'e' : ''} ${one} avec ces filtres.`) : i18n(`Aucun${fem ? 'e' : ''} ${one} dans tes médias pour l’instant.`);
+                    const hint = i18n((st.q ? 'Vérifie l’orthographe, enlève un filtre' : st.personOn ? 'Retire le filtre de la personne' : '') + (allowImport ? `${st.q || st.personOn ? ', ou importe' : 'Importe'}-${fem ? 'la' : 'le'} depuis l’ordinateur.` : '.'));
                     grid.innerHTML = A().emptyState ? A().emptyState({icon: '🖼', text: what, hint: hint.replace(/^\./, ''), action: allowImport ? {label: '📁 Importer…', attrs: 'data-mp="import" data-ia-done="1"'} : null}) : `<p class="pk-empty">${esc(what)}</p>`;
-                } else grid.innerHTML = st.items.map(tileHtml).join('') + (st.more ? '<div class="mpk-more"><span class="pk-spin"></span> La suite arrive en descendant…</div>' : '');
+                } else grid.innerHTML = st.items.map(tileHtml).join('') + (st.more ? `<div class="mpk-more"><span class="pk-spin"></span> ${i18n('La suite arrive en descendant…')}</div>` : '');
                 if (more) scroller.scrollTop = top;
                 counter(); preview();
                 if (st.active >= 0) grid.setAttribute('aria-activedescendant', `mpk-o-${st.active}`); else grid.removeAttribute('aria-activedescendant');
@@ -221,7 +222,7 @@
             let prevId = 0;
             function preview() {
                 const it = st.items[st.active] || (multiple ? [...st.chosen.values()].pop() : null);
-                if (!it || !it.title) { prevId = 0; prev.innerHTML = `<div class="mpk-prev-empty">${allowImport ? `Clique sur ${fem ? 'une' : 'un'} ${esc(one)} pour ${fem ? 'la' : 'le'} voir ici en grand.` : `Clique sur ${fem ? 'une' : 'un'} ${esc(one)} pour ${fem ? 'la' : 'le'} voir ici.`}</div>`; return; }
+                if (!it || !it.title) { prevId = 0; prev.innerHTML = `<div class="mpk-prev-empty">${esc(i18n(allowImport ? `Clique sur ${fem ? 'une' : 'un'} ${one} pour ${fem ? 'la' : 'le'} voir ici en grand.` : `Clique sur ${fem ? 'une' : 'un'} ${one} pour ${fem ? 'la' : 'le'} voir ici.`))}</div>`; return; }
                 if (prevId === it.id) return; prevId = it.id;
                 const src = mediaUrl(it.filename);
                 const big = it.media_type === 'image' ? `<div class="mpk-big"><img src="${esc(src)}" alt="" data-mpk-bigimg></div>`
@@ -237,7 +238,7 @@
                 const ids = (it.people_ids || []).map(Number).filter(Boolean);
                 if (ids.length) loadPeople(ids).then(ps => {
                     const box = prev.querySelector('[data-mpk-ppl]'); if (!box || prevId !== it.id) return;
-                    box.innerHTML = ps.map(p => `<button type="button" class="pk-chip mpk-pchip" data-mpk-person="${Number(p.id)}" data-ia-done="1" title="Voir ses médias">${window.LCNDA_UI?.avatarOn?.() ? window.LCNDA_UI.avatar({...p, name: p.title, photo: p.thumb || ''}, 22) : p.thumb ? `<span class="pk-av ${p.gender === 'male' ? 'm' : p.gender === 'female' ? 'f' : 'u'} photo" style="background-image:url('${esc(p.thumb)}')"></span>` : `<span class="pk-av ${p.kind === 'animal' ? 'a' : p.gender === 'male' ? 'm' : p.gender === 'female' ? 'f' : 'u'}">${esc(p.initials || '?')}</span>`}<b>${esc(p.title)}</b></button>`).join('') + (it.people_count > ps.length ? `<small>+ ${num(it.people_count - ps.length)}</small>` : '');
+                    box.innerHTML = ps.map(p => `<button type="button" class="pk-chip mpk-pchip" data-mpk-person="${Number(p.id)}" data-ia-done="1" title="${esc(i18n('Voir ses médias'))}">${window.LCNDA_UI?.avatarOn?.() ? window.LCNDA_UI.avatar({...p, name: p.title, photo: p.thumb || ''}, 22) : p.thumb ? `<span class="pk-av ${p.gender === 'male' ? 'm' : p.gender === 'female' ? 'f' : 'u'} photo" style="background-image:url('${esc(p.thumb)}')"></span>` : `<span class="pk-av ${p.kind === 'animal' ? 'a' : p.gender === 'male' ? 'm' : p.gender === 'female' ? 'f' : 'u'}">${esc(p.initials || '?')}</span>`}<b>${esc(p.title)}</b></button>`).join('') + (it.people_count > ps.length ? `<small>+ ${num(it.people_count - ps.length)}</small>` : '');
                 });
             }
 
@@ -275,7 +276,7 @@
                         st.imported.unshift(it);
                         if (!multiple) st.chosen.clear();
                         st.chosen.set(Number(it.id), it);
-                        toast(`« ${it.title} » est entré${fem ? 'e' : ''} dans tes médias.`);
+                        toast(i18n(`« {title} » est entré${fem ? 'e' : ''} dans tes médias.`, {title: it.title}));
                     } catch (e) { toast(e.message, 'error'); }
                 }
                 drop?.classList.remove('busy');
@@ -299,8 +300,8 @@
                 try {
                     const list = await navigator.clipboard.read(), files = [];
                     for (const c of list) { const t = c.types.find(x => x.startsWith('image/')); if (t) { const b = await c.getType(t); files.push(new File([b], `image-collée-${new Date().toISOString().slice(0, 10)}.${t.split('/')[1] || 'png'}`, {type: t})); } }
-                    if (files.length) addFiles(files); else toast('Aucune image dans le presse-papiers. Copie une image, puis réessaie.');
-                } catch (_) { toast('Appuie sur ⌘V (ou Ctrl+V) pour coller l’image ici.'); }
+                    if (files.length) addFiles(files); else toast(i18n('Aucune image dans le presse-papiers. Copie une image, puis réessaie.'));
+                } catch (_) { toast(i18n('Appuie sur ⌘V (ou Ctrl+V) pour coller l’image ici.')); }
             }
             let dragDepth = 0;
             d.addEventListener('dragenter', e => { if (!allowImport || ![...(e.dataTransfer?.types || [])].includes('Files')) return; e.preventDefault(); dragDepth++; d.classList.add('mpk-dragging'); });
@@ -328,7 +329,7 @@
                     case 'person-off': st.personOn = false; return load();
                     case 'person-pick': {
                         const P = window.LCNDA_PICKER; if (!P?.openPicker) return;
-                        const p = await P.openPicker({kind: 'person', title: 'Les médias de quelle personne ?'});
+                        const p = await P.openPicker({kind: 'person', title: i18n('Les médias de quelle personne ?')});
                         if (p) { st.person = p; st.personOn = true; load(); }
                         return;
                     }
@@ -402,9 +403,9 @@
     const mfHidden = c => c.opts.multiple ? c.items.map(it => it.id).join(',') : String(c.items[0]?.id || '');
     function mfChip(it, i, small) {
         const pic = it.thumb ? `<span class="pk-ic thumb has-img" style="background-image:url('${esc(it.thumb)}')" aria-hidden="true"></span>` : `<span class="pk-ic" aria-hidden="true">${it.media_type === 'audio' ? '🎧' : it.media_type === 'video' ? '🎬' : it.title ? (it.icon || '🖼') : '…'}</span>`;
-        const t = it.title || (it.id ? `Média #${it.id}` : ''), y = it.year || '';
-        if (small) return `<span class="pk-chip mf-chip" data-i="${i}">${pic}<b>${esc(t)}</b>${y ? `<small>${esc(y)}</small>` : ''}<button type="button" class="go" data-mf="open" data-i="${i}" data-ia-done="1" title="Ouvrir">↗</button><button type="button" class="x" data-mf="remove" data-i="${i}" data-ia-done="1" title="Retirer" aria-label="Retirer ${esc(t)}">×</button></span>`;
-        return `<span class="pk-chip mf-chip" data-i="${i}">${pic}<span><b>${esc(t)}</b>${y ? ` <small>${esc(y)}</small>` : ''}</span><button type="button" class="go" data-mf="open" data-i="${i}" data-ia-done="1">↗ Ouvrir</button><button type="button" class="go" data-mf="change" data-i="${i}" data-ia-done="1">🖼 Changer</button><button type="button" class="x" data-mf="remove" data-i="${i}" data-ia-done="1" title="Retirer" aria-label="Retirer ${esc(t)}">×</button></span>`;
+        const t = it.title || (it.id ? i18n('Média #{n}', {n: String(it.id)}) : ''), y = it.year || '';
+        if (small) return `<span class="pk-chip mf-chip" data-i="${i}">${pic}<b>${esc(t)}</b>${y ? `<small>${esc(y)}</small>` : ''}<button type="button" class="go" data-mf="open" data-i="${i}" data-ia-done="1" title="Ouvrir">↗</button><button type="button" class="x" data-mf="remove" data-i="${i}" data-ia-done="1" title="${esc(i18n('Retirer'))}" aria-label="${esc(i18n('Retirer {name}', {name: t}))}">×</button></span>`;
+        return `<span class="pk-chip mf-chip" data-i="${i}">${pic}<span><b>${esc(t)}</b>${y ? ` <small>${esc(y)}</small>` : ''}</span><button type="button" class="go" data-mf="open" data-i="${i}" data-ia-done="1">↗ Ouvrir</button><button type="button" class="go" data-mf="change" data-i="${i}" data-ia-done="1">🖼 Changer</button><button type="button" class="x" data-mf="remove" data-i="${i}" data-ia-done="1" title="${esc(i18n('Retirer'))}" aria-label="${esc(i18n('Retirer {name}', {name: t}))}">×</button></span>`;
     }
     function mfInner(c) {
         const o = c.opts, [one, , fem] = nouns(o.types);
@@ -447,7 +448,7 @@
     async function mfLoad(c) {
         const todo = c.items.filter(it => !it.title); if (!todo.length) return;
         const found = await loadMedia(todo.map(it => it.id));
-        c.items = c.items.map(it => found.find(f => Number(f.id) === Number(it.id)) || {...it, title: it.title || `Média #${it.id}`});
+        c.items = c.items.map(it => found.find(f => Number(f.id) === Number(it.id)) || {...it, title: it.title || i18n('Média #{n}', {n: String(it.id)})});
         if (c.el) mfRender(c);
     }
     function mediaValue(fieldEl) {

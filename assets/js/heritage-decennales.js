@@ -13,6 +13,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const A = () => window.LCNDA_APP;
     const P = () => window.LCNDA_PICKER || window.LCNDA_APP;
@@ -112,10 +113,10 @@
             cols: TEMPLATES[0].cols.map(c => [...c]), template: 'npd', top: .08, bottom: .96, left: .02, right: .98, rows: [], cells: [], read: '', digestId: 0, created: null, cur: 0, busy: false, stop: false};
         const dlg = document.createElement('dialog'); dlg.className = 'modal modal-xl h-td-dlg';
         dlg.innerHTML = `<form method="dialog" class="h-td-form" novalidate>
-            <div class="modal-head"><div><span class="eyebrow">DÉPOUILLEMENTS · TABLE DÉCENNALE</span><h2>📑 Lire une table décennale</h2></div><button class="icon-button" type="button" data-td-close aria-label="Fermer">×</button></div>
-            <ol class="h-td-steps" aria-label="Les étapes">${['L’image', 'Les colonnes', 'La lecture', 'La relecture', 'Créer'].map((l, i) => `<li data-td-st="${i + 1}"><span>${i + 1}</span>${l}</li>`).join('')}</ol>
+            <div class="modal-head"><div><span class="eyebrow">${i18n('DÉPOUILLEMENTS · TABLE DÉCENNALE')}</span><h2>📑 ${i18n('Lire une table décennale')}</h2></div><button class="icon-button" type="button" data-td-close aria-label="${esc(i18n('Fermer'))}">×</button></div>
+            <ol class="h-td-steps" aria-label="${esc(i18n('Les étapes'))}">${['L’image', 'Les colonnes', 'La lecture', 'La relecture', 'Créer'].map((l, i) => `<li data-td-st="${i + 1}"><span>${i + 1}</span>${i18n(l)}</li>`).join('')}</ol>
             <div class="h-td-body" data-td-body></div>
-            <div class="modal-actions"><button type="button" class="button secondary" data-td-cancel>Annuler</button><span class="spacer"></span><button type="button" class="button secondary" data-td-back>← Retour</button><button type="button" class="button" data-td-next>Suivant →</button></div>
+            <div class="modal-actions"><button type="button" class="button secondary" data-td-cancel>${i18n('Annuler')}</button><span class="spacer"></span><button type="button" class="button secondary" data-td-back>${i18n('← Retour')}</button><button type="button" class="button" data-td-next>${i18n('Suivant →')}</button></div>
         </form>`;
         document.body.appendChild(dlg); dlg.showModal();
         const $ = s => dlg.querySelector(s), body = $('[data-td-body]'), form = $('form');
@@ -123,7 +124,7 @@
         const period = () => periodYears(td.period);
         const close = async () => {
             if (td.busy) { td.stop = true; }
-            if (!td.digestId && td.cells.some(c => c.nom || c.prenoms) && !await A().confirmBox('Ce qui a été lu ou saisi n’est pas encore dans un dépouillement.', {title: 'Fermer l’assistant ?', okLabel: 'Fermer sans créer', danger: false})) return;
+            if (!td.digestId && td.cells.some(c => c.nom || c.prenoms) && !await A().confirmBox(i18n('Ce qui a été lu ou saisi n’est pas encore dans un dépouillement.'), {title: i18n('Fermer l’assistant ?'), okLabel: i18n('Fermer sans créer'), danger: false})) return;
             dlg.close();
         };
         dlg.addEventListener('cancel', e => { e.preventDefault(); close(); });
@@ -137,7 +138,7 @@
             td.media = m ? {id: Number(m.id), title: m.title || '', filename: m.filename, thumb: m.thumb || (m.filename ? `media/${encodeURIComponent(m.thumbnail || m.filename)}` : '')} : null; td.img = null;
             if (!td.media?.filename) return;
             td.img = await new Promise(ok => { const im = new Image(); im.onload = () => ok(im); im.onerror = () => ok(null); im.src = `media/${encodeURIComponent(td.media.filename)}`; });
-            if (!td.img) toast('L’image n’a pas pu être ouverte.', 'error');
+            if (!td.img) toast(i18n('L’image n’a pas pu être ouverte.'), 'error');
             td.rows = []; td.cells = []; td.read = '';
         }
         if (opts.mediaId || opts.media) {
@@ -149,7 +150,7 @@
             dlg.querySelectorAll('[data-td-st]').forEach(li => { const n = Number(li.dataset.tdSt); li.classList.toggle('is-active', n === td.step); li.classList.toggle('is-done', n < td.step); });
             $('[data-td-back]').hidden = td.step === 1 || td.step === 5 && !!td.digestId;
             const nx = $('[data-td-next]');
-            nx.textContent = td.step === 3 ? 'Relire →' : td.step === 4 ? 'Suivant : créer →' : td.step === 5 ? (td.digestId ? 'Fermer' : '＋ Créer le dépouillement') : 'Suivant →';
+            nx.textContent = i18n(td.step === 3 ? 'Relire →' : td.step === 4 ? 'Suivant : créer →' : td.step === 5 ? (td.digestId ? 'Fermer' : '＋ Créer le dépouillement') : 'Suivant →');
             nx.disabled = td.busy; $('[data-td-cancel]').hidden = td.step === 5 && !!td.digestId;
         }
         function go(n) { td.step = clamp(n, 1, 5); paintSteps(); [null, step1, step2, step3, step4, step5][td.step](); body.scrollTop = 0; }
@@ -158,19 +159,19 @@
             const U = UI();
             if (td.step === 1) {
                 const errs = [];
-                if (!td.media || !td.img) errs.push([form.elements.td_media, 'Choisis la photo de la table.']);
-                if (td.period.trim() && !period()) errs.push([form.elements.td_period, 'Je ne trouve pas d’année : écris par exemple « 1853-1862 ».']);
+                if (!td.media || !td.img) errs.push([form.elements.td_media, i18n('Choisis la photo de la table.')]);
+                if (td.period.trim() && !period()) errs.push([form.elements.td_period, i18n('Je ne trouve pas d’année : écris par exemple « 1853-1862 ».')]);
                 if (errs.length) { if (U.formErrors) U.formErrors(form, errs); else toast(errs[0][1], 'error'); return; }
                 return go(2);
             }
             if (td.step === 2) {
-                if (!td.cols.some(c => c[2] === 'nom' || c[2] === 'prenoms')) return toast('Donne au moins une colonne « Nom » ou « Prénoms ».', 'error');
+                if (!td.cols.some(c => c[2] === 'nom' || c[2] === 'prenoms')) return toast(i18n('Donne au moins une colonne « Nom » ou « Prénoms ».'), 'error');
                 if (!td.rows.length) td.rows = detectRows(td.img, td.top, td.bottom, td.left, td.right);
                 if (!td.rows.length) td.rows = evenRows(td.top, td.bottom, 20);
                 return go(3);
             }
             if (td.step === 3) { if (!td.cells.length) startManual(); return go(4); }
-            if (td.step === 4) { readGrid(); if (!td.cells.some(c => c.nom || c.prenoms)) return toast('Aucune ligne avec un nom : saisis au moins un nom, ou reviens à la lecture.', 'error'); return go(5); }
+            if (td.step === 4) { readGrid(); if (!td.cells.some(c => c.nom || c.prenoms)) return toast(i18n('Aucune ligne avec un nom : saisis au moins un nom, ou reviens à la lecture.'), 'error'); return go(5); }
             if (td.step === 5) { if (td.digestId) { dlg.close(); return; } return create(); }
         }
 
@@ -179,17 +180,17 @@
             const pk = P(), placeVal = td.place ? (td.place.id ? {id: td.place.id, title: td.place.title, kind: 'place'} : `txt:${td.place.title}`) : null;
             body.innerHTML = `<div class="h-td-s1">
                 <div class="h-td-s1-form">
-                    <div><span class="pk-lab">La photo de la table</span>${pk.mediaField ? pk.mediaField({name: 'td_media', types: ['image'], value: td.media, title: 'La photo de la table décennale', okLabel: 'Prendre cette photo'}) : ''}<small class="muted">Une page (ou une double page) photographiée bien à plat ; une image de l’ordinateur entre dans les Médias.</small></div>
+                    <div><span class="pk-lab">${i18n('La photo de la table')}</span>${pk.mediaField ? pk.mediaField({name: 'td_media', types: ['image'], value: td.media, title: i18n('La photo de la table décennale'), okLabel: i18n('Prendre cette photo')}) : ''}<small class="muted">${i18n('Une page (ou une double page) photographiée bien à plat ; une image de l’ordinateur entre dans les Médias.')}</small></div>
                     <div class="pk-host"><span class="pk-lab">Commune</span>${pk.pickerField ? pk.pickerField({name: 'td_place', kind: 'place', allowFree: true, value: placeVal}) : ''}</div>
-                    <label>Période de la table<input name="td_period" value="${esc(td.period)}" placeholder="1853-1862, 1793-an X…" autocomplete="off"><small class="muted" data-td-period-help></small></label>
-                    <label>Sorte d’actes<select name="td_kind">${KINDS.map(([k, l]) => `<option value="${k}" ${td.kind === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
-                    <div><span class="pk-lab">L’écriture</span><div class="segmented h-td-writing" role="group" aria-label="L’écriture de la table"><button type="button" data-td-writing="print" class="${td.writing === 'print' ? 'is-active' : ''}">🖨 Imprimée ou tapée</button><button type="button" data-td-writing="hand" class="${td.writing === 'hand' ? 'is-active' : ''}">✍ À la main</button></div></div>
+                    <label>${i18n('Période de la table')}<input name="td_period" value="${esc(td.period)}" placeholder="1853-1862, 1793-an X…" autocomplete="off"><small class="muted" data-td-period-help></small></label>
+                    <label>${i18n('Sorte d’actes')}<select name="td_kind">${KINDS.map(([k, l]) => `<option value="${k}" ${td.kind === k ? 'selected' : ''}>${esc(i18n(l))}</option>`).join('')}</select></label>
+                    <div><span class="pk-lab">L’écriture</span><div class="segmented h-td-writing" role="group" aria-label="${esc(i18n('L’écriture de la table'))}"><button type="button" data-td-writing="print" class="${td.writing === 'print' ? 'is-active' : ''}">🖨 ${i18n('Imprimée ou tapée')}</button><button type="button" data-td-writing="hand" class="${td.writing === 'hand' ? 'is-active' : ''}">✍ ${i18n('À la main')}</button></div></div>
                     <label data-td-langwrap>Langue<select name="td_lang">${[['fra', 'Français'], ['lat', 'Latin'], ['fra+lat', 'Français + latin'], ['eng', 'Anglais'], ['deu', 'Allemand'], ['ita', 'Italien'], ['spa', 'Espagnol']].map(([k, l]) => `<option value="${k}" ${td.lang === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
                     <div class="h-td-two"><label>Archives<input name="td_service" value="${esc(td.service)}" placeholder="AD 19…"></label><label>Cote<input name="td_cote" value="${esc(td.cote)}" placeholder="2 E 123…"></label></div>
                 </div>
-                <figure class="h-td-s1-prev">${td.img ? `<img src="media/${esc(encodeURIComponent(td.media.filename))}" alt="">` : (A().emptyState ? A().emptyState({icon: '📑', text: 'Choisis la photo de la table', hint: 'Dans tes médias, ou depuis l’ordinateur (glisser, coller, importer).', action: {label: '🖼 Choisir la photo', attrs: 'data-td-pick'}}) : '')}</figure>
+                <figure class="h-td-s1-prev">${td.img ? `<img src="media/${esc(encodeURIComponent(td.media.filename))}" alt="">` : (A().emptyState ? A().emptyState({icon: '📑', text: i18n('Choisis la photo de la table'), hint: i18n('Dans tes médias, ou depuis l’ordinateur (glisser, coller, importer).'), action: {label: '🖼 ' + i18n('Choisir la photo'), attrs: 'data-td-pick'}}) : '')}</figure>
             </div>`;
-            const help = () => { const p = period(), h = body.querySelector('[data-td-period-help]'); if (h) h.textContent = !td.period.trim() ? 'Facultatif : sert à compléter les dates sans année et à repérer celles qui sortent de la table.' : p ? `✓ Compris : de ${p.y1} à ${p.y2}` : '⚠️ Je ne trouve pas d’année.'; };
+            const help = () => { const p = period(), h = body.querySelector('[data-td-period-help]'); if (h) h.textContent = !td.period.trim() ? i18n('Facultatif : sert à compléter les dates sans année et à repérer celles qui sortent de la table.') : p ? i18n('✓ Compris : de {a} à {b}', {a: String(p.y1), b: String(p.y2)}) : i18n('⚠️ Je ne trouve pas d’année.'); };
             help();
             body.querySelector('[data-td-langwrap]').hidden = td.writing !== 'print';
             body.addEventListener('input', e => { const n = e.target.name; if (n === 'td_period') { td.period = e.target.value; help(); } if (n === 'td_service') td.service = e.target.value; if (n === 'td_cote') td.cote = e.target.value; }, sig);
@@ -207,15 +208,15 @@
             const all = [...TEMPLATES, ...myTemplates().map((t, i) => ({...t, key: `my${i}`, mine: true}))];
             body.innerHTML = `<div class="h-td-s2">
                 <div class="h-td-tools">
-                    <label>Gabarit<select data-td-tpl>${all.map(t => `<option value="${esc(t.key)}" ${t.key === td.template ? 'selected' : ''}>${t.mine ? '⭐ ' : ''}${esc(t.label)}</option>`).join('')}<option value="" ${td.template ? '' : 'selected'}>Mes réglages (glissés)</option></select></label>
-                    <button type="button" class="button small secondary" data-td-addcol title="Couper la colonne la plus large en deux">＋ Colonne</button><button type="button" class="button small secondary" data-td-delcol title="Retirer la dernière colonne">− Colonne</button>
-                    <button type="button" class="button small secondary" data-td-keep title="Garder ces colonnes pour une prochaine table (sur cet ordinateur)">⭐ Garder ce gabarit</button>
+                    <label>Gabarit<select data-td-tpl>${all.map(t => `<option value="${esc(t.key)}" ${t.key === td.template ? 'selected' : ''}>${t.mine ? '⭐ ' : ''}${esc(t.mine ? t.label : i18n(t.label))}</option>`).join('')}<option value="" ${td.template ? '' : 'selected'}>${i18n('Mes réglages (glissés)')}</option></select></label>
+                    <button type="button" class="button small secondary" data-td-addcol title="${esc(i18n('Couper la colonne la plus large en deux'))}">＋ ${i18n('Colonne')}</button><button type="button" class="button small secondary" data-td-delcol title="${esc(i18n('Retirer la dernière colonne'))}">− ${i18n('Colonne')}</button>
+                    <button type="button" class="button small secondary" data-td-keep title="${esc(i18n('Garder ces colonnes pour une prochaine table (sur cet ordinateur)'))}">⭐ ${i18n('Garder ce gabarit')}</button>
                     <span class="spacer"></span>
-                    <button type="button" class="button small" data-td-rows title="Chercher les lignes d’écriture entre le trait du haut et celui du bas">↧ Repérer les lignes</button>
-                    <label class="h-td-nrows">Lignes <input type="number" min="1" max="200" data-td-nrows value="${td.rows.length || ''}" placeholder="—" title="Nombre de lignes : la zone est coupée en parts égales"></label>
+                    <button type="button" class="button small" data-td-rows title="${esc(i18n('Chercher les lignes d’écriture entre le trait du haut et celui du bas'))}">↧ ${i18n('Repérer les lignes')}</button>
+                    <label class="h-td-nrows">${i18n('Lignes')} <input type="number" min="1" max="200" data-td-nrows value="${td.rows.length || ''}" placeholder="—" title="${esc(i18n('Nombre de lignes : la zone est coupée en parts égales'))}"></label>
                 </div>
-                <p class="muted small h-td-help">Glisse les <b class="h-td-k-col">traits bleus</b> pour séparer les colonnes et choisis ce que contient chacune ; les <b class="h-td-k-band">traits orange</b> bornent la zone à lire (sous les titres, au-dessus du bas de page). Puis « ↧ Repérer les lignes ».</p>
-                <div class="h-td-stage" data-td-stage><div class="h-td-imgbox" data-td-imgbox><img src="media/${esc(encodeURIComponent(td.media.filename))}" alt="La table décennale" draggable="false"><div class="h-td-ov" data-td-ov></div></div></div>
+                <p class="muted small h-td-help">${i18n('Glisse les <b class="h-td-k-col">traits bleus</b> pour séparer les colonnes et choisis ce que contient chacune ; les <b class="h-td-k-band">traits orange</b> bornent la zone à lire (sous les titres, au-dessus du bas de page). Puis « ↧ Repérer les lignes ».')}</p>
+                <div class="h-td-stage" data-td-stage><div class="h-td-imgbox" data-td-imgbox><img src="media/${esc(encodeURIComponent(td.media.filename))}" alt="${esc(i18n('La table décennale'))}" draggable="false"><div class="h-td-ov" data-td-ov></div></div></div>
             </div>`;
             paintOverlay();
         }
@@ -225,8 +226,8 @@
             const cols = td.cols, bounds = [cols[0][0], ...cols.map(c => c[1])];
             ov.innerHTML = `<div class="h-td-zone" style="left:${pc(cols[0][0])};right:${pc(1 - cols[cols.length - 1][1])};top:${pc(td.top)};bottom:${pc(1 - td.bottom)}"></div>
                 ${td.rows.map((r, i) => `<div class="h-td-row${i % 2 ? ' is-odd' : ''}" style="left:${pc(cols[0][0])};right:${pc(1 - cols[cols.length - 1][1])};top:${pc(r.y0)};height:${pc(r.y1 - r.y0)}"></div>`).join('')}
-                ${bounds.map((x, i) => `<div class="h-td-vline" data-td-v="${i}" style="left:${pc(x)}" title="Glisser pour déplacer" role="slider" aria-label="Séparation de colonne ${i + 1}" aria-valuenow="${Math.round(x * 100)}" tabindex="0"></div>`).join('')}
-                <div class="h-td-hline" data-td-h="top" style="top:${pc(td.top)}" title="Haut de la zone à lire" role="slider" aria-label="Haut de la zone à lire" tabindex="0"></div><div class="h-td-hline" data-td-h="bottom" style="top:${pc(td.bottom)}" title="Bas de la zone à lire" role="slider" aria-label="Bas de la zone à lire" tabindex="0"></div>
+                ${bounds.map((x, i) => `<div class="h-td-vline" data-td-v="${i}" style="left:${pc(x)}" title="${esc(i18n('Glisser pour déplacer'))}" role="slider" aria-label="${esc(i18n('Séparation de colonne {n}', {n: i + 1}))}" aria-valuenow="${Math.round(x * 100)}" tabindex="0"></div>`).join('')}
+                <div class="h-td-hline" data-td-h="top" style="top:${pc(td.top)}" title="${esc(i18n('Haut de la zone à lire'))}" role="slider" aria-label="${esc(i18n('Haut de la zone à lire'))}" tabindex="0"></div><div class="h-td-hline" data-td-h="bottom" style="top:${pc(td.bottom)}" title="${esc(i18n('Bas de la zone à lire'))}" role="slider" aria-label="${esc(i18n('Bas de la zone à lire'))}" tabindex="0"></div>
                 ${cols.map((c, i) => `<label class="h-td-colrole" style="left:${pc(c[0])};width:${pc(c[1] - c[0])};top:${pc(Math.max(0, td.top - .045))}"><select data-td-role="${i}" aria-label="Colonne ${i + 1}">${ROLES.map(([k, l]) => `<option value="${k}" ${c[2] === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>`).join('')}`;
             const n = body.querySelector('[data-td-nrows]'); if (n && document.activeElement !== n) n.value = td.rows.length || '';
         }
@@ -271,13 +272,13 @@
             if (td.step !== 2) return; const b = e.target.closest('button'); if (!b) return;
             if (b.hasAttribute('data-td-addcol')) { if (td.cols.length >= 12) return; let w = -1, k = 0; td.cols.forEach((c, i) => { if (c[1] - c[0] > w) { w = c[1] - c[0]; k = i; } }); const c = td.cols[k], m = (c[0] + c[1]) / 2; td.cols.splice(k, 1, [c[0], m, c[2]], [m, c[1], 'ignore']); td.template = ''; td.cells = []; paintOverlay(); }
             else if (b.hasAttribute('data-td-delcol')) { if (td.cols.length <= 1) return; const last = td.cols.pop(); td.cols[td.cols.length - 1][1] = last[1]; td.template = ''; td.cells = []; paintOverlay(); }
-            else if (b.hasAttribute('data-td-rows')) { td.rows = detectRows(td.img, td.top, td.bottom, td.left, td.right); td.cells = []; td.read = ''; paintOverlay(); toast(td.rows.length ? `${plural(td.rows.length, 'ligne repérée', 'lignes repérées')} : vérifie qu’elles tombent bien sur l’écriture.` : 'Aucune ligne repérée : ajuste les traits orange, ou indique le nombre de lignes.', td.rows.length ? '' : 'error'); }
+            else if (b.hasAttribute('data-td-rows')) { td.rows = detectRows(td.img, td.top, td.bottom, td.left, td.right); td.cells = []; td.read = ''; paintOverlay(); toast(td.rows.length ? i18n('{lines} : vérifie qu’elles tombent bien sur l’écriture.', {lines: plural(td.rows.length, 'ligne repérée', 'lignes repérées')}) : i18n('Aucune ligne repérée : ajuste les traits orange, ou indique le nombre de lignes.'), td.rows.length ? '' : 'error'); }
             else if (b.hasAttribute('data-td-keep')) {
-                const name = await A().askText?.({title: 'Garder ce gabarit', message: 'Son nom (il sera proposé pour tes prochaines tables, sur cet ordinateur) :', value: '', okLabel: 'Garder'}); if (!name?.trim()) return;
+                const name = await A().askText?.({title: i18n('Garder ce gabarit'), message: i18n('Son nom (il sera proposé pour tes prochaines tables, sur cet ordinateur) :'), value: '', okLabel: i18n('Garder')}); if (!name?.trim()) return;
                 const l = td.cols[0][0], w = (td.cols[td.cols.length - 1][1] - l) || 1, list = myTemplates();
                 list.push({label: name.trim().slice(0, 80), cols: td.cols.map(c => [+((c[0] - l) / w).toFixed(4), +((c[1] - l) / w).toFixed(4), c[2]])});
                 try { localStorage.setItem(MY_KEY, JSON.stringify(list.slice(-30))); } catch (_) {}
-                td.template = `my${list.length - 1}`; step2(); toast(`Gabarit « ${name.trim()} » gardé.`);
+                td.template = `my${list.length - 1}`; step2(); toast(i18n('Gabarit « {name} » gardé.', {name: name.trim()}));
             }
         }, sig);
 
@@ -289,17 +290,17 @@
             const hand = td.writing === 'hand';
             body.innerHTML = `<div class="h-td-s3"><div data-td-read class="h-td-read">${UI().spinner ? UI().spinner('Préparation…') : 'Préparation…'}</div></div>`;
             const box = body.querySelector('[data-td-read]');
-            const manualBtn = '<button type="button" class="button" data-td-manual>✍ Saisir les lignes à la main</button>';
+            const manualBtn = `<button type="button" class="button" data-td-manual>${i18n('✍ Saisir les lignes à la main')}</button>`;
             const say = (kind, msg, extra = '') => { box.innerHTML = `${UI().notice ? UI().notice(kind, msg) : `<p>${esc(msg)}</p>`}<div class="h-td-row-actions">${extra}</div>`; };
             box.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; if (b.hasAttribute('data-td-manual')) { startManual(); go(4); } if (b.hasAttribute('data-td-run')) runRead(); if (b.hasAttribute('data-td-stop')) td.stop = true; }, sig);
-            if (td.cells.length && td.read) { say('ok', `${plural(td.cells.length, 'ligne déjà lue', 'lignes déjà lues')} : passe à la relecture, ou relis l’image.`, `<button type="button" class="button secondary" data-td-run>↻ Relire l’image</button>${manualBtn}`); return; }
+            if (td.cells.length && td.read) { say('ok', i18n('{lines} : passe à la relecture, ou relis l’image.', {lines: plural(td.cells.length, 'ligne déjà lue', 'lignes déjà lues')}), `<button type="button" class="button secondary" data-td-run>${i18n('↻ Relire l’image')}</button>${manualBtn}`); return; }
             if (hand) {
                 let ready = false; try { ready = !!(await api('htr_setup_status')).ready; } catch (_) {}
                 if (td.step !== 3) return;
-                if (!ready) { say('info', 'Le lecteur d’écriture manuscrite (HTR) n’est pas installé sur cet ordinateur : la saisie se fait à la main, dans une grille rapide, la bande de chaque ligne sous les yeux. (Pour l’installer : Réglages → Reconnaissance d’écriture.)', manualBtn); return; }
-                say('info', `${plural(td.rows.length, 'ligne', 'lignes')} à lire avec le lecteur d’écriture manuscrite (HTR) : chaque case est envoyée au lecteur installé sur cet ordinateur. C’est plus lent, et à relire attentivement.`, `<button type="button" class="button" data-td-run>▶ Lire les lignes</button>${manualBtn}`); return;
+                if (!ready) { say('info', i18n('Le lecteur d’écriture manuscrite (HTR) n’est pas installé sur cet ordinateur : la saisie se fait à la main, dans une grille rapide, la bande de chaque ligne sous les yeux. (Pour l’installer : Réglages → Reconnaissance d’écriture.)'), manualBtn); return; }
+                say('info', i18n('{lines} à lire avec le lecteur d’écriture manuscrite (HTR) : chaque case est envoyée au lecteur installé sur cet ordinateur. C’est plus lent, et à relire attentivement.', {lines: plural(td.rows.length, 'ligne', 'lignes')}), `<button type="button" class="button" data-td-run>${i18n('▶ Lire les lignes')}</button>${manualBtn}`); return;
             }
-            say('info', `${plural(td.rows.length, 'ligne', 'lignes')} à lire, ${plural(roleCols().length, 'colonne', 'colonnes')}. La lecture se fait sur cet ordinateur (le moteur est téléchargé une fois, et vérifié).`, `<button type="button" class="button" data-td-run>▶ Lire les lignes</button>${manualBtn}`);
+            say('info', i18n('{lines} à lire, {cols}. La lecture se fait sur cet ordinateur (le moteur est téléchargé une fois, et vérifié).', {lines: plural(td.rows.length, 'ligne', 'lignes'), cols: plural(roleCols().length, 'colonne', 'colonnes')}), `<button type="button" class="button" data-td-run>${i18n('▶ Lire les lignes')}</button>${manualBtn}`);
             runRead();
         }
         const progress = (i, n, what) => { const box = body.querySelector('[data-td-read]'); if (!box) return; box.innerHTML = `<div class="h-td-prog"><div>${UI().spinner ? UI().spinner(what) : esc(what)}</div><div class="h-pc-meter"><i style="width:${n ? Math.round(i / n * 100) : 0}%"></i></div><small class="muted">${i} / ${n}</small> <button type="button" class="button small secondary" data-td-stop>■ Arrêter</button></div>`; };
@@ -317,10 +318,10 @@
                         put(cells[ri], c.role, String(res.result?.text || res.text || '').replace(/\s+/g, ' ').trim(), null);
                     }
                 } else {
-                    progress(0, 1, 'Chargement du moteur de lecture…');
+                    progress(0, 1, i18n('Chargement du moteur de lecture…'));
                     const T = await A().loadOcrEngine();
                     if (td.stop) throw Object.assign(new Error('Lecture arrêtée.'), {stopped: true});
-                    progress(0, 1, 'Lecture de la table…');
+                    progress(0, 1, i18n('Lecture de la table…'));
                     const rh = td.rows.length ? (td.rows.reduce((s, r) => s + (r.y1 - r.y0), 0) / td.rows.length) * td.img.naturalHeight : 30;
                     const can = cropCanvas(td.img, td.left, td.top, td.right, td.bottom, {minH: rh ? (td.bottom - td.top) * td.img.naturalHeight * clamp(44 / rh, 1, 3) : 0, gray: true});
                     const worker = await T.createWorker(td.lang, 1);
@@ -340,13 +341,13 @@
                 }
                 td.cells = cells; td.read = hand ? 'htr' : 'ocr';
                 const got = cells.filter(c => c.nom || c.prenoms).length;
-                toast(`${plural(got, 'ligne lue', 'lignes lues')} sur ${td.rows.length} : relis et corrige.`);
+                toast(i18n('{lines} sur {n} : relis et corrige.', {lines: plural(got, 'ligne lue', 'lignes lues'), n: td.rows.length}));
                 td.busy = false; go(4);
             } catch (err) {
                 td.busy = false; paintSteps();
-                if (err.stopped) { const box = body.querySelector('[data-td-read]'); if (box) box.innerHTML = `${UI().notice ? UI().notice('info', 'Lecture arrêtée.') : ''}<div class="h-td-row-actions"><button type="button" class="button secondary" data-td-run>▶ Reprendre la lecture</button><button type="button" class="button" data-td-manual>✍ Saisir les lignes à la main</button></div>`; return; }
-                const msg = hand ? `Le lecteur d’écriture manuscrite n’a pas pu lire la table (${err.message || 'erreur'}).` : `${err.message || 'Le moteur de lecture n’a pas pu être chargé.'}`;
-                const box = body.querySelector('[data-td-read]'); if (box) box.innerHTML = `${UI().notice ? UI().notice('warn', `${msg} La saisie à la main reste possible : la bande de chaque ligne s’affiche au-dessus de la grille.`) : esc(msg)}<div class="h-td-row-actions"><button type="button" class="button secondary" data-td-run>↻ Réessayer</button><button type="button" class="button" data-td-manual>✍ Saisir les lignes à la main</button></div>`;
+                if (err.stopped) { const box = body.querySelector('[data-td-read]'); if (box) box.innerHTML = `${UI().notice ? UI().notice('info', i18n('Lecture arrêtée.')) : ''}<div class="h-td-row-actions"><button type="button" class="button secondary" data-td-run>${i18n('▶ Reprendre la lecture')}</button><button type="button" class="button" data-td-manual>${i18n('✍ Saisir les lignes à la main')}</button></div>`; return; }
+                const msg = hand ? i18n('Le lecteur d’écriture manuscrite n’a pas pu lire la table ({err}).', {err: err.message || i18n('erreur')}) : `${err.message || i18n('Le moteur de lecture n’a pas pu être chargé.')}`;
+                const box = body.querySelector('[data-td-read]'); if (box) box.innerHTML = `${UI().notice ? UI().notice('warn', `${msg} ${i18n('La saisie à la main reste possible : la bande de chaque ligne s’affiche au-dessus de la grille.')}`) : esc(msg)}<div class="h-td-row-actions"><button type="button" class="button secondary" data-td-run>↻ ${i18n('Réessayer')}</button><button type="button" class="button" data-td-manual>${i18n('✍ Saisir les lignes à la main')}</button></div>`;
             }
         }
         function put(cell, role, text, conf) {
@@ -361,36 +362,37 @@
             let prev = 0; for (let k = i - 1; k >= 0; k--) { const d = rowDate(td.cells[k].date, {annee: td.cells[k].annee, period: period()}); if (d.year) { prev = d.year; break; } }
             return rowDate(td.cells[i].date, {annee: td.cells[i].annee, prevYear: prev, period: period()});
         }
-        const dateHelp = d => (d.empty ? '' : d.ok ? `${d.warn ? '⚠️' : '✓'} ${esc(d.label)}${d.warn ? ` <span class="h-td-warn">— ${esc(d.warn)}</span>` : ''}` : `⚠️ ${esc(d.warn || 'date à vérifier')}`);
+        const warnTx = w => { const m = /^hors de la période de la table \((.+)\)$/.exec(w); return m ? i18n('hors de la période de la table ({years})', {years: m[1]}) : i18n(w); };
+        const dateHelp = d => (d.empty ? '' : d.ok ? `${d.warn ? '⚠️' : '✓'} ${esc(d.label)}${d.warn ? ` <span class="h-td-warn">— ${esc(warnTx(d.warn))}</span>` : ''}` : `⚠️ ${esc(warnTx(d.warn || 'date à vérifier'))}`);
         const kindOpts = v => `<option value="">—</option>${Object.entries(ACT).map(([k, l]) => `<option value="${k}" ${v === k ? 'selected' : ''}>${l}</option>`).join('')}`;
         function step4() {
             const hasAnnee = td.cols.some(c => c[2] === 'annee'), hasNotes = td.cols.some(c => c[2] === 'notes');
             body.innerHTML = `<div class="h-td-s4">
-                <div class="h-td-s4-img" data-td-s4img><div class="h-td-imgbox"><img src="media/${esc(encodeURIComponent(td.media.filename))}" alt="La table décennale" draggable="false"><div class="h-td-ov" data-td-ov4></div></div></div>
+                <div class="h-td-s4-img" data-td-s4img><div class="h-td-imgbox"><img src="media/${esc(encodeURIComponent(td.media.filename))}" alt="${esc(i18n('La table décennale'))}" draggable="false"><div class="h-td-ov" data-td-ov4></div></div></div>
                 <div class="h-td-s4-grid">
-                    <div class="h-td-strip-wrap"><span class="pk-lab" data-td-strip-lab>La ligne sur l’image</span><canvas class="h-td-strip" data-td-strip height="60"></canvas></div>
-                    <p class="muted small">${td.read === 'manual' ? 'Saisis chaque ligne en regardant la bande au-dessus. ' : 'Ce que l’app a lu : corrige ce qui est faux (les cases peu sûres sont en jaune). '}Entrée ou ↓ : ligne suivante ; ↑ : ligne d’avant. Les dates sans année prennent l’année de la ligne d’avant${period() ? ` (table de ${period().y1} à ${period().y2})` : ''}.</p>
-                    <div class="h-td-gridwrap"><table class="data-table h-td-grid"><thead><tr><th>N°</th><th>Nom</th><th>Prénoms</th>${hasAnnee ? '<th>Année</th>' : ''}<th>Date</th><th>Sorte</th>${hasNotes ? '<th>N° / notes</th>' : ''}<th></th></tr></thead><tbody data-td-tbody></tbody></table></div>
-                    <div class="h-td-row-actions"><button type="button" class="button small secondary" data-td-addrow>＋ Ajouter une ligne</button><span class="muted small" data-td-count></span></div>
+                    <div class="h-td-strip-wrap"><span class="pk-lab" data-td-strip-lab>${i18n('La ligne sur l’image')}</span><canvas class="h-td-strip" data-td-strip height="60"></canvas></div>
+                    <p class="muted small">${td.read === 'manual' ? i18n('Saisis chaque ligne en regardant la bande au-dessus.') : i18n('Ce que l’app a lu : corrige ce qui est faux (les cases peu sûres sont en jaune).')} ${period() ? i18n('Entrée ou ↓ : ligne suivante ; ↑ : ligne d’avant. Les dates sans année prennent l’année de la ligne d’avant (table de {a} à {b}).', {a: String(period().y1), b: String(period().y2)}) : i18n('Entrée ou ↓ : ligne suivante ; ↑ : ligne d’avant. Les dates sans année prennent l’année de la ligne d’avant.')}</p>
+                    <div class="h-td-gridwrap"><table class="data-table h-td-grid"><thead><tr><th>${i18n('N°')}</th><th>${i18n('Nom')}</th><th>${i18n('Prénoms')}</th>${hasAnnee ? `<th>${i18n('Année')}</th>` : ''}<th>${i18n('Date')}</th><th>${i18n('Sorte')}</th>${hasNotes ? `<th>${i18n('N° / notes')}</th>` : ''}<th></th></tr></thead><tbody data-td-tbody></tbody></table></div>
+                    <div class="h-td-row-actions"><button type="button" class="button small secondary" data-td-addrow>＋ ${i18n('Ajouter une ligne')}</button><span class="muted small" data-td-count></span></div>
                 </div></div>`;
             const tb = body.querySelector('[data-td-tbody]');
             tb.innerHTML = td.cells.map((c, i) => {
                 const d = dateInfo(i), low = c.conf != null && c.conf < 60 ? ' is-unsure' : '';
-                return `<tr data-td-i="${i}"><td class="h-td-n">${i + 1}</td><td><input data-td-k="nom" class="h-td-nom${low}" value="${esc(c.nom)}" aria-label="Nom, ligne ${i + 1}"></td><td><input data-td-k="prenoms" class="${low.trim()}" value="${esc(c.prenoms)}" aria-label="Prénoms, ligne ${i + 1}"></td>${hasAnnee ? `<td><input data-td-k="annee" class="h-td-annee" value="${esc(c.annee)}" aria-label="Année, ligne ${i + 1}"></td>` : ''}<td><input data-td-k="date" value="${esc(c.date)}" aria-label="Date, ligne ${i + 1}" placeholder="12 mars, 12/03/1855…"><small class="h-td-dh ${d.ok && !d.warn ? 'is-ok' : d.empty ? '' : 'is-warn'}" data-td-dh>${dateHelp(d)}</small></td><td><select data-td-k="sorte" aria-label="Sorte d’acte, ligne ${i + 1}">${kindOpts(c.sorte)}</select></td>${hasNotes ? `<td><input data-td-k="notes" value="${esc(c.notes)}" aria-label="Notes, ligne ${i + 1}"></td>` : ''}<td><button type="button" class="icon-button small" data-td-delrow title="Retirer cette ligne" aria-label="Retirer la ligne ${i + 1}">✕</button></td></tr>`;
-            }).join('') || `<tr><td colspan="8">${A().empty ? A().empty('Aucune ligne : « ＋ Ajouter une ligne ».', {icon: '📑'}) : ''}</td></tr>`;
+                return `<tr data-td-i="${i}"><td class="h-td-n">${i + 1}</td><td><input data-td-k="nom" class="h-td-nom${low}" value="${esc(c.nom)}" aria-label="${esc(i18n('Nom, ligne {n}', {n: i + 1}))}"></td><td><input data-td-k="prenoms" class="${low.trim()}" value="${esc(c.prenoms)}" aria-label="${esc(i18n('Prénoms, ligne {n}', {n: i + 1}))}"></td>${hasAnnee ? `<td><input data-td-k="annee" class="h-td-annee" value="${esc(c.annee)}" aria-label="${esc(i18n('Année, ligne {n}', {n: i + 1}))}"></td>` : ''}<td><input data-td-k="date" value="${esc(c.date)}" aria-label="${esc(i18n('Date, ligne {n}', {n: i + 1}))}" placeholder="${esc(i18n('12 mars, 12/03/1855…'))}"><small class="h-td-dh ${d.ok && !d.warn ? 'is-ok' : d.empty ? '' : 'is-warn'}" data-td-dh>${dateHelp(d)}</small></td><td><select data-td-k="sorte" aria-label="${esc(i18n('Sorte d’acte, ligne {n}', {n: i + 1}))}">${kindOpts(c.sorte)}</select></td>${hasNotes ? `<td><input data-td-k="notes" value="${esc(c.notes)}" aria-label="${esc(i18n('Notes, ligne {n}', {n: i + 1}))}"></td>` : ''}<td><button type="button" class="icon-button small" data-td-delrow title="${esc(i18n('Retirer cette ligne'))}" aria-label="${esc(i18n('Retirer la ligne {n}', {n: i + 1}))}">✕</button></td></tr>`;
+            }).join('') || `<tr><td colspan="8">${A().empty ? A().empty(i18n('Aucune ligne : « ＋ Ajouter une ligne ».'), {icon: '📑'}) : ''}</td></tr>`;
             count(); paintOv4(); paintStrip();
             const first = tb.querySelector(`tr[data-td-i="${td.cur}"] input`) || tb.querySelector('input'); first?.focus({preventScroll: true});
         }
-        const count = () => { const n = td.cells.filter(c => c.nom || c.prenoms).length, el = body.querySelector('[data-td-count]'); if (el) el.textContent = `${plural(n, 'ligne avec un nom', 'lignes avec un nom')} sur ${td.cells.length}`; };
+        const count = () => { const n = td.cells.filter(c => c.nom || c.prenoms).length, el = body.querySelector('[data-td-count]'); if (el) el.textContent = i18n('{lines} sur {n}', {lines: plural(n, 'ligne avec un nom', 'lignes avec un nom'), n: td.cells.length}); };
         function paintOv4() {
             const ov = body.querySelector('[data-td-ov4]'); if (!ov) return; const pc = v => `${(v * 100).toFixed(3)}%`;
-            ov.innerHTML = td.cells.map((c, i) => `<div class="h-td-row${i === td.cur ? ' is-cur' : ''}${i % 2 ? ' is-odd' : ''}" data-td-zone="${i}" style="left:${pc(td.left)};right:${pc(1 - td.right)};top:${pc(c.y0)};height:${pc(Math.max(.004, c.y1 - c.y0))}" title="Ligne ${i + 1}"></div>`).join('');
+            ov.innerHTML = td.cells.map((c, i) => `<div class="h-td-row${i === td.cur ? ' is-cur' : ''}${i % 2 ? ' is-odd' : ''}" data-td-zone="${i}" style="left:${pc(td.left)};right:${pc(1 - td.right)};top:${pc(c.y0)};height:${pc(Math.max(.004, c.y1 - c.y0))}" title="${esc(i18n('Ligne {n}', {n: i + 1}))}"></div>`).join('');
             const z = ov.querySelector('.is-cur'); const wrap = body.querySelector('[data-td-s4img]');
             if (z && wrap) { const zr = z.getBoundingClientRect(), wr = wrap.getBoundingClientRect(); if (zr.top < wr.top || zr.bottom > wr.bottom) wrap.scrollTop += zr.top - wr.top - wr.height / 3; }
         }
         function paintStrip() {
             const cv = body.querySelector('[data-td-strip]'), c = td.cells[td.cur]; if (!cv || !td.img) return;
-            const lab = body.querySelector('[data-td-strip-lab]'); if (lab) lab.textContent = c ? `La ligne ${td.cur + 1} sur l’image` : 'La ligne sur l’image';
+            const lab = body.querySelector('[data-td-strip-lab]'); if (lab) lab.textContent = c ? i18n('La ligne {n} sur l’image', {n: td.cur + 1}) : i18n('La ligne sur l’image');
             const g = cv.getContext('2d'), wPx = cv.clientWidth || 600; cv.width = Math.round(wPx * (window.devicePixelRatio || 1));
             if (!c) { g.clearRect(0, 0, cv.width, cv.height); return; }
             const iw = td.img.naturalWidth, ih = td.img.naturalHeight, pad = (c.y1 - c.y0) * .25, y0 = Math.max(0, c.y0 - pad), y1 = Math.min(1, c.y1 + pad);
@@ -436,21 +438,21 @@
             if (td.digestId) return paintFiches();
             const rows = kept(), warn = rows.filter(c => { const d = dateInfo(c.i); return !d.empty && (!d.ok || d.warn); }).length;
             body.innerHTML = `<div class="h-td-s5">
-                <h3>Voilà ce qui va entrer</h3>
-                <ul class="h-td-sum"><li>📑 Un dépouillement <b>« ${esc(digestTitle())} »</b> (modèle « Table décennale »), dans Listes → Dépouillements et Recherche → Dépouillement d’archive ;</li>
-                <li>👥 <b>${plural(rows.length, 'ligne', 'lignes')}</b> relevée${rows.length > 1 ? 's' : ''} (nom, prénoms, date, sorte d’acte), chacune avec sa zone sur l’image ;</li>
-                <li>🖼 la photo de la table, reliée au dépouillement (page 1).</li></ul>
-                ${warn ? (UI().notice ? UI().notice('warn', `${plural(warn, 'date reste', 'dates restent')} à vérifier : elles sont gardées telles qu’écrites.`) : '') : ''}
-                <p class="muted">Ensuite, l’app te propose les fiches qui correspondent : relier ou créer, ligne par ligne.</p></div>`;
+                <h3>${i18n('Voilà ce qui va entrer')}</h3>
+                <ul class="h-td-sum"><li>📑 ${i18n('Un dépouillement <b>« {title} »</b> (modèle « Table décennale »), dans Listes → Dépouillements et Recherche → Dépouillement d’archive ;', {title: esc(digestTitle())})}</li>
+                <li>👥 ${i18n(rows.length > 1 ? '<b>{lines}</b> relevées (nom, prénoms, date, sorte d’acte), chacune avec sa zone sur l’image ;' : '<b>{lines}</b> relevée (nom, prénoms, date, sorte d’acte), chacune avec sa zone sur l’image ;', {lines: plural(rows.length, 'ligne', 'lignes')})}</li>
+                <li>🖼 ${i18n('la photo de la table, reliée au dépouillement (page 1).')}</li></ul>
+                ${warn ? (UI().notice ? UI().notice('warn', i18n('{dates} à vérifier : elles sont gardées telles qu’écrites.', {dates: plural(warn, 'date reste', 'dates restent')})) : '') : ''}
+                <p class="muted">${i18n('Ensuite, l’app te propose les fiches qui correspondent : relier ou créer, ligne par ligne.')}</p></div>`;
         }
         async function create() {
-            if (td.busy) return; readGrid(); const rows = kept(); if (!rows.length) return toast('Aucune ligne avec un nom.', 'error');
-            td.busy = true; paintSteps(); body.innerHTML = UI().spinner ? UI().spinner('Création du dépouillement…') : 'Création…';
+            if (td.busy) return; readGrid(); const rows = kept(); if (!rows.length) return toast(i18n('Aucune ligne avec un nom.'), 'error');
+            td.busy = true; paintSteps(); body.innerHTML = UI().spinner ? UI().spinner(i18n('Création du dépouillement…')) : i18n('Création…');
             const make = async () => {
                 const p = period();
                 const res = await post('save_archive_digest', {record_type: 'table_decennale', template_key: 'table', status: 'todo', city_name: td.place?.title || '', place_id: td.place?.id || 0, year_text: td.period.trim() || (p ? `${p.y1}-${p.y2}` : ''),
                     archive_service: td.service.trim(), archive_reference: td.cote.trim(), searched: '', found: '', notes: `Lue avec l’assistant « 📑 Lire une table décennale » (${td.read === 'ocr' ? 'lecture automatique, relue' : td.read === 'htr' ? 'écriture manuscrite lue automatiquement, relue' : 'saisie à la main'}). Sorte d’actes : ${kindLabel()}.`, page_total: 1});
-                const id = Number(res.result?.id || res.id); if (!id) throw new Error('Le dépouillement n’a pas pu être créé.');
+                const id = Number(res.result?.id || res.id); if (!id) throw new Error(i18n('Le dépouillement n’a pas pu être créé.'));
                 await post('link_archive_digest_media', {archive_digest_id: id, media_id: td.media.id, page_number: '1'});
                 const out = [];
                 for (const [n, c] of rows.entries()) {
@@ -469,7 +471,7 @@
                 const r = await make(); td.digestId = r.id; td.created = r.out;
                 const undo = async () => { await post('delete_archive_digest', {id: td.digestId}); td.digestId = 0; td.created = null; if (dlg.open) go(5); ext.lists?.depouillements && A().state.module === 'listes' && A().state.listType === 'depouillements' && A().renderList?.(); };
                 const redo = async () => { const again = await make(); td.digestId = again.id; td.created = again.out; if (dlg.open) { go(5); suggest(); } };
-                A().undoToast ? A().undoToast(`Dépouillement créé : ${plural(r.out.length, 'ligne', 'lignes')}`, {undo, redo, icon: '📑'}) : toast('Dépouillement créé.');
+                A().undoToast ? A().undoToast(i18n('Dépouillement créé : {lines}', {lines: plural(r.out.length, 'ligne', 'lignes')}), {undo, redo, icon: '📑'}) : toast(i18n('Dépouillement créé.'));
                 td.busy = false; go(5); suggest();
             } catch (err) { td.busy = false; toast(err.message || 'Création impossible.', 'error', {retry: create}); go(5); }
         }
@@ -490,18 +492,18 @@
         function ficheHtml(row, i) {
             const pk = P(), name = `${row.first} ${row.last}`.trim();
             const what = [ACT[row.act], row.date].filter(Boolean).join(' · ');
-            const state = row.personId ? `<span class="h-td-linked">${row.created ? '＋ Fiche créée' : '🔗 Reliée'} : <button type="button" class="link-button" data-open-person="${row.personId}">↗ ${esc(row.personName || name)}</button></span>`
+            const state = row.personId ? `<span class="h-td-linked">${row.created ? i18n('＋ Fiche créée') : i18n('🔗 Reliée')} : <button type="button" class="link-button" data-open-person="${row.personId}">↗ ${esc(row.personName || name)}</button></span>`
                 : `<div class="h-td-fpick">${pk.pickerField ? pk.pickerField({name: `td_p${i}`, kind: 'person', allowCreate: false, value: row.suggestion ? {id: row.suggestion.id, title: row.suggestion.title, kind: 'person'} : null}) : ''}</div>
-                   <button type="button" class="button small" data-td-link="${i}" title="Relier la ligne à la fiche choisie">🔗 Relier</button><button type="button" class="button small secondary" data-td-create="${i}" title="Créer la fiche ${esc(name)}${ACT[row.act] && row.act !== 'mariage' && row.dateOk ? ' avec son événement' : ''}">＋ Créer la fiche</button>`;
-            return `<li class="h-td-fiche" data-td-f="${i}"><div class="h-td-fname"><b>${esc(row.last.toLocaleUpperCase('fr'))}</b> ${esc(row.first)}<small class="muted">${esc(what)}${!row.personId && row.suggestion ? ' · fiche proposée' : ''}</small></div><div class="h-td-fact">${state}</div></li>`;
+                   <button type="button" class="button small" data-td-link="${i}" title="${esc(i18n('Relier la ligne à la fiche choisie'))}">🔗 ${i18n('Relier')}</button><button type="button" class="button small secondary" data-td-create="${i}" title="${esc(ACT[row.act] && row.act !== 'mariage' && row.dateOk ? i18n('Créer la fiche {name} avec son événement', {name}) : i18n('Créer la fiche {name}', {name}))}">＋ ${i18n('Créer la fiche')}</button>`;
+            return `<li class="h-td-fiche" data-td-f="${i}"><div class="h-td-fname"><b>${esc(row.last.toLocaleUpperCase('fr'))}</b> ${esc(row.first)}<small class="muted">${esc(what)}${!row.personId && row.suggestion ? ' · ' + i18n('fiche proposée') : ''}</small></div><div class="h-td-fact">${state}</div></li>`;
         }
         function paintFiche(row) { const i = td.created.indexOf(row), li = body.querySelector(`[data-td-f="${i}"]`); if (li) li.outerHTML = ficheHtml(row, i); }
         function paintFiches() {
             const rows = td.created || [], linkable = rows.filter(r => !r.personId && r.suggestion).length;
             body.innerHTML = `<div class="h-td-s5">
-                ${UI().notice ? UI().notice('ok', `Le dépouillement « ${esc(digestTitle())} » est créé avec ${plural(rows.length, 'ligne', 'lignes')}.`) : ''}
-                <div class="h-td-row-actions"><button type="button" class="button secondary" data-td-open>↗ Ouvrir le dépouillement</button><span class="spacer"></span><button type="button" class="button small" data-td-linkall ${linkable ? '' : 'disabled'}>🔗 Relier les fiches proposées${linkable ? ` (${linkable})` : ''}</button></div>
-                <h3>Les fiches</h3><p class="muted small">Pour chaque ligne : relie-la à une fiche de ta base (menu de choix), ou crée la fiche. Rien n’est obligatoire : la ligne reste dans le dépouillement.</p>
+                ${UI().notice ? UI().notice('ok', i18n('Le dépouillement « {title} » est créé avec {lines}.', {title: esc(digestTitle()), lines: plural(rows.length, 'ligne', 'lignes')})) : ''}
+                <div class="h-td-row-actions"><button type="button" class="button secondary" data-td-open>↗ ${i18n('Ouvrir le dépouillement')}</button><span class="spacer"></span><button type="button" class="button small" data-td-linkall ${linkable ? '' : 'disabled'}>🔗 ${i18n('Relier les fiches proposées')}${linkable ? ` (${linkable})` : ''}</button></div>
+                <h3>${i18n('Les fiches')}</h3><p class="muted small">${i18n('Pour chaque ligne : relie-la à une fiche de ta base (menu de choix), ou crée la fiche. Rien n’est obligatoire : la ligne reste dans le dépouillement.')}</p>
                 <ul class="h-td-fiches">${rows.map(ficheHtml).join('')}</ul></div>`;
         }
         async function linkRow(row, personId, title) {
@@ -511,7 +513,7 @@
         async function unlinkRow(row) { await post('save_archive_digest_person', {id: row.rowId, archive_digest_id: td.digestId, person_mode: 'manual', first_name: row.first, last_name: row.last, page_number: '1', personal_status: ACT[row.act] || '', extra_info: row.date}); row.personId = 0; row.created = false; }
         async function createRow(row) {
             const r = await post('save_archive_digest_person', {id: row.rowId, archive_digest_id: td.digestId, person_mode: 'create', first_name: row.first, last_name: row.last, page_number: '1', personal_status: ACT[row.act] || '', extra_info: row.date});
-            const pid = Number(r.result?.person_id || r.person_id); if (!pid) throw new Error('La fiche n’a pas pu être créée.');
+            const pid = Number(r.result?.person_id || r.person_id); if (!pid) throw new Error(i18n('La fiche n’a pas pu être créée.'));
             const slug = row.act === 'naissance' ? 'birth' : row.act === 'deces' ? 'death' : '';
             const type = slug ? (A().state.bootstrap?.eventTypes || []).find(t => t.slug === slug && t.scope === 'person') : null;
             if (type && row.dateOk) { try { await post('add_event', {person_id: pid, event_type_id: type.id, date_text: row.date, place_id: td.place?.id || '', description: `Relevé dans la table décennale${td.place?.title ? ` de ${td.place.title}` : ''}${td.period ? ` (${td.period})` : ''}.`}); } catch (_) {} }
@@ -527,20 +529,20 @@
                     const list = td.created.filter(r => !r.personId && r.suggestion); b.disabled = true;
                     for (const r of list) await linkRow(r, r.suggestion.id, r.suggestion.title);
                     paintFiches();
-                    A().undoToast?.(`${plural(list.length, 'ligne reliée', 'lignes reliées')} à sa fiche`, {undo: async () => { for (const r of list) await unlinkRow(r); if (td.step === 5) paintFiches(); }, redo: async () => { for (const r of list) await linkRow(r, r.suggestion.id, r.suggestion.title); if (td.step === 5) paintFiches(); }});
+                    A().undoToast?.(i18n('{lines} à sa fiche', {lines: plural(list.length, 'ligne reliée', 'lignes reliées')}), {undo: async () => { for (const r of list) await unlinkRow(r); if (td.step === 5) paintFiches(); }, redo: async () => { for (const r of list) await linkRow(r, r.suggestion.id, r.suggestion.title); if (td.step === 5) paintFiches(); }});
                     return;
                 }
                 if (!row) return;
                 if (b.hasAttribute('data-td-link')) {
                     const f = body.querySelector(`[data-td-f="${i}"] [data-picker], [data-td-f="${i}"] .pk`); const v = Number(body.querySelector(`[data-td-f="${i}"] input[name="td_p${i}"]`)?.value || 0);
-                    if (!v) { if (UI().fieldError && f) UI().fieldError(f, 'Choisis la fiche dans la liste (ou « ＋ Créer la fiche »).'); else toast('Choisis la fiche dans la liste.', 'error'); return; }
+                    if (!v) { if (UI().fieldError && f) UI().fieldError(f, i18n('Choisis la fiche dans la liste (ou « ＋ Créer la fiche »).')); else toast(i18n('Choisis la fiche dans la liste.'), 'error'); return; }
                     const title = body.querySelector(`[data-td-f="${i}"] .pk-chosen b, [data-td-f="${i}"] .pk-chip b`)?.textContent || '';
                     await linkRow(row, v, title); paintFiche(row);
-                    A().undoToast?.(`Ligne reliée à ${title || 'la fiche'}`, {undo: async () => { await unlinkRow(row); if (td.step === 5) paintFiche(row); }, redo: async () => { await linkRow(row, v, title); if (td.step === 5) paintFiche(row); }});
+                    A().undoToast?.(i18n('Ligne reliée à {name}', {name: title || i18n('la fiche')}), {undo: async () => { await unlinkRow(row); if (td.step === 5) paintFiche(row); }, redo: async () => { await linkRow(row, v, title); if (td.step === 5) paintFiche(row); }});
                 }
                 if (b.hasAttribute('data-td-create')) {
                     b.disabled = true; await createRow(row); paintFiche(row);
-                    A().undoToast?.(`Fiche créée : ${row.personName}`, {undo: async () => { const pid = row.personId; await post('delete_person', {id: pid}); row.personId = 0; row.created = false; await unlinkRow(row); if (td.step === 5) paintFiche(row); }, redo: async () => { await createRow(row); if (td.step === 5) paintFiche(row); }});
+                    A().undoToast?.(i18n('Fiche créée : {name}', {name: row.personName}), {undo: async () => { const pid = row.personId; await post('delete_person', {id: pid}); row.personId = 0; row.created = false; await unlinkRow(row); if (td.step === 5) paintFiche(row); }, redo: async () => { await createRow(row); if (td.step === 5) paintFiche(row); }});
                 }
             } catch (err) { toast(err.message || 'Impossible.', 'error'); b.disabled = false; }
         }, sig);

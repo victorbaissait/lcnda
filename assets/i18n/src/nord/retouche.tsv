@@ -1,0 +1,281 @@
+fr ¦ cs ¦ sv ¦ da
+Espace de travail « {name} » appliqué. ¦ Pracovní prostor „{name}“ použit. ¦ Arbetsytan ”{name}” tillämpad. ¦ Arbejdsområdet »{name}« anvendt.
+Réglages « {name} » importés : « Appliquer » pour les utiliser. ¦ Nastavení „{name}“ importováno: „Použít“ je zapne. ¦ Inställningarna ”{name}” importerade: ”Använd” för att använda dem. ¦ Indstillingerne »{name}« importeret: »Anvend« for at bruge dem.
+{layer} (avant / après) ¦ {layer} (před / po) ¦ {layer} (före / efter) ¦ {layer} (før / efter)
+Avant / après — {name} ¦ Před / po — {name} ¦ Före / efter — {name} ¦ Før / efter — {name}
+Modèle des visages : {what} ¦ Model obličejů: {what} ¦ Ansiktsmodell: {what} ¦ Ansigtsmodel: {what}
+Portrait de {name} (photo d’identité) ¦ Portrét {name} (průkazová fotka) ¦ Porträtt av {name} (passfoto) ¦ Portræt af {name} (pasfoto)
+Portrait (photo d’identité) ¦ Portrét (průkazová fotka) ¦ Porträtt (passfoto) ¦ Portræt (pasfoto)
+Fiche {num} ¦ Karta {num} ¦ Post {num} ¦ Post {num}
+⚠️ visage non trouvé sur « {name} » : cadrage au centre, à vérifier (ou identifie le visage dans la visionneuse) ¦ ⚠️ na „{name}“ nebyl nalezen obličej: ořez na střed, zkontroluj (nebo označ obličej v prohlížeči) ¦ ⚠️ inget ansikte hittades på ”{name}”: centrerad beskärning, kontrollera (eller identifiera ansiktet i visaren) ¦ ⚠️ intet ansigt fundet på »{name}«: centreret beskæring, kontrollér (eller identificér ansigtet i fremviseren)
+={n} portraits prêts : décoche ceux qui ne vont pas, puis « Utiliser comme portraits ». ¦ {n} portrét je připravený: odškrtni ho, pokud nesedí, pak „Použít jako portréty“.|{n} portréty jsou připravené: odškrtni ty, které nesedí, pak „Použít jako portréty“.|{n} portrétů je připraveno: odškrtni ty, které nesedí, pak „Použít jako portréty“. ¦ {n} porträtt klart: avmarkera det om det inte stämmer, sedan ”Använd som porträtt”.|{n} porträtt klara: avmarkera de som inte stämmer, sedan ”Använd som porträtt”. ¦ {n} portræt klar: fjern fluebenet, hvis det ikke passer, og så »Brug som portrætter«.|{n} portrætter klar: fjern fluebenet ved dem, der ikke passer, og så »Brug som portrætter«.
+={n} portrait prêt : décoche ceux qui ne vont pas, puis « Utiliser comme portraits ». ¦ {n} portrét je připravený: odškrtni ho, pokud nesedí, pak „Použít jako portréty“.|{n} portréty jsou připravené: odškrtni ty, které nesedí, pak „Použít jako portréty“.|{n} portrétů je připraveno: odškrtni ty, které nesedí, pak „Použít jako portréty“. ¦ {n} porträtt klart: avmarkera det om det inte stämmer, sedan ”Använd som porträtt”.|{n} porträtt klara: avmarkera de som inte stämmer, sedan ”Använd som porträtt”. ¦ {n} portræt klar: fjern fluebenet, hvis det ikke passer, og så »Brug som portrætter«.|{n} portrætter klar: fjern fluebenet ved dem, der ikke passer, og så »Brug som portrætter«.
+Aucun visage trouvé tout seul. ¦ Žádný obličej nebyl nalezen automaticky. ¦ Inget ansikte hittades automatiskt. ¦ Intet ansigt fundet automatisk.
+={n} autres sont cadrés au centre : coche-les seulement s’ils vont. ¦ {n} další je oříznutý na střed: zaškrtni ho, jen pokud sedí.|{n} další jsou oříznuté na střed: zaškrtni je, jen pokud sedí.|{n} dalších je oříznuto na střed: zaškrtni je, jen pokud sedí. ¦ {n} annan är centrerad: bocka bara för den om den stämmer.|{n} andra är centrerade: bocka bara för dem om de stämmer. ¦ {n} anden er centreret: sæt kun flueben, hvis den passer.|{n} andre er centreret: sæt kun flueben, hvis de passer.
+={n} autre est cadré au centre : coche-le seulement s’il va. ¦ {n} další je oříznutý na střed: zaškrtni ho, jen pokud sedí.|{n} další jsou oříznuté na střed: zaškrtni je, jen pokud sedí.|{n} dalších je oříznuto na střed: zaškrtni je, jen pokud sedí. ¦ {n} annan är centrerad: bocka bara för den om den stämmer.|{n} andra är centrerade: bocka bara för dem om de stämmer. ¦ {n} anden er centreret: sæt kun flueben, hvis den passer.|{n} andre er centreret: sæt kun flueben, hvis de passer.
+Calque {num} ¦ Vrstva {num} ¦ Lager {num} ¦ Lag {num}
+Groupe {num} ¦ Skupina {num} ¦ Grupp {num} ¦ Gruppe {num}
+calque|Réglages ¦ Úpravy ¦ Justeringar ¦ Justeringer
+Masque d’écrêtage : ne touche que « {name} » juste dessous (⌥ Alt + clic entre deux calques dans Photoshop) ¦ Ořezová maska: působí jen na „{name}“ hned pod ní (⌥ Alt + klik mezi dvěma vrstvami ve Photoshopu) ¦ Urklippsmask: påverkar bara ”{name}” precis under (⌥ Alt + klick mellan två lager i Photoshop) ¦ Beskæringsmaske: påvirker kun »{name}« lige nedenunder (⌥ Alt + klik mellem to lag i Photoshop)
+Masque d’écrêtage : ne touche que l’élément juste dessous (⌥ Alt + clic entre deux calques dans Photoshop) ¦ Ořezová maska: působí jen na prvek hned pod ní (⌥ Alt + klik mezi dvěma vrstvami ve Photoshopu) ¦ Urklippsmask: påverkar bara objektet precis under (⌥ Alt + klick mellan två lager i Photoshop) ¦ Beskæringsmaske: påvirker kun elementet lige nedenunder (⌥ Alt + klik mellem to lag i Photoshop)
+seulement sur « {name} » ¦ jen na „{name}“ ¦ bara på ”{name}” ¦ kun på »{name}«
+seulement sur ce qui est juste dessous ¦ jen na to, co je hned pod ní ¦ bara på det som ligger precis under ¦ kun på det, der ligger lige nedenunder
+touche tout ce qui est dessous dans « {name} » ¦ působí na vše pod ní v „{name}“ ¦ påverkar allt under i ”{name}” ¦ påvirker alt nedenunder i »{name}«
+réglages, {n} corrections ¦ úpravy, opravy: {n} ¦ justeringar, {n} korrigeringar ¦ justeringer, {n} korrektioner
+réglages, {n} correction ¦ úpravy, opravy: {n} ¦ justeringar, {n} korrigering ¦ justeringer, {n} korrektion
+« {name} » mis dans un groupe ¦ „{name}“ vloženo do skupiny ¦ ”{name}” lagd i en grupp ¦ »{name}« lagt i en gruppe
+{layer} montré ¦ {layer} zobrazeno ¦ {layer} visas ¦ {layer} vist
+{layer} masqué ¦ {layer} skryto ¦ {layer} dolt ¦ {layer} skjult
+Masque qui cache la sélection ajouté à {name} ¦ Maska skrývající výběr přidána k {name} ¦ Mask som döljer markeringen tillagd till {name} ¦ Maske, der skjuler markeringen, tilføjet til {name}
+Masque qui cache tout ajouté à {name} ¦ Maska skrývající vše přidána k {name} ¦ Mask som döljer allt tillagd till {name} ¦ Maske, der skjuler alt, tilføjet til {name}
+Masque ajouté à {name} ¦ Maska přidána k {name} ¦ Mask tillagd till {name} ¦ Maske tilføjet til {name}
+Masque de {name} désactivé ¦ Maska {name} vypnuta ¦ Masken för {name} avstängd ¦ Masken for {name} slået fra
+Masque de {name} réactivé ¦ Maska {name} znovu zapnuta ¦ Masken för {name} påslagen igen ¦ Masken for {name} slået til igen
+Masque de {name} inversé ¦ Maska {name} převrácena ¦ Masken för {name} inverterad ¦ Masken for {name} inverteret
+Masque de {name} retiré ¦ Maska {name} odebrána ¦ Masken för {name} borttagen ¦ Masken for {name} fjernet
+« {name} » à sa taille d’origine ¦ „{name}“ v původní velikosti ¦ ”{name}” i originalstorlek ¦ »{name}« i oprindelig størrelse
+✨ Filtre sur « {name} » ¦ ✨ Filtr na „{name}“ ¦ ✨ Filter på ”{name}” ¦ ✨ Filter på »{name}«
+« {name} » pixellisé ¦ „{name}“ rastrováno ¦ ”{name}” rastrerad ¦ »{name}« rasteriseret
+« {name} » pixellisé : figé à sa taille actuelle (l’agrandir le rendra flou) ¦ „{name}“ rastrováno: zafixováno v aktuální velikosti (zvětšení ho rozmaže) ¦ ”{name}” rastrerad: låst i nuvarande storlek (förstoring gör den suddig) ¦ »{name}« rasteriseret: låst i den nuværende størrelse (forstørrelse gør den sløret)
+Groupe « {name} » supprimé (son contenu reste) ¦ Skupina „{name}“ smazána (obsah zůstává) ¦ Gruppen ”{name}” raderad (innehållet finns kvar) ¦ Gruppen »{name}« slettet (indholdet bliver)
+{layer} supprimé ¦ {layer} smazáno ¦ {layer} raderat ¦ {layer} slettet
+« {name} » retiré des calques ¦ „{name}“ odebráno z vrstev ¦ ”{name}” borttagen ur lagren ¦ »{name}« fjernet fra lagene
+Calque « {name} » supprimé avec ce qui est dessus ¦ Vrstva „{name}“ smazána i s tím, co na ní je ¦ Lagret ”{name}” raderat med det som finns på det ¦ Laget »{name}« slettet med det, der er på det
+{layer} dupliquée ¦ {layer} zdvojeno ¦ {layer} duplicerad ¦ {layer} duplikeret
+{layer} dupliqué ¦ {layer} zdvojeno ¦ {layer} duplicerat ¦ {layer} duplikeret
+{layer} vidé ¦ {layer} vyprázdněno ¦ {layer} tömt ¦ {layer} tømt
+{layer} déplacé ¦ {layer} přesunuto ¦ {layer} flyttat ¦ {layer} flyttet
+Opacité de {name} : {n} % ¦ Krytí {name}: {n} % ¦ Opacitet för {name}: {n} % ¦ Opacitet for {name}: {n} %
+Fond de {name} : {n} % ¦ Výplň {name}: {n} % ¦ Fyllning för {name}: {n} % ¦ Fyld for {name}: {n} %
+Renommé « {name} » ¦ Přejmenováno na „{name}“ ¦ Namnbyte till ”{name}” ¦ Omdøbt til »{name}«
+Fusion de {name} : {what} ¦ Režim prolnutí {name}: {what} ¦ Blandningsläge för {name}: {what} ¦ Blandingstilstand for {name}: {what}
+« {name} » rangé dans « {group} » ¦ „{name}“ přesunuto do „{group}“ ¦ ”{name}” flyttad till ”{group}” ¦ »{name}« flyttet til »{group}«
+« {name} » sorti du groupe ¦ „{name}“ vyjmuto ze skupiny ¦ ”{name}” flyttad ut ur gruppen ¦ »{name}« taget ud af gruppen
+« {name} » rangé tout en bas ¦ „{name}“ přesunuto úplně dolů ¦ ”{name}” flyttad längst ned ¦ »{name}« flyttet helt ned
+« {name} » rangé au-dessus de « {other} » ¦ „{name}“ přesunuto nad „{other}“ ¦ ”{name}” flyttad ovanför ”{other}” ¦ »{name}« flyttet over »{other}«
+« {name} » rangé sous « {other} » ¦ „{name}“ přesunuto pod „{other}“ ¦ ”{name}” flyttad under ”{other}” ¦ »{name}« flyttet under »{other}«
+🎚 Calque de réglage {name} ¦ 🎚 Vrstva úprav {name} ¦ 🎚 Justeringslager {name} ¦ 🎚 Justeringslag {name}
+🖼 Réglages de <b>la photo</b> ¦ 🖼 Úpravy <b>fotky</b> ¦ 🖼 Justeringar av <b>fotot</b> ¦ 🖼 Justeringer af <b>fotoet</b>
+Sur le masque, le pinceau ⬜ montre (fait revenir ce qui était caché) — X pour changer ¦ Na masce štětec ⬜ odkrývá (vrací, co bylo skryté) — X pro přepnutí ¦ På masken visar penseln ⬜ (tar tillbaka det som var dolt) — X för att växla ¦ På masken viser penslen ⬜ (bringer det skjulte tilbage) — X for at skifte
+Sur le masque, le pinceau ⬛ cache — X pour changer ¦ Na masce štětec ⬛ skrývá — X pro přepnutí ¦ På masken döljer penseln ⬛ — X för att växla ¦ På masken skjuler penslen ⬛ — X for at skifte
+Texte choisi : « {text} » ¦ Vybraný text: „{text}“ ¦ Vald text: ”{text}” ¦ Valgt tekst: »{text}«
+Glyphe {what} ajouté ¦ Glyf {what} přidán ¦ Glyfen {what} tillagd ¦ Glyffen {what} tilføjet
+« {what} » copié : colle-le dans un texte (⌘V). ¦ „{what}“ zkopírováno: vlož ho do textu (⌘V). ¦ ”{what}” kopierat: klistra in det i en text (⌘V). ¦ »{what}« kopieret: indsæt det i en tekst (⌘V).
+calque « {name} » (seulement l’élément dessous) ¦ vrstva „{name}“ (jen prvek pod ní) ¦ lagret ”{name}” (bara objektet under) ¦ laget »{name}« (kun elementet nedenunder)
+calque « {name} » ¦ vrstva „{name}“ ¦ lagret ”{name}” ¦ laget »{name}«
+Gamme : {a}° / {b}° — {c}° \ {d}° (glisse les repères) ¦ Rozsah: {a}° / {b}° — {c}° \ {d}° (táhni značky) ¦ Omfång: {a}° / {b}° — {c}° \ {d}° (dra markörerna) ¦ Område: {a}° / {b}° — {c}° \ {d}° (træk markørerne)
+Propriétés de « {name} » ¦ Vlastnosti „{name}“ ¦ Egenskaper för ”{name}” ¦ Egenskaber for »{name}«
+🎨 Teinte/Saturation sur « {name} » ¦ 🎨 Odstín/sytost na „{name}“ ¦ 🎨 Nyans/mättnad på ”{name}” ¦ 🎨 Farvetone/mætning på »{name}«
+Motif « {what} » : calque « {name} » ¦ Vzorek „{what}“: vrstva „{name}“ ¦ Mönster ”{what}”: lagret ”{name}” ¦ Mønster »{what}«: laget »{name}«
+Motif de « {name} » ¦ Vzorek z „{name}“ ¦ Mönster från ”{name}” ¦ Mønster fra »{name}«
+Motif « {what} » sur « {name} » ¦ Vzorek „{what}“ na „{name}“ ¦ Mönster ”{what}” på ”{name}” ¦ Mønster »{what}« på »{name}«
+Motif « {what} » retiré de la bibliothèque (les calques qui l’utilisent le gardent) ¦ Vzorek „{what}“ odebrán z knihovny (vrstvy, které ho používají, si ho ponechají) ¦ Mönstret ”{what}” borttaget ur biblioteket (lager som använder det behåller det) ¦ Mønstret »{what}« fjernet fra biblioteket (lag, der bruger det, beholder det)
+le calque « {name} » ¦ vrstva „{name}“ ¦ lagret ”{name}” ¦ laget »{name}«
+🖌 {name} : peins sur un calque. ¦ 🖌 {name}: maluj na vrstvu. ¦ 🖌 {name}: måla på ett lager. ¦ 🖌 {name}: mal på et lag.
+Dégradé : {what} ¦ Přechod: {what} ¦ Toning: {what} ¦ Gradient: {what}
+Dégradé {num} ¦ Přechod {num} ¦ Toning {num} ¦ Gradient {num}
+Calque « {name} » ¦ Vrstva „{name}“ ¦ Lagret ”{name}” ¦ Laget »{name}«
+« {name} » · son masque (noir = caché, blanc = montré) : tout se voit tout de suite ¦ „{name}“ · její maska (černá = skryto, bílá = vidět): vše je vidět hned ¦ ”{name}” · dess mask (svart = dolt, vitt = synligt): du ser allt direkt ¦ »{name}« · dens maske (sort = skjult, hvid = vist): du ser alt med det samme
+« {name} » : tout se voit tout de suite ¦ „{name}“: vše je vidět hned ¦ ”{name}”: du ser allt direkt ¦ »{name}«: du ser alt med det samme
+le prochain dégradé que tu traceras ¦ další přechod, který nakreslíš ¦ nästa toning du ritar ¦ den næste gradient, du tegner
+Préréglage « {name} » gardé : il reste dans cette liste. ¦ Předvolba „{name}“ uložena: zůstává v tomto seznamu. ¦ Förinställningen ”{name}” sparad: den finns kvar i listan. ¦ Forudindstillingen »{name}« gemt: den bliver på listen.
+Dégradé modifié sur « {name} » ¦ Přechod změněn na „{name}“ ¦ Toning ändrad på ”{name}” ¦ Gradient ændret på »{name}«
+Texte « {text} » ¦ Text „{text}“ ¦ Text ”{text}” ¦ Tekst »{text}«
+Objet dynamique « {name} » : image remplacée ¦ Inteligentní objekt „{name}“: obrázek nahrazen ¦ Smart objekt ”{name}”: bilden ersatt ¦ Smart objekt »{name}«: billedet erstattet
+Image placée : « {name} » ¦ Obrázek vložen: „{name}“ ¦ Bild placerad: ”{name}” ¦ Billede placeret: »{name}«
+Image placée, mais pas rangée dans les médias : {err} ¦ Obrázek vložen, ale neuložen do médií: {err} ¦ Bilden placerad, men inte sparad bland medierna: {err} ¦ Billedet placeret, men ikke gemt i medierne: {err}
+Élément supprimé de « {name} » ¦ Prvek smazán z „{name}“ ¦ Objekt raderat från ”{name}” ¦ Element slettet fra »{name}«
+Image tournée sur « {name} » ¦ Obrázek otočen na „{name}“ ¦ Bilden roterad på ”{name}” ¦ Billedet roteret på »{name}«
+Image agrandie / réduite sur « {name} » ¦ Obrázek zvětšen / zmenšen na „{name}“ ¦ Bilden förstorad / förminskad på ”{name}” ¦ Billedet forstørret / formindsket på »{name}«
+Dégradé ajusté (masque) sur « {name} » ¦ Přechod upraven (maska) na „{name}“ ¦ Toning justerad (mask) på ”{name}” ¦ Gradient justeret (maske) på »{name}«
+Dégradé ajusté sur « {name} » ¦ Přechod upraven na „{name}“ ¦ Toning justerad på ”{name}” ¦ Gradient justeret på »{name}«
+Élément déplacé sur « {name} » ¦ Prvek přesunut na „{name}“ ¦ Objekt flyttat på ”{name}” ¦ Element flyttet på »{name}«
+Masque en dégradé sur « {name} » ¦ Přechodová maska na „{name}“ ¦ Toningsmask på ”{name}” ¦ Gradientmaske på »{name}«
+Dégradé {what} : « {name} » ¦ Přechod {what}: „{name}“ ¦ Toning {what}: ”{name}” ¦ Gradient {what}: »{name}«
+{what} sur « {name} » ¦ {what} na „{name}“ ¦ {what} på ”{name}” ¦ {what} på »{name}«
+Masque : caché au pinceau ¦ Maska: skryto štětcem ¦ Mask: dolt med penseln ¦ Maske: skjult med penslen
+Masque : montré au pinceau ¦ Maska: odkryto štětcem ¦ Mask: visat med penseln ¦ Maske: vist med penslen
+Pli réparé ({n} touches) (calque ✨ Retouches) ¦ Přehyb opraven (tahů: {n}) (vrstva ✨ Retuše) ¦ Veck reparerat ({n} drag) (lagret ✨ Retuscher) ¦ Fold repareret ({n} strøg) (laget ✨ Retoucheringer)
+Pli réparé (calque ✨ Retouches) ¦ Přehyb opraven (vrstva ✨ Retuše) ¦ Veck reparerat (lagret ✨ Retuscher) ¦ Fold repareret (laget ✨ Retoucheringer)
+Recadrage enlevé ¦ Ořez odstraněn ¦ Beskärning borttagen ¦ Beskæring fjernet
+Recadrage et redressement ({a}°) ¦ Ořez a narovnání ({a}°) ¦ Beskärning och upprätning ({a}°) ¦ Beskæring og udretning ({a}°)
+Recadrage ¦ Ořez ¦ Beskärning ¦ Beskæring
+Filtre « {what} » (refait) ¦ Filtr „{what}“ (znovu) ¦ Filter ”{what}” (upprepat) ¦ Filter »{what}« (gentaget)
+« {what} » refait sur un nouveau calque. ¦ „{what}“ znovu na nové vrstvě. ¦ ”{what}” upprepat på ett nytt lager. ¦ »{what}« gentaget på et nyt lag.
+limité à la sélection ¦ omezeno na výběr ¦ begränsat till markeringen ¦ begrænset til markeringen
+Filtre « {what} » ¦ Filtr „{what}“ ¦ Filter ”{what}” ¦ Filter »{what}«
+Filtre « {what} » ajouté au calque ¦ Filtr „{what}“ přidán k vrstvě ¦ Filtret ”{what}” tillagt till lagret ¦ Filteret »{what}« tilføjet til laget
+Filtre « {what} » réglé ¦ Filtr „{what}“ nastaven ¦ Filtret ”{what}” justerat ¦ Filteret »{what}« justeret
+Action « {name} » ¦ Akce „{name}“ ¦ Åtgärd ”{name}” ¦ Handling »{name}«
+Action du {date} ¦ Akce z {date} ¦ Åtgärd från {date} ¦ Handling fra {date}
+Action « {name} » enregistrée. ¦ Akce „{name}“ uložena. ¦ Åtgärden ”{name}” sparad. ¦ Handlingen »{name}« gemt.
+Action « {name} » importée : « Sur cette photo » ou « Sur plusieurs photos… ». ¦ Akce „{name}“ importována: „Na tuto fotku“ nebo „Na více fotek…“. ¦ Åtgärden ”{name}” importerad: ”På det här fotot” eller ”På flera foton…”. ¦ Handlingen »{name}« importeret: »På dette foto« eller »På flere fotos…«.
+Action « {name} » supprimée ¦ Akce „{name}“ smazána ¦ Åtgärden ”{name}” raderad ¦ Handlingen »{name}« slettet
+« {name} » sur plusieurs photos ¦ „{name}“ na více fotek ¦ ”{name}” på flera foton ¦ »{name}« på flere fotos
+Terminé : {n} photos sur {total}, nouvelle version affichée. ¦ Hotovo: {n} fotek z {total}, zobrazena nová verze. ¦ Klart: {n} foton av {total}, ny version visas. ¦ Færdig: {n} fotos af {total}, ny version vist.
+Terminé : {n} photo sur {total}, nouvelle version affichée. ¦ Hotovo: {n} fotka z {total}, zobrazena nová verze. ¦ Klart: {n} foto av {total}, ny version visas. ¦ Færdig: {n} foto af {total}, ny version vist.
+Terminé : {n} photos sur {total}. ¦ Hotovo: {n} fotek z {total}. ¦ Klart: {n} foton av {total}. ¦ Færdig: {n} fotos af {total}.
+Terminé : {n} photo sur {total}. ¦ Hotovo: {n} fotka z {total}. ¦ Klart: {n} foto av {total}. ¦ Færdig: {n} foto af {total}.
+{layer} (retouchée) ¦ {layer} (upravená) ¦ {layer} (retuscherad) ¦ {layer} (retoucheret)
+« {name} » · comme le style de calque de Photoshop ¦ „{name}“ · jako styl vrstvy ve Photoshopu ¦ ”{name}” · som Photoshops lagerstil ¦ »{name}« · som Photoshops lagstil
+Effets de {layer} enlevés ¦ Efekty {layer} odebrány ¦ Effekterna för {layer} borttagna ¦ Effekterne for {layer} fjernet
+Effets de {layer} ¦ Efekty {layer} ¦ Effekter för {layer} ¦ Effekter for {layer}
+Les lignes fines, claires ou sombres, sont repérées en rouge (dans la sélection). Vérifie, puis « Réparer ces lignes ». ¦ Tenké světlé nebo tmavé čáry jsou označené červeně (ve výběru). Zkontroluj, pak „Opravit tyto čáry“. ¦ Tunna linjer, ljusa eller mörka, markeras med rött (i markeringen). Kontrollera, sedan ”Reparera linjerna”. ¦ Tynde linjer, lyse eller mørke, markeres med rødt (i markeringen). Kontrollér, og derefter »Reparér disse linjer«.
+Les lignes fines, claires ou sombres, sont repérées en rouge. Vérifie, puis « Réparer ces lignes ». ¦ Tenké světlé nebo tmavé čáry jsou označené červeně. Zkontroluj, pak „Opravit tyto čáry“. ¦ Tunna linjer, ljusa eller mörka, markeras med rött. Kontrollera, sedan ”Reparera linjerna”. ¦ Tynde linjer, lyse eller mørke, markeres med rødt. Kontrollér, og derefter »Reparér disse linjer«.
+{what} (en rouge sur la photo). ¦ {what} (červeně na fotce). ¦ {what} (med rött på fotot). ¦ {what} (med rødt på fotoet).
+Plis réparés ({what}) ¦ Přehyby opraveny ({what}) ¦ Veck reparerade ({what}) ¦ Folder repareret ({what})
+{what} : compare avec 👁 ou ◧ ; ↶ pour revenir. ¦ {what}: porovnej s 👁 nebo ◧; ↶ pro návrat. ¦ {what}: jämför med 👁 eller ◧; ↶ för att gå tillbaka. ¦ {what}: sammenlign med 👁 eller ◧; ↶ for at gå tilbage.
+={n} lignes repérées puis comblées ¦ {n} čára nalezena a vyplněna|{n} čáry nalezeny a vyplněny|{n} čar nalezeno a vyplněno ¦ {n} linje hittad och fylld|{n} linjer hittade och fyllda ¦ {n} linje fundet og udfyldt|{n} linjer fundet og udfyldt
+={n} ligne repérée puis comblée ¦ {n} čára nalezena a vyplněna|{n} čáry nalezeny a vyplněny|{n} čar nalezeno a vyplněno ¦ {n} linje hittad och fylld|{n} linjer hittade och fyllda ¦ {n} linje fundet og udfyldt|{n} linjer fundet og udfyldt
+=pli|{n} lignes ¦ {n} čára|{n} čáry|{n} čar ¦ {n} linje|{n} linjer ¦ {n} linje|{n} linjer
+=pli|{n} ligne ¦ {n} čára|{n} čáry|{n} čar ¦ {n} linje|{n} linjer ¦ {n} linje|{n} linjer
+=retouche|{n} étapes ¦ {n} krok|{n} kroky|{n} kroků ¦ {n} steg|{n} steg ¦ {n} trin|{n} trin
+=retouche|{n} étape ¦ {n} krok|{n} kroky|{n} kroků ¦ {n} steg|{n} steg ¦ {n} trin|{n} trin
+=ligne repérée ¦ nalezená čára|nalezené čáry|nalezených čar ¦ linje hittad|linjer hittade ¦ linje fundet|linjer fundet
+=ligne réparée ¦ opravená čára|opravené čáry|opravených čar ¦ linje reparerad|linjer reparerade ¦ linje repareret|linjer repareret
+=calque de réglage ¦ vrstva úprav|vrstvy úprav|vrstev úprav ¦ justeringslager|justeringslager ¦ justeringslag|justeringslag
+=portrait mis à jour ¦ aktualizovaný portrét|aktualizované portréty|aktualizovaných portrétů ¦ porträtt uppdaterat|porträtt uppdaterade ¦ portræt opdateret|portrætter opdateret
+✨ Restauration en une fois ({what}) ¦ ✨ Obnova najednou ({what}) ¦ ✨ Restaurering i ett svep ({what}) ¦ ✨ Restaurering i ét hug ({what})
+Restauration faite ({what}) : chaque étape est un calque « ✨ » (Calques) que tu peux cacher ou doser ; ↶ défait tout. ¦ Obnova hotová ({what}): každý krok je vrstva „✨“ (Vrstvy), kterou můžeš skrýt nebo zeslabit; ↶ vrátí vše. ¦ Restaurering klar ({what}): varje steg är ett ”✨”-lager (Lager) som du kan dölja eller tona ned; ↶ ångrar allt. ¦ Restaurering færdig ({what}): hvert trin er et »✨«-lag (Lag), som du kan skjule eller dæmpe; ↶ fortryder det hele.
+Portrait de la fiche « {name} » mis à jour (la photo recadrée est dans ses médias). ¦ Portrét karty „{name}“ aktualizován (oříznutá fotka je v jejích médiích). ¦ Porträttet för posten ”{name}” uppdaterat (det beskurna fotot finns bland dess medier). ¦ Portrættet for posten »{name}« opdateret (det beskårne foto er i dens medier).
+Portrait de la fiche mis à jour (la photo recadrée est dans ses médias). ¦ Portrét karty aktualizován (oříznutá fotka je v jejích médiích). ¦ Postens porträtt uppdaterat (det beskurna fotot finns bland dess medier). ¦ Postens portræt opdateret (det beskårne foto er i dens medier).
+{w} × {h} px (recadrée) ¦ {w} × {h} px (oříznutá) ¦ {w} × {h} px (beskuren) ¦ {w} × {h} px (beskåret)
+Horizon redressé ({a}°) ¦ Horizont narovnán ({a}°) ¦ Horisonten uppräta ({a}°) ¦ Horisonten rettet op ({a}°)
+Redressée de {a}° : ajuste le cadre puis « ✓ Valider ». ¦ Narovnáno o {a}°: uprav rámeček, pak „✓ Potvrdit“. ¦ Upprätad {a}°: justera ramen och sedan ”✓ Bekräfta”. ¦ Rettet op {a}°: justér rammen, og så »✓ Bekræft«.
+Photo redressée de {a}° (et recadrée pour ne pas voir les coins). ⌗ Recadrer pour ajuster. ¦ Fotka narovnána o {a}° (a oříznuta, aby nebyly vidět rohy). ⌗ Oříznout pro úpravu. ¦ Fotot upprätat {a}° (och beskuret så att hörnen inte syns). ⌗ Beskär för att justera. ¦ Fotoet rettet op {a}° (og beskåret, så hjørnerne ikke ses). ⌗ Beskær for at justere.
+Redressée automatiquement ({a}°) ¦ Narovnáno automaticky ({a}°) ¦ Upprätat automatiskt ({a}°) ¦ Rettet op automatisk ({a}°)
+Reflets retirés sur un calque à part (seulement dans la sélection : fais d’abord une sélection de la vitre pour limiter) : règle la force et la taille, l’opacité dose, 🎭 limite, 👁 cache. La photo n’est pas touchée. ¦ Odlesky odstraněny na samostatné vrstvě (jen ve výběru: nejdřív vyber sklo, abys to omezil): nastav sílu a velikost, krytí zeslabí, 🎭 omezí, 👁 skryje. Fotka zůstane nedotčená. ¦ Reflexer borttagna på ett separat lager (bara i markeringen: markera först glaset för att begränsa): ställ in styrka och storlek; opaciteten tonar ned, 🎭 begränsar, 👁 döljer. Fotot rörs inte. ¦ Refleksioner fjernet på et separat lag (kun i markeringen: markér først glasset for at begrænse): indstil styrke og størrelse; opaciteten dæmper, 🎭 begrænser, 👁 skjuler. Fotoet røres ikke.
+Reflets retirés sur un calque à part : règle la force et la taille, l’opacité dose, 🎭 limite, 👁 cache. La photo n’est pas touchée. ¦ Odlesky odstraněny na samostatné vrstvě: nastav sílu a velikost, krytí zeslabí, 🎭 omezí, 👁 skryje. Fotka zůstane nedotčená. ¦ Reflexer borttagna på ett separat lager: ställ in styrka och storlek; opaciteten tonar ned, 🎭 begränsar, 👁 döljer. Fotot rörs inte. ¦ Refleksioner fjernet på et separat lag: indstil styrke og størrelse; opaciteten dæmper, 🎭 begrænser, 👁 skjuler. Fotoet røres ikke.
+Colorisation dans un calque de réglage (limitée à la sélection) : choisis les couleurs et la force ; 🎭 pour la limiter, 👁 pour la cacher. La photo n’est pas touchée. ¦ Kolorování ve vrstvě úprav (omezené na výběr): vyber barvy a sílu; 🎭 omezí, 👁 skryje. Fotka zůstane nedotčená. ¦ Färgläggning i ett justeringslager (begränsat till markeringen): välj färger och styrka; 🎭 för att begränsa, 👁 för att dölja. Fotot rörs inte. ¦ Farvelægning i et justeringslag (begrænset til markeringen): vælg farver og styrke; 🎭 for at begrænse, 👁 for at skjule. Fotoet røres ikke.
+Colorisation dans un calque de réglage : choisis les couleurs et la force ; 🎭 pour la limiter, 👁 pour la cacher. La photo n’est pas touchée. ¦ Kolorování ve vrstvě úprav: vyber barvy a sílu; 🎭 omezí, 👁 skryje. Fotka zůstane nedotčená. ¦ Färgläggning i ett justeringslager: välj färger och styrka; 🎭 för att begränsa, 👁 för att dölja. Fotot rörs inte. ¦ Farvelægning i et justeringslag: vælg farver og styrke; 🎭 for at begrænse, 👁 for at skjule. Fotoet røres ikke.
+={n} taches enlevées, sur le calque « {layer} » (la photo n’est pas touchée) : cache-le ou baisse-le pour comparer ; ↶ si c’est trop. ¦ {n} skvrna odstraněna na vrstvě „{layer}“ (fotka zůstane nedotčená): skryj ji nebo zeslab a porovnej; ↶ když je to moc.|{n} skvrny odstraněny na vrstvě „{layer}“ (fotka zůstane nedotčená): skryj ji nebo zeslab a porovnej; ↶ když je to moc.|{n} skvrn odstraněno na vrstvě „{layer}“ (fotka zůstane nedotčená): skryj ji nebo zeslab a porovnej; ↶ když je to moc. ¦ {n} fläck borttagen, på lagret ”{layer}” (fotot rörs inte): dölj det eller sänk det för att jämföra; ↶ om det blir för mycket.|{n} fläckar borttagna, på lagret ”{layer}” (fotot rörs inte): dölj det eller sänk det för att jämföra; ↶ om det blir för mycket. ¦ {n} plet fjernet på laget »{layer}« (fotoet røres ikke): skjul det eller dæmp det for at sammenligne; ↶ hvis det er for meget.|{n} pletter fjernet på laget »{layer}« (fotoet røres ikke): skjul det eller dæmp det for at sammenligne; ↶ hvis det er for meget.
+={n} tache enlevée, sur le calque « {layer} » (la photo n’est pas touchée) : cache-le ou baisse-le pour comparer ; ↶ si c’est trop. ¦ {n} skvrna odstraněna na vrstvě „{layer}“ (fotka zůstane nedotčená): skryj ji nebo zeslab a porovnej; ↶ když je to moc.|{n} skvrny odstraněny na vrstvě „{layer}“ (fotka zůstane nedotčená): skryj ji nebo zeslab a porovnej; ↶ když je to moc.|{n} skvrn odstraněno na vrstvě „{layer}“ (fotka zůstane nedotčená): skryj ji nebo zeslab a porovnej; ↶ když je to moc. ¦ {n} fläck borttagen, på lagret ”{layer}” (fotot rörs inte): dölj det eller sänk det för att jämföra; ↶ om det blir för mycket.|{n} fläckar borttagna, på lagret ”{layer}” (fotot rörs inte): dölj det eller sänk det för att jämföra; ↶ om det blir för mycket. ¦ {n} plet fjernet på laget »{layer}« (fotoet røres ikke): skjul det eller dæmp det for at sammenligne; ↶ hvis det er for meget.|{n} pletter fjernet på laget »{layer}« (fotoet røres ikke): skjul det eller dæmp det for at sammenligne; ↶ hvis det er for meget.
+✨ Taches enlevées ¦ ✨ Skvrny odstraněny ¦ ✨ Fläckar borttagna ¦ ✨ Pletter fjernet
+Taches enlevées automatiquement ({n}) ¦ Skvrny odstraněny automaticky ({n}) ¦ Fläckar borttagna automatiskt ({n}) ¦ Pletter fjernet automatisk ({n})
+Sélection remplie ({what}) ¦ Výběr vyplněn ({what}) ¦ Markeringen fylld ({what}) ¦ Markeringen udfyldt ({what})
+Sélection effacée sur « {name} » ¦ Výběr vymazán na „{name}“ ¦ Markeringen raderad på ”{name}” ¦ Markeringen slettet på »{name}«
+Masque d’après la sélection ({name}) ¦ Maska podle výběru ({name}) ¦ Mask från markeringen ({name}) ¦ Maske ud fra markeringen ({name})
+Préréglage « {name} » retiré ¦ Předvolba „{name}“ odebrána ¦ Förinställningen ”{name}” borttagen ¦ Forudindstillingen »{name}« fjernet
+Préréglage « {name} » ¦ Předvolba „{name}“ ¦ Förinställning ”{name}” ¦ Forudindstilling »{name}«
+Projet « {name} » (📂 Fichier → Ouvrir un projet pour le retrouver) ¦ Projekt „{name}“ (📂 Soubor → Otevřít projekt, abys ho znovu našel) ¦ Projektet ”{name}” (📂 Arkiv → Öppna ett projekt för att hitta det igen) ¦ Projektet »{name}« (📂 Filer → Åbn et projekt for at finde det igen)
+Versions de la photo ({n}) ¦ Verze fotky ({n}) ¦ Fotots versioner ({n}) ¦ Fotoets versioner ({n})
+{w} × {h} cm à {dpi} ppp ¦ {w} × {h} cm při {dpi} dpi ¦ {w} × {h} cm vid {dpi} dpi ¦ {w} × {h} cm ved {dpi} dpi
+≈ {size} Mo en mémoire ¦ ≈ {size} MB v paměti ¦ ≈ {size} MB i minnet ¦ ≈ {size} MB i hukommelsen
+Taille de l’image : {w} × {h} px ¦ Velikost obrázku: {w} × {h} px ¦ Bildstorlek: {w} × {h} px ¦ Billedstørrelse: {w} × {h} px
+Zone de travail : {w} × {h} px ¦ Pracovní plocha: {w} × {h} px ¦ Arbetsyta: {w} × {h} px ¦ Lærred: {w} × {h} px
+Zone de travail de départ ¦ Původní pracovní plocha ¦ Ursprunglig arbetsyta ¦ Oprindeligt lærred
+Cette image est très grande ({n} millions de points) : l’enregistrement peut être long, voire échouer. ¦ Tento obrázek je velmi velký ({n} milionů bodů): ukládání může trvat dlouho, nebo i selhat. ¦ Bilden är mycket stor ({n} miljoner pixlar): sparandet kan ta lång tid eller till och med misslyckas. ¦ Billedet er meget stort ({n} millioner pixels): det kan tage lang tid at gemme det, eller det kan mislykkes.
+Enregistrer quand même ? ¦ Přesto uložit? ¦ Spara ändå? ¦ Gem alligevel?
+Projet « {name} » rouvert ¦ Projekt „{name}“ znovu otevřen ¦ Projektet ”{name}” öppnat igen ¦ Projektet »{name}« genåbnet
+Projet en partie illisible : {err} ¦ Projekt je zčásti nečitelný: {err} ¦ Projektet delvis oläsligt: {err} ¦ Projektet er delvist ulæseligt: {err}
+photo de départ introuvable ¦ výchozí fotka nenalezena ¦ startfotot hittades inte ¦ udgangsfotoet blev ikke fundet
+Supprimer le projet « {name} » ? ¦ Smazat projekt „{name}“? ¦ Radera projektet ”{name}”? ¦ Slet projektet »{name}«?
+Quitter le plein écran ¦ Ukončit celou obrazovku ¦ Lämna helskärm ¦ Afslut fuld skærm
+Plus de place pour enregistrer : supprime un espace de travail. ¦ Už není místo pro uložení: smaž některý pracovní prostor. ¦ Inget utrymme kvar att spara: radera en arbetsyta. ¦ Ikke mere plads til at gemme: slet et arbejdsområde.
+Ranger, montrer ou cacher les boutons et les options ¦ Seřadit, zobrazit nebo skrýt tlačítka a možnosti ¦ Ordna, visa eller dölj knapparna och alternativen ¦ Ordn, vis eller skjul knapperne og valgmulighederne
+⚙️ Boutons et options ¦ ⚙️ Tlačítka a možnosti ¦ ⚙️ Knappar och alternativ ¦ ⚙️ Knapper og valgmuligheder
+Coche ce qu’on montre, range avec ↑ ↓ (ou en glissant ⠿). Gardé pour la prochaine fois. Comme les espaces de travail de Photoshop : enregistre une disposition sous un nom (« Restauration », « Montage rapide »…) et passe de l’une à l’autre. ¦ Zaškrtni, co se má zobrazit, seřaď pomocí ↑ ↓ (nebo přetažením ⠿). Zachová se na příště. Jako pracovní prostory ve Photoshopu: ulož rozvržení pod názvem („Obnova“, „Rychlá úprava“…) a přepínej mezi nimi. ¦ Bocka för det som ska visas, ordna med ↑ ↓ (eller genom att dra ⠿). Sparas till nästa gång. Som arbetsytorna i Photoshop: spara en layout under ett namn (”Restaurering”, ”Snabbredigering”…) och växla mellan dem. ¦ Sæt flueben ved det, der skal vises, ordn med ↑ ↓ (eller ved at trække ⠿). Gemmes til næste gang. Som arbejdsområderne i Photoshop: gem et layout under et navn (»Restaurering«, »Hurtig redigering«…), og skift mellem dem.
+les boutons montrés, cachés et rangés ¦ zobrazená, skrytá a seřazená tlačítka ¦ knapparna som visas, döljs och ordnas ¦ knapperne, der vises, skjules og ordnes
+Boutons remis comme au départ (rouvre la fenêtre pour retrouver l’ordre de départ). ¦ Tlačítka vrácena do výchozího stavu (znovu otevři okno a uvidíš původní pořadí). ¦ Knapparna återställda (öppna fönstret igen för att se den ursprungliga ordningen). ¦ Knapperne nulstillet (åbn vinduet igen for at se den oprindelige rækkefølge).
+Boutons rangés. ¦ Tlačítka seřazena. ¦ Knapparna ordnade. ¦ Knapperne ordnet.
+Hautes lumières ¦ Světla ¦ Högdagrar ¦ Højlys
+Vibrance (couleurs ternes d’abord) ¦ Živost (nejdřív matné barvy) ¦ Lyster (matta färger först) ¦ Livlighed (matte farver først)
+Teinte (tourner les couleurs) ¦ Odstín (otočit barvy) ¦ Nyans (vrid färgerna) ¦ Farvetone (drej farverne)
+Noir d’entrée ¦ Vstupní černá ¦ Svart in ¦ Sort ind
+Blanc d’entrée ¦ Vstupní bílá ¦ Vitt in ¦ Hvid ind
+Tons moyens (gamma ×100) ¦ Středy (gama ×100) ¦ Mellantoner (gamma ×100) ¦ Mellemtoner (gamma ×100)
+Noir de sortie ¦ Výstupní černá ¦ Svart ut ¦ Sort ud
+Blanc de sortie ¦ Výstupní bílá ¦ Vitt ut ¦ Hvid ud
+Naturelle : ciel, verdure, peau, habits (conseillé) ¦ Přirozené: nebe, zeleň, pleť, oblečení (doporučeno) ¦ Naturlig: himmel, grönska, hud, kläder (rekommenderas) ¦ Naturlig: himmel, grønt, hud, tøj (anbefalet)
+Sépia chaud ¦ Teplá sépie ¦ Varm sepia ¦ Varm sepia
+Autochrome (couleurs d’autrefois) ¦ Autochrom (barvy dávných dob) ¦ Autokrom (forna tiders färger) ¦ Autokrom (fortidens farver)
+Portrait (peau rosée) ¦ Portrét (růžová pleť) ¦ Porträtt (rosig hud) ¦ Portræt (rosa hud)
+Paysage : ciel en haut, terre en bas ¦ Krajina: nebe nahoře, země dole ¦ Landskap: himmel överst, mark nederst ¦ Landskab: himmel øverst, jord nederst
+Saturation augmentée ¦ Zvýšená sytost ¦ Ökad mättnad ¦ Øget mætning
+Saturation plus forte ¦ Silnější sytost ¦ Starkare mättnad ¦ Kraftigere mætning
+Rouges plus saturés ¦ Sytější červené ¦ Mättare röda ¦ Mere mættede røde
+Jaune intensifié ¦ Zesílená žlutá ¦ Starkare gul ¦ Kraftigere gul
+Ciel plus bleu ¦ Modřejší nebe ¦ Blåare himmel ¦ Blåere himmel
+Peau plus douce ¦ Jemnější pleť ¦ Mjukare hud ¦ Blødere hud
+Désaturer ¦ Odbarvit ¦ Avmätta ¦ Afmæt
+Verts d’automne ¦ Podzimní zelené ¦ Höstgröna ¦ Efterårsgrønne
+Reflets en moins (vitre, verre, vernis) ¦ Méně odlesků (sklo, lak) ¦ Färre reflexer (glas, fernissa) ¦ Færre refleksioner (glas, fernis)
+Taille des reflets (0 = moyenne) ¦ Velikost odlesků (0 = střední) ¦ Reflexernas storlek (0 = medel) ¦ Refleksionernes størrelse (0 = middel)
+Poussière et rayures (automatique) ¦ Prach a škrábance (automaticky) ¦ Damm och repor (automatiskt) ¦ Støv og ridser (automatisk)
+Réduire le bruit ¦ Potlačit šum ¦ Minska bruset ¦ Reducér støjen
+Netteté ¦ Ostrost ¦ Skärpa ¦ Skarphed
+Clarté (contraste local) ¦ Jasnost (místní kontrast) ¦ Klarhet (lokal kontrast) ¦ Klarhed (lokal kontrast)
+Flou de surface (garde les contours) ¦ Plošné rozostření (zachová obrysy) ¦ Ytoskärpa (behåller konturerna) ¦ Overfladesløring (bevarer konturerne)
+Décentrement (maquette, tilt-shift) ¦ Tilt-shift (maketa) ¦ Tilt-shift (miniatyr) ¦ Tilt-shift (miniature)
+Largeur de la bande ¦ Šířka pásu ¦ Bandets bredd ¦ Båndets bredde
+Flou de l’objectif (bokeh) ¦ Rozostření objektivu (bokeh) ¦ Objektivoskärpa (bokeh) ¦ Objektivsløring (bokeh)
+Ajouter du bruit ¦ Přidat šum ¦ Lägg till brus ¦ Tilføj støj
+Poussière et rayures ¦ Prach a škrábance ¦ Damm och repor ¦ Støv og ridser
+Passe-haut (pour accentuer en Incrustation) ¦ Horní propust (pro doostření v Překrytí) ¦ Högpass (för skärpning i Täcka över) ¦ Højpas (til skærpning i Overlejring)
+Esthétiques ¦ Stylizace ¦ Stilisera ¦ Stilisér
+Garder les couleurs (0 / 1) ¦ Zachovat barvy (0 / 1) ¦ Behåll färgerna (0 / 1) ¦ Bevar farverne (0 / 1)
+Tracé des contours ¦ Obkreslení obrysů ¦ Konturspårning ¦ Konturtegning
+Contours lumineux (néon) ¦ Zářící hrany (neon) ¦ Glödande kanter (neon) ¦ Glødende kanter (neon)
+Postérisation ¦ Posterizace ¦ Posterisera ¦ Posterisér
+Seuil (noir et blanc pur) ¦ Práh (čistá černobílá) ¦ Tröskel (ren svartvit) ¦ Tærskel (ren sort-hvid)
+Vers la droite (1) / gauche (0) ¦ Doprava (1) / doleva (0) ¦ Åt höger (1) / vänster (0) ¦ Til højre (1) / venstre (0)
+Peinture à l’huile ¦ Olejomalba ¦ Oljemålning ¦ Oliemaleri
+Taille de la touche ¦ Velikost tahu ¦ Penseldragets storlek ¦ Penselstrøgets størrelse
+Taille des taches ¦ Velikost skvrn ¦ Fläckarnas storlek ¦ Pletternes størrelse
+Dessin au crayon ¦ Kresba tužkou ¦ Blyertsteckning ¦ Blyantstegning
+En couleur (0 / 1) ¦ Barevně (0 / 1) ¦ I färg (0 / 1) ¦ I farver (0 / 1)
+Taille des carreaux ¦ Velikost dlaždic ¦ Rutornas storlek ¦ Flisernes størrelse
+Demi-teinte (points d’imprimerie) ¦ Polotón (tiskové body) ¦ Halvton (tryckpunkter) ¦ Halvtone (trykpunkter)
+Taille des cristaux ¦ Velikost krystalů ¦ Kristallernas storlek ¦ Krystallernes størrelse
+Éclairage (projecteur) ¦ Osvětlení (reflektor) ¦ Belysning (strålkastare) ¦ Belysning (projektør)
+Lumière X ¦ Světlo X ¦ Ljus X ¦ Lys X
+Lumière Y ¦ Světlo Y ¦ Ljus Y ¦ Lys Y
+Lumière ambiante ¦ Okolní světlo ¦ Omgivningsljus ¦ Omgivende lys
+Halo de lumière (flare) ¦ Odlesk objektivu (flare) ¦ Linsreflex ¦ Linserefleks
+À partir de (luminosité) ¦ Od (jasu) ¦ Från (ljusstyrka) ¦ Fra (lysstyrke)
+Déformation ¦ Deformace ¦ Förvräng ¦ Forvræng
+Pincement / sphérisation ¦ Stažení / sféra ¦ Nyp / sfärisk ¦ Klem / kugle
+Force (− sphère, + pincement) ¦ Síla (− sféra, + stažení) ¦ Styrka (− sfär, + nyp) ¦ Styrke (− kugle, + klem)
+Longueur d’onde ¦ Vlnová délka ¦ Våglängd ¦ Bølgelængde
+Ondulation (ronds dans l’eau) ¦ Vlnění (kruhy na vodě) ¦ Krusning (ringar på vattnet) ¦ Krusning (ringe i vandet)
+Écart des ronds ¦ Rozestup kruhů ¦ Avstånd mellan ringarna ¦ Afstand mellem ringene
+Coordonnées polaires ¦ Polární souřadnice ¦ Polära koordinater ¦ Polære koordinater
+Rectangle → polaire (0) / l’inverse (1) ¦ Pravoúhlé → polární (0) / naopak (1) ¦ Rektangulär → polär (0) / tvärtom (1) ¦ Rektangulær → polær (0) / omvendt (1)
+Minimum (assombrit, épaissit le sombre) ¦ Minimum (ztmaví, rozšíří tmavé) ¦ Minimum (gör mörkare, tjockar till det mörka) ¦ Minimum (gør mørkere, gør det mørke tykkere)
+Maximum (éclaircit, épaissit le clair) ¦ Maximum (zesvětlí, rozšíří světlé) ¦ Maximum (gör ljusare, tjockar till det ljusa) ¦ Maksimum (gør lysere, gør det lyse tykkere)
+Décalage (avec retour de l’autre côté) ¦ Posun (s návratem na druhé straně) ¦ Förskjutning (med omlindning) ¦ Forskydning (med ombrydning)
+Enlever les reflets (vitre) ¦ Odstranit odlesky (sklo) ¦ Ta bort reflexer (glas) ¦ Fjern refleksioner (glas)
+Reflets en moins ¦ Méně odlesků ¦ Färre reflexer ¦ Færre refleksioner
+Vieille photo ravivée ¦ Oživená stará fotka ¦ Gammalt foto återupplivat ¦ Gammelt foto genoplivet
+Négatif → positif ¦ Negativ → pozitiv ¦ Negativ → positiv ¦ Negativ → positiv
+🖌 Forme du panneau Formes ¦ 🖌 Tvar z panelu Tvary ¦ 🖌 Form från panelen Former ¦ 🖌 Form fra panelet Former
+Avec empattement ¦ Patkové ¦ Antikva ¦ Med fødder
+Sans empattement ¦ Bezpatkové ¦ Sanserif ¦ Uden fødder
+Manuscrite ¦ Ručně psané ¦ Handskrivet ¦ Håndskrevet
+Extra-fin ¦ Extra tenké ¦ Extra tunn ¦ Ekstra tynd
+Ultra-léger ¦ Ultra lehké ¦ Extra lätt ¦ Ekstra let
+Léger ¦ Lehké ¦ Lätt ¦ Let
+Médium ¦ Střední ¦ Medium ¦ Medium
+Demi-gras ¦ Polotučné ¦ Halvfet ¦ Halvfed
+Extra-gras ¦ Extra tučné ¦ Extra fet ¦ Ekstra fed
+Aligné à gauche ¦ Zarovnáno doleva ¦ Vänsterjusterad ¦ Venstrejusteret
+Aligné à droite ¦ Zarovnáno doprava ¦ Högerjusterad ¦ Højrejusteret
+Justifié, dernière ligne à gauche ¦ Do bloku, poslední řádek vlevo ¦ Marginaljusterad, sista raden vänster ¦ Lige margener, sidste linje venstre
+Justifié, dernière ligne centrée ¦ Do bloku, poslední řádek na střed ¦ Marginaljusterad, sista raden centrerad ¦ Lige margener, sidste linje centreret
+Justifié, dernière ligne à droite ¦ Do bloku, poslední řádek vpravo ¦ Marginaljusterad, sista raden höger ¦ Lige margener, sidste linje højre
+Tout justifié ¦ Vše do bloku ¦ Helt marginaljusterad ¦ Helt lige margener
+Ligatures et formes ¦ Ligatury a tvary ¦ Ligaturer och former ¦ Ligaturer og former
+Unicode : Latin étendu A ¦ Unicode: rozšířená latinka A ¦ Unicode: utökad latin A ¦ Unicode: udvidet latin A
+Unicode : Latin étendu B ¦ Unicode: rozšířená latinka B ¦ Unicode: utökad latin B ¦ Unicode: udvidet latin B
+Unicode : hébreu ¦ Unicode: hebrejština ¦ Unicode: hebreiska ¦ Unicode: hebraisk
+Unicode : exposants et indices ¦ Unicode: horní a dolní indexy ¦ Unicode: upphöjda och nedsänkta tecken ¦ Unicode: hævede og sænkede tegn
+Unicode : flèches ¦ Unicode: šipky ¦ Unicode: pilar ¦ Unicode: pile
+Unicode : mathématiques ¦ Unicode: matematika ¦ Unicode: matematik ¦ Unicode: matematik
+Unicode : formes géométriques ¦ Unicode: geometrické tvary ¦ Unicode: geometriska former ¦ Unicode: geometriske former
+Unicode : latin étendu D (abréviations anciennes) ¦ Unicode: rozšířená latinka D (staré zkratky) ¦ Unicode: utökad latin D (gamla förkortningar) ¦ Unicode: udvidet latin D (gamle forkortelser)
+espace fine ¦ úzká mezera ¦ smalt mellanslag ¦ smalt mellemrum
+tiret conditionnel (césure) ¦ podmíněné rozdělení (dělení slov) ¦ mjukt bindestreck (avstavning) ¦ blød bindestreg (orddeling)
+mort au combat ¦ padl v boji ¦ stupad i strid ¦ faldet i kamp
+et (abréviation ancienne) ¦ a (stará zkratka) ¦ och (gammal förkortning) ¦ og (gammel forkortelse)
+s long ¦ dlouhé s ¦ långt s ¦ langt s
+Linéaire ¦ Lineární ¦ Linjär ¦ Lineær
