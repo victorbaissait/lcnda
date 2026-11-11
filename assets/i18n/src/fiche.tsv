@@ -250,7 +250,6 @@ Média « {name} » supprimé de la base ¦ Media “{name}” deleted from the 
 {what}. Clique sur une zone pour l’identifier. ¦ {what}. Click an area to identify it. ¦ {what}. Haz clic en una zona para identificarla. ¦ {what}. Klicke auf einen Bereich, um ihn zu benennen. ¦ {what}. Clicca su una zona per identificarla. ¦ {what}. Clica numa zona para a identificar. ¦ {what}. Kliknij obszar, aby go rozpoznać. ¦ {what}. Klik op een vlak om het te benoemen.
 Événement #{n} ¦ Event #{n} ¦ Evento n.º {n} ¦ Ereignis Nr. {n} ¦ Evento n. {n} ¦ Evento n.º {n} ¦ Wydarzenie nr {n} ¦ Gebeurtenis #{n}
 Texte ajouté à « {name} » : ouvre-le pour le relire et l’enregistrer. ¦ Text added to “{name}”: open it to check and save it. ¦ Texto añadido a «{name}»: ábrelo para revisarlo y guardarlo. ¦ Text zu „{name}“ hinzugefügt: Öffne es, um ihn zu prüfen und zu speichern. ¦ Testo aggiunto a «{name}»: aprilo per rileggerlo e salvarlo. ¦ Texto adicionado a «{name}»: abre-o para o rever e guardar. ¦ Dodano tekst do „{name}”: otwórz, aby go sprawdzić i zapisać. ¦ Tekst toegevoegd aan ‘{name}’: open het om na te lezen en op te slaan.
-document ¦ document ¦ documento ¦ Dokument ¦ documento ¦ documento ¦ dokument ¦ document
 Modifier cette signature ¦ Edit this signature ¦ Editar esta firma ¦ Diese Unterschrift bearbeiten ¦ Modifica questa firma ¦ Editar esta assinatura ¦ Edytuj ten podpis ¦ Deze handtekening bewerken
 Modifier cette identification ¦ Edit this identification ¦ Editar esta identificación ¦ Diese Zuordnung bearbeiten ¦ Modifica questa identificazione ¦ Editar esta identificação ¦ Edytuj to rozpoznanie ¦ Deze herkenning bewerken
 Supprimer cette signature ¦ Delete this signature ¦ Eliminar esta firma ¦ Diese Unterschrift löschen ¦ Elimina questa firma ¦ Eliminar esta assinatura ¦ Usuń ten podpis ¦ Deze handtekening verwijderen
@@ -379,7 +378,6 @@ affixe « {nm} » ¦ kennel name “{nm}” ¦ afijo «{nm}» ¦ Zwingername „
 Caractéristiques ¦ Characteristics ¦ Características ¦ Merkmale ¦ Caratteristiche ¦ Características ¦ Cechy ¦ Kenmerken
 {what} dans la liste. ¦ {what} in the list. ¦ {what} en la lista. ¦ {what} in der Liste. ¦ {what} nell’elenco. ¦ {what} na lista. ¦ {what} na liście. ¦ {what} in de lijst.
 Ce bloc n’a pas pu être dessiné : {err} ¦ This block could not be drawn: {err} ¦ No se pudo dibujar este bloque: {err} ¦ Dieser Block konnte nicht gezeichnet werden: {err} ¦ Non è stato possibile disegnare questo blocco: {err} ¦ Não foi possível desenhar este bloco: {err} ¦ Nie udało się narysować tego bloku: {err} ¦ Dit blok kon niet worden getekend: {err}
-erreur ¦ error ¦ error ¦ Fehler ¦ errore ¦ erro ¦ błąd ¦ fout
 Jamais vu depuis le baguage ¦ Never seen since ringing ¦ Nunca visto desde el anillamiento ¦ Seit der Beringung nie gesehen ¦ Mai visto dall’inanellamento ¦ Nunca visto desde a anilhagem ¦ Nie widziany od obrączkowania ¦ Nooit gezien sinds het ringen
 Vu aujourd’hui ¦ Seen today ¦ Visto hoy ¦ Heute gesehen ¦ Visto oggi ¦ Visto hoje ¦ Widziany dziś ¦ Vandaag gezien
 Vu hier ¦ Seen yesterday ¦ Visto ayer ¦ Gestern gesehen ¦ Visto ieri ¦ Visto ontem ¦ Widziany wczoraj ¦ Gisteren gezien
@@ -1136,14 +1134,12 @@ propriétaire ¦ owner ¦ propietario ¦ Halter ¦ proprietario ¦ proprietário
 co-propriétaire ¦ co-owner ¦ copropietario ¦ Mithalter ¦ comproprietario ¦ coproprietário ¦ współwłaściciel ¦ mede-eigenaar
 éleveur ¦ breeder ¦ criador ¦ Züchter ¦ allevatore ¦ criador ¦ hodowca ¦ fokker
 famille d’accueil ¦ foster family ¦ familia de acogida ¦ Pflegefamilie ¦ famiglia affidataria ¦ família de acolhimento ¦ dom tymczasowy ¦ pleeggezin
-arrivée ¦ arrival ¦ llegada ¦ Ankunft ¦ arrivo ¦ chegada ¦ przybycie ¦ aankomst
 déménagement ¦ move ¦ mudanza ¦ Umzug ¦ trasloco ¦ mudança ¦ przeprowadzka ¦ verhuizing
 mise bas / portée ¦ birth / litter ¦ parto / camada ¦ Geburt / Wurf ¦ parto / cucciolata ¦ parto / ninhada ¦ poród / miot ¦ werpen / nest
 stérilisation ¦ neutering ¦ esterilización ¦ Kastration ¦ sterilizzazione ¦ esterilização ¦ sterylizacja ¦ sterilisatie
 opération ¦ operation ¦ operación ¦ Operation ¦ operazione ¦ operação ¦ operacja ¦ operatie
 retrouvé ¦ found again ¦ encontrado ¦ wiedergefunden ¦ ritrovato ¦ reencontrado ¦ odnaleziony ¦ teruggevonden
 départ ¦ departure ¦ salida ¦ Weggang ¦ partenza ¦ partida ¦ odejście ¦ vertrek
-décès ¦ death ¦ muerte ¦ Tod ¦ morte ¦ morte ¦ śmierć ¦ overlijden
 Aucun animal ne correspond. ¦ No animal matches. ¦ Ningún animal coincide. ¦ Kein Tier passt. ¦ Nessun animale corrisponde. ¦ Nenhum animal corresponde. ¦ Żadne zwierzę nie pasuje. ¦ Geen dier komt overeen.
 Chercher… (nom, race, puce, éleveur, maître) ¦ Search… (name, breed, chip, breeder, owner) ¦ Buscar… (nombre, raza, chip, criador, dueño) ¦ Suchen … (Name, Rasse, Chip, Züchter, Halter) ¦ Cerca… (nome, razza, chip, allevatore, padrone) ¦ Procurar… (nome, raça, chip, criador, dono) ¦ Szukaj… (imię, rasa, czip, hodowca, właściciel) ¦ Zoeken… (naam, ras, chip, fokker, baasje)
 Personnes et animaux mêlés. ¦ People and animals mixed. ¦ Personas y animales mezclados. ¦ Personen und Tiere gemischt. ¦ Persone e animali mescolati. ¦ Pessoas e animais misturados. ¦ Osoby i zwierzęta razem. ¦ Personen en dieren door elkaar.

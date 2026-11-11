@@ -42,7 +42,7 @@ function i18n_t(string $text, array $vars = [], string $ctx = ''): string
     $d = i18n_dict();
     if ($d) {
         $v = ($ctx !== '' && isset($d[$ctx . '|' . $text])) ? $d[$ctx . '|' . $text] : ($d[$text] ?? null);
-        if (is_array($v)) { $v = $v['other'] ?? $v['one'] ?? null; }
+        if (is_array($v)) { $n = isset($vars['n']) && is_numeric($vars['n']) ? (float) $vars['n'] : 1.0; $v = ($n == 1.0 ? ($v['one'] ?? null) : null) ?? $v['other'] ?? $v['many'] ?? $v['one'] ?? null; } // un mot au pluriel lu tout seul : la forme « un »
         if (is_string($v) && $v !== '') { $out = $v; }
     }
     if ($vars) {

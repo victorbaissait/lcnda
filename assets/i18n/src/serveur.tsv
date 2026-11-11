@@ -34,10 +34,8 @@ Date « {date} » lue comme l’an {y} ¦ Date “{date}” read as the year {y}
 Décès avant la naissance ¦ Death before birth ¦ Defunción antes del nacimiento ¦ Tod vor der Geburt ¦ Morte prima della nascita ¦ Óbito antes do nascimento ¦ Zgon przed urodzeniem ¦ Overlijden vóór de geboorte
 Naissance {b} · décès {d} ¦ Birth {b} · death {d} ¦ Nacimiento {b} · defunción {d} ¦ Geburt {b} · Tod {d} ¦ Nascita {b} · morte {d} ¦ Nascimento {b} · óbito {d} ¦ Urodzenie {b} · zgon {d} ¦ Geboorte {b} · overlijden {d}
 Décès ({d}) avant sa naissance ({b}) ¦ Death ({d}) before their birth ({b}) ¦ Defunción ({d}) antes de su nacimiento ({b}) ¦ Tod ({d}) vor der Geburt ({b}) ¦ Morte ({d}) prima della nascita ({b}) ¦ Óbito ({d}) antes do nascimento ({b}) ¦ Zgon ({d}) przed urodzeniem ({b}) ¦ Overlijden ({d}) vóór de geboorte ({b})
-naissance ¦ birth ¦ nacimiento ¦ Geburt ¦ nascita ¦ nascimento ¦ urodzenie ¦ geboorte
 inhumation ¦ burial ¦ sepultura ¦ Beerdigung ¦ sepoltura ¦ sepultura ¦ pochówek ¦ begrafenis
 baptême ¦ baptism ¦ bautizo ¦ Taufe ¦ battesimo ¦ batismo ¦ chrzest ¦ doop
-mariage ¦ marriage ¦ matrimonio ¦ Heirat ¦ matrimonio ¦ casamento ¦ ślub ¦ huwelijk
 Mort à {n} ans ¦ Died aged {n} ¦ Murió a los {n} años ¦ Mit {n} Jahren gestorben ¦ Morto a {n} anni ¦ Morreu aos {n} anos ¦ Zmarł w wieku {n} lat ¦ Overleden op {n} jaar
 Morte à {n} ans ¦ Died aged {n} ¦ Murió a los {n} años ¦ Mit {n} Jahren gestorben ¦ Morta a {n} anni ¦ Morreu aos {n} anos ¦ Zmarła w wieku {n} lat ¦ Overleden op {n} jaar
 Mort(e) à {n} ans ¦ Died aged {n} ¦ Murió a los {n} años ¦ Mit {n} Jahren gestorben ¦ Morto/a a {n} anni ¦ Morreu aos {n} anos ¦ Zmarł(a) w wieku {n} lat ¦ Overleden op {n} jaar
@@ -286,7 +284,6 @@ Même nom, même lieu (née en {y}) ¦ Same surname, same place (born in {y}) ¦
 Même nom, même lieu (né en {y}) ¦ Same surname, same place (born in {y}) ¦ Mismo apellido, mismo lugar (nacido en {y}) ¦ Gleicher Nachname, gleicher Ort (geboren {y}) ¦ Stesso cognome, stesso luogo (nato nel {y}) ¦ Mesmo apelido, mesmo lugar (nascido em {y}) ¦ To samo nazwisko, to samo miejsce (ur. w {y}) ¦ Zelfde achternaam, zelfde plaats (geboren in {y})
 Même nom, même lieu ¦ Same surname, same place ¦ Mismo apellido, mismo lugar ¦ Gleicher Nachname, gleicher Ort ¦ Stesso cognome, stesso luogo ¦ Mesmo apelido, mesmo lugar ¦ To samo nazwisko, to samo miejsce ¦ Zelfde achternaam, zelfde plaats
 {act} de {y} ¦ {act} of {y} ¦ {act} de {y} ¦ {act} von {y} ¦ {act} del {y} ¦ {act} de {y} ¦ {act} z {y} ¦ {act} van {y}
-acte ¦ record ¦ acta ¦ Urkunde ¦ atto ¦ ato ¦ akt ¦ akte
 même nom : de la famille ? ¦ same surname: family? ¦ mismo apellido: ¿de la familia? ¦ gleicher Nachname: aus der Familie? ¦ stesso cognome: della famiglia? ¦ mesmo apelido: da família? ¦ to samo nazwisko: rodzina? ¦ zelfde achternaam: familie?
 souvent un proche ¦ often a relative ¦ a menudo un allegado ¦ oft ein Angehöriger ¦ spesso un parente ¦ muitas vezes um próximo ¦ często ktoś bliski ¦ vaak een naaste
 Quelqu’un ¦ Someone ¦ Alguien ¦ Jemand ¦ Qualcuno ¦ Alguém ¦ Ktoś ¦ Iemand

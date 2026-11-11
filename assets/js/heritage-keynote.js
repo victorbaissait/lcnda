@@ -17,6 +17,8 @@
     const api = (...a) => A().api(...a);
     const post = (action, body) => api(action, {}, {method: 'POST', body});
     const toast = (...a) => A().toast(...a);
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
+    const plural = (n, w, m) => (A()?.plural ? A().plural(n, w, m) : `${n} ${w}`);
     const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
     const num = (v, d = 0) => { const n = Number(v); return v !== null && v !== '' && Number.isFinite(n) ? n : d; };
     const r1 = v => Math.round(num(v) * 10) / 10;
@@ -30,11 +32,11 @@
     const fileOk = f => typeof f === 'string' && /^[A-Za-z0-9._%\-/]{1,240}$/.test(f) && !f.includes('..');
     const srcOf = o => o && fileOk(o.filename) ? mediaUrl(o.filename) : o && dataOk(o.src) ? o.src : '';
     const readJ = (k, d) => { try { const v = JSON.parse(localStorage.getItem(k) || 'null'); return v && typeof v === 'object' ? v : d; } catch (_) { return d; } };
-    const writeJ = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch (_) { toast('Plus de place pour enregistrer ce réglage.', 'error'); return false; } };
+    const writeJ = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch (_) { toast(i18n('Plus de place pour enregistrer ce réglage.'), 'error'); return false; } };
     const PREF = 'genealogie-keynote-prefs', FONTS_KEY = 'genealogie-layout-fonts';
     const UI = () => window.LCNDA_UI || {};
     /* les sections repliables du panneau de droite (E2) : l'état ouvert / fermé est retenu ; la clé data-kn-… reste la première (⚙️ Personnaliser) */
-    const isec = (attr, key, label, html, open = true) => { const body = typeof html === 'function' ? html() : html;
+    const isec = (attr, key, label, html, open = true) => { const body = typeof html === 'function' ? html() : html; label = i18n(label);
         if (!UI().panelSection) return `<section class="kn-is" ${attr}="${key}" data-tb-label="${esc(label)}"><h4>${esc(label)}</h4>${body}</section>`;
         return UI().panelSection({title: label, key: `kn-${attr.slice(8)}-${key}`, open, body}).replace('<details class="ui-section"', `<details class="ui-section kn-is" ${attr}="${key}" data-tb-label="${esc(label)}"`); };
     const KN_CSS = `.kn-is.ui-section{display:block;padding:0}.kn-is.ui-section>summary{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--kn-mute);padding:8px 0;cursor:pointer}
@@ -47,7 +49,7 @@
     const download = (blob, name) => { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 4000); };
 
     /* ═════════ Formats, thèmes, dispositions ═════════ */
-    const ASPECTS = {'16:9': [1920, 1080, 'Large (16:9)'], '4:3': [1440, 1080, 'Standard (4:3)'], '16:10': [1920, 1200, '16:10'], '1:1': [1080, 1080, 'Carré'], '9:16': [1080, 1920, 'Vertical (téléphone)'], 'a4': [1754, 1240, 'A4 à l’italienne'], custom: [0, 0, 'Sur mesure…']};
+    const ASPECTS = {'16:9': [1920, 1080, 'Large (16:9)'], '4:3': [1440, 1080, 'Standard (4:3)'], '16:10': [1920, 1200, '16:10'], '1:1': [1080, 1080, 'Carré'], '9:16': [1080, 1920, 'Vertical (téléphone)'], 'a4': [1754, 1240, 'A4 à l’italienne'], custom: [0, 0, 'Sur mesure…']}; Object.values(ASPECTS).forEach(a => { a[2] = i18n(a[2]); });
     const SANS = '"Helvetica Neue", Helvetica, Arial, sans-serif', SERIF = 'Georgia, "Times New Roman", serif', PALA = '"Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif';
     const THEMES = {
         lcnda: {label: 'Comme l’application', bg: {type: 'color', c1: '#ffffff'}, fg: '#080808', accent: '#055dff', tf: 'Arial, Helvetica, sans-serif', bf: 'Arial, Helvetica, sans-serif', tw: 800},
@@ -62,9 +64,10 @@
         craie: {label: 'Tableau noir', bg: {type: 'radial', c1: '#3a4a3f', c2: '#222c25'}, fg: '#f0efe6', accent: '#f5d76e', tf: '"Chalkboard SE", "Comic Sans MS", "Segoe Print", cursive', bf: '"Chalkboard SE", "Comic Sans MS", "Segoe Print", cursive', tw: 700, dark: true},
         journal: {label: 'Journal', bg: {type: 'color', c1: '#f4f1ea'}, fg: '#111111', accent: '#b3261e', tf: '"Bodoni 72", Didot, "Times New Roman", serif', bf: SERIF, tw: 700},
     };
+    Object.values(THEMES).forEach(t => { t.label = i18n(t.label); }); // 🌐 les noms des thèmes dans la langue choisie
     const themeOf = show => { const t = THEMES[show.theme] || THEMES.blanc; return {...t, fg: col(show.colors?.fg, t.fg), accent: col(show.colors?.accent, t.accent), tf: fontCss(show.fonts?.title) || t.tf, bf: fontCss(show.fonts?.body) || t.bf}; };
-    const LAYOUTS = [['title', 'Titre'], ['title-content', 'Titre et texte'], ['title-photo', 'Titre et photo'], ['photo', 'Photo pleine page'], ['photo-text', 'Photo et texte'], ['two', 'Deux colonnes'], ['quote', 'Citation'], ['section', 'Section'], ['statement', 'Chiffre clé'], ['person', 'Une personne'], ['blank', 'Vide']];
-    const PH = {title: 'Titre', sub: 'Sous-titre', body: 'Double-clique pour écrire', caption: 'Légende de la photo', quote: '« Une phrase qui compte »', number: '1789'};
+    const LAYOUTS = [['title', 'Titre'], ['title-content', 'Titre et texte'], ['title-photo', 'Titre et photo'], ['photo', 'Photo pleine page'], ['photo-text', 'Photo et texte'], ['two', 'Deux colonnes'], ['quote', 'Citation'], ['section', 'Section'], ['statement', 'Chiffre clé'], ['person', 'Une personne'], ['blank', 'Vide']].map(([k, l, ...r]) => [k, i18n(l), ...r]);
+    const PH = Object.fromEntries(Object.entries({title: 'Titre', sub: 'Sous-titre', body: 'Double-clique pour écrire', caption: 'Légende de la photo', quote: '« Une phrase qui compte »', number: '1789'}).map(([k, v]) => [k, i18n(v)]));
     function layoutObjs(kind, W, H, th) {
         const T = (role, x, y, w, h, size, o = {}) => ({id: uid(), t: 'text', role, x: x * W, y: y * H, w: w * W, h: h * H, size: Math.round(size * H), html: '', ...o});
         const I = (x, y, w, h) => ({id: uid(), t: 'image', role: 'photo', x: x * W, y: y * H, w: w * W, h: h * H, fit: 'cover'});
@@ -83,19 +86,19 @@
             default: return [];
         }
     }
-    const SHAPES = [['rect', 'Rectangle'], ['rounded', 'Rectangle arrondi'], ['ellipse', 'Ellipse'], ['triangle', 'Triangle'], ['rtriangle', 'Triangle rectangle'], ['diamond', 'Losange'], ['pentagon', 'Pentagone'], ['hexagon', 'Hexagone'], ['octagon', 'Octogone'], ['star', 'Étoile'], ['arrow', 'Flèche'], ['darrow', 'Double flèche'], ['chevron', 'Chevron'], ['callout', 'Bulle'], ['heart', 'Cœur'], ['cross', 'Croix'], ['line', 'Ligne'], ['arrowline', 'Ligne fléchée']];
-    const MASKS = [['none', 'Aucun (rectangle)'], ['rounded', 'Coins arrondis'], ['circle', 'Cercle / ovale'], ['arch', 'Arche (portrait ancien)'], ['hex', 'Hexagone'], ['diamond', 'Losange'], ['triangle', 'Triangle'], ['star', 'Étoile']];
-    const TRANS = [['none', 'Aucune'], ['fade', 'Fondu enchaîné'], ['dissolve', 'Dissoudre'], ['black', 'Fondu par le noir'], ['push', 'Pousser'], ['movein', 'Glisser par-dessus'], ['reveal', 'Révéler'], ['wipe', 'Balayage'], ['zoom', 'Zoom'], ['swap', 'Échanger'], ['flip', 'Retourner'], ['cube', 'Cube'], ['magic', 'Déplacement magique']];
-    const FX = [['appear', 'Apparition'], ['fade', 'Fondu'], ['fly', 'Arrivée (glisser)'], ['scale', 'Agrandir'], ['pop', 'Rebond'], ['drop', 'Chute'], ['wipe', 'Balayage'], ['blur', 'Flou'], ['spin', 'Tourbillon'], ['type', 'Machine à écrire (textes)'], ['path', 'Trajectoire (déplacement)']];
-    const DIRS = [['l', 'depuis la gauche'], ['r', 'depuis la droite'], ['t', 'depuis le haut'], ['b', 'depuis le bas']];
-    const STARTS = [['click', 'Au clic'], ['with', 'Avec la précédente'], ['after', 'Après la précédente']];
+    const SHAPES = [['rect', 'Rectangle'], ['rounded', 'Rectangle arrondi'], ['ellipse', 'Ellipse'], ['triangle', 'Triangle'], ['rtriangle', 'Triangle rectangle'], ['diamond', 'Losange'], ['pentagon', 'Pentagone'], ['hexagon', 'Hexagone'], ['octagon', 'Octogone'], ['star', 'Étoile'], ['arrow', 'Flèche'], ['darrow', 'Double flèche'], ['chevron', 'Chevron'], ['callout', 'Bulle'], ['heart', 'Cœur'], ['cross', 'Croix'], ['line', 'Ligne'], ['arrowline', 'Ligne fléchée']].map(([k, l, ...r]) => [k, i18n(l), ...r]);
+    const MASKS = [['none', 'Aucun (rectangle)'], ['rounded', 'Coins arrondis'], ['circle', 'Cercle / ovale'], ['arch', 'Arche (portrait ancien)'], ['hex', 'Hexagone'], ['diamond', 'Losange'], ['triangle', 'Triangle'], ['star', 'Étoile']].map(([k, l, ...r]) => [k, i18n(l), ...r]);
+    const TRANS = [['none', 'Aucune'], ['fade', 'Fondu enchaîné'], ['dissolve', 'Dissoudre'], ['black', 'Fondu par le noir'], ['push', 'Pousser'], ['movein', 'Glisser par-dessus'], ['reveal', 'Révéler'], ['wipe', 'Balayage'], ['zoom', 'Zoom'], ['swap', 'Échanger'], ['flip', 'Retourner'], ['cube', 'Cube'], ['magic', 'Déplacement magique']].map(([k, l, ...r]) => [k, i18n(l), ...r]);
+    const FX = [['appear', 'Apparition'], ['fade', 'Fondu'], ['fly', 'Arrivée (glisser)'], ['scale', 'Agrandir'], ['pop', 'Rebond'], ['drop', 'Chute'], ['wipe', 'Balayage'], ['blur', 'Flou'], ['spin', 'Tourbillon'], ['type', 'Machine à écrire (textes)'], ['path', 'Trajectoire (déplacement)']].map(([k, l, ...r]) => [k, i18n(l), ...r]);
+    const DIRS = [['l', 'depuis la gauche'], ['r', 'depuis la droite'], ['t', 'depuis le haut'], ['b', 'depuis le bas']].map(([k, l, ...r]) => [k, i18n(l), ...r]);
+    const STARTS = [['click', 'Au clic'], ['with', 'Avec la précédente'], ['after', 'Après la précédente']].map(([k, l, ...r]) => [k, i18n(l), ...r]);
     const prefs = () => ({aspect: '16:9', w: 1920, h: 1080, theme: 'blanc', trans: 'dissolve', transDur: .8, snap: true, layout: 'title-content', laser: '#ff2d2d', ...readJ(PREF, {})});
     const CHART_KINDS = ['columns', 'bars', 'stacked', 'stacked100', 'line', 'area', 'radar', 'pie', 'donut', 'halfdonut']; // ceux qui se remplissent avec « Catégorie ; Série 1 ; Série 2… »
-    const TYPE_LABEL = {text: 'Texte', image: 'Image', shape: 'Forme', table: 'Tableau', chart: 'Graphique', person: 'Généalogie', video: 'Vidéo', audio: 'Son', link: 'Liaison'};
+    const TYPE_LABEL = {text: 'Texte', image: 'Image', shape: 'Forme', table: 'Tableau', chart: 'Graphique', person: 'Généalogie', video: 'Vidéo', audio: 'Son', link: 'Liaison'}; Object.keys(TYPE_LABEL).forEach(k => { TYPE_LABEL[k] = i18n(TYPE_LABEL[k]); });
     const TYPE_ICON = {text: 'T', image: '🖼️', shape: '◆', table: '▦', chart: '📊', person: '👤', video: '🎬', audio: '🔊', link: '↔'};
-    const LINK_KINDS = [['straight', 'Droite'], ['elbow', 'En équerre'], ['curve', 'Courbe']], LINK_ARROWS = [['end', 'Flèche au bout'], ['both', 'Flèches aux deux bouts'], ['none', 'Sans flèche']];
+    const LINK_KINDS = [['straight', 'Droite'], ['elbow', 'En équerre'], ['curve', 'Courbe']].map(([k, l]) => [k, i18n(l, {ctx: 'liaison'})]), LINK_ARROWS = [['end', 'Flèche au bout'], ['both', 'Flèches aux deux bouts'], ['none', 'Sans flèche']].map(([k, l]) => [k, i18n(l)]);
     const PATHS = [['line', 'Ligne droite'], ['arc', 'Arc'], ['wave', 'Vague'], ['zigzag', 'Zigzag'], ['loop', 'Boucle']];
-    const MERGE_OPS = [['union', 'Union (les deux réunies)'], ['subtract', 'Soustraire (la 1re moins la 2e)'], ['intersect', 'Intersection (ce qu’elles ont en commun)']];
+    const MERGE_OPS = [['union', 'Union (les deux réunies)'], ['subtract', 'Soustraire (la 1re moins la 2e)'], ['intersect', 'Intersection (ce qu’elles ont en commun)']].map(([k, l, ...r]) => [k, i18n(l), ...r]);
 
     /* ═════════ Texte riche : quelques balises et un style limité (comme le serveur) ═════════ */
     const TAGS = new Set(['B', 'STRONG', 'I', 'EM', 'U', 'S', 'STRIKE', 'BR', 'DIV', 'P', 'UL', 'OL', 'LI', 'SPAN', 'SUP', 'SUB']);
@@ -187,7 +190,7 @@
     function personHtml(o, th, mode) {
         const d = o.data || {}, fs = num(o.size, 30), fg = col(o.color, '#1d1d1f'), fill = o.nofill ? 'transparent' : col(o.fill, '#fffffff0'), view = o.view || 'card', tf = th.tf;
         const portrait = fileOk(d.portrait) ? mediaUrl(d.portrait) : '';
-        if (!d.name) return mode === 'edit' ? `<div style="${esc(`width:100%;height:100%;display:flex;align-items:center;justify-content:center;text-align:center;border:2px dashed rgba(127,127,127,.6);border-radius:16px;color:#888;background:rgba(127,127,127,.12);font:600 ${Math.max(14, fs * .8)}px sans-serif;padding:10px;box-sizing:border-box`)}">👤<br>Choisis une personne (à droite, onglet Format)</div>` : '';
+        if (!d.name) return mode === 'edit' ? `<div style="${esc(`width:100%;height:100%;display:flex;align-items:center;justify-content:center;text-align:center;border:2px dashed rgba(127,127,127,.6);border-radius:16px;color:#888;background:rgba(127,127,127,.12);font:600 ${Math.max(14, fs * .8)}px sans-serif;padding:10px;box-sizing:border-box`)}">👤<br>${esc(i18n('Choisis une personne (à droite, onglet Format)'))}</div>` : '';
         const ini = esc(String(d.name).split(/\s+/).map(x => x[0] || '').join('').slice(0, 2).toUpperCase());
         if (view === 'photo') return `<div style="${esc(`position:relative;width:100%;height:100%;overflow:hidden;border-radius:${num(o.radius, 12)}px;background:#222;${o.border ? `border:${num(o.bw, 6)}px solid ${col(o.border)};box-sizing:border-box;` : ''}`)}">${portrait ? `<img src="${esc(portrait)}" alt="" draggable="false" style="width:100%;height:100%;object-fit:cover;display:block">` : `<div style="${esc(`width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#aaa;font:700 ${fs * 3}px ${tf}`)}">${ini}</div>`}
             <div style="${esc(`position:absolute;left:0;right:0;bottom:0;padding:${fs * .6}px ${fs * .7}px ${fs * .5}px;background:linear-gradient(transparent, rgba(0,0,0,.78));color:#fff;font-family:${tf}`)}"><div style="${esc(`font-size:${fs * 1.1}px;font-weight:700;line-height:1.1`)}">${esc(d.name)}</div><div style="${esc(`font-size:${fs * .75}px;opacity:.9`)}">${esc(d.years || '')}</div></div></div>`;
@@ -204,7 +207,7 @@
         }
         if (view === 'timeline') {
             const ev = (d.events || []).slice(0, 12), VW = 1000, VH = 320, n = ev.length, X = i => n < 2 ? VW / 2 : 70 + i * (VW - 140) / (n - 1);
-            return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${VW} ${VH}" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" font-family="${esc(th.bf)}" style="display:block">${o.nofill ? '' : `<rect width="${VW}" height="${VH}" rx="24" fill="${fill}"/>`}<text x="${VW / 2}" y="44" text-anchor="middle" font-size="30" font-weight="700" fill="${fg}">${esc(cut(d.name, 50))}${d.years ? ` <tspan fill="${th.accent}" font-weight="400">${esc(d.years)}</tspan>` : ''}</text><line x1="40" y1="170" x2="${VW - 40}" y2="170" stroke="${th.accent}" stroke-width="5" stroke-linecap="round"/>${ev.map((e, i) => { const up = i % 2 === 0; return `<circle cx="${r1(X(i))}" cy="170" r="11" fill="${th.accent}" stroke="#ffffff" stroke-width="3"/><text x="${r1(X(i))}" y="${up ? 128 : 222}" text-anchor="middle" font-size="24" font-weight="700" fill="${fg}">${esc(e.year || '')}</text><text x="${r1(X(i))}" y="${up ? 100 : 252}" text-anchor="middle" font-size="${n > 8 ? 15 : 18}" fill="${fg}" opacity=".85">${esc(cut(e.label, n > 8 ? 18 : 26))}</text>`; }).join('')}${n ? '' : `<text x="${VW / 2}" y="230" text-anchor="middle" font-size="22" fill="#888">Aucun événement daté</text>`}</svg>`;
+            return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${VW} ${VH}" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" font-family="${esc(th.bf)}" style="display:block">${o.nofill ? '' : `<rect width="${VW}" height="${VH}" rx="24" fill="${fill}"/>`}<text x="${VW / 2}" y="44" text-anchor="middle" font-size="30" font-weight="700" fill="${fg}">${esc(cut(d.name, 50))}${d.years ? ` <tspan fill="${th.accent}" font-weight="400">${esc(d.years)}</tspan>` : ''}</text><line x1="40" y1="170" x2="${VW - 40}" y2="170" stroke="${th.accent}" stroke-width="5" stroke-linecap="round"/>${ev.map((e, i) => { const up = i % 2 === 0; return `<circle cx="${r1(X(i))}" cy="170" r="11" fill="${th.accent}" stroke="#ffffff" stroke-width="3"/><text x="${r1(X(i))}" y="${up ? 128 : 222}" text-anchor="middle" font-size="24" font-weight="700" fill="${fg}">${esc(e.year || '')}</text><text x="${r1(X(i))}" y="${up ? 100 : 252}" text-anchor="middle" font-size="${n > 8 ? 15 : 18}" fill="${fg}" opacity=".85">${esc(cut(e.label, n > 8 ? 18 : 26))}</text>`; }).join('')}${n ? '' : `<text x="${VW / 2}" y="230" text-anchor="middle" font-size="22" fill="#888">${esc(i18n('Aucun événement daté'))}</text>`}</svg>`;
         }
         return `<div style="${esc(`width:100%;height:100%;box-sizing:border-box;display:flex;gap:${fs * .8}px;align-items:center;padding:${fs * .8}px;background:${fill};color:${fg};border-radius:${num(o.radius, 18)}px;overflow:hidden;font-family:${th.bf};${o.border ? `border:${num(o.bw, 3)}px solid ${col(o.border)};` : ''}`)}">
             ${portrait ? `<img src="${esc(portrait)}" alt="" draggable="false" style="${esc(`height:100%;max-height:100%;aspect-ratio:3/4;max-width:42%;object-fit:cover;border-radius:${fs * .4}px;flex:0 0 auto;display:block`)}">` : `<div style="${esc(`flex:0 0 auto;width:${fs * 4}px;height:${fs * 4}px;border-radius:50%;background:${th.accent};color:${inkOn(th.accent)};display:flex;align-items:center;justify-content:center;font:700 ${fs * 1.5}px ${tf}`)}">${ini}</div>`}
@@ -219,7 +222,7 @@
         }
         if (o.t === 'image') {
             const src = srcOf(o), wrap = `width:100%;height:100%;overflow:hidden;box-sizing:border-box;${(MASK_CSS[o.mask] || (() => ''))(o)}${o.border ? `border:${num(o.bw, 6)}px solid ${col(o.border)};` : ''}`;
-            if (!src) return ed ? `<div style="${esc(`${wrap}display:flex;align-items:center;justify-content:center;background:rgba(127,127,127,.16);border:2px dashed rgba(127,127,127,.6);color:#888;font:600 ${clamp(Math.min(o.w, o.h) / 12, 12, 40)}px sans-serif;text-align:center;padding:8px`)}">🖼️<br>Double-clique pour choisir une image</div>` : '';
+            if (!src) return ed ? `<div style="${esc(`${wrap}display:flex;align-items:center;justify-content:center;background:rgba(127,127,127,.16);border:2px dashed rgba(127,127,127,.6);color:#888;font:600 ${clamp(Math.min(o.w, o.h) / 12, 12, 40)}px sans-serif;text-align:center;padding:8px`)}">🖼️<br>${esc(i18n('Double-clique pour choisir une image'))}</div>` : '';
             const fit = ['cover', 'contain', 'fill'].includes(o.fit) ? o.fit : 'cover', z = clamp(num(o.zoom, 1), 1, 8), px = clamp(num(o.px, 50), 0, 100), py = clamp(num(o.py, 50), 0, 100);
             const filt = [num(o.bright, 100) !== 100 ? `brightness(${num(o.bright)}%)` : '', num(o.contrast, 100) !== 100 ? `contrast(${num(o.contrast)}%)` : '', num(o.sat, 100) !== 100 ? `saturate(${num(o.sat)}%)` : '', num(o.sepia) ? `sepia(${num(o.sepia)}%)` : '', num(o.gray) ? `grayscale(${num(o.gray)}%)` : '', num(o.blur) ? `blur(${num(o.blur)}px)` : ''].filter(Boolean).join(' ');
             const flip = o.flipH || o.flipV ? `scale(${o.flipH ? -1 : 1},${o.flipV ? -1 : 1}) ` : '';
@@ -285,7 +288,7 @@
     function renderSlide(show, s, mode = 'edit') {
         const [W, H] = dims(show), th = themeOf(show), objs = s.objs || [];
         const vis = objs.filter(o => o.t !== 'link' || linkGeom(o, objs));
-        return `<div class="kn-sl" style="${esc(`position:relative;width:${W}px;height:${H}px;overflow:hidden;${bgCss(s, th)};color:${th.fg};font-family:${th.bf}`)}">${bgImg(s)}${masterHtml(show, s, th, mode)}${vis.map(o => objHtml(o, show, th, mode)).join('')}</div>`;
+        return `<div class="kn-sl" data-i18n-off style="${esc(`position:relative;width:${W}px;height:${H}px;overflow:hidden;${bgCss(s, th)};color:${th.fg};font-family:${th.bf}`)}">${bgImg(s)}${masterHtml(show, s, th, mode)}${vis.map(o => objHtml(o, show, th, mode)).join('')}</div>`;
     }
     /** l'état « tout est construit » ou « au début » d'une diapositive : quels objets sont cachés par leurs animations */
     function hiddenAt(s, at) {
@@ -426,13 +429,13 @@
 .pp ul{list-style:disc;padding-left:1.2em;margin:.2em 0}.pp ol{padding-left:1.4em;margin:.2em 0}`;
     function openPlayer(show, {start = 0, name = '', onExit, presenter = false} = {}) {
         const [W, H] = dims(show), order = show.slides.map((s, i) => i).filter(i => !show.slides[i].skip);
-        if (!order.length) { toast('Aucune diapositive à montrer (toutes sont sautées ?).', 'error'); return; }
+        if (!order.length) { toast(i18n('Aucune diapositive à montrer (toutes sont sautées ?).'), 'error'); return; }
         let pos = order.findIndex(i => i >= start); if (pos < 0) pos = 0;
         const P = prefs();
         const dlg = document.createElement('dialog'); dlg.className = 'kn-play-dlg';
         dlg.innerHTML = `<div class="kn-pv" data-pv><div class="kn-pst" data-pst></div><div class="kn-pcover" data-cover hidden></div><div class="kn-laser" data-laser hidden></div>
             <div class="kn-phud" data-hud><button type="button" data-p="prev" title="Précédente (←)">‹</button><span data-pidx></span><button type="button" data-p="next" title="Suivante (→ ou espace)">›</button><button type="button" data-p="presenter" title="Fenêtre du présentateur : notes, suivante, chronomètre (P)">🎤</button><button type="button" data-p="laser" title="Pointeur laser (L)">🔴</button><button type="button" data-p="help" title="Les touches (?)">?</button><button type="button" data-p="exit" title="Quitter (Échap)">×</button></div>
-            <div class="kn-phelp" data-help hidden><h3>Touches</h3><p><kbd>→</kbd> <kbd>espace</kbd> <kbd>clic</kbd> suivante · <kbd>←</kbd> précédente · <kbd>Début</kbd> <kbd>Fin</kbd> · un numéro puis <kbd>Entrée</kbd> : aller à la diapositive · <kbd>B</kbd> écran noir · <kbd>W</kbd> écran blanc · <kbd>L</kbd> pointeur laser · <kbd>P</kbd> présentateur · <kbd>Échap</kbd> quitter</p></div></div>`;
+            <div class="kn-phelp" data-help hidden><h3>${esc(i18n('Touches'))}</h3><p>${i18n('<kbd>→</kbd> <kbd>espace</kbd> <kbd>clic</kbd> suivante · <kbd>←</kbd> précédente · <kbd>Début</kbd> <kbd>Fin</kbd> · un numéro puis <kbd>Entrée</kbd> : aller à la diapositive · <kbd>B</kbd> écran noir · <kbd>W</kbd> écran blanc · <kbd>L</kbd> pointeur laser · <kbd>P</kbd> présentateur · <kbd>Échap</kbd> quitter')}</p></div></div>`;
         document.body.appendChild(dlg); dlg.showModal();
         dlg.requestFullscreen?.().catch(() => {});
         const $ = s => dlg.querySelector(s), pv = $('[data-pv]'), stage = $('[data-pst]'), cover = $('[data-cover]'), laserEl = $('[data-laser]'), hud = $('[data-hud]');
@@ -468,7 +471,7 @@
             if (si < steps.length) return runStep();
             if (pos < order.length - 1) return enter(pos + 1);
             if (show.loop) return enter(0);
-            ended = true; clearTimeout(autoT); cover.hidden = false; cover.className = 'kn-pcover is-end'; cover.textContent = 'Fin de la présentation — clic ou → pour quitter'; presenterUpdate();
+            ended = true; clearTimeout(autoT); cover.hidden = false; cover.className = 'kn-pcover is-end'; cover.textContent = i18n('Fin de la présentation — clic ou → pour quitter'); presenterUpdate();
         }
         function prev() { if (ended) { ended = false; cover.hidden = true; return; } if (transH) transH.finish(); enter(Math.max(0, pos - 1), {at: pos > 0 ? 'end' : 'start', trans: false}); }
         function setCover(kind) { if (!cover.hidden && cover.classList.contains('is-' + kind)) { cover.hidden = true; return; } cover.hidden = false; cover.className = `kn-pcover is-${kind}`; cover.textContent = ''; }
@@ -484,20 +487,21 @@
         function presenterUpdate() {
             if (!pw || pw.closed) return; const d = pw.document, s = cur(), nx = order[pos + 1] !== undefined ? show.slides[order[pos + 1]] : null;
             fitBox(d.getElementById('cur'), renderBuilt(show, s, 'thumb', si >= steps.length ? 'end' : 'start'));
-            fitBox(d.getElementById('next'), si < steps.length ? `<div style="width:${W}px;height:${H}px;display:flex;align-items:center;justify-content:center;background:#222;color:#ddd;font:600 ${H / 12}px sans-serif">✨ Encore ${steps.length - si} animation${steps.length - si > 1 ? 's' : ''} sur cette diapositive</div>` : nx ? renderBuilt(show, nx, 'thumb', 'end') : `<div style="width:${W}px;height:${H}px;display:flex;align-items:center;justify-content:center;background:#111;color:#888;font:600 ${H / 10}px sans-serif">Fin</div>`);
-            const n = d.getElementById('notes'); n.style.fontSize = notesSize + 'px'; n.innerHTML = s.notes ? esc(s.notes).replace(/\n/g, '<br>') : '<span class="empty-line"><span class="empty-line-ico" aria-hidden="true">📝</span><span class="empty-line-text">Pas de notes pour cette diapositive (onglet 📝 Notes sous la diapositive).</span></span>';
+            fitBox(d.getElementById('next'), si < steps.length ? `<div style="width:${W}px;height:${H}px;display:flex;align-items:center;justify-content:center;background:#222;color:#ddd;font:600 ${H / 12}px sans-serif">✨ ${esc(i18n('Encore {n} sur cette diapositive', {n: plural(steps.length - si, 'animation')}))}</div>` : nx ? renderBuilt(show, nx, 'thumb', 'end') : `<div style="width:${W}px;height:${H}px;display:flex;align-items:center;justify-content:center;background:#111;color:#888;font:600 ${H / 10}px sans-serif">${esc(i18n('Fin', {ctx: 'présentation'}))}</div>`);
+            const n = d.getElementById('notes'); n.style.fontSize = notesSize + 'px'; n.innerHTML = s.notes ? esc(s.notes).replace(/\n/g, '<br>') : `<span class="empty-line"><span class="empty-line-ico" aria-hidden="true">📝</span><span class="empty-line-text">${esc(i18n('Pas de notes pour cette diapositive (onglet 📝 Notes sous la diapositive).'))}</span></span>`;
             d.getElementById('idx').textContent = ended ? 'Fin' : `Diapositive ${pos + 1} / ${order.length}`;
         }
         const tick = () => { if (!pw || pw.closed) { clearInterval(pTimer); return; } const d = pw.document, el = (Date.now() - pStart - (pPause ? Date.now() - pPause : 0)) / 1000; d.getElementById('timer').textContent = `${Math.floor(el / 3600) ? Math.floor(el / 3600) + ':' : ''}${String(Math.floor(el / 60) % 60).padStart(2, '0')}:${String(Math.floor(el % 60)).padStart(2, '0')}`; d.getElementById('clock').textContent = new Date().toLocaleTimeString('fr-FR', {hour: '2-digit', minute: '2-digit'}); };
         function openPresenter() {
             if (pw && !pw.closed) { pw.focus(); return; }
             pw = window.open('', 'lcnda-kn-presenter', 'width=1180,height=760');
-            if (!pw) { toast('La fenêtre du présentateur a été bloquée : autorise les fenêtres surgissantes pour cette page.', 'error'); return; }
+            if (!pw) { toast(i18n('La fenêtre du présentateur a été bloquée : autorise les fenêtres surgissantes pour cette page.'), 'error'); return; }
             const base = location.href.replace(/[#?].*$/, '').replace(/[^/]*$/, '');
-            pw.document.open(); pw.document.write(`<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>🎤 Présentateur — ${esc(name || 'Présentation')}</title><base href="${esc(base)}"><style>${PRESENTER_CSS}</style></head><body><div class="pp">
-                <header><b id="timer">00:00</b><button type="button" data-a="pause" title="Arrêter / reprendre le chronomètre">⏸</button><button type="button" data-a="reset" title="Remettre le chronomètre à zéro">↺</button><span class="sp"></span><span id="idx"></span><span class="sp"></span><span class="muted">Heure :</span> <b id="clock" style="font-size:18px"></b></header>
-                <main><div class="col"><div class="lbl">Maintenant</div><div class="box" id="cur"></div></div><div class="col2"><div class="lbl">Ensuite</div><div class="box" id="next"></div><div class="lbl">Notes <button type="button" data-a="smaller" title="Plus petit">A−</button> <button type="button" data-a="bigger" title="Plus grand">A+</button></div><div class="notes" id="notes"></div></div></main>
-                <footer><button type="button" data-a="prev">‹ Précédente</button><button type="button" data-a="next">Suivante ›</button><button type="button" data-a="black">Écran noir</button><button type="button" data-a="white">Écran blanc</button><span class="sp"></span><span class="muted">Touches : → ← espace, B, W, Échap</span><button type="button" data-a="exit">Terminer</button></footer></div></body></html>`);
+            const T = s => esc(i18n(s)); // 🌐 la fenêtre du présentateur est une page à part : ses textes sont traduits ici
+            pw.document.open(); pw.document.write(`<!doctype html><html lang="${esc(document.documentElement.lang || 'fr')}"><head><meta charset="utf-8"><title>🎤 ${T('Présentateur')} — ${esc(name || i18n('Présentation'))}</title><base href="${esc(base)}"><style>${PRESENTER_CSS}</style></head><body><div class="pp">
+                <header><b id="timer">00:00</b><button type="button" data-a="pause" title="${T('Arrêter / reprendre le chronomètre')}">⏸</button><button type="button" data-a="reset" title="${T('Remettre le chronomètre à zéro')}">↺</button><span class="sp"></span><span id="idx"></span><span class="sp"></span><span class="muted">${T('Heure :')}</span> <b id="clock" style="font-size:18px"></b></header>
+                <main><div class="col"><div class="lbl">${T('Maintenant')}</div><div class="box" id="cur"></div></div><div class="col2"><div class="lbl">${T('Ensuite')}</div><div class="box" id="next"></div><div class="lbl">${T('Notes')} <button type="button" data-a="smaller" title="${T('Plus petit')}">A−</button> <button type="button" data-a="bigger" title="${T('Plus grand')}">A+</button></div><div class="notes" id="notes"></div></div></main>
+                <footer><button type="button" data-a="prev">${T('‹ Précédente')}</button><button type="button" data-a="next">${T('Suivante ›')}</button><button type="button" data-a="black">${T('Écran noir')}</button><button type="button" data-a="white">${T('Écran blanc')}</button><span class="sp"></span><span class="muted">${T('Touches : → ← espace, B, W, Échap')}</span><button type="button" data-a="exit">${T('Terminer')}</button></footer></div></body></html>`);
             pw.document.close();
             pw.addEventListener('keydown', onKey, true);
             pw.addEventListener('resize', () => presenterUpdate());
@@ -535,7 +539,7 @@
         pv.addEventListener('pointermove', e => { if (laser) { laserEl.style.left = e.clientX + 'px'; laserEl.style.top = e.clientY + 'px'; } hud.classList.add('is-on'); clearTimeout(hudT); hudT = setTimeout(() => hud.classList.remove('is-on'), 1800); });
         pv.addEventListener('click', e => { const b = e.target.closest('[data-p]'); if (b) { const a = b.dataset.p; if (a === 'next') next(); if (a === 'prev') prev(); if (a === 'exit') exit(); if (a === 'laser') toggleLaser(); if (a === 'presenter') openPresenter(); if (a === 'help') $('[data-help]').hidden = !$('[data-help]').hidden; return; }
             if (e.target.closest('video[controls],audio[controls],[data-help]')) return; next(); });
-        pv.addEventListener('contextmenu', e => { e.preventDefault(); if (!window.LCNDA_UI?.contextMenu) return prev(); window.LCNDA_UI.contextMenu(e, [{icon: '←', label: 'Diapositive précédente', shortcut: 'ArrowLeft', run: prev}, {icon: '→', label: 'Diapositive suivante', shortcut: 'ArrowRight', run: next}, '-', {icon: '×', label: 'Quitter la présentation', shortcut: 'Échap', run: exit}]); }); // K14 : le menu de l'app (plus de « clic droit = diapo précédente »)
+        pv.addEventListener('contextmenu', e => { e.preventDefault(); if (!window.LCNDA_UI?.contextMenu) return prev(); window.LCNDA_UI.contextMenu(e, [{icon: '←', label: i18n('Diapositive précédente'), shortcut: 'ArrowLeft', run: prev}, {icon: '→', label: i18n('Diapositive suivante'), shortcut: 'ArrowRight', run: next}, '-', {icon: '×', label: i18n('Quitter la présentation'), shortcut: 'Échap', run: exit}]); }); // K14 : le menu de l'app (plus de « clic droit = diapo précédente »)
         fit(); requestAnimationFrame(fit); setTimeout(fit, 250);
         enter(pos, {trans: false});
         if (presenter) openPresenter();
@@ -576,14 +580,14 @@
         const cp = Number(A().state.currentPersonId) || 0;
         return new Promise(res => { let done = false;
             ext.openDialog({eyebrow: 'PRÉSENTATION', title, submitLabel: 'Choisir',
-                body: `<div class="h-pk-solo"><span class="pk-lab">Personne</span>${(window.LCNDA_PICKER || A()).pickerField({name: 'kn_pick', kind: 'person', value: cp || null})}</div>${cp ? '<p class="muted">La personne affichée en ce moment, ou × pour en chercher une autre.</p>' : ''}`,
+                body: `<div class="h-pk-solo"><span class="pk-lab">Personne</span>${(window.LCNDA_PICKER || A()).pickerField({name: 'kn_pick', kind: 'person', value: cp || null})}</div>${cp ? `<p class="muted">${esc(i18n('La personne affichée en ce moment, ou × pour en chercher une autre.'))}</p>` : ''}`,
                 onOpen: dg => { setTimeout(() => (dg.querySelector('.pk-search:not([hidden]) .pk-input') || dg.querySelector('.pk-chosen .go'))?.focus(), 30);
                     dg.addEventListener('close', () => { if (!done) res(0); }, {once: true}); },
-                onSubmit: f => { const v = Number(f.elements.kn_pick?.value) || 0; if (!v) return window.LCNDA_UI.fail(f.elements.kn_pick, 'Choisis une personne.'); done = true; res(v); }}); });
+                onSubmit: f => { const v = Number(f.elements.kn_pick?.value) || 0; if (!v) return window.LCNDA_UI.fail(f.elements.kn_pick, i18n('Choisis une personne.')); done = true; res(v); }}); });
     }
     /** une vidéo ou un son : la fenêtre unique des médias (un fichier de l'ordinateur y entre et se coche) */
     async function pickAV(title = 'Une vidéo ou un son', types = ['video', 'audio']) {
-        const P = window.LCNDA_PICKER; if (!P?.openMediaPicker) { toast('La fenêtre des médias n’est pas encore prête. Réessaie dans un instant.', 'error'); return null; }
+        const P = window.LCNDA_PICKER; if (!P?.openMediaPicker) { toast(i18n('La fenêtre des médias n’est pas encore prête. Réessaie dans un instant.'), 'error'); return null; }
         const m = await P.openMediaPicker({types, eyebrow: 'PRÉSENTATION', title, okLabel: 'Choisir'});
         return m ? {media_id: Number(m.id), filename: m.filename, kind: m.media_type === 'video' ? 'video' : 'audio', title: m.title || ''} : null;
     }
@@ -591,37 +595,37 @@
     let localFonts = null;
     const fontList = () => { const mine = readJ(FONTS_KEY, []); return [...new Set([...(Array.isArray(mine) ? mine : []).map(fontOk).filter(Boolean), ...(localFonts || []), ...BASE_FONTS])]; };
     async function loadLocalFonts() {
-        if (typeof window.queryLocalFonts !== 'function') { const n = ((await A().askText({title: 'Police de l’ordinateur', message: 'Ce navigateur ne sait pas lister les polices : tape le nom exact d’une police installée (ex. Garamond) :', okLabel: 'Ajouter'})) || '').trim(); if (!n) return false; const mine = readJ(FONTS_KEY, []); writeJ(FONTS_KEY, [...new Set([fontOk(n), ...(Array.isArray(mine) ? mine : [])])].slice(0, 200)); return true; }
-        try { const all = await Promise.race([window.queryLocalFonts(), new Promise((_, no) => setTimeout(() => no(new Error('lent')), 8000))]); localFonts = [...new Set(all.map(f => f.family))].sort((a, b) => a.localeCompare(b, 'fr')); if (!localFonts.length) { toast('L’ordinateur n’a donné aucune police : tape son nom dans la fenêtre.', 'error'); localFonts = null; } return true; } catch (_) { toast('Les polices de l’ordinateur ne sont pas lisibles ici : tape le nom d’une police dans la fenêtre.', 'error'); return true; }
+        if (typeof window.queryLocalFonts !== 'function') { const n = ((await A().askText({title: i18n('Police de l’ordinateur'), message: i18n('Ce navigateur ne sait pas lister les polices : tape le nom exact d’une police installée (ex. Garamond) :'), okLabel: i18n('Ajouter')})) || '').trim(); if (!n) return false; const mine = readJ(FONTS_KEY, []); writeJ(FONTS_KEY, [...new Set([fontOk(n), ...(Array.isArray(mine) ? mine : [])])].slice(0, 200)); return true; }
+        try { const all = await Promise.race([window.queryLocalFonts(), new Promise((_, no) => setTimeout(() => no(new Error('lent')), 8000))]); localFonts = [...new Set(all.map(f => f.family))].sort((a, b) => a.localeCompare(b, 'fr')); if (!localFonts.length) { toast(i18n('L’ordinateur n’a donné aucune police : tape son nom dans la fenêtre.'), 'error'); localFonts = null; } return true; } catch (_) { toast(i18n('Les polices de l’ordinateur ne sont pas lisibles ici : tape le nom d’une police dans la fenêtre.'), 'error'); return true; }
     }
     /** 🖥 choisir une police (celles de l'ordinateur en tête), vue dans sa propre forme ; resolve({font, to: 'title' | 'body' | 'sel'}) */
     function pickFont(hasSel) {
         return new Promise(res => { let done = false, chosen = '';
             const all = () => [...new Set([...(localFonts || []), ...fontList()])];
             ext.openDialog({eyebrow: 'PRÉSENTATION', title: '🖥 Choisir une police', submitLabel: 'Pour les titres', wide: true,
-                body: `<p class="muted">${localFonts ? `${A().plural(localFonts.length, 'police')} de cet ordinateur, puis celles de l’app.` : 'Les polices de l’app ; une autre police installée : tape son nom exact puis Entrée.'} Clique sur une police, puis dis où elle va.</p>
+                body: `<p class="muted">${esc(localFonts ? i18n('{n} de cet ordinateur, puis celles de l’app. Clique sur une police, puis dis où elle va.', {n: A().plural(localFonts.length, 'police')}) : i18n('Les polices de l’app ; une autre police installée : tape son nom exact puis Entrée. Clique sur une police, puis dis où elle va.'))}</p>
                     <input type="search" data-kf-q placeholder="Chercher une police, ou taper son nom…" autocomplete="off" style="width:100%">
                     <div class="kn-fontpick" data-kf-list></div><p class="kn-fontprev" data-kf-prev>Choisis une police</p>
                     <div class="kn-row"><button type="button" class="button secondary" data-kf-to="body">Pour les textes</button>${hasSel ? '<button type="button" class="button secondary" data-kf-to="sel">Pour le texte choisi</button>' : ''}</div>`,
                 onOpen: dg => { const q = dg.querySelector('[data-kf-q]'), box = dg.querySelector('[data-kf-list]'), prev = dg.querySelector('[data-kf-prev]');
                     const draw = () => { const v = q.value.trim().toLowerCase(), list = all().filter(f => !v || f.toLowerCase().includes(v)).slice(0, 400);
-                        box.innerHTML = list.map(f => `<button type="button" class="kn-fontitem${f === chosen ? ' is-on' : ''}" data-kf="${esc(f)}" style="font-family:'${esc(f).replace(/'/g, '')}',sans-serif">${esc(f)}</button>`).join('') || `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔤</span><span class="empty-line-text">Aucune police « ${esc(q.value)} » dans la liste : Entrée pour la prendre telle quelle.</span></p>`; };
-                    const pick = f => { chosen = fontOk(f) || ''; prev.textContent = chosen ? `${chosen} : Portez ce vieux whisky au juge blond qui fume` : 'Choisis une police'; prev.style.fontFamily = chosen ? `'${chosen.replace(/'/g, '')}', sans-serif` : ''; box.querySelectorAll('[data-kf]').forEach(b => b.classList.toggle('is-on', b.dataset.kf === chosen)); };
+                        box.innerHTML = list.map(f => `<button type="button" class="kn-fontitem${f === chosen ? ' is-on' : ''}" data-kf="${esc(f)}" style="font-family:'${esc(f).replace(/'/g, '')}',sans-serif">${esc(f)}</button>`).join('') || `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔤</span><span class="empty-line-text">${i18n('Aucune police « {q} » dans la liste : Entrée pour la prendre telle quelle.', {q: esc(q.value)})}</span></p>`; };
+                    const pick = f => { chosen = fontOk(f) || ''; prev.textContent = chosen ? `${chosen} : ${i18n('Portez ce vieux whisky au juge blond qui fume')}` : i18n('Choisis une police'); prev.style.fontFamily = chosen ? `'${chosen.replace(/'/g, '')}', sans-serif` : ''; box.querySelectorAll('[data-kf]').forEach(b => b.classList.toggle('is-on', b.dataset.kf === chosen)); };
                     q.addEventListener('input', draw); q.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); if (q.value.trim()) pick(q.value.trim()); } });
                     box.addEventListener('click', e => { const b = e.target.closest('[data-kf]'); if (b) pick(b.dataset.kf); });
-                    dg.addEventListener('click', e => { const b = e.target.closest('[data-kf-to]'); if (!b) return; if (!chosen) return toast('Clique d’abord sur une police.', 'error'); done = true; res({font: chosen, to: b.dataset.kfTo}); dg.close(); });
+                    dg.addEventListener('click', e => { const b = e.target.closest('[data-kf-to]'); if (!b) return; if (!chosen) return toast(i18n('Clique d’abord sur une police.'), 'error'); done = true; res({font: chosen, to: b.dataset.kfTo}); dg.close(); });
                     dg.addEventListener('close', () => { if (!done) res(null); }, {once: true}); draw(); setTimeout(() => q.focus(), 30); },
-                onSubmit: () => { if (!chosen) { toast('Clique d’abord sur une police.', 'error'); return false; } done = true; res({font: chosen, to: 'title'}); }}); });
+                onSubmit: () => { if (!chosen) { toast(i18n('Clique d’abord sur une police.'), 'error'); return false; } done = true; res({font: chosen, to: 'title'}); }}); });
     }
     const shapeIcon = k => `<span class="kn-shico">${shapeSvg({kind: k, w: 34, h: k === 'line' || k === 'arrowline' ? 20 : 26, sw: 3}, {accent: 'currentColor'})}</span>`;
 
     /* ═════════ L'éditeur ═════════ */
     const HANDLES = [['nw', -1, -1], ['n', 0, -1], ['ne', 1, -1], ['e', 1, 0], ['se', 1, 1], ['s', 0, 1], ['sw', -1, 1], ['w', -1, 0]];
-    const opt = (list, v) => list.map(([k, l]) => `<option value="${esc(k)}" ${String(k) === String(v) ? 'selected' : ''}>${esc(l)}</option>`).join('');
+    const opt = (list, v) => list.map(([k, l]) => `<option value="${esc(k)}" ${String(k) === String(v) ? 'selected' : ''}>${esc(i18n(l))}</option>`).join('');
     // la touche écrite à la fin de la bulle (« Grouper (⌘G) ») va aussi dans data-shortcut
-    const tbtn = (attr, icon, label, title = label) => { const sc = (String(title).match(/\(([⌘⇧⌥][^()]{0,8})\)$/) || [])[1] || ''; return `<button type="button" class="kn-tb" ${attr} title="${esc(title)}" data-tb-label="${esc(`${icon} ${title}`)}"${sc ? ` data-shortcut="${esc(sc)}"` : ''}><b>${icon}</b><span class="kn-tbl">${esc(label)}</span></button>`; };
+    const tbtn = (attr, icon, label, title = label) => { label = i18n(label); title = i18n(title); const sc = (String(title).match(/\(([⌘⇧⌥][^()]{0,8})\)$/) || [])[1] || ''; return `<button type="button" class="kn-tb" ${attr} title="${esc(title)}" data-tb-label="${esc(`${icon} ${title}`)}"${sc ? ` data-shortcut="${esc(sc)}"` : ''}><b>${icon}</b><span class="kn-tbl">${esc(label)}</span></button>`; };
     async function openEditor(ctx = {}) {
-        let id = 0, name = ctx.name || 'Ma présentation', show;
+        let id = 0, name = ctx.name || i18n('Ma présentation'), show;
         try {
             if (ctx.preload) { id = ctx.preload.id; name = ctx.preload.name; show = normalize(ctx.preload.show || {}); }
             else if (ctx.id) { const r = await api('slideshow', {id: ctx.id}); id = r.id; name = r.name; show = normalize(r.show || {}); }
@@ -631,43 +635,43 @@
         let cur = 0, sel = new Set(), editing = null, dirty = !!ctx.dirty, zoom = 'fit', K = .5, tab = 'format', hist = [], hi = -1, navFocus = false, snap = prefs().snap !== false, savedRange = null, escUsed = false, closed = false;
         const collapsed = new Set(), docAc = new AbortController(); // les écoutes sur la page s'arrêtent à la fermeture
         const dlg = document.createElement('dialog'); dlg.className = 'modal h-modal kn-dlg';
-        const fileMenu = [['import', '⤒ Importer (PowerPoint, OpenDocument, PDF, images, texte, JSON)…'], ['-'], ['exp_pdf', '🖨 PDF / imprimer (une diapositive par page)'], ['exp_pdfnotes', '🖨 PDF avec les notes de l’orateur'], ['exp_png', '🖼️ Cette diapositive en PNG'], ['exp_pngall', '🗂️ Toutes les diapositives en PNG (.zip)'], ['exp_video', '⏺ Vidéo (WebM)'], ['exp_json', '⤓ Fichier de la présentation (.json)']];
+        const fileMenu = [['import', '⤒ Importer (PowerPoint, OpenDocument, PDF, images, texte, JSON)…'], ['-'], ['exp_pdf', '🖨 PDF / imprimer (une diapositive par page)'], ['exp_pdfnotes', '🖨 PDF avec les notes de l’orateur'], ['exp_png', '🖼️ Cette diapositive en PNG'], ['exp_pngall', '🗂️ Toutes les diapositives en PNG (.zip)'], ['exp_video', '⏺ Vidéo (WebM)'], ['exp_json', '⤓ Fichier de la présentation (.json)']].map(([k, l]) => (l ? [k, i18n(l)] : [k]));
         dlg.innerHTML = `<div class="kn">
-            <header class="kn-top"><span class="kn-logo">🎤</span><input class="kn-name" data-kn-name value="${esc(name)}" maxlength="200" aria-label="Nom de la présentation">
-                <span class="kn-grp" data-tbg="kn-hist" data-tbg-label="Annuler / rétablir"><button type="button" class="kn-tb" data-kn-cmd="undo" title="Annuler (⌘Z)" data-tb-label="↶ Annuler (⌘Z)" data-shortcut="⌘Z"><b>↶</b><span class="kn-tbl">Annuler</span></button><button type="button" class="kn-tb" data-kn-cmd="redo" title="Rétablir (⇧⌘Z)" data-tb-label="↷ Rétablir (⇧⌘Z)" data-shortcut="⇧⌘Z"><b>↷</b><span class="kn-tbl">Rétablir</span></button></span>
-                <span class="kn-grp" data-tbg="kn-insert" data-tbg-label="Insérer (barre du haut)">
+            <header class="kn-top"><span class="kn-logo">🎤</span><input class="kn-name" data-kn-name value="${esc(name)}" maxlength="200" aria-label="${esc(i18n('Nom de la présentation'))}">
+                <span class="kn-grp" data-tbg="kn-hist" data-tbg-label="${esc(i18n('Annuler / rétablir'))}"><button type="button" class="kn-tb" data-kn-cmd="undo" title="${esc(i18n('Annuler (⌘Z)'))}" data-tb-label="${esc(i18n('↶ Annuler (⌘Z)'))}" data-shortcut="⌘Z"><b>↶</b><span class="kn-tbl">${esc(i18n('Annuler'))}</span></button><button type="button" class="kn-tb" data-kn-cmd="redo" title="${esc(i18n('Rétablir (⇧⌘Z)'))}" data-tb-label="${esc(i18n('↷ Rétablir (⇧⌘Z)'))}" data-shortcut="⇧⌘Z"><b>↷</b><span class="kn-tbl">${esc(i18n('Rétablir'))}</span></button></span>
+                <span class="kn-grp" data-tbg="kn-insert" data-tbg-label="${esc(i18n('Insérer (barre du haut)'))}">
                     ${tbtn('data-kn-ins="text"', 'T', 'Texte', 'Une zone de texte')}
-                    <details class="kn-dd" data-kn-dd="shape" data-tb-label="◆ Formes"><summary class="kn-tb" title="Une forme"><b>◆</b><span class="kn-tbl">Forme</span></summary><div class="kn-ddl kn-shapes">${SHAPES.map(([k, l]) => `<button type="button" data-kn-ins="shape:${k}" title="${esc(l)}">${shapeIcon(k)}</button>`).join('')}</div></details>
+                    <details class="kn-dd" data-kn-dd="shape" data-tb-label="${esc(i18n('◆ Formes'))}"><summary class="kn-tb" title="${esc(i18n('Une forme'))}"><b>◆</b><span class="kn-tbl">${esc(i18n('Forme'))}</span></summary><div class="kn-ddl kn-shapes">${SHAPES.map(([k, l]) => `<button type="button" data-kn-ins="shape:${k}" title="${esc(l)}">${shapeIcon(k)}</button>`).join('')}</div></details>
                     ${tbtn('data-kn-ins="image"', '🖼️', 'Image', 'Une photo des médias ou de l’ordinateur')}
                     ${tbtn('data-kn-ins="table"', '▦', 'Tableau', 'Un tableau')}
                     ${tbtn('data-kn-ins="chart"', '📊', 'Graphique', 'Un graphique (colonnes, camembert, courbe…)')}
-                    <details class="kn-dd" data-kn-dd="person" data-tb-label="👤 Généalogie (fiche, portrait, arbre, frise)"><summary class="kn-tb" title="La généalogie : une personne de la base"><b>👤</b><span class="kn-tbl">Généalogie</span></summary><div class="kn-ddl">${[['card', '🪪 Fiche d’une personne'], ['photo', '🖼️ Portrait d’une personne'], ['tree', '🌳 Petit arbre (parents, couple, enfants)'], ['timeline', '🗓️ Frise de sa vie']].map(([k, l]) => `<button type="button" data-kn-ins="person:${k}">${l}</button>`).join('')}</div></details>
+                    <details class="kn-dd" data-kn-dd="person" data-tb-label="${esc(i18n('👤 Généalogie (fiche, portrait, arbre, frise)'))}"><summary class="kn-tb" title="${esc(i18n('La généalogie : une personne de la base'))}"><b>👤</b><span class="kn-tbl">${esc(i18n('Généalogie'))}</span></summary><div class="kn-ddl">${[['card', '🪪 Fiche d’une personne'], ['photo', '🖼️ Portrait d’une personne'], ['tree', '🌳 Petit arbre (parents, couple, enfants)'], ['timeline', '🗓️ Frise de sa vie']].map(([k, l]) => `<button type="button" data-kn-ins="person:${k}">${esc(i18n(l))}</button>`).join('')}</div></details>
                     ${tbtn('data-kn-ins="media"', '🎬', 'Vidéo / son', 'Une vidéo ou un son des médias')}
                 </span>
-                <span class="kn-grp" data-tbg="kn-arrange" data-tbg-label="Disposer (barre du haut)">
-                    <details class="kn-dd" data-kn-dd="align" data-tb-label="⇤⇥ Aligner et répartir"><summary class="kn-tb" title="Aligner et répartir"><b>⇤⇥</b><span class="kn-tbl">Aligner</span></summary><div class="kn-ddl">${[['left', '⇤ À gauche'], ['hcenter', '↔ Au centre'], ['right', '⇥ À droite'], ['top', '⤒ En haut'], ['vcenter', '↕ Au milieu'], ['bottom', '⤓ En bas'], ['-'], ['dist-h', '⟷ Répartir horizontalement'], ['dist-v', '⟷ Répartir verticalement']].map(([k, l]) => k === '-' ? '<hr>' : `<button type="button" data-kn-cmd="align:${k}">${l}</button>`).join('')}</div></details>
-                    <details class="kn-dd" data-kn-dd="order" data-tb-label="⧉ Ordre (devant, derrière)"><summary class="kn-tb" title="Devant, derrière"><b>⧉</b><span class="kn-tbl">Ordre</span></summary><div class="kn-ddl">${[['front', 'Tout devant (⇧⌘])'], ['forward', 'Avancer (⌘])'], ['backward', 'Reculer (⌘[)'], ['back', 'Tout derrière (⇧⌘[)']].map(([k, l]) => `<button type="button" data-kn-cmd="order:${k}">${l}</button>`).join('')}</div></details>
+                <span class="kn-grp" data-tbg="kn-arrange" data-tbg-label="${esc(i18n('Disposer (barre du haut)'))}">
+                    <details class="kn-dd" data-kn-dd="align" data-tb-label="${esc(i18n('⇤⇥ Aligner et répartir'))}"><summary class="kn-tb" title="${esc(i18n('Aligner et répartir'))}"><b>⇤⇥</b><span class="kn-tbl">${esc(i18n('Aligner'))}</span></summary><div class="kn-ddl">${[['left', '⇤ À gauche'], ['hcenter', '↔ Au centre'], ['right', '⇥ À droite'], ['top', '⤒ En haut'], ['vcenter', '↕ Au milieu'], ['bottom', '⤓ En bas'], ['-'], ['dist-h', '⟷ Répartir horizontalement'], ['dist-v', '⟷ Répartir verticalement']].map(([k, l]) => k === '-' ? '<hr>' : `<button type="button" data-kn-cmd="align:${k}">${esc(i18n(l))}</button>`).join('')}</div></details>
+                    <details class="kn-dd" data-kn-dd="order" data-tb-label="${esc(i18n('⧉ Ordre (devant, derrière)'))}"><summary class="kn-tb" title="${esc(i18n('Devant, derrière'))}"><b>⧉</b><span class="kn-tbl">${esc(i18n('Ordre'))}</span></summary><div class="kn-ddl">${[['front', 'Tout devant (⇧⌘])'], ['forward', 'Avancer (⌘])'], ['backward', 'Reculer (⌘[)'], ['back', 'Tout derrière (⇧⌘[)']].map(([k, l]) => `<button type="button" data-kn-cmd="order:${k}">${esc(i18n(l))}</button>`).join('')}</div></details>
                     ${tbtn('data-kn-cmd="group"', '⊞', 'Grouper', 'Grouper (⌘G) — ⇧⌘G pour dissocier')}${tbtn('data-kn-cmd="ungroup"', '⊟', 'Dissocier', 'Dissocier (⇧⌘G)')}${tbtn('data-kn-cmd="lock"', '🔒', 'Verrouiller', 'Verrouiller / déverrouiller (⌘L)')}${tbtn('data-kn-cmd="connect"', '↔', 'Relier', 'Relier deux objets par un trait qui les suit (choisis-en deux)')}${tbtn('data-kn-cmd="merge"', '⊕', 'Fusionner', 'Fusionner deux formes : union, soustraction, intersection')}${tbtn('data-kn-cmd="master"', '🗂', 'Masque', 'Masque des diapositives : mettre les objets choisis sur toutes les diapositives, ou modifier le masque')}
                 </span>
-                <span class="kn-grp" data-tbg="kn-play" data-tbg-label="Lecture">${tbtn('data-kn-cmd="play"', '▶', 'Lire', 'Lire en plein écran depuis le début (⌥⌘↩)')}${tbtn('data-kn-cmd="playhere"', '⏵', 'D’ici', 'Lire depuis cette diapositive (⌘↩)')}${tbtn('data-kn-cmd="presenter"', '🎤', 'Présentateur', 'Plein écran + fenêtre du présentateur (notes, suivante, chronomètre)')}</span>
-                <span class="kn-grp" data-tbg="kn-file" data-tbg-label="Fichier">${tbtn('data-kn-cmd="import"', '⤒', 'Importer', 'PowerPoint, OpenDocument, PDF, images, Markdown, texte, JSON')}${tbtn('data-kn-cmd="story"', '✨', 'Récit', 'Récit d’une vie : des diapositives toutes faites à partir de la fiche d’une personne')}</span>
+                <span class="kn-grp" data-tbg="kn-play" data-tbg-label="${esc(i18n('Lecture'))}">${tbtn('data-kn-cmd="play"', '▶', 'Lire', 'Lire en plein écran depuis le début (⌥⌘↩)')}${tbtn('data-kn-cmd="playhere"', '⏵', 'D’ici', 'Lire depuis cette diapositive (⌘↩)')}${tbtn('data-kn-cmd="presenter"', '🎤', 'Présentateur', 'Plein écran + fenêtre du présentateur (notes, suivante, chronomètre)')}</span>
+                <span class="kn-grp" data-tbg="kn-file" data-tbg-label="${esc(i18n('Fichier'))}">${tbtn('data-kn-cmd="import"', '⤒', 'Importer', 'PowerPoint, OpenDocument, PDF, images, Markdown, texte, JSON')}${tbtn('data-kn-cmd="story"', '✨', 'Récit', 'Récit d’une vie : des diapositives toutes faites à partir de la fiche d’une personne')}</span>
                 <span class="kn-spacer"></span><span class="kn-state" data-kn-state data-ui-status></span>
-                ${ext.tbButton ? ext.tbButton('keynote') : ''}<button type="button" class="button small secondary" data-kn-cmd="export" title="PDF, impression, images, vidéo, fichier de la présentation">⤓ Exporter ▾</button><button type="button" class="button small" data-kn-cmd="save" data-shortcut="⌘S" title="Enregistrer">💾 Enregistrer</button>${ext.fullButton ? ext.fullButton('keynote') : ''}<button type="button" class="icon-button" data-kn-cmd="close" aria-label="Fermer">×</button></header>
+                ${ext.tbButton ? ext.tbButton('keynote') : ''}<button type="button" class="button small secondary" data-kn-cmd="export" title="${esc(i18n('PDF, impression, images, vidéo, fichier de la présentation'))}">${esc(i18n('⤓ Exporter ▾'))}</button><button type="button" class="button small" data-kn-cmd="save" data-shortcut="⌘S" title="${esc(i18n('Enregistrer'))}">${esc(i18n('💾 Enregistrer'))}</button>${ext.fullButton ? ext.fullButton('keynote') : ''}<button type="button" class="icon-button" data-kn-cmd="close" aria-label="${esc(i18n('Fermer'))}">×</button></header>
             <div class="kn-main">
-                <nav class="kn-rail" data-kn-rail aria-label="Outils">${[['data-kn-ins="text"', 'T', 'Une zone de texte'], ['data-kn-ins="shape:rect"', '◆', 'Une forme (les autres : menu ◆ Forme en haut)'], ['data-kn-ins="image"', '🖼️', 'Une image (médias ou ordinateur)'], ['data-kn-ins="table"', '▦', 'Un tableau'], ['data-kn-ins="chart"', '📊', 'Un graphique'], ['data-kn-ins="person:card"', '👤', 'La fiche d’une personne'], ['data-kn-ins="media"', '🎬', 'Une vidéo ou un son'], ['data-kn-cmd="playhere"', '⏵', 'Lire depuis cette diapositive (⌘↩)'], ['data-kn-cmd="presenter"', '🎤', 'Présentateur : plein écran, notes, chronomètre']].map(([a, i, t]) => `<button type="button" ${a} title="${esc(t)}" aria-label="${esc(t)}">${i}</button>`).join('')}</nav>
-                <aside class="kn-nav"><div class="kn-navbar" data-tbg="kn-navbar" data-tbg-label="Diapositives (au-dessus de la liste)"><span class="kn-split"><button type="button" class="kn-nb is-main" data-kn-cmd="newslide" title="Nouvelle diapositive">＋ Diapositive</button><details class="kn-dd" data-kn-dd="layouts" data-tb-label="▾ Choisir la disposition"><summary class="kn-nb" title="Choisir la disposition">▾</summary><div class="kn-ddl kn-lays" data-kn-lays></div></details></span><button type="button" class="kn-nb" data-kn-cmd="dupslide" title="Dupliquer la diapositive (pour un déplacement magique)">⧉</button><button type="button" class="kn-nb" data-kn-cmd="skipslide" title="Sauter / ne plus sauter à la lecture">👁</button><button type="button" class="kn-nb" data-kn-cmd="section" title="Commencer une section (un groupe de diapositives) ici">§</button><button type="button" class="kn-nb" data-kn-cmd="delslide" title="Supprimer la diapositive">🗑</button></div><ol class="kn-nlist" data-kn-slides></ol></aside>
+                <nav class="kn-rail" data-kn-rail aria-label="${esc(i18n('Outils'))}">${[['data-kn-ins="text"', 'T', 'Une zone de texte'], ['data-kn-ins="shape:rect"', '◆', 'Une forme (les autres : menu ◆ Forme en haut)'], ['data-kn-ins="image"', '🖼️', 'Une image (médias ou ordinateur)'], ['data-kn-ins="table"', '▦', 'Un tableau'], ['data-kn-ins="chart"', '📊', 'Un graphique'], ['data-kn-ins="person:card"', '👤', 'La fiche d’une personne'], ['data-kn-ins="media"', '🎬', 'Une vidéo ou un son'], ['data-kn-cmd="playhere"', '⏵', 'Lire depuis cette diapositive (⌘↩)'], ['data-kn-cmd="presenter"', '🎤', 'Présentateur : plein écran, notes, chronomètre']].map(([a, i, t]) => `<button type="button" ${a} title="${esc(i18n(t))}" aria-label="${esc(i18n(t))}">${i}</button>`).join('')}</nav>
+                <aside class="kn-nav"><div class="kn-navbar" data-tbg="kn-navbar" data-tbg-label="${esc(i18n('Diapositives (au-dessus de la liste)'))}"><span class="kn-split"><button type="button" class="kn-nb is-main" data-kn-cmd="newslide" title="${esc(i18n('Nouvelle diapositive'))}">${esc(i18n('＋ Diapositive'))}</button><details class="kn-dd" data-kn-dd="layouts" data-tb-label="${esc(i18n('▾ Choisir la disposition'))}"><summary class="kn-nb" title="${esc(i18n('Choisir la disposition'))}">▾</summary><div class="kn-ddl kn-lays" data-kn-lays></div></details></span><button type="button" class="kn-nb" data-kn-cmd="dupslide" title="${esc(i18n('Dupliquer la diapositive (pour un déplacement magique)'))}">⧉</button><button type="button" class="kn-nb" data-kn-cmd="skipslide" title="${esc(i18n('Sauter / ne plus sauter à la lecture'))}">👁</button><button type="button" class="kn-nb" data-kn-cmd="section" title="${esc(i18n('Commencer une section (un groupe de diapositives) ici'))}">§</button><button type="button" class="kn-nb" data-kn-cmd="delslide" title="${esc(i18n('Supprimer la diapositive'))}">🗑</button></div><ol class="kn-nlist" data-kn-slides></ol></aside>
                 <section class="kn-center"><div class="kn-canvas" data-kn-canvas><div class="kn-stage" data-kn-stage><div class="kn-slidebox" data-kn-slide></div><div class="kn-ov" data-kn-ov></div></div></div>
-                    <div class="kn-status" data-tbg="kn-status" data-tbg-label="Barre du bas"><button type="button" class="kn-sb" data-kn-cmd="prevslide" title="Diapositive précédente (Page précédente)">‹</button><span class="kn-sbi" data-kn-idx></span><button type="button" class="kn-sb" data-kn-cmd="nextslide" title="Diapositive suivante (Page suivante)">›</button><label class="kn-sbi ed-old-hidden" data-kn-zoomw>Zoom <select data-kn-zoom>${opt([['fit', 'Ajuster'], ['.25', '25 %'], ['.5', '50 %'], ['.75', '75 %'], ['1', '100 %'], ['1.5', '150 %'], ['2', '200 %']], 'fit')}</select></label><label class="ui-toggle kn-sbi ed-old-hidden" data-kn-snapw title="Les objets se calent sur les bords, le centre et les autres objets (⌘ en glissant : sans aimant)"><input type="checkbox" data-kn-snap ${snap ? 'checked' : ''}><i></i>Aimanter</label><button type="button" class="kn-sb" data-kn-cmd="notes" title="Notes de l’orateur">📝 Notes</button><span class="kn-sbi kn-pos" data-kn-pos></span></div>
-                    <div class="kn-notes" data-kn-notesbox hidden><textarea data-kn-notes placeholder="Notes de l’orateur : ce que tu veux dire sur cette diapositive (vues seulement dans la fenêtre du présentateur, et dans le PDF avec notes)…"></textarea></div></section>
-                <aside class="kn-insp"><nav class="kn-tabs" data-tbg="kn-tabs" data-tbg-label="Onglets de l’inspecteur (à droite)">${[['format', '🖌', 'Format', 'Format de l’objet choisi'], ['anim', '✨', 'Animer', 'Transition et animations'], ['slide', '🖼', 'Diapo', 'La diapositive : disposition, fond, durée, notes'], ['objs', '🗂', 'Objets', 'Les objets de la diapositive (devant, derrière, cacher, verrouiller)'], ['doc', '⚙️', 'Document', 'Thème, polices, format, musique']].map(([k, i, l, t]) => `<button type="button" data-kn-tab="${k}" title="${esc(t)}" data-tb-label="${esc(`${i} ${l}`)}"><span>${i}</span>${esc(l)}</button>`).join('')}</nav><div class="kn-ibody" data-kn-ibody data-dnd-off></div></aside>
+                    <div class="kn-status" data-tbg="kn-status" data-tbg-label="${esc(i18n('Barre du bas'))}"><button type="button" class="kn-sb" data-kn-cmd="prevslide" title="${esc(i18n('Diapositive précédente (Page précédente)'))}">‹</button><span class="kn-sbi" data-kn-idx></span><button type="button" class="kn-sb" data-kn-cmd="nextslide" title="${esc(i18n('Diapositive suivante (Page suivante)'))}">›</button><label class="kn-sbi ed-old-hidden" data-kn-zoomw>${esc(i18n('Zoom'))} <select data-kn-zoom>${opt([['fit', 'Ajuster'], ['.25', '25 %'], ['.5', '50 %'], ['.75', '75 %'], ['1', '100 %'], ['1.5', '150 %'], ['2', '200 %']], 'fit')}</select></label><label class="ui-toggle kn-sbi ed-old-hidden" data-kn-snapw title="${esc(i18n('Les objets se calent sur les bords, le centre et les autres objets (⌘ en glissant : sans aimant)'))}"><input type="checkbox" data-kn-snap ${snap ? 'checked' : ''}><i></i>${esc(i18n('Aimanter'))}</label><button type="button" class="kn-sb" data-kn-cmd="notes" title="${esc(i18n('Notes de l’orateur'))}">${esc(i18n('📝 Notes'))}</button><span class="kn-sbi kn-pos" data-kn-pos></span></div>
+                    <div class="kn-notes" data-kn-notesbox hidden><textarea data-kn-notes placeholder="${esc(i18n('Notes de l’orateur : ce que tu veux dire sur cette diapositive (vues seulement dans la fenêtre du présentateur, et dans le PDF avec notes)…'))}"></textarea></div></section>
+                <aside class="kn-insp"><nav class="kn-tabs" data-tbg="kn-tabs" data-tbg-label="${esc(i18n('Onglets de l’inspecteur (à droite)'))}">${[['format', '🖌', 'Format', 'Format de l’objet choisi'], ['anim', '✨', 'Animer', 'Transition et animations'], ['slide', '🖼', 'Diapo', 'La diapositive : disposition, fond, durée, notes'], ['objs', '🗂', 'Objets', 'Les objets de la diapositive (devant, derrière, cacher, verrouiller)'], ['doc', '⚙️', 'Document', 'Thème, polices, format, musique']].map(([k, i, l, t]) => `<button type="button" data-kn-tab="${k}" title="${esc(i18n(t))}" data-tb-label="${esc(`${i} ${i18n(l)}`)}"><span>${i}</span>${esc(i18n(l))}</button>`).join('')}</nav><div class="kn-ibody" data-kn-ibody data-dnd-off></div></aside>
             </div></div>`;
         document.body.appendChild(dlg); dlg.showModal();
         ext.fullInit?.(dlg, 'keynote', true); knCss();
         const $ = s => dlg.querySelector(s), canvasEl = $('[data-kn-canvas]'), stage = $('[data-kn-stage]'), slideBox = $('[data-kn-slide]'), ov = $('[data-kn-ov]'), navList = $('[data-kn-slides]'), ibody = $('[data-kn-ibody]');
         // K19 : la colonne d'outils (insérer) ; K18 : la barre du bas commune — la diapositive et ses boutons à gauche, l'aide au milieu, 🧲 et le zoom à droite
         UI().editorRail?.($('[data-kn-rail]'), {breaks: ['[data-kn-cmd="playhere"]']});
-        const knBar = UI().editorStatus?.({help: 'Clic : choisir un objet (⇧ : en plus) · double-clic : écrire dedans · glisser : déplacer · poignées : agrandir · rond : tourner',
-            magnetTitle: 'Aimanter : les objets se calent sur les bords, le centre et les autres objets (⌘ en glissant : sans aimant)',
+        const knBar = UI().editorStatus?.({help: i18n('Clic : choisir un objet (⇧ : en plus) · double-clic : écrire dedans · glisser : déplacer · poignées : agrandir · rond : tourner'),
+            magnetTitle: i18n('Aimanter : les objets se calent sur les bords, le centre et les autres objets (⌘ en glissant : sans aimant)'),
             magnet: {get: () => snap, set: v => { const c = $('[data-kn-snap]'); c.checked = !!v; c.dispatchEvent(new Event('change', {bubbles: true})); }},
             zoom: {get: () => K, set: k => { zoom = String(k); fitZoom(); }, fit: () => { zoom = 'fit'; fitZoom(); }, min: .1, max: 4}, wheel: canvasEl});
         if (knBar) { const st0 = $('.kn-status'); $('.kn-main').after(knBar); knBar.setWhere(st0); st0.classList.add('kn-status-in'); }
@@ -705,9 +709,9 @@
         function paintNav() {
             let html = '', hide = false;
             show.slides.forEach((s, i) => {
-                if (s.section) { hide = collapsed.has(s.id); html += `<li class="kn-nsec" data-kn-navsec="${i}"><button type="button" class="kn-nsec-t" data-kn-fold="${esc(s.id)}" title="Replier / déplier la section">${hide ? '▸' : '▾'}</button><span>${esc(s.section)}</span><small>${(() => { let n = 1; for (let j = i + 1; j < show.slides.length && !show.slides[j].section; j++) n++; return n; })()}</small></li>`; }
+                if (s.section) { hide = collapsed.has(s.id); html += `<li class="kn-nsec" data-kn-navsec="${i}"><button type="button" class="kn-nsec-t" data-kn-fold="${esc(s.id)}" title="${esc(i18n('Replier / déplier la section'))}">${hide ? '▸' : '▾'}</button><span data-i18n-off>${esc(s.section)}</span><small>${(() => { let n = 1; for (let j = i + 1; j < show.slides.length && !show.slides[j].section; j++) n++; return n; })()}</small></li>`; }
                 const folded = hide && !s.section;
-                html += `<li class="kn-ni${i === cur ? ' is-cur' : ''}${s.skip ? ' is-skip' : ''}${folded ? ' is-folded' : ''}" data-kn-i="${i}" draggable="true"><span class="kn-nnum">${i + 1}</span>${thumbHtml(s)}<span class="kn-nbadge">${s.skip ? '<i title="Sautée à la lecture">⤼</i>' : ''}${s.builds?.length ? '<i title="Animations">✨</i>' : ''}${s.trans?.type && s.trans.type !== 'none' ? `<i title="Transition : ${esc((TRANS.find(t => t[0] === s.trans.type) || [])[1] || '')}">◧</i>` : ''}${s.notes ? '<i title="Notes de l’orateur">📝</i>' : ''}</span></li>`;
+                html += `<li class="kn-ni${i === cur ? ' is-cur' : ''}${s.skip ? ' is-skip' : ''}${folded ? ' is-folded' : ''}" data-kn-i="${i}" draggable="true"><span class="kn-nnum">${i + 1}</span>${thumbHtml(s)}<span class="kn-nbadge">${s.skip ? `<i title="${esc(i18n('Sautée à la lecture'))}">⤼</i>` : ''}${s.builds?.length ? `<i title="${esc(i18n('Animations'))}">✨</i>` : ''}${s.trans?.type && s.trans.type !== 'none' ? `<i title="${esc(i18n('Transition : {name}', {name: (TRANS.find(t => t[0] === s.trans.type) || [])[1] || ''}))}">◧</i>` : ''}${s.notes ? `<i title="${esc(i18n('Notes de l’orateur'))}">📝</i>` : ''}</span></li>`;
             });
             navList.innerHTML = html;
             $('[data-kn-idx]').textContent = `${cur + 1} / ${show.slides.length}`;
@@ -722,7 +726,7 @@
             const box = (o, cls, inner = '') => `<div class="${cls}" style="left:${r1(o.x * K)}px;top:${r1(o.y * K)}px;width:${r1(o.w * K)}px;height:${r1(o.h * K)}px;transform:rotate(${r1(o.rot)}deg)">${inner}</div>`;
             const handles = () => HANDLES.map(([k]) => `<span class="kn-h kn-h-${k}" data-kn-h="${k}"></span>`).join('');
             objs.forEach(o => { h += box(o, `kn-selbox${o.lock ? ' is-lock' : ''}${editing === o.id ? ' is-edit' : ''}`, o.lock ? '<span class="kn-lockb">🔒</span>' : ''); });
-            if (!editing && objs.length === 1 && !objs[0].lock) h += box(objs[0], 'kn-handles', handles() + '<span class="kn-h kn-h-rot" data-kn-h="rot" title="Tourner (⇧ : de 15° en 15°)"></span>');
+            if (!editing && objs.length === 1 && !objs[0].lock) h += box(objs[0], 'kn-handles', handles() + `<span class="kn-h kn-h-rot" data-kn-h="rot" title="${esc(i18n('Tourner (⇧ : de 15° en 15°)'))}"></span>`);
             else if (!editing && objs.length > 1 && objs.every(o => !o.lock)) h += box({...bbox(objs), rot: 0}, 'kn-handles is-multi', handles());
             guides.forEach(g => { h += g.x !== undefined ? `<div class="kn-guide is-v" style="left:${r1(g.x * K)}px"></div>` : `<div class="kn-guide is-h" style="top:${r1(g.y * K)}px"></div>`; });
             if (marquee) h += `<div class="kn-marquee" style="left:${r1(marquee.x * K)}px;top:${r1(marquee.y * K)}px;width:${r1(marquee.w * K)}px;height:${r1(marquee.h * K)}px"></div>`;
@@ -775,7 +779,7 @@
         }
         function rich(cmd, val) {
             if (editing && obj(editing)?.t === 'text') { const t = editTarget(); if (!t) return; t.focus(); if (savedRange) { const s = getSelection(); s.removeAllRanges(); s.addRange(savedRange); } execRich(cmd, val); return; }
-            const list = selObjs().filter(o => o.t === 'text'); if (!list.length) return toast('Choisis une zone de texte.');
+            const list = selObjs().filter(o => o.t === 'text'); if (!list.length) return toast(i18n('Choisis une zone de texte.'));
             list.forEach(o => { const t = objEl(o.id)?.querySelector('.kn-txi'); if (!t) return; t.querySelector('.kn-ph')?.remove(); if (!t.textContent.trim()) return; t.contentEditable = 'true'; t.focus(); const r = document.createRange(); r.selectNodeContents(t); const s = getSelection(); s.removeAllRanges(); s.addRange(r); execRich(cmd, val); o.html = cleanHtml(t.innerHTML); t.contentEditable = 'false'; });
             try { getSelection().removeAllRanges(); } catch (_) {} touch();
         }
@@ -873,27 +877,27 @@
         const center = (w, h) => { const [W, H] = WH(); return {x: Math.round((W - w) / 2), y: Math.round((H - h) / 2), w: Math.round(w), h: Math.round(h)}; };
         function addObj(o, edit = false) { S().objs.push(o); sel = new Set([o.id]); canvasEl.focus({preventScroll: true}); if (tab !== 'format' && tab !== 'anim') tab = 'format'; paintSlide(); paintThumb(); commit(); paintInsp(); if (edit) startEdit(o); }
         async function insertImage(target) {
-            const m = await ext.pickImage?.({eyebrow: 'PRÉSENTATION', title: 'Choisir une image', filters: false}); if (!m) return;
+            const m = await ext.pickImage?.({eyebrow: i18n('PRÉSENTATION'), title: i18n('Choisir une image'), filters: false}); if (!m) return;
             const filename = m.filename, [nw, nh] = await imgSize(mediaUrl(filename)), [W, H] = WH();
             const one = selObjs().length === 1 ? selObjs()[0] : null;
             const ph = target || (one?.t === 'image' && !srcOf(one) ? one : null) || (!sel.size ? S().objs.find(o => o.t === 'image' && !srcOf(o)) : null);
             if (ph) { ph.filename = filename; ph.media_id = Number(m.id) || 0; delete ph.src; ph.name = ph.name || m.title || ''; sel = new Set([ph.id]); touch(true); return; }
             const k = Math.min(W * .6 / nw, H * .7 / nh); addObj({id: uid(), t: 'image', filename, media_id: Number(m.id) || 0, name: m.title || '', fit: 'cover', ...center(nw * k, nh * k)});
         }
-        async function repickPerson(o) { const pid = await askPerson('Quelle personne ?'); if (!pid) return; await setPerson(o, pid); }
-        async function setPerson(o, pid) { status('Lecture de la fiche…'); try { o.pid = pid; o.data = await personData(pid); if (!o.name || o.name === o._oldName) o.name = o.data.name; status(''); touch(true); } catch (e) { status(''); toast(e.message, 'error'); } }
-        async function replaceAV(o) { const m = await pickAV('Changer la vidéo ou le son'); if (!m) return; o.t = m.kind; o.filename = m.filename; o.media_id = m.media_id; o.name = m.title || o.name; touch(true); }
+        async function repickPerson(o) { const pid = await askPerson(i18n('Quelle personne ?')); if (!pid) return; await setPerson(o, pid); }
+        async function setPerson(o, pid) { status(i18n('Lecture de la fiche…')); try { o.pid = pid; o.data = await personData(pid); if (!o.name || o.name === o._oldName) o.name = o.data.name; status(''); touch(true); } catch (e) { status(''); toast(e.message, 'error'); } }
+        async function replaceAV(o) { const m = await pickAV(i18n('Changer la vidéo ou le son')); if (!m) return; o.t = m.kind; o.filename = m.filename; o.media_id = m.media_id; o.name = m.title || o.name; touch(true); }
         async function insert(k) {
             if (editing) stopEdit();
             const [W, H] = WH();
             if (k === 'text') return addObj({id: uid(), t: 'text', role: 'body', ...center(W * .5, H * .14), size: Math.round(H * .045), html: ''}, true);
             if (k.startsWith('shape:')) { const kind = k.slice(6), line = kind === 'line' || kind === 'arrowline'; return addObj({id: uid(), t: 'shape', kind, ...center(line ? W * .3 : H * .3, line ? 40 : H * .3), size: Math.round(H * .04), ...(line ? {sw: 6} : {})}); }
             if (k === 'image') return insertImage();
-            if (k === 'table') return addObj({id: uid(), t: 'table', ...center(W * .6, H * .36), head: true, size: Math.round(H * .03), rows: [['Année', 'Lieu', 'Événement'], ['1850', 'Tulle', 'Naissance'], ['1875', 'Brive', 'Mariage'], ['1920', 'Tulle', 'Décès']]});
+            if (k === 'table') return addObj({id: uid(), t: 'table', ...center(W * .6, H * .36), head: true, size: Math.round(H * .03), rows: [[i18n('Année'), i18n('Lieu'), i18n('Événement')], ['1850', 'Tulle', i18n('Naissance')], ['1875', 'Brive', i18n('Mariage')], ['1920', 'Tulle', i18n('Décès')]]});
             if (k === 'chart') { const R = ext.diagramRender, smp = R?.KINDS?.columns?.sample?.() || {rows: [], series: []}; return addObj({id: uid(), t: 'chart', ...center(W * .6, H * .58), spec: {kind: 'columns', ...smp}}); }
             if (k.startsWith('person:')) {
-                const view = k.slice(7), pid = await askPerson(view === 'tree' ? 'Le petit arbre de quelle personne ?' : view === 'timeline' ? 'La frise de la vie de qui ?' : 'Quelle personne ?'); if (!pid) return;
-                status('Lecture de la fiche…');
+                const view = k.slice(7), pid = await askPerson(i18n(view === 'tree' ? 'Le petit arbre de quelle personne ?' : view === 'timeline' ? 'La frise de la vie de qui ?' : 'Quelle personne ?')); if (!pid) return;
+                status(i18n('Lecture de la fiche…'));
                 try { const data = await personData(pid), g = view === 'photo' ? center(H * .45, H * .6) : view === 'tree' ? center(W * .7, W * .42) : view === 'timeline' ? center(W * .84, W * .27) : center(W * .58, H * .42); status(''); addObj({id: uid(), t: 'person', view, pid, data, name: data.name, size: Math.round(H * .03), ...g}); }
                 catch (e) { status(''); toast(e.message, 'error'); } return;
             }
@@ -901,9 +905,9 @@
         }
         /* ─── disposer ─── */
         function align(k) {
-            const objs = selObjs().filter(o => !o.lock); if (!objs.length) return toast('Choisis un ou plusieurs objets.');
+            const objs = selObjs().filter(o => !o.lock); if (!objs.length) return toast(i18n('Choisis un ou plusieurs objets.'));
             const [W, H] = WH(), b = objs.length === 1 ? {x: 0, y: 0, w: W, h: H} : bbox(objs);
-            if (k.startsWith('dist')) { if (objs.length < 3) return toast('Choisis au moins trois objets pour les répartir.'); const hz = k === 'dist-h', list = objs.slice().sort((a, c) => hz ? a.x - c.x : a.y - c.y), tot = list.reduce((a, o) => a + (hz ? o.w : o.h), 0), gap = ((hz ? b.w : b.h) - tot) / (list.length - 1); let p = hz ? b.x : b.y; list.forEach(o => { if (hz) o.x = Math.round(p); else o.y = Math.round(p); p += (hz ? o.w : o.h) + gap; }); }
+            if (k.startsWith('dist')) { if (objs.length < 3) return toast(i18n('Choisis au moins trois objets pour les répartir.')); const hz = k === 'dist-h', list = objs.slice().sort((a, c) => hz ? a.x - c.x : a.y - c.y), tot = list.reduce((a, o) => a + (hz ? o.w : o.h), 0), gap = ((hz ? b.w : b.h) - tot) / (list.length - 1); let p = hz ? b.x : b.y; list.forEach(o => { if (hz) o.x = Math.round(p); else o.y = Math.round(p); p += (hz ? o.w : o.h) + gap; }); }
             else objs.forEach(o => { if (k === 'left') o.x = b.x; if (k === 'right') o.x = b.x + b.w - o.w; if (k === 'hcenter') o.x = Math.round(b.x + (b.w - o.w) / 2); if (k === 'top') o.y = b.y; if (k === 'bottom') o.y = b.y + b.h - o.h; if (k === 'vcenter') o.y = Math.round(b.y + (b.h - o.h) / 2); });
             touch(true);
         }
@@ -914,7 +918,7 @@
             touch(true);
         }
         function delSel() { if (!sel.size) return; const s = S(); s.objs = s.objs.filter(o => !sel.has(o.id)); s.builds = (s.builds || []).filter(b => !sel.has(b.obj)); sel = new Set(); touch(true); }
-        function copySel(cut = false) { if (!sel.size) return; KN_CLIP.objs = JSON.parse(JSON.stringify(selObjs())); KN_CLIP.slides = null; KN_CLIP.from = S().id; if (cut) delSel(); else toast(`${KN_CLIP.objs.length} objet${KN_CLIP.objs.length > 1 ? 's' : ''} copié${KN_CLIP.objs.length > 1 ? 's' : ''}.`); }
+        function copySel(cut = false) { if (!sel.size) return; KN_CLIP.objs = JSON.parse(JSON.stringify(selObjs())); KN_CLIP.slides = null; KN_CLIP.from = S().id; if (cut) delSel(); else toast(`${plural(KN_CLIP.objs.length, 'objet copié', 'objets copiés')}.`); }
         function paste() {
             if (KN_CLIP.slides) { const cl = KN_CLIP.slides.map(s => ({...JSON.parse(JSON.stringify(s)), id: uid('s')})); show.slides.splice(cur + 1, 0, ...cl); cur++; sel = new Set(); paintAll(); commit(); return; }
             if (!KN_CLIP.objs?.length) return;
@@ -922,11 +926,11 @@
             S().objs.push(...cl); sel = new Set(cl.map(c => c.id)); if (same) KN_CLIP.objs = JSON.parse(JSON.stringify(cl)); touch(true);
         }
         function dupSel() { if (!sel.size) return; const cl = selObjs().map(o => { const c = cloneObj(o); c.x += 24; c.y += 24; return c; }); S().objs.push(...cl); sel = new Set(cl.map(c => c.id)); touch(true); }
-        function group(on) { const objs = selObjs(); if (on) { if (objs.length < 2) return toast('Choisis au moins deux objets à grouper.'); const g = uid('g'); objs.forEach(o => { o.g = g; }); } else objs.forEach(o => { delete o.g; }); touch(true); }
-        function connectSel() { const objs = selObjs().filter(o => o.t !== 'link'); if (objs.length !== 2) return toast('Choisis deux objets (⇧ clic) : un trait les reliera, et les suivra quand tu les déplaces.');
+        function group(on) { const objs = selObjs(); if (on) { if (objs.length < 2) return toast(i18n('Choisis au moins deux objets à grouper.')); const g = uid('g'); objs.forEach(o => { o.g = g; }); } else objs.forEach(o => { delete o.g; }); touch(true); }
+        function connectSel() { const objs = selObjs().filter(o => o.t !== 'link'); if (objs.length !== 2) return toast(i18n('Choisis deux objets (⇧ clic) : un trait les reliera, et les suivra quand tu les déplaces.'));
             const l = {id: uid(), t: 'link', from: objs[0].id, to: objs[1].id, kind: 'straight', arrow: 'end', sw: 4, x: 0, y: 0, w: 10, h: 10}; S().objs.unshift(l); sel = new Set([l.id]); touch(true); }
-        async function mergeSel() { const objs = selObjs().filter(o => o.t === 'shape' && o.kind !== 'line' && o.kind !== 'arrowline'); if (objs.length !== 2) return toast('Choisis deux formes (⇧ clic) à fusionner.');
-            const op = await new Promise(res => ext.openDialog({eyebrow: 'FORMES', title: '⊕ Fusionner deux formes', submitLabel: 'Fusionner', body: `<p class="muted">La 1re forme est celle du dessous. Les deux restent gardées dans la nouvelle forme.</p><label>Comment<select name="op">${MERGE_OPS.map(([k, l]) => `<option value="${k}">${esc(l)}</option>`).join('')}</select></label>`, onSubmit: f => res(f.elements.op.value)}));
+        async function mergeSel() { const objs = selObjs().filter(o => o.t === 'shape' && o.kind !== 'line' && o.kind !== 'arrowline'); if (objs.length !== 2) return toast(i18n('Choisis deux formes (⇧ clic) à fusionner.'));
+            const op = await new Promise(res => ext.openDialog({eyebrow: i18n('FORMES'), title: i18n('⊕ Fusionner deux formes'), submitLabel: i18n('Fusionner'), body: `<p class="muted">${esc(i18n('La 1re forme est celle du dessous. Les deux restent gardées dans la nouvelle forme.'))}</p><label>${esc(i18n('Comment'))}<select name="op">${MERGE_OPS.map(([k, l]) => `<option value="${k}">${esc(l)}</option>`).join('')}</select></label>`, onSubmit: f => res(f.elements.op.value)}));
             if (!op) return; const s = S(), [a, b] = objs.sort((p, q) => s.objs.indexOf(p) - s.objs.indexOf(q)), x0 = Math.min(a.x, b.x), y0 = Math.min(a.y, b.y), x1 = Math.max(a.x + a.w, b.x + b.w), y1 = Math.max(a.y + a.h, b.y + b.h);
             const part = o => ({kind: o.kind || 'rect', x: o.x - x0, y: o.y - y0, w: o.w, h: o.h, ...(o.points ? {points: o.points} : {}), ...(o.inner ? {inner: o.inner} : {}), ...(o.radius ? {radius: o.radius} : {})});
             const c = {id: uid(), t: 'shape', kind: 'combo', mop: op, parts: [part(a), part(b)], x: x0, y: y0, w: x1 - x0, h: y1 - y0, ...(a.fill ? {fill: a.fill} : {})};
@@ -935,9 +939,9 @@
         async function masterCmd() {
             const objs = selObjs().filter(o => o.t !== 'link'); show.master = show.master && Array.isArray(show.master.objs) ? show.master : {objs: []};
             if (objs.length) { const ids = new Set(objs.map(o => o.id)); show.master.objs.push(...objs.map(o => { const c = JSON.parse(JSON.stringify(o)); delete c._editing; return c; })); S().objs = S().objs.filter(o => !ids.has(o.id)); S().builds = (S().builds || []).filter(b => !ids.has(b.obj)); sel = new Set(); touch(true);
-                return toast(`🗂 Sur toutes les diapositives (masque). Dans un texte, « {n} » donne le numéro de la diapositive et « {total} » leur nombre. 🗂 sans rien choisir : le modifier.`, 'success'); }
-            if (!show.master.objs.length) return toast('Le masque est vide : choisis des objets (logo, pied de page, numéro « {n} »…) puis 🗂 pour les mettre sur toutes les diapositives.');
-            const what = await new Promise(res => ext.openDialog({eyebrow: 'PRÉSENTATION', title: '🗂 Masque des diapositives', submitLabel: 'OK', body: `<p class="muted">${show.master.objs.length} objet${show.master.objs.length > 1 ? 's' : ''} sur toutes les diapositives.</p><label>Que faire<select name="w"><option value="edit">Les ramener sur cette diapositive pour les modifier (puis 🗂 pour les remettre)</option><option value="skip">${S().noMaster ? 'Remontrer le masque sur cette diapositive' : 'Ne pas montrer le masque sur cette diapositive'}</option><option value="clear">Vider le masque</option></select></label>`, onSubmit: f => res(f.elements.w.value)}));
+                return toast(i18n('🗂 Sur toutes les diapositives (masque). Dans un texte, « {a} » donne le numéro de la diapositive et « {b} » leur nombre. 🗂 sans rien choisir : le modifier.', {a: '{n}', b: '{total}'}), 'success'); }
+            if (!show.master.objs.length) return toast(i18n('Le masque est vide : choisis des objets (logo, pied de page, numéro « {a} »…) puis 🗂 pour les mettre sur toutes les diapositives.', {a: '{n}'}));
+            const what = await new Promise(res => ext.openDialog({eyebrow: i18n('PRÉSENTATION'), title: i18n('🗂 Masque des diapositives'), submitLabel: 'OK', body: `<p class="muted">${esc(i18n('{n} sur toutes les diapositives.', {n: plural(show.master.objs.length, 'objet')}))}</p><label>${esc(i18n('Que faire'))}<select name="w"><option value="edit">${esc(i18n('Les ramener sur cette diapositive pour les modifier (puis 🗂 pour les remettre)'))}</option><option value="skip">${esc(i18n(S().noMaster ? 'Remontrer le masque sur cette diapositive' : 'Ne pas montrer le masque sur cette diapositive'))}</option><option value="clear">${esc(i18n('Vider le masque'))}</option></select></label>`, onSubmit: f => res(f.elements.w.value)}));
             if (what === 'edit') { const back = show.master.objs.map(o => ({...o})); show.master.objs = []; S().objs.push(...back); sel = new Set(back.map(o => o.id)); }
             else if (what === 'skip') S().noMaster = !S().noMaster; else if (what === 'clear') show.master.objs = []; else return;
             touch(true); }
@@ -945,24 +949,25 @@
         /* ─── les diapositives ─── */
         function goSlide(i) { if (editing) stopEdit(); cur = clamp(i, 0, show.slides.length - 1); sel = new Set(); paintSlide(); paintNav(); paintInsp(); $('[data-kn-notes]').value = S()?.notes || ''; }
         function addSlide(layout) { if (editing) stopEdit(); const s = newSlide(show, layout || prefs().layout || 'title-content'); show.slides.splice(cur + 1, 0, s); goSlide(cur + 1); commit(); }
-        function dupSlide() { const s = JSON.parse(JSON.stringify(S())); s.id = uid('s'); s.section = ''; s.builds = (s.builds || []).map(b => ({...b, id: uid('b')})); show.slides.splice(cur + 1, 0, s); goSlide(cur + 1); commit(); toast('Diapositive dupliquée : déplace les objets puis choisis la transition « Déplacement magique » (onglet ✨ Animer).'); }
+        function dupSlide() { const s = JSON.parse(JSON.stringify(S())); s.id = uid('s'); s.section = ''; s.builds = (s.builds || []).map(b => ({...b, id: uid('b')})); show.slides.splice(cur + 1, 0, s); goSlide(cur + 1); commit(); toast(i18n('Diapositive dupliquée : déplace les objets puis choisis la transition « Déplacement magique » (onglet ✨ Animer).')); }
         function delSlide() { if (show.slides.length <= 1) { show.slides = [newSlide(show, 'blank')]; cur = 0; } else { show.slides.splice(cur, 1); cur = Math.min(cur, show.slides.length - 1); } sel = new Set(); paintAll(); commit(); }
         /* ─── l'inspecteur (à droite) : Format, Animer, Diapositive, Objets, Document ─── */
         const hex6 = c => { c = String(c || ''); if (/^#[0-9a-f]{6}$/i.test(c)) return c; if (/^#[0-9a-f]{3}$/i.test(c)) return '#' + c.slice(1).replace(/./g, x => x + x); if (/^#[0-9a-f]{8}$/i.test(c)) return c.slice(0, 7); if (/^#[0-9a-f]{4}$/i.test(c)) return '#' + c.slice(1, 4).replace(/./g, x => x + x); return '#000000'; };
-        const F = (label, html, cls = '') => `<label class="kn-f${cls ? ' ' + cls : ''}"><span>${label}</span>${html}</label>`;
+        const F = (label, html, cls = '') => `<label class="kn-f${cls ? ' ' + cls : ''}"><span>${i18n(label)}</span>${html}</label>`;
         // C8 : un réglage difficile, avec sa bulle « ? » (une div, pas un label : la bulle ne prend pas le clic du champ)
-        const FH = (label, html, tip) => `<div class="kn-f"><span data-help="${esc(tip)}" data-help-faq="présentation">${label}</span>${html}</div>`;
+        const FH = (label, html, tip) => `<div class="kn-f"><span data-help="${esc(i18n(tip))}" data-help-faq="présentation">${i18n(label)}</span>${html}</div>`;
         const of = (k, kind = '') => `data-kn-f="${k}"${kind ? ` data-kn-k="${kind}"` : ''}`;
         const iNum = (attr, v, a = '') => `<input type="number" ${attr} data-kn-k="num" value="${esc(v === undefined || v === null ? '' : r1(v))}" ${a}>`;
         const iRange = (attr, v, min, max, step = 1) => `<span class="kn-rng"><input type="range" ${attr} data-kn-k="num" min="${min}" max="${max}" step="${step}" value="${esc(v)}"><output>${esc(v)}</output></span>`;
-        const iColor = (attr, v, clear = '') => `<span class="kn-colw"><input type="color" ${attr} value="${esc(hex6(v))}">${clear ? `<button type="button" class="kn-ib" data-kn-x="${clear}" title="Aucune couleur">∅</button>` : ''}</span>`;
-        const iChk = (attr, v, label) => `<label class="ui-toggle kn-chk"><input type="checkbox" ${attr} data-kn-k="bool" ${v ? 'checked' : ''}><i></i>${label}</label>`;
+        const iColor = (attr, v, clear = '') => `<span class="kn-colw"><input type="color" ${attr} value="${esc(hex6(v))}">${clear ? `<button type="button" class="kn-ib" data-kn-x="${clear}" title="${esc(i18n('Aucune couleur'))}">∅</button>` : ''}</span>`;
+        const iChk = (attr, v, label) => `<label class="ui-toggle kn-chk"><input type="checkbox" ${attr} data-kn-k="bool" ${v ? 'checked' : ''}><i></i>${i18n(label)}</label>`;
         const iSel = (attr, list, v) => `<select ${attr}>${opt(list, v)}</select>`;
         const iTxt = (attr, v, ph = '') => `<input type="text" ${attr} data-kn-k="text" value="${esc(v ?? '')}" placeholder="${esc(ph)}" maxlength="200">`;
-        const B = (x, label, title = '') => `<button type="button" class="kn-ib" data-kn-x="${esc(x)}" title="${esc(title || label.replace(/<[^>]+>/g, ''))}">${label}</button>`;
-        const fontBtn = (to, v, ph) => `<button type="button" class="kn-fontbtn" data-kn-x="fontpick:${to}" title="Choisir la police (recherche, récentes, polices de l’ordinateur)" style="${esc(v ? `font-family:${fontCss(v)}` : '')}"><span>${esc(v ? fontOk(v) : ph)}</span><span aria-hidden="true">▾</span></button>`;
-        const C = (cmd, label, title = '') => `<button type="button" class="kn-ib" data-kn-cmd="${esc(cmd)}" title="${esc(title || label)}">${label}</button>`;
-        const objLabel = o => !o ? '?' : o.name || (o.t === 'text' ? cut(htmlToText(o.html), 40) || PH[o.role] || 'Texte' : o.t === 'shape' ? `${(SHAPES.find(x => x[0] === o.kind) || SHAPES[0])[1]}${o.text ? ` « ${cut(o.text, 20)} »` : ''}` : o.t === 'person' ? o.data?.name || 'Personne' : TYPE_LABEL[o.t]);
+        // 🌐 les libellés et les bulles des boutons du panneau, dans la langue choisie (« <b>G</b> » : clé « bouton|<b>G</b> »)
+        const B = (x, label, title = '') => { label = i18n(label, {ctx: 'bouton'}); title = title ? i18n(title) : ''; return `<button type="button" class="kn-ib" data-kn-x="${esc(x)}" title="${esc(title || label.replace(/<[^>]+>/g, ''))}">${label}</button>`; };
+        const fontBtn = (to, v, ph) => `<button type="button" class="kn-fontbtn" data-kn-x="fontpick:${to}" title="${esc(i18n('Choisir la police (recherche, récentes, polices de l’ordinateur)'))}" style="${esc(v ? `font-family:${fontCss(v)}` : '')}"><span>${esc(v ? fontOk(v) : i18n(ph))}</span><span aria-hidden="true">▾</span></button>`;
+        const C = (cmd, label, title = '') => `<button type="button" class="kn-ib" data-kn-cmd="${esc(cmd)}" title="${esc(i18n(title || label))}">${label}</button>`;
+        const objLabel = o => !o ? '?' : o.name || (o.t === 'text' ? cut(htmlToText(o.html), 40) || PH[o.role] || i18n('Texte') : o.t === 'shape' ? `${(SHAPES.find(x => x[0] === o.kind) || SHAPES[0])[1]}${o.text ? ` « ${cut(o.text, 20)} »` : ''}` : o.t === 'person' ? o.data?.name || i18n('Personne') : TYPE_LABEL[o.t]);
         const fxL = k => (FX.find(x => x[0] === k) || FX[1])[1], startL = k => (STARTS.find(x => x[0] === k) || STARTS[0])[1];
         const chartText = sp => { const se = (sp?.series?.length ? sp.series : [{name: 'Valeur'}]).map(s => s.name || 'Valeur'); return [['Catégorie', ...se].join(' ; '), ...(sp?.rows || []).map(r => [r.label ?? '', ...se.map((_, j) => r['s' + j] ?? '')].join(' ; '))].join('\n'); };
         function paneFormat() {
@@ -972,64 +977,64 @@
             const line = o && o.t === 'shape' && ['line', 'arrowline'].includes(o.kind);
             const h = [
                 sec('geom', 'Position et taille', one, () => `<div class="kn-g4">${F('X', iNum(of('x'), o.x))}${F('Y', iNum(of('y'), o.y))}${F('Largeur', iNum(of('w'), o.w, 'min="4"'))}${F('Hauteur', iNum(of('h'), o.h, 'min="4"'))}</div><div class="kn-g2">${F('Rotation', iNum(of('rot'), o.rot || 0, 'min="-180" max="180" data-unit="°"'))}${F('Nom (pour le déplacement magique)', iTxt(of('name'), o.name, objLabel(o)))}</div>${['image', 'shape'].includes(o.t) ? `<div class="kn-row">${B('flipH', '⇋ Miroir', 'Retourner de gauche à droite')}${B('flipV', '⇵ Miroir', 'Retourner de haut en bas')}${o.t === 'image' ? B('natural', '⤢ Proportions de la photo') : ''}</div>` : ''}`),
-                sec('arrange', 'Disposition', objs.length > 0, () => `<div class="kn-row kn-icons">${[['left', '⇤', 'À gauche'], ['hcenter', '↔', 'Au centre'], ['right', '⇥', 'À droite'], ['top', '⤒', 'En haut'], ['vcenter', '↕', 'Au milieu'], ['bottom', '⤓', 'En bas'], ['dist-h', '⟷', 'Répartir horizontalement'], ['dist-v', '⇳', 'Répartir verticalement']].map(([k, i, t]) => C(`align:${k}`, i, `${t}${one ? ' (sur la diapositive)' : ''}`)).join('')}</div>
+                sec('arrange', 'Disposition', objs.length > 0, () => `<div class="kn-row kn-icons">${[['left', '⇤', 'À gauche'], ['hcenter', '↔', 'Au centre'], ['right', '⇥', 'À droite'], ['top', '⤒', 'En haut'], ['vcenter', '↕', 'Au milieu'], ['bottom', '⤓', 'En bas'], ['dist-h', '⟷', 'Répartir horizontalement'], ['dist-v', '⇳', 'Répartir verticalement']].map(([k, i, t]) => C(`align:${k}`, i, one ? i18n('{what} (sur la diapositive)', {what: i18n(t)}) : t)).join('')}</div>
                     <div class="kn-row kn-icons">${C('order:front', '⏫', 'Tout devant')}${C('order:forward', '🔼', 'Avancer')}${C('order:backward', '🔽', 'Reculer')}${C('order:back', '⏬', 'Tout derrière')}${C('group', '⊞', 'Grouper (⌘G)')}${C('ungroup', '⊟', 'Dissocier (⇧⌘G)')}${C('lock', o.lock ? '🔒' : '🔓', o.lock ? 'Déverrouiller (⌘L)' : 'Verrouiller (⌘L)')}${C('duplicate', '⧉', 'Dupliquer (⌘D)')}${C('delete', '🗑', 'Supprimer (⌫)')}</div>`),
                 sec('text', 'Texte', has('text', 'shape', 'table', 'person'), () => `${F('Police', `<span class="kn-fontw">${fontBtn('sel', o.font, 'Police du thème')}${o.font ? B('fontclear:sel', '∅', 'Revenir à la police du thème') : ''}</span>`)}
                     <div class="kn-g3">${F('Taille', `<input type="number" data-kn-x="size" min="4" max="600" value="${esc(num(o.size, 40))}">`)}${F('Graisse', iSel(of('weight', 'num'), [['', 'Selon le rôle'], ['300', 'Légère'], ['400', 'Normale'], ['500', 'Moyenne'], ['600', 'Demi-grasse'], ['700', 'Grasse'], ['800', 'Extra-grasse'], ['900', 'Noire']], o.weight ?? ''))}${F('Couleur', `<input type="color" data-kn-x="color" value="${esc(hex6(o.color || (o.acc ? th.accent : o.t === 'shape' ? '#ffffff' : o.t === 'person' ? '#1d1d1f' : th.fg)))}">`)}</div>
                     ${has('text') ? `<div class="kn-row kn-icons">${B('rich:bold', '<b>G</b>', 'Gras (⌘B)')}${B('rich:italic', '<i>I</i>', 'Italique (⌘I)')}${B('rich:underline', '<u>S</u>', 'Souligné (⌘U)')}${B('rich:strikeThrough', '<s>B</s>', 'Barré')}${B('rich:superscript', 'x²', 'Exposant (1<sup>er</sup>)')}${B('rich:insertUnorderedList', '•≡', 'Liste à puces')}${B('rich:insertOrderedList', '1≡', 'Liste numérotée')}${B('rich:indent', '⇥', 'Retrait (sous-liste)')}${B('rich:outdent', '⇤', 'Moins de retrait')}${B('rich:removeFormat', '⌫A', 'Enlever la mise en forme')}</div>` : ''}
-                    <div class="kn-row kn-icons">${[['left', '⯇≡', 'Aligné à gauche'], ['center', '≡', 'Centré'], ['right', '≡⯈', 'Aligné à droite'], ['justify', '☰', 'Justifié']].map(([k, i, t]) => `<button type="button" class="kn-ib${(o.align || (o.t === 'shape' ? 'center' : 'left')) === k ? ' is-on' : ''}" data-kn-x="align:${k}" title="${t}">${i}</button>`).join('')}${has('text') ? [['top', '⤒', 'En haut de la zone'], ['middle', '↕', 'Au milieu de la zone'], ['bottom', '⤓', 'En bas de la zone']].map(([k, i, t]) => `<button type="button" class="kn-ib${(o.valign || 'top') === k ? ' is-on' : ''}" data-kn-x="valign:${k}" title="${t}">${i}</button>`).join('') : ''}</div>
+                    <div class="kn-row kn-icons">${[['left', '⯇≡', 'Aligné à gauche'], ['center', '≡', 'Centré'], ['right', '≡⯈', 'Aligné à droite'], ['justify', '☰', 'Justifié']].map(([k, i, t]) => `<button type="button" class="kn-ib${(o.align || (o.t === 'shape' ? 'center' : 'left')) === k ? ' is-on' : ''}" data-kn-x="align:${k}" title="${esc(i18n(t))}">${i}</button>`).join('')}${has('text') ? [['top', '⤒', 'En haut de la zone'], ['middle', '↕', 'Au milieu de la zone'], ['bottom', '⤓', 'En bas de la zone']].map(([k, i, t]) => `<button type="button" class="kn-ib${(o.valign || 'top') === k ? ' is-on' : ''}" data-kn-x="valign:${k}" title="${esc(i18n(t))}">${i}</button>`).join('') : ''}</div>
                     ${has('text', 'shape') ? `<div class="kn-g3">${F('Interligne', iNum(of('lh'), o.lh ?? 1.2, 'step="0.05" min="0.6" max="4"'))}${F('Lettres', iNum(of('ls'), o.ls ?? 0, 'step="0.5" min="-20" max="100"'))}${has('text') ? F('Marge', iNum(of('pad'), o.pad ?? 8, 'min="0" max="400"')) : ''}</div>` : ''}
                     <div class="kn-row">${iChk(of('acc'), o.acc, 'Couleur d’accent du thème')}${iChk(of('italic'), o.italic, 'Italique')}</div>
                     ${one && o.t === 'shape' ? F('Texte dans la forme', `<textarea rows="2" ${of('text', 'text')}>${esc(o.text || '')}</textarea>`) : ''}
-                    ${editing ? '<p class="muted">Les réglages vont au texte sélectionné (sinon à tout le texte).</p>' : has('text') ? '<p class="muted">Double-clic dans le texte pour l’écrire ; les réglages vont à tout le texte, ou au morceau sélectionné.</p>' : ''}`),
+                    ${editing ? `<p class="muted">${esc(i18n('Les réglages vont au texte sélectionné (sinon à tout le texte).'))}</p>` : has('text') ? `<p class="muted">${esc(i18n('Double-clic dans le texte pour l’écrire ; les réglages vont à tout le texte, ou au morceau sélectionné.'))}</p>` : ''}`),
                 sec('fill', 'Couleur (fond et bordure)', has('text', 'shape', 'table', 'chart', 'person', 'audio'), () => `<div class="kn-g2">${F('Fond', iColor('data-kn-x="fill"', o.t === 'shape' && !o.nofill ? o.fill || th.accent : o.fill || '#ffffff', 'clear:fill'))}${F('Bordure', iColor('data-kn-x="stroke"', o.stroke || (line ? o.fill || th.accent : '#000000'), 'clear:stroke'))}</div>
                     <div class="kn-g3">${F('Épaisseur', iNum(of('sw'), o.sw ?? (o.stroke || line ? (line ? 6 : 3) : 0), 'min="0" max="200"'))}${F('Trait', iSel(of('dash'), [['solid', 'Plein'], ['dash', 'Tirets'], ['dot', 'Points']], o.dash || 'solid'))}${F('Coins', iNum(of('radius'), o.radius ?? '', 'min="0" placeholder="auto"'))}</div>
-                    <p class="muted">${o.t === 'shape' ? (o.nofill ? 'Forme sans fond.' : '') : o.fill ? '' : 'Pas de fond (∅).'} ${o.stroke || line ? '' : 'Pas de bordure (∅).'}</p>`),
+                    <p class="muted">${esc(i18n(o.t === 'shape' ? (o.nofill ? 'Forme sans fond.' : '') : o.fill ? '' : 'Pas de fond (∅).'))} ${esc(i18n(o.stroke || line ? '' : 'Pas de bordure (∅).'))}</p>`),
                 sec('image', 'Image', one && o.t === 'image', () => `<div class="kn-row">${B('replace', '🖼️ Changer l’image…')}${srcOf(o) ? B('tobg', '🖼 En fond de diapositive') : ''}</div>
                     <div class="kn-g2">${F('Cadrage', iSel(of('fit'), [['cover', 'Remplir (rogner)'], ['contain', 'Photo entière'], ['fill', 'Étirer']], o.fit || 'cover'))}${FH('Masque (forme)', iSel(of('mask') + ' data-kn-re="1"', MASKS, o.mask || 'none'), 'La photo est découpée dans cette forme : rond, arrondi, étoile, cœur… sans toucher à la photo d’origine.')}</div>
                     ${o.mask === 'rounded' ? F('Arrondi', iRange(of('radius'), o.radius ?? 28, 0, 400)) : ''}
                     ${FH('Zoom (rogner)', iRange(of('zoom'), o.zoom ?? 1, 1, 4, .05), 'Agrandit la photo dans son cadre ; « Cadrer ↔ ↕ » choisit ensuite quelle partie on voit.')}<div class="kn-g2">${F('Cadrer ↔', iRange(of('px'), o.px ?? 50, 0, 100))}${F('Cadrer ↕', iRange(of('py'), o.py ?? 50, 0, 100))}</div>
                     <details class="kn-sub" ${['bright', 'contrast', 'sat', 'sepia', 'gray', 'blur'].some(k => o[k] !== undefined) ? 'open' : ''}><summary>🎚️ Retouche</summary>${F('Luminosité', iRange(of('bright'), o.bright ?? 100, 0, 200))}${F('Contraste', iRange(of('contrast'), o.contrast ?? 100, 0, 200))}${F('Saturation', iRange(of('sat'), o.sat ?? 100, 0, 200))}${F('Sépia', iRange(of('sepia'), o.sepia ?? 0, 0, 100))}${F('Noir et blanc', iRange(of('gray'), o.gray ?? 0, 0, 100))}${F('Flou', iRange(of('blur'), o.blur ?? 0, 0, 20))}${B('imgreset', '↺ Remettre comme au départ')}</details>
                     <div class="kn-g2">${F('Cadre', iColor('data-kn-x="border"', o.border || '#ffffff', 'clear:border'))}${F('Épaisseur du cadre', iNum(of('bw'), o.bw ?? 6, 'min="0" max="100"'))}</div>`),
-                sec('link', 'Liaison', one && o.t === 'link', () => `<div class="kn-g2">${F('Trait', iSel(of('kind') + ' data-kn-re="1"', LINK_KINDS, o.kind || 'straight'))}${F('Bouts', iSel(of('arrow'), LINK_ARROWS, o.arrow || 'end'))}</div><div class="kn-g2">${F('Couleur', `<input type="color" ${of('stroke')} value="${esc(col(o.stroke, '#333333'))}">`)}${F('Épaisseur', `<input type="number" ${of('sw', 'num')} min="1" max="40" value="${num(o.sw, 4)}">`)}</div><p class="muted">Le trait suit les deux objets quand on les déplace.</p>`),
+                sec('link', 'Liaison', one && o.t === 'link', () => `<div class="kn-g2">${F('Trait', iSel(of('kind') + ' data-kn-re="1"', LINK_KINDS, o.kind || 'straight'))}${F('Bouts', iSel(of('arrow'), LINK_ARROWS, o.arrow || 'end'))}</div><div class="kn-g2">${F('Couleur', `<input type="color" ${of('stroke')} value="${esc(col(o.stroke, '#333333'))}">`)}${F('Épaisseur', `<input type="number" ${of('sw', 'num')} min="1" max="40" value="${num(o.sw, 4)}">`)}</div><p class="muted">${esc(i18n('Le trait suit les deux objets quand on les déplace.'))}</p>`),
                 sec('shape', 'Forme', one && o.t === 'shape' && o.kind !== 'combo', () => `${F('Forme', iSel(of('kind') + ' data-kn-re="1"', SHAPES, o.kind || 'rect'))}${o.kind === 'star' ? `<div class="kn-g2">${F('Branches', iNum(of('points'), o.points ?? 5, 'min="3" max="40"'))}${F('Creux', iRange(of('inner') + ' data-unit="%"', o.inner ?? 45, 5, 95))}</div>` : ''}${o.kind === 'hexagon' ? F('Côtés', iNum(of('points'), o.points ?? 6, 'min="3" max="40"')) : ''}${line ? F('Flèches', iSel(of('arrow'), [['none', 'Aucune'], ['end', 'Au bout'], ['start', 'Au début'], ['both', 'Aux deux bouts']], o.arrow || (o.kind === 'arrowline' ? 'end' : 'none'))) : ''}`),
                 sec('table', 'Tableau', one && o.t === 'table', () => `${ext.openSheetEditor ? `<div class="kn-row">${B('sheet', '🧾 Modifier les données', 'Le tableur en grand : formules, tri, coller depuis Excel… puis « ✓ Enregistrer et revenir »')}</div>` : ''}<div class="kn-row">${B('trow+', '＋ Ligne')}${B('trow-', '− Ligne')}${B('tcol+', '＋ Colonne')}${B('tcol-', '− Colonne')}</div>${iChk(of('head') + ' data-kn-re="1"', o.head, 'Première ligne en en-tête')}
                     <div class="kn-g2">${F('En-tête : fond', iColor(of('headFill', 'color'), o.headFill || th.accent))}${F('En-tête : texte', iColor(of('headColor', 'color'), o.headColor || '#ffffff'))}</div>
-                    ${F('Contenu (une ligne par rangée, cases séparées par « ; » ou une tabulation — se colle d’un tableur)', `<textarea rows="5" data-kn-x="tdata">${esc((o.rows || []).map(r => (r || []).join(' ; ')).join('\n'))}</textarea>`)}<p class="muted">Double-clic sur une case du tableau pour l’écrire directement.</p>`),
+                    ${F('Contenu (une ligne par rangée, cases séparées par « ; » ou une tabulation — se colle d’un tableur)', `<textarea rows="5" data-kn-x="tdata">${esc((o.rows || []).map(r => (r || []).join(' ; ')).join('\n'))}</textarea>`)}<p class="muted">${esc(i18n('Double-clic sur une case du tableau pour l’écrire directement.'))}</p>`),
                 sec('chart', 'Graphique', one && o.t === 'chart', () => { const R = ext.diagramRender, kinds = CHART_KINDS.map(k => [k, R?.KINDS?.[k]]).filter(([, v]) => v);
                     return `${F('Sorte', `<select data-kn-x="ckind">${kinds.map(([k, v]) => `<option value="${esc(k)}" ${o.spec?.kind === k ? 'selected' : ''}>${esc(`${v.icon || ''} ${v.label}`)}</option>`).join('')}</select>`)}${F('Titre', `<input type="text" data-kn-x="ctitle" value="${esc(o.spec?.o?.title || '')}" maxlength="200">`)}
                     ${ext.openSheetEditor ? `<div class="kn-row">${B('sheet', '🧾 Modifier les données', 'Le tableur en grand, préparé « Catégorie + séries » : formules, tri, coller depuis Excel… puis « ✓ Enregistrer et revenir »')}</div>` : ''}${F(ext.openSheetEditor ? 'Ou ici, en secours (1re ligne : Catégorie ; Série 1 ; Série 2…)' : 'Les chiffres (1re ligne : Catégorie ; Série 1 ; Série 2…)', `<textarea rows="6" data-kn-x="cdata">${esc(chartText(o.spec))}</textarea>`)}
                     <div class="kn-g2">${F('Couleurs', `<select data-kn-x="cpal">${opt([['', 'Vives'], ['pastel', 'Pastel'], ['terre', 'Terre'], ['mer', 'Mer'], ['sepia', 'Sépia (ancien)'], ['gris', 'Gris']], o.spec?.o?.palette || '')}</select>`)}${F('Légende', `<select data-kn-x="cleg">${opt([['', 'Selon la sorte'], ['bottom', 'En bas'], ['right', 'À droite'], ['none', 'Aucune']], o.spec?.o?.legend || '')}</select>`)}</div>${F('Couleur des textes', iColor(of('color', 'color'), o.color || th.fg))}`; }),
                 sec('person', 'Généalogie', one && o.t === 'person', () => `<div class="kn-f"><span>Personne</span>${(window.LCNDA_PICKER || A()).pickerField({name: 'kn_person', kind: 'person', value: o.pid ? (o.data?.name ? {id: o.pid, title: o.data.name} : o.pid) : null})}</div>
                     ${F('Montrer', iSel(of('view') + ' data-kn-re="1"', [['card', '🪪 La fiche'], ['photo', '🖼️ Le portrait'], ['tree', '🌳 Petit arbre'], ['timeline', '🗓️ Frise de sa vie']], o.view || 'card'))}
-                    <div class="kn-row">${o.pid ? B('prefresh', '🔄 Relire la fiche') : ''}</div>${o.data?.at ? `<p class="muted">Ce qui est montré vient de la fiche (relue le ${esc(o.data.at)}) : la présentation se lit même sans la base. « Relire la fiche » la met à jour.</p>` : ''}`),
+                    <div class="kn-row">${o.pid ? B('prefresh', '🔄 Relire la fiche') : ''}</div>${o.data?.at ? `<p class="muted">${esc(i18n('Ce qui est montré vient de la fiche (relue le {date}) : la présentation se lit même sans la base. « Relire la fiche » la met à jour.', {date: o.data.at}))}</p>` : ''}`),
                 sec('media', 'Vidéo / son', one && ['video', 'audio'].includes(o.t), () => `<div class="kn-row">${B('avreplace', '🎬 Changer…')}</div><div class="kn-row">${iChk(of('autoplay'), o.autoplay, 'Lecture automatique')}${iChk(of('loop'), o.loop, 'En boucle')}${o.t === 'video' ? iChk(of('muted'), o.muted, 'Sans le son') : ''}${iChk(of('controls'), o.controls, 'Boutons de lecture visibles')}</div><div class="kn-g2">${F('Volume', iRange(of('vol'), o.vol ?? 1, 0, 1, .05))}${F('Commencer à', iNum(of('start'), o.start ?? 0, 'min="0" data-ui-duration="s"'))}</div>`),
                 sec('effects', 'Effets (ombre et opacité)', objs.length > 0, () => `${F('Opacité', iRange(of('op'), o.op ?? 1, 0, 1, .05))}${iChk(of('shadow') + ' data-kn-re="1"', o.shadow, 'Ombre portée')}${o.shadow ? `<div class="kn-g2">${F('Flou', iRange(of('shBlur'), o.shBlur ?? 16, 0, 80))}${F('Couleur', iColor(of('shColor', 'color'), o.shColor || '#000000'))}</div>` : ''}`),
             ];
             // l'ordre des éditeurs (E2) : Position et taille · Couleur · Texte · Effets, puis le reste
             const ORDER = ['geom', 'fill', 'text', 'effects', 'arrange', 'image', 'shape', 'table', 'chart', 'person', 'media'], keyOf = x => (String(x).match(/data-kn-isec="([^"]+)"/) || [])[1];
             h.sort((a, b) => ORDER.indexOf(keyOf(a)) - ORDER.indexOf(keyOf(b)));
-            return `${objs.length ? (one ? `<p class="kn-ihead">${TYPE_ICON[o.t]} ${esc(cut(objLabel(o), 40))}${o.lock ? ' 🔒' : ''}${o.g ? ' <small>(groupe)</small>' : ''}</p>` : `<p class="kn-ihead">${objs.length} objets</p>`) : '<p class="muted kn-hint">Choisis un objet sur la diapositive (clic) ou insère-en un (barre du haut). ⇧ clic : en choisir plusieurs ; glisser sur le fond : un rectangle de sélection ; double-clic : écrire dans un texte, changer une image ; ⌥ en glissant : copier.</p>'}<div data-tbg="kn-format" data-tbg-label="Inspecteur : sections de « Format »">${h.join('')}</div>`;
+            return `${objs.length ? (one ? `<p class="kn-ihead">${TYPE_ICON[o.t]} ${esc(cut(objLabel(o), 40))}${o.lock ? ' 🔒' : ''}${o.g ? ` <small>${esc(i18n('(groupe)'))}</small>` : ''}</p>` : `<p class="kn-ihead">${esc(plural(objs.length, 'objet'))}</p>`) : `<p class="muted kn-hint">${esc(i18n('Choisis un objet sur la diapositive (clic) ou insère-en un (barre du haut). ⇧ clic : en choisir plusieurs ; glisser sur le fond : un rectangle de sélection ; double-clic : écrire dans un texte, changer une image ; ⌥ en glissant : copier.'))}</p>`}<div data-tbg="kn-format" data-tbg-label="${esc(i18n('Inspecteur : sections de « Format »'))}">${h.join('')}</div>`;
         }
         const buildRow = (b, i) => `<div class="kn-brow"><div class="kn-g3">${F(b.kind === 'out' ? 'Sortie' : 'Entrée', iSel(`data-kn-b="${i}:fx" data-kn-re="1"`, FX, b.fx))}${['fly', 'wipe'].includes(b.fx) ? F('Sens', iSel(`data-kn-b="${i}:dir"`, DIRS, b.dir || 'l')) : ''}${b.fx === 'path' ? F('Chemin', iSel(`data-kn-b="${i}:pk"`, PATHS, b.pk || 'line')) : ''}${F('Début', iSel(`data-kn-b="${i}:start" data-kn-re="1"`, STARTS, b.start))}</div><div class="kn-g3">${F('Durée', `<input data-ui-duration="s" type="number" data-kn-b="${i}:dur" data-kn-k="num" min="0.05" max="20" step="0.1" value="${num(b.dur, .6)}">`)}${F('Attendre', `<input data-ui-duration="s" type="number" data-kn-b="${i}:delay" data-kn-k="num" min="0" max="60" step="0.1" value="${num(b.delay)}">`)}${B(`bdel:${i}`, '× Retirer')}</div>${b.fx === 'path' ? `<div class="kn-g3">${F('Vers la droite', `<input type="number" data-unit="px" data-kn-b="${i}:dx" data-kn-k="num" min="-4000" max="4000" step="10" value="${num(b.dx, 400)}">`)}${F('Vers le bas', `<input type="number" data-unit="px" data-kn-b="${i}:dy" data-kn-k="num" min="-4000" max="4000" step="10" value="${num(b.dy, 0)}">`)}</div>` : ''}</div>`;
         function paneAnim() {
             const s = S(), t = s.trans || {}, objs = selObjs(), o = objs.length === 1 ? objs[0] : null, bl = s.builds || [];
             const sec = (key, label, html) => isec('data-kn-asec', key, label, html);
-            return `<div data-tbg="kn-anim" data-tbg-label="Inspecteur : sections de « Animer »">${[
-                sec('trans', 'Transition', `${cur ? '' : '<p class="muted">C’est la première diapositive : sa transition ne joue que si la lecture recommence en boucle.</p>'}<div class="kn-g2">${FH('Effet (en arrivant sur cette diapositive)', iSel('data-kn-s="trans.type" data-kn-re="1"', TRANS, t.type || 'none'), 'L’effet joue en passant de la diapositive d’avant à celle-ci. « Déplacement magique » fait glisser les objets présents sur les deux.')}${F('Durée', `<input data-ui-duration="s" type="number" data-kn-s="trans.dur" data-kn-k="num" min="0.1" max="5" step="0.1" value="${num(t.dur, .8)}">`)}</div>
+            return `<div data-tbg="kn-anim" data-tbg-label="${esc(i18n('Inspecteur : sections de « Animer »'))}">${[
+                sec('trans', 'Transition', `${cur ? '' : `<p class="muted">${esc(i18n('C’est la première diapositive : sa transition ne joue que si la lecture recommence en boucle.'))}</p>`}<div class="kn-g2">${FH('Effet (en arrivant sur cette diapositive)', iSel('data-kn-s="trans.type" data-kn-re="1"', TRANS, t.type || 'none'), 'L’effet joue en passant de la diapositive d’avant à celle-ci. « Déplacement magique » fait glisser les objets présents sur les deux.')}${F('Durée', `<input data-ui-duration="s" type="number" data-kn-s="trans.dur" data-kn-k="num" min="0.1" max="5" step="0.1" value="${num(t.dur, .8)}">`)}</div>
                     ${['push', 'movein', 'reveal', 'wipe', 'swap', 'flip', 'cube'].includes(t.type) ? F('Sens', iSel('data-kn-s="trans.dir"', [['l', 'Vers la gauche'], ['r', 'Vers la droite'], ['t', 'Vers le haut'], ['b', 'Vers le bas']], t.dir || 'l')) : ''}
-                    ${t.type === 'magic' ? '<p class="muted">✨ Les objets présents sur la diapositive d’avant et sur celle-ci (diapositive dupliquée avec ⧉, ou objets portant le même nom) glissent, grandissent et tournent d’une place à l’autre ; les autres apparaissent ou s’effacent.</p>' : ''}
+                    ${t.type === 'magic' ? `<p class="muted">${esc(i18n('✨ Les objets présents sur la diapositive d’avant et sur celle-ci (diapositive dupliquée avec ⧉, ou objets portant le même nom) glissent, grandissent et tournent d’une place à l’autre ; les autres apparaissent ou s’effacent.'))}</p>` : ''}
                     <div class="kn-row">${B('ptrans', '▶ Aperçu')}${B('transall', 'Pour toutes les diapositives')}</div>`),
-                sec('obj', 'Animations de l’objet choisi', o ? `<p class="kn-ihead">${TYPE_ICON[o.t]} ${esc(cut(objLabel(o), 34))}</p>${bl.map((b, i) => b.obj === o.id ? buildRow(b, i) : '').join('') || '<p class="muted">Aucune : il est là dès l’arrivée de la diapositive.</p>'}<div class="kn-row">${B('badd:in', '＋ Entrée')}${B('badd:out', '＋ Sortie')}</div>` : '<p class="muted">Choisis un objet sur la diapositive pour le faire apparaître (entrée) ou disparaître (sortie), au clic ou tout seul.</p>'),
-                sec('order', 'Ordre des animations', bl.length ? `<ol class="kn-blist">${bl.map((b, i) => `<li class="${o && b.obj === o.id ? 'is-cur' : ''}"><button type="button" class="kn-blab" data-kn-x="bsel:${i}"><b>${i + 1}.</b> ${esc(cut(objLabel(obj(b.obj)), 24))}<small>${b.kind === 'out' ? '⬅ Sortie' : '➡ Entrée'} · ${esc(fxL(b.fx))} · ${esc(startL(b.start))}</small></button>${B(`bup:${i}`, '↑', 'Plus tôt')}${B(`bdown:${i}`, '↓', 'Plus tard')}${B(`bdel:${i}`, '×', 'Retirer')}</li>`).join('')}</ol><div class="kn-row">${B('pbuilds', '▶ Aperçu des animations')}</div>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">✨</span><span class="empty-line-text">Pas encore d’animation sur cette diapositive.</span></p>'),
+                sec('obj', 'Animations de l’objet choisi', o ? `<p class="kn-ihead">${TYPE_ICON[o.t]} ${esc(cut(objLabel(o), 34))}</p>${bl.map((b, i) => b.obj === o.id ? buildRow(b, i) : '').join('') || `<p class="muted">${esc(i18n('Aucune : il est là dès l’arrivée de la diapositive.'))}</p>`}<div class="kn-row">${B('badd:in', '＋ Entrée')}${B('badd:out', '＋ Sortie')}</div>` : `<p class="muted">${esc(i18n('Choisis un objet sur la diapositive pour le faire apparaître (entrée) ou disparaître (sortie), au clic ou tout seul.'))}</p>`),
+                sec('order', 'Ordre des animations', bl.length ? `<ol class="kn-blist">${bl.map((b, i) => `<li class="${o && b.obj === o.id ? 'is-cur' : ''}"><button type="button" class="kn-blab" data-kn-x="bsel:${i}"><b>${i + 1}.</b> ${esc(cut(objLabel(obj(b.obj)), 24))}<small>${esc(i18n(b.kind === 'out' ? '⬅ Sortie' : '➡ Entrée'))} · ${esc(fxL(b.fx))} · ${esc(startL(b.start))}</small></button>${B(`bup:${i}`, '↑', 'Plus tôt')}${B(`bdown:${i}`, '↓', 'Plus tard')}${B(`bdel:${i}`, '×', 'Retirer')}</li>`).join('')}</ol><div class="kn-row">${B('pbuilds', '▶ Aperçu des animations')}</div>` : `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">✨</span><span class="empty-line-text">${esc(i18n('Pas encore d’animation sur cette diapositive.'))}</span></p>`),
             ].join('')}</div>`;
         }
         function paneSlide() {
             const s = S(), b = s.bg || {type: 'theme'}, th = themeOf(show), bt = b.type || 'theme';
             const sec = (key, label, html) => isec('data-kn-ssec', key, label, html);
             const base = th.bg;
-            return `<div data-tbg="kn-slide" data-tbg-label="Inspecteur : sections de « Diapositive »">${[
-                sec('layout', 'Disposition', `${FH('Disposition (place les titres, textes, photos)', `<select data-kn-x="layout">${opt(LAYOUTS, s.layout || 'blank')}</select>`, 'Un plan tout fait (titre, titre et texte, photo pleine page…) : les textes déjà écrits sont gardés et changent de place.')}<p class="muted">Changer de disposition replace les objets « titre », « texte », « photo » ; ce que tu as écrit est gardé.</p>`),
+            return `<div data-tbg="kn-slide" data-tbg-label="${esc(i18n('Inspecteur : sections de « Diapositive »'))}">${[
+                sec('layout', 'Disposition', `${FH('Disposition (place les titres, textes, photos)', `<select data-kn-x="layout">${opt(LAYOUTS, s.layout || 'blank')}</select>`, 'Un plan tout fait (titre, titre et texte, photo pleine page…) : les textes déjà écrits sont gardés et changent de place.')}<p class="muted">${esc(i18n('Changer de disposition replace les objets « titre », « texte », « photo » ; ce que tu as écrit est gardé.'))}</p>`),
                 sec('bg', 'Fond', `${F('Fond', iSel('data-kn-s="bg.type" data-kn-re="1"', [['theme', 'Celui du thème'], ['color', 'Couleur'], ['gradient', 'Dégradé'], ['radial', 'Dégradé rond'], ['image', 'Image']], bt))}
                     ${bt === 'color' || bt === 'image' ? F(bt === 'image' ? 'Couleur autour de l’image' : 'Couleur', iColor('data-kn-s="bg.c1"', b.c1 || base.c1 || '#ffffff')) : ''}
                     ${bt === 'gradient' || bt === 'radial' ? `<div class="kn-g2">${F('De', iColor('data-kn-s="bg.c1"', b.c1 || base.c1 || '#ffffff'))}${F('À', iColor('data-kn-s="bg.c2"', b.c2 || base.c2 || '#888888'))}</div>${bt === 'gradient' ? F('Angle', iRange('data-kn-s="bg.angle"', b.angle ?? 135, 0, 360)) : ''}` : ''}
@@ -1037,22 +1042,22 @@
                     <div class="kn-row">${B('bgall', 'Ce fond pour toutes les diapositives')}</div>`),
                 sec('play', 'Lecture', `<div class="kn-g2">${FH('Durée — lecture seule et vidéo', `<input data-ui-duration="s" type="number" data-kn-s="dur" data-kn-k="num" min="1" max="600" step="0.5" value="${num(s.dur, 5)}">`, 'Le temps passé sur cette diapositive quand la présentation avance toute seule et dans la vidéo exportée.')}</div>${iChk('data-kn-s="auto"', s.auto, 'Passer toute seule à la suivante (après la durée)')}${iChk('data-kn-s="skip" data-kn-re="1"', s.skip, 'Sauter cette diapositive à la lecture')}`),
                 sec('section', 'Section', `${F('Titre de la section (un groupe de diapositives qui commence ici)', iTxt('data-kn-s="section"', s.section, 'ex. Les années de guerre'))}`),
-                sec('notes', 'Notes de l’orateur', `<textarea rows="6" data-kn-s="notes" data-kn-k="text" placeholder="Ce que tu veux dire sur cette diapositive (vu dans la fenêtre du présentateur)…">${esc(s.notes || '')}</textarea>`),
+                sec('notes', 'Notes de l’orateur', `<textarea rows="6" data-kn-s="notes" data-kn-k="text" placeholder="${esc(i18n('Ce que tu veux dire sur cette diapositive (vu dans la fenêtre du présentateur)…'))}">${esc(s.notes || '')}</textarea>`),
             ].join('')}</div>`;
         }
         function paneObjs() {
             const list = S().objs.slice().reverse();
-            return `<div data-tbg="kn-objs" data-tbg-label="Inspecteur : « Objets »"><section class="kn-is" data-kn-osec="list" data-tb-label="Objets de la diapositive"><h4>Objets (le premier est devant)</h4>${list.length ? `<ol class="kn-layers">${list.map(o => `<li class="${sel.has(o.id) ? 'is-cur' : ''}${o.hide ? ' is-hid' : ''}"><button type="button" class="kn-lname" data-kn-x="osel:${esc(o.id)}"><span class="kn-lico">${TYPE_ICON[o.t]}</span><span>${esc(cut(objLabel(o), 34))}</span>${o.g ? '<small title="Dans un groupe">⊞</small>' : ''}</button>${B(`ohide:${o.id}`, o.hide ? '🙈' : '👁', o.hide ? 'Montrer' : 'Cacher')}${B(`olock:${o.id}`, o.lock ? '🔒' : '🔓', o.lock ? 'Déverrouiller' : 'Verrouiller')}${B(`oup:${o.id}`, '↑', 'Vers le devant')}${B(`odown:${o.id}`, '↓', 'Vers le fond')}</li>`).join('')}</ol>` : A().emptyState({icon: '🧩', text: 'Aucun objet sur cette diapositive pour l’instant', hint: 'Insère un texte, une image… avec la barre du haut.'})}</section></div>`;
+            return `<div data-tbg="kn-objs" data-tbg-label="${esc(i18n('Inspecteur : « Objets »'))}"><section class="kn-is" data-kn-osec="list" data-tb-label="${esc(i18n('Objets de la diapositive'))}"><h4>${esc(i18n('Objets (le premier est devant)'))}</h4>${list.length ? `<ol class="kn-layers">${list.map(o => `<li class="${sel.has(o.id) ? 'is-cur' : ''}${o.hide ? ' is-hid' : ''}"><button type="button" class="kn-lname" data-kn-x="osel:${esc(o.id)}"><span class="kn-lico">${TYPE_ICON[o.t]}</span><span>${esc(cut(objLabel(o), 34))}</span>${o.g ? `<small title="${esc(i18n('Dans un groupe'))}">⊞</small>` : ''}</button>${B(`ohide:${o.id}`, o.hide ? '🙈' : '👁', o.hide ? 'Montrer' : 'Cacher')}${B(`olock:${o.id}`, o.lock ? '🔒' : '🔓', o.lock ? 'Déverrouiller' : 'Verrouiller')}${B(`oup:${o.id}`, '↑', 'Vers le devant')}${B(`odown:${o.id}`, '↓', 'Vers le fond')}</li>`).join('')}</ol>` : A().emptyState({icon: '🧩', text: i18n('Aucun objet sur cette diapositive pour l’instant'), hint: i18n('Insère un texte, une image… avec la barre du haut.')})}</section></div>`;
         }
         function paneDoc() {
             const th = themeOf(show), [W, H] = WH(), fonts = fontList(), tot = show.slides.filter(s => !s.skip).reduce((a, s) => a + num(s.dur, 5), 0);
             const sec = (key, label, html) => isec('data-kn-dsec', key, label, html);
-            return `<div data-tbg="kn-doc" data-tbg-label="Inspecteur : sections de « Document »">${[
+            return `<div data-tbg="kn-doc" data-tbg-label="${esc(i18n('Inspecteur : sections de « Document »'))}">${[
                 sec('theme', 'Thème', `<div class="kn-themes">${Object.entries(THEMES).map(([k, t]) => `<button type="button" class="kn-theme${show.theme === k ? ' is-cur' : ''}" data-kn-x="theme:${k}" title="${esc(t.label)}"><span style="${esc(`${bgCss({}, t)};color:${t.fg}`)}"><b style="${esc(`font-family:${t.tf};font-weight:${t.tw}`)}">Aa</b><i style="background:${t.accent}"></i></span><small>${esc(t.label)}</small></button>`).join('')}</div>`),
-                sec('colors', 'Couleurs et polices', `<div class="kn-g2">${F('Texte', iColor('data-kn-d="colors.fg"', th.fg, 'dclear:colors.fg'))}${F('Accent', iColor('data-kn-d="colors.accent"', th.accent, 'dclear:colors.accent'))}</div>${F('Police des titres', `<span class="kn-fontw">${fontBtn('title', show.fonts?.title, `Celle du thème (${th.tf.split(',')[0].replace(/"/g, '')})`)}${show.fonts?.title ? B('fontclear:title', '∅', 'Revenir à la police du thème') : ''}</span>`)}${F('Police des textes', `<span class="kn-fontw">${fontBtn('body', show.fonts?.body, `Celle du thème (${th.bf.split(',')[0].replace(/"/g, '')})`)}${show.fonts?.body ? B('fontclear:body', '∅', 'Revenir à la police du thème') : ''}</span>`)}`),
-                sec('format', 'Format', `${F('Format des diapositives', `<select data-kn-x="aspect">${opt(Object.entries(ASPECTS).map(([k, v]) => [k, v[2]]), show.aspect)}</select>`)}${show.aspect === 'custom' ? `<div class="kn-g2">${F('Largeur (points)', `<input type="number" data-kn-x="cw" min="320" max="4000" value="${W}">`)}${F('Hauteur (points)', `<input type="number" data-kn-x="ch" min="240" max="4000" value="${H}">`)}</div>` : ''}<p class="muted">${W} × ${H} points. En changeant de format, les objets sont agrandis ou réduits ensemble.</p>`),
-                sec('sound', 'Musique', `${show.music ? `<p>🎵 ${esc(show.music.title || 'Musique')}</p><div class="kn-row">${B('music', 'Changer…')}${B('nomusic', 'Retirer')}</div>${F('Volume', iRange('data-kn-d="musicVol"', show.musicVol ?? .5, 0, 1, .05))}` : `<div class="kn-row">${B('music', '🎵 Une musique pendant la lecture…')}</div>`}`),
-                sec('loop', 'Lecture', `${iChk('data-kn-d="loop"', show.loop, 'Recommencer au début à la fin (borne, exposition)')}<p class="muted">${show.slides.length} diapositive${show.slides.length > 1 ? 's' : ''}${show.slides.some(s => s.skip) ? ` dont ${A().plural(show.slides.filter(s => s.skip).length, 'sautée')}` : ''} · ${fmt(tot)} en lecture toute seule (durées des diapositives).</p>`),
+                sec('colors', 'Couleurs et polices', `<div class="kn-g2">${F('Texte', iColor('data-kn-d="colors.fg"', th.fg, 'dclear:colors.fg'))}${F('Accent', iColor('data-kn-d="colors.accent"', th.accent, 'dclear:colors.accent'))}</div>${F('Police des titres', `<span class="kn-fontw">${fontBtn('title', show.fonts?.title, i18n('Celle du thème ({font})', {font: th.tf.split(',')[0].replace(/"/g, '')}))}${show.fonts?.title ? B('fontclear:title', '∅', 'Revenir à la police du thème') : ''}</span>`)}${F('Police des textes', `<span class="kn-fontw">${fontBtn('body', show.fonts?.body, i18n('Celle du thème ({font})', {font: th.bf.split(',')[0].replace(/"/g, '')}))}${show.fonts?.body ? B('fontclear:body', '∅', 'Revenir à la police du thème') : ''}</span>`)}`),
+                sec('format', 'Format', `${F('Format des diapositives', `<select data-kn-x="aspect">${opt(Object.entries(ASPECTS).map(([k, v]) => [k, v[2]]), show.aspect)}</select>`)}${show.aspect === 'custom' ? `<div class="kn-g2">${F('Largeur (points)', `<input type="number" data-kn-x="cw" min="320" max="4000" value="${W}">`)}${F('Hauteur (points)', `<input type="number" data-kn-x="ch" min="240" max="4000" value="${H}">`)}</div>` : ''}<p class="muted">${esc(i18n('{w} × {h} points. En changeant de format, les objets sont agrandis ou réduits ensemble.', {w: String(W), h: String(H)}))}</p>`),
+                sec('sound', 'Musique', `${show.music ? `<p>🎵 <span data-i18n-off>${esc(show.music.title || i18n('Musique'))}</span></p><div class="kn-row">${B('music', 'Changer…')}${B('nomusic', 'Retirer')}</div>${F('Volume', iRange('data-kn-d="musicVol"', show.musicVol ?? .5, 0, 1, .05))}` : `<div class="kn-row">${B('music', '🎵 Une musique pendant la lecture…')}</div>`}`),
+                sec('loop', 'Lecture', `${iChk('data-kn-d="loop"', show.loop, 'Recommencer au début à la fin (borne, exposition)')}<p class="muted">${esc(show.slides.some(s => s.skip) ? i18n('{n} dont {skipped} · {time} en lecture toute seule (durées des diapositives).', {n: plural(show.slides.length, 'diapositive'), skipped: plural(show.slides.filter(s => s.skip).length, 'sautée'), time: fmt(tot)}) : i18n('{n} · {time} en lecture toute seule (durées des diapositives).', {n: plural(show.slides.length, 'diapositive'), time: fmt(tot)}))}</p>`),
             ].join('')}</div>`;
         }
         function paintInsp() {
@@ -1146,8 +1151,8 @@
         }
         function previewTrans() {
             const s = S(), prevS = show.slides[cur - 1] || (show.loop ? show.slides[show.slides.length - 1] : null), t = s.trans || {};
-            if (!prevS || prevS === s) return toast('Il n’y a pas de diapositive avant celle-ci.');
-            if (!t.type || t.type === 'none') return toast('Choisis d’abord un effet de transition.');
+            if (!prevS || prevS === s) return toast(i18n('Il n’y a pas de diapositive avant celle-ci.'));
+            if (!t.type || t.type === 'none') return toast(i18n('Choisis d’abord un effet de transition.'));
             if (editing) stopEdit(); const [W, H] = WH(), box = document.createElement('div'); box.style.cssText = `position:absolute;left:0;top:0;width:${W}px;height:${H}px;overflow:hidden;background:#000`;
             const mk = (sl, at) => { const L = document.createElement('div'); L.style.cssText = `position:absolute;left:0;top:0;width:${W}px;height:${H}px`; L.innerHTML = renderSlide(show, sl, 'thumb'); hiddenAt(sl, at).forEach(oid => { const el = L.querySelector(`[data-kn-o="${CSS.escape(oid)}"]`); if (el) el.style.visibility = 'hidden'; }); return L; };
             slideBox.innerHTML = ''; slideBox.appendChild(box); ov.innerHTML = ''; const a = mk(prevS, 'end'), b = mk(s, 'start'); box.append(a, b);
@@ -1164,7 +1169,7 @@
             try { const r = await post('save_slideshow', {id, name, show: forSave()}); id = r.result.id; dirty = false; status('✓ Enregistré'); ctx.onSaved?.(id); }
             catch (e) { if (UI().savedStatus) UI().savedStatus($('[data-kn-state]'), 'error'); else status(''); toast(e.message, 'error'); }
         }
-        async function close() { if (editing) stopEdit(); if (dirty && !await A().confirmBox('Les dernières modifications de la présentation seront perdues.', {title: 'Fermer sans enregistrer la présentation ?', okLabel: 'Fermer sans enregistrer', danger: true})) return; closed = true; ro.disconnect(); docAc.abort(); dlg.close(); dlg.remove(); ctx.onClose?.(); }
+        async function close() { if (editing) stopEdit(); if (dirty && !await A().confirmBox(i18n('Les dernières modifications de la présentation seront perdues.'), {title: i18n('Fermer sans enregistrer la présentation ?'), okLabel: i18n('Fermer sans enregistrer'), danger: true})) return; closed = true; ro.disconnect(); docAc.abort(); dlg.close(); dlg.remove(); ctx.onClose?.(); }
         const ctl = {get show() { return show; }, get cur() { return cur; }, select(ids) { if (editing) stopEdit(); sel = new Set(ids); paintSlide(); paintInsp(); }, run: k => runCmd(k), get name() { return $('[data-kn-name]').value || name; },
             addSlides(list, {replace = false, meta = null} = {}) {
                 if (editing) stopEdit();
@@ -1177,32 +1182,32 @@
         /* ─── E3 : une seule fenêtre d'export ─── */
         async function exportDialog() {
             if (editing) stopEdit();
-            if (!UI().openExportDialog) return toast('La fenêtre d’export n’est pas chargée.', 'error');
+            if (!UI().openExportDialog) return toast(i18n('La fenêtre d’export n’est pas chargée.'), 'error');
             const n = ctl.name, [W, H] = WH();
             await UI().openExportDialog({title: n, defaultName: n, quality: false, saveCopy: true, info: `${A().plural(show.slides.length, 'diapositive')} · ${W} × ${H} points`,
                 preview: async () => (await slideCanvas(show, S(), Math.min(1, 480 / W))).toDataURL('image/jpeg', .85),
                 formats: [
-                    {id: 'pdf', hint: 'une diapositive par page (« Enregistrer en PDF »)', ext: '', run: async () => { exportPrint(show, n, false, cur); }},
-                    {id: 'pdfnotes', label: '📝 PDF + notes', hint: 'avec les notes de l’orateur', ext: '', run: async () => { exportPrint(show, n, true, cur); }},
-                    {id: 'png', hint: 'cette diapositive', run: o => exportPng(show, n, [cur], {...o, direct: true})},
-                    {id: 'zip', label: '🗂 Toutes en PNG', hint: 'un fichier .zip', ext: 'zip', run: o => exportPng(show, n, null, {...o, direct: true, saveCopy: false})},
-                    {id: 'video', label: '🎬 Vidéo', hint: 'WebM, avec la musique', ext: 'webm', run: o => exportVideo(show, n, status, {...o, direct: true, alive: () => dlg.isConnected})},
-                    {id: 'print', hint: 'aperçu, pages, notes', run: async () => { exportPrint(show, n, false, cur); }},
-                    {id: 'file', hint: 'pour la rouvrir ou la partager', ext: 'json', run: async o => download(new Blob([JSON.stringify({type: 'lcnda-presentation', version: 1, name: n, show: forSave()}, null, 1)], {type: 'application/json'}), o.filename)},
+                    {id: 'pdf', hint: i18n('une diapositive par page (« Enregistrer en PDF »)'), ext: '', run: async () => { exportPrint(show, n, false, cur); }},
+                    {id: 'pdfnotes', label: i18n('📝 PDF + notes'), hint: i18n('avec les notes de l’orateur'), ext: '', run: async () => { exportPrint(show, n, true, cur); }},
+                    {id: 'png', hint: i18n('cette diapositive'), run: o => exportPng(show, n, [cur], {...o, direct: true})},
+                    {id: 'zip', label: i18n('🗂 Toutes en PNG'), hint: i18n('un fichier .zip'), ext: 'zip', run: o => exportPng(show, n, null, {...o, direct: true, saveCopy: false})},
+                    {id: 'video', label: i18n('🎬 Vidéo'), hint: i18n('WebM, avec la musique'), ext: 'webm', run: o => exportVideo(show, n, status, {...o, direct: true, alive: () => dlg.isConnected})},
+                    {id: 'print', hint: i18n('aperçu, pages, notes'), run: async () => { exportPrint(show, n, false, cur); }},
+                    {id: 'file', hint: i18n('pour la rouvrir ou la partager'), ext: 'json', run: async o => download(new Blob([JSON.stringify({type: 'lcnda-presentation', version: 1, name: n, show: forSave()}, null, 1)], {type: 'application/json'}), o.filename)},
                 ]});
         }
         /* ─── ✨ Récit d'une vie (heritage-slideshow.js) : les diapositives arrivent après celle affichée ─── */
         async function storyHere() {
             if (editing) stopEdit();
-            if (!ext.storyOptions || !ext.lifeStory) return toast('Le diaporama n’est pas chargé.', 'error');
-            const o = await ext.storyOptions({eyebrow: 'PRÉSENTATION', submitLabel: 'Ajouter le récit'}); if (!o) return;
-            status('✨ Préparation du récit…');
+            if (!ext.storyOptions || !ext.lifeStory) return toast(i18n('Le diaporama n’est pas chargé.'), 'error');
+            const o = await ext.storyOptions({eyebrow: i18n('PRÉSENTATION'), submitLabel: i18n('Ajouter le récit')}); if (!o) return;
+            status(i18n('✨ Préparation du récit…'));
             try {
                 const st = await ext.lifeStory(o), list = fromDiaporama(st.show, show); status('');
-                if (!list.length) return toast('Rien à raconter pour cette personne.', 'error');
+                if (!list.length) return toast(i18n('Rien à raconter pour cette personne.'), 'error');
                 if (!show.music && st.show.music) { show.music = st.show.music; show.musicVol = st.show.musicVol; }
                 ctl.addSlides(list);
-                toast(`✨ ${A().plural(list.length, 'diapositive ajoutée', 'diapositives ajoutées')} : chaque texte vient de la fiche. Les cartes animées restent dans le diaporama.`);
+                toast(`✨ ${i18n('{n} : chaque texte vient de la fiche. Les cartes animées restent dans le diaporama.', {n: A().plural(list.length, 'diapositive ajoutée', 'diapositives ajoutées')})}`);
             } catch (e) { status(''); toast(e.message, 'error'); }
         }
         async function runCmd(k) {
@@ -1222,7 +1227,7 @@
                 case 'newslide': return addSlide();
                 case 'dupslide': return dupSlide(); case 'delslide': return delSlide();
                 case 'skipslide': S().skip = !S().skip; paintNav(); paintInsp(); return commit();
-                case 'section': { const n = await A().askText({title: 'Section', message: 'Titre de la section qui commence à cette diapositive (vide : pas de section) :', value: S().section || '', okLabel: 'OK'}); if (n === null) return; S().section = String(n).trim().slice(0, 80); paintNav(); paintInsp(); return commit(); }
+                case 'section': { const n = await A().askText({title: i18n('Section'), message: i18n('Titre de la section qui commence à cette diapositive (vide : pas de section) :'), value: S().section || '', okLabel: 'OK'}); if (n === null) return; S().section = String(n).trim().slice(0, 80); paintNav(); paintInsp(); return commit(); }
                 case 'prevslide': return goSlide(cur - 1); case 'nextslide': return goSlide(cur + 1);
                 case 'notes': { const b = $('[data-kn-notesbox]'); b.hidden = !b.hidden; if (!b.hidden) b.querySelector('textarea').focus(); setTimeout(fitZoom, 30); return; }
                 case 'group': return group(true); case 'ungroup': return group(false); case 'lock': return lockSel();
@@ -1245,20 +1250,20 @@
                 case 'localfonts': { if (typeof window.queryLocalFonts === 'function' && !localFonts) await loadLocalFonts();
                     const r = await pickFont(objs.some(q => ['text', 'shape', 'table', 'person'].includes(q.t))); if (!r) return paintInsp();
                     const mine = readJ(FONTS_KEY, []); if (!(localFonts || []).includes(r.font) && !BASE_FONTS.includes(r.font)) writeJ(FONTS_KEY, [...new Set([r.font, ...(Array.isArray(mine) ? mine : [])])].slice(0, 200)); // une police tapée à la main reste dans la liste
-                    if (r.to === 'sel') { objs.forEach(q => { q.font = r.font; if (q.t === 'text') stripStyle(q, 'font-family'); }); toast(`Police « ${r.font} » pour le texte choisi.`); return touch(true); }
-                    show.fonts = {...(show.fonts || {}), [r.to]: r.font}; paintAll(); toast(`Police « ${r.font} » pour ${r.to === 'title' ? 'les titres' : 'les textes'}.`); return commit(); }
+                    if (r.to === 'sel') { objs.forEach(q => { q.font = r.font; if (q.t === 'text') stripStyle(q, 'font-family'); }); toast(i18n('Police « {font} » pour le texte choisi.', {font: r.font})); return touch(true); }
+                    show.fonts = {...(show.fonts || {}), [r.to]: r.font}; paintAll(); toast(i18n(r.to === 'title' ? 'Police « {font} » pour les titres.' : 'Police « {font} » pour les textes.', {font: r.font})); return commit(); }
                 case 'rich': return rich(arg);
                 case 'align': objs.forEach(q => { q.align = arg; }); return touch(true);
                 case 'valign': objs.forEach(q => { q.valign = arg; }); return touch(true);
                 case 'replace': return insertImage(o);
-                case 'tobg': if (o?.t === 'image') { S().bg = {type: 'image', filename: o.filename, src: o.src, fit: 'cover', c1: '#000000'}; if (!S().bg.src) delete S().bg.src; S().objs = S().objs.filter(q => q !== o); S().builds = (S().builds || []).filter(b => b.obj !== o.id); sel = new Set(); touch(true); toast('L’image est maintenant le fond de la diapositive (onglet 🖼 Diapositive).'); } return;
+                case 'tobg': if (o?.t === 'image') { S().bg = {type: 'image', filename: o.filename, src: o.src, fit: 'cover', c1: '#000000'}; if (!S().bg.src) delete S().bg.src; S().objs = S().objs.filter(q => q !== o); S().builds = (S().builds || []).filter(b => b.obj !== o.id); sel = new Set(); touch(true); toast(i18n('L’image est maintenant le fond de la diapositive (onglet 🖼 Diapositive).')); } return;
                 case 'imgreset': objs.forEach(q => ['bright', 'contrast', 'sat', 'sepia', 'gray', 'blur', 'zoom', 'px', 'py'].forEach(f => delete q[f])); return touch(true);
                 case 'trow+': case 'trow-': case 'tcol+': case 'tcol-': if (o?.t === 'table') { const rows = o.rows = (o.rows || [['']]).map(r => Array.isArray(r) ? r : []), nc = Math.max(1, ...rows.map(r => r.length));
                     if (k === 'trow+') rows.push(Array(nc).fill('')); if (k === 'trow-' && rows.length > 1) rows.pop(); if (k === 'tcol+') rows.forEach(r => { while (r.length < nc) r.push(''); r.push(''); }); if (k === 'tcol-' && nc > 1) rows.forEach(r => { r.length = Math.min(r.length, nc - 1); });
                     const rh = o.h / Math.max(1, rows.length + (k === 'trow+' ? -1 : k === 'trow-' ? 1 : 0)); if (k === 'trow+') o.h = Math.round(o.h + rh); if (k === 'trow-') o.h = Math.max(20, Math.round(o.h - rh)); touch(true); } return;
                 case 'prefresh': if (o?.pid) await setPerson(o, o.pid); return;
                 case 'sheet': if (o && (o.t === 'table' || o.t === 'chart') && ext.openSheetEditor) { const oid = o.id; // 🧾 le tableur commun (heritage-tableur-cibles.js), puis retour ici
-                    ext.openSheetEditor({target: 'keynote', data: JSON.parse(JSON.stringify(o)), name: objLabel(o), onSave: v => { const q = obj(oid); if (!q) return; if (q.t === 'chart') { q.spec = {...v, kind: v.kind || q.spec?.kind || 'columns'}; delete q.spec.live; } else q.rows = Array.isArray(v) && v.length ? v : [['']]; touch(true); toast('Données reprises du tableur.'); }}); } return;
+                    ext.openSheetEditor({target: 'keynote', data: JSON.parse(JSON.stringify(o)), name: objLabel(o), onSave: v => { const q = obj(oid); if (!q) return; if (q.t === 'chart') { q.spec = {...v, kind: v.kind || q.spec?.kind || 'columns'}; delete q.spec.live; } else q.rows = Array.isArray(v) && v.length ? v : [['']]; touch(true); toast(i18n('Données reprises du tableur.')); }}); } return;
                 case 'avreplace': if (o) await replaceAV(o); return;
                 case 'badd': if (o) { S().builds = S().builds || []; S().builds.push({id: uid('b'), obj: o.id, kind: arg === 'out' ? 'out' : 'in', fx: arg === 'out' ? 'fade' : o.t === 'text' ? 'fly' : 'fade', dir: arg === 'out' ? 'r' : 'b', dur: .6, delay: 0, start: 'click'}); paintNav(); paintInsp(); commit(); } return;
                 case 'bsel': { const b = S().builds?.[Number(arg)]; if (b && obj(b.obj)) { sel = new Set([b.obj]); afterSel(); } return; }
@@ -1266,12 +1271,12 @@
                 case 'bdel': S().builds.splice(Number(arg), 1); paintNav(); paintInsp(); return commit();
                 case 'pbuilds': return previewBuilds();
                 case 'ptrans': return previewTrans();
-                case 'transall': { const t = JSON.stringify(S().trans || {}); show.slides.forEach(s => { s.trans = JSON.parse(t); }); paintNav(); commit(); return toast('Cette transition va maintenant à toutes les diapositives.'); }
-                case 'bgimg': { const m = await ext.pickImage?.({eyebrow: 'PRÉSENTATION', title: 'L’image du fond', filters: false}); if (!m) return; S().bg = {...(S().bg || {}), type: 'image', filename: m.filename}; delete S().bg.src; return touch(true); }
-                case 'bgall': { const b = JSON.stringify(S().bg || {type: 'theme'}); show.slides.forEach(s => { s.bg = JSON.parse(b); }); paintAll(); commit(); return toast('Ce fond va maintenant à toutes les diapositives.'); }
+                case 'transall': { const t = JSON.stringify(S().trans || {}); show.slides.forEach(s => { s.trans = JSON.parse(t); }); paintNav(); commit(); return toast(i18n('Cette transition va maintenant à toutes les diapositives.')); }
+                case 'bgimg': { const m = await ext.pickImage?.({eyebrow: i18n('PRÉSENTATION'), title: i18n('L’image du fond'), filters: false}); if (!m) return; S().bg = {...(S().bg || {}), type: 'image', filename: m.filename}; delete S().bg.src; return touch(true); }
+                case 'bgall': { const b = JSON.stringify(S().bg || {type: 'theme'}); show.slides.forEach(s => { s.bg = JSON.parse(b); }); paintAll(); commit(); return toast(i18n('Ce fond va maintenant à toutes les diapositives.')); }
                 case 'theme': show.theme = THEMES[arg] ? arg : show.theme; paintAll(); return commit();
                 case 'dclear': setPath(show, arg, undefined); paintAll(); return commit();
-                case 'music': { const m = await pickAV('Une musique pendant la lecture', ['audio']); if (!m) return; if (m.kind !== 'audio') return toast('Choisis un son (MP3, M4A, WAV…).', 'error'); show.music = {media_id: m.media_id, filename: m.filename, title: m.title || 'Musique'}; paintInsp(); return commit(); }
+                case 'music': { const m = await pickAV(i18n('Une musique pendant la lecture'), ['audio']); if (!m) return; if (m.kind !== 'audio') return toast(i18n('Choisis un son (MP3, M4A, WAV…).'), 'error'); show.music = {media_id: m.media_id, filename: m.filename, title: m.title || i18n('Musique')}; paintInsp(); return commit(); }
                 case 'nomusic': show.music = null; paintInsp(); return commit();
                 case 'osel': { const q = obj(arg); if (q) { sel = new Set([q.id]); afterSel(); } return; }
                 case 'ohide': { const q = obj(arg); if (q) { if (q.hide) delete q.hide; else q.hide = true; touch(true); } return; }
@@ -1306,7 +1311,7 @@
         navList.addEventListener('dragend', () => { dragI = -1; navList.querySelectorAll('.is-drop').forEach(x => x.classList.remove('is-drop')); });
         async function addFile(f, at) {
             const [W, H] = WH(), kind = /^image\//.test(f.type) ? 'image' : /^video\//.test(f.type) ? 'video' : /^audio\//.test(f.type) ? 'audio' : '';
-            if (!kind) return toast(`${f.name} : ni une image, ni une vidéo, ni un son.`, 'error');
+            if (!kind) return toast(i18n('{name} : ni une image, ni une vidéo, ni un son.', {name: f.name}), 'error');
             status(`Envoi de ${f.name}…`);
             try { const u = await uploadBlob(f, f.name || `image.${(f.type.split('/')[1] || 'png').replace('jpeg', 'jpg')}`, kind); status('');
                 if (kind === 'image') { const [nw, nh] = await imgSize(mediaUrl(u.filename)), k = Math.min(W * .5 / nw, H * .6 / nh), w = nw * k, h = nh * k; return addObj({id: uid(), t: 'image', ...u, fit: 'cover', name: f.name.replace(/\.[^.]+$/, ''), x: Math.round((at?.x ?? W / 2) - w / 2), y: Math.round((at?.y ?? H / 2) - h / 2), w: Math.round(w), h: Math.round(h)}); }
@@ -1334,7 +1339,7 @@
             const done = () => { e.preventDefault(); e.stopPropagation(); };
             if (mod && kl === 'z') { done(); return e.shiftKey ? redo() : undo(); }
             if (mod && kl === 'y') { done(); return redo(); }
-            if (mod && kl === 'c') { done(); if (navFocus && !sel.size) { KN_CLIP.slides = [JSON.parse(JSON.stringify(S()))]; KN_CLIP.objs = null; return toast('Diapositive copiée : ⌘V pour la coller.'); } return copySel(); }
+            if (mod && kl === 'c') { done(); if (navFocus && !sel.size) { KN_CLIP.slides = [JSON.parse(JSON.stringify(S()))]; KN_CLIP.objs = null; return toast(i18n('Diapositive copiée : ⌘V pour la coller.')); } return copySel(); }
             if (mod && kl === 'x') { done(); return copySel(true); }
             if (mod && kl === 'd') { done(); return navFocus && !sel.size ? dupSlide() : dupSel(); }
             if (mod && kl === 'a') { done(); sel = new Set(S().objs.map(o => o.id)); return afterSel(); }
@@ -1382,7 +1387,7 @@
     async function unzip(buf) {
         const u8 = new Uint8Array(buf), dv = new DataView(buf); let e = -1;
         for (let i = u8.length - 22; i >= Math.max(0, u8.length - 65600); i--) if (dv.getUint32(i, true) === 0x06054b50) { e = i; break; }
-        if (e < 0) throw new Error('ce n’est pas un fichier zip valide (pptx, odp)');
+        if (e < 0) throw new Error(i18n('ce n’est pas un fichier zip valide (pptx, odp)'));
         const n = dv.getUint16(e + 10, true); let p = dv.getUint32(e + 16, true); const files = new Map(), dec = new TextDecoder();
         for (let k = 0; k < n && k < 20000; k++) {
             if (p + 46 > u8.length || dv.getUint32(p, true) !== 0x02014b50) break;
@@ -1393,9 +1398,9 @@
             const f = files.get(name); if (!f || f.off + 30 > u8.length || dv.getUint32(f.off, true) !== 0x04034b50) return null;
             const start = f.off + 30 + dv.getUint16(f.off + 26, true) + dv.getUint16(f.off + 28, true), data = u8.subarray(start, start + f.csize);
             if (f.method === 0) return data;
-            if (f.method !== 8) throw new Error('compression inconnue dans le fichier');
-            if (f.usize > 400e6) throw new Error('un élément du fichier est trop gros');
-            if (typeof DecompressionStream !== 'function') throw new Error('ce navigateur ne sait pas ouvrir les fichiers zip (mets-le à jour)');
+            if (f.method !== 8) throw new Error(i18n('compression inconnue dans le fichier'));
+            if (f.usize > 400e6) throw new Error(i18n('un élément du fichier est trop gros'));
+            if (typeof DecompressionStream !== 'function') throw new Error(i18n('ce navigateur ne sait pas ouvrir les fichiers zip (mets-le à jour)'));
             return new Uint8Array(await new Response(new Blob([data]).stream().pipeThrough(new DecompressionStream('deflate-raw'))).arrayBuffer());
         };
         return {names: [...files.keys()], has: n2 => files.has(n2), read, text: async n2 => { const b = await read(n2); return b ? new TextDecoder().decode(b) : null; }};
@@ -1406,7 +1411,7 @@
     const zipStore = files => window.LCNDA_SHEET.zipStore(files);
 
     /* ═════════ Importer ═════════ */
-    const parseXml = s => { if (/<!DOCTYPE|<!ENTITY/i.test(String(s || ''))) throw new Error('fichier refusé : il contient des déclarations XML (DOCTYPE ou ENTITY)'); const d = new DOMParser().parseFromString(String(s || ''), 'application/xml'); if (d.getElementsByTagName('parsererror').length) throw new Error('XML illisible dans le fichier'); return d; };
+    const parseXml = s => { if (/<!DOCTYPE|<!ENTITY/i.test(String(s || ''))) throw new Error(i18n('fichier refusé : il contient des déclarations XML (DOCTYPE ou ENTITY)')); const d = new DOMParser().parseFromString(String(s || ''), 'application/xml'); if (d.getElementsByTagName('parsererror').length) throw new Error(i18n('XML illisible dans le fichier')); return d; };
     const kids = (el, l) => el ? [...el.children].filter(c => c.localName === l) : [];
     const kid = (el, l) => el ? [...el.children].find(c => c.localName === l) || null : null;
     const desc = (el, l) => el ? [...el.getElementsByTagNameNS('*', l)] : [];
@@ -1427,7 +1432,7 @@
     const PPT_TRANS = {fade: 'fade', dissolve: 'dissolve', push: 'push', wipe: 'wipe', zoom: 'zoom', cover: 'movein', pull: 'reveal', split: 'wipe', cut: 'none', randomBar: 'wipe', blinds: 'wipe', checker: 'dissolve', circle: 'zoom', morph: 'magic', flip: 'flip', cube: 'cube', box: 'cube', rotate: 'flip', gallery: 'swap', conveyor: 'push', reveal: 'reveal', ferris: 'swap', flythrough: 'zoom', prism: 'cube', doors: 'wipe', window: 'zoom', vortex: 'dissolve', ripple: 'dissolve', honeycomb: 'dissolve', glitter: 'dissolve', shred: 'dissolve', switch: 'flip', flash: 'black', curtains: 'wipe', wind: 'push', airplane: 'swap', origami: 'flip', fracture: 'dissolve', crush: 'zoom', peelOff: 'reveal', pageCurlDouble: 'reveal', pageCurlSingle: 'reveal', drape: 'wipe', prestige: 'fade'};
     async function importPptx(buf, fname, show) {
         const zip = await unzip(buf), name = fname.replace(/\.[^.]+$/, '');
-        const presTxt = await zip.text('ppt/presentation.xml'); if (!presTxt) throw new Error('ce n’est pas une présentation PowerPoint (.pptx)');
+        const presTxt = await zip.text('ppt/presentation.xml'); if (!presTxt) throw new Error(i18n('ce n’est pas une présentation PowerPoint (.pptx)'));
         const pres = parseXml(presTxt), sz = desc1(pres, 'sldSz'), cx = Number(sz?.getAttribute('cx')) || 12192000, cy = Number(sz?.getAttribute('cy')) || 6858000;
         const W = 1920, H = clamp(Math.round(1920 * cy / cx), 240, 4000), k = W / cx;
         const relsCache = new Map(), xmlCache = new Map();
@@ -1526,8 +1531,8 @@
             const t0 = s.objs.find(o => o.role === 'title'); s.layout = t0 && s.objs.some(o => o.role === 'body') ? 'title-content' : t0 && s.objs.some(o => o.role === 'sub') ? 'title' : s.objs.some(o => o.t === 'image' && o.w >= W * .9) ? 'photo' : 'blank';
             slides.push(s); if (si % 5 === 4) await new Promise(r => setTimeout(r, 0));
         }
-        if (!slides.length) throw new Error('aucune diapositive trouvée');
-        return {slides, meta: {w: W, h: H}, notes: [...(skippedImg ? [`${A().plural(skippedImg, 'image')} dans un format que le navigateur ne lit pas (EMF, WMF…) ont été laissées de côté.`] : [])]};
+        if (!slides.length) throw new Error(i18n('aucune diapositive trouvée'));
+        return {slides, meta: {w: W, h: H}, notes: [...(skippedImg ? [i18n('{n} dans un format que le navigateur ne lit pas (EMF, WMF…) ont été laissées de côté.', {n: A().plural(skippedImg, 'image')})] : [])]};
     }
     function pptxText(txBody, k, phType, kindTx, colorOf, fontOf) {
         let html = '', plain = '', listOpen = '', firstSize = 0, firstColor = '', align = '';
@@ -1568,12 +1573,12 @@
         const cats = pts(desc1(sers[0], 'cat')), n = Math.max(cats.size, ...sers.map(s => pts(desc1(s, 'val')).size));
         const rows = Array.from({length: Math.min(n, 200)}, (_, i) => { const r = {label: String(cats.get(i) ?? i + 1)}; sers.forEach((s, j) => { r['s' + j] = num(pts(desc1(s, 'val')).get(i), 0); }); return r; });
         const title = desc(desc1(cdoc, 'title'), 't').map(x => x.textContent).join('').slice(0, 200);
-        return {kind, o: title ? {title} : {}, series: sers.map((s, j) => ({name: desc(desc1(s, 'tx'), 'v').map(x => x.textContent).join('') || `Série ${j + 1}`})), rows};
+        return {kind, o: title ? {title} : {}, series: sers.map((s, j) => ({name: desc(desc1(s, 'tx'), 'v').map(x => x.textContent).join('') || i18n('Série {n}', {n: String(j + 1)})})), rows};
     }
     /* ─── OpenDocument (.odp : LibreOffice Impress, Keynote → exporté…) ─── */
     const ODF_SHAPES = {rectangle: 'rect', 'round-rectangle': 'rounded', ellipse: 'ellipse', circle: 'ellipse', 'isosceles-triangle': 'triangle', 'right-triangle': 'rtriangle', diamond: 'diamond', pentagon: 'pentagon', hexagon: 'hexagon', octagon: 'octagon', star5: 'star', star4: 'star', star8: 'star', 'right-arrow': 'arrow', 'left-right-arrow': 'darrow', chevron: 'chevron', heart: 'heart', cross: 'cross', 'round-rectangular-callout': 'callout', 'rectangular-callout': 'callout'};
     async function importOdp(buf, fname, show) {
-        const zip = await unzip(buf), name = fname.replace(/\.[^.]+$/, ''), ctTxt = await zip.text('content.xml'); if (!ctTxt) throw new Error('ce n’est pas un fichier OpenDocument (.odp)');
+        const zip = await unzip(buf), name = fname.replace(/\.[^.]+$/, ''), ctTxt = await zip.text('content.xml'); if (!ctTxt) throw new Error(i18n('ce n’est pas un fichier OpenDocument (.odp)'));
         const content = parseXml(ctTxt), stylesDoc = parseXml(await zip.text('styles.xml') || '<x/>');
         const cm = v => { const m = String(v || '').trim().match(/^(-?[\d.]+)\s*(cm|mm|in|inch|pt|pc|px)?$/); if (!m) return 0; const n = Number(m[1]); return n * ({cm: 1, mm: .1, in: 2.54, inch: 2.54, pt: 2.54 / 72, pc: 2.54 / 6, px: 2.54 / 96}[m[2] || 'cm']); };
         const attr = (el, local) => { if (!el) return null; for (const a of el.attributes) if (a.localName === local) return a.value; return null; };
@@ -1631,8 +1636,8 @@
             const t0 = s.objs.find(o => o.role === 'title'); s.layout = t0 && s.objs.some(o => o.role === 'body') ? 'title-content' : t0 ? 'title' : 'blank';
             slides.push(s);
         }
-        if (!slides.length) throw new Error('aucune diapositive trouvée');
-        return {slides, meta: {w: W, h: H}, notes: skipped ? [`${A().plural(skipped, 'image illisible laissée', 'images illisibles laissées')} de côté.`] : []};
+        if (!slides.length) throw new Error(i18n('aucune diapositive trouvée'));
+        return {slides, meta: {w: W, h: H}, notes: skipped ? [i18n('{n} de côté.', {n: A().plural(skipped, 'image illisible laissée', 'images illisibles laissées')})] : []};
     }
     /* ─── PDF : les images qu'il contient (scans, photos), une par diapositive ─── */
     const ascii85 = str => { let t = str.replace(/\s/g, ''); if (t.startsWith('<~')) t = t.slice(2); const e = t.indexOf('~>'); if (e >= 0) t = t.slice(0, e); const out = []; let i = 0;
@@ -1640,7 +1645,7 @@
         return new Uint8Array(out); };
     async function importPdf(buf, fname, show) {
         const u8 = new Uint8Array(buf), s = new TextDecoder('latin1').decode(u8), out = [];
-        if (!s.startsWith('%PDF')) throw new Error('ce n’est pas un PDF');
+        if (!s.startsWith('%PDF')) throw new Error(i18n('ce n’est pas un PDF'));
         const re = /stream\r?\n/g; let m;
         while ((m = re.exec(s)) && out.length < 300) {
             const objStart = s.lastIndexOf(' obj', m.index); if (objStart < 0 || m.index - objStart > 4000) continue;
@@ -1653,9 +1658,9 @@
             const data = a85 ? ascii85(s.slice(start, start + len)) : u8.subarray(start, start + len); if (data[0] !== 0xff || data[1] !== 0xd8) continue;
             out.push(data.slice()); re.lastIndex = start + len;
         }
-        if (!out.length) throw new Error('aucune image (scan, photo) n’a été trouvée dans ce PDF. Son texte et ses dessins ne peuvent pas être lus ici : exporte-le plutôt en images, ou en PowerPoint depuis le logiciel qui l’a fait');
+        if (!out.length) throw new Error(i18n('aucune image (scan, photo) n’a été trouvée dans ce PDF. Son texte et ses dessins ne peuvent pas être lus ici : exporte-le plutôt en images, ou en PowerPoint depuis le logiciel qui l’a fait'));
         const slides = []; let i = 0; for (const d of out) { const f = await storeImage(d, `page-${++i}.jpg`, `${fname.replace(/\.[^.]+$/, '')} — image ${i}`); if (f) slides.push(photoSlide(show, f)); }
-        return {slides, notes: [`PDF : ${A().plural(slides.length, 'image reprise', 'images reprises')} ; le texte et les dessins du PDF ne sont pas lus.`]};
+        return {slides, notes: [i18n('PDF : {n} ; le texte et les dessins du PDF ne sont pas lus.', {n: A().plural(slides.length, 'image reprise', 'images reprises')})]};
     }
     /* ─── Markdown, texte : « # » = une diapositive, « - » = une puce, « --- » sépare, « > » une citation ─── */
     function importText(txt, show, md = true) {
@@ -1704,7 +1709,7 @@
             if (x.type === 'title' && fileOk(x.filename)) { const s = photoSlide(show, x.filename, [x.title, x.sub].filter(Boolean).join(' — ')); s.dur = num(x.dur, 5); return fin(s); }
             const s = newSlide(show, 'title'), T = s.objs.find(o => o.role === 'title'), Sb = s.objs.find(o => o.role === 'sub');
             T.html = x.title ? `<div>${esc(x.title)}</div>` : ''; Sb.html = x.sub || x.text ? String(x.sub || x.text).split('\n').map(l => `<div>${esc(l)}</div>`).join('') : '';
-            if (x.type === 'map') { Sb.html = `<div>${esc(x.text || (x.route || []).map(p => p.label || p.name).filter(Boolean).join(' → ') || '')}</div>`; s.notes = 'Carte du diaporama : le trajet animé reste dans le diaporama.'; }
+            if (x.type === 'map') { Sb.html = `<div>${esc(x.text || (x.route || []).map(p => p.label || p.name).filter(Boolean).join(' → ') || '')}</div>`; s.notes = i18n('Carte du diaporama : le trajet animé reste dans le diaporama.'); }
             if (hexOk(x.bg)) s.bg = {type: 'color', c1: x.bg}; s.dur = num(x.dur, 5);
             return fin(s);
         });
@@ -1712,7 +1717,7 @@
     function importJson(txt, show) {
         let d; try { d = JSON.parse(txt); } catch (_) { throw new Error('JSON illisible'); }
         const sh = d?.type === 'lcnda-presentation' ? d.show : d?.show && typeof d.show === 'object' ? d.show : d;
-        if (!sh || !Array.isArray(sh.slides)) throw new Error('ce n’est pas une présentation de l’app');
+        if (!sh || !Array.isArray(sh.slides)) throw new Error(i18n('ce n’est pas une présentation de l’app'));
         if (sh.mode !== 'keynote') return {slides: fromDiaporama(sh, show)};
         const n = normalize(sh); n.slides.forEach(s => { s.id = uid('s'); });
         return {slides: n.slides, meta: {w: n.w, h: n.h}};
@@ -1723,9 +1728,9 @@
         for (const f of files.slice(0, 200)) {
             const ex = (f.name.split('.').pop() || '').toLowerCase();
             try {
-                if (ex === 'key') { notes.push(`${f.name} : Keynote garde ses fichiers dans un format fermé. Dans Keynote : Fichier → Exporter vers → PowerPoint (ou PDF, ou Images), puis importe ce fichier ici.`); continue; }
-                if (['ppt', 'pps', 'pot'].includes(ex)) { notes.push(`${f.name} : l’ancien format PowerPoint (avant 2007) ne se lit pas ici ; ouvre-le et enregistre-le en .pptx.`); continue; }
-                if (f.size > 400e6) throw new Error('fichier trop gros (400 Mo au plus)');
+                if (ex === 'key') { notes.push(i18n('{name} : Keynote garde ses fichiers dans un format fermé. Dans Keynote : Fichier → Exporter vers → PowerPoint (ou PDF, ou Images), puis importe ce fichier ici.', {name: f.name})); continue; }
+                if (['ppt', 'pps', 'pot'].includes(ex)) { notes.push(i18n('{name} : l’ancien format PowerPoint (avant 2007) ne se lit pas ici ; ouvre-le et enregistre-le en .pptx.', {name: f.name})); continue; }
+                if (f.size > 400e6) throw new Error(i18n('fichier trop gros (400 Mo au plus)'));
                 let r = null;
                 if (['pptx', 'potx', 'ppsx', 'pptm'].includes(ex)) r = await importPptx(await f.arrayBuffer(), f.name, ctl.show);
                 else if (['odp', 'otp', 'fodp'].includes(ex)) r = await importOdp(await f.arrayBuffer(), f.name, ctl.show);
@@ -1733,66 +1738,66 @@
                 else if (['md', 'markdown', 'txt', 'text'].includes(ex)) r = {slides: importText(await f.text(), ctl.show, ex !== 'txt')};
                 else if (ex === 'json') r = importJson(await f.text(), ctl.show);
                 else if (/^image\//.test(f.type) || ['jpg', 'jpeg', 'png', 'webp', 'gif', 'bmp', 'tif', 'tiff'].includes(ex)) { const fn = await storeImage(new Uint8Array(await f.arrayBuffer()), f.name, f.name.replace(/\.[^.]+$/, '')); if (!fn) { notes.push(`${f.name} : image illisible.`); continue; } r = {slides: [photoSlide(ctl.show, fn)]}; }
-                else { notes.push(`${f.name} : format non reconnu.`); continue; }
-                if (!r.slides?.length) { notes.push(`${f.name} : rien à importer.`); continue; }
+                else { notes.push(i18n('{name} : format non reconnu.', {name: f.name})); continue; }
+                if (!r.slides?.length) { notes.push(i18n('{name} : rien à importer.', {name: f.name})); continue; }
                 if (r.meta && !(replace || all.length === 0) && meta && (r.meta.w !== meta.w || r.meta.h !== meta.h)) scaleSlides(r.slides, r.meta.w, r.meta.h, meta.w, meta.h);
                 else if (r.meta && !meta) meta = r.meta;
-                all.push(...r.slides); (r.notes || []).forEach(n => notes.push(`${f.name} : ${n}`));
-            } catch (e) { notes.push(`${f.name} : ${e.message}`); }
+                all.push(...r.slides); (r.notes || []).forEach(n => notes.push(i18n('{what} : {value}', {what: f.name, value: n})));
+            } catch (e) { notes.push(i18n('{what} : {value}', {what: f.name, value: e.message})); }
         }
         if (all.length) ctl.addSlides(all, {replace, meta});
         const s = all.length > 1 ? 's' : '';
-        if (notes.length) ext.openDialog({eyebrow: 'IMPORT', title: all.length ? `${all.length} diapositive${s} importée${s}` : 'Rien n’a été importé', body: `<ul>${notes.map(n => `<li>${esc(n)}</li>`).join('')}</ul>`}); // un compte rendu : « Fermer » seul (K3)
-        else toast(`${all.length} diapositive${s} importée${s}.`);
+        if (notes.length) ext.openDialog({eyebrow: i18n('IMPORT'), title: all.length ? A().plural(all.length, 'diapositive importée', 'diapositives importées') : i18n('Rien n’a été importé'), body: `<ul>${notes.map(n => `<li>${esc(n)}</li>`).join('')}</ul>`}); // un compte rendu : « Fermer » seul (K3)
+        else toast(`${A().plural(all.length, 'diapositive importée', 'diapositives importées')}.`);
     }
     function openImport(ctl) {
         ext.openDialog({eyebrow: 'PRÉSENTATION', title: '⤒ Importer', submitLabel: 'Importer', wide: true,
-            body: `${IMPORT_HELP}<label>Fichiers<input type="file" name="kn_files" multiple accept=".pptx,.potx,.ppsx,.odp,.otp,.key,.pdf,.md,.markdown,.txt,.json,image/*"></label><label class="checkbox-line"><input type="checkbox" name="kn_replace"> Remplacer les diapositives actuelles (sinon : ajoutées après la diapositive affichée)</label>`,
-            onSubmit: f => { const files = [...(f.elements.kn_files.files || [])]; if (!files.length) return window.LCNDA_UI.fail(f.elements.kn_files, 'Choisis au moins un fichier.'); importFiles(files, ctl, {replace: !!f.elements.kn_replace?.checked}); }});
+            body: `${IMPORT_HELP}<label>Fichiers<input type="file" name="kn_files" multiple accept=".pptx,.potx,.ppsx,.odp,.otp,.key,.pdf,.md,.markdown,.txt,.json,image/*"></label><label class="checkbox-line"><input type="checkbox" name="kn_replace"> ${esc(i18n('Remplacer les diapositives actuelles (sinon : ajoutées après la diapositive affichée)'))}</label>`,
+            onSubmit: f => { const files = [...(f.elements.kn_files.files || [])]; if (!files.length) return window.LCNDA_UI.fail(f.elements.kn_files, i18n('Choisis au moins un fichier.')); importFiles(files, ctl, {replace: !!f.elements.kn_replace?.checked}); }});
     }
-    const IMPORT_HELP = `<ul class="kn-implist"><li><b>PowerPoint (.pptx)</b> et <b>OpenDocument / LibreOffice Impress (.odp)</b> : chaque diapositive avec ses textes (à leur place, taille, gras, couleur, listes), ses images, ses formes simples, ses tableaux, ses graphiques, ses notes et ses transitions.</li>
-        <li><b>Keynote (.key)</b> : le format d’Apple est fermé. Dans Keynote : Fichier → Exporter vers → <b>PowerPoint</b> (ou PDF, ou Images), puis importe ce fichier ici.</li>
-        <li><b>PDF</b> : les images qu’il contient (scans, photos) deviennent des diapositives, une par image. Le texte et les dessins d’un PDF ne se lisent pas ici : pour une présentation, exporte-la plutôt en PowerPoint ou en images.</li>
-        <li><b>Images</b> (JPG, PNG, WEBP, GIF, BMP…), plusieurs à la fois : une diapositive « photo pleine page » par image.</li>
-        <li><b>Markdown (.md) ou texte (.txt)</b> : « # Titre » commence une diapositive, « - » fait une puce, « --- » sépare deux diapositives, « > » une citation, « Notes: » les notes de l’orateur. Un texte simple : un paragraphe par diapositive.</li>
-        <li><b>JSON</b> : une présentation (ou un diaporama) exportée par l’app.</li></ul>`;
+    const IMPORT_HELP = `<ul class="kn-implist"><li>${i18n('<b>PowerPoint (.pptx)</b> et <b>OpenDocument / LibreOffice Impress (.odp)</b> : chaque diapositive avec ses textes (à leur place, taille, gras, couleur, listes), ses images, ses formes simples, ses tableaux, ses graphiques, ses notes et ses transitions.')}</li>
+        <li>${i18n('<b>Keynote (.key)</b> : le format d’Apple est fermé. Dans Keynote : Fichier → Exporter vers → <b>PowerPoint</b> (ou PDF, ou Images), puis importe ce fichier ici.')}</li>
+        <li>${i18n('<b>PDF</b> : les images qu’il contient (scans, photos) deviennent des diapositives, une par image. Le texte et les dessins d’un PDF ne se lisent pas ici : pour une présentation, exporte-la plutôt en PowerPoint ou en images.')}</li>
+        <li>${i18n('<b>Images</b> (JPG, PNG, WEBP, GIF, BMP…), plusieurs à la fois : une diapositive « photo pleine page » par image.')}</li>
+        <li>${i18n('<b>Markdown (.md) ou texte (.txt)</b> : « # Titre » commence une diapositive, « - » fait une puce, « --- » sépare deux diapositives, « > » une citation, « Notes: » les notes de l’orateur. Un texte simple : un paragraphe par diapositive.')}</li>
+        <li>${i18n('<b>JSON</b> : une présentation (ou un diaporama) exportée par l’app.')}</li></ul>`; // 🌐 une phrase entière par ligne (avec ses <b>)
 
     /* ═════════ Exporter : PDF / impression, PNG, vidéo ═════════ */
     const PRINT_CSS = '*{-webkit-print-color-adjust:exact;print-color-adjust:exact;box-sizing:border-box}ul{list-style:disc;padding-left:1.2em;margin:.15em 0}ol{padding-left:1.4em;margin:.15em 0}li{margin:.1em 0}';
     /** L1 : la fenêtre « Imprimer » commune — diapositives, + notes, ou notes seules ; 1, 2, 4 ou 6 par page ; numéros ; masquées aussi */
     function exportPrint(show, name, withNotes, at = 0) {
-        const [W, H] = dims(show); if (!show.slides.length) return toast('Aucune diapositive à imprimer.', 'error');
-        const UI2 = window.LCNDA_UI; if (!UI2?.openPrintDialog) return toast('La fenêtre « Imprimer » n’est pas chargée.', 'error');
+        const [W, H] = dims(show); if (!show.slides.length) return toast(i18n('Aucune diapositive à imprimer.'), 'error');
+        const UI2 = window.LCNDA_UI; if (!UI2?.openPrintDialog) return toast(i18n('La fenêtre « Imprimer » n’est pas chargée.'), 'error');
         const list = c => show.slides.map((s, i) => ({s, i})).filter(x => c.hidden || !x.s.skip);
         const per = c => (c.what === 'notes' ? 1 : Number(c.per) || 1);
         const html = c => {
             const L = list(c), n = per(c), pages = [], MMp = 96 / 25.4, [pw, ph] = c.pageMm, pad = 10;
             if (c.what === 'notes') {
-                const body = L.map(x => `<div class="kn-pn"><b>${c.nums ? `${x.i + 1}. ` : ''}${esc(x.s.title || x.s.section || 'Diapositive')}</b><div>${x.s.notes ? esc(x.s.notes).replace(/\n/g, '<br>') : '<i>Pas de notes.</i>'}</div></div>`).join('');
+                const body = L.map(x => `<div class="kn-pn"><b>${c.nums ? `${x.i + 1}. ` : ''}${esc(x.s.title || x.s.section || i18n('Diapositive'))}</b><div>${x.s.notes ? esc(x.s.notes).replace(/\n/g, '<br>') : `<i>${esc(i18n('Pas de notes.'))}</i>`}</div></div>`).join('');
                 return `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>${esc(name || 'Présentation')}</title><style>body{margin:0;font:13px/1.5 Georgia,serif;color:#222}.kn-pn{break-inside:avoid;margin:0 0 5mm;padding-bottom:3mm;border-bottom:1px solid #ddd}.kn-pn b{font:700 12px system-ui,sans-serif;display:block;margin-bottom:2px}</style></head><body><h1 style="font:700 18px system-ui;margin:0 0 6mm">${esc(name || 'Présentation')} — notes</h1>${body}</body></html>`;
             }
             const notes = c.what === 'notes-slides', cols = n <= 2 ? 1 : n <= 4 ? 2 : (pw > ph ? 3 : 2), rows = Math.ceil(n / cols);
             for (let k = 0; k < L.length; k += n) {
                 const grp = L.slice(k, k + n), cw = (pw - 2 * pad - (cols - 1) * 6) / cols, chh = (ph - 2 * pad - (rows - 1) * 6) / rows;
                 const cell = x => { const numH = c.nums ? 5 : 0, aw = (notes ? cw * 0.56 : cw) * MMp, ah = (chh - numH) * MMp, sc = Math.min(aw / W, ah / H); // avec les notes : la diapositive à gauche, ses notes à droite
-                    return `<div class="kn-pc" style="width:${cw}mm;height:${chh}mm">${c.nums ? `<span class="kn-pnum">${x.i + 1}${x.s.skip ? ' · masquée' : ''}</span>` : ''}<div class="kn-prow"><div class="kn-ps" style="width:${W * sc}px;height:${H * sc}px"><div style="width:${W}px;height:${H}px;transform:scale(${sc});transform-origin:0 0">${renderBuilt(show, x.s, 'print')}</div></div>${notes ? `<div class="kn-pnotes">${x.s.notes ? esc(x.s.notes).replace(/\n/g, '<br>') : '<i>Pas de notes.</i>'}</div>` : ''}</div></div>`; };
+                    return `<div class="kn-pc" style="width:${cw}mm;height:${chh}mm">${c.nums ? `<span class="kn-pnum">${x.i + 1}${x.s.skip ? ` · ${esc(i18n('masquée'))}` : ''}</span>` : ''}<div class="kn-prow"><div class="kn-ps" style="width:${W * sc}px;height:${H * sc}px"><div style="width:${W}px;height:${H}px;transform:scale(${sc});transform-origin:0 0">${renderBuilt(show, x.s, 'print')}</div></div>${notes ? `<div class="kn-pnotes">${x.s.notes ? esc(x.s.notes).replace(/\n/g, '<br>') : `<i>${esc(i18n('Pas de notes.'))}</i>`}</div>` : ''}</div></div>`; };
                 pages.push({html: `<div class="kn-pg" style="grid-template-columns:repeat(${cols},${cw}mm)">${grp.map(cell).join('')}</div>`, pad});
             }
             return UI2.printSheets({title: name || 'Présentation', choix: c, pages, css: `${PRINT_CSS}.kn-pg{display:grid;gap:6mm;align-content:start;justify-content:center;height:100%}.kn-pc{display:flex;flex-direction:column;gap:1mm;overflow:hidden}.kn-pnum{font:600 10px system-ui,sans-serif;color:#888}.kn-ps{overflow:hidden;border:1px solid #bbb;flex:none}.kn-prow{display:flex;gap:4mm;align-items:flex-start;min-height:0;flex:1}.kn-pnotes{flex:1;min-width:0;font:11px/1.45 Georgia,serif;color:#222;overflow:hidden;max-height:100%}`});
         };
         const land = W >= H;
-        UI2.openPrintDialog({title: `${name || 'Présentation'} — présentation`, key: 'presentation', zone: 'Présentation', photos: false, margin: 0, orientation: land ? 'landscape' : 'portrait',
-            options: [{key: 'what', type: 'radio', value: withNotes ? 'notes-slides' : 'slides', choices: [['slides', 'Les diapositives'], ['notes-slides', 'Les diapositives avec les notes du présentateur'], ['notes', 'Les notes seules (texte)']]},
-                {key: 'per', type: 'radio', label: 'Diapositives par page', tiles: true, value: '1', show: c => c.what !== 'notes', choices: [{value: '1', label: '1', cells: 1}, {value: '2', label: '2', cells: 2}, {value: '4', label: '4', cells: 4}, {value: '6', label: '6', cells: 6}]},
-                {key: 'nums', label: 'Numéros des diapositives', checked: true, show: c => c.what !== 'notes'},
-                {key: 'hidden', label: 'Les diapositives masquées aussi', checked: false}],
+        UI2.openPrintDialog({title: i18n('{name} — présentation', {name: name || i18n('Présentation')}), key: 'presentation', zone: i18n('Présentation'), photos: false, margin: 0, orientation: land ? 'landscape' : 'portrait',
+            options: [{key: 'what', type: 'radio', value: withNotes ? 'notes-slides' : 'slides', choices: [['slides', i18n('Les diapositives')], ['notes-slides', i18n('Les diapositives avec les notes du présentateur')], ['notes', i18n('Les notes seules (texte)')]]},
+                {key: 'per', type: 'radio', label: i18n('Diapositives par page'), tiles: true, value: '1', show: c => c.what !== 'notes', choices: [{value: '1', label: '1', cells: 1}, {value: '2', label: '2', cells: 2}, {value: '4', label: '4', cells: 4}, {value: '6', label: '6', cells: 6}]},
+                {key: 'nums', label: i18n('Numéros des diapositives'), checked: true, show: c => c.what !== 'notes'},
+                {key: 'hidden', label: i18n('Les diapositives masquées aussi'), checked: false}],
             current: c => { const L = list(c), k = L.findIndex(x => x.i >= at); return Math.floor(Math.max(0, k) / per(c)) + 1; },
             html});
     }
     /** o (fenêtre d'export) : {direct, filename, saveCopy} — direct : les erreurs remontent à la fenêtre */
     async function exportPng(show, name, which, o = {}) {
-        const idx = which || show.slides.map((s, i) => i).filter(i => !show.slides[i].skip); if (!idx.length) { if (o.direct) throw new Error('aucune diapositive'); return toast('Aucune diapositive.', 'error'); }
-        if (!o.direct) toast(idx.length > 1 ? `Préparation de ${idx.length} images…` : 'Préparation de l’image…');
+        const idx = which || show.slides.map((s, i) => i).filter(i => !show.slides[i].skip); if (!idx.length) { if (o.direct) throw new Error(i18n('aucune diapositive')); return toast(i18n('Aucune diapositive.'), 'error'); }
+        if (!o.direct) toast(idx.length > 1 ? i18n('Préparation de {n} images…', {n: String(idx.length)}) : i18n('Préparation de l’image…'));
         try {
             const blobs = []; for (const i of idx) { const c = await slideCanvas(show, show.slides[i], 1); blobs.push([i, await new Promise((r, j) => { try { c.toBlob(b => b ? r(b) : j(new Error('image vide')), 'image/png'); } catch (e) { j(e); } })]); }
             if (blobs.length === 1) { const fn = o.filename || `${safeName(name)}-${blobs[0][0] + 1}.png`; download(blobs[0][1], fn); if (o.saveCopy) await uploadBlob(blobs[0][1], fn, 'image', `${name} — diapositive ${blobs[0][0] + 1}`); return; }
@@ -1801,12 +1806,12 @@
         } catch (e) { if (o.direct) throw e; toast(`Export impossible : ${e.message}`, 'error'); }
     }
     async function exportVideo(show, name, status = () => {}, o = {}) {
-        const list = show.slides.filter(s => !s.skip); if (!list.length) { if (o.direct) throw new Error('aucune diapositive'); return toast('Aucune diapositive.', 'error'); }
-        if (typeof MediaRecorder !== 'function') { if (o.direct) throw new Error('ce navigateur ne sait pas enregistrer de vidéo'); return toast('Ce navigateur ne sait pas enregistrer de vidéo.', 'error'); }
+        const list = show.slides.filter(s => !s.skip); if (!list.length) { if (o.direct) throw new Error(i18n('aucune diapositive')); return toast(i18n('Aucune diapositive.'), 'error'); }
+        if (typeof MediaRecorder !== 'function') { if (o.direct) throw new Error(i18n('ce navigateur ne sait pas enregistrer de vidéo')); return toast(i18n('Ce navigateur ne sait pas enregistrer de vidéo.'), 'error'); }
         const [W, H] = dims(show), sc = Math.min(1, 1280 / W), cw = Math.round(W * sc / 2) * 2, chh = Math.round(H * sc / 2) * 2, durs = list.map(s => clamp(num(s.dur, 5), 1, 600)), total = durs.reduce((a, b) => a + b, 0);
-        if (!o.direct && !await A().confirmBox(`La vidéo rejoue la présentation en entier (${fmt(total)}, durées de l’onglet 🖼 Diapositive) et l’enregistre. Laisse la fenêtre ouverte.`, {title: 'Fabriquer la vidéo ?', okLabel: 'Fabriquer la vidéo'})) return;
+        if (!o.direct && !await A().confirmBox(i18n('La vidéo rejoue la présentation en entier ({time}, durées de l’onglet 🖼 Diapositive) et l’enregistre. Laisse la fenêtre ouverte.', {time: fmt(total)}), {title: i18n('Fabriquer la vidéo ?'), okLabel: i18n('Fabriquer la vidéo')})) return;
         try {
-            const frames = []; for (const [i, s] of list.entries()) { status(`⏺ Préparation : ${i + 1} / ${list.length}`); frames.push(await slideCanvas(show, s, sc)); }
+            const frames = []; for (const [i, s] of list.entries()) { status(`⏺ ${i18n('Préparation : {n} / {total}', {n: String(i + 1), total: String(list.length)})}`); frames.push(await slideCanvas(show, s, sc)); }
             const c = document.createElement('canvas'); c.width = cw; c.height = chh; const g = c.getContext('2d'), vs = c.captureStream(30);
             const ac = new AudioContext(), dest = ac.createMediaStreamDestination(); let mus = null;
             if (show.music?.filename && fileOk(show.music.filename)) { const a = new Audio(); a.crossOrigin = 'anonymous'; a.src = mediaUrl(show.music.filename); a.loop = true; const gn = ac.createGain(); gn.gain.value = clamp(num(show.musicVol, .5), 0, 1); ac.createMediaElementSource(a).connect(gn).connect(dest); mus = a; const o = ac.createConstantSource(), z = ac.createGain(); z.gain.value = 0; o.connect(z).connect(dest); o.start(); await ac.resume().catch(() => {}); }
@@ -1825,14 +1830,14 @@
             const t0 = performance.now();
             // la présentation fermée pendant l'enregistrement : on arrête là, sans téléchargement surprise plus tard
             let stopped = false;
-            await new Promise(res => { const step = () => { if (o.alive && !o.alive()) { stopped = true; return res(); } const t = (performance.now() - t0) / 1000; if (t >= total) { draw(total - .01); return res(); } draw(t); status(`⏺ Vidéo : ${Math.round(t / total * 100)} %`); requestAnimationFrame(step); }; step(); });
+            await new Promise(res => { const step = () => { if (o.alive && !o.alive()) { stopped = true; return res(); } const t = (performance.now() - t0) / 1000; if (t >= total) { draw(total - .01); return res(); } draw(t); status(`⏺ ${i18n('Vidéo : {n} %', {n: String(Math.round(t / total * 100))})}`); requestAnimationFrame(step); }; step(); });
             mr.stop(); mus?.pause(); await done; ac.close().catch(() => {}); status('');
-            if (stopped) { toast('Vidéo arrêtée : la présentation a été fermée pendant l’enregistrement.'); return; }
-            const blob = new Blob(chunks, {type: 'video/webm'}); if (!blob.size) { if (o.direct) throw new Error('la vidéo est vide : l’enregistrement n’a pas pu se faire dans ce navigateur'); return toast('La vidéo est vide : l’enregistrement n’a pas pu se faire dans ce navigateur.', 'error'); }
-            if (o.direct) { download(blob, o.filename || `${safeName(name)}.webm`); if (o.saveCopy) await uploadBlob(blob, o.filename || 'presentation.webm', 'video', name || 'Présentation'); toast(o.saveCopy ? 'Vidéo téléchargée et rangée dans les Médias.' : 'Vidéo téléchargée.'); return; }
-            if (await A().confirmBox('Tu peux l’ajouter aux Médias de l’app, ou seulement la télécharger.', {title: 'Vidéo prête', okLabel: 'Ajouter aux Médias', cancelLabel: 'Télécharger seulement', danger: false})) { const u = await uploadBlob(blob, 'presentation.webm', 'video', name || 'Présentation'); toast(u ? 'Vidéo ajoutée aux Médias.' : 'Envoi impossible.'); }
+            if (stopped) { toast(i18n('Vidéo arrêtée : la présentation a été fermée pendant l’enregistrement.')); return; }
+            const blob = new Blob(chunks, {type: 'video/webm'}); if (!blob.size) { if (o.direct) throw new Error(i18n('la vidéo est vide : l’enregistrement n’a pas pu se faire dans ce navigateur')); return toast(i18n('La vidéo est vide : l’enregistrement n’a pas pu se faire dans ce navigateur.'), 'error'); }
+            if (o.direct) { download(blob, o.filename || `${safeName(name)}.webm`); if (o.saveCopy) await uploadBlob(blob, o.filename || 'presentation.webm', 'video', name || i18n('Présentation')); toast(i18n(o.saveCopy ? 'Vidéo téléchargée et rangée dans les Médias.' : 'Vidéo téléchargée.')); return; }
+            if (await A().confirmBox(i18n('Tu peux l’ajouter aux Médias de l’app, ou seulement la télécharger.'), {title: i18n('Vidéo prête'), okLabel: i18n('Ajouter aux Médias'), cancelLabel: i18n('Télécharger seulement'), danger: false})) { const u = await uploadBlob(blob, 'presentation.webm', 'video', name || i18n('Présentation')); toast(i18n(u ? 'Vidéo ajoutée aux Médias.' : 'Envoi impossible.')); }
             else download(blob, `${safeName(name)}.webm`);
-        } catch (e) { status(''); if (o.direct) throw e; toast(`Vidéo impossible : ${e.message}`, 'error'); }
+        } catch (e) { status(''); if (o.direct) throw e; toast(i18n('Vidéo impossible : {error}', {error: e.message}), 'error'); }
     }
 
     /* ═════════ Commencer : choisir un thème et un format ; importer ═════════ */
@@ -1840,14 +1845,14 @@
         const p = prefs(), sample = t => { const sh = newShowFrom({...p, theme: t, aspect: '16:9'}), [W, H] = dims(sh), o = layoutObjs('title', W, H, themeOf(sh)); o[0].html = '<div>Titre</div>'; o[1].html = '<div>Sous-titre</div>'; return `<span class="kn-newprev"><span style="width:${W}px;height:${H}px;transform:scale(${150 / W})">${renderSlide(sh, {objs: o, bg: {type: 'theme'}}, 'thumb')}</span></span>`; };
         ext.openDialog({eyebrow: 'NOUVELLE PRÉSENTATION', title: '🎤 Choisis un thème', submitLabel: 'Créer la présentation', wide: true,
             body: `<div class="kn-newgrid">${Object.entries(THEMES).map(([k, t]) => `<label class="kn-newth"><input type="radio" name="kn_theme" value="${k}" ${p.theme === k ? 'checked' : ''}>${sample(k)}<small>${esc(t.label)}</small></label>`).join('')}</div>
-                <div class="form-grid"><label>Nom<input name="kn_name" value="Ma présentation" maxlength="200"></label><label>Format<select name="kn_aspect">${opt(Object.entries(ASPECTS).filter(([k]) => k !== 'custom' || p.aspect === 'custom').map(([k, v]) => [k, v[2]]), p.aspect)}</select></label></div>
+                <div class="form-grid"><label>${esc(i18n('Nom'))}<input name="kn_name" value="${esc(i18n('Ma présentation'))}" maxlength="200"></label><label>Format<select name="kn_aspect">${opt(Object.entries(ASPECTS).filter(([k]) => k !== 'custom' || p.aspect === 'custom').map(([k, v]) => [k, v[2]]), p.aspect)}</select></label></div>
                 <p class="muted">Le thème, les couleurs, les polices et le format se changent ensuite (onglet ⚙️ Document). Pour partir d’un PowerPoint, d’un OpenDocument, d’un PDF ou de photos : « ⤒ Importer ».</p>`,
-            onSubmit: f => { const theme = f.elements.kn_theme?.value || p.theme, aspect = f.elements.kn_aspect.value, show = newShowFrom({...p, theme, aspect}); show.slides = [newSlide(show, 'title')]; openEditor({...ctx, show, name: f.elements.kn_name.value.trim() || 'Ma présentation'}); }});
+            onSubmit: f => { const theme = f.elements.kn_theme?.value || p.theme, aspect = f.elements.kn_aspect.value, show = newShowFrom({...p, theme, aspect}); show.slides = [newSlide(show, 'title')]; openEditor({...ctx, show, name: f.elements.kn_name.value.trim() || i18n('Ma présentation')}); }});
     }
     function importNew(ctx = {}) {
         ext.openDialog({eyebrow: 'NOUVELLE PRÉSENTATION', title: '⤒ Importer une présentation', submitLabel: 'Importer', wide: true,
             body: `${IMPORT_HELP}<label>Fichiers<input type="file" name="kn_files" multiple accept=".pptx,.potx,.ppsx,.odp,.otp,.key,.pdf,.md,.markdown,.txt,.json,image/*"></label>`,
-            onSubmit: f => { const files = [...(f.elements.kn_files.files || [])]; if (!files.length) return window.LCNDA_UI.fail(f.elements.kn_files, 'Choisis au moins un fichier.');
+            onSubmit: f => { const files = [...(f.elements.kn_files.files || [])]; if (!files.length) return window.LCNDA_UI.fail(f.elements.kn_files, i18n('Choisis au moins un fichier.'));
                 const show = newShowFrom(); show.slides = [newSlide(show, 'blank')]; openEditor({...ctx, show, name: files[0].name.replace(/\.[^.]+$/, '').slice(0, 200), importFiles: files}); }});
     }
 
@@ -1865,8 +1870,8 @@
             <div class="h-mtp-row"><button type="button" class="button small secondary" data-knp-reset>↺ Réglages de départ</button></div>
             <p class="muted">Les boutons du haut, les onglets et les sections de l’inspecteur se rangent, se montrent ou se cachent dans « Boutons et options » (éditeur 🎤 Présentation), avec ses raccourcis clavier.</p>`; },
         bind: (box, redraw) => {
-            box.addEventListener('change', e => { const k = e.target.dataset.knp; if (!k) return; const p = readJ(PREF, {}); let v = e.target.value; if (['w', 'h', 'transDur'].includes(k)) v = Number(v); if (k === 'snap') v = v === '1'; p[k] = v; writeJ(PREF, p); toast('Enregistré.'); if (k === 'aspect') redraw(); });
-            box.addEventListener('click', e => { if (!e.target.closest('[data-knp-reset]')) return; try { localStorage.removeItem(PREF); } catch (_) {} redraw(); toast('Réglages de départ.'); });
+            box.addEventListener('change', e => { const k = e.target.dataset.knp; if (!k) return; const p = readJ(PREF, {}); let v = e.target.value; if (['w', 'h', 'transDur'].includes(k)) v = Number(v); if (k === 'snap') v = v === '1'; p[k] = v; writeJ(PREF, p); toast(i18n('Enregistré.')); if (k === 'aspect') redraw(); });
+            box.addEventListener('click', e => { if (!e.target.closest('[data-knp-reset]')) return; try { localStorage.removeItem(PREF); } catch (_) {} redraw(); toast(i18n('Réglages de départ.')); });
         },
     };
 
@@ -1883,6 +1888,6 @@
     ext.newPresentation = newPresentation;
     ext.importPresentation = importNew;
     ext.playPresentation = openPlayer;
-    ext.keynoteFromSlideshow = (src, name, ctx = {}) => { const show = newShowFrom(); show.slides = fromDiaporama(src || {}, show); if (src?.music?.filename) { show.music = src.music; show.musicVol = num(src.musicVol, .5); } return openEditor({...ctx, show, dirty: true, name: `${name || 'Diaporama'} (présentation)`}); };
+    ext.keynoteFromSlideshow = (src, name, ctx = {}) => { const show = newShowFrom(); show.slides = fromDiaporama(src || {}, show); if (src?.music?.filename) { show.music = src.music; show.musicVol = num(src.musicVol, .5); } return openEditor({...ctx, show, dirty: true, name: i18n('{name} (présentation)', {name: name || i18n('Diaporama')})}); };
     ext.keynoteInternals = {renderSlide, renderBuilt, cleanHtml, importText, importJson, unzip, zipStore, crc32, chartSpec, slideCanvas, normalize, THEMES, LAYOUTS, TRANS, FX, scaleSlides};
 })();

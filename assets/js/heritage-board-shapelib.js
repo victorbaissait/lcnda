@@ -16,18 +16,20 @@
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const K = ext.boardKit; if (!K) return;
     const A = () => window.LCNDA_APP || {};
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m))); // 🌐 app-i18n.js
+    const fmtN = n => (window.LCNDA_I18N?.fmtNumber ? window.LCNDA_I18N.fmtNumber(n) : Number(n).toLocaleString('fr-FR'));
     const esc = v => (A().escapeHtml ? A().escapeHtml(v ?? '') : String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'}[c])));
     const DATA_URL = 'assets/data/shapes-lib.json?v=1';
     // les nouvelles catégories (avant « Mes formes », qui reste la dernière)
     const NEW_CATS = [['letters', 'Lettres et chiffres', '🔤'], ['heraldry', 'Armoiries et héraldique', '🛡️'], ['frames', 'Cadres et bordures', '🖼️'], ['labels', 'Étiquettes', '🏷️'],
-        ['emotions', 'Émotions', '😊'], ['flags', 'Drapeaux', '🚩'], ['tech', 'Écrans et appareils', '💻'], ['money', 'Argent et commerce', '💶']];
+        ['emotions', 'Émotions', '😊'], ['flags', 'Drapeaux', '🚩'], ['tech', 'Écrans et appareils', '💻'], ['money', 'Argent et commerce', '💶']].map(([k, n, i]) => [k, i18n(n), i]);
     { const at = K.CATS.findIndex(c => c[0] === 'mine'); const add = NEW_CATS.filter(c => !K.CATS.some(x => x[0] === c[0])); K.CATS.splice(at < 0 ? K.CATS.length : at, 0, ...add); }
     const catName = c => K.CATS.find(x => x[0] === c)?.[1] || '';
 
     /* ── recherche C1 : sans accents, en français ── */
     const fold = s => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/œ/g, 'oe').replace(/æ/g, 'ae').replace(/[’'`«»()",;:!?]/g, ' ').replace(/\s+/g, ' ').trim();
     const idx = new WeakMap();
-    const textOf = sh => { let t = idx.get(sh); if (t === undefined) { t = ' ' + fold(`${sh.n} ${sh.tags || ''} ${catName(sh.c)}`) + ' '; idx.set(sh, t); } return t; };
+    const textOf = sh => { let t = idx.get(sh); if (t === undefined) { t = ' ' + fold(`${sh.n} ${sh.fr && sh.fr !== sh.n ? sh.fr : ''} ${sh.tags || ''} ${catName(sh.c)}`) + ' '; idx.set(sh, t); } return t; };
     const nameOf = sh => ' ' + fold(sh.n) + ' ';
     const variants = w => { const v = [w]; if (w.length > 3 && /[sx]$/.test(w)) v.push(w.slice(0, -1)); if (w.length > 4 && /aux$/.test(w)) v.push(w.slice(0, -3) + 'al'); return v; };
     function searchShapes(q, {cat = '', list = null} = {}) {
@@ -61,7 +63,7 @@
                 if (!Array.isArray(r) || r.length < 7) continue;
                 const [k, n, c, d, eo, tags, box] = r;
                 if (typeof k !== 'string' || !/^[a-z0-9_]{1,60}$/.test(k) || K.SHAPE_MAP[k] || typeof d !== 'string' || !PATH_OK.test(d) || !cats.has(c)) continue;
-                const sh = {k, n: String(n || k).slice(0, 80), c, d, eo: !!eo, tags: String(tags || '').slice(0, 200), s: [24, 100, 256].includes(box) ? box : 100, lazy: true};
+                const sh = ext.shapeNameI18n.named({k, fr: String(n || k).slice(0, 80), c, d, eo: !!eo, tags: String(tags || '').slice(0, 200), s: [24, 100, 256].includes(box) ? box : 100, lazy: true});
                 K.SHAPES.push(sh); K.SHAPE_MAP[k] = sh;
             }
             K.libraryLoaded = true;
@@ -90,15 +92,15 @@
         const order = c => (p.shapeCats || []).indexOf(c);
         const cats = () => K.CATS.filter(c => (p.shapeCats || []).includes(c[0]) && !hidden.has('cat:' + c[0])).sort((a, b) => order(a[0]) - order(b[0]));
         const UI = window.LCNDA_UI;
-        const m = document.createElement('div'); m.className = 'h-bd-shapelib sl-lib'; m.setAttribute('role', 'dialog'); m.setAttribute('aria-label', 'Bibliothèque de formes');
-        m.innerHTML = `<div class="h-bd-shhead sl-head"><span class="sl-q" data-sl-q></span>${onNew ? '<button type="button" class="button small" data-sl-new>＋ Créer une forme</button>' : ''}${onFrom ? '<button type="button" class="button small secondary" data-sl-from title="Créer une forme à partir d’une autre (retourner, tourner, étirer, ajouter, percer)">🧩 À partir d’une forme</button>' : ''}<button type="button" class="icon-button sl-x" data-sl-x title="Fermer" aria-label="Fermer">×</button></div>
+        const m = document.createElement('div'); m.className = 'h-bd-shapelib sl-lib'; m.setAttribute('role', 'dialog'); m.setAttribute('aria-label', i18n('Bibliothèque de formes'));
+        m.innerHTML = `<div class="h-bd-shhead sl-head"><span class="sl-q" data-sl-q></span>${onNew ? `<button type="button" class="button small" data-sl-new>${esc(i18n('＋ Créer une forme'))}</button>` : ''}${onFrom ? `<button type="button" class="button small secondary" data-sl-from title="${esc(i18n('Créer une forme à partir d’une autre (retourner, tourner, étirer, ajouter, percer)'))}">${esc(i18n('🧩 À partir d’une forme'))}</button>` : ''}<button type="button" class="icon-button sl-x" data-sl-x title="${esc(i18n('Fermer'))}" aria-label="${esc(i18n('Fermer'))}">×</button></div>
             <div class="h-bd-shcats sl-cats" role="tablist" data-sl-cats></div>
             <div class="sl-scroll" data-sl-scroll tabindex="0" aria-label="Formes (flèches pour choisir, Entrée pour prendre)"><div class="sl-space" data-sl-space></div></div>
             <div class="sl-foot" data-sl-foot aria-live="polite"></div>`;
         (anchor?.closest?.('.h-bd-menuwrap, .h-bd-isec, .h-bt-opts') || root || document.body).appendChild(m);
         let input;
-        if (UI?.searchField) { const sf = UI.searchField({placeholder: 'Chercher une forme… (arbre, croix, É, drapeau)', delay: 80, label: 'Chercher une forme', onInput: () => { sel = -1; draw(true); }}); m.querySelector('[data-sl-q]').appendChild(sf); input = sf.input; }
-        else { input = document.createElement('input'); input.type = 'search'; input.placeholder = 'Chercher une forme…'; input.setAttribute('aria-label', 'Chercher une forme'); m.querySelector('[data-sl-q]').appendChild(input); input.addEventListener('input', () => { sel = -1; draw(true); }); }
+        if (UI?.searchField) { const sf = UI.searchField({placeholder: i18n('Chercher une forme… (arbre, croix, É, drapeau)'), delay: 80, label: i18n('Chercher une forme'), onInput: () => { sel = -1; draw(true); }}); m.querySelector('[data-sl-q]').appendChild(sf); input = sf.input; }
+        else { input = document.createElement('input'); input.type = 'search'; input.placeholder = i18n('Chercher une forme…'); input.setAttribute('aria-label', i18n('Chercher une forme')); m.querySelector('[data-sl-q]').appendChild(input); input.addEventListener('input', () => { sel = -1; draw(true); }); }
         const scroll = m.querySelector('[data-sl-scroll]'), space = m.querySelector('[data-sl-space]'), catsEl = m.querySelector('[data-sl-cats]'), foot = m.querySelector('[data-sl-foot]');
         let cur = 'all', lines = [], flat = [], sel = -1, cols = 6, total = 0, state = K.libraryLoaded ? 'ok' : 'loading', raf = 0;
         const visibleShapes = () => K.allShapes().filter(sh => !hidden.has(sh.k));
@@ -110,7 +112,7 @@
             const count = {}; (found || pool).forEach(sh => { count[sh.c] = (count[sh.c] || 0) + 1; });
             if (cur !== 'all' && q && !count[cur]) cur = 'all';
             const n = (found || pool).length;
-            catsEl.innerHTML = `<button type="button" role="tab" class="${cur === 'all' ? 'is-on is-active' : ''}" data-sl-cat="all" aria-selected="${cur === 'all'}">Toutes (${n.toLocaleString('fr-FR')})</button>` + cs.filter(c => !q || count[c[0]] || c[0] === cur).map(c => `<button type="button" role="tab" class="${cur === c[0] ? 'is-on is-active' : ''}" data-sl-cat="${esc(c[0])}" aria-selected="${cur === c[0]}">${c[2]} ${esc(c[1])} (${(count[c[0]] || 0).toLocaleString('fr-FR')})</button>`).join('');
+            catsEl.innerHTML = `<button type="button" role="tab" class="${cur === 'all' ? 'is-on is-active' : ''}" data-sl-cat="all" aria-selected="${cur === 'all'}">${esc(i18n('Toutes ({n})', {n: fmtN(n)}))}</button>` + cs.filter(c => !q || count[c[0]] || c[0] === cur).map(c => `<button type="button" role="tab" class="${cur === c[0] ? 'is-on is-active' : ''}" data-sl-cat="${esc(c[0])}" aria-selected="${cur === c[0]}">${c[2]} ${esc(c[1])} (${fmtN(count[c[0]] || 0)})</button>`).join('');
             // lignes : titres de catégorie (sans recherche) et rangées de formes
             const w = scroll.clientWidth || 600; cols = Math.max(3, Math.floor((w - PAD * 2 + 6) / CELL));
             lines = []; flat = []; let y = 4;
@@ -129,18 +131,18 @@
         function paint() {
             raf = 0; const top = scroll.scrollTop, bottom = top + (scroll.clientHeight || 400);
             let html = '';
-            if (state === 'loading') html += `<div class="sl-msg" style="top:${Math.max(0, top)}px">${UI?.spinner ? UI.spinner('Chargement de toutes les formes…') : 'Chargement…'}</div>`;
-            if (state === 'error') html += `<div class="sl-msg" style="top:${Math.max(0, top)}px">${UI?.notice ? UI.notice('error', 'Les formes en plus n’ont pas pu être chargées.') : '⛔ Les formes en plus n’ont pas pu être chargées.'} <button type="button" class="button small secondary" data-sl-retry>Réessayer</button></div>`;
+            if (state === 'loading') html += `<div class="sl-msg" style="top:${Math.max(0, top)}px">${UI?.spinner ? UI.spinner(i18n('Chargement de toutes les formes…')) : esc(i18n('Chargement…'))}</div>`;
+            if (state === 'error') html += `<div class="sl-msg" style="top:${Math.max(0, top)}px">${UI?.notice ? UI.notice('error', i18n('Les formes en plus n’ont pas pu être chargées.')) : esc(i18n('⛔ Les formes en plus n’ont pas pu être chargées.'))} <button type="button" class="button small secondary" data-sl-retry>${esc(i18n('Réessayer'))}</button></div>`;
             for (const L of lines) {
                 if (L.y + L.h < top - BUF || L.y > bottom + BUF) continue;
                 if (L.head) { html += `<h5 class="sl-h" style="top:${L.y}px">${L.head[2]} ${esc(L.head[1])}</h5>`; continue; }
-                if (L.newBtn) { html += `<div class="sl-row" style="top:${L.y}px"><button type="button" class="h-bd-shcell sl-cell h-bd-shnew" data-sl-new title="Créer une forme">＋</button></div>`; continue; }
+                if (L.newBtn) { html += `<div class="sl-row" style="top:${L.y}px"><button type="button" class="h-bd-shcell sl-cell h-bd-shnew" data-sl-new title="${esc(i18n('Créer une forme'))}">＋</button></div>`; continue; }
                 html += `<div class="sl-row" style="top:${L.y}px">${L.row.map((sh, j) => { const i = L.start + j; return `<button type="button" class="h-bd-shcell sl-cell${sh.k === current ? ' is-on' : ''}${i === sel ? ' is-sel' : ''}" data-shk="${esc(sh.k)}" data-i="${i}" title="${esc(sh.n)}" tabindex="-1">${K.shapeSvg(sh, 34)}</button>`; }).join('')}</div>`;
             }
-            if (!flat.length && state !== 'loading') { const q = input.value.trim(); html += `<div class="sl-msg" style="top:8px">${q ? `Aucune forme pour « ${esc(q)} ». Essaie un autre mot (maison, croix, lettre, drapeau…).` : 'Aucune forme dans cette catégorie.'}</div>`; }
+            if (!flat.length && state !== 'loading') { const q = input.value.trim(); html += `<div class="sl-msg" style="top:8px">${q ? i18n('Aucune forme pour « {q} ». Essaie un autre mot (maison, croix, lettre, drapeau…).', {q: esc(q)}) : esc(i18n('Aucune forme dans cette catégorie.'))}</div>`; }
             space.innerHTML = html;
             const sh = flat[sel];
-            foot.innerHTML = sh ? `<b>${esc(sh.n)}</b> <span class="muted">· ${esc(catName(sh.c))}</span>` : `<span class="muted">${flat.length.toLocaleString('fr-FR')} forme${flat.length > 1 ? 's' : ''} · ↑ ↓ ← → pour choisir, Entrée pour prendre, / pour chercher</span>`;
+            foot.innerHTML = sh ? `<b data-i18n-off>${esc(sh.n)}</b> <span class="muted">· ${esc(catName(sh.c))}</span>` : `<span class="muted">${esc(i18n('{n} · ↑ ↓ ← → pour choisir, Entrée pour prendre, / pour chercher', {n: A().plural ? A().plural(flat.length, 'forme') : flat.length}))}</span>`;
         }
         const schedule = () => { if (!raf) raf = requestAnimationFrame(paint); };
         function draw(resetScroll = false) { build(); if (resetScroll) scroll.scrollTop = 0; paint(); }

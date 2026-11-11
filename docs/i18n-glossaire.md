@@ -410,3 +410,27 @@ Les mots qui se traduisent autrement ailleurs passent par `i18n(…, {ctx: 'mais
 `nW(n, '{n} pièce', '{n} pièces')` (clés de pluriel `={n} pièce`), car le mot « pièce » se traduit ailleurs par « morceau ».
 Les mots-clés de recherche du catalogue (kw) et les objets de heritage-house-metiers.js restent en français ; le contenu de la
 personne (noms des pièces, des étages, souvenirs, textes de la visite guidée lus à voix haute) n’est jamais traduit.
+
+## Zone « tableaux » (🧩 Tableaux, 🎤 Présentation)
+
+| Français | English | Español | Deutsch | Italiano | Português | Polski | Nederlands |
+|---|---|---|---|---|---|---|---|
+| tableau (outil 🧩 Tableaux) | board | tablero | Board | lavagna | quadro | tablica | bord |
+| forme | shape | forma | Form | forma | forma | kształt | vorm |
+| bibliothèque de formes | shape library | biblioteca de formas | Formenbibliothek | libreria di forme | biblioteca de formas | biblioteka kształtów | vormenbibliotheek |
+| diapositive | slide | diapositiva | Folie | diapositiva | diapositivo | slajd | dia |
+| transition | transition | transición | Übergang | transizione | transição | przejście | overgang |
+| présentateur (fenêtre du) | presenter | presentador | Referent | relatore | apresentador | prowadzący | presentator |
+| notes de l’orateur | speaker notes | notas del orador | Rednernotizen | note del relatore | notas do orador | notatki prelegenta | sprekersnotities |
+| plume (outil de tracé) | pen | pluma | Zeichenstift | penna | caneta | pióro | pen |
+| pinceau | brush | pincel | Pinsel | pennello | pincel | pędzel | penseel |
+| pointe (bout d’un trait) | arrowhead | punta | Spitze | punta | ponta | grot | pijlpunt |
+| écu (héraldique) | shield | escudo | Wappenschild | scudo | escudo | tarcza | schild |
+
+Les noms des formes passent par des clés `forme|…` : `shapeNameParts` / `shapeName` (heritage-board-kit.js, aussi pour Node)
+coupe un nom en sa base et chacune de ses précisions entre parenthèses (« Flèche vers le bas (trait fin) » → `forme|Flèche vers le bas`
++ `forme|trait fin`) ; « Lettre A », « Chiffre 3 », « Polygone à 5 côtés » deviennent `forme|Lettre {x}`… La recherche des formes
+garde aussi les mots français. Les mots qui changent selon l’endroit ont un contexte : `pinceau|`, `pointe|`, `trait|`, `fond|`,
+`motif|`, `piste|`, `liaison|`, `bouton|` (lettres G, I, S des boutons de style), `lien|libre`, `rangement|libre`, `présentation|Fin`.
+Le contenu de la personne (titres, notes, textes posés, commentaires, contenu des diapositives) est marqué `data-i18n-off` et
+n’est jamais traduit ; les noms des nouveaux objets se traduisent au moment où ils sont créés.

@@ -584,7 +584,6 @@ Année de décès la plus récente inconnue. ¦ Latest year of death unknown. ¦
 Données couvrant {year}. ¦ Data covering {year}. ¦ Datos que abarcan {year}. ¦ Daten für {year}. ¦ Dati che coprono il {year}. ¦ Dados que cobrem {year}. ¦ Dane obejmujące {year}. ¦ Gegevens over {year}.
 Données couvrant les décès de {from} à {to}. ¦ Data covering deaths from {from} to {to}. ¦ Datos que abarcan las defunciones de {from} a {to}. ¦ Daten zu Todesfällen von {from} bis {to}. ¦ Dati che coprono i decessi dal {from} al {to}. ¦ Dados que cobrem os óbitos de {from} a {to}. ¦ Dane obejmujące zgony od {from} do {to}. ¦ Gegevens over overlijdens van {from} tot {to}.
 Dernier import : « {file} », {date}. ¦ Last import: “{file}”, {date}. ¦ Última importación: «{file}», {date}. ¦ Letzter Import: „{file}“, {date}. ¦ Ultima importazione: «{file}», {date}. ¦ Última importação: «{file}», {date}. ¦ Ostatni import: „{file}”, {date}. ¦ Laatste import: ‘{file}’, {date}.
-importé ¦ imported ¦ importado ¦ importiert ¦ importato ¦ importado ¦ zaimportowano ¦ geïmporteerd
 Voir les imports ¦ View the imports ¦ Ver las importaciones ¦ Importe ansehen ¦ Vedi le importazioni ¦ Ver as importações ¦ Zobacz importy ¦ Imports bekijken
 Fichiers de l’INSEE ¦ INSEE files ¦ Ficheros del INSEE ¦ INSEE-Dateien ¦ File dell’INSEE ¦ Ficheiros do INSEE ¦ Pliki INSEE ¦ INSEE-bestanden
 Base locale des décès ¦ Local deaths database ¦ Base local de defunciones ¦ Lokale Datenbank der Todesfälle ¦ Base locale dei decessi ¦ Base local de óbitos ¦ Lokalna baza zgonów ¦ Lokale overlijdensdatabase
@@ -1000,7 +999,6 @@ les sortes d’éléments ¦ the item types ¦ los tipos de elementos ¦ die Ele
 les émojis des dossiers ¦ the folder emojis ¦ los emojis de las carpetas ¦ die Ordner-Emojis ¦ le emoji delle cartelle ¦ os emojis das pastas ¦ emoji folderów ¦ de emoji’s van de mappen
 les plans de départ ¦ the starting outlines ¦ los esquemas iniciales ¦ die Ausgangsgliederungen ¦ gli schemi iniziali ¦ os planos iniciais ¦ plany wyjściowe ¦ de beginopzetten
 sorte d’élément ¦ item type ¦ tipo de elemento ¦ Elementart ¦ tipo di elemento ¦ tipo de elemento ¦ rodzaj elementu ¦ soort item
-vue ¦ view ¦ vista ¦ Ansicht ¦ vista ¦ vista ¦ widok ¦ weergave
 tous les réglages de l’Atelier ¦ all the Workshop settings ¦ todos los ajustes del Taller ¦ alle Einstellungen der Werkstatt ¦ tutte le impostazioni del Laboratorio ¦ todas as definições da Oficina ¦ wszystkie ustawienia warsztatu ¦ alle instellingen van het Atelier
 Comme au départ ¦ As at the start ¦ Como al principio ¦ Wie am Anfang ¦ Come all’inizio ¦ Como no início ¦ Jak na początku ¦ Zoals in het begin
 RÉINITIALISER ¦ RESET ¦ RESTABLECER ¦ ZURÜCKSETZEN ¦ RIPRISTINA ¦ REPOR ¦ PRZYWRÓĆ ¦ TERUGZETTEN
@@ -1013,7 +1011,6 @@ Tu as aussi créé toi-même : ¦ You also created yourself: ¦ También creaste
 Garder mes éléments (mis à la fin) ¦ Keep my items (put at the end) ¦ Conservar mis elementos (al final) ¦ Meine Elemente behalten (ans Ende) ¦ Tieni i miei elementi (in fondo) ¦ Manter os meus elementos (no fim) ¦ Zachowaj moje elementy (na końcu) ¦ Mijn items houden (achteraan)
 comme dans la liste (titre) ¦ as in the list (title) ¦ como en la lista (título) ¦ wie in der Liste (Titel) ¦ come nell’elenco (titolo) ¦ como na lista (título) ¦ jak na liście (tytuł) ¦ zoals in de lijst (titel)
 auteur, créateur ¦ author, creator ¦ autor, creador ¦ Autor, Urheber ¦ autore, creatore ¦ autor, criador ¦ autor, twórca ¦ auteur, maker
-date ¦ date ¦ fecha ¦ Datum ¦ data ¦ data ¦ data ¦ datum
 date d’ajout ¦ date added ¦ fecha de alta ¦ Datum des Hinzufügens ¦ data di aggiunta ¦ data de adição ¦ data dodania ¦ datum toegevoegd
 optique, gravure (vide : au moins une étiquette) ¦ optics, engraving (empty: at least one label) ¦ óptica, grabado (vacío: al menos una etiqueta) ¦ Optik, Stich (leer: mindestens ein Etikett) ¦ ottica, incisione (vuoto: almeno un’etichetta) ¦ ótica, gravura (vazio: pelo menos uma etiqueta) ¦ optyka, rycina (puste: co najmniej jedna etykieta) ¦ optica, gravure (leeg: minstens één label)
 toutes ¦ all ¦ todas ¦ alle ¦ tutte ¦ todas ¦ wszystkie ¦ alle
@@ -1214,7 +1211,6 @@ Retirer ce média de cette piste ? ¦ Remove this media file from this lead? ¦ 
 # ═════ Que manque-t-il ? (heritage-research-gaps.js) ═════
 à faire ¦ to do ¦ por hacer ¦ zu erledigen ¦ da fare ¦ a fazer ¦ do zrobienia ¦ te doen
 à revoir ¦ to review ¦ por revisar ¦ zu prüfen ¦ da rivedere ¦ a rever ¦ do przejrzenia ¦ na te kijken
-doute ¦ doubt ¦ duda ¦ Zweifel ¦ dubbio ¦ dúvida ¦ wątpliwość ¦ twijfel
 priorité ¦ priority ¦ prioridad ¦ Priorität ¦ priorità ¦ prioridade ¦ priorytet ¦ prioriteit
 plus tard ¦ later ¦ más tarde ¦ später ¦ più tardi ¦ mais tarde ¦ później ¦ later
 Déjà dans le suivi des dépouillements ¦ Already in the index tracking ¦ Ya en el seguimiento de vaciados ¦ Schon in der Auszugsverfolgung ¦ Già nel monitoraggio degli spogli ¦ Já no acompanhamento dos levantamentos ¦ Już w śledzeniu wypisów ¦ Al in de opvolging van indexeringen
