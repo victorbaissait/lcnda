@@ -1,7 +1,7 @@
 'use strict';
 /* 🌐 Traduction de l'app (vague 1 : le socle et le cadre). Mode d'emploi : docs/I18N.md.
  *     node tests/test-i18n.js            (I18N_SHOTS=dossier pour garder des captures)
- * 1. Node : t() avec repli sur le français, contexte, variables ; pluriels des 8 premières langues (cs, sv, da : test-i18n-nord.js) (Intl.PluralRules) ; nombres ;
+ * 1. Node : t() avec repli sur le français, contexte, variables ; pluriels des 8 premières langues (cs, sv, da : test-i18n-nord.js ; sk, nb : test-i18n-nord2.js) (Intl.PluralRules) ; nombres ;
  *    fichiers de langue complets et à jour (scripts/i18n-check.js) ; bandeau IA dans chaque langue ; i18n-extract.
  * 2. Serveur : lib/i18n.php traduit les messages d'erreur (en-tête X-LCNDA-Lang), le français ne change pas.
  * 3. Navigateur (Playwright, sinon sauté) : en français rien ne change (pas de bandeau, html lang="fr") ; choisir la
@@ -190,7 +190,7 @@ require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding: 'utf8', e
             const first = await page.evaluate(() => { const g = document.querySelector('#workspace .design-primary-grid'); const l = g && [...g.children].find(c => c.offsetParent); return l ? l.hasAttribute('data-lc-lang-field') : false; });
             assert.ok(first, 'la langue est le premier réglage du premier cadre');
             const opts = await page.$$eval('select[data-lc-lang] option', o => o.map(x => x.value + ':' + x.textContent));
-            assert.equal(opts.length, 11); assert.ok(opts.some(o => /^de:.*Deutsch/.test(o)) && opts.some(o => /^pl:.*Polski/.test(o)) && opts.some(o => /^cs:.*Čeština/.test(o)));
+            assert.equal(opts.length, 13); assert.ok(opts.some(o => /^de:.*Deutsch/.test(o)) && opts.some(o => /^pl:.*Polski/.test(o)) && opts.some(o => /^cs:.*Čeština/.test(o)) && opts.some(o => /^sk:.*Slovenčina/.test(o)) && opts.some(o => /^nb:.*Norsk \(bokmål\)/.test(o)));
             await page.selectOption('select[data-lc-lang]', 'en');
             await page.waitForFunction(() => /✓ Saved/.test(document.querySelector('#workspace .page-header .ui-ph-saved')?.textContent || '') && [...document.querySelectorAll('.toast')].some(x => /↶ Undo/.test(x.innerText)), null, {timeout: 6000}).catch(() => {});
             const en = await page.evaluate(() => ({lang: document.documentElement.lang, nav: document.querySelector('.main-nav').innerText, banner: document.getElementById('lc-i18n-banner')?.innerText || '', saved: localStorage.getItem('lcnda-langue'), cookie: document.cookie, toast: [...document.querySelectorAll('.toast')].map(x => x.innerText).join(' | ')}));

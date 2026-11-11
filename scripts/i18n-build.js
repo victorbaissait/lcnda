@@ -8,12 +8,13 @@
  *   - une ligne par texte : le français exact (la clé), puis les traductions ;
  *   - « ctx|Texte » dans la colonne fr : un même mot traduit autrement selon l'endroit (t('Texte', {ctx: 'ctx'})) ;
  *   - « =mot » dans la colonne fr : un pluriel pour plural(n, 'mot') ; chaque traduction donne ses formes séparées
- *     par « | » : one|other (en, es, de, it, pt, nl, sv, da), one|few|many (pl, cs : 1 | 2 à 4 | 5 et plus) ;
+ *     par « | » : one|other (en, es, de, it, pt, nl, sv, da, nb), one|few|many (pl, cs, sk : 1 | 2 à 4 | 5 et plus) ;
  *   - ligne vide ou commençant par « # » : ignorée. Variables {n}, {x} : les mêmes dans toutes les langues.
- * Les langues ajoutées ensuite (cs, sv, da) ont leurs propres fichiers, un par zone : assets/i18n/src/nord/<zone>.tsv,
- * 1re ligne « fr ¦ cs ¦ sv ¦ da », mêmes clés (y compris « ctx|… » et « =mot ») que assets/i18n/src/<zone>.tsv :
- * ainsi on les traduit sans toucher aux fichiers des 7 premières langues. Chaque fichier dit ses langues dans sa 1re
- * ligne : les deux sortes de fichiers sont fusionnées, clé par clé.
+ * Les langues ajoutées ensuite ont leurs propres fichiers, un par zone, dans un sous-dossier de assets/i18n/src/ :
+ * nord/<zone>.tsv (1re ligne « fr ¦ cs ¦ sv ¦ da ») et nord2/<zone>.tsv (1re ligne « fr ¦ sk ¦ nb »), mêmes clés
+ * (y compris « ctx|… » et « =mot ») que assets/i18n/src/<zone>.tsv : ainsi on les traduit sans toucher aux fichiers des
+ * 7 premières langues. Tout sous-dossier de src/ est lu ; chaque fichier dit ses langues dans sa 1re ligne : toutes les
+ * sortes de fichiers sont fusionnées, clé par clé.
  * Le français n'a pas de fichier : la clé EST le texte français.
  */
 'use strict';
@@ -24,10 +25,10 @@ const ROOT = path.join(__dirname, '..');
 const SRC = path.join(ROOT, 'assets/i18n/src');
 const NORD = path.join(SRC, 'nord');
 const CORE = ['en', 'es', 'de', 'it', 'pt', 'pl', 'nl'];  // traduites en entier : une clé absente est une erreur
-const NEW_LANGS = ['cs', 'sv', 'da'];                     // en cours de traduction : une clé absente → repli sur le français
+const NEW_LANGS = ['cs', 'sv', 'da', 'sk', 'nb'];         // en cours de traduction : une clé absente → repli sur le français
 const LANGS = [...CORE, ...NEW_LANGS];
-const NAMES = {en: 'English', es: 'Español', de: 'Deutsch', it: 'Italiano', pt: 'Português', pl: 'Polski', nl: 'Nederlands', cs: 'Čeština', sv: 'Svenska', da: 'Dansk'};
-const FORMS = {pl: ['one', 'few', 'many'], cs: ['one', 'few', 'many'], def: ['one', 'other']};
+const NAMES = {en: 'English', es: 'Español', de: 'Deutsch', it: 'Italiano', pt: 'Português', pl: 'Polski', nl: 'Nederlands', cs: 'Čeština', sv: 'Svenska', da: 'Dansk', sk: 'Slovenčina', nb: 'Norsk (bokmål)'};
+const FORMS = {pl: ['one', 'few', 'many'], cs: ['one', 'few', 'many'], sk: ['one', 'few', 'many'], def: ['one', 'other']};
 
 function readFile(file, label) {
     const out = [];
@@ -47,26 +48,48 @@ function readFile(file, label) {
     });
     return out;
 }
-/** les fichiers de assets/i18n/src/nord/ : {key, plural, vals: {cs, sv, da}, file, line} */
-function readNord(nord = NORD) {
-    if (!fs.existsSync(nord)) return [];
+/** les sous-dossiers de src/ qui ont des .tsv (nord/, nord2/…) : un par groupe de langues ajoutées ensuite */
+function extraDirs(src = SRC) {
+    if (!fs.existsSync(src)) return [];
+    return fs.readdirSync(src, {withFileTypes: true}).filter(d => d.isDirectory()).map(d => path.join(src, d.name))
+        .filter(d => fs.readdirSync(d).some(f => f.endsWith('.tsv'))).sort();
+}
+/** les fichiers d'un sous-dossier (nord/ par défaut), ou de plusieurs : {key, plural, vals: {cs, sv, da…}, file, line, langs} */
+function readNord(dirs = NORD) {
     const rows = [];
-    for (const f of fs.readdirSync(nord).filter(x => x.endsWith('.tsv')).sort()) rows.push(...readFile(path.join(nord, f), `nord/${f}`));
+    for (const dir of [].concat(dirs)) {
+        if (!fs.existsSync(dir)) continue;
+        const name = path.basename(dir);
+        for (const f of fs.readdirSync(dir).filter(x => x.endsWith('.tsv')).sort()) rows.push(...readFile(path.join(dir, f), `${name}/${f}`));
+    }
     return rows;
+}
+/** dans quel sous-dossier s'écrit une langue ajoutée ensuite (lu dans la 1re ligne des fichiers ; sinon nord/) */
+function dirOf(code, src = SRC) {
+    for (const d of extraDirs(src)) {
+        for (const f of fs.readdirSync(d).filter(x => x.endsWith('.tsv'))) {
+            const h = fs.readFileSync(path.join(d, f), 'utf8').split('\n')[0];
+            if ((h.includes('\t') ? h.split('\t') : h.split(' ¦ ')).map(x => x.trim()).includes(code)) return {dir: path.basename(d), head: h.trim()};
+        }
+    }
+    return {dir: 'nord', head: 'fr ¦ cs ¦ sv ¦ da'};
 }
 /** les lignes des fichiers de assets/i18n/src/*.tsv, avec les traductions de nord/ fusionnées (même clé) ;
  *  orphans : les lignes de nord/ dont la clé n'existe dans aucun fichier français (clé changée ou mal recopiée) */
-function readSources({withOrphans = false, src = SRC, nord = path.join(src, 'nord')} = {}) {
+function readSources({withOrphans = false, src = SRC, nord = null} = {}) {
     const rows = []; // {key, plural, vals: {en…}, file, line}
     for (const f of fs.readdirSync(src).filter(x => x.endsWith('.tsv')).sort()) rows.push(...readFile(path.join(src, f), f));
     const byId = new Map(rows.map(r => [(r.plural ? '=' : '') + r.key, r]));
     const orphans = [], dups = [];
     const seenNord = new Map();
-    for (const n of readNord(nord)) {
+    for (const n of readNord(nord || extraDirs(src))) {
         const id = (n.plural ? '=' : '') + n.key;
         const r = byId.get(id);
-        if (seenNord.has(id)) dups.push(`« ${n.key} » (${seenNord.get(id)} et ${n.file}:${n.line})`);
-        seenNord.set(id, `${n.file}:${n.line}`);
+        for (const c of n.langs) { // en double = la même clé ET la même langue (nord/ et nord2/ ont chacun leurs langues)
+            const k = `${c}${id}`;
+            if (seenNord.has(k) && n.vals[c]) dups.push(`« ${n.key} » [${c}] (${seenNord.get(k)} et ${n.file}:${n.line})`);
+            if (n.vals[c]) seenNord.set(k, `${n.file}:${n.line}`);
+        }
         if (!r) { orphans.push(n); continue; }
         r.nord = r.nord || {};
         for (const c of n.langs) if (n.vals[c]) { r.vals[c] = n.vals[c]; r.nord[c] = `${n.file}:${n.line}`; }
@@ -79,7 +102,7 @@ function forms(code, v) {
     const names = FORMS[code] || FORMS.def, o = {};
     names.forEach((n, i) => { o[n] = parts[i] || parts[parts.length - 1]; });
     if (code === 'pl') o.other = o.few;
-    else if (code === 'cs') { o.other = o.many; o.many = o.few; } // Intl (cs) : 5 et plus → « other », 1,5 → « many » (comme « 2 à 4 »)
+    else if (code === 'cs' || code === 'sk') { o.other = o.many; o.many = o.few; } // Intl (cs, sk) : 5 et plus → « other », 1,5 → « many » (comme « 2 à 4 »)
     else if (!o.other) o.other = o.one;
     if (code === 'pt' || code === 'es' || code === 'it') o.many = o.other; // « 1 000 000 de… » : Intl donne « many »
     if (code === 'fr') o.many = o.other;
@@ -88,7 +111,7 @@ function forms(code, v) {
 function build() {
     const {rows, orphans, dups} = readSources({withOrphans: true});
     orphans.forEach(n => console.warn(`⚠️ ${n.file}:${n.line} : « ${n.key} » n'existe dans aucun fichier français de assets/i18n/src/ (clé changée ?) — ignorée`));
-    dups.forEach(d => console.warn(`⚠️ en double dans nord/ : ${d} — la dernière gagne`));
+    dups.forEach(d => console.warn(`⚠️ en double dans les sous-dossiers : ${d} — la dernière gagne`));
     const out = Object.fromEntries(LANGS.map(c => [c, {}]));
     const seen = new Map();
     for (const r of rows) {
@@ -101,11 +124,11 @@ function build() {
         }
     }
     for (const c of LANGS) {
-        const sorted = {_meta: {lang: c, name: NAMES[c], source: 'fr', ai: true, note: 'Fabriqué par scripts/i18n-build.js depuis assets/i18n/src/*.tsv' + (NEW_LANGS.includes(c) ? ' et assets/i18n/src/nord/*.tsv' : '') + ' : ne pas modifier à la main.'}};
+        const sorted = {_meta: {lang: c, name: NAMES[c], source: 'fr', ai: true, note: 'Fabriqué par scripts/i18n-build.js depuis assets/i18n/src/*.tsv' + (NEW_LANGS.includes(c) ? ` et assets/i18n/src/${dirOf(c).dir}/*.tsv` : '') + ' : ne pas modifier à la main.'}};
         Object.keys(out[c]).sort((a, b) => a.localeCompare(b, 'fr')).forEach(k => { sorted[k] = out[c][k]; });
         fs.writeFileSync(path.join(ROOT, 'assets/i18n', `${c}.json`), JSON.stringify(sorted, null, 1) + '\n');
     }
     return {rows: rows.length, keys: seen.size};
 }
-module.exports = {readSources, readNord, build, LANGS, CORE, NEW_LANGS, FORMS, NAMES, SRC, NORD};
+module.exports = {readSources, readNord, extraDirs, dirOf, build, LANGS, CORE, NEW_LANGS, FORMS, NAMES, SRC, NORD};
 if (require.main === module) { const r = build(); console.log(`✓ ${r.keys} textes (${r.rows} lignes) → assets/i18n/{${LANGS.join(',')}}.json`); }

@@ -3,7 +3,7 @@
 À suivre pour toute traduction de LCNDA (mode d’emploi : `docs/I18N.md`). Un mot de l’app se traduit **toujours de la
 même façon** dans une langue. Ton : on tutoie partout (en : *you* ; es : *tú* ; de : *du* ; it : *tu* ; pt : *tu* ;
 pl : *ty* ; nl : *je* ; cs : *ty* ; sv : *du* ; da : *du*). Phrases courtes et simples, comme en français.
-Le tchèque, le suédois et le danois ont leur propre section à la fin (« Langues ajoutées ensuite »).
+Le tchèque, le suédois et le danois, puis le slovaque et le norvégien bokmål ont leur propre section à la fin (« Langues ajoutées ensuite »).
 
 ## Généalogie
 
@@ -515,6 +515,82 @@ sv et da `one|other`. Les verbes des boutons à l’infinitif en cs (« Uložit 
 | ✓ Compris : | ✓ Rozumím: | ✓ Uppfattat: | ✓ Forstået: |
 | Aimanter | Přichytávat | Fäst | Fastgør |
 | Liste \| Fiches (affichage) | Seznam \| Karty | Lista \| Kort | Liste \| Kort |
+
+## Langues ajoutées ensuite : slovaque (sk), norvégien bokmål (nb)
+
+Fichiers à part : `assets/i18n/src/nord2/<zone>.tsv` (1re ligne `fr ¦ sk ¦ nb`, même clé que `<zone>.tsv`).
+On traduit **depuis le français**, en s’aidant beaucoup du tchèque pour le slovaque et du danois pour le norvégien
+(`node scripts/i18n-todo.js sk,nb <zone>` les montre à côté), sans les recopier : sk « Uložiť », « Nastavenia », « Vymazať »
+(cs « Uložit », « Nastavení », « Smazat ») ; nb « Lagre », « Innstillinger », « datamaskin », « Angre » (da « Gem »,
+« Indstillinger », « computer », « Fortryd »).
+Ton : on tutoie (sk : *ty*, impératif à la 2e personne du singulier « Vyber », « Klikni », « Skús » ; nb : *du*, « Velg », « Klikk »).
+Guillemets : sk „…“, nb «…». Pluriels : sk `1|2 à 4|5 et plus` (osoba|osoby|osôb, comme le tchèque), nb `one|other`
+(person|personer). Les verbes des boutons à l’infinitif en sk (« Uložiť », « Pridať »), à l’impératif en nb (« Lagre », « Legg til »).
+Norvégien : bokmål seulement (pas de nynorsk), « KI » pour l’IA (mot recommandé par le Språkrådet).
+
+| Français | Slovenčina | Norsk (bokmål) |
+|---|---|---|
+| Sosa (numéro Sosa) | číslo Sosa (vývod) | anenummer (Sosa) |
+| SOSA (liste) | Sosa | Sosa |
+| fiche (d’une personne) | karta | oppføring |
+| 📒 Fiches (sujets) | 📒 Poznámkové karty | 📒 Notatkort |
+| généalogie (la base de la personne) | rodokmeň | slektsforskning / slektstre |
+| acte | záznam (matričný záznam) | dokument (kirkebokinnføring) |
+| état civil / registre paroissial | matrika / farská matrika | folkeregister / kirkebok |
+| baptême / naissance | krst / narodenie | dåp / fødsel |
+| mariage | sobáš | vielse |
+| décès / sépulture | úmrtie / pohreb | død / begravelse |
+| parrain / marraine | krstný otec / krstná matka | gudfar / gudmor (faddere) |
+| témoin / déclarant | svedok / oznamovateľ | vitne / anmelder |
+| ascendants / descendants | predkovia / potomkovia | aner / etterkommere |
+| arbre des ascendants / descendants | vývod z predkov / rozrod potomkov | anetavle / etterslektstavle |
+| branche | vetva | gren |
+| implexe | implex | anetap |
+| recensement | sčítanie obyvateľov | folketelling |
+| inventaire après décès | pozostalostný inventár | skifte |
+| dépouillement | výpis | registrering |
+| cote (d’archive) | signatúra | signatur |
+| mur de brique | slepá ulička | blindvei |
+| cousinade | rodinné stretnutie | slektstreff |
+| commune / ville / village | obec / mesto / dedina | sted (kommune) / by / bygd |
+| catalogue raisonné | súpis diela | verkfortegnelse |
+| Tableau de bord | Prehľad | Oversikt |
+| Personnes | Osoby | Personer |
+| Graphiques / Diagrammes | Grafy / Diagramy | Diagrammer / Skjemaer |
+| Carte | Mapa | Kart |
+| Listes | Zoznamy | Lister |
+| Chronologie | Časová os | Tidslinje |
+| Recherche | Výskum | Forskning |
+| Enquêtes | Pátrania | Undersøkelser |
+| Trésors | Poklady | Skatter |
+| Réglages | Nastavenia | Innstillinger |
+| Apparence | Vzhľad | Utseende |
+| Médias | Médiá | Medier |
+| Source | Prameň | Kilde |
+| Étiquette | Štítok | Etikett |
+| Battue | Hromadné pátranie | Leteaksjon |
+| Mode simple | Jednoduchý režim | Enkel modus |
+| Mode consultation | Režim prehliadania | Visningsmodus |
+| Sauvegarde | Záloha | Sikkerhetskopi |
+| Enregistrer / ✓ Enregistré | Uložiť / ✓ Uložené | Lagre / ✓ Lagret |
+| Annuler (bouton) | Zrušiť | Avbryt |
+| ↶ Annuler / ↷ Rétablir | ↶ Späť / ↷ Znova | ↶ Angre / ↷ Gjør om |
+| Fermer | Zavrieť | Lukk |
+| Supprimer | Vymazať | Slett |
+| Retirer (détacher) | Odobrať | Fjern |
+| Modifier | Upraviť | Rediger |
+| Créer / Ajouter | Vytvoriť / Pridať | Opprett / Legg til |
+| Relier | Prepojiť | Koble |
+| ↺ Remettre comme au départ | ↺ Obnoviť východiskový stav | ↺ Tilbakestill som fra start |
+| Réessayer | Skúsiť znova | Prøv igjen |
+| ⤒ Importer / ⤓ Exporter | ⤒ Importovať / ⤓ Exportovať | ⤒ Importer / ⤓ Eksporter |
+| 🖨 Imprimer | 🖨 Tlačiť | 🖨 Skriv ut |
+| Chercher / Filtrer ▾ / Trier : | Hľadať / Filtrovať ▾ / Zoradiť: | Søk / Filtrer ▾ / Sorter: |
+| ✓ Compris : | ✓ Rozumiem: | ✓ Forstått: |
+| Aimanter | Prichytávať | Fest |
+| Liste \| Fiches (affichage) | Zoznam \| Karty | Liste \| Kort |
+| ordinateur | počítač | datamaskin |
+| Traduction faite par une IA | Preklad vytvorila AI | Oversatt av KI (kunstig intelligens) |
 
 ## Zone « tresors-ui » (étiquettes et fenêtres des pages Trésors)
 

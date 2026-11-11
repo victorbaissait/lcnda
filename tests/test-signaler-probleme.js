@@ -8,7 +8,11 @@ process.env.GENEALOGY_SKIP_REFERENCE = process.env.GENEALOGY_SKIP_REFERENCE || '
  *  2. le serveur (GET report_info, lib/signaler.php) ne rend que des nombres et des versions : ni nom, ni lieu, ni chemin ;
  *  3. navigateur (Playwright, sinon sauté) : erreurs JS, promesse refusée, console.error et réponse du serveur en erreur,
  *     toutes avec des données de généalogie → ni le journal gardé (localStorage) ni la pièce jointe ni l'adresse GitHub
- *     n'en contiennent ; boutons Copier / GitHub ; « ✉️ Écrire un e-mail » seulement si une adresse est réglée.
+ *     n'en contiennent ; boutons Copier / GitHub ; « ✉️ Écrire un e-mail » seulement si une adresse est réglée ;
+ *  4. 🐞 le bouton du haut « Signaler un bug » (Boutons en haut à droite) et le bandeau « Quelque chose n'a pas marché »
+ *     (erreur provoquée → bandeau ; × ; une fois par écran et par minute ; pas pour un refus ordinaire du serveur ; pré-rempli ;
+ *     réglage K2 éteint dans 🔄 Mises à jour ; jamais en mode simple ; empilé sur le bandeau des langues ; 390 px et sombre).
+ *     Port : SIGNALER_PORT (sinon un port libre).
  */
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
@@ -77,7 +81,7 @@ const CORPUS = [
     $p->exec("INSERT INTO persons(first_name,last_name,gender) VALUES('Joséphine','Kerjean','female'),('Jean','Dupont','male')");
     $p->exec("INSERT INTO places(name) VALUES('Saint-Martin-de-Ré'),('Agen')"); echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
   assert.match(mk.stdout, /ok$/, mk.stderr);
-  const port = await new Promise((res) => { const s = net.createServer(); s.listen(0, '127.0.0.1', () => { const p = s.address().port; s.close(() => res(p)); }); });
+  const port = Number(process.env.SIGNALER_PORT) || await new Promise((res) => { const s = net.createServer(); s.listen(0, '127.0.0.1', () => { const p = s.address().port; s.close(() => res(p)); }); });
   const proc = spawn(phpPath, [...phpRuntimeArgs(phpPath), '-S', `127.0.0.1:${port}`, '-t', appRoot, path.join(appRoot, 'router.php')], { cwd: appRoot, env, stdio: 'ignore' });
   const base = `http://127.0.0.1:${port}/`;
   for (let i = 0; i < 100; i++) { try { await fetch(base + 'api.php?action=kiosk_state'); break; } catch (_) { await new Promise((r) => setTimeout(r, 100)); } }
@@ -176,7 +180,113 @@ const CORPUS = [
           await p.evaluate(() => { const A = window.LCNDA_APP; A.state.maintenanceTab = 'mises_a_jour'; A.setModule('maintenance'); });
           await p.waitForSelector('.mj-page [data-report-problem]');
         });
+
+        console.log('4. 🐞 Bouton du haut et bandeau d’erreur');
+        const closeAll = () => p.evaluate(() => document.querySelectorAll('dialog').forEach((d) => d.close()));
+        // une erreur « vraie » (le message cite une fiche : il doit être nettoyé avant d’être écrit dans la fenêtre)
+        const boom = (msg = 'Fiche « Marie-Thérèse Lefèvre » 1925 introuvable') => p.evaluate((m) => { setTimeout(() => { throw new TypeError(m); }); }, msg);
+        const bannerOn = () => p.evaluate(() => !!document.getElementById('lc-err-banner'));
+        await okA('le bouton 🐞 « Signaler un bug » est en haut à droite (rangé dans « Boutons en haut à droite »), il ouvre la fenêtre', async () => {
+          const ap = fs.readFileSync(path.join(appRoot, 'assets/js/app-apparence.js'), 'utf8');
+          assert.match(ap, /\['report', '#report-problem-open', '🐞', 'Signaler un bug'\]/);
+          await closeAll();
+          const b = await p.$eval('#report-problem-open', (e) => ({ off: e.hasAttribute('data-tb-off') || e.hidden || !e.offsetWidth, title: e.title, aria: e.getAttribute('aria-label'), inBar: !!e.closest('.topbar-meta') }));
+          assert.deepEqual({ off: b.off, inBar: b.inBar, aria: b.aria }, { off: false, inBar: true, aria: 'Signaler un bug' });
+          assert.match(b.title, /^Signaler un bug/);
+          await p.click('#report-problem-open');
+          await p.waitForSelector('.rp-dialog [data-rp-what]');
+          await closeAll();
+          // caché depuis la liste de l’Apparence
+          await p.evaluate(() => window.LCNDA_APPARENCE.topbarSetShown('report', false));
+          assert.equal(await p.$eval('#report-problem-open', (e) => e.hasAttribute('data-tb-off')), true, 'caché');
+          await p.evaluate(() => window.LCNDA_APPARENCE.topbarReset());
+          assert.equal(await p.$eval('#report-problem-open', (e) => e.hasAttribute('data-tb-off')), false, '↺ : montré de nouveau');
+        });
+        await okA('une erreur provoquée → le bandeau ; × le referme ; pas deux fois sur le même écran dans la minute', async () => {
+          await p.evaluate(() => { window.LCNDA_TEST_ERR_BANNER = true; window.LCNDA_EXT.reportProblem.banner.reset(); document.getElementById('lc-err-banner')?.remove(); });
+          assert.equal(await bannerOn(), false, 'rien sans erreur');
+          await boom(); await p.waitForSelector('#lc-err-banner');
+          const txt = await p.textContent('#lc-err-banner');
+          assert.match(txt, /🐞Quelque chose n’a pas marché\. Tu veux le signaler \?Signaler×/);
+          await boom(); await p.waitForTimeout(150);
+          assert.equal(await p.$$eval('.lc-err-banner', (e) => e.length), 1, 'un seul bandeau');
+          await p.click('#lc-err-banner [data-err-close]');
+          assert.equal(await bannerOn(), false, '× : refermé');
+          await boom(); await p.waitForTimeout(200);
+          assert.equal(await bannerOn(), false, 'même écran, moins d’une minute : pas de nouveau bandeau');
+        });
+        await okA('un refus ordinaire du serveur (409) ne le montre pas ; une panne du serveur (500) oui', async () => {
+          await p.evaluate(() => window.LCNDA_EXT.reportProblem.banner.reset());
+          await p.evaluate(() => fetch('api.php?action=test_echec&id=4')); await p.waitForTimeout(500);
+          assert.equal(await bannerOn(), false, '409');
+          await ctx.route('**/api.php?action=test_panne*', (r) => r.fulfill({ status: 500, contentType: 'application/json', body: JSON.stringify({ error: 'Erreur interne chez Jean Dupont' }) }));
+          await p.evaluate(() => fetch('api.php?action=test_panne')); await p.waitForSelector('#lc-err-banner', { timeout: 3000 });
+          await p.click('#lc-err-banner [data-err-close]');
+        });
+        await okA('« Signaler » : la fenêtre s’ouvre pré-remplie (écran + erreur nettoyée), le bandeau disparaît', async () => {
+          await p.evaluate(() => window.LCNDA_EXT.reportProblem.banner.reset());
+          await boom(); await p.waitForSelector('#lc-err-banner');
+          await p.click('#lc-err-banner [data-err-report]');
+          await p.waitForSelector('.rp-dialog [data-rp-what]');
+          await p.waitForTimeout(100);
+          const what = await p.inputValue('.rp-dialog [data-rp-what]');
+          assert.match(what, /^Sur l’écran « maintenance · mises_a_jour », un message d’erreur est apparu : JS · TypeError: Fiche/);
+          assert.match(what, /\nCe que je faisais juste avant : $/);
+          for (const sec of SECRETS) assert.ok(!has(what, sec), `« ${sec} » dans le texte pré-rempli : ${what}`);
+          assert.equal(await bannerOn(), false);
+          await closeAll();
+        });
+        await okA('réglage K2 dans 🔄 Mises à jour : « Proposer de signaler… » éteint → plus de bandeau (l’e-mail reste)', async () => {
+          await p.evaluate(() => localStorage.setItem('lcnda-signaler', JSON.stringify({ email: 'aide@exemple.fr' })));
+          await p.evaluate(() => { const A = window.LCNDA_APP; A.state.maintenanceTab = 'mises_a_jour'; A.setModule('maintenance'); });
+          await p.waitForSelector('.mj-page [data-mj-offer]');
+          const tog = await p.$eval('.mj-page [data-mj-offer]', (e) => ({ checked: e.checked, k16: !!e.closest('label.ui-toggle'), txt: e.closest('label').textContent.trim() }));
+          assert.deepEqual(tog, { checked: true, k16: true, txt: 'Proposer de signaler quand quelque chose ne marche pas' });
+          await p.click('.mj-page label.ui-toggle:has([data-mj-offer])'); await p.waitForTimeout(700);
+          assert.deepEqual(JSON.parse(await p.evaluate(() => localStorage.getItem('lcnda-signaler'))), { email: 'aide@exemple.fr', offer: false });
+          assert.equal((await p.textContent('.mj-page .ui-ph-saved')).trim(), '✓ Enregistré', 'K2');
+          await p.evaluate(() => window.LCNDA_EXT.reportProblem.banner.reset());
+          await boom(); await p.waitForTimeout(300);
+          assert.equal(await bannerOn(), false, 'éteint');
+          await p.click('.mj-page label.ui-toggle:has([data-mj-offer])'); await p.waitForTimeout(400);
+          assert.deepEqual(JSON.parse(await p.evaluate(() => localStorage.getItem('lcnda-signaler'))), { email: 'aide@exemple.fr' });
+          await p.evaluate(() => localStorage.removeItem('lcnda-signaler'));
+        });
+        await okA('jamais en mode simple ; sous un navigateur piloté sans le drapeau de test : rien', async () => {
+          await p.evaluate(() => { window.LCNDA_EXT.reportProblem.banner.reset(); document.documentElement.classList.add('ms-open'); });
+          await boom(); await p.waitForTimeout(300);
+          assert.equal(await bannerOn(), false, 'mode simple');
+          await p.evaluate(() => { document.documentElement.classList.remove('ms-open'); window.LCNDA_TEST_ERR_BANNER = false; window.LCNDA_EXT.reportProblem.banner.reset(); });
+          await boom(); await p.waitForTimeout(300);
+          assert.equal(await bannerOn(), false, 'navigator.webdriver');
+        });
         assert.deepEqual(pageErrors, [], pageErrors.join(' | '));
+
+        // 390 px, sombre, en anglais : les deux bandeaux s’empilent sans se chevaucher ni déborder
+        for (const [w, dark] of [[1440, false], [390, true]]) {
+          await okA(`${w} px${dark ? ', sombre' : ''} : empilé au-dessus du bandeau des langues, traduit, rien ne déborde`, async () => {
+            const q = await browser.newPage({ viewport: { width: w, height: 800 }, colorScheme: dark ? 'dark' : 'light' });
+            const errs2 = [];
+            q.on('pageerror', (e) => { if (!/Lefèvre/.test(e.message)) errs2.push(e.message); });
+            await q.addInitScript((d) => { try { window.LCNDA_TEST_ERR_BANNER = true; localStorage.setItem('lcnda-langue', 'en'); if (d) localStorage.setItem('genealogie-design', JSON.stringify({ preset: 'dark' })); } catch (_) {} }, dark);
+            await q.goto(base); await q.waitForFunction(() => window.LCNDA_EXT?.reportProblem?.banner && document.getElementById('lc-i18n-banner'));
+            await q.waitForTimeout(600);
+            await q.evaluate(() => { setTimeout(() => { throw new Error('Lefèvre'); }); });
+            await q.waitForSelector('#lc-err-banner');
+            await q.waitForTimeout(150);
+            const r = await q.evaluate(() => { const a = document.getElementById('lc-err-banner').getBoundingClientRect(), b = document.getElementById('lc-i18n-banner').getBoundingClientRect();
+              const bg = getComputedStyle(document.getElementById('lc-err-banner')).backgroundColor;
+              return { aBottom: a.bottom, bTop: b.top, aLeft: a.left, aRight: a.right, vw: innerWidth, scroll: document.documentElement.scrollWidth - innerWidth, bg, theme: document.documentElement.dataset.theme || '', txt: document.getElementById('lc-err-banner').textContent }; });
+            assert.ok(r.aBottom <= r.bTop - 4, `chevauchement : ${JSON.stringify(r)}`);
+            assert.ok(r.aLeft >= 0 && r.aRight <= r.vw + 0.5 && r.scroll <= 1, `déborde : ${JSON.stringify(r)}`);
+            assert.match(r.txt, /Something didn’t work\. Do you want to report it\?Report×/);
+            if (dark) { const [rr, gg, bb] = (r.bg.match(/\d+/g) || []).map(Number); assert.ok(rr + gg + bb < 300, `fond sombre attendu : ${r.bg} (${r.theme})`); }
+            await q.click('#lc-err-banner [data-err-report]'); await q.waitForSelector('.rp-dialog [data-rp-what]'); await q.waitForTimeout(100);
+            assert.match(await q.inputValue('.rp-dialog [data-rp-what]'), /^On the “[^”]*” screen, an error message appeared: JS · Error: \[nom\]\nWhat I was doing just before: $/);
+            assert.deepEqual(errs2, []);
+            await q.close();
+          });
+        }
       } finally { await browser.close(); }
     }
   } finally {

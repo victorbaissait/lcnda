@@ -119,6 +119,8 @@
         if (last && last.msg === m && last.kind === kind && last.where === w) { last.n = (last.n || 1) + 1; last.t = Date.now(); }
         else { items.push({t: Date.now(), kind: String(kind).slice(0, 10), msg: m, where: w, n: 1}); if (items.length > MAX) items = items.slice(-MAX); }
         saveSoon();
+        // 🐞 le bandeau « Quelque chose n'a pas marché » (app-signaler.js) écoute ceci ; jamais d'erreur renvoyée d'ici (pas de boucle)
+        try { if (typeof root.dispatchEvent === 'function' && typeof root.CustomEvent === 'function') root.dispatchEvent(new root.CustomEvent('lcnda:journal', {detail: {kind: String(kind).slice(0, 10), msg: m, where: w}})); } catch (_) {}
     }
     const list = () => items.slice();
     const clear = () => { items = []; try { root.localStorage && root.localStorage.removeItem(KEY); } catch (_) {} };

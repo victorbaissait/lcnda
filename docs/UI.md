@@ -916,6 +916,16 @@ Quatre jeux de plus dans la page **Jeu**, choisis dans « Jeu ▾ » comme le je
 - **Patiences** : 23 de plus dans `app-jeu-patience-regles.js` (131 en tout), dont 4 mécaniques à part (`MODES.montana`, `MODES.nestor`, `MODES.allinarow`, `sum` avec `same`) ; `nostock` cache le bouton de pioche, `stockLabel` le renomme.
 - Test : `tests/test-jeux-cartes.js` (parties entières à tous les niveaux, règles une par une, une donne gagnante connue rejouée pour chaque nouvelle patience — `tests/fixtures/patiences-gagnees.json` —, navigateur à 1440 et 390 px, sombre, aucun POST).
 
+## 🎬 Montage : réglages en plus (heritage-studio-av.js, heritage-montage-plus.js, heritage-audio-engine.js)
+
+- **Boutons des pistes** : `tbtn` des réglages du montage (`genealogie-montage-prefs`) ; 0 = comme avant (22 px, « moyens »), `TBTN_S` = 18 (petits), `TBTN_L` = 30 (grands). Menu Affichage `tbtn:s`, `tbtn:l`, `tbtn:0`, `tbtn:up|down` ; Réglages → Montage… : curseur + « Petits / Moyens (départ) / Grands » (K2). Toute nouvelle commande du montage s'ajoute aussi à `DEFAULT_CMDS` d'`heritage-editorkeys.js` (page Raccourcis, bulles K12).
+- **Volume dans le temps** : un morceau garde `fadeIn`, `fadeOut` (s) et `env = [{t, v}]` (t = temps dans le fichier d'origine, comme les images clés ; v = 0 à 2, 1 = le volume réglé). Un seul calcul : `audioEngine.clipGain(c, x, len, local)` (fondus × courbe, `autoAt`), servi à la lecture et à l'export (`sync` du moteur du montage) et au mélange hors ligne du volume standard (`montageLoud.mixMontage`). Sur la frise : `.h-mt-env` (SVG + points `.h-mt-envpt`), modifiable quand « ✎ Poser des points sur le morceau » est allumé (`envEdit`).
+- **Effets du son d'un morceau ou du film** (`afx` / `fx`) : joués par `audioEngine.liveChain` — noise, clarity, bass, treble, mono, `comp` (volume plus égal), `reverb` (0 à 1) + `room` (les `ROOMS` du rack), `pan` (−1 à 1). Un nouvel effet joué en direct s'écrit là, jamais dans le montage.
+- **↺ Remettre comme au départ** (H7, `undoable`) : `data-mt-lookreset="look|film"` (couleurs + vieux film), `data-mt-fxreset` (son du film, la rotation reste), `data-mt-txtreset="outline|band"`, `data-mt-afxreset`.
+- **Sections du panneau de droite (E2)** : `sec(clé, titre, corps, ouvert)` → `<details class="h-mt-isec h-mt-sec" data-mt-sec>` posé directement dans un onglet ; tout `details.h-mt-isec` de premier niveau devient une section (clé tirée de sa classe `h-mt-…`). `arrangePane(onglet, sorte)` ajoute la poignée ⠿ (`[data-mt-secgrip]`, glisser ou Alt + ↑ / ↓), remet l'ordre et l'ouverture gardés dans `genealogie-montage-panel` (`{order: {'item-v1': […], color, sound, film…}, open: {'item-v1:color': false}}`) ; rien de gardé = l'ordre et l'ouverture de départ. Affichage → `secreset` (↶ Annuler).
+- **Textes du film** : en plus d'avant, `italic`, `stroke` + `strokeW` (% de la taille), `shadowC` + `shadowS` (force), `bgA` (opacité du bandeau, 0,75 au départ), `bgR` (coins, %). Sans ces clés, le dessin est celui d'avant. Police : `UI.openFontPicker` (E5) ; ⤓ Exporter (`data-mt-export`, fenêtre E3) reste à part de 💾 Enregistrer le projet (`data-mt-saveproj`).
+- Test : `tests/test-montage-reglages.js`.
+
 ## 🏠 Maison : vides, mezzanines, garde-corps et trémies d'escalier (heritage-house-vides.js)
 
 Une seule géométrie, `assets/js/heritage-house-vides.js` → `LCNDA_EXT.houseVoids` (aussi `require()` dans Node), pour le plan 2D, la 3D et la visite :
@@ -1600,7 +1610,7 @@ Complète « 📮 Actes à demander » (lib/heritage_more.php) et le Registre de
 ## 🌐 Langue de l’app (app-i18n.js, lib/i18n.php, assets/i18n/)
 
 Mode d’emploi complet : `docs/I18N.md` ; glossaire : `docs/i18n-glossaire.md` ; test : `tests/test-i18n.js`.
-- **11 langues** : français (référence, rien ne change), English, Español, Deutsch, Italiano, Português, Polski, Nederlands, et, en cours de traduction, Čeština, Svenska, Dansk (fichiers `assets/i18n/src/nord/`, repli sur le français ; voir `docs/I18N.md`, « Ajouter une langue »).
+- **13 langues** : français (référence, rien ne change), English, Español, Deutsch, Italiano, Português, Polski, Nederlands, Čeština, Svenska, Dansk (fichiers `assets/i18n/src/nord/`) et, en cours de traduction, Slovenčina, Norsk (bokmål) (code `nb`, fichiers `assets/i18n/src/nord2/`, repli sur le français ; voir `docs/I18N.md`, « Ajouter une langue »).
   Choix : Réglages → Apparence → « Thème et couleurs », tout en haut (« 🌐 Langue de l’app », menu simple : drapeau, nom dans
   sa langue, code) et l’écran du premier lancement (`<span data-lc-lang-slot>` ; tout `select[data-lc-lang-pick]`).
   Gardé tout de suite (K2, « ↶ Annuler » remet aussi la langue) dans `lcnda-langue` (cet ordinateur, pas la base ni le

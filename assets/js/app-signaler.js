@@ -102,9 +102,10 @@
     }
     const openOut = url => { const w = window.open(url, '_blank', 'noopener'); if (!w && /^mailto:/.test(url)) location.href = url; };
 
-    /** la fenêtre */
-    async function open() {
+    /** la fenêtre ; {what} : « Ce qui s'est passé » déjà rempli (bandeau d'erreur) */
+    async function open(opts = {}) {
         if (document.documentElement.classList.contains('ms-open')) return; // rien en mode simple
+        const preset = opts && typeof opts === 'object' && typeof opts.what === 'string' ? opts.what : '';
         const info = await gather();
         const att = attachment(info);
         const nErr = (J()?.list?.() || []).length;
@@ -153,11 +154,75 @@
             if (r.cut) { await copy(m.body); A().toast('Le message est long : il est coupé dans la demande, et le texte complet est copié. Colle-le à la place.'); }
             openOut(r.url);
         });
-        setTimeout(() => form.querySelector('[data-rp-what]')?.focus(), 30);
+        const whatBox = form.querySelector('[data-rp-what]');
+        if (preset && whatBox) whatBox.value = preset.slice(0, 4000);
+        setTimeout(() => { whatBox?.focus(); if (preset && whatBox) whatBox.setSelectionRange(whatBox.value.length, whatBox.value.length); }, 30);
         return d;
     }
 
-    ext.reportProblem = {open, attachment, compose, githubUrl, mailUrl, email, PREF, ISSUES};
-    document.addEventListener('click', e => { const b = e.target.closest?.('[data-report-problem]'); if (!b) return; e.preventDefault(); open(); });
+    /* ═════ 🐞 Le bandeau « Quelque chose n'a pas marché » ═════
+     * En bas à droite, du même style que celui des langues (app-i18n.js), seulement quand app-journal.js vient de capter une
+     * vraie erreur (JS, promesse refusée, serveur 5xx) : « Signaler » ouvre la fenêtre ci-dessus, pré-remplie (écran + erreur
+     * nettoyée), × le referme. Au plus une fois par écran et par minute ; jamais en mode simple, ni sous un navigateur piloté
+     * (tests automatiques : navigator.webdriver) sauf window.LCNDA_TEST_ERR_BANNER = true. Éteint par Réglages → 🔄 Mises à
+     * jour → « Proposer de signaler quand quelque chose ne marche pas » (localStorage['lcnda-signaler'].offer = false).
+     * Au-dessus du bandeau des langues s'il est là (les deux s'empilent sans se chevaucher). */
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : s);
+    const offerOn = () => prefs().offer !== false;
+    const SPACE = 60000;
+    let lastShown = 0, last = null;
+    const seenScreens = new Set();
+    const screenKey = () => { const st = A()?.state || {}; return [id(st.module), id(st.module === 'maintenance' ? st.maintenanceTab : st.module === 'listes' ? st.listType : st.module === 'enquetes' ? st.enquetesTab : '')].filter(Boolean).join(' · '); };
+    const piloted = () => { try { return !!navigator.webdriver && window.LCNDA_TEST_ERR_BANNER !== true; } catch (_) { return false; } };
+    /** une erreur qui vaut la peine d'être signalée (pas un abandon voulu, pas un script d'ailleurs, pas un refus ordinaire du serveur) */
+    function worth(e) {
+        if (!e || !e.msg) return false;
+        if (e.kind === 'console') return false;
+        if (e.kind === 'server') return /^(5\d\d|0)\b/.test(e.msg);
+        if (/AbortError|aborted|ResizeObserver loop|^Script error\.?$|NotAllowedError|play\(\) request was interrupted/i.test(e.msg)) return false;
+        if (e.where === '[adresse]' || /extension/i.test(e.where || '')) return false;
+        return e.kind === 'js' || e.kind === 'promise';
+    }
+    function placeBanner() {
+        const el = document.getElementById('lc-err-banner'); if (!el) return;
+        const lang = document.getElementById('lc-i18n-banner');
+        const r = lang && lang.isConnected && getComputedStyle(lang).display !== 'none' ? lang.getBoundingClientRect() : null;
+        el.style.bottom = r && r.height ? `${Math.round(window.innerHeight - r.top + 8)}px` : '';
+    }
+    function hideBanner() { document.getElementById('lc-err-banner')?.remove(); }
+    function showBanner(e) {
+        if (!offerOn() || piloted() || document.documentElement.classList.contains('ms-open') || !document.body) return;
+        const key = screenKey(), now = Date.now();
+        const el0 = document.getElementById('lc-err-banner');
+        if (el0) { last = {...e, screen: key}; return; } // déjà là : il parle de la dernière erreur
+        if (now - lastShown < SPACE || seenScreens.has(key)) return;
+        lastShown = now; seenScreens.add(key); last = {...e, screen: key};
+        const el = document.createElement('div');
+        el.id = 'lc-err-banner'; el.className = 'lc-err-banner'; el.setAttribute('role', 'status'); el.setAttribute('data-i18n-off', '');
+        el.innerHTML = `<span class="lc-err-banner-ico" aria-hidden="true">🐞</span><span class="lc-err-banner-t">${esc(i18n('Quelque chose n’a pas marché. Tu veux le signaler ?'))}</span><button type="button" class="lc-err-banner-btn" data-err-report>${esc(i18n('Signaler'))}</button><button type="button" class="lc-err-banner-x" data-err-close aria-label="${esc(i18n('Fermer'))}" title="${esc(i18n('Fermer'))}">×</button>`;
+        el.addEventListener('click', ev => {
+            if (ev.target.closest('[data-err-report]')) { ev.preventDefault(); const what = prefill(last); hideBanner(); open({what}); }
+            else if (ev.target.closest('[data-err-close]')) { ev.preventDefault(); hideBanner(); }
+        });
+        document.body.appendChild(el);
+        placeBanner();
+    }
+    /** « Ce qui s'est passé », déjà écrit : l'écran et l'erreur (déjà nettoyée par app-journal.js) ; la suite est à écrire */
+    function prefill(e) {
+        const err = e ? `${KIND[e.kind] || 'JS'} · ${String(e.msg || '').split('\n')[0].slice(0, 240)}` : '';
+        return `${i18n('Sur l’écran « {where} », un message d’erreur est apparu : {err}', {where: e?.screen || '?', err})}\n${i18n('Ce que je faisais juste avant :')} `;
+    }
+    window.addEventListener('lcnda:journal', ev => { try { const e = ev.detail; if (worth(e)) setTimeout(() => { try { showBanner(e); } catch (_) {} }, 0); } catch (_) {} });
+    window.addEventListener('resize', () => { try { placeBanner(); } catch (_) {} });
+    const watchLang = () => { try { new MutationObserver(() => { try { placeBanner(); } catch (_) {} }).observe(document.body, {childList: true}); } catch (_) {} };
+    const startBanner = () => {
+        watchLang();
+        // une erreur captée pendant le démarrage (avant ce fichier) : proposée aussi
+        try { const t0 = performance.timeOrigin || 0; const early = (J()?.list?.() || []).filter(x => x.t >= t0 && worth(x)).pop(); if (early) showBanner(early); } catch (_) {}
+    };
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', startBanner); else startBanner();
+
+    ext.reportProblem = {open, attachment, compose, githubUrl, mailUrl, email, PREF, ISSUES, offerOn, banner: {show: showBanner, hide: hideBanner, place: placeBanner, worth, prefill, reset: () => { lastShown = 0; seenScreens.clear(); }}};
+    document.addEventListener('click', e => { const b = e.target.closest?.('[data-report-problem]'); if (!b) return; e.preventDefault(); hideBanner(); open(); });
     try { window.lcnda?.onCommand?.(cmd => { if (cmd === 'report-problem') open(); }); } catch (_) {}
 })();

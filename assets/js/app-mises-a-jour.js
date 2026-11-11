@@ -126,7 +126,9 @@
         const draw = () => {
             const auto = readPref().auto !== false;
             const signal = window.LCNDA_EXT?.reportProblem;
-            const mail = (() => { try { return JSON.parse(localStorage.getItem(signal?.PREF || 'lcnda-signaler') || '{}').email || ''; } catch (_) { return ''; } })();
+            const sPref = (() => { try { const o = JSON.parse(localStorage.getItem(signal?.PREF || 'lcnda-signaler') || '{}'); return o && typeof o === 'object' ? o : {}; } catch (_) { return {}; } })();
+            const mail = sPref.email || '';
+            const offer = sPref.offer !== false;
             const versionCard = desk
                 ? `<section class="card mj-card"><h3>Ta version</h3>
                     <p class="mj-version"><b>LCNDA ${esc(desk.version)}</b> <span class="ui-hint">Application de bureau · ${esc(OS[desk.platform] || desk.platform)} ${esc(desk.arch)}${FMT[desk.format] ? ` (${esc(FMT[desk.format])})` : ''}</span></p>
@@ -149,6 +151,8 @@
                     <p><button type="button" class="button secondary" data-report-problem>🐞 Signaler un problème…</button></p>
                     <label class="mj-field">Adresse e-mail des signalements<input type="email" maxlength="200" placeholder="vide : seulement GitHub" value="${esc(mail)}" data-mj-mail autocomplete="off" spellcheck="false"></label>
                     <p class="ui-hint">Vide : seul « Ouvrir une demande sur GitHub » est proposé. Remplie : « ✉️ Écrire un e-mail » ouvre ta messagerie avec le message prêt.</p>
+                    ${UI().toggleHtml ? UI().toggleHtml(i18n('Proposer de signaler quand quelque chose ne marche pas'), {checked: offer, attrs: 'data-mj-offer'}) : `<label class="ui-toggle"><input type="checkbox" data-mj-offer${offer ? ' checked' : ''}><i></i><span>${esc(i18n('Proposer de signaler quand quelque chose ne marche pas'))}</span></label>`}
+                    <p class="ui-hint">${esc(i18n('Quand l’app rencontre une erreur, un petit bandeau « 🐞 Quelque chose n’a pas marché » apparaît en bas à droite, avec « Signaler ». Rien n’est envoyé sans toi.'))}</p>
                 </section>
                 </div></section>`;
             const sec = ws.querySelector('.mj-page');
@@ -166,12 +170,24 @@
             if (t.closest('[data-mj-skip]')) return last && skip(last);
             if (t.closest('[data-mj-unskip]')) { await U()?.setPrefs({skip: ''}); return redrawIfOpen(); }
         };
+        // lcnda-signaler = {email, offer} : chaque case garde sa partie (rien d'écrit qui vaut le départ : clé retirée)
+        const writeSignal = patch => {
+            const key = window.LCNDA_EXT?.reportProblem?.PREF || 'lcnda-signaler';
+            try {
+                let o = {}; try { o = JSON.parse(localStorage.getItem(key) || '{}') || {}; } catch (_) { o = {}; }
+                o = {...(typeof o === 'object' && !Array.isArray(o) ? o : {}), ...patch};
+                if (!o.email) delete o.email;
+                if (o.offer !== false) delete o.offer;
+                if (Object.keys(o).length) localStorage.setItem(key, JSON.stringify(o)); else localStorage.removeItem(key);
+            } catch (_) {}
+        };
         const onChange = e => {
+            const off = e.target.closest('[data-mj-offer]');
+            if (off) { writeSignal({offer: !!off.checked}); if (!off.checked) window.LCNDA_EXT?.reportProblem?.banner?.hide?.(); return; }
             const m = e.target.closest('[data-mj-mail]'); if (!m) return;
             const v = m.value.trim();
-            const key = window.LCNDA_EXT?.reportProblem?.PREF || 'lcnda-signaler';
             if (v && !/^[^\s@<>"',;:()]{1,64}@[\w.-]{1,190}\.[a-z]{2,24}$/i.test(v)) { UI().fail?.(m, 'Cette adresse e-mail n’a pas l’air juste (ex. : nom@exemple.fr).'); return; }
-            try { if (v) localStorage.setItem(key, JSON.stringify({email: v})); else localStorage.removeItem(key); } catch (_) {}
+            writeSignal({email: v});
         };
         draw();
         UI().autoSave?.(ws, {redraw: async () => { const p = readPref(); await U()?.setPrefs({auto: p.auto !== false}); draw(); }});

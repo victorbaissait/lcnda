@@ -4,21 +4,26 @@
  *   node scripts/i18n-todo.js cs cadre          les clés de assets/i18n/src/cadre.tsv sans traduction en tchèque,
  *                                               avec l'anglais et l'allemand en aide (clé ⇥ en ⇥ de)
  *   node scripts/i18n-todo.js sv,da listes      les clés qui manquent dans au moins une de ces langues
+ *   node scripts/i18n-todo.js sk,nb cadre       pour le slovaque et le norvégien : en plus, le tchèque (aide pour sk) et le danois
+ *                                               (aide pour nb), langues très proches (clé ⇥ en ⇥ de ⇥ cs ⇥ da)
  *   node scripts/i18n-todo.js cs all            le nombre de textes à traduire, zone par zone (les plus petites d'abord)
  *   options : --json (sortie JSON), --skeleton (lignes « clé ¦ ¦ ¦ » prêtes à remplir pour nord/<zone>.tsv),
  *             --limit N (les N premières seulement)
  *
- * Les traductions de cs, sv, da s'écrivent dans assets/i18n/src/nord/<zone>.tsv (1re ligne « fr ¦ cs ¦ sv ¦ da »),
- * avec la même clé que dans <zone>.tsv : « ctx|Texte » et « =mot » (pluriel) compris. Pluriels : cs = 3 formes
- * « 1 | 2 à 4 | 5 et plus » (osoba|osoby|osob), sv et da = 2 formes (person|personer). Puis :
+ * Les traductions de cs, sv, da s'écrivent dans assets/i18n/src/nord/<zone>.tsv (1re ligne « fr ¦ cs ¦ sv ¦ da »), celles de
+ * sk, nb dans assets/i18n/src/nord2/<zone>.tsv (1re ligne « fr ¦ sk ¦ nb »), avec la même clé que dans <zone>.tsv :
+ * « ctx|Texte » et « =mot » (pluriel) compris. Pluriels : cs et sk = 3 formes « 1 | 2 à 4 | 5 et plus » (osoba|osoby|osob),
+ * sv, da, nb = 2 formes (person|personer). Puis :
  *   node scripts/i18n-build.js && node scripts/i18n-check.js      (0 erreur ; les textes encore manquants sont comptés)
  * Une clé présente dans plusieurs zones n'est à traduire qu'une fois (elle compte comme faite partout).
  */
 'use strict';
 const fs = require('fs');
 const path = require('path');
-const {readSources, LANGS, NEW_LANGS, SRC} = require('./i18n-build.js');
+const {readSources, dirOf, LANGS, NEW_LANGS, SRC} = require('./i18n-build.js');
+const NEAR = {sk: 'cs', nb: 'da'}; // une langue très proche, déjà traduite : en aide à côté de l'anglais et de l'allemand
 
+const near = list => [...new Set(list.map(c => NEAR[c]).filter(Boolean))];
 function todo(codes, zone) {
     const list = String(codes || '').split(',').map(s => s.trim()).filter(Boolean);
     const bad = list.filter(c => !LANGS.includes(c));
@@ -42,9 +47,12 @@ function todo(codes, zone) {
         if (seen.has(id)) continue; seen.add(id);
         const miss = missingIn(r); if (!miss.length) continue;
         const m = byId.get(id);
-        items.push({key: id, line: r.line, missing: miss, en: (m && m.vals.en) || r.vals.en || '', de: (m && m.vals.de) || r.vals.de || ''});
+        const it = {key: id, line: r.line, missing: miss, en: (m && m.vals.en) || r.vals.en || '', de: (m && m.vals.de) || r.vals.de || ''};
+        near(list).forEach(c => { it[c] = (m && m.vals[c]) || ''; });
+        items.push(it);
     }
-    return {codes: list, zone, items, total: seen.size};
+    const where = dirOf(list[0]);
+    return {codes: list, zone, items, total: seen.size, dir: where.dir, head: where.head, near: near(list)};
 }
 module.exports = {todo};
 
@@ -67,13 +75,13 @@ if (require.main === module) {
         process.exit(0);
     }
     const items = limit ? r.items.slice(0, limit) : r.items;
-    const file = `assets/i18n/src/nord/${r.zone}.tsv`;
+    const file = `assets/i18n/src/${r.dir}/${r.zone}.tsv`, cols = r.head.split(/\s*¦\s*|\t/).length - 1;
     if (flags.has('--skeleton')) {
-        console.log(`# ${r.zone} : ${r.items.length} / ${r.total} textes à traduire — à remplir puis à ajouter dans ${file} (1re ligne : fr ¦ cs ¦ sv ¦ da)`);
-        items.forEach(x => console.log(`${x.key} ¦  ¦  ¦ `));
+        console.log(`# ${r.zone} : ${r.items.length} / ${r.total} textes à traduire — à remplir puis à ajouter dans ${file} (1re ligne : ${r.head})`);
+        items.forEach(x => console.log(`${x.key}${' ¦ '.repeat(cols)}`.trimEnd() + ' '));
         process.exit(0);
     }
-    console.log(`# ${r.zone} : ${r.items.length} / ${r.total} textes sans traduction en ${r.codes.join(', ')} — à écrire dans ${file}`);
-    console.log('# clé (français) ⇥ anglais (aide) ⇥ allemand (aide)' + (r.codes.length > 1 ? ' ⇥ langues qui manquent' : ''));
-    items.forEach(x => console.log([x.key, x.en, x.de].concat(r.codes.length > 1 ? [x.missing.join(',')] : []).join('\t')));
+    console.log(`# ${r.zone} : ${r.items.length} / ${r.total} textes sans traduction en ${r.codes.join(', ')} — à écrire dans ${file} (1re ligne : ${r.head})`);
+    console.log('# clé (français) ⇥ anglais (aide) ⇥ allemand (aide)' + r.near.map(c => ` ⇥ ${c} (aide, langue proche)`).join('') + (r.codes.length > 1 ? ' ⇥ langues qui manquent' : ''));
+    items.forEach(x => console.log([x.key, x.en, x.de].concat(r.near.map(c => x[c]), r.codes.length > 1 ? [x.missing.join(',')] : []).join('\t')));
 }

@@ -3,15 +3,15 @@
  *
  *   node scripts/i18n-check.js            résumé + problèmes (code de sortie 1 s'il y a une erreur)
  *   node scripts/i18n-check.js --verbose  aussi les avertissements (longueur suspecte, traduction = français)
- *   node scripts/i18n-check.js --strict-new   pour cs, sv, da aussi : une clé absente devient une erreur (quand leur traduction sera finie)
+ *   node scripts/i18n-check.js --strict-new   pour les langues ajoutées ensuite (cs, sv, da, sk, nb) aussi : une clé absente devient une erreur (quand leur traduction sera finie)
  *   node scripts/i18n-check.js --lang cs   le détail d'une langue seulement (avec --verbose : chaque texte manquant)
  *
  * Erreurs : clé manquante dans une des 7 premières langues (en, es, de, it, pt, pl, nl), variables {x} différentes du français, pluriel sans toutes ses formes,
  *           texte vide, symbole de tête perdu (« ＋ », « ↶ », « ⤒ »…), fichier .json pas à jour avec les sources.
  * Avertissements : traduction 2,5 × plus longue que le français (risque de débordement, surtout en allemand),
  *           traduction identique au français (souvent un oubli, parfois normal : « Sosa », « GEDCOM »),
- *           cs / sv / da : textes encore sans traduction (comptés : « cs : N textes encore sans traduction » ; repli sur le
- *           français), lignes de assets/i18n/src/nord/ dont la clé n'existe plus en français.
+ *           cs / sv / da / sk / nb : textes encore sans traduction (comptés : « cs : N textes encore sans traduction » ; repli sur le
+ *           français), lignes des sous-dossiers de assets/i18n/src/ (nord/, nord2/) dont la clé n'existe plus en français.
  */
 'use strict';
 const fs = require('fs');
@@ -26,7 +26,7 @@ const LEADSYM = /^[＋↶↷⤒⤓✓⚠️⛔ℹ️🔍↗×✎🗑💾🖨⧉�
 function check({verbose = false, strictNew = false, only = '', src = ''} = {}) {
     const {rows, orphans, dups} = readSources(src ? {withOrphans: true, src} : {withOrphans: true});
     const errors = [], warns = [];
-    const missingNew = Object.fromEntries(NEW_LANGS.map(c => [c, []])); // cs, sv, da : textes encore sans traduction
+    const missingNew = Object.fromEntries(NEW_LANGS.map(c => [c, []])); // cs, sv, da, sk, nb : textes encore sans traduction
     const keys = new Map();
     rows.forEach(r => keys.set((r.plural ? '=' : '') + r.key, r));
     const langs = only ? LANGS.filter(c => c === only) : LANGS;
@@ -53,7 +53,7 @@ function check({verbose = false, strictNew = false, only = '', src = ''} = {}) {
         }
     }
     orphans.forEach(n => warns.push(`${n.file}:${n.line} « ${n.plural ? '=' : ''}${n.key} » n'existe dans aucun fichier français de assets/i18n/src/ (clé changée ?)`));
-    dups.forEach(d => warns.push(`en double dans nord/ : ${d}`));
+    dups.forEach(d => warns.push(`en double dans les sous-dossiers de src/ : ${d}`));
     for (const c of NEW_LANGS) if (missingNew[c].length) warns.push(`${c} : ${missingNew[c].length} textes encore sans traduction (node scripts/i18n-todo.js ${c} <zone>)`);
     // les .json doivent être à jour
     for (const c of (src ? [] : langs)) {
