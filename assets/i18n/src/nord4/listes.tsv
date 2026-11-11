@@ -1199,3 +1199,823 @@ Relier aux pistes ¦ Yhdistä vihjeisiin ¦ Összekapcsolás a nyomokkal
 Aucun média dans ce dossier. ¦ Tässä kansiossa ei ole mediaa. ¦ Ebben a mappában nincs média.
 Aucun média évalué. ¦ Ei arvioitua mediaa. ¦ Nincs értékelt média.
 L’enquête, ses pistes et son journal seront supprimés. Les personnes de la généalogie ne sont pas supprimées. ¦ Selvitys, sen vihjeet ja päiväkirja poistetaan. Sukututkimuksen henkilöitä ei poisteta. ¦ A nyomozás, a nyomai és a naplója törlődik. A családfa személyei nem törlődnek.
+Supprimer cette enquête ? ¦ Poistetaanko tämä selvitys? ¦ Törlöd ezt a nyomozást?
+Supprimer l’enquête ¦ Poista selvitys ¦ Nyomozás törlése
+Piste supprimée ¦ Johtolanka poistettu ¦ Nyom törölve
+Retirer ce média de cette piste ? ¦ Irrotetaanko tämä media tästä johtolangasta? ¦ Eltávolítod ezt a médiát erről a nyomról?
+à faire ¦ tehtävä ¦ teendő
+à revoir ¦ tarkistettava ¦ átnézendő
+priorité ¦ tärkeä ¦ fontos
+plus tard ¦ myöhemmin ¦ később
+Déjà dans le suivi des dépouillements ¦ Jo indeksoinnin seurannassa ¦ Már szerepel a feldolgozások követésében
+sans période ¦ ei ajanjaksoa ¦ időszak nélkül
+🔍 Chercher sur SocFace ↗ ¦ 🔍 Hae SocFacesta ↗ ¦ 🔍 Keresés a SocFace-en ↗
+Sur internet ¦ Internetissä ¦ Az interneten
+Noté dans le Journal des recherches ; importe ensuite le CSV pour avoir le foyer ¦ Merkitty tutkimuspäiväkirjaan; tuo sitten CSV-tiedosto, niin saat kotitalouden ¦ Feljegyezve a Kutatási naplóba; utána importáld a CSV-t, hogy megkapd a háztartást
+Noté dans le Journal des recherches : « Rien trouvé » ¦ Merkitty tutkimuspäiväkirjaan: ”Mitään ei löytynyt” ¦ Feljegyezve a Kutatási naplóba: „Nem találtam semmit”
+✓ Trouvé ¦ ✓ Löytyi ¦ ✓ Megtalálva
+Pas trouvé ¦ Ei löytynyt ¦ Nem található
+⤒ Importer… ¦ ⤒ Tuo… ¦ ⤒ Importálás…
+📌 Au suivi ¦ 📌 Seurantaan ¦ 📌 Követésbe
+Une lettre toute prête pour demander cet acte (mairie, archives…) ¦ Valmis kirje tämän asiakirjan pyytämiseen (kunta, arkisto…) ¦ Kész levél ennek az anyakönyvi bejegyzésnek a kéréséhez (polgármesteri hivatal, levéltár…)
+📮 Demander l’acte ¦ 📮 Pyydä asiakirja ¦ 📮 Bejegyzés kérése
+📇 Tables décennales : ¦ 📇 Kymmenvuotishakemistot: ¦ 📇 Tízéves mutatók:
+Déjà cherché : ¦ Jo haettu: ¦ Már keresve:
+Lieu inconnu ¦ Tuntematon paikka ¦ Ismeretlen hely
+🌐 Trouver le site des archives ¦ 🌐 Etsi arkiston verkkosivusto ¦ 🌐 A levéltár weboldalának megkeresése
+Rien avec ces filtres. ¦ Ei mitään näillä suodattimilla. ¦ Ezekkel a szűrőkkel nincs semmi.
+Rien ne manque dans les générations regardées : bravo ! Regarde plus loin (générations) ou complète la lignée. ¦ Tarkastelluista sukupolvista ei puutu mitään: hienoa! Katso kauemmas (sukupolvet) tai täydennä sukuhaaraa. ¦ A vizsgált nemzedékekből semmi sem hiányzik: szép munka! Nézz tovább (nemzedékek), vagy egészítsd ki az ágat.
+RECHERCHE · QUE MANQUE-T-IL ? ¦ TUTKIMUS · MITÄ PUUTTUU? ¦ KUTATÁS · MI HIÁNYZIK?
+Les actes à chercher ¦ Etsittävät asiakirjat ¦ A keresendő bejegyzések
+Les actes à chercher pour la lignée de {name} ¦ Etsittävät asiakirjat henkilön {name} sukuhaaraan ¦ A keresendő bejegyzések {name} ágához
+{searches} pour {ancestors} ancêtres sur {gens} générations, chez {services}. ¦ {searches} – {ancestors} esivanhempaa, {gens} sukupolvea, arkistoissa: {services}. ¦ {searches} – {ancestors} felmenő, {gens} nemzedék, itt: {services}.
+Les plus proches générations d’abord : leurs actes sont les plus faciles à trouver, et chacun ouvre la porte du suivant. ¦ Lähimmät sukupolvet ensin: niiden asiakirjat on helpoin löytää, ja jokainen avaa oven seuraavaan. ¦ Először a legközelebbi nemzedékek: az ő bejegyzéseik a legkönnyebben megtalálhatók, és mindegyik ajtót nyit a következőhöz.
+services d’archives ¦ arkistoa ¦ levéltár
+🖨 Imprimer pour aller aux archives ¦ 🖨 Tulosta arkistokäyntiä varten ¦ 🖨 Nyomtatás a levéltári látogatáshoz
+Ranger par ¦ Ryhmittele ¦ Csoportosítás
+Service d’archives ¦ Arkisto ¦ Levéltár
+Ancêtre ¦ Esivanhempi ¦ Felmenő
+Sorte d’acte ¦ Asiakirjan laji ¦ Bejegyzés fajtája
+Nom, commune, département… ¦ Nimi, kunta, departementti… ¦ Név, település, megye…
+Ajouté au suivi : Recherche → Dépouillement d’archive. ¦ Lisätty seurantaan: Tutkimus → Arkiston indeksointi. ¦ Hozzáadva a követéshez: Kutatás → Levéltári feldolgozás.
+à {place} ¦ paikassa {place} ¦ itt: {place}
+(lieu inconnu) ¦ (tuntematon paikka) ¦ (ismeretlen hely)
+Trouvé : recensement de {year} noté dans le Journal des recherches ¦ Löytyi: vuoden {year} väestönlaskenta merkitty tutkimuspäiväkirjaan ¦ Megtalálva: a(z) {year}. évi népszámlálás feljegyezve a Kutatási naplóba
+Pas trouvé : noté dans le Journal des recherches ¦ Ei löytynyt: merkitty tutkimuspäiväkirjaan ¦ Nem található: feljegyezve a Kutatási naplóba
+Courriers en attente ¦ Vastausta odottavat kirjeet ¦ Válaszra váró levelek
+Pistes et hypothèses ¦ Johtolangat ja hypoteesit ¦ Nyomok és feltevések
+À chercher (Que manque-t-il ?) ¦ Etsittävää (Mitä puuttuu?) ¦ Keresendő (Mi hiányzik?)
+Fait cette semaine ¦ Tehty tällä viikolla ¦ Elvégezve ezen a héten
+En retard ¦ Myöhässä ¦ Késésben
+Cette semaine ¦ Tällä viikolla ¦ Ezen a héten
+Quand tu as le temps ¦ Kun sinulla on aikaa ¦ Ha lesz időd
+Ouvrir le lien ¦ Avaa linkki ¦ Link megnyitása
+C’est fait ¦ Tehty ¦ Kész
+Tout est fait pour cette semaine, bravo ! Profite-en pour avancer une recherche. ¦ Kaikki tämän viikon asiat on tehty, hienoa! Käytä tilaisuus viedäksesi jotain tutkimusta eteenpäin. ¦ Minden kész erre a hétre, szép munka! Használd ki, és vigyél előre egy kutatást.
+💡 Voir ce qui manque ¦ 💡 Katso, mitä puuttuu ¦ 💡 Nézd meg, mi hiányzik
+Ta semaine de recherche n’a pas pu être lue. Réessaie dans un instant. ¦ Tutkimusviikkoasi ei voitu lukea. Yritä hetken päästä uudelleen. ¦ Nem sikerült betölteni a kutatási hetedet. Próbáld újra egy pillanat múlva.
+choses reportées ¦ siirrettyä asiaa ¦ elhalasztott teendő
+Par urgence ¦ Kiireellisyyden mukaan ¦ Sürgősség szerint
+Par sorte ¦ Lajin mukaan ¦ Fajta szerint
+Ce qu’on montre, dans cet ordre ¦ Mitä näytetään, tässä järjestyksessä ¦ Ami megjelenik, ebben a sorrendben
+Décoche ce que tu ne veux pas voir ; ⠿ ou Alt + ↑ / ↓ pour changer l’ordre. ¦ Poista valinta siitä, mitä et halua nähdä; ⠿ tai Alt + ↑ / ↓ muuttaa järjestystä. ¦ Vedd ki a pipát abból, amit nem akarsz látni; ⠿ vagy Alt + ↑ / ↓ a sorrend módosításához.
+Réglages de « Ma semaine de recherche » remis comme au départ. ¦ ”Tutkimusviikkoni”-asetukset palautettu alkuperäisiksi. ¦ A „Kutatási hetem” beállításai visszaállítva alapra.
+TABLEAU DE BORD · EN GRAND ¦ KOJELAUTA · ISOSSA KOOSSA ¦ IRÁNYÍTÓPULT · NAGY MÉRETBEN
+Ta semaine… ¦ Viikkosi… ¦ A heted…
+à demain ¦ huomiseen ¦ holnapig
+à la semaine prochaine ¦ ensi viikkoon ¦ jövő hétig
+À demain ¦ Huomiseen ¦ Holnapig
+À la semaine prochaine ¦ Ensi viikkoon ¦ Jövő hétig
+{n} en retard ¦ {n} myöhässä ¦ {n} késésben
+{n} cette semaine ¦ {n} tällä viikolla ¦ {n} ezen a héten
+{n} quand tu as le temps ¦ {n} kun sinulla on aikaa ¦ {n} ha lesz időd
+⏭ {n} : elles reviendront le jour dit. ¦ ⏭ {n}: ne palaavat sovittuna päivänä. ¦ ⏭ {n}: a megadott napon visszatérnek.
+⏭ Reporté à demain : « {title} » ¦ ⏭ Siirretty huomiseen: ”{title}” ¦ ⏭ Holnapra halasztva: „{title}”
+⏭ Reporté à la semaine prochaine : « {title} » ¦ ⏭ Siirretty ensi viikkoon: ”{title}” ¦ ⏭ Jövő hétre halasztva: „{title}”
+« {title} » n’est plus reporté ¦ ”{title}” ei ole enää siirretty ¦ „{title}” már nincs elhalasztva
+Reporter ¦ Siirrä ¦ Elhalasztás
+Adresse vérifiée ¦ Osoite tarkistettu ¦ Ellenőrzött cím
+Forme de l’adresse vue sur le site ¦ Sivustolla nähty osoitteen muoto ¦ A weboldalon látott címforma
+Vérifiée en partie ¦ Osittain tarkistettu ¦ Részben ellenőrzött
+La forme de l’adresse est connue, mais pas tous ses paramètres ¦ Osoitteen muoto tiedetään, mutta ei kaikkia sen parametreja ¦ A cím formája ismert, de nem minden paramétere
+Adresse non vérifiée ¦ Osoitetta ei tarkistettu ¦ Nem ellenőrzött cím
+Construite d’après la forme connue du site : si elle ne marche plus, change-la dans « ⚙️ Adresses des sites » ¦ Rakennettu sivuston tunnetun muodon mukaan: jos se ei enää toimi, muuta sitä kohdassa ”⚙️ Sivustojen osoitteet” ¦ A weboldal ismert formája alapján készült: ha már nem működik, módosítsd itt: „⚙️ Weboldalak címei”
+Un site que tu as ajouté ¦ Lisäämäsi sivusto ¦ Általad hozzáadott weboldal
+Ce site demande un abonnement ou des crédits pour voir les documents ¦ Tämä sivusto vaatii tilauksen tai krediittejä asiakirjojen katsomiseen ¦ Ez a weboldal előfizetést vagy krediteket kér a dokumentumok megtekintéséhez
+En partie payant ¦ Osittain maksullinen ¦ Részben fizetős
+Gratuit, sauf une partie qui demande un abonnement ¦ Ilmainen, paitsi osa, joka vaatii tilauksen ¦ Ingyenes, kivéve egy részét, amely előfizetést kér
+Gratuit en bibliothèque ¦ Ilmainen kirjastossa ¦ Könyvtárban ingyenes
+Gratuit seulement sur les ordinateurs d’une bibliothèque ou des archives ¦ Ilmainen vain kirjaston tai arkiston tietokoneilla ¦ Csak könyvtári vagy levéltári számítógépen ingyenes
+Indique son unité (régiment…) dans « Plus de précisions » pour trouver le journal de marche. ¦ Kerro hänen joukko-osastonsa (rykmentti…) kohdassa ”Lisätietoja”, niin sotapäiväkirja löytyy. ¦ Add meg az alakulatát (ezred…) a „További részletek” résznél, hogy megtaláld a hadinaplót.
+Choisis le département dans « Plus de précisions » pour ouvrir le site de ses archives. ¦ Valitse departementti kohdassa ”Lisätietoja”, niin sen arkiston sivusto avautuu. ¦ Válaszd ki a megyét a „További részletek” résznél, hogy megnyíljon a levéltára weboldala.
+Indique le département dans « Plus de précisions ». ¦ Kerro departementti kohdassa ”Lisätietoja”. ¦ Add meg a megyét a „További részletek” résznél.
+Indique au moins un nom. ¦ Kerro ainakin yksi nimi. ¦ Adj meg legalább egy nevet.
+Il faut son identifiant FamilySearch (écrit sur sa fiche). ¦ Tarvitaan hänen FamilySearch-tunnuksensa (kirjoitettu hänen korttiinsa). ¦ Kell a FamilySearch-azonosítója (az adatlapján szerepel).
+Écris son port d’attache dans « Plus de précisions ». ¦ Kirjoita hänen kotisatamansa kohtaan ”Lisätietoja”. ¦ Írd be az anyakikötőjét a „További részletek” résznél.
+Écris le nom du photographe dans « Plus de précisions ». ¦ Kirjoita valokuvaajan nimi kohtaan ”Lisätietoja”. ¦ Írd be a fényképész nevét a „További részletek” résznél.
+Écris au moins un nom ou un lieu. ¦ Kirjoita ainakin nimi tai paikka. ¦ Írj be legalább egy nevet vagy egy helyet.
+Écris au moins un nom. ¦ Kirjoita ainakin yksi nimi. ¦ Írj be legalább egy nevet.
+Le site demande de créer un compte (gratuit) pour voir les résultats ¦ Sivusto pyytää luomaan (ilmaisen) tilin tulosten näkemiseksi ¦ A weboldal (ingyenes) fiók létrehozását kéri az eredmények megtekintéséhez
+Ton sobre : ce qui vient de ce site n’entre jamais dans un jeu ¦ Asiallinen sävy: tältä sivustolta tuleva ei koskaan päädy peliin ¦ Visszafogott hangnem: ami erről a weboldalról jön, soha nem kerül játékba
+Ta région ¦ Alueesi ¦ A régiód
+⤒ Importer ce que tu as trouvé sur ce site ¦ ⤒ Tuo, mitä löysit tältä sivustolta ¦ ⤒ Importáld, amit ezen a weboldalon találtál
+🎯 Pour cette recherche ¦ 🎯 Tähän hakuun ¦ 🎯 Ehhez a kereséshez
+Cette rubrique ¦ Tämä osio ¦ Ez a rovat
+📍 Pour ce lieu ¦ 📍 Tähän paikkaan ¦ 📍 Ehhez a helyhez
+🎯 Pour sa fiche ¦ 🎯 Hänen korttiinsa ¦ 🎯 Az adatlapjához
+👤 Pour sa fiche ¦ 👤 Hänen korttiinsa ¦ 👤 Az adatlapjához
+🏺 Pour cet objet ¦ 🏺 Tähän esineeseen ¦ 🏺 Ehhez a tárgyhoz
+🏠 Pour cette maison ¦ 🏠 Tähän taloon ¦ 🏠 Ehhez a házhoz
+ARCHIVES EN LIGNE ¦ ARKISTOT VERKOSSA ¦ ONLINE LEVÉLTÁRAK
+🔍 Chercher dans les archives en ligne ¦ 🔍 Hae verkkoarkistoista ¦ 🔍 Keresés az online levéltárakban
+Ce que la fiche sait… ¦ Mitä kortti tietää… ¦ Amit az adatlap tud…
+⚙️ Adresses des sites ¦ ⚙️ Sivustojen osoitteet ¦ ⚙️ Weboldalak címei
+Les sites payants demandent un abonnement ou des crédits : la recherche y est souvent possible sans payer, pas la lecture des documents. Essaie d’abord les sites gratuits. ¦ Maksulliset sivustot vaativat tilauksen tai krediittejä: hakeminen onnistuu usein maksutta, asiakirjojen lukeminen ei. Kokeile ensin ilmaisia sivustoja. ¦ A fizetős weboldalak előfizetést vagy krediteket kérnek: keresni gyakran ingyen is lehet, a dokumentumokat olvasni nem. Először az ingyenes oldalakat próbáld.
+Aucun site ici. ¦ Ei sivustoja täällä. ¦ Itt nincs weboldal.
+Aucun site. ¦ Ei sivustoja. ¦ Nincs weboldal.
+Aucun site pour « {q} ». ¦ Ei sivustoa haulle ”{q}”. ¦ Nincs weboldal ehhez: „{q}”.
+Vérifie l’orthographe, ou choisis « Tout ». ¦ Tarkista kirjoitusasu tai valitse ”Kaikki”. ¦ Ellenőrizd a helyesírást, vagy válaszd a „Mind” lehetőséget.
+Choisis « Tout », ou décoche « Gratuites seulement ». ¦ Valitse ”Kaikki” tai poista valinta ”Vain ilmaiset”. ¦ Válaszd a „Mind” lehetőséget, vagy vedd ki a pipát a „Csak ingyenesek” elől.
+sites hors de son époque ¦ hänen aikakautensa ulkopuolisia sivustoja ¦ a korán kívüli weboldal
+Les montrer ¦ Näytä ne ¦ Megjelenítés
+Cacher les sites hors de son époque ¦ Piilota hänen aikakautensa ulkopuoliset sivustot ¦ A korán kívüli weboldalak elrejtése
+sites payants cachés ¦ maksullista sivustoa piilotettu ¦ elrejtett fizetős weboldal
+{n} par « Gratuites seulement ». ¦ {n} valinnalla ”Vain ilmaiset”. ¦ {n} a „Csak ingyenesek” miatt.
+Gratuites seulement ¦ Vain ilmaiset ¦ Csak ingyenesek
+Pour : ¦ Kenelle: ¦ Kinek:
+De l’année ¦ Vuodesta ¦ Ettől az évtől
+à l’année ¦ vuoteen ¦ eddig az évig
+Plus de précisions (né en, département, unité, port, canton…) ¦ Lisätietoja (syntymävuosi, departementti, joukko-osasto, satama, kantoni…) ¦ További részletek (születési év, megye, alakulat, kikötő, kanton…)
+Plus de précisions ¦ Lisätietoja ¦ További részletek
+Né(e) en ¦ Syntynyt vuonna ¦ Születési év
+Unité (régiment…) ¦ Joukko-osasto (rykmentti…) ¦ Alakulat (ezred…)
+152e régiment d’infanterie ¦ 152. jalkaväkirykmentti ¦ 152. gyalogezred
+Port d’attache (marins) ¦ Kotisatama (merimiehet) ¦ Anyakikötő (tengerészek)
+Saint-Malo, Fécamp, Sète… ¦ Saint-Malo, Fécamp, Sète… ¦ Saint-Malo, Fécamp, Sète…
+Ce que tu cherches (patrimoine) ¦ Mitä etsit (kulttuuriperintö) ¦ Amit keresel (örökség)
+église Saint-Martin, cloche, retable… ¦ Saint-Martinin kirkko, kello, alttaritaulu… ¦ Saint-Martin templom, harang, oltárkép…
+Photographe (au dos de la carte) ¦ Valokuvaaja (kortin kääntöpuolella) ¦ Fényképész (a kártya hátoldalán)
+Nadar, Disdéri… ¦ Nadar, Disdéri… ¦ Nadar, Disdéri…
+Chercher un site… (Italie, notaires, Gallica, payant…) ¦ Hae sivustoa… (Italia, notaarit, Gallica, maksullinen…) ¦ Weboldal keresése… (Olaszország, közjegyzők, Gallica, fizetős…)
+Chercher un site ¦ Hae sivustoa ¦ Weboldal keresése
+Pays de la zone ¦ Alueen maat ¦ A térség országai
+Thèmes ¦ Aiheet ¦ Témák
+Tous les pays ({n}) ¦ Kaikki maat ({n}) ¦ Minden ország ({n})
+Tous les thèmes ({n}) ¦ Kaikki aiheet ({n}) ¦ Minden téma ({n})
+Cet import n’est pas disponible ici. ¦ Tämä tuonti ei ole käytettävissä täällä. ¦ Ez az importálás itt nem érhető el.
+Lien de la fiche, de l’acte ou de l’article ¦ Linkki korttiin, asiakirjaan tai artikkeliin ¦ Az adatlap, a bejegyzés vagy a cikk linkje
+Copie l’adresse dans la barre de ton navigateur : l’app reconnaît le site (Gallica, Mémoire des hommes, FamilySearch, IdRef, Archives Portal Europe…) et ouvre le bon import. ¦ Kopioi osoite selaimesi osoiteriviltä: sovellus tunnistaa sivuston (Gallica, Mémoire des hommes, FamilySearch, IdRef, Archives Portal Europe…) ja avaa oikean tuonnin. ¦ Másold ki a címet a böngésződ címsorából: az app felismeri a weboldalt (Gallica, Mémoire des hommes, FamilySearch, IdRef, Archives Portal Europe…), és megnyitja a megfelelő importálást.
+Importer avec ¦ Tuo käyttäen ¦ Importálás ezzel
+Texte de la fiche (facultatif) ¦ Kortin teksti (valinnainen) ¦ Az adatlap szövege (nem kötelező)
+Pas de lien ? Colle seulement le texte copié sur la page : la sorte de fiche est reconnue quand c’est possible. ¦ Ei linkkiä? Liitä vain sivulta kopioitu teksti: kortin laji tunnistetaan, kun se on mahdollista. ¦ Nincs link? Csak illeszd be az oldalról kimásolt szöveget: az adatlap fajtáját felismeri, ha lehetséges.
+⚠️ Site pas reconnu : choisis l’import ci-dessous. ¦ ⚠️ Sivustoa ei tunnistettu: valitse tuonti alta. ¦ ⚠️ Ismeretlen weboldal: válaszd ki lent az importálást.
+⚠️ Colle une adresse qui commence par https:// ¦ ⚠️ Liitä osoite, joka alkaa https:// ¦ ⚠️ Illessz be egy https://-sel kezdődő címet
+Colle une adresse qui commence par https:// ¦ Liitä osoite, joka alkaa https:// ¦ Illessz be egy https://-sel kezdődő címet
+Colle le lien de la fiche (ou son texte, plus bas). ¦ Liitä kortin linkki (tai sen teksti, alempana). ¦ Illeszd be az adatlap linkjét (vagy a szövegét, lejjebb).
+Montrer ce site dans la fenêtre de recherche ¦ Näytä tämä sivusto hakuikkunassa ¦ A weboldal megjelenítése a keresőablakban
+📒 Mon cercle généalogique, par département ¦ 📒 Sukututkimusyhdistykseni, departementeittain ¦ 📒 Családfakutató egyesületem, megyénként
+Le n° du département puis l’adresse du site de son cercle (ses relevés). Une ligne par département. ¦ Departementin numero ja sitten sen yhdistyksen sivuston osoite (sen luettelot). Yksi rivi departementtia kohden. ¦ A megye száma, majd az egyesülete weboldalának címe (a kivonatai). Megyénként egy sor.
+Adresse du cercle ¦ Yhdistyksen osoite ¦ Az egyesület címe
+⭐ Mes sites ¦ ⭐ Omat sivustoni ¦ ⭐ Saját weboldalaim
+Ajoute ici le site d’une association, d’une bibliothèque ou d’un relevé que tu connais. ¦ Lisää tähän tuntemasi yhdistyksen, kirjaston tai luettelon sivusto. ¦ Add hozzá itt egy általad ismert egyesület, könyvtár vagy kivonat weboldalát.
+Cercle généalogique du Finistère ¦ Cercle généalogique du Finistère ¦ Cercle généalogique du Finistère
+ARCHIVES EN LIGNE · RÉGLAGES ¦ ARKISTOT VERKOSSA · ASETUKSET ¦ ONLINE LEVÉLTÁRAK · BEÁLLÍTÁSOK
+Chercher un site… (Italie, FreeBMD, cheminots, payant…) ¦ Hae sivustoa… (Italia, FreeBMD, rautatieläiset, maksullinen…) ¦ Weboldal keresése… (Olaszország, FreeBMD, vasutasok, fizetős…)
+Adresse d’un site ¦ Sivuston osoite ¦ Egy weboldal címe
+Donne un nom au site. ¦ Anna sivustolle nimi. ¦ Adj nevet a weboldalnak.
+L’adresse doit commencer par https:// (ou http://), sans espace. ¦ Osoitteen on alettava https:// (tai http://), ilman välilyöntejä. ¦ A címnek https://-sel (vagy http://-vel) kell kezdődnie, szóköz nélkül.
+Site retiré de « Mes sites » ¦ Sivusto irrotettu kohdasta ”Omat sivustoni” ¦ Weboldal eltávolítva a „Saját weboldalaim” közül
+Site retiré. ¦ Sivusto irrotettu. ¦ Weboldal eltávolítva.
+Tous les sites d’archives en ligne, nom et années déjà remplis : Mémoire des hommes, Gallica, FamilySearch, archives d’Europe… ¦ Kaikki verkkoarkistojen sivustot, nimi ja vuodet valmiiksi täytettyinä: Mémoire des hommes, Gallica, FamilySearch, Euroopan arkistot… ¦ Minden online levéltári weboldal, a név és az évek már kitöltve: Mémoire des hommes, Gallica, FamilySearch, európai levéltárak…
+🔍 Archives en ligne… ¦ 🔍 Arkistot verkossa… ¦ 🔍 Online levéltárak…
+Colle le lien d’une fiche trouvée : l’app reconnaît le site et ouvre le bon import ¦ Liitä löytämäsi kortin linkki: sovellus tunnistaa sivuston ja avaa oikean tuonnin ¦ Illeszd be egy megtalált adatlap linkjét: az app felismeri a weboldalt, és megnyitja a megfelelő importálást
+Les sites les plus utiles pour cette personne, et pourquoi ¦ Hyödyllisimmät sivustot tälle henkilölle, ja miksi ¦ A legjobb weboldalak ehhez a személyhez, és hogy miért
+« {text} » est copié : colle-le dans la case du site ¦ ”{text}” on kopioitu: liitä se sivuston hakukenttään ¦ „{text}” kimásolva: illeszd be a weboldal keresőmezőjébe
+« {text} » est copié : colle-le dans la case du site. ¦ ”{text}” on kopioitu: liitä se sivuston hakukenttään. ¦ „{text}” kimásolva: illeszd be a weboldal keresőmezőjébe.
+Écris « {text} » dans la case du site. ¦ Kirjoita ”{text}” sivuston hakukenttään. ¦ Írd be: „{text}” a weboldal keresőmezőjébe.
+Importer ce que tu as trouvé sur {site} ¦ Tuo, mitä löysit sivustolta {site} ¦ Importáld, amit itt találtál: {site}
+Si la page ne trouve rien : ¦ Jos sivu ei löydä mitään: ¦ Ha az oldal nem talál semmit:
+chercher avec Google dans ce site ↗ ¦ hae tältä sivustolta Googlella ↗ ¦ keresés ezen a weboldalon a Google-lel ↗
+Données ouvertes : ¦ Avoin data: ¦ Nyílt adatok:
+⤓ les résultats en JSON ¦ ⤓ tulokset JSON-muodossa ¦ ⤓ az eredmények JSON-ban
+— enregistre le fichier, puis « ⤒ Importer ce que tu as trouvé ». ¦ — tallenna tiedosto ja sitten ”⤒ Tuo, mitä löysit”. ¦ — mentsd a fájlt, majd „⤒ Importáld, amit találtál”.
+aucun ¦ ei mitään ¦ nincs
+aussi dans « Chercher sur internet » ¦ myös kohdassa ”Hae internetistä” ¦ a „Keresés az interneten” részben is
+Site « {name} » ajouté : il est aussi dans « Chercher sur internet ». ¦ Sivusto ”{name}” lisätty: se on myös kohdassa ”Hae internetistä”. ¦ „{name}” weboldal hozzáadva: a „Keresés az interneten” részben is megtalálod.
+🎖 Mémoire des hommes, Léonore, registre matricule, presse ancienne ¦ 🎖 Mémoire des hommes, Léonore, kantakirja, vanhat lehdet ¦ 🎖 Mémoire des hommes, Léonore, katonai törzskönyv, régi sajtó
+🏛 Naturalisation, notaire, colonies, marin, déportation, Journal officiel, annuaire, patrimoine ¦ 🏛 Kansalaistaminen, notaari, siirtomaat, merimies, karkotus, Journal officiel, osoitekalenteri, kulttuuriperintö ¦ 🏛 Honosítás, közjegyző, gyarmatok, tengerész, deportálás, Journal officiel, címtár, örökség
+🌍 Prisonnier 14-18, élu, brevet, thèse, acte d’Italie, d’Espagne…, FreeBMD, Open Archives ¦ 🌍 Sotavanki 1914–18, luottamushenkilö, patentti, väitöskirja, Italian, Espanjan… asiakirjat, FreeBMD, Open Archives ¦ 🌍 Hadifogoly 1914–18, választott tisztségviselő, szabadalom, disszertáció, olasz, spanyol… bejegyzések, FreeBMD, Open Archives
+🗿 Monument aux morts, tombe, acte d’Europe, presse étrangère ¦ 🗿 Sankarimuistomerkki, hauta, Euroopan asiakirjat, ulkomainen lehdistö ¦ 🗿 Hősi emlékmű, sír, európai bejegyzések, külföldi sajtó
+🌳 FamilySearch, WikiTree, Québec, passagers, Sainte-Hélène, Maitron, mémoriaux ¦ 🌳 FamilySearch, WikiTree, Québec, matkustajat, Saint Helena, Maitron, muistomerkit ¦ 🌳 FamilySearch, WikiTree, Québec, utasok, Szent Ilona, Maitron, emlékhelyek
+📚 Bibliothèque, auteur, HisKi, Old Bailey, notaire de Paris ¦ 📚 Kirjasto, kirjailija, HisKi, Old Bailey, Pariisin notaari ¦ 📚 Könyvtár, szerző, HisKi, Old Bailey, párizsi közjegyző
+🇪🇺 Archives d’Europe, Juste, enfant assisté, monument, cadastre ¦ 🇪🇺 Euroopan arkistot, Vanhurskas, huutolaislapsi, muistomerkki, maarekisteri ¦ 🇪🇺 Európai levéltárak, Igaz ember, lelencgyermek, emlékmű, kataszter
+Europe ¦ Eurooppa ¦ Európa
+Amériques ¦ Amerikat ¦ Amerika
+Monde ¦ Maailma ¦ Világ
+France ¦ Ranska ¦ Franciaország
+Italie ¦ Italia ¦ Olaszország
+Espagne ¦ Espanja ¦ Spanyolország
+Portugal ¦ Portugali ¦ Portugália
+Allemagne ¦ Saksa ¦ Németország
+Belgique ¦ Belgia ¦ Belgium
+Suisse ¦ Sveitsi ¦ Svájc
+Luxembourg ¦ Luxemburg ¦ Luxemburg
+Pays-Bas ¦ Alankomaat ¦ Hollandia
+Royaume-Uni ¦ Yhdistynyt kuningaskunta ¦ Egyesült Királyság
+Irlande ¦ Irlanti ¦ Írország
+Canada ¦ Kanada ¦ Kanada
+Pologne ¦ Puola ¦ Lengyelország
+Russie ¦ Venäjä ¦ Oroszország
+Ukraine ¦ Ukraina ¦ Ukrajna
+Norvège ¦ Norja ¦ Norvégia
+Suède ¦ Ruotsi ¦ Svédország
+Danemark ¦ Tanska ¦ Dánia
+Finlande ¦ Suomi ¦ Finnország
+Tchéquie ¦ Tšekki ¦ Csehország
+Slovaquie ¦ Slovakia ¦ Szlovákia
+Autriche ¦ Itävalta ¦ Ausztria
+Hongrie ¦ Unkari ¦ Magyarország
+Algérie ¦ Algeria ¦ Algéria
+Maroc ¦ Marokko ¦ Marokkó
+Tunisie ¦ Tunisia ¦ Tunézia
+Sénégal ¦ Senegal ¦ Szenegál
+Indochine ¦ Indokiina ¦ Indokína
+Nouvelle-Calédonie ¦ Uusi-Kaledonia ¦ Új-Kaledónia
+Guyane ¦ Ranskan Guayana ¦ Francia Guyana
+La Réunion ¦ Réunion ¦ Réunion
+Guadeloupe ¦ Guadeloupe ¦ Guadeloupe
+Martinique ¦ Martinique ¦ Martinique
+Madagascar ¦ Madagaskar ¦ Madagaszkár
+Australie ¦ Australia ¦ Ausztrália
+Argentine ¦ Argentiina ¦ Argentína
+Brésil ¦ Brasilia ¦ Brazília
+Lituanie ¦ Liettua ¦ Litvánia
+Lettonie ¦ Latvia ¦ Lettország
+Roumanie ¦ Romania ¦ Románia
+États-Unis ¦ Yhdysvallat ¦ Egyesült Államok
+Israël ¦ Israel ¦ Izrael
+Nouvelle-Zélande ¦ Uusi-Seelanti ¦ Új-Zéland
+Soldats et guerres ¦ Sotilaat ja sodat ¦ Katonák és háborúk
+Décorations ¦ Kunniamerkit ¦ Kitüntetések
+Mémoire (déportés, fusillés, Justes) ¦ Muisto (karkotetut, teloitetut, Vanhurskaat) ¦ Emlékezet (deportáltak, kivégzettek, Igazak)
+État civil et registres ¦ Väestörekisteri ja rekisterit ¦ Anyakönyv és nyilvántartások
+Arbres et grandes bases ¦ Sukupuut ja suuret tietokannat ¦ Családfák és nagy adatbázisok
+Émigration et outre-mer ¦ Siirtolaisuus ja merentakaiset alueet ¦ Kivándorlás és tengerentúl
+Notaires et justice ¦ Notaarit ja oikeuslaitos ¦ Közjegyzők és igazságszolgáltatás
+Métiers, élus, savants ¦ Ammatit, luottamushenkilöt, oppineet ¦ Foglalkozások, választott tisztségviselők, tudósok
+Presse et Journal officiel ¦ Lehdistö ja Journal officiel ¦ Sajtó és Journal officiel
+Livres, bibliothèques, auteurs ¦ Kirjat, kirjastot, kirjailijat ¦ Könyvek, könyvtárak, szerzők
+Cimetières et monuments ¦ Hautausmaat ja muistomerkit ¦ Temetők és emlékművek
+Lieux, cartes, patrimoine ¦ Paikat, kartat, kulttuuriperintö ¦ Helyek, térképek, örökség
+Enfants assistés ¦ Huutolaislapset ¦ Lelencgyermekek
+🕯 Maitron des fusillés 1940-1944 ¦ 🕯 Maitron: teloitetut 1940-1944 ¦ 🕯 Maitron: kivégzettek 1940-1944
+📷 Le photographe dans l’annuaire ¦ 📷 Valokuvaaja osoitekalenterissa ¦ 📷 A fényképész a címtárban
+Un site que tu as ajouté. ¦ Lisäämäsi sivusto. ¦ Általad hozzáadott weboldal.
+🧳 Émigration ¦ 🧳 Siirtolaisuus ¦ 🧳 Kivándorlás
+⚕ Médecin, polytechnicien ¦ ⚕ Lääkäri, polyteknikko ¦ ⚕ Orvos, politechnikus
+🏛 Élu ¦ 🏛 Luottamushenkilö ¦ 🏛 Választott tisztségviselő
+📍 Ce lieu ¦ 📍 Tämä paikka ¦ 📍 Ez a hely
+🏆 Récompenses ¦ 🏆 Palkinnot ¦ 🏆 Díjak
+SERVICE D’ARCHIVES ¦ ARKISTO ¦ LEVÉLTÁR
+Nouveau service d’archives ¦ Uusi arkisto ¦ Új levéltár
+Partir des Archives départementales de… ¦ Aloita departementin arkistosta… ¦ Kiindulás ennek a megyei levéltárából…
+(facultatif : remplit le nom, le sigle et le site) ¦ (valinnainen: täyttää nimen, lyhenteen ja sivuston) ¦ (nem kötelező: kitölti a nevet, a rövidítést és a weboldalt)
+— choisir un département — ¦ — valitse departementti — ¦ — válassz megyét —
+Nom du service ¦ Arkiston nimi ¦ A levéltár neve
+Archives départementales de la Corrèze ¦ Archives départementales de la Corrèze ¦ Archives départementales de la Corrèze
+Sigle ¦ Lyhenne ¦ Rövidítés
+Autres noms ¦ Muut nimet ¦ Más nevek
+(comme tu l’écris dans tes recherches) ¦ (kuten kirjoitat sen tutkimuksissasi) ¦ (ahogy a kutatásaidban írod)
+(si c’est en France) ¦ (jos se on Ranskassa) ¦ (ha Franciaországban van)
+Du mardi au vendredi, 9 h – 17 h ; réservation des documents la veille… ¦ Tiistaista perjantaihin 9–17; asiakirjat varataan edellisenä päivänä… ¦ Keddtől péntekig 9–17 óráig; a dokumentumokat előző nap kell kikérni…
+Recherche en ligne ¦ Haku verkossa ¦ Online keresés
+Séries ¦ Sarjat ¦ Sorozatok
+(une par ligne : « 3 E — Notaires », « 4 E — État civil », « 2 Mi — Microfilms ») ¦ (yksi riville: ”3 E — Notaires”, ”4 E — État civil”, ”2 Mi — Microfilms”) ¦ (soronként egy: „3 E — Notaires”, „4 E — État civil”, „2 Mi — Microfilms”)
+(ceux que tu as pu écrire dans tes dépouillements, séparés par des virgules : tout ce qui y a été consulté s’affichera sur la fiche) ¦ (ne, joita olet voinut kirjoittaa indeksointeihisi, pilkuilla erotettuina: kaikki siellä tutkittu näkyy kortilla) ¦ (amelyeket a feldolgozásaidba írhattál, vesszővel elválasztva: minden, amit ott átnéztél, megjelenik az adatlapon)
+AD Corrèze, Archives de Tulle ¦ AD Corrèze, Archives de Tulle ¦ AD Corrèze, Archives de Tulle
+Salle de lecture, carte de lecteur, appareil photo autorisé… ¦ Lukusali, tutkijakortti, kamera sallittu… ¦ Kutatóterem, olvasójegy, fényképezőgép engedélyezett…
+En ligne : ¦ Verkossa: ¦ Online:
+Donne le nom du service d’archives. ¦ Anna arkiston nimi. ¦ Add meg a levéltár nevét.
+Service « {name} » créé. ¦ Arkisto ”{name}” luotu. ¦ „{name}” levéltár létrehozva.
+Service « {name} » supprimé ¦ Arkisto ”{name}” poistettu ¦ „{name}” levéltár törölve
+{n} chez eux ¦ {n} siellä ¦ {n} ott
+Rien de consulté pour l’instant ¦ Mitään ei ole vielä tutkittu ¦ Még semmit sem néztél át
+trouvées ¦ löydetty ¦ megtalálva
+trouvés ¦ löydetty ¦ megtalálva
+Consulté ¦ Tutkittu ¦ Átnézve
+Tes services d’archives, avec leur adresse, leurs horaires, leur site, leurs séries, et tout ce que tu y as déjà consulté. ¦ Arkistosi osoitteineen, aukioloaikoineen, sivustoineen ja sarjoineen sekä kaikki, mitä olet niissä jo tutkinut. ¦ A levéltáraid a címükkel, nyitvatartásukkal, weboldalukkal, sorozataikkal, és mindazzal, amit már átnéztél bennük.
+＋ Nouveau service ¦ ＋ Uusi arkisto ¦ ＋ Új levéltár
+🗄️ Visites d’archives ¦ 🗄️ Arkistokäynnit ¦ 🗄️ Levéltári látogatások
+Chargement des services… ¦ Ladataan arkistoja… ¦ Levéltárak betöltése…
+Ces services sont écrits dans tes recherches sans avoir encore de fiche : ¦ Nämä arkistot mainitaan tutkimuksissasi, mutta niillä ei ole vielä korttia: ¦ Ezek a levéltárak szerepelnek a kutatásaidban, de még nincs adatlapjuk:
+Ce service est écrit dans tes recherches sans avoir encore de fiche : ¦ Tämä arkisto mainitaan tutkimuksissasi, mutta sillä ei ole vielä korttia: ¦ Ez a levéltár szerepel a kutatásaidban, de még nincs adatlapja:
+Chercher… (nom, sigle, ville, série) ¦ Hae… (nimi, lyhenne, kaupunki, sarja) ¦ Keresés… (név, rövidítés, város, sorozat)
+Déjà consultés ¦ Jo tutkitut ¦ Már átnézettek
+Déjà consultés ({n}) ¦ Jo tutkitut ({n}) ¦ Már átnézettek ({n})
+Rien de consulté ¦ Ei mitään tutkittu ¦ Semmi nincs átnézve
+Rien de consulté ({n}) ¦ Ei mitään tutkittu ({n}) ¦ Semmi nincs átnézve ({n})
+Consultés le plus récemment ¦ Viimeksi tutkitut ¦ Legutóbb átnézettek
+Les plus consultés ¦ Eniten tutkitut ¦ Legtöbbet átnézettek
+Ajoute les archives où tu cherches (départementales, municipales, notaires…) : leur adresse, leurs horaires, leurs séries, et tout ce que tu y as consulté s’affichera sur leur fiche. ¦ Lisää arkistot, joista haet (departementti-, kunnan-, notaariarkistot…): niiden osoite, aukioloajat, sarjat ja kaikki, mitä olet niissä tutkinut, näkyvät niiden kortilla. ¦ Add hozzá a levéltárakat, ahol keresel (megyei, városi, közjegyzői…): a címük, a nyitvatartásuk, a sorozataik és minden, amit ott átnéztél, megjelenik az adatlapjukon.
+Rien ne correspond ¦ Mikään ei täsmää ¦ Nincs egyezés
+Enlève un filtre, ou cherche autrement (un sigle, une ville). ¦ Poista jokin suodatin tai hae toisin (lyhenne, kaupunki). ¦ Vegyél ki egy szűrőt, vagy keress másképp (rövidítés, város).
+Rien trouvé ¦ Mitään ei löytynyt ¦ Nincs találat
+En partie ¦ Osittain ¦ Részben
+Pas consulté ¦ Ei tutkittu ¦ Nincs átnézve
+Chargement de la fiche… ¦ Ladataan korttia… ¦ Adatlap betöltése…
+← Tous les services ¦ ← Kaikki arkistot ¦ ← Minden levéltár
+📍 Où et quand ¦ 📍 Missä ja milloin ¦ 📍 Hol és mikor
+Site du service ¦ Arkiston sivusto ¦ A levéltár weboldala
+Registres et fonds en ligne ¦ Rekisterit ja arkistokokoelmat verkossa ¦ Online anyakönyvek és fondok
+Rien de noté : ajoute l’adresse, les horaires et le site. ¦ Mitään ei ole merkitty: lisää osoite, aukioloajat ja sivusto. ¦ Nincs semmi feljegyezve: add meg a címet, a nyitvatartást és a weboldalt.
+🗂 Séries ¦ 🗂 Sarjat ¦ 🗂 Sorozatok
+Série ¦ Sarja ¦ Sorozat
+Ce que c’est ¦ Mikä se on ¦ Mi ez
+Sans série ¦ Ei sarjaa ¦ Sorozat nélkül
+Sans série ({n}) ¦ Ei sarjaa ({n}) ¦ Sorozat nélkül ({n})
+Aucune série notée : écris-les sur la fiche (« 3 E — Notaires »), ou elles viendront des cotes de tes recherches. ¦ Sarjoja ei ole merkitty: kirjoita ne kortille (”3 E — Notaires”), tai ne saadaan tutkimustesi arkistotunnuksista. ¦ Nincs feljegyzett sorozat: írd be őket az adatlapra („3 E — Notaires”), vagy a kutatásaid jelzeteiből származnak majd.
+✓ Déjà consulté chez eux ¦ ✓ Jo tutkittu siellä ¦ ✓ Már átnézve ott
+nom écrit ¦ kirjoitettu nimi ¦ beírt név
+Aucune source reliée : choisis ce service dans la fenêtre d’une source (« 🏛 Service d’archives »). ¦ Ei yhdistettyä lähdettä: valitse tämä arkisto lähteen ikkunassa (”🏛 Arkisto”). ¦ Nincs összekapcsolt forrás: válaszd ki ezt a levéltárat egy forrás ablakában („🏛 Levéltár”).
+Aucun média relié : choisis ce service dans la fenêtre d’un média. ¦ Ei yhdistettyä mediaa: valitse tämä arkisto median ikkunassa. ¦ Nincs összekapcsolt média: válaszd ki ezt a levéltárat egy média ablakában.
+Aucune visite préparée chez eux. ¦ Ei suunniteltua käyntiä siellä. ¦ Nincs ott tervezett látogatás.
+Rien dans cette série. ¦ Ei mitään tässä sarjassa. ¦ Ebben a sorozatban nincs semmi.
+Faite ¦ Tehty ¦ Kész
+🏛 Service d’archives ¦ 🏛 Arkisto ¦ 🏛 Levéltár
+Tout ce qui vient de ce service se retrouve sur sa fiche (Listes → Services d’archives), rangé par série. ¦ Kaikki tästä arkistosta tuleva löytyy sen kortilta (Luettelot → Arkistot) sarjoittain järjestettynä. ¦ Minden, ami ebből a levéltárból származik, megjelenik az adatlapján (Listák → Levéltárak), sorozatok szerint rendezve.
+vue dans une cote ¦ nähty arkistotunnuksessa ¦ jelzetben látva
+cote sans série reconnue ¦ arkistotunnus ilman tunnistettua sarjaa ¦ jelzet felismert sorozat nélkül
+série {s} ¦ sarja {s} ¦ {s} sorozat
+cote {c} ¦ arkistotunnus {c} ¦ jelzet: {c}
+prévue le {date} ¦ suunniteltu {date} ¦ tervezve: {date}
+Rien de consulté chez eux pour l’instant. Les dépouillements, visites faites et demandes dont le service est « {name} » (ou un de ses autres noms) s’affichent ici. ¦ Siellä ei ole vielä tutkittu mitään. Tähän tulevat indeksoinnit, tehdyt käynnit ja pyynnöt, joiden arkisto on ”{name}” (tai jokin sen muista nimistä). ¦ Ott még semmit sem néztél át. Itt jelennek meg azok a feldolgozások, megtett látogatások és kérések, amelyek levéltára „{name}” (vagy annak valamelyik más neve).
+Résolu ¦ Ratkaistu ¦ Megoldva
+Abandonné ¦ Hylätty ¦ Feladva
+ses deux parents ¦ molemmat vanhemmat ¦ mindkét szülője
+rien (marqué à la main) ¦ ei mitään (merkitty käsin) ¦ semmi (kézzel jelölve)
+{service} — état civil et registres paroissiaux ¦ {service} — väestörekisteri ja kirkonkirjat ¦ {service} — anyakönyv és egyházi anyakönyvek
+Archives du département ¦ Departementin arkisto ¦ Megyei levéltár
+Naissance inconnue : les registres de {place}, en ligne, autour de {year} ¦ Syntymä tuntematon: paikan {place} rekisterit verkossa, noin vuoden {year} tienoilta ¦ Ismeretlen születés: {place} anyakönyvei online, {year} körül
+Naissance inconnue : les registres de {place}, en ligne ¦ Syntymä tuntematon: paikan {place} rekisterit verkossa ¦ Ismeretlen születés: {place} anyakönyvei online
+Parents inconnus : son acte de mariage à {place} donne le nom de ses parents ¦ Vanhemmat tuntemattomat: hänen vihkiasiakirjansa paikassa {place} kertoo hänen vanhempiensa nimet ¦ Ismeretlen szülők: a házassági bejegyzése ({place}) megadja a szülei nevét
+Parents inconnus : son acte de naissance à {place} donne le nom de ses parents ¦ Vanhemmat tuntemattomat: hänen syntymäasiakirjansa paikassa {place} kertoo hänen vanhempiensa nimet ¦ Ismeretlen szülők: a születési bejegyzése ({place}) megadja a szülei nevét
+Décès inconnu : les registres de {place} ¦ Kuolema tuntematon: paikan {place} rekisterit ¦ Ismeretlen halál: {place} anyakönyvei
+Elle a vécu à {place} : l’état civil et les registres paroissiaux en ligne ¦ Hän asui paikassa {place}: väestörekisteri ja kirkonkirjat verkossa ¦ Itt élt: {place}: anyakönyv és egyházi anyakönyvek online
+Il a vécu à {place} : l’état civil et les registres paroissiaux en ligne ¦ Hän asui paikassa {place}: väestörekisteri ja kirkonkirjat verkossa ¦ Itt élt: {place}: anyakönyv és egyházi anyakönyvek online
+S’ouvre dans ton navigateur, avec son nom déjà rempli ¦ Avautuu selaimessasi, nimi valmiiksi täytettynä ¦ A böngésződben nyílik meg, a nevével már kitöltve
+Noter dans le Journal des recherches ce que ça a donné ¦ Merkitse tutkimuspäiväkirjaan, mitä siitä tuli ¦ Jegyezd fel a Kutatási naplóba, mi lett az eredmény
+✓ Déjà cherché ¦ ✓ Jo haettu ¦ ✓ Már keresve
+🔍 Déjà cherché ¦ 🔍 Jo haettu ¦ 🔍 Már keresve
+✓ {result} sur {site} : noté dans le Journal des recherches ¦ ✓ {result} sivustolla {site}: merkitty tutkimuspäiväkirjaan ¦ ✓ {result} itt: {site}: feljegyezve a Kutatási naplóba
+＋ Piste ajoutée : « Chercher sur {site} » (nouvelle enquête « Où chercher ? ») ¦ ＋ Johtolanka lisätty: ”Hae sivustolta {site}” (uusi selvitys ”Mistä etsiä?”) ¦ ＋ Nyom hozzáadva: „Keresés itt: {site}” (új „Hol keressem?” nyomozás)
+＋ Piste ajoutée : « Chercher sur {site} » ¦ ＋ Johtolanka lisätty: ”Hae sivustolta {site}” ¦ ＋ Nyom hozzáadva: „Keresés itt: {site}”
+« {text} » est copié : colle-le dans la case de recherche du site ({key}). ¦ ”{text}” on kopioitu: liitä se sivuston hakukenttään ({key}). ¦ „{text}” kimásolva: illeszd be a weboldal keresőmezőjébe ({key}).
+Ce que ça a donné ¦ Mitä siitä tuli ¦ Mi lett az eredmény
+Chercher sur ce site ¦ Hae tältä sivustolta ¦ Keresés ezen a weboldalon
+En faire une piste ¦ Tee siitä johtolanka ¦ Legyen belőle nyom
+Copier l’adresse ¦ Kopioi osoite ¦ Cím másolása
+Adresse copiée. ¦ Osoite kopioitu. ¦ Cím kimásolva.
+Je cherche les bons sites… ¦ Etsin sopivia sivustoja… ¦ Keresem a megfelelő weboldalakat…
+Les sites les plus utiles pour {name}, d’après ses lieux, ses dates et ce qui manque. Chaque site s’ouvre dans ton navigateur, son nom déjà rempli. ¦ Hyödyllisimmät sivustot henkilölle {name} hänen paikkojensa, päivämääriensä ja puuttuvien tietojen perusteella. Jokainen sivusto avautuu selaimessasi, nimi valmiiksi täytettynä. ¦ A legjobb weboldalak {name} számára a helyei, dátumai és a hiányzó adatok alapján. Minden weboldal a böngésződben nyílik meg, a nevével már kitöltve.
+Voir les {n} autres propositions ↓ ¦ Näytä {n} muuta ehdotusta ↓ ¦ A további {n} javaslat ↓
+Toutes les propositions, et celles déjà cherchées ¦ Kaikki ehdotukset, myös jo haetut ¦ Minden javaslat, a már keresettek is
+Ajoute un lieu ou une date : les propositions s’affinent. ¦ Lisää paikka tai päivämäärä: ehdotukset tarkentuvat. ¦ Adj meg egy helyet vagy dátumot: a javaslatok pontosabbak lesznek.
+sites déjà cherchés ¦ jo haettua sivustoa ¦ már keresett weboldal
+Cache les sites payants (le même réglage que dans « Archives en ligne ») ¦ Piilottaa maksulliset sivustot (sama asetus kuin kohdassa ”Arkistot verkossa”) ¦ Elrejti a fizetős weboldalakat (ugyanaz a beállítás, mint az „Online levéltárak” részben)
+Où chercher ? ¦ Mistä etsiä? ¦ Hol keressem?
+Pour qui ? ¦ Kenelle? ¦ Kinek?
+Choisis une personne ¦ Valitse henkilö ¦ Válassz egy személyt
+Ses lieux, ses dates et ce qui manque décident des sites proposés. ¦ Hänen paikkansa, päivämääränsä ja puuttuvat tiedot ratkaisevat ehdotettavat sivustot. ¦ A helyei, a dátumai és a hiányzó adatok döntik el, mely weboldalakat javasolja.
+Ce qui compte pour choisir ¦ Mikä valinnassa ratkaisee ¦ Ami a választásnál számít
+🧱 Ne plus bloquer ici ¦ 🧱 En ole enää umpikujassa ¦ 🧱 Már nem akadtam el itt
+🧱 Je bloque ici ¦ 🧱 Olen umpikujassa ¦ 🧱 Itt elakadtam
+Ne plus bloquer ici ¦ En ole enää umpikujassa ¦ Már nem akadtam el itt
+Je bloque ici (mur de brique) ¦ Olen umpikujassa (umpikuja) ¦ Itt elakadtam (holtpont)
+Aucun site écarté. ¦ Yhtään sivustoa ei ole suljettu pois. ¦ Egy weboldal sincs kizárva.
+Rien n’a encore été noté pour cette personne. ¦ Tälle henkilölle ei ole vielä merkitty mitään. ¦ Ennél a személynél még semmi sincs feljegyezve.
+Après une recherche, « ✓ Déjà cherché » la note dans le Journal des recherches. ¦ Haun jälkeen ”✓ Jo haettu” merkitsee sen tutkimuspäiväkirjaan. ¦ Keresés után a „✓ Már keresve” feljegyzi a Kutatási naplóba.
+Proposés ({n}) ¦ Ehdotetut ({n}) ¦ Javasoltak ({n})
+✓ Déjà cherchés ({n}) ¦ ✓ Jo haetut ({n}) ¦ ✓ Már keresettek ({n})
+Écartés ({n}) ¦ Pois suljetut ({n}) ¦ Kizártak ({n})
+Aucun site à proposer. ¦ Ei ehdotettavaa sivustoa. ¦ Nincs javasolható weboldal.
+{n} : décoche « Gratuites seulement ». ¦ {n}: poista valinta ”Vain ilmaiset”. ¦ {n}: vedd ki a pipát a „Csak ingyenesek” elől.
+sites payants sont cachés ¦ maksullista sivustoa on piilotettu ¦ fizetős weboldal el van rejtve
+Ajoute un lieu ou une date sur la fiche. ¦ Lisää kortille paikka tai päivämäärä. ¦ Adj meg egy helyet vagy dátumot az adatlapon.
+pistes d’enquête ¦ selvityksen johtolankaa ¦ nyomozási nyom
+Piste d’enquête ¦ Selvityksen johtolanka ¦ Nyomozási nyom
+Pistes d’enquête ¦ Selvityksen johtolangat ¦ Nyomozási nyomok
+🧱 {name} : ajoutée aux murs de brique ¦ 🧱 {name}: lisätty umpikujiin ¦ 🧱 {name}: hozzáadva a holtpontokhoz
+🧱 {name} : ne bloque plus ici ¦ 🧱 {name}: ei enää umpikujassa ¦ 🧱 {name}: már nincs elakadva
+🎉 Bravo ! Le mur de {name} est tombé : une génération de plus à découvrir. ¦ 🎉 Hienoa! Henkilön {name} umpikuja on murtunut: yksi sukupolvi lisää löydettäväksi. ¦ 🎉 Szép munka! {name} holtpontja megszűnt: egy újabb nemzedék vár felfedezésre.
+🎉 Bravo ! Le mur de {name} est tombé : ses parents sont maintenant dans ta base. ¦ 🎉 Hienoa! Henkilön {name} umpikuja on murtunut: hänen vanhempansa ovat nyt tietokannassasi. ¦ 🎉 Szép munka! {name} holtpontja megszűnt: a szülei most már az adatbázisodban vannak.
+Je cherche les murs… ¦ Etsin umpikujia… ¦ Holtpontokat keresek…
+Sur qui bloques-tu ? ¦ Kenen kohdalla olet jumissa? ¦ Kinél akadtál el?
+Chercher un nom… (ex. Martin, Naves) ¦ Hae nimeä… (esim. Martin, Naves) ¦ Név keresése… (pl. Martin, Naves)
+Les deux parents ¦ Molemmat vanhemmat ¦ Mindkét szülő
+Le père ¦ Isä ¦ Az apa
+La mère ¦ Äiti ¦ Az anya
+🧱 À la main ¦ 🧱 Käsin ¦ 🧱 Kézzel
+Génération, puis Sosa ¦ Sukupolvi, sitten Sosa-numero ¦ Nemzedék, majd Sosa-szám
+Plus récents ¦ Uusimmat ¦ Legújabbak
+Hors lignée ¦ Suoran linjan ulkopuolella ¦ Az egyenes ágon kívül
+Aucun mur ne correspond ¦ Mikään umpikuja ei täsmää ¦ Nincs egyező holtpont
+Retire un filtre ou change la recherche. ¦ Poista jokin suodatin tai muuta hakua. ¦ Vegyél ki egy szűrőt, vagy módosítsd a keresést.
+Aucun mur de brique ¦ Ei umpikujia ¦ Nincs holtpont
+Tous tes ancêtres connus ont leurs deux parents. Si tu bloques quelque part, marque-le « 🧱 Je bloque ici ». ¦ Kaikilla tunnetuilla esivanhemmillasi on molemmat vanhemmat. Jos olet jossain jumissa, merkitse se ”🧱 Olen umpikujassa”. ¦ Minden ismert felmenődnek megvan mindkét szülője. Ha valahol elakadtál, jelöld meg: „🧱 Itt elakadtam”.
+Je rassemble ce que tu sais… ¦ Kokoan, mitä tiedät… ¦ Összegyűjtöm, amit tudsz…
+à explorer en priorité ¦ tutkittava ensin ¦ elsőként felderítendő
+à explorer ¦ tutkittava ¦ felderítendő
+prometteuse ¦ lupaava ¦ ígéretes
+explorée ¦ tutkittu ¦ felderítve
+fermée ¦ suljettu ¦ lezárva
+Rien de noté pour l’instant. ¦ Mitään ei ole vielä merkitty. ¦ Még nincs semmi feljegyezve.
+🌍 À essayer ¦ 🌍 Kokeiltavaa ¦ 🌍 Kipróbálandó
+Tous les sites proposés ont été cherchés. ¦ Kaikilta ehdotetuilta sivustoilta on haettu. ¦ Minden javasolt weboldalon kerestél már.
+💡 Indices dans ta base ¦ 💡 Vihjeitä tietokannassasi ¦ 💡 Nyomok az adatbázisodban
+Pas d’homonyme, de témoin ni de voisin repéré. ¦ Kaimoja, todistajia tai naapureita ei löytynyt. ¦ Nincs névrokon, tanú vagy szomszéd.
+Ce que tu sais, ce que tu soupçonnes, où tu as déjà regardé… ¦ Mitä tiedät, mitä epäilet, mistä olet jo katsonut… ¦ Amit tudsz, amit sejtesz, ahol már néztél…
+Gardée toute seule. ¦ Tallennetaan automaattisesti. ¦ Magától mentődik.
+Les murs de brique n’ont pas pu être lus. ¦ Umpikujia ei voitu lukea. ¦ Nem sikerült betölteni a holtpontokat.
+résolus ¦ ratkaistu ¦ megoldva
+Tous tes murs sont tombés, bravo ! ¦ Kaikki umpikujasi ovat murtuneet, hienoa! ¦ Minden holtpontod megszűnt, szép munka!
+Aucun mur de brique : tes ancêtres connus ont leurs parents. ¦ Ei umpikujia: tunnetuilla esivanhemmillasi on vanhempansa. ¦ Nincs holtpont: az ismert felmenőidnek megvannak a szüleik.
+Génération {n} ¦ Sukupolvi {n} ¦ {n}. nemzedék
+{n} en cours ¦ {n} kesken ¦ {n} folyamatban
+Voir les {n} autres ↓ ¦ Näytä {n} muuta ↓ ¦ A további {n} ↓
+⚖️ Hypothèses ¦ ⚖️ Hypoteesit ¦ ⚖️ Feltevések
+soldat ¦ sotilas ¦ katona
+mort pour la France ¦ kaatui Ranskan puolesta ¦ Franciaországért halt meg
+prisonnier de guerre ¦ sotavanki ¦ hadifogoly
+marin ¦ merimies ¦ tengerész
+émigré ¦ siirtolainen ¦ kivándorló
+notaire ¦ notaari ¦ közjegyző
+héritage, testament ¦ perintö, testamentti ¦ örökség, végrendelet
+déporté ¦ karkotettu ¦ deportált
+fusillé ¦ teloitettu ¦ kivégzett
+résistant ¦ vastarintaliikkeen jäsen ¦ ellenálló
+enfant placé ¦ sijoitettu lapsi ¦ nevelőszülőhöz adott gyermek
+noblesse ¦ aatelisto ¦ nemesség
+protestant ¦ protestantti ¦ protestáns
+famille juive ¦ juutalainen perhe ¦ zsidó család
+cheminot ¦ rautatieläinen ¦ vasutas
+gendarme, policier ¦ santarmi, poliisi ¦ csendőr, rendőr
+élu ¦ luottamushenkilö ¦ választott tisztségviselő
+médecin ¦ lääkäri ¦ orvos
+photographe ¦ valokuvaaja ¦ fényképész
+religieux ¦ hengellinen sääty ¦ egyházi személy
+ouvrier ¦ työläinen ¦ munkás
+inventeur, savant ¦ keksijä, oppinut ¦ feltaláló, tudós
+artiste ¦ taiteilija ¦ művész
+naissance inconnue ¦ syntymä tuntematon ¦ ismeretlen születés
+décès inconnu ¦ kuolema tuntematon ¦ ismeretlen halál
+parents inconnus ¦ vanhemmat tuntemattomat ¦ ismeretlen szülők
+père inconnu ¦ isä tuntematon ¦ ismeretlen apa
+mère inconnue ¦ äiti tuntematon ¦ ismeretlen anya
+mariage inconnu ¦ avioliitto tuntematon ¦ ismeretlen házasság
+en {dept} ¦ departementissa {dept} ¦ itt: {dept}
+en {country} ¦ maassa {country} ¦ itt: {country}
+de {place} ¦ paikasta {place} ¦ innen: {place}
+vers ¦ noin ¦ kb.
+ou ¦ tai ¦ vagy
+Née vers {year} ¦ Syntynyt noin {year} ¦ Született {year} körül
+Né vers {year} ¦ Syntynyt noin {year} ¦ Született {year} körül
+Née en {year} ¦ Syntynyt {year} ¦ Született: {year}
+Né en {year} ¦ Syntynyt {year} ¦ Született: {year}
+Écosse ¦ Skotlanti ¦ Skócia
+{born} : elle a fait la guerre de 14 ¦ {born}: hän osallistui ensimmäiseen maailmansotaan ¦ {born}: részt vett az első világháborúban
+{born} : il a fait la guerre de 14 ¦ {born}: hän osallistui ensimmäiseen maailmansotaan ¦ {born}: részt vett az első világháborúban
+{born} : elle a sans doute fait la guerre de 14 ¦ {born}: hän osallistui luultavasti ensimmäiseen maailmansotaan ¦ {born}: valószínűleg részt vett az első világháborúban
+{born} : il a sans doute fait la guerre de 14 ¦ {born}: hän osallistui luultavasti ensimmäiseen maailmansotaan ¦ {born}: valószínűleg részt vett az első világháborúban
+{born} : elle avait l’âge d’être mobilisé en 1939-1945 ¦ {born}: hän oli kutsuntaiässä 1939-1945 ¦ {born}: 1939-1945-ben behívható korban volt
+{born} : il avait l’âge d’être mobilisé en 1939-1945 ¦ {born}: hän oli kutsuntaiässä 1939-1945 ¦ {born}: 1939-1945-ben behívható korban volt
+Les arbres et relevés des généalogistes français : quelqu’un a peut-être déjà trouvé ses parents ¦ Ranskalaisten sukututkijoiden sukupuut ja luettelot: joku on ehkä jo löytänyt hänen vanhempansa ¦ Francia családfakutatók családfái és kivonatai: talán valaki már megtalálta a szüleit
+Des millions d’arbres et de relevés : quelqu’un a peut-être déjà cherché ¦ Miljoonia sukupuita ja luetteloita: joku on ehkä jo etsinyt ¦ Családfák és kivonatok milliói: talán valaki már keresett
+Actes indexés du monde entier, gratuits ({list}) ¦ Indeksoituja asiakirjoja kaikkialta maailmasta, ilmaiseksi ({list}) ¦ Indexelt bejegyzések a világ minden tájáról, ingyen ({list})
+Actes indexés gratuits (un compte gratuit est demandé) ¦ Ilmaisia indeksoituja asiakirjoja (ilmainen tili tarvitaan) ¦ Ingyenes indexelt bejegyzések (ingyenes fiók kell hozzá)
+Les registres filmés {of} (catalogue FamilySearch) ¦ Kuvatut rekisterit {of} (FamilySearch-luettelo) ¦ A lefilmezett anyakönyvek {of} (FamilySearch-katalógus)
+Les registres filmés de ses communes (catalogue FamilySearch) ¦ Hänen kuntiensa kuvatut rekisterit (FamilySearch-luettelo) ¦ A települései lefilmezett anyakönyvei (FamilySearch-katalógus)
+Décès en {year} : le fichier des décès de l’INSEE (depuis 1970) ¦ Kuollut {year}: INSEE:n kuolleiden rekisteri (vuodesta 1970) ¦ Elhunyt: {year}: az INSEE halálozási nyilvántartása (1970 óta)
+{born} : si elle est morte après 1970, son décès est dans le fichier de l’INSEE ¦ {born}: jos hän kuoli vuoden 1970 jälkeen, hänen kuolemansa on INSEE:n rekisterissä ¦ {born}: ha 1970 után halt meg, a halála szerepel az INSEE nyilvántartásában
+{born} : s’il est mort après 1970, son décès est dans le fichier de l’INSEE ¦ {born}: jos hän kuoli vuoden 1970 jälkeen, hänen kuolemansa on INSEE:n rekisterissä ¦ {born}: ha 1970 után halt meg, a halála szerepel az INSEE nyilvántartásában
+Tombes photographiées par des bénévoles ¦ Vapaaehtoisten valokuvaamat haudat ¦ Önkéntesek által lefényképezett sírok
+Le journal de marche de son régiment : où il était, jour après jour ¦ Hänen rykmenttinsä sotapäiväkirja: missä hän oli päivä päivältä ¦ Az ezrede hadinaplója: hol volt nap mint nap
+{born} : sa fiche matricule (classe {year}) dit sa taille, son métier, ses adresses et ses parents ¦ {born}: hänen kantakirjansa (ikäluokka {year}) kertoo pituuden, ammatin, osoitteet ja vanhemmat ¦ {born}: a katonai törzslapja ({year}. évi korosztály) megadja a magasságát, foglalkozását, lakcímeit és szüleit
+Les dossiers de la Légion d’honneur (morts avant 1977) ¦ Kunnialegioonan asiakirjat (ennen vuotta 1977 kuolleet) ¦ A Becsületrend aktái (1977 előtt elhunytak)
+{born} : un soldat de Napoléon a peut-être reçu la médaille de Sainte-Hélène ¦ {born}: Napoleonin sotilas on ehkä saanut Saint Helenan mitalin ¦ {born}: Napóleon katonájaként talán megkapta a Szent Ilona-érmet
+{born} : elle avait l’âge de faire la guerre de 1870 ¦ {born}: hän oli sopivassa iässä vuoden 1870 sotaan ¦ {born}: az 1870-es háború idején hadköteles korban volt
+{born} : il avait l’âge de faire la guerre de 1870 ¦ {born}: hän oli sopivassa iässä vuoden 1870 sotaan ¦ {born}: az 1870-es háború idején hadköteles korban volt
+Un marin : l’inscription maritime suit chaque embarquement ¦ Merimies: merimiesrekisteri seuraa jokaista pestautumista ¦ Tengerész: a tengerészeti nyilvántartás minden behajózást követ
+Un marin : l’inscription maritime de son port (quartier maritime) ¦ Merimies: hänen satamansa merimiesrekisteri (merenkulkupiiri) ¦ Tengerész: a kikötője tengerészeti nyilvántartása (tengerészeti körzet)
+Partie en Amérique : les listes de passagers d’Ellis Island (1892-1924) ¦ Lähti Amerikkaan: Ellis Islandin matkustajaluettelot (1892-1924) ¦ Amerikába ment: az Ellis Island-i utaslisták (1892-1924)
+Parti en Amérique : les listes de passagers d’Ellis Island (1892-1924) ¦ Lähti Amerikkaan: Ellis Islandin matkustajaluettelot (1892-1924) ¦ Amerikába ment: az Ellis Island-i utaslisták (1892-1924)
+Elle a vécu aux États-Unis : les arrivées à Ellis Island (1892-1924) ¦ Hän asui Yhdysvalloissa: saapumiset Ellis Islandille (1892-1924) ¦ Az Egyesült Államokban élt: érkezések Ellis Islandre (1892-1924)
+Il a vécu aux États-Unis : les arrivées à Ellis Island (1892-1924) ¦ Hän asui Yhdysvalloissa: saapumiset Ellis Islandille (1892-1924) ¦ Az Egyesült Államokban élt: érkezések Ellis Islandre (1892-1924)
+Arrivées à New York avant Ellis Island (1820-1892) ¦ Saapumiset New Yorkiin ennen Ellis Islandia (1820-1892) ¦ Érkezések New Yorkba Ellis Island előtt (1820-1892)
+Venu d’ailleurs : les décrets de naturalisation (1883-1930) ¦ Tuli muualta: kansalaistamispäätökset (1883-1930) ¦ Máshonnan jött: a honosítási rendeletek (1883-1930)
+Il a vécu à Paris : les actes de ses notaires (contrats de mariage, inventaires, testaments) ¦ Hän asui Pariisissa: hänen notaariensa asiakirjat (avioehdot, perukirjat, testamentit) ¦ Párizsban élt: a közjegyzői okiratai (házassági szerződések, hagyatéki leltárak, végrendeletek)
+Un héritage, un testament : le Minutier central des notaires de Paris ¦ Perintö, testamentti: Pariisin notaarien keskusarkisto (Minutier central) ¦ Örökség, végrendelet: a párizsi közjegyzők központi irattára (Minutier central)
+Sa fiche dit une déportation : les noms des victimes de la Shoah ¦ Hänen korttinsa mainitsee karkotuksen: holokaustin uhrien nimet ¦ Az adatlapja deportálást említ: a holokauszt áldozatainak nevei
+Les archives des persécutions nazies (déportés, travailleurs forcés, personnes déplacées) ¦ Natsivainojen arkistot (karkotetut, pakkotyöläiset, siirtoväki) ¦ A náci üldözés levéltárai (deportáltak, kényszermunkások, kitelepítettek)
+Le Mémorial de la Shoah : les noms des déportés de France ¦ Mémorial de la Shoah: Ranskasta karkotettujen nimet ¦ Mémorial de la Shoah: a Franciaországból deportáltak nevei
+Le livre-mémorial des déportés de France ¦ Ranskasta karkotettujen muistokirja ¦ A Franciaországból deportáltak emlékkönyve
+Le Maitron des fusillés et exécutés (1940-1944) ¦ Maitron: teloitetut ja ammutut (1940-1944) ¦ Maitron: a kivégzettek és agyonlőttek (1940-1944)
+Elle a vécu {where} : l’état civil des anciennes colonies (ANOM) ¦ Hän asui {where}: entisten siirtomaiden väestörekisteri (ANOM) ¦ Itt élt: {where}: a volt gyarmatok anyakönyvei (ANOM)
+Il a vécu {where} : l’état civil des anciennes colonies (ANOM) ¦ Hän asui {where}: entisten siirtomaiden väestörekisteri (ANOM) ¦ Itt élt: {where}: a volt gyarmatok anyakönyvei (ANOM)
+Une famille protestante : les registres des réfugiés huguenots ¦ Protestanttinen perhe: hugenottipakolaisten rekisterit ¦ Protestáns család: a hugenotta menekültek nyilvántartásai
+Il a vécu à Paris : l’état civil reconstitué (avant 1860) ¦ Hän asui Pariisissa: uudelleen koottu väestörekisteri (ennen vuotta 1860) ¦ Párizsban élt: a helyreállított anyakönyvek (1860 előtt)
+Elle a vécu en France entre 1836 et 1936 : les recensements nominatifs (SocFace) ¦ Hän asui Ranskassa vuosina 1836–1936: nimelliset väestönlaskennat (SocFace) ¦ Franciaországban élt 1836 és 1936 között: a névszerinti népszámlálások (SocFace)
+Il a vécu en France entre 1836 et 1936 : les recensements nominatifs (SocFace) ¦ Hän asui Ranskassa vuosina 1836–1936: nimelliset väestönlaskennat (SocFace) ¦ Franciaországban élt 1836 és 1936 között: a névszerinti népszámlálások (SocFace)
+Elle a vécu en Italie : l’état civil italien numérisé (Antenati) ¦ Hän asui Italiassa: digitoitu Italian väestörekisteri (Antenati) ¦ Olaszországban élt: a digitalizált olasz anyakönyvek (Antenati)
+Il a vécu en Italie : l’état civil italien numérisé (Antenati) ¦ Hän asui Italiassa: digitoitu Italian väestörekisteri (Antenati) ¦ Olaszországban élt: a digitalizált olasz anyakönyvek (Antenati)
+Les bénévoles du cercle généalogique {of} relèvent les actes de leurs communes ¦ Sukututkimusyhdistyksen {of} vapaaehtoiset indeksoivat kuntiensa asiakirjoja ¦ A(z) {of} családfakutató egyesület önkéntesei feldolgozzák településeik bejegyzéseit
+Les bénévoles du cercle généalogique du département relèvent les actes de leurs communes ¦ Departementin sukututkimusyhdistyksen vapaaehtoiset indeksoivat kuntiensa asiakirjoja ¦ A megyei családfakutató egyesület önkéntesei feldolgozzák településeik bejegyzéseit
+Le mode d’emploi des archives du pays ou de la région (FamilySearch Wiki) ¦ Maan tai alueen arkistojen käyttöopas (FamilySearch Wiki) ¦ Az ország vagy a régió levéltárainak útmutatója (FamilySearch Wiki)
+Où vivaient les {name} entre 1891 et 1990 : pour trouver d’où vient la famille ¦ Missä {name}-nimiset asuivat vuosina 1891–1990: suvun alkuperän löytämiseksi ¦ Hol éltek a(z) {name} nevűek 1891 és 1990 között: hogy megtudd, honnan származik a család
+Où vivaient les gens de ce nom entre 1891 et 1990 : pour trouver d’où vient la famille ¦ Missä tämännimiset ihmiset asuivat vuosina 1891–1990: suvun alkuperän löytämiseksi ¦ Hol éltek az ilyen nevű emberek 1891 és 1990 között: hogy megtudd, honnan származik a család
+Elle a vécu {where} ¦ Hän asui {where} ¦ Itt élt: {where}
+Il a vécu {where} ¦ Hän asui {where} ¦ Itt élt: {where}
+pas de lieu {where} ¦ ei paikkaa {where} ¦ nincs hely itt: {where}
+pas de lieu dans ces pays ¦ ei paikkaa näissä maissa ¦ nincs hely ezekben az országokban
+sa vie ({life}) n’est pas dans les années du site ({from}–{to}) ¦ hänen elämänsä ({life}) ei osu sivuston vuosiin ({from}–{to}) ¦ az élete ({life}) kívül esik a weboldal évein ({from}–{to})
+Ses années ({life}) sont dans celles du site ({from}–{to}) ¦ Hänen vuotensa ({life}) osuvat sivuston vuosiin ({from}–{to}) ¦ Az évei ({life}) beleesnek a weboldal éveibe ({from}–{to})
+née en {year}, hors des années {from}–{to} ¦ syntynyt {year}, vuosien {from}–{to} ulkopuolella ¦ született: {year}, a(z) {from}–{to} éveken kívül
+né en {year}, hors des années {from}–{to} ¦ syntynyt {year}, vuosien {from}–{to} ulkopuolella ¦ született: {year}, a(z) {from}–{to} éveken kívül
+pour les hommes ¦ miehille ¦ férfiaknak
+pour les femmes ¦ naisille ¦ nőknek
+Sa fiche dit : {what} ¦ Hänen kortillaan lukee: {what} ¦ Az adatlapján ez áll: {what}
+seulement {list} ¦ vain {list} ¦ csak {list}
+Sa fiche a une émigration ¦ Hänen kortillaan on maastamuutto ¦ Az adatlapján szerepel kivándorlás
+Sa fiche a une immigration ¦ Hänen kortillaan on maahanmuutto ¦ Az adatlapján szerepel bevándorlás
+Sa fiche a une naturalisation ¦ Hänen kortillaan on kansalaistaminen ¦ Az adatlapján szerepel honosítás
+Sa fiche a un testament ¦ Hänen kortillaan on testamentti ¦ Az adatlapján szerepel végrendelet
+Sa fiche a une succession ¦ Hänen kortillaan on perinnönjako ¦ Az adatlapján szerepel hagyaték
+Sa fiche a un acte notarié ¦ Hänen kortillaan on notaarin asiakirja ¦ Az adatlapján szerepel közjegyzői okirat
+Sa fiche a un contrat de mariage ¦ Hänen kortillaan on avioehto ¦ Az adatlapján szerepel házassági szerződés
+Sa fiche a l’événement {tag} ¦ Hänen kortillaan on tapahtuma {tag} ¦ Az adatlapján szerepel ez az esemény: {tag}
+née hors de France ({country}) ¦ syntynyt Ranskan ulkopuolella ({country}) ¦ Franciaországon kívül született ({country})
+né hors de France ({country}) ¦ syntynyt Ranskan ulkopuolella ({country}) ¦ Franciaországon kívül született ({country})
+pas de lieu qui convient ¦ ei sopivaa paikkaa ¦ nincs megfelelő hely
+Une bibliothèque de sa région ¦ Kirjasto hänen alueellaan ¦ Könyvtár a régiójában
+pas dans sa région ¦ ei hänen alueellaan ¦ nem a régiójában
+(et {list}) ¦ (ja {list}) ¦ (és {list})
+Utile surtout pour {list} ¦ Hyödyllinen etenkin: {list} ¦ Főleg ehhez hasznos: {list}
+Utile surtout pour un autre cas ¦ Hyödyllinen etenkin toisessa tapauksessa ¦ Főleg más esetben hasznos
+Un site général, à essayer ¦ Yleinen sivusto, kokeilemisen arvoinen ¦ Általános weboldal, érdemes kipróbálni
+peu utile pour cette fiche ¦ vähän hyötyä tälle kortille ¦ ehhez az adatlaphoz kevéssé hasznos
+Dépouillement ¦ Indeksointi ¦ Feldolgozás
+Visite faite ¦ Tehty käynti ¦ Megtett látogatás
+Visites faites ¦ Tehdyt käynnit ¦ Megtett látogatások
+— pas encore noté — ¦ — ei vielä merkitty — ¦ — még nincs feljegyezve —
+Déjà dans ton suivi : ¦ Jo seurannassasi: ¦ Már a követésedben:
+(relevé) ¦ (merkitty) ¦ (feljegyezve)
+lignes exportées en CSV. ¦ riviä viety CSV-muodossa. ¦ sor exportálva CSV-be.
+Tout ce que tu as déjà cherché, du plus récent au plus ancien : pour ne pas chercher deux fois au même endroit. ¦ Kaikki, mitä olet jo hakenut, uusimmasta vanhimpaan: ettet hae kahdesti samasta paikasta. ¦ Minden, amit már kerestél, a legújabbtól a legrégebbiig: hogy ne keress kétszer ugyanott.
+Un compte rendu des recherches montrées (avec les filtres), dans le traitement de texte ¦ Raportti näytetyistä hauista (suodattimineen) tekstinkäsittelyssä ¦ Beszámoló a megjelenített keresésekről (a szűrőkkel) a szövegszerkesztőben
+Chargement du journal… ¦ Ladataan päiväkirjaa… ¦ Napló betöltése…
+Résultat pas noté ¦ Tulosta ei merkitty ¦ Eredmény nincs feljegyezve
+Pas encore noté ({n}) ¦ Ei vielä merkitty ({n}) ¦ Még nincs feljegyezve ({n})
+Tous les services ¦ Kaikki arkistot ¦ Minden levéltár
+Toutes les communes ¦ Kaikki kunnat ¦ Minden település
+Chercher… (cote, commune, service, nom) ¦ Hae… (arkistotunnus, kunta, arkisto, nimi) ¦ Keresés… (jelzet, település, levéltár, név)
+Note tes dépouillements, tes visites d’archives (« ✓ Fait le … »), tes pistes d’enquête et tes battues : tout s’affichera ici, du plus récent au plus ancien. ¦ Merkitse indeksointisi, arkistokäyntisi (”✓ Tehty …”), selvitysten johtolankasi ja laajat hakusi: kaikki näkyy täällä uusimmasta vanhimpaan. ¦ Jegyezd fel a feldolgozásaidat, levéltári látogatásaidat („✓ Elvégezve: …”), nyomozási nyomaidat és átfésüléseidet: minden itt jelenik meg, a legújabbtól a legrégebbiig.
+Enlève un filtre, ou cherche autrement (une cote, une commune, un nom). ¦ Poista jokin suodatin tai hae toisin (arkistotunnus, kunta, nimi). ¦ Vegyél ki egy szűrőt, vagy keress másképp (jelzet, település, név).
+Tout le journal des recherches, filtré sur cette personne ¦ Koko tutkimuspäiväkirja tähän henkilöön suodatettuna ¦ A teljes Kutatási napló erre a személyre szűrve
+Rien de cherché pour cette personne pour l’instant. ¦ Tälle henkilölle ei ole vielä haettu mitään. ¦ Ennél a személynél még nem kerestél semmit.
+🔍 Déjà cherché (journal des recherches) ¦ 🔍 Jo haettu (tutkimuspäiväkirja) ¦ 🔍 Már keresve (Kutatási napló)
+relevée dans ce registre ¦ merkitty tähän rekisteriin ¦ feljegyezve ebben az anyakönyvben
+cherchée ¦ haettu ¦ keresve
+Voir les {n} recherches dans le journal → ¦ Näytä {n} hakua päiväkirjassa → ¦ A(z) {n} keresés a naplóban →
+=adresse à toi ¦ oma osoite|omaa osoitetta ¦ saját cím|saját cím
+=affiché ¦ näytetty|näytettyä ¦ megjelenítve|megjelenítve
+=annotation ¦ merkintä|merkintää ¦ megjegyzés|megjegyzés
+=autre chose ¦ muu asia|muuta asiaa ¦ egyéb dolog|egyéb dolog
+=autre disponible ¦ lisää saatavilla|lisää saatavilla ¦ további elérhető|további elérhető
+=battue ¦ laaja haku|laajaa hakua ¦ átfésülés|átfésülés
+=chargée ¦ ladattu|ladattua ¦ betöltve|betöltve
+=chose reportée ¦ siirretty asia|siirrettyä asiaa ¦ elhalasztott teendő|elhalasztott teendő
+=citation ¦ lainaus|lainausta ¦ idézet|idézet
+=commune ajoutée ¦ kunta lisätty|kuntaa lisätty ¦ település hozzáadva|település hozzáadva
+=commune retirée ¦ kunta irrotettu|kuntaa irrotettu ¦ település eltávolítva|település eltávolítva
+=commune voisine incluse ¦ naapurikunta mukana|naapurikuntaa mukana ¦ szomszéd település beleszámítva|szomszéd település beleszámítva
+=cote ¦ arkistotunnus|arkistotunnusta ¦ jelzet|jelzet
+=cote consultée ¦ arkistotunnus tutkittu|arkistotunnusta tutkittu ¦ átnézett jelzet|átnézett jelzet
+=cote ou registre déjà suivis dans cette sélection. ¦ arkistotunnus tai rekisteri on jo seurannassa tässä valinnassa.|arkistotunnusta tai rekisteriä on jo seurannassa tässä valinnassa. ¦ jelzet vagy anyakönyv már követve ebben a kiválasztásban.|jelzet vagy anyakönyv már követve ebben a kiválasztásban.
+=dossier ¦ kansio|kansiota ¦ mappa|mappa
+=décès importé ¦ kuolema tuotu|kuolemaa tuotu ¦ halálozás importálva|halálozás importálva
+=département ¦ departementti|departementtia ¦ megye|megye
+=dépouillement importé ¦ indeksointi tuotu|indeksointia tuotu ¦ feldolgozás importálva|feldolgozás importálva
+=entrée ¦ merkintä|merkintää ¦ tétel|tétel
+=entrée affichée ¦ merkintä näytetty|merkintää näytetty ¦ megjelenített tétel|megjelenített tétel
+=feuille ¦ taulukko|taulukkoa ¦ munkalap|munkalap
+=fiche retirée ¦ kortti irrotettu|korttia irrotettu ¦ adatlap eltávolítva|adatlap eltávolítva
+=fichier importé ¦ tiedosto tuotu|tiedostoa tuotu ¦ fájl importálva|fájl importálva
+=fichier joint ¦ liitetiedosto|liitetiedostoa ¦ csatolt fájl|csatolt fájl
+=lien ¦ linkki|linkkiä ¦ link|link
+=lien affiché ¦ linkki näytetty|linkkiä näytetty ¦ megjelenített link|megjelenített link
+=lien de voisinage ¦ naapurilinkki|naapurilinkkiä ¦ szomszédsági kapcsolat|szomszédsági kapcsolat
+=lieu trouvé ¦ paikka löytyi|paikkaa löytyi ¦ talált hely|talált hely
+=ligne affichée ¦ rivi näytetty|riviä näytetty ¦ megjelenített sor|megjelenített sor
+=ligne chargée ¦ rivi ladattu|riviä ladattu ¦ betöltött sor|betöltött sor
+=ligne exportée en CSV. ¦ rivi viety CSV-muodossa.|riviä viety CSV-muodossa. ¦ sor exportálva CSV-be.|sor exportálva CSV-be.
+=ligne ignorée ¦ rivi ohitettu|riviä ohitettu ¦ kihagyott sor|kihagyott sor
+=ligne importée ¦ rivi tuotu|riviä tuotu ¦ importált sor|importált sor
+=masqué ¦ piilotettu|piilotettua ¦ elrejtve|elrejtve
+=masquée ¦ piilotettu|piilotettua ¦ elrejtve|elrejtve
+=média ajouté ¦ media lisätty|mediaa lisätty ¦ média hozzáadva|média hozzáadva
+=média trouvé ¦ media löytyi|mediaa löytyi ¦ talált média|talált média
+=occurrence ¦ esiintymä|esiintymää ¦ előfordulás|előfordulás
+=page / vue ¦ sivu / kuva|sivua / kuvaa ¦ oldal / kép|oldal / kép
+=page détaillée ¦ yksityiskohtainen sivu|yksityiskohtaista sivua ¦ részletes oldal|részletes oldal
+=pays ¦ maa|maata ¦ ország|ország
+=personne importée ¦ henkilö tuotu|henkilöä tuotu ¦ importált személy|importált személy
+=personne relevée ¦ henkilö merkitty|henkilöä merkitty ¦ feljegyzett személy|feljegyzett személy
+=personne repérée, classée par nombre d’occurrences. ¦ henkilö löytyi, järjestetty esiintymien määrän mukaan.|henkilöä löytyi, järjestetty esiintymien määrän mukaan. ¦ talált személy, előfordulások száma szerint rendezve.|talált személy, előfordulások száma szerint rendezve.
+=piste ¦ johtolanka|johtolankaa ¦ nyom|nyom
+=piste d’enquête ¦ selvityksen johtolanka|selvityksen johtolankaa ¦ nyomozási nyom|nyomozási nyom
+=plan à moi ¦ oma jäsennys|omaa jäsennystä ¦ saját vázlat|saját vázlat
+=recherche ¦ haku|hakua ¦ keresés|keresés
+=recherche faite ¦ tehty haku|tehtyä hakua ¦ elvégzett keresés|elvégzett keresés
+=référence ¦ viite|viitettä ¦ hivatkozás|hivatkozás
+=résolu ¦ ratkaistu|ratkaistua ¦ megoldva|megoldva
+=résultat ¦ tulos|tulosta ¦ találat|találat
+=service ¦ arkisto|arkistoa ¦ levéltár|levéltár
+=service d’archives ¦ arkisto|arkistoa ¦ levéltár|levéltár
+=site déjà cherché ¦ jo haettu sivusto|jo haettua sivustoa ¦ már keresett weboldal|már keresett weboldal
+=site hors de son époque ¦ hänen aikakautensa ulkopuolinen sivusto|hänen aikakautensa ulkopuolista sivustoa ¦ a korán kívüli weboldal|a korán kívüli weboldal
+=site payant caché ¦ maksullinen sivusto piilotettu|maksullista sivustoa piilotettu ¦ elrejtett fizetős weboldal|elrejtett fizetős weboldal
+=site payant est caché ¦ maksullinen sivusto on piilotettu|maksullista sivustoa on piilotettu ¦ fizetős weboldal el van rejtve|fizetős weboldal el van rejtve
+=site trouvé ¦ sivusto löytyi|sivustoa löytyi ¦ talált weboldal|talált weboldal
+=sorte d’élément ajoutée aux réglages de l’Atelier. ¦ kohdetyyppi lisätty Työpajan asetuksiin.|kohdetyyppiä lisätty Työpajan asetuksiin. ¦ elemfajta hozzáadva a Műhely beállításaihoz.|elemfajta hozzáadva a Műhely beállításaihoz.
+=sorte à moi ¦ oma tyyppi|omaa tyyppiä ¦ saját fajta|saját fajta
+=sous-dossier ¦ alikansio|alikansiota ¦ almappa|almappa
+=suivi ¦ seuranta|seurantaa ¦ követés|követés
+=trouvé ¦ löydetty|löydettyä ¦ megtalálva|megtalálva
+=trouvée ¦ löydetty|löydettyä ¦ megtalálva|megtalálva
+=tâche à faire ¦ tehtävä|tehtävää ¦ elvégzendő feladat|elvégzendő feladat
+=visite ¦ käynti|käyntiä ¦ látogatás|látogatás
+=vue à moi ¦ oma näkymä|omaa näkymää ¦ saját nézet|saját nézet
+=élément choisi ¦ kohde valittu|kohdetta valittu ¦ kiválasztott elem|kiválasztott elem
+=élément à toi gardé ¦ oma kohde säilytetty|omaa kohdetta säilytetty ¦ megtartott saját elem|megtartott saját elem
+Monte, descends, change l’émoji ou le nom, masque ce dont tu ne te sers pas (la Corbeille reste toujours). Une <b>vue à toi</b> regroupe les éléments selon tes critères (ex. « 📕 À lire » : les références à lire ; « 🖼 Gravures » : les images et références « gravure »). ¦ Siirrä ylös, siirrä alas, vaihda emoji tai nimi, piilota se, mitä et käytä (Roskakori jää aina). <b>Oma näkymä</b> ryhmittelee kohteet valitsemiesi ehtojen mukaan (esim. ”📕 Luettavaa”: luettavat viitteet; ”🖼 Kaiverrukset”: kuvat ja viitteet, joissa on ”kaiverrus”). ¦ Mozgasd fel, le, módosítsd az emojit vagy a nevet, rejtsd el, amit nem használsz (a Kuka mindig megmarad). A <b>saját nézet</b> a te feltételeid szerint csoportosítja az elemeket (pl. „📕 Elolvasandó”: az elolvasandó hivatkozások; „🖼 Metszetek”: a „metszet” jelölésű képek és hivatkozások).
+L’ordre du menu « ＋ Ajouter » et de « Toutes les sortes ». Une sorte masquée ne se propose plus, mais ce qui existe déjà reste visible. <b>Ta propre sorte</b> a les champs que tu veux (ex. « 🎞 Plaque de lanterne » : sujet, fabricant, dimensions, état, lieu de conservation…). ¦ Valikon ”＋ Lisää” ja kohdan ”Kaikki tyypit” järjestys. Piilotettua tyyppiä ei enää tarjota, mutta jo olemassa oleva pysyy näkyvissä. <b>Omassa tyypissäsi</b> on haluamasi kentät (esim. ”🎞 Taikalyhdyn lasikuva”: aihe, valmistaja, mitat, kunto, säilytyspaikka…). ¦ A „＋ Hozzáadás” menü és a „Minden fajta” sorrendje. Az elrejtett fajtát nem kínálja fel többé, de ami már létezik, látható marad. A <b>saját fajtádnak</b> olyan mezői vannak, amilyeneket szeretnél (pl. „🎞 Laterna magica üveglemez”: téma, készítő, méretek, állapot, őrzési hely…).
+<b>Une sorte d’élément</b> s’ajoute dans un projet avec « ＋ Ajouter », comme une référence ou une note, avec <b>tes champs</b> : texte court ou long, lien internet, date, nombre, liste de choix, case à cocher, personne de ta base, lieu sur la carte. Elle apparaît aussi dans « Toutes les sortes ». ¦ <b>Kohdetyyppi</b> lisätään projektiin painikkeella ”＋ Lisää” kuten viite tai muistiinpano, ja siinä on <b>omat kenttäsi</b>: lyhyt tai pitkä teksti, verkkolinkki, päivämäärä, luku, valintalista, valintaruutu, henkilö tietokannastasi, paikka kartalla. Se näkyy myös kohdassa ”Kaikki tyypit”. ¦ Az <b>elemfajtát</b> a „＋ Hozzáadás” gombbal adhatod egy projekthez, mint egy hivatkozást vagy jegyzetet, <b>a saját mezőiddel</b>: rövid vagy hosszú szöveg, webes link, dátum, szám, választólista, jelölőnégyzet, személy az adatbázisodból, hely a térképen. A „Minden fajta” között is megjelenik.
+Clique sur un critère pour l’ajouter, puis règle-le. Range-les avec ↑ ↓ ; « pas » garde tout <i>sauf</i> ce critère. Sans critère : tout le projet. ¦ Napsauta ehtoa lisätäksesi sen ja säädä se sitten. Järjestä ne ↑ ↓; ”ei” pitää kaiken <i>paitsi</i> tämän ehdon. Ilman ehtoja: koko projekti. ¦ Kattints egy feltételre a hozzáadásához, majd állítsd be. Rendezd őket a ↑ ↓ gombokkal; a „nem” mindent megtart, <i>kivéve</i> ezt a feltételt. Feltétel nélkül: az egész projekt.
+L’élément reste <b>vivant</b> : il montre toujours ce qu’il y a dans le logiciel, et « ↗ Ouvrir » y mène. ¦ Kohde pysyy <b>elävänä</b>: se näyttää aina sen, mitä sovelluksessa on, ja ”↗ Avaa” vie sinne. ¦ Az elem <b>élő</b> marad: mindig azt mutatja, ami az appban van, és a „↗ Megnyitás” odavisz.
+Tout logiciel de bibliographie : <b>BibTeX</b> (.bib) ou <b>RIS</b> (.ris). ¦ Mikä tahansa lähdeluetteloohjelma: <b>BibTeX</b> (.bib) tai <b>RIS</b> (.ris). ¦ Bármely bibliográfiai program: <b>BibTeX</b> (.bib) vagy <b>RIS</b> (.ris).
+Plan de « {name} » ¦ Jäsennys: ”{name}” ¦ Vázlat: „{name}”
+Tu veux plutôt <b>une nouvelle sorte d’élément</b>, avec tes champs à remplir (texte libre, lien internet, date, personne, lieu…) ? ¦ Haluatko mieluummin <b>uuden kohdetyypin</b>, jossa on omat täytettävät kenttäsi (vapaa teksti, verkkolinkki, päivämäärä, henkilö, paikka…)? ¦ Inkább <b>új elemfajtát</b> szeretnél, saját kitöltendő mezőkkel (szabad szöveg, webes link, dátum, személy, hely…)?
+Créer une sorte d’élément à la place → ¦ Luo kohdetyyppi sen sijaan → ¦ Inkább elemfajta létrehozása →
+<b>Une vue est un filtre</b> : une entrée du menu de gauche qui montre les éléments du projet répondant à tes critères (ex. « 📕 À lire »). Elle n’a pas de champs à remplir. ¦ <b>Näkymä on suodatin</b>: vasemman valikon kohta, joka näyttää ehtojasi vastaavat projektin kohteet (esim. ”📕 Luettavaa”). Siinä ei ole täytettäviä kenttiä. ¦ <b>A nézet egy szűrő</b>: a bal oldali menü egy eleme, amely a feltételeidnek megfelelő projektelemeket mutatja (pl. „📕 Elolvasandó”). Nincsenek kitöltendő mezői.
+personnes repérées, classées par nombre d’occurrences. ¦ löydettyä henkilöä, järjestetty esiintymien määrän mukaan. ¦ talált személy, előfordulások száma szerint rendezve.
+événements ¦ tapahtumaa ¦ esemény
+références ¦ viitettä ¦ hivatkozás
+Archives départementales — ¦ Departementin arkisto — ¦ Megyei levéltár —
+Ce qu’il reste à faire, avec une date. ¦ Mitä on vielä tehtävä, päivämäärän kanssa. ¦ Ami még hátravan, dátummal.
+Prépare un formulaire standardisé à joindre au courrier, puis imprime-le quand il est prêt. ¦ Valmistele kirjeeseen liitettävä vakiolomake ja tulosta se, kun se on valmis. ¦ Készíts egy szabványos űrlapot a levél mellé, majd nyomtasd ki, ha kész.
+Google Photos (archive Takeout), Apple Photos ou tout dossier de photos : date, lieu, description, mots-clés et personnes nommées repris (lieux et personnes à confirmer) ¦ Google Kuvat (Takeout-arkisto), Apple Kuvat tai mikä tahansa valokuvakansio: päivämäärä, paikka, kuvaus, avainsanat ja nimetyt henkilöt tuodaan (paikat ja henkilöt vahvistettava) ¦ Google Fotók (Takeout-archívum), Apple Fotók vagy bármely fényképmappa: dátum, hely, leírás, kulcsszavak és megnevezett személyek átvéve (a helyeket és személyeket meg kell erősíteni)
+Retrouver une photo dans la base à partir d’une autre (de la base ou de ton ordinateur), même recadrée ou zoomée ¦ Löydä tietokannasta valokuva toisen kuvan perusteella (tietokannasta tai tietokoneeltasi), vaikka se olisi rajattu tai zoomattu ¦ Fénykép megkeresése az adatbázisban egy másik alapján (az adatbázisból vagy a számítógépedről), akkor is, ha körbe van vágva vagy nagyítva
+Deux portraits côte à côte, en fondu ou en rideau, yeux alignés : chercher une ressemblance ¦ Kaksi muotokuvaa rinnakkain, häivytettynä tai verholla, silmät kohdakkain: etsi yhdennäköisyyttä ¦ Két portré egymás mellett, áttűnéssel vagy függönnyel, a szemek egy vonalban: keress hasonlóságot
+⤒ Importer des photos ¦ ⤒ Tuo valokuvia ¦ ⤒ Fényképek importálása
+⤒ Importer des coordonnées (KML, GeoJSON) ¦ ⤒ Tuo koordinaatteja (KML, GeoJSON) ¦ ⤒ Koordináták importálása (KML, GeoJSON)
+Afficher tous les éléments ¦ Näytä kaikki kohteet ¦ Minden elem megjelenítése
+Masquer tous les éléments ¦ Piilota kaikki kohteet ¦ Minden elem elrejtése
+Document à consulter ¦ Tutkittava asiakirja ¦ Átnézendő dokumentum
+Cote à préciser ¦ Arkistotunnus täsmennettävä ¦ A jelzetet meg kell adni
+Ajoute les cotes à consulter pendant cette visite. ¦ Lisää tällä käynnillä tutkittavat arkistotunnukset. ¦ Add hozzá a látogatás során átnézendő jelzeteket.
+Centre à préciser ¦ Arkisto täsmennettävä ¦ A levéltárat meg kell adni
+Changer la date de la visite, ou la remettre « à faire » ¦ Muuta käynnin päivämäärää tai palauta se tilaan ”tehtävä” ¦ A látogatás dátumának módosítása, vagy visszaállítás „teendő” állapotba
+Prépare une feuille de mission par centre d’archives à partir des cotes déjà suivies, ou ajoute une cote libre. ¦ Valmistele tehtävälista arkistoa kohden jo seurattujen arkistotunnusten perusteella tai lisää vapaa arkistotunnus. ¦ Készíts levéltáranként egy munkalapot a már követett jelzetekből, vagy adj hozzá egy szabad jelzetet.
+Les horaires et périodes de fermeture sont à vérifier auprès du centre avant le départ, notamment pour les fermetures estivales d’août. ¦ Tarkista aukioloajat ja sulkemisajat arkistosta ennen lähtöä, etenkin elokuun kesäsulut. ¦ A nyitvatartást és a zárva tartási időszakokat indulás előtt ellenőrizd a levéltárnál, különösen az augusztusi nyári zárvatartást.
+Aucune feuille de mission pour l’instant ¦ Ei vielä tehtävälistoja ¦ Még nincs munkalap
+Crée une visite pour réunir les cotes à consulter. ¦ Luo käynti kootaksesi tutkittavat arkistotunnukset. ¦ Hozz létre egy látogatást az átnézendő jelzetek összegyűjtéséhez.
+Dépouillement créé et relié à la cote. ¦ Indeksointi luotu ja yhdistetty arkistotunnukseen. ¦ Feldolgozás létrehozva és összekapcsolva a jelzettel.
+Remettre la visite « à faire » ¦ Palauta käynti tilaan ”tehtävä” ¦ A látogatás visszaállítása „teendő” állapotba
+La visite est de nouveau « à faire ». ¦ Käynti on taas ”tehtävä”. ¦ A látogatás újra „teendő”.
+Ex. fermeture estivale à vérifier en août ¦ Esim. tarkista kesäsulku elokuussa ¦ Pl. augusztusban ellenőrizni a nyári zárvatartást
+Ajouter une cote ¦ Lisää arkistotunnus ¦ Jelzet hozzáadása
+Ajouter la cote ¦ Lisää arkistotunnus ¦ A jelzet hozzáadása
+Cotes à consulter ¦ Tutkittavat arkistotunnukset ¦ Átnézendő jelzetek
+Le lien sera ajouté à cette liste locale. ¦ Linkki lisätään tähän paikalliseen luetteloon. ¦ A link ehhez a helyi listához kerül.
+Inscription à vérifier ¦ Rekisteröityminen tarkistettava ¦ Regisztráció ellenőrizendő
+Lien direct à compléter ¦ Suora linkki täydennettävä ¦ A közvetlen linket ki kell egészíteni
+Indique au moins une référence ou un document à reproduire. ¦ Anna ainakin yksi kopioitava viite tai asiakirja. ¦ Adj meg legalább egy másolandó hivatkozást vagy dokumentumot.
+Service destinataire à compléter ¦ Vastaanottava arkisto täydennettävä ¦ A címzett levéltárat ki kell egészíteni
+Formulaire à joindre à votre demande de reproduction. ¦ Lomake liitettäväksi kopiopyyntöösi. ¦ Űrlap a másolatkérésedhez csatolva.
+Implexe : cette personne est ton ancêtre par plusieurs lignées, elle a donc plusieurs numéros Sosa. C’est normal (souvent des cousins qui se sont mariés) : ce n’est pas un doublon, il n’y a rien à fusionner. ¦ Esivanhempien kato (implex): tämä henkilö on esivanhempasi usean sukuhaaran kautta, joten hänellä on useita Sosa-numeroita. Se on normaalia (usein serkukset, jotka menivät naimisiin): se ei ole kaksoiskappale, mitään ei tarvitse yhdistää. ¦ Ősveszteség (implexus): ez a személy több ágon is a felmenőd, ezért több Sosa-száma van. Ez normális (gyakran unokatestvérek házasodtak össze): nem duplikátum, nincs mit összevonni.
+Réglage changé : « Types de recherche » ¦ Asetus muutettu: ”Hakutyypit” ¦ Beállítás módosítva: „Keresési típusok”
+🔍 Que manque-t-il ? (actes à chercher, où et dans quelle série) ¦ 🔍 Mitä puuttuu? (etsittävät asiakirjat, mistä ja missä sarjassa) ¦ 🔍 Mi hiányzik? (keresendő bejegyzések, hol és melyik sorozatban)
+🌍 Où chercher ? (les sites à consulter pour une personne) ¦ 🌍 Mistä etsiä? (henkilön kannalta tutkittavat sivustot) ¦ 🌍 Hol keressem? (egy személyhez átnézendő weboldalak)
+＋ Ajouter un dépouillement ¦ ＋ Lisää indeksointi ¦ ＋ Feldolgozás hozzáadása
+Aucune personne ne correspond à cette recherche. ¦ Kukaan ei vastaa tätä hakua. ¦ Senki sem felel meg ennek a keresésnek.
+Période, type d’acte et références à vérifier. ¦ Ajanjakso, asiakirjan tyyppi ja tarkistettavat viitteet. ¦ Időszak, bejegyzés típusa és ellenőrizendő hivatkozások.
+Ajouter le dépouillement ¦ Lisää indeksointi ¦ A feldolgozás hozzáadása
+(pour qui tu as ouvert ce registre — à part des personnes relevées dedans) ¦ (kenelle avasit tämän rekisterin — erillään siihen merkityistä henkilöistä) ¦ (akinek a kedvéért megnyitottad ezt az anyakönyvet — a benne feljegyzett személyektől külön)
+Aucune page détaillée pour l’instant ¦ Ei vielä yksityiskohtaista sivua ¦ Még nincs részletes oldal
+Médias non rattachés à une page ¦ Sivuun yhdistämättömät mediat ¦ Oldalhoz nem kapcsolt médiák
+⤒ Importer des relevés (Nimègue…) ¦ ⤒ Tuo luetteloita (Nimègue…) ¦ ⤒ Kivonatok importálása (Nimègue…)
+📜 En pages (Listes) ¦ 📜 Sivuittain (Luettelot) ¦ 📜 Oldalanként (Listák)
+Actes à commander ¦ Tilattavat asiakirjat ¦ Megrendelendő bejegyzések
+Ajouter une page / vue ¦ Lisää sivu / kuva ¦ Oldal / kép hozzáadása
+Ajouter une personne après l’enregistrement ¦ Lisää henkilö tallentamisen jälkeen ¦ Személy hozzáadása mentés után
+Ajouter un média après l’enregistrement ¦ Lisää media tallentamisen jälkeen ¦ Média hozzáadása mentés után
+Ajouter la page ¦ Lisää sivu ¦ Az oldal hozzáadása
+Actes à commander ou consulter ¦ Tilattavat tai tutkittavat asiakirjat ¦ Megrendelendő vagy átnézendő bejegyzések
+Liste de travail indépendante pour les actes à commander, consulter en salle ou faire reproduire. ¦ Erillinen työlista asiakirjoille, jotka tilataan, tutkitaan lukusalissa tai kopioidaan. ¦ Külön munkalista a megrendelendő, a kutatóteremben átnézendő vagy lemásoltatandó bejegyzésekhez.
+Aucun acte à commander ou consulter. ¦ Ei tilattavia tai tutkittavia asiakirjoja. ¦ Nincs megrendelendő vagy átnézendő bejegyzés.
+Acte ajouté à la liste. ¦ Asiakirja lisätty luetteloon. ¦ Bejegyzés hozzáadva a listához.
+Transcription ligne à ligne ¦ Litterointi rivi riviltä ¦ Átírás soronként
+Choisis une image pour relier la transcription à une zone. ¦ Valitse kuva yhdistääksesi litteroinnin alueeseen. ¦ Válassz egy képet, hogy az átírást egy területhez kapcsold.
+Ajouter la ligne ¦ Lisää rivi ¦ A sor hozzáadása
+Aucune ligne relevée pour l’instant ¦ Ei vielä merkittyjä rivejä ¦ Még nincs feljegyzett sor
+Ajouter une personne - page ¦ Lisää henkilö - sivu ¦ Személy hozzáadása - oldal
+Ajouter une personne relevée ¦ Lisää merkitty henkilö ¦ Feljegyzett személy hozzáadása
+Ajouter comme ¦ Lisää muodossa ¦ Hozzáadás mint
+Relier à une personne existante ¦ Yhdistä olemassa olevaan henkilöön ¦ Összekapcsolás egy meglévő személlyel
+Hypothèse, rapprochement, à vérifier… ¦ Hypoteesi, yhteys, tarkistettava… ¦ Feltevés, összefüggés, ellenőrizendő…
+Non rattaché à une page ¦ Ei yhdistetty sivuun ¦ Oldalhoz nem kapcsolva
+Ajouter un média ¦ Lisää media ¦ Média hozzáadása
+Ajouter le média ¦ Lisää media ¦ A média hozzáadása
+lieux trouvés ¦ paikkaa löytyi ¦ talált hely
+médias trouvés ¦ mediaa löytyi ¦ talált média
+tâches à faire ¦ tehtävää ¦ elvégzendő feladat
+vues à moi ¦ omaa näkymää ¦ saját nézet
+sortes à moi ¦ omaa tyyppiä ¦ saját fajta
+plans à moi ¦ omaa jäsennystä ¦ saját vázlat
+éléments à toi gardés ¦ omaa kohdetta säilytetty ¦ megtartott saját elem
+adresses à toi ¦ omaa osoitetta ¦ saját cím
+sites trouvés ¦ sivustoa löytyi ¦ talált weboldal
+Données à jour jusqu'en {year}. ¦ Tiedot ajan tasalla vuoteen {year} asti. ¦ Adatok {year}-ig naprakészek.
+Sélectionne un ou plusieurs fichiers du fichier des personnes décédées (CSV, TXT ou ZIP contenant un CSV/TXT). Chaque fichier vient s'ajouter à la base existante, rien n'est écrasé. Un même fichier déjà importé est détecté et une confirmation te sera demandée avant de le réimporter. ¦ Valitse yksi tai useampi tiedosto kuolleiden henkilöiden rekisteristä (CSV, TXT tai ZIP, jossa on CSV/TXT). Jokainen tiedosto lisätään olemassa olevaan tietokantaan, mitään ei korvata. Jo tuotu tiedosto tunnistetaan, ja sinulta pyydetään vahvistus ennen kuin se tuodaan uudelleen. ¦ Válassz ki egy vagy több fájlt az elhunyt személyek nyilvántartásából (CSV, TXT vagy CSV/TXT-t tartalmazó ZIP). Minden fájl hozzáadódik a meglévő adatbázishoz, semmi sem íródik felül. A már importált fájlt felismeri, és újbóli importálás előtt megerősítést kér tőled.
+Aucune personne ne correspond à ces critères. ¦ Kukaan ei vastaa näitä ehtoja. ¦ Senki sem felel meg ezeknek a feltételeknek.
+Vérifier chaque jour à l’ouverture de l’app et importer tout seul les nouveaux fichiers ¦ Tarkista joka päivä sovelluksen avautuessa ja tuo uudet tiedostot automaattisesti ¦ Naponta ellenőrzés az app megnyitásakor, és az új fájlok automatikus importálása
+Aucun import pour l’instant ¦ Ei vielä tuonteja ¦ Még nincs importálás
+Aucun événement ne correspond à cette sélection. ¦ Mikään tapahtuma ei vastaa tätä valintaa. ¦ Egy esemény sem felel meg ennek a kiválasztásnak.
+📕 à lire ¦ 📕 luettavaa ¦ 📕 elolvasandó
+{n} (PDF…) à rajouter à la main ¦ {n} (PDF…) lisättävä käsin ¦ {n} (PDF…) kézzel pótolandó
+⤒ Importer un projet (Zotero…) ¦ ⤒ Tuo projekti (Zotero…) ¦ ⤒ Projekt importálása (Zotero…)
+Qui étaient les montreurs d’optique ? D’où venaient-ils, quelles images montraient-ils, à quels publics ? ¦ Keitä olivat optisten kuvien näyttäjät? Mistä he tulivat, mitä kuvia he näyttivät ja kenelle? ¦ Kik voltak az optikai képek mutogatói? Honnan jöttek, milyen képeket mutattak, és milyen közönségnek?
+Relié à d’autres éléments ¦ Yhdistetty muihin kohteisiin ¦ Más elemekhez kapcsolva
+Rien ne correspond à ta recherche. ¦ Mikään ei vastaa hakuasi. ¦ Semmi sem felel meg a keresésednek.
+Le projet est vide : choisis un dossier à gauche, puis « ＋ Ajouter ». ¦ Projekti on tyhjä: valitse kansio vasemmalta ja sitten ”＋ Lisää”. ¦ A projekt üres: válassz egy mappát bal oldalt, majd „＋ Hozzáadás”.
+Aucun lieu placé : ajoute un « Lieu » ou un lieu à une date. ¦ Ei sijoitettua paikkaa: lisää ”Paikka” tai paikka päivämäärään. ¦ Nincs elhelyezett hely: adj hozzá egy „Hely” elemet vagy egy helyet egy dátumhoz.
+Mettre à la corbeille ¦ Siirrä roskakoriin ¦ Áthelyezés a kukába
+☑️ Case à cocher ¦ ☑️ Valintaruutu ¦ ☑️ Jelölőnégyzet
+Ajouter un élément du logiciel ¦ Lisää kohde sovelluksesta ¦ Elem hozzáadása az appból
+(↗ Ouvrir mène à ce bloc) ¦ (↗ Avaa vie tähän lohkoon) ¦ (a ↗ Megnyitás ehhez a blokkhoz visz)
+Vue d’optique : la place Saint-Marc à Venise ¦ Optinen kuva: Pyhän Markuksen tori Venetsiassa ¦ Optikai kép: a velencei Szent Márk tér
+— à la racine du projet — ¦ — projektin juuressa — ¦ — a projekt gyökerében —
+Les dossiers dans l’ordre, avec leurs notes, brouillons, citations et références : à ouvrir dans un traitement de texte ¦ Kansiot järjestyksessä muistiinpanoineen, luonnoksineen, lainauksineen ja viitteineen: avattavaksi tekstinkäsittelyohjelmassa ¦ A mappák sorrendben, a jegyzeteikkel, piszkozataikkal, idézeteikkel és hivatkozásaikkal: szövegszerkesztőben megnyitható
+Avec de vrais titres de chapitres : s’ouvre dans Word, Pages, LibreOffice ; prêt à mettre en page ¦ Oikeilla lukuotsikoilla: avautuu Wordissa, Pagesissa, LibreOfficessa; valmis taitettavaksi ¦ Valódi fejezetcímekkel: megnyílik a Wordben, a Pagesben, a LibreOffice-ban; tördelésre kész
+Le plan et les textes, mis en page, avec la bibliographie à la fin ¦ Jäsennys ja tekstit taitettuina, lähdeluettelo lopussa ¦ A vázlat és a szövegek tördelve, a végén a bibliográfiával
+Les dossiers de ce projet seront proposés à la création d’un nouveau projet ¦ Tämän projektin kansioita tarjotaan, kun luot uuden projektin ¦ A projekt mappáit felkínálja új projekt létrehozásakor
+{name} — éléments ¦ {name} — kohteet ¦ {name} — elemek
+Mis à la corbeille (on peut l’en sortir). ¦ Siirretty roskakoriin (sen voi ottaa sieltä pois). ¦ A kukába került (onnan ki lehet venni).
+Étiquette à ajouter aux éléments choisis : ¦ Valittuihin kohteisiin lisättävä tunniste: ¦ A kiválasztott elemekhez adandó címke:
+Copie impossible : sélectionne le texte à la main. ¦ Kopiointi ei onnistunut: valitse teksti käsin. ¦ Nem sikerült a másolás: jelöld ki a szöveget kézzel.
+Plan enregistré : il est proposé à la création d’un projet (Réglages → Atelier pour le renommer). ¦ Jäsennys tallennettu: sitä tarjotaan, kun luot projektin (Asetukset → Työpaja nimen muuttamiseksi). ¦ Vázlat mentve: projekt létrehozásakor felkínálja (Beállítások → Műhely az átnevezéshez).
+Faire {what} à moi à partir de celle-ci, pour la modifier (l’originale ne change pas) ¦ Tee tästä {what} muokattavaksi (alkuperäinen ei muutu) ¦ Saját {what} készítése ebből, hogy szerkeszthesd (az eredeti nem változik)
+Garde tous ces réglages (menu, sortes d’éléments, dossiers, plans) sous un nom, pour y revenir plus tard, ou les envoyer à quelqu’un : il les importe ici. Les projets et leurs éléments ne sont pas dedans. ¦ Tallenna kaikki nämä asetukset (valikko, kohdetyypit, kansiot, jäsennykset) nimellä, palataksesi niihin myöhemmin tai lähettääksesi ne jollekulle: hän tuo ne tänne. Projektit ja niiden kohteet eivät sisälly. ¦ Ments el minden beállítást (menü, elemfajták, mappák, vázlatok) egy néven, hogy később visszatérhess hozzájuk, vagy elküldhesd valakinek: ő itt importálja őket. A projektek és elemeik nincsenek benne.
+Garder mes éléments ¦ Säilytä omat kohteeni ¦ Saját elemeim megtartása
+rien à régler ¦ ei säädettävää ¦ nincs mit beállítani
+Copie à modifier ¦ Muokattava kopio ¦ Szerkeszthető másolat
+Une enquête rassemble les pistes, médias et notes d’une question à résoudre. ¦ Selvitys kokoaa ratkaistavan kysymyksen johtolangat, mediat ja muistiinpanot. ¦ A nyomozás egy megoldandó kérdés nyomait, médiáit és jegyzeteit gyűjti össze.
+La France est toujours disponible. Ajoute les pays utiles à tes recherches : leurs communes, leurs anciennes communes et les communes voisines de part et d’autre des frontières. Certains pays sont téléchargés la première fois qu’on les coche (il faut alors internet), puis restent sur l’ordinateur. ¦ Ranska on aina käytettävissä. Lisää tutkimuksillesi hyödylliset maat: niiden kunnat, entiset kunnat ja naapurikunnat rajojen molemmin puolin. Jotkin maat ladataan, kun valitset ne ensimmäisen kerran (silloin tarvitaan internet), ja ne jäävät sitten tietokoneelle. ¦ Franciaország mindig elérhető. Add hozzá a kutatásaidhoz hasznos országokat: a településeiket, korábbi településeiket és a határ két oldalán lévő szomszédos településeket. Néhány országot az első bejelöléskor tölt le (ehhez internet kell), utána a számítógépen marad.
+Nom à chercher ¦ Haettava nimi ¦ Keresendő név
+Aucune piste pour l’instant ¦ Ei vielä johtolankoja ¦ Még nincs nyom
+＋ Ajouter une piste ¦ ＋ Lisää johtolanka ¦ ＋ Nyom hozzáadása
+Relier tout ou partie d’un recueil (registre, liste photographiée…) à ce dossier ¦ Yhdistä kokoelma (rekisteri, valokuvattu luettelo…) kokonaan tai osittain tähän kansioon ¦ Egy gyűjtemény (anyakönyv, lefényképezett lista…) egészének vagy részének összekapcsolása ezzel a mappával
+Le média reste dans l’enquête, il n’est plus lié à cette piste. ¦ Media jää selvitykseen, se ei ole enää yhdistetty tähän johtolankaan. ¦ A média a nyomozásban marad, már nincs ehhez a nyomhoz kapcsolva.
+L’événement reste dans la généalogie, il n’est plus lié à cette piste. ¦ Tapahtuma jää sukututkimukseen, se ei ole enää yhdistetty tähän johtolankaan. ¦ Az esemény a családfában marad, már nincs ehhez a nyomhoz kapcsolva.
+Ajouter une ligne « à faire » dans Recherche → Dépouillement d’archive ¦ Lisää ”tehtävä”-rivi kohtaan Tutkimus → Arkiston indeksointi ¦ „Teendő” sor hozzáadása itt: Kutatás → Levéltári feldolgozás
+Je regarde ce qui manque à la lignée… ¦ Katson, mitä sukuhaarasta puuttuu… ¦ Megnézem, mi hiányzik az ágból…
+Les trous à combler, pour aller aux archives ¦ Täytettävät aukot arkistokäyntiä varten ¦ A kitöltendő hiányok a levéltári látogatáshoz
+Reporter à demain ou à la semaine prochaine ¦ Siirrä huomiseen tai ensi viikkoon ¦ Elhalasztás holnapra vagy jövő hétre
+Rien d’urgent : ta semaine est libre. Ajoute un rappel ou regarde ce qui manque à ton arbre. ¦ Ei mitään kiireellistä: viikkosi on vapaa. Lisää muistutus tai katso, mitä sukupuustasi puuttuu. ¦ Semmi sürgős: szabad a heted. Adj hozzá egy emlékeztetőt, vagy nézd meg, mi hiányzik a családfádból.
+Ce qu’il y a à faire, le plus urgent d’abord. ✓ quand c’est fait, ⏭ pour reporter : « ↶ Annuler » en bas à gauche si tu te trompes. ¦ Mitä on tehtävä, kiireellisin ensin. ✓ kun se on tehty, ⏭ siirtääksesi: ”↶ Kumoa” vasemmalla alhaalla, jos erehdyt. ¦ Ami teendő, a legsürgősebb elöl. ✓ ha kész, ⏭ az elhalasztáshoz: „↶ Visszavonás” bal oldalt lent, ha tévedsz.
+« {title} » remis à faire ¦ ”{title}” palautettu tehtäväksi ¦ „{title}” újra teendő
+Reporter à demain ¦ Siirrä huomiseen ¦ Elhalasztás holnapra
+Reporter à la semaine prochaine ¦ Siirrä ensi viikkoon ¦ Elhalasztás jövő hétre
+Adresse à toi ¦ Oma osoite ¦ Saját cím
+Adresse à toi pour {site} ¦ Oma osoite sivustolle {site} ¦ Saját cím ehhez: {site}
+⤒ Importer ce que tu as trouvé ▾ ¦ ⤒ Tuo, mitä löysit ▾ ¦ ⤒ Importáld, amit találtál ▾
+⤒ Importer ce que tu as trouvé ¦ ⤒ Tuo, mitä löysit ¦ ⤒ Importáld, amit találtál
+Cette personne est peut-être vivante : ces recherches restent dans ton navigateur, rien n’est partagé. Pense à sa vie privée. ¦ Tämä henkilö saattaa olla elossa: nämä haut jäävät selaimeesi, mitään ei jaeta. Muista hänen yksityisyytensä. ¦ Lehet, hogy ez a személy még él: ezek a keresések a böngésződben maradnak, semmit sem oszt meg. Gondolj a magánéletére.
+Chaque recherche s’ouvre dans ton navigateur. L’app n’envoie rien d’autre que ce que tu vois dans l’adresse, et ne se connecte jamais à ces sites. ¦ Jokainen haku avautuu selaimessasi. Sovellus ei lähetä mitään muuta kuin sen, minkä näet osoitteessa, eikä koskaan ota yhteyttä näihin sivustoihin. ¦ Minden keresés a böngésződben nyílik meg. Az app semmi mást nem küld, mint amit a címben látsz, és soha nem csatlakozik ezekhez a weboldalakhoz.
+Ce qu’on lit sur ces sites est à vérifier : homonymes, fautes de lecture. Ensuite, enregistre le document (image, PDF, page) ou copie son lien, et fais « ⤒ Importer ce que tu as trouvé ». ¦ Näiltä sivustoilta luettu on tarkistettava: kaimat, lukuvirheet. Tallenna sitten asiakirja (kuva, PDF, sivu) tai kopioi sen linkki ja valitse ”⤒ Tuo, mitä löysit”. ¦ Amit ezeken a weboldalakon olvasol, ellenőrizni kell: névrokonok, olvasási hibák. Utána mentsd el a dokumentumot (kép, PDF, oldal), vagy másold ki a linkjét, és válaszd az „⤒ Importáld, amit találtál” lehetőséget.
+Mets {nom}, {prénom}, {nom_complet}, {lieu}, {année}, {de} ou {à} à la place de ce que tu cherches. ¦ Laita {nom}, {prénom}, {nom_complet}, {lieu}, {année}, {de} tai {à} sen kohdalle, mitä etsit. ¦ Írd be a {nom}, {prénom}, {nom_complet}, {lieu}, {année}, {de} vagy {à} jelet oda, amit keresel.
+＋ Ajouter mon site ¦ ＋ Lisää oma sivustoni ¦ ＋ Saját weboldal hozzáadása
+Gratuites seulement (les sites payants restent à la fin quand on décoche) ¦ Vain ilmaiset (maksulliset sivustot jäävät loppuun, kun valinta poistetaan) ¦ Csak ingyenesek (a fizetős weboldalak a végére kerülnek, ha kiveszed a pipát)
+Aucun site à proposer pour cette fiche. ¦ Ei ehdotettavaa sivustoa tälle kortille. ¦ Nincs javasolható weboldal ehhez az adatlaphoz.
+Pour une personne, les sites à consulter, les plus utiles d’abord : d’après ses lieux, son époque, son métier ou sa vie (soldat, marin, émigré…) et ce qui manque. Chaque site s’ouvre dans ton navigateur avec son nom déjà rempli ; note ensuite ce que ça a donné. ¦ Henkilön kannalta tutkittavat sivustot, hyödyllisimmät ensin: hänen paikkojensa, aikakautensa, ammattinsa tai elämänsä (sotilas, merimies, siirtolainen…) ja puuttuvien tietojen perusteella. Jokainen sivusto avautuu selaimessasi nimi valmiiksi täytettynä; merkitse sitten, mitä siitä tuli. ¦ Egy személyhez átnézendő weboldalak, a leghasznosabbak elöl: a helyei, a kora, a foglalkozása vagy az élete (katona, tengerész, kivándorló…) és a hiányzó adatok alapján. Minden weboldal a böngésződben nyílik meg, a nevével már kitöltve; utána jegyezd fel, mi lett az eredmény.
+Les ancêtres où tu bloques : un parent ou les deux manquent, ou tu l’as marqué « 🧱 Je bloque ici ». Pour chacun : ce qui a déjà été cherché, les sites à essayer, les indices de ta base. ¦ Esivanhemmat, joiden kohdalla olet jumissa: toinen tai molemmat vanhemmat puuttuvat, tai olet merkinnyt hänet ”🧱 Olen umpikujassa”. Jokaiselle: mitä on jo haettu, kokeiltavat sivustot, vihjeet tietokannassasi. ¦ A felmenők, akiknél elakadtál: az egyik vagy mindkét szülő hiányzik, vagy megjelölted: „🧱 Itt elakadtam”. Mindegyiknél: amit már kerestél, kipróbálandó weboldalak, nyomok az adatbázisodban.
+＋ Ajouter un mur… ¦ ＋ Lisää umpikuja… ¦ ＋ Holtpont hozzáadása…
+Marqués à la main ¦ Merkitty käsin ¦ Kézzel jelölve
+🧱 Je bloque ici (marqué à la main) ¦ 🧱 Olen umpikujassa (merkitty käsin) ¦ 🧱 Itt elakadtam (kézzel jelölve)
+Où : à préciser ¦ Missä: täsmennettävä ¦ Hol: megadandó
+⤓ Exporter en CSV ¦ ⤓ Vie CSV-muodossa ¦ ⤓ Exportálás CSV-be
+Rien de cherché pour l’instant ¦ Mitään ei ole vielä haettu ¦ Még semmit sem kerestél
+Prendre un livre à la bibliothèque ¦ Lainaa kirja kirjastosta ¦ Könyv kölcsönzése a könyvtárból
+Rendre le livre à la bibliothèque ¦ Palauta kirja kirjastoon ¦ A könyv visszavitele a könyvtárba
+Continuer la recherche sur internet ¦ Jatka hakua internetissä ¦ A keresés folytatása az interneten
+Se rendre à des archives ¦ Mene arkistoon ¦ Elmenni egy levéltárba
+Se rendre à un endroit ¦ Mene paikkaan ¦ Elmenni egy helyre
+Afrique du Sud ¦ Etelä-Afrikka ¦ Dél-Afrika
+L’INSEE publie un fichier par année (depuis 1970), puis un par mois pour l’année en cours. Quand le fichier de l’année sort, il remplace ceux des mois : l’app retire alors les mois déjà importés pour éviter les doublons. Les fichiers sont gros (60 à 150 Mo par année) : l’import peut prendre quelques minutes. ¦ INSEE julkaisee yhden tiedoston vuodessa (vuodesta 1970) ja sitten yhden kuukaudessa kuluvalta vuodelta. Kun vuoden tiedosto ilmestyy, se korvaa kuukausitiedostot: sovellus poistaa silloin jo tuodut kuukaudet kaksoiskappaleiden välttämiseksi. Tiedostot ovat suuria (60–150 Mt vuodessa): tuonti voi kestää muutaman minuutin. ¦ Az INSEE évente egy fájlt tesz közzé (1970 óta), majd a folyó évre havonta egyet. Amikor megjelenik az éves fájl, az felváltja a haviakat: az app ekkor eltávolítja a már importált hónapokat, hogy ne legyenek duplikátumok. A fájlok nagyok (évente 60–150 MB): az importálás néhány percig tarthat.
+Aide : {text} ¦ Ohje: {text} ¦ Súgó: {text}
+Garde les actes passés quelques jours avant ou après la date précise (par exemple 30 jours) : un baptême et une naissance déclarée plus tard se retrouvent ensemble. ¦ Pitää mukana asiakirjat, jotka on laadittu muutama päivä ennen tarkkaa päivämäärää tai sen jälkeen (esimerkiksi 30 päivää): kaste ja myöhemmin ilmoitettu syntymä päätyvät yhteen. ¦ Megtartja a pontos dátum előtt vagy után néhány nappal (például 30 nappal) kelt bejegyzéseket: így egy keresztelő és egy később bejelentett születés együtt jelenik meg.
+0 km : seulement la commune choisie. En montant le curseur, les communes voisines (jusqu’à 50 km) comptent aussi : utile pour retrouver des témoins ou voisins qui revenaient souvent. ¦ 0 km: vain valittu kunta. Kun liukusäädintä nostetaan, myös naapurikunnat (enintään 50 km) lasketaan mukaan: kätevää, kun etsit usein palanneita todistajia tai naapureita. ¦ 0 km: csak a kiválasztott település. Ha feljebb húzod a csúszkát, a szomszédos települések (legfeljebb 50 km) is beleszámítanak: hasznos a gyakran visszatérő tanúk vagy szomszédok megtalálásához.
+Masquer, montrer, ranger les colonnes ¦ Piilota, näytä ja järjestä sarakkeet ¦ Oszlopok elrejtése, megjelenítése, rendezése
+La liste telle qu’elle est affichée (mêmes colonnes, mêmes filtres) : dans le tableur ou en CSV ¦ Luettelo sellaisena kuin se näytetään (samat sarakkeet, samat suodattimet): taulukkolaskennassa tai CSV-muodossa ¦ A lista úgy, ahogy megjelenik (ugyanazok az oszlopok, ugyanazok a szűrők): a táblázatkezelőben vagy CSV-ben
+📮 Actes à demander à la mairie ¦ 📮 Kunnalta pyydettävät asiakirjat ¦ 📮 A polgármesteri hivataltól kérendő bejegyzések
+Les actes de moins de 100 ans ne sont en général pas en ligne : il faut les demander à la mairie. Naissances et mariages de moins de 75 ans : copie intégrale réservée à la personne, ses ascendants, descendants et conjoint (sinon extrait sans filiation). Décès : communicables à tous. ¦ Alle 100 vuotta vanhat asiakirjat eivät yleensä ole verkossa: ne on pyydettävä kunnalta (mairie). Alle 75 vuotta vanhat syntymät ja avioliitot: täydellinen jäljennös vain henkilölle itselleen, hänen esivanhemmilleen, jälkeläisilleen ja puolisolleen (muuten ote ilman vanhempia). Kuolemat: kaikkien saatavilla. ¦ A 100 évnél fiatalabb bejegyzések általában nincsenek fent az interneten: a polgármesteri hivataltól kell kérni őket. A 75 évnél fiatalabb születések és házasságok: teljes másolatot csak a személy maga, a felmenői, leszármazottai és házastársa kaphat (egyébként kivonat a szülők adatai nélkül). Halálesetek: bárki számára hozzáférhetők.
+Montrer aussi ceux que j’ai déjà (copie, source) ou déjà demandés ¦ Näytä myös ne, jotka minulla jo on (kopio, lähde) tai jotka olen jo pyytänyt ¦ Azok megjelenítése is, amelyek már megvannak (másolat, forrás), vagy amelyeket már kértem
+Aucun acte récent à demander. ¦ Ei pyydettäviä tuoreita asiakirjoja. ¦ Nincs kérendő friss bejegyzés.
+Une lettre toute prête pour demander un acte (mairie, archives, Nantes…) ¦ Valmis kirje asiakirjan pyytämiseen (kunta, arkisto, Nantes…) ¦ Kész levél egy bejegyzés kéréséhez (polgármesteri hivatal, levéltár, Nantes…)
+📮 Demander un acte ¦ 📮 Pyydä asiakirja ¦ 📮 Bejegyzés kérése
+Payant : abonnement pour voir la plupart des documents ¦ Maksullinen: useimpien asiakirjojen katsominen vaatii tilauksen ¦ Fizetős: a legtöbb dokumentum megtekintéséhez előfizetés kell
+Gratuit en partie ; certains journaux et la lecture complète demandent un abonnement ¦ Osittain ilmainen; jotkin lehdet ja koko tekstin lukeminen vaativat tilauksen ¦ Részben ingyenes; egyes újságokhoz és a teljes olvasáshoz előfizetés kell
+Gratuit ; une partie (Premium) est payante ¦ Ilmainen; osa (Premium) on maksullinen ¦ Ingyenes; egy része (Premium) fizetős
+FamilySearch — catalogue (registres filmés d’un lieu) ¦ FamilySearch — luettelo (paikan kuvatut rekisterit) ¦ FamilySearch — katalógus (egy hely lefilmezett anyakönyvei)
+Antenati — recherche par nom (Italie) ¦ Antenati — haku nimellä (Italia) ¦ Antenati — keresés név szerint (Olaszország)
+Même adresse que le bouton « WikiTree » de l’app. Avec un identifiant WikiTree (« Durand-1234 »), la fiche s’ouvre directement. ¦ Sama osoite kuin sovelluksen ”WikiTree”-painikkeessa. WikiTree-tunnuksella (”Durand-1234”) profiili avautuu suoraan. ¦ Ugyanaz a cím, mint az app „WikiTree” gombjáé. WikiTree-azonosítóval („Durand-1234”) a profil közvetlenül megnyílik.
+Même adresse que le bouton « WikiTree » de l’app. ¦ Sama osoite kuin sovelluksen ”WikiTree”-painikkeessa. ¦ Ugyanaz a cím, mint az app „WikiTree” gombjáé.

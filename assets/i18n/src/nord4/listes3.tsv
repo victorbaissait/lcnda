@@ -1,0 +1,392 @@
+fr ¦ fi ¦ hu
+Quitter sans enregistrer ? ¦ Poistutaanko tallentamatta? ¦ Kilépsz mentés nélkül?
+Quitter sans enregistrer ¦ Poistu tallentamatta ¦ Kilépés mentés nélkül
+Fiche verrouillée : déverrouille la fiche de la personne pour la modifier. ¦ Kortti lukittu: avaa henkilön kortin lukitus muokataksesi sitä. ¦ Zárolt adatlap: a szerkesztéshez oldd fel a személy adatlapjának zárolását.
+Rien ne peut être modifié ici ¦ Täällä ei voi muokata mitään ¦ Itt semmit sem lehet módosítani
+Fiche verrouillée ¦ Kortti lukittu ¦ Zárolt adatlap
+Afficher, masquer, ranger les champs ; ajouter les tiens ¦ Näytä, piilota ja järjestä kenttiä; lisää omiasi ¦ Mezők megjelenítése, elrejtése, rendezése; sajátok hozzáadása
+⚙️ Champs affichés ¦ ⚙️ Näytettävät kentät ¦ ⚙️ Megjelenített mezők
+La fiche en PDF, à imprimer, ou en fichier ¦ Kortti PDF:nä, tulostettavaksi tai tiedostona ¦ Az adatlap PDF-ben, nyomtatáshoz vagy fájlként
+CATALOGUE RAISONNÉ ¦ KRIITTINEN TEOSLUETTELO ¦ OEUVRE-KATALÓGUS
+Les autres sortes de fiches, et créer la tienne ¦ Muut korttityypit, ja luo omasi ¦ A többi adatlap-típus, és hozd létre a sajátodat
+Le catalogue raisonné ou la discographie en livre, dans la mise en page ¦ Kriittinen teosluettelo tai diskografia kirjana taitossa ¦ Az oeuvre-katalógus vagy a diszkográfia könyvként, a kiadványszerkesztőben
+📖 Créer le livre… ¦ 📖 Luo kirja… ¦ 📖 A könyv létrehozása…
+Tableur, PDF, impression, fichier (réimportable) ¦ Taulukkolaskenta, PDF, tulostus, tiedosto (voi tuoda uudelleen) ¦ Táblázatkezelő, PDF, nyomtatás, fájl (újra importálható)
+Toutes les sortes d’œuvres, rangées par familles ¦ Kaikki teostyypit perheittäin ryhmiteltyinä ¦ Az összes műtípus, családok szerint csoportosítva
+Ranger, cacher les sections, choisir leur largeur ¦ Järjestä ja piilota osioita, valitse niiden leveys ¦ Szakaszok rendezése, elrejtése, szélességük megadása
+⚙️ Organiser la page ¦ ⚙️ Järjestä sivu ¦ ⚙️ Az oldal elrendezése
+Jeton Discogs, clé TMDb (facultatifs, gardés dans ce navigateur) ¦ Discogs-tunnus, TMDb-avain (valinnaisia, säilytetään tässä selaimessa) ¦ Discogs-token, TMDb-kulcs (nem kötelező, ebben a böngészőben tárolva)
+catalogue d’un autre artiste ¦ toisen taiteilijan luettelo ¦ egy másik művész katalógusa
+catalogue de {nm} ¦ luettelo: {nm} ¦ {nm} katalógusa
+Il faut un titre. ¦ Otsikko tarvitaan. ¦ Cím kell.
+Ce lieu est dans ta base : ouvre-le depuis « Lieux ». ¦ Tämä paikka on tietokannassasi: avaa se kohdasta ”Paikat”. ¦ Ez a hely az adatbázisodban van: a „Helyek” menüből nyisd meg.
+Toutes les sortes de fiches ¦ Kaikki korttityypit ¦ Minden adatlap-típus
+Une sorte qui manque (sculpture, affiche, opéra…) ? Crée-la : tu choisis ses champs (ou tu les reprends d’une autre sorte). ¦ Puuttuuko jokin tyyppi (veistos, juliste, ooppera…)? Luo se: valitset sen kentät (tai otat ne toisesta tyypistä). ¦ Hiányzik egy típus (szobor, plakát, opera…)? Hozd létre: te választod ki a mezőit (vagy átveszed őket egy másik típusból).
+＋ Créer une sorte de fiche… ¦ ＋ Luo korttityyppi… ¦ ＋ Adatlap-típus létrehozása…
+titre, nom, lieu, année ¦ otsikko, nimi, paikka, vuosi ¦ cím, név, hely, év
+« ＋ Nouveau », ou « ⤒ Importer » (Discogs, MusicBrainz, Open Library, Wikidata, TMDb, un tableau, un fichier). ¦ ”＋ Uusi” tai ”⤒ Tuo” (Discogs, MusicBrainz, Open Library, Wikidata, TMDb, taulukko, tiedosto). ¦ „＋ Új”, vagy „⤒ Importálás” (Discogs, MusicBrainz, Open Library, Wikidata, TMDb, egy táblázat, egy fájl).
+Glisser pour ranger ¦ Järjestä vetämällä ¦ Húzd az átrendezéshez
+(avec durées) ¦ (kestoineen) ¦ (időtartamokkal)
+La fenêtre « Imprimer » n’est pas chargée. ¦ ”Tulosta”-ikkunaa ei ole ladattu. ¦ A „Nyomtatás” ablak nincs betöltve.
+Index des œuvres ¦ Teosluettelo ¦ Műjegyzék
+Notices complètes ¦ Täydelliset kuvaukset ¦ Teljes leírások
+Liste en tableau ¦ Taulukkoluettelo ¦ Táblázatos lista
+Une œuvre par page ¦ Yksi teos sivulla ¦ Egy mű oldalanként
+les notices illustrées (« Enregistrer en PDF ») ¦ kuvitetut kuvaukset (”Tallenna PDF:nä”) ¦ az illusztrált leírások („Mentés PDF-ként”)
+les notices illustrées ¦ kuvitetut kuvaukset ¦ az illusztrált leírások
+pour une autre base : « ⤒ Importer » → « Un fichier exporté d’ici » ¦ toiseen tietokantaan: ”⤒ Tuo” → ”Täältä viety tiedosto” ¦ egy másik adatbázisba: „⤒ Importálás” → „Innen exportált fájl”
+les champs de l’onglet « L’export » (⚙️ Champs affichés) ¦ välilehden ”Vienti” kentät (⚙️ Näytettävät kentät) ¦ az „Exportálás” lap mezői (⚙️ Megjelenített mezők)
+la notice (« Enregistrer en PDF ») ¦ kuvaus (”Tallenna PDF:nä”) ¦ a leírás („Mentés PDF-ként”)
+la notice ¦ kuvaus ¦ a leírás
+réimportable (« ⤒ Importer ») ¦ voi tuoda uudelleen (”⤒ Tuo”) ¦ újra importálható („⤒ Importálás”)
+Long métrage ¦ Pitkä elokuva ¦ Játékfilm
+Téléfilm ¦ Televisioelokuva ¦ Tévéfilm
+Publicité ¦ Mainos ¦ Reklám
+Opéra, ballet ¦ Ooppera, baletti ¦ Opera, balett
+rôle : {nm} ¦ rooli: {nm} ¦ szerep: {nm}
+acteur, réalisation, scénario… ¦ näyttelijä, ohjaus, käsikirjoitus… ¦ színész, rendezés, forgatókönyv…
+Rôle (personnage) ¦ Rooli (henkilöhahmo) ¦ Szerep (szereplő)
+réalisation ¦ ohjaus ¦ rendezés
+Un acteur, une actrice ¦ Näyttelijä ¦ Egy színész, egy színésznő
+personnage, métier ¦ hahmo, ammatti ¦ szereplő, foglalkozás
+Une sortie ¦ Julkaisu ¦ Egy bemutató
+Festivals et prix ¦ Festivaalit ja palkinnot ¦ Fesztiválok és díjak
+Un festival, un prix ¦ Festivaali, palkinto ¦ Egy fesztivál, egy díj
+Lauréat ou nommé ¦ Voittaja tai ehdokas ¦ Díjazott vagy jelölt
+Lauréat ¦ Voittaja ¦ Díjazott
+Nommé ¦ Ehdokas ¦ Jelölt
+Une version ¦ Versio ¦ Egy változat
+Saisons et épisodes, ou mises en scène et représentations ¦ Kaudet ja jaksot tai lavastukset ja esitykset ¦ Évadok és epizódok, vagy rendezések és előadások
+Un épisode, une représentation ¦ Jakso, esitys ¦ Egy epizód, egy előadás
+Musique du film ¦ Elokuvamusiikki ¦ Filmzene
+Identifiants et liens ¦ Tunnisteet ja linkit ¦ Azonosítók és hivatkozások
+Oui / non ¦ Kyllä / ei ¦ Igen / nem
+☐ Oui / non ¦ ☐ Kyllä / ei ¦ ☐ Igen / nem
+Autre fiche ¦ Muu kortti ¦ Másik adatlap
+Autres fiches ¦ Muut kortit ¦ Más adatlapok
+rôle (chant, accordéon…) ¦ rooli (laulu, harmonikka…) ¦ szerep (ének, harmonika…)
+Seulement sur certaines pistes (A1, B2…) ; vide = tout le disque ¦ Vain joillakin raidoilla (A1, B2…); tyhjä = koko levy ¦ Csak néhány számon (A1, B2…); üres = az egész lemez
+Personnes et rôles ¦ Henkilöt ja roolit ¦ Személyek és szerepek
+👤 rôles ¦ 👤 roolit ¦ 👤 szerepek
+Image / son ¦ Kuva / ääni ¦ Kép / hang
+🖼 Image / son ¦ 🖼 Kuva / ääni ¦ 🖼 Kép / hang
+Ce son ne se lit pas (fichier introuvable ?). ¦ Tätä ääntä ei voi toistaa (tiedostoa ei löydy?). ¦ Ez a hang nem játszható le (nem található a fájl?).
+légende ¦ kuvateksti ¦ képaláírás
+L’image n’a pas été rapatriée : réessayer ¦ Kuvaa ei tuotu: yritä uudelleen ¦ A kép nem került át: próbáld újra
+↻ Réessayer de rapatrier ¦ ↻ Yritä tuoda uudelleen ¦ ↻ Áthozás újra
+La fenêtre des images : choisir dans la base, ou glisser, coller, importer depuis l’ordinateur ¦ Kuvaikkuna: valitse tietokannasta tai vedä, liitä, tuo tietokoneelta ¦ A képek ablaka: válassz az adatbázisból, vagy húzd be, illeszd be, importáld a számítógépről
+de la base, ou importées (glisser, coller ⌘V) ¦ tietokannasta tai tuotuja (vedä, liitä ⌘V) ¦ az adatbázisból, vagy importálva (húzás, beillesztés ⌘V)
+Plus ¦ Lisää ¦ Több
+précision (toile 10 F paysage…) ¦ tarkennus (kangas 10 F maisema…) ¦ pontosítás (vászon 10 F tájkép…)
+encadré (62 × 71 cm) ¦ kehystettynä (62 × 71 cm) ¦ keretezve (62 × 71 cm)
+· encadré ¦ · kehystettynä ¦ · keretezve
+Calculé ¦ Laskettu ¦ Számított
+début ¦ alku ¦ kezdet
+Mesure + unité ¦ Mitta + yksikkö ¦ Mérték + mértékegység
+⚖ Mesure + unité ¦ ⚖ Mitta + yksikkö ¦ ⚖ Mérték + mértékegység
+🖼 Image · son · vidéo ¦ 🖼 Kuva · ääni · video ¦ 🖼 Kép · hang · videó
+Photos de la fiche ¦ Kortin valokuvat ¦ Az adatlap fényképei
+Ajouter ces photos ¦ Lisää nämä valokuvat ¦ Ezeknek a fényképeknek a hozzáadása
+Les liens se voient des deux côtés : chaque fiche liée, et la fiche de chaque personne, montrent celle-ci. ¦ Linkit näkyvät molemmin puolin: jokainen linkitetty kortti ja jokaisen henkilön kortti näyttävät tämän. ¦ A kapcsolatok mindkét oldalon látszanak: minden kapcsolt adatlap és minden személy adatlapja mutatja ezt.
+De lui / d’elle (auteur) ¦ Häneltä (tekijä) ¦ Tőle (szerző)
+Sur lui / sur elle ¦ Hänestä ¦ Róla
+Préface ¦ Esipuhe ¦ Előszó
+préface ¦ esipuhe ¦ előszó
+Catalogue d’exposition ¦ Näyttelyluettelo ¦ Kiállítási katalógus
+Revue, numéro spécial ¦ Aikakauslehti, erikoisnumero ¦ Folyóirat, különszám
+Mémoires ¦ Muistelmat ¦ Emlékiratok
+Le texte ¦ Teksti ¦ A szöveg
+Un auteur ¦ Tekijä ¦ Egy szerző
+Éditions ¦ Painokset ¦ Kiadások
+Ses éditions ¦ Sen painokset ¦ A kiadásai
+Une adaptation ¦ Sovitus ¦ Egy adaptáció
+Film, morceau, pièce… ¦ Elokuva, kappale, näytelmä… ¦ Film, dal, színdarab…
+Aucune édition rattachée : sur la fiche d’un livre, choisis ce texte dans « Texte (l’œuvre) ». ¦ Ei yhdistettyä painosta: valitse kirjan kortilla tämä teksti kohdassa ”Teksti (teos)”. ¦ Nincs kapcsolt kiadás: egy könyv adatlapján válaszd ki ezt a szöveget a „Szöveg (a mű)” mezőben.
+Le livre ¦ Kirja ¦ A könyv
+Lien avec l’artiste ¦ Yhteys taiteilijaan ¦ Kapcsolat a művésszel
+Texte (l’œuvre) ¦ Teksti (teos) ¦ Szöveg (a mű)
+Édition (1re, 2e…) ¦ Painos (1., 2.…) ¦ Kiadás (1., 2.…)
+Dépôt légal ¦ Vapaakappale ¦ Kötelespéldány
+Où le trouver ¦ Mistä sen löytää ¦ Hol található
+bibliothèque, cote, chez nous… ¦ kirjasto, hyllytunnus, meillä kotona… ¦ könyvtár, jelzet, nálunk otthon…
+Quatrième ¦ Takakansi ¦ Hátsó borító
+Dédicace ¦ Omistuskirjoitus ¦ Dedikáció
+dédicace ¦ omistuskirjoitus ¦ dedikáció
+Une critique ¦ Arvostelu ¦ Egy kritika
+Œuvres citées ¦ Mainitut teokset ¦ Hivatkozott művek
+Une œuvre citée ¦ Mainittu teos ¦ Egy hivatkozott mű
+Œuvre, disque, film ¦ Teos, levy, elokuva ¦ Mű, lemez, film
+Rangé ¦ Säilytyspaikka ¦ Elhelyezve
+Dédicacé à ¦ Omistettu ¦ Dedikálva neki:
+Un exemplaire de plus ¦ Yksi kappale lisää ¦ Még egy példány
+Résumé, notes ¦ Tiivistelmä, muistiinpanot ¦ Összefoglaló, jegyzetek
+Musée ¦ Museo ¦ Múzeum
+=prise ¦ otto|ottoa ¦ felvétel|felvétel
+=mixage ¦ miksaus|miksausta ¦ keverés|keverés
+=remaster ¦ remasterointi|remasterointia ¦ remaster|remaster
+=enregistrement ¦ äänite|äänitettä ¦ felvétel|felvétel
+=parution ¦ julkaisu|julkaisua ¦ kiadás|kiadás
+=œuvre ¦ teos|teosta ¦ mű|mű
+=musée ¦ museo|museota ¦ múzeum|múzeum
+=catalogue ¦ luettelo|luetteloa ¦ katalógus|katalógus
+=date ¦ päivämäärä|päivämäärää ¦ dátum|dátum
+=disque ¦ levy|levyä ¦ lemez|lemez
+=film ¦ elokuva|elokuvaa ¦ film|film
+valeur estimée {amount} € ¦ arvioitu arvo {amount} € ¦ becsült érték: {amount} €
+Réglage « {nm} » importé : « Appliquer » pour t’en servir. ¦ Asetus ”{nm}” tuotu: ota se käyttöön valitsemalla ”Käytä”. ¦ „{nm}” beállítás importálva: az „Alkalmaz” gombbal használhatod.
+Champ « {nm} » enlevé ¦ Kenttä ”{nm}” poistettu ¦ „{nm}” mező eltávolítva
+Les champs de « {nm} » reviennent comme au départ (ordre, affichés, colonnes). Tes propres champs restent. ¦ Tyypin ”{nm}” kentät palautetaan alkuperäisiksi (järjestys, näkyvyys, sarakkeet). Omat kenttäsi säilyvät. ¦ A(z) „{nm}” mezői visszaállnak az alapra (sorrend, megjelenítés, oszlopok). A saját mezőid megmaradnak.
+✎ La sorte « {nm} » ¦ ✎ Tyyppi ”{nm}” ¦ ✎ A(z) „{nm}” típus
+Sorte « {nm} » créée : ajoute ses champs avec « ⚙️ Champs affichés ». ¦ Tyyppi ”{nm}” luotu: lisää sen kentät kohdasta ”⚙️ Näytettävät kentät”. ¦ „{nm}” típus létrehozva: a mezőit a „⚙️ Megjelenített mezők” résznél adhatod hozzá.
+Signé, daté {nm} ¦ Signeerattu, päivätty {nm} ¦ Szignálva, keltezve: {nm}
+{nm}, catalogue raisonné ¦ {nm}, kriittinen teosluettelo ¦ {nm}, oeuvre-katalógus
+{nm}, discographie ¦ {nm}, diskografia ¦ {nm}, diszkográfia
+Notice — {nm} ¦ Kuvaus — {nm} ¦ Leírás — {nm}
+Image — {nm} ¦ Kuva — {nm} ¦ Kép — {nm}
+En public (live) ¦ Livenä (live) ¦ Élő (live)
+En public ¦ Livenä ¦ Élő
+Réédition ¦ Uusintajulkaisu ¦ Újrakiadás
+réédition ¦ uusintajulkaisu ¦ újrakiadás
+Très bon (VG+) ¦ Erittäin hyvä (VG+) ¦ Nagyon jó (VG+)
+Intérieur ¦ Sisäpussi ¦ Belső
+(toutes éditions) ¦ (kaikki painokset) ¦ (minden kiadás)
+Artiste crédité ¦ Mainittu artisti ¦ Feltüntetett előadó
+Format et détails ¦ Formaatti ja tiedot ¦ Formátum és részletek
+Album (toutes éditions) ¦ Albumi (kaikki painokset) ¦ Album (minden kiadás)
+Pistes et crédits ¦ Raidat ja tekijät ¦ Számok és közreműködők
+Pistes (avec durées) ¦ Raidat (kestoineen) ¦ Számok (időtartamokkal)
+Une piste ¦ Raita ¦ Egy szám
+Coller une liste de titres… ¦ Liitä kappaleluettelo… ¦ Számlista beillesztése…
+Coller une liste de titres ¦ Liitä kappaleluettelo ¦ Számlista beillesztése
+Crédits de la piste ¦ Raidan tekijät ¦ A szám közreműködői
+Crédits, paroles, notes de la piste ¦ Raidan tekijät, sanat, muistiinpanot ¦ A szám közreműködői, dalszöveg, jegyzetek
+Crédits du disque ¦ Levyn tekijät ¦ A lemez közreműködői
+Un crédit ¦ Tekijätieto ¦ Egy közreműködő
+crédit ¦ tekijätieto ¦ közreműködő
+Éditions et pressages ¦ Painokset ja prässäykset ¦ Kiadások és préselések
+Une édition ¦ Painos ¦ Egy kiadás
+Titre (si différent) ¦ Nimi (jos eri) ¦ Cím (ha eltér)
+Les photos du disque ¦ Levyn valokuvat ¦ A lemez fényképei
+(échelle Goldmine) ¦ (Goldmine-asteikko) ¦ (Goldmine-skála)
+Bon (G+) · coin corné ¦ Hyvä (G+) · taittunut kulma ¦ Jó (G+) · behajlott sarok
+Valeur estimée le ¦ Arvo arvioitu ¦ Érték becslésének dátuma
+Édition / pressage ¦ Painos / prässäys ¦ Kiadás / préselés
+Avec les crédits ¦ Tekijätietoineen ¦ Közreműködőkkel
+Pas encore de pistes : « ✎ Modifier » → « ＋ Une piste » ou « 📋 Coller une liste de titres ». ¦ Ei vielä raitoja: ”✎ Muokkaa” → ”＋ Raita” tai ”📋 Liitä kappaleluettelo”. ¦ Még nincsenek számok: „✎ Szerkesztés” → „＋ Egy szám” vagy „📋 Számlista beillesztése”.
+L’enregistrement (et son morceau) ¦ Äänite (ja sen kappale) ¦ A felvétel (és a dala)
+les noms de ta généalogie sont des pastilles cliquables ¦ sukututkimuksesi nimet ovat napsautettavia merkkejä ¦ a családfád nevei kattintható címkék
+même album, autres parutions ¦ sama albumi, muut julkaisut ¦ ugyanaz az album, más kiadások
+＋ Ajouter une édition ¦ ＋ Lisää painos ¦ ＋ Kiadás hozzáadása
+Une seule édition connue. « ＋ Ajouter une édition » (même album, autre pays, autre format, réédition…). ¦ Vain yksi tunnettu painos. ”＋ Lisää painos” (sama albumi, eri maa, eri formaatti, uusintajulkaisu…). ¦ Csak egy ismert kiadás. „＋ Kiadás hozzáadása” (ugyanaz az album, más ország, más formátum, újrakiadás…).
+Ouvrir cette édition ¦ Avaa tämä painos ¦ Ennek a kiadásnak a megnyitása
+Un titre par ligne, avec si tu veux la position devant et la durée à la fin : « A1. Paris canaille 2:41 ». ¦ Yksi nimi riville, halutessasi alkuun sijainti ja loppuun kesto: ”A1. Paris canaille 2:41”. ¦ Soronként egy cím, ha szeretnéd, elöl a pozícióval és a végén az időtartammal: „A1. Paris canaille 2:41”.
+Première sortie ¦ Ensijulkaisu ¦ Első megjelenés
+Toutes ses éditions ¦ Kaikki sen painokset ¦ Az összes kiadása
+Aucune parution rattachée : sur la fiche d’un disque, choisis cet album dans « Album (toutes éditions) ». ¦ Ei yhdistettyä julkaisua: valitse levyn kortilla tämä albumi kohdassa ”Albumi (kaikki painokset)”. ¦ Nincs kapcsolt kiadás: egy lemez adatlapján válaszd ki ezt az albumot az „Album (minden kiadás)” mezőben.
+Morceau (œuvre musicale) ¦ Kappale (musiikkiteos) ¦ Dal (zenemű)
+L’œuvre ¦ Teos ¦ A mű
+Écrite ¦ Kirjoitettu ¦ Írva
+Dépôt SACEM ¦ SACEM-rekisteröinti ¦ SACEM-bejegyzés
+Tonalité ¦ Sävellaji ¦ Hangnem
+D’après ¦ Pohjautuu teokseen ¦ Alapja
+Partitions et paroles ¦ Nuotit ja sanat ¦ Kották és dalszövegek
+Une partition ¦ Nuotti ¦ Egy kotta
+Paroles (couplets annotés) ¦ Sanat (selitetyt säkeistöt) ¦ Dalszöveg (jegyzetelt versszakok)
+Reprises par d’autres ¦ Muiden tekemät covert ¦ Mások feldolgozásai
+Une reprise ¦ Cover-versio ¦ Egy feldolgozás
+Interprète ¦ Esittäjä ¦ Előadó
+Précision (instrumental…) ¦ Tarkennus (instrumentaali…) ¦ Pontosítás (instrumentális…)
+＋ Ajouter un enregistrement ¦ ＋ Lisää äänite ¦ ＋ Felvétel hozzáadása
+Aucun enregistrement ¦ Ei äänitettä ¦ Nincs felvétel
+Une prise, un mixage, une version, en public… Sur un disque, chaque piste peut ensuite pointer vers l’un d’eux. ¦ Otto, miksaus, versio, livenä… Levyllä jokainen raita voi sitten viitata johonkin niistä. ¦ Egy felvétel, egy keverés, egy változat, élő… Egy lemezen aztán minden szám hivatkozhat valamelyikre.
+non retenue ¦ hylätty ¦ nem használt
+Fait d’après ¦ Tehty pohjalta ¦ Ebből készült
+(le mixage d’une prise, le remaster d’un mixage…) ¦ (oton miksaus, miksauksen remasterointi…) ¦ (egy felvétel keverése, egy keverés remastere…)
+Studio, lieu ¦ Studio, paikka ¦ Stúdió, helyszín
+mixé par…, couplet 3 coupé, bande amateur ¦ miksannut…, säkeistö 3 leikattu, amatöörinauha ¦ keverte:…, a 3. versszak kivágva, amatőr szalag
+Fichier son ¦ Äänitiedosto ¦ Hangfájl
+Figure sur ¦ Esiintyy levyllä ¦ Szerepel ezen:
+Sur aucun disque pour l’instant : sur la fiche d’un disque, une piste peut pointer vers cet enregistrement. ¦ Ei vielä millään levyllä: levyn kortilla raita voi viitata tähän äänitteeseen. ¦ Egyelőre egy lemezen sem szerepel: egy lemez adatlapján egy szám hivatkozhat erre a felvételre.
+Concerts et tournées ¦ Konsertit ja kiertueet ¦ Koncertek és turnék
+Un morceau ¦ Kappale ¦ Egy dal
+Céramique ¦ Keramiikka ¦ Kerámia
+Œuvre certaine ¦ Varma teos ¦ Biztos mű
+Attribuée ¦ Attribuoitu ¦ Neki tulajdonított
+Dans la famille ¦ Suvun hallussa ¦ A családban
+dans la famille ¦ suvun hallussa ¦ a családban
+Musée, collection publique ¦ Museo, julkinen kokoelma ¦ Múzeum, közgyűjtemény
+Collection privée ¦ Yksityiskokoelma ¦ Magángyűjtemény
+Prêtée ¦ Lainassa ¦ Kölcsönadva
+prêtée ¦ lainassa ¦ kölcsönadva
+En dépôt ¦ Talletuksena ¦ Letétben
+en dépôt ¦ talletuksena ¦ letétben
+Détruite ¦ Tuhoutunut ¦ Megsemmisült
+Où ? inconnu ¦ Missä? tuntematon ¦ Hol? ismeretlen
+où ? inconnu ¦ missä? tuntematon ¦ hol? ismeretlen
+à restaurer ¦ restauroitava ¦ restaurálandó
+restauré ¦ restauroitu ¦ restaurált
+l’artiste ¦ taiteilija ¦ a művész
+donnée ¦ lahjoitettu ¦ ajándékozott
+achetée, rachetée ¦ ostettu, ostettu takaisin ¦ megvásárolt, visszavásárolt
+par héritage ¦ perintönä ¦ örökléssel
+volée ¦ varastettu ¦ ellopott
+étude pour ¦ luonnos teokseen ¦ tanulmány ehhez:
+réplique ¦ toisinto ¦ replika
+gravure d’après ¦ kaiverrus teoksen pohjalta ¦ metszet ennek alapján:
+même série ¦ sama sarja ¦ ugyanaz a sorozat
+Œuvres ¦ Teokset ¦ Művek
+Huile sur toile ¦ Öljy kankaalle ¦ Olaj, vászon
+Signé, daté ¦ Signeerattu, päivätty ¦ Szignálva, keltezve
+en bas à droite « J. Martin 21 » ¦ oikeassa alakulmassa ”J. Martin 21” ¦ jobbra lent „J. Martin 21”
+Lieu peint ¦ Maalattu paikka ¦ Ábrázolt hely
+Où est l’œuvre ¦ Missä teos on ¦ Hol van a mű
+Les photos de l’œuvre ¦ Teoksen valokuvat ¦ A mű fényképei
+Une étape ¦ Vaihe ¦ Egy állomás
+Qui (personne, galerie, musée) ¦ Kuka (henkilö, galleria, museo) ¦ Ki (személy, galéria, múzeum)
+pour son mariage, lot 112… ¦ häihinsä, erä 112… ¦ az esküvőjére, 112. tétel…
+Pièce (lettre, facture…) ¦ Asiakirja (kirje, lasku…) ¦ Irat (levél, számla…)
+Une exposition ¦ Näyttely ¦ Egy kiállítás
+N° au catalogue ¦ Luettelonumero ¦ Katalógusszám
+N° du catalogue ¦ Luettelon numero ¦ Katalógusszám
+Prêtée par ¦ Lainaaja ¦ Kölcsönadó
+Bibliographie de l’œuvre ¦ Teoksen kirjallisuus ¦ A mű bibliográfiája
+Une référence ¦ Viite ¦ Egy hivatkozás
+Pièce, réserve ¦ Huone, varasto ¦ Terem, raktár
+Un constat ¦ Kuntoraportti ¦ Egy állapotfelmérés
+Tirages et fontes ¦ Vedokset ja valokset ¦ Levonatok és öntések
+Un tirage ¦ Vedos ¦ Egy levonat
+Matière, papier ¦ Materiaali, paperi ¦ Anyag, papír
+Où, à qui ¦ Missä, kenellä ¦ Hol, kinél
+Attribuée, atelier, entourage ¦ Attribuoitu, työpaja, piiri ¦ Neki tulajdonított, műhely, kör
+Douteuse, rejetée ¦ Epävarma, hylätty ¦ Kétes, elvetett
+Exposée au moins une fois ¦ Ollut näytteillä ainakin kerran ¦ Legalább egyszer kiállítva
+Citée dans un livre ¦ Mainittu kirjassa ¦ Egy könyvben említve
+qui l’a eue, quand, comment ¦ kenellä se on ollut, milloin, miten ¦ kinél volt, mikor, hogyan
+＋ Ajouter une étape ¦ ＋ Lisää vaihe ¦ ＋ Állomás hozzáadása
+chaque exposition est une fiche, reliée à toutes ses œuvres ¦ jokainen näyttely on kortti, joka on yhdistetty kaikkiin sen teoksiin ¦ minden kiállítás egy adatlap, amely az összes művéhez kapcsolódik
+＋ Ajouter à une exposition… ¦ ＋ Lisää näyttelyyn… ¦ ＋ Hozzáadás egy kiállításhoz…
+Liens : étude pour, esquisse, réplique, variante, gravure d’après, pendant, même série… ¦ Yhteydet: luonnos teokseen, hahmotelma, toisinto, muunnelma, kaiverrus teoksen pohjalta, parinäyte, sama sarja… ¦ Kapcsolatok: tanulmány ehhez, vázlat, replika, változat, metszet ennek alapján, párdarab, ugyanaz a sorozat…
+Salle, musée ¦ Sali, museo ¦ Terem, múzeum
+Œuvres exposées ¦ Esillä olleet teokset ¦ Kiállított művek
+Carton d’invitation ¦ Kutsukortti ¦ Meghívó
+Aucune œuvre : sur la fiche d’une œuvre, « Expositions » → choisis celle-ci. ¦ Ei teoksia: valitse teoksen kortilla ”Näyttelyt” → tämä. ¦ Nincs mű: egy mű adatlapján a „Kiállítások” résznél válaszd ki ezt.
+Profil d’artiste ¦ Taiteilijaprofiili ¦ Művészprofil
+Identité artistique ¦ Taiteellinen identiteetti ¦ Művészi identitás
+Nom d’artiste principal ¦ Pääasiallinen taiteilijanimi ¦ Fő művésznév
+Noms de scène ¦ Taiteilijanimet ¦ Művésznevek
+Un nom de scène ¦ Taiteilijanimi ¦ Egy művésznév
+Un groupe ¦ Yhtye ¦ Egy együttes
+Rôle, instrument ¦ Rooli, soitin ¦ Szerep, hangszer
+Éditeurs ¦ Kustantajat ¦ Kiadók
+Une école, un maître ¦ Koulukunta, mestari ¦ Egy iskola, egy mester
+École, atelier ¦ Koulukunta, työpaja ¦ Iskola, műhely
+Élève de ¦ Oppilaana henkilöllä ¦ Tanítványa volt:
+Prix et distinctions ¦ Palkinnot ja kunnianosoitukset ¦ Díjak és kitüntetések
+Pour l’œuvre ¦ Teoksesta ¦ A műért
+Presse et critiques ¦ Lehdistö ja arvostelut ¦ Sajtó és kritikák
+Un article ¦ Artikkeli ¦ Egy cikk
+Pas encore de biographie : « … » pour l’écrire. ¦ Ei vielä elämäkertaa: kirjoita se kohdasta ”…”. ¦ Még nincs életrajz: a „…” gombbal írhatod meg.
+Noms de scène, groupes, labels, galeries, formation… : « … » pour les écrire. ¦ Taiteilijanimet, yhtyeet, levy-yhtiöt, galleriat, koulutus…: kirjoita ne kohdasta ”…”. ¦ Művésznevek, együttesek, kiadók, galériák, képzés…: a „…” gombbal írhatod meg őket.
+(nommé) ¦ (ehdokas) ¦ (jelölt)
+Aucun prix noté. ¦ Ei merkittyjä palkintoja. ¦ Nincs feljegyzett díj.
+Aucun disque. ¦ Ei levyjä. ¦ Nincs lemez.
+Morceaux (œuvres musicales) ¦ Kappaleet (musiikkiteokset) ¦ Dalok (zeneművek)
+Aucun morceau. ¦ Ei kappaleita. ¦ Nincs dal.
+Œuvres · catalogue raisonné ¦ Teokset · kriittinen teosluettelo ¦ Művek · oeuvre-katalógus
+Aucune œuvre. ¦ Ei teoksia. ¦ Nincs mű.
+Aucune exposition. ¦ Ei näyttelyitä. ¦ Nincs kiállítás.
+sur lui ¦ hänestä ¦ róla
+Aucun livre. ¦ Ei kirjoja. ¦ Nincs könyv.
+Aucun film. ¦ Ei elokuvia. ¦ Nincs film.
+Aucun concert. ¦ Ei konsertteja. ¦ Nincs koncert.
+Spectacles et rôles ¦ Esitykset ja roolit ¦ Előadások és szerepek
+Aucun spectacle. ¦ Ei esityksiä. ¦ Nincs előadás.
+Aucune photographie. ¦ Ei valokuvia. ¦ Nincs fénykép.
+Aucun article noté. ¦ Ei merkittyjä artikkeleita. ¦ Nincs feljegyzett cikk.
+en-tête ¦ ylätunniste ¦ fejléc
+toute la ligne ¦ koko rivi ¦ teljes sor
+Couleur du liseré de la section ¦ Osion reunaviivan väri ¦ A szakasz szegélyének színe
+Revenir à la couleur de départ ¦ Palaa alkuperäiseen väriin ¦ Vissza az eredeti színhez
+Vide : « … » pour l’écrire. ¦ Tyhjä: kirjoita se kohdasta ”…”. ¦ Üres: a „…” gombbal írhatod meg.
+Ranger : ⚙️ Organiser la page ¦ Järjestä: ⚙️ Järjestä sivu ¦ Rendezés: ⚙️ Az oldal elrendezése
+de l’artiste ¦ taiteilijan ¦ a művészé
+Glisse ⠿ (ou ↑ ↓) pour ranger, 👁 pour cacher. La largeur : toute la ligne, ½, ⅓, ¼, ⅔ ou ¾ ; la pastille : la couleur du liseré. ¦ Järjestä vetämällä ⠿ (tai ↑ ↓), piilota 👁:lla. Leveys: koko rivi, ½, ⅓, ¼, ⅔ tai ¾; pallo: reunaviivan väri. ¦ Húzd a ⠿ jelet (vagy ↑ ↓) a rendezéshez, 👁 az elrejtéshez. Szélesség: teljes sor, ½, ⅓, ¼, ⅔ vagy ¾; a pötty: a szegély színe.
+Modèle de départ selon la discipline ¦ Aloitusmalli taiteenlajin mukaan ¦ Kiinduló sablon a művészeti ág szerint
+＋ Ajouter une section ¦ ＋ Lisää osio ¦ ＋ Szakasz hozzáadása
+Modèles de départ selon la discipline (Musicien, Peintre, Écrivain, Cinéaste, Photographe, Sculpteur, Architecte…) ; tout se change ensuite. Gardé dans « 💾 Réglages enregistrés » (outil « artistes ») : « ⚙️ Champs affichés » d’une fiche. ¦ Aloitusmallit taiteenlajin mukaan (muusikko, taidemaalari, kirjailija, elokuvantekijä, valokuvaaja, kuvanveistäjä, arkkitehti…); kaiken voi muuttaa jälkeenpäin. Säilytetään kohdassa ”💾 Tallennetut asetukset” (työkalu ”taiteilijat”): kortin ”⚙️ Näytettävät kentät”. ¦ Kiinduló sablonok a művészeti ág szerint (zenész, festő, író, filmes, fotós, szobrász, építész…); utána minden módosítható. A „💾 Mentett beállítások” között tárolva („művészek” eszköz): egy adatlap „⚙️ Megjelenített mezők” része.
+Son nom (ex. « Ses instruments ») ; tu l’écris ensuite avec « … ». ¦ Sen nimi (esim. ”Hänen soittimensa”); kirjoitat sen sitten kohdasta ”…”. ¦ A neve (pl. „Hangszerei”); utána a „…” gombbal írod meg.
+La liste ¦ Luettelo ¦ A lista
+Les vignettes ¦ Pienoiskuvat ¦ A bélyegképek
+L’export ¦ Vienti ¦ Az exportálás
+Enlever ce champ (il se remet avec « Remettre un champ enlevé ») ¦ Poista tämä kenttä (sen saa takaisin kohdasta ”Palauta poistettu kenttä”) ¦ A mező eltávolítása (a „Eltávolított mező visszahelyezése” résznél hozható vissza)
+Aucun champ. ¦ Ei kenttiä. ¦ Nincs mező.
+Sorte de fiche ¦ Korttityyppi ¦ Adatlap-típus
+Chercher un champ… ¦ Hae kenttää… ¦ Mező keresése…
+Le formulaire suit cet ordre : mêmes groupes, même ordre. Un champ masqué garde ce qui y est écrit. À la lecture, un champ vide ne s’affiche jamais. ¦ Lomake noudattaa tätä järjestystä: samat ryhmät, sama järjestys. Piilotettu kenttä säilyttää siihen kirjoitetun. Luettaessa tyhjää kenttää ei koskaan näytetä. ¦ Az űrlap ezt a sorrendet követi: ugyanazok a csoportok, ugyanaz a sorrend. Az elrejtett mező megőrzi, ami bele van írva. Olvasáskor az üres mező sosem jelenik meg.
+Les colonnes de la liste, dans l’ordre. ¦ Luettelon sarakkeet järjestyksessä. ¦ A lista oszlopai, sorrendben.
+Les lignes grises sous chaque vignette (affichage « Fiches »). ¦ Harmaat rivit kunkin pienoiskuvan alla (näkymä ”Kortit”). ¦ Az egyes bélyegképek alatti szürke sorok („Adatlapok” nézet).
+Ce qu’on met dans une notice : export, impression, livre du catalogue raisonné. ¦ Mitä kuvaukseen tulee: vienti, tulostus, kriittisen teosluettelon kirja. ¦ Ami egy leírásba kerül: exportálás, nyomtatás, az oeuvre-katalógus könyve.
+＋ Ajouter un groupe ¦ ＋ Lisää ryhmä ¦ ＋ Csoport hozzáadása
+Remettre un champ enlevé… ▾ ¦ Palauta poistettu kenttä… ▾ ¦ Eltávolított mező visszahelyezése… ▾
+Cacher les champs vides à la lecture ¦ Piilota tyhjät kentät luettaessa ¦ Üres mezők elrejtése olvasáskor
+Réglage propre à ¦ Asetus vain kohteelle ¦ Csak erre vonatkozó beállítás:
+Revenir aux champs de départ de cette sorte ¦ Palaa tämän tyypin alkuperäisiin kenttiin ¦ Vissza a típus eredeti mezőihez
+(sinon : pour tous) ¦ (muuten: kaikille) ¦ (különben: mindenkire)
+les champs affichés, l’ordre, les colonnes, tes champs et la page de l’artiste ¦ näytettävät kentät, järjestys, sarakkeet, omat kenttäsi ja taiteilijan sivu ¦ a megjelenített mezők, a sorrend, az oszlopok, a saját mezőid és a művész oldala
+Renommer le champ ¦ Nimeä kenttä uudelleen ¦ Mező átnevezése
+Le nouveau nom (ce qui est écrit dans les fiches reste). ¦ Uusi nimi (korteille kirjoitettu säilyy). ¦ Az új név (ami az adatlapokba be van írva, megmarad).
+Le nom du groupe (il apparaît dans la colonne de droite de la fiche, avec ses champs). ¦ Ryhmän nimi (se näkyy kortin oikeassa sarakkeessa kenttineen). ¦ A csoport neve (az adatlap jobb oldali oszlopában jelenik meg, a mezőivel együtt).
+Ajouter le groupe ¦ Lisää ryhmä ¦ Csoport hozzáadása
+↺ Remettre comme au départ ? ¦ ↺ Palautetaanko alkuperäiseksi? ¦ ↺ Visszaállítod alapra?
+Ajouter le champ ¦ Lisää kenttä ¦ Mező hozzáadása
+Écouté sur, Acheté par, Souvenir… ¦ Kuunneltu laitteella, Ostanut, Muisto… ¦ Ezen hallgattuk, Megvette:, Emlék…
+Choix (un par ligne) ¦ Vaihtoehdot (yksi riville) ¦ Választható értékek (soronként egy)
+Dans le groupe ¦ Ryhmässä ¦ A csoportban
+de tous les artistes ¦ kaikkien taiteilijoiden ¦ minden művészé
+Donne un nom au champ. ¦ Anna kentälle nimi. ¦ Adj nevet a mezőnek.
+Proposées ¦ Ehdotetut ¦ Javasolt
+Icône de la sorte ¦ Tyypin kuvake ¦ A típus ikonja
+＋ Créer une sorte de fiche ¦ ＋ Luo korttityyppi ¦ ＋ Adatlap-típus létrehozása
+Créer la sorte ¦ Luo tyyppi ¦ A típus létrehozása
+Au pluriel ¦ Monikossa ¦ Többes számban
+Rien (titre, date, photos, notes) ¦ Ei mitään (otsikko, päivämäärä, valokuvat, muistiinpanot) ¦ Semmi (cím, dátum, fényképek, jegyzetek)
+(ses champs) ¦ (sen kentät) ¦ (a mezői)
+Ensuite, « ⚙️ Champs affichés » : ajoute tes champs (texte, date, période, personne + rôle, lieu, fiche liée, image, tableau…), range-les, cache-les. ¦ Sitten ”⚙️ Näytettävät kentät”: lisää kenttäsi (teksti, päivämäärä, ajanjakso, henkilö + rooli, paikka, linkitetty kortti, kuva, taulukko…), järjestä ja piilota ne. ¦ Ezután a „⚙️ Megjelenített mezők” résznél: add hozzá a mezőidet (szöveg, dátum, időszak, személy + szerep, hely, kapcsolt adatlap, kép, táblázat…), rendezd és rejtsd el őket.
+Sorte enregistrée. ¦ Tyyppi tallennettu. ¦ Típus mentve.
+Notices des œuvres ¦ Teosten kuvaukset ¦ A művek leírásai
+(par période) ¦ (kausittain) ¦ (időszakok szerint)
+Liste des expositions ¦ Näyttelyluettelo ¦ A kiállítások listája
+Bibliographie générale ¦ Yleinen kirjallisuusluettelo ¦ Általános bibliográfia
+Index des titres, des lieux, des propriétaires ¦ Nimien, paikkojen ja omistajien hakemisto ¦ Címek, helyek, tulajdonosok mutatója
+Œuvres non retrouvées (en annexe) ¦ Kadonneet teokset (liitteenä) ¦ Lappangó művek (függelékben)
+Œuvres non retrouvées ¦ Kadonneet teokset ¦ Lappangó művek
+Les disques ¦ Levyt ¦ A lemezek
+(une double page par album : pochette, pistes, crédits, éditions) ¦ (yksi aukeama albumia kohden: kansi, raidat, tekijät, painokset) ¦ (albumonként egy dupla oldal: borító, számok, közreműködők, kiadások)
+Index des morceaux ¦ Kappalehakemisto ¦ A dalok mutatója
+Index des musiciens et des crédits ¦ Muusikoiden ja tekijöiden hakemisto ¦ A zenészek és közreműködők mutatója
+Musiciens et crédits ¦ Muusikot ja tekijät ¦ Zenészek és közreműködők
+Concordance des numéros de catalogue ¦ Luettelonumeroiden vastaavuudet ¦ Katalógusszámok megfeleltetése
+1 œuvre par page (grande image) ¦ 1 teos sivulla (iso kuva) ¦ Oldalanként 1 mű (nagy kép)
+Une double page par œuvre (image à gauche, notice à droite) ¦ Yksi aukeama teosta kohden (kuva vasemmalla, kuvaus oikealla) ¦ Művenként egy dupla oldal (kép balra, leírás jobbra)
+2 œuvres par page ¦ 2 teosta sivulla ¦ Oldalanként 2 mű
+4 œuvres par page (inventaire) ¦ 4 teosta sivulla (inventaario) ¦ Oldalanként 4 mű (leltár)
+Carré (21 × 21 cm) ¦ Neliö (21 × 21 cm) ¦ Négyzet (21 × 21 cm)
+A4 à l’italienne ¦ A4 vaaka ¦ A4 fekvő
+collection particulière ¦ yksityiskokoelma ¦ magángyűjtemény
+Propriétaire actuel ¦ Nykyinen omistaja ¦ Jelenlegi tulajdonos
+Œuvres en rapport ¦ Liittyvät teokset ¦ Kapcsolódó művek
+NOUVEAU DOCUMENT ¦ UUSI ASIAKIRJA ¦ ÚJ DOKUMENTUM
+📖 Un catalogue raisonné ¦ 📖 Kriittinen teosluettelo ¦ 📖 Egy oeuvre-katalógus
+💿 Une discographie ¦ 💿 Diskografia ¦ 💿 Egy diszkográfia
+Créer le livre ¦ Luo kirja ¦ A könyv létrehozása
+Les parties du livre ¦ Kirjan osat ¦ A könyv részei
+Dans chaque notice ¦ Jokaisessa kuvauksessa ¦ Minden leírásban
+(le panneau « ⚙️ Champs affichés », onglet « L’export ») ¦ (paneeli ”⚙️ Näytettävät kentät”, välilehti ”Vienti”) ¦ (a „⚙️ Megjelenített mezők” panel, „Exportálás” lap)
+Mise en page des notices ¦ Kuvausten taitto ¦ A leírások elrendezése
+Cacher le nom des propriétaires vivants (« collection particulière ») ¦ Piilota elävien omistajien nimet (”yksityiskokoelma”) ¦ Az élő tulajdonosok nevének elrejtése („magángyűjtemény”)
+(filtres de la liste) ¦ (luettelon suodattimet) ¦ (a lista szűrői)
+Choisis d’abord l’artiste. ¦ Valitse ensin taiteilija. ¦ Előbb válaszd ki a művészt.
+Choisis l’artiste. ¦ Valitse taiteilija. ¦ Válaszd ki a művészt.
+L’aperçu d’une double page s’affiche ici. ¦ Aukeaman esikatselu näkyy tässä. ¦ Itt jelenik meg egy dupla oldal előnézete.
+Aucune œuvre à mettre dans le livre. ¦ Ei teoksia kirjaan. ¦ Nincs mű, amit a könyvbe lehetne tenni.
+Aucun disque à mettre dans le livre. ¦ Ei levyjä kirjaan. ¦ Nincs lemez, amit a könyvbe lehetne tenni.
