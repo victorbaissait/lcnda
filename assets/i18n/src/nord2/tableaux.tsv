@@ -1,0 +1,2401 @@
+fr ¦ sk ¦ nb
+piste|Confirmée ¦ Potvrdená ¦ Bekreftet
+piste|Fausse ¦ Mylná ¦ Falsk
+Fiche #{id} ¦ Karta #{id} ¦ Oppføring #{id}
+Tableau verrouillé : 🔒 en haut pour le déverrouiller. ¦ Tabuľa je zamknutá: odomkni ju pomocou 🔒 hore. ¦ Tavlen er låst: 🔒 øverst for å låse den opp.
+H ou Espace ¦ H alebo medzerník ¦ H eller mellomrom
+Formes ¦ Tvary ¦ Former
+Dessin à main levée ¦ Kresba voľnou rukou ¦ Frihåndstegning
+Gomme ¦ Guma ¦ Viskelær
+{owner} : {name} ¦ {owner}: {name} ¦ {owner}: {name}
+Tableau libre ¦ Voľná tabuľa ¦ Fri tavle
+changer ¦ zmeniť ¦ endre
+Police du thème ¦ Písmo motívu ¦ Temaets skrift
+PDF · double-clic pour l’ouvrir ¦ PDF · dvojklikom otvoríš ¦ PDF · dobbeltklikk for å åpne
+Dossier ¦ Priečinok ¦ Mappe
+double-clic pour ouvrir ¦ dvojklikom otvoríš ¦ dobbeltklikk for å åpne
+Recueil ¦ Zborník ¦ Samling
+Recueil · double-clic pour l’ouvrir ¦ Zborník · dvojklikom otvoríš ¦ Samling · dobbeltklikk for å åpne
+Frise ¦ Časová os ¦ Tidslinje
+Chargement de la frise… ¦ Načítava sa časová os… ¦ Laster inn tidslinjen…
+Cadre ¦ Rámec ¦ Ramme
+Chargement du widget… ¦ Načítava sa widget… ¦ Laster inn widgeten…
+Écran de l’app · double-clic pour l’ouvrir ¦ Obrazovka aplikácie · dvojklikom otvoríš ¦ Appskjerm · dobbeltklikk for å åpne
+mort à {age} ¦ zomrel(a) vo veku {age} ¦ død {age} gammel
+Choisis la personne à droite. ¦ Vyber osobu vpravo. ¦ Velg personen til høyre.
+Choisir ce groupe ¦ Vybrať túto skupinu ¦ Velg denne gruppen
+Groupe {n} ¦ Skupina {n} ¦ Gruppe {n}
+le tableau est fermé ¦ tabuľa je zatvorená ¦ tavlen er lukket
+d’autres changements ont suivi : utilise ↶ dans la barre du tableau ¦ nasledovali ďalšie zmeny: použi ↶ v lište tabule ¦ andre endringer har fulgt etter: bruk ↶ i tavlens linje
+Ce tableau ¦ Táto tabuľa ¦ Denne tavlen
+Choisir le pinceau ¦ Vybrať štetec ¦ Velg pensel
+Dureté du bord : 100 % net, moins = flou ¦ Tvrdosť okraja: 100 % ostrý, menej = rozmazaný ¦ Kantens hardhet: 100 % skarp, mindre = uskarp
+Les gommes n’effacent que les dessins à main levée. ¦ Gumy mažú len kresby voľnou rukou. ¦ Viskelær sletter bare frihåndstegninger.
+Clique où écrire. ¦ Klikni, kam chceš písať. ¦ Klikk der du vil skrive.
+Tire un trait ; posé sur un élément, il s’y accroche. ¦ Ťahaj čiaru; položená na prvok sa k nemu pripojí. ¦ Trekk en strek; slippes den på et element, fester den seg til det.
+Un lien tout prêt : légende, couleur et style ¦ Hotové spojenie: popis, farba a štýl ¦ En ferdig kobling: tekst, farge og stil
+lien|libre ¦ voľné ¦ fri
+Pointes ¦ Hroty ¦ Pilspisser
+Pointes de la même couleur que le trait ¦ Hroty v rovnakej farbe ako čiara ¦ Pilspisser i samme farge som streken
+Tire une flèche d’un élément à un autre : elle les suit. ¦ Ťahaj šípku od jedného prvku k druhému: bude ich nasledovať. ¦ Trekk en pil fra ett element til et annet: den følger dem.
+Toutes les formes, et créer la sienne ¦ Všetky tvary a vytvoriť vlastný ¦ Alle former, og lag din egen
+Toutes les formes ¦ Všetky tvary ¦ Alle former
+Nom;Année;Lieu ¦ Meno;Rok;Miesto ¦ Navn;År;Sted
+Tableau repris du tableur. ¦ Tabuľka prevzatá z tabuľkového editora. ¦ Tabellen hentet tilbake fra regnearket.
+{n}. Choisis un élément pour le régler. ¦ {n}. Vyber prvok a nastav ho. ¦ {n}. Velg et element for å justere det.
+Réglages de la légende ¦ Nastavenia legendy ¦ Innstillinger for tegnforklaringen
+Cellule <strong>{a}</strong> à <strong>{b}</strong> ¦ Bunky <strong>{a}</strong> až <strong>{b}</strong> ¦ Celle <strong>{a}</strong> til <strong>{b}</strong>
+Cellule <strong>{a}</strong> ¦ Bunka <strong>{a}</strong> ¦ Celle <strong>{a}</strong>
+Clique une cellule pour la choisir ¦ Klikni na bunku a vyber ju ¦ Klikk på en celle for å velge den
+⇧ + clic : plusieurs · double-clic : écrire ¦ ⇧ + klik: viac · dvojklik: písať ¦ ⇧ + klikk: flere · dobbeltklikk: skriv
+Simple note ¦ Obyčajná poznámka ¦ Enkel notat
+Lieux de… ¦ Miesta osoby… ¦ Steder for…
+Enlever ce repère ¦ Odobrať túto značku ¦ Fjern denne markøren
+Enlever : {n} ¦ Odobrať: {n} ¦ Fjern: {n}
+Aucune forme. ¦ Žiadny tvar. ¦ Ingen form.
+🧩 À partir d’une forme ¦ 🧩 Z tvaru ¦ 🧩 Ut fra en form
+Comment tracer avec la plume ¦ Ako kresliť perom ¦ Slik tegner du med pennen
+<strong>Clic</strong> : un point d’angle (trait droit). ¦ <strong>Klik</strong>: rohový bod (rovná čiara). ¦ <strong>Klikk</strong>: et hjørnepunkt (rett strek).
+<strong>Cliquer-glisser</strong> : un point arrondi ; tire pour régler la courbe. ¦ <strong>Klik a ťahanie</strong>: zaoblený bod; ťahaním nastavíš krivku. ¦ <strong>Klikk og dra</strong>: et avrundet punkt; dra for å justere kurven.
+<strong>Clic sur le premier point</strong> (jaune) : la forme se ferme. ¦ <strong>Klik na prvý bod</strong> (žltý): tvar sa uzavrie. ¦ <strong>Klikk på det første punktet</strong> (gult): formen lukkes.
+Glisser un point pour le <strong>déplacer</strong> ; glisser une poignée (rond rouge) pour <strong>courber</strong> ; avec <kbd>⌥</kbd> / <kbd>Alt</kbd>, les deux poignées deviennent indépendantes. ¦ Potiahnutím bodu ho <strong>presunieš</strong>; potiahnutím úchytu (červené koliesko) <strong>ohneš</strong>; s <kbd>⌥</kbd> / <kbd>Alt</kbd> sú oba úchyty nezávislé. ¦ Dra et punkt for å <strong>flytte</strong> det; dra et håndtak (rød prikk) for å <strong>bøye</strong>; med <kbd>⌥</kbd> / <kbd>Alt</kbd> blir de to håndtakene uavhengige.
+<kbd>⌥</kbd> / <kbd>Alt</kbd> + clic sur un point : angle ↔ arrondi ; <strong>double-clic</strong> : le supprimer. ¦ <kbd>⌥</kbd> / <kbd>Alt</kbd> + klik na bod: roh ↔ oblúk; <strong>dvojklik</strong>: vymazať ho. ¦ <kbd>⌥</kbd> / <kbd>Alt</kbd> + klikk på et punkt: hjørne ↔ avrundet; <strong>dobbeltklikk</strong>: slett det.
+Une forme fermée, puis un nouveau tracé à l’intérieur : un <strong>trou</strong>. ¦ Uzavretý tvar a potom nová cesta vo vnútri: <strong>diera</strong>. ¦ En lukket form, deretter en ny bane inni: et <strong>hull</strong>.
+{n} sur le tableau : chaque trait devient une partie remplie de la forme. ¦ {n} na tabuli: každá čiara sa stane vyplnenou časťou tvaru. ¦ {n} på tavlen: hver strek blir en fylt del av formen.
+Choisis d’abord un ou plusieurs dessins à main levée sur le tableau (outil ✍︎), puis reviens ici. ¦ Najprv vyber na tabuli jednu alebo viac kresieb voľnou rukou (nástroj ✍︎), potom sa sem vráť. ¦ Velg først én eller flere frihåndstegninger på tavlen (verktøyet ✍︎), og kom så tilbake hit.
+Nom de la forme ¦ Názov tvaru ¦ Formens navn
+Ce dessin est trop détaillé pour devenir une forme : prends un dessin plus simple (ou moins de traits). ¦ Táto kresba je príliš podrobná na to, aby sa stala tvarom: vezmi jednoduchšiu kresbu (alebo menej čiar). ¦ Tegningen er for detaljert til å bli en form: ta en enklere tegning (eller færre streker).
+Forme « {name} » créée : elle est dans « Mes formes ». ¦ Tvar „{name}“ vytvorený: je v „Moje tvary“. ¦ Formen «{name}» er opprettet: den ligger i «Mine former».
+Ce navigateur ne lit pas les polices de l’ordinateur : tape le nom de la police (ou fais des listes dans Réglages → Tableaux). ¦ Tento prehliadač nevie čítať písma počítača: napíš názov písma (alebo si urob zoznamy v Nastavenia → Tabule). ¦ Nettleseren kan ikke lese skriftene på datamaskinen: skriv inn skriftens navn (eller lag lister i Innstillinger → Tavler).
+{n} de l’ordinateur lues : leurs graisses exactes sont proposées (et « Aa Toutes les polices… » les montre toutes). ¦ Načítané z počítača: {n}; ponúkajú sa ich presné rezy (a „Aa Všetky písma…“ ich ukáže všetky). ¦ {n} lest fra datamaskinen: de nøyaktige vektene deres tilbys (og «Aa Alle skrifter…» viser alle).
+Lecture des polices refusée : {error} ¦ Čítanie písiem odmietnuté: {error} ¦ Lesing av skrifter avvist: {error}
+Ce fichier n’est pas un tableau exporté. ¦ Tento súbor nie je exportovaná tabuľa. ¦ Filen er ikke en eksportert tavle.
+Ce fichier n’est pas un tableau exporté de l’app. ¦ Tento súbor nie je tabuľa exportovaná z aplikácie. ¦ Filen er ikke en tavle eksportert fra appen.
+Import : vérification des fiches et médias… ¦ Import: kontrola kariet a médií… ¦ Import: kontrollerer oppføringer og medier…
+Média absent ici : {name} ¦ Médium tu chýba: {name} ¦ Mediefil mangler her: {name}
+{name} (fiche absente ici) ¦ {name} (karta tu chýba) ¦ {name} (oppføringen mangler her)
+{name} (absent ici) ¦ {name} (tu chýba) ¦ {name} (mangler her)
+{name} (dossier non importé) ¦ {name} (priečinok neimportovaný) ¦ {name} (mappen ikke importert)
+Tableau importé ¦ Importovaná tabuľa ¦ Importert tavle
+Associations reprises. ¦ Prepojenia prevzaté. ¦ Koblinger beholdt.
+{n} sur {total} reprises (les autres visent une autre base). ¦ Prevzaté {n} z {total} (ostatné smerujú na inú databázu). ¦ {n} av {total} beholdt (de andre peker til en annen database).
+Les associations visent une autre base : non reprises. ¦ Prepojenia smerujú na inú databázu: neprevzaté. ¦ Koblingene peker til en annen database: ikke beholdt.
+Import des photos : {n} / {total}… ¦ Import fotiek: {n} / {total}… ¦ Importerer bilder: {n} / {total}…
+Média non importé : {name} ¦ Médium neimportované: {name} ¦ Mediefil ikke importert: {name}
+Tableau importé. {n} (fiche, média, recueil ou dossier) devenus des notes. ¦ Tabuľa importovaná. {n} (karta, médium, zborník alebo priečinok) sa zmenilo na poznámky. ¦ Tavlen er importert. {n} (oppføring, mediefil, samling eller mappe) ble til notater.
+Une adresse qui commence par https:// ¦ Adresa, ktorá začína https:// ¦ En adresse som begynner med https://
+Choisis un écran (pour une fiche ou une commune, passe par « Une fiche » ou l’Éditeur de widgets). ¦ Vyber obrazovku (pre kartu alebo obec použi „Karta“ alebo Editor widgetov). ¦ Velg en skjerm (for en oppføring eller et sted, bruk «En oppføring» eller Widgetredigering).
+Ne plus associer ¦ Zrušiť prepojenie ¦ Fjern koblingen
+Le tableau garde son rangement ({where}) ; il apparaît en plus là où tu l’associes (sur la fiche de la personne, dans l’enquête…). ¦ Tabuľa si ponechá svoje umiestnenie ({where}); navyše sa objaví tam, kde ju prepojíš (na karte osoby, v pátraní…). ¦ Tavlen beholder plassen sin ({where}); den vises i tillegg der du kobler den (på personens oppføring, i undersøkelsen…).
+rangement|libre ¦ voľné ¦ fri
+(aucun pour l’instant) ¦ (zatiaľ žiadne) ¦ (ingen ennå)
+Choisis à quoi associer le tableau. ¦ Vyber, s čím tabuľu prepojiť. ¦ Velg hva tavlen skal kobles til.
+Déjà associé. ¦ Už prepojené. ¦ Allerede koblet.
+Tableau associé. ¦ Tabuľa prepojená. ¦ Tavlen er koblet.
+le tableau à l’écran ¦ tabuľa na obrazovke ¦ tavlen på skjermen
+Pas d’image pour cet instantané. ¦ Pre tento snímok nie je obrázok. ¦ Ikke noe bilde for dette øyeblikksbildet.
+📸 Prendre un instantané ¦ 📸 Urobiť snímok stavu ¦ 📸 Ta et øyeblikksbilde
+Un nom (facultatif) : ¦ Názov (nepovinný): ¦ Et navn (valgfritt):
+avant la visite aux archives ¦ pred návštevou archívu ¦ før arkivbesøket
+Instantané pris. ¦ Snímok stavu urobený. ¦ Øyeblikksbilde tatt.
+↺ Revenir à cet état ¦ ↺ Vrátiť sa k tomuto stavu ¦ ↺ Gå tilbake til denne tilstanden
+⧉ En faire un tableau ¦ ⧉ Urobiť z toho tabuľu ¦ ⧉ Lag en tavle av det
+Aucun instantané pour l’instant ¦ Zatiaľ žiadny snímok stavu ¦ Ingen øyeblikksbilder ennå
+Versions automatiques ({n}) ¦ Automatické verzie ({n}) ¦ Automatiske versjoner ({n})
+une par jour de travail au plus, les 30 dernières gardées ¦ najviac jedna za pracovný deň, uchováva sa posledných 30 ¦ høyst én per arbeidsdag, de siste 30 beholdes
+Nom du nouveau tableau ¦ Názov novej tabule ¦ Navnet på den nye tavlen
+même rangement ({where}) et mêmes associations ¦ rovnaké umiestnenie ({where}) a rovnaké prepojenia ¦ samme plass ({where}) og samme koblinger
+Le contenu de l’instantané est recopié dans un tableau à part ; l’original ne change pas. Les dossiers posés dedans restent ceux de l’original. ¦ Obsah snímku sa skopíruje do samostatnej tabule; originál sa nemení. Priečinky v nej zostávajú priečinkami originálu. ¦ Innholdet i øyeblikksbildet kopieres til en egen tavle; originalen endres ikke. Mappene i den forblir originalens.
+Tout le contenu actuel est recopié dans un tableau à part ; l’original ne change pas. Les dossiers posés dedans restent ceux de l’original. ¦ Celý súčasný obsah sa skopíruje do samostatnej tabule; originál sa nemení. Priečinky v nej zostávajú priečinkami originálu. ¦ Alt nåværende innhold kopieres til en egen tavle; originalen endres ikke. Mappene i den forblir originalens.
+Nouveau tableau créé. ¦ Nová tabuľa vytvorená. ¦ Ny tavle opprettet.
+État du tableau changé. ¦ Stav tabule zmenený. ¦ Tavlens status er endret.
+(avec photos) ¦ (s fotkami) ¦ (med bilder)
+(sélection) ¦ (výber) ¦ (utvalg)
+Fichier du tableau enregistré ({size}) : « ＋ Ajouter → Importer un tableau » le rouvre. ¦ Súbor tabule uložený ({size}): „＋ Pridať → Importovať tabuľu“ ho znova otvorí. ¦ Tavlefilen er lagret ({size}): «＋ Legg til → Importer en tavle» åpner den igjen.
+{n} Mo ¦ {n} MB ¦ {n} MB
+{n} ko ¦ {n} kB ¦ {n} kB
+Préparation… ¦ Príprava… ¦ Forbereder…
+image impossible (une image d’un autre site l’empêche, ou le tableau est trop grand) ¦ obrázok sa nedá vytvoriť (bráni tomu obrázok z inej stránky, alebo je tabuľa príliš veľká) ¦ bilde ikke mulig (et bilde fra et annet nettsted hindrer det, eller tavlen er for stor)
+Une copie de l’image est rangée dans les médias. ¦ Kópia obrázka je uložená v médiách. ¦ En kopi av bildet er lagt i medier.
+Copie dans les médias impossible : {error} ¦ Kópia do médií nie je možná: {error} ¦ Kopi til medier ikke mulig: {error}
+💾 Fichier léger ¦ 💾 Ľahký súbor ¦ 💾 Lett fil
+sans les photos : petit, pour garder une copie ¦ bez fotiek: malý, na uchovanie kópie ¦ uten bilder: liten, for å ta vare på en kopi
+💾 Fichier complet ¦ 💾 Úplný súbor ¦ 💾 Komplett fil
+avec {n} : pour une autre base ¦ s {n}: pre inú databázu ¦ med {n}: til en annen database
+pareil : pas de photo de l’app ¦ rovnaké: žiadna fotka z aplikácie ¦ det samme: ingen bilder fra appen
+⤓ Exporter le tableau… (PDF, image, impression, fichier) ¦ ⤓ Exportovať tabuľu… (PDF, obrázok, tlač, súbor) ¦ ⤓ Eksporter tavlen… (PDF, bilde, utskrift, fil)
+⤓ Exporter la sélection en image… ¦ ⤓ Exportovať výber ako obrázok… ¦ ⤓ Eksporter utvalget som bilde…
+⭐ En faire un modèle (pour les nouveaux tableaux) ¦ ⭐ Urobiť z nej šablónu (pre nové tabule) ¦ ⭐ Gjør den til en mal (for nye tavler)
+Ajuster à la sélection ¦ Prispôsobiť výberu ¦ Tilpass til utvalget
+Adapter le contenu à la fenêtre ¦ Prispôsobiť obsah oknu ¦ Tilpass innholdet til vinduet
+Pour répartir, choisis au moins trois éléments. ¦ Na rozmiestnenie vyber aspoň tri prvky. ¦ For å fordele må du velge minst tre elementer.
+{todo} à vérifier · {ok} · {no} — clic : aller à la suivante à vérifier ¦ {todo} na overenie · {ok} · {no} — klik: prejsť na ďalšiu na overenie ¦ {todo} å sjekke · {ok} · {no} — klikk: gå til det neste som skal sjekkes
+Plus rien à vérifier : bravo ! ¦ Už nie je čo overovať: výborne! ¦ Ingenting mer å sjekke: godt jobbet!
+Question ¦ Otázka ¦ Spørsmål
+Idée ¦ Nápad ¦ Idé
+Source ? ¦ Prameň? ¦ Kilde?
+Important ¦ Dôležité ¦ Viktig
+Réglé ¦ Vyriešené ¦ Løst
+Pas encore de commentaire sur cet élément. ¦ K tomuto prvku zatiaľ nie je komentár. ¦ Ingen kommentar til dette elementet ennå.
+(sans mot) ¦ (bez slova) ¦ (uten ord)
+＋ un autre mot… ¦ ＋ iné slovo… ¦ ＋ et annet ord…
+Retirer ce mot ¦ Odobrať toto slovo ¦ Fjern dette ordet
+Écris un commentaire ou choisis un mot. ¦ Napíš komentár alebo vyber slovo. ¦ Skriv en kommentar eller velg et ord.
+La personne de la frise ¦ Osoba z časovej osi ¦ Tidslinjens person
+Les lieux de… ¦ Miesta osoby… ¦ Stedene for…
+Repère « {name} » posé. ¦ Značka „{name}“ umiestnená. ¦ Markøren «{name}» er plassert.
+Cette enquête ne porte pas sur une personne : choisis-en une autre. ¦ Toto pátranie sa netýka osoby: vyber iné. ¦ Denne undersøkelsen handler ikke om en person: velg en annen.
+Aucun lieu avec ses coordonnées. ¦ Žiadne miesto so súradnicami. ¦ Ingen steder med koordinater.
+Enquête n° {n} ¦ Pátranie č. {n} ¦ Undersøkelse nr. {n}
+Choisis la personne (ou « seulement mes repères »). ¦ Vyber osobu (alebo „len moje značky“). ¦ Velg personen (eller «bare mine markører»).
+Les lieux de {name} ¦ Miesta osoby {name} ¦ Stedene for {name}
+Arbre : lecture des fiches… ¦ Strom: čítanie kariet… ¦ Tre: leser oppføringer…
+Arbre posé : {n}. Chaque carte reste liée à sa fiche (double-clic pour l’ouvrir). ¦ Strom umiestnený: {n}. Každá kartička zostáva prepojená so svojou kartou (dvojklikom ju otvoríš). ¦ Treet er plassert: {n}. Hvert kort forblir knyttet til sin oppføring (dobbeltklikk for å åpne den).
+Arbre posé : {n} (limite atteinte). Chaque carte reste liée à sa fiche (double-clic pour l’ouvrir). ¦ Strom umiestnený: {n} (dosiahnutý limit). Každá kartička zostáva prepojená so svojou kartou (dvojklikom ju otvoríš). ¦ Treet er plassert: {n} (grensen er nådd). Hvert kort forblir knyttet til sin oppføring (dobbeltklikk for å åpne den).
+Pas de micro disponible ici. ¦ Tu nie je k dispozícii mikrofón. ¦ Ingen mikrofon tilgjengelig her.
+Titre du mémo ¦ Názov poznámky ¦ Memoens tittel
+Mémo du {date} ¦ Poznámka z {date} ¦ Memo fra {date}
+Le son est rangé avec ce tableau (et dans les médias de l’app). ¦ Zvuk je uložený s touto tabuľou (a v médiách aplikácie). ¦ Lyden lagres med denne tavlen (og i appens medier).
+Micro refusé : autorise-le dans les réglages de l’ordinateur. ¦ Mikrofón odmietnutý: povoľ ho v nastaveniach počítača. ¦ Mikrofonen ble avvist: tillat den i innstillingene på datamaskinen.
+Arrête d’abord l’enregistrement. ¦ Najprv zastav nahrávanie. ¦ Stopp opptaket først.
+Enregistre d’abord ton mémo. ¦ Najprv nahraj svoju poznámku. ¦ Ta opp memoen din først.
+Mémo vocal ¦ Hlasová poznámka ¦ Talememo
+{n}, en colonnes (un bout de tableur). ¦ {n}, v stĺpcoch (kúsok tabuľky). ¦ {n}, i kolonner (et stykke regneark).
+Mon modèle ¦ Moja šablóna ¦ Min mal
+Modèle trop lourd pour être gardé (des formes faites d’une image ?). ¦ Šablóna je príliš veľká na uloženie (tvary vytvorené z obrázka?). ¦ Malen er for tung til å lagres (former laget av et bilde?).
+Modèle « {name} » enregistré : il est dans « Nouveau tableau ». ¦ Šablóna „{name}“ uložená: je v „Nová tabuľa“. ¦ Malen «{name}» er lagret: den ligger i «Ny tavle».
+Calque « {name} » supprimé (ses éléments restent sur le calque principal) ¦ Vrstva „{name}“ vymazaná (jej prvky zostávajú na hlavnej vrstve) ¦ Laget «{name}» er slettet (elementene blir værende på hovedlaget)
+Calque supprimé (ses éléments restent sur le calque principal) ¦ Vrstva vymazaná (jej prvky zostávajú na hlavnej vrstve) ¦ Laget er slettet (elementene blir værende på hovedlaget)
+▶ Lancer la présentation ({n}) ¦ ▶ Spustiť prezentáciu ({n}) ¦ ▶ Start presentasjonen ({n})
+▶ Lancer la présentation ¦ ▶ Spustiť prezentáciu ¦ ▶ Start presentasjonen
+＋ La vue actuelle comme étape ¦ ＋ Súčasný pohľad ako krok ¦ ＋ Den gjeldende visningen som trinn
+＋ La sélection comme étape ¦ ＋ Výber ako krok ¦ ＋ Utvalget som trinn
+＋ Une étape par cadre ¦ ＋ Jeden krok na rámec ¦ ＋ Ett trinn per ramme
+☰ Les étapes (renommer, ordre…) ¦ ☰ Kroky (premenovať, poradie…) ¦ ☰ Trinnene (gi nytt navn, rekkefølge…)
+▶ Les étapes de la présentation ¦ ▶ Kroky prezentácie ¦ ▶ Presentasjonens trinn
+Étape {n} ¦ Krok {n} ¦ Trinn {n}
+{n} dans la présentation. ¦ {n} v prezentácii. ¦ {n} i presentasjonen.
+Aucune étape. ¦ Žiadny krok. ¦ Ingen trinn.
+Étape remplacée par la vue actuelle. ¦ Krok nahradený súčasným pohľadom. ¦ Trinnet er erstattet med den gjeldende visningen.
+Ajoute d’abord des étapes (▶ Présenter → ＋ La vue actuelle comme étape) ou des cadres. ¦ Najprv pridaj kroky (▶ Prezentovať → ＋ Súčasný pohľad ako krok) alebo rámce. ¦ Legg først til trinn (▶ Presenter → ＋ Den gjeldende visningen som trinn) eller rammer.
+Étape d’avant ¦ Predchádzajúci krok ¦ Forrige trinn
+Étape suivante ¦ Ďalší krok ¦ Neste trinn
+→ ou Espace ¦ → alebo medzerník ¦ → eller mellomrom
+Quitter ¦ Ukončiť ¦ Avslutt
+Remplacer par la vue actuelle ¦ Nahradiť súčasným pohľadom ¦ Erstatt med den gjeldende visningen
+Supprimer le tableau « {name} » et tous ses dossiers ? Les photos, sons et fiches posés dessus restent dans l’app. ¦ Vymazať tabuľu „{name}“ a všetky jej priečinky? Fotky, zvuky a karty na nej zostanú v aplikácii. ¦ Slette tavlen «{name}» og alle mappene dens? Bilder, lyder og oppføringer på den blir værende i appen.
+sans titre ¦ bez názvu ¦ uten tittel
+Tableau et dossiers supprimés. ¦ Tabuľa a priečinky vymazané. ¦ Tavlen og mappene er slettet.
+Tableau supprimé. ¦ Tabuľa vymazaná. ¦ Tavlen er slettet.
+Ce qu’on sait ¦ Čo vieme ¦ Det vi vet
+Sources à voir ¦ Pramene na pozretie ¦ Kilder å se på
+Idée centrale ¦ Ústredná myšlienka ¦ Sentral idé
+Branche {n} ¦ Vetva {n} ¦ Gren {n}
+Date {n} ¦ Dátum {n} ¦ Dato {n}
+Arbre à la main ¦ Ručne kreslený strom ¦ Håndtegnet tre
+Enfant ¦ Dieťa ¦ Barn
+Une toile libre. ¦ Voľné plátno. ¦ Et fritt lerret.
+Mur d’indices ¦ Stena stôp ¦ Sporvegg
+Fond de liège, une question au centre, des notes autour. ¦ Korkové pozadie, otázka v strede, poznámky okolo. ¦ Korkbakgrunn, et spørsmål i midten, notater rundt.
+Carte mentale ¦ Myšlienková mapa ¦ Tankekart
+Une idée au centre, des branches. ¦ Myšlienka v strede, vetvy. ¦ En idé i midten, grener.
+Une flèche du temps et des repères. ¦ Šípka času a značky. ¦ En tidspil og markører.
+Des cases pour une famille, à relier. ¦ Políčka pre rodinu na prepojenie. ¦ Bokser for en familie, som skal kobles.
+Nouveau tableau ¦ Nová tabuľa ¦ Ny tavle
+Qui est le père de Marie ? ¦ Kto je otcom Marie? ¦ Hvem er Maries far?
+Piste 1, les témoins… ¦ Stopa 1, svedkovia… ¦ Spor 1, vitnene…
+Pour commencer ¦ Na začiatok ¦ Til å begynne med
+Pour faire tes propres modèles : dans un tableau, ⤓ Exporter → ⭐ En faire un modèle. ¦ Vlastné šablóny: v tabuli ⤓ Exportovať → ⭐ Urobiť z nej šablónu. ¦ For å lage dine egne maler: i en tavle, ⤓ Eksporter → ⭐ Gjør den til en mal.
+Supprimer ce modèle ¦ Vymazať túto šablónu ¦ Slett denne malen
+Modèle « {name} » supprimé ¦ Šablóna „{name}“ vymazaná ¦ Malen «{name}» er slettet
+Tableau sans titre ¦ Tabuľa bez názvu ¦ Tavle uten tittel
+Modèle introuvable. ¦ Šablóna sa nenašla. ¦ Fant ikke malen.
+Libre ¦ Voľná ¦ Fri
+Supprimer ce tableau ¦ Vymazať túto tabuľu ¦ Slett denne tavlen
+Chercher… (titre, partie) ¦ Hľadať… (názov, časť) ¦ Søk… (tittel, del)
+Rechercher un tableau ¦ Hľadať tabuľu ¦ Søk etter en tavle
+({n} prometteuses) ¦ ({n} sľubných) ¦ ({n} lovende)
+{what} : {value} ¦ {what}: {value} ¦ {what}: {value}
+{col} : les plus récents ¦ {col}: najnovšie ¦ {col}: nyeste først
+{col} : les plus anciens ¦ {col}: najstaršie ¦ {col}: eldste først
+{col} : du plus grand au plus petit ¦ {col}: od najväčšieho po najmenšie ¦ {col}: størst til minst
+{col} : du plus petit au plus grand ¦ {col}: od najmenšieho po najväčšie ¦ {col}: minst til størst
+{help} Un clic sur un titre l’ouvre ; un clic sur une colonne trie. ¦ {help} Kliknutím na názov ho otvoríš; kliknutím na stĺpec zoraďuješ. ¦ {help} Klikk på en tittel for å åpne den; klikk på en kolonne for å sortere.
+Un clic sur un titre l’ouvre ; un clic sur une colonne trie. ¦ Kliknutím na názov ho otvoríš; kliknutím na stĺpec zoraďuješ. ¦ Klikk på en tittel for å åpne den; klikk på en kolonne for å sortere.
+Rien ne correspond à ta recherche ¦ Vyhľadávaniu nič nezodpovedá ¦ Ingenting passer til søket ditt
+Les tableaux se créent dans Enquêtes → Tableaux. ¦ Tabule sa vytvárajú v Pátrania → Tabule. ¦ Tavler opprettes i Undersøkelser → Tavler.
+Partie ¦ Časť ¦ Del
+Communes faites ¦ Hotové obce ¦ Ferdige steder
+Archivé ¦ Archivované ¦ Arkivert
+Tous les tableaux : ceux des enquêtes, des battues, des projets, et les tableaux libres. ¦ Všetky tabule: z pátraní, hromadných pátraní, projektov a voľné tabule. ¦ Alle tavler: fra undersøkelser, leteaksjoner, prosjekter og de frie tavlene.
+Les projets de l’Atelier de recherche, avec leur état et leur échéance. ¦ Projekty Výskumnej dielne s ich stavom a termínom. ¦ Forskningsverkstedets prosjekter, med status og frist.
+Toutes les enquêtes, avec leurs pistes et leurs tableaux. ¦ Všetky pátrania s ich stopami a tabuľami. ¦ Alle undersøkelser, med spor og tavler.
+Toutes les battues, commune par commune. ¦ Všetky hromadné pátrania, obec po obci. ¦ Alle leteaksjoner, sted for sted.
+Chercher un tableau… (titre, enquête, battue) ¦ Hľadať tabuľu… (názov, pátranie, hromadné pátranie) ¦ Søk etter en tavle… (tittel, undersøkelse, leteaksjon)
+Chercher une battue… (titre, commune, personne) ¦ Hľadať hromadné pátranie… (názov, obec, osoba) ¦ Søk etter en leteaksjon… (tittel, sted, person)
+Chercher un projet… (titre, sorte) ¦ Hľadať projekt… (názov, druh) ¦ Søk etter et prosjekt… (tittel, type)
+Chercher une enquête… (titre, personne) ¦ Hľadať pátranie… (názov, osoba) ¦ Søk etter en undersøkelse… (tittel, person)
+Une toile libre, comme un grand tableau de liège : on y pose des notes, des formes, des flèches, des dessins, des photos, des sons, des PDF, des fiches, des écrans de l’app… Chaque tableau peut être libre ou rangé dans une enquête, une battue ou un projet de l’Atelier. ¦ Voľné plátno ako veľká korková nástenka: dávaš na ňu poznámky, tvary, šípky, kresby, fotky, zvuky, PDF, karty, obrazovky aplikácie… Každá tabuľa môže byť voľná alebo uložená v pátraní, hromadnom pátraní alebo projekte Dielne. ¦ Et fritt lerret, som en stor korktavle: du setter notater, former, piler, tegninger, bilder, lyder, PDF-er, oppføringer, appskjermer på den… Hver tavle kan være fri eller ligge i en undersøkelse, en leteaksjon eller et prosjekt i Verkstedet.
+Aucun tableau ici. ¦ Tu nie je žiadna tabuľa. ¦ Ingen tavle her.
+Aucun tableau pour l’instant ¦ Zatiaľ žiadna tabuľa ¦ Ingen tavle ennå
+Vide, mur d’indices, carte mentale, frise… ¦ Prázdna, stena stôp, myšlienková mapa, časová os… ¦ Tom, sporvegg, tankekart, tidslinje…
+Des toiles libres pour chercher, relier, montrer : notes, flèches, photos, sons, fiches… ¦ Voľné plátna na hľadanie, prepájanie, ukazovanie: poznámky, šípky, fotky, zvuky, karty… ¦ Frie lerreter for å søke, koble, vise: notater, piler, bilder, lyder, oppføringer…
+Dans une enquête ¦ V pátraní ¦ I en undersøkelse
+Dans l’Atelier ¦ V Dielni ¦ I Verkstedet
+＋ Nouveau tableau ici ¦ ＋ Nová tabuľa tu ¦ ＋ Ny tavle her
+Un tableau libre pour cette recherche : notes, flèches, photos, fiches… Tu peux en faire plusieurs (une « partie » chacun). ¦ Voľná tabuľa pre tento výskum: poznámky, šípky, fotky, karty… Môžeš ich urobiť viac (každá ako „časť“). ¦ En fri tavle for denne forskningen: notater, piler, bilder, oppføringer… Du kan lage flere (en «del» hver).
+enquêtes ¦ pátrania ¦ undersøkelser
+TABLEAU ¦ TABUĽA ¦ TAVLE
+TABLEAUX ¦ TABULE ¦ TAVLER
+Ranger le tableau ¦ Uložiť tabuľu do ¦ Plasser tavlen
+Ranger ¦ Uložiť do ¦ Plasser
+Laquelle ¦ Ktoré ¦ Hvilken
+(facultatif : pour avoir plusieurs tableaux, « Piste 1 », « Les témoins »…) ¦ (nepovinné: ak chceš viac tabúľ, „Stopa 1“, „Svedkovia“…) ¦ (valgfritt: for å ha flere tavler, «Spor 1», «Vitnene»…)
+(facultatif : piste 1, les témoins, la branche paternelle…) ¦ (nepovinné: stopa 1, svedkovia, otcovská vetva…) ¦ (valgfritt: spor 1, vitnene, farsgrenen…)
+(aucune) ¦ (žiadne) ¦ (ingen)
+▭ Rectangle ¦ ▭ Obdĺžnik ¦ ▭ Rektangel
+▢ Arrondi ¦ ▢ Zaoblený ¦ ▢ Avrundet
+◯ Ovale ¦ ◯ Ovál ¦ ◯ Oval
+△ Triangle ¦ △ Trojuholník ¦ △ Trekant
+☆ Étoile ¦ ☆ Hviezda ¦ ☆ Stjerne
+⬡ Hexagone ¦ ⬡ Šesťuholník ¦ ⬡ Sekskant
+💬 Bulle ¦ 💬 Bublina ¦ 💬 Snakkeboble
+☁ Nuage ¦ ☁ Oblak ¦ ☁ Sky
+pinceau|Stylo ¦ Pero ¦ Penn
+pinceau|Monoligne ¦ Jednotná linka ¦ Jevn strek
+pinceau|Marqueur ¦ Fixka ¦ Tusj
+pinceau|Crayon ¦ Ceruzka ¦ Blyant
+pinceau|Pastel ¦ Pastel ¦ Pastell
+pinceau|Stylo-plume ¦ Plniace pero ¦ Fyllepenn
+pinceau|Calame ¦ Trstinové pero ¦ Rørpenn
+pinceau|Pinceau ¦ Štetec ¦ Pensel
+pinceau|Aquarelle ¦ Akvarel ¦ Akvarell
+pinceau|Remplissage ¦ Výplň ¦ Fyll
+pinceau|Surligneur ¦ Zvýrazňovač ¦ Merkepenn
+pinceau|Craie ¦ Krieda ¦ Kritt
+pinceau|Néon ¦ Neón ¦ Neon
+pinceau|Aérographe ¦ Airbrush ¦ Airbrush
+pinceau|Pointillé ¦ Bodkovaná ¦ Prikket
+Néon ¦ Neón ¦ Neon
+Pointillé ¦ Bodkovaná ¦ Prikket
+trait|— droit ¦ — rovná ¦ — rett
+trait|⌒ courbe ¦ ⌒ zakrivená ¦ ⌒ buet
+trait|⌐ coudé ¦ ⌐ lomená ¦ ⌐ vinklet
+trait|∿ vague ¦ ∿ vlnovka ¦ ∿ bølge
+trait|⩘ zigzag ¦ ⩘ cikcak ¦ ⩘ sikksakk
+trait|⤳ contourne les éléments ¦ ⤳ obchádza prvky ¦ ⤳ går rundt elementene
+⌐ coudé ¦ ⌐ lomená ¦ ⌐ vinklet
+⤳ contourne les éléments ¦ ⤳ obchádza prvky ¦ ⤳ går rundt elementene
+fond|Fond à points ¦ Bodkované pozadie ¦ Prikket bakgrunn
+fond|Quadrillé ¦ Štvorčekované ¦ Rutet
+fond|Lignes ¦ Linajky ¦ Linjer
+fond|Uni ¦ Jednofarebné ¦ Ensfarget
+fond|Papier ¦ Papier ¦ Papir
+fond|Liège ¦ Korok ¦ Kork
+fond|Sombre ¦ Tmavé ¦ Mørkt
+fond|Couleur à choisir… ¦ Farba podľa výberu… ¦ Valgfri farge…
+Fond à points ¦ Bodkované pozadie ¦ Prikket bakgrunn
+Liège ¦ Korok ¦ Kork
+Couleur à choisir… ¦ Farba podľa výberu… ¦ Valgfri farge…
+Motif sur la couleur ¦ Vzor na farbe ¦ Mønster på fargen
+motif|sans motif ¦ bez vzoru ¦ uten mønster
+motif|points ¦ bodky ¦ prikker
+motif|quadrillé ¦ štvorčeky ¦ rutet
+motif|lignes ¦ linajky ¦ linjer
+quadrillé ¦ štvorčekované ¦ rutet
+Instantanés : figer l’état du tableau, y revenir, en faire un nouveau tableau ¦ Snímky stavu: zmraziť stav tabule, vrátiť sa k nemu, urobiť z neho novú tabuľu ¦ Øyeblikksbilder: frys tavlens tilstand, gå tilbake til den, lag en ny tavle av den
+📸 Instantanés ¦ 📸 Snímky stavu ¦ 📸 Øyeblikksbilder
+Créer un nouveau tableau à partir de celui-ci ¦ Vytvoriť novú tabuľu z tejto ¦ Opprett en ny tavle ut fra denne
+PDF, image PNG ou JPG, impression, fichier du tableau, modèle ¦ PDF, obrázok PNG alebo JPG, tlač, súbor tabule, šablóna ¦ PDF, PNG- eller JPG-bilde, utskrift, tavlefil, mal
+Les pistes à vérifier : clic pour aller à la suivante ¦ Stopy na overenie: kliknutím prejdeš na ďalšiu ¦ Spor å sjekke: klikk for å gå til det neste
+Chercher dans le tableau ¦ Hľadať na tabuli ¦ Søk på tavlen
+Grille aimantée et guides d’alignement ¦ Prichytávacia mriežka a vodiace čiary zarovnania ¦ Festerutenett og justeringslinjer
+Mini-carte du tableau (montrer ou cacher) ¦ Minimapa tabule (zobraziť alebo skryť) ¦ Tavlens minikart (vis eller skjul)
+Présenter : un parcours d’étapes ¦ Prezentovať: trasa krokov ¦ Presenter: en rute med trinn
+▶ Présenter ¦ ▶ Prezentovať ¦ ▶ Presenter
+Réglages des tableaux : disposition, ordre des outils, boutons montrés ou cachés ¦ Nastavenia tabúľ: rozloženie, poradie nástrojov, zobrazené alebo skryté tlačidlá ¦ Tavleinnstillinger: oppsett, rekkefølgen på verktøyene, viste eller skjulte knapper
+Verrouiller ou déverrouiller tout le tableau ¦ Zamknúť alebo odomknúť celú tabuľu ¦ Lås eller lås opp hele tavlen
+Supprimer ce tableau (et ses dossiers) ¦ Vymazať túto tabuľu (a jej priečinky) ¦ Slett denne tavlen (og mappene dens)
+Revenir aux tableaux ¦ Späť na tabule ¦ Tilbake til tavlene
+Titre du tableau ¦ Názov tabule ¦ Tavlens tittel
+État du tableau ¦ Stav tabule ¦ Tavlens status
+● En cours ¦ ● Prebieha ¦ ● Pågår
+⏸ En pause ¦ ⏸ Pozastavené ¦ ⏸ På pause
+✓ Terminé ¦ ✓ Hotovo ¦ ✓ Ferdig
+Enregistrer maintenant (le tableau s’enregistre aussi tout seul) ¦ Uložiť teraz (tabuľa sa ukladá aj sama) ¦ Lagre nå (tavlen lagres også av seg selv)
+Ajouter un fichier, un média, une fiche, un écran de l’app… ¦ Pridať súbor, médium, kartu, obrazovku aplikácie… ¦ Legg til en fil, en mediefil, en oppføring, en appskjerm…
+Zoom : ajuster à la sélection, adapter à la fenêtre… ¦ Priblíženie: prispôsobiť výberu, prispôsobiť oknu… ¦ Zoom: tilpass til utvalget, tilpass til vinduet…
+Montrer ce qui est groupé ¦ Zobraziť, čo je zoskupené ¦ Vis det som er gruppert
+Lâche ici : images, sons, vidéos, PDF… ¦ Pusti sem: obrázky, zvuky, videá, PDF… ¦ Slipp her: bilder, lyder, videoer, PDF-er…
+Un tableau vide. ¦ Prázdna tabuľa. ¦ En tom tavle.
+Choisis un outil à gauche, ou glisse ici des photos, des sons, des PDF… « ＋ Ajouter » pose une fiche, un écran de l’app, un widget, un recueil, une étiquette ou un dossier. Double-clic pour écrire. ¦ Vyber nástroj vľavo alebo sem pretiahni fotky, zvuky, PDF… „＋ Pridať“ vloží kartu, obrazovku aplikácie, widget, zborník, štítok alebo priečinok. Dvojklikom začneš písať. ¦ Velg et verktøy til venstre, eller dra bilder, lyder, PDF-er… hit. «＋ Legg til» plasserer en oppføring, en appskjerm, en widget, en samling, en etikett eller en mappe. Dobbeltklikk for å skrive.
+Revenir à la police du thème ¦ Vrátiť sa k písmu motívu ¦ Tilbake til temaets skrift
+Aimanter : grille aimantée et guides d’alignement ¦ Prichytávať: prichytávacia mriežka a vodiace čiary zarovnania ¦ Fest: festerutenett og justeringslinjer
+Choisis à droite une personne, une famille ou une enquête, ou pose des repères. ¦ Vyber vpravo osobu, rodinu alebo pátranie, alebo umiestni značky. ¦ Velg en person, en familie eller en undersøkelse til høyre, eller plasser markører.
+Glisser pour plier · double-clic pour enlever ce coude ¦ Ťahaním ohneš · dvojklikom odoberieš tento ohyb ¦ Dra for å bøye · dobbeltklikk for å fjerne denne knekken
+Glisser pour ajouter un coude ¦ Ťahaním pridáš ohyb ¦ Dra for å legge til en knekk
+Modifié… ¦ Zmenené… ¦ Endret…
+Enregistré ✓ ¦ Uložené ✓ ¦ Lagret ✓
+⚠ Modifié dans une autre fenêtre ¦ ⚠ Zmenené v inom okne ¦ ⚠ Endret i et annet vindu
+Envoi des fichiers… ¦ Odosielanie súborov… ¦ Sender filer…
+efface seulement ce que tu touches ¦ maže len to, čoho sa dotkneš ¦ sletter bare det du berører
+🩹 Gomme fine ¦ 🩹 Jemná guma ¦ 🩹 Fint viskelær
+🧽 Gomme à traits ¦ 🧽 Guma na čiary ¦ 🧽 Strekviskelær
+enlève le trait entier ¦ odstráni celú čiaru ¦ fjerner hele streken
+Autre couleur pour les notes ¦ Iná farba pre poznámky ¦ Annen farge for notater
+Tire une flèche d’un élément à un autre : elle les suit quand on les déplace. ¦ Ťahaj šípku od jedného prvku k druhému: nasleduje ich, keď ich presúvaš. ¦ Trekk en pil fra ett element til et annet: den følger dem når de flyttes.
+Clique où poser le tableur. ¦ Klikni, kam umiestniť tabuľku. ¦ Klikk der regnearket skal plasseres.
+Glisse pour te déplacer ; molette ou deux doigts aussi ; ⌘ + molette pour zoomer. ¦ Ťahaním sa pohybuješ; aj kolieskom alebo dvoma prstami; ⌘ + koliesko na priblíženie. ¦ Dra for å flytte deg; musehjul eller to fingre også; ⌘ + musehjul for å zoome.
+Clic : choisir · ⇧ + clic : en ajouter · ⌥ / Alt + glisser : dupliquer · glisser dans le vide : en choisir plusieurs · double-clic : écrire ou ouvrir. ¦ Klik: vybrať · ⇧ + klik: pridať · ⌥ / Alt + ťahanie: duplikovať · ťahanie v prázdnom priestore: vybrať viac · dvojklik: písať alebo otvoriť. ¦ Klikk: velg · ⇧ + klikk: legg til · ⌥ / Alt + dra: dupliser · dra på tom flate: velg flere · dobbeltklikk: skriv eller åpne.
+Les groupes sont montrés. ¦ Skupiny sú zobrazené. ¦ Gruppene vises.
+Groupes cachés. ¦ Skupiny skryté. ¦ Gruppene er skjult.
+Fond du cadre ¦ Pozadie rámčeka ¦ Boksens bakgrunn
+Bord du cadre ¦ Okraj rámčeka ¦ Boksens kant
+Épaisseur du bord ¦ Hrúbka okraja ¦ Kantens tykkelse
+Marge dans le cadre ¦ Vnútorný okraj rámčeka ¦ Innvendig marg i boksen
+Arrondi du cadre ¦ Zaoblenie rámčeka ¦ Boksens avrunding
+Position le long du trait ¦ Poloha pozdĺž čiary ¦ Plassering langs streken
+sur le trait ¦ na čiare ¦ på streken
+au-dessus ¦ nad ¦ over
+en dessous ¦ pod ¦ under
+Écart avec le trait ¦ Vzdialenosť od čiary ¦ Avstand fra streken
+suivre l’angle du trait ¦ nasledovať uhol čiary ¦ følg strekens vinkel
+Fond du tableau ¦ Pozadie tabule ¦ Tavlens bakgrunn
+⌘Z annuler · ⌘D dupliquer · ⌘G grouper (⇧ pour dégrouper) · ⌘L verrouiller · ] [ devant / derrière · flèches pour pousser · espace pour se déplacer · ⌘ + molette pour zoomer · coller une image ou une adresse web. ¦ ⌘Z späť · ⌘D duplikovať · ⌘G zoskupiť (⇧ na zrušenie) · ⌘L zamknúť · ] [ dopredu / dozadu · šípky na posun · medzerník na pohyb · ⌘ + koliesko na priblíženie · vložiť obrázok alebo webovú adresu. ¦ ⌘Z angre · ⌘D dupliser · ⌘G grupper (⇧ for å oppheve) · ⌘L lås · ] [ fremst / bakerst · piler for å flytte litt · mellomrom for å flytte deg · ⌘ + musehjul for å zoome · lim inn et bilde eller en nettadresse.
+Couleurs, formes, polices, tailles, ordre des menus : Réglages → Tableaux. ¦ Farby, tvary, písma, veľkosti, poradie ponúk: Nastavenia → Tabule. ¦ Farger, former, skrifter, størrelser, rekkefølgen på menyene: Innstillinger → Tavler.
+Puces et numéros ¦ Odrážky a číslovanie ¦ Punkttegn og nummerering
+• Puce ¦ • Odrážka ¦ • Punkt
+1. Nombres ¦ 1. Čísla ¦ 1. Tall
+I. Chiffres romains ¦ I. Rímske číslice ¦ I. Romertall
+a. Lettres ¦ a. Písmená ¦ a. Bokstaver
+A. Lettres capitales ¦ A. Veľké písmená ¦ A. Store bokstaver
+– Tiret ¦ – Pomlčka ¦ – Tankestrek
+☐ Cases à cocher ¦ ☐ Začiarkávacie políčka ¦ ☐ Avkrysningsbokser
+Les graisses exactes de la police : 🖥 ci-dessous (polices de l’ordinateur). ¦ Presné rezy písma: 🖥 nižšie (písma počítača). ¦ Skriftens nøyaktige vekter: 🖥 nedenfor (skriftene på datamaskinen).
+Lire les graisses exactes des polices de l’ordinateur ¦ Načítať presné rezy písiem počítača ¦ Les de nøyaktige vektene til skriftene på datamaskinen
+Couleur des pointes ¦ Farba hrotov ¦ Pilspissenes farge
+même couleur que le trait ¦ rovnaká farba ako čiara ¦ samme farge som streken
+(comme le trait) ¦ (ako čiara) ¦ (som streken)
+Pointe au début ¦ Hrot na začiatku ¦ Pilspiss i starten
+Pointe à la fin ¦ Hrot na konci ¦ Pilspiss i slutten
+Taille des pointes ¦ Veľkosť hrotov ¦ Pilspissenes størrelse
+Forme du trait ¦ Tvar čiary ¦ Strekens form
+frère de, a écrit à… ¦ brat osoby, písal(a) komu… ¦ bror av, skrev til…
+＋ ligne ¦ ＋ riadok ¦ ＋ rad
+＋ colonne ¦ ＋ stĺpec ¦ ＋ kolonne
+− ligne ¦ − riadok ¦ − rad
+− colonne ¦ − stĺpec ¦ − kolonne
+Ajouter une ligne dessous ¦ Pridať riadok pod ¦ Legg til en rad under
+Enlever la ligne ¦ Odobrať riadok ¦ Fjern raden
+Ajouter une colonne à droite ¦ Pridať stĺpec vpravo ¦ Legg til en kolonne til høyre
+Enlever la colonne ¦ Odobrať stĺpec ¦ Fjern kolonnen
+Fusionner les cellules choisies ¦ Zlúčiť vybrané bunky ¦ Slå sammen de valgte cellene
+⊞ Fusionner ¦ ⊞ Zlúčiť ¦ ⊞ Slå sammen
+Séparer les cellules ¦ Rozdeliť bunky ¦ Del cellene
+⊟ Séparer ¦ ⊟ Rozdeliť ¦ ⊟ Del
+Colonne plus étroite ¦ Užší stĺpec ¦ Smalere kolonne
+Colonne plus large ¦ Širší stĺpec ¦ Bredere kolonne
+Vider la cellule ¦ Vyprázdniť bunku ¦ Tøm cellen
+⌫ vider ¦ ⌫ vyprázdniť ¦ ⌫ tøm
+Le tableur en grand : plus de fonctions, tri, filtres, Excel… puis « ✓ Enregistrer et revenir » ¦ Tabuľkový editor vo veľkom: viac funkcií, zoraďovanie, filtre, Excel… potom „✓ Uložiť a vrátiť sa“ ¦ Regnearket i stort format: flere funksjoner, sortering, filtre, Excel… deretter «✓ Lagre og gå tilbake»
+Télécharger en CSV (Excel, Numbers…) ¦ Stiahnuť ako CSV (Excel, Numbers…) ¦ Last ned som CSV (Excel, Numbers…)
+première ligne en titre ¦ prvý riadok ako záhlavie ¦ første rad som overskrift
+première colonne en titre ¦ prvý stĺpec ako záhlavie ¦ første kolonne som overskrift
+une ligne sur deux teintée ¦ každý druhý riadok podfarbený ¦ annenhver rad farget
+Fond des titres ¦ Pozadie záhlavia ¦ Overskriftenes bakgrunn
+Fond de la cellule (les cellules choisies) ¦ Pozadie bunky (vybrané bunky) ¦ Cellens bakgrunn (de valgte cellene)
+Fond de la cellule ¦ Pozadie bunky ¦ Cellens bakgrunn
+aperçu vivant dans le tableau ¦ živý náhľad na tabuli ¦ levende forhåndsvisning på tavlen
+La fiche montre ¦ Karta ukazuje ¦ Oppføringen viser
+Lu dans la fiche à chaque ouverture du tableau : si la fiche change, la carte suit. ¦ Číta sa z karty pri každom otvorení tabule: keď sa karta zmení, kartička ju nasleduje. ¦ Leses fra oppføringen hver gang tavlen åpnes: endres oppføringen, følger kortet med.
+de la personne, son couple et ses enfants ¦ osoby, jej páru a detí ¦ personens, parets og barnas
+👤 Changer de personne ¦ 👤 Zmeniť osobu ¦ 👤 Bytt person
+aucune fiche (seulement mes repères) ¦ žiadna karta (len moje značky) ¦ ingen oppføring (bare mine markører)
+une personne et sa famille ¦ osoba a jej rodina ¦ en person og familien
+la personne d’une enquête ¦ osoba z pátrania ¦ personen i en undersøkelse
+👤 Choisir la personne ¦ 👤 Vybrať osobu ¦ 👤 Velg personen
+Une commune, un lieu… ¦ Obec, miesto… ¦ Et sted, en kommune…
+relier les lieux dans l’ordre (le parcours) ¦ prepojiť miesta v poradí (trasa) ¦ koble stedene i rekkefølge (ruten)
+Poser un repère ¦ Umiestniť značku ¦ Plasser en markør
+Lien tout prêt ¦ Hotové spojenie ¦ Ferdig kobling
+Glisse un « ＋ » sur le trait pour le plier en plusieurs segments. ¦ Potiahni „＋“ na čiare a ohneš ju do viacerých úsekov. ¦ Dra et «＋» på streken for å bøye den i flere segmenter.
+Aligner ¦ Zarovnať ¦ Juster
+Centrés (de gauche à droite) ¦ Na stred (zľava doprava) ¦ Sentrert (venstre mot høyre)
+Centrés (de haut en bas) ¦ Na stred (zhora nadol) ¦ Sentrert (ovenfra og ned)
+Même écart de gauche à droite ¦ Rovnaké rozostupy zľava doprava ¦ Samme avstand fra venstre mot høyre
+Même écart de haut en bas ¦ Rovnaké rozostupy zhora nadol ¦ Samme avstand ovenfra og ned
+Même largeur que le premier choisi ¦ Rovnaká šírka ako prvý vybraný ¦ Samme bredde som det første valgte
+Même hauteur que le premier choisi ¦ Rovnaká výška ako prvý vybraný ¦ Samme høyde som det første valgte
+Répartir ¦ Rozmiestniť ¦ Fordel
+⇹ en largeur ¦ ⇹ vodorovne ¦ ⇹ vannrett
+⇳ en hauteur ¦ ⇳ zvisle ¦ ⇳ loddrett
+═ même largeur ¦ ═ rovnaká šírka ¦ ═ samme bredde
+‖ même hauteur ¦ ‖ rovnaká výška ¦ ‖ samme høyde
+🔓 Déverrouiller ¦ 🔓 Odomknúť ¦ 🔓 Lås opp
+🔒 Verrouiller ¦ 🔒 Zamknúť ¦ 🔒 Lås
+⧉ Grouper ¦ ⧉ Zoskupiť ¦ ⧉ Grupper
+Dégrouper ¦ Zrušiť zoskupenie ¦ Opphev gruppe
+Faire de ce dessin une forme à toi (réutilisable) ¦ Urobiť z tejto kresby vlastný tvar (opakovane použiteľný) ¦ Gjør tegningen til din egen form (gjenbrukbar)
+✏️ En faire une forme ¦ ✏️ Urobiť z toho tvar ¦ ✏️ Gjør den til en form
+Devant ¦ Dopredu ¦ Fremst
+Derrière ¦ Dozadu ¦ Bakerst
+Image du web ¦ Obrázok z webu ¦ Bilde fra nettet
+Lien web ¦ Webový odkaz ¦ Nettlenke
+Frise vivante ¦ Živá časová os ¦ Levende tidslinje
+Rechercher une forme ¦ Hľadať tvar ¦ Søk etter en form
+Créer une forme à partir d’une autre (retourner, tourner, étirer, ajouter, percer) ¦ Vytvoriť tvar z iného (prevrátiť, otočiť, natiahnuť, pridať, preraziť) ¦ Opprett en form ut fra en annen (vend, roter, strekk, legg til, lag hull)
+＋ Créer une forme ¦ ＋ Vytvoriť tvar ¦ ＋ Opprett en form
+✒️ Plume (tracé) ¦ ✒️ Pero (cesta) ¦ ✒️ Penn (bane)
+✍︎ À partir de mon dessin ¦ ✍︎ Z mojej kresby ¦ ✍︎ Ut fra tegningen min
+🖼 À partir d’une image ¦ 🖼 Z obrázka ¦ 🖼 Ut fra et bilde
+Fermer le tracé en cours ¦ Uzavrieť aktuálnu cestu ¦ Lukk den gjeldende banen
+Commencer un autre tracé (un trou s’il est dans la forme) ¦ Začať ďalšiu cestu (diera, ak je vo vnútri tvaru) ¦ Start en ny bane (et hull hvis den er inne i formen)
+Supprimer le point choisi ¦ Vymazať vybraný bod ¦ Slett det valgte punktet
+Annuler le dernier point ¦ Vrátiť posledný bod ¦ Angre det siste punktet
+◯ Fermer ¦ ◯ Uzavrieť ¦ ◯ Lukk
+＋ Nouveau tracé ¦ ＋ Nová cesta ¦ ＋ Ny bane
+✕ Point ¦ ✕ Bod ¦ ✕ Punkt
+Une image PNG avec un fond transparent donne sa silhouette. Sinon, coche : ce qui est sombre devient la forme. ¦ Obrázok PNG s priehľadným pozadím dá svoju siluetu. Inak začiarkni: čo je tmavé, sa stane tvarom. ¦ Et PNG-bilde med gjennomsiktig bakgrunn gir silhuetten sin. Ellers kryss av: det mørke blir formen.
+le sombre devient la forme (images sans transparence) ¦ tmavé sa stane tvarom (obrázky bez priehľadnosti) ¦ det mørke blir formen (bilder uten gjennomsiktighet)
+Choisis d’abord un dessin sur le tableau. ¦ Najprv vyber kresbu na tabuli. ¦ Velg først en tegning på tavlen.
+Ferme la forme : au moins trois points, puis clic sur le premier (ou « ◯ Fermer »). ¦ Uzavri tvar: aspoň tri body, potom klikni na prvý (alebo „◯ Uzavrieť“). ¦ Lukk formen: minst tre punkter, og klikk så på det første (eller «◯ Lukk»).
+Ajouter au tableau ¦ Pridať na tabuľu ¦ Legg til på tavlen
+📎 Des fichiers ¦ 📎 Súbory ¦ 📎 Filer
+📁 Choisir des fichiers ¦ 📁 Vybrať súbory ¦ 📁 Velg filer
+Images, GIF, sons, vidéos, PDF (ou glisse-les sur le tableau, ou colle une image). ¦ Obrázky, GIF, zvuky, videá, PDF (alebo ich pretiahni na tabuľu, alebo vlož obrázok). ¦ Bilder, GIF-er, lyder, videoer, PDF-er (eller dra dem til tavlen, eller lim inn et bilde).
+🖼 Un média de l’app ¦ 🖼 Médium z aplikácie ¦ 🖼 En mediefil fra appen
+Un média de l’app ¦ Médium z aplikácie ¦ En mediefil fra appen
+Poser sur le tableau ¦ Umiestniť na tabuľu ¦ Plasser på tavlen
+Choisir une image, un son, une vidéo… ¦ Vybrať obrázok, zvuk, video… ¦ Velg et bilde, en lyd, en video…
+🌐 D’ailleurs ¦ 🌐 Odinakiaľ ¦ 🌐 Fra andre steder
+Adresse d’une image ou d’un site ¦ Adresa obrázka alebo webu ¦ Adressen til et bilde eller et nettsted
+👤 Une fiche ¦ 👤 Karta ¦ 👤 En oppføring
+Poser la fiche ¦ Umiestniť kartu ¦ Plasser oppføringen
+📺 Un écran de l’app ¦ 📺 Obrazovka aplikácie ¦ 📺 En appskjerm
+Une liste, un diagramme, une statistique, la carte, un village, une de tes listes… ¦ Zoznam, diagram, štatistika, mapa, dedina, niektorý z tvojich zoznamov… ¦ En liste, et diagram, en statistikk, kartet, en bygd, en av listene dine…
+avec l’aperçu vivant ¦ so živým náhľadom ¦ med levende forhåndsvisning
+Poser l’écran ¦ Umiestniť obrazovku ¦ Plasser skjermen
+✨ Un de mes widgets ¦ ✨ Niektorý z mojich widgetov ¦ ✨ En av widgetene mine
+Poser le widget ¦ Umiestniť widget ¦ Plasser widgeten
+Crée d’abord un widget (Réglages → Éditeur de widgets). ¦ Najprv vytvor widget (Nastavenia → Editor widgetov). ¦ Opprett først en widget (Innstillinger → Widgetredigering).
+Titre du recueil ¦ Názov zborníka ¦ Samlingens tittel
+📚 Un recueil ¦ 📚 Zborník ¦ 📚 En samling
+🏷 Une étiquette ¦ 🏷 Štítok ¦ 🏷 En etikett
+ou un mot à toi ¦ alebo vlastné slovo ¦ eller et eget ord
+Nom du dossier ¦ Názov priečinka ¦ Mappens navn
+Poser ce mot ¦ Umiestniť toto slovo ¦ Plasser dette ordet
+▦ Un tableur ¦ ▦ Tabuľka ¦ ▦ Et regneark
+Une grille à remplir, avec des formules (=SOMME…) ; on peut y coller un bout d’Excel ou de Numbers. ¦ Mriežka na vyplnenie so vzorcami (=SUM…); môžeš do nej vložiť kúsok z Excelu alebo Numbers. ¦ Et rutenett å fylle ut, med formler (=SUMMER…); du kan lime inn et stykke fra Excel eller Numbers.
+Poser un tableur ¦ Umiestniť tabuľku ¦ Plasser et regneark
+📁 Un dossier ¦ 📁 Priečinok ¦ 📁 En mappe
+Un tableau dans le tableau : double-clic pour y entrer. ¦ Tabuľa v tabuli: dvojklikom do nej vstúpiš. ¦ En tavle i tavlen: dobbeltklikk for å gå inn i den.
+Créer le dossier ¦ Vytvoriť priečinok ¦ Opprett mappen
+🌳 Un arbre automatique ¦ 🌳 Automatický strom ¦ 🌳 Et automatisk tre
+Une personne, et ses parents, grands-parents ou enfants posés en fiches reliées par des flèches. ¦ Osoba a jej rodičia, starí rodičia alebo deti umiestnení ako karty prepojené šípkami. ¦ En person med foreldre, besteforeldre eller barn plassert som oppføringer koblet med piler.
+ses ancêtres ¦ predkovia ¦ anene
+ses descendants ¦ potomkovia ¦ etterkommerne
+sa famille proche ¦ blízka rodina ¦ den nærmeste familien
+avec les conjoints ¦ s manželmi ¦ med ektefeller
+flèches (sinon des traits) ¦ šípky (inak čiary) ¦ piler (ellers streker)
+Poser l’arbre ¦ Umiestniť strom ¦ Plasser treet
+🗓 Une frise vivante ¦ 🗓 Živá časová os ¦ 🗓 En levende tidslinje
+Les événements d’une personne (ou de sa famille) placés tout seuls sur une ligne du temps ; elle suit la fiche. ¦ Udalosti osoby (alebo jej rodiny) sa samy umiestnia na časovú os; tá nasleduje kartu. ¦ Hendelsene til en person (eller familien) plasseres automatisk på en tidslinje; den følger oppføringen.
+Poser la frise ¦ Umiestniť časovú os ¦ Plasser tidslinjen
+🗺 Une carte ¦ 🗺 Mapa ¦ 🗺 Et kart
+Les lieux d’une personne, de sa famille ou d’une enquête ; tu peux y poser tes repères. ¦ Miesta osoby, jej rodiny alebo pátrania; môžeš na ňu umiestniť vlastné značky. ¦ Stedene til en person, familien eller en undersøkelse; du kan plassere dine egne markører.
+Nom de la personne (facultatif) ¦ Meno osoby (nepovinné) ¦ Personens navn (valgfritt)
+la personne et sa famille ¦ osoba a jej rodina ¦ personen og familien
+personne : seulement mes repères ¦ nikto: len moje značky ¦ ingen: bare mine markører
+Poser la carte ¦ Umiestniť mapu ¦ Plasser kartet
+▭ Un cadre ¦ ▭ Rámec ¦ ▭ En ramme
+Une zone nommée (« Branche paternelle », « Sources à voir ») : ce qui est dedans bouge avec elle ; on peut la replier. ¦ Pomenovaná oblasť („Otcovská vetva“, „Pramene na pozretie“): čo je vo vnútri, sa hýbe s ňou; dá sa zbaliť. ¦ Et navngitt område («Farsgrenen», «Kilder å se på»): det som er inni, flytter med; det kan foldes sammen.
+Nom du cadre ¦ Názov rámca ¦ Rammens navn
+Poser le cadre ¦ Umiestniť rámec ¦ Plasser rammen
+🎙 Un mémo vocal ¦ 🎙 Hlasová poznámka ¦ 🎙 Et talememo
+Enregistre ta voix ici : le son est rangé avec le tableau et posé dessus. ¦ Nahraj tu svoj hlas: zvuk sa uloží s tabuľou a umiestni sa na ňu. ¦ Ta opp stemmen din her: lyden lagres med tavlen og plasseres på den.
+🎙 Enregistrer ¦ 🎙 Nahrať ¦ 🎙 Ta opp
+🎙 Mémo vocal ¦ 🎙 Hlasová poznámka ¦ 🎙 Talememo
+Un fichier « .lcnda-tableau.json » (⤓ Exporter → Fichier léger ou complet) : il devient un nouveau tableau. ¦ Súbor „.lcnda-tableau.json“ (⤓ Exportovať → Ľahký alebo úplný súbor): stane sa novou tabuľou. ¦ En fil «.lcnda-tableau.json» (⤓ Eksporter → Lett eller komplett fil): den blir en ny tavle.
+Tableau verrouillé : clic pour le déverrouiller ¦ Tabuľa zamknutá: kliknutím ju odomkneš ¦ Tavlen er låst: klikk for å låse den opp
+Verrouiller tout le tableau ¦ Zamknúť celú tabuľu ¦ Lås hele tavlen
+Tableau verrouillé : on peut le regarder et ouvrir ce qu’il contient, rien ne bouge. ¦ Tabuľa zamknutá: môžeš sa na ňu pozerať a otvárať, čo obsahuje, nič sa nehýbe. ¦ Tavlen er låst: du kan se på den og åpne det den inneholder, ingenting flytter seg.
+Tableau déverrouillé. ¦ Tabuľa odomknutá. ¦ Tavlen er låst opp.
+Un projet de l’Atelier ¦ Projekt Dielne ¦ Et prosjekt i Verkstedet
+Un lieu (sa commune) ¦ Miesto (jeho obec) ¦ Et sted (kommunen)
+Un média (photo, acte, son…) ¦ Médium (fotka, záznam, zvuk…) ¦ En mediefil (bilde, dokument, lyd…)
+Une famille (un couple) ¦ Rodina (pár) ¦ En familie (et par)
+Un événement ¦ Udalosť ¦ En hendelse
+Un animal ¦ Zviera ¦ Et dyr
+Un autre tableau ¦ Iná tabuľa ¦ En annen tavle
+Relier ce tableau à une personne, une enquête (ou une de ses parties), une battue… ¦ Prepojiť túto tabuľu s osobou, pátraním (alebo jeho časťou), hromadným pátraním… ¦ Koble denne tavlen til en person, en undersøkelse (eller en del av den), en leteaksjon…
+🔗 Relier… ¦ 🔗 Prepojiť… ¦ 🔗 Koble…
+Relier ce tableau ¦ Prepojiť túto tabuľu ¦ Koble denne tavlen
+À quoi ¦ S čím ¦ Til hva
+Nouveau tableau depuis un instantané ¦ Nová tabuľa zo snímky stavu ¦ Ny tavle fra et øyeblikksbilde
+Nouveau tableau à partir de celui-ci ¦ Nová tabuľa z tejto ¦ Ny tavle ut fra denne
+Grille aimantée : les éléments s’alignent sur la grille et sur les autres (⌥ / Alt en glissant pour s’en passer). ¦ Prichytávacia mriežka: prvky sa zarovnávajú na mriežku aj na ostatné (⌥ / Alt pri ťahaní ju vypne). ¦ Festerutenett: elementene justeres etter rutenettet og etter hverandre (⌥ / Alt mens du drar for å unngå det).
+Grille aimantée enlevée. ¦ Prichytávacia mriežka odobratá. ¦ Festerutenettet er fjernet.
+frère de ¦ brat osoby ¦ bror av
+sœur de ¦ sestra osoby ¦ søster av
+époux de ¦ manžel osoby ¦ ektemann til
+épouse de ¦ manželka osoby ¦ hustru til
+père de ¦ otec osoby ¦ far til
+mère de ¦ matka osoby ¦ mor til
+fils de ¦ syn osoby ¦ sønn av
+fille de ¦ dcéra osoby ¦ datter av
+cousin de ¦ bratranec osoby ¦ fetter av
+cousine de ¦ sesternica osoby ¦ kusine av
+parrain de ¦ krstný otec osoby ¦ gudfar til
+marraine de ¦ krstná matka osoby ¦ gudmor til
+témoin de ¦ svedok osoby ¦ vitne for
+voisin de ¦ sused osoby ¦ nabo til
+a travaillé pour ¦ pracoval(a) pre ¦ arbeidet for
+a écrit à ¦ písal(a) osobe ¦ skrev til
+même personne ? ¦ tá istá osoba? ¦ samme person?
+💬 Commentaires ¦ 💬 Komentáre ¦ 💬 Kommentarer
+Ton mot (ex. « Piste », « Archives ») ¦ Tvoje slovo (napr. „Stopa“, „Archívy“) ¦ Ditt ord (f.eks. «Spor», «Arkiver»)
+Les mots proposés pour les bulles (tu en ajoutes avec « ＋ un autre mot… »). ¦ Slová ponúkané pre bubliny (ďalšie pridáš cez „＋ iné slovo…“). ¦ Ordene som tilbys for boblene (legg til flere med «＋ et annet ord…»).
+Les lignes et les colonnes gardées, avec les formules possibles. ¦ Riadky a stĺpce zachované, so vzorcami. ¦ Rader og kolonner beholdes, med mulige formler.
+🗒 Une note par ligne ¦ 🗒 Jedna poznámka na riadok ¦ 🗒 Ett notat per linje
+Chaque ligne devient une note, rangées en grille. ¦ Každý riadok sa stane poznámkou, zoradené v mriežke. ¦ Hver linje blir et notat, ordnet i et rutenett.
+🗂 Une note par ligne du tableur ¦ 🗂 Jedna poznámka na riadok tabuľky ¦ 🗂 Ett notat per rad i regnearket
+Les colonnes d’une ligne dans la même note. ¦ Stĺpce jedného riadka v jednej poznámke. ¦ Kolonnene i en rad i samme notat.
+T Un seul texte ¦ T Jediný text ¦ T Én tekst
+Tout le texte collé, d’un bloc. ¦ Celý vložený text v jednom bloku. ¦ All den innlimte teksten, i én blokk.
+grouper ce qui est posé ¦ zoskupiť, čo je umiestnené ¦ grupper det som plasseres
+⭐ En faire un modèle ¦ ⭐ Urobiť z nej šablónu ¦ ⭐ Gjør den til en mal
+Enregistrer le modèle ¦ Uložiť šablónu ¦ Lagre malen
+Nom du modèle ¦ Názov šablóny ¦ Malens navn
+Pour une enquête sur un enfant trouvé… ¦ Pre pátranie po nájdenom dieťati… ¦ For en undersøkelse om et hittebarn…
+Décris-le ¦ Opíš ju ¦ Beskriv den
+seulement la sélection ¦ len výber ¦ bare utvalget
+sans les textes (garder les cases vides, les titres des cadres restent) ¦ bez textov (ponechať prázdne políčka, názvy rámcov zostanú) ¦ uten tekstene (behold tomme felt, rammetitlene blir værende)
+Il apparaît dans « Nouveau tableau », avec les modèles de l’app. Les fiches, photos et sons posés sont gardés tels quels (ils pointent vers ta base). ¦ Objaví sa v „Nová tabuľa“ spolu so šablónami aplikácie. Umiestnené karty, fotky a zvuky zostanú tak, ako sú (odkazujú na tvoju databázu). ¦ Den vises i «Ny tavle», sammen med appens maler. Plasserte oppføringer, bilder og lyder beholdes som de er (de peker til databasen din).
+Calque principal ¦ Hlavná vrstva ¦ Hovedlag
+Les nouveaux éléments vont sur ce calque ¦ Nové prvky idú na túto vrstvu ¦ Nye elementer havner på dette laget
+Choisir ce qu’il contient ¦ Vybrať, čo obsahuje ¦ Velg det det inneholder
+Supprimer le calque (ses éléments vont sur le calque principal) ¦ Vymazať vrstvu (jej prvky prejdú na hlavnú vrstvu) ¦ Slett laget (elementene flyttes til hovedlaget)
+Mettre la sélection sur le calque choisi ¦ Presunúť výber na vybranú vrstvu ¦ Flytt utvalget til det valgte laget
+Un calque caché ne s’affiche pas (ni dans les images exportées) ; verrouillé, on ne peut plus le choisir ni le bouger. ¦ Skrytá vrstva sa nezobrazuje (ani v exportovaných obrázkoch); zamknutú už nemožno vybrať ani presunúť. ¦ Et skjult lag vises ikke (heller ikke i eksporterte bilder); er det låst, kan det ikke lenger velges eller flyttes.
+Y aller ¦ Prejsť tam ¦ Gå dit
+⟳ vue ¦ ⟳ pohľad ¦ ⟳ visning
+Chercher un mot, un nom… ¦ Hľadať slovo, meno… ¦ Søk etter et ord, et navn…
+Mini-carte ¦ Minimapa ¦ Minikart
+Glisser pour déplacer la mini-carte ¦ Ťahaním presunieš minimapu ¦ Dra for å flytte minikartet
+Cacher la mini-carte ¦ Skryť minimapu ¦ Skjul minikartet
+Pour tous les jours ¦ Na každý deň ¦ Til hverdags
+Écritures anciennes ¦ Staré písma ¦ Gamle håndskrifter
+Trop lourd pour être gardé (retire des formes faites d’une image). ¦ Príliš veľké na uloženie (odober tvary vytvorené z obrázka). ¦ For tungt til å lagres (fjern former laget av et bilde).
+Réglages trop lourds pour être gardés (retire des formes faites d’une image). ¦ Nastavenia sú príliš veľké na uloženie (odober tvary vytvorené z obrázka). ¦ Innstillingene er for tunge til å lagres (fjern former laget av et bilde).
+Choisis une forme de départ. ¦ Vyber východiskový tvar. ¦ Velg en startform.
+Forme trop détaillée : retire des formes ajoutées. ¦ Tvar je príliš podrobný: odober pridané tvary. ¦ Formen er for detaljert: fjern noen tilføyde former.
+Choisis une forme ou trace la pointe. ¦ Vyber tvar alebo nakresli hrot. ¦ Velg en form eller tegn pilspissen.
+Cette forme est trop détaillée pour une pointe. ¦ Tento tvar je na hrot príliš podrobný. ¦ Formen er for detaljert til en pilspiss.
+les réglages des tableaux sont fermés ¦ nastavenia tabúľ sú zatvorené ¦ tavleinnstillingene er lukket
+Montrer / cacher ¦ Zobraziť / skryť ¦ Vis / skjul
+Déjà dans l’accès rapide ¦ Už v rýchlom prístupe ¦ Allerede i hurtigtilgang
+Ajouter à l’accès rapide ¦ Pridať do rýchleho prístupu ¦ Legg til i hurtigtilgang
+La reprendre dans le dessin vectoriel (plume, points, Pathfinder…) ¦ Upraviť ho vo vektorovej kresbe (pero, body, Pathfinder…) ¦ Bearbeid den i vektortegning (penn, punkter, Pathfinder…)
+Supprimer cette forme ¦ Vymazať tento tvar ¦ Slett denne formen
+Aucune pour l’instant : dans un tableau, outil Formes → « ＋ Créer une forme ». ¦ Zatiaľ žiadne: na tabuli nástroj Tvary → „＋ Vytvoriť tvar“. ¦ Ingen ennå: i en tavle, verktøyet Former → «＋ Opprett en form».
+Supprimer la liste ¦ Vymazať zoznam ¦ Slett listen
+Pas encore de pinceau à toi. ¦ Zatiaľ žiadny vlastný štetec. ¦ Ingen egen pensel ennå.
+tous les réglages des tableaux (couleurs, pointes, formes, polices, tailles, tableur, pinceaux, menus) ¦ všetky nastavenia tabúľ (farby, hroty, tvary, písma, veľkosti, tabuľka, štetce, ponuky) ¦ alle tavleinnstillingene (farger, pilspisser, former, skrifter, størrelser, regneark, pensler, menyer)
+Reprendre les réglages « {name} » ? Les réglages actuels sont remplacés (enregistre-les d’abord sous un nom si tu veux les garder). ¦ Použiť nastavenia „{name}“? Súčasné nastavenia sa nahradia (ak ich chceš zachovať, najprv ich ulož pod nejakým názvom). ¦ Bruke innstillingene «{name}»? De nåværende innstillingene erstattes (lagre dem først under et navn hvis du vil beholde dem).
+Reprendre ces réglages ¦ Použiť tieto nastavenia ¦ Bruk disse innstillingene
+Reprendre les réglages ¦ Použiť nastavenia ¦ Bruk innstillingene
+Réglages enregistrés sous « {name} » (et utilisés dès maintenant). ¦ Nastavenia uložené ako „{name}“ (a používajú sa odteraz). ¦ Innstillingene er lagret som «{name}» (og brukes fra nå av).
+Réglages « {name} » importés : « Appliquer » pour t’en servir. ¦ Nastavenia „{name}“ importované: „Použiť“, ak ich chceš používať. ¦ Innstillingene «{name}» er importert: «Bruk» for å ta dem i bruk.
+Palette « {name} » retirée ¦ Paleta „{name}“ odobratá ¦ Paletten «{name}» er fjernet
+Pointe « {name} » créée : elle est dans la liste. ¦ Hrot „{name}“ vytvorený: je v zozname. ¦ Pilspissen «{name}» er opprettet: den ligger i listen.
+Pointe retirée (les traits qui l’utilisent prennent un triangle) ¦ Hrot odobratý (čiary, ktoré ho používajú, dostanú trojuholník) ¦ Pilspissen er fjernet (streker som bruker den, får en trekant)
+⚡ « {name} » est déjà dans l’accès rapide (en haut de cet onglet ; ✕ sur elle pour l’en retirer). ¦ ⚡ „{name}“ už je v rýchlom prístupe (hore na tejto záložke; ✕ na ňom ho odoberie). ¦ ⚡ «{name}» er allerede i hurtigtilgang (øverst i denne fanen; ✕ på den for å fjerne den).
+⚡ « {name} » ajoutée à l’accès rapide : elle est en haut de cet onglet, et dans la barre de l’outil Formes. N’oublie pas « Enregistrer ». ¦ ⚡ „{name}“ pridaný do rýchleho prístupu: je hore na tejto záložke a v lište nástroja Tvary. Nezabudni „Uložiť“. ¦ ⚡ «{name}» er lagt til i hurtigtilgang: den er øverst i denne fanen og i linjen til verktøyet Former. Ikke glem «Lagre».
+Chargement des formes… ¦ Načítavajú sa tvary… ¦ Laster inn former…
+📚 Réessayer de charger les formes ¦ 📚 Skúsiť znova načítať tvary ¦ 📚 Prøv å laste inn formene igjen
+Les formes n’ont pas pu être chargées. Réessaie. ¦ Tvary sa nepodarilo načítať. Skús to znova. ¦ Formene kunne ikke lastes inn. Prøv igjen.
+Forme retirée (les tableaux qui l’utilisent la gardent) ¦ Tvar odobratý (tabule, ktoré ho používajú, si ho ponechajú) ¦ Formen er fjernet (tavler som bruker den, beholder den)
+Ma liste ¦ Môj zoznam ¦ Min liste
+Liste de polices retirée ¦ Zoznam písiem odobratý ¦ Skriftlisten er fjernet
+Ajouter une police à la liste ¦ Pridať písmo do zoznamu ¦ Legg til en skrift i listen
+« {font} » ajoutée à « {list} ». ¦ „{font}“ pridané do „{list}“. ¦ «{font}» er lagt til i «{list}».
+Toutes les polices ¦ Všetky písma ¦ Alle skrifter
+Élémentaire ¦ Základné ¦ Grunnleggende
+Géométrie ¦ Geometria ¦ Geometri
+Bulles ¦ Bubliny ¦ Bobler
+Étoiles et badges ¦ Hviezdy a odznaky ¦ Stjerner og merker
+Croyances et mémoire ¦ Viera a pamäť ¦ Tro og minne
+Écrits et documents ¦ Písomnosti a dokumenty ¦ Skrifter og dokumenter
+Lieux et bâtiments ¦ Miesta a budovy ¦ Steder og bygninger
+Maison et objets ¦ Dom a predmety ¦ Hjem og gjenstander
+Vêtements et parures ¦ Oblečenie a ozdoby ¦ Klær og smykker
+Métiers et outils ¦ Remeslá a nástroje ¦ Yrker og verktøy
+Transports et voyages ¦ Doprava a cestovanie ¦ Transport og reiser
+Nature ¦ Príroda ¦ Natur
+Météo et ciel ¦ Počasie a obloha ¦ Vær og himmel
+Cuisine et repas ¦ Varenie a jedlo ¦ Matlaging og måltider
+Musique, jeux et sport ¦ Hudba, hry a šport ¦ Musikk, spill og sport
+Santé et corps ¦ Zdravie a telo ¦ Helse og kropp
+Objets ¦ Predmety ¦ Gjenstander
+Mes formes ¦ Moje tvary ¦ Mine former
+Lettres et chiffres ¦ Písmená a číslice ¦ Bokstaver og tall
+Armoiries et héraldique ¦ Erby a heraldika ¦ Våpen og heraldikk
+Cadres et bordures ¦ Rámčeky a okraje ¦ Rammer og kanter
+Émotions ¦ Emócie ¦ Følelser
+Drapeaux ¦ Vlajky ¦ Flagg
+Écrans et appareils ¦ Obrazovky a zariadenia ¦ Skjermer og apparater
+Argent et commerce ¦ Peniaze a obchod ¦ Penger og handel
+Fond des formes, étiquettes, dossiers ¦ Výplň tvarov, štítkov, priečinkov ¦ Fyll for former, etiketter, mapper
+Bord des formes et contour des médias ¦ Okraj tvarov a obrys médií ¦ Formenes kant og medienes omriss
+Couleur du texte, des traits et flèches ¦ Farba textu, čiar a šípok ¦ Farge på tekst, streker og piler
+Légendes des traits : texte ¦ Popisy čiar: text ¦ Strektekster: tekst
+Légendes des traits : fond du cadre ¦ Popisy čiar: pozadie rámčeka ¦ Strektekster: boksens bakgrunn
+Légendes des traits : bord du cadre ¦ Popisy čiar: okraj rámčeka ¦ Strektekster: boksens kant
+⤓ Exporter / imprimer ¦ ⤓ Exportovať / tlačiť ¦ ⤓ Eksporter / skriv ut
+⛶ Plein écran ¦ ⛶ Celá obrazovka ¦ ⛶ Fullskjerm
+❓ Pistes à vérifier (compteur) ¦ ❓ Stopy na overenie (počítadlo) ¦ ❓ Spor å sjekke (teller)
+🔍 Chercher dans le tableau ¦ 🔍 Hľadať na tabuli ¦ 🔍 Søk på tavlen
+🧲 Grille aimantée ¦ 🧲 Prichytávacia mriežka ¦ 🧲 Festerutenett
+🗺 Mini-carte ¦ 🗺 Minimapa ¦ 🗺 Minikart
+⚙️ Réglages des tableaux ¦ ⚙️ Nastavenia tabúľ ¦ ⚙️ Tavleinnstillinger
+🗑 Supprimer ¦ 🗑 Vymazať ¦ 🗑 Slett
+✕ Fermer ¦ ✕ Zavrieť ¦ ✕ Lukk
+Bord / contour ¦ Okraj / obrys ¦ Kant / omriss
+Couleur du texte ou du trait ¦ Farba textu alebo čiary ¦ Farge på tekst eller strek
+Épaisseur et style du trait ¦ Hrúbka a štýl čiary ¦ Strekens tykkelse og stil
+Arrondi ¦ Zaoblenie ¦ Avrunding
+Taille et style du texte ¦ Veľkosť a štýl textu ¦ Tekstens størrelse og stil
+Pointes des flèches ¦ Hroty šípok ¦ Pilspisser
+Forme du trait et légende ¦ Tvar čiary a popis ¦ Strekens form og tekst
+Pinceau ¦ Štetec ¦ Pensel
+Titre, étiquette, adresse ¦ Názov, štítok, adresa ¦ Tittel, etikett, adresse
+Fiche : ce qu’elle montre ¦ Karta: čo ukazuje ¦ Oppføring: hva den viser
+Piste : à vérifier, confirmée, fausse ¦ Stopa: na overenie, potvrdená, mylná ¦ Spor: å sjekke, bekreftet, falsk
+Carte et repères ¦ Mapa a značky ¦ Kart og markører
+Liens tout prêts (frère de…) ¦ Hotové spojenia (brat osoby…) ¦ Ferdige koblinger (bror av…)
+Boutons (dupliquer, verrouiller…) ¦ Tlačidlá (duplikovať, zamknúť…) ¦ Knapper (dupliser, lås…)
+Des fichiers ¦ Súbory ¦ Filer
+D’ailleurs (web) ¦ Odinakiaľ (web) ¦ Fra andre steder (nettet)
+Une fiche ¦ Karta ¦ En oppføring
+Un écran de l’app ¦ Obrazovka aplikácie ¦ En appskjerm
+Un de mes widgets ¦ Niektorý z mojich widgetov ¦ En av widgetene mine
+Un tableur ¦ Tabuľka ¦ Et regneark
+Un dossier ¦ Priečinok ¦ En mappe
+Un arbre automatique ¦ Automatický strom ¦ Et automatisk tre
+Une frise vivante ¦ Živá časová os ¦ En levende tidslinje
+Une carte ¦ Mapa ¦ Et kart
+Un cadre (section) ¦ Rámec (oddiel) ¦ En ramme (seksjon)
+Un mémo vocal ¦ Hlasová poznámka ¦ Et talememo
+Importer un tableau ¦ Importovať tabuľu ¦ Importer en tavle
+Gras, italique ¦ Tučné, kurzíva ¦ Fet, kursiv
+Suivre l’angle du trait ¦ Nasledovať uhol čiary ¦ Følg strekens vinkel
+pointe|aucune ¦ žiadny ¦ ingen
+pointe|▶ triangle ¦ ▶ trojuholník ¦ ▶ trekant
+pointe|➤ flèche fine ¦ ➤ tenká šípka ¦ ➤ tynn pil
+pointe|› ouverte ¦ › otvorený ¦ › åpen
+pointe|⏩ double ¦ ⏩ dvojitý ¦ ⏩ dobbel
+pointe|◣ demi-flèche ¦ ◣ polovičná šípka ¦ ◣ halvpil
+pointe|● rond ¦ ● koliesko ¦ ● sirkel
+pointe|○ rond vide ¦ ○ prázdne koliesko ¦ ○ tom sirkel
+pointe|• point ¦ • bodka ¦ • punkt
+pointe|■ carré ¦ ■ štvorec ¦ ■ firkant
+pointe|□ carré vide ¦ □ prázdny štvorec ¦ □ tom firkant
+pointe|◆ losange ¦ ◆ kosoštvorec ¦ ◆ rombe
+pointe|◇ losange vide ¦ ◇ prázdny kosoštvorec ¦ ◇ tom rombe
+pointe|| barre ¦ | priečka ¦ | strek
+pointe|⋔ patte d’oie ¦ ⋔ husia stopa ¦ ⋔ kråkefot
+pointe|» plumes ¦ » perie ¦ » fjær
+pointe|▷ triangle vide ¦ ▷ prázdny trojuholník ¦ ▷ tom trekant
+pointe|⟶ flèche longue ¦ ⟶ dlhá šípka ¦ ⟶ lang pil
+pointe|» double chevron ¦ » dvojitá lomená šípka ¦ » dobbel vinkel
+pointe|✕ croix ¦ ✕ krížik ¦ ✕ kryss
+pointe|＋ plus ¦ ＋ plus ¦ ＋ pluss
+pointe|★ étoile ¦ ★ hviezda ¦ ★ stjerne
+pointe|♥ cœur ¦ ♥ srdce ¦ ♥ hjerte
+pointe|‖ un (deux barres) ¦ ‖ jeden (dve priečky) ¦ ‖ én (to streker)
+pointe|⋲ plusieurs (pied de corbeau) ¦ ⋲ viac (vrania noha) ¦ ⋲ flere (kråkefot)
+pointe|◗ demi-rond ¦ ◗ polkruh ¦ ◗ halvsirkel
+Chercher une forme (cœur, maison, chien…) ¦ Hľadať tvar (srdce, dom, pes…) ¦ Søk etter en form (hjerte, hus, hund…)
+＋ ajouter (réunir) ¦ ＋ pridať (zjednotiť) ¦ ＋ legg til (slå sammen)
+⭕ percer (trou) ¦ ⭕ preraziť (diera) ¦ ⭕ lag hull
+miroir ¦ zrkadliť ¦ speil
+Créer une forme à partir d’une autre ¦ Vytvoriť tvar z iného ¦ Opprett en form ut fra en annen
+1. La forme de départ ¦ 1. Východiskový tvar ¦ 1. Startformen
+2. La transformer ¦ 2. Upraviť ho ¦ 2. Omform den
+3. Lui ajouter d’autres formes, ou y percer un trou ¦ 3. Pridať k nemu ďalšie tvary alebo doň preraziť dieru ¦ 3. Legg til andre former, eller lag et hull i den
+＋ Ajouter une forme ¦ ＋ Pridať tvar ¦ ＋ Legg til en form
+Nom de la nouvelle forme ¦ Názov nového tvaru ¦ Navnet på den nye formen
+Elle ira dans « Mes formes », et dans l’accès rapide. ¦ Pôjde do „Moje tvary“ a do rýchleho prístupu. ¦ Den havner i «Mine former» og i hurtigtilgang.
+Fermer la forme ¦ Uzavrieť tvar ¦ Lukk formen
+Point ¦ Bod ¦ Punkt
+RÉGLAGES DES TABLEAUX ¦ NASTAVENIA TABÚĽ ¦ TAVLEINNSTILLINGER
+FORMES ¦ TVARY ¦ FORMER
+Créer une pointe ¦ Vytvoriť hrot ¦ Opprett en pilspiss
+Créer la pointe ¦ Vytvoriť hrot ¦ Opprett pilspissen
+Chercher une forme (flèche, cœur, étoile…) ¦ Hľadať tvar (šípka, srdce, hviezda…) ¦ Søk etter en form (pil, hjerte, stjerne…)
+⬠ À partir d’une forme ¦ ⬠ Z tvaru ¦ ⬠ Ut fra en form
+✒️ Tracée à la plume ¦ ✒️ Nakreslený perom ¦ ✒️ Tegnet med pennen
+Trace la pointe tournée vers la droite (→) : clic pour un angle, cliquer-glisser pour un arrondi, clic sur le premier point pour fermer. ¦ Nakresli hrot otočený doprava (→): klik pre roh, klik a ťahanie pre oblúk, klik na prvý bod pre uzavretie. ¦ Tegn pilspissen pekende mot høyre (→): klikk for et hjørne, klikk og dra for en kurve, klikk på det første punktet for å lukke.
+Accrochée ¦ Uchytený ¦ Festet
+par la pointe (au bout du trait) ¦ za špičku (na konci čiary) ¦ i spissen (ved enden av streken)
+presque au bout ¦ skoro na konci ¦ nesten ved enden
+par le milieu ¦ v strede ¦ i midten
+par l’arrière ¦ za zadnú časť ¦ bak
+Trace la pointe (au moins trois points, puis ferme-la). ¦ Nakresli hrot (aspoň tri body, potom ho uzavri). ¦ Tegn pilspissen (minst tre punkter, og lukk den så).
+Choisis une forme. ¦ Vyber tvar. ¦ Velg en form.
+＋ cette couleur ¦ ＋ túto farbu ¦ ＋ denne fargen
+＋ transparent ¦ ＋ priehľadná ¦ ＋ gjennomsiktig
+Sans couleur ¦ Bez farby ¦ Uten farge
+🎨 Couleurs ¦ 🎨 Farby ¦ 🎨 Farger
+➤ Pointes ¦ ➤ Hroty ¦ ➤ Pilspisser
+⬠ Formes ¦ ⬠ Tvary ¦ ⬠ Former
+🔤 Polices ¦ 🔤 Písma ¦ 🔤 Skrifter
+📏 Tailles et arrondi ¦ 📏 Veľkosti a zaoblenie ¦ 📏 Størrelser og avrunding
+▦ Tableur ¦ ▦ Tabuľka ¦ ▦ Regneark
+🖌 Pinceaux ¦ 🖌 Štetce ¦ 🖌 Pensler
+☰ Menus et options ¦ ☰ Ponuky a voľby ¦ ☰ Menyer og valg
+Les couleurs proposées dans les tableaux, catégorie par catégorie, dans l’ordre voulu (glisse une pastille, ou ‹ ›). Le sélecteur « autre couleur » reste toujours là. Tu peux avoir plusieurs palettes et choisir celle des tableaux. ¦ Farby ponúkané na tabuliach, kategória po kategórii, v požadovanom poradí (potiahni vzorku alebo ‹ ›). Výber „iná farba“ je vždy k dispozícii. Môžeš mať viac paliet a vybrať tú pre tabule. ¦ Fargene som tilbys i tavlene, kategori for kategori, i ønsket rekkefølge (dra en fargeprøve, eller ‹ ›). Velgeren «annen farge» er alltid der. Du kan ha flere paletter og velge den for tavlene.
+Palette utilisée ¦ Použitá paleta ¦ Palett i bruk
+Nom de la palette ¦ Názov palety ¦ Palettens navn
+＋ Nouvelle palette ¦ ＋ Nová paleta ¦ ＋ Ny palett
+Partir d’un modèle… ¦ Vychádzať zo šablóny… ¦ Start fra en mal…
+Supprimer la palette ¦ Vymazať paletu ¦ Slett paletten
+Les pointes proposées pour les traits et les flèches, dans l’ordre voulu ; décoche celles que tu ne veux pas voir. « ＋ Créer une pointe » : à partir d’une forme (n’importe laquelle des formes, ou une des tiennes) ou tracée à la plume. ¦ Hroty ponúkané pre čiary a šípky v požadovanom poradí; zruš začiarknutie pri tých, ktoré nechceš vidieť. „＋ Vytvoriť hrot“: z tvaru (ľubovoľného alebo niektorého z tvojich) alebo nakreslený perom. ¦ Pilspissene som tilbys for streker og piler, i ønsket rekkefølge; fjern avkrysningen for dem du ikke vil se. «＋ Opprett en pilspiss»: ut fra en form (hvilken som helst, eller en av dine) eller tegnet med pennen.
+Pointe au début, par défaut ¦ Hrot na začiatku, predvolený ¦ Pilspiss i starten, standard
+Pointe à la fin, par défaut (outil Flèche) ¦ Hrot na konci, predvolený (nástroj Šípka) ¦ Pilspiss i slutten, standard (verktøyet Pil)
+＋ Créer une pointe ¦ ＋ Vytvoriť hrot ¦ ＋ Opprett en pilspiss
+Supprimer cette pointe ¦ Vymazať tento hrot ¦ Slett denne pilspissen
+Les catégories de formes et leurs formes, dans l’ordre voulu ; décoche ce que tu ne veux pas voir. « Accès rapide » : les formes proposées directement dans la barre de l’outil Formes. ¦ Kategórie tvarov a ich tvary v požadovanom poradí; zruš začiarknutie pri tom, čo nechceš vidieť. „Rýchly prístup“: tvary ponúkané priamo v lište nástroja Tvary. ¦ Formkategoriene og formene deres, i ønsket rekkefølge; fjern avkrysningen for det du ikke vil se. «Hurtigtilgang»: formene som tilbys direkte i linjen til verktøyet Former.
+✒️ Dessiner une nouvelle forme (dessin vectoriel) ¦ ✒️ Nakresliť nový tvar (vektorová kresba) ¦ ✒️ Tegn en ny form (vektortegning)
+ou ✒️ sur une forme ci-dessous pour la reprendre : plume, points et poignées, Pathfinder, import SVG… ¦ alebo ✒️ na tvare nižšie a uprav ho: pero, body a úchyty, Pathfinder, import SVG… ¦ eller ✒️ på en form nedenfor for å bearbeide den: penn, punkter og håndtak, Pathfinder, SVG-import…
+📚 Montrer aussi les 2 900 formes de la grande bibliothèque ¦ 📚 Zobraziť aj 2 900 tvarov veľkej knižnice ¦ 📚 Vis også de 2 900 formene i det store biblioteket
+lettres et chiffres, armoiries, cadres, étiquettes, drapeaux, symboles… (elles sont toujours dans la bibliothèque des tableaux ; ici, pour les cacher, les ranger ou les mettre dans l’accès rapide) ¦ písmená a číslice, erby, rámčeky, štítky, vlajky, symboly… (sú vždy v knižnici tabúľ; tu ich môžeš skryť, zoradiť alebo dať do rýchleho prístupu) ¦ bokstaver og tall, våpen, rammer, etiketter, flagg, symboler… (de er alltid i tavlebiblioteket; her kan du skjule dem, ordne dem eller legge dem i hurtigtilgang)
+Accès rapide ¦ Rýchly prístup ¦ Hurtigtilgang
+Glisse une forme (ou ‹ ›) pour changer l’ordre ; ⚡ sur une forme ci-dessous l’ajoute ici ; ✏️ crée une forme à partir d’elle. ¦ Potiahnutím tvaru (alebo ‹ ›) zmeníš poradie; ⚡ na tvare nižšie ho sem pridá; ✏️ z neho vytvorí nový tvar. ¦ Dra en form (eller ‹ ›) for å endre rekkefølgen; ⚡ på en form nedenfor legger den til her; ✏️ oppretter en form ut fra den.
+Des listes de polices à toi, proposées dans le choix de la police d’un texte. « Toutes les polices » ouvre la liste commune (polices de l’app et de l’ordinateur, chacune écrite dans sa police). ¦ Vlastné zoznamy písiem, ponúkané pri výbere písma textu. „Všetky písma“ otvorí spoločný zoznam (písma aplikácie a počítača, každé napísané svojím písmom). ¦ Dine egne skriftlister, som tilbys når du velger skrift for en tekst. «Alle skrifter» åpner den felles listen (appens og datamaskinens skrifter, hver skrevet med sin egen skrift).
+Aa Toutes les polices… ¦ Aa Všetky písma… ¦ Aa Alle skrifter…
+＋ Nouvelle liste ¦ ＋ Nový zoznam ¦ ＋ Ny liste
+＋ Ajouter une police… ¦ ＋ Pridať písmo… ¦ ＋ Legg til en skrift…
+De quelle taille à quelle taille vont les curseurs (épaisseur des traits et des contours : de 0,5 à 500 px ; texte : jusqu’à 500 px). La case de saisie à côté du curseur accepte toujours toute la plage. ¦ Rozsah posúvačov (hrúbka čiar a obrysov: od 0,5 do 500 px; text: do 500 px). Vstupné pole vedľa posúvača vždy prijme celý rozsah. ¦ Glidebrytenes område (tykkelse på streker og omriss: 0,5 til 500 px; tekst: opptil 500 px). Feltet ved siden av glidebryteren godtar alltid hele området.
+Épaisseur mini ¦ Min. hrúbka ¦ Min. tykkelse
+Épaisseur maxi ¦ Max. hrúbka ¦ Maks. tykkelse
+Texte mini ¦ Min. text ¦ Min. tekst
+Texte maxi ¦ Max. text ¦ Maks. tekst
+Arrondi par défaut ¦ Predvolené zaoblenie ¦ Standard avrunding
+Comment est un tableur quand tu le poses dans un tableau. ¦ Ako vyzerá tabuľka, keď ju umiestniš na tabuľu. ¦ Slik ser et regneark ut når du plasserer det på en tavle.
+Titres des colonnes, séparés par ; ¦ Nadpisy stĺpcov oddelené ; ¦ Kolonneoverskrifter, skilt med ;
+Tes pinceaux à toi : un pinceau de départ, une épaisseur, une opacité, une <strong>dureté</strong> (100 % = bord net ; plus bas = bord flou, comme dans Photoshop), une couleur si tu veux. Ils apparaissent en tête du menu des pinceaux. ¦ Tvoje vlastné štetce: východiskový štetec, hrúbka, krytie, <strong>tvrdosť</strong> (100 % = ostrý okraj; menej = rozmazaný okraj, ako vo Photoshope), prípadne farba. Objavia sa na začiatku ponuky štetcov. ¦ Dine egne pensler: en startpensel, en tykkelse, en opasitet, en <strong>hardhet</strong> (100 % = skarp kant; lavere = uskarp kant, som i Photoshop), en farge om du vil. De vises øverst i penselmenyen.
+Mon pinceau ¦ Môj štetec ¦ Min pensel
+Imposer une couleur ¦ Vynútiť farbu ¦ Tving en farge
+plein ¦ plná ¦ heltrukken
+tirets ¦ čiarkovaná ¦ stiplet
+longs tirets ¦ dlhé čiarky ¦ lange streker
+points ¦ bodkovaná ¦ prikket
+tiret-point ¦ bodkočiarkovaná ¦ strek-punkt
+＋ Nouveau pinceau ¦ ＋ Nový štetec ¦ ＋ Ny pensel
+La place de chaque partie, puis l’ordre de tout ce qu’on voit dans un tableau ; décoche pour cacher. Glisse les lignes, ou ↑ ↓. ¦ Umiestnenie každej časti, potom poradie všetkého, čo je na tabuli vidieť; zrušením začiarknutia skryješ. Potiahni riadky alebo ↑ ↓. ¦ Plasseringen av hver del, deretter rekkefølgen på alt man ser i en tavle; fjern avkrysningen for å skjule. Dra radene, eller ↑ ↓.
+🧭 Disposition du tableau ¦ 🧭 Rozloženie tabule ¦ 🧭 Tavlens oppsett
+à gauche (en colonne) ¦ vľavo (v stĺpci) ¦ til venstre (i en kolonne)
+à droite (en colonne) ¦ vpravo (v stĺpci) ¦ til høyre (i en kolonne)
+Réglages (texte, forme, trait…) ¦ Nastavenia (text, tvar, čiara…) ¦ Innstillinger (tekst, form, strek…)
+cachés (plus de place) ¦ skryté (viac miesta) ¦ skjult (mer plass)
+Taille des boutons ¦ Veľkosť tlačidiel ¦ Knappenes størrelse
+petits ¦ malé ¦ små
+normaux ¦ normálne ¦ normale
+grands ¦ veľké ¦ store
+En-tête (titre, propriétaire, état) ¦ Záhlavie (názov, vlastník, stav) ¦ Topptekst (tittel, eier, status)
+complet ¦ úplné ¦ full
+compact (une ligne) ¦ kompaktné (jeden riadok) ¦ kompakt (én linje)
+Outils (barre du haut) ¦ Nástroje (horná lišta) ¦ Verktøy (øverste linje)
+Boutons de l’en-tête ¦ Tlačidlá záhlavia ¦ Knappene i topptekst
+↶ ↷ restent à côté du nom ; ⚙️ Personnaliser, ⤓ Exporter, ⛶ et × restent à droite, dans cet ordre (comme dans tous les éditeurs) : ici, tu peux seulement les montrer ou les cacher. ¦ ↶ ↷ zostávajú vedľa názvu; ⚙️ Prispôsobiť, ⤓ Exportovať, ⛶ a × zostávajú vpravo v tomto poradí (ako vo všetkých editoroch): tu ich môžeš len zobraziť alebo skryť. ¦ ↶ ↷ blir værende ved navnet; ⚙️ Tilpass, ⤓ Eksporter, ⛶ og × blir værende til høyre, i den rekkefølgen (som i alle redigeringsverktøy): her kan du bare vise eller skjule dem.
+Réglages à droite (texte, forme, trait…) ¦ Nastavenia vpravo (text, tvar, čiara…) ¦ Innstillinger til høyre (tekst, form, strek…)
+Menu « ＋ Ajouter » ¦ Ponuka „＋ Pridať“ ¦ Menyen «＋ Legg til»
+Réglages d’une légende de trait ¦ Nastavenia popisu čiary ¦ Innstillinger for en strektekst
+Dans « Réglages de la légende » (choisis un trait). Les couleurs proposées : onglet 🎨 Couleurs. ¦ V „Nastavenia legendy“ (vyber čiaru). Ponúkané farby: záložka 🎨 Farby. ¦ I «Innstillinger for tegnforklaringen» (velg en strek). Fargene som tilbys: fanen 🎨 Farger.
+Ce que proposent les tableaux (Enquêtes → Tableaux) : couleurs, pointes, formes, polices, tailles, tableur, pinceaux, et l’ordre des menus. ¦ Čo tabule ponúkajú (Pátrania → Tabule): farby, hroty, tvary, písma, veľkosti, tabuľku, štetce a poradie ponúk. ¦ Hva tavlene tilbyr (Undersøkelser → Tavler): farger, pilspisser, former, skrifter, størrelser, regneark, pensler og rekkefølgen på menyene.
+Bibliothèque de formes ¦ Knižnica tvarov ¦ Formbibliotek
+Chercher une forme… (arbre, croix, É, drapeau) ¦ Hľadať tvar… (strom, kríž, É, vlajka) ¦ Søk etter en form… (tre, kors, É, flagg)
+Chercher une forme… ¦ Hľadať tvar… ¦ Søk etter en form…
+Chargement de toutes les formes… ¦ Načítavajú sa všetky tvary… ¦ Laster inn alle former…
+Les formes en plus n’ont pas pu être chargées. ¦ Ďalšie tvary sa nepodarilo načítať. ¦ De ekstra formene kunne ikke lastes inn.
+⛔ Les formes en plus n’ont pas pu être chargées. ¦ ⛔ Ďalšie tvary sa nepodarilo načítať. ¦ ⛔ De ekstra formene kunne ikke lastes inn.
+Aucune forme pour « {q} ». Essaie un autre mot (maison, croix, lettre, drapeau…). ¦ Žiadny tvar pre „{q}“. Skús iné slovo (dom, kríž, písmeno, vlajka…). ¦ Ingen form for «{q}». Prøv et annet ord (hus, kors, bokstav, flagg…).
+Aucune forme dans cette catégorie. ¦ V tejto kategórii nie je žiadny tvar. ¦ Ingen form i denne kategorien.
+{n} · ↑ ↓ ← → pour choisir, Entrée pour prendre, / pour chercher ¦ {n} · ↑ ↓ ← → na výber, Enter na prevzatie, / na hľadanie ¦ {n} · ↑ ↓ ← → for å velge, Enter for å ta, / for å søke
+Formes (flèches pour choisir, Entrée pour prendre) ¦ Tvary (šípky na výber, Enter na prevzatie) ¦ Former (piler for å velge, Enter for å ta)
+Large (16:9) ¦ Široký (16:9) ¦ Bred (16:9)
+Standard (4:3) ¦ Štandardný (4:3) ¦ Standard (4:3)
+Vertical (téléphone) ¦ Na výšku (telefón) ¦ Stående (telefon)
+Sur mesure… ¦ Vlastný… ¦ Tilpasset…
+Comme l’application ¦ Ako aplikácia ¦ Som appen
+Ardoise ¦ Bridlica ¦ Skifer
+Parchemin ¦ Pergamen ¦ Pergament
+Aurore ¦ Svitanie ¦ Morgengry
+Tableau noir ¦ Školská tabuľa ¦ Svart tavle
+Titre et texte ¦ Nadpis a text ¦ Tittel og tekst
+Titre et photo ¦ Nadpis a fotka ¦ Tittel og bilde
+Photo pleine page ¦ Fotka na celú stranu ¦ Helsidesbilde
+Photo et texte ¦ Fotka a text ¦ Bilde og tekst
+Deux colonnes ¦ Dva stĺpce ¦ To kolonner
+Section ¦ Oddiel ¦ Seksjon
+Chiffre clé ¦ Kľúčové číslo ¦ Nøkkeltall
+Double-clique pour écrire ¦ Dvojklikom začneš písať ¦ Dobbeltklikk for å skrive
+Légende de la photo ¦ Popis fotky ¦ Bildetekst
+« Une phrase qui compte » ¦ „Veta, na ktorej záleží“ ¦ «En setning som betyr noe»
+Triangle rectangle ¦ Pravouhlý trojuholník ¦ Rettvinklet trekant
+Pentagone ¦ Päťuholník ¦ Femkant
+Octogone ¦ Osemuholník ¦ Åttekant
+Double flèche ¦ Dvojitá šípka ¦ Dobbeltpil
+Chevron ¦ Lomená šípka ¦ Vinkelpil
+Ligne fléchée ¦ Čiara so šípkou ¦ Pilstrek
+Aucun (rectangle) ¦ Žiadny (obdĺžnik) ¦ Ingen (rektangel)
+Coins arrondis ¦ Zaoblené rohy ¦ Avrundede hjørner
+Cercle / ovale ¦ Kruh / ovál ¦ Sirkel / oval
+Arche (portrait ancien) ¦ Oblúk (starý portrét) ¦ Bue (gammelt portrett)
+Dissoudre ¦ Rozpustiť ¦ Oppløs
+Fondu par le noir ¦ Prelínanie cez čiernu ¦ Overgang via svart
+Glisser par-dessus ¦ Vsunúť ¦ Skyv inn
+Révéler ¦ Odhaliť ¦ Avdekk
+Balayage ¦ Stieranie ¦ Visk
+Échanger ¦ Výmena ¦ Bytt
+Retourner ¦ Prevrátiť ¦ Vend
+Cube ¦ Kocka ¦ Terning
+Déplacement magique ¦ Kúzelný presun ¦ Magisk flytting
+Apparition ¦ Objavenie ¦ Vis
+Fondu ¦ Prelínanie ¦ Overtoning
+Arrivée (glisser) ¦ Prílet (posun) ¦ Fly inn (gli)
+Rebond ¦ Odraz ¦ Sprett
+Chute ¦ Pád ¦ Fall
+Machine à écrire (textes) ¦ Písací stroj (texty) ¦ Skrivemaskin (tekster)
+Trajectoire (déplacement) ¦ Dráha (presun) ¦ Bevegelsesbane (flytting)
+depuis la gauche ¦ zľava ¦ fra venstre
+depuis la droite ¦ sprava ¦ fra høyre
+depuis le haut ¦ zhora ¦ ovenfra
+depuis le bas ¦ zdola ¦ nedenfra
+Au clic ¦ Pri kliknutí ¦ Ved klikk
+Avec la précédente ¦ S predchádzajúcou ¦ Med forrige
+Après la précédente ¦ Po predchádzajúcej ¦ Etter forrige
+Liaison ¦ Spojnica ¦ Kobling
+liaison|Droite ¦ Rovná ¦ Rett
+liaison|En équerre ¦ V pravom uhle ¦ Vinklet
+liaison|Courbe ¦ Zakrivená ¦ Buet
+Flèche au bout ¦ Šípka na konci ¦ Pil i enden
+Flèches aux deux bouts ¦ Šípky na oboch koncoch ¦ Piler i begge ender
+Sans flèche ¦ Bez šípky ¦ Uten pil
+Union (les deux réunies) ¦ Zjednotenie (obe spojené) ¦ Union (begge samlet)
+Soustraire (la 1re moins la 2e) ¦ Odčítať (1. mínus 2.) ¦ Trekk fra (den 1. minus den 2.)
+Intersection (ce qu’elles ont en commun) ¦ Prienik (čo majú spoločné) ¦ Snitt (det de har felles)
+Choisis une personne (à droite, onglet Format) ¦ Vyber osobu (vpravo, záložka Formát) ¦ Velg en person (til høyre, fanen Format)
+Aucun événement daté ¦ Žiadna datovaná udalosť ¦ Ingen datert hendelse
+Double-clique pour choisir une image ¦ Dvojklikom vyber obrázok ¦ Dobbeltklikk for å velge et bilde
+Aucune diapositive à montrer (toutes sont sautées ?). ¦ Žiadna snímka na zobrazenie (sú všetky preskočené?). ¦ Ingen lysbilder å vise (hoppes alle over?).
+Touches ¦ Klávesy ¦ Taster
+<kbd>→</kbd> <kbd>espace</kbd> <kbd>clic</kbd> suivante · <kbd>←</kbd> précédente · <kbd>Début</kbd> <kbd>Fin</kbd> · un numéro puis <kbd>Entrée</kbd> : aller à la diapositive · <kbd>B</kbd> écran noir · <kbd>W</kbd> écran blanc · <kbd>L</kbd> pointeur laser · <kbd>P</kbd> présentateur · <kbd>Échap</kbd> quitter ¦ <kbd>→</kbd> <kbd>medzerník</kbd> <kbd>klik</kbd> ďalšia · <kbd>←</kbd> predchádzajúca · <kbd>Home</kbd> <kbd>End</kbd> · číslo a potom <kbd>Enter</kbd>: prejsť na snímku · <kbd>B</kbd> čierna obrazovka · <kbd>W</kbd> biela obrazovka · <kbd>L</kbd> laserové ukazovátko · <kbd>P</kbd> prezentujúci · <kbd>Esc</kbd> ukončiť ¦ <kbd>→</kbd> <kbd>mellomrom</kbd> <kbd>klikk</kbd> neste · <kbd>←</kbd> forrige · <kbd>Home</kbd> <kbd>End</kbd> · et nummer og så <kbd>Enter</kbd>: gå til lysbildet · <kbd>B</kbd> svart skjerm · <kbd>W</kbd> hvit skjerm · <kbd>L</kbd> laserpeker · <kbd>P</kbd> presentatør · <kbd>Esc</kbd> avslutt
+Précédente (←) ¦ Predchádzajúca (←) ¦ Forrige (←)
+Suivante (→ ou espace) ¦ Ďalšia (→ alebo medzerník) ¦ Neste (→ eller mellomrom)
+Fenêtre du présentateur : notes, suivante, chronomètre (P) ¦ Okno prezentujúceho: poznámky, ďalšia, stopky (P) ¦ Presentatørvindu: notater, neste, stoppeklokke (P)
+Pointeur laser (L) ¦ Laserové ukazovátko (L) ¦ Laserpeker (L)
+Les touches (?) ¦ Klávesy (?) ¦ Tastene (?)
+Quitter (Échap) ¦ Ukončiť (Esc) ¦ Avslutt (Esc)
+Fin de la présentation — clic ou → pour quitter ¦ Koniec prezentácie — klik alebo → na ukončenie ¦ Slutt på presentasjonen — klikk eller → for å avslutte
+Encore {n} sur cette diapositive ¦ Na tejto snímke ešte {n} ¦ {n} til på dette lysbildet
+présentation|Fin ¦ Koniec ¦ Slutt
+Pas de notes pour cette diapositive (onglet 📝 Notes sous la diapositive). ¦ K tejto snímke nie sú poznámky (záložka 📝 Poznámky pod snímkou). ¦ Ingen notater til dette lysbildet (fanen 📝 Notater under lysbildet).
+La fenêtre du présentateur a été bloquée : autorise les fenêtres surgissantes pour cette page. ¦ Okno prezentujúceho bolo zablokované: povoľ pre túto stránku vyskakovacie okná. ¦ Presentatørvinduet ble blokkert: tillat popup-vinduer for denne siden.
+Présentateur ¦ Prezentujúci ¦ Presentatør
+Arrêter / reprendre le chronomètre ¦ Zastaviť / spustiť stopky ¦ Stopp / fortsett stoppeklokken
+Remettre le chronomètre à zéro ¦ Vynulovať stopky ¦ Nullstill stoppeklokken
+Heure : ¦ Čas: ¦ Klokken:
+Ensuite ¦ Ďalej ¦ Deretter
+‹ Précédente ¦ ‹ Predchádzajúca ¦ ‹ Forrige
+Suivante › ¦ Ďalšia › ¦ Neste ›
+Écran noir ¦ Čierna obrazovka ¦ Svart skjerm
+Écran blanc ¦ Biela obrazovka ¦ Hvit skjerm
+Touches : → ← espace, B, W, Échap ¦ Klávesy: → ← medzerník, B, W, Esc ¦ Taster: → ← mellomrom, B, W, Esc
+Terminer ¦ Ukončiť ¦ Avslutt
+Diapositive précédente ¦ Predchádzajúca snímka ¦ Forrige lysbilde
+Diapositive suivante ¦ Ďalšia snímka ¦ Neste lysbilde
+Quitter la présentation ¦ Ukončiť prezentáciu ¦ Avslutt presentasjonen
+PRÉSENTATION ¦ PREZENTÁCIA ¦ PRESENTASJON
+La personne affichée en ce moment, ou × pour en chercher une autre. ¦ Práve zobrazená osoba alebo × na hľadanie inej. ¦ Personen som vises nå, eller × for å søke etter en annen.
+Une vidéo ou un son ¦ Video alebo zvuk ¦ En video eller en lyd
+La fenêtre des médias n’est pas encore prête. Réessaie dans un instant. ¦ Okno médií ešte nie je pripravené. Skús to o chvíľu. ¦ Medievinduet er ikke klart ennå. Prøv igjen om litt.
+Police de l’ordinateur ¦ Písmo počítača ¦ Skrift fra datamaskinen
+Ce navigateur ne sait pas lister les polices : tape le nom exact d’une police installée (ex. Garamond) : ¦ Tento prehliadač nevie vypísať písma: napíš presný názov nainštalovaného písma (napr. Garamond): ¦ Nettleseren kan ikke vise skriftene: skriv inn det nøyaktige navnet på en installert skrift (f.eks. Garamond):
+L’ordinateur n’a donné aucune police : tape son nom dans la fenêtre. ¦ Počítač nevrátil žiadne písmo: napíš jeho názov do okna. ¦ Datamaskinen ga ingen skrifter: skriv inn navnet i vinduet.
+Les polices de l’ordinateur ne sont pas lisibles ici : tape le nom d’une police dans la fenêtre. ¦ Písma počítača tu nemožno čítať: napíš názov písma do okna. ¦ Skriftene på datamaskinen kan ikke leses her: skriv inn et skriftnavn i vinduet.
+🖥 Choisir une police ¦ 🖥 Vybrať písmo ¦ 🖥 Velg en skrift
+Pour les titres ¦ Pre nadpisy ¦ For overskrifter
+Pour les textes ¦ Pre texty ¦ For tekster
+Pour le texte choisi ¦ Pre vybraný text ¦ For den valgte teksten
+Chercher une police, ou taper son nom… ¦ Hľadať písmo alebo napísať jeho názov… ¦ Søk etter en skrift, eller skriv inn navnet…
+{n} de cet ordinateur, puis celles de l’app. Clique sur une police, puis dis où elle va. ¦ {n} z tohto počítača, potom písma aplikácie. Klikni na písmo a potom urči, kam patrí. ¦ {n} fra denne datamaskinen, deretter appens. Klikk på en skrift, og si så hvor den skal brukes.
+Les polices de l’app ; une autre police installée : tape son nom exact puis Entrée. Clique sur une police, puis dis où elle va. ¦ Písma aplikácie; iné nainštalované písmo: napíš jeho presný názov a Enter. Klikni na písmo a potom urči, kam patrí. ¦ Appens skrifter; en annen installert skrift: skriv inn det nøyaktige navnet og trykk Enter. Klikk på en skrift, og si så hvor den skal brukes.
+Aucune police « {q} » dans la liste : Entrée pour la prendre telle quelle. ¦ Písmo „{q}“ v zozname nie je: Enter ho prevezme tak, ako je. ¦ Ingen skrift «{q}» i listen: Enter for å ta den som den er.
+Portez ce vieux whisky au juge blond qui fume ¦ Kŕdeľ šťastných ďatľov učí pri ústí Váhu mĺkveho koňa obhrýzať kôru a žrať čerstvé mäso ¦ Vår sære Zulu fra badeøya spilte jo whist og quickstep i min taxi
+Choisis une police ¦ Vyber písmo ¦ Velg en skrift
+Clique d’abord sur une police. ¦ Najprv klikni na písmo. ¦ Klikk først på en skrift.
+Ma présentation ¦ Moja prezentácia ¦ Min presentasjon
+⤒ Importer (PowerPoint, OpenDocument, PDF, images, texte, JSON)… ¦ ⤒ Importovať (PowerPoint, OpenDocument, PDF, obrázky, text, JSON)… ¦ ⤒ Importer (PowerPoint, OpenDocument, PDF, bilder, tekst, JSON)…
+🖨 PDF / imprimer (une diapositive par page) ¦ 🖨 PDF / tlač (jedna snímka na stranu) ¦ 🖨 PDF / skriv ut (ett lysbilde per side)
+🖨 PDF avec les notes de l’orateur ¦ 🖨 PDF s poznámkami rečníka ¦ 🖨 PDF med foredragsnotater
+🖼️ Cette diapositive en PNG ¦ 🖼️ Táto snímka ako PNG ¦ 🖼️ Dette lysbildet som PNG
+🗂️ Toutes les diapositives en PNG (.zip) ¦ 🗂️ Všetky snímky ako PNG (.zip) ¦ 🗂️ Alle lysbilder som PNG (.zip)
+⏺ Vidéo (WebM) ¦ ⏺ Video (WebM) ¦ ⏺ Video (WebM)
+⤓ Fichier de la présentation (.json) ¦ ⤓ Súbor prezentácie (.json) ¦ ⤓ Presentasjonsfil (.json)
+Nom de la présentation ¦ Názov prezentácie ¦ Presentasjonens navn
+Annuler / rétablir ¦ Späť / znova ¦ Angre / gjør om
+↶ Annuler (⌘Z) ¦ ↶ Späť (⌘Z) ¦ ↶ Angre (⌘Z)
+↷ Rétablir (⇧⌘Z) ¦ ↷ Znova (⇧⌘Z) ¦ ↷ Gjør om (⇧⌘Z)
+Insérer (barre du haut) ¦ Vložiť (horná lišta) ¦ Sett inn (øverste linje)
+Une zone de texte ¦ Textové pole ¦ En tekstboks
+◆ Formes ¦ ◆ Tvary ¦ ◆ Former
+Une forme ¦ Tvar ¦ En form
+Une photo des médias ou de l’ordinateur ¦ Fotka z médií alebo z počítača ¦ Et bilde fra medier eller datamaskinen
+Un graphique (colonnes, camembert, courbe…) ¦ Graf (stĺpce, koláč, krivka…) ¦ Et diagram (stolper, kake, kurve…)
+👤 Généalogie (fiche, portrait, arbre, frise) ¦ 👤 Rodokmeň (karta, portrét, strom, časová os) ¦ 👤 Slektstre (oppføring, portrett, tre, tidslinje)
+La généalogie : une personne de la base ¦ Rodokmeň: osoba z databázy ¦ Slektstre: en person fra databasen
+🪪 Fiche d’une personne ¦ 🪪 Karta osoby ¦ 🪪 En persons oppføring
+🖼️ Portrait d’une personne ¦ 🖼️ Portrét osoby ¦ 🖼️ En persons portrett
+🌳 Petit arbre (parents, couple, enfants) ¦ 🌳 Malý strom (rodičia, pár, deti) ¦ 🌳 Lite tre (foreldre, par, barn)
+🗓️ Frise de sa vie ¦ 🗓️ Časová os života ¦ 🗓️ Tidslinje over livet
+Vidéo / son ¦ Video / zvuk ¦ Video / lyd
+Une vidéo ou un son des médias ¦ Video alebo zvuk z médií ¦ En video eller en lyd fra medier
+Disposer (barre du haut) ¦ Usporiadať (horná lišta) ¦ Ordne (øverste linje)
+⇤⇥ Aligner et répartir ¦ ⇤⇥ Zarovnať a rozmiestniť ¦ ⇤⇥ Juster og fordel
+⇤ À gauche ¦ ⇤ Vľavo ¦ ⇤ Venstre
+↔ Au centre ¦ ↔ Na stred ¦ ↔ Midtstilt
+⇥ À droite ¦ ⇥ Vpravo ¦ ⇥ Høyre
+⤒ En haut ¦ ⤒ Hore ¦ ⤒ Øverst
+↕ Au milieu ¦ ↕ Do stredu ¦ ↕ I midten
+⤓ En bas ¦ ⤓ Dole ¦ ⤓ Nederst
+⟷ Répartir horizontalement ¦ ⟷ Rozmiestniť vodorovne ¦ ⟷ Fordel vannrett
+⟷ Répartir verticalement ¦ ⟷ Rozmiestniť zvisle ¦ ⟷ Fordel loddrett
+⧉ Ordre (devant, derrière) ¦ ⧉ Poradie (dopredu, dozadu) ¦ ⧉ Rekkefølge (fremst, bakerst)
+Devant, derrière ¦ Dopredu, dozadu ¦ Fremst, bakerst
+Tout devant (⇧⌘]) ¦ Úplne dopredu (⇧⌘]) ¦ Helt fremst (⇧⌘])
+Avancer (⌘]) ¦ O úroveň vyššie (⌘]) ¦ Flytt fremover (⌘])
+Reculer (⌘[) ¦ O úroveň nižšie (⌘[) ¦ Flytt bakover (⌘[)
+Tout derrière (⇧⌘[) ¦ Úplne dozadu (⇧⌘[) ¦ Helt bakerst (⇧⌘[)
+Grouper (⌘G) — ⇧⌘G pour dissocier ¦ Zoskupiť (⌘G) — ⇧⌘G na zrušenie ¦ Grupper (⌘G) — ⇧⌘G for å oppheve
+Dissocier ¦ Zrušiť zoskupenie ¦ Opphev gruppe
+Dissocier (⇧⌘G) ¦ Zrušiť zoskupenie (⇧⌘G) ¦ Opphev gruppe (⇧⌘G)
+Verrouiller / déverrouiller (⌘L) ¦ Zamknúť / odomknúť (⌘L) ¦ Lås / lås opp (⌘L)
+Relier deux objets par un trait qui les suit (choisis-en deux) ¦ Prepojiť dva objekty čiarou, ktorá ich nasleduje (vyber dva) ¦ Koble to objekter med en strek som følger dem (velg to)
+Fusionner deux formes : union, soustraction, intersection ¦ Zlúčiť dva tvary: zjednotenie, rozdiel, prienik ¦ Slå sammen to former: union, subtraksjon, snitt
+Masque des diapositives : mettre les objets choisis sur toutes les diapositives, ou modifier le masque ¦ Predloha snímok: dať vybrané objekty na všetky snímky alebo upraviť predlohu ¦ Lysbildemal: legg de valgte objektene på alle lysbilder, eller rediger malen
+Lire en plein écran depuis le début (⌥⌘↩) ¦ Prehrať na celej obrazovke od začiatku (⌥⌘↩) ¦ Spill av i fullskjerm fra starten (⌥⌘↩)
+D’ici ¦ Odtiaľto ¦ Herfra
+Lire depuis cette diapositive (⌘↩) ¦ Prehrať od tejto snímky (⌘↩) ¦ Spill av fra dette lysbildet (⌘↩)
+Plein écran + fenêtre du présentateur (notes, suivante, chronomètre) ¦ Celá obrazovka + okno prezentujúceho (poznámky, ďalšia, stopky) ¦ Fullskjerm + presentatørvindu (notater, neste, stoppeklokke)
+PowerPoint, OpenDocument, PDF, images, Markdown, texte, JSON ¦ PowerPoint, OpenDocument, PDF, obrázky, Markdown, text, JSON ¦ PowerPoint, OpenDocument, PDF, bilder, Markdown, tekst, JSON
+Récit d’une vie : des diapositives toutes faites à partir de la fiche d’une personne ¦ Príbeh života: hotové snímky z karty osoby ¦ Livshistorie: ferdige lysbilder ut fra en persons oppføring
+PDF, impression, images, vidéo, fichier de la présentation ¦ PDF, tlač, obrázky, video, súbor prezentácie ¦ PDF, utskrift, bilder, video, presentasjonsfil
+Une forme (les autres : menu ◆ Forme en haut) ¦ Tvar (ostatné: ponuka ◆ Tvar hore) ¦ En form (de andre: menyen ◆ Form øverst)
+Une image (médias ou ordinateur) ¦ Obrázok (médiá alebo počítač) ¦ Et bilde (medier eller datamaskinen)
+La fiche d’une personne ¦ Karta osoby ¦ En persons oppføring
+Présentateur : plein écran, notes, chronomètre ¦ Prezentujúci: celá obrazovka, poznámky, stopky ¦ Presentatør: fullskjerm, notater, stoppeklokke
+Diapositives (au-dessus de la liste) ¦ Snímky (nad zoznamom) ¦ Lysbilder (over listen)
+Nouvelle diapositive ¦ Nová snímka ¦ Nytt lysbilde
+＋ Diapositive ¦ ＋ Snímka ¦ ＋ Lysbilde
+▾ Choisir la disposition ¦ ▾ Vybrať rozloženie ¦ ▾ Velg oppsett
+Choisir la disposition ¦ Vybrať rozloženie ¦ Velg oppsett
+Dupliquer la diapositive (pour un déplacement magique) ¦ Duplikovať snímku (pre kúzelný presun) ¦ Dupliser lysbildet (for magisk flytting)
+Sauter / ne plus sauter à la lecture ¦ Preskakovať / nepreskakovať pri prehrávaní ¦ Hopp over / ikke hopp over ved avspilling
+Commencer une section (un groupe de diapositives) ici ¦ Začať tu oddiel (skupinu snímok) ¦ Start en seksjon (en gruppe lysbilder) her
+Supprimer la diapositive ¦ Vymazať snímku ¦ Slett lysbildet
+Diapositive précédente (Page précédente) ¦ Predchádzajúca snímka (Page Up) ¦ Forrige lysbilde (Page Up)
+Diapositive suivante (Page suivante) ¦ Ďalšia snímka (Page Down) ¦ Neste lysbilde (Page Down)
+Ajuster ¦ Prispôsobiť ¦ Tilpass
+Les objets se calent sur les bords, le centre et les autres objets (⌘ en glissant : sans aimant) ¦ Objekty sa prichytávajú k okrajom, stredu a ďalším objektom (⌘ pri ťahaní: bez prichytávania) ¦ Objektene festes til kantene, midten og andre objekter (⌘ mens du drar: uten festing)
+Notes de l’orateur ¦ Poznámky rečníka ¦ Foredragsnotater
+📝 Notes ¦ 📝 Poznámky ¦ 📝 Notater
+Notes de l’orateur : ce que tu veux dire sur cette diapositive (vues seulement dans la fenêtre du présentateur, et dans le PDF avec notes)… ¦ Poznámky rečníka: čo chceš povedať k tejto snímke (vidieť len v okne prezentujúceho a v PDF s poznámkami)… ¦ Foredragsnotater: det du vil si om dette lysbildet (vises bare i presentatørvinduet og i PDF-en med notater)…
+Onglets de l’inspecteur (à droite) ¦ Záložky inšpektora (vpravo) ¦ Inspektørens faner (til høyre)
+Format de l’objet choisi ¦ Formát vybraného objektu ¦ Formatet til det valgte objektet
+Animer ¦ Animovať ¦ Animer
+Transition et animations ¦ Prechod a animácie ¦ Overgang og animasjoner
+Diapo ¦ Snímka ¦ Lysbilde
+La diapositive : disposition, fond, durée, notes ¦ Snímka: rozloženie, pozadie, trvanie, poznámky ¦ Lysbildet: oppsett, bakgrunn, varighet, notater
+Les objets de la diapositive (devant, derrière, cacher, verrouiller) ¦ Objekty snímky (dopredu, dozadu, skryť, zamknúť) ¦ Lysbildets objekter (fremst, bakerst, skjul, lås)
+Thème, polices, format, musique ¦ Motív, písma, formát, hudba ¦ Tema, skrifter, format, musikk
+Clic : choisir un objet (⇧ : en plus) · double-clic : écrire dedans · glisser : déplacer · poignées : agrandir · rond : tourner ¦ Klik: vybrať objekt (⇧: pridať) · dvojklik: písať doň · ťahanie: presunúť · úchyty: zmeniť veľkosť · koliesko: otočiť ¦ Klikk: velg et objekt (⇧: legg til) · dobbeltklikk: skriv i det · dra: flytt · håndtak: endre størrelse · sirkel: roter
+Aimanter : les objets se calent sur les bords, le centre et les autres objets (⌘ en glissant : sans aimant) ¦ Prichytávať: objekty sa prichytávajú k okrajom, stredu a ďalším objektom (⌘ pri ťahaní: bez prichytávania) ¦ Fest: objektene festes til kantene, midten og andre objekter (⌘ mens du drar: uten festing)
+Replier / déplier la section ¦ Zbaliť / rozbaliť oddiel ¦ Fold sammen / ut seksjonen
+Sautée à la lecture ¦ Preskočená pri prehrávaní ¦ Hoppes over ved avspilling
+Animations ¦ Animácie ¦ Animasjoner
+Transition : {name} ¦ Prechod: {name} ¦ Overgang: {name}
+Tourner (⇧ : de 15° en 15°) ¦ Otočiť (⇧: po 15°) ¦ Roter (⇧: i trinn på 15°)
+Choisis une zone de texte. ¦ Vyber textové pole. ¦ Velg en tekstboks.
+Le petit arbre de quelle personne ? ¦ Malý strom ktorej osoby? ¦ Hvem sitt lille tre?
+La frise de la vie de qui ? ¦ Časová os čieho života? ¦ Hvem sin livstidslinje?
+Lecture de la fiche… ¦ Čítanie karty… ¦ Leser oppføringen…
+Changer la vidéo ou le son ¦ Zmeniť video alebo zvuk ¦ Bytt video eller lyd
+Choisis un ou plusieurs objets. ¦ Vyber jeden alebo viac objektov. ¦ Velg ett eller flere objekter.
+Choisis au moins trois objets pour les répartir. ¦ Na rozmiestnenie vyber aspoň tri objekty. ¦ Velg minst tre objekter for å fordele dem.
+Choisis au moins deux objets à grouper. ¦ Vyber aspoň dva objekty na zoskupenie. ¦ Velg minst to objekter som skal grupperes.
+Choisis deux objets (⇧ clic) : un trait les reliera, et les suivra quand tu les déplaces. ¦ Vyber dva objekty (⇧ klik): prepojí ich čiara a bude ich nasledovať, keď ich presunieš. ¦ Velg to objekter (⇧ klikk): en strek kobler dem og følger dem når du flytter dem.
+Choisis deux formes (⇧ clic) à fusionner. ¦ Vyber dva tvary (⇧ klik) na zlúčenie. ¦ Velg to former (⇧ klikk) som skal slås sammen.
+⊕ Fusionner deux formes ¦ ⊕ Zlúčiť dva tvary ¦ ⊕ Slå sammen to former
+La 1re forme est celle du dessous. Les deux restent gardées dans la nouvelle forme. ¦ 1. tvar je ten spodný. Oba zostanú zachované v novom tvare. ¦ Den 1. formen er den nederste. Begge beholdes i den nye formen.
+Comment ¦ Ako ¦ Hvordan
+🗂 Sur toutes les diapositives (masque). Dans un texte, « {a} » donne le numéro de la diapositive et « {b} » leur nombre. 🗂 sans rien choisir : le modifier. ¦ 🗂 Na všetkých snímkach (predloha). V texte „{a}“ dáva číslo snímky a „{b}“ ich počet. 🗂 bez výberu: upraviť ju. ¦ 🗂 På alle lysbilder (mal). I en tekst gir «{a}» lysbildets nummer og «{b}» antallet. 🗂 uten noe valgt: rediger den.
+Le masque est vide : choisis des objets (logo, pied de page, numéro « {a} »…) puis 🗂 pour les mettre sur toutes les diapositives. ¦ Predloha je prázdna: vyber objekty (logo, päta, číslo „{a}“…) a potom 🗂, aby si ich dal(a) na všetky snímky. ¦ Malen er tom: velg objekter (logo, bunntekst, nummer «{a}»…) og så 🗂 for å legge dem på alle lysbilder.
+🗂 Masque des diapositives ¦ 🗂 Predloha snímok ¦ 🗂 Lysbildemal
+{n} sur toutes les diapositives. ¦ {n} na všetkých snímkach. ¦ {n} på alle lysbilder.
+Que faire ¦ Čo urobiť ¦ Hva skal gjøres
+Les ramener sur cette diapositive pour les modifier (puis 🗂 pour les remettre) ¦ Vrátiť ich na túto snímku na úpravu (potom 🗂 na ich vrátenie) ¦ Hent dem til dette lysbildet for å redigere dem (og så 🗂 for å legge dem tilbake)
+Remontrer le masque sur cette diapositive ¦ Znova zobraziť predlohu na tejto snímke ¦ Vis malen igjen på dette lysbildet
+Ne pas montrer le masque sur cette diapositive ¦ Nezobrazovať predlohu na tejto snímke ¦ Ikke vis malen på dette lysbildet
+Vider le masque ¦ Vyprázdniť predlohu ¦ Tøm malen
+Diapositive dupliquée : déplace les objets puis choisis la transition « Déplacement magique » (onglet ✨ Animer). ¦ Snímka duplikovaná: presuň objekty a potom vyber prechod „Kúzelný presun“ (záložka ✨ Animovať). ¦ Lysbildet er duplisert: flytt objektene og velg så overgangen «Magisk flytting» (fanen ✨ Animer).
+Aucune couleur ¦ Žiadna farba ¦ Ingen farge
+Choisir la police (recherche, récentes, polices de l’ordinateur) ¦ Vybrať písmo (hľadanie, nedávne, písma počítača) ¦ Velg skrift (søk, nylige, skrifter på datamaskinen)
+{what} (sur la diapositive) ¦ {what} (na snímke) ¦ {what} (på lysbildet)
+Les réglages vont au texte sélectionné (sinon à tout le texte). ¦ Nastavenia sa použijú na vybraný text (inak na celý text). ¦ Innstillingene gjelder den markerte teksten (ellers hele teksten).
+Double-clic dans le texte pour l’écrire ; les réglages vont à tout le texte, ou au morceau sélectionné. ¦ Dvojklikom do textu začneš písať; nastavenia platia pre celý text alebo vybranú časť. ¦ Dobbeltklikk i teksten for å skrive; innstillingene gjelder hele teksten eller den markerte delen.
+Le trait suit les deux objets quand on les déplace. ¦ Čiara nasleduje oba objekty, keď sa presúvajú. ¦ Streken følger begge objektene når de flyttes.
+Double-clic sur une case du tableau pour l’écrire directement. ¦ Dvojklikom na bunku tabuľky do nej priamo píšeš. ¦ Dobbeltklikk på en tabellcelle for å skrive direkte i den.
+Ce qui est montré vient de la fiche (relue le {date}) : la présentation se lit même sans la base. « Relire la fiche » la met à jour. ¦ Čo sa zobrazuje, pochádza z karty (prečítanej {date}): prezentácia funguje aj bez databázy. „Znova načítať kartu“ ju aktualizuje. ¦ Det som vises, kommer fra oppføringen (lest {date}): presentasjonen fungerer også uten databasen. «Les oppføringen på nytt» oppdaterer den.
+(groupe) ¦ (skupina) ¦ (gruppe)
+Choisis un objet sur la diapositive (clic) ou insère-en un (barre du haut). ⇧ clic : en choisir plusieurs ; glisser sur le fond : un rectangle de sélection ; double-clic : écrire dans un texte, changer une image ; ⌥ en glissant : copier. ¦ Vyber objekt na snímke (klik) alebo nejaký vlož (horná lišta). ⇧ klik: vybrať viac; ťahanie po pozadí: výberový obdĺžnik; dvojklik: písať do textu, zmeniť obrázok; ⌥ pri ťahaní: kopírovať. ¦ Velg et objekt på lysbildet (klikk) eller sett inn et (øverste linje). ⇧ klikk: velg flere; dra på bakgrunnen: et markeringsrektangel; dobbeltklikk: skriv i en tekst, bytt et bilde; ⌥ mens du drar: kopier.
+Inspecteur : sections de « Format » ¦ Inšpektor: oddiely „Formát“ ¦ Inspektør: seksjoner i «Format»
+Inspecteur : sections de « Animer » ¦ Inšpektor: oddiely „Animovať“ ¦ Inspektør: seksjoner i «Animer»
+Inspecteur : sections de « Diapositive » ¦ Inšpektor: oddiely „Snímka“ ¦ Inspektør: seksjoner i «Lysbilde»
+Inspecteur : « Objets » ¦ Inšpektor: „Objekty“ ¦ Inspektør: «Objekter»
+Inspecteur : sections de « Document » ¦ Inšpektor: oddiely „Dokument“ ¦ Inspektør: seksjoner i «Dokument»
+C’est la première diapositive : sa transition ne joue que si la lecture recommence en boucle. ¦ Toto je prvá snímka: jej prechod sa prehrá len pri prehrávaní v slučke. ¦ Dette er det første lysbildet: overgangen spilles bare av hvis avspillingen går i sløyfe.
+✨ Les objets présents sur la diapositive d’avant et sur celle-ci (diapositive dupliquée avec ⧉, ou objets portant le même nom) glissent, grandissent et tournent d’une place à l’autre ; les autres apparaissent ou s’effacent. ¦ ✨ Objekty na predchádzajúcej aj na tejto snímke (snímka duplikovaná pomocou ⧉ alebo objekty s rovnakým názvom) sa posunú, zväčšia a otočia z jedného miesta na druhé; ostatné sa objavia alebo zmiznú. ¦ ✨ Objekter som finnes både på forrige lysbilde og på dette (lysbilde duplisert med ⧉, eller objekter med samme navn), glir, vokser og roterer fra ett sted til et annet; de andre dukker opp eller forsvinner.
+Aucune : il est là dès l’arrivée de la diapositive. ¦ Žiadna: je tam hneď od zobrazenia snímky. ¦ Ingen: det er der så snart lysbildet vises.
+Choisis un objet sur la diapositive pour le faire apparaître (entrée) ou disparaître (sortie), au clic ou tout seul. ¦ Vyber objekt na snímke, ktorý sa má objaviť (vstup) alebo zmiznúť (výstup), po kliknutí alebo sám. ¦ Velg et objekt på lysbildet for å la det dukke opp (inngang) eller forsvinne (utgang), ved klikk eller automatisk.
+Pas encore d’animation sur cette diapositive. ¦ Na tejto snímke zatiaľ nie je animácia. ¦ Ingen animasjon på dette lysbildet ennå.
+Changer de disposition replace les objets « titre », « texte », « photo » ; ce que tu as écrit est gardé. ¦ Zmena rozloženia premiestni objekty „nadpis“, „text“, „fotka“; čo si napísal(a), zostane. ¦ Bytte av oppsett flytter objektene «tittel», «tekst», «bilde»; det du har skrevet, beholdes.
+Ce que tu veux dire sur cette diapositive (vu dans la fenêtre du présentateur)… ¦ Čo chceš povedať k tejto snímke (vidieť v okne prezentujúceho)… ¦ Det du vil si om dette lysbildet (vises i presentatørvinduet)…
+Objets de la diapositive ¦ Objekty snímky ¦ Lysbildets objekter
+Objets (le premier est devant) ¦ Objekty (prvý je vpredu) ¦ Objekter (det første er fremst)
+Dans un groupe ¦ V skupine ¦ I en gruppe
+Aucun objet sur cette diapositive pour l’instant ¦ Na tejto snímke zatiaľ nie je žiadny objekt ¦ Ingen objekter på dette lysbildet ennå
+Insère un texte, une image… avec la barre du haut. ¦ Vlož text, obrázok… pomocou hornej lišty. ¦ Sett inn en tekst, et bilde… med den øverste linjen.
+Celle du thème ({font}) ¦ Z motívu ({font}) ¦ Temaets ({font})
+{w} × {h} points. En changeant de format, les objets sont agrandis ou réduits ensemble. ¦ {w} × {h} bodov. Pri zmene formátu sa objekty zväčšia alebo zmenšia spoločne. ¦ {w} × {h} punkter. Når formatet endres, forstørres eller forminskes objektene sammen.
+{n} dont {skipped} · {time} en lecture toute seule (durées des diapositives). ¦ {n}, z toho {skipped} · {time} pri automatickom prehrávaní (trvanie snímok). ¦ {n}, herav {skipped} · {time} ved automatisk avspilling (lysbildenes varighet).
+{n} · {time} en lecture toute seule (durées des diapositives). ¦ {n} · {time} pri automatickom prehrávaní (trvanie snímok). ¦ {n} · {time} ved automatisk avspilling (lysbildenes varighet).
+Il n’y a pas de diapositive avant celle-ci. ¦ Pred touto snímkou nie je žiadna snímka. ¦ Det er ikke noe lysbilde før dette.
+Choisis d’abord un effet de transition. ¦ Najprv vyber efekt prechodu. ¦ Velg først en overgangseffekt.
+Les dernières modifications de la présentation seront perdues. ¦ Posledné zmeny prezentácie sa stratia. ¦ De siste endringene i presentasjonen går tapt.
+Fermer sans enregistrer la présentation ? ¦ Zavrieť prezentáciu bez uloženia? ¦ Lukke presentasjonen uten å lagre?
+une diapositive par page (« Enregistrer en PDF ») ¦ jedna snímka na stranu („Uložiť ako PDF“) ¦ ett lysbilde per side («Lagre som PDF»)
+📝 PDF + notes ¦ 📝 PDF + poznámky ¦ 📝 PDF + notater
+avec les notes de l’orateur ¦ s poznámkami rečníka ¦ med foredragsnotater
+🗂 Toutes en PNG ¦ 🗂 Všetky ako PNG ¦ 🗂 Alle som PNG
+un fichier .zip ¦ súbor .zip ¦ en .zip-fil
+WebM, avec la musique ¦ WebM, s hudbou ¦ WebM, med musikken
+aperçu, pages, notes ¦ náhľad, strany, poznámky ¦ forhåndsvisning, sider, notater
+pour la rouvrir ou la partager ¦ na opätovné otvorenie alebo zdieľanie ¦ for å åpne den igjen eller dele den
+Le diaporama n’est pas chargé. ¦ Prezentácia fotiek nie je načítaná. ¦ Lysbildefremvisningen er ikke lastet inn.
+Ajouter le récit ¦ Pridať príbeh ¦ Legg til historien
+Rien à raconter pour cette personne. ¦ O tejto osobe nie je čo rozprávať. ¦ Ingenting å fortelle om denne personen.
+{n} : chaque texte vient de la fiche. Les cartes animées restent dans le diaporama. ¦ {n}: každý text pochádza z karty. Animované mapy zostávajú v prezentácii fotiek. ¦ {n}: hver tekst kommer fra oppføringen. Animerte kart blir værende i lysbildefremvisningen.
+Titre de la section qui commence à cette diapositive (vide : pas de section) : ¦ Názov oddielu, ktorý začína touto snímkou (prázdne: žiadny oddiel): ¦ Tittel på seksjonen som begynner ved dette lysbildet (tomt: ingen seksjon):
+Police « {font} » pour le texte choisi. ¦ Písmo „{font}“ pre vybraný text. ¦ Skriften «{font}» for den valgte teksten.
+Police « {font} » pour les titres. ¦ Písmo „{font}“ pre nadpisy. ¦ Skriften «{font}» for overskrifter.
+Police « {font} » pour les textes. ¦ Písmo „{font}“ pre texty. ¦ Skriften «{font}» for tekster.
+L’image est maintenant le fond de la diapositive (onglet 🖼 Diapositive). ¦ Obrázok je teraz pozadím snímky (záložka 🖼 Snímka). ¦ Bildet er nå lysbildets bakgrunn (fanen 🖼 Lysbilde).
+Cette transition va maintenant à toutes les diapositives. ¦ Tento prechod teraz platí pre všetky snímky. ¦ Denne overgangen gjelder nå alle lysbilder.
+L’image du fond ¦ Obrázok pozadia ¦ Bakgrunnsbildet
+Ce fond va maintenant à toutes les diapositives. ¦ Toto pozadie teraz platí pre všetky snímky. ¦ Denne bakgrunnen gjelder nå alle lysbilder.
+Une musique pendant la lecture ¦ Hudba počas prehrávania ¦ Musikk under avspillingen
+Choisis un son (MP3, M4A, WAV…). ¦ Vyber zvuk (MP3, M4A, WAV…). ¦ Velg en lyd (MP3, M4A, WAV…).
+{name} : ni une image, ni une vidéo, ni un son. ¦ {name}: nie je to obrázok, video ani zvuk. ¦ {name}: verken et bilde, en video eller en lyd.
+Diapositive copiée : ⌘V pour la coller. ¦ Snímka skopírovaná: ⌘V ju vloží. ¦ Lysbildet er kopiert: ⌘V for å lime det inn.
+ce n’est pas un fichier zip valide (pptx, odp) ¦ nie je to platný súbor zip (pptx, odp) ¦ dette er ikke en gyldig zip-fil (pptx, odp)
+un élément du fichier est trop gros ¦ jedna časť súboru je príliš veľká ¦ en del av filen er for stor
+fichier refusé : il contient des déclarations XML (DOCTYPE ou ENTITY) ¦ súbor odmietnutý: obsahuje deklarácie XML (DOCTYPE alebo ENTITY) ¦ filen ble avvist: den inneholder XML-deklarasjoner (DOCTYPE eller ENTITY)
+XML illisible dans le fichier ¦ nečitateľné XML v súbore ¦ uleselig XML i filen
+ce n’est pas une présentation PowerPoint (.pptx) ¦ nie je to prezentácia PowerPoint (.pptx) ¦ dette er ikke en PowerPoint-presentasjon (.pptx)
+aucune diapositive trouvée ¦ nenašla sa žiadna snímka ¦ fant ingen lysbilder
+{n} dans un format que le navigateur ne lit pas (EMF, WMF…) ont été laissées de côté. ¦ {n} vo formáte, ktorý prehliadač nevie čítať (EMF, WMF…), bolo vynechaných. ¦ {n} i et format nettleseren ikke kan lese (EMF, WMF…), ble utelatt.
+ce n’est pas un fichier OpenDocument (.odp) ¦ nie je to súbor OpenDocument (.odp) ¦ dette er ikke en OpenDocument-fil (.odp)
+{n} de côté. ¦ Vynechané: {n}. ¦ {n} utelatt.
+ce n’est pas un PDF ¦ nie je to PDF ¦ dette er ikke en PDF
+aucune image (scan, photo) n’a été trouvée dans ce PDF. Son texte et ses dessins ne peuvent pas être lus ici : exporte-le plutôt en images, ou en PowerPoint depuis le logiciel qui l’a fait ¦ v tomto PDF sa nenašiel žiadny obrázok (sken, fotka). Jeho text a kresby tu nemožno prečítať: radšej ho exportuj ako obrázky alebo ako PowerPoint z programu, ktorý ho vytvoril ¦ fant ingen bilder (skanning, foto) i denne PDF-en. Teksten og tegningene kan ikke leses her: eksporter den heller som bilder, eller som PowerPoint fra programmet som laget den
+PDF : {n} ; le texte et les dessins du PDF ne sont pas lus. ¦ PDF: {n}; text a kresby PDF sa nečítajú. ¦ PDF: {n}; PDF-ens tekst og tegninger leses ikke.
+Carte du diaporama : le trajet animé reste dans le diaporama. ¦ Mapa z prezentácie fotiek: animovaná trasa zostáva v prezentácii fotiek. ¦ Kart fra lysbildefremvisningen: den animerte ruten blir værende i lysbildefremvisningen.
+ce n’est pas une présentation de l’app ¦ nie je to prezentácia z aplikácie ¦ dette er ikke en presentasjon fra appen
+{name} : Keynote garde ses fichiers dans un format fermé. Dans Keynote : Fichier → Exporter vers → PowerPoint (ou PDF, ou Images), puis importe ce fichier ici. ¦ {name}: Keynote ukladá súbory v uzavretom formáte. V Keynote: Súbor → Exportovať do → PowerPoint (alebo PDF, alebo Obrázky), potom tento súbor importuj sem. ¦ {name}: Keynote lagrer filene sine i et lukket format. I Keynote: Arkiv → Eksporter til → PowerPoint (eller PDF, eller Bilder), og importer så den filen her.
+{name} : l’ancien format PowerPoint (avant 2007) ne se lit pas ici ; ouvre-le et enregistre-le en .pptx. ¦ {name}: starý formát PowerPoint (pred 2007) tu nemožno prečítať; otvor ho a ulož ako .pptx. ¦ {name}: det gamle PowerPoint-formatet (før 2007) kan ikke leses her; åpne det og lagre som .pptx.
+fichier trop gros (400 Mo au plus) ¦ súbor je príliš veľký (najviac 400 MB) ¦ filen er for stor (høyst 400 MB)
+{name} : format non reconnu. ¦ {name}: nerozpoznaný formát. ¦ {name}: ukjent format.
+{name} : rien à importer. ¦ {name}: nič na import. ¦ {name}: ingenting å importere.
+IMPORT ¦ IMPORT ¦ IMPORT
+Rien n’a été importé ¦ Nič sa neimportovalo ¦ Ingenting ble importert
+Remplacer les diapositives actuelles (sinon : ajoutées après la diapositive affichée) ¦ Nahradiť súčasné snímky (inak: pridať za zobrazenú snímku) ¦ Erstatt de nåværende lysbildene (ellers: legges til etter lysbildet som vises)
+<b>PowerPoint (.pptx)</b> et <b>OpenDocument / LibreOffice Impress (.odp)</b> : chaque diapositive avec ses textes (à leur place, taille, gras, couleur, listes), ses images, ses formes simples, ses tableaux, ses graphiques, ses notes et ses transitions. ¦ <b>PowerPoint (.pptx)</b> a <b>OpenDocument / LibreOffice Impress (.odp)</b>: každá snímka so svojimi textami (na mieste, veľkosť, tučné, farba, zoznamy), obrázkami, jednoduchými tvarmi, tabuľkami, grafmi, poznámkami a prechodmi. ¦ <b>PowerPoint (.pptx)</b> og <b>OpenDocument / LibreOffice Impress (.odp)</b>: hvert lysbilde med tekstene sine (på plass, størrelse, fet, farge, lister), bilder, enkle former, tabeller, diagrammer, notater og overganger.
+<b>Keynote (.key)</b> : le format d’Apple est fermé. Dans Keynote : Fichier → Exporter vers → <b>PowerPoint</b> (ou PDF, ou Images), puis importe ce fichier ici. ¦ <b>Keynote (.key)</b>: formát Apple je uzavretý. V Keynote: Súbor → Exportovať do → <b>PowerPoint</b> (alebo PDF, alebo Obrázky), potom tento súbor importuj sem. ¦ <b>Keynote (.key)</b>: Apples format er lukket. I Keynote: Arkiv → Eksporter til → <b>PowerPoint</b> (eller PDF, eller Bilder), og importer så den filen her.
+<b>PDF</b> : les images qu’il contient (scans, photos) deviennent des diapositives, une par image. Le texte et les dessins d’un PDF ne se lisent pas ici : pour une présentation, exporte-la plutôt en PowerPoint ou en images. ¦ <b>PDF</b>: obrázky v ňom (skeny, fotky) sa stanú snímkami, jedna na obrázok. Text a kresby PDF tu nemožno prečítať: prezentáciu radšej exportuj do PowerPointu alebo ako obrázky. ¦ <b>PDF</b>: bildene i den (skanninger, bilder) blir lysbilder, ett per bilde. Tekst og tegninger i en PDF kan ikke leses her: eksporter heller presentasjonen som PowerPoint eller bilder.
+<b>Images</b> (JPG, PNG, WEBP, GIF, BMP…), plusieurs à la fois : une diapositive « photo pleine page » par image. ¦ <b>Obrázky</b> (JPG, PNG, WEBP, GIF, BMP…), viac naraz: jedna snímka „fotka na celú stranu“ na obrázok. ¦ <b>Bilder</b> (JPG, PNG, WEBP, GIF, BMP…), flere om gangen: ett lysbilde «helsidesbilde» per bilde.
+<b>Markdown (.md) ou texte (.txt)</b> : « # Titre » commence une diapositive, « - » fait une puce, « --- » sépare deux diapositives, « > » une citation, « Notes: » les notes de l’orateur. Un texte simple : un paragraphe par diapositive. ¦ <b>Markdown (.md) alebo text (.txt)</b>: „# Nadpis“ začína snímku, „-“ robí odrážku, „---“ oddeľuje dve snímky, „>“ citát, „Notes:“ poznámky rečníka. Obyčajný text: jeden odsek na snímku. ¦ <b>Markdown (.md) eller tekst (.txt)</b>: «# Tittel» starter et lysbilde, «-» lager et punkt, «---» skiller to lysbilder, «>» et sitat, «Notes:» foredragsnotatene. Ren tekst: ett avsnitt per lysbilde.
+<b>JSON</b> : une présentation (ou un diaporama) exportée par l’app. ¦ <b>JSON</b>: prezentácia (alebo prezentácia fotiek) exportovaná aplikáciou. ¦ <b>JSON</b>: en presentasjon (eller lysbildefremvisning) eksportert av appen.
+Aucune diapositive à imprimer. ¦ Žiadna snímka na tlač. ¦ Ingen lysbilder å skrive ut.
+Diapositive ¦ Snímka ¦ Lysbilde
+Pas de notes. ¦ Žiadne poznámky. ¦ Ingen notater.
+{name} — présentation ¦ {name} — prezentácia ¦ {name} — presentasjon
+Les diapositives ¦ Snímky ¦ Lysbildene
+Les diapositives avec les notes du présentateur ¦ Snímky s poznámkami prezentujúceho ¦ Lysbildene med presentatørens notater
+Les notes seules (texte) ¦ Len poznámky (text) ¦ Bare notatene (tekst)
+Diapositives par page ¦ Snímok na stranu ¦ Lysbilder per side
+Numéros des diapositives ¦ Čísla snímok ¦ Lysbildenumre
+Les diapositives masquées aussi ¦ Aj skryté snímky ¦ Også skjulte lysbilder
+aucune diapositive ¦ žiadna snímka ¦ ingen lysbilder
+Préparation de {n} images… ¦ Príprava obrázkov ({n})… ¦ Forbereder {n} bilder…
+Préparation de l’image… ¦ Príprava obrázka… ¦ Forbereder bildet…
+ce navigateur ne sait pas enregistrer de vidéo ¦ tento prehliadač nevie nahrávať video ¦ nettleseren kan ikke ta opp video
+La vidéo rejoue la présentation en entier ({time}, durées de l’onglet 🖼 Diapositive) et l’enregistre. Laisse la fenêtre ouverte. ¦ Video prehrá celú prezentáciu ({time}, trvania zo záložky 🖼 Snímka) a nahrá ju. Nechaj okno otvorené. ¦ Videoen spiller av hele presentasjonen ({time}, varigheter fra fanen 🖼 Lysbilde) og tar den opp. La vinduet være åpent.
+Fabriquer la vidéo ? ¦ Vytvoriť video? ¦ Lage videoen?
+Fabriquer la vidéo ¦ Vytvoriť video ¦ Lag videoen
+Préparation : {n} / {total} ¦ Príprava: {n} / {total} ¦ Forbereder: {n} / {total}
+Vidéo : {n} % ¦ Video: {n} % ¦ Video: {n} %
+Vidéo arrêtée : la présentation a été fermée pendant l’enregistrement. ¦ Video zastavené: prezentácia bola počas nahrávania zatvorená. ¦ Videoen stoppet: presentasjonen ble lukket under opptaket.
+la vidéo est vide : l’enregistrement n’a pas pu se faire dans ce navigateur ¦ video je prázdne: v tomto prehliadači sa nahrávanie nepodarilo ¦ videoen er tom: opptaket kunne ikke gjøres i denne nettleseren
+La vidéo est vide : l’enregistrement n’a pas pu se faire dans ce navigateur. ¦ Video je prázdne: v tomto prehliadači sa nahrávanie nepodarilo. ¦ Videoen er tom: opptaket kunne ikke gjøres i denne nettleseren.
+Vidéo téléchargée et rangée dans les Médias. ¦ Video stiahnuté a uložené do Médií. ¦ Videoen er lastet ned og lagt i Medier.
+Tu peux l’ajouter aux Médias de l’app, ou seulement la télécharger. ¦ Môžeš ho pridať do Médií aplikácie alebo ho len stiahnuť. ¦ Du kan legge den til i appens Medier, eller bare laste den ned.
+Vidéo prête ¦ Video pripravené ¦ Videoen er klar
+Ajouter aux Médias ¦ Pridať do Médií ¦ Legg til i Medier
+Télécharger seulement ¦ Len stiahnuť ¦ Bare last ned
+Vidéo ajoutée aux Médias. ¦ Video pridané do Médií. ¦ Videoen er lagt til i Medier.
+Vidéo impossible : {error} ¦ Video nemožno vytvoriť: {error} ¦ Video ikke mulig: {error}
+NOUVELLE PRÉSENTATION ¦ NOVÁ PREZENTÁCIA ¦ NY PRESENTASJON
+🎤 Choisis un thème ¦ 🎤 Vyber motív ¦ 🎤 Velg et tema
+Créer la présentation ¦ Vytvoriť prezentáciu ¦ Opprett presentasjonen
+Le thème, les couleurs, les polices et le format se changent ensuite (onglet ⚙️ Document). Pour partir d’un PowerPoint, d’un OpenDocument, d’un PDF ou de photos : « ⤒ Importer ». ¦ Motív, farby, písma a formát sa dajú zmeniť neskôr (záložka ⚙️ Dokument). Ak chceš vychádzať z PowerPointu, OpenDocumentu, PDF alebo fotiek: „⤒ Importovať“. ¦ Tema, farger, skrifter og format kan endres senere (fanen ⚙️ Dokument). For å starte fra en PowerPoint, et OpenDocument, en PDF eller bilder: «⤒ Importer».
+⤒ Importer une présentation ¦ ⤒ Importovať prezentáciu ¦ ⤒ Importer en presentasjon
+Thème au départ ¦ Východiskový motív ¦ Starttema
+Format au départ ¦ Východiskový formát ¦ Startformat
+Transition des nouvelles diapositives ¦ Prechod nových snímok ¦ Overgang for nye lysbilder
+Disposition de « ＋ Diapositive » ¦ Rozloženie „＋ Snímka“ ¦ Oppsett for «＋ Lysbilde»
+Aimanter les objets (guides) ¦ Prichytávať objekty (vodiace čiary) ¦ Fest objektene (hjelpelinjer)
+Couleur du pointeur laser ¦ Farba laserového ukazovátka ¦ Laserpekerens farge
+↺ Réglages de départ ¦ ↺ Východiskové nastavenia ¦ ↺ Standardinnstillinger
+Réglages de départ. ¦ Východiskové nastavenia. ¦ Standardinnstillinger.
+Les boutons du haut, les onglets et les sections de l’inspecteur se rangent, se montrent ou se cachent dans « Boutons et options » (éditeur 🎤 Présentation), avec ses raccourcis clavier. ¦ Horné tlačidlá, záložky a oddiely inšpektora sa zoraďujú, zobrazujú alebo skrývajú v „Tlačidlá a voľby“ (editor 🎤 Prezentácia), spolu s klávesovými skratkami. ¦ Knappene øverst, fanene og inspektørens seksjoner ordnes, vises eller skjules i «Knapper og valg» (redigeringsverktøyet 🎤 Presentasjon), sammen med hurtigtastene.
+{name} (présentation) ¦ {name} (prezentácia) ¦ {name} (presentasjon)
+Diaporama ¦ Prezentácia fotiek ¦ Lysbildefremvisning
+Nom (pour le déplacement magique) ¦ Názov (pre kúzelný presun) ¦ Navn (for magisk flytting)
+⇋ Miroir ¦ ⇋ Zrkadliť ¦ ⇋ Speil
+⇵ Miroir ¦ ⇵ Zrkadliť ¦ ⇵ Speil
+Retourner de gauche à droite ¦ Prevrátiť zľava doprava ¦ Vend fra venstre mot høyre
+Retourner de haut en bas ¦ Prevrátiť zhora nadol ¦ Vend ovenfra og ned
+⤢ Proportions de la photo ¦ ⤢ Proporcie fotky ¦ ⤢ Bildets proporsjoner
+Tout devant ¦ Úplne dopredu ¦ Helt fremst
+Tout derrière ¦ Úplne dozadu ¦ Helt bakerst
+Grouper (⌘G) ¦ Zoskupiť (⌘G) ¦ Grupper (⌘G)
+Déverrouiller (⌘L) ¦ Odomknúť (⌘L) ¦ Lås opp (⌘L)
+Verrouiller (⌘L) ¦ Zamknúť (⌘L) ¦ Lås (⌘L)
+Dupliquer (⌘D) ¦ Duplikovať (⌘D) ¦ Dupliser (⌘D)
+Supprimer (⌫) ¦ Vymazať (⌫) ¦ Slett (⌫)
+Selon le rôle ¦ Podľa roly ¦ Etter rolle
+Légère ¦ Ľahké ¦ Lett
+Normale ¦ Normálne ¦ Normal
+Demi-grasse ¦ Polotučné ¦ Halvfet
+Grasse ¦ Tučné ¦ Fet
+Extra-grasse ¦ Extra tučné ¦ Ekstra fet
+Noire ¦ Čierne ¦ Svart
+bouton|<b>G</b> ¦ <b>T</b> ¦ <b>F</b>
+bouton|<i>I</i> ¦ <i>K</i> ¦ <i>K</i>
+bouton|<u>S</u> ¦ <u>P</u> ¦ <u>U</u>
+bouton|<s>B</s> ¦ <s>P</s> ¦ <s>G</s>
+Gras (⌘B) ¦ Tučné (⌘B) ¦ Fet (⌘B)
+Italique (⌘I) ¦ Kurzíva (⌘I) ¦ Kursiv (⌘I)
+Souligné (⌘U) ¦ Podčiarknuté (⌘U) ¦ Understreket (⌘U)
+Exposant (1<sup>er</sup>) ¦ Horný index (1<sup>.</sup>) ¦ Hevet skrift (1<sup>.</sup>)
+Retrait (sous-liste) ¦ Odsadenie (podzoznam) ¦ Innrykk (underliste)
+Moins de retrait ¦ Menšie odsadenie ¦ Mindre innrykk
+En haut de la zone ¦ Hore v poli ¦ Øverst i feltet
+Au milieu de la zone ¦ V strede poľa ¦ Midt i feltet
+En bas de la zone ¦ Dole v poli ¦ Nederst i feltet
+Couleur d’accent du thème ¦ Zvýrazňujúca farba motívu ¦ Temaets aksentfarge
+Texte dans la forme ¦ Text v tvare ¦ Tekst i formen
+Couleur (fond et bordure) ¦ Farba (výplň a okraj) ¦ Farge (fyll og kant)
+Bordure ¦ Okraj ¦ Kant
+Points ¦ Body ¦ Prikker
+Coins ¦ Rohy ¦ Hjørner
+Forme sans fond. ¦ Tvar bez výplne. ¦ Form uten fyll.
+Pas de fond (∅). ¦ Bez výplne (∅). ¦ Ingen fyll (∅).
+Pas de bordure (∅). ¦ Bez okraja (∅). ¦ Ingen kant (∅).
+🖼️ Changer l’image… ¦ 🖼️ Zmeniť obrázok… ¦ 🖼️ Bytt bilde…
+🖼️ Choisir l’image… ¦ 🖼️ Vybrať obrázok… ¦ 🖼️ Velg bilde…
+🖼 En fond de diapositive ¦ 🖼 Ako pozadie snímky ¦ 🖼 Som lysbildebakgrunn
+Cadrage ¦ Orezanie ¦ Beskjæring
+Remplir (rogner) ¦ Vyplniť (orezať) ¦ Fyll (beskjær)
+Photo entière ¦ Celá fotka ¦ Hele bildet
+Étirer ¦ Roztiahnuť ¦ Strekk
+Masque (forme) ¦ Maska (tvar) ¦ Maske (form)
+La photo est découpée dans cette forme : rond, arrondi, étoile, cœur… sans toucher à la photo d’origine. ¦ Fotka sa oreže do tohto tvaru: kruh, zaoblenie, hviezda, srdce… bez zásahu do pôvodnej fotky. ¦ Bildet klippes til denne formen: rund, avrundet, stjerne, hjerte… uten å røre originalbildet.
+Zoom (rogner) ¦ Priblíženie (orezať) ¦ Zoom (beskjær)
+Agrandit la photo dans son cadre ; « Cadrer ↔ ↕ » choisit ensuite quelle partie on voit. ¦ Zväčší fotku v rámčeku; „Orezať ↔ ↕“ potom určí, ktorá časť je vidieť. ¦ Forstørrer bildet i rammen; «Beskjær ↔ ↕» velger deretter hvilken del som vises.
+Cadrer ↔ ¦ Orezať ↔ ¦ Beskjær ↔
+Cadrer ↕ ¦ Orezať ↕ ¦ Beskjær ↕
+🎚️ Retouche ¦ 🎚️ Retuš ¦ 🎚️ Retusjering
+Épaisseur du cadre ¦ Hrúbka rámčeka ¦ Rammens tykkelse
+Au bout ¦ Na konci ¦ I enden
+Aux deux bouts ¦ Na oboch koncoch ¦ I begge ender
+Le tableur en grand : formules, tri, coller depuis Excel… puis « ✓ Enregistrer et revenir » ¦ Tabuľkový editor vo veľkom: vzorce, zoraďovanie, vloženie z Excelu… potom „✓ Uložiť a vrátiť sa“ ¦ Regnearket i stort format: formler, sortering, lim inn fra Excel… deretter «✓ Lagre og gå tilbake»
+Le tableur en grand, préparé « Catégorie + séries » : formules, tri, coller depuis Excel… puis « ✓ Enregistrer et revenir » ¦ Tabuľkový editor vo veľkom, pripravený „Kategória + rady“: vzorce, zoraďovanie, vloženie z Excelu… potom „✓ Uložiť a vrátiť sa“ ¦ Regnearket i stort format, klargjort som «Kategori + serier»: formler, sortering, lim inn fra Excel… deretter «✓ Lagre og gå tilbake»
+＋ Ligne ¦ ＋ Riadok ¦ ＋ Rad
+− Ligne ¦ − Riadok ¦ − Rad
+＋ Colonne ¦ ＋ Stĺpec ¦ ＋ Kolonne
+− Colonne ¦ − Stĺpec ¦ − Kolonne
+Première ligne en en-tête ¦ Prvý riadok ako záhlavie ¦ Første rad som overskrift
+En-tête : fond ¦ Záhlavie: pozadie ¦ Overskrift: bakgrunn
+En-tête : texte ¦ Záhlavie: text ¦ Overskrift: tekst
+Contenu (une ligne par rangée, cases séparées par « ; » ou une tabulation — se colle d’un tableur) ¦ Obsah (jeden riadok na rad, bunky oddelené „;“ alebo tabulátorom — dá sa vložiť z tabuľky) ¦ Innhold (én linje per rad, celler skilt med «;» eller tabulator — kan limes inn fra et regneark)
+Ou ici, en secours (1re ligne : Catégorie ; Série 1 ; Série 2…) ¦ Alebo tu, náhradne (1. riadok: Kategória; Rad 1; Rad 2…) ¦ Eller her, som reserve (1. linje: Kategori; Serie 1; Serie 2…)
+Les chiffres (1re ligne : Catégorie ; Série 1 ; Série 2…) ¦ Čísla (1. riadok: Kategória; Rad 1; Rad 2…) ¦ Tallene (1. linje: Kategori; Serie 1; Serie 2…)
+Vives ¦ Živé ¦ Klare
+Pastel ¦ Pastelové ¦ Pastell
+Terre ¦ Zemité ¦ Jordfarger
+Gris ¦ Sivé ¦ Grå
+Selon la sorte ¦ Podľa druhu ¦ Etter type
+🪪 La fiche ¦ 🪪 Karta ¦ 🪪 Oppføringen
+🖼️ Le portrait ¦ 🖼️ Portrét ¦ 🖼️ Portrettet
+🌳 Petit arbre ¦ 🌳 Malý strom ¦ 🌳 Lite tre
+🔄 Relire la fiche ¦ 🔄 Znova načítať kartu ¦ 🔄 Les oppføringen på nytt
+🎬 Changer… ¦ 🎬 Zmeniť… ¦ 🎬 Bytt…
+Lecture automatique ¦ Automatické prehrávanie ¦ Automatisk avspilling
+En boucle ¦ V slučke ¦ I sløyfe
+Sans le son ¦ Bez zvuku ¦ Uten lyd
+Boutons de lecture visibles ¦ Viditeľné tlačidlá prehrávania ¦ Synlige avspillingsknapper
+Commencer à ¦ Začať v ¦ Start ved
+Effets (ombre et opacité) ¦ Efekty (tieň a krytie) ¦ Effekter (skygge og dekkevne)
+Chemin ¦ Dráha ¦ Bane
+Attendre ¦ Čakať ¦ Vent
+× Retirer ¦ × Odobrať ¦ × Fjern
+Transition ¦ Prechod ¦ Overgang
+Effet (en arrivant sur cette diapositive) ¦ Efekt (pri príchode na túto snímku) ¦ Effekt (når dette lysbildet vises)
+L’effet joue en passant de la diapositive d’avant à celle-ci. « Déplacement magique » fait glisser les objets présents sur les deux. ¦ Efekt sa prehrá pri prechode z predchádzajúcej snímky na túto. „Čarovný presun“ posunie objekty, ktoré sú na oboch. ¦ Effekten spilles av når man går fra forrige lysbilde til dette. «Magisk flytting» lar objekter som finnes på begge, gli over.
+▶ Aperçu ¦ ▶ Náhľad ¦ ▶ Forhåndsvisning
+Pour toutes les diapositives ¦ Pre všetky snímky ¦ For alle lysbilder
+Animations de l’objet choisi ¦ Animácie vybraného objektu ¦ Animasjonene til det valgte objektet
+＋ Entrée ¦ ＋ Vstup ¦ ＋ Inngang
+＋ Sortie ¦ ＋ Výstup ¦ ＋ Utgang
+Ordre des animations ¦ Poradie animácií ¦ Rekkefølgen på animasjonene
+⬅ Sortie ¦ ⬅ Výstup ¦ ⬅ Utgang
+➡ Entrée ¦ ➡ Vstup ¦ ➡ Inngang
+▶ Aperçu des animations ¦ ▶ Náhľad animácií ¦ ▶ Forhåndsvis animasjonene
+Disposition (place les titres, textes, photos) ¦ Rozloženie (umiestni nadpisy, texty, fotky) ¦ Oppsett (plasserer titler, tekster, bilder)
+Un plan tout fait (titre, titre et texte, photo pleine page…) : les textes déjà écrits sont gardés et changent de place. ¦ Hotové rozloženie (nadpis, nadpis a text, fotka na celú stranu…): už napísané texty zostanú a premiestnia sa. ¦ Et ferdig oppsett (tittel, tittel og tekst, helsidesbilde…): tekst som allerede er skrevet, beholdes og flyttes.
+Celui du thème ¦ Z motívu ¦ Temaets
+Dégradé rond ¦ Kruhový prechod ¦ Radiell overgang
+Couleur autour de l’image ¦ Farba okolo obrázka ¦ Farge rundt bildet
+Entière ¦ Celá ¦ Hel
+Ce fond pour toutes les diapositives ¦ Toto pozadie pre všetky snímky ¦ Denne bakgrunnen for alle lysbilder
+Durée — lecture seule et vidéo ¦ Trvanie — automatické prehrávanie a video ¦ Varighet — automatisk avspilling og video
+Le temps passé sur cette diapositive quand la présentation avance toute seule et dans la vidéo exportée. ¦ Čas strávený na tejto snímke, keď prezentácia postupuje sama, a vo vyexportovanom videu. ¦ Tiden på dette lysbildet når presentasjonen går videre av seg selv, og i den eksporterte videoen.
+Passer toute seule à la suivante (après la durée) ¦ Sama prejsť na ďalšiu (po uplynutí trvania) ¦ Gå videre til neste av seg selv (etter varigheten)
+Sauter cette diapositive à la lecture ¦ Preskočiť túto snímku pri prehrávaní ¦ Hopp over dette lysbildet ved avspilling
+Titre de la section (un groupe de diapositives qui commence ici) ¦ Názov oddielu (skupina snímok, ktorá sa tu začína) ¦ Tittel på delen (en gruppe lysbilder som begynner her)
+ex. Les années de guerre ¦ napr. Vojnové roky ¦ f.eks. Krigsårene
+Vers le devant ¦ Dopredu ¦ Fremover
+Vers le fond ¦ Dozadu ¦ Bakover
+Couleurs et polices ¦ Farby a písma ¦ Farger og skrifter
+Accent ¦ Zvýraznenie ¦ Aksent
+Format des diapositives ¦ Formát snímok ¦ Lysbildeformat
+Largeur (points) ¦ Šírka (body) ¦ Bredde (punkter)
+Hauteur (points) ¦ Výška (body) ¦ Høyde (punkter)
+Changer… ¦ Zmeniť… ¦ Bytt…
+🎵 Une musique pendant la lecture… ¦ 🎵 Hudba počas prehrávania… ¦ 🎵 Musikk under avspillingen…
+Recommencer au début à la fin (borne, exposition) ¦ Na konci začať znova (kiosk, výstava) ¦ Start på nytt til slutt (kiosk, utstilling)
+Remplissage et bordure ¦ Výplň a okraj ¦ Fyll og kant
+Ombre et opacité ¦ Tieň a krytie ¦ Skygge og dekkevne
+T Une zone de texte ¦ T Textové pole ¦ T Et tekstfelt
+🖼️ Une photo des médias ou de l’ordinateur ¦ 🖼️ Fotka z médií alebo z počítača ¦ 🖼️ Et bilde fra mediene eller datamaskinen
+📊 Un graphique (colonnes, camembert, courbe…) ¦ 📊 Graf (stĺpce, koláč, krivka…) ¦ 📊 Et diagram (søyler, kake, kurve…)
+🎬 Une vidéo ou un son des médias ¦ 🎬 Video alebo zvuk z médií ¦ 🎬 En video eller lyd fra mediene
+⊞ Grouper (⌘G) — ⇧⌘G pour dissocier ¦ ⊞ Zoskupiť (⌘G) — ⇧⌘G na zrušenie ¦ ⊞ Grupper (⌘G) — ⇧⌘G for å dele opp
+⊟ Dissocier (⇧⌘G) ¦ ⊟ Zrušiť zoskupenie (⇧⌘G) ¦ ⊟ Del opp (⇧⌘G)
+🔒 Verrouiller / déverrouiller (⌘L) ¦ 🔒 Zamknúť / odomknúť (⌘L) ¦ 🔒 Lås / lås opp (⌘L)
+▶ Lire en plein écran depuis le début (⌥⌘↩) ¦ ▶ Prehrať na celej obrazovke od začiatku (⌥⌘↩) ¦ ▶ Spill av i fullskjerm fra starten (⌥⌘↩)
+⏵ Lire depuis cette diapositive (⌘↩) ¦ ⏵ Prehrať od tejto snímky (⌘↩) ¦ ⏵ Spill av fra dette lysbildet (⌘↩)
+🎤 Plein écran + fenêtre du présentateur (notes, suivante, chronomètre) ¦ 🎤 Celá obrazovka + okno prezentujúceho (poznámky, ďalšia, stopky) ¦ 🎤 Fullskjerm + presentatørvindu (notater, neste, stoppeklokke)
+⤓ Exporter (PDF, PNG, vidéo, fichier) ¦ ⤓ Exportovať (PDF, PNG, video, súbor) ¦ ⤓ Eksporter (PDF, PNG, video, fil)
+⧉ Dupliquer la diapositive (pour un déplacement magique) ¦ ⧉ Duplikovať snímku (na čarovný presun) ¦ ⧉ Dupliser lysbildet (for en magisk flytting)
+👁 Sauter / ne plus sauter à la lecture ¦ 👁 Preskakovať / nepreskakovať pri prehrávaní ¦ 👁 Hopp over / ikke hopp over ved avspilling
+§ Commencer une section (un groupe de diapositives) ici ¦ § Začať tu oddiel (skupinu snímok) ¦ § Begynn en del (en gruppe lysbilder) her
+🗑 Supprimer la diapositive ¦ 🗑 Vymazať snímku ¦ 🗑 Slett lysbildet
+‹ Diapositive précédente (Page précédente) ¦ ‹ Predchádzajúca snímka (Page Up) ¦ ‹ Forrige lysbilde (Page Up)
+› Diapositive suivante (Page suivante) ¦ › Ďalšia snímka (Page Down) ¦ › Neste lysbilde (Page Down)
+=élément copié ¦ skopírovaný prvok|skopírované prvky|skopírovaných prvkov ¦ element kopiert|elementer kopiert
+=coude ¦ ohyb|ohyby|ohybov ¦ knekk|knekker
+=dessin choisi ¦ vybraná kresba|vybrané kresby|vybraných kresieb ¦ tegning valgt|tegninger valgt
+=association ¦ prepojenie|prepojenia|prepojení ¦ forbindelse|forbindelser
+=élément absent ici ¦ prvok, ktorý tu chýba|prvky, ktoré tu chýbajú|prvkov, ktoré tu chýbajú ¦ element mangler her|elementer mangler her
+=confirmée ¦ potvrdená|potvrdené|potvrdených ¦ bekreftet|bekreftede
+=fausse ¦ mylná|mylné|mylných ¦ falsk|falske
+=note posée ¦ umiestnená poznámka|umiestnené poznámky|umiestnených poznámok ¦ notat plassert|notater plassert
+=animation ¦ animácia|animácie|animácií ¦ animasjon|animasjoner
+=sautée ¦ preskočená|preskočené|preskočených ¦ hoppet over|hoppet over
+=diapositive ajoutée ¦ pridaná snímka|pridané snímky|pridaných snímok ¦ lysbilde lagt til|lysbilder lagt til
+=image illisible laissée ¦ vynechaný nečitateľný obrázok|vynechané nečitateľné obrázky|vynechaných nečitateľných obrázkov ¦ uleselig bilde utelatt|uleselige bilder utelatt
+=image reprise ¦ prevzatý obrázok|prevzaté obrázky|prevzatých obrázkov ¦ bilde hentet|bilder hentet
+=diapositive importée ¦ importovaná snímka|importované snímky|importovaných snímok ¦ lysbilde importert|lysbilder importert
+Arrondi par défaut des éléments arrondis ¦ Predvolené zaoblenie zaoblených prvkov ¦ Standard avrunding for avrundede elementer
+Formules ¦ Vzorce ¦ Formler
+Commence par <code>=</code> : <code>=B2+B3</code>, <code>=SOMME(B2:B9)</code>, <code>=MOYENNE(B2:B9)</code>, <code>=MIN(…)</code>, <code>=MAX(…)</code>, <code>=NB(…)</code>, <code>=PRODUIT(…)</code>, <code>=ARRONDI(B2;1)</code>, <code>=2026-B2</code> (âge), <code>="texte"</code>. Colle un bout de tableur (Excel, Numbers) dans une cellule : il se range dans la grille. ¦ Začni znakom <code>=</code>: <code>=B2+B3</code>, <code>=SUM(B2:B9)</code>, <code>=AVERAGE(B2:B9)</code>, <code>=MIN(…)</code>, <code>=MAX(…)</code>, <code>=COUNT(…)</code>, <code>=PRODUCT(…)</code>, <code>=ROUND(B2;1)</code>, <code>=2026-B2</code> (vek), <code>="text"</code>. Vlož do bunky kúsok tabuľky (Excel, Numbers): rozloží sa do mriežky. ¦ Begynn med <code>=</code>: <code>=B2+B3</code>, <code>=SUM(B2:B9)</code>, <code>=AVERAGE(B2:B9)</code>, <code>=MIN(…)</code>, <code>=MAX(…)</code>, <code>=COUNT(…)</code>, <code>=PRODUCT(…)</code>, <code>=ROUND(B2;1)</code>, <code>=2026-B2</code> (alder), <code>="tekst"</code>. Lim inn et stykke regneark (Excel, Numbers) i en celle: det fordeles i rutenettet.
+⏺ Vidéo ¦ ⏺ Video ¦ ⏺ Video
+Hexagone ¦ Šesťuholník ¦ Sekskant
+Bulle ¦ Bublina ¦ Snakkeboble
+Cœur ¦ Srdce ¦ Hjerte
+⧉ Copie ¦ ⧉ Kópia ¦ ⧉ Kopi
+forme|Rectangle ¦ Obdĺžnik ¦ Rektangel
+forme|Rectangle arrondi ¦ Zaoblený obdĺžnik ¦ Avrundet rektangel
+forme|Ovale ¦ Ovál ¦ Oval
+forme|Triangle ¦ Trojuholník ¦ Trekant
+forme|Triangle rectangle ¦ Pravouhlý trojuholník ¦ Rettvinklet trekant
+forme|Losange ¦ Kosoštvorec ¦ Rombe
+forme|Pentagone ¦ Päťuholník ¦ Femkant
+forme|Hexagone ¦ Šesťuholník ¦ Sekskant
+forme|Étoile ¦ Hviezda ¦ Stjerne
+forme|Bulle ¦ Bublina ¦ Snakkeboble
+forme|Nuage ¦ Oblak ¦ Sky
+forme|Flèche ¦ Šípka ¦ Pil
+forme|Double flèche ¦ Dvojitá šípka ¦ Dobbeltpil
+forme|Étiquette ¦ Štítok ¦ Etikett
+forme|Parallélogramme ¦ Rovnobežník ¦ Parallellogram
+forme|Trapèze ¦ Lichobežník ¦ Trapes
+forme|Losange plat ¦ Plochý kosoštvorec ¦ Flat rombe
+forme|Pilule ¦ Tabletka ¦ Pille
+forme|Cylindre ¦ Valec ¦ Sylinder
+forme|Cube ¦ Kocka ¦ Kube
+forme|Pavé ¦ Kváder ¦ Kasse
+forme|Pyramide ¦ Ihlan ¦ Pyramide
+forme|Cône ¦ Kužeľ ¦ Kjegle
+forme|Tétraèdre ¦ Štvorsten ¦ Tetraeder
+forme|Heptagone ¦ Sedemuholník ¦ Sjukant
+forme|Octogone ¦ Osemuholník ¦ Åttekant
+forme|Décagone ¦ Desaťuholník ¦ Tikant
+forme|Dodécagone ¦ Dvanásťuholník ¦ Tolvkant
+forme|Anneau ¦ Prstenec ¦ Ring
+forme|Demi-cercle ¦ Polkruh ¦ Halvsirkel
+forme|Quart de cercle ¦ Štvrťkruh ¦ Kvartsirkel
+forme|Cadre ¦ Rámček ¦ Ramme
+forme|Équerre ¦ Uholník ¦ L-form
+forme|Chevron ¦ Šípka (chevron) ¦ Vinkelpil
+forme|Sablier ¦ Presýpacie hodiny ¦ Timeglass
+forme|forme ¦ tvar ¦ form
+forme|Arche ¦ Oblúk ¦ Bue
+forme|Flèche à gauche ¦ Šípka doľava ¦ Pil til venstre
+forme|Flèche en haut ¦ Šípka hore ¦ Pil opp
+forme|Flèche en bas ¦ Šípka dole ¦ Pil ned
+forme|Double flèche verticale ¦ Zvislá dvojitá šípka ¦ Loddrett dobbeltpil
+forme|Quatre directions ¦ Štyri smery ¦ Fire retninger
+forme|Flèche à encoche ¦ Šípka so zárezom ¦ Pil med hakk
+forme|Flèche courbe ¦ Zakrivená šípka ¦ Buet pil
+forme|Demi-tour ¦ Obrat ¦ U-sving
+forme|Flèche fine ¦ Tenká šípka ¦ Tynn pil
+forme|Pavé flèche ¦ Blok so šípkou ¦ Pilblokk
+forme|Flèche ronde ¦ Kruhová šípka ¦ Rund pil
+forme|Bulle ronde ¦ Okrúhla bublina ¦ Rund boble
+forme|Encadré ¦ Popis ¦ Bildetekstboks
+forme|Pensée ¦ Myšlienka ¦ Tankeboble
+forme|Cri ¦ Výkrik ¦ Rop
+forme|gauche ¦ vľavo ¦ venstre
+forme|Bulle carrée ¦ Hranatá bublina ¦ Firkantet boble
+forme|Étoile à {x} branches ¦ {x}-cípa hviezda ¦ {x}-tagget stjerne
+forme|Éclat ¦ Výbuch ¦ Eksplosjon
+forme|Sceau ¦ Pečať ¦ Segl
+forme|Rose des vents ¦ Veterná ružica ¦ Kompassrose
+forme|Ruban ¦ Stuha ¦ Bånd
+forme|Médaille ¦ Medaila ¦ Medalje
+forme|Écu ¦ Štít ¦ Skjold
+forme|Bannière ¦ Zástava ¦ Banner
+forme|Cocarde ¦ Kokarda ¦ Kokarde
+forme|Cœur ¦ Srdce ¦ Hjerte
+forme|Coche ¦ Zaškrtnutie ¦ Hake
+forme|Croix ¦ Kríž ¦ Kryss
+forme|Plus ¦ Plus ¦ Pluss
+forme|Moins ¦ Mínus ¦ Minus
+forme|Lune ¦ Mesiac ¦ Måne
+forme|Éclair ¦ Blesk ¦ Lyn
+forme|Goutte ¦ Kvapka ¦ Dråpe
+forme|Repère ¦ Značka ¦ Markør
+forme|Drapeau ¦ Vlajka ¦ Flagg
+forme|Point d’interrogation ¦ Otáznik ¦ Spørsmålstegn
+forme|Point d’exclamation ¦ Výkričník ¦ Utropstegn
+forme|Information ¦ Informácia ¦ Informasjon
+forme|Infini ¦ Nekonečno ¦ Uendelighet
+forme|Soleil ¦ Slnko ¦ Sol
+forme|Signe ¦ Znak ¦ Tegn
+forme|Arbre ¦ Strom ¦ Tre
+forme|Chêne ¦ Dub ¦ Eik
+forme|Alliances ¦ Obrúčky ¦ Giftering
+forme|Couronne ¦ Koruna ¦ Krone
+forme|Tombe ¦ Hrob ¦ Grav
+forme|Berceau ¦ Kolíska ¦ Vugge
+forme|Parchemin ¦ Zvitok ¦ Skriftrull
+forme|Plume ¦ Brko ¦ Fjærpenn
+forme|Livre ¦ Kniha ¦ Bok
+forme|Lettre ¦ List ¦ Brev
+forme|Bougie ¦ Sviečka ¦ Lys
+forme|Cachet de cire ¦ Vosková pečať ¦ Lakksegl
+forme|Fleur de lys ¦ Ľalia ¦ Lilje
+forme|Branche ¦ Vetva ¦ Gren
+forme|Personne ¦ Osoba ¦ Person
+forme|Femme ¦ Žena ¦ Kvinne
+forme|Couple ¦ Pár ¦ Par
+forme|Famille ¦ Rodina ¦ Familie
+forme|Enfant ¦ Dieťa ¦ Barn
+forme|Portrait ¦ Portrét ¦ Portrett
+forme|médaillon ¦ medailón ¦ medaljong
+forme|Soldat ¦ Vojak ¦ Soldat
+forme|Maison ¦ Dom ¦ Hus
+forme|Église ¦ Kostol ¦ Kirke
+forme|Château ¦ Zámok ¦ Slott
+forme|Mairie ¦ Radnica ¦ Rådhus
+forme|Moulin ¦ Mlyn ¦ Mølle
+forme|Bateau ¦ Loď ¦ Båt
+forme|Usine ¦ Továreň ¦ Fabrikk
+forme|Montagne ¦ Hora ¦ Fjell
+forme|Pont ¦ Most ¦ Bro
+forme|Clé ¦ Kľúč ¦ Nøkkel
+forme|Lampe ¦ Lampa ¦ Lampe
+forme|Chaise ¦ Stolička ¦ Stol
+forme|Horloge ¦ Hodiny ¦ Klokke
+forme|Lunettes ¦ Okuliare ¦ Briller
+forme|Parapluie ¦ Dáždnik ¦ Paraply
+forme|Ampoule ¦ Žiarovka ¦ Lyspære
+forme|Loupe ¦ Lupa ¦ Lupe
+forme|Cadeau ¦ Darček ¦ Gave
+forme|Tasse ¦ Hrnček ¦ Kopp
+forme|Appareil photo ¦ Fotoaparát ¦ Kamera
+forme|Téléphone ¦ Telefón ¦ Telefon
+forme|Crayon ¦ Ceruzka ¦ Blyant
+forme|Sac ¦ Taška ¦ Veske
+forme|Valise ¦ Kufor ¦ Koffert
+forme|Chapeau ¦ Klobúk ¦ Hatt
+forme|Cloche ¦ Zvon ¦ Klokke
+forme|Ancre ¦ Kotva ¦ Anker
+forme|Feuille ¦ List ¦ Blad
+forme|Fleur ¦ Kvet ¦ Blomst
+forme|Sapin ¦ Jedľa ¦ Gran
+forme|Vague ¦ Vlna ¦ Bølge
+forme|Poisson ¦ Ryba ¦ Fisk
+forme|Oiseau ¦ Vták ¦ Fugl
+forme|Flocon ¦ Vločka ¦ Snøfnugg
+forme|Pomme ¦ Jablko ¦ Eple
+forme|Champignon ¦ Hríb ¦ Sopp
+forme|Patte ¦ Labka ¦ Pote
+forme|Anneau fin ¦ Tenký prstenec ¦ Tynn ring
+forme|Anneau épais ¦ Hrubý prstenec ¦ Tykk ring
+forme|Deux anneaux ¦ Dva prstence ¦ To ringer
+forme|Cadre fin ¦ Tenký rámček ¦ Tynn ramme
+forme|Cadre arrondi ¦ Zaoblený rámček ¦ Avrundet ramme
+forme|Médaillon ¦ Medailón ¦ Medaljong
+forme|Ovale vertical ¦ Zvislý ovál ¦ Loddrett oval
+forme|Ovale horizontal ¦ Vodorovný ovál ¦ Vannrett oval
+forme|Croissant fin ¦ Tenký kosák ¦ Tynn halvmåne
+forme|Goutte inversée ¦ Obrátená kvapka ¦ Omvendt dråpe
+forme|Deux cœurs ¦ Dve srdcia ¦ To hjerter
+forme|Croix grecque ¦ Grécky kríž ¦ Gresk kors
+forme|Croix de Malte ¦ Maltézsky kríž ¦ Malteserkors
+forme|Croix de Lorraine ¦ Lotrinský kríž ¦ Lothringerkors
+forme|Croix orthodoxe ¦ Pravoslávny kríž ¦ Ortodoks kors
+forme|Bannière ondulée ¦ Zvlnená zástava ¦ Bølget banner
+forme|Phylactère ¦ Zvitková páska ¦ Skriftbånd
+forme|Étiquette ronde ¦ Okrúhly štítok ¦ Rund etikett
+forme|Bulle ovale ¦ Oválna bublina ¦ Oval boble
+forme|droite ¦ vpravo ¦ høyre
+forme|Petite pensée ¦ Malá myšlienka ¦ Liten tankeboble
+forme|Quart de disque ¦ Štvrťkruh ¦ Kvart skive
+forme|Tiers de disque ¦ Tretina kruhu ¦ Tredjedels skive
+forme|Demi-disque ¦ Polkruh ¦ Halv skive
+forme|Deux tiers de disque ¦ Dve tretiny kruhu ¦ To tredjedels skive
+forme|Trois quarts de disque ¦ Tri štvrtiny kruhu ¦ Tre kvart skive
+forme|Camembert ¦ Koláčový graf ¦ Kakediagram
+forme|Polygone à {x} côtés ¦ {x}-uholník ¦ Mangekant med {x} sider
+forme|Étoile fine à {x} branches ¦ Tenká {x}-cípa hviezda ¦ Smal {x}-tagget stjerne
+forme|Étoile ronde à {x} branches ¦ Okrúhla {x}-cípa hviezda ¦ Rund {x}-tagget stjerne
+forme|Quart d’anneau ¦ Štvrť prstenca ¦ Kvart ring
+forme|Demi-anneau ¦ Pol prstenca ¦ Halv ring
+forme|Trois quarts d’anneau ¦ Tri štvrtiny prstenca ¦ Tre kvart ring
+forme|Arbre généalogique ¦ Rodokmeň ¦ Slektstre
+forme|Arborescence ¦ Stromová štruktúra ¦ Trestruktur
+forme|Organigramme ¦ Organigram ¦ Organisasjonskart
+forme|Liens ¦ Väzby ¦ Forbindelser
+forme|Groupe de personnes ¦ Skupina ľudí ¦ Gruppe av personer
+forme|Homme et femme ¦ Muž a žena ¦ Mann og kvinne
+forme|Parents et enfant ¦ Rodičia a dieťa ¦ Foreldre og barn
+forme|Deux femmes ¦ Dve ženy ¦ To kvinner
+forme|Deux hommes ¦ Dvaja muži ¦ To menn
+forme|Mère et fille ¦ Matka a dcéra ¦ Mor og datter
+forme|Père et fils ¦ Otec a syn ¦ Far og sønn
+forme|Mère et fils ¦ Matka a syn ¦ Mor og sønn
+forme|Père et fille ¦ Otec a dcéra ¦ Far og datter
+forme|Visage de bébé ¦ Tvár bábätka ¦ Babyansikt
+forme|Bébé ¦ Bábätko ¦ Baby
+forme|Landau ¦ Kočík ¦ Barnevogn
+forme|Biberon ¦ Dojčenská fľaša ¦ Tåteflaske
+forme|Femme enceinte ¦ Tehotná žena ¦ Gravid kvinne
+forme|Bague ¦ Prsteň ¦ Ring
+forme|Cœurs ¦ Srdcia ¦ Hjerter
+forme|Foyer ¦ Domov ¦ Hjem
+forme|Personne aimée ¦ Milovaná osoba ¦ Elsket person
+forme|Main et cœur ¦ Ruka a srdce ¦ Hånd og hjerte
+forme|Symbole masculin ¦ Symbol muža ¦ Mannssymbol
+forme|Symbole féminin ¦ Symbol ženy ¦ Kvinnesymbol
+forme|Symbole couple ¦ Symbol páru ¦ Parsymbol
+forme|Pierre tombale ¦ Náhrobný kameň ¦ Gravstein
+forme|Cercueil ¦ Rakva ¦ Kiste
+forme|Tulipe ¦ Tulipán ¦ Tulipan
+forme|Coquelicot ¦ Vlčí mak ¦ Valmue
+forme|Croix latine ¦ Latinský kríž ¦ Latinsk kors
+forme|Croix celtique ¦ Keltský kríž ¦ Keltisk kors
+forme|Bible ¦ Biblia ¦ Bibel
+forme|Certificat ¦ Osvedčenie ¦ Sertifikat
+forme|Parchemin écrit ¦ Popísaný zvitok ¦ Beskrevet skriftrull
+forme|Plume à encre ¦ Pero s atramentom ¦ Blekkpenn
+forme|Tampon ¦ Pečiatka ¦ Stempel
+forme|Passeport ¦ Pas ¦ Pass
+forme|Carte d’identité ¦ Občiansky preukaz ¦ ID-kort
+forme|Carte et loupe ¦ Mapa a lupa ¦ Kart og lupe
+forme|Document cherché ¦ Hľadaný dokument ¦ Søkt dokument
+forme|Frise du temps ¦ Časová os ¦ Tidslinje
+forme|Histoire ¦ História ¦ Historie
+forme|Diaphragme ¦ Clona ¦ Blender
+forme|Cadre photo ¦ Fotorámček ¦ Fotoramme
+forme|Miroir ovale ¦ Oválne zrkadlo ¦ Ovalt speil
+forme|Blason couronné ¦ Korunovaný erb ¦ Kronet våpen
+forme|Tour ¦ Veža ¦ Tårn
+forme|Père et enfant ¦ Otec a dieťa ¦ Far og barn
+forme|Deux mères et enfant ¦ Dve matky a dieťa ¦ To mødre og barn
+forme|Deux pères et enfant ¦ Dvaja otcovia a dieťa ¦ To fedre og barn
+forme|Amour maternel ¦ Materská láska ¦ Morskjærlighet
+forme|Mère qui allaite ¦ Dojčiaca matka ¦ Ammende mor
+forme|Poussette ¦ Športový kočík ¦ Sportsvogn
+forme|Table à langer ¦ Prebaľovací pult ¦ Stellebord
+forme|contour ¦ obrys ¦ omriss
+forme|Adulte et enfant ¦ Dospelý a dieťa ¦ Voksen og barn
+forme|rond ¦ okrúhly ¦ rund
+forme|Tuteur ¦ Poručník ¦ Verge
+forme|Deux personnes ¦ Dve osoby ¦ To personer
+forme|Maison familiale ¦ Rodinný dom ¦ Familiehjem
+forme|Registre de personnes ¦ Register osôb ¦ Personregister
+forme|Date d’une personne ¦ Dátum osoby ¦ En persons dato
+forme|Fiche individuelle ¦ Osobná karta ¦ Personoppføring
+forme|Dossier de personne ¦ Priečinok osoby ¦ Personmappe
+forme|Acte certifié ¦ Overený záznam ¦ Bekreftet dokument
+forme|Cœur dans un carré ¦ Srdce v štvorci ¦ Hjerte i en firkant
+forme|Cœur rond ¦ Okrúhle srdce ¦ Rundt hjerte
+forme|Livre de famille ¦ Rodinná kniha ¦ Familiebok
+forme|variante ¦ variant ¦ variant
+forme|Symbole non binaire ¦ Nebinárny symbol ¦ Ikke-binært symbol
+forme|Taille d’un homme ¦ Výška muža ¦ En manns høyde
+forme|Album photo ¦ Fotoalbum ¦ Fotoalbum
+forme|Photos ¦ Fotky ¦ Bilder
+forme|Photo instantanée ¦ Polaroid ¦ Polaroidbilde
+forme|Portrait photo ¦ Fotoportrét ¦ Portrettbilde
+forme|Dossier de photos ¦ Priečinok fotiek ¦ Bildemappe
+forme|Frise ¦ Časová os ¦ Tidslinje
+forme|Frise commentée ¦ Komentovaná časová os ¦ Kommentert tidslinje
+forme|Diagramme chronologique ¦ Chronologický diagram ¦ Kronologisk diagram
+forme|Arbre en blocs ¦ Blokový strom ¦ Blokktre
+forme|Relation un à plusieurs ¦ Vzťah jeden k viacerým ¦ En-til-mange-relasjon
+forme|Relation un à un ¦ Vzťah jeden k jednému ¦ En-til-en-relasjon
+forme|Couronne ronde ¦ Okrúhla koruna ¦ Rund krone
+forme|Blason à l’épée ¦ Erb s mečom ¦ Våpen med sverd
+forme|Blason à la croix ¦ Erb s krížom ¦ Våpen med kors
+forme|Écu parti ¦ Polený štít ¦ Kløvd skjold
+forme|Croix de Bolnissi ¦ Bolniský kríž ¦ Bolnisi-kors
+forme|Crâne ¦ Lebka ¦ Hodeskalle
+forme|Parchemin et clé ¦ Zvitok a kľúč ¦ Skriftrull og nøkkel
+forme|Sceau rond ¦ Okrúhla pečať ¦ Rundt segl
+forme|Coffre au trésor ¦ Truhlica s pokladom ¦ Skattekiste
+forme|Coffre-fort ¦ Trezor ¦ Safe
+forme|Coffre-fort carré ¦ Hranatý trezor ¦ Firkantet safe
+forme|Poignée de main ¦ Podanie ruky ¦ Håndtrykk
+forme|Miroir rectangulaire ¦ Obdĺžnikové zrkadlo ¦ Rektangulært speil
+forme|Homme ¦ Muž ¦ Mann
+forme|Personne âgée ¦ Staršia osoba ¦ Eldre person
+forme|Bras levés ¦ Zdvihnuté ruky ¦ Løftede armer
+forme|Salut ¦ Pozdrav ¦ Hilsen
+forme|Fauteuil roulant ¦ Invalidný vozík ¦ Rullestol
+forme|Marcheur ¦ Chodec ¦ Fotgjenger
+forme|Coureur ¦ Bežec ¦ Løper
+forme|Instituteur ¦ Učiteľ ¦ Lærer
+forme|Silhouette ¦ Silueta ¦ Silhuett
+forme|Homme en cravate ¦ Muž s kravatou ¦ Mann med slips
+forme|Cow-boy ¦ Kovboj ¦ Cowboy
+forme|Ouvrier ¦ Robotník ¦ Arbeider
+forme|Chapeau et cravate ¦ Klobúk a kravata ¦ Hatt og slips
+forme|Insigne de police ¦ Policajný odznak ¦ Politiskilt
+forme|Visage d’homme ¦ Mužská tvár ¦ Mannsansikt
+forme|Visage de femme ¦ Ženská tvár ¦ Kvinneansikt
+forme|Profil d’homme ¦ Mužský profil ¦ Mannsprofil
+forme|Profil de femme ¦ Ženský profil ¦ Kvinneprofil
+forme|Moustache ¦ Fúzy ¦ Bart
+forme|Main qui salue ¦ Mávajúca ruka ¦ Vinkende hånd
+forme|Main ¦ Ruka ¦ Hånd
+forme|Mains jointes ¦ Zopnuté ruky ¦ Foldede hender
+forme|Empreinte de pied ¦ Odtlačok chodidla ¦ Fotavtrykk
+forme|File de personnes ¦ Rad ľudí ¦ Kø av personer
+forme|Bras baissés ¦ Spustené ruky ¦ Senkede armer
+forme|Danseuse ¦ Tanečnica ¦ Danserinne
+forme|Personne non binaire ¦ Nebinárna osoba ¦ Ikke-binær person
+forme|Personne en trottinette ¦ Osoba na kolobežke ¦ Person på sparkesykkel
+forme|Personne au déambulateur ¦ Osoba s chodítkom ¦ Person med rullator
+forme|Personne à canne blanche ¦ Osoba s bielou palicou ¦ Person med hvit stokk
+forme|Présentation au tableau ¦ Prezentácia pri tabuli ¦ Presentasjon ved tavlen
+forme|Foule ¦ Dav ¦ Folkemengde
+forme|Groupe ¦ Skupina ¦ Gruppe
+forme|Silhouette ronde ¦ Okrúhla silueta ¦ Rund silhuett
+forme|Silhouette encadrée ¦ Silueta v rámčeku ¦ Innrammet silhuett
+forme|Portraits ¦ Portréty ¦ Portretter
+forme|Femme d’affaires ¦ Podnikateľka ¦ Forretningskvinne
+forme|Orateur ¦ Rečník ¦ Taler
+forme|Personne qui parle ¦ Hovoriaca osoba ¦ Person som snakker
+forme|Écolier ¦ Školák ¦ Skolegutt
+forme|Personne blessée ¦ Zranená osoba ¦ Skadet person
+forme|Personne remarquable ¦ Významná osoba ¦ Fremtredende person
+forme|Personne inconnue ¦ Neznáma osoba ¦ Ukjent person
+forme|Recherche de personne ¦ Hľadanie osoby ¦ Personsøk
+forme|Ajouter une personne ¦ Pridať osobu ¦ Legg til en person
+forme|Musicien ¦ Hudobník ¦ Musiker
+forme|Départ d’une personne ¦ Odchod osoby ¦ En person som drar
+forme|Arrivée d’une personne ¦ Príchod osoby ¦ En person som kommer
+forme|Détails de la personne ¦ Podrobnosti osoby ¦ Personens detaljer
+forme|Homme élégant ¦ Elegantný muž ¦ Elegant mann
+forme|Femme élégante ¦ Elegantná žena ¦ Elegant kvinne
+forme|Masque de protection ¦ Ochranné rúško ¦ Munnbind
+forme|Tête ¦ Hlava ¦ Hode
+forme|Pensée amoureuse ¦ Zaľúbená myšlienka ¦ Kjærlig tanke
+forme|Idée en tête ¦ Nápad v hlave ¦ Idé i hodet
+forme|Question en tête ¦ Otázka v hlave ¦ Spørsmål i hodet
+forme|Main gauche ¦ Ľavá ruka ¦ Venstre hånd
+forme|Paume gauche ¦ Ľavá dlaň ¦ Venstre håndflate
+forme|Paume droite ¦ Pravá dlaň ¦ Høyre håndflate
+forme|Applaudissements ¦ Potlesk ¦ Applaus
+forme|D’accord ¦ OK ¦ OK
+forme|main ¦ ruka ¦ hånd
+forme|Victoire ¦ Víťazstvo ¦ Seier
+forme|Index levé ¦ Zdvihnutý ukazovák ¦ Løftet pekefinger
+forme|Index vers la droite ¦ Ukazovák doprava ¦ Pekefinger mot høyre
+forme|Main tendue ¦ Natiahnutá ruka ¦ Utstrakt hånd
+forme|Lavage des mains ¦ Umývanie rúk ¦ Håndvask
+forme|Main et pièce ¦ Ruka a minca ¦ Hånd og mynt
+forme|Biceps ¦ Biceps ¦ Biceps
+forme|Langue des signes ¦ Posunkový jazyk ¦ Tegnspråk
+forme|Empreintes de pas ¦ Stopy ¦ Fotspor
+forme|Méditation ¦ Meditácia ¦ Meditasjon
+forme|Yoga ¦ Joga ¦ Yoga
+forme|Promeneur au parc ¦ Chodec v parku ¦ Spaserende i parken
+forme|Voleur ¦ Zlodej ¦ Tyv
+forme|Ninja ¦ Ninja ¦ Ninja
+forme|Incognito ¦ Inkognito ¦ Inkognito
+forme|Pirate ¦ Pirát ¦ Pirat
+forme|Médecin ¦ Lekár ¦ Lege
+forme|Chien ¦ Pes ¦ Hund
+forme|Chien de profil ¦ Pes z profilu ¦ Hund i profil
+forme|Chien guide ¦ Vodiaci pes ¦ Førerhund
+forme|Chat ¦ Mačka ¦ Katt
+forme|Cheval ¦ Kôň ¦ Hest
+forme|Cheval au galop ¦ Cválajúci kôň ¦ Galopperende hest
+forme|Cavalier ¦ Jazdec ¦ Rytter
+forme|Fer à cheval ¦ Podkova ¦ Hestesko
+forme|Vache ¦ Krava ¦ Ku
+forme|Cochon ¦ Prasa ¦ Gris
+forme|Mouton ¦ Ovca ¦ Sau
+forme|Lapin ¦ Zajac ¦ Kanin
+forme|Rongeur ¦ Hlodavec ¦ Gnager
+forme|Éléphant ¦ Slon ¦ Elefant
+forme|Kangourou ¦ Klokan ¦ Kenguru
+forme|Koala ¦ Koala ¦ Koala
+forme|Panda ¦ Panda ¦ Panda
+forme|Manchot ¦ Tučniak ¦ Pingvin
+forme|Chouette ¦ Sova ¦ Ugle
+forme|Canard ¦ Kačica ¦ And
+forme|Dinde ¦ Moriak ¦ Kalkun
+forme|Œuf ¦ Vajce ¦ Egg
+forme|Dauphin ¦ Delfín ¦ Delfin
+forme|Aileron de requin ¦ Žraločia plutva ¦ Haifinne
+forme|Méduse ¦ Medúza ¦ Manet
+forme|Escargot ¦ Slimák ¦ Snegle
+forme|Papillon ¦ Motýľ ¦ Sommerfugl
+forme|Abeille ¦ Včela ¦ Bie
+forme|Coccinelle ¦ Lienka ¦ Marihøne
+forme|Araignée ¦ Pavúk ¦ Edderkopp
+forme|Insecte ¦ Hmyz ¦ Insekt
+forme|Serpent ¦ Had ¦ Slange
+forme|Tortue ¦ Korytnačka ¦ Skilpadde
+forme|Tortue terrestre ¦ Suchozemská korytnačka ¦ Landskilpadde
+forme|Licorne ¦ Jednorožec ¦ Enhjørning
+forme|Os ¦ Kosť ¦ Bein
+forme|Âne ¦ Osol ¦ Esel
+forme|Chauve-souris ¦ Netopier ¦ Flaggermus
+forme|Toile d’araignée ¦ Pavučina ¦ Spindelvev
+forme|Requin ¦ Žralok ¦ Hai
+forme|Abeille et fleur ¦ Včela a kvet ¦ Bie og blomst
+forme|Apiculteur ¦ Včelár ¦ Birøkter
+forme|Bocal à poisson ¦ Akvárium ¦ Fiskebolle
+forme|Araignée au fil ¦ Pavúk na vlákne ¦ Edderkopp i tråd
+forme|Cheval rapide ¦ Rýchly kôň ¦ Rask hest
+forme|Chien interdit ¦ Zákaz psov ¦ Hunder forbudt
+forme|Os barré ¦ Prečiarknutá kosť ¦ Overstreket bein
+forme|Arbre feuillu ¦ Listnatý strom ¦ Løvtre
+forme|Conifère ¦ Ihličnan ¦ Bartre
+forme|Palmier ¦ Palma ¦ Palme
+forme|Cactus ¦ Kaktus ¦ Kaktus
+forme|Pousse ¦ Výhonok ¦ Spire
+forme|Graine ¦ Semeno ¦ Frø
+forme|Feuille d’érable ¦ Javorový list ¦ Lønneblad
+forme|Trèfle ¦ Ďatelina ¦ Kløver
+forme|Fleur et pollen ¦ Kvet a peľ ¦ Blomst og pollen
+forme|Herbe ¦ Tráva ¦ Gress
+forme|Épi de blé ¦ Pšeničný klas ¦ Hveteaks
+forme|Maïs ¦ Kukurica ¦ Mais
+forme|Cerises ¦ Čerešne ¦ Kirsebær
+forme|Raisin ¦ Hrozno ¦ Druer
+forme|Poire ¦ Hruška ¦ Pære
+forme|Pastèque ¦ Melón ¦ Vannmelon
+forme|Carotte ¦ Mrkva ¦ Gulrot
+forme|Relief ¦ Reliéf ¦ Terreng
+forme|Montagnes ¦ Hory ¦ Fjell
+forme|Volcan ¦ Sopka ¦ Vulkan
+forme|Île ¦ Ostrov ¦ Øy
+forme|Vagues ¦ Vlny ¦ Bølger
+forme|Eau ¦ Voda ¦ Vann
+forme|Feu ¦ Oheň ¦ Ild
+forme|Terre ¦ Zem ¦ Jord
+forme|Globe ¦ Glóbus ¦ Globus
+forme|Boussole ¦ Kompas ¦ Kompass
+forme|Carte ¦ Mapa ¦ Kart
+forme|Hameau ¦ Osada ¦ Grend
+forme|Forêt ¦ Les ¦ Skog
+forme|Bosquet ¦ Háj ¦ Lund
+forme|Ruche ¦ Úľ ¦ Bikube
+forme|Incendie de forêt ¦ Lesný požiar ¦ Skogbrann
+forme|Semis ¦ Výsev ¦ Såing
+forme|Feuille ronde ¦ Okrúhly list ¦ Rundt blad
+forme|Ananas ¦ Ananás ¦ Ananas
+forme|Houblon ¦ Chmeľ ¦ Humle
+forme|Chanvre ¦ Konope ¦ Hamp
+forme|Compost ¦ Kompost ¦ Kompost
+forme|Fleur de lotus ¦ Lotosový kvet ¦ Lotusblomst
+forme|Champs ¦ Polia ¦ Åkre
+forme|Parcelles ¦ Parcely ¦ Teiger
+forme|Parcelle ronde ¦ Okrúhla parcela ¦ Rund teig
+forme|Parcelle repérée ¦ Označená parcela ¦ Merket teig
+forme|Sillons horizontaux ¦ Vodorovné brázdy ¦ Vannrette furer
+forme|Glissement de terrain ¦ Zosuv pôdy ¦ Jordskred
+forme|Cascade ¦ Vodopád ¦ Foss
+forme|Raz-de-marée ¦ Prílivová vlna ¦ Flodbølge
+forme|Marée montante ¦ Príliv ¦ Stigende tidevann
+forme|Humidité ¦ Vlhkosť ¦ Fuktighet
+forme|Puits ¦ Studňa ¦ Brønn
+forme|Pompe à eau ¦ Vodné čerpadlo ¦ Vannpumpe
+forme|Fleur stylisée ¦ Štylizovaný kvet ¦ Stilisert blomst
+forme|Légende de carte ¦ Legenda mapy ¦ Tegnforklaring
+forme|Lieu ¦ Miesto ¦ Sted
+forme|rayon ¦ okruh ¦ radius
+forme|Plusieurs lieux ¦ Viac miest ¦ Flere steder
+forme|Distance entre lieux ¦ Vzdialenosť medzi miestami ¦ Avstand mellom steder
+forme|Lieu d’une personne ¦ Miesto osoby ¦ En persons sted
+forme|Lieu important ¦ Dôležité miesto ¦ Viktig sted
+forme|Lieu inconnu ¦ Neznáme miesto ¦ Ukjent sted
+forme|Position GPS ¦ Poloha GPS ¦ GPS-posisjon
+forme|Viseur ¦ Zameriavač ¦ Sikte
+forme|Latitude ¦ Zemepisná šírka ¦ Breddegrad
+forme|Longitude ¦ Zemepisná dĺžka ¦ Lengdegrad
+forme|Sommet ¦ Vrchol ¦ Topp
+forme|Montée ¦ Stúpanie ¦ Stigning
+forme|Pente montante ¦ Stúpajúci svah ¦ Stigende skråning
+forme|Rivage ¦ Pobrežie ¦ Strand
+forme|Plage ¦ Pláž ¦ Badestrand
+forme|Tunnel de culture ¦ Fóliovník ¦ Plasttunnel
+forme|Ferme et silo ¦ Statok a silo ¦ Gård og silo
+forme|Silo ¦ Silo ¦ Silo
+forme|Clôture électrique ¦ Elektrický ohradník ¦ Strømgjerde
+forme|Arrosoir ¦ Krhla ¦ Vannkanne
+forme|Arroseur ¦ Zavlažovač ¦ Vannspreder
+forme|Râteau ¦ Hrable ¦ Rive
+forme|Fourche à foin ¦ Vidly ¦ Høygaffel
+forme|Faucille ¦ Kosák ¦ Sigd
+forme|Tondeuse ¦ Kosačka ¦ Gressklipper
+forme|Nuit ¦ Noc ¦ Natt
+forme|Éclaircies ¦ Polojasno ¦ Oppholdsvær
+forme|Nuageux ¦ Oblačno ¦ Overskyet
+forme|Pluie ¦ Dážď ¦ Regn
+forme|Averse ¦ Prehánka ¦ Byge
+forme|Neige ¦ Sneh ¦ Snø
+forme|Orage ¦ Búrka ¦ Tordenvær
+forme|Vent ¦ Vietor ¦ Vind
+forme|Brouillard ¦ Hmla ¦ Tåke
+forme|Grêle ¦ Krupobitie ¦ Hagl
+forme|Coucher de soleil ¦ Západ slnka ¦ Solnedgang
+forme|Thermomètre ¦ Teplomer ¦ Termometer
+forme|Croissant de lune ¦ Mesačný kosák ¦ Månesigd
+forme|Pleine lune ¦ Spln ¦ Fullmåne
+forme|Étoile filante ¦ Padajúca hviezda ¦ Stjerneskudd
+forme|Scintillement ¦ Trblietanie ¦ Glitring
+forme|Ouragan ¦ Hurikán ¦ Orkan
+forme|Tornade ¦ Tornádo ¦ Tornado
+forme|Tempête de sable ¦ Piesočná búrka ¦ Sandstorm
+forme|Brume ¦ Opar ¦ Dis
+forme|Orage pluvieux ¦ Búrka s dažďom ¦ Tordenvær med regn
+forme|Orage et éclaircies ¦ Búrka a vyjasnenie ¦ Tordenvær og oppholdsvær
+forme|Averses et éclaircies ¦ Prehánky a vyjasnenie ¦ Byger og oppholdsvær
+forme|Neige et éclaircies ¦ Sneh a vyjasnenie ¦ Snø og oppholdsvær
+forme|Pluie et neige ¦ Dážď a sneh ¦ Regn og snø
+forme|Fortes chutes de neige ¦ Silné sneženie ¦ Kraftig snøfall
+forme|Neige mêlée de pluie ¦ Dážď so snehom ¦ Sludd
+forme|Nuit nuageuse ¦ Oblačná noc ¦ Overskyet natt
+forme|Vent fort ¦ Silný vietor ¦ Sterk vind
+forme|Lever du soleil ¦ Východ slnka ¦ Soloppgang
+forme|Coucher du soleil ¦ Západ slnka ¦ Solnedgang
+forme|Coucher de lune ¦ Západ mesiaca ¦ Månenedgang
+forme|Canicule ¦ Horúčava ¦ Hetebølge
+forme|Nuages ¦ Mraky ¦ Skyer
+forme|Vague de chaleur ¦ Vlna horúčav ¦ Varmebølge
+forme|Arc-en-ciel ¦ Dúha ¦ Regnbue
+forme|Aurore boréale ¦ Polárna žiara ¦ Nordlys
+forme|Nouvelle lune ¦ Nov ¦ Nymåne
+forme|Premier quartier ¦ Prvá štvrť ¦ Første kvarter
+forme|Dernier quartier ¦ Posledná štvrť ¦ Siste kvarter
+forme|Lune décroissante ¦ Ubúdajúci mesiac ¦ Minkende måne
+forme|Lune gibbeuse décroissante ¦ Ubúdajúci mesiac po splne ¦ Minkende måne etter fullmåne
+forme|Lune gibbeuse croissante ¦ Dorastajúci mesiac pred splnom ¦ Voksende måne før fullmåne
+forme|Jour et nuit ¦ Deň a noc ¦ Dag og natt
+forme|Soleil radieux ¦ Žiarivé slnko ¦ Strålende sol
+forme|Heure solaire ¦ Slnečný čas ¦ Soltid
+forme|Soleil et flocon ¦ Slnko a vločka ¦ Sol og snøfnugg
+forme|Chaleur ¦ Horúčava ¦ Varme
+forme|Dégel ¦ Topenie ¦ Tøvær
+forme|Grand froid ¦ Veľký mráz ¦ Sterk kulde
+forme|Bonhomme de neige ¦ Snehuliak ¦ Snømann
+forme|Température élevée ¦ Vysoká teplota ¦ Høy temperatur
+forme|Température basse ¦ Nízka teplota ¦ Lav temperatur
+forme|Degrés Celsius ¦ Stupne Celzia ¦ Grader celsius
+forme|Parasol ¦ Slnečník ¦ Parasoll
+forme|Manche à air ¦ Veterný rukáv ¦ Vindpølse
+forme|Fumée ¦ Dym ¦ Røyk
+forme|Inondation ¦ Povodeň ¦ Oversvømmelse
+forme|Tranche de pain ¦ Krajec chleba ¦ Brødskive
+forme|Baguette ¦ Bageta ¦ Baguette
+forme|Croissant ¦ Croissant ¦ Croissant
+forme|Fromage ¦ Syr ¦ Ost
+forme|Gâteau ¦ Torta ¦ Kake
+forme|Gâteau d’anniversaire ¦ Narodeninová torta ¦ Bursdagskake
+forme|Petit gâteau ¦ Košíček ¦ Cupcake
+forme|Biscuit ¦ Keks ¦ Kjeks
+forme|Bonbon ¦ Cukrík ¦ Godteri
+forme|Glace ¦ Zmrzlina ¦ Iskrem
+forme|Pizza ¦ Pizza ¦ Pizza
+forme|Cuisse de poulet ¦ Kuracie stehno ¦ Kyllinglår
+forme|Œuf au plat ¦ Volské oko ¦ Speilegg
+forme|Tasse de café ¦ Šálka kávy ¦ Kopp kaffe
+forme|Tasse de thé ¦ Šálka čaju ¦ Kopp te
+forme|Bouilloire ¦ Kanvica ¦ Vannkoker
+forme|Marmite ¦ Hrniec ¦ Gryte
+forme|Couverts ¦ Príbor ¦ Bestikk
+forme|Toque ¦ Kuchárska čiapka ¦ Kokkelue
+forme|Verre de vin ¦ Pohár vína ¦ Vinglass
+forme|Bouteille de vin ¦ Fľaša vína ¦ Vinflaske
+forme|Chope ¦ Krígeľ ¦ Krus
+forme|Cocktail ¦ Koktail ¦ Cocktail
+forme|Bière ¦ Pivo ¦ Øl
+forme|Gobelet ¦ Pohárik ¦ Beger
+forme|Agrume ¦ Citrus ¦ Sitrusfrukt
+forme|Cacahuète ¦ Arašid ¦ Peanøtt
+forme|Nouilles ¦ Rezance ¦ Nudler
+forme|Hamburger ¦ Hamburger ¦ Hamburger
+forme|Repas ¦ Jedlo ¦ Måltid
+forme|Pièce montée ¦ Svadobná torta ¦ Kransekake
+forme|Sucre d’orge ¦ Lízatko ¦ Kjærlighet på pinne
+forme|Muffin ¦ Muffin ¦ Muffins
+forme|Bretzel ¦ Praclík ¦ Kringle
+forme|Frites ¦ Hranolčeky ¦ Pommes frites
+forme|Hot-dog ¦ Párok v rožku ¦ Pølse i brød
+forme|Steak ¦ Steak ¦ Biff
+forme|Dinde rôtie ¦ Pečený moriak ¦ Stekt kalkun
+forme|Restauration ¦ Stravovanie ¦ Servering
+forme|Plat à emporter ¦ Jedlo so sebou ¦ Takeaway
+forme|Halal ¦ Halal ¦ Halal
+forme|Casher ¦ Košer ¦ Kosher
+forme|Taco ¦ Taco ¦ Taco
+forme|Pâtes ¦ Cestoviny ¦ Pasta
+forme|Bol de riz ¦ Miska ryže ¦ Risbolle
+forme|Saucisse ¦ Klobása ¦ Pølse
+forme|Poireau ¦ Pór ¦ Purre
+forme|Piment fort ¦ Pálivá paprička ¦ Sterk chili
+forme|Piment doux ¦ Sladká paprika ¦ Paprika
+forme|Pop-corn ¦ Pukance ¦ Popkorn
+forme|Glace à l’eau ¦ Nanuk ¦ Ispinne
+forme|Nutrition ¦ Výživa ¦ Ernæring
+forme|Bol ¦ Miska ¦ Bolle
+forme|Saladier ¦ Misa ¦ Salatbolle
+forme|Casserole ¦ Kastról ¦ Kjele
+forme|Casserole et cuillère ¦ Kastról a lyžica ¦ Kjele og skje
+forme|Poêle ¦ Panvica ¦ Stekepanne
+forme|Couverts croisés ¦ Prekrížený príbor ¦ Kryssende bestikk
+forme|Fourchette ¦ Vidlička ¦ Gaffel
+forme|Cuillère ¦ Lyžica ¦ Skje
+forme|Cuillère de sucre ¦ Lyžička cukru ¦ Skje med sukker
+forme|Salière ¦ Soľnička ¦ Saltbøsse
+forme|Sauce soja ¦ Sójová omáčka ¦ Soyasaus
+forme|Café à emporter ¦ Káva so sebou ¦ Kaffe å ta med
+forme|Cafetière ¦ Kávovar ¦ Kaffetrakter
+forme|Bouilloire fumante ¦ Dymiaca kanvica ¦ Dampende kjele
+forme|Verre d’eau ¦ Pohár vody ¦ Glass vann
+forme|Flûte à champagne ¦ Pohár na šampanské ¦ Champagneglass
+forme|Verre tulipe ¦ Tulipánový pohár ¦ Tulipanglass
+forme|Pinte ¦ Pollitrový krígeľ ¦ Halvliter
+forme|Fragile ¦ Krehké ¦ Skjørt
+forme|Bouteille de soda ¦ Fľaša limonády ¦ Brusflaske
+forme|Flacon ¦ Flakón ¦ Flakong
+forme|Spiritueux ¦ Liehovina ¦ Brennevin
+forme|Tonneau de bière ¦ Pivný sud ¦ Ølfat
+forme|Tonneau ¦ Sud ¦ Tønne
+forme|Mixeur ¦ Mixér ¦ Blender
+forme|Barbecue ¦ Gril ¦ Grill
+forme|Œuf de Pâques ¦ Kraslica ¦ Påskeegg
+forme|Maison et immeuble ¦ Dom a bytovka ¦ Hus og boligblokk
+forme|Porte ¦ Dvere ¦ Dør
+forme|Porte ouverte ¦ Otvorené dvere ¦ Åpen dør
+forme|Fenêtre ¦ Okno ¦ Vindu
+forme|Escalier ¦ Schodisko ¦ Trapp
+forme|Cheminée ¦ Krb ¦ Peis
+forme|Canapé ¦ Pohovka ¦ Sofa
+forme|Lit ¦ Posteľ ¦ Seng
+forme|Lit double ¦ Manželská posteľ ¦ Dobbeltseng
+forme|Fauteuil ¦ Kreslo ¦ Lenestol
+forme|Table ¦ Stôl ¦ Bord
+forme|Armoire ¦ Skriňa ¦ Klesskap
+forme|Lampe de bureau ¦ Stolová lampa ¦ Skrivebordslampe
+forme|Lustre ¦ Luster ¦ Lysekrone
+forme|Clé ancienne ¦ Starý kľúč ¦ Gammel nøkkel
+forme|Cadenas ¦ Visiaca zámka ¦ Hengelås
+forme|Cadenas ouvert ¦ Otvorená visiaca zámka ¦ Åpen hengelås
+forme|Pendule ¦ Kyvadlové hodiny ¦ Pendelur
+forme|Réveil ¦ Budík ¦ Vekkerklokke
+forme|Ballon de fête ¦ Balónik ¦ Ballong
+forme|Fête ¦ Oslava ¦ Fest
+forme|Ours en peluche ¦ Plyšový medvedík ¦ Bamse
+forme|Brique de jeu ¦ Kocka stavebnice ¦ Byggekloss
+forme|Cintre ¦ Vešiak ¦ Kleshenger
+forme|Fer à repasser ¦ Žehlička ¦ Strykejern
+forme|Machine à laver ¦ Práčka ¦ Vaskemaskin
+forme|Aiguille ¦ Ihla ¦ Nål
+forme|Balai ¦ Metla ¦ Kost
+forme|Seau ¦ Vedro ¦ Bøtte
+forme|Boîte aux lettres ¦ Poštová schránka ¦ Postkasse
+forme|Téléphone ancien ¦ Starý telefón ¦ Gammel telefon
+forme|Radio ¦ Rádio ¦ Radio
+forme|Télévision ancienne ¦ Starý televízor ¦ Gammelt fjernsyn
+forme|Machine à écrire ¦ Písací stroj ¦ Skrivemaskin
+forme|Projecteur ¦ Projektor ¦ Projektor
+forme|Pellicule ¦ Filmový pás ¦ Filmrull
+forme|Film ¦ Film ¦ Film
+forme|Cassette ¦ Kazeta ¦ Kassett
+forme|Tourne-disque ¦ Gramofón ¦ Platespiller
+forme|Disque ¦ Platňa ¦ Plate
+forme|Maison ronde ¦ Okrúhly dom ¦ Rundt hus
+forme|Toit ¦ Strecha ¦ Tak
+forme|Maison éclairée ¦ Osvetlený dom ¦ Opplyst hus
+forme|Quitter la maison ¦ Odchod z domu ¦ Forlate huset
+forme|Entrer à la maison ¦ Príchod domov ¦ Komme hjem
+forme|Changement de maison ¦ Sťahovanie ¦ Flytting
+forme|Adresse ¦ Adresa ¦ Adresse
+forme|Porte fermée ¦ Zatvorené dvere ¦ Lukket dør
+forme|Porte coulissante ¦ Posuvné dvere ¦ Skyvedør
+forme|Porte coulissante ouverte ¦ Otvorené posuvné dvere ¦ Åpen skyvedør
+forme|Sonnette ¦ Zvonček ¦ Dørklokke
+forme|Fenêtre ouverte ¦ Otvorené okno ¦ Åpent vindu
+forme|Fenêtre fermée ¦ Zatvorené okno ¦ Lukket vindu
+forme|Balcon ¦ Balkón ¦ Balkong
+forme|Store banne ¦ Markíza ¦ Markise
+forme|Escalier montant ¦ Schody hore ¦ Trapp opp
+forme|Escalier descendant ¦ Schody dole ¦ Trapp ned
+forme|Ascenseur ¦ Výťah ¦ Heis
+forme|Escalator ¦ Eskalátor ¦ Rulletrapp
+forme|Échelle ¦ Rebrík ¦ Stige
+forme|Garage ¦ Garáž ¦ Garasje
+forme|Garage ouvert ¦ Otvorená garáž ¦ Åpen garasje
+forme|Fauteuil club ¦ Klubové kreslo ¦ Klubbstol
+forme|Grand lit ¦ Veľká posteľ ¦ Stor seng
+forme|Lit deux places ¦ Dvojlôžko ¦ Seng for to
+forme|Lit simple ¦ Jednolôžko ¦ Enkeltseng
+forme|Lits superposés ¦ Poschodová posteľ ¦ Køyeseng
+forme|Chaise d’écolier ¦ Školská stolička ¦ Skolestol
+forme|Bureau ¦ Písací stôl ¦ Skrivebord
+forme|Commode ¦ Komoda ¦ Kommode
+forme|Buffet ¦ Príborník ¦ Skjenk
+forme|Plan de travail ¦ Pracovná doska ¦ Benkeplate
+forme|Portemanteau ¦ Vešiak na kabáty ¦ Stumtjener
+forme|Casier ¦ Skrinka ¦ Skap
+forme|Tabouret ¦ Taburetka ¦ Krakk
+forme|Banc ¦ Lavica ¦ Benk
+forme|Banc à dossier ¦ Lavička s operadlom ¦ Benk med ryggstø
+forme|Tapis ¦ Koberec ¦ Teppe
+forme|Lampadaire ¦ Stojacia lampa ¦ Stålampe
+forme|Grand lustre ¦ Veľký luster ¦ Stor lysekrone
+forme|Applique murale ¦ Nástenné svietidlo ¦ Vegglampe
+forme|Lanterne murale ¦ Nástenný lampáš ¦ Vegglykt
+forme|Réverbère ¦ Pouličná lampa ¦ Gatelykt
+forme|Lampe à huile ¦ Olejová lampa ¦ Oljelampe
+forme|Guirlande lumineuse ¦ Svetelná reťaz ¦ Lysslynge
+forme|Idée ¦ Nápad ¦ Idé
+forme|Chandelier ¦ Svietnik ¦ Lysestake
+forme|Chandelier allumé ¦ Zapálený svietnik ¦ Tent lysestake
+forme|Radiateur ¦ Radiátor ¦ Radiator
+forme|Cuisinière ¦ Sporák ¦ Komfyr
+forme|Four à micro-ondes ¦ Mikrovlnná rúra ¦ Mikrobølgeovn
+forme|Réfrigérateur ¦ Chladnička ¦ Kjøleskap
+forme|Lave-vaisselle ¦ Umývačka riadu ¦ Oppvaskmaskin
+forme|Aspirateur ¦ Vysávač ¦ Støvsuger
+forme|Planche à repasser ¦ Žehliaca doska ¦ Strykebrett
+forme|Robinet ¦ Kohútik ¦ Vannkran
+forme|Douche ¦ Sprcha ¦ Dusj
+forme|Baignoire ¦ Vaňa ¦ Badekar
+forme|Toilettes ¦ Toaleta ¦ Toalett
+forme|Ventilateur ¦ Ventilátor ¦ Vifte
+forme|Trousseau de clés ¦ Zväzok kľúčov ¦ Nøkkelknippe
+forme|Cloche qui sonne ¦ Zvoniaci zvon ¦ Ringende klokke
+forme|Midi ¦ Poludnie ¦ Middag
+forme|Sablier vide ¦ Prázdne presýpacie hodiny ¦ Tomt timeglass
+forme|Sablier plein ¦ Plné presýpacie hodiny ¦ Fullt timeglass
+forme|Cadeau ouvert ¦ Otvorený darček ¦ Åpnet gave
+forme|Boîte aux lettres ouverte ¦ Otvorená schránka ¦ Åpen postkasse
+forme|Vaporisateur ¦ Rozprašovač ¦ Sprayflaske
+forme|Poubelle ¦ Odpadkový kôš ¦ Søppelbøtte
+forme|Panier ¦ Košík ¦ Kurv
+forme|Colis ¦ Balík ¦ Pakke
+forme|Diable ¦ Rudla ¦ Sekketralle
+forme|Caméra ancienne ¦ Stará kamera ¦ Gammelt kamera
+forme|Radio FM ¦ Rádio FM ¦ FM-radio
+forme|Antenne radio ¦ Rádiová anténa ¦ Radioantenne
+forme|Radiocassette ¦ Rádiomagnetofón ¦ Radiokassettspiller
+forme|Cassette vidéo ¦ Videokazeta ¦ Videokassett
+forme|Disque compact ¦ CD ¦ CD
+forme|Lecteur de disques ¦ Prehrávač diskov ¦ Platespiller
+forme|Télécopieur ¦ Fax ¦ Faks
+forme|Télévision ¦ Televízor ¦ TV
+forme|Ordinateur ancien ¦ Starý počítač ¦ Gammel datamaskin
+forme|Disquette ¦ Disketa ¦ Diskett
+forme|Calculatrice ¦ Kalkulačka ¦ Kalkulator
+forme|Boulier ¦ Počítadlo ¦ Kuleramme
+forme|Cheminée éteinte ¦ Vyhasnutý krb ¦ Slukket peis
+forme|Volet roulant ¦ Roleta ¦ Rullesjalusi
+forme|Volet roulant ouvert ¦ Vytiahnutá roleta ¦ Åpen rullesjalusi
+forme|Ventilateur de plafond ¦ Stropný ventilátor ¦ Takvifte
+forme|Sèche-linge ¦ Sušička ¦ Tørketrommel
+forme|Grille-pain ¦ Hriankovač ¦ Brødrister
+forme|Bain à remous ¦ Vírivka ¦ Boblebad
+forme|Chauffe-eau ¦ Ohrievač vody ¦ Varmtvannsbereder
+forme|Climatiseur ¦ Klimatizácia ¦ Klimaanlegg
+forme|Caméscope ¦ Videokamera ¦ Videokamera
+forme|Bobine de film ¦ Filmová cievka ¦ Filmspole
+forme|Écran de projection ¦ Premietacie plátno ¦ Lerret
+forme|Talkie-walkie ¦ Vysielačka ¦ Walkie-talkie
+forme|Téléphone de bureau ¦ Stolový telefón ¦ Bordtelefon
+forme|Trois heures ¦ Tri hodiny ¦ Klokken tre
+forme|Six heures ¦ Šesť hodín ¦ Klokken seks
+forme|Neuf heures ¦ Deväť hodín ¦ Klokken ni
+forme|Sablier écoulé ¦ Presýpacie hodiny, čas vypršal ¦ Utløpt timeglass
+forme|Lampes ¦ Lampy ¦ Lamper
+forme|Lampadaire torchère ¦ Stojacia lampa so svetlom nahor ¦ Uplight-stålampe
+forme|Carton ouvert ¦ Otvorená krabica ¦ Åpen pappeske
+forme|T-shirt ¦ Tričko ¦ T-skjorte
+forme|Chemise ¦ Košeľa ¦ Skjorte
+forme|Chapeau feutre ¦ Plstený klobúk ¦ Filthatt
+forme|Chapeau rond ¦ Buřinka ¦ Bowlerhatt
+forme|Cravate ¦ Kravata ¦ Slips
+forme|Nœud papillon ¦ Motýlik ¦ Sløyfe
+forme|Chaussure de ville ¦ Spoločenská topánka ¦ Pensko
+forme|Escarpin ¦ Lodička ¦ Pumps
+forme|Basket ¦ Tenisky ¦ Joggesko
+forme|Chausson de danse ¦ Baletná špička ¦ Ballettsko
+forme|Lunettes de soleil ¦ Slnečné okuliare ¦ Solbriller
+forme|Diamant ¦ Diamant ¦ Diamant
+forme|Collier ¦ Náhrdelník ¦ Halskjede
+forme|Montre ¦ Hodinky ¦ Armbåndsur
+forme|Sac à main ¦ Kabelka ¦ Håndveske
+forme|Portefeuille ¦ Peňaženka ¦ Lommebok
+forme|Parapluie fermé ¦ Zatvorený dáždnik ¦ Lukket paraply
+forme|Ciseaux ¦ Nožnice ¦ Saks
+forme|Rouge à lèvres ¦ Rúž ¦ Leppestift
+forme|Sac à dos ¦ Batoh ¦ Ryggsekk
+forme|Mallette ¦ Kufrík ¦ Dokumentmappe
+forme|Lingerie ¦ Spodná bielizeň ¦ Undertøy
+forme|Sous-vêtement ¦ Spodky ¦ Underbukse
+forme|Couche ¦ Plienka ¦ Bleie
+forme|Chapeau de magicien ¦ Kúzelnícky klobúk ¦ Tryllehatt
+forme|Chaussure à crampons ¦ Kopačka ¦ Fotballsko
+forme|Chaussette de Noël ¦ Vianočná pančucha ¦ Julestrømpe
+forme|Portefeuille plié ¦ Zložená peňaženka ¦ Sammenbrettet lommebok
+forme|Pochette de voyage ¦ Cestovné puzdro ¦ Reiseveske
+forme|Bagage cabine ¦ Príručná batožina ¦ Håndbagasje
+forme|Bagage en soute ¦ Podaná batožina ¦ Innsjekket bagasje
+forme|Sac étiqueté ¦ Taška so štítkom ¦ Merket veske
+forme|Mallette professionnelle ¦ Pracovný kufrík ¦ Arbeidsveske
+forme|Sèche-cheveux ¦ Fén ¦ Hårføner
+forme|Rasoir de sûreté ¦ Holiaci strojček ¦ Barberhøvel
+forme|Lame de rasoir ¦ Žiletka ¦ Barberblad
+forme|Lotion ¦ Pleťová voda ¦ Lotion
+forme|Loup ¦ Škraboška ¦ Øyemaske
+forme|Masques de théâtre ¦ Divadelné masky ¦ Teatermasker
+forme|Masque de Guy Fawkes ¦ Maska Guya Fawkesa ¦ Guy Fawkes-maske
+forme|Voiture ¦ Auto ¦ Bil
+forme|Voiture de profil ¦ Auto z profilu ¦ Bil i profil
+forme|Cabriolet ¦ Kabriolet ¦ Kabriolet
+forme|Break ¦ Kombi ¦ Stasjonsvogn
+forme|Camionnette ¦ Dodávka ¦ Varebil
+forme|Camion ¦ Nákladné auto ¦ Lastebil
+forme|Fourgon ¦ Skriňová dodávka ¦ Kassebil
+forme|Autobus ¦ Autobus ¦ Buss
+forme|Autocar ¦ Diaľkový autobus ¦ Turbuss
+forme|Train ¦ Vlak ¦ Tog
+forme|Locomotive ¦ Lokomotíva ¦ Lokomotiv
+forme|Tramway ¦ Električka ¦ Trikk
+forme|Métro ¦ Metro ¦ T-bane
+forme|Tracteur ¦ Traktor ¦ Traktor
+forme|Vélo ¦ Bicykel ¦ Sykkel
+forme|Moto ¦ Motorka ¦ Motorsykkel
+forme|Trottinette ¦ Kolobežka ¦ Sparkesykkel
+forme|Voilier ¦ Plachetnica ¦ Seilbåt
+forme|Paquebot ¦ Zaoceánsky parník ¦ Passasjerskip
+forme|Gouvernail ¦ Kormidlo ¦ Ratt
+forme|Avion ¦ Lietadlo ¦ Fly
+forme|Décollage ¦ Vzlet ¦ Avgang
+forme|Montgolfière ¦ Teplovzdušný balón ¦ Luftballong
+forme|Fusée ¦ Raketa ¦ Rakett
+forme|Fusée au départ ¦ Štartujúca raketa ¦ Rakettoppskyting
+forme|Caravane ¦ Karavan ¦ Campingvogn
+forme|Camping-car ¦ Obytné auto ¦ Bobil
+forme|Station-service ¦ Čerpacia stanica ¦ Bensinstasjon
+forme|Feu tricolore ¦ Semafor ¦ Trafikklys
+forme|Panneau de direction ¦ Smerová tabuľa ¦ Veiviser
+forme|Route ¦ Cesta ¦ Vei
+forme|Itinéraire ¦ Trasa ¦ Rute
+forme|Brouette ¦ Fúrik ¦ Trillebår
+forme|Volant ¦ Volant ¦ Ratt
+forme|Voiture de dos ¦ Auto zozadu ¦ Bil bakfra
+forme|Voiture compacte ¦ Malé auto ¦ Småbil
+forme|Voiture de sport ¦ Športové auto ¦ Sportsbil
+forme|Limousine ¦ Limuzína ¦ Limousin
+forme|Voiture électrique ¦ Elektromobil ¦ Elbil
+forme|Siège auto ¦ Autosedačka ¦ Bilsete
+forme|Siège enfant ¦ Detská sedačka ¦ Barnesete
+forme|Lavage auto ¦ Autoumyváreň ¦ Bilvask
+forme|Garagiste ¦ Automechanik ¦ Bilmekaniker
+forme|Taxi ¦ Taxík ¦ Drosje
+forme|Jeepney ¦ Jeepney ¦ Jeepney
+forme|Camion de livraison ¦ Rozvozové auto ¦ Leveringsbil
+forme|Livraison rapide ¦ Rýchle doručenie ¦ Ekspresslevering
+forme|Semi-remorque ¦ Kamión ¦ Semitrailer
+forme|Camion plateau ¦ Valník ¦ Planbil
+forme|Camion-citerne ¦ Cisterna ¦ Tankbil
+forme|Dépanneuse ¦ Odťahovka ¦ Bergingsbil
+forme|Benne ¦ Sklápač ¦ Tippbil
+forme|Minibus ¦ Mikrobus ¦ Minibuss
+forme|Bus scolaire ¦ Školský autobus ¦ Skolebuss
+forme|Bus à impériale ¦ Poschodový autobus ¦ Dobbeltdekker
+forme|Arrêt de bus ¦ Autobusová zastávka ¦ Bussholdeplass
+forme|Train et voiture ¦ Vlak a auto ¦ Tog og bil
+forme|Train et bus ¦ Vlak a autobus ¦ Tog og buss
+forme|Voiture de voyageurs ¦ Osobný vozeň ¦ Passasjervogn
+forme|Fourgon de queue ¦ Služobný vozeň ¦ Konduktørvogn
+forme|Tramway de profil ¦ Električka z profilu ¦ Trikk i profil
+forme|souterrain ¦ podzemný ¦ underjordisk
+forme|Télécabine ¦ Kabínková lanovka ¦ Gondolbane
+forme|Vélo à panier ¦ Bicykel s košíkom ¦ Sykkel med kurv
+forme|Vélo cargo ¦ Nákladný bicykel ¦ Lastesykkel
+forme|Vélo électrique ¦ Elektrobicykel ¦ Elsykkel
+forme|Grand-bi ¦ Vysoký bicykel ¦ Høyhjuling
+forme|Cyclomoteur ¦ Moped ¦ Moped
+forme|Trottinette électrique ¦ Elektrická kolobežka ¦ Elsparkesykkel
+forme|Pousse-pousse ¦ Rikša ¦ Rickshaw
+forme|Monocycle ¦ Jednokolka ¦ Enhjulssykkel
+forme|Quad ¦ Štvorkolka ¦ ATV
+forme|Motoneige ¦ Snežný skúter ¦ Snøscooter
+forme|Chariot élévateur ¦ Vysokozdvižný vozík ¦ Gaffeltruck
+forme|Pelleteuse ¦ Bager ¦ Gravemaskin
+forme|Bulldozer ¦ Buldozér ¦ Bulldoser
+forme|Grue ¦ Žeriav ¦ Kran
+forme|Portique ¦ Portálový žeriav ¦ Portalkran
+forme|Atterrissage ¦ Pristátie ¦ Landing
+forme|Aéroport ¦ Letisko ¦ Flyplass
+forme|Hélicoptère ¦ Vrtuľník ¦ Helikopter
+forme|Drone ¦ Dron ¦ Drone
+forme|Parachute ¦ Padák ¦ Fallskjerm
+forme|Parapente ¦ Paraglajdingový padák ¦ Paraglider
+forme|Soucoupe volante ¦ Lietajúci tanier ¦ Flygende tallerken
+forme|Satellite ¦ Družica ¦ Satellitt
+forme|Station spatiale ¦ Vesmírna stanica ¦ Romstasjon
+forme|Sous-marin ¦ Ponorka ¦ Ubåt
+forme|Naufrage ¦ Stroskotanie ¦ Skipsforlis
+forme|Bouée de sauvetage ¦ Záchranný kruh ¦ Livbøye
+forme|Rame ¦ Veslo ¦ Åre
+forme|Jetée ¦ Mólo ¦ Molo
+forme|Grue portuaire ¦ Prístavný žeriav ¦ Havnekran
+forme|Kayak ¦ Kajak ¦ Kajakk
+forme|Aviron ¦ Veslovanie ¦ Roing
+forme|Avion et voiture ¦ Lietadlo a auto ¦ Fly og bil
+forme|Avion et train ¦ Lietadlo a vlak ¦ Fly og tog
+forme|Autoroute ¦ Diaľnica ¦ Motorvei
+forme|Route droite ¦ Rovná cesta ¦ Rett vei
+forme|Itinéraires ¦ Trasy ¦ Ruter
+forme|Tunnel ¦ Tunel ¦ Tunnel
+forme|Barrière ¦ Rampa ¦ Bom
+forme|Tourniquet ¦ Turniket ¦ Svingport
+forme|Cône de signalisation ¦ Dopravný kužeľ ¦ Trafikkjegle
+forme|Panneau attention ¦ Výstražná značka ¦ Fareskilt
+forme|Cédez le passage ¦ Daj prednosť v jazde ¦ Vikeplikt
+forme|Poteau indicateur ¦ Rázcestník ¦ Veiviserstolpe
+forme|Panneau à vendre ¦ Tabuľa Na predaj ¦ Til salgs-skilt
+forme|Directions ¦ Smery ¦ Retninger
+forme|Parking ¦ Parkovisko ¦ Parkering
+forme|Borne de recharge ¦ Nabíjacia stanica ¦ Ladestasjon
+forme|Carburant ¦ Palivo ¦ Drivstoff
+forme|Pneu ¦ Pneumatika ¦ Dekk
+forme|Moteur ¦ Motor ¦ Motor
+forme|Ceinture de sécurité ¦ Bezpečnostný pás ¦ Bilbelte
+forme|Compteur de vitesse ¦ Tachometer ¦ Speedometer
+forme|Correspondance ¦ Prestup ¦ Overgang
+forme|Accessibilité ¦ Bezbariérovosť ¦ Tilgjengelighet
+forme|Maison moderne ¦ Moderný dom ¦ Moderne hus
+forme|Immeuble ¦ Bytový dom ¦ Boligblokk
+forme|Ville ¦ Mesto ¦ By
+forme|Bâtiment ¦ Budova ¦ Bygning
+forme|Hôpital ¦ Nemocnica ¦ Sykehus
+forme|École ¦ Škola ¦ Skole
+forme|toque ¦ čiapka ¦ lue
+forme|Hôtel de ville ¦ Radnica ¦ Rådhus
+forme|Banque ¦ Banka ¦ Bank
+forme|Boutique ¦ Obchod ¦ Butikk
+forme|Commerce ¦ Obchod ¦ Handel
+forme|Entrepôt ¦ Sklad ¦ Lager
+forme|Grange ¦ Stodola ¦ Låve
+forme|Serre ¦ Skleník ¦ Drivhus
+forme|Clôture ¦ Plot ¦ Gjerde
+forme|Portail ¦ Brána ¦ Port
+forme|Tente ¦ Stan ¦ Telt
+forme|Phare ¦ Maják ¦ Fyrtårn
+forme|Phare allumé ¦ Svietiaci maják ¦ Tent fyrtårn
+forme|Mosquée ¦ Mešita ¦ Moské
+forme|Synagogue ¦ Synagóga ¦ Synagoge
+forme|Temple ¦ Chrám ¦ Tempel
+forme|Pagode ¦ Pagoda ¦ Pagode
+forme|Stade ¦ Štadión ¦ Stadion
+forme|Théâtre ¦ Divadlo ¦ Teater
+forme|Fontaine ¦ Fontána ¦ Fontene
+forme|Colonne ¦ Stĺp ¦ Søyle
+forme|Mur ¦ Múr ¦ Mur
+forme|Éolienne ¦ Veterná elektráreň ¦ Vindturbin
+forme|Tour de guet ¦ Strážna veža ¦ Vakttårn
+forme|Commissariat ¦ Policajná stanica ¦ Politistasjon
+forme|Poste ¦ Pošta ¦ Postkontor
+forme|Drapeau à damier ¦ Šachovnicová vlajka ¦ Rutete flagg
+forme|Immeuble repéré ¦ Označená budova ¦ Merket bygning
+forme|Changer de ville ¦ Zmena mesta ¦ Bytte by
+forme|Changer de bâtiment ¦ Zmena budovy ¦ Bytte bygning
+forme|Bibliothèque ¦ Knižnica ¦ Bibliotek
+forme|bâtiment ¦ budova ¦ bygning
+forme|Rayonnages ¦ Regály ¦ Reoler
+forme|Commerce ouvert {x} h ¦ Obchod otvorený {x} h ¦ Butikk åpen {x} t
+forme|Hôpital repéré ¦ Označená nemocnica ¦ Merket sykehus
+forme|Panneau d’hôpital ¦ Značka nemocnice ¦ Sykehusskilt
+forme|Terrain de football ¦ Futbalové ihrisko ¦ Fotballbane
+forme|Terrain de base-ball ¦ Bejzbalové ihrisko ¦ Baseballbane
+forme|Poste de secours ¦ Stanica prvej pomoci ¦ Førstehjelpspost
+forme|Tour Eiffel ¦ Eiffelova veža ¦ Eiffeltårnet
+forme|Grande roue ¦ Ruské koleso ¦ Pariserhjul
+forme|Yourte ¦ Jurta ¦ Jurt
+forme|Chalet ¦ Chata ¦ Hytte
+forme|Feu de camp ¦ Táborák ¦ Leirbål
+forme|Piscine ¦ Bazén ¦ Svømmebasseng
+forme|Caserne de pompiers ¦ Hasičská stanica ¦ Brannstasjon
+forme|Panneau d’affichage ¦ Bilbord ¦ Reklametavle
+forme|Panneau d’annonces ¦ Nástenka ¦ Oppslagstavle
+forme|Podium ¦ Stupienok víťazov ¦ Pall
+forme|Mur en flammes ¦ Horiaci múr ¦ Brennende mur
+forme|Portail ouvert ¦ Otvorená brána ¦ Åpen port
+forme|Réservoir ¦ Nádrž ¦ Tank
+forme|Pylône électrique ¦ Stĺp elektrického vedenia ¦ Kraftmast
+forme|Turbine ¦ Turbína ¦ Turbin
+forme|Panneau solaire ¦ Solárny panel ¦ Solcellepanel
+forme|Grand panneau solaire ¦ Veľký solárny panel ¦ Stort solcellepanel
+forme|Barrage ¦ Priehrada ¦ Demning
+forme|Explosion nucléaire ¦ Jadrový výbuch ¦ Atomeksplosjon
+forme|Marteau ¦ Kladivo ¦ Hammer
+forme|Outils ¦ Náradie ¦ Verktøy
+forme|Clé à molette ¦ Francúzsky kľúč ¦ Skiftenøkkel
+forme|Tournevis ¦ Skrutkovač ¦ Skrutrekker
+forme|Lame de scie ¦ Pílový list ¦ Sagblad
+forme|Scie ¦ Píla ¦ Sag
+forme|Hache ¦ Sekera ¦ Øks
+forme|Pelle ¦ Lopata ¦ Spade
+forme|Pioche ¦ Krompáč ¦ Hakke
+forme|Enclume ¦ Nákova ¦ Ambolt
+forme|Clou ¦ Klinec ¦ Spiker
+forme|Boîte à outils ¦ Kufor na náradie ¦ Verktøykasse
+forme|Règle ¦ Pravítko ¦ Linjal
+forme|Crayon et règle ¦ Ceruzka a pravítko ¦ Blyant og linjal
+forme|Rouleau de peinture ¦ Maliarsky valček ¦ Malerrull
+forme|Pinceau ¦ Štetec ¦ Pensel
+forme|Palette de peintre ¦ Maliarska paleta ¦ Malerpalett
+forme|Stéthoscope ¦ Stetoskop ¦ Stetoskop
+forme|Trousse médicale ¦ Lekárnička ¦ Legeveske
+forme|Balance ¦ Váhy ¦ Vekt
+forme|Marteau de juge ¦ Sudcovské kladivko ¦ Dommerklubbe
+forme|Billets ¦ Bankovky ¦ Pengesedler
+forme|Euro ¦ Euro ¦ Euro
+forme|Caisse ¦ Pokladňa ¦ Kasse
+forme|Microscope ¦ Mikroskop ¦ Mikroskop
+forme|Fiole ¦ Fľaštička ¦ Ampulle
+forme|Livre d’école ¦ Učebnica ¦ Skolebok
+forme|Camion de pompiers ¦ Hasičské auto ¦ Brannbil
+forme|Imprimante ¦ Tlačiareň ¦ Skriver
+forme|Casque de chantier ¦ Ochranná prilba ¦ Vernehjelm
+forme|Mine ¦ Baňa ¦ Gruve
+forme|Bidon d’huile ¦ Kanister oleja ¦ Oljekanne
+forme|Couteau ¦ Nôž ¦ Kniv
+forme|Outils croisés ¦ Prekrížené náradie ¦ Kryssede verktøy
+forme|Marteau et tournevis ¦ Kladivo a skrutkovač ¦ Hammer og skrutrekker
+forme|Marteau et faucille ¦ Kosák a kladivo ¦ Hammer og sigd
+forme|Clé à tube ¦ Rúrkový kľúč ¦ Pipenøkkel
+forme|Pince ¦ Kliešte ¦ Tang
+forme|Scie circulaire ¦ Kotúčová píla ¦ Sirkelsag
+forme|Cutter ¦ Odlamovací nôž ¦ Tapetkniv
+forme|Équerre et compas ¦ Uholník a kružidlo ¦ Vinkel og passer
+forme|Compas ¦ Kružidlo ¦ Passer
+forme|Mètre ruban ¦ Zvinovací meter ¦ Målebånd
+forme|Niveau à bulle ¦ Vodováha ¦ Vater
+forme|Vis à tête plate ¦ Skrutka s plochou hlavou ¦ Skrue med flatt hode
+forme|Vis à tête ronde ¦ Skrutka s guľatou hlavou ¦ Skrue med rundt hode
+forme|Boulon ¦ Svorník ¦ Bolt
+forme|Écrou ¦ Matica ¦ Mutter
+forme|Rivet ¦ Nit ¦ Nagle
+forme|Fer à souder ¦ Spájkovačka ¦ Loddebolt
+forme|Bêche ¦ Rýľ ¦ Spade
+forme|Hache de guerre ¦ Bojová sekera ¦ Stridsøks
+forme|Crayon à papier ¦ Obyčajná ceruzka ¦ Blyant
+forme|Bombe de peinture ¦ Sprej s farbou ¦ Sprayboks
+forme|Pot de peinture ¦ Plechovka farby ¦ Malingsspann
+forme|Pipette ¦ Pipeta ¦ Pipette
+forme|Dessin ¦ Kresba ¦ Tegning
+forme|Plume de dessin ¦ Kresliace pero ¦ Tegnepenn
+forme|Balance de cuisine ¦ Kuchynská váha ¦ Kjøkkenvekt
+forme|Balance déséquilibrée ¦ Nevyvážené váhy ¦ Vekt i ubalanse
+forme|Pèse-personne ¦ Osobná váha ¦ Badevekt
+forme|Poids ¦ Závažie ¦ Lodd
+forme|Lingots d’or ¦ Zlaté tehličky ¦ Gullbarrer
+forme|Liasses de billets ¦ Zväzky bankoviek ¦ Seddelbunker
+forme|Tirelire ¦ Pokladnička ¦ Sparegris
+forme|Livre sterling ¦ Libra šterlingov ¦ Britisk pund
+forme|Franc ¦ Frank ¦ Franc
+forme|Yen ¦ Jen ¦ Yen
+forme|Rouble ¦ Rubeľ ¦ Rubel
+forme|Roupie indienne ¦ Indická rupia ¦ Indisk rupi
+forme|Chéquier ¦ Šeková knižka ¦ Sjekkhefte
+forme|Carte bancaire ¦ Platobná karta ¦ Bankkort
+forme|Chariot de courses ¦ Nákupný vozík ¦ Handlevogn
