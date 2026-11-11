@@ -415,7 +415,7 @@
         const byRole = role => media.filter(m => (m.role || '') === role);
         const photos = media.filter(m => !['passagers', 'papiers', 'naturalisation'].includes(m.role || ''));
         const row = (label, value) => value ? `<div class="data-row"><dt>${esc(label)}</dt><dd>${nl(value)}</dd></div>` : '';
-        return `<article class="h-record h-voyage"><header><div>${withPerson ? `<div>${personLink(v.person_id, v.person_name)}</div>` : ''}<strong>🚢 ${esc(voyageTitle(v))}</strong>${LC(v.labels)}${v.ship_name ? `<span class="h-ship">à bord du navire <em>${esc(v.ship_name)}</em></span>` : ''}</div>${editable ? tools(`data-h-voyage-edit="${v.id}" data-h-voyage-person="${v.person_id}"`, `data-h-voyage-delete="${v.id}"`, 'ce voyage') : ''}</header>
+        return `<article class="h-record h-voyage"><header><div>${withPerson ? `<div>${personLink(v.person_id, v.person_name)}</div>` : ''}<strong>🚢 ${esc(voyageTitle(v))}</strong>${LC(v.labels)}${v.ship_name ? `<span class="h-ship">${i18n('à bord du navire <em>{name}</em>',{name:esc(v.ship_name)})}</span>` : ''}</div>${editable ? tools(`data-h-voyage-edit="${v.id}" data-h-voyage-person="${v.person_id}"`, `data-h-voyage-delete="${v.id}"`, 'ce voyage') : ''}</header>
             <dl class="data-list">${row('Départ', [v.departure_date, v.departure_port].filter(Boolean).join(' · '))}${row('Escales', v.stopovers)}${row('Arrivée', [v.arrival_date, v.arrival_port].filter(Boolean).join(' · '))}${row('Destination', v.destination)}${row('Motif', v.reason)}
             ${v.companion_people?.length || v.companions ? `<div class="data-row"><dt>Partis ensemble</dt><dd>${[personLink(v.person_id, v.person_name), ...(v.companion_people || []).map(c => personLink(c.person.id, A().personName(c.person), c.relation))].join(', ')}${v.companions ? `<br><small>${nl(v.companions)}</small>` : ''}</dd></div>` : ''}</dl>
             ${v.passenger_list_ref || v.passenger_list_url || v.passenger_list_text || byRole('passagers').length ? `<details class="h-section" open><summary>Liste de passagers</summary>${v.passenger_list_ref ? `<p><strong>Référence :</strong> ${esc(v.passenger_list_ref)}</p>` : ''}${v.passenger_list_url ? `<p><a href="${esc(v.passenger_list_url)}" target="_blank" rel="noopener noreferrer">Voir la liste en ligne ↗</a></p>` : ''}${thumbs('voyage-pass-' + v.id, byRole('passagers'))}${v.passenger_list_text ? `<p class="h-transcription">${nl(v.passenger_list_text)}</p>` : ''}</details>` : ''}
@@ -595,7 +595,7 @@
             ${c.blazon ? `<p class="h-blazon">« ${esc(c.blazon)} »</p>` : '<p class="muted">Blasonnement à écrire.</p>'}
             ${c.motto ? `<p class="h-motto">Devise : <em>${esc(c.motto)}</em></p>` : ''}
             ${!compact && c.origin_text ? `<p class="muted">${nl(c.origin_text)}</p>` : ''}
-            ${others.length ? `<div class="collection-holder">${currentPersonId ? 'Aussi porté par' : 'Porté par'} : ${others.map(l => chip(l.person) + (l.note ? ` <small>(${esc(l.note)})</small>` : '')).join(' · ')}</div>` : ''}
+            ${others.length ? `<div class="collection-holder">${currentPersonId ? i18n('Aussi porté par') : i18n('Porté par')} : ${others.map(l => chip(l.person) + (l.note ? ` <small>(${esc(l.note)})</small>` : '')).join(' · ')}</div>` : ''}
             <div class="page-actions compact">${tools(`data-h-coat-edit="${c.id}"`, `data-h-coat-delete="${c.id}" data-h-coat-person="${Number(currentPersonId) || 0}"`, 'ces armoiries')}</div></div></article>`;
     }
     function registerCoatMedia(rows) { rows.forEach(c => { const img = coatImage(c); if (img) mediaGroups['coat-' + c.id] = (c.media || []).filter(m => m.media_type === 'image'); }); }
@@ -655,7 +655,7 @@
         const [data, detail] = await Promise.all([api('coats_of_arms'), api('person', {id: personId})]);
         const person = detail.person, coats = (data.coats || []).filter(c => !(c.people || []).some(l => Number(l.person.id) === Number(personId)));
         openDialog({
-            eyebrow: 'ARMOIRIES', title: 'Relier des armoiries à ' + A().personName(person), submitLabel: 'Relier',
+            eyebrow: 'ARMOIRIES', title: i18n('Relier des armoiries à {name}', {name: A().personName(person)}), submitLabel: 'Relier',
             body: `${coats.length ? `<label class="h-block-label">Armoiries déjà enregistrées<select name="coat_id"><option value="">— Choisir —</option>${coats.map(c => `<option value="${c.id}">${esc(c.title)}${c.blazon ? ' — ' + esc(c.blazon.slice(0, 60)) : ''}</option>`).join('')}</select></label>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📭</span><span class="empty-line-text">Aucune autre armoirie enregistrée.</span></p>'}
                 <label class="h-block-label">Rôle (facultatif)<input name="note" placeholder="Chef de nom, branche cadette…"></label>
                 <p><button type="button" class="button secondary" data-h-coat-new>Créer de nouvelles armoiries…</button></p>`,
@@ -698,7 +698,7 @@
     }
     function jmoLinks(u, date = '') {
         return `<span class="h-jmo-links">${u.jmo_url ? `<a href="${esc(u.jmo_url)}" target="_blank" rel="noopener noreferrer">📖 Journal de marche${u.jmo_cote ? ' (' + esc(u.jmo_cote) + ')' : ''} ↗</a>` : `<a href="${esc(jmoSearch(u.unit_name))}" target="_blank" rel="noopener noreferrer">📖 Trouver le journal de marche ↗</a>`}
-            <a href="${MDH}" target="_blank" rel="noopener noreferrer">Mémoire des hommes ↗</a><a href="${esc(gallicaHistory(u.unit_name))}" target="_blank" rel="noopener noreferrer">Historique du régiment (Gallica) ↗</a>${date ? `<small class="muted">Dans le journal, va à la page du ${esc(dateFr(date))}.</small>` : ''}</span>`;
+            <a href="${MDH}" target="_blank" rel="noopener noreferrer">Mémoire des hommes ↗</a><a href="${esc(gallicaHistory(u.unit_name))}" target="_blank" rel="noopener noreferrer">Historique du régiment (Gallica) ↗</a>${date ? `<small class="muted">${i18n('Dans le journal, va à la page du {date}.', {date: esc(dateFr(date))})}</small>` : ''}</span>`;
     }
     function poiluHtml(data, person) {
         const units = data.units || [], events = data.events || [];
@@ -786,7 +786,7 @@
     ext.personBlocks.family_papers_block = (index, detail) => {
         const rows = detail.heritage?.family_papers || [];
         if (!rows.length) return '';
-        return card(index, 'Papiers de famille (originaux)', rows.length, `<ul class="h-paper-mini">${rows.map(r => `<li><span class="h-paper-number">${esc(r.class_number)}</span> <strong>${esc(r.title)}</strong>${LC(r.labels)}${r.date_text ? ` <small>${esc(r.date_text)}</small>` : ''}<br><small>📦 ${esc(r.storage_location || 'rangement à préciser')}${r.holder_text ? ' · chez ' + esc(r.holder_text) : ''}</small> ${tools(`data-h-open-list="family_papers" data-h-edit="${r.id}"`, `data-h-paper-delete="${r.id}"`, 'ce document')} ${thumbs('paper-' + r.id, r.media)}</li>`).join('')}</ul>`, 'span-6', '<button type="button" class="button small secondary" data-h-open-list="family_papers">Inventaire</button>');
+        return card(index, 'Papiers de famille (originaux)', rows.length, `<ul class="h-paper-mini">${rows.map(r => `<li><span class="h-paper-number">${esc(r.class_number)}</span> <strong>${esc(r.title)}</strong>${LC(r.labels)}${r.date_text ? ` <small>${esc(r.date_text)}</small>` : ''}<br><small>📦 ${esc(r.storage_location || i18n('rangement à préciser'))}${r.holder_text ? ' · ' + i18n('chez {name}', {name: esc(r.holder_text)}) : ''}</small> ${tools(`data-h-open-list="family_papers" data-h-edit="${r.id}"`, `data-h-paper-delete="${r.id}"`, 'ce document')} ${thumbs('paper-' + r.id, r.media)}</li>`).join('')}</ul>`, 'span-6', '<button type="button" class="button small secondary" data-h-open-list="family_papers">Inventaire</button>');
     };
 
     /* ═══════════════════════ LISTES ═══════════════════════ */
@@ -1115,7 +1115,7 @@
         const form = A().$('#h-paper-form');
         bindMediaEditor(form); form.scrollIntoView({block: 'start'});
         form.querySelector('[data-h-paper-cancel]').addEventListener('click', () => A().renderList());
-        form.querySelector('[data-h-paper-delete]')?.addEventListener('click', async () => { if (!await A().confirmBox('', {title: `Supprimer « ${p.title} » de l’inventaire ?`, okLabel: 'Supprimer le document'})) return; await api('delete_family_paper', {}, {method: 'POST', body: {id: p.id}}); toast('Supprimé.'); A().renderList(); });
+        form.querySelector('[data-h-paper-delete]')?.addEventListener('click', async () => { if (!await A().confirmBox('', {title: i18n('Supprimer « {name} » de l’inventaire ?', {name: p.title}), okLabel: 'Supprimer le document'})) return; await api('delete_family_paper', {}, {method: 'POST', body: {id: p.id}}); toast('Supprimé.'); A().renderList(); });
         form.addEventListener('submit', async event => {
             event.preventDefault();
             const v = values(form);
@@ -1203,7 +1203,7 @@
             const pid = p => Number(p && typeof p === 'object' ? p.id : p) || 0;
             const card = t => ({thumb: `<span class="ui-card-ico">${t.status === 'done' ? '✅' : '🚗'}</span>`, name: t.title || 'Sans titre', open: `data-h-trip-open="${t.id}"`,
                 lines: [[t.date_start ? dateFr(t.date_start) + (t.date_end && t.date_end !== t.date_start ? ' → ' + dateFr(t.date_end) : '') : i18n('dates à fixer'), t.start_place ? i18n('départ de {nm}', {nm: t.start_place}) : ''].filter(Boolean).join(' · '), t.people_names || (t.notes || '').slice(0, 90)],
-                badges: [Number(t.stop_count) ? {text: `${fmt(t.done_count)} / ${plural(Number(t.stop_count), 'étape', 'étapes')}`, kind: t.status === 'done' || Number(t.done_count) === Number(t.stop_count) ? 'green' : 'blue'} : {text: 'sans étape', kind: 'grey'}, ...(t.labels || []).slice(0, 2).map(l => ({text: l.name, kind: 'grey'}))],
+                badges: [Number(t.stop_count) ? {text: `${fmt(t.done_count)} / ${plural(Number(t.stop_count), 'étape', 'étapes')}`, kind: t.status === 'done' || Number(t.done_count) === Number(t.stop_count) ? 'green' : 'blue'} : {text: i18n('sans étape'), kind: 'grey'}, ...(t.labels || []).slice(0, 2).map(l => ({text: l.name, kind: 'grey'}))],
                 menu: [`<button type="button" data-h-trip-status="${t.id}" data-status="${t.status === 'done' ? 'todo' : 'done'}">${t.status === 'done' ? '↺ Remettre à faire' : '✓ Marquer fait'}</button>`]});
             const paint = () => {
                 const s = bar.state, f = s.filters, words = fold(s.q).split(/\s+/).filter(Boolean), stt = f.status || [], per = f.person, lab = f.label;
@@ -1230,7 +1230,7 @@
     };
     function tripFormHtml(t) {
         const people = t.people || [], rowsById = Object.fromEntries((t.people_rows || []).map(p => [p.id, p]));
-        const row = (p = {}) => `<div class="transfer-row h-trip-person">${personPick('person_id', p.id || null)}<select name="mode"><option value="person" ${p.mode === 'person' ? 'selected' : ''}>cette personne seulement</option><option value="ascendants" ${p.mode === 'ascendants' || !p.mode ? 'selected' : ''}>et ses ascendants</option><option value="descendants" ${p.mode === 'descendants' ? 'selected' : ''}>et ses descendants</option></select><label class="h-inline">sur <input type="number" name="generations" min="1" max="12" value="${Number(p.generations) || 4}" class="h-narrow"> générations</label><button type="button" class="button small secondary" data-h-row-remove aria-label="Retirer">✕</button></div>`;
+        const row = (p = {}) => `<div class="transfer-row h-trip-person">${personPick('person_id', p.id || null)}<select name="mode"><option value="person" ${p.mode === 'person' ? 'selected' : ''}>cette personne seulement</option><option value="ascendants" ${p.mode === 'ascendants' || !p.mode ? 'selected' : ''}>et ses ascendants</option><option value="descendants" ${p.mode === 'descendants' ? 'selected' : ''}>et ses descendants</option></select><label class="h-inline">${i18n('sur')} <input type="number" name="generations" min="1" max="12" value="${Number(p.generations) || 4}" class="h-narrow"> ${i18n('générations')}</label><button type="button" class="button small secondary" data-h-row-remove aria-label="Retirer">✕</button></div>`;
         return `<form class="maintenance-panel collection-form" id="h-trip-form"><h3>${t.id ? 'Modifier le circuit' : 'Nouveau circuit'}</h3>
             <div class="form-grid"><label>Nom<input name="title" required value="${esc(t.title || '')}" placeholder="Sur les traces des Dupont en Corrèze"></label><label>Point de départ<input name="start_place" value="${esc(t.start_place || '')}" placeholder="Brive-la-Gaillarde (hôtel, gîte…)"></label>
             <label>Du<input type="date" name="date_start" value="${esc(t.date_start || '')}"></label><label>Au<input type="date" name="date_end" value="${esc(t.date_end || '')}"></label>
@@ -1251,7 +1251,7 @@
         const paintDrafts = () => { if (!draftBox) return;
             const sorted = drafts.map((d, i) => [d, i]).sort((a, b) => (Number(a[0].day) || 1) - (Number(b[0].day) || 1));
             draftBox.innerHTML = sorted.map(([d, i]) => { const x = d.extra || {}, n = (x.checklist || []).length;
-                return `<div class="h-trip-draft"><span class="h-trip-draft-day">Jour ${Number(d.day) || 1}</span><div><strong>${esc(d.title || 'Étape sans titre')}</strong> <small class="muted">${esc(tripKinds[d.kind] || '')}</small><div class="muted">${esc([d.place_text, x.time_from && 'arrivée ' + x.time_from, x.transport, x.goals && 'je cherche : ' + x.goals, n && n + ' ligne' + (n > 1 ? 's' : '') + ' à cocher'].filter(Boolean).join(' · '))}</div></div>
+                return `<div class="h-trip-draft"><span class="h-trip-draft-day">Jour ${Number(d.day) || 1}</span><div><strong>${esc(d.title || 'Étape sans titre')}</strong> <small class="muted">${esc(tripKinds[d.kind] || '')}</small><div class="muted">${esc([d.place_text, x.time_from && i18n('arrivée {t}', {t: x.time_from}), x.transport, x.goals && i18n('je cherche : {x}', {x: x.goals}), n && i18n('{n} à cocher', {n: plural(n, 'ligne', 'lignes')})].filter(Boolean).join(' · '))}</div></div>
                     <span class="h-trip-draft-tools"><button type="button" class="button small secondary" data-h-draft-edit="${i}">Modifier</button><button type="button" class="icon-button" data-h-draft-del="${i}" title="Retirer">✕</button></span></div>`; }).join('') || A().emptyState({text: 'Aucune étape pour l’instant', icon: '📍', action: {label: '＋ Étape', attrs: 'data-h-draft-add'}}); };
         const editDraft = i => { const d = i === null ? {kind: 'autre', day: drafts.length ? Math.max(...drafts.map(x => Number(x.day) || 1)) : 1, _draft: i !== null} : {...drafts[i], _draft: true};
             openStopDialog(d, draftNames(d.extra || {}), {onSave: async (v, extra) => { const row = {...v, lat: v.place_text_lat, lon: v.place_text_lon, extra}; if (i === null) drafts.push(row); else drafts[i] = row; paintDrafts(); }}); };
@@ -1270,7 +1270,7 @@
                 const saved = await api('save_field_trip', {}, {method: 'POST', body: {id: t.id, title: v.title, start_place: v.start_place, date_start: v.date_start, date_end: v.date_end, stops_per_day: v.stops_per_day, notes: v.notes, status: t.status || 'todo', people, generate: generate ? 1 : 0}});
                 let failed = 0;
                 for (const d of drafts) { try { await api('save_field_trip_stop', {}, {method: 'POST', body: {...d, id: 0, trip_id: saved.result.id, done: 0}}); } catch (_) { failed++; } }
-                if (failed) toast(`${plural(failed, 'étape non enregistrée', 'étapes non enregistrées')} : ajoute-les depuis le circuit.`, 'error');
+                if (failed) toast(i18n('{n} : ajoute-les depuis le circuit.', {n: plural(failed, 'étape non enregistrée', 'étapes non enregistrées')}), 'error');
                 else if (saved.result.warning) toast('Circuit enregistré. ' + saved.result.warning, 'error');
                 else toast(generate ? 'Circuit préparé.' : 'Circuit enregistré.');
                 ext.lists.field_trips(++S().workspaceToken, {trip: saved.result.id});
@@ -1354,7 +1354,7 @@
                 ${res || x.findings ? `<div class="h-stop-x h-stop-result"><span title="Résultat">📝</span> ${res ? `<strong>${res}</strong> ` : ''}${nl(x.findings || '')}</div>` : ''}`;
         };
         const stopHtml = s => { k++; return `<li class="h-stop ${Number(s.done) ? 'is-done' : ''}"><label class="h-stop-check"><input type="checkbox" data-h-stop-done="${s.id}" ${Number(s.done) ? 'checked' : ''}><span class="h-stop-n">${k}</span></label>
-            <div class="h-stop-body"><strong>${tripIcons[s.kind] || '📍'} ${esc(s.title || tripKinds[s.kind])}</strong> <small class="muted">${esc(s.place_text)}${s.address ? ' · ' + esc(s.address) : ''}${finite(s.lat) ? '' : ' · ⚠ pas de coordonnées'}</small>
+            <div class="h-stop-body"><strong>${tripIcons[s.kind] || '📍'} ${esc(s.title || tripKinds[s.kind])}</strong> <small class="muted">${esc(s.place_text)}${s.address ? ' · ' + esc(s.address) : ''}${finite(s.lat) ? '' : ' · ⚠ ' + i18n('pas de coordonnées')}</small>
             ${s.people_text ? `<div class="h-stop-people">${nl(s.people_text)}</div>` : ''}${s.to_photograph ? `<div class="h-stop-photo">📷 ${nl(s.to_photograph)}</div>` : ''}${s.opening_hours ? `<div class="h-stop-hours">🕘 ${nl(s.opening_hours)}</div>` : ''}${stopExtraHtml(s)}${s.notes ? `<div class="muted">${nl(s.notes)}</div>` : ''}</div>
             <div class="h-stop-tools"><button type="button" class="icon-button" data-h-stop-move="${s.id}" data-dir="-1" title="Monter">↑</button><button type="button" class="icon-button" data-h-stop-move="${s.id}" data-dir="1" title="Descendre">↓</button><select data-h-stop-day="${s.id}" title="Jour">${[...dayNums, maxDay + 1].map(d => `<option value="${d}" ${d === Number(s.day) ? 'selected' : ''}>Jour ${d}</option>`).join('')}</select>${tools(`data-h-stop-edit="${s.id}"`, `data-h-stop-delete="${s.id}"`, 'cette étape')}</div></li>`; };
         A().$('#workspace').innerHTML = `<section class="page collection-page h-trip-page">${pageHeader(t.status === 'done' ? 'CIRCUIT FAIT' : 'CIRCUIT', t.title, `${esc([t.date_start ? dateFr(t.date_start) : '', t.date_end && t.date_end !== t.date_start ? '→ ' + dateFr(t.date_end) : ''].join(' '))}${t.start_place ? ` · ${i18n('départ de {nm}', {nm: esc(t.start_place)})}` : ''} · ${i18n('{a} sur {b}', {a: plural(t.stops.length, 'étape', 'étapes'), b: plural(dayNums.length, 'jour', 'jours')})} · ${i18n('pour {list}', {list: (t.people_rows || []).map(p => esc(A().personName(p))).join(', ') || '—'})}`,
@@ -1370,7 +1370,7 @@
         ws.querySelector('[data-h-trip-regen]').addEventListener('click', async () => { if (!await A().confirmBox('Les étapes non faites sont remplacées.', {title: 'Préparer à nouveau les étapes ?', okLabel: 'Remplacer les étapes'})) return; try { const r = await api('generate_field_trip', {}, {method: 'POST', body: {id}}); toast(`${A().plural(r.result.stops, 'étape')} sur ${A().plural(r.result.days, 'jour')}.`); reload(); } catch (error) { toast(error.message, 'error'); } });
         ws.querySelector('[data-h-trip-print]').addEventListener('click', () => printTrip(t, days, dayNums, dayDate));
         ws.querySelector('[data-h-trip-done]').addEventListener('click', async () => { const status = t.status === 'done' ? 'todo' : 'done'; await api('set_field_trip_status', {}, {method: 'POST', body: {id, status}}); toast(status === 'done' ? 'Circuit marqué fait.' : 'Circuit remis à faire.'); reload(); });
-        ws.querySelector('[data-h-trip-delete]').addEventListener('click', async () => { if (!await A().confirmBox('', {title: `Supprimer le circuit « ${t.title} » ?`, okLabel: 'Supprimer le circuit'})) return; await api('delete_field_trip', {}, {method: 'POST', body: {id}}); toast('Circuit supprimé.'); ext.lists.field_trips(++S().workspaceToken, {back: true}); });
+        ws.querySelector('[data-h-trip-delete]').addEventListener('click', async () => { if (!await A().confirmBox('', {title: i18n('Supprimer le circuit « {name} » ?', {name: t.title}), okLabel: 'Supprimer le circuit'})) return; await api('delete_field_trip', {}, {method: 'POST', body: {id}}); toast('Circuit supprimé.'); ext.lists.field_trips(++S().workspaceToken, {back: true}); });
         ws.querySelectorAll('[data-h-stop-done]').forEach(c => c.addEventListener('change', async () => { await api('set_field_trip_stop_done', {}, {method: 'POST', body: {id: c.dataset.hStopDone, done: c.checked ? 1 : 0}}); c.closest('.h-stop').classList.toggle('is-done', c.checked); }));
         ws.querySelectorAll('[data-h-stop-ck]').forEach(c => c.addEventListener('change', async () => { try { await api('set_field_trip_stop_check', {}, {method: 'POST', body: {id: c.dataset.hStopCk, index: Number(c.dataset.i), done: c.checked ? 1 : 0}}); const st = t.stops.find(x => Number(x.id) === Number(c.dataset.hStopCk)); if (st?.extra?.checklist?.[c.dataset.i]) st.extra.checklist[c.dataset.i].done = c.checked ? 1 : 0; } catch (error) { c.checked = !c.checked; toast(error.message, 'error'); } }));
         ws.querySelectorAll('[data-h-stop-move]').forEach(b => b.addEventListener('click', async () => { await api('move_field_trip_stop', {}, {method: 'POST', body: {id: b.dataset.hStopMove, direction: Number(b.dataset.dir)}}); reload(); }));
@@ -1404,7 +1404,7 @@
     function printStopExtra(x) {
         const p = (label, v) => v ? `<p><b>${label} :</b> ${nl(v)}</p>` : '';
         return p('Horaires', [x.time_from, x.time_to].filter(Boolean).join(' → ') + (x.duration ? ` (${x.duration})` : '')) + p('Transport, accès', [x.transport, x.access].filter(Boolean).join(' — '))
-            + p('Contact', [x.contact_name, x.contact_phone, x.contact_email].filter(Boolean).join(' · ')) + p('Rendez-vous', x.booking ? x.booking + (x.booking_done ? ' (réservé)' : ' (à réserver)') : '')
+            + p('Contact', [x.contact_name, x.contact_phone, x.contact_email].filter(Boolean).join(' · ')) + p('Rendez-vous', x.booking ? x.booking + ' ' + (x.booking_done ? i18n('(réservé)') : i18n('(à réserver)')) : '')
             + p('Coût', x.cost) + p('Documents', x.documents) + p('Matériel', x.equipment) + p('Photographie', x.photo_rules) + p('Cotes', x.references) + p('Je cherche', x.goals)
             + ((x.checklist || []).length ? `<ul class="ck">${x.checklist.map(c => `<li>${c.done ? '☑' : '☐'} ${esc(c.text)}</li>`).join('')}</ul>` : '');
     }
@@ -1556,13 +1556,13 @@
             <label>Image (photo ou scan du plan)<input type="file" name="image" accept="image/*"></label><label>Transparence sur la carte<input type="range" name="opacity" min="10" max="100" value="${Number(ed.opacity) || 70}"></label>
             <label class="span-2">Notes, cote<input name="notes" value="${esc(ed.notes)}" placeholder="AD87, 3 P 1234"></label></div>
             ${LP('old_map', ed.labels)}<div class="page-actions action-zone"><button class="button" type="submit">Enregistrer</button>${ed.id ? `<button class="button secondary" type="button" data-h-oldmap-show>Voir sur la carte</button><button class="button secondary danger" type="button" data-h-oldmap-delete>Supprimer</button>` : ''}</div></form>
-            ${ed.filename ? `<div class="h-calib-help maintenance-panel"><p><b>Caler la carte :</b> 1. choisis un point ci-dessous ; 2. clique sur ce point dans <b>ton image</b> (à gauche) ; 3. clique au même endroit sur <b>la carte d’aujourd’hui</b> (à droite). Trois points bien écartés suffisent (plus, c’est encore mieux).<br><b>Placer une maison :</b> clique « Placer une maison », puis sur l’image.</p>
+            ${ed.filename ? `<div class="h-calib-help maintenance-panel"><p>${i18n('<b>Caler la carte :</b> 1. choisis un point ci-dessous ; 2. clique sur ce point dans <b>ton image</b> (à gauche) ; 3. clique au même endroit sur <b>la carte d’aujourd’hui</b> (à droite). Trois points bien écartés suffisent (plus, c’est encore mieux).<br><b>Placer une maison :</b> clique « Placer une maison », puis sur l’image.')}</p>
                 <div class="h-calib-tools"><span data-h-calib-points></span><button type="button" class="button small secondary" data-h-calib-add>＋ Point</button><button type="button" class="button small secondary" data-h-house-mode>🏠 Placer une maison</button><label class="ui-toggle h-inline"><input type="checkbox" data-h-calib-preview checked><i></i><label class="ui-toggle h-inline"><input type="checkbox" data-h-calib-preview checked><i></i><label class="ui-toggle h-inline"><input type="checkbox" data-h-calib-preview checked><i></i>Aperçu superposé</label><span data-h-calib-quality class="muted"></span></div></div>
                 <div class="h-calib"><div class="h-calib-image"><div class="h-calib-imgwrap"><img src="media/${encodeURIComponent(ed.filename)}" alt="" draggable="false"><div class="h-calib-pins"></div></div></div><div class="h-calib-map"></div></div>
                 <div class="maintenance-panel"><h4>Maisons placées</h4><ul class="h-houses"></ul></div>` : '<p class="muted">Enregistre d’abord la carte avec son image ; tu pourras ensuite la caler.</p>'}</section>`;
         const ws = A().$('#workspace'), form = ws.querySelector('#h-oldmap-form');
         ws.querySelector('[data-h-oldmap-back]').addEventListener('click', () => ext.lists.old_maps(++S().workspaceToken));
-        ws.querySelector('[data-h-oldmap-delete]')?.addEventListener('click', async () => { if (!await A().confirmBox('', {title: `Supprimer la carte « ${ed.title} » ?`, okLabel: 'Supprimer la carte'})) return; await api('delete_old_map', {}, {method: 'POST', body: {id: ed.id}}); toast('Carte supprimée.'); ext.lists.old_maps(++S().workspaceToken); });
+        ws.querySelector('[data-h-oldmap-delete]')?.addEventListener('click', async () => { if (!await A().confirmBox('', {title: i18n('Supprimer la carte « {name} » ?', {name: ed.title}), okLabel: 'Supprimer la carte'})) return; await api('delete_old_map', {}, {method: 'POST', body: {id: ed.id}}); toast('Carte supprimée.'); ext.lists.old_maps(++S().workspaceToken); });
         ws.querySelector('[data-h-oldmap-show]')?.addEventListener('click', () => showOldMapOnMainMap(ed.id));
         let active = ed.control_points.findIndex(p => !finite(p.u) || !finite(p.lat));
         if (active < 0) active = ed.control_points.length < 3 ? ed.control_points.length : 0;
@@ -1716,7 +1716,7 @@
             try {
                 const r = await api('saved_search_results', {criteria: JSON.stringify(criteria), id});
                 const newOnes = r.people.filter(p => p.is_new).length;
-                box.innerHTML = `<h3>${plural(r.count, 'fiche trouvée', 'fiches trouvées')}${newOnes ? ` <span class="h-new-badge">${newOnes} nouvelle${newOnes > 1 ? 's' : ''}</span>` : ''}</h3><p class="muted">${esc(r.description)}</p>
+                box.innerHTML = `<h3>${plural(r.count, 'fiche trouvée', 'fiches trouvées')}${newOnes ? ` <span class="h-new-badge">${plural(newOnes, 'nouvelle', 'nouvelles')}</span>` : ''}</h3><p class="muted">${esc(r.description)}</p>
                     ${r.people.length ? `<table class="data-table"><thead><tr><th>Personne</th><th>Naissance</th><th>Décès</th><th></th></tr></thead><tbody>${r.people.map(p => `<tr class="${p.is_new ? 'is-new' : ''}"><td>${personLink(p.id, A().personName(p))}</td><td>${esc(p.birth_date || p.birth_year || '')}</td><td>${esc(p.death_date || p.death_year || '')}</td><td>${p.is_new ? '<span class="h-new-badge">nouvelle</span>' : ''}</td></tr>`).join('')}</tbody></table>${r.count > r.people.length ? `<p class="muted">${i18n('Seules les {n} premières sont affichées.', {n: r.people.length})}</p>` : ''}` : empty('Aucune fiche ne répond à ces critères.')}`;
             } catch (error) { box.innerHTML = empty(error.message); }
         };
@@ -1748,7 +1748,7 @@
         const fresh = (data.searches || []).filter(s => s.new_count > (notified[s.id] || 0));
         fresh.forEach(s => { notified[s.id] = s.new_count; });
         try { sessionStorage.setItem('lcnda-saved-search-notified', JSON.stringify(notified)); } catch (_) {}
-        if (fresh.length) toast(fresh.map(s => `🔎 « ${s.name} » : ${plural(s.new_count, 'nouvelle fiche', 'nouvelles fiches')}`).join(' · ') + ' (Recherche → Recherches enregistrées)');
+        if (fresh.length) toast(fresh.map(s => i18n('🔎 « {name} » : {n}', {name: s.name, n: plural(s.new_count, 'nouvelle fiche', 'nouvelles fiches')})).join(' · ') + ' ' + i18n('(Recherche → Recherches enregistrées)'));
     }
     const WATCHED = /^(import_package|import_local_path|merge_gedcom_apply|save_person|merge_persons|merge_duplicates|add_relation|save_event|add_event|bulk_)/;
     window.addEventListener('lcnda:data-changed', event => {
@@ -1776,7 +1776,7 @@
         const from = meta ? Math.max(meta.from, minYear) : minYear, to = meta ? meta.to : new Date().getFullYear();
         const phrase = r => {
             if (!meta) return '';
-            if (!r.peak_year) return `<em>${esc(r.name)}</em> : prénom très rare en France (moins de 3 naissances par an), absent du fichier.`;
+            if (!r.peak_year) return i18n('<em>{name}</em> : prénom très rare en France (moins de 3 naissances par an), absent du fichier.', {name: esc(r.name)});
             const given = r.family_years.map(y => { const diff = y - r.peak_year; return `${y} ${Math.abs(diff) <= 2 ? i18n('(en pleine mode)') : diff < 0 ? i18n('({n} ans avant le pic : en avance)', {n: -diff}) : i18n('({n} ans après le pic)', {n: diff})}`; });
             return i18n('<strong>{name}</strong> : au sommet en France vers <strong>{year}</strong> ({n} bébés). Ta famille l’a donné en {list}.', {name: esc(r.name), year: String(r.peak_year), n: fmt(r.peak_count), list: given.join(', ')});
         };
@@ -1822,8 +1822,8 @@
         const genRows = Object.entries(gens).sort((a, b) => b[0] - a[0]).map(([g, list]) => ({g: Number(g), avg: list.reduce((s, r) => s + r.days, 0) / list.length, list}));
         const maxG = Math.max(1, ...genRows.map(g => g.avg));
         A().$('#workspace').innerHTML = `<section class="page">${pageHeader('STATISTIQUES', 'Richesse d’après les inventaires après décès', 'Le total net de chaque inventaire, converti en journées de travail d’un journalier de province (même convertisseur que Réglages → Calendrier / mesures). Ordre de grandeur pour comparer les générations entre elles, pas un montant exact.', '<button type="button" class="button secondary" data-h-open-list="probate">Saisir un inventaire</button>')}
-            ${genRows.length ? `<section class="maintenance-panel"><h3>Par génération (numéros Sosa)</h3><table class="data-table"><thead><tr><th>Génération</th><th>Inventaires</th><th>Moyenne</th><th></th></tr></thead><tbody>${genRows.map(g => `<tr><td>${g.g}<sup>e</sup> génération</td><td>${g.list.map(r => personLink(r.person_id, r.person_name, r.year || '')).join('<br>')}</td><td>${fmt(g.avg)} journées<br><small>${fmt(g.avg / 250, 1)} années de travail</small></td><td class="h-bar-cell"><span class="h-bar" style="width:${Math.round(100 * g.avg / maxG)}%"></span></td></tr>`).join('')}</tbody></table></section>` : ''}
-            ${rows.length ? `<section class="maintenance-panel"><h3>Chaque inventaire</h3><table class="data-table"><thead><tr><th>Année</th><th>Personne</th><th>Total net</th><th>Journées de travail</th><th></th></tr></thead><tbody>${rows.map(r => `<tr><td>${esc(r.year || '?')}</td><td>${personLink(r.person_id, r.person_name)}${r.gen ? ` <small>(gén. ${r.gen})</small>` : ''}</td><td>${esc(moneyText(r.net, r.currency))}</td><td>${r.days ? `${fmt(r.days)}<br><small>${fmt(r.days / 250, 1)} années</small>` : '<small>année inconnue</small>'}</td><td class="h-bar-cell">${r.days ? `<span class="h-bar" style="width:${Math.round(100 * r.days / max)}%"></span>` : ''}</td></tr>`).join('')}</tbody></table></section>` : empty('Aucun inventaire après décès. Saisis-en un dans Listes → Inventaires après décès.')}</section>`;
+            ${genRows.length ? `<section class="maintenance-panel"><h3>Par génération (numéros Sosa)</h3><table class="data-table"><thead><tr><th>Génération</th><th>Inventaires</th><th>Moyenne</th><th></th></tr></thead><tbody>${genRows.map(g => `<tr><td>${i18n('{n}<sup>e</sup> génération', {n: g.g})}</td><td>${g.list.map(r => personLink(r.person_id, r.person_name, r.year || '')).join('<br>')}</td><td>${i18n('{n} journées', {n: fmt(g.avg)})}<br><small>${i18n('{n} années de travail', {n: fmt(g.avg / 250, 1)})}</small></td><td class="h-bar-cell"><span class="h-bar" style="width:${Math.round(100 * g.avg / maxG)}%"></span></td></tr>`).join('')}</tbody></table></section>` : ''}
+            ${rows.length ? `<section class="maintenance-panel"><h3>Chaque inventaire</h3><table class="data-table"><thead><tr><th>Année</th><th>Personne</th><th>Total net</th><th>Journées de travail</th><th></th></tr></thead><tbody>${rows.map(r => `<tr><td>${esc(r.year || '?')}</td><td>${personLink(r.person_id, r.person_name)}${r.gen ? ` <small>${i18n('(gén. {n})', {n: r.gen})}</small>` : ''}</td><td>${esc(moneyText(r.net, r.currency))}</td><td>${r.days ? `${fmt(r.days)}<br><small>${i18n('{n} années', {n: fmt(r.days / 250, 1)})}</small>` : '<small>année inconnue</small>'}</td><td class="h-bar-cell">${r.days ? `<span class="h-bar" style="width:${Math.round(100 * r.days / max)}%"></span>` : ''}</td></tr>`).join('')}</tbody></table></section>` : empty('Aucun inventaire après décès. Saisis-en un dans Listes → Inventaires après décès.')}</section>`;
     };
 
     /* ═══════════════════════ WIDGETS DU TABLEAU DE BORD ═══════════════════════ */
@@ -1890,7 +1890,7 @@
         if (event.target.closest?.('[data-h-offsite-settings]')) { S().maintenanceTab = 'export'; A().setModule('maintenance'); setTimeout(() => document.getElementById('h-offsite-panel')?.scrollIntoView({block: 'start'}), 400); }
     });
     ext.exportPanels.push(() => `<section class="maintenance-panel" id="h-offsite-panel"><h3>🛟 Copie hors de cet ordinateur</h3>
-        <p>La sauvegarde automatique reste sur le même disque : si l’ordinateur est volé ou tombe en panne, tout part avec lui. Choisis un ou plusieurs dossiers <b>ailleurs</b> : disque externe, clé USB, dossier iCloud Drive, Dropbox, OneDrive… L’app y copie la base et te prévient quand la dernière copie devient trop ancienne.</p>
+        <p>${i18n('La sauvegarde automatique reste sur le même disque : si l’ordinateur est volé ou tombe en panne, tout part avec lui. Choisis un ou plusieurs dossiers <b>ailleurs</b> : disque externe, clé USB, dossier iCloud Drive, Dropbox, OneDrive… L’app y copie la base et te prévient quand la dernière copie devient trop ancienne.')}</p>
         <div data-h-offsite-body>${window.LCNDA_UI.spinner('Chargement…')}</div></section>`);
     ext.afterExport.push(async () => {
         const box = document.querySelector('[data-h-offsite-body]');
@@ -1933,7 +1933,7 @@
     /* ═══════════════════════ 👨‍👩‍👧 EXPORT D'UNE SEULE BRANCHE ═══════════════════════ */
 
     ext.exportPanels.push(() => `<section class="maintenance-panel" id="h-branch-export"><h3>👨‍👩‍👧 GEDCOM d’une seule branche</h3>
-        <p>Pour un cousin qui ne s’intéresse qu’à sa branche : un GEDCOM limité aux <b>ascendants d’une personne</b>, ou aux <b>descendants d’un couple</b>, au lieu de toute ta base. Combine-le avec « Pour partager » pour masquer les vivants.</p>
+        <p>${i18n('Pour un cousin qui ne s’intéresse qu’à sa branche : un GEDCOM limité aux <b>ascendants d’une personne</b>, ou aux <b>descendants d’un couple</b>, au lieu de toute ta base. Combine-le avec « Pour partager » pour masquer les vivants.')}</p>
         <form id="h-branch-form" class="form-grid"><label>Branche<select name="branch_mode"><option value="ascendants">Ascendants d’une personne</option><option value="descendants">Descendants d’un couple (ou d’une personne)</option></select></label>
             <div><span class="pk-lab">Personne</span>${personPick('branch_person', null)}</div>
             <div data-h-partner><span class="pk-lab">Conjoint (pour un couple)</span>${personPick('branch_partner', null)}</div>

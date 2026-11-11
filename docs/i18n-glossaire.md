@@ -617,3 +617,18 @@ Les noms par défaut des joueurs (« Toi », « Nord »…) sont écrits dans la
 Les textes du moteur des trajets (`app-cartes-outils-core.js`, resté en français pour Node et ses tests) sont refaits dans la
 langue choisie par `heritage-cartes-outils.js` (`durT`, `kmT`, `sentenceT`) ; en français, ceux du moteur s’affichent tels quels.
 Noms des provinces et des départements de 1790, sociétés de test, titres des sources (Légifrance, INSEE…) : des noms propres, non traduits.
+
+## Zone « reste3 » (app.js, heritage.js, heritage-more.js, app-maintenance.js)
+
+| Français | English | Español | Deutsch | Italiano | Português | Polski | Nederlands |
+|---|---|---|---|---|---|---|---|
+| circuit (sur les traces des ancêtres) | trip | circuito | Rundreise | circuito | circuito | wycieczka | tocht |
+| étape (d’un circuit) | stop | etapa | Etappe | tappa | etapa | etap | etappe |
+| armoiries / blason | coat of arms / arms | escudo / blasón | Wappen | stemma | brasão | herb | wapen |
+| blasonnement | blazon | blasonamiento | Blasonierung | blasonatura | brasonamento | opis herbu | blazoenering |
+| enfant placé / nourrice | placed child / wet nurse | niño colocado / nodriza | untergebrachtes Kind / Amme | bambino collocato / balia | criança colocada / ama | dziecko oddane / mamka | geplaatst kind / min |
+| journal des marches et opérations (JMO) | war diary (JMO) | diario de marcha y operaciones | Kriegstagebuch (JMO) | diario di marcia e operazioni | diário de marcha e operações | dziennik działań bojowych | oorlogsdagboek (JMO) |
+| résistant | Resistance member | resistente | Widerstandskämpfer | resistente | resistente | członek ruchu oporu | verzetsstrijder |
+| copie chez un cousin / coffre | copy at a cousin’s / vault | copia en casa de un primo / cofre | Kopie bei einem Cousin / Tresor | copia da un cugino / cassaforte | cópia em casa de um primo / cofre | kopia u kuzyna / sejf | kopie bij een neef / kluis |
+| moteur de lecture (Kraken) | reading engine | motor de lectura | Leseerkennung | motore di lettura | motor de leitura | silnik odczytu | leesherkenning |
+| harmoniser les écritures | harmonise the spellings | armonizar las escrituras | Schreibweisen vereinheitlichen | armonizzare le grafie | harmonizar as escritas | ujednolicić pisownię | schrijfwijzen harmoniseren |
