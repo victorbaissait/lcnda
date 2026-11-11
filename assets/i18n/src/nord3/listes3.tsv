@@ -990,3 +990,1803 @@ Choisis l’artiste. ¦ Alege artistul.
 L’aperçu d’une double page s’affiche ici. ¦ Previzualizarea unei pagini duble apare aici.
 Aucune œuvre à mettre dans le livre. ¦ Nicio operă de pus în carte.
 Aucun disque à mettre dans le livre. ¦ Niciun disc de pus în carte.
+=vote noté ¦ vot notat|voturi notate|de voturi notate
+=date ajoutée ¦ dată adăugată|date adăugate|de date adăugate
+=électeur ¦ alegător|alegători|de alegători
+Présidentielle ¦ Prezidențiale
+Législatives ¦ Legislative
+Cantonales / départementales ¦ Cantonale / departamentale
+Régionales ¦ Regionale
+Européennes ¦ Europarlamentare
+Référendum ¦ Referendum
+Plébiscite ¦ Plebiscit
+Sénatoriales (grands électeurs) ¦ Senatoriale (mari electori)
+Prud’homales ¦ Alegeri pentru consiliile de prud’hommes
+Élections professionnelles (chambres, sécurité sociale…) ¦ Alegeri profesionale (camere, asigurări sociale…)
+Délivrée le ¦ Eliberată la
+Valable à partir de ¦ Valabilă începând cu
+N° de carte ¦ Nr. cărții
+N° d’inscription sur la liste ¦ Nr. de înscriere pe listă
+Adresse du bureau ¦ Adresa secției de votare
+Adresse de l’électeur (sur la carte) ¦ Adresa alegătorului (pe carte)
+Nom écrit sur la carte ¦ Numele scris pe carte
+Naissance écrite sur la carte ¦ Nașterea scrisă pe carte
+Profession écrite ¦ Profesia scrisă
+Motif d’inscription ¦ Motivul înscrierii
+Source, cote ¦ Sursă, cotă
+— morte en {y}, elle n’a pas pu voter à ce titre ¦ — moartă în {y}, nu a putut vota cu acest titlu
+— mort en {y}, il n’a pas pu voter à ce titre ¦ — mort în {y}, nu a putut vota cu acest titlu
+— elle a pu voter à partir de {from} (à ses {age} ans) ¦ — a putut vota începând din {from} (la {age} ani)
+— il a pu voter à partir de {from} (à ses {age} ans) ¦ — a putut vota începând din {from} (la {age} ani)
+— elle a pu voter à partir de {from} ¦ — a putut vota începând din {from}
+— il a pu voter à partir de {from} ¦ — a putut vota începând din {from}
+🗳️ Droit de vote des femmes ({country}) : <strong>{year}</strong> ¦ 🗳️ Dreptul de vot al femeilor ({country}): <strong>{year}</strong>
+🗳️ Droit de vote des hommes ({country}) : <strong>{year}</strong> ¦ 🗳️ Dreptul de vot al bărbaților ({country}): <strong>{year}</strong>
+Carte n° {num} ¦ Cartea nr. {num}
+délivrée le {dt} ¦ eliberată la {dt}
+bureau {bureau} ¦ secția {bureau}
+valable {from} → {to} ¦ valabilă {from} → {to}
+Élection ¦ Alegeri
+Photos des cartes ¦ Fotografiile cărților
+Aucune carte notée. Ajoute les cartes d’électeur (photos recto / verso, commune, bureau, numéros) et les dates où la personne a voté. ¦ Nicio carte de alegător notată. Adaugă cărțile de alegător (fotografii față / verso, localitate, secție, numere) și datele în care persoana a votat.
+les cartes d’électeur ¦ cărțile de alegător
+＋ Carte, votes ¦ ＋ Carte, voturi
+Supprimer les cartes d’électeur et les votes de cette fiche ? ¦ Ștergi cărțile de alegător și voturile din această fișă?
+Supprimer les cartes et votes ¦ Șterge cărțile și voturile
+Cartes effacées. ¦ Cărți șterse.
+n° 2, école des garçons ¦ nr. 2, școala de băieți
+Adresse de l’électeur ¦ Adresa alegătorului
+Naissance écrite ¦ Nașterea scrisă
+né le 4 mai 1890 à Menin (Belgique) ¦ né le 4 mai 1890 à Menin (Belgique)
+première inscription, changement de domicile… ¦ prima înscriere, schimbare de domiciliu…
+papiers de famille ; AD Nord 3 M 123 (listes électorales) ¦ acte de familie; AD Nord 3 M 123 (liste electorale)
+Retirer cette carte ¦ Scoate această carte
+Élection… ¦ Alegeri…
+Lieu (si autre) ¦ Loc (dacă e altul)
+CARTES D’ÉLECTEUR ¦ CĂRȚI DE ALEGĂTOR
+Cartes d’électeur et votes ¦ Cărți de alegător și voturi
+Une carte par période ou par commune. Les dates de vote sont souvent tamponnées au dos (une case par élection). ¦ O carte pentru fiecare perioadă sau localitate. Datele votului sunt adesea ștampilate pe verso (o căsuță pentru fiecare alegere).
+Les dates où la personne a voté ¦ Datele în care persoana a votat
+Ajouter plusieurs dates d’un coup… ¦ Adaugă mai multe date deodată…
+Une date par ligne (ou séparées par des virgules ou des points-virgules) ¦ O dată pe rând (sau separate prin virgule ori punct și virgulă)
+Ajouter ces dates ¦ Adaugă aceste date
+Recto des cartes ¦ Fața cărților
+Verso (tampons des votes) ¦ Verso (ștampilele voturilor)
+Autres documents (listes électorales, convocations…) ¦ Alte documente (liste electorale, convocări…)
+Les médias de la fiche notés « Carte d’électeur » (Nature du média) s’affichent aussi dans ce bloc. ¦ Fișierele media ale fișei notate „Carte de alegător” (Natura fișierului media) apar și în acest bloc.
+Cartes d’électeur enregistrées. ¦ Cărți de alegător salvate.
+{nm} — pas de date dans la liste ¦ {nm} — nicio dată în listă
+{nm} — hommes : {men} · femmes : {women} ¦ {nm} — bărbați: {men} · femei: {women}
+les femmes avant ¦ femeile înainte
+en même temps ¦ în același timp
+1 à 10 ans ¦ 1 până la 10 ani
+11 à 30 ans ¦ 11 până la 30 de ani
+31 à 60 ans ¦ 31 până la 60 de ani
+plus de 60 ans ¦ peste 60 de ani
+Années entre le vote des hommes et celui des femmes. ¦ Ani între votul bărbaților și cel al femeilor.
+les hommes votent en {year} ¦ bărbații votează în {year}
+les femmes votent en {year} ¦ femeile votează în {year}
+pas encore ¦ încă nu
+{gap} ans d’écart ¦ {gap} ani diferență
+les femmes {gap} ans avant les hommes ¦ femeile cu {gap} ani înaintea bărbaților
+Régions ¦ Regiuni
+Les électeurs de la famille, leurs cartes et les dates où ils ont voté. Pour en ajouter : fiche → Identité → « Blocs à afficher sur la fiche » → 🗳️ Cartes d’électeur. ¦ Alegătorii din familie, cărțile lor și datele în care au votat. Pentru a adăuga: fișă → Identitate → „Blocuri afișate pe fișă” → 🗳️ Cărți de alegător.
+Fond de carte : Natural Earth (domaine public) ; les tout petits pays ne sont que dans la liste. ¦ Fundal de hartă: Natural Earth (domeniu public); țările foarte mici sunt doar în listă.
+La carte du droit de vote n’a pas pu être chargée. ¦ Harta dreptului de vot nu a putut fi încărcată.
+Premier vote ou carte ¦ Primul vot sau prima carte
+Aucun électeur ne correspond ¦ Niciun alegător nu corespunde
+Chercher… (personne, commune) ¦ Caută… (persoană, localitate)
+Période du premier vote ¦ Perioada primului vot
+Premier vote jusqu’à ¦ Primul vot până la
+Avec des photos ({n}) ¦ Cu fotografii ({n})
+Sans photo ({n}) ¦ Fără fotografie ({n})
+📷 Avec photos ¦ 📷 Cu fotografii
+Le plus de votes ¦ Cele mai multe voturi
+Pas de date pour ce pays dans la liste. ¦ Nicio dată pentru această țară în listă.
+=acte ¦ act|acte|de acte
+=demande ¦ cerere|cereri|de cereri
+=déclarée ¦ declarată|declarate|de declarate
+Quels ancêtres étaient boulangers à Lille avant 1850 ? ¦ Care strămoși erau brutari la Lille înainte de 1850?
+Qui est né le même jour que moi ? ¦ Cine s-a născut în aceeași zi cu mine?
+Les petits-enfants de Jean Dupont ¦ Nepoții lui Jean Dupont
+Les Dupont mariés dans le Nord au XVIIIe siècle ¦ Familia Dupont căsătoriți în Nord în secolul al XVIII-lea
+Quelles femmes sont nées en Bretagne après 1800 ? ¦ Ce femei s-au născut în Bretania după 1800?
+🧬 Parenté ¦ 🧬 Rudenie
+Quel est le lien entre Jean Dupont et Marie Durand ? ¦ Care e legătura dintre Jean Dupont și Marie Durand?
+Qui a vécu le plus longtemps ? ¦ Cine a trăit cel mai mult?
+Quelle famille a le plus d’enfants ? ¦ Ce familie are cei mai mulți copii?
+Qui s’est marié le plus jeune ? ¦ Cine s-a căsătorit cel mai tânăr?
+Quel est l’ancêtre le plus ancien ? ¦ Care e cel mai vechi strămoș?
+Quel est l’âge moyen au mariage des femmes ? ¦ Care e vârsta medie la căsătorie a femeilor?
+Âge moyen au décès des adultes au XIXe siècle ¦ Vârsta medie la deces a adulților în secolul al XIX-lea
+Combien d’enfants en moyenne par couple ? ¦ Câți copii în medie are un cuplu?
+🔝 Les plus fréquents ¦ 🔝 Cele mai frecvente
+Quels sont les prénoms les plus fréquents chez les femmes ? ¦ Care sunt prenumele cele mai frecvente la femei?
+Quels métiers sont les plus courants ? ¦ Ce meserii sunt cele mai obișnuite?
+En quel mois se mariait-on le plus ? ¦ În ce lună se căsătoreau oamenii cel mai des?
+🗓️ Époques ¦ 🗓️ Epoci
+Qui a connu la Grande Guerre ? ¦ Cine a trăit Marele Război?
+Qui avait 20 ans en 1914 ? ¦ Cine avea 20 de ani în 1914?
+Qui était vivant en 1900 ? ¦ Cine era în viață în 1900?
+Quand est né Jean Dupont ? ¦ Când s-a născut Jean Dupont?
+Quel âge avait Jean Dupont à son mariage ? ¦ Câți ani avea Jean Dupont la căsătorie?
+Quel âge aurait Jean Dupont aujourd’hui ? ¦ Câți ani ar avea Jean Dupont astăzi?
+Combien d’ancêtres ai-je ? ¦ Câți strămoși am?
+Qui est né un 25 décembre ? ¦ Cine s-a născut pe 25 decembrie?
+Poser une question ¦ Pune o întrebare
+Sans Internet : l’app comprend les formules courantes (métier, lieu, avant / après / entre / siècle, prénom, nom, naissance, mariage, décès, « ancêtres », « le même jour que moi », et la parenté d’une fiche : « Jean Dupont a-t-il eu des enfants ? », « les petites-filles de Marie Durand », parents, frères et sœurs, conjoints, descendants). Exemples : ¦ Fără internet: aplicația înțelege formulările obișnuite (meserie, loc, înainte / după / între / secol, prenume, nume, naștere, căsătorie, deces, „strămoși”, „în aceeași zi cu mine” și rudenia unei fișe: „A avut Jean Dupont copii?”, „nepoatele lui Marie Durand”, părinți, frați și surori, soți, descendenți). Exemple:
+Et aussi des questions qui demandent un calcul… ¦ Și întrebări care cer un calcul…
+On peut ajouter « hommes », « femmes », « ancêtres », « au XIXe siècle », « entre 1800 et 1850 » à la plupart de ces questions. ¦ Poți adăuga „bărbați”, „femei”, „strămoși”, „în secolul al XIX-lea”, „între 1800 și 1850” la majoritatea acestor întrebări.
+Enregistrer la recherche ¦ Salvează căutarea
+Nom de cette recherche (elle se relance en un clic et signale les nouvelles fiches) : ¦ Numele acestei căutări (se relansează dintr-un clic și semnalează fișele noi):
+Recherche « {nm} » enregistrée ({count}). ¦ Căutarea „{nm}” a fost salvată ({count}).
+{n} fiches portent ce nom : ¦ {n} fișe poartă acest nume:
+fiche n°{id} ¦ fișa nr. {id}
+réponse ci-dessous ¦ răspunsul mai jos
+Répondre pour celle-ci ¦ Răspunde pentru aceasta
+J’ai compris : ¦ Am înțeles:
+Aucune fiche ne répond à cette question. ¦ Nicio fișă nu răspunde la această întrebare.
+Enregistrer comme recherche ¦ Salvează ca și căutare
+Aucune recherche enregistrée pour l’instant ¦ Nicio căutare salvată deocamdată
+Pose une question, puis « Enregistrer comme recherche ». ¦ Pune o întrebare, apoi „Salvează ca și căutare”.
+Aucune fiche ne répond à cette recherche. ¦ Nicio fișă nu răspunde la această căutare.
+Supprimer cette recherche enregistrée ? ¦ Ștergi această căutare salvată?
+Supprimer la recherche ¦ Șterge căutarea
+Recherche supprimée. ¦ Căutare ștearsă.
+Écris ta question comme tu la dirais : l’app cherche dans toute la base, sans Internet. ¦ Scrie-ți întrebarea cum ai spune-o: aplicația caută în toată baza, fără internet.
+Langue à vérifier ¦ Limbă de verificat
+français ¦ franceză
+néerlandais ¦ neerlandeză
+provençal ¦ provensală
+franco-provençal ¦ franco-provensală
+piémontais ¦ piemonteză
+hébreu ¦ ebraică
+arménien ¦ armeană
+créole ¦ creolă
+doute (peut-être une autre) ¦ îndoială (poate alta)
+→ transmise à la descendance ¦ → transmisă descendenților
+cette langue ¦ această limbă
+Par sa famille : ¦ Prin familia sa:
+de {who}, {n} générations au-dessus ¦ de la {who}, cu {n} generații mai sus
+de {who} (langue) ¦ de la {who} (limbă)
+Aucune langue notée. ¦ Nicio limbă notată.
+Langue des actes ¦ Limba actelor
+Ne pas reprendre les langues de ses ancêtres ¦ Nu prelua limbile strămoșilor
+Modifier la langue ¦ Modifică limba
+Langue parlée ¦ Limbă vorbită
+Aussi pour toute sa descendance (sauf ceux qui ont leurs propres langues ou qui refusent l’héritage) ¦ Și pentru toți descendenții săi (în afară de cei care au propriile limbi sau care refuză moștenirea)
+Parlait breton à la maison, français à l’école… ¦ Vorbea bretonă acasă, franceză la școală…
+Un doute entre deux langues ? Ajoute les deux, chacune avec « doute ». ¦ O îndoială între două limbi? Adaugă-le pe amândouă, fiecare cu „îndoială”.
+Langue enregistrée. ¦ Limbă salvată.
+Supprimer cette langue ? ¦ Ștergi această limbă?
+Supprimer la langue ¦ Șterge limba
+Langue supprimée. ¦ Limbă ștearsă.
+Langue(s) de l’acte ¦ Limba (limbile) actului
+Langue(s) du document ¦ Limba (limbile) documentului
+non précisée ¦ neprecizată
+Langue de l’acte : enregistre d’abord l’événement, puis rouvre-le. ¦ Limba actului: salvează mai întâi evenimentul, apoi redeschide-l.
+Aucun lieu de naissance connu pour les personnes dont la langue est notée. ¦ Niciun loc de naștere cunoscut pentru persoanele cu limbă notată.
+Sur une fiche, coche « Langues » dans IDENTITÉ → Modifier la personne, puis « ＋ Langue ». ¦ Pe o fișă, bifează „Limbi” în IDENTITATE → Modifică persoana, apoi „＋ Limbă”.
+Acte ou document ¦ Act sau document
+Aucune. La langue d’un acte se note dans la fenêtre de l’événement ; celle d’un document dans sa transcription (Listes → Noms cités). ¦ Niciuna. Limba unui act se notează în fereastra evenimentului; cea a unui document, în transcrierea lui (Liste → Nume citate).
+Relier à une fiche : ¦ Leagă de o fișă:
+Ouvrir la fiche de {nm} ¦ Deschide fișa lui {nm}
+Écris « @ » suivi d’un nom dans une note ou une transcription pour créer un lien vers une fiche. ¦ Scrie „@” urmat de un nume într-o notă sau o transcriere ca să creezi o legătură spre o fișă.
+Lien direct vers la vue ¦ Legătură directă spre imagine
+Référence précise de l’acte ¦ Referința precisă a actului
+La référence complète est rédigée toute seule, toujours de la même façon, et rangée dans « Page ou référence ». ¦ Referința completă se scrie singură, mereu în același fel, și se pune în „Pagină sau referință”.
+Ouvrir la vue ↗ ¦ Deschide imaginea ↗
+ses parents ¦ părinții săi
+sa naissance (date et lieu) ¦ nașterea sa (dată și loc)
+son baptême ¦ botezul său
+son mariage ¦ căsătoria sa
+son décès (date et lieu) ¦ decesul său (dată și loc)
+son origine (d’où venait la famille) ¦ originea sa (de unde venea familia)
+où a été prise une image ¦ unde a fost făcută o imagine
+Publiée ¦ Publicată
+Abandonnée ¦ Abandonată
+Groupes Facebook de généalogie ¦ Grupuri Facebook de genealogie
+Cercle généalogique du département ¦ Cercul genealogic al departamentului
+Pour un ancêtre où tu es bloqué, l’app rédige un message prêt à copier sur un forum, sur l’entraide de Geneanet ou sur un groupe Facebook : ce que l’on sait (avec les sources), ce que l’on cherche, ce qui a déjà été essayé (tiré des enquêtes). Les demandes bien présentées obtiennent beaucoup plus de réponses. ¦ Pentru un strămoș la care te-ai blocat, aplicația redactează un mesaj gata de copiat pe un forum, pe secțiunea de ajutor reciproc de la Geneanet sau pe un grup Facebook: ce se știe (cu sursele), ce se caută, ce s-a încercat deja (din investigații). Cererile bine prezentate primesc mult mai multe răspunsuri.
+Pour un ancêtre où tu es bloqué : l’app rédige un message prêt à copier sur un forum ou un groupe d’entraide. ¦ Pentru un strămoș la care te-ai blocat: aplicația redactează un mesaj gata de copiat pe un forum sau pe un grup de ajutor reciproc.
+Un forum ¦ Un forum
+Pas encore publiée ¦ Încă nepublicată
+Chercher… (personne, question, réponse, où c’est publié) ¦ Caută… (persoană, întrebare, răspuns, unde e publicată)
+Ce qu’on cherche ¦ Ce se caută
+Publiée sur ¦ Publicată pe
+Sur {where} ¦ Pe {where}
+Ailleurs ¦ În altă parte
+cette demande ¦ această cerere
+📍 Où a-t-elle été prise ? (hypothèses, carte, réponses) ¦ 📍 Unde a fost făcută? (ipoteze, hartă, răspunsuri)
+📍 Les hypothèses de lieu ¦ 📍 Ipotezele de loc
+Mise à jour ¦ Actualizare
+Aucune demande ne correspond ¦ Nicio cerere nu corespunde
+Change les mots cherchés ou retire un filtre (« Tout effacer » montre aussi les demandes terminées). ¦ Schimbă cuvintele căutate sau scoate un filtru („Șterge tot” arată și cererile terminate).
+Supprimer cette demande ? ¦ Ștergi această cerere?
+Supprimer la demande ¦ Șterge cererea
+Modifier la demande ¦ Modifică cererea
+Nouvelle demande d’entraide ¦ Cerere nouă de ajutor
+Pour quel ancêtre ? ¦ Pentru ce strămoș?
+Je cherche le baptême de Jean Dupont vers 1750, probablement dans une paroisse voisine de Halluin… ¦ Caut botezul lui Jean Dupont pe la 1750, probabil într-o parohie vecină cu Halluin…
+Ma question, avec mes mots (facultatif) ¦ Întrebarea mea, cu cuvintele mele (opțional)
+Où publier ¦ Unde public
+Groupe Facebook (plus court) ¦ Grup Facebook (mai scurt)
+Rédiger le message ¦ Redactează mesajul
+Copier le message ¦ Copiază mesajul
+Publiée où ¦ Unde a fost publicată
+Entraide Geneanet, groupe « Généalogie du Nord »… ¦ Ajutor reciproc Geneanet, grupul „Généalogie du Nord”…
+Lien vers la demande publiée ¦ Link spre cererea publicată
+Réponses reçues, pistes ¦ Răspunsuri primite, piste
+Choisis d’abord l’ancêtre (dans les suggestions). ¦ Alege mai întâi strămoșul (din sugestii).
+Remplacer le message actuel par un nouveau brouillon ? ¦ Înlocuiești mesajul actual cu o ciornă nouă?
+Nouveau brouillon ¦ Ciornă nouă
+Remplacer le message ¦ Înlocuiește mesajul
+Message copié : colle-le sur le forum ou le groupe. ¦ Mesaj copiat: lipește-l pe forum sau pe grup.
+Message copié. ¦ Mesaj copiat.
+Demande enregistrée. ¦ Cerere salvată.
+Aucune demande en cours. ¦ Nicio cerere în curs.
+🎬 Film de la famille ¦ 🎬 Filmul familiei
+Enregistrer en vidéo la famille qui se déplace au fil des siècles ¦ Înregistrează ca video familia care se mută de-a lungul secolelor
+au fil des siècles ¦ de-a lungul secolelor
+Le film de la famille ¦ Filmul familiei
+Enregistrer la vidéo ¦ Înregistrează video-ul
+La carte animée montre la famille se déplacer au fil des siècles : chaque événement (naissance, mariage, décès, résidence…) apparaît à son année, puis s’estompe ; les déplacements d’une même personne sont tracés. La vidéo se télécharge en <strong>MP4</strong> (lisible partout : messages, mails, téléphones). ¦ Harta animată arată familia mutându-se de-a lungul secolelor: fiecare eveniment (naștere, căsătorie, deces, reședință…) apare în anul lui, apoi se estompează; deplasările aceleiași persoane sunt trasate. Video-ul se descarcă în <strong>MP4</strong> (se poate citi oriunde: mesaje, e-mailuri, telefoane).
+La carte animée montre la famille se déplacer au fil des siècles : chaque événement (naissance, mariage, décès, résidence…) apparaît à son année, puis s’estompe ; les déplacements d’une même personne sont tracés. La vidéo se télécharge en <strong>WebM</strong> (si un téléphone ne la lit pas, VLC ou un convertisseur en ligne la passent en MP4). ¦ Harta animată arată familia mutându-se de-a lungul secolelor: fiecare eveniment (naștere, căsătorie, deces, reședință…) apare în anul lui, apoi se estompează; deplasările aceleiași persoane sunt trasate. Video-ul se descarcă în <strong>WebM</strong> (dacă un telefon nu îl poate citi, VLC sau un convertor online îl trec în MP4).
+À l’année ¦ La anul
+Durée de la vidéo ¦ Durata video-ului
+Paysage 1280 × 720 (écran, réunion) ¦ Peisaj 1280 × 720 (ecran, întâlnire)
+Carré 1080 × 1080 (messages) ¦ Pătrat 1080 × 1080 (mesaje)
+Portrait 720 × 1280 (téléphone) ¦ Portret 720 × 1280 (telefon)
+Fond de carte détaillé (Internet) — sinon, fond hors ligne ¦ Fundal de hartă detaliat (internet) — altfel, fundal offline
+Cet ordinateur ne sait pas enregistrer de vidéo depuis l’application. ¦ Acest calculator nu poate înregistra video din aplicație.
+Préparation des données… ¦ Se pregătesc datele…
+Pas assez d’événements datés et placés sur la carte pour faire un film. ¦ Nu sunt destule evenimente datate și plasate pe hartă pentru a face un film.
+Chargement du fond de carte… ¦ Se încarcă fundalul hărții…
+La famille au fil des siècles ¦ Familia de-a lungul secolelor
+Fond de carte © contributeurs OpenStreetMap · LCNDA ¦ Fundal de hartă © contributorii OpenStreetMap · LCNDA
+Enregistrement… {year} (laisse cette fenêtre ouverte) ¦ Se înregistrează… {year} (lasă această fereastră deschisă)
+Vidéo enregistrée ({size} Mo, {fmt}) : regarde dans tes Téléchargements. ¦ Video salvat ({size} MB, {fmt}): uită-te în Descărcări.
+🎬 Film de la famille enregistré. ¦ 🎬 Filmul familiei a fost salvat.
+=version ¦ versiune|versiuni|de versiuni
+=photo à ranger ¦ fotografie de pus la loc|fotografii de pus la loc|de fotografii de pus la loc
+=recueil ¦ culegere|culegeri|de culegeri
+=photo supprimée ¦ fotografie ștearsă|fotografii șterse|de fotografii șterse
+=gardée ¦ păstrată|păstrate|de păstrate
+=photo choisie ¦ fotografie aleasă|fotografii alese|de fotografii alese
+=nouvelle page ¦ pagină nouă|pagini noi|de pagini noi
+=retenue ¦ reținută|reținute|de reținute
+=autre recueil est rangé ¦ altă culegere e pusă la loc|alte culegeri sunt puse la loc|de alte culegeri sunt puse la loc
+p. {num} — {label} ¦ p. {num} — {label}
+Page {num} ¦ Pagina {num}
+page {num} ¦ pagina {num}
+pages {from} à {to} ¦ paginile {from} până la {to}
+tout le recueil ({n} p.) ¦ toată culegerea ({n} p.)
+{done}/{all} transcrites ¦ {done}/{all} transcrise
+{done}/{all} transcrite ¦ {done}/{all} transcrisă
+{done} sur {all} pages ¦ {done} din {all} pagini
+Supprimer le recueil « {title} » avec ses pages, transcriptions et versions ? ¦ Ștergi culegerea „{title}” cu paginile, transcrierile și versiunile ei?
+Les photos restent dans Médias. ¦ Fotografiile rămân în Media.
+Recueil supprimé ({deleted}, {kept} car utilisées ailleurs). ¦ Culegere ștearsă ({deleted}, {kept} pentru că sunt folosite în altă parte).
+{count} sans page · trie-les d’abord dans des dossiers, puis choisis leur page ¦ {count} fără pagină · sortează-le mai întâi în dosare, apoi alege-le pagina
+{count} sans page : choisis sa page ¦ {count} fără pagină: alege-i pagina
+{n} photos rangées. ¦ {n} fotografii puse la loc.
+Supprimer le dossier « {nm} » ? ¦ Ștergi dosarul „{nm}”?
+Ses photos restent « à ranger », sans dossier. ¦ Fotografiile lui rămân „de pus la loc”, fără dosar.
+🔍 détail ¦ 🔍 detaliu
+⭐ retenue ¦ ⭐ reținută
+montrée (la plus récente) ¦ arătată (cea mai recentă)
+(tout le recueil) ¦ (toată culegerea)
+Supprimer la {page} ? ¦ Ștergi {page}?
+Ses {n} photos passent « à ranger ». ¦ Cele {n} fotografii ale ei trec la „de pus la loc”.
+Sa photo passe « à ranger ». ¦ Fotografia ei trece la „de pus la loc”.
+Sa transcription sera perdue. ¦ Transcrierea ei se va pierde.
+— ou glisse les photos ici, ou colle-les (⌘V) ¦ — sau trage fotografiile aici ori lipește-le (⌘V)
+— ou glisse la photo ici, ou colle-la (⌘V) ¦ — sau trage fotografia aici ori lipește-o (⌘V)
+Photo de la {page} ¦ Fotografia pentru {page}
+Chaque photo est une <b>nouvelle page</b>, à la suite ¦ Fiecare fotografie e o <b>pagină nouă</b>, una după alta
+Sur les <b>pages déjà là</b>, dans l’ordre, à partir de la page ¦ Pe <b>paginile deja existente</b>, în ordine, începând cu pagina
+(celles qui n’ont pas encore de photo dans cette série), puis de nouvelles pages ¦ (cele care încă nu au fotografie în această serie), apoi pagini noi
+<b>À ranger</b> : je dirai plus tard sur quelle page va chaque photo ¦ <b>De pus la loc</b>: voi spune mai târziu pe ce pagină merge fiecare fotografie
+Ligne rattachée à {nm} : elle apparaît dans le bloc « Recueils » de sa fiche. ¦ Rând legat de {nm}: apare în blocul „Culegeri” al fișei sale.
+Couverture choisie. ¦ Copertă aleasă.
+Pour l’instant : <b>la première page</b> (automatique). ¦ Deocamdată: <b>prima pagină</b> (automat).
+Une <b>version</b> est une série de photos du même document : celles prises il y a dix ans, celles de ta prochaine visite… Elles coexistent. Pour chaque page, tu choisis l’image à garder (⭐) : c’est « la meilleure version », faite du meilleur de chacune. Une photo peut aussi être un <b>détail</b> (zoom) d’une page. ¦ O <b>versiune</b> e o serie de fotografii ale aceluiași document: cele făcute acum zece ani, cele de la următoarea ta vizită… Ele coexistă. Pentru fiecare pagină alegi imaginea de păstrat (⭐): asta e „cea mai bună versiune”, făcută din ce e mai bun din fiecare. O fotografie poate fi și un <b>detaliu</b> (zoom) al unei pagini.
+☆ garder ¦ ☆ păstrează
+(montrée pour l’instant) ¦ (arătată deocamdată)
+Supprimer la version « {nm} » ? ¦ Ștergi versiunea „{nm}”?
+Ses photos quittent le recueil (elles restent dans Médias). Les pages et leurs transcriptions restent. ¦ Fotografiile ei ies din culegere (rămân în Media). Paginile și transcrierile lor rămân.
+À transcrire : ¦ De transcris:
+Sans aucune photo : ¦ Fără nicio fotografie:
+… et {n} autres. ¦ … și alte {n}.
+{count} dans d’autres dossiers de l’enquête. ¦ {count} în alte dosare ale investigației.
+Projet de l’Atelier ¦ Proiect din Atelier
+Choisis des photos (JPEG, PNG, WEBP). ¦ Alege fotografii (JPEG, PNG, WEBP).
+Un recueil rassemble des pages photographiées dans l’ordre : un registre, une liste de prisonniers, un cahier, un album. Tu peux y transcrire chaque page, garder plusieurs campagnes de photos (celles d’il y a dix ans et les nouvelles) et choisir, page par page, la meilleure image. ¦ O culegere adună pagini fotografiate în ordine: un registru, o listă de prizonieri, un caiet, un album. Poți transcrie fiecare pagină, păstra mai multe serii de fotografii (cele de acum zece ani și cele noi) și alege, pagină cu pagină, cea mai bună imagine.
+Aucun recueil ne correspond. ¦ Nicio culegere nu corespunde.
+Change les mots cherchés ou retire un filtre. ¦ Schimbă cuvintele căutate sau scoate un filtru.
+Chercher un recueil… (titre, cote, lieu) ¦ Caută o culegere… (titlu, cotă, loc)
+Modifier le recueil ¦ Modifică culegerea
+Nouveau recueil ¦ Culegere nouă
+Liste des prisonniers d’Ulm ¦ Lista prizonierilor de la Ulm
+Lieu de conservation ¦ Locul de păstrare
+Vincennes, Service historique de la Défense ¦ Vincennes, Service historique de la Défense
+Nom de la première série de photos ¦ Numele primei serii de fotografii
+Ce que contient le recueil, ce qui manque, où le consulter… ¦ Ce conține culegerea, ce lipsește, unde poate fi consultată…
+Recueil enregistré. ¦ Culegere salvată.
+Recueil créé : ajoute maintenant tes photos. ¦ Culegere creată: adaugă acum fotografiile.
+Supprimer le recueil ¦ Șterge culegerea
+Supprimer aussi les photos qui ne servent nulle part ailleurs ? Sinon, elles restent dans Médias. ¦ Ștergi și fotografiile care nu sunt folosite nicăieri altundeva? Altfel, rămân în Media.
+Photos du recueil ¦ Fotografiile culegerii
+Supprimer aussi les photos ¦ Șterge și fotografiile
+Garder les photos ¦ Păstrează fotografiile
+Recueil supprimé : les photos sont toujours dans Médias. ¦ Culegere ștearsă: fotografiile sunt în continuare în Media.
+← Tous les recueils ¦ ← Toate culegerile
+Choisir l’image de couverture du recueil ¦ Alege imaginea de copertă a culegerii
+photographiée ¦ fotografiată
+pas de photo ¦ nicio fotografie
+Détails (zooms) ¦ Detalii (zoomuri)
+Chercher dans les transcriptions, les noms de page… ¦ Caută în transcrieri, în numele paginilor…
+▦ Mosaïque ¦ ▦ Mozaic
+Mosaïque ¦ Mozaic
+Aucune page pour l’instant ¦ Nicio pagină deocamdată
+Chaque photo devient une page, dans l’ordre. ¦ Fiecare fotografie devine o pagină, în ordine.
+Clique sur une page pour l’ouvrir et la transcrire ; glisse-la pour changer l’ordre. ¦ Fă clic pe o pagină ca s-o deschizi și s-o transcrii; trage-o ca să schimbi ordinea.
+Mettre sur la page… ¦ Pune pe pagina…
+Mettre sur la page ¦ Pune pe pagină
+🧺 À ranger (sans page) ¦ 🧺 De pus la loc (fără pagină)
+🧺 À ranger ¦ 🧺 De pus la loc
+🧺 à ranger ¦ 🧺 de pus la loc
+À ranger ¦ De pus la loc
+à ranger ¦ de pus la loc
+Créer une nouvelle page ¦ Creează o pagină nouă
+＋ Nouvelle page au début ¦ ＋ Pagină nouă la început
+＋ Nouvelle page juste après celle-ci ¦ ＋ Pagină nouă chiar după aceasta
+＋ Nouvelle page après la page… ¦ ＋ Pagină nouă după pagina…
+＋ Nouvelle page à la fin ¦ ＋ Pagină nouă la sfârșit
+NOUVELLE PAGE ¦ PAGINĂ NOUĂ
+Créer la nouvelle page après… ¦ Creează pagina nouă după…
+Créer la page ici ¦ Creează pagina aici
+Après la page ¦ După pagina
+Choisir plusieurs photos pour les ranger d’un coup ¦ Alege mai multe fotografii ca să le pui la loc deodată
+Glisser pour changer l’ordre des dossiers ¦ Trage ca să schimbi ordinea dosarelor
+Monter le dossier ¦ Urcă dosarul
+Descendre le dossier ¦ Coboară dosarul
+Supprimer le dossier (ses photos restent à ranger) ¦ Șterge dosarul (fotografiile lui rămân de pus la loc)
+Vide : glisse des photos ici, ou choisis ce dossier sous une photo. ¦ Gol: trage fotografii aici sau alege acest dosar sub o fotografie.
+Mettre dans ¦ Pune în
+Mettre sur ¦ Pune pe
+Une nouvelle page = une page par photo, dans l’ordre. ¦ O pagină nouă = o pagină pentru fiecare fotografie, în ordine.
+Toutes les photos sont dans un dossier. ¦ Toate fotografiile sunt într-un dosar.
+Ce dossier existe déjà. ¦ Acest dosar există deja.
+Nom du nouveau dossier (ex. « Liste A », « à vérifier », « 1915 ») : ¦ Numele noului dosar (ex. „Lista A”, „de verificat”, „1915”):
+Photo rangée. ¦ Fotografie pusă la loc.
+Dossier renommé. ¦ Dosar redenumit.
+Dossier supprimé. ¦ Dosar șters.
+▦ Toutes les pages ¦ ▦ Toate paginile
+Image précédente de cette page ¦ Imaginea anterioară a acestei pagini
+Image suivante de cette page ¦ Imaginea următoare a acestei pagini
+Pas de photo pour cette page. ¦ Nicio fotografie pentru această pagină.
+＋ Ajouter une photo de cette page ¦ ＋ Adaugă o fotografie a acestei pagini
+⭐ Image retenue pour cette page ¦ ⭐ Imaginea reținută pentru această pagină
+C’est elle qu’on voit dans la mosaïque, le résumé et les fiches ¦ Pe ea o vezi în mozaic, în rezumat și în fișe
+Mettre ensemble les photos de cette page (morceaux, zoom…) : le résultat devient l’image retenue ¦ Pune laolaltă fotografiile acestei pagini (bucăți, zoom…): rezultatul devine imaginea reținută
+✕ Fin de la comparaison ¦ ✕ Sfârșitul comparației
+⇄ Comparer côte à côte ¦ ⇄ Compară una lângă alta
+📄 C’est la page entière ¦ 📄 E pagina întreagă
+🔍 C’est un détail (zoom) ¦ 🔍 E un detaliu (zoom)
+Relier juste cette image à une fiche (ses médias ou un bloc), une enquête, une battue, l’Atelier, un village ¦ Leagă doar această imagine de o fișă (media ei sau un bloc), o investigație, o căutare amplă, Atelierul, un sat
+🔗 Relier cette image… ¦ 🔗 Leagă această imagine…
+Retirer cette photo du recueil (elle reste dans Médias) ¦ Scoate această fotografie din culegere (rămâne în Media)
+· détail ¦ · detaliu
+détail ¦ detaliu
+détails ¦ detalii
+Ajouter une photo de cette page (autre version, détail…) ¦ Adaugă o fotografie a acestei pagini (altă versiune, detaliu…)
+Nom de la page ¦ Numele paginii
+Recopie ici ce qui est écrit sur la page (une ligne par ligne du document)… ¦ Copiază aici ce e scris pe pagină (câte un rând pentru fiecare rând din document)…
+↧ Reprendre la transcription déjà faite sur cette photo ¦ ↧ Preia transcrierea deja făcută pe această fotografie
+Voir le tableau de la page ¦ Vezi tabelul paginii
+Une liste à transposer ? Faire un tableau ¦ O listă de transpus? Fă un tabel
+Abréviations, mots incertains, ce qu’il reste à vérifier… ¦ Abrevieri, cuvinte nesigure, ce mai e de verificat…
+↑ Avancer la page ¦ ↑ Mută pagina înainte
+Relier cette page à une fiche, un village, une enquête, un projet de l’Atelier, une battue ¦ Leagă această pagină de o fișă, un sat, o investigație, un proiect din Atelier, o căutare amplă
+↓ Reculer la page ¦ ↓ Mută pagina înapoi
+＋ Page après ¦ ＋ Pagină după
+🔗 Relier la page… ¦ 🔗 Leagă pagina…
+Supprimer la page ¦ Șterge pagina
+🔗 Cette page est rattachée à : ¦ 🔗 Această pagină e legată de:
+Supprimer une page ne supprime pas ses photos : elles passent « à ranger ». ¦ Ștergerea unei pagini nu îi șterge fotografiile: ele trec „de pus la loc”.
+📊 Tableau de la page ¦ 📊 Tabelul paginii
+pour transposer une liste (noms, âges, lieux…) ligne par ligne ¦ pentru a transpune o listă (nume, vârste, locuri…) rând cu rând
+Pas encore de tableau sur cette page. ¦ Încă niciun tabel pe această pagină.
+＋ Créer le tableau ¦ ＋ Creează tabelul
+Image retenue pour cette page. ¦ Imagine reținută pentru această pagină.
+Assemblage posé sur la page et retenu (⭐). ¦ Asamblare pusă pe pagină și reținută (⭐).
+Photo mise « à ranger ». ¦ Fotografie trecută „de pus la loc”.
+Photo déplacée. ¦ Fotografie mutată.
+Photo retirée du recueil (elle reste dans Médias). ¦ Fotografie scoasă din culegere (rămâne în Media).
+🔗 Cette image est aussi : ¦ 🔗 Această imagine e și:
+Page supprimée. ¦ Pagină ștearsă.
+✓ enregistré ¦ ✓ salvat
+Ajouter des photos ¦ Adaugă fotografii
+la photo ¦ fotografia
+les photos (dans l’ordre des pages : le nom du fichier compte) ¦ fotografiile (în ordinea paginilor: numele fișierului contează)
+Série de photos (version) ¦ Serie de fotografii (versiune)
+＋ Nouvelle série… ¦ ＋ Serie nouă…
+Nom de la nouvelle série ¦ Numele noii serii
+Cette photo est ¦ Această fotografie e
+la page entière ¦ pagina întreagă
+un détail (zoom) de la page ¦ un detaliu (zoom) al paginii
+Où les mettre ? ¦ Unde le pui?
+Ligne détachée de la fiche. ¦ Rând desprins de fișă.
+Relier cette ligne à une fiche ¦ Leagă acest rând de o fișă
+Choisis la personne dans la liste. ¦ Alege persoana din listă.
+La couverture redevient la première page. ¦ Coperta redevine prima pagină.
+Clique sur une image ci-dessous pour en faire la couverture. ¦ Fă clic pe o imagine de mai jos ca s-o faci copertă.
+↺ Revenir à la première page ¦ ↺ Revino la prima pagină
+🖼 Une image à part, juste pour la couverture ¦ 🖼 O imagine separată, doar pentru copertă
+📷 Choisir une image sur l’ordinateur ¦ 📷 Alege o imagine de pe calculator
+📚 Une photo du recueil ¦ 📚 O fotografie din culegere
+Pas encore de photo dans le recueil. ¦ Încă nicio fotografie în culegere.
+🖼️ Une image déjà dans Médias ¦ 🖼️ O imagine deja în Media
+Choisir dans les médias : titre, cote, personne, lieu, année… ¦ Alege din media: titlu, cotă, persoană, loc, an…
+L’image de la couverture ¦ Imaginea copertei
+Prendre pour la couverture ¦ Folosește pentru copertă
+👤 Une fiche (ses médias ou un de ses blocs) ¦ 👤 O fișă (media ei sau unul dintre blocurile ei)
+📚 Un projet de l’Atelier ¦ 📚 Un proiect din Atelier
+🏘️ Un village ¦ 🏘️ Un sat
+📘 Un livret de famille ¦ 📘 Un livret de familie
+Toute la page ¦ Toată pagina
+(elle apparaîtra dans « Recueils » de la fiche, du village, de l’enquête…) ¦ (va apărea în „Culegeri” la fișă, la sat, la investigație…)
+Juste cette image ¦ Doar această imagine
+(elle s’ajoute aux médias de la fiche, à un bloc, aux pièces de l’enquête…) ¦ (se adaugă la media fișei, la un bloc, la piesele investigației…)
+À quoi ? ¦ De ce?
+Nom, titre, commune… (2 lettres au moins) ¦ Nume, titlu, localitate… (cel puțin 2 litere)
+Il est cité à la ligne 12 ¦ E citat la rândul 12
+Où exactement ? ¦ Unde anume?
+Où la montrer dans l’enquête ? ¦ Unde s-o arăți în investigație?
+— rien où la mettre (ex. battue sans recherche) — ¦ — niciun loc unde s-o pui (ex. căutare amplă fără cercetare) —
+Dans les médias de la fiche, ou dans un bloc ? ¦ În media fișei sau într-un bloc?
+Quelle recherche de la battue ? ¦ Care cercetare a căutării ample?
+Dans quel dossier ? ¦ În ce dosar?
+Choisis dans la liste à quoi rattacher. ¦ Alege din listă de ce să legi.
+Choisis où mettre l’image. ¦ Alege unde pui imaginea.
+Cette image y était déjà rattachée. ¦ Această imagine era deja legată acolo.
+Image rattachée. ¦ Imagine legată.
+Page rattachée. ¦ Pagină legată.
+et choisir, page par page, l’image à garder ¦ și alege, pagină cu pagină, imaginea de păstrat
+Garder celle-ci pour la page ¦ Păstrează-o pe aceasta pentru pagină
+Supprimer cette version ¦ Șterge această versiune
+Pas encore de photo. ¦ Încă nicio fotografie.
+＋ Nouvelle série de photos ¦ ＋ Serie nouă de fotografii
+Nouvelle série de photos ¦ Serie nouă de fotografii
+Supprimer la version ¦ Șterge versiunea
+Version supprimée. ¦ Versiune ștearsă.
+tout le recueil ¦ toată culegerea
+Rattache tout le recueil, ou seulement quelques pages, à une fiche, un village, une enquête, un projet de l’Atelier ou une battue. Le recueil y apparaît, avec les pages concernées. ¦ Leagă toată culegerea sau doar câteva pagini de o fișă, un sat, o investigație, un proiect din Atelier sau o căutare amplă. Culegerea apare acolo, cu paginile respective.
+Rattaché à rien pour l’instant. ¦ Legată de nimic deocamdată.
+Lien retiré du recueil. ¦ Legătură scoasă din culegere.
+à la page ¦ la pagina
+Rattacher le recueil ¦ Leagă culegerea
+Nom, titre… ¦ Nume, titlu…
+Rattaché. ¦ Legat.
+La première page (image retenue) ¦ Prima pagină (imaginea reținută)
+En chiffres ¦ În cifre
+Le texte du recueil ¦ Textul culegerii
+Avancement de la transcription ¦ Progresul transcrierii
+Barre et pages restantes ¦ Bară și pagini rămase
+Ce que couvre chaque série de photos ¦ Ce acoperă fiecare serie de fotografii
+Pages sans photo dans une version ¦ Pagini fără fotografie într-o versiune
+Table des pages ¦ Tabla paginilor
+Nom et début de la transcription ¦ Numele și începutul transcrierii
+Les pages transcrites, en entier ¦ Paginile transcrise, în întregime
+Fiches, villages, enquêtes… ¦ Fișe, sate, investigații…
+Les pages en vignettes ¦ Paginile în miniaturi
+Un texte à toi ¦ Un text al tău
+Changer la couverture ¦ Schimbă coperta
+Choisir une autre couverture ¦ Alege altă copertă
+Pas de description : « Modifier » pour en écrire une. ¦ Nicio descriere: „Modifică” ca să scrii una.
+Toutes les pages ont leurs photos. ¦ Toate paginile au fotografiile lor.
+Pas de page. ¦ Nicio pagină.
+Aucune page transcrite. ¦ Nicio pagină transcrisă.
+Rattaché à rien. ¦ Legat de nimic.
+Note vide : « Personnaliser » pour l’écrire. ¦ Notă goală: „Personalizează” ca s-o scrii.
+⚙️ Personnaliser le résumé ¦ ⚙️ Personalizează rezumatul
+Résumé vide : « Personnaliser » pour choisir ce qu’on y voit. ¦ Rezumat gol: „Personalizează” ca să alegi ce apare în el.
+Ta note… ¦ Nota ta…
+RÉSUMÉ DU RECUEIL ¦ REZUMATUL CULEGERII
+Ce qu’on voit dans le résumé ¦ Ce apare în rezumat
+Coche les blocs à afficher, range-les avec ↑ ↓, renomme-les, choisis combien d’éléments ils montrent. ¦ Bifează blocurile de afișat, ordonează-le cu ↑ ↓, redenumește-le, alege câte elemente arată.
+Résumé enregistré. ¦ Rezumat salvat.
+🌐 Partout dans l’enquête ¦ 🌐 Peste tot în investigație
+Le laisser visible dans tous les dossiers, ou le ranger dans un seul ¦ Las-o vizibilă în toate dosarele sau pune-o într-unul singur
+🔗 Relier un recueil ¦ 🔗 Leagă o culegere
+Pas encore de recueil. En créer un maintenant (Listes › Recueils) ? ¦ Încă nicio culegere. Creezi una acum (Liste › Culegeri)?
+Aucun recueil ¦ Nicio culegere
+Créer un recueil ¦ Creează o culegere
+Relier un recueil ¦ Leagă o culegere
+Où le montrer dans l’enquête ¦ Unde s-o arăți în investigație
+« Partout » : visible dans chaque dossier (pratique pour un registre qui sert souvent). Tu pourras le déplacer ensuite. ¦ „Peste tot”: vizibilă în fiecare dosar (practic pentru un registru folosit des). O vei putea muta după aceea.
+Recueil rattaché. ¦ Culegere legată.
+Aucun recueil rattaché. ¦ Nicio culegere legată.
+Recueil visible partout dans l’enquête. ¦ Culegere vizibilă peste tot în investigație.
+Recueil déplacé. ¦ Culegere mutată.
+Recueil retiré. ¦ Culegere scoasă.
+Aucun recueil (registre, liste, cahier photographié) ne parle de cette personne. ¦ Nicio culegere (registru, listă, caiet fotografiat) nu vorbește despre această persoană.
+=bien ¦ bun|bunuri|de bunuri
+LISTES ¦ LISTE
+le testateur ¦ testatorul
+le défunt ¦ defunctul
+le donateur ¦ donatorul
+Vente entre héritiers ¦ Vânzare între moștenitori
+le vendeur ¦ vânzătorul
+qui donne la dot ¦ cine dă zestrea
+Déclaration de succession ¦ Declarație de succesiune
+la personne principale ¦ persoana principală
+Parcelle du cadastre ¦ Parcelă din cadastru
+Terre, pré, vigne, bois ¦ Pământ, fâneață, vie, pădure
+Somme d’argent ¦ Sumă de bani
+écus ¦ scuzi
+héritier ¦ moștenitor
+héritière ¦ moștenitoare
+légataire ¦ legatar
+légataire universel ¦ legatar universal
+usufruitière ¦ uzufructuară
+nu-propriétaire ¦ nud proprietar
+future épouse ¦ viitoarea soție
+futur époux ¦ viitorul soț
+exécuteur testamentaire ¦ executor testamentar
+créancier ¦ creditor
+Héritiers et bénéficiaires ¦ Moștenitori și beneficiari
+★ Héritiers et bénéficiaires ¦ ★ Moștenitori și beneficiari
+qui reçoit : héritiers, légataires, donataires… ¦ cine primește: moștenitori, legatari, donatari…
+＋ Ajouter un héritier… ¦ ＋ Adaugă un moștenitor…
+Autres personnes ¦ Alte persoane
+☆ Autres personnes ¦ ☆ Alte persoane
+témoins, tuteur, notaire, experts… ¦ martori, tutore, notar, experți…
+＋ Ajouter une autre personne… ¦ ＋ Adaugă altă persoană…
+{amount} d’aujourd’hui (ordre de grandeur) ¦ {amount} de azi (ordin de mărime)
+≈ {amount} € d’aujourd’hui (ordre de grandeur) ¦ ≈ {amount} € de azi (ordin de mărime)
+Personne sans fiche ¦ Persoană fără fișă
+À qui ? (pas noté) ¦ Cui? (nenotat)
+Chaîne des propriétaires ¦ Lanțul proprietarilor
+🏠 Chaîne des propriétaires ¦ 🏠 Lanțul proprietarilor
+🏠 Chaîne des propriétaires (héritages) ¦ 🏠 Lanțul proprietarilor (moșteniri)
+pas noté ¦ nenotat
+HÉRITAGES ET SUCCESSIONS ¦ MOȘTENIRI ȘI SUCCESIUNI
+Modifier « {title} » ¦ Modifică „{title}”
+Créer l’acte ¦ Creează actul
+Facultatif : sinon « Partage de Jean MARTIN (1852) » ¦ Opțional: altfel „Partage de Jean MARTIN (1852)”
+Étude ¦ Birou notarial
+Étude de Me Lafon, Tulle ¦ Étude de Me Lafon, Tulle
+Lieu de l’acte ¦ Locul actului
+Cote aux archives ¦ Cotă la arhive
+3 E 12/345, MC/ET/XLV/123 ¦ 3 E 12/345, MC/ET/XLV/123
+Inventaire après décès relié ¦ Inventar succesoral legat
+⭐ La personne principale : ¦ ⭐ Persoana principală:
+📦 Les biens et à qui ils vont ¦ 📦 Bunurile și cui le revin
+＋ Ajouter un bien ¦ ＋ Adaugă un bun
+🖼 L’acte (images) ¦ 🖼 Actul (imagini)
+Images de l’acte ¦ Imaginile actului
+🖼 Images de l’acte ¦ 🖼 Imaginile actului
+Relier ces images ¦ Leagă aceste imagini
+Clauses, conditions, rentes, ce que dit l’acte… ¦ Clauze, condiții, rente, ce spune actul…
+la moitié, le rez-de-chaussée… ¦ jumătate, parterul…
+la dot, une rente… ¦ zestrea, o rentă…
+le pré des Combes, l’armoire de noyer… ¦ fâneața de la Combes, dulapul de nuc…
+Retirer ce bien ¦ Scoate acest bun
+Valeur écrite ¦ Valoare scrisă
+(comme dans l’acte) ¦ (ca în act)
+un tiers, en usufruit, la moitié… ¦ o treime, în uzufruct, jumătate…
+À qui ¦ Cui
+rien de coché : à tous les héritiers ¦ nimic bifat: tuturor moștenitorilor
+Ajoute d’abord les héritiers (★) plus haut. ¦ Adaugă mai întâi moștenitorii (★) mai sus.
+Aucun bien noté ¦ Niciun bun notat
+Choisis au moins le défunt (ou le donateur), un héritier ou un bien. ¦ Alege cel puțin defunctul (sau donatorul), un moștenitor sau un bun.
+Acte « {title} » créé ¦ Actul „{title}” a fost creat
+Acte « {title} » enregistré ¦ Actul „{title}” a fost salvat
+Acte « {title} » supprimé ¦ Actul „{title}” a fost șters
+🔀 Schéma de partage ¦ 🔀 Schema de împărțire
+SCHÉMA DE PARTAGE ¦ SCHEMA DE ÎMPĂRȚIRE
+Qui a hérité de quoi, d’après les actes : testaments, partages, inventaires après décès, donations, ventes entre héritiers, contrats de mariage. Relie le défunt, les héritiers et les biens (maisons, parcelles, objets de famille). ¦ Cine a moștenit ce, după acte: testamente, împărțeli, inventare succesorale, donații, vânzări între moștenitori, contracte de căsătorie. Leagă defunctul, moștenitorii și bunurile (case, parcele, obiecte de familie).
+Chargement des actes… ¦ Se încarcă actele…
+Avec une maison ({n}) ¦ Cu o casă ({n})
+Avec une maison ¦ Cu o casă
+Avec une parcelle ({n}) ¦ Cu o parcelă ({n})
+Avec une parcelle ¦ Cu o parcelă
+Avec un objet de famille ({n}) ¦ Cu un obiect de familie ({n})
+Avec un objet ¦ Cu un obiect
+Un testament, un partage, un inventaire après décès, une donation, une dot : note le défunt (ou le donateur), les héritiers, et ce que chacun a reçu. ¦ Un testament, o împărțeală, un inventar succesoral, o donație, o zestre: notează defunctul (sau donatorul), moștenitorii și ce a primit fiecare.
+Enlève un filtre, ou cherche autrement (un nom, un notaire, un bien). ¦ Scoate un filtru sau caută altfel (un nume, un notar, un bun).
+Le tableur n’est pas chargé. ¦ Foaia de calcul nu e încărcată.
+Comment noter qui a hérité de quoi (testament, partage, inventaire après décès) ? ¦ Cum notezi cine a moștenit ce (testament, împărțeală, inventar succesoral)?
+(fiche supprimée) ¦ (fișă ștearsă)
+Convertisseur d’autrefois ¦ Convertor de altădată
+tous les héritiers ¦ toți moștenitorii
+L’acte ¦ Actul
+Ouvrir l’inventaire ¦ Deschide inventarul
+Ni date, ni notaire, ni lieu notés ¦ Nici dată, nici notar, nici loc notate
+Aucune personne reliée ¦ Nicio persoană legată
+De qui, quels biens, à qui ¦ De la cine, ce bunuri, cui
+(en valeur) ¦ (în valoare)
+(un bien = une part ; partagé à parts égales quand plusieurs personnes le reçoivent) ¦ (un bun = o parte; împărțit în părți egale când îl primesc mai multe persoane)
+Le dessin n’est pas encore chargé ¦ Desenul nu e încă încărcat
+📊 Modifier dans Mes diagrammes ¦ 📊 Modifică în Diagramele mele
+Les diagrammes ne sont pas chargés. ¦ Diagramele nu sunt încărcate.
+Le cadastre n’est pas chargé. ¦ Cadastrul nu e încărcat.
+Chargement de l’acte… ¦ Se încarcă actul…
+＋ Nouvel acte pour cette maison ¦ ＋ Act nou pentru această casă
+＋ Nouvel acte pour cette parcelle ¦ ＋ Act nou pentru această parcelă
+＋ Nouvel acte pour cet objet ¦ ＋ Act nou pentru acest obiect
+Aucun acte de succession pour cette maison ¦ Niciun act de succesiune pentru această casă
+Aucun acte de succession pour l’instant ¦ Niciun act de succesiune deocamdată
+{kind} (sans bien noté pour elle) ¦ {kind} (fără bun notat pentru ea)
+{kind} (sans bien noté pour lui) ¦ {kind} (fără bun notat pentru el)
+🎁 Ce qu’elle a reçu ¦ 🎁 Ce a primit ea
+🎁 Ce qu’il a reçu ¦ 🎁 Ce a primit el
+📤 Ce qu’elle a transmis ¦ 📤 Ce a transmis ea
+📤 Ce qu’il a transmis ¦ 📤 Ce a transmis el
+👥 Présente dans d’autres actes ¦ 👥 Prezentă în alte acte
+👥 Présent dans d’autres actes ¦ 👥 Prezent în alte acte
+🏠 Ce qu’elle a reçu / transmis ¦ 🏠 Ce a primit / transmis ea
+🏠 Ce qu’il a reçu / transmis ¦ 🏠 Ce a primit / transmis el
+🏠 Héritages : reçu et transmis ¦ 🏠 Moșteniri: primite și transmise
+=parcelle trouvée ¦ parcelă găsită|parcele găsite|de parcele găsite
+=personne reliée ¦ persoană legată|persoane legate|de persoane legate
+=maison ¦ casă|case|de case
+=parcelle ¦ parcelă|parcele|de parcele
+=image reliée ¦ imagine legată|imagini legate|de imagini legate
+copropriétaire ¦ coproprietar
+métayer ¦ dijmaș
+géomètre ¦ topograf
+Propriétaires ¦ Proprietari
+★ Propriétaires ¦ ★ Proprietari
+Propriétaire ¦ Proprietar
+à qui la parcelle appartenait ¦ cui îi aparținea parcela
+＋ Ajouter un propriétaire… ¦ ＋ Adaugă un proprietar…
+＋ Ajouter un propriétaire ¦ ＋ Adaugă un proprietar
+Parcelle sans numéro ¦ Parcelă fără număr
+Les parcelles d’aujourd’hui (IGN), par-dessus le fond ¦ Parcelele de azi (IGN), peste fundal
+Zoome pour voir les parcelles ¦ Mărește ca să vezi parcelele
+zoome pour voir les parcelles ¦ mărește ca să vezi parcelele
+Nouvelle parcelle ¦ Parcelă nouă
+Retrouver la parcelle ¦ Regăsește parcela
+🔍 Retrouver la parcelle ¦ 🔍 Regăsește parcela
+— le contour, la surface, la section et le numéro viennent du cadastre d’aujourd’hui (IGN) ¦ — conturul, suprafața, secțiunea și numărul vin din cadastrul de azi (IGN)
+🗺 Cliquer sur la carte ¦ 🗺 Fă clic pe hartă
+Lieu-dit ¦ Toponim local
+Les Combes, Le Pré du Moulin… ¦ Les Combes, Le Pré du Moulin…
+pré, terre, vigne, bois, maison et cour… ¦ fâneață, pământ, vie, pădure, casă și curte…
+Ancien numéro ¦ Număr vechi
+(plan napoléonien) ¦ (planul napoleonian)
+12 rue du Moulin ¦ 12 rue du Moulin
+L’adresse d’aujourd’hui la plus proche du centre de la parcelle (Base Adresse Nationale) ¦ Adresa de azi cea mai apropiată de centrul parcelei (Base Adresse Nationale)
+📍 Adresse d’aujourd’hui ¦ 📍 Adresa de azi
+👥 Propriétaires et occupants ¦ 👥 Proprietari și ocupanți
+📍 Autres lieux ¦ 📍 Alte locuri
+📅 Événements (vente, partage, succession…) ¦ 📅 Evenimente (vânzare, împărțeală, succesiune…)
+🗺️ Plans anciens calés (Cartes anciennes) ¦ 🗺️ Planuri vechi suprapuse (Hărți vechi)
+🗺️ Plans anciens calés ¦ 🗺️ Planuri vechi suprapuse
+🖼 Médias (extrait de matrice, plan scanné, photos) ¦ 🖼 Media (extras din matrice, plan scanat, fotografii)
+Médias de la parcelle ¦ Fișierele media ale parcelei
+Matrice cadastrale (case n°…), mutations, partages, ce que tu sais de cette parcelle… ¦ Matricea cadastrală (căsuța nr.…), mutații, împărțeli, ce știi despre această parcelă…
+↗ Déjà dans ta liste ¦ ↗ Deja în lista ta
+(Géoplateforme IGN) ¦ (Géoplateforme IGN)
+… et {n} autres : écris le numéro. ¦ … și alte {n}: scrie numărul.
+Aucune parcelle à cet endroit dans le cadastre d’aujourd’hui. Vérifie la section et le numéro (une parcelle a pu être divisée ou renumérotée), ou remplis la fiche à la main. ¦ Nicio parcelă în acest loc în cadastrul de azi. Verifică secțiunea și numărul (o parcelă poate fi fost împărțită sau renumerotată) sau completează fișa de mână.
+Le cadastre en ligne ne répond pas. ¦ Cadastrul online nu răspunde.
+Choisis une commune de France (elle a un code INSEE). ¦ Alege o localitate din Franța (are un cod INSEE).
+Je cherche dans le cadastre… ¦ Caut în cadastru…
+Je cherche la parcelle à cet endroit… ¦ Caut parcela din acest loc…
+Je cherche la parcelle… ¦ Caut parcela…
+Sections de la commune : ¦ Secțiunile localității:
+Ce lieu n’a pas de code de commune française (INSEE) : la recherche en ligne ne marche que pour les communes de France. Tu peux remplir la parcelle à la main. ¦ Acest loc nu are cod de localitate franceză (INSEE): căutarea online merge doar pentru localitățile din Franța. Poți completa parcela de mână.
+Depuis quand, jusqu’à quand ? (écris comme dans un acte : « 1834 », « vers 1850 », « 12 mars 1872 ») ¦ De când, până când? (scrie ca într-un act: „1834”, „vers 1850”, „12 mars 1872”)
+Clique sur la parcelle, sur la carte ci-dessous (zoome d’abord : glisse, molette, ＋). ¦ Fă clic pe parcelă, pe harta de mai jos (mărește mai întâi: trage, rotița, ＋).
+Retrouve d’abord la parcelle (le centre de la parcelle sert à trouver l’adresse). ¦ Regăsește mai întâi parcela (centrul parcelei servește la găsirea adresei).
+Pas d’adresse trouvée près de cette parcelle. ¦ Nicio adresă găsită lângă această parcelă.
+Parcelle « {title} » créée. ¦ Parcela „{title}” a fost creată.
+Parcelle « {title} » supprimée ¦ Parcela „{title}” a fost ștearsă
+Les parcelles de ta famille : terres, prés, maisons. Retrouve une parcelle par sa commune, sa section et son numéro (ou d’un clic sur la carte), relie-la aux propriétaires, aux maisons, aux actes et au plan napoléonien. ¦ Parcelele familiei tale: pământuri, fânețe, case. Regăsește o parcelă după localitate, secțiune și număr (sau dintr-un clic pe hartă), leag-o de proprietari, de case, de acte și de planul napoleonian.
+Chargement des parcelles… ¦ Se încarcă parcelele…
+plans, numéros et surfaces d’aujourd’hui (le plan napoléonien se cale à part). ¦ planuri, numere și suprafețe de azi (planul napoleonian se suprapune separat).
+Avec un propriétaire ({n}) ¦ Cu un proprietar ({n})
+Avec propriétaire ¦ Cu proprietar
+Sans propriétaire ({n}) ¦ Fără proprietar ({n})
+Sans propriétaire ¦ Fără proprietar
+Reliées à une maison ({n}) ¦ Legate de o casă ({n})
+Avec maison ¦ Cu casă
+Aucune parcelle pour l’instant ¦ Nicio parcelă deocamdată
+Une terre, un pré, la maison des ancêtres : choisis la commune, écris la section et le numéro (sur un acte, une matrice, un plan), ou clique sur la carte. Le contour et la surface viennent tout seuls. ¦ Un pământ, o fâneață, casa strămoșilor: alege localitatea, scrie secțiunea și numărul (de pe un act, o matrice, un plan) sau fă clic pe hartă. Conturul și suprafața vin singure.
+Enlève un filtre, ou cherche autrement (une commune, un nom). ¦ Scoate un filtru sau caută altfel (o localitate, un nume).
+Que peut-on récupérer du cadastre, et avec quelle licence ? ¦ Ce se poate prelua din cadastru și cu ce licență?
+🗺 Grande carte ¦ 🗺 Hartă mare
+Relire le contour et la surface dans le cadastre d’aujourd’hui ¦ Recitește conturul și suprafața din cadastrul de azi
+↻ Relire en ligne ¦ ↻ Recitește online
+▦ La parcelle ¦ ▦ Parcela
+Préfixe (ancienne commune) ¦ Prefix (fostă localitate)
+Pas encore de contour : « ✎ Modifier » → « 🔍 Chercher » (ou un clic sur la carte) pour le récupérer. ¦ Încă niciun contur: „✎ Modifică” → „🔍 Caută” (sau un clic pe hartă) ca să-l preiei.
+Aucune maison reliée ¦ Nicio casă legată
+Aucun acte relié (vente, partage, succession…) ¦ Niciun act legat (vânzare, împărțeală, succesiune…)
+Aucune image : un extrait de matrice, le plan scanné, une photo… ¦ Nicio imagine: un extras din matrice, planul scanat, o fotografie…
+＋ Ajouter des images ¦ ＋ Adaugă imagini
+🏛 Plan napoléonien et archives ¦ 🏛 Planul napoleonian și arhivele
+Le plan cadastral « napoléonien » (vers 1810-1850) et ses matrices sont aux <b>archives départementales</b>. Beaucoup les montrent en ligne (conditions de réutilisation propres à chaque département) : télécharge l’image de la section, ajoute-la à tes médias, puis cale-la sur la carte d’aujourd’hui (2 points suffisent, 3 ou plus c’est mieux). ¦ Planul cadastral „napoleonian” (cca 1810-1850) și matricele lui se află la <b>arhivele departamentale</b>. Multe le arată online (condiții de reutilizare proprii fiecărui departament): descarcă imaginea secțiunii, adaug-o la media ta, apoi suprapune-o pe harta de azi (ajung 2 puncte, 3 sau mai multe e mai bine).
+(adresse du site à chercher) ¦ (adresa site-ului de căutat)
+Chercher « cadastre {commune} » sur FranceArchives ↗ ¦ Caută „cadastre {commune}” pe FranceArchives ↗
+Liens donnés sans garantie : les sites des archives changent souvent. ¦ Linkuri date fără garanție: site-urile arhivelor se schimbă des.
+＋ Caler un plan ancien ¦ ＋ Suprapune un plan vechi
+📍 Lieux et 📚 sources ¦ 📍 Locuri și 📚 surse
+Aucun lieu ni source ¦ Niciun loc și nicio sursă
+Les ventes enregistrées par les impôts (prix, date, nature du terrain), sans nom de personne. Seulement pour les parcelles d’aujourd’hui. ¦ Vânzările înregistrate de fisc (preț, dată, natura terenului), fără nume de persoane. Doar pentru parcelele de azi.
+🔎 Voir les ventes ¦ 🔎 Vezi vânzările
+Plan napoléonien de {commune} ¦ Planul napoleonian din {commune}
+Plan napoléonien de {commune}, section {section} ¦ Planul napoleonian din {commune}, secțiunea {section}
+Donne une image du plan (photo ou scan), enregistre, puis clique 2 points (ou plus) sur l’image et au même endroit sur la carte. ¦ Dă o imagine a planului (fotografie sau scanare), salvează, apoi fă clic pe 2 puncte (sau mai multe) pe imagine și în același loc pe hartă.
+Images de la parcelle ¦ Imaginile parcelei
+Un extrait de matrice cadastrale, le plan napoléonien scanné, une photo de la parcelle… « 📁 Importer » ajoute une image de l’ordinateur à tes médias. ¦ Un extras din matricea cadastrală, planul napoleonian scanat, o fotografie a parcelei… „📁 Importă” adaugă o imagine de pe calculator la media ta.
+{count} à la parcelle. ¦ {count} la parcelă.
+Cette parcelle n’est plus dans le cadastre d’aujourd’hui (divisée ou renumérotée ?). ¦ Această parcelă nu mai e în cadastrul de azi (împărțită sau renumerotată?).
+Contour et surface relus dans le cadastre d’aujourd’hui. ¦ Contur și suprafață recitite din cadastrul de azi.
+Je lis les ventes de la commune (DVF)… ¦ Citesc vânzările din localitate (DVF)…
+Bâti ¦ Construit
+années lues : {years} ¦ ani citiți: {years}
+reprendre la nature « {nature} » ¦ preia natura „{nature}”
+Aucune vente de cette parcelle depuis {year}. ¦ Nicio vânzare a acestei parcele din {year}.
+Nature reprise des ventes. ¦ Natură preluată din vânzări.
+Chargement de la parcelle… ¦ Se încarcă parcela…
+← Toutes les parcelles ¦ ← Toate parcelele
+Une parcelle du cadastre. ¦ O parcelă din cadastru.
+Plan relié à la parcelle. ¦ Plan legat de parcelă.
+Les parcelles du cadastre d’aujourd’hui (IGN), et les tiennes ¦ Parcelele din cadastrul de azi (IGN) și ale tale
+Clique ensuite sur la carte : la parcelle de cet endroit, à ajouter à ta liste ¦ Fă clic apoi pe hartă: parcela din acel loc, de adăugat în lista ta
+📍 Parcelle ici ¦ 📍 Parcelă aici
+Zoome sur l’endroit, puis clique sur la parcelle. ¦ Mărește pe loc, apoi fă clic pe parcelă.
+↗ Ouvrir ma fiche ¦ ↗ Deschide fișa mea
+＋ Ajouter cette parcelle ¦ ＋ Adaugă această parcelă
+Aucune parcelle ici (le cadastre en ligne n’a rien à cet endroit). ¦ Nicio parcelă aici (cadastrul online nu are nimic în acest loc).
+🗺 Parcelles du cadastre ¦ 🗺 Parcele din cadastru
+🔗 Relier une parcelle de ta liste… ¦ 🔗 Leagă o parcelă din lista ta…
+Aucune parcelle reliée à cette maison ¦ Nicio parcelă legată de această casă
+Aucune parcelle à {nm} ¦ Nicio parcelă la {nm}
+Aucune parcelle à cet endroit ¦ Nicio parcelă în acest loc
+la maison ¦ casa
+Parcelle reliée. ¦ Parcelă legată.
+🗺 Propriétaire de… ¦ 🗺 Proprietar al…
+🗺 Propriétaire de… (cadastre) ¦ 🗺 Proprietar al… (cadastru)
+=élément ajouté ¦ element adăugat|elemente adăugate|de elemente adăugate
+🛒 À acheter ({n}) ¦ 🛒 De cumpărat ({n})
+{own} à moi · {want} à acheter ¦ {own} ale mele · {want} de cumpărat
+📬 abonné jusqu’au {dt} ¦ 📬 abonat până la {dt}
+📬 abonné ¦ 📬 abonat
+Nouvelle revue ¦ Revistă nouă
+Nouvelle collection ou série ¦ Colecție sau serie nouă
+Nouvelle émission (podcast, radio) ¦ Emisiune nouă (podcast, radio)
+Nouvelle série ou émission ¦ Serie sau emisiune nouă
+Supprimer « {title} » et tout ce qu’il contient ? (les images restent dans les Médias) ¦ Ștergi „{title}” și tot ce conține? (imaginile rămân în Media)
+Ajoute d’abord une revue. ¦ Adaugă mai întâi o revistă.
+Ajoute d’abord une « {kind} ». ¦ Adaugă mai întâi o „{kind}”.
+🎧 Pour écouter l’épisode ici et noter ses moments d’un clic, ajoute le fichier audio plus bas. Sinon : écoute-le {where}, puis « ＋ Moment » avec son minutage. ¦ 🎧 Ca să asculți episodul aici și să-i notezi momentele dintr-un clic, adaugă fișierul audio mai jos. Altfel: ascultă-l {where}, apoi „＋ Moment” cu minutajul lui.
+🎞️ Pour regarder le film ici et capturer ses images d’un clic, ajoute le fichier vidéo plus bas. Sinon : regarde-le {where}, fais une capture d’écran ({keys}), puis « ＋ Moment » et colle-la (⌘V). ¦ 🎞️ Ca să vezi filmul aici și să-i capturezi imaginile dintr-un clic, adaugă fișierul video mai jos. Altfel: vezi-l {where}, fă o captură de ecran ({keys}), apoi „＋ Moment” și lipește-o (⌘V).
+en ligne ↗ ¦ online ↗
+où tu veux ¦ unde vrei
+Enregistre d’abord, puis ajoute ses moments. ¦ Salvează mai întâi, apoi adaugă-i momentele.
+Enregistre d’abord, puis ajoute ses chapitres et passages. ¦ Salvează mai întâi, apoi adaugă-i capitolele și pasajele.
+Enregistre d’abord, puis ajoute ses articles. ¦ Salvează mai întâi, apoi adaugă-i articolele.
+Supprimer {nm} et tout son contenu ? (les images restent dans les Médias) ¦ Ștergi {nm} și tot conținutul? (imaginile rămân în Media)
+Supprimer le type « {nm} » ? ¦ Ștergi tipul „{nm}”?
+Ses {n} éléments passeront dans « {base} » (rien n’est effacé). ¦ Cele {n} elemente ale lui vor trece în „{base}” (nu se șterge nimic).
+Son élément passera dans « {base} » (rien n’est effacé). ¦ Elementul lui va trece în „{base}” (nu se șterge nimic).
+{count} à mettre dans un projet ¦ {count} de pus într-un proiect
+Chaque élément devient une <b>référence</b> du projet (auteurs, revue, numéro, pages ou minutage, résumé, étiquettes, captures) ; un passage à retenir ou ce qui est dit devient en plus une <b>citation</b>. ¦ Fiecare element devine o <b>referință</b> a proiectului (autori, revistă, număr, pagini sau minutaj, rezumat, etichete, capturi); un pasaj de reținut sau ce se spune devine în plus o <b>citare</b>.
+{count} au projet de l’Atelier. ¦ {count} la proiectul din Atelier.
+Aucun article pour l’instant. ¦ Niciun articol deocamdată.
+Collection, série ¦ Colecție, serie
+Collections, séries ¦ Colecții, serii
+Aucun chapitre ni passage noté. ¦ Niciun capitol și niciun pasaj notat.
+Série, émission ¦ Serie, emisiune
+Séries, émissions ¦ Serii, emisiuni
+Aucun moment noté. ¦ Niciun moment notat.
+Épisode ¦ Episod
+Podcasts (épisodes) ¦ Podcasturi (episoade)
+Podcast, émission de radio ¦ Podcast, emisiune radio
+Podcasts, émissions ¦ Podcasturi, emisiuni
+Numéros, livres, films ¦ Numere, cărți, filme
+Revues, collections, séries ¦ Reviste, colecții, serii
+Pas précisé ¦ Neprecizat
+(hors-série) ¦ (ediție specială)
+Ce que tu as lu, vu, ce que tu veux acheter ; chaque article, chapitre ou moment, et qui ou quoi y est cité. ¦ Ce ai citit, ce ai văzut, ce vrei să cumperi; fiecare articol, capitol sau moment și cine sau ce e citat în el.
+Les types (revue, livre, documentaire, podcast, les tiens), leurs champs, leur affichage ¦ Tipurile (revistă, carte, documentar, podcast, ale tale), câmpurile lor, afișarea lor
+à acheter ou commandé ¦ de cumpărat sau comandat
+au prix affiché ¦ la prețul afișat
+Sans catégorie ¦ Fără categorie
+Rien ne correspond. ¦ Nimic nu corespunde.
+Commence par « ＋ Numéro », « ＋ Livre », « ＋ Documentaire » ou « ＋ Épisode », en haut de la page. ¦ Începe cu „＋ Număr”, „＋ Carte”, „＋ Documentar” sau „＋ Episod”, sus pe pagină.
+N°, tome, épisode ¦ Nr., volum, episod
+Où l’acheter ¦ De unde se cumpără
+écouté ¦ ascultat
+Écouté ¦ Ascultat
+Le film est dans l’application ¦ Filmul e în aplicație
+L’épisode est dans l’application ¦ Episodul e în aplicație
+Rien ne correspond. Les articles, chapitres et moments s’ajoutent dans la fiche d’un numéro, d’un livre ou d’un documentaire. ¦ Nimic nu corespunde. Articolele, capitolele și momentele se adaugă în fișa unui număr, a unei cărți sau a unui documentar.
+Auteurs, qui parle ¦ Autori, cine vorbește
+Aucune revue, collection ou série pour l’instant ¦ Nicio revistă, colecție sau serie deocamdată
+Un livre ou un documentaire n’a pas besoin d’être dans une collection ou une série. ¦ O carte sau un documentar nu trebuie neapărat să fie într-o colecție sau o serie.
+à acheter ¦ de cumpărat
+Toutes les catégories ¦ Toate categoriile
+Toutes les enquêtes ¦ Toate investigațiile
+Personne citée ¦ Persoană citată
+Nom de la personne… ¦ Numele persoanei…
+Introuvable : la liste a changé, elle se recharge. ¦ Negăsit: lista s-a schimbat, se reîncarcă.
+Choisis la vue des numéros, livres et films, ou celle de leur contenu. ¦ Alege vizualizarea numerelor, cărților și filmelor sau pe cea a conținutului lor.
+Ce qu’on voit ¦ Ce se vede
+Ce qui est dit, citation ¦ Ce se spune, citare
+Noms cités ¦ Nume citate
+Éditeur, chaîne ¦ Editură, canal
+Hors-série ¦ Ediție specială
+Prix payé ¦ Preț plătit
+Rangé où ¦ Pus unde
+Ajouter une personne, une enquête… ¦ Adaugă o persoană, o investigație…
+ou une partie d’enquête… ¦ sau o parte de investigație…
+Revue française de généalogie, bulletin du cercle… ¦ Revue française de généalogie, buletinul cercului…
+Que sais-je ?, Les Rougon-Macquart… ¦ Que sais-je ?, Les Rougon-Macquart…
+La Fabrique de l’histoire, Affaires sensibles, Généalogie pour tous… ¦ La Fabrique de l’histoire, Affaires sensibles, Généalogie pour tous…
+Secrets d’histoire, Apocalypse, Retour aux sources… ¦ Secrets d’histoire, Apocalypse, Retour aux sources…
+Chaîne, producteur ¦ Canal, producător
+📬 Je suis abonné ¦ 📬 Sunt abonat
+Abonnement jusqu’au ¦ Abonament până la
+Prix de l’abonnement ¦ Prețul abonamentului
+Pays, région ¦ Țară, regiune
+Depuis (année) ¦ Din (anul)
+Jusqu’à (année) ¦ Până în (anul)
+Où l’acheter, le voir ¦ De unde se cumpără, unde se vede
+Supprimer le périodique ¦ Șterge periodicul
+Revue, collection, série, podcast ¦ Revistă, colecție, serie, podcast
+N° dans la collection, tome ¦ Nr. în colecție, volum
+Épisode, saison ¦ Episod, sezon
+Année, date ¦ An, dată
+Diffusé, sorti le ¦ Difuzat, apărut la
+mars 2024, été 1998, 12/03/1925… ¦ mars 2024, été 1998, 12/03/1925…
+Hors-série / numéro spécial ¦ Ediție specială / număr special
+Thème, titre de couverture ¦ Temă, titlu de copertă
+Titre de l’épisode ¦ Titlul episodului
+Réalisation ¦ Regie
+Prénom Nom, Prénom Nom ¦ Prenume Nume, Prenume Nume
+Invités, qui parle ¦ Invitați, cine vorbește
+2e édition, poche… ¦ ediția a 2-a, format de buzunar…
+Chaîne, diffuseur, plateforme ¦ Canal, difuzor, platformă
+Où le voir (lien : replay, YouTube, INA…) ¦ Unde se vede (link: reluare, YouTube, INA…)
+Où l’écouter (lien de l’épisode) ¦ Unde se ascultă (linkul episodului)
+Envie de l’acheter ¦ Vreau să-l cumpăr
+🔥 un peu ¦ 🔥 puțin
+Acheté le ¦ Cumpărat la
+Acheté où ¦ Cumpărat de unde
+Où le trouver (lien) ¦ Unde se găsește (link)
+Version numérique (lien) ¦ Versiune digitală (link)
+DVD de l’étagère, disque dur, dossier… ¦ DVD de pe raft, hard disk, dosar…
+bibliothèque du bureau, boîte 3… ¦ biblioteca din birou, cutia 3…
+Résumé, table des matières ¦ Rezumat, cuprins
+— aucune — ¦ — niciunul —
+Généalogie, histoire locale, guerre… ¦ Genealogie, istorie locală, război…
+🎞️ Le film lui-même (fichier vidéo, si tu l’as) ¦ 🎞️ Filmul însuși (fișier video, dacă îl ai)
+📸 Captures d’écran, documents ¦ 📸 Capturi de ecran, documente
+🖼️ Image de l’émission ¦ 🖼️ Imaginea emisiunii
+🎧 L’épisode lui-même (fichier audio, si tu l’as) ¦ 🎧 Episodul însuși (fișier audio, dacă îl ai)
+📸 Pages photographiées, captures, PDF ¦ 📸 Pagini fotografiate, capturi, PDF
+📸 Captures d’écran, pages, PDF ¦ 📸 Capturi de ecran, pagini, PDF
+📸 Captures d’écran, PDF ¦ 📸 Capturi de ecran, PDF
+Aller à ce moment ¦ Mergi la acest moment
+Ouvrir à ce moment ¦ Deschide la acest moment
+📸 Capturer cette image ¦ 📸 Capturează această imagine
+📌 Noter ce moment ¦ 📌 Notează acest moment
+La capture s’ouvre dans un nouveau moment, à annoter. ¦ Captura se deschide într-un moment nou, de adnotat.
+Le minutage du moment se remplit tout seul. ¦ Minutajul momentului se completează singur.
+Nouveau numéro ¦ Număr nou
+Nouveau livre ¦ Carte nouă
+Nouveau documentaire ¦ Documentar nou
+Nouvel épisode ¦ Episod nou
+Les champs montrés et leur ordre se règlent dans « ⚙️ Réglages » (en haut de la liste). ¦ Câmpurile arătate și ordinea lor se reglează în „⚙️ Setări” (sus în listă).
+Supprimer le numéro ¦ Șterge numărul
+📰 Revue (numéros, articles) ¦ 📰 Revistă (numere, articole)
+📖 Livre (chapitres, passages) ¦ 📖 Carte (capitole, pasaje)
+🎬 Documentaire (moments minutés, film) ¦ 🎬 Documentar (momente cu minutaj, film)
+🎙️ Podcast (épisodes, moments minutés, son) ¦ 🎙️ Podcast (episoade, momente cu minutaj, sunet)
+Nom (au pluriel) ¦ Nume (la plural)
+Cartes postales, Thèses, Expositions… ¦ Cărți poștale, Teze, Expoziții…
+Un élément s’appelle ¦ Un element se numește
+Carte, Thèse, Exposition… ¦ Carte poștală, Teză, Expoziție…
+Affichage par défaut ¦ Afișare implicită
+Grouper par catégorie par défaut ¦ Grupează implicit după categorie
+Champs de la fiche (montrés, dans cet ordre) ¦ Câmpurile fișei (arătate, în această ordine)
+Coche ce qui s’affiche (dans la fiche de l’élément et sur ses cartes) ; ↑ ↓ pour l’ordre. Un champ caché garde ce qu’on y avait écrit. ¦ Bifează ce se afișează (în fișa elementului și pe cardurile lui); ↑ ↓ pentru ordine. Un câmp ascuns păstrează ce ai scris în el.
+case à cocher ¦ casetă de bifat
+＋ Champ à moi ¦ ＋ Câmp al meu
+Champs comme au départ ¦ Câmpuri ca la început
+Supprimer ce type ¦ Șterge acest tip
+⚙️ Réglages des types ¦ ⚙️ Setările tipurilor
+Supprimer le type ¦ Șterge tipul
+Donne un nom à chaque type. ¦ Dă un nume fiecărui tip.
+Réglages des types enregistrés. ¦ Setările tipurilor au fost salvate.
+La vidéo n’est pas encore prête : lance-la un instant puis recommence. ¦ Video-ul nu e încă gata: pornește-l o clipă, apoi încearcă din nou.
+Impossible de capturer cette vidéo. ¦ Nu se poate captura acest video.
+Épaisseur ¦ Grosime
+Texte sur l’image ¦ Text pe imagine
+Quoi écrire ? ¦ Ce scrii?
+52:34 ou 1:02:10 – 1:03:00 ¦ 52:34 sau 1:02:10 – 1:03:00
+En quelques mots ¦ În câteva cuvinte
+La maison de l’arrière-grand-père, l’acte de mariage montré… ¦ Casa străbunicului, actul de căsătorie arătat…
+Qui parle ¦ Cine vorbește
+Qui parle, qui on voit ¦ Cine vorbește, pe cine vezi
+Ce qu’on entend, ce qu’on apprend ¦ Ce se aude, ce afli
+Ce qu’on voit, ce qu’on apprend ¦ Ce se vede, ce afli
+Ce qui est dit (mot à mot) ¦ Ce se spune (cuvânt cu cuvânt)
+Documents montrés, sources ¦ Documente arătate, surse
+Mots-clés ¦ Cuvinte-cheie
+Titre du chapitre, du passage ¦ Titlul capitolului, al pasajului
+Auteur (si différent du livre) ¦ Autor (dacă e altul decât al cărții)
+Passage à retenir (citation) ¦ Pasaj de reținut (citare)
+meunier, émigration, registres protestants… ¦ morar, emigrare, registre protestante…
+Noms de famille cités ¦ Nume de familie citate
+Sources citées ¦ Surse citate
+Lien (version en ligne) ¦ Link (versiunea online)
+chapitre ou passage ¦ capitol sau pasaj
+▶ Réécouter ce moment en ligne ↗ ¦ ▶ Reascultă acest moment online ↗
+▶ Revoir ce moment en ligne ↗ ¦ ▶ Revezi acest moment online ↗
+Capture de ce moment ¦ Captura acestui moment
+Colle une capture d’écran (⌘V) ou choisis-la ci-dessous : tu peux ensuite l’annoter (flèches, cercles, texte). ¦ Lipește o captură de ecran (⌘V) sau alege-o mai jos: o poți adnota apoi (săgeți, cercuri, text).
+Colle une capture (⌘V) pour l’annoter avant de l’ajouter. ¦ Lipește o captură (⌘V) ca s-o adnotezi înainte de a o adăuga.
+📸 Captures de ce moment ¦ 📸 Capturile acestui moment
+Dessine sur l’image : elle sera ajoutée telle quelle, annotations comprises. ¦ Desenează pe imagine: va fi adăugată așa cum e, cu tot cu adnotări.
+Supprimer l’article ¦ Șterge articolul
+Rien à envoyer : la liste affichée est vide. ¦ Nimic de trimis: lista afișată e goală.
+Crée d’abord un projet dans Enquêtes → Atelier. ¦ Creează mai întâi un proiect în Investigații → Atelier.
+VERS L’ATELIER ¦ SPRE ATELIER
+Mettre dans le projet ¦ Pune în proiect
+— à la racine — ¦ — la rădăcină —
+avec leur contenu (articles, chapitres, moments) ¦ cu conținutul lor (articole, capitole, momente)
+Rien encore dans Listes → Revues, livres et documentaires. ¦ Încă nimic în Liste → Reviste, cărți și documentare.
+＋ Ajouter des revues, livres, documentaires ¦ ＋ Adaugă reviste, cărți, documentare
+Ajouter au projet ¦ Adaugă la proiect
+tout cocher (affichés) ¦ bifează tot (cele afișate)
+Coche au moins un élément. ¦ Bifează cel puțin un element.
+Modifier cette demande ¦ Modifică această cerere
+Supprimer cette demande ¦ Șterge această cerere
+Modifier cette langue ¦ Modifică această limbă
+Supprimer cette langue ¦ Șterge această limbă
+Modifier les cartes d’électeur ¦ Modifică cărțile de alegător
+Supprimer les cartes d’électeur ¦ Șterge cărțile de alegător
+★ ceux qui reçoivent ; ☆ les autres (témoins, tuteur…). ¦ ★ cei care primesc; ☆ ceilalți (martori, tutore…).
+Dates indicatives au niveau national, d’après les synthèses de l’Union interparlementaire et de Wikipédia (« Droit de vote des femmes », « Suffrage universel »). Elles disent quand le droit a été accordé ; des restrictions (âge, fortune, savoir lire, origine) existaient souvent avant ou après, voir les notes. ¦ Date orientative la nivel național, după sintezele Uniunii Interparlamentare și ale Wikipediei („Dreptul de vot al femeilor”, „Vot universal”). Ele spun când a fost acordat dreptul; restricții (vârstă, avere, știința de carte, origine) existau adesea înainte sau după, vezi notele.
+La langue parlée par chacun ou par une branche (flamand, picard, breton, occitan, alsacien, yiddish, italien…). Elle éclaire les noms mal orthographiés par un curé qui ne comprenait pas la langue de la famille, et indique dans quelle langue chercher : dans le Nord, une partie des registres et des actes notariés est en flamand. Une langue notée sur une personne vaut aussi pour sa descendance, sauf refus explicite sur une fiche. ¦ Limba vorbită de fiecare sau de o ramură (flamandă, picardă, bretonă, occitană, alsaciană, idiș, italiană…). Ea explică numele scrise greșit de un preot care nu înțelegea limba familiei și arată în ce limbă să cauți: în Nord, o parte din registre și din actele notariale sunt în flamandă. O limbă notată la o persoană e valabilă și pentru descendenții ei, în afară de un refuz explicit pe o fișă.
+=personne connue ¦ persoană cunoscută|persoane cunoscute|de persoane cunoscute
+=information notée ¦ informație notată|informații notate|de informații notate
+Cause de décès ¦ Cauza decesului
+Épidémie traversée ¦ Epidemie trăită
+🩺 Santé (privé) ¦ 🩺 Sănătate (privat)
+Lecture de la santé… ¦ Se citește sănătatea…
+Voir comment c’est réparti chez ses ancêtres ¦ Vezi cum e repartizat la strămoșii săi
+🌳 Par branches ¦ 🌳 Pe ramuri
+Acte de décès ¦ Act de deces
+La cause écrite sur l’acte de décès (bloc Événements) : elle se modifie là-bas ¦ Cauza scrisă în actul de deces (blocul Evenimente): se modifică acolo
+d’après l’acte de décès ¦ după actul de deces
+Rien de noté sur sa santé pour l’instant ¦ Nimic notat despre sănătatea sa deocamdată
+＋ Ajouter une information ¦ ＋ Adaugă o informație
+🦠 Épidémies de son vivant, là où elle a vécu ¦ 🦠 Epidemii din timpul vieții ei, acolo unde a trăit
+🦠 Épidémies de son vivant, là où il a vécu ¦ 🦠 Epidemii din timpul vieții lui, acolo unde a trăit
+D’après « 🌍 Le monde autour ». On ne sait pas si {nm} a été malade : « ＋ Noter » la garde comme épidémie traversée. ¦ După „🌍 Lumea din jur”. Nu se știe dacă {nm} a fost bolnav(ă): „＋ Notează” o păstrează ca epidemie trăită.
+cette personne ¦ această persoană
+dans sa région ¦ în regiunea sa
+Noté ¦ Notat
+« 🩺 Santé de la famille » est cachée : montre-la d’abord dans les Réglages. ¦ „🩺 Sănătatea familiei” e ascunsă: arat-o mai întâi în Setări.
+🩺 SANTÉ DE LA FAMILLE · PRIVÉ ¦ 🩺 SĂNĂTATEA FAMILIEI · PRIVAT
+Modifier l’information de santé ¦ Modifică informația de sănătate
+Nouvelle information de santé ¦ Informație nouă de sănătate
+Ce que c’était ¦ Ce era
+phtisie, diabète, sourd de naissance, grippe espagnole… ¦ ftizie, diabet, surd din naștere, gripă spaniolă…
+Déjà noté dans la famille : ¦ Deja notat în familie:
+vers 1890, 1918, entre 1880 et 1885… ¦ vers 1890, 1918, entre 1880 et 1885…
+Ce que la famille en dit, ce qu’on a lu… ¦ Ce spune familia, ce s-a citit…
+À vérifier (on l’a entendu dire, sans preuve) ¦ De verificat (s-a auzit, fără dovadă)
+🔒 Privé : caché ailleurs que sur ta fiche et dans cette liste, jamais exporté sans le demander. ¦ 🔒 Privat: ascuns în afară de fișa ta și de această listă, niciodată exportat fără să ceri.
+Choisis la personne. ¦ Alege persoana.
+Écris ce que c’était (une maladie, un handicap, une cause de décès…). ¦ Scrie ce era (o boală, un handicap, o cauză de deces…).
+Information de santé enregistrée. ¦ Informație de sănătate salvată.
+Information de santé ajoutée. ¦ Informație de sănătate adăugată.
+Information de santé supprimée : « {label} » ¦ Informație de sănătate ștearsă: „{label}”
+Les maladies et causes de décès connues dans la famille, et leur place dans les branches. ¦ Bolile și cauzele de deces cunoscute în familie și locul lor în ramuri.
+Pas en mode consultation ¦ Nu în modul consultare
+Les informations de santé sont privées : elles ne se montrent pas en mode consultation. ¦ Informațiile de sănătate sunt private: nu apar în modul consultare.
+Les maladies, handicaps, causes de décès et épidémies notés dans la famille. De la mémoire familiale, privée : jamais exportée. ¦ Bolile, handicapurile, cauzele de deces și epidemiile notate în familie. Din memoria familiei, privată: niciodată exportată.
+⚙️ Réglages de la santé ¦ ⚙️ Setările sănătății
+📋 Tout ce qui est noté ¦ 📋 Tot ce e notat
+Lecture de la santé de la famille… ¦ Se citește sănătatea familiei…
+Rien de noté pour l’instant ¦ Nimic notat deocamdată
+Une maladie dont on parlait dans la famille, un handicap, la cause d’un décès, une épidémie traversée… Les causes écrites sur les actes de décès apparaissent ici toutes seules. ¦ O boală despre care se vorbea în familie, un handicap, cauza unui deces, o epidemie trăită… Cauzele scrise în actele de deces apar aici singure.
+Chercher… (ex. phtisie, Borie, 1918) ¦ Caută… (ex. ftizie, Borie, 1918)
+D’où ça vient ¦ De unde vine
+Noté dans la santé ¦ Notat la sănătate
+Écrit sur l’acte de décès ¦ Scris în actul de deces
+Seulement « à vérifier » ¦ Doar „de verificat”
+Le plus souvent noté : ¦ Notat cel mai des:
+Voir la répartition dans les branches ¦ Vezi repartiția pe ramuri
+Aucune ligne ne correspond. ¦ Niciun rând nu corespunde.
+Ancêtre pas encore trouvé ¦ Strămoș încă negăsit
+Éventail des ancêtres de {nm} ¦ Evantaiul strămoșilor lui {nm}
+La personne du centre ¦ Persoana din centru
+La maladie à colorer ¦ Boala de colorat
+Éventail ¦ Evantai
+Les quatre côtés ¦ Cele patru părți
+Lecture des ancêtres… ¦ Se citesc strămoșii…
+Choisis la personne du centre : ses ancêtres forment l’éventail. ¦ Alege persoana din centru: strămoșii ei formează evantaiul.
+<b>{count}</b> avec « {label} » parmi {known} sur {gens} générations. ¦ <b>{count}</b> cu „{label}” din {known} pe {gens} generații.
+Choisis une maladie pour la voir en couleur. En gris : ce qui est noté d’autre. ¦ Alege o boală ca s-o vezi colorată. Cu gri: ce altceva e notat.
+La maladie choisie ¦ Boala aleasă
+Autre chose de noté ¦ Altceva notat
+Rien de noté ¦ Nimic notat
+Pas encore trouvé ¦ Încă negăsit
+Personne avec « {label} » de ce côté. ¦ Nimeni cu „{label}” pe această parte.
+Au centre : ¦ În centru:
+Au centre et chez ses parents : ¦ În centru și la părinții săi:
+Noter les maladies et causes de décès connues dans la famille. Des informations privées : cachées au départ, jamais exportées. ¦ Notează bolile și cauzele de deces cunoscute în familie. Informații private: ascunse la început, niciodată exportate.
+Montrer « 🩺 Santé de la famille » ¦ Arată „🩺 Sănătatea familiei”
+Le bloc « 🩺 Santé » des fiches et la liste dans Listes → Personnes et familles. ¦ Blocul „🩺 Sănătate” din fișe și lista din Liste → Persoane și familii.
+Proposer les épidémies de son vivant sur la fiche ¦ Propune pe fișă epidemiile din timpul vieții
+D’après « 🌍 Le monde autour » : elles ne sont notées que si tu cliques « ＋ Noter ». ¦ După „🌍 Lumea din jur”: sunt notate doar dacă faci clic pe „＋ Notează”.
+Voir la liste ↗ ¦ Vezi lista ↗
+Le bloc se range comme les autres : Réglages → Apparence → Fiches personnes et animaux. ¦ Blocul se ordonează ca celelalte: Setări → Aspect → Fișe de persoane și animale.
+🔒 Ce qui reste privé ¦ 🔒 Ce rămâne privat
+C’est de la mémoire familiale, pas un avis médical : l’app ne calcule aucun risque ni aucun pourcentage. ¦ E memorie de familie, nu o părere medicală: aplicația nu calculează niciun risc și niciun procent.
+Jamais dans le GEDCOM, sauf si tu coches « 🩺 Inclure la santé de la famille » au moment de l’export. ¦ Niciodată în GEDCOM, decât dacă bifezi „🩺 Include sănătatea familiei” la export.
+Jamais sur le site web, dans le partage avec la famille, les paquets, les livres, le mode simple ni les jeux. ¦ Niciodată pe site-ul web, în partajarea cu familia, în pachete, în cărți, în modul simplu sau în jocuri.
+Pas imprimée avec la fiche. ¦ Nu se tipărește cu fișa.
+Cachée : ni bloc, ni liste, ni résultat dans la recherche. ¦ Ascunsă: nici bloc, nici listă, nici rezultat în căutare.
+En mode consultation 🔒 : rien ne se montre. ¦ În modul consultare 🔒: nu se arată nimic.
+Les causes écrites sur les actes de décès restent des événements : elles sont exportées comme avant. ¦ Cauzele scrise în actele de deces rămân evenimente: sunt exportate ca înainte.
+Naissances et baptêmes. ¦ Nașteri și botezuri.
+Mariages, contrats et fiançailles. ¦ Căsătorii, contracte și logodne.
+Les lieux de décès. ¦ Locurile de deces.
+Inhumations et tombes ¦ Înmormântări și morminte
+Inhumations, crémations et tombes placées (GPS). ¦ Înmormântări, incinerări și morminte localizate (GPS).
+Résidences ¦ Reședințe
+Les lieux où ils ont habité. ¦ Locurile unde au locuit.
+Les foyers recensés. ¦ Gospodăriile recenzate.
+Événements (choisis) ¦ Evenimente (alese)
+Les sortes d’événements que tu choisis. ¦ Felurile de evenimente pe care le alegi.
+Migrations et voyages ¦ Migrații și călătorii
+De la naissance au décès, et les voyages notés. ¦ De la naștere la deces și călătoriile notate.
+Lieux de vie d’une personne ¦ Locurile de viață ale unei persoane
+Les étapes d’une ou plusieurs vies, dans l’ordre. ¦ Etapele uneia sau mai multor vieți, în ordine.
+Où sont nés ceux qui portent ces noms. ¦ Unde s-au născut cei care poartă aceste nume.
+Les professions notées, à leur lieu. ¦ Profesiile notate, la locul lor.
+Les maisons de famille. ¦ Casele familiei.
+Photos et cartes postales de lieux : points, zones, hypothèses, angle de vue. ¦ Fotografii și cărți poștale cu locuri: puncte, zone, ipoteze, unghi de vedere.
+Monuments aux morts ¦ Monumente ale eroilor
+Les morts pour la France, au monument de leur commune. ¦ Morții pentru Franța, la monumentul din localitatea lor.
+Où les sources citées ont été trouvées. ¦ Unde au fost găsite sursele citate.
+Médias placés ¦ Media localizate
+Photos avec une position GPS ou rangées sur un lieu. ¦ Fotografii cu o poziție GPS sau puse pe un loc.
+Observations et trajets GPS. ¦ Observații și trasee GPS.
+Événements historiques ¦ Evenimente istorice
+Les événements de l’histoire placés sur un lieu. ¦ Evenimentele istoriei puse pe un loc.
+Mes couches dessinées ou importées ¦ Straturile mele desenate sau importate
+Zones, itinéraires et points de « ✏️ Mes couches » (GeoJSON, KML). ¦ Zone, itinerarii și puncte din „✏️ Straturile mele” (GeoJSON, KML).
+📍 Épingle ¦ 📍 Pioneză
+Non précisé ¦ Neprecizat
+Ma carte ¦ Harta mea
+Aucune couche ¦ Niciun strat
+Mes cartes ¦ Hărțile mele
+Des cartes sur mesure : tu choisis ce qu’on y voit (naissances, trajets, images de lieux, métiers…), pour qui et entre quelles dates. Chaque couche a ses filtres et son style. ¦ Hărți la comandă: alegi ce apare pe ele (nașteri, trasee, imagini de locuri, meserii…), pentru cine și între ce date. Fiecare strat are filtrele și stilul lui.
+⤒ Importer une carte… ¦ ⤒ Importă o hartă…
+Chargement de mes cartes… ¦ Se încarcă hărțile mele…
+Prête ¦ Gata
+💾 Partager la définition ¦ 💾 Partajează definiția
+Partager la définition ¦ Partajează definiția
+🔍 Aucune carte ne correspond ¦ 🔍 Nicio hartă nu corespunde
+Aucune carte pour l’instant ¦ Nicio hartă deocamdată
+Chercher une carte… (ex. naissances, Corrèze) ¦ Caută o hartă… (ex. nașteri, Corrèze)
+Ce qu’elle montre ¦ Ce arată
+Renommer la carte ¦ Redenumește harta
+Carte renommée « {nm} » ¦ Hartă redenumită „{nm}”
+Toutes mes cartes ¦ Toate hărțile mele
+CARTE · MES CARTES ¦ HARTĂ · HĂRȚILE MELE
+Nouvelle carte ¦ Hartă nouă
+Créer la carte ¦ Creează harta
+Les BORIE en Corrèze ¦ Familia BORIE în Corrèze
+Ce que montre la carte, pour qui, à quelle époque ¦ Ce arată harta, pentru cine, în ce epocă
+Les premières couches ¦ Primele straturi
+(tu pourras en ajouter, en retirer et les filtrer) ¦ (vei putea adăuga, scoate și filtra)
+Donne un nom à la carte. ¦ Dă un nume hărții.
+Carte « {nm} » ¦ Harta „{nm}”
+Carte « {nm} » créée ¦ Harta „{nm}” a fost creată
+Carte « {nm} » créée (copie) ¦ Harta „{nm}” a fost creată (copie)
+Carte « {nm} » supprimée ¦ Harta „{nm}” a fost ștearsă
+Carte « {nm} » importée ¦ Harta „{nm}” a fost importată
+Carte « {nm} » exportée en {fmt} ¦ Harta „{nm}” a fost exportată în {fmt}
+Carte « {nm} » ajoutée au tableau de bord ¦ Harta „{nm}” a fost adăugată pe tabloul de bord
+« {nm} » est gardée dans Mes cartes : tes changements y restent. ¦ „{nm}” e păstrată în Hărțile mele: modificările tale rămân acolo.
+jusqu’en {year} ¦ până în {year}
+Aucune couche montrée ¦ Niciun strat arătat
+Toutes les années ¦ Toți anii
+Pas de dates sur cette carte ¦ Nicio dată pe această hartă
+Curseur du temps ¦ Cursorul timpului
+Faire défiler le temps ¦ Derulează timpul
+Toutes les années d’un coup ¦ Toți anii deodată
+Garder ce qui n’a pas de date ¦ Păstrează ce nu are dată
+Qui ? ¦ Cine?
+Une ou plusieurs vies, dans l’ordre des années. ¦ Una sau mai multe vieți, în ordinea anilor.
+Vide = tout le monde. ¦ Gol = toată lumea.
+Avec ¦ Cu
+Seulement les ancêtres (Sosa) ¦ Doar strămoșii (Sosa)
+Générations au plus ¦ Generații cel mult
+Côté ¦ Partea
+Les deux côtés ¦ Ambele părți
+Côté du père ¦ Partea tatălui
+Côté de la mère ¦ Partea mamei
+Depuis la personne de départ (Sosa 1). ¦ De la persoana de pornire (Sosa 1).
+Dans la zone ¦ În zona
+Une couche de « ✏️ Mes couches » : ses zones dessinées. ¦ Un strat din „✏️ Straturile mele”: zonele lui desenate.
+Rien de coché = toutes. ¦ Nimic bifat = toate.
+Seulement l’hypothèse retenue ¦ Doar ipoteza reținută
+Aucune sorte ¦ Niciun fel
+Rien de coché = tous les événements. ¦ Nimic bifat = toate evenimentele.
+tisserand, ou un secteur ¦ țesător, sau un sector
+Séparés par des virgules. Vide = le nom de la personne de départ. ¦ Separate prin virgule. Gol = numele persoanei de pornire.
+Vide = tous les métiers. ¦ Gol = toate meseriile.
+Vide = tous. ¦ Gol = toți.
+Vide = toutes mes couches. ¦ Gol = toate straturile mele.
+Avec les voyages notés (départs, émigration) ¦ Cu călătoriile notate (plecări, emigrare)
+Regrouper les points proches ¦ Grupează punctele apropiate
+Carte de chaleur ¦ Hartă termică
+Noms des lieux ¦ Numele locurilor
+Une couleur par sorte ¦ O culoare pentru fiecare fel
+⚙️ La carte ¦ ⚙️ Harta
+Carte prête : au premier changement, elle est gardée dans Mes cartes. ¦ Hartă gata: la prima modificare, e păstrată în Hărțile mele.
+Celui de la Carte ¦ Cel al Hărții
+Du… (1800) ¦ De la… (1800)
+Au… (1950) ¦ Până la… (1950)
+Le temps ▶ ¦ Timpul ▶
+Tout jusqu’à l’année ¦ Tot până în anul
+Une fenêtre ¦ O fereastră
+Largeur de la fenêtre ¦ Lățimea ferestrei
+Durée de la lecture ¦ Durata redării
+Légende sur la carte ¦ Legendă pe hartă
+📌 Garder cette vue ¦ 📌 Păstrează această vedere
+La carte s’ouvre toujours sur la vue gardée. ¦ Harta se deschide mereu pe vederea păstrată.
+Sans vue gardée, la carte se cadre sur ce qu’elle montre. ¦ Fără vedere păstrată, harta se încadrează pe ce arată.
+(la première est dessinée par-dessus) ¦ (primul e desenat deasupra)
+Ranger la couche (Alt + ↑ / ↓) ¦ Mută stratul (Alt + ↑ / ↓)
+Glisser pour ranger · Alt + ↑ / ↓ ¦ Trage ca să ordonezi · Alt + ↑ / ↓
+Montrer ou cacher ¦ Arată sau ascunde
+Montrer « {nm} » ¦ Arată „{nm}”
+Aucune couche : ajoute ce que la carte doit montrer. ¦ Niciun strat: adaugă ce trebuie să arate harta.
+＋ Ajouter une couche ¦ ＋ Adaugă un strat
+Ajouter une couche ¦ Adaugă un strat
+Couleur de « {nm} » changée ¦ Culoarea pentru „{nm}” a fost schimbată
+Couche « {nm} » rangée ¦ Stratul „{nm}” a fost mutat
+Couche « {nm} » ajoutée ¦ Stratul „{nm}” a fost adăugat
+Couche « {nm} » dupliquée ¦ Stratul „{nm}” a fost duplicat
+Couche « {nm} » retirée ¦ Stratul „{nm}” a fost scos
+Couche « {nm} » montrée ¦ Stratul „{nm}” e arătat
+Couche « {nm} » cachée ¦ Stratul „{nm}” e ascuns
+Couche renommée « {nm} » ¦ Strat redenumit „{nm}”
+Cadrer sur la couche ¦ Încadrează pe strat
+Retirer la couche ¦ Scoate stratul
+Vue gardée ¦ Vedere păstrată
+Filtre de « {nm} » changé ¦ Filtrul pentru „{nm}” a fost schimbat
+Curseur du temps changé ¦ Cursorul timpului a fost schimbat
+Description changée ¦ Descrierea a fost schimbată
+Fond de la carte changé ¦ Fundalul hărții a fost schimbat
+Période changée ¦ Perioada a fost schimbată
+Légende montrée ¦ Legendă arătată
+Légende cachée ¦ Legendă ascunsă
+montrée ¦ arătată
+Certitude de « {nm} » changée ¦ Certitudinea pentru „{nm}” a fost schimbată
+Sortes de « {nm} » changées ¦ Felurile pentru „{nm}” au fost schimbate
+Style de « {nm} » changé ¦ Stilul pentru „{nm}” a fost schimbat
+Personnes de « {nm} » changées ¦ Persoanele pentru „{nm}” au fost schimbate
+Branche de « {nm} » changée ¦ Ramura pentru „{nm}” a fost schimbată
+Étiquettes de « {nm} » changées ¦ Etichetele pentru „{nm}” au fost schimbate
+Lieu de « {nm} » changé ¦ Locul pentru „{nm}” a fost schimbat
+Zone de « {nm} » changée ¦ Zona pentru „{nm}” a fost schimbată
+Animaux de « {nm} » changés ¦ Animalele pentru „{nm}” au fost schimbate
+Couches de « {nm} » changées ¦ Straturile pentru „{nm}” au fost schimbate
+la définition de cette carte (fond, période, couches, filtres et styles — jamais les données) ¦ definiția acestei hărți (fundal, perioadă, straturi, filtre și stiluri — niciodată datele)
+Réglage « {nm} » appliqué ¦ Setarea „{nm}” a fost aplicată
+Réglage « {nm} » importé : clique « Appliquer » pour t’en servir. ¦ Setarea „{nm}” a fost importată: fă clic pe „Aplică” ca s-o folosești.
+à vérifier ¦ de verificat
+← Mes cartes ¦ ← Hărțile mele
+Image ou PDF (PNG, JPG, SVG, PDF)… ¦ Imagine sau PDF (PNG, JPG, SVG, PDF)…
+La définition (réglage à partager) ¦ Definiția (setare de partajat)
+Mettre dans le tableau de bord ¦ Pune pe tabloul de bord
+Mettre dans la mise en page… ¦ Pune în paginare…
+Dans mon site web… ¦ În site-ul meu web…
+Supprimer la carte ¦ Șterge harta
+Les fonds de carte ne sont pas encore chargés : réessaie dans un instant. ¦ Fundalurile de hartă nu sunt încă încărcate: încearcă din nou peste o clipă.
+Une copie est rangée dans les médias. ¦ O copie e pusă în media.
+sans les personnes vivantes ni les fiches confidentielles ¦ fără persoanele în viață și fără fișele confidențiale
+(sans les personnes vivantes ni les fiches confidentielles) ¦ (fără persoanele în viață și fără fișele confidențiale)
+A4 paysage ¦ A4 peisaj
+net à toutes les tailles ¦ clar la orice mărime
+les formes, pour un autre logiciel ¦ formele, pentru alt program
+L’export KML n’est pas chargé. ¦ Exportul KML nu e încărcat.
+Carte introuvable. ¦ Hartă negăsită.
+Le tableau de bord n’est pas chargé. ¦ Tabloul de bord nu e încărcat.
+La mise en page n’est pas chargée. ¦ Paginarea nu e încărcată.
+MISE EN PAGE ¦ PAGINARE
+📐 Mettre la carte dans la mise en page ¦ 📐 Pune harta în paginare
+La carte devient une page d’un livre (Mise en page), avec son titre. Une image de la carte est aussi rangée dans les médias. Jamais de personne vivante ni de fiche confidentielle. ¦ Harta devine o pagină dintr-o carte (Paginare), cu titlul ei. O imagine a hărții e pusă și în media. Niciodată persoane în viață sau fișe confidențiale.
+Un nouveau livre ¦ O carte nouă
+À la fin d’un livre existant ¦ La sfârșitul unei cărți existente
+Choisis le livre. ¦ Alege cartea.
+Titre de la carte ¦ Titlul hărții
+La carte est dans la mise en page : vérifie, puis enregistre le livre. ¦ Harta e în paginare: verifică, apoi salvează cartea.
+Dans 🌐 Mon site web : ＋ Ajouter un bloc → « 🗺 Une de mes cartes ». La carte y est mise en image, sans personne vivante ni fiche confidentielle. ¦ În 🌐 Site-ul meu web: ＋ Adaugă un bloc → „🗺 Una dintre hărțile mele”. Harta e pusă acolo ca imagine, fără persoane în viață sau fișe confidențiale.
+Ouvrir mon site ¦ Deschide site-ul meu
+Je dessine la carte… ¦ Desenez harta…
+Cette carte n’existe plus. ¦ Această hartă nu mai există.
+Ouvrir dans la Carte ¦ Deschide în Hartă
+La carte n’a pas pu se dessiner : {nm} ¦ Harta nu a putut fi desenată: {nm}
+Une de mes cartes ¦ Una dintre hărțile mele
+Une de tes cartes sur mesure (Carte → 🗺 Mes cartes), avec ses couches, ses filtres et sa légende. Un clic l’ouvre en grand dans la Carte. ¦ Una dintre hărțile tale la comandă (Hartă → 🗺 Hărțile mele), cu straturile, filtrele și legenda ei. Un clic o deschide mare în Hartă.
+=désaccord n’est pas encore résolu ¦ dezacord nu e încă rezolvat|dezacorduri nu sunt încă rezolvate|de dezacorduri nu sunt încă rezolvate
+=désaccord à résoudre ¦ dezacord de rezolvat|dezacorduri de rezolvat|de dezacorduri de rezolvat
+Prouvé ¦ Dovedit
+Réfuté ¦ Infirmat
+Supposé ¦ Presupus
+pas encore de conclusion ¦ încă nicio concluzie
+les indices concordent, rien ne contredit, la conclusion est écrite ¦ indiciile concordă, nimic nu contrazice, concluzia e scrisă
+les indices vont dans ce sens, sans preuve directe ¦ indiciile merg în această direcție, fără dovadă directă
+quelques indices, mais rien de sûr ¦ câteva indicii, dar nimic sigur
+les indices montrent que c’est faux ¦ indiciile arată că e fals
+Même personne ¦ Aceeași persoană
+l’acte dit la chose en toutes lettres ¦ actul spune lucrul acesta cu toate literele
+il faut le déduire en rapprochant plusieurs indices ¦ trebuie dedus apropiind mai multe indicii
+Négatif ¦ Negativ
+négatif ¦ negativ
+une absence qui parle (pas d’acte là où il devrait y en avoir) ¦ o absență care spune ceva (niciun act acolo unde ar trebui să fie)
+l’acte lui-même, ou sa photo ¦ actul însuși sau fotografia lui
+Dérivée ¦ Derivată
+dérivée ¦ derivată
+une copie, un relevé, une table, une transcription ¦ o copie, un extras, un index, o transcriere
+Écrite par un auteur ¦ Scrisă de un autor
+écrite par un auteur ¦ scrisă de un autor
+un livre, un arbre en ligne, un souvenir de famille ¦ o carte, un arbore online, o amintire de familie
+Indices pour ¦ Indicii pentru
+indice pour ¦ indiciu pentru
+Désaccords entre les sources ¦ Dezacorduri între surse
+⚡ Désaccords entre les sources ¦ ⚡ Dezacorduri între surse
+désaccord ¦ dezacord
+Tous les actes qui peuvent répondre : naissance, baptême, mariage, décès, recensements, actes notariés… Note aussi ce que tu n’as pas trouvé. ¦ Toate actele care pot răspunde: naștere, botez, căsătorie, deces, recensăminte, acte notariale… Notează și ce n-ai găsit.
+Dis d’où vient chaque indice ¦ Spune de unde vine fiecare indiciu
+Chaque indice a sa source (la citation : registre, année, vue, acte). ¦ Fiecare indiciu are sursa lui (citarea: registru, an, imagine, act).
+Pèse chaque indice ¦ Cântărește fiecare indiciu
+Direct ou indirect ? L’acte original, une copie, ou un auteur ? Un acte écrit au moment des faits vaut plus qu’un souvenir. ¦ Direct sau indirect? Actul original, o copie sau un autor? Un act scris în momentul faptelor valorează mai mult decât o amintire.
+Explique les désaccords ¦ Explică dezacordurile
+Deux sources se contredisent ? Écris pourquoi tu en crois une plus que l’autre. ¦ Două surse se contrazic? Scrie de ce crezi una mai mult decât pe cealaltă.
+Écris ta conclusion ¦ Scrie-ți concluzia
+En quelques phrases, avec ton niveau de certitude. On peut la revoir si un nouvel acte arrive. ¦ În câteva fraze, cu nivelul tău de certitudine. O poți revedea dacă apare un act nou.
+La méthode des généalogistes de métier (on parle de « standard de preuve ») tient en cinq étapes : une conclusion est solide quand on a cherché partout, cité ses sources, pesé chaque indice, expliqué les désaccords et écrit son raisonnement. ¦ Metoda genealogiștilor de meserie (se vorbește de „standard al dovezii”) are cinci etape: o concluzie e solidă când ai căutat peste tot, ți-ai citat sursele, ai cântărit fiecare indiciu, ai explicat dezacordurile și ți-ai scris raționamentul.
+le fils ¦ fiul
+la fille ¦ fiica
+l’enfant ¦ copilul
+Lecture seule : les dossiers de preuve se consultent dans Listes → « ⚖️ Dossiers de preuve ». ¦ Doar citire: dosarele de dovadă se consultă în Liste → „⚖️ Dosare de dovadă”.
+⚖️ Dossier de preuve ouvert : « {nm} » ¦ ⚖️ Dosar de dovadă deschis: „{nm}”
+🗑 Dossier supprimé : « {nm} » ¦ 🗑 Dosar șters: „{nm}”
+⚖️ Certitude : {nm} ¦ ⚖️ Certitudine: {nm}
+Dossier de preuve — {nm} ¦ Dosar de dovadă — {nm}
+J’ouvre le dossier… ¦ Deschid dosarul…
+qualité ¦ calitate
+Pas encore résolu ¦ Încă nerezolvat
+pas encore résolu ¦ încă nerezolvat
+Retirer du dossier ¦ Scoate din dosar
+Aucun indice pour. ¦ Niciun indiciu pentru.
+Aucun indice contre — c’est bien d’en chercher aussi. ¦ Niciun indiciu contra — e bine să cauți și din acestea.
+Aucune recherche notée. ¦ Nicio cercetare notată.
+Aucun désaccord entre les sources. ¦ Niciun dezacord între surse.
+Ajouter une recherche ¦ Adaugă o cercetare
+Ajouter un désaccord ¦ Adaugă un dezacord
+Ajouter un indice pour ¦ Adaugă un indiciu pentru
+Ajouter un indice contre ¦ Adaugă un indiciu contra
+Un document du traitement de texte, déjà rempli ¦ Un document din procesorul de text, deja completat
+La question ¦ Întrebarea
+🛡 solidité du lien : ¦ 🛡 soliditatea legăturii:
+(calculée : le dossier comptera dès qu’il aura une conclusion) ¦ (calculată: dosarul va conta de îndată ce va avea o concluzie)
+{count} : explique-les avant de conclure « prouvé ». ¦ {count}: explică-le înainte de a concluziona „dovedit”.
+Ce que tu conclus, et pourquoi : quels indices pèsent le plus, comment les désaccords s’expliquent… ¦ Ce concluzionezi și de ce: ce indicii cântăresc cel mai mult, cum se explică dezacordurile…
+Gardé tout seul. ¦ Păstrat automat.
+💡 Comment raisonner ? (5 étapes) ¦ 💡 Cum să raționezi? (5 etape)
+Un indice ¦ Un indiciu
+Écris la question à laquelle le dossier répond. ¦ Scrie întrebarea la care răspunde dosarul.
+🗑 Retiré du dossier : ¦ 🗑 Scos din dosar:
+Je ne sais pas ¦ Nu știu
+Nouvelle recherche ¦ Cercetare nouă
+Nouveau désaccord ¦ Dezacord nou
+Nouvel indice pour ¦ Indiciu nou pentru
+Ajouter la recherche ¦ Adaugă cercetarea
+Ajouter le désaccord ¦ Adaugă dezacordul
+Ajouter l’indice ¦ Adaugă indiciul
+Pour ou contre ¦ Pentru sau contra
+Ce qui a été cherché, et le résultat ¦ Ce s-a căutat și rezultatul
+Le désaccord ¦ Dezacordul
+L’indice ¦ Indiciul
+Registres de Naves 1780-1790 : pas de baptême de Jean ¦ Registrele din Naves 1780-1790: niciun botez al lui Jean
+Le baptême dit 1784, le décès donne 70 ans en 1850 ¦ Botezul spune 1784, decesul dă 70 de ani în 1850
+Le baptême nomme « Pierre Martin, laboureur » comme père ¦ Botezul îl numește pe „Pierre Martin, plugar” ca tată
+Dépouillement du Journal des recherches (facultatif) ¦ Indexare din Jurnalul cercetărilor (opțional)
+Source ou citation (facultatif) ¦ Sursă sau citare (opțional)
+Sorte d’indice ¦ Felul indiciului
+Qualité de la source ¦ Calitatea sursei
+L’âge au décès est souvent arrondi : le baptême, écrit le jour même, est plus sûr. ¦ Vârsta la deces e adesea rotunjită: botezul, scris chiar în ziua aceea, e mai sigur.
+Comment il se résout ¦ Cum se rezolvă
+Écris ce qui a été cherché, ou choisis un dépouillement. ¦ Scrie ce s-a căutat sau alege o indexare.
+Écris le désaccord. ¦ Scrie dezacordul.
+Écris l’indice, ou choisis sa source. ¦ Scrie indiciul sau alege-i sursa.
+✎ Ligne du dossier modifiée ¦ ✎ Rând din dosar modificat
+Recherche ajoutée ¦ Cercetare adăugată
+Désaccord ajouté ¦ Dezacord adăugat
+Indice ajouté ¦ Indiciu adăugat
+Résolution : ¦ Rezolvare:
+résolution : ¦ rezolvare:
+👍 Indices pour ¦ 👍 Indicii pentru
+Aucun indice contre. ¦ Niciun indiciu contra.
+Aucun désaccord. ¦ Niciun dezacord.
+Pas encore écrite. ¦ Încă nescrisă.
+L’impression n’est pas disponible. ¦ Tipărirea nu e disponibilă.
+Les recherches faites ¦ Cercetările făcute
+Les désaccords et leur résolution ¦ Dezacordurile și rezolvarea lor
+Le petit guide « Comment raisonner » ¦ Micul ghid „Cum să raționezi”
+Ta conclusion… ¦ Concluzia ta…
+{nm} est-elle bien la fille d’{par} ? ¦ Este {nm} într-adevăr fiica lui {par}?
+{nm} est-elle bien la fille de {par} ? ¦ Este {nm} într-adevăr fiica lui {par}?
+{nm} est-il bien le fils d’{par} ? ¦ Este {nm} într-adevăr fiul lui {par}?
+{nm} est-il bien le fils de {par} ? ¦ Este {nm} într-adevăr fiul lui {par}?
+{nm} est-il bien l’enfant d’{par} ? ¦ Este {nm} într-adevăr copilul lui {par}?
+{nm} est-il bien l’enfant de {par} ? ¦ Este {nm} într-adevăr copilul lui {par}?
+{nm} et {x2} formaient-ils bien un couple ? ¦ Au format {nm} și {x2} într-adevăr un cuplu?
+La date de {ev} ({dt}) est-elle juste ? ¦ Data pentru {ev} ({dt}) este corectă?
+Le lieu de {ev} ({pl}) est-il juste ? ¦ Locul pentru {ev} ({pl}) este corect?
+sans date ¦ fără dată
+{nm} est-elle la même personne qu’une autre fiche ? (choisir…) ¦ Este {nm} aceeași persoană cu altă fișă? (alege…)
+{nm} est-il la même personne qu’une autre fiche ? (choisir…) ¦ Este {nm} aceeași persoană cu altă fișă? (alege…)
+Une autre question… ¦ Altă întrebare…
+Quelle question pour {nm} ? ¦ Ce întrebare pentru {nm}?
+Ses dossiers ¦ Dosarele sale
+Ou une nouvelle question ¦ Sau o întrebare nouă
+Une question ¦ O întrebare
+Un dossier de preuve rassemble ce qui dit « oui » et ce qui dit « non », puis ta conclusion. Pour un lien parent-enfant, il compte dans la 🛡 solidité du lien. ¦ Un dosar de dovadă adună ce spune „da” și ce spune „nu”, apoi concluzia ta. Pentru o legătură părinte-copil, contează la 🛡 soliditatea legăturii.
+L’autre fiche (la même personne ?) ¦ Cealaltă fișă (aceeași persoană?)
+🛡 SOLIDITÉ DU LIEN ¦ 🛡 SOLIDITATEA LEGĂTURII
+🛡 SOLIDITÉ DES LIENS ¦ 🛡 SOLIDITATEA LEGĂTURILOR
+Lien noté « {rel} » sur la fiche (pas biologique). ¦ Legătură notată „{rel}” pe fișă (nu biologică).
+Ouvrir le dossier de preuve ¦ Deschide dosarul de dovadă
+Ouvrir un dossier de preuve ¦ Deschide un dosar de dovadă
+Le dossier de preuve passe devant le calcul et le choix à la main. ¦ Dosarul de dovadă are prioritate față de calcul și de alegerea manuală.
+Choisir à la main ¦ Alege manual
+Calculé par l’app ¦ Calculat de aplicație
+d’après les sources ¦ după surse
+Les règles, en clair ¦ Regulile, pe înțeles
+Rien n’est changé dans ta base : c’est seulement un repère. ¦ Nu se schimbă nimic în baza ta: e doar un reper.
+🛡 Lien marqué « {nm} » à la main ¦ 🛡 Legătură marcată manual „{nm}”
+🛡 Lien de nouveau calculé par l’app ¦ 🛡 Legătură calculată din nou de aplicație
+🛡 Solidité du lien : {lvl} — {why} ¦ 🛡 Soliditatea legăturii: {lvl} — {why}
+Solidité du lien avec {nm} : {lvl} ¦ Soliditatea legăturii cu {nm}: {lvl}
+Légende de la vue solidité ¦ Legenda vizualizării soliditate
+Clic droit sur une case ou un trait : le dossier de preuve, le pourquoi. ¦ Clic dreapta pe o casetă sau o linie: dosarul de dovadă, motivul.
+Dossier de preuve : {nm} → enfant d’{par} ¦ Dosar de dovadă: {nm} → copil al lui {par}
+Dossier de preuve : {nm} → enfant de {par} ¦ Dosar de dovadă: {nm} → copil al lui {par}
+Solidité du lien : {nm}, enfant d’{par} ¦ Soliditatea legăturii: {nm}, copil al lui {par}
+Solidité du lien : {nm}, enfant de {par} ¦ Soliditatea legăturii: {nm}, copil al lui {par}
+Une question (« Jean est-il bien le fils de Pierre ? »), ce qui dit oui, ce qui dit non, les recherches faites, puis ta conclusion et ton niveau de certitude. ¦ O întrebare („Este Jean într-adevăr fiul lui Pierre?”), ce spune da, ce spune nu, cercetările făcute, apoi concluzia ta și nivelul tău de certitudine.
+Je lis les dossiers… ¦ Citesc dosarele…
+Le dossier de qui ? ¦ Dosarul cui?
+Ouvre-en un depuis une fiche (⋯ → « ⚖️ Dossier de preuve… »), en cliquant la pastille 🛡 d’un parent, ou par un clic droit dans un arbre. ¦ Deschide unul dintr-o fișă (⋯ → „⚖️ Dosar de dovadă…”), făcând clic pe insigna 🛡 a unui părinte sau cu un clic dreapta într-un arbore.
+Chercher… (ex. Martin, baptême) ¦ Caută… (ex. Martin, botez)
+Désaccords pas encore résolus ¦ Dezacorduri încă nerezolvate
+⚡ Désaccords à résoudre ¦ ⚡ Dezacorduri de rezolvat
+✍ conclusion écrite ¦ ✍ concluzie scrisă
+Aucun dossier ne correspond ¦ Niciun dosar nu corespunde
+Dans le traitement de texte ¦ În procesorul de text
+Tes ancêtres (numéros Sosa) dont le lien avec leur enfant n’est pas encore appuyé sur une source : supposé, sans source ou réfuté. Les plus proches de toi d’abord. ¦ Strămoșii tăi (numere Sosa) a căror legătură cu copilul lor nu se sprijină încă pe o sursă: presupusă, fără sursă sau infirmată. Cei mai apropiați de tine mai întâi.
+Je pèse chaque lien… ¦ Cântăresc fiecare legătură…
+de ta lignée ¦ din linia ta
+Aucune branche fragile ¦ Nicio ramură fragilă
+Chaque lien de ta lignée s’appuie sur au moins une source. ¦ Fiecare legătură din linia ta se sprijină pe cel puțin o sursă.
+Chercher un nom… (ex. Martin) ¦ Caută un nume… (ex. Martin)
+Solidité ¦ Soliditate
+Sosa {sosa} · génération {gen} · parent d’{par} ¦ Sosa {sosa} · generația {gen} · părinte al lui {par}
+Sosa {sosa} · génération {gen} · parent de {par} ¦ Sosa {sosa} · generația {gen} · părinte al lui {par}
+Sosa {sosa} · parent d’{par} ¦ Sosa {sosa} · părinte al lui {par}
+Sosa {sosa} · parent de {par} ¦ Sosa {sosa} · părinte al lui {par}
+Aucun lien ne correspond ¦ Nicio legătură nu corespunde
+Pourquoi ce niveau ? ¦ De ce acest nivel?
+Où chercher ? ({nm}) ¦ Unde să cauți? ({nm})
+Comment l’app pèse chaque lien ¦ Cum cântărește aplicația fiecare legătură
+Pour chaque lien parent-enfant, l’app regarde dans cet ordre : ¦ Pentru fiecare legătură părinte-copil, aplicația se uită în această ordine:
+<b>Le dossier de preuve</b> de ce lien, s’il a une conclusion : il passe devant tout. ¦ <b>Dosarul de dovadă</b> al acestei legături, dacă are o concluzie: are prioritate față de orice.
+<b>Ton choix à la main</b> (pastille 🛡 à côté du parent, sur la fiche). ¦ <b>Alegerea ta manuală</b> (insigna 🛡 de lângă părinte, pe fișă).
+<b>Les sources citées</b> : sur la naissance ou le baptême de l’enfant, son mariage, sa fiche, la famille ; leur qualité (0 à 3, venue de ton ancien logiciel) si elle est notée. ¦ <b>Sursele citate</b>: la nașterea sau botezul copilului, la căsătoria lui, pe fișa lui, la familie; calitatea lor (0 până la 3, venită din vechiul tău program) dacă e notată.
+Rien n’est changé dans ta base : c’est seulement un repère, recalculé dès qu’une source change. ¦ Nu se schimbă nimic în baza ta: e doar un reper, recalculat de îndată ce se schimbă o sursă.
+La solidité des liens n’a pas pu être calculée. ¦ Soliditatea legăturilor nu a putut fi calculată.
+Pas encore de lignée : choisis la personne de départ et ajoute ses parents. ¦ Încă nicio linie: alege persoana de pornire și adaugă-i părinții.
+Chaque lien de ta lignée s’appuie sur une source, bravo ! ¦ Fiecare legătură din linia ta se sprijină pe o sursă, bravo!
+=image ¦ imagine|imagini|de imagini
+nord ¦ nord
+nord-est ¦ nord-est
+est ¦ est
+sud-est ¦ sud-est
+sud ¦ sud
+sud-ouest ¦ sud-vest
+ouest ¦ vest
+nord-ouest ¦ nord-vest
+Lieu à préciser ¦ Loc de precizat
+⬠ {n} points : clique les autres coins, puis double-clic (ou « ✓ Fermer la zone »). ¦ ⬠ {n} puncte: fă clic pe celelalte colțuri, apoi dublu clic (sau „✓ Închide zona”).
+⬠ 1 point : clique les autres coins, puis double-clic (ou « ✓ Fermer la zone »). ¦ ⬠ 1 punct: fă clic pe celelalte colțuri, apoi dublu clic (sau „✓ Închide zona”).
+🧭 Pose d’abord un point, une zone ou un lieu : la direction part de là. ¦ 🧭 Pune mai întâi un punct, o zonă sau un loc: direcția pornește de acolo.
+⬠ Une zone a besoin d’au moins 3 points. ¦ ⬠ O zonă are nevoie de cel puțin 3 puncte.
+📍 Clique l’endroit d’où la vue a été prise (ou ce qu’elle montre). ¦ 📍 Fă clic pe locul de unde a fost făcută imaginea (sau pe ce arată).
+◯ Clique le centre et glisse pour le rayon. ¦ ◯ Fă clic pe centru și trage pentru rază.
+⬠ Clique les coins de la zone, puis double-clic. ¦ ⬠ Fă clic pe colțurile zonei, apoi dublu clic.
+🧭 Clique vers où regarde la photo. ¦ 🧭 Fă clic spre unde privește fotografia.
+IMAGE DE LIEU ¦ IMAGINE DE LOC
+📍 Où a-t-elle été prise ? ¦ 📍 Unde a fost făcută?
+Où a-t-elle été prise ? ¦ Unde a fost făcută?
+Voir l’image en grand ¦ Vezi imaginea mare
+vers 1905, entre 1900 et 1910… ¦ vers 1905, entre 1900 et 1910…
+Éditeur ou photographe ¦ Editor sau fotograf
+Éd. Lévy et fils, ND Phot., studio Nadar… ¦ Éd. Lévy et fils, ND Phot., studio Nadar…
+Ce qu’on voit : enseignes, clocher, légende imprimée… ¦ Ce se vede: firme, clopotniță, legendă tipărită…
+Une photo d’aujourd’hui prise du même endroit : rideau à faire glisser, fondu, recalage ¦ O fotografie de azi făcută din același loc: cortină de glisat, estompare, realiniere
+Une demande d’entraide (forum, Geneanet, Facebook) ou une petite annonce, avec l’image, tes pistes et tes questions ¦ O cerere de ajutor (forum, Geneanet, Facebook) sau un mic anunț, cu imaginea, pistele și întrebările tale
+🪟 Comparer avec aujourd’hui ¦ 🪟 Compară cu azi
+🙋 Demander de l’aide ¦ 🙋 Cere ajutor
+Les Trésors : dater une vieille photo d’après le support, le carton, les vêtements ¦ Comorile: datează o fotografie veche după suport, carton, haine
+📷 Dater la photo ¦ 📷 Datează fotografia
+Hypothèses de lieu ¦ Ipoteze de loc
+＋ Ajouter une hypothèse ¦ ＋ Adaugă o ipoteză
+L’hypothèse retenue : c’est le lieu de l’image partout dans l’app ¦ Ipoteza reținută: e locul imaginii peste tot în aplicație
+⬠ Zone dessinée ({nm} points) ¦ ⬠ Zonă desenată ({nm} puncte)
+🧭 Vue vers le {dir} ({deg}°) ¦ 🧭 Vedere spre {dir} ({deg}°)
+🧭 vers le {nm} ({x2}°) ¦ 🧭 spre {nm} ({x2}°)
+Proposé par {nm} ¦ Propusă de {nm}
+Proposé par ¦ Propusă de
+Retenir cette hypothèse ¦ Reține această ipoteză
+Pas encore d’hypothèse : où crois-tu qu’elle a été prise ? ¦ Încă nicio ipoteză: unde crezi că a fost făcută?
+Hypothèse de lieu ¦ Ipoteză de loc
+📨 Réponse reçue → nouvelle hypothèse ¦ 📨 Răspuns primit → ipoteză nouă
+Qui a répondu ? ¦ Cine a răspuns?
+Pseudo du forum, nom du lecteur… ¦ Pseudonimul de pe forum, numele cititorului…
+✓ Fermer la zone ¦ ✓ Închide zona
+× Retirer le point, la zone et la direction ¦ × Scoate punctul, zona și direcția
+Grande-Rue, place de l’Église… ¦ Grande-Rue, place de l’Église…
+12, à l’angle de la rue du Moulin… ¦ 12, la colțul cu rue du Moulin…
+Ouverture du cône ¦ Deschiderea conului
+L’enseigne « Café du Commerce », le clocher à bulbe, la légende imprimée, l’éditeur local… ¦ Firma „Café du Commerce”, clopotnița cu bulb, legenda tipărită, editorul local…
+(les indices) ¦ (indiciile)
+(vide = toi) ¦ (gol = tu)
+★ C’est l’hypothèse retenue (le lieu de l’image partout dans l’app) ¦ ★ E ipoteza reținută (locul imaginii peste tot în aplicație)
+Enregistrer l’hypothèse ¦ Salvează ipoteza
+Ajouter l’hypothèse ¦ Adaugă ipoteza
+Rien sur la carte : choisis un outil, puis clique la carte. ¦ Nimic pe hartă: alege un instrument, apoi fă clic pe hartă.
+Choisis un lieu, ou pose un point ou une zone sur la carte. ¦ Alege un loc sau pune un punct ori o zonă pe hartă.
+Réponse de {nm} notée comme hypothèse ¦ Răspunsul lui {nm} a fost notat ca ipoteză
+Hypothèse ajoutée. ¦ Ipoteză adăugată.
+Photo d’aujourd’hui ¦ Fotografia de azi
+Changer la photo d’aujourd’hui ¦ Schimbă fotografia de azi
+Retirer la photo d’aujourd’hui ¦ Scoate fotografia de azi
+HIER ET AUJOURD’HUI ¦ IERI ȘI AZI
+La photo d’aujourd’hui ¦ Fotografia de azi
+Une photo prise du même endroit ¦ O fotografie făcută din același loc
+Une photo prise du même endroit ({where}), aujourd’hui. Importe-la si elle n’est pas encore dans tes médias. ¦ O fotografie făcută din același loc ({where}), azi. Importă-o dacă nu e încă în media ta.
+Une photo prise du même endroit, aujourd’hui. Importe-la si elle n’est pas encore dans tes médias. ¦ O fotografie făcută din același loc, azi. Importă-o dacă nu e încă în media ta.
+C’est la même image : choisis une photo d’aujourd’hui. ¦ E aceeași imagine: alege o fotografie de azi.
+Le comparateur de photos n’est pas encore chargé. ¦ Comparatorul de fotografii nu e încă încărcat.
+Prête à envoyer ¦ Gata de trimis
+Envoyée ¦ Trimisă
+Refusée ¦ Refuzată
+🙋 Demandes d’aide ¦ 🙋 Cereri de ajutor
+Une réponse reçue devient une nouvelle hypothèse, avec son auteur ¦ Un răspuns primit devine o ipoteză nouă, cu autorul lui
+📨 Noter une réponse ¦ 📨 Notează un răspuns
+Ouvrir dans Petites annonces ¦ Deschide în Mica publicitate
+Ouvrir dans Demandes d’entraide ¦ Deschide în Cereri de ajutor
+Aucune demande pour cette image. ¦ Nicio cerere pentru această imagine.
+📨 Noter une réponse venue d’ailleurs (forum, courrier, visite…) ¦ 📨 Notează un răspuns venit din altă parte (forum, scrisoare, vizită…)
+Hypothèse retenue : c’est maintenant le lieu de l’image ¦ Ipoteză reținută: acum e locul imaginii
+Photo d’aujourd’hui retirée (elle reste dans les Médias) ¦ Fotografia de azi a fost scoasă (rămâne în Media)
+DEMANDER DE L’AIDE ¦ CERE AJUTOR
+🙋 Demander de l’aide pour situer cette image ¦ 🙋 Cere ajutor ca să localizezi această imagine
+Créer la demande ¦ Creează cererea
+Je pense à Saint-Martin, mais le clocher ne ressemble pas… ¦ Mă gândesc la Saint-Martin, dar clopotnița nu seamănă…
+⤓ Télécharger l’image ¦ ⤓ Descarcă imaginea
+Joins l’image à ton message : sur un forum, une page Facebook ou dans le courriel au journal. ¦ Atașează imaginea la mesajul tău: pe un forum, pe o pagină Facebook sau în e-mailul către ziar.
+Où demander ? ¦ Unde ceri?
+🤝 Une demande d’entraide ¦ 🤝 O cerere de ajutor
+(texte prêt à coller sur un forum, l’entraide Geneanet ou un groupe Facebook) ¦ (text gata de lipit pe un forum, la ajutorul reciproc Geneanet sau pe un grup Facebook)
+✉️ Une petite annonce dans un journal ¦ ✉️ Un mic anunț într-un ziar
+(prix calculé dans « Petites annonces ») ¦ (preț calculat în „Mica publicitate”)
+Forme du texte ¦ Forma textului
+Ta question, avec tes mots ¦ Întrebarea ta, cu cuvintele tale
+Le texte (modifiable) ¦ Textul (modificabil)
+📋 Copier le texte ¦ 📋 Copiază textul
+Les hypothèses et leurs indices sont repris tout seuls. Rien n’est envoyé par l’app : tu colles le texte toi-même. ¦ Ipotezele și indiciile lor sunt preluate singure. Aplicația nu trimite nimic: lipești textul tu însuți.
+Texte copié : colle-le sur le forum ou le groupe, avec l’image. ¦ Text copiat: lipește-l pe forum sau pe grup, cu imaginea.
+Texte copié. ¦ Text copiat.
+Le texte de la demande est vide. ¦ Textul cererii e gol.
+Demande créée dans {nm} : les réponses reçues se notent ici (📨 Noter une réponse). ¦ Cerere creată în {nm}: răspunsurile primite se notează aici (📨 Notează un răspuns).
+Pas encore situé ¦ Încă nelocalizat
+Sans lieu ¦ Fără loc
+hypothèses ¦ ipoteze
+Hier / aujourd’hui ¦ Ieri / azi
+Rue pas encore notée ¦ Stradă încă nenotată
+Cartes postales, photos anciennes, gravures, plans : choisis une image et dis où elle a été prise (une ou plusieurs hypothèses, avec leur certitude). ¦ Cărți poștale, fotografii vechi, gravuri, planuri: alege o imagine și spune unde a fost făcută (una sau mai multe ipoteze, cu certitudinea lor).
+Aucune image ne correspond ¦ Nicio imagine nu corespunde
+Cartes postales, photos anciennes, gravures et plans : où ils ont été pris (une ou plusieurs hypothèses avec leur certitude), rangés par rue et par époque, à comparer avec aujourd’hui. ¦ Cărți poștale, fotografii vechi, gravuri și planuri: unde au fost făcute (una sau mai multe ipoteze cu certitudinea lor), ordonate pe străzi și pe epoci, de comparat cu azi.
+Chercher… (titre, lieu, rue, éditeur, indices) ¦ Caută… (titlu, loc, stradă, editor, indicii)
+Toutes les rues ¦ Toate străzile
+Situées ¦ Localizate
+Par rue ¦ Pe străzi
+IMAGES DE LIEUX ¦ IMAGINI DE LOCURI
+Une image d’un lieu ¦ O imagine a unui loc
+Une carte postale, une photo ancienne, une gravure, un plan… (importe-la si elle n’est pas encore dans tes médias). ¦ O carte poștală, o fotografie veche, o gravură, un plan… (importă-o dacă nu e încă în media ta).
+Situer cette image ¦ Localizează această imagine
+années ¦ ani
+🖼 Images du lieu ¦ 🖼 Imaginile locului
+Aucune image de ce lieu : cartes postales, photos anciennes, gravures… ¦ Nicio imagine a acestui loc: cărți poștale, fotografii vechi, gravuri…
+Ce lieu n’est pas encore dans ta base. ¦ Acest loc nu e încă în baza ta.
+Montrer les cartes postales, photos anciennes et gravures à l’endroit où elles ont été prises (zones, direction de la vue) ¦ Arată cărțile poștale, fotografiile vechi și gravurile în locul unde au fost făcute (zone, direcția vederii)
+Une ou plusieurs hypothèses de lieu (lieu, point, zone, direction, certitude), comparer avec aujourd’hui, demander de l’aide ¦ Una sau mai multe ipoteze de loc (loc, punct, zonă, direcție, certitudine), compară cu azi, cere ajutor
+Choisis une image. ¦ Alege o imagine.
+Zone : cercle de {nm} m ¦ Zonă: cerc de {nm} m
+Zone : {nm} points ¦ Zonă: {nm} puncte
+◯ Zone : cercle de {nm} m ¦ ◯ Zonă: cerc de {nm} m
+◯ cercle de {nm} m ¦ ◯ cerc de {nm} m
+⬠ zone de {nm} points ¦ ⬠ zonă de {nm} puncte
+Rue : {nm} ¦ Stradă: {nm}
+Copie intégrale ¦ Copie integrală
+Extrait avec filiation ¦ Extras cu filiație
+Recherche aux archives ¦ Cercetare la arhive
+Transcription (acte à l’étranger) ¦ Transcriere (act din străinătate)
+Je suis son descendant direct ¦ Sunt descendentul său direct
+C’est mon propre acte ¦ E propriul meu act
+Je suis son ascendant direct ¦ Sunt ascendentul său direct
+Je suis son conjoint ¦ Sunt soțul/soția sa
+Je suis son représentant légal ¦ Sunt reprezentantul său legal
+Autre lien (cousin…) ou aucun ¦ Altă legătură (văr…) sau niciuna
+Mairie de la commune ¦ Primăria localității
+Service central d’état civil (Nantes) ¦ Service central d’état civil (Nantes)
+Archives diocésaines ¦ Arhivele diecezane
+En mode consultation, on ne prépare pas de courrier. ¦ În modul consultare nu se pregătește corespondență.
+COURRIER TOUT PRÊT ¦ SCRISOARE GATA FĂCUTĂ
+📮 Ranger dans les courriers suivis ¦ 📮 Pune la scrisorile urmărite
+Ce que tu demandes ¦ Ce ceri
+Ton lien avec la personne ¦ Legătura ta cu persoana
+Ex. : je ne connais pas la date exacte, entre 1880 et 1885. ¦ Ex.: nu știu data exactă, între 1880 și 1885.
+Adresse du destinataire ¦ Adresa destinatarului
+Vérifie l’adresse : complète le code postal ou corrige-la si besoin. ¦ Verifică adresa: completează codul poștal sau corecteaz-o dacă e nevoie.
+Courriel du destinataire (facultatif) ¦ E-mailul destinatarului (opțional)
+Tes précisions (facultatif) ¦ Precizările tale (opțional)
+✉️ Par la poste ¦ ✉️ Prin poștă
+📧 Par courriel ¦ 📧 Prin e-mail
+Suivi du courrier ¦ Urmărirea scrisorii
+Relance dans ¦ Revenire peste
+Me rappeler quand l’acte sera libre d’accès ¦ Amintește-mi când actul va fi liber de consultat
+La lettre (tu peux la retoucher) ¦ Scrisoarea (o poți retușa)
+Tu as retouché la lettre : elle ne change plus toute seule. ¦ Ai retușat scrisoarea: nu se mai schimbă singură.
+↺ Remettre la lettre du modèle ¦ ↺ Pune la loc scrisoarea din model
+🖨 Imprimer ou ⤓ PDF ¦ 🖨 Tipărește sau ⤓ PDF
+Mon adresse et mes modèles de lettres ¦ Adresa mea și modelele mele de scrisori
+Réglages des courriers ¦ Setările scrisorilor
+ton nom ¦ numele tău
+adresse à remplir ¦ adresă de completat
+⚙️ Mon adresse et mes modèles… ¦ ⚙️ Adresa mea și modelele mele…
+Choisis la personne : la lettre s’écrit toute seule. ¦ Alege persoana: scrisoarea se scrie singură.
+La règle ¦ Regula
+Cet acte n’est pas encore dans ta généalogie : la lettre le dit et laisse la mairie chercher. Ajoute tes précisions (années, lieu probable). ¦ Acest act nu e încă în genealogia ta: scrisoarea o spune și lasă primăria să caute. Adaugă precizările tale (ani, loc probabil).
+Ces archives ne sont pas encore dans « Services d’archives » : complète l’adresse (elle est sur leur site). ¦ Aceste arhive nu sunt încă în „Servicii de arhive”: completează adresa (e pe site-ul lor).
+L’adresse du Service central d’état civil est déjà complète. ¦ Adresa Service central d’état civil e deja completă.
+Lettre remise comme le modèle ¦ Scrisoarea a fost readusă la model
+Choisis d’abord la personne. ¦ Alege mai întâi persoana.
+Lettre copiée. ¦ Scrisoare copiată.
+Le traitement de texte n’est pas disponible. ¦ Procesorul de text nu e disponibil.
+Ton logiciel de courriel s’ouvre avec la lettre : relis-la et envoie-la toi-même. ¦ Programul tău de e-mail se deschide cu scrisoarea: recitește-o și trimite-o tu însuți.
+Ton logiciel de courriel s’ouvre : ajoute l’adresse du destinataire. Rien n’est envoyé par l’app. ¦ Programul tău de e-mail se deschide: adaugă adresa destinatarului. Aplicația nu trimite nimic.
+Copie impossible : le moteur de documents n’est pas chargé. ¦ Copiere imposibilă: motorul de documente nu e încărcat.
+Copie impossible : {nm} ¦ Copiere imposibilă: {nm}
+📁 Une copie (.docx) est rangée dans les médias ; elle sera reliée au courrier. ¦ 📁 O copie (.docx) e pusă în media; va fi legată de scrisoare.
+Copie rangée dans les médias. ¦ Copie pusă în media.
+Choisis la personne de l’acte. ¦ Alege persoana din act.
+La lettre est vide. ¦ Scrisoarea e goală.
+Cette adresse de courriel n’est pas complète. ¦ Această adresă de e-mail nu e completă.
+Courrier rangé dans les courriers suivis ¦ Scrisoare pusă la scrisorile urmărite
+Courrier rangé dans les courriers suivis (relance le {dt}) ¦ Scrisoare pusă la scrisorile urmărite (revenire pe {dt})
+envoyé le {dt} ¦ trimisă pe {dt}
+relance le {dt} ¦ revenire pe {dt}
+✉️ L’expéditeur (toi) ¦ ✉️ Expeditorul (tu)
+Ton nom (signature) ¦ Numele tău (semnătura)
+Prénom Nom ¦ Prenume Nume
+Ton adresse ¦ Adresa ta
+Ta ville (« À Tulle, le… ») ¦ Orașul tău („À Tulle, le…”)
+Ton téléphone ¦ Telefonul tău
+Ton courriel ¦ E-mailul tău
+Relancer au bout de ¦ Revino după
+Proposer l’envoi par courriel d’abord ¦ Propune mai întâi trimiterea prin e-mail
+📝 Les modèles de lettres ¦ 📝 Modelele de scrisori
+Modèle ¦ Model
+↺ Remettre ce modèle comme au départ ¦ ↺ Readu acest model la starea inițială
+Les repères qu’on peut utiliser ¦ Reperele care pot fi folosite
+✎ Modèle retouché (gardé tout seul). ¦ ✎ Model retușat (păstrat automat).
+Modèle de départ. ¦ Model inițial.
+ton nom et ton adresse ¦ numele și adresa ta
+l’adresse du destinataire ¦ adresa destinatarului
+« À Tulle, le 9 novembre 2026 » ¦ „À Tulle, le 9 novembre 2026”
+l’objet ¦ obiectul
+« une copie intégrale de l’acte de naissance » ¦ „une copie intégrale de l’acte de naissance”
+naissance, mariage ou décès ¦ naștere, căsătorie sau deces
+le nom de la personne ¦ numele persoanei
+« , fils de … et de … » ¦ „, fils de … et de …”
+« né le 7 mai 1925 à Tulle (Corrèze) » ¦ „né le 7 mai 1925 à Tulle (Corrèze)”
+le conjoint ¦ soțul/soția
+ton lien ¦ legătura ta
+les pièces jointes ¦ anexele
+tes précisions ¦ precizările tale
+l’enveloppe timbrée ¦ plicul timbrat
+ta signature ¦ semnătura ta
+Modèle remis comme au départ ¦ Model readus la starea inițială
+ton adresse, le délai de relance et tes modèles de lettres ¦ adresa ta, termenul de revenire și modelele tale de scrisori
+📮 Revoir la lettre ¦ 📮 Revezi scrisoarea
+COURRIER RANGÉ ¦ SCRISOARE PĂSTRATĂ
+📮 Refaire une demande ¦ 📮 Refă o cerere
+Demander un acte… ¦ Cere un act…
+=doute ¦ îndoială|îndoieli|de îndoieli
+=foyer de recensement ¦ gospodărie din recensământ|gospodării din recensământ|de gospodării din recensământ
+=lecture douteuse ¦ citire îndoielnică|citiri îndoielnice|de citiri îndoielnice
+=foyer importé ¦ gospodărie importată|gospodării importate|de gospodării importate
+=fiche reliée ¦ fișă legată|fișe legate|de fișe legate
+=déjà là ¦ deja existentă|deja existente|de deja existente
+Transcription automatique SocFace (FranceArchives) — peut contenir des erreurs : à vérifier sur l’image ¦ Transcriere automată SocFace (FranceArchives) — poate conține erori: de verificat pe imagine
+🖼 Voir l’image ↗ ¦ 🖼 Vezi imaginea ↗
+🗂 Lien vers le registre (la page n’est pas précisée) ↗ ¦ 🗂 Link spre registru (pagina nu e precizată) ↗
+Néant ¦ Nimic
+le lecteur de tableaux n’est pas chargé ¦ cititorul de tabele nu e încărcat
+je ne reconnais ni un CSV de FranceArchives, ni le texte d’une fiche (« Naissance », « Lien avec le chef de ménage »…) ¦ nu recunosc nici un CSV de la FranceArchives, nici textul unei fișe („Naissance”, „Lien avec le chef de ménage”…)
+{n} lignes laissées de côté : ce ne sont pas des recensements. ¦ {n} rânduri lăsate deoparte: nu sunt recensăminte.
+{n} ligne laissée de côté : ce ne sont pas des recensements. ¦ {n} rând lăsat deoparte: nu sunt recensăminte.
+{n} lignes sans année de recensement : elles ne seront pas importées. ¦ {n} rânduri fără an de recensământ: nu vor fi importate.
+{n} ligne sans année de recensement : elle ne sera pas importée. ¦ {n} rând fără an de recensământ: nu va fi importat.
+Ce fichier ne dit pas qui vit avec qui (le CSV de FranceArchives ne contient pas le ménage) : les personnes de même nom, même commune et même année sont mises ensemble. Décoche celles qui ne vont pas avec les autres. Pour avoir le ménage exact, copie le texte de la fiche (avec « Voir les autres membres du ménage »). ¦ Acest fișier nu spune cine locuiește cu cine (CSV-ul de la FranceArchives nu conține gospodăria): persoanele cu același nume, aceeași localitate și același an sunt puse împreună. Debifează-le pe cele care nu merg cu celelalte. Ca să ai gospodăria exactă, copiază textul fișei (cu „Voir les autres membres du ménage”).
+Lien avec le chef ¦ Legătura cu capul gospodăriei
+🧾 Recensements : {years} — transcription automatique (SocFace) à vérifier sur l’image ; ensuite « ⤒ Importer » le CSV. ¦ 🧾 Recensăminte: {years} — transcriere automată (SocFace) de verificat pe imagine; apoi „⤒ Importă” CSV-ul.
+aucun entre ces deux années ¦ niciunul între acești doi ani
+C’est la même personne ? ¦ E aceeași persoană?
+— Ne pas relier (personne sans fiche) ¦ — Nu lega (persoană fără fișă)
+Importer cette ligne ¦ Importă acest rând
+(cité sur la fiche) ¦ (citat pe fișă)
+Aucune fiche proche : la ligne entre sans fiche. ¦ Nicio fișă apropiată: rândul intră fără fișă.
+ⓘ déjà un recensement de {year} dans sa fiche : celui-ci s’ajoute à côté, rien n’est remplacé. ¦ ⓘ există deja un recensământ din {year} în fișa sa: acesta se adaugă alături, nu se înlocuiește nimic.
+Ce ménage est déjà importé : il sera laissé de côté (pas de doublon). ¦ Această gospodărie e deja importată: va fi lăsată deoparte (fără dublură).
+Personne lue ¦ Persoană citită
+Âge, naissance ¦ Vârstă, naștere
+fichier trop gros (8 Mo au plus) ¦ fișier prea mare (cel mult 8 MB)
+aucun recensement dans ce fichier ¦ niciun recensământ în acest fișier
+{count} repérées (lettres ou chiffres qui se ressemblent, abréviations…) : clique sur « doute » pour voir pourquoi et corriger avant d’importer. ¦ {count} găsite (litere sau cifre care seamănă, abrevieri…): fă clic pe „îndoială” ca să vezi de ce și să corectezi înainte de import.
+{count} repérée (lettres ou chiffres qui se ressemblent, abréviations…) : clique sur « doute » pour voir pourquoi et corriger avant d’importer. ¦ {count} găsită (litere sau cifre care seamănă, abrevieri…): fă clic pe „îndoială” ca să vezi de ce și să corectezi înainte de import.
+Rien n’est relié à une fiche sans ton accord : choisis « Relier à… » seulement si c’est bien la même personne. Aucune donnée de tes fiches n’est remplacée. ¦ Nimic nu e legat de o fișă fără acordul tău: alege „Leagă de…” doar dacă e chiar aceeași persoană. Nicio dată din fișele tale nu e înlocuită.
+— à vérifier sur l’image. ¦ — de verificat pe imagine.
+Importer des recensements SocFace ¦ Importă recensăminte SocFace
+CSV de FranceArchives ou texte d’une fiche ¦ CSV de la FranceArchives sau textul unei fișe
+Le CSV d’une notice (« Télécharger la notice en CSV »), l’export d’une recherche (« Exporter les résultats »), ou le texte d’une fiche copié dans un fichier .txt. Rien n’est demandé à FranceArchives : seul ton fichier est lu. ¦ CSV-ul unei notițe („Télécharger la notice en CSV”), exportul unei căutări („Exporter les résultats”) sau textul unei fișe copiat într-un fișier .txt. Nu se cere nimic de la FranceArchives: se citește doar fișierul tău.
+📋 Coller le texte d’une fiche ¦ 📋 Lipește textul unei fișe
+Sur la fiche FranceArchives, sélectionne tout le texte (de « Naissance » jusqu’à « Voir les autres membres du ménage »), copie-le, puis colle-le ici. Tu peux coller plusieurs fiches à la suite. ¦ Pe fișa FranceArchives, selectează tot textul (de la „Naissance” până la „Voir les autres membres du ménage”), copiază-l, apoi lipește-l aici. Poți lipi mai multe fișe una după alta.
+Colle le texte d’une fiche. ¦ Lipește textul unei fișe.
+🔍 Vérifier cette ligne SocFace ¦ 🔍 Verifică acest rând SocFace
+relié à ¦ legat de
+Lu par SocFace ¦ Citit de SocFace
+lu d’abord : « {val} » ¦ citit mai întâi: „{val}”
+Utiliser « {val} » ¦ Folosește „{val}”
+✓ rien de suspect ¦ ✓ nimic suspect
+Une proposition n’est jamais appliquée toute seule : regarde l’image, puis clique si elle est juste. ¦ O propunere nu se aplică niciodată singură: uită-te la imagine, apoi fă clic dacă e corectă.
+Tu peux toujours faire « ↶ Annuler ». ¦ Poți face oricând „↶ Anulează”.
+L’original ¦ Originalul
+Pas de lien vers l’image dans le fichier. ¦ Niciun link spre imagine în fișier.
+Ce ménage ¦ Această gospodărie
+‹ Ligne d’avant ¦ ‹ Rândul dinainte
+Ouvre FranceArchives dans ton navigateur, avec le nom, la commune et les années remplis ¦ Deschide FranceArchives în browser, cu numele, localitatea și anii completați
+🔍 Chercher dans les recensements (SocFace) ¦ 🔍 Caută în recensăminte (SocFace)
+⤒ Importer des recensements SocFace ¦ ⤒ Importă recensăminte SocFace
+Coché « Vérifié sur l’image » ¦ Bifat „Verificat pe imagine”
+Lu par SocFace, à vérifier sur l’image ¦ Citit de SocFace, de verificat pe imagine
+Vérifié sur l’image ¦ Verificat pe imagine
+Les foyers importés de SocFace… ¦ Gospodăriile importate din SocFace…
+ménage {nm} ¦ gospodăria {nm}
+Importé ¦ Importat
+Pas de fiche reliée ¦ Nicio fișă legată
+Les listes nominatives des recensements de 1836 à 1936, lues par intelligence artificielle (projet SocFace) et publiées sur FranceArchives. Cherche sur le site, télécharge le CSV, importe-le ici : chaque ménage devient un foyer de recensement, à vérifier sur l’image. ¦ Listele nominale ale recensămintelor din 1836 până în 1936, citite de inteligența artificială (proiectul SocFace) și publicate pe FranceArchives. Caută pe site, descarcă CSV-ul, importă-l aici: fiecare gospodărie devine o gospodărie de recensământ, de verificat pe imagine.
+🔍 Chercher sur FranceArchives ¦ 🔍 Caută pe FranceArchives
+Chercher… (nom, commune, année, cote) ¦ Caută… (nume, localitate, an, cotă)
+Chercher dans les foyers importés ¦ Caută în gospodăriile importate
+✓ Vérifiés ¦ ✓ Verificate
+Aucun recensement SocFace importé pour l’instant ¦ Niciun recensământ SocFace importat deocamdată
+Cherche un ancêtre sur FranceArchives, télécharge la notice ou les résultats en CSV, puis importe le fichier. ¦ Caută un strămoș pe FranceArchives, descarcă notița sau rezultatele în CSV, apoi importă fișierul.
+Foyer coché « Vérifié sur l’image » ¦ Gospodărie bifată „Verificat pe imagine”
+Foyer de nouveau « À vérifier » ¦ Gospodărie din nou „De verificat”
+Lu sur un site d’archives en ligne et recopié : à vérifier sur le document ¦ Citit pe un site de arhive online și copiat: de verificat pe document
+Morts pour la France 1914-1918 ¦ Morți pentru Franța 1914-1918
+mort pour la France 1914-1918 ¦ mort pentru Franța 1914-1918
+Morts pour la France 1939-1945 ¦ Morți pentru Franța 1939-1945
+mort pour la France 1939-1945 ¦ mort pentru Franța 1939-1945
+Sépultures de guerre ¦ Morminte de război
+sépulture de guerre ¦ mormânt de război
+Militaires décédés (sans la mention « Mort pour la France ») ¦ Militari decedați (fără mențiunea „Mort pour la France”)
+militaires décédés ¦ militari decedați
+Journal de marche de son unité ¦ Jurnalul de operațiuni al unității sale
+Léonore — Légion d’honneur ¦ Léonore — Legiunea de Onoare
+Archives du département (registres matricules) ¦ Arhivele departamentului (registre matricole)
+Grand Mémorial (culture.fr) ¦ Grand Mémorial (culture.fr)
+RetroNews (BnF, en partie payant) ¦ RetroNews (BnF, parțial cu plată)
+Europeana — journaux d’Europe ¦ Europeana — ziare din Europa
+Sans année de naissance, on ne peut pas calculer sa classe. ¦ Fără an de naștere nu i se poate calcula contingentul.
+Né en {y}, il est de la classe {c} : les garçons étaient recensés l’année de leurs 20 ans ({y} + 20 = {c}). Les registres matricules sont rangés par classe, puis par bureau de recrutement. ¦ Născut în {y}, face parte din contingentul {c}: băieții erau recenzați în anul în care împlineau 20 de ani ({y} + 20 = {c}). Registrele matricole sunt ordonate pe contingente, apoi pe birouri de recrutare.
+Avant les années 1860, il n’y a en général pas encore de registre matricule. ¦ Înainte de anii 1860, în general nu există încă registru matricol.
+Les registres de cette classe ne sont souvent pas encore en ligne (délai de 100 à 120 ans). ¦ Registrele acestui contingent adesea nu sunt încă online (termen de 100 până la 120 de ani).
+Mémoire des hommes (ministère des Armées) : les fiches des soldats « Morts pour la France » des deux guerres, les sépultures de guerre, les militaires décédés et les marins, et les journaux de marche des unités. Ses bases ne gardent pas la recherche dans l’adresse : l’app ouvre une recherche limitée à ce site, avec son nom et son prénom. ¦ Mémoire des hommes (Ministerul Forțelor Armate): fișele soldaților „Morts pour la France” din cele două războaie, mormintele de război, militarii decedați și marinarii, precum și jurnalele de operațiuni ale unităților. Bazele lui nu păstrează căutarea în adresă: aplicația deschide o căutare limitată la acest site, cu numele și prenumele lui.
+Léonore (Archives nationales) : les dossiers des membres de la Légion d’honneur morts avant 1977 — souvent l’acte de naissance, le grade, la date de nomination, parfois une photo. ¦ Léonore (Archives nationales): dosarele membrilor Legiunii de Onoare morți înainte de 1977 — adesea actul de naștere, gradul, data numirii, uneori o fotografie.
+Les registres matricules (au service militaire, vers 20 ans) : numéro, classe, bureau de recrutement, signalement (cheveux, yeux, taille, instruction), campagnes, blessures, adresses successives. Ils sont sur le site des Archives du département où il habitait à 20 ans. ¦ Registrele matricole (la serviciul militar, pe la 20 de ani): număr, contingent, birou de recrutare, semnalmente (păr, ochi, înălțime, instrucție), campanii, răni, adrese succesive. Se află pe site-ul Arhivelor departamentului unde locuia la 20 de ani.
+Les journaux anciens numérisés. Gallica (BnF) est gratuit ; RetroNews (BnF) est en partie payant (certains journaux et la lecture complète demandent un abonnement) ; Europeana réunit des journaux de toute l’Europe. Un nom seul trouve beaucoup d’homonymes : ajoute le lieu et la période. ¦ Ziarele vechi digitalizate. Gallica (BnF) e gratuit; RetroNews (BnF) e parțial cu plată (unele ziare și citirea completă cer un abonament); Europeana adună ziare din toată Europa. Un nume singur găsește mulți omonimi: adaugă locul și perioada.
+🏅 Léonore ¦ 🏅 Léonore
+Nécrologie ¦ Necrolog
+Avis de décès ¦ Anunț de deces
+Résultats, palmarès ¦ Rezultate, palmares
+déjà sur la fiche : {val} (gardé) ¦ deja pe fișă: {val} (păstrat)
+soldat de 2e classe ¦ soldat
+Matricule au corps · classe · recrutement ¦ Număr matricol la unitate · contingent · recrutare
+Date du décès ¦ Data decesului
+20 août 1914 ¦ 20 août 1914
+Lieu du décès ¦ Locul decesului
+Lu : « {val} » — choisis le lieu (ou crée-le). ¦ Citit: „{val}” — alege locul (sau creează-l).
+Genre de mort ¦ Felul morții
+tué à l’ennemi, des suites de blessures… ¦ ucis de inamic, în urma rănilor…
+Décret · promotion ¦ Decret · promoție
+décret du 12 juillet 1920 ¦ decretul din 12 iulie 1920
+Degré d’instruction ¦ Nivel de instrucție
+contre l’Allemagne du 2 août 1914 au… ¦ contra Germaniei, din 2 august 1914 până la…
+Blessures, citations, décorations ¦ Răni, citări, decorații
+Titre de l’article ¦ Titlul articolului
+Un drame à Tulle ¦ O dramă la Tulle
+Ce qui sera proposé sur la fiche (rien n’est remplacé) ¦ Ce se va propune pe fișă (nu se înlocuiește nimic)
+Ajouter le décès « Mort pour la France » ¦ Adaugă decesul „Mort pour la France”
+— la fiche a déjà un décès : il est gardé ¦ — fișa are deja un deces: e păstrat
+Cocher « Mort pour la France » sur la fiche ¦ Bifează „Mort pour la France” pe fișă
+— déjà coché ¦ — deja bifat
+— la fiche dit « non » : change-la toi-même si le document dit « oui » ¦ — fișa spune „nu”: schimb-o tu însuți dacă documentul spune „da”
+Ajouter son unité au bloc « Poilu 14-18 » (si elle n’y est pas) ¦ Adaugă unitatea lui în blocul „Poilu 14-18” (dacă nu e deja)
+fichier trop gros (60 Mo au plus) ¦ fișier prea mare (cel mult 60 MB)
+Le document importé ¦ Documentul importat
+Le PDF sera rangé dans les médias. Recopie à côté ce qu’il dit. ¦ PDF-ul va fi pus în media. Copiază alături ce spune.
+Page enregistrée : seul son texte est gardé (dans la source), pas la page elle-même. ¦ Pagină salvată: se păstrează doar textul ei (în sursă), nu pagina însăși.
+ici : une image (JPG, PNG, WebP, GIF), un PDF, une page enregistrée (.html) ou un texte (.txt) ¦ aici: o imagine (JPG, PNG, WebP, GIF), un PDF, o pagină salvată (.html) sau un text (.txt)
+<b>un document</b> pour {who} ¦ <b>un document</b> pentru {who}
+la fiche choisie ci-dessous ¦ fișa aleasă mai jos
+Le document entre « À vérifier ». ¦ Documentul intră „De verificat”.
+— à vérifier sur le document. ¦ — de verificat pe document.
+Rien de la fiche n’est remplacé : seules les cases vides sont remplies, et « ↶ Annuler » retire tout ce que l’import a ajouté. ¦ Nimic din fișă nu e înlocuit: se completează doar căsuțele goale, iar „↶ Anulează” scoate tot ce a adăugat importul.
+ℹ️ Choisis la fiche : l’app comparera le document avec elle. ¦ ℹ️ Alege fișa: aplicația va compara documentul cu ea.
+✓ Le nom, le prénom et les dates ne contredisent pas la fiche. ¦ ✓ Numele, prenumele și datele nu contrazic fișa.
+À qui se rapporte ce document ? ¦ La cine se referă acest document?
+Recopie ce que dit le document ; laisse vide ce que tu ne sais pas. ¦ Copiază ce spune documentul; lasă gol ce nu știi.
+Lien vers la fiche ou l’article ¦ Link spre fișă sau spre articol
+Texte copié (facultatif : gardé dans la source) ¦ Text copiat (opțional: păstrat în sursă)
+Choisis la fiche à qui se rapporte ce document. ¦ Alege fișa la care se referă acest document.
+Le lien doit commencer par https:// (ou http://). ¦ Linkul trebuie să înceapă cu https:// (sau http://).
+Il faut un fichier, un lien ou le texte du document. ¦ Trebuie un fișier, un link sau textul documentului.
+une fiche de Mémoire des hommes ¦ o fișă din Mémoire des hommes
+un dossier Léonore ¦ un dosar Léonore
+une page de registre matricule ¦ o pagină de registru matricol
+un article de journal ¦ un articol de ziar
+Importer depuis les archives en ligne ¦ Importă din arhivele online
+image, PDF, page enregistrée ou texte ¦ imagine, PDF, pagină salvată sau text
+Ce que tu as téléchargé ou enregistré : {kind} en image ou en PDF, la page enregistrée par ton navigateur (« Enregistrer sous… »), ou un texte copié. Rien n’est demandé au site : seul ton fichier est lu. Pas de fichier ? « 🔗 Coller un lien » dans la fenêtre de recherche. ¦ Ce ai descărcat sau salvat: {kind} ca imagine sau PDF, pagina salvată de browser („Salvează ca…”) sau un text copiat. Nu se cere nimic de la site: se citește doar fișierul tău. Niciun fișier? „🔗 Lipește un link” în fereastra de căutare.
+Ouvre Mémoire des hommes dans ton navigateur, avec son nom et son prénom ¦ Deschide Mémoire des hommes în browser, cu numele și prenumele lui
+Sa classe, son département et le site des archives où chercher son registre matricule ¦ Contingentul lui, departamentul și site-ul arhivelor unde îi cauți registrul matricol
+🔍 Léonore ¦ 🔍 Léonore
+Ouvre la base Léonore (Légion d’honneur) dans ton navigateur ¦ Deschide baza Léonore (Legiunea de Onoare) în browser
+Gallica, RetroNews, Europeana : nom, lieu et années déjà remplis ¦ Gallica, RetroNews, Europeana: nume, loc și ani deja completați
+🔍 Archives en ligne ¦ 🔍 Arhive online
+Range l’image ou le PDF trouvé, crée la source et propose ce qu’il dit ¦ Pune la loc imaginea sau PDF-ul găsit, creează sursa și propune ce spune
