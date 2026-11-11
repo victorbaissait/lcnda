@@ -319,3 +319,1803 @@ maison|Angles ¦ Unghiuri
 maison|Écurie ¦ Grajd
 maison|Croix ¦ Cruce
 couleur|aucune ¦ niciuna
+Rez-de-chaussée ¦ Parter
+Cave ¦ Pivniță
+1er étage ¦ Etajul 1
+{level}e étage ¦ Etajul {level}
+Maison de famille ¦ Casa familiei
+Époque sans nom ¦ Epocă fără nume
+Barre du haut ¦ Bara de sus
+Barre de la vue 3D ¦ Bara vederii 3D
+Vues dessus / face / côté ¦ Vederi de sus / din față / din lateral
+Revêtement sur {what} de mur ¦ Finisaj pe {what} de perete
+=face ¦ față|fețe|de fețe
+=mur ¦ perete|pereți|de pereți
+=étage ¦ etaj|etaje|de etaje
+=trait ¦ linie|linii|de linii
+=objet trouvé ¦ obiect găsit|obiecte găsite|de obiecte găsite
+Aucune pièce tracée ¦ Nicio cameră desenată
+Pièces et surfaces ¦ Camere și suprafețe
+Plan du ¦ Planul din
+double hauteur (vide au-dessus) ¦ înălțime dublă (gol deasupra)
+trémie de l’escalier ¦ golul scării
+escalier (plancher fermé) ¦ scară (planșeu închis)
+VIDE ¦ GOL
+vide sur {name} ¦ gol deasupra {name}
+maison|Vide ¦ Gol
+sans plancher ¦ fără planșeu
+m² Carrez ¦ m² Carrez
+Moins de 1,80 m sous la pente du toit ¦ Sub 1,80 m sub panta acoperișului
+🕰 Fantôme : {name} ¦ 🕰 Fantomă: {name}
+⌒ {len} · flèche {arrow} ¦ ⌒ {len} · săgeată {arrow}
+{len} pour fermer en rectangle ¦ {len} ca să închizi ca dreptunghi
+départ (clic : fermer) ¦ început (clic: închide)
+maison|départ ¦ început
+Posé sous l’étage « {name} ». ¦ Așezat sub etajul „{name}”.
+📐 {area} m² au sol ¦ 📐 {area} m² la sol
+{area} m² au sol ¦ {area} m² la sol
+{carrez} m² loi Carrez ¦ {carrez} m² legea Carrez
+{area} m² loi Carrez (hauteur ≥ 1,80 m) ¦ {area} m² legea Carrez (înălțime ≥ 1,80 m)
+(là où l’on tient debout : 1,80 m et plus, hachuré sur le plan) ¦ (unde se poate sta în picioare: 1,80 m și peste, hașurat pe plan)
+Habitant : {role} — ouvrir la fiche ¦ Locuitor: {role} — deschide fișa
+Habitant — ouvrir la fiche ¦ Locuitor — deschide fișa
+Liée à la pièce « {room} » — ouvrir la fiche ¦ Legată de camera „{room}” — deschide fișa
+{label} — époque : {era} — ouvrir la fiche où il est ¦ {label} — epoca: {era} — deschide fișa pe care se află
+{label} — ouvrir la fiche où il est ¦ {label} — deschide fișa pe care se află
+🏷 Les souvenirs de la maison ¦ 🏷 Amintirile casei
+Aller à « {where} » et voir le souvenir ¦ Mergi la „{where}” și vezi amintirea
+Soleil calculé pour {place} ({lat}° N). ¦ Soare calculat pentru {place} ({lat}° N).
+le lieu de la maison ¦ locul casei
+Le lieu de la maison n’a pas de coordonnées : soleil calculé pour le centre de la France. ¦ Locul casei nu are coordonate: soare calculat pentru centrul Franței.
+La nuit, les lampes posées s’allument (Vue 3D → ☀️ Lumière). ¦ Noaptea, lămpile așezate se aprind (Vedere 3D → ☀️ Lumină).
+Pour commencer : ⬚ <b>glisse une pièce</b> (ses murs se font tout seuls), ou ▬ trace les murs un par un. ▨ Un <b>vide</b> (mezzanine, double hauteur) se dessine à l’étage du dessus. Puis 🚪 portes et 🪟 fenêtres (un clic sur un mur), et le <b>mobilier</b> (onglet à côté). ¦ Ca să începi: ⬚ <b>trage o cameră</b> (pereții ei se fac singuri), sau ▬ desenează pereții unul câte unul. ▨ Un <b>gol</b> (mezanin, înălțime dublă) se desenează la etajul de deasupra. Apoi 🚪 uși și 🪟 ferestre (un clic pe un perete), și <b>mobilierul</b> (fila de alături).
+{area} m² habitables ¦ {area} m² locuibili
+Face côté {rooms} ¦ Fața dinspre {rooms}
+Face extérieure (façade) ¦ Fața exterioară (fațadă)
+Les murs de « {name} » ¦ Pereții camerei „{name}”
+la pièce ¦ camera
+Les murs de toutes les pièces de cet étage ¦ Pereții tuturor camerelor de la acest etaj
+Toutes les façades de cet étage ¦ Toate fațadele acestui etaj
+Les murs de toutes les pièces de la maison (tous les étages) ¦ Pereții tuturor camerelor din casă (toate etajele)
+Toutes les façades de la maison (tous les étages) ¦ Toate fațadele casei (toate etajele)
+Vide sur « {room} » ({floor}). ¦ Gol deasupra „{room}” ({floor}).
+Vide sur l’étage « {floor} ». ¦ Gol deasupra etajului „{floor}”.
+⚠️ C’est l’étage le plus bas : ce vide n’ouvre sur rien. ¦ ⚠️ Este etajul cel mai de jos: acest gol nu dă spre nimic.
+{w} × {d} hors tout · périmètre {p} ¦ {w} × {d} total · perimetru {p}
+La face de {walls} tournée vers la pièce. ¦ Fața {walls} îndreptată spre cameră.
+Années de {name} ¦ Anii lui {name}
+Hauteur : celle de l’étage + le plancher ({h}) ¦ Înălțime: cea a etajului + planșeul ({h})
+={n} marches de {rise} cm, giron {going} cm · 2 h + g = {sum} cm ¦ {n} treaptă de {rise} cm, lățime {going} cm · 2 h + l = {sum} cm|{n} trepte de {rise} cm, lățime {going} cm · 2 h + l = {sum} cm|{n} de trepte de {rise} cm, lățime {going} cm · 2 h + l = {sum} cm
+Ouvrir le plancher au-dessus (« {name} ») ¦ Deschide planșeul de deasupra („{name}”)
+Ouvrir le plancher au-dessus ¦ Deschide planșeul de deasupra
+posé sur « {name} » : il le suit ¦ așezat pe „{name}”: îl urmează
+un objet ¦ un obiect
+Georgia (de départ) ¦ Georgia (inițial)
+État d’origine ¦ Starea de origine
+Époque modifiée ¦ Epocă modificată
+Nouvelle époque : {name} ¦ Epocă nouă: {name}
+Époques retirées (le plan « {name} » reste, sans date) ¦ Epoci scoase (planul „{name}” rămâne, fără dată)
+Époque « {name} » supprimée avec son plan ¦ Epoca „{name}” a fost ștearsă cu planul ei
+{name} est déjà rattaché. ¦ {name} este deja legat.
+🏠 un habitant y est ¦ 🏠 un locuitor este acolo
+Posé sur « {name} » ¦ Așezat pe „{name}”
+Posé au sol ¦ Așezat pe podea
+Pièce {n} ¦ Camera {n}
+Pièce de {area} m² ¦ Cameră de {area} m²
+Vide sur {name} ¦ Gol deasupra {name}
+Mezzanine ¦ Mezanin
+🏗 Mezzanine posée (étage « Mezzanine » ajouté) : vide sur {room}, garde-corps et escalier. ¦ 🏗 Mezanin așezat (etajul „Mezanin” adăugat): gol deasupra {room}, balustradă și scară.
+🏗 Mezzanine posée à l’étage « {floor} » : vide sur {room}, garde-corps et escalier. ¦ 🏗 Mezanin așezat la etajul „{floor}”: gol deasupra {room}, balustradă și scară.
+{len} cm, c’est trop court : pour des mètres, écris « {typed} m ». ¦ {len} cm e prea scurt: pentru metri, scrie „{typed} m”.
+{name} posé ¦ {name} așezat
+{msg} — et maintenant le deuxième point. ¦ {msg} — și acum al doilea punct.
+À l’échelle : la longueur choisie mesure {len}. Puis « ✏️ Décalquer les murs » (onglet Étage). ¦ La scară: lungimea aleasă măsoară {len}. Apoi „✏️ Copiază pereții” (fila Etaj).
+Plan ancien redressé ({deg}°) ¦ Plan vechi îndreptat ({deg}°)
+Souvenir ¦ Amintire
+🔗 Relier un souvenir à « {name} » ¦ 🔗 Leagă o amintire de „{name}”
+Un souvenir pour « {name} » ¦ O amintire pentru „{name}”
+✍ Un récit pour « {name} » ¦ ✍ O povestire pentru „{name}”
+👤 Une personne liée à « {name} » ¦ 👤 O persoană legată de „{name}”
+Ce qui s’y est passé ¦ Ce s-a întâmplat acolo
+Réglage « {name} » appliqué ¦ Setarea „{name}” a fost aplicată
+Ce réglage est celui d’un autre outil (« {tool} ») : importe-le dans cet outil-là, pas dans la Maison. ¦ Această setare aparține altei unelte („{tool}”): import-o în acea unealtă, nu în Casă.
+Un réglage s’appelle déjà « {name} ». Nom du réglage importé : ¦ O setare se numește deja „{name}”. Numele setării importate:
+{lines} et {texts}. ¦ {lines} și {texts}.
+Chaque trait devient un mur ; un contour fermé sur un calque « pièce / room » devient une pièce, nommée par le texte posé dedans. ¦ Fiecare linie devine un perete; un contur închis pe un strat „pièce / room” devine o cameră, numită după textul pus înăuntru.
+Pas repris : {what}. ¦ Nepreluat: {what}.
+Cet étage ({name}), en plus de ce qui y est ¦ Acest etaj ({name}), pe lângă ce este deja acolo
+{walls}, {rooms} et {texts} importés. ¦ {walls}, {rooms} și {texts} importate.
+🔁 Répéter cette fenêtre ¦ 🔁 Repetă această fereastră
+🔁 Répéter cette porte ¦ 🔁 Repetă această ușă
+Des copies le long du même mur, vers son autre bout (mur de {len}). ¦ Copii de-a lungul aceluiași perete, spre celălalt capăt al lui (perete de {len}).
+🔁 Répéter « {name} » ¦ 🔁 Repetă „{name}”
+{name} (à {len}) ¦ {name} (la {len})
+{copies} de « {name} ». ¦ {copies} ale lui „{name}”.
+Vue 3D ¦ Vedere 3D
+Au-dessus : {name} ¦ Deasupra: {name}
+En dessous : {name} (cave, sous-sol) ¦ Dedesubt: {name} (pivniță, subsol)
+Reprendre les murs de « {name} » (et ses fenêtres) ¦ Preia pereții de la „{name}” (și ferestrele lui)
+{name} ajouté ¦ {name} adăugat
+Étages ¦ Etaje
+{name} (murs repris) ¦ {name} (pereți preluați)
+Étage « {name} » supprimé ¦ Etajul „{name}” a fost șters
+Maison de {place} ¦ Casa din {place}
+✓ Toit retiré ¦ ✓ Acoperiș scos
+✓ Toit ajouté : il se voit depuis « {name} », l’étage du haut ¦ ✓ Acoperiș adăugat: se vede de la „{name}”, etajul de sus
+✓ Toit ajouté : il se pose sur les murs (aucun mur pour l’instant) ¦ ✓ Acoperiș adăugat: se așază pe pereți (deocamdată niciun perete)
+✓ Toit ajouté ¦ ✓ Acoperiș adăugat
+Arrêt {n} de la visite guidée ¦ Oprirea {n} din turul ghidat
+{label} — ouvrir la fiche ¦ {label} — deschide fișa
+Habitant ¦ Locuitor
+{label} — époque : {era} ¦ {label} — epoca: {era}
+{what} sur {total} ¦ {what} din {total}
+Supprimer la maison « {name} » ? ¦ Ștergi casa „{name}”?
+Supprimer la maison ¦ Șterge casa
+🕰 époque : {name} ¦ 🕰 epoca: {name}
+aucune époque choisie ¦ nicio epocă aleasă
+mètres ¦ metri
+centimètres ¦ centimetri
+millimètres ¦ milimetri
+pieds ¦ picioare
+toises (1,949 m) ¦ toises (1,949 m)
+pieds du roi (32,48 cm) ¦ pieds du roi (32,48 cm)
+aunes de Paris (1,188 m) ¦ aunes de Paris (1,188 m)
+perches de Paris (18 pieds, 5,847 m) ¦ perches de Paris (18 picioare, 5,847 m)
+perches royales (22 pieds, 7,146 m) ¦ perches royales (22 de picioare, 7,146 m)
+pas (environ 75 cm) ¦ pași (cam 75 cm)
+Plâtre blanc ¦ Tencuială albă de ipsos
+Enduit à la chaux ¦ Tencuială de var
+Pierre apparente ¦ Piatră aparentă
+Brique ¦ Cărămidă
+Colombage (pans de bois) ¦ Paiantă (structură de lemn)
+Lambris de bois ¦ Lambriu de lemn
+Papier peint ¦ Tapet
+Carrelage ¦ Faianță
+Béton ¦ Beton
+Torchis ¦ Chirpici
+Enduit, crépi ¦ Tencuială, pișcot
+Pierre de taille ¦ Piatră cioplită
+Papier peint à rayures ¦ Tapet cu dungi
+Papier peint à fleurs ¦ Tapet cu flori
+Toile de Jouy ¦ Toile de Jouy
+Parquet ¦ Parchet
+Parquet à bâtons rompus ¦ Parchet în os de pește
+Tomettes ¦ Plăci de teracotă
+Carreaux de ciment ¦ Plăci de ciment
+Damier noir et blanc ¦ Tablă de șah alb-negru
+Dalles de pierre ¦ Dale de piatră
+Terre battue ¦ Pământ bătătorit
+Moquette, tapis ¦ Mochetă, covor
+Herbe (extérieur) ¦ Iarbă (exterior)
+Gravier, cour ¦ Pietriș, curte
+Bois clair (hêtre, pin) ¦ Lemn deschis (fag, pin)
+Chêne ¦ Stejar
+Noyer ¦ Nuc
+Merisier ¦ Cireș
+Bois foncé (ébène, bois ciré) ¦ Lemn închis (abanos, lemn ceruit)
+Bois peint ¦ Lemn vopsit
+Métal, acier ¦ Metal, oțel
+Fonte, fer forgé ¦ Fontă, fier forjat
+Laiton, bronze, doré ¦ Alamă, bronz, aurit
+Zinc, fer-blanc ¦ Zinc, tablă cositorită
+Pierre ¦ Piatră
+Marbre ¦ Marmură
+Grès, terre cuite ¦ Gresie, teracotă
+Faïence, porcelaine, émail ¦ Faianță, porțelan, email
+Tissu ¦ Țesătură
+Velours ¦ Catifea
+Cuir ¦ Piele
+Osier, rotin ¦ Răchită, ratan
+Paille ¦ Paie
+Verre ¦ Sticlă
+Sans pieds ¦ Fără picioare
+Pieds droits ¦ Picioare drepte
+Pieds tournés ¦ Picioare strunjite
+Pieds boules (miches) ¦ Picioare bilă
+Patins ¦ Patine
+Roulettes ¦ Rotile
+Barreaux de bois ¦ Baluștri de lemn
+Métal (barreaux fins) ¦ Metal (bare subțiri)
+Muret plein ¦ Zid scund plin
+Métiers, ferme ¦ Meserii, fermă
+Extérieur ¦ Exterior
+sa chambre ¦ camera sa
+né ici ¦ născut aici
+née ici ¦ născută aici
+y a vécu ¦ a locuit aici
+y est mort ¦ a murit aici
+y est morte ¦ a murit aici
+les parents ¦ părinții
+les enfants ¦ copiii
+locataire ¦ chiriaș
+fermier ¦ arendaș
+domestique ¦ servitor
+servante ¦ servitoare
+valet ¦ argat
+nourrice ¦ doică
+pensionnaire ¦ pensionar (chiriaș cu masă)
+atelier ¦ atelier
+boutique ¦ prăvălie
+Nom de la maison ¦ Numele casei
+Réglages de l’aimant : grille, coins, angles, précision et 💾 réglages enregistrés ¦ Setările alinierii magnetice: grilă, colțuri, unghiuri, precizie și 💾 setări salvate
+Réglages de l’aimant ¦ Setările alinierii magnetice
+📐 Un plan ancien, un cadastre, à calquer… ¦ 📐 Un plan vechi, o hartă cadastrală, de copiat…
+🖼️ Un objet en image (vue de dessus)… ¦ 🖼️ Un obiect ca imagine (vedere de sus)…
+🧊 Un objet 3D (OBJ, STL, glTF, GLB)… ¦ 🧊 Un obiect 3D (OBJ, STL, glTF, GLB)…
+🏠 Une maison (fichier .json)… ¦ 🏠 O casă (fișier .json)…
+📐 Un plan DXF (AutoCAD, LibreCAD, architecte, notaire)… ¦ 📐 Un plan DXF (AutoCAD, LibreCAD, arhitect, notar)…
+Le plan (PNG, JPG, PDF, SVG, impression), la vue 3D, le fichier de la maison ¦ Planul (PNG, JPG, PDF, SVG, tipărire), vederea 3D, fișierul casei
+Choisir, déplacer ¦ Alege, mută
+Déplacer la vue, ou barre d’espace ¦ Mută vederea, sau bara de spațiu
+Pièce rectangulaire, murs compris : glisser ¦ Cameră dreptunghiulară, cu pereți: trage
+Vide, trémie, double hauteur : glisser, sans murs ¦ Gol, gol de scară, înălțime dublă: trage, fără pereți
+Mur : un clic par coin, double-clic ou Entrée pour finir ¦ Perete: un clic pe fiecare colț, dublu clic sau Enter ca să termini
+Pièce de forme libre, sans murs : un clic par coin ¦ Cameră de formă liberă, fără pereți: un clic pe fiecare colț
+Porte : clic sur un mur ¦ Ușă: clic pe un perete
+Fenêtre : clic sur un mur ¦ Fereastră: clic pe un perete
+Cote, mesure : deux clics ¦ Cotă, măsurătoare: două clicuri
+Étiquette à flèche : un clic sur le point, un clic où écrire ¦ Etichetă cu săgeată: un clic pe punct, un clic unde scrii
+Une autre époque de la maison en fantôme (celle du calque 🕰, sinon l’époque d’avant) : murs très transparents, arêtes en pointillés ¦ O altă epocă a casei ca fantomă (cea a stratului 🕰, altfel epoca dinainte): pereți foarte transparenți, muchii punctate
+Deux clics sur la maison : la distance (et la hauteur entre les deux points) ¦ Două clicuri pe casă: distanța (și înălțimea dintre cele două puncte)
+Tous les étages ¦ Toate etajele
+Murs coupés (voir dedans) ¦ Pereți tăiați (vezi înăuntru)
+Murs coupés ¦ Pereți tăiați
+🕰 Autre époque ¦ 🕰 Altă epocă
+Vue de dessus ¦ Vedere de sus
+Vue de face ¦ Vedere din față
+Vue de côté ¦ Vedere din lateral
+Dessus ¦ Sus
+Face ¦ Față
+Le soleil selon l’heure, la date et le lieu ; la nuit, les lampes ¦ Soarele după oră, dată și loc; noaptea, lămpile
+Visiter la maison à hauteur d’yeux ¦ Vizitează casa la înălțimea ochilor
+☀️ Lumière ¦ ☀️ Lumină
+🚶 Visiter ¦ 🚶 Vizitează
+📏 Mesurer ¦ 📏 Măsoară
+Plan 2D ¦ Plan 2D
+Toit ¦ Acoperiș
+Cotes ¦ Cote
+Mobilier ¦ Mobilier
+Propriétés de l’élément choisi ¦ Proprietățile elementului ales
+Mobilier : meubles, portes, fenêtres à poser ¦ Mobilier: mobile, uși, ferestre de așezat
+L’étage affiché : niveaux, hauteur, sol ¦ Etajul afișat: niveluri, înălțime, pardoseală
+La maison : nom, époque, réglages généraux ¦ Casa: nume, epocă, setări generale
+la maison est fermée ¦ casa este închisă
+d’autres changements ont suivi : utilise ↶ dans la barre du haut ¦ au urmat alte modificări: folosește ↶ din bara de sus
+Aimanter : grille, coins et milieux des murs, angles (Alt pour s’en passer) ¦ Aliniere magnetică: grilă, colțurile și mijloacele pereților, unghiuri (Alt ca s-o eviți)
+{walls} ajouté depuis {when} ¦ {walls} adăugat din {when}
+{walls} ajoutés depuis {when} ¦ {walls} adăugați din {when}
+{walls} disparu depuis {when} ¦ {walls} dispărut din {when}
+{walls} disparus depuis {when} ¦ {walls} dispăruți din {when}
+{walls} plus là en {when} ¦ {walls} nu mai e acolo în {when}
+{walls} ajouté en {when} ¦ {walls} adăugat în {when}
+{walls} ajoutés en {when} ¦ {walls} adăugați în {when}
+={n} souvenir : clic pour voir ¦ {n} amintire: clic ca s-o vezi|{n} amintiri: clic ca să le vezi|{n} de amintiri: clic ca să le vezi
+={n} souvenirs : clic pour voir ¦ {n} amintire: clic ca s-o vezi|{n} amintiri: clic ca să le vezi|{n} de amintiri: clic ca să le vezi
+Glisser : la pointe de la flèche ¦ Trage: vârful săgeții
+Voir un autre étage, ou le même étage à une autre époque, en transparence ¦ Vezi alt etaj, sau același etaj în altă epocă, în transparență
+Calque d’un autre étage ou d’une autre époque ¦ Stratul altui etaj sau al altei epoci
+Calque d’un autre étage ou d’une époque ¦ Stratul altui etaj sau al unei epoci
+👻 Calque : non ¦ 👻 Strat: nu
+👻 Dessous ¦ 👻 Dedesubt
+👻 Dessus ¦ 👻 Deasupra
+👻 Les deux ¦ 👻 Amândouă
+🕰 Époque d’avant ¦ 🕰 Epoca dinainte
+🕰 Époque d’après ¦ 🕰 Epoca de după
+🕰 Choisir une époque… ¦ 🕰 Alege o epocă…
+Ajouter un étage ou une cave ¦ Adaugă un etaj sau o pivniță
+Les étages : gérer, ajouter, dupliquer, supprimer ¦ Etajele: gestionează, adaugă, duplică, șterge
+Plus d’actions sur les étages ¦ Mai multe acțiuni pe etaje
+Chercher : lit, poêle, rouet… ¦ Caută: pat, sobă, roată de tors…
+Mes objets ¦ Obiectele mele
+Aucun objet importé pour l’instant ¦ Niciun obiect importat deocamdată
+« ⤒ Importer » (en haut) un fichier 3D (OBJ, STL, glTF, GLB) ou une image. ¦ „⤒ Importă” (sus) un fișier 3D (OBJ, STL, glTF, GLB) sau o imagine.
+Clic sur un objet : il se pose au milieu de la vue ; glisse-le ensuite à sa place (R ou la poignée ronde pour tourner). ¦ Clic pe un obiect: se așază în mijlocul vederii; trage-l apoi la locul lui (R sau mânerul rotund ca să-l rotești).
+Nom de l’étage ¦ Numele etajului
+Épaisseur des nouveaux murs ¦ Grosimea pereților noi
+Épaisseur des planchers ¦ Grosimea planșeelor
+Pas de la grille ¦ Pasul grilei
+⧉ Dupliquer cet étage (murs) ¦ ⧉ Duplică acest etaj (pereți)
+Supprimer l’étage ¦ Șterge etajul
+Cotes des murs ¦ Cotele pereților
+Cotes d’ensemble ¦ Cote de ansamblu
+Tableau des pièces sur le plan ¦ Tabelul camerelor pe plan
+Cartouche (nom, lieu, époque, étage) ¦ Cartuș (nume, loc, epocă, etaj)
+Affichage sombre (dessin technique) ¦ Afișare întunecată (desen tehnic)
+Plafond (visite 3D) ¦ Tavan (vizită 3D)
+Aucun (ouvert) ¦ Niciunul (deschis)
+Plafond uni ¦ Tavan simplu
+Poutres apparentes ¦ Grinzi aparente
+Couleur du plafond ¦ Culoarea tavanului
+Légende : ― ajouté · ┄ disparu ¦ Legendă: ― adăugat · ┄ dispărut
+Transparence du calque ¦ Transparența stratului
+📐 Plan ancien, cadastre ¦ 📐 Plan vechi, cadastru
+Un cadastre napoléonien, un plan ancien, un croquis : pose-le en fond, mets-le à l’échelle, puis décalque les murs par-dessus. ¦ Un cadastru napoleonian, un plan vechi, o schiță: pune-l ca fundal, adu-l la scară, apoi copiază pereții peste el.
+🖼 Choisir l’image… ¦ 🖼 Alege imaginea…
+Le mettre sous cet étage ¦ Pune-l sub acest etaj
+Visible ¦ Vizibil
+🔒 Verrouillé ¦ 🔒 Blocat
+📏 Mettre à l’échelle ¦ 📏 Adu la scară
+Deux clics le long d’un mur de l’image : il devient droit (horizontal ou vertical) ¦ Două clicuri de-a lungul unui perete din imagine: devine drept (orizontal sau vertical)
+✓ Fin du décalque ¦ ✓ Gata cu copierea
+✏️ Décalquer les murs ¦ ✏️ Copiază pereții
+🖼 Changer d’image… ¦ 🖼 Schimbă imaginea…
+🏠 Combles (sous le toit) ¦ 🏠 Pod (sub acoperiș)
+Pour l’étage le plus haut, sous un toit en pente (onglet Étage → 🏠 Toit) : le plafond suit alors la pente, et la hauteur sous plafond se lit partout sur le plan. ¦ Pentru etajul cel mai de sus, sub un acoperiș în pantă (fila Etaj → 🏠 Acoperiș): tavanul urmează atunci panta, iar înălțimea sub tavan se citește peste tot pe plan.
+Combles : le plafond suit la pente du toit ¦ Pod: tavanul urmează panta acoperișului
+Hauteur des murs sous le toit ¦ Înălțimea pereților sub acoperiș
+🏠 Toit (vue 3D) ¦ 🏠 Acoperiș (vedere 3D)
+Un toit sur l’étage le plus haut ¦ Un acoperiș pe etajul cel mai de sus
+Deux pans (pignons) ¦ Două ape (frontoane)
+Quatre pans (croupes) ¦ Patru ape (șarpantă în patru ape)
+Pavillon (pointe) ¦ Piramidal (vârf)
+Un pan (appentis) ¦ O apă (șopron)
+Mansardé ¦ Mansardat
+Plat (toit-terrasse) ¦ Plat (acoperiș-terasă)
+Faîtage ¦ Coamă
+Dans la longueur ¦ Pe lungime
+Dans la largeur ¦ Pe lățime
+Est – ouest ¦ Est – vest
+Nord – sud ¦ Nord – sud
+Débord ¦ Streașină
+Couverture ¦ Învelitoare
+Tuiles canal ¦ Țigle canal
+Tuiles plates ¦ Țigle plate
+Tuiles vernissées ¦ Țigle smălțuite
+Ardoises ¦ Ardezie
+Lauzes (pierre) ¦ Lespezi de piatră (lauzes)
+Chaume ¦ Stuf
+Zinc ¦ Zinc
+Bac acier ¦ Tablă de oțel
+Pignons, acrotères ¦ Frontoane, atice
+Acrotère (toit plat) ¦ Atic (acoperiș plat)
+Une cheminée ¦ Un coș de fum
+Place de la cheminée ¦ Poziția coșului de fum
+Gouttières et descentes ¦ Jgheaburi și burlane
+Un toit par aile (maison en L, en T, en U) ¦ Un acoperiș pe fiecare aripă (casă în L, în T, în U)
+Verrières, lanterneaux et édicules ¦ Luminatoare de sticlă, lanterne și edicule
+Fenêtres de toit et lucarnes ¦ Ferestre de acoperiș și lucarne
+🪟 Verrière ¦ 🪟 Acoperiș de sticlă
+🚪 Édicule (sortie sur le toit) ¦ 🚪 Edicul (ieșire pe acoperiș)
+🔆 Lanterneau ¦ 🔆 Lanternou
+🪟 Fenêtre de toit ¦ 🪟 Fereastră de acoperiș
+🏠 Lucarne ¦ 🏠 Lucarnă
+🏚 Chien-assis ¦ 🏚 Lucarnă cu o apă
+Lucarne ¦ Lucarnă
+Aile ¦ Aripă
+Arrière ¦ Spate
+En travers ¦ De-a curmezișul
+Vers l’égout ¦ Spre streașină
+Profondeur ¦ Adâncime
+＋ Verrière ¦ ＋ Acoperiș de sticlă
+＋ Édicule ¦ ＋ Edicul
+＋ Lanterneau ¦ ＋ Lanternou
+＋ Fenêtre de toit ¦ ＋ Fereastră de acoperiș
+＋ Lucarne ¦ ＋ Lucarnă
+＋ Chien-assis ¦ ＋ Lucarnă cu o apă
+Rien pour l’instant : ajoute des habitants et des recensements (plus bas). ¦ Nimic deocamdată: adaugă locuitori și recensăminte (mai jos).
+📍 Lieu et époque ¦ 📍 Loc și epocă
+Époque (en quelques mots) ¦ Epoca (în câteva cuvinte)
+Aucun souvenir posé pour l’instant ¦ Nicio amintire pusă deocamdată
+Clic sur un meuble ou une pièce, puis « 🔗 Relier un souvenir » : une photo, un récit, une personne, un souvenir de famille. ¦ Clic pe o mobilă sau pe o cameră, apoi „🔗 Leagă o amintire”: o fotografie, o povestire, o persoană, o amintire de familie.
+☀️ Orientation et lumière ¦ ☀️ Orientare și lumină
+Nord du plan ¦ Nordul planului
+Heure ¦ Ora
+Jour ¦ Ziua
+Jour de l’année ¦ Ziua din an
+Hauteur des yeux pour la visite ¦ Înălțimea ochilor pentru vizită
+👥 Les habitants ¦ 👥 Locuitorii
+rôle, années (né ici, 1880–1920…) ¦ rol, ani (născut aici, 1880–1920…)
+＋ Ajouter un habitant… ¦ ＋ Adaugă un locuitor…
+📋 Les recensements ¦ 📋 Recensămintele
+Ouvrir la fiche où est ce recensement ¦ Deschide fișa pe care se află acest recensământ
+L’époque de la maison qui correspond à ce recensement ¦ Epoca casei care corespunde acestui recensământ
+— époque — ¦ — epocă —
+Aucun recensement rattaché. ¦ Niciun recensământ legat.
+＋ Ajouter un recensement… ¦ ＋ Adaugă un recensământ…
+🕰 Les époques ¦ 🕰 Epocile
+Montrer la maison à cette époque ¦ Arată casa în această epocă
+Renommer, changer la date, rattacher à un recensement ¦ Redenumește, schimbă data, leagă de un recensământ
+Supprimer cette époque ¦ Șterge această epocă
+La maison a changé avec le temps ? Crée une époque par année ou par date (1850, 1900, 1936…), chacune avec son plan : tu la verras évoluer, et chacune peut être rattachée à un recensement. ¦ Casa s-a schimbat de-a lungul timpului? Creează o epocă pentru fiecare an sau dată (1850, 1900, 1936…), fiecare cu planul ei: o vei vedea cum evoluează, și fiecare poate fi legată de un recensământ.
+＋ Nouvelle époque (copie de celle-ci) ¦ ＋ Epocă nouă (copie a acesteia)
+＋ Nouvelle époque (copie de celle-ci)… ¦ ＋ Epocă nouă (copie a acesteia)…
+▶ Voir évoluer ¦ ▶ Vezi cum evoluează
+⏹ Arrêter ¦ ⏹ Oprește
+📖 Histoire de la maison ¦ 📖 Istoria casei
+Histoire de la maison ¦ Istoria casei
+Construite par…, agrandie en…, vendue en… ¦ Construită de…, extinsă în…, vândută în…
+Clic sur un mur, une pièce, un meuble : ses réglages viennent ici (matériau, couleur, taille, nom, souvenirs). Molette : zoomer ; barre d’espace : déplacer la vue ; Alt : sans aimant. ¦ Clic pe un perete, o cameră, o mobilă: setările lui apar aici (material, culoare, mărime, nume, amintiri). Rotița: zoom; bara de spațiu: mută vederea; Alt: fără aliniere magnetică.
+Cet étage ¦ Acest etaj
+={n} pièce ¦ {n} cameră|{n} camere|{n} de camere
+={n} pièces ¦ {n} cameră|{n} camere|{n} de camere
+={n} étage ¦ {n} etaj|{n} etaje|{n} de etaje
+={n} étages ¦ {n} etaj|{n} etaje|{n} de etaje
+={n} habitant ¦ {n} locuitor|{n} locuitori|{n} de locuitori
+={n} habitants ¦ {n} locuitor|{n} locuitori|{n} de locuitori
+={n} époque ¦ {n} epocă|{n} epoci|{n} de epoci
+={n} époques ¦ {n} epocă|{n} epoci|{n} de epoci
+={n} arrêt ¦ {n} oprire|{n} opriri|{n} de opriri
+={n} arrêts ¦ {n} oprire|{n} opriri|{n} de opriri
+={n} modèle ¦ {n} model|{n} modele|{n} de modele
+={n} modèles ¦ {n} model|{n} modele|{n} de modele
+={n} recensement rattaché ¦ {n} recensământ legat|{n} recensăminte legate|{n} de recensăminte legate
+={n} recensements rattachés ¦ {n} recensământ legat|{n} recensăminte legate|{n} de recensăminte legate
+={n} habitant ajouté depuis le recensement. ¦ {n} locuitor adăugat din recensământ.|{n} locuitori adăugați din recensământ.|{n} de locuitori adăugați din recensământ.
+={n} habitants ajoutés depuis le recensement. ¦ {n} locuitor adăugat din recensământ.|{n} locuitori adăugați din recensământ.|{n} de locuitori adăugați din recensământ.
+={n} trémie ouverte ¦ {n} gol de scară deschis|{n} goluri de scară deschise|{n} de goluri de scară deschise
+={n} trémies ouvertes ¦ {n} gol de scară deschis|{n} goluri de scară deschise|{n} de goluri de scară deschise
+={n} étage supprimé ¦ {n} etaj șters|{n} etaje șterse|{n} de etaje șterse
+={n} étages supprimés ¦ {n} etaj șters|{n} etaje șterse|{n} de etaje șterse
+={n} copie seulement : le mur est trop court pour plus. ¦ Doar {n} copie: peretele e prea scurt pentru mai multe.|Doar {n} copii: peretele e prea scurt pentru mai multe.|Doar {n} de copii: peretele e prea scurt pentru mai multe.
+={n} copies seulement : le mur est trop court pour plus. ¦ Doar {n} copie: peretele e prea scurt pentru mai multe.|Doar {n} copii: peretele e prea scurt pentru mai multe.|Doar {n} de copii: peretele e prea scurt pentru mai multe.
+={n} lampe allumée ¦ {n} lampă aprinsă|{n} lămpi aprinse|{n} de lămpi aprinse
+={n} lampes allumées ¦ {n} lampă aprinsă|{n} lămpi aprinse|{n} de lămpi aprinse
+={n} refusé : {list} ¦ {n} refuzat: {list}|{n} refuzate: {list}|{n} de refuzate: {list}
+={n} refusés : {list} ¦ {n} refuzat: {list}|{n} refuzate: {list}|{n} de refuzate: {list}
+=✓ {n} image : à glisser dans le 🎬 Montage pour en faire un film (avec les textes en voix off). ¦ ✓ {n} imagine: trage-o în 🎬 Montaj ca să faci un film (cu textele ca voce din off).|✓ {n} imagini: trage-le în 🎬 Montaj ca să faci un film (cu textele ca voce din off).|✓ {n} de imagini: trage-le în 🎬 Montaj ca să faci un film (cu textele ca voce din off).
+=✓ {n} images : à glisser dans le 🎬 Montage pour en faire un film (avec les textes en voix off). ¦ ✓ {n} imagine: trage-o în 🎬 Montaj ca să faci un film (cu textele ca voce din off).|✓ {n} imagini: trage-le în 🎬 Montaj ca să faci un film (cu textele ca voce din off).|✓ {n} de imagini: trage-le în 🎬 Montaj ca să faci un film (cu textele ca voce din off).
+🔗 Relier un souvenir… ¦ 🔗 Leagă o amintire…
+Angle (°, 0 = vers la droite, 90 = vers le haut) ¦ Unghi (°, 0 = spre dreapta, 90 = în sus)
+Début X ¦ Început X
+Début Y ¦ Început Y
+Fin X ¦ Sfârșit X
+Fin Y ¦ Sfârșit Y
+Hauteur (cm, vide = celle de l’étage) ¦ Înălțime (cm, gol = cea a etajului)
+⌒ Courbure (flèche) ¦ ⌒ Curbură (săgeată)
+✂ Couper en deux ¦ ✂ Taie în două
+Revêtement ¦ Finisaj
+Pareil pour : ¦ La fel pentru:
+tout l’étage ¦ tot etajul
+toute la maison ¦ toată casa
+Couleur et texture ¦ Culoare și textură
+Taille du motif ¦ Mărimea modelului
+Allège (cm du sol) ¦ Parapet (cm de la podea)
+Position sur le mur ¦ Poziția pe perete
+Du début du mur ¦ De la începutul peretelui
+Jusqu’à la fin ¦ Până la sfârșit
+🚪 Genre et ouverture ¦ 🚪 Tip și deschidere
+Porte ¦ Ușă
+Porte double ¦ Ușă dublă
+Porte d’entrée ¦ Ușă de intrare
+Passage, arche ¦ Trecere, arcadă
+Porte de grange ¦ Poartă de hambar
+Une rangée de fenêtres (ou de portes) le long du mur ¦ Un șir de ferestre (sau de uși) de-a lungul peretelui
+🔁 Répéter… ¦ 🔁 Repetă…
+↔ Sens d’ouverture ¦ ↔ Sensul de deschidere
+▨ Plancher : plein ou vide ¦ ▨ Planșeu: plin sau gol
+Pas de plancher : vide sur l’étage du dessous ¦ Fără planșeu: gol deasupra etajului de dedesubt
+Garde-corps ¦ Balustradă
+Garde-corps autour ¦ Balustradă de jur împrejur
+Ajoute l’étage du dessus s’il manque, une mezzanine sur une partie de cette pièce, le vide sur le reste, son garde-corps et l’escalier ¦ Adaugă etajul de deasupra dacă lipsește, un mezanin peste o parte din această cameră, golul peste rest, balustrada lui și scara
+🏗 Mezzanine ouverte sur cette pièce ¦ 🏗 Mezanin deschis spre această cameră
+Mezzanine ouverte ¦ Mezanin deschis
+🔗 Les murs et les meubles suivent la pièce ¦ 🔗 Pereții și mobilele urmează camera
+🧱 Murs de la pièce ¦ 🧱 Pereții camerei
+Sol ¦ Pardoseală
+Salle commune ¦ Camera comună
+Chambre des parents ¦ Dormitorul părinților
+Chambre des enfants ¦ Camera copiilor
+Salle à manger ¦ Sufragerie
+Grenier ¦ Pod
+Cellier ¦ Cămară
+Étable ¦ Grajd
+Grange ¦ Hambar
+Fournil ¦ Brutărie (cuptor)
+Boutique ¦ Prăvălie
+Couloir ¦ Coridor
+Cour ¦ Curte
+Jardin ¦ Grădină
+Potager ¦ Grădină de legume
+Basse-cour ¦ Ogradă cu păsări
+🕯 Souvenirs de la pièce ¦ 🕯 Amintirile camerei
+La chambre où est née Marie en 1890 ; la veillée… ¦ Camera în care s-a născut Marie în 1890; șezătoarea…
+Les personnes de la pièce ¦ Persoanele camerei
+Leurs années dans cette pièce ¦ Anii lor în această cameră
+années : 1890 – 1925 ¦ ani: 1890 – 1925
+🪜 Escalier ¦ 🪜 Scară
+✓ confortable (60 à 66 cm) ¦ ✓ confortabilă (60 până la 66 cm)
+⚠️ un peu raide : allonge l’escalier ou choisis un escalier tournant ¦ ⚠️ cam abruptă: lungește scara sau alege o scară cu întoarcere
+⚠️ marches très longues : raccourcis l’escalier ¦ ⚠️ trepte foarte lungi: scurtează scara
+Quart tournant ¦ Sfert de întoarcere
+Vers la gauche ¦ Spre stânga
+Vers la droite ¦ Spre dreapta
+Le haut devient le bas ¦ Susul devine jos
+⇅ Inverser le sens de montée ¦ ⇅ Inversează sensul de urcare
+Pas d’étage au-dessus : ajoute-le avec ＋ en haut. ¦ Niciun etaj deasupra: adaugă-l cu ＋ sus.
+Pour les maisons dessinées avant : chaque escalier perce le plancher de l’étage du dessus ¦ Pentru casele desenate înainte: fiecare scară deschide planșeul etajului de deasupra
+Ouvrir les trémies de tous les escaliers ¦ Deschide golurile tuturor scărilor
+Du sol ¦ De la podea
+Les prochains objets de ce modèle seront posés à cette taille ¦ Următoarele obiecte de acest model vor fi așezate la această mărime
+💾 Garder pour ce modèle ¦ 💾 Păstrează pentru acest model
+Le poser sur le meuble qui est dessous (table, commode, cheminée…) ¦ Așază-l pe mobila de dedesubt (masă, comodă, șemineu…)
+⬆ Sur l’objet dessous ¦ ⬆ Pe obiectul de dedesubt
+⬇ Au sol ¦ ⬇ Pe podea
+Plusieurs copies d’un coup : en ligne, en grille, ou en cercle autour d’un objet (6 chaises autour d’une table) ¦ Mai multe copii deodată: în linie, în grilă, sau în cerc în jurul unui obiect (6 scaune în jurul unei mese)
+Pieds ¦ Picioare
+Pieds, poignées, filets, ferrures ¦ Picioare, mânere, filete, feronerie
+Sans deuxième couleur ¦ Fără a doua culoare
+Époque, style ¦ Epocă, stil
+Effets : pieds et détails ¦ Efecte: picioare și detalii
+🏷 Souvenirs de cet objet ¦ 🏷 Amintirile acestui obiect
+Son histoire (objet de famille) ¦ Povestea lui (obiect de familie)
+Flèche vers un point ¦ Săgeată spre un punct
+Couleur de la flèche ¦ Culoarea săgeții
+Police de départ ¦ Font inițial
+Des versions de la maison selon les années ou des dates : la voir évoluer, rattacher une époque à un recensement ¦ Versiuni ale casei după ani sau date: vezi-o cum evoluează, leagă o epocă de un recensământ
+🕰 Époques ¦ 🕰 Epoci
+L’époque d’avant ¦ Epoca dinainte
+L’époque montrée (plan 2D et vue 3D) ¦ Epoca arătată (plan 2D și vedere 3D)
+L’époque d’après ¦ Epoca de după
+⋯ Gérer les époques… ¦ ⋯ Gestionează epocile…
+▶ Voir évoluer : les époques l’une après l’autre ¦ ▶ Vezi cum evoluează: epocile una după alta
+MAISON · ÉPOQUES ¦ CASĂ · EPOCI
+MAISON ¦ CASĂ
+Créer l’époque ¦ Creează epoca
+La maison telle qu’elle est dessinée maintenant devient la première époque : donne-lui un nom et une date. La nouvelle époque part d’une copie, que tu changes ensuite (une pièce ajoutée, un mur abattu, d’autres meubles…). ¦ Casa așa cum e desenată acum devine prima epocă: dă-i un nume și o dată. Epoca nouă pornește de la o copie, pe care o schimbi apoi (o cameră adăugată, un perete dărâmat, alte mobile…).
+La maison dessinée maintenant ¦ Casa desenată acum
+Année ou date ¦ An sau dată
+La nouvelle époque ¦ Epoca nouă
+ex. Après l’agrandissement ¦ ex. După extindere
+Rattachée au recensement ¦ Legată de recensământ
+Pour la rattacher à un recensement : onglet Maison → « 📋 Les recensements » → ＋ Un recensement. ¦ Ca s-o legi de un recensământ: fila Casă → „📋 Recensămintele” → ＋ Un recensământ.
+Donne un nom ou une date à cette époque. ¦ Dă un nume sau o dată acestei epoci.
+Nouvelle époque créée (copie) : change ce qui était différent. « ‹ › » en haut pour passer d’une époque à l’autre. ¦ Epocă nouă creată (copie): schimbă ce era diferit. „‹ ›” sus ca să treci de la o epocă la alta.
+Époque supprimée ¦ Epocă ștearsă
+Crée au moins deux époques (＋ Nouvelle époque) pour voir la maison évoluer. ¦ Creează cel puțin două epoci (＋ Epocă nouă) ca să vezi casa evoluând.
+＋ Un recensement ¦ ＋ Un recensământ
+Recensements à rattacher ¦ Recensăminte de legat
+Ajouter aussi les personnes du foyer comme habitants ¦ Adaugă și persoanele din gospodărie ca locuitori
+À l’époque ¦ În epoca
+Choisis au moins un recensement. ¦ Alege cel puțin un recensământ.
+Clique sur un mur. ¦ Fă clic pe un perete.
+Une étiquette à flèche ¦ O etichetă cu săgeată
+La note (ex. « Double vitrage posé en 1978 », « Ici était le puits ») ¦ Nota (ex. „Geamuri termopan puse în 1978”, „Aici era fântâna”)
+Étiquette à flèche ¦ Etichetă cu săgeată
+Un texte sur le plan ¦ Un text pe plan
+Le texte à écrire (nom d’une pièce, d’un lieu, une remarque…) ¦ Textul de scris (numele unei camere, al unui loc, o observație…)
+Mur modifié ¦ Perete modificat
+Pièce modifiée ¦ Cameră modificată
+Flèche déplacée ¦ Săgeată mutată
+Objet tourné ¦ Obiect rotit
+Plan ancien déplacé ¦ Plan vechi mutat
+Une pièce d’au moins 50 cm de côté. ¦ O cameră de cel puțin 50 cm pe latură.
+Un vide d’au moins 40 cm de côté. ¦ Un gol de cel puțin 40 cm pe latură.
+Ce vide est à l’étage le plus bas : il n’ouvre sur rien. Pour une mezzanine, dessine le vide à l’étage du dessus. ¦ Acest gol este la etajul cel mai de jos: nu dă spre nimic. Pentru un mezanin, desenează golul la etajul de deasupra.
+Choisis d’abord la pièce (le séjour) sur le plan. ¦ Alege mai întâi camera (camera de zi) pe plan.
+La pièce est un peu petite pour une mezzanine (au moins 2,5 m × 4 m). ¦ Camera e cam mică pentru un mezanin (cel puțin 2,5 m × 4 m).
+Clic : choisir · glisser : déplacer · poignées : allonger un mur, déformer une pièce · ⌫ : supprimer ¦ Clic: alege · trage: mută · mânere: lungește un perete, deformează o cameră · ⌫: șterge
+Glisser pour déplacer la vue ¦ Trage ca să muți vederea
+Glisse en diagonale : une pièce rectangulaire avec ses quatre murs (la surface s’affiche) ¦ Trage în diagonală: o cameră dreptunghiulară cu cei patru pereți ai ei (suprafața se afișează)
+Glisse en diagonale : un vide sans plancher (mezzanine, double hauteur, trémie) ; un garde-corps se pose tout seul le long des bords sans mur ¦ Trage în diagonală: un gol fără planșeu (mezanin, înălțime dublă, gol de scară); o balustradă se pune singură de-a lungul marginilor fără perete
+Un clic par coin (aimant : grille, coins, angles droits ; Alt : libre) · double-clic ou Entrée : finir · clic sur le 1er point : fermer (et créer la pièce) ¦ Un clic pe fiecare colț (aliniere magnetică: grilă, colțuri, unghiuri drepte; Alt: liber) · dublu clic sau Enter: termină · clic pe primul punct: închide (și creează camera)
+Une pièce de forme libre (sans murs) : un clic par coin, double-clic pour finir ¦ O cameră de formă liberă (fără pereți): un clic pe fiecare colț, dublu clic ca să termini
+Clic sur un mur : une porte (glisse-la ensuite le long du mur) ¦ Clic pe un perete: o ușă (glis-o apoi de-a lungul peretelui)
+Clic sur un mur : une fenêtre ¦ Clic pe un perete: o fereastră
+Deux clics : une cote (la distance s’affiche) ¦ Două clicuri: o cotă (distanța se afișează)
+Clic : écrire un texte sur le plan ¦ Clic: scrie un text pe plan
+Clic sur le point à montrer (le puits, une fenêtre…), puis clic là où écrire la note ¦ Clic pe punctul de arătat (fântâna, o fereastră…), apoi clic unde scrii nota
+largeur x profondeur (ex. 420 x 350, 4,2 x 3,5 m) ↵ ¦ lățime x adâncime (ex. 420 x 350, 4,2 x 3,5 m) ↵
+longueur (cm, ou 3,5 m) puis @angle ↵ ¦ lungime (cm, sau 3,5 m) apoi @unghi ↵
+Écris largeur x profondeur : 420 x 350 (cm) ou 4,2 x 3,5 m (50 cm au moins). ¦ Scrie lățime x adâncime: 420 x 350 (cm) sau 4,2 x 3,5 m (cel puțin 50 cm).
+Clique d’abord le point de départ sur le plan, puis tape la longueur. ¦ Fă clic mai întâi pe punctul de pornire pe plan, apoi tastează lungimea.
+Longueur incomprise : 350, 3,5 m, ou 350 @ 90 pour l’angle. ¦ Lungime neînțeleasă: 350, 3,5 m, sau 350 @ 90 pentru unghi.
+Angle incompris (en degrés : 0 à droite, 90 en haut). ¦ Unghi neînțeles (în grade: 0 la dreapta, 90 în sus).
+Grille ¦ Grilă
+Coins des murs et des pièces ¦ Colțurile pereților și ale camerelor
+Milieu des murs ¦ Mijlocul pereților
+Le long des murs (au cm) ¦ De-a lungul pereților (la cm)
+Alignements (lignes de rappel) ¦ Alinieri (linii de ghidaj)
+Pas des angles ¦ Pasul unghiurilor
+Alt : aucun aimant (au mm près) · ⇧ : angles à 45° · flèches : décaler ce qui est choisi de 1 cm (⇧ : d’un pas de grille) · en traçant, tape la longueur au clavier. ¦ Alt: fără aliniere magnetică (la mm) · ⇧: unghiuri la 45° · săgeți: mută ce e ales cu 1 cm (⇧: cu un pas de grilă) · în timp ce desenezi, tastează lungimea.
+Décalé ¦ Decalat
+Il faut un fichier OBJ, STL, GLB ou glTF. ¦ Îți trebuie un fișier OBJ, STL, GLB sau glTF.
+Lecture du modèle… ¦ Se citește modelul…
+Objet importé ¦ Obiect importat
+Objet 3D importé : il est aussi dans Mobilier → « Mes objets », pour toutes les maisons. ¦ Obiect 3D importat: este și în Mobilier → „Obiectele mele”, pentru toate casele.
+Objet posé (vue de dessus) : règle sa taille réelle dans Propriétés. ¦ Obiect așezat (vedere de sus): setează-i mărimea reală în Proprietăți.
+Envoi de l’image dans les médias… ¦ Se trimite imaginea în media…
+MAISON · PLAN ANCIEN ¦ CASĂ · PLAN VECHI
+Le plan à calquer ¦ Planul de copiat
+Un cadastre napoléonien, un plan ancien, un croquis… « 📁 Importer » en prend un sur l’ordinateur (il entre dans les médias). ¦ Un cadastru napoleonian, un plan vechi, o schiță… „📁 Importă” ia unul de pe calculator (intră în media).
+Poser ce plan ¦ Așază acest plan
+Cette image ne peut pas servir de plan. ¦ Această imagine nu poate fi folosită ca plan.
+Plan ancien posé ¦ Plan vechi așezat
+📏 Clique les deux bouts d’une longueur connue sur le plan ancien (un mur, l’échelle dessinée) ¦ 📏 Fă clic pe cele două capete ale unei lungimi cunoscute pe planul vechi (un perete, scara desenată)
+Les deux points sont trop proches. ¦ Cele două puncte sunt prea apropiate.
+📏 Mettre le plan à l’échelle ¦ 📏 Adu planul la scară
+Mettre à l’échelle ¦ Adu la scară
+Quelle est la vraie longueur entre ces deux points ? ¦ Care este lungimea reală dintre aceste două puncte?
+Le cadastre napoléonien est souvent au 1/2500 ou au 1/1250 ; les plans anciens comptent en toises (6 pieds, 1,949 m) et en pieds du roi (32,48 cm) : écris le nombre, la conversion se fait toute seule. ¦ Cadastrul napoleonian este adesea la 1/2500 sau la 1/1250; planurile vechi socotesc în toises (6 picioare, 1,949 m) și în pieds du roi (32,48 cm): scrie numărul, conversia se face singură.
+Écris une longueur, par exemple 12 ou 3,5. ¦ Scrie o lungime, de exemplu 12 sau 3,5.
+Plan ancien mis à l’échelle ¦ Plan vechi adus la scară
+↻ Clique deux points le long d’un mur du plan ancien : il deviendra droit ¦ ↻ Fă clic pe două puncte de-a lungul unui perete al planului vechi: va deveni drept
+Ce mur est déjà droit. ¦ Acest perete este deja drept.
+↻ Redresser ¦ ↻ Îndreaptă
+✥ Déplacer ¦ ✥ Mută
+✏️ Décalque : un clic par coin de mur, en suivant le plan ancien · double-clic ou Entrée pour finir un mur · ⬚ pour une pièce entière ¦ ✏️ Copiere: un clic pe fiecare colț de perete, urmând planul vechi · dublu clic sau Enter ca să termini un perete · ⬚ pentru o cameră întreagă
+Photo, document ¦ Fotografie, document
+Récit ¦ Povestire
+Souvenir de famille ¦ Amintire de familie
+Objet de famille ¦ Obiect de familie
+Voir ce souvenir ¦ Vezi această amintire
+Retirer ce souvenir (sans le supprimer de la base) ¦ Scoate această amintire (fără s-o ștergi din bază)
+Aucun souvenir rattaché : une photo, un récit, une personne… ¦ Nicio amintire legată: o fotografie, o povestire, o persoană…
+Aucun souvenir ne correspond. ¦ Nicio amintire nu corespunde.
+Aucun souvenir de famille pour l’instant ¦ Nicio amintire de familie deocamdată
+Essaie un autre mot. ¦ Încearcă alt cuvânt.
+Listes → Mémoire familiale (recettes, expressions, chansons…) ou Objets de famille. ¦ Liste → Memoria familiei (rețete, expresii, cântece…) sau Obiecte de familie.
+MAISON · SOUVENIRS ¦ CASĂ · AMINTIRI
+📜 Un souvenir de famille ¦ 📜 O amintire de familie
+Chercher… (recette, montre, surnom) ¦ Caută… (rețetă, ceas, poreclă)
+Chercher un souvenir ¦ Caută o amintire
+Choisis d’abord un meuble, un objet ou une pièce. ¦ Alege mai întâi o mobilă, un obiect sau o cameră.
+🖼 Une photo, un document ¦ 🖼 O fotografie, un document
+pris dans les médias (ou importé depuis l’ordinateur) ¦ luată din media (sau importată de pe calculator)
+✍ Un récit ¦ ✍ O povestire
+ce qui s’est passé ici, ce qu’on en raconte ¦ ce s-a întâmplat aici, ce se povestește despre asta
+👤 Une personne ¦ 👤 O persoană
+qui a vécu ici, qui s’en servait ¦ care a locuit aici, care îl folosea
+une recette, une expression, un objet de famille… ¦ o rețetă, o expresie, un obiect de familie…
+ex. La veillée de Noël 1912 ¦ ex. Seara de Crăciun din 1912
+Ce qui s’est passé ici, ce qu’on en raconte… ¦ Ce s-a întâmplat aici, ce se povestește despre asta…
+Le récit ¦ Povestirea
+Écris un titre ou un récit. ¦ Scrie un titlu sau o povestire.
+Souvenir rattaché ¦ Amintire legată
+Ce média n’existe plus. ¦ Acest fișier media nu mai există.
+La maison non enregistrée sera perdue (💾 d’abord). ¦ Casa nesalvată se va pierde (💾 mai întâi).
+Ouvrir la fiche ? ¦ Deschizi fișa?
+les aimants, la grille, l’épaisseur des murs, la hauteur des yeux et la lumière ¦ alinierea magnetică, grila, grosimea pereților, înălțimea ochilor și lumina
+Fichier prêt : il s’importe dans 🧲 Aimants → « ⤒ Importer ». ¦ Fișier gata: se importă în 🧲 Aliniere magnetică → „⤒ Importă”.
+Ce fichier n’est pas lisible (il faut un fichier .json de réglage). ¦ Acest fișier nu se poate citi (îți trebuie un fișier .json de setare).
+Ce fichier n’est pas un réglage LCNDA (⤓ Exporter un réglage, dans un outil). ¦ Acest fișier nu este o setare LCNDA (⤓ Exportă o setare, într-o unealtă).
+Le plan de cet étage est vide. ¦ Planul acestui etaj este gol.
+le plan de l’étage ¦ planul etajului
+le plan, plus léger ¦ planul, mai ușor
+le plan sur une page A4 ¦ planul pe o pagină A4
+le plan, en dessin ¦ planul, ca desen
+le plan, tout de suite ¦ planul, imediat
+le plan de l’étage pour AutoCAD, LibreCAD… (calques, en cm) ¦ planul etajului pentru AutoCAD, LibreCAD… (straturi, în cm)
+image de la vue 3D ¦ imaginea vederii 3D
+🧊 Vue 3D ¦ 🧊 Vedere 3D
+💾 Fichier de la maison ¦ 💾 Fișierul casei
+à réimporter (⤒ Importer) ¦ de reimportat (⤒ Importă)
+Ce fichier DXF n’est pas lisible. ¦ Acest fișier DXF nu se poate citi.
+Aucun trait trouvé dans ce DXF (un DXF « binaire » ne se lit pas : enregistre-le en DXF texte, ASCII). ¦ Nicio linie găsită în acest DXF (un DXF „binar” nu se citește: salvează-l ca DXF text, ASCII).
+MAISON · IMPORT DXF ¦ CASĂ · IMPORT DXF
+Importer le plan ¦ Importă planul
+Unité du dessin ¦ Unitatea desenului
+Épaisseur des murs ¦ Grosimea pereților
+Où le mettre ¦ Unde îl pui
+Un nouvel étage ¦ Un etaj nou
+Calques à prendre ¦ Straturi de preluat
+Un plan exporté d’ici : ses murs sont repris par leur axe (MURS_AXES). ¦ Un plan exportat de aici: pereții lui sunt preluați după axa lor (MURS_AXES).
+Un plan d’architecte dessine souvent chaque mur avec deux traits : garde une petite épaisseur, ou décoche les calques de meubles, de cotes et de hachures. ¦ Un plan de arhitect desenează adesea fiecare perete cu două linii: păstrează o grosime mică, sau debifează straturile de mobilier, cote și hașuri.
+Coche au moins un calque. ¦ Bifează cel puțin un strat.
+Rien à reprendre dans ces calques. ¦ Nimic de preluat din aceste straturi.
+Plan importé ¦ Plan importat
+Plan DXF importé ¦ Plan DXF importat
+Nombre en tout ¦ Număr total
+Espace entre deux ¦ Spațiu între două
+Pas la place sur ce mur : moins d’espace, ou déplace la première vers le début du mur. ¦ Nu e loc pe acest perete: mai puțin spațiu, sau mută prima spre începutul peretelui.
+Répété ¦ Repetat
+Choisis d’abord un objet, une porte ou une fenêtre. ¦ Alege mai întâi un obiect, o ușă sau o fereastră.
+En ligne ¦ În linie
+En grille (rangées) ¦ În grilă (rânduri)
+En cercle (autour d’un objet) ¦ În cerc (în jurul unui obiect)
+Sens (en ligne) ¦ Sens (în linie)
+→ vers la droite ¦ → spre dreapta
+↓ vers le bas ¦ ↓ în jos
+← vers la gauche ¦ ← spre stânga
+↑ vers le haut ¦ ↑ în sus
+Par rangée (en grille) ¦ Pe rând (în grilă)
+Autour de (en cercle) ¦ În jurul (în cerc)
+Un point, au rayon ci-dessous ¦ Un punct, la raza de mai jos
+Rayon (si autour d’un point) ¦ Rază (dacă e în jurul unui punct)
+En cercle : place d’abord un seul objet (une chaise) à sa place autour de la table, choisis-le, puis répète : les copies tournent autour de la table et regardent vers elle, comme la première. ¦ În cerc: pune mai întâi un singur obiect (un scaun) la locul lui în jurul mesei, alege-l, apoi repetă: copiile se rotesc în jurul mesei și privesc spre ea, ca primul.
+Ce fichier n’est pas lisible. ¦ Acest fișier nu se poate citi.
+Ce fichier n’est pas une maison LCNDA (⤓ Exporter → 💾 Fichier de la maison). ¦ Acest fișier nu este o casă LCNDA (⤓ Exportă → 💾 Fișierul casei).
+Le plan dessiné ici sera remplacé par celui du fichier (↶ pour revenir en arrière). ¦ Planul desenat aici va fi înlocuit cu cel din fișier (↶ ca să revii).
+Remplacer le plan par celui du fichier ? ¦ Înlocuiești planul cu cel din fișier?
+Remplacer le plan ¦ Înlocuiește planul
+Maison importée ¦ Casă importată
+Dépose une image, un objet 3D (OBJ, STL, glTF, GLB) ou un fichier de maison. ¦ Plasează o imagine, un obiect 3D (OBJ, STL, glTF, GLB) sau un fișier de casă.
+📁 Que faire de cette image ? ¦ 📁 Ce faci cu această imagine?
+🖼 L’image de ce tableau, de ce cadre ¦ 🖼 Imaginea acestui tablou, a acestei rame
+posée sur l’objet choisi, en 2D et en 3D ¦ pusă pe obiectul ales, în 2D și în 3D
+📐 Un plan ancien, un cadastre, à calquer ¦ 📐 Un plan vechi, un cadastru, de copiat
+posé en fond, à mettre à l’échelle ¦ pus ca fundal, de adus la scară
+🖼 Un objet vu de dessus ¦ 🖼 Un obiect văzut de sus
+posé sur le plan comme un meuble ¦ pus pe plan ca o mobilă
+🏷 Un souvenir pour ce qui est choisi ¦ 🏷 O amintire pentru ce e ales
+rattaché au meuble ou à la pièce ¦ legată de mobilă sau de cameră
+Construction de la maison en 3D… ¦ Se construiește casa în 3D…
+Vue 3D indisponible. ¦ Vederea 3D nu e disponibilă.
+Glisser : tourner · clic droit ou ⇧ glisser : déplacer · molette : approcher · ☀️ Lumière : l’heure et la saison · 🚶 Visiter : Z Q S D ou flèches · ✦ : un souvenir ¦ Trage: rotește · clic dreapta sau ⇧ trage: mută · rotița: apropie · ☀️ Lumină: ora și anotimpul · 🚶 Vizitează: Z Q S D sau săgeți · ✦: o amintire
+Les dernières modifications de la maison seront perdues. ¦ Ultimele modificări ale casei se vor pierde.
+Fermer sans enregistrer la maison ? ¦ Închizi fără să salvezi casa?
+Supprimé ¦ Șters
+Dupliqué ¦ Duplicat
+Sens de l’escalier ¦ Sensul scării
+Tous les escaliers ouvrent déjà le plancher. ¦ Toate scările deschid deja planșeul.
+Verrière ajoutée ¦ Acoperiș de sticlă adăugat
+Édicule ajouté ¦ Edicul adăugat
+Lanterneau ajouté ¦ Lanternou adăugat
+Fenêtre de toit ajoutée ¦ Fereastră de acoperiș adăugată
+Lucarne ajoutée ¦ Lucarnă adăugată
+Chien-assis ajouté ¦ Lucarnă cu o apă adăugată
+✓ Elle se voit dans la vue 3D, avec le toit. ¦ ✓ Se vede în vederea 3D, cu acoperișul.
+Retiré du toit ¦ Scos de pe acoperiș
+Fenêtre de toit ou lucarne retirée ¦ Fereastră de acoperiș sau lucarnă scoasă
+Rien sous cet objet : glisse-le d’abord au-dessus du meuble (une table, une commode…). ¦ Nimic sub acest obiect: trage-l mai întâi deasupra mobilei (o masă, o comodă…).
+Taille hors limites (de 1 cm à 50 m). ¦ Mărime în afara limitelor (de la 1 cm la 50 m).
+Agrandi ¦ Mărit
+Réduit ¦ Micșorat
+Taille gardée pour ce modèle : les prochains seront posés comme celui-ci. ¦ Mărime păstrată pentru acest model: următoarele vor fi așezate ca acesta.
+Sens d’ouverture ¦ Sensul de deschidere
+Côté d’ouverture ¦ Partea de deschidere
+Mur coupé ¦ Perete tăiat
+＋ Un étage ¦ ＋ Un etaj
+Hauteur sous plafond ¦ Înălțimea sub tavan
+Gérer les étages… ¦ Gestionează etajele…
+Renommer, hauteur sous plafond, supprimer ¦ Redenumește, înălțimea sub tavan, șterge
+Ajouter un étage… ¦ Adaugă un etaj…
+Les étages ¦ Etajele
+Du plus haut au plus bas. Renomme, change la hauteur, ou supprime un étage (avec tout ce qu’il contient). ¦ De la cel mai de sus la cel mai de jos. Redenumește, schimbă înălțimea, sau șterge un etaj (cu tot ce conține).
+Niveau ¦ Nivel
+Il faut au moins un étage. ¦ Trebuie cel puțin un etaj.
+{names} supprimés avec ce qu’ils contenaient ¦ {names} șterse cu ce conțineau
+{names} supprimé avec ce qu’il contenait ¦ {names} șters cu ce conținea
+Étage supprimé ¦ Etaj șters
+Étage renommé ¦ Etaj redenumit
+Renommer l’étage ¦ Redenumește etajul
+✥ Glisse le plan ancien (sur un endroit vide du plan) ; reclique « ✥ Déplacer » pour finir. ¦ ✥ Trage planul vechi (pe un loc gol al planului); fă din nou clic pe „✥ Mută” ca să termini.
+Plan ancien retiré ¦ Plan vechi scos
+Plan ancien retiré du fond (l’image reste dans les médias) ¦ Plan vechi scos din fundal (imaginea rămâne în media)
+Plan ancien sous cet étage ¦ Plan vechi sub acest etaj
+Plan ancien ¦ Plan vechi
+Plan ancien verrouillé ¦ Plan vechi blocat
+Plan ancien déverrouillé ¦ Plan vechi deblocat
+Un habitant de la maison ¦ Un locuitor al casei
+Habitant ajouté ¦ Locuitor adăugat
+Habitant retiré ¦ Locuitor scos
+Une personne liée à cette pièce ¦ O persoană legată de această cameră
+Personne liée à la pièce ¦ Persoană legată de cameră
+Le plan est vide. ¦ Planul este gol.
+Fenêtre bloquée. ¦ Fereastră blocată.
+Ce recensement n’est relié à aucune fiche. ¦ Acest recensământ nu este legat de nicio fișă.
+Recensement retiré ¦ Recensământ scos
+Personne retirée ¦ Persoană scoasă
+Souvenir retiré ¦ Amintire scoasă
+Légende des époques ¦ Legenda epocilor
+Personnes de la pièce ¦ Persoanele camerei
+Flèche ajoutée ¦ Săgeată adăugată
+Flèche retirée ¦ Săgeată scoasă
+Lumière ¦ Lumină
+Années de la personne ¦ Anii persoanei
+Recensement rattaché à l’époque ¦ Recensământ legat de epocă
+Revêtement du mur ¦ Finisajul peretelui
+Murs de la pièce ¦ Pereții camerei
+Autre époque en 3D ¦ Altă epocă în 3D
+📍 Un arrêt de la visite guidée ¦ 📍 O oprire a turului ghidat
+Ce qu’on dit ici (lu à voix haute pendant la visite guidée) : ¦ Ce se spune aici (citit cu voce tare în timpul turului ghidat):
+Ici, la salle commune : on y veillait l’hiver… ¦ Aici, camera comună: aici se făcea șezătoarea iarna…
+Ajouter l’arrêt ¦ Adaugă oprirea
+MAISON · PHOTO D’ÉPOQUE ¦ CASĂ · FOTOGRAFIE DE EPOCĂ
+La photo prise d’ici ¦ Fotografia făcută de aici
+La photo ancienne prise à cet endroit, dans cette direction : tu pourras la comparer avec la maison (curseur Autrefois ⟷ Aujourd’hui). ¦ Fotografia veche făcută în acest loc, în această direcție: o vei putea compara cu casa (cursorul Odinioară ⟷ Azi).
+Poser la photo ¦ Așază fotografia
+Cette image ne peut pas servir ici. ¦ Această imagine nu poate fi folosită aici.
+Photo d’époque ¦ Fotografie de epocă
+Photo d’époque posée ¦ Fotografie de epocă așezată
+Le nord du plan : clic pour le régler (☀️ Orientation et lumière) ¦ Nordul planului: clic ca să-l setezi (☀️ Orientare și lumină)
+Aucune maison ne correspond. ¦ Nicio casă nu corespunde.
+Époques ¦ Epoci
+🏰 Notice Mérimée (patrimoine)… ¦ 🏰 Fișă Mérimée (patrimoniu)…
+🏠 Maisons ¦ 🏠 Case
+Les plans des maisons de la famille, en 2D et en 3D : leurs pièces, leurs meubles, leurs habitants, leurs recensements, leurs époques et leurs souvenirs. ¦ Planurile caselor familiei, în 2D și în 3D: camerele, mobilele, locuitorii, recensămintele, epocile și amintirile lor.
+Renommer la maison ¦ Redenumește casa
+Ouvrir la maison ¦ Deschide casa
+↗ Ouvrir la maison ¦ ↗ Deschide casa
+Cette maison est déjà rattachée. ¦ Această casă este deja legată.
+🏠 Maison ¦ 🏠 Casă
+Enregistre d’abord le recensement : tu pourras ensuite lui rattacher la maison où vivait le foyer (et l’époque de la maison). ¦ Salvează mai întâi recensământul: vei putea apoi să-i legi casa în care locuia gospodăria (și epoca casei).
+Détacher la maison de ce recensement ¦ Scoate casa de la acest recensământ
+Relier une maison : nom, lieu… ¦ Leagă o casă: nume, loc…
+Époque de la maison ¦ Epoca casei
+Dessiner la maison de ce foyer ¦ Desenează casa acestei gospodării
+Rattachée tout de suite (sans attendre « Enregistrer »). Dans la maison : onglet Maison → « 📋 Les recensements ». ¦ Legată imediat (fără să aștepți „Salvează”). În casă: fila Casă → „📋 Recensămintele”.
+— époque de la maison — ¦ — epoca casei —
+Le recensement a des changements non enregistrés. ¦ Recensământul are modificări nesalvate.
+Ouvrir la maison quand même ? ¦ Deschizi totuși casa?
+Maison détachée du recensement. ¦ Casa a fost scoasă de la recensământ.
+Choisis une maison. ¦ Alege o casă.
+Maison rattachée au recensement. ¦ Casa a fost legată de recensământ.
+La longueur et la largeur de tout l’étage, sous le plan et à sa gauche (en plus des cotes de chaque mur). ¦ Lungimea și lățimea întregului etaj, sub plan și în stânga lui (pe lângă cotele fiecărui perete).
+Un tableau posé à droite du plan : chaque pièce et sa surface, et le total. Il se met à jour tout seul et part avec le plan (image, PDF, impression). ¦ Un tabel pus în dreapta planului: fiecare cameră și suprafața ei, și totalul. Se actualizează singur și pleacă împreună cu planul (imagine, PDF, tipărire).
+Le cadre en bas à droite des vrais plans : le nom de la maison, le lieu, l’époque, l’étage et la date du jour. ¦ Chenarul din dreapta jos al planurilor adevărate: numele casei, locul, epoca, etajul și data de azi.
+Le plan en clair sur fond sombre, comme dans un logiciel de dessin technique. Seulement à l’écran : les images, PDF et impressions restent sur fond blanc. ¦ Planul în linii deschise pe fundal întunecat, ca într-un program de desen tehnic. Doar pe ecran: imaginile, PDF-urile și tipăririle rămân pe fundal alb.
+L’étage du dessous (ou du dessus) apparaît en transparence sous celui-ci : pratique pour poser les murs du 1er étage juste au-dessus de ceux du rez-de-chaussée. 🕰 Une autre époque : le même étage, tel qu’il était (ou sera), en sépia. ¦ Etajul de dedesubt (sau de deasupra) apare în transparență sub acesta: practic ca să pui pereții etajului 1 exact deasupra celor de la parter. 🕰 O altă epocă: același etaj, așa cum era (sau va fi), în sepia.
+Clique les deux bouts d’une longueur connue sur l’image (un mur, l’échelle du plan), puis donne sa vraie longueur : en mètres, ou en toises et pieds anciens (convertis tout seuls). ¦ Fă clic pe cele două capete ale unei lungimi cunoscute pe imagine (un perete, scara planului), apoi dă-i lungimea reală: în metri, sau în toises și picioare vechi (convertite singure).
+Le plafond suit la pente du toit (vue 3D, coupe, visite) ; la surface « loi Carrez » ne compte que là où la hauteur fait au moins 1,80 m. ¦ Tavanul urmează panta acoperișului (vedere 3D, secțiune, vizită); suprafața „legea Carrez” se numără doar acolo unde înălțimea are cel puțin 1,80 m.
+Le mur bas sous la pente (le « jambage ») : 0 si le toit part du plancher, 100 cm souvent. ¦ Peretele scund de sub pantă („peretele de mansardă”): 0 dacă acoperișul pornește de la planșeu, adesea 100 cm.
+Pour une maison en L, en T ou en U : un toit par aile, à la même pente ; les noues (là où deux toits se rejoignent) se font toutes seules. Les ailes suivent les pièces de l’étage du haut. ¦ Pentru o casă în L, în T sau în U: un acoperiș pe fiecare aripă, cu aceeași pantă; doliile (unde se întâlnesc două acoperișuri) se fac singure. Aripile urmează camerele etajului de sus.
+Tourne le plan par rapport au nord : 0° = le haut du plan est au nord, 90° = le haut du plan regarde l’est. Le soleil et les ombres de la vue 3D suivent. ¦ Rotește planul față de nord: 0° = partea de sus a planului e la nord, 90° = partea de sus a planului privește spre est. Soarele și umbrele din vederea 3D urmează.
+La hauteur de tes yeux pendant la visite (🚶 Visiter, vue 3D) : 1,60 m pour un adulte, 1 m pour voir comme un enfant. ¦ Înălțimea ochilor tăi în timpul vizitei (🚶 Vizitează, vedere 3D): 1,60 m pentru un adult, 1 m ca să vezi ca un copil.
+La hauteur de tes yeux dans la maison : 1,60 m pour un adulte, 1 m pour voir comme un enfant. ¦ Înălțimea ochilor tăi în casă: 1,60 m pentru un adult, 1 m ca să vezi ca un copil.
+De combien le milieu du mur sort de la ligne droite : + d’un côté, − de l’autre ; 0 = un mur droit. Pour une tour ronde, une abside, un mur cintré. ¦ Cât iese mijlocul peretelui din linia dreaptă: + într-o parte, − în cealaltă; 0 = un perete drept. Pentru un turn rotund, o absidă, un perete arcuit.
+Agrandit ou rapetisse le motif (briques, pierres, papier peint) sur ce mur : 100 % = taille réelle. ¦ Mărește sau micșorează modelul (cărămizi, pietre, tapet) pe acest perete: 100 % = mărime reală.
+La hauteur du bas de la fenêtre au-dessus du plancher (souvent 90 cm). ¦ Înălțimea părții de jos a ferestrei deasupra podelei (adesea 90 cm).
+Une zone sans plancher : on voit l’étage du dessous (mezzanine, séjour en double hauteur, cage d’escalier). En 3D le plancher est percé, et pendant la visite on ne peut pas y marcher. ¦ O zonă fără planșeu: se vede etajul de dedesubt (mezanin, cameră de zi cu înălțime dublă, casa scării). În 3D planșeul e perforat, iar în timpul vizitei nu se poate merge acolo.
+Posé tout seul le long des bords du vide qui ne touchent pas un mur (et laissé ouvert là où arrive un escalier). ¦ Pusă singură de-a lungul marginilor golului care nu ating un perete (și lăsată deschisă acolo unde ajunge o scară).
+En déplaçant la pièce, ses murs (portes et fenêtres comprises), ses meubles et ses textes suivent. ⇧ en glissant : la pièce seule. ¦ Când muți camera, pereții ei (cu uși și ferestre), mobilele și textele ei o urmează. ⇧ în timp ce tragi: doar camera.
+La hauteur à monter : celle de l’étage plus l’épaisseur du plancher (réglée dans l’onglet Maison). Décoche pour la fixer à la main dans « Hauteur ». ¦ Înălțimea de urcat: cea a etajului plus grosimea planșeului (setată în fila Casă). Debifează ca s-o fixezi de mână în „Înălțime”.
+Perce le plancher de l’étage du dessus au-dessus de l’escalier (la trémie), avec un garde-corps autour sauf du côté de l’arrivée. ¦ Perforează planșeul etajului de deasupra peste scară (golul scării), cu o balustradă de jur împrejur, mai puțin în partea de sosire.
+La hauteur du dessous de l’objet au-dessus du plancher : 0 pour un meuble posé au sol, 140 pour une horloge accrochée au mur. ¦ Înălțimea părții de jos a obiectului deasupra podelei: 0 pentru o mobilă pusă pe podea, 140 pentru un ceas agățat pe perete.
+Agrandit ou réduit l’objet en gardant ses proportions : pratique pour un modèle importé arrivé trop petit ou trop grand. ¦ Mărește sau micșorează obiectul păstrându-i proporțiile: practic pentru un model importat care a venit prea mic sau prea mare.
+Une flèche du texte vers un point du plan (le puits, une fenêtre, une cheminée…). Glisse la poignée rouge pour la pointer. ¦ O săgeată de la text spre un punct al planului (fântâna, o fereastră, un șemineu…). Trage mânerul roșu ca s-o îndrepți.
+Quand l’aimant des angles est mis, un mur tracé se cale sur des angles de ce pas : 90° = seulement des angles droits, 45° = aussi les diagonales, 15° = plus fin. ¦ Când alinierea magnetică la unghiuri e pornită, un perete desenat se fixează pe unghiuri cu acest pas: 90° = doar unghiuri drepte, 45° = și diagonalele, 15° = mai fin.
+Glisse : la maison prend l’époque la plus proche de l’année (avant ou égale). ¦ Glisează: casa ia epoca cea mai apropiată de an (înainte sau egală).
+Tourne le plan par rapport au nord : 0° = le haut du plan est au nord, 90° = le haut du plan regarde l’est. Les ombres suivent. ¦ Rotește planul față de nord: 0° = partea de sus a planului e la nord, 90° = partea de sus privește spre est. Umbrele urmează.
+Licence : {x} ¦ Licență: {x}
+Auteur : {x} ¦ Autor: {x}
+Source : {x} ¦ Sursă: {x}
+🕰 ancien ¦ 🕰 vechi
+Forme « {name} » ¦ Forma „{name}”
+{w} × {d} cm, {h} cm de haut, à {elev} cm du sol ¦ {w} × {d} cm, {h} cm înălțime, la {elev} cm de podea
+{w} × {d} cm, {h} cm de haut ¦ {w} × {d} cm, {h} cm înălțime
+{name} (à moi) ¦ {name} (al meu)
+Comme « {name} » ¦ Ca „{name}”
+Supprimer l’objet « {name} » de la bibliothèque ? ¦ Ștergi obiectul „{name}” din bibliotecă?
+« {name} » est dans « {cat} » : clique-le pour le poser. ¦ „{name}” este în „{cat}”: fă clic pe el ca să-l așezi.
+Supprimer « {name} » de « Mes objets » ? ¦ Ștergi „{name}” din „Obiectele mele”?
+Des modèles 3D <b>libres de droit</b> (CC0 : domaine public, utilisables sans condition) à poser dans tes maisons. Ils arrivent dans <b>Mobilier → « Mes objets »</b>, avec leur licence, leur auteur et leur source. ¦ Modele 3D <b>libere de drepturi</b> (CC0: domeniu public, utilizabile fără condiții) de pus în casele tale. Ajung în <b>Mobilier → „Obiectele mele”</b>, cu licența, autorul și sursa lor.
+Modèles fournis par {ph} (Powered by Poly Haven) — licence {cc0}. Le téléchargement passe par ton serveur (environ 1 à 10 Mo par modèle, textures comprises). ¦ Modele oferite de {ph} (Powered by Poly Haven) — licență {cc0}. Descărcarea trece prin serverul tău (cam 1 până la 10 MB pe model, cu texturi cu tot).
+Télécharge d’abord un pack <b>CC0</b> sur le site de son auteur (un fichier .zip), puis choisis-le ici : tu coches les modèles à garder (GLB, glTF, OBJ, STL). ¦ Descarcă mai întâi un pachet <b>CC0</b> de pe site-ul autorului (un fișier .zip), apoi alege-l aici: bifezi modelele de păstrat (GLB, glTF, OBJ, STL).
+{models} (les {n} plus téléchargés sur {total}) ¦ {models} (cele mai descărcate {n} din {total})
+« {name} » est dans Mobilier → « Mes objets » (CC0, Poly Haven). ¦ „{name}” este în Mobilier → „Obiectele mele” (CC0, Poly Haven).
+Licence trouvée dans le pack ¦ Licență găsită în pachet
+Mesure et vignettes… ¦ Măsurare și miniaturi…
+{models} dans « Mes objets ». ¦ {models} în „Obiectele mele”.
+Renommer, ranger, voir la licence, supprimer ¦ Redenumește, ordonează, vezi licența, șterge
+Modifier ou supprimer cet objet ¦ Modifică sau șterge acest obiect
+Rien ne correspond. ＋ Crée l’objet, ou cherche-le dans la 📦 Bibliothèque en ligne. ¦ Nimic nu corespunde. ＋ Creează obiectul, sau caută-l în 📦 Biblioteca online.
+Ici : les objets que tu crées (＋ Créer un objet), ceux téléchargés dans la 📦 Bibliothèque en ligne, et les fichiers 3D importés (⤒ Importer, en haut). ¦ Aici: obiectele pe care le creezi (＋ Creează un obiect), cele descărcate din 📦 Biblioteca online, și fișierele 3D importate (⤒ Importă, sus).
+Rien d’ancien dans cette catégorie (décoche « 🕰 Ancien seulement »). ¦ Nimic vechi în această categorie (debifează „🕰 Doar vechi”).
+Aucun objet montré dans cette catégorie (⚙️ Ranger pour en remontrer). ¦ Niciun obiect arătat în această categorie (⚙️ Ordonează ca să arăți din nou).
+Chercher… lit, lampe, piano, vache, salon… ¦ Caută… pat, lampă, pian, vacă, salon…
+Chercher un objet ¦ Caută un obiect
+Un objet à toi : nom, taille, couleur, forme, image ¦ Un obiect al tău: nume, mărime, culoare, formă, imagine
+Des modèles 3D libres de droit (CC0) à télécharger ¦ Modele 3D libere de drepturi (CC0) de descărcat
+Montrer, cacher, ranger les catégories et les objets ¦ Arată, ascunde, ordonează categoriile și obiectele
+Ne montrer que le mobilier et les objets d’autrefois ¦ Arată doar mobilierul și obiectele de odinioară
+＋ Créer un objet ¦ ＋ Creează un obiect
+📦 Bibliothèque en ligne ¦ 📦 Biblioteca online
+⚙️ Ranger ¦ ⚙️ Ordonează
+🕰 Ancien seulement ¦ 🕰 Doar vechi
+Ovale ¦ Oval
+Triangle ¦ Triunghi
+En L ¦ În L
+Lit simple ¦ Pat de o persoană
+Lit clos ¦ Pat închis (dulap-pat)
+Meuble à portes ¦ Dulap cu uși
+Banc-coffre à dossier ¦ Bancă-ladă cu spătar
+Horloge ¦ Ceas
+Cheminée à manteau ¦ Șemineu cu poliță
+Cheminée à manteau (hotte) ¦ Șemineu cu poliță (hotă)
+Poêle ¦ Sobă
+Cuisinière ¦ Mașină de gătit
+Évier ¦ Chiuvetă
+Lavabo, toilette ¦ Lavoar, toaletă
+Maie, pétrin ¦ Covată
+Broc et cuvette ¦ Cană și lighean
+Fontaine ¦ Fântână
+Baratte ¦ Putinei
+Lampe ¦ Lampă
+Bougeoir ¦ Sfeșnic
+Chenets ¦ Pirostrii de cămin
+Fer à repasser ¦ Fier de călcat
+Banc d’école ¦ Bancă de școală
+Miroir, cadre au mur ¦ Oglindă, ramă pe perete
+Statue ¦ Statuie
+Animal ¦ Animal
+Cabane ¦ Colibă
+Cône, tipi ¦ Con, tipi
+Bloc (boîte pleine) ¦ Bloc (cutie plină)
+Cylindre ¦ Cilindru
+Bassine, baquet (ouvert) ¦ Lighean, ciubăr (deschis)
+Table (plateau et 4 pieds) ¦ Masă (blat și 4 picioare)
+Table ovale ¦ Masă ovală
+Caisson sur pieds ¦ Cutie pe picioare
+Comptoir, plan de travail ¦ Tejghea, blat de lucru
+Buffet deux-corps, vaisselier ¦ Bufet în două corpuri, vitrină de vase
+Vitrine ¦ Vitrină
+Armoire (corniche) ¦ Dulap (cornișă)
+Commode à tiroirs ¦ Comodă cu sertare
+Coffre à couvercle ¦ Ladă cu capac
+Étagère ouverte ¦ Etajeră deschisă
+Lit ¦ Pat
+Poêle rond (Godin) ¦ Sobă rotundă (Godin)
+Crémaillère et chaudron ¦ Cârlig de vatră și ceaun
+Baignoire sur pieds ¦ Cadă pe picioare
+Lavabo sur colonne ¦ Lavoar pe coloană
+Fontaine sur support ¦ Fântână pe suport
+Baratte à piston ¦ Putinei cu piston
+Lampe à pétrole ¦ Lampă cu gaz
+Bougeoir, chandelier ¦ Sfeșnic, candelabru
+Poste TSF ¦ Aparat de radio TSF
+Phonographe ¦ Fonograf
+Machine à coudre à pédale ¦ Mașină de cusut cu pedală
+Banc d’école à pupitre ¦ Bancă de școală cu pupitru
+Pressoir, presse ¦ Teasc, presă
+Miroir ¦ Oglindă
+Cadre au mur ¦ Ramă pe perete
+Statue sur socle ¦ Statuie pe soclu
+Plante en pot ¦ Plantă în ghiveci
+Boule ¦ Sferă
+Cône ¦ Con
+Cabane (toit) ¦ Colibă (acoperiș)
+À plat (tapis) ¦ Plat (covor)
+Plateau avec l’image dessus ¦ Placă cu imaginea deasupra
+MAISON · MOBILIER ¦ CASĂ · MOBILIER
+MAISON · MES OBJETS ¦ CASĂ · OBIECTELE MELE
+Créer l’objet ¦ Creează obiectul
+Partir d’un objet existant (facultatif) ¦ Pornește de la un obiect existent (opțional)
+— un objet vide — ¦ — un obiect gol —
+ex. Armoire de la grand-mère, pressoir du moulin… ¦ ex. Dulapul bunicii, teascul morii…
+Nouvelle catégorie… ¦ Categorie nouă…
+ex. Grenier ¦ ex. Pod
+Vu de dessus (2D) ¦ Văzut de sus (2D)
+En volume (3D) ¦ În volum (3D)
+2ᵉ couleur (pieds, poignées, filets) ¦ A 2-a culoare (picioare, mânere, filete)
+2ᵉ couleur ¦ A 2-a culoare
+Une deuxième couleur ¦ O a doua culoare
+Posé au sol (0), sur une table (75), accroché au mur (140)… ¦ Pus pe podea (0), pe o masă (75), agățat pe perete (140)…
+Tourné de ¦ Rotit cu
+Image vue de dessus (facultatif) ¦ Imagine văzută de sus (opțional)
+🖼️ Une photo des médias… ¦ 🖼️ O fotografie din media…
+Retirer l’image ¦ Scoate imaginea
+Note (souvenir, provenance) ¦ Notă (amintire, proveniență)
+Aperçu en 3D ¦ Previzualizare 3D
+⏳ Mesure… ¦ ⏳ Măsurare…
+Une photo de l’objet (vue de dessus) ¦ O fotografie a obiectului (vedere de sus)
+L’image se pose sur le plan, à la taille de l’objet. ¦ Imaginea se așază pe plan, la mărimea obiectului.
+Ceux déjà posés dans les maisons restent. ¦ Cele deja așezate în case rămân.
+Donne un nom à la nouvelle catégorie. ¦ Dă un nume categoriei noi.
+Objet modifié (ceux déjà posés gardent leur ancienne forme). ¦ Obiect modificat (cele deja așezate își păstrează forma veche).
+Montrer aussi dans la catégorie ¦ Arată și în categoria
+— seulement dans « Mes objets » — ¦ — doar în „Obiectele mele” —
+« Mes objets » seulement ¦ Doar „Obiectele mele”
+Licence ¦ Licență
+non précisée (fichier importé) ¦ nespecificată (fișier importat)
+Le fichier 3D est supprimé : là où il est posé, il redevient une simple boîte. ¦ Fișierul 3D este șters: acolo unde e așezat, redevine o simplă cutie.
+Aucun objet. ¦ Niciun obiect.
+⚙️ Ranger le mobilier ¦ ⚙️ Ordonează mobilierul
+Coche ce que tu veux voir et range avec ↑ ↓ : les catégories, puis les objets de chaque catégorie. ¦ Bifează ce vrei să vezi și ordonează cu ↑ ↓: categoriile, apoi obiectele din fiecare categorie.
+Objets de ¦ Obiecte din
+Mobilier remis comme au départ. ¦ Mobilierul a fost readus la starea inițială.
+Garde au moins une catégorie. ¦ Păstrează cel puțin o categorie.
+Kenney — tous les packs 3D ¦ Kenney — toate pachetele 3D
+OpenGameArt — filtre « CC0 » ¦ OpenGameArt — filtrul „CC0”
+📦 Bibliothèque en ligne (libre de droit) ¦ 📦 Biblioteca online (liberă de drepturi)
+Chercher (en français ou en anglais) : chaise, tonneau, lampe, vase… ¦ Caută (în franceză sau în engleză): scaun, butoi, lampă, vază…
+🌐 Poly Haven (en ligne) ¦ 🌐 Poly Haven (online)
+🗜️ Un pack ZIP (Kenney, Quaternius…) ¦ 🗜️ Un pachet ZIP (Kenney, Quaternius…)
+Ranger aussi dans ¦ Pune și în
+Chargement de la liste… ¦ Se încarcă lista…
+Recherche… ¦ Căutare…
+🗜️ Choisir le fichier ZIP… ¦ 🗜️ Alege fișierul ZIP…
+Voir sur Poly Haven ¦ Vezi pe Poly Haven
+Aucun modèle ne correspond. ¦ Niciun model nu corespunde.
+Sans internet, tu peux toujours importer un pack ZIP déjà téléchargé (onglet à côté), ou ＋ créer tes objets. ¦ Fără internet, poți totuși să imporți un pachet ZIP deja descărcat (fila de alături), sau ＋ să-ți creezi obiectele.
+Un téléchargement est en cours… ¦ O descărcare este în curs…
+⏳ Téléchargement… ¦ ⏳ Descărcare…
+✓ Dans « Mes objets » ¦ ✓ În „Obiectele mele”
+Envoi et lecture du pack… ¦ Se trimite și se citește pachetul…
+Envoi impossible (fichier trop gros pour le serveur ?). ¦ Trimiterea a eșuat (fișier prea mare pentru server?).
+Envoi impossible. ¦ Trimiterea a eșuat.
+Image impossible. ¦ Imaginea a eșuat.
+Aucun fichier de licence dans le pack : vérifie sur le site de l’auteur qu’il est bien libre de droit. ¦ Niciun fișier de licență în pachet: verifică pe site-ul autorului că e într-adevăr liber de drepturi.
+Auteur, source ¦ Autor, sursă
+Adresse du pack (facultatif) ¦ Adresa pachetului (opțional)
+⤒ Importer les modèles cochés ¦ ⤒ Importă modelele bifate
+Coche au moins un modèle. ¦ Bifează cel puțin un model.
+Indique la licence du pack (par exemple CC0 1.0). ¦ Indică licența pachetului (de exemplu CC0 1.0).
+Surface (m²) ¦ Suprafață (m²)
+Loi Carrez ≥ 1,80 m (m²) ¦ Legea Carrez ≥ 1,80 m (m²)
+Hauteur mini (cm) ¦ Înălțime min. (cm)
+Hauteur maxi (cm) ¦ Înălțime max. (cm)
+Un mur de moins de 5 cm (un double-clic de trop ?) ¦ Un perete mai scurt de 5 cm (un dublu clic în plus?)
+« {name} » n’a pas de porte ¦ „{name}” nu are ușă
+=Escalier un peu raide : {n} marches de {rise} cm, giron {going} cm (2 h + g = {sum} cm) ¦ Scară cam abruptă: {n} treaptă de {rise} cm, lățime {going} cm (2 h + l = {sum} cm)|Scară cam abruptă: {n} trepte de {rise} cm, lățime {going} cm (2 h + l = {sum} cm)|Scară cam abruptă: {n} de trepte de {rise} cm, lățime {going} cm (2 h + l = {sum} cm)
+Un escalier sans étage au-dessus ¦ O scară fără etaj deasupra
+L’escalier ne perce pas le plancher de « {name} » (Propriétés → « Ouvrir le plancher au-dessus ») ¦ Scara nu deschide planșeul de la „{name}” (Proprietăți → „Deschide planșeul de deasupra”)
+Un vide à l’étage le plus bas : il n’ouvre sur rien ¦ Un gol la etajul cel mai de jos: nu dă spre nimic
+Des pièces sans aucun mur ¦ Camere fără niciun perete
+maison|Mur ¦ Perete
+maison|Ouverture ¦ Deschidere
+maison|Combles ¦ Pod
+maison|Pièce ¦ Cameră
+maison|Escalier ¦ Scară
+maison|Étage ¦ Etaj
+Mur ¦ Perete
+Escalier ¦ Scară
+Combles ¦ Pod
+Plans ¦ Planuri
+▶ Visite guidée ¦ ▶ Tur ghidat
+Visite en lecture seule, ouverte sans l’application. Souris ou doigt pour tourner, molette pour zoomer, « 🚶 Visiter » pour marcher (Z Q S D ou flèches). ¦ Vizită doar în citire, deschisă fără aplicație. Mouse sau deget ca să rotești, rotița ca să faci zoom, „🚶 Vizitează” ca să mergi (Z Q S D sau săgeți).
+📐 Surfaces ¦ 📐 Suprafețe
+Surfaces ¦ Suprafețe
+⚠️ Vérifier le plan ¦ ⚠️ Verifică planul
+🗺 Visite guidée ¦ 🗺 Tur ghidat
+aucun arrêt ¦ nicio oprire
+📷 Photos d’époque ¦ 📷 Fotografii de epocă
+🏘 Le hameau ¦ 🏘 Cătunul
+cette maison seule ¦ doar această casă
+foyer n° {n} ¦ gospodăria nr. {n}
+{a} à {b} m ¦ {a} până la {b} m
+un clic : aller à l’endroit ¦ un clic: mergi la locul respectiv
+{name} — coupe ¦ {name} — secțiune
+Texte de l’arrêt {n} ¦ Textul opririi {n}
+Texte de l’arrêt ¦ Textul opririi
+⤓ Exporter la vidéo en {fmt} ¦ ⤓ Exportă videoclipul în {fmt}
+{stops} : la caméra glisse de l’un à l’autre, et le texte de chaque arrêt s’affiche en sous-titre. La vidéo se fait en temps réel (environ {s} secondes) : laisse la fenêtre ouverte. ¦ {stops}: camera alunecă de la una la alta, iar textul fiecărei opriri apare ca subtitrare. Videoclipul se face în timp real (cam {s} secunde): lasă fereastra deschisă.
+Une fenêtre est posée sur un mur qui n’existe plus ¦ O fereastră e pusă pe un perete care nu mai există
+Une porte est posée sur un mur qui n’existe plus ¦ O ușă e pusă pe un perete care nu mai există
+Une fenêtre est plus large que son mur ¦ O fereastră e mai lată decât peretele ei
+Une porte est plus large que son mur ¦ O ușă e mai lată decât peretele ei
+Une fenêtre dépasse le plafond ({top} cm pour {wall} cm de mur) : elle est coupée par le plancher ¦ O fereastră trece de tavan ({top} cm pentru {wall} cm de perete): e tăiată de planșeu
+Une porte dépasse le plafond ({top} cm pour {wall} cm de mur) : elle est coupée par le plancher ¦ O ușă trece de tavan ({top} cm pentru {wall} cm de perete): e tăiată de planșeu
+Une fenêtre passe sous la pente du toit à cet endroit ¦ O fereastră trece sub panta acoperișului în acest loc
+Une porte passe sous la pente du toit à cet endroit ¦ O ușă trece sub panta acoperișului în acest loc
+🧰 Outils de la maison ¦ 🧰 Uneltele casei
+Le tableau des surfaces, ouvert dans le 🧾 Tableur ¦ Tabelul suprafețelor, deschis în 🧾 Tabelar
+Clique deux points sur le plan : la ligne de coupe ¦ Fă clic pe două puncte pe plan: linia de secțiune
+📐 Surfaces par pièce ¦ 📐 Suprafețe pe cameră
+✂ Tracer la ligne de coupe ¦ ✂ Trasează linia de secțiune
+✂ Voir la coupe ¦ ✂ Vezi secțiunea
+🕰 L’année ¦ 🕰 Anul
+Pendant que tu glisses l’année, l’époque d’avant reste visible en pointillés sépia ¦ În timp ce glisezi anul, epoca dinainte rămâne vizibilă cu linii punctate sepia
+👻 Voir l’époque d’avant en fantôme ¦ 👻 Vezi epoca dinainte ca fantomă
+La visite guidée en vidéo, toute faite : on glisse d’un arrêt à l’autre, le texte en sous-titre ¦ Turul ghidat ca videoclip gata făcut: se alunecă de la o oprire la alta, cu textul ca subtitrare
+Une image par arrêt et les textes, dans un fichier .zip : à glisser dans le 🎬 Montage ¦ O imagine pe oprire și textele, într-un fișier .zip: de tras în 🎬 Montaj
+✎ Les arrêts ¦ ✎ Opririle
+🎬 Vidéo de la visite… ¦ 🎬 Videoclipul vizitei…
+⤓ Images de la visite ¦ ⤓ Imaginile vizitei
+Les arrêts et les photos se posent pendant la visite (🚶 Visiter, vue 3D) ¦ Opririle și fotografiile se pun în timpul vizitei (🚶 Vizitează, vedere 3D)
+＋ Arrêt, 📷 photo… ¦ ＋ Oprire, 📷 fotografie…
+Un fichier .html à envoyer : la maison en 3D et ses plans, sans l’app, en lecture seule (sans personnes ni souvenirs) ¦ Un fișier .html de trimis: casa în 3D și planurile ei, fără aplicație, doar în citire (fără persoane și fără amintiri)
+🏘 Bâtiments du terrain… ¦ 🏘 Clădirile de pe teren…
+📤 Partager la visite ¦ 📤 Distribuie vizita
+Aucune pièce dessinée. ¦ Nicio cameră desenată.
+Toute la maison ¦ Toată casa
+Loi Carrez ¦ Legea Carrez
+Surface ¦ Suprafață
+Loi Carrez : seules comptent les parties où l’on tient debout (hauteur sous plafond d’au moins 1,80 m, combles comprises). Les vides et les escaliers ne comptent pas. ¦ Legea Carrez: se numără doar părțile în care se poate sta în picioare (înălțime sub tavan de cel puțin 1,80 m, inclusiv podurile). Golurile și scările nu se numără.
+Le Tableur n’est pas prêt. ¦ Tabelarul nu este gata.
+Rien à signaler : portes, fenêtres, escaliers et pièces sont cohérents. ¦ Nimic de semnalat: ușile, ferestrele, scările și camerele sunt coerente.
+✓ Rien à signaler. ¦ ✓ Nimic de semnalat.
+✂ Clique les deux bouts de la ligne de coupe sur le plan ¦ ✂ Fă clic pe cele două capete ale liniei de secțiune pe plan
+Ligne de coupe ¦ Linie de secțiune
+Trace d’abord la ligne de coupe sur le plan. ¦ Trasează mai întâi linia de secțiune pe plan.
+✂ Coupe de la maison ¦ ✂ Secțiunea casei
+⤓ Exporter en SVG ¦ ⤓ Exportă în SVG
+⤓ Exporter en PNG ¦ ⤓ Exportă în PNG
+Ouvre la vue 3D, puis « 🚶 Visiter » : en bas de la visite, « 📍 Arrêt ici » pose un arrêt (avec un texte lu à voix haute) et « 📷 Photo d’époque ici » pose une photo prise de cet endroit. ¦ Deschide vederea 3D, apoi „🚶 Vizitează”: în josul vizitei, „📍 Oprire aici” pune o oprire (cu un text citit cu voce tare) și „📷 Fotografie de epocă aici” pune o fotografie făcută din acel loc.
+🗺 Les arrêts de la visite guidée ¦ 🗺 Opririle turului ghidat
+Arrêt retiré ¦ Oprire scoasă
+Arrêts rangés ¦ Opriri reordonate
+Impossible de faire les images. ¦ Imaginile nu au putut fi făcute.
+Une image par arrêt… ¦ O imagine pe oprire…
+Pose d’abord des arrêts : vue 3D → 🚶 Visiter → 📍 Arrêt ici. ¦ Pune mai întâi opriri: vedere 3D → 🚶 Vizitează → 📍 Oprire aici.
+🎬 La vidéo de la visite guidée ¦ 🎬 Videoclipul turului ghidat
+Paysage 1280 × 720 (écran) ¦ Peisaj 1280 × 720 (ecran)
+Carré 1080 × 1080 (messageries) ¦ Pătrat 1080 × 1080 (aplicații de mesagerie)
+Titre au début ¦ Titlu la început
+⛔ Ce navigateur ne sait pas enregistrer de vidéo : garde « ⤓ Images de la visite ». ¦ ⛔ Acest browser nu poate înregistra video: folosește „⤓ Imaginile vizitei”.
+🔴 Enregistrement de la visite… ¦ 🔴 Se înregistrează vizita…
+fenêtre des médias indisponible ¦ fereastra media nu e disponibilă
+✓ Vidéo exportée, et une copie rangée dans les médias. ¦ ✓ Videoclip exportat, și o copie pusă în media.
+✓ Vidéo exportée. ¦ ✓ Videoclip exportat.
+Photo retirée ¦ Fotografie scoasă
+Fichier prêt : envoie-le, il s’ouvre d’un double-clic dans un navigateur, sans l’app. ¦ Fișier gata: trimite-l, se deschide cu dublu clic într-un browser, fără aplicație.
+Retirer du terrain ¦ Scoate de pe teren
+🏘 Le hameau : les bâtiments du terrain ¦ 🏘 Cătunul: clădirile de pe teren
+La ferme, la grange, le four, le puits, les maisons voisines : chacune est une maison de la liste « 🏠 Maisons de famille », posée ici à côté (en 3D et en pointillés sur le plan). ¦ Ferma, hambarul, cuptorul, fântâna, casele vecine: fiecare este o casă din lista „🏠 Casele familiei”, așezată aici alături (în 3D și punctată pe plan).
+＋ Ajouter un bâtiment ¦ ＋ Adaugă o clădire
+N° de foyer au recensement (facultatif) ¦ Nr. gospodăriei la recensământ (opțional)
+Bâtiment ajouté ¦ Clădire adăugată
+Bâtiment déplacé ¦ Clădire mutată
+Bâtiment retiré ¦ Clădire scoasă
+Soleil à {deg}° de haut, au {dir} ¦ Soarele la {deg}° înălțime, spre {dir}
+boussole|nord ¦ nord
+boussole|nord-est ¦ nord-est
+boussole|est ¦ est
+boussole|sud-est ¦ sud-est
+boussole|sud ¦ sud
+boussole|sud-ouest ¦ sud-vest
+boussole|ouest ¦ vest
+boussole|nord-ouest ¦ nord-vest
+🌙 Nuit ¦ 🌙 Noapte
+Crépuscule ¦ Amurg
+(pose une lampe pour éclairer) ¦ (pune o lampă ca să luminezi)
+nuit polaire ¦ noapte polară
+soleil de minuit ¦ soarele de la miezul nopții
+lever {rise}, coucher {set} ¦ răsărit {rise}, apus {set}
+France (lieu de la maison inconnu) ¦ Franța (locul casei necunoscut)
+au sol {len} ¦ la sol {len}
+🗺 Arrêt {n} sur {total} ¦ 🗺 Oprirea {n} din {total}
+🪜 Un escalier : ¦ 🪜 O scară:
+⬆ Monter (E) ¦ ⬆ Urcă (E)
+⬇ Descendre (C) ¦ ⬇ Coboară (C)
+Ce glTF utilise des fichiers à part : exporte-le plutôt en GLB (un seul fichier). ¦ Acest glTF folosește fișiere separate: exportă-l mai bine ca GLB (un singur fișier).
+Format 3D inconnu. ¦ Format 3D necunoscut.
+✦ Les souvenirs de la pièce ¦ ✦ Amintirile camerei
+☀️ Lumière du jour ¦ ☀️ Lumina zilei
+Le soleil passe d’une heure à l’autre ¦ Soarele trece de la o oră la alta
+À cette heure-ci, du 1er janvier au 31 décembre : les ombres s’allongent l’hiver ¦ La această oră, de la 1 ianuarie la 31 decembrie: umbrele se lungesc iarna
+▶ Voir la journée ¦ ▶ Vezi ziua
+▶ Voir l’année ¦ ▶ Vezi anul
+❄️ Hiver ¦ ❄️ Iarnă
+🌱 Printemps ¦ 🌱 Primăvară
+☀️ Été ¦ ☀️ Vară
+🍂 Automne ¦ 🍂 Toamnă
+📅 Aujourd’hui ¦ 📅 Azi
+Ombres portées ¦ Umbre proiectate
+🚶 Visite ¦ 🚶 Vizită
+Monter à l’étage du dessus (E ou Page ↑) ¦ Urcă la etajul de deasupra (E sau Page ↑)
+Descendre à l’étage du dessous (C ou Page ↓) ¦ Coboară la etajul de dedesubt (C sau Page ↓)
+Yeux à ¦ Ochii la
+Un arrêt de la visite guidée, ici, regardant par là (avec un texte lu à voix haute) ¦ O oprire a turului ghidat, aici, privind într-acolo (cu un text citit cu voce tare)
+Une photo ancienne prise de cet endroit, dans cette direction : on la compare avec la maison d’aujourd’hui ¦ O fotografie veche făcută din acest loc, în această direcție: o compari cu casa de azi
+📍 Arrêt ici ¦ 📍 Oprire aici
+📷 Photo d’époque ici ¦ 📷 Fotografie de epocă aici
+Petite carte : clic pour t’y rendre ¦ Hartă mică: clic ca să mergi acolo
+Z Q S D, W A S D ou flèches : marcher · Maj : courir · la souris regarde · Échap : libérer la souris ¦ Z Q S D, W A S D sau săgeți: mergi · Shift: fugi · mouse-ul privește · Esc: eliberează mouse-ul
+Le rond en bas à gauche : marcher · glisser sur la vue : regarder · ✦ : toucher pour voir le souvenir ¦ Cercul din stânga jos: mergi · trage pe vedere: privește · ✦: atinge ca să vezi amintirea
+Z Q S D, W A S D ou flèches : marcher · clic sur la vue : regarder avec la souris · ✦ : clic pour voir le souvenir · Échap : sortir ¦ Z Q S D, W A S D sau săgeți: mergi · clic pe vedere: privește cu mouse-ul · ✦: clic ca să vezi amintirea · Esc: ieși
+✋ Arrêter la visite ¦ ✋ Oprește vizita
+Autrefois ¦ Odinioară
+Autrefois ou aujourd’hui ¦ Odinioară sau azi
+Arrêt suivant ¦ Oprirea următoare
+Arrêter la visite guidée ¦ Oprește turul ghidat
+Pose d’abord des arrêts (🚶 Visiter → 📍 Arrêt ici). ¦ Pune mai întâi opriri (🚶 Vizitează → 📍 Oprire aici).
+Ce navigateur ne sait pas enregistrer de vidéo. ¦ Acest browser nu poate înregistra video.
+Remettre la vue comme au départ ¦ Readu vederea la starea inițială
+L’image du média n° {n} est introuvable : une toile neutre la remplace. ¦ Imaginea fișierului media nr. {n} nu poate fi găsită: o pânză neutră o înlocuiește.
+Cadre {n} : une image ¦ Rama {n}: o imagine
+Cadre {n} : vide ¦ Rama {n}: goală
+Image du cadre {n} ¦ Imaginea ramei {n}
+Prise dans les médias ¦ Luată din media
+L’image de « {name} » ¦ Imaginea pentru „{name}”
+🖼 Déposer sur « {name} » (cadre {n}) ¦ 🖼 Plasează pe „{name}” (rama {n})
+🖼 Déposer sur « {name} » ¦ 🖼 Plasează pe „{name}”
+Remplir (recadrer) ¦ Umple (decupează)
+Ajuster (toute l’image) ¦ Încadrează (toată imaginea)
+Centrer (taille réelle) ¦ Centrează (mărime reală)
+Pas d’image. ¦ Nicio imagine.
+Image introuvable ¦ Imagine negăsită
+Le cadre ¦ Rama
+MAISON · IMAGE ¦ CASĂ · IMAGINE
+Poser cette image ¦ Așază această imagine
+Ou un souvenir de cet objet : ¦ Sau o amintire a acestui obiect:
+La rattacher aussi aux souvenirs de cet objet ¦ Leag-o și de amintirile acestui obiect
+🏷 Garder aussi comme souvenir ¦ 🏷 Păstrează și ca amintire
+⚠️ Cette image est introuvable dans les médias : une toile neutre la remplace. Choisis-en une autre. ¦ ⚠️ Această imagine nu poate fi găsită în media: o pânză neutră o înlocuiește. Alege alta.
+Aperçu : glisse pour déplacer l’image, molette pour zoomer ¦ Previzualizare: trage ca să muți imaginea, rotița ca să faci zoom
+Glisse pour déplacer l’image · molette pour zoomer ¦ Trage ca să muți imaginea · rotița ca să faci zoom
+Dans le cadre ¦ În ramă
+Remettre l’image au centre, sans zoom ¦ Readu imaginea în centru, fără zoom
+↺ Recadrage de départ ¦ ↺ Încadrarea inițială
+Recadrage de départ ¦ Încadrarea inițială
+Sa couleur ¦ Culoarea sa
+Passe-partout ¦ Paspartu
+🖼 Images des cadres ¦ 🖼 Imaginile ramelor
+🖼 Image ¦ 🖼 Imagine
+📁 Tu peux aussi glisser une image de l’ordinateur sur l’objet, dans le plan ou dans la vue 3D : elle entre dans les médias. ¦ 📁 Poți și să tragi o imagine de pe calculator pe obiect, în plan sau în vederea 3D: intră în media.
+Image posée ¦ Imagine așezată
+Image retirée ¦ Imagine scoasă
+Import de l’image… ¦ Se importă imaginea…
+Image déposée sur l’objet ¦ Imagine plasată pe obiect
+✓ L’image est rangée dans les médias et posée sur l’objet. ¦ ✓ Imaginea este pusă în media și așezată pe obiect.
+Image prise dans les souvenirs ¦ Imagine luată din amintiri
+Image tournée ¦ Imagine rotită
+Image réglée ¦ Imagine reglată
+Image recadrée ¦ Imagine reîncadrată
+Image zoomée ¦ Imagine mărită
+Cote ¦ Cotă
+Hauteur (cm) ¦ Înălțime (cm)
+Contenu ¦ Conținut
+Tourne le plan par rapport au nord : 0° = le haut du plan est au nord, 90° = le haut du plan regarde l’est. Le soleil et les ombres suivent. ¦ Rotește planul față de nord: 0° = partea de sus a planului e la nord, 90° = partea de sus a planului privește spre est. Soarele și umbrele urmează.
+Lit d’une personne ¦ Pat de o persoană
+Chambre ¦ Dormitor
+Lit double ¦ Pat dublu
+Lit clos (breton) ¦ Pat închis (breton)
+Berceau ¦ Leagăn
+Lit d’enfant ¦ Pat de copil
+Table de chevet ¦ Noptieră
+Commode ¦ Comodă
+Coiffeuse ¦ Măsuță de toaletă
+Prie-Dieu ¦ Scaun de rugăciune
+Religion, souvenirs ¦ Religie, amintiri
+Table ¦ Masă
+Séjour ¦ Cameră de zi
+Table ronde ¦ Masă rotundă
+Chaise ¦ Scaun
+Fauteuil ¦ Fotoliu
+Canapé ¦ Canapea
+Banc ¦ Bancă
+Buffet ¦ Bufet
+Vaisselier ¦ Vitrină de vase
+Horloge comtoise ¦ Ceas Comtoise
+Piano droit ¦ Pianină
+Bibliothèque ¦ Bibliotecă
+Cheminée ¦ Șemineu
+Poêle à bois ¦ Sobă cu lemne
+Tapis ¦ Covor
+Lampadaire ¦ Lampadar
+Plante ¦ Plantă
+Poste de radio (TSF) ¦ Aparat de radio (TSF)
+Cuisinière à bois ¦ Mașină de gătit cu lemne
+Cuisine ¦ Bucătărie
+Évier en pierre ¦ Chiuvetă de piatră
+Pétrin ¦ Covată
+Garde-manger ¦ Cămară de alimente
+Réfrigérateur ¦ Frigider
+Plan de travail ¦ Blat de lucru
+Baignoire ¦ Cadă
+Salle d’eau ¦ Baie
+Douche ¦ Duș
+WC ¦ WC
+Lavabo ¦ Lavoar
+Table de toilette (broc et cuvette) ¦ Măsuță de toaletă (cană și lighean)
+Armoire ¦ Dulap
+Rangement ¦ Depozitare
+Coffre ¦ Ladă
+Étagère ¦ Etajeră
+Rouet ¦ Roată de tors
+Métiers, atelier ¦ Meserii, atelier
+Métier à tisser ¦ Război de țesut
+Établi ¦ Banc de lucru
+Tonneau ¦ Butoi
+Machine à coudre ¦ Mașină de cusut
+Enclume ¦ Nicovală
+Mangeoire, crèche ¦ Iesle, hrănitoare
+Ferme, animaux ¦ Fermă, animale
+Charrette ¦ Căruță
+Puits ¦ Fântână
+Jardin, extérieur ¦ Grădină, exterior
+Arbre ¦ Copac
+Voiture ¦ Mașină
+Banc de jardin ¦ Bancă de grădină
+Escalier droit ¦ Scară dreaptă
+Structure ¦ Structură
+Escalier tournant ¦ Scară cu întoarcere
+Poteau, pilier ¦ Stâlp, pilon
+Placard ¦ Dulap în perete
+Lit bateau (Empire) ¦ Pat-sanie (Empire)
+Lit Louis-Philippe ¦ Pat Louis-Philippe
+Lit à baldaquin ¦ Pat cu baldachin
+Lit en fer forgé ¦ Pat din fier forjat
+Grand lit (160) ¦ Pat mare (160)
+Paillasse (lit de paille) ¦ Saltea de paie
+Armoire normande ¦ Dulap normand
+Armoire à glace ¦ Dulap cu oglindă
+Chiffonnier, semainier ¦ Șifonier înalt, semainier
+Table de nuit à marbre ¦ Noptieră cu marmură
+Lampe de chevet ¦ Veioză
+Pot de chambre ¦ Oală de noapte
+Paravent ¦ Paravan
+Psyché (miroir sur pied) ¦ Psihă (oglindă pe picior)
+Fauteuil Voltaire ¦ Fotoliu Voltaire
+Banquette de pied de lit ¦ Banchetă la picioarele patului
+Descente de lit ¦ Covoraș de pat
+Dressing ¦ Dressing
+Chaise paillée ¦ Scaun cu șezut de papură
+Coffre de mariage ¦ Ladă de zestre
+Malle-cabine ¦ Cufăr de cabină
+Table de toilette à miroir ¦ Măsuță de toaletă cu oglindă
+Chaufferette, bassinoire ¦ Încălzitor de picioare, încălzitor de pat
+Cheminée de chambre ¦ Șemineu de dormitor
+Table ovale à rallonges ¦ Masă ovală extensibilă
+Table de ferme ¦ Masă de fermă
+Table basse ¦ Măsuță de cafea
+Guéridon ¦ Gheridon
+Bergère ¦ Fotoliu bergère
+Fauteuil à bascule ¦ Balansoar
+Canapé trois places ¦ Canapea cu trei locuri
+Méridienne ¦ Meridiană
+Pouf ¦ Puf
+Pendule de cheminée ¦ Pendulă de șemineu
+Grande cheminée à manteau ¦ Șemineu mare cu poliță
+Poêle en faïence ¦ Sobă de teracotă
+Meuble TV ¦ Comodă TV
+Gramophone ¦ Gramofon
+Harmonium ¦ Armoniu
+Piano à queue ¦ Pian cu coadă
+Lustre ¦ Candelabru
+Tapis rond ¦ Covor rotund
+Bibliothèque vitrée ¦ Bibliotecă cu geam
+Chaise cannée ¦ Scaun cu împletitură de trestie
+Jardinière ¦ Jardinieră
+Cage à oiseaux ¦ Colivie
+Aquarium ¦ Acvariu
+Console ¦ Consolă
+Bonheur-du-jour ¦ Birou bonheur-du-jour
+Canapé-lit, clic-clac ¦ Canapea extensibilă
+Potager (fourneau maçonné) ¦ Plită zidită
+Âtre avec crémaillère ¦ Vatră cu cârlig
+Four encastrable ¦ Cuptor încorporat
+Plaques de cuisson ¦ Plită
+Lave-vaisselle ¦ Mașină de spălat vase
+Congélateur coffre ¦ Congelator-ladă
+Glacière (armoire à glace) ¦ Ladă frigorifică (cu gheață)
+Évier double ¦ Chiuvetă dublă
+Îlot central ¦ Insulă centrală
+Plan de travail en L ¦ Blat de lucru în L
+Hotte ¦ Hotă
+Meuble haut ¦ Corp suspendat
+Meuble bas ¦ Corp de jos
+Tabouret ¦ Taburet
+Table de cuisine ¦ Masă de bucătărie
+Panetière ¦ Dulăpior de pâine
+Billot de boucher ¦ Butuc de măcelar
+Seau, cruche ¦ Găleată, cană
+Saloir, jarre ¦ Ciubăr de sărat, chiup
+Micro-ondes ¦ Cuptor cu microunde
+Cuisinière à gaz ¦ Aragaz
+Chaudron ¦ Ceaun
+Moulin à café ¦ Râșniță de cafea
+Réfrigérateur américain ¦ Frigider american
+Égouttoir, vaisselier mural ¦ Scurgător de vase, etajeră de perete
+Baignoire sabot ¦ Cadă șezut
+Baignoire sur pieds (fonte) ¦ Cadă pe picioare (fontă)
+Cuvier, baquet ¦ Albie, ciubăr
+Bidet ¦ Bideu
+Double vasque ¦ Lavoar dublu
+Douche à l’italienne ¦ Duș walk-in
+Machine à laver ¦ Mașină de spălat
+Sèche-linge ¦ Uscător de rufe
+Chauffe-eau, ballon ¦ Boiler
+Radiateur ¦ Calorifer
+Sèche-serviettes ¦ Port-prosop încălzit
+Meuble vasque ¦ Mobilier de lavoar
+Miroir de salle de bains ¦ Oglindă de baie
+WC à la turque ¦ WC turcesc
+Chaise percée ¦ Scaun cu oliță
+Lessiveuse ¦ Cazan de rufe
+Étendoir à linge ¦ Uscător de rufe (stativ)
+Panier à linge ¦ Coș de rufe
+Colonne de rangement ¦ Coloană de depozitare
+WC suspendu ¦ WC suspendat
+Bac à douche ¦ Cădiță de duș
+Malle de voyage ¦ Cufăr de călătorie
+Bahut ¦ Bufet scund
+Buffet deux corps ¦ Bufet în două corpuri
+Enfilade ¦ Bufet lung
+Confiturier ¦ Dulăpior de dulcețuri
+Étagère métallique ¦ Raft metalic
+Penderie, portant ¦ Garderobă, stender
+Portemanteau ¦ Cuier
+Meuble à cases ¦ Raft cu compartimente
+Placard mural ¦ Dulap de perete
+Meuble à chaussures ¦ Pantofar
+Casier à bouteilles ¦ Suport de sticle
+Pile de cartons ¦ Teanc de cutii
+Cantine militaire ¦ Ladă militară
+Armoire à linge ¦ Dulap de lenjerie
+Porte-parapluies ¦ Suport de umbrele
+Meuble d’entrée ¦ Mobilier de hol
+Vestiaire métallique ¦ Vestiar metalic
+Commode basse ¦ Comodă joasă
+Coffre à bois ¦ Ladă de lemne
+Secrétaire à abattant ¦ Secretaire cu capac rabatabil
+Bureau plat (ministre) ¦ Birou plat (de ministru)
+Bureau à cylindre ¦ Birou cu rulou
+Fauteuil de bureau ¦ Scaun de birou
+Chaise de bureau en bois ¦ Scaun de birou din lemn
+Cartonnier ¦ Dulap cu cutii de dosare
+Classeur à tiroirs ¦ Clasor cu sertare
+Ordinateur (écran) ¦ Calculator (ecran)
+Imprimante, scanner ¦ Imprimantă, scanner
+Globe terrestre ¦ Glob pământesc
+Coffre-fort ¦ Seif
+Lampe de bureau ¦ Lampă de birou
+Bibliothèque murale ¦ Bibliotecă de perete
+Table à dessin ¦ Masă de desen
+Boîtes d’archives ¦ Cutii de arhivă
+Téléphone mural (ancien) ¦ Telefon de perete (vechi)
+Tableau noir, tableau blanc ¦ Tablă neagră, tablă albă
+Bureau moderne ¦ Birou modern
+Caisson à tiroirs ¦ Corp cu sertare
+Fauteuil club ¦ Fotoliu club
+Berceau en osier ¦ Leagăn de răchită
+Lit à barreaux ¦ Pătuț cu gratii
+Lits superposés ¦ Paturi suprapuse
+Table à langer ¦ Masă de înfășat
+Coffre à jouets ¦ Ladă de jucării
+Cheval à bascule ¦ Căluț balansoar
+Parc ¦ Țarc
+Chaise haute ¦ Scaun înalt
+Pupitre d’écolier ¦ Pupitru de școlar
+Landau ¦ Cărucior
+Maison de poupée ¦ Casă de păpuși
+Tipi ¦ Tipi
+Petite table ¦ Măsuță
+Petite chaise ¦ Scăunel
+Tapis de jeu ¦ Covoraș de joacă
+Ours en peluche ¦ Ursuleț de pluș
+Bibliothèque basse ¦ Bibliotecă joasă
+Trotteur, porteur ¦ Premergător, vehicul de împins
+Crucifix ¦ Crucifix
+Bénitier ¦ Agheasmatar
+Petit autel, oratoire ¦ Altar mic, oratoriu
+Statue de la Vierge ¦ Statuia Fecioarei
+Chandelier, cierge ¦ Sfeșnic, lumânare de biserică
+Portrait de famille ¦ Portret de familie
+Photo de mariage encadrée ¦ Fotografie de nuntă înrămată
+Arbre généalogique encadré ¦ Arbore genealogic înrămat
+Globe de mariée ¦ Glob de mireasă
+Cadre de médailles ¦ Ramă cu medalii
+Bible familiale sur lutrin ¦ Biblia familiei pe pupitru
+Coffret à souvenirs ¦ Cutie de amintiri
+Vitrine à souvenirs ¦ Vitrină de amintiri
+Lampe à huile ¦ Lampă cu ulei
+Buste sur colonne ¦ Bust pe coloană
+Icône, image pieuse ¦ Icoană, imagine sfântă
+Pile d’albums de famille ¦ Teanc de albume de familie
+Plaque commémorative ¦ Placă comemorativă
+Malle aux souvenirs ¦ Cufăr cu amintiri
+Croix de bois au mur ¦ Cruce de lemn pe perete
+Retable, armoire d’église ¦ Retablu, dulap de biserică
+Forge (foyer) ¦ Forjă (vatră)
+Soufflet de forge ¦ Foale de forjă
+Tour à bois ¦ Strung de lemn
+Presse à imprimer ¦ Presă de tipar
+Meule à aiguiser ¦ Tocilă
+Cuve de vigneron ¦ Cadă de vin
+Pressoir à vin ¦ Teasc de vin
+Alambic ¦ Alambic
+Comptoir de boutique ¦ Tejghea de prăvălie
+Balance à bascule ¦ Cântar basculă
+Caisse enregistreuse ¦ Casă de marcat
+Étalage de magasin ¦ Raft de magazin
+Fauteuil de barbier ¦ Scaun de frizer
+Établi de cordonnier ¦ Banc de cizmar
+Chevalet de peintre ¦ Șevalet de pictor
+Carreau de dentellière ¦ Pernă de dantelă
+Four de boulanger ¦ Cuptor de brutar
+Barrique ¦ Butoi mare
+Meule de moulin ¦ Piatră de moară
+Chevalet de scieur ¦ Capră de tăiat lemne
+Établi de menuisier ¦ Banc de tâmplar
+Panneau à outils ¦ Panou de scule
+Vache ¦ Vacă
+Cheval ¦ Cal
+Âne ¦ Măgar
+Cochon ¦ Porc
+Mouton ¦ Oaie
+Chèvre ¦ Capră
+Poule ¦ Găină
+Chien ¦ Câine
+Chat ¦ Pisică
+Clapier à lapins ¦ Cușcă de iepuri
+Poulailler ¦ Coteț de găini
+Niche ¦ Cușcă de câine
+Stalle, box d’écurie ¦ Boxă de grajd
+Abreuvoir ¦ Adăpătoare
+Râtelier à foin ¦ Iesle de fân
+Meule de foin ¦ Căpiță de fân
+Botte de paille ¦ Balot de paie
+Charrue ¦ Plug
+Herse ¦ Grapă
+Tracteur ancien ¦ Tractor vechi
+Brouette ¦ Roabă
+Baratte à beurre ¦ Putinei de unt
+Ruche ¦ Stup
+Coffre à grain ¦ Ladă de grâne
+Bidon à lait ¦ Bidon de lapte
+Tombereau ¦ Car basculant
+Arbre fruitier ¦ Pom fructifer
+Sapin, conifère ¦ Brad, conifer
+Haie ¦ Gard viu
+Buisson, arbuste ¦ Tufă, arbust
+Massif de fleurs ¦ Strat de flori
+Potager (planches) ¦ Grădină de legume (straturi)
+Mare, bassin ¦ Iaz, bazin
+Lavoir ¦ Spălătorie
+Four à pain ¦ Cuptor de pâine
+Pompe à bras ¦ Pompă de mână
+Croix de chemin, calvaire ¦ Troiță, calvar
+Pierre tombale ¦ Piatră funerară
+Table de jardin ¦ Masă de grădină
+Chaise de jardin ¦ Scaun de grădină
+Transat, chaise longue ¦ Șezlong
+Parasol ¦ Umbrelă de soare
+Barbecue ¦ Grătar
+Balançoire ¦ Leagăn
+Toboggan ¦ Tobogan
+Pergola, tonnelle ¦ Pergolă, boltă
+Clôture, barrière ¦ Gard, barieră
+Portail ¦ Poartă
+Muret de pierre ¦ Zid scund de piatră
+Bicyclette ¦ Bicicletă
+Cabane de jardin ¦ Șopron de grădină
+Serre ¦ Seră
+Tas de bois ¦ Stivă de lemne
+Bouleau, arbre fin ¦ Mesteacăn, copac zvelt
+Banc de pierre ¦ Bancă de piatră
+Escalier en colimaçon ¦ Scară în spirală
+Échelle de meunier ¦ Scară de moară
+Colonne ronde ¦ Coloană rotundă
+Poutre apparente ¦ Grindă aparentă
+Trappe de cave ¦ Trapă de pivniță
+Marche, seuil ¦ Treaptă, prag
+Garde-corps, rampe ¦ Balustradă, mână curentă
+Conduit de cheminée ¦ Coș de fum (canal)
+Verrière, cloison vitrée ¦ Luminator, perete despărțitor de sticlă
+Radiateur en fonte ¦ Calorifer din fontă
+Chaudière ¦ Centrală termică
+Pilier de pierre ¦ Stâlp de piatră
+Estrade, palier ¦ Estradă, palier
+Muret, demi-cloison ¦ Zid scund, semi-perete
+Niche, alcôve ¦ Nișă, alcov
+Bonnetière (armoire à une porte) ¦ Dulap cu o ușă (bonnetière)
+Armoire de mariage (de dot) ¦ Dulap de nuntă (de zestre)
+Lit clos à portes coulissantes ¦ Pat închis cu uși glisante
+Lit-armoire, lit clos d’angle ¦ Pat-dulap, pat închis de colț
+Lit d’alcôve à rideaux ¦ Pat de alcov cu perdele
+Berceau ancien en bois (à bascule) ¦ Leagăn vechi de lemn (balansoar)
+Berceau à capote en osier ¦ Leagăn de răchită cu coviltir
+Bassinoire en cuivre (à long manche) ¦ Încălzitor de pat din cupru (cu mâner lung)
+Table de toilette à marbre ¦ Măsuță de toaletă cu marmură
+Cuvette et broc en faïence ¦ Lighean și cană de faianță
+Commode galbée (Louis XV) ¦ Comodă bombată (Louis XV)
+Bougeoir de chevet ¦ Sfeșnic de noptieră
+Chaufferette à braises ¦ Încălzitor de picioare cu jar
+Malle en osier ¦ Cufăr de răchită
+Horloge comtoise à ventre (violonée) ¦ Ceas Comtoise cu burtă (în formă de vioară)
+Horloge comtoise peinte ¦ Ceas Comtoise pictat
+Horloge de parquet (régulateur) ¦ Ceas de podea (regulator)
+Buffet bas à deux portes ¦ Bufet scund cu două uși
+Vaisselier breton ¦ Vitrină de vase bretonă
+Vaisselier normand ¦ Vitrină de vase normandă
+Banc-coffre à dossier (archebanc) ¦ Bancă-ladă cu spătar (archebanc)
+Banc-coffre de lit clos ¦ Bancă-ladă de pat închis
+Chaise paillée à barreaux ¦ Scaun cu șezut de papură și spătar cu bare
+Fauteuil paillé (de grand-mère) ¦ Fotoliu cu șezut de papură (al bunicii)
+Table à volets ¦ Masă cu aripi rabatabile
+Table de ferme en chêne (à tiroir) ¦ Masă de fermă din stejar (cu sertar)
+Lampe tempête ¦ Felinar de vânt
+Chandelier, bougeoir ¦ Sfeșnic
+Suspension à pétrole ¦ Lampă suspendată cu gaz
+Poste TSF à lampes ¦ Aparat de radio TSF cu lămpi
+Phonographe à pavillon ¦ Fonograf cu pâlnie
+Poêle Godin (fonte émaillée) ¦ Sobă Godin (fontă emailată)
+Poêle à bois en fonte (cloche) ¦ Sobă de lemne din fontă (clopot)
+Chenets (la paire) ¦ Pirostrii de cămin (perechea)
+Cheminée à manteau (à hotte) ¦ Șemineu cu poliță (cu hotă)
+Cheminée de pierre à linteau de bois ¦ Șemineu de piatră cu buiandrug de lemn
+Cantou (coin du feu) ¦ Cantou (colțul focului)
+Bergère Louis XVI ¦ Bergère Louis XVI
+Fauteuil crapaud ¦ Fotoliu crapaud
+Sellette (porte-plante) ¦ Suport de plante
+Portrait des ancêtres (ovale) ¦ Portretul strămoșilor (oval)
+Maie (pétrin sur pieds) ¦ Covată pe picioare
+Maie-coffre à couvercle ¦ Covată-ladă cu capac
+Huche à pain ¦ Cutie de pâine
+Cuisinière à bois en fonte (à barre de laiton) ¦ Mașină de gătit cu lemne din fontă (cu bară de alamă)
+Cuisinière émaillée bois et charbon ¦ Mașină de gătit emailată pe lemne și cărbune
+Potager carrelé (fourneau à braises) ¦ Plită cu faianță (cu jar)
+Évier taillé dans la pierre ¦ Chiuvetă cioplită în piatră
+Évier en grès émaillé ¦ Chiuvetă din gresie smălțuită
+Fontaine en cuivre sur son support ¦ Fântână de cupru pe suportul ei
+Fontaine en grès ¦ Fântână de gresie
+Saloir en grès ¦ Vas de sărat din gresie
+Saloir en bois (coffre à sel) ¦ Ladă de sare din lemn
+Garde-manger grillagé (mural) ¦ Cămară de alimente cu plasă (de perete)
+Buffet de cuisine (années 1930-1950) ¦ Bufet de bucătărie (anii 1930-1950)
+Moulin à café mural ¦ Râșniță de cafea de perete
+Fer à repasser en fonte ¦ Fier de călcat din fontă
+Marmite en fonte ¦ Oală din fontă
+Cruche, pichet en grès ¦ Cană, ulcior de gresie
+Tue-mouches en verre (piège à mouches) ¦ Capcană de muște din sticlă
+Balance Roberval et ses poids ¦ Cântar Roberval cu greutăți
+Glacière en bois doublée de zinc ¦ Ladă frigorifică de lemn căptușită cu zinc
+Tub (grand bassin en zinc) ¦ Cadă de zinc (lighean mare)
+Baquet de lessive en bois ¦ Albie de lemn pentru rufe
+Lessiveuse à champignon ¦ Cazan de rufe cu ciupercă
+Baignoire en zinc ¦ Cadă de zinc
+Lave-mains en fonte émaillée ¦ Chiuvetă de mâini din fontă emailată
+Planche à laver ¦ Placă de spălat
+Buffet deux-corps vitré ¦ Bufet în două corpuri cu geam
+Buffet deux-corps normand ¦ Bufet normand în două corpuri
+Armoire lorraine ¦ Dulap din Lorena
+Armoire bressane ¦ Dulap din Bresse
+Coffre de mariage sculpté ¦ Ladă de zestre sculptată
+Malle bombée de voyage ¦ Cufăr de călătorie bombat
+Coffre à linge à pentures de fer ¦ Ladă de lenjerie cu balamale de fier
+Panetière provençale (murale) ¦ Dulăpior de pâine provensal (de perete)
+Étagère à cuivres ¦ Raft pentru vase de aramă
+Bureau de pente (dos d’âne) ¦ Birou cu pupitru înclinat
+Scriban (pente et vitrine) ¦ Scriban (pupitru și vitrină)
+Écritoire, encrier et plumier ¦ Set de scris, călimară și penar
+Lampe bouillotte ¦ Lampă bouillotte
+Banc d’école à pupitre (deux places) ¦ Bancă de școală cu pupitru (două locuri)
+Pupitre d’écolier à abattant ¦ Pupitru de școlar cu capac
+Ardoise d’écolier ¦ Tăbliță de școlar
+Cheval de bois ¦ Cal de lemn
+Poupée de porcelaine ¦ Păpușă de porțelan
+Chaise d’enfant paillée ¦ Scăunel de copil cu șezut de papură
+Trotteur d’enfant en bois ¦ Premergător de lemn
+Prie-Dieu sculpté ¦ Scaun de rugăciune sculptat
+Bénitier de chambre en faïence ¦ Agheasmatar de cameră din faianță
+Crucifix de chevet (Christ en bronze) ¦ Crucifix de noptieră (Hristos de bronz)
+Globe de mariée sur son socle ¦ Glob de mireasă pe soclul lui
+Statuette de saint ¦ Statuetă de sfânt
+Image de communion encadrée ¦ Imagine de împărtășanie înrămată
+Couronne de perles (mortuaire) ¦ Coroană funerară de mărgele
+Rouet flamand (à fuseau) ¦ Roată de tors flamandă (cu fus)
+Grand rouet à laine ¦ Roată mare de tors lână
+Métier à tisser à bras ¦ Război de țesut manual
+Métier à tapisserie (vertical) ¦ Război de tapiserie (vertical)
+Dévidoir à écheveaux ¦ Depănătoare de scule
+Machine à coudre à pédale (Singer) ¦ Mașină de cusut cu pedală (Singer)
+Machine à coudre à main ¦ Mașină de cusut de mână
+Mannequin de couturière ¦ Manechin de croitoreasă
+Fourneau à fers de repasseuse ¦ Sobiță pentru fiare de călcat
+Banc de sabotier ¦ Banc de saboți
+Presse à fromage ¦ Presă de brânză
+Baratte à piston en bois ¦ Putinei de lemn cu piston
+Baratte-tonneau à manivelle ¦ Putinei-butoi cu manivelă
+Écrémeuse ¦ Separator de smântână
+Joug de bœufs ¦ Jug de boi
+Outils (fourche, faux, râteau) ¦ Unelte (furcă, coasă, greblă)
+Pressoir à pommes (cidre) ¦ Teasc de mere (cidru)
+Charreton à bras ¦ Cărucior de mână
+Ruche en paille (panier) ¦ Stup de paie (coș)
+Puits à margelle et petit toit ¦ Fântână cu ghizd și acoperiș mic
+Pompe à eau en fonte et son auge ¦ Pompă de apă din fontă cu jgheabul ei
+Auge en pierre ¦ Jgheab de piatră
+Banc à laver (de lavoir) ¦ Bancă de spălat (de spălătorie)
+Canapé moderne trois places ¦ Canapea modernă cu trei locuri
+Canapé deux places ¦ Canapea cu două locuri
+Canapé d’angle ¦ Canapea de colț
+Canapé Chesterfield (capitonné) ¦ Canapea Chesterfield (capitonată)
+Fauteuil scandinave ¦ Fotoliu scandinav
+Fauteuil suspendu (œuf) ¦ Fotoliu suspendat (ou)
+Pouf poire ¦ Fotoliu-sac
+Pouf capitonné ¦ Puf capitonat
+Repose-pieds ¦ Taburet pentru picioare
+Table basse en verre ¦ Măsuță de cafea din sticlă
+Bout de canapé ¦ Măsuță laterală
+Bibliothèque garnie de livres ¦ Bibliotecă plină de cărți
+Meuble à disques vinyles ¦ Mobilier pentru discuri de vinil
+Cheminée moderne à insert ¦ Șemineu modern cu focar închis
+Poêle à granulés ¦ Sobă pe peleți
+Porte-revues ¦ Suport de reviste
+Table d’échecs ¦ Masă de șah
+Billard ¦ Biliard
+Pare-feu de cheminée ¦ Paravan de șemineu
+Panier à bûches ¦ Coș de lemne
+Table de salle à manger (8 couverts) ¦ Masă de sufragerie (8 locuri)
+Table dressée pour un repas de famille ¦ Masă pusă pentru o masă de familie
+Table ronde à pied central ¦ Masă rotundă cu picior central
+Table à rallonges ouverte ¦ Masă extensibilă deschisă
+Chaise à barreaux (bistrot) ¦ Scaun de bistro
+Chaise rembourrée ¦ Scaun tapițat
+Chaise scandinave ¦ Scaun scandinav
+Chaise médaillon (Louis XVI) ¦ Scaun medalion (Louis XVI)
+Buffet scandinave sur pieds ¦ Bufet scandinav pe picioare
+Vitrine à vaisselle ¦ Vitrină de vase
+Banc de table ¦ Bancă de masă
+Desserte, chariot de service ¦ Cărucior de servire
+Candélabre à cinq branches ¦ Candelabru cu cinci brațe
+Coupe de fruits ¦ Fructieră
+Bouquet dans un vase ¦ Buchet într-o vază
+Piano de cuisson ¦ Mașină de gătit profesională
+Colonne de cuisine (four et micro-ondes) ¦ Coloană de bucătărie (cuptor și microunde)
+Évier timbre d’office (céramique) ¦ Chiuvetă de ceramică (timbre d’office)
+Suspension à casseroles ¦ Suport suspendat de cratițe
+Poubelle à pédale ¦ Coș de gunoi cu pedală
+Étagère à épices et bocaux ¦ Raft de condimente și borcane
+Desserte à roulettes de cuisine ¦ Cărucior de bucătărie
+Mange-debout ¦ Masă înaltă de bar
+Tabouret de bar ¦ Scaun de bar
+Table en formica (années 60) ¦ Masă din formica (anii ’60)
+Chaise en formica (années 60) ¦ Scaun din formica (anii ’60)
+Pots d’herbes aromatiques ¦ Ghivece cu plante aromatice
+Échelle à pain (suspendue) ¦ Raft de pâine suspendat
+Lit double moderne (140) ¦ Pat dublu modern (140)
+Lit king size (180) ¦ Pat king size (180)
+Lit simple moderne (90) ¦ Pat simplu modern (90)
+Lit mezzanine avec bureau ¦ Pat supraînălțat cu birou
+Futon, lit bas ¦ Futon, pat jos
+Table de chevet moderne ¦ Noptieră modernă
+Armoire à portes coulissantes (miroir) ¦ Dulap cu uși glisante (oglindă)
+Coiffeuse moderne à miroir rond ¦ Măsuță de toaletă modernă cu oglindă rotundă
+Valet de chambre ¦ Valet (suport de haine)
+Lit de fer à barreaux ¦ Pat de fier cu bare
+Chaise de nourrice (basse) ¦ Scaun de alăptat (jos)
+Baignoire d’angle ¦ Cadă de colț
+Baignoire îlot (moderne) ¦ Cadă independentă (modernă)
+Cabine de douche ¦ Cabină de duș
+Porte-serviettes sur pied ¦ Suport de prosoape pe picior
+Pèse-personne ¦ Cântar de baie
+Vasque à poser sur plan en bois ¦ Lavoar de pus pe blat de lemn
+WC à réservoir ¦ WC cu rezervor
+WC à chasse d’eau haute (à chaîne) ¦ WC cu rezervor sus (cu lanț)
+Armoire à pharmacie murale ¦ Dulăpior de medicamente de perete
+Colonne lave-linge et sèche-linge ¦ Coloană mașină de spălat și uscător
+Buanderie ¦ Spălătorie
+Planche à repasser et son fer ¦ Masă de călcat cu fierul ei
+Bac à laver (évier de buanderie) ¦ Chiuvetă de spălătorie
+Balai, seau et serpillière ¦ Mătură, găleată și mop
+Étagère à linge plié ¦ Raft pentru rufe împăturite
+Corbeille à linge en osier ¦ Coș de rufe din răchită
+Séchoir à linge (accordéon) ¦ Uscător de rufe pliabil
+Aspirateur traîneau ¦ Aspirator cu sac
+Aspirateur balai ¦ Aspirator vertical
+Essoreuse à rouleaux (ancienne) ¦ Storcător de rufe cu role (vechi)
+Machine à laver à manivelle (ancienne) ¦ Mașină de spălat cu manivelă (veche)
+Patère murale et manteaux ¦ Cuier de perete și paltoane
+Vestiaire d’entrée à miroir (ancien) ¦ Cuier de hol cu oglindă (vechi)
+Banc à chaussures ¦ Bancă de încălțăminte
+Console et miroir d’entrée ¦ Consolă și oglindă de hol
+Paillasson ¦ Preș
+Boîte à clés murale ¦ Cutie de chei de perete
+Boîte aux lettres sur pied ¦ Cutie poștală pe picior
+Ordinateur portable ¦ Laptop
+Ordinateur de bureau (écran, tour, clavier) ¦ Calculator de birou (ecran, unitate, tastatură)
+Minitel ¦ Minitel
+Téléphone à cadran ¦ Telefon cu disc
+Échelle de bibliothèque ¦ Scară de bibliotecă
+Tableau en liège (pense-bête) ¦ Panou de plută (notițe)
+Corbeille à papier ¦ Coș de hârtii
+Bureau assis-debout ¦ Birou reglabil (șezut-în picioare)
+Rayonnage d’archives (généalogie) ¦ Rafturi de arhivă (genealogie)
+Circuit de train électrique ¦ Machetă de tren electric
+Cubes empilés ¦ Cuburi stivuite
+Tricycle ¦ Tricicletă
+Cuisine pour enfant (dînette) ¦ Bucătărie de jucărie
+Théâtre de marionnettes (castelet) ¦ Teatru de păpuși
+Ballon ¦ Minge
+Trottinette ¦ Trotinetă
+Baby-foot ¦ Fotbal de masă
+Luge en bois ¦ Sanie de lemn
+Lit de fer d’enfant ¦ Pat de fier de copil
+Lampadaire à abat-jour ¦ Lampadar cu abajur
+Luminaires ¦ Corpuri de iluminat
+Lampadaire arc ¦ Lampadar arcuit
+Lampadaire trépied ¦ Lampadar trepied
+Lampe de salon (pied boule) ¦ Lampă de salon (picior-bilă)
+Lampe de banquier (verte) ¦ Lampă de bancher (verde)
+Lampe d’architecte ¦ Lampă de arhitect
+Suspension de cuisine ¦ Lustră de bucătărie
+Suspension à trois globes ¦ Lustră cu trei globuri
+Lustre à pampilles ¦ Candelabru cu cristale
+Suspension boule en papier ¦ Abajur-glob de hârtie
+Applique murale ¦ Aplică de perete
+Rail de spots ¦ Șină de spoturi
+Lanterne ¦ Felinar
+Bougies (groupe) ¦ Lumânări (grup)
+Guirlande lumineuse ¦ Ghirlandă luminoasă
+Lampe Tiffany (vitrail) ¦ Lampă Tiffany (vitraliu)
+Lampe à lave ¦ Lampă cu lavă
+Lampe champignon ¦ Lampă ciupercă
+Réverbère (lampadaire de jardin) ¦ Felinar stradal (lampadar de grădină)
+Lampe Pigeon ¦ Lampă Pigeon
+Mur de cadres photo ¦ Perete cu rame foto
+Cadre photo à poser ¦ Ramă foto de pus pe masă
+Tableau : paysage ¦ Tablou: peisaj
+Tableau : marine ¦ Tablou: marină
+Tableau abstrait ¦ Tablou abstract
+Tableau : nature morte ¦ Tablou: natură moartă
+Carte ancienne encadrée ¦ Hartă veche înrămată
+Papillons encadrés ¦ Fluturi înrămați
+Miroir rond ¦ Oglindă rotundă
+Miroir soleil ¦ Oglindă-soare
+Grand miroir doré (trumeau) ¦ Oglindă mare aurită (trumeau)
+Tapis persan ¦ Covor persan
+Tapis berbère ¦ Covor berber
+Tapis kilim ¦ Covor kilim
+Tapis de couloir ¦ Covor de hol
