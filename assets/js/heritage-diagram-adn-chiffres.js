@@ -12,7 +12,7 @@
  */
 (() => {
     'use strict';
-    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : s);
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : (v ? String(s).replace(/\{(\w+)\}/g, (m, k) => (k in v ? String(v[k]) : m)) : s));
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const R = ext.diagramRender; if (!R?.KINDS) return;
     const A = () => window.LCNDA_APP;
@@ -251,7 +251,7 @@
             const pts = g.d.map((d, k) => [labW + plotW * k / (n - 1), base - d / g.peak * H]);
             const c = one || (grad ? mix(c0, c1, gs.length > 1 ? i / (gs.length - 1) : 1) : pick(spec, g.i, g.color));
             const mean = g.vals.reduce((a, b) => a + b, 0) / g.vals.length;
-            svg += `<g${whoN(g.pids, `${g.name} — ${(A()?.plural || ((n, w) => `${n} ${w}`))(g.vals.length, 'personne')}`)}><path d="${smooth(pts)}L${r2(labW + plotW)} ${r2(base)}L${r2(labW)} ${r2(base)}Z" fill="${c}" fill-opacity="${op}" stroke="${o.bg === 'transparent' ? c : '#ffffff'}" stroke-width="1.4">${tip(i18n('{name} : {n}, médiane {med}, moyenne {mean}, de {min} à {max}', {name: g.name, n: plural(g.vals.length, 'valeur'), med: fmt(g.md) + u, mean: fmt(mean) + u, min: fmt(g.sorted[0]), max: fmt(g.sorted[g.sorted.length - 1]) + u}) + (g.pids.length ? ' ' + i18n('(clic : la liste)') : ''))}</path>`
+            svg += `<g${whoN(g.pids, `${g.name} — ${(A()?.plural || ((n, w) => `${n} ${w}${n > 1 ? 's' : ''}`))(g.vals.length, 'personne')}`)}><path d="${smooth(pts)}L${r2(labW + plotW)} ${r2(base)}L${r2(labW)} ${r2(base)}Z" fill="${c}" fill-opacity="${op}" stroke="${o.bg === 'transparent' ? c : '#ffffff'}" stroke-width="1.4">${tip(i18n('{name} : {n}, médiane {med}, moyenne {mean}, de {min} à {max}', {name: g.name, n: plural(g.vals.length, 'valeur'), med: fmt(g.md) + u, mean: fmt(mean) + u, min: fmt(g.sorted[0]), max: fmt(g.sorted[g.sorted.length - 1]) + u}) + (g.pids.length ? ' ' + i18n('(clic : la liste)') : ''))}</path>`
                 + `<path d="${smooth(pts)}" fill="none" stroke="${mix(c, '#000000', .35)}" stroke-width="1.2"/></g>`;
             if (o.median !== false) { const x = X(g.md), k = clamp(Math.round((g.md - lo) / (hi - lo) * (n - 1)), 0, n - 1), yTop = base - g.d[k] / g.peak * H; svg += `<line x1="${r2(x)}" y1="${r2(base)}" x2="${r2(x)}" y2="${r2(yTop)}" stroke="${contrast(c) === '#ffffff' ? '#ffffff' : '#1d1d1f'}" stroke-width="1.6" stroke-dasharray="3 2">${tip(i18n('{name} : médiane {v}', {name: g.name, v: fmt(g.md) + u}))}</line>`; }
             svg += T(labW - 6, base - fs * .45, cut(g.name, labW - 8, fs), {size: fs, anchor: 'end', weight: 600}) + (o.counts !== false ? T(labW - 6, base + fs * .45, `${fmt(g.vals.length, 0)}`, {size: fs * .7, anchor: 'end', op: .6}) : '');
@@ -522,7 +522,7 @@
         return {o: {title: i18n('Les métiers, siècle par siècle'), subtitle: i18n('largeur : nombre de personnes ; hauteur : part du métier')}, series: jobs.map(name => ({name})), rows: per.map(([label, v]) => { const row = {label}; v.forEach((x, j) => { row['s' + j] = x; }); return row; })}; };
     const sampleDot = () => ({o: {title: i18n('Âge moyen au décès'), subtitle: i18n('par commune de naissance, femmes et hommes'), unit: i18n('ans'), sort: 'desc'}, series: [{name: i18n('Femmes'), color: '#e15759'}, {name: i18n('Hommes'), color: '#4e79a7'}],
         rows: [['Rennes', 64, 58], ['Vitré', 61, 59], ['Fougères', 57, 55], ['Redon', 66, 60], ['Nantes', 59, 52], ['Saint-Malo', 63, 57], ['Laval', 60, 61], ['Angers', 62, 54]].map(([label, s0, s1]) => ({label, s0, s1}))});
-    const MONTHS = ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'];
+    const MONTHS = ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'].map(m => i18n(m)); // 🌐 mois abrégés de la langue choisie
     const sampleRose = () => ({o: {title: i18n('Les mois de la vie'), subtitle: i18n('naissances, mariages et décès')}, series: [{name: i18n('Naissances'), color: '#59a14f'}, {name: i18n('Mariages'), color: '#f28e2b'}, {name: i18n('Décès'), color: '#5f6b7a'}],
         rows: MONTHS.map((label, i) => ({label, s0: [42, 45, 51, 39, 33, 30, 28, 31, 36, 40, 38, 44][i], s1: [28, 34, 4, 9, 12, 16, 14, 10, 8, 11, 26, 3][i], s2: [38, 36, 34, 30, 26, 22, 24, 31, 35, 28, 30, 37][i]}))});
     const sampleMob = () => ({o: {title: i18n('Métier du père, métier du fils'), childWord: 'le fils', top: 8}, rows: [['Laboureur', 'Laboureur', 64], ['Laboureur', 'Journalier', 22], ['Laboureur', 'Tisserand', 9], ['Laboureur', 'Ouvrier', 14], ['Journalier', 'Journalier', 28], ['Journalier', 'Laboureur', 11], ['Journalier', 'Ouvrier', 19], ['Tisserand', 'Tisserand', 17],

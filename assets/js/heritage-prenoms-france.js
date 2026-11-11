@@ -13,14 +13,15 @@
     const S = () => A().state;
     const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
     const api = (...a) => A().api(...a);
-    const fmt = (n, d = 1) => n === null || n === undefined ? '—' : Number(n).toLocaleString('fr-FR', {maximumFractionDigits: d});
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s ?? '').replace(/\{(\w+)\}/g, (m, k) => (v && k in v ? v[k] : m))); // 🌐 docs/I18N.md
+    const fmt = (n, d = 1) => n === null || n === undefined ? '—' : (window.LCNDA_I18N && window.LCNDA_I18N.lang !== 'fr' ? window.LCNDA_I18N.fmtNumber(Number(n), {maximumFractionDigits: d}) : Number(n).toLocaleString('fr-FR', {maximumFractionDigits: d}));
     const plural = (n, w, p) => A().plural ? A().plural(n, w, p) : `${n} ${w}`;
     const ro = () => document.body.classList.contains('is-kiosk') || document.documentElement.classList.contains('ms-open');
     const KIND = {godparent: ['🎀', 'Parrain ou marraine', '#2a6fdb'], sibling: ['🕯', 'Frère ou sœur mort avant', '#8e44ad'], grandparent: ['👴', 'Grand-parent', '#2e8b57'],
         parent: ['👪', 'Père ou mère', '#c27c0e'], uncle: ['🧑‍🤝‍🧑', 'Oncle ou tante', '#d1495b'], saint: ['✶', 'Saint du jour', '#8a8f98'], manual: ['✎', 'Choisi à la main', '#1d1d1f'], none: ['·', 'Pas trouvé', '#c9ced6']};
     const LEVEL = {forte: 'green', moyenne: 'yellow', faible: 'grey'};
     const badge = (t, k, title = '') => UI()?.badge ? UI().badge(t, k, {title}) : `<span class="ui-badge is-${k}">${esc(t)}</span>`;
-    const confBadge = o => o.manual ? badge(o.manual === 'chosen' ? 'choisi à la main' : 'vérifié', 'green', 'Corrigé ou confirmé à la main') : badge('confiance ' + o.level, LEVEL[o.level] || 'grey', `Indice de confiance : ${o.score} sur 100`);
+    const confBadge = o => o.manual ? badge(i18n(o.manual === 'chosen' ? 'choisi à la main' : 'vérifié'), 'green', i18n('Corrigé ou confirmé à la main')) : badge(i18n({forte: 'confiance forte', moyenne: 'confiance moyenne', faible: 'confiance faible'}[o.level] || 'confiance ' + o.level), LEVEL[o.level] || 'grey', i18n('Indice de confiance : {n} sur 100', {n: o.score}));
     const SVG = spec => { try { return ext.diagramRender?.svg ? ext.diagramRender.svg(spec) : ''; } catch (e) { console.error(e); return ''; } };
 
     /* ── les deux statistiques, juste après « Moyennes de la famille » ── */
@@ -69,10 +70,10 @@
         const periods = d.periods || [];
         // le moteur commun : colonnes empilées, d’où vient le prénom, époque par époque
         const used = kinds.filter(k => periods.some(p => p[k] > 0));
-        const stack = periods.length ? SVG({kind: 'stacked', o: {title: 'D’où vient le prénom, par époque', unit: 'enfants', height: 260}, series: [...used, 'none'].map(k => ({name: KIND[k][1], color: KIND[k][2]})),
+        const stack = periods.length ? SVG({kind: 'stacked', o: {title: i18n('D’où vient le prénom, par époque'), unit: i18n('enfants'), height: 260}, series: [...used, 'none'].map(k => ({name: i18n(KIND[k][1]), color: KIND[k][2]})),
             rows: periods.map(p => { const r = {label: p.label}; [...used, 'none'].forEach((k, i) => { r['s' + i] = p[k] || 0; }); return r; })}) : '';
         const share = periods.filter(p => p.with_godparents > 0);
-        const shareSvg = share.length ? SVG({kind: 'columns', o: {title: 'Enfants qui portent le prénom de leur parrain ou marraine', unit: '%', height: 200, max: 100}, series: [{name: '% des enfants qui ont un parrain ou une marraine notés', color: KIND.godparent[2]}],
+        const shareSvg = share.length ? SVG({kind: 'columns', o: {title: i18n('Enfants qui portent le prénom de leur parrain ou marraine'), unit: '%', height: 200, max: 100}, series: [{name: i18n('% des enfants qui ont un parrain ou une marraine notés'), color: KIND.godparent[2]}],
             rows: share.map(p => ({label: p.label, s0: pct(p.named_godparent, p.with_godparents)}))}) : '';
         const rows = d.rows || [];
         const nameSel = `<label>Prénom <select data-pf-name><option value="">Tous les prénoms</option>${names.map(n => `<option value="${esc(n)}"${n === name ? ' selected' : ''}>${esc(n)}${d.names?.[n] ? ` (${d.names[n]})` : ''}</option>`).join('')}</select></label>`;
@@ -82,16 +83,16 @@
         A().$('#workspace').innerHTML = `<section class="page pf-page">${head}${filtersHtml(nameSel)}
             <div class="stats-stage pf-stage">
             ${d.total ? `<div class="pf-sum">
-                <div class="pf-tile"><b>${fmt(d.found, 0)}</b><span>${d.found > 1 ? 'prénoms expliqués' : 'prénom expliqué'} sur ${plural(d.total, 'enfant')}</span></div>
-                <div class="pf-tile"><b>${pct(d.named_godparent, d.with_godparents)} %</b><span>des enfants qui ont un parrain ou une marraine notés portent son prénom (${fmt(d.named_godparent, 0)} sur ${fmt(d.with_godparents, 0)})</span></div>
-                ${kinds.filter(k => d.by_kind?.[k]).map(k => `<div class="pf-tile is-kind"><b style="color:${KIND[k][2]}">${KIND[k][0]} ${fmt(d.by_kind[k], 0)}</b><span>${esc(KIND[k][1])}</span></div>`).join('')}</div>
+                <div class="pf-tile"><b>${fmt(d.found, 0)}</b><span>${i18n(d.found > 1 ? 'prénoms expliqués sur {n}' : 'prénom expliqué sur {n}', {n: plural(d.total, 'enfant')})}</span></div>
+                <div class="pf-tile"><b>${pct(d.named_godparent, d.with_godparents)} %</b><span>${i18n('des enfants qui ont un parrain ou une marraine notés portent son prénom ({n} sur {total})', {n: fmt(d.named_godparent, 0), total: fmt(d.with_godparents, 0)})}</span></div>
+                ${kinds.filter(k => d.by_kind?.[k]).map(k => `<div class="pf-tile is-kind"><b style="color:${KIND[k][2]}">${KIND[k][0]} ${fmt(d.by_kind[k], 0)}</b><span>${esc(i18n(KIND[k][1]))}</span></div>`).join('')}</div>
             <section class="pf-block"><h3>🌳 Les flèches de transmission</h3><p class="ui-hint">Une ligne par prénom, les années en travers : chaque flèche va de la personne qui transmet à l’enfant. Clique sur un rond pour ouvrir la fiche.</p>
                 <div class="pf-chains">${chainsSvg(rows, name)}</div>
-                <div class="pf-legend">${kinds.filter(k => rows.some(r => r.kind === k)).map(k => `<span><i style="background:${KIND[k][2]}"></i>${esc(KIND[k][1])}</span>`).join('')}</div></section>
+                <div class="pf-legend">${kinds.filter(k => rows.some(r => r.kind === k)).map(k => `<span><i style="background:${KIND[k][2]}"></i>${esc(i18n(KIND[k][1]))}</span>`).join('')}</div></section>
             <section class="pf-block pf-charts">${stack ? `<div>${stack}</div>` : ''}${shareSvg ? `<div>${shareSvg}</div>` : ''}</section>
             <section class="pf-block"><h3>Chaque enfant</h3><div data-pf-sortbar></div><div class="data-table-wrap"><table class="data-table pf-table"><thead><tr><th>Enfant</th><th>Prénom reçu de</th><th>Pourquoi</th><th>Confiance</th><th><span class="sr-only">Actions</span></th></tr></thead><tbody data-pf-tbody></tbody></table></div><div data-pf-more-rows></div>
-                ${d.truncated ? `<p class="ui-hint">La liste s’arrête à ${fmt(d.max_rows, 0)} enfants (les prénoms les plus transmis d’abord) ; les chiffres du haut comptent tout le monde. Choisis un prénom pour voir les autres.</p>` : ''}</section>`
-            : A().emptyState({icon: '👶', text: name ? `Aucun enfant prénommé ${name}` : 'Rien à comparer pour l’instant', hint: 'Il faut des enfants reliés à leurs parents (ou des parrains et marraines notés comme témoins « parrain », « marraine » de la naissance ou du baptême).'})}
+                ${d.truncated ? `<p class="ui-hint">${i18n('La liste s’arrête à {n} enfants (les prénoms les plus transmis d’abord) ; les chiffres du haut comptent tout le monde. Choisis un prénom pour voir les autres.', {n: fmt(d.max_rows, 0)})}</p>` : ''}</section>`
+            : A().emptyState({icon: '👶', text: name ? i18n('Aucun enfant prénommé {name}', {name}) : i18n('Rien à comparer pour l’instant'), hint: 'Il faut des enfants reliés à leurs parents (ou des parrains et marraines notés comme témoins « parrain », « marraine » de la naissance ou du baptême).'})}
             </div></section>`;
         const root = A().$('#workspace > .pf-page');
         A().bindGraphExportControls?.();
@@ -154,13 +155,13 @@
             });
             nodes.forEach(n => {
                 const x = X(n.y), y = cy + n.dy;
-                svg += `<g class="pf-node" data-pf-open="${n.id}" tabindex="0" role="button" aria-label="${esc(`${n.name} (${n.y}) : ouvrir la fiche`)}"><circle cx="${x.toFixed(1)}" cy="${y}" r="6" fill="var(--pf-node, #fff)" stroke="currentColor" stroke-width="1.6"/><title>${esc(`${n.name} (${n.y})`)}</title></g>`;
+                svg += `<g class="pf-node" data-pf-open="${n.id}" tabindex="0" role="button" aria-label="${esc(i18n('{name} ({year}) : ouvrir la fiche', {name: n.name, year: String(n.y)}))}"><circle cx="${x.toFixed(1)}" cy="${y}" r="6" fill="var(--pf-node, #fff)" stroke="currentColor" stroke-width="1.6"/><title>${esc(`${n.name} (${n.y})`)}</title></g>`;
             });
         });
         const markers = Object.entries(KIND).map(([k, v]) => `<marker id="pf-arrow-${k}" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="${v[2]}"/></marker>`).join('');
         const H = top + lanes.length * laneH + 6;
-        const more = !only && by.size > lanes.length ? `<p class="ui-hint">Les ${lanes.length} prénoms les plus transmis ; choisis un prénom dans « Prénom » pour le voir seul.</p>` : '';
-        return `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Flèches de transmission des prénoms" class="pf-chains-svg"><defs>${markers}</defs>${axis}${svg}</svg>${more}`;
+        const more = !only && by.size > lanes.length ? `<p class="ui-hint">${i18n('Les {n} prénoms les plus transmis ; choisis un prénom dans « Prénom » pour le voir seul.', {n: lanes.length})}</p>` : '';
+        return `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="${esc(i18n('Flèches de transmission des prénoms'))}" class="pf-chains-svg"><defs>${markers}</defs>${axis}${svg}</svg>${more}`;
     }
 
     /* ── corriger à la main : le même ⋯ sur la fiche et dans la liste ── */
@@ -176,17 +177,17 @@
     function originMenu(btn, child, info, after) {
         if (ro()) return;
         const o = info.origin, items = [];
-        if (o && !o.manual && o.id > 0) items.push({icon: '✓', label: 'C’est bien ça', help: 'Garder cette piste comme sûre', run: () => setOrigin(child, o.id, 'yes', `Prénom reçu de ${o.name} : confirmé.`, after)});
-        if (o) items.push({icon: '✕', label: 'Ce n’est pas ça', help: 'Écarter cette piste', run: () => setOrigin(child, o.id, o.manual === 'chosen' ? 'clear' : 'no', 'Piste écartée.', after)});
-        (info.others || []).slice(0, 3).forEach(x => items.push({icon: KIND[x.kind]?.[0] || '•', label: `Plutôt : ${x.rel.replace(/\s*\(.*$/, '')} ${x.id ? x.name : ''}`.trim(), help: x.rule, run: () => x.id > 0 ? setOrigin(child, x.id, 'yes', `Prénom reçu de ${x.name}.`, after) : setOrigin(child, o?.id || 0, 'no', 'Piste écartée.', after)}));
-        items.push({icon: '👤', label: 'Choisir la personne…', help: 'Celle dont il ou elle tient son prénom', run: async () => {
-            const it = await A().openPicker?.({kind: 'person', title: 'De qui tient-il son prénom ?'}); if (!it?.id) return;
-            if (Number(it.id) === Number(child)) { A().toast('Choisis une autre personne que l’enfant.', 'error'); return; }
-            setOrigin(child, Number(it.id), 'yes', `Prénom reçu de ${it.title || 'la personne choisie'}.`, after);
+        if (o && !o.manual && o.id > 0) items.push({icon: '✓', label: i18n('C’est bien ça'), help: i18n('Garder cette piste comme sûre'), run: () => setOrigin(child, o.id, 'yes', i18n('Prénom reçu de {name} : confirmé.', {name: o.name}), after)});
+        if (o) items.push({icon: '✕', label: i18n('Ce n’est pas ça'), help: i18n('Écarter cette piste'), run: () => setOrigin(child, o.id, o.manual === 'chosen' ? 'clear' : 'no', i18n('Piste écartée.'), after)});
+        (info.others || []).slice(0, 3).forEach(x => items.push({icon: KIND[x.kind]?.[0] || '•', label: i18n('Plutôt : {who}', {who: `${x.rel.replace(/\s*\(.*$/, '')} ${x.id ? x.name : ''}`.trim()}), help: x.rule, run: () => x.id > 0 ? setOrigin(child, x.id, 'yes', i18n('Prénom reçu de {name}.', {name: x.name}), after) : setOrigin(child, o?.id || 0, 'no', i18n('Piste écartée.'), after)}));
+        items.push({icon: '👤', label: i18n('Choisir la personne…'), help: i18n('Celle dont il ou elle tient son prénom'), run: async () => {
+            const it = await A().openPicker?.({kind: 'person', title: i18n('De qui tient-il son prénom ?')}); if (!it?.id) return;
+            if (Number(it.id) === Number(child)) { A().toast(i18n('Choisis une autre personne que l’enfant.'), 'error'); return; }
+            setOrigin(child, Number(it.id), 'yes', i18n('Prénom reçu de {name}.', {name: it.title || i18n('la personne choisie')}), after);
         }});
-        if (o?.manual || (info.rejected || []).length) items.push('-', {icon: '↺', label: 'Remettre comme au départ', help: 'Oublier les corrections à la main', run: () => setOrigin(child, 0, 'clear', 'Corrections oubliées : le calcul de l’app revient.', after)});
-        items.push('-', {icon: '↗', label: 'Voir la transmission de ce prénom', run: () => { const st = S(); st.graphMode = 'stats'; st.graphStatsType = 'name_transmission'; st.pfName = info.firstDisplay || ''; A().persistUiState?.(); A().setModule('graphiques'); }});
-        UI().menuAt(btn, items, {title: 'Prénom reçu de…'});
+        if (o?.manual || (info.rejected || []).length) items.push('-', {icon: '↺', label: i18n('Remettre comme au départ'), help: i18n('Oublier les corrections à la main'), run: () => setOrigin(child, 0, 'clear', i18n('Corrections oubliées : le calcul de l’app revient.'), after)});
+        items.push('-', {icon: '↗', label: i18n('Voir la transmission de ce prénom'), run: () => { const st = S(); st.graphMode = 'stats'; st.graphStatsType = 'name_transmission'; st.pfName = info.firstDisplay || ''; A().persistUiState?.(); A().setModule('graphiques'); }});
+        UI().menuAt(btn, items, {title: i18n('Prénom reçu de…')});
     }
 
     /* ── la fiche : « 👶 Prénom reçu de… » sous l’identité ── */
@@ -203,9 +204,9 @@
             const first = String(p.first_name).trim().split(/[\s,]+/)[0];
             info.firstDisplay = first.charAt(0).toUpperCase() + first.slice(1).toLowerCase();
             const who = o.id > 0 ? `<button type="button" class="link-button" data-pf-open="${o.id}">${esc(o.name)}</button>` : `<b>${esc(o.name)}</b>`;
-            const rel = o.kind === 'saint' ? 'saint du jour : ' : o.kind === 'manual' && o.rel === 'choisi à la main' ? '' : esc(o.rel.replace(/\s*\(.*$/, '').replace(/, mort.*$/, '')) + ' ';
+            const rel = o.kind === 'saint' ? i18n('saint du jour :') + ' ' : o.kind === 'manual' && o.rel === 'choisi à la main' ? '' : esc(o.rel.replace(/\s*\(.*$/, '').replace(/, mort.*$/, '')) + ' ';
             const line = document.createElement('div'); line.className = 'pf-line';
-            line.innerHTML = `<span class="pf-line-ico" aria-hidden="true">👶</span><span class="pf-line-text">Prénom reçu de ${rel}${who} ${confBadge(o)}<small class="ui-hint">${esc(o.rule)}${o.manual ? '' : ' · indice ' + o.score + ' sur 100'}</small></span>${ro() ? '' : '<button type="button" class="icon-button small" data-pf-more title="Plus d’actions" aria-label="Plus d’actions">⋯</button>'}`;
+            line.innerHTML = `<span class="pf-line-ico" aria-hidden="true">👶</span><span class="pf-line-text">${i18n('Prénom reçu de {who}', {who: rel + who})} ${confBadge(o)}<small class="ui-hint">${esc(o.rule)}${o.manual ? '' : ' · ' + i18n('indice {n} sur 100', {n: o.score})}</small></span>${ro() ? '' : '<button type="button" class="icon-button small" data-pf-more title="Plus d’actions" aria-label="Plus d’actions">⋯</button>'}`;
             const after = cardBody.querySelector('.person-saint') || cardBody.querySelector('.data-list');
             if (after) after.insertAdjacentElement('afterend', line); else cardBody.prepend(line);
             line.addEventListener('click', e => {
@@ -227,7 +228,7 @@
         const head = UI().pageHeader({where: 'Graphiques · Statistiques', title: 'Ta famille et l’histoire de France', icon: '📊',
             help: 'Les moyennes de ta famille à côté des moyennes françaises de la même époque (≈ : des ordres de grandeur, avec leur source). Une famille compte quelques dizaines d’actes : la comparaison se lit en gros. Sans les personnes en vie ni les fiches confidentielles.',
             actions: [A().graphExportToolbarHtml?.() || '']});
-        const sexName = {h: 'Hommes', f: 'Femmes', all: 'Tous'};
+        const sexName = {h: i18n('Hommes'), f: i18n('Femmes'), all: i18n('Tous')};
         const blocks = (d.indicators || []).filter(ind => ind.rows.length).map(ind => {
             const lines = [];
             ind.rows.forEach(r => {
@@ -236,21 +237,21 @@
                 // une espérance de vie sans détail par sexe en France : on compare à toute la famille
                 sx.forEach(s => lines.push({r, s, fr: r.france[s] || r.france.all, fam: r.family[s], n: r.n[s], ids: r.ids[s]}));
             });
-            const unit = ind.unit === '%' || ind.unit === '‰' ? ind.unit : ' ' + ind.unit;
-            const spec = {kind: 'dumbbell', o: {title: '', unit: ind.unit === 'ans' ? 'ans' : ind.unit, showGap: true, values: true}, series: [{name: 'Ta famille', color: '#d9480f'}, {name: 'France ≈', color: '#2a6fdb'}],
-                rows: lines.map(l => ({label: `${l.r.label}${l.s !== 'all' ? ' · ' + sexName[l.s] : ''}`, s0: l.fam === null || l.n < 1 ? '' : l.fam, s1: mid(l.fr)}))};
+            const unit = ind.unit === '%' || ind.unit === '‰' ? ind.unit : ' ' + i18n(ind.unit);
+            const spec = {kind: 'dumbbell', o: {title: '', unit: ind.unit === 'ans' ? i18n('ans') : ind.unit, showGap: true, values: true}, series: [{name: i18n('Ta famille'), color: '#d9480f'}, {name: i18n('France ≈'), color: '#2a6fdb'}],
+                rows: lines.map(l => ({label: `${i18n(l.r.label)}${l.s !== 'all' ? ' · ' + sexName[l.s] : ''}`, s0: l.fam === null || l.n < 1 ? '' : l.fam, s1: mid(l.fr)}))};
             const svg = lines.some(l => l.fam !== null) ? SVG(spec) : '';
-            return `<section class="pf-block ff-ind" data-ff-key="${esc(ind.key)}"><h3>${esc(ind.icon)} ${esc(ind.label)}</h3><p class="ui-hint">${esc(ind.family_text)}</p>
+            return `<section class="pf-block ff-ind" data-ff-key="${esc(ind.key)}"><h3>${esc(ind.icon)} ${esc(i18n(ind.label))}</h3><p class="ui-hint">${esc(i18n(ind.family_text))}</p>
                 ${svg ? `<div class="ff-chart">${svg}</div>` : ''}
                 <div class="data-table-wrap"><table class="data-table ff-table"><thead><tr><th>Époque</th><th>Ta famille</th><th>France</th><th>Source</th></tr></thead><tbody>${lines.map((l, i) => `<tr>
-                    <td>${esc(l.r.label)}${l.s !== 'all' ? ` · ${sexName[l.s]}` : ''}${l.r.who_text ? `<br><small class="muted">personnes ${esc(l.r.who_text)}</small>` : ''}</td>
-                    <td>${l.fam === null ? '<span class="muted">pas de données</span>' : `<b>${fmt(l.fam)}${unit}</b> ${(() => { const t = ind.key === 'infant' ? `${fmt(l.r.extra?.dead ?? l.ids.length, 0)} sur ${plural(l.n, 'naissance')}` : ind.key === 'farm' ? `${fmt(l.ids.length, 0)} sur ${plural(l.n, 'personne')}` : plural(l.n, ind.key === 'children' ? 'couple' : 'personne');
-                        return l.ids.length ? `<button type="button" class="link-button" data-ff-who="${esc(ind.key)}|${i}" title="Voir les personnes">${t}</button>` : `<small class="muted">(${t})</small>`; })()}${l.n > 0 && l.n < 10 ? ' <small class="muted" title="Moins de 10 : à lire avec prudence">⚠️ peu</small>' : ''}`}</td>
-                    <td>≈ ${range(l.fr)}${unit}</td><td><small>${esc(src[l.r.source]?.label?.split(',')[0] || l.r.source)}</small></td></tr>`).join('')}</tbody></table></div></section>`;
+                    <td>${esc(i18n(l.r.label))}${l.s !== 'all' ? ` · ${sexName[l.s]}` : ''}${l.r.who_text ? `<br><small class="muted">${esc(i18n('personnes {who}', {who: i18n(l.r.who_text)}))}</small>` : ''}</td>
+                    <td>${l.fam === null ? `<span class="muted">${i18n('pas de données')}</span>` : `<b>${fmt(l.fam)}${unit}</b> ${(() => { const t = ind.key === 'infant' ? i18n('{n} sur {total}', {n: fmt(l.r.extra?.dead ?? l.ids.length, 0), total: plural(l.n, 'naissance')}) : ind.key === 'farm' ? i18n('{n} sur {total}', {n: fmt(l.ids.length, 0), total: plural(l.n, 'personne')}) : plural(l.n, ind.key === 'children' ? 'couple' : 'personne');
+                        return l.ids.length ? `<button type="button" class="link-button" data-ff-who="${esc(ind.key)}|${i}" title="${esc(i18n('Voir les personnes'))}">${t}</button>` : `<small class="muted">(${t})</small>`; })()}${l.n > 0 && l.n < 10 ? ` <small class="muted" title="${esc(i18n('Moins de 10 : à lire avec prudence'))}">⚠️ ${i18n('peu')}</small>` : ''}`}</td>
+                    <td>≈ ${range(l.fr)}${unit}</td><td data-i18n-off><small>${esc(src[l.r.source]?.label?.split(',')[0] || l.r.source)}</small></td></tr>`).join('')}</tbody></table></div></section>`;
         });
         A().$('#workspace').innerHTML = `<section class="page pf-page ff-page">${head}${filtersHtml()}
-            <div class="stats-stage pf-stage">${blocks.length ? blocks.join('') : A().emptyState({icon: '📊', text: 'Aucune époque dans cette période', hint: 'Les repères français vont de 1686 à 1999 : élargis la période.'})}
-            <section class="pf-block ff-sources"><h3>📚 D’où viennent les chiffres de la France</h3><p class="ui-hint">${esc(d.note)}</p><ul>${[...used].filter(k => src[k]).map(k => `<li>${esc(src[k].label)}${src[k].url ? ` · <a href="${esc(src[k].url)}" target="_blank" rel="noopener noreferrer">${esc(new URL(src[k].url).hostname)} ↗</a>` : ''}</li>`).join('')}</ul></section></div></section>`;
+            <div class="stats-stage pf-stage">${blocks.length ? blocks.join('') : A().emptyState({icon: '📊', text: i18n('Aucune époque dans cette période'), hint: i18n('Les repères français vont de 1686 à 1999 : élargis la période.')})}
+            <section class="pf-block ff-sources"><h3>📚 D’où viennent les chiffres de la France</h3><p class="ui-hint">${esc(i18n(d.note))}</p><ul data-i18n-off>${[...used].filter(k => src[k]).map(k => `<li>${esc(src[k].label)}${src[k].url ? ` · <a href="${esc(src[k].url)}" target="_blank" rel="noopener noreferrer">${esc(new URL(src[k].url).hostname)} ↗</a>` : ''}</li>`).join('')}</ul></section></div></section>`;
         const root = A().$('#workspace > .ff-page');
         A().bindGraphExportControls?.();
         bindFilters(root, () => ext.graphStats.family_vs_france(++S().workspaceToken));
@@ -263,7 +264,7 @@
             try {
                 const res = await api('diagram_cartes2', {what: 'people', ids: ids.join(',')});
                 ext.whoDialog?.({eyebrow: 'TA FAMILLE ET LA FRANCE', label: `${ind.label} · ${l.r.label}${l.s !== 'all' ? ' · ' + sexName[l.s] : ''}`, n: ids.length, total: l.r.n[l.s] || ids.length, color: '#d9480f', res: {people: res.people || [], truncated: ids.length >= 400}, csvName: `${ind.label} ${l.r.label}`});
-            } catch (err) { A().toast(err.message || 'Lecture impossible.', 'error'); }
+            } catch (err) { A().toast(err.message || i18n('Lecture impossible.'), 'error'); }
         });
     };
 })();

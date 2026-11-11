@@ -213,8 +213,8 @@
         switch (c.type) {
             case 'rename': return `<label class="h-lot-wide">${i18n('Modèle du nom')}<input type="text" data-k="pattern" value="${esc(p.pattern)}" maxlength="200" spellcheck="false" aria-describedby="h-lot-tk-${c.id}"></label>
                 <div class="h-lot-tokens" id="h-lot-tk-${c.id}" role="group" aria-label="${esc(i18n('Ajouter au modèle'))}">${Bx.TOKENS.map(([t, l]) => `<button type="button" class="ui-badge is-date h-lot-token" data-token="${esc(t)}" title="${esc(i18n('Ajouter {t} au modèle', {t: esc(t)}))}">＋ ${esc(l)}</button>`).join('')}</div>
-                <label>Texte<input type="text" data-k="text" value="${esc(p.text)}" maxlength="80" placeholder="ex. mariage-1925"></label>
-                ${num('start', p.start, '', {label: i18n('Commencer à'), max: 999999})}${num('step', p.step, '', {label: 'De', min: 1, max: 1000})}${num('digits', p.digits, 'chiffres', {label: i18n('Séquence sur'), min: 1, max: 6})}
+                <label>Texte<input type="text" data-k="text" value="${esc(p.text)}" maxlength="80" placeholder="${esc(i18n('ex. mariage-1925'))}"></label>
+                ${num('start', p.start, '', {label: i18n('Commencer à'), max: 999999})}${num('step', p.step, '', {label: 'De', min: 1, max: 1000})}${num('digits', p.digits, i18n('chiffres'), {label: i18n('Séquence sur'), min: 1, max: 6})}
                 <label>${i18n('Chercher')}<input type="text" data-k="find" value="${esc(p.find)}" maxlength="80" placeholder="ex. IMG_"></label><label>${i18n('Remplacer par')}<input type="text" data-k="repl" value="${esc(p.repl)}" maxlength="80" placeholder="(rien)"></label>
                 <label>Lettres<select data-k="cas">${opt([['keep', i18n('Comme tapé')], ['upper', 'MAJUSCULES'], ['lower', 'minuscules'], ['title', i18n('Une Majuscule Par Mot')]], p.cas)}</select></label>
                 <label>Espaces<select data-k="spaces">${opt([['keep', i18n('Garder les espaces')], ['dash', i18n('Des tirets (-)')], ['under', i18n('Des soulignés (_)')]], p.spaces)}</select></label>
@@ -283,7 +283,7 @@
         const U = UI();
         // E4 : glisser-déposer, coller, choisir sur l'ordinateur
         const ACCEPT = 'image/*,.jpg,.jpeg,.png,.webp,.avif,.gif,.bmp,.docx,.odt,.rtf,.md,.txt,.html,.htm,.pdf,.xlsx,.ods,.csv,.tsv,.mp3,.wav,.ogg,.flac,.m4a,.aiff';
-        if (U?.dropZone) $('[data-lot-drop]').appendChild(U.dropZone({accept: ACCEPT, multiple: true, text: '', hint: i18n('Images, documents (Word, LibreOffice, RTF, Markdown, texte, page web, PDF), classeurs (Excel, LibreOffice, CSV) et sons.'), onFiles: fl => addFiles([...fl].map(fromFile))}));
+        if (U?.dropZone) $('[data-lot-drop]').appendChild(U.dropZone({accept: ACCEPT, multiple: true, text: window.LCNDA_I18N && window.LCNDA_I18N.lang !== 'fr' ? i18n('📁 Glisse ici les fichiers, colle-les (⌘V) ou choisis-les sur l’ordinateur') : '', hint: i18n('Images, documents (Word, LibreOffice, RTF, Markdown, texte, page web, PDF), classeurs (Excel, LibreOffice, CSV) et sons.'), onFiles: fl => addFiles([...fl].map(fromFile))}));
         // 💾 les recettes
         const builtinN = () => B().BUILTIN.length;
         const all = () => [...B().BUILTIN.map(b => ({name: i18n('{name} (prêt)', {name: b.name}), date: '', recipe: b.recipe, builtin: true})), ...userRecipes()];

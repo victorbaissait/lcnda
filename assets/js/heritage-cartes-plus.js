@@ -21,7 +21,9 @@
     const lsGet = (k, d) => { try { const v = JSON.parse(localStorage.getItem(k) || 'null'); return v ?? d; } catch (_) { return d; } };
     const lsSet = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (_) {} };
     const clamp = (v, a, b) => Math.max(a, Math.min(b, Number.isFinite(v) ? v : a));
-    const mo = n => n == null ? '' : n >= 1e6 ? `${(n / 1048576).toLocaleString('fr-FR', {maximumFractionDigits: 1})} Mo` : `${Math.max(1, Math.round(n / 1024)).toLocaleString('fr-FR')} Ko`;
+    const nfmt = (n, d = 0) => (window.LCNDA_I18N && window.LCNDA_I18N.lang !== 'fr' ? window.LCNDA_I18N.fmtNumber(n, {maximumFractionDigits: d}) : n.toLocaleString('fr-FR', {maximumFractionDigits: d}));
+    const chk = c => { const m = String(c || '').match(/^(\w+) publiée par (.+)$/); return m ? i18n('{type} publiée par {from}', {type: m[1], from: i18n(m[2])}) : String(c || ''); }; // 🌐 « sha256 publiée par … » (écrit par le serveur)
+    const mo = n => n == null ? '' : n >= 1e6 ? i18n('{n} Mo', {n: nfmt(n / 1048576, 1)}) : i18n('{n} Ko', {n: nfmt(Math.max(1, Math.round(n / 1024)))});
 
     /* ═════════ ⇆ Comparer deux époques ═════════ */
     const CMP_KEY = 'lcnda-map-compare';
@@ -65,9 +67,9 @@
             if (!p.on || !last) { layer.innerHTML = ''; layer.hidden = true; return; }
             layer.hidden = false;
             const {left, top, z, width: w, height: h} = last, a = o.baseBg ? o.baseBg() : 'light';
-            const bar = `<div class="cp-cmp-bar" role="group" aria-label="Comparer deux époques"><label>À droite <select data-cp-cmp-bg aria-label="Fond à comparer">${A().mapBackgroundSelectHtml(p.bg)}</select></label>
-                <div class="segmented" role="tablist" aria-label="Façon de comparer">${[['swipe', '▏ Trait'], ['side', '◫ Côte à côte'], ['fade', '◐ Transparence']].map(([k, l]) => `<button type="button" role="tab" class="${p.mode === k ? 'is-active' : ''}" aria-selected="${p.mode === k}" data-cp-cmp-mode="${k}">${l}</button>`).join('')}</div>
-                ${p.mode === 'fade' ? `<label class="cp-cmp-op">Transparence <input type="range" min="0" max="100" value="${p.opacity}" data-cp-cmp-op aria-label="Transparence du fond à comparer"><input type="number" min="0" max="100" value="${p.opacity}" data-unit="%" data-cp-cmp-opn aria-label="Transparence en %"></label>` : ''}
+            const bar = `<div class="cp-cmp-bar" role="group" aria-label="${esc(i18n('Comparer deux époques'))}"><label>${i18n('À droite')} <select data-cp-cmp-bg aria-label="${esc(i18n('Fond à comparer'))}">${A().mapBackgroundSelectHtml(p.bg)}</select></label>
+                <div class="segmented" role="tablist" aria-label="${esc(i18n('Façon de comparer'))}">${[['swipe', '▏ Trait'], ['side', '◫ Côte à côte'], ['fade', '◐ Transparence']].map(([k, l]) => `<button type="button" role="tab" class="${p.mode === k ? 'is-active' : ''}" aria-selected="${p.mode === k}" data-cp-cmp-mode="${k}">${esc(i18n(l))}</button>`).join('')}</div>
+                ${p.mode === 'fade' ? `<label class="cp-cmp-op">${i18n('Transparence')} <input type="range" min="0" max="100" value="${p.opacity}" data-cp-cmp-op aria-label="${esc(i18n('Transparence du fond à comparer'))}"><input type="number" min="0" max="100" value="${p.opacity}" data-unit="%" data-cp-cmp-opn aria-label="${esc(i18n('Transparence en %'))}"></label>` : ''}
                 <button type="button" class="icon-button small" data-cp-cmp-off aria-label="Fermer la comparaison" title="Fermer la comparaison">×</button></div>`;
             if (p.mode === 'side') {
                 const hw = Math.round(w / 2), l2 = left + w / 4;
@@ -76,7 +78,7 @@
             } else if (p.mode === 'fade') {
                 layer.innerHTML = `<div class="cp-cmp-b" style="opacity:${p.opacity / 100}">${tilesHtml(p.bg, left, top, z, w, h)}</div><span class="cp-cmp-tag is-b">${esc(bgName(p.bg))} · ${p.opacity} %</span>${bar}`;
             } else {
-                layer.innerHTML = `<div class="cp-cmp-b">${tilesHtml(p.bg, left, top, z, w, h)}</div><button type="button" class="cp-cmp-handle" role="slider" aria-label="Trait de comparaison : glisse-le, ou flèches gauche et droite" aria-valuemin="0" aria-valuemax="100" title="Glisse le trait (← →)"><i></i></button>
+                layer.innerHTML = `<div class="cp-cmp-b">${tilesHtml(p.bg, left, top, z, w, h)}</div><button type="button" class="cp-cmp-handle" role="slider" aria-label="${esc(i18n('Trait de comparaison : glisse-le, ou flèches gauche et droite'))}" aria-valuemin="0" aria-valuemax="100" title="${esc(i18n('Glisse le trait (← →)'))}"><i></i></button>
                     <span class="cp-cmp-tag is-a">◀ ${esc(bgName(a))}</span><span class="cp-cmp-tag is-b">${esc(bgName(p.bg))} ▶</span>${bar}`;
                 applyPos(p, w);
             }
@@ -164,7 +166,7 @@
         const G = new Map(), arcUse = new Map();
         topo.deps.forEach(d => {
             let k = layer === 'prov' ? look(PROV, d.code) || '' : look(D1790, d.code) || '', out = false;
-            if (!k) { k = layer === 'd1790' ? look(D1790_OUT, d.code) || d.name : d.name; out = true; }
+            if (!k) { k = layer === 'd1790' ? (look(D1790_OUT, d.code) ? i18n(look(D1790_OUT, d.code)) : d.name) : d.name; out = true; }
             if (layer === 'prov' && PROV_OUT.has(k)) out = true;
             const g = G.get(k) || {name: k, deps: [], out, area: 0, lx: 0, ly: 0}; g.deps.push(d);
             const w = d.rings.reduce((s, poly) => { const r = poly[0] || []; let a = 0; for (let i = 0, j = r.length - 1; i < r.length; j = i++) a += (r[j][0] + r[i][0]) * (r[j][1] - r[i][1]); return s + Math.abs(a / 2); }, 0);
@@ -177,7 +179,7 @@
         [...G.values()].sort((a, b) => (nb.get(b.name)?.size || 0) - (nb.get(a.name)?.size || 0)).forEach(g => {
             const used = new Set([...(nb.get(g.name) || [])].map(n => G.get(n)?.ci).filter(x => x !== undefined)); let ci = 0; while (used.has(ci)) ci++; g.ci = ci % LAYER_COLORS.length;
             g.color = g.out ? '#8a8f98' : LAYER_COLORS[g.ci]; g.label = g.area ? [g.lx / g.area, g.ly / g.area] : [0, 0];
-            g.note = layer === 'prov' ? PROV_NOTE[g.name] || '' : D1790_NOTE[g.name] || (g.out ? 'Pas en France en 1790.' : '');
+            g.note = i18n(layer === 'prov' ? PROV_NOTE[g.name] || '' : D1790_NOTE[g.name] || (g.out ? 'Pas en France en 1790.' : ''));
         });
         const inner = [], outer = [];
         arcUse.forEach((s, a) => { (s.size > 1 ? inner : outer).push(a); });
@@ -188,7 +190,7 @@
     function layerSvg(layer, P, z) {
         const {G, inner, outer} = groupsOf(layer), dash = layer === 'd1790' ? ' stroke-dasharray="7 4"' : '', ink = layer === 'prov' ? '#6b2c1f' : '#1f3d6b';
         let svg = `<g class="cp-fr-layer is-${layer}">`;
-        G.forEach(g => { svg += `<path class="cp-fr-zone" data-cp-zone="${esc(layer + '|' + g.name)}" d="${g.deps.map(d => pathOf(d.rings.flat(), P)).join('')}" fill="${g.color}" fill-opacity="${g.out ? .22 : .13}"><title>${esc(g.name)}${g.note ? ' — ' + esc(g.note) : ''} (approximatif)</title></path>`; });
+        G.forEach(g => { svg += `<path class="cp-fr-zone" data-cp-zone="${esc(layer + '|' + g.name)}" d="${g.deps.map(d => pathOf(d.rings.flat(), P)).join('')}" fill="${g.color}" fill-opacity="${g.out ? .22 : .13}"><title>${esc(g.name)}${g.note ? ' — ' + esc(g.note) : ''} ${esc(i18n('(approximatif)'))}</title></path>`; });
         svg += `<path d="${arcPath(inner, P)}" fill="none" stroke="${ink}" stroke-width="${z >= 8 ? 2.6 : 1.8}" stroke-opacity=".85"${dash} stroke-linejoin="round" pointer-events="none"/>`;
         svg += `<path d="${arcPath(outer, P)}" fill="none" stroke="${ink}" stroke-width="1" stroke-opacity=".45" pointer-events="none"/>`;
         const fs = clamp(9 + (z - 5) * 2.2, 9, 20);
@@ -207,12 +209,12 @@
             return true;
         } catch (_) { gone.busy = false; return false; }
     }
-    const fmtDate = d => { const m = String(d || '').match(/^(\d{4})-(\d{2})-(\d{2})/); if (!m) return String(d || ''); const mois = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'][Number(m[2]) - 1]; return `${Number(m[3]) === 1 ? '1er' : Number(m[3])} ${mois} ${m[1]}`; };
+    const fmtDate = d => { const m = String(d || '').match(/^(\d{4})-(\d{2})-(\d{2})/); if (!m) return String(d || ''); if (window.LCNDA_I18N && window.LCNDA_I18N.lang !== 'fr') return window.LCNDA_I18N.fmtDate(new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3])), {day: 'numeric', month: 'long', year: 'numeric'}); const mois = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'][Number(m[2]) - 1]; return `${Number(m[3]) === 1 ? '1er' : Number(m[3])} ${mois} ${m[1]}`; };
     const MODS = {30: 'supprimée (partagée entre ses voisines)', 31: 'fusionnée', 32: 'réunie en commune nouvelle', 33: 'fusionnée (fusion-association)', 34: 'fusionnée', 10: 'renommée'};
     /** la bulle d'une commune ancienne : « Puy-d'Essai — fusionnée le 1er janvier 1973 ; aujourd'hui : Naves (19146) » */
     function goneHtml(r) {
         const what = r.k === 'rename' ? i18n('renommée « {name} » le {date}', {name: esc(r.tn), date: fmtDate(r.d)}) : `${i18n('{what} le {date}', {what: i18n(MODS[r.m] || 'disparue'), date: fmtDate(r.d)})}${r.tn && r.tn !== r.nn ? ` ${i18n('dans {name}', {name: esc(r.tn)})}` : ''}${r.as ? ` ${i18n('(devenue commune {name})', {name: esc(r.as)})}` : ''}`;
-        return `<b>🏚 ${esc(r.n)}</b> <small class="muted">(${esc(r.c)})</small><p>${what}.</p><p>${i18n('Aujourd’hui : <b>{name}</b>', {name: esc(r.nn || r.tn)})} <small class="muted">(${esc(r.nc || r.tc)})</small>${r.back ? `<br>${i18n('Rétablie le {date}.', {date: fmtDate(r.back)})}` : ''}</p>${r.approx ? '<p class="ui-hint">Position approximative : le centre de la commune d’aujourd’hui.</p>' : ''}<p class="ui-hint">Source : INSEE, Code officiel géographique (depuis 1943).</p>`;
+        return `<b>🏚 ${esc(r.n)}</b> <small class="muted">(${esc(r.c)})</small><p>${what}.</p><p>${i18n('Aujourd’hui : <b>{name}</b>', {name: esc(r.nn || r.tn)})} <small class="muted">(${esc(r.nc || r.tc)})</small>${r.back ? `<br>${i18n('Rétablie le {date}.', {date: fmtDate(r.back)})}` : ''}</p>${r.approx ? `<p class="ui-hint">${i18n('Position approximative : le centre de la commune d’aujourd’hui.')}</p>` : ''}<p class="ui-hint">${i18n('Source : INSEE, Code officiel géographique (depuis 1943).')}</p>`;
     }
     let pop = null;
     const closePop = () => { pop?.remove(); pop = null; };
@@ -233,22 +235,22 @@
         stage.insertBefore(svg, document.getElementById('map-route-layer') || document.getElementById('map-overlay') || null);
         const ctl = document.createElement('span'); ctl.className = 'cp-fr-ctl';
         const p = frPrefs(), on = p.prov || p.d1790 || p.gone;
-        ctl.innerHTML = `<button type="button" class="button small secondary${on ? ' is-active' : ''}" data-cp-fr aria-haspopup="true" aria-expanded="false" title="Provinces, départements de 1790, communes disparues">🏛 Frontières ▾</button>`;
+        ctl.innerHTML = `<button type="button" class="button small secondary${on ? ' is-active' : ''}" data-cp-fr aria-haspopup="true" aria-expanded="false" title="${esc(i18n('Provinces, départements de 1790, communes disparues'))}">🏛 ${i18n('Frontières')} ▾</button>`;
         strip.insertBefore(ctl, strip.querySelector('.spacer') || null);
         ctl.querySelector('[data-cp-fr]').addEventListener('click', e => { e.stopPropagation(); openFrMenu(e.currentTarget); });
         stage.addEventListener('click', e => {
             const z = e.target.closest?.('[data-cp-zone]'), g = e.target.closest?.('[data-cp-gone]'), r = stage.getBoundingClientRect();
             if (g) { const it = gone.items.find(x => `${x.c}|${x.d}` === g.dataset.cpGone); if (it) popAt(stage, e.clientX - r.left, e.clientY - r.top, goneHtml(it)); return; }
             if (z && !e.target.closest('.map-marker')) { const [layer, name] = z.dataset.cpZone.split('|'); const gr = groupsOf(layer).G.get(name);
-                popAt(stage, e.clientX - r.left, e.clientY - r.top, `<b>${layer === 'prov' ? '🏛 Province' : '🏛 Département de 1790'} : ${esc(name)}</b>${gr?.note ? `<p>${esc(gr.note)}</p>` : ''}<p class="ui-hint">Tracé approximatif, d’après les départements d’aujourd’hui${gr ? ` (${gr.deps.map(d => esc(d.code)).join(', ')})` : ''}.</p>`); }
+                popAt(stage, e.clientX - r.left, e.clientY - r.top, `<b>${i18n(layer === 'prov' ? '🏛 Province : {name}' : '🏛 Département de 1790 : {name}', {name: esc(name)})}</b>${gr?.note ? `<p>${esc(gr.note)}</p>` : ''}<p class="ui-hint">${gr ? i18n('Tracé approximatif, d’après les départements d’aujourd’hui ({list}).', {list: gr.deps.map(d => esc(d.code)).join(', ')}) : i18n('Tracé approximatif, d’après les départements d’aujourd’hui.')}</p>`); }
         });
         stage.addEventListener('keydown', e => { if (e.key === 'Escape' && pop) { e.stopPropagation(); closePop(); } });
         if (p.prov || p.d1790) loadTopo().then(() => A().drawMap?.()).catch(() => {});
     });
     function openFrMenu(btn) {
         const p = frPrefs(); const old = document.querySelector('body > .cp-fr-menu'); if (old) { old.remove(); btn.setAttribute('aria-expanded', 'false'); if (old._btn === btn) return; }
-        const menu = document.createElement('div'); menu.className = 'cp-fr-menu'; menu.setAttribute('role', 'group'); menu.setAttribute('aria-label', 'Frontières anciennes');
-        const C = (k, label, sub) => `<label class="checkbox-line"><input type="checkbox" data-cp-fr-k="${k}" ${p[k] ? 'checked' : ''}> <span>${esc(label)}${sub ? `<small class="ui-hint">${esc(sub)}</small>` : ''}</span></label>`;
+        const menu = document.createElement('div'); menu.className = 'cp-fr-menu'; menu.setAttribute('role', 'group'); menu.setAttribute('aria-label', i18n('Frontières anciennes'));
+        const C = (k, label, sub) => `<label class="checkbox-line"><input type="checkbox" data-cp-fr-k="${k}" ${p[k] ? 'checked' : ''}> <span>${esc(i18n(label))}${sub ? `<small class="ui-hint">${esc(i18n(sub))}</small>` : ''}</span></label>`;
         menu.innerHTML = `<b>🏛 Frontières anciennes</b>${C('prov', 'Provinces d’Ancien Régime (≈ 1789)', 'Approximatif : d’après les départements d’aujourd’hui.')}${C('d1790', 'Départements de 1790', 'Les 83 départements, noms d’alors ; approximatif.')}
             ${C('gone', 'Communes disparues ou fusionnées', 'Depuis 1943 (INSEE). Zoome sur une région.')}${C('renames', 'Avec les communes renommées', '')}
             <p class="ui-hint" data-cp-fr-dl hidden>Les communes disparues se téléchargent une fois : <button type="button" class="link-button" data-cp-fr-go>Réglages → Frontières anciennes ↗</button></p>`;
@@ -286,7 +288,7 @@
         const need = p.gone && (z < 8 || gone.installed === false);
         let h = stage.querySelector('.cp-fr-hint');
         if (need && !h) { h = document.createElement('div'); h.className = 'cp-fr-hint'; stage.appendChild(h); }
-        if (h) { h.hidden = !need; h.textContent = gone.installed === false ? '🏚 Communes disparues : à télécharger une fois (Réglages → 🏛 Frontières anciennes).' : '🏚 Zoome sur une région pour voir les communes disparues.'; }
+        if (h) { h.hidden = !need; h.textContent = i18n(gone.installed === false ? '🏚 Communes disparues : à télécharger une fois (Réglages → 🏛 Frontières anciennes).' : '🏚 Zoome sur une région pour voir les communes disparues.'); }
     });
     // clavier sur une commune disparue : Entrée ouvre la bulle
     document.addEventListener('keydown', e => { if ((e.key === 'Enter' || e.key === ' ') && e.target.closest?.('[data-cp-gone]')) { e.preventDefault(); const st = document.getElementById('map-stage'), b = e.target.getBoundingClientRect(), r = st.getBoundingClientRect(); const it = gone.items.find(x => `${x.c}|${x.d}` === e.target.closest('[data-cp-gone]').dataset.cpGone); if (it) popAt(st, b.left - r.left, b.top - r.top, goneHtml(it)); } });
@@ -299,7 +301,7 @@
         let st = {}; try { st = await A().api('frontieres_status'); } catch (e) { st = {error: e.message}; }
         if (token !== undefined && token !== S().workspaceToken) return;
         const files = st.files || [];
-        const rows = files.map(f => `<div class="cp-set-row"><span><b>${esc(f.label)}</b><small>${f.installed ? `${mo(f.size)} (${Number(f.size).toLocaleString('fr-FR')} octets) · empreinte sha256 ${esc(f.sha256.slice(0, 12))}… · vérifié : ${esc(f.checked)}` : 'Pas encore téléchargé'}</small>${f.installed && f.date && UI().when ? `<small>${UI().when(f.date, {label: 'Téléchargé'})}</small>` : ''}</span>${UI().badge(f.installed ? 'Installé' : 'Pas installé', f.installed ? 'green' : 'grey')}</div>`).join('');
+        const rows = files.map(f => `<div class="cp-set-row"><span><b>${esc(i18n(f.label))}</b><small>${f.installed ? i18n('{size} ({bytes} octets) · empreinte sha256 {hash}… · vérifié : {when}', {size: mo(f.size), bytes: nfmt(Number(f.size)), hash: esc(f.sha256.slice(0, 12)), when: esc(chk(f.checked))}) : i18n('Pas encore téléchargé')}</small>${f.installed && f.date && UI().when ? `<small>${UI().when(f.date, {label: i18n('Téléchargé')})}</small>` : ''}</span>${UI().badge(i18n(f.installed ? 'Installé' : 'Pas installé'), f.installed ? 'green' : 'grey')}</div>`).join('');
         ws.innerHTML = `<section class="page cp-settings">${UI().pageHeader({where: 'Réglages · Cartes', title: 'Frontières anciennes', help: 'Provinces, départements de 1790 et communes disparues, sur la Carte (bouton « 🏛 Frontières »).',
                 actions: ['<button type="button" class="button" data-cp-open-map>↗ Voir sur la Carte</button>']})}
             ${st.error ? UI().notice('error', st.error) : ''}
@@ -312,29 +314,29 @@
                 <p class="ui-hint" data-cp-remote></p>
                 <p class="ui-hint">${esc(st.licence || '')}. ${i18n('Rangé dans le {name}, commun à toutes tes généalogies.', {name: esc(i18n(st.dir_label || 'dossier des données'))})}</p></section>
             <section class="maintenance-panel"><h3>🏛 Provinces (≈ 1789) et départements de 1790</h3>
-                <p>Livrés avec l’app : rien à télécharger. Ce sont des tracés <b>approximatifs</b>, faits d’après les départements d’aujourd’hui (chaque département rangé dans la province qui en couvre la plus grande partie). Aucune source libre et officielle de leurs vrais contours n’a été trouvée.</p></section>
+                <p>${i18n('Livrés avec l’app : rien à télécharger. Ce sont des tracés <b>approximatifs</b>, faits d’après les départements d’aujourd’hui (chaque département rangé dans la province qui en couvre la plus grande partie). Aucune source libre et officielle de leurs vrais contours n’a été trouvée.')}</p></section>
         </section>`;
         ws.querySelector('[data-cp-open-map]').addEventListener('click', () => { lsSet(FR_KEY, {...frPrefs(), prov: true}); A().setModule?.('carte'); });
         const sz = ws.querySelector('[data-cp-size]'), info = ws.querySelector('[data-cp-remote]');
         A().api('frontieres_remote').then(r => {
-            if (sz) sz.textContent = r.total != null ? `(${mo(r.total)})` : '(taille inconnue)';
-            if (info) info.textContent = (r.files || []).map(f => `${f.label} : ${f.size != null ? mo(f.size) : 'taille inconnue'} (${f.from})`).join(' · ');
+            if (sz) sz.textContent = r.total != null ? `(${mo(r.total)})` : `(${i18n('taille inconnue')})`;
+            if (info) info.textContent = (r.files || []).map(f => `${i18n(f.label)} : ${f.size != null ? mo(f.size) : i18n('taille inconnue')} (${i18n(f.from)})`).join(' · ');
         }).catch(e => { if (sz) sz.textContent = ''; if (info) info.textContent = i18n('Adresse de téléchargement injoignable pour l’instant ({err}).', {err: e.message || i18n('pas d’Internet')}); });
         ws.querySelector('[data-cp-dl]')?.addEventListener('click', async e => {
-            const b = e.currentTarget; b.disabled = true; const t = b.innerHTML; b.innerHTML = UI().spinner('Téléchargement et vérification…', {inline: true});
+            const b = e.currentTarget; b.disabled = true; const t = b.innerHTML; b.innerHTML = UI().spinner(i18n('Téléchargement et vérification…'), {inline: true});
             try {
                 const r = await A().api('frontieres_download', {}, {method: 'POST', body: {}});
                 A().toast(i18n('✓ Frontières anciennes installées : {n}.', {n: A().plural(r.gone || 0, 'commune disparue', 'communes disparues')}), 'success');
                 gone = {key: '', items: [], total: 0, busy: false, installed: null};
                 ext.maintenance.frontieres(++S().workspaceToken);
-            } catch (err) { b.disabled = false; b.innerHTML = t; A().toast(err.message || 'Téléchargement impossible.', 'error'); }
+            } catch (err) { b.disabled = false; b.innerHTML = t; A().toast(err.message || i18n('Téléchargement impossible.'), 'error'); }
         });
         ws.querySelector('[data-cp-rm]')?.addEventListener('click', async () => {
             try {
                 await A().api('frontieres_remove', {}, {method: 'POST', body: {}});
                 gone = {key: '', items: [], total: 0, busy: false, installed: null};
                 const again = () => { if (S().module === 'maintenance' && S().maintenanceTab === 'frontieres') ext.maintenance.frontieres(++S().workspaceToken); };
-                A().undoToast('Frontières anciennes retirées', {undo: async () => { await A().api('frontieres_restore', {}, {method: 'POST', body: {}}); again(); }, redo: async () => { await A().api('frontieres_remove', {}, {method: 'POST', body: {}}); again(); }});
+                A().undoToast(i18n('Frontières anciennes retirées'), {undo: async () => { await A().api('frontieres_restore', {}, {method: 'POST', body: {}}); again(); }, redo: async () => { await A().api('frontieres_remove', {}, {method: 'POST', body: {}}); again(); }});
                 again();
             } catch (err) { A().toast(err.message, 'error'); }
         });

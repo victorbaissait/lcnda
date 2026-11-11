@@ -354,7 +354,7 @@
     function styleSec(spec) {
         const o = spec.o || {}, cur = o.style || (defStyle ? 'default' : ''), pal = Array.isArray(o.colors) && o.colors.length ? o.colors : (defStyle?.v?.colors && !o.style ? defStyle.v.colors : (R().PALETTES[o.palette] || R().PALETTES.vive).slice(0, 8));
         const all = styles();
-        const cards = all.map(s => `<button type="button" class="h-dgp-card${cur === s.id ? ' is-active' : ''}" data-dgp-style="${esc(s.id)}" title="${esc(s.help || 'Mon style')}">${swatches(s.v.colors)}<b${s.v.font ? ` style="font-family:'${esc(s.v.font)}'"` : ''}>${esc(s.name)}</b>${defStyle && defStyle.id === s.id ? '<small>⭐ par défaut</small>' : ''}</button>`).join('');
+        const cards = all.map(s => `<button type="button" class="h-dgp-card${cur === s.id ? ' is-active' : ''}" data-dgp-style="${esc(s.id)}" title="${esc(s.help || 'Mon style')}">${swatches(s.v.colors)}<b${s.v.font ? ` style="font-family:'${esc(s.v.font)}'"` : ''}>${esc(s.ready ? i18n(s.name) : s.name)}</b>${defStyle && defStyle.id === s.id ? '<small>⭐ par défaut</small>' : ''}</button>`).join('');
         const v = k => o[k] ?? (!o.style && defStyle ? defStyle.v[k] : undefined);
         return `<div class="h-dgp-cards">${cards}<button type="button" class="h-dgp-card${cur === 'none' ? ' is-active' : ''}" data-dgp-style="none" title="Les couleurs et réglages du type, comme avant"><span class="h-dgp-sw"></span><b>Comme avant</b></button></div>
             <div class="h-dgp-grid">

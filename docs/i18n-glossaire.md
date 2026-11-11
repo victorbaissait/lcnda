@@ -598,3 +598,22 @@ Les noms par défaut des joueurs (« Toi », « Nord »…) sont écrits dans la
 | paquet de modifications | change package | paquete de cambios | Änderungspaket | pacchetto di modifiche | pacote de alterações | paczka zmian | wijzigingspakket |
 | brevet | patent | patente | Patent | brevetto | patente | patent | octrooi |
 | ménage (recensement) | household | hogar | Haushalt | nucleo | agregado | gospodarstwo | huishouden |
+
+## Zone « reste2 » (🧬 ADN, 👤 Visages, 🔍 Comparer deux photos, 🧭 outils de la Carte, 🏛 Frontières anciennes, 👶 prénoms)
+
+| Français | English | Español | Deutsch | Italiano | Português | Polski | Nederlands |
+|---|---|---|---|---|---|---|---|
+| grappe (ADN) | cluster | grupo | Cluster | cluster | grupo | klaster | cluster |
+| correspondances en commun | shared matches | coincidencias en común | gemeinsame Übereinstimmungen | corrispondenze in comune | correspondências em comum | wspólne dopasowania | gedeelde matches |
+| méthode de Leeds | Leeds method | método Leeds | Leeds-Methode | metodo Leeds | método de Leeds | metoda Leeds | Leeds-methode |
+| navigateur de chromosomes | chromosome browser | navegador de cromosomas | Chromosomen-Browser | browser dei cromosomi | navegador de cromossomas | przeglądarka chromosomów | chromosoombrowser |
+| couche (Mes couches) | layer | capa | Ebene | livello | camada | warstwa | laag |
+| à vol d’oiseau | as the crow flies | en línea recta | Luftlinie | in linea d’aria | em linha reta | w linii prostej | hemelsbreed |
+| détour (route) | detour | rodeo | Umweg | deviazione | desvio | objazd | omweg |
+| commune disparue | vanished municipality | municipio desaparecido | verschwundene Gemeinde | comune scomparso | município desaparecido | zniknięta gmina | verdwenen gemeente |
+| département de 1790 | 1790 département | departamento de 1790 | Département von 1790 | dipartimento del 1790 | departamento de 1790 | departament z 1790 r. | departement van 1790 |
+| piste (origine d’un prénom) | lead | pista | Spur | pista | pista | trop | spoor |
+
+Les textes du moteur des trajets (`app-cartes-outils-core.js`, resté en français pour Node et ses tests) sont refaits dans la
+langue choisie par `heritage-cartes-outils.js` (`durT`, `kmT`, `sentenceT`) ; en français, ceux du moteur s’affichent tels quels.
+Noms des provinces et des départements de 1790, sociétés de test, titres des sources (Légifrance, INSEE…) : des noms propres, non traduits.
