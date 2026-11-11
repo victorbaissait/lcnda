@@ -1319,7 +1319,7 @@
  "🎓 {a} : {w} semaines d’apprentissage auprès de {m} — {ico} ×{n}.": "🎓 {a}: {w} ukers læretid hos {m} — {ico} ×{n}.",
  "🎓 {a} : 1 semaine d’apprentissage auprès de {m} — {ico} ×{n}.": "🎓 {a}: 1 ukes læretid hos {m} — {ico} ×{n}.",
  "🎓 {a} devient l’apprenti·e de {m} : {ico} {skill}.": "🎓 {a} blir lærlingen til {m}: {ico} {skill}.",
- "🎓 {a} en sait maintenant autant que {m} : {skill}, c’est son métier.": "🎓 {a} kan nå like mye som {m}: {skill} er faget til {a}.",
+ "🎓 {a} en sait maintenant autant que {m} : {skill}, c’est son métier.": "🎓 {a} kan nå like mye som {m}: {skill} er faget hans eller hennes.",
  "🎓 {name} forme un·e apprenti·e": "🎓 {name} lærer opp en lærling",
  "🎓 apprenti·e de {name}": "🎓 lærling hos {name}",
  "🎓 Diplômes et formation": "🎓 Vitnemål og utdanning",

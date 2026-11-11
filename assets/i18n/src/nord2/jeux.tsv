@@ -2740,7 +2740,7 @@ Choisis un maître et un apprenti. ¦ Vyber majstra a učňa. ¦ Velg en mester 
 🎓 {a} devient l’apprenti·e de {m} : {ico} {skill}. ¦ 🎓 {a} sa stáva učňom osoby {m}: {ico} {skill}. ¦ 🎓 {a} blir lærlingen til {m}: {ico} {skill}.
 {name} m’apprend son métier. Je veux être à la hauteur. ¦ {name} ma učí svojmu remeslu. Chcem obstáť. ¦ {name} lærer meg faget sitt. Jeg vil leve opp til det.
 J’ai pris {name} comme apprenti·e. ¦ Vzal(a) som si {name} do učenia. ¦ Jeg har tatt {name} i lære.
-🎓 {a} en sait maintenant autant que {m} : {skill}, c’est son métier. ¦ 🎓 {a} teraz vie rovnako veľa ako {m}: {skill} je jeho/jej remeslo. ¦ 🎓 {a} kan nå like mye som {m}: {skill} er faget til {a}.
+🎓 {a} en sait maintenant autant que {m} : {skill}, c’est son métier. ¦ 🎓 {a} teraz vie rovnako veľa ako {m}: {skill} je jeho/jej remeslo. ¦ 🎓 {a} kan nå like mye som {m}: {skill} er faget hans eller hennes.
 {name} dit que je n’ai plus rien à apprendre de lui ou d’elle. ¦ {name} hovorí, že sa od neho/nej už nemám čo naučiť. ¦ {name} sier at jeg ikke har mer å lære av vedkommende.
 📜 {m} n’est plus, mais son savoir reste chez {a} : {skill} ×{n}. ¦ 📜 {m} už tu nie je, ale jeho/jej vedomosti zostávajú u {a}: {skill} ×{n}. ¦ 📜 {m} er borte, men kunnskapen lever videre hos {a}: {skill} ×{n}.
 {name} est parti·e. Je continuerai ce qu’il ou elle m’a appris. ¦ {name} odišiel/odišla. Budem pokračovať v tom, čo ma naučil(a). ¦ {name} er borte. Jeg fører videre det vedkommende lærte meg.
