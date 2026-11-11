@@ -1470,3 +1470,224 @@ Molette : zoomer · glisser : déplacer · Maj + glisser : tracer un cadre ¦ Ko
 pas encore utilisée ¦ zatím nepoužito ¦ inte använd än ¦ ikke brugt endnu
 Les migrations de ton arbre ¦ Stěhování v tvém rodokmenu ¦ Flyttningarna i ditt släktträd ¦ Flytningerne i dit slægtstræ
 Les lieux de ton arbre ¦ Místa tvého rodokmenu ¦ Orterna i ditt släktträd ¦ Stederne i dit slægtstræ
+Chaque lieu de ta base devient un rond, plus gros quand plus de personnes y sont nées (mariées, décédées). Les lieux avec des coordonnées sont placés exactement ; les autres sont cherchés par leur nom sur la carte. Le tableau est remplacé. ¦ Každé místo z tvé databáze se stane kruhem, tím větším, čím víc osob se tam narodilo (uzavřelo sňatek, zemřelo). Místa se souřadnicemi se umístí přesně; ostatní se hledají na mapě podle názvu. Tabulka se nahradí. ¦ Varje ort i din databas blir en cirkel, större ju fler personer som föddes (gifte sig, dog) där. Orter med koordinater placeras exakt; de andra söks upp efter namn på kartan. Tabellen ersätts. ¦ Hvert sted i din database bliver en cirkel, større jo flere personer der er født (gift, døde) der. Steder med koordinater placeres præcist; de andre søges efter navn på kortet. Tabellen erstattes.
+Chaque personne relie deux lieux de ta base (ceux qui ont des coordonnées, ou une zone de la carte reconnue). Le tableau est remplacé. ¦ Každá osoba spojuje dvě místa z tvé databáze (ta se souřadnicemi nebo rozpoznanou oblast mapy). Tabulka se nahradí. ¦ Varje person förbinder två orter i din databas (de med koordinater, eller ett igenkänt område på kartan). Tabellen ersätts. ¦ Hver person forbinder to steder i din database (dem med koordinater eller et genkendt område på kortet). Tabellen erstattes.
+Chaque lieu de ta base est rattaché à sa zone (d’après ses coordonnées, sinon son département, sa région ou son pays ; pour les communes : son code INSEE, puis son nom et son département), puis les zones sont comptées. Le tableau est remplacé. ¦ Každé místo z tvé databáze se přiřadí ke své oblasti (podle souřadnic, jinak podle departementu, regionu nebo země; u obcí: podle kódu INSEE, pak podle názvu a departementu), pak se oblasti spočítají. Tabulka se nahradí. ¦ Varje ort i din databas knyts till sitt område (efter koordinaterna, annars departement, region eller land; för kommuner: INSEE-koden, sedan namn och departement), sedan räknas områdena. Tabellen ersätts. ¦ Hvert sted i din database knyttes til sit område (ud fra koordinaterne, ellers departement, region eller land; for kommuner: INSEE-koden, derefter navn og departement), derefter tælles områderne. Tabellen erstattes.
+🔄 Tenir à jour (relire l’arbre à chaque affichage) ¦ 🔄 Aktualizovat (při každém zobrazení znovu načíst rodokmen) ¦ 🔄 Håll aktuellt (läs om släktträdet vid varje visning) ¦ 🔄 Hold ajour (læs slægtstræet igen ved hver visning)
+＋ Ajouter un flux ¦ ＋ Přidat proud ¦ ＋ Lägg till ett flöde ¦ ＋ Tilføj en strøm
+＋ Ajouter ce flux ¦ ＋ Přidat tento proud ¦ ＋ Lägg till det här flödet ¦ ＋ Tilføj denne strøm
+Un lieu sans position (⚠) : choisis-le dans ta base ou dans les communes et villes du monde, ou tape ses coordonnées dans le tableau (« Rennes 48.11, -1.68 »). ¦ Místo bez polohy (⚠): vyber ho ve své databázi nebo mezi obcemi a městy světa, nebo napiš jeho souřadnice do tabulky („Rennes 48.11, -1.68“). ¦ En ort utan position (⚠): välj den i din databas eller bland kommuner och städer i världen, eller skriv dess koordinater i tabellen (”Rennes 48.11, -1.68”). ¦ Et sted uden position (⚠): vælg det i din database eller blandt kommuner og byer i verden, eller skriv dets koordinater i tabellen (»Rennes 48.11, -1.68«).
+⏳ Lecture de l’arbre… ¦ ⏳ Načítám rodokmen… ¦ ⏳ Läser släktträdet… ¦ ⏳ Læser slægtstræet…
+(mes ancêtres) ¦ (moji předkové) ¦ (mina anfäder) ¦ (mine aner)
+{n} : cherchés par leur nom sur la carte. ¦ {n}: hledáno na mapě podle názvu. ¦ {n}: söktes efter namn på kartan. ¦ {n}: søgt efter navn på kortet.
+{n} : cherché par leur nom sur la carte. ¦ {n}: hledáno na mapě podle názvu. ¦ {n}: söktes efter namn på kartan. ¦ {n}: søgt efter navn på kortet.
+=lieu sans coordonnées ¦ místo bez souřadnic|místa bez souřadnic|míst bez souřadnic ¦ ort utan koordinater|orter utan koordinater ¦ sted uden koordinater|steder uden koordinater
+=lieu rattaché ¦ přiřazené místo|přiřazená místa|přiřazených míst ¦ knuten ort|knutna orter ¦ tilknyttet sted|tilknyttede steder
+Aucun lieu dans ton arbre pour ce choix. ¦ Pro tuto volbu není v tvém rodokmenu žádné místo. ¦ Ingen ort i ditt släktträd för det här valet. ¦ Intet sted i dit slægtstræ for dette valg.
+Aucun déplacement trouvé (il faut deux lieux différents pour une même personne). ¦ Nenalezeno žádné stěhování (jedna osoba potřebuje dvě různá místa). ¦ Ingen förflyttning hittades (en person behöver två olika orter). ¦ Ingen flytning fundet (én person skal have to forskellige steder).
+{n} : voir « Les lieux du tableau ». ¦ {n}: viz „Místa v tabulce“. ¦ {n}: se ”Orterna i tabellen”. ¦ {n}: se »Stederne i tabellen«.
+{n} à {z} (âge moyen sur {p} ; la carte montre des années, pas un nombre). ¦ {n} do {z} (průměrný věk z {p}; mapa ukazuje roky, ne počet). ¦ {n} till {z} (medelålder över {p}; kartan visar år, inte ett antal). ¦ {n} til {z} (gennemsnitsalder over {p}; kortet viser år, ikke et antal).
+{n} à {z}. ¦ {n} do {z}. ¦ {n} till {z}. ¦ {n} til {z}.
+{n} hors de cette carte ou sans position ({list}). ¦ {n} mimo tuto mapu nebo bez polohy ({list}). ¦ {n} utanför den här kartan eller utan position ({list}). ¦ {n} uden for dette kort eller uden position ({list}).
+Aucun lieu de ton arbre ne tombe sur cette carte : change de carte ou de niveau dans Réglages. ¦ Žádné místo z tvého rodokmenu nepadá na tuto mapu: změň mapu nebo úroveň v Nastavení. ¦ Ingen ort i ditt släktträd hamnar på den här kartan: byt karta eller nivå i Inställningar. ¦ Intet sted i dit slægtstræ falder på dette kort: skift kort eller niveau i Indstillinger.
+Où est « {name} » ? ¦ Kde je „{name}“? ¦ Var ligger ”{name}”? ¦ Hvor ligger »{name}«?
+Le tableau n’a pas encore de lieux. ¦ Tabulka zatím nemá žádná místa. ¦ Tabellen har inga orter än. ¦ Tabellen har ingen steder endnu.
+Ce lieu n’a pas de coordonnées : choisis-en un autre, ou tape ses coordonnées dans le tableau. ¦ Toto místo nemá souřadnice: vyber jiné, nebo napiš jeho souřadnice do tabulky. ¦ Den här orten har inga koordinater: välj en annan, eller skriv dess koordinater i tabellen. ¦ Dette sted har ingen koordinater: vælg et andet, eller skriv dets koordinater i tabellen.
+Choisis le lieu de départ et le lieu d’arrivée. ¦ Vyber místo odchodu a místo příchodu. ¦ Välj avreseort och ankomstort. ¦ Vælg afrejsested og ankomststed.
+Flux ajouté. ¦ Proud přidán. ¦ Flödet har lagts till. ¦ Strømmen er tilføjet.
+niveau|ville ¦ město ¦ stad ¦ by
+niveau|département ¦ departement ¦ departement ¦ departement
+niveau|province ¦ provincie ¦ provins ¦ provins
+niveau|canton ¦ kanton ¦ kanton ¦ kanton
+niveau|région ¦ region ¦ region ¦ region
+niveau|grande région ¦ velký region ¦ storregion ¦ storregion
+niveau|pays ¦ země ¦ land ¦ land
+niveau|continent ¦ kontinent ¦ kontinent ¦ kontinent
+niveau|zone ¦ oblast ¦ område ¦ område
+sa commune ¦ jeho obec ¦ sin kommun ¦ sin kommune
+leur commune ¦ jejich obec ¦ deras kommun ¦ deres kommune
+une ville ¦ město ¦ en stad ¦ en by
+son département ¦ jeho departement ¦ sitt departement ¦ sit departement
+leur département ¦ jejich departement ¦ deras departement ¦ deres departement
+sa province ¦ jeho provincie ¦ sin provins ¦ sin provins
+leur province ¦ jejich provincie ¦ deras provins ¦ deres provins
+son canton ¦ jeho kanton ¦ sin kanton ¦ sin kanton
+leur canton ¦ jejich kanton ¦ deras kanton ¦ deres kanton
+région ¦ region ¦ region ¦ region
+sa région ¦ jeho region ¦ sin region ¦ sin region
+leur région ¦ jejich region ¦ deras region ¦ deres region
+une région ¦ region ¦ en region ¦ en region
+grande région ¦ velký region ¦ storregion ¦ storregion
+sa grande région ¦ jeho velký region ¦ sin storregion ¦ sin storregion
+leur grande région ¦ jejich velký region ¦ deras storregion ¦ deres storregion
+une grande région ¦ velký region ¦ en storregion ¦ en storregion
+son pays ¦ jeho země ¦ sitt land ¦ sit land
+leur pays ¦ jejich země ¦ deras land ¦ deres land
+un pays ¦ země ¦ ett land ¦ et land
+son continent ¦ jeho kontinent ¦ sin kontinent ¦ sit kontinent
+leur continent ¦ jejich kontinent ¦ deras kontinent ¦ deres kontinent
+un continent ¦ kontinent ¦ en kontinent ¦ et kontinent
+sa zone ¦ jeho oblast ¦ sitt område ¦ sit område
+leur zone ¦ jejich oblast ¦ deras område ¦ deres område
+une zone ¦ oblast ¦ ett område ¦ et område
+aussi « {name} » ¦ také „{name}“ ¦ även ”{name}” ¦ også »{name}«
+autre niveau : « {name} » ¦ jiná úroveň: „{name}“ ¦ annan nivå: ”{name}” ¦ andet niveau: »{name}«
+ancienne commune ¦ bývalá obec ¦ tidigare kommun ¦ tidligere kommune
+Plusieurs villes s’appellent {name} ({n}) : choisis-en une dans la liste. ¦ Více měst se jmenuje {name} ({n}): jedno vyber ze seznamu. ¦ Flera städer heter {name} ({n}): välj en i listan. ¦ Flere byer hedder {name} ({n}): vælg én på listen.
+Plusieurs villes s’appellent {name} : choisis-en une dans la liste. ¦ Více měst se jmenuje {name}: jedno vyber ze seznamu. ¦ Flera städer heter {name}: välj en i listan. ¦ Flere byer hedder {name}: vælg én på listen.
+{name} est {a}, mais la carte montre le niveau « {level} » : choisis {b} dans la liste, ou change le niveau de détail (Réglages). ¦ {name} je {a}, ale mapa ukazuje úroveň „{level}“: vyber ze seznamu {b}, nebo změň úroveň podrobnosti (Nastavení). ¦ {name} är {a}, men kartan visar nivån ”{level}”: välj {b} i listan, eller ändra detaljnivån (Inställningar). ¦ {name} er {a}, men kortet viser niveauet »{level}«: vælg {b} på listen, eller skift detaljeniveau (Indstillinger).
+Pas trouvé sur cette carte : vérifie l’orthographe, ou choisis dans la liste. ¦ Na této mapě nenalezeno: zkontroluj pravopis, nebo vyber ze seznamu. ¦ Hittades inte på den här kartan: kontrollera stavningen, eller välj i listan. ¦ Ikke fundet på dette kort: kontrollér stavningen, eller vælg på listen.
+{n} villes comptent dans {where} sur cette carte (niveau « {level} »). ¦ {n} měst se na této mapě počítá do {where} (úroveň „{level}“). ¦ {n} städer räknas in i {where} på den här kartan (nivå ”{level}”). ¦ {n} byer tæller med i {where} på dette kort (niveau »{level}«).
+1 ville compte dans {where} sur cette carte (niveau « {level} »). ¦ 1 město se na této mapě počítá do {where} (úroveň „{level}“). ¦ 1 stad räknas in i {where} på den här kartan (nivå ”{level}”). ¦ 1 by tæller med i {where} på dette kort (niveau »{level}«).
+Rien de ce nom sur cette carte. ¦ Na této mapě nic s tímto názvem. ¦ Inget med det här namnet på den här kartan. ¦ Intet med dette navn på dette kort.
+chargement des communes… ¦ načítám obce… ¦ läser in kommuner… ¦ indlæser kommuner…
+↑ ↓ pour choisir · Entrée pour valider · Échap pour fermer ¦ ↑ ↓ pro výběr · Enter pro potvrzení · Esc pro zavření ¦ ↑ ↓ för att välja · Enter för att bekräfta · Esc för att stänga ¦ ↑ ↓ for at vælge · Enter for at bekræfte · Esc for at lukke
+Une ville compte dans {where} sur cette carte. ¦ Jedno město se na této mapě počítá do {where}. ¦ En stad räknas in i {where} på den här kartan. ¦ Én by tæller med i {where} på dette kort.
+Niveau « Communes » : chaque ville a sa couleur. ¦ Úroveň „Obce“: každé město má svou barvu. ¦ Nivån ”Kommuner”: varje stad har sin färg. ¦ Niveauet »Kommuner«: hver by har sin farve.
+Zone (nom ou code : 35, FRH03, BE, Vaud…) ¦ Oblast (název nebo kód: 35, FRH03, BE, Vaud…) ¦ Område (namn eller kod: 35, FRH03, BE, Vaud…) ¦ Område (navn eller kode: 35, FRH03, BE, Vaud…)
+Carte colorée : {n} zones ({map}, {level}). ¦ Barevná mapa: {n} oblastí ({map}, {level}). ¦ Färgad karta: {n} områden ({map}, {level}). ¦ Farvet kort: {n} områder ({map}, {level}).
+Carte des migrations : {n} flux. ¦ Mapa stěhování: {n} proudů. ¦ Flyttningskarta: {n} flöden. ¦ Flytningskort: {n} strømme.
+Les lieux (ou zones) et leurs chiffres ¦ Místa (nebo oblasti) a jejich čísla ¦ Orterna (eller områdena) och deras siffror ¦ Stederne (eller områderne) og deres tal
+Lieu ou zone (« Rennes », « Rennes 48.11, -1.68 », « 35 »…) ¦ Místo nebo oblast („Rennes“, „Rennes 48.11, -1.68“, „35“…) ¦ Ort eller område (”Rennes”, ”Rennes 48.11, -1.68”, ”35”…) ¦ Sted eller område (»Rennes«, »Rennes 48.11, -1.68«, »35«…)
+Carte à symboles proportionnels : {n} lieux. ¦ Mapa s proporcionálními symboly: {n} míst. ¦ Karta med proportionella symboler: {n} orter. ¦ Kort med proportionale symboler: {n} steder.
+Rien à dessiner pour l’instant. ¦ Zatím není co kreslit. ¦ Inget att rita än. ¦ Intet at tegne endnu.
+Graphique introuvable : supprimé, ou fait dans un autre navigateur. ¦ Graf nebyl nalezen: smazán, nebo vytvořen v jiném prohlížeči. ¦ Diagrammet hittades inte: raderat, eller gjort i en annan webbläsare. ¦ Diagrammet blev ikke fundet: slettet, eller lavet i en anden browser.
+L’ouvrir en grand dans Graphiques ¦ Otevřít ve velkém v Grafech ¦ Öppna det i stort format i Diagram ¦ Åbn det i stort format i Diagrammer
+Ajuster à la page ¦ Přizpůsobit stránce ¦ Anpassa till sidan ¦ Tilpas til siden
+par l’impression : « Enregistrer en PDF » ¦ přes tisk: „Uložit jako PDF“ ¦ via utskrift: ”Spara som PDF” ¦ via udskrift: »Gem som PDF«
+ouvrir les chiffres dans le tableur ¦ otevřít čísla v tabulkovém editoru ¦ öppna siffrorna i kalkylarket ¦ åbn tallene i regnearket
+du diagramme, à réimporter ¦ diagramu, k opětovnému importu ¦ för schemat, att importera igen ¦ for skemaet, til at importere igen
+à coller ailleurs (⌘V) ¦ k vložení jinam (⌘V) ¦ att klistra in någon annanstans (⌘V) ¦ til at indsætte et andet sted (⌘V)
+Revenir à la couleur automatique ¦ Zpět na automatickou barvu ¦ Tillbaka till den automatiska färgen ¦ Tilbage til den automatiske farve
+🧾 Tout voir dans le tableur ¦ 🧾 Zobrazit vše v tabulkovém editoru ¦ 🧾 Se allt i kalkylarket ¦ 🧾 Se alt i regnearket
+{a} lignes sur {b} (toutes comptent dans le dessin) ¦ {a} řádků z {b} (v kresbě se počítají všechny) ¦ {a} rader av {b} (alla räknas i teckningen) ¦ {a} rækker af {b} (alle tæller med i tegningen)
+Couleur de la série ¦ Barva řady ¦ Seriens färg ¦ Seriens farve
+Supprimer cette série ¦ Smazat tuto řadu ¦ Radera den här serien ¦ Slet denne serie
+Copier des cellules dans Excel, LibreOffice, Numbers… et les coller ici ¦ Zkopírovat buňky v Excelu, LibreOffice, Numbers… a vložit je sem ¦ Kopiera celler i Excel, LibreOffice, Numbers… och klistra in dem här ¦ Kopiér celler i Excel, LibreOffice, Numbers… og indsæt dem her
+⤒ Importer un CSV ¦ ⤒ Importovat CSV ¦ ⤒ Importera en CSV ¦ ⤒ Importér en CSV
+Un classeur déjà fait dans le Tableur : une feuille, une plage, copiée une fois ou liée ¦ Sešit už vytvořený v Tabulkovém editoru: list, oblast, zkopírovaná jednou nebo propojená ¦ En arbetsbok som redan gjorts i Kalkylarket: ett blad, ett område, kopierat en gång eller länkat ¦ En projektmappe, der allerede er lavet i Regnearket: et ark, et område, kopieret én gang eller forbundet
+Relevés paroissiaux ¦ Výpisy z farních matrik ¦ Kyrkboksregister ¦ Kirkebogsregistreringer
+Visite aux AD ¦ Návštěva archivu ¦ Besök i arkivet ¦ Besøg i arkivet
+Déplacement ¦ Cesta ¦ Resa ¦ Rejse
+Rédaction ¦ Psaní ¦ Skrivande ¦ Skrivning
+Planning de recherche ¦ Plán výzkumu ¦ Forskningsplan ¦ Forskningsplan
+Style, annotations, lignes de repère, petits multiples, lecture dans le temps ¦ Styl, poznámky, referenční čáry, malé násobky, přehrávání v čase ¦ Stil, anteckningar, referenslinjer, små multiplar, uppspelning över tid ¦ Stil, annotationer, referencelinjer, små multipler, afspilning over tid
+Les figer (les modifier à la main) ¦ Zmrazit je (upravovat ručně) ¦ Frys dem (redigera dem för hand) ¦ Frys dem (rediger dem i hånden)
+Le tableur en grand, préparé avec les colonnes de ce diagramme : formules, tri, coller depuis Excel… puis « ✓ Enregistrer et revenir » ¦ Tabulkový editor ve velkém, připravený se sloupci tohoto diagramu: vzorce, řazení, vkládání z Excelu… pak „✓ Uložit a vrátit se“ ¦ Kalkylarket i stort format, förberett med det här schemats kolumner: formler, sortering, klistra in från Excel… sedan ”✓ Spara och gå tillbaka” ¦ Regnearket i stort format, forberedt med dette skemas kolonner: formler, sortering, indsæt fra Excel… derefter »✓ Gem og gå tilbage«
+dans le tableur (formules, tri, Excel…) ¦ v tabulkovém editoru (vzorce, řazení, Excel…) ¦ i kalkylarket (formler, sortering, Excel…) ¦ i regnearket (formler, sortering, Excel…)
+🔄 Chiffres tenus à jour depuis « {src} » : ils sont relus à chaque affichage. ¦ 🔄 Čísla aktualizovaná z „{src}“: načítají se znovu při každém zobrazení. ¦ 🔄 Siffror som hålls aktuella från ”{src}”: de läses om vid varje visning. ¦ 🔄 Tal, der holdes ajour fra »{src}«: de læses igen ved hver visning.
+l’app ¦ aplikace ¦ appen ¦ appen
+Pas de réglage particulier. ¦ Žádné zvláštní nastavení. ¦ Inga särskilda inställningar. ¦ Ingen særlige indstillinger.
+🌳 Des données de mon arbre ¦ 🌳 Data z mého rodokmenu ¦ 🌳 Data från mitt släktträd ¦ 🌳 Data fra mit slægtstræ
+Remplace le tableau par des chiffres calculés dans ta base (tu peux ensuite les retoucher à la main). ¦ Nahradí tabulku čísly spočítanými v tvé databázi (pak je můžeš ručně upravit). ¦ Ersätter tabellen med siffror som räknats ut i din databas (du kan sedan justera dem för hand). ¦ Erstatter tabellen med tal beregnet i din database (du kan derefter tilpasse dem i hånden).
+📊 Des chiffres de l’app ¦ 📊 Čísla z aplikace ¦ 📊 Siffror från appen ¦ 📊 Tal fra appen
+Remplace le tableau par des chiffres calculés dans ta base : « 🧮 Compter dans ma base » (ce qu’on compte, le groupe de personnes, la période, le regroupement… tout se règle ci-dessous), un exemple, une statistique de l’app ou un de « Mes graphiques » (faits dans Réglages → Éditeur de graphiques). ¦ Nahradí tabulku čísly spočítanými v tvé databázi: „🧮 Spočítat v mé databázi“ (co se počítá, skupina osob, období, seskupení… vše se nastaví níže), příklad, statistika aplikace nebo jeden z „Moje grafy“ (vytvořené v Nastavení → Editor grafů). ¦ Ersätter tabellen med siffror som räknats ut i din databas: ”🧮 Räkna i min databas” (vad som räknas, persongruppen, perioden, grupperingen… allt ställs in nedan), ett exempel, en statistik från appen eller ett av ”Mina diagram” (gjorda i Inställningar → Diagramredigeraren). ¦ Erstatter tabellen med tal beregnet i din database: »🧮 Tæl i min database« (hvad der tælles, persongruppen, perioden, grupperingen… alt indstilles nedenfor), et eksempel, en statistik fra appen eller et af »Mine diagrammer« (lavet i Indstillinger → Diagrameditoren).
+👥 Des personnes de la base ¦ 👥 Osoby z databáze ¦ 👥 Personer från databasen ¦ 👥 Personer fra databasen
+Chaque personne devient une ligne, de sa naissance à son décès (rôle : Homme ou Femme, à changer à volonté). ¦ Každá osoba se stane řádkem od narození do úmrtí (role: Muž nebo Žena, můžeš libovolně změnit). ¦ Varje person blir en rad, från födelse till död (roll: Man eller Kvinna, ändra som du vill). ¦ Hver person bliver en række, fra fødsel til død (rolle: Mand eller Kvinde, skift som du vil).
+Leurs naissances, mariages et décès deviennent des dates de la frise. ¦ Jejich narození, sňatky a úmrtí se stanou daty na časové ose. ¦ Deras födslar, vigslar och dödsfall blir datum på tidslinjen. ¦ Deres fødsler, vielser og dødsfald bliver datoer på tidslinjen.
+Ce type de diagramme se remplit à la main, en collant un tableau ou avec un CSV (onglet Données). ¦ Tento typ diagramu se vyplňuje ručně, vložením tabulky nebo pomocí CSV (karta Data). ¦ Den här schematypen fylls i för hand, genom att klistra in en tabell eller med en CSV (fliken Data). ¦ Denne skematype udfyldes i hånden, ved at indsætte en tabel eller med en CSV (fanen Data).
+Données prises dans ton arbre. ¦ Data převzatá z tvého rodokmenu. ¦ Data hämtade från ditt släktträd. ¦ Data hentet fra dit slægtstræ.
+Ces chiffres sont déjà comptés : tu peux les trier, garder les premiers, montrer « Inconnu » ou les passer en %. Pour choisir ce qu’on compte, le groupe de personnes ou la période, prends « 🧮 Compter dans ma base » ¦ Tato čísla jsou už spočítaná: můžeš je seřadit, ponechat první, zobrazit „Neznámé“ nebo je převést na %. Chceš-li zvolit, co se počítá, skupinu osob nebo období, použij „🧮 Spočítat v mé databázi“ ¦ De här siffrorna är redan räknade: du kan sortera dem, behålla de första, visa ”Okänt” eller visa dem i %. För att välja vad som räknas, persongruppen eller perioden, använd ”🧮 Räkna i min databas” ¦ Disse tal er allerede talt: du kan sortere dem, beholde de første, vise »Ukendt« eller vise dem i %. For at vælge, hvad der tælles, persongruppen eller perioden, brug »🧮 Tæl i min database«
+{name} — pas pour ce diagramme ¦ {name} — ne pro tento diagram ¦ {name} — inte för det här schemat ¦ {name} — ikke til dette skema
+Aucun chiffre pour ces réglages : essaie un autre groupe, une autre période ou montre « Inconnu ». ¦ Pro tato nastavení nejsou žádná čísla: zkus jinou skupinu, jiné období nebo zobraz „Neznámé“. ¦ Inga siffror för de här inställningarna: prova en annan grupp, en annan period eller visa ”Okänt”. ¦ Ingen tal for disse indstillinger: prøv en anden gruppe, en anden periode eller vis »Ukendt«.
+{n} valeurs prises dans ta base ({k} comptés). ¦ {n} hodnot převzato z tvé databáze (započteno {k}). ¦ {n} värden hämtade från din databas ({k} räknade). ¦ {n} værdier hentet fra din database ({k} talt).
+{n} valeur prise dans ta base ({k} comptés). ¦ {n} hodnota převzata z tvé databáze (započteno {k}). ¦ {n} värde hämtat från din databas ({k} räknade). ¦ {n} værdi hentet fra din database ({k} talt).
+{n} valeur prise dans ta base. ¦ {n} hodnota převzata z tvé databáze. ¦ {n} värde hämtat från din databas. ¦ {n} værdi hentet fra din database.
+{n} valeurs prises dans l’app. ¦ {n} hodnot převzato z aplikace. ¦ {n} värden hämtade från appen. ¦ {n} værdier hentet fra appen.
+{n} valeur prise dans l’app. ¦ {n} hodnota převzata z aplikace. ¦ {n} värde hämtat från appen. ¦ {n} værdi hentet fra appen.
+{name} : pas de date de naissance dans sa fiche. ¦ {name}: na kartě není datum narození. ¦ {name}: inget födelsedatum i posten. ¦ {name}: ingen fødselsdato i posten.
+{name} ajouté. ¦ {name} přidán. ¦ {name} har lagts till. ¦ {name} er tilføjet.
+{name} ajoutée. ¦ {name} přidána. ¦ {name} har lagts till. ¦ {name} er tilføjet.
+{name} ajouté(e). ¦ {name} přidán(a). ¦ {name} har lagts till. ¦ {name} er tilføjet.
+Le diagramme apparaît alors sur la fiche de la personne, dans l’enquête ou dans le projet de l’Atelier. Pour le poser ailleurs : un widget (Réglages → Éditeur de widgets), un bloc de fiche, la mise en page. ¦ Diagram se pak objeví na kartě osoby, v pátrání nebo v projektu Dílny. Chceš-li ho vložit jinam: widget (Nastavení → Editor widgetů), blok poznámkové karty, sazba. ¦ Schemat visas då på personens post, i undersökningen eller i Verkstadens projekt. För att lägga det någon annanstans: en widget (Inställningar → Widgetredigeraren), ett block i ett anteckningskort, sidlayouten. ¦ Skemaet vises så på personens post, i undersøgelsen eller i Værkstedets projekt. For at indsætte det et andet sted: en widget (Indstillinger → Widgeteditoren), en blok i et notekort, sidelayoutet.
+ou une partie d’enquête, un projet de l’Atelier… ¦ nebo část pátrání, projekt Dílny… ¦ eller en del av en undersökning, ett projekt i Verkstaden… ¦ eller en del af en undersøgelse, et projekt i Værkstedet…
+Supprimer la série « {name} » et ses chiffres ? ¦ Smazat řadu „{name}“ a její čísla? ¦ Radera serien ”{name}” och dess siffror? ¦ Slet serien »{name}« og dens tal?
+Supprimer la série ¦ Smazat řadu ¦ Radera serien ¦ Slet serien
+Vider le tableau ¦ Vyprázdnit tabulku ¦ Töm tabellen ¦ Tøm tabellen
+une feuille, une plage : copiée une fois ou liée (tenue à jour) ¦ list, oblast: zkopírovaná jednou nebo propojená (aktualizovaná) ¦ ett blad, ett område: kopierat en gång eller länkat (hålls aktuellt) ¦ et ark, et område: kopieret én gang eller forbundet (holdes ajour)
+Sélectionne des cellules dans Excel, LibreOffice, Numbers ou Google Sheets, copie-les (⌘C) et colle-les ici. Si la première ligne contient des titres, ils deviennent les noms des séries. Le tableau actuel est remplacé. ¦ Vyber buňky v Excelu, LibreOffice, Numbers nebo Google Sheets, zkopíruj je (⌘C) a vlož je sem. Pokud první řádek obsahuje nadpisy, stanou se názvy řad. Současná tabulka se nahradí. ¦ Markera celler i Excel, LibreOffice, Numbers eller Google Sheets, kopiera dem (⌘C) och klistra in dem här. Om första raden innehåller rubriker blir de seriernas namn. Den nuvarande tabellen ersätts. ¦ Markér celler i Excel, LibreOffice, Numbers eller Google Sheets, kopiér dem (⌘C), og indsæt dem her. Hvis første række indeholder overskrifter, bliver de seriernes navne. Den nuværende tabel erstattes.
+Données liées au classeur : elles suivent le Tableur. ¦ Data propojená se sešitem: sledují Tabulkový editor. ¦ Data länkade till arbetsboken: de följer Kalkylarket. ¦ Data forbundet med projektmappen: de følger Regnearket.
+{n} lignes copiées du classeur. ¦ {n} řádků zkopírováno ze sešitu. ¦ {n} rader kopierade från arbetsboken. ¦ {n} rækker kopieret fra projektmappen.
+Ce type ne lit pas le même tableau : l’exemple remplace tes données. Continuer ? ¦ Tento typ nečte stejnou tabulku: příklad nahradí tvá data. Pokračovat? ¦ Den här typen läser inte samma tabell: exemplet ersätter dina data. Fortsätta? ¦ Denne type læser ikke den samme tabel: eksemplet erstatter dine data. Fortsæt?
+D’un graphique (à moi ou de l’app, tenu à jour) ¦ Z grafu (mého nebo z aplikace, aktualizovaného) ¦ Från ett diagram (mitt eller appens, hålls aktuellt) ¦ Fra et diagram (mit eller appens, holdes ajour)
+Un de mes graphiques (Éditeur de graphiques, tenu à jour) ¦ Jeden z mých grafů (Editor grafů, aktualizovaný) ¦ Ett av mina diagram (Diagramredigeraren, hålls aktuellt) ¦ Et af mine diagrammer (Diagrameditoren, holdes ajour)
+Hémicycle d’une assemblée, fer à cheval, frise des membres d’un groupe de musique façon Wikipédia, frise de vies, camembert, flux de migrations, organigramme, nuage de noms… avec tes propres chiffres ou ceux de l’app. Ils se posent ensuite partout : tableau de bord, fiches, fiche d’une personne, enquêtes, Atelier, mise en page. ¦ Půlkruh shromáždění, podkova, časová osa členů hudební skupiny jako na Wikipedii, osa životů, koláč, proudy stěhování, organizační schéma, mrak jmen… s tvými vlastními čísly nebo s čísly z aplikace. Pak je vložíš kamkoli: přehled, poznámkové karty, karta osoby, pátrání, Dílna, sazba. ¦ Halvcirkel för en församling, hästsko, tidslinje över medlemmarna i ett band i Wikipedia-stil, livslinjer, cirkeldiagram, flyttningsflöden, organisationsschema, namnmoln… med dina egna siffror eller appens. De läggs sedan in överallt: översikt, anteckningskort, en persons post, undersökningar, Verkstad, sidlayout. ¦ Halvcirkel for en forsamling, hestesko, tidslinje over medlemmerne af et band i Wikipedia-stil, livslinjer, lagkagediagram, flytningsstrømme, organisationsdiagram, navnesky… med dine egne tal eller appens. De indsættes derefter overalt: oversigt, notekort, en persons post, undersøgelser, Værksted, sidelayout.
+MES DIAGRAMMES ¦ MOJE DIAGRAMY ¦ MINA SCHEMAN ¦ MINE SKEMAER
+📈 Ce diagramme montre ton graphique « {name} » (Éditeur de graphiques) : son dessin et ses chiffres le suivent, partout où il est posé. ¦ 📈 Tento diagram ukazuje tvůj graf „{name}“ (Editor grafů): jeho kresba a čísla ho následují, ať je vložen kdekoli. ¦ 📈 Det här schemat visar ditt diagram ”{name}” (Diagramredigeraren): dess teckning och siffror följer med, var det än ligger. ¦ 📈 Dette skema viser dit diagram »{name}« (Diagrameditoren): dets tegning og tal følger med, uanset hvor det er indsat.
+🔗 Données : {src} · tenu à jour. ¦ 🔗 Data: {src} · aktualizováno. ¦ 🔗 Data: {src} · hålls aktuellt. ¦ 🔗 Data: {src} · holdes ajour.
+🔄 Chiffres tenus à jour depuis « {src} ». ¦ 🔄 Čísla aktualizovaná z „{src}“. ¦ 🔄 Siffror som hålls aktuella från ”{src}”. ¦ 🔄 Tal, der holdes ajour fra »{src}«.
+✎ Modifier le graphique ¦ ✎ Upravit graf ¦ ✎ Redigera diagrammet ¦ ✎ Rediger diagrammet
+Une copie figée, à retoucher comme un diagramme ¦ Zmrazená kopie k úpravě jako diagram ¦ En fryst kopia, att justera som ett schema ¦ En frossen kopi, der kan tilpasses som et skema
+Une copie à modifier ¦ Kopie k úpravě ¦ En kopia att redigera ¦ En kopi til redigering
+Le poser sur le tableau de bord, comme un widget ¦ Vložit ho na přehled jako widget ¦ Lägg det på översikten, som en widget ¦ Indsæt det på oversigten, som en widget
+Pour le poser ailleurs : <b>Réglages → Éditeur de widgets</b> (partie « Diagramme ») pour le tableau de bord ou un onglet, un bloc « 📊 Diagramme » dans une <b>Fiche</b>, « Relier » (onglet de l’éditeur) pour la fiche d’une personne, une enquête ou un projet de l’Atelier, et « Insérer → Diagramme » dans la <b>mise en page</b>. Tous tes graphiques et diagrammes : <b>Listes → Graphiques et diagrammes</b>. ¦ Chceš-li ho vložit jinam: <b>Nastavení → Editor widgetů</b> (část „Diagram“) pro přehled nebo kartu, blok „📊 Diagram“ v <b>poznámkové kartě</b>, „Propojit“ (karta editoru) pro kartu osoby, pátrání nebo projekt Dílny a „Vložit → Diagram“ v <b>sazbě</b>. Všechny tvé grafy a diagramy: <b>Seznamy → Grafy a diagramy</b>. ¦ För att lägga det någon annanstans: <b>Inställningar → Widgetredigeraren</b> (delen ”Schema”) för översikten eller en flik, ett block ”📊 Schema” i ett <b>anteckningskort</b>, ”Koppla” (redigerarens flik) för en persons post, en undersökning eller ett projekt i Verkstaden, och ”Infoga → Schema” i <b>sidlayouten</b>. Alla dina diagram och scheman: <b>Listor → Diagram och scheman</b>. ¦ For at indsætte det et andet sted: <b>Indstillinger → Widgeteditoren</b> (delen »Skema«) til oversigten eller en fane, en blok »📊 Skema« i et <b>notekort</b>, »Forbind« (editorens fane) til en persons post, en undersøgelse eller et projekt i Værkstedet, og »Indsæt → Skema« i <b>sidelayoutet</b>. Alle dine diagrammer og skemaer: <b>Lister → Diagrammer og skemaer</b>.
+Rien à copier : le graphique est introuvable. ¦ Není co kopírovat: graf nebyl nalezen. ¦ Inget att kopiera: diagrammet hittades inte. ¦ Intet at kopiere: diagrammet blev ikke fundet.
+Supprimer le diagramme « {name} » ? Il disparaît aussi des widgets, fiches et enquêtes où il est posé. ¦ Smazat diagram „{name}“? Zmizí také z widgetů, karet a pátrání, kde je vložen. ¦ Radera schemat ”{name}”? Det försvinner också från widgetar, poster och undersökningar där det ligger. ¦ Slet skemaet »{name}«? Det forsvinder også fra widgets, poster og undersøgelser, hvor det er indsat.
+Supprimer le diagramme ¦ Smazat diagram ¦ Radera schemat ¦ Slet skemaet
+Passe par les Réglages → Éditeur de widgets. ¦ Jdi přes Nastavení → Editor widgetů. ¦ Gå via Inställningar → Widgetredigeraren. ¦ Gå via Indstillinger → Widgeteditoren.
+Ajouter un diagramme ¦ Přidat diagram ¦ Lägg till ett schema ¦ Tilføj et skema
+Ajoute des groupes et leur nombre de sièges. ¦ Přidej skupiny a jejich počet mandátů. ¦ Lägg till grupper och deras antal platser. ¦ Tilføj grupper og deres antal pladser.
+{n} sièges ¦ {n} mandátů ¦ {n} platser ¦ {n} pladser
+Tribune · {n} sièges ¦ Řečnický pult · {n} mandátů ¦ Talarstol · {n} platser ¦ Talerstol · {n} pladser
+Majorité absolue : {n} sièges ¦ Absolutní většina: {n} mandátů ¦ Absolut majoritet: {n} platser ¦ Absolut flertal: {n} pladser
+Ajoute des lignes : un nom, des rôles, une date de début et de fin. ¦ Přidej řádky: jméno, role, datum začátku a konce. ¦ Lägg till rader: ett namn, roller, ett start- och slutdatum. ¦ Tilføj rækker: et navn, roller, en start- og slutdato.
+Ajoute des dates et ce qui s’est passé. ¦ Přidej data a co se stalo. ¦ Lägg till datum och vad som hände. ¦ Tilføj datoer og hvad der skete.
+Ajoute des lignes de chiffres. ¦ Přidej řádky s čísly. ¦ Lägg till rader med siffror. ¦ Tilføj rækker med tal.
+Ajoute des tranches (âges…) et deux séries (hommes, femmes…). ¦ Přidej intervaly (věky…) a dvě řady (muži, ženy…). ¦ Lägg till intervall (åldrar…) och två serier (män, kvinnor…). ¦ Tilføj intervaller (aldre…) og to serier (mænd, kvinder…).
+Ajoute des lignes et des colonnes de chiffres. ¦ Přidej řádky a sloupce s čísly. ¦ Lägg till rader och kolumner med siffror. ¦ Tilføj rækker og kolonner med tal.
+Ajoute des points : X, Y (et une taille pour des bulles). ¦ Přidej body: X, Y (a velikost pro bubliny). ¦ Lägg till punkter: X, Y (och en storlek för bubblor). ¦ Tilføj punkter: X, Y (og en størrelse for bobler).
+Ajoute des cases : un nom et, pour chacune, sa case « au-dessus ». ¦ Přidej políčka: název a u každého jeho políčko „nad ním“. ¦ Lägg till rutor: ett namn och, för var och en, dess ruta ”ovanför”. ¦ Tilføj felter: et navn og, for hvert, dets felt »ovenover«.
+Ajoute des mots (noms, prénoms, lieux…) et leur poids. ¦ Přidej slova (příjmení, křestní jména, místa…) a jejich váhu. ¦ Lägg till ord (efternamn, förnamn, orter…) och deras vikt. ¦ Tilføj ord (efternavne, fornavne, steder…) og deres vægt.
+Texte au centre (sinon le total) ¦ Text uprostřed (jinak součet) ¦ Text i mitten (annars summan) ¦ Tekst i midten (ellers summen)
+Total au centre ¦ Součet uprostřed ¦ Summa i mitten ¦ Sum i midten
+Les groupes (de gauche à droite) ¦ Skupiny (zleva doprava) ¦ Grupperna (från vänster till höger) ¦ Grupperne (fra venstre mod højre)
+Côté (Westminster) ¦ Strana (Westminster) ¦ Sida (Westminster) ¦ Side (Westminster)
+Salle (rangées face à la tribune) ¦ Sál (řady naproti řečnickému pultu) ¦ Sal (rader mot talarstolen) ¦ Sal (rækker vendt mod talerstolen)
+Angle de l’arc ¦ Úhel oblouku ¦ Bågens vinkel ¦ Buens vinkel
+Nombre de rangées (0 = automatique) ¦ Počet řad (0 = automaticky) ¦ Antal rader (0 = automatiskt) ¦ Antal rækker (0 = automatisk)
+Texte au centre (sinon le nombre de sièges) ¦ Text uprostřed (jinak počet mandátů) ¦ Text i mitten (annars antalet platser) ¦ Tekst i midten (ellers antallet af pladser)
+Petit texte sous le nombre ¦ Malý text pod číslem ¦ Liten text under talet ¦ Lille tekst under tallet
+En texte et ligne au milieu ¦ Jako text a čára uprostřed ¦ Som text och linje i mitten ¦ Som tekst og linje i midten
+Écologistes ¦ Zelení ¦ Miljöpartister ¦ De Grønne
+Libéraux ¦ Liberálové ¦ Liberaler ¦ Liberale
+Les rôles et leur couleur ¦ Role a jejich barva ¦ Rollerna och deras färg ¦ Rollerne og deres farve
+Début de la frise (vide = auto) ¦ Začátek časové osy (prázdné = auto) ¦ Tidslinjens början (tomt = auto) ¦ Tidslinjens start (tom = auto)
+Fin de la frise (vide = auto) ¦ Konec časové osy (prázdné = auto) ¦ Tidslinjens slut (tomt = auto) ¦ Tidslinjens slutning (tom = auto)
+Écrire le nom des traits verticaux ¦ Psát názvy svislých čar ¦ Skriv namnen på de lodräta linjerna ¦ Skriv navnene på de lodrette streger
+Les Cousins — membres ¦ Les Cousins — členové ¦ Les Cousins — medlemmar ¦ Les Cousins — medlemmer
+Guitare solo, Chœurs ¦ Sólová kytara, vokály ¦ Sologitarr, kör ¦ Leadguitar, kor
+Deuxième ¦ Druhý ¦ Andra ¦ Anden
+Tous en dessous ¦ Všechny pod ¦ Alla under ¦ Alle under
+Décès de Jean ¦ Úmrtí Jeana ¦ Jeans död ¦ Jeans død
+La famille Martin ¦ Rodina Martin ¦ Familjen Martin ¦ Familien Martin
+Sur les parts ¦ Na dílech ¦ På delarna ¦ På delene
+Avec une date de naissance ¦ S datem narození ¦ Med födelsedatum ¦ Med fødselsdato
+Où en sont mes recherches ¦ Kde je můj výzkum ¦ Var min forskning står ¦ Hvor min forskning står
+Maximum de l’échelle (vide = auto) ¦ Maximum měřítka (prázdné = auto) ¦ Skalans maximum (tomt = auto) ¦ Skalaens maksimum (tom = auto)
+Première ligne en bas ¦ První řádek dole ¦ Första raden längst ned ¦ Første række nederst
+Naissances par mois et par siècle ¦ Narození podle měsíce a století ¦ Födslar per månad och århundrade ¦ Fødsler pr. måned og århundrede
+Nom de l’axe X ¦ Název osy X ¦ X-axelns namn ¦ X-aksens navn
+Nom de l’axe Y ¦ Název osy Y ¦ Y-axelns namn ¦ Y-aksens navn
+Taille de la plus grosse bulle ¦ Velikost největší bubliny ¦ Storlek på den största bubblan ¦ Størrelse på den største boble
+Âge au mariage et nombre d’enfants ¦ Věk při sňatku a počet dětí ¦ Ålder vid vigsel och antal barn ¦ Alder ved vielse og antal børn
+Au-dessus (nom de la case) ¦ Nad tím (název políčka) ¦ Ovanför (rutans namn) ¦ Ovenover (feltets navn)
+Présidente ¦ Předsedkyně ¦ Ordförande ¦ Formand
+Trésorier ¦ Pokladník ¦ Kassör ¦ Kasserer
+Secrétaire ¦ Jednatel ¦ Sekreterare ¦ Sekretær
+3 bénévoles ¦ 3 dobrovolníci ¦ 3 volontärer ¦ 3 frivillige
+Fêtes ¦ Slavnosti ¦ Fester ¦ Fester
+5 bénévoles ¦ 5 dobrovolníků ¦ 5 volontärer ¦ 5 frivillige
+Association des Amis du village ¦ Spolek přátel obce ¦ Byns vänförening ¦ Landsbyens venneforening
+Diagramme de Venn (2 ou 3 ensembles) ¦ Vennův diagram (2 nebo 3 množiny) ¦ Venndiagram (2 eller 3 mängder) ¦ Venndiagram (2 eller 3 mængder)
+Mes objectifs ¦ Moje cíle ¦ Mina mål ¦ Mine mål
+Jean et Marie ¦ Jean a Marie ¦ Jean och Marie ¦ Jean og Marie
+Pierre et Anne ¦ Pierre a Anne ¦ Pierre och Anne ¦ Pierre og Anne
+Louis et Rose ¦ Louis a Rose ¦ Louis och Rose ¦ Louis og Rose
+Enfants par couple ¦ Děti na pár ¦ Barn per par ¦ Børn pr. par
+Source / note en bas ¦ Pramen / poznámka dole ¦ Källa / not längst ned ¦ Kilde / note nederst
+Largeur de l’image ¦ Šířka obrázku ¦ Bildens bredd ¦ Billedets bredde
+Notaires ¦ Notáři ¦ Notarier ¦ Notarer
+↺ Police de l’app ¦ ↺ Písmo aplikace ¦ ↺ Appens typsnitt ¦ ↺ Appens skrifttype
+{name} : {a} sur {n} enfants morts avant 1 an ({p} %) ¦ {name}: {a} z {n} dětí zemřelo před 1. rokem ({p} %) ¦ {name}: {a} av {n} barn dog före 1 år ({p} %) ¦ {name}: {a} af {n} børn døde før 1 år ({p} %)
+{name} : {a} sur {n} morts avant 5 ans ({p} %) ¦ {name}: {a} z {n} zemřelo před 5. rokem ({p} %) ¦ {name}: {a} av {n} dog före 5 år ({p} %) ¦ {name}: {a} af {n} døde før 5 år ({p} %)
+parrains : {a} sur {b} · marraines : {c} sur {d} ¦ kmotři: {a} z {b} · kmotry: {c} z {d} ¦ gudfäder: {a} av {b} · gudmödrar: {c} av {d} ¦ gudfædre: {a} af {b} · gudmødre: {c} af {d}
