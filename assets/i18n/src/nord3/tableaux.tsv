@@ -1,0 +1,3601 @@
+fr ¦ ro
+piste|Confirmée ¦ Confirmată
+piste|Fausse ¦ Falsă
+Fiche #{id} ¦ Fișa #{id}
+Tableau verrouillé : 🔒 en haut pour le déverrouiller. ¦ Panou blocat: 🔒 sus pentru a-l debloca.
+H ou Espace ¦ H sau Spațiu
+Formes ¦ Forme
+Dessin à main levée ¦ Desen liber
+Gomme ¦ Radieră
+{owner} : {name} ¦ {owner}: {name}
+Tableau libre ¦ Panou liber
+changer ¦ schimbă
+Police du thème ¦ Fontul temei
+PDF · double-clic pour l’ouvrir ¦ PDF · dublu clic pentru a-l deschide
+Dossier ¦ Dosar
+double-clic pour ouvrir ¦ dublu clic pentru a deschide
+Recueil ¦ Culegere
+Recueil · double-clic pour l’ouvrir ¦ Culegere · dublu clic pentru a o deschide
+Frise ¦ Axă cronologică
+Chargement de la frise… ¦ Se încarcă axa cronologică…
+Cadre ¦ Cadru
+Chargement du widget… ¦ Se încarcă widgetul…
+Écran de l’app · double-clic pour l’ouvrir ¦ Ecran al aplicației · dublu clic pentru a-l deschide
+mort à {age} ¦ mort la {age}
+Choisis la personne à droite. ¦ Alege persoana din dreapta.
+Choisir ce groupe ¦ Alege acest grup
+Groupe {n} ¦ Grupul {n}
+le tableau est fermé ¦ panoul este închis
+d’autres changements ont suivi : utilise ↶ dans la barre du tableau ¦ au urmat alte modificări: folosește ↶ din bara panoului
+Ce tableau ¦ Acest panou
+Choisir le pinceau ¦ Alege pensula
+Dureté du bord : 100 % net, moins = flou ¦ Duritatea marginii: 100 % clar, mai puțin = estompat
+Les gommes n’effacent que les dessins à main levée. ¦ Radierele șterg doar desenele libere.
+Clique où écrire. ¦ Fă clic unde vrei să scrii.
+Tire un trait ; posé sur un élément, il s’y accroche. ¦ Trage o linie; pusă pe un element, se prinde de el.
+Un lien tout prêt : légende, couleur et style ¦ O legătură gata făcută: legendă, culoare și stil
+lien|libre ¦ liberă
+Pointes ¦ Vârfuri
+Pointes de la même couleur que le trait ¦ Vârfuri de aceeași culoare cu linia
+Tire une flèche d’un élément à un autre : elle les suit. ¦ Trage o săgeată de la un element la altul: le urmează.
+Toutes les formes, et créer la sienne ¦ Toate formele și creează-ți propria formă
+Toutes les formes ¦ Toate formele
+Nom;Année;Lieu ¦ Nume;An;Loc
+Tableau repris du tableur. ¦ Tabel preluat din foaia de calcul.
+{n}. Choisis un élément pour le régler. ¦ {n}. Alege un element pentru a-l regla.
+Réglages de la légende ¦ Setările legendei
+Cellule <strong>{a}</strong> à <strong>{b}</strong> ¦ Celula <strong>{a}</strong> până la <strong>{b}</strong>
+Cellule <strong>{a}</strong> ¦ Celula <strong>{a}</strong>
+Clique une cellule pour la choisir ¦ Fă clic pe o celulă pentru a o alege
+⇧ + clic : plusieurs · double-clic : écrire ¦ ⇧ + clic: mai multe · dublu clic: scrie
+Simple note ¦ Notă simplă
+Lieux de… ¦ Locurile lui…
+Enlever ce repère ¦ Scoate acest reper
+Enlever : {n} ¦ Scoate: {n}
+Aucune forme. ¦ Nicio formă.
+🧩 À partir d’une forme ¦ 🧩 Pornind de la o formă
+Comment tracer avec la plume ¦ Cum desenezi cu penița
+<strong>Clic</strong> : un point d’angle (trait droit). ¦ <strong>Clic</strong>: un punct de colț (linie dreaptă).
+<strong>Cliquer-glisser</strong> : un point arrondi ; tire pour régler la courbe. ¦ <strong>Clic și tragere</strong>: un punct rotunjit; trage pentru a regla curba.
+<strong>Clic sur le premier point</strong> (jaune) : la forme se ferme. ¦ <strong>Clic pe primul punct</strong> (galben): forma se închide.
+Glisser un point pour le <strong>déplacer</strong> ; glisser une poignée (rond rouge) pour <strong>courber</strong> ; avec <kbd>⌥</kbd> / <kbd>Alt</kbd>, les deux poignées deviennent indépendantes. ¦ Trage un punct pentru a-l <strong>muta</strong>; trage un mâner (cerc roșu) pentru a <strong>curba</strong>; cu <kbd>⌥</kbd> / <kbd>Alt</kbd>, cele două mânere devin independente.
+<kbd>⌥</kbd> / <kbd>Alt</kbd> + clic sur un point : angle ↔ arrondi ; <strong>double-clic</strong> : le supprimer. ¦ <kbd>⌥</kbd> / <kbd>Alt</kbd> + clic pe un punct: colț ↔ rotunjit; <strong>dublu clic</strong>: îl șterge.
+Une forme fermée, puis un nouveau tracé à l’intérieur : un <strong>trou</strong>. ¦ O formă închisă, apoi un nou traseu înăuntru: o <strong>gaură</strong>.
+{n} sur le tableau : chaque trait devient une partie remplie de la forme. ¦ {n} pe panou: fiecare linie devine o parte plină a formei.
+Choisis d’abord un ou plusieurs dessins à main levée sur le tableau (outil ✍︎), puis reviens ici. ¦ Alege mai întâi unul sau mai multe desene libere de pe panou (unealta ✍︎), apoi revino aici.
+Nom de la forme ¦ Numele formei
+Ce dessin est trop détaillé pour devenir une forme : prends un dessin plus simple (ou moins de traits). ¦ Acest desen este prea detaliat pentru a deveni o formă: ia un desen mai simplu (sau cu mai puține linii).
+Forme « {name} » créée : elle est dans « Mes formes ». ¦ Forma „{name}” a fost creată: este în „Formele mele”.
+Ce navigateur ne lit pas les polices de l’ordinateur : tape le nom de la police (ou fais des listes dans Réglages → Tableaux). ¦ Acest browser nu citește fonturile calculatorului: scrie numele fontului (sau fă liste în Setări → Panouri).
+{n} de l’ordinateur lues : leurs graisses exactes sont proposées (et « Aa Toutes les polices… » les montre toutes). ¦ {n} citite de pe calculator: grosimile lor exacte sunt propuse (iar „Aa Toate fonturile…” le arată pe toate).
+Lecture des polices refusée : {error} ¦ Citirea fonturilor a fost refuzată: {error}
+Ce fichier n’est pas un tableau exporté. ¦ Acest fișier nu este un panou exportat.
+Ce fichier n’est pas un tableau exporté de l’app. ¦ Acest fișier nu este un panou exportat din aplicație.
+Import : vérification des fiches et médias… ¦ Import: se verifică fișele și fișierele media…
+Média absent ici : {name} ¦ Fișier media lipsă aici: {name}
+{name} (fiche absente ici) ¦ {name} (fișă lipsă aici)
+{name} (absent ici) ¦ {name} (lipsă aici)
+{name} (dossier non importé) ¦ {name} (dosar neimportat)
+Tableau importé ¦ Panou importat
+Associations reprises. ¦ Legăturile au fost păstrate.
+{n} sur {total} reprises (les autres visent une autre base). ¦ {n} din {total} păstrate (celelalte țintesc altă bază de date).
+Les associations visent une autre base : non reprises. ¦ Legăturile țintesc altă bază de date: nu au fost păstrate.
+Import des photos : {n} / {total}… ¦ Importul fotografiilor: {n} / {total}…
+Média non importé : {name} ¦ Fișier media neimportat: {name}
+Tableau importé. {n} (fiche, média, recueil ou dossier) devenus des notes. ¦ Panou importat. {n} (fișă, fișier media, culegere sau dosar) au devenit note.
+Une adresse qui commence par https:// ¦ O adresă care începe cu https://
+Choisis un écran (pour une fiche ou une commune, passe par « Une fiche » ou l’Éditeur de widgets). ¦ Alege un ecran (pentru o fișă sau o localitate, folosește „O fișă” sau Editorul de widgeturi).
+Ne plus associer ¦ Nu mai lega
+Le tableau garde son rangement ({where}) ; il apparaît en plus là où tu l’associes (sur la fiche de la personne, dans l’enquête…). ¦ Panoul își păstrează locul ({where}); apare în plus acolo unde îl legi (pe fișa persoanei, în investigație…).
+rangement|libre ¦ liber
+(aucun pour l’instant) ¦ (niciunul deocamdată)
+Choisis à quoi associer le tableau. ¦ Alege de ce să legi panoul.
+Déjà associé. ¦ Deja legat.
+Tableau associé. ¦ Panou legat.
+le tableau à l’écran ¦ panoul de pe ecran
+Pas d’image pour cet instantané. ¦ Nicio imagine pentru acest instantaneu.
+📸 Prendre un instantané ¦ 📸 Fă un instantaneu
+Un nom (facultatif) : ¦ Un nume (opțional):
+avant la visite aux archives ¦ înainte de vizita la arhive
+Instantané pris. ¦ Instantaneu făcut.
+↺ Revenir à cet état ¦ ↺ Revino la această stare
+⧉ En faire un tableau ¦ ⧉ Fă din el un panou
+Aucun instantané pour l’instant ¦ Niciun instantaneu deocamdată
+Versions automatiques ({n}) ¦ Versiuni automate ({n})
+une par jour de travail au plus, les 30 dernières gardées ¦ cel mult una pe zi de lucru, ultimele 30 păstrate
+Nom du nouveau tableau ¦ Numele noului panou
+même rangement ({where}) et mêmes associations ¦ același loc ({where}) și aceleași legături
+Le contenu de l’instantané est recopié dans un tableau à part ; l’original ne change pas. Les dossiers posés dedans restent ceux de l’original. ¦ Conținutul instantaneului este copiat într-un panou separat; originalul nu se schimbă. Dosarele puse în el rămân cele ale originalului.
+Tout le contenu actuel est recopié dans un tableau à part ; l’original ne change pas. Les dossiers posés dedans restent ceux de l’original. ¦ Tot conținutul actual este copiat într-un panou separat; originalul nu se schimbă. Dosarele puse în el rămân cele ale originalului.
+Nouveau tableau créé. ¦ Panou nou creat.
+État du tableau changé. ¦ Starea panoului a fost schimbată.
+(avec photos) ¦ (cu fotografii)
+(sélection) ¦ (selecție)
+Fichier du tableau enregistré ({size}) : « ＋ Ajouter → Importer un tableau » le rouvre. ¦ Fișierul panoului a fost salvat ({size}): „＋ Adaugă → Importă un panou” îl redeschide.
+{n} Mo ¦ {n} MB
+{n} ko ¦ {n} KB
+Préparation… ¦ Pregătire…
+image impossible (une image d’un autre site l’empêche, ou le tableau est trop grand) ¦ imagine imposibilă (o imagine de pe alt site o împiedică sau panoul este prea mare)
+Une copie de l’image est rangée dans les médias. ¦ O copie a imaginii este pusă în fișierele media.
+Copie dans les médias impossible : {error} ¦ Copierea în fișierele media este imposibilă: {error}
+💾 Fichier léger ¦ 💾 Fișier ușor
+sans les photos : petit, pour garder une copie ¦ fără fotografii: mic, pentru a păstra o copie
+💾 Fichier complet ¦ 💾 Fișier complet
+avec {n} : pour une autre base ¦ cu {n}: pentru altă bază de date
+pareil : pas de photo de l’app ¦ la fel: nicio fotografie din aplicație
+⤓ Exporter le tableau… (PDF, image, impression, fichier) ¦ ⤓ Exportă panoul… (PDF, imagine, tipărire, fișier)
+⤓ Exporter la sélection en image… ¦ ⤓ Exportă selecția ca imagine…
+⭐ En faire un modèle (pour les nouveaux tableaux) ¦ ⭐ Fă din el un model (pentru panourile noi)
+Ajuster à la sélection ¦ Potrivește la selecție
+Adapter le contenu à la fenêtre ¦ Potrivește conținutul la fereastră
+Pour répartir, choisis au moins trois éléments. ¦ Pentru a distribui, alege cel puțin trei elemente.
+{todo} à vérifier · {ok} · {no} — clic : aller à la suivante à vérifier ¦ {todo} de verificat · {ok} · {no} — clic: mergi la următoarea de verificat
+Plus rien à vérifier : bravo ! ¦ Nu mai e nimic de verificat: bravo!
+Question ¦ Întrebare
+Idée ¦ Idee
+Source ? ¦ Sursă?
+Important ¦ Important
+Réglé ¦ Rezolvat
+Pas encore de commentaire sur cet élément. ¦ Încă niciun comentariu la acest element.
+(sans mot) ¦ (fără cuvânt)
+＋ un autre mot… ¦ ＋ alt cuvânt…
+Retirer ce mot ¦ Scoate acest cuvânt
+Écris un commentaire ou choisis un mot. ¦ Scrie un comentariu sau alege un cuvânt.
+La personne de la frise ¦ Persoana de pe axa cronologică
+Les lieux de… ¦ Locurile lui…
+Repère « {name} » posé. ¦ Reperul „{name}” a fost pus.
+Cette enquête ne porte pas sur une personne : choisis-en une autre. ¦ Această investigație nu privește o persoană: alege alta.
+Aucun lieu avec ses coordonnées. ¦ Niciun loc cu coordonate.
+Enquête n° {n} ¦ Investigația nr. {n}
+Choisis la personne (ou « seulement mes repères »). ¦ Alege persoana (sau „doar reperele mele”).
+Les lieux de {name} ¦ Locurile lui {name}
+Arbre : lecture des fiches… ¦ Arbore: se citesc fișele…
+Arbre posé : {n}. Chaque carte reste liée à sa fiche (double-clic pour l’ouvrir). ¦ Arbore pus: {n}. Fiecare cartonaș rămâne legat de fișa sa (dublu clic pentru a o deschide).
+Arbre posé : {n} (limite atteinte). Chaque carte reste liée à sa fiche (double-clic pour l’ouvrir). ¦ Arbore pus: {n} (limită atinsă). Fiecare cartonaș rămâne legat de fișa sa (dublu clic pentru a o deschide).
+Pas de micro disponible ici. ¦ Niciun microfon disponibil aici.
+Titre du mémo ¦ Titlul notei vocale
+Mémo du {date} ¦ Notă vocală din {date}
+Le son est rangé avec ce tableau (et dans les médias de l’app). ¦ Sunetul este păstrat cu acest panou (și în fișierele media ale aplicației).
+Micro refusé : autorise-le dans les réglages de l’ordinateur. ¦ Microfon refuzat: permite-l în setările calculatorului.
+Arrête d’abord l’enregistrement. ¦ Oprește mai întâi înregistrarea.
+Enregistre d’abord ton mémo. ¦ Înregistrează mai întâi nota vocală.
+Mémo vocal ¦ Notă vocală
+{n}, en colonnes (un bout de tableur). ¦ {n}, pe coloane (o bucată de foaie de calcul).
+Mon modèle ¦ Modelul meu
+Modèle trop lourd pour être gardé (des formes faites d’une image ?). ¦ Model prea mare pentru a fi păstrat (forme făcute dintr-o imagine?).
+Modèle « {name} » enregistré : il est dans « Nouveau tableau ». ¦ Modelul „{name}” a fost salvat: este în „Panou nou”.
+Calque « {name} » supprimé (ses éléments restent sur le calque principal) ¦ Stratul „{name}” a fost șters (elementele lui rămân pe stratul principal)
+Calque supprimé (ses éléments restent sur le calque principal) ¦ Strat șters (elementele lui rămân pe stratul principal)
+▶ Lancer la présentation ({n}) ¦ ▶ Pornește prezentarea ({n})
+▶ Lancer la présentation ¦ ▶ Pornește prezentarea
+＋ La vue actuelle comme étape ¦ ＋ Vederea actuală ca etapă
+＋ La sélection comme étape ¦ ＋ Selecția ca etapă
+＋ Une étape par cadre ¦ ＋ O etapă pentru fiecare cadru
+☰ Les étapes (renommer, ordre…) ¦ ☰ Etapele (redenumire, ordine…)
+▶ Les étapes de la présentation ¦ ▶ Etapele prezentării
+Étape {n} ¦ Etapa {n}
+{n} dans la présentation. ¦ {n} în prezentare.
+Aucune étape. ¦ Nicio etapă.
+Étape remplacée par la vue actuelle. ¦ Etapa a fost înlocuită cu vederea actuală.
+Ajoute d’abord des étapes (▶ Présenter → ＋ La vue actuelle comme étape) ou des cadres. ¦ Adaugă mai întâi etape (▶ Prezintă → ＋ Vederea actuală ca etapă) sau cadre.
+Étape d’avant ¦ Etapa anterioară
+Étape suivante ¦ Etapa următoare
+→ ou Espace ¦ → sau Spațiu
+Quitter ¦ Ieși
+Remplacer par la vue actuelle ¦ Înlocuiește cu vederea actuală
+Supprimer le tableau « {name} » et tous ses dossiers ? Les photos, sons et fiches posés dessus restent dans l’app. ¦ Ștergi panoul „{name}” și toate dosarele lui? Fotografiile, sunetele și fișele puse pe el rămân în aplicație.
+sans titre ¦ fără titlu
+Tableau et dossiers supprimés. ¦ Panou și dosare șterse.
+Tableau supprimé. ¦ Panou șters.
+Ce qu’on sait ¦ Ce știm
+Sources à voir ¦ Surse de văzut
+Idée centrale ¦ Ideea centrală
+Branche {n} ¦ Ramura {n}
+Date {n} ¦ Data {n}
+Arbre à la main ¦ Arbore desenat de mână
+Enfant ¦ Copil
+Une toile libre. ¦ O pânză liberă.
+Mur d’indices ¦ Zid de indicii
+Fond de liège, une question au centre, des notes autour. ¦ Fundal de plută, o întrebare în centru, note în jur.
+Carte mentale ¦ Hartă mentală
+Une idée au centre, des branches. ¦ O idee în centru, ramuri.
+Une flèche du temps et des repères. ¦ O săgeată a timpului și repere.
+Des cases pour une famille, à relier. ¦ Căsuțe pentru o familie, de legat între ele.
+Nouveau tableau ¦ Panou nou
+Qui est le père de Marie ? ¦ Cine este tatăl Mariei?
+Piste 1, les témoins… ¦ Pista 1, martorii…
+Pour commencer ¦ Pentru început
+Pour faire tes propres modèles : dans un tableau, ⤓ Exporter → ⭐ En faire un modèle. ¦ Ca să-ți faci propriile modele: într-un panou, ⤓ Exportă → ⭐ Fă din el un model.
+Supprimer ce modèle ¦ Șterge acest model
+Modèle « {name} » supprimé ¦ Modelul „{name}” a fost șters
+Tableau sans titre ¦ Panou fără titlu
+Modèle introuvable. ¦ Model negăsit.
+Libre ¦ Liber
+Supprimer ce tableau ¦ Șterge acest panou
+Chercher… (titre, partie) ¦ Caută… (titlu, parte)
+Rechercher un tableau ¦ Caută un panou
+({n} prometteuses) ¦ ({n} promițătoare)
+{what} : {value} ¦ {what}: {value}
+{col} : les plus récents ¦ {col}: cele mai recente
+{col} : les plus anciens ¦ {col}: cele mai vechi
+{col} : du plus grand au plus petit ¦ {col}: de la cel mai mare la cel mai mic
+{col} : du plus petit au plus grand ¦ {col}: de la cel mai mic la cel mai mare
+{help} Un clic sur un titre l’ouvre ; un clic sur une colonne trie. ¦ {help} Un clic pe un titlu îl deschide; un clic pe o coloană sortează.
+Un clic sur un titre l’ouvre ; un clic sur une colonne trie. ¦ Un clic pe un titlu îl deschide; un clic pe o coloană sortează.
+Rien ne correspond à ta recherche ¦ Nimic nu corespunde căutării tale
+Les tableaux se créent dans Enquêtes → Tableaux. ¦ Panourile se creează în Investigații → Panouri.
+Partie ¦ Parte
+Communes faites ¦ Localități făcute
+Archivé ¦ Arhivat
+Tous les tableaux : ceux des enquêtes, des battues, des projets, et les tableaux libres. ¦ Toate panourile: cele ale investigațiilor, ale căutărilor ample, ale proiectelor și panourile libere.
+Les projets de l’Atelier de recherche, avec leur état et leur échéance. ¦ Proiectele din Atelierul de cercetare, cu starea și termenul lor.
+Toutes les enquêtes, avec leurs pistes et leurs tableaux. ¦ Toate investigațiile, cu pistele și panourile lor.
+Toutes les battues, commune par commune. ¦ Toate căutările ample, localitate cu localitate.
+Chercher un tableau… (titre, enquête, battue) ¦ Caută un panou… (titlu, investigație, căutare amplă)
+Chercher une battue… (titre, commune, personne) ¦ Caută o căutare amplă… (titlu, localitate, persoană)
+Chercher un projet… (titre, sorte) ¦ Caută un proiect… (titlu, tip)
+Chercher une enquête… (titre, personne) ¦ Caută o investigație… (titlu, persoană)
+Une toile libre, comme un grand tableau de liège : on y pose des notes, des formes, des flèches, des dessins, des photos, des sons, des PDF, des fiches, des écrans de l’app… Chaque tableau peut être libre ou rangé dans une enquête, une battue ou un projet de l’Atelier. ¦ O pânză liberă, ca un mare panou de plută: pui pe el note, forme, săgeți, desene, fotografii, sunete, PDF-uri, fișe, ecrane ale aplicației… Fiecare panou poate fi liber sau pus într-o investigație, o căutare amplă sau un proiect al Atelierului.
+Aucun tableau ici. ¦ Niciun panou aici.
+Aucun tableau pour l’instant ¦ Niciun panou deocamdată
+Vide, mur d’indices, carte mentale, frise… ¦ Gol, zid de indicii, hartă mentală, axă cronologică…
+Des toiles libres pour chercher, relier, montrer : notes, flèches, photos, sons, fiches… ¦ Pânze libere pentru a căuta, a lega, a arăta: note, săgeți, fotografii, sunete, fișe…
+Dans une enquête ¦ Într-o investigație
+Dans l’Atelier ¦ În Atelier
+＋ Nouveau tableau ici ¦ ＋ Panou nou aici
+Un tableau libre pour cette recherche : notes, flèches, photos, fiches… Tu peux en faire plusieurs (une « partie » chacun). ¦ Un panou liber pentru această cercetare: note, săgeți, fotografii, fișe… Poți face mai multe (câte o „parte” fiecare).
+enquêtes ¦ investigații
+TABLEAU ¦ PANOU
+TABLEAUX ¦ PANOURI
+Ranger le tableau ¦ Pune panoul la locul lui
+Ranger ¦ Pune la loc
+Laquelle ¦ Care
+(facultatif : pour avoir plusieurs tableaux, « Piste 1 », « Les témoins »…) ¦ (opțional: pentru a avea mai multe panouri, „Pista 1”, „Martorii”…)
+(facultatif : piste 1, les témoins, la branche paternelle…) ¦ (opțional: pista 1, martorii, ramura paternă…)
+(aucune) ¦ (niciuna)
+▭ Rectangle ¦ ▭ Dreptunghi
+▢ Arrondi ¦ ▢ Rotunjit
+◯ Ovale ¦ ◯ Oval
+△ Triangle ¦ △ Triunghi
+☆ Étoile ¦ ☆ Stea
+⬡ Hexagone ¦ ⬡ Hexagon
+💬 Bulle ¦ 💬 Bulă
+☁ Nuage ¦ ☁ Nor
+pinceau|Stylo ¦ Pix
+pinceau|Monoligne ¦ Monolinie
+pinceau|Marqueur ¦ Marker
+pinceau|Crayon ¦ Creion
+pinceau|Pastel ¦ Pastel
+pinceau|Stylo-plume ¦ Stilou
+pinceau|Calame ¦ Calam
+pinceau|Pinceau ¦ Pensulă
+pinceau|Aquarelle ¦ Acuarelă
+pinceau|Remplissage ¦ Umplere
+pinceau|Surligneur ¦ Evidențiator
+pinceau|Craie ¦ Cretă
+pinceau|Néon ¦ Neon
+pinceau|Aérographe ¦ Aerograf
+pinceau|Pointillé ¦ Punctat
+Néon ¦ Neon
+Pointillé ¦ Punctat
+trait|— droit ¦ — dreaptă
+trait|⌒ courbe ¦ ⌒ curbă
+trait|⌐ coudé ¦ ⌐ frântă
+trait|∿ vague ¦ ∿ val
+trait|⩘ zigzag ¦ ⩘ zigzag
+trait|⤳ contourne les éléments ¦ ⤳ ocolește elementele
+⌐ coudé ¦ ⌐ frântă
+⤳ contourne les éléments ¦ ⤳ ocolește elementele
+fond|Fond à points ¦ Fundal cu puncte
+fond|Quadrillé ¦ Caroiaj
+fond|Lignes ¦ Linii
+fond|Uni ¦ Uni
+fond|Papier ¦ Hârtie
+fond|Liège ¦ Plută
+fond|Sombre ¦ Întunecat
+fond|Couleur à choisir… ¦ Culoare la alegere…
+Fond à points ¦ Fundal cu puncte
+Liège ¦ Plută
+Couleur à choisir… ¦ Culoare la alegere…
+Motif sur la couleur ¦ Model pe culoare
+motif|sans motif ¦ fără model
+motif|points ¦ puncte
+motif|quadrillé ¦ caroiaj
+motif|lignes ¦ linii
+quadrillé ¦ caroiaj
+Instantanés : figer l’état du tableau, y revenir, en faire un nouveau tableau ¦ Instantanee: îngheață starea panoului, revino la ea, fă din ea un panou nou
+📸 Instantanés ¦ 📸 Instantanee
+Créer un nouveau tableau à partir de celui-ci ¦ Creează un panou nou pornind de la acesta
+PDF, image PNG ou JPG, impression, fichier du tableau, modèle ¦ PDF, imagine PNG sau JPG, tipărire, fișierul panoului, model
+Les pistes à vérifier : clic pour aller à la suivante ¦ Pistele de verificat: clic pentru a merge la următoarea
+Chercher dans le tableau ¦ Caută în panou
+Grille aimantée et guides d’alignement ¦ Grilă magnetică și ghidaje de aliniere
+Mini-carte du tableau (montrer ou cacher) ¦ Mini-harta panoului (arată sau ascunde)
+Présenter : un parcours d’étapes ¦ Prezintă: un parcurs de etape
+▶ Présenter ¦ ▶ Prezintă
+Réglages des tableaux : disposition, ordre des outils, boutons montrés ou cachés ¦ Setările panourilor: așezare, ordinea uneltelor, butoane arătate sau ascunse
+Verrouiller ou déverrouiller tout le tableau ¦ Blochează sau deblochează tot panoul
+Supprimer ce tableau (et ses dossiers) ¦ Șterge acest panou (și dosarele lui)
+Revenir aux tableaux ¦ Înapoi la panouri
+Titre du tableau ¦ Titlul panoului
+État du tableau ¦ Starea panoului
+● En cours ¦ ● În curs
+⏸ En pause ¦ ⏸ În pauză
+✓ Terminé ¦ ✓ Terminat
+Enregistrer maintenant (le tableau s’enregistre aussi tout seul) ¦ Salvează acum (panoul se salvează și singur)
+Ajouter un fichier, un média, une fiche, un écran de l’app… ¦ Adaugă un fișier, un fișier media, o fișă, un ecran al aplicației…
+Zoom : ajuster à la sélection, adapter à la fenêtre… ¦ Zoom: potrivește la selecție, potrivește la fereastră…
+Montrer ce qui est groupé ¦ Arată ce este grupat
+Lâche ici : images, sons, vidéos, PDF… ¦ Lasă aici: imagini, sunete, videoclipuri, PDF-uri…
+Un tableau vide. ¦ Un panou gol.
+Choisis un outil à gauche, ou glisse ici des photos, des sons, des PDF… « ＋ Ajouter » pose une fiche, un écran de l’app, un widget, un recueil, une étiquette ou un dossier. Double-clic pour écrire. ¦ Alege o unealtă din stânga sau trage aici fotografii, sunete, PDF-uri… „＋ Adaugă” pune o fișă, un ecran al aplicației, un widget, o culegere, o etichetă sau un dosar. Dublu clic pentru a scrie.
+Revenir à la police du thème ¦ Revino la fontul temei
+Aimanter : grille aimantée et guides d’alignement ¦ Aliniere magnetică: grilă magnetică și ghidaje de aliniere
+Choisis à droite une personne, une famille ou une enquête, ou pose des repères. ¦ Alege în dreapta o persoană, o familie sau o investigație, sau pune repere.
+Glisser pour plier · double-clic pour enlever ce coude ¦ Trage pentru a îndoi · dublu clic pentru a scoate acest cot
+Glisser pour ajouter un coude ¦ Trage pentru a adăuga un cot
+Modifié… ¦ Modificat…
+Enregistré ✓ ¦ Salvat ✓
+⚠ Modifié dans une autre fenêtre ¦ ⚠ Modificat în altă fereastră
+Envoi des fichiers… ¦ Se trimit fișierele…
+efface seulement ce que tu touches ¦ șterge doar ce atingi
+🩹 Gomme fine ¦ 🩹 Radieră fină
+🧽 Gomme à traits ¦ 🧽 Radieră de linii
+enlève le trait entier ¦ șterge toată linia
+Autre couleur pour les notes ¦ Altă culoare pentru note
+Tire une flèche d’un élément à un autre : elle les suit quand on les déplace. ¦ Trage o săgeată de la un element la altul: le urmează când le muți.
+Clique où poser le tableur. ¦ Fă clic unde vrei să pui foaia de calcul.
+Glisse pour te déplacer ; molette ou deux doigts aussi ; ⌘ + molette pour zoomer. ¦ Trage pentru a te deplasa; rotița sau două degete merg și ele; ⌘ + rotiță pentru zoom.
+Clic : choisir · ⇧ + clic : en ajouter · ⌥ / Alt + glisser : dupliquer · glisser dans le vide : en choisir plusieurs · double-clic : écrire ou ouvrir. ¦ Clic: alege · ⇧ + clic: adaugă · ⌥ / Alt + tragere: duplică · tragere în gol: alege mai multe · dublu clic: scrie sau deschide.
+Les groupes sont montrés. ¦ Grupurile sunt arătate.
+Groupes cachés. ¦ Grupuri ascunse.
+Fond du cadre ¦ Fundalul casetei
+Bord du cadre ¦ Marginea casetei
+Épaisseur du bord ¦ Grosimea marginii
+Marge dans le cadre ¦ Spațiu interior în casetă
+Arrondi du cadre ¦ Rotunjirea casetei
+Position le long du trait ¦ Poziția de-a lungul liniei
+sur le trait ¦ pe linie
+au-dessus ¦ deasupra
+en dessous ¦ dedesubt
+Écart avec le trait ¦ Distanța față de linie
+suivre l’angle du trait ¦ urmează unghiul liniei
+Fond du tableau ¦ Fundalul panoului
+⌘Z annuler · ⌘D dupliquer · ⌘G grouper (⇧ pour dégrouper) · ⌘L verrouiller · ] [ devant / derrière · flèches pour pousser · espace pour se déplacer · ⌘ + molette pour zoomer · coller une image ou une adresse web. ¦ ⌘Z anulează · ⌘D duplică · ⌘G grupează (⇧ pentru degrupare) · ⌘L blochează · ] [ în față / în spate · săgeți pentru a împinge · spațiu pentru a te deplasa · ⌘ + rotiță pentru zoom · lipește o imagine sau o adresă web.
+Couleurs, formes, polices, tailles, ordre des menus : Réglages → Tableaux. ¦ Culori, forme, fonturi, dimensiuni, ordinea meniurilor: Setări → Panouri.
+Puces et numéros ¦ Buline și numerotare
+• Puce ¦ • Bulină
+1. Nombres ¦ 1. Numere
+I. Chiffres romains ¦ I. Cifre romane
+a. Lettres ¦ a. Litere
+A. Lettres capitales ¦ A. Majuscule
+– Tiret ¦ – Liniuță
+☐ Cases à cocher ¦ ☐ Casete de bifat
+Les graisses exactes de la police : 🖥 ci-dessous (polices de l’ordinateur). ¦ Grosimile exacte ale fontului: 🖥 mai jos (fonturile calculatorului).
+Lire les graisses exactes des polices de l’ordinateur ¦ Citește grosimile exacte ale fonturilor calculatorului
+Couleur des pointes ¦ Culoarea vârfurilor
+même couleur que le trait ¦ aceeași culoare cu linia
+(comme le trait) ¦ (ca linia)
+Pointe au début ¦ Vârf la început
+Pointe à la fin ¦ Vârf la sfârșit
+Taille des pointes ¦ Mărimea vârfurilor
+Forme du trait ¦ Forma liniei
+frère de, a écrit à… ¦ frate cu, i-a scris lui…
+＋ ligne ¦ ＋ rând
+＋ colonne ¦ ＋ coloană
+− ligne ¦ − rând
+− colonne ¦ − coloană
+Ajouter une ligne dessous ¦ Adaugă un rând dedesubt
+Enlever la ligne ¦ Scoate rândul
+Ajouter une colonne à droite ¦ Adaugă o coloană la dreapta
+Enlever la colonne ¦ Scoate coloana
+Fusionner les cellules choisies ¦ Unește celulele alese
+⊞ Fusionner ¦ ⊞ Unește
+Séparer les cellules ¦ Separă celulele
+⊟ Séparer ¦ ⊟ Separă
+Colonne plus étroite ¦ Coloană mai îngustă
+Colonne plus large ¦ Coloană mai lată
+Vider la cellule ¦ Golește celula
+⌫ vider ¦ ⌫ golește
+Le tableur en grand : plus de fonctions, tri, filtres, Excel… puis « ✓ Enregistrer et revenir » ¦ Foaia de calcul mare: mai multe funcții, sortare, filtre, Excel… apoi „✓ Salvează și revino”
+Télécharger en CSV (Excel, Numbers…) ¦ Descarcă în CSV (Excel, Numbers…)
+première ligne en titre ¦ primul rând ca titlu
+première colonne en titre ¦ prima coloană ca titlu
+une ligne sur deux teintée ¦ un rând din două colorat
+Fond des titres ¦ Fundalul titlurilor
+Fond de la cellule (les cellules choisies) ¦ Fundalul celulei (celulele alese)
+Fond de la cellule ¦ Fundalul celulei
+aperçu vivant dans le tableau ¦ previzualizare vie în panou
+La fiche montre ¦ Fișa arată
+Lu dans la fiche à chaque ouverture du tableau : si la fiche change, la carte suit. ¦ Citit din fișă la fiecare deschidere a panoului: dacă fișa se schimbă, cartonașul o urmează.
+de la personne, son couple et ses enfants ¦ a persoanei, a cuplului și a copiilor ei
+👤 Changer de personne ¦ 👤 Schimbă persoana
+aucune fiche (seulement mes repères) ¦ nicio fișă (doar reperele mele)
+une personne et sa famille ¦ o persoană și familia ei
+la personne d’une enquête ¦ persoana unei investigații
+👤 Choisir la personne ¦ 👤 Alege persoana
+Une commune, un lieu… ¦ O localitate, un loc…
+relier les lieux dans l’ordre (le parcours) ¦ leagă locurile în ordine (traseul)
+Poser un repère ¦ Pune un reper
+Lien tout prêt ¦ Legătură gata făcută
+Glisse un « ＋ » sur le trait pour le plier en plusieurs segments. ¦ Trage un „＋” pe linie pentru a o îndoi în mai multe segmente.
+Aligner ¦ Aliniază
+Centrés (de gauche à droite) ¦ Centrate (de la stânga la dreapta)
+Centrés (de haut en bas) ¦ Centrate (de sus în jos)
+Même écart de gauche à droite ¦ Aceeași distanță de la stânga la dreapta
+Même écart de haut en bas ¦ Aceeași distanță de sus în jos
+Même largeur que le premier choisi ¦ Aceeași lățime ca primul ales
+Même hauteur que le premier choisi ¦ Aceeași înălțime ca primul ales
+Répartir ¦ Distribuie
+⇹ en largeur ¦ ⇹ pe lățime
+⇳ en hauteur ¦ ⇳ pe înălțime
+═ même largeur ¦ ═ aceeași lățime
+‖ même hauteur ¦ ‖ aceeași înălțime
+🔓 Déverrouiller ¦ 🔓 Deblochează
+🔒 Verrouiller ¦ 🔒 Blochează
+⧉ Grouper ¦ ⧉ Grupează
+Dégrouper ¦ Degrupează
+Faire de ce dessin une forme à toi (réutilisable) ¦ Fă din acest desen o formă a ta (refolosibilă)
+✏️ En faire une forme ¦ ✏️ Fă din el o formă
+Devant ¦ În față
+Derrière ¦ În spate
+Image du web ¦ Imagine de pe web
+Lien web ¦ Link web
+Frise vivante ¦ Axă cronologică vie
+Rechercher une forme ¦ Caută o formă
+Créer une forme à partir d’une autre (retourner, tourner, étirer, ajouter, percer) ¦ Creează o formă pornind de la alta (întoarce, rotește, întinde, adaugă, perforează)
+＋ Créer une forme ¦ ＋ Creează o formă
+✒️ Plume (tracé) ¦ ✒️ Peniță (traseu)
+✍︎ À partir de mon dessin ¦ ✍︎ Pornind de la desenul meu
+🖼 À partir d’une image ¦ 🖼 Pornind de la o imagine
+Fermer le tracé en cours ¦ Închide traseul în curs
+Commencer un autre tracé (un trou s’il est dans la forme) ¦ Începe alt traseu (o gaură dacă este în formă)
+Supprimer le point choisi ¦ Șterge punctul ales
+Annuler le dernier point ¦ Anulează ultimul punct
+◯ Fermer ¦ ◯ Închide
+＋ Nouveau tracé ¦ ＋ Traseu nou
+✕ Point ¦ ✕ Punct
+Une image PNG avec un fond transparent donne sa silhouette. Sinon, coche : ce qui est sombre devient la forme. ¦ O imagine PNG cu fundal transparent dă silueta ei. Altfel, bifează: ce este întunecat devine forma.
+le sombre devient la forme (images sans transparence) ¦ întunecatul devine forma (imagini fără transparență)
+Choisis d’abord un dessin sur le tableau. ¦ Alege mai întâi un desen de pe panou.
+Ferme la forme : au moins trois points, puis clic sur le premier (ou « ◯ Fermer »). ¦ Închide forma: cel puțin trei puncte, apoi clic pe primul (sau „◯ Închide”).
+Ajouter au tableau ¦ Adaugă pe panou
+📎 Des fichiers ¦ 📎 Fișiere
+📁 Choisir des fichiers ¦ 📁 Alege fișiere
+Images, GIF, sons, vidéos, PDF (ou glisse-les sur le tableau, ou colle une image). ¦ Imagini, GIF-uri, sunete, videoclipuri, PDF-uri (sau trage-le pe panou, sau lipește o imagine).
+🖼 Un média de l’app ¦ 🖼 Un fișier media al aplicației
+Un média de l’app ¦ Un fișier media al aplicației
+Poser sur le tableau ¦ Pune pe panou
+Choisir une image, un son, une vidéo… ¦ Alege o imagine, un sunet, un videoclip…
+🌐 D’ailleurs ¦ 🌐 Din altă parte
+Adresse d’une image ou d’un site ¦ Adresa unei imagini sau a unui site
+👤 Une fiche ¦ 👤 O fișă
+Poser la fiche ¦ Pune fișa
+📺 Un écran de l’app ¦ 📺 Un ecran al aplicației
+Une liste, un diagramme, une statistique, la carte, un village, une de tes listes… ¦ O listă, un grafic, o statistică, harta, un sat, una dintre listele tale…
+avec l’aperçu vivant ¦ cu previzualizarea vie
+Poser l’écran ¦ Pune ecranul
+✨ Un de mes widgets ¦ ✨ Unul dintre widgeturile mele
+Poser le widget ¦ Pune widgetul
+Crée d’abord un widget (Réglages → Éditeur de widgets). ¦ Creează mai întâi un widget (Setări → Editorul de widgeturi).
+Titre du recueil ¦ Titlul culegerii
+📚 Un recueil ¦ 📚 O culegere
+🏷 Une étiquette ¦ 🏷 O etichetă
+ou un mot à toi ¦ sau un cuvânt al tău
+Nom du dossier ¦ Numele dosarului
+Poser ce mot ¦ Pune acest cuvânt
+▦ Un tableur ¦ ▦ O foaie de calcul
+Une grille à remplir, avec des formules (=SOMME…) ; on peut y coller un bout d’Excel ou de Numbers. ¦ O grilă de completat, cu formule (=SOMME…); poți lipi în ea o bucată din Excel sau Numbers.
+Poser un tableur ¦ Pune o foaie de calcul
+📁 Un dossier ¦ 📁 Un dosar
+Un tableau dans le tableau : double-clic pour y entrer. ¦ Un panou în panou: dublu clic pentru a intra în el.
+Créer le dossier ¦ Creează dosarul
+🌳 Un arbre automatique ¦ 🌳 Un arbore automat
+Une personne, et ses parents, grands-parents ou enfants posés en fiches reliées par des flèches. ¦ O persoană și părinții, bunicii sau copiii ei, puși ca fișe legate prin săgeți.
+ses ancêtres ¦ ascendenții ei
+ses descendants ¦ descendenții ei
+sa famille proche ¦ familia ei apropiată
+avec les conjoints ¦ cu soții
+flèches (sinon des traits) ¦ săgeți (altfel linii)
+Poser l’arbre ¦ Pune arborele
+🗓 Une frise vivante ¦ 🗓 O axă cronologică vie
+Les événements d’une personne (ou de sa famille) placés tout seuls sur une ligne du temps ; elle suit la fiche. ¦ Evenimentele unei persoane (sau ale familiei ei) puse singure pe o linie a timpului; ea urmează fișa.
+Poser la frise ¦ Pune axa cronologică
+🗺 Une carte ¦ 🗺 O hartă
+Les lieux d’une personne, de sa famille ou d’une enquête ; tu peux y poser tes repères. ¦ Locurile unei persoane, ale familiei ei sau ale unei investigații; poți pune pe ea reperele tale.
+Nom de la personne (facultatif) ¦ Numele persoanei (opțional)
+la personne et sa famille ¦ persoana și familia ei
+personne : seulement mes repères ¦ nimeni: doar reperele mele
+Poser la carte ¦ Pune harta
+▭ Un cadre ¦ ▭ Un cadru
+Une zone nommée (« Branche paternelle », « Sources à voir ») : ce qui est dedans bouge avec elle ; on peut la replier. ¦ O zonă cu nume („Ramura paternă”, „Surse de văzut”): ce este înăuntru se mișcă odată cu ea; o poți plia.
+Nom du cadre ¦ Numele cadrului
+Poser le cadre ¦ Pune cadrul
+🎙 Un mémo vocal ¦ 🎙 O notă vocală
+Enregistre ta voix ici : le son est rangé avec le tableau et posé dessus. ¦ Înregistrează-ți vocea aici: sunetul este păstrat cu panoul și pus pe el.
+🎙 Enregistrer ¦ 🎙 Înregistrează
+🎙 Mémo vocal ¦ 🎙 Notă vocală
+Un fichier « .lcnda-tableau.json » (⤓ Exporter → Fichier léger ou complet) : il devient un nouveau tableau. ¦ Un fișier „.lcnda-tableau.json” (⤓ Exportă → Fișier ușor sau complet): devine un panou nou.
+Tableau verrouillé : clic pour le déverrouiller ¦ Panou blocat: clic pentru a-l debloca
+Verrouiller tout le tableau ¦ Blochează tot panoul
+Tableau verrouillé : on peut le regarder et ouvrir ce qu’il contient, rien ne bouge. ¦ Panou blocat: îl poți privi și poți deschide ce conține, nimic nu se mișcă.
+Tableau déverrouillé. ¦ Panou deblocat.
+Un projet de l’Atelier ¦ Un proiect al Atelierului
+Un lieu (sa commune) ¦ Un loc (localitatea lui)
+Un média (photo, acte, son…) ¦ Un fișier media (fotografie, act, sunet…)
+Une famille (un couple) ¦ O familie (un cuplu)
+Un événement ¦ Un eveniment
+Un animal ¦ Un animal
+Un autre tableau ¦ Alt panou
+Relier ce tableau à une personne, une enquête (ou une de ses parties), une battue… ¦ Leagă acest panou de o persoană, o investigație (sau una dintre părțile ei), o căutare amplă…
+🔗 Relier… ¦ 🔗 Leagă…
+Relier ce tableau ¦ Leagă acest panou
+À quoi ¦ De ce
+Nouveau tableau depuis un instantané ¦ Panou nou dintr-un instantaneu
+Nouveau tableau à partir de celui-ci ¦ Panou nou pornind de la acesta
+Grille aimantée : les éléments s’alignent sur la grille et sur les autres (⌥ / Alt en glissant pour s’en passer). ¦ Grilă magnetică: elementele se aliniază pe grilă și unele cu altele (⌥ / Alt în timp ce tragi pentru a renunța).
+Grille aimantée enlevée. ¦ Grila magnetică a fost scoasă.
+frère de ¦ frate cu
+sœur de ¦ soră cu
+époux de ¦ soțul lui/ei
+épouse de ¦ soția lui
+père de ¦ tatăl lui/ei
+mère de ¦ mama lui/ei
+fils de ¦ fiul lui/ei
+fille de ¦ fiica lui/ei
+cousin de ¦ văr cu
+cousine de ¦ verișoară cu
+parrain de ¦ naș al lui/ei
+marraine de ¦ nașă a lui/ei
+témoin de ¦ martor al lui/ei
+voisin de ¦ vecin cu
+a travaillé pour ¦ a lucrat pentru
+a écrit à ¦ i-a scris lui/ei
+même personne ? ¦ aceeași persoană?
+💬 Commentaires ¦ 💬 Comentarii
+Ton mot (ex. « Piste », « Archives ») ¦ Cuvântul tău (ex. „Pistă”, „Arhive”)
+Les mots proposés pour les bulles (tu en ajoutes avec « ＋ un autre mot… »). ¦ Cuvintele propuse pentru bule (adaugi altele cu „＋ alt cuvânt…”).
+Les lignes et les colonnes gardées, avec les formules possibles. ¦ Rândurile și coloanele păstrate, cu formule posibile.
+🗒 Une note par ligne ¦ 🗒 O notă pe rând
+Chaque ligne devient une note, rangées en grille. ¦ Fiecare rând devine o notă, așezate în grilă.
+🗂 Une note par ligne du tableur ¦ 🗂 O notă pe rând al foii de calcul
+Les colonnes d’une ligne dans la même note. ¦ Coloanele unui rând în aceeași notă.
+T Un seul texte ¦ T Un singur text
+Tout le texte collé, d’un bloc. ¦ Tot textul lipit, dintr-o bucată.
+grouper ce qui est posé ¦ grupează ce este pus
+⭐ En faire un modèle ¦ ⭐ Fă din el un model
+Enregistrer le modèle ¦ Salvează modelul
+Nom du modèle ¦ Numele modelului
+Pour une enquête sur un enfant trouvé… ¦ Pentru o investigație despre un copil găsit…
+Décris-le ¦ Descrie-l
+seulement la sélection ¦ doar selecția
+sans les textes (garder les cases vides, les titres des cadres restent) ¦ fără texte (păstrează căsuțele goale, titlurile cadrelor rămân)
+Il apparaît dans « Nouveau tableau », avec les modèles de l’app. Les fiches, photos et sons posés sont gardés tels quels (ils pointent vers ta base). ¦ Apare în „Panou nou”, cu modelele aplicației. Fișele, fotografiile și sunetele puse sunt păstrate așa cum sunt (trimit la baza ta de date).
+Calque principal ¦ Strat principal
+Les nouveaux éléments vont sur ce calque ¦ Elementele noi merg pe acest strat
+Choisir ce qu’il contient ¦ Alege ce conține
+Supprimer le calque (ses éléments vont sur le calque principal) ¦ Șterge stratul (elementele lui merg pe stratul principal)
+Mettre la sélection sur le calque choisi ¦ Pune selecția pe stratul ales
+Un calque caché ne s’affiche pas (ni dans les images exportées) ; verrouillé, on ne peut plus le choisir ni le bouger. ¦ Un strat ascuns nu se afișează (nici în imaginile exportate); blocat, nu mai poate fi ales sau mutat.
+Y aller ¦ Mergi acolo
+⟳ vue ¦ ⟳ vedere
+Chercher un mot, un nom… ¦ Caută un cuvânt, un nume…
+Mini-carte ¦ Mini-hartă
+Glisser pour déplacer la mini-carte ¦ Trage pentru a muta mini-harta
+Cacher la mini-carte ¦ Ascunde mini-harta
+Pour tous les jours ¦ Pentru toate zilele
+Écritures anciennes ¦ Scrieri vechi
+Trop lourd pour être gardé (retire des formes faites d’une image). ¦ Prea mare pentru a fi păstrat (scoate formele făcute dintr-o imagine).
+Réglages trop lourds pour être gardés (retire des formes faites d’une image). ¦ Setări prea mari pentru a fi păstrate (scoate formele făcute dintr-o imagine).
+Choisis une forme de départ. ¦ Alege o formă de pornire.
+Forme trop détaillée : retire des formes ajoutées. ¦ Formă prea detaliată: scoate din formele adăugate.
+Choisis une forme ou trace la pointe. ¦ Alege o formă sau desenează vârful.
+Cette forme est trop détaillée pour une pointe. ¦ Această formă este prea detaliată pentru un vârf.
+les réglages des tableaux sont fermés ¦ setările panourilor sunt închise
+Montrer / cacher ¦ Arată / ascunde
+Déjà dans l’accès rapide ¦ Deja în accesul rapid
+Ajouter à l’accès rapide ¦ Adaugă la accesul rapid
+La reprendre dans le dessin vectoriel (plume, points, Pathfinder…) ¦ Reia-o în desenul vectorial (peniță, puncte, Pathfinder…)
+Supprimer cette forme ¦ Șterge această formă
+Aucune pour l’instant : dans un tableau, outil Formes → « ＋ Créer une forme ». ¦ Niciuna deocamdată: într-un panou, unealta Forme → „＋ Creează o formă”.
+Supprimer la liste ¦ Șterge lista
+Pas encore de pinceau à toi. ¦ Încă nicio pensulă a ta.
+tous les réglages des tableaux (couleurs, pointes, formes, polices, tailles, tableur, pinceaux, menus) ¦ toate setările panourilor (culori, vârfuri, forme, fonturi, dimensiuni, foaie de calcul, pensule, meniuri)
+Reprendre les réglages « {name} » ? Les réglages actuels sont remplacés (enregistre-les d’abord sous un nom si tu veux les garder). ¦ Folosești setările „{name}”? Setările actuale sunt înlocuite (salvează-le mai întâi sub un nume dacă vrei să le păstrezi).
+Reprendre ces réglages ¦ Folosește aceste setări
+Reprendre les réglages ¦ Folosește setările
+Réglages enregistrés sous « {name} » (et utilisés dès maintenant). ¦ Setări salvate ca „{name}” (și folosite de acum).
+Réglages « {name} » importés : « Appliquer » pour t’en servir. ¦ Setările „{name}” au fost importate: „Aplică” pentru a le folosi.
+Palette « {name} » retirée ¦ Paleta „{name}” a fost scoasă
+Pointe « {name} » créée : elle est dans la liste. ¦ Vârful „{name}” a fost creat: este în listă.
+Pointe retirée (les traits qui l’utilisent prennent un triangle) ¦ Vârf scos (liniile care îl folosesc primesc un triunghi)
+⚡ « {name} » est déjà dans l’accès rapide (en haut de cet onglet ; ✕ sur elle pour l’en retirer). ¦ ⚡ „{name}” este deja în accesul rapid (sus în această filă; ✕ pe ea pentru a o scoate).
+⚡ « {name} » ajoutée à l’accès rapide : elle est en haut de cet onglet, et dans la barre de l’outil Formes. N’oublie pas « Enregistrer ». ¦ ⚡ „{name}” a fost adăugată la accesul rapid: este sus în această filă și în bara uneltei Forme. Nu uita „Salvează”.
+Chargement des formes… ¦ Se încarcă formele…
+📚 Réessayer de charger les formes ¦ 📚 Încearcă din nou să încarci formele
+Les formes n’ont pas pu être chargées. Réessaie. ¦ Formele nu au putut fi încărcate. Încearcă din nou.
+Forme retirée (les tableaux qui l’utilisent la gardent) ¦ Formă scoasă (panourile care o folosesc o păstrează)
+Ma liste ¦ Lista mea
+Liste de polices retirée ¦ Lista de fonturi a fost scoasă
+Ajouter une police à la liste ¦ Adaugă un font în listă
+« {font} » ajoutée à « {list} ». ¦ „{font}” a fost adăugat în „{list}”.
+Toutes les polices ¦ Toate fonturile
+Élémentaire ¦ Elementar
+Géométrie ¦ Geometrie
+Bulles ¦ Bule
+Étoiles et badges ¦ Stele și insigne
+Croyances et mémoire ¦ Credințe și memorie
+Écrits et documents ¦ Scrieri și documente
+Lieux et bâtiments ¦ Locuri și clădiri
+Maison et objets ¦ Casă și obiecte
+Vêtements et parures ¦ Haine și podoabe
+Métiers et outils ¦ Meserii și unelte
+Transports et voyages ¦ Transporturi și călătorii
+Nature ¦ Natură
+Météo et ciel ¦ Vreme și cer
+Cuisine et repas ¦ Bucătărie și mese
+Musique, jeux et sport ¦ Muzică, jocuri și sport
+Santé et corps ¦ Sănătate și corp
+Objets ¦ Obiecte
+Mes formes ¦ Formele mele
+Lettres et chiffres ¦ Litere și cifre
+Armoiries et héraldique ¦ Steme și heraldică
+Cadres et bordures ¦ Rame și borduri
+Émotions ¦ Emoții
+Drapeaux ¦ Steaguri
+Écrans et appareils ¦ Ecrane și aparate
+Argent et commerce ¦ Bani și comerț
+Fond des formes, étiquettes, dossiers ¦ Fundalul formelor, etichetelor, dosarelor
+Bord des formes et contour des médias ¦ Marginea formelor și conturul fișierelor media
+Couleur du texte, des traits et flèches ¦ Culoarea textului, a liniilor și a săgeților
+Légendes des traits : texte ¦ Legendele liniilor: text
+Légendes des traits : fond du cadre ¦ Legendele liniilor: fundalul casetei
+Légendes des traits : bord du cadre ¦ Legendele liniilor: marginea casetei
+⤓ Exporter / imprimer ¦ ⤓ Exportă / tipărește
+⛶ Plein écran ¦ ⛶ Ecran complet
+❓ Pistes à vérifier (compteur) ¦ ❓ Piste de verificat (contor)
+🔍 Chercher dans le tableau ¦ 🔍 Caută în panou
+🧲 Grille aimantée ¦ 🧲 Grilă magnetică
+🗺 Mini-carte ¦ 🗺 Mini-hartă
+⚙️ Réglages des tableaux ¦ ⚙️ Setările panourilor
+🗑 Supprimer ¦ 🗑 Șterge
+✕ Fermer ¦ ✕ Închide
+Bord / contour ¦ Margine / contur
+Couleur du texte ou du trait ¦ Culoarea textului sau a liniei
+Épaisseur et style du trait ¦ Grosimea și stilul liniei
+Arrondi ¦ Rotunjire
+Taille et style du texte ¦ Mărimea și stilul textului
+Pointes des flèches ¦ Vârfurile săgeților
+Forme du trait et légende ¦ Forma liniei și legenda
+Pinceau ¦ Pensulă
+Titre, étiquette, adresse ¦ Titlu, etichetă, adresă
+Fiche : ce qu’elle montre ¦ Fișa: ce arată
+Piste : à vérifier, confirmée, fausse ¦ Pistă: de verificat, confirmată, falsă
+Carte et repères ¦ Hartă și repere
+Liens tout prêts (frère de…) ¦ Legături gata făcute (frate cu…)
+Boutons (dupliquer, verrouiller…) ¦ Butoane (duplică, blochează…)
+Des fichiers ¦ Fișiere
+D’ailleurs (web) ¦ Din altă parte (web)
+Une fiche ¦ O fișă
+Un écran de l’app ¦ Un ecran al aplicației
+Un de mes widgets ¦ Unul dintre widgeturile mele
+Un tableur ¦ O foaie de calcul
+Un dossier ¦ Un dosar
+Un arbre automatique ¦ Un arbore automat
+Une frise vivante ¦ O axă cronologică vie
+Une carte ¦ O hartă
+Un cadre (section) ¦ Un cadru (secțiune)
+Un mémo vocal ¦ O notă vocală
+Importer un tableau ¦ Importă un panou
+Gras, italique ¦ Aldin, cursiv
+Suivre l’angle du trait ¦ Urmează unghiul liniei
+pointe|aucune ¦ niciunul
+pointe|▶ triangle ¦ ▶ triunghi
+pointe|➤ flèche fine ¦ ➤ săgeată subțire
+pointe|› ouverte ¦ › deschis
+pointe|⏩ double ¦ ⏩ dublu
+pointe|◣ demi-flèche ¦ ◣ jumătate de săgeată
+pointe|● rond ¦ ● cerc
+pointe|○ rond vide ¦ ○ cerc gol
+pointe|• point ¦ • punct
+pointe|■ carré ¦ ■ pătrat
+pointe|□ carré vide ¦ □ pătrat gol
+pointe|◆ losange ¦ ◆ romb
+pointe|◇ losange vide ¦ ◇ romb gol
+pointe|| barre ¦ | bară
+pointe|⋔ patte d’oie ¦ ⋔ labă de gâscă
+pointe|» plumes ¦ » pene
+pointe|▷ triangle vide ¦ ▷ triunghi gol
+pointe|⟶ flèche longue ¦ ⟶ săgeată lungă
+pointe|» double chevron ¦ » chevron dublu
+pointe|✕ croix ¦ ✕ cruce
+pointe|＋ plus ¦ ＋ plus
+pointe|★ étoile ¦ ★ stea
+pointe|♥ cœur ¦ ♥ inimă
+pointe|‖ un (deux barres) ¦ ‖ unu (două bare)
+pointe|⋲ plusieurs (pied de corbeau) ¦ ⋲ mai mulți (picior de cioară)
+pointe|◗ demi-rond ¦ ◗ semicerc
+Chercher une forme (cœur, maison, chien…) ¦ Caută o formă (inimă, casă, câine…)
+＋ ajouter (réunir) ¦ ＋ adaugă (unește)
+⭕ percer (trou) ¦ ⭕ perforează (gaură)
+miroir ¦ oglindă
+Créer une forme à partir d’une autre ¦ Creează o formă pornind de la alta
+1. La forme de départ ¦ 1. Forma de pornire
+2. La transformer ¦ 2. Transform-o
+3. Lui ajouter d’autres formes, ou y percer un trou ¦ 3. Adaugă-i alte forme sau fă-i o gaură
+＋ Ajouter une forme ¦ ＋ Adaugă o formă
+Nom de la nouvelle forme ¦ Numele noii forme
+Elle ira dans « Mes formes », et dans l’accès rapide. ¦ Va merge în „Formele mele” și în accesul rapid.
+Fermer la forme ¦ Închide forma
+Point ¦ Punct
+RÉGLAGES DES TABLEAUX ¦ SETĂRILE PANOURILOR
+FORMES ¦ FORME
+Créer une pointe ¦ Creează un vârf
+Créer la pointe ¦ Creează vârful
+Chercher une forme (flèche, cœur, étoile…) ¦ Caută o formă (săgeată, inimă, stea…)
+⬠ À partir d’une forme ¦ ⬠ Pornind de la o formă
+✒️ Tracée à la plume ¦ ✒️ Desenat cu penița
+Trace la pointe tournée vers la droite (→) : clic pour un angle, cliquer-glisser pour un arrondi, clic sur le premier point pour fermer. ¦ Desenează vârful îndreptat spre dreapta (→): clic pentru un colț, clic și tragere pentru o curbă, clic pe primul punct pentru a închide.
+Accrochée ¦ Prins
+par la pointe (au bout du trait) ¦ de vârf (la capătul liniei)
+presque au bout ¦ aproape de capăt
+par le milieu ¦ de mijloc
+par l’arrière ¦ de spate
+Trace la pointe (au moins trois points, puis ferme-la). ¦ Desenează vârful (cel puțin trei puncte, apoi închide-l).
+Choisis une forme. ¦ Alege o formă.
+＋ cette couleur ¦ ＋ această culoare
+＋ transparent ¦ ＋ transparent
+Sans couleur ¦ Fără culoare
+🎨 Couleurs ¦ 🎨 Culori
+➤ Pointes ¦ ➤ Vârfuri
+⬠ Formes ¦ ⬠ Forme
+🔤 Polices ¦ 🔤 Fonturi
+📏 Tailles et arrondi ¦ 📏 Dimensiuni și rotunjire
+▦ Tableur ¦ ▦ Foaie de calcul
+🖌 Pinceaux ¦ 🖌 Pensule
+☰ Menus et options ¦ ☰ Meniuri și opțiuni
+Les couleurs proposées dans les tableaux, catégorie par catégorie, dans l’ordre voulu (glisse une pastille, ou ‹ ›). Le sélecteur « autre couleur » reste toujours là. Tu peux avoir plusieurs palettes et choisir celle des tableaux. ¦ Culorile propuse în panouri, categorie cu categorie, în ordinea dorită (trage o bulină sau ‹ ›). Selectorul „altă culoare” rămâne mereu acolo. Poți avea mai multe palete și o poți alege pe cea a panourilor.
+Palette utilisée ¦ Paleta folosită
+Nom de la palette ¦ Numele paletei
+＋ Nouvelle palette ¦ ＋ Paletă nouă
+Partir d’un modèle… ¦ Pornește de la un model…
+Supprimer la palette ¦ Șterge paleta
+Les pointes proposées pour les traits et les flèches, dans l’ordre voulu ; décoche celles que tu ne veux pas voir. « ＋ Créer une pointe » : à partir d’une forme (n’importe laquelle des formes, ou une des tiennes) ou tracée à la plume. ¦ Vârfurile propuse pentru linii și săgeți, în ordinea dorită; debifează-le pe cele pe care nu vrei să le vezi. „＋ Creează un vârf”: pornind de la o formă (oricare dintre forme sau una dintre ale tale) sau desenat cu penița.
+Pointe au début, par défaut ¦ Vârf la început, implicit
+Pointe à la fin, par défaut (outil Flèche) ¦ Vârf la sfârșit, implicit (unealta Săgeată)
+＋ Créer une pointe ¦ ＋ Creează un vârf
+Supprimer cette pointe ¦ Șterge acest vârf
+Les catégories de formes et leurs formes, dans l’ordre voulu ; décoche ce que tu ne veux pas voir. « Accès rapide » : les formes proposées directement dans la barre de l’outil Formes. ¦ Categoriile de forme și formele lor, în ordinea dorită; debifează ce nu vrei să vezi. „Acces rapid”: formele propuse direct în bara uneltei Forme.
+✒️ Dessiner une nouvelle forme (dessin vectoriel) ¦ ✒️ Desenează o formă nouă (desen vectorial)
+ou ✒️ sur une forme ci-dessous pour la reprendre : plume, points et poignées, Pathfinder, import SVG… ¦ sau ✒️ pe o formă de mai jos pentru a o relua: peniță, puncte și mânere, Pathfinder, import SVG…
+📚 Montrer aussi les 2 900 formes de la grande bibliothèque ¦ 📚 Arată și cele 2 900 de forme din biblioteca mare
+lettres et chiffres, armoiries, cadres, étiquettes, drapeaux, symboles… (elles sont toujours dans la bibliothèque des tableaux ; ici, pour les cacher, les ranger ou les mettre dans l’accès rapide) ¦ litere și cifre, steme, rame, etichete, steaguri, simboluri… (sunt mereu în biblioteca panourilor; aici, pentru a le ascunde, a le ordona sau a le pune în accesul rapid)
+Accès rapide ¦ Acces rapid
+Glisse une forme (ou ‹ ›) pour changer l’ordre ; ⚡ sur une forme ci-dessous l’ajoute ici ; ✏️ crée une forme à partir d’elle. ¦ Trage o formă (sau ‹ ›) pentru a schimba ordinea; ⚡ pe o formă de mai jos o adaugă aici; ✏️ creează o formă pornind de la ea.
+Des listes de polices à toi, proposées dans le choix de la police d’un texte. « Toutes les polices » ouvre la liste commune (polices de l’app et de l’ordinateur, chacune écrite dans sa police). ¦ Liste de fonturi ale tale, propuse la alegerea fontului unui text. „Toate fonturile” deschide lista comună (fonturile aplicației și ale calculatorului, fiecare scris cu fontul său).
+Aa Toutes les polices… ¦ Aa Toate fonturile…
+＋ Nouvelle liste ¦ ＋ Listă nouă
+＋ Ajouter une police… ¦ ＋ Adaugă un font…
+De quelle taille à quelle taille vont les curseurs (épaisseur des traits et des contours : de 0,5 à 500 px ; texte : jusqu’à 500 px). La case de saisie à côté du curseur accepte toujours toute la plage. ¦ Între ce valori merg cursoarele (grosimea liniilor și a contururilor: de la 0,5 la 500 px; text: până la 500 px). Caseta de lângă cursor acceptă mereu toată plaja.
+Épaisseur mini ¦ Grosime minimă
+Épaisseur maxi ¦ Grosime maximă
+Texte mini ¦ Text minim
+Texte maxi ¦ Text maxim
+Arrondi par défaut ¦ Rotunjire implicită
+Comment est un tableur quand tu le poses dans un tableau. ¦ Cum arată o foaie de calcul când o pui pe un panou.
+Titres des colonnes, séparés par ; ¦ Titlurile coloanelor, separate prin ;
+Tes pinceaux à toi : un pinceau de départ, une épaisseur, une opacité, une <strong>dureté</strong> (100 % = bord net ; plus bas = bord flou, comme dans Photoshop), une couleur si tu veux. Ils apparaissent en tête du menu des pinceaux. ¦ Pensulele tale: o pensulă de pornire, o grosime, o opacitate, o <strong>duritate</strong> (100 % = margine clară; mai jos = margine estompată, ca în Photoshop), o culoare dacă vrei. Apar în capul meniului de pensule.
+Mon pinceau ¦ Pensula mea
+Imposer une couleur ¦ Impune o culoare
+plein ¦ plin
+tirets ¦ liniuțe
+longs tirets ¦ liniuțe lungi
+points ¦ puncte
+tiret-point ¦ linie-punct
+＋ Nouveau pinceau ¦ ＋ Pensulă nouă
+La place de chaque partie, puis l’ordre de tout ce qu’on voit dans un tableau ; décoche pour cacher. Glisse les lignes, ou ↑ ↓. ¦ Locul fiecărei părți, apoi ordinea a tot ce vezi într-un panou; debifează pentru a ascunde. Trage rândurile sau ↑ ↓.
+🧭 Disposition du tableau ¦ 🧭 Așezarea panoului
+à gauche (en colonne) ¦ la stânga (pe coloană)
+à droite (en colonne) ¦ la dreapta (pe coloană)
+Réglages (texte, forme, trait…) ¦ Setări (text, formă, linie…)
+cachés (plus de place) ¦ ascunse (mai mult loc)
+Taille des boutons ¦ Mărimea butoanelor
+petits ¦ mici
+normaux ¦ normale
+grands ¦ mari
+En-tête (titre, propriétaire, état) ¦ Antet (titlu, proprietar, stare)
+complet ¦ complet
+compact (une ligne) ¦ compact (un rând)
+Outils (barre du haut) ¦ Unelte (bara de sus)
+Boutons de l’en-tête ¦ Butoanele antetului
+↶ ↷ restent à côté du nom ; ⚙️ Personnaliser, ⤓ Exporter, ⛶ et × restent à droite, dans cet ordre (comme dans tous les éditeurs) : ici, tu peux seulement les montrer ou les cacher. ¦ ↶ ↷ rămân lângă nume; ⚙️ Personalizează, ⤓ Exportă, ⛶ și × rămân la dreapta, în această ordine (ca în toate editoarele): aici poți doar să le arăți sau să le ascunzi.
+Réglages à droite (texte, forme, trait…) ¦ Setări la dreapta (text, formă, linie…)
+Menu « ＋ Ajouter » ¦ Meniul „＋ Adaugă”
+Réglages d’une légende de trait ¦ Setările unei legende de linie
+Dans « Réglages de la légende » (choisis un trait). Les couleurs proposées : onglet 🎨 Couleurs. ¦ În „Setările legendei” (alege o linie). Culorile propuse: fila 🎨 Culori.
+Ce que proposent les tableaux (Enquêtes → Tableaux) : couleurs, pointes, formes, polices, tailles, tableur, pinceaux, et l’ordre des menus. ¦ Ce propun panourile (Investigații → Panouri): culori, vârfuri, forme, fonturi, dimensiuni, foaie de calcul, pensule și ordinea meniurilor.
+Bibliothèque de formes ¦ Biblioteca de forme
+Chercher une forme… (arbre, croix, É, drapeau) ¦ Caută o formă… (arbore, cruce, É, steag)
+Chercher une forme… ¦ Caută o formă…
+Chargement de toutes les formes… ¦ Se încarcă toate formele…
+Les formes en plus n’ont pas pu être chargées. ¦ Formele suplimentare nu au putut fi încărcate.
+⛔ Les formes en plus n’ont pas pu être chargées. ¦ ⛔ Formele suplimentare nu au putut fi încărcate.
+Aucune forme pour « {q} ». Essaie un autre mot (maison, croix, lettre, drapeau…). ¦ Nicio formă pentru „{q}”. Încearcă alt cuvânt (casă, cruce, literă, steag…).
+Aucune forme dans cette catégorie. ¦ Nicio formă în această categorie.
+{n} · ↑ ↓ ← → pour choisir, Entrée pour prendre, / pour chercher ¦ {n} · ↑ ↓ ← → pentru a alege, Enter pentru a lua, / pentru a căuta
+Formes (flèches pour choisir, Entrée pour prendre) ¦ Forme (săgeți pentru a alege, Enter pentru a lua)
+Large (16:9) ¦ Lat (16:9)
+Standard (4:3) ¦ Standard (4:3)
+Vertical (téléphone) ¦ Vertical (telefon)
+Sur mesure… ¦ Personalizat…
+Comme l’application ¦ Ca aplicația
+Ardoise ¦ Ardezie
+Parchemin ¦ Pergament
+Aurore ¦ Auroră
+Tableau noir ¦ Tablă neagră
+Titre et texte ¦ Titlu și text
+Titre et photo ¦ Titlu și fotografie
+Photo pleine page ¦ Fotografie pe toată pagina
+Photo et texte ¦ Fotografie și text
+Deux colonnes ¦ Două coloane
+Section ¦ Secțiune
+Chiffre clé ¦ Cifră-cheie
+Double-clique pour écrire ¦ Fă dublu clic pentru a scrie
+Légende de la photo ¦ Legenda fotografiei
+« Une phrase qui compte » ¦ „O frază care contează”
+Triangle rectangle ¦ Triunghi dreptunghic
+Pentagone ¦ Pentagon
+Octogone ¦ Octogon
+Double flèche ¦ Săgeată dublă
+Chevron ¦ Chevron
+Ligne fléchée ¦ Linie cu săgeată
+Aucun (rectangle) ¦ Niciuna (dreptunghi)
+Coins arrondis ¦ Colțuri rotunjite
+Cercle / ovale ¦ Cerc / oval
+Arche (portrait ancien) ¦ Arcadă (portret vechi)
+Dissoudre ¦ Dizolvare
+Fondu par le noir ¦ Estompare prin negru
+Glisser par-dessus ¦ Glisare deasupra
+Révéler ¦ Dezvăluire
+Balayage ¦ Ștergere
+Échanger ¦ Schimb
+Retourner ¦ Întoarcere
+Cube ¦ Cub
+Déplacement magique ¦ Mutare magică
+Apparition ¦ Apariție
+Fondu ¦ Estompare
+Arrivée (glisser) ¦ Intrare (glisare)
+Rebond ¦ Ricoșeu
+Chute ¦ Cădere
+Machine à écrire (textes) ¦ Mașină de scris (texte)
+Trajectoire (déplacement) ¦ Traiectorie (deplasare)
+depuis la gauche ¦ din stânga
+depuis la droite ¦ din dreapta
+depuis le haut ¦ de sus
+depuis le bas ¦ de jos
+Au clic ¦ La clic
+Avec la précédente ¦ Cu precedenta
+Après la précédente ¦ După precedenta
+Liaison ¦ Conector
+liaison|Droite ¦ Dreaptă
+liaison|En équerre ¦ În unghi drept
+liaison|Courbe ¦ Curbă
+Flèche au bout ¦ Săgeată la capăt
+Flèches aux deux bouts ¦ Săgeți la ambele capete
+Sans flèche ¦ Fără săgeată
+Union (les deux réunies) ¦ Uniune (amândouă reunite)
+Soustraire (la 1re moins la 2e) ¦ Scădere (prima minus a doua)
+Intersection (ce qu’elles ont en commun) ¦ Intersecție (ce au în comun)
+Choisis une personne (à droite, onglet Format) ¦ Alege o persoană (în dreapta, fila Format)
+Aucun événement daté ¦ Niciun eveniment datat
+Double-clique pour choisir une image ¦ Fă dublu clic pentru a alege o imagine
+Aucune diapositive à montrer (toutes sont sautées ?). ¦ Nicio diapozitivă de arătat (sunt toate sărite?).
+Touches ¦ Taste
+<kbd>→</kbd> <kbd>espace</kbd> <kbd>clic</kbd> suivante · <kbd>←</kbd> précédente · <kbd>Début</kbd> <kbd>Fin</kbd> · un numéro puis <kbd>Entrée</kbd> : aller à la diapositive · <kbd>B</kbd> écran noir · <kbd>W</kbd> écran blanc · <kbd>L</kbd> pointeur laser · <kbd>P</kbd> présentateur · <kbd>Échap</kbd> quitter ¦ <kbd>→</kbd> <kbd>spațiu</kbd> <kbd>clic</kbd> următoarea · <kbd>←</kbd> precedenta · <kbd>Home</kbd> <kbd>End</kbd> · un număr apoi <kbd>Enter</kbd>: mergi la diapozitivă · <kbd>B</kbd> ecran negru · <kbd>W</kbd> ecran alb · <kbd>L</kbd> indicator laser · <kbd>P</kbd> prezentator · <kbd>Esc</kbd> ieși
+Précédente (←) ¦ Precedenta (←)
+Suivante (→ ou espace) ¦ Următoarea (→ sau spațiu)
+Fenêtre du présentateur : notes, suivante, chronomètre (P) ¦ Fereastra prezentatorului: note, următoarea, cronometru (P)
+Pointeur laser (L) ¦ Indicator laser (L)
+Les touches (?) ¦ Tastele (?)
+Quitter (Échap) ¦ Ieși (Esc)
+Fin de la présentation — clic ou → pour quitter ¦ Sfârșitul prezentării — clic sau → pentru a ieși
+Encore {n} sur cette diapositive ¦ Încă {n} pe această diapozitivă
+présentation|Fin ¦ Sfârșit
+Pas de notes pour cette diapositive (onglet 📝 Notes sous la diapositive). ¦ Nicio notă pentru această diapozitivă (fila 📝 Note sub diapozitivă).
+La fenêtre du présentateur a été bloquée : autorise les fenêtres surgissantes pour cette page. ¦ Fereastra prezentatorului a fost blocată: permite ferestrele pop-up pentru această pagină.
+Présentateur ¦ Prezentator
+Arrêter / reprendre le chronomètre ¦ Oprește / reia cronometrul
+Remettre le chronomètre à zéro ¦ Readu cronometrul la zero
+Heure : ¦ Ora:
+Ensuite ¦ Urmează
+‹ Précédente ¦ ‹ Precedenta
+Suivante › ¦ Următoarea ›
+Écran noir ¦ Ecran negru
+Écran blanc ¦ Ecran alb
+Touches : → ← espace, B, W, Échap ¦ Taste: → ← spațiu, B, W, Esc
+Terminer ¦ Termină
+Diapositive précédente ¦ Diapozitiva precedentă
+Diapositive suivante ¦ Diapozitiva următoare
+Quitter la présentation ¦ Ieși din prezentare
+PRÉSENTATION ¦ PREZENTARE
+La personne affichée en ce moment, ou × pour en chercher une autre. ¦ Persoana afișată acum sau × pentru a căuta alta.
+Une vidéo ou un son ¦ Un videoclip sau un sunet
+La fenêtre des médias n’est pas encore prête. Réessaie dans un instant. ¦ Fereastra fișierelor media nu este încă gata. Încearcă din nou peste o clipă.
+Police de l’ordinateur ¦ Font al calculatorului
+Ce navigateur ne sait pas lister les polices : tape le nom exact d’une police installée (ex. Garamond) : ¦ Acest browser nu știe să listeze fonturile: scrie numele exact al unui font instalat (ex. Garamond):
+L’ordinateur n’a donné aucune police : tape son nom dans la fenêtre. ¦ Calculatorul nu a dat niciun font: scrie numele lui în fereastră.
+Les polices de l’ordinateur ne sont pas lisibles ici : tape le nom d’une police dans la fenêtre. ¦ Fonturile calculatorului nu pot fi citite aici: scrie numele unui font în fereastră.
+🖥 Choisir une police ¦ 🖥 Alege un font
+Pour les titres ¦ Pentru titluri
+Pour les textes ¦ Pentru texte
+Pour le texte choisi ¦ Pentru textul ales
+Chercher une police, ou taper son nom… ¦ Caută un font sau scrie-i numele…
+{n} de cet ordinateur, puis celles de l’app. Clique sur une police, puis dis où elle va. ¦ {n} de pe acest calculator, apoi cele ale aplicației. Fă clic pe un font, apoi spune unde merge.
+Les polices de l’app ; une autre police installée : tape son nom exact puis Entrée. Clique sur une police, puis dis où elle va. ¦ Fonturile aplicației; alt font instalat: scrie-i numele exact, apoi Enter. Fă clic pe un font, apoi spune unde merge.
+Aucune police « {q} » dans la liste : Entrée pour la prendre telle quelle. ¦ Niciun font „{q}” în listă: Enter pentru a-l lua așa cum e.
+Portez ce vieux whisky au juge blond qui fume ¦ Muzicologă în bej vând whisky și tequila, preț fix
+Choisis une police ¦ Alege un font
+Clique d’abord sur une police. ¦ Fă clic mai întâi pe un font.
+Ma présentation ¦ Prezentarea mea
+⤒ Importer (PowerPoint, OpenDocument, PDF, images, texte, JSON)… ¦ ⤒ Importă (PowerPoint, OpenDocument, PDF, imagini, text, JSON)…
+🖨 PDF / imprimer (une diapositive par page) ¦ 🖨 PDF / tipărește (o diapozitivă pe pagină)
+🖨 PDF avec les notes de l’orateur ¦ 🖨 PDF cu notele vorbitorului
+🖼️ Cette diapositive en PNG ¦ 🖼️ Această diapozitivă în PNG
+🗂️ Toutes les diapositives en PNG (.zip) ¦ 🗂️ Toate diapozitivele în PNG (.zip)
+⏺ Vidéo (WebM) ¦ ⏺ Video (WebM)
+⤓ Fichier de la présentation (.json) ¦ ⤓ Fișierul prezentării (.json)
+Nom de la présentation ¦ Numele prezentării
+Annuler / rétablir ¦ Anulează / refă
+↶ Annuler (⌘Z) ¦ ↶ Anulează (⌘Z)
+↷ Rétablir (⇧⌘Z) ¦ ↷ Refă (⇧⌘Z)
+Insérer (barre du haut) ¦ Inserează (bara de sus)
+Une zone de texte ¦ O casetă de text
+◆ Formes ¦ ◆ Forme
+Une forme ¦ O formă
+Une photo des médias ou de l’ordinateur ¦ O fotografie din fișierele media sau de pe calculator
+Un graphique (colonnes, camembert, courbe…) ¦ Un grafic (coloane, plăcintă, curbă…)
+👤 Généalogie (fiche, portrait, arbre, frise) ¦ 👤 Genealogie (fișă, portret, arbore, axă cronologică)
+La généalogie : une personne de la base ¦ Genealogia: o persoană din baza de date
+🪪 Fiche d’une personne ¦ 🪪 Fișa unei persoane
+🖼️ Portrait d’une personne ¦ 🖼️ Portretul unei persoane
+🌳 Petit arbre (parents, couple, enfants) ¦ 🌳 Arbore mic (părinți, cuplu, copii)
+🗓️ Frise de sa vie ¦ 🗓️ Axa cronologică a vieții sale
+Vidéo / son ¦ Video / sunet
+Une vidéo ou un son des médias ¦ Un videoclip sau un sunet din fișierele media
+Disposer (barre du haut) ¦ Aranjează (bara de sus)
+⇤⇥ Aligner et répartir ¦ ⇤⇥ Aliniază și distribuie
+⇤ À gauche ¦ ⇤ La stânga
+↔ Au centre ¦ ↔ În centru
+⇥ À droite ¦ ⇥ La dreapta
+⤒ En haut ¦ ⤒ Sus
+↕ Au milieu ¦ ↕ La mijloc
+⤓ En bas ¦ ⤓ Jos
+⟷ Répartir horizontalement ¦ ⟷ Distribuie orizontal
+⟷ Répartir verticalement ¦ ⟷ Distribuie vertical
+⧉ Ordre (devant, derrière) ¦ ⧉ Ordine (în față, în spate)
+Devant, derrière ¦ În față, în spate
+Tout devant (⇧⌘]) ¦ Adu în prim-plan (⇧⌘])
+Avancer (⌘]) ¦ Adu în față (⌘])
+Reculer (⌘[) ¦ Trimite în spate (⌘[)
+Tout derrière (⇧⌘[) ¦ Trimite în fundal (⇧⌘[)
+Grouper (⌘G) — ⇧⌘G pour dissocier ¦ Grupează (⌘G) — ⇧⌘G pentru a degrupa
+Dissocier ¦ Degrupează
+Dissocier (⇧⌘G) ¦ Degrupează (⇧⌘G)
+Verrouiller / déverrouiller (⌘L) ¦ Blochează / deblochează (⌘L)
+Relier deux objets par un trait qui les suit (choisis-en deux) ¦ Leagă două obiecte printr-o linie care le urmează (alege două)
+Fusionner deux formes : union, soustraction, intersection ¦ Unește două forme: uniune, scădere, intersecție
+Masque des diapositives : mettre les objets choisis sur toutes les diapositives, ou modifier le masque ¦ Masterul diapozitivelor: pune obiectele alese pe toate diapozitivele sau modifică masterul
+Lire en plein écran depuis le début (⌥⌘↩) ¦ Redă pe tot ecranul de la început (⌥⌘↩)
+D’ici ¦ De aici
+Lire depuis cette diapositive (⌘↩) ¦ Redă de la această diapozitivă (⌘↩)
+Plein écran + fenêtre du présentateur (notes, suivante, chronomètre) ¦ Ecran complet + fereastra prezentatorului (note, următoarea, cronometru)
+PowerPoint, OpenDocument, PDF, images, Markdown, texte, JSON ¦ PowerPoint, OpenDocument, PDF, imagini, Markdown, text, JSON
+Récit d’une vie : des diapositives toutes faites à partir de la fiche d’une personne ¦ Povestea unei vieți: diapozitive gata făcute pornind de la fișa unei persoane
+PDF, impression, images, vidéo, fichier de la présentation ¦ PDF, tipărire, imagini, video, fișierul prezentării
+Une forme (les autres : menu ◆ Forme en haut) ¦ O formă (celelalte: meniul ◆ Formă sus)
+Une image (médias ou ordinateur) ¦ O imagine (fișiere media sau calculator)
+La fiche d’une personne ¦ Fișa unei persoane
+Présentateur : plein écran, notes, chronomètre ¦ Prezentator: ecran complet, note, cronometru
+Diapositives (au-dessus de la liste) ¦ Diapozitive (deasupra listei)
+Nouvelle diapositive ¦ Diapozitivă nouă
+＋ Diapositive ¦ ＋ Diapozitivă
+▾ Choisir la disposition ¦ ▾ Alege așezarea
+Choisir la disposition ¦ Alege așezarea
+Dupliquer la diapositive (pour un déplacement magique) ¦ Duplică diapozitiva (pentru o mutare magică)
+Sauter / ne plus sauter à la lecture ¦ Sari / nu mai sări la redare
+Commencer une section (un groupe de diapositives) ici ¦ Începe aici o secțiune (un grup de diapozitive)
+Supprimer la diapositive ¦ Șterge diapozitiva
+Diapositive précédente (Page précédente) ¦ Diapozitiva precedentă (Page Up)
+Diapositive suivante (Page suivante) ¦ Diapozitiva următoare (Page Down)
+Ajuster ¦ Potrivește
+Les objets se calent sur les bords, le centre et les autres objets (⌘ en glissant : sans aimant) ¦ Obiectele se aliniază pe margini, pe centru și pe celelalte obiecte (⌘ în timp ce tragi: fără magnet)
+Notes de l’orateur ¦ Notele vorbitorului
+📝 Notes ¦ 📝 Note
+Notes de l’orateur : ce que tu veux dire sur cette diapositive (vues seulement dans la fenêtre du présentateur, et dans le PDF avec notes)… ¦ Notele vorbitorului: ce vrei să spui despre această diapozitivă (văzute doar în fereastra prezentatorului și în PDF-ul cu note)…
+Onglets de l’inspecteur (à droite) ¦ Filele inspectorului (în dreapta)
+Format de l’objet choisi ¦ Formatul obiectului ales
+Animer ¦ Animează
+Transition et animations ¦ Tranziție și animații
+Diapo ¦ Diapozitivă
+La diapositive : disposition, fond, durée, notes ¦ Diapozitiva: așezare, fundal, durată, note
+Les objets de la diapositive (devant, derrière, cacher, verrouiller) ¦ Obiectele diapozitivei (în față, în spate, ascunde, blochează)
+Thème, polices, format, musique ¦ Temă, fonturi, format, muzică
+Clic : choisir un objet (⇧ : en plus) · double-clic : écrire dedans · glisser : déplacer · poignées : agrandir · rond : tourner ¦ Clic: alege un obiect (⇧: în plus) · dublu clic: scrie în el · tragere: mută · mânere: mărește · cerc: rotește
+Aimanter : les objets se calent sur les bords, le centre et les autres objets (⌘ en glissant : sans aimant) ¦ Aliniere magnetică: obiectele se aliniază pe margini, pe centru și pe celelalte obiecte (⌘ în timp ce tragi: fără magnet)
+Replier / déplier la section ¦ Pliază / desfășoară secțiunea
+Sautée à la lecture ¦ Sărită la redare
+Animations ¦ Animații
+Transition : {name} ¦ Tranziție: {name}
+Tourner (⇧ : de 15° en 15°) ¦ Rotește (⇧: din 15° în 15°)
+Choisis une zone de texte. ¦ Alege o casetă de text.
+Le petit arbre de quelle personne ? ¦ Arborele mic al cărei persoane?
+La frise de la vie de qui ? ¦ Axa cronologică a vieții cui?
+Lecture de la fiche… ¦ Se citește fișa…
+Changer la vidéo ou le son ¦ Schimbă videoclipul sau sunetul
+Choisis un ou plusieurs objets. ¦ Alege unul sau mai multe obiecte.
+Choisis au moins trois objets pour les répartir. ¦ Alege cel puțin trei obiecte pentru a le distribui.
+Choisis au moins deux objets à grouper. ¦ Alege cel puțin două obiecte de grupat.
+Choisis deux objets (⇧ clic) : un trait les reliera, et les suivra quand tu les déplaces. ¦ Alege două obiecte (⇧ clic): o linie le va lega și le va urma când le muți.
+Choisis deux formes (⇧ clic) à fusionner. ¦ Alege două forme (⇧ clic) de unit.
+⊕ Fusionner deux formes ¦ ⊕ Unește două forme
+La 1re forme est celle du dessous. Les deux restent gardées dans la nouvelle forme. ¦ Prima formă este cea de dedesubt. Amândouă rămân păstrate în noua formă.
+Comment ¦ Cum
+🗂 Sur toutes les diapositives (masque). Dans un texte, « {a} » donne le numéro de la diapositive et « {b} » leur nombre. 🗂 sans rien choisir : le modifier. ¦ 🗂 Pe toate diapozitivele (master). Într-un text, „{a}” dă numărul diapozitivei și „{b}” numărul lor total. 🗂 fără nimic ales: îl modifici.
+Le masque est vide : choisis des objets (logo, pied de page, numéro « {a} »…) puis 🗂 pour les mettre sur toutes les diapositives. ¦ Masterul este gol: alege obiecte (logo, subsol, număr „{a}”…) apoi 🗂 pentru a le pune pe toate diapozitivele.
+🗂 Masque des diapositives ¦ 🗂 Masterul diapozitivelor
+{n} sur toutes les diapositives. ¦ {n} pe toate diapozitivele.
+Que faire ¦ Ce să faci
+Les ramener sur cette diapositive pour les modifier (puis 🗂 pour les remettre) ¦ Adu-le înapoi pe această diapozitivă pentru a le modifica (apoi 🗂 pentru a le pune la loc)
+Remontrer le masque sur cette diapositive ¦ Arată din nou masterul pe această diapozitivă
+Ne pas montrer le masque sur cette diapositive ¦ Nu arăta masterul pe această diapozitivă
+Vider le masque ¦ Golește masterul
+Diapositive dupliquée : déplace les objets puis choisis la transition « Déplacement magique » (onglet ✨ Animer). ¦ Diapozitivă duplicată: mută obiectele, apoi alege tranziția „Mutare magică” (fila ✨ Animează).
+Aucune couleur ¦ Nicio culoare
+Choisir la police (recherche, récentes, polices de l’ordinateur) ¦ Alege fontul (căutare, recente, fonturile calculatorului)
+{what} (sur la diapositive) ¦ {what} (pe diapozitivă)
+Les réglages vont au texte sélectionné (sinon à tout le texte). ¦ Setările se aplică textului selectat (altfel întregului text).
+Double-clic dans le texte pour l’écrire ; les réglages vont à tout le texte, ou au morceau sélectionné. ¦ Dublu clic în text pentru a-l scrie; setările se aplică întregului text sau bucății selectate.
+Le trait suit les deux objets quand on les déplace. ¦ Linia urmează cele două obiecte când sunt mutate.
+Double-clic sur une case du tableau pour l’écrire directement. ¦ Dublu clic pe o celulă a tabelului pentru a scrie direct în ea.
+Ce qui est montré vient de la fiche (relue le {date}) : la présentation se lit même sans la base. « Relire la fiche » la met à jour. ¦ Ce se arată vine din fișă (recitită pe {date}): prezentarea merge și fără baza de date. „Recitește fișa” o actualizează.
+(groupe) ¦ (grup)
+Choisis un objet sur la diapositive (clic) ou insère-en un (barre du haut). ⇧ clic : en choisir plusieurs ; glisser sur le fond : un rectangle de sélection ; double-clic : écrire dans un texte, changer une image ; ⌥ en glissant : copier. ¦ Alege un obiect pe diapozitivă (clic) sau inserează unul (bara de sus). ⇧ clic: alege mai multe; tragere pe fundal: un dreptunghi de selecție; dublu clic: scrie într-un text, schimbă o imagine; ⌥ în timp ce tragi: copiază.
+Inspecteur : sections de « Format » ¦ Inspector: secțiunile „Format”
+Inspecteur : sections de « Animer » ¦ Inspector: secțiunile „Animează”
+Inspecteur : sections de « Diapositive » ¦ Inspector: secțiunile „Diapozitivă”
+Inspecteur : « Objets » ¦ Inspector: „Obiecte”
+Inspecteur : sections de « Document » ¦ Inspector: secțiunile „Document”
+C’est la première diapositive : sa transition ne joue que si la lecture recommence en boucle. ¦ Aceasta este prima diapozitivă: tranziția ei se redă doar dacă redarea reîncepe în buclă.
+✨ Les objets présents sur la diapositive d’avant et sur celle-ci (diapositive dupliquée avec ⧉, ou objets portant le même nom) glissent, grandissent et tournent d’une place à l’autre ; les autres apparaissent ou s’effacent. ¦ ✨ Obiectele prezente pe diapozitiva anterioară și pe aceasta (diapozitivă duplicată cu ⧉ sau obiecte cu același nume) glisează, cresc și se rotesc dintr-un loc în altul; celelalte apar sau se estompează.
+Aucune : il est là dès l’arrivée de la diapositive. ¦ Niciuna: este acolo de cum apare diapozitiva.
+Choisis un objet sur la diapositive pour le faire apparaître (entrée) ou disparaître (sortie), au clic ou tout seul. ¦ Alege un obiect pe diapozitivă pentru a-l face să apară (intrare) sau să dispară (ieșire), la clic sau singur.
+Pas encore d’animation sur cette diapositive. ¦ Încă nicio animație pe această diapozitivă.
+Changer de disposition replace les objets « titre », « texte », « photo » ; ce que tu as écrit est gardé. ¦ Schimbarea așezării repoziționează obiectele „titlu”, „text”, „fotografie”; ce ai scris se păstrează.
+Ce que tu veux dire sur cette diapositive (vu dans la fenêtre du présentateur)… ¦ Ce vrei să spui despre această diapozitivă (văzut în fereastra prezentatorului)…
+Objets de la diapositive ¦ Obiectele diapozitivei
+Objets (le premier est devant) ¦ Obiecte (primul este în față)
+Dans un groupe ¦ Într-un grup
+Aucun objet sur cette diapositive pour l’instant ¦ Încă niciun obiect pe această diapozitivă
+Insère un texte, une image… avec la barre du haut. ¦ Inserează un text, o imagine… cu bara de sus.
+Celle du thème ({font}) ¦ Cel al temei ({font})
+{w} × {h} points. En changeant de format, les objets sont agrandis ou réduits ensemble. ¦ {w} × {h} puncte. La schimbarea formatului, obiectele sunt mărite sau micșorate împreună.
+{n} dont {skipped} · {time} en lecture toute seule (durées des diapositives). ¦ {n}, dintre care {skipped} · {time} la redare automată (duratele diapozitivelor).
+{n} · {time} en lecture toute seule (durées des diapositives). ¦ {n} · {time} la redare automată (duratele diapozitivelor).
+Il n’y a pas de diapositive avant celle-ci. ¦ Nu există nicio diapozitivă înaintea acesteia.
+Choisis d’abord un effet de transition. ¦ Alege mai întâi un efect de tranziție.
+Les dernières modifications de la présentation seront perdues. ¦ Ultimele modificări ale prezentării se vor pierde.
+Fermer sans enregistrer la présentation ? ¦ Închizi prezentarea fără să o salvezi?
+une diapositive par page (« Enregistrer en PDF ») ¦ o diapozitivă pe pagină („Salvează ca PDF”)
+📝 PDF + notes ¦ 📝 PDF + note
+avec les notes de l’orateur ¦ cu notele vorbitorului
+🗂 Toutes en PNG ¦ 🗂 Toate în PNG
+un fichier .zip ¦ un fișier .zip
+WebM, avec la musique ¦ WebM, cu muzica
+aperçu, pages, notes ¦ previzualizare, pagini, note
+pour la rouvrir ou la partager ¦ pentru a o redeschide sau a o partaja
+Le diaporama n’est pas chargé. ¦ Diaporama nu este încărcată.
+Ajouter le récit ¦ Adaugă povestea
+Rien à raconter pour cette personne. ¦ Nimic de povestit pentru această persoană.
+{n} : chaque texte vient de la fiche. Les cartes animées restent dans le diaporama. ¦ {n}: fiecare text vine din fișă. Hărțile animate rămân în diaporamă.
+Titre de la section qui commence à cette diapositive (vide : pas de section) : ¦ Titlul secțiunii care începe la această diapozitivă (gol: nicio secțiune):
+Police « {font} » pour le texte choisi. ¦ Fontul „{font}” pentru textul ales.
+Police « {font} » pour les titres. ¦ Fontul „{font}” pentru titluri.
+Police « {font} » pour les textes. ¦ Fontul „{font}” pentru texte.
+L’image est maintenant le fond de la diapositive (onglet 🖼 Diapositive). ¦ Imaginea este acum fundalul diapozitivei (fila 🖼 Diapozitivă).
+Cette transition va maintenant à toutes les diapositives. ¦ Această tranziție se aplică acum tuturor diapozitivelor.
+L’image du fond ¦ Imaginea de fundal
+Ce fond va maintenant à toutes les diapositives. ¦ Acest fundal se aplică acum tuturor diapozitivelor.
+Une musique pendant la lecture ¦ O muzică în timpul redării
+Choisis un son (MP3, M4A, WAV…). ¦ Alege un sunet (MP3, M4A, WAV…).
+{name} : ni une image, ni une vidéo, ni un son. ¦ {name}: nici imagine, nici videoclip, nici sunet.
+Diapositive copiée : ⌘V pour la coller. ¦ Diapozitivă copiată: ⌘V pentru a o lipi.
+ce n’est pas un fichier zip valide (pptx, odp) ¦ nu este un fișier zip valid (pptx, odp)
+un élément du fichier est trop gros ¦ un element din fișier este prea mare
+fichier refusé : il contient des déclarations XML (DOCTYPE ou ENTITY) ¦ fișier refuzat: conține declarații XML (DOCTYPE sau ENTITY)
+XML illisible dans le fichier ¦ XML ilizibil în fișier
+ce n’est pas une présentation PowerPoint (.pptx) ¦ nu este o prezentare PowerPoint (.pptx)
+aucune diapositive trouvée ¦ nicio diapozitivă găsită
+{n} dans un format que le navigateur ne lit pas (EMF, WMF…) ont été laissées de côté. ¦ {n} într-un format pe care browserul nu îl citește (EMF, WMF…) au fost lăsate deoparte.
+ce n’est pas un fichier OpenDocument (.odp) ¦ nu este un fișier OpenDocument (.odp)
+{n} de côté. ¦ {n} lăsate deoparte.
+ce n’est pas un PDF ¦ nu este un PDF
+aucune image (scan, photo) n’a été trouvée dans ce PDF. Son texte et ses dessins ne peuvent pas être lus ici : exporte-le plutôt en images, ou en PowerPoint depuis le logiciel qui l’a fait ¦ nu s-a găsit nicio imagine (scanare, fotografie) în acest PDF. Textul și desenele lui nu pot fi citite aici: exportă-l mai bine ca imagini sau ca PowerPoint din programul care l-a făcut
+PDF : {n} ; le texte et les dessins du PDF ne sont pas lus. ¦ PDF: {n}; textul și desenele PDF-ului nu sunt citite.
+Carte du diaporama : le trajet animé reste dans le diaporama. ¦ Harta diaporamei: traseul animat rămâne în diaporamă.
+ce n’est pas une présentation de l’app ¦ nu este o prezentare a aplicației
+{name} : Keynote garde ses fichiers dans un format fermé. Dans Keynote : Fichier → Exporter vers → PowerPoint (ou PDF, ou Images), puis importe ce fichier ici. ¦ {name}: Keynote își păstrează fișierele într-un format închis. În Keynote: Fișier → Exportă în → PowerPoint (sau PDF, sau Imagini), apoi importă acel fișier aici.
+{name} : l’ancien format PowerPoint (avant 2007) ne se lit pas ici ; ouvre-le et enregistre-le en .pptx. ¦ {name}: vechiul format PowerPoint (dinainte de 2007) nu se citește aici; deschide-l și salvează-l ca .pptx.
+fichier trop gros (400 Mo au plus) ¦ fișier prea mare (cel mult 400 MB)
+{name} : format non reconnu. ¦ {name}: format nerecunoscut.
+{name} : rien à importer. ¦ {name}: nimic de importat.
+IMPORT ¦ IMPORT
+Rien n’a été importé ¦ Nu s-a importat nimic
+Remplacer les diapositives actuelles (sinon : ajoutées après la diapositive affichée) ¦ Înlocuiește diapozitivele actuale (altfel: adăugate după diapozitiva afișată)
+<b>PowerPoint (.pptx)</b> et <b>OpenDocument / LibreOffice Impress (.odp)</b> : chaque diapositive avec ses textes (à leur place, taille, gras, couleur, listes), ses images, ses formes simples, ses tableaux, ses graphiques, ses notes et ses transitions. ¦ <b>PowerPoint (.pptx)</b> și <b>OpenDocument / LibreOffice Impress (.odp)</b>: fiecare diapozitivă cu textele ei (la locul lor, mărime, aldin, culoare, liste), imaginile, formele simple, tabelele, graficele, notele și tranzițiile ei.
+<b>Keynote (.key)</b> : le format d’Apple est fermé. Dans Keynote : Fichier → Exporter vers → <b>PowerPoint</b> (ou PDF, ou Images), puis importe ce fichier ici. ¦ <b>Keynote (.key)</b>: formatul Apple este închis. În Keynote: Fișier → Exportă în → <b>PowerPoint</b> (sau PDF, sau Imagini), apoi importă acel fișier aici.
+<b>PDF</b> : les images qu’il contient (scans, photos) deviennent des diapositives, une par image. Le texte et les dessins d’un PDF ne se lisent pas ici : pour une présentation, exporte-la plutôt en PowerPoint ou en images. ¦ <b>PDF</b>: imaginile pe care le conține (scanări, fotografii) devin diapozitive, câte una pe imagine. Textul și desenele unui PDF nu se citesc aici: pentru o prezentare, exportă-o mai bine ca PowerPoint sau ca imagini.
+<b>Images</b> (JPG, PNG, WEBP, GIF, BMP…), plusieurs à la fois : une diapositive « photo pleine page » par image. ¦ <b>Imagini</b> (JPG, PNG, WEBP, GIF, BMP…), mai multe deodată: câte o diapozitivă „fotografie pe toată pagina” pentru fiecare imagine.
+<b>Markdown (.md) ou texte (.txt)</b> : « # Titre » commence une diapositive, « - » fait une puce, « --- » sépare deux diapositives, « > » une citation, « Notes: » les notes de l’orateur. Un texte simple : un paragraphe par diapositive. ¦ <b>Markdown (.md) sau text (.txt)</b>: „# Titlu” începe o diapozitivă, „-” face o bulină, „---” separă două diapozitive, „>” o citare, „Notes:” notele vorbitorului. Un text simplu: un paragraf pe diapozitivă.
+<b>JSON</b> : une présentation (ou un diaporama) exportée par l’app. ¦ <b>JSON</b>: o prezentare (sau o diaporamă) exportată de aplicație.
+Aucune diapositive à imprimer. ¦ Nicio diapozitivă de tipărit.
+Diapositive ¦ Diapozitivă
+Pas de notes. ¦ Nicio notă.
+{name} — présentation ¦ {name} — prezentare
+Les diapositives ¦ Diapozitivele
+Les diapositives avec les notes du présentateur ¦ Diapozitivele cu notele prezentatorului
+Les notes seules (texte) ¦ Doar notele (text)
+Diapositives par page ¦ Diapozitive pe pagină
+Numéros des diapositives ¦ Numerele diapozitivelor
+Les diapositives masquées aussi ¦ Și diapozitivele ascunse
+aucune diapositive ¦ nicio diapozitivă
+Préparation de {n} images… ¦ Se pregătesc {n} imagini…
+Préparation de l’image… ¦ Se pregătește imaginea…
+ce navigateur ne sait pas enregistrer de vidéo ¦ acest browser nu știe să înregistreze video
+La vidéo rejoue la présentation en entier ({time}, durées de l’onglet 🖼 Diapositive) et l’enregistre. Laisse la fenêtre ouverte. ¦ Videoclipul redă din nou întreaga prezentare ({time}, duratele din fila 🖼 Diapozitivă) și o înregistrează. Lasă fereastra deschisă.
+Fabriquer la vidéo ? ¦ Faci videoclipul?
+Fabriquer la vidéo ¦ Fă videoclipul
+Préparation : {n} / {total} ¦ Pregătire: {n} / {total}
+Vidéo : {n} % ¦ Video: {n} %
+Vidéo arrêtée : la présentation a été fermée pendant l’enregistrement. ¦ Video oprit: prezentarea a fost închisă în timpul înregistrării.
+la vidéo est vide : l’enregistrement n’a pas pu se faire dans ce navigateur ¦ videoclipul este gol: înregistrarea nu s-a putut face în acest browser
+La vidéo est vide : l’enregistrement n’a pas pu se faire dans ce navigateur. ¦ Videoclipul este gol: înregistrarea nu s-a putut face în acest browser.
+Vidéo téléchargée et rangée dans les Médias. ¦ Videoclip descărcat și pus în Media.
+Tu peux l’ajouter aux Médias de l’app, ou seulement la télécharger. ¦ Îl poți adăuga în Media aplicației sau doar să-l descarci.
+Vidéo prête ¦ Videoclip gata
+Ajouter aux Médias ¦ Adaugă în Media
+Télécharger seulement ¦ Doar descarcă
+Vidéo ajoutée aux Médias. ¦ Videoclip adăugat în Media.
+Vidéo impossible : {error} ¦ Video imposibil: {error}
+NOUVELLE PRÉSENTATION ¦ PREZENTARE NOUĂ
+🎤 Choisis un thème ¦ 🎤 Alege o temă
+Créer la présentation ¦ Creează prezentarea
+Le thème, les couleurs, les polices et le format se changent ensuite (onglet ⚙️ Document). Pour partir d’un PowerPoint, d’un OpenDocument, d’un PDF ou de photos : « ⤒ Importer ». ¦ Tema, culorile, fonturile și formatul se pot schimba apoi (fila ⚙️ Document). Pentru a porni de la un PowerPoint, un OpenDocument, un PDF sau fotografii: „⤒ Importă”.
+⤒ Importer une présentation ¦ ⤒ Importă o prezentare
+Thème au départ ¦ Tema de pornire
+Format au départ ¦ Formatul de pornire
+Transition des nouvelles diapositives ¦ Tranziția diapozitivelor noi
+Disposition de « ＋ Diapositive » ¦ Așezarea pentru „＋ Diapozitivă”
+Aimanter les objets (guides) ¦ Aliniere magnetică a obiectelor (ghidaje)
+Couleur du pointeur laser ¦ Culoarea indicatorului laser
+↺ Réglages de départ ¦ ↺ Setări inițiale
+Réglages de départ. ¦ Setări inițiale.
+Les boutons du haut, les onglets et les sections de l’inspecteur se rangent, se montrent ou se cachent dans « Boutons et options » (éditeur 🎤 Présentation), avec ses raccourcis clavier. ¦ Butoanele de sus, filele și secțiunile inspectorului se ordonează, se arată sau se ascund în „Butoane și opțiuni” (editorul 🎤 Prezentare), cu scurtăturile lui de tastatură.
+{name} (présentation) ¦ {name} (prezentare)
+Diaporama ¦ Diaporamă
+Nom (pour le déplacement magique) ¦ Nume (pentru mutarea magică)
+⇋ Miroir ¦ ⇋ Oglindă
+⇵ Miroir ¦ ⇵ Oglindă
+Retourner de gauche à droite ¦ Întoarce de la stânga la dreapta
+Retourner de haut en bas ¦ Întoarce de sus în jos
+⤢ Proportions de la photo ¦ ⤢ Proporțiile fotografiei
+Tout devant ¦ Adu în prim-plan
+Tout derrière ¦ Trimite în fundal
+Grouper (⌘G) ¦ Grupează (⌘G)
+Déverrouiller (⌘L) ¦ Deblochează (⌘L)
+Verrouiller (⌘L) ¦ Blochează (⌘L)
+Dupliquer (⌘D) ¦ Duplică (⌘D)
+Supprimer (⌫) ¦ Șterge (⌫)
+Selon le rôle ¦ După rol
+Légère ¦ Subțire
+Normale ¦ Normală
+Demi-grasse ¦ Semi-aldină
+Grasse ¦ Aldină
+Extra-grasse ¦ Extra-aldină
+Noire ¦ Neagră
+bouton|<b>G</b> ¦ <b>B</b>
+bouton|<i>I</i> ¦ <i>I</i>
+bouton|<u>S</u> ¦ <u>U</u>
+bouton|<s>B</s> ¦ <s>T</s>
+Gras (⌘B) ¦ Aldin (⌘B)
+Italique (⌘I) ¦ Cursiv (⌘I)
+Souligné (⌘U) ¦ Subliniat (⌘U)
+Exposant (1<sup>er</sup>) ¦ Exponent (1<sup>a</sup>)
+Retrait (sous-liste) ¦ Indentare (sub-listă)
+Moins de retrait ¦ Mai puțină indentare
+En haut de la zone ¦ Sus în casetă
+Au milieu de la zone ¦ La mijlocul casetei
+En bas de la zone ¦ Jos în casetă
+Couleur d’accent du thème ¦ Culoarea de accent a temei
+Texte dans la forme ¦ Text în formă
+Couleur (fond et bordure) ¦ Culoare (fundal și bordură)
+Bordure ¦ Bordură
+Points ¦ Puncte
+Coins ¦ Colțuri
+Forme sans fond. ¦ Formă fără fundal.
+Pas de fond (∅). ¦ Fără fundal (∅).
+Pas de bordure (∅). ¦ Fără bordură (∅).
+🖼️ Changer l’image… ¦ 🖼️ Schimbă imaginea…
+🖼️ Choisir l’image… ¦ 🖼️ Alege imaginea…
+🖼 En fond de diapositive ¦ 🖼 Ca fundal al diapozitivei
+Cadrage ¦ Încadrare
+Remplir (rogner) ¦ Umple (decupează)
+Photo entière ¦ Fotografia întreagă
+Étirer ¦ Întinde
+Masque (forme) ¦ Mască (formă)
+La photo est découpée dans cette forme : rond, arrondi, étoile, cœur… sans toucher à la photo d’origine. ¦ Fotografia este decupată în această formă: rotundă, rotunjită, stea, inimă… fără a atinge fotografia originală.
+Zoom (rogner) ¦ Zoom (decupează)
+Agrandit la photo dans son cadre ; « Cadrer ↔ ↕ » choisit ensuite quelle partie on voit. ¦ Mărește fotografia în cadrul ei; „Încadrează ↔ ↕” alege apoi ce parte se vede.
+Cadrer ↔ ¦ Încadrează ↔
+Cadrer ↕ ¦ Încadrează ↕
+🎚️ Retouche ¦ 🎚️ Retușare
+Épaisseur du cadre ¦ Grosimea ramei
+Au bout ¦ La capăt
+Aux deux bouts ¦ La ambele capete
+Le tableur en grand : formules, tri, coller depuis Excel… puis « ✓ Enregistrer et revenir » ¦ Foaia de calcul mare: formule, sortare, lipire din Excel… apoi „✓ Salvează și revino”
+Le tableur en grand, préparé « Catégorie + séries » : formules, tri, coller depuis Excel… puis « ✓ Enregistrer et revenir » ¦ Foaia de calcul mare, pregătită „Categorie + serii”: formule, sortare, lipire din Excel… apoi „✓ Salvează și revino”
+＋ Ligne ¦ ＋ Rând
+− Ligne ¦ − Rând
+＋ Colonne ¦ ＋ Coloană
+− Colonne ¦ − Coloană
+Première ligne en en-tête ¦ Primul rând ca antet
+En-tête : fond ¦ Antet: fundal
+En-tête : texte ¦ Antet: text
+Contenu (une ligne par rangée, cases séparées par « ; » ou une tabulation — se colle d’un tableur) ¦ Conținut (un rând pe linie, celule separate prin „;” sau un tab — se lipește dintr-o foaie de calcul)
+Ou ici, en secours (1re ligne : Catégorie ; Série 1 ; Série 2…) ¦ Sau aici, de rezervă (primul rând: Categorie; Seria 1; Seria 2…)
+Les chiffres (1re ligne : Catégorie ; Série 1 ; Série 2…) ¦ Cifrele (primul rând: Categorie; Seria 1; Seria 2…)
+Vives ¦ Vii
+Pastel ¦ Pastel
+Terre ¦ Pământ
+Gris ¦ Gri
+Selon la sorte ¦ După tip
+🪪 La fiche ¦ 🪪 Fișa
+🖼️ Le portrait ¦ 🖼️ Portretul
+🌳 Petit arbre ¦ 🌳 Arbore mic
+🔄 Relire la fiche ¦ 🔄 Recitește fișa
+🎬 Changer… ¦ 🎬 Schimbă…
+Lecture automatique ¦ Redare automată
+En boucle ¦ În buclă
+Sans le son ¦ Fără sunet
+Boutons de lecture visibles ¦ Butoane de redare vizibile
+Commencer à ¦ Începe la
+Effets (ombre et opacité) ¦ Efecte (umbră și opacitate)
+Chemin ¦ Traseu
+Attendre ¦ Așteaptă
+× Retirer ¦ × Scoate
+Transition ¦ Tranziție
+Effet (en arrivant sur cette diapositive) ¦ Efect (la sosirea pe această diapozitivă)
+L’effet joue en passant de la diapositive d’avant à celle-ci. « Déplacement magique » fait glisser les objets présents sur les deux. ¦ Efectul se redă la trecerea de la diapozitiva anterioară la aceasta. „Mutare magică” face să gliseze obiectele prezente pe amândouă.
+▶ Aperçu ¦ ▶ Previzualizare
+Pour toutes les diapositives ¦ Pentru toate diapozitivele
+Animations de l’objet choisi ¦ Animațiile obiectului ales
+＋ Entrée ¦ ＋ Intrare
+＋ Sortie ¦ ＋ Ieșire
+Ordre des animations ¦ Ordinea animațiilor
+⬅ Sortie ¦ ⬅ Ieșire
+➡ Entrée ¦ ➡ Intrare
+▶ Aperçu des animations ¦ ▶ Previzualizarea animațiilor
+Disposition (place les titres, textes, photos) ¦ Așezare (plasează titlurile, textele, fotografiile)
+Un plan tout fait (titre, titre et texte, photo pleine page…) : les textes déjà écrits sont gardés et changent de place. ¦ Un plan gata făcut (titlu, titlu și text, fotografie pe toată pagina…): textele deja scrise se păstrează și își schimbă locul.
+Celui du thème ¦ Cel al temei
+Dégradé rond ¦ Degradeu circular
+Couleur autour de l’image ¦ Culoarea din jurul imaginii
+Entière ¦ Întreagă
+Ce fond pour toutes les diapositives ¦ Acest fundal pentru toate diapozitivele
+Durée — lecture seule et vidéo ¦ Durată — redare automată și video
+Le temps passé sur cette diapositive quand la présentation avance toute seule et dans la vidéo exportée. ¦ Timpul petrecut pe această diapozitivă când prezentarea avansează singură și în videoclipul exportat.
+Passer toute seule à la suivante (après la durée) ¦ Treci singur la următoarea (după durată)
+Sauter cette diapositive à la lecture ¦ Sari peste această diapozitivă la redare
+Titre de la section (un groupe de diapositives qui commence ici) ¦ Titlul secțiunii (un grup de diapozitive care începe aici)
+ex. Les années de guerre ¦ ex. Anii războiului
+Vers le devant ¦ Spre față
+Vers le fond ¦ Spre fundal
+Couleurs et polices ¦ Culori și fonturi
+Accent ¦ Accent
+Format des diapositives ¦ Formatul diapozitivelor
+Largeur (points) ¦ Lățime (puncte)
+Hauteur (points) ¦ Înălțime (puncte)
+Changer… ¦ Schimbă…
+🎵 Une musique pendant la lecture… ¦ 🎵 O muzică în timpul redării…
+Recommencer au début à la fin (borne, exposition) ¦ Reîncepe de la început la final (chioșc, expoziție)
+Remplissage et bordure ¦ Umplere și bordură
+Ombre et opacité ¦ Umbră și opacitate
+T Une zone de texte ¦ T O casetă de text
+🖼️ Une photo des médias ou de l’ordinateur ¦ 🖼️ O fotografie din fișierele media sau de pe calculator
+📊 Un graphique (colonnes, camembert, courbe…) ¦ 📊 Un grafic (coloane, plăcintă, curbă…)
+🎬 Une vidéo ou un son des médias ¦ 🎬 Un videoclip sau un sunet din fișierele media
+⊞ Grouper (⌘G) — ⇧⌘G pour dissocier ¦ ⊞ Grupează (⌘G) — ⇧⌘G pentru a degrupa
+⊟ Dissocier (⇧⌘G) ¦ ⊟ Degrupează (⇧⌘G)
+🔒 Verrouiller / déverrouiller (⌘L) ¦ 🔒 Blochează / deblochează (⌘L)
+▶ Lire en plein écran depuis le début (⌥⌘↩) ¦ ▶ Redă pe tot ecranul de la început (⌥⌘↩)
+⏵ Lire depuis cette diapositive (⌘↩) ¦ ⏵ Redă de la această diapozitivă (⌘↩)
+🎤 Plein écran + fenêtre du présentateur (notes, suivante, chronomètre) ¦ 🎤 Ecran complet + fereastra prezentatorului (note, următoarea, cronometru)
+⤓ Exporter (PDF, PNG, vidéo, fichier) ¦ ⤓ Exportă (PDF, PNG, video, fișier)
+⧉ Dupliquer la diapositive (pour un déplacement magique) ¦ ⧉ Duplică diapozitiva (pentru o mutare magică)
+👁 Sauter / ne plus sauter à la lecture ¦ 👁 Sari / nu mai sări la redare
+§ Commencer une section (un groupe de diapositives) ici ¦ § Începe aici o secțiune (un grup de diapozitive)
+🗑 Supprimer la diapositive ¦ 🗑 Șterge diapozitiva
+‹ Diapositive précédente (Page précédente) ¦ ‹ Diapozitiva precedentă (Page Up)
+› Diapositive suivante (Page suivante) ¦ › Diapozitiva următoare (Page Down)
+=élément copié ¦ element copiat|elemente copiate|de elemente copiate
+=coude ¦ cot|coturi|de coturi
+=dessin choisi ¦ desen ales|desene alese|de desene alese
+=association ¦ legătură|legături|de legături
+=élément absent ici ¦ element lipsă aici|elemente lipsă aici|de elemente lipsă aici
+=confirmée ¦ confirmată|confirmate|de confirmate
+=fausse ¦ falsă|false|de false
+=note posée ¦ notă pusă|note puse|de note puse
+=animation ¦ animație|animații|de animații
+=sautée ¦ sărită|sărite|de sărite
+=diapositive ajoutée ¦ diapozitivă adăugată|diapozitive adăugate|de diapozitive adăugate
+=image illisible laissée ¦ imagine ilizibilă lăsată deoparte|imagini ilizibile lăsate deoparte|de imagini ilizibile lăsate deoparte
+=image reprise ¦ imagine preluată|imagini preluate|de imagini preluate
+=diapositive importée ¦ diapozitivă importată|diapozitive importate|de diapozitive importate
+Arrondi par défaut des éléments arrondis ¦ Rotunjirea implicită a elementelor rotunjite
+Formules ¦ Formule
+Commence par <code>=</code> : <code>=B2+B3</code>, <code>=SOMME(B2:B9)</code>, <code>=MOYENNE(B2:B9)</code>, <code>=MIN(…)</code>, <code>=MAX(…)</code>, <code>=NB(…)</code>, <code>=PRODUIT(…)</code>, <code>=ARRONDI(B2;1)</code>, <code>=2026-B2</code> (âge), <code>="texte"</code>. Colle un bout de tableur (Excel, Numbers) dans une cellule : il se range dans la grille. ¦ Începe cu <code>=</code>: <code>=B2+B3</code>, <code>=SOMME(B2:B9)</code>, <code>=MOYENNE(B2:B9)</code>, <code>=MIN(…)</code>, <code>=MAX(…)</code>, <code>=NB(…)</code>, <code>=PRODUIT(…)</code>, <code>=ARRONDI(B2;1)</code>, <code>=2026-B2</code> (vârstă), <code>="text"</code>. Lipește o bucată de foaie de calcul (Excel, Numbers) într-o celulă: se așază în grilă.
+⏺ Vidéo ¦ ⏺ Video
+Hexagone ¦ Hexagon
+Bulle ¦ Bulă
+Cœur ¦ Inimă
+⧉ Copie ¦ ⧉ Copie
+forme|Rectangle ¦ Dreptunghi
+forme|Rectangle arrondi ¦ Dreptunghi rotunjit
+forme|Ovale ¦ Oval
+forme|Triangle ¦ Triunghi
+forme|Triangle rectangle ¦ Triunghi dreptunghic
+forme|Losange ¦ Romb
+forme|Pentagone ¦ Pentagon
+forme|Hexagone ¦ Hexagon
+forme|Étoile ¦ Stea
+forme|Bulle ¦ Bulă
+forme|Nuage ¦ Nor
+forme|Flèche ¦ Săgeată
+forme|Double flèche ¦ Săgeată dublă
+forme|Étiquette ¦ Etichetă
+forme|Parallélogramme ¦ Paralelogram
+forme|Trapèze ¦ Trapez
+forme|Losange plat ¦ Romb turtit
+forme|Pilule ¦ Pastilă
+forme|Cylindre ¦ Cilindru
+forme|Cube ¦ Cub
+forme|Pavé ¦ Paralelipiped
+forme|Pyramide ¦ Piramidă
+forme|Cône ¦ Con
+forme|Tétraèdre ¦ Tetraedru
+forme|Heptagone ¦ Heptagon
+forme|Octogone ¦ Octogon
+forme|Décagone ¦ Decagon
+forme|Dodécagone ¦ Dodecagon
+forme|Anneau ¦ Inel
+forme|Demi-cercle ¦ Semicerc
+forme|Quart de cercle ¦ Sfert de cerc
+forme|Cadre ¦ Ramă
+forme|Équerre ¦ Echer
+forme|Chevron ¦ Chevron
+forme|Sablier ¦ Clepsidră
+forme|forme ¦ formă
+forme|Arche ¦ Arcadă
+forme|Flèche à gauche ¦ Săgeată la stânga
+forme|Flèche en haut ¦ Săgeată în sus
+forme|Flèche en bas ¦ Săgeată în jos
+forme|Double flèche verticale ¦ Săgeată dublă verticală
+forme|Quatre directions ¦ Patru direcții
+forme|Flèche à encoche ¦ Săgeată cu crestătură
+forme|Flèche courbe ¦ Săgeată curbă
+forme|Demi-tour ¦ Întoarcere
+forme|Flèche fine ¦ Săgeată subțire
+forme|Pavé flèche ¦ Bloc săgeată
+forme|Flèche ronde ¦ Săgeată circulară
+forme|Bulle ronde ¦ Bulă rotundă
+forme|Encadré ¦ Casetă explicativă
+forme|Pensée ¦ Gând
+forme|Cri ¦ Strigăt
+forme|gauche ¦ stânga
+forme|Bulle carrée ¦ Bulă pătrată
+forme|Étoile à {x} branches ¦ Stea cu {x} colțuri
+forme|Éclat ¦ Explozie
+forme|Sceau ¦ Sigiliu
+forme|Rose des vents ¦ Roza vânturilor
+forme|Ruban ¦ Panglică
+forme|Médaille ¦ Medalie
+forme|Écu ¦ Scut
+forme|Bannière ¦ Banner
+forme|Cocarde ¦ Cocardă
+forme|Cœur ¦ Inimă
+forme|Coche ¦ Bifă
+forme|Croix ¦ Cruce
+forme|Plus ¦ Plus
+forme|Moins ¦ Minus
+forme|Lune ¦ Lună
+forme|Éclair ¦ Fulger
+forme|Goutte ¦ Picătură
+forme|Repère ¦ Reper
+forme|Drapeau ¦ Steag
+forme|Point d’interrogation ¦ Semnul întrebării
+forme|Point d’exclamation ¦ Semnul exclamării
+forme|Information ¦ Informație
+forme|Infini ¦ Infinit
+forme|Soleil ¦ Soare
+forme|Signe ¦ Semn
+forme|Arbre ¦ Arbore
+forme|Chêne ¦ Stejar
+forme|Alliances ¦ Verighete
+forme|Couronne ¦ Coroană
+forme|Tombe ¦ Mormânt
+forme|Berceau ¦ Leagăn
+forme|Parchemin ¦ Pergament
+forme|Plume ¦ Pană de scris
+forme|Livre ¦ Carte
+forme|Lettre ¦ Scrisoare
+forme|Bougie ¦ Lumânare
+forme|Cachet de cire ¦ Sigiliu de ceară
+forme|Fleur de lys ¦ Floare de crin
+forme|Branche ¦ Ramură
+forme|Personne ¦ Persoană
+forme|Femme ¦ Femeie
+forme|Couple ¦ Cuplu
+forme|Famille ¦ Familie
+forme|Enfant ¦ Copil
+forme|Portrait ¦ Portret
+forme|médaillon ¦ medalion
+forme|Soldat ¦ Soldat
+forme|Maison ¦ Casă
+forme|Église ¦ Biserică
+forme|Château ¦ Castel
+forme|Mairie ¦ Primărie
+forme|Moulin ¦ Moară
+forme|Bateau ¦ Barcă
+forme|Usine ¦ Fabrică
+forme|Montagne ¦ Munte
+forme|Pont ¦ Pod
+forme|Clé ¦ Cheie
+forme|Lampe ¦ Lampă
+forme|Chaise ¦ Scaun
+forme|Horloge ¦ Ceas
+forme|Lunettes ¦ Ochelari
+forme|Parapluie ¦ Umbrelă
+forme|Ampoule ¦ Bec
+forme|Loupe ¦ Lupă
+forme|Cadeau ¦ Cadou
+forme|Tasse ¦ Ceașcă
+forme|Appareil photo ¦ Aparat foto
+forme|Téléphone ¦ Telefon
+forme|Crayon ¦ Creion
+forme|Sac ¦ Geantă
+forme|Valise ¦ Valiză
+forme|Chapeau ¦ Pălărie
+forme|Cloche ¦ Clopot
+forme|Ancre ¦ Ancoră
+forme|Feuille ¦ Frunză
+forme|Fleur ¦ Floare
+forme|Sapin ¦ Brad
+forme|Vague ¦ Val
+forme|Poisson ¦ Pește
+forme|Oiseau ¦ Pasăre
+forme|Flocon ¦ Fulg de nea
+forme|Pomme ¦ Măr
+forme|Champignon ¦ Ciupercă
+forme|Patte ¦ Labă
+forme|Anneau fin ¦ Inel subțire
+forme|Anneau épais ¦ Inel gros
+forme|Deux anneaux ¦ Două inele
+forme|Cadre fin ¦ Ramă subțire
+forme|Cadre arrondi ¦ Ramă rotunjită
+forme|Médaillon ¦ Medalion
+forme|Ovale vertical ¦ Oval vertical
+forme|Ovale horizontal ¦ Oval orizontal
+forme|Croissant fin ¦ Semilună subțire
+forme|Goutte inversée ¦ Picătură inversată
+forme|Deux cœurs ¦ Două inimi
+forme|Croix grecque ¦ Cruce grecească
+forme|Croix de Malte ¦ Crucea de Malta
+forme|Croix de Lorraine ¦ Crucea de Lorena
+forme|Croix orthodoxe ¦ Cruce ortodoxă
+forme|Bannière ondulée ¦ Banner ondulat
+forme|Phylactère ¦ Filacter
+forme|Étiquette ronde ¦ Etichetă rotundă
+forme|Bulle ovale ¦ Bulă ovală
+forme|droite ¦ dreapta
+forme|Petite pensée ¦ Gând mic
+forme|Quart de disque ¦ Sfert de disc
+forme|Tiers de disque ¦ Treime de disc
+forme|Demi-disque ¦ Jumătate de disc
+forme|Deux tiers de disque ¦ Două treimi de disc
+forme|Trois quarts de disque ¦ Trei sferturi de disc
+forme|Camembert ¦ Plăcintă
+forme|Polygone à {x} côtés ¦ Poligon cu {x} laturi
+forme|Étoile fine à {x} branches ¦ Stea subțire cu {x} colțuri
+forme|Étoile ronde à {x} branches ¦ Stea rotundă cu {x} colțuri
+forme|Quart d’anneau ¦ Sfert de inel
+forme|Demi-anneau ¦ Jumătate de inel
+forme|Trois quarts d’anneau ¦ Trei sferturi de inel
+forme|Arbre généalogique ¦ Arbore genealogic
+forme|Arborescence ¦ Arborescență
+forme|Organigramme ¦ Organigramă
+forme|Liens ¦ Legături
+forme|Groupe de personnes ¦ Grup de persoane
+forme|Homme et femme ¦ Bărbat și femeie
+forme|Parents et enfant ¦ Părinți și copil
+forme|Deux femmes ¦ Două femei
+forme|Deux hommes ¦ Doi bărbați
+forme|Mère et fille ¦ Mamă și fiică
+forme|Père et fils ¦ Tată și fiu
+forme|Mère et fils ¦ Mamă și fiu
+forme|Père et fille ¦ Tată și fiică
+forme|Visage de bébé ¦ Față de bebeluș
+forme|Bébé ¦ Bebeluș
+forme|Landau ¦ Cărucior
+forme|Biberon ¦ Biberon
+forme|Femme enceinte ¦ Femeie însărcinată
+forme|Bague ¦ Inel
+forme|Cœurs ¦ Inimi
+forme|Foyer ¦ Cămin
+forme|Personne aimée ¦ Persoană iubită
+forme|Main et cœur ¦ Mână și inimă
+forme|Symbole masculin ¦ Simbol masculin
+forme|Symbole féminin ¦ Simbol feminin
+forme|Symbole couple ¦ Simbol de cuplu
+forme|Pierre tombale ¦ Piatră funerară
+forme|Cercueil ¦ Sicriu
+forme|Tulipe ¦ Lalea
+forme|Coquelicot ¦ Mac
+forme|Croix latine ¦ Cruce latină
+forme|Croix celtique ¦ Cruce celtică
+forme|Bible ¦ Biblie
+forme|Certificat ¦ Certificat
+forme|Parchemin écrit ¦ Pergament scris
+forme|Plume à encre ¦ Pană cu cerneală
+forme|Tampon ¦ Ștampilă
+forme|Passeport ¦ Pașaport
+forme|Carte d’identité ¦ Carte de identitate
+forme|Carte et loupe ¦ Hartă și lupă
+forme|Document cherché ¦ Document căutat
+forme|Frise du temps ¦ Axa timpului
+forme|Histoire ¦ Istorie
+forme|Diaphragme ¦ Diafragmă
+forme|Cadre photo ¦ Ramă foto
+forme|Miroir ovale ¦ Oglindă ovală
+forme|Blason couronné ¦ Stemă cu coroană
+forme|Tour ¦ Turn
+forme|Père et enfant ¦ Tată și copil
+forme|Deux mères et enfant ¦ Două mame și copil
+forme|Deux pères et enfant ¦ Doi tați și copil
+forme|Amour maternel ¦ Iubire maternă
+forme|Mère qui allaite ¦ Mamă care alăptează
+forme|Poussette ¦ Cărucior sport
+forme|Table à langer ¦ Masă de înfășat
+forme|contour ¦ contur
+forme|Adulte et enfant ¦ Adult și copil
+forme|rond ¦ rotund
+forme|Tuteur ¦ Tutore
+forme|Deux personnes ¦ Două persoane
+forme|Maison familiale ¦ Casa familiei
+forme|Registre de personnes ¦ Registru de persoane
+forme|Date d’une personne ¦ Data unei persoane
+forme|Fiche individuelle ¦ Fișă individuală
+forme|Dossier de personne ¦ Dosarul unei persoane
+forme|Acte certifié ¦ Act certificat
+forme|Cœur dans un carré ¦ Inimă într-un pătrat
+forme|Cœur rond ¦ Inimă rotundă
+forme|Livre de famille ¦ Carnet de familie
+forme|variante ¦ variantă
+forme|Symbole non binaire ¦ Simbol non-binar
+forme|Taille d’un homme ¦ Înălțimea unui om
+forme|Album photo ¦ Album foto
+forme|Photos ¦ Fotografii
+forme|Photo instantanée ¦ Fotografie instant
+forme|Portrait photo ¦ Portret foto
+forme|Dossier de photos ¦ Dosar de fotografii
+forme|Frise ¦ Axă cronologică
+forme|Frise commentée ¦ Axă cronologică comentată
+forme|Diagramme chronologique ¦ Diagramă cronologică
+forme|Arbre en blocs ¦ Arbore în blocuri
+forme|Relation un à plusieurs ¦ Relație unu la mai mulți
+forme|Relation un à un ¦ Relație unu la unu
+forme|Couronne ronde ¦ Coroană rotundă
+forme|Blason à l’épée ¦ Stemă cu sabie
+forme|Blason à la croix ¦ Stemă cu cruce
+forme|Écu parti ¦ Scut despicat
+forme|Croix de Bolnissi ¦ Crucea de Bolnisi
+forme|Crâne ¦ Craniu
+forme|Parchemin et clé ¦ Pergament și cheie
+forme|Sceau rond ¦ Sigiliu rotund
+forme|Coffre au trésor ¦ Cufăr cu comori
+forme|Coffre-fort ¦ Seif
+forme|Coffre-fort carré ¦ Seif pătrat
+forme|Poignée de main ¦ Strângere de mână
+forme|Miroir rectangulaire ¦ Oglindă dreptunghiulară
+forme|Homme ¦ Bărbat
+forme|Personne âgée ¦ Persoană în vârstă
+forme|Bras levés ¦ Brațe ridicate
+forme|Salut ¦ Salut
+forme|Fauteuil roulant ¦ Scaun cu rotile
+forme|Marcheur ¦ Om care merge
+forme|Coureur ¦ Alergător
+forme|Instituteur ¦ Învățător
+forme|Silhouette ¦ Siluetă
+forme|Homme en cravate ¦ Bărbat cu cravată
+forme|Cow-boy ¦ Cowboy
+forme|Ouvrier ¦ Muncitor
+forme|Chapeau et cravate ¦ Pălărie și cravată
+forme|Insigne de police ¦ Insignă de poliție
+forme|Visage d’homme ¦ Față de bărbat
+forme|Visage de femme ¦ Față de femeie
+forme|Profil d’homme ¦ Profil de bărbat
+forme|Profil de femme ¦ Profil de femeie
+forme|Moustache ¦ Mustață
+forme|Main qui salue ¦ Mână care salută
+forme|Main ¦ Mână
+forme|Mains jointes ¦ Mâini împreunate
+forme|Empreinte de pied ¦ Urmă de picior
+forme|File de personnes ¦ Șir de persoane
+forme|Bras baissés ¦ Brațe coborâte
+forme|Danseuse ¦ Dansatoare
+forme|Personne non binaire ¦ Persoană non-binară
+forme|Personne en trottinette ¦ Persoană pe trotinetă
+forme|Personne au déambulateur ¦ Persoană cu cadru de mers
+forme|Personne à canne blanche ¦ Persoană cu baston alb
+forme|Présentation au tableau ¦ Prezentare la tablă
+forme|Foule ¦ Mulțime
+forme|Groupe ¦ Grup
+forme|Silhouette ronde ¦ Siluetă rotundă
+forme|Silhouette encadrée ¦ Siluetă încadrată
+forme|Portraits ¦ Portrete
+forme|Femme d’affaires ¦ Femeie de afaceri
+forme|Orateur ¦ Orator
+forme|Personne qui parle ¦ Persoană care vorbește
+forme|Écolier ¦ Școlar
+forme|Personne blessée ¦ Persoană rănită
+forme|Personne remarquable ¦ Persoană remarcabilă
+forme|Personne inconnue ¦ Persoană necunoscută
+forme|Recherche de personne ¦ Căutarea unei persoane
+forme|Ajouter une personne ¦ Adaugă o persoană
+forme|Musicien ¦ Muzician
+forme|Départ d’une personne ¦ Plecarea unei persoane
+forme|Arrivée d’une personne ¦ Sosirea unei persoane
+forme|Détails de la personne ¦ Detaliile persoanei
+forme|Homme élégant ¦ Bărbat elegant
+forme|Femme élégante ¦ Femeie elegantă
+forme|Masque de protection ¦ Mască de protecție
+forme|Tête ¦ Cap
+forme|Pensée amoureuse ¦ Gând de iubire
+forme|Idée en tête ¦ Idee în minte
+forme|Question en tête ¦ Întrebare în minte
+forme|Main gauche ¦ Mâna stângă
+forme|Paume gauche ¦ Palma stângă
+forme|Paume droite ¦ Palma dreaptă
+forme|Applaudissements ¦ Aplauze
+forme|D’accord ¦ De acord
+forme|main ¦ mână
+forme|Victoire ¦ Victorie
+forme|Index levé ¦ Arătător ridicat
+forme|Index vers la droite ¦ Arătător spre dreapta
+forme|Main tendue ¦ Mână întinsă
+forme|Lavage des mains ¦ Spălatul mâinilor
+forme|Main et pièce ¦ Mână și monedă
+forme|Biceps ¦ Biceps
+forme|Langue des signes ¦ Limbajul semnelor
+forme|Empreintes de pas ¦ Urme de pași
+forme|Méditation ¦ Meditație
+forme|Yoga ¦ Yoga
+forme|Promeneur au parc ¦ Plimbăreț în parc
+forme|Voleur ¦ Hoț
+forme|Ninja ¦ Ninja
+forme|Incognito ¦ Incognito
+forme|Pirate ¦ Pirat
+forme|Médecin ¦ Medic
+forme|Chien ¦ Câine
+forme|Chien de profil ¦ Câine din profil
+forme|Chien guide ¦ Câine-ghid
+forme|Chat ¦ Pisică
+forme|Cheval ¦ Cal
+forme|Cheval au galop ¦ Cal în galop
+forme|Cavalier ¦ Călăreț
+forme|Fer à cheval ¦ Potcoavă
+forme|Vache ¦ Vacă
+forme|Cochon ¦ Porc
+forme|Mouton ¦ Oaie
+forme|Lapin ¦ Iepure
+forme|Rongeur ¦ Rozător
+forme|Éléphant ¦ Elefant
+forme|Kangourou ¦ Cangur
+forme|Koala ¦ Koala
+forme|Panda ¦ Panda
+forme|Manchot ¦ Pinguin
+forme|Chouette ¦ Bufniță
+forme|Canard ¦ Rață
+forme|Dinde ¦ Curcan
+forme|Œuf ¦ Ou
+forme|Dauphin ¦ Delfin
+forme|Aileron de requin ¦ Aripioară de rechin
+forme|Méduse ¦ Meduză
+forme|Escargot ¦ Melc
+forme|Papillon ¦ Fluture
+forme|Abeille ¦ Albină
+forme|Coccinelle ¦ Buburuză
+forme|Araignée ¦ Păianjen
+forme|Insecte ¦ Insectă
+forme|Serpent ¦ Șarpe
+forme|Tortue ¦ Broască țestoasă
+forme|Tortue terrestre ¦ Țestoasă de uscat
+forme|Licorne ¦ Unicorn
+forme|Os ¦ Os
+forme|Âne ¦ Măgar
+forme|Chauve-souris ¦ Liliac
+forme|Toile d’araignée ¦ Pânză de păianjen
+forme|Requin ¦ Rechin
+forme|Abeille et fleur ¦ Albină și floare
+forme|Apiculteur ¦ Apicultor
+forme|Bocal à poisson ¦ Acvariu rotund
+forme|Araignée au fil ¦ Păianjen pe fir
+forme|Cheval rapide ¦ Cal rapid
+forme|Chien interdit ¦ Câini interziși
+forme|Os barré ¦ Os tăiat
+forme|Arbre feuillu ¦ Arbore foios
+forme|Conifère ¦ Conifer
+forme|Palmier ¦ Palmier
+forme|Cactus ¦ Cactus
+forme|Pousse ¦ Lăstar
+forme|Graine ¦ Sămânță
+forme|Feuille d’érable ¦ Frunză de arțar
+forme|Trèfle ¦ Trifoi
+forme|Fleur et pollen ¦ Floare și polen
+forme|Herbe ¦ Iarbă
+forme|Épi de blé ¦ Spic de grâu
+forme|Maïs ¦ Porumb
+forme|Cerises ¦ Cireșe
+forme|Raisin ¦ Struguri
+forme|Poire ¦ Pară
+forme|Pastèque ¦ Pepene verde
+forme|Carotte ¦ Morcov
+forme|Relief ¦ Relief
+forme|Montagnes ¦ Munți
+forme|Volcan ¦ Vulcan
+forme|Île ¦ Insulă
+forme|Vagues ¦ Valuri
+forme|Eau ¦ Apă
+forme|Feu ¦ Foc
+forme|Terre ¦ Pământ
+forme|Globe ¦ Glob
+forme|Boussole ¦ Busolă
+forme|Carte ¦ Hartă
+forme|Hameau ¦ Cătun
+forme|Forêt ¦ Pădure
+forme|Bosquet ¦ Crâng
+forme|Ruche ¦ Stup
+forme|Incendie de forêt ¦ Incendiu de pădure
+forme|Semis ¦ Răsad
+forme|Feuille ronde ¦ Frunză rotundă
+forme|Ananas ¦ Ananas
+forme|Houblon ¦ Hamei
+forme|Chanvre ¦ Cânepă
+forme|Compost ¦ Compost
+forme|Fleur de lotus ¦ Floare de lotus
+forme|Champs ¦ Câmpuri
+forme|Parcelles ¦ Parcele
+forme|Parcelle ronde ¦ Parcelă rotundă
+forme|Parcelle repérée ¦ Parcelă marcată
+forme|Sillons horizontaux ¦ Brazde orizontale
+forme|Glissement de terrain ¦ Alunecare de teren
+forme|Cascade ¦ Cascadă
+forme|Raz-de-marée ¦ Val seismic
+forme|Marée montante ¦ Flux
+forme|Humidité ¦ Umiditate
+forme|Puits ¦ Fântână
+forme|Pompe à eau ¦ Pompă de apă
+forme|Fleur stylisée ¦ Floare stilizată
+forme|Légende de carte ¦ Legenda hărții
+forme|Lieu ¦ Loc
+forme|rayon ¦ rază
+forme|Plusieurs lieux ¦ Mai multe locuri
+forme|Distance entre lieux ¦ Distanța dintre locuri
+forme|Lieu d’une personne ¦ Locul unei persoane
+forme|Lieu important ¦ Loc important
+forme|Lieu inconnu ¦ Loc necunoscut
+forme|Position GPS ¦ Poziție GPS
+forme|Viseur ¦ Vizor
+forme|Latitude ¦ Latitudine
+forme|Longitude ¦ Longitudine
+forme|Sommet ¦ Vârf
+forme|Montée ¦ Urcare
+forme|Pente montante ¦ Pantă ascendentă
+forme|Rivage ¦ Țărm
+forme|Plage ¦ Plajă
+forme|Tunnel de culture ¦ Solar tunel
+forme|Ferme et silo ¦ Fermă și siloz
+forme|Silo ¦ Siloz
+forme|Clôture électrique ¦ Gard electric
+forme|Arrosoir ¦ Stropitoare
+forme|Arroseur ¦ Aspersor
+forme|Râteau ¦ Greblă
+forme|Fourche à foin ¦ Furcă de fân
+forme|Faucille ¦ Seceră
+forme|Tondeuse ¦ Mașină de tuns iarba
+forme|Nuit ¦ Noapte
+forme|Éclaircies ¦ Înseninări
+forme|Nuageux ¦ Înnorat
+forme|Pluie ¦ Ploaie
+forme|Averse ¦ Aversă
+forme|Neige ¦ Ninsoare
+forme|Orage ¦ Furtună
+forme|Vent ¦ Vânt
+forme|Brouillard ¦ Ceață
+forme|Grêle ¦ Grindină
+forme|Coucher de soleil ¦ Apus de soare
+forme|Thermomètre ¦ Termometru
+forme|Croissant de lune ¦ Semilună
+forme|Pleine lune ¦ Lună plină
+forme|Étoile filante ¦ Stea căzătoare
+forme|Scintillement ¦ Sclipire
+forme|Ouragan ¦ Uragan
+forme|Tornade ¦ Tornadă
+forme|Tempête de sable ¦ Furtună de nisip
+forme|Brume ¦ Pâclă
+forme|Orage pluvieux ¦ Furtună cu ploaie
+forme|Orage et éclaircies ¦ Furtună și înseninări
+forme|Averses et éclaircies ¦ Averse și înseninări
+forme|Neige et éclaircies ¦ Ninsoare și înseninări
+forme|Pluie et neige ¦ Ploaie și ninsoare
+forme|Fortes chutes de neige ¦ Ninsori abundente
+forme|Neige mêlée de pluie ¦ Lapoviță
+forme|Nuit nuageuse ¦ Noapte înnorată
+forme|Vent fort ¦ Vânt puternic
+forme|Lever du soleil ¦ Răsărit de soare
+forme|Coucher du soleil ¦ Apusul soarelui
+forme|Coucher de lune ¦ Apusul lunii
+forme|Canicule ¦ Caniculă
+forme|Nuages ¦ Nori
+forme|Vague de chaleur ¦ Val de căldură
+forme|Arc-en-ciel ¦ Curcubeu
+forme|Aurore boréale ¦ Aurora boreală
+forme|Nouvelle lune ¦ Lună nouă
+forme|Premier quartier ¦ Primul pătrar
+forme|Dernier quartier ¦ Ultimul pătrar
+forme|Lune décroissante ¦ Lună în descreștere
+forme|Lune gibbeuse décroissante ¦ Lună gibbosă în descreștere
+forme|Lune gibbeuse croissante ¦ Lună gibbosă în creștere
+forme|Jour et nuit ¦ Zi și noapte
+forme|Soleil radieux ¦ Soare strălucitor
+forme|Heure solaire ¦ Ora solară
+forme|Soleil et flocon ¦ Soare și fulg de nea
+forme|Chaleur ¦ Căldură
+forme|Dégel ¦ Dezgheț
+forme|Grand froid ¦ Ger mare
+forme|Bonhomme de neige ¦ Om de zăpadă
+forme|Température élevée ¦ Temperatură ridicată
+forme|Température basse ¦ Temperatură scăzută
+forme|Degrés Celsius ¦ Grade Celsius
+forme|Parasol ¦ Umbrelă de soare
+forme|Manche à air ¦ Mânecă de vânt
+forme|Fumée ¦ Fum
+forme|Inondation ¦ Inundație
+forme|Tranche de pain ¦ Felie de pâine
+forme|Baguette ¦ Baghetă
+forme|Croissant ¦ Croasant
+forme|Fromage ¦ Brânză
+forme|Gâteau ¦ Prăjitură
+forme|Gâteau d’anniversaire ¦ Tort aniversar
+forme|Petit gâteau ¦ Brioșă
+forme|Biscuit ¦ Biscuit
+forme|Bonbon ¦ Bomboană
+forme|Glace ¦ Înghețată
+forme|Pizza ¦ Pizza
+forme|Cuisse de poulet ¦ Pulpă de pui
+forme|Œuf au plat ¦ Ou ochi
+forme|Tasse de café ¦ Ceașcă de cafea
+forme|Tasse de thé ¦ Ceașcă de ceai
+forme|Bouilloire ¦ Fierbător
+forme|Marmite ¦ Oală
+forme|Couverts ¦ Tacâmuri
+forme|Toque ¦ Bonetă de bucătar
+forme|Verre de vin ¦ Pahar de vin
+forme|Bouteille de vin ¦ Sticlă de vin
+forme|Chope ¦ Halbă
+forme|Cocktail ¦ Cocktail
+forme|Bière ¦ Bere
+forme|Gobelet ¦ Pahar
+forme|Agrume ¦ Citrice
+forme|Cacahuète ¦ Arahidă
+forme|Nouilles ¦ Tăiței
+forme|Hamburger ¦ Hamburger
+forme|Repas ¦ Masă
+forme|Pièce montée ¦ Tort etajat
+forme|Sucre d’orge ¦ Baston de zahăr
+forme|Muffin ¦ Brioșă
+forme|Bretzel ¦ Covrig
+forme|Frites ¦ Cartofi prăjiți
+forme|Hot-dog ¦ Hot-dog
+forme|Steak ¦ Friptură
+forme|Dinde rôtie ¦ Curcan la cuptor
+forme|Restauration ¦ Alimentație publică
+forme|Plat à emporter ¦ Mâncare la pachet
+forme|Halal ¦ Halal
+forme|Casher ¦ Cușer
+forme|Taco ¦ Taco
+forme|Pâtes ¦ Paste
+forme|Bol de riz ¦ Bol de orez
+forme|Saucisse ¦ Cârnat
+forme|Poireau ¦ Praz
+forme|Piment fort ¦ Ardei iute
+forme|Piment doux ¦ Ardei dulce
+forme|Pop-corn ¦ Floricele
+forme|Glace à l’eau ¦ Înghețată pe băț
+forme|Nutrition ¦ Nutriție
+forme|Bol ¦ Bol
+forme|Saladier ¦ Castron de salată
+forme|Casserole ¦ Cratiță
+forme|Casserole et cuillère ¦ Cratiță și lingură
+forme|Poêle ¦ Tigaie
+forme|Couverts croisés ¦ Tacâmuri încrucișate
+forme|Fourchette ¦ Furculiță
+forme|Cuillère ¦ Lingură
+forme|Cuillère de sucre ¦ Lingură de zahăr
+forme|Salière ¦ Solniță
+forme|Sauce soja ¦ Sos de soia
+forme|Café à emporter ¦ Cafea la pachet
+forme|Cafetière ¦ Cafetieră
+forme|Bouilloire fumante ¦ Fierbător aburind
+forme|Verre d’eau ¦ Pahar cu apă
+forme|Flûte à champagne ¦ Pahar de șampanie
+forme|Verre tulipe ¦ Pahar lalea
+forme|Pinte ¦ Halbă de bere
+forme|Fragile ¦ Fragil
+forme|Bouteille de soda ¦ Sticlă de suc
+forme|Flacon ¦ Flacon
+forme|Spiritueux ¦ Băuturi spirtoase
+forme|Tonneau de bière ¦ Butoi de bere
+forme|Tonneau ¦ Butoi
+forme|Mixeur ¦ Blender
+forme|Barbecue ¦ Grătar
+forme|Œuf de Pâques ¦ Ou de Paște
+forme|Maison et immeuble ¦ Casă și bloc
+forme|Porte ¦ Ușă
+forme|Porte ouverte ¦ Ușă deschisă
+forme|Fenêtre ¦ Fereastră
+forme|Escalier ¦ Scară
+forme|Cheminée ¦ Șemineu
+forme|Canapé ¦ Canapea
+forme|Lit ¦ Pat
+forme|Lit double ¦ Pat dublu
+forme|Fauteuil ¦ Fotoliu
+forme|Table ¦ Masă
+forme|Armoire ¦ Dulap
+forme|Lampe de bureau ¦ Lampă de birou
+forme|Lustre ¦ Candelabru
+forme|Clé ancienne ¦ Cheie veche
+forme|Cadenas ¦ Lacăt
+forme|Cadenas ouvert ¦ Lacăt deschis
+forme|Pendule ¦ Pendulă
+forme|Réveil ¦ Ceas deșteptător
+forme|Ballon de fête ¦ Balon de petrecere
+forme|Fête ¦ Petrecere
+forme|Ours en peluche ¦ Ursuleț de pluș
+forme|Brique de jeu ¦ Cărămidă de joacă
+forme|Cintre ¦ Umeraș
+forme|Fer à repasser ¦ Fier de călcat
+forme|Machine à laver ¦ Mașină de spălat
+forme|Aiguille ¦ Ac
+forme|Balai ¦ Mătură
+forme|Seau ¦ Găleată
+forme|Boîte aux lettres ¦ Cutie poștală
+forme|Téléphone ancien ¦ Telefon vechi
+forme|Radio ¦ Radio
+forme|Télévision ancienne ¦ Televizor vechi
+forme|Machine à écrire ¦ Mașină de scris
+forme|Projecteur ¦ Proiector
+forme|Pellicule ¦ Rolă de film
+forme|Film ¦ Film
+forme|Cassette ¦ Casetă
+forme|Tourne-disque ¦ Pick-up
+forme|Disque ¦ Disc
+forme|Maison ronde ¦ Casă rotundă
+forme|Toit ¦ Acoperiș
+forme|Maison éclairée ¦ Casă luminată
+forme|Quitter la maison ¦ Plecare de acasă
+forme|Entrer à la maison ¦ Venire acasă
+forme|Changement de maison ¦ Mutare
+forme|Adresse ¦ Adresă
+forme|Porte fermée ¦ Ușă închisă
+forme|Porte coulissante ¦ Ușă glisantă
+forme|Porte coulissante ouverte ¦ Ușă glisantă deschisă
+forme|Sonnette ¦ Sonerie
+forme|Fenêtre ouverte ¦ Fereastră deschisă
+forme|Fenêtre fermée ¦ Fereastră închisă
+forme|Balcon ¦ Balcon
+forme|Store banne ¦ Copertină
+forme|Escalier montant ¦ Scară în sus
+forme|Escalier descendant ¦ Scară în jos
+forme|Ascenseur ¦ Lift
+forme|Escalator ¦ Scară rulantă
+forme|Échelle ¦ Scară mobilă
+forme|Garage ¦ Garaj
+forme|Garage ouvert ¦ Garaj deschis
+forme|Fauteuil club ¦ Fotoliu club
+forme|Grand lit ¦ Pat mare
+forme|Lit deux places ¦ Pat pentru două persoane
+forme|Lit simple ¦ Pat de o persoană
+forme|Lits superposés ¦ Paturi suprapuse
+forme|Chaise d’écolier ¦ Scaun de școlar
+forme|Bureau ¦ Birou
+forme|Commode ¦ Comodă
+forme|Buffet ¦ Bufet
+forme|Plan de travail ¦ Blat de lucru
+forme|Portemanteau ¦ Cuier
+forme|Casier ¦ Dulăpior
+forme|Tabouret ¦ Taburet
+forme|Banc ¦ Bancă
+forme|Banc à dossier ¦ Bancă cu spătar
+forme|Tapis ¦ Covor
+forme|Lampadaire ¦ Lampadar
+forme|Grand lustre ¦ Candelabru mare
+forme|Applique murale ¦ Aplică de perete
+forme|Lanterne murale ¦ Felinar de perete
+forme|Réverbère ¦ Felinar stradal
+forme|Lampe à huile ¦ Lampă cu ulei
+forme|Guirlande lumineuse ¦ Ghirlandă luminoasă
+forme|Idée ¦ Idee
+forme|Chandelier ¦ Sfeșnic
+forme|Chandelier allumé ¦ Sfeșnic aprins
+forme|Radiateur ¦ Calorifer
+forme|Cuisinière ¦ Aragaz
+forme|Four à micro-ondes ¦ Cuptor cu microunde
+forme|Réfrigérateur ¦ Frigider
+forme|Lave-vaisselle ¦ Mașină de spălat vase
+forme|Aspirateur ¦ Aspirator
+forme|Planche à repasser ¦ Masă de călcat
+forme|Robinet ¦ Robinet
+forme|Douche ¦ Duș
+forme|Baignoire ¦ Cadă
+forme|Toilettes ¦ Toaletă
+forme|Ventilateur ¦ Ventilator
+forme|Trousseau de clés ¦ Legătură de chei
+forme|Cloche qui sonne ¦ Clopot care sună
+forme|Midi ¦ Amiază
+forme|Sablier vide ¦ Clepsidră goală
+forme|Sablier plein ¦ Clepsidră plină
+forme|Cadeau ouvert ¦ Cadou deschis
+forme|Boîte aux lettres ouverte ¦ Cutie poștală deschisă
+forme|Vaporisateur ¦ Pulverizator
+forme|Poubelle ¦ Coș de gunoi
+forme|Panier ¦ Coș
+forme|Colis ¦ Colet
+forme|Diable ¦ Cărucior de transport
+forme|Caméra ancienne ¦ Cameră veche
+forme|Radio FM ¦ Radio FM
+forme|Antenne radio ¦ Antenă radio
+forme|Radiocassette ¦ Radiocasetofon
+forme|Cassette vidéo ¦ Casetă video
+forme|Disque compact ¦ Compact disc
+forme|Lecteur de disques ¦ Player de discuri
+forme|Télécopieur ¦ Fax
+forme|Télévision ¦ Televizor
+forme|Ordinateur ancien ¦ Calculator vechi
+forme|Disquette ¦ Dischetă
+forme|Calculatrice ¦ Calculator de buzunar
+forme|Boulier ¦ Abac
+forme|Cheminée éteinte ¦ Șemineu stins
+forme|Volet roulant ¦ Rulou
+forme|Volet roulant ouvert ¦ Rulou deschis
+forme|Ventilateur de plafond ¦ Ventilator de tavan
+forme|Sèche-linge ¦ Uscător de rufe
+forme|Grille-pain ¦ Prăjitor de pâine
+forme|Bain à remous ¦ Jacuzzi
+forme|Chauffe-eau ¦ Boiler
+forme|Climatiseur ¦ Aparat de aer condiționat
+forme|Caméscope ¦ Cameră video
+forme|Bobine de film ¦ Bobină de film
+forme|Écran de projection ¦ Ecran de proiecție
+forme|Talkie-walkie ¦ Stație walkie-talkie
+forme|Téléphone de bureau ¦ Telefon de birou
+forme|Trois heures ¦ Ora trei
+forme|Six heures ¦ Ora șase
+forme|Neuf heures ¦ Ora nouă
+forme|Sablier écoulé ¦ Clepsidră scursă
+forme|Lampes ¦ Lămpi
+forme|Lampadaire torchère ¦ Lampadar cu lumină în sus
+forme|Carton ouvert ¦ Cutie de carton deschisă
+forme|T-shirt ¦ Tricou
+forme|Chemise ¦ Cămașă
+forme|Chapeau feutre ¦ Pălărie de fetru
+forme|Chapeau rond ¦ Melon
+forme|Cravate ¦ Cravată
+forme|Nœud papillon ¦ Papion
+forme|Chaussure de ville ¦ Pantof de oraș
+forme|Escarpin ¦ Pantof cu toc
+forme|Basket ¦ Adidas
+forme|Chausson de danse ¦ Poantă de balet
+forme|Lunettes de soleil ¦ Ochelari de soare
+forme|Diamant ¦ Diamant
+forme|Collier ¦ Colier
+forme|Montre ¦ Ceas de mână
+forme|Sac à main ¦ Poșetă
+forme|Portefeuille ¦ Portofel
+forme|Parapluie fermé ¦ Umbrelă închisă
+forme|Ciseaux ¦ Foarfecă
+forme|Rouge à lèvres ¦ Ruj
+forme|Sac à dos ¦ Rucsac
+forme|Mallette ¦ Servietă
+forme|Lingerie ¦ Lenjerie
+forme|Sous-vêtement ¦ Lenjerie intimă
+forme|Couche ¦ Scutec
+forme|Chapeau de magicien ¦ Joben de magician
+forme|Chaussure à crampons ¦ Ghete cu crampoane
+forme|Chaussette de Noël ¦ Ciorap de Crăciun
+forme|Portefeuille plié ¦ Portofel pliat
+forme|Pochette de voyage ¦ Borsetă de călătorie
+forme|Bagage cabine ¦ Bagaj de cabină
+forme|Bagage en soute ¦ Bagaj de cală
+forme|Sac étiqueté ¦ Geantă cu etichetă
+forme|Mallette professionnelle ¦ Servietă profesională
+forme|Sèche-cheveux ¦ Uscător de păr
+forme|Rasoir de sûreté ¦ Aparat de ras de siguranță
+forme|Lame de rasoir ¦ Lamă de ras
+forme|Lotion ¦ Loțiune
+forme|Loup ¦ Mască de ochi
+forme|Masques de théâtre ¦ Măști de teatru
+forme|Masque de Guy Fawkes ¦ Mască Guy Fawkes
+forme|Voiture ¦ Mașină
+forme|Voiture de profil ¦ Mașină din profil
+forme|Cabriolet ¦ Decapotabilă
+forme|Break ¦ Break
+forme|Camionnette ¦ Camionetă
+forme|Camion ¦ Camion
+forme|Fourgon ¦ Furgon
+forme|Autobus ¦ Autobuz
+forme|Autocar ¦ Autocar
+forme|Train ¦ Tren
+forme|Locomotive ¦ Locomotivă
+forme|Tramway ¦ Tramvai
+forme|Métro ¦ Metrou
+forme|Tracteur ¦ Tractor
+forme|Vélo ¦ Bicicletă
+forme|Moto ¦ Motocicletă
+forme|Trottinette ¦ Trotinetă
+forme|Voilier ¦ Velier
+forme|Paquebot ¦ Pachebot
+forme|Gouvernail ¦ Cârmă
+forme|Avion ¦ Avion
+forme|Décollage ¦ Decolare
+forme|Montgolfière ¦ Balon cu aer cald
+forme|Fusée ¦ Rachetă
+forme|Fusée au départ ¦ Lansare de rachetă
+forme|Caravane ¦ Rulotă
+forme|Camping-car ¦ Autorulotă
+forme|Station-service ¦ Benzinărie
+forme|Feu tricolore ¦ Semafor
+forme|Panneau de direction ¦ Indicator de direcție
+forme|Route ¦ Drum
+forme|Itinéraire ¦ Itinerar
+forme|Brouette ¦ Roabă
+forme|Volant ¦ Volan
+forme|Voiture de dos ¦ Mașină din spate
+forme|Voiture compacte ¦ Mașină compactă
+forme|Voiture de sport ¦ Mașină sport
+forme|Limousine ¦ Limuzină
+forme|Voiture électrique ¦ Mașină electrică
+forme|Siège auto ¦ Scaun auto
+forme|Siège enfant ¦ Scaun pentru copii
+forme|Lavage auto ¦ Spălătorie auto
+forme|Garagiste ¦ Mecanic auto
+forme|Taxi ¦ Taxi
+forme|Jeepney ¦ Jeepney
+forme|Camion de livraison ¦ Camion de livrare
+forme|Livraison rapide ¦ Livrare rapidă
+forme|Semi-remorque ¦ Semiremorcă
+forme|Camion plateau ¦ Camion cu platformă
+forme|Camion-citerne ¦ Autocisternă
+forme|Dépanneuse ¦ Mașină de tractare
+forme|Benne ¦ Basculantă
+forme|Minibus ¦ Microbuz
+forme|Bus scolaire ¦ Autobuz școlar
+forme|Bus à impériale ¦ Autobuz etajat
+forme|Arrêt de bus ¦ Stație de autobuz
+forme|Train et voiture ¦ Tren și mașină
+forme|Train et bus ¦ Tren și autobuz
+forme|Voiture de voyageurs ¦ Vagon de călători
+forme|Fourgon de queue ¦ Vagon de coadă
+forme|Tramway de profil ¦ Tramvai din profil
+forme|souterrain ¦ subteran
+forme|Télécabine ¦ Telecabină
+forme|Vélo à panier ¦ Bicicletă cu coș
+forme|Vélo cargo ¦ Bicicletă cargo
+forme|Vélo électrique ¦ Bicicletă electrică
+forme|Grand-bi ¦ Velociped cu roată mare
+forme|Cyclomoteur ¦ Moped
+forme|Trottinette électrique ¦ Trotinetă electrică
+forme|Pousse-pousse ¦ Ricșă
+forme|Monocycle ¦ Monociclu
+forme|Quad ¦ ATV
+forme|Motoneige ¦ Snowmobil
+forme|Chariot élévateur ¦ Motostivuitor
+forme|Pelleteuse ¦ Excavator
+forme|Bulldozer ¦ Buldozer
+forme|Grue ¦ Macara
+forme|Portique ¦ Pod rulant
+forme|Atterrissage ¦ Aterizare
+forme|Aéroport ¦ Aeroport
+forme|Hélicoptère ¦ Elicopter
+forme|Drone ¦ Dronă
+forme|Parachute ¦ Parașută
+forme|Parapente ¦ Parapantă
+forme|Soucoupe volante ¦ Farfurie zburătoare
+forme|Satellite ¦ Satelit
+forme|Station spatiale ¦ Stație spațială
+forme|Sous-marin ¦ Submarin
+forme|Naufrage ¦ Naufragiu
+forme|Bouée de sauvetage ¦ Colac de salvare
+forme|Rame ¦ Vâslă
+forme|Jetée ¦ Dig
+forme|Grue portuaire ¦ Macara portuară
+forme|Kayak ¦ Caiac
+forme|Aviron ¦ Canotaj
+forme|Avion et voiture ¦ Avion și mașină
+forme|Avion et train ¦ Avion și tren
+forme|Autoroute ¦ Autostradă
+forme|Route droite ¦ Drum drept
+forme|Itinéraires ¦ Itinerare
+forme|Tunnel ¦ Tunel
+forme|Barrière ¦ Barieră
+forme|Tourniquet ¦ Turnichet
+forme|Cône de signalisation ¦ Con de semnalizare
+forme|Panneau attention ¦ Indicator de atenție
+forme|Cédez le passage ¦ Cedează trecerea
+forme|Poteau indicateur ¦ Stâlp indicator
+forme|Panneau à vendre ¦ Panou de vânzare
+forme|Directions ¦ Direcții
+forme|Parking ¦ Parcare
+forme|Borne de recharge ¦ Stație de încărcare
+forme|Carburant ¦ Carburant
+forme|Pneu ¦ Anvelopă
+forme|Moteur ¦ Motor
+forme|Ceinture de sécurité ¦ Centură de siguranță
+forme|Compteur de vitesse ¦ Vitezometru
+forme|Correspondance ¦ Legătură
+forme|Accessibilité ¦ Accesibilitate
+forme|Maison moderne ¦ Casă modernă
+forme|Immeuble ¦ Bloc de locuințe
+forme|Ville ¦ Oraș
+forme|Bâtiment ¦ Clădire
+forme|Hôpital ¦ Spital
+forme|École ¦ Școală
+forme|toque ¦ tocă
+forme|Hôtel de ville ¦ Primărie
+forme|Banque ¦ Bancă
+forme|Boutique ¦ Magazin
+forme|Commerce ¦ Comerț
+forme|Entrepôt ¦ Depozit
+forme|Grange ¦ Hambar
+forme|Serre ¦ Seră
+forme|Clôture ¦ Gard
+forme|Portail ¦ Poartă
+forme|Tente ¦ Cort
+forme|Phare ¦ Far
+forme|Phare allumé ¦ Far aprins
+forme|Mosquée ¦ Moschee
+forme|Synagogue ¦ Sinagogă
+forme|Temple ¦ Templu
+forme|Pagode ¦ Pagodă
+forme|Stade ¦ Stadion
+forme|Théâtre ¦ Teatru
+forme|Fontaine ¦ Fântână arteziană
+forme|Colonne ¦ Coloană
+forme|Mur ¦ Zid
+forme|Éolienne ¦ Turbină eoliană
+forme|Tour de guet ¦ Turn de veghe
+forme|Commissariat ¦ Secție de poliție
+forme|Poste ¦ Poștă
+forme|Drapeau à damier ¦ Steag în carouri
+forme|Immeuble repéré ¦ Clădire marcată
+forme|Changer de ville ¦ Schimbare de oraș
+forme|Changer de bâtiment ¦ Schimbare de clădire
+forme|Bibliothèque ¦ Bibliotecă
+forme|bâtiment ¦ clădire
+forme|Rayonnages ¦ Rafturi
+forme|Commerce ouvert {x} h ¦ Magazin deschis {x} h
+forme|Hôpital repéré ¦ Spital marcat
+forme|Panneau d’hôpital ¦ Indicator de spital
+forme|Terrain de football ¦ Teren de fotbal
+forme|Terrain de base-ball ¦ Teren de baseball
+forme|Poste de secours ¦ Punct de prim ajutor
+forme|Tour Eiffel ¦ Turnul Eiffel
+forme|Grande roue ¦ Roată mare
+forme|Yourte ¦ Iurtă
+forme|Chalet ¦ Cabană
+forme|Feu de camp ¦ Foc de tabără
+forme|Piscine ¦ Piscină
+forme|Caserne de pompiers ¦ Remiză de pompieri
+forme|Panneau d’affichage ¦ Panou publicitar
+forme|Panneau d’annonces ¦ Avizier
+forme|Podium ¦ Podium
+forme|Mur en flammes ¦ Zid în flăcări
+forme|Portail ouvert ¦ Poartă deschisă
+forme|Réservoir ¦ Rezervor
+forme|Pylône électrique ¦ Stâlp de înaltă tensiune
+forme|Turbine ¦ Turbină
+forme|Panneau solaire ¦ Panou solar
+forme|Grand panneau solaire ¦ Panou solar mare
+forme|Barrage ¦ Baraj
+forme|Explosion nucléaire ¦ Explozie nucleară
+forme|Marteau ¦ Ciocan
+forme|Outils ¦ Unelte
+forme|Clé à molette ¦ Cheie franceză
+forme|Tournevis ¦ Șurubelniță
+forme|Lame de scie ¦ Pânză de ferăstrău
+forme|Scie ¦ Ferăstrău
+forme|Hache ¦ Topor
+forme|Pelle ¦ Lopată
+forme|Pioche ¦ Târnăcop
+forme|Enclume ¦ Nicovală
+forme|Clou ¦ Cui
+forme|Boîte à outils ¦ Trusă de scule
+forme|Règle ¦ Riglă
+forme|Crayon et règle ¦ Creion și riglă
+forme|Rouleau de peinture ¦ Trafalet
+forme|Pinceau ¦ Pensulă
+forme|Palette de peintre ¦ Paletă de pictor
+forme|Stéthoscope ¦ Stetoscop
+forme|Trousse médicale ¦ Trusă medicală
+forme|Balance ¦ Balanță
+forme|Marteau de juge ¦ Ciocănel de judecător
+forme|Billets ¦ Bancnote
+forme|Euro ¦ Euro
+forme|Caisse ¦ Casă de marcat
+forme|Microscope ¦ Microscop
+forme|Fiole ¦ Fiolă
+forme|Livre d’école ¦ Manual școlar
+forme|Camion de pompiers ¦ Mașină de pompieri
+forme|Imprimante ¦ Imprimantă
+forme|Casque de chantier ¦ Cască de protecție
+forme|Mine ¦ Mină
+forme|Bidon d’huile ¦ Canistră de ulei
+forme|Couteau ¦ Cuțit
+forme|Outils croisés ¦ Unelte încrucișate
+forme|Marteau et tournevis ¦ Ciocan și șurubelniță
+forme|Marteau et faucille ¦ Secera și ciocanul
+forme|Clé à tube ¦ Cheie tubulară
+forme|Pince ¦ Clește
+forme|Scie circulaire ¦ Fierăstrău circular
+forme|Cutter ¦ Cutter
+forme|Équerre et compas ¦ Echer și compas
+forme|Compas ¦ Compas
+forme|Mètre ruban ¦ Ruletă
+forme|Niveau à bulle ¦ Nivelă cu bulă
+forme|Vis à tête plate ¦ Șurub cu cap plat
+forme|Vis à tête ronde ¦ Șurub cu cap rotund
+forme|Boulon ¦ Bulon
+forme|Écrou ¦ Piuliță
+forme|Rivet ¦ Nit
+forme|Fer à souder ¦ Ciocan de lipit
+forme|Bêche ¦ Cazma
+forme|Hache de guerre ¦ Topor de luptă
+forme|Crayon à papier ¦ Creion
+forme|Bombe de peinture ¦ Spray de vopsea
+forme|Pot de peinture ¦ Cutie de vopsea
+forme|Pipette ¦ Pipetă
+forme|Dessin ¦ Desen
+forme|Plume de dessin ¦ Peniță de desen
+forme|Balance de cuisine ¦ Cântar de bucătărie
+forme|Balance déséquilibrée ¦ Balanță dezechilibrată
+forme|Pèse-personne ¦ Cântar de persoane
+forme|Poids ¦ Greutate
+forme|Lingots d’or ¦ Lingouri de aur
+forme|Liasses de billets ¦ Teancuri de bancnote
+forme|Tirelire ¦ Pușculiță
+forme|Livre sterling ¦ Liră sterlină
+forme|Franc ¦ Franc
+forme|Yen ¦ Yen
+forme|Rouble ¦ Rublă
+forme|Roupie indienne ¦ Rupie indiană
+forme|Chéquier ¦ Carnet de cecuri
+forme|Carte bancaire ¦ Card bancar
+forme|Chariot de courses ¦ Cărucior de cumpărături
+forme|Sac de courses ¦ Pungă de cumpărături
+forme|Soldes ¦ Reduceri
+forme|Reçu ¦ Bon
+forme|Télescope ¦ Telescop
+forme|Bécher ¦ Pahar Berzelius
+forme|Ballon de chimie ¦ Balon de laborator
+forme|Éprouvette ¦ Eprubetă
+forme|Atome ¦ Atom
+forme|Molécule ¦ Moleculă
+forme|Tableau périodique ¦ Tabel periodic
+forme|Lunettes de protection ¦ Ochelari de protecție
+forme|Menottes ¦ Cătușe
+forme|Extincteur ¦ Extinctor
+forme|Bouche d’incendie ¦ Hidrant
+forme|Pupitre ¦ Pupitru
+forme|Présentation ¦ Prezentare
+forme|Présentation projetée ¦ Prezentare proiectată
+forme|Courrier ¦ Corespondență
+forme|Musique ¦ Muzică
+forme|Note de musique ¦ Notă muzicală
+forme|Clé de sol ¦ Cheia sol
+forme|Piano ¦ Pian
+forme|Guitare ¦ Chitară
+forme|Violon ¦ Vioară
+forme|Trompette ¦ Trompetă
+forme|Saxophone ¦ Saxofon
+forme|Clairon ¦ Goarnă
+forme|Micro ancien ¦ Microfon vechi
+forme|Casque audio ¦ Căști audio
+forme|Roi ¦ Rege
+forme|échecs ¦ șah
+forme|Dame ¦ Regină
+forme|Fou ¦ Nebun
+forme|Pion ¦ Pion
+forme|Cartes à jouer ¦ Cărți de joc
+forme|cartes ¦ cărți
+forme|Pique ¦ Pică
+forme|Carreau ¦ Caro
+forme|Dé ¦ Zar
+forme|Puzzle ¦ Puzzle
+forme|Cerf-volant ¦ Zmeu
+forme|Ballon de football ¦ Minge de fotbal
+forme|Ballon de basket ¦ Minge de baschet
+forme|Tennis ¦ Tenis
+forme|Ballon de rugby ¦ Minge de rugby
+forme|Cycliste ¦ Biciclist
+forme|Nageur ¦ Înotător
+forme|Skieur ¦ Schior
+forme|Coupe ¦ Cupă
+forme|Trophée ¦ Trofeu
+forme|Ticket ¦ Bilet
+forme|Clap de cinéma ¦ Clachetă
+forme|Nuancier ¦ Mostrar de culori
+forme|Livre ouvert ¦ Carte deschisă
+forme|Manette ¦ Controler de joc
+forme|Guitare électrique ¦ Chitară electrică
+forme|Médiator ¦ Pană de chitară
+forme|Ocarina ¦ Ocarină
+forme|instrument ¦ instrument
+forme|Métronome ¦ Metronom
+forme|Microphone ¦ Microfon
+forme|Amplificateur ¦ Amplificator
+forme|Enceinte ¦ Boxă
+forme|Partition encadrée ¦ Partitură înrămată
+forme|Croche ¦ Optime
+forme|Blanche ¦ Doime
+forme|Noire ¦ Pătrime
+forme|Double croche ¦ Șaisprezecime
+forme|Ronde ¦ Notă întreagă
+forme|Clé de fa ¦ Cheia fa
+forme|Clé d’ut ¦ Cheia do
+forme|Dièse ¦ Diez
+forme|musique ¦ muzică
+forme|Bémol ¦ Bemol
+forme|Bécarre ¦ Becar
+forme|Pause ¦ Pauză de notă întreagă
+forme|Demi-pause ¦ Pauză de doime
+forme|Soupir ¦ Pauză de pătrime
+forme|Demi-soupir ¦ Pauză de optime
+forme|Recueil de chansons ¦ Culegere de cântece
+forme|Écouteurs ¦ Căști intraauriculare
+forme|Danse de salon ¦ Dans de societate
+forme|Billet ¦ Bilet
+forme|Jeu de cartes ¦ Pachet de cărți
+forme|Carte de cœur ¦ Carte de cupă
+forme|Carte de pique ¦ Carte de pică
+forme|Carte de trèfle ¦ Carte de treflă
+forme|Carte de carreau ¦ Carte de caro
+forme|Jeton de poker ¦ Jeton de poker
+forme|Machine à sous ¦ Păcănea
+forme|Dés ¦ Zaruri
+forme|Dé à vingt faces ¦ Zar cu douăzeci de fețe
+forme|Damier ¦ Tablă de dame
+forme|Pièce de puzzle et cœur ¦ Piesă de puzzle și inimă
+forme|Tangram ¦ Tangram
+forme|Moulin à vent ¦ Morișcă de vânt
+forme|jouet ¦ jucărie
+forme|Bascule ¦ Balansoar
+forme|jeu ¦ joc
+forme|Toboggan ¦ Tobogan
+forme|Boule de cristal ¦ Glob de cristal
+forme|Baguette magique ¦ Baghetă magică
+forme|Feu d’artifice ¦ Focuri de artificii
+forme|Bowling ¦ Bowling
+forme|Billard ¦ Biliard
+forme|Triangle de billard ¦ Triunghi de biliard
+forme|Golf ¦ Golf
+forme|Balle de base-ball ¦ Minge de baseball
+forme|Batte de base-ball ¦ Bâtă de baseball
+forme|Panier de basket ¦ Coș de baschet
+forme|Ballon de volley ¦ Minge de volei
+forme|Ballon de football américain ¦ Minge de fotbal american
+forme|Casque de football américain ¦ Cască de fotbal american
+forme|Balle de tennis ¦ Minge de tenis
+forme|Badminton ¦ Badminton
+forme|Tennis de table ¦ Tenis de masă
+forme|Crosses de hockey ¦ Crose de hochei
+forme|Handball ¦ Handbal
+forme|Polo ¦ Polo
+forme|Curling ¦ Curling
+forme|Arc et flèche ¦ Arc și săgeată
+forme|Flèche dans la cible ¦ Săgeată în țintă
+forme|Cible de tir ¦ Țintă de tir
+forme|Escrime ¦ Scrimă
+forme|Karaté ¦ Karate
+forme|Gant de boxe ¦ Mănușă de box
+forme|Gymnastique ¦ Gimnastică
+forme|Haltérophile ¦ Halterofil
+forme|Haltère ¦ Ganteră
+forme|Corde à sauter ¦ Coardă de sărit
+forme|Sprinteur ¦ Sprinter
+forme|Randonneur ¦ Drumeț
+forme|Ski de fond ¦ Schi fond
+forme|Ski nautique ¦ Schi nautic
+forme|Planche à neige ¦ Snowboard
+forme|Raquettes à neige ¦ Rachete de zăpadă
+forme|Luge ¦ Sanie
+forme|Patin à glace ¦ Patină de gheață
+forme|Patin à roulettes ¦ Patină cu rotile
+forme|Roller en ligne ¦ Role în linie
+forme|Planche à roulettes ¦ Skateboard
+forme|Skateur ¦ Skater
+forme|Surfeur ¦ Surfer
+forme|Plongeur ¦ Scafandru
+forme|Plongée sous-marine ¦ Scufundare
+forme|Masque de plongée ¦ Mască de scufundare
+forme|Tuba ¦ Tub de respirat
+forme|Casque de course ¦ Cască de curse
+forme|Sifflet ¦ Fluier
+forme|Tableau des scores ¦ Tabelă de scor
+forme|Médaille d’or ¦ Medalie de aur
+forme|Trophée brisé ¦ Trofeu spart
+forme|Tournoi ¦ Turneu
+forme|Flambeau ¦ Torță
+forme|Jumelles ¦ Binoclu
+forme|Panorama ¦ Panoramă
+forme|un ¦ unu
+forme|deux ¦ doi
+forme|trois ¦ trei
+forme|quatre ¦ patru
+forme|six ¦ șase
+forme|cinéma ¦ cinema
+forme|Médaille d’argent ¦ Medalie de argint
+forme|Médaille de bronze ¦ Medalie de bronz
+forme|Cricket ¦ Cricket
+forme|Liste de chansons ¦ Listă de cântece
+forme|Étoile de David ¦ Steaua lui David
+forme|Ménorah ¦ Menora
+forme|Croissant et étoile ¦ Semilună și stea
+forme|Om ¦ Om
+forme|Roue du dharma ¦ Roata dharmei
+forme|Yin et yang ¦ Yin și yang
+forme|Paix ¦ Pace
+forme|Cœur brisé ¦ Inimă frântă
+forme|Éternité ¦ Eternitate
+forme|Khanda ¦ Khanda
+forme|Ménorah allumée ¦ Menora aprinsă
+forme|Hexagramme ¦ Hexagramă
+forme|Boule de Noël ¦ Glob de Crăciun
+forme|Halloween ¦ Halloween
+forme|Citrouille ¦ Dovleac
+forme|Document ¦ Document
+forme|Documents ¦ Documente
+forme|Note écrite ¦ Notă scrisă
+forme|Livres ¦ Cărți
+forme|Carnet ¦ Carnet
+forme|Journal ¦ Ziar
+forme|Gazette ¦ Gazetă
+forme|Lettre {x} ¦ Scrisoarea {x}
+forme|Timbre ¦ Timbru
+forme|Archives ¦ Arhive
+forme|Dossier ¦ Dosar
+forme|Dossier ouvert ¦ Dosar deschis
+forme|Presse-papiers ¦ Clipboard
+forme|Calendrier ¦ Calendar
+forme|Date heureuse ¦ Dată fericită
+forme|Date importante ¦ Dată importantă
+forme|Stylo ¦ Pix
+forme|Stylo-plume ¦ Stilou
+forme|Signature ¦ Semnătură
+forme|Guillemet ¦ Ghilimea
+forme|Marque-page ¦ Semn de carte
+forme|Punaise ¦ Pioneză
+forme|Trombone ¦ Agrafă
+forme|Post-it ¦ Post-it
+forme|Bulle de message ¦ Balon de mesaj
+forme|Discussion ¦ Discuție
+forme|Traduction ¦ Traducere
+forme|Alphabet ¦ Alfabet
+forme|Document à modifier ¦ Document de modificat
+forme|Document signé ¦ Document semnat
+forme|Classeur à tiroirs ¦ Fișet
+forme|Document douteux ¦ Document îndoielnic
+forme|Document daté ¦ Document datat
+forme|Document important ¦ Document important
+forme|Document lié ¦ Document legat
+forme|Partition ¦ Partitură
+forme|Dossiers ¦ Dosare
+forme|Dossier de la maison ¦ Dosarul casei
+forme|Dossier favori ¦ Dosar preferat
+forme|Dossier important ¦ Dosar important
+forme|Dossier de textes ¦ Dosar de texte
+forme|Recherche de dossier ¦ Căutare de dosar
+forme|Dossier daté ¦ Dosar datat
+forme|Dossier mystère ¦ Dosar misterios
+forme|Recherche aux archives ¦ Cercetare în arhive
+forme|Archive précieuse ¦ Arhivă prețioasă
+forme|Livre ouvert vierge ¦ Carte deschisă goală
+forme|pages ¦ pagini
+forme|Abécédaire ¦ Abecedar
+forme|Recherche dans un livre ¦ Căutare într-o carte
+forme|Livre daté ¦ Carte datată
+forme|Livre et repère ¦ Carte și semn
+forme|Livre en écriture ¦ Carte în curs de scriere
+forme|Marque-pages ¦ Semne de carte
+forme|Carnets ¦ Carnete
+forme|Lettres ¦ Scrisori
+forme|Bulletin ¦ Buletin
+forme|Presse-papiers vide ¦ Clipboard gol
+forme|Liste sur presse-papiers ¦ Listă pe clipboard
+forme|Fiche de personne ¦ Fișă de persoană
+forme|Liste validée ¦ Listă bifată
+forme|Calendrier vierge ¦ Calendar gol
+forme|Mois ¦ Lună
+forme|Aujourd’hui ¦ Astăzi
+forme|Période ¦ Perioadă
+forme|Agenda ¦ Agendă
+forme|Date et heure ¦ Dată și oră
+forme|Date inconnue ¦ Dată necunoscută
+forme|Date incertaine ¦ Dată incertă
+forme|Date confirmée ¦ Dată confirmată
+forme|Date de début ¦ Data de început
+forme|Date de fin ¦ Data de sfârșit
+forme|Notes ¦ Note
+forme|Écrire une note ¦ Scrie o notă
+forme|Autocollant ¦ Autocolant
+forme|Notes écrites ¦ Note scrise
+forme|Pièce jointe ¦ Atașament
+forme|Étiquettes ¦ Etichete
+forme|Étiquette écrite ¦ Etichetă scrisă
+forme|Étiquette favorite ¦ Etichetă preferată
+forme|Message écrit ¦ Mesaj scris
+forme|Question ¦ Întrebare
+forme|Conversation ¦ Conversație
+forme|Commentaire ¦ Comentariu
+forme|Commentaire écrit ¦ Comentariu scris
+forme|Citation ¦ Citat
+forme|Commentaires ¦ Comentarii
+forme|Témoignage ¦ Mărturie
+forme|Bulle de pensée ¦ Balon de gând
+forme|Guillemet fermant ¦ Ghilimea de închidere
+forme|Alphabet latin ¦ Alfabet latin
+forme|Alphabet grec ¦ Alfabet grecesc
+forme|Alphabet cyrillique ¦ Alfabet chirilic
+forme|Alphabet hébreu ¦ Alfabet ebraic
+forme|Alphabet arabe ¦ Alfabet arab
+forme|Idéogramme ¦ Ideogramă
+forme|Braille ¦ Braille
+forme|stylo ¦ pix
+forme|Signature écrite ¦ Semnătură de mână
+forme|Crayon encadré ¦ Creion încadrat
+forme|Gomme ¦ Radieră
+forme|Carte de visite ¦ Carte de vizită
+forme|Carte nominative ¦ Card cu nume
+forme|Répertoire ¦ Agendă de adrese
+forme|Fichier rotatif ¦ Fișier rotativ
+forme|Passeport biométrique ¦ Pașaport biometric
+forme|Licence ¦ Licență
+forme|Bulletin de vote ¦ Buletin de vot
+forme|Vote ¦ Vot
+forme|Liste à puces ¦ Listă cu buline
+forme|Liste numérotée ¦ Listă numerotată
+forme|Tableau ¦ Tabel
+forme|Scanner ¦ Scaner
+forme|Copie ¦ Copie
+forme|Semaine ¦ Săptămână
+forme|Fin de semaine ¦ Weekend
+forme|Enveloppe ¦ Plic
+forme|Réponse ¦ Răspuns
+forme|Texte long ¦ Text lung
+forme|Battement de cœur ¦ Bătăi ale inimii
+forme|Pansement ¦ Plasture
+forme|Croix médicale ¦ Cruce medicală
+forme|Ambulance ¦ Ambulanță
+forme|Dent ¦ Dinte
+forme|Cerveau ¦ Creier
+forme|Poumons ¦ Plămâni
+forme|Estomac ¦ Stomac
+forme|Œil ¦ Ochi
+forme|Oreille ¦ Ureche
+forme|Virus ¦ Virus
+forme|Bactérie ¦ Bacterie
+forme|ADN ¦ ADN
+forme|Mortier ¦ Mojar
+forme|Tête de mort ¦ Craniu
+forme|Défibrillateur ¦ Defibrilator
+forme|Pouls ¦ Puls
+forme|Pilules ¦ Pastile
+forme|Médicament ¦ Medicament
+forme|Ordonnance ¦ Rețetă
+forme|Perfusion ¦ Perfuzie
+forme|Poche de sang ¦ Pungă de sânge
+forme|Diabète ¦ Diabet
+forme|Allergie ¦ Alergie
+forme|Radiographie ¦ Radiografie
+forme|Scanner du crâne ¦ Scanare a craniului
+forme|Brosse à dents ¦ Periuță de dinți
+forme|Brosse à dents et dentifrice ¦ Periuță și pastă de dinți
+forme|Surdité ¦ Surditate
+forme|Œil fermé ¦ Ochi închis
+forme|Cécité ¦ Orbire
+forme|Dossier médical ¦ Dosar medical
+forme|Reproduction ¦ Reproducere
+forme|Malade ¦ Bolnav
+forme|Fièvre ¦ Febră
+forme|Mortier et pilon ¦ Mojar și pistil
+forme|Potion de soin ¦ Poțiune de vindecare
+forme|Poison ¦ Otravă
+forme|Boucle auditive ¦ Buclă auditivă
+forme|Tache de liquide ¦ Pată de lichid
+forme|Cœur arrêté ¦ Inimă oprită
+forme|Véhicule sanitaire ¦ Vehicul sanitar
+forme|Étoile ronde ¦ Stea rotundă
+forme|Demi-cœur ¦ Jumătate de inimă
+forme|Pouce levé ¦ Deget mare în sus
+forme|Pouce baissé ¦ Deget mare în jos
+forme|Validé ¦ Validat
+forme|Refusé ¦ Refuzat
+forme|Plus rond ¦ Plus rotund
+forme|Moins rond ¦ Minus rotund
+forme|Question ronde ¦ Întrebare rotundă
+forme|Attention ¦ Atenție
+forme|Alerte ¦ Alertă
+forme|Stop ¦ Stop
+forme|Info ronde ¦ Info rotund
+forme|Bouclier ¦ Scut
+forme|Bouclier validé ¦ Scut validat
+forme|Recyclage ¦ Reciclare
+forme|Copyright ¦ Copyright
+forme|Arobase ¦ Arond
+forme|Pourcentage ¦ Procent
+forme|Dollar ¦ Dolar
+forme|Pi ¦ Pi
+forme|Somme ¦ Sumă
+forme|Danger biologique ¦ Pericol biologic
+forme|Radioactif ¦ Radioactiv
+forme|Content ¦ Mulțumit
+forme|Triste ¦ Trist
+forme|Neutre ¦ Neutru
+forme|Ravi ¦ Încântat
+forme|Pleure ¦ Plânge
+forme|Fâché ¦ Supărat
+forme|Clin d’œil ¦ Clipit
+forme|Bisou ¦ Pupic
+forme|Fantôme ¦ Fantomă
+forme|Robot ¦ Robot
+forme|Hexagones ¦ Hexagoane
+forme|Cible ¦ Țintă
+forme|Mille ¦ Centrul țintei
+forme|Engrenage ¦ Roată dințată
+forme|Aimant ¦ Magnet
+forme|Ondes ¦ Unde
+forme|Bluetooth ¦ Bluetooth
+forme|Fanion ¦ Fanion
+forme|Récompense ¦ Recompensă
+forme|Chiffre {x} ¦ Cifra {x}
+forme|Demi-étoile ¦ Jumătate de stea
+forme|Étoile souriante ¦ Stea zâmbitoare
+forme|Étoile encadrée ¦ Stea încadrată
+forme|Décagramme ¦ Decagramă
+forme|Octogramme ¦ Octagramă
+forme|Sceau validé ¦ Sigiliu validat
+forme|Pour et contre ¦ Pro și contra
+forme|Coche épaisse ¦ Bifă groasă
+forme|Double coche ¦ Bifă dublă
+forme|Croix de refus ¦ Cruce de refuz
+forme|Croix épaisse ¦ Cruce groasă
+forme|Interdit octogonal ¦ Interdicție octogonală
+forme|Plus épais ¦ Plus gros
+forme|Moins épais ¦ Minus gros
+forme|Plus ou moins ¦ Plus sau minus
+forme|Égal ¦ Egal
+forme|Question en losange ¦ Întrebare în romb
+forme|Alerte en losange ¦ Alertă în romb
+forme|Interdit ¦ Interzis
+forme|Sens interdit ¦ Accesul interzis
+forme|Demi-bouclier ¦ Jumătate de scut
+forme|Bouclier étoilé ¦ Scut cu stele
+forme|Esperluette ¦ Ampersand
+forme|Astérisque ¦ Asterisc
+forme|Oméga ¦ Omega
+forme|Chiffre romain I ¦ Cifra romană I
+forme|Chiffre romain II ¦ Cifra romană II
+forme|Chiffre romain III ¦ Cifra romană III
+forme|Chiffre romain IV ¦ Cifra romană IV
+forme|Chiffre romain V ¦ Cifra romană V
+forme|Chiffre romain VI ¦ Cifra romană VI
+forme|Chiffre romain VII ¦ Cifra romană VII
+forme|Chiffre romain VIII ¦ Cifra romană VIII
+forme|Chiffre romain IX ¦ Cifra romană IX
+forme|Chiffre romain X ¦ Cifra romană X
+forme|Bâton ¦ Bețișor
+forme|Bâtons ¦ Bețișoare
+forme|cinq ¦ cinci
+forme|Bélier ¦ Berbec
+forme|zodiaque ¦ zodiac
+forme|Taureau ¦ Taur
+forme|Gémeaux ¦ Gemeni
+forme|Cancer ¦ Rac
+forme|Lion ¦ Leu
+forme|Vierge ¦ Fecioară
+forme|Scorpion ¦ Scorpion
+forme|Sagittaire ¦ Săgetător
+forme|Capricorne ¦ Capricorn
+forme|Verseau ¦ Vărsător
+forme|Poissons ¦ Pești
+forme|Visage souriant ¦ Față zâmbitoare
+forme|Visage décontracté ¦ Față relaxată
+forme|Perplexe ¦ Nedumerit
+forme|Visage évanoui ¦ Față leșinată
+forme|Diablotin ¦ Drăcușor
+forme|Mort de rire ¦ Mort de râs
+forme|Extraterrestre ¦ Extraterestru
+forme|Pentagramme ¦ Pentagramă
+forme|Losange plein ¦ Romb plin
+forme|Losange moyen ¦ Romb mediu
+forme|Disque plein ¦ Disc plin
+forme|Cercle ¦ Cerc
+forme|Moitié de disque ¦ Jumătate de disc
+forme|Petit disque ¦ Disc mic
+forme|Disques ¦ Discuri
+forme|Ellipse ¦ Elipsă
+forme|Carré ¦ Pătrat
+forme|Carré arrondi ¦ Pătrat rotunjit
+forme|Petit carré ¦ Pătrat mic
+forme|Triangle pointe en bas ¦ Triunghi cu vârful în jos
+forme|Sphère ¦ Sferă
+forme|Formes ¦ Forme
+forme|Case pleine ¦ Căsuță plină
+forme|Case vide ¦ Căsuță goală
+forme|Case cochée ¦ Căsuță bifată
+forme|Pastille ¦ Bulină
+forme|Pastille cochée ¦ Bulină bifată
+forme|Points de suspension ¦ Puncte de suspensie
+forme|Points verticaux ¦ Puncte verticale
+forme|Grille de points ¦ Grilă de puncte
+forme|Trois points en triangle ¦ Trei puncte în triunghi
+forme|Quadrillage ¦ Caroiaj
+forme|Goutte bicolore ¦ Picătură bicoloră
+forme|Bombe ¦ Bombă
+forme|Épée ¦ Sabie
+forme|Épées croisées ¦ Săbii încrucișate
+forme|Lance ¦ Lance
+forme|Masse d’armes ¦ Buzdugan
+forme|Couteau de combat ¦ Cuțit de luptă
+forme|Étoile de ninja ¦ Stea ninja
+forme|Boomerang ¦ Bumerang
+forme|Pistolet ¦ Pistol
+forme|Munitions ¦ Muniție
+forme|Char d’assaut ¦ Tanc
+forme|Lien ¦ Link
+forme|Maillon ¦ Za
+forme|Empreinte digitale ¦ Amprentă digitală
+forme|Drapeau à hampe ¦ Steag pe catarg
+forme|Marque déposée ¦ Marcă înregistrată
+forme|Marque commerciale ¦ Marcă comercială
+forme|Supérieur à ¦ Mai mare decât
+forme|Inférieur à ¦ Mai mic decât
+forme|Multiplication ¦ Înmulțire
+forme|Division ¦ Împărțire
+forme|Lien rompu ¦ Link rupt
+forme|Sommeil ¦ Somn
+forme|Flèche épaisse droite ¦ Săgeată groasă dreapta
+forme|Flèche épaisse gauche ¦ Săgeată groasă stânga
+forme|Flèche épaisse haut ¦ Săgeată groasă sus
+forme|Flèche épaisse bas ¦ Săgeată groasă jos
+forme|Flèche en coin ¦ Săgeată în colț
+forme|Flèche pleine ¦ Săgeată plină
+forme|Flèche dans un rond ¦ Săgeată în cerc
+forme|Double flèche épaisse ¦ Săgeată dublă groasă
+forme|Toutes directions ¦ Toate direcțiile
+forme|Agrandir ¦ Extinde
+forme|Rassembler ¦ Strânge
+forme|Double chevron ¦ Chevron dublu
+forme|Triple chevron ¦ Chevron triplu
+forme|Retour en U ¦ Întoarcere în U
+forme|Flèche montante ¦ Săgeată ascendentă
+forme|Flèche descendante ¦ Săgeată descendentă
+forme|Retour en haut ¦ Înapoi sus
+forme|Rotation ¦ Rotație
+forme|Rotation inverse ¦ Rotație inversă
+forme|Revenir ¦ Înapoi
+forme|Recharger ¦ Reîncarcă
+forme|Synchroniser ¦ Sincronizează
+forme|Échange ¦ Schimb
+forme|Échange vertical ¦ Schimb vertical
+forme|Séparation ¦ Separare
+forme|Réunion ¦ Reunire
+forme|Embranchement ¦ Ramificație
+forme|Fourche ¦ Furcă
+forme|Bifurcation ¦ Bifurcație
+forme|Décision ¦ Decizie
+forme|Mélange ¦ Amestecare
+forme|Transfert ¦ Transfer
+forme|Suivant ¦ Următor
+forme|Lecture ¦ Redare
+forme|Avance rapide ¦ Derulare rapidă înainte
+forme|Pointe à droite ¦ Vârf spre dreapta
+forme|Navigation ¦ Navigare
+forme|Flèche haut ¦ Săgeată sus
+forme|Flèche bas ¦ Săgeată jos
+forme|Flèche gauche ¦ Săgeată stânga
+forme|Flèche droite ¦ Săgeată dreapta
+forme|Flèche haut gauche ¦ Săgeată sus stânga
+forme|Flèche haut droite ¦ Săgeată sus dreapta
+forme|Flèche bas gauche ¦ Săgeată jos stânga
+forme|Flèche bas droite ¦ Săgeată jos dreapta
+forme|Flèche pleine haut ¦ Săgeată plină sus
+forme|Flèche pleine bas ¦ Săgeată plină jos
+forme|Flèche pleine gauche ¦ Săgeată plină stânga
+forme|Flèche pleine haut gauche ¦ Săgeată plină sus stânga
+forme|Flèche pleine haut droite ¦ Săgeată plină sus dreapta
+forme|Flèche pleine bas gauche ¦ Săgeată plină jos stânga
+forme|Flèche pleine bas droite ¦ Săgeată plină jos dreapta
+forme|Flèche gauche dans un rond ¦ Săgeată stânga în cerc
+forme|Flèche haut dans un rond ¦ Săgeată sus în cerc
+forme|Flèche bas dans un rond ¦ Săgeată jos în cerc
+forme|Double flèche verticale fine ¦ Săgeată dublă verticală subțire
+forme|Double flèche diagonale ¦ Săgeată dublă diagonală
+forme|Double flèche diagonale inverse ¦ Săgeată dublă diagonală inversă
+forme|Flèche coudée haut gauche ¦ Săgeată cotită sus stânga
+forme|Flèche coudée haut droite ¦ Săgeată cotită sus dreapta
+forme|Flèche coudée bas gauche ¦ Săgeată cotită jos stânga
+forme|Flèche coudée bas droite ¦ Săgeată cotită jos dreapta
+forme|Flèche coudée vers le bas ¦ Săgeată cotită în jos
+forme|Demi-tour à gauche ¦ Întoarcere la stânga
+forme|Demi-tour à droite ¦ Întoarcere la dreapta
+forme|Réduire ¦ Micșorează
+forme|Étendre ¦ Întinde
+forme|Rapprocher ¦ Apropie
+forme|Écarter ¦ Depărtează
+forme|Va-et-vient ¦ Du-te-vino
+forme|Flèche d’archer ¦ Săgeată de arcaș
+forme|Chevron haut ¦ Chevron sus
+forme|Chevron bas ¦ Chevron jos
+forme|Chevron gauche ¦ Chevron stânga
+forme|Chevron droite ¦ Chevron dreapta
+forme|Double chevron haut ¦ Chevron dublu sus
+forme|Double chevron bas ¦ Chevron dublu jos
+forme|Double chevron gauche ¦ Chevron dublu stânga
+forme|Pointe en haut ¦ Vârf în sus
+forme|Pointe en bas ¦ Vârf în jos
+forme|Pointe à gauche ¦ Vârf spre stânga
+forme|Échange fin ¦ Schimb subțire
+forme|Échange vertical fin ¦ Schimb vertical subțire
+forme|Hausse ¦ Creștere
+forme|Baisse ¦ Scădere
+forme|Stable ¦ Stabil
+forme|Annuler ¦ Anulează
+forme|Rétablir ¦ Refă
+forme|Répondre ¦ Răspunde
+forme|Partager ¦ Distribuie
+forme|Actualiser ¦ Actualizează
+forme|Cycle ¦ Ciclu
+forme|Répéter ¦ Repetă
+forme|Rotation complète ¦ Rotație completă
+forme|Orbite ¦ Orbită
+forme|Rotation à gauche ¦ Rotire la stânga
+forme|Rotation à droite ¦ Rotire la dreapta
+forme|Mélanger ¦ Amestecă
+forme|Flèche sortante ¦ Săgeată de ieșire
+forme|Flèche entrante ¦ Săgeată de intrare
+forme|Sous-niveau à droite ¦ Subnivel la dreapta
+forme|Sous-niveau à gauche ¦ Subnivel la stânga
+forme|Fusion ¦ Fuziune
+forme|Étape ¦ Etapă
+forme|Fusionner ¦ Unește
+forme|Segment ¦ Segment
+forme|Détour ¦ Ocol
+forme|Connexion ¦ Conectare
+forme|Entrée ¦ Intrare
+forme|Sortie ¦ Ieșire
+forme|Sortie de secours ¦ Ieșire de urgență
+forme|Précédent ¦ Anterior
+forme|Lecture ronde ¦ Redare rotundă
+forme|Position actuelle ¦ Poziția actuală
+forme|Main pointeur ¦ Mână care arată
+forme|Plein écran ¦ Ecran complet
+forme|Flèche haut ronde ¦ Săgeată sus rotundă
+forme|Flèche bas ronde ¦ Săgeată jos rotundă
+forme|Flèche gauche ronde ¦ Săgeată stânga rotundă
+forme|Flèche droite ronde ¦ Săgeată dreapta rotundă
+forme|Chevron gauche rond ¦ Chevron stânga rotund
+forme|Chevron droite rond ¦ Chevron dreapta rotund
+forme|Rejouer ¦ Redă din nou
+forme|Renouvellement ¦ Reînnoire
+forme|Télécharger ¦ Descarcă
+forme|Envoyer ¦ Trimite
+forme|Importer ¦ Importă
+forme|Exporter ¦ Exportă
+forme|Arrêt ¦ Oprire
+forme|piste ¦ pistă
+forme|Retour rapide ¦ Derulare rapidă înapoi
+forme|Enregistrement ¦ Înregistrare
+forme|Gland ¦ Ghindă
+forme|trait fin ¦ linie subțire
+forme|plein ¦ plin
+forme|Carnet d’adresses ¦ Agendă de adrese
+forme|Répertoire à onglets ¦ Agendă cu file
+forme|Tour de contrôle ¦ Turn de control
+forme|Avion en vol ¦ Avion în zbor
+forme|Avion qui atterrit ¦ Avion care aterizează
+forme|Avion qui décolle ¦ Avion care decolează
+forme|Avion au sol ¦ Avion la sol
+forme|Avion penché ¦ Avion înclinat
+forme|Ancre simple ¦ Ancoră simplă
+forme|Angle ¦ Unghi
+forme|boîte ¦ cutie
+forme|Flèche en arc vers la gauche ¦ Săgeată în arc spre stânga
+forme|Flèche en arc vers la droite ¦ Săgeată în arc spre dreapta
+forme|Double flèche courbée ¦ Săgeată dublă curbată
+forme|haut ¦ sus
+forme|Flèche courbée ¦ Săgeată curbată
+forme|bas ¦ jos
+forme|Flèche ronde vers le bas ¦ Săgeată rotundă în jos
+forme|Flèche ronde vers le bas à gauche ¦ Săgeată rotundă în jos la stânga
+forme|Flèche ronde vers le bas à droite ¦ Săgeată rotundă în jos la dreapta
+forme|Flèche ronde vers la gauche ¦ Săgeată rotundă spre stânga
+forme|Flèche ronde vers la droite ¦ Săgeată rotundă spre dreapta
+forme|Flèche ronde vers le haut ¦ Săgeată rotundă în sus
+forme|Flèche ronde vers le haut à gauche ¦ Săgeată rotundă în sus la stânga
+forme|Flèche ronde vers le haut à droite ¦ Săgeată rotundă în sus la dreapta
+forme|Flèche tournante ¦ Săgeată rotitoare
+forme|sens des aiguilles ¦ în sensul acelor de ceasornic
+forme|sens inverse ¦ în sens invers
+forme|Flèche vers le bas ¦ Săgeată în jos
+forme|Flèche vers le bas à gauche ¦ Săgeată în jos la stânga
+forme|Flèche vers le bas à droite ¦ Săgeată în jos la dreapta
+forme|Flèche en équerre ¦ Săgeată în unghi drept
+forme|Flèche en équerre vers la gauche ¦ Săgeată în unghi drept spre stânga
+forme|Flèche en équerre vers la droite ¦ Săgeată în unghi drept spre dreapta
+forme|Grosse flèche vers le bas ¦ Săgeată mare în jos
+forme|Grosse flèche vers la gauche ¦ Săgeată mare spre stânga
+forme|Grosse flèche à un trait vers le bas ¦ Săgeată mare cu o linie, în jos
+forme|Grosse flèche à un trait vers la gauche ¦ Săgeată mare cu o linie, spre stânga
+forme|Grosse flèche à un trait vers la droite ¦ Săgeată mare cu o linie, spre dreapta
+forme|Grosse flèche à un trait vers le haut ¦ Săgeată mare cu o linie, în sus
+forme|Grosse flèche à traits vers le bas ¦ Săgeată mare cu linii, în jos
+forme|Grosse flèche à traits vers la gauche ¦ Săgeată mare cu linii, spre stânga
+forme|Grosse flèche à traits vers la droite ¦ Săgeată mare cu linii, spre dreapta
+forme|Grosse flèche à traits vers le haut ¦ Săgeată mare cu linii, în sus
+forme|Grosse flèche vers la droite ¦ Săgeată mare spre dreapta
+forme|Grosse flèche vers le haut ¦ Săgeată mare în sus
+forme|Flèche vers la gauche ¦ Săgeată spre stânga
+forme|Flèche jusqu’au trait vers le bas ¦ Săgeată până la linie, în jos
+forme|Flèche jusqu’au trait vers le bas à gauche ¦ Săgeată până la linie, în jos la stânga
+forme|Flèche jusqu’au trait vers le bas à droite ¦ Săgeată până la linie, în jos la dreapta
+forme|Flèche jusqu’au trait vers la gauche ¦ Săgeată până la linie, spre stânga
+forme|Flèche jusqu’au trait vers la droite ¦ Săgeată până la linie, spre dreapta
+forme|Flèche jusqu’au trait vers le haut ¦ Săgeată până la linie, în sus
+forme|Flèche jusqu’au trait vers le haut à gauche ¦ Săgeată până la linie, în sus la stânga
+forme|Flèche jusqu’au trait vers le haut à droite ¦ Săgeată până la linie, în sus la dreapta
+forme|Flèche vers la droite ¦ Săgeată spre dreapta
+forme|Flèche carrée vers le bas ¦ Săgeată pătrată în jos
+forme|Flèche carrée vers le bas à gauche ¦ Săgeată pătrată în jos la stânga
+forme|Flèche carrée vers le bas à droite ¦ Săgeată pătrată în jos la dreapta
+forme|Flèche carrée vers la gauche ¦ Săgeată pătrată spre stânga
+forme|Flèche carrée vers la droite ¦ Săgeată pătrată spre dreapta
+forme|Flèche carrée vers le haut ¦ Săgeată pătrată în sus
+forme|Flèche carrée vers le haut à gauche ¦ Săgeată pătrată în sus la stânga
+forme|Flèche carrée vers le haut à droite ¦ Săgeată pătrată în sus la dreapta
+forme|Flèche en U ¦ Săgeată în U
+forme|Flèche vers le haut ¦ Săgeată în sus
+forme|Flèche vers le haut à gauche ¦ Săgeată în sus la stânga
+forme|Flèche vers le haut à droite ¦ Săgeată în sus la dreapta
+forme|Flèches tournantes ¦ Săgeți rotitoare
+forme|Flèches haut et bas ¦ Săgeți sus și jos
+forme|Flèches gauche et droite ¦ Săgeți stânga și dreapta
+forme|écartées ¦ depărtate
+forme|Flèches vers le centre ¦ Săgeți spre centru
+forme|4 côtés ¦ 4 laturi
+forme|Flèches vers un trait ¦ Săgeți spre o linie
+forme|debout ¦ în picioare
+forme|couché ¦ culcat
+forme|Flèches qui se rejoignent ¦ Săgeți care se unesc
+forme|Flèches vers l’extérieur ¦ Săgeți spre exterior
+forme|Flèches qui s’écartent d’un trait ¦ Săgeți care se depărtează de o linie
+forme|Flèches qui se séparent ¦ Săgeți care se despart
+forme|Article ¦ Articol
+forme|Article illustré ¦ Articol ilustrat
+forme|Bâton d’Asclépios ¦ Toiagul lui Asclepios
+forme|Avocat ¦ Avocado
+forme|fruit ¦ fruct
+forme|Sac simple ¦ Geantă simplă
+forme|Ballon de baudruche ¦ Balon
+forme|Pansements ¦ Plasturi
+forme|Code-barres ¦ Cod de bare
+forme|Barrière de chantier ¦ Barieră de șantier
+forme|Casquette ¦ Șapcă
+forme|Casque de base-ball ¦ Cască de baseball
+forme|Pile chargée ¦ Baterie încărcată
+forme|Pile vide ¦ Baterie descărcată
+forme|Ballon de plage ¦ Minge de plajă
+forme|Bonnet ¦ Căciulă
+forme|Bouteille de bière ¦ Sticlă de bere
+forme|Chope de bière ¦ Halbă de bere
+forme|Clochette ¦ Clopoțel
+forme|Clochette qui sonne ¦ Clopoțel care sună
+forme|Ceinture ¦ Curea
+forme|Plan d’architecte ¦ Plan de arhitect
+forme|Livre avec marque-page ¦ Carte cu semn de carte
+forme|Livre ouvert écrit ¦ Carte deschisă cu scris
+forme|Livre de la personne ¦ Cartea persoanei
+forme|Marque-page simple ¦ Semn de carte simplu
+forme|Marque-pages simples ¦ Semne de carte simple
+forme|Botte ¦ Cizmă
+forme|Boules ¦ Bile
+forme|pétanque ¦ petanque
+forme|Bol de nourriture ¦ Bol de mâncare
+forme|Bol fumant ¦ Bol aburind
+forme|Boule de bowling ¦ Bilă de bowling
+forme|Verre de cognac ¦ Pahar de coniac
+forme|Pain ¦ Pâine
+forme|Mallette en métal ¦ Servietă metalică
+forme|Scarabée ¦ Gândac
+forme|Immeuble d’appartements ¦ Bloc de apartamente
+forme|Bureaux ¦ Birouri
+forme|Immeubles ¦ Clădiri
+forme|Téléphérique ¦ Telecabină
+forme|Calendrier coché ¦ Calendar bifat
+forme|Calendrier avec un jour ¦ Calendar cu o zi
+forme|Calendrier avec des jours ¦ Calendar cu zile
+forme|Calendrier avec un cœur ¦ Calendar cu o inimă
+forme|Calendrier avec une étoile ¦ Calendar cu o stea
+forme|Calendrier barré ¦ Calendar tăiat
+forme|Sonnette de comptoir ¦ Sonerie de recepție
+forme|Appareil photo plus ¦ Aparat foto plus
+forme|Appareil photo tourner ¦ Aparat foto rotire
+forme|Appareil photo barré ¦ Aparat foto tăiat
+forme|Batterie de voiture ¦ Baterie auto
+forme|Voiture simple ¦ Mașină simplă
+forme|Porte-cartes ¦ Suport de carduri
+forme|Cartes ¦ Cărți
+forme|Trois cartes ¦ Trei cărți
+forme|Double chevron rond vers le bas ¦ Chevron dublu rotund în jos
+forme|Double chevron rond vers la gauche ¦ Chevron dublu rotund spre stânga
+forme|Double chevron rond vers la droite ¦ Chevron dublu rotund spre dreapta
+forme|Double chevron rond vers le haut ¦ Chevron dublu rotund în sus
+forme|Chevron rond vers le bas ¦ Chevron rotund în jos
+forme|Chevron rond vers la gauche ¦ Chevron rotund spre stânga
+forme|Chevron rond vers la droite ¦ Chevron rotund spre dreapta
+forme|Chevron rond vers le haut ¦ Chevron rotund în sus
+forme|Chevrons haut et bas ¦ Chevroane sus și jos
+forme|Double chevron vers le bas ¦ Chevron dublu în jos
+forme|Double chevron vers la gauche ¦ Chevron dublu spre stânga
+forme|Double chevron vers la droite ¦ Chevron dublu spre dreapta
+forme|Double chevron vers le haut ¦ Chevron dublu în sus
+forme|Chevron vers le bas ¦ Chevron în jos
+forme|Chevron vers la gauche ¦ Chevron spre stânga
+forme|Chevron jusqu’au trait vers le bas ¦ Chevron până la linie, în jos
+forme|Chevron jusqu’au trait vers la gauche ¦ Chevron până la linie, spre stânga
+forme|Chevron jusqu’au trait vers la droite ¦ Chevron până la linie, spre dreapta
+forme|Chevron jusqu’au trait vers le haut ¦ Chevron până la linie, în sus
+forme|Chevron vers la droite ¦ Chevron spre dreapta
+forme|Chevron vers le haut ¦ Chevron în sus
+forme|Caisse enregistreuse ¦ Casă de marcat
+forme|Cassette audio ¦ Casetă audio
+forme|Tour de château ¦ Turn de castel
+forme|Diplôme ¦ Diplomă
+forme|Tableau noir ¦ Tablă
+forme|Tableau noir simple ¦ Tablă simplă
+forme|Instituteur au tableau ¦ Învățător la tablă
+forme|Champagne ¦ Șampanie
+forme|Graphique en barres ¦ Grafic cu bare
+forme|Courbe ¦ Curbă
+forme|Bulle centrée ¦ Balon centrat
+forme|points ¦ puncte
+forme|texte ¦ text
+forme|Bulle goutte ¦ Balon picătură
+forme|Deux bulles ¦ Două baloane
+forme|Coche ronde ¦ Bifă rotundă
+forme|Grosse coche ¦ Bifă mare
+forme|Case cochée débordante ¦ Căsuță bifată care depășește
+forme|Trinquer ¦ Ciocnire de pahare
+forme|Toque de cuisinier ¦ Bonetă de bucătar
+forme|Cercle en pointillés ¦ Cerc punctat
+forme|Demi-cercle plein ¦ Semicerc plin
+forme|Demi-cercle penché ¦ Semicerc înclinat
+forme|Cercle ouvert ¦ Cerc deschis
+forme|Quatre cercles ¦ Patru cercuri
+forme|Trois cercles ¦ Trei cercuri
+forme|Trois cercles et un plus ¦ Trei cercuri și un plus
+forme|Porte-bloc ¦ Clipboard
+forme|Porte-bloc écrit ¦ Clipboard cu scris
+forme|après-midi ¦ după-amiază
+forme|Horloge en avant ¦ Ceas înainte
+forme|Compte à rebours ¦ Numărătoare inversă
+forme|Horloge en arrière ¦ Ceas înapoi
+forme|Heure de la personne ¦ Ora persoanei
+forme|Nuage flèche en bas ¦ Nor cu săgeată în jos
+forme|Nuage flèche en haut ¦ Nor cu săgeată în sus
+forme|Nuage coché ¦ Nor bifat
+forme|Éclaircie ¦ Înseninare
+forme|Nuage attention ¦ Nor cu atenționare
+forme|Nuage barré ¦ Nor tăiat
+forme|Trèfle à quatre feuilles ¦ Trifoi cu patru foi
+forme|Grain de café ¦ Boabă de cafea
+forme|Pièce de monnaie ¦ Monedă
+forme|tranche ¦ muchie
+forme|Pièces de monnaie ¦ Monede
+forme|Confettis ¦ Confetti
+forme|Terrain de basket ¦ Teren de baschet
+forme|Chapeau de cow-boy ¦ Pălărie de cowboy
+forme|oiseau ¦ pasăre
+forme|Grue de chantier ¦ Macara de șantier
+forme|Viseur simple ¦ Vizor simplu
+forme|Couronne à la croix ¦ Coroană cu cruce
+forme|Couronne simple ¦ Coroană simplă
+forme|meuble ¦ mobilier
+forme|Ordinateur ¦ Calculator
+forme|Tablette ¦ Tabletă
+forme|Quatre losanges ¦ Patru romburi
+forme|Robe ¦ Rochie
+forme|Goutte à moitié ¦ Jumătate de picătură
+forme|Goutte simple ¦ Picătură simplă
+forme|Œuf fêlé ¦ Ou crăpat
+forme|Enveloppe ouverte ¦ Plic deschis
+forme|Enveloppe simple ¦ Plic simplu
+forme|Enveloppe simple ouverte ¦ Plic simplu deschis
+forme|Escalier roulant ¦ Scară rulantă
+forme|descente ¦ coborâre
+forme|montée ¦ urcare
+forme|Examen ¦ Examen
+forme|Deux yeux ¦ Doi ochi
+forme|Masque de soin ¦ Mască de îngrijire
+forme|Ferme ¦ Fermă
+forme|Fichier ¦ Fișier
+forme|Fichier d’archives ¦ Fișier de arhivă
+forme|Fichier son ¦ Fișier audio
+forme|Fichier image ¦ Fișier imagine
+forme|Chercher dans un document ¦ Caută într-un document
+forme|Fichier PDF ¦ Fișier PDF
+forme|Document écrit ¦ Document scris
+forme|Fichier vidéo ¦ Fișier video
+forme|Fichier compressé ¦ Fișier comprimat
+forme|Fichiers ¦ Fișiere
+forme|Scénario ¦ Scenariu
+forme|Empreinte digitale simple ¦ Amprentă digitală simplă
+forme|Flamme ¦ Flacără
+forme|Croix de secours ¦ Cruce de prim ajutor
+forme|Trousse de secours ¦ Trusă de prim ajutor
+forme|Poisson simple ¦ Pește simplu
+forme|Fanion plié ¦ Fanion pliat
+forme|drapeau ¦ steag
+forme|Flamme vive ¦ Flacără vie
+forme|Lampe de poche ¦ Lanternă
+forme|dos ¦ spate
+forme|Flèche de parcours ¦ Săgeată de traseu
+forme|Lotus ¦ Lotus
+forme|Dossier simple ¦ Dosar simplu
+forme|Dossier de la personne ¦ Dosarul persoanei
+forme|Dossier à l’étoile ¦ Dosar cu stea
+forme|Dossier personnel ¦ Dosar personal
+forme|Fourchette et couteau ¦ Furculiță și cuțit
+forme|Coins de cadre ¦ Colțuri de ramă
+forme|Bidon d’essence ¦ Canistră de benzină
+forme|Pompe à essence ¦ Pompă de benzină
+forme|Jauge ¦ Indicator
+forme|Engrenage fin ¦ Roată dințată subțire
+forme|Engrenage à six dents ¦ Roată dințată cu șase dinți
+forme|Symbole femme ¦ Simbol feminin
+forme|Symbole intersexe ¦ Simbol intersex
+forme|Symbole homme ¦ Simbol masculin
+forme|Symbole neutre ¦ Simbol neutru
+forme|Symbole transgenre ¦ Simbol transgen
+forme|Europe ¦ Europa
+forme|Afrique ¦ Africa
+forme|Amériques ¦ Americile
+forme|Globe simple ¦ Glob simplu
+forme|Globe terrestre sur pied ¦ Glob pământesc pe suport
+forme|Lunettes de natation ¦ Ochelari de înot
+forme|Toque de diplômé ¦ Tocă de absolvent
+forme|Épis de blé ¦ Spice de grâu
+forme|Réseau de points ¦ Rețea de puncte
+forme|Grille de quatre ¦ Grilă de patru
+forme|Grille de neuf ¦ Grilă de nouă
+forme|Main et pièces ¦ Mână și monede
+forme|Main et œil ¦ Mână și ochi
+forme|Poing ¦ Pumn
+forme|Main qui attrape ¦ Mână care apucă
+forme|Paume ¦ Palmă
+forme|Signe de paix ¦ Semnul păcii
+forme|Main qui montre ¦ Mână care arată
+forme|Savon liquide ¦ Săpun lichid
+forme|Sac à main simple ¦ Poșetă simplă
+forme|Phares ¦ Faruri
+forme|Casque micro ¦ Căști cu microfon
+forme|Cœur droit ¦ Inimă dreaptă
+forme|Cœur droit brisé ¦ Inimă dreaptă frântă
+forme|Surligneur ¦ Marker
+forme|Hockey ¦ Hochei
+forme|Sweat à capuche ¦ Hanorac cu glugă
+forme|début ¦ început
+forme|fin ¦ sfârșit
+forme|milieu ¦ mijloc
+forme|Sablier simple ¦ Clepsidră simplă
+forme|Maison au trait ¦ Casă din linii
+forme|Maison simple ¦ Casă simplă
+forme|Badge ¦ Ecuson
+forme|Image ¦ Imagine
+forme|Images ¦ Imagini
+forme|Facture ¦ Factură
+forme|Bocal ¦ Borcan
+forme|Bocal étiqueté ¦ Borcan etichetat
+forme|Jeep ¦ Jeep
+forme|Clavier ¦ Tastatură
+forme|Trou de serrure ¦ Gaura cheii
+forme|Échelle simple ¦ Scară simplă
+forme|Suspension ¦ Lustră suspendată
+forme|Ordinateur portable ¦ Laptop
+forme|Bouée ¦ Colac de salvare
+forme|Ampoule à filament ¦ Bec cu filament
+forme|Liste ¦ Listă
+forme|Liste de favoris ¦ Listă de favorite
+forme|Cadenas fermé ¦ Lacăt închis
+forme|Cadenas à clé ¦ Lacăt cu cheie
+forme|Casiers ¦ Dulăpioare
+forme|Aimant droit ¦ Magnet drept
+forme|Repère sur la carte ¦ Marcaj pe hartă
+forme|Repère et zone ¦ Marcaj și zonă
+forme|Repère au sol ¦ Marcaj pe sol
+forme|Carte dépliée ¦ Hartă desfăcută
+forme|Masque joyeux ¦ Mască veselă
+forme|Masque triste ¦ Mască tristă
+forme|Médaille militaire ¦ Medalie militară
+forme|Porte-voix ¦ Megafon
+forme|Porte-voix simple ¦ Megafon simplu
+forme|Météore ¦ Meteor
+forme|Micro ¦ Microfon
+forme|Micro de scène ¦ Microfon de scenă
+forme|Moins carré ¦ Minus pătrat
+forme|Billet ondulé ¦ Bancnotă ondulată
+forme|Écran ¦ Ecran
+forme|Lune et étoiles ¦ Lună și stele
+forme|Mobylette ¦ Motoretă
+forme|de face ¦ din față
+forme|Souris ¦ Mouse
+forme|ordinateur ¦ calculator
+forme|Note simple ¦ Notă simplă
+forme|Notes de musique ¦ Note muzicale
+forme|Notes moins ¦ Note minus
+forme|Notes plus ¦ Note plus
+forme|Notes simples ¦ Note simple
+forme|Flèche de navigation ¦ Săgeată de navigare
+forme|Aiguille à coudre ¦ Ac de cusut
+forme|Coupure de presse ¦ Decupaj de presă
+forme|Note ¦ Notă
+forme|Note vierge ¦ Notă goală
+forme|Note et crayon ¦ Notă și creion
+forme|Bloc-notes ¦ Blocnotes
+forme|Fauteuil de bureau ¦ Scaun de birou
+forme|Onigiri ¦ Onigiri
+forme|Orange ¦ Portocală
+forme|Tranche d’orange ¦ Felie de portocală
+forme|Four ¦ Cuptor
+forme|Brosse de peintre ¦ Pensulă de pictor
+forme|Palette ¦ Paletă
+forme|Pantalon ¦ Pantaloni
+forme|Avion en papier ¦ Avion de hârtie
+forme|Avion en papier penché ¦ Avion de hârtie înclinat
+forme|Trombone couché ¦ Agrafă culcată
+forme|Pied-de-mouche ¦ Semn de paragraf
+forme|Parc ¦ Parc
+forme|Chemin ¦ Cărare
+forme|Empreinte de patte ¦ Urmă de labă
+forme|Symbole de paix ¦ Simbolul păcii
+forme|Plume de stylo ¦ Peniță de stilou
+forme|Crayon simple ¦ Creion simplu
+forme|Poivron ¦ Ardei gras
+forme|Personne bras ouverts ¦ Persoană cu brațele deschise
+forme|Personne simple ¦ Persoană simplă
+forme|Personne dans un rond ¦ Persoană în cerc
+forme|Surfeur des neiges ¦ Snowboarder
+forme|Tai-chi ¦ Tai-chi
+forme|Lanceur ¦ Aruncător
+forme|Téléphone qui sonne ¦ Telefon care sună
+forme|Clavier de piano ¦ Claviatură de pian
+forme|Table de pique-nique ¦ Masă de picnic
+forme|Verre à bière ¦ Pahar de bere
+forme|Pipe ¦ Pipă
+forme|Planète ¦ Planetă
+forme|Lecture-pause ¦ Redare-pauză
+forme|Liste de lecture ¦ Listă de redare
+forme|Prise électrique ¦ Priză electrică
+forme|Fiches électriques ¦ Ștechere
+forme|Plus carré ¦ Plus pătrat
+forme|Jeton de jeu ¦ Jeton de joc
+forme|Voiture de police ¦ Mașină de poliție
+forme|Polygone ¦ Poligon
+forme|Plante en pot ¦ Plantă în ghiveci
+forme|Marche-arrêt ¦ Pornit-oprit
+forme|Tableau de présentation ¦ Tablă de prezentare
+forme|Punaise simple ¦ Pioneză simplă
+forme|Pièce de puzzle ¦ Piesă de puzzle
+forme|Guillemets ¦ Ghilimele
+forme|Raquette ¦ Rachetă de tenis
+forme|Poste de radio ¦ Aparat de radio
+forme|Arc-en-ciel et nuage ¦ Curcubeu și nor
+forme|Enregistrer ¦ Salvează
+forme|Rectangle en pointillés ¦ Dreptunghi punctat
+forme|Fusée au décollage ¦ Rachetă la decolare
+forme|Sceau dentelé ¦ Sigiliu zimțat
+forme|Siège ¦ Scaun
+forme|grosse flèche ¦ săgeată mare
+forme|Écu simple ¦ Scut simplu
+forme|Écu coché ¦ Scut bifat
+forme|Écu écartelé ¦ Scut sfertuit
+forme|Écu au chevron ¦ Scut cu căprior
+forme|Écu à la croix ¦ Scut cu cruce
+forme|Écu à la barre ¦ Scut cu bară
+forme|Écu à l’étoile ¦ Scut cu stea
+forme|Écu au point d’exclamation ¦ Scut cu semn de exclamare
+forme|Conteneur ¦ Container
+forme|Chemise pliée ¦ Cămașă pliată
+forme|Sac de courses ouvert ¦ Pungă de cumpărături deschisă
+forme|Chariot simple ¦ Cărucior simplu
+forme|Crevette ¦ Crevetă
+forme|Sigma ¦ Sigma
+forme|Panneau indicateur ¦ Panou indicator
+forme|Gyrophare ¦ Girofar
+forme|Diaporama ¦ Prezentare de diapozitive
+forme|Visage en colère ¦ Față furioasă
+forme|Visage sans expression ¦ Față fără expresie
+forme|Visage blasé ¦ Față plictisită
+forme|Visage qui fond ¦ Față care se topește
+forme|Visage nerveux ¦ Față nervoasă
+forme|Visage triste ¦ Față tristă
+forme|Visage KO ¦ Față KO
+forme|chaussure ¦ pantof
+forme|Basket en marche ¦ Adidas în mers
+forme|Flocon de neige ¦ Fulg de nea
+forme|Ballon de foot ¦ Minge de fotbal
+forme|Chaussette ¦ Șosetă
+forme|Étincelle ¦ Scânteie
+forme|Haut-parleur ¦ Difuzor
+forme|Spirale ¦ Spirală
+forme|Carré à moitié ¦ Jumătate de pătrat
+forme|Quatre carrés ¦ Patru pătrate
+forme|Étoile à quatre branches ¦ Stea cu patru colțuri
+forme|Marches ¦ Trepte
+forme|carré ¦ pătrat
+forme|Stratégie ¦ Strategie
+forme|Élève ¦ Elev
+forme|Valise à roulettes ¦ Valiză cu roți
+forme|Valise simple ¦ Valiză simplă
+forme|Soleil voilé ¦ Soare voalat
+forme|Lever de soleil ¦ Răsărit de soare
+forme|Seringue ¦ Seringă
+forme|Tee-shirt ¦ Tricou
+forme|grille ¦ grilă
+forme|Étiquette en chevron ¦ Etichetă în chevron
+forme|Étiquette simple ¦ Etichetă simplă
+forme|Sachet de thé ¦ Plic de ceai
+forme|Thermomètre froid ¦ Termometru rece
+forme|Thermomètre chaud ¦ Termometru cald
+forme|Thermomètre simple ¦ Termometru simplu
+forme|Pouce en bas ¦ Degetul mare în jos
+forme|Pouce en haut ¦ Degetul mare în sus
+forme|Billet d’entrée ¦ Bilet de intrare
+forme|Chronomètre ¦ Cronometru
+forme|Pot à pourboires ¦ Borcan pentru bacșiș
+forme|Tipi ¦ Tipi
+forme|Cabas ¦ Sacoșă
+forme|Cabas simple ¦ Sacoșă simplă
+forme|Serviette ¦ Prosop
+forme|Cône de chantier ¦ Con de șantier
+forme|Panneau routier ¦ Indicator rutier
+forme|Train régional ¦ Tren regional
+forme|Train simple ¦ Tren simplu
+forme|Traduire ¦ Tradu
+forme|Poubelle simple ¦ Coș de gunoi simplu
+forme|Plateau ¦ Tavă
+forme|Courbe qui baisse ¦ Curbă descendentă
+forme|Courbe qui monte ¦ Curbă ascendentă
+forme|Triangle en pointillés ¦ Triunghi punctat
+forme|chariot ¦ cărucior
+forme|Chariot à bagages ¦ Cărucior de bagaje
+forme|Parapluie simple ¦ Umbrelă simplă
+forme|buste ¦ bust
+forme|Personne vérifiée ¦ Persoană verificată
+forme|Personne moins ¦ Persoană minus
+forme|Personne plus ¦ Persoană plus
+forme|Liste de personnes ¦ Listă de persoane
+forme|Personne dans un carré ¦ Persoană în pătrat
+forme|Quatre personnes ¦ Patru persoane
+forme|Trois personnes ¦ Trei persoane
+forme|Vidéo ¦ Video
+forme|Caméra ¦ Cameră video
+forme|Disque vinyle ¦ Disc de vinil
+forme|Mur de briques ¦ Zid de cărămidă
+forme|triangle ¦ triunghi
+forme|losange ¦ romb
+forme|octogone ¦ octogon
+forme|Onde ¦ Undă
+forme|Son ¦ Sunet
+forme|onde ¦ undă
+forme|Fauteuil roulant en mouvement ¦ Scaun cu rotile în mișcare
+forme|Wi-Fi ¦ Wi-Fi
+forme|Clé plate ¦ Cheie fixă
+forme|Pelote de laine ¦ Ghem de lână
+forme|seule ¦ singură
+forme|seul ¦ singur
+forme|Lettre {x} minuscule ¦ Litera mică {x}
+forme|Point ¦ Punct
+forme|Virgule ¦ Virgulă
+forme|Point-virgule ¦ Punct și virgulă
+forme|Deux-points ¦ Două puncte
+forme|Point d’exclamation renversé ¦ Semn de exclamare inversat
+forme|Point d’interrogation renversé ¦ Semn de întrebare inversat
+forme|Apostrophe ¦ Apostrof
+forme|Guillemet droit ¦ Ghilimea dreaptă
+forme|Guillemet ouvrant ¦ Ghilimea de deschidere
+forme|Parenthèse ouvrante ¦ Paranteză de deschidere
+forme|Parenthèse fermante ¦ Paranteză de închidere
+forme|Crochet ouvrant ¦ Paranteză dreaptă de deschidere
+forme|Crochet fermant ¦ Paranteză dreaptă de închidere
+forme|Trait d’union ¦ Cratimă
+forme|Tiret ¦ Linie de pauză
+forme|et ¦ și
+forme|numéro ¦ număr
+forme|Pour cent ¦ Procent
+forme|naissance ¦ naștere
+forme|Barre oblique ¦ Bară oblică
+forme|Paragraphe ¦ Semn de paragraf
+forme|Degré ¦ Grad
+forme|naissance ° ¦ naștere °
+forme|décès † ¦ deces †
+forme|Double croix ¦ Cruce dublă
+forme|Numéro ¦ Semnul numero
+forme|Nombre {x} ¦ Numărul {x}
+forme|Signe de naissance ¦ Semn de naștere
+forme|Étoile de naissance ¦ Stea de naștere
+forme|Croix de décès ¦ Cruce de deces
+forme|Signe du mariage ¦ Semnul căsătoriei
+forme|Signe du divorce ¦ Semnul divorțului
+forme|Union libre ¦ Uniune consensuală
+forme|mariage ¦ căsătorie
+forme|inhumation ¦ înmormântare
+forme|Urne ¦ Urnă
+forme|crémation ¦ incinerare
+forme|mort au combat ¦ căzut în luptă
+forme|Fleuron ¦ Floron
+forme|vers la gauche ¦ spre stânga
+forme|Feuille de vigne ¦ Frunză de viță-de-vie
+forme|ornement ¦ ornament
+forme|Croix ombrée ¦ Cruce umbrită
+forme|Croix à contour ¦ Cruce conturată
+forme|Chrisme ¦ Hristogramă
+forme|Croix de Jérusalem ¦ Crucea Ierusalimului
+forme|Ankh ¦ Ankh
+forme|croix ansée ¦ cruce cu toartă
+forme|Symbole de Farsi ¦ Simbol Farsi
+forme|Croix pattée à contour ¦ Cruce latită conturată
+forme|Croix grecque épaisse ¦ Cruce grecească groasă
+forme|Croix à centre ouvert ¦ Cruce cu centrul deschis
+forme|Croix à centre rond ¦ Cruce cu centrul rotund
+forme|Reine ¦ Regină
+forme|Marteau et pic ¦ Ciocan și târnăcop
+forme|justice ¦ justiție
+forme|Bâton d’Esculape ¦ Toiagul lui Esculap
+forme|Alambic ¦ Alambic
+forme|Roue dentée ¦ Roată dințată
+forme|Caducée d’Hermès ¦ Caduceul lui Hermes
+forme|Caducée ¦ Caduceu
+forme|Main qui écrit ¦ Mână care scrie
+forme|note ¦ notă
+forme|Deux croches ¦ Două optimi
+forme|Doubles croches ¦ Șaisprezecimi
+forme|Dé un ¦ Zar unu
+forme|Dé deux ¦ Zar doi
