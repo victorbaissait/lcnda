@@ -2800,3 +2800,253 @@ forme|Croix épaisse ¦ Silný křížek ¦ Tjockt kryss ¦ Tykt kryds
 forme|Interdit octogonal ¦ Osmiúhelníkový zákaz ¦ Åttakantigt förbud ¦ Ottekantet forbud
 forme|Plus épais ¦ Silné plus ¦ Tjockt plus ¦ Tykt plus
 forme|Moins épais ¦ Silné mínus ¦ Tjockt minus ¦ Tykt minus
+forme|Plus ou moins ¦ Plus mínus ¦ Plus minus ¦ Plus minus
+forme|Égal ¦ Rovná se ¦ Lika med ¦ Lig med
+forme|Question en losange ¦ Otazník v kosočtverci ¦ Fråga i romb ¦ Spørgsmål i rombe
+forme|Alerte en losange ¦ Výstraha v kosočtverci ¦ Varning i romb ¦ Advarsel i rombe
+forme|Interdit ¦ Zákaz ¦ Förbjudet ¦ Forbudt
+forme|Sens interdit ¦ Zákaz vjezdu ¦ Infart förbjuden ¦ Indkørsel forbudt
+forme|Demi-bouclier ¦ Polovina štítu ¦ Halv sköld ¦ Halvt skjold
+forme|Bouclier étoilé ¦ Štít s hvězdou ¦ Sköld med stjärna ¦ Skjold med stjerne
+forme|Esperluette ¦ Ampersand ¦ Et-tecken ¦ Og-tegn
+forme|Astérisque ¦ Hvězdička ¦ Asterisk ¦ Stjerne
+forme|Oméga ¦ Omega ¦ Omega ¦ Omega
+forme|Chiffre romain I ¦ Římská číslice I ¦ Romersk siffra I ¦ Romertal I
+forme|Chiffre romain II ¦ Římská číslice II ¦ Romersk siffra II ¦ Romertal II
+forme|Chiffre romain III ¦ Římská číslice III ¦ Romersk siffra III ¦ Romertal III
+forme|Chiffre romain IV ¦ Římská číslice IV ¦ Romersk siffra IV ¦ Romertal IV
+forme|Chiffre romain V ¦ Římská číslice V ¦ Romersk siffra V ¦ Romertal V
+forme|Chiffre romain VI ¦ Římská číslice VI ¦ Romersk siffra VI ¦ Romertal VI
+forme|Chiffre romain VII ¦ Římská číslice VII ¦ Romersk siffra VII ¦ Romertal VII
+forme|Chiffre romain VIII ¦ Římská číslice VIII ¦ Romersk siffra VIII ¦ Romertal VIII
+forme|Chiffre romain IX ¦ Římská číslice IX ¦ Romersk siffra IX ¦ Romertal IX
+forme|Chiffre romain X ¦ Římská číslice X ¦ Romersk siffra X ¦ Romertal X
+forme|Bâton ¦ Čárka ¦ Streck ¦ Streg
+forme|Bâtons ¦ Čárky ¦ Streck ¦ Streger
+forme|cinq ¦ pět ¦ fem ¦ fem
+forme|Bélier ¦ Beran ¦ Väduren ¦ Vædderen
+forme|zodiaque ¦ zvěrokruh ¦ zodiaken ¦ dyrekredsen
+forme|Taureau ¦ Býk ¦ Oxen ¦ Tyren
+forme|Gémeaux ¦ Blíženci ¦ Tvillingarna ¦ Tvillingerne
+forme|Cancer ¦ Rak ¦ Kräftan ¦ Krebsen
+forme|Lion ¦ Lev ¦ Lejonet ¦ Løven
+forme|Vierge ¦ Panna ¦ Jungfrun ¦ Jomfruen
+forme|Scorpion ¦ Štír ¦ Skorpionen ¦ Skorpionen
+forme|Sagittaire ¦ Střelec ¦ Skytten ¦ Skytten
+forme|Capricorne ¦ Kozoroh ¦ Stenbocken ¦ Stenbukken
+forme|Verseau ¦ Vodnář ¦ Vattumannen ¦ Vandbæreren
+forme|Poissons ¦ Ryby ¦ Fiskarna ¦ Fiskene
+forme|Visage souriant ¦ Usměvavý obličej ¦ Leende ansikte ¦ Smilende ansigt
+forme|Visage décontracté ¦ Uvolněný obličej ¦ Avslappnat ansikte ¦ Afslappet ansigt
+forme|Perplexe ¦ Zmatený ¦ Förbryllad ¦ Forvirret
+forme|Visage évanoui ¦ Omdlévající obličej ¦ Svimfärdigt ansikte ¦ Besvimet ansigt
+forme|Diablotin ¦ Čertík ¦ Djävul ¦ Djævel
+forme|Mort de rire ¦ K smíchu ¦ Skrattar ihjäl sig ¦ Griner sig ihjel
+forme|Extraterrestre ¦ Mimozemšťan ¦ Utomjording ¦ Rumvæsen
+forme|Pentagramme ¦ Pentagram ¦ Pentagram ¦ Pentagram
+forme|Losange plein ¦ Plný kosočtverec ¦ Fylld romb ¦ Fyldt rombe
+forme|Losange moyen ¦ Střední kosočtverec ¦ Mellanstor romb ¦ Mellemstor rombe
+forme|Disque plein ¦ Plný kruh ¦ Fylld cirkel ¦ Fyldt cirkel
+forme|Cercle ¦ Kruh ¦ Cirkel ¦ Cirkel
+forme|Moitié de disque ¦ Polovina kruhu ¦ Halv cirkel ¦ Halv cirkel
+forme|Petit disque ¦ Malý kruh ¦ Liten cirkel ¦ Lille cirkel
+forme|Disques ¦ Kruhy ¦ Cirklar ¦ Cirkler
+forme|Ellipse ¦ Elipsa ¦ Ellips ¦ Ellipse
+forme|Carré ¦ Čtverec ¦ Kvadrat ¦ Kvadrat
+forme|Carré arrondi ¦ Zaoblený čtverec ¦ Rundad kvadrat ¦ Afrundet kvadrat
+forme|Petit carré ¦ Malý čtverec ¦ Liten kvadrat ¦ Lille kvadrat
+forme|Triangle pointe en bas ¦ Trojúhelník špičkou dolů ¦ Triangel med spetsen nedåt ¦ Trekant med spidsen nedad
+forme|Sphère ¦ Koule ¦ Klot ¦ Kugle
+forme|Formes ¦ Tvary ¦ Former ¦ Former
+forme|Case pleine ¦ Plné pole ¦ Fylld ruta ¦ Fyldt felt
+forme|Case vide ¦ Prázdné pole ¦ Tom ruta ¦ Tomt felt
+forme|Case cochée ¦ Zaškrtnuté pole ¦ Markerad ruta ¦ Afkrydset felt
+forme|Pastille ¦ Tečka ¦ Prick ¦ Prik
+forme|Pastille cochée ¦ Zaškrtnutá tečka ¦ Markerad prick ¦ Afkrydset prik
+forme|Points de suspension ¦ Tři tečky ¦ Tre punkter ¦ Tre prikker
+forme|Points verticaux ¦ Svislé tečky ¦ Lodräta punkter ¦ Lodrette prikker
+forme|Grille de points ¦ Mřížka teček ¦ Punktrutnät ¦ Prikgitter
+forme|Trois points en triangle ¦ Tři tečky v trojúhelníku ¦ Tre punkter i triangel ¦ Tre prikker i trekant
+forme|Quadrillage ¦ Mřížka ¦ Rutnät ¦ Gitter
+forme|Goutte bicolore ¦ Dvoubarevná kapka ¦ Tvåfärgad droppe ¦ Tofarvet dråbe
+forme|Bombe ¦ Bomba ¦ Bomb ¦ Bombe
+forme|Épée ¦ Meč ¦ Svärd ¦ Sværd
+forme|Épées croisées ¦ Zkřížené meče ¦ Korsade svärd ¦ Krydsede sværd
+forme|Lance ¦ Kopí ¦ Lans ¦ Lanse
+forme|Masse d’armes ¦ Palcát ¦ Stridsklubba ¦ Stridskølle
+forme|Couteau de combat ¦ Bojový nůž ¦ Stridskniv ¦ Kampkniv
+forme|Étoile de ninja ¦ Ninja hvězdice ¦ Kastjärna ¦ Kastestjerne
+forme|Boomerang ¦ Bumerang ¦ Bumerang ¦ Boomerang
+forme|Pistolet ¦ Pistole ¦ Pistol ¦ Pistol
+forme|Munitions ¦ Střelivo ¦ Ammunition ¦ Ammunition
+forme|Char d’assaut ¦ Tank ¦ Stridsvagn ¦ Kampvogn
+forme|Lien ¦ Odkaz ¦ Länk ¦ Link
+forme|Maillon ¦ Článek řetězu ¦ Kedjelänk ¦ Kædeled
+forme|Empreinte digitale ¦ Otisk prstu ¦ Fingeravtryck ¦ Fingeraftryk
+forme|Drapeau à hampe ¦ Vlajka na žerdi ¦ Flagga på stång ¦ Flag på stang
+forme|Marque déposée ¦ Registrovaná ochranná známka ¦ Registrerat varumärke ¦ Registreret varemærke
+forme|Marque commerciale ¦ Ochranná známka ¦ Varumärke ¦ Varemærke
+forme|Supérieur à ¦ Větší než ¦ Större än ¦ Større end
+forme|Inférieur à ¦ Menší než ¦ Mindre än ¦ Mindre end
+forme|Multiplication ¦ Násobení ¦ Multiplikation ¦ Multiplikation
+forme|Division ¦ Dělení ¦ Division ¦ Division
+forme|Lien rompu ¦ Přerušený odkaz ¦ Bruten länk ¦ Brudt link
+forme|Sommeil ¦ Spánek ¦ Sömn ¦ Søvn
+forme|Flèche épaisse droite ¦ Silná šipka doprava ¦ Tjock pil höger ¦ Tyk pil højre
+forme|Flèche épaisse gauche ¦ Silná šipka doleva ¦ Tjock pil vänster ¦ Tyk pil venstre
+forme|Flèche épaisse haut ¦ Silná šipka nahoru ¦ Tjock pil upp ¦ Tyk pil op
+forme|Flèche épaisse bas ¦ Silná šipka dolů ¦ Tjock pil ned ¦ Tyk pil ned
+forme|Flèche en coin ¦ Rohová šipka ¦ Hörnpil ¦ Hjørnepil
+forme|Flèche pleine ¦ Plná šipka ¦ Fylld pil ¦ Fyldt pil
+forme|Flèche dans un rond ¦ Šipka v kruhu ¦ Pil i cirkel ¦ Pil i cirkel
+forme|Double flèche épaisse ¦ Silná dvojitá šipka ¦ Tjock dubbelpil ¦ Tyk dobbeltpil
+forme|Toutes directions ¦ Všechny směry ¦ Alla riktningar ¦ Alle retninger
+forme|Agrandir ¦ Zvětšit ¦ Förstora ¦ Forstør
+forme|Rassembler ¦ Shromáždit ¦ Samla ¦ Saml
+forme|Double chevron ¦ Dvojitá šipka ¦ Dubbel vinkel ¦ Dobbelt vinkel
+forme|Triple chevron ¦ Trojitá šipka ¦ Trippel vinkel ¦ Tredobbelt vinkel
+forme|Retour en U ¦ Obrat do U ¦ U-sväng tillbaka ¦ U-vending tilbage
+forme|Flèche montante ¦ Stoupající šipka ¦ Stigande pil ¦ Stigende pil
+forme|Flèche descendante ¦ Klesající šipka ¦ Fallande pil ¦ Faldende pil
+forme|Retour en haut ¦ Zpět nahoru ¦ Tillbaka upp ¦ Tilbage op
+forme|Rotation ¦ Otáčení ¦ Rotation ¦ Rotation
+forme|Rotation inverse ¦ Opačné otáčení ¦ Omvänd rotation ¦ Omvendt rotation
+forme|Revenir ¦ Vrátit se ¦ Gå tillbaka ¦ Gå tilbage
+forme|Recharger ¦ Znovu načíst ¦ Ladda om ¦ Genindlæs
+forme|Synchroniser ¦ Synchronizovat ¦ Synkronisera ¦ Synkroniser
+forme|Échange ¦ Výměna ¦ Byte ¦ Udveksling
+forme|Échange vertical ¦ Svislá výměna ¦ Lodrätt byte ¦ Lodret udveksling
+forme|Séparation ¦ Rozdělení ¦ Delning ¦ Opdeling
+forme|Réunion ¦ Spojení ¦ Förening ¦ Samling
+forme|Embranchement ¦ Odbočka ¦ Förgrening ¦ Forgrening
+forme|Fourche ¦ Vidlice ¦ Gaffel ¦ Gaffel
+forme|Bifurcation ¦ Rozcestí ¦ Vägskäl ¦ Vejforgrening
+forme|Décision ¦ Rozhodnutí ¦ Beslut ¦ Beslutning
+forme|Mélange ¦ Promíchání ¦ Blandning ¦ Blanding
+forme|Transfert ¦ Přenos ¦ Överföring ¦ Overførsel
+forme|Suivant ¦ Další ¦ Nästa ¦ Næste
+forme|Lecture ¦ Přehrát ¦ Spela upp ¦ Afspil
+forme|Avance rapide ¦ Rychle vpřed ¦ Snabbspola framåt ¦ Spol frem
+forme|Pointe à droite ¦ Hrot doprava ¦ Spets åt höger ¦ Spids mod højre
+forme|Navigation ¦ Navigace ¦ Navigering ¦ Navigation
+forme|Flèche haut ¦ Šipka nahoru ¦ Pil upp ¦ Pil op
+forme|Flèche bas ¦ Šipka dolů ¦ Pil ned ¦ Pil ned
+forme|Flèche gauche ¦ Šipka doleva ¦ Pil vänster ¦ Pil venstre
+forme|Flèche droite ¦ Šipka doprava ¦ Pil höger ¦ Pil højre
+forme|Flèche haut gauche ¦ Šipka nahoru doleva ¦ Pil upp vänster ¦ Pil op venstre
+forme|Flèche haut droite ¦ Šipka nahoru doprava ¦ Pil upp höger ¦ Pil op højre
+forme|Flèche bas gauche ¦ Šipka dolů doleva ¦ Pil ned vänster ¦ Pil ned venstre
+forme|Flèche bas droite ¦ Šipka dolů doprava ¦ Pil ned höger ¦ Pil ned højre
+forme|Flèche pleine haut ¦ Plná šipka nahoru ¦ Fylld pil upp ¦ Fyldt pil op
+forme|Flèche pleine bas ¦ Plná šipka dolů ¦ Fylld pil ned ¦ Fyldt pil ned
+forme|Flèche pleine gauche ¦ Plná šipka doleva ¦ Fylld pil vänster ¦ Fyldt pil venstre
+forme|Flèche pleine haut gauche ¦ Plná šipka nahoru doleva ¦ Fylld pil upp vänster ¦ Fyldt pil op venstre
+forme|Flèche pleine haut droite ¦ Plná šipka nahoru doprava ¦ Fylld pil upp höger ¦ Fyldt pil op højre
+forme|Flèche pleine bas gauche ¦ Plná šipka dolů doleva ¦ Fylld pil ned vänster ¦ Fyldt pil ned venstre
+forme|Flèche pleine bas droite ¦ Plná šipka dolů doprava ¦ Fylld pil ned höger ¦ Fyldt pil ned højre
+forme|Flèche gauche dans un rond ¦ Šipka doleva v kruhu ¦ Pil vänster i cirkel ¦ Pil venstre i cirkel
+forme|Flèche haut dans un rond ¦ Šipka nahoru v kruhu ¦ Pil upp i cirkel ¦ Pil op i cirkel
+forme|Flèche bas dans un rond ¦ Šipka dolů v kruhu ¦ Pil ned i cirkel ¦ Pil ned i cirkel
+forme|Double flèche verticale fine ¦ Tenká svislá dvojitá šipka ¦ Tunn lodrät dubbelpil ¦ Tynd lodret dobbeltpil
+forme|Double flèche diagonale ¦ Diagonální dvojitá šipka ¦ Diagonal dubbelpil ¦ Diagonal dobbeltpil
+forme|Double flèche diagonale inverse ¦ Obrácená diagonální dvojitá šipka ¦ Omvänd diagonal dubbelpil ¦ Omvendt diagonal dobbeltpil
+forme|Flèche coudée haut gauche ¦ Lomená šipka nahoru doleva ¦ Vinklad pil upp vänster ¦ Vinklet pil op venstre
+forme|Flèche coudée haut droite ¦ Lomená šipka nahoru doprava ¦ Vinklad pil upp höger ¦ Vinklet pil op højre
+forme|Flèche coudée bas gauche ¦ Lomená šipka dolů doleva ¦ Vinklad pil ned vänster ¦ Vinklet pil ned venstre
+forme|Flèche coudée bas droite ¦ Lomená šipka dolů doprava ¦ Vinklad pil ned höger ¦ Vinklet pil ned højre
+forme|Flèche coudée vers le bas ¦ Lomená šipka dolů ¦ Vinklad pil nedåt ¦ Vinklet pil nedad
+forme|Demi-tour à gauche ¦ Obrat doleva ¦ U-sväng vänster ¦ U-vending til venstre
+forme|Demi-tour à droite ¦ Obrat doprava ¦ U-sväng höger ¦ U-vending til højre
+forme|Réduire ¦ Zmenšit ¦ Förminska ¦ Formindsk
+forme|Étendre ¦ Rozšířit ¦ Utöka ¦ Udvid
+forme|Rapprocher ¦ Přiblížit ¦ Föra samman ¦ Føre sammen
+forme|Écarter ¦ Oddálit ¦ Sära på ¦ Skille ad
+forme|Va-et-vient ¦ Tam a zpět ¦ Fram och tillbaka ¦ Frem og tilbage
+forme|Flèche d’archer ¦ Lukostřelecký šíp ¦ Bågskyttepil ¦ Bueskydningspil
+forme|Chevron haut ¦ Šipka nahoru (chevron) ¦ Vinkel upp ¦ Vinkel op
+forme|Chevron bas ¦ Šipka dolů (chevron) ¦ Vinkel ned ¦ Vinkel ned
+forme|Chevron gauche ¦ Šipka doleva (chevron) ¦ Vinkel vänster ¦ Vinkel venstre
+forme|Chevron droite ¦ Šipka doprava (chevron) ¦ Vinkel höger ¦ Vinkel højre
+forme|Double chevron haut ¦ Dvojitá šipka nahoru ¦ Dubbel vinkel upp ¦ Dobbelt vinkel op
+forme|Double chevron bas ¦ Dvojitá šipka dolů ¦ Dubbel vinkel ned ¦ Dobbelt vinkel ned
+forme|Double chevron gauche ¦ Dvojitá šipka doleva ¦ Dubbel vinkel vänster ¦ Dobbelt vinkel venstre
+forme|Pointe en haut ¦ Hrot nahoru ¦ Spets uppåt ¦ Spids opad
+forme|Pointe en bas ¦ Hrot dolů ¦ Spets nedåt ¦ Spids nedad
+forme|Pointe à gauche ¦ Hrot doleva ¦ Spets åt vänster ¦ Spids mod venstre
+forme|Échange fin ¦ Tenká výměna ¦ Tunt byte ¦ Tynd udveksling
+forme|Échange vertical fin ¦ Tenká svislá výměna ¦ Tunt lodrätt byte ¦ Tynd lodret udveksling
+forme|Hausse ¦ Nárůst ¦ Ökning ¦ Stigning
+forme|Baisse ¦ Pokles ¦ Minskning ¦ Fald
+forme|Stable ¦ Stabilní ¦ Stabil ¦ Stabil
+forme|Annuler ¦ Zpět ¦ Ångra ¦ Fortryd
+forme|Rétablir ¦ Znovu ¦ Gör om ¦ Gentag
+forme|Répondre ¦ Odpovědět ¦ Svara ¦ Svar
+forme|Partager ¦ Sdílet ¦ Dela ¦ Del
+forme|Actualiser ¦ Obnovit ¦ Uppdatera ¦ Opdater
+forme|Cycle ¦ Cyklus ¦ Cykel ¦ Cyklus
+forme|Répéter ¦ Opakovat ¦ Upprepa ¦ Gentag
+forme|Rotation complète ¦ Celé otočení ¦ Hel rotation ¦ Hel rotation
+forme|Orbite ¦ Oběžná dráha ¦ Omloppsbana ¦ Kredsløb
+forme|Rotation à gauche ¦ Otočení doleva ¦ Rotation åt vänster ¦ Drejning mod venstre
+forme|Rotation à droite ¦ Otočení doprava ¦ Rotation åt höger ¦ Drejning mod højre
+forme|Mélanger ¦ Zamíchat ¦ Blanda ¦ Bland
+forme|Flèche sortante ¦ Výstupní šipka ¦ Utgående pil ¦ Udgående pil
+forme|Flèche entrante ¦ Vstupní šipka ¦ Ingående pil ¦ Indgående pil
+forme|Sous-niveau à droite ¦ Podúroveň vpravo ¦ Undernivå höger ¦ Underniveau højre
+forme|Sous-niveau à gauche ¦ Podúroveň vlevo ¦ Undernivå vänster ¦ Underniveau venstre
+forme|Fusion ¦ Sloučení ¦ Sammanslagning ¦ Fletning
+forme|Étape ¦ Krok ¦ Steg ¦ Trin
+forme|Fusionner ¦ Sloučit ¦ Sammanfoga ¦ Flet
+forme|Segment ¦ Úsek ¦ Segment ¦ Segment
+forme|Détour ¦ Objížďka ¦ Omväg ¦ Omvej
+forme|Connexion ¦ Připojení ¦ Anslutning ¦ Forbindelse
+forme|Entrée ¦ Vstup ¦ Ingång ¦ Indgang
+forme|Sortie ¦ Výstup ¦ Utgång ¦ Udgang
+forme|Sortie de secours ¦ Nouzový východ ¦ Nödutgång ¦ Nødudgang
+forme|Précédent ¦ Předchozí ¦ Föregående ¦ Forrige
+forme|Lecture ronde ¦ Kulaté přehrávání ¦ Rund uppspelning ¦ Rund afspilning
+forme|Position actuelle ¦ Aktuální poloha ¦ Nuvarande position ¦ Nuværende position
+forme|Main pointeur ¦ Ukazující ruka ¦ Pekande hand ¦ Pegende hånd
+forme|Plein écran ¦ Celá obrazovka ¦ Helskärm ¦ Fuld skærm
+forme|Flèche haut ronde ¦ Kulatá šipka nahoru ¦ Rund pil upp ¦ Rund pil op
+forme|Flèche bas ronde ¦ Kulatá šipka dolů ¦ Rund pil ned ¦ Rund pil ned
+forme|Flèche gauche ronde ¦ Kulatá šipka doleva ¦ Rund pil vänster ¦ Rund pil venstre
+forme|Flèche droite ronde ¦ Kulatá šipka doprava ¦ Rund pil höger ¦ Rund pil højre
+forme|Chevron gauche rond ¦ Kulatá šipka doleva (chevron) ¦ Rund vinkel vänster ¦ Rund vinkel venstre
+forme|Chevron droite rond ¦ Kulatá šipka doprava (chevron) ¦ Rund vinkel höger ¦ Rund vinkel højre
+forme|Rejouer ¦ Přehrát znovu ¦ Spela igen ¦ Afspil igen
+forme|Renouvellement ¦ Obnovení ¦ Förnyelse ¦ Fornyelse
+forme|Télécharger ¦ Stáhnout ¦ Ladda ned ¦ Download
+forme|Envoyer ¦ Odeslat ¦ Skicka ¦ Send
+forme|Importer ¦ Importovat ¦ Importera ¦ Importér
+forme|Exporter ¦ Exportovat ¦ Exportera ¦ Eksportér
+forme|Arrêt ¦ Zastavit ¦ Stopp ¦ Stop
+forme|piste ¦ stopa ¦ spår ¦ spor
+forme|Retour rapide ¦ Rychle zpět ¦ Snabbspola bakåt ¦ Spol tilbage
+forme|Enregistrement ¦ Nahrávání ¦ Inspelning ¦ Optagelse
+forme|Gland ¦ Žalud ¦ Ekollon ¦ Agern
+forme|trait fin ¦ tenká čára ¦ tunn linje ¦ tynd streg
+forme|plein ¦ plný ¦ fylld ¦ fyldt
+forme|Carnet d’adresses ¦ Adresář ¦ Adressbok ¦ Adressebog
+forme|Répertoire à onglets ¦ Adresář se záložkami ¦ Register med flikar ¦ Register med faner
+forme|Tour de contrôle ¦ Řídicí věž ¦ Kontrolltorn ¦ Kontroltårn
+forme|Avion en vol ¦ Letadlo za letu ¦ Flygplan i luften ¦ Fly i luften
+forme|Avion qui atterrit ¦ Přistávající letadlo ¦ Landande flygplan ¦ Landende fly
+forme|Avion qui décolle ¦ Vzlétající letadlo ¦ Startande flygplan ¦ Lettende fly
+forme|Avion au sol ¦ Letadlo na zemi ¦ Flygplan på marken ¦ Fly på jorden
+forme|Avion penché ¦ Nakloněné letadlo ¦ Lutande flygplan ¦ Skråt fly
+forme|Ancre simple ¦ Jednoduchá kotva ¦ Enkelt ankare ¦ Enkelt anker
+forme|Angle ¦ Úhel ¦ Vinkel ¦ Vinkel
+forme|boîte ¦ krabice ¦ låda ¦ kasse
+forme|Flèche en arc vers la gauche ¦ Oblouková šipka doleva ¦ Bågpil åt vänster ¦ Buepil mod venstre
+forme|Flèche en arc vers la droite ¦ Oblouková šipka doprava ¦ Bågpil åt höger ¦ Buepil mod højre
+forme|Double flèche courbée ¦ Zakřivená dvojitá šipka ¦ Böjd dubbelpil ¦ Buet dobbeltpil
+forme|haut ¦ nahoru ¦ upp ¦ op
+forme|Flèche courbée ¦ Zakřivená šipka ¦ Böjd pil ¦ Buet pil
+forme|bas ¦ dolů ¦ ned ¦ ned
+forme|Flèche ronde vers le bas ¦ Kulatá šipka dolů ¦ Rund pil nedåt ¦ Rund pil nedad
+forme|Flèche ronde vers le bas à gauche ¦ Kulatá šipka dolů doleva ¦ Rund pil nedåt vänster ¦ Rund pil nedad venstre
+forme|Flèche ronde vers le bas à droite ¦ Kulatá šipka dolů doprava ¦ Rund pil nedåt höger ¦ Rund pil nedad højre
+forme|Flèche ronde vers la gauche ¦ Kulatá šipka doleva ¦ Rund pil åt vänster ¦ Rund pil mod venstre
+forme|Flèche ronde vers la droite ¦ Kulatá šipka doprava ¦ Rund pil åt höger ¦ Rund pil mod højre
+forme|Flèche ronde vers le haut ¦ Kulatá šipka nahoru ¦ Rund pil uppåt ¦ Rund pil opad

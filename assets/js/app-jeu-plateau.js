@@ -9,11 +9,12 @@
     'use strict';
     const A = () => window.LCNDA_APP || {};
     const UI = () => window.LCNDA_UI || {};
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : s);
     const esc = v => (A().escapeHtml ? A().escapeHtml(v ?? '') : String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c])));
     const LEVELS = [['', '🙂 Une personne'], ['facile', '🤖 Ordinateur facile'], ['moyen', '🤖 Ordinateur moyen'], ['difficile', '🤖 Ordinateur difficile']];
     const LEVEL_TXT = {facile: 'facile', moyen: 'moyen', difficile: 'difficile'};
     const cleanAi = v => (['facile', 'moyen', 'difficile'].includes(v) ? v : '');
-    const levelSelect = (p, name = 'pai') => `<label>Qui joue<select name="${name}">${LEVELS.map(([v, t]) => `<option value="${v}" ${p.ai === v ? 'selected' : ''}>${t}</option>`).join('')}</select></label>`;
+    const levelSelect = (p, name = 'pai') => `<label>${esc(i18n('Qui joue'))}<select name="${name}">${LEVELS.map(([v, t]) => `<option value="${v}" ${p.ai === v ? 'selected' : ''}>${esc(i18n(t))}</option>`).join('')}</select></label>`;
     /** « Réduire les animations » (Accessibilité) ou le réglage du système */
     const calm = () => document.documentElement.classList.contains('a11y-calm') || !!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
     const fmt = ms => { const s = Math.max(0, Math.floor(ms / 1000)); return UI().clock ? UI().clock(s) : `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`; };
@@ -49,15 +50,15 @@
             const r = records.get(game, k); if (!r) return '';
             const plural = A().plural || ((n, w) => `${n} ${w}${n > 1 ? 's' : ''}`);
             const parts = [r.w || r.d || r.l ? [plural(r.w, 'victoire'), r.d ? plural(r.d, 'nulle') : '', plural(r.l, 'défaite')].filter(Boolean).join(' · ') : ''];
-            if (r.best) parts.push(`record : ${esc(r.best.label)}${UI().when ? ` (${UI().when(r.best.date)})` : ''}`);
-            return `<p class="jp-rec jf-small">🏆 ${title ? `${esc(title)} : ` : ''}${parts.filter(Boolean).join(' · ')}</p>`;
+            if (r.best) parts.push(`${esc(i18n('record : {what}', {what: i18n(r.best.label)}))}${UI().when ? ` (${UI().when(r.best.date)})` : ''}`);
+            return `<p class="jp-rec jf-small">🏆 ${title ? `${esc(i18n('{what} :', {what: i18n(title)}))} ` : ''}${parts.filter(Boolean).join(' · ')}</p>`;
         },
     };
 
     /** la fenêtre des règles (bouton « ? ») */
     function rules(title, html) {
         const open = window.LCNDA_EXT?.openDialog;
-        if (open) return open({eyebrow: 'LES RÈGLES', title, body: `<div class="jp-rules">${html}</div>`, wide: true});
+        if (open) return open({eyebrow: i18n('LES RÈGLES'), title, body: `<div class="jp-rules">${html}</div>`, wide: true});
         A().toast?.(title);
     }
 
@@ -76,18 +77,18 @@
             /** players : [{name, color, ai, score, on, out, extra}] */
             bar(players = []) {
                 const hints = o.hints?.(), canUndo = !!o.canUndo?.();
-                return `<div class="jp-bar" role="toolbar" aria-label="La partie">
-                    <div class="jp-who">${players.map(p => `<span class="jp-pl ${p.on ? 'is-on' : ''} ${p.out ? 'is-out' : ''}" style="--pc:${esc(p.color || '#000')}"><i aria-hidden="true"></i><span class="jp-pl-n">${esc(p.name)}${p.ai ? ` <small>🤖 ${esc(LEVEL_TXT[p.ai] || '')}</small>` : ''}</span>${p.score != null ? `<b>${esc(p.score)}</b>` : ''}${p.extra ? `<span class="jp-pl-x">${p.extra}</span>` : ''}</span>`).join('')}</div>
-                    <span class="jp-time" title="Le temps de la partie (sans les pauses)">⏱ <span data-jp-time>${fmt(elapsed())}</span></span>
+                return `<div class="jp-bar" role="toolbar" aria-label="${esc(i18n('La partie'))}">
+                    <div class="jp-who">${players.map(p => `<span class="jp-pl ${p.on ? 'is-on' : ''} ${p.out ? 'is-out' : ''}" style="--pc:${esc(p.color || '#000')}"><i aria-hidden="true"></i><span class="jp-pl-n">${esc(p.name)}${p.ai ? ` <small>🤖 ${esc(i18n(LEVEL_TXT[p.ai] || '', {ctx: 'niveau'}))}</small>` : ''}</span>${p.score != null ? `<b>${esc(p.score)}</b>` : ''}${p.extra ? `<span class="jp-pl-x">${p.extra}</span>` : ''}</span>`).join('')}</div>
+                    <span class="jp-time" title="${esc(i18n('Le temps de la partie (sans les pauses)'))}">⏱ <span data-jp-time>${fmt(elapsed())}</span></span>
                     <span class="jp-tools">
-                      <button type="button" class="icon-button small" data-jp-undo title="Annuler le dernier coup" data-shortcut="⌘Z" aria-label="Annuler le dernier coup" ${canUndo ? '' : 'disabled'}>↶</button>
-                      ${hints === null || hints === undefined ? '' : `<button type="button" class="button small secondary jp-hint" data-jp-hint title="Un conseil (touche H)" data-shortcut="H" ${over() || hints <= 0 ? 'disabled' : ''}>💡 <b>${hints}</b></button>`}
-                      <button type="button" class="icon-button small" data-jp-pause title="${paused ? 'Reprendre' : 'Pause'} (Échap)" aria-label="${paused ? 'Reprendre' : 'Pause'}" aria-pressed="${paused}" ${over() ? 'disabled' : ''}>${paused ? '▶' : '⏸'}</button>
-                      <button type="button" class="ui-help jp-help" data-jp-rules title="Les règles" aria-label="Les règles de ${esc(o.title || 'ce jeu')}">?</button>
-                      ${o.menu ? '<button type="button" class="icon-button small" data-jp-more title="Plus d’actions" aria-label="Plus d’actions">⋯</button>' : ''}
+                      <button type="button" class="icon-button small" data-jp-undo title="${esc(i18n('Annuler le dernier coup'))}" data-shortcut="⌘Z" aria-label="${esc(i18n('Annuler le dernier coup'))}" ${canUndo ? '' : 'disabled'}>↶</button>
+                      ${hints === null || hints === undefined ? '' : `<button type="button" class="button small secondary jp-hint" data-jp-hint title="${esc(i18n('Un conseil (touche H)'))}" data-shortcut="H" ${over() || hints <= 0 ? 'disabled' : ''}>💡 <b>${hints}</b></button>`}
+                      <button type="button" class="icon-button small" data-jp-pause title="${esc(paused ? i18n('Reprendre (Échap)') : i18n('Pause (Échap)'))}" aria-label="${esc(paused ? i18n('Reprendre') : i18n('Pause'))}" aria-pressed="${paused}" ${over() ? 'disabled' : ''}>${paused ? '▶' : '⏸'}</button>
+                      <button type="button" class="ui-help jp-help" data-jp-rules title="${esc(i18n('Les règles'))}" aria-label="${esc(o.title ? i18n('Les règles de {name}', {name: i18n(o.title)}) : i18n('Les règles de ce jeu'))}">?</button>
+                      ${o.menu ? `<button type="button" class="icon-button small" data-jp-more title="${esc(i18n('Plus d’actions'))}" aria-label="${esc(i18n('Plus d’actions'))}">⋯</button>` : ''}
                     </span></div>`;
             },
-            pauseHtml: () => (paused ? `<div class="jp-pause" role="dialog" aria-label="Pause"><p class="jf-big">⏸ Pause</p><p class="muted jf-small">Le chrono est arrêté. Échap ou le bouton pour reprendre.</p><button type="button" class="button" data-jp-resume>▶ Reprendre</button></div>` : ''),
+            pauseHtml: () => (paused ? `<div class="jp-pause" role="dialog" aria-label="${esc(i18n('Pause'))}"><p class="jf-big">⏸ ${esc(i18n('Pause'))}</p><p class="muted jf-small">${esc(i18n('Le chrono est arrêté. Échap ou le bouton pour reprendre.'))}</p><button type="button" class="button" data-jp-resume>▶ ${esc(i18n('Reprendre'))}</button></div>` : ''),
             pause(on = !paused) {
                 if (over() && on) return; if (on === paused) return;
                 if (on) { settle(); paused = true; } else { paused = false; startAt = Date.now(); }
@@ -100,7 +101,7 @@
                 host.querySelector('[data-jp-hint]')?.addEventListener('click', () => o.onHint?.(), sig);
                 host.querySelector('[data-jp-pause]')?.addEventListener('click', () => self.pause(), sig);
                 host.querySelector('[data-jp-resume]')?.addEventListener('click', () => self.pause(false), sig);
-                host.querySelector('[data-jp-rules]')?.addEventListener('click', () => rules(`Les règles : ${o.title}`, o.rulesHtml?.() || ''), sig);
+                host.querySelector('[data-jp-rules]')?.addEventListener('click', () => rules(i18n('Les règles : {name}', {name: i18n(o.title)}), o.rulesHtml?.() || ''), sig);
                 const more = host.querySelector('[data-jp-more]');
                 more?.addEventListener('click', () => { const items = o.menu?.() || []; if (UI().menuAt) UI().menuAt(more, items); else items.find(x => x && x.run)?.run(); }, sig);
                 if (paused) host.querySelector('[data-jp-resume]')?.focus();

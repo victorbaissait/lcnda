@@ -8,6 +8,12 @@
     'use strict';
     const J = () => window.LCNDA_JEUX_FAMILLE, C = () => window.LCNDA_CARTES;
     if (!J() || !C()) return;
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : s);
+    // les noms, présentations et règles des jeux : traduits une fois (le moteur reste en français dans Node)
+    (() => { const I = window.LCNDA_I18N; if (!I || !I.lang || I.lang === 'fr') return;
+        C().GAMES.forEach(g => { g.name = i18n(g.name); g.desc = i18n(g.desc); if (Array.isArray(g.rules)) g.rules = g.rules.map(x => i18n(x)); }); })();
+    const sn = s => i18n(C().SUIT_NAME[s], {ctx: 'carte'}), rn = r => i18n(C().RANK_NAME[r], {ctx: 'carte'});
+    const tl = list => list.map(([k, l]) => [k, i18n(l)]);
     const SUIT = ['♥', '♦', '♠', '♣'], RANK = ['', 'A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'V', 'D', 'R'], TRANK = ['', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'V', 'C', 'D', 'R'];
     const Pl = () => window.LCNDA_JEUX_PLATEAU; // la barre de partie commune (L2), les records, le choix « Qui joue » : app-jeu-plateau.js
     const SPEEDS = [['lent', 'Lent'], ['normal', 'Normal'], ['rapide', 'Rapide']], DELAY = {lent: 1000, normal: 560, rapide: 180};
@@ -17,20 +23,22 @@
     const gameOf = k => C().get(k) || C().get('belote');
     /** les places autour de la table : toi en bas (Sud), puis Ouest, Nord, Est */
     const SEATS = {2: ['Toi', 'Nord'], 3: ['Toi', 'Ouest', 'Est'], 4: ['Toi', 'Ouest', 'Nord', 'Est']};
-    const isDefaultName = n => /^(Joueur \d+|Toi|Ouest|Nord|Est)$/.test(String(n || ''));
+    const seat = n => i18n(n, {ctx: 'siege'}), seatAt = (n, i) => (SEATS[n] && SEATS[n][i] ? seat(SEATS[n][i]) : i18n('Joueur {n}', {n: String(i + 1)}));
+    const isDefaultName = n => { const v = String(n || ''); if (/^(Joueur \d+|Toi|Ouest|Nord|Est)$/.test(v)) return true;
+        if (['Toi', 'Ouest', 'Nord', 'Est'].some(x => seat(x) === v)) return true; return [1, 2, 3, 4].some(k => i18n('Joueur {n}', {n: String(k)}) === v); };
     const cleanAi = v => (Pl()?.cleanAi ? Pl().cleanAi(v) : (['facile', 'moyen', 'difficile'].includes(v) ? v : ''));
     /** autant de joueurs que le jeu en demande (Belote, Tarot, Dame de pique : 4 ; Rami, Crapette : 2…) ; les noms par défaut suivent les places */
     function fitPlayers(c) {
         const allowed = gameOf(c.game).players, n = allowed.includes(c.players.length) ? c.players.length : c.players.length > allowed[allowed.length - 1] ? allowed[allowed.length - 1] : gameOf(c.game).def;
         const COL = ['#d93636', '#2878c8', '#198754', '#f2c230'];
-        while (c.players.length < n) { const i = c.players.length; c.players.push({name: `Joueur ${i + 1}`, color: COL.find(x => !c.players.some(p => p.color === x)) || COL[i % 4], ai: 'moyen'}); }
+        while (c.players.length < n) { const i = c.players.length; c.players.push({name: i18n('Joueur {n}', {n: String(i + 1)}), color: COL.find(x => !c.players.some(p => p.color === x)) || COL[i % 4], ai: 'moyen'}); }
         c.players = c.players.slice(0, n);
-        c.players.forEach((p, i) => { if (isDefaultName(p.name)) p.name = SEATS[n][i]; });
+        c.players.forEach((p, i) => { if (isDefaultName(p.name)) p.name = seatAt(n, i); });
         return c;
     }
     const rulesHtml = (esc, k) => { const g = gameOf(k); return `<ol class="cx-rules-list">${g.rules.map(r => `<li>${esc(r)}</li>`).join('')}</ol>`; };
-    const descHtml = (esc, k) => { const g = gameOf(k); return `<b>${g.icon} ${esc(g.name)}</b> · ${esc(g.players.length > 1 ? `${g.players[0]} à ${g.players[g.players.length - 1]} joueurs` : `${g.players[0]} joueurs`)}<br>${esc(g.desc)}
-        <details class="cx-rules"><summary><span class="cx-q" aria-hidden="true">?</span> Les règles du jeu</summary>${rulesHtml(esc, k)}</details>`; };
+    const descHtml = (esc, k) => { const g = gameOf(k); return `<b>${g.icon} ${esc(g.name)}</b> · ${esc(g.players.length > 1 ? i18n('{a} à {b} joueurs', {a: g.players[0], b: g.players[g.players.length - 1]}) : i18n('{n} joueurs', {n: g.players[0]}))}<br>${esc(g.desc)}
+        <details class="cx-rules"><summary><span class="cx-q" aria-hidden="true">?</span> ${esc(i18n('Les règles du jeu'))}</summary>${rulesHtml(esc, k)}</details>`; };
 
     /* ═════ Les figures : les portraits des ancêtres ═════ */
     /** Rois et Cavaliers : des hommes des plus anciennes générations ; Dames : des femmes ; Valets : des hommes plus jeunes */
@@ -55,7 +63,7 @@
         namePh: 'Ex : La belote du dimanche', fieldsTitle: 'Le jeu',
         unit: 'figure possible', unitP: 'figures possibles', minPeople: 1,
         scope: true, players: {min: 2, max: 4, def: 4},
-        playerExtra: i => ({ai: i ? 'moyen' : '', name: SEATS[4][i] || `Joueur ${i + 1}`}),
+        playerExtra: i => ({ai: i ? 'moyen' : '', name: seatAt(4, i)}),
         playerFields: p => (Pl()?.levelSelect ? Pl().levelSelect(p) : ''),
         defaults: () => ({game: 'belote', portraits: true, names: false, back: 'bleu', speed: 'normal', hints: 5, scope: {kind: 'sosa', gen: 3}}),
         clean(c) {
@@ -67,19 +75,19 @@
             {k: 'pre', name: 'Président', hint: 'à quatre, 5 manches', cfg: {game: 'president'}}, {k: 'ram', name: 'Rami (gin)', hint: 'à deux, premier à 100', cfg: {game: 'rami'}},
             {k: 'cra', name: 'Crapette', hint: 'à deux, chacun son jeu', cfg: {game: 'crapette'}}, {k: 'bat', name: 'Bataille', hint: 'pour les petits', cfg: {game: 'bataille'}}],
         usable: people => faceCount(people),
-        fieldsHtml: (c, h) => `<label class="jfp-pick">Le jeu<select data-cx-game>${C().GAMES.map(g => `<option value="${h.esc(g.k)}"${g.k === c.game ? ' selected' : ''}>${g.icon} ${h.esc(g.name)}</option>`).join('')}</select></label>
+        fieldsHtml: (c, h) => `<label class="jfp-pick">${h.esc(i18n('Le jeu'))}<select data-cx-game>${C().GAMES.map(g => `<option value="${h.esc(g.k)}"${g.k === c.game ? ' selected' : ''}>${g.icon} ${h.esc(g.name)}</option>`).join('')}</select></label>
             <div class="jfp-desc" data-cx-desc>${descHtml(h.esc, c.game)}</div>
-            <div class="jf-row"><span class="jf-lab">Vitesse de l’ordinateur</span>${h.seg('speed', SPEEDS, c.speed)}</div>
-            <div class="jf-row"><span class="jf-lab">Conseils 💡 par manche</span>${h.seg('hints', HINTS, c.hints)}</div>
-            <div class="jf-checks">${h.toggle('data-cx-portraits', c.portraits, '🖼 Les Rois, Dames et Valets avec les portraits de mes ancêtres')}${h.toggle('data-cx-names', c.names, '🤖 L’ordinateur porte des noms d’ancêtres')}</div>
-            <div class="jfp-backs"><span>Dos des cartes</span>${h.seg('back', BACKS, c.back)}</div>`,
+            <div class="jf-row"><span class="jf-lab">${h.esc(i18n('Vitesse de l’ordinateur'))}</span>${h.seg('speed', tl(SPEEDS), c.speed)}</div>
+            <div class="jf-row"><span class="jf-lab">${h.esc(i18n('Conseils 💡 par manche'))}</span>${h.seg('hints', tl(HINTS), c.hints)}</div>
+            <div class="jf-checks">${h.toggle('data-cx-portraits', c.portraits, i18n('🖼 Les Rois, Dames et Valets avec les portraits de mes ancêtres'))}${h.toggle('data-cx-names', c.names, i18n('🤖 L’ordinateur porte des noms d’ancêtres'))}</div>
+            <div class="jfp-backs"><span>${h.esc(i18n('Dos des cartes'))}</span>${h.seg('back', tl(BACKS), c.back)}</div>`,
         bindPlayers(box, c) {
             // le nombre de joueurs suit le jeu choisi
             const allowed = gameOf(c.game).players, add = box.parentElement?.querySelector('[data-jf-padd]');
             if (add) { add.disabled = c.players.length >= allowed[allowed.length - 1]; add.hidden = allowed.length === 1; }
             box.querySelectorAll('[data-jf-pdel]').forEach(b => { b.hidden = c.players.length <= allowed[0]; });
             const note = box.parentElement?.querySelector('[data-cx-pnote]') || Object.assign(document.createElement('p'), {className: 'muted jf-small'});
-            note.dataset.cxPnote = ''; note.textContent = `${gameOf(c.game).name} : ${allowed.length > 1 ? `de ${allowed[0]} à ${allowed[allowed.length - 1]} joueurs` : `${allowed[0]} joueurs`}. Une seule personne à la table (les cartes de chacun sont cachées) : les autres sont l’ordinateur.`;
+            note.dataset.cxPnote = ''; note.textContent = allowed.length > 1 ? i18n('{game} : de {a} à {b} joueurs. Une seule personne à la table (les cartes de chacun sont cachées) : les autres sont l’ordinateur.', {game: gameOf(c.game).name, a: allowed[0], b: allowed[allowed.length - 1]}) : i18n('{game} : {n} joueurs. Une seule personne à la table (les cartes de chacun sont cachées) : les autres sont l’ordinateur.', {game: gameOf(c.game).name, n: allowed[0]});
             if (!note.isConnected) box.after(note);
         },
         onChange(t, c, form) {
@@ -96,10 +104,10 @@
         async start(c, src, prev) {
             fitPlayers(c);
             const humans = c.players.map((p, i) => (p.ai ? -1 : i)).filter(i => i >= 0);
-            if (humans.length !== 1) return {error: humans.length ? 'Une seule personne à la table : les cartes de chacun sont cachées. Mets les autres joueurs sur « Ordinateur ».' : 'Il faut une personne à la table (sinon l’ordinateur joue tout seul).'};
+            if (humans.length !== 1) return {error: i18n(humans.length ? 'Une seule personne à la table : les cartes de chacun sont cachées. Mets les autres joueurs sur « Ordinateur ».' : 'Il faut une personne à la table (sinon l’ordinateur joue tout seul).')};
             // la personne s'assoit en bas (Sud), les autres dans l'ordre autour de la table
             const order = [humans[0], ...c.players.map((p, i) => i).filter(i => i !== humans[0])];
-            let names = order.map(i => c.players[i].name || SEATS[c.players.length][i]);
+            let names = order.map(i => c.players[i].name || seatAt(c.players.length, i));
             if (c.names && Pl()?.ancestors) { const list = await Pl().ancestors(c.seed, order.length); names = names.map((n, k) => (k && list[k - 1] ? list[k - 1].name : n)); }
             const seed = `${c.seed}${prev ? 'r' + ((prev.round || 1) + 1) : ''}`;
             const st = C().create(c.game, {n: order.length, levels: order.map(i => c.players[i].ai || 'moyen'), seed, names});
@@ -112,7 +120,7 @@
             let sel = [], pick = null, hintA = null, pause = null, botT = 0, autoT = 0, cw = 64, suitFor = null, msg = '', lastMsg = '';
             const hist = [];
             const delay = () => (PL?.calm?.() ? 120 : DELAY[c.speed] || 560);
-            const name = p => st().names[p] || `Joueur ${p + 1}`;
+            const name = p => st().names[p] || i18n('Joueur {n}', {n: String(p + 1)});
             const label = p => (p === me ? esc(name(p)) : `🤖 ${esc(name(p))}`);
             const seatOf = p => { const n = st().n; if (p === 0) return 's'; if (n === 2) return 'n'; if (n === 3) return p === 1 ? 'w' : 'e'; return ['s', 'w', 'n', 'e'][p]; };
             const fmt = ms => (PL?.fmt ? PL.fmt(ms) : api.fmtTime ? api.fmtTime(ms) : `${Math.floor(ms / 60000)}:${String(Math.floor(ms / 1000) % 60).padStart(2, '0')}`);
@@ -132,15 +140,15 @@
                     if (e.key === 'Enter' && !e.target.closest?.('button, a')) { if (st().phase === 'end') { act('next'); return true; } if (K === 'bataille' && myTurn()) { act('flip'); return true; } }
                     return false;
                 },
-                menu: () => [K === 'bataille' && !over() ? {icon: '⏩', label: 'Jouer jusqu’à la fin', run: () => autoBattle()} : null,
-                    st().lastTrick ? {icon: '👁', label: 'Revoir le dernier pli', run: () => { pause = {trick: st().lastTrick, look: true}; draw(); clearTimeout(botT); botT = setTimeout(() => { pause = null; pump(); }, 2600); }} : null,
-                    over() ? null : {icon: '🏳', label: 'Abandonner la partie', danger: true, run: resign}].filter(Boolean),
+                menu: () => [K === 'bataille' && !over() ? {icon: '⏩', label: i18n('Jouer jusqu’à la fin'), run: () => autoBattle()} : null,
+                    st().lastTrick ? {icon: '👁', label: i18n('Revoir le dernier pli'), run: () => { pause = {trick: st().lastTrick, look: true}; draw(); clearTimeout(botT); botT = setTimeout(() => { pause = null; pump(); }, 2600); }} : null,
+                    over() ? null : {icon: '🏳', label: i18n('Abandonner la partie'), danger: true, run: resign}].filter(Boolean),
             }) : null;
             const paused = () => !!sh?.paused;
 
             /* ── une carte (le dessin des patiences ; les figures avec un portrait) ── */
             const face = card => {
-                if (K === 'tarot' && card.s === 5) return '<span class="pc-mid cx-excuse"><b>★</b><small>Excuse</small></span>';
+                if (K === 'tarot' && card.s === 5) return `<span class="pc-mid cx-excuse"><b>★</b><small>${esc(i18n('Excuse', {ctx: 'carte'}))}</small></span>`;
                 if (K === 'tarot' && card.s === 4) return `<span class="pc-c">${card.r}<i>✦</i></span><span class="pc-mid cx-atout"><b>${card.r}</b></span><span class="pc-c pc-c2">${card.r}<i>✦</i></span>`;
                 const rk = K === 'tarot' ? TRANK[card.r] : RANK[card.r], fig = card.r >= 11, p = fig && g.faces ? g.faces[`${card.r}-${card.s}`] : null;
                 const mid = p ? `<span class="cx-por">${api.avatar ? api.avatar(p, 48) : ''}<small>${esc(p.first || p.name || '')}</small></span>` : fig ? `<b>${rk}</b>` : SUIT[card.s];
@@ -149,7 +157,7 @@
             const cname = card => { const p = g.faces && card.s < 4 && card.r >= 11 ? g.faces[`${card.r}-${card.s}`] : null; return CC.cardName(card, K) + (p ? ` (${p.name})` : ''); };
             const cardBtn = (card, extra = '') => `<button type="button" class="pc-card cx-card${card.s < 2 ? ' is-red' : ''}${extra}" data-c="${card.i}" aria-label="${esc(cname(card))}">${face(card)}</button>`;
             const cardView = (card, extra = '') => `<span class="pc-card cx-card${card.s < 2 ? ' is-red' : ''}${extra}" role="img" aria-label="${esc(cname(card))}">${face(card)}</span>`;
-            const back = (extra = '', lbl = 'Carte retournée') => `<span class="pc-card cx-card is-back${extra}" role="img" aria-label="${esc(lbl)}"></span>`;
+            const back = (extra = '', lbl = i18n('Carte retournée')) => `<span class="pc-card cx-card is-back${extra}" role="img" aria-label="${esc(lbl)}"></span>`;
 
             /* ── ce que la personne peut faire ── */
             const myTurn = () => !over() && st().phase !== 'end' && st().turn === me && !pause && !paused();
@@ -166,42 +174,42 @@
             function seatHtml(p) {
                 const S = st(), n = S.hands[p]?.length ?? 0, on = !S.over && S.phase !== 'end' && S.turn === p;
                 let extra = '';
-                if (K === 'belote' && S.taker === p) extra += badge(`Preneur ${SUIT[S.trump]}`, 'blue');
-                if (K === 'tarot' && S.taker === p && S.bid) extra += badge(CC.helpers.CONTRACTS[S.bid], 'blue');
-                if ((K === 'belote' || K === 'tarot') && S.dealer === p) extra += badge('Donneur', 'grey');
-                if (K === 'president' && S.ranks && S.ranks.indexOf(p) >= 0) extra += badge(CC.helpers.TITLES[S.n][S.ranks.indexOf(p)], S.ranks.indexOf(p) === 0 ? 'green' : 'grey');
-                const count = K === 'crapette' ? '' : `<small>${api.plural(n, 'carte')}</small>`;
+                if (K === 'belote' && S.taker === p) extra += badge(i18n('Preneur {sym}', {sym: SUIT[S.trump]}), 'blue');
+                if (K === 'tarot' && S.taker === p && S.bid) extra += badge(i18n(CC.helpers.CONTRACTS[S.bid]), 'blue');
+                if ((K === 'belote' || K === 'tarot') && S.dealer === p) extra += badge(i18n('Donneur'), 'grey');
+                if (K === 'president' && S.ranks && S.ranks.indexOf(p) >= 0) extra += badge(i18n(CC.helpers.TITLES[S.n][S.ranks.indexOf(p)]), S.ranks.indexOf(p) === 0 ? 'green' : 'grey');
+                const count = K === 'crapette' ? '' : `<small>${esc(api.plural(n, 'carte'))}</small>`;
                 const fan = p === me || K === 'crapette' ? '' : `<span class="cx-mini" aria-hidden="true">${Array.from({length: Math.min(4, n)}, () => '<i></i>').join('')}</span>`;
                 return `<div class="cx-seat cx-${seatOf(p)}${on ? ' is-turn' : ''}" data-seat="${p}"><span class="cx-name"><i class="cx-dot" style="--pc:${esc(g.colors?.[p] || '#000')}" aria-hidden="true"></i>${label(p)}</span>${count}${fan}<span class="cx-tags">${extra}</span></div>`;
             }
             const trickHtml = (cards, winner) => `<div class="cx-trick">${cards.map(x => `<span class="cx-tp cx-tp-${seatOf(x.p)}${winner === x.p ? ' is-win' : ''}">${cardView(x.c)}</span>`).join('')}</div>`;
             function centerHtml() {
                 const S = st();
-                if (pause && pause.trick) return trickHtml(pause.trick.cards, pause.trick.winner) + `<p class="cx-say">${esc(name(pause.trick.winner))} ramasse${pause.trick.pts ? ` (${api.plural(pause.trick.pts, 'point')})` : ''}${pause.look ? ' — le dernier pli' : ''}</p>`;
+                if (pause && pause.trick) return trickHtml(pause.trick.cards, pause.trick.winner) + `<p class="cx-say">${esc(pause.look ? (pause.trick.pts ? i18n('{name} ramasse ({points}) — le dernier pli', {name: name(pause.trick.winner), points: api.plural(pause.trick.pts, 'point')}) : i18n('{name} ramasse — le dernier pli', {name: name(pause.trick.winner)})) : (pause.trick.pts ? i18n('{name} ramasse ({points})', {name: name(pause.trick.winner), points: api.plural(pause.trick.pts, 'point')}) : i18n('{name} ramasse', {name: name(pause.trick.winner)})))}</p>`;
                 if (K === 'bataille') {
-                    const L = S.last; if (!L) return '<p class="cx-say">Retourne ta première carte !</p>';
+                    const L = S.last; if (!L) return `<p class="cx-say">${esc(i18n('Retourne ta première carte !'))}</p>`;
                     const by = {}; L.shown.forEach(x => { (by[x.p] = by[x.p] || []).push(x); });
-                    return `<div class="cx-bat">${Object.entries(by).map(([p, l]) => `<div class="cx-bat-col${Number(p) === L.winner ? ' is-win' : ''}"><small>${label(Number(p))}</small><span class="cx-bat-cards">${l.map(x => (x.hidden ? back('', 'Carte cachée de la bataille') : cardView(x.c))).join('')}</span></div>`).join('')}</div><p class="cx-say">${L.battles ? '⚔️ Bataille ! ' : ''}${esc(name(L.winner))} ramasse ${L.n} cartes.</p>`;
+                    return `<div class="cx-bat">${Object.entries(by).map(([p, l]) => `<div class="cx-bat-col${Number(p) === L.winner ? ' is-win' : ''}"><small>${label(Number(p))}</small><span class="cx-bat-cards">${l.map(x => (x.hidden ? back('', i18n('Carte cachée de la bataille')) : cardView(x.c))).join('')}</span></div>`).join('')}</div><p class="cx-say">${esc(i18n(L.battles ? '⚔️ Bataille ! {name} ramasse {n} cartes.' : '{name} ramasse {n} cartes.', {name: name(L.winner), n: String(L.n)}))}</p>`;
                 }
                 if (K === 'huit') {
                     const t = S.pile[S.pile.length - 1];
-                    return `<div class="cx-piles"><button type="button" class="cx-stock" data-cx-act="draw" ${legal().some(a => a.t === 'draw') ? '' : 'disabled'} aria-label="Piocher (${S.stock.length} cartes)">${back()}<em class="pc-count">${S.stock.length}</em></button>${cardView(t)}<span class="cx-suit${S.suit < 2 ? ' is-red' : ''}" title="Couleur demandée" aria-label="Couleur demandée : ${CC.SUIT_NAME[S.suit]}">${SUIT[S.suit]}</span></div>
-                        <p class="cx-say">${S.pending ? `⚠️ ${esc(name(S.turn))} doit piocher ${S.pending} cartes (ou poser un 2).` : `On joue du ${CC.SUIT_NAME[S.suit]} ${SUIT[S.suit]} ou un ${CC.RANK_NAME[t.r]}.`}${S.dir < 0 && S.n > 2 ? ' · sens inverse ↺' : ''}</p>`;
+                    return `<div class="cx-piles"><button type="button" class="cx-stock" data-cx-act="draw" ${legal().some(a => a.t === 'draw') ? '' : 'disabled'} aria-label="${esc(i18n('Piocher ({n} cartes)', {n: String(S.stock.length)}))}">${back()}<em class="pc-count">${S.stock.length}</em></button>${cardView(t)}<span class="cx-suit${S.suit < 2 ? ' is-red' : ''}" title="${esc(i18n('Couleur demandée'))}" aria-label="${esc(i18n('Couleur demandée : {suit}', {suit: sn(S.suit)}))}">${SUIT[S.suit]}</span></div>
+                        <p class="cx-say">${esc(S.pending ? i18n('⚠️ {name} doit piocher {n} cartes (ou poser un 2).', {name: name(S.turn), n: String(S.pending)}) : i18n('On joue du {suit} {sym} ou un {rank}.', {suit: sn(S.suit), sym: SUIT[S.suit], rank: rn(t.r)}))}${S.dir < 0 && S.n > 2 ? ` · ${esc(i18n('sens inverse ↺'))}` : ''}</p>`;
                 }
                 if (K === 'president') {
-                    if (!S.cur) return `<p class="cx-say">${S.turn === me ? 'À toi de commencer : pose une ou plusieurs cartes de même valeur.' : `${esc(name(S.turn))} commence.`}</p>`;
-                    return `<div class="cx-piles">${S.cur.cards.map(x => cardView(x)).join('')}</div><p class="cx-say">${esc(name(S.cur.by))} a posé ${S.cur.count > 1 ? `${S.cur.count} cartes` : 'une carte'}${S.passed.length ? ` · ${S.passed.map(q => esc(name(q))).join(', ')} ${S.passed.length > 1 ? 'passent' : 'passe'}` : ''}.</p>`;
+                    if (!S.cur) return `<p class="cx-say">${esc(S.turn === me ? i18n('À toi de commencer : pose une ou plusieurs cartes de même valeur.') : i18n('{name} commence.', {name: name(S.turn)}))}</p>`;
+                    return `<div class="cx-piles">${S.cur.cards.map(x => cardView(x)).join('')}</div><p class="cx-say">${esc(S.cur.count > 1 ? i18n('{name} a posé {n} cartes', {name: name(S.cur.by), n: String(S.cur.count)}) : i18n('{name} a posé une carte', {name: name(S.cur.by)}))}${S.passed.length ? ` · ${esc(i18n(S.passed.length > 1 ? '{names} passent' : '{names} passe', {names: S.passed.map(q => name(q)).join(', ')}))}` : ''}.</p>`;
                 }
-                if (K === 'belote' && (S.phase === 'bid1' || S.phase === 'bid2')) return `<div class="cx-piles">${cardView(S.turned)}</div><p class="cx-say">${S.phase === 'bid1' ? `Qui prend à ${SUIT[S.turned.s]} ${CC.SUIT_NAME[S.turned.s]} ?` : 'Second tour : on peut choisir une autre couleur.'}</p>`;
-                if (K === 'tarot' && S.phase === 'bid') return `<div class="cx-piles cx-chien">${Array.from({length: 6}, () => back('', 'Le chien')).join('')}</div><p class="cx-say">Le chien (6 cartes). ${S.bid ? `Contrat demandé : ${esc(CC.helpers.CONTRACTS[S.bid])} (${esc(name(S.taker))}).` : 'Personne n’a encore pris.'}</p>`;
-                if (K === 'tarot' && S.phase === 'ecart') return `<p class="cx-say">${S.turn === me ? `Le chien est dans ta main (cartes marquées en jaune). Choisis 6 cartes à mettre à l’écart : ${sel.length} / 6.` : `${esc(name(S.taker))} fait son écart…`}</p>`;
-                if (K === 'dame' && S.phase === 'pass') { const d = ({1: 'à ton voisin de gauche (Ouest)', 3: 'à ton voisin de droite (Est)', 2: 'au joueur d’en face (Nord)'})[[1, 3, 2, 0][(S.manche - 1) % 4]]; return `<p class="cx-say">Choisis 3 cartes à donner ${d} : ${sel.length} / 3.</p>`; }
-                if ((S.phase === 'end' || S.over) && S.lastTrick) return trickHtml(S.lastTrick.cards, S.lastTrick.winner) + `<p class="cx-say">Le dernier pli, pour ${esc(name(S.lastTrick.winner))}.</p>`;
-                if (S.trick) return trickHtml(S.trick, -1) + (S.trick.length ? '' : `<p class="cx-say">${S.turn === me ? 'À toi d’entamer.' : `${esc(name(S.turn))} entame.`}</p>`);
+                if (K === 'belote' && (S.phase === 'bid1' || S.phase === 'bid2')) return `<div class="cx-piles">${cardView(S.turned)}</div><p class="cx-say">${esc(S.phase === 'bid1' ? i18n('Qui prend à {sym} {suit} ?', {sym: SUIT[S.turned.s], suit: sn(S.turned.s)}) : i18n('Second tour : on peut choisir une autre couleur.'))}</p>`;
+                if (K === 'tarot' && S.phase === 'bid') return `<div class="cx-piles cx-chien">${Array.from({length: 6}, () => back('', i18n('Le chien'))).join('')}</div><p class="cx-say">${esc(i18n('Le chien (6 cartes).'))} ${esc(S.bid ? i18n('Contrat demandé : {contract} ({name}).', {contract: i18n(CC.helpers.CONTRACTS[S.bid]), name: name(S.taker)}) : i18n('Personne n’a encore pris.'))}</p>`;
+                if (K === 'tarot' && S.phase === 'ecart') return `<p class="cx-say">${esc(S.turn === me ? i18n('Le chien est dans ta main (cartes marquées en jaune). Choisis 6 cartes à mettre à l’écart : {n} / 6.', {n: String(sel.length)}) : i18n('{name} fait son écart…', {name: name(S.taker)}))}</p>`;
+                if (K === 'dame' && S.phase === 'pass') { const d = ({1: 'Choisis 3 cartes à donner à ton voisin de gauche (Ouest) : {n} / 3.', 3: 'Choisis 3 cartes à donner à ton voisin de droite (Est) : {n} / 3.', 2: 'Choisis 3 cartes à donner au joueur d’en face (Nord) : {n} / 3.'})[[1, 3, 2, 0][(S.manche - 1) % 4]]; return `<p class="cx-say">${esc(i18n(d, {n: String(sel.length)}))}</p>`; }
+                if ((S.phase === 'end' || S.over) && S.lastTrick) return trickHtml(S.lastTrick.cards, S.lastTrick.winner) + `<p class="cx-say">${esc(i18n('Le dernier pli, pour {name}.', {name: name(S.lastTrick.winner)}))}</p>`;
+                if (S.trick) return trickHtml(S.trick, -1) + (S.trick.length ? '' : `<p class="cx-say">${esc(S.turn === me ? i18n('À toi d’entamer.') : i18n('{name} entame.', {name: name(S.turn)}))}</p>`);
                 return '';
             }
             function handHtml() {
-                if (K === 'bataille') { const n = st().hands[me].length; return `<button type="button" class="cx-stock" data-cx-act="flip" ${myTurn() ? '' : 'disabled'} aria-label="Ton tas : ${api.plural(n, 'carte')}. Retourner la carte du dessus">${n ? back() : '<span class="pc-slot cx-slot"></span>'}<em class="pc-count">${n}</em></button>`; }
+                if (K === 'bataille') { const n = st().hands[me].length; return `<button type="button" class="cx-stock" data-cx-act="flip" ${myTurn() ? '' : 'disabled'} aria-label="${esc(i18n('Ton tas : {cards}. Retourner la carte du dessus', {cards: api.plural(n, 'carte')}))}">${n ? back() : '<span class="pc-slot cx-slot"></span>'}<em class="pc-count">${n}</em></button>`; }
                 const S = st(), h = sortHand(S.hands[me] || []), ok = playableIds(), mp = multiPhase(), mine = myTurn();
                 const chien = K === 'tarot' && S.phase === 'ecart' ? new Set(S.chien.map(x => x.i)) : null, got = K === 'dame' && S.tricks === 0 ? new Set(S.received || []) : null;
                 return h.map(card => {
@@ -217,41 +225,41 @@
             function actionsHtml() {
                 const S = st(), L = legal(), b = (a, text, extra = '', cls = 'secondary') => `<button type="button" class="button small ${cls}" data-cx-act="${a}" ${extra}>${text}</button>`;
                 if (S.over) return '';
-                if (S.phase === 'end') return b('next', `▶ ${K === 'tarot' ? 'Donne' : 'Manche'} suivante`, 'data-shortcut="Entrée"', '');
+                if (S.phase === 'end') return b('next', esc(i18n(K === 'tarot' ? '▶ Donne suivante' : '▶ Manche suivante')), 'data-shortcut="Entrée"', '');
                 if (!myTurn()) return '';
-                if (K === 'bataille') return b('flip', 'Retourner ma carte', 'data-shortcut="Entrée"', '') + b('auto', '⏩ Jusqu’à la fin');
-                if (suitFor != null) return `<p class="jf-small"><b>Quelle couleur demandes-tu ?</b></p><div class="cx-suits">${[0, 1, 2, 3].map(s => `<button type="button" class="button small secondary cx-suitb${s < 2 ? ' is-red' : ''}" data-cx-suit="${s}">${SUIT[s]} ${CC.SUIT_NAME[s]}</button>`).join('')}</div>${b('cancel', 'Annuler')}`;
-                if (K === 'huit') return (L.some(a => a.t === 'draw') ? b('draw', S.pending ? `Piocher ${S.pending} cartes` : 'Piocher') : '') + (L.some(a => a.t === 'pass') ? b('pass', 'Passer') : '');
-                if (K === 'dame' && S.phase === 'pass') return b('give', 'Donner ces 3 cartes', sel.length === 3 ? '' : 'disabled', '');
-                if (K === 'president') return b('play', sel.length ? `Poser ${api.plural(sel.length, 'carte')}` : 'Poser', sel.length ? '' : 'disabled', '') + (L.some(a => a.t === 'pass') ? b('pass', 'Passer') : '');
-                if (K === 'belote' && S.phase === 'bid1') return b('take-' + S.turned.s, `Je prends à ${SUIT[S.turned.s]}`, '', '') + b('pass', 'Je passe');
-                if (K === 'belote' && S.phase === 'bid2') return L.filter(a => a.t === 'take').map(a => b('take-' + a.s, `${SUIT[a.s]} ${CC.SUIT_NAME[a.s]}`)).join('') + b('pass', 'Je passe');
-                if (K === 'tarot' && S.phase === 'bid') return L.map(a => (a.t === 'pass' ? b('pass', 'Je passe') : b('bid-' + a.v, esc(CC.helpers.CONTRACTS[a.v]), '', a.v === 1 ? '' : 'secondary'))).join('');
-                if (K === 'tarot' && S.phase === 'ecart') return b('ecart', 'Mettre à l’écart', sel.length === 6 ? '' : 'disabled', '');
+                if (K === 'bataille') return b('flip', esc(i18n('Retourner ma carte')), 'data-shortcut="Entrée"', '') + b('auto', esc(i18n('⏩ Jusqu’à la fin')));
+                if (suitFor != null) return `<p class="jf-small"><b>${esc(i18n('Quelle couleur demandes-tu ?'))}</b></p><div class="cx-suits">${[0, 1, 2, 3].map(s => `<button type="button" class="button small secondary cx-suitb${s < 2 ? ' is-red' : ''}" data-cx-suit="${s}">${SUIT[s]} ${esc(sn(s))}</button>`).join('')}</div>${b('cancel', esc(i18n('Annuler')))}`;
+                if (K === 'huit') return (L.some(a => a.t === 'draw') ? b('draw', esc(S.pending ? i18n('Piocher {n} cartes', {n: String(S.pending)}) : i18n('Piocher'))) : '') + (L.some(a => a.t === 'pass') ? b('pass', esc(i18n('Passer'))) : '');
+                if (K === 'dame' && S.phase === 'pass') return b('give', esc(i18n('Donner ces 3 cartes')), sel.length === 3 ? '' : 'disabled', '');
+                if (K === 'president') return b('play', esc(sel.length ? i18n('Poser {cards}', {cards: api.plural(sel.length, 'carte')}) : i18n('Poser')), sel.length ? '' : 'disabled', '') + (L.some(a => a.t === 'pass') ? b('pass', esc(i18n('Passer'))) : '');
+                if (K === 'belote' && S.phase === 'bid1') return b('take-' + S.turned.s, esc(i18n('Je prends à {sym}', {sym: SUIT[S.turned.s]})), '', '') + b('pass', esc(i18n('Je passe')));
+                if (K === 'belote' && S.phase === 'bid2') return L.filter(a => a.t === 'take').map(a => b('take-' + a.s, `${SUIT[a.s]} ${esc(sn(a.s))}`)).join('') + b('pass', esc(i18n('Je passe')));
+                if (K === 'tarot' && S.phase === 'bid') return L.map(a => (a.t === 'pass' ? b('pass', esc(i18n('Je passe'))) : b('bid-' + a.v, esc(i18n(CC.helpers.CONTRACTS[a.v])), '', a.v === 1 ? '' : 'secondary'))).join('');
+                if (K === 'tarot' && S.phase === 'ecart') return b('ecart', esc(i18n('Mettre à l’écart')), sel.length === 6 ? '' : 'disabled', '');
                 if (K === 'rami') {
-                    if (S.phase === 'draw') return b('draw-stock', 'Prendre dans la pioche', '', '') + b('draw-discard', 'Prendre la défausse', S.discard.length ? '' : 'disabled');
+                    if (S.phase === 'draw') return b('draw-stock', esc(i18n('Prendre dans la pioche')), '', '') + b('draw-discard', esc(i18n('Prendre la défausse')), S.discard.length ? '' : 'disabled');
                     const can = L.some(a => a.t === 'knock' && a.c === pick);
-                    return b('discard', 'Jeter cette carte', pick != null ? '' : 'disabled', '') + b('knock', '✊ Frapper avec cette carte', can ? '' : 'disabled');
+                    return b('discard', esc(i18n('Jeter cette carte')), pick != null ? '' : 'disabled', '') + b('knock', esc(i18n('✊ Frapper avec cette carte')), can ? '' : 'disabled');
                 }
-                if (K === 'crapette') return (L.some(a => a.t === 'flip') ? b('flip', 'Retourner une carte du talon', '', '') : '') + (L.some(a => a.t === 'end') ? b('end', 'Poser sur ma défausse (fin du tour)') : '') + (L.some(a => a.t === 'pass') ? b('pass', 'Finir mon tour') : '');
+                if (K === 'crapette') return (L.some(a => a.t === 'flip') ? b('flip', esc(i18n('Retourner une carte du talon')), '', '') : '') + (L.some(a => a.t === 'end') ? b('end', esc(i18n('Poser sur ma défausse (fin du tour)'))) : '') + (L.some(a => a.t === 'pass') ? b('pass', esc(i18n('Finir mon tour'))) : '');
                 return '';
             }
             function scoreHtml() {
                 const S = st();
-                if (isTeam) { const T = S.teamTotal || [0, 0]; return `<table class="cx-score"><tr><th>${esc(name(0))} + ${esc(name(2))}</th><td>${T[0]}</td></tr><tr><th>🤖 ${esc(name(1))} + ${esc(name(3))}</th><td>${T[1]}</td></tr></table><p class="muted jf-small">Manche ${S.manche}. Partie en ${CC.get('belote').E.target} points.</p>`; }
+                if (isTeam) { const T = S.teamTotal || [0, 0]; return `<table class="cx-score"><tr><th>${esc(name(0))} + ${esc(name(2))}</th><td>${T[0]}</td></tr><tr><th>🤖 ${esc(name(1))} + ${esc(name(3))}</th><td>${T[1]}</td></tr></table><p class="muted jf-small">${esc(i18n('Manche {n}. Partie en {target} points.', {n: String(S.manche), target: String(CC.get('belote').E.target)}))}</p>`; }
                 if (K === 'bataille') return `<p class="jf-small">${api.plural(S.plis, 'pli')} joués.</p>`;
-                if (K === 'crapette') return `<p class="jf-small">Cartes encore à poser : ${[0, 1].map(p => `${label(p)} ${CC.get('crapette').E.left(S, p)}`).join(' · ')}</p>`;
-                const E = CC.get(K).E, goal = E.target ? `Partie en ${E.target} points${K === 'huit' || K === 'dame' ? ' (le moins de points gagne)' : ''}.` : E.manches ? `Partie en ${E.manches} ${K === 'tarot' ? 'donnes' : 'manches'}.` : '';
-                return `<table class="cx-score">${S.total.map((v, p) => `<tr><th>${label(p)}</th><td>${v}</td>${S.lastScore ? `<td class="muted">${S.lastScore[p] > 0 ? '+' : ''}${S.lastScore[p]}</td>` : ''}</tr>`).join('')}</table><p class="muted jf-small">${K === 'tarot' ? 'Donne' : 'Manche'} ${S.manche}. ${goal}</p>`;
+                if (K === 'crapette') return `<p class="jf-small">${esc(i18n('Cartes encore à poser :'))} ${[0, 1].map(p => `${label(p)} ${CC.get('crapette').E.left(S, p)}`).join(' · ')}</p>`;
+                const E = CC.get(K).E, goal = E.target ? i18n(K === 'huit' || K === 'dame' ? 'Partie en {n} points (le moins de points gagne).' : 'Partie en {n} points.', {n: String(E.target)}) : E.manches ? i18n(K === 'tarot' ? 'Partie en {n} donnes.' : 'Partie en {n} manches.', {n: String(E.manches)}) : '';
+                return `<table class="cx-score">${S.total.map((v, p) => `<tr><th>${label(p)}</th><td>${v}</td>${S.lastScore ? `<td class="muted">${S.lastScore[p] > 0 ? '+' : ''}${S.lastScore[p]}</td>` : ''}</tr>`).join('')}</table><p class="muted jf-small">${esc(i18n(K === 'tarot' ? 'Donne {n}.' : 'Manche {n}.', {n: String(S.manche)}))} ${esc(goal)}</p>`;
             }
             const iWon = () => (isTeam ? st().winTeam === 0 : st().winner === me);
             function statusText() {
                 const S = st();
-                if (paused()) return '⏸ En pause';
-                if (S.over) return iWon() ? '🏆 Tu gagnes la partie !' : isTeam ? `L’équipe ${esc(name(1))} et ${esc(name(3))} gagne la partie.` : `${esc(name(S.winner))} gagne la partie.`;
-                if (S.phase === 'end') return `Fin de la ${K === 'tarot' ? 'donne' : 'manche'}`;
+                if (paused()) return esc(i18n('⏸ En pause'));
+                if (S.over) return esc(iWon() ? i18n('🏆 Tu gagnes la partie !') : isTeam ? i18n('L’équipe {a} et {b} gagne la partie.', {a: name(1), b: name(3)}) : i18n('{name} gagne la partie.', {name: name(S.winner)}));
+                if (S.phase === 'end') return esc(i18n(K === 'tarot' ? 'Fin de la donne' : 'Fin de la manche'));
                 if (msg) return esc(msg);
-                return myTurn() ? (K === 'bataille' ? 'Retourne ta carte' : 'À toi de jouer') : pause?.trick ? `${esc(name(pause.trick.winner))} ramasse le pli` : `🤖 ${esc(name(S.turn))} réfléchit…`;
+                return esc(myTurn() ? i18n(K === 'bataille' ? 'Retourne ta carte' : 'À toi de jouer') : pause?.trick ? i18n('{name} ramasse le pli', {name: name(pause.trick.winner)}) : i18n('🤖 {name} réfléchit…', {name: name(S.turn)}));
             }
             /** les joueurs dans la barre : nom, ordinateur, score, à qui le tour */
             function barPlayers() {
@@ -265,36 +273,36 @@
                 const ov = Math.min(6, Math.floor((tableW - 20 - handN * cw) / Math.max(1, handN - 1)));
                 const crap = K === 'crapette', hide = paused() ? ' jp-hide' : '';
                 host.innerHTML = `${sh ? sh.bar(barPlayers()) : ''}<div class="goose-game-layout jfp cx cx-${esc(K)}${wide ? '' : ' is-stacked'}" data-back="${esc(c.back)}" style="--cw:${cw}px;--ch:${Math.round(cw * 1.4)}px;--ov:${ov}px">
-                    <div class="goose-board-wrap jp-wrap">${sh ? sh.pauseHtml() : ''}<div class="cx-board${hide}" role="application" aria-label="La table : ${esc(def.name)}">
+                    <div class="goose-board-wrap jp-wrap">${sh ? sh.pauseHtml() : ''}<div class="cx-board${hide}" role="application" aria-label="${esc(i18n('La table : {name}', {name: def.name}))}">
                       ${crap ? crapetteHtml() : `<div class="cx-table cx-n${S.n}">${Array.from({length: S.n}, (_, p) => p).filter(p => p !== me).map(seatHtml).join('')}<div class="cx-center" aria-live="polite">${centerHtml()}</div></div>
-                      <div class="cx-me">${seatHtml(me)}<div class="cx-hand" role="group" aria-label="${K === 'bataille' ? 'Ton tas' : 'Ta main'}">${handHtml()}</div>${K === 'rami' ? ramiInfo() : ''}${wide ? '' : `<div class="jfp-tools cx-acts">${actionsHtml()}</div>`}</div>`}${crap && !wide ? `<div class="jfp-tools cx-acts">${actionsHtml()}</div>` : ''}
+                      <div class="cx-me">${seatHtml(me)}<div class="cx-hand" role="group" aria-label="${esc(i18n(K === 'bataille' ? 'Ton tas' : 'Ta main'))}">${handHtml()}</div>${K === 'rami' ? ramiInfo() : ''}${wide ? '' : `<div class="jfp-tools cx-acts">${actionsHtml()}</div>`}</div>`}${crap && !wide ? `<div class="jfp-tools cx-acts">${actionsHtml()}</div>` : ''}
                     </div></div>
                     <aside class="goose-panel jp-panel"><p class="goose-status jf-big" role="status">${statusText()}</p>
                       ${lastMsg && S.over ? `<p class="jp-newrec">${esc(lastMsg)}</p>` : ''}
                       ${wide ? `<div class="jfp-tools cx-acts">${actionsHtml()}</div>` : ''}
                       ${S.phase === 'end' || S.over ? endHtml() : ''}
                       <div class="cx-scorebox">${scoreHtml()}</div>
-                      ${S.over ? '<p class="muted jf-small">« ↻ Rejouer » en haut : une revanche avec les mêmes réglages.</p>' : ''}
+                      ${S.over ? `<p class="muted jf-small">${esc(i18n('« ↻ Rejouer » en haut : une revanche avec les mêmes réglages.'))}</p>` : ''}
                       ${PL?.records ? PL.records.html('cartes', K, def.name) : ''}
-                      <details class="cx-log"><summary>📜 Ce qui s’est passé</summary><ol>${S.log.slice(-8).map(l => `<li>${esc(l)}</li>`).join('')}</ol></details>
-                      <p class="muted jf-small">Clic ou toucher : une carte de ta main. Clavier : ← → puis Entrée. ⌘Z annule, H un conseil, Échap pause.</p>
+                      <details class="cx-log"><summary>${esc(i18n('📜 Ce qui s’est passé'))}</summary><ol>${S.log.slice(-8).map(l => `<li>${esc(l)}</li>`).join('')}</ol></details>
+                      <p class="muted jf-small">${esc(i18n('Clic ou toucher : une carte de ta main. Clavier : ← → puis Entrée. ⌘Z annule, H un conseil, Échap pause.'))}</p>
                     </aside></div>`;
                 sh?.bind(); bind();
             }
             function endHtml() {
                 const S = st(); let out = '';
                 if (K === 'rami' && S.result && !S.result.nul) {
-                    const show = (p, M) => `<div class="cx-melds"><small>${label(p)}</small>${M.melds.map(m => `<span class="cx-meld">${m.map(x => cardView(x)).join('')}</span>`).join('')}${M.dead.length ? `<span class="cx-meld is-dead" title="Cartes seules">${M.dead.map(x => cardView(x)).join('')}</span>` : ''}</div>`;
+                    const show = (p, M) => `<div class="cx-melds"><small>${label(p)}</small>${M.melds.map(m => `<span class="cx-meld">${m.map(x => cardView(x)).join('')}</span>`).join('')}${M.dead.length ? `<span class="cx-meld is-dead" title="${esc(i18n('Cartes seules'))}">${M.dead.map(x => cardView(x)).join('')}</span>` : ''}</div>`;
                     out += show(S.result.knocker, S.result.K) + show(1 - S.result.knocker, S.result.D);
                 }
-                if (K === 'belote' && S.detail) out += `<p class="jf-small">Plis : ${S.detail.card[0]} / ${S.detail.card[1]}${S.detail.ann[0] + S.detail.ann[1] ? ` · annonces ${S.detail.ann[0]} / ${S.detail.ann[1]}` : ''}${S.detail.bel[0] + S.detail.bel[1] ? ` · belote ${S.detail.bel[0]} / ${S.detail.bel[1]}` : ''}${S.detail.capot >= 0 ? ' · capot !' : ''}</p><p class="jf-small"><b>Cette manche : ${S.lastScore[0]} / ${S.lastScore[1]}</b></p>`;
-                if (K === 'tarot' && S.detail) out += `<p class="jf-small">${esc(name(S.taker))} : ${esc(S.detail.contract)}, ${S.detail.pts} points pour ${S.detail.need} demandés (${api.plural(S.detail.oud, 'bout')}) — ${S.detail.win ? 'réussi ✓' : 'chuté'}${S.detail.pab ? ' · Petit au bout' : ''}.</p>`;
+                if (K === 'belote' && S.detail) out += `<p class="jf-small">${esc(i18n('Plis : {a} / {b}', {a: String(S.detail.card[0]), b: String(S.detail.card[1])}))}${S.detail.ann[0] + S.detail.ann[1] ? ` · ${esc(i18n('annonces {a} / {b}', {a: String(S.detail.ann[0]), b: String(S.detail.ann[1])}))}` : ''}${S.detail.bel[0] + S.detail.bel[1] ? ` · ${esc(i18n('belote {a} / {b}', {a: String(S.detail.bel[0]), b: String(S.detail.bel[1])}))}` : ''}${S.detail.capot >= 0 ? ` · ${esc(i18n('capot !'))}` : ''}</p><p class="jf-small"><b>${esc(i18n('Cette manche : {a} / {b}', {a: String(S.lastScore[0]), b: String(S.lastScore[1])}))}</b></p>`;
+                if (K === 'tarot' && S.detail) out += `<p class="jf-small">${esc(i18n(S.detail.win ? '{name} : {contract}, {pts} points pour {need} demandés ({bouts}) — réussi ✓' : '{name} : {contract}, {pts} points pour {need} demandés ({bouts}) — chuté', {name: name(S.taker), contract: i18n(S.detail.contract), pts: String(S.detail.pts), need: String(S.detail.need), bouts: api.plural(S.detail.oud, 'bout')}))}${S.detail.pab ? ` · ${esc(i18n('Petit au bout'))}` : ''}.</p>`;
                 return out ? `<div class="cx-end">${out}</div>` : '';
             }
             function ramiInfo() {
                 const S = st(), M = CC.helpers.bestMelds(S.hands[me]), can = myTurn() && S.phase === 'draw', top = S.discard[S.discard.length - 1];
-                return `<p class="muted jf-small cx-dw">Tes cartes seules : ${api.plural(M.dw, 'point')} · ${api.plural(M.melds.length, 'combinaison')}${S.phase === 'discard' && myTurn() ? ' · clique la carte à jeter' : ''}</p>
-                    <div class="cx-piles cx-rami-piles"><button type="button" class="cx-stock" data-cx-act="draw-stock" ${can ? '' : 'disabled'} aria-label="La pioche (${S.stock.length} cartes)">${back()}<em class="pc-count">${S.stock.length}</em></button>${top ? `<button type="button" class="cx-stock" data-cx-act="draw-discard" ${can ? '' : 'disabled'} aria-label="Prendre ${esc(CC.cardName(top))} sur la défausse">${cardView(top)}</button>` : ''}</div>`;
+                return `<p class="muted jf-small cx-dw">${esc(i18n('Tes cartes seules : {points} · {melds}', {points: api.plural(M.dw, 'point'), melds: api.plural(M.melds.length, 'combinaison')}))}${S.phase === 'discard' && myTurn() ? ` · ${esc(i18n('clique la carte à jeter'))}` : ''}</p>
+                    <div class="cx-piles cx-rami-piles"><button type="button" class="cx-stock" data-cx-act="draw-stock" ${can ? '' : 'disabled'} aria-label="${esc(i18n('La pioche ({n} cartes)', {n: String(S.stock.length)}))}">${back()}<em class="pc-count">${S.stock.length}</em></button>${top ? `<button type="button" class="cx-stock" data-cx-act="draw-discard" ${can ? '' : 'disabled'} aria-label="${esc(i18n('Prendre {card} sur la défausse', {card: CC.cardName(top)}))}">${cardView(top)}</button>` : ''}</div>`;
             }
 
             /* ── la Crapette : son plateau à elle ── */
@@ -304,19 +312,19 @@
                 const pileBtn = (id, cards, lbl, o = {}) => {
                     const t = top(cards), face = t && t.up !== false && !o.down;
                     const inner = !t ? `<span class="pc-slot cx-slot"><span>${esc(o.empty || '')}</span></span>` : face ? cardView(t, t.o ? ' is-o1f' : '') : back(t.o ? ' is-o1' : '');
-                    return `<button type="button" class="cx-pile${pick === id ? ' is-sel' : ''}${isTgt(id) ? ' is-target' : ''}${isHint(id) ? ' is-hint' : ''}" data-pile="${esc(id)}" aria-label="${esc(lbl)}${face ? ' : ' + esc(CC.cardName(t)) : ''}${cards.length > 1 ? `, ${cards.length} cartes` : ''}">${inner}${o.count && cards.length ? `<em class="pc-count">${cards.length}</em>` : ''}</button>`;
+                    return `<button type="button" class="cx-pile${pick === id ? ' is-sel' : ''}${isTgt(id) ? ' is-target' : ''}${isHint(id) ? ' is-hint' : ''}" data-pile="${esc(id)}" aria-label="${esc(lbl)}${face ? ' : ' + esc(CC.cardName(t)) : ''}${cards.length > 1 ? `, ${esc(i18n('{n} cartes', {n: String(cards.length)}))}` : ''}">${inner}${o.count && cards.length ? `<em class="pc-count">${cards.length}</em>` : ''}</button>`;
                 };
                 const col = k => { const l = S.cols[k], id = 'c' + k;
-                    return `<button type="button" class="cx-col${pick === id ? ' is-sel' : ''}${isTgt(id) ? ' is-target' : ''}${isHint(id) ? ' is-hint' : ''}" data-pile="${id}" aria-label="Colonne ${k + 1}${l.length ? ' : ' + esc(CC.cardName(top(l))) : ' (vide)'}">${l.length ? l.map(x => `<span class="cx-colc">${cardView(x, x.o ? ' is-o1f' : '')}</span>`).join('') : '<span class="pc-slot cx-slot"></span>'}</button>`; };
+                    return `<button type="button" class="cx-col${pick === id ? ' is-sel' : ''}${isTgt(id) ? ' is-target' : ''}${isHint(id) ? ' is-hint' : ''}" data-pile="${id}" aria-label="${esc(l.length ? i18n('Colonne {n} : {card}', {n: String(k + 1), card: CC.cardName(top(l))}) : i18n('Colonne {n} (vide)', {n: String(k + 1)}))}">${l.length ? l.map(x => `<span class="cx-colc">${cardView(x, x.o ? ' is-o1f' : '')}</span>`).join('') : '<span class="pc-slot cx-slot"></span>'}</button>`; };
                 const cap = (html, t) => `<span class="cx-pw">${html}<small aria-hidden="true">${t}</small></span>`;
-                const side = p => `<div class="cx-crow">${cap(pileBtn('cr' + p, S.crap[p], `Crapette de ${name(p)}`, {count: true, empty: ''}), 'Crapette')}${cap(pileBtn('tl' + p, S.talon[p], `Talon de ${name(p)}`, {count: true, down: true, empty: ''}), 'Talon')}${cap(pileBtn('h' + p, S.hand[p] ? [S.hand[p]] : [], p === me ? 'Ta carte retournée' : `Carte retournée de ${name(p)}`), 'Retournée')}${cap(pileBtn('df' + p, S.disc[p], `Défausse de ${name(p)}`, {count: true, empty: ''}), 'Défausse')}<span class="cx-who">${label(p)}${S.turn === p && !S.over ? ' · à son tour' : ''}<small>${api.plural(E.left(S, p), 'carte')} à poser</small></span></div>`;
+                const side = p => `<div class="cx-crow">${cap(pileBtn('cr' + p, S.crap[p], i18n('Crapette de {name}', {name: name(p)}), {count: true, empty: ''}), esc(i18n('Crapette')))}${cap(pileBtn('tl' + p, S.talon[p], i18n('Talon de {name}', {name: name(p)}), {count: true, down: true, empty: ''}), esc(i18n('Talon')))}${cap(pileBtn('h' + p, S.hand[p] ? [S.hand[p]] : [], p === me ? i18n('Ta carte retournée') : i18n('Carte retournée de {name}', {name: name(p)})), esc(i18n('Retournée')))}${cap(pileBtn('df' + p, S.disc[p], i18n('Défausse de {name}', {name: name(p)}), {count: true, empty: ''}), esc(i18n('Défausse')))}<span class="cx-who">${label(p)}${S.turn === p && !S.over ? ` · ${esc(i18n('à son tour'))}` : ''}<small>${esc(i18n('{cards} à poser', {cards: api.plural(E.left(S, p), 'carte')}))}</small></span></div>`;
                 return `<div class="cx-crap">${side(1)}<div class="cx-cols">${[4, 5, 6, 7].map(col).join('')}</div>
-                    <div class="cx-found" role="group" aria-label="Les fondations">${S.found.map((f, k) => pileBtn('f' + k, f, `Fondation ${k + 1}`, {empty: 'A'})).join('')}</div>
+                    <div class="cx-found" role="group" aria-label="${esc(i18n('Les fondations'))}">${S.found.map((f, k) => pileBtn('f' + k, f, i18n('Fondation {n}', {n: String(k + 1)}), {empty: 'A'})).join('')}</div>
                     <div class="cx-cols">${[0, 1, 2, 3].map(col).join('')}</div>${side(me)}</div>`;
             }
 
             /* ── jouer ── */
-            const fail = m => { msg = '⛔ ' + (m || 'Ce coup n’est pas permis.'); draw(); };
+            const fail = m => { msg = '⛔ ' + (m || i18n('Ce coup n’est pas permis.')); draw(); };
             function human(a) {
                 if (!myTurn()) return;
                 const before = JSON.stringify(g.st), tricks = st().tricks;
@@ -336,11 +344,11 @@
                 const S = st();
                 if (S.over && !g.recorded) {
                     g.recorded = true; g.finished = true; sh?.settle();
-                    const won = iWon(), r = PL?.records?.add('cartes', K, won ? 'w' : 'l', won ? {v: Math.round(g.ms / 1000), label: `gagné en ${fmt(g.ms)}`, low: true} : null);
-                    if (r?.newBest) lastMsg = '🏆 Nouveau record !';
-                    api.toast?.(won ? `🏆 ${def.name} : tu gagnes !` : `${def.name} : partie finie.`); api.sidebar();
+                    const won = iWon(), r = PL?.records?.add('cartes', K, won ? 'w' : 'l', won ? {v: Math.round(g.ms / 1000), label: i18n('gagné en {time}', {time: fmt(g.ms)}), low: true} : null);
+                    if (r?.newBest) lastMsg = i18n('🏆 Nouveau record !');
+                    api.toast?.(won ? i18n('🏆 {name} : tu gagnes !', {name: def.name}) : i18n('{name} : partie finie.', {name: def.name})); api.sidebar();
                 }
-                g.status = S.over ? (iWon() ? '🏆 Gagné' : 'Perdu') : `${K === 'tarot' ? 'Donne' : 'Manche'} ${S.manche}`;
+                g.status = S.over ? (iWon() ? '🏆 Gagné' : 'Perdu') : i18n(K === 'tarot' ? 'Donne {n}' : 'Manche {n}', {n: String(S.manche)});
                 api.save();
             }
             /** l'ordinateur joue, un coup à la fois, jusqu'au tour de la personne */
@@ -364,17 +372,17 @@
             function resign() {
                 const S = st(); if (S.over) return;
                 S.over = true; S.phase = 'over'; S.winner = isTeam ? 1 : (S.total.map((v, p) => [v, p]).filter(x => x[1] !== me).sort((a, b) => (K === 'huit' || K === 'dame' ? a[0] - b[0] : b[0] - a[0]))[0]?.[1] ?? 1); if (isTeam) S.winTeam = 1;
-                S.log.push(`${name(me)} abandonne la partie.`); clearTimeout(botT); clearTimeout(autoT); save(); draw();
+                S.log.push(i18n('{name} abandonne la partie.', {name: name(me)})); clearTimeout(botT); clearTimeout(autoT); save(); draw();
             }
             const findCard = i => st().hands.flat().find(x => x.i === i) || null;
             function giveHint() {
                 if (!myTurn() || (c.hints && g.hintsLeft <= 0)) return;
-                const a = CC.hint(st()); hintA = a; if (!a) { msg = 'Aucun conseil pour l’instant.'; return draw(); }
+                const a = CC.hint(st()); hintA = a; if (!a) { msg = i18n('Aucun conseil pour l’instant.'); return draw(); }
                 if (c.hints) g.hintsLeft--;
                 const cn = i => cname(findCard(i) || {r: 1, s: 0});
-                const say = a.t === 'play' && a.c != null ? `joue ${cn(a.c)}` : a.t === 'play' ? `pose ${a.cards.length > 1 ? `ces ${a.cards.length} cartes` : 'cette carte'}` : a.t === 'pass' ? 'passe' : a.t === 'take' ? `prends à ${SUIT[a.s]}` : a.t === 'bid' ? `annonce une ${CC.helpers.CONTRACTS[a.v]}` : a.t === 'give' ? 'donne les 3 cartes marquées' : a.t === 'discard' && a.cards ? 'mets à l’écart les 6 cartes marquées' : a.t === 'discard' ? `jette ${cn(a.c)}` : a.t === 'knock' ? `frappe en jetant ${cn(a.c)}` : a.t === 'draw' ? (a.from === 'discard' ? 'prends la défausse' : 'pioche') : a.t === 'move' ? 'déplace la carte marquée' : a.t === 'flip' ? 'retourne une carte du talon' : a.t === 'end' ? 'pose ta carte sur ta défausse' : 'joue';
+                const say = a.t === 'play' && a.c != null ? i18n('💡 Conseil : joue {card}.', {card: cn(a.c)}) : a.t === 'play' ? (a.cards.length > 1 ? i18n('💡 Conseil : pose ces {n} cartes.', {n: String(a.cards.length)}) : i18n('💡 Conseil : pose cette carte.')) : a.t === 'pass' ? i18n('💡 Conseil : passe.') : a.t === 'take' ? i18n('💡 Conseil : prends à {sym}.', {sym: SUIT[a.s]}) : a.t === 'bid' ? i18n('💡 Conseil : annonce une {contract}.', {contract: i18n(CC.helpers.CONTRACTS[a.v])}) : a.t === 'give' ? i18n('💡 Conseil : donne les 3 cartes marquées.') : a.t === 'discard' && a.cards ? i18n('💡 Conseil : mets à l’écart les 6 cartes marquées.') : a.t === 'discard' ? i18n('💡 Conseil : jette {card}.', {card: cn(a.c)}) : a.t === 'knock' ? i18n('💡 Conseil : frappe en jetant {card}.', {card: cn(a.c)}) : a.t === 'draw' ? i18n(a.from === 'discard' ? '💡 Conseil : prends la défausse.' : '💡 Conseil : pioche.') : a.t === 'move' ? i18n('💡 Conseil : déplace la carte marquée.') : a.t === 'flip' ? i18n('💡 Conseil : retourne une carte du talon.') : a.t === 'end' ? i18n('💡 Conseil : pose ta carte sur ta défausse.') : i18n('💡 Conseil : joue.');
                 if (a.cards) sel = a.cards.slice(); // Président, cartes à donner, écart : déjà choisies, il reste à valider
-                msg = `💡 Conseil : ${say}.`; api.save(); draw();
+                msg = say; api.save(); draw();
             }
             function clickCard(i) {
                 if (!myTurn()) return;
@@ -384,8 +392,8 @@
                     if (K === 'president') { const c0 = findCard(i); if (sel.map(findCard).some(x => x && CC.helpers.pv(x) !== CC.helpers.pv(c0))) sel = [i]; }
                     msg = ''; return draw();
                 }
-                if (K === 'rami') { if (S.phase !== 'discard') return fail('Prends d’abord une carte : dans la pioche ou sur la défausse.'); pick = pick === i ? null : i; return draw(); }
-                if (/^bid/.test(S.phase)) return fail('Choisis d’abord ton enchère, avec les boutons à côté de la table.');
+                if (K === 'rami') { if (S.phase !== 'discard') return fail(i18n('Prends d’abord une carte : dans la pioche ou sur la défausse.')); pick = pick === i ? null : i; return draw(); }
+                if (/^bid/.test(S.phase)) return fail(i18n('Choisis d’abord ton enchère, avec les boutons à côté de la table.'));
                 const L = CC.legal(S).filter(a => a.t === 'play' && a.c === i);
                 if (!L.length) return fail(CC.play(JSON.parse(JSON.stringify(S)), {t: 'play', c: i, s: 0}).msg);
                 if (K === 'huit' && findCard(i).r === 8) { suitFor = i; return draw(); }
@@ -409,7 +417,7 @@
                 if (pick && pick !== id) { const a = {t: 'move', from: pick, to: id}; pick = null; if (L.some(x => x.t === 'move' && x.from === a.from && x.to === id)) return human(a); return fail(CC.play(JSON.parse(JSON.stringify(S)), a).msg); }
                 if (pick === id) { pick = null; return draw(); }
                 if (L.some(x => x.t === 'move' && x.from === id)) { pick = id; hintA = null; msg = ''; return draw(); }
-                fail('Tu ne peux rien prendre ici pour l’instant.');
+                fail(i18n('Tu ne peux rien prendre ici pour l’instant.'));
             }
             function toFoundation(id) { const a = CC.legal(st()).find(x => x.t === 'move' && x.from === id && /^f\d$/.test(x.to)); if (a && myTurn()) { pick = null; human(a); } }
             /** au tour de la personne : le clavier va dans sa main (s'il n'était pas ailleurs dans la page) */
@@ -445,7 +453,7 @@
                 render(); if (key) (host.querySelector(key) || host.querySelector('.cx-hand [data-c]'))?.focus({preventScroll: true});
             };
             let rz = 0; window.addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(() => { if (host.isConnected) draw(); }, 150); }, {signal: api.signal});
-            api.sub(`${def.icon} ${def.name} · ${api.plural(st().n, 'joueur')}${g.faces ? ' · figures aux portraits des ancêtres' : ''}`);
+            api.sub(`${def.icon} ${def.name} · ${api.plural(st().n, 'joueur')}${g.faces ? ` · ${i18n('figures aux portraits des ancêtres')}` : ''}`);
             api.onCleanup(() => { clearTimeout(botT); clearTimeout(autoT); sh?.settle(); sh?.stop(); api.save(); });
             pump();
         },

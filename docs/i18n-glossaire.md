@@ -528,3 +528,73 @@ sv et da `one|other`. Les verbes des boutons à l’infinitif en cs (« Uložit 
 | couche (d’une ambiance) | layer | capa | Ebene | strato | camada | warstwa | laag |
 | Jeu des 7 familles | Happy Families | Juego de las 7 familias | Quartett | Gioco delle 7 famiglie | Jogo das 7 famílias | Gra w 7 rodzin | Kwartet |
 | les vieux mots des actes | old words in records | palabras antiguas de las actas | alte Wörter in Urkunden | parole antiche degli atti | palavras antigas dos registos | dawne słowa z aktów | oude woorden in akten |
+
+## Zone « diagrammes2 » (réglages et dessins des diagrammes : cartes, vie, généalogie, chiffres, nouveaux)
+
+| Français | English | Español | Deutsch | Italiano | Português | Polski | Nederlands |
+|---|---|---|---|---|---|---|---|
+| « Depuis l’app » (onglet) | “From the app” | «Desde la app» | „Aus der App“ | «Dall’app» | «Da app» | „Z aplikacji” | ‘Uit de app’ |
+| 🧮 Compter dans ma base | 🧮 Count in my database | 🧮 Contar en mi base | 🧮 In meiner Datenbank zählen | 🧮 Conta nella mia base | 🧮 Contar na minha base | 🧮 Policz w mojej bazie | 🧮 Tellen in mijn database |
+| Tenir à jour / tenu à jour | Keep up to date / kept up to date | Mantener al día / actualizado | Aktuell halten / aktuell gehalten | Tieni aggiornato / aggiornato | Manter atualizado / atualizado | Aktualizuj / aktualizowane | Bijwerken / bijgewerkt |
+| fond de carte | base map | mapa base | Grundkarte | mappa di sfondo | mapa de fundo | podkład mapy | ondergrond |
+| alvéole (carte en hexagones) | cell | celda | Wabe | cella | célula | komórka | cel |
+| flux (migrations) | flow | flujo | Strom | flusso | fluxo | przepływ | stroom |
+| carte déformée | cartogram | mapa deformado | verzerrte Karte | mappa deformata | mapa deformado | kartogram | vervormde kaart |
+| carte qui raconte / étape | story map / stop | mapa que cuenta / etapa | erzählende Karte / Station | mappa che racconta / tappa | mapa que conta / etapa | mapa opowieści / etap | verhalende kaart / etappe |
+| sablier (diagramme) | hourglass | reloj de arena | Sanduhr | clessidra | ampulheta | klepsydra | zandloper |
+| dépouillement / battue (carte des recherches) | record index / search sweep | vaciado / batida | Auszug / Suchaktion | spoglio / battuta | levantamento / batida | wypis / przeszukanie | indexering / zoekactie |
+| grande famille (causes de décès) | main group | gran familia | Hauptgruppe | grande famiglia | grande família | główna grupa | hoofdgroep |
+| petits multiples | small multiples | pequeños múltiplos | kleine Vielfache | piccoli multipli | pequenos múltiplos | małe wielokrotności | kleine veelvouden |
+| ligne de repère | reference line | línea de referencia | Bezugslinie | linea di riferimento | linha de referência | linia odniesienia | referentielijn |
+| mini-courbe | sparkline | minigráfico | Sparkline | grafico sparkline | gráfico sparkline | wykres przebiegu | sparkline |
+
+Les noms propres, les lieux et les événements historiques des exemples restent tels quels ; les causes de décès d’exemple
+restent en français (les « grandes familles » sont devinées d’après les mots français).
+
+## Zone « jeux » (cadre des jeux, jeux de plateau, 🌀 Labyrinthe, 🧩 Puzzle, 🂠 Patiences, 🂡 Jeux de cartes)
+
+| Français | English | Español | Deutsch | Italiano | Português | Polski | Nederlands |
+|---|---|---|---|---|---|---|---|
+| partie (un jeu joué) | game | partida | Spiel | partita | jogo | gra | spel |
+| Nouvelle partie (`jeu\|`) | New game | Nueva partida | Neues Spiel | Nuova partita | Novo jogo | Nowa gra | Nieuw spel |
+| manche | round | ronda | Runde | mano | ronda | runda | ronde |
+| donne (tarot) | deal | mano | Runde | mano | mão | rozdanie | spel |
+| case (plateau) | square / cell | casilla | Feld / Zelle | casella | casa | pole | vak / cel |
+| plateau | board | tablero | Spielbrett | tabellone | tabuleiro | plansza | bord |
+| pioche | stock | mazo | Stapel | mazzo | monte | talia | stapel |
+| défausse | discard pile | descarte | Ablagestapel | scarti | descarte | odrzucone | aflegstapel |
+| fondation (patiences) | foundation | fundación | Ablagestapel | fondazione | fundação | stos bazowy | aflegstapel |
+| case libre (FreeCell) | free cell | casilla libre | freie Zelle | casella libera | casa livre | wolne pole | vrije cel |
+| pli | trick | baza | Stich | presa | vaza | lewa | slag |
+| atout | trump | triunfo | Trumpf | briscola / trionfo | trunfo | atut | troef |
+| couleur (♥ ♦ ♠ ♣) | suit | palo | Farbe | seme | naipe | kolor | kleur |
+| As, Roi, Dame, Valet, Cavalier (`carte\|`) | Ace, King, Queen, Jack, Knight | As, Rey, Reina, Sota, Caballo | Ass, König, Dame, Bube, Reiter | Asso, Re, Donna, Fante, Cavallo | Ás, Rei, Dama, Valete, Cavaleiro | As, Król, Dama, Walet, Rycerz | Aas, Heer, Vrouw, Boer, Ruiter |
+| Toi, Ouest, Nord, Est (`siege\|`) | You, West, North, East | Tú, Oeste, Norte, Este | Du, West, Nord, Ost | Tu, Ovest, Nord, Est | Tu, Oeste, Norte, Este | Ty, Zachód, Północ, Wschód | Jij, West, Noord, Oost |
+| Roi, Dame, Tour, Fou, Cavalier, Pion (`echecs\|`) | King, Queen, Rook, Bishop, Knight, Pawn | Rey, Dama, Torre, Alfil, Caballo, Peón | König, Dame, Turm, Läufer, Springer, Bauer | Re, Donna, Torre, Alfiere, Cavallo, Pedone | Rei, Dama, Torre, Bispo, Cavalo, Peão | Król, Hetman, Wieża, Goniec, Skoczek, Pion | Koning, Dame, Toren, Loper, Paard, Pion |
+| Dame, pion (`dames\|`) | king, man | dama, peón | Dame, Stein | dama, pedina | dama, peão | damka, pionek | dam, schijf |
+| Patience / Patiences | Solitaire | Solitario | Patience | Solitario | Paciência | Pasjans | Patience |
+| Sosa (numéro) | Sosa | Sosa | Sosa | Sosa | Sosa | Sosa | Sosa |
+| Contre l’ordinateur 🤖 | Against the computer | Contra el ordenador | Gegen den Computer | Contro il computer | Contra o computador | Przeciw komputerowi | Tegen de computer |
+| facile / moyen / difficile (`niveau\|`) | easy / medium / hard | fácil / medio / difícil | leicht / mittel / schwer | facile / medio / difficile | fácil / médio / difícil | łatwy / średni / trudny | makkelijk / gemiddeld / moeilijk |
+
+Les noms propres des patiences (Klondike, FreeCell, Yukon, La Belle Lucie, Canfield…) restent tels quels ; ceux qui se traduisent
+(Araignée, La pyramide, La guêpe, Les quarante voleurs…) sont traduits. Les noms des ancêtres sur les cartes ne se traduisent jamais.
+Les moteurs (patiences, jeux de cartes, labyrinthe) restent en français dans Node : la traduction se fait dans le navigateur.
+Les noms par défaut des joueurs (« Toi », « Nord »…) sont écrits dans la langue choisie au moment où la partie est préparée.
+
+## Zone « outils2 » (calculette, transcription, aide à la lecture, sciences, lots, outils)
+
+| Français | English | Español | Deutsch | Italiano | Português | Polski | Nederlands |
+|---|---|---|---|---|---|---|---|
+| Calculette | Calculator | Calculadora | Rechner | Calcolatrice | Calculadora | Kalkulator | Rekenmachine |
+| ruban (de la calculette) | tape | cinta | Papierstreifen | nastro | fita | taśma | rol |
+| Transcription d’actes | Record transcription | Transcripción de actas | Urkunden-Transkription | Trascrizione di atti | Transcrição de atos | Transkrypcja aktów | Transcriptie van akten |
+| zone (sur l’image) | area | zona | Bereich | zona | zona | obszar | gebied |
+| « Mieux voir » | “See better” | «Ver mejor» | „Besser sehen“ | «Vedere meglio» | «Ver melhor» | „Lepiej widać” | ‘Beter zien’ |
+| Repérer (noms, dates…) | Spot | Detectar | Erkennen | Individua | Detetar | Wyszukaj | Herkennen |
+| Aide à la lecture | Reading help | Ayuda a la lectura | Lesehilfe | Aiuto alla lettura | Ajuda à leitura | Pomoc w czytaniu | Leeshulp |
+| Traitements par lot / recette | Batch processing / recipe | Procesamiento por lotes / receta | Stapelverarbeitung / Rezept | Elaborazione in serie / ricetta | Processamento em lote / receita | Przetwarzanie wsadowe / przepis | Batchverwerking / recept |
+| rattachement (paroisse) | link | dependencia | Zugehörigkeit | dipendenza | dependência | przynależność | koppeling |
+| paquet de modifications | change package | paquete de cambios | Änderungspaket | pacchetto di modifiche | pacote de alterações | paczka zmian | wijzigingspakket |
+| brevet | patent | patente | Patent | brevetto | patente | patent | octrooi |
+| ménage (recensement) | household | hogar | Haushalt | nucleo | agregado | gospodarstwo | huishouden |

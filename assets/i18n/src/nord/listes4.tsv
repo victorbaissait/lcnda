@@ -1780,3 +1780,183 @@ pas encore placée ¦ zatím neumístěno ¦ inte placerad än ¦ ikke placeret 
 Modifier le repère ¦ Upravit značku ¦ Redigera markören ¦ Rediger markøren
 ½ pas par seconde ¦ ½ kroku za sekundu ¦ ½ steg per sekund ¦ ½ trin pr. sekund
 1 pas par seconde ¦ 1 krok za sekundu ¦ 1 steg per sekund ¦ 1 trin pr. sekund
+2 pas par seconde ¦ 2 kroky za sekundu ¦ 2 steg per sekund ¦ 2 trin pr. sekund
+4 pas par seconde ¦ 4 kroky za sekundu ¦ 4 steg per sekund ¦ 4 trin pr. sekund
+8 pas par seconde ¦ 8 kroků za sekundu ¦ 8 steg per sekund ¦ 8 trin pr. sekund
+20 pas par seconde ¦ 20 kroků za sekundu ¦ 20 steg per sekund ¦ 20 trin pr. sekund
+Pas ¦ Krok ¦ Steg ¦ Trin
+Pas rapides ¦ Rychlé kroky ¦ Snabba steg ¦ Hurtige trin
+cumulative (tout ce qui précède reste) ¦ kumulativní (vše předchozí zůstává) ¦ kumulativ (allt tidigare finns kvar) ¦ kumulativ (alt tidligere bliver)
+glissante : une durée au choix… ¦ klouzavá: délka podle volby… ¦ glidande: en valfri längd… ¦ glidende: en valgfri varighed…
+selon le zoom ¦ podle přiblížení ¦ beroende på zoom ¦ afhængigt af zoom
+par heure ¦ po hodinách ¦ per timme ¦ pr. time
+par jour ¦ po dnech ¦ per dag ¦ pr. dag
+par mois ¦ po měsících ¦ per månad ¦ pr. måned
+sans date : écris une date (✎) pour les voir dans le temps. ¦ bez data: napiš datum (✎), abys je viděl v čase. ¦ utan datum: skriv ett datum (✎) för att se dem i tiden. ¦ uden dato: skriv en dato (✎) for at se dem i tiden.
+· glisse sur la frise pour choisir une période ¦ · táhni po časové ose a vyber období ¦ · dra på tidslinjen för att välja en period ¦ · træk på tidslinjen for at vælge en periode
+Pas de date à montrer ¦ Žádné datum k zobrazení ¦ Inget datum att visa ¦ Ingen dato at vise
+Cette carte de photos n’existe plus. ¦ Tato mapa fotografií už neexistuje. ¦ Fotokartan finns inte längre. ¦ Fotokortet findes ikke længere.
+CARTES DE PHOTOS · TOUTES ¦ MAPY FOTOGRAFIÍ · VŠECHNY ¦ FOTOKARTOR · ALLA ¦ FOTOKORT · ALLE
+CARTE DE PHOTOS ¦ MAPA FOTOGRAFIÍ ¦ FOTOKARTA ¦ FOTOKORT
+CARTES DE PHOTOS ¦ MAPY FOTOGRAFIÍ ¦ FOTOKARTOR ¦ FOTOKORT
+Carte sans nom ¦ Mapa bez názvu ¦ Namnlös karta ¦ Kort uden navn
+l’enquête ¦ pátrání ¦ undersökningen ¦ undersøgelsen
+Les photos et vidéos de toutes tes cartes, une couleur par carte. Coche ou décoche les cartes dans la légende. ¦ Fotografie a videa ze všech tvých map, jedna barva na mapu. Mapy zaškrtni nebo odškrtni v legendě. ¦ Foton och videor från alla dina kartor, en färg per karta. Kryssa i eller ur kartorna i teckenförklaringen. ¦ Fotos og videoer fra alle dine kort, én farve pr. kort. Markér eller fjern markeringen af kortene i signaturforklaringen.
+＋ Photos de l’app ¦ ＋ Fotografie z aplikace ¦ ＋ Foton från appen ¦ ＋ Fotos fra appen
+Forme des vignettes ¦ Tvar náhledů ¦ Miniatyrernas form ¦ Miniaturernes form
+Vignettes carrées ¦ Čtvercové náhledy ¦ Kvadratiska miniatyrer ¦ Kvadratiske miniaturer
+Le trajet ¦ Trasa ¦ Rutten ¦ Ruten
+à placer ¦ k umístění ¦ att placera ¦ at placere
+Aucune carte encore. ¦ Zatím žádná mapa. ¦ Inga kartor än. ¦ Ingen kort endnu.
+Glisse une vignette sur la carte, ou 📍 pour choisir un lieu de ta base. ¦ Přetáhni náhled na mapu, nebo 📍 a vyber místo z databáze. ¦ Dra en miniatyr till kartan, eller 📍 för att välja en plats i din databas. ¦ Træk en miniature hen på kortet, eller 📍 for at vælge et sted i din database.
+Glisse-moi sur la carte ¦ Přetáhni mě na mapu ¦ Dra mig till kartan ¦ Træk mig hen på kortet
+Choisir un lieu de la base ¦ Vybrat místo z databáze ¦ Välj en plats i databasen ¦ Vælg et sted i databasen
+Modifier : date, légende, personnes, lieu ¦ Upravit: datum, popisek, osoby, místo ¦ Redigera: datum, bildtext, personer, plats ¦ Rediger: dato, billedtekst, personer, sted
+Tout est placé ✓ ¦ Vše je umístěno ✓ ¦ Allt är placerat ✓ ¦ Alt er placeret ✓
+Carte vide : « ＋ Photos de l’app » ou glisse des fichiers ci-dessous. ¦ Prázdná mapa: „＋ Fotografie z aplikace“ nebo přetáhni soubory níže. ¦ Tom karta: ”＋ Foton från appen” eller dra filer nedan. ¦ Tomt kort: »＋ Fotos fra appen« eller træk filer nedenfor.
+Rien sur cette carte pour l’instant. ¦ Na této mapě zatím nic není. ¦ Inget på kartan än. ¦ Intet på kortet endnu.
+Rien à afficher avec ces filtres. ¦ S těmito filtry není co zobrazit. ¦ Inget att visa med dessa filter. ¦ Intet at vise med disse filtre.
+Poser sur la carte ¦ Umístit na mapu ¦ Placera på kartan ¦ Placér på kortet
+Les photos et vidéos qui ont des coordonnées GPS se placent toutes seules ; les autres vont dans « À placer ». ¦ Fotografie a videa se souřadnicemi GPS se umístí samy; ostatní jdou do „K umístění“. ¦ Foton och videor med GPS-koordinater placeras automatiskt; de andra hamnar i ”Att placera”. ¦ Fotos og videoer med GPS-koordinater placeres automatisk; de andre havner i »At placere«.
+Plusieurs à la fois. Ils entrent dans les médias de l’app ; ceux qui ont des coordonnées GPS se placent tout seuls. Tu peux aussi les glisser directement à leur place sur la carte. ¦ Více najednou. Uloží se do médií aplikace; ty se souřadnicemi GPS se umístí samy. Můžeš je také přetáhnout přímo na jejich místo na mapě. ¦ Flera på en gång. De läggs in i appens media; de med GPS-koordinater placeras automatiskt. Du kan också dra dem direkt till deras plats på kartan. ¦ Flere ad gangen. De kommer ind i appens medier; dem med GPS-koordinater placeres automatisk. Du kan også trække dem direkte hen på deres plads på kortet.
+14 juillet 2023 à 10 h 22, vers 1950… ¦ 14. července 2023 v 10:22, kolem 1950… ¦ 14 juli 2023 kl. 10.22, omkring 1950… ¦ 14. juli 2023 kl. 10.22, omkring 1950…
+lue dans le fichier ¦ načteno ze souboru ¦ läst i filen ¦ læst i filen
+Sans heure, la photo est placée à midi de son jour sur la frise (au milieu de sa période si la date est vague). Ajoute l’heure si tu la connais : « 7 mai 1925 à 14 h 30 ». ¦ Bez času se fotografie umístí na časovou osu na poledne svého dne (doprostřed období, je-li datum nepřesné). Přidej čas, pokud ho znáš: „7. května 1925 ve 14:30“. ¦ Utan klockslag placeras fotot kl. 12 på sin dag på tidslinjen (mitt i perioden om datumet är vagt). Lägg till klockslaget om du vet det: ”7 maj 1925 kl. 14.30”. ¦ Uden klokkeslæt placeres fotoet kl. 12 på sin dag på tidslinjen (midt i perioden, hvis datoen er vag). Tilføj klokkeslættet, hvis du kender det: »7. maj 1925 kl. 14.30«.
+Personnes sur la photo ¦ Osoby na fotografii ¦ Personer på fotot ¦ Personer på fotoet
+Lieu de la base ¦ Místo z databáze ¦ Plats i databasen ¦ Sted i databasen
+Poser la photo sur ce lieu ¦ Umístit fotografii na toto místo ¦ Placera fotot på denna plats ¦ Placér fotoet på dette sted
+pas encore placée (dans « À placer ») ¦ zatím neumístěno (v „K umístění“) ¦ inte placerad än (i ”Att placera”) ¦ ikke placeret endnu (i »At placere«)
+↺ Revenir au GPS ¦ ↺ Vrátit se ke GPS ¦ ↺ Tillbaka till GPS ¦ ↺ Tilbage til GPS
+Remettre dans « À placer » ¦ Vrátit do „K umístění“ ¦ Lägg tillbaka i ”Att placera” ¦ Læg tilbage i »At placere«
+Retirer de la carte ¦ Odebrat z mapy ¦ Ta bort från kartan ¦ Fjern fra kortet
+Revenue à sa position GPS ¦ Vráceno na polohu GPS ¦ Tillbaka på sin GPS-position ¦ Tilbage på sin GPS-position
+Date incomprise : écris par exemple « 14 juillet 2023 », « 7 mai 1925 à 14 h 30 », « vers 1950 ». ¦ Datum nerozpoznáno: napiš například „14. července 2023“, „7. května 1925 ve 14:30“, „kolem 1950“. ¦ Datumet förstods inte: skriv till exempel ”14 juli 2023”, ”7 maj 1925 kl. 14.30”, ”omkring 1950”. ¦ Datoen blev ikke forstået: skriv for eksempel »14. juli 2023«, »7. maj 1925 kl. 14.30«, »omkring 1950«.
+Ce lieu n’a pas de coordonnées : glisse la photo sur la carte. ¦ Toto místo nemá souřadnice: přetáhni fotografii na mapu. ¦ Platsen har inga koordinater: dra fotot till kartan. ¦ Stedet har ingen koordinater: træk fotoet hen på kortet.
+Remise dans « À placer » ¦ Vráceno do „K umístění“ ¦ Tillbakalagd i ”Att placera” ¦ Lagt tilbage i »At placere«
+La carte telle qu’elle est à l’écran : fond, trajet et vignettes. Si le fond vient d’Internet et refuse d’être copié, l’image est faite sans lui. ¦ Mapa tak, jak je na obrazovce: podklad, trasa a náhledy. Pokud podklad pochází z internetu a nedovolí zkopírování, obrázek se vytvoří bez něj. ¦ Kartan som den ser ut på skärmen: bakgrund, rutt och miniatyrer. Om bakgrunden kommer från internet och inte går att kopiera görs bilden utan den. ¦ Kortet, som det ser ud på skærmen: baggrund, rute og miniaturer. Hvis baggrunden kommer fra internettet og ikke kan kopieres, laves billedet uden den.
+Carte de photos ¦ Mapa fotografií ¦ Fotokarta ¦ Fotokort
+(ni photo ni vidéo) ¦ (ani fotografie, ani video) ¦ (varken foto eller video) ¦ (hverken foto eller video)
+la carte est cachée ou trop petite pour en faire une image ¦ mapa je skrytá nebo příliš malá na vytvoření obrázku ¦ kartan är dold eller för liten för att göra en bild ¦ kortet er skjult eller for lille til at lave et billede
+＋ Nouvelle carte de photos ¦ ＋ Nová mapa fotografií ¦ ＋ Ny fotokarta ¦ ＋ Nyt fotokort
+Vacances en Bretagne 1978, La maison de Lucie… ¦ Prázdniny v Bretani 1978, Luciin dům… ¦ Semester i Bretagne 1978, Lucies hus… ¦ Ferie i Bretagne 1978, Lucies hus…
+juillet 1978, entre 1950 et 1960… ¦ červenec 1978, mezi 1950 a 1960… ¦ juli 1978, mellan 1950 och 1960… ¦ juli 1978, mellem 1950 og 1960…
+Fond de carte ¦ Podkladová mapa ¦ Bakgrundskarta ¦ Baggrundskort
+celui de l’app ¦ ten z aplikace ¦ appens ¦ appens
+carrées ¦ čtvercové ¦ kvadratiska ¦ kvadratiske
+Montrer le trajet (les photos reliées dans l’ordre du temps) ¦ Zobrazit trasu (fotografie propojené v časovém pořadí) ¦ Visa rutten (fotona kopplade i tidsordning) ¦ Vis ruten (fotoene forbundet i tidsrækkefølge)
+Liée à une personne ¦ Propojeno s osobou ¦ Kopplad till en person ¦ Knyttet til en person
+Liée à une enquête ¦ Propojeno s pátráním ¦ Kopplad till en undersökning ¦ Knyttet til en undersøgelse
+Période incomprise : écris par exemple « juillet 1978 », « 1950 », « entre 1950 et 1960 ». ¦ Období nerozpoznáno: napiš například „červenec 1978“, „1950“, „mezi 1950 a 1960“. ¦ Perioden förstods inte: skriv till exempel ”juli 1978”, ”1950”, ”mellan 1950 och 1960”. ¦ Perioden blev ikke forstået: skriv for eksempel »juli 1978«, »1950«, »mellem 1950 og 1960«.
+⚙️ Les cartes en pastilles ¦ ⚙️ Mapy jako štítky ¦ ⚙️ Kartorna som knappar ¦ ⚙️ Kortene som knapper
+Les cartes qui ont leur pastille en haut de l’outil. Les autres restent dans « 🔍 autres cartes… », et la carte affichée garde toujours la sienne. ¦ Mapy, které mají svůj štítek nahoře v nástroji. Ostatní zůstanou v „🔍 další mapy…“ a zobrazená mapa si vždy ponechá svůj. ¦ Kartorna som har sin knapp högst upp i verktyget. De andra finns kvar i ”🔍 andra kartor…”, och den visade kartan behåller alltid sin. ¦ Kortene, der har deres knap øverst i værktøjet. De andre bliver i »🔍 andre kort…«, og det viste kort beholder altid sin.
+(les dernières modifiées) ¦ (naposledy upravené) ¦ (senast ändrade) ¦ (senest ændrede)
+(les premières créées) ¦ (první vytvořené) ¦ (först skapade) ¦ (først oprettede)
+Choisies à la main ¦ Vybrané ručně ¦ Valda för hand ¦ Valgt manuelt
+(dans l’ordre où tu les ajoutes) ¦ (v pořadí, v jakém je přidáš) ¦ (i den ordning du lägger till dem) ¦ (i den rækkefølge, du tilføjer dem)
+Mes cartes en pastilles ¦ Moje mapy jako štítky ¦ Mina kartor som knappar ¦ Mine kort som knapper
+Mes cartes de photos ¦ Moje mapy fotografií ¦ Mina fotokartor ¦ Mine fotokort
+Carte affichée ¦ Zobrazená mapa ¦ Visad karta ¦ Vist kort
+Quelles cartes en pastilles ? ¦ Které mapy jako štítky? ¦ Vilka kartor som knappar? ¦ Hvilke kort som knapper?
+Régler les pastilles des cartes ¦ Nastavit štítky map ¦ Ställ in kartknapparna ¦ Indstil kortknapperne
+Choisir une carte de photos ¦ Vybrat mapu fotografií ¦ Välj en fotokarta ¦ Vælg et fotokort
+Chargement des cartes… ¦ Načítání map… ¦ Laddar kartor… ¦ Indlæser kort…
+Des cartes à toi où tu poses des photos et des vidéos à leur place, avec leur date : un voyage, une maison, un quartier, la vie d’une personne. Les fichiers qui ont des coordonnées GPS se placent tout seuls. ¦ Vlastní mapy, na které umísťuješ fotografie a videa na jejich místo, s jejich datem: cesta, dům, čtvrť, život osoby. Soubory se souřadnicemi GPS se umístí samy. ¦ Egna kartor där du placerar foton och videor på sin plats, med sitt datum: en resa, ett hus, ett kvarter, en persons liv. Filer med GPS-koordinater placeras automatiskt. ¦ Dine egne kort, hvor du placerer fotos og videoer på deres plads med deres dato: en rejse, et hus, et kvarter, en persons liv. Filer med GPS-koordinater placeres automatisk.
+Pas encore de date ¦ Zatím bez data ¦ Inget datum än ¦ Ingen dato endnu
+Supprimer la carte (les photos restent dans les médias) ¦ Smazat mapu (fotografie zůstanou v médiích) ¦ Radera kartan (fotona finns kvar i media) ¦ Slet kortet (fotoene bliver i medier)
+Aucune carte de photos pour l’instant ¦ Zatím žádná mapa fotografií ¦ Inga fotokartor än ¦ Ingen fotokort endnu
+Avec des vidéos ¦ S videi ¦ Med videor ¦ Med videoer
+Avec des photos à placer ¦ S fotografiemi k umístění ¦ Med foton att placera ¦ Med fotos at placere
+À placer ¦ K umístění ¦ Att placera ¦ At placere
+Liée à ¦ Propojeno s ¦ Kopplad till ¦ Knyttet til
+Liées à une personne ¦ Propojené s osobou ¦ Kopplade till en person ¦ Knyttet til en person
+🔍 une enquête ¦ 🔍 pátrání ¦ 🔍 en undersökning ¦ 🔍 en undersøgelse
+Liées à une enquête ¦ Propojené s pátráním ¦ Kopplade till en undersökning ¦ Knyttet til en undersøgelse
+(vide = toutes mes cartes) ¦ (prázdné = všechny moje mapy) ¦ (tomt = alla mina kartor) ¦ (tomt = alle mine kort)
+Toutes mes cartes (ou cherche une carte…) ¦ Všechny moje mapy (nebo hledej mapu…) ¦ Alla mina kartor (eller sök en karta…) ¦ Alle mine kort (eller søg et kort…)
+📷 les photos ¦ 📷 fotografie ¦ 📷 fotona ¦ 📷 fotoene
+entre 1975 et 1980, juillet 2023… ¦ mezi 1975 a 1980, červenec 2023… ¦ mellan 1975 och 1980, juli 2023… ¦ mellem 1975 og 1980, juli 2023…
+Montrer le trajet ¦ Zobrazit trasu ¦ Visa rutten ¦ Vis ruten
+Toutes mes cartes de photos ¦ Všechny moje mapy fotografií ¦ Alla mina fotokartor ¦ Alle mine fotokort
+Une de tes cartes de photos (ou toutes), avec ses vignettes, la période et le filtre photos / vidéos que tu choisis. Un clic sur une photo ouvre la visionneuse. ¦ Jedna z tvých map fotografií (nebo všechny) s náhledy, obdobím a filtrem fotografie / videa, který vybereš. Kliknutí na fotografii otevře prohlížeč. ¦ En av dina fotokartor (eller alla), med miniatyrer, perioden och filtret foton / videor som du väljer. Ett klick på ett foto öppnar visaren. ¦ Et af dine fotokort (eller alle) med miniaturer, perioden og filteret fotos / videoer, som du vælger. Et klik på et foto åbner fremviseren.
+=question ¦ otázka|otázky|otázek ¦ fråga|frågor ¦ spørgsmål|spørgsmål
+=réponse ¦ odpověď|odpovědi|odpovědí ¦ svar|svar ¦ svar|svar
+=question ajoutée ¦ otázka přidána|otázky přidány|otázek přidáno ¦ fråga tillagd|frågor tillagda ¦ spørgsmål tilføjet|spørgsmål tilføjet
+=témoignage ¦ svědectví|svědectví|svědectví ¦ vittnesmål|vittnesmål ¦ beretning|beretninger
+=questionnaire ¦ dotazník|dotazníky|dotazníků ¦ frågeformulär|frågeformulär ¦ spørgeskema|spørgeskemaer
+Questionnaire « {nm} » supprimé ¦ Dotazník „{nm}“ smazán ¦ Frågeformuläret ”{nm}” raderat ¦ Spørgeskemaet »{nm}« slettet
+Questionnaire téléchargé ({n} n’a pas pu être jointe). ¦ Dotazník stažen ({n} se nepodařilo připojit). ¦ Frågeformuläret nedladdat ({n} kunde inte bifogas). ¦ Spørgeskemaet downloadet ({n} kunne ikke vedhæftes).
+Tes souvenirs de {nm} ¦ Tvé vzpomínky na {nm} ¦ Dina minnen av {nm} ¦ Dine minder om {nm}
+(après « Bonjour {nm}, ») ¦ (po „Dobrý den, {nm},“) ¦ (efter ”Hej {nm},”) ¦ (efter »Hej {nm},«)
+tel que {nm} le verra ¦ tak, jak ho uvidí {nm} ¦ som {nm} kommer att se det ¦ som {nm} vil se det
+Écrire à {nm} ¦ Napsat {nm} ¦ Skriv till {nm} ¦ Skriv til {nm}
+Questionnaire « {nm} » à imprimer ¦ Dotazník „{nm}“ k tisku ¦ Frågeformuläret ”{nm}” att skriva ut ¦ Spørgeskemaet »{nm}« til udskrift
+<b>{n}</b> de <b>{from}</b> au questionnaire « {t} » ({d}). Choisis où va chacune ¦ <b>{n}</b> od <b>{from}</b> k dotazníku „{t}“ ({d}). Vyber, kam která půjde ¦ <b>{n}</b> från <b>{from}</b> på frågeformuläret ”{t}” ({d}). Välj vart vart och ett ska ¦ <b>{n}</b> fra <b>{from}</b> til spørgeskemaet »{t}« ({d}). Vælg, hvor hvert enkelt skal hen
+{what} ajoutés (réponses de {nm}) ¦ {what} přidáno (odpovědi od {nm}) ¦ {what} tillagda (svar från {nm}) ¦ {what} tilføjet (svar fra {nm})
+{what} ajouté (réponses de {nm}) ¦ {what} přidáno (odpovědi od {nm}) ¦ {what} tillagt (svar från {nm}) ¦ {what} tilføjet (svar fra {nm})
+Colle ici ce que {nm} t’a répondu. Si c’est le contenu d’un fichier de réponses (.json), il est lu comme le fichier. ¦ Vlož sem, co ti {nm} odpověděl(a). Pokud jde o obsah souboru s odpověďmi (.json), načte se jako soubor. ¦ Klistra in här det som {nm} svarade dig. Om det är innehållet i en svarsfil (.json) läses det som filen. ¦ Indsæt her, hvad {nm} svarede dig. Hvis det er indholdet af en svarfil (.json), læses det som filen.
+de {nm} ¦ od {nm} ¦ från {nm} ¦ fra {nm}
+Sinon : {nm} ¦ Jinak: {nm} ¦ Annars: {nm} ¦ Ellers: {nm}
+Préparé ¦ Připraveno ¦ Förberett ¦ Forberedt
+Répondu ¦ Zodpovězeno ¦ Besvarat ¦ Besvaret
+Je fais l’histoire de notre famille et tes souvenirs comptent beaucoup. Réponds à ce que tu veux, avec tes mots : une phrase suffit, et tu peux en écrire autant que tu veux. ¦ Sepisuji historii naší rodiny a tvé vzpomínky jsou pro mě velmi důležité. Odpověz, na co chceš, vlastními slovy: stačí jedna věta a můžeš napsat, kolik chceš. ¦ Jag skriver vår släkts historia och dina minnen betyder mycket. Svara på det du vill, med egna ord: en mening räcker, och du kan skriva hur mycket du vill. ¦ Jeg skriver vores families historie, og dine minder betyder meget. Svar på det, du har lyst til, med dine egne ord: én sætning er nok, og du kan skrive så meget, du vil.
+👤 Sur une personne ¦ 👤 K osobě ¦ 👤 Om en person ¦ 👤 Om en person
+💬 Témoignage sur la fiche ¦ 💬 Svědectví na kartě ¦ 💬 Vittnesmål i posten ¦ 💬 Beretning i posten
+Ne pas importer ¦ Neimportovat ¦ Importera inte ¦ Importér ikke
+Message copié : colle-le dans un e-mail, et joins le questionnaire. ¦ Zpráva zkopírována: vlož ji do e-mailu a připoj dotazník. ¦ Meddelandet kopierat: klistra in det i ett mejl och bifoga frågeformuläret. ¦ Beskeden kopieret: indsæt den i en e-mail, og vedhæft spørgeskemaet.
+Chargement des questionnaires… ¦ Načítání dotazníků… ¦ Laddar frågeformulär… ¦ Indlæser spørgeskemaer…
+Un questionnaire « Te souviens-tu de… » qu’un proche remplit chez lui ; ses réponses reviennent en témoignages. ¦ Dotazník „Pamatuješ si…“, který příbuzný vyplní doma; jeho odpovědi se vrátí jako svědectví. ¦ Ett frågeformulär ”Minns du…” som en anhörig fyller i hemma; svaren kommer tillbaka som vittnesmål. ¦ Et spørgeskema »Kan du huske…«, som en slægtning udfylder derhjemme; svarene kommer tilbage som beretninger.
+quelqu’un ¦ někdo ¦ någon ¦ nogen
+Supprimer le questionnaire ¦ Smazat dotazník ¦ Radera frågeformuläret ¦ Slet spørgeskemaet
+Choisis un proche, quelques questions toutes prêtes (enfance, maison, métiers, guerre, fêtes, recettes, photos…), et envoie-lui un fichier qu’il remplit chez lui. ¦ Vyber příbuzného, několik připravených otázek (dětství, dům, povolání, válka, svátky, recepty, fotografie…) a pošli mu soubor, který vyplní doma. ¦ Välj en anhörig, några färdiga frågor (barndom, hem, yrken, krig, högtider, recept, foton…), och skicka en fil som personen fyller i hemma. ¦ Vælg en slægtning, nogle færdige spørgsmål (barndom, hjem, erhverv, krig, fester, opskrifter, fotos…), og send en fil, som vedkommende udfylder derhjemme.
+Préparés ¦ Připravené ¦ Förberedda ¦ Forberedte
+Envoyés ¦ Odeslané ¦ Skickade ¦ Sendte
+Répondus ¦ Zodpovězené ¦ Besvarade ¦ Besvarede
+Rangés ¦ Archivované ¦ Arkiverade ¦ Arkiverede
+Questionnaire téléchargé : joins-le à un e-mail. ¦ Dotazník stažen: připoj ho k e-mailu. ¦ Frågeformuläret nedladdat: bifoga det i ett mejl. ¦ Spørgeskemaet downloadet: vedhæft det til en e-mail.
+Ouverture du questionnaire… ¦ Otevírání dotazníku… ¦ Öppnar frågeformuläret… ¦ Åbner spørgeskemaet…
+Nouveau questionnaire ¦ Nový dotazník ¦ Nytt frågeformulär ¦ Nyt spørgeskema
+Choisis à qui tu l’envoies, écris un petit mot, range les questions. À droite : ce que ton proche verra. ¦ Vyber, komu ho posíláš, napiš krátký vzkaz a seřaď otázky. Vpravo: co uvidí tvůj příbuzný. ¦ Välj vem du skickar det till, skriv ett kort meddelande, ordna frågorna. Till höger: det din anhörige kommer att se. ¦ Vælg, hvem du sender det til, skriv en kort besked, ordn spørgsmålene. Til højre: hvad din slægtning vil se.
+Créer le questionnaire ¦ Vytvořit dotazník ¦ Skapa frågeformuläret ¦ Opret spørgeskemaet
+← Tous les questionnaires ¦ ← Všechny dotazníky ¦ ← Alla frågeformulär ¦ ← Alle spørgeskemaer
+🗑 Supprimer le questionnaire ¦ 🗑 Smazat dotazník ¦ 🗑 Radera frågeformuläret ¦ 🗑 Slet spørgeskemaet
+Un contact du Répertoire des vivants, ou son nom… ¦ Kontakt z Adresáře žijících nebo jeho jméno… ¦ En kontakt i Registret över levande, eller namnet… ¦ En kontakt i Registeret over levende, eller navnet…
+Choisis-le dans le Répertoire des vivants, ou garde son nom écrit (« ✎ Garder le texte »). ¦ Vyber ho v Adresáři žijících, nebo ponech napsané jméno („✎ Ponechat text“). ¦ Välj personen i Registret över levande, eller behåll det skrivna namnet (”✎ Behåll texten”). ¦ Vælg personen i Registeret over levende, eller behold det skrevne navn (»✎ Behold teksten«).
+Les questions portent sur ¦ Otázky se týkají ¦ Frågorna handlar om ¦ Spørgsmålene handler om
+« [Prénom] » dans une question devient son prénom. ¦ „[Prénom]“ v otázce se nahradí jeho křestním jménem. ¦ ”[Prénom]” i en fråga blir personens förnamn. ¦ »[Prénom]« i et spørgsmål bliver personens fornavn.
+Le mot d’accueil ¦ Uvítací slovo ¦ Välkomsttexten ¦ Velkomstteksten
+Tes souvenirs de mémé Marie ¦ Tvé vzpomínky na babičku Marii ¦ Dina minnen av mormor Marie ¦ Dine minder om bedste Marie
+Mot d’accueil ¦ Uvítací slovo ¦ Välkomsttext ¦ Velkomsttekst
+Les questions ¦ Otázky ¦ Frågorna ¦ Spørgsmålene
+＋ Ajouter des questions ¦ ＋ Přidat otázky ¦ ＋ Lägg till frågor ¦ ＋ Tilføj spørgsmål
+ton proche ¦ tvůj příbuzný ¦ din anhörige ¦ din slægtning
+Aperçu du questionnaire ¦ Náhled dotazníku ¦ Förhandsvisning av frågeformuläret ¦ Forhåndsvisning af spørgeskemaet
+Les réponses ¦ Odpovědi ¦ Svaren ¦ Svarene
+Crée d’abord le questionnaire (bouton bleu en haut) : tu pourras ensuite le télécharger, l’imprimer et copier le message à envoyer. ¦ Nejdřív vytvoř dotazník (modré tlačítko nahoře): pak ho budeš moci stáhnout, vytisknout a zkopírovat zprávu k odeslání. ¦ Skapa först frågeformuläret (blå knapp högst upp): sedan kan du ladda ner det, skriva ut det och kopiera meddelandet att skicka. ¦ Opret først spørgeskemaet (blå knap øverst): derefter kan du downloade det, udskrive det og kopiere beskeden, der skal sendes.
+⤓ Télécharger le questionnaire (.html) ¦ ⤓ Stáhnout dotazník (.html) ¦ ⤓ Ladda ner frågeformuläret (.html) ¦ ⤓ Download spørgeskemaet (.html)
+Le message à envoyer avec le fichier ¦ Zpráva k odeslání se souborem ¦ Meddelandet att skicka med filen ¦ Beskeden, der skal sendes med filen
+📤 Marquer comme envoyé ¦ 📤 Označit jako odeslané ¦ 📤 Markera som skickat ¦ 📤 Markér som sendt
+Relancer le ¦ Připomenout dne ¦ Påminn den ¦ Påmind den
+Les réponses arriveront ici. ¦ Odpovědi dorazí sem. ¦ Svaren kommer hit. ¦ Svarene kommer hertil.
+✎ Coller une réponse reçue par e-mail ¦ ✎ Vložit odpověď přijatou e-mailem ¦ ✎ Klistra in ett svar som kommit med e-post ¦ ✎ Indsæt et svar modtaget via e-mail
+reçues ¦ přijaté ¦ mottagna ¦ modtaget
+Pas encore de réponse. ¦ Zatím žádná odpověď. ¦ Inget svar än. ¦ Intet svar endnu.
+🗄 Ranger le questionnaire ¦ 🗄 Archivovat dotazník ¦ 🗄 Arkivera frågeformuläret ¦ 🗄 Arkivér spørgeskemaet
+Écris la question… ¦ Napiš otázku… ¦ Skriv frågan… ¦ Skriv spørgsmålet…
+La photo de la question ¦ Fotografie k otázce ¦ Frågans foto ¦ Spørgsmålets foto
+Prendre cette photo ¦ Použít tuto fotografii ¦ Använd detta foto ¦ Brug dette foto
+Retirer la question ¦ Odebrat otázku ¦ Ta bort frågan ¦ Fjern spørgsmålet
+Pas encore de question. ¦ Zatím žádná otázka. ¦ Ingen fråga än. ¦ Intet spørgsmål endnu.
+Questionnaire créé : tu peux le télécharger et l’envoyer. ¦ Dotazník vytvořen: můžeš ho stáhnout a odeslat. ¦ Frågeformuläret skapat: du kan ladda ner och skicka det. ¦ Spørgeskemaet oprettet: du kan downloade og sende det.
+Question retirée ¦ Otázka odebrána ¦ Frågan borttagen ¦ Spørgsmålet fjernet
+Tes derniers changements ne sont pas enregistrés. ¦ Tvé poslední změny nejsou uložené. ¦ Dina senaste ändringar är inte sparade. ¦ Dine seneste ændringer er ikke gemt.
+Joins-le à un e-mail, puis note qu’il est parti : ¦ Připoj ho k e-mailu a pak zaznamenej, že byl odeslán: ¦ Bifoga det i ett mejl och notera sedan att det har skickats: ¦ Vedhæft det til en e-mail, og notér så, at det er sendt:
+Dates enregistrées ¦ Data uložena ¦ Datumen sparade ¦ Datoerne gemt
+Te souviens-tu de la ferme de la Borie ? ¦ Pamatuješ si na statek v la Borie? ¦ Minns du gården i la Borie? ¦ Kan du huske gården i la Borie?
+✎ Écrire ma question ¦ ✎ Napsat vlastní otázku ¦ ✎ Skriv min fråga ¦ ✎ Skriv mit spørgsmål
+＋ Garder dans mes questions ¦ ＋ Uložit do mých otázek ¦ ＋ Spara bland mina frågor ¦ ＋ Gem blandt mine spørgsmål
+Écris « [Prénom] » pour mettre le prénom de la personne choisie. ¦ Napiš „[Prénom]“ a vloží se křestní jméno vybrané osoby. ¦ Skriv ”[Prénom]” för att infoga den valda personens förnamn. ¦ Skriv »[Prénom]« for at indsætte den valgte persons fornavn.
+QUESTIONS AUX PROCHES ¦ OTÁZKY PRO PŘÍBUZNÉ ¦ FRÅGOR TILL ANHÖRIGA ¦ SPØRGSMÅL TIL SLÆGTNINGE
+Ajouter des questions ¦ Přidat otázky ¦ Lägg till frågor ¦ Tilføj spørgsmål
+Ajouter les questions cochées ¦ Přidat zaškrtnuté otázky ¦ Lägg till de ikryssade frågorna ¦ Tilføj de markerede spørgsmål
+Coche au moins une question (ou écris la tienne en dessous). ¦ Zaškrtni aspoň jednu otázku (nebo napiš vlastní níže). ¦ Kryssa i minst en fråga (eller skriv din egen nedan). ¦ Markér mindst ét spørgsmål (eller skriv dit eget nedenfor).
+Supprimer cette question de mes questions ¦ Smazat tuto otázku z mých otázek ¦ Radera frågan från mina frågor ¦ Slet spørgsmålet fra mine spørgsmål

@@ -7,6 +7,7 @@
 (() => {
     'use strict';
     const J = () => window.LCNDA_JEUX_FAMILLE, L = () => window.LCNDA_JEUX_LOGIQUE;
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : s);
     const N = 1, E = 2, S = 4, W = 8, DIRS = [[N, -1, 0, S], [E, 0, 1, W], [S, 1, 0, N], [W, 0, -1, E]];
     const rotCW = m => ((m << 1) | (m >> 3)) & 15, rotCCW = m => ((m >> 1) | ((m & 1) << 3)) & 15;
     const bits = m => (m & 1) + ((m >> 1) & 1) + ((m >> 2) & 1) + ((m >> 3) & 1);
@@ -48,10 +49,10 @@
         clean: c => ({...c, rows: Math.max(4, Math.min(15, Number(c.rows) || 7)), cols: Math.max(4, Math.min(15, Number(c.cols) || 7)), wrap: !!c.wrap, names: c.names !== false}),
         ready: [{k: 'easy', name: 'Débutant', hint: '5×5', cfg: {rows: 5, cols: 5, wrap: false}}, {k: 'mid', name: 'Moyen', hint: '7×7', cfg: {rows: 7, cols: 7, wrap: false}}, {k: 'hard', name: 'Difficile', hint: '9×9', cfg: {rows: 9, cols: 9, wrap: false}},
             {k: 'wrap', name: 'Expert : bords qui se rejoignent', hint: '9×9, un câble peut passer d’un bord à l’autre', cfg: {rows: 9, cols: 9, wrap: true}}, {k: 'giant', name: 'Géant', hint: '13×13, bords qui se rejoignent', cfg: {rows: 13, cols: 13, wrap: true}}],
-        fieldsHtml: (c, h) => `<div class="jf-grid2"><div data-jfc-rows></div><div data-jfc-cols></div></div><div class="jf-checks">${h.toggle('data-jfc-wrap', c.wrap, '🔁 Les bords se rejoignent (un câble qui sort à droite revient à gauche, en haut revient en bas)')}${h.toggle('data-jfc-names', c.names, '👪 Les postes portent le nom d’ancêtres')}</div>`,
+        fieldsHtml: (c, h) => `<div class="jf-grid2"><div data-jfc-rows></div><div data-jfc-cols></div></div><div class="jf-checks">${h.toggle('data-jfc-wrap', c.wrap, i18n('🔁 Les bords se rejoignent (un câble qui sort à droite revient à gauche, en haut revient en bas)'))}${h.toggle('data-jfc-names', c.names, i18n('👪 Les postes portent le nom d’ancêtres'))}</div>`,
         bindFields(form, c, save, {range}) {
-            range(form.querySelector('[data-jfc-rows]'), {label: 'Lignes', min: 4, max: 15, value: c.rows, unit: 'lignes', def: 7}, v => { c.rows = v; save(); });
-            range(form.querySelector('[data-jfc-cols]'), {label: 'Colonnes', min: 4, max: 15, value: c.cols, unit: 'colonnes', def: 7}, v => { c.cols = v; save(); });
+            range(form.querySelector('[data-jfc-rows]'), {label: i18n('Lignes'), min: 4, max: 15, value: c.rows, unit: i18n('lignes'), def: 7}, v => { c.rows = v; save(); });
+            range(form.querySelector('[data-jfc-cols]'), {label: i18n('Colonnes'), min: 4, max: 15, value: c.cols, unit: i18n('colonnes'), def: 7}, v => { c.cols = v; save(); });
         },
         onChange(t, c) { if (t.matches('[data-jfc-wrap]')) c.wrap = t.checked; if (t.matches('[data-jfc-names]')) c.names = t.checked; },
         async start(c, src, prev) {
@@ -60,7 +61,7 @@
             const leaves = []; sol.forEach((row, r) => row.forEach((m, cc) => { if (bits(m) === 1 && !(r === server[0] && cc === server[1])) leaves.push([r, cc]); }));
             let names = {};
             if (c.names) { try { const d = await J().loadData(), ppl = L().shuffle(d.persons.filter(x => x.first && !x.living && !x.priv && !x.mem), L().rng(c.seed + ":noms")); leaves.forEach(([r, cc], i) => { const p = ppl[i % Math.max(1, ppl.length)]; if (p) names[`${r},${cc}`] = {name: `${p.first} ${p.last || ''}`.trim(), ini: `${(p.first || '?')[0]}${(p.last || '')[0] || ''}`}; }); } catch (_) {} }
-            return {tiles, server, locks: [], names, moves: 0, ms: 0, startAt: Date.now(), won: false, round: (prev?.round || 0) + 1, best: prev?.best || null, status: 'Réseau à relier'};
+            return {tiles, server, locks: [], names, moves: 0, ms: 0, startAt: Date.now(), won: false, round: (prev?.round || 0) + 1, best: prev?.best || null, status: i18n('Réseau à relier')};
         },
         mount(host, g, api) {
             const {esc} = api, c = g.cfg, rows = c.rows, cols = c.cols; let lockMode = false, timer = 0;
@@ -69,24 +70,24 @@
                 return `<svg viewBox="0 0 100 100" aria-hidden="true">${seg}${isServer ? `<rect x="24" y="24" width="52" height="52" rx="8" fill="${on ? '#1d4ed8' : '#334'}"/><text x="50" y="60" text-anchor="middle" font-size="30" fill="#fff">⌂</text>` : leaf ? `<rect x="28" y="30" width="44" height="34" rx="5" fill="${on ? '#1f9d55' : '#c9ccd4'}" stroke="#334" stroke-width="3"/><rect x="40" y="64" width="20" height="8" fill="#334"/>` : `<circle cx="50" cy="50" r="10" fill="${col}"/>`}</svg>`; };
             const draw = () => {
                 const l = lit(g.tiles, g.server, c.wrap), nOn = l.on.flat().filter(Boolean).length, total = rows * cols, cell = Math.max(26, Math.min(64, Math.floor(Math.min(600, (host.clientWidth || 700) - (window.innerWidth < 900 ? 30 : 330)) / Math.max(rows, cols))));
-                api.sub(`Manche ${g.round} · ${rows}×${cols}${c.wrap ? ' · bords qui se rejoignent' : ''}`);
+                api.sub([i18n('Manche {n}', {n: g.round}), `${rows}×${cols}`, c.wrap && i18n('bords qui se rejoignent')].filter(Boolean).join(' · '));
                 const linked = Object.entries(g.names || {}).filter(([k]) => { const [r, cc] = k.split(',').map(Number); return l.on[r][cc]; });
-                host.innerHTML = `<div class="goose-game-layout jfc"><div class="goose-board-wrap"><div class="jfc-grid ${c.wrap ? 'is-wrap' : ''} ${g.won ? 'is-won' : ''}" style="--rows:${rows};--cols:${cols};--cell:${cell}px" role="grid" aria-label="Le réseau">${g.tiles.map((row, r) => row.map((m, cc) => {
+                host.innerHTML = `<div class="goose-game-layout jfc"><div class="goose-board-wrap"><div class="jfc-grid ${c.wrap ? 'is-wrap' : ''} ${g.won ? 'is-won' : ''}" style="--rows:${rows};--cols:${cols};--cell:${cell}px" role="grid" aria-label="${esc(i18n('Le réseau'))}">${g.tiles.map((row, r) => row.map((m, cc) => {
                         const k = `${r},${cc}`, isS = r === g.server[0] && cc === g.server[1], leaf = !isS && bits(m) === 1, nm = g.names?.[k];
-                        return `<button type="button" class="jfc-cell ${locked.has(k) ? 'is-locked' : ''}" data-r="${r}" data-c="${cc}" title="${isS ? 'Le serveur' : nm ? esc(nm.name) : ''}" aria-label="Case ${r + 1}, ${cc + 1}${isS ? ' (serveur)' : leaf ? ' (poste)' : ''}${l.on[r][cc] ? ', reliée' : ''}">${tileSvg(m, l.on[r][cc], isS, leaf)}${leaf && nm ? `<small>${esc(nm.ini)}</small>` : ''}</button>`; }).join('')).join('')}</div></div>
-                  <aside class="goose-panel"><p class="goose-status jf-big" role="status">${g.won ? `🎉 Tout est relié en ${api.plural(g.moves, 'coup')} et ${fmt(g.ms)} !` : `${nOn} / ${total} cases reliées${l.loose ? ` · ${api.plural(l.loose, 'bout dans le vide', 'bouts dans le vide')}` : ''}`}</p>
-                    <p>${api.plural(g.moves, 'coup')} · ⏱ <span data-jfc-time>${fmt(g.won ? g.ms : g.ms + Date.now() - g.startAt)}</span>${g.best ? ` · record ${api.plural(g.best.moves, 'coup')}, ${fmt(g.best.ms)}` : ''}</p>
-                    ${g.won ? '' : `<button type="button" class="button small ${lockMode ? '' : 'secondary'}" data-jfc-lockmode aria-pressed="${lockMode}">🔒 Mode verrou ${lockMode ? '(actif)' : ''}</button>`}
-                    ${c.wrap ? '<p class="muted jf-small">🔁 Les bords se rejoignent : un câble qui sort d’un côté continue de l’autre côté.</p>' : ''}
-                    ${linked.length ? `<details class="jfc-linked"><summary>👪 ${api.plural(linked.length, 'ancêtre relié', 'ancêtres reliés')}</summary><p class="jf-small">${linked.map(([, v]) => esc(v.name)).join(', ')}</p></details>` : ''}
-                    <p class="muted jf-small">Clic : tourner · clic droit ou Maj+clic : dans l’autre sens · Alt+clic : verrouiller. Clavier : flèches, Entrée pour tourner, Espace pour verrouiller.</p></aside></div>`;
+                        return `<button type="button" class="jfc-cell ${locked.has(k) ? 'is-locked' : ''}" data-r="${r}" data-c="${cc}" title="${isS ? esc(i18n('Le serveur')) : nm ? esc(nm.name) : ''}" aria-label="${esc(i18n(isS ? 'Case {r}, {c} (serveur)' : leaf ? 'Case {r}, {c} (poste)' : 'Case {r}, {c}', {r: r + 1, c: cc + 1}))}${l.on[r][cc] ? esc(i18n(', reliée')) : ''}">${tileSvg(m, l.on[r][cc], isS, leaf)}${leaf && nm ? `<small>${esc(nm.ini)}</small>` : ''}</button>`; }).join('')).join('')}</div></div>
+                  <aside class="goose-panel"><p class="goose-status jf-big" role="status">${esc(g.won ? i18n('🎉 Tout est relié en {moves} et {time} !', {moves: api.plural(g.moves, 'coup'), time: fmt(g.ms)}) : `${i18n('{a} / {b} cases reliées', {a: nOn, b: total})}${l.loose ? ` · ${api.plural(l.loose, 'bout dans le vide', 'bouts dans le vide')}` : ''}`)}</p>
+                    <p>${api.plural(g.moves, 'coup')} · ⏱ <span data-jfc-time>${fmt(g.won ? g.ms : g.ms + Date.now() - g.startAt)}</span>${g.best ? ` · ${esc(i18n('record {moves}, {time}', {moves: api.plural(g.best.moves, 'coup'), time: fmt(g.best.ms)}))}` : ''}</p>
+                    ${g.won ? '' : `<button type="button" class="button small ${lockMode ? '' : 'secondary'}" data-jfc-lockmode aria-pressed="${lockMode}">🔒 ${esc(lockMode ? i18n('Mode verrou (actif)') : i18n('Mode verrou'))}</button>`}
+                    ${c.wrap ? `<p class="muted jf-small">🔁 ${esc(i18n('Les bords se rejoignent : un câble qui sort d’un côté continue de l’autre côté.'))}</p>` : ''}
+                    ${linked.length ? `<details class="jfc-linked"><summary>👪 ${esc(api.plural(linked.length, 'ancêtre relié', 'ancêtres reliés'))}</summary><p class="jf-small">${linked.map(([, v]) => esc(v.name)).join(', ')}</p></details>` : ''}
+                    <p class="muted jf-small">${esc(i18n('Clic : tourner · clic droit ou Maj+clic : dans l’autre sens · Alt+clic : verrouiller. Clavier : flèches, Entrée pour tourner, Espace pour verrouiller.'))}</p></aside></div>`;
                 bind();
             };
             const fmt = ms => { const s = Math.floor(ms / 1000); return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`; };
             const turn = (r, cc, back) => {
-                if (g.won) return; const k = `${r},${cc}`; if (locked.has(k)) return api.toast?.('Case verrouillée (Alt+clic pour la déverrouiller).');
+                if (g.won) return; const k = `${r},${cc}`; if (locked.has(k)) return api.toast?.(i18n('Case verrouillée (Alt+clic pour la déverrouiller).'));
                 g.tiles[r][cc] = back ? rotCCW(g.tiles[r][cc]) : rotCW(g.tiles[r][cc]); g.moves++;
-                if (solved(g.tiles, g.server, c.wrap)) { g.won = true; g.finished = true; g.ms += Date.now() - g.startAt; if (!g.best || g.ms < g.best.ms) g.best = {moves: g.moves, ms: g.ms}; g.status = `Relié en ${g.moves} coups`; }
+                if (solved(g.tiles, g.server, c.wrap)) { g.won = true; g.finished = true; g.ms += Date.now() - g.startAt; if (!g.best || g.ms < g.best.ms) g.best = {moves: g.moves, ms: g.ms}; g.status = i18n('Relié en {n} coups', {n: g.moves}); }
                 api.save(); if (g.won) api.sidebar(); draw(); host.querySelector(`[data-r="${r}"][data-c="${cc}"]`)?.focus();
             };
             const lock = (r, cc) => { const k = `${r},${cc}`; if (locked.has(k)) locked.delete(k); else locked.add(k); g.locks = [...locked]; api.save(); draw(); host.querySelector(`[data-r="${r}"][data-c="${cc}"]`)?.focus(); };

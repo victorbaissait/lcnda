@@ -24,11 +24,17 @@
     const RANK_NAME = ['', 'As', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Valet', 'Dame', 'Roi'];
     const TAROT_NAME = ['', 'As', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Valet', 'Cavalier', 'Dame', 'Roi'];
     const red = c => c.s === 0 || c.s === 1;
+    /** les textes : traduits dans le navigateur (LCNDA_I18N), tels quels en français et dans Node */
+    const I18 = () => (typeof window !== 'undefined' && window.LCNDA_I18N) || null;
+    const i18n = (s, v) => { const I = I18(); return I ? I.t(s, v) : (v ? String(s).replace(/\{(\w+)\}/g, (m, k) => (k in v ? String(v[k]) : m)) : s); };
+    const plur = (n, one, many) => { const I = I18(); return I ? I.plural(n, one, many) : `${n} ${n > 1 ? many : one}`; };
+    const sn = s => i18n(SUIT_NAME[s], {ctx: 'carte'}), rn = r => i18n(RANK_NAME[r], {ctx: 'carte'});
+    const seat = n => i18n(n, {ctx: 'siege'});
     /** le nom d'une carte, en clair (« Dame de pique », « Atout 21 », « L'excuse ») */
     function cardName(c, k) {
         if (!c) return '';
-        if (k === 'tarot') { if (c.s === 5) return 'l’Excuse'; if (c.s === 4) return c.r === 1 ? 'le Petit (atout 1)' : `l’atout ${c.r}`; return `${TAROT_NAME[c.r]} de ${SUIT_NAME[c.s]}`; }
-        return `${RANK_NAME[c.r]} de ${SUIT_NAME[c.s]}`;
+        if (k === 'tarot') { if (c.s === 5) return i18n('l’Excuse'); if (c.s === 4) return c.r === 1 ? i18n('le Petit (atout 1)') : i18n('l’atout {n}', {n: String(c.r)}); return i18n('{rank} de {suit}', {rank: i18n(TAROT_NAME[c.r], {ctx: 'carte'}), suit: sn(c.s)}); }
+        return i18n('{rank} de {suit}', {rank: rn(c.r), suit: sn(c.s)});
     }
     const deck52 = () => { const d = []; for (let s = 0; s < 4; s++) for (let r = 1; r <= 13; r++) d.push({r, s, i: d.length}); return d; };
     const deck32 = () => { const d = []; for (let s = 0; s < 4; s++) for (const r of [1, 7, 8, 9, 10, 11, 12, 13]) d.push({r, s, i: d.length}); return d; };
@@ -38,7 +44,7 @@
     const byId = (st, i) => st.hands.flat().find(c => c.i === i) || null;
     const others = (st, p) => Array.from({length: st.n}, (_, k) => (p + 1 + k) % st.n).filter(q => q !== p);
     const log = (st, msg) => { st.log.push(msg); if (st.log.length > 80) st.log.shift(); };
-    const nm = (st, p) => st.names[p] || `Joueur ${p + 1}`;
+    const nm = (st, p) => st.names[p] || i18n('Joueur {n}', {n: String(p + 1)});
     /** un nouveau tirage du hasard, toujours le même pour la même partie au même moment */
     const R = st => rng(`${st.seed}:${st.manche}:${st.rs++}`);
     const LEVELS = ['facile', 'moyen', 'difficile'];
@@ -57,7 +63,7 @@
         },
         legal: st => (st.phase === 'play' ? [{t: 'flip'}] : []),
         play(st, a) {
-            if (a.t !== 'flip' || st.phase !== 'play') return {ok: false, msg: 'Retourne une carte.'};
+            if (a.t !== 'flip' || st.phase !== 'play') return {ok: false, msg: i18n('Retourne une carte.')};
             const Rr = R(st); let pot = [], fighters = st.hands.map((h, p) => p).filter(p => st.hands[p].length), shown = [], battles = 0, winner = -1;
             for (let guard = 0; guard < 30 && fighters.length; guard++) {
                 const up = [];
@@ -76,12 +82,12 @@
             }
             st.hands[winner].push(...shuffle(pot, Rr));
             st.plis++; st.last = {shown, winner, battles, n: pot.length};
-            log(st, `${battles ? (battles > 1 ? `Double bataille ! ` : 'Bataille ! ') : ''}${nm(st, winner)} ramasse ${pot.length} cartes.`);
+            log(st, i18n(battles > 1 ? 'Double bataille ! {name} ramasse {n} cartes.' : battles ? 'Bataille ! {name} ramasse {n} cartes.' : '{name} ramasse {n} cartes.', {name: nm(st, winner), n: String(pot.length)}));
             const alive = st.hands.filter(h => h.length).length;
             if (alive <= 1 || st.plis >= st.cap) {
                 const counts = st.hands.map(h => h.length), best = Math.max(...counts);
                 st.winner = counts.indexOf(best); st.total = counts.slice(); st.over = true; st.phase = 'over';
-                log(st, alive <= 1 ? `${nm(st, st.winner)} a toutes les cartes : gagné !` : `Après ${st.cap} plis, ${nm(st, st.winner)} a le plus de cartes : gagné !`);
+                log(st, alive <= 1 ? i18n('{name} a toutes les cartes : gagné !', {name: nm(st, st.winner)}) : i18n('Après {n} plis, {name} a le plus de cartes : gagné !', {n: String(st.cap), name: nm(st, st.winner)}));
             }
             return {ok: true};
         },
@@ -120,32 +126,32 @@
             if (a.t === 'draw') {
                 if (st.pending) {
                     let n = 0; for (let k = 0; k < st.pending; k++) { this.refill(st); const c = st.stock.pop(); if (c) { h.push(c); n++; } }
-                    log(st, `${nm(st, p)} pioche ${n} cartes.`); st.pending = 0; this.advance(st); return {ok: true};
+                    log(st, i18n('{name} pioche {n} cartes.', {name: nm(st, p), n: String(n)})); st.pending = 0; this.advance(st); return {ok: true};
                 }
-                if (st.drew) return {ok: false, msg: 'Tu as déjà pioché : joue une carte ou passe.'};
-                this.refill(st); const c = st.stock.pop(); if (!c) return {ok: false, msg: 'Plus rien à piocher.'};
-                h.push(c); st.drew = true; st.voids[p][st.suit] = true; log(st, `${nm(st, p)} pioche.`);
+                if (st.drew) return {ok: false, msg: i18n('Tu as déjà pioché : joue une carte ou passe.')};
+                this.refill(st); const c = st.stock.pop(); if (!c) return {ok: false, msg: i18n('Plus rien à piocher.')};
+                h.push(c); st.drew = true; st.voids[p][st.suit] = true; log(st, i18n('{name} pioche.', {name: nm(st, p)}));
                 return {ok: true, drawn: c.i};
             }
-            if (a.t === 'pass') { if (st.pending || (!st.drew && (st.stock.length || st.pile.length > 1))) return {ok: false, msg: 'Pioche d’abord une carte.'}; log(st, `${nm(st, p)} passe.`); this.advance(st); return {ok: true}; }
+            if (a.t === 'pass') { if (st.pending || (!st.drew && (st.stock.length || st.pile.length > 1))) return {ok: false, msg: i18n('Pioche d’abord une carte.')}; log(st, i18n('{name} passe.', {name: nm(st, p)})); this.advance(st); return {ok: true}; }
             if (a.t !== 'play') return {ok: false};
-            const j = h.findIndex(c => c.i === a.c); if (j < 0) return {ok: false, msg: 'Cette carte n’est pas dans ta main.'};
-            const c = h[j]; if (!this.playable(st, c)) return {ok: false, msg: st.pending ? `Il faut jouer un 2 ou piocher ${st.pending} cartes.` : `Il faut jouer du ${SUIT_NAME[st.suit]}, un ${RANK_NAME[this.top(st).r]} ou un 8.`};
-            if (c.r === 8 && !(a.s >= 0 && a.s <= 3)) return {ok: false, msg: 'Choisis la couleur demandée.'};
+            const j = h.findIndex(c => c.i === a.c); if (j < 0) return {ok: false, msg: i18n('Cette carte n’est pas dans ta main.')};
+            const c = h[j]; if (!this.playable(st, c)) return {ok: false, msg: st.pending ? i18n('Il faut jouer un 2 ou piocher {n} cartes.', {n: String(st.pending)}) : i18n('Il faut jouer du {suit}, un {rank} ou un 8.', {suit: sn(st.suit), rank: rn(this.top(st).r)})};
+            if (c.r === 8 && !(a.s >= 0 && a.s <= 3)) return {ok: false, msg: i18n('Choisis la couleur demandée.')};
             h.splice(j, 1); st.pile.push(c); st.suit = c.r === 8 ? a.s : c.s;
-            log(st, `${nm(st, p)} joue ${cardName(c)}${c.r === 8 ? ` et demande du ${SUIT_NAME[a.s]} ${SUIT[a.s]}` : ''}.`);
+            log(st, c.r === 8 ? i18n('{name} joue {card} et demande du {suit} {sym}.', {name: nm(st, p), card: cardName(c), suit: sn(a.s), sym: SUIT[a.s]}) : i18n('{name} joue {card}.', {name: nm(st, p), card: cardName(c)}));
             if (!h.length) return this.endManche(st, p);
             if (c.r === 2) { st.pending += 2; this.advance(st); }
-            else if (c.r === 11) { log(st, `${nm(st, (p + st.dir + st.n) % st.n)} passe son tour.`); this.advance(st, 2); }
-            else if (c.r === 1) { st.dir = -st.dir; if (st.n === 2) { st.drew = false; log(st, `${nm(st, p)} rejoue.`); } else { log(st, 'On change de sens.'); this.advance(st); } }
+            else if (c.r === 11) { log(st, i18n('{name} passe son tour.', {name: nm(st, (p + st.dir + st.n) % st.n)})); this.advance(st, 2); }
+            else if (c.r === 1) { st.dir = -st.dir; if (st.n === 2) { st.drew = false; log(st, i18n('{name} rejoue.', {name: nm(st, p)})); } else { log(st, i18n('On change de sens.')); this.advance(st); } }
             else this.advance(st);
             return {ok: true};
         },
         endManche(st, w) {
             const pts = st.hands.map(h => sum(h.map(huitPts)));
             pts.forEach((v, p) => { st.total[p] += v; }); st.lastScore = pts; st.phase = 'end';
-            log(st, `${nm(st, w)} n’a plus de cartes : fin de la manche.`);
-            if (Math.max(...st.total) >= this.target) { const lo = Math.min(...st.total); st.winner = st.total.indexOf(lo); st.over = true; st.phase = 'over'; log(st, `${nm(st, st.winner)} gagne la partie avec le moins de points.`); }
+            log(st, i18n('{name} n’a plus de cartes : fin de la manche.', {name: nm(st, w)}));
+            if (Math.max(...st.total) >= this.target) { const lo = Math.min(...st.total); st.winner = st.total.indexOf(lo); st.over = true; st.phase = 'over'; log(st, i18n('{name} gagne la partie avec le moins de points.', {name: nm(st, st.winner)})); }
             return {ok: true};
         },
         ai(st, lvl, Rr) {
@@ -199,14 +205,14 @@
         play(st, a) {
             if (st.phase === 'pass') {
                 const p = st.turn, h = st.hands[p], ids = [...new Set(a.cards || [])];
-                if (a.t !== 'give' || ids.length !== 3 || !ids.every(i => h.some(c => c.i === i))) return {ok: false, msg: 'Choisis 3 cartes à donner.'};
+                if (a.t !== 'give' || ids.length !== 3 || !ids.every(i => h.some(c => c.i === i))) return {ok: false, msg: i18n('Choisis 3 cartes à donner.')};
                 st.given[p] = ids;
                 // l'ordinateur choisit ses 3 cartes en même temps
                 for (let q = 1; q < 4; q++) if (!st.given[q]) st.given[q] = this.passChoice(st, q, st.levels?.[q] || st.level, R(st));
                 const dir = this.passDir(st), moved = st.given.map((g, q) => g.map(i => { const k = st.hands[q].findIndex(c => c.i === i); return st.hands[q].splice(k, 1)[0]; }));
                 moved.forEach((cards, q) => st.hands[(q + dir) % 4].push(...cards));
                 st.received = moved[(0 - dir + 4) % 4].map(c => c.i);
-                log(st, `Chacun a donné 3 cartes ${dir === 1 ? 'à son voisin de gauche' : dir === 3 ? 'à son voisin de droite' : 'au joueur d’en face'}.`);
+                log(st, i18n(dir === 1 ? 'Chacun a donné 3 cartes à son voisin de gauche.' : dir === 3 ? 'Chacun a donné 3 cartes à son voisin de droite.' : 'Chacun a donné 3 cartes au joueur d’en face.'));
                 this.startPlay(st); return {ok: true};
             }
             if (a.t !== 'play' || !this.legal(st).some(x => x.c === a.c)) return {ok: false, msg: this.why(st, a.c)};
@@ -216,23 +222,23 @@
             const s = st.trick[0].c.s, win = st.trick.filter(x => x.c.s === s).sort((x, y) => hiAce(y.c) - hiAce(x.c))[0].p;
             const pts = sum(st.trick.map(x => heartPts(x.c)));
             st.won[win].push(...st.trick.map(x => x.c)); st.lastTrick = {cards: st.trick.slice(), winner: win, pts}; st.tricks++;
-            log(st, `${nm(st, win)} ramasse le pli${pts ? ` (${pts} point${pts > 1 ? 's' : ''})` : ''}.`);
+            log(st, pts ? i18n('{name} ramasse le pli ({points}).', {name: nm(st, win), points: plur(pts, 'point', 'points')}) : i18n('{name} ramasse le pli.', {name: nm(st, win)}));
             if (st.tricks === 13) { st.trick = []; return this.endManche(st); }
             trickStart(st, win); return {ok: true};
         },
         why(st, i) {
-            const h = st.hands[st.turn], c = h.find(x => x.i === i); if (!c) return 'Cette carte n’est pas dans ta main.';
-            if (!st.trick.length && st.tricks === 0) return 'Le 2 de trèfle commence toujours.';
-            if (!st.trick.length && c.s === 0) return 'On ne commence pas par du cœur tant qu’aucun cœur n’a été joué.';
-            if (st.trick.length && h.some(x => x.s === ledSuit(st))) return `Il faut fournir du ${SUIT_NAME[ledSuit(st)]}.`;
-            return 'Au premier pli, pas de cœur ni de Dame de pique (si tu as autre chose).';
+            const h = st.hands[st.turn], c = h.find(x => x.i === i); if (!c) return i18n('Cette carte n’est pas dans ta main.');
+            if (!st.trick.length && st.tricks === 0) return i18n('Le 2 de trèfle commence toujours.');
+            if (!st.trick.length && c.s === 0) return i18n('On ne commence pas par du cœur tant qu’aucun cœur n’a été joué.');
+            if (st.trick.length && h.some(x => x.s === ledSuit(st))) return i18n('Il faut fournir du {suit}.', {suit: sn(ledSuit(st))});
+            return i18n('Au premier pli, pas de cœur ni de Dame de pique (si tu as autre chose).');
         },
         endManche(st) {
             let pts = st.won.map(w => sum(w.map(heartPts)));
             const moon = pts.indexOf(26);
-            if (moon >= 0) { pts = pts.map((v, p) => (p === moon ? 0 : 26)); log(st, `🌙 ${nm(st, moon)} a ramassé tous les points : 26 pour chacun des autres !`); }
+            if (moon >= 0) { pts = pts.map((v, p) => (p === moon ? 0 : 26)); log(st, i18n('🌙 {name} a ramassé tous les points : 26 pour chacun des autres !', {name: nm(st, moon)})); }
             pts.forEach((v, p) => { st.total[p] += v; }); st.lastScore = pts; st.phase = 'end';
-            if (Math.max(...st.total) >= this.target) { const lo = Math.min(...st.total); st.winner = st.total.indexOf(lo); st.over = true; st.phase = 'over'; log(st, `${nm(st, st.winner)} gagne avec le moins de points.`); }
+            if (Math.max(...st.total) >= this.target) { const lo = Math.min(...st.total); st.winner = st.total.indexOf(lo); st.over = true; st.phase = 'over'; log(st, i18n('{name} gagne avec le moins de points.', {name: nm(st, st.winner)})); }
             return {ok: true};
         },
         passChoice(st, p, lvl, Rr) {
@@ -283,7 +289,7 @@
                     const top = st.ranks[a], bot = st.ranks[b]; if (top == null || bot == null) return;
                     const best = st.hands[bot].sort((x, y) => pv(y) - pv(x)).splice(0, k), low = st.hands[top].sort((x, y) => pv(x) - pv(y)).splice(0, k);
                     st.hands[top].push(...best); st.hands[bot].push(...low);
-                    log(st, `${nm(st, bot)} donne ${best.map(c => cardName(c)).join(' et ')} à ${nm(st, top)}, qui rend ${low.map(c => cardName(c)).join(' et ')}.`);
+                    log(st, i18n('{name} donne {cards} à {other}, qui rend {back}.', {name: nm(st, bot), cards: best.map(c => cardName(c)).join(` ${i18n('et', {ctx: 'liste'})} `), other: nm(st, top), back: low.map(c => cardName(c)).join(` ${i18n('et', {ctx: 'liste'})} `)}));
                 });
                 st.turn = st.ranks[st.n - 1];
             } else st.turn = st.hands.findIndex(h => h.some(c => c.s === 3 && c.r === 3)); // la première fois : le 3 de trèfle commence
@@ -307,36 +313,36 @@
         play(st, a) {
             const p = st.turn, h = st.hands[p];
             if (a.t === 'pass') {
-                if (!st.cur) return {ok: false, msg: 'Tu commences : pose une ou plusieurs cartes de même valeur.'};
-                st.passed.push(p); log(st, `${nm(st, p)} passe.`);
+                if (!st.cur) return {ok: false, msg: i18n('Tu commences : pose une ou plusieurs cartes de même valeur.')};
+                st.passed.push(p); log(st, i18n('{name} passe.', {name: nm(st, p)}));
                 const q = this.nextActive(st, p);
-                if (q < 0 || q === st.lastPlay || (st.passed.length && this.waiting(st) === 0)) { log(st, `Tout le monde passe : ${nm(st, st.lastPlay)} reprend la main.`); this.clear(st, st.lastPlay); }
+                if (q < 0 || q === st.lastPlay || (st.passed.length && this.waiting(st) === 0)) { log(st, i18n('Tout le monde passe : {name} reprend la main.', {name: nm(st, st.lastPlay)})); this.clear(st, st.lastPlay); }
                 else st.turn = q;
                 return {ok: true};
             }
             if (a.t !== 'play') return {ok: false};
             const ids = [...new Set(a.cards || [])], cards = ids.map(i => h.find(c => c.i === i));
-            if (!cards.length || cards.some(c => !c)) return {ok: false, msg: 'Choisis des cartes de ta main.'};
-            if (cards.some(c => pv(c) !== pv(cards[0]))) return {ok: false, msg: 'Les cartes jouées ensemble doivent avoir la même valeur.'};
-            if (st.cur && cards.length !== st.cur.count) return {ok: false, msg: `Il faut poser ${st.cur.count} carte${st.cur.count > 1 ? 's' : ''} à la fois.`};
-            if (st.cur && pv(cards[0]) <= st.cur.val) return {ok: false, msg: 'Il faut une valeur plus forte (le 2 est la plus forte, puis l’As).'};
+            if (!cards.length || cards.some(c => !c)) return {ok: false, msg: i18n('Choisis des cartes de ta main.')};
+            if (cards.some(c => pv(c) !== pv(cards[0]))) return {ok: false, msg: i18n('Les cartes jouées ensemble doivent avoir la même valeur.')};
+            if (st.cur && cards.length !== st.cur.count) return {ok: false, msg: i18n('Il faut poser {cards} à la fois.', {cards: plur(st.cur.count, 'carte', 'cartes')})};
+            if (st.cur && pv(cards[0]) <= st.cur.val) return {ok: false, msg: i18n('Il faut une valeur plus forte (le 2 est la plus forte, puis l’As).')};
             cards.forEach(c => h.splice(h.indexOf(c), 1));
             st.cur = {count: cards.length, val: pv(cards[0]), cards: cards.slice(), by: p}; st.lastPlay = p;
-            log(st, `${nm(st, p)} pose ${cards.length > 1 ? `${cards.length} × ` : ''}${RANK_NAME[cards[0].r]}${cards.length > 1 && cards[0].r !== 1 ? (cards[0].r >= 11 ? 's' : '') : ''}.`);
-            if (!h.length) { st.out.push(p); log(st, `${nm(st, p)} n’a plus de cartes : ${TITLES[st.n][st.out.length - 1]} !`); }
+            log(st, cards.length > 1 ? i18n('{name} pose {n} × {rank}.', {name: nm(st, p), n: String(cards.length), rank: cards[0].r >= 11 ? i18n(RANK_NAME[cards[0].r] + 's', {ctx: 'carte'}) : rn(cards[0].r)}) : i18n('{name} pose {rank}.', {name: nm(st, p), rank: rn(cards[0].r)}));
+            if (!h.length) { st.out.push(p); log(st, i18n('{name} n’a plus de cartes : {title} !', {name: nm(st, p), title: i18n(TITLES[st.n][st.out.length - 1])})); }
             const left = st.hands.map((x, q) => q).filter(q => this.active(st, q));
             if (left.length <= 1) { st.out.push(...left); return this.endManche(st); }
-            if (cards[0].r === 2) { log(st, 'Un 2 : personne ne peut faire mieux, le pli est fini.'); this.clear(st, p); return {ok: true}; }
+            if (cards[0].r === 2) { log(st, i18n('Un 2 : personne ne peut faire mieux, le pli est fini.')); this.clear(st, p); return {ok: true}; }
             const q = this.nextActive(st, p);
-            if (q < 0 || q === p) { log(st, `Personne ne peut suivre : ${nm(st, p)} reprend la main.`); this.clear(st, p); } else st.turn = q;
+            if (q < 0 || q === p) { log(st, i18n('Personne ne peut suivre : {name} reprend la main.', {name: nm(st, p)})); this.clear(st, p); } else st.turn = q;
             return {ok: true};
         },
         waiting(st) { return st.hands.map((x, q) => q).filter(q => this.active(st, q) && !st.passed.includes(q) && q !== st.lastPlay).length; },
         endManche(st) {
             st.ranks = st.out.slice(); const pts = Array(st.n).fill(0);
             st.ranks.forEach((p, k) => { pts[p] = st.n - 1 - k; }); pts.forEach((v, p) => { st.total[p] += v; }); st.lastScore = pts; st.phase = 'end';
-            log(st, st.ranks.map((p, k) => `${TITLES[st.n][k]} : ${nm(st, p)}`).join(' · '));
-            if (st.manche >= this.manches) { const hi = Math.max(...st.total); st.winner = st.total.indexOf(hi); st.over = true; st.phase = 'over'; log(st, `${nm(st, st.winner)} gagne la partie.`); }
+            log(st, st.ranks.map((p, k) => i18n('{title} : {name}', {title: i18n(TITLES[st.n][k]), name: nm(st, p)})).join(' · '));
+            if (st.manche >= this.manches) { const hi = Math.max(...st.total); st.winner = st.total.indexOf(hi); st.over = true; st.phase = 'over'; log(st, i18n('{name} gagne la partie.', {name: nm(st, st.winner)})); }
             return {ok: true};
         },
         ai(st, lvl, Rr) {
@@ -362,12 +368,12 @@
     function belAnnonces(hand, trump) {
         const out = [], used = new Set();
         [[11, 200, 'Carré de Valets'], [9, 150, 'Carré de 9'], [1, 100, 'Carré d’As'], [10, 100, 'Carré de 10'], [13, 100, 'Carré de Rois'], [12, 100, 'Carré de Dames']].forEach(([r, v, label]) => {
-            const g = hand.filter(c => c.r === r); if (g.length === 4) { out.push({v, label, high: 20 + B_SEQ.indexOf(r), trump: false}); g.forEach(c => used.add(c.i)); }
+            const g = hand.filter(c => c.r === r); if (g.length === 4) { out.push({v, label: i18n(label), high: 20 + B_SEQ.indexOf(r), trump: false}); g.forEach(c => used.add(c.i)); }
         });
         for (let s = 0; s < 4; s++) {
             const has = B_SEQ.map(r => hand.some(c => c.s === s && c.r === r && !used.has(c.i)));
             let k = 0; while (k < 8) { if (!has[k]) { k++; continue; } let e = k; while (e + 1 < 8 && has[e + 1]) e++; const len = e - k + 1;
-                if (len >= 3) out.push({v: len >= 5 ? 100 : len === 4 ? 50 : 20, label: len >= 5 ? `Cent (${len} à la suite) à ${SUIT[s]}` : len === 4 ? `Cinquante à ${SUIT[s]}` : `Tierce à ${SUIT[s]}`, high: e, trump: s === trump});
+                if (len >= 3) out.push({v: len >= 5 ? 100 : len === 4 ? 50 : 20, label: len >= 5 ? i18n('Cent ({n} à la suite) à {sym}', {n: String(len), sym: SUIT[s]}) : len === 4 ? i18n('Cinquante à {sym}', {sym: SUIT[s]}) : i18n('Tierce à {sym}', {sym: SUIT[s]}), high: e, trump: s === trump});
                 k = e + 1; }
         }
         return out;
@@ -408,43 +414,43 @@
             st.trump = s; st.taker = p; const h = st.hands[p]; h.push(st.turned);
             h.push(st.rest.shift(), st.rest.shift());
             for (let q = 1; q <= 4; q++) { const x = (st.dealer + q) % 4; if (x !== p) for (let k = 0; k < 3; k++) st.hands[x].push(st.rest.shift()); }
-            log(st, `${nm(st, p)} prend à ${SUIT[s]} ${SUIT_NAME[s]}.`);
+            log(st, i18n('{name} prend à {sym} {suit}.', {name: nm(st, p), sym: SUIT[s], suit: sn(s)}));
             // belote-rebelote : le Roi et la Dame d'atout dans la même main
             st.beloteP = st.hands.findIndex(hh => hh.some(c => c.s === s && c.r === 13) && hh.some(c => c.s === s && c.r === 12));
             // les annonces : seule l'équipe qui a la meilleure les marque toutes
             const all = st.hands.map(hh => belAnnonces(hh, s)), best = [0, 1].map(t => all.filter((a, q) => team(q) === t).flat().sort((x, y) => y.v - x.v || y.high - x.high || (y.trump - x.trump))[0] || null);
             let wt = -1; if (best[0] && best[1]) wt = best[0].v !== best[1].v ? (best[0].v > best[1].v ? 0 : 1) : best[0].high !== best[1].high ? (best[0].high > best[1].high ? 0 : 1) : best[0].trump ? 0 : best[1].trump ? 1 : -1; else wt = best[0] ? 0 : best[1] ? 1 : -1;
             st.ann = {list: all, team: wt, pts: wt < 0 ? 0 : sum(all.filter((a, q) => team(q) === wt).flat().map(a => a.v))};
-            if (wt >= 0) all.forEach((a, q) => { if (team(q) === wt && a.length) log(st, `${nm(st, q)} annonce : ${a.map(x => x.label).join(', ')}.`); });
+            if (wt >= 0) all.forEach((a, q) => { if (team(q) === wt && a.length) log(st, i18n('{name} annonce : {list}.', {name: nm(st, q), list: a.map(x => x.label).join(', ')})); });
             st.phase = 'play'; trickStart(st, (st.dealer + 1) % 4);
             st.hands.forEach(hh => hh.sort((x, y) => (x.s === s) - (y.s === s) || x.s - y.s || bStrength(x, s) - bStrength(y, s)));
         },
         play(st, a) {
             const p = st.turn;
             if (st.phase === 'bid1' || st.phase === 'bid2') {
-                if (a.t === 'take') { if (st.phase === 'bid1' ? a.s !== st.turned.s : (a.s === st.turned.s || !(a.s >= 0 && a.s < 4))) return {ok: false, msg: st.phase === 'bid1' ? 'Au premier tour, on prend dans la couleur de la carte retournée.' : 'Au second tour, on choisit une autre couleur.'}; this.take(st, p, a.s); return {ok: true}; }
+                if (a.t === 'take') { if (st.phase === 'bid1' ? a.s !== st.turned.s : (a.s === st.turned.s || !(a.s >= 0 && a.s < 4))) return {ok: false, msg: i18n(st.phase === 'bid1' ? 'Au premier tour, on prend dans la couleur de la carte retournée.' : 'Au second tour, on choisit une autre couleur.')}; this.take(st, p, a.s); return {ok: true}; }
                 if (a.t !== 'pass') return {ok: false};
-                log(st, `${nm(st, p)} passe.`); st.bids++; st.turn = (p + 1) % 4;
+                log(st, i18n('{name} passe.', {name: nm(st, p)})); st.bids++; st.turn = (p + 1) % 4;
                 if (st.bids === 4 && st.phase === 'bid1') { st.phase = 'bid2'; st.bids = 0; }
-                else if (st.bids === 4) { log(st, 'Personne ne prend : on redistribue.'); st.redeal = (st.redeal || 0) + 1; this.deal(st); }
+                else if (st.bids === 4) { log(st, i18n('Personne ne prend : on redistribue.')); st.redeal = (st.redeal || 0) + 1; this.deal(st); }
                 return {ok: true};
             }
             if (a.t !== 'play') return {ok: false};
             const h = st.hands[p], c = h.find(x => x.i === a.c);
-            if (!c) return {ok: false, msg: 'Cette carte n’est pas dans ta main.'};
+            if (!c) return {ok: false, msg: i18n('Cette carte n’est pas dans ta main.')};
             if (!this.allowed(st, h, p).includes(c)) return {ok: false, msg: this.why(st, h, p)};
             h.splice(h.indexOf(c), 1); st.trick.push({p, c});
-            if (st.beloteP === p && c.s === st.trump && (c.r === 13 || c.r === 12)) log(st, `${nm(st, p)} : « ${h.some(x => x.s === st.trump && (x.r === 13 || x.r === 12)) ? 'Belote' : 'Rebelote'} ! »`);
+            if (st.beloteP === p && c.s === st.trump && (c.r === 13 || c.r === 12)) log(st, i18n(h.some(x => x.s === st.trump && (x.r === 13 || x.r === 12)) ? '{name} : « Belote ! »' : '{name} : « Rebelote ! »', {name: nm(st, p)}));
             if (st.trick.length < 4) { st.turn = (p + 1) % 4; return {ok: true}; }
             const w = this.master(st).p, pts = sum(st.trick.map(x => bPts(x.c, st.trump)));
             st.won[team(w)].push(...st.trick.map(x => x.c)); st.trickCount[team(w)]++; st.tricks++;
-            st.lastTrick = {cards: st.trick.slice(), winner: w, pts}; log(st, `${nm(st, w)} ramasse le pli (${pts} points).`);
+            st.lastTrick = {cards: st.trick.slice(), winner: w, pts}; log(st, i18n('{name} ramasse le pli ({points}).', {name: nm(st, w), points: plur(pts, 'point', 'points')}));
             if (st.tricks === 8) { st.trick = []; return this.endManche(st, w); }
             trickStart(st, w); return {ok: true};
         },
         why(st, h, p) {
-            const s = st.trick[0].c.s; if (h.some(c => c.s === s)) return s === st.trump ? 'À l’atout, il faut monter (jouer plus fort) si tu peux.' : `Il faut fournir du ${SUIT_NAME[s]}.`;
-            return 'Tu n’as pas de la couleur demandée : il faut couper avec un atout (et monter si un atout est déjà posé), sauf si ton partenaire est maître.';
+            const s = st.trick[0].c.s; if (h.some(c => c.s === s)) return s === st.trump ? i18n('À l’atout, il faut monter (jouer plus fort) si tu peux.') : i18n('Il faut fournir du {suit}.', {suit: sn(s)});
+            return i18n('Tu n’as pas de la couleur demandée : il faut couper avec un atout (et monter si un atout est déjà posé), sauf si ton partenaire est maître.');
         },
         endManche(st, last) {
             const T = st.trump, card = [0, 1].map(t => sum(st.won[t].map(c => bPts(c, T))));
@@ -455,11 +461,11 @@
             const ann = [0, 0]; if (st.ann?.team >= 0) ann[st.ann.team] = st.ann.pts;
             const tt = team(st.taker), tot = [0, 1].map(t => card[t] + bel[t] + ann[t]);
             let pts;
-            if (tot[tt] > tot[1 - tt]) { pts = tot; log(st, `L’équipe qui a pris fait son contrat : ${tot[tt]} contre ${tot[1 - tt]}.`); }
-            else { pts = [0, 0]; pts[1 - tt] = (capot >= 0 ? 250 : 162) + ann[0] + ann[1] + bel[1 - tt]; pts[tt] = bel[tt]; log(st, `L’équipe qui a pris est « dedans » (${tot[tt]} contre ${tot[1 - tt]}) : tout va aux adversaires.`); }
+            if (tot[tt] > tot[1 - tt]) { pts = tot; log(st, i18n('L’équipe qui a pris fait son contrat : {a} contre {b}.', {a: String(tot[tt]), b: String(tot[1 - tt])})); }
+            else { pts = [0, 0]; pts[1 - tt] = (capot >= 0 ? 250 : 162) + ann[0] + ann[1] + bel[1 - tt]; pts[tt] = bel[tt]; log(st, i18n('L’équipe qui a pris est « dedans » ({a} contre {b}) : tout va aux adversaires.', {a: String(tot[tt]), b: String(tot[1 - tt])})); }
             st.lastScore = pts.slice(); st.teamTotal = st.teamTotal || [0, 0]; st.teamTotal[0] += pts[0]; st.teamTotal[1] += pts[1];
             st.total = [st.teamTotal[0], st.teamTotal[1], st.teamTotal[0], st.teamTotal[1]]; st.phase = 'end'; st.detail = {card, bel, ann, capot};
-            if (Math.max(...st.teamTotal) >= this.target) { const wt = st.teamTotal[0] >= st.teamTotal[1] ? 0 : 1; st.winner = wt; st.winTeam = wt; st.over = true; st.phase = 'over'; log(st, `L’équipe ${wt === 0 ? `de ${nm(st, 0)} et ${nm(st, 2)}` : `de ${nm(st, 1)} et ${nm(st, 3)}`} gagne la partie.`); }
+            if (Math.max(...st.teamTotal) >= this.target) { const wt = st.teamTotal[0] >= st.teamTotal[1] ? 0 : 1; st.winner = wt; st.winTeam = wt; st.over = true; st.phase = 'over'; log(st, i18n('L’équipe de {a} et {b} gagne la partie.', wt === 0 ? {a: nm(st, 0), b: nm(st, 2)} : {a: nm(st, 1), b: nm(st, 3)})); }
             return {ok: true};
         },
         handValue(h, s, extra) { const all = extra ? h.concat([extra]) : h; let v = 0; all.forEach(c => { if (c.s === s) v += B_TRUMP[c.r] + 5; else if (c.r === 1) v += 11; else if (c.r === 10 && all.some(x => x.s === c.s && x.r === 1)) v += 5; }); return v; },
@@ -509,7 +515,7 @@
                 st.chien = d.splice(0, 6); d.forEach((c, j) => st.hands[(st.dealer + 1 + j) % 4].push(c));
                 // petit sec (le Petit seul atout, sans l'Excuse) : on redistribue
                 if (!st.hands.some(h => h.some(c => c.s === 4 && c.r === 1) && h.filter(c => c.s >= 4).length === 1)) break;
-                log(st, 'Petit sec : on redistribue.');
+                log(st, i18n('Petit sec : on redistribue.'));
             }
             st.hands.forEach(h => this.sort(h)); st.phase = 'bid'; st.turn = (st.dealer + 1) % 4; st.bid = 0; st.taker = -1; st.spoken = 0;
             st.won = [[], []]; st.tricks = 0; st.trick = []; st.lastTrick = null; st.ecart = []; st.excuseDue = null; st.pab = 0;
@@ -536,28 +542,28 @@
         play(st, a) {
             const p = st.turn;
             if (st.phase === 'bid') {
-                if (a.t === 'bid') { if (!(a.v > st.bid && a.v <= 4)) return {ok: false, msg: 'Il faut annoncer plus fort que le contrat déjà demandé.'}; st.bid = a.v; st.taker = p; log(st, `${nm(st, p)} : ${CONTRACTS[a.v]}.`); }
-                else if (a.t === 'pass') log(st, `${nm(st, p)} passe.`); else return {ok: false};
+                if (a.t === 'bid') { if (!(a.v > st.bid && a.v <= 4)) return {ok: false, msg: i18n('Il faut annoncer plus fort que le contrat déjà demandé.')}; st.bid = a.v; st.taker = p; log(st, i18n('{name} : {contract}.', {name: nm(st, p), contract: i18n(CONTRACTS[a.v])})); }
+                else if (a.t === 'pass') log(st, i18n('{name} passe.', {name: nm(st, p)})); else return {ok: false};
                 st.spoken++; st.turn = (p + 1) % 4;
                 if (st.spoken === 4) {
-                    if (!st.bid) { log(st, 'Tout le monde passe : on redistribue.'); st.redeal = (st.redeal || 0) + 1; this.deal(st); return {ok: true}; }
+                    if (!st.bid) { log(st, i18n('Tout le monde passe : on redistribue.')); st.redeal = (st.redeal || 0) + 1; this.deal(st); return {ok: true}; }
                     st.mult = MULT[st.bid];
-                    if (st.bid <= 2) { st.hands[st.taker].push(...st.chien); this.sort(st.hands[st.taker]); log(st, `Le chien : ${st.chien.map(c => cardName(c, 'tarot')).join(', ')}.`); st.phase = 'ecart'; st.turn = st.taker; }
-                    else { st.ecart = st.chien.slice(); st.chienTo = st.bid === 3 ? 0 : 1; log(st, st.bid === 3 ? 'Le chien va au preneur, sans être regardé.' : 'Le chien va à la défense, sans être regardé.'); st.phase = 'play'; trickStart(st, (st.dealer + 1) % 4); }
+                    if (st.bid <= 2) { st.hands[st.taker].push(...st.chien); this.sort(st.hands[st.taker]); log(st, i18n('Le chien : {cards}.', {cards: st.chien.map(c => cardName(c, 'tarot')).join(', ')})); st.phase = 'ecart'; st.turn = st.taker; }
+                    else { st.ecart = st.chien.slice(); st.chienTo = st.bid === 3 ? 0 : 1; log(st, i18n(st.bid === 3 ? 'Le chien va au preneur, sans être regardé.' : 'Le chien va à la défense, sans être regardé.')); st.phase = 'play'; trickStart(st, (st.dealer + 1) % 4); }
                 }
                 return {ok: true};
             }
             if (st.phase === 'ecart') {
                 const h = st.hands[p], ids = [...new Set(a.cards || [])], cards = ids.map(i => h.find(c => c.i === i));
-                if (a.t !== 'discard' || cards.length !== 6 || cards.some(c => !c)) return {ok: false, msg: 'Choisis 6 cartes à mettre à l’écart.'};
-                if (cards.some(c => !this.okEcart(c, h))) return {ok: false, msg: 'Pas de Roi, d’Excuse, ni de bout à l’écart ; un atout seulement si tu ne peux pas faire autrement.'};
+                if (a.t !== 'discard' || cards.length !== 6 || cards.some(c => !c)) return {ok: false, msg: i18n('Choisis 6 cartes à mettre à l’écart.')};
+                if (cards.some(c => !this.okEcart(c, h))) return {ok: false, msg: i18n('Pas de Roi, d’Excuse, ni de bout à l’écart ; un atout seulement si tu ne peux pas faire autrement.')};
                 cards.forEach(c => h.splice(h.indexOf(c), 1)); st.ecart = cards; st.chienTo = 0;
-                const shownT = cards.filter(c => c.s === 4); if (shownT.length) log(st, `${nm(st, p)} met à l’écart ${shownT.map(c => cardName(c, 'tarot')).join(', ')} (montré).`);
-                log(st, `${nm(st, p)} a fait son écart.`); st.phase = 'play'; trickStart(st, (st.dealer + 1) % 4); return {ok: true};
+                const shownT = cards.filter(c => c.s === 4); if (shownT.length) log(st, i18n('{name} met à l’écart {cards} (montré).', {name: nm(st, p), cards: shownT.map(c => cardName(c, 'tarot')).join(', ')}));
+                log(st, i18n('{name} a fait son écart.', {name: nm(st, p)})); st.phase = 'play'; trickStart(st, (st.dealer + 1) % 4); return {ok: true};
             }
             if (a.t !== 'play') return {ok: false};
             const h = st.hands[p], c = h.find(x => x.i === a.c);
-            if (!c) return {ok: false, msg: 'Cette carte n’est pas dans ta main.'};
+            if (!c) return {ok: false, msg: i18n('Cette carte n’est pas dans ta main.')};
             if (!this.allowed(st, h).includes(c)) return {ok: false, msg: this.why(st, h)};
             h.splice(h.indexOf(c), 1); st.trick.push({p, c});
             if (st.trick.length < 4) { st.turn = (p + 1) % 4; return {ok: true}; }
@@ -566,13 +572,13 @@
             const take = st.trick.filter(x => x !== ex || (lastTrick && false)).map(x => x.c);
             st.won[this.camp(st, w)].push(...take);
             if (ex) { st.won[this.camp(st, ex.p)].push(ex.c); if (this.camp(st, ex.p) !== this.camp(st, w)) st.excuseDue = this.camp(st, w); }
-            if (lastTrick) { const petit = st.trick.find(x => x.c.s === 4 && x.c.r === 1); if (petit) { st.pab = this.camp(st, w) === 0 ? 1 : -1; log(st, `Le Petit au bout pour ${this.camp(st, w) === 0 ? 'le preneur' : 'la défense'} !`); } }
-            st.tricks++; st.lastTrick = {cards: st.trick.slice(), winner: w}; log(st, `${nm(st, w)} ramasse le pli.`);
+            if (lastTrick) { const petit = st.trick.find(x => x.c.s === 4 && x.c.r === 1); if (petit) { st.pab = this.camp(st, w) === 0 ? 1 : -1; log(st, i18n(this.camp(st, w) === 0 ? 'Le Petit au bout pour le preneur !' : 'Le Petit au bout pour la défense !')); } }
+            st.tricks++; st.lastTrick = {cards: st.trick.slice(), winner: w}; log(st, i18n('{name} ramasse le pli.', {name: nm(st, w)}));
             if (st.tricks === 18) { st.trick = []; return this.endManche(st); }
             trickStart(st, w); return {ok: true};
         },
         winnerOf(trick) { const lead = trick.find(x => x.c.s !== 5); if (!lead) return trick[0].p; const s = lead.c.s; let best = lead; trick.forEach(x => { if (x.c.s === 4 && (best.c.s !== 4 || x.c.r > best.c.r)) best = x; else if (x.c.s === s && best.c.s === s && x.c.r > best.c.r) best = x; }); return best.p; },
-        why(st, h) { const lead = st.trick.find(x => x.c.s !== 5), s = lead.c.s; if (h.some(c => c.s === s)) return s === 4 ? 'À l’atout, il faut monter (jouer un atout plus fort) si tu peux.' : `Il faut fournir du ${SUIT_NAME[s]}.`; return 'Tu n’as pas la couleur demandée : il faut couper avec un atout, et monter si un atout est déjà posé. (L’Excuse se joue quand tu veux.)'; },
+        why(st, h) { const lead = st.trick.find(x => x.c.s !== 5), s = lead.c.s; if (h.some(c => c.s === s)) return s === 4 ? i18n('À l’atout, il faut monter (jouer un atout plus fort) si tu peux.') : i18n('Il faut fournir du {suit}.', {suit: sn(s)}); return i18n('Tu n’as pas la couleur demandée : il faut couper avec un atout, et monter si un atout est déjà posé. (L’Excuse se joue quand tu veux.)'); },
         endManche(st) {
             const half = [0, 1].map(t => sum(st.won[t].map(tHalf)));
             half[st.chienTo || 0] += sum(st.ecart.map(tHalf));
@@ -582,9 +588,9 @@
             const s = base + st.pab * 10 * st.mult;
             const res = [0, 0, 0, 0].map((v, p) => (p === st.taker ? 3 * s : -s));
             res.forEach((v, p) => { st.total[p] += v; }); st.lastScore = res; st.phase = 'end';
-            st.detail = {pts, need, oud, contract: CONTRACTS[st.bid], win, mult: st.mult, pab: st.pab};
-            log(st, `${nm(st, st.taker)} ${win ? 'réussit' : 'chute'} sa ${CONTRACTS[st.bid]} : ${pts} points pour ${need} demandés (${oud} bout${oud > 1 ? 's' : ''}).`);
-            if (st.manche >= this.manches) { const hi = Math.max(...st.total); st.winner = st.total.indexOf(hi); st.over = true; st.phase = 'over'; log(st, `${nm(st, st.winner)} gagne la partie.`); }
+            st.detail = {pts, need, oud, contract: i18n(CONTRACTS[st.bid]), win, mult: st.mult, pab: st.pab};
+            log(st, i18n(win ? '{name} réussit sa {contract} : {pts} points pour {need} demandés ({bouts}).' : '{name} chute sa {contract} : {pts} points pour {need} demandés ({bouts}).', {name: nm(st, st.taker), contract: i18n(CONTRACTS[st.bid]), pts: String(pts), need: String(need), bouts: plur(oud, 'bout', 'bouts')}));
+            if (st.manche >= this.manches) { const hi = Math.max(...st.total); st.winner = st.total.indexOf(hi); st.over = true; st.phase = 'over'; log(st, i18n('{name} gagne la partie.', {name: nm(st, st.winner)})); }
             return {ok: true};
         },
         handScore(h) { let v = 0; h.forEach(c => { if (c.s === 5) v += 8; else if (c.s === 4) { v += c.r === 21 ? 10 : c.r === 1 ? (h.filter(x => x.s === 4).length >= 5 ? 8 : 2) : 2 + (c.r >= 16 ? 2 : 0); } else if (c.r === 14) v += 6; else if (c.r === 13) v += 3; }); for (let s = 0; s < 4; s++) if (!h.some(c => c.s === s)) v += 5; return v; },
@@ -660,20 +666,20 @@
         play(st, a) {
             const p = st.turn, h = st.hands[p];
             if (st.phase === 'draw') {
-                if (a.t !== 'draw') return {ok: false, msg: 'Prends d’abord une carte : dans la pioche ou sur la défausse.'};
-                const c = a.from === 'discard' ? st.discard.pop() : st.stock.pop(); if (!c) return {ok: false, msg: 'Il n’y a rien là.'};
+                if (a.t !== 'draw') return {ok: false, msg: i18n('Prends d’abord une carte : dans la pioche ou sur la défausse.')};
+                const c = a.from === 'discard' ? st.discard.pop() : st.stock.pop(); if (!c) return {ok: false, msg: i18n('Il n’y a rien là.')};
                 h.push(c); st.took = a.from === 'discard' ? c.i : -1; st.phase = 'discard';
-                log(st, a.from === 'discard' ? `${nm(st, p)} prend ${cardName(c)} sur la défausse.` : `${nm(st, p)} pioche.`); return {ok: true, drawn: c.i};
+                log(st, a.from === 'discard' ? i18n('{name} prend {card} sur la défausse.', {name: nm(st, p), card: cardName(c)}) : i18n('{name} pioche.', {name: nm(st, p)})); return {ok: true, drawn: c.i};
             }
             if (st.phase !== 'discard' || (a.t !== 'discard' && a.t !== 'knock')) return {ok: false};
-            const c = h.find(x => x.i === a.c); if (!c) return {ok: false, msg: 'Cette carte n’est pas dans ta main.'};
-            if (c.i === st.took) return {ok: false, msg: 'On ne rejette pas la carte qu’on vient de prendre sur la défausse.'};
+            const c = h.find(x => x.i === a.c); if (!c) return {ok: false, msg: i18n('Cette carte n’est pas dans ta main.')};
+            if (c.i === st.took) return {ok: false, msg: i18n('On ne rejette pas la carte qu’on vient de prendre sur la défausse.')};
             const rest = h.filter(x => x !== c);
-            if (a.t === 'knock' && bestMelds(rest).dw > 10) return {ok: false, msg: 'Pour frapper, tes cartes seules doivent faire 10 points ou moins.'};
+            if (a.t === 'knock' && bestMelds(rest).dw > 10) return {ok: false, msg: i18n('Pour frapper, tes cartes seules doivent faire 10 points ou moins.')};
             h.splice(h.indexOf(c), 1); st.discard.push(c);
             if (a.t === 'knock') return this.knock(st, p);
-            log(st, `${nm(st, p)} jette ${cardName(c)}.`);
-            if (st.stock.length <= 2) { st.result = {nul: true}; st.lastScore = [0, 0]; st.phase = 'end'; log(st, 'La pioche est presque vide : manche nulle.'); return {ok: true}; }
+            log(st, i18n('{name} jette {card}.', {name: nm(st, p), card: cardName(c)}));
+            if (st.stock.length <= 2) { st.result = {nul: true}; st.lastScore = [0, 0]; st.phase = 'end'; log(st, i18n('La pioche est presque vide : manche nulle.')); return {ok: true}; }
             st.turn = 1 - p; st.phase = 'draw'; st.took = -1; return {ok: true};
         },
         knock(st, p) {
@@ -681,12 +687,12 @@
             let dead = D.dead.slice(), laid = [];
             if (!gin) { const melds = K.melds.map(m => m.slice()); let again = true; while (again) { again = false; for (const c of dead.slice()) { const m = melds.find(x => fitsMeld(x, c)); if (m) { m.push(c); dead = dead.filter(x => x !== c); laid.push(c); again = true; } } } }
             const ddw = sum(dead.map(ginVal)), pts = [0, 0];
-            if (gin) { pts[p] = 25 + ddw; log(st, `${nm(st, p)} fait gin ! (+${pts[p]})`); }
-            else if (K.dw < ddw) { pts[p] = ddw - K.dw; log(st, `${nm(st, p)} frappe : ${K.dw} contre ${ddw} (+${pts[p]}).`); }
-            else { pts[q] = K.dw - ddw + 25; log(st, `${nm(st, q)} contre la frappe : ${ddw} contre ${K.dw} (+${pts[q]}).`); }
+            if (gin) { pts[p] = 25 + ddw; log(st, i18n('{name} fait gin ! (+{n})', {name: nm(st, p), n: String(pts[p])})); }
+            else if (K.dw < ddw) { pts[p] = ddw - K.dw; log(st, i18n('{name} frappe : {a} contre {b} (+{n}).', {name: nm(st, p), a: String(K.dw), b: String(ddw), n: String(pts[p])})); }
+            else { pts[q] = K.dw - ddw + 25; log(st, i18n('{name} contre la frappe : {a} contre {b} (+{n}).', {name: nm(st, q), a: String(ddw), b: String(K.dw), n: String(pts[q])})); }
             st.result = {knocker: p, gin, K, D: {...D, dead}, laid: laid.map(c => c.i)};
             pts.forEach((v, k) => { st.total[k] += v; }); st.lastScore = pts; st.phase = 'end';
-            if (Math.max(...st.total) >= this.target) { st.winner = st.total[0] >= st.total[1] ? 0 : 1; st.over = true; st.phase = 'over'; log(st, `${nm(st, st.winner)} gagne la partie.`); }
+            if (Math.max(...st.total) >= this.target) { st.winner = st.total[0] >= st.total[1] ? 0 : 1; st.over = true; st.phase = 'over'; log(st, i18n('{name} gagne la partie.', {name: nm(st, st.winner)})); }
             return {ok: true};
         },
         ai(st, lvl, Rr) {
@@ -743,21 +749,21 @@
         play(st, a) {
             const p = st.turn;
             if (a.t === 'flip') {
-                if (st.hand[p]) return {ok: false, msg: 'Tu as déjà une carte retournée : joue-la ou pose-la sur ta défausse.'};
-                if (!st.talon[p].length) { if (!st.disc[p].length) return {ok: false, msg: 'Plus de talon.'}; st.talon[p] = st.disc[p].reverse().map(c => ({...c, up: false})); st.disc[p] = []; log(st, `${nm(st, p)} retourne sa défausse : elle redevient son talon.`); }
+                if (st.hand[p]) return {ok: false, msg: i18n('Tu as déjà une carte retournée : joue-la ou pose-la sur ta défausse.')};
+                if (!st.talon[p].length) { if (!st.disc[p].length) return {ok: false, msg: i18n('Plus de talon.')}; st.talon[p] = st.disc[p].reverse().map(c => ({...c, up: false})); st.disc[p] = []; log(st, i18n('{name} retourne sa défausse : elle redevient son talon.', {name: nm(st, p)})); }
                 const c = st.talon[p].pop(); c.up = true; st.hand[p] = c; return {ok: true};
             }
             if (a.t === 'end' || a.t === 'pass') {
                 if (a.t === 'end') { if (!st.hand[p]) return {ok: false}; st.disc[p].push(st.hand[p]); st.hand[p] = null; }
-                else if (st.hand[p] || st.talon[p].length || st.disc[p].length) return {ok: false, msg: 'Retourne d’abord une carte de ton talon.'};
-                log(st, `${nm(st, p)} termine son tour.`); st.turn = 1 - p; st.turns++;
+                else if (st.hand[p] || st.talon[p].length || st.disc[p].length) return {ok: false, msg: i18n('Retourne d’abord une carte de ton talon.')};
+                log(st, i18n('{name} termine son tour.', {name: nm(st, p)})); st.turn = 1 - p; st.turns++;
                 if (st.turns >= st.cap) return this.finish(st, -1);
                 return {ok: true};
             }
             if (a.t !== 'move') return {ok: false};
             const from = this.src(st, a.from || ''), to = this.src(st, a.to || '');
-            if (!from || !to || !from.length) return {ok: false, msg: 'Rien à prendre là.'};
-            if (!this.sources(st, p).includes(a.from)) return {ok: false, msg: 'Tu ne peux prendre que le dessus de ta crapette, ta carte retournée ou le dessus d’une colonne.'};
+            if (!from || !to || !from.length) return {ok: false, msg: i18n('Rien à prendre là.')};
+            if (!this.sources(st, p).includes(a.from)) return {ok: false, msg: i18n('Tu ne peux prendre que le dessus de ta crapette, ta carte retournée ou le dessus d’une colonne.')};
             const c = this.top(from); if (!this.canTo(st, c, a.to, p)) return {ok: false, msg: this.why(a.to)};
             if (a.from.startsWith('h')) st.hand[p] = null; else from.pop();
             c.up = true; to.push(c); st.moved++;
@@ -765,10 +771,10 @@
             if (!this.left(st, p)) return this.finish(st, p);
             return {ok: true};
         },
-        why: to => (to.startsWith('f') ? 'Sur une fondation : on monte de l’As au Roi, dans la même couleur de carte.' : to.startsWith('c') ? 'Sur une colonne : une carte plus faible d’un, de l’autre couleur (rouge sur noir) ; une colonne vide prend n’importe quelle carte.' : 'Sur la crapette ou la défausse de l’autre : même couleur de carte, juste au-dessus ou au-dessous.'),
+        why: to => i18n(to.startsWith('f') ? 'Sur une fondation : on monte de l’As au Roi, dans la même couleur de carte.' : to.startsWith('c') ? 'Sur une colonne : une carte plus faible d’un, de l’autre couleur (rouge sur noir) ; une colonne vide prend n’importe quelle carte.' : 'Sur la crapette ou la défausse de l’autre : même couleur de carte, juste au-dessus ou au-dessous.'),
         finish(st, w) {
-            if (w < 0) { const l = [this.left(st, 0), this.left(st, 1)]; w = l[0] <= l[1] ? 0 : 1; log(st, `Après ${st.cap} tours, ${nm(st, w)} a le moins de cartes : gagné !`); }
-            else log(st, `${nm(st, w)} a posé toutes ses cartes : gagné !`);
+            if (w < 0) { const l = [this.left(st, 0), this.left(st, 1)]; w = l[0] <= l[1] ? 0 : 1; log(st, i18n('Après {n} tours, {name} a le moins de cartes : gagné !', {n: String(st.cap), name: nm(st, w)})); }
+            else log(st, i18n('{name} a posé toutes ses cartes : gagné !', {name: nm(st, w)}));
             st.winner = w; st.total = [52 - this.left(st, 0), 52 - this.left(st, 1)]; st.over = true; st.phase = 'over'; return {ok: true};
         },
         ai(st, lvl, Rr) {
@@ -822,15 +828,15 @@
     function create(k, o = {}) {
         const g = get(k); if (!g) throw new Error('Jeu inconnu : ' + k);
         let n = Number(o.n) || g.def; if (!g.players.includes(n)) n = g.def;
-        const names = Array.isArray(o.names) && o.names.length >= n ? o.names.slice(0, n) : (n === 2 ? ['Toi', 'Nord'] : n === 3 ? ['Toi', 'Ouest', 'Est'] : NAMES.slice());
+        const names = Array.isArray(o.names) && o.names.length >= n ? o.names.slice(0, n) : (n === 2 ? ['Toi', 'Nord'] : n === 3 ? ['Toi', 'Ouest', 'Est'] : NAMES.slice()).map(seat);
         const level = LEVELS.includes(o.level) ? o.level : 'moyen', levels = Array.from({length: n}, (_, p) => (LEVELS.includes(o.levels?.[p]) ? o.levels[p] : level));
         const st = {k, seed: String(o.seed ?? 'x'), n, level, levels, names, rs: 0, manche: 1, total: Array(n).fill(0), log: [], over: false, winner: -1, phase: 'play', turn: 0, hands: []};
         g.E.deal(st); return st;
     }
     const legal = st => (st.over || st.phase === 'end' ? [] : get(st.k).E.legal(st));
     function play(st, a) {
-        if (!a || st.over) return {ok: false, msg: 'La partie est finie.'};
-        if (st.phase === 'end') return {ok: false, msg: 'La manche est finie.'};
+        if (!a || st.over) return {ok: false, msg: i18n('La partie est finie.')};
+        if (st.phase === 'end') return {ok: false, msg: i18n('La manche est finie.')};
         return get(st.k).E.play(st, a) || {ok: false};
     }
     /** le coup de l'ordinateur pour le joueur dont c'est le tour */

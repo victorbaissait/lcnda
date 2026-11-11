@@ -6,6 +6,7 @@
     'use strict';
     const J = () => window.LCNDA_JEUX_FAMILLE, L = () => window.LCNDA_JEUX_LOGIQUE;
     if (!J()) return;
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : s);
     const SYMS = ['❌', '⭕', '⭐', '🌳', '♥', '🔺', '🟦', '🌙', '☀️', '🍀', '🐾', '🎲'];
     const AIS = [['', '🙂 Une personne'], ['simple', '🤖 Ordinateur (simple)'], ['moyen', '🤖 Ordinateur (moyen)']];
     const MAXG = 30, MAXS = 30;
@@ -28,11 +29,11 @@
             {k: 'infini', name: 'Grille sans fin', hint: 'Commence en 5×5 et s’agrandit, aligner 5', cfg: {rows: 5, cols: 5, k: 5, grow: true, gravity: false, fill: false}},
             {k: 'remplir', name: 'Jusqu’à remplir la grille', hint: '10×10, on compte les alignements de 4', cfg: {rows: 10, cols: 10, k: 4, grow: false, gravity: false, fill: true}}],
         fieldsHtml: (c, h) => `<div class="jf-grid2"><div data-jfx-rows></div><div data-jfx-cols></div></div><div data-jfx-k></div>
-            <div class="jf-checks">${h.toggle('data-jfx-gravity', c.gravity, '⬇ Gravité (les pions tombent, comme au « puissance 4 »)')}${h.toggle('data-jfx-diag', c.diag, '↗ Les diagonales comptent')}${h.toggle('data-jfx-grow', c.grow, '⤢ La grille s’agrandit quand on joue au bord (sans la gravité)')}${h.toggle('data-jfx-fill', c.fill, '🧮 Jouer jusqu’à remplir la grille : chaque alignement compte un point (une suite deux fois plus longue en vaut deux), le plus de points gagne')}</div>`,
+            <div class="jf-checks">${h.toggle('data-jfx-gravity', c.gravity, i18n('⬇ Gravité (les pions tombent, comme au « puissance 4 »)'))}${h.toggle('data-jfx-diag', c.diag, i18n('↗ Les diagonales comptent'))}${h.toggle('data-jfx-grow', c.grow, i18n('⤢ La grille s’agrandit quand on joue au bord (sans la gravité)'))}${h.toggle('data-jfx-fill', c.fill, i18n('🧮 Jouer jusqu’à remplir la grille : chaque alignement compte un point (une suite deux fois plus longue en vaut deux), le plus de points gagne'))}</div>`,
         bindFields(form, c, save, {range}) {
-            const kSlot = form.querySelector('[data-jfx-k]'), drawK = () => range(kSlot, {label: 'Combien à la suite pour gagner', min: 3, max: Math.max(3, Math.min(10, c.grow ? 10 : Math.max(c.rows, c.cols))), value: Math.min(c.k, c.grow ? 10 : Math.max(c.rows, c.cols)), unit: 'à la suite', def: 3}, v => { c.k = v; save(); });
-            range(form.querySelector('[data-jfx-rows]'), {label: 'Lignes', min: 3, max: MAXS, value: c.rows, unit: 'lignes', def: 3}, v => { c.rows = v; if (c.k > Math.max(c.rows, c.cols) && !c.grow) c.k = Math.max(c.rows, c.cols); save(); drawK(); });
-            range(form.querySelector('[data-jfx-cols]'), {label: 'Colonnes', min: 3, max: MAXS, value: c.cols, unit: 'colonnes', def: 3}, v => { c.cols = v; if (c.k > Math.max(c.rows, c.cols) && !c.grow) c.k = Math.max(c.rows, c.cols); save(); drawK(); });
+            const kSlot = form.querySelector('[data-jfx-k]'), drawK = () => range(kSlot, {label: i18n('Combien à la suite pour gagner'), min: 3, max: Math.max(3, Math.min(10, c.grow ? 10 : Math.max(c.rows, c.cols))), value: Math.min(c.k, c.grow ? 10 : Math.max(c.rows, c.cols)), unit: i18n('à la suite'), def: 3}, v => { c.k = v; save(); });
+            range(form.querySelector('[data-jfx-rows]'), {label: i18n('Lignes'), min: 3, max: MAXS, value: c.rows, unit: i18n('lignes'), def: 3}, v => { c.rows = v; if (c.k > Math.max(c.rows, c.cols) && !c.grow) c.k = Math.max(c.rows, c.cols); save(); drawK(); });
+            range(form.querySelector('[data-jfx-cols]'), {label: i18n('Colonnes'), min: 3, max: MAXS, value: c.cols, unit: i18n('colonnes'), def: 3}, v => { c.cols = v; if (c.k > Math.max(c.rows, c.cols) && !c.grow) c.k = Math.max(c.rows, c.cols); save(); drawK(); });
             drawK();
         },
         onChange(t, c, form) {
@@ -47,23 +48,23 @@
         onPicker(e, c) { const row = e.target.closest('[data-i]'); if (!row) return; const it = e.detail?.item || (e.detail?.items || [])[0], p = c.players[Number(row.dataset.i)]; p.pid = it && !it.free ? Number(it.id) : 0; p.ptitle = it?.title || ''; },
         playerFields(p, i, h) {
             const PK = window.LCNDA_PICKER || window.LCNDA_APP;
-            return `<label>Symbole<select name="psym">${SYMS.map(s => `<option value="${s}" ${p.sym === s ? 'selected' : ''}>${s}</option>`).join('')}<option value="lettre" ${p.sym === 'lettre' ? 'selected' : ''}>Une lettre…</option><option value="portrait" ${p.sym === 'portrait' ? 'selected' : ''}>Le portrait d’un ancêtre…</option></select></label>
-                ${p.sym === 'lettre' ? `<label>Lettre<input name="pletter" maxlength="2" value="${h.esc(p.letter)}" size="3" placeholder="A"></label>` : ''}
-                ${p.sym === 'portrait' && PK?.pickerField ? `<div class="jfx-pk"><span class="pk-lab">Ancêtre</span>${PK.pickerField({name: `ppid${i}`, kind: 'person', value: p.pid ? {id: p.pid, title: p.ptitle} : null})}</div>` : ''}
-                <label>Qui joue<select name="pai">${AIS.map(([v, t]) => `<option value="${v}" ${p.ai === v ? 'selected' : ''}>${t}</option>`).join('')}</select></label>`;
+            return `<label>${h.esc(i18n('Symbole'))}<select name="psym">${SYMS.map(s => `<option value="${s}" ${p.sym === s ? 'selected' : ''}>${s}</option>`).join('')}<option value="lettre" ${p.sym === 'lettre' ? 'selected' : ''}>${h.esc(i18n('Une lettre…'))}</option><option value="portrait" ${p.sym === 'portrait' ? 'selected' : ''}>${h.esc(i18n('Le portrait d’un ancêtre…'))}</option></select></label>
+                ${p.sym === 'lettre' ? `<label>${h.esc(i18n('Lettre'))}<input name="pletter" maxlength="2" value="${h.esc(p.letter)}" size="3" placeholder="A"></label>` : ''}
+                ${p.sym === 'portrait' && PK?.pickerField ? `<div class="jfx-pk"><span class="pk-lab">${h.esc(i18n('Ancêtre'))}</span>${PK.pickerField({name: `ppid${i}`, kind: 'person', value: p.pid ? {id: p.pid, title: p.ptitle} : null})}</div>` : ''}
+                <label>${h.esc(i18n('Qui joue'))}<select name="pai">${AIS.map(([v, t]) => `<option value="${v}" ${p.ai === v ? 'selected' : ''}>${h.esc(i18n(t))}</option>`).join('')}</select></label>`;
         },
         async start(c, src, prev) {
-            if (c.players.every(p => p.ai)) return {error: 'Il faut au moins une personne pour jouer (sinon les ordinateurs jouent tout seuls).'};
-            if (c.players.some(p => p.sym === 'portrait' && !p.pid)) return {error: 'Choisis l’ancêtre de chaque joueur qui a le symbole « portrait ».'};
+            if (c.players.every(p => p.ai)) return {error: i18n('Il faut au moins une personne pour jouer (sinon les ordinateurs jouent tout seuls).')};
+            if (c.players.some(p => p.sym === 'portrait' && !p.pid)) return {error: i18n('Choisis l’ancêtre de chaque joueur qui a le symbole « portrait ».')};
             const syms = c.players.map(p => (p.sym === 'lettre' ? 'L:' + (p.letter || '?') : p.sym === 'portrait' ? 'P:' + p.pid : p.sym));
-            if (new Set(syms).size !== syms.length) return {error: 'Deux joueurs ont le même symbole : choisis-en un différent pour chacun.'};
+            if (new Set(syms).size !== syms.length) return {error: i18n('Deux joueurs ont le même symbole : choisis-en un différent pour chacun.')};
             let photos = {};
             if (c.players.some(p => p.sym === 'portrait')) { try { const d = await J().loadData(); d.persons.forEach(x => { if (c.players.some(p => p.pid === x.id)) photos[x.id] = {photo: x.photo, first: x.first, last: x.last, g: x.g}; }); } catch (_) {} }
             const starter = prev ? ((prev.starter ?? 0) + 1) % c.players.length : 0;
-            return {board: L().emptyBoard(c.rows, c.cols), turn: starter, starter, moves: [], line: null, winner: -1, draw: false, photos, score: prev?.score?.length === c.players.length ? prev.score : c.players.map(() => 0), round: (prev?.round || 0) + 1, status: 'Manche en cours'};
+            return {board: L().emptyBoard(c.rows, c.cols), turn: starter, starter, moves: [], line: null, winner: -1, draw: false, photos, score: prev?.score?.length === c.players.length ? prev.score : c.players.map(() => 0), round: (prev?.round || 0) + 1, status: i18n('Manche en cours')};
         },
         mount(host, g, api) {
-            const {esc} = api, L_ = api.L, c = g.cfg, P = c.players, name = i => P[i]?.name || `Joueur ${i + 1}`;
+            const {esc} = api, L_ = api.L, c = g.cfg, P = c.players, name = i => P[i]?.name || i18n('Joueur {n}', {n: i + 1});
             let aiT = 0, focus = null;
             const symHtml = (i, size = 34) => { const p = P[i]; if (p.sym === 'lettre') return `<span class="jfx-sym jfx-let" style="--pc:${esc(p.color)}">${esc(p.letter || '?')}</span>`;
                 if (p.sym === 'portrait') { const x = g.photos?.[p.pid] || {}; return api.avatar({id: p.pid, first: x.first || p.ptitle, last: x.last || '', g: x.g || 'u', photo: x.photo || ''}, size); }
@@ -71,15 +72,15 @@
             const over = () => g.winner >= 0 || g.draw;
             const draw = () => {
                 const cnt = c.fill ? L_.morpionCount(g.board, c.k, c.diag, P.length) : null, rows = g.board.length, cols = g.board[0].length, win = new Set((cnt ? cnt.lines.flat() : g.line || []).map(([r, cc]) => `${r},${cc}`)), moves = new Set(L_.morpionMoves(g.board, c.gravity).map(([r, cc]) => `${r},${cc}`));
-                api.sub(`Manche ${g.round} · aligner ${c.k}${c.gravity ? ' · gravité' : ''}${c.diag ? '' : ' · sans diagonales'}${c.grow ? ' · grille qui s’agrandit' : ''}${c.fill ? ' · jusqu’à remplir la grille' : ''} · ${rows}×${cols}`);
+                api.sub([i18n('Manche {n}', {n: g.round}), i18n('aligner {n}', {n: c.k}), c.gravity && i18n('gravité'), !c.diag && i18n('sans diagonales'), c.grow && i18n('grille qui s’agrandit'), c.fill && i18n('jusqu’à remplir la grille'), `${rows}×${cols}`].filter(Boolean).join(' · '));
                 const room = Math.min(560, Math.max(200, (host.clientWidth || 600) - (window.innerWidth < 900 ? 40 : 360))), cell = Math.max(22, Math.min(64, Math.floor(room / Math.max(rows, cols)))); // la grille tient dans l'écran (téléphone compris)
-                host.innerHTML = `<div class="goose-game-layout jfx"><div class="goose-board-wrap jfx-wrap"><div class="jfx-grid ${c.gravity ? 'is-gravity' : ''}" style="--rows:${rows};--cols:${cols};--cell:${cell}px" role="grid" aria-label="La grille">${g.board.map((row, r) => row.map((v, cc) => {
+                host.innerHTML = `<div class="goose-game-layout jfx"><div class="goose-board-wrap jfx-wrap"><div class="jfx-grid ${c.gravity ? 'is-gravity' : ''}" style="--rows:${rows};--cols:${cols};--cell:${cell}px" role="grid" aria-label="${esc(i18n('La grille'))}">${g.board.map((row, r) => row.map((v, cc) => {
                         const k = `${r},${cc}`, can = !over() && v < 0 && (!c.gravity || moves.has(k));
-                        return `<button type="button" class="jfx-cell ${win.has(k) ? 'is-win' : ''} ${g.moves.at(-1)?.[0] === r && g.moves.at(-1)?.[1] === cc ? 'is-last' : ''}" data-r="${r}" data-c="${cc}" ${!can && !(c.gravity && !over() && v < 0) ? 'aria-disabled="true"' : ''} aria-label="Ligne ${r + 1}, colonne ${cc + 1}${v >= 0 ? ` : ${esc(name(v))}` : ''}">${v >= 0 ? symHtml(v, cell > 40 ? 34 : 22) : ''}</button>`; }).join('')).join('')}</div></div>
-                  <aside class="goose-panel"><div class="jf-turns">${P.map((p, i) => `<span class="jf-turn ${i === g.turn && !over() ? 'is-on' : ''}" style="--pc:${esc(p.color)}">${symHtml(i, 22)}${esc(p.name)}${p.ai ? ' 🤖' : ''}${cnt ? `<b class="jfx-pts">${api.plural(cnt.pts[i], 'point')}</b>` : ''}<small>${api.plural(g.score[i], 'manche gagnée', 'manches gagnées')}</small></span>`).join('')}</div>
-                    <p class="goose-status jf-big" role="status">${g.winner >= 0 ? `🎉 ${esc(name(g.winner))} gagne la manche${c.fill && cnt ? ` avec ${api.plural(cnt.pts[g.winner], 'point')}` : ''} !` : g.draw ? (c.fill ? '🤝 Égalité : la grille est pleine, même nombre de points.' : '🤝 Match nul : la grille est pleine.') : `À ${esc(name(g.turn))} de jouer${P[g.turn].ai ? ' (l’ordinateur réfléchit…)' : ''}.`}</p>
-                    ${over() ? '<p class="muted jf-small">« ↻ Rejouer » en haut : une nouvelle manche, les scores de la soirée sont gardés.</p>' : `<button type="button" class="button small secondary" data-undo ${g.moves.length ? '' : 'disabled'}>↶ Annuler le dernier coup</button>`}
-                    <p class="muted jf-small">Clavier : flèches puis Entrée.${c.gravity ? ' Avec la gravité, une case de la colonne suffit : le pion tombe.' : ''}</p></aside></div>`;
+                        return `<button type="button" class="jfx-cell ${win.has(k) ? 'is-win' : ''} ${g.moves.at(-1)?.[0] === r && g.moves.at(-1)?.[1] === cc ? 'is-last' : ''}" data-r="${r}" data-c="${cc}" ${!can && !(c.gravity && !over() && v < 0) ? 'aria-disabled="true"' : ''} aria-label="${esc(v >= 0 ? i18n('Ligne {r}, colonne {c} : {name}', {r: r + 1, c: cc + 1, name: name(v)}) : i18n('Ligne {r}, colonne {c}', {r: r + 1, c: cc + 1}))}">${v >= 0 ? symHtml(v, cell > 40 ? 34 : 22) : ''}</button>`; }).join('')).join('')}</div></div>
+                  <aside class="goose-panel"><div class="jf-turns">${P.map((p, i) => `<span class="jf-turn ${i === g.turn && !over() ? 'is-on' : ''}" style="--pc:${esc(p.color)}">${symHtml(i, 22)}${esc(p.name)}${p.ai ? ' 🤖' : ''}${cnt ? `<b class="jfx-pts">${api.plural(cnt.pts[i], 'point')}</b>` : ''}<small>${esc(api.plural(g.score[i], 'manche gagnée', 'manches gagnées'))}</small></span>`).join('')}</div>
+                    <p class="goose-status jf-big" role="status">${esc(g.winner >= 0 ? (c.fill && cnt ? i18n('🎉 {name} gagne la manche avec {pts} !', {name: name(g.winner), pts: api.plural(cnt.pts[g.winner], 'point')}) : i18n('🎉 {name} gagne la manche !', {name: name(g.winner)})) : g.draw ? (c.fill ? i18n('🤝 Égalité : la grille est pleine, même nombre de points.') : i18n('🤝 Match nul : la grille est pleine.')) : P[g.turn].ai ? i18n('À {name} de jouer (l’ordinateur réfléchit…).', {name: name(g.turn)}) : i18n('À {name} de jouer.', {name: name(g.turn)}))}</p>
+                    ${over() ? `<p class="muted jf-small">${esc(i18n('« ↻ Rejouer » en haut : une nouvelle manche, les scores de la soirée sont gardés.'))}</p>` : `<button type="button" class="button small secondary" data-undo ${g.moves.length ? '' : 'disabled'}>↶ ${esc(i18n('Annuler le dernier coup'))}</button>`}
+                    <p class="muted jf-small">${esc(c.gravity ? i18n('Clavier : flèches puis Entrée. Avec la gravité, une case de la colonne suffit : le pion tombe.') : i18n('Clavier : flèches puis Entrée.'))}</p></aside></div>`;
                 bind();
                 if (focus) host.querySelector(`[data-r="${focus[0]}"][data-c="${focus[1]}"]`)?.focus();
                 maybeAI();
@@ -90,10 +91,10 @@
                 g.board[r][cc] = g.turn; g.moves.push([r, cc, g.turn]);
                 let line = c.fill ? null : L_.morpionLine(g.board, r, cc, c.k, c.diag); // « jusqu’à remplir » : pas de victoire avant la fin
                 if (!line && c.grow) { const gr = L_.morpionGrow(g.board, r, cc, MAXG); if (gr.board.length !== g.board.length || gr.board[0].length !== g.board[0].length) { const dr = gr.r - r, dc = gr.c - cc; g.board = gr.board; g.moves = g.moves.map(([a, b, w]) => [a + dr, b + dc, w]); r = gr.r; cc = gr.c; } }
-                if (line) { g.line = line; g.winner = g.turn; g.score[g.turn]++; g.finished = true; g.status = `${name(g.turn)} a gagné`; }
+                if (line) { g.line = line; g.winner = g.turn; g.score[g.turn]++; g.finished = true; g.status = i18n('{name} a gagné', {name: name(g.turn)}); }
                 else if (!L_.morpionMoves(g.board, c.gravity).length) {
                     const pts = c.fill ? L_.morpionCount(g.board, c.k, c.diag, P.length).pts : null, top = pts ? Math.max(...pts) : 0, best = pts ? pts.map((x, i) => (x === top ? i : -1)).filter(i => i >= 0) : [];
-                    if (pts && top > 0 && best.length === 1) { g.winner = best[0]; g.score[g.winner]++; g.status = `${name(g.winner)} a gagné (${api.plural(top, 'point')})`; } else { g.draw = true; g.status = c.fill ? 'Égalité' : 'Match nul'; }
+                    if (pts && top > 0 && best.length === 1) { g.winner = best[0]; g.score[g.winner]++; g.status = i18n('{name} a gagné ({pts})', {name: name(g.winner), pts: api.plural(top, 'point')}); } else { g.draw = true; g.status = c.fill ? i18n('Égalité') : i18n('Match nul'); }
                     g.finished = true;
                 }
                 else g.turn = (g.turn + 1) % P.length;
