@@ -1199,3 +1199,1203 @@ forme|Roupie indienne ¦ Intian rupia ¦ Indiai rúpia
 forme|Chéquier ¦ Shekkivihko ¦ Csekkfüzet
 forme|Carte bancaire ¦ Pankkikortti ¦ Bankkártya
 forme|Chariot de courses ¦ Ostoskärry ¦ Bevásárlókocsi
+piste|Confirmée ¦ Vahvistettu ¦ Megerősítve
+piste|Fausse ¦ Väärä ¦ Hamis
+Fiche #{id} ¦ Kortti #{id} ¦ Adatlap #{id}
+Tableau verrouillé : 🔒 en haut pour le déverrouiller. ¦ Taulu on lukittu: avaa lukitus ylhäältä 🔒. ¦ A tábla zárolva van: a feloldáshoz kattints fent a 🔒 gombra.
+H ou Espace ¦ H tai välilyönti ¦ H vagy szóköz
+Formes ¦ Muodot ¦ Alakzatok
+Dessin à main levée ¦ Vapaa piirto ¦ Szabadkézi rajz
+Gomme ¦ Pyyhekumi ¦ Radír
+{owner} : {name} ¦ {owner}: {name} ¦ {owner}: {name}
+Tableau libre ¦ Vapaa taulu ¦ Szabad tábla
+changer ¦ vaihda ¦ módosítás
+Police du thème ¦ Teeman fontti ¦ A téma betűtípusa
+PDF · double-clic pour l’ouvrir ¦ PDF · avaa kaksoisnapsautuksella ¦ PDF · dupla kattintással megnyílik
+Dossier ¦ Kansio ¦ Dosszié
+double-clic pour ouvrir ¦ avaa kaksoisnapsautuksella ¦ dupla kattintással megnyílik
+Recueil ¦ Kokoelma ¦ Gyűjtemény
+Recueil · double-clic pour l’ouvrir ¦ Kokoelma · avaa kaksoisnapsautuksella ¦ Gyűjtemény · dupla kattintással megnyílik
+Frise ¦ Aikajana ¦ Idővonal
+Chargement de la frise… ¦ Ladataan aikajanaa… ¦ Az idővonal betöltése…
+Cadre ¦ Kehys ¦ Keret
+Chargement du widget… ¦ Ladataan widgetiä… ¦ A widget betöltése…
+Écran de l’app · double-clic pour l’ouvrir ¦ Sovelluksen näkymä · avaa kaksoisnapsautuksella ¦ Az alkalmazás képernyője · dupla kattintással megnyílik
+mort à {age} ¦ kuoli {age}-vuotiaana ¦ {age} évesen halt meg
+Choisis la personne à droite. ¦ Valitse henkilö oikealta. ¦ Válaszd ki a személyt jobb oldalon.
+Choisir ce groupe ¦ Valitse tämä ryhmä ¦ A csoport kiválasztása
+Groupe {n} ¦ Ryhmä {n} ¦ {n}. csoport
+le tableau est fermé ¦ taulu on suljettu ¦ a tábla be van zárva
+d’autres changements ont suivi : utilise ↶ dans la barre du tableau ¦ muita muutoksia on tehty sen jälkeen: käytä taulun palkin ↶-painiketta ¦ azóta más módosítások is történtek: használd a tábla sávjában a ↶ gombot
+Ce tableau ¦ Tämä taulu ¦ Ez a tábla
+Choisir le pinceau ¦ Valitse sivellin ¦ Ecset kiválasztása
+Dureté du bord : 100 % net, moins = flou ¦ Reunan terävyys: 100 % terävä, vähemmän = pehmeä ¦ A szél keménysége: 100 % éles, kevesebb = elmosódott
+Les gommes n’effacent que les dessins à main levée. ¦ Pyyhekumit pyyhkivät vain vapaalla kädellä piirrettyjä. ¦ A radírok csak a szabadkézi rajzokat törlik.
+Clique où écrire. ¦ Napsauta kohtaa, johon kirjoitat. ¦ Kattints oda, ahová írni szeretnél.
+Tire un trait ; posé sur un élément, il s’y accroche. ¦ Vedä viiva; kun se pudotetaan kohteen päälle, se kiinnittyy siihen. ¦ Húzz egy vonalat; ha egy elemre ejted, ahhoz kapcsolódik.
+Un lien tout prêt : légende, couleur et style ¦ Valmis yhteys: selite, väri ja tyyli ¦ Kész összekötő: felirat, szín és stílus
+lien|libre ¦ vapaa ¦ szabad
+Pointes ¦ Kärjet ¦ Nyílhegyek
+Pointes de la même couleur que le trait ¦ Kärjet samanvärisinä kuin viiva ¦ A nyílhegyek a vonallal azonos színűek
+Tire une flèche d’un élément à un autre : elle les suit. ¦ Vedä nuoli kohteesta toiseen: se seuraa niitä. ¦ Húzz nyilat az egyik elemtől a másikig: követni fogja őket.
+Toutes les formes, et créer la sienne ¦ Kaikki muodot, ja luo oma ¦ Minden alakzat, és saját létrehozása
+Toutes les formes ¦ Kaikki muodot ¦ Minden alakzat
+Nom;Année;Lieu ¦ Nimi;Vuosi;Paikka ¦ Név;Év;Hely
+Tableau repris du tableur. ¦ Taulukko otettu taulukkolaskennasta. ¦ A táblázat a táblázatkezelőből átvéve.
+{n}. Choisis un élément pour le régler. ¦ {n}. Valitse kohde säätääksesi sitä. ¦ {n}. Válassz ki egy elemet a beállításához.
+Réglages de la légende ¦ Selitteen asetukset ¦ A jelmagyarázat beállításai
+Cellule <strong>{a}</strong> à <strong>{b}</strong> ¦ Solu <strong>{a}</strong>–<strong>{b}</strong> ¦ Cella: <strong>{a}</strong>–<strong>{b}</strong>
+Cellule <strong>{a}</strong> ¦ Solu <strong>{a}</strong> ¦ Cella: <strong>{a}</strong>
+Clique une cellule pour la choisir ¦ Valitse solu napsauttamalla ¦ Kattints egy cellára a kijelöléséhez
+⇧ + clic : plusieurs · double-clic : écrire ¦ ⇧ + napsautus: useita · kaksoisnapsautus: kirjoita ¦ ⇧ + kattintás: több · dupla kattintás: írás
+Simple note ¦ Pelkkä muistiinpano ¦ Egyszerű jegyzet
+Lieux de… ¦ Paikat… ¦ Helyek…
+Enlever ce repère ¦ Poista tämä merkki ¦ Jelölő eltávolítása
+Enlever : {n} ¦ Poista: {n} ¦ Eltávolítás: {n}
+Aucune forme. ¦ Ei muotoja. ¦ Nincs alakzat.
+🧩 À partir d’une forme ¦ 🧩 Muodosta lähtien ¦ 🧩 Alakzatból kiindulva
+Comment tracer avec la plume ¦ Näin piirrät kynällä ¦ Hogyan rajzolj a tollal
+<strong>Clic</strong> : un point d’angle (trait droit). ¦ <strong>Napsautus</strong>: kulmapiste (suora viiva). ¦ <strong>Kattintás</strong>: sarokpont (egyenes vonal).
+<strong>Cliquer-glisser</strong> : un point arrondi ; tire pour régler la courbe. ¦ <strong>Napsauta ja vedä</strong>: pyöristetty piste; vedä säätääksesi kaarta. ¦ <strong>Kattintás és húzás</strong>: lekerekített pont; húzással állíthatod a görbét.
+<strong>Clic sur le premier point</strong> (jaune) : la forme se ferme. ¦ <strong>Napsautus ensimmäiseen pisteeseen</strong> (keltainen): muoto sulkeutuu. ¦ <strong>Kattintás az első pontra</strong> (sárga): az alakzat bezárul.
+Glisser un point pour le <strong>déplacer</strong> ; glisser une poignée (rond rouge) pour <strong>courber</strong> ; avec <kbd>⌥</kbd> / <kbd>Alt</kbd>, les deux poignées deviennent indépendantes. ¦ Vedä pistettä <strong>siirtääksesi</strong> sitä; vedä kahvaa (punainen ympyrä) <strong>kaartaaksesi</strong>; <kbd>⌥</kbd> / <kbd>Alt</kbd> -näppäimellä kahvat liikkuvat toisistaan riippumatta. ¦ Egy pontot húzva <strong>áthelyezed</strong>; egy fogantyút (piros kör) húzva <strong>meghajlítod</strong>; <kbd>⌥</kbd> / <kbd>Alt</kbd> lenyomásával a két fogantyú függetlenné válik.
+<kbd>⌥</kbd> / <kbd>Alt</kbd> + clic sur un point : angle ↔ arrondi ; <strong>double-clic</strong> : le supprimer. ¦ <kbd>⌥</kbd> / <kbd>Alt</kbd> + napsautus pisteeseen: kulma ↔ pyöristetty; <strong>kaksoisnapsautus</strong>: poista se. ¦ <kbd>⌥</kbd> / <kbd>Alt</kbd> + kattintás egy pontra: sarok ↔ lekerekített; <strong>dupla kattintás</strong>: törlés.
+Une forme fermée, puis un nouveau tracé à l’intérieur : un <strong>trou</strong>. ¦ Suljettu muoto ja sen sisään uusi piirto: <strong>reikä</strong>. ¦ Egy zárt alakzat, majd benne egy új rajzolás: <strong>lyuk</strong>.
+{n} sur le tableau : chaque trait devient une partie remplie de la forme. ¦ {n} taululla: jokaisesta vedosta tulee muodon täytetty osa. ¦ {n} a táblán: minden vonásból az alakzat kitöltött része lesz.
+Choisis d’abord un ou plusieurs dessins à main levée sur le tableau (outil ✍︎), puis reviens ici. ¦ Valitse ensin taululta yksi tai useampi vapaalla kädellä piirretty kuva (työkalu ✍︎) ja palaa sitten tänne. ¦ Előbb jelölj ki a táblán egy vagy több szabadkézi rajzot (✍︎ eszköz), majd gyere vissza ide.
+Nom de la forme ¦ Muodon nimi ¦ Az alakzat neve
+Ce dessin est trop détaillé pour devenir une forme : prends un dessin plus simple (ou moins de traits). ¦ Tämä piirros on liian yksityiskohtainen muodoksi: valitse yksinkertaisempi piirros (tai vähemmän vetoja). ¦ Ez a rajz túl részletes ahhoz, hogy alakzat legyen: válassz egyszerűbb rajzot (vagy kevesebb vonást).
+Forme « {name} » créée : elle est dans « Mes formes ». ¦ Muoto ”{name}” luotu: se on kohdassa ”Omat muodot”. ¦ A(z) „{name}” alakzat elkészült: a „Saját alakzatok” között található.
+Ce navigateur ne lit pas les polices de l’ordinateur : tape le nom de la police (ou fais des listes dans Réglages → Tableaux). ¦ Tämä selain ei lue tietokoneen fontteja: kirjoita fontin nimi (tai tee luettelot kohdassa Asetukset → Taulut). ¦ Ez a böngésző nem olvassa a számítógép betűtípusait: írd be a betűtípus nevét (vagy készíts listákat a Beállítások → Táblák alatt).
+{n} de l’ordinateur lues : leurs graisses exactes sont proposées (et « Aa Toutes les polices… » les montre toutes). ¦ {n} tietokoneelta luettu: niiden tarkat painot ehdotetaan (ja ”Aa Kaikki fontit…” näyttää ne kaikki). ¦ {n} beolvasva a számítógépről: a pontos betűvastagságaik is választhatók (és az „Aa Minden betűtípus…” mindet megmutatja).
+Lecture des polices refusée : {error} ¦ Fonttien luku estetty: {error} ¦ A betűtípusok olvasása elutasítva: {error}
+Ce fichier n’est pas un tableau exporté. ¦ Tämä tiedosto ei ole viety taulu. ¦ Ez a fájl nem exportált tábla.
+Ce fichier n’est pas un tableau exporté de l’app. ¦ Tämä tiedosto ei ole sovelluksesta viety taulu. ¦ Ez a fájl nem az alkalmazásból exportált tábla.
+Import : vérification des fiches et médias… ¦ Tuonti: tarkistetaan kortteja ja mediaa… ¦ Importálás: adatlapok és média ellenőrzése…
+Média absent ici : {name} ¦ Media puuttuu täältä: {name} ¦ A média itt hiányzik: {name}
+{name} (fiche absente ici) ¦ {name} (kortti puuttuu täältä) ¦ {name} (az adatlap itt hiányzik)
+{name} (absent ici) ¦ {name} (puuttuu täältä) ¦ {name} (itt hiányzik)
+{name} (dossier non importé) ¦ {name} (kansiota ei tuotu) ¦ {name} (a dosszié nincs importálva)
+Tableau importé ¦ Taulu tuotu ¦ Tábla importálva
+Associations reprises. ¦ Liitokset palautettu. ¦ A társítások átvéve.
+{n} sur {total} reprises (les autres visent une autre base). ¦ {n}/{total} palautettu (muut viittaavat toiseen tietokantaan). ¦ {n} / {total} átvéve (a többi egy másik adatbázisra mutat).
+Les associations visent une autre base : non reprises. ¦ Liitokset viittaavat toiseen tietokantaan: niitä ei palautettu. ¦ A társítások egy másik adatbázisra mutatnak: nincsenek átvéve.
+Import des photos : {n} / {total}… ¦ Tuodaan kuvia: {n} / {total}… ¦ Fotók importálása: {n} / {total}…
+Média non importé : {name} ¦ Mediaa ei tuotu: {name} ¦ A média nincs importálva: {name}
+Tableau importé. {n} (fiche, média, recueil ou dossier) devenus des notes. ¦ Taulu tuotu. {n} (kortti, media, kokoelma tai kansio) muuttui muistiinpanoiksi. ¦ Tábla importálva. {n} (adatlap, média, gyűjtemény vagy dosszié) jegyzetté alakult.
+Une adresse qui commence par https:// ¦ Osoite, joka alkaa https:// ¦ https:// kezdetű cím
+Choisis un écran (pour une fiche ou une commune, passe par « Une fiche » ou l’Éditeur de widgets). ¦ Valitse näkymä (kortille tai kunnalle käytä kohtaa ”Kortti” tai Widget-editoria). ¦ Válassz egy képernyőt (adatlaphoz vagy településhez az „Egy adatlap” vagy a Widgetszerkesztő útján).
+Ne plus associer ¦ Poista liitos ¦ Társítás megszüntetése
+Le tableau garde son rangement ({where}) ; il apparaît en plus là où tu l’associes (sur la fiche de la personne, dans l’enquête…). ¦ Taulu säilyttää paikkansa ({where}); se näkyy lisäksi siellä, mihin liität sen (henkilön kortilla, selvityksessä…). ¦ A tábla megtartja a helyét ({where}); ezen felül ott is megjelenik, ahová társítod (a személy adatlapján, a nyomozásban…).
+rangement|libre ¦ vapaa ¦ szabad
+(aucun pour l’instant) ¦ (ei vielä yhtään) ¦ (egyelőre egy sem)
+Choisis à quoi associer le tableau. ¦ Valitse, mihin taulu liitetään. ¦ Válaszd ki, mihez társítod a táblát.
+Déjà associé. ¦ Jo liitetty. ¦ Már társítva.
+Tableau associé. ¦ Taulu liitetty. ¦ Tábla társítva.
+le tableau à l’écran ¦ taulu näytöllä ¦ a tábla a képernyőn
+Pas d’image pour cet instantané. ¦ Tällä tilannekuvalla ei ole kuvaa. ¦ Ehhez a pillanatképhez nincs kép.
+📸 Prendre un instantané ¦ 📸 Ota tilannekuva ¦ 📸 Pillanatkép készítése
+Un nom (facultatif) : ¦ Nimi (valinnainen): ¦ Név (nem kötelező):
+avant la visite aux archives ¦ ennen arkistokäyntiä ¦ a levéltári látogatás előtt
+Instantané pris. ¦ Tilannekuva otettu. ¦ Pillanatkép elkészült.
+↺ Revenir à cet état ¦ ↺ Palaa tähän tilaan ¦ ↺ Visszatérés ehhez az állapothoz
+⧉ En faire un tableau ¦ ⧉ Tee siitä taulu ¦ ⧉ Tábla készítése belőle
+Aucun instantané pour l’instant ¦ Ei vielä tilannekuvia ¦ Egyelőre nincs pillanatkép
+Versions automatiques ({n}) ¦ Automaattiset versiot ({n}) ¦ Automatikus verziók ({n})
+une par jour de travail au plus, les 30 dernières gardées ¦ enintään yksi työpäivää kohden, 30 viimeisintä säilytetään ¦ munkanaponként legfeljebb egy, az utolsó 30 megmarad
+Nom du nouveau tableau ¦ Uuden taulun nimi ¦ Az új tábla neve
+même rangement ({where}) et mêmes associations ¦ sama paikka ({where}) ja samat liitokset ¦ ugyanaz a hely ({where}) és ugyanazok a társítások
+Le contenu de l’instantané est recopié dans un tableau à part ; l’original ne change pas. Les dossiers posés dedans restent ceux de l’original. ¦ Tilannekuvan sisältö kopioidaan erilliseen tauluun; alkuperäinen ei muutu. Sen sisällä olevat kansiot ovat edelleen alkuperäisen kansioita. ¦ A pillanatkép tartalma egy külön táblába másolódik; az eredeti nem változik. A benne lévő dossziék az eredetiéi maradnak.
+Tout le contenu actuel est recopié dans un tableau à part ; l’original ne change pas. Les dossiers posés dedans restent ceux de l’original. ¦ Koko nykyinen sisältö kopioidaan erilliseen tauluun; alkuperäinen ei muutu. Sen sisällä olevat kansiot ovat edelleen alkuperäisen kansioita. ¦ A teljes jelenlegi tartalom egy külön táblába másolódik; az eredeti nem változik. A benne lévő dossziék az eredetiéi maradnak.
+Nouveau tableau créé. ¦ Uusi taulu luotu. ¦ Új tábla létrehozva.
+État du tableau changé. ¦ Taulun tila muutettu. ¦ A tábla állapota megváltozott.
+(avec photos) ¦ (kuvien kanssa) ¦ (fotókkal)
+(sélection) ¦ (valinta) ¦ (kijelölés)
+Fichier du tableau enregistré ({size}) : « ＋ Ajouter → Importer un tableau » le rouvre. ¦ Taulun tiedosto tallennettu ({size}): ”＋ Lisää → Tuo taulu” avaa sen uudelleen. ¦ A tábla fájlja mentve ({size}): a „＋ Hozzáadás → Tábla importálása” újra megnyitja.
+{n} Mo ¦ {n} Mt ¦ {n} MB
+{n} ko ¦ {n} kt ¦ {n} KB
+Préparation… ¦ Valmistellaan… ¦ Előkészítés…
+image impossible (une image d’un autre site l’empêche, ou le tableau est trop grand) ¦ kuva ei onnistu (toisen sivuston kuva estää sen, tai taulu on liian suuri) ¦ a kép nem készíthető el (egy másik oldalról származó kép megakadályozza, vagy a tábla túl nagy)
+Une copie de l’image est rangée dans les médias. ¦ Kuvan kopio on tallennettu mediaan. ¦ A kép egy másolata a médiába került.
+Copie dans les médias impossible : {error} ¦ Kopiointi mediaan ei onnistu: {error} ¦ A médiába másolás nem sikerült: {error}
+💾 Fichier léger ¦ 💾 Kevyt tiedosto ¦ 💾 Könnyű fájl
+sans les photos : petit, pour garder une copie ¦ ilman kuvia: pieni, kopion säilyttämiseen ¦ fotók nélkül: kicsi, másolat megőrzéséhez
+💾 Fichier complet ¦ 💾 Täydellinen tiedosto ¦ 💾 Teljes fájl
+avec {n} : pour une autre base ¦ mukana {n}: toista tietokantaa varten ¦ {n} is benne: egy másik adatbázishoz
+pareil : pas de photo de l’app ¦ sama: ei sovelluksen kuvia ¦ ugyanaz: nincs fotó az alkalmazásból
+⤓ Exporter le tableau… (PDF, image, impression, fichier) ¦ ⤓ Vie taulu… (PDF, kuva, tulostus, tiedosto) ¦ ⤓ A tábla exportálása… (PDF, kép, nyomtatás, fájl)
+⤓ Exporter la sélection en image… ¦ ⤓ Vie valinta kuvana… ¦ ⤓ A kijelölés exportálása képként…
+⭐ En faire un modèle (pour les nouveaux tableaux) ¦ ⭐ Tee siitä malli (uusille tauluille) ¦ ⭐ Sablon készítése belőle (az új táblákhoz)
+Ajuster à la sélection ¦ Sovita valintaan ¦ Igazítás a kijelöléshez
+Adapter le contenu à la fenêtre ¦ Sovita sisältö ikkunaan ¦ A tartalom igazítása az ablakhoz
+Pour répartir, choisis au moins trois éléments. ¦ Valitse jakamista varten vähintään kolme kohdetta. ¦ Az elosztáshoz jelölj ki legalább három elemet.
+{todo} à vérifier · {ok} · {no} — clic : aller à la suivante à vérifier ¦ {todo} tarkistettavana · {ok} · {no} — napsautus: siirry seuraavaan tarkistettavaan ¦ {todo} ellenőrizendő · {ok} · {no} — kattintás: ugrás a következő ellenőrizendőre
+Plus rien à vérifier : bravo ! ¦ Ei enää mitään tarkistettavaa: hienoa! ¦ Nincs több ellenőrizendő: bravó!
+Question ¦ Kysymys ¦ Kérdés
+Idée ¦ Idea ¦ Ötlet
+Source ? ¦ Lähde? ¦ Forrás?
+Important ¦ Tärkeä ¦ Fontos
+Réglé ¦ Selvitetty ¦ Megoldva
+Pas encore de commentaire sur cet élément. ¦ Tässä kohteessa ei ole vielä kommenttia. ¦ Ehhez az elemhez még nincs megjegyzés.
+(sans mot) ¦ (ei sanaa) ¦ (szó nélkül)
+＋ un autre mot… ¦ ＋ toinen sana… ¦ ＋ másik szó…
+Retirer ce mot ¦ Poista tämä sana ¦ Szó eltávolítása
+Écris un commentaire ou choisis un mot. ¦ Kirjoita kommentti tai valitse sana. ¦ Írj megjegyzést, vagy válassz egy szót.
+La personne de la frise ¦ Aikajanan henkilö ¦ Az idővonal személye
+Les lieux de… ¦ Paikat… ¦ Helyek…
+Repère « {name} » posé. ¦ Merkki ”{name}” asetettu. ¦ A(z) „{name}” jelölő elhelyezve.
+Cette enquête ne porte pas sur une personne : choisis-en une autre. ¦ Tämä selvitys ei koske henkilöä: valitse toinen. ¦ Ez a nyomozás nem egy személyről szól: válassz másikat.
+Aucun lieu avec ses coordonnées. ¦ Ei yhtään paikkaa koordinaatteineen. ¦ Nincs koordinátákkal rendelkező hely.
+Enquête n° {n} ¦ Selvitys nro {n} ¦ {n}. sz. nyomozás
+Choisis la personne (ou « seulement mes repères »). ¦ Valitse henkilö (tai ”vain omat merkkini”). ¦ Válaszd ki a személyt (vagy a „csak a saját jelölőim” lehetőséget).
+Les lieux de {name} ¦ Henkilön {name} paikat ¦ {name} helyei
+Arbre : lecture des fiches… ¦ Puu: luetaan kortteja… ¦ Fa: adatlapok beolvasása…
+Arbre posé : {n}. Chaque carte reste liée à sa fiche (double-clic pour l’ouvrir). ¦ Puu asetettu: {n}. Jokainen kortti pysyy yhteydessä henkilön korttiin (avaa kaksoisnapsautuksella). ¦ A fa elhelyezve: {n}. Minden kártya kapcsolatban marad az adatlapjával (dupla kattintással megnyílik).
+Arbre posé : {n} (limite atteinte). Chaque carte reste liée à sa fiche (double-clic pour l’ouvrir). ¦ Puu asetettu: {n} (raja saavutettu). Jokainen kortti pysyy yhteydessä henkilön korttiin (avaa kaksoisnapsautuksella). ¦ A fa elhelyezve: {n} (elérte a korlátot). Minden kártya kapcsolatban marad az adatlapjával (dupla kattintással megnyílik).
+Pas de micro disponible ici. ¦ Mikrofonia ei ole käytettävissä täällä. ¦ Itt nem érhető el mikrofon.
+Titre du mémo ¦ Muistion otsikko ¦ A hangjegyzet címe
+Mémo du {date} ¦ Muistio {date} ¦ Hangjegyzet, {date}
+Le son est rangé avec ce tableau (et dans les médias de l’app). ¦ Ääni tallennetaan tämän taulun kanssa (ja sovelluksen mediaan). ¦ A hang ezzel a táblával együtt tárolódik (és az alkalmazás médiájában).
+Micro refusé : autorise-le dans les réglages de l’ordinateur. ¦ Mikrofoni estetty: salli se tietokoneen asetuksista. ¦ Mikrofon elutasítva: engedélyezd a számítógép beállításaiban.
+Arrête d’abord l’enregistrement. ¦ Lopeta ensin tallennus. ¦ Előbb állítsd le a felvételt.
+Enregistre d’abord ton mémo. ¦ Tallenna ensin muistiosi. ¦ Előbb vedd fel a hangjegyzetedet.
+Mémo vocal ¦ Ääniviesti ¦ Hangjegyzet
+{n}, en colonnes (un bout de tableur). ¦ {n}, sarakkeissa (pala taulukkolaskentaa). ¦ {n}, oszlopokban (egy darab táblázat).
+Mon modèle ¦ Oma mallini ¦ Saját sablonom
+Modèle trop lourd pour être gardé (des formes faites d’une image ?). ¦ Malli on liian raskas säilytettäväksi (kuvasta tehtyjä muotoja?). ¦ A sablon túl nagy a megőrzéshez (képből készült alakzatok?).
+Modèle « {name} » enregistré : il est dans « Nouveau tableau ». ¦ Malli ”{name}” tallennettu: se on kohdassa ”Uusi taulu”. ¦ A(z) „{name}” sablon mentve: az „Új tábla” alatt található.
+Calque « {name} » supprimé (ses éléments restent sur le calque principal) ¦ Taso ”{name}” poistettu (sen kohteet jäävät päätasolle) ¦ A(z) „{name}” réteg törölve (az elemei a fő rétegen maradnak)
+Calque supprimé (ses éléments restent sur le calque principal) ¦ Taso poistettu (sen kohteet jäävät päätasolle) ¦ Réteg törölve (az elemei a fő rétegen maradnak)
+▶ Lancer la présentation ({n}) ¦ ▶ Aloita esitys ({n}) ¦ ▶ A bemutató indítása ({n})
+▶ Lancer la présentation ¦ ▶ Aloita esitys ¦ ▶ A bemutató indítása
+＋ La vue actuelle comme étape ¦ ＋ Nykyinen näkymä vaiheeksi ¦ ＋ A jelenlegi nézet lépésként
+＋ La sélection comme étape ¦ ＋ Valinta vaiheeksi ¦ ＋ A kijelölés lépésként
+＋ Une étape par cadre ¦ ＋ Yksi vaihe kehystä kohden ¦ ＋ Keretenként egy lépés
+☰ Les étapes (renommer, ordre…) ¦ ☰ Vaiheet (nimeä uudelleen, järjestys…) ¦ ☰ A lépések (átnevezés, sorrend…)
+▶ Les étapes de la présentation ¦ ▶ Esityksen vaiheet ¦ ▶ A bemutató lépései
+Étape {n} ¦ Vaihe {n} ¦ {n}. lépés
+{n} dans la présentation. ¦ {n} esityksessä. ¦ {n} a bemutatóban.
+Aucune étape. ¦ Ei vaiheita. ¦ Nincs lépés.
+Étape remplacée par la vue actuelle. ¦ Vaihe korvattu nykyisellä näkymällä. ¦ A lépés lecserélve a jelenlegi nézetre.
+Ajoute d’abord des étapes (▶ Présenter → ＋ La vue actuelle comme étape) ou des cadres. ¦ Lisää ensin vaiheita (▶ Esitä → ＋ Nykyinen näkymä vaiheeksi) tai kehyksiä. ¦ Előbb adj hozzá lépéseket (▶ Bemutatás → ＋ A jelenlegi nézet lépésként) vagy kereteket.
+Étape d’avant ¦ Edellinen vaihe ¦ Előző lépés
+Étape suivante ¦ Seuraava vaihe ¦ Következő lépés
+→ ou Espace ¦ → tai välilyönti ¦ → vagy szóköz
+Quitter ¦ Lopeta ¦ Kilépés
+Remplacer par la vue actuelle ¦ Korvaa nykyisellä näkymällä ¦ Csere a jelenlegi nézetre
+Supprimer le tableau « {name} » et tous ses dossiers ? Les photos, sons et fiches posés dessus restent dans l’app. ¦ Poistetaanko taulu ”{name}” ja kaikki sen kansiot? Sille asetetut kuvat, äänet ja kortit jäävät sovellukseen. ¦ Törlöd a(z) „{name}” táblát és minden dossziéját? A rajta lévő fotók, hangok és adatlapok megmaradnak az alkalmazásban.
+sans titre ¦ nimetön ¦ cím nélkül
+Tableau et dossiers supprimés. ¦ Taulu ja kansiot poistettu. ¦ A tábla és a dossziék törölve.
+Tableau supprimé. ¦ Taulu poistettu. ¦ Tábla törölve.
+Ce qu’on sait ¦ Mitä tiedetään ¦ Amit tudunk
+Sources à voir ¦ Tarkistettavat lähteet ¦ Megnézendő források
+Idée centrale ¦ Keskeinen idea ¦ Központi ötlet
+Branche {n} ¦ Haara {n} ¦ {n}. ág
+Date {n} ¦ Päivämäärä {n} ¦ {n}. dátum
+Arbre à la main ¦ Käsin piirretty puu ¦ Kézzel rajzolt fa
+Enfant ¦ Lapsi ¦ Gyermek
+Une toile libre. ¦ Vapaa piirtoalusta. ¦ Szabad vászon.
+Mur d’indices ¦ Vihjeseinä ¦ Nyomfal
+Fond de liège, une question au centre, des notes autour. ¦ Korkkitaustaa, kysymys keskellä, muistilappuja ympärillä. ¦ Parafa háttér, középen egy kérdés, körülötte jegyzetek.
+Carte mentale ¦ Miellekartta ¦ Gondolattérkép
+Une idée au centre, des branches. ¦ Idea keskellä, haarat ympärillä. ¦ Egy ötlet középen, ágakkal.
+Une flèche du temps et des repères. ¦ Aikanuoli ja merkkipisteitä. ¦ Egy időnyíl és jelölők.
+Des cases pour une famille, à relier. ¦ Laatikot perheelle, yhdistettäviksi. ¦ Dobozok egy családnak, összekötéshez.
+Nouveau tableau ¦ Uusi taulu ¦ Új tábla
+Qui est le père de Marie ? ¦ Kuka on Marien isä? ¦ Ki Marie apja?
+Piste 1, les témoins… ¦ Johtolanka 1, todistajat… ¦ 1. nyom, a tanúk…
+Pour commencer ¦ Aloittamiseen ¦ Kezdésnek
+Pour faire tes propres modèles : dans un tableau, ⤓ Exporter → ⭐ En faire un modèle. ¦ Omien mallien tekeminen: taulussa ⤓ Vie → ⭐ Tee siitä malli. ¦ Saját sablonok készítése: egy táblában ⤓ Exportálás → ⭐ Sablon készítése belőle.
+Supprimer ce modèle ¦ Poista tämä malli ¦ Sablon törlése
+Modèle « {name} » supprimé ¦ Malli ”{name}” poistettu ¦ A(z) „{name}” sablon törölve
+Tableau sans titre ¦ Nimetön taulu ¦ Cím nélküli tábla
+Modèle introuvable. ¦ Mallia ei löytynyt. ¦ A sablon nem található.
+Libre ¦ Vapaa ¦ Szabad
+Supprimer ce tableau ¦ Poista tämä taulu ¦ Tábla törlése
+Chercher… (titre, partie) ¦ Hae… (otsikko, osa) ¦ Keresés… (cím, rész)
+Rechercher un tableau ¦ Hae taulua ¦ Tábla keresése
+({n} prometteuses) ¦ ({n} lupaavaa) ¦ ({n} ígéretes)
+{what} : {value} ¦ {what}: {value} ¦ {what}: {value}
+{col} : les plus récents ¦ {col}: uusimmat ¦ {col}: a legújabbak
+{col} : les plus anciens ¦ {col}: vanhimmat ¦ {col}: a legrégebbiek
+{col} : du plus grand au plus petit ¦ {col}: suurimmasta pienimpään ¦ {col}: a legnagyobbtól a legkisebbig
+{col} : du plus petit au plus grand ¦ {col}: pienimmästä suurimpaan ¦ {col}: a legkisebbtől a legnagyobbig
+{help} Un clic sur un titre l’ouvre ; un clic sur une colonne trie. ¦ {help} Napsautus otsikkoon avaa sen; napsautus sarakkeeseen lajittelee. ¦ {help} Egy címre kattintva megnyílik; egy oszlopra kattintva rendez.
+Un clic sur un titre l’ouvre ; un clic sur une colonne trie. ¦ Napsautus otsikkoon avaa sen; napsautus sarakkeeseen lajittelee. ¦ Egy címre kattintva megnyílik; egy oszlopra kattintva rendez.
+Rien ne correspond à ta recherche ¦ Mikään ei vastaa hakuasi ¦ Semmi sem felel meg a keresésednek
+Les tableaux se créent dans Enquêtes → Tableaux. ¦ Taulut luodaan kohdassa Selvitykset → Taulut. ¦ A táblák a Nyomozások → Táblák alatt hozhatók létre.
+Partie ¦ Osa ¦ Rész
+Communes faites ¦ Käydyt kunnat ¦ Kész települések
+Archivé ¦ Arkistoitu ¦ Archiválva
+Tous les tableaux : ceux des enquêtes, des battues, des projets, et les tableaux libres. ¦ Kaikki taulut: selvitysten, laajojen hakujen ja projektien taulut sekä vapaat taulut. ¦ Minden tábla: a nyomozásokéi, az átfésüléseké, a projekteké és a szabad táblák.
+Les projets de l’Atelier de recherche, avec leur état et leur échéance. ¦ Tutkimuspajan projektit tiloineen ja määräaikoineen. ¦ A Kutatóműhely projektjei, az állapotukkal és a határidejükkel.
+Toutes les enquêtes, avec leurs pistes et leurs tableaux. ¦ Kaikki selvitykset johtolankoineen ja tauluineen. ¦ Minden nyomozás, a nyomaival és a tábláival.
+Toutes les battues, commune par commune. ¦ Kaikki laajat haut, kunta kerrallaan. ¦ Minden átfésülés, településenként.
+Chercher un tableau… (titre, enquête, battue) ¦ Hae taulua… (otsikko, selvitys, laaja haku) ¦ Tábla keresése… (cím, nyomozás, átfésülés)
+Chercher une battue… (titre, commune, personne) ¦ Hae laajaa hakua… (otsikko, kunta, henkilö) ¦ Átfésülés keresése… (cím, település, személy)
+Chercher un projet… (titre, sorte) ¦ Hae projektia… (otsikko, tyyppi) ¦ Projekt keresése… (cím, fajta)
+Chercher une enquête… (titre, personne) ¦ Hae selvitystä… (otsikko, henkilö) ¦ Nyomozás keresése… (cím, személy)
+Une toile libre, comme un grand tableau de liège : on y pose des notes, des formes, des flèches, des dessins, des photos, des sons, des PDF, des fiches, des écrans de l’app… Chaque tableau peut être libre ou rangé dans une enquête, une battue ou un projet de l’Atelier. ¦ Vapaa piirtoalusta kuin suuri korkkitaulu: siihen voi asettaa muistilappuja, muotoja, nuolia, piirroksia, kuvia, ääniä, PDF-tiedostoja, kortteja, sovelluksen näkymiä… Jokainen taulu voi olla vapaa tai sijoitettu selvitykseen, laajaan hakuun tai Pajan projektiin. ¦ Szabad vászon, mint egy nagy parafatábla: jegyzeteket, alakzatokat, nyilakat, rajzokat, fotókat, hangokat, PDF-eket, adatlapokat, az alkalmazás képernyőit teheted rá… Minden tábla lehet szabad, vagy elhelyezhető egy nyomozásban, egy átfésülésben vagy a Műhely egy projektjében.
+Aucun tableau ici. ¦ Täällä ei ole tauluja. ¦ Itt nincs tábla.
+Aucun tableau pour l’instant ¦ Ei vielä tauluja ¦ Egyelőre nincs tábla
+Vide, mur d’indices, carte mentale, frise… ¦ Tyhjä, vihjeseinä, miellekartta, aikajana… ¦ Üres, nyomfal, gondolattérkép, idővonal…
+Des toiles libres pour chercher, relier, montrer : notes, flèches, photos, sons, fiches… ¦ Vapaita piirtoalustoja etsimiseen, yhdistämiseen ja näyttämiseen: muistilaput, nuolet, kuvat, äänet, kortit… ¦ Szabad vásznak kereséshez, összekapcsoláshoz, bemutatáshoz: jegyzetek, nyilak, fotók, hangok, adatlapok…
+Dans une enquête ¦ Selvityksessä ¦ Egy nyomozásban
+Dans l’Atelier ¦ Pajassa ¦ A Műhelyben
+＋ Nouveau tableau ici ¦ ＋ Uusi taulu tähän ¦ ＋ Új tábla ide
+Un tableau libre pour cette recherche : notes, flèches, photos, fiches… Tu peux en faire plusieurs (une « partie » chacun). ¦ Vapaa taulu tälle tutkimukselle: muistilaput, nuolet, kuvat, kortit… Voit tehdä useita (kukin on oma ”osansa”). ¦ Egy szabad tábla ehhez a kutatáshoz: jegyzetek, nyilak, fotók, adatlapok… Többet is készíthetsz (mindegyik egy-egy „rész”).
+enquêtes ¦ selvitykset ¦ nyomozások
+TABLEAU ¦ TAULU ¦ TÁBLA
+TABLEAUX ¦ TAULUT ¦ TÁBLÁK
+Ranger le tableau ¦ Sijoita taulu ¦ A tábla elhelyezése
+Ranger ¦ Sijoita ¦ Elhelyezés
+Laquelle ¦ Mikä ¦ Melyik
+(facultatif : pour avoir plusieurs tableaux, « Piste 1 », « Les témoins »…) ¦ (valinnainen: useamman taulun saamiseksi, ”Johtolanka 1”, ”Todistajat”…) ¦ (nem kötelező: több táblához, „1. nyom”, „A tanúk”…)
+(facultatif : piste 1, les témoins, la branche paternelle…) ¦ (valinnainen: johtolanka 1, todistajat, isän puoleinen haara…) ¦ (nem kötelező: 1. nyom, a tanúk, az apai ág…)
+(aucune) ¦ (ei mitään) ¦ (egyik sem)
+▭ Rectangle ¦ ▭ Suorakulmio ¦ ▭ Téglalap
+▢ Arrondi ¦ ▢ Pyöristetty ¦ ▢ Lekerekített
+◯ Ovale ¦ ◯ Soikio ¦ ◯ Ovális
+△ Triangle ¦ △ Kolmio ¦ △ Háromszög
+☆ Étoile ¦ ☆ Tähti ¦ ☆ Csillag
+⬡ Hexagone ¦ ⬡ Kuusikulmio ¦ ⬡ Hatszög
+💬 Bulle ¦ 💬 Puhekupla ¦ 💬 Szövegbuborék
+☁ Nuage ¦ ☁ Pilvi ¦ ☁ Felhő
+pinceau|Stylo ¦ Kynä ¦ Toll
+pinceau|Monoligne ¦ Tasaviiva ¦ Egyenletes vonal
+pinceau|Marqueur ¦ Tussi ¦ Filctoll
+pinceau|Crayon ¦ Lyijykynä ¦ Ceruza
+pinceau|Pastel ¦ Pastelli ¦ Pasztell
+pinceau|Stylo-plume ¦ Täytekynä ¦ Töltőtoll
+pinceau|Calame ¦ Ruokokynä ¦ Nádtoll
+pinceau|Pinceau ¦ Sivellin ¦ Ecset
+pinceau|Aquarelle ¦ Vesiväri ¦ Akvarell
+pinceau|Remplissage ¦ Täyttö ¦ Kitöltés
+pinceau|Surligneur ¦ Korostuskynä ¦ Szövegkiemelő
+pinceau|Craie ¦ Liitu ¦ Kréta
+pinceau|Néon ¦ Neon ¦ Neon
+pinceau|Aérographe ¦ Ilmasivellin ¦ Festékszóró
+pinceau|Pointillé ¦ Pisteviiva ¦ Pontozott
+Néon ¦ Neon ¦ Neon
+Pointillé ¦ Pisteviiva ¦ Pontozott
+trait|— droit ¦ — suora ¦ — egyenes
+trait|⌒ courbe ¦ ⌒ kaareva ¦ ⌒ íves
+trait|⌐ coudé ¦ ⌐ kulmikas ¦ ⌐ megtört
+trait|∿ vague ¦ ∿ aaltoileva ¦ ∿ hullámos
+trait|⩘ zigzag ¦ ⩘ siksak ¦ ⩘ cikcakk
+trait|⤳ contourne les éléments ¦ ⤳ kiertää kohteet ¦ ⤳ megkerüli az elemeket
+⌐ coudé ¦ ⌐ kulmikas ¦ ⌐ megtört
+⤳ contourne les éléments ¦ ⤳ kiertää kohteet ¦ ⤳ megkerüli az elemeket
+fond|Fond à points ¦ Pistetausta ¦ Pontozott háttér
+fond|Quadrillé ¦ Ruudukko ¦ Négyzethálós
+fond|Lignes ¦ Viivat ¦ Vonalas
+fond|Uni ¦ Yksivärinen ¦ Egyszínű
+fond|Papier ¦ Paperi ¦ Papír
+fond|Liège ¦ Korkki ¦ Parafa
+fond|Sombre ¦ Tumma ¦ Sötét
+fond|Couleur à choisir… ¦ Valitse väri… ¦ Választható szín…
+Fond à points ¦ Pistetausta ¦ Pontozott háttér
+Liège ¦ Korkki ¦ Parafa
+Couleur à choisir… ¦ Valitse väri… ¦ Választható szín…
+Motif sur la couleur ¦ Kuvio värin päällä ¦ Minta a színen
+motif|sans motif ¦ ei kuviota ¦ minta nélkül
+motif|points ¦ pisteet ¦ pontok
+motif|quadrillé ¦ ruudukko ¦ négyzetháló
+motif|lignes ¦ viivat ¦ vonalak
+quadrillé ¦ ruudukko ¦ négyzethálós
+Instantanés : figer l’état du tableau, y revenir, en faire un nouveau tableau ¦ Tilannekuvat: pysäytä taulun tila, palaa siihen, tee siitä uusi taulu ¦ Pillanatképek: a tábla állapotának rögzítése, visszatérés hozzá, új tábla készítése belőle
+📸 Instantanés ¦ 📸 Tilannekuvat ¦ 📸 Pillanatképek
+Créer un nouveau tableau à partir de celui-ci ¦ Luo uusi taulu tämän pohjalta ¦ Új tábla létrehozása ebből
+PDF, image PNG ou JPG, impression, fichier du tableau, modèle ¦ PDF, PNG- tai JPG-kuva, tulostus, taulun tiedosto, malli ¦ PDF, PNG vagy JPG kép, nyomtatás, a tábla fájlja, sablon
+Les pistes à vérifier : clic pour aller à la suivante ¦ Tarkistettavat johtolangat: napsauta siirtyäksesi seuraavaan ¦ Ellenőrizendő nyomok: kattints a következőre ugráshoz
+Chercher dans le tableau ¦ Hae taulusta ¦ Keresés a táblán
+Grille aimantée et guides d’alignement ¦ Magneettiruudukko ja tasausapuviivat ¦ Mágneses rács és igazítási segédvonalak
+Mini-carte du tableau (montrer ou cacher) ¦ Taulun pienoiskartta (näytä tai piilota) ¦ A tábla minitérképe (megjelenítés vagy elrejtés)
+Présenter : un parcours d’étapes ¦ Esitä: vaiheiden reitti ¦ Bemutatás: lépések útvonala
+▶ Présenter ¦ ▶ Esitä ¦ ▶ Bemutatás
+Réglages des tableaux : disposition, ordre des outils, boutons montrés ou cachés ¦ Taulujen asetukset: asettelu, työkalujen järjestys, näytetyt tai piilotetut painikkeet ¦ A táblák beállításai: elrendezés, az eszközök sorrendje, megjelenített vagy elrejtett gombok
+Verrouiller ou déverrouiller tout le tableau ¦ Lukitse tai avaa koko taulu ¦ Az egész tábla zárolása vagy feloldása
+Supprimer ce tableau (et ses dossiers) ¦ Poista tämä taulu (ja sen kansiot) ¦ A tábla törlése (a dossziéival együtt)
+Revenir aux tableaux ¦ Palaa tauluihin ¦ Vissza a táblákhoz
+Titre du tableau ¦ Taulun otsikko ¦ A tábla címe
+État du tableau ¦ Taulun tila ¦ A tábla állapota
+● En cours ¦ ● Käynnissä ¦ ● Folyamatban
+⏸ En pause ¦ ⏸ Tauolla ¦ ⏸ Szünetel
+✓ Terminé ¦ ✓ Valmis ¦ ✓ Befejezve
+Enregistrer maintenant (le tableau s’enregistre aussi tout seul) ¦ Tallenna nyt (taulu tallentuu myös itsestään) ¦ Mentés most (a tábla magától is mentődik)
+Ajouter un fichier, un média, une fiche, un écran de l’app… ¦ Lisää tiedosto, media, kortti, sovelluksen näkymä… ¦ Fájl, média, adatlap, az alkalmazás egy képernyője… hozzáadása
+Zoom : ajuster à la sélection, adapter à la fenêtre… ¦ Zoomaus: sovita valintaan, sovita ikkunaan… ¦ Nagyítás: igazítás a kijelöléshez, az ablakhoz…
+Montrer ce qui est groupé ¦ Näytä ryhmitellyt ¦ A csoportosítottak megjelenítése
+Lâche ici : images, sons, vidéos, PDF… ¦ Pudota tähän: kuvia, ääniä, videoita, PDF-tiedostoja… ¦ Engedd el itt: képek, hangok, videók, PDF-ek…
+Un tableau vide. ¦ Tyhjä taulu. ¦ Üres tábla.
+Choisis un outil à gauche, ou glisse ici des photos, des sons, des PDF… « ＋ Ajouter » pose une fiche, un écran de l’app, un widget, un recueil, une étiquette ou un dossier. Double-clic pour écrire. ¦ Valitse työkalu vasemmalta tai vedä tänne kuvia, ääniä, PDF-tiedostoja… ”＋ Lisää” asettaa kortin, sovelluksen näkymän, widgetin, kokoelman, tunnisteen tai kansion. Kaksoisnapsauta kirjoittaaksesi. ¦ Válassz egy eszközt bal oldalt, vagy húzz ide fotókat, hangokat, PDF-eket… A „＋ Hozzáadás” egy adatlapot, az alkalmazás egy képernyőjét, widgetet, gyűjteményt, címkét vagy dossziét tesz fel. Íráshoz kattints duplán.
+Revenir à la police du thème ¦ Palaa teeman fonttiin ¦ Vissza a téma betűtípusához
+Aimanter : grille aimantée et guides d’alignement ¦ Magneettikohdistus: magneettiruudukko ja tasausapuviivat ¦ Mágneses igazítás: mágneses rács és igazítási segédvonalak
+Choisis à droite une personne, une famille ou une enquête, ou pose des repères. ¦ Valitse oikealta henkilö, perhe tai selvitys, tai aseta merkkejä. ¦ Válassz jobb oldalt egy személyt, családot vagy nyomozást, vagy helyezz el jelölőket.
+Glisser pour plier · double-clic pour enlever ce coude ¦ Vedä taittaaksesi · kaksoisnapsauta poistaaksesi tämän taitteen ¦ Húzd a hajlításhoz · dupla kattintással eltávolítod ezt a törést
+Glisser pour ajouter un coude ¦ Vedä lisätäksesi taitteen ¦ Húzd egy törés hozzáadásához
+Modifié… ¦ Muokattu… ¦ Módosítva…
+Enregistré ✓ ¦ Tallennettu ✓ ¦ Mentve ✓
+⚠ Modifié dans une autre fenêtre ¦ ⚠ Muokattu toisessa ikkunassa ¦ ⚠ Egy másik ablakban módosították
+Envoi des fichiers… ¦ Lähetetään tiedostoja… ¦ Fájlok küldése…
+efface seulement ce que tu touches ¦ pyyhkii vain sen, mitä kosketat ¦ csak azt törli, amihez hozzáérsz
+🩹 Gomme fine ¦ 🩹 Tarkka pyyhekumi ¦ 🩹 Finom radír
+🧽 Gomme à traits ¦ 🧽 Vetopyyhekumi ¦ 🧽 Vonalradír
+enlève le trait entier ¦ poistaa koko vedon ¦ az egész vonást eltávolítja
+Autre couleur pour les notes ¦ Muu väri muistilapuille ¦ Más szín a jegyzetekhez
+Tire une flèche d’un élément à un autre : elle les suit quand on les déplace. ¦ Vedä nuoli kohteesta toiseen: se seuraa niitä, kun niitä siirretään. ¦ Húzz nyilat az egyik elemtől a másikig: követi őket, amikor áthelyezed őket.
+Clique où poser le tableur. ¦ Napsauta kohtaa, johon taulukko asetetaan. ¦ Kattints oda, ahová a táblázatot tenni szeretnéd.
+Glisse pour te déplacer ; molette ou deux doigts aussi ; ⌘ + molette pour zoomer. ¦ Vedä liikkuaksesi; myös rulla tai kaksi sormea; ⌘ + rulla zoomaa. ¦ Húzd a mozgáshoz; görgővel vagy két ujjal is; ⌘ + görgő a nagyításhoz.
+Clic : choisir · ⇧ + clic : en ajouter · ⌥ / Alt + glisser : dupliquer · glisser dans le vide : en choisir plusieurs · double-clic : écrire ou ouvrir. ¦ Napsautus: valitse · ⇧ + napsautus: lisää valintaan · ⌥ / Alt + veto: monista · veto tyhjässä: valitse useita · kaksoisnapsautus: kirjoita tai avaa. ¦ Kattintás: kijelölés · ⇧ + kattintás: hozzáadás · ⌥ / Alt + húzás: kettőzés · húzás az üres részen: több kijelölése · dupla kattintás: írás vagy megnyitás.
+Les groupes sont montrés. ¦ Ryhmät näytetään. ¦ A csoportok láthatók.
+Groupes cachés. ¦ Ryhmät piilotettu. ¦ A csoportok elrejtve.
+Fond du cadre ¦ Kehyksen tausta ¦ A keret háttere
+Bord du cadre ¦ Kehyksen reuna ¦ A keret szegélye
+Épaisseur du bord ¦ Reunan paksuus ¦ A szegély vastagsága
+Marge dans le cadre ¦ Sisämarginaali ¦ Belső margó
+Arrondi du cadre ¦ Kehyksen pyöristys ¦ A keret lekerekítése
+Position le long du trait ¦ Sijainti viivalla ¦ Helyzet a vonal mentén
+sur le trait ¦ viivalla ¦ a vonalon
+au-dessus ¦ yläpuolella ¦ felette
+en dessous ¦ alapuolella ¦ alatta
+Écart avec le trait ¦ Etäisyys viivasta ¦ Távolság a vonaltól
+suivre l’angle du trait ¦ seuraa viivan kulmaa ¦ a vonal szögét követi
+Fond du tableau ¦ Taulun tausta ¦ A tábla háttere
+⌘Z annuler · ⌘D dupliquer · ⌘G grouper (⇧ pour dégrouper) · ⌘L verrouiller · ] [ devant / derrière · flèches pour pousser · espace pour se déplacer · ⌘ + molette pour zoomer · coller une image ou une adresse web. ¦ ⌘Z kumoa · ⌘D monista · ⌘G ryhmitä (⇧ purkaa ryhmän) · ⌘L lukitse · ] [ eteen / taakse · nuolet siirtävät · välilyönti liikkumiseen · ⌘ + rulla zoomaa · liitä kuva tai verkko-osoite. ¦ ⌘Z visszavonás · ⌘D kettőzés · ⌘G csoportosítás (⇧ a bontáshoz) · ⌘L zárolás · ] [ előre / hátra · nyilak a tologatáshoz · szóköz a mozgáshoz · ⌘ + görgő a nagyításhoz · kép vagy webcím beillesztése.
+Couleurs, formes, polices, tailles, ordre des menus : Réglages → Tableaux. ¦ Värit, muodot, fontit, koot, valikoiden järjestys: Asetukset → Taulut. ¦ Színek, alakzatok, betűtípusok, méretek, a menük sorrendje: Beállítások → Táblák.
+Puces et numéros ¦ Luettelomerkit ja numerot ¦ Felsorolásjelek és számozás
+• Puce ¦ • Luettelomerkki ¦ • Felsorolásjel
+1. Nombres ¦ 1. Numerot ¦ 1. Számok
+I. Chiffres romains ¦ I. Roomalaiset numerot ¦ I. Római számok
+a. Lettres ¦ a. Kirjaimet ¦ a. Betűk
+A. Lettres capitales ¦ A. Isot kirjaimet ¦ A. Nagybetűk
+– Tiret ¦ – Ajatusviiva ¦ – Gondolatjel
+☐ Cases à cocher ¦ ☐ Valintaruudut ¦ ☐ Jelölőnégyzetek
+Les graisses exactes de la police : 🖥 ci-dessous (polices de l’ordinateur). ¦ Fontin tarkat painot: 🖥 alla (tietokoneen fontit). ¦ A betűtípus pontos vastagságai: 🖥 lent (a számítógép betűtípusai).
+Lire les graisses exactes des polices de l’ordinateur ¦ Lue tietokoneen fonttien tarkat painot ¦ A számítógép betűtípusai pontos vastagságainak beolvasása
+Couleur des pointes ¦ Kärkien väri ¦ A nyílhegyek színe
+même couleur que le trait ¦ sama väri kuin viivalla ¦ a vonallal azonos szín
+(comme le trait) ¦ (kuten viiva) ¦ (mint a vonal)
+Pointe au début ¦ Kärki alussa ¦ Nyílhegy az elején
+Pointe à la fin ¦ Kärki lopussa ¦ Nyílhegy a végén
+Taille des pointes ¦ Kärkien koko ¦ A nyílhegyek mérete
+Forme du trait ¦ Viivan muoto ¦ A vonal alakja
+frère de, a écrit à… ¦ veli, kirjoitti henkilölle… ¦ fivére, írt neki…
+＋ ligne ¦ ＋ rivi ¦ ＋ sor
+＋ colonne ¦ ＋ sarake ¦ ＋ oszlop
+− ligne ¦ − rivi ¦ − sor
+− colonne ¦ − sarake ¦ − oszlop
+Ajouter une ligne dessous ¦ Lisää rivi alle ¦ Sor hozzáadása alá
+Enlever la ligne ¦ Poista rivi ¦ Sor eltávolítása
+Ajouter une colonne à droite ¦ Lisää sarake oikealle ¦ Oszlop hozzáadása jobbra
+Enlever la colonne ¦ Poista sarake ¦ Oszlop eltávolítása
+Fusionner les cellules choisies ¦ Yhdistä valitut solut ¦ A kijelölt cellák egyesítése
+⊞ Fusionner ¦ ⊞ Yhdistä ¦ ⊞ Egyesítés
+Séparer les cellules ¦ Erota solut ¦ Cellák szétválasztása
+⊟ Séparer ¦ ⊟ Erota ¦ ⊟ Szétválasztás
+Colonne plus étroite ¦ Kapeampi sarake ¦ Keskenyebb oszlop
+Colonne plus large ¦ Leveämpi sarake ¦ Szélesebb oszlop
+Vider la cellule ¦ Tyhjennä solu ¦ Cella ürítése
+⌫ vider ¦ ⌫ tyhjennä ¦ ⌫ ürítés
+Le tableur en grand : plus de fonctions, tri, filtres, Excel… puis « ✓ Enregistrer et revenir » ¦ Taulukkolaskenta isona: lisää funktioita, lajittelu, suodattimet, Excel… sitten ”✓ Tallenna ja palaa” ¦ A táblázatkezelő nagyban: több függvény, rendezés, szűrők, Excel… majd „✓ Mentés és vissza”
+Télécharger en CSV (Excel, Numbers…) ¦ Lataa CSV-muodossa (Excel, Numbers…) ¦ Letöltés CSV-ként (Excel, Numbers…)
+première ligne en titre ¦ ensimmäinen rivi otsikkona ¦ az első sor fejléc
+première colonne en titre ¦ ensimmäinen sarake otsikkona ¦ az első oszlop fejléc
+une ligne sur deux teintée ¦ joka toinen rivi sävytetty ¦ minden második sor színezett
+Fond des titres ¦ Otsikoiden tausta ¦ A fejlécek háttere
+Fond de la cellule (les cellules choisies) ¦ Solun tausta (valitut solut) ¦ A cella háttere (a kijelölt cellák)
+Fond de la cellule ¦ Solun tausta ¦ A cella háttere
+aperçu vivant dans le tableau ¦ elävä esikatselu taulussa ¦ élő előnézet a táblán
+La fiche montre ¦ Kortti näyttää ¦ Az adatlap mutatja
+Lu dans la fiche à chaque ouverture du tableau : si la fiche change, la carte suit. ¦ Luetaan kortilta aina, kun taulu avataan: jos kortti muuttuu, kartta seuraa. ¦ A tábla minden megnyitásakor az adatlapból olvassuk ki: ha az adatlap változik, a térkép követi.
+de la personne, son couple et ses enfants ¦ henkilön, hänen pariskuntansa ja lastensa ¦ a személyé, a házaspáré és a gyermekeiké
+👤 Changer de personne ¦ 👤 Vaihda henkilöä ¦ 👤 Másik személy
+aucune fiche (seulement mes repères) ¦ ei korttia (vain omat merkkini) ¦ nincs adatlap (csak a saját jelölőim)
+une personne et sa famille ¦ henkilö ja hänen perheensä ¦ egy személy és a családja
+la personne d’une enquête ¦ selvityksen henkilö ¦ egy nyomozás személye
+👤 Choisir la personne ¦ 👤 Valitse henkilö ¦ 👤 Személy kiválasztása
+Une commune, un lieu… ¦ Kunta, paikka… ¦ Település, hely…
+relier les lieux dans l’ordre (le parcours) ¦ yhdistä paikat järjestyksessä (reitti) ¦ a helyek összekötése sorrendben (az útvonal)
+Poser un repère ¦ Aseta merkki ¦ Jelölő elhelyezése
+Lien tout prêt ¦ Valmis yhteys ¦ Kész összekötő
+Glisse un « ＋ » sur le trait pour le plier en plusieurs segments. ¦ Vedä ”＋” viivan päälle taittaaksesi sen useaksi osaksi. ¦ Húzz egy „＋” jelet a vonalra, hogy több szakaszra törd.
+Aligner ¦ Tasaa ¦ Igazítás
+Centrés (de gauche à droite) ¦ Keskitetty (vasemmalta oikealle) ¦ Középre (balról jobbra)
+Centrés (de haut en bas) ¦ Keskitetty (ylhäältä alas) ¦ Középre (fentről lefelé)
+Même écart de gauche à droite ¦ Sama väli vasemmalta oikealle ¦ Azonos távolság balról jobbra
+Même écart de haut en bas ¦ Sama väli ylhäältä alas ¦ Azonos távolság fentről lefelé
+Même largeur que le premier choisi ¦ Sama leveys kuin ensimmäisellä valitulla ¦ Azonos szélesség, mint az elsőként kijelölté
+Même hauteur que le premier choisi ¦ Sama korkeus kuin ensimmäisellä valitulla ¦ Azonos magasság, mint az elsőként kijelölté
+Répartir ¦ Jaa tasaisesti ¦ Elosztás
+⇹ en largeur ¦ ⇹ leveyssuunnassa ¦ ⇹ vízszintesen
+⇳ en hauteur ¦ ⇳ korkeussuunnassa ¦ ⇳ függőlegesen
+═ même largeur ¦ ═ sama leveys ¦ ═ azonos szélesség
+‖ même hauteur ¦ ‖ sama korkeus ¦ ‖ azonos magasság
+🔓 Déverrouiller ¦ 🔓 Avaa lukitus ¦ 🔓 Feloldás
+🔒 Verrouiller ¦ 🔒 Lukitse ¦ 🔒 Zárolás
+⧉ Grouper ¦ ⧉ Ryhmitä ¦ ⧉ Csoportosítás
+Dégrouper ¦ Pura ryhmä ¦ Csoport bontása
+Faire de ce dessin une forme à toi (réutilisable) ¦ Tee tästä piirroksesta oma muotosi (uudelleenkäytettävä) ¦ Saját alakzat készítése ebből a rajzból (újra felhasználható)
+✏️ En faire une forme ¦ ✏️ Tee siitä muoto ¦ ✏️ Alakzat készítése belőle
+Devant ¦ Eteen ¦ Előre
+Derrière ¦ Taakse ¦ Hátra
+Image du web ¦ Verkkokuva ¦ Kép a webről
+Lien web ¦ Verkkolinkki ¦ Webes hivatkozás
+Frise vivante ¦ Elävä aikajana ¦ Élő idővonal
+Rechercher une forme ¦ Hae muotoa ¦ Alakzat keresése
+Créer une forme à partir d’une autre (retourner, tourner, étirer, ajouter, percer) ¦ Luo muoto toisen pohjalta (käännä, kierrä, venytä, lisää, lävistä) ¦ Alakzat létrehozása egy másikból (tükrözés, forgatás, nyújtás, hozzáadás, kivágás)
+＋ Créer une forme ¦ ＋ Luo muoto ¦ ＋ Alakzat létrehozása
+✒️ Plume (tracé) ¦ ✒️ Kynä (polku) ¦ ✒️ Toll (útvonal)
+✍︎ À partir de mon dessin ¦ ✍︎ Omasta piirroksestani ¦ ✍︎ A saját rajzomból
+🖼 À partir d’une image ¦ 🖼 Kuvasta ¦ 🖼 Képből
+Fermer le tracé en cours ¦ Sulje nykyinen polku ¦ Az aktuális útvonal lezárása
+Commencer un autre tracé (un trou s’il est dans la forme) ¦ Aloita uusi polku (reikä, jos se on muodon sisällä) ¦ Új útvonal kezdése (lyuk, ha az alakzaton belül van)
+Supprimer le point choisi ¦ Poista valittu piste ¦ A kijelölt pont törlése
+Annuler le dernier point ¦ Kumoa viimeinen piste ¦ Az utolsó pont visszavonása
+◯ Fermer ¦ ◯ Sulje ¦ ◯ Lezárás
+＋ Nouveau tracé ¦ ＋ Uusi polku ¦ ＋ Új útvonal
+✕ Point ¦ ✕ Piste ¦ ✕ Pont
+Une image PNG avec un fond transparent donne sa silhouette. Sinon, coche : ce qui est sombre devient la forme. ¦ PNG-kuva, jossa on läpinäkyvä tausta, antaa siluettinsa. Muuten valitse: tummasta tulee muoto. ¦ Egy átlátszó hátterű PNG kép a sziluettjét adja. Különben jelöld be: ami sötét, abból lesz az alakzat.
+le sombre devient la forme (images sans transparence) ¦ tummasta tulee muoto (kuvat ilman läpinäkyvyyttä) ¦ a sötét rész lesz az alakzat (átlátszóság nélküli képek)
+Choisis d’abord un dessin sur le tableau. ¦ Valitse ensin piirros taululta. ¦ Előbb jelölj ki egy rajzot a táblán.
+Ferme la forme : au moins trois points, puis clic sur le premier (ou « ◯ Fermer »). ¦ Sulje muoto: vähintään kolme pistettä, sitten napsautus ensimmäiseen (tai ”◯ Sulje”). ¦ Zárd le az alakzatot: legalább három pont, majd kattintás az elsőre (vagy „◯ Lezárás”).
+Ajouter au tableau ¦ Lisää tauluun ¦ Hozzáadás a táblához
+📎 Des fichiers ¦ 📎 Tiedostoja ¦ 📎 Fájlok
+📁 Choisir des fichiers ¦ 📁 Valitse tiedostoja ¦ 📁 Fájlok kiválasztása
+Images, GIF, sons, vidéos, PDF (ou glisse-les sur le tableau, ou colle une image). ¦ Kuvia, GIF-animaatioita, ääniä, videoita, PDF-tiedostoja (tai vedä ne taululle tai liitä kuva). ¦ Képek, GIF-ek, hangok, videók, PDF-ek (vagy húzd őket a táblára, vagy illessz be egy képet).
+🖼 Un média de l’app ¦ 🖼 Sovelluksen media ¦ 🖼 Az alkalmazás egy médiája
+Un média de l’app ¦ Sovelluksen media ¦ Az alkalmazás egy médiája
+Poser sur le tableau ¦ Aseta taululle ¦ Elhelyezés a táblán
+Choisir une image, un son, une vidéo… ¦ Valitse kuva, ääni, video… ¦ Kép, hang, videó… kiválasztása
+🌐 D’ailleurs ¦ 🌐 Muualta ¦ 🌐 Máshonnan
+Adresse d’une image ou d’un site ¦ Kuvan tai sivuston osoite ¦ Egy kép vagy egy webhely címe
+👤 Une fiche ¦ 👤 Kortti ¦ 👤 Egy adatlap
+Poser la fiche ¦ Aseta kortti ¦ Az adatlap elhelyezése
+📺 Un écran de l’app ¦ 📺 Sovelluksen näkymä ¦ 📺 Az alkalmazás egy képernyője
+Une liste, un diagramme, une statistique, la carte, un village, une de tes listes… ¦ Luettelo, diagrammi, tilasto, kartta, kylä, jokin omista luetteloistasi… ¦ Egy lista, diagram, statisztika, a térkép, egy falu, valamelyik saját listád…
+avec l’aperçu vivant ¦ elävällä esikatselulla ¦ élő előnézettel
+Poser l’écran ¦ Aseta näkymä ¦ A képernyő elhelyezése
+✨ Un de mes widgets ¦ ✨ Jokin widgeteistäni ¦ ✨ Az egyik widgetem
+Poser le widget ¦ Aseta widget ¦ A widget elhelyezése
+Crée d’abord un widget (Réglages → Éditeur de widgets). ¦ Luo ensin widget (Asetukset → Widget-editori). ¦ Előbb hozz létre egy widgetet (Beállítások → Widgetszerkesztő).
+Titre du recueil ¦ Kokoelman otsikko ¦ A gyűjtemény címe
+📚 Un recueil ¦ 📚 Kokoelma ¦ 📚 Egy gyűjtemény
+🏷 Une étiquette ¦ 🏷 Tunniste ¦ 🏷 Egy címke
+ou un mot à toi ¦ tai oma sana ¦ vagy egy saját szó
+Nom du dossier ¦ Kansion nimi ¦ A dosszié neve
+Poser ce mot ¦ Aseta tämä sana ¦ A szó elhelyezése
+▦ Un tableur ¦ ▦ Taulukko ¦ ▦ Egy táblázat
+Une grille à remplir, avec des formules (=SOMME…) ; on peut y coller un bout d’Excel ou de Numbers. ¦ Täytettävä ruudukko kaavoineen (=SUMMA…); siihen voi liittää palan Exceliä tai Numbersia. ¦ Kitöltendő rács képletekkel (=SZUM…); beilleszthetsz egy darabot Excelből vagy Numbersből.
+Poser un tableur ¦ Aseta taulukko ¦ Táblázat elhelyezése
+📁 Un dossier ¦ 📁 Kansio ¦ 📁 Egy dosszié
+Un tableau dans le tableau : double-clic pour y entrer. ¦ Taulu taulussa: kaksoisnapsauta mennäksesi sisään. ¦ Tábla a táblában: belépéshez kattints duplán.
+Créer le dossier ¦ Luo kansio ¦ Dosszié létrehozása
+🌳 Un arbre automatique ¦ 🌳 Automaattinen puu ¦ 🌳 Automatikus fa
+Une personne, et ses parents, grands-parents ou enfants posés en fiches reliées par des flèches. ¦ Henkilö ja hänen vanhempansa, isovanhempansa tai lapsensa kortteina, joita yhdistävät nuolet. ¦ Egy személy és a szülei, nagyszülei vagy gyermekei, nyilakkal összekötött adatlapokként.
+ses ancêtres ¦ hänen esivanhempansa ¦ a felmenői
+ses descendants ¦ hänen jälkeläisensä ¦ a leszármazottai
+sa famille proche ¦ hänen lähiperheensä ¦ a közeli családja
+avec les conjoints ¦ puolisoineen ¦ a házastársakkal
+flèches (sinon des traits) ¦ nuolet (muuten viivat) ¦ nyilak (különben vonalak)
+Poser l’arbre ¦ Aseta puu ¦ A fa elhelyezése
+🗓 Une frise vivante ¦ 🗓 Elävä aikajana ¦ 🗓 Élő idővonal
+Les événements d’une personne (ou de sa famille) placés tout seuls sur une ligne du temps ; elle suit la fiche. ¦ Henkilön (tai hänen perheensä) tapahtumat asettuvat itsestään aikajanalle; se seuraa korttia. ¦ Egy személy (vagy a családja) eseményei maguktól kerülnek egy idővonalra; az adatlapot követi.
+Poser la frise ¦ Aseta aikajana ¦ Az idővonal elhelyezése
+🗺 Une carte ¦ 🗺 Kartta ¦ 🗺 Egy térkép
+Les lieux d’une personne, de sa famille ou d’une enquête ; tu peux y poser tes repères. ¦ Henkilön, hänen perheensä tai selvityksen paikat; voit asettaa siihen omia merkkejäsi. ¦ Egy személy, a családja vagy egy nyomozás helyei; saját jelölőket is tehetsz rá.
+Nom de la personne (facultatif) ¦ Henkilön nimi (valinnainen) ¦ A személy neve (nem kötelező)
+la personne et sa famille ¦ henkilö ja hänen perheensä ¦ a személy és a családja
+personne : seulement mes repères ¦ ei henkilöä: vain omat merkkini ¦ senki: csak a saját jelölőim
+Poser la carte ¦ Aseta kartta ¦ A térkép elhelyezése
+▭ Un cadre ¦ ▭ Kehys ¦ ▭ Egy keret
+Une zone nommée (« Branche paternelle », « Sources à voir ») : ce qui est dedans bouge avec elle ; on peut la replier. ¦ Nimetty alue (”Isän puoleinen haara”, ”Tarkistettavat lähteet”): sen sisältö liikkuu sen mukana; sen voi taittaa kokoon. ¦ Elnevezett terület („Apai ág”, „Megnézendő források”): ami benne van, vele együtt mozog; össze is csukható.
+Nom du cadre ¦ Kehyksen nimi ¦ A keret neve
+Poser le cadre ¦ Aseta kehys ¦ A keret elhelyezése
+🎙 Un mémo vocal ¦ 🎙 Ääniviesti ¦ 🎙 Egy hangjegyzet
+Enregistre ta voix ici : le son est rangé avec le tableau et posé dessus. ¦ Nauhoita äänesi tässä: ääni tallennetaan taulun kanssa ja asetetaan sille. ¦ Itt veheted fel a hangodat: a hang a táblával együtt tárolódik, és rákerül.
+🎙 Enregistrer ¦ 🎙 Nauhoita ¦ 🎙 Felvétel
+🎙 Mémo vocal ¦ 🎙 Ääniviesti ¦ 🎙 Hangjegyzet
+Un fichier « .lcnda-tableau.json » (⤓ Exporter → Fichier léger ou complet) : il devient un nouveau tableau. ¦ Tiedosto ”.lcnda-tableau.json” (⤓ Vie → Kevyt tai täydellinen tiedosto): siitä tulee uusi taulu. ¦ Egy „.lcnda-tableau.json” fájl (⤓ Exportálás → Könnyű vagy teljes fájl): új tábla lesz belőle.
+Tableau verrouillé : clic pour le déverrouiller ¦ Taulu on lukittu: avaa lukitus napsauttamalla ¦ A tábla zárolva van: kattints a feloldáshoz
+Verrouiller tout le tableau ¦ Lukitse koko taulu ¦ Az egész tábla zárolása
+Tableau verrouillé : on peut le regarder et ouvrir ce qu’il contient, rien ne bouge. ¦ Taulu on lukittu: sitä voi katsella ja sen sisältöä avata, mutta mikään ei liiku. ¦ A tábla zárolva van: megnézheted és megnyithatod, ami benne van, de semmi sem mozdul.
+Tableau déverrouillé. ¦ Taulun lukitus avattu. ¦ A tábla feloldva.
+Un projet de l’Atelier ¦ Pajan projekti ¦ A Műhely egy projektje
+Un lieu (sa commune) ¦ Paikka (sen kunta) ¦ Egy hely (a települése)
+Un média (photo, acte, son…) ¦ Media (kuva, asiakirja, ääni…) ¦ Egy média (fotó, okirat, hang…)
+Une famille (un couple) ¦ Perhe (pariskunta) ¦ Egy család (egy pár)
+Un événement ¦ Tapahtuma ¦ Egy esemény
+Un animal ¦ Eläin ¦ Egy állat
+Un autre tableau ¦ Toinen taulu ¦ Egy másik tábla
+Relier ce tableau à une personne, une enquête (ou une de ses parties), une battue… ¦ Yhdistä tämä taulu henkilöön, selvitykseen (tai sen osaan), laajaan hakuun… ¦ A tábla összekapcsolása egy személlyel, nyomozással (vagy annak egy részével), átfésüléssel…
+🔗 Relier… ¦ 🔗 Yhdistä… ¦ 🔗 Összekapcsolás…
+Relier ce tableau ¦ Yhdistä tämä taulu ¦ A tábla összekapcsolása
+À quoi ¦ Mihin ¦ Mihez
+Nouveau tableau depuis un instantané ¦ Uusi taulu tilannekuvasta ¦ Új tábla pillanatképből
+Nouveau tableau à partir de celui-ci ¦ Uusi taulu tämän pohjalta ¦ Új tábla ebből kiindulva
+Grille aimantée : les éléments s’alignent sur la grille et sur les autres (⌥ / Alt en glissant pour s’en passer). ¦ Magneettiruudukko: kohteet asettuvat ruudukkoon ja toisiinsa (⌥ / Alt vetäessä ohittaa sen). ¦ Mágneses rács: az elemek a rácshoz és egymáshoz igazodnak (húzás közben ⌥ / Alt nélküle).
+Grille aimantée enlevée. ¦ Magneettiruudukko poistettu. ¦ Mágneses rács kikapcsolva.
+frère de ¦ veli ¦ fivére
+sœur de ¦ sisar ¦ nővére
+époux de ¦ aviomies ¦ férje
+épouse de ¦ vaimo ¦ felesége
+père de ¦ isä ¦ apja
+mère de ¦ äiti ¦ anyja
+fils de ¦ poika ¦ fia
+fille de ¦ tytär ¦ lánya
+cousin de ¦ serkku ¦ unokatestvére
+cousine de ¦ serkku ¦ unokatestvére
+parrain de ¦ kummisetä ¦ keresztapja
+marraine de ¦ kummitäti ¦ keresztanyja
+témoin de ¦ todistaja ¦ tanúja
+voisin de ¦ naapuri ¦ szomszédja
+a travaillé pour ¦ työskenteli henkilölle ¦ dolgozott neki
+a écrit à ¦ kirjoitti henkilölle ¦ írt neki
+même personne ? ¦ sama henkilö? ¦ ugyanaz a személy?
+💬 Commentaires ¦ 💬 Kommentit ¦ 💬 Megjegyzések
+Ton mot (ex. « Piste », « Archives ») ¦ Oma sanasi (esim. ”Johtolanka”, ”Arkisto”) ¦ A saját szavad (pl. „Nyom”, „Levéltár”)
+Les mots proposés pour les bulles (tu en ajoutes avec « ＋ un autre mot… »). ¦ Kuplille ehdotetut sanat (lisää niitä kohdasta ”＋ toinen sana…”). ¦ A buborékokhoz javasolt szavak (a „＋ másik szó…” gombbal bővítheted).
+Les lignes et les colonnes gardées, avec les formules possibles. ¦ Rivit ja sarakkeet säilytetään, kaavat mahdollisia. ¦ A sorok és oszlopok megmaradnak, képletek is használhatók.
+🗒 Une note par ligne ¦ 🗒 Yksi muistilappu riviä kohden ¦ 🗒 Soronként egy jegyzet
+Chaque ligne devient une note, rangées en grille. ¦ Jokaisesta rivistä tulee muistilappu, ruudukkoon järjestettynä. ¦ Minden sorból egy jegyzet lesz, rácsba rendezve.
+🗂 Une note par ligne du tableur ¦ 🗂 Yksi muistilappu taulukon riviä kohden ¦ 🗂 Táblázatsoronként egy jegyzet
+Les colonnes d’une ligne dans la même note. ¦ Rivin sarakkeet samassa muistilapussa. ¦ Egy sor oszlopai ugyanabban a jegyzetben.
+T Un seul texte ¦ T Yksi teksti ¦ T Egyetlen szöveg
+Tout le texte collé, d’un bloc. ¦ Koko liitetty teksti yhtenä lohkona. ¦ Az egész beillesztett szöveg egy tömbben.
+grouper ce qui est posé ¦ ryhmitä asetetut ¦ az elhelyezettek csoportosítása
+⭐ En faire un modèle ¦ ⭐ Tee siitä malli ¦ ⭐ Sablon készítése belőle
+Enregistrer le modèle ¦ Tallenna malli ¦ A sablon mentése
+Nom du modèle ¦ Mallin nimi ¦ A sablon neve
+Pour une enquête sur un enfant trouvé… ¦ Löytölasta koskevaan selvitykseen… ¦ Egy talált gyermekről szóló nyomozáshoz…
+Décris-le ¦ Kuvaile sitä ¦ Írd le
+seulement la sélection ¦ vain valinta ¦ csak a kijelölés
+sans les textes (garder les cases vides, les titres des cadres restent) ¦ ilman tekstejä (tyhjät laatikot säilyvät, kehysten otsikot jäävät) ¦ szövegek nélkül (az üres dobozok megmaradnak, a keretek címei is)
+Il apparaît dans « Nouveau tableau », avec les modèles de l’app. Les fiches, photos et sons posés sont gardés tels quels (ils pointent vers ta base). ¦ Se näkyy kohdassa ”Uusi taulu” sovelluksen mallien kanssa. Asetetut kortit, kuvat ja äänet säilyvät sellaisinaan (ne viittaavat tietokantaasi). ¦ Az „Új tábla” alatt jelenik meg, az alkalmazás sablonjaival együtt. A rajta lévő adatlapok, fotók és hangok változatlanul megmaradnak (az adatbázisodra mutatnak).
+Calque principal ¦ Päätaso ¦ Fő réteg
+Les nouveaux éléments vont sur ce calque ¦ Uudet kohteet menevät tälle tasolle ¦ Az új elemek erre a rétegre kerülnek
+Choisir ce qu’il contient ¦ Valitse sen sisältö ¦ A tartalmának kijelölése
+Supprimer le calque (ses éléments vont sur le calque principal) ¦ Poista taso (sen kohteet siirtyvät päätasolle) ¦ A réteg törlése (az elemei a fő rétegre kerülnek)
+Mettre la sélection sur le calque choisi ¦ Siirrä valinta valitulle tasolle ¦ A kijelölés áthelyezése a kiválasztott rétegre
+Un calque caché ne s’affiche pas (ni dans les images exportées) ; verrouillé, on ne peut plus le choisir ni le bouger. ¦ Piilotettu taso ei näy (ei myöskään viedyissä kuvissa); lukittua tasoa ei voi enää valita eikä siirtää. ¦ Az elrejtett réteg nem jelenik meg (az exportált képeken sem); a zárolt réteg nem jelölhető ki és nem mozgatható.
+Y aller ¦ Siirry sinne ¦ Ugrás oda
+⟳ vue ¦ ⟳ näkymä ¦ ⟳ nézet
+Chercher un mot, un nom… ¦ Hae sanaa, nimeä… ¦ Szó, név keresése…
+Mini-carte ¦ Pienoiskartta ¦ Minitérkép
+Glisser pour déplacer la mini-carte ¦ Vedä siirtääksesi pienoiskarttaa ¦ Húzd a minitérkép áthelyezéséhez
+Cacher la mini-carte ¦ Piilota pienoiskartta ¦ A minitérkép elrejtése
+Pour tous les jours ¦ Joka päivälle ¦ Mindennapokra
+Écritures anciennes ¦ Vanhat käsialat ¦ Régi írások
+Trop lourd pour être gardé (retire des formes faites d’une image). ¦ Liian raskas säilytettäväksi (poista kuvasta tehtyjä muotoja). ¦ Túl nagy a megőrzéshez (távolíts el képből készült alakzatokat).
+Réglages trop lourds pour être gardés (retire des formes faites d’une image). ¦ Asetukset ovat liian raskaat säilytettäviksi (poista kuvasta tehtyjä muotoja). ¦ A beállítások túl nagyok a megőrzéshez (távolíts el képből készült alakzatokat).
+Choisis une forme de départ. ¦ Valitse lähtömuoto. ¦ Válassz egy kiinduló alakzatot.
+Forme trop détaillée : retire des formes ajoutées. ¦ Muoto on liian yksityiskohtainen: poista lisättyjä muotoja. ¦ Az alakzat túl részletes: távolíts el hozzáadott alakzatokat.
+Choisis une forme ou trace la pointe. ¦ Valitse muoto tai piirrä kärki. ¦ Válassz egy alakzatot, vagy rajzold meg a nyílhegyet.
+Cette forme est trop détaillée pour une pointe. ¦ Tämä muoto on liian yksityiskohtainen kärjeksi. ¦ Ez az alakzat túl részletes egy nyílheghez.
+les réglages des tableaux sont fermés ¦ taulujen asetukset on suljettu ¦ a táblák beállításai be vannak zárva
+Montrer / cacher ¦ Näytä / piilota ¦ Megjelenítés / elrejtés
+Déjà dans l’accès rapide ¦ Jo pikavalinnoissa ¦ Már a gyorselérésben van
+Ajouter à l’accès rapide ¦ Lisää pikavalintoihin ¦ Hozzáadás a gyorseléréshez
+La reprendre dans le dessin vectoriel (plume, points, Pathfinder…) ¦ Muokkaa sitä vektoripiirroksessa (kynä, pisteet, Pathfinder…) ¦ Átdolgozás vektoros rajzban (toll, pontok, Pathfinder…)
+Supprimer cette forme ¦ Poista tämä muoto ¦ Alakzat törlése
+Aucune pour l’instant : dans un tableau, outil Formes → « ＋ Créer une forme ». ¦ Ei vielä yhtään: taulussa työkalu Muodot → ”＋ Luo muoto”. ¦ Egyelőre egy sincs: egy táblában az Alakzatok eszköz → „＋ Alakzat létrehozása”.
+Supprimer la liste ¦ Poista luettelo ¦ A lista törlése
+Pas encore de pinceau à toi. ¦ Sinulla ei ole vielä omaa sivellintä. ¦ Még nincs saját ecseted.
+tous les réglages des tableaux (couleurs, pointes, formes, polices, tailles, tableur, pinceaux, menus) ¦ kaikki taulujen asetukset (värit, kärjet, muodot, fontit, koot, taulukko, siveltimet, valikot) ¦ a táblák minden beállítása (színek, nyílhegyek, alakzatok, betűtípusok, méretek, táblázat, ecsetek, menük)
+Reprendre les réglages « {name} » ? Les réglages actuels sont remplacés (enregistre-les d’abord sous un nom si tu veux les garder). ¦ Otetaanko asetukset ”{name}” käyttöön? Nykyiset asetukset korvataan (tallenna ne ensin nimellä, jos haluat säilyttää ne). ¦ Átveszed a(z) „{name}” beállításokat? A jelenlegi beállítások lecserélődnek (előbb mentsd el őket egy néven, ha meg akarod tartani).
+Reprendre ces réglages ¦ Ota nämä asetukset käyttöön ¦ Ezen beállítások átvétele
+Reprendre les réglages ¦ Ota asetukset käyttöön ¦ A beállítások átvétele
+Réglages enregistrés sous « {name} » (et utilisés dès maintenant). ¦ Asetukset tallennettu nimellä ”{name}” (ja käytössä heti). ¦ A beállítások „{name}” néven mentve (és azonnal használatban).
+Réglages « {name} » importés : « Appliquer » pour t’en servir. ¦ Asetukset ”{name}” tuotu: ota ne käyttöön valitsemalla ”Käytä”. ¦ A(z) „{name}” beállítások importálva: a használatukhoz kattints az „Alkalmaz” gombra.
+Palette « {name} » retirée ¦ Paletti ”{name}” poistettu ¦ A(z) „{name}” paletta eltávolítva
+Pointe « {name} » créée : elle est dans la liste. ¦ Kärki ”{name}” luotu: se on luettelossa. ¦ A(z) „{name}” nyílhegy elkészült: a listában található.
+Pointe retirée (les traits qui l’utilisent prennent un triangle) ¦ Kärki poistettu (sitä käyttävät viivat saavat kolmion) ¦ Nyílhegy eltávolítva (az ezt használó vonalak háromszöget kapnak)
+⚡ « {name} » est déjà dans l’accès rapide (en haut de cet onglet ; ✕ sur elle pour l’en retirer). ¦ ⚡ ”{name}” on jo pikavalinnoissa (tämän välilehden yläosassa; poista se ✕:llä). ¦ ⚡ A(z) „{name}” már a gyorselérésben van (a lap tetején; a ✕ jellel eltávolíthatod).
+⚡ « {name} » ajoutée à l’accès rapide : elle est en haut de cet onglet, et dans la barre de l’outil Formes. N’oublie pas « Enregistrer ». ¦ ⚡ ”{name}” lisätty pikavalintoihin: se on tämän välilehden yläosassa ja Muodot-työkalun palkissa. Muista ”Tallenna”. ¦ ⚡ A(z) „{name}” bekerült a gyorselérésbe: a lap tetején és az Alakzatok eszköz sávjában található. Ne felejtsd el a „Mentés” gombot.
+Chargement des formes… ¦ Ladataan muotoja… ¦ Alakzatok betöltése…
+📚 Réessayer de charger les formes ¦ 📚 Yritä ladata muodot uudelleen ¦ 📚 Az alakzatok újratöltése
+Les formes n’ont pas pu être chargées. Réessaie. ¦ Muotoja ei voitu ladata. Yritä uudelleen. ¦ Az alakzatokat nem sikerült betölteni. Próbáld újra.
+Forme retirée (les tableaux qui l’utilisent la gardent) ¦ Muoto poistettu (sitä käyttävät taulut säilyttävät sen) ¦ Alakzat eltávolítva (az ezt használó táblák megtartják)
+Ma liste ¦ Oma luetteloni ¦ Saját listám
+Liste de polices retirée ¦ Fonttiluettelo poistettu ¦ Betűtípuslista eltávolítva
+Ajouter une police à la liste ¦ Lisää fontti luetteloon ¦ Betűtípus hozzáadása a listához
+« {font} » ajoutée à « {list} ». ¦ ”{font}” lisätty luetteloon ”{list}”. ¦ A(z) „{font}” bekerült a(z) „{list}” listába.
+Toutes les polices ¦ Kaikki fontit ¦ Minden betűtípus
+Élémentaire ¦ Perusmuodot ¦ Alapformák
+Géométrie ¦ Geometria ¦ Geometria
+Bulles ¦ Kuplat ¦ Buborékok
+Étoiles et badges ¦ Tähdet ja merkit ¦ Csillagok és jelvények
+Croyances et mémoire ¦ Uskomukset ja muisto ¦ Hit és emlékezet
+Écrits et documents ¦ Kirjoitukset ja asiakirjat ¦ Írások és dokumentumok
+Lieux et bâtiments ¦ Paikat ja rakennukset ¦ Helyek és épületek
+Maison et objets ¦ Koti ja esineet ¦ Otthon és tárgyak
+Vêtements et parures ¦ Vaatteet ja koristeet ¦ Ruhák és ékszerek
+Métiers et outils ¦ Ammatit ja työkalut ¦ Mesterségek és szerszámok
+Transports et voyages ¦ Kulkuneuvot ja matkat ¦ Közlekedés és utazás
+Nature ¦ Luonto ¦ Természet
+Météo et ciel ¦ Sää ja taivas ¦ Időjárás és égbolt
+Cuisine et repas ¦ Ruoanlaitto ja ateriat ¦ Konyha és étkezés
+Musique, jeux et sport ¦ Musiikki, pelit ja urheilu ¦ Zene, játék és sport
+Santé et corps ¦ Terveys ja keho ¦ Egészség és test
+Objets ¦ Esineet ¦ Tárgyak
+Mes formes ¦ Omat muodot ¦ Saját alakzatok
+Lettres et chiffres ¦ Kirjaimet ja numerot ¦ Betűk és számok
+Armoiries et héraldique ¦ Vaakunat ja heraldiikka ¦ Címerek és heraldika
+Cadres et bordures ¦ Kehykset ja reunukset ¦ Keretek és szegélyek
+Émotions ¦ Tunteet ¦ Érzelmek
+Drapeaux ¦ Liput ¦ Zászlók
+Écrans et appareils ¦ Näytöt ja laitteet ¦ Képernyők és eszközök
+Argent et commerce ¦ Raha ja kauppa ¦ Pénz és kereskedelem
+Fond des formes, étiquettes, dossiers ¦ Muotojen, tunnisteiden ja kansioiden tausta ¦ Az alakzatok, címkék, dossziék háttere
+Bord des formes et contour des médias ¦ Muotojen reuna ja median ääriviiva ¦ Az alakzatok szegélye és a médiák körvonala
+Couleur du texte, des traits et flèches ¦ Tekstin, viivojen ja nuolten väri ¦ A szöveg, a vonalak és a nyilak színe
+Légendes des traits : texte ¦ Viivojen selitteet: teksti ¦ A vonalak feliratai: szöveg
+Légendes des traits : fond du cadre ¦ Viivojen selitteet: kehyksen tausta ¦ A vonalak feliratai: a keret háttere
+Légendes des traits : bord du cadre ¦ Viivojen selitteet: kehyksen reuna ¦ A vonalak feliratai: a keret szegélye
+⤓ Exporter / imprimer ¦ ⤓ Vie / tulosta ¦ ⤓ Exportálás / nyomtatás
+⛶ Plein écran ¦ ⛶ Koko näyttö ¦ ⛶ Teljes képernyő
+❓ Pistes à vérifier (compteur) ¦ ❓ Tarkistettavat johtolangat (laskuri) ¦ ❓ Ellenőrizendő nyomok (számláló)
+🔍 Chercher dans le tableau ¦ 🔍 Hae taulusta ¦ 🔍 Keresés a táblán
+🧲 Grille aimantée ¦ 🧲 Magneettiruudukko ¦ 🧲 Mágneses rács
+🗺 Mini-carte ¦ 🗺 Pienoiskartta ¦ 🗺 Minitérkép
+⚙️ Réglages des tableaux ¦ ⚙️ Taulujen asetukset ¦ ⚙️ A táblák beállításai
+🗑 Supprimer ¦ 🗑 Poista ¦ 🗑 Törlés
+✕ Fermer ¦ ✕ Sulje ¦ ✕ Bezárás
+Bord / contour ¦ Reuna / ääriviiva ¦ Szegély / körvonal
+Couleur du texte ou du trait ¦ Tekstin tai viivan väri ¦ A szöveg vagy a vonal színe
+Épaisseur et style du trait ¦ Viivan paksuus ja tyyli ¦ A vonal vastagsága és stílusa
+Arrondi ¦ Pyöristys ¦ Lekerekítés
+Taille et style du texte ¦ Tekstin koko ja tyyli ¦ A szöveg mérete és stílusa
+Pointes des flèches ¦ Nuolten kärjet ¦ A nyilak hegye
+Forme du trait et légende ¦ Viivan muoto ja seliteteksti ¦ A vonal alakja és felirata
+Pinceau ¦ Sivellin ¦ Ecset
+Titre, étiquette, adresse ¦ Otsikko, tunniste, osoite ¦ Cím, címke, webcím
+Fiche : ce qu’elle montre ¦ Kortti: mitä se näyttää ¦ Adatlap: mit mutat
+Piste : à vérifier, confirmée, fausse ¦ Johtolanka: tarkistettava, vahvistettu, väärä ¦ Nyom: ellenőrizendő, megerősített, hamis
+Carte et repères ¦ Kartta ja merkit ¦ Térkép és jelölők
+Liens tout prêts (frère de…) ¦ Valmiit yhteydet (veli…) ¦ Kész összekötők (fivére…)
+Boutons (dupliquer, verrouiller…) ¦ Painikkeet (monista, lukitse…) ¦ Gombok (kettőzés, zárolás…)
+Des fichiers ¦ Tiedostoja ¦ Fájlok
+D’ailleurs (web) ¦ Muualta (verkko) ¦ Máshonnan (web)
+Une fiche ¦ Kortti ¦ Egy adatlap
+Un écran de l’app ¦ Sovelluksen näkymä ¦ Az alkalmazás egy képernyője
+Un de mes widgets ¦ Jokin widgeteistäni ¦ Az egyik widgetem
+Un tableur ¦ Taulukko ¦ Egy táblázat
+Un dossier ¦ Kansio ¦ Egy dosszié
+Un arbre automatique ¦ Automaattinen puu ¦ Automatikus fa
+Une frise vivante ¦ Elävä aikajana ¦ Élő idővonal
+Une carte ¦ Kartta ¦ Egy térkép
+Un cadre (section) ¦ Kehys (osio) ¦ Egy keret (szakasz)
+Un mémo vocal ¦ Ääniviesti ¦ Egy hangjegyzet
+Importer un tableau ¦ Tuo taulu ¦ Tábla importálása
+Gras, italique ¦ Lihavointi, kursivointi ¦ Félkövér, dőlt
+Suivre l’angle du trait ¦ Seuraa viivan kulmaa ¦ A vonal szögét követi
+pointe|aucune ¦ ei mitään ¦ nincs
+pointe|▶ triangle ¦ ▶ kolmio ¦ ▶ háromszög
+pointe|➤ flèche fine ¦ ➤ ohut nuoli ¦ ➤ vékony nyíl
+pointe|› ouverte ¦ › avoin ¦ › nyitott
+pointe|⏩ double ¦ ⏩ kaksois ¦ ⏩ dupla
+pointe|◣ demi-flèche ¦ ◣ puolinuoli ¦ ◣ félnyíl
+pointe|● rond ¦ ● ympyrä ¦ ● kör
+pointe|○ rond vide ¦ ○ tyhjä ympyrä ¦ ○ üres kör
+pointe|• point ¦ • piste ¦ • pont
+pointe|■ carré ¦ ■ neliö ¦ ■ négyzet
+pointe|□ carré vide ¦ □ tyhjä neliö ¦ □ üres négyzet
+pointe|◆ losange ¦ ◆ vinoneliö ¦ ◆ rombusz
+pointe|◇ losange vide ¦ ◇ tyhjä vinoneliö ¦ ◇ üres rombusz
+pointe|| barre ¦ | palkki ¦ | vonás
+pointe|⋔ patte d’oie ¦ ⋔ hanhenjalka ¦ ⋔ libatalp
+pointe|» plumes ¦ » sulat ¦ » tollak
+pointe|▷ triangle vide ¦ ▷ tyhjä kolmio ¦ ▷ üres háromszög
+pointe|⟶ flèche longue ¦ ⟶ pitkä nuoli ¦ ⟶ hosszú nyíl
+pointe|» double chevron ¦ » kaksoiskulma ¦ » dupla csúcsos
+pointe|✕ croix ¦ ✕ risti ¦ ✕ kereszt
+pointe|＋ plus ¦ ＋ plus ¦ ＋ plusz
+pointe|★ étoile ¦ ★ tähti ¦ ★ csillag
+pointe|♥ cœur ¦ ♥ sydän ¦ ♥ szív
+pointe|‖ un (deux barres) ¦ ‖ yksi (kaksi palkkia) ¦ ‖ egy (két vonás)
+pointe|⋲ plusieurs (pied de corbeau) ¦ ⋲ monta (varpaanjalka) ¦ ⋲ több (varjúláb)
+pointe|◗ demi-rond ¦ ◗ puoliympyrä ¦ ◗ félkör
+Chercher une forme (cœur, maison, chien…) ¦ Hae muotoa (sydän, talo, koira…) ¦ Alakzat keresése (szív, ház, kutya…)
+＋ ajouter (réunir) ¦ ＋ lisää (yhdistä) ¦ ＋ hozzáadás (egyesítés)
+⭕ percer (trou) ¦ ⭕ lävistä (reikä) ¦ ⭕ kivágás (lyuk)
+miroir ¦ peilikuva ¦ tükrözés
+Créer une forme à partir d’une autre ¦ Luo muoto toisen pohjalta ¦ Alakzat létrehozása egy másikból
+1. La forme de départ ¦ 1. Lähtömuoto ¦ 1. A kiinduló alakzat
+2. La transformer ¦ 2. Muunna se ¦ 2. Átalakítás
+3. Lui ajouter d’autres formes, ou y percer un trou ¦ 3. Lisää siihen muita muotoja tai lävistä siihen reikä ¦ 3. Más alakzatok hozzáadása, vagy lyuk kivágása
+＋ Ajouter une forme ¦ ＋ Lisää muoto ¦ ＋ Alakzat hozzáadása
+Nom de la nouvelle forme ¦ Uuden muodon nimi ¦ Az új alakzat neve
+Elle ira dans « Mes formes », et dans l’accès rapide. ¦ Se menee kohtaan ”Omat muodot” ja pikavalintoihin. ¦ A „Saját alakzatok” közé és a gyorselérésbe kerül.
+Fermer la forme ¦ Sulje muoto ¦ Alakzat lezárása
+Point ¦ Piste ¦ Pont
+RÉGLAGES DES TABLEAUX ¦ TAULUJEN ASETUKSET ¦ A TÁBLÁK BEÁLLÍTÁSAI
+FORMES ¦ MUODOT ¦ ALAKZATOK
+Créer une pointe ¦ Luo kärki ¦ Nyílhegy létrehozása
+Créer la pointe ¦ Luo kärki ¦ Nyílhegy létrehozása
+Chercher une forme (flèche, cœur, étoile…) ¦ Hae muotoa (nuoli, sydän, tähti…) ¦ Alakzat keresése (nyíl, szív, csillag…)
+⬠ À partir d’une forme ¦ ⬠ Muodosta lähtien ¦ ⬠ Alakzatból kiindulva
+✒️ Tracée à la plume ¦ ✒️ Kynällä piirretty ¦ ✒️ Tollal rajzolva
+Trace la pointe tournée vers la droite (→) : clic pour un angle, cliquer-glisser pour un arrondi, clic sur le premier point pour fermer. ¦ Piirrä kärki oikealle osoittavaksi (→): napsautus kulmaa varten, napsauta ja vedä pyöristystä varten, napsautus ensimmäiseen pisteeseen sulkee. ¦ Rajzold meg a jobbra (→) mutató nyílhegyet: kattintás egy sarokhoz, kattintás és húzás egy íves részhez, kattintás az első pontra a lezáráshoz.
+Accrochée ¦ Kiinnitys ¦ Rögzítés
+par la pointe (au bout du trait) ¦ kärjestä (viivan päässä) ¦ a hegyénél (a vonal végén)
+presque au bout ¦ lähes päästä ¦ majdnem a végén
+par le milieu ¦ keskeltä ¦ a közepénél
+par l’arrière ¦ takaa ¦ a hátuljánál
+Trace la pointe (au moins trois points, puis ferme-la). ¦ Piirrä kärki (vähintään kolme pistettä, sitten sulje se). ¦ Rajzold meg a nyílhegyet (legalább három pont, majd zárd le).
+Choisis une forme. ¦ Valitse muoto. ¦ Válassz egy alakzatot.
+＋ cette couleur ¦ ＋ tämä väri ¦ ＋ ez a szín
+＋ transparent ¦ ＋ läpinäkyvä ¦ ＋ átlátszó
+Sans couleur ¦ Ei väriä ¦ Szín nélkül
+🎨 Couleurs ¦ 🎨 Värit ¦ 🎨 Színek
+➤ Pointes ¦ ➤ Kärjet ¦ ➤ Nyílhegyek
+⬠ Formes ¦ ⬠ Muodot ¦ ⬠ Alakzatok
+🔤 Polices ¦ 🔤 Fontit ¦ 🔤 Betűtípusok
+📏 Tailles et arrondi ¦ 📏 Koot ja pyöristys ¦ 📏 Méretek és lekerekítés
+▦ Tableur ¦ ▦ Taulukko ¦ ▦ Táblázat
+🖌 Pinceaux ¦ 🖌 Siveltimet ¦ 🖌 Ecsetek
+☰ Menus et options ¦ ☰ Valikot ja valinnat ¦ ☰ Menük és beállítások
+Les couleurs proposées dans les tableaux, catégorie par catégorie, dans l’ordre voulu (glisse une pastille, ou ‹ ›). Le sélecteur « autre couleur » reste toujours là. Tu peux avoir plusieurs palettes et choisir celle des tableaux. ¦ Tauluissa ehdotetut värit luokittain halutussa järjestyksessä (vedä värinappia tai ‹ ›). ”Muu väri” -valitsin on aina käytettävissä. Sinulla voi olla useita paletteja, ja voit valita taulujen paletin. ¦ A táblákban felkínált színek kategóriánként, a kívánt sorrendben (húzz egy színkorongot, vagy ‹ ›). A „más szín” választó mindig ott marad. Több palettád is lehet, és kiválaszthatod a táblákét.
+Palette utilisée ¦ Käytössä oleva paletti ¦ Használt paletta
+Nom de la palette ¦ Paletin nimi ¦ A paletta neve
+＋ Nouvelle palette ¦ ＋ Uusi paletti ¦ ＋ Új paletta
+Partir d’un modèle… ¦ Aloita mallista… ¦ Kiindulás egy sablonból…
+Supprimer la palette ¦ Poista paletti ¦ A paletta törlése
+Les pointes proposées pour les traits et les flèches, dans l’ordre voulu ; décoche celles que tu ne veux pas voir. « ＋ Créer une pointe » : à partir d’une forme (n’importe laquelle des formes, ou une des tiennes) ou tracée à la plume. ¦ Viivoille ja nuolille ehdotetut kärjet halutussa järjestyksessä; poista valinta niistä, joita et halua nähdä. ”＋ Luo kärki”: muodosta (mistä tahansa muodosta tai omistasi) tai kynällä piirtäen. ¦ A vonalakhoz és nyilakhoz felkínált nyílhegyek a kívánt sorrendben; vedd ki a jelölést azokról, amelyeket nem akarsz látni. „＋ Nyílhegy létrehozása”: egy alakzatból (bármelyik alakzatból vagy a sajátjaidból), vagy tollal rajzolva.
+Pointe au début, par défaut ¦ Kärki alussa, oletuksena ¦ Nyílhegy az elején, alapértelmezés
+Pointe à la fin, par défaut (outil Flèche) ¦ Kärki lopussa, oletuksena (Nuoli-työkalu) ¦ Nyílhegy a végén, alapértelmezés (Nyíl eszköz)
+＋ Créer une pointe ¦ ＋ Luo kärki ¦ ＋ Nyílhegy létrehozása
+Supprimer cette pointe ¦ Poista tämä kärki ¦ A nyílhegy törlése
+Les catégories de formes et leurs formes, dans l’ordre voulu ; décoche ce que tu ne veux pas voir. « Accès rapide » : les formes proposées directement dans la barre de l’outil Formes. ¦ Muotoluokat ja niiden muodot halutussa järjestyksessä; poista valinta siitä, mitä et halua nähdä. ”Pikavalinnat”: Muodot-työkalun palkissa suoraan tarjotut muodot. ¦ Az alakzatkategóriák és alakzataik a kívánt sorrendben; vedd ki a jelölést arról, amit nem akarsz látni. „Gyorselérés”: az Alakzatok eszköz sávjában közvetlenül felkínált alakzatok.
+✒️ Dessiner une nouvelle forme (dessin vectoriel) ¦ ✒️ Piirrä uusi muoto (vektoripiirros) ¦ ✒️ Új alakzat rajzolása (vektoros rajz)
+ou ✒️ sur une forme ci-dessous pour la reprendre : plume, points et poignées, Pathfinder, import SVG… ¦ tai ✒️ alla olevassa muodossa muokataksesi sitä: kynä, pisteet ja kahvat, Pathfinder, SVG-tuonti… ¦ vagy ✒️ egy lenti alakzaton az átdolgozásához: toll, pontok és fogantyúk, Pathfinder, SVG-importálás…
+📚 Montrer aussi les 2 900 formes de la grande bibliothèque ¦ 📚 Näytä myös suuren kirjaston 2 900 muotoa ¦ 📚 A nagy könyvtár 2 900 alakzatának megjelenítése is
+lettres et chiffres, armoiries, cadres, étiquettes, drapeaux, symboles… (elles sont toujours dans la bibliothèque des tableaux ; ici, pour les cacher, les ranger ou les mettre dans l’accès rapide) ¦ kirjaimet ja numerot, vaakunat, kehykset, tunnisteet, liput, symbolit… (ne ovat aina taulujen kirjastossa; täällä voit piilottaa ne, järjestää ne tai lisätä ne pikavalintoihin) ¦ betűk és számok, címerek, keretek, címkék, zászlók, szimbólumok… (mindig ott vannak a táblák könyvtárában; itt elrejtheted, rendezheted vagy a gyorselérésbe teheted őket)
+Accès rapide ¦ Pikavalinnat ¦ Gyorselérés
+Glisse une forme (ou ‹ ›) pour changer l’ordre ; ⚡ sur une forme ci-dessous l’ajoute ici ; ✏️ crée une forme à partir d’elle. ¦ Vedä muotoa (tai ‹ ›) muuttaaksesi järjestystä; ⚡ alla olevassa muodossa lisää sen tänne; ✏️ luo muodon sen pohjalta. ¦ Húzz egy alakzatot (vagy ‹ ›) a sorrend módosításához; a lenti alakzaton a ⚡ ide teszi; a ✏️ új alakzatot hoz létre belőle.
+Des listes de polices à toi, proposées dans le choix de la police d’un texte. « Toutes les polices » ouvre la liste commune (polices de l’app et de l’ordinateur, chacune écrite dans sa police). ¦ Omat fonttiluettelosi, joita tarjotaan tekstin fonttia valittaessa. ”Kaikki fontit” avaa yhteisen luettelon (sovelluksen ja tietokoneen fontit, kukin kirjoitettuna omalla fontillaan). ¦ Saját betűtípuslistáid, amelyeket egy szöveg betűtípusának kiválasztásakor kínálunk fel. A „Minden betűtípus” a közös listát nyitja meg (az alkalmazás és a számítógép betűtípusai, mindegyik a saját betűtípusával írva).
+Aa Toutes les polices… ¦ Aa Kaikki fontit… ¦ Aa Minden betűtípus…
+＋ Nouvelle liste ¦ ＋ Uusi luettelo ¦ ＋ Új lista
+＋ Ajouter une police… ¦ ＋ Lisää fontti… ¦ ＋ Betűtípus hozzáadása…
+De quelle taille à quelle taille vont les curseurs (épaisseur des traits et des contours : de 0,5 à 500 px ; texte : jusqu’à 500 px). La case de saisie à côté du curseur accepte toujours toute la plage. ¦ Mistä koosta mihin kokoon liukusäätimet ulottuvat (viivojen ja ääriviivojen paksuus: 0,5–500 px; teksti: enintään 500 px). Liukusäätimen vieressä oleva syöttökenttä hyväksyy aina koko alueen. ¦ Milyen mérettől milyen méretig mennek a csúszkák (a vonalak és körvonalak vastagsága: 0,5 és 500 px között; szöveg: legfeljebb 500 px). A csúszka melletti beviteli mező mindig a teljes tartományt elfogadja.
+Épaisseur mini ¦ Pienin paksuus ¦ Legkisebb vastagság
+Épaisseur maxi ¦ Suurin paksuus ¦ Legnagyobb vastagság
+Texte mini ¦ Pienin teksti ¦ Legkisebb szöveg
+Texte maxi ¦ Suurin teksti ¦ Legnagyobb szöveg
+Arrondi par défaut ¦ Oletuspyöristys ¦ Alapértelmezett lekerekítés
+Comment est un tableur quand tu le poses dans un tableau. ¦ Millainen taulukko on, kun asetat sen tauluun. ¦ Milyen egy táblázat, amikor egy táblára teszed.
+Titres des colonnes, séparés par ; ¦ Sarakkeiden otsikot, erotettuina merkillä ; ¦ Az oszlopok címei ; jellel elválasztva
+Tes pinceaux à toi : un pinceau de départ, une épaisseur, une opacité, une <strong>dureté</strong> (100 % = bord net ; plus bas = bord flou, comme dans Photoshop), une couleur si tu veux. Ils apparaissent en tête du menu des pinceaux. ¦ Omat siveltimesi: lähtösivellin, paksuus, peittävyys, <strong>kovuus</strong> (100 % = terävä reuna; pienempi = pehmeä reuna, kuten Photoshopissa) ja halutessasi väri. Ne näkyvät siveltimien valikon alussa. ¦ Saját ecseteid: egy kiinduló ecset, vastagság, átlátszatlanság, <strong>keménység</strong> (100 % = éles szél; kisebb = elmosódott szél, mint a Photoshopban), és ha szeretnéd, egy szín. Az ecsetek menüjének elején jelennek meg.
+Mon pinceau ¦ Oma siveltimeni ¦ Saját ecsetem
+Imposer une couleur ¦ Pakota väri ¦ Szín rögzítése
+plein ¦ yhtenäinen ¦ folytonos
+tirets ¦ katkoviiva ¦ szaggatott
+longs tirets ¦ pitkä katkoviiva ¦ hosszú szaggatott
+points ¦ pisteet ¦ pontozott
+tiret-point ¦ viiva-piste ¦ pont-vonal
+＋ Nouveau pinceau ¦ ＋ Uusi sivellin ¦ ＋ Új ecset
+La place de chaque partie, puis l’ordre de tout ce qu’on voit dans un tableau ; décoche pour cacher. Glisse les lignes, ou ↑ ↓. ¦ Kunkin osan paikka ja sitten kaiken taulussa näkyvän järjestys; poista valinta piilottaaksesi. Vedä rivejä tai käytä ↑ ↓. ¦ Minden rész helye, majd a táblán látható összes elem sorrendje; az elrejtéshez vedd ki a jelölést. Húzd a sorokat, vagy ↑ ↓.
+🧭 Disposition du tableau ¦ 🧭 Taulun asettelu ¦ 🧭 A tábla elrendezése
+à gauche (en colonne) ¦ vasemmalla (sarakkeena) ¦ bal oldalt (oszlopban)
+à droite (en colonne) ¦ oikealla (sarakkeena) ¦ jobb oldalt (oszlopban)
+Réglages (texte, forme, trait…) ¦ Asetukset (teksti, muoto, viiva…) ¦ Beállítások (szöveg, alakzat, vonal…)
+cachés (plus de place) ¦ piilotettu (enemmän tilaa) ¦ elrejtve (több hely)
+Taille des boutons ¦ Painikkeiden koko ¦ A gombok mérete
+petits ¦ pienet ¦ kicsi
+normaux ¦ normaalit ¦ normál
+grands ¦ suuret ¦ nagy
+En-tête (titre, propriétaire, état) ¦ Otsake (otsikko, omistaja, tila) ¦ Fejléc (cím, tulajdonos, állapot)
+complet ¦ täysi ¦ teljes
+compact (une ligne) ¦ tiivis (yksi rivi) ¦ tömör (egy sor)
+Outils (barre du haut) ¦ Työkalut (yläpalkki) ¦ Eszközök (felső sáv)
+Boutons de l’en-tête ¦ Otsakkeen painikkeet ¦ A fejléc gombjai
+↶ ↷ restent à côté du nom ; ⚙️ Personnaliser, ⤓ Exporter, ⛶ et × restent à droite, dans cet ordre (comme dans tous les éditeurs) : ici, tu peux seulement les montrer ou les cacher. ¦ ↶ ↷ pysyvät nimen vieressä; ⚙️ Mukauta, ⤓ Vie, ⛶ ja × pysyvät oikealla tässä järjestyksessä (kuten kaikissa editoreissa): täällä voit vain näyttää tai piilottaa ne. ¦ ↶ ↷: a név mellett marad; a ⚙️ Testreszabás, a ⤓ Exportálás, a ⛶ és a × jobb oldalt marad, ebben a sorrendben (mint minden szerkesztőben): itt csak megjelenítheted vagy elrejtheted őket.
+Réglages à droite (texte, forme, trait…) ¦ Asetukset oikealla (teksti, muoto, viiva…) ¦ Beállítások jobb oldalt (szöveg, alakzat, vonal…)
+Menu « ＋ Ajouter » ¦ Valikko ”＋ Lisää” ¦ A „＋ Hozzáadás” menü
+Réglages d’une légende de trait ¦ Viivan selitteen asetukset ¦ A vonalfelirat beállításai
+Dans « Réglages de la légende » (choisis un trait). Les couleurs proposées : onglet 🎨 Couleurs. ¦ Kohdassa ”Selitteen asetukset” (valitse viiva). Ehdotetut värit: välilehti 🎨 Värit. ¦ A „Jelmagyarázat beállításai” részben (jelölj ki egy vonalat). A felkínált színek: 🎨 Színek lap.
+Ce que proposent les tableaux (Enquêtes → Tableaux) : couleurs, pointes, formes, polices, tailles, tableur, pinceaux, et l’ordre des menus. ¦ Mitä taulut tarjoavat (Selvitykset → Taulut): värit, kärjet, muodot, fontit, koot, taulukko, siveltimet ja valikoiden järjestys. ¦ Amit a táblák kínálnak (Nyomozások → Táblák): színek, nyílhegyek, alakzatok, betűtípusok, méretek, táblázat, ecsetek és a menük sorrendje.
+Bibliothèque de formes ¦ Muotokirjasto ¦ Alakzatkönyvtár
+Chercher une forme… (arbre, croix, É, drapeau) ¦ Hae muotoa… (puu, risti, É, lippu) ¦ Alakzat keresése… (fa, kereszt, É, zászló)
+Chercher une forme… ¦ Hae muotoa… ¦ Alakzat keresése…
+Chargement de toutes les formes… ¦ Ladataan kaikkia muotoja… ¦ Az összes alakzat betöltése…
+Les formes en plus n’ont pas pu être chargées. ¦ Lisämuotoja ei voitu ladata. ¦ A további alakzatokat nem sikerült betölteni.
+⛔ Les formes en plus n’ont pas pu être chargées. ¦ ⛔ Lisämuotoja ei voitu ladata. ¦ ⛔ A további alakzatokat nem sikerült betölteni.
+Aucune forme pour « {q} ». Essaie un autre mot (maison, croix, lettre, drapeau…). ¦ Ei muotoja haulle ”{q}”. Kokeile toista sanaa (talo, risti, kirjain, lippu…). ¦ Nincs alakzat erre: „{q}”. Próbálj másik szót (ház, kereszt, betű, zászló…).
+Aucune forme dans cette catégorie. ¦ Tässä luokassa ei ole muotoja. ¦ Ebben a kategóriában nincs alakzat.
+{n} · ↑ ↓ ← → pour choisir, Entrée pour prendre, / pour chercher ¦ {n} · ↑ ↓ ← → valitsee, Enter ottaa, / hakee ¦ {n} · ↑ ↓ ← → a választáshoz, Enter a kiválasztáshoz, / a kereséshez
+Formes (flèches pour choisir, Entrée pour prendre) ¦ Muodot (nuolet valitsevat, Enter ottaa) ¦ Alakzatok (nyilakkal választhatsz, Enterrel veszed ki)
+Large (16:9) ¦ Leveä (16:9) ¦ Széles (16:9)
+Standard (4:3) ¦ Vakio (4:3) ¦ Normál (4:3)
+Vertical (téléphone) ¦ Pysty (puhelin) ¦ Álló (telefon)
+Sur mesure… ¦ Mukautettu… ¦ Egyéni…
+Comme l’application ¦ Kuten sovellus ¦ Mint az alkalmazás
+Ardoise ¦ Liuskekivi ¦ Pala
+Parchemin ¦ Pergamentti ¦ Pergamen
+Aurore ¦ Aamurusko ¦ Hajnal
+Tableau noir ¦ Liitutaulu ¦ Iskolai tábla
+Titre et texte ¦ Otsikko ja teksti ¦ Cím és szöveg
+Titre et photo ¦ Otsikko ja kuva ¦ Cím és fotó
+Photo pleine page ¦ Koko sivun kuva ¦ Egész oldalas fotó
+Photo et texte ¦ Kuva ja teksti ¦ Fotó és szöveg
+Deux colonnes ¦ Kaksi saraketta ¦ Két oszlop
+Section ¦ Osio ¦ Szakasz
+Chiffre clé ¦ Avainluku ¦ Kulcsszám
+Double-clique pour écrire ¦ Kaksoisnapsauta kirjoittaaksesi ¦ Íráshoz kattints duplán
+Légende de la photo ¦ Kuvateksti ¦ A fotó felirata
+« Une phrase qui compte » ¦ ”Merkityksellinen lause” ¦ „Egy mondat, ami számít”
+Triangle rectangle ¦ Suorakulmainen kolmio ¦ Derékszögű háromszög
+Pentagone ¦ Viisikulmio ¦ Ötszög
+Octogone ¦ Kahdeksankulmio ¦ Nyolcszög
+Double flèche ¦ Kaksoisnuoli ¦ Kettős nyíl
+Chevron ¦ Väkänen ¦ Csúcsos nyíl
+Ligne fléchée ¦ Nuoliviiva ¦ Nyílvonal
+Aucun (rectangle) ¦ Ei mitään (suorakulmio) ¦ Nincs (téglalap)
+Coins arrondis ¦ Pyöristetyt kulmat ¦ Lekerekített sarkok
+Cercle / ovale ¦ Ympyrä / soikio ¦ Kör / ovális
+Arche (portrait ancien) ¦ Kaari (vanha muotokuva) ¦ Ív (régi portré)
+Dissoudre ¦ Häivytys ¦ Áttűnés
+Fondu par le noir ¦ Häivytys mustan kautta ¦ Áttűnés feketén át
+Glisser par-dessus ¦ Liukuu päälle ¦ Rácsúszás
+Révéler ¦ Paljastus ¦ Felfedés
+Balayage ¦ Pyyhkäisy ¦ Törlés
+Échanger ¦ Vaihto ¦ Csere
+Retourner ¦ Käännös ¦ Átfordulás
+Cube ¦ Kuutio ¦ Kocka
+Déplacement magique ¦ Taikasiirto ¦ Varázsmozgás
+Apparition ¦ Ilmestyminen ¦ Megjelenés
+Fondu ¦ Häivytys ¦ Elhalványulás
+Arrivée (glisser) ¦ Saapuminen (liuku) ¦ Beúszás (csúszás)
+Rebond ¦ Pomppu ¦ Pattanás
+Chute ¦ Putoaminen ¦ Leesés
+Machine à écrire (textes) ¦ Kirjoituskone (tekstit) ¦ Írógép (szövegek)
+Trajectoire (déplacement) ¦ Liikerata (siirtymä) ¦ Mozgásvonal (elmozdulás)
+depuis la gauche ¦ vasemmalta ¦ balról
+depuis la droite ¦ oikealta ¦ jobbról
+depuis le haut ¦ ylhäältä ¦ fentről
+depuis le bas ¦ alhaalta ¦ lentről
+Au clic ¦ Napsautuksella ¦ Kattintásra
+Avec la précédente ¦ Edellisen kanssa ¦ Az előzővel együtt
+Après la précédente ¦ Edellisen jälkeen ¦ Az előző után
+Liaison ¦ Yhdysviiva ¦ Összekötő
+liaison|Droite ¦ Suora ¦ Egyenes
+liaison|En équerre ¦ Kulmikas ¦ Derékszögű
+liaison|Courbe ¦ Kaareva ¦ Íves
+Flèche au bout ¦ Nuoli päässä ¦ Nyíl a végén
+Flèches aux deux bouts ¦ Nuolet molemmissa päissä ¦ Nyíl mindkét végén
+Sans flèche ¦ Ilman nuolta ¦ Nyíl nélkül
+Union (les deux réunies) ¦ Yhdiste (molemmat yhdessä) ¦ Egyesítés (a kettő együtt)
+Soustraire (la 1re moins la 2e) ¦ Vähennä (1. miinus 2.) ¦ Kivonás (az 1. mínusz a 2.)
+Intersection (ce qu’elles ont en commun) ¦ Leikkaus (yhteinen osa) ¦ Metszet (ami közös bennük)
+Choisis une personne (à droite, onglet Format) ¦ Valitse henkilö (oikealla, Muotoilu-välilehti) ¦ Válassz egy személyt (jobb oldalt, Formátum lap)
+Aucun événement daté ¦ Ei päivättyjä tapahtumia ¦ Nincs dátummal ellátott esemény
+Double-clique pour choisir une image ¦ Kaksoisnapsauta valitaksesi kuvan ¦ Kép kiválasztásához kattints duplán
+Aucune diapositive à montrer (toutes sont sautées ?). ¦ Ei näytettäviä dioja (ohitetaanko kaikki?). ¦ Nincs megjeleníthető dia (mind ki van hagyva?).
+Touches ¦ Näppäimet ¦ Billentyűk
+<kbd>→</kbd> <kbd>espace</kbd> <kbd>clic</kbd> suivante · <kbd>←</kbd> précédente · <kbd>Début</kbd> <kbd>Fin</kbd> · un numéro puis <kbd>Entrée</kbd> : aller à la diapositive · <kbd>B</kbd> écran noir · <kbd>W</kbd> écran blanc · <kbd>L</kbd> pointeur laser · <kbd>P</kbd> présentateur · <kbd>Échap</kbd> quitter ¦ <kbd>→</kbd> <kbd>välilyönti</kbd> <kbd>napsautus</kbd> seuraava · <kbd>←</kbd> edellinen · <kbd>Home</kbd> <kbd>End</kbd> · numero ja <kbd>Enter</kbd>: siirry diaan · <kbd>B</kbd> musta näyttö · <kbd>W</kbd> valkoinen näyttö · <kbd>L</kbd> laserosoitin · <kbd>P</kbd> esittäjä · <kbd>Esc</kbd> lopeta ¦ <kbd>→</kbd> <kbd>szóköz</kbd> <kbd>kattintás</kbd> következő · <kbd>←</kbd> előző · <kbd>Home</kbd> <kbd>End</kbd> · egy szám, majd <kbd>Enter</kbd>: ugrás a diára · <kbd>B</kbd> fekete képernyő · <kbd>W</kbd> fehér képernyő · <kbd>L</kbd> lézermutató · <kbd>P</kbd> előadó · <kbd>Esc</kbd> kilépés
+Précédente (←) ¦ Edellinen (←) ¦ Előző (←)
+Suivante (→ ou espace) ¦ Seuraava (→ tai välilyönti) ¦ Következő (→ vagy szóköz)
+Fenêtre du présentateur : notes, suivante, chronomètre (P) ¦ Esittäjän ikkuna: muistiinpanot, seuraava, ajastin (P) ¦ Előadói ablak: jegyzetek, következő, stopper (P)
+Pointeur laser (L) ¦ Laserosoitin (L) ¦ Lézermutató (L)
+Les touches (?) ¦ Näppäimet (?) ¦ A billentyűk (?)
+Quitter (Échap) ¦ Lopeta (Esc) ¦ Kilépés (Esc)
+Fin de la présentation — clic ou → pour quitter ¦ Esityksen loppu — napsauta tai → lopettaaksesi ¦ A bemutató vége — kattintás vagy → a kilépéshez
+Encore {n} sur cette diapositive ¦ Vielä {n} tällä dialla ¦ Még {n} ezen a dián
+présentation|Fin ¦ Loppu ¦ Vége
+Pas de notes pour cette diapositive (onglet 📝 Notes sous la diapositive). ¦ Tällä dialla ei ole muistiinpanoja (välilehti 📝 Muistiinpanot dian alla). ¦ Ehhez a diához nincs jegyzet (📝 Jegyzetek lap a dia alatt).
+La fenêtre du présentateur a été bloquée : autorise les fenêtres surgissantes pour cette page. ¦ Esittäjän ikkuna estettiin: salli ponnahdusikkunat tälle sivulle. ¦ Az előadói ablak le lett tiltva: engedélyezd a felugró ablakokat ennél az oldalnál.
+Présentateur ¦ Esittäjä ¦ Előadó
+Arrêter / reprendre le chronomètre ¦ Pysäytä / jatka ajastinta ¦ A stopper megállítása / folytatása
+Remettre le chronomètre à zéro ¦ Nollaa ajastin ¦ A stopper nullázása
+Heure : ¦ Kello: ¦ Idő:
+Ensuite ¦ Seuraavaksi ¦ Következő
+‹ Précédente ¦ ‹ Edellinen ¦ ‹ Előző
+Suivante › ¦ Seuraava › ¦ Következő ›
+Écran noir ¦ Musta näyttö ¦ Fekete képernyő
+Écran blanc ¦ Valkoinen näyttö ¦ Fehér képernyő
+Touches : → ← espace, B, W, Échap ¦ Näppäimet: → ← välilyönti, B, W, Esc ¦ Billentyűk: → ← szóköz, B, W, Esc
+Terminer ¦ Lopeta ¦ Befejezés
+Diapositive précédente ¦ Edellinen dia ¦ Előző dia
+Diapositive suivante ¦ Seuraava dia ¦ Következő dia
+Quitter la présentation ¦ Lopeta esitys ¦ Kilépés a bemutatóból
+PRÉSENTATION ¦ ESITYS ¦ BEMUTATÓ
+La personne affichée en ce moment, ou × pour en chercher une autre. ¦ Tällä hetkellä näytetty henkilö, tai × etsiäksesi toista. ¦ Az éppen látható személy, vagy × egy másik kereséséhez.
+Une vidéo ou un son ¦ Video tai ääni ¦ Egy videó vagy hang
+La fenêtre des médias n’est pas encore prête. Réessaie dans un instant. ¦ Mediaikkuna ei ole vielä valmis. Yritä hetken päästä uudelleen. ¦ A médiaablak még nem áll készen. Próbáld újra egy pillanat múlva.
+Police de l’ordinateur ¦ Tietokoneen fontti ¦ A számítógép betűtípusa
+Ce navigateur ne sait pas lister les polices : tape le nom exact d’une police installée (ex. Garamond) : ¦ Tämä selain ei osaa luetella fontteja: kirjoita asennetun fontin tarkka nimi (esim. Garamond): ¦ Ez a böngésző nem tudja kilistázni a betűtípusokat: írd be egy telepített betűtípus pontos nevét (pl. Garamond):
+L’ordinateur n’a donné aucune police : tape son nom dans la fenêtre. ¦ Tietokone ei antanut yhtään fonttia: kirjoita sen nimi ikkunaan. ¦ A számítógép egyetlen betűtípust sem adott meg: írd be a nevét az ablakba.
+Les polices de l’ordinateur ne sont pas lisibles ici : tape le nom d’une police dans la fenêtre. ¦ Tietokoneen fontteja ei voi lukea täällä: kirjoita fontin nimi ikkunaan. ¦ A számítógép betűtípusai itt nem olvashatók: írd be egy betűtípus nevét az ablakba.
+🖥 Choisir une police ¦ 🖥 Valitse fontti ¦ 🖥 Betűtípus kiválasztása
+Pour les titres ¦ Otsikoille ¦ A címekhez
+Pour les textes ¦ Teksteille ¦ A szövegekhez
+Pour le texte choisi ¦ Valitulle tekstille ¦ A kijelölt szöveghez
+Chercher une police, ou taper son nom… ¦ Hae fonttia tai kirjoita sen nimi… ¦ Betűtípus keresése, vagy a nevének beírása…
+{n} de cet ordinateur, puis celles de l’app. Clique sur une police, puis dis où elle va. ¦ {n} tältä tietokoneelta, sitten sovelluksen fontit. Napsauta fonttia ja kerro sitten, mihin se tulee. ¦ {n} erről a számítógépről, majd az alkalmazáséi. Kattints egy betűtípusra, majd add meg, hová kerüljön.
+Les polices de l’app ; une autre police installée : tape son nom exact puis Entrée. Clique sur une police, puis dis où elle va. ¦ Sovelluksen fontit; muu asennettu fontti: kirjoita sen tarkka nimi ja paina Enter. Napsauta fonttia ja kerro sitten, mihin se tulee. ¦ Az alkalmazás betűtípusai; másik telepített betűtípushoz írd be a pontos nevét, majd Enter. Kattints egy betűtípusra, majd add meg, hová kerüljön.
+Aucune police « {q} » dans la liste : Entrée pour la prendre telle quelle. ¦ Fonttia ”{q}” ei ole luettelossa: Enter ottaa sen sellaisenaan. ¦ Nincs „{q}” betűtípus a listában: Enterrel változatlanul átveszed.
+Portez ce vieux whisky au juge blond qui fume ¦ Viekas kettu punaturkki laiskan koiran takaa kurkki ¦ Árvíztűrő tükörfúrógép
+Choisis une police ¦ Valitse fontti ¦ Válassz betűtípust
+Clique d’abord sur une police. ¦ Napsauta ensin fonttia. ¦ Előbb kattints egy betűtípusra.
+Ma présentation ¦ Oma esitykseni ¦ Saját bemutatóm
+⤒ Importer (PowerPoint, OpenDocument, PDF, images, texte, JSON)… ¦ ⤒ Tuo (PowerPoint, OpenDocument, PDF, kuvat, teksti, JSON)… ¦ ⤒ Importálás (PowerPoint, OpenDocument, PDF, képek, szöveg, JSON)…
+🖨 PDF / imprimer (une diapositive par page) ¦ 🖨 PDF / tulosta (yksi dia sivulle) ¦ 🖨 PDF / nyomtatás (oldalanként egy dia)
+🖨 PDF avec les notes de l’orateur ¦ 🖨 PDF puhujan muistiinpanoineen ¦ 🖨 PDF az előadói jegyzetekkel
+🖼️ Cette diapositive en PNG ¦ 🖼️ Tämä dia PNG-kuvana ¦ 🖼️ Ez a dia PNG-ként
+🗂️ Toutes les diapositives en PNG (.zip) ¦ 🗂️ Kaikki diat PNG-kuvina (.zip) ¦ 🗂️ Minden dia PNG-ként (.zip)
+⏺ Vidéo (WebM) ¦ ⏺ Video (WebM) ¦ ⏺ Videó (WebM)
+⤓ Fichier de la présentation (.json) ¦ ⤓ Esityksen tiedosto (.json) ¦ ⤓ A bemutató fájlja (.json)
+Nom de la présentation ¦ Esityksen nimi ¦ A bemutató neve
+Annuler / rétablir ¦ Kumoa / tee uudelleen ¦ Visszavonás / újra
+↶ Annuler (⌘Z) ¦ ↶ Kumoa (⌘Z) ¦ ↶ Visszavonás (⌘Z)
+↷ Rétablir (⇧⌘Z) ¦ ↷ Tee uudelleen (⇧⌘Z) ¦ ↷ Újra (⇧⌘Z)
+Insérer (barre du haut) ¦ Lisää (yläpalkki) ¦ Beszúrás (felső sáv)
+Une zone de texte ¦ Tekstikenttä ¦ Szövegdoboz
+◆ Formes ¦ ◆ Muodot ¦ ◆ Alakzatok
+Une forme ¦ Muoto ¦ Egy alakzat
+Une photo des médias ou de l’ordinateur ¦ Kuva mediasta tai tietokoneelta ¦ Egy fotó a médiából vagy a számítógépről
+Un graphique (colonnes, camembert, courbe…) ¦ Kaavio (pylväät, piirakka, käyrä…) ¦ Egy grafikon (oszlopok, kör, görbe…)
+👤 Généalogie (fiche, portrait, arbre, frise) ¦ 👤 Sukututkimus (kortti, muotokuva, puu, aikajana) ¦ 👤 Családfa (adatlap, portré, fa, idővonal)
+La généalogie : une personne de la base ¦ Sukututkimus: henkilö tietokannasta ¦ A családfa: egy személy az adatbázisból
+🪪 Fiche d’une personne ¦ 🪪 Henkilön kortti ¦ 🪪 Egy személy adatlapja
+🖼️ Portrait d’une personne ¦ 🖼️ Henkilön muotokuva ¦ 🖼️ Egy személy portréja
+🌳 Petit arbre (parents, couple, enfants) ¦ 🌳 Pieni puu (vanhemmat, pariskunta, lapset) ¦ 🌳 Kis fa (szülők, pár, gyermekek)
+🗓️ Frise de sa vie ¦ 🗓️ Hänen elämänsä aikajana ¦ 🗓️ Az élete idővonala
+Vidéo / son ¦ Video / ääni ¦ Videó / hang
+Une vidéo ou un son des médias ¦ Video tai ääni mediasta ¦ Egy videó vagy hang a médiából
+Disposer (barre du haut) ¦ Järjestä (yläpalkki) ¦ Elrendezés (felső sáv)
+⇤⇥ Aligner et répartir ¦ ⇤⇥ Tasaa ja jaa ¦ ⇤⇥ Igazítás és elosztás
+⇤ À gauche ¦ ⇤ Vasemmalle ¦ ⇤ Balra
+↔ Au centre ¦ ↔ Keskelle ¦ ↔ Középre
+⇥ À droite ¦ ⇥ Oikealle ¦ ⇥ Jobbra
+⤒ En haut ¦ ⤒ Ylös ¦ ⤒ Felülre
+↕ Au milieu ¦ ↕ Keskelle pystysuunnassa ¦ ↕ Középre függőlegesen
+⤓ En bas ¦ ⤓ Alas ¦ ⤓ Alulra
+⟷ Répartir horizontalement ¦ ⟷ Jaa vaakasuunnassa ¦ ⟷ Vízszintes elosztás
+⟷ Répartir verticalement ¦ ⟷ Jaa pystysuunnassa ¦ ⟷ Függőleges elosztás
+⧉ Ordre (devant, derrière) ¦ ⧉ Järjestys (eteen, taakse) ¦ ⧉ Sorrend (előre, hátra)
+Devant, derrière ¦ Eteen, taakse ¦ Előre, hátra
+Tout devant (⇧⌘]) ¦ Kaikkein eteen (⇧⌘]) ¦ Legelőre (⇧⌘])
+Avancer (⌘]) ¦ Tuo eteenpäin (⌘]) ¦ Előrébb (⌘])
+Reculer (⌘[) ¦ Vie taaksepäin (⌘[) ¦ Hátrébb (⌘[)
+Tout derrière (⇧⌘[) ¦ Kaikkein taakse (⇧⌘[) ¦ Leghátra (⇧⌘[)
+Grouper (⌘G) — ⇧⌘G pour dissocier ¦ Ryhmitä (⌘G) — ⇧⌘G purkaa ¦ Csoportosítás (⌘G) — ⇧⌘G a bontáshoz
+Dissocier ¦ Pura ryhmä ¦ Csoport bontása
+Dissocier (⇧⌘G) ¦ Pura ryhmä (⇧⌘G) ¦ Csoport bontása (⇧⌘G)
+Verrouiller / déverrouiller (⌘L) ¦ Lukitse / avaa lukitus (⌘L) ¦ Zárolás / feloldás (⌘L)
+Relier deux objets par un trait qui les suit (choisis-en deux) ¦ Yhdistä kaksi objektia viivalla, joka seuraa niitä (valitse kaksi) ¦ Két objektum összekötése egy őket követő vonallal (jelölj ki kettőt)
+Fusionner deux formes : union, soustraction, intersection ¦ Yhdistä kaksi muotoa: yhdiste, vähennys, leikkaus ¦ Két alakzat egyesítése: egyesítés, kivonás, metszet
+Masque des diapositives : mettre les objets choisis sur toutes les diapositives, ou modifier le masque ¦ Diapohja: aseta valitut objektit kaikille dioille tai muokkaa pohjaa ¦ Diaminta: a kijelölt objektumok minden diára, vagy a minta szerkesztése
+Lire en plein écran depuis le début (⌥⌘↩) ¦ Toista koko näytössä alusta (⌥⌘↩) ¦ Lejátszás teljes képernyőn az elejétől (⌥⌘↩)
+D’ici ¦ Tästä ¦ Innen
+Lire depuis cette diapositive (⌘↩) ¦ Toista tästä diasta (⌘↩) ¦ Lejátszás erről a diáról (⌘↩)
+Plein écran + fenêtre du présentateur (notes, suivante, chronomètre) ¦ Koko näyttö + esittäjän ikkuna (muistiinpanot, seuraava, ajastin) ¦ Teljes képernyő + előadói ablak (jegyzetek, következő, stopper)
+PowerPoint, OpenDocument, PDF, images, Markdown, texte, JSON ¦ PowerPoint, OpenDocument, PDF, kuvat, Markdown, teksti, JSON ¦ PowerPoint, OpenDocument, PDF, képek, Markdown, szöveg, JSON
+Récit d’une vie : des diapositives toutes faites à partir de la fiche d’une personne ¦ Elämäntarina: valmiita dioja henkilön kortin pohjalta ¦ Egy élet története: kész diák egy személy adatlapjából
+PDF, impression, images, vidéo, fichier de la présentation ¦ PDF, tulostus, kuvat, video, esityksen tiedosto ¦ PDF, nyomtatás, képek, videó, a bemutató fájlja
+Une forme (les autres : menu ◆ Forme en haut) ¦ Muoto (muut: valikko ◆ Muoto ylhäällä) ¦ Egy alakzat (a többi: ◆ Alakzat menü fent)
+Une image (médias ou ordinateur) ¦ Kuva (mediasta tai tietokoneelta) ¦ Egy kép (médiából vagy számítógépről)
+La fiche d’une personne ¦ Henkilön kortti ¦ Egy személy adatlapja
+Présentateur : plein écran, notes, chronomètre ¦ Esittäjä: koko näyttö, muistiinpanot, ajastin ¦ Előadó: teljes képernyő, jegyzetek, stopper
+Diapositives (au-dessus de la liste) ¦ Diat (luettelon yläpuolella) ¦ Diák (a lista felett)
+Nouvelle diapositive ¦ Uusi dia ¦ Új dia
+＋ Diapositive ¦ ＋ Dia ¦ ＋ Dia
+▾ Choisir la disposition ¦ ▾ Valitse asettelu ¦ ▾ Elrendezés kiválasztása
+Choisir la disposition ¦ Valitse asettelu ¦ Elrendezés kiválasztása
+Dupliquer la diapositive (pour un déplacement magique) ¦ Monista dia (taikasiirtoa varten) ¦ A dia kettőzése (varázsmozgáshoz)
+Sauter / ne plus sauter à la lecture ¦ Ohita / älä enää ohita toistossa ¦ Kihagyás / visszavétel lejátszáskor
+Commencer une section (un groupe de diapositives) ici ¦ Aloita osio (diaryhmä) tästä ¦ Szakasz (diacsoport) kezdése itt
+Supprimer la diapositive ¦ Poista dia ¦ A dia törlése
+Diapositive précédente (Page précédente) ¦ Edellinen dia (Page Up) ¦ Előző dia (Page Up)
+Diapositive suivante (Page suivante) ¦ Seuraava dia (Page Down) ¦ Következő dia (Page Down)
+Ajuster ¦ Sovita ¦ Igazítás
+Les objets se calent sur les bords, le centre et les autres objets (⌘ en glissant : sans aimant) ¦ Objektit kohdistuvat reunoihin, keskelle ja muihin objekteihin (⌘ vetäessä: ilman magneettia) ¦ Az objektumok a szélekhez, a középhez és a többi objektumhoz illeszkednek (húzás közben ⌘: mágnes nélkül)
+Notes de l’orateur ¦ Puhujan muistiinpanot ¦ Előadói jegyzetek
+📝 Notes ¦ 📝 Muistiinpanot ¦ 📝 Jegyzetek
+Notes de l’orateur : ce que tu veux dire sur cette diapositive (vues seulement dans la fenêtre du présentateur, et dans le PDF avec notes)… ¦ Puhujan muistiinpanot: mitä haluat sanoa tästä diasta (näkyvät vain esittäjän ikkunassa ja muistiinpanollisessa PDF:ssä)… ¦ Előadói jegyzetek: amit erről a diáról mondani szeretnél (csak az előadói ablakban és a jegyzetes PDF-ben látszik)…
+Onglets de l’inspecteur (à droite) ¦ Tarkastimen välilehdet (oikealla) ¦ A felügyelő lapjai (jobb oldalt)
+Format de l’objet choisi ¦ Valitun objektin muotoilu ¦ A kijelölt objektum formátuma
+Animer ¦ Animoi ¦ Animálás
+Transition et animations ¦ Siirtymä ja animaatiot ¦ Áttűnés és animációk
+Diapo ¦ Dia ¦ Dia
+La diapositive : disposition, fond, durée, notes ¦ Dia: asettelu, tausta, kesto, muistiinpanot ¦ A dia: elrendezés, háttér, időtartam, jegyzetek
+Les objets de la diapositive (devant, derrière, cacher, verrouiller) ¦ Dian objektit (eteen, taakse, piilota, lukitse) ¦ A dia objektumai (előre, hátra, elrejtés, zárolás)
+Thème, polices, format, musique ¦ Teema, fontit, koko, musiikki ¦ Téma, betűtípusok, formátum, zene
+Clic : choisir un objet (⇧ : en plus) · double-clic : écrire dedans · glisser : déplacer · poignées : agrandir · rond : tourner ¦ Napsautus: valitse objekti (⇧: lisää) · kaksoisnapsautus: kirjoita siihen · veto: siirrä · kahvat: suurenna · ympyrä: kierrä ¦ Kattintás: objektum kijelölése (⇧: továbbiak) · dupla kattintás: írás bele · húzás: áthelyezés · fogantyúk: nagyítás · kör: forgatás
+Aimanter : les objets se calent sur les bords, le centre et les autres objets (⌘ en glissant : sans aimant) ¦ Magneettikohdistus: objektit kohdistuvat reunoihin, keskelle ja muihin objekteihin (⌘ vetäessä: ilman magneettia) ¦ Mágneses igazítás: az objektumok a szélekhez, a középhez és a többi objektumhoz illeszkednek (húzás közben ⌘: mágnes nélkül)
+Replier / déplier la section ¦ Taita / avaa osio ¦ A szakasz összecsukása / kibontása
+Sautée à la lecture ¦ Ohitetaan toistossa ¦ Lejátszáskor kihagyva
+Animations ¦ Animaatiot ¦ Animációk
+Transition : {name} ¦ Siirtymä: {name} ¦ Áttűnés: {name}
+Tourner (⇧ : de 15° en 15°) ¦ Kierrä (⇧: 15° kerrallaan) ¦ Forgatás (⇧: 15°-onként)
+Choisis une zone de texte. ¦ Valitse tekstikenttä. ¦ Jelölj ki egy szövegdobozt.
+Le petit arbre de quelle personne ? ¦ Kenen henkilön pieni puu? ¦ Melyik személy kis fája?
+La frise de la vie de qui ? ¦ Kenen elämän aikajana? ¦ Kinek az életének idővonala?
+Lecture de la fiche… ¦ Luetaan korttia… ¦ Az adatlap beolvasása…
+Changer la vidéo ou le son ¦ Vaihda video tai ääni ¦ A videó vagy a hang cseréje
+Choisis un ou plusieurs objets. ¦ Valitse yksi tai useampi objekti. ¦ Jelölj ki egy vagy több objektumot.
+Choisis au moins trois objets pour les répartir. ¦ Valitse jakamista varten vähintään kolme objektia. ¦ Az elosztáshoz jelölj ki legalább három objektumot.
+Choisis au moins deux objets à grouper. ¦ Valitse vähintään kaksi ryhmitettävää objektia. ¦ Jelölj ki legalább két csoportosítandó objektumot.
+Choisis deux objets (⇧ clic) : un trait les reliera, et les suivra quand tu les déplaces. ¦ Valitse kaksi objektia (⇧ napsautus): viiva yhdistää ne ja seuraa niitä, kun siirrät niitä. ¦ Jelölj ki két objektumot (⇧ kattintás): egy vonal köti össze őket, és követi őket, amikor áthelyezed őket.
+Choisis deux formes (⇧ clic) à fusionner. ¦ Valitse kaksi yhdistettävää muotoa (⇧ napsautus). ¦ Jelölj ki két egyesítendő alakzatot (⇧ kattintás).
+⊕ Fusionner deux formes ¦ ⊕ Yhdistä kaksi muotoa ¦ ⊕ Két alakzat egyesítése
+La 1re forme est celle du dessous. Les deux restent gardées dans la nouvelle forme. ¦ 1. muoto on alempi. Molemmat säilyvät uudessa muodossa. ¦ Az 1. alakzat az alsó. Mindkettő megmarad az új alakzatban.
+Comment ¦ Miten ¦ Hogyan
+🗂 Sur toutes les diapositives (masque). Dans un texte, « {a} » donne le numéro de la diapositive et « {b} » leur nombre. 🗂 sans rien choisir : le modifier. ¦ 🗂 Kaikille dioille (pohja). Tekstissä ”{a}” antaa dian numeron ja ”{b}” niiden määrän. 🗂 ilman valintaa: muokkaa sitä. ¦ 🗂 Minden diára (minta). Egy szövegben a „{a}” a dia számát, a „{b}” a diák számát adja. 🗂 kijelölés nélkül: a minta szerkesztése.
+Le masque est vide : choisis des objets (logo, pied de page, numéro « {a} »…) puis 🗂 pour les mettre sur toutes les diapositives. ¦ Pohja on tyhjä: valitse objekteja (logo, alatunniste, numero ”{a}”…) ja sitten 🗂 asettaaksesi ne kaikille dioille. ¦ A minta üres: jelölj ki objektumokat (logó, lábléc, „{a}” szám…), majd 🗂, hogy minden diára rákerüljenek.
+🗂 Masque des diapositives ¦ 🗂 Diapohja ¦ 🗂 Diaminta
+{n} sur toutes les diapositives. ¦ {n} kaikilla dioilla. ¦ {n} minden dián.
+Que faire ¦ Mitä tehdään ¦ Mi legyen
+Les ramener sur cette diapositive pour les modifier (puis 🗂 pour les remettre) ¦ Tuo ne takaisin tälle dialle muokattaviksi (sitten 🗂 palauttaaksesi ne) ¦ Visszahozás erre a diára szerkesztéshez (majd 🗂 a visszatételükhöz)
+Remontrer le masque sur cette diapositive ¦ Näytä pohja taas tällä dialla ¦ A minta újbóli megjelenítése ezen a dián
+Ne pas montrer le masque sur cette diapositive ¦ Älä näytä pohjaa tällä dialla ¦ A minta elrejtése ezen a dián
+Vider le masque ¦ Tyhjennä pohja ¦ A minta ürítése
+Diapositive dupliquée : déplace les objets puis choisis la transition « Déplacement magique » (onglet ✨ Animer). ¦ Dia monistettu: siirrä objekteja ja valitse sitten siirtymä ”Taikasiirto” (välilehti ✨ Animoi). ¦ A dia megkettőzve: mozgasd az objektumokat, majd válaszd a „Varázsmozgás” áttűnést (✨ Animálás lap).
+Aucune couleur ¦ Ei väriä ¦ Nincs szín
+Choisir la police (recherche, récentes, polices de l’ordinateur) ¦ Valitse fontti (haku, viimeisimmät, tietokoneen fontit) ¦ Betűtípus kiválasztása (keresés, legutóbbiak, a számítógép betűtípusai)
+{what} (sur la diapositive) ¦ {what} (dialla) ¦ {what} (a dián)
+Les réglages vont au texte sélectionné (sinon à tout le texte). ¦ Asetukset koskevat valittua tekstiä (muuten koko tekstiä). ¦ A beállítások a kijelölt szövegre vonatkoznak (különben az egész szövegre).
+Double-clic dans le texte pour l’écrire ; les réglages vont à tout le texte, ou au morceau sélectionné. ¦ Kaksoisnapsauta tekstiä kirjoittaaksesi; asetukset koskevat koko tekstiä tai valittua osaa. ¦ Az íráshoz kattints duplán a szövegbe; a beállítások az egész szövegre vagy a kijelölt részre vonatkoznak.
+Le trait suit les deux objets quand on les déplace. ¦ Viiva seuraa molempia objekteja, kun niitä siirretään. ¦ A vonal követi mindkét objektumot, amikor áthelyezed őket.
+Double-clic sur une case du tableau pour l’écrire directement. ¦ Kaksoisnapsauta taulukon solua kirjoittaaksesi siihen suoraan. ¦ A táblázat egy cellájába dupla kattintással közvetlenül írhatsz.
+Ce qui est montré vient de la fiche (relue le {date}) : la présentation se lit même sans la base. « Relire la fiche » la met à jour. ¦ Näytetty sisältö tulee kortilta (luettu {date}): esitys toimii ilman tietokantaakin. ”Lue kortti uudelleen” päivittää sen. ¦ A látható tartalom az adatlapról származik (beolvasva: {date}): a bemutató adatbázis nélkül is lejátszható. Az „Adatlap újraolvasása” frissíti.
+(groupe) ¦ (ryhmä) ¦ (csoport)
+Choisis un objet sur la diapositive (clic) ou insère-en un (barre du haut). ⇧ clic : en choisir plusieurs ; glisser sur le fond : un rectangle de sélection ; double-clic : écrire dans un texte, changer une image ; ⌥ en glissant : copier. ¦ Valitse objekti dialta (napsautus) tai lisää sellainen (yläpalkki). ⇧ napsautus: valitse useita; veto taustalla: valintasuorakulmio; kaksoisnapsautus: kirjoita tekstiin, vaihda kuva; ⌥ vetäessä: kopioi. ¦ Jelölj ki egy objektumot a dián (kattintás), vagy szúrj be egyet (felső sáv). ⇧ kattintás: több kijelölése; húzás a háttéren: kijelölő téglalap; dupla kattintás: írás egy szövegbe, kép cseréje; húzás közben ⌥: másolás.
+Inspecteur : sections de « Format » ¦ Tarkastin: ”Muotoilu”-osiot ¦ Felügyelő: a „Formátum” szakaszai
+Inspecteur : sections de « Animer » ¦ Tarkastin: ”Animoi”-osiot ¦ Felügyelő: az „Animálás” szakaszai
+Inspecteur : sections de « Diapositive » ¦ Tarkastin: ”Dia”-osiot ¦ Felügyelő: a „Dia” szakaszai
+Inspecteur : « Objets » ¦ Tarkastin: ”Objektit” ¦ Felügyelő: „Objektumok”
+Inspecteur : sections de « Document » ¦ Tarkastin: ”Asiakirja”-osiot ¦ Felügyelő: a „Dokumentum” szakaszai
+C’est la première diapositive : sa transition ne joue que si la lecture recommence en boucle. ¦ Tämä on ensimmäinen dia: sen siirtymä toistuu vain, jos toisto alkaa alusta silmukassa. ¦ Ez az első dia: az áttűnése csak akkor játszódik le, ha a lejátszás ismétlődve újraindul.
+✨ Les objets présents sur la diapositive d’avant et sur celle-ci (diapositive dupliquée avec ⧉, ou objets portant le même nom) glissent, grandissent et tournent d’une place à l’autre ; les autres apparaissent ou s’effacent. ¦ ✨ Objektit, jotka ovat sekä edellisellä että tällä dialla (⧉:llä monistettu dia tai samannimiset objektit), liukuvat, kasvavat ja kiertyvät paikasta toiseen; muut ilmestyvät tai häviävät. ¦ ✨ Az előző és erre a diára is felkerült objektumok (⧉-vel kettőzött dia vagy azonos nevű objektumok) egyik helyről a másikra csúsznak, nőnek és fordulnak; a többiek megjelennek vagy eltűnnek.
+Aucune : il est là dès l’arrivée de la diapositive. ¦ Ei mitään: se on paikalla heti dian tullessa. ¦ Nincs: a dia megjelenésétől kezdve ott van.
+Choisis un objet sur la diapositive pour le faire apparaître (entrée) ou disparaître (sortie), au clic ou tout seul. ¦ Valitse dialta objekti, joka ilmestyy (sisääntulo) tai katoaa (poistuminen), napsautuksella tai itsestään. ¦ Jelölj ki egy objektumot a dián, hogy megjelenjen (belépés) vagy eltűnjön (kilépés), kattintásra vagy magától.
+Pas encore d’animation sur cette diapositive. ¦ Tällä dialla ei ole vielä animaatioita. ¦ Ezen a dián még nincs animáció.
+Changer de disposition replace les objets « titre », « texte », « photo » ; ce que tu as écrit est gardé. ¦ Asettelun vaihtaminen siirtää ”otsikko”-, ”teksti”- ja ”kuva”-objektit; kirjoittamasi säilyy. ¦ Az elrendezés cseréje áthelyezi a „cím”, „szöveg”, „fotó” objektumokat; amit írtál, megmarad.
+Ce que tu veux dire sur cette diapositive (vu dans la fenêtre du présentateur)… ¦ Mitä haluat sanoa tästä diasta (näkyy esittäjän ikkunassa)… ¦ Amit erről a diáról mondani szeretnél (az előadói ablakban látszik)…
+Objets de la diapositive ¦ Dian objektit ¦ A dia objektumai
+Objets (le premier est devant) ¦ Objektit (ensimmäinen on edessä) ¦ Objektumok (az első van elöl)
+Dans un groupe ¦ Ryhmässä ¦ Csoportban
+Aucun objet sur cette diapositive pour l’instant ¦ Tällä dialla ei ole vielä objekteja ¦ Ezen a dián még nincs objektum
+Insère un texte, une image… avec la barre du haut. ¦ Lisää tekstiä, kuva… yläpalkista. ¦ Szúrj be egy szöveget, képet… a felső sávval.
+Celle du thème ({font}) ¦ Teeman fontti ({font}) ¦ A témáé ({font})
+{w} × {h} points. En changeant de format, les objets sont agrandis ou réduits ensemble. ¦ {w} × {h} pistettä. Kokoa vaihdettaessa objektit suurennetaan tai pienennetään yhdessä. ¦ {w} × {h} pont. Formátumváltáskor az objektumok együtt nagyobbodnak vagy kisebbednek.
+{n} dont {skipped} · {time} en lecture toute seule (durées des diapositives). ¦ {n}, joista {skipped} · {time} itsestään toistettuna (diojen kestot). ¦ {n}, ebből {skipped} · {time} önálló lejátszással (a diák időtartama).
+{n} · {time} en lecture toute seule (durées des diapositives). ¦ {n} · {time} itsestään toistettuna (diojen kestot). ¦ {n} · {time} önálló lejátszással (a diák időtartama).
+Il n’y a pas de diapositive avant celle-ci. ¦ Tätä ennen ei ole diaa. ¦ Ez előtt nincs dia.
+Choisis d’abord un effet de transition. ¦ Valitse ensin siirtymätehoste. ¦ Előbb válassz egy áttűnési effektust.
+Les dernières modifications de la présentation seront perdues. ¦ Esityksen viimeisimmät muutokset menetetään. ¦ A bemutató legutóbbi módosításai elvesznek.
+Fermer sans enregistrer la présentation ? ¦ Suljetaanko esitys tallentamatta? ¦ Bezárod a bemutatót mentés nélkül?
+une diapositive par page (« Enregistrer en PDF ») ¦ yksi dia sivulle (”Tallenna PDF-muodossa”) ¦ oldalanként egy dia („Mentés PDF-ként”)
+📝 PDF + notes ¦ 📝 PDF + muistiinpanot ¦ 📝 PDF + jegyzetek
+avec les notes de l’orateur ¦ puhujan muistiinpanojen kanssa ¦ az előadói jegyzetekkel
+🗂 Toutes en PNG ¦ 🗂 Kaikki PNG-kuvina ¦ 🗂 Mind PNG-ként
+un fichier .zip ¦ .zip-tiedosto ¦ egy .zip fájl
+WebM, avec la musique ¦ WebM, musiikin kanssa ¦ WebM, zenével
+aperçu, pages, notes ¦ esikatselu, sivut, muistiinpanot ¦ előnézet, oldalak, jegyzetek
+pour la rouvrir ou la partager ¦ uudelleen avaamista tai jakamista varten ¦ újbóli megnyitáshoz vagy megosztáshoz
+Le diaporama n’est pas chargé. ¦ Diaesitystä ei ole ladattu. ¦ A diavetítés nincs betöltve.
+Ajouter le récit ¦ Lisää tarina ¦ A történet hozzáadása
+Rien à raconter pour cette personne. ¦ Tästä henkilöstä ei ole mitään kerrottavaa. ¦ Erről a személyről nincs mit elmesélni.
+{n} : chaque texte vient de la fiche. Les cartes animées restent dans le diaporama. ¦ {n}: jokainen teksti tulee kortilta. Animoidut kartat jäävät diaesitykseen. ¦ {n}: minden szöveg az adatlapról származik. Az animált térképek a diavetítésben maradnak.
+Titre de la section qui commence à cette diapositive (vide : pas de section) : ¦ Tästä diasta alkavan osion otsikko (tyhjä: ei osiota): ¦ Az ezen a dián kezdődő szakasz címe (üres: nincs szakasz):
+Police « {font} » pour le texte choisi. ¦ Fontti ”{font}” valitulle tekstille. ¦ „{font}” betűtípus a kijelölt szöveghez.
+Police « {font} » pour les titres. ¦ Fontti ”{font}” otsikoille. ¦ „{font}” betűtípus a címekhez.
+Police « {font} » pour les textes. ¦ Fontti ”{font}” teksteille. ¦ „{font}” betűtípus a szövegekhez.
+L’image est maintenant le fond de la diapositive (onglet 🖼 Diapositive). ¦ Kuva on nyt dian tausta (välilehti 🖼 Dia). ¦ A kép most a dia háttere (🖼 Dia lap).
+Cette transition va maintenant à toutes les diapositives. ¦ Tämä siirtymä koskee nyt kaikkia dioja. ¦ Ez az áttűnés mostantól minden diára vonatkozik.
+L’image du fond ¦ Taustakuva ¦ A háttérkép
+Ce fond va maintenant à toutes les diapositives. ¦ Tämä tausta koskee nyt kaikkia dioja. ¦ Ez a háttér mostantól minden diára vonatkozik.
+Une musique pendant la lecture ¦ Musiikki toiston aikana ¦ Zene lejátszás közben
+Choisis un son (MP3, M4A, WAV…). ¦ Valitse ääni (MP3, M4A, WAV…). ¦ Válassz egy hangot (MP3, M4A, WAV…).
+{name} : ni une image, ni une vidéo, ni un son. ¦ {name}: ei kuva, ei video eikä ääni. ¦ {name}: se nem kép, se nem videó, se nem hang.
+Diapositive copiée : ⌘V pour la coller. ¦ Dia kopioitu: ⌘V liittää sen. ¦ Dia másolva: ⌘V a beillesztéshez.
+ce n’est pas un fichier zip valide (pptx, odp) ¦ tämä ei ole kelvollinen zip-tiedosto (pptx, odp) ¦ ez nem érvényes zip fájl (pptx, odp)
+un élément du fichier est trop gros ¦ tiedoston osa on liian suuri ¦ a fájl egyik eleme túl nagy
+fichier refusé : il contient des déclarations XML (DOCTYPE ou ENTITY) ¦ tiedosto hylätty: se sisältää XML-määrityksiä (DOCTYPE tai ENTITY) ¦ fájl elutasítva: XML-deklarációkat (DOCTYPE vagy ENTITY) tartalmaz
+XML illisible dans le fichier ¦ tiedoston XML:ää ei voi lukea ¦ olvashatatlan XML a fájlban
+ce n’est pas une présentation PowerPoint (.pptx) ¦ tämä ei ole PowerPoint-esitys (.pptx) ¦ ez nem PowerPoint-bemutató (.pptx)
+aucune diapositive trouvée ¦ dioja ei löytynyt ¦ nem található dia
+{n} dans un format que le navigateur ne lit pas (EMF, WMF…) ont été laissées de côté. ¦ {n} muodossa, jota selain ei lue (EMF, WMF…), jätettiin pois. ¦ {n}, amelyet a böngésző nem tud olvasni (EMF, WMF…), kimaradt.
+ce n’est pas un fichier OpenDocument (.odp) ¦ tämä ei ole OpenDocument-tiedosto (.odp) ¦ ez nem OpenDocument-fájl (.odp)
+{n} de côté. ¦ {n} jätetty pois. ¦ {n} kimaradt.
+ce n’est pas un PDF ¦ tämä ei ole PDF ¦ ez nem PDF
+aucune image (scan, photo) n’a été trouvée dans ce PDF. Son texte et ses dessins ne peuvent pas être lus ici : exporte-le plutôt en images, ou en PowerPoint depuis le logiciel qui l’a fait ¦ tästä PDF:stä ei löytynyt kuvia (skannauksia, valokuvia). Sen tekstiä ja piirroksia ei voi lukea täällä: vie se mieluummin kuvina tai PowerPointina ohjelmasta, jolla se tehtiin ¦ ebben a PDF-ben nem található kép (szkennelés, fotó). A szövege és a rajzai itt nem olvashatók: inkább exportáld képekként vagy PowerPointként abból a programból, amellyel készült
+PDF : {n} ; le texte et les dessins du PDF ne sont pas lus. ¦ PDF: {n}; PDF:n tekstiä ja piirroksia ei lueta. ¦ PDF: {n}; a PDF szövegét és rajzait nem olvassuk be.
+Carte du diaporama : le trajet animé reste dans le diaporama. ¦ Diaesityksen kartta: animoitu reitti jää diaesitykseen. ¦ A diavetítés térképe: az animált útvonal a diavetítésben marad.
+ce n’est pas une présentation de l’app ¦ tämä ei ole sovelluksen esitys ¦ ez nem az alkalmazás bemutatója
+{name} : Keynote garde ses fichiers dans un format fermé. Dans Keynote : Fichier → Exporter vers → PowerPoint (ou PDF, ou Images), puis importe ce fichier ici. ¦ {name}: Keynote tallentaa tiedostonsa suljetussa muodossa. Keynotessa: Arkisto → Vie muotoon → PowerPoint (tai PDF tai Kuvat), ja tuo sitten tämä tiedosto tänne. ¦ {name}: a Keynote zárt formátumban tárolja a fájljait. A Keynote-ban: Fájl → Exportálás → PowerPoint (vagy PDF, vagy Képek), majd importáld ide ezt a fájlt.
+{name} : l’ancien format PowerPoint (avant 2007) ne se lit pas ici ; ouvre-le et enregistre-le en .pptx. ¦ {name}: vanhaa PowerPoint-muotoa (ennen vuotta 2007) ei voi lukea täällä; avaa se ja tallenna .pptx-muodossa. ¦ {name}: a régi PowerPoint-formátum (2007 előtti) itt nem olvasható; nyisd meg, és mentsd .pptx formátumban.
+fichier trop gros (400 Mo au plus) ¦ tiedosto on liian suuri (enintään 400 Mt) ¦ a fájl túl nagy (legfeljebb 400 MB)
+{name} : format non reconnu. ¦ {name}: muotoa ei tunnistettu. ¦ {name}: fel nem ismert formátum.
+{name} : rien à importer. ¦ {name}: ei mitään tuotavaa. ¦ {name}: nincs mit importálni.
+IMPORT ¦ TUONTI ¦ IMPORTÁLÁS
+Rien n’a été importé ¦ Mitään ei tuotu ¦ Semmi sem lett importálva
+Remplacer les diapositives actuelles (sinon : ajoutées après la diapositive affichée) ¦ Korvaa nykyiset diat (muuten: lisätään näytetyn dian jälkeen) ¦ A jelenlegi diák lecserélése (különben: a látható dia után kerülnek)
+<b>PowerPoint (.pptx)</b> et <b>OpenDocument / LibreOffice Impress (.odp)</b> : chaque diapositive avec ses textes (à leur place, taille, gras, couleur, listes), ses images, ses formes simples, ses tableaux, ses graphiques, ses notes et ses transitions. ¦ <b>PowerPoint (.pptx)</b> ja <b>OpenDocument / LibreOffice Impress (.odp)</b>: jokainen dia teksteineen (paikallaan, koko, lihavointi, väri, luettelot), kuvineen, yksinkertaisine muotoineen, taulukkoineen, kaavioineen, muistiinpanoineen ja siirtymineen. ¦ <b>PowerPoint (.pptx)</b> és <b>OpenDocument / LibreOffice Impress (.odp)</b>: minden dia a szövegeivel (a helyükön, méret, félkövér, szín, listák), képeivel, egyszerű alakzataival, táblázataival, grafikonjaival, jegyzeteivel és áttűnéseivel.
+<b>Keynote (.key)</b> : le format d’Apple est fermé. Dans Keynote : Fichier → Exporter vers → <b>PowerPoint</b> (ou PDF, ou Images), puis importe ce fichier ici. ¦ <b>Keynote (.key)</b>: Applen muoto on suljettu. Keynotessa: Arkisto → Vie muotoon → <b>PowerPoint</b> (tai PDF tai Kuvat), ja tuo sitten tämä tiedosto tänne. ¦ <b>Keynote (.key)</b>: az Apple formátuma zárt. A Keynote-ban: Fájl → Exportálás → <b>PowerPoint</b> (vagy PDF, vagy Képek), majd importáld ide ezt a fájlt.
+<b>PDF</b> : les images qu’il contient (scans, photos) deviennent des diapositives, une par image. Le texte et les dessins d’un PDF ne se lisent pas ici : pour une présentation, exporte-la plutôt en PowerPoint ou en images. ¦ <b>PDF</b>: sen sisältämistä kuvista (skannaukset, valokuvat) tulee dioja, yksi kuvaa kohden. PDF:n tekstiä ja piirroksia ei voi lukea täällä: vie esitys mieluummin PowerPointina tai kuvina. ¦ <b>PDF</b>: a benne lévő képekből (szkennelések, fotók) diák lesznek, képenként egy. A PDF szövege és rajzai itt nem olvashatók: bemutatót inkább PowerPointként vagy képekként exportálj.
+<b>Images</b> (JPG, PNG, WEBP, GIF, BMP…), plusieurs à la fois : une diapositive « photo pleine page » par image. ¦ <b>Kuvat</b> (JPG, PNG, WEBP, GIF, BMP…), useita kerralla: yksi ”koko sivun kuva” -dia kuvaa kohden. ¦ <b>Képek</b> (JPG, PNG, WEBP, GIF, BMP…), egyszerre több is: képenként egy „egész oldalas fotó” dia.
+<b>Markdown (.md) ou texte (.txt)</b> : « # Titre » commence une diapositive, « - » fait une puce, « --- » sépare deux diapositives, « > » une citation, « Notes: » les notes de l’orateur. Un texte simple : un paragraphe par diapositive. ¦ <b>Markdown (.md) tai teksti (.txt)</b>: ”# Otsikko” aloittaa dian, ”-” tekee luettelomerkin, ”---” erottaa kaksi diaa, ”>” lainauksen, ”Notes:” puhujan muistiinpanot. Pelkkä teksti: yksi kappale diaa kohden. ¦ <b>Markdown (.md) vagy szöveg (.txt)</b>: a „# Cím” új diát kezd, a „-” felsorolásjelet ad, a „---” két diát választ el, a „>” idézetet, a „Notes:” az előadói jegyzeteket. Egyszerű szöveg: diánként egy bekezdés.
+<b>JSON</b> : une présentation (ou un diaporama) exportée par l’app. ¦ <b>JSON</b>: sovelluksen viemä esitys (tai diaesitys). ¦ <b>JSON</b>: az alkalmazásból exportált bemutató (vagy diavetítés).
+Aucune diapositive à imprimer. ¦ Ei tulostettavia dioja. ¦ Nincs nyomtatható dia.
+Diapositive ¦ Dia ¦ Dia
+Pas de notes. ¦ Ei muistiinpanoja. ¦ Nincs jegyzet.
+{name} — présentation ¦ {name} — esitys ¦ {name} — bemutató
+Les diapositives ¦ Diat ¦ A diák
+Les diapositives avec les notes du présentateur ¦ Diat esittäjän muistiinpanoineen ¦ A diák az előadói jegyzetekkel
+Les notes seules (texte) ¦ Pelkät muistiinpanot (teksti) ¦ Csak a jegyzetek (szöveg)
+Diapositives par page ¦ Dioja sivulla ¦ Dia oldalanként
+Numéros des diapositives ¦ Diojen numerot ¦ A diák számai
+Les diapositives masquées aussi ¦ Myös piilotetut diat ¦ A rejtett diák is
+aucune diapositive ¦ ei dioja ¦ nincs dia
+Préparation de {n} images… ¦ Valmistellaan {n} kuvaa… ¦ {n} kép előkészítése…
+Préparation de l’image… ¦ Valmistellaan kuvaa… ¦ A kép előkészítése…
+ce navigateur ne sait pas enregistrer de vidéo ¦ tämä selain ei osaa tallentaa videota ¦ ez a böngésző nem tud videót rögzíteni
+La vidéo rejoue la présentation en entier ({time}, durées de l’onglet 🖼 Diapositive) et l’enregistre. Laisse la fenêtre ouverte. ¦ Video toistaa koko esityksen ({time}, kestot välilehdeltä 🖼 Dia) ja tallentaa sen. Pidä ikkuna auki. ¦ A videó a teljes bemutatót lejátssza ({time}, a 🖼 Dia lap időtartamaival), és rögzíti. Hagyd nyitva az ablakot.
+Fabriquer la vidéo ? ¦ Tehdäänkö video? ¦ Elkészíted a videót?
+Fabriquer la vidéo ¦ Tee video ¦ Videó készítése
+Préparation : {n} / {total} ¦ Valmistellaan: {n} / {total} ¦ Előkészítés: {n} / {total}
+Vidéo : {n} % ¦ Video: {n} % ¦ Videó: {n} %
+Vidéo arrêtée : la présentation a été fermée pendant l’enregistrement. ¦ Video pysäytetty: esitys suljettiin tallennuksen aikana. ¦ A videó leállt: a bemutatót a rögzítés közben bezárták.
+la vidéo est vide : l’enregistrement n’a pas pu se faire dans ce navigateur ¦ video on tyhjä: tallennus ei onnistunut tässä selaimessa ¦ a videó üres: a rögzítés nem sikerült ebben a böngészőben
+La vidéo est vide : l’enregistrement n’a pas pu se faire dans ce navigateur. ¦ Video on tyhjä: tallennus ei onnistunut tässä selaimessa. ¦ A videó üres: a rögzítés nem sikerült ebben a böngészőben.
+Vidéo téléchargée et rangée dans les Médias. ¦ Video ladattu ja tallennettu Mediaan. ¦ A videó letöltve, és a Médiába került.
+Tu peux l’ajouter aux Médias de l’app, ou seulement la télécharger. ¦ Voit lisätä sen sovelluksen Mediaan tai vain ladata sen. ¦ Hozzáadhatod az alkalmazás Médiájához, vagy csak letöltheted.
+Vidéo prête ¦ Video valmis ¦ A videó kész
+Ajouter aux Médias ¦ Lisää Mediaan ¦ Hozzáadás a Médiához
+Télécharger seulement ¦ Lataa vain ¦ Csak letöltés
+Vidéo ajoutée aux Médias. ¦ Video lisätty Mediaan. ¦ A videó a Médiába került.
+Vidéo impossible : {error} ¦ Video ei onnistu: {error} ¦ A videó nem készíthető el: {error}
+NOUVELLE PRÉSENTATION ¦ UUSI ESITYS ¦ ÚJ BEMUTATÓ
+🎤 Choisis un thème ¦ 🎤 Valitse teema ¦ 🎤 Válassz témát
+Créer la présentation ¦ Luo esitys ¦ A bemutató létrehozása
+Le thème, les couleurs, les polices et le format se changent ensuite (onglet ⚙️ Document). Pour partir d’un PowerPoint, d’un OpenDocument, d’un PDF ou de photos : « ⤒ Importer ». ¦ Teemaa, värejä, fontteja ja kokoa voi muuttaa myöhemmin (välilehti ⚙️ Asiakirja). Aloittaaksesi PowerPointista, OpenDocumentista, PDF:stä tai kuvista: ”⤒ Tuo”. ¦ A téma, a színek, a betűtípusok és a formátum később módosítható (⚙️ Dokumentum lap). Ha PowerPointból, OpenDocumentből, PDF-ből vagy fotókból indulnál: „⤒ Importálás”.
+⤒ Importer une présentation ¦ ⤒ Tuo esitys ¦ ⤒ Bemutató importálása
+Thème au départ ¦ Aloitusteema ¦ Kezdő téma
+Format au départ ¦ Aloituskoko ¦ Kezdő formátum
+Transition des nouvelles diapositives ¦ Uusien diojen siirtymä ¦ Az új diák áttűnése
+Disposition de « ＋ Diapositive » ¦ ”＋ Dia” -asettelu ¦ A „＋ Dia” elrendezése
+Aimanter les objets (guides) ¦ Kohdista objektit magneetilla (apuviivat) ¦ Az objektumok mágneses igazítása (segédvonalak)
+Couleur du pointeur laser ¦ Laserosoittimen väri ¦ A lézermutató színe
+↺ Réglages de départ ¦ ↺ Alkuperäiset asetukset ¦ ↺ Kezdeti beállítások
+Réglages de départ. ¦ Alkuperäiset asetukset. ¦ Kezdeti beállítások.
+Les boutons du haut, les onglets et les sections de l’inspecteur se rangent, se montrent ou se cachent dans « Boutons et options » (éditeur 🎤 Présentation), avec ses raccourcis clavier. ¦ Yläpalkin painikkeet, välilehdet ja tarkastimen osiot järjestetään, näytetään tai piilotetaan kohdassa ”Painikkeet ja valinnat” (editori 🎤 Esitys), pikanäppäimineen. ¦ A felső gombok, a lapok és a felügyelő szakaszai a „Gombok és beállítások” alatt (🎤 Bemutató szerkesztő) rendezhetők, jeleníthetők meg vagy rejthetők el, a billentyűparancsaikkal együtt.
+{name} (présentation) ¦ {name} (esitys) ¦ {name} (bemutató)
+Diaporama ¦ Diaesitys ¦ Diavetítés
+Nom (pour le déplacement magique) ¦ Nimi (taikasiirtoa varten) ¦ Név (a varázsmozgáshoz)
+⇋ Miroir ¦ ⇋ Peilaa ¦ ⇋ Tükrözés
+⇵ Miroir ¦ ⇵ Peilaa ¦ ⇵ Tükrözés
+Retourner de gauche à droite ¦ Käännä vasemmalta oikealle ¦ Vízszintes tükrözés
+Retourner de haut en bas ¦ Käännä ylhäältä alas ¦ Függőleges tükrözés
+⤢ Proportions de la photo ¦ ⤢ Kuvan mittasuhteet ¦ ⤢ A fotó arányai
+Tout devant ¦ Kaikkein eteen ¦ Legelőre
+Tout derrière ¦ Kaikkein taakse ¦ Leghátra
+Grouper (⌘G) ¦ Ryhmitä (⌘G) ¦ Csoportosítás (⌘G)
+Déverrouiller (⌘L) ¦ Avaa lukitus (⌘L) ¦ Feloldás (⌘L)
+Verrouiller (⌘L) ¦ Lukitse (⌘L) ¦ Zárolás (⌘L)
+Dupliquer (⌘D) ¦ Monista (⌘D) ¦ Kettőzés (⌘D)
+Supprimer (⌫) ¦ Poista (⌫) ¦ Törlés (⌫)
+Selon le rôle ¦ Roolin mukaan ¦ Szerep szerint
+Légère ¦ Ohut ¦ Vékony
+Normale ¦ Normaali ¦ Normál
+Demi-grasse ¦ Puolilihava ¦ Félkövér
