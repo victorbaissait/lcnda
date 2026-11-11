@@ -1,0 +1,422 @@
+fr ¦ ro
+# ═════ zone « composants » : roumain (ro) — boutons, menus de choix, fenêtres communes ═════
+Enregistrer ¦ Salvează
+Annuler ¦ Anulează
+Fermer ¦ Închide
+Supprimer ¦ Șterge
+Retirer ¦ Scoate
+Modifier ¦ Modifică
+Créer ¦ Creează
+Ajouter ¦ Adaugă
+Relier ¦ Leagă
+↺ Remettre comme au départ ¦ ↺ Readu la starea inițială
+Remettre comme au départ ¦ Readu la starea inițială
+↶ Annuler ¦ ↶ Anulează
+↷ Rétablir ¦ ↷ Refă
+Rétablir ¦ Refă
+Continuer ¦ Continuă
+Réessayer ¦ Încearcă din nou
+Ouvrir ¦ Deschide
+↗ Ouvrir ¦ ↗ Deschide
+Renommer ¦ Redenumește
+Dupliquer ¦ Duplică
+Remplacer ¦ Înlocuiește
+Choisir ¦ Alege
+Choisir… ¦ Alege…
+Changer ¦ Schimbă
+Exporter ¦ Exportă
+Importer ¦ Importă
+Imprimer ¦ Tipărește
+🖨 Imprimer ¦ 🖨 Tipărește
+💾 Enregistrer ¦ 💾 Salvează
+⤒ Importer ¦ ⤒ Importă
+⤓ Exporter ▾ ¦ ⤓ Exportă ▾
+📋 Copier ¦ 📋 Copiază
+✓ Enregistré ¦ ✓ Salvat
+Enregistré ¦ Salvat
+Enregistrement… ¦ Se salvează…
+⚠️ Pas enregistré ¦ ⚠️ Nesalvat
+• modifié ¦ • modificat
+Plein écran ¦ Ecran complet
+Plus d’actions ¦ Mai multe acțiuni
+Aide ¦ Ajutor
+Aide : ¦ Ajutor:
+En savoir plus (FAQ) → ¦ Află mai multe (FAQ) →
+Clique pour lire la suite ¦ Fă clic ca să citești continuarea
+Retour ¦ Înapoi
+← Retour ¦ ← Înapoi
+Oui ¦ Da
+Non ¦ Nu
+Aucune ¦ Niciuna
+Aucun ¦ Niciunul
+Tous ¦ Toți
+Toutes ¦ Toate
+Tout ¦ Tot
+Tout voir ¦ Vezi tot
+Voir tout ¦ Vezi tot
+Toutes ({n}) ¦ Toate ({n})
+Tout ({n}) ¦ Tot ({n})
+Rien pour l’instant ¦ Nimic deocamdată
+Rien ¦ Nimic
+Sans titre ¦ Fără titlu
+Échap ¦ Esc
+Entrée ¦ Enter
+Début ¦ Home
+retour arrière ¦ backspace
+⚠️ ATTENTION ¦ ⚠️ ATENȚIE
+CONFIRMER ¦ CONFIRMĂ
+Es-tu sûr ? ¦ Ești sigur?
+Confirmer ¦ Confirmă
+Impossible d’annuler : {err} ¦ Anularea nu e posibilă: {err}
+Impossible de rétablir : {err} ¦ Refacerea nu e posibilă: {err}
+Déjà remis : rien à annuler de plus. ¦ Deja readus: nimic de anulat în plus.
+↶ Annulé : {what} ¦ ↶ Anulat: {what}
+↶ Annulé : « {what} » ¦ ↶ Anulat: „{what}”
+Pas de connexion avec LCNDA : rien n’est perdu, réessaie. ¦ Nicio conexiune cu LCNDA: nimic nu e pierdut, încearcă din nou.
+Réponse illisible du serveur ¦ Răspuns ilizibil de la server
+Réponse illisible du serveur. ¦ Răspuns ilizibil de la server.
+Erreur du serveur. ¦ Eroare de server.
+Réglage changé ¦ Setare schimbată
+Réglage changé : « {what} » ¦ Setare schimbată: „{what}”
+Réglages remis comme au départ ¦ Setările au revenit la starea inițială
+Chargement… ¦ Se încarcă…
+Chargement de la base… ¦ Se încarcă baza…
+Ouverture de la généalogie… ¦ Se deschide genealogia…
+Chercher ¦ Caută
+Chercher… ¦ Caută…
+Rechercher ¦ Caută
+Vider la case (Échap) ¦ Golește caseta (Esc)
+Vider la case ¦ Golește caseta
+Touche « / » : aller dans la case de recherche ¦ Tasta „/”: mergi în caseta de căutare
+Filtrer ¦ Filtrează
+Filtrer ▾ ¦ Filtrează ▾
+Tout effacer ¦ Șterge tot
+Retirer ce filtre ¦ Scoate acest filtru
+Trier ¦ Sortează
+Trier : ¦ Sortează:
+Les plus récents ¦ Cele mai recente
+Les plus anciens ¦ Cele mai vechi
+Les plus récentes ¦ Cele mai recente
+Les plus anciennes ¦ Cele mai vechi
+Nom A → Z ¦ Nume A → Z
+Nom Z → A ¦ Nume Z → A
+Liste ¦ Listă
+Fiches ¦ Fișe
+En liste : une ligne par élément (vignette, nom, détails, date) ¦ Ca listă: un rând pentru fiecare element (miniatură, nume, detalii, dată)
+En fiches : une carte par élément, avec une grande vignette ¦ Ca fișe: o cartelă pentru fiecare element, cu o miniatură mare
+Affichage des {what} ¦ Afișarea: {what}
+Voir le suivant ↓ ¦ Vezi următorul ↓
+Voir la suivante ↓ ¦ Vezi următoarea ↓
+Voir les {n} suivants ↓ ¦ Vezi următorii {n} ↓
+Voir les {n} suivantes ↓ ¦ Vezi următoarele {n} ↓
+{n} éléments ¦ {n} elemente
+=élément ¦ element|elemente|de elemente
+éléments ¦ elemente
+=personne ¦ persoană|persoane|de persoane
+=animal ¦ animal|animale|de animale
+=fiche ¦ fișă|fișe|de fișe
+=lieu ¦ loc|locuri|de locuri
+=commune ¦ localitate|localități|de localități
+=ville ¦ oraș|orașe|de orașe
+=chose ¦ lucru|lucruri|de lucruri
+=caractère ¦ caracter|caractere|de caractere
+=page ¦ pagină|pagini|de pagini
+=document ¦ document|documente|de documente
+=média ¦ fișier media|fișiere media|de fișiere media
+=source ¦ sursă|surse|de surse
+=événement ¦ eveniment|evenimente|de evenimente
+=étiquette ¦ etichetă|etichete|de etichete
+=enquête ¦ investigație|investigații|de investigații
+=modification ¦ modificare|modificări|de modificări
+=famille ¦ familie|familii|de familii
+=génération ¦ generație|generații|de generații
+=réglage ¦ setare|setări|de setări
+=erreur captée ¦ eroare înregistrată|erori înregistrate|de erori înregistrate
+=jour ¦ zi|zile|de zile
+=type ¦ tip|tipuri|de tipuri
+=branche ¦ ramură|ramuri|de ramuri
+=doublon possible ¦ dublură posibilă|dubluri posibile|de dubluri posibile
+=chose à vérifier ¦ lucru de verificat|lucruri de verificat|de lucruri de verificat
+=album ¦ album|albume|de albume
+=chanson ¦ cântec|cântece|de cântece
+=titre ¦ titlu|titluri|de titluri
+Nom, prénom… (2 lettres suffisent) ¦ Nume, prenume… (ajung 2 litere)
+Ville, village, paroisse… ¦ Oraș, sat, parohie…
+＋ Ajouter une personne… ¦ ＋ Adaugă o persoană…
+＋ Ajouter un lieu… ¦ ＋ Adaugă un loc…
+＋ Ajouter une source… ¦ ＋ Adaugă o sursă…
+＋ Ajouter un média… ¦ ＋ Adaugă un fișier media…
+＋ Ajouter une enquête… ¦ ＋ Adaugă o investigație…
+＋ Ajouter une étiquette… ¦ ＋ Adaugă o etichetă…
+＋ Ajouter un événement… ¦ ＋ Adaugă un eveniment…
+＋ Ajouter un animal… ¦ ＋ Adaugă un animal…
+＋ Ajouter… ¦ ＋ Adaugă…
+↗ Fiche ¦ ↗ Fișă
+↗ Lieu ¦ ↗ Loc
+Aucune fiche ¦ Nicio fișă
+Aucun lieu ¦ Niciun loc
+Aucune source ¦ Nicio sursă
+Aucun média ¦ Niciun fișier media
+Aucune enquête ¦ Nicio investigație
+Aucune étiquette ¦ Nicio etichetă
+Aucun événement ¦ Niciun eveniment
+Aucun animal ¦ Niciun animal
+Créer la fiche ¦ Creează fișa
+Créer le lieu ¦ Creează locul
+Créer une fiche ¦ Creează o fișă
+＋ Créer sa fiche ¦ ＋ Creează-i fișa
+👤 Personnes ¦ 👤 Persoane
+📍 Lieux ¦ 📍 Locuri
+📚 Sources ¦ 📚 Surse
+🖼 Médias ¦ 🖼 Media
+🔍 Enquêtes ¦ 🔍 Investigații
+🏷 Étiquettes ¦ 🏷 Etichete
+📅 Événements ¦ 📅 Evenimente
+🐾 Animaux ¦ 🐾 Animale
+✎ Garder le texte « {q} » sans fiche ¦ ✎ Păstrează textul „{q}” fără fișă
+🗺 Choisir sur la carte ¦ 🗺 Alege pe hartă
+{what} de ta base ¦ {what} din baza ta
+{what} de France ¦ {what} din Franța
+{what} du monde ¦ {what} din lume
+300 villes du monde et plus ¦ 300 de orașe din lume și mai multe
+{what} trouvés ¦ {what} găsite
+{none} pour « {q} ». Vérifie l’orthographe ¦ {none} pentru „{q}”. Verifică ortografia
+{none} pour l’instant ¦ {none} deocamdată
+, ou : ¦ , sau:
+↹ Tab passe d’un filtre à l’autre ¦ ↹ Tab trece de la un filtru la altul
+↑ ↓ Entrée ¦ ↑ ↓ Enter
+… la liste défile ¦ … lista derulează
+⭐ Personne principale ¦ ⭐ Persoana principală
+Autres personnes principales ¦ Alte persoane principale
+Personnes principales ¦ Persoane principale
+Personnes secondaires ¦ Persoane secundare
+au cœur de la recherche ¦ în centrul cercetării
+témoins, voisins, parrains, pistes… ¦ martori, vecini, nași, piste…
+Choisir la personne principale… ¦ Alege persoana principală…
+＋ Ajouter une personne principale… ¦ ＋ Adaugă o persoană principală…
+＋ Ajouter une personne secondaire… ¦ ＋ Adaugă o persoană secundară…
+Changer le rôle ¦ Schimbă rolul
+Donner un rôle (facultatif) ¦ Dă un rol (opțional)
+rôle ▾ ¦ rol ▾
+Rôle libre ¦ Rol liber
+Retirer le rôle ¦ Scoate rolul
+Passer en secondaire ¦ Trece la secundare
+Passer en principale ¦ Trece la principale
+Autre mot… (Entrée) ¦ Alt cuvânt… (Enter)
+témoin ¦ martor
+déclarant ¦ declarant
+parrain ¦ naș
+marraine ¦ nașă
+voisin ¦ vecin
+employeur ¦ angajator
+officier ¦ ofițer
+épouse ¦ soție
+époux ¦ soț
+sans fiche ¦ fără fișă
+Personne sans fiche : clic pour créer sa fiche ¦ Persoană fără fișă: clic ca să-i creezi fișa
+Ouvrir la fiche ¦ Deschide fișa
+Voir sur la carte ¦ Vezi pe hartă
+Aucune personne choisie ¦ Nicio persoană aleasă
+Choisir des personnes ¦ Alege persoane
+Choisir une personne ¦ Alege o persoană
+Choisir des lieux ¦ Alege locuri
+Choisir un lieu ¦ Alege un loc
+Carte : clique l’endroit du lieu ¦ Hartă: fă clic pe locul respectiv
+Clique l’endroit du lieu sur la carte (glisse pour te déplacer, molette pour zoomer). ¦ Fă clic pe locul respectiv pe hartă (trage ca să te miști, rotița ca să mărești).
+＋ Créer un lieu ici ¦ ＋ Creează un loc aici
+Nom du lieu ¦ Numele locului
+Lieux proches… ¦ Locuri apropiate…
+Aucun lieu connu près d’ici : crée-le ci-dessous. ¦ Niciun loc cunoscut pe aproape: creează-l mai jos.
+Donne un nom au lieu. ¦ Dă un nume locului.
+Dézoomer ¦ Micșorează
+Lieu impossible à ajouter ¦ Locul nu poate fi adăugat
+Crée d’abord la fiche dans Personnes, puis choisis-la ici. ¦ Creează mai întâi fișa în Persoane, apoi alege-o aici.
+Crée-la d’abord dans l’outil, puis choisis-la ici. ¦ Creeaz-o mai întâi în instrument, apoi alege-o aici.
+Personne ¦ Persoană
+Lieu ¦ Loc
+À corriger. ¦ De corectat.
+<b>{what} à corriger</b> avant d’enregistrer. ¦ <b>{what} de corectat</b> înainte de salvare.
+Coche cette case pour continuer. ¦ Bifează această casetă ca să continui.
+Choisis une des possibilités. ¦ Alege una dintre variante.
+Choisis un fichier. ¦ Alege un fișier.
+Choisis dans la liste. ¦ Alege din listă.
+Ce champ est à remplir. ¦ Acest câmp trebuie completat.
+Écris un nombre (par exemple 12 ou 3,5). ¦ Scrie un număr (de exemplu 12 sau 3,5).
+Ce n’est pas compris : vérifie ce qui est écrit. ¦ Nu s-a înțeles: verifică ce e scris.
+Écris une adresse e-mail complète (nom@exemple.fr). ¦ Scrie o adresă de e-mail completă (nume@exemplu.ro).
+Écris une adresse web complète (https://…). ¦ Scrie o adresă web completă (https://…).
+Ce n’est pas au bon format. ¦ Nu e în formatul potrivit.
+Au moins {x}. ¦ Cel puțin {x}.
+Au plus {x}. ¦ Cel mult {x}.
+Au moins {x} (là : {y}). ¦ Cel puțin {x} (acum: {y}).
+Cette valeur n’est pas permise ici : prends un nombre rond. ¦ Această valoare nu e permisă aici: ia un număr rotund.
+Donne un nom à ces réglages. ¦ Dă un nume acestor setări.
+Choisir une couleur ¦ Alege o culoare
+Couleurs de l’app ¦ Culorile aplicației
+Récentes ¦ Recente
+Choisir une autre couleur ¦ Alege altă culoare
+Prendre une couleur n’importe où dans la fenêtre ¦ Ia o culoare de oriunde din fereastră
+Code de la couleur ¦ Codul culorii
+Remettre la couleur d’avant ¦ Pune la loc culoarea de dinainte
+Double-clic : revenir à la valeur de départ ¦ Dublu clic: revino la valoarea inițială
+Choisir une police ¦ Alege un font
+Chercher une police… ¦ Caută un font…
+Les polices de l’ordinateur… ¦ Fonturile calculatorului…
+Aucune police pour « {q} ». ¦ Niciun font pentru „{q}”.
+Lecture des polices… ¦ Se citesc fonturile…
+🔓 Voir toutes les polices de l’ordinateur ¦ 🔓 Vezi toate fonturile calculatorului
+Le navigateur te demandera la permission. ¦ Browserul îți va cere permisiunea.
+CONSEILLÉE ¦ RECOMANDAT
+RÉCENTE ¦ RECENT
+DE L’APP ¦ AL APLICAȚIEI
+TAPÉE ¦ SCRIS
+Réglages enregistrés ¦ Setări salvate
+Nom de ces réglages ¦ Numele acestor setări
+Nom du réglage ¦ Numele setării
+Aucun réglage enregistré pour l’instant. ¦ Deocamdată nicio setare salvată.
+＋ Enregistrer les réglages actuels ¦ ＋ Salvează setările actuale
+Un réglage « {name} » existe déjà. ¦ O setare „{name}” există deja.
+Le remplacer ? ¦ O înlocuiești?
+Réglages gardés sous « {name} ». ¦ Setări păstrate sub numele „{name}”.
+Remplacer par les réglages actuels ¦ Înlocuiește cu setările actuale
+Remplacer « {name} » par les réglages actuels ? ¦ Înlocuiești „{name}” cu setările actuale?
+Réglage mis à jour. ¦ Setare actualizată.
+Réglages « {name} » appliqués. ¦ Setările „{name}” au fost aplicate.
+Exporter (fichier .json) ¦ Exportă (fișier .json)
+Remplacer, renommer, dupliquer, exporter, supprimer ¦ Înlocuiește, redenumește, duplică, exportă, șterge
+Exporter (PDF, image, impression…) ¦ Exportă (PDF, imagine, tipărire…)
+⤓ Exporter en {fmt} ¦ ⤓ Exportă ca {fmt}
+Nom du fichier ¦ Numele fișierului
+Qualité ¦ Calitate
+Fond perdu et traits de coupe (imprimeur) ¦ Margine de tăiere și semne de tăiere (tipografie)
+Ranger aussi une copie dans les médias ¦ Pune și o copie în fișierele media
+Aperçu ¦ Previzualizare
+Aperçu… ¦ Previzualizare…
+Pas d’aperçu ¦ Fără previzualizare
+Format du papier ¦ Formatul hârtiei
+Ce qu’on imprime ¦ Ce se tipărește
+Pages à imprimer ¦ Pagini de tipărit
+Celle affichée ¦ Cea afișată
+Page précédente ¦ Pagina anterioară
+Page suivante ¦ Pagina următoare
+Aperçu de l’impression ¦ Previzualizarea tipăririi
+Exemplaires ¦ Exemplare
+Portrait ¦ Portret
+Paysage ¦ Peisaj
+L’écran affiché ¦ Ecranul afișat
+Dans la fenêtre qui s’ouvre, choisis « Enregistrer au format PDF » comme imprimante. ¦ În fereastra care se deschide, alege „Salvează ca PDF” ca imprimantă.
+Dans la fenêtre d’impression, choisis « Enregistrer au format PDF ». ¦ În fereastra de tipărire, alege „Salvează ca PDF”.
+IMPORTER · ÉTAPE 1 SUR 3 ¦ IMPORT · PASUL 1 DIN 3
+IMPORTER · ÉTAPE {n} SUR 3 ¦ IMPORT · PASUL {n} DIN 3
+📁 Glisse ici le fichier, colle-le (⌘V) ou choisis-le sur l’ordinateur ¦ 📁 Trage fișierul aici, lipește-l (⌘V) sau alege-l de pe calculator
+📁 Glisse ici les fichiers, colle-les (⌘V) ou choisis-les sur l’ordinateur ¦ 📁 Trage fișierele aici, lipește-le (⌘V) sau alege-le de pe calculator
+Lecture du fichier… ¦ Se citește fișierul…
+Ce fichier ne peut pas être importé : {err} ¦ Acest fișier nu poate fi importat: {err}
+Voilà ce qui va entrer : {sum}. ¦ Iată ce va intra: {sum}.
+⤒ Importer {what} ¦ ⤒ Importă {what}
+{what} importés. ¦ {what} importate.
+Import terminé. ¦ Import terminat.
+Impossible d’importer : {err} ¦ Importul nu e posibil: {err}
+Importer un fichier ¦ Importă un fișier
+⤒ Importer un fichier… ¦ ⤒ Importă un fișier…
+Ce type de fichier n’est pas accepté ici. ¦ Acest tip de fișier nu e acceptat aici.
+Il entre dans les médias de l’app et se place dans l’outil. ¦ Intră în fișierele media ale aplicației și se pune în instrument.
+📁 Choisir un fichier ¦ 📁 Alege un fișier
+Ce fichier .json est abîmé : il ne peut pas être lu. ¦ Acest fișier .json e deteriorat: nu poate fi citit.
+Ajuster à la fenêtre ¦ Potrivește la fereastră
+Zoom arrière ¦ Micșorează
+Zoom avant ¦ Mărește
+Règles ¦ Rigle
+Règles : montrer ou cacher ¦ Rigle: arată sau ascunde
+Aimanter : les objets se collent aux autres et à la grille (Alt pour s’en passer en glissant) ¦ Aliniere magnetică: obiectele se lipesc de celelalte și de grilă (Alt ca s-o oprești când tragi)
+Les autres façons d’enregistrer ¦ Celelalte moduri de salvare
+Ranger, montrer ou cacher les boutons ¦ Ordonează, arată sau ascunde butoanele
+Compris ¦ Am înțeles
+Choisir sur un calendrier ¦ Alege dintr-un calendar
+Durée ¦ Durată
+aujourd’hui ¦ azi
+aujourd’hui à {h} ¦ azi la {h}
+hier ¦ ieri
+hier à {h} ¦ ieri la {h}
+{day} à {h} ¦ {day} la {h}
+Modifié ¦ Modificat
+Créé ¦ Creat
+Ajouté ¦ Adăugat
+Aucune battue ¦ Nicio căutare amplă
+Aucune maison ¦ Nicio casă
+Aucune revue ¦ Nicio revistă
+Aucun employeur ¦ Niciun angajator
+Aucun recensement ¦ Niciun recensământ
+🎨 Œuvres ¦ 🎨 Opere
+Chercher un graphique… (ex. naissances, camembert) ¦ Caută un grafic… (ex. nașteri, diagramă circulară)
+Aucun graphique ¦ Niciun grafic
+Créer le graphique ¦ Creează graficul
+Nouveau graphique ¦ Grafic nou
+Aucun projet ¦ Niciun proiect
+Aucun tableau ¦ Niciun panou
+Aucune mise en page ¦ Nicio paginare
+📐 Mises en page ¦ 📐 Paginări
+Aucun diagramme ¦ Nicio diagramă
+Aucune carte ¦ Nicio hartă
+Aucune transcription ¦ Nicio transcriere
+Aucune carte de photos ¦ Nicio hartă cu fotografii
+Aucun classeur ¦ Niciun registru de calcul
+Aucun document ¦ Niciun document
+Aucune parcelle ¦ Nicio parcelă
+Nom de l’objet, sorte… (2 lettres suffisent) ¦ Numele obiectului, tipul… (ajung 2 litere)
+Aucun objet de famille ¦ Niciun obiect de familie
+Nom du défunt, notaire, année… (2 lettres suffisent) ¦ Numele defunctului, notarul, anul… (ajung 2 litere)
+Aucun inventaire après décès ¦ Niciun inventar succesoral
+⚖️ Inventaires après décès ¦ ⚖️ Inventare succesorale
+Nom, espèce, code de bague, puce… (2 lettres suffisent) ¦ Nume, specie, cod de inel, cip… (ajung 2 litere)
+Nom du site… (2 lettres suffisent) ¦ Numele sitului… (ajung 2 litere)
+Aucun site ¦ Niciun sit
+Nom du groupe, de la meute… (2 lettres suffisent) ¦ Numele grupului, al haitei… (ajung 2 litere)
+Aucun groupe ¦ Niciun grup
+👥 Groupes d’animaux ¦ 👥 Grupuri de animale
+Maladie, cause de décès… (2 lettres suffisent) ¦ Boală, cauză de deces… (ajung 2 litere)
+＋ Choisir une maladie… ¦ ＋ Alege o boală…
+Aucune maladie notée ¦ Nicio boală notată
+🩺 Santé ¦ 🩺 Sănătate
+Chercher une de mes cartes… ¦ Caută una dintre hărțile mele…
+＋ Choisir une carte… ¦ ＋ Alege o hartă…
+Nom de la branche… ¦ Numele ramurii…
+＋ Choisir une branche… ¦ ＋ Alege o ramură…
+Aucune branche ¦ Nicio ramură
+Nom d’une de mes couches… ¦ Numele unuia dintre straturile mele…
+＋ Choisir une couche… ¦ ＋ Alege un strat…
+Aucune couche dessinée ¦ Niciun strat desenat
+Commune, cote, année… (2 lettres suffisent) ¦ Localitate, cotă, an… (ajung 2 litere)
+🔗 Relier un dépouillement… ¦ 🔗 Leagă o indexare…
+Aucun dépouillement ¦ Nicio indexare
+Nom, prénom d’un contact… (2 lettres suffisent) ¦ Numele, prenumele unui contact… (ajung 2 litere)
+Aucun contact ¦ Niciun contact
+Chercher une de mes listes… ¦ Caută una dintre listele mele…
+Aucune liste ¦ Nicio listă
+Événement, personne, année… (2 lettres suffisent) ¦ Eveniment, persoană, an… (ajung 2 litere)
+Aucun service d’archives ¦ Niciun serviciu de arhivă
+Créer le service ¦ Creează serviciul
+🏛 Services d’archives ¦ 🏛 Servicii de arhivă
+Source, page, nom de la personne citée… ¦ Sursă, pagină, numele persoanei citate…
+＋ Choisir une citation… ¦ ＋ Alege o citare…
+Aucune citation ¦ Nicio citare
+— une seule ¦ — una singură
+＋ Ajouter une maison… ¦ ＋ Adaugă o casă…
+＋ Ajouter une fiche… ¦ ＋ Adaugă o fișă…
+＋ Ajouter un document… ¦ ＋ Adaugă un document…
+＋ Ajouter une carte… ¦ ＋ Adaugă o hartă…
+＋ Ajouter un groupe… ¦ ＋ Adaugă un grup…
+＋ Ajouter un contact… ¦ ＋ Adaugă un contact…
+＋ Ajouter une liste… ¦ ＋ Adaugă o listă…
+Ce réglage prend ce qui est à l’écran maintenant. ¦ Această setare ia ce e acum pe ecran.
+L’ancienne version de ce réglage ne sera plus gardée. ¦ Versiunea veche a acestei setări nu va mai fi păstrată.
+Le nom devient modifiable sur la ligne. ¦ Numele devine modificabil pe rând.
+Une copie, à modifier sans toucher à l’original. ¦ O copie, de modificat fără să atingi originalul.
+Pour le garder, ou l’ouvrir sur un autre ordinateur. ¦ Ca s-o păstrezi sau s-o deschizi pe alt calculator.
+On peut encore l’annuler juste après. ¦ Se mai poate anula imediat după.
+Un fichier lcnda-reglage-….json exporté ici ou sur un autre ordinateur ¦ Un fișier lcnda-reglage-….json exportat aici sau pe alt calculator
+Ce navigateur ne donne pas la liste des polices : voici les polices courantes trouvées sur l’ordinateur. Pour une autre, tape son nom exact. ¦ Acest browser nu dă lista fonturilor: iată fonturile obișnuite găsite pe calculator. Pentru altul, scrie-i numele exact.
+La liste des polices n’a pas pu être lue. Réessaie. ¦ Lista fonturilor nu a putut fi citită. Încearcă din nou.
+Un autre format de la liste, ou un format libre (gardé dans « Mes formats ») ¦ Alt format din listă sau un format liber (păstrat în „Formatele mele”)
+Un exemplaire au moins. ¦ Cel puțin un exemplar.
+{n} exemplaires au plus. ¦ Cel mult {n} exemplare.

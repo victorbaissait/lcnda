@@ -1,0 +1,238 @@
+fr ¦ ro
+# ═════ zone « reste4 » : roumain (ro) — Calendrier / mesures, grille d’icônes ═════
+Mesures anciennes par région ¦ Măsuri vechi pe regiuni
+Les mesures changeaient d’une province, parfois d’un village à l’autre. Choisis la région, la valeur et l’unité : l’app donne l’équivalent en mètres, ares ou litres, et dans les autres mesures du lieu. ¦ Măsurile se schimbau de la o provincie la alta, uneori de la un sat la altul. Alege regiunea, valoarea și unitatea: aplicația dă echivalentul în metri, ari sau litri, și în celelalte măsuri ale locului.
+Région / ville ¦ Regiune / oraș
+Entre une valeur. ¦ Introdu o valoare.
+Longueurs ¦ Lungimi
+Grains (matières sèches) ¦ Cereale (materii uscate)
+Liquides (vin, cidre, huile) ¦ Lichide (vin, cidru, ulei)
+kilomètre ¦ kilometru
+mètre carré ¦ metru pătrat
+are ¦ ar
+hectare ¦ hectar
+litre ¦ litru
+hectolitre ¦ hectolitru
+Paris, Île-de-France (mesures du roi) ¦ Paris, Île-de-France (măsurile regelui)
+Lyon, Lyonnais ¦ Lyon, Lyonnais
+Bretagne (Rennes) ¦ Bretania (Rennes)
+Normandie (Rouen) ¦ Normandia (Rouen)
+Bourgogne (Dijon, Beaune) ¦ Burgundia (Dijon, Beaune)
+Provence (Marseille) ¦ Provence (Marsilia)
+Lorraine (Nancy) ¦ Lorena (Nancy)
+Alsace (Strasbourg) ¦ Alsacia (Strasbourg)
+Flandre (Lille) ¦ Flandra (Lille)
+très variable ¦ foarte variabil
+très variable d’une ville à l’autre ¦ foarte variabil de la un oraș la altul
+très variable (de 1 500 à 3 000 m² selon le lieu) ¦ foarte variabil (de la 1 500 la 3 000 m² după loc)
+de 45 à 50 litres selon le lieu ¦ de la 45 la 50 de litri după loc
+≈ : valeur approchée ou variable selon la ville. Sources : loi du 19 frimaire an VIII (pied du roi, toise) et « Tables de comparaison entre les mesures anciennes et celles qui les remplacent » publiées par département (an X – 1812). Pour une commune précise, cherche la table de ton département aux archives départementales. ¦ ≈ : valoare aproximativă sau variabilă după oraș. Surse: legea din 19 frimar anul VIII (piciorul regelui, stânjenul) și „Tabelele de comparație între măsurile vechi și cele care le înlocuiesc” publicate pe departamente (anul X – 1812). Pentru o comună anume, caută tabelul departamentului tău la arhivele departamentale.
+Âge ↔ date de naissance ¦ Vârstă ↔ data nașterii
+Les actes donnent souvent l’âge plutôt que la date de naissance. « 32 ans au décès le 12/03/1790 » → né entre deux dates. Ou l’inverse : l’âge exact à une date. ¦ Actele dau adesea vârsta mai degrabă decât data nașterii. „32 de ani la deces, pe 12/03/1790” → născut între două date. Sau invers: vârsta exactă la o dată.
+exact (ans révolus) ¦ exact (ani împliniți)
+« environ » (± 2 ans) ¦ „cam” (± 2 ani)
+arrondi (± 5 ans) ¦ rotunjit (± 5 ani)
+très vague (± 10 ans) ¦ foarte vag (± 10 ani)
+À la date de ¦ La data de
+Entre un âge et la date de l’acte. ¦ Introdu o vârstă și data actului.
+Âge le ¦ Vârsta la
+Entre une date de naissance et une autre date. ¦ Introdu o dată de naștere și o altă dată.
+Date non reconnue : écris par exemple 12/03/1790, 12 mars 1790, mars 1790 ou 1790. ¦ Dată nerecunoscută: scrie de exemplu 12/03/1790, 12 mars 1790, mars 1790 sau 1790.
+Naissance entre le {from} et le {to} ¦ Naștere între {from} și {to}
+soit vers {when} (entre {lo} et {hi} révolus) ¦ adică pe la {when} (între {lo} și {hi} împliniți)
+soit vers {when} ¦ adică pe la {when}
+Date non reconnue : écris par exemple 13/03/1757. ¦ Dată nerecunoscută: scrie de exemplu 13/03/1757.
+La seconde date est avant la naissance. ¦ A doua dată este înainte de naștere.
+soit {days} de vie ¦ adică {days} de viață
+Entre {min} et {max} ¦ Între {min} și {max}
+Une des dates est incomplète. ¦ Una dintre date este incompletă.
+Écart entre deux dates ¦ Intervalul dintre două date
+Combien de temps entre deux actes ? Années, mois, jours, nombre total de jours et de semaines. Une date incomplète (« mars 1790 », « 1802 ») donne un écart minimum et maximum. ¦ Cât timp între două acte? Ani, luni, zile, numărul total de zile și de săptămâni. O dată incompletă („mars 1790”, „1802”) dă un interval minim și maxim.
+9 novembre 1799 ¦ 9 noiembrie 1799
+Entre deux dates. ¦ Introdu două date.
+Date non reconnue : écris par exemple 14/07/1789, 14 juillet 1789, juillet 1789 ou 1789. ¦ Dată nerecunoscută: scrie de exemplu 14/07/1789, 14 juillet 1789, juillet 1789 sau 1789.
+(la seconde date est la plus ancienne : écart compté à l’envers) ¦ (a doua dată este cea mai veche: intervalul e numărat invers)
+{weeks} et {days} ¦ {weeks} și {days}
+Du {a} au {b} : une date est incomplète. ¦ De la {a} la {b}: o dată este incompletă.
+=semaine ¦ săptămână|săptămâni|de săptămâni
+Jour de la semaine ¦ Ziua săptămânii
+Quel jour tombait une date ? Avant 1582, le calendrier julien s’applique : choisis l’usage. ¦ În ce zi a căzut o dată? Înainte de 1582 se aplică calendarul iulian: alege uzul.
+France (julien jusqu’au 9 déc. 1582) ¦ Franța (iulian până la 9 dec. 1582)
+Rome (julien jusqu’au 4 oct. 1582) ¦ Roma (iulian până la 4 oct. 1582)
+Toujours grégorien ¦ Mereu gregorian
+Toujours julien ¦ Mereu iulian
+Indices pour la recherche (baptêmes, mariages…) ¦ Indicii pentru cercetare (botezuri, căsătorii…)
+Entre une date complète. ¦ Introdu o dată completă.
+Il faut une date complète : jour, mois et année (ex. 14/07/1789). ¦ E nevoie de o dată completă: zi, lună și an (ex. 14/07/1789).
+Ce jour n’a pas existé en France : le 9 décembre 1582 a été suivi du 20 décembre. ¦ Această zi nu a existat în Franța: după 9 decembrie 1582 a urmat 20 decembrie.
+Ce jour n’a pas existé à Rome : le 4 octobre 1582 a été suivi du 15 octobre. ¦ Această zi nu a existat la Roma: după 4 octombrie 1582 a urmat 15 octombrie.
+soit le {date} dans le calendrier grégorien ¦ adică {date} în calendarul gregorian
+soit le {date} dans le calendrier julien ¦ adică {date} în calendarul iulian
+C’était un {day} ¦ Era {day}
+julien ¦ iulian
+Jour du Seigneur : beaucoup de baptêmes (souvent le jour même ou le lendemain de la naissance) ; mariages rares. ¦ Ziua Domnului: multe botezuri (adesea chiar în ziua nașterii sau a doua zi); căsătorii rare.
+Jour courant des mariages à la campagne sous l’Ancien Régime. ¦ Zi obișnuită pentru căsătorii la țară sub Vechiul Regim.
+Jour préféré des mariages dans bien des paroisses sous l’Ancien Régime. ¦ Ziua preferată pentru căsătorii în multe parohii sub Vechiul Regim.
+Jour maigre dans certains diocèses : mariages moins fréquents. ¦ Zi de post în unele dieceze: căsătorii mai rare.
+Jour ordinaire ; fêtes de l’Ascension et de la Fête-Dieu. ¦ Zi obișnuită; sărbătorile Înălțării și Corpus Christi.
+Jour maigre (souvenir de la Passion) : on évitait de s’y marier. ¦ Zi de post (amintirea Patimilor): se evita căsătoria în această zi.
+Jour maigre jusqu’au XVIIIe siècle dans beaucoup de diocèses ; au XIXe, jour fréquent des mariages civils. ¦ Zi de post până în secolul al XVIII-lea în multe dieceze; în secolul al XIX-lea, zi frecventă pentru căsătoriile civile.
+Saint du jour et fêtes mobiles ¦ Sfântul zilei și sărbătorile mobile
+Les fêtes mobiles dépendent de Pâques. Le saint du jour aide à comprendre un prénom : on donnait souvent celui du saint de la naissance ou du baptême. ¦ Sărbătorile mobile depind de Paști. Sfântul zilei ajută la înțelegerea unui prenume: se dădea adesea numele sfântului din ziua nașterii sau a botezului.
+Comput ¦ Computul pascal
+auto (julien avant 1583) ¦ automat (iulian înainte de 1583)
+date|Mois ¦ Luna
+Entre une année entre 400 et 2400. ¦ Introdu un an între 400 și 2400.
+Dates dans le calendrier julien. ¦ Date în calendarul iulian.
+Ce jour n’existe pas. ¦ Această zi nu există.
+Dans ta base, nés ou baptisés ce jour : ¦ În baza ta, născuți sau botezați în această zi:
+porte le prénom du saint du jour ¦ poartă prenumele sfântului zilei
+Saint du jour indisponible. ¦ Sfântul zilei nu este disponibil.
+Saints : calendrier usuel des almanachs français (celui du widget « Prénom et saint du jour ») ; il a varié selon les époques et les diocèses. ¦ Sfinți: calendarul obișnuit al almanahurilor franceze (cel al widgetului „Prenumele și sfântul zilei”); a variat după epoci și dieceze.
+dimanche, début du temps de la Septuagésime ¦ duminică, începutul perioadei Septuagesima
+dimanche ¦ duminică
+dimanche gras ¦ duminica lăsatului de sec
+veille des Cendres, fin du carnaval ¦ ajunul Miercurii Cenușii, sfârșitul carnavalului
+début du Carême : plus de mariages jusqu’à Pâques ¦ începutul Postului Mare: nicio căsătorie până la Paști
+dimanche des Brandons ¦ duminica focurilor (Brandons)
+jeudi ¦ joi
+Pâques fleuries ¦ Floriile
+baptêmes solennels ¦ botezuri solemne
+dimanche, fin du temps pascal des mariages interdits ¦ duminică, sfârșitul perioadei pascale în care căsătoriile erau interzise
+lundi, processions dans les champs ¦ luni, procesiuni pe câmpuri
+jeudi (fêtée le dimanche suivant après 1802) ¦ joi (sărbătorită duminica următoare după 1802)
+vendredi ¦ vineri
+Heures canoniques ¦ Ore canonice
+Les actes datent parfois à « l’heure de vêpres » ou « à l’issue de la grand-messe ». Les heures de l’Église suivaient le soleil : le jour était coupé en 12 heures, plus longues en été qu’en hiver. ¦ Actele dau uneori ora „la vecernie” sau „după liturghia mare”. Orele Bisericii urmau soarele: ziua era împărțită în 12 ore, mai lungi vara decât iarna.
+(équinoxe) ¦ (echinocțiu)
+(jours les plus longs) ¦ (zilele cele mai lungi)
+(jours les plus courts) ¦ (zilele cele mai scurte)
+vers {time} ¦ pe la {time}
+{winter} en hiver, {summer} en été ¦ {winter} iarna, {summer} vara
+Écris la mention (« à l’heure de vêpres », « après complies »…) ou lis le tableau. ¦ Scrie mențiunea („à l’heure de vêpres”, „après complies”…) sau citește tabelul.
+{hour} en {month} : {time} ¦ {hour} în {month}: {time}
+entre {dec} en décembre et {jun} en juin ¦ între {dec} în decembrie și {jun} în iunie
+Heure non reconnue : matines, laudes, prime, tierce, sexte, none, vêpres, complies ou angélus. ¦ Oră nerecunoscută: matines, laudes, prime, tierce, sexte, none, vêpres, complies sau angélus.
+office de la nuit (dans les paroisses, souvent chanté la veille au soir ou au petit matin) ¦ slujba de noapte (în parohii, adesea cântată în seara dinainte sau în zori)
+à l’aube, avant le lever du soleil ¦ în zori, înainte de răsăritul soarelui
+6e heure, midi ¦ ceasul al 6-lea, amiază
+à la tombée du jour (le dimanche, à la paroisse, souvent dès le début de l’après-midi) ¦ la căderea serii (duminica, la parohie, adesea de la începutul după-amiezii)
+à la nuit, avant le coucher ¦ la căderea nopții, înainte de culcare
+cloche du matin, de midi et du soir ¦ clopotul de dimineață, de amiază și de seară
+Heure solaire (midi = soleil au plus haut), calculée pour le centre de la France ; l’heure légale n’existe qu’à partir de 1891. Les horaires réels variaient selon les paroisses et les couvents. ¦ Ora solară (amiaza = soarele cel mai sus), calculată pentru centrul Franței; ora legală există doar din 1891. Orele reale variau după parohii și mănăstiri.
+Monnaies étrangères anciennes ¦ Monede străine vechi
+Dans les contrats et inventaires, on trouve des pistoles, ducats, florins ou piastres. Leur valeur en livres tournois, monnaie de compte du royaume, selon l’époque. ¦ În contracte și inventare găsești pistoli, ducați, florini sau piaștri. Valoarea lor în livre tournois, moneda de cont a regatului, după epocă.
+Monnaie ¦ Monedă
+XVIIe siècle (1640-1700) ¦ Secolul al XVII-lea (1640-1700)
+XVIIIe siècle (1726-1789) ¦ Secolul al XVIII-lea (1726-1789)
+Toutes les monnaies à cette époque ¦ Toate monedele în această epocă
+soit ≈ {n} livres ¦ adică ≈ {n} livre
+Cette monnaie n’avait pas cours en France à cette époque. ¦ Această monedă nu circula în Franța în acea epocă.
+Louis d’or (France) ¦ Ludovic de aur (Franța)
+Écu d’or au soleil (France) ¦ Scut de aur cu soare (Franța)
+Écu blanc ou louis d’argent (France) ¦ Scut alb sau ludovic de argint (Franța)
+Pistole (Espagne, Italie) ¦ Pistol (Spania, Italia)
+Ducat d’or (Venise, Hollande, Empire) ¦ Ducat de aur (Veneția, Olanda, Imperiu)
+Florin de Hollande (gulden) ¦ Florin olandez (gulden)
+Gulden ou florin du Rhin (Allemagne, Alsace, Suisse) ¦ Gulden sau florin renan (Germania, Alsacia, Elveția)
+Thaler, rixdale (Empire, Saxe, Prusse) ¦ Taler, rixdaler (Imperiu, Saxonia, Prusia)
+Piastre ou réal de huit (Espagne) ¦ Piastru sau real de opt (Spania)
+Livre sterling (Angleterre) ¦ Liră sterlină (Anglia)
+Livre de Lorraine ¦ Livră de Lorena
+créé en 1640 à 10 livres ; 24 livres de 1726 à la Révolution ¦ creat în 1640 la 10 livre; 24 de livre din 1726 până la Revoluție
+plus frappé après 1640 ¦ nu mai e bătut după 1640
+3 livres en 1641 ; gros écu de 6 livres (et petit écu de 3 livres) au XVIIIe ¦ 3 livre în 1641; scut mare de 6 livre (și scut mic de 3 livre) în secolul al XVIII-lea
+souvent une monnaie de compte valant 10 livres ¦ adesea o monedă de cont care valora 10 livre
+« piastre gourde » des colonies ¦ „piastre gourde” din colonii
+monnaie de compte, d’après le cours du change ¦ monedă de cont, după cursul de schimb
+15 sols 6 deniers tournois ¦ 15 soli 6 denieri tournois
+Valeurs approchées (≈), d’après les ordonnances monétaires de Louis XIII à Louis XVI, le poids d’or ou d’argent fin des pièces et le cours du change à Paris (Savary, « Dictionnaire universel de commerce »). Les cours bougeaient souvent, surtout de 1689 à 1726 : c’est un ordre de grandeur. ¦ Valori aproximative (≈), după ordonanțele monetare de la Ludovic al XIII-lea la Ludovic al XVI-lea, greutatea de aur sau argint fin a monedelor și cursul de schimb la Paris (Savary, „Dictionnaire universel de commerce”). Cursurile se schimbau des, mai ales între 1689 și 1726: e un ordin de mărime.
+Calculateur de générations ¦ Calculator de generații
+Combien de générations entre deux années ? En moyenne 25 à 33 ans par génération : environ 30 ans en lignée masculine, 27 ans en lignée féminine. ¦ Câte generații între doi ani? În medie 25 până la 33 de ani pe generație: cam 30 de ani pe linie masculină, 27 de ani pe linie feminină.
+Année (ta naissance) ¦ Anul (nașterea ta)
+Année (l’ancêtre) ¦ Anul (strămoșul)
+Entre deux années. ¦ Introdu doi ani.
+Générations en arrière ¦ Generații în urmă
+Depuis l’année ¦ Din anul
+Entre deux années différentes. ¦ Introdu doi ani diferiți.
+Environ {min} à {max} générations ¦ Cam {min} până la {max} generații
+{years} : ≈ {male} générations en lignée masculine (30 ans), ≈ {female} en lignée féminine (27 ans) ¦ {years}: ≈ {male} generații pe linie masculină (30 de ani), ≈ {female} pe linie feminină (27 de ani)
+Entre un nombre de générations (1 à 40) et une année. ¦ Introdu un număr de generații (1 până la 40) și un an.
+ancêtres de la génération {n} ¦ strămoși din generația {n}
+{gens} en arrière → nés vers {from}–{to} ¦ {gens} în urmă → născuți pe la {from}–{to}
+≈ {male} en lignée masculine, ≈ {female} en lignée féminine ¦ ≈ {male} pe linie masculină, ≈ {female} pe linie feminină
+{at} {label} en théorie (Sosa {from} à {to}) ; {total} ancêtres en tout jusqu’à cette génération ¦ {at} {label} în teorie (Sosa {from} până la {to}); {total} strămoși în total până la această generație
+Le nombre d’ancêtres double à chaque génération en théorie ; en pratique il y en a moins, car des cousins se sont mariés entre eux (l’implexe). ¦ Numărul strămoșilor se dublează la fiecare generație în teorie; în practică sunt mai puțini, pentru că unii veri s-au căsătorit între ei (implexul).
+le jour de la Pentecôte 1754 ¦ în ziua de Rusalii 1754
+/Documents/Scans généalogie ¦ /Documente/Scanări genealogie
+Saint-Martin de Brive ¦ Saint-Martin de Brive
+Paroisse érigée en 1792 ; voir aussi la chapelle de… ¦ Parohie înființată în 1792; vezi și capela din…
+Religion et noblesse ¦ Religie și nobilime
+Travail et société ¦ Muncă și societate
+Voyages et lieux ¦ Călătorii și locuri
+Temps et nature ¦ Timp și natură
+Formes et repères ¦ Forme și repere
+Artistique ¦ Artistic
+Voyages ¦ Călătorii
+Tous les emojis ¦ Toate emoji-urile
+Autres emojis ¦ Alte emoji-uri
+Choisir un fond ¦ Alege un fundal
+Choisir un fond… ¦ Alege un fundal…
+Choisir un fond de carte ¦ Alege un fundal de hartă
+Choisir une icône… ¦ Alege o pictogramă…
+Aucune icône ¦ Nicio pictogramă
+Aucun fond ¦ Niciun fundal
+choisir ¦ alege
+valider ¦ confirmă
+fermer ¦ închide
+Chercher une icône ¦ Caută o pictogramă
+Chercher un fond ¦ Caută un fundal
+Chercher un fond… (ex. Cassini, relief, 1850) ¦ Caută un fundal… (ex. Cassini, relief, 1850)
+Chercher… (ex. coeur, bateau, chien) ¦ Caută… (ex. inimă, barcă, câine)
+Chercher… (ex. église, mariage, étoile) ¦ Caută… (ex. biserică, căsătorie, stea)
+Utiliser « {x} » ¦ Folosește „{x}”
+1 icône pour « {q} » ¦ 1 pictogramă pentru „{q}”
+{n} icônes pour « {q} » ¦ {n} pictograme pentru „{q}”
+1 fond pour « {q} » ¦ 1 fundal pentru „{q}”
+{n} fonds pour « {q} » ¦ {n} fundaluri pentru „{q}”
+Rien pour « {q} ». Vérifie l’orthographe, ou essaie un autre mot. ¦ Nimic pentru „{q}”. Verifică ortografia sau încearcă alt cuvânt.
+Retirer l’icône ¦ Scoate pictograma
+Retirer le fond ¦ Scoate fundalul
+Allemand et alsacien ¦ Germană și alsaciană
+Néerlandais / flamand ¦ Neerlandeză / flamandă
+Croate / serbe en lettres latines ¦ Croată / sârbă cu litere latine
+Slovène ¦ Slovenă
+Gaélique irlandais ¦ Irlandeză (gaelică)
+Biélorusse ¦ Belarusă
+Serbe en cyrillique ¦ Sârbă cu chirilice
+Hébreu ¦ Ebraică
+Dates du calendrier grégorien. Les âges des actes anciens sont souvent approximatifs : « environ 40 ans » peut cacher 35 ou 45 ans. ¦ Date din calendarul gregorian. Vârstele din actele vechi sunt adesea aproximative: „cam 40 de ani” poate ascunde 35 sau 45 de ani.
+Changer dans l’onglet Personnes ¦ Schimbă în fila Persoane
+Mode de chronologie parallèle ¦ Modul cronologiei paralele
+Les événements sans année restent sur les fiches. ¦ Evenimentele fără an rămân pe fișe.
+Modifier la frise historique ¦ Modifică cronologia istorică
+Les grands événements livrés avec l’app, et les tiens (histoire locale) ¦ Marile evenimente livrate cu aplicația și ale tale (istorie locală)
+Les médias et pièces d’archives de ta base, comme les personnes : la liste à gauche (A → Z ou en 📁 dossiers), la fiche à droite. ¦ Fișierele media și piesele de arhivă din baza ta, ca persoanele: lista în stânga (A → Z sau în 📁 dosare), fișa în dreapta.
+Les dossiers des trésors (les renommer, en créer, en effacer, choisir ce qui va dedans), l’ordre, ce qui s’affiche (en ce moment : {n}) ¦ Dosarele comorilor (redenumește-le, creează, șterge, alege ce intră în ele), ordinea, ce se afișează (acum: {n})
+Les dossiers des trésors (les renommer, en créer, en effacer, choisir ce qui va dedans), l’ordre, ce qui s’affiche ¦ Dosarele comorilor (redenumește-le, creează, șterge, alege ce intră în ele), ordinea, ce se afișează
+Me le rappeler (la veille, une semaine avant…) ¦ Amintește-mi (cu o zi înainte, cu o săptămână înainte…)
+choses à vérifier ¦ lucruri de verificat
+Pour montrer l’arbre à quelqu’un qui n’est pas à l’aise avec l’ordinateur : de très gros boutons, seulement l’arbre, les photos et les fiches, et rien qu’on puisse modifier par erreur. ¦ Ca să arăți arborele cuiva care nu se descurcă bine cu calculatorul: butoane foarte mari, doar arborele, fotografiile și fișele, și nimic ce s-ar putea modifica din greșeală.
+Aucune hypothèse : une question à trancher (« né à Naves ou à Tulle ? »), avec les preuves pour et contre. ¦ Nicio ipoteză: o întrebare de lămurit („născut la Naves sau la Tulle?”), cu dovezile pro și contra.
+Détaillée ¦ Detaliată
+Ce qu’on inclut ¦ Ce se include
+Texte de l’app ¦ Textul aplicației
+Regénérer ¦ Regenerează
+Une journée… ¦ O zi…
+Réécrire le texte d’après la fiche et voir ce qui a changé ¦ Rescrie textul după fișă și vezi ce s-a schimbat
+Un petit récit d’un jour de sa vie : âge, famille, village, métier, calendrier, météo, contexte ¦ O mică povestire despre o zi din viața sa: vârstă, familie, sat, meserie, calendar, vreme, context
+Ajouter un événement local ¦ Adaugă un eveniment local
+Rien dans cette sorte pendant sa vie. ¦ Nimic de acest fel în timpul vieții sale.
+Voir toute la liste et ses sources ¦ Vezi toată lista și sursele ei
+Une fête, une inondation, un incendie au village… rattaché à une commune ¦ O sărbătoare, o inundație, un incendiu în sat… legat de o localitate
+Sortes d’événements ¦ Tipuri de evenimente
+Un article, une interview à la radio, une émission de télé, un avis de naissance ou une nécrologie, une photo publiée… ¦ Un articol, un interviu la radio, o emisiune TV, un anunț de naștere sau un necrolog, o fotografie publicată…
+Ajouter un passage ¦ Adaugă o apariție
+La revue de presse de cette personne ¦ Revista presei despre această persoană
+Modifier l’identifiant Wikidata ¦ Modifică identificatorul Wikidata
+Plus de détails ¦ Mai multe detalii

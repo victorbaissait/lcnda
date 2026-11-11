@@ -1,0 +1,134 @@
+fr ¦ ro
+# ═════ zone « reste5 » : roumain (ro) — Réglages → Apparence, Tableau de bord ═════
+Les traits, les ombres et les coins des fiches des personnes et des animaux : blocs, boutons, champs. Le reste de l’app ne change pas ; les couleurs et la police restent celles de l’Apparence. ¦ Liniile, umbrele și colțurile fișelor de persoane și animale: blocuri, butoane, câmpuri. Restul aplicației nu se schimbă; culorile și fontul rămân cele din Aspect.
+L’espace dans et entre les blocs, la hauteur des lignes de liste, la marge des boutons. ¦ Spațiul din blocuri și dintre ele, înălțimea rândurilor din liste, marginea butoanelor.
+Les petits dessins des boutons, des barres d’outils et des rubriques. ¦ Micile desene ale butoanelor, ale barelor de instrumente și ale rubricilor.
+Le haut de la fiche : portrait, nom, dates, pastilles et boutons. ¦ Partea de sus a fișei: portret, nume, date, insigne și butoane.
+Les boutons secondaires (Annuler, Modifier, ＋ Ajouter…) ; le bouton principal reste toujours plein, à la couleur principale de l’Apparence. ¦ Butoanele secundare (Anulează, Modifică, ＋ Adaugă…); butonul principal rămâne mereu plin, în culoarea principală din Aspect.
+Les fenêtres qui s’ouvrent, les menus, les messages en bas à gauche, les boutons au survol. L’aperçu tourne en boucle. ¦ Ferestrele care se deschid, meniurile, mesajele din stânga jos, butoanele la trecerea mouse-ului. Previzualizarea rulează în buclă.
+Les listes (Listes, Personnes, Recherche…), la colonne des personnes et les tableaux. ¦ Listele (Liste, Persoane, Cercetare…), coloana persoanelor și tabelele.
+{label} (nombre) ¦ {label} (număr)
+Pour les listes, les tableaux et le menu de choix. Plus haut = plus facile à viser ; plus bas = plus de lignes visibles. ¦ Pentru liste, tabele și meniul de alegere. Mai înalt = mai ușor de nimerit; mai jos = mai multe rânduri vizibile.
+Le haut de la fiche. Les traits, les ombres et les coins de la fiche se règlent juste en dessous ¦ Partea de sus a fișei. Liniile, umbrele și colțurile fișei se reglează chiar dedesubt
+Les traits, les ombres et les coins des fiches (personnes et animaux) seulement : le reste de l’app ne change pas. La colonne de gauche a les siens (Menus, colonne et listes → Colonne) ¦ Doar liniile, umbrele și colțurile fișelor (persoane și animale): restul aplicației nu se schimbă. Coloana din stânga le are pe ale ei (Meniuri, coloană și liste → Coloană)
+L’espace dans et entre les blocs, la hauteur des lignes de liste, la marge des boutons. Une colonne de gauche réglée « Compacte » (onglet Colonne) garde sa propre taille : les deux ne s’additionnent pas ¦ Spațiul din blocuri și dintre ele, înălțimea rândurilor din liste, marginea butoanelor. O coloană din stânga setată „Compactă” (fila Coloană) își păstrează propria mărime: cele două nu se adună
+Les petits dessins des boutons, des barres d’outils et des rubriques. Les traits et les ombres suivent ¦ Micile desene ale butoanelor, ale barelor de instrumente și ale rubricilor. Liniile și umbrele urmează
+Les lignes des listes (Listes, Personnes, Recherche…), la colonne des personnes et les tableaux. Les traits et les ombres suivent ¦ Rândurile listelor (Liste, Persoane, Cercetare…), coloana persoanelor și tabelele. Liniile și umbrele urmează
+Les boutons secondaires (Annuler, Modifier, ＋ Ajouter…). Les traits et les ombres suivent ¦ Butoanele secundare (Anulează, Modifică, ＋ Adaugă…). Liniile și umbrele urmează
+Comment les fenêtres, les menus et les messages apparaissent. L’aperçu tourne en boucle ¦ Cum apar ferestrele, meniurile și mesajele. Previzualizarea rulează în buclă
+{group} : {choice} ¦ {group}: {choice}
+Rien ne bouge : chaque écran garde le dessin que tu connais. ¦ Nimic nu se mișcă: fiecare ecran își păstrează desenul pe care îl cunoști.
+7 dessins différents ; tes couleurs homme / femme et ta forme d’avatar ne s’y appliquent pas. ¦ 7 desene diferite; culorile tale bărbat / femeie și forma avatarului nu se aplică acolo.
+Un seul dessin partout, à la couleur du genre : homme, femme, animal se voient d’un coup d’œil. ¦ Un singur desen peste tot, în culoarea genului: bărbat, femeie, animal se văd dintr-o privire.
+Léger dans les listes serrées et le menu de choix (c’est déjà le modèle validé du menu). ¦ Ușor în listele strânse și în meniul de alegere (e deja modelul validat al meniului).
+Le style « archive » de ta fiche : bord noir, photo en noir et blanc, comme une photo d’identité collée. ¦ Stilul „arhivă” al fișei tale: margine neagră, fotografie alb-negru, ca o fotografie de buletin lipită.
+Nouveau nom de l’onglet {tab} ¦ Nume nou pentru fila {tab}
+Émoji de l’onglet {tab} ¦ Emoji-ul filei {tab}
+La personne n°1 (le de cujus) ; son père a le n°2, sa mère le n°3, et ainsi de suite : le père d’un numéro N a toujours 2N, la mère 2N+1. ¦ Persoana nr. 1 (de cujus); tatăl ei are nr. 2, mama nr. 3 și așa mai departe: tatăl numărului N are mereu 2N, mama 2N+1.
+Pour les descendants : la personne n°1, ses enfants 1.1, 1.2, 1.3…, les enfants de 1.2 sont 1.2.1, 1.2.2… Chaque point = une génération de plus. ¦ Pentru descendenți: persoana nr. 1, copiii ei 1.1, 1.2, 1.3…, copiii lui 1.2 sunt 1.2.1, 1.2.2… Fiecare punct = încă o generație.
+Un thème règle les couleurs de toute l’app : la couleur principale, le fond de la page, des panneaux, des cartes et de leurs en-têtes, le texte, et les traits qui entourent (couleur et épaisseur). Crée le tien à partir d’un thème existant : il s’ajoute à la liste « Preset », dans « ✎ Mes thèmes ». ¦ O temă reglează culorile întregii aplicații: culoarea principală, fundalul paginii, al panourilor, al cartelor și al antetelor lor, textul și liniile de contur (culoare și grosime). Creează-ți-o pe a ta pornind de la o temă existentă: se adaugă la lista „Preset”, în „✎ Temele mele”.
+La forme des petits carrés numérotés des blocs et des initiales des fiches. Ajoute tes formes (bibliothèque des tableaux, polygone dessiné, SVG importé), range la liste du menu « Forme des avatars », cache celles qui ne te servent pas. ¦ Forma micilor pătrate numerotate ale blocurilor și a inițialelor din fișe. Adaugă formele tale (biblioteca panourilor, poligon desenat, SVG importat), ordonează lista meniului „Forma avatarelor”, ascunde-le pe cele de care nu ai nevoie.
+Le grand cadre en haut de chaque fiche : le nom, les badges (Sosa, À vérifier, Hors généalogie, Artiste) et la colonne de boutons carrés. Tu peux le masquer pour une fiche épurée (diaporama), ranger les boutons, les cacher, les mettre sur 2 colonnes. ¦ Cadrul mare din partea de sus a fiecărei fișe: numele, insignele (Sosa, De verificat, În afara genealogiei, Artist) și coloana de butoane pătrate. Îl poți ascunde pentru o fișă simplă (prezentare), poți ordona butoanele, ascunde, pune pe 2 coloane.
+Les petits boutons carrés en haut à droite, à côté du nombre de personnes : écran en deux, nouvelle fenêtre, mode consultation, mode simple, calculette, Mes généalogies. Décoche pour cacher, glisse ⠿ pour changer l’ordre. ¦ Micile butoane pătrate din dreapta sus, lângă numărul de persoane: ecran împărțit în două, fereastră nouă, mod consultare, mod simplu, calculator, Genealogiile mele. Debifează ca să ascunzi, trage de ⠿ ca să schimbi ordinea.
+Les boutons de la barre du haut, à côté du nombre de personnes. Glisse ⠿ (ou Alt + ↑ / ↓) pour changer leur ordre ; décoche un bouton pour le cacher. Plus bas, « 👤 Nouvelle personne » et un raccourci vers chaque outil de modification (tableur, montage, retouche…) et chaque partie d’Enquêtes : coche ceux que tu veux en haut, et choisis ce que le clic ouvre (la liste des projets ou un nouveau projet). C’est gardé tout de suite. ¦ Butoanele barei de sus, lângă numărul de persoane. Trage de ⠿ (sau Alt + ↑ / ↓) ca să le schimbi ordinea; debifează un buton ca să-l ascunzi. Mai jos, „👤 Persoană nouă” și o scurtătură către fiecare instrument de modificare (foaie de calcul, montaj, retușare…) și fiecare parte din Investigații: bifează-le pe cele pe care le vrei sus și alege ce deschide clicul (lista proiectelor sau un proiect nou). Se păstrează imediat.
+Les blocs d’une fiche se rangent en sections nommées (Identité, Famille…). Ici, où vont leurs titres et leurs options ; la forme (traits, coins, ombres) se règle plus bas, avec l’en-tête (« Style des fiches »). ¦ Blocurile unei fișe se ordonează în secțiuni cu nume (Identitate, Familie…). Aici, unde merg titlurile și opțiunile lor; forma (linii, colțuri, umbre) se reglează mai jos, cu antetul („Stilul fișelor”).
+Glisse les sections et les blocs pour changer leur ordre. Décoche une section ou un bloc pour le masquer. ¦ Trage secțiunile și blocurile ca să le schimbi ordinea. Debifează o secțiune sau un bloc ca să-l ascunzi.
+La façon dont les listes à ranger de cette page sont dessinées. Ne change que cet écran de réglage (et la fenêtre « ⚙️ Ranger les sections » d’une fiche) : ni les fiches, ni les données. ¦ Felul în care sunt desenate listele de ordonat de pe această pagină. Schimbă doar acest ecran de setări (și fereastra „⚙️ Ordonează secțiunile” a unei fișe): nici fișele, nici datele.
+Les blocs se rangent en sections nommées (Identité, Famille…). Ici, la façon de dessiner leurs titres et leurs options. Chaque changement est gardé tout de suite. ¦ Blocurile se ordonează în secțiuni cu nume (Identitate, Familie…). Aici, felul de a desena titlurile și opțiunile lor. Fiecare schimbare se păstrează imediat.
+Retenu d’une fiche à l’autre. ¦ Păstrat de la o fișă la alta.
+Sans trait ni cadre : juste le nom, en grand, comme un chapitre. ¦ Fără linie și fără cadru: doar numele, mare, ca un capitol.
+Un cadre autour de la section, le titre dans une étiquette sur le bord. ¦ Un cadru în jurul secțiunii, titlul într-o etichetă pe margine.
+Un petit titre en capitales posé sur un trait. Sobre, prend peu de place. ¦ Un mic titlu cu majuscule pus pe o linie. Sobru, ocupă puțin loc.
+Une bande de la couleur principale (celle de l’Apparence), titre en blanc. ¦ O bandă în culoarea principală (cea din Aspect), titlu cu alb.
+« Nouveau » : sections en bandes, ⠿ et 👁. ¦ „Nou”: secțiuni în benzi, ⠿ și 👁.
+Ce que tu fais avec l’app : ses onglets et son premier écran. Aucune fiche n’est supprimée. ¦ Ce faci cu aplicația: filele și primul ei ecran. Nicio fișă nu este ștearsă.
+Changer d’usage change <b>seulement les onglets et le premier écran</b>. Aucune fiche n’est supprimée : les personnes restent là, même quand l’onglet est caché. On peut en allumer plusieurs : leurs onglets s’additionnent. ¦ Schimbarea utilizării schimbă <b>doar filele și primul ecran</b>. Nicio fișă nu este ștearsă: persoanele rămân acolo, chiar și când fila e ascunsă. Poți activa mai multe: filele lor se adună.
+Personnes, arbre, actes. ¦ Persoane, arbore, acte.
+« 🌳 Ma généalogie » seule ¦ Doar „🌳 Genealogia mea”
+Trésors de famille. ¦ Comori de familie.
+Catalogue raisonné. ¦ Catalog raționat.
+Maisons et lieux. ¦ Case și locuri.
+L’entreprise, 👥 Membres. ¦ Firma, 👥 Membri.
+Animaux, portées, pedigree. ¦ Animale, fătări, pedigri.
+Suivi des animaux. ¦ Urmărirea animalelor.
+Documents, ✨ Trésors. ¦ Documente, ✨ Comori.
+Les onglets se rangent, se renomment et se cachent un par un dans « Ordre et noms du menu principal ». ¦ Filele se ordonează, se redenumesc și se ascund una câte una în „Ordinea și numele meniului principal”.
+Au féminin ¦ La feminin
+Au masculin ¦ La masculin
+Avec un point médian ¦ Cu punct median
+Entre parenthèses ¦ Între paranteze
+Sexe « Autre / non binaire » ¦ Sex „Altul / non-binar”
+Sexe « Non renseigné » (et les animaux dont on ne connaît pas le sexe) ¦ Sex „Necompletat” (și animalele al căror sex nu se cunoaște)
+Sur les fiches d’hommes et de femmes, les mots s’accordent tout seuls : « né le » ou « née le », « décédé » ou « décédée ». Choisis ici comment les écrire pour les autres fiches. Chaque choix est gardé tout de suite. ¦ Pe fișele bărbaților și femeilor, cuvintele se acordă singure: „născut la” sau „născută la”, „decedat” sau „decedată”. Alege aici cum se scriu pentru celelalte fișe. Fiecare alegere se păstrează imediat.
+comme on dit « la personne » : « née », « décédée » ¦ cum se spune „persoana”: „născută”, „decedată”
+rien ne change : « né(e) », sauf « Vivante », « Décédée » sur la fiche ¦ nimic nu se schimbă: „născut(ă)”, în afară de „În viață”, „Decedată” pe fișă
+une tournure neutre quand il y en a une (« Naissance le … », « Décès »), sinon « né(e) » ¦ o formulare neutră când există („Naștere la …”, „Deces”), altfel „născut(ă)”
+« né », « décédé » ¦ „născut”, „decedat”
+« né(e) », « décédé(e) », partout ¦ „născut(ă)”, „decedat(ă)”, peste tot
+« né·e », « décédé·e » ¦ „născut·ă”, „decedat·ă”
+autre / non binaire ¦ altul / non-binar
+sexe non renseigné ¦ sex necompletat
+Arbre en filigrane ¦ Arbore în filigran
+Bleu pâle (comme avant) ¦ Albastru pal (ca înainte)
+Gris neutre ¦ Gri neutru
+Les traits de mon thème (✎ Mes thèmes) ¦ Liniile temei mele (✎ Temele mele)
+Les traits de mon thème : choisis d’abord un thème à toi (✎ Mes thèmes) ¦ Liniile temei mele: alege mai întâi o temă a ta (✎ Temele mele)
+Bleu pâle = comme avant · gris · la couleur principale de l’Apparence (elle suit si tu la changes) · sépia · la couleur des traits de ton thème (✎ Mes thèmes) · une couleur à toi. ¦ Albastru pal = ca înainte · gri · culoarea principală din Aspect (urmează dacă o schimbi) · sepia · culoarea liniilor temei tale (✎ Temele mele) · o culoare a ta.
+Cahier ligné ¦ Caiet liniat
+Papier millimétré ¦ Hârtie milimetrică
+Papier vergé ¦ Hârtie vergată
+Ce qu’on voit derrière les blocs, sur toutes les pages. Le fond reste très pâle pour ne jamais gêner la lecture ; la couleur du papier vient du Preset (ou de ton thème). ¦ Ce se vede în spatele blocurilor, pe toate paginile. Fundalul rămâne foarte pal ca să nu încurce niciodată cititul; culoarea hârtiei vine din Preset (sau din tema ta).
+Choisir une photo ¦ Alege o fotografie
+Couleur du motif ¦ Culoarea motivului
+Couleur principale (suit l’Apparence) ¦ Culoarea principală (urmează Aspectul)
+De « à peine visible » à « bien marqué ». Au départ : comme aujourd’hui. ¦ De la „abia vizibil” la „bine marcat”. La început: ca acum.
+Décoché : fond uni sur ces pages. La carte et les éditeurs plein écran gardent toujours le leur. ¦ Debifat: fundal uniform pe aceste pagini. Harta și editoarele pe tot ecranul își păstrează mereu fundalul lor.
+Pas encore de photo : fond uni en attendant. ¦ Încă nicio fotografie: fundal uniform deocamdată.
+Pâlie par l’intensité et floutée, pour rester derrière sans gêner. Elle reste sur cet ordinateur (pas dans le défaut du site : là-bas, fond uni). ¦ Pălită după intensitate și estompată, ca să rămână în spate fără să încurce. Rămâne pe acest calculator (nu în valorile implicite ale site-ului: acolo, fundal uniform).
+bords à peine teintés, vieille photo ¦ margini abia colorate, fotografie veche
+comme aujourd’hui ¦ ca acum
+de petites branches, très pâles ¦ crenguțe mici, foarte palide
+du papier vers la couleur ¦ de la hârtie spre culoare
+fin, trait plus fort tous les 5 ¦ fin, linie mai groasă la fiecare 5
+fines rayures des vieux papiers ¦ dungi fine ca pe hârtiile vechi
+hexagones de la maison de famille ¦ hexagoane ale casei de familie
+lignes et double marge, comme l’état civil ¦ linii și margine dublă, ca la starea civilă
+lignes et marge rouge ¦ linii și margine roșie
+pâle et floutée derrière ¦ palidă și estompată în spate
+rien derrière, le plus calme ¦ nimic în spate, cel mai liniștit
+tissage léger, album de famille ¦ țesătură ușoară, album de familie
+une grille de petits points ¦ o grilă de puncte mici
+va bien avec « Archive papier » ¦ se potrivește cu „Hârtie de arhivă”
+Une page de l’app ¦ O pagină a aplicației
+Ta photo ¦ Fotografia ta
+les Réglages ¦ Setările
+Dans les listes où l’on coche ce qui s’affiche (menus, listes, Réordonner, Personnaliser…) : une ligne décochée reste telle quelle, ou se grise un peu. ¦ În listele în care bifezi ce se afișează (meniuri, liste, Reordonează, Personalizează…): un rând debifat rămâne așa cum e sau devine puțin gri.
+Une ligne affichée ¦ Un rând afișat
+Une ligne cachée ¦ Un rând ascuns
+Lignes cachées dans les listes à ranger ¦ Rânduri ascunse în listele de ordonat
+Supprimer en rouge ¦ Șterge cu roșu
+Hypothèses à comparer ¦ Ipoteze de comparat
+signature ou sceau ¦ semnătură sau sigiliu
+PLAN DU RECENSEMENT ¦ PLANUL RECENSĂMÂNTULUI
+Fonds de carte du plan des adresses ¦ Fundaluri de hartă pentru planul adreselor
+Plan, photo aérienne, carte hors ligne… ¦ Plan, fotografie aeriană, hartă offline…
+Cassini, État-major, cartes et photos de 1950… ¦ Cassini, Statul-Major, hărți și fotografii din 1950…
+Carte ancienne (par-dessus) ¦ Hartă veche (deasupra)
+Aujourd’hui (dessous) ¦ Azi (dedesubt)
+Dépouillements (onglet « Plan ») et fiche d’un village : les fonds cochés viennent en premier dans les menus ; le premier coché est celui de départ. Tous les autres restent dans les menus, par catégorie. ¦ Indexări (fila „Plan”) și fișa unui sat: fundalurile bifate apar primele în meniuri; primul bifat este cel de pornire. Toate celelalte rămân în meniuri, pe categorii.
+naissance manquante ¦ naștere lipsă
+décès manquant ¦ deces lipsă
+parents manquants ¦ părinți lipsă
+source manquante ¦ sursă lipsă
+aucun média ¦ niciun fișier media
+1 livre en {y} ¦ 1 livră în {y}
+1 franc en {y} ¦ 1 franc în {y}
+1 euro en {y} ¦ 1 euro în {y}
+≈ <b>{eur} €</b> d’aujourd’hui ¦ ≈ <b>{eur} €</b> de azi
+≈ <b>{kg} kg</b> de pain ¦ ≈ <b>{kg} kg</b> de pâine
+≈ {n} jour de travail d’un journalier ¦ ≈ {n} zi de muncă a unui zilier
+≈ {n} jours de travail d’un journalier ¦ ≈ {n} zile de muncă ale unui zilier
+🛡 Solidité des liens à côté des parents ¦ 🛡 Soliditatea legăturilor lângă părinți
+Seulement Supposé et Réfuté ¦ Doar Presupus și Infirmat
+Toujours ¦ Mereu
+Jamais ¦ Niciodată

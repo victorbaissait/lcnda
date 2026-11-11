@@ -1,0 +1,111 @@
+fr ¦ ro
+# ═════ zone « premier » : roumain (ro) — premier lancement, visite guidée, Signaler un problème ═════
+INSTALLATION ¦ INSTALARE
+La base généalogique doit être importée. ¦ Baza genealogică trebuie importată.
+Choisis comment démarrer : importer un fichier existant, ou créer une première personne pour partir d'une base vide. ¦ Alege cum începi: importă un fișier existent sau creează o primă persoană ca să pornești de la o bază goală.
+GEDCOM (.ged, aussi d’Ancestry, MyHeritage, Geneanet), Gramps (.gramps ou paquet .gpkg avec les photos), Hérédis (.hmw ou .heredis), MacFamilyTree (.mftpkg), base LCNDA (.db) ou sauvegarde complète LCNDA (.zip, base + médias). Les fichiers JSON et CSV sont analysés mais pas encore importés. ¦ GEDCOM (.ged, și de la Ancestry, MyHeritage, Geneanet), Gramps (.gramps sau pachet .gpkg cu fotografiile), Hérédis (.hmw sau .heredis), MacFamilyTree (.mftpkg), bază LCNDA (.db) sau copie de siguranță completă LCNDA (.zip, bază + fișiere media). Fișierele JSON și CSV sunt analizate, dar încă nu sunt importate.
+Fichier ¦ Fișier
+Créer une première personne ¦ Creează o primă persoană
+Initialise une base vide avec une première fiche, à compléter ensuite. ¦ Pornește o bază goală cu o primă fișă, de completat apoi.
+Prénom ¦ Prenume
+Nom ¦ Nume
+Créer et ouvrir la base ¦ Creează și deschide baza
+Je veux faire autre chose ▾ ¦ Vreau să fac altceva ▾
+▴ Replier ¦ ▴ Restrânge
+Qu’est-ce que tu veux faire avec l’app ? ¦ Ce vrei să faci cu aplicația?
+Choisis ce qui te ressemble : l’app s’ouvre avec les bons onglets et le bon premier écran. Tu pourras tout changer après. ¦ Alege ce ți se potrivește: aplicația se deschide cu filele potrivite și primul ecran potrivit. Vei putea schimba totul după aceea.
+Ta famille, tes ancêtres, leurs actes et leurs photos. ¦ Familia ta, strămoșii tăi, actele și fotografiile lor.
+Une lignée d’animaux ¦ O linie de animale
+Un élevage, le pedigree de tes chiens, chats, chevaux… ¦ O crescătorie, pedigriul câinilor, pisicilor, cailor tăi…
+Recenser des animaux ¦ Inventariază animale
+Suivre des animaux : baguage, puces, observations, trajets. ¦ Urmărește animale: inelare, cipuri, observații, trasee.
+L’histoire d’une maison ou d’un village ¦ Istoria unei case sau a unui sat
+Maison ou village ¦ Casă sau sat
+Qui a vécu où, de génération en génération, pièce par pièce. ¦ Cine a locuit unde, din generație în generație, cameră cu cameră.
+Le catalogue d’un artiste ou d’une collection ¦ Catalogul unui artist sau al unei colecții
+Artiste ou collection ¦ Artist sau colecție
+Ses œuvres, ses expositions, son catalogue raisonné. ¦ Operele, expozițiile, catalogul raționat.
+Un fonds d’archives ou un musée familial ¦ Un fond de arhivă sau un muzeu de familie
+Archives ou musée ¦ Arhivă sau muzeu
+Des photos, des lettres, des objets à classer et à décrire. ¦ Fotografii, scrisori, obiecte de clasat și de descris.
+L’étude d’un nom de famille ¦ Studiul unui nume de familie
+Un nom de famille ¦ Un nume de familie
+Tous les porteurs d’un nom, ses variantes, d’où ils viennent. ¦ Toți purtătorii unui nume, variantele lui, de unde vin.
+L’histoire d’une entreprise ou d’une association ¦ Istoria unei firme sau a unei asociații
+Entreprise ou association ¦ Firmă sau asociație
+Ses lieux, ses dirigeants, ses salariés ou ses membres. ¦ Locurile, conducătorii, angajații sau membrii ei.
+Transmettre des souvenirs ¦ Transmite amintiri
+Des lettres à ouvrir plus tard, des recettes, des chansons, des souvenirs à laisser. ¦ Scrisori de deschis mai târziu, rețete, cântece, amintiri de lăsat.
+Ce qui change ¦ Ce se schimbă
+Commencer avec une base vide ¦ Începe cu o bază goală
+🧪 Essayer avec une base d’exemple ¦ 🧪 Încearcă cu o bază de exemplu
+🧪 Base d’exemple ¦ 🧪 Bază de exemplu
+Une famille imaginaire pour essayer l’app : ta généalogie n’est pas touchée. ¦ O familie imaginară ca să încerci aplicația: genealogia ta nu este atinsă.
+Revenir à ma généalogie ¦ Înapoi la genealogia mea
+Repartir d’une base vide ¦ Pornește din nou de la o bază goală
+Ou bien : ¦ Sau:
+🐾 Créer le premier animal ¦ 🐾 Creează primul animal
+Créer le premier animal ¦ Creează primul animal
+Espèce ¦ Specie
+Création de la base… ¦ Se creează baza…
+Préparation de la base d’exemple… ¦ Se pregătește baza de exemplu…
+✓ Base créée ¦ ✓ Bază creată
+ℹ️ Rien n’est figé : Réglages → Apparence → « 🧭 Usage de l’app ». ¦ ℹ️ Nimic nu e definitiv: Setări → Aspect → „🧭 Utilizarea aplicației”.
+🧭 Usage de l’app ¦ 🧭 Utilizarea aplicației
+🧭 Revoir le premier lancement ¦ 🧭 Revezi prima pornire
+Premier écran à l’ouverture ¦ Primul ecran la deschidere
+Le dernier écran ouvert (comme avant) ¦ Ultimul ecran deschis (ca înainte)
+Usage enregistré. ¦ Utilizarea a fost salvată.
+(la page va se recharger) ¦ (pagina se va reîncărca)
+Langue · Language ¦ Limbă · Language
+Une petite visite ? ¦ Un mic tur?
+En {n} étapes, l’app te montre où créer une fiche, ajouter un parent, une photo, un événement, faire une sauvegarde et trouver l’aide. Ça prend deux minutes. ¦ În {n} pași, aplicația îți arată unde creezi o fișă, adaugi un părinte, o fotografie, un eveniment, faci o copie de siguranță și găsești ajutorul. Durează două minute.
+▶ Commencer ¦ ▶ Începe
+Plus tard ¦ Mai târziu
+Ne plus proposer ¦ Nu mai propune
+Passer la visite ¦ Sari peste tur
+← Précédent ¦ ← Înapoi
+Suivant → ¦ Înainte →
+✓ Terminer ¦ ✓ Termină
+Étape {i} sur {n} ¦ Pasul {i} din {n}
+Visite guidée, étape {i} sur {n} : {what} ¦ Tur ghidat, pasul {i} din {n}: {what}
+Tu peux cliquer le bouton entouré pour le faire pour de vrai, ou juste avancer. ¦ Poți face clic pe butonul încercuit ca să o faci de-adevăratelea, sau doar să mergi mai departe.
+Ajouter un parent ¦ Adaugă un părinte
+Ajouter une photo ¦ Adaugă o fotografie
+Un événement et son lieu ¦ Un eveniment și locul lui
+Faire une sauvegarde ¦ Fă o copie de siguranță
+Les Réglages et l’aide ¦ Setările și ajutorul
+Chaque personne a sa fiche. Ce bouton en crée une : un prénom, un nom, et c’est parti. ¦ Fiecare persoană are fișa ei. Acest buton creează una: un prenume, un nume, și gata.
+Sur une fiche, le « ＋ » de « Parents » relie un père ou une mère : choisis une fiche qui existe, ou crée-la. C’est comme ça que l’arbre se construit. ¦ Pe o fișă, „＋” de la „Părinți” leagă un tată sau o mamă: alege o fișă care există sau creeaz-o. Așa se construiește arborele.
+Ici, tu ajoutes des photos et des actes à la fiche : prends-les dans tes médias, ou glisse-les depuis l’ordinateur. ¦ Aici adaugi fotografii și acte la fișă: ia-le din fișierele tale media sau trage-le din calculator.
+Naissance, mariage, décès… Ajoute un événement avec sa date et son lieu : tape les premières lettres de la commune, l’app la trouve. ¦ Naștere, căsătorie, deces… Adaugă un eveniment cu data și locul lui: scrie primele litere ale localității, aplicația o găsește.
+De temps en temps, fais une sauvegarde : ce fichier garde toute ta généalogie et tes photos. Range-le sur une clé USB ou un autre disque. ¦ Din când în când, fă o copie de siguranță: acest fișier păstrează toată genealogia ta și fotografiile. Pune-l pe un stick USB sau pe alt disc.
+Tout se règle ici : apparence, import, sauvegardes… Dans les Réglages, la page « FAQ / tuto » répond à tes questions ; tu peux aussi y relancer cette visite. ¦ Totul se reglează aici: aspect, import, copii de siguranță… În Setări, pagina „FAQ / ghid” îți răspunde la întrebări; tot acolo poți relua acest tur.
+✓ Visite terminée. Pour la revoir : Réglages → FAQ / tuto → « ▶ Relancer la visite guidée ». ¦ ✓ Tur terminat. Ca să-l revezi: Setări → FAQ / ghid → „▶ Reia turul ghidat”.
+Visite guidée fermée. Tu la retrouves dans Réglages → FAQ / tuto. ¦ Turul ghidat a fost închis. Îl găsești în Setări → FAQ / ghid.
+Une petite visite guidée de l’app est proposée. Commencer, plus tard, ou ne plus proposer. ¦ Ți se propune un mic tur ghidat al aplicației. Începe, mai târziu sau nu mai propune.
+Rien à montrer sur cet écran pour l’instant. ¦ Deocamdată nimic de arătat pe acest ecran.
+Pas de visite guidée en mode consultation. ¦ Fără tur ghidat în modul consultare.
+La visite guidée n’est pas possible ici. ¦ Turul ghidat nu e posibil aici.
+🐞 Signaler un problème ¦ 🐞 Raportează o problemă
+AIDE ¦ AJUTOR
+Ce qui s’est passé ¦ Ce s-a întâmplat
+Ce que j’attendais ¦ Ce mă așteptam
+Écris avec tes mots. Évite les noms de ta famille si tu ne veux pas qu’ils soient lus. ¦ Scrie cu cuvintele tale. Evită numele din familia ta dacă nu vrei să fie citite.
+Joindre le rapport technique ¦ Atașează raportul tehnic
+Joindre le rapport technique ({x}) ¦ Atașează raportul tehnic ({x})
+aucune erreur captée ¦ nicio eroare înregistrată
+Rapport technique ¦ Raport tehnic
+🗑 Vider le journal ¦ 🗑 Golește jurnalul
+Vider le journal des erreurs captées sur cet ordinateur ¦ Golește jurnalul erorilor înregistrate pe acest calculator
+✉️ Écrire un e-mail ¦ ✉️ Scrie un e-mail
+Ouvrir une demande sur GitHub ¦ Deschide o cerere pe GitHub
+Journal des erreurs vidé ¦ Jurnalul erorilor a fost golit
+✓ Message copié : colle-le où tu veux (e-mail, forum, GitHub). ¦ ✓ Mesaj copiat: lipește-l unde vrei (e-mail, forum, GitHub).
+La copie n’a pas marché : sélectionne le texte et copie-le à la main. ¦ Copierea nu a mers: selectează textul și copiază-l manual.
+Dis en quelques mots ce qui s’est passé. ¦ Spune în câteva cuvinte ce s-a întâmplat.
+Ex. : j’ai cliqué sur « Enregistrer » dans la fiche, et la fenêtre est restée grise. ¦ Ex.: am făcut clic pe „Salvează” în fișă și fereastra a rămas gri.
+Ex. : que la fiche soit enregistrée et que la fenêtre se ferme. ¦ Ex.: ca fișa să fie salvată și fereastra să se închidă.
+Pour écrire un e-mail plutôt qu’ouvrir une demande sur GitHub : règle une adresse dans Réglages → « 🔄 Mises à jour ». ¦ Ca să scrii un e-mail în loc să deschizi o cerere pe GitHub: setează o adresă în Setări → „🔄 Actualizări”.
+La base d’exemple est une famille imaginaire (5 générations, des photos d’époque dessinées) rangée à part dans « Mes généalogies » : ta généalogie n’est jamais touchée. ¦ Baza de exemplu este o familie imaginară (5 generații, fotografii de epocă desenate) păstrată separat în „Genealogiile mele”: genealogia ta nu este atinsă niciodată.
+Aucun fichier choisi ¦ Niciun fișier ales

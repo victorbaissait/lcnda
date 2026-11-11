@@ -8,10 +8,12 @@
  *   - une ligne par texte : le français exact (la clé), puis les traductions ;
  *   - « ctx|Texte » dans la colonne fr : un même mot traduit autrement selon l'endroit (t('Texte', {ctx: 'ctx'})) ;
  *   - « =mot » dans la colonne fr : un pluriel pour plural(n, 'mot') ; chaque traduction donne ses formes séparées
- *     par « | » : one|other (en, es, de, it, pt, nl, sv, da, nb), one|few|many (pl, cs, sk : 1 | 2 à 4 | 5 et plus) ;
+ *     par « | » : one|other (en, es, de, it, pt, nl, sv, da, nb), one|few|many (pl, cs, sk : 1 | 2 à 4 | 5 et plus),
+ *     one|few|other (ro : 1 | 0 et 2 à 19 | 20 et plus, « 20 de persoane ») ;
  *   - ligne vide ou commençant par « # » : ignorée. Variables {n}, {x} : les mêmes dans toutes les langues.
  * Les langues ajoutées ensuite ont leurs propres fichiers, un par zone, dans un sous-dossier de assets/i18n/src/ :
- * nord/<zone>.tsv (1re ligne « fr ¦ cs ¦ sv ¦ da ») et nord2/<zone>.tsv (1re ligne « fr ¦ sk ¦ nb »), mêmes clés
+ * nord/<zone>.tsv (1re ligne « fr ¦ cs ¦ sv ¦ da »), nord2/<zone>.tsv (1re ligne « fr ¦ sk ¦ nb ») et nord3/<zone>.tsv
+ * (1re ligne « fr ¦ ro »), mêmes clés
  * (y compris « ctx|… » et « =mot ») que assets/i18n/src/<zone>.tsv : ainsi on les traduit sans toucher aux fichiers des
  * 7 premières langues. Tout sous-dossier de src/ est lu ; chaque fichier dit ses langues dans sa 1re ligne : toutes les
  * sortes de fichiers sont fusionnées, clé par clé.
@@ -25,10 +27,10 @@ const ROOT = path.join(__dirname, '..');
 const SRC = path.join(ROOT, 'assets/i18n/src');
 const NORD = path.join(SRC, 'nord');
 const CORE = ['en', 'es', 'de', 'it', 'pt', 'pl', 'nl'];  // traduites en entier : une clé absente est une erreur
-const NEW_LANGS = ['cs', 'sv', 'da', 'sk', 'nb'];         // en cours de traduction : une clé absente → repli sur le français
+const NEW_LANGS = ['cs', 'sv', 'da', 'sk', 'nb', 'ro'];   // en cours de traduction : une clé absente → repli sur le français
 const LANGS = [...CORE, ...NEW_LANGS];
-const NAMES = {en: 'English', es: 'Español', de: 'Deutsch', it: 'Italiano', pt: 'Português', pl: 'Polski', nl: 'Nederlands', cs: 'Čeština', sv: 'Svenska', da: 'Dansk', sk: 'Slovenčina', nb: 'Norsk (bokmål)'};
-const FORMS = {pl: ['one', 'few', 'many'], cs: ['one', 'few', 'many'], sk: ['one', 'few', 'many'], def: ['one', 'other']};
+const NAMES = {en: 'English', es: 'Español', de: 'Deutsch', it: 'Italiano', pt: 'Português', pl: 'Polski', nl: 'Nederlands', cs: 'Čeština', sv: 'Svenska', da: 'Dansk', sk: 'Slovenčina', nb: 'Norsk (bokmål)', ro: 'Română'};
+const FORMS = {pl: ['one', 'few', 'many'], cs: ['one', 'few', 'many'], sk: ['one', 'few', 'many'], ro: ['one', 'few', 'other'], def: ['one', 'other']};
 
 function readFile(file, label) {
     const out = [];

@@ -2224,6 +2224,7 @@
         da: 'en et og eller af til i pa ved for fra med uden er var vaere kan kunne hvordan hvad hvilken hvilket hvilke hvem hvorfor hvornar hvor jeg mig min mit mine du dig din dit dine det den dette denne disse som her ikke ingen ja hvis sa at ud over vil ville skal gore gor app lcnda program ting slaegtsforskning database',
         sk: 'a i o u v vo z zo na do od po za pre bez je su byt ako co ci aky aka ake kto preco kedy kde ja ma mi moj moja moje ty ta ti tvoj tvoja to ten ta sa si nie ano ked mozno mozem mozes chcem chcel musim urobit robit sposob app lcnda program vec genealogia databaza',
         nb: 'en et ei og eller av til i pa ved for fra med uten er var vaere kan kunne hvordan hva hvilken hvilket hvilke hvem hvorfor nar hvor jeg meg min mitt mine du deg din ditt dine det den dette denne disse som her ikke ingen ja hvis sa at ut over vil ville skal gjore gjor app lcnda program ting slektsforskning database',
+        ro: 'si sau un o de la in din pe cu fara pentru ca care ce cum cine unde cand este sunt e fi a al ai ale lui ei eu tu el ea noi voi ma mi meu mea mei mele tau ta tai tale se sa nu da daca pot poti vreau trebuie fac face fel aplicatie aplicatia app lcnda program lucru genealogie baza',
     }).map(([k, v]) => [k, new Set(v.split(' '))]));
     const FAQ_SYN = {photo: 'image media scan document', image: 'photo media', media: 'photo image document', scan: 'photo document numeriser', pdf: 'imprimer livre exporter', imprimer: 'pdf livre', livre: 'livret pdf imprimer',
         supprimer: 'effacer enlever retirer', effacer: 'supprimer', ancetre: 'sosa lignee aieul', sosa: 'ancetre lignee cujus', cujus: 'sosa depart', arbre: 'genealogie diagramme ascendant', carte: 'lieu plan',
@@ -2247,6 +2248,7 @@
         da: {foto: 'billede medie scanning', billede: 'foto', pdf: 'udskriv bog eksporter', udskriv: 'pdf bog', bog: 'pdf udskriv', slet: 'fjern', fjern: 'slet', sikkerhedskopi: 'kopi gem backup', forfader: 'sosa', trae: 'stamtrae diagram', kort: 'sted', diagram: 'statistik', importer: 'gedcom heredis gramps ancestry myheritage', eksporter: 'pdf csv', fejl: 'kontroller', lyd: 'audio optagelse', vielse: 'aegteskab bryllup', bryllup: 'vielse', sog: 'find', find: 'sog'},
         sk: {fotografia: 'foto obrazok media sken', foto: 'fotografia obrazok', pdf: 'tlac kniha export', tlac: 'pdf kniha', kniha: 'pdf tlac', zmazat: 'odstranit', odstranit: 'zmazat', zaloha: 'kopia ulozit', predok: 'sosa', strom: 'rodokmen diagram', rodokmen: 'strom', mapa: 'miesto', graf: 'statistika', import: 'gedcom heredis gramps ancestry myheritage', export: 'pdf csv', chyba: 'kontrola', zvuk: 'audio nahravka', svadba: 'sobas manzelstvo', hladat: 'najst', najst: 'hladat'},
         nb: {foto: 'bilde medie skanning', bilde: 'foto', pdf: 'skriv ut bok eksporter', bok: 'pdf skriv', slett: 'fjern', fjern: 'slett', sikkerhetskopi: 'kopi lagre backup', stamfar: 'sosa', tre: 'slektstre diagram', kart: 'sted', diagram: 'statistikk', importer: 'gedcom heredis gramps ancestry myheritage', eksporter: 'pdf csv', feil: 'kontroller', lyd: 'audio opptak', vielse: 'ekteskap bryllup', bryllup: 'vielse', sok: 'finn', finn: 'sok'},
+        ro: {fotografie: 'foto imagine media scanare', foto: 'fotografie imagine', pdf: 'tipareste carte exporta', tipareste: 'pdf carte', carte: 'pdf tipareste', sterge: 'scoate elimina', scoate: 'sterge', copie: 'siguranta salvare backup', stramos: 'sosa', arbore: 'genealogie diagrama', harta: 'loc', grafic: 'statistica diagrama', importa: 'gedcom heredis gramps ancestry myheritage', exporta: 'pdf csv', eroare: 'verificare', sunet: 'audio inregistrare', casatorie: 'nunta cununie', nunta: 'casatorie', cauta: 'gaseste', gaseste: 'cauta'},
     };
     // les synonymes vont dans les deux sens, et se retrouvent aussi au pluriel ou sous une autre forme du mot
     const faqBoth = map => Object.entries({...map}).forEach(([k, v]) => v.split(' ').forEach(x => { map[x] = [...new Set(`${map[x] || ''} ${k}`.trim().split(' '))].join(' '); }));
@@ -2267,6 +2269,7 @@
         da: w => (w.length > 4 ? w.replace(/(erne|ene|er|en|et|e)$/, '') : w),
         sk: w => (w.length > 4 ? w.replace(/(ami|ach|och|ovi|om|ou|y|i|a|e|u|o)$/, '') : w),
         nb: w => (w.length > 4 ? w.replace(/(ene|er|en|et|a|e)$/, '') : w),
+        ro: w => (w.length > 4 ? w.replace(/(urilor|ilor|elor|ului|uri|ile|ele|lor|ul|le|ii|ei|a|e|i|u)$/, '') : w),
     };
     const faqStem = (w, L = 'fr') => (FAQ_STEM[L] || FAQ_STEM.fr)(w);
     // un mot composé (« faire-part ») reste entier dans la question ; dans les textes, il compte entier et en morceaux

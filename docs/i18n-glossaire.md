@@ -592,6 +592,81 @@ Norvégien : bokmål seulement (pas de nynorsk), « KI » pour l’IA (mot recom
 | ordinateur | počítač | datamaskin |
 | Traduction faite par une IA | Preklad vytvorila AI | Oversatt av KI (kunstig intelligens) |
 
+## Langue ajoutée ensuite : roumain (ro)
+
+Fichiers à part : `assets/i18n/src/nord3/<zone>.tsv` (1re ligne `fr ¦ ro`, même clé que `<zone>.tsv`).
+On traduit **depuis le français** (`node scripts/i18n-todo.js ro <zone>` montre l’italien, langue romane proche, en aide).
+Diacritiques : *ă, â, î, ș, ț* — ș et ț **avec virgule** (U+0219, U+021B), jamais ş / ţ avec cédille.
+Ton : on tutoie (*tu*), impératif à la 2e personne du singulier (« Alege », « Fă clic », « Încearcă ») ; les boutons aussi à
+l’impératif (« Salvează », « Adaugă », « Șterge »). Guillemets „…”. Pluriels : `one|few|other` = 1 | 0 et 2 à 19 | 20 et plus,
+la 3e forme avec « de » (`persoană|persoane|de persoane` → « 1 persoană », « 3 persoane », « 20 de persoane »).
+« IA » pour l’intelligence artificielle. Les exemples de dates restent en français (la lecture des dates C4 est française).
+
+| Français | Română |
+|---|---|
+| Sosa (numéro Sosa) | număr Sosa |
+| SOSA (liste) | SOSA |
+| fiche (d’une personne) | fișă |
+| 📒 Fiches (sujets) | 📒 Fișe |
+| généalogie (la base de la personne) | genealogie |
+| acte | act (de stare civilă) |
+| état civil / registre paroissial | stare civilă / registru parohial |
+| baptême / naissance | botez / naștere |
+| mariage | căsătorie |
+| décès / sépulture | deces / înmormântare |
+| parrain / marraine | naș / nașă |
+| témoin / déclarant | martor / declarant |
+| ascendants / descendants | ascendenți / descendenți |
+| arbre des ascendants / descendants | arborele ascendenților / arborele descendenților |
+| branche | ramură |
+| implexe | implex |
+| recensement | recensământ |
+| inventaire après décès | inventar succesoral |
+| dépouillement | indexare |
+| cote (d’archive) | cotă |
+| mur de brique | fundătură |
+| cousinade | reuniune de familie |
+| commune / ville / village | localitate (comună) / oraș / sat |
+| catalogue raisonné | catalog raționat |
+| Tableau de bord | Tablou de bord |
+| Personnes | Persoane |
+| Graphiques / Diagrammes | Grafice / Diagrame |
+| Carte | Hartă |
+| Listes | Liste |
+| Chronologie | Cronologie |
+| Recherche | Cercetare |
+| Enquêtes | Investigații |
+| Trésors | Comori |
+| Réglages | Setări |
+| Apparence | Aspect |
+| Médias | Media (fișiere media) |
+| Source | Sursă |
+| Étiquette | Etichetă |
+| Battue | Căutare amplă |
+| Mode simple | Mod simplu |
+| Mode consultation | Mod consultare |
+| Sauvegarde | Copie de siguranță |
+| Enregistrer / ✓ Enregistré | Salvează / ✓ Salvat |
+| Annuler (bouton) | Anulează |
+| ↶ Annuler / ↷ Rétablir | ↶ Anulează / ↷ Refă |
+| Fermer | Închide |
+| Supprimer | Șterge |
+| Retirer (détacher) | Scoate |
+| Modifier | Modifică |
+| Créer / Ajouter | Creează / Adaugă |
+| Relier | Leagă |
+| ↺ Remettre comme au départ | ↺ Readu la starea inițială |
+| Réessayer | Încearcă din nou |
+| ⤒ Importer / ⤓ Exporter | ⤒ Importă / ⤓ Exportă |
+| 🖨 Imprimer | 🖨 Tipărește |
+| Chercher / Filtrer ▾ / Trier : | Caută / Filtrează ▾ / Sortează: |
+| ✓ Compris : | ✓ Înțeles: |
+| Aimanter | Aliniere magnetică |
+| Liste \| Fiches (affichage) | Listă \| Fișe |
+| onglet | filă |
+| ordinateur | calculator |
+| Traduction faite par une IA | Traducere făcută de o IA |
+
 ## Zone « tresors-ui » (étiquettes et fenêtres des pages Trésors)
 
 | Français | English | Español | Deutsch | Italiano | Português | Polski | Nederlands |

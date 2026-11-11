@@ -4,13 +4,13 @@ declare(strict_types=1);
  * 🌐 Traduction côté serveur (même dictionnaire que assets/js/app-i18n.js ; mode d'emploi : docs/I18N.md).
  *
  *  - i18n_lang() : la langue de la page — en-tête « X-LCNDA-Lang » envoyé par app.js (api()), sinon le cookie lcnda_lang ;
- *    toujours une des 13 langues (fr par défaut).
+ *    toujours une des 14 langues (fr par défaut).
  *  - i18n_t('Texte français', ['n' => 3]) : le texte dans cette langue, sinon le français (variables {x} remplacées).
  *  - json_response() passe le message « error » par i18n_t() : un message d'erreur connu arrive traduit ; en français,
  *    rien ne change.
  */
 
-const I18N_LANGS = ['fr', 'en', 'es', 'de', 'it', 'pt', 'pl', 'nl', 'cs', 'sv', 'da', 'sk', 'nb'];
+const I18N_LANGS = ['fr', 'en', 'es', 'de', 'it', 'pt', 'pl', 'nl', 'cs', 'sv', 'da', 'sk', 'nb', 'ro'];
 
 function i18n_lang(): string
 {
@@ -42,7 +42,12 @@ function i18n_t(string $text, array $vars = [], string $ctx = ''): string
     $d = i18n_dict();
     if ($d) {
         $v = ($ctx !== '' && isset($d[$ctx . '|' . $text])) ? $d[$ctx . '|' . $text] : ($d[$text] ?? null);
-        if (is_array($v)) { $n = isset($vars['n']) && is_numeric($vars['n']) ? (float) $vars['n'] : 1.0; $v = ($n == 1.0 ? ($v['one'] ?? null) : null) ?? $v['other'] ?? $v['many'] ?? $v['one'] ?? null; } // un mot au pluriel lu tout seul : la forme « un »
+        if (is_array($v)) {
+            $n = isset($vars['n']) && is_numeric($vars['n']) ? (float) $vars['n'] : 1.0;
+            // roumain : 1 → one ; 0, 2 à 19 (et 101 à 119…) → few ; 20 et plus → other (« 20 de persoane »), comme Intl.PluralRules('ro')
+            $few = i18n_lang() === 'ro' && $n != 1.0 && ($n == 0.0 || floor($n) != $n || (fmod($n, 100.0) >= 1 && fmod($n, 100.0) <= 19));
+            $v = ($few ? ($v['few'] ?? null) : null) ?? ($n == 1.0 ? ($v['one'] ?? null) : null) ?? $v['other'] ?? $v['many'] ?? $v['one'] ?? null; // un mot au pluriel lu tout seul : la forme « un »
+        }
         if (is_string($v) && $v !== '') { $out = $v; }
     }
     if ($vars) {
