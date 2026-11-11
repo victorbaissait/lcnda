@@ -2775,6 +2775,23 @@ html.is-screen-embed [data-h-village-back],html.is-screen-embed [data-h-village-
 [data-theme="dark"] .h-mt-ibody { background:#303136; }
 [data-theme="dark"] .h-mt-irow { border-color:rgba(255,255,255,.06); }
 [data-theme="dark"] .h-mt-kf.has, [data-theme="dark"] .h-mt-kf.on { color:#ffcc00; }
+/* 🎬 Montage : sections du panneau de droite rangées par la personne (E2, ⠿ K20), courbe du volume posée sur un morceau */
+.h-mt-secbody { padding:0 10px 8px; }
+.h-mt-secgrip { flex:none; width:16px; color:#8e8e93; font-size:16px; line-height:1; cursor:grab; user-select:none; text-align:center; border-radius:3px; }
+.h-mt-secgrip:focus-visible { outline:2px solid #2f80ff; outline-offset:1px; }
+.h-mt-isec.is-dragging { opacity:.5; }
+.h-mt-isec.is-drop-before { box-shadow:inset 0 3px 0 #2f80ff; }
+.h-mt-isec.is-drop-after { box-shadow:inset 0 -3px 0 #2f80ff; }
+.h-mt-isec.is-alt-moved { background:rgba(47,128,255,.08); }
+.h-mt-env { position:absolute; inset:3px 0; pointer-events:none; }
+.h-mt-env svg { position:absolute; inset:0; width:100%; height:100%; overflow:visible; }
+.h-mt-env polyline { fill:none; stroke:#ffcc00; stroke-width:2; }
+.h-mt-env .h-mt-env0 { stroke:rgba(0,0,0,.28); stroke-width:1; stroke-dasharray:3 3; }
+.h-mt-env.is-edit { pointer-events:auto; cursor:crosshair; background:rgba(255,204,0,.14); border-radius:3px; }
+.h-mt-envpt { position:absolute; width:10px; height:10px; margin:-5px 0 0 -5px; border-radius:50%; background:#fff; border:2px solid #d9a400; box-sizing:border-box; }
+.h-mt-env.is-edit .h-mt-envpt { cursor:grab; width:12px; height:12px; margin:-6px 0 0 -6px; }
+.h-mtp-tbtnq { margin:4px 0 0; }
+:root[data-theme="dark"] .h-mt-env .h-mt-env0 { stroke:rgba(255,255,255,.3); }
 /* Fiches : en-tête des blocs comme les widgets (⠿ ✎ ⧉ 🗑), réglages au verso du bloc */
 .h-fi .h-fi-arrow { display:none !important; }
 .h-fi-block.is-back { outline:3px solid var(--blue, #0066cc); outline-offset:2px; }

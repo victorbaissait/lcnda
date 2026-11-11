@@ -528,6 +528,7 @@
     let uid = 0; const nid = p => p + (++uid) + Date.now().toString(36).slice(-3);
     /* Réglages du montage (Réglages → Montage, retouche, mise en page et son) : disposition et enregistrement par défaut */
     const MT_KEY = 'genealogie-montage-prefs';
+    const PANEL_KEY = 'genealogie-montage-panel'; // E2 : ordre et ouverture des sections du panneau de droite du montage
     const MT_SIZES = [[0, 'Comme la vidéo'], [2160, '4K (2160 p)'], [1080, 'Full HD (1080 p)'], [720, 'HD (720 p)'], [480, '480 p'], [360, '360 p (léger)']];
     const MT_QUALITY = [[2, 'Légère (petit fichier)'], [5, 'Normale'], [8, 'Haute'], [14, 'Très haute (gros fichier)']];
     const MT_FPS = [24, 25, 30, 50, 60];
@@ -540,7 +541,7 @@
     // texte lisible (noir ou blanc) sur la couleur choisie
     const inkOn = hex => { const m = /^#?([0-9a-f]{6})$/i.exec(hex || ''); if (!m) return '#111'; const n = parseInt(m[1], 16), l = 0.299 * (n >> 16) + 0.587 * (n >> 8 & 255) + 0.114 * (n & 255); return l > 150 ? '#111' : '#fff'; };
     // taille des boutons des pistes (👁 🔓 ↑ ↓ 🗑) : 0 = comme avant (≈ 22 px), sinon de 16 à 44 px
-    const TBTN0 = 22, tbtnOf = x => { const n = Math.round(Number(x)); return Number.isFinite(n) && n >= 16 && n !== TBTN0 ? Math.min(44, n) : 0; };
+    const TBTN0 = 22, TBTN_S = 18, TBTN_L = 30, tbtnOf = x => { const n = Math.round(Number(x)); return Number.isFinite(n) && n >= 16 && n !== TBTN0 ? Math.min(44, n) : 0; };
     function montagePrefs() {
         let v = {}; try { v = JSON.parse(localStorage.getItem(MT_KEY) || '{}') || {}; } catch (_) {}
         return montagePrefsFrom(v);
@@ -674,7 +675,7 @@
                 if ((hard && drift > 0.04) || drift > 0.35) { try { e.el.currentTime = it.local; } catch (_) {} }
                 // volume (fondus du son, morceau muet ou son détaché)
                 let v = it.kind === 'a' ? (c.vol ?? 1) : (c.mute ? 0 : (c.vol ?? 1));
-                if (it.kind === 'a') { const len = clen(c), x = tt - c.at; if (c.fadeIn && x < c.fadeIn) v *= x / c.fadeIn; if (c.fadeOut && len - x < c.fadeOut) v *= Math.max(0, (len - x) / c.fadeOut); }
+                { const len = it.kind === 'v1' ? it.x.end - it.x.at : clen(c), x = tt - (it.kind === 'v1' ? it.x.at : c.at); v *= AE.clipGain(c, x, len, it.local); } // fondus et courbe du volume (moteur son commun)
                 if (it.kind === 'v1' && it.x.cross && tt < it.x.at + it.x.cross) v *= (tt - it.x.at) / it.x.cross; // le son suit le fondu enchaîné
                 if (it.kind === 'a' && !c.voice) v *= duckLvl;
                 e.gain.gain.value = Math.max(0, v);
@@ -808,7 +809,7 @@
             if (x.fade !== false) { if (local < 0.4) st.alpha = local / 0.4; if (d - local < 0.4) st.alpha = Math.min(st.alpha, (d - local) / 0.4); }
             textFx(st, enter, clamp01(local / inD), false, size, local);
             textFx(st, leave, clamp01((d - local) / outD), true, size, d - local);
-            g.save(); g.font = `${x.bold ? '700 ' : ''}${size}px ${x.font || 'Georgia, serif'}`; g.textAlign = x.align || 'center'; g.textBaseline = 'middle';
+            g.save(); g.font = `${x.italic ? 'italic ' : ''}${x.bold ? '700 ' : ''}${size}px ${x.font || 'Georgia, serif'}`; g.textAlign = x.align || 'center'; g.textBaseline = 'middle';
             const lh = size * 1.25, tw = Math.max(1, ...lines.map(l => g.measureText(l).width));
             if (loop === 'scroll') st.dy += H * 0.55 - (local / d) * (H * 1.1 + lines.length * size * 1.3);
             else if (loop === 'ticker') st.dx += (W / 2 + tw / 2) - (local / d) * (W + tw) - ((x.x ?? 50) / 100 * W - W / 2);
@@ -828,8 +829,14 @@
             const sl = shown.split('\n'), top = -(lines.length - 1) * lh / 2;
             const bw = tw + size, x0 = x.align === 'left' ? -size / 2 : x.align === 'right' ? -bw + size / 2 : -bw / 2;
             if (st.reveal < 1) { g.beginPath(); g.rect(x0, top - lh, bw * st.reveal, lines.length * lh + lh * 2); g.clip(); }
-            if (x.bg) { const w = Math.max(...sl.map(l => g.measureText(l).width)) + size, h = sl.length * lh + size * 0.4, bx = x.align === 'left' ? -size / 2 : x.align === 'right' ? -w + size / 2 : -w / 2; g.fillStyle = x.bg; g.globalAlpha *= 0.75; g.fillRect(bx, top - lh / 2 - size * 0.2, w, h); g.globalAlpha /= 0.75; }
-            sl.forEach((l, i) => { if (x.shadow !== false) { g.shadowColor = 'rgba(0,0,0,.65)'; g.shadowBlur = size / 6; g.shadowOffsetY = size / 14; } g.fillStyle = x.color || '#ffffff'; g.fillText(l, 0, top + i * lh); });
+            if (x.bg) { const w = Math.max(...sl.map(l => g.measureText(l).width)) + size, h = sl.length * lh + size * 0.4, bx = x.align === 'left' ? -size / 2 : x.align === 'right' ? -w + size / 2 : -w / 2, ba = Math.max(0.05, Math.min(1, Number(x.bgA ?? 0.75))), br = Math.max(0, Math.min(100, Number(x.bgR) || 0)) / 100 * Math.min(w, h) / 2;
+                g.fillStyle = x.bg; g.globalAlpha *= ba; if (br > 0.5 && g.roundRect) { g.beginPath(); g.roundRect(bx, top - lh / 2 - size * 0.2, w, h, br); g.fill(); } else g.fillRect(bx, top - lh / 2 - size * 0.2, w, h); g.globalAlpha /= ba; }
+            // ombre (couleur et force réglables : au départ, noire à 65 %) ; contour autour des lettres (dessiné sous le remplissage)
+            const sk = Math.max(0, Number(x.shadowS ?? 1)), sc0 = /^#[0-9a-f]{6}$/i.test(x.shadowC || '') ? `rgba(${parseInt(x.shadowC.slice(1, 3), 16)},${parseInt(x.shadowC.slice(3, 5), 16)},${parseInt(x.shadowC.slice(5, 7), 16)},.65)` : 'rgba(0,0,0,.65)';
+            const sw = x.stroke && /^#[0-9a-f]{6}$/i.test(x.stroke) ? Math.max(0, Math.min(30, Number(x.strokeW ?? 8))) / 100 * size : 0;
+            sl.forEach((l, i) => { if (x.shadow !== false) { g.shadowColor = sc0; g.shadowBlur = size / 6 * sk; g.shadowOffsetY = size / 14 * sk; }
+                if (sw > 0) { g.lineJoin = 'round'; g.miterLimit = 2; g.lineWidth = sw * 2; g.strokeStyle = x.stroke; g.strokeText(l, 0, top + i * lh); g.shadowColor = 'transparent'; }
+                g.fillStyle = x.color || '#ffffff'; g.fillText(l, 0, top + i * lh); });
             g.restore();
         }
         function paint(tt) {
@@ -1153,7 +1160,14 @@
         function drawTl(pane = true) {
             const L = layoutV1(P), T = montageEnd(P), W = Math.max(600, T * pxs + 160);
             const kfMarks = c => { const ts = [...new Set(Object.values(c.kf || {}).flat().map(k => Math.round(k.t * 100) / 100))]; return ts.map(t => `<i class="h-mt-kfm" style="left:${(t - (c.from || 0)) / spd(c) * pxs}px" title="${i18n('Image clé {time}', {time: fmt(t - (c.from || 0))})}"></i>`).join(''); };
-            const block = (tr, c, at, len, label, cls = '') => `<button type="button" class="h-mt-clip ${cls} ${isImg(c) ? 'is-img' : ''} ${sel && sel.track === tr && sel.id === c.id ? 'is-sel' : ''}" style="left:${OFF + at * pxs}px;width:${Math.max(6, len * pxs)}px" data-mt-clip="${tr}:${c.id}" data-i18n-off title="${esc(label)} · ${fmt(at)} → ${fmt(at + len)}">${isImg(c) ? '🖼️ ' : ''}${esc(label)}${kfMarks(c)}${tr === 'audio' ? beatMarks(c) : ''}</button>`;
+            const block = (tr, c, at, len, label, cls = '') => `<button type="button" class="h-mt-clip ${cls} ${isImg(c) ? 'is-img' : ''} ${sel && sel.track === tr && sel.id === c.id ? 'is-sel' : ''}" style="left:${OFF + at * pxs}px;width:${Math.max(6, len * pxs)}px" data-mt-clip="${tr}:${c.id}" data-i18n-off title="${esc(label)} · ${fmt(at)} → ${fmt(at + len)}">${isImg(c) ? '🖼️ ' : ''}${esc(label)}${kfMarks(c)}${tr === 'audio' ? beatMarks(c) : ''}${envMarks(tr, c, len)}</button>`;
+            // 📈 la courbe du volume d'un morceau (fondus et points) : vue quand elle existe, ou quand on pose des points sur le morceau choisi
+            const envMarks = (tr, c, len) => { if (tr === 'texts' || isImg(c)) return ''; const edit = envEdit && sel && sel.track === tr && sel.id === c.id; if (!edit && !c.env?.length) return '';
+                const sp = spd(c), w = Math.max(6, len * pxs), yOf = v => (100 - Math.min(2, Math.max(0, v)) / 2 * 100).toFixed(1);
+                const xs = [...new Set([0, len, Math.min(len, c.fadeIn || 0), Math.max(0, len - (c.fadeOut || 0)), ...(c.env || []).map(q => (q.t - c.from) / sp).filter(x => x > 0 && x < len)])].sort((a, b) => a - b);
+                const line = xs.map(x => `${(x * pxs).toFixed(1)},${yOf(AE.clipGain(c, x, len, c.from + x * sp))}`).join(' ');
+                const dots = (c.env || []).map((q, i) => { const x = (q.t - c.from) / sp; return x < 0 || x > len ? '' : `<i class="h-mt-envpt" data-mt-envpt="${i}" style="left:${(x * pxs).toFixed(1)}px;top:${yOf(q.v)}%" title="${esc(i18n('Volume : {n} %', {n: Math.round(q.v * 100)}))}"></i>`; }).join('');
+                return `<span class="h-mt-env ${edit ? 'is-edit' : ''}" data-mt-env="${tr}:${c.id}"><svg viewBox="0 0 ${w.toFixed(1)} 100" preserveAspectRatio="none" aria-hidden="true"><line x1="0" x2="${w.toFixed(1)}" y1="50" y2="50" class="h-mt-env0" vector-effect="non-scaling-stroke"/><polyline points="${line}" vector-effect="non-scaling-stroke"/></svg>${dots}</span>`; };
             // 🥁 les temps repérés d'une musique : de petits traits sur le son
             const beatMarks = c => (c.beats || []).filter(b => b >= c.from && b <= c.to).slice(0, 4000).map(b => `<i class="h-mt-beat" style="left:${(b - c.from) / spd(c) * pxs}px"></i>`).join('');
             const lane = (key, name, inner) => `<div class="h-mt-lane" data-mt-lane="${key}"><span class="h-mt-lname">${name}</span>${inner}</div>`;
@@ -1176,7 +1190,7 @@
         // panneau de droite : réglages de l'élément choisi
         const chk = (k, label, on) => `<label class="ui-toggle"><input type="checkbox" data-mt-k="${k}" ${on ? 'checked' : ''}><i></i>${label}</label>`;
         // les réglages du son : pour un morceau (afx) ou pour tout le film (fx)
-        const soundFx = (pre, f) => `${chk(pre + '.clarity', '🗣️ Voix plus nette', f.clarity)}${chk(pre + '.noise', '🧹 Moins de souffle et de grondement', f.noise)}${rng(pre + '.bass', 'Graves', -12, 12, 1, f.bass || 0, ' dB')}${rng(pre + '.treble', 'Aigus', -12, 12, 1, f.treble || 0, ' dB')}${chk(pre + '.mono', '🎧 Mono (le même son des deux côtés)', f.mono)}`;
+        const soundFx = (pre, f) => `${chk(pre + '.clarity', '🗣️ Voix plus nette', f.clarity)}${chk(pre + '.noise', '🧹 Moins de souffle et de grondement', f.noise)}${rng(pre + '.bass', 'Graves', -12, 12, 1, f.bass || 0, ' dB')}${rng(pre + '.treble', 'Aigus', -12, 12, 1, f.treble || 0, ' dB')}${chk(pre + '.mono', '🎧 Mono (le même son des deux côtés)', f.mono)}${chk(pre + '.comp', `🗜 ${i18n('Volume plus égal (les passages faibles remontent, les forts baissent)')}`, f.comp)}${rng(pre + '.reverb', `⛪ ${i18n('Réverbération')}`, 0, 1, 0.05, Number(f.reverb) || 0, '%')}${`<label class="h-avx-row">${i18n('Lieu de la réverbération')} <select data-mt-k="${pre}.room">${[['piece', i18n('Une pièce')], ['salle', i18n('Une grande salle')], ['eglise', i18n('Une église')], ['cave', i18n('Une cave')]].map(([k, l]) => `<option value="${k}" ${(f.room || 'piece') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>`}${rng(pre + '.pan', `↔ ${i18n('Gauche ↔ droite')}`, -1, 1, 0.05, Number(f.pan) || 0)}`;
         const speedHtml = c => `${rng('speed', 'Vitesse', 0.1, 10, 0.05, spd(c), ' ×')}<label class="h-avx-row">Vitesse exacte <input data-unit="×" type="number" class="h-mt-num" min="0.1" max="10" step="0.05" value="${spd(c)}" data-mt-k="speedn"></label><div class="h-mt-quick">${montagePrefs().speeds.map(v => `<button type="button" data-mt-speed="${v}" class="${spd(c) === v ? 'is-on' : ''}">${String(v).replace('.', ',')} ×</button>`).join('')}<button type="button" data-mt-speededit title="Choisir les vitesses de ces boutons (aussi dans Réglages → Montage)">✎</button></div>${chk('pitch', 'garder la hauteur de la voix', c.pitch !== false)}`;
         const clipSound = c => `<details class="h-mt-isec h-mt-sfx" ${c.afx && Object.values(c.afx).some(Boolean) ? 'open' : ''}><summary><b>🔊 Son de ce morceau</b></summary>${soundFx('afx', c.afx || {})}<div class="h-mt-quick"><button type="button" data-mt-afxall title="Mettre ces réglages du son sur tous les morceaux et sons du projet">Appliquer à tous les sons du projet</button><button type="button" data-mt-afxreset>↺ Remettre comme au départ</button></div>${P.sources[c.s]?.kind === 'audio' && ext.openAudioStudio ? '<p><button type="button" class="button small secondary" data-mt-studio title="Nettoyer ce son dans le Studio son (rack d’effets, spectre…) : il revient propre ici">🎚️ Ouvrir dans le Studio son</button></p>' : ''}<p class="muted">Pour tout le film d’un coup : onglet 🔊 Son.</p></details>`;
         const kbHtml = c => `<label class="h-avx-row">Effet Ken Burns <select data-mt-k="kb">${KB.map(([k, l]) => `<option value="${k}" ${(c.kb ?? (P.kbAuto ? 'auto' : '')) === k ? 'selected' : ''}>${l}</option>`).join('')}</select><span data-help="Un lent mouvement de caméra sur la photo : elle s’approche, s’éloigne ou glisse doucement pendant qu’elle est à l’écran."></span></label>`;
@@ -1189,7 +1203,7 @@
         const oldHtml = (o, pre, label) => `<details class="h-mt-isec h-mt-old" ${o?.on ? 'open' : ''}><summary><b>🎞️ ${label}</b></summary>${chk(pre + '.on', 'Effet vieux film : grain, rayures, poussières, image qui scintille, coins assombris', o?.on)}
             ${rng(pre + '.amt', 'Intensité', 0.05, 1, 0.05, o?.amt ?? OLD0.amt, '%')}${chk(pre + '.sepia', 'sépia (couleurs passées, brunes)', o ? o.sepia !== false : true)}${chk(pre + '.weave', 'l’image tremble un peu, comme dans un vieux projecteur', o ? o.weave !== false : true)}${pre === 'old' && oldClean(P.old) ? '<p class="muted">Tout le film a déjà l’effet (onglet 🎨 Couleurs) : ces réglages-ci passent avant pour ce morceau.</p>' : ''}</details>`;
         // 📐 stabilisation légère d'une vidéo : analyse une fois (avec sa barre et Annuler), puis réglages
-        let stabJob = null, beatJob = null, beatEvery = 1;
+        let stabJob = null, beatJob = null, beatEvery = 1, envEdit = false; // envEdit : ✎ on pose des points de volume sur le morceau choisi
         const STAB_HELP = 'Corrige les petites secousses d’une vidéo filmée à la main. L’analyse regarde, sur une image réduite, de combien toute l’image bouge d’un instant à l’autre (vers le haut, le bas, les côtés), garde le mouvement voulu (un panoramique lent) et compense le reste, en agrandissant un peu l’image pour cacher les bords. Elle ne corrige ni les rotations, ni le flou de bougé, ni un sujet qui bouge seul devant un fond fixe.';
         const stabHtml = c => { if (isImg(c) || P.sources[c.s]?.kind !== 'video') return ''; const st = c.stab, job = stabJob?.id === c.id ? stabJob : null;
             return `<details class="h-mt-isec h-mt-stab" ${st || job ? 'open' : ''}><summary><b>📐 Stabiliser (léger)</b><span data-help="${esc(STAB_HELP)}"></span></summary>
@@ -1216,14 +1230,22 @@
         const irow = (c, local, [k, label, min, max, step]) => { const v = tfAt(c, k, local), has = (c.kf?.[k] || []).length, on = kfAt(c, k, local) >= 0;
             return `<div class="h-mt-irow"><span>${label}</span><input type="range" min="${min}" max="${max}" step="${step}" value="${v}" data-mt-tf="${k}"><output data-mt-tfo="${k}">${fmtTf(k, v)}</output><button type="button" class="h-mt-kf ${has ? 'has' : ''} ${on ? 'on' : ''}" data-mt-kf="${k}" title="${on ? 'Enlever cette image clé' : 'Ajouter une image clé ici (la valeur pourra changer au fil du temps)'}">${on ? '◆' : '◇'}</button></div>`; };
         const isec = (c, key, flag, title, icon, body, open = true) => `<details class="h-mt-isec" ${open ? 'open' : ''}><summary>${flag ? `<input type="checkbox" data-mt-k="${flag}" ${c[flag] !== false ? 'checked' : ''} title="Activer / couper">` : ''}<b>${title}</b><span class="h-mt-iico">${icon}</span><button type="button" class="h-mt-ireset" data-mt-ireset="${key}" title="Remettre comme au départ">↺</button></summary><div class="h-mt-ibody">${body}</div></details>`;
+        /** E2 : une section du panneau de droite (repliable ; rangée par ⠿ ou Alt + ↑ / ↓ ; ouverte et place retenues : arrangePane) */
+        const sec = (key, title, body, open = true) => `<details class="h-mt-isec h-mt-sec" data-mt-sec="${key}" ${open ? 'open' : ''}><summary><b>${title}</b></summary><div class="h-mt-secbody">${body}</div></details>`;
+        const resetBtn = (attr, title = '') => `<button type="button" ${attr} ${title ? `title="${esc(title)}"` : ''}>↺ ${i18n('Remettre comme au départ')}</button>`;
+        /** 📈 Le volume dans le temps d'un morceau : fondus d'entrée et de sortie, points posés sur le morceau, dans la frise */
+        const envHtml = c => { const n = (c.env || []).length;
+            return sec('env', `📈 ${i18n('Volume dans le temps')}`, `${rng('fadeIn', 'Fondu d’entrée', 0, 10, 0.1, c.fadeIn || 0, ' s')}${rng('fadeOut', 'Fondu de sortie', 0, 10, 0.1, c.fadeOut || 0, ' s')}
+                <div class="h-mt-quick"><button type="button" data-mt-envedit class="${envEdit ? 'is-on' : ''}" aria-pressed="${envEdit}" title="${esc(i18n('Sur le morceau choisi, dans la frise : un clic pose un point, on glisse un point pour le déplacer (en haut : plus fort, en bas : moins fort), un double-clic l’enlève.'))}">✎ ${i18n('Poser des points sur le morceau')}</button><button type="button" data-mt-envadd>＋ ${i18n('Point à la tête de lecture')}</button>${n ? `<button type="button" data-mt-envclear>✕ ${i18n('Effacer la courbe')}</button>` : ''}</div>
+                <p class="ui-hint">${n ? i18n('Points sur la courbe : {n}. La ligne du milieu = le volume réglé plus haut ; en haut, jusqu’à deux fois plus fort.', {n}) : i18n('Pas encore de courbe : le volume reste le même du début à la fin (avec ses fondus).')}</p>`, n > 0 || !!(c.fadeIn || c.fadeOut) || sel?.track === 'audio'); };
         function inspectorHtml(c, main) {
             const local = localOf(c), rows = key => IROWS[key].map(r => irow(c, local, r)).join('');
-            return `<div class="h-mt-insp" data-mt-insp><div class="h-mt-ihead"><b>🎛️ Réglages de l’image</b><span class="muted">${i18n('◇ image clé à {time}', {time: fmt(local - c.from)})}</span><label class="h-mt-ease">Entre deux images clés <select data-mt-k="ease"><option value="smooth" ${c.ease !== 'linear' ? 'selected' : ''}>en douceur</option><option value="linear" ${c.ease === 'linear' ? 'selected' : ''}>régulier</option></select><span data-help="Une image clé fixe un réglage (taille, place, rotation…) à un moment du film ; entre deux images clés, l’image passe de l’une à l’autre, en douceur ou à vitesse régulière."></span></label></div>
+            return sec('insp', '🎛️ Réglages de l’image', `<div class="h-mt-insp" data-mt-insp><div class="h-mt-ihead"><span class="muted">${i18n('◇ image clé à {time}', {time: fmt(local - c.from)})}</span><label class="h-mt-ease">Entre deux images clés <select data-mt-k="ease"><option value="smooth" ${c.ease !== 'linear' ? 'selected' : ''}>en douceur</option><option value="linear" ${c.ease === 'linear' ? 'selected' : ''}>régulier</option></select><span data-help="Une image clé fixe un réglage (taille, place, rotation…) à un moment du film ; entre deux images clés, l’image passe de l’une à l’autre, en douceur ou à vitesse régulière."></span></label></div>
                 ${isec(c, 'comp', '', 'Composition', '◐', rows('comp') + `<div class="h-mt-irow"><span>Mode de fusion</span><select data-mt-k="blend">${BLENDS.map(([k, l]) => `<option value="${k}" ${(c.blend || 'source-over') === k ? 'selected' : ''}>${l}</option>`).join('')}</select><span data-help="Comment cette image se mélange avec celle de dessous : « Produit » assombrit, « Superposition claire » éclaircit, « Normal » la pose simplement dessus."></span></div>`)}
                 ${isec(c, 'tf', 'tfOn', 'Transformer', '⬚', rows('tf'))}
                 ${isec(c, 'crop', 'cropOn', 'Recadrer', '⌗', rows('crop'), false)}
                 ${isec(c, 'dist', 'distOn', 'Distorsion', '▱', rows('dist'), false)}
-                ${main ? isec(c, 'fit', '', 'Adaptation spatiale', '⤢', `<div class="h-mt-irow"><span>Type</span><select data-mt-k="fit">${FITS.map(([k, l]) => `<option value="${k}" ${(c.fit || 'fit') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></div>`, false) : ''}</div>`;
+                ${main ? isec(c, 'fit', '', 'Adaptation spatiale', '⤢', `<div class="h-mt-irow"><span>Type</span><select data-mt-k="fit">${FITS.map(([k, l]) => `<option value="${k}" ${(c.fit || 'fit') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></div>`, false) : ''}</div>`);
         }
         /** Met les curseurs de l'inspecteur à la valeur du moment (images clés) sans tout redessiner */
         function syncInspector() {
@@ -1244,50 +1266,105 @@
             const c = selected(), item = $('[data-mt-pane="item"]');
             if (!c) item.innerHTML = '<p class="muted">Choisis un élément sur la frise (un morceau, une incrustation, un texte, un son).</p>';
             else if (sel.track === 'v1') item.innerHTML = `<h4>${isImg(c) ? i18n('🖼️ Photo de la piste 1') : i18n('🎬 Morceau de la piste 1')}</h4><p class="muted" data-i18n-off>${esc(P.sources[c.s]?.title || '')} · ${isImg(c) ? i18n('{time} à l’écran', {time: fmt(c.to - c.from)}) : `${fmt(c.from)} → ${fmt(c.to)}`}</p>
-                ${isImg(c) ? imgDur(c) + kbHtml(c) : speedHtml(c)}
-                <label class="h-avx-row">Transition avant <select data-mt-k="tr.type">${TRANS.map(([k, l]) => `<option value="${k}" ${(c.tr?.type || 'none') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>${c.tr?.type === 'color' ? `<label class="h-avx-row">Couleur du fondu <input type="color" value="${esc(/^#[0-9a-f]{6}$/i.test(c.tr.color || '') ? c.tr.color : '#7a4b22')}" data-mt-k="tr.color"></label>` : ''}${rng('tr.d', 'Durée de la transition', 0.2, 4, 0.1, c.tr?.d ?? 1, ' s')}${P.v1[0] === c && c.tr?.type && c.tr.type !== 'none' ? '<p class="muted">C’est le premier morceau : sa transition ne joue pas (il n’y a rien avant lui).</p>' : ''}
+                ${sec('time', isImg(c) ? `⏱ ${i18n('Durée à l’écran')}` : `⏱ ${i18n('Vitesse')}`, isImg(c) ? imgDur(c) + kbHtml(c) : speedHtml(c))}
+                ${sec('trans', `◇ ${i18n('Transition avant')}`, `<label class="h-avx-row">Transition avant <select data-mt-k="tr.type">${TRANS.map(([k, l]) => `<option value="${k}" ${(c.tr?.type || 'none') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>${c.tr?.type === 'color' ? `<label class="h-avx-row">Couleur du fondu <input type="color" value="${esc(/^#[0-9a-f]{6}$/i.test(c.tr.color || '') ? c.tr.color : '#7a4b22')}" data-mt-k="tr.color"></label>` : ''}${rng('tr.d', 'Durée de la transition', 0.2, 4, 0.1, c.tr?.d ?? 1, ' s')}${P.v1[0] === c && c.tr?.type && c.tr.type !== 'none' ? '<p class="muted">C’est le premier morceau : sa transition ne joue pas (il n’y a rien avant lui).</p>' : ''}`)}
                 ${stabHtml(c)}${ext.montageKey?.html(c, rng, chk) || ''}
-                ${isImg(c) ? '' : `${rng('vol', 'Volume', 0, 2, 0.05, c.vol ?? 1, '%')}<label class="ui-toggle"><input type="checkbox" data-mt-k="mute" ${c.mute ? 'checked' : ''}><i></i>🔇 Sans son</label>${c.detached ? '<p class="muted">🔊 Son séparé : il est sur une piste son, à part.</p>' : '<button type="button" class="button small secondary" data-mt-sep title="Le son passe sur une piste son : on le déplace, le coupe ou le règle à part de l’image">🔊 Séparer le son de l’image</button>'}${clipSound(c)}`}
+                ${isImg(c) ? '' : `${sec('sound', `🔊 ${i18n('Volume')}`, `${rng('vol', 'Volume', 0, 2, 0.05, c.vol ?? 1, '%')}<label class="ui-toggle"><input type="checkbox" data-mt-k="mute" ${c.mute ? 'checked' : ''}><i></i>🔇 Sans son</label>${c.detached ? '<p class="muted">🔊 Son séparé : il est sur une piste son, à part.</p>' : '<button type="button" class="button small secondary" data-mt-sep title="Le son passe sur une piste son : on le déplace, le coupe ou le règle à part de l’image">🔊 Séparer le son de l’image</button>'}`)}${envHtml(c)}${clipSound(c)}`}
                 ${inspectorHtml(c, true)}
-                <h4>🎨 Couleurs de ce morceau</h4>${lookHtml(c.look || {}, 'look')}${oldHtml(c.old, 'old', 'Vieux film (ce morceau)')}`;
+                ${sec('color', '🎨 Couleurs de ce morceau', `${lookHtml(c.look || {}, 'look')}<div class="h-mt-quick">${resetBtn('data-mt-lookreset="look"', i18n('Les couleurs et le vieux film de ce morceau reviennent comme au départ'))}</div>`)}${oldHtml(c.old, 'old', 'Vieux film (ce morceau)')}`;
             else if (sel.track === 'v2') item.innerHTML = `<h4>🖼️ ${c.full ? 'Vidéo (tout l’écran)' : 'Incrustation'}${isImg(c) ? ' (photo)' : ''}</h4><p class="muted">${esc(P.sources[c.s]?.title || '')}</p>
                 <div class="h-mt-quick"><button type="button" data-mt-full="1" class="${c.full ? 'is-on' : ''}" title="Prend tout l’écran (on peut ensuite la glisser ou tirer son coin sur l’image)">⛶ Tout l’écran</button><button type="button" data-mt-full="0" class="${c.full ? '' : 'is-on'}" title="Une petite vidéo dans un coin, réglable">▣ Dans un coin</button></div>
                 ${c.full ? `<label class="h-avx-row">Cadrage <select data-mt-k="fit">${FITS.slice(0, 2).map(([k, l]) => `<option value="${k}" ${(c.fit || 'fit') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>` : ''}
-                ${isImg(c) ? imgDur(c) + kbHtml(c) : speedHtml(c)}${c.full ? '' : rng('w', 'Largeur', 10, 300, 1, c.w ?? 35, ' %')}${c.full ? '' : rng('x', 'Position horizontale', -100, 100, 1, c.x ?? 62, ' %') + rng('y', 'Position verticale', -100, 100, 1, c.y ?? 6, ' %')}
-                ${isImg(c) ? '' : rng('vol', 'Volume', 0, 2, 0.05, c.vol ?? 0, '%') + (c.detached ? '<p class="muted">🔊 Son séparé : il est sur une piste son, à part.</p>' : '<button type="button" class="button small secondary" data-mt-sep>🔊 Séparer le son de l’image</button>') + clipSound(c)}${trackSel('v2', c)}<label class="ui-toggle"><input type="checkbox" data-mt-k="border" ${c.border !== false ? 'checked' : ''}><i></i>cadre blanc</label><label class="ui-toggle"><input type="checkbox" data-mt-k="fade" ${c.fade !== false ? 'checked' : ''}><i></i>apparaît et disparaît en fondu</label>
-                ${stabHtml(c)}${ext.montageKey?.html(c, rng, chk) || ''}${c.full ? '' : ext.montageTrack?.html(c) || ''}${oldHtml(c.old, 'old', 'Vieux film (cette vidéo)')}
+                ${sec('time', isImg(c) ? `⏱ ${i18n('Durée à l’écran')}` : `⏱ ${i18n('Vitesse')}`, isImg(c) ? imgDur(c) + kbHtml(c) : speedHtml(c))}${sec('place', `📐 ${i18n('Taille et place')}`, `${c.full ? '' : rng('w', 'Largeur', 10, 300, 1, c.w ?? 35, ' %')}${c.full ? '' : rng('x', 'Position horizontale', -100, 100, 1, c.x ?? 62, ' %') + rng('y', 'Position verticale', -100, 100, 1, c.y ?? 6, ' %')}${trackSel('v2', c)}<label class="ui-toggle"><input type="checkbox" data-mt-k="border" ${c.border !== false ? 'checked' : ''}><i></i>cadre blanc</label><label class="ui-toggle"><input type="checkbox" data-mt-k="fade" ${c.fade !== false ? 'checked' : ''}><i></i>apparaît et disparaît en fondu</label>`)}
+                ${isImg(c) ? '' : sec('sound', `🔊 ${i18n('Volume')}`, rng('vol', 'Volume', 0, 2, 0.05, c.vol ?? 0, '%') + (c.detached ? '<p class="muted">🔊 Son séparé : il est sur une piste son, à part.</p>' : '<button type="button" class="button small secondary" data-mt-sep>🔊 Séparer le son de l’image</button>')) + envHtml(c) + clipSound(c)}
+                ${stabHtml(c)}${ext.montageKey?.html(c, rng, chk) || ''}${c.full ? '' : ext.montageTrack?.html(c) || ''}${sec('color', `🎨 ${i18n('Couleurs de cette vidéo')}`, `${lookHtml(c.look || {}, 'look')}<div class="h-mt-quick">${resetBtn('data-mt-lookreset="look"', i18n('Les couleurs et le vieux film de ce morceau reviennent comme au départ'))}</div>`, !!(c.look && Object.keys(c.look).length))}${oldHtml(c.old, 'old', 'Vieux film (cette vidéo)')}
                 ${inspectorHtml(c, false)}`;
             else if (sel.track === 'texts') item.innerHTML = `<h4>🔤 Titre / texte</h4>${trackSel('texts', c)}${ext.montageTrack?.html(c) || ''}<label class="h-mt-txt">Texte <textarea rows="3" data-mt-k="text">${esc(c.text)}</textarea></label>
-                <details class="h-mt-isec" open><summary><b>✨ Mouvement</b></summary>
+                <details class="h-mt-isec" data-mt-sec="anim" open><summary><b>✨ Mouvement</b></summary>
                 <label class="h-avx-row">Entrée <select data-mt-k="anim">${ANIMS.map(([k, l]) => `<option value="${k}" ${(c.anim === 'scroll' ? 'none' : c.anim || 'none') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
                 ${rng('animDur', 'Durée de l’entrée (0 = auto)', 0, 10, 0.1, c.animDur || 0, ' s')}
                 <label class="h-avx-row">Pendant <select data-mt-k="loop">${ANIMS_LOOP.map(([k, l]) => `<option value="${k}" ${(c.loop || (c.anim === 'scroll' ? 'scroll' : '')) === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
                 <label class="h-avx-row">Sortie <select data-mt-k="animOut">${ANIMS_OUT.map(([k, l]) => `<option value="${k}" ${(c.animOut || 'none') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
                 ${rng('animOutDur', 'Durée de la sortie (0 = auto)', 0, 10, 0.1, c.animOutDur || 0, ' s')}
                 <div class="h-mt-quick"><button type="button" data-mt-animprev title="Rejoue ce texte depuis son début">▶ Voir le mouvement</button></div></details>
-                ${rng('dur', 'Durée', 0.5, 30, 0.1, c.dur, ' s')}${rng('size', 'Taille', 2, 20, 0.5, c.size ?? 6, ' %')}
-                <div class="h-avx-row">Police <input type="hidden" data-mt-k="font" value="${esc(c.font || FONTS_V[0][0])}"><button type="button" class="button small secondary" data-mt-fontpick style="${esc(`font-family:${c.font || FONTS_V[0][0]}`)}" title="Choisir la police (recherche, récentes, polices de l’ordinateur)">${esc((FONTS_V.find(f => f[0] === c.font) || [0, String(c.font || 'Georgia').split(',')[0].replace(/"/g, '')])[1])} ▾</button></div>
+                ${sec('place', `📐 ${i18n('Durée, taille et place')}`, `${rng('dur', 'Durée', 0.5, 30, 0.1, c.dur, ' s')}${rng('size', 'Taille', 2, 20, 0.5, c.size ?? 6, ' %')}${rng('x', 'Position horizontale', 0, 100, 1, c.x ?? 50, ' %')}${rng('y', 'Position verticale', 0, 100, 1, c.y ?? 80, ' %')}
+                <label class="h-avx-row">Alignement <select data-mt-k="align">${[['center', 'centré'], ['left', 'à gauche'], ['right', 'à droite']].map(([k, l]) => `<option value="${k}" ${(c.align || 'center') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>`)}
+                ${sec('font', `🔤 ${i18n('Police et couleur')}`, `<div class="h-avx-row">Police <input type="hidden" data-mt-k="font" value="${esc(c.font || FONTS_V[0][0])}"><button type="button" class="button small secondary" data-mt-fontpick style="${esc(`font-family:${c.font || FONTS_V[0][0]}`)}" title="Choisir la police (recherche, récentes, polices de l’ordinateur)">${esc((FONTS_V.find(f => f[0] === c.font) || [0, String(c.font || 'Georgia').split(',')[0].replace(/"/g, '')])[1])} ▾</button></div>
                 <label class="h-avx-row">Couleur <input type="color" value="${esc(c.color || '#ffffff')}" data-mt-k="color"> Fond <input type="color" value="${esc(c.bg || '#000000')}" data-mt-k="bg" ${c.bg ? '' : 'disabled'}><label class="ui-toggle"><input type="checkbox" data-mt-k="hasbg" ${c.bg ? 'checked' : ''}><i></i>bandeau</label></label>
-                ${rng('x', 'Position horizontale', 0, 100, 1, c.x ?? 50, ' %')}${rng('y', 'Position verticale', 0, 100, 1, c.y ?? 80, ' %')}
-                <label class="h-avx-row">Alignement <select data-mt-k="align">${[['center', 'centré'], ['left', 'à gauche'], ['right', 'à droite']].map(([k, l]) => `<option value="${k}" ${(c.align || 'center') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
-                <label class="ui-toggle"><input type="checkbox" data-mt-k="bold" ${c.bold ? 'checked' : ''}><i></i>gras</label><label class="ui-toggle"><input type="checkbox" data-mt-k="shadow" ${c.shadow !== false ? 'checked' : ''}><i></i>ombre</label><label class="ui-toggle"><input type="checkbox" data-mt-k="fade" ${c.fade !== false ? 'checked' : ''}><i></i>entre et sort en fondu</label>`;
-            else item.innerHTML = `<h4>${c.voice ? '🎙 Voix' : '🎵 Son'}</h4><p class="muted" data-i18n-off>${esc(P.sources[c.s]?.title || '')} · ${fmt(c.from)} → ${fmt(c.to)}</p>${chk('voice', '🎙 C’est une voix (la musique baisse toute seule pendant qu’elle parle)', c.voice)}${rng('vol', 'Volume', 0, 2, 0.05, c.vol ?? 1, '%')}${rng('fadeIn', 'Fondu d’entrée', 0, 10, 0.1, c.fadeIn || 0, ' s')}${rng('fadeOut', 'Fondu de sortie', 0, 10, 0.1, c.fadeOut || 0, ' s')}
-                ${beatsHtml(c)}${speedHtml(c)}${trackSel('audio', c)}${clipSound(c)}`;
-            $('[data-mt-pane="color"]').innerHTML = `<h4>🎨 Couleurs de tout le film</h4><p class="muted">S’ajoutent aux couleurs de chaque morceau (onglet Élément).</p>${lookHtml(P.look, 'film')}${oldHtml(P.old, 'pold', 'Vieux film (tout le film)')}`;
-            $('[data-mt-pane="sound"]').innerHTML = `<h4>🔊 Le son de tout le film</h4>${rng('fx.volume', 'Volume général', 0, 3, 0.05, P.fx.volume, '%')}${soundFx('fx', P.fx)}${chk('fx.mute', '🔇 Sans le son', P.fx.mute)}<p class="muted">S’ajoute aux réglages de chaque morceau (onglet 🎯 Élément → « 🔊 Son de ce morceau »).</p>`;
-            $('[data-mt-pane="film"]').innerHTML = `<h4>🎞️ Le film</h4><div class="h-avx-row"><button type="button" class="button small secondary" data-mt-rot="-90">⟲ 90°</button><button type="button" class="button small secondary" data-mt-rot="90">⟳ 90°</button><small class="muted">${P.fx.rotate ? i18n('tourné de {n}°', {n: P.fx.rotate}) : ''}</small></div>
-                <label class="ui-toggle"><input type="checkbox" data-mt-k="fadeStart" ${P.fadeStart ? 'checked' : ''}><i></i>commence par un fondu depuis le noir</label><label class="ui-toggle"><input type="checkbox" data-mt-k="fadeEnd" ${P.fadeEnd ? 'checked' : ''}><i></i>finit par un fondu au noir</label>
-                <h4>📐 Format de l’image</h4><label class="h-avx-row">Format <select data-mt-aspect>${ASPECTS.map(([k, l]) => `<option value="${k}" ${(P.aspect || '') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
+                <label class="ui-toggle"><input type="checkbox" data-mt-k="bold" ${c.bold ? 'checked' : ''}><i></i>gras</label><label class="ui-toggle"><input type="checkbox" data-mt-k="italic" ${c.italic ? 'checked' : ''}><i></i>${i18n('italique')}</label><label class="ui-toggle"><input type="checkbox" data-mt-k="shadow" ${c.shadow !== false ? 'checked' : ''}><i></i>ombre</label><label class="ui-toggle"><input type="checkbox" data-mt-k="fade" ${c.fade !== false ? 'checked' : ''}><i></i>entre et sort en fondu</label>`)}
+                ${sec('outline', `✒️ ${i18n('Contour et ombre')}`, `<label class="h-avx-row">${i18n('Contour')} <input type="color" value="${esc(/^#[0-9a-f]{6}$/i.test(c.stroke || '') ? c.stroke : '#000000')}" data-mt-k="stroke" ${c.stroke ? '' : 'disabled'}><label class="ui-toggle"><input type="checkbox" data-mt-k="hasstroke" ${c.stroke ? 'checked' : ''}><i></i>${i18n('autour des lettres')}</label></label>${c.stroke ? rng('strokeW', i18n('Épaisseur du contour'), 1, 30, 1, c.strokeW ?? 8, ' %') : ''}
+                    ${c.shadow !== false ? `<label class="h-avx-row">${i18n('Couleur de l’ombre')} <input type="color" value="${esc(/^#[0-9a-f]{6}$/i.test(c.shadowC || '') ? c.shadowC : '#000000')}" data-mt-k="shadowC"></label>${rng('shadowS', i18n('Force de l’ombre'), 0.2, 3, 0.1, c.shadowS ?? 1, ' ×')}` : `<p class="ui-hint">${i18n('Allume « ombre » (Police et couleur) pour régler l’ombre.')}</p>`}
+                    <div class="h-mt-quick">${resetBtn('data-mt-txtreset="outline"')}</div>`, !!(c.stroke || c.shadowC || c.shadowS))}
+                ${sec('band', `▭ ${i18n('Bandeau derrière le texte')}`, c.bg ? `${rng('bgA', i18n('Opacité du bandeau'), 0.1, 1, 0.05, c.bgA ?? 0.75, '%')}${rng('bgR', i18n('Coins arrondis'), 0, 100, 5, c.bgR || 0, ' %')}<div class="h-mt-quick">${resetBtn('data-mt-txtreset="band"')}</div>` : `<p class="ui-hint">${i18n('Allume « bandeau » (Police et couleur) : un fond de couleur derrière le texte, plus ou moins transparent, aux coins droits ou arrondis.')}</p>`, !!c.bg)}`;
+            else item.innerHTML = `<h4>${c.voice ? '🎙 Voix' : '🎵 Son'}</h4><p class="muted" data-i18n-off>${esc(P.sources[c.s]?.title || '')} · ${fmt(c.from)} → ${fmt(c.to)}</p>${chk('voice', '🎙 C’est une voix (la musique baisse toute seule pendant qu’elle parle)', c.voice)}${sec('sound', `🔊 ${i18n('Volume')}`, rng('vol', 'Volume', 0, 2, 0.05, c.vol ?? 1, '%'))}${envHtml(c)}
+                ${beatsHtml(c)}${sec('time', `⏱ ${i18n('Vitesse')}`, speedHtml(c) + trackSel('audio', c))}${clipSound(c)}`;
+            $('[data-mt-pane="color"]').innerHTML = `<h4>🎨 Couleurs de tout le film</h4><p class="muted">S’ajoutent aux couleurs de chaque morceau (onglet Élément).</p>${sec('look', `🎨 ${i18n('Couleurs')}`, `${lookHtml(P.look, 'film')}<div class="h-mt-quick">${resetBtn('data-mt-lookreset="film"', i18n('Les couleurs et le vieux film de tout le film reviennent comme au départ'))}</div>`)}${oldHtml(P.old, 'pold', 'Vieux film (tout le film)')}`;
+            $('[data-mt-pane="sound"]').innerHTML = `<h4>🔊 Le son de tout le film</h4>${sec('fx', `🔊 ${i18n('Volume et effets')}`, `${rng('fx.volume', 'Volume général', 0, 3, 0.05, P.fx.volume, '%')}${soundFx('fx', P.fx)}${chk('fx.mute', '🔇 Sans le son', P.fx.mute)}<div class="h-mt-quick">${resetBtn('data-mt-fxreset', i18n('Le son de tout le film revient comme au départ (volume, effets)'))}</div>`)}<p class="muted">S’ajoute aux réglages de chaque morceau (onglet 🎯 Élément → « 🔊 Son de ce morceau »).</p>`;
+            $('[data-mt-pane="film"]').innerHTML = `<h4>🎞️ Le film</h4>${sec('turn', `⟳ ${i18n('Rotation et fondus')}`, `<div class="h-avx-row"><button type="button" class="button small secondary" data-mt-rot="-90">⟲ 90°</button><button type="button" class="button small secondary" data-mt-rot="90">⟳ 90°</button><small class="muted">${P.fx.rotate ? i18n('tourné de {n}°', {n: P.fx.rotate}) : ''}</small></div>
+                <label class="ui-toggle"><input type="checkbox" data-mt-k="fadeStart" ${P.fadeStart ? 'checked' : ''}><i></i>commence par un fondu depuis le noir</label><label class="ui-toggle"><input type="checkbox" data-mt-k="fadeEnd" ${P.fadeEnd ? 'checked' : ''}><i></i>finit par un fondu au noir</label>`)}
+                ${sec('format', '📐 Format de l’image', `<label class="h-avx-row">Format <select data-mt-aspect>${ASPECTS.map(([k, l]) => `<option value="${k}" ${(P.aspect || '') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
                 <label class="ui-toggle"><input type="checkbox" data-mt-k="blurBars" ${P.blurBars ? 'checked' : ''}><i></i>bandes floues au lieu des bandes noires (la même image, floutée, derrière)</label>
-                <h4>🖼️ Photos</h4><label class="ui-toggle"><input type="checkbox" data-mt-k="kbAuto" ${P.kbAuto ? 'checked' : ''}><i></i>effet Ken Burns sur toutes les photos (zoom et glissement lents, variés)</label>
-                <h4>🎙 Musique et voix</h4><label class="ui-toggle"><input type="checkbox" data-mt-duck="on" ${P.duck?.on !== false ? 'checked' : ''}><i></i>la musique baisse toute seule pendant une voix</label>${rng('duck.amount', 'Musique pendant la voix', 0, 1, 0.05, P.duck?.amount ?? 0.3, '%')}<label class="ui-toggle"><input type="checkbox" data-mt-duck="video" ${P.duck?.video ? 'checked' : ''}><i></i>… et aussi pendant le son des vidéos de la piste 1</label>
-                <h4>🔖 Chapitres</h4>${(P.chapters || []).length ? `<ol class="h-mt-chaps">${[...P.chapters].sort((a, b) => a.t - b.t).map(c => `<li><button type="button" class="link-button" data-mt-chapgo="${c.t}">${fmt(c.t, false)}</button> <input value="${esc(c.title)}" data-mt-chapname="${esc(c.id)}"> <button type="button" class="icon-button" data-mt-chapdel="${esc(c.id)}" title="Enlever">✕</button></li>`).join('')}</ol>
-                    <div class="h-mt-quick"><button type="button" data-mt-chapcopy title="La liste « 00:00 Titre » à coller dans la description YouTube">📋 Copier pour YouTube</button><button type="button" data-mt-chapvtt>⬇ Fichier .vtt</button></div>` : '<p class="muted">« 🔖 Chapitre ici » pose un chapitre à la tête de lecture.</p>'}
+`)}
+                ${sec('photos', '🖼️ Photos', `<label class="ui-toggle"><input type="checkbox" data-mt-k="kbAuto" ${P.kbAuto ? 'checked' : ''}><i></i>effet Ken Burns sur toutes les photos (zoom et glissement lents, variés)</label>`)}
+                ${sec('duck', '🎙 Musique et voix', `<label class="ui-toggle"><input type="checkbox" data-mt-duck="on" ${P.duck?.on !== false ? 'checked' : ''}><i></i>la musique baisse toute seule pendant une voix</label>${rng('duck.amount', 'Musique pendant la voix', 0, 1, 0.05, P.duck?.amount ?? 0.3, '%')}<label class="ui-toggle"><input type="checkbox" data-mt-duck="video" ${P.duck?.video ? 'checked' : ''}><i></i>… et aussi pendant le son des vidéos de la piste 1</label>`)}
+                ${sec('chap', '🔖 Chapitres', `${(P.chapters || []).length ? `<ol class="h-mt-chaps">${[...P.chapters].sort((a, b) => a.t - b.t).map(c => `<li><button type="button" class="link-button" data-mt-chapgo="${c.t}">${fmt(c.t, false)}</button> <input value="${esc(c.title)}" data-mt-chapname="${esc(c.id)}"> <button type="button" class="icon-button" data-mt-chapdel="${esc(c.id)}" title="Enlever">✕</button></li>`).join('')}</ol>
+                    <div class="h-mt-quick"><button type="button" data-mt-chapcopy title="La liste « 00:00 Titre » à coller dans la description YouTube">📋 Copier pour YouTube</button><button type="button" data-mt-chapvtt>⬇ Fichier .vtt</button></div>` : '<p class="muted">« 🔖 Chapitre ici » pose un chapitre à la tête de lecture.</p>'}`)}
                 <p class="muted">Durée du film : <b>${fmt(montageEnd(P))}</b></p>`;
+            // E2 : chaque onglet range ses sections à la façon de la personne (ordre et sections ouvertes retenus)
+            arrangePane(item, c ? 'item-' + sel.track : 'item'); ['color', 'sound', 'film'].forEach(k => arrangePane($(`[data-mt-pane="${k}"]`), k));
+        }
+        /* ═════ E2 : sections du panneau de droite, rangées par la personne ═════
+         * Une section = un <details class="h-mt-isec"> posé directement dans un onglet ; ⠿ (glisser, ou Alt + ↑ / ↓) la range ;
+         * l'ordre (par sorte d'élément : vidéo de la piste 1, incrustation, texte, son, couleurs, son du film, film) et les
+         * sections ouvertes ou fermées à la main sont gardés dans PANEL_KEY. Rien de gardé : l'ordre et l'ouverture de départ. */
+        // une section d'avant (stabiliser, fond vert, son de ce morceau…) s'ouvre selon son contenu : on la range, sans retenir son ouverture
+        const secKey = d => d.dataset.mtSec || (d.dataset.mtSecauto = '1', d.dataset.mtSec = ([...d.classList].find(x => x.startsWith('h-mt-') && x !== 'h-mt-isec' && x !== 'h-mt-sec') || 'h-mt-x').slice(5));
+        const secsOf = box => [...(box?.children || [])].filter(el => el.matches('details.h-mt-isec'));
+        function arrangePane(box, kind) {
+            if (!box) return; const secs = secsOf(box); if (!secs.length) return; box.dataset.mtSecs = kind;
+            const pr = panelPrefs(), open = pr.open || {}, saved = Array.isArray(pr.order?.[kind]) ? pr.order[kind] : null;
+            secs.forEach(d => { const k = secKey(d), sm = d.querySelector(':scope > summary');
+                if (sm && !sm.querySelector(':scope > [data-mt-secgrip]') && secs.length > 1) sm.insertAdjacentHTML('afterbegin', `<span class="h-mt-secgrip" data-mt-secgrip tabindex="0" role="button" aria-label="${esc(i18n('Ranger cette section : glisse la poignée, ou Alt + ↑ / ↓'))}" title="${esc(i18n('Ranger cette section : glisse la poignée, ou Alt + ↑ / ↓'))}">⠿</span>`);
+                if (!d.dataset.mtSecauto && Object.prototype.hasOwnProperty.call(open, kind + ':' + k)) d.open = !!open[kind + ':' + k]; });
+            if (!saved?.length) return;
+            // l'ordre gardé ; une section qu'il ne connaît pas reste après celle qui la précède au départ
+            const def = secs.map(secKey), out = saved.filter(k => def.includes(k));
+            def.forEach((k, i) => { if (out.includes(k)) return; const prev = def.slice(0, i).reverse().find(x => out.includes(x)); out.splice(prev ? out.indexOf(prev) + 1 : 0, 0, k); });
+            if (out.join('|') === def.join('|')) return;
+            const marks = secs.map(d => { const m = document.createComment('sec'); d.before(m); return m; }), byKey = new Map(secs.map(d => [secKey(d), d]));
+            marks.forEach((m, i) => { m.replaceWith(byKey.get(out[i])); });
+        }
+        function panelPrefs() { try { const v = JSON.parse(localStorage.getItem(PANEL_KEY) || '{}'); return v && typeof v === 'object' && !Array.isArray(v) ? v : {}; } catch (_) { return {}; } }
+        const panelSave = v => { try { localStorage.setItem(PANEL_KEY, JSON.stringify(v)); } catch (_) {} };
+        const saveOrder = box => { const kind = box?.dataset.mtSecs; if (!kind) return; const pr = panelPrefs(); pr.order = pr.order || {}; pr.order[kind] = secsOf(box).map(secKey); panelSave(pr); };
+        /** Déplace une section d'un cran (Alt + ↑ / ↓) ou devant une autre (glisser) ; l'ordre est gardé tout de suite */
+        const moveSec = (d, dir) => { const list = secsOf(d.parentElement), i = list.indexOf(d), j = i + dir; if (i < 0 || j < 0 || j >= list.length) return false;
+            if (dir < 0) list[j].before(d); else list[j].after(d); saveOrder(d.parentElement); d.classList.add('is-alt-moved'); setTimeout(() => d.classList.remove('is-alt-moved'), 700); return true; };
+        {
+            const side = dl.querySelector('.h-mt-side');
+            // ouverte ou fermée à la main : retenu (un clic sur le titre, au clavier aussi)
+            side.addEventListener('click', e => {
+                if (e.target.closest('[data-mt-secgrip]')) { e.preventDefault(); return; } // la poignée ne replie pas la section
+                const sm = e.target.closest('summary'), d = sm?.parentElement; if (!d?.matches('details.h-mt-isec') || d.dataset.mtSecauto || !d.parentElement?.dataset.mtSecs || e.target.closest('input, button, select, [data-help]')) return;
+                setTimeout(() => { const pr = panelPrefs(); pr.open = pr.open || {}; pr.open[d.parentElement.dataset.mtSecs + ':' + secKey(d)] = d.open; panelSave(pr); }, 0);
+            }, true);
+            side.addEventListener('keydown', e => {
+                const g = e.target.closest?.('[data-mt-secgrip]'); if (!g || !e.altKey || (e.key !== 'ArrowUp' && e.key !== 'ArrowDown')) { if (g && (e.key === 'Enter' || e.key === ' ')) e.preventDefault(); return; }
+                e.preventDefault(); e.stopPropagation(); const d = g.closest('details'); if (moveSec(d, e.key === 'ArrowUp' ? -1 : 1)) g.focus();
+            });
+            side.addEventListener('pointerdown', e => {
+                const g = e.target.closest('[data-mt-secgrip]'); if (!g || e.button) return; e.preventDefault();
+                const d = g.closest('details'), box = d.parentElement; d.classList.add('is-dragging'); let target = null, after = false;
+                const mv = ev => { const list = secsOf(box).filter(x => x !== d); target?.classList.remove('is-drop-before', 'is-drop-after'); target = list.find(x => { const r = x.getBoundingClientRect(); return ev.clientY < r.bottom; }) || list.at(-1);
+                    if (!target) return; const r = target.getBoundingClientRect(); after = ev.clientY > r.top + r.height / 2; target.classList.add(after ? 'is-drop-after' : 'is-drop-before'); };
+                const up = () => { document.removeEventListener('pointermove', mv); document.removeEventListener('pointerup', up); d.classList.remove('is-dragging');
+                    if (!target) return; target.classList.remove('is-drop-before', 'is-drop-after'); if (after) target.after(d); else target.before(d); saveOrder(box); };
+                document.addEventListener('pointermove', mv); document.addEventListener('pointerup', up);
+            });
         }
         // réglages → modèle
         const setK = (obj, k, v) => { const ks = k.split('.'); let o = obj; ks.slice(0, -1).forEach(x => { o[x] = o[x] || {}; o = o[x]; }); o[ks.at(-1)] = v; };
-        const audioFx = k => /^(fx\.(clarity|noise|mute|volume|bass|treble|mono)$|afx\.)/.test(k);
+        const audioFx = k => /^(fx\.(clarity|noise|mute|volume|bass|treble|mono|comp|reverb|room|pan)$|afx\.)/.test(k);
         // E5 : la police d'un titre, dans la fenêtre commune des polices
         dl.querySelector('.h-mt-side').addEventListener('click', async e => {
             const b = e.target.closest('[data-mt-fontpick]'); if (!b || !UIx().openFontPicker) return;
@@ -1316,7 +1393,9 @@
             else if (k.startsWith('pold.')) { P.old = P.old && typeof P.old === 'object' ? P.old : {}; setK(P.old, k.slice(5), v); if (k === 'pold.on') { touch(0); return; } }
             else if (k.startsWith('fx.') || ['fadeStart', 'fadeEnd', 'blurBars', 'kbAuto'].includes(k) || k.startsWith('duck.')) { if (k.startsWith('duck.')) P.duck = P.duck || {on: true, amount: 0.3}; setK(P, k, v); }
             else if (c) {
-                if (k === 'hasbg') { c.bg = v ? (dl.querySelector('[data-mt-k="bg"]').value || '#000000') : ''; dl.querySelector('[data-mt-k="bg"]').disabled = !v; }
+                if (k === 'hasbg') { c.bg = v ? (dl.querySelector('[data-mt-k="bg"]').value || '#000000') : ''; dl.querySelector('[data-mt-k="bg"]').disabled = !v; touch(0); return; } // le bandeau a sa section (opacité, coins)
+                else if (k === 'hasstroke') { c.stroke = v ? (dl.querySelector('[data-mt-k="stroke"]')?.value || '#000000') : ''; if (v && !c.strokeW) c.strokeW = 8; touch(0); return; }
+                else if (k === 'shadow') { c.shadow = v; touch(0); return; }
                 else if (k === 'track') { c.track = v; touch(1); return; }
                 else if (k === 'anim' || k === 'loop') { if (c.anim === 'scroll') { c.anim = 'none'; if (!c.loop) c.loop = 'scroll'; } c[k] = v; }
                 else if (k === 'speedn') { const v2 = Number(String(v).replace(',', '.')); if (!(v2 > 0)) return; c.speed = Math.max(0.1, Math.min(10, v2)); syncSpeed(c, el); touch(1, false); return; }
@@ -1380,6 +1459,14 @@
             const idur = e.target.closest('[data-mt-imgdur]'); if (idur) { const c = selected(); if (c) { c.to = c.from + Number(idur.dataset.mtImgdur); touch(1); } return; }
             if (e.target.closest('[data-mt-afxall]')) { const c = selected(); if (!c) return; const f = {...(c.afx || {})}; [...P.v1, ...P.v2, ...P.audio].forEach(x => { if (!isImg(x)) x.afx = {...f}; }); toast('Réglages du son mis sur tous les sons du projet.'); touch(2); return; }
             if (e.target.closest('[data-mt-afxreset]')) { const c = selected(); if (c) { delete c.afx; touch(2); } return; }
+            // ↺ remettre comme au départ (H7 : tout de suite, avec « ↶ Annuler »)
+            const lr = e.target.closest('[data-mt-lookreset]'); if (lr) { if (lr.dataset.mtLookreset === 'film') { P.look = {...LOOK0}; delete P.old; } else { const c = selected(); if (!c) return; c.look = {}; delete c.old; } const r = touch(0); undoable(i18n('Couleurs remises comme au départ')); return r; }
+            if (e.target.closest('[data-mt-fxreset]')) { P.fx = {volume: 1, clarity: false, noise: false, mute: false, rotate: P.fx.rotate || 0}; const r = touch(2); undoable(i18n('Son du film remis comme au départ')); return r; }
+            const tr0 = e.target.closest('[data-mt-txtreset]'); if (tr0) { const c = selected(); if (!c || sel?.track !== 'texts') return; (tr0.dataset.mtTxtreset === 'band' ? ['bgA', 'bgR'] : ['stroke', 'strokeW', 'shadowC', 'shadowS']).forEach(k => delete c[k]); const r = touch(0); undoable(i18n('Texte remis comme au départ')); return r; }
+            // 📈 courbe du volume d'un morceau
+            if (e.target.closest('[data-mt-envedit]')) { envEdit = !envEdit; drawTl(); if (envEdit) toast(i18n('✎ Clique sur le morceau, dans la frise, pour poser un point ; glisse un point pour le déplacer ; double-clic pour l’enlever.')); return; }
+            if (e.target.closest('[data-mt-envadd]')) { const c = selected(); if (!c) return; if (isLocked(sel.track, c)) return lockToast(); const local = Math.round(localOf(c) * 1000) / 1000; c.env = (c.env || []).filter(q => Math.abs(q.t - local) > 0.01); c.env.push({t: local, v: Math.round(AE.autoAt(c.env, local, 1) * 100) / 100}); c.env.sort((a, b) => a.t - b.t); return touch(0); }
+            if (e.target.closest('[data-mt-envclear]')) { const c = selected(); if (!c) return; delete c.env; const r = touch(0); undoable(i18n('Courbe du volume effacée')); return r; }
             const rot = e.target.closest('[data-mt-rot]'); if (rot) { P.fx.rotate = (P.fx.rotate + Number(rot.dataset.mtRot) + 360) % 360; touch(2); }
             const kb = e.target.closest('[data-mt-kf]');
             if (kb) { const c = selected(); if (!c) return; const k = kb.dataset.mtKf, local = localOf(c); c.kf = c.kf || {}; const list = c.kf[k] = c.kf[k] || [], i = kfAt(c, k, local);
@@ -1437,7 +1524,7 @@
         const boxOf = (track, c) => {
             const W = cv.width, H = cv.height, t = eng?.t || 0;
             if (track === 'v2') { if (t < c.at || t >= c.at + clen(c)) return null; const s = eng.videoSize(c.id) || {vw: 16, vh: 9}; return v2Box(c, s.vw, s.vh, W, H); }
-            if (track === 'texts') { if (t < c.at || t >= c.at + c.dur) return null; const size = (c.size || 6) / 100 * Math.min(H, W), lines = String(c.text || ' ').split('\n'); measure.font = `${c.bold ? '700 ' : ''}${size}px ${c.font || 'Georgia, serif'}`;
+            if (track === 'texts') { if (t < c.at || t >= c.at + c.dur) return null; const size = (c.size || 6) / 100 * Math.min(H, W), lines = String(c.text || ' ').split('\n'); measure.font = `${c.italic ? 'italic ' : ''}${c.bold ? '700 ' : ''}${size}px ${c.font || 'Georgia, serif'}`;
                 const w = Math.max(...lines.map(l => measure.measureText(l).width)) + size, h = lines.length * size * 1.25 + size * 0.3, cx = (c.x ?? 50) / 100 * W, cy = (c.y ?? 80) / 100 * H;
                 return {x: c.align === 'left' ? cx - size / 2 : c.align === 'right' ? cx - w + size / 2 : cx - w / 2, y: cy - h / 2, w, h}; }
             return null;
@@ -1475,8 +1562,29 @@
             cv.style.cursor = b && px >= b.x + b.w - hs && px <= b.x + b.w + hs && py >= b.y + b.h - hs && py <= b.y + b.h + hs ? 'nwse-resize' : [...P.texts.map(x => ['texts', x]), ...P.v2.map(x => ['v2', x])].some(([tr, x]) => { const bb = boxOf(tr, x); return bb && px >= bb.x && px <= bb.x + bb.w && py >= bb.y && py <= bb.y + bb.h; }) ? 'move' : ''; });
         // frise : choisir, se placer, déplacer
         const tl = $('[data-mt-tl]');
+        /** 📈 Pose ou déplace un point de la courbe du volume (en haut : plus fort, jusqu'à 200 % ; au milieu : 100 %) ; double-clic : l'enlève */
+        let envLast = {i: -1, at: 0};
+        function envDrag(e, envEl) {
+            const [track, id] = envEl.dataset.mtEnv.split(':'), c = all().find(([tr, x]) => tr === track && x.id === id)?.[1]; if (!c) return;
+            if (isLocked(track, c)) return lockToast();
+            const r = envEl.getBoundingClientRect(), sp = spd(c), len = clen(c);
+            const tOf = ev => Math.round((c.from + Math.max(0, Math.min(len, (ev.clientX - r.left) / pxs)) * sp) * 1000) / 1000;
+            const vOf = ev => { let v = Math.max(0, Math.min(2, (1 - (ev.clientY - r.top) / Math.max(1, r.height)) * 2)); if (Math.abs(v - 1) < 0.06) v = 1; return Math.round(v * 100) / 100; };
+            c.env = c.env || [];
+            const ptEl = e.target.closest('[data-mt-envpt]'); let pt = ptEl ? c.env[Number(ptEl.dataset.mtEnvpt)] : null;
+            if (pt && envLast.pt === pt && performance.now() - envLast.at < 450) { c.env.splice(c.env.indexOf(pt), 1); if (!c.env.length) delete c.env; envLast = {}; touch(0); return; } // double-clic : enlevé
+            if (!pt) { pt = {t: tOf(e), v: vOf(e)}; c.env.push(pt); c.env.sort((a, b) => a.t - b.t); }
+            envLast = ptEl ? {pt, at: performance.now()} : {}; // un double-clic se compte sur un point déjà là
+            let raf = 0, moved = false; const x0 = e.clientX, y0 = e.clientY;
+            const mv = ev => { if (!moved && Math.abs(ev.clientX - x0) + Math.abs(ev.clientY - y0) < 3) return; moved = true; envLast = {}; pt.t = tOf(ev); pt.v = vOf(ev); c.env.sort((a, b) => a.t - b.t);
+                if (!raf) raf = requestAnimationFrame(() => { raf = 0; drawTl(false); }); };
+            const up = () => { document.removeEventListener('pointermove', mv); document.removeEventListener('pointerup', up); cancelAnimationFrame(raf); touch(0); };
+            document.addEventListener('pointermove', mv); document.addEventListener('pointerup', up);
+            drawTl(false);
+        }
         tl.addEventListener('pointerdown', e => {
             window.getSelection()?.removeAllRanges(); // un texte sélectionné ailleurs ne part pas en glisser-déposer
+            const envEl = e.target.closest('[data-mt-env].is-edit'); if (envEl) { e.preventDefault(); envDrag(e, envEl); return; } // 📈 un point de volume
             const clip = e.target.closest('[data-mt-clip]'), x0 = e.clientX, inner = tl.querySelector('.h-mt-tlin'), r = inner.getBoundingClientRect();
             const cg = e.target.closest('[data-mt-chapgo]'); if (cg) { e.preventDefault(); eng.seek(Number(cg.dataset.mtChapgo)); return; }
             if (!clip) { if (e.target.closest('.h-mt-lname, .h-mt-addtracks')) return; eng.seek((e.clientX - r.left - OFF) / pxs); return; }
@@ -1954,7 +2062,7 @@
             ['Ajouter', [['import', '⤒ Importer des rushes (vidéos, photos, sons)…'], ['multicam', '🎥 Plusieurs caméras (calées par le son)…'], ['base', '🗂 Un rush de la base…'], ['-'], ['op:addv1', '＋ Vidéo / photo à la suite'], ['op:addv2', '＋ Incrustation'], ['op:addtext', '＋ Titre / texte'], ['op:adda', '＋ Son / musique'], ['-'], ['op:voice', '🎙 Enregistrer une voix off'], ['op:sub', '💬 Sous-titre ici'], ['subimport', '⤒ Importer des sous-titres (.srt, .vtt)…'], ['op:chapter', '🔖 Chapitre ici'], ['-'], ['tpl:life', '🪄 Modèle « La vie de… »'], ['tpl:family', '🪄 Modèle « Une famille »']]],
             ['Pistes', [['track:v', '＋ Piste vidéo'], ['track:t', '＋ Piste texte'], ['track:a', '＋ Piste son']]],
             ['Lecture', [['play', '▶ Lire / pause', 'Espace'], ['home', '⏮ Au début'], ['-'], ['op:kfprev', '◀ ◆ Image clé précédente'], ['op:kfnext', '◆ ▶ Image clé suivante'], ['-'], ['snap', '🧲 Aimanter (marche / arrêt)']]],
-            ['Affichage', [['tab:rush', '🎞️ Rushes'], ['tab:item', '🎯 Élément choisi'], ['tab:color', '🎨 Couleurs du film'], ['tab:sound', '🔊 Son du film'], ['tab:film', '🎞️ Le film (rotation, fondus)'], ['scope', '🎯 Vectorscope et histogramme'], ['-'], ['zoom:in', 'Zoom avant sur la frise', '⌘+'], ['zoom:out', 'Zoom arrière sur la frise', '⌘−'], ['zoom:0', 'Zoom de départ', '⌘0'], ['-'], ['tbtn:up', 'Boutons des pistes : plus grands'], ['tbtn:down', 'Boutons des pistes : plus petits'], ['tbtn:0', 'Boutons des pistes : taille de départ'], ['-'], ['full', '⛶ Plein écran']]],
+            ['Affichage', [['tab:rush', '🎞️ Rushes'], ['tab:item', '🎯 Élément choisi'], ['tab:color', '🎨 Couleurs du film'], ['tab:sound', '🔊 Son du film'], ['tab:film', '🎞️ Le film (rotation, fondus)'], ['scope', '🎯 Vectorscope et histogramme'], ['-'], ['zoom:in', 'Zoom avant sur la frise', '⌘+'], ['zoom:out', 'Zoom arrière sur la frise', '⌘−'], ['zoom:0', 'Zoom de départ', '⌘0'], ['-'], ['tbtn:up', 'Boutons des pistes : plus grands'], ['tbtn:down', 'Boutons des pistes : plus petits'], ['tbtn:0', 'Boutons des pistes : taille de départ'], ['tbtn:s', i18n('Boutons des pistes : petits')], ['tbtn:l', i18n('Boutons des pistes : grands')], ['-'], ['secreset', i18n('Sections du panneau de droite : ↺ Remettre comme au départ')], ['-'], ['full', '⛶ Plein écran']]],
         ];
         const head = dl.querySelector('.modal-head');
         head?.querySelector(':scope > div')?.insertAdjacentHTML('afterend', `<nav class="h-rt-menubar h-mt-menubar">${MT_MENUS.map(([l, items]) => `<details class="h-rt-menu"><summary>${l}</summary><div class="h-rt-menulist">${items.map(([k, t, sc]) => k === '-' ? '<hr>' : `<button type="button" data-mt-cmd="${k}"><span>${esc(t)}</span>${sc ? `<kbd>${sc}</kbd>` : ''}</button>`).join('')}</div></details>`).join('')}</nav>`);
@@ -1978,13 +2086,16 @@
             if (a === 'zoom') return ext.editorZoom?.(v === 'in' ? 1 : v === 'out' ? -1 : 0);
             if (k === 'full') return q('[data-full-toggle]');
             if (a === 'tbtn') { // a) boutons des pistes : réglage gardé tout de suite (K2), « ↶ Annuler » dans le message
-                const cur = montagePrefs().tbtn || TBTN0, nx = v === '0' ? 0 : Math.max(16, Math.min(44, cur + (v === 'up' ? 4 : -4)));
-                if ((nx || TBTN0) === cur) return toast(v === '0' ? i18n('Les boutons des pistes ont déjà leur taille de départ.') : v === 'up' ? i18n('Les boutons des pistes sont déjà au plus grand.') : i18n('Les boutons des pistes sont déjà au plus petit.'));
+                const cur = montagePrefs().tbtn || TBTN0, nx = v === '0' ? 0 : v === 's' ? TBTN_S : v === 'l' ? TBTN_L : Math.max(16, Math.min(44, cur + (v === 'up' ? 4 : -4))); // petits · moyens (départ) · grands
+                if ((nx || TBTN0) === cur) return toast(v === '0' ? i18n('Les boutons des pistes ont déjà leur taille de départ.') : v === 's' || v === 'l' ? i18n('Les boutons des pistes ont déjà cette taille.') : v === 'up' ? i18n('Les boutons des pistes sont déjà au plus grand.') : i18n('Les boutons des pistes sont déjà au plus petit.'));
                 const redo = () => { applyTbtn(montagePrefs().tbtn); drawTl(); mtBar?.sync(); };
                 A().undoLocalChange(nx ? i18n('Boutons des pistes : {n} px', {n: nx}) : i18n('Boutons des pistes : {n} px (taille de départ)', {n: TBTN0}), [MT_KEY], () => { let cfg = {}; try { cfg = JSON.parse(localStorage.getItem(MT_KEY) || '{}') || {}; } catch (_) {} cfg.tbtn = nx; try { localStorage.setItem(MT_KEY, JSON.stringify(cfg)); } catch (_) {} }, redo);
                 return redo();
             }
             if (k === 'keys') return keysDialog();
+            if (k === 'secreset') { // E2 : l'ordre et l'ouverture de départ des sections, « ↶ Annuler » dans le message
+                if (!(() => { try { return localStorage.getItem(PANEL_KEY); } catch (_) { return null; } })()) return toast(i18n('Les sections du panneau de droite sont déjà comme au départ.'));
+                return A().undoLocalChange(i18n('Sections du panneau de droite remises comme au départ'), [PANEL_KEY], () => { try { localStorage.removeItem(PANEL_KEY); } catch (_) {} drawPane(); }, () => drawPane()); }
             if (k === 'scope') return ext.montageScope?.(dl, cv);
             if (k === 'subexport') return exportSubs();
             if (k === 'chapcopy') { if (!(P.chapters || []).length) return toast('Aucun chapitre : « 🔖 Chapitre ici ».', 'error'); const txt = chaptersText(); navigator.clipboard?.writeText(txt).then(() => toast('Chapitres copiés.'), () => prompt('Copie ce texte :', txt)); return; }
@@ -2100,6 +2211,7 @@
                     <label>Hauteur de l’image<span class="h-mtp-range"><input type="range" min="25" max="80" value="${p.stage}" data-mtp="stage"><output>${p.stage} %</output></span></label>
                     <label>Hauteur des pistes<span class="h-mtp-range"><input type="range" min="28" max="70" value="${p.lane}" data-mtp="lane"><output>${p.lane} px</output></span></label>
                     <label title="Les petits boutons au début de chaque piste (👁 cacher, 🔓 verrouiller, ↑ ↓ ranger, 🗑 supprimer) — aussi dans le montage : Affichage → Boutons des pistes">Taille des boutons des pistes<span class="h-mtp-range"><input type="range" min="16" max="44" value="${p.tbtn || TBTN0}" data-mtp="tbtn"><output>${p.tbtn || TBTN0} px</output></span></label>
+                    <div class="h-mt-quick h-mtp-tbtnq" role="group" aria-label="${esc(i18n('Taille des boutons des pistes'))}">${[[TBTN_S, i18n('Petits')], [TBTN0, i18n('Moyens (départ)')], [TBTN_L, i18n('Grands')]].map(([n, l]) => `<button type="button" data-mtp-tbtn="${n}" class="${(p.tbtn || TBTN0) === n ? 'is-on' : ''}">${l}</button>`).join('')}</div>
                     </div>
                     <h4>🎨 Couleur des blocs sur la frise</h4><div class="h-mtp-colors">${MT_COLORS.map(([k, l]) => `<label class="h-mtp-color"><input type="color" data-mtp="${k}" value="${esc(p[k])}"> <span class="h-mtp-swatch" data-mtp-sw="${k}" style="background:${esc(p[k])};color:${inkOn(p[k])}">${esc(l)}</span></label>`).join('')}</div>
                     <button type="button" class="button small secondary" data-mtp-colreset>Couleurs de départ</button>
@@ -2221,6 +2333,7 @@
             const li = e.target.closest('li');
             if (e.target.closest('[data-up]') && li?.previousElementSibling) li.parentNode.insertBefore(li, li.previousElementSibling);
             if (e.target.closest('[data-down]') && li?.nextElementSibling) li.parentNode.insertBefore(li.nextElementSibling, li);
+            const tq = e.target.closest('[data-mtp-tbtn]'); if (tq) { const el = ws.querySelector('[data-mtp="tbtn"]'); if (el) { el.value = tq.dataset.mtpTbtn; el.dispatchEvent(new Event('input', {bubbles: true})); el.dispatchEvent(new Event('change', {bubbles: true})); } ws.querySelectorAll('[data-mtp-tbtn]').forEach(b => b.classList.toggle('is-on', b === tq)); return; }
             if (e.target.closest('[data-mtp-colreset]')) { MT_COLORS.forEach(([k, , d]) => { const el = ws.querySelector(`[data-mtp="${k}"]`); if (el) { el.value = d; el.dispatchEvent(new Event('input', {bubbles: true})); } });  return; }
             if (e.target.closest('[data-mtp-reset]')) { const all = lsJson('genealogie-toolbars', {}); delete all[which]; writeJson('genealogie-toolbars', all); toast('Boutons remis comme au départ.'); draw(); }
         }, {signal: ac.signal});
