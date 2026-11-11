@@ -1,0 +1,642 @@
+fr ¦ cs ¦ sv ¦ da
+# ═════ Zone « outils2 » : calculette, transcription, aide à la lecture, sciences, lots, outils ═════
+son importé ¦ importovaný zvuk ¦ importerat ljud ¦ importeret lyd
+⚠ fichier de travail introuvable ¦ ⚠ pracovní soubor nenalezen ¦ ⚠ arbetsfilen hittades inte ¦ ⚠ arbejdsfilen blev ikke fundet
+Une vieille cassette ou un dictaphone : souffle, bourdonnement, voix, volume, début et fin, pas à pas ¦ Stará kazeta nebo diktafon: šum, brum, hlas, hlasitost, začátek a konec, krok za krokem ¦ En gammal kassett eller diktafon: brus, brum, röst, volym, början och slut, steg för steg ¦ Et gammelt kassettebånd eller en diktafon: sus, brum, stemme, lydstyrke, start og slutning, trin for trin
+Sauver une vieille cassette ¦ Zachránit starou kazetu ¦ Rädda en gammal kassett ¦ Red et gammelt kassettebånd
+Une lettre lue, un souvenir raconté : le son entre dans les médias puis s’ouvre dans le Studio son ¦ Přečtený dopis, vyprávěná vzpomínka: zvuk se uloží do médií a otevře se ve Zvukovém studiu ¦ Ett uppläst brev, ett berättat minne: ljudet hamnar i media och öppnas sedan i Ljudstudion ¦ Et oplæst brev, et fortalt minde: lyden kommer ind i medierne og åbnes derefter i Lydstudiet
+Un son de la base, nettoyé en deux minutes ¦ Zvuk z databáze, vyčištěný za dvě minuty ¦ Ett ljud från databasen, rengjort på två minuter ¦ En lyd fra databasen, renset på to minutter
+Son rapide… ¦ Rychlý zvuk… ¦ Snabbljud… ¦ Hurtig lyd…
+⚠ photo de départ introuvable ¦ ⚠ původní fotka nenalezena ¦ ⚠ originalfotot hittades inte ¦ ⚠ det oprindelige foto blev ikke fundet
+Une image vide (blanche, transparente ou d’une couleur), à la taille voulue, pour dessiner, écrire ou assembler des calques ¦ Prázdný obrázek (bílý, průhledný nebo jednobarevný) v požadované velikosti, na kreslení, psaní nebo skládání vrstev ¦ En tom bild (vit, genomskinlig eller i en färg) i den storlek du vill, för att rita, skriva eller sätta ihop lager ¦ Et tomt billede (hvidt, gennemsigtigt eller i én farve) i den ønskede størrelse, til at tegne, skrive eller samle lag
+Canevas vide ¦ Prázdné plátno ¦ Tom duk ¦ Tomt lærred
+Une vieille photo abîmée : redresser, couleurs, taches, déchirures, visages, colorisation, pas à pas ¦ Stará poškozená fotka: narovnání, barvy, skvrny, trhliny, obličeje, kolorování, krok za krokem ¦ Ett gammalt skadat foto: räta upp, färger, fläckar, revor, ansikten, färgläggning, steg för steg ¦ Et gammelt beskadiget foto: ret op, farver, pletter, rifter, ansigter, farvelægning, trin for trin
+Restaurer une vieille photo ¦ Obnovit starou fotku ¦ Restaurera ett gammalt foto ¦ Restaurer et gammelt foto
+Le portrait de plusieurs fiches recadré au même format (yeux à la même hauteur), puis utilisé comme portrait ¦ Portrét několika karet oříznutý na stejný formát (oči ve stejné výšce) a pak použitý jako portrét ¦ Porträttet för flera poster beskuret till samma format (ögonen i samma höjd) och sedan använt som porträtt ¦ Portrættet på flere poster beskåret til samme format (øjnene i samme højde) og derefter brugt som portræt
+Portraits d’identité ¦ Průkazové portréty ¦ Passfoton ¦ Pasfotos
+Nouveau blason ¦ Nový erb ¦ Nytt vapen ¦ Nyt våbenskjold
+Blason ¦ Erb ¦ Vapen ¦ Våbenskjold
+Livre vide ¦ Prázdná kniha ¦ Tom bok ¦ Tom bog
+Ouvrir l’atelier ¦ Otevřít dílnu ¦ Öppna verkstaden ¦ Åbn værkstedet
+OUTILS DE MODIFICATION ¦ NÁSTROJE ÚPRAV ¦ REDIGERINGSVERKTYG ¦ REDIGERINGSVÆRKTØJER
+Ranger les outils ¦ Uspořádat nástroje ¦ Ordna verktygen ¦ Arrangér værktøjerne
+Range les onglets avec la poignée ⠿ (ou Alt + ↑ / ↓) et décoche ceux que tu ne veux pas voir. ¦ Uspořádej karty úchytem ⠿ (nebo Alt + ↑ / ↓) a odškrtni ty, které nechceš vidět. ¦ Ordna flikarna med handtaget ⠿ (eller Alt + ↑ / ↓) och avmarkera dem du inte vill se. ¦ Arrangér fanerne med håndtaget ⠿ (eller Alt + ↑ / ↓), og fjern markeringen ved dem, du ikke vil se.
+Garde au moins un outil : coche celui que tu veux voir. ¦ Ponech aspoň jeden nástroj: zaškrtni ten, který chceš vidět. ¦ Behåll minst ett verktyg: markera det du vill se. ¦ Behold mindst ét værktøj: markér det, du vil se.
+Garde au moins un outil. ¦ Ponech aspoň jeden nástroj. ¦ Behåll minst ett verktyg. ¦ Behold mindst ét værktøj.
+{shown} sur {n} ¦ {shown} z {n} ¦ {shown} av {n} ¦ {shown} af {n}
+Aucun projet pour « {q} » ¦ Žádný projekt pro „{q}“ ¦ Inget projekt för ”{q}” ¦ Intet projekt for »{q}«
+Vérifie l’orthographe, ou cherche un autre mot (nom, photo, détails). ¦ Zkontroluj pravopis nebo hledej jiné slovo (název, fotka, podrobnosti). ¦ Kontrollera stavningen eller sök efter ett annat ord (namn, foto, detaljer). ¦ Tjek stavningen, eller søg efter et andet ord (navn, foto, detaljer).
+Effacer la recherche ¦ Vymazat hledání ¦ Rensa sökningen ¦ Ryd søgningen
+Aucun projet de {what} pour l’instant ¦ Zatím žádný projekt typu {what} ¦ Inget projekt av typen {what} ännu ¦ Endnu intet projekt af typen {what}
+projet|montage ¦ střih videa ¦ videoredigering ¦ videoredigering
+projet|son ¦ zvuk ¦ ljud ¦ lyd
+projet|retouche ¦ úprava fotek ¦ fotoredigering ¦ fotoredigering
+projet|dessin ¦ kresba ¦ teckning ¦ tegning
+projet|livre ¦ kniha ¦ bok ¦ bog
+projet|tableau ¦ tabule ¦ tavla ¦ tavle
+projet|cousinade ¦ rodinné setkání ¦ släktträff ¦ slægtsstævne
+projet|maison ¦ dům ¦ hus ¦ hus
+projet|traitement par lot ¦ hromadné zpracování ¦ batchbearbetning ¦ batchbehandling
+projet|comparaison de photos ¦ porovnání fotek ¦ fotojämförelse ¦ fotosammenligning
+projet|site ¦ web ¦ webbplats ¦ websted
+projet|présentation ou de diaporama ¦ prezentace nebo prezentace fotek ¦ presentation eller bildspel ¦ præsentation eller diasshow
+projet|document ¦ dokument ¦ dokument ¦ dokument
+projet|transcription ¦ přepis ¦ transkription ¦ transskription
+projet|faire-part ¦ oznámení ¦ kort ¦ meddelelseskort
+projet|carte ¦ mapa ¦ karta ¦ kort
+projet|signature ou sceau ¦ podpis nebo pečeť ¦ signatur eller sigill ¦ underskrift eller segl
+projet|arbre ¦ strom ¦ träd ¦ træ
+Les projets des outils de l’app : choisis un outil, puis ouvre, cherche, trie, renomme ou commence un projet. ¦ Projekty nástrojů aplikace: vyber nástroj a pak otevři, hledej, řaď, přejmenuj nebo začni projekt. ¦ Projekten i appens verktyg: välj ett verktyg och öppna, sök, sortera, byt namn på eller starta sedan ett projekt. ¦ Projekterne i appens værktøjer: vælg et værktøj, og åbn, søg, sortér, omdøb eller start derefter et projekt.
+Une calculette flottante (simple, scientifique, courbes, mesures anciennes, dates des actes), qui reste ouverte au-dessus de l’app ¦ Plovoucí kalkulačka (jednoduchá, vědecká, grafy, staré míry, data záznamů), která zůstává otevřená nad aplikací ¦ En flytande miniräknare (enkel, vetenskaplig, kurvor, gamla mått, datum i handlingar) som ligger öppen ovanpå appen ¦ En flydende lommeregner (enkel, videnskabelig, kurver, gamle mål, datoer i dokumenter), der bliver åben oven på appen
+projets ¦ projekty ¦ projekt ¦ projekter
+Projet renommé. ¦ Projekt přejmenován. ¦ Projektet har bytt namn. ¦ Projektet er omdøbt.
+Les photos, vidéos et sons restent dans les Médias. ¦ Fotky, videa a zvuky zůstávají v Médiích. ¦ Foton, videor och ljud ligger kvar i Media. ¦ Fotos, videoer og lyde bliver i Medier.
+=projet ¦ projekt|projekty|projektů ¦ projekt|projekt ¦ projekt|projekter
+＋ Nouvelle retouche ¦ ＋ Nová úprava fotky ¦ ＋ Ny fotoredigering ¦ ＋ Ny fotoredigering
+＋ Nouveau dessin ¦ ＋ Nová kresba ¦ ＋ Ny teckning ¦ ＋ Ny tegning
+＋ Nouveau livre ¦ ＋ Nová kniha ¦ ＋ Ny bok ¦ ＋ Ny bog
+＋ Nouveau traitement ¦ ＋ Nové zpracování ¦ ＋ Ny bearbetning ¦ ＋ Ny behandling
+＋ Nouvelle comparaison ¦ ＋ Nové porovnání ¦ ＋ Ny jämförelse ¦ ＋ Ny sammenligning
+Ce calcul est trop long : je m’arrête là. ¦ Tento výpočet je příliš dlouhý: tady končím. ¦ Den här beräkningen är för lång: jag stannar här. ¦ Denne beregning er for lang: jeg stopper her.
+Essaie avec des nombres plus petits ou moins d’étapes. ¦ Zkus menší čísla nebo méně kroků. ¦ Försök med mindre tal eller färre steg. ¦ Prøv med mindre tal eller færre trin.
+Division par zéro : on ne peut pas diviser par 0. ¦ Dělení nulou: nulou dělit nelze. ¦ Division med noll: man kan inte dela med 0. ¦ Division med nul: man kan ikke dividere med 0.
+Nombre trop grand pour être calculé. ¦ Číslo je příliš velké na výpočet. ¦ Talet är för stort för att beräknas. ¦ Tallet er for stort til at blive beregnet.
+Liste trop longue (plus de {list} nombres). ¦ Seznam je příliš dlouhý (víc než {list} čísel). ¦ Listan är för lång (fler än {list} tal). ¦ Listen er for lang (mere end {list} tal).
+Matrice trop grande (au plus {mat} × {mat2}). ¦ Matice je příliš velká (nejvýš {mat} × {mat2}). ¦ Matrisen är för stor (högst {mat} × {mat2}). ¦ Matricen er for stor (højst {mat} × {mat2}).
+{what} : il faut des nombres ici{x}. ¦ {what}: tady musí být čísla{x}. ¦ {what}: här behövs tal{x}. ¦ {what}: her skal der være tal{x}.
+(« {text} » est un résultat écrit en mots) ¦ („{text}“ je výsledek zapsaný slovy) ¦ (”{text}” är ett resultat skrivet med ord) ¦ (»{text}« er et resultat skrevet med ord)
+Les deux listes n’ont pas la même longueur ({n} et {n2}). ¦ Oba seznamy nemají stejnou délku ({n} a {n2}). ¦ De två listorna är inte lika långa ({n} och {n2}). ¦ De to lister er ikke lige lange ({n} og {n2}).
+On ne peut pas ajouter un nombre et une matrice. ¦ Číslo a matici nelze sečíst. ¦ Man kan inte addera ett tal och en matris. ¦ Man kan ikke lægge et tal og en matrix sammen.
+Pour multiplier chaque case, utilise « × ». ¦ Chceš-li násobit každé pole, použij „ד. ¦ Använd ”×” för att multiplicera varje ruta. ¦ Brug »×« for at gange hver celle.
+Les deux matrices n’ont pas la même taille ({r} × {c} et {r2} × {c2}). ¦ Obě matice nemají stejnou velikost ({r} × {c} a {r2} × {c2}). ¦ De två matriserna har inte samma storlek ({r} × {c} och {r2} × {c2}). ¦ De to matricer har ikke samme størrelse ({r} × {c} og {r2} × {c2}).
+Signe moins ¦ Znaménko minus ¦ Minustecken ¦ Minustegn
+Addition ¦ Sčítání ¦ Addition ¦ Addition
+Multiplication ¦ Násobení ¦ Multiplikation ¦ Multiplikation
+Division ¦ Dělení ¦ Division ¦ Division
+Produit impossible : la 1re matrice a {cols}, la 2e a {rows}. ¦ Součin nelze: 1. matice má {cols}, 2. má {rows}. ¦ Produkten går inte: den 1:a matrisen har {cols}, den 2:a har {rows}. ¦ Produktet er umuligt: 1. matrix har {cols}, 2. har {rows}.
+Pour multiplier deux matrices, il faut autant de colonnes dans la 1re que de lignes dans la 2e. ¦ K násobení dvou matic musí mít 1. matice tolik sloupců, kolik má 2. řádků. ¦ För att multiplicera två matriser måste den 1:a ha lika många kolumner som den 2:a har rader. ¦ For at gange to matricer skal 1. matrix have lige så mange kolonner, som 2. har rækker.
+Produit impossible : la matrice a {c} colonnes et la liste {n} nombres. ¦ Součin nelze: matice má {c} sloupců a seznam {n} čísel. ¦ Produkten går inte: matrisen har {c} kolumner och listan {n} tal. ¦ Produktet er umuligt: matricen har {c} kolonner og listen {n} tal.
+ln(0) n’existe pas (il part vers −∞). ¦ ln(0) neexistuje (jde k −∞). ¦ ln(0) finns inte (det går mot −∞). ¦ ln(0) findes ikke (det går mod −∞).
+Une matrice ne peut être élevée qu’à une puissance entière. ¦ Matici lze umocnit jen na celé číslo. ¦ En matris kan bara upphöjas till en heltalspotens. ¦ En matrix kan kun opløftes til en heltalspotens.
+Seule une matrice carrée peut être élevée à une puissance. ¦ Umocnit lze jen čtvercovou matici. ¦ Bara en kvadratisk matris kan upphöjas till en potens. ¦ Kun en kvadratisk matrix kan opløftes til en potens.
+Puissance trop grande pour une matrice. ¦ Mocnina je pro matici příliš velká. ¦ För hög potens för en matris. ¦ For stor potens til en matrix.
+Division par zéro : 0 ne peut pas être élevé à une puissance négative. ¦ Dělení nulou: 0 nelze umocnit na zápornou mocninu. ¦ Division med noll: 0 kan inte upphöjas till en negativ potens. ¦ Division med nul: 0 kan ikke opløftes til en negativ potens.
+Ce calcul n’a pas de résultat. ¦ Tento výpočet nemá výsledek. ¦ Den här beräkningen har inget resultat. ¦ Denne beregning har intet resultat.
+{what} : il faut un nombre réel (sans i). ¦ {what}: musí to být reálné číslo (bez i). ¦ {what}: här behövs ett reellt tal (utan i). ¦ {what}: der skal være et reelt tal (uden i).
+{what} : il faut un nombre entier. ¦ {what}: musí to být celé číslo. ¦ {what}: här behövs ett heltal. ¦ {what}: der skal være et heltal.
+{what} : il faut une matrice, par exemple [[1 ; 2] ; [3 ; 4]]. ¦ {what}: musí to být matice, například [[1 ; 2] ; [3 ; 4]]. ¦ {what}: här behövs en matris, till exempel [[1 ; 2] ; [3 ; 4]]. ¦ {what}: der skal være en matrix, for eksempel [[1 ; 2] ; [3 ; 4]].
+Déterminant ¦ Determinant ¦ Determinant ¦ Determinant
+Le déterminant demande une matrice carrée (celle-ci fait {r} × {c}). ¦ Determinant vyžaduje čtvercovou matici (tato má {r} × {c}). ¦ Determinanten kräver en kvadratisk matris (den här är {r} × {c}). ¦ Determinanten kræver en kvadratisk matrix (denne er {r} × {c}).
+Inverse ¦ Inverzní matice ¦ Invers ¦ Invers
+Seule une matrice carrée a un inverse (celle-ci fait {r} × {c}). ¦ Inverzi má jen čtvercová matice (tato má {r} × {c}). ¦ Bara en kvadratisk matris har en invers (den här är {r} × {c}). ¦ Kun en kvadratisk matrix har en invers (denne er {r} × {c}).
+Cette matrice n’a pas d’inverse (son déterminant vaut 0). ¦ Tato matice nemá inverzi (její determinant je 0). ¦ Den här matrisen har ingen invers (dess determinant är 0). ¦ Denne matrix har ingen invers (dens determinant er 0).
+Transposée ¦ Transponovaná ¦ Transponat ¦ Transponeret
+Ce système n’a aucune solution (les équations se contredisent). ¦ Tato soustava nemá řešení (rovnice si odporují). ¦ Det här systemet har ingen lösning (ekvationerna motsäger varandra). ¦ Dette system har ingen løsning (ligningerne modsiger hinanden).
+Ce système a une infinité de solutions (des équations disent la même chose). ¦ Tato soustava má nekonečně mnoho řešení (některé rovnice říkají totéž). ¦ Det här systemet har oändligt många lösningar (några ekvationer säger samma sak). ¦ Dette system har uendeligt mange løsninger (nogle ligninger siger det samme).
+Ce nombre est trop dur à décomposer. ¦ Toto číslo je příliš těžké rozložit. ¦ Det här talet är för svårt att faktorisera. ¦ Dette tal er for svært at faktorisere.
+Ce nombre est trop grand pour être décomposé (au plus 30 chiffres). ¦ Toto číslo je příliš velké na rozklad (nejvýš 30 číslic). ¦ Det här talet är för stort för att faktoriseras (högst 30 siffror). ¦ Dette tal er for stort til at blive faktoriseret (højst 30 cifre).
+{n} n’a pas de facteur premier. ¦ {n} nemá prvočinitele. ¦ {n} har ingen primfaktor. ¦ {n} har ingen primfaktor.
+{x} est un nombre premier. ¦ {x} je prvočíslo. ¦ {x} är ett primtal. ¦ {x} er et primtal.
+Factorielle trop grande : au plus {fact}!. ¦ Faktoriál je příliš velký: nejvýš {fact}!. ¦ För stor fakultet: högst {fact}!. ¦ For stor fakultet: højst {fact}!.
+Factorielle ¦ Faktoriál ¦ Fakultet ¦ Fakultet
+La factorielle n’existe pas pour un entier négatif. ¦ Faktoriál záporného celého čísla neexistuje. ¦ Fakulteten finns inte för ett negativt heltal. ¦ Fakulteten findes ikke for et negativt heltal.
+n! = 1 × 2 × … × n, pour n = 0, 1, 2… ¦ n! = 1 × 2 × … × n, pro n = 0, 1, 2… ¦ n! = 1 × 2 × … × n, för n = 0, 1, 2… ¦ n! = 1 × 2 × … × n, for n = 0, 1, 2…
+Changement de base ¦ Převod soustavy ¦ Basbyte ¦ Baseskift
+La base va de 2 à 36. ¦ Základ je od 2 do 36. ¦ Basen går från 2 till 36. ¦ Basen går fra 2 til 36.
+{n} écrit en base {b} ¦ {n} zapsané v soustavě o základu {b} ¦ {n} skrivet i bas {b} ¦ {n} skrevet i base {b}
+(à retaper : {x}{pre}{x2}) ¦ (k opsání: {x}{pre}{x2}) ¦ (att skriva in igen: {x}{pre}{x2}) ¦ (til at skrive igen: {x}{pre}{x2})
+{what} : la liste est vide. ¦ {what}: seznam je prázdný. ¦ {what}: listan är tom. ¦ {what}: listen er tom.
+L’écart-type d’un échantillon demande au moins 2 nombres. ¦ Směrodatná odchylka výběru vyžaduje aspoň 2 čísla. ¦ Standardavvikelsen för ett stickprov kräver minst 2 tal. ¦ Standardafvigelsen for en stikprøve kræver mindst 2 tal.
+Ce calcul n’a pas de résultat fini. ¦ Tento výpočet nemá konečný výsledek. ¦ Den här beräkningen har inget ändligt resultat. ¦ Denne beregning har intet endeligt resultat.
+Calcul trop long (plus de {input} signes). ¦ Výpočet je příliš dlouhý (víc než {input} znaků). ¦ För lång beräkning (fler än {input} tecken). ¦ For lang beregning (mere end {input} tegn).
+« {x} » n’est pas un nombre en base {base}. ¦ „{x}“ není číslo v soustavě o základu {base}. ¦ ”{x}” är inte ett tal i bas {base}. ¦ »{x}« er ikke et tal i base {base}.
+Je ne comprends pas le signe « {c} ». ¦ Nerozumím znaku „{c}“. ¦ Jag förstår inte tecknet ”{c}”. ¦ Jeg forstår ikke tegnet »{c}«.
+Les signes compris : + − × ÷ ^ ! % ( ) [ ] ; = et les noms des fonctions. ¦ Znaky, kterým rozumím: + − × ÷ ^ ! % ( ) [ ] ; = a názvy funkcí. ¦ Tecken som förstås: + − × ÷ ^ ! % ( ) [ ] ; = och funktionernas namn. ¦ Tegn, der forstås: + − × ÷ ^ ! % ( ) [ ] ; = og funktionernes navne.
+Tape un calcul. ¦ Napiš výpočet. ¦ Skriv en beräkning. ¦ Skriv en beregning.
+Trop de parenthèses imbriquées. ¦ Příliš mnoho vnořených závorek. ¦ För många inbäddade parenteser. ¦ For mange indlejrede parenteser.
+Il manque un nombre après « {x} ». ¦ Za „{x}“ chybí číslo. ¦ Det saknas ett tal efter ”{x}”. ¦ Der mangler et tal efter »{x}«.
+Il manque un nombre à la fin. ¦ Na konci chybí číslo. ¦ Det saknas ett tal i slutet. ¦ Der mangler et tal til sidst.
+Il manque un nombre après « {x} », avant « ) ». ¦ Za „{x}“ chybí číslo, před „)“. ¦ Det saknas ett tal efter ”{x}”, före ”)”. ¦ Der mangler et tal efter »{x}«, før »)«.
+Il y a une parenthèse fermante « ) » de trop, ou il manque un nombre avant elle. ¦ Je tu zavírací závorka „)“ navíc, nebo před ní chybí číslo. ¦ Det finns en avslutande parentes ”)” för mycket, eller så saknas ett tal före den. ¦ Der er en afsluttende parentes »)« for meget, eller der mangler et tal før den.
+Il manque un nombre avant « {x} ». ¦ Před „{x}“ chybí číslo. ¦ Det saknas ett tal före ”{x}”. ¦ Der mangler et tal før »{x}«.
+Le signe « {v} » sépare les nombres d’une fonction, comme pgcd(12 ; 18). ¦ Znak „{v}“ odděluje čísla funkce, jako pgcd(12 ; 18). ¦ Tecknet ”{v}” skiljer talen i en funktion åt, som pgcd(12 ; 18). ¦ Tegnet »{v}« adskiller tallene i en funktion, som pgcd(12 ; 18).
+Pour un nombre à virgule, colle la virgule aux chiffres : 2,5. ¦ U desetinného čísla napiš čárku hned k číslicím: 2,5. ¦ För ett decimaltal, skriv kommat direkt intill siffrorna: 2,5. ¦ For et decimaltal skal kommaet stå lige op ad cifrene: 2,5.
+Je ne comprends pas « {raw} » ici. ¦ Tady nerozumím „{raw}“. ¦ Jag förstår inte ”{raw}” här. ¦ Jeg forstår ikke »{raw}« her.
+Il manque un signe entre « {raw} » et « {raw2} ». ¦ Mezi „{raw}“ a „{raw2}“ chybí znak. ¦ Det saknas ett tecken mellan ”{raw}” och ”{raw2}”. ¦ Der mangler et tegn mellem »{raw}« og »{raw2}«.
+Par exemple « × » ou « + ». ¦ Například „ד nebo „+“. ¦ Till exempel ”×” eller ”+”. ¦ For eksempel »×« eller »+«.
+Il manque une parenthèse fermante « ) » après {name}(…). ¦ Za {name}(…) chybí zavírací závorka „)“. ¦ Det saknas en avslutande parentes ”)” efter {name}(…). ¦ Der mangler en afsluttende parentes »)« efter {name}(…).
+Ajoute « ) » à la fin. ¦ Přidej „)“ na konec. ¦ Lägg till ”)” i slutet. ¦ Tilføj »)« til sidst.
+Je ne comprends pas « {raw} » dans {name}(…). ¦ Nerozumím „{raw}“ v {name}(…). ¦ Jag förstår inte ”{raw}” i {name}(…). ¦ Jeg forstår ikke »{raw}« i {name}(…).
+Les parenthèses sont vides. ¦ Závorky jsou prázdné. ¦ Parenteserna är tomma. ¦ Parenteserne er tomme.
+Le signe « ; » sépare les nombres d’une fonction, comme pgcd(12 ; 18) — il n’a pas sa place ici. ¦ Znak „;“ odděluje čísla funkce, jako pgcd(12 ; 18) — sem nepatří. ¦ Tecknet ”;” skiljer talen i en funktion åt, som pgcd(12 ; 18) — det hör inte hemma här. ¦ Tegnet »;« adskiller tallene i en funktion, som pgcd(12 ; 18) — det hører ikke til her.
+Il manque une parenthèse fermante « ) ». ¦ Chybí zavírací závorka „)“. ¦ Det saknas en avslutande parentes ”)”. ¦ Der mangler en afsluttende parentes »)«.
+Il manque un crochet fermant « ] ». ¦ Chybí zavírací hranatá závorka „]“. ¦ Det saknas en avslutande hakparentes ”]”. ¦ Der mangler en afsluttende kantet parentes »]«.
+Je ne comprends pas « {raw} » dans la liste. ¦ Nerozumím „{raw}“ v seznamu. ¦ Jag förstår inte ”{raw}” i listan. ¦ Jeg forstår ikke »{raw}« i listen.
+Une liste s’écrit [1 ; 2 ; 3]. ¦ Seznam se píše [1 ; 2 ; 3]. ¦ En lista skrivs [1 ; 2 ; 3]. ¦ En liste skrives [1 ; 2 ; 3].
+Il manque la barre fermante « | » de la valeur absolue. ¦ Chybí zavírací svislá čára „|“ absolutní hodnoty. ¦ Det saknas det avslutande strecket ”|” för absolutbeloppet. ¦ Der mangler den afsluttende streg »|« for den numeriske værdi.
+Il manque le nombre de {x}. ¦ Chybí číslo pro {x}. ¦ Talet för {x} saknas. ¦ Tallet til {x} mangler.
+Par exemple {name}(30). ¦ Například {name}(30). ¦ Till exempel {name}(30). ¦ For eksempel {name}(30).
+Il y a une parenthèse fermante « ) » de trop. ¦ Je tu zavírací závorka „)“ navíc. ¦ Det finns en avslutande parentes ”)” för mycket. ¦ Der er en afsluttende parentes »)« for meget.
+Retire-la, ou ajoute « ( » avant. ¦ Odeber ji, nebo před ni přidej „(“. ¦ Ta bort den, eller lägg till ”(” före. ¦ Fjern den, eller tilføj »(« før.
+Il y a un crochet fermant « ] » de trop. ¦ Je tu zavírací hranatá závorka „]“ navíc. ¦ Det finns en avslutande hakparentes ”]” för mycket. ¦ Der er en afsluttende kantet parentes »]« for meget.
+Il manque un signe avant « {raw} ». ¦ Před „{raw}“ chybí znak. ¦ Det saknas ett tecken före ”{raw}”. ¦ Der mangler et tegn før »{raw}«.
+Une équation ne peut pas contenir un autre signe « = ». ¦ Rovnice nemůže obsahovat další znak „=“. ¦ En ekvation kan inte innehålla ett till ”=”-tecken. ¦ En ligning kan ikke indeholde endnu et »=«-tegn.
+Je ne sais comparer avec « = » que des nombres. ¦ Pomocí „=“ umím porovnávat jen čísla. ¦ Jag kan bara jämföra tal med ”=”. ¦ Jeg kan kun sammenligne tal med »=«.
+Je ne comprends pas ce calcul. ¦ Tomuto výpočtu nerozumím. ¦ Jag förstår inte den här beräkningen. ¦ Jeg forstår ikke denne beregning.
+L’infini (∞) n’est pas un nombre : je ne peux pas calculer avec. ¦ Nekonečno (∞) není číslo: nemůžu s ním počítat. ¦ Oändligheten (∞) är inget tal: jag kan inte räkna med den. ¦ Uendelig (∞) er ikke et tal: jeg kan ikke regne med det.
+Il n’y a pas encore de résultat précédent (ans). ¦ Zatím tu není předchozí výsledek (ans). ¦ Det finns inget tidigare resultat ännu (ans). ¦ Der er endnu intet tidligere resultat (ans).
+{n} est une fonction : écris {n2}(…) avec son nombre entre parenthèses. ¦ {n} je funkce: napiš {n2}(…) s číslem v závorkách. ¦ {n} är en funktion: skriv {n2}(…) med talet inom parentes. ¦ {n} er en funktion: skriv {n2}(…) med tallet i parentes.
+La lettre « {n} » n’a pas de valeur. ¦ Písmeno „{n}“ nemá hodnotu. ¦ Bokstaven ”{n}” har inget värde. ¦ Bogstavet »{n}« har ingen værdi.
+Pour une équation, ajoute « = … » (x² = 4) ; pour une courbe, ouvre l’onglet 📈 Courbes. ¦ U rovnice přidej „= …“ (x² = 4); pro graf otevři kartu 📈 Grafy funkcí. ¦ För en ekvation, lägg till ”= …” (x² = 4); för en kurva, öppna fliken 📈 Kurvor. ¦ Til en ligning tilføjer du »= …« (x² = 4); til en kurve åbner du fanen 📈 Kurver.
+Je ne connais pas « {n} ». ¦ „{n}“ neznám. ¦ Jag känner inte till ”{n}”. ¦ Jeg kender ikke »{n}«.
+Voulais-tu dire « {s} » ? ¦ Myslel jsi „{s}“? ¦ Menade du ”{s}”? ¦ Mente du »{s}«?
+La liste des fonctions est dans le mode 🧪 Scientifique (rubriques en haut des touches). ¦ Seznam funkcí je v režimu 🧪 Vědecká (oddíly nad klávesami). ¦ Listan över funktioner finns i läget 🧪 Vetenskaplig (avsnitt ovanför knapparna). ¦ Listen over funktioner findes i tilstanden 🧪 Videnskabelig (afsnit over tasterne).
+Je ne connais pas la fonction « {name} ». ¦ Funkci „{name}“ neznám. ¦ Jag känner inte till funktionen ”{name}”. ¦ Jeg kender ikke funktionen »{name}«.
+au moins {n} ¦ aspoň {n} ¦ minst {n} ¦ mindst {n}
+{min} à {max} nombres ¦ {min} až {max} čísel ¦ {min} till {max} tal ¦ {min} til {max} tal
+, séparés par « ; » ¦ , oddělená „;“ ¦ , åtskilda med ”;” ¦ , adskilt med »;«
+La virgule sert aux nombres à virgule (2,5) : sépare les nombres avec « ; », par exemple {x}. ¦ Čárka slouží pro desetinná čísla (2,5): čísla odděluj pomocí „;“, například {x}. ¦ Kommat används för decimaltal (2,5): skilj talen åt med ”;”, till exempel {x}. ¦ Kommaet bruges til decimaltal (2,5): adskil tallene med »;«, for eksempel {x}.
+Par exemple : {ex} ¦ Například: {ex} ¦ Till exempel: {ex} ¦ For eksempel: {ex}
+Je résous les équations jusqu’au degré 4. ¦ Řeším rovnice až do 4. stupně. ¦ Jag löser ekvationer upp till grad 4. ¦ Jeg løser ligninger op til 4. grad.
+Plusieurs lettres inconnues ({x}) : pour un système, écris toutes les équations dans resoudre(… ; …). ¦ Několik neznámých ({x}): u soustavy napiš všechny rovnice do resoudre(… ; …). ¦ Flera okända bokstäver ({x}): för ett system, skriv alla ekvationer i resoudre(… ; …). ¦ Flere ukendte bogstaver ({x}): til et system skriver du alle ligninger i resoudre(… ; …).
+Aucune solution ¦ Žádné řešení ¦ Ingen lösning ¦ Ingen løsning
+Toujours vrai : tout nombre {name} convient. ¦ Vždy pravda: vyhovuje každé číslo {name}. ¦ Alltid sant: alla tal {name} fungerar. ¦ Altid sandt: alle tal {name} passer.
+(l’égalité est toujours fausse) ¦ (rovnost nikdy neplatí) ¦ (likheten är alltid falsk) ¦ (ligheden er altid falsk)
+entre {x} et {x2} ¦ mezi {x} a {x2} ¦ mellan {x} och {x2} ¦ mellem {x} og {x2}
+, solutions entre {x} et {x2} ¦ , řešení mezi {x} a {x2} ¦ , lösningar mellan {x} och {x2} ¦ , løsninger mellem {x} og {x2}
+entre {a} et {b} ¦ mezi {a} a {b} ¦ mellan {a} och {b} ¦ mellem {a} og {b}
+Solutions cherchées entre {a} et {b}{x}. ¦ Řešení hledána mezi {a} a {b}{x}. ¦ Lösningar söks mellan {a} och {b}{x}. ¦ Løsninger søges mellem {a} og {b}{x}.
+(valeurs approchées) ¦ (přibližné hodnoty) ¦ (ungefärliga värden) ¦ (tilnærmede værdier)
+Ce système n’a pas d’inconnue (x, y, z…). ¦ Tato soustava nemá neznámou (x, y, z…). ¦ Det här systemet har ingen obekant (x, y, z…). ¦ Dette system har ingen ubekendt (x, y, z…).
+Je résous les systèmes jusqu’à 6 inconnues. ¦ Řeším soustavy až do 6 neznámých. ¦ Jag löser system med upp till 6 obekanta. ¦ Jeg løser systemer med op til 6 ubekendte.
+Ce système n’est pas du premier degré : je sais résoudre les systèmes où les inconnues ne sont ni multipliées entre elles, ni au carré. ¦ Tato soustava není lineární: umím řešit soustavy, kde se neznámé navzájem nenásobí ani nejsou na druhou. ¦ Det här systemet är inte av första graden: jag kan lösa system där de obekanta varken multipliceras med varandra eller kvadreras. ¦ Dette system er ikke af første grad: jeg kan løse systemer, hvor de ubekendte hverken ganges med hinanden eller kvadreres.
+Système de {eq} à {unk}. ¦ Soustava {eq} o {unk}. ¦ System med {eq} och {unk}. ¦ System med {eq} og {unk}.
+Équation du 1er degré{x2}. ¦ Rovnice 1. stupně{x2}. ¦ Ekvation av 1:a graden{x2}. ¦ Ligning af 1. grad{x2}.
+Équation du {x}e degré{x2}. ¦ Rovnice {x}. stupně{x2}. ¦ Ekvation av grad {x}{x2}. ¦ Ligning af {x}. grad{x2}.
+=nb|équation ¦ rovnice|rovnice|rovnic ¦ ekvation|ekvationer ¦ ligning|ligninger
+=nb|inconnue ¦ neznámá|neznámé|neznámých ¦ obekant|obekanta ¦ ubekendt|ubekendte
+=nb|colonne ¦ sloupec|sloupce|sloupců ¦ kolumn|kolumner ¦ kolonne|kolonner
+=nb|ligne ¦ řádek|řádky|řádků ¦ rad|rader ¦ række|rækker
+=nb|nombre ¦ číslo|čísla|čísel ¦ tal|tal ¦ tal|tal
+=nb|jour ¦ den|dny|dní ¦ dag|dagar ¦ dag|dage
+=nb|semaine ¦ týden|týdny|týdnů ¦ vecka|veckor ¦ uge|uger
+=nb|an ¦ rok|roky|let ¦ år|år ¦ år|år
+=nb|mois ¦ měsíc|měsíce|měsíců ¦ månad|månader ¦ måned|måneder
+La dérivée n’existe pas en {name} = {x}. ¦ Derivace v {name} = {x} neexistuje. ¦ Derivatan finns inte i {name} = {x}. ¦ Den afledte findes ikke i {name} = {x}.
+Les bornes de l’intégrale doivent être des nombres. ¦ Meze integrálu musí být čísla. ¦ Integralens gränser måste vara tal. ¦ Integralets grænser skal være tal.
+L’intégrale ne converge pas (la fonction part à l’infini entre les bornes). ¦ Integrál nekonverguje (funkce mezi mezemi utíká do nekonečna). ¦ Integralen konvergerar inte (funktionen går mot oändligheten mellan gränserna). ¦ Integralet konvergerer ikke (funktionen går mod uendelig mellem grænserne).
+Trop de termes (au plus {sum}). ¦ Příliš mnoho členů (nejvýš {sum}). ¦ För många termer (högst {sum}). ¦ For mange led (højst {sum}).
+Sinus (dans l’unité d’angle choisie) ¦ Sinus (ve zvolené jednotce úhlu) ¦ Sinus (i den valda vinkelenheten) ¦ Sinus (i den valgte vinkelenhed)
+Cosinus ¦ Kosinus ¦ Cosinus ¦ Cosinus
+Tangente ¦ Tangens ¦ Tangens ¦ Tangens
+tan({x}{x2}) n’existe pas (le cosinus vaut 0). ¦ tan({x}{x2}) neexistuje (kosinus je 0). ¦ tan({x}{x2}) finns inte (cosinus är 0). ¦ tan({x}{x2}) findes ikke (cosinus er 0).
+Cette tangente n’existe pas (le cosinus vaut 0). ¦ Tento tangens neexistuje (kosinus je 0). ¦ Den här tangensen finns inte (cosinus är 0). ¦ Denne tangens findes ikke (cosinus er 0).
+{nm}(…) demande un nombre entre −1 et 1. ¦ {nm}(…) vyžaduje číslo mezi −1 a 1. ¦ {nm}(…) kräver ett tal mellan −1 och 1. ¦ {nm}(…) kræver et tal mellem −1 og 1.
+Arc sinus (angle dont le sinus vaut x) ¦ Arkus sinus (úhel, jehož sinus je x) ¦ Arcussinus (vinkeln vars sinus är x) ¦ Arcus sinus (vinklen hvis sinus er x)
+Arc cosinus ¦ Arkus kosinus ¦ Arcuscosinus ¦ Arcus cosinus
+Arc tangente ¦ Arkus tangens ¦ Arcustangens ¦ Arcus tangens
+Angle du point (x ; y) : atan2(y ; x) ¦ Úhel bodu (x ; y): atan2(y ; x) ¦ Vinkeln för punkten (x ; y): atan2(y ; x) ¦ Vinklen for punktet (x ; y): atan2(y ; x)
+Sinus hyperbolique ¦ Hyperbolický sinus ¦ Hyperbolisk sinus ¦ Hyperbolsk sinus
+Cosinus hyperbolique ¦ Hyperbolický kosinus ¦ Hyperbolisk cosinus ¦ Hyperbolsk cosinus
+Tangente hyperbolique ¦ Hyperbolický tangens ¦ Hyperbolisk tangens ¦ Hyperbolsk tangens
+Argument sinus hyperbolique ¦ Hyperbolický argument sinu ¦ Areasinus hyperbolicus ¦ Areasinus hyperbolicus
+Argument cosinus hyperbolique ¦ Hyperbolický argument kosinu ¦ Areacosinus hyperbolicus ¦ Areacosinus hyperbolicus
+Argument tangente hyperbolique ¦ Hyperbolický argument tangens ¦ Areatangens hyperbolicus ¦ Areatangens hyperbolicus
+Le logarithme demande un nombre plus grand que 0. ¦ Logaritmus vyžaduje číslo větší než 0. ¦ Logaritmen kräver ett tal större än 0. ¦ Logaritmen kræver et tal større end 0.
+Logarithme népérien (base e) ¦ Přirozený logaritmus (základ e) ¦ Naturlig logaritm (bas e) ¦ Naturlig logaritme (base e)
+Logarithme décimal ; log(x ; b) en base b ¦ Dekadický logaritmus; log(x ; b) o základu b ¦ Tiologaritm; log(x ; b) i bas b ¦ Titalslogaritme; log(x ; b) i base b
+La base d’un logarithme ne peut pas valoir 1. ¦ Základ logaritmu nemůže být 1. ¦ En logaritms bas kan inte vara 1. ¦ En logaritmes base kan ikke være 1.
+Logarithme en base 2 ¦ Logaritmus o základu 2 ¦ Logaritm i bas 2 ¦ Logaritme med base 2
+Exponentielle : e puissance x ¦ Exponenciála: e na x ¦ Exponentialfunktion: e upphöjt till x ¦ Eksponentialfunktion: e opløftet i x
+Racine carrée ; racine(x ; n) : racine n-ième ¦ Druhá odmocnina; racine(x ; n): n-tá odmocnina ¦ Kvadratrot; racine(x ; n): n:te roten ¦ Kvadratrod; racine(x ; n): n'te rod
+Racine cubique ¦ Třetí odmocnina ¦ Kubikrot ¦ Kubikrod
+Racine 4e ¦ Čtvrtá odmocnina ¦ Fjärderot ¦ Fjerde rod
+Racine n-ième : root(x ; n) ¦ N-tá odmocnina: root(x ; n) ¦ N:te roten: root(x ; n) ¦ N'te rod: root(x ; n)
+Racine ¦ Odmocnina ¦ Rot ¦ Rod
+La racine 0-ième n’existe pas. ¦ Nultá odmocnina neexistuje. ¦ Den 0:e roten finns inte. ¦ Den 0'te rod findes ikke.
+Valeur absolue (ou module d’un complexe) : |x| ¦ Absolutní hodnota (nebo modul komplexního čísla): |x| ¦ Absolutbelopp (eller ett komplext tals belopp): |x| ¦ Numerisk værdi (eller modulus af et komplekst tal): |x|
+Factorielle : n! = 1 × 2 × … × n ¦ Faktoriál: n! = 1 × 2 × … × n ¦ Fakultet: n! = 1 × 2 × … × n ¦ Fakultet: n! = 1 × 2 × … × n
+Fonction Γ : Γ(n) = (n − 1)! ¦ Funkce Γ: Γ(n) = (n − 1)! ¦ Γ-funktionen: Γ(n) = (n − 1)! ¦ Γ-funktionen: Γ(n) = (n − 1)!
+Partie réelle ¦ Reálná část ¦ Realdel ¦ Realdel
+Partie imaginaire ¦ Imaginární část ¦ Imaginärdel ¦ Imaginærdel
+Module |z| = √(a² + b²) ¦ Modul |z| = √(a² + b²) ¦ Belopp |z| = √(a² + b²) ¦ Modulus |z| = √(a² + b²)
+Argument (angle) d’un complexe ¦ Argument (úhel) komplexního čísla ¦ Argument (vinkel) för ett komplext tal ¦ Argument (vinkel) for et komplekst tal
+L’argument de 0 n’existe pas. ¦ Argument čísla 0 neexistuje. ¦ Argumentet för 0 finns inte. ¦ Argumentet for 0 findes ikke.
+Conjugué : a − bi ¦ Komplexně sdružené: a − bi ¦ Konjugat: a − bi ¦ Konjugeret: a − bi
+Arrondi (au plus proche) ; arrondi(x ; n) avec n chiffres après la virgule ¦ Zaokrouhlení (na nejbližší); arrondi(x ; n) s n desetinnými místy ¦ Avrundning (till närmaste); arrondi(x ; n) med n decimaler ¦ Afrunding (til nærmeste); arrondi(x ; n) med n decimaler
+Partie entière (vers le bas) ¦ Celá část (dolů) ¦ Heltalsdel (nedåt) ¦ Heltalsdel (nedad)
+Arrondi vers le haut ¦ Zaokrouhlení nahoru ¦ Avrundning uppåt ¦ Afrunding opad
+Coupe les chiffres après la virgule (vers 0) ¦ Odřízne desetinná místa (k nule) ¦ Kapar decimalerna (mot 0) ¦ Skærer decimalerne af (mod 0)
+Tronque ¦ Oříznutí ¦ Trunkera ¦ Afkort
+Écrit un nombre à virgule en fraction ¦ Zapíše desetinné číslo jako zlomek ¦ Skriver ett decimaltal som bråk ¦ Skriver et decimaltal som brøk
+Je ne trouve pas de fraction simple pour ce nombre. ¦ Pro toto číslo nenacházím jednoduchý zlomek. ¦ Jag hittar inget enkelt bråk för det här talet. ¦ Jeg kan ikke finde en simpel brøk for dette tal.
+Écrit le nombre en décimal ¦ Zapíše číslo desetinně ¦ Skriver talet som decimaltal ¦ Skriver tallet som decimaltal
+Signe : −1, 0 ou 1 ¦ Znaménko: −1, 0 nebo 1 ¦ Tecken: −1, 0 eller 1 ¦ Fortegn: −1, 0 eller 1
+Signe ¦ Znaménko ¦ Tecken ¦ Fortegn
+Reste de la division : 17 mod 5 ¦ Zbytek po dělení: 17 mod 5 ¦ Resten vid division: 17 mod 5 ¦ Resten ved division: 17 mod 5
+Quotient entier ¦ Celočíselný podíl ¦ Heltalskvot ¦ Heltalskvotient
+Plus grand commun diviseur ¦ Největší společný dělitel ¦ Största gemensamma delare ¦ Største fælles divisor
+Plus petit commun multiple ¦ Nejmenší společný násobek ¦ Minsta gemensamma multipel ¦ Mindste fælles multiplum
+Combinaisons : C(n ; k) façons de choisir k parmi n ¦ Kombinace: C(n ; k) způsobů, jak vybrat k z n ¦ Kombinationer: C(n ; k) sätt att välja k av n ¦ Kombinationer: C(n ; k) måder at vælge k ud af n
+Arrangements : A(n ; k) (l’ordre compte) ¦ Variace: A(n ; k) (na pořadí záleží) ¦ Permutationer: A(n ; k) (ordningen spelar roll) ¦ Permutationer: A(n ; k) (rækkefølgen tæller)
+Est-ce un nombre premier ? ¦ Je to prvočíslo? ¦ Är det ett primtal? ¦ Er det et primtal?
+Oui, {n} est premier ✓ ¦ Ano, {n} je prvočíslo ✓ ¦ Ja, {n} är ett primtal ✓ ¦ Ja, {n} er et primtal ✓
+Non, {n} n’est pas premier ¦ Ne, {n} není prvočíslo ¦ Nej, {n} är inte ett primtal ¦ Nej, {n} er ikke et primtal
+Décomposition en facteurs premiers ¦ Rozklad na prvočinitele ¦ Primtalsfaktorisering ¦ Primfaktoropløsning
+Le nombre premier suivant ¦ Následující prvočíslo ¦ Nästa primtal ¦ Det næste primtal
+Écrit un entier en binaire (base 2) ¦ Zapíše celé číslo dvojkově (základ 2) ¦ Skriver ett heltal binärt (bas 2) ¦ Skriver et heltal binært (base 2)
+Écrit un entier en octal (base 8) ¦ Zapíše celé číslo osmičkově (základ 8) ¦ Skriver ett heltal oktalt (bas 8) ¦ Skriver et heltal oktalt (base 8)
+Écrit un entier en hexadécimal (base 16) ¦ Zapíše celé číslo šestnáctkově (základ 16) ¦ Skriver ett heltal hexadecimalt (bas 16) ¦ Skriver et heltal hexadecimalt (base 16)
+Écrit un entier dans une base de 2 à 36 ¦ Zapíše celé číslo v soustavě o základu 2 až 36 ¦ Skriver ett heltal i en bas från 2 till 36 ¦ Skriver et heltal i en base fra 2 til 36
+calc|Moyenne ¦ Průměr ¦ Medelvärde ¦ Gennemsnit
+Médiane (la valeur du milieu) ¦ Medián (prostřední hodnota) ¦ Median (värdet i mitten) ¦ Median (den midterste værdi)
+Variance (de la population) ¦ Rozptyl (základního souboru) ¦ Varians (för populationen) ¦ Varians (for populationen)
+Variance ¦ Rozptyl ¦ Varians ¦ Varians
+Écart-type σ (de la population, comme au lycée) ¦ Směrodatná odchylka σ (základního souboru, jako ve škole) ¦ Standardavvikelse σ (för populationen, som i skolan) ¦ Standardafvigelse σ (for populationen, som i skolen)
+Écart-type ¦ Směrodatná odchylka ¦ Standardavvikelse ¦ Standardafvigelse
+Écart-type d’un échantillon (divisé par n − 1) ¦ Výběrová směrodatná odchylka (děleno n − 1) ¦ Standardavvikelse för ett stickprov (delat med n − 1) ¦ Standardafvigelse for en stikprøve (divideret med n − 1)
+Somme d’une liste ; somme(k² ; k ; 1 ; 10) : somme d’une suite ¦ Součet seznamu; somme(k² ; k ; 1 ; 10): součet posloupnosti ¦ Summan av en lista; somme(k² ; k ; 1 ; 10): summan av en följd ¦ Summen af en liste; somme(k² ; k ; 1 ; 10): summen af en følge
+Produit d’une liste ; produit(k ; k ; 1 ; 5) ¦ Součin seznamu; produit(k ; k ; 1 ; 5) ¦ Produkten av en lista; produit(k ; k ; 1 ; 5) ¦ Produktet af en liste; produit(k ; k ; 1 ; 5)
+Le plus petit ¦ Nejmenší ¦ Det minsta ¦ Det mindste
+Le plus grand ¦ Největší ¦ Det största ¦ Det største
+Étendue : max − min ¦ Rozpětí: max − min ¦ Variationsbredd: max − min ¦ Variationsbredde: max − min
+calc|Étendue ¦ Rozpětí ¦ Variationsbredd ¦ Variationsbredde
+1er quartile ¦ 1. kvartil ¦ 1:a kvartilen ¦ 1. kvartil
+Quartile ¦ Kvartil ¦ Kvartil ¦ Kvartil
+3e quartile ¦ 3. kvartil ¦ 3:e kvartilen ¦ 3. kvartil
+Combien de nombres dans la liste ¦ Kolik čísel je v seznamu ¦ Hur många tal listan har ¦ Hvor mange tal der er i listen
+Effectif ¦ Četnost ¦ Antal ¦ Antal
+Range la liste du plus petit au plus grand ¦ Seřadí seznam od nejmenšího po největší ¦ Sorterar listan från minst till störst ¦ Sorterer listen fra mindst til størst
+Tri ¦ Řazení ¦ Sortering ¦ Sortering
+Déterminant d’une matrice carrée ¦ Determinant čtvercové matice ¦ Determinanten för en kvadratisk matris ¦ Determinanten for en kvadratisk matrix
+Matrice inverse ¦ Inverzní matice ¦ Invers matris ¦ Invers matrix
+Transposée (lignes ↔ colonnes) ¦ Transponovaná (řádky ↔ sloupce) ¦ Transponat (rader ↔ kolumner) ¦ Transponeret (rækker ↔ kolonner)
+Trace : somme de la diagonale ¦ Stopa: součet diagonály ¦ Spår: summan av diagonalen ¦ Spor: summen af diagonalen
+Trace ¦ Stopa ¦ Spår ¦ Spor
+La trace demande une matrice carrée. ¦ Stopa vyžaduje čtvercovou matici. ¦ Spåret kräver en kvadratisk matris. ¦ Sporet kræver en kvadratisk matrix.
+Matrice identité n × n ¦ Jednotková matice n × n ¦ Enhetsmatris n × n ¦ Identitetsmatrix n × n
+La taille va de 1 à {mat}. ¦ Velikost je od 1 do {mat}. ¦ Storleken går från 1 till {mat}. ¦ Størrelsen går fra 1 til {mat}.
+Rang d’une matrice ¦ Hodnost matice ¦ Rang för en matris ¦ Rang af en matrix
+Rang ¦ Hodnost ¦ Rang ¦ Rang
+Résout A·X = B (matrice A, liste B) ¦ Řeší A·X = B (matice A, seznam B) ¦ Löser A·X = B (matris A, lista B) ¦ Løser A·X = B (matrix A, liste B)
+La matrice a {r} lignes et la liste {n} nombres : il en faut autant. ¦ Matice má {r} řádků a seznam {n} čísel: musí jich být stejně. ¦ Matrisen har {r} rader och listan {n} tal: det måste vara lika många. ¦ Matricen har {r} rækker og listen {n} tal: der skal være lige mange.
+Le système doit avoir autant d’équations que d’inconnues. ¦ Soustava musí mít stejně rovnic jako neznámých. ¦ Systemet måste ha lika många ekvationer som obekanta. ¦ Systemet skal have lige så mange ligninger som ubekendte.
+Résout une équation (jusqu’au 4e degré exactement, ou approchée) ou un système ¦ Řeší rovnici (přesně až do 4. stupně, nebo přibližně) nebo soustavu ¦ Löser en ekvation (exakt upp till grad 4, eller ungefärligt) eller ett system ¦ Løser en ligning (præcist op til 4. grad, eller tilnærmet) eller et system
+Écris l’équation dans resoudre(…), par exemple resoudre(x^2 = 4). ¦ Napiš rovnici do resoudre(…), například resoudre(x^2 = 4). ¦ Skriv ekvationen i resoudre(…), till exempel resoudre(x^2 = 4). ¦ Skriv ligningen i resoudre(…), for eksempel resoudre(x^2 = 4).
+Intervalle ¦ Interval ¦ Intervall ¦ Interval
+resoudre(équation ; lettre ; début ; fin) : je n’ai pas compris les nombres en plus. ¦ resoudre(rovnice ; písmeno ; začátek ; konec): nerozuměl jsem dalším číslům. ¦ resoudre(ekvation ; bokstav ; början ; slut): jag förstod inte de extra talen. ¦ resoudre(ligning ; bogstav ; start ; slut): jeg forstod ikke de ekstra tal.
+Racines d’un polynôme : ses coefficients, du plus haut degré au plus bas ¦ Kořeny polynomu: jeho koeficienty od nejvyššího stupně po nejnižší ¦ Rötterna till ett polynom: dess koefficienter, från högsta graden till lägsta ¦ Rødderne i et polynomium: dets koefficienter fra højeste grad til laveste
+Nombre dérivé de f en a : derivee(f(x) ; a) ¦ Derivace f v bodě a: derivee(f(x) ; a) ¦ Derivatan av f i a: derivee(f(x) ; a) ¦ Den afledte af f i a: derivee(f(x) ; a)
+calc|Dérivée ¦ Derivace ¦ Derivata ¦ Afledt
+Intégrale de f entre a et b : integrale(f(x) ; a ; b) ¦ Integrál f od a do b: integrale(f(x) ; a ; b) ¦ Integralen av f mellan a och b: integrale(f(x) ; a ; b) ¦ Integralet af f mellem a og b: integrale(f(x) ; a ; b)
+Intégrale ¦ Integrál ¦ Integral ¦ Integral
+Valeur approchée de la limite en a ¦ Přibližná hodnota limity v a ¦ Ungefärligt värde för gränsvärdet i a ¦ Tilnærmet værdi af grænseværdien i a
+Je ne trouve pas de limite (à gauche et à droite ce n’est pas pareil, ou ça part à l’infini). ¦ Nenacházím limitu (zleva a zprava to není stejné, nebo to jde do nekonečna). ¦ Jag hittar inget gränsvärde (det skiljer sig från vänster och höger, eller går mot oändligheten). ¦ Jeg finder ingen grænseværdi (fra venstre og højre er det ikke det samme, eller det går mod uendelig).
+pas un nombre ¦ není číslo ¦ inte ett tal ¦ ikke et tal
+longueur ¦ délka ¦ längd ¦ længde
+surface ¦ plocha ¦ yta ¦ areal
+volume ¦ objem ¦ volym ¦ rumfang
+poids ¦ hmotnost ¦ vikt ¦ vægt
+monnaie ¦ měna ¦ valuta ¦ mønt
+durée ¦ doba ¦ tid ¦ varighed
+température ¦ teplota ¦ temperatur ¦ temperatur
+valeur approchée : la mesure changeait d’un lieu à l’autre ¦ přibližná hodnota: míra se lišila místo od místa ¦ ungefärligt värde: måttet varierade från ort till ort ¦ tilnærmet værdi: målet varierede fra sted til sted
+mesure de {region} ¦ míra z oblasti {region} ¦ mått från {region} ¦ mål fra {region}
+valeur approchée ¦ přibližná hodnota ¦ ungefärligt värde ¦ tilnærmet værdi
+Le calendrier républicain n’est pas chargé. ¦ Republikánský kalendář není načtený. ¦ Den republikanska kalendern är inte laddad. ¦ Den republikanske kalender er ikke indlæst.
+Le calendrier républicain n’a servi que du 22 septembre 1792 (1er vendémiaire an I) au 31 décembre 1805. ¦ Republikánský kalendář se používal jen od 22. září 1792 (1. vendémiaire roku I) do 31. prosince 1805. ¦ Den republikanska kalendern användes bara från 22 september 1792 (1 vendémiaire år I) till 31 december 1805. ¦ Den republikanske kalender blev kun brugt fra 22. september 1792 (1. vendémiaire år I) til 31. december 1805.
+Cette date est hors du calendrier républicain. ¦ Toto datum je mimo republikánský kalendář. ¦ Det här datumet ligger utanför den republikanska kalendern. ¦ Denne dato ligger uden for den republikanske kalender.
+date approchée ¦ přibližné datum ¦ ungefärligt datum ¦ omtrentlig dato
+Le calcul des écarts de dates n’est pas chargé. ¦ Výpočet rozdílu dat není načtený. ¦ Beräkningen av datumskillnader är inte laddad. ¦ Beregningen af datoforskelle er ikke indlæst.
+Je ne sais pas calculer l’écart entre ces deux dates. ¦ Neumím spočítat rozdíl mezi těmito dvěma daty. ¦ Jag kan inte räkna ut skillnaden mellan de här två datumen. ¦ Jeg kan ikke beregne forskellen mellem disse to datoer.
+soit {days} ({weeks}) ¦ tj. {days} ({weeks}) ¦ dvs. {days} ({weeks}) ¦ dvs. {days} ({weeks})
+la 2e date est la plus ancienne ¦ 2. datum je starší ¦ det 2:a datumet är det äldsta ¦ den 2. dato er den ældste
+du {from} au {to} ¦ od {from} do {to} ¦ från {from} till {to} ¦ fra {from} til {to}
+{n} environ ¦ asi {n} ¦ cirka {n} ¦ cirka {n}
+entre {years} et {x} ¦ mezi {years} a {x} ¦ mellan {years} och {x} ¦ mellem {years} og {x}
+une date n’est pas complète (jour, mois et année) : de {x} à {x2} ¦ jedno datum není úplné (den, měsíc a rok): od {x} do {x2} ¦ ett datum är inte fullständigt (dag, månad och år): från {x} till {x2} ¦ en dato er ikke fuldstændig (dag, måned og år): fra {x} til {x2}
+Je ne comprends pas la date « {x} ». ¦ Nerozumím datu „{x}“. ¦ Jag förstår inte datumet ”{x}”. ¦ Jeg forstår ikke datoen »{x}«.
+Écris-la comme dans un acte : 7 mai 1925, 14/07/1789, 3 frimaire an XII. ¦ Napiš ho jako v matričním záznamu: 7 mai 1925, 14/07/1789, 3 frimaire an XII. ¦ Skriv det som i en handling: 7 mai 1925, 14/07/1789, 3 frimaire an XII. ¦ Skriv den som i et dokument: 7 mai 1925, 14/07/1789, 3 frimaire an XII.
+Il faut une date complète (jour, mois, année). ¦ Je potřeba úplné datum (den, měsíc, rok). ¦ Det behövs ett fullständigt datum (dag, månad, år). ¦ Der skal være en fuldstændig dato (dag, måned, år).
+« {x} » est une mesure de {label} : choisis cette région dans ⚙️ Réglages → Mesures anciennes. ¦ „{x}“ je míra z oblasti {label}: vyber tuto oblast v ⚙️ Nastavení → Staré míry. ¦ ”{x}” är ett mått från {label}: välj den regionen i ⚙️ Inställningar → Gamla mått. ¦ »{x}« er et mål fra {label}: vælg den region i ⚙️ Indstillinger → Gamle mål.
+Je ne connais pas l’unité « {right} ». ¦ Jednotku „{right}“ neznám. ¦ Jag känner inte till enheten ”{right}”. ¦ Jeg kender ikke enheden »{right}«.
+Les unités comprises sont dans la rubrique « Unités » du mode 🧪 Scientifique. ¦ Jednotky, kterým rozumím, jsou v oddílu „Jednotky“ režimu 🧪 Vědecká. ¦ Enheterna som förstås finns under ”Enheter” i läget 🧪 Vetenskaplig. ¦ De enheder, der forstås, står under »Enheder« i tilstanden 🧪 Videnskabelig.
+On ne peut pas convertir une {x} en {x2} ({right}). ¦ Veličinu {x} nelze převést na {x2} ({right}). ¦ Man kan inte omvandla {x} till {x2} ({right}). ¦ Man kan ikke omregne {x} til {x2} ({right}).
+Je ne connais pas l’unité de « {left} ». ¦ Neznám jednotku „{left}“. ¦ Jag känner inte till enheten för ”{left}”. ¦ Jeg kender ikke enheden for »{left}«.
+angle en {x} : passe en RAD pour calculer avec π ¦ úhel ve {x}: přepni na RAD, chceš-li počítat s π ¦ vinkel i {x}: byt till RAD för att räkna med π ¦ vinkel i {x}: skift til RAD for at regne med π
+degrés ¦ stupních ¦ grader ¦ grader
+grades ¦ gradech ¦ gon ¦ gon
+Ce calcul est trop gros pour être fait. ¦ Tento výpočet je příliš velký. ¦ Den här beräkningen är för stor för att göras. ¦ Denne beregning er for stor til at blive udført.
+La lettre « {x} » n’a pas de valeur : une courbe s’écrit avec x seulement, par exemple sin(x). ¦ Písmeno „{x}“ nemá hodnotu: graf funkce se píše jen s x, například sin(x). ¦ Bokstaven ”{x}” har inget värde: en kurva skrivs bara med x, till exempel sin(x). ¦ Bogstavet »{x}« har ingen værdi: en kurve skrives kun med x, for eksempel sin(x).
+Écris seulement la formule de y, par exemple x^2 − 1 (sans « = »). ¦ Napiš jen vzorec pro y, například x^2 − 1 (bez „=“). ¦ Skriv bara formeln för y, till exempel x^2 − 1 (utan ”=”). ¦ Skriv kun formlen for y, for eksempel x^2 − 1 (uden »=«).
+Trigonométrie ¦ Goniometrie ¦ Trigonometri ¦ Trigonometri
+Hyperboliques ¦ Hyperbolické ¦ Hyperboliska ¦ Hyperbolske
+Logarithmes et exponentielle ¦ Logaritmy a exponenciála ¦ Logaritmer och exponentialfunktion ¦ Logaritmer og eksponentialfunktion
+Puissances et racines ¦ Mocniny a odmocniny ¦ Potenser och rötter ¦ Potenser og rødder
+Nombres complexes ¦ Komplexní čísla ¦ Komplexa tal ¦ Komplekse tal
+Arithmétique et arrondis ¦ Aritmetika a zaokrouhlování ¦ Aritmetik och avrundning ¦ Aritmetik og afrunding
+Bases (binaire, hexadécimal…) ¦ Soustavy (dvojková, šestnáctková…) ¦ Talbaser (binär, hexadecimal…) ¦ Talsystemer (binært, hexadecimalt…)
+Matrices ¦ Matice ¦ Matriser ¦ Matricer
+Équations ¦ Rovnice ¦ Ekvationer ¦ Ligninger
+Dérivées et intégrales ¦ Derivace a integrály ¦ Derivator och integraler ¦ Afledte og integraler
+Degrés (un tour = 360°) ¦ Stupně (otáčka = 360°) ¦ Grader (ett varv = 360°) ¦ Grader (en omgang = 360°)
+Radians (un tour = 2π) ¦ Radiány (otáčka = 2π) ¦ Radianer (ett varv = 2π) ¦ Radianer (en omgang = 2π)
+Grades (un tour = 400 gr) ¦ Grady (otáčka = 400 gr) ¦ Gon (ett varv = 400 gr) ¦ Gon (en omgang = 400 gr)
+Fonctions ¦ Funkce ¦ Funktioner ¦ Funktioner
+Sinus ¦ Sinus ¦ Sinus ¦ Sinus
+Au carré ¦ Na druhou ¦ I kvadrat ¦ I anden
+Puissance ¦ Mocnina ¦ Potens ¦ Potens
+Racine carrée ¦ Druhá odmocnina ¦ Kvadratrot ¦ Kvadratrod
+Arc sinus ¦ Arkus sinus ¦ Arcussinus ¦ Arcus sinus
+Au cube ¦ Na třetí ¦ I kubik ¦ I tredje
+Logarithme népérien ¦ Přirozený logaritmus ¦ Naturlig logaritm ¦ Naturlig logaritme
+Exponentielle ¦ Exponenciála ¦ Exponentialfunktion ¦ Eksponentialfunktion
+Valeur absolue ¦ Absolutní hodnota ¦ Absolutbelopp ¦ Numerisk værdi
+Pi = 3,14159… ¦ Pí = 3,14159… ¦ Pi = 3,14159… ¦ Pi = 3,14159…
+Nombre d’or = 1,61803… ¦ Zlatý řez = 1,61803… ¦ Gyllene snittet = 1,61803… ¦ Det gyldne snit = 1,61803…
+Puissance de 10 ¦ Mocnina 10 ¦ Tiopotens ¦ Titalspotens
+Reste de la division ¦ Zbytek po dělení ¦ Rest vid division ¦ Rest ved division
+Pour cent (200 + 10 % = 220) ¦ Procento (200 + 10 % = 220) ¦ Procent (200 + 10 % = 220) ¦ Procent (200 + 10 % = 220)
+Degrés, même en mode RAD ¦ Stupně, i v režimu RAD ¦ Grader, även i läget RAD ¦ Grader, også i tilstanden RAD
+Sépare les nombres d’une fonction ¦ Odděluje čísla funkce ¦ Skiljer talen i en funktion åt ¦ Adskiller tallene i en funktion
+Le résultat précédent ¦ Předchozí výsledek ¦ Det föregående resultatet ¦ Det forrige resultat
+Complexes ¦ Komplexní ¦ Komplexa ¦ Komplekse
+Module |z| ¦ Modul |z| ¦ Belopp |z| ¦ Modulus |z|
+Argument (angle) ¦ Argument (úhel) ¦ Argument (vinkel) ¦ Argument (vinkel)
+Conjugué ¦ Komplexně sdružené ¦ Konjugat ¦ Konjugeret
+Écris un complexe a + bi : (3 + 4i) × 2, √(−9), i^2. ¦ Napiš komplexní číslo a + bi: (3 + 4i) × 2, √(−9), i^2. ¦ Skriv ett komplext tal a + bi: (3 + 4i) × 2, √(−9), i^2. ¦ Skriv et komplekst tal a + bi: (3 + 4i) × 2, √(−9), i^2.
+Arithmétique ¦ Aritmetika ¦ Aritmetik ¦ Aritmetik
+Combinaisons : C(n ; k) ¦ Kombinace: C(n ; k) ¦ Kombinationer: C(n ; k) ¦ Kombinationer: C(n ; k)
+Arrangements : A(n ; k) ¦ Variace: A(n ; k) ¦ Permutationer: A(n ; k) ¦ Permutationer: A(n ; k)
+Arrondi à 2 chiffres après la virgule ¦ Zaokrouhlení na 2 desetinná místa ¦ Avrundning till 2 decimaler ¦ Afrunding til 2 decimaler
+Partie entière ¦ Celá část ¦ Heltalsdel ¦ Heltalsdel
+En fraction ¦ Na zlomek ¦ Som bråk ¦ Som brøk
+En nombre à virgule ¦ Na desetinné číslo ¦ Som decimaltal ¦ Som decimaltal
+Bases ¦ Soustavy ¦ Talbaser ¦ Talsystemer
+En binaire ¦ Dvojkově ¦ Binärt ¦ Binært
+En octal ¦ Osmičkově ¦ Oktalt ¦ Oktalt
+En hexadécimal ¦ Šestnáctkově ¦ Hexadecimalt ¦ Hexadecimalt
+Dans une base de 2 à 36 ¦ V soustavě o základu 2 až 36 ¦ I en bas från 2 till 36 ¦ I en base fra 2 til 36
+Un nombre binaire : 0b1010 ¦ Dvojkové číslo: 0b1010 ¦ Ett binärt tal: 0b1010 ¦ Et binært tal: 0b1010
+Un nombre hexadécimal : 0xFF ¦ Šestnáctkové číslo: 0xFF ¦ Ett hexadecimalt tal: 0xFF ¦ Et hexadecimalt tal: 0xFF
+Une liste : [12 ; 15 ; 9] ¦ Seznam: [12 ; 15 ; 9] ¦ En lista: [12 ; 15 ; 9] ¦ En liste: [12 ; 15 ; 9]
+Sépare les nombres ¦ Odděluje čísla ¦ Skiljer talen åt ¦ Adskiller tallene
+Écart-type (population) ¦ Směrodatná odchylka (soubor) ¦ Standardavvikelse (population) ¦ Standardafvigelse (population)
+Écart-type d’un échantillon ¦ Výběrová směrodatná odchylka ¦ Standardavvikelse för ett stickprov ¦ Standardafvigelse for en stikprøve
+Mets tes nombres entre crochets, séparés par « ; ». ¦ Dej svá čísla do hranatých závorek, oddělená „;“. ¦ Sätt dina tal inom hakparenteser, åtskilda med ”;”. ¦ Sæt dine tal i kantede parenteser, adskilt med »;«.
+Écrire une matrice dans une grille ¦ Zapsat matici do mřížky ¦ Skriv en matris i ett rutnät ¦ Skriv en matrix i et gitter
+Une matrice : [[1 ; 2] ; [3 ; 4]] ¦ Matice: [[1 ; 2] ; [3 ; 4]] ¦ En matris: [[1 ; 2] ; [3 ; 4]] ¦ En matrix: [[1 ; 2] ; [3 ; 4]]
+Matrice identité ¦ Jednotková matice ¦ Enhetsmatris ¦ Identitetsmatrix
+Produit de deux matrices ¦ Součin dvou matic ¦ Produkten av två matriser ¦ Produktet af to matricer
+Une matrice = des lignes entre crochets : [[1 ; 2] ; [3 ; 4]]. ¦ Matice = řádky v hranatých závorkách: [[1 ; 2] ; [3 ; 4]]. ¦ En matris = rader inom hakparenteser: [[1 ; 2] ; [3 ; 4]]. ¦ En matrix = rækker i kantede parenteser: [[1 ; 2] ; [3 ; 4]].
+Le signe égal d’une équation ¦ Rovnítko v rovnici ¦ Likhetstecknet i en ekvation ¦ Lighedstegnet i en ligning
+Résout une équation ou un système ¦ Řeší rovnici nebo soustavu ¦ Löser en ekvation eller ett system ¦ Løser en ligning eller et system
+Racines d’un polynôme : ses coefficients ¦ Kořeny polynomu: jeho koeficienty ¦ Rötterna till ett polynom: dess koefficienter ¦ Rødderne i et polynomium: dets koefficienter
+Système A·X = B ¦ Soustava A·X = B ¦ System A·X = B ¦ System A·X = B
+Tape l’équation avec « = » : la calculette la résout (jusqu’au 4e degré exactement). ¦ Napiš rovnici s „=“: kalkulačka ji vyřeší (přesně až do 4. stupně). ¦ Skriv ekvationen med ”=”: miniräknaren löser den (exakt upp till grad 4). ¦ Skriv ligningen med »=«: lommeregneren løser den (præcist op til 4. grad).
+Analyse ¦ Analýza ¦ Analys ¦ Analyse
+Nombre dérivé : derivee(f(x) ; a) ¦ Derivace v bodě: derivee(f(x) ; a) ¦ Derivata i en punkt: derivee(f(x) ; a) ¦ Afledt i et punkt: derivee(f(x) ; a)
+Intégrale : integrale(f(x) ; a ; b) ¦ Integrál: integrale(f(x) ; a ; b) ¦ Integral: integrale(f(x) ; a ; b) ¦ Integral: integrale(f(x) ; a ; b)
+Limite : limite(f(x) ; a) ¦ Limita: limite(f(x) ; a) ¦ Gränsvärde: limite(f(x) ; a) ¦ Grænseværdi: limite(f(x) ; a)
+Somme d’une suite ¦ Součet posloupnosti ¦ Summan av en följd ¦ Summen af en følge
+Les dérivées, intégrales et limites se calculent en radians. ¦ Derivace, integrály a limity se počítají v radiánech. ¦ Derivator, integraler och gränsvärden beräknas i radianer. ¦ Afledte, integraler og grænseværdier beregnes i radianer.
+Unités ¦ Jednotky ¦ Enheter ¦ Enheder
+Écris « 3 toises en m » ; les mesures anciennes suivent la région choisie dans ⚙️. ¦ Napiš „3 toises en m“; staré míry se řídí oblastí zvolenou v ⚙️. ¦ Skriv ”3 toises en m”; de gamla måtten följer regionen som valts i ⚙️. ¦ Skriv »3 toises en m«; de gamle mål følger den region, der er valgt i ⚙️.
+Les dates s’écrivent comme dans un acte (C4) : 7 mai 1925, 14/07/1789, vers 1784, 3 frimaire an XII. ¦ Data se píšou jako v matričním záznamu (C4): 7 mai 1925, 14/07/1789, vers 1784, 3 frimaire an XII. ¦ Datum skrivs som i en handling (C4): 7 mai 1925, 14/07/1789, vers 1784, 3 frimaire an XII. ¦ Datoer skrives som i et dokument (C4): 7 mai 1925, 14/07/1789, vers 1784, 3 frimaire an XII.
+Tout effacer (Échap) ¦ Vymazat vše (Esc) ¦ Rensa allt (Esc) ¦ Ryd alt (Esc)
+Effacer le dernier signe ¦ Smazat poslední znak ¦ Radera det sista tecknet ¦ Slet det sidste tegn
+Pour cent ¦ Procento ¦ Procent ¦ Procent
+Changer le signe ¦ Změnit znaménko ¦ Byt tecken ¦ Skift fortegn
+Calculer (Entrée) ¦ Spočítat (Enter) ¦ Beräkna (Enter) ¦ Beregn (Enter)
+Glisser pour déplacer la calculette ¦ Táhni pro přesunutí kalkulačky ¦ Dra för att flytta miniräknaren ¦ Træk for at flytte lommeregneren
+Mode de la calculette ¦ Režim kalkulačky ¦ Miniräknarens läge ¦ Lommeregnerens tilstand
+Grosses touches, ruban, mémoire ¦ Velké klávesy, páska, paměť ¦ Stora knappar, remsa, minne ¦ Store taster, strimmel, hukommelse
+Fonctions, complexes, matrices, équations, unités, dates ¦ Funkce, komplexní čísla, matice, rovnice, jednotky, data ¦ Funktioner, komplexa tal, matriser, ekvationer, enheter, datum ¦ Funktioner, komplekse tal, matricer, ligninger, enheder, datoer
+Tracer des courbes y = f(x) ¦ Kreslit grafy y = f(x) ¦ Rita kurvor y = f(x) ¦ Tegn kurver y = f(x)
+Réglages de la calculette ¦ Nastavení kalkulačky ¦ Inställningar för miniräknaren ¦ Indstillinger for lommeregneren
+Fermer la calculette ¦ Zavřít kalkulačku ¦ Stäng miniräknaren ¦ Luk lommeregneren
+Vider le ruban (on peut l’annuler juste après) ¦ Vyprázdnit pásku (hned potom to jde vrátit zpět) ¦ Töm remsan (det går att ångra direkt efteråt) ¦ Tøm strimlen (det kan fortrydes lige bagefter)
+Calculs déjà faits : un clic reprend le résultat ¦ Hotové výpočty: kliknutím převezmeš výsledek ¦ Gjorda beräkningar: ett klick hämtar resultatet ¦ Udførte beregninger: et klik henter resultatet
+Calcul à faire ¦ Výpočet ¦ Beräkning att göra ¦ Beregning, der skal udføres
+Tape un calcul… ¦ Napiš výpočet… ¦ Skriv en beräkning… ¦ Skriv en beregning…
+Copier le résultat ¦ Kopírovat výsledek ¦ Kopiera resultatet ¦ Kopiér resultatet
+Effacer la mémoire ¦ Vymazat paměť ¦ Rensa minnet ¦ Ryd hukommelsen
+Reprendre le nombre gardé en mémoire ¦ Vyvolat číslo z paměti ¦ Hämta talet från minnet ¦ Hent tallet fra hukommelsen
+Ajouter le résultat à la mémoire ¦ Přičíst výsledek do paměti ¦ Lägg till resultatet i minnet ¦ Læg resultatet til hukommelsen
+Retirer le résultat de la mémoire ¦ Odečíst výsledek z paměti ¦ Dra av resultatet från minnet ¦ Træk resultatet fra hukommelsen
+Unité des angles ¦ Jednotka úhlů ¦ Vinkelenhet ¦ Vinkelenhed
+Ajouter une courbe ¦ Přidat graf ¦ Lägg till en kurva ¦ Tilføj en kurve
+Exporter l’image du graphique (PNG) ¦ Exportovat obrázek grafu (PNG) ¦ Exportera bilden av diagrammet (PNG) ¦ Eksportér billedet af grafen (PNG)
+Exporter en PNG ¦ Exportovat do PNG ¦ Exportera som PNG ¦ Eksportér som PNG
+Graphique des courbes ¦ Graf funkcí ¦ Diagram över kurvorna ¦ Graf over kurverne
+Glisse pour te déplacer · molette pour zoomer · survole une courbe pour lire ses valeurs · x en radians. ¦ Táhni pro posun · kolečkem přibliž · najeď na graf a čti hodnoty · x v radiánech. ¦ Dra för att flytta · scrollhjul för att zooma · för musen över en kurva för att läsa värdena · x i radianer. ¦ Træk for at flytte · rullehjul for at zoome · hold over en kurve for at aflæse værdierne · x i radianer.
+Glisser pour agrandir ou réduire ¦ Táhni pro zvětšení nebo zmenšení ¦ Dra för att förstora eller förminska ¦ Træk for at forstørre eller formindske
+Point décimal ¦ Desetinná čárka ¦ Decimaltecken ¦ Decimaltegn
+Par exemple 12 × 3,5, ou 1/3 + 1/6. ¦ Například 12 × 3,5 nebo 1/3 + 1/6. ¦ Till exempel 12 × 3,5 eller 1/3 + 1/6. ¦ For eksempel 12 × 3,5 eller 1/3 + 1/6.
+Reprendre ce résultat dans le calcul ¦ Převzít tento výsledek do výpočtu ¦ Använd det här resultatet i beräkningen ¦ Brug dette resultat i beregningen
+Reprendre ce calcul pour le modifier ¦ Převzít tento výpočet a upravit ho ¦ Hämta den här beräkningen för att ändra den ¦ Hent denne beregning for at ændre den
+Reprendre ce calcul ¦ Převzít tento výpočet ¦ Hämta den här beräkningen ¦ Hent denne beregning
+Copier ce résultat ¦ Kopírovat tento výsledek ¦ Kopiera det här resultatet ¦ Kopiér dette resultat
+Tes calculs s’écriront ici. ¦ Tvoje výpočty se objeví tady. ¦ Dina beräkningar skrivs här. ¦ Dine beregninger skrives her.
+Ruban de la calculette vidé ¦ Páska kalkulačky vyprázdněna ¦ Miniräknarens remsa tömd ¦ Lommeregnerens strimmel er tømt
+Résultat copié ¦ Výsledek zkopírován ¦ Resultatet kopierat ¦ Resultatet er kopieret
+Il n’y a pas encore de résultat à copier. ¦ Zatím tu není žádný výsledek ke kopírování. ¦ Det finns inget resultat att kopiera ännu. ¦ Der er endnu intet resultat at kopiere.
+La copie n’a pas marché : choisis le résultat et copie-le à la main. ¦ Kopírování nefungovalo: označ výsledek a zkopíruj ho ručně. ¦ Kopieringen fungerade inte: markera resultatet och kopiera det för hand. ¦ Kopieringen virkede ikke: markér resultatet, og kopiér det manuelt.
+Nombre gardé en mémoire ¦ Číslo v paměti ¦ Tal i minnet ¦ Tal i hukommelsen
+Calcule d’abord un nombre à garder en mémoire. ¦ Nejdřív spočítej číslo, které chceš uložit do paměti. ¦ Räkna först ut ett tal att spara i minnet. ¦ Beregn først et tal, der skal gemmes i hukommelsen.
+Ajouter au calcul ¦ Přidat do výpočtu ¦ Lägg till i beräkningen ¦ Tilføj til beregningen
+Mesures anciennes : {label} (à changer dans ⚙️). Pour les mesures et monnaies d’autres régions : Réglages → Calendrier / mesures. ¦ Staré míry: {label} (změníš v ⚙️). Míry a měny jiných oblastí: Nastavení → Kalendář / míry. ¦ Gamla mått: {label} (ändras i ⚙️). För mått och valutor från andra regioner: Inställningar → Kalender / mått. ¦ Gamle mål: {label} (ændres i ⚙️). For mål og mønter fra andre regioner: Indstillinger → Kalender / mål.
+Âge ou écart entre deux dates ¦ Věk nebo rozdíl mezi dvěma daty ¦ Ålder eller skillnad mellan två datum ¦ Alder eller forskel mellem to datoer
+Calculer l’écart ¦ Spočítat rozdíl ¦ Beräkna skillnaden ¦ Beregn forskellen
+Calendrier républicain ↔ grégorien ¦ Republikánský kalendář ↔ gregoriánský ¦ Republikansk kalender ↔ gregoriansk ¦ Republikansk kalender ↔ gregoriansk
+3 frimaire an XII ou 14/07/1794 ¦ 3 frimaire an XII nebo 14/07/1794 ¦ 3 frimaire an XII eller 14/07/1794 ¦ 3 frimaire an XII eller 14/07/1794
+Retirer cette courbe ¦ Odebrat tento graf ¦ Ta bort den här kurvan ¦ Fjern denne kurve
+Aucune courbe. ¦ Žádný graf. ¦ Ingen kurva. ¦ Ingen kurve.
+Revenir à la vue de départ ¦ Vrátit se k výchozímu zobrazení ¦ Gå tillbaka till startvyn ¦ Gå tilbage til startvisningen
+Image « {name} » téléchargée. ¦ Obrázek „{name}“ stažen. ¦ Bilden ”{name}” har laddats ned. ¦ Billedet »{name}« er downloadet.
+Ce résultat ne se reprend pas dans un calcul (c’est un texte). ¦ Tento výsledek nejde použít ve výpočtu (je to text). ¦ Det här resultatet kan inte användas i en beräkning (det är text). ¦ Dette resultat kan ikke bruges i en beregning (det er tekst).
+Courbe retirée. ¦ Graf odebrán. ¦ Kurvan borttagen. ¦ Kurven er fjernet.
+Écris la première date. ¦ Napiš první datum. ¦ Skriv det första datumet. ¦ Skriv den første dato.
+Écris la deuxième date. ¦ Napiš druhé datum. ¦ Skriv det andra datumet. ¦ Skriv den anden dato.
+Écris une date. ¦ Napiš datum. ¦ Skriv ett datum. ¦ Skriv en dato.
+{d} en grégorien ¦ {d} v gregoriánském kalendáři ¦ {d} i gregoriansk kalender ¦ {d} i gregoriansk kalender
+{d} en républicain ¦ {d} v republikánském kalendáři ¦ {d} i republikansk kalender ¦ {d} i republikansk kalender
+Comme l’app (clair ou sombre) ¦ Jako aplikace (světlý nebo tmavý) ¦ Som appen (ljus eller mörk) ¦ Som appen (lys eller mørk)
+Chiffres affichés ¦ Zobrazené číslice ¦ Visade siffror ¦ Viste cifre
+Séparateur décimal ¦ Oddělovač desetinných míst ¦ Decimaltecken ¦ Decimaltegn
+Virgule : 2,5 (et « ; » entre les nombres) ¦ Čárka: 2,5 (a „;“ mezi čísly) ¦ Komma: 2,5 (och ”;” mellan talen) ¦ Komma: 2,5 (og »;« mellem tallene)
+Point : 2.5 (et « , » ou « ; » entre les nombres) ¦ Tečka: 2.5 (a „,“ nebo „;“ mezi čísly) ¦ Punkt: 2.5 (och ”,” eller ”;” mellan talen) ¦ Punktum: 2.5 (og »,« eller »;« mellem tallene)
+Fractions exactes quand c’est possible (1/3 au lieu de 0,333…) ¦ Přesné zlomky, když to jde (1/3 místo 0,333…) ¦ Exakta bråk när det går (1/3 i stället för 0,333…) ¦ Præcise brøker, når det er muligt (1/3 i stedet for 0,333…)
+Fractions exactes ¦ Přesné zlomky ¦ Exakta bråk ¦ Præcise brøker
+Bouton 🧮 dans la barre du haut ¦ Tlačítko 🧮 v horní liště ¦ Knappen 🧮 i övre fältet ¦ Knappen 🧮 i topbjælken
+La calculette s’ouvre aussi avec {x} (à changer dans Réglages → Raccourcis). Sa place parmi les boutons du haut : Réglages → Apparence → « Boutons en haut à droite ». ¦ Kalkulačka se otevírá i pomocí {x} (změníš v Nastavení → Zkratky). Její místo mezi horními tlačítky: Nastavení → Vzhled → „Tlačítka vpravo nahoře“. ¦ Miniräknaren öppnas också med {x} (ändras i Inställningar → Kortkommandon). Dess plats bland knapparna överst: Inställningar → Utseende → ”Knappar uppe till höger”. ¦ Lommeregneren åbnes også med {x} (ændres i Indstillinger → Genveje). Dens plads blandt knapperne øverst: Indstillinger → Udseende → »Knapper øverst til højre«.
+Réglage de la calculette ¦ Nastavení kalkulačky ¦ Inställning för miniräknaren ¦ Indstilling for lommeregneren
+les réglages de la calculette (thème, mode, angle, précision) ¦ nastavení kalkulačky (motiv, režim, úhel, přesnost) ¦ miniräknarens inställningar (tema, läge, vinkel, precision) ¦ lommeregnerens indstillinger (tema, tilstand, vinkel, præcision)
+Réglage « {nom} » importé : clique « Appliquer » pour t’en servir. ¦ Nastavení „{nom}“ importováno: klikni na „Použít“ a začni ho používat. ¦ Inställningen ”{nom}” har importerats: klicka på ”Tillämpa” för att använda den. ¦ Indstillingen »{nom}« er importeret: klik på »Anvend« for at bruge den.
+La calculette n’est pas encore chargée. Réessaie dans un instant. ¦ Kalkulačka ještě není načtená. Zkus to za chvíli znovu. ¦ Miniräknaren är inte laddad än. Försök igen om en stund. ¦ Lommeregneren er ikke indlæst endnu. Prøv igen om lidt.
+Ouvrir la calculette ¦ Otevřít kalkulačku ¦ Öppna miniräknaren ¦ Åbn lommeregneren
+CALCULETTE ¦ KALKULAČKA ¦ MINIRÄKNARE ¦ LOMMEREGNER
+Mesures anciennes ¦ Staré míry ¦ Gamla mått ¦ Gamle mål
+date|De ¦ Od ¦ Från ¦ Fra
+date|À ¦ Do ¦ Till ¦ Til
+=calcul ¦ výpočet|výpočty|výpočtů ¦ beräkning|beräkningar ¦ beregning|beregninger
+Français + latin ¦ Francouzština + latina ¦ Franska + latin ¦ Fransk + latin
+Titre de l’acte (ex. Baptême de Jean Martin, 1790) ¦ Název záznamu (např. Křest Jeana Martina, 1790) ¦ Handlingens titel (t.ex. Dop av Jean Martin, 1790) ¦ Dokumentets titel (f.eks. Dåb af Jean Martin, 1790)
+Genre d’acte ¦ Druh záznamu ¦ Typ av handling ¦ Dokumenttype
+Source (AD, cote, vue) ¦ Pramen (archiv, signatura, snímek) ¦ Källa (arkiv, signum, bild) ¦ Kilde (arkiv, signatur, billede)
+Archives, cote, numéro de vue ¦ Archiv, signatura, číslo snímku ¦ Arkiv, signum, bildnummer ¦ Arkiv, signatur, billednummer
+Où en est cette transcription (pour la liste « Transcriptions d’actes ») ¦ Stav tohoto přepisu (pro seznam „Přepisy záznamů“) ¦ Hur långt transkriberingen har kommit (för listan ”Transkriberingar”) ¦ Hvor langt transskriptionen er nået (til listen »Transskriptioner«)
+Le texte (.txt), l’impression ou un PDF (image + texte) ¦ Text (.txt), tisk nebo PDF (obrázek + text) ¦ Texten (.txt), utskrift eller en PDF (bild + text) ¦ Teksten (.txt), udskrift eller en PDF (billede + tekst)
+Exporter ▾ ¦ Exportovat ▾ ¦ Exportera ▾ ¦ Eksportér ▾
+Plus ▾ ¦ Více ▾ ¦ Mer ▾ ¦ Mere ▾
+Déplacer l’image, ou barre d’espace ¦ Posunout obrázek, nebo mezerník ¦ Flytta bilden, eller mellanslag ¦ Flyt billedet, eller mellemrum
+Déplacer l’image ¦ Posunout obrázek ¦ Flytta bilden ¦ Flyt billedet
+Dessiner une zone : choisis un passage dans le texte, puis dessine son rectangle sur l’image (les deux restent liés) ¦ Nakreslit oblast: vyber úsek v textu a pak nakresli jeho obdélník na obrázku (obojí zůstane propojené) ¦ Rita ett område: välj ett stycke i texten och rita sedan dess rektangel på bilden (de två förblir kopplade) ¦ Tegn et område: vælg et afsnit i teksten, og tegn derefter dets rektangel på billedet (de to forbliver forbundet)
+Dessiner une zone ¦ Nakreslit oblast ¦ Rita ett område ¦ Tegn et område
+Loupe qui suit la souris (la molette change le grossissement) ¦ Lupa, která sleduje myš (kolečko mění zvětšení) ¦ Förstoringsglas som följer musen (scrollhjulet ändrar förstoringen) ¦ Lup, der følger musen (rullehjulet ændrer forstørrelsen)
+Tourner l’image de 90° ¦ Otočit obrázek o 90° ¦ Vrid bilden 90° ¦ Drej billedet 90°
+Tourner de 90° ¦ Otočit o 90° ¦ Vrid 90° ¦ Drej 90°
+Choisir l’image de l’acte (base ou ordinateur) ¦ Vybrat obrázek záznamu (databáze nebo počítač) ¦ Välj bilden av handlingen (databas eller dator) ¦ Vælg billedet af dokumentet (database eller computer)
+Choisis l’image de l’acte : « 🖼️ Image… » (une photo de la base, ou un fichier de l’ordinateur). ¦ Vyber obrázek záznamu: „🖼️ Obrázek…“ (fotka z databáze nebo soubor z počítače). ¦ Välj bilden av handlingen: ”🖼️ Bild…” (ett foto från databasen eller en fil från datorn). ¦ Vælg billedet af dokumentet: »🖼️ Billede…« (et foto fra databasen eller en fil fra computeren).
+Lire un texte imprimé ou tapé (pose aussi les zones ligne par ligne) ¦ Přečíst tištěný nebo psaný text (zároveň vloží oblasti řádek po řádku) ¦ Läs en tryckt eller maskinskriven text (lägger också ut områden rad för rad) ¦ Læs en trykt eller maskinskrevet tekst (lægger også områder ud linje for linje)
+Lire (imprimé) ¦ Přečíst (tištěné) ¦ Läs (tryckt) ¦ Læs (trykt)
+Lire l’écriture à la main : toute la page, ou seulement la zone choisie (▭). Le texte est proposé ligne par ligne, à relire. ¦ Přečíst rukopis: celou stránku, nebo jen zvolenou oblast (▭). Text se nabídne řádek po řádku ke kontrole. ¦ Läs handskrift: hela sidan eller bara det valda området (▭). Texten föreslås rad för rad och ska läsas igenom. ¦ Læs håndskrift: hele siden eller kun det valgte område (▭). Teksten foreslås linje for linje og skal læses igennem.
+Lire l’acte ¦ Přečíst záznam ¦ Läs handlingen ¦ Læs dokumentet
+Arrêter la lecture ¦ Zastavit čtení ¦ Stoppa läsningen ¦ Stop læsningen
+Langue du texte : sert à la lecture automatique, et « 📜 Aide à la lecture » s’ouvre sur cette langue ¦ Jazyk textu: slouží pro automatické čtení a „📜 Pomoc se čtením“ se otevře v tomto jazyce ¦ Textens språk: används för automatisk läsning, och ”📜 Läshjälp” öppnas på det språket ¦ Tekstens sprog: bruges til automatisk læsning, og »📜 Læsehjælp« åbner på det sprog
+Un modèle d’acte à compléter ¦ Šablona záznamu k doplnění ¦ En mall för handlingen att fylla i ¦ En dokumentskabelon, der skal udfyldes
+Le latin des registres, les abréviations, les anciennes lettres (ſ, ꝑ…) et des exercices : choisis d’abord un mot dans le texte pour le chercher ¦ Latina matrik, zkratky, stará písmena (ſ, ꝑ…) a cvičení: nejdřív vyber slovo v textu, které chceš hledat ¦ Kyrkböckernas latin, förkortningar, gamla bokstäver (ſ, ꝑ…) och övningar: välj först ett ord i texten för att söka efter det ¦ Kirkebøgernes latin, forkortelser, gamle bogstaver (ſ, ꝑ…) og øvelser: vælg først et ord i teksten for at søge efter det
+Aide à la lecture ¦ Pomoc se čtením ¦ Läshjälp ¦ Læsehjælp
+Repérer les noms, dates, lieux et métiers ¦ Najít jména, data, místa a povolání ¦ Hitta namn, datum, platser och yrken ¦ Find navne, datoer, steder og erhverv
+Repérer ¦ Najít ¦ Hitta ¦ Find
+Mettre le texte dans le média ¦ Vložit text do média ¦ Lägg texten i mediet ¦ Læg teksten i mediet
+Copier le texte ¦ Kopírovat text ¦ Kopiera texten ¦ Kopiér teksten
+La lecture (imprimé et manuscrit) et l’export prennent l’image avec les réglages « Mieux voir » (contraste, netteté, canal, seuil…), sinon l’image d’origine ¦ Čtení (tištěné i rukopisné) a export použijí obrázek s nastavením „Lépe vidět“ (kontrast, ostrost, kanál, práh…), jinak původní obrázek ¦ Läsningen (tryckt och handskriven) och exporten använder bilden med inställningarna ”Se bättre” (kontrast, skärpa, kanal, tröskel…), annars originalbilden ¦ Læsningen (trykt og håndskrevet) og eksporten bruger billedet med indstillingerne »Se bedre« (kontrast, skarphed, kanal, tærskel…), ellers det originale billede
+Lire et exporter l’image améliorée ¦ Číst a exportovat vylepšený obrázek ¦ Läs och exportera den förbättrade bilden ¦ Læs og eksportér det forbedrede billede
+Insérer {c} ¦ Vložit {c} ¦ Infoga {c} ¦ Indsæt {c}
+La transcription, ligne à ligne comme sur l’acte. Choisis un passage, puis dessine sa zone sur l’image (▭ Zone) : les deux restent liés. ¦ Přepis řádek po řádku jako v záznamu. Vyber úsek a pak nakresli jeho oblast na obrázku (▭ Oblast): obojí zůstane propojené. ¦ Transkriberingen, rad för rad som i handlingen. Välj ett stycke och rita sedan dess område på bilden (▭ Område): de två förblir kopplade. ¦ Transskriptionen, linje for linje som i dokumentet. Vælg et afsnit, og tegn derefter dets område på billedet (▭ Område): de to forbliver forbundet.
+Elles étaient posées pour l’ancienne image. ¦ Byly umístěny pro předchozí obrázek. ¦ De lades ut för den gamla bilden. ¦ De blev lagt ud til det gamle billede.
+Garder les zones déjà posées ? ¦ Ponechat už umístěné oblasti? ¦ Behålla områdena som redan lagts ut? ¦ Behold de områder, der allerede er lagt ud?
+Garder les zones ¦ Ponechat oblasti ¦ Behåll områdena ¦ Behold områderne
+Les retirer ¦ Odebrat je ¦ Ta bort dem ¦ Fjern dem
+L’image est dans les Médias et devient l’image de l’acte. ¦ Obrázek je v Médiích a stává se obrázkem záznamu. ¦ Bilden finns i Media och blir handlingens bild. ¦ Billedet er i Medier og bliver dokumentets billede.
+Largeur (l’image prend toute la largeur, le mieux pour lire) ¦ Šířka (obrázek zabere celou šířku, nejlepší pro čtení) ¦ Bredd (bilden tar hela bredden, bäst för läsning) ¦ Bredde (billedet fylder hele bredden, bedst til læsning)
+Taille réelle (100 %) ¦ Skutečná velikost (100 %) ¦ Verklig storlek (100 %) ¦ Faktisk størrelse (100 %)
+« Mieux voir » : cette image n’a pas pu être préparée (trop grande ou abîmée) ; seuls contraste, luminosité, négatif et gris s’appliquent. ¦ „Lépe vidět“: tento obrázek se nepodařilo připravit (je příliš velký nebo poškozený); použije se jen kontrast, jas, negativ a šedá. ¦ ”Se bättre”: bilden kunde inte förberedas (för stor eller skadad); bara kontrast, ljusstyrka, negativ och grått tillämpas. ¦ »Se bedre«: billedet kunne ikke forberedes (for stort eller beskadiget); kun kontrast, lysstyrke, negativ og gråtoner anvendes.
+Ce navigateur ne sait pas calculer ces réglages : seuls contraste, luminosité, négatif et gris s’appliquent. ¦ Tento prohlížeč tato nastavení neumí spočítat: použije se jen kontrast, jas, negativ a šedá. ¦ Den här webbläsaren kan inte beräkna de inställningarna: bara kontrast, ljusstyrka, negativ och grått tillämpas. ¦ Denne browser kan ikke beregne disse indstillinger: kun kontrast, lysstyrke, negativ og gråtoner anvendes.
+Image de l’acte illisible. ¦ Obrázek záznamu je nečitelný. ¦ Bilden av handlingen går inte att läsa. ¦ Billedet af dokumentet kan ikke læses.
+Zone non reliée ¦ Nepropojená oblast ¦ Okopplat område ¦ Uforbundet område
+— glisse pour la déplacer, tire une poignée pour la redimensionner (flèches, Maj + flèches) ¦ — táhni pro přesun, tahem za úchyt změníš velikost (šipky, Shift + šipky) ¦ — dra för att flytta det, dra i ett handtag för att ändra storlek (piltangenter, Skift + piltangenter) ¦ — træk for at flytte det, træk i et håndtag for at ændre størrelsen (piletaster, Skift + piletaster)
+Tirer pour redimensionner ¦ Táhni pro změnu velikosti ¦ Dra för att ändra storlek ¦ Træk for at ændre størrelse
+pas encore reliée au texte ¦ zatím nepropojená s textem ¦ ännu inte kopplat till texten ¦ endnu ikke forbundet med teksten
+Relier cette zone au passage choisi dans le texte ¦ Propojit tuto oblast se zvoleným úsekem textu ¦ Koppla det här området till det valda stycket i texten ¦ Forbind dette område med det valgte afsnit i teksten
+Au passage choisi ¦ Ke zvolenému úseku ¦ Till det valda stycket ¦ Til det valgte afsnit
+Lire l’écriture à la main dans cette zone seulement ¦ Přečíst rukopis jen v této oblasti ¦ Läs handskriften bara i det här området ¦ Læs håndskriften kun i dette område
+Lire cette zone ¦ Přečíst tuto oblast ¦ Läs det här området ¦ Læs dette område
+Supprimer la zone (Suppr) — « ↶ Annuler » la remet ¦ Smazat oblast (Delete) — „↶ Vrátit zpět“ ji vrátí ¦ Radera området (Delete) — ”↶ Ångra” lägger tillbaka det ¦ Slet området (Delete) — »↶ Fortryd« sætter det tilbage
+Glisse la zone pour la déplacer, tire une des 8 poignées pour changer sa taille ¦ Táhni oblast pro přesun, tahem za jeden z 8 úchytů změníš její velikost ¦ Dra området för att flytta det, dra i ett av de 8 handtagen för att ändra storleken ¦ Træk området for at flytte det, træk i et af de 8 håndtag for at ændre størrelsen
+glisser · poignées · flèches · Maj + flèches · ⌘Z ¦ táhnout · úchyty · šipky · Shift + šipky · ⌘Z ¦ dra · handtag · piltangenter · Skift + piltangenter · ⌘Z ¦ træk · håndtag · piletaster · Skift + piletaster · ⌘Z
+Rétabli ¦ Obnoveno ¦ Återställt ¦ Gentaget
+Annulé ¦ Vráceno zpět ¦ Ångrat ¦ Fortrudt
+Zone supprimée ¦ Oblast smazána ¦ Området raderat ¦ Området er slettet
+Zone déplacée (⌘Z pour annuler) ¦ Oblast přesunuta (⌘Z pro vrácení) ¦ Området flyttat (⌘Z för att ångra) ¦ Området er flyttet (⌘Z for at fortryde)
+Zone redimensionnée (⌘Z pour annuler) ¦ Velikost oblasti změněna (⌘Z pro vrácení) ¦ Områdets storlek ändrad (⌘Z för att ångra) ¦ Områdets størrelse er ændret (⌘Z for at fortryde)
+Zone reliée au passage choisi ¦ Oblast propojena se zvoleným úsekem ¦ Området kopplat till det valda stycket ¦ Området er forbundet med det valgte afsnit
+Zone posée : choisis son passage dans le texte, puis « 🔗 Au passage choisi » ¦ Oblast umístěna: vyber její úsek v textu a pak „🔗 Ke zvolenému úseku“ ¦ Området utlagt: välj dess stycke i texten och sedan ”🔗 Till det valda stycket” ¦ Området er lagt ud: vælg dets afsnit i teksten og derefter »🔗 Til det valgte afsnit«
+Glisse pour déplacer l’image (ou barre d’espace) · molette : zoomer · clic sur une zone : la choisir ¦ Táhni pro posun obrázku (nebo mezerník) · kolečko: přiblížení · klik na oblast: vybrat ji ¦ Dra för att flytta bilden (eller mellanslag) · scrollhjul: zooma · klick på ett område: välj det ¦ Træk for at flytte billedet (eller mellemrum) · rullehjul: zoom · klik på et område: vælg det
+Choisis un passage dans le texte, puis dessine son rectangle sur l’image : les deux restent liés ¦ Vyber úsek v textu a pak nakresli jeho obdélník na obrázku: obojí zůstane propojené ¦ Välj ett stycke i texten och rita sedan dess rektangel på bilden: de två förblir kopplade ¦ Vælg et afsnit i teksten, og tegn derefter dets rektangel på billedet: de to forbliver forbundet
+Pas encore d’image ¦ Zatím žádný obrázek ¦ Ingen bild ännu ¦ Intet billede endnu
+Personnes de l’acte ¦ Osoby v záznamu ¦ Personer i handlingen ¦ Personer i dokumentet
+Rôle dans l’acte ¦ Role v záznamu ¦ Roll i handlingen ¦ Rolle i dokumentet
+— rôle — ¦ — role — ¦ — roll — ¦ — rolle —
+role|sujet ¦ hlavní osoba ¦ huvudperson ¦ hovedperson
+role|parent ¦ rodič ¦ förälder ¦ forælder
+role|conjoint ¦ manžel/manželka ¦ make/maka ¦ ægtefælle
+role|conjoint défunt ¦ zesnulý manžel/manželka ¦ avliden make/maka ¦ afdød ægtefælle
+role|défunt ¦ zesnulý ¦ avliden ¦ afdød
+role|parrain ¦ kmotr ¦ gudfar ¦ gudfar
+role|marraine ¦ kmotra ¦ gudmor ¦ gudmor
+role|témoin ¦ svědek ¦ vittne ¦ vidne
+role|déclarant ¦ oznamovatel ¦ anmälare ¦ anmelder
+role|officiant ¦ oddávající / celebrant ¦ officiant ¦ officiant
+role|officier ¦ úředník ¦ tjänsteman ¦ embedsmand
+role|notaire ¦ notář ¦ notarie ¦ notar
+role|autre ¦ jiná ¦ annan ¦ anden
+fiche n° {person_id} ¦ karta č. {person_id} ¦ post nr {person_id} ¦ post nr. {person_id}
+Fiche… ¦ Karta… ¦ Post… ¦ Post…
+Noms repérés ¦ Nalezená jména ¦ Hittade namn ¦ Fundne navne
+tout garder ¦ ponechat vše ¦ behåll allt ¦ behold alt
+Garder et relier à cette fiche ¦ Ponechat a propojit s touto kartou ¦ Behåll och koppla till den här posten ¦ Behold og forbind med denne post
+Garder dans les personnes de l’acte ¦ Ponechat mezi osobami záznamu ¦ Behåll bland personerna i handlingen ¦ Behold blandt personerne i dokumentet
+Ouvrir dans 📜 Aide à la lecture ¦ Otevřít v 📜 Pomoc se čtením ¦ Öppna i 📜 Läshjälp ¦ Åbn i 📜 Læsehjælp
+« 🧭 Repérer » cherche dans le texte les noms (et leur rôle : parrain, témoin, fils de…), les dates (même en toutes lettres, ou au calendrier républicain), les lieux et les métiers, et propose les fiches de ta base qui leur ressemblent. ¦ „🧭 Najít“ hledá v textu jména (a jejich roli: kmotr, svědek, syn…), data (i vypsaná slovy nebo v republikánském kalendáři), místa a povolání a nabídne karty z tvé databáze, které se jim podobají. ¦ ”🧭 Hitta” söker i texten efter namn (och deras roll: gudfar, vittne, son till…), datum (även utskrivna med ord eller i republikansk kalender), platser och yrken, och föreslår poster i din databas som liknar dem. ¦ »🧭 Find« søger i teksten efter navne (og deres rolle: gudfar, vidne, søn af…), datoer (også skrevet med bogstaver eller i republikansk kalender), steder og erhverv og foreslår de poster i din database, der ligner dem.
+Relier « {name} » à une fiche ¦ Propojit „{name}“ s kartou ¦ Koppla ”{name}” till en post ¦ Forbind »{name}« med en post
+Choisis une fiche. ¦ Vyber kartu. ¦ Välj en post. ¦ Vælg en post.
+Personne gardée et reliée à sa fiche. ¦ Osoba ponechána a propojena se svou kartou. ¦ Personen har behållits och kopplats till sin post. ¦ Personen er beholdt og forbundet med sin post.
+La transcription non enregistrée sera perdue (💾 d’abord). ¦ Neuložený přepis se ztratí (nejdřív 💾). ¦ Den osparade transkriberingen går förlorad (💾 först). ¦ Den ikke-gemte transskription går tabt (💾 først).
+« Mieux voir » : cette image n’a pas pu être préparée. ¦ „Lépe vidět“: tento obrázek se nepodařilo připravit. ¦ ”Se bättre”: bilden kunde inte förberedas. ¦ »Se bedre«: billedet kunne ikke forberedes.
+Chargement du lecteur… ¦ Načítání čtečky… ¦ Läsaren laddas… ¦ Indlæser læseren…
+Aucun texte lu sur cette image (essaie le contraste, ou « Lire (manuscrit) »). ¦ Na tomto obrázku nebyl přečten žádný text (zkus kontrast nebo „Přečíst (rukopis)“). ¦ Ingen text lästes på den här bilden (prova kontrasten eller ”Läs (handskrivet)”). ¦ Ingen tekst blev læst på dette billede (prøv kontrasten eller »Læs (håndskrevet)«).
+Texte lu (à relire) ¦ Přečtený text (ke kontrole) ¦ Läst text (läs igenom) ¦ Læst tekst (skal læses igennem)
+Texte lu et zones posées ligne par ligne : relis et corrige. ¦ Text přečten a oblasti umístěny řádek po řádku: zkontroluj a oprav. ¦ Texten läst och områden utlagda rad för rad: läs igenom och rätta. ¦ Teksten er læst og områder lagt ud linje for linje: læs igennem og ret.
+Lecture arrêtée ¦ Čtení zastaveno ¦ Läsningen stoppad ¦ Læsningen er stoppet
+Une lecture est déjà en cours. ¦ Čtení už probíhá. ¦ En läsning pågår redan. ¦ En læsning er allerede i gang.
+La lecture d’écriture manuscrite n’est pas encore installée : Réglages → Reconnaissance d’écriture (HTR) (une seule fois, l’assistant explique tout). ¦ Čtení rukopisu ještě není nainstalované: Nastavení → Rozpoznávání písma (HTR) (jen jednou, průvodce vše vysvětlí). ¦ Läsning av handskrift är inte installerad än: Inställningar → Handskriftsigenkänning (HTR) (bara en gång, guiden förklarar allt). ¦ Læsning af håndskrift er ikke installeret endnu: Indstillinger → Håndskriftsgenkendelse (HTR) (kun én gang, guiden forklarer alt).
+Lecture de la zone… ¦ Čtení oblasti… ¦ Läser området… ¦ Læser området…
+Lecture de l’acte… ¦ Čtení záznamu… ¦ Läser handlingen… ¦ Læser dokumentet…
+Lecture de la zone ¦ Čtení oblasti ¦ Läsning av området ¦ Læsning af området
+Lecture de l’acte ¦ Čtení záznamu ¦ Läsning av handlingen ¦ Læsning af dokumentet
+La lecture n’a pas abouti. ¦ Čtení se nezdařilo. ¦ Läsningen lyckades inte. ¦ Læsningen lykkedes ikke.
+Aucune ligne d’écriture trouvée : essaie « 🎚️ Mieux voir » (contraste), ou une zone plus serrée. ¦ Nenalezen žádný řádek písma: zkus „🎚️ Lépe vidět“ (kontrast) nebo menší oblast. ¦ Ingen skriftrad hittades: prova ”🎚️ Se bättre” (kontrast) eller ett snävare område. ¦ Ingen skriftlinje fundet: prøv »🎚️ Se bedre« (kontrast) eller et mindre område.
+Sûr à {x} % — clique pour le corriger ¦ Jistota {x} % — klikni pro opravu ¦ {x} % säkert — klicka för att rätta ¦ {x} % sikkert — klik for at rette
+LECTURE AUTOMATIQUE · À RELIRE ¦ AUTOMATICKÉ ČTENÍ · KE KONTROLE ¦ AUTOMATISK LÄSNING · LÄS IGENOM ¦ AUTOMATISK LÆSNING · SKAL LÆSES IGENNEM
+Le texte lu, ligne par ligne ¦ Přečtený text, řádek po řádku ¦ Den lästa texten, rad för rad ¦ Den læste tekst, linje for linje
+Mettre {x} dans le texte ¦ Vložit {x} do textu ¦ Lägg {x} i texten ¦ Læg {x} i teksten
+les {n} lignes ¦ všech {n} řádků ¦ de {n} raderna ¦ de {n} linjer
+mots peu sûrs ¦ nejistá slova ¦ osäkra ord ¦ usikre ord
+=mot peu sûr ¦ nejisté slovo|nejistá slova|nejistých slov ¦ osäkert ord|osäkra ord ¦ usikkert ord|usikre ord
+(sûrs à moins de {x} %) ¦ (jistota pod {x} %) ¦ (mindre än {x} % säkra) ¦ (under {x} % sikre)
+aucun mot peu sûr ¦ žádné nejisté slovo ¦ inga osäkra ord ¦ ingen usikre ord
+Relire avec ce modèle ¦ Přečíst znovu tímto modelem ¦ Läs om med den här modellen ¦ Læs igen med denne model
+Garder cette ligne ¦ Ponechat tento řádek ¦ Behåll den här raden ¦ Behold denne linje
+Ligne {x} sur l’image ¦ Řádek {x} na obrázku ¦ Rad {x} på bilden ¦ Linje {x} på billedet
+pas d’image pour cette ligne ¦ pro tento řádek není obrázek ¦ ingen bild för den här raden ¦ intet billede til denne linje
+Corrige directement dans les lignes (clique un mot surligné pour le remplacer) · Entrée : ligne suivante · décoche une ligne pour la laisser de côté. Lu par « {x} », sur cet ordinateur. Ensuite, « 🧭 Repérer » cherche tout seul les noms, dates et lieux. ¦ Opravuj přímo v řádcích (klikni na zvýrazněné slovo a nahraď ho) · Enter: další řádek · odškrtni řádek, který chceš vynechat. Přečetl „{x}“ na tomto počítači. Potom „🧭 Najít“ samo vyhledá jména, data a místa. ¦ Rätta direkt i raderna (klicka på ett markerat ord för att ersätta det) · Enter: nästa rad · avmarkera en rad för att hoppa över den. Läst av ”{x}” på den här datorn. Sedan söker ”🧭 Hitta” själv efter namn, datum och platser. ¦ Ret direkte i linjerne (klik på et markeret ord for at erstatte det) · Enter: næste linje · fjern markeringen ved en linje for at springe den over. Læst af »{x}« på denne computer. Derefter søger »🧭 Find« selv efter navne, datoer og steder.
+Lectures à vérifier ¦ Čtení ke kontrole ¦ Läsningar att kontrollera ¦ Læsninger, der skal kontrolleres
+Utiliser « {value} » ¦ Použít „{value}“ ¦ Använd ”{value}” ¦ Brug »{value}«
+Aucune ligne gardée. ¦ Žádný řádek nebyl ponechán. ¦ Ingen rad behölls. ¦ Ingen linje blev beholdt.
+Lu automatiquement (sûr à {x} %) ¦ Přečteno automaticky (jistota {x} %) ¦ Automatiskt läst ({x} % säkert) ¦ Automatisk læst ({x} % sikkert)
+{x} (à relire) ¦ {x} (ke kontrole) ¦ {x} (läs igenom) ¦ {x} (skal læses igennem)
+Texte mis dans la transcription, zones posées ligne par ligne ; noms, dates et lieux repérés à droite. ¦ Text vložen do přepisu, oblasti umístěny řádek po řádku; jména, data a místa nalezená vpravo. ¦ Texten lagd i transkriberingen, områden utlagda rad för rad; namn, datum och platser hittade till höger. ¦ Teksten er lagt i transskriptionen, områder lagt ud linje for linje; navne, datoer og steder fundet til højre.
+Clique sur l’image de l’acte. Une image de l’ordinateur est ajoutée aux Médias. ¦ Klikni na obrázek záznamu. Obrázek z počítače se přidá do Médií. ¦ Klicka på bilden av handlingen. En bild från datorn läggs till i Media. ¦ Klik på billedet af dokumentet. Et billede fra computeren tilføjes til Medier.
+Enregistré, et le texte est dans la transcription du média. ¦ Uloženo a text je v přepisu média. ¦ Sparat, och texten finns i mediets transkribering. ¦ Gemt, og teksten er i mediets transskription.
+Image + texte côte à côte ¦ Obrázek + text vedle sebe ¦ Bild + text sida vid sida ¦ Billede + tekst side om side
+Image améliorée ¦ Vylepšený obrázek ¦ Förbättrad bild ¦ Forbedret billede
+Choisis d’abord un passage dans le texte. ¦ Nejdřív vyber úsek v textu. ¦ Välj först ett stycke i texten. ¦ Vælg først et afsnit i teksten.
+Il n’y a pas d’image de la base. ¦ Není tu obrázek z databáze. ¦ Det finns ingen bild från databasen. ¦ Der er intet billede fra databasen.
+Loupe : la molette change le grossissement ¦ Lupa: kolečko mění zvětšení ¦ Förstoringsglas: scrollhjulet ändrar förstoringen ¦ Lup: rullehjulet ændrer forstørrelsen
+Réglages de l’image retenus pour cet acte : ils reviennent à la prochaine ouverture. ¦ Nastavení obrázku uložena pro tento záznam: vrátí se při příštím otevření. ¦ Bildinställningarna sparas för den här handlingen: de kommer tillbaka nästa gång den öppnas. ¦ Billedindstillingerne er gemt for dette dokument: de kommer igen, næste gang det åbnes.
+L’image est déjà d’origine ¦ Obrázek už je původní ¦ Bilden är redan i original ¦ Billedet er allerede originalt
+Image remise d’origine ¦ Obrázek vrácen do původního stavu ¦ Bilden återställd till original ¦ Billedet er sat tilbage til originalen
+L’aide à la lecture n’est pas chargée. ¦ Pomoc se čtením není načtená. ¦ Läshjälpen är inte laddad. ¦ Læsehjælpen er ikke indlæst.
+Pas de modèle pour ce genre d’acte. ¦ Pro tento druh záznamu není šablona. ¦ Ingen mall för den här typen av handling. ¦ Ingen skabelon til denne dokumenttype.
+Le texte déjà écrit est gardé. ¦ Už napsaný text zůstane. ¦ Texten som redan skrivits behålls. ¦ Den tekst, der allerede er skrevet, beholdes.
+Ajouter le modèle à la fin du texte ? ¦ Přidat šablonu na konec textu? ¦ Lägga till mallen i slutet av texten? ¦ Tilføje skabelonen til sidst i teksten?
+Ajouter le modèle ¦ Přidat šablonu ¦ Lägg till mallen ¦ Tilføj skabelonen
+avec l’image de l’acte ¦ s obrázkem záznamu ¦ med bilden av handlingen ¦ med billedet af dokumentet
+le texte seul (.txt) ¦ jen text (.txt) ¦ bara texten (.txt) ¦ kun teksten (.txt)
+image + texte (« Enregistrer en PDF ») ¦ obrázek + text („Uložit jako PDF“) ¦ bild + text (”Spara som PDF”) ¦ billede + tekst (»Gem som PDF«)
+Les dernières modifications de la transcription seront perdues. ¦ Poslední změny přepisu se ztratí. ¦ De senaste ändringarna i transkriberingen går förlorade. ¦ De seneste ændringer i transskriptionen går tabt.
+Fermer sans enregistrer la transcription ? ¦ Zavřít bez uložení přepisu? ¦ Stänga utan att spara transkriberingen? ¦ Lukke uden at gemme transskriptionen?
+Exporter (texte, PDF, imprimer)… ¦ Exportovat (text, PDF, tisk)… ¦ Exportera (text, PDF, skriv ut)… ¦ Eksportér (tekst, PDF, udskriv)…
+Image de l’acte… ¦ Obrázek záznamu… ¦ Bild av handlingen… ¦ Billede af dokumentet…
+Modèle d’acte ¦ Šablona záznamu ¦ Mall för handling ¦ Dokumentskabelon
+Repérer les noms, dates, lieux ¦ Najít jména, data, místa ¦ Hitta namn, datum, platser ¦ Find navne, datoer, steder
+Lire l’acte (écriture à la main) ¦ Přečíst záznam (rukopis) ¦ Läs handlingen (handskrift) ¦ Læs dokumentet (håndskrift)
+Aide à la lecture… ¦ Pomoc se čtením… ¦ Läshjälp… ¦ Læsehjælp…
+Toute la largeur (pour lire) ¦ Celá šířka (pro čtení) ¦ Hela bredden (för läsning) ¦ Hele bredden (til læsning)
+Image d’origine ¦ Původní obrázek ¦ Originalbild ¦ Originalbillede
+Toute la transcription, en grand (et les actes transcrits dans l’outil) ¦ Celý přepis ve velkém (a záznamy přepsané v nástroji) ¦ Hela transkriberingen i stort format (och handlingarna som transkriberats i verktyget) ¦ Hele transskriptionen i stort format (og de dokumenter, der er transskriberet i værktøjet)
+Lire en entier ¦ Číst celé ¦ Läs hela ¦ Læs det hele
+Ouvrir l’outil Transcription d’actes sur cette image (zones, noms, dates) ¦ Otevřít nástroj Přepis záznamů na tomto obrázku (oblasti, jména, data) ¦ Öppna verktyget Transkribering av handlingar på den här bilden (områden, namn, datum) ¦ Åbn værktøjet Transskription af dokumenter på dette billede (områder, navne, datoer)
+Nouvelle ¦ Nová ¦ Ny ¦ Ny
