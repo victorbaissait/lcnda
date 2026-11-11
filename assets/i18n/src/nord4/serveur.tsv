@@ -1,0 +1,416 @@
+fr ¦ fi ¦ hu
+Référence ou personne manquante. ¦ Viite tai henkilö puuttuu. ¦ Hiányzik a hivatkozás vagy a személy.
+Cet événement n’est pas lié à cette personne. ¦ Tätä tapahtumaa ei ole yhdistetty tähän henkilöön. ¦ Ez az esemény nincs összekapcsolva ezzel a személlyel.
+Choisis au moins deux médias pour créer un document groupé. ¦ Valitse vähintään kaksi mediaa luodaksesi kootun asiakirjan. ¦ Válassz ki legalább két médiát egy összevont dokumentum létrehozásához.
+Un des médias choisis n’est pas lié à cet élément. ¦ Yksi valituista medioista ei ole yhdistetty tähän kohteeseen. ¦ Az egyik kiválasztott média nincs összekapcsolva ezzel az elemmel.
+Document groupé manquant. ¦ Koottu asiakirja puuttuu. ¦ Hiányzik az összevont dokumentum.
+Document groupé introuvable. ¦ Koottua asiakirjaa ei löydy. ¦ Az összevont dokumentum nem található.
+Ordre des médias manquant. ¦ Medioiden järjestys puuttuu. ¦ Hiányzik a médiák sorrendje.
+Nom de branche obligatoire. ¦ Haaran nimi on pakollinen. ¦ Az ág neve kötelező.
+Nom de vue obligatoire ¦ Näkymän nimi on pakollinen ¦ A nézet neve kötelező
+Le terme est requis ¦ Termi on pakollinen ¦ A kifejezés kötelező
+Sépulture introuvable ¦ Hautaa ei löydy ¦ A sír nem található
+Cette personne est déjà rattachée à une sépulture ¦ Tämä henkilö on jo yhdistetty hautaan ¦ Ez a személy már össze van kapcsolva egy sírral
+Sépulture manquante ¦ Hauta puuttuu ¦ Hiányzik a sír
+Cette personne est déjà rattachée à une autre sépulture ¦ Tämä henkilö on jo yhdistetty toiseen hautaan ¦ Ez a személy már össze van kapcsolva egy másik sírral
+Cette personne est déjà associée à cette sépulture ¦ Tämä henkilö on jo yhdistetty tähän hautaan ¦ Ez a személy már össze van kapcsolva ezzel a sírral
+Référence manquante ¦ Viite puuttuu ¦ Hiányzik a hivatkozás
+Cette personne n’est pas rattachée à cette sépulture ¦ Tätä henkilöä ei ole yhdistetty tähän hautaan ¦ Ez a személy nincs összekapcsolva ezzel a sírral
+Impossible de retirer la dernière personne : supprime la sépulture si besoin ¦ Viimeistä henkilöä ei voi irrottaa: poista hauta tarvittaessa ¦ Az utolsó személy nem távolítható el: szükség esetén töröld a sírt
+Ce média n’est pas accessible depuis cette fiche ¦ Tähän mediaan ei pääse tältä kortilta ¦ Ez a média nem érhető el erről az adatlapról
+Ce rattachement existe déjà ¦ Tämä yhteys on jo olemassa ¦ Ez a kapcsolat már létezik
+Données manquantes ¦ Tietoja puuttuu ¦ Hiányzó adatok
+Impossible de retirer le dernier rattachement — supprime le média si tu veux le retirer complètement ¦ Viimeistä yhteyttä ei voi irrottaa — poista media, jos haluat poistaa sen kokonaan ¦ Az utolsó kapcsolat nem távolítható el — töröld a médiát, ha teljesen el akarod távolítani
+Méthode refusée ¦ Menetelmä hylätty ¦ Elutasított metódus
+Personne, annotation de battue ou dépouillement manquant ¦ Henkilö, laajan haun merkintä tai indeksointi puuttuu ¦ Hiányzik a személy, az átfésülési jegyzet vagy a feldolgozás
+Aucun fichier reçu ¦ Tiedostoa ei vastaanotettu ¦ Nem érkezett fájl
+Une carte postale recto/verso doit contenir exactement deux images : recto puis verso. ¦ Kaksipuolisessa postikortissa on oltava täsmälleen kaksi kuvaa: ensin etupuoli, sitten takapuoli. ¦ Egy kétoldalas képeslapnak pontosan két képet kell tartalmaznia: előbb az előoldalt, aztán a hátoldalt.
+Dossier d’enquête introuvable. ¦ Selvityskansiota ei löydy. ¦ A nyomozás mappája nem található.
+Annotation de battue introuvable. ¦ Laajan haun merkintää ei löydy. ¦ Az átfésülési jegyzet nem található.
+Choisis le type de l’événement à créer. ¦ Valitse luotavan tapahtuman tyyppi. ¦ Válaszd ki a létrehozandó esemény típusát.
+Ce recensement n’est pas rattaché à cette personne. ¦ Tätä henkikirjaa ei ole yhdistetty tähän henkilöön. ¦ Ez a népszámlálás nincs összekapcsolva ezzel a személlyel.
+Aucun fichier reçu : choisis-le à nouveau. ¦ Tiedostoa ei vastaanotettu: valitse se uudelleen. ¦ Nem érkezett fájl: válaszd ki újra.
+Une carte postale recto/verso doit contenir uniquement deux images. ¦ Kaksipuolisessa postikortissa saa olla vain kaksi kuvaa. ¦ Egy kétoldalas képeslap csak két képet tartalmazhat.
+Ce fichier semble déjà avoir été importé (« {file} » le {date}, {n} ligne(s)). Confirme si tu veux l'importer quand même. ¦ Tämä tiedosto näyttää olevan jo tuotu (”{file}” {date}, {n} riviä). Vahvista, jos haluat tuoda sen silti. ¦ Úgy tűnik, ezt a fájlt már importáltad („{file}”, {date}, {n} sor). Erősítsd meg, ha mégis importálni szeretnéd.
+Fiche verrouillée ({name}). Déverrouille-la avant de modifier ce couple. ¦ Kortti on lukittu ({name}). Avaa lukitus ennen tämän pariskunnan muokkaamista. ¦ Az adatlap zárolva van ({name}). Oldd fel a zárolást, mielőtt szerkeszted ezt a párt.
+Fusion impossible : {a} et {b} forment un couple. Deux conjoints ne sont pas la même personne. ¦ Yhdistäminen ei onnistu: {a} ja {b} ovat pariskunta. Kaksi puolisoa eivät ole sama henkilö. ¦ Az egyesítés nem lehetséges: {a} és {b} egy párt alkotnak. Két házastárs nem ugyanaz a személy.
+Fusion impossible : {a} est un ancêtre de {b}. Un ancêtre et son descendant ne sont pas la même personne. ¦ Yhdistäminen ei onnistu: {a} on henkilön {b} esivanhempi. Esivanhempi ja hänen jälkeläisensä eivät ole sama henkilö. ¦ Az egyesítés nem lehetséges: {a} felmenője ennek a személynek: {b}. Egy felmenő és a leszármazottja nem ugyanaz a személy.
+Cette parcelle est déjà dans ta liste (fiche n° {n}) : ouvre-la plutôt que d’en créer une deuxième. ¦ Tämä palsta on jo luettelossasi (kortti nro {n}): avaa se mieluummin kuin luot toisen. ¦ Ez a földrészlet már szerepel a listádban ({n}. számú adatlap): inkább nyisd meg, ne hozz létre egy másodikat.
+Tu as déjà {n} cartes de photos : supprimes-en une pour en créer une autre. ¦ Sinulla on jo {n} valokuvakarttaa: poista yksi luodaksesi uuden. ¦ Már {n} fotótérképed van: törölj egyet, hogy újat hozhass létre.
+Les {n} puzzles en cours sont gardés : termine ou supprime-en un pour en commencer un autre. ¦ {n} keskeneräistä palapeliä on tallessa: lopeta tai poista yksi aloittaaksesi uuden. ¦ A(z) {n} folyamatban lévő kirakós meg van őrizve: fejezz be vagy törölj egyet, hogy újat kezdhess.
+Les {n} graphiques et widgets sont gardés : supprime-en un pour en créer un autre. ¦ {n} kaaviota ja widgetiä on tallessa: poista yksi luodaksesi uuden. ¦ A(z) {n} grafikon és widget meg van őrizve: törölj egyet, hogy újat hozhass létre.
+Le champ « {label} » est obligatoire. ¦ Kenttä ”{label}” on pakollinen. ¦ A(z) „{label}” mező kötelező.
+Le champ « {label} » est à remplir. ¦ Kenttä ”{label}” on täytettävä. ¦ A(z) „{label}” mezőt ki kell tölteni.
+« {name} » est une femelle : elle ne peut pas être le père. ¦ ”{name}” on naaras: se ei voi olla isä. ¦ „{name}” nőstény: nem lehet az apa.
+« {name} » est un mâle : il ne peut pas être la mère. ¦ ”{name}” on uros: se ei voi olla emo. ¦ „{name}” hím: nem lehet az anya.
+Dossier introuvable : {dir} (clé ou disque débranché ?). La sauvegarde se fera dès qu’il sera de retour. ¦ Kansiota ei löydy: {dir} (muistitikku tai levy irrotettu?). Varmuuskopio tehdään heti, kun se on taas paikalla. ¦ A mappa nem található: {dir} (kihúzott pendrive vagy lemez?). A biztonsági mentés azonnal elkészül, amint újra elérhető lesz.
+Dossier introuvable : {dir} (clé débranchée ?). ¦ Kansiota ei löydy: {dir} (muistitikku irrotettu?). ¦ A mappa nem található: {dir} (kihúzott pendrive?).
+Dossier partagé introuvable : {dir} (clé débranchée ?). Rien n’est perdu : tes changements partiront la prochaine fois. ¦ Jaettua kansiota ei löydy: {dir} (muistitikku irrotettu?). Mitään ei menetetty: muutoksesi lähtevät ensi kerralla. ¦ A megosztott mappa nem található: {dir} (kihúzott pendrive?). Semmi sem veszett el: a változtatásaid legközelebb elmennek.
+Cette généalogie est déjà ouverte sur l’ordinateur « {name} ». Ferme-la là-bas d’abord : deux ordinateurs qui écrivent dans le même fichier peuvent l’abîmer. ¦ Tämä sukututkimus on jo auki tietokoneella ”{name}”. Sulje se ensin siellä: kaksi samaan tiedostoon kirjoittavaa tietokonetta voi vahingoittaa sitä. ¦ Ez a családfa már meg van nyitva a(z) „{name}” számítógépen. Előbb ott zárd be: ha két számítógép ír ugyanabba a fájlba, az megrongálhatja.
+Ce type de fichier ne se range pas dans les médias (.{ext}). ¦ Tämän tyyppistä tiedostoa ei voi tallentaa mediaan (.{ext}). ¦ Ez a fájltípus nem tehető a médiák közé (.{ext}).
+Ce type de fichier ne se range pas dans les médias (sans extension). ¦ Tämän tyyppistä tiedostoa ei voi tallentaa mediaan (ei tiedostopäätettä). ¦ Ez a fájltípus nem tehető a médiák közé (kiterjesztés nélkül).
+Le contenu du fichier ne correspond pas à son extension (.{ext}). ¦ Tiedoston sisältö ei vastaa sen päätettä (.{ext}). ¦ A fájl tartalma nem felel meg a kiterjesztésének (.{ext}).
+Pas assez de place sur le disque pour ouvrir cette sauvegarde (il faut environ {n} Mo libres). ¦ Levyllä ei ole tarpeeksi tilaa tämän varmuuskopion avaamiseen (tarvitaan noin {n} Mt vapaata). ¦ Nincs elég hely a lemezen a biztonsági mentés megnyitásához (kb. {n} MB szabad hely kell).
+Pas assez d’espace disque pour préparer la sauvegarde complète (il faut environ {n} Mo libres). ¦ Levytilaa ei ole tarpeeksi täydellisen varmuuskopion valmisteluun (tarvitaan noin {n} Mt vapaata). ¦ Nincs elég lemezterület a teljes biztonsági mentés előkészítéséhez (kb. {n} MB szabad hely kell).
+Ce dossier a déjà {n} lignes : ouvre-en un autre. ¦ Tässä kansiossa on jo {n} riviä: avaa toinen. ¦ Ebben a mappában már {n} sor van: nyiss egy másikat.
+Choisis la fiche de la personne pour le visage {n} (ou « Plus tard »). ¦ Valitse henkilön kortti kasvoille {n} (tai ”Myöhemmin”). ¦ Válaszd ki a(z) {n}. archoz tartozó személy adatlapját (vagy „Később”).
+Choisis la personne concernée pour le témoignage « {q} ». ¦ Valitse henkilö, jota kertomus ”{q}” koskee. ¦ Válaszd ki az érintett személyt a(z) „{q}” visszaemlékezéshez.
+La page {n} existe déjà. ¦ Sivu {n} on jo olemassa. ¦ A(z) {n}. oldal már létezik.
+Cette date est avant sa naissance ({date}) ¦ Tämä päivämäärä on ennen hänen syntymäänsä ({date}) ¦ Ez a dátum a születése előtti ({date})
+Cette date est après son décès ({date}) ¦ Tämä päivämäärä on hänen kuolemansa jälkeen ({date}) ¦ Ez a dátum a halála utáni ({date})
+La date de naissance exacte de {name} n’est pas connue. ¦ Henkilön {name} tarkkaa syntymäpäivää ei tiedetä. ¦ {name} pontos születési dátuma nem ismert.
+Commune inconnue. ¦ Tuntematon kunta. ¦ Ismeretlen település.
+Adresse inconnue. ¦ Tuntematon osoite. ¦ Ismeretlen cím.
+Position impossible. ¦ Mahdoton sijainti. ¦ Lehetetlen helyzet.
+Service d’archives introuvable. ¦ Arkistolaitosta ei löydy. ¦ A levéltár nem található.
+Adresse e-mail invalide. ¦ Virheellinen sähköpostiosoite. ¦ Érvénytelen e-mail-cím.
+Cette fiche n’existe plus. ¦ Tätä korttia ei ole enää olemassa. ¦ Ez az adatlap már nem létezik.
+Fiche introuvable. ¦ Korttia ei löydy. ¦ Az adatlap nem található.
+Fiche introuvable ¦ Korttia ei löydy ¦ Az adatlap nem található
+Profil inconnu. ¦ Tuntematon profiili. ¦ Ismeretlen profil.
+Sorte inconnue. ¦ Tuntematon laji. ¦ Ismeretlen fajta.
+Sorte introuvable. ¦ Lajia ei löydy. ¦ A fajta nem található.
+Demande Discogs inconnue. ¦ Tuntematon Discogs-pyyntö. ¦ Ismeretlen Discogs-kérés.
+Demande MusicBrainz inconnue. ¦ Tuntematon MusicBrainz-pyyntö. ¦ Ismeretlen MusicBrainz-kérés.
+Demande Open Library inconnue. ¦ Tuntematon Open Library -pyyntö. ¦ Ismeretlen Open Library-kérés.
+Demande Wikidata inconnue. ¦ Tuntematon Wikidata-pyyntö. ¦ Ismeretlen Wikidata-kérés.
+Demande TMDb inconnue. ¦ Tuntematon TMDb-pyyntö. ¦ Ismeretlen TMDb-kérés.
+Demande iTunes inconnue. ¦ Tuntematon iTunes-pyyntö. ¦ Ismeretlen iTunes-kérés.
+Source d’import inconnue. ¦ Tuntematon tuontilähde. ¦ Ismeretlen importálási forrás.
+Impossible d’enregistrer l’image. ¦ Kuvaa ei voi tallentaa. ¦ A kép nem menthető.
+Image illisible. ¦ Kuvaa ei voi lukea. ¦ Olvashatatlan kép.
+Image trop lourde (15 Mo au plus). ¦ Kuva on liian suuri (enintään 15 Mt). ¦ A kép túl nagy (legfeljebb 15 MB).
+Projet introuvable. ¦ Projektia ei löydy. ¦ A projekt nem található.
+Dossier introuvable. ¦ Kansiota ei löydy. ¦ A mappa nem található.
+Dossier introuvable ¦ Kansiota ei löydy ¦ A mappa nem található
+Fichier trop gros. ¦ Tiedosto on liian suuri. ¦ A fájl túl nagy.
+Fichier Zotero RDF illisible. ¦ Zotero RDF -tiedostoa ei voi lukea. ¦ Olvashatatlan Zotero RDF-fájl.
+Fichier JSON illisible. ¦ JSON-tiedostoa ei voi lukea. ¦ Olvashatatlan JSON-fájl.
+Fichier EndNote XML illisible. ¦ EndNote XML -tiedostoa ei voi lukea. ¦ Olvashatatlan EndNote XML-fájl.
+Son introuvable. ¦ Ääntä ei löydy. ¦ A hang nem található.
+Zones illisibles. ¦ Alueita ei voi lukea. ¦ Olvashatatlan területek.
+Transcription illisible. ¦ Litterointia ei voi lukea. ¦ Olvashatatlan átirat.
+Transcription trop longue (5 000 lignes au plus). ¦ Litterointi on liian pitkä (enintään 5 000 riviä). ¦ Az átirat túl hosszú (legfeljebb 5 000 sor).
+Cette base ne contient aucune personne. ¦ Tässä tietokannassa ei ole yhtään henkilöä. ¦ Ez az adatbázis egyetlen személyt sem tartalmaz.
+Impossible d’ouvrir l’archive. ¦ Arkistoa ei voi avata. ¦ Az archívum nem nyitható meg.
+Aucune base (.db) dans cette archive. ¦ Tässä arkistossa ei ole tietokantaa (.db). ¦ Ebben az archívumban nincs adatbázis (.db).
+Fichier introuvable ou illisible. ¦ Tiedostoa ei löydy tai sitä ei voi lukea. ¦ A fájl nem található vagy olvashatatlan.
+Fiche trop volumineuse. ¦ Kortti on liian suuri. ¦ Az adatlap túl nagy.
+Tableau introuvable. ¦ Taulukkoa ei löydy. ¦ A tábla nem található.
+Tableau trop lourd : retire quelques dessins. ¦ Taulukko on liian raskas: poista joitakin piirroksia. ¦ A tábla túl nagy: távolíts el néhány rajzot.
+Tableau parent introuvable. ¦ Ylätason taulukkoa ei löydy. ¦ A szülőtábla nem található.
+Parcelle introuvable. ¦ Palstaa ei löydy. ¦ A földrészlet nem található.
+Lieu introuvable. ¦ Paikkaa ei löydy. ¦ A hely nem található.
+Couche illisible. ¦ Tasoa ei voi lukea. ¦ Olvashatatlan réteg.
+Couche trop lourde (8 Mo au plus). ¦ Taso on liian suuri (enintään 8 Mt). ¦ A réteg túl nagy (legfeljebb 8 MB).
+Couche introuvable. ¦ Tasoa ei löydy. ¦ A réteg nem található.
+Carte illisible. ¦ Karttaa ei voi lukea. ¦ Olvashatatlan térkép.
+Fichier d’essai introuvable. ¦ Testitiedostoa ei löydy. ¦ A próbafájl nem található.
+Copie impossible. ¦ Kopiointi ei onnistu. ¦ A másolás nem lehetséges.
+Fichier illisible. ¦ Tiedostoa ei voi lukea. ¦ Olvashatatlan fájl.
+Citation introuvable. ¦ Lähdeviitettä ei löydy. ¦ A hivatkozás nem található.
+Citation introuvable ¦ Lähdeviitettä ei löydy ¦ A hivatkozás nem található
+Objet introuvable ¦ Esinettä ei löydy ¦ A tárgy nem található
+Objet introuvable. ¦ Esinettä ei löydy. ¦ A tárgy nem található.
+Souvenir introuvable ¦ Muistoa ei löydy ¦ Az emlék nem található
+Type inconnu ¦ Tuntematon tyyppi ¦ Ismeretlen típus
+Adresse invalide ¦ Virheellinen osoite ¦ Érvénytelen cím
+Salon introuvable ¦ Huonetta ei löydy ¦ A szoba nem található
+Alerte inconnue. ¦ Tuntematon hälytys. ¦ Ismeretlen figyelmeztetés.
+Texte illisible. ¦ Tekstiä ei voi lukea. ¦ Olvashatatlan szöveg.
+Date d’envoi incorrecte. ¦ Virheellinen lähetyspäivä. ¦ Hibás küldési dátum.
+Courrier introuvable. ¦ Kirjettä ei löydy. ¦ A levél nem található.
+Cousinade introuvable. ¦ Sukukokousta ei löydy. ¦ A családi találkozó nem található.
+Champ inconnu. ¦ Tuntematon kenttä. ¦ Ismeretlen mező.
+Champ inconnu ¦ Tuntematon kenttä ¦ Ismeretlen mező
+Valeur hors limites. ¦ Arvo on sallittujen rajojen ulkopuolella. ¦ Az érték a megengedett tartományon kívül esik.
+Liste inconnue. ¦ Tuntematon luettelo. ¦ Ismeretlen lista.
+Widget inconnu. ¦ Tuntematon widget. ¦ Ismeretlen widget.
+Ensemble inconnu. ¦ Tuntematon joukko. ¦ Ismeretlen készlet.
+Choisis au moins 2 ensembles. ¦ Valitse vähintään 2 joukkoa. ¦ Válassz ki legalább 2 készletet.
+Choisis au moins deux personnes. ¦ Valitse vähintään kaksi henkilöä. ¦ Válassz ki legalább két személyt.
+Choisis deux personnes. ¦ Valitse kaksi henkilöä. ¦ Válassz ki két személyt.
+Diagramme introuvable. ¦ Diagrammia ei löydy. ¦ A diagram nem található.
+Foyer inconnu. ¦ Tuntematon kotitalous. ¦ Ismeretlen háztartás.
+Test introuvable. ¦ Testiä ei löydy. ¦ A teszt nem található.
+Correspondance introuvable. ¦ Kirjeenvaihtoa ei löydy. ¦ A levelezés nem található.
+Groupe introuvable. ¦ Ryhmää ei löydy. ¦ A csoport nem található.
+Format d’export inconnu. ¦ Tuntematon vientimuoto. ¦ Ismeretlen exportálási formátum.
+Export impossible : l’extension PHP ZipArchive manque sur cet ordinateur. ¦ Vienti ei onnistu: PHP:n ZipArchive-laajennus puuttuu tästä tietokoneesta. ¦ Az exportálás nem lehetséges: ezen a számítógépen hiányzik a PHP ZipArchive bővítménye.
+Fichier temporaire impossible. ¦ Väliaikaista tiedostoa ei voi luoda. ¦ Nem hozható létre ideiglenes fájl.
+Employeur sans nom. ¦ Työnantaja ilman nimeä. ¦ Név nélküli munkáltató.
+Photo introuvable. ¦ Valokuvaa ei löydy. ¦ A fénykép nem található.
+Visage introuvable. ¦ Kasvoja ei löydy. ¦ Az arc nem található.
+ePub impossible : l’extension PHP ZipArchive manque. ¦ ePub ei onnistu: PHP:n ZipArchive-laajennus puuttuu. ¦ Az ePub nem készíthető el: hiányzik a PHP ZipArchive bővítménye.
+Document impossible : l’extension PHP ZipArchive manque. ¦ Asiakirja ei onnistu: PHP:n ZipArchive-laajennus puuttuu. ¦ A dokumentum nem készíthető el: hiányzik a PHP ZipArchive bővítménye.
+Livret introuvable. ¦ Vihkosta ei löydy. ¦ A füzet nem található.
+Graphique inconnu (identifiant invalide). ¦ Tuntematon kaavio (virheellinen tunniste). ¦ Ismeretlen grafikon (érvénytelen azonosító).
+Graphique illisible. ¦ Kaaviota ei voi lukea. ¦ Olvashatatlan grafikon.
+Graphique illisible (champ inconnu). ¦ Kaaviota ei voi lukea (tuntematon kenttä). ¦ Olvashatatlan grafikon (ismeretlen mező).
+Graphique illisible (parties). ¦ Kaaviota ei voi lukea (osat). ¦ Olvashatatlan grafikon (részek).
+Graphique introuvable. ¦ Kaaviota ei löydy. ¦ A grafikon nem található.
+Lien impossible ¦ Yhteys ei onnistu ¦ A kapcsolat nem lehetséges
+Voyage introuvable ¦ Matkaa ei löydy ¦ Az utazás nem található
+Placement introuvable ¦ Sijoitusta ei löydy ¦ Az elhelyezés nem található
+Armoiries introuvables ¦ Vaakunaa ei löydy ¦ A címer nem található
+Circuit introuvable ¦ Kierrosta ei löydy ¦ A körút nem található
+Ligne introuvable ¦ Riviä ei löydy ¦ A sor nem található
+Ligne introuvable. ¦ Riviä ei löydy. ¦ A sor nem található.
+Circuit manquant ¦ Kierros puuttuu ¦ Hiányzik a körút
+Aucun fichier CSV dans ce ZIP. ¦ Tässä ZIP-tiedostossa ei ole CSV-tiedostoa. ¦ Ebben a ZIP-fájlban nincs CSV-fájl.
+Aucune ligne utilisable dans ce fichier. ¦ Tässä tiedostossa ei ole käyttökelpoisia rivejä. ¦ Ebben a fájlban nincs használható sor.
+Acte ou document manquant ¦ Kirkonkirjamerkintä tai asiakirja puuttuu ¦ Hiányzik az anyakönyvi bejegyzés vagy a dokumentum
+Chiffrement impossible. ¦ Salaus ei onnistu. ¦ A titkosítás nem lehetséges.
+Copie introuvable ¦ Kopiota ei löydy ¦ A másolat nem található
+Copie introuvable. ¦ Kopiota ei löydy. ¦ A másolat nem található.
+Harmonisation introuvable. ¦ Yhtenäistämistä ei löydy. ¦ Az egységesítés nem található.
+Bloc introuvable ¦ Lohkoa ei löydy ¦ A blokk nem található
+Nom manquant. ¦ Nimi puuttuu. ¦ Hiányzik a név.
+Enregistrement impossible. ¦ Tallennus ei onnistu. ¦ A mentés nem lehetséges.
+Source inconnue. ¦ Tuntematon lähde. ¦ Ismeretlen forrás.
+Pack inconnu. ¦ Tuntematon paketti. ¦ Ismeretlen csomag.
+Pack trop gros (150 Mo au plus). ¦ Paketti on liian suuri (enintään 150 Mt). ¦ A csomag túl nagy (legfeljebb 150 MB).
+GLB illisible. ¦ GLB-tiedostoa ei voi lukea. ¦ Olvashatatlan GLB-fájl.
+OBJ illisible. ¦ OBJ-tiedostoa ei voi lukea. ¦ Olvashatatlan OBJ-fájl.
+Maison introuvable. ¦ Taloa ei löydy. ¦ A ház nem található.
+Recensement introuvable. ¦ Henkikirjaa ei löydy. ¦ A népszámlálás nem található.
+Recensement introuvable ¦ Henkikirjaa ei löydy ¦ A népszámlálás nem található
+Fichier 3D trop gros (30 Mo au plus). ¦ 3D-tiedosto on liian suuri (enintään 30 Mt). ¦ A 3D-fájl túl nagy (legfeljebb 30 MB).
+Programme d’installation introuvable (scripts/htr_install.php). ¦ Asennusohjelmaa ei löydy (scripts/htr_install.php). ¦ A telepítőprogram nem található (scripts/htr_install.php).
+Demande d’installation inconnue. ¦ Tuntematon asennuspyyntö. ¦ Ismeretlen telepítési kérés.
+Lecture inconnue. ¦ Tuntematon luenta. ¦ Ismeretlen olvasat.
+Lecture inconnue (ou trop ancienne). ¦ Tuntematon luenta (tai liian vanha). ¦ Ismeretlen olvasat (vagy túl régi).
+Preuve introuvable. ¦ Todistetta ei löydy. ¦ A bizonyíték nem található.
+Preuve introuvable ¦ Todistetta ei löydy ¦ A bizonyíték nem található
+Empreinte d’image incorrecte. ¦ Virheellinen kuvan sormenjälki. ¦ Hibás képujjlenyomat.
+Empreinte d’image incorrecte (couleurs). ¦ Virheellinen kuvan sormenjälki (värit). ¦ Hibás képujjlenyomat (színek).
+Empreinte d’image incorrecte (points). ¦ Virheellinen kuvan sormenjälki (pisteet). ¦ Hibás képujjlenyomat (pontok).
+Fusion impossible ici. ¦ Yhdistäminen ei onnistu tässä. ¦ Itt nem lehetséges az egyesítés.
+Fusion inconnue. ¦ Tuntematon yhdistäminen. ¦ Ismeretlen egyesítés.
+Fusion introuvable. ¦ Yhdistämistä ei löydy. ¦ Az egyesítés nem található.
+Fusion impossible ¦ Yhdistäminen ei onnistu ¦ Az egyesítés nem lehetséges
+Annulation impossible ici. ¦ Kumoaminen ei onnistu tässä. ¦ Itt nem lehetséges a visszavonás.
+Fichier RootsMagic introuvable. ¦ RootsMagic-tiedostoa ei löydy. ¦ A RootsMagic-fájl nem található.
+Aucune personne dans ce fichier GEDCOM-X. ¦ Tässä GEDCOM-X-tiedostossa ei ole henkilöitä. ¦ Ebben a GEDCOM-X-fájlban nincs személy.
+Annulation impossible : import inconnu. ¦ Kumoaminen ei onnistu: tuntematon tuonti. ¦ A visszavonás nem lehetséges: ismeretlen importálás.
+Fichier trop gros (20 Mo au plus). ¦ Tiedosto on liian suuri (enintään 20 Mt). ¦ A fájl túl nagy (legfeljebb 20 MB).
+Aucun point dans ce GeoJSON. ¦ Tässä GeoJSON-tiedostossa ei ole pisteitä. ¦ Ebben a GeoJSON-fájlban nincs pont.
+Document introuvable. ¦ Asiakirjaa ei löydy. ¦ A dokumentum nem található.
+Document illisible. ¦ Asiakirjaa ei voi lukea. ¦ Olvashatatlan dokumentum.
+Cette action s’envoie en POST. ¦ Tämä toiminto lähetetään POST-pyyntönä. ¦ Ezt a műveletet POST-kéréssel kell küldeni.
+Lot inconnu. ¦ Tuntematon erä. ¦ Ismeretlen köteg.
+Fichier vide. ¦ Tyhjä tiedosto. ¦ Üres fájl.
+Fichier vide ¦ Tyhjä tiedosto ¦ Üres fájl
+Sortie inconnue. ¦ Tuntematon tuloste. ¦ Ismeretlen kimenet.
+Analyse introuvable. ¦ Analyysia ei löydy. ¦ Az elemzés nem található.
+Altitude impossible : entre −450 et 8 900 m. ¦ Mahdoton korkeus: oltava välillä −450 ja 8 900 m. ¦ Lehetetlen magasság: −450 és 8 900 m között kell lennie.
+Envoi inconnu. ¦ Tuntematon lähetys. ¦ Ismeretlen feltöltés.
+Projet illisible. ¦ Projektia ei voi lukea. ¦ Olvashatatlan projekt.
+Rush illisible. ¦ Raakaleikettä ei voi lukea. ¦ Olvashatatlan nyersanyag.
+Projet trop lourd (4 Mo au plus). ¦ Projekti on liian suuri (enintään 4 Mt). ¦ A projekt túl nagy (legfeljebb 4 MB).
+Salle introuvable. ¦ Salia ei löydy. ¦ A terem nem található.
+Fichier trop lourd. ¦ Tiedosto on liian suuri. ¦ A fájl túl nagy.
+Salle ou œuvre introuvable. ¦ Salia tai teosta ei löydy. ¦ A terem vagy a mű nem található.
+Import impossible : l’extension PHP zip manque. ¦ Tuonti ei onnistu: PHP:n zip-laajennus puuttuu. ¦ Az importálás nem lehetséges: hiányzik a PHP zip bővítménye.
+Liste introuvable. ¦ Luetteloa ei löydy. ¦ A lista nem található.
+Ligne invalide. ¦ Virheellinen rivi. ¦ Érvénytelen sor.
+Cette liste n’existe plus. ¦ Tätä luetteloa ei ole enää olemassa. ¦ Ez a lista már nem létezik.
+Personne manquante. ¦ Henkilö puuttuu. ¦ Hiányzik a személy.
+Personne manquante ¦ Henkilö puuttuu ¦ Hiányzik a személy
+Adresse Internet invalide ¦ Virheellinen verkko-osoite ¦ Érvénytelen internetcím
+Adresse Internet invalide. ¦ Virheellinen verkko-osoite. ¦ Érvénytelen internetcím.
+Statut inconnu. ¦ Tuntematon tila. ¦ Ismeretlen állapot.
+Revue introuvable. ¦ Lehteä ei löydy. ¦ A folyóirat nem található.
+Article introuvable. ¦ Artikkelia ei löydy. ¦ A cikk nem található.
+Quoi supprimer ? ¦ Mitä poistetaan? ¦ Mit töröljünk?
+Annonce introuvable. ¦ Ilmoitusta ei löydy. ¦ A hirdetés nem található.
+Animal introuvable. ¦ Eläintä ei löydy. ¦ Az állat nem található.
+Demande introuvable. ¦ Pyyntöä ei löydy. ¦ A kérés nem található.
+Visage incorrect. ¦ Virheelliset kasvot. ¦ Hibás arc.
+Choix incorrect. ¦ Virheellinen valinta. ¦ Hibás választás.
+Comparaison introuvable. ¦ Vertailua ei löydy. ¦ Az összehasonlítás nem található.
+Image introuvable. ¦ Kuvaa ei löydy. ¦ A kép nem található.
+Latitude entre -90 et 90, longitude entre -180 et 180. ¦ Leveysaste välillä -90 ja 90, pituusaste välillä -180 ja 180. ¦ A szélesség -90 és 90, a hosszúság -180 és 180 között legyen.
+Cette demande d’entraide n’existe plus. ¦ Tätä avunpyyntöä ei ole enää olemassa. ¦ Ez a segítségkérés már nem létezik.
+Cette annonce n’existe plus. ¦ Tätä ilmoitusta ei ole enää olemassa. ¦ Ez a hirdetés már nem létezik.
+Carte postale introuvable. ¦ Postikorttia ei löydy. ¦ A képeslap nem található.
+Choix inconnu. ¦ Tuntematon valinta. ¦ Ismeretlen választás.
+Niveau inconnu. ¦ Tuntematon taso. ¦ Ismeretlen szint.
+Seuls tes propres profils se modifient ici. ¦ Täällä voi muokata vain omia profiilejasi. ¦ Itt csak a saját profiljaidat szerkesztheted.
+Seuls tes propres profils se suppriment. ¦ Vain omia profiilejasi voi poistaa. ¦ Csak a saját profiljaidat törölheted.
+Profil introuvable. ¦ Profiilia ei löydy. ¦ A profil nem található.
+Questionnaire introuvable. ¦ Kyselyä ei löydy. ¦ A kérdőív nem található.
+Question incorrecte. ¦ Virheellinen kysymys. ¦ Hibás kérdés.
+Choix incorrects. ¦ Virheelliset valinnat. ¦ Hibás választások.
+Question introuvable. ¦ Kysymystä ei löydy. ¦ A kérdés nem található.
+Recueil introuvable. ¦ Kokoelmaa ei löydy. ¦ A gyűjtemény nem található.
+Aucune photo. ¦ Ei valokuvia. ¦ Nincs fénykép.
+Page introuvable. ¦ Sivua ei löydy. ¦ Az oldal nem található.
+Rattachement inconnu. ¦ Tuntematon yhteys. ¦ Ismeretlen kapcsolat.
+Bloc inconnu. ¦ Tuntematon lohko. ¦ Ismeretlen blokk.
+Village introuvable. ¦ Kylää ei löydy. ¦ A falu nem található.
+Pays non disponible. ¦ Maa ei ole saatavilla. ¦ Az ország nem érhető el.
+Branche introuvable ¦ Haaraa ei löydy ¦ Az ág nem található
+Branche introuvable. ¦ Haaraa ei löydy. ¦ Az ág nem található.
+Import indisponible. ¦ Tuonti ei ole käytettävissä. ¦ Az importálás nem érhető el.
+Aucun DOI reconnu : il commence par « 10. » (ex. 10.1038/251123a0), ou colle l’adresse https://doi.org/… ¦ DOI-tunnistetta ei tunnistettu: se alkaa ”10.” (esim. 10.1038/251123a0), tai liitä osoite https://doi.org/… ¦ Nem ismerhető fel DOI: „10.”-zel kezdődik (pl. 10.1038/251123a0), vagy illeszd be a https://doi.org/… címet
+Source inconnue (DOI, ORCID ou HAL). ¦ Tuntematon lähde (DOI, ORCID tai HAL). ¦ Ismeretlen forrás (DOI, ORCID vagy HAL).
+Ligne inconnue. ¦ Tuntematon rivi. ¦ Ismeretlen sor.
+Report inconnu. ¦ Tuntematon lykkäys. ¦ Ismeretlen halasztás.
+Rappel introuvable. ¦ Muistutusta ei löydy. ¦ Az emlékeztető nem található.
+Piste introuvable. ¦ Johtolankaa ei löydy. ¦ A nyom nem található.
+Statistique inconnue. ¦ Tuntematon tilasto. ¦ Ismeretlen statisztika.
+Ligne illisible. ¦ Riviä ei voi lukea. ¦ Olvashatatlan sor.
+Diaporama introuvable. ¦ Diaesitystä ei löydy. ¦ A diavetítés nem található.
+Diaporama trop lourd. ¦ Diaesitys on liian suuri. ¦ A diavetítés túl nagy.
+Foyer SocFace introuvable. ¦ SocFace-kotitaloutta ei löydy. ¦ A SocFace-háztartás nem található.
+Ligne SocFace introuvable. ¦ SocFace-riviä ei löydy. ¦ A SocFace-sor nem található.
+Sorte d’import inconnue. ¦ Tuntematon tuontityyppi. ¦ Ismeretlen importálási fajta.
+Import inconnu. ¦ Tuntematon tuonti. ¦ Ismeretlen importálás.
+Ce lieu n’existe plus. ¦ Tätä paikkaa ei ole enää olemassa. ¦ Ez a hely már nem létezik.
+L’original garde son nom. ¦ Alkuperäinen säilyttää nimensä. ¦ Az eredeti megtartja a nevét.
+Bien inconnu. ¦ Tuntematon omaisuus. ¦ Ismeretlen ingatlan.
+Acte introuvable. ¦ Asiakirjaa ei löydy. ¦ Az anyakönyvi bejegyzés nem található.
+Site introuvable. ¦ Paikkaa ei löydy. ¦ A helyszín nem található.
+Marque introuvable. ¦ Merkkiä ei löydy. ¦ A jelölés nem található.
+Observation introuvable. ¦ Havaintoa ei löydy. ¦ A megfigyelés nem található.
+Comptage introuvable. ¦ Laskentaa ei löydy. ¦ A számlálás nem található.
+Appartenance introuvable. ¦ Jäsenyyttä ei löydy. ¦ A tagság nem található.
+Import introuvable. ¦ Tuontia ei löydy. ¦ Az importálás nem található.
+Import introuvable ¦ Tuontia ei löydy ¦ Az importálás nem található
+Fichier trop gros : trop d’observations. ¦ Tiedosto on liian suuri: liikaa havaintoja. ¦ A fájl túl nagy: túl sok megfigyelés.
+Conflit illisible. ¦ Ristiriitaa ei voi lukea. ¦ Olvashatatlan ütközés.
+Document illisible : il manque son texte. ¦ Asiakirjaa ei voi lukea: siitä puuttuu teksti. ¦ Olvashatatlan dokumentum: hiányzik a szövege.
+Partie illisible. ¦ Osaa ei voi lukea. ¦ Olvashatatlan rész.
+Document trop lourd : partage ses onglets en plusieurs documents. ¦ Asiakirja on liian suuri: jaa sen välilehdet useaan asiakirjaan. ¦ A dokumentum túl nagy: oszd szét a lapjait több dokumentumba.
+Version trop lourde. ¦ Versio on liian suuri. ¦ A verzió túl nagy.
+Transcription introuvable. ¦ Litterointia ei löydy. ¦ Az átirat nem található.
+Dessin introuvable. ¦ Piirrosta ei löydy. ¦ A rajz nem található.
+Commune introuvable. ¦ Kuntaa ei löydy. ¦ A település nem található.
+Site illisible : il manque ses pages. ¦ Sivustoa ei voi lukea: siitä puuttuvat sivut. ¦ Olvashatatlan webhely: hiányoznak az oldalai.
+Page illisible. ¦ Sivua ei voi lukea. ¦ Olvashatatlan oldal.
+Service inconnu. ¦ Tuntematon palvelu. ¦ Ismeretlen szolgáltatás.
+Adresse non permise. ¦ Osoite ei ole sallittu. ¦ Nem engedélyezett cím.
+Publication impossible : l’extension PHP curl manque. ¦ Julkaisu ei onnistu: PHP:n curl-laajennus puuttuu. ¦ A közzététel nem lehetséges: hiányzik a PHP curl bővítménye.
+Donne l’identifiant FTP. ¦ Anna FTP-käyttäjätunnus. ¦ Add meg az FTP-azonosítót.
+Colle d’abord ton jeton Netlify. ¦ Liitä ensin Netlify-tunnuksesi. ¦ Előbb illeszd be a Netlify-tokenedet.
+Colle d’abord ton jeton GitHub. ¦ Liitä ensin GitHub-tunnuksesi. ¦ Előbb illeszd be a GitHub-tokenedet.
+Identifiant Wikidata incorrect. ¦ Virheellinen Wikidata-tunniste. ¦ Hibás Wikidata-azonosító.
+Classeur illisible : il manque ses feuilles. ¦ Työkirjaa ei voi lukea: siitä puuttuvat taulukot. ¦ Olvashatatlan munkafüzet: hiányoznak a munkalapjai.
+Feuille illisible. ¦ Taulukkoa ei voi lukea. ¦ Olvashatatlan munkalap.
+Classeur introuvable. ¦ Työkirjaa ei löydy. ¦ A munkafüzet nem található.
+Import manquant ¦ Tuonti puuttuu ¦ Hiányzik az importálás
+Archive ZIP illisible ¦ ZIP-arkistoa ei voi lukea ¦ Olvashatatlan ZIP-archívum
+Modification introuvable. ¦ Muutosta ei löydy. ¦ A módosítás nem található.
+Sauvegarde introuvable. ¦ Varmuuskopiota ei löydy. ¦ A biztonsági mentés nem található.
+Lecture impossible ¦ Lukeminen ei onnistu ¦ Az olvasás nem lehetséges
+JSON invalide ou non-objet ¦ Virheellinen JSON tai ei objekti ¦ Érvénytelen JSON, vagy nem objektum
+Impossible d'ouvrir l'archive (format inattendu) ¦ Arkistoa ei voi avata (odottamaton muoto) ¦ Az archívum nem nyitható meg (váratlan formátum)
+Impossible d'ouvrir l'archive GedZip (format inattendu) ¦ GedZip-arkistoa ei voi avata (odottamaton muoto) ¦ A GedZip-archívum nem nyitható meg (váratlan formátum)
+Fichier GEDCOM (.ged) introuvable dans l'archive. ¦ Arkistosta ei löydy GEDCOM-tiedostoa (.ged). ¦ Az archívumban nem található GEDCOM-fájl (.ged).
+Type introuvable ¦ Tyyppiä ei löydy ¦ A típus nem található
+Identifiant manquant ¦ Tunniste puuttuu ¦ Hiányzik az azonosító
+Battue introuvable ¦ Laajaa hakua ei löydy ¦ Az átfésülés nem található
+Battue introuvable. ¦ Laajaa hakua ei löydy. ¦ Az átfésülés nem található.
+Lacune introuvable. ¦ Aukkoa ei löydy. ¦ A hiány nem található.
+Lien direct vers l’archive invalide. ¦ Virheellinen suora linkki arkistoon. ¦ Érvénytelen közvetlen hivatkozás a levéltárra.
+Mention familiale invalide ¦ Virheellinen perhemerkintä ¦ Érvénytelen családi bejegyzés
+Titre obligatoire ¦ Otsikko on pakollinen ¦ A cím kötelező
+Recensement manquant ¦ Henkikirja puuttuu ¦ Hiányzik a népszámlálás
+Membre manquant ¦ Jäsen puuttuu ¦ Hiányzik a tag
+Membre introuvable ¦ Jäsentä ei löydy ¦ A tag nem található
+Dossier militaire invalide ¦ Virheellinen sotilasasiakirja ¦ Érvénytelen katonai irat
+Recensement ou personne manquante ¦ Henkikirja tai henkilö puuttuu ¦ Hiányzik a népszámlálás vagy a személy
+Journal introuvable ¦ Päiväkirjaa ei löydy ¦ A napló nem található
+Confirmation requise ¦ Vahvistus vaaditaan ¦ Megerősítés szükséges
+Piste manquante. ¦ Johtolanka puuttuu. ¦ Hiányzik a nyom.
+Rappel manquant. ¦ Muistutus puuttuu. ¦ Hiányzik az emlékeztető.
+Courrier manquant. ¦ Kirje puuttuu. ¦ Hiányzik a levél.
+Contact introuvable. ¦ Yhteystietoa ei löydy. ¦ A kapcsolattartó nem található.
+Contact manquant. ¦ Yhteystieto puuttuu. ¦ Hiányzik a kapcsolattartó.
+Battue manquante. ¦ Laaja haku puuttuu. ¦ Hiányzik az átfésülés.
+Battue, commune et nom obligatoires. ¦ Laaja haku, kunta ja nimi ovat pakollisia. ¦ Az átfésülés, a település és a név kötelező.
+Battue et commune obligatoires. ¦ Laaja haku ja kunta ovat pakollisia. ¦ Az átfésülés és a település kötelező.
+Annotation manquante. ¦ Merkintä puuttuu. ¦ Hiányzik a jegyzet.
+Annotation introuvable. ¦ Merkintää ei löydy. ¦ A jegyzet nem található.
+Dossier parent invalide ¦ Virheellinen yläkansio ¦ Érvénytelen szülőmappa
+Dossier manquant ¦ Kansio puuttuu ¦ Hiányzik a mappa
+Sexe invalide : choisis Homme, Femme, Non binaire ou Inconnu. ¦ Virheellinen sukupuoli: valitse Mies, Nainen, Muunsukupuolinen tai Tuntematon. ¦ Érvénytelen nem: válaszd a Férfi, Nő, Nem bináris vagy Ismeretlen lehetőséget.
+Variante manquante ¦ Muunnelma puuttuu ¦ Hiányzik a változat
+Variante introuvable ¦ Muunnelmaa ei löydy ¦ A változat nem található
+Famille introuvable ¦ Perhettä ei löydy ¦ A család nem található
+Fiche en ligne introuvable ¦ Verkkokorttia ei löydy ¦ Az online adatlap nem található
+Fiche en ligne manquante ¦ Verkkokortti puuttuu ¦ Hiányzik az online adatlap
+Personne ou contenu manquant ¦ Henkilö tai sisältö puuttuu ¦ Hiányzik a személy vagy a tartalom
+Note ou contenu manquant ¦ Muistiinpano tai sisältö puuttuu ¦ Hiányzik a jegyzet vagy a tartalom
+Note introuvable ¦ Muistiinpanoa ei löydy ¦ A jegyzet nem található
+Note manquante ¦ Muistiinpano puuttuu ¦ Hiányzik a jegyzet
+Personne et titre obligatoires ¦ Henkilö ja otsikko ovat pakollisia ¦ A személy és a cím kötelező
+Source et titre obligatoires ¦ Lähde ja otsikko ovat pakollisia ¦ A forrás és a cím kötelező
+Source introuvable ¦ Lähdettä ei löydy ¦ A forrás nem található
+Source manquante ¦ Lähde puuttuu ¦ Hiányzik a forrás
+Rotation impossible. ¦ Kääntäminen ei onnistu. ¦ Az elforgatás nem lehetséges.
+Script HTR local introuvable. ¦ Paikallista HTR-skriptiä ei löydy. ¦ A helyi HTR-szkript nem található.
+Fiche individuelle invalide. ¦ Virheellinen henkilökortti. ¦ Érvénytelen egyéni adatlap.
+Alerte manquante ¦ Hälytys puuttuu ¦ Hiányzik a figyelmeztetés
+Patronyme et groupe obligatoires ¦ Sukunimi ja ryhmä ovat pakollisia ¦ A családnév és a csoport kötelező
+Personne racine introuvable. ¦ Juurihenkilöä ei löydy. ¦ A kiinduló személy nem található.
+Vue introuvable ¦ Näkymää ei löydy ¦ A nézet nem található
+Cible manquante ¦ Kohde puuttuu ¦ Hiányzik a cél
+Identification manquante ¦ Tunnistus puuttuu ¦ Hiányzik az azonosítás
+Identification introuvable ¦ Tunnistusta ei löydy ¦ Az azonosítás nem található
+Objet ou souvenir manquant ¦ Esine tai muisto puuttuu ¦ Hiányzik a tárgy vagy az emlék
+À faire le {date} ¦ Tehtävä {date} ¦ Teendő: {date}
+Avant le {date} ¦ Ennen {date} ¦ {date} előtt
+Après le {date} ¦ Jälkeen {date} ¦ {date} után
+Rappel libre ¦ Vapaa muistutus ¦ Szabad emlékeztető
+Enquête « {title} » ¦ Selvitys ”{title}” ¦ „{title}” nyomozás
+Pas encore envoyé ¦ Ei vielä lähetetty ¦ Még nincs elküldve
+Envoyé aujourd’hui ¦ Lähetetty tänään ¦ Ma elküldve
+Réponse attendue depuis {n} jours ¦ Vastausta odotettu {n} päivää ¦ {n} napja várod a választ
+Réponse attendue depuis {n} jour ¦ Vastausta odotettu {n} päivä ¦ {n} napja várod a választ
+relance prévue le {date} : à relancer ¦ muistutus suunniteltu {date}: muistuta nyt ¦ emlékeztetés tervezve: {date}: ideje emlékeztetni
+relance le {date} ¦ muistutus {date} ¦ emlékeztetés: {date}
+Visite ¦ Käynti ¦ Látogatás
+Prévue le {date} : note-la comme faite ¦ Suunniteltu {date}: merkitse tehdyksi ¦ Tervezve: {date}: jelöld késznek
+Le {date} ¦ {date} ¦ {date}
+{n} cotes à consulter ¦ {n} arkistotunnusta tutkittavana ¦ {n} megnézendő jelzet
+{n} cote à consulter ¦ {n} arkistotunnus tutkittavana ¦ {n} megnézendő jelzet
+Piste ¦ Johtolanka ¦ Nyom
+À explorer ¦ Tutkittavana ¦ Felderítendő
+Hypothèse : {title} ¦ Hypoteesi: {title} ¦ Feltevés: {title}
+Hypothèse : sans titre ¦ Hypoteesi: nimetön ¦ Feltevés: cím nélkül
+confiance faible ¦ heikko luottamus ¦ gyenge bizalom
+confiance moyenne ¦ kohtalainen luottamus ¦ közepes bizalom
+confiance forte ¦ vahva luottamus ¦ erős bizalom
+Vu ¦ Nähty ¦ Megnézve
+Recensement de {y} à {place} : chercher sur SocFace ¦ Henkikirja {y}, {place}: hae SocFacesta ¦ Népszámlálás ({y}), {place}: keresd a SocFace-en
+Recensement de {y} : chercher sur SocFace ¦ Henkikirja {y}: hae SocFacesta ¦ Népszámlálás ({y}): keresd a SocFace-en
+Cherché sur SocFace ¦ Haettu SocFacesta ¦ Keresve a SocFace-en
+{act} : {name}, chercher à {place} ¦ {act}: {name}, hae paikasta {place} ¦ {act}: {name}, keresd itt: {place}
+{act} : {name} ¦ {act}: {name} ¦ {act}: {name}
+acte|Parents ¦ Vanhemmat ¦ Szülők
+acte|Contrat de mariage ¦ Avioehtosopimus ¦ Házassági szerződés
+acte|Succession ¦ Perunkirjoitus ¦ Hagyaték
+acte|Registre matricule ¦ Kantakirja ¦ Katonai törzskönyv
+Foyer de {name} ¦ Henkilön {name} kotitalous ¦ {name} háztartása
+{n} personnes ¦ {n} henkilöä ¦ {n} személy
+{n} personne ¦ {n} henkilö ¦ {n} személy
+Demande d’entraide ¦ Avunpyyntö ¦ Segítségkérés
+Une réponse t’attend ¦ Sinua odottaa vastaus ¦ Válasz vár rád
+Brouillon à publier ¦ Julkaistava luonnos ¦ Közzéteendő piszkozat
+Publiée il y a {n} jours ¦ Julkaistu {n} päivää sitten ¦ {n} napja közzétéve
+Publiée il y a {n} jour ¦ Julkaistu {n} päivä sitten ¦ {n} napja közzétéve
+Rappel fait ¦ Muistutus tehty ¦ Emlékeztető kész
+Demande résolue ¦ Pyyntö ratkaistu ¦ Kérés megoldva
+Piste explorée ¦ Johtolanka tutkittu ¦ Nyom felderítve
+Hypothèse revue ¦ Hypoteesi tarkistettu ¦ Feltevés átnézve
+Recherche faite ¦ Haku tehty ¦ Keresés kész
+Alerte revue ¦ Hälytys tarkistettu ¦ Figyelmeztetés átnézve
+Piste du mur faite ¦ Umpikujan johtolanka tehty ¦ Holtpont nyoma kész
+Lien vérifié ¦ Yhteys tarkistettu ¦ Kapcsolat ellenőrizve
+🛡 Lien à consolider ¦ 🛡 Vahvistettava yhteys ¦ 🛡 Megerősítendő kapcsolat
+Lien à consolider : {child}, le fils de {parent} ¦ Vahvistettava yhteys: {child}, henkilön {parent} poika ¦ Megerősítendő kapcsolat: {child}, {parent} fia
+Lien à consolider : {child}, la fille de {parent} ¦ Vahvistettava yhteys: {child}, henkilön {parent} tytär ¦ Megerősítendő kapcsolat: {child}, {parent} lánya
+Lien à consolider : {child}, l’enfant de {parent} ¦ Vahvistettava yhteys: {child}, henkilön {parent} lapsi ¦ Megerősítendő kapcsolat: {child}, {parent} gyermeke
+cherche l’acte de naissance ou de baptême qui le nomme ¦ etsi syntymä- tai kasteasiakirja, jossa hänet mainitaan ¦ keresd meg a születési vagy keresztelési anyakönyvi bejegyzést, amely megnevezi
