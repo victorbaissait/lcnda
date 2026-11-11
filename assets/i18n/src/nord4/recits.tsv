@@ -341,3 +341,1203 @@ Quand ¦ Milloin ¦ Mikor
 Raconte ¦ Kerro ¦ Mesélj
 Passeport ¦ Passi ¦ Útlevél
 Barbe ¦ Parta ¦ Szakáll
+son {x} (lien) ¦ hänen {x} ¦ az ő {x}
+sa {x} (lien) ¦ hänen {x} ¦ az ő {x}
+père ¦ isä ¦ apa
+mère ¦ äiti ¦ anya
+grand-père ¦ isoisä ¦ nagyapa
+grand-mère ¦ isoäiti ¦ nagyanya
+arrière-grand-père ¦ isoisoisä ¦ dédapa
+arrière-grand-mère ¦ isoisoäiti ¦ dédanya
+arrière-arrière-grand-père ¦ isoisoisoisä ¦ ükapa
+arrière-arrière-grand-mère ¦ isoisoisoäiti ¦ ükanya
+arrière-arrière-arrière-grand-père ¦ isoisoisoisoisä ¦ szépapa
+arrière-arrière-arrière-grand-mère ¦ isoisoisoisoäiti ¦ szépanya
+ancêtre à la {n}e génération ¦ esivanhempi {n}. sukupolvessa ¦ felmenő a(z) {n}. nemzedékben
+{kin} de {name} ¦ henkilön {name} {kin} ¦ {kin} ({name})
+Il est né {when}{where}. ¦ Hän syntyi {when}{where}. ¦ Született {when}{where}.
+Elle est née {when}{where}. ¦ Hän syntyi {when}{where}. ¦ Született {when}{where}.
+Il était {occ}. ¦ Hän oli ammatiltaan {occ}. ¦ Foglalkozása: {occ}.
+Elle était {occ}. ¦ Hän oli ammatiltaan {occ}. ¦ Foglalkozása: {occ}.
+Il a épousé {name}{when}{where}. ¦ Hän avioitui henkilön {name} kanssa {when}{where}. ¦ Házasságot kötött vele: {name}{when}{where}.
+Elle a épousé {name}{when}{where}. ¦ Hän avioitui henkilön {name} kanssa {when}{where}. ¦ Házasságot kötött vele: {name}{when}{where}.
+Il a eu un enfant : {list}. ¦ Hänellä oli yksi lapsi: {list}. ¦ Egy gyermeke volt: {list}.
+Elle a eu un enfant : {list}. ¦ Hänellä oli yksi lapsi: {list}. ¦ Egy gyermeke volt: {list}.
+Il a eu {n} enfants : {list}. ¦ Hänellä oli {n} lasta: {list}. ¦ {n} gyermeke volt: {list}.
+Elle a eu {n} enfants : {list}. ¦ Hänellä oli {n} lasta: {list}. ¦ {n} gyermeke volt: {list}.
+Il est mort {when}{age}{where}. ¦ Hän kuoli {when}{age}{where}. ¦ Meghalt {when}{age}{where}.
+Elle est morte {when}{age}{where}. ¦ Hän kuoli {when}{age}{where}. ¦ Meghalt {when}{age}{where}.
+, à {n} ans ¦ , {n}-vuotiaana ¦ , {n} évesen
+, à {n} an ¦ , {n}-vuotiaana ¦ , {n} évesen
+avec {name} ¦ yhdessä henkilön {name} kanssa ¦ vele: {name}
+se mariait{with}{where}{date} ¦ meni naimisiin{with}{where}{date} ¦ házasságot kötött{with}{where}{date}
+se mariait civilement{with}{where}{date} ¦ solmi siviiliavioliiton{with}{where}{date} ¦ polgári házasságot kötött{with}{where}{date}
+se mariait religieusement{with}{where}{date} ¦ vihittiin kirkossa{with}{where}{date} ¦ templomi esküvőt tartott{with}{where}{date}
+mourait{with}{where}{date} ¦ kuoli{with}{where}{date} ¦ meghalt{with}{where}{date}
+était inhumé{with}{where}{date} ¦ haudattiin{with}{where}{date} ¦ eltemették{with}{where}{date}
+était inhumée{with}{where}{date} ¦ haudattiin{with}{where}{date} ¦ eltemették{with}{where}{date}
+habitait{with}{where}{date} ¦ asui{with}{where}{date} ¦ lakott{with}{where}{date}
+travaillait comme{what}{with}{where}{date} ¦ työskenteli{what}{with}{where}{date} ¦ dolgozott{what}{with}{where}{date}
+partait{with}{where}{date} ¦ lähti matkaan{with}{where}{date} ¦ útra kelt{with}{where}{date}
+arrivait{with}{where}{date} ¦ saapui{with}{where}{date} ¦ megérkezett{with}{where}{date}
+était recensé{with}{where}{date} ¦ oli mukana väestönlaskennassa{with}{where}{date} ¦ szerepelt a népszámlálásban{with}{where}{date}
+était recensée{with}{where}{date} ¦ oli mukana väestönlaskennassa{with}{where}{date} ¦ szerepelt a népszámlálásban{with}{where}{date}
+était sous les drapeaux{with}{where}{date} ¦ oli asepalveluksessa{with}{where}{date} ¦ katonáskodott{with}{where}{date}
+obtenait un diplôme{with}{where}{date} ¦ sai tutkinnon{with}{where}{date} ¦ oklevelet szerzett{with}{where}{date}
+devenait français{with}{where}{date} ¦ sai Ranskan kansalaisuuden{with}{where}{date} ¦ francia állampolgár lett{with}{where}{date}
+devenait française{with}{where}{date} ¦ sai Ranskan kansalaisuuden{with}{where}{date} ¦ francia állampolgár lett{with}{where}{date}
+était baptisé{with}{where}{date} ¦ kastettiin{with}{where}{date} ¦ megkeresztelték{with}{where}{date}
+était baptisée{with}{where}{date} ¦ kastettiin{with}{where}{date} ¦ megkeresztelték{with}{where}{date}
+faisait sa confirmation{with}{where}{date} ¦ konfirmoitiin{with}{where}{date} ¦ bérmálkozott{with}{where}{date}
+était à l’école{with}{where}{date} ¦ kävi koulua{with}{where}{date} ¦ iskolába járt{with}{where}{date}
+vivait un événement ({label}){where}{date} ¦ koki tapahtuman ({label}){where}{date} ¦ eseményt élt át ({label}){where}{date}
+devenait père de {name}{where}{date} ¦ tuli isäksi lapselle {name}{where}{date} ¦ apja lett: {name}{where}{date}
+devenait mère de {name}{where}{date} ¦ tuli äidiksi lapselle {name}{where}{date} ¦ anyja lett: {name}{where}{date}
+n’était plus là : il était mort à {n} ans ¦ ei ollut enää elossa: hän oli kuollut {n}-vuotiaana ¦ már nem élt: {n} évesen meghalt
+n’était plus là : elle était morte à {n} ans ¦ ei ollut enää elossa: hän oli kuollut {n}-vuotiaana ¦ már nem élt: {n} évesen meghalt
+vivait sans doute du côté de {place} en {y}{occ} ¦ asui luultavasti paikan {place} tienoilla vuonna {y}{occ} ¦ valószínűleg {place} környékén élt {y}-ban{occ}
+vivait sa vie en {y}{occ} ¦ eli elämäänsä vuonna {y}{occ} ¦ élte az életét {y}-ban{occ}
+À {n} ans… ¦ {n}-vuotiaana… ¦ {n} évesen…
+À {n} ans, il {facts}. ¦ {n}-vuotiaana hän {facts}. ¦ {n} évesen {facts}.
+À {n} ans, elle {facts}. ¦ {n}-vuotiaana hän {facts}. ¦ {n} évesen {facts}.
+{who} de {name} dont on connaît la naissance. ¦ {who} (henkilön {name}), joiden syntymä tunnetaan. ¦ {who} ({name}), akiknek ismert a születése.
+{who} de {name} dont on connaît la naissance ({k} sans date de naissance ne sont pas comptés). ¦ {who} (henkilön {name}), joiden syntymä tunnetaan ({k}, joilta puuttuu syntymäaika, ei lasketa). ¦ {who} ({name}), akiknek ismert a születése ({k} születési dátum nélkül nincs beleszámítva).
+{who}{y}, comme {kin} {from}{fy} ¦ {who}{y}, kuten {kin} {from}{fy} ¦ {who}{y}, akárcsak {kin} {from}{fy}
+C’est un homme. ¦ Se on mies. ¦ Ez egy férfi.
+C’est une femme. ¦ Se on nainen. ¦ Ez egy nő.
+C’est un homme, né au XVIIIe siècle ou avant. ¦ Se on mies, syntynyt 1700-luvulla tai aiemmin. ¦ Ez egy férfi, a 18. században vagy korábban született.
+C’est un homme, né au XIXe siècle. ¦ Se on mies, syntynyt 1800-luvulla. ¦ Ez egy férfi, a 19. században született.
+C’est un homme, né au XXe siècle. ¦ Se on mies, syntynyt 1900-luvulla. ¦ Ez egy férfi, a 20. században született.
+C’est une femme, née au XVIIIe siècle ou avant. ¦ Se on nainen, syntynyt 1700-luvulla tai aiemmin. ¦ Ez egy nő, a 18. században vagy korábban született.
+C’est une femme, née au XIXe siècle. ¦ Se on nainen, syntynyt 1800-luvulla. ¦ Ez egy nő, a 19. században született.
+C’est une femme, née au XXe siècle. ¦ Se on nainen, syntynyt 1900-luvulla. ¦ Ez egy nő, a 20. században született.
+Il est né à {place}. ¦ Hän syntyi paikassa {place}. ¦ Születési helye: {place}.
+Elle est née à {place}. ¦ Hän syntyi paikassa {place}. ¦ Születési helye: {place}.
+Son métier : {occ}. ¦ Ammatti: {occ}. ¦ Foglalkozása: {occ}.
+Il a vécu {n} ans. ¦ Hän eli {n} vuotta. ¦ {n} évet élt.
+Elle a vécu {n} ans. ¦ Hän eli {n} vuotta. ¦ {n} évet élt.
+Il a eu {n} enfant. ¦ Hänellä oli {n} lapsi. ¦ {n} gyermeke volt.
+Elle a eu {n} enfant. ¦ Hänellä oli {n} lapsi. ¦ {n} gyermeke volt.
+Il a eu {n} enfants. ¦ Hänellä oli {n} lasta. ¦ {n} gyermeke volt.
+Elle a eu {n} enfants. ¦ Hänellä oli {n} lasta. ¦ {n} gyermeke volt.
+On ne lui connaît pas d’enfant. ¦ Hänellä ei tiedetä olleen lapsia. ¦ Nem tudunk gyermekéről.
+Né dans les années {y}. ¦ Syntynyt {y}-luvulla. ¦ Született az {y}-as években.
+Née dans les années {y}. ¦ Syntynyt {y}-luvulla. ¦ Született az {y}-as években.
+Sa femme s’appelait {name}. ¦ Hänen vaimonsa nimi oli {name}. ¦ A felesége neve {name} volt.
+Son mari s’appelait {name}. ¦ Hänen miehensä nimi oli {name}. ¦ A férje neve {name} volt.
+Un de ses enfants s’appelait {name}. ¦ Yhden hänen lapsistaan nimi oli {name}. ¦ Az egyik gyermeke neve {name} volt.
+Son nom commence par {l}… et compte {n} lettres. ¦ Sukunimi alkaa kirjaimella {l}… ja siinä on {n} kirjainta. ¦ A vezetékneve {l} betűvel kezdődik… és {n} betűből áll.
+Ta naissance ¦ Syntymäsi ¦ A születésed
+Tu es {name}. ¦ Olet {name}. ¦ Te vagy {name}.
+Tu nais {when}{where}{parents}. ¦ Synnyt {when}{where}{parents}. ¦ Megszületsz {when}{where}{parents}.
+fils de {names} ¦ poika, vanhemmat {names} ¦ fia ennek: {names}
+fille de {names} ¦ tytär, vanhemmat {names} ¦ lánya ennek: {names}
+{a} et de {b} ¦ {a} ja {b} ¦ {a} és {b}
+Ton père est {occ}. ¦ Isäsi on ammatiltaan {occ}. ¦ Apád foglalkozása: {occ}.
+Le métier ¦ Ammatti ¦ A mesterség
+Tu as quinze ans, c’est l’année {y}. Il faut gagner ta vie. Que vas-tu faire ? ¦ Olet viisitoista, on vuosi {y}. Sinun täytyy ansaita elantosi. Mitä teet? ¦ Tizenöt éves vagy, {y} van. Meg kell keresned a kenyered. Mit fogsz csinálni?
+Tu as quinze ans. Il faut gagner ta vie. Que vas-tu faire ? ¦ Olet viisitoista. Sinun täytyy ansaita elantosi. Mitä teet? ¦ Tizenöt éves vagy. Meg kell keresned a kenyered. Mit fogsz csinálni?
+Devenir {occ} ¦ Ryhdy: {occ} ¦ Legyél: {occ}
+Dans la vraie vie, {name} est devenu {occ}. ¦ Todellisuudessa {name} ryhtyi ammattiin: {occ}. ¦ A valóságban {name} foglalkozása ez lett: {occ}.
+Dans la vraie vie, {name} est devenue {occ}. ¦ Todellisuudessa {name} ryhtyi ammattiin: {occ}. ¦ A valóságban {name} foglalkozása ez lett: {occ}.
+L’amour ¦ Rakkaus ¦ A szerelem
+Tu as {n} ans. ¦ Olet {n}-vuotias. ¦ {n} éves vagy.
+À {place}, deux personnes ont attiré ton regard… ¦ Paikassa {place} kaksi ihmistä on kiinnittänyt huomiosi… ¦ {place} településen két ember is megakadt a szemeden…
+deux personnes ont attiré ton regard… ¦ kaksi ihmistä on kiinnittänyt huomiosi… ¦ két ember is megakadt a szemeden…
+Épouser {name} ¦ Avioidu: {name} ¦ Házasodj vele: {name}
+Rester libre encore un peu ¦ Pysy vielä hetken vapaana ¦ Maradj még egy kicsit szabad
+Dans la vraie vie, {first} a épousé {name}{when}{where}. ¦ Todellisuudessa {first} avioitui henkilön {name} kanssa {when}{where}. ¦ A valóságban {first} házasságot kötött vele: {name}{when}{where}.
+Partir ? ¦ Lähteäkö? ¦ Elmenni?
+La vie est dure{where}. On parle de partir… ¦ Elämä on kovaa{where}. Puhutaan lähtemisestä… ¦ Kemény az élet{where}. Az elmenésről beszélnek…
+Partir pour {place} ¦ Lähde: {place} ¦ Indulj ide: {place}
+Rester au pays ¦ Jää kotiseudulle ¦ Maradj otthon
+Dans la vraie vie, {name} a fini sa route à {place}. ¦ Todellisuudessa {name} päätyi lopulta paikkaan {place}. ¦ A valóságban {name} útja itt ért véget: {place}.
+On parle de partir pour la ville… ¦ Puhutaan lähtemisestä kaupunkiin… ¦ Arról beszélnek, hogy a városba kéne menni…
+Partir ¦ Lähde ¦ Menj el
+Rester à {place} ¦ Jää: {place} ¦ Maradj itt: {place}
+Dans la vraie vie, {name} est resté à {place}. ¦ Todellisuudessa {name} jäi paikkaan {place}. ¦ A valóságban {name} itt maradt: {place}.
+Dans la vraie vie, {name} est restée à {place}. ¦ Todellisuudessa {name} jäi paikkaan {place}. ¦ A valóságban {name} itt maradt: {place}.
+Les enfants ¦ Lapset ¦ A gyerekek
+Un enfant arrive : {list}. Tu les regardes grandir. ¦ Lapsi syntyy: {list}. Katsot hänen kasvavan. ¦ Gyermek születik: {list}. Nézed, ahogy felnő.
+{n} enfants arrivent : {list}. Tu les regardes grandir. ¦ {n} lasta syntyy: {list}. Katsot heidän kasvavan. ¦ {n} gyermek születik: {list}. Nézed, ahogy felnőnek.
+La fin du voyage ¦ Matkan loppu ¦ Az utazás vége
+Tu t’éteins {when}{where}{age}. ¦ Nukut pois {when}{where}{age}. ¦ Elhunysz {when}{where}{age}.
+Ton histoire continue… ¦ Tarinasi jatkuu… ¦ A történeted folytatódik…
+{n} personnes nées un {date} : {list}. ¦ {n} henkilöä syntynyt päivänä {date}: {list}. ¦ {n} személy született ezen a napon: {date}: {list}.
+{name} est mort le jour de son anniversaire, à {n} ans ({date}). ¦ {name} kuoli syntymäpäivänään {n}-vuotiaana ({date}). ¦ {name} a születésnapján halt meg, {n} évesen ({date}).
+{name} est morte le jour de son anniversaire, à {n} ans ({date}). ¦ {name} kuoli syntymäpäivänään {n}-vuotiaana ({date}). ¦ {name} a születésnapján halt meg, {n} évesen ({date}).
+{name} est né un {date}, jour anniversaire de la mort de {kin} {who} ({y}). ¦ {name} syntyi päivänä {date}, jolloin tuli kuluneeksi vuosi lisää siitä, kun kuoli {kin} {who} ({y}). ¦ {name} ezen a napon született: {date}, épp {kin} {who} halálának évfordulóján ({y}).
+{name} est née un {date}, jour anniversaire de la mort de {kin} {who} ({y}). ¦ {name} syntyi päivänä {date}, jolloin tuli kuluneeksi vuosi lisää siitä, kun kuoli {kin} {who} ({y}). ¦ {name} ezen a napon született: {date}, épp {kin} {who} halálának évfordulóján ({y}).
+son ancêtre ¦ hänen esivanhempansa ¦ az őse
+{n} mariages le même jour de l’année : {list}. ¦ {n} vihkimistä samana vuodenpäivänä: {list}. ¦ {n} házasságkötés az év ugyanazon napján: {list}.
+{a} et {b} sont nés à {n} ans pile d’écart, jour pour jour ({y1} et {y2}). ¦ {a} ja {b} syntyivät tasan {n} vuoden välein, päivälleen ({y1} ja {y2}). ¦ {a} és {b} pontosan {n} év különbséggel született, napra pontosan ({y1} és {y2}).
+{name} est né le jour de Noël {y}. ¦ {name} syntyi joulupäivänä {y}. ¦ {name} karácsony napján született, {y}.
+{name} est née le jour de Noël {y}. ¦ {name} syntyi joulupäivänä {y}. ¦ {name} karácsony napján született, {y}.
+{name} est né le jour de l’An {y}. ¦ {name} syntyi uudenvuodenpäivänä {y}. ¦ {name} újév napján született, {y}.
+{name} est née le jour de l’An {y}. ¦ {name} syntyi uudenvuodenpäivänä {y}. ¦ {name} újév napján született, {y}.
+{name} est né un vendredi 13 ({date}). ¦ {name} syntyi perjantaina 13. päivä ({date}). ¦ {name} péntek 13-án született ({date}).
+{name} est née un vendredi 13 ({date}). ¦ {name} syntyi perjantaina 13. päivä ({date}). ¦ {name} péntek 13-án született ({date}).
+{name} s’est marié à {n} ans, au même âge que son père {father}. ¦ {name} meni naimisiin {n}-vuotiaana, samanikäisenä kuin isänsä {father}. ¦ {name} {n} évesen házasodott, ugyanannyi idősen, mint az apja, {father}.
+{name} s’est mariée à {n} ans, au même âge que son père {father}. ¦ {name} meni naimisiin {n}-vuotiaana, samanikäisenä kuin isänsä {father}. ¦ {name} {n} évesen házasodott, ugyanannyi idősen, mint az apja, {father}.
+En quelle année est né {name} ? ¦ Minä vuonna {name} syntyi? ¦ Melyik évben született {name}?
+En quelle année est née {name} ? ¦ Minä vuonna {name} syntyi? ¦ Melyik évben született {name}?
+Où est né {name} ? ¦ Missä {name} syntyi? ¦ Hol született {name}?
+Où est née {name} ? ¦ Missä {name} syntyi? ¦ Hol született {name}?
+Quel était le métier de {name} ? ¦ Mikä oli henkilön {name} ammatti? ¦ Mi volt {name} foglalkozása?
+{name} était {occ}. ¦ {name} oli ammatiltaan {occ}. ¦ {name} foglalkozása: {occ}.
+Qui a épousé {name} ? ¦ Kuka avioitui henkilön {name} kanssa? ¦ Ki kötött házasságot vele: {name}?
+{a} et {b} se sont mariés{when}{where}. ¦ {a} ja {b} menivät naimisiin{when}{where}. ¦ {a} és {b} házasságot kötött{when}{where}.
+Qui est le père de {name} ? ¦ Kuka on henkilön {name} isä? ¦ Ki {name} apja?
+Qui est la mère de {name} ? ¦ Kuka on henkilön {name} äiti? ¦ Ki {name} anyja?
+{name} est le fils de {parent}. ¦ {name} on henkilön {parent} poika. ¦ {name} fia ennek: {parent}.
+{name} est la fille de {parent}. ¦ {name} on henkilön {parent} tytär. ¦ {name} lánya ennek: {parent}.
+Combien d’enfants a eus {name} ? ¦ Montako lasta henkilöllä {name} oli? ¦ Hány gyermeke volt {name}?
+À quel âge est mort {name} ? ¦ Minkä ikäisenä {name} kuoli? ¦ Hány évesen halt meg {name}?
+À quel âge est morte {name} ? ¦ Minkä ikäisenä {name} kuoli? ¦ Hány évesen halt meg {name}?
+Qui est né le premier ? ¦ Kuka syntyi ensin? ¦ Ki született előbb?
+Ici est né {name}, {when}. ¦ Täällä syntyi {name}, {when}. ¦ Itt született {name}, {when}.
+Ici est née {name}, {when}. ¦ Täällä syntyi {name}, {when}. ¦ Itt született {name}, {when}.
+C’est aussi ici que est né {name}, {when}. ¦ Täällä syntyi myös {name}, {when}. ¦ Szintén itt született {name}, {when}.
+C’est aussi ici que est née {name}, {when}. ¦ Täällä syntyi myös {name}, {when}. ¦ Szintén itt született {name}, {when}.
+Ici est né {name}, {when} ; il sera {occ}. ¦ Täällä syntyi {name}, {when}; hänestä tulisi {occ}. ¦ Itt született {name}, {when}; később ez lett a foglalkozása: {occ}.
+Ici est née {name}, {when} ; elle sera {occ}. ¦ Täällä syntyi {name}, {when}; hänestä tulisi {occ}. ¦ Itt született {name}, {when}; később ez lett a foglalkozása: {occ}.
+C’est aussi ici que est né {name}, {when} ; il sera {occ}. ¦ Täällä syntyi myös {name}, {when}; hänestä tulisi {occ}. ¦ Szintén itt született {name}, {when}; később ez lett a foglalkozása: {occ}.
+C’est aussi ici que est née {name}, {when} ; elle sera {occ}. ¦ Täällä syntyi myös {name}, {when}; hänestä tulisi {occ}. ¦ Szintén itt született {name}, {when}; később ez lett a foglalkozása: {occ}.
+Ici, {when}, {name} : {label}{what}. ¦ Täällä, {when}, {name}: {label}{what}. ¦ Itt, {when}, {name}: {label}{what}.
+Puis, {when}, {name} : {label}{what}. ¦ Sitten, {when}, {name}: {label}{what}. ¦ Aztán, {when}, {name}: {label}{what}.
+Ici, {when}, {name} a épousé {other}. ¦ Täällä, {when}, {name} avioitui henkilön {other} kanssa. ¦ Itt, {when}, {name} házasságot kötött vele: {other}.
+Puis, {when}, {name} a épousé {other}. ¦ Sitten, {when}, {name} avioitui henkilön {other} kanssa. ¦ Aztán, {when}, {name} házasságot kötött vele: {other}.
+Ici est mort {name}, {when}{age}. ¦ Täällä kuoli {name}, {when}{age}. ¦ Itt halt meg {name}, {when}{age}.
+Ici est morte {name}, {when}{age}. ¦ Täällä kuoli {name}, {when}{age}. ¦ Itt halt meg {name}, {when}{age}.
+C’est aussi ici que est mort {name}, {when}{age}. ¦ Täällä kuoli myös {name}, {when}{age}. ¦ Szintén itt halt meg {name}, {when}{age}.
+C’est aussi ici que est morte {name}, {when}{age}. ¦ Täällä kuoli myös {name}, {when}{age}. ¦ Szintén itt halt meg {name}, {when}{age}.
+son conjoint ¦ hänen puolisonsa ¦ a házastársa
+Naissance ({date}) ¦ Syntymä ({date}) ¦ Születés ({date})
+Mariage avec {name} ({date}) ¦ Avioliitto: {name} ({date}) ¦ Házasság: {name} ({date})
+Mariage avec {name} ¦ Avioliitto: {name} ¦ Házasság: {name}
+Mariage ({date}) ¦ Avioliitto ({date}) ¦ Házasság ({date})
+Décès ({date}) ¦ Kuolema ({date}) ¦ Halál ({date})
+ont la joie de vous annoncer la naissance de leur fils ¦ ilolla ilmoittavat poikansa syntymästä ¦ örömmel tudatják fiuk születését
+ont la joie de vous annoncer la naissance de leur fille ¦ ilolla ilmoittavat tyttärensä syntymästä ¦ örömmel tudatják lányuk születését
+a la joie de vous annoncer la naissance de son fils ¦ ilolla ilmoittaa poikansa syntymästä ¦ örömmel tudatja fia születését
+a la joie de vous annoncer la naissance de sa fille ¦ ilolla ilmoittaa tyttärensä syntymästä ¦ örömmel tudatja lánya születését
+a la joie de vous annoncer la naissance de ¦ ilolla ilmoittaa syntyneen: ¦ örömmel tudatja születését:
+On nous prie d’annoncer le décès de ¦ Suruksemme ilmoitamme, että on kuollut ¦ Fájdalommal tudatjuk, hogy elhunyt
+survenu {when}{age} ¦ kuollut {when}{age} ¦ elhunyt {when}{age}
+survenue {when}{age} ¦ kuollut {when}{age} ¦ elhunyt {when}{age}
+, dans sa {n}e année ¦ , {n}. ikävuotenaan ¦ , életének {n}. évében
+De la part de ¦ Ilmoittajat ¦ A gyászolók és hozzátartozók nevében
+Monsieur {name}, son époux ¦ {name}, hänen puolisonsa ¦ {name}, a férje
+Madame {name}, son épouse ¦ {name}, hänen puolisonsa ¦ {name}, a felesége
+{names}, ses enfants ¦ {names}, hänen lapsensa ¦ {names}, a gyermekei
+{names}, son fils ¦ {names}, hänen poikansa ¦ {names}, a fia
+{names}, sa fille ¦ {names}, hänen tyttärensä ¦ {names}, a lánya
+ont l’honneur de vous faire part du mariage de leurs enfants ¦ kunnioittaen ilmoittavat lastensa avioliitosta ¦ tisztelettel tudatják gyermekeik házasságkötését
+ont la joie de vous faire part de leur mariage ¦ ilolla ilmoittavat avioliitostaan ¦ örömmel tudatják házasságkötésüket
+célébré {when} ¦ vihitty {when} ¦ megtartva {when}
+{names} se sont dit oui ! ¦ {names} sanoivat tahdon! ¦ {names} kimondták az igent!
+Bienvenue à {name} ! ¦ Tervetuloa, {name}! ¦ Isten hozott, {name}!
+Adieu à {name} ¦ Hyvästi, {name} ¦ Búcsú: {name}
+Une année tranquille ¦ Rauhallinen vuosi ¦ Egy csendes év
+C’est {when} que {a} a épousé {b}. ¦ {when} {a} avioitui henkilön {b} kanssa. ¦ {when} kötött házasságot {a} és {b}.
+{name} est le fils de {parents} ¦ {name} on henkilön {parents} poika ¦ {name} fia ennek: {parents}
+{name} est la fille de {parents} ¦ {name} on henkilön {parents} tytär ¦ {name} lánya ennek: {parents}
+Tous nos vœux de bonheur aux jeunes époux. ¦ Parhaat onnentoivotukset nuorelleparille. ¦ Sok boldogságot kívánunk az ifjú párnak.
+Les heureux parents, {names}, reçoivent les félicitations de toute la famille. ¦ Onnelliset vanhemmat, {names}, ottavat vastaan koko suvun onnittelut. ¦ A boldog szülők, {names}, az egész család jókívánságait fogadják.
+Rien de notable à signaler cette année dans la famille, ce qui est aussi une bonne nouvelle. ¦ Suvussa ei tänä vuonna tapahtunut mitään erityistä – sekin on hyvä uutinen. ¦ Idén semmi említésre méltó nem történt a családban – ez is jó hír.
+{name} fête ses {n} ans. ¦ {name} täyttää {n} vuotta. ¦ {name} {n} éves lesz.
+{names} : {n} ans de mariage ! ¦ {names}: {n} vuotta naimisissa! ¦ {names}: {n} év házasság!
+Né il y a {n} ans, jour pour jour. ¦ Syntyi {n} vuotta sitten, päivälleen. ¦ Napra pontosan {n} éve született.
+Née il y a {n} ans, jour pour jour. ¦ Syntyi {n} vuotta sitten, päivälleen. ¦ Napra pontosan {n} éve született.
+Disparu il y a {n} ans, jour pour jour. ¦ Poistui keskuudestamme {n} vuotta sitten, päivälleen. ¦ Napra pontosan {n} éve távozott közülünk.
+Disparue il y a {n} ans, jour pour jour. ¦ Poistui keskuudestamme {n} vuotta sitten, päivälleen. ¦ Napra pontosan {n} éve távozott közülünk.
+Fils de {names}. ¦ Poika, vanhemmat {names}. ¦ Szülei: {names}.
+Fille de {names}. ¦ Tytär, vanhemmat {names}. ¦ Szülei: {names}.
+{name}, son frère, est né {when} : moins de neuf mois d’écart (des jumeaux auraient la même date). ¦ {name}, hänen veljensä, syntyi {when}: alle yhdeksän kuukauden ero (kaksosilla olisi sama päivä). ¦ {name}, a fivére, {when} született: kevesebb mint kilenc hónap különbség (ikreknek ugyanaz lenne a dátumuk).
+{name}, sa sœur, est née {when} : moins de neuf mois d’écart (des jumeaux auraient la même date). ¦ {name}, hänen sisarensa, syntyi {when}: alle yhdeksän kuukauden ero (kaksosilla olisi sama päivä). ¦ {name}, a nővére vagy húga, {when} született: kevesebb mint kilenc hónap különbség (ikreknek ugyanaz lenne a dátumuk).
+{name} est mort {when}, avant ce mariage. ¦ {name} kuoli {when}, ennen tätä avioliittoa. ¦ {name} {when} meghalt, még e házasság előtt.
+{name} est morte {when}, avant ce mariage. ¦ {name} kuoli {when}, ennen tätä avioliittoa. ¦ {name} {when} meghalt, még e házasság előtt.
+La même année, {label} à {place}, à {km} km : possible, mais à vérifier. ¦ Samana vuonna {label} paikassa {place}, {km} km:n päässä: mahdollista, mutta tarkista. ¦ Ugyanabban az évben {label} itt: {place}, {km} km-re: lehetséges, de érdemes ellenőrizni.
+Un métier à {n} ans : c’est jeune. ¦ Ammatti {n}-vuotiaana: se on nuorena. ¦ Foglalkozás {n} évesen: ez fiatal kor.
+🔎 À regarder aussi ¦ 🔎 Katso myös ¦ 🔎 Érdemes megnézni
+{name} naît {when} {where}. ¦ {name} syntyy {when} {where}. ¦ {name} megszületik {when} {where}.
+Ses parents : {list}. ¦ Vanhemmat: {list}. ¦ Szülei: {list}.
+Parent connu : {list}. ¦ Tunnettu vanhempi: {list}. ¦ Ismert szülő: {list}.
+Ses frères et sœurs ¦ Sisarukset ¦ Testvérei
+Son frère ou sa sœur ¦ Veli tai sisar ¦ Fivére vagy nővére
+{name} reçoit le baptême {when} {where}. ¦ {name} kastetaan {when} {where}. ¦ {name} megkeresztelkedik {when} {where}.
+Présents : {list}. ¦ Läsnä: {list}. ¦ Jelen voltak: {list}.
+Le mariage religieux est célébré {when} {where}. ¦ Kirkollinen vihkiminen pidetään {when} {where}. ¦ A templomi esküvőt {when} tartják {where}.
+Le mariage civil est célébré {when} {where}. ¦ Siviilivihkiminen pidetään {when} {where}. ¦ A polgári esküvőt {when} tartják {where}.
+{name} se marie avec {who} {when} {where}. ¦ {name} menee naimisiin, puoliso {who}, {when} {where}. ¦ {name} házasságot köt vele: {who}, {when} {where}.
+{name} se marie {when} {where}. ¦ {name} menee naimisiin {when} {where}. ¦ {name} házasságot köt {when} {where}.
+{name} meurt {when} {where}{age}. ¦ {name} kuolee {when} {where}{age}. ¦ {name} meghal {when} {where}{age}.
+Cause notée : {cause}. ¦ Merkitty kuolinsyy: {cause}. ¦ Feljegyzett ok: {cause}.
+{name} repose {where} ¦ {name} lepää {where} ¦ {name} nyughelye: {where}
+{name} est inhumé ¦ {name} on haudattu ¦ {name} eltemetve
+{name} est inhumée ¦ {name} on haudattu ¦ {name} eltemetve
+{name} est inhumé(e) ¦ {name} on haudattu ¦ {name} eltemetve
+(inhumation {when}) ¦ (hautaus {when}) ¦ (temetés {when})
+{kind} {when} {where}. ¦ {kind} {when} {where}. ¦ {kind} {when} {where}.
+{name} exerce le métier de {job}{where}. ¦ {name} työskentelee ammatissa {job}{where}. ¦ {name} foglalkozása: {job}{where}.
+{name} s’installe {where}{addr}. ¦ {name} asettuu asumaan {where}{addr}. ¦ {name} letelepszik {where}{addr}.
+{name} habite {where}{addr}. ¦ {name} asuu {where}{addr}. ¦ {name} lakik {where}{addr}.
+Au recensement de {y}, {name} vit {where}{desc}. ¦ Vuoden {y} väestönlaskennassa {name} asuu {where}{desc}. ¦ Az {y}. évi népszámláláskor {name} lakhelye: {where}{desc}.
+Au recensement {when}, {name} vit {where}{desc}. ¦ Väestönlaskennassa {when} {name} asuu {where}{desc}. ¦ A népszámláláskor ({when}) {name} lakhelye: {where}{desc}.
+à l’adresse « {ad} » ¦ osoitteessa ”{ad}” ¦ a(z) „{ad}” címen
+Métier noté : {job}. ¦ Merkitty ammatti: {job}. ¦ Feljegyzett foglalkozás: {job}.
+Le foyer compte {who}. ¦ Kotitalouteen kuuluu {who}. ¦ A háztartás tagjai: {who}.
+{label} {when} {where}. ¦ {label} {when} {where}. ¦ {label} {when} {where}.
+Recensement de {y} ¦ Väestönlaskenta {y} ¦ {y}. évi népszámlálás
+Déménagement ¦ Muutto ¦ Költözés
+Domicile ¦ Asuinpaikka ¦ Lakóhely
+Sépulture ¦ Hautaus ¦ Temetés
+Crémation ¦ Tuhkaus ¦ Hamvasztás
+Obsèques ¦ Hautajaiset ¦ Gyászszertartás
+Ses enfants ¦ Lapset ¦ Gyermekei
+Son enfant ¦ Lapsi ¦ Gyermeke
+{n} enfants connus : {list}. ¦ {n} tunnettua lasta: {list}. ¦ {n} ismert gyermek: {list}.
+Un enfant connu : {list}. ¦ Yksi tunnettu lapsi: {list}. ¦ Egy ismert gyermek: {list}.
+Pendant sa vie ¦ Elämänsä aikana ¦ Élete során
+Sa vie en quelques mots ¦ Elämä muutamin sanoin ¦ Élete néhány szóban
+Ta version de la biographie (📖 sur la fiche). ¦ Oma versiosi elämäkerrasta (📖 kortilla). ¦ Az életrajz saját változatod (📖 az adatlapon).
+Biographie écrite par l’app d’après la fiche. ¦ Sovelluksen kortin pohjalta kirjoittama elämäkerta. ¦ Az alkalmazás által az adatlap alapján írt életrajz.
+Les lieux de sa vie ¦ Elämän paikat ¦ Élete helyszínei
+Sa descendance ¦ Jälkeläiset ¦ Leszármazottai
+{list} dans la généalogie. ¦ {list} sukututkimuksessa. ¦ {list} a családfában.
+Récit d’une vie — {name} ¦ Elämäntarina — {name} ¦ Egy élet története — {name}
+=petit-enfant ¦ lapsenlapsi|lastenlasta ¦ unoka|unoka
+=arrière-petit-enfant ¦ lapsenlapsenlapsi|lapsenlapsenlasta ¦ dédunoka|dédunoka
+=autre descendant ¦ muu jälkeläinen|muuta jälkeläistä ¦ más leszármazott|más leszármazott
+=signature ¦ allekirjoitus|allekirjoitusta ¦ aláírás|aláírás
+=visage ¦ kasvot|kasvot ¦ arc|arc
+=trésor caché ¦ kätketty aarre|kätkettyä aarretta ¦ rejtett kincs|rejtett kincs
+Garder la mémoire ¦ Muistojen vaaliminen ¦ Az emlékek megőrzése
+← Tous les trésors ¦ ← Kaikki aarteet ¦ ← Minden kincs
+Trésors · {fam} ¦ Aarteet · {fam} ¦ Kincsek · {fam}
+Un texte, un son ou une vidéo qui ne s’ouvre qu’à une date : « pour les 18 ans de Léa », « en 2050 ». ¦ Teksti, ääni tai video, joka avautuu vasta tiettynä päivänä: ”Léan 18-vuotispäiväksi”, ”vuonna 2050”. ¦ Szöveg, hang vagy videó, amely csak egy adott napon nyílik meg: „Léa 18. születésnapjára”, „2050-ben”.
+{n} scellée ¦ {n} sinetöity ¦ {n} lepecsételt
+{n} ouverte ¦ {n} avattu ¦ {n} kinyitott
+📬 Ouvertes ¦ 📬 Avatut ¦ 📬 Kinyitottak
+Aucune lettre ouverte pour l’instant ¦ Ei vielä avattuja kirjeitä ¦ Még nincs kinyitott levél
+Une lettre scellée s’ouvre toute seule le jour venu. ¦ Sinetöity kirje avautuu itsestään, kun päivä koittaa. ¦ A lepecsételt levél magától kinyílik, amikor eljön a nap.
+Souvenirs des sens ¦ Aistimuistot ¦ Érzékszervi emlékek
+L’odeur de la cire, le bruit du moulin, le goût des confitures : ce qu’aucun acte ne garde. ¦ Vahan tuoksu, myllyn ääni, hillon maku: sitä mitä yksikään asiakirja ei säilytä. ¦ A viasz illata, a malom zaja, a lekvár íze: amit egyetlen okirat sem őriz meg.
+Le sens ¦ Aisti ¦ Az érzékszerv
+👃 Une odeur ¦ 👃 Tuoksu ¦ 👃 Egy illat
+👂 Un son ¦ 👂 Ääni ¦ 👂 Egy hang
+👅 Un goût ¦ 👅 Maku ¦ 👅 Egy íz
+✋ Au toucher ¦ ✋ Kosketus ¦ ✋ Egy tapintás
+👁 Une image ¦ 👁 Näkymä ¦ 👁 Egy kép
+Les souvenirs qui ne tiennent dans aucun acte : une odeur, un bruit, un goût. Joins-y un son enregistré ou une photo si tu en as. ¦ Muistot, jotka eivät mahdu mihinkään asiakirjaan: tuoksu, ääni, maku. Liitä mukaan äänitys tai valokuva, jos sinulla on. ¦ Az emlékek, amelyek egyetlen okiratba sem férnek bele: egy illat, egy zaj, egy íz. Csatolj hozzá hangfelvételt vagy fényképet, ha van.
+Noter un souvenir ¦ Kirjaa muisto ¦ Emlék feljegyzése
+📋 Voir dans Listes › Mémoire familiale ¦ 📋 Näytä: Luettelot › Suvun muisti ¦ 📋 Megtekintés: Listák › Családi emlékezet
+Rangé avec les expressions, surnoms, traditions et témoignages ¦ Tallennetaan sanontojen, lempinimien, perinteiden ja kertomusten kanssa ¦ A szólások, becenevek, hagyományok és visszaemlékezések mellett tárolva
+Aucun souvenir noté pour l’instant : l’odeur de la cire dans l’escalier, le bruit du moulin, le goût des confitures de Mémé… ¦ Ei vielä muistoja: vahan tuoksu portaissa, myllyn ääni, mummon hillon maku… ¦ Még nincs feljegyzett emlék: a viasz illata a lépcsőházban, a malom zaja, a mama lekvárjának íze…
+Le livre de recettes ¦ Reseptikirja ¦ A receptkönyv
+Les recettes de la famille, avec qui les faisait et leur histoire, puis un vrai livre à imprimer. ¦ Suvun reseptit, kuka niitä teki ja niiden tarina – ja lopuksi oikea kirja tulostettavaksi. ¦ A család receptjei, ki készítette őket és mi a történetük, aztán egy igazi kinyomtatható könyv.
+Rubrique ¦ Osio ¦ Rovat
+Entrées et soupes ¦ Alkuruoat ja keitot ¦ Előételek és levesek
+Plats ¦ Pääruoat ¦ Főételek
+Desserts et gâteaux ¦ Jälkiruoat ja kakut ¦ Desszertek és sütemények
+Confitures et conserves ¦ Hillot ja säilykkeet ¦ Lekvárok és befőttek
+Boissons ¦ Juomat ¦ Italok
+Ajouter une recette ¦ Lisää resepti ¦ Recept hozzáadása
+Imprimer le livre ¦ Tulosta kirja ¦ A könyv nyomtatása
+{label} : couverture, sommaire, une page chacun ¦ {label}: kansi, sisällys, yksi sivu kustakin ¦ {label}: borító, tartalomjegyzék, mindegyiknek egy oldal
+Aucune recette pour l’instant : le far de Mamie, la soupe aux choux du dimanche… ¦ Ei vielä reseptejä: mummon far-kakku, sunnuntain kaalikeitto… ¦ Még nincs recept: a mama far-süteménye, a vasárnapi káposztaleves…
+Rien à mettre dans le livre pour l’instant : commence par « ＋ {what} ». ¦ Kirjaan ei ole vielä mitään lisättävää: aloita valinnalla ”＋ {what}”. ¦ Még nincs mit a könyvbe tenni: kezdd ezzel: „＋ {what}”.
+Les chansons de la famille ¦ Suvun laulut ¦ A család dalai
+Berceuses, chansons de banquet, de conscrits : paroles, air, qui la chantait, l’enregistrement, et un carnet à imprimer. ¦ Kehtolaulut, juhlalaulut, kutsuntalaulut: sanat, sävel, kuka lauloi, äänitys ja tulostettava laulukirja. ¦ Altatók, lakodalmi dalok, regrutanóták: szöveg, dallam, ki énekelte, a felvétel és egy kinyomtatható daloskönyv.
+Berceuses ¦ Kehtolaulut ¦ Altatók
+Chansons de fête et de repas ¦ Juhla- ja pöytälaulut ¦ Ünnepi és asztali dalok
+Chansons de travail ¦ Työlaulut ¦ Munkadalok
+Conscrits et soldats ¦ Kutsuntalaiset ja sotilaat ¦ Regruták és katonák
+Noël ¦ Joulu ¦ Karácsony
+En patois ¦ Murteella ¦ Tájszólásban
+Les paroles, l’air, qui la chantait — et, si tu peux, l’enregistrement (un son choisi dans les médias). ¦ Sanat, sävel, kuka lauloi – ja jos voit, äänitys (mediasta valittu ääni). ¦ A szöveg, a dallam, ki énekelte — és ha lehet, a felvétel (a médiából választott hang).
+Ajouter une chanson ¦ Lisää laulu ¦ Dal hozzáadása
+Imprimer le carnet ¦ Tulosta laulukirja ¦ A daloskönyv nyomtatása
+Aucune chanson pour l’instant : la berceuse de Mémé, la chanson des fins de banquet… ¦ Ei vielä lauluja: mummon kehtolaulu, juhlien loppulaulu… ¦ Még nincs dal: a mama altatója, a lakomák végén énekelt dal…
+L’entretien guidé ¦ Opastettu haastattelu ¦ Vezetett interjú
+Les bonnes questions à poser à un grand-parent, lues à voix haute ; l’enregistrement est rangé sur sa fiche, avec un repère par question. ¦ Oikeat kysymykset isovanhemmalle, luettuina ääneen; äänitys tallennetaan hänen kortilleen, ja jokaiselle kysymykselle tulee merkki. ¦ A jó kérdések, amelyeket egy nagyszülőnek érdemes feltenni, felolvasva; a felvétel az adatlapjára kerül, minden kérdésnél jelölővel.
+Les questions s’affichent en grand (et peuvent être lues à voix haute) ; l’entretien s’enregistre au micro, chaque question est marquée dans l’enregistrement, puis le son est rangé dans les médias de la fiche. ¦ Kysymykset näkyvät isolla (ja ne voi lukea ääneen); haastattelu äänitetään mikrofonilla, jokainen kysymys merkitään äänitykseen, ja lopuksi ääni tallennetaan kortin mediaan. ¦ A kérdések nagy betűvel jelennek meg (és felolvashatók); az interjút mikrofonnal rögzítjük, minden kérdés megjelölve a felvételben, majd a hang az adatlap médiái közé kerül.
+La personne interrogée ¦ Haastateltava ¦ A megkérdezett személy
+Lire les questions à voix haute ¦ Lue kysymykset ääneen ¦ Kérdések felolvasása
+Les thèmes ¦ Teemat ¦ Témák
+🧒 L’enfance ¦ 🧒 Lapsuus ¦ 🧒 Gyermekkor
+✏️ L’école ¦ ✏️ Koulu ¦ ✏️ Iskola
+👪 La famille ¦ 👪 Perhe ¦ 👪 Család
+🔨 Le travail ¦ 🔨 Työ ¦ 🔨 Munka
+💞 L’amour ¦ 💞 Rakkaus ¦ 💞 Szerelem
+🪖 La guerre ¦ 🪖 Sota ¦ 🪖 Háború
+🏡 La maison ¦ 🏡 Koti ¦ 🏡 A ház
+🎉 Les fêtes ¦ 🎉 Juhlat ¦ 🎉 Ünnepek
+💬 Pour plus tard ¦ 💬 Myöhempää varten ¦ 💬 Későbbre
+Les entretiens enregistrés ¦ Äänitetyt haastattelut ¦ Rögzített interjúk
+🎙️ Commencer l’entretien ¦ 🎙️ Aloita haastattelu ¦ 🎙️ Interjú indítása
+Les questions sur papier, avec la place pour noter les réponses ¦ Kysymykset paperilla, tilaa vastauksille ¦ A kérdések papíron, hellyel a válaszoknak
+Aucun entretien pour l’instant ¦ Ei vielä haastatteluja ¦ Még nincs interjú
+Choisis la personne et les thèmes, puis « 🎙️ Commencer l’entretien ». ¦ Valitse henkilö ja teemat, sitten ”🎙️ Aloita haastattelu”. ¦ Válaszd ki a személyt és a témákat, aztán: „🎙️ Interjú indítása”.
+La veillée en un clic ¦ Iltatarinat yhdellä napsautuksella ¦ Mesélős este egy kattintással
+En plein écran, les portraits d’une branche défilent, chaque vie est racontée à voix haute, avec une musique douce. ¦ Koko näytöllä haaran muotokuvat vaihtuvat, jokainen elämä kerrotaan ääneen, taustalla rauhallinen musiikki. ¦ Teljes képernyőn egy ág portréi peregnek, minden életet felolvasunk, halk zenével.
+Autour de ¦ Keskiössä ¦ Akinek a köre
+Secondes par vie ¦ Sekuntia per elämä ¦ Másodperc életenként
+Raconter à voix haute ¦ Kerro ääneen ¦ Felolvasás
+Musique douce ¦ Rauhallinen musiikki ¦ Halk zene
+En plein écran : les portraits défilent, chaque vie est racontée. Espace = pause, flèches = avant / après, Échap = fin. ¦ Koko näytöllä: muotokuvat vaihtuvat, jokainen elämä kerrotaan. Välilyönti = tauko, nuolet = edellinen / seuraava, Esc = lopetus. ¦ Teljes képernyőn: peregnek a portrék, minden életet elmesélünk. Szóköz = szünet, nyilak = vissza / tovább, Esc = vége.
+La veillée de la famille {name} ¦ Suvun {name} ilta ¦ A(z) {name} család estéje
+Ce soir, on raconte {n} vies de la famille de {name}. ¦ Tänä iltana kerromme {n} elämää suvusta {name}. ¦ Ma este {n} életet mesélünk el {name} családjából.
+Bonne nuit ¦ Hyvää yötä ¦ Jó éjszakát
+Et maintenant, à vous de raconter ce dont vous vous souvenez. ¦ Ja nyt on teidän vuoronne kertoa, mitä muistatte. ¦ És most rajtatok a sor, meséljétek el, amire emlékeztek.
+{n} vies à raconter : {list} ¦ {n} elämää kerrottavana: {list} ¦ {n} elmesélendő élet: {list}
+🕯️ Lancer la veillée ¦ 🕯️ Aloita ilta ¦ 🕯️ Az est indítása
+Découvrir ¦ Tutustu ¦ Felfedezés
+À ton âge… ¦ Sinun iässäsi… ¦ A te korodban…
+Ce que faisait chaque ancêtre au même âge que toi : il se mariait, partait, devenait parent… ¦ Mitä kukin esivanhempi teki samanikäisenä kuin sinä: meni naimisiin, lähti, sai lapsen… ¦ Mit csinált minden felmenőd ugyanebben a korban: házasodott, útra kelt, szülő lett…
+L’âge ¦ Ikä ¦ Életkor
+Mon âge ¦ Oma ikäni ¦ A korom
+Aperçu, A4 ou A5, ⤓ PDF ¦ Esikatselu, A4 tai A5, ⤓ PDF ¦ Előnézet, A4 vagy A5, ⤓ PDF
+Les prénoms qui sautent une génération ¦ Etunimet, jotka hyppäävät sukupolven yli ¦ Egy nemzedéket átugró keresztnevek
+Henri comme son grand-père, Rose comme son arrière-grand-mère : les prénoms transmis par-dessus les parents. ¦ Henri kuten isoisänsä, Rose kuten isoisoäitinsä: nimet, jotka siirtyivät vanhempien yli. ¦ Henri, mint a nagyapja, Rose, mint a dédanyja: a szülőket átugorva továbbadott nevek.
+Un prénom qui « saute » une génération : l’enfant le reçoit d’un grand-parent (ou d’un arrière-grand-parent), alors que ni son père ni sa mère ne le portaient. La popularité de chaque prénom en France (INSEE) est dans <b>Patrimoine → Prénoms</b>. ¦ Nimi, joka ”hyppää” sukupolven yli: lapsi saa sen isovanhemmalta (tai isoisovanhemmalta), vaikka isä tai äiti ei sitä kantanut. Kunkin etunimen suosio Ranskassa (INSEE) on kohdassa <b>Perintö → Etunimet</b>. ¦ Egy név, amely „átugrik” egy nemzedéket: a gyermek egy nagyszülőtől (vagy dédszülőtől) kapja, pedig sem az apja, sem az anyja nem viselte. Az egyes nevek gyakorisága Franciaországban (INSEE) itt található: <b>Örökség → Keresztnevek</b>.
+{n} prénom transmis par-dessus une génération ¦ {n} etunimi siirtynyt sukupolven yli ¦ {n} keresztnév egy nemzedéket átugorva továbbadva
+{n} fois ¦ {n} kertaa ¦ {n} alkalommal
+Les prénoms qui reviennent ¦ Toistuvat etunimet ¦ Visszatérő keresztnevek
+Le pouvoir d’achat d’autrefois ¦ Entisajan ostovoima ¦ A régi idők vásárlóereje
+Une dot de 1 200 francs en 1880 : combien d’euros d’aujourd’hui, de kilos de pain, de journées de travail ? ¦ 1 200 frangin myötäjäiset vuonna 1880: kuinka monta nykyeuroa, leipäkiloa, työpäivää? ¦ 1200 frank hozomány 1880-ban: hány mai euró, hány kiló kenyér, hány napi munka?
+La somme ¦ Summa ¦ Az összeg
+livres (ou francs de l’époque) ¦ livreä (tai aikakauden frangia) ¦ livre (vagy korabeli frank)
+sous (1/20 de livre ou de franc) ¦ sou'ta (1/20 livreä tai frangia) ¦ sou (1/20 livre vagy frank)
+deniers (1/240 de livre) ¦ denieriä (1/240 livreä) ¦ denier (1/240 livre)
+anciens francs (après 1960) ¦ vanhaa frangia (vuoden 1960 jälkeen) ¦ régi frank (1960 után)
+centimes ¦ senttiä ¦ centime
+euros ¦ euroa ¦ euró
+Repères : à partir de 1901, l’indice des prix de l’INSEE ; avant, un ordre de grandeur d’après le prix des denrées. Le pain : prix moyen du kilo de pain ordinaire. Les journées : le salaire d’un journalier. Un écu = 3 livres. ¦ Viitekohdat: vuodesta 1901 INSEE:n hintaindeksi; sitä ennen suuruusluokka elintarvikkeiden hintojen perusteella. Leipä: tavallisen leipäkilon keskihinta. Päivät: päivätyöläisen palkka. Yksi écu = 3 livreä. ¦ Támpontok: 1901-től az INSEE árindexe; előtte nagyságrendi becslés az élelmiszerárak alapján. Kenyér: egy kiló közönséges kenyér átlagára. Napok: egy napszámos bére. Egy écu = 3 livre.
+🪙 Le calcul pas à pas dans le Convertisseur d’autrefois ↗ ¦ 🪙 Laskelma vaihe vaiheelta Vanhan rahan muuntimessa ↗ ¦ 🪙 A számítás lépésről lépésre a Régi pénz átváltójában ↗
+Les sommes de ton arbre ¦ Sukupuusi summat ¦ Összegek a családfádban
+{sum} en {y} ¦ {sum} vuonna {y} ¦ {sum} ({y})
+≈ {eur} d’aujourd’hui ¦ ≈ {eur} nykyrahassa ¦ ≈ {eur} mai értéken
+{kg} kg de pain ¦ {kg} kg leipää ¦ {kg} kg kenyér
+{d} journées de travail ¦ {d} työpäivää ¦ {d} napi munka
+En euros d’aujourd’hui ¦ Nykypäivän euroina ¦ Mai euróban
+En pain ¦ Leipänä ¦ Kenyérben
+soit {n} baguettes d’aujourd’hui ¦ eli {n} nykyistä patonkia ¦ azaz {n} mai bagett
+En journées de travail ¦ Työpäivinä ¦ Munkanapokban
+d’un journalier en {y} ¦ päivätyöläisen, vuonna {y} ¦ egy napszámosé {y}-ban
+≈ {eur} au SMIC d’aujourd’hui ¦ ≈ {eur} nykyisellä minimipalkalla ¦ ≈ {eur} mai minimálbéren
+francs ¦ frangia ¦ frank
+{n} {unit} de {y}. ¦ {n} {unit} vuodelta {y}. ¦ {n} {unit}, {y}.
+Les deux chiffres ne disent pas la même chose : le pain coûtait proportionnellement bien plus cher autrefois, le travail beaucoup moins. ¦ Luvut eivät kerro samaa: leipä oli ennen suhteessa paljon kalliimpaa, työ paljon halvempaa. ¦ A két szám nem ugyanazt mondja: a kenyér régen arányosan sokkal drágább volt, a munka sokkal olcsóbb.
+Les vieux mots des actes ¦ Asiakirjojen vanhat sanat ¦ A régi okiratok szavai
+Laboureur, ondoyé, brumaire, douaire… Colle un acte : les mots anciens sont surlignés et expliqués. ¦ Laboureur, ondoyé, brumaire, douaire… Liitä asiakirja: vanhat (ranskankieliset) sanat korostetaan ja selitetään. ¦ Laboureur, ondoyé, brumaire, douaire… Illessz be egy okiratot: a régi (francia) szavak kiemelve és megmagyarázva jelennek meg.
+Colle ici le texte d’un acte ¦ Liitä tähän asiakirjan teksti ¦ Ide illeszd be egy okirat szövegét
+Dans ton arbre ¦ Sukupuussasi ¦ A családfádban
+Chercher un mot ¦ Hae sanaa ¦ Szó keresése
+{n} mots ¦ {n} sanaa ¦ {n} szó
+📜 Le latin, les abréviations et les anciennes lettres ↗ ¦ 📜 Latina, lyhenteet ja vanhat kirjaimet ↗ ¦ 📜 Latin, rövidítések és régi betűk ↗
+Ces mots et leurs explications sont ceux des actes français : ils restent en français. ¦ Nämä sanat ja niiden selitykset ovat ranskalaisista asiakirjoista: ne pysyvät ranskaksi. ¦ Ezek a szavak és magyarázataik francia okiratokból valók: franciául maradnak.
+Jouer en famille ¦ Pelaa perheen kanssa ¦ Családi játék
+Jeu des 7 familles ¦ Seitsemän perheen korttipeli ¦ Hét család kártyajáték
+Les cartes faites depuis ton arbre : la photo de chacun au choix et recadrée, six styles de cartes, les couleurs, le dos ; à imprimer et découper. ¦ Sukupuustasi tehdyt kortit: jokaisen valokuva valittuna ja rajattuna, kuusi korttityyliä, värit, kääntöpuoli; tulosta ja leikkaa. ¦ A családfádból készült kártyák: mindenki fotója kiválasztva és körbevágva, hat kártyastílus, színek, hátlap; nyomtasd ki és vágd ki.
+Les familles ¦ Perheet ¦ A családok
+par nom de famille ¦ sukunimen mukaan ¦ vezetéknév szerint
+par branche (arrière-grands-parents) ¦ haaran mukaan (isoisovanhemmat) ¦ ág szerint (dédszülők)
+Le style ¦ Tyyli ¦ Stílus
+🃏 Classique ¦ 🃏 Klassinen ¦ 🃏 Klasszikus
+📜 Ancien (papier jauni) ¦ 📜 Vanha (kellastunut paperi) ¦ 📜 Régi (megsárgult papír)
+◻️ Moderne (grande photo) ¦ ◻️ Moderni (iso kuva) ¦ ◻️ Modern (nagy fotó)
+🧸 Pour les petits ¦ 🧸 Pienille ¦ 🧸 A kicsiknek
+🎩 Années folles ¦ 🎩 Kultainen 1920-luku ¦ 🎩 Az őrült húszas évek
+🪵 Bois gravé ¦ 🪵 Puupiirros ¦ 🪵 Fametszet
+Couleurs d’origine ¦ Alkuperäiset värit ¦ Eredeti színek
+Le dos ¦ Kääntöpuoli ¦ A hátlap
+Un dos à motif (à imprimer au verso) ¦ Kuvioitu kääntöpuoli (tulostetaan taakse) ¦ Mintás hátlap (a hátoldalra nyomtatva)
+Sans dos ¦ Ei kääntöpuolta ¦ Hátlap nélkül
+Le lieu de naissance ¦ Syntymäpaikka ¦ Születési hely
+La liste de la famille ¦ Perheiden luettelo ¦ A családok listája
+Les photos choisies, les couleurs et le style de départ ¦ Valitut kuvat, värit ja aloitustyyli ¦ A kiválasztott fotók, a színek és a kiinduló stílus
+📷 sur une carte : choisir et recadrer sa photo. ¦ 📷 kortissa: valitse ja rajaa kuva. ¦ 📷 a kártyán: a fotó kiválasztása és körbevágása.
+{n} familles de 6 cartes ({total} cartes). ¦ {n} perhettä, kussakin 6 korttia ({total} korttia). ¦ {n} család, egyenként 6 kártyával ({total} kártya).
+Choisir et recadrer la photo de {name} ¦ Valitse ja rajaa kuva: {name} ¦ {name} fotójának kiválasztása és körbevágása
+Le grand-père ¦ Isoisä ¦ A nagyapa
+Le fils ¦ Poika ¦ A fiú
+Jeu des familles ¦ Perhepeli ¦ Családos kártyajáték
+La grand-mère ¦ Isoäiti ¦ A nagymama
+La fille ¦ Tytär ¦ A lány
+Les planches de cartes (et leurs dos), avec la règle du jeu ¦ Korttiarkit (ja niiden kääntöpuolet) sekä pelin säännöt ¦ A kártyaívek (és hátlapjaik), a játékszabályokkal
+Arbre à colorier ¦ Väritettävä puu ¦ Kifestő családfa
+Les vrais ancêtres d’un enfant en traits noirs : un arbre, un jardin de fleurs, un village, des blasons, des montgolfières, une ruche, un éventail ou une rosace. ¦ Lapsen todelliset esivanhemmat mustin ääriviivoin: puu, kukkapuutarha, kylä, vaakunat, kuumailmapallot, mehiläispesä, viuhka tai ruusuikkuna. ¦ Egy gyermek valódi felmenői fekete körvonalakkal: fa, virágoskert, falu, címerek, hőlégballonok, méhkas, legyező vagy rózsaablak.
+L’enfant (ou la personne) au pied de l’arbre ¦ Lapsi (tai henkilö) puun juurella ¦ A gyermek (vagy személy) a fa tövében
+5 (petites cases) ¦ 5 (pienet ruudut) ¦ 5 (kis mezők)
+Le dessin ¦ Piirros ¦ A rajz
+🌳 Le grand arbre ¦ 🌳 Iso puu ¦ 🌳 A nagy fa
+🌷 Le jardin de fleurs ¦ 🌷 Kukkapuutarha ¦ 🌷 A virágoskert
+🏡 Le village (une maison chacun) ¦ 🏡 Kylä (talo kullekin) ¦ 🏡 A falu (mindenkinek egy ház)
+🛡️ Les blasons ¦ 🛡️ Vaakunat ¦ 🛡️ A címerek
+🎈 Les montgolfières ¦ 🎈 Kuumailmapallot ¦ 🎈 A hőlégballonok
+🐝 La ruche (alvéoles) ¦ 🐝 Mehiläispesä (kennot) ¦ 🐝 A méhkas (sejtek)
+🪭 L’éventail ¦ 🪭 Viuhka ¦ 🪭 A legyező
+🏵️ La rosace ¦ 🏵️ Ruusuikkuna ¦ 🏵️ A rózsaablak
+Le prénom seul (petits) ¦ Vain etunimi (pienille) ¦ Csak a keresztnév (kicsiknek)
+Prénom et nom ¦ Etu- ja sukunimi ¦ Kereszt- és vezetéknév
+Prénom, nom et année ¦ Etu- ja sukunimi sekä vuosi ¦ Kereszt- és vezetéknév, évszám
+L’écriture ¦ Kirjaimet ¦ Az írás
+D’écolier ¦ Kaunokirjoitus ¦ Folyóírás
+Bâton (lettres rondes) ¦ Tikkukirjaimet (pyöreät kirjaimet) ¦ Nyomtatott betűk (kerek betűk)
+Le trait ¦ Viiva ¦ A vonal
+Fin (grands) ¦ Ohut (isommat) ¦ Vékony (nagyobbaknak)
+Épais (petits, gros feutres) ¦ Paksu (pienet, paksut tussit) ¦ Vastag (kicsiknek, vastag filctollal)
+Sans ¦ Ei mitään ¦ Nincs
+Double trait ¦ Kaksoisviiva ¦ Dupla vonal
+Guirlande de feuilles ¦ Lehtiköynnös ¦ Levélfüzér
+Le titre ¦ Otsikko ¦ A cím
+L’arbre de … ¦ Sukupuu: … ¦ … családfája
+Dessiner ¦ Piirrä ¦ Rajzolás
+Enregistrer un fichier sur l’ordinateur, ou ranger une copie dans les médias ¦ Tallenna tiedosto tietokoneelle tai laita kopio mediaan ¦ Fájl mentése a számítógépre, vagy másolat elhelyezése a médiában
+L’arbre de {name} ¦ Sukupuu: {name} ¦ {name} családfája
+Le quiz du repas ¦ Ruokapöydän tietovisa ¦ Az asztali kvíz
+Sur la télé, en équipes : des questions tirées de l’arbre (qui a épousé qui, où, quel métier), compte à rebours et scores. ¦ Televisiossa, joukkueittain: sukupuusta poimittuja kysymyksiä (kuka avioitui kenen kanssa, missä, mikä ammatti), lähtölaskenta ja pisteet. ¦ A tévén, csapatokban: a családfából vett kérdések (ki kivel házasodott, hol, milyen foglalkozás), visszaszámlálás és pontok.
+Les équipes (séparées par des virgules) ¦ Joukkueet (pilkuilla erotettuina) ¦ A csapatok (vesszővel elválasztva)
+Les {name}, Les cousins ¦ Suku {name}, Serkut ¦ A(z) {name} család, Az unokatestvérek
+Secondes pour répondre ¦ Sekuntia vastaamiseen ¦ Másodperc a válaszra
+Branche l’ordinateur sur la télé : la question et les quatre réponses s’affichent en grand ; à la fin du compte à rebours (ou avec <b>Entrée</b>), la bonne réponse apparaît, puis on donne le point à l’équipe qui a trouvé (touches <b>1</b> à <b>9</b>). Répondre depuis les téléphones demanderait que l’application soit joignable depuis tout le réseau de la maison : ce n’est pas possible pour l’instant, on joue devant l’écran. ¦ Kytke tietokone televisioon: kysymys ja neljä vastausta näkyvät isolla; kun lähtölaskenta päättyy (tai painat <b>Enter</b>), oikea vastaus tulee näkyviin, ja sitten annat pisteen joukkueelle, joka tiesi sen (näppäimet <b>1</b>–<b>9</b>). Puhelimista vastaaminen vaatisi, että sovellukseen pääsee koko kodin verkosta: se ei ole vielä mahdollista, joten pelataan ruudun edessä. ¦ Csatlakoztasd a számítógépet a tévéhez: a kérdés és a négy válasz nagy betűvel jelenik meg; a visszaszámlálás végén (vagy <b>Enter</b>-rel) megjelenik a helyes válasz, majd a pontot annak a csapatnak adod, amelyik eltalálta (<b>1</b>–<b>9</b> billentyűk). A telefonokról való válaszadáshoz az alkalmazásnak az egész otthoni hálózatról elérhetőnek kellene lennie: ez egyelőre nem lehetséges, ezért a képernyő előtt játszunk.
+📺 Lancer le quiz ¦ 📺 Aloita tietovisa ¦ 📺 A kvíz indítása
+Un avant-goût ¦ Esimakua ¦ Ízelítő
+Créer et fabriquer ¦ Luo ja valmista ¦ Alkotás és készítés
+Le faire-part d’un événement ¦ Ilmoitus tapahtumasta ¦ Értesítő egy eseményről
+Une naissance, un mariage ou un décès de l’arbre : le faire-part se compose tout seul, dans le style de l’époque. ¦ Sukupuun syntymä, avioliitto tai kuolema: ilmoitus kirjoittuu itsestään, aikakauden tyyliin. ¦ Egy születés, házasság vagy haláleset a családfából: az értesítő magától elkészül, a kor stílusában.
+L’événement ¦ Tapahtuma ¦ Az esemény
+Classique (1900) ¦ Klassinen (1900) ¦ Klasszikus (1900)
+Art déco (1925) ¦ Art déco (1925) ¦ Art deco (1925)
+Fleuri ¦ Kukallinen ¦ Virágos
+Deuil (liseré noir) ¦ Suru (musta reunus) ¦ Gyász (fekete keret)
+Romantique (dentelle, 1880) ¦ Romanttinen (pitsi, 1880) ¦ Romantikus (csipke, 1880)
+Art nouveau (1900) ¦ Jugend (1900) ¦ Szecesszió (1900)
+Champêtre (papier kraft) ¦ Maalaishenkinen (voimapaperi) ¦ Vidéki (kraftpapír)
+Bleu et or ¦ Sininen ja kulta ¦ Kék és arany
+Layette (naissance) ¦ Vauva (syntymä) ¦ Babás (születés)
+Épuré ¦ Pelkistetty ¦ Letisztult
+🎨 Plus d’options ¦ 🎨 Lisää vaihtoehtoja ¦ 🎨 További beállítások
+Le format ¦ Koko ¦ A formátum
+Carte A6 (portrait) ¦ A6-kortti (pysty) ¦ A6-os kártya (álló)
+Marque-page ¦ Kirjanmerkki ¦ Könyvjelző
+Celle du style ¦ Tyylin oma ¦ A stílusé
+Écriture à la plume ¦ Sulkakynäkäsiala ¦ Tollírás
+Élégante (Didot) ¦ Tyylikäs (Didot) ¦ Elegáns (Didot)
+Bâton ¦ Groteski ¦ Talpatlan
+Les ornements ¦ Koristeet ¦ A díszítések
+Ceux du style ¦ Tyylin omat ¦ A stílusé
+Mes couleurs ¦ Omat värini ¦ Saját színeim
+La photo de la personne ¦ Henkilön kuva ¦ A személy fotója
+Sa forme ¦ Sen muoto ¦ Formája
+Couleurs de la photo ¦ Kuvan värit ¦ A fotó színei
+D’origine ¦ Alkuperäiset ¦ Eredeti
+Le texte (une ligne par ligne ; * devant une ligne = en grand) ¦ Teksti (rivi kerrallaan; * rivin alussa = isolla) ¦ A szöveg (soronként; * a sor elején = nagy betűvel)
+Le mur des signatures ¦ Allekirjoitusten seinä ¦ Az aláírások fala
+Toutes les signatures repérées sur les actes, découpées et rangées par époque : l’écriture de chaque génération. ¦ Kaikki asiakirjoista löydetyt allekirjoitukset rajattuina ja aikakausittain järjestettyinä: kunkin sukupolven käsiala. ¦ Az okiratokon talált összes aláírás kivágva és korszakok szerint rendezve: minden nemzedék kézírása.
+La Belle Époque ¦ Belle Époque ¦ A Belle Époque
+L’affiche (image PNG) ¦ Juliste (PNG-kuva) ¦ A plakát (PNG-kép)
+Lieux et voyages ¦ Paikat ja matkat ¦ Helyek és utazások
+Le film des migrations ¦ Muuttoliikkeen elokuva ¦ A vándorlások filmje
+Année après année, chacun se déplace sur la carte, de sa naissance à sa mort ; le film s’enregistre en vidéo. ¦ Vuosi vuodelta jokainen liikkuu kartalla syntymästä kuolemaan; elokuva tallentuu videoksi. ¦ Évről évre mindenki mozog a térképen, a születésétől a haláláig; a film videóként rögzül.
+Durée du film ¦ Elokuvan kesto ¦ A film hossza
+Sans carte ¦ Ilman karttaa ¦ Térkép nélkül
+▶ Jouer ¦ ▶ Toista ¦ ▶ Lejátszás
+{n} parcours, de {y0} à {y1} ¦ {n} reittiä, {y0}–{y1} ¦ {n} útvonal, {y0}–{y1}
+famille {name} ¦ suku {name} ¦ a(z) {name} család
+Le fond de carte se charge… ¦ Taustakarttaa ladataan… ¦ Az alaptérkép betöltése…
+{n} personne en vie ¦ {n} henkilö elossa ¦ {n} élő személy
+Fond de carte © OpenStreetMap, Esri ¦ Taustakartta © OpenStreetMap, Esri ¦ Alaptérkép © OpenStreetMap, Esri
+La vidéo (WebM) ¦ Video (WebM) ¦ A videó (WebM)
+Le film se joue une fois pendant l’enregistrement ¦ Elokuva toistetaan kerran tallennuksen aikana ¦ A film a felvétel közben egyszer lejátszódik
+Cette image (PNG) ¦ Tämä kuva (PNG) ¦ Ez a kép (PNG)
+Le film des migrations — {title} ¦ Muuttoliikkeen elokuva — {title} ¦ A vándorlások filmje — {title}
+La vidéo, enregistrée pendant que le film se joue ¦ Video, joka tallennetaan elokuvan toistuessa ¦ A videó, a film lejátszása közben rögzítve
+Le village des ancêtres sur la carte de Cassini et sur la carte d’aujourd’hui, avec un rideau à faire glisser. ¦ Esivanhempien kylä Cassinin kartalla ja nykykartalla, liu'utettavalla verholla. ¦ Az ősök faluja a Cassini-térképen és a mai térképen, elhúzható függönnyel.
+Hier ¦ Ennen ¦ Régen
+Carte de Cassini (XVIIIe s.) ¦ Cassinin kartta (1700-luku) ¦ Cassini-térkép (18. sz.)
+Cassini, exemplaire du roi ¦ Cassini, kuninkaan kappale ¦ Cassini, a király példánya
+Carte d’État-major (1820-1866) ¦ Ranskan yleisesikunnan kartta (1820-1866) ¦ Francia vezérkari térkép (1820-1866)
+OpenHistoricalMap ¦ OpenHistoricalMap ¦ OpenHistoricalMap
+Fais glisser le rideau (ou les flèches du clavier). ¦ Liu'uta verhoa (tai käytä nuolinäppäimiä). ¦ Húzd el a függönyt (vagy használd a nyílbillentyűket).
+Rideau entre la carte d’hier et celle d’aujourd’hui ¦ Verho entisen ja nykyisen kartan välissä ¦ Függöny a régi és a mai térkép között
+Cartes : Géoplateforme IGN (Cassini, État-major), © OpenStreetMap, Esri. Dans l’onglet Carte, le mode « superposition » compare aussi deux fonds avec l’opacité. ¦ Kartat: IGN Géoplateforme (Cassini, yleisesikunta), © OpenStreetMap, Esri. Kartta-välilehdellä ”päällekkäin”-tila vertaa myös kahta taustaa läpinäkyvyyden avulla. ¦ Térképek: IGN Géoplateforme (Cassini, vezérkari), © OpenStreetMap, Esri. A Térkép lapon az „átfedés” mód két alaptérképet is összehasonlít az átlátszóság segítségével.
+La promenade guidée ¦ Opastettu kävelykierros ¦ A vezetett séta
+Les lieux d’une vie dans l’ordre, l’histoire de chaque étape lue à voix haute — même toute seule, en arrivant sur place. ¦ Elämän paikat järjestyksessä, kunkin pysähdyksen tarina luettuna ääneen – jopa itsestään, kun saavut paikalle. ¦ Egy élet helyszínei sorrendben, minden állomás története felolvasva — akár magától is, amikor odaérsz.
+La promenade de ¦ Kävelykierros: ¦ Séta:
+Le parcours ¦ Reitti ¦ Az útvonal
+les lieux de sa vie ¦ hänen elämänsä paikat ¦ élete helyszínei
+les villages de ses ancêtres ¦ hänen esivanhempiensa kylät ¦ ősei falvai
+🔊 Tout le guide ¦ 🔊 Koko opas ¦ 🔊 Az egész kalauz
+📍 Me guider en marchant ¦ 📍 Opasta minua kävellessä ¦ 📍 Vezess séta közben
+⏹ Silence ¦ ⏹ Hiljaa ¦ ⏹ Csend
+Le guide de la promenade, étape par étape ¦ Kävelykierroksen opas vaihe vaiheelta ¦ A séta kalauza lépésről lépésre
+🔊 Écouter ¦ 🔊 Kuuntele ¦ 🔊 Meghallgatás
+🧭 Itinéraire ¦ 🧭 Reittiohjeet ¦ 🧭 Útvonal
+{km} km en tout (à vol d’oiseau) ¦ {km} km yhteensä (linnuntietä) ¦ összesen {km} km (légvonalban)
+Outils malins ¦ Näppärät työkalut ¦ Ügyes eszközök
+Dater une vieille photo ¦ Ajoita vanha valokuva ¦ Régi fénykép datálása
+Le support, le carton, les vêtements, les coiffures : une fourchette d’années, et qui de l’arbre ça peut être. ¦ Alusta, pahvi, vaatteet, kampaukset: vuosien haarukka ja kuka sukupuusta se voisi olla. ¦ A hordozó, a karton, a ruhák, a frizurák: egy évtartomány, és hogy ki lehet a családfából.
+Coche ce que tu vois sur la photo (une ou plusieurs réponses par question, ou rien si tu ne sais pas). Les repères sont volontairement larges. ¦ Rastita, mitä näet kuvassa (yksi tai useampi vastaus kysymystä kohden, tai ei mitään, jos et tiedä). Haarukat ovat tarkoituksella väljiä. ¦ Jelöld be, amit a fotón látsz (kérdésenként egy vagy több válasz, vagy semmi, ha nem tudod). A támpontok szándékosan tágak.
+Le support ¦ Alusta ¦ A hordozó
+Plaque de métal argentée, comme un miroir, dans un écrin ¦ Hopeoitu metallilevy, kuin peili, kotelossa ¦ Ezüstözött fémlemez, mint egy tükör, tokban
+Image sur verre, dans un écrin (ambrotype) ¦ Kuva lasilla, kotelossa (ambrotypia) ¦ Üvegre készült kép, tokban (ambrotípia)
+Image sur une fine plaque de fer, sombre (ferrotype) ¦ Kuva ohuella rautalevyllä, tumma (ferrotypia) ¦ Vékony vaslemezre készült kép, sötét (ferrotípia)
+Petite carte (6 × 10 cm) collée sur un carton : carte de visite ¦ Pieni kortti (6 × 10 cm) pahville liimattuna: carte de visite ¦ Kis kártya (6 × 10 cm) kartonra ragasztva: carte de visite (névjegyfotó)
+Grande carte (11 × 16 cm) sur carton : carte cabinet ¦ Iso kortti (11 × 16 cm) pahvilla: kabinettikortti ¦ Nagy kártya (11 × 16 cm) kartonon: kabinetkártya
+Carte postale photo (dos imprimé « carte postale ») ¦ Valokuvapostikortti (taakse painettu ”postikortti”) ¦ Fotós képeslap (hátoldalán „levelezőlap” felirat)
+Tirage papier aux bords dentelés ¦ Paperivedos, jossa hammasreunat ¦ Fogazott szélű papírkép
+Petit tirage papier noir et blanc sans carton, bords blancs droits ¦ Pieni mustavalkoinen paperivedos ilman pahvia, suorat valkoiset reunat ¦ Kis fekete-fehér papírkép karton nélkül, egyenes fehér szegéllyel
+Photo couleur aux couleurs passées (orange, magenta) ¦ Värikuva haalistunein värein (oranssi, magenta) ¦ Színes fotó kifakult színekkel (narancs, bíbor)
+Tirage carré à bord blanc large (type Polaroid / Instamatic) ¦ Neliön muotoinen vedos leveällä valkoisella reunalla (Polaroid / Instamatic -tyyppinen) ¦ Négyzetes kép széles fehér szegéllyel (Polaroid / Instamatic típus)
+Le carton (carte de visite ou cabinet) ¦ Pahvi (carte de visite tai kabinettikortti) ¦ A karton (névjegyfotó vagy kabinetkártya)
+Coins carrés, carton fin et clair ¦ Suorat kulmat, ohut ja vaalea pahvi ¦ Szögletes sarkok, vékony, világos karton
+Carton épais et coloré (crème, noir, bordeaux), tranche dorée ¦ Paksu värillinen pahvi (kerma, musta, viininpunainen), kullattu reuna ¦ Vastag, színes karton (krém, fekete, bordó), aranyozott él
+Nom du photographe en grandes lettres décorées au dos, médailles ¦ Valokuvaajan nimi isoin koristelluin kirjaimin takana, mitaleja ¦ A fényképész neve nagy, díszes betűkkel a hátoldalon, érmekkel
+Bord biseauté doré ¦ Kullattu viistetty reuna ¦ Aranyozott, csiszolt él
+Les vêtements des femmes ¦ Naisten vaatteet ¦ A nők ruházata
+Jupe très large en cloche (crinoline), épaules tombantes ¦ Hyvin leveä kellohame (krinoliini), laskeutuvat olkapäät ¦ Nagyon bő harang alakú szoknya (krinolin), lejtős vállak
+Jupe plate devant et gonflée derrière (tournure) ¦ Hame edestä sileä ja takaa pöyhkeä (turnyyri) ¦ Elöl lapos, hátul kidomborodó szoknya (turnűr)
+Manches très bouffantes en haut (gigot) ¦ Hihat yläosasta hyvin pullottavat (gigot) ¦ Felül nagyon bő ujjak (sonkaujj)
+Silhouette en S, col montant, grand chapeau ¦ S-muotoinen siluetti, korkea kaulus, iso hattu ¦ S alakú sziluett, magas gallér, nagy kalap
+Robe droite, taille basse, jupe au genou ¦ Suora mekko, matala vyötärö, polvipituinen hame ¦ Egyenes ruha, mély derék, térdig érő szoknya
+Épaules carrées, jupe sous le genou ¦ Kulmikkaat olkapäät, polven alle ulottuva hame ¦ Szögletes vállak, térd alá érő szoknya
+Jupe ample et taille fine (New Look) ¦ Levenevä hame ja kapea vyötärö (New Look) ¦ Bő szoknya és karcsú derék (New Look)
+Coiffe régionale ou bonnet de paysanne ¦ Alueellinen päähine tai talonpoikaismyssy ¦ Tájjellegű fejfedő vagy parasztasszony-főkötő
+Les coiffures ¦ Kampaukset ¦ A frizurák
+Raie au milieu, cheveux plaqués sur les oreilles ¦ Keskijakaus, hiukset sileästi korvien päällä ¦ Középen elválasztott haj, a fülre simítva
+Frange frisée sur le front ¦ Kiharat otsatukat ¦ Göndör frufru a homlokon
+Chignon haut et volumineux ¦ Korkea ja tuuhea nuttura ¦ Magas, dús konty
+Cheveux courts « à la garçonne » ¦ Lyhyet ”poikamaiset” hiukset ¦ Rövid, „garçonne” frizura
+Mise en plis ondulée ¦ Laineikas kampaus ¦ Hullámos berakás
+Les hommes ¦ Miehet ¦ A férfiak
+Haut-de-forme ¦ Silinterihattu ¦ Cilinder
+Canotier (chapeau de paille plat) ¦ Olkihattu (litteä kanotieri) ¦ Szalmakalap (lapos „zsirardi”)
+Moustache fournie, sans barbe ¦ Tuuheat viikset, ei partaa ¦ Dús bajusz, szakáll nélkül
+Barbe entière fournie ¦ Tuuhea täysparta ¦ Dús, teljes szakáll
+Col cassé et nœud papillon ¦ Siipikaulus ja rusetti ¦ Szárnyas gallér és csokornyakkendő
+Uniforme bleu horizon ¦ Horisontinsininen univormu ¦ Horizontkék egyenruha
+Costume trois-pièces large, chapeau mou ¦ Väljä kolmiosainen puku, pehmeä huopahattu ¦ Bő háromrészes öltöny, puha kalap
+Pantalon pattes d’éléphant, cheveux longs ¦ Leveälahkeiset housut, pitkät hiukset ¦ Trapéznadrág, hosszú haj
+Le décor ¦ Ympäristö ¦ A háttér
+Fond peint, colonne, balustrade, rideau drapé ¦ Maalattu tausta, pylväs, kaide, laskostettu verho ¦ Festett háttér, oszlop, korlát, redőzött függöny
+Fond uni, simple chaise ¦ Yksivärinen tausta, yksinkertainen tuoli ¦ Egyszínű háttér, egyszerű szék
+Dehors, photo prise sur le vif (pas en atelier) ¦ Ulkona, tilannekuva (ei ateljeessa) ¦ Kint, pillanatfelvétel (nem műteremben)
+Et toi, que sais-tu ? ¦ Entä mitä sinä tiedät? ¦ És te mit tudsz?
+Photographe ou date notée : de ¦ Valokuvaaja tai merkitty päivämäärä: alkaen ¦ Fényképész vagy feljegyzett dátum: ettől
+Âge apparent de la personne ¦ Henkilön näennäinen ikä ¦ A személy látszólagos kora
+C’est ¦ Kyseessä on ¦ Ez
+un homme, un garçon ¦ mies, poika ¦ férfi, fiú
+une femme, une fille ¦ nainen, tyttö ¦ nő, lány
+Lieu (nom du photographe, ville) ¦ Paikka (valokuvaajan nimi, kaupunki) ¦ Hely (a fényképész neve, város)
+Coche au moins un indice ¦ Rastita ainakin yksi vihje ¦ Jelölj be legalább egy támpontot
+Les rappels de recherche ¦ Tutkimusmuistutukset ¦ Kutatási emlékeztetők
+« Tu n’as pas touché à la branche FAURE depuis 8 mois » : les branches endormies, ce qui y manque, un rappel en un clic. ¦ ”Et ole koskenut FAURE-haaraan 8 kuukauteen”: uinuvat haarat, mitä niistä puuttuu, muistutus yhdellä napsautuksella. ¦ „8 hónapja nem nyúltál a FAURE ághoz”: az alvó ágak, ami hiányzik belőlük, emlékeztető egy kattintással.
+Les branches de ¦ Haarat: ¦ Ágai:
+Endormie depuis au moins ¦ Uinunut vähintään ¦ Legalább ennyi ideje alszik
+peu importe ¦ yhdentekevää ¦ mindegy
+La date est celle de la dernière modification d’une fiche de la branche. Un rappel se crée en un clic : il rejoint les rappels de l’application (Listes → Rappels) et le widget « À venir ». ¦ Päivämäärä on haaran jonkin kortin viimeisin muutos. Muistutus luodaan yhdellä napsautuksella: se lisätään sovelluksen muistutuksiin (Luettelot → Muistutukset) ja ”Tulossa”-pienoisohjelmaan. ¦ A dátum az ág valamelyik adatlapjának utolsó módosítása. Az emlékeztető egy kattintással létrejön: bekerül az alkalmazás emlékeztetői közé (Listák → Emlékeztetők) és a „Közelgő” widgetbe.
+Branche {name} ({first}) ¦ Haara {name} ({first}) ¦ {name} ág ({first})
+Reprendre la branche {name} ({first}) ¦ Jatka haaraa {name} ({first}) ¦ A(z) {name} ág folytatása ({first})
+Aucune branche endormie depuis aussi longtemps ¦ Mikään haara ei ole uinunut niin kauan ¦ Egyik ág sem alszik ilyen régóta
+Les actes manquants ¦ Puuttuvat asiakirjat ¦ Hiányzó okiratok
+Ce qui manque à la lignée, rangé par archives où chercher (l’assistant de l’onglet Recherche). ¦ Mitä suvusta puuttuu, järjestettynä arkistojen mukaan, joista etsiä (Tutkimus-välilehden avustaja). ¦ Ami az ágból hiányzik, a kutatandó levéltárak szerint rendezve (a Kutatás lap segédje).
+Je regarde ce qui manque… ¦ Katson, mitä puuttuu… ¦ Megnézem, mi hiányzik…
+L’assistant <b>« Que manque-t-il ? »</b> (onglet Recherche) liste les actes qui manquent à la lignée, rangés par service d’archives, avec la commune, les années et les séries à consulter (état civil, tables décennales, registres paroissiaux, notaires, recensements, registres matricules), et un lien vers FranceArchives. ¦ Avustaja <b>”Mitä puuttuu?”</b> (Tutkimus-välilehti) luettelee suvusta puuttuvat asiakirjat arkistolaitoksittain, kunta, vuodet ja tutkittavat sarjat mukana (väestörekisteri, kymmenvuotishakemistot, kirkonkirjat, notaarit, väestönlaskennat, sotilasrekisterit), sekä linkki FranceArchives-palveluun. ¦ A <b>„Mi hiányzik?”</b> segéd (Kutatás lap) felsorolja az ágból hiányzó okiratokat levéltárak szerint, a településsel, az évekkel és a kutatandó sorozatokkal (anyakönyv, tízéves mutatók, egyházi anyakönyvek, közjegyzők, népszámlálások, katonai nyilvántartások), és egy hivatkozással a FranceArchives oldalra.
+{n} recherches à faire sur 6 générations ¦ {n} etsittävää 6 sukupolven ajalta ¦ {n} elvégzendő keresés 6 nemzedéken át
+L’assistant « Que manque-t-il ? » de l’onglet Recherche ¦ Tutkimus-välilehden avustaja ”Mitä puuttuu?” ¦ A Kutatás lap „Mi hiányzik?” segédje
+Le thème d’époque ¦ Aikakauden teema ¦ Korabeli téma
+Chaque fiche aux couleurs de son temps : parchemin, sépia, Belle Époque, art déco, Trente Glorieuses. ¦ Jokainen kortti oman aikansa väreissä: pergamentti, seepia, Belle Époque, art déco, sodanjälkeinen nousukausi. ¦ Minden adatlap a saját kora színeiben: pergamen, szépia, Belle Époque, art deco, a háború utáni fellendülés.
+Habiller chaque fiche aux couleurs de son époque ¦ Pue jokainen kortti aikakautensa väreihin ¦ Minden adatlap a saját korának színeiben
+La fiche d’un ancêtre prend l’allure du temps où il a vécu (ses 25 ans) : parchemin pour l’Ancien Régime, sépia au XIXe, art déco pour les années folles… Le reste de l’application ne change pas. Ce réglage est gardé sur cet ordinateur. ¦ Esivanhemman kortti saa sen ajan ilmeen, jolloin hän eli (25-vuotiaana): pergamentti Ancien Régimelle, seepia 1800-luvulle, art déco 1920-luvulle… Muu sovellus ei muutu. Asetus säilyy tällä tietokoneella. ¦ Egy felmenő adatlapja annak a kornak a külsejét kapja, amelyben élt (25 éves korában): pergamen az Ancien Régime-hez, szépia a 19. századhoz, art deco az őrült húszas évekhez… Az alkalmazás többi része nem változik. Ez a beállítás ezen a számítógépen marad meg.
+📜 Ancien Régime ¦ 📜 Ancien Régime ¦ 📜 Ancien Régime
+avant ¦ ennen ¦ előtt
+🎖️ Révolution et Empire ¦ 🎖️ Vallankumous ja keisarikunta ¦ 🎖️ Forradalom és császárság
+🎩 Le XIXe siècle ¦ 🎩 1800-luku ¦ 🎩 A 19. század
+🌿 La Belle Époque ¦ 🌿 Belle Époque ¦ 🌿 A Belle Époque
+🍸 Les années folles et la guerre ¦ 🍸 1920-luku ja sota ¦ 🍸 Az őrült húszas évek és a háború
+🚗 Les Trente Glorieuses ¦ 🚗 Sodanjälkeinen nousukausi ¦ 🚗 A háború utáni fellendülés
+📻 Les années 70 et après ¦ 📻 1970-luku ja sen jälkeen ¦ 📻 A 70-es évek és utána
+Les étoiles, la Lune et les planètes au-dessus du village, la nuit de la naissance : une image à garder ou à offrir. ¦ Tähdet, Kuu ja planeetat kylän yllä syntymäyönä: kuva säilytettäväksi tai lahjaksi. ¦ A csillagok, a Hold és a bolygók a falu felett a születés éjszakáján: egy kép megőrzésre vagy ajándékba.
+La naissance de ¦ Syntymä: ¦ Születése:
+Vers quelle heure (heure solaire du lieu) ¦ Noin mihin aikaan (paikallinen aurinkoaika) ¦ Nagyjából hánykor (helyi napidő)
+Nuit bleue ¦ Sininen yö ¦ Kék éjszaka
+Affiche (fond crème) ¦ Juliste (kermanvärinen tausta) ¦ Plakát (krémszínű háttér)
+Noir et or ¦ Musta ja kulta ¦ Fekete és arany
+Encre sur papier (à imprimer) ¦ Muste paperilla (tulostettavaksi) ¦ Tinta papíron (nyomtatáshoz)
+Aube (rose et bleu) ¦ Aamunkoitto (vaaleanpunainen ja sininen) ¦ Hajnal (rózsaszín és kék)
+Vert forêt ¦ Metsänvihreä ¦ Erdőzöld
+Ronde ¦ Pyöreä ¦ Kerek
+Carrée ¦ Neliö ¦ Négyzetes
+Fenêtre en arc ¦ Kaari-ikkuna ¦ Íves ablak
+Affiche ¦ Juliste ¦ Plakát
+A4 (portrait) ¦ A4 (pysty) ¦ A4 (álló)
+Élégante ¦ Tyylikäs ¦ Elegáns
+À la plume ¦ Kynällä kirjoitettu ¦ Tollal írt
+Les constellations ¦ Tähtikuviot ¦ A csillagképek
+La Voie lactée (évocation) ¦ Linnunrata (vihjaus) ¦ A Tejút (érzékeltetés)
+Les repères (hauteur, directions) ¦ Merkit (korkeus, ilmansuunnat) ¦ Jelölések (magasság, égtájak)
+✏️ Les textes ¦ ✏️ Tekstit ¦ ✏️ Szövegek
+(le nom) ¦ (nimi) ¦ (a név)
+(le lieu et la date) ¦ (paikka ja päivämäärä) ¦ (a hely és a dátum)
+Dernière ligne ¦ Viimeinen rivi ¦ Utolsó sor
+(la lune, les planètes) ¦ (kuu, planeetat) ¦ (a hold, a bolygók)
+Aussi rangée sur sa fiche ¦ Tallennetaan myös hänen kortilleen ¦ Az adatlapjára is elmentve
+{place} — {when}, vers {h} ¦ {place} — {when}, noin klo {h} ¦ {place} — {when}, {h} körül
+pleine lune ¦ täysikuu ¦ telihold
+Jupiter ¦ Jupiter ¦ Jupiter
+{list} brillait ¦ {list} loisti ¦ {list} fénylett
+Grande Ourse ¦ Iso karhu ¦ Nagy Medve
+Orion ¦ Orion ¦ Orion
+Cassiopée ¦ Kassiopeia ¦ Kassziopeia
+Lion ¦ Leijona ¦ Oroszlán
+Gémeaux ¦ Kaksoset ¦ Ikrek
+Bouvier ¦ Karhunvartija ¦ Ökörhajcsár
+Taureau ¦ Härkä ¦ Bika
+Petite Ourse ¦ Pieni karhu ¦ Kis Medve
+Cocher ¦ Ajomies ¦ Szekeres
+Grand Chien ¦ Iso koira ¦ Nagy Kutya
+Vierge ¦ Neitsyt ¦ Szűz
+boussole|N ¦ P ¦ É
+boussole|E ¦ I ¦ K
+boussole|S ¦ E ¦ D
+boussole|O ¦ L ¦ Ny
+{n} % éclairée ¦ {n} % valaistu ¦ {n}%-ban megvilágítva
+coucher du soleil vers {h} ¦ auringonlasku noin klo {h} ¦ napnyugta {h} körül
+lever vers {h} ¦ auringonnousu noin klo {h} ¦ napkelte {h} körül
+{n} étoiles brillantes au-dessus de l’horizon ¦ {n} kirkasta tähteä horisontin yläpuolella ¦ {n} fényes csillag a horizont felett
+Allumer une bougie ¦ Sytytä kynttilä ¦ Gyertyagyújtás
+Une bougie pour un ancêtre, avec un mot : elle brûle sept jours. Les anniversaires de naissance et de décès à venir. ¦ Kynttilä esivanhemmalle, ja sen kanssa muutama sana: se palaa seitsemän päivää. Tulevat syntymän ja kuoleman vuosipäivät. ¦ Egy gyertya egy felmenőért, pár szóval: hét napig ég. A közelgő születési és halálozási évfordulók.
+{n} bougie allumée ¦ {n} kynttilä sytytetty ¦ {n} meggyújtott gyertya
+{n} au registre ¦ {n} rekisterissä ¦ {n} a nyilvántartásban
+Aucune bougie allumée en ce moment ¦ Yhtään kynttilää ei pala juuri nyt ¦ Jelenleg nem ég gyertya
+📅 Dans les trente jours ¦ 📅 Seuraavien kolmenkymmenen päivän aikana ¦ 📅 A következő harminc napban
+{n} ans de sa naissance ({date}) ¦ {n} vuotta syntymästä ({date}) ¦ {n} éve született ({date})
+dans {n} jours ¦ {n} päivän päästä ¦ {n} nap múlva
+{n} ans de son décès ({date}) ¦ {n} vuotta kuolemasta ({date}) ¦ {n} éve hunyt el ({date})
+L’ambiance sonore d’époque ¦ Aikakauden äänimaisema ¦ Korabeli hangulat
+Le feu et l’horloge de la veillée, les cloches du dimanche, la forge, la gare, le moulin : les bruits du temps des ancêtres. ¦ Iltatulen ja kellon äänet, sunnuntain kirkonkellot, paja, asema, mylly: esivanhempien ajan äänet. ¦ A tűz és az óra az esti együttlétnél, a vasárnapi harangok, a kovácsműhely, az állomás, a malom: az ősök korának hangjai.
+🔥 La veillée au coin du feu (vers 1880) ¦ 🔥 Ilta takkatulen ääressä (noin 1880) ¦ 🔥 Esti együttlét a tűz mellett (1880 körül)
+🔔 Le village un dimanche matin ¦ 🔔 Kylä sunnuntaiaamuna ¦ 🔔 A falu vasárnap reggel
+⚒️ L’atelier du forgeron ¦ ⚒️ Sepän paja ¦ ⚒️ A kovácsműhely
+🚂 La gare (vers 1900) ¦ 🚂 Asema (noin 1900) ¦ 🚂 Az állomás (1900 körül)
+💧 Le moulin au bord de l’eau ¦ 💧 Vesimylly ¦ 💧 A vízimalom
+🌧️ La nuit d’orage ¦ 🌧️ Myrskyinen yö ¦ 🌧️ A viharos éjszaka
+🌊 Le port ¦ 🌊 Satama ¦ 🌊 A kikötő
+🐓 La ferme au petit matin ¦ 🐓 Maatila varhain aamulla ¦ 🐓 A tanya kora reggel
+🌙 Une nuit d’été à la campagne ¦ 🌙 Kesäyö maalla ¦ 🌙 Egy nyári éjszaka vidéken
+🧺 Le lavoir ¦ 🧺 Pyykkipaikka ¦ 🧺 A mosóhely
+🧺 Le jour de marché ¦ 🧺 Markkinapäivä ¦ 🧺 A vásárnap
+🍷 Le café du village ¦ 🍷 Kylän kahvila ¦ 🍷 A falusi kocsma
+🪗 Le bal musette ¦ 🪗 Haitaritanssit ¦ 🪗 A harmonikás bál
+⛪ La messe à l’église ¦ ⛪ Messu kirkossa ¦ ⛪ Mise a templomban
+🪡 L’atelier de couture ¦ 🪡 Ompelimo ¦ 🪡 A varroda
+🧵 La filature et le tissage ¦ 🧵 Kehräämö ja kutomo ¦ 🧵 A fonoda és a szövöde
+🧶 La veillée des fileuses ¦ 🧶 Kehrääjien ilta ¦ 🧶 A fonók estéje
+🪚 L’atelier du menuisier ¦ 🪚 Puusepän verstas ¦ 🪚 Az asztalosműhely
+🏫 La classe (vers 1900) ¦ 🏫 Luokkahuone (noin 1900) ¦ 🏫 Az osztályterem (1900 körül)
+✒️ L’étude du notaire ¦ ✒️ Notaarin toimisto ¦ ✒️ A közjegyzői iroda
+🌾 Les moissons ¦ 🌾 Elonkorjuu ¦ 🌾 Az aratás
+🐝 Le rucher ¦ 🐝 Mehiläistarha ¦ 🐝 A méhes
+🐴 La route en diligence ¦ 🐴 Postivaunutie ¦ 🐴 Úton postakocsival
+Ou celle du métier de ¦ Tai ammatin mukaan: ¦ Vagy ennek a foglalkozásnak a hangulata:
+▶ Écouter ¦ ▶ Kuuntele ¦ ▶ Meghallgatás
+🔈 Volume ¦ 🔈 Äänenvoimakkuus ¦ 🔈 Hangerő
+⏲️ S’arrêter après ¦ ⏲️ Pysähdy kuluttua ¦ ⏲️ Leállás ennyi idő után
+Un mélange au hasard de 3 à 5 couches ¦ Satunnainen 3–5 kerroksen sekoitus ¦ Véletlenszerű keverék 3–5 rétegből
+🎲 Au hasard ¦ 🎲 Satunnainen ¦ 🎲 Véletlenszerű
+Tout à zéro ¦ Kaikki nollaan ¦ Mindent nullára
+Durée du fichier son ¦ Äänitiedoston kesto ¦ A hangfájl hossza
+⭐ Mes ambiances ¦ ⭐ Omat äänimaisemani ¦ ⭐ Saját hangulataim
+💾 Garder ce mélange ¦ 💾 Säilytä tämä sekoitus ¦ 💾 A keverék megtartása
+Tout est fabriqué par l’ordinateur, à partir de bruit et de sons purs : une évocation, pas un enregistrement. Règle chaque couche à ton goût ({n} couches). ¦ Tietokone tekee kaiken kohinasta ja puhtaista sävyistä: vihjaus, ei äänitys. Säädä jokainen kerros mieleiseksesi ({n} kerrosta). ¦ Mindent a számítógép készít zajból és tiszta hangokból: érzékeltetés, nem felvétel. Állítsd be ízlésed szerint az egyes rétegeket ({n} réteg).
+Chercher une couche (cloches, eau, atelier…) ¦ Hae kerrosta (kellot, vesi, verstas…) ¦ Réteg keresése (harangok, víz, műhely…)
+Chercher une couche ¦ Hae kerrosta ¦ Réteg keresése
+🌬️ Le vent ¦ 🌬️ Tuuli ¦ 🌬️ A szél
+🌧️ La pluie ¦ 🌧️ Sade ¦ 🌧️ Az eső
+🔥 Le feu de cheminée ¦ 🔥 Takkatuli ¦ 🔥 A kandalló tüze
+🕰️ L’horloge comtoise ¦ 🕰️ Kaappikello ¦ 🕰️ Az állóóra
+🔔 Les cloches du village ¦ 🔔 Kylän kirkonkellot ¦ 🔔 A falu harangjai
+⚒️ L’enclume du forgeron ¦ ⚒️ Sepän alasin ¦ ⚒️ A kovács üllője
+🐦 Les oiseaux ¦ 🐦 Linnut ¦ 🐦 A madarak
+💧 La rivière et le moulin ¦ 💧 Joki ja mylly ¦ 💧 A folyó és a malom
+🚂 Le train à vapeur ¦ 🚂 Höyryjuna ¦ 🚂 A gőzmozdony
+🌊 La mer ¦ 🌊 Meri ¦ 🌊 A tenger
+🦗 Les grillons ¦ 🦗 Sirkat ¦ 🦗 A tücskök
+🐸 Les grenouilles de la mare ¦ 🐸 Lammen sammakot ¦ 🐸 A tó békái
+🦉 La chouette ¦ 🦉 Pöllö ¦ 🦉 A bagoly
+🐓 Le coq ¦ 🐓 Kukko ¦ 🐓 A kakas
+🐄 Les sonnailles des vaches ¦ 🐄 Lehmänkellot ¦ 🐄 A tehénkolompok
+🐴 Les sabots du cheval ¦ 🐴 Hevosen kaviot ¦ 🐴 A ló patái
+🛞 La charrette sur les pavés ¦ 🛞 Kärryt mukulakivillä ¦ 🛞 A szekér a macskakövön
+🐝 Les abeilles du rucher ¦ 🐝 Mehiläistarhan mehiläiset ¦ 🐝 A méhes méhei
+🌾 Le vent dans les blés ¦ 🌾 Tuuli vehnäpellossa ¦ 🌾 A szél a búzában
+⛈️ Le tonnerre au loin ¦ ⛈️ Kaukainen ukkonen ¦ ⛈️ Távoli mennydörgés
+⛲ La fontaine du lavoir ¦ ⛲ Pesupaikan lähde ¦ ⛲ A mosóhely kútja
+🧺 Les battoirs des lavandières ¦ 🧺 Pyykkärien kurikat ¦ 🧺 A mosóasszonyok sulykai
+🧶 Le rouet qui file ¦ 🧶 Kehräävä rukki ¦ 🧶 A forgó rokka
+🧵 Le métier à tisser ¦ 🧵 Kangaspuut ¦ 🧵 A szövőszék
+🪡 La machine à coudre ¦ 🪡 Ompelukone ¦ 🪡 A varrógép
+🪚 La scie du menuisier ¦ 🪚 Puusepän saha ¦ 🪚 Az asztalos fűrésze
+✒️ La plume sur le papier ¦ ✒️ Kynä paperilla ¦ ✒️ A toll a papíron
+🗣️ Le murmure de la foule ¦ 🗣️ Väkijoukon puheensorina ¦ 🗣️ A tömeg morajlása
+🍷 Les verres du café ¦ 🍷 Kahvilan lasit ¦ 🍷 Poharak a kocsmában
+⛪ L’orgue de l’église ¦ ⛪ Kirkon urut ¦ ⛪ A templom orgonája
+🪗 L’accordéon du bal musette ¦ 🪗 Tanssiaisten haitari ¦ 🪗 A bál harmonikája
+🏫 La craie au tableau ¦ 🏫 Liitu taululla ¦ 🏫 Kréta a táblán
+🪵 Le bois qui craque ¦ 🪵 Narisevaa puuta ¦ 🪵 Ropogó fa
+👣 Des pas sur le gravier ¦ 👣 Askeleita soralla ¦ 👣 Léptek a kavicson
+🕊️ Les mouettes ¦ 🕊️ Lokit ¦ 🕊️ A sirályok
+🎶 Le bourdon de la vielle ¦ 🎶 Kampiliiran bordunasävel ¦ 🎶 A tekerőlant bordója
+© Crédits et droits des sons ¦ © Äänten tekijät ja oikeudet ¦ © A hangok készítői és jogai
+Aucun enregistrement n’est utilisé : <b>chaque son est calculé par ton navigateur</b> au moment où tu l’écoutes (Web Audio), à partir de bruit et de sons purs. Il n’y a donc aucun auteur à créditer en dehors de LCNDA, et rien n’est téléchargé. ¦ Äänityksiä ei käytetä: <b>selaimesi laskee jokaisen äänen</b> juuri kun kuuntelet (Web Audio), kohinasta ja puhtaista sävyistä. Siksi ei ole muuta mainittavaa tekijää kuin LCNDA, eikä mitään ladata. ¦ Nem használunk felvételeket: <b>minden hangot a böngésződ számít ki</b> abban a pillanatban, amikor hallgatod (Web Audio), zajból és tiszta hangokból. Így az LCNDA-n kívül nincs kit feltüntetni szerzőként, és semmi sem töltődik le.
+<b>Libres de droits</b> : tu peux les écouter, les enregistrer, les mettre dans un montage ou une présentation, même les partager, sans rien demander (comme le domaine public, CC0). ¦ <b>Vapaasti käytettävissä</b>: voit kuunnella niitä, tallentaa niitä, laittaa ne videoeditointiin tai esitykseen, jopa jakaa ne, kysymättä keneltäkään (kuten vapaa käyttö, CC0). ¦ <b>Jogdíjmentesek</b>: meghallgathatod, elmentheted, betehetsz videóvágásba vagy bemutatóba, akár meg is oszthatod őket, senkit sem kell megkérdezned (mint a közkincs, CC0).
+bruit blanc filtré, qui ondule lentement ¦ suodatettua valkoista kohinaa, joka aaltoilee hitaasti ¦ szűrt fehérzaj, amely lassan hullámzik
+bruit aigu et milliers de petites gouttes au hasard ¦ korkeaa kohinaa ja tuhansia pieniä satunnaisia pisaroita ¦ magas zaj és ezernyi apró, véletlenszerű csepp
+bruit grave et crépitements au hasard ¦ matalaa kohinaa ja satunnaista rätinää ¦ mély zaj és véletlenszerű pattogás
+deux « tic » de sons purs, un carillon toutes les 40 secondes ¦ kaksi puhtaan sävyn ”tik”-ääntä, lyönti 40 sekunnin välein ¦ két tiszta hangú „tik”, 40 másodpercenként egy harangjáték
+sons purs aux harmoniques des cloches de bronze ¦ puhtaita sävyjä pronssikellojen yläsävelin ¦ tiszta hangok a bronzharangok felhangjaival
+coups métalliques : trois sons purs qui s’éteignent ¦ metallisia iskuja: kolme hiipuvaa puhdasta sävyä ¦ fémes ütések: három elhaló tiszta hang
+petits sifflets de sons purs qui montent ¦ pieniä nousevia puhtaan sävyn vihellyksiä ¦ kis emelkedő, tiszta hangú füttyök
+bruit filtré et le battement grave de la roue ¦ suodatettua kohinaa ja rattaan matala jyske ¦ szűrt zaj és a kerék mély dobbanása
+souffles de vapeur rythmés et un sifflet à deux notes ¦ rytmikkäitä höyrypuuskia ja kaksisävelinen pilli ¦ ütemes gőzpöffenések és egy kéthangú síp
+bruit grave qui monte et descend comme les vagues ¦ matalaa kohinaa, joka nousee ja laskee kuin aallot ¦ mély zaj, amely hullámként emelkedik és süllyed
+trilles de sons purs très aigus ¦ hyvin korkeita puhtaan sävyn liverryksiä ¦ nagyon magas, tiszta hangú trillák
+sons en dents de scie qui montent ¦ nousevia sahalaitaääniä ¦ emelkedő fűrészfoghangok
+trois sons purs graves qui glissent ¦ kolme matalaa liukuvaa puhdasta sävyä ¦ három mély, csúszó tiszta hang
+trois sons qui montent puis retombent ¦ kolme sävyä, jotka nousevat ja sitten laskevat ¦ három hang, amely emelkedik, majd leesik
+sons métalliques aux harmoniques de cloche ¦ metallisia ääniä kellon yläsävelin ¦ fémes hangok harangfelhangokkal
+petits chocs de bruit au rythme du pas ¦ pieniä kohinaiskuja askelten tahdissa ¦ apró zajlökések a lépések ütemében
+grondement grave qui tremble et cailloux de bruit ¦ matalaa väreilevää jyrinää ja kohinakiviä ¦ mély, remegő dübörgés és zajkavicsok
+trois notes graves qui vibrent ¦ kolme matalaa värisevää säveltä ¦ három mély, rezgő hang
+bruit très aigu qui ondule ¦ hyvin korkeaa aaltoilevaa kohinaa ¦ nagyon magas, hullámzó zaj
+grondements de bruit très grave ¦ hyvin matalan kohinan jyrinää ¦ nagyon mély zaj dörgése
+bruit d’eau et gouttes de sons purs ¦ veden kohinaa ja puhtaan sävyn pisaroita ¦ vízzaj és tiszta hangú cseppek
+deux chocs sourds ¦ kaksi kumeaa tömähdystä ¦ két tompa puffanás
+ronronnement et petit clic de la roue ¦ surinaa ja rukin pieni naksahdus ¦ zúgás és a kerék kis kattanása
+le claquement de la navette et le coup du battant ¦ sukkulan napsahdus ja kaidepuun lyönti ¦ a vetélő csattanása és a borda ütése
+cliquetis rapides par séries ¦ nopeaa naksutusta sarjoina ¦ gyors kattogás sorozatokban
+bruit filtré qui va et vient ¦ suodatettua kohinaa, joka tulee ja menee ¦ szűrt zaj, amely jön és megy
+grattements de bruit aigu ¦ korkeaa raapivaa kohinaa ¦ magas, kaparó zaj
+quatre bandes de bruit qui imitent les voix ¦ neljä kohinakaistaa, jotka matkivat ääniä ¦ négy zajsáv, amely hangokat utánoz
+tintements de sons purs ¦ puhtaan sävyn kilahduksia ¦ tiszta hangú csilingelés
+accords tenus de sons doux ¦ pehmeiden sävyjen pitkiä sointuja ¦ lágy hangok kitartott akkordjai
+une petite valse de sons en dents de scie, basse et accords ¦ pieni sahalaitavalssi, basso ja soinnut ¦ egy kis fűrészfoghangú keringő, basszus és akkordok
+traits de bruit et le petit coup du point ¦ kohinavetoja ja pisteen pieni napautus ¦ zajvonások és a pont kis koppanása
+craquements de bruit ¦ kohinan ritinää ¦ zajropogás
+pas de bruit filtré ¦ suodatetun kohinan askeleita ¦ szűrt zajból álló léptek
+cris en dents de scie qui descendent ¦ laskevia sahalaitahuutoja ¦ ereszkedő fűrészfoghangú kiáltások
+trois notes graves tenues, qui vibrent un peu ¦ kolme matalaa pitkää säveltä, jotka värisevät hieman ¦ három mély, kitartott hang, enyhén rezegve
+Fichier son (WebM) ¦ Äänitiedosto (WebM) ¦ Hangfájl (WebM)
+Ce qu’on entend, pendant la durée choisie ¦ Se mitä kuulet, valitun keston ajan ¦ Amit hallasz, a választott időtartamig
+L’arbre qui pousse ¦ Kasvava puu ¦ A növekvő fa
+Les descendants d’un ancêtre apparaissent année après année, les branches poussent, les feuilles roussissent. ¦ Esivanhemman jälkeläiset ilmestyvät vuosi vuodelta, oksat kasvavat, lehdet ruskaantuvat. ¦ Egy felmenő leszármazottai évről évre megjelennek, az ágak nőnek, a levelek rozsdabarnára színeződnek.
+▶ Faire pousser ¦ ▶ Kasvata ¦ ▶ Növesztés
+lente ¦ hidas ¦ lassú
+normale ¦ normaali ¦ normál
+rapide ¦ nopea ¦ gyors
+La musique de l’arbre ¦ Puun musiikki ¦ A fa zenéje
+L’arbre joué comme une partition : une note par naissance, un accord par mariage ; à écouter ou à télécharger. ¦ Puu soitettuna kuin partituuri: sävel jokaisesta syntymästä, sointu jokaisesta avioliitosta; kuunneltavaksi tai ladattavaksi. ¦ A fa kottaként lejátszva: minden születés egy hang, minden házasság egy akkord; meghallgatható vagy letölthető.
+tout l’arbre ¦ koko puu ¦ az egész fa
+Tempo ¦ Tempo ¦ Tempó
+lent ¦ hidas ¦ lassú
+normal ¦ normaali ¦ normál
+vif ¦ vilkas ¦ élénk
+Chaque naissance est une note : plus aiguë pour les générations proches, plus longue pour une longue vie, au timbre plus doux pour les femmes ; chaque mariage, un accord ; chaque décès, une note grave. ¦ Jokainen syntymä on sävel: korkeampi lähisukupolville, pidempi pitkälle elämälle, pehmeämpi naisille; jokainen avioliitto on sointu, jokainen kuolema matala sävel. ¦ Minden születés egy hang: magasabb a közeli nemzedékeknél, hosszabb a hosszú életnél, lágyabb hangszínű a nőknél; minden házasság egy akkord, minden haláleset egy mély hang.
+Fichier son (WAV) ¦ Äänitiedosto (WAV) ¦ Hangfájl (WAV)
+{b} naissances, {m} mariages, {d} décès — {s} secondes ¦ {b} syntymää, {m} avioliittoa, {d} kuolemaa — {s} sekuntia ¦ {b} születés, {m} házasság, {d} haláleset — {s} másodperc
+La chasse au trésor ¦ Aarteenetsintä ¦ Kincskeresés
+Des énigmes sur les ancêtres cachées dans la maison : seule la bonne réponse mène à la cachette suivante. ¦ Esivanhempia koskevia arvoituksia piilotettuna ympäri taloa: vain oikea vastaus johtaa seuraavaan kätköön. ¦ Az ősökről szóló találós kérdések elrejtve a házban: csak a helyes válasz vezet a következő rejtekhelyhez.
+🗝️ Préparer la chasse ¦ 🗝️ Valmistele etsintä ¦ 🗝️ A kincskeresés előkészítése
+Le nom de la chasse ¦ Etsinnän nimi ¦ A kincskeresés neve
+La chasse au trésor de la famille {name} ¦ Suvun {name} aarteenetsintä ¦ A(z) {name} család kincskeresése
+Les cachettes, dans l’ordre (une par ligne ; la dernière est celle du trésor) ¦ Kätköt järjestyksessä (yksi riviä kohden; viimeisessä on aarre) ¦ A rejtekhelyek sorrendben (soronként egy; az utolsóban van a kincs)
+sous le paillasson ¦ ovimaton alla ¦ a lábtörlő alatt
+dans la boîte aux lettres ¦ postilaatikossa ¦ a postaládában
+derrière l’horloge ¦ kellon takana ¦ az óra mögött
+au fond du placard de l’entrée ¦ eteisen kaapin perällä ¦ az előszobaszekrény mélyén
+Le trésor (ce qu’on trouve à la fin) ¦ Aarre (mitä lopuksi löytyy) ¦ A kincs (amit a végén találnak)
+le gâteau d’anniversaire de Mamie ¦ mummon syntymäpäiväkakku ¦ a mama születésnapi tortája
+Chaque énigme porte sur un ancêtre ; chaque réponse renvoie à une cachette : il faut la bonne réponse pour trouver la suite. ¦ Jokainen arvoitus koskee yhtä esivanhempaa; jokainen vastaus osoittaa kätköön: tarvitset oikean vastauksen löytääksesi jatkon. ¦ Minden találós kérdés egy felmenőről szól; minden válasz egy rejtekhelyre mutat: a folytatáshoz a helyes válasz kell.
+L’ancêtre mystère ¦ Salaperäinen esivanhempi ¦ A rejtélyes ős
+Un ancêtre caché, des indices un par un : le même pour toute la famille chaque jour. Qui le trouve le plus vite ? ¦ Piilotettu esivanhempi, vihjeitä yksi kerrallaan: sama koko perheelle joka päivä. Kuka löytää hänet nopeimmin? ¦ Egy elrejtett ős, egyenként adagolt támpontok: minden nap ugyanaz az egész családnak. Ki találja ki leggyorsabban?
+🕵️ L’ancêtre mystère du {date} ¦ 🕵️ Päivän {date} salaperäinen esivanhempi ¦ 🕵️ A rejtélyes ős – {date}
+Proposer ¦ Arvaa ¦ Tipp
+Un indice de plus ({n}) ¦ Yksi vihje lisää ({n}) ¦ Még egy támpont ({n})
+Je donne ma langue au chat ¦ Luovutan ¦ Feladom
+Trouvé maintenant : {n} points. ¦ Löydetty nyt: {n} pistettä. ¦ Most kitalálva: {n} pont.
+Le livre dont tu es le héros ¦ Kirja, jossa sinä olet sankari ¦ A könyv, amelyben te vagy a hős
+Vis la vie d’un ancêtre et fais ses choix — métier, mariage, départ — puis découvre ce qu’il a vraiment choisi. ¦ Elä esivanhemman elämää ja tee hänen valintansa – ammatti, avioliitto, lähtö – ja katso sitten, mitä hän todella valitsi. ¦ Éld egy ősöd életét és hozd meg a döntéseit — foglalkozás, házasság, elköltözés —, aztán fedezd fel, mit választott valójában.
+Tu seras ¦ Sinusta tulee ¦ Te leszel
+📖 Commencer l’histoire ¦ 📖 Aloita tarina ¦ 📖 A történet kezdése
+Les coïncidences ¦ Sattumat ¦ Egybeesések
+Nés le même jour, mort le jour de son anniversaire, mariés à cent ans d’écart jour pour jour : les hasards de l’arbre. ¦ Syntyneet samana päivänä, kuollut syntymäpäivänään, vihityt tasan sadan vuoden välein: sukupuun sattumat. ¦ Ugyanazon a napon születtek, a születésnapján halt meg, napra pontosan száz év különbséggel házasodtak: a családfa véletlenei.
+Plus l’arbre a de dates précises (jour et mois), plus il y en a. ¦ Mitä enemmän puussa on tarkkoja päivämääriä (päivä ja kuukausi), sitä enemmän niitä löytyy. ¦ Minél több pontos dátum (nap és hónap) van a fában, annál több ilyen akad.
+« Et si… » ¦ ”Entä jos…” ¦ „Mi lett volna, ha…”
+Et si ces deux-là ne s’étaient pas rencontrés ? Toutes les vies qui n’auraient jamais existé — peut-être la tienne. ¦ Entä jos nämä kaksi eivät olisi koskaan tavanneet? Kaikki elämät, joita ei olisi koskaan ollut – ehkä sinunkin. ¦ Mi lett volna, ha ők ketten sosem találkoznak? Mindazok az életek, amelyek soha nem léteztek volna — talán a tiéd is.
+Et si… ¦ Entä jos… ¦ Mi lett volna, ha…
+ces deux-là ne s’étaient jamais rencontrés ¦ nämä kaksi eivät olisi koskaan tavanneet ¦ ők ketten sosem találkoznak
+cette personne n’avait pas vécu ¦ tämä henkilö ei olisi elänyt ¦ ez a személy sosem él
+🦋 {n} vies n’auraient jamais existé ¦ 🦋 {n} elämää ei olisi koskaan ollut ¦ 🦋 {n} élet soha nem létezett volna
+{pct} % de l’arbre, dont {who} en vie aujourd’hui. ¦ {pct} % puusta, joista {who} elossa tänään. ¦ A fa {pct}%-a, köztük {who} ma is él.
+Et {name} non plus. ¦ Eikä myöskään {name}. ¦ És {name} sem.
+La broderie au point de croix ¦ Ristipistokirjonta ¦ Keresztszemes hímzés
+Un marquoir à l’ancienne : le nom de la famille, un couple, une date, un arbre ; la grille et les fils. ¦ Vanhanajan merkkausliina: suvun nimi, pariskunta, päivämäärä, puu; malli ja langat. ¦ Régi stílusú betűminta-kendő: a család neve, egy pár, egy dátum, egy fa; a minta és a fonalak.
+FAMILLE {name} ¦ SUKU {name} ¦ {name} CSALÁD
+La date ¦ Päivämäärä ¦ A dátum
+Le lieu (facultatif) ¦ Paikka (valinnainen) ¦ A hely (nem kötelező)
+La couleur du titre ¦ Otsikon väri ¦ A cím színe
+Brun ¦ Ruskea ¦ Barna
+Bleu ciel ¦ Taivaansininen ¦ Égkék
+La couleur du couple ¦ Pariskunnan väri ¦ A pár színe
+Le titre en grandes lettres (double) ¦ Otsikko isoin kirjaimin (kaksinkertainen) ¦ A cím nagy betűkkel (dupla)
+Le motif ¦ Kuvio ¦ A motívum
+❤️ Le cœur ¦ ❤️ Sydän ¦ ❤️ A szív
+👑 Le cœur couronné ¦ 👑 Kruunattu sydän ¦ 👑 A koronás szív
+🌷 Les tulipes ¦ 🌷 Tulppaanit ¦ 🌷 A tulipánok
+⛪ L’église ¦ ⛪ Kirkko ¦ ⛪ A templom
+🕊️ Les colombes ¦ 🕊️ Kyyhkyset ¦ 🕊️ A galambok
+— Aucun motif ¦ — Ei kuviota ¦ — Nincs motívum
+Ses couleurs ¦ Sen värit ¦ A színei
+celle du motif ¦ kuvion väri ¦ a motívumé
+Deux petits cœurs de chaque côté ¦ Kaksi pientä sydäntä kummallakin puolella ¦ Két kis szív mindkét oldalon
+La bordure ¦ Reunus ¦ A szegély
+· Les points (à l’ancienne) ¦ · Pisteet (vanhaan tapaan) ¦ · Pöttyök (régi stílusban)
+♥ La frise de cœurs ¦ ♥ Sydänreunus ¦ ♥ Szívfríz
+⌇ La frise en zigzag ¦ ⌇ Siksak-reunus ¦ ⌇ Cikcakkos fríz
+▭ Le double trait ¦ ▭ Kaksoisviiva ¦ ▭ Dupla vonal
+— Sans bordure ¦ — Ei reunusta ¦ — Szegély nélkül
+La toile ¦ Kangas ¦ Az anyag
+Aïda 11 ¦ Aida 11 ¦ Aida 11
+Aïda 14 ¦ Aida 14 ¦ Aida 14
+Aïda 16 ¦ Aida 16 ¦ Aida 16
+Aïda 18 ¦ Aida 18 ¦ Aida 18
+Lin 28 fils (un point sur 2 fils) ¦ Pellava 28 lankaa (yksi pisto 2 langan yli) ¦ Len 28 szálas (egy öltés 2 szálon át)
+Sa couleur (aperçu) ¦ Sen väri (esikatselu) ¦ A színe (előnézet)
+Écru ¦ Luonnonvalkoinen ¦ Nyersszínű
+Lin ¦ Pellava ¦ Len
+Bleu nuit ¦ Yönsininen ¦ Éjkék
+l’aperçu brodé ¦ kirjottu esikatselu ¦ a hímzett előnézet
+la grille à symboles ¦ symbolimalli ¦ a szimbólumos minta
+La grille (dessin SVG) ¦ Malli (SVG-piirros) ¦ A minta (SVG-rajz)
+L’aperçu brodé (image PNG) ¦ Kirjottu esikatselu (PNG-kuva) ¦ A hímzett előnézet (PNG-kép)
+La grille à symboles et la liste des fils ¦ Symbolimalli ja lankaluettelo ¦ A szimbólumos minta és a fonallista
+{w} × {h} points · sur {cloth} : {cw} × {ch} cm (prévoir 5 cm de marge tout autour) ¦ {w} × {h} pistoa · kankaalla {cloth}: {cw} × {ch} cm (varaa 5 cm:n marginaali joka puolelle) ¦ {w} × {h} öltés · {cloth} anyagon: {cw} × {ch} cm (hagyj körben 5 cm ráhagyást)
+{n} points ¦ {n} pistoa ¦ {n} öltés
+La gravure au laser ¦ Laserkaiverrus ¦ Lézergravírozás
+L’éventail des ancêtres en fichier SVG aux vraies dimensions, prêt pour une graveuse laser (gravure et découpe). ¦ Esivanhempien viuhkakaavio SVG-tiedostona todellisessa koossa, valmiina laserkaivertimelle (kaiverrus ja leikkaus). ¦ Az ősök legyezőábrája SVG-fájlként valós méretben, lézergravírozóhoz előkészítve (gravírozás és vágás).
+Les ancêtres de ¦ Esivanhemmat: ¦ Felmenői:
+Le fichier est aux vraies dimensions, en millimètres : <b>noir = gravure</b> (traits et noms), <b>rouge = découpe</b> (le contour, trait fin). Convient à LightBurn, Glowforge, xTool, Inkscape. Vérifie toujours la taille à l’import. ¦ Tiedosto on todellisessa koossa, millimetreinä: <b>musta = kaiverrus</b> (viivat ja nimet), <b>punainen = leikkaus</b> (ääriviiva, ohut viiva). Sopii LightBurniin, Glowforgeen, xTooliin ja Inkscapeen. Tarkista koko aina tuonnin yhteydessä. ¦ A fájl valós méretű, milliméterben: <b>fekete = gravírozás</b> (vonalak és nevek), <b>piros = vágás</b> (a körvonal, vékony vonal). LightBurn, Glowforge, xTool és Inkscape programokhoz. Importáláskor mindig ellenőrizd a méretet.
+Dessin SVG pour la graveuse ¦ SVG-piirros kaivertimelle ¦ SVG-rajz a gravírozóhoz
+Aux vraies dimensions : noir = gravure, rouge = découpe ¦ Todellisessa koossa: musta = kaiverrus, punainen = leikkaus ¦ Valós méretben: fekete = gravírozás, piros = vágás
+La mosaïque de portraits ¦ Muotokuvamosaiikki ¦ Portrémozaik
+Tous les visages de l’arbre en une image, ou un portrait refait avec les visages de toute la famille. ¦ Kaikki puun kasvot yhdessä kuvassa, tai muotokuva, joka on koottu koko suvun kasvoista. ¦ A fa összes arca egy képen, vagy egy portré, amely az egész család arcaiból áll össze.
+Je rassemble les visages… ¦ Kokoan kasvoja… ¦ Az arcok összegyűjtése…
+La mosaïque ¦ Mosaiikki ¦ A mozaik
+tous les visages, en grille ¦ kaikki kasvot ruudukkona ¦ az összes arc rácsban
+un portrait refait avec tous les autres ¦ muotokuva koottuna kaikista muista ¦ egy portré az összes többiből összerakva
+Le portrait à refaire ¦ Koottava muotokuva ¦ Az újraalkotandó portré
+Finesse ¦ Tarkkuus ¦ Részletesség
+Le visage de la lignée ¦ Sukulinjan kasvot ¦ A vérvonal arca
+De père en père ou de mère en mère : les visages côte à côte, en fondu, et le visage moyen des générations. ¦ Isältä isälle tai äidiltä äidille: kasvot rinnakkain, ristihäivytyksenä, ja sukupolvien keskimääräiset kasvot. ¦ Apáról apára vagy anyáról anyára: az arcok egymás mellett, áttűnéssel, és a nemzedékek átlagarca.
+La lignée ¦ Sukulinja ¦ A vérvonal
+de père en père ¦ isältä isälle ¦ apáról apára
+de mère en mère ¦ äidiltä äidille ¦ anyáról anyára
+▶ Le fondu ¦ ▶ Ristihäivytys ¦ ▶ Áttűnés
+Les visages (image PNG) ¦ Kasvot (PNG-kuva) ¦ Az arcok (PNG-kép)
+Le visage moyen de {n} générations ¦ {n} sukupolven keskimääräiset kasvot ¦ {n} nemzedék átlagarca
+Le fondu ¦ Ristihäivytys ¦ Áttűnés
+La gazette de l’année ¦ Vuoden lehti ¦ Az év újságja
+La une d’un journal pour une année de la famille : mariages, naissances, nouvelles des nôtres, le prix du pain. ¦ Sanomalehden etusivu yhdestä suvun vuodesta: avioliitot, syntymät, kuulumisia omaisilta, leivän hinta. ¦ Egy újság címlapja a család egy évéről: házasságok, születések, hírek a mieinkről, a kenyér ára.
+Les années les plus riches : ¦ Rikkaimmat vuodet: ¦ A leggazdagabb évek:
+🎨 Le style du journal ¦ 🎨 Lehden tyyli ¦ 🎨 Az újság stílusa
+📜 Ancien (1900) ¦ 📜 Vanha (1900) ¦ 📜 Régi (1900)
+🎨 Supplément illustré (en couleurs) ¦ 🎨 Kuvitettu liite (värillinen) ¦ 🎨 Képes melléklet (színes)
+🗞️ Le quotidien (papier journal) ¦ 🗞️ Päivälehti (sanomalehtipaperi) ¦ 🗞️ A napilap (újságpapír)
+🎩 Années 30 ¦ 🎩 1930-luku ¦ 🎩 A 30-as évek
+◻️ Moderne ¦ ◻️ Moderni ¦ ◻️ Modern
+💖 Magazine ¦ 💖 Aikakauslehti ¦ 💖 Magazin
+📣 À sensation (gros titres) ¦ 📣 Iltapäivälehti (isot otsikot) ¦ 📣 Bulvárlap (nagy főcímek)
+🧸 Le journal des enfants ¦ 🧸 Lasten lehti ¦ 🧸 A gyerekújság
+Le nom du journal ¦ Lehden nimi ¦ Az újság neve
+Le bandeau ¦ Lehden nimiö ¦ A fejléc
+Édition unique ¦ Ainoa painos ¦ Egyetlen kiadás
+Le papier ¦ Paperi ¦ A papír
+Celui du style ¦ Tyylin oma ¦ A stílusé
+Crème ¦ Kermanvärinen ¦ Krémszínű
+Jauni ¦ Kellastunut ¦ Megsárgult
+Papier journal ¦ Sanomalehtipaperi ¦ Újságpapír
+Ma couleur ¦ Oma värini ¦ Saját színem
+Les colonnes ¦ Palstat ¦ Hasábok
+L’article de une ¦ Pääjuttu ¦ A vezércikk
+Les nouvelles ¦ Uutiset ¦ A hírek
+Le coin pratique ¦ Käytännön nurkka ¦ Hasznos tudnivalók
+5 centimes ¦ 5 senttiä ¦ 5 centime
+Prix : {price} ¦ Hinta: {price} ¦ Ár: {price}
+{n} membres de la famille en vie ¦ {n} elossa olevaa suvun jäsentä ¦ {n} élő családtag
+Carnet ¦ Perheuutiset ¦ Családi hírek
+Nouvelles des nôtres ¦ Kuulumisia omaisilta ¦ Hírek a mieinkről
+Anniversaires ¦ Syntymäpäivät ¦ Születésnapok
+{n} centimes ¦ {n} senttiä ¦ {n} centime
+Le kilo de pain : environ {price}. ¦ Leipäkilo: noin {price}. ¦ Egy kiló kenyér: körülbelül {price}.
+Qui fait quoi ¦ Kuka tekee mitä ¦ Ki mit csinál
+Composée à partir de l’arbre de famille · {y} ¦ Koottu sukupuusta · {y} ¦ A családfa alapján összeállítva · {y}
+Le fond d’écran du jour ¦ Päivän taustakuva ¦ A nap háttérképe
+Chaque jour un ancêtre en image, aux dimensions de ton écran : couleurs, motif, photo, textes, calendrier… tout se règle. ¦ Joka päivä yksi esivanhempi kuvana, näyttösi kokoisena: värit, kuvio, valokuva, tekstit, kalenteri… kaikki on säädettävissä. ¦ Minden nap egy ős képben, a képernyőd méretében: színek, minta, fotó, szövegek, naptár… minden beállítható.
+L’ANCÊTRE DU JOUR ¦ PÄIVÄN ESIVANHEMPI ¦ A NAP ŐSE
+Ordinateur ¦ Tietokone ¦ Számítógép
+Grand écran (2K) ¦ Iso näyttö (2K) ¦ Nagy képernyő (2K)
+Écran 4K ¦ 4K-näyttö ¦ 4K-s képernyő
+Écran très large ¦ Ultralaaja näyttö ¦ Ultraszéles képernyő
+Mac Retina ¦ Mac Retina ¦ Mac Retina
+Tablette ¦ Tabletti ¦ Táblagép
+Tablette debout ¦ Tabletti pystyssä ¦ Táblagép (álló)
+Téléphone Android ¦ Android-puhelin ¦ Android telefon
+L’ancêtre (celui du jour par défaut) ¦ Esivanhempi (oletuksena päivän esivanhempi) ¦ Az ős (alapértelmezés szerint a napi)
+🎨 Couleurs et fond ¦ 🎨 Värit ja tausta ¦ 🎨 Színek és háttér
+Les couleurs ¦ Värit ¦ A színek
+Selon l’époque de l’ancêtre ¦ Esivanhemman aikakauden mukaan ¦ Az ős korszaka szerint
+Crème et encre ¦ Kerma ja muste ¦ Krém és tinta
+Vert sauge ¦ Salvianvihreä ¦ Zsályazöld
+Océan ¦ Valtameri ¦ Óceán
+Poudre ¦ Puuteri ¦ Púder
+Le dégradé ¦ Liukuväri ¦ Színátmenet
+En biais ¦ Vinottain ¦ Átlósan
+De haut en bas ¦ Ylhäältä alas ¦ Fentről lefelé
+De gauche à droite ¦ Vasemmalta oikealle ¦ Balról jobbra
+En rond ¦ Pyöreä ¦ Körkörös
+Aucun (uni) ¦ Ei mitään (yksivärinen) ¦ Nincs (egyszínű)
+Rayures fines ¦ Ohuet raidat ¦ Vékony csíkok
+Un arbre en filigrane ¦ Puu vesileimana ¦ Fa vízjelként
+La photo floutée en fond ¦ Sumennettu kuva taustana ¦ Elmosott fotó háttérként
+🖼️ La photo ¦ 🖼️ Kuva ¦ 🖼️ A fotó
+En arc ¦ Kaareva ¦ Íves
+La place ¦ Sijainti ¦ Elhelyezés
+En haut, centrée ¦ Ylhäällä, keskitetty ¦ Fent, középre igazítva
+La taille ¦ Koko ¦ Méret
+L’alignement ¦ Tasaus ¦ Igazítás
+L’étiquette ¦ Nimilappu ¦ A felirat
+Sa vie en deux phrases ¦ Elämä kahdessa lauseessa ¦ Élete két mondatban
+Une phrase à moi ¦ Oma lause ¦ Saját mondat
+Une devise, un souvenir… ¦ Motto, muisto… ¦ Egy jelmondat, egy emlék…
+🧩 En plus ¦ 🧩 Lisäksi ¦ 🧩 Extrák
+Le calendrier du mois ¦ Kuukauden kalenteri ¦ A hónap naptára
+Laisser la place pour ¦ Jätä tilaa: ¦ Hagyj helyet ennek:
+les icônes du bureau (à gauche) ¦ työpöydän kuvakkeille (vasemmalla) ¦ az asztali ikonok (bal oldalon)
+l’heure du téléphone (en haut) ¦ puhelimen kellolle (ylhäällä) ¦ a telefon órája (fent)
+Chaque jour un autre ancêtre — en priorité celui dont c’est l’anniversaire de naissance ou de décès. Tes réglages sont gardés sur cet ordinateur. ¦ Joka päivä eri esivanhempi – ensisijaisesti se, jonka syntymän tai kuoleman vuosipäivä on. Asetuksesi säilyvät tällä tietokoneella. ¦ Minden nap egy másik ős — elsősorban az, akinek születési vagy halálozási évfordulója van. A beállításaid ezen a számítógépen maradnak meg.
+Le fond d’écran (image PNG) ¦ Taustakuva (PNG-kuva) ¦ A háttérkép (PNG-kép)
+Fond d’écran du jour ¦ Päivän taustakuva ¦ A nap háttérképe
+Les passeports ¦ Passit ¦ Útlevelek
+Le passeport intérieur ou pour l’étranger d’un ancêtre voyageur, son signalement, son portrait-robot, et l’import des relevés publiés (Saint-Brieuc…). ¦ Matkustavan esivanhemman sisäinen passi tai ulkomaanpassi, tuntomerkit, hänen piirroskuvansa sekä julkaistujen otteiden tuonti (Saint-Brieuc…). ¦ Egy utazó ős belső vagy külföldi útlevele, személyleírása, fantomképe, és a közzétett kivonatok importálása (Saint-Brieuc…).
+＋ Ajouter un passeport ¦ ＋ Lisää passi ¦ ＋ Útlevél hozzáadása
+⤒ Importer un relevé (XML, CSV)… ¦ ⤒ Tuo ote (XML, CSV)… ¦ ⤒ Kivonat importálása (XML, CSV)…
+Un relevé publié (par exemple sur data.gouv.fr) ¦ Julkaistu ote (esimerkiksi data.gouv.fr-sivustolla) ¦ Közzétett kivonat (például a data.gouv.fr oldalon)
+{n} passeport rattaché ¦ {n} yhdistetty passi ¦ {n} kapcsolt útlevél
+« ＋ Ajouter un passeport », ou importe un relevé publié. ¦ ”＋ Lisää passi”, tai tuo julkaistu ote. ¦ „＋ Útlevél hozzáadása”, vagy importálj egy közzétett kivonatot.
+Grand-parent raconte ¦ Isovanhempi kertoo ¦ Nagyszülő mesél
+Un récit dicté ou collé : les naissances, mariages, métiers et domiciles repérés, comparés à l’arbre, à ajouter en un clic. ¦ Sanelu tai liitetty kertomus: siitä poimitut syntymät, avioliitot, ammatit ja asuinpaikat verrataan sukupuuhun, ja ne voi lisätä yhdellä napsautuksella. ¦ Diktált vagy beillesztett elbeszélés: a felismert születések, házasságok, foglalkozások és lakóhelyek a családfával összevetve, egy kattintással hozzáadhatók.
+Qui raconte ¦ Kuka kertoo ¦ Ki mesél
+🎤 Dicter ¦ 🎤 Sanele ¦ 🎤 Diktálás
+🔍 Repérer les faits ¦ 🔍 Etsi tosiasiat ¦ 🔍 Tények felismerése
+Le repérage des faits lit les récits écrits en français. ¦ Tosiasioiden etsintä lukee ranskaksi kirjoitettuja kertomuksia. ¦ A tények felismerése francia nyelvű elbeszéléseket olvas.
+Le récit (dicté, collé, ou recopié d’un enregistrement) ¦ Kertomus (sanelu, liitetty tai kirjoitettu äänityksestä) ¦ Az elbeszélés (diktálva, beillesztve vagy felvételről lejegyezve)
+💾 Enregistrer le récit ¦ 💾 Tallenna kertomus ¦ 💾 Az elbeszélés mentése
+Rangé dans le bloc ✨ Trésors de la fiche ¦ Tallennetaan kortin lohkoon ✨ Aarteet ¦ Az adatlap ✨ Kincsek blokkjába kerül
+Partager une branche (pour un temps) ¦ Jaa haara (määräajaksi) ¦ Egy ág megosztása (egy időre)
+Un fichier à envoyer à un cousin : la branche sans les vivants, protégée par un mot de passe, qui expire à la date choisie. ¦ Tiedosto serkulle lähetettäväksi: haara ilman eläviä henkilöitä, salasanalla suojattuna, voimassa valittuun päivään asti. ¦ Egy unokatestvérnek küldhető fájl: az ág élő személyek nélkül, jelszóval védve, a választott napon lejár.
+La branche de ¦ Haara: ¦ Ága:
+Valable jusqu’au ¦ Voimassa asti ¦ Érvényes eddig
+Mot de passe (le fichier est chiffré, illisible sans lui) ¦ Salasana (tiedosto on salattu, eikä sitä voi lukea ilman salasanaa) ¦ Jelszó (a fájl titkosított, nélküle olvashatatlan)
+à donner à part, par téléphone par exemple ¦ annettavaksi erikseen, esimerkiksi puhelimessa ¦ külön kell átadni, például telefonon
+Montrer ou cacher le mot de passe ¦ Näytä tai piilota salasana ¦ Jelszó megjelenítése vagy elrejtése
+Quatre mots et un nombre, faciles à dicter ¦ Neljä sanaa ja luku, helppo sanella ¦ Négy szó és egy szám, könnyen lediktálható
+🎲 En proposer un ¦ 🎲 Ehdota salasanaa ¦ 🎲 Javaslat
+Copier le mot de passe ¦ Kopioi salasana ¦ Jelszó másolása
+Sans mot de passe (déconseillé : quiconque reçoit le fichier peut le lire, et la date limite ne protège plus rien) ¦ Ilman salasanaa (ei suositella: kuka tahansa tiedoston saava voi lukea sen, eikä päättymispäivä enää suojaa mitään) ¦ Jelszó nélkül (nem ajánlott: bárki elolvashatja, aki megkapja a fájlt, és a lejárati dátum sem véd semmit)
+Un seul fichier HTML, qui s’ouvre dans n’importe quel navigateur, sans l’application : à envoyer par courriel ou à déposer sur un nuage. Retirées, avec les phrases qui les nomment : les personnes vivantes ou probablement vivantes (même règle que l’export GEDCOM « Pour partager »), les fiches confidentielles. Les numéros de fiche ne sortent pas. ¦ Yksi HTML-tiedosto, joka avautuu missä tahansa selaimessa ilman sovellusta: lähetettäväksi sähköpostilla tai pilvipalveluun. Poistettu, niitä mainitsevine lauseineen: elävät tai todennäköisesti elävät henkilöt (sama sääntö kuin GEDCOM-viennissä ”Jakamista varten”) ja luottamukselliset kortit. Korttien numerot eivät tule mukaan. ¦ Egyetlen HTML-fájl, amely bármelyik böngészőben megnyílik, az alkalmazás nélkül: elküldheted e-mailben vagy feltöltheted a felhőbe. Eltávolítva, az őket említő mondatokkal együtt: az élő vagy valószínűleg élő személyek (ugyanaz a szabály, mint a „Megosztáshoz” GEDCOM-exportnál), a bizalmas adatlapok. Az adatlapok számai nem kerülnek bele.
+🔐 Ce que protège ce fichier, et ce qu’il ne protège pas ¦ 🔐 Mitä tämä tiedosto suojaa ja mitä ei ¦ 🔐 Mit véd ez a fájl, és mit nem
+Chiffrement AES-256-GCM, clé tirée du mot de passe (PBKDF2, {n} tours) : sans le mot de passe, le contenu (noms compris, titre compris) est illisible. ¦ AES-256-GCM-salaus, avain johdettu salasanasta (PBKDF2, {n} kierrosta): ilman salasanaa sisältöä (myös nimiä ja otsikkoa) ei voi lukea. ¦ AES-256-GCM titkosítás, a kulcs a jelszóból származik (PBKDF2, {n} kör): jelszó nélkül a tartalom (a neveket és a címet is beleértve) olvashatatlan.
+Le fichier ne se connecte à rien (aucune adresse internet n’est appelée, ce que le navigateur fait respecter). ¦ Tiedosto ei ota yhteyttä mihinkään (mitään internetosoitetta ei kutsuta, ja selain valvoo tätä). ¦ A fájl semmihez sem kapcsolódik (egyetlen internetcímet sem hív meg, ezt a böngésző kikényszeríti).
+La date limite est vérifiée à l’ouverture, mais quelqu’un qui a le mot de passe et recule l’horloge de son ordinateur peut la contourner, ou recopier ce qu’il voit : un partage ne se reprend pas. Ne partage que ce que tu acceptes de voir circuler. ¦ Päättymispäivä tarkistetaan avattaessa, mutta joku, jolla on salasana ja joka siirtää tietokoneensa kelloa taaksepäin, voi kiertää sen tai kopioida näkemänsä: jakoa ei voi perua. Jaa vain sitä, minkä hyväksyt leviävän. ¦ A lejárati dátumot megnyitáskor ellenőrzi, de aki ismeri a jelszót és visszaállítja a számítógépe óráját, megkerülheti, vagy lemásolhatja, amit lát: a megosztást nem lehet visszavonni. Csak azt oszd meg, amiről elfogadod, hogy továbbadják.
+Envoie le mot de passe par un autre chemin que le fichier (téléphone, SMS) : les deux ensemble dans le même courriel ne protègent rien. ¦ Lähetä salasana eri reittiä kuin tiedosto (puhelin, tekstiviesti): molemmat samassa sähköpostissa eivät suojaa mitään. ¦ A jelszót más úton küldd, mint a fájlt (telefon, SMS): ha mindkettő ugyanabban az e-mailben van, semmit sem véd.
+{n} personnes partagées ¦ {n} henkilöä jaettu ¦ {n} megosztott személy
+{n} retirées (vivantes ou récentes) ¦ {n} poistettu (elävät tai lähiaikojen) ¦ {n} eltávolítva (élő vagy közelmúltbeli)
+🔗 Fabriquer le fichier à partager ¦ 🔗 Luo jaettava tiedosto ¦ 🔗 A megosztandó fájl elkészítése
+Le passeport des lieux ¦ Paikkojen passi ¦ A helyek útlevele
+Un tampon par village de l’arbre : quand tu y vas, il se colore. Combien en as-tu visité ? ¦ Leima jokaisesta sukupuun kylästä: kun käyt siellä, se saa värin. Kuinka monessa olet käynyt? ¦ Egy pecsét a fa minden falujához: ha ellátogatsz oda, kiszíneződik. Hányat jártál már be?
+Le carnet des tampons, à imprimer ¦ Leimavihko tulostettavaksi ¦ A pecsétfüzet nyomtatáshoz
+{n} / {total} lieux visités ¦ {n} / {total} paikassa käyty ¦ {n} / {total} meglátogatott hely
+Chaque lieu de l’arbre a son tampon. Quand tu y vas — le village, l’église, la mairie, le cimetière —, clique dessus : « J’y suis allé ». ¦ Jokaisella sukupuun paikalla on oma leimansa. Kun käyt siellä – kylässä, kirkossa, kunnantalolla, hautausmaalla –, napsauta sitä: ”Olen käynyt täällä”. ¦ A fa minden helyének saját pecsétje van. Ha ellátogatsz oda — a faluba, a templomba, a városházára, a temetőbe —, kattints rá: „Jártam itt”.
+{n} pers. ¦ {n} hlö ¦ {n} fő
+Le tour du monde des ancêtres ¦ Esivanhempien maailmanympärysmatka ¦ Az ősök világ körüli útja
+Les kilomètres parcourus de lieu en lieu, le plus long voyage, le plus loin du berceau, siècle après siècle. ¦ Paikasta toiseen kuljetut kilometrit, pisin matka, kauimpana synnyinseudulta, vuosisata vuosisadalta. ¦ A helyről helyre megtett kilométerek, a leghosszabb út, a szülőhelytől legtávolabb, évszázadról évszázadra.
+Tous ensemble ¦ Kaikki yhdessä ¦ Mindenki együtt
+{n} % du chemin vers la Lune ¦ {n} % matkasta Kuuhun ¦ A Holdig tartó út {n}%-a
+Le plus long voyage ¦ Pisin matka ¦ A leghosszabb út
+Le plus loin du berceau ({place}) ¦ Kauimpana synnyinseudulta ({place}) ¦ A szülőhelytől legtávolabb ({place})
+Les grands voyageurs ¦ Suuret matkaajat ¦ A nagy utazók
+Entre le berceau des parents et celui des enfants ¦ Vanhempien ja lasten syntymäpaikkojen välillä ¦ A szülők és a gyermekek születési helye között
+La distance moyenne, siècle par siècle, entre le lieu de naissance d’un parent et celui de son enfant : la famille qui s’éloigne de son village. ¦ Keskimääräinen etäisyys vuosisadoittain vanhemman ja lapsen syntymäpaikan välillä: suku, joka etääntyy kotikylästään. ¦ Az átlagos távolság évszázadonként egy szülő és gyermeke születési helye között: a család, amely eltávolodik a falujától.
+Les maisons dans le temps ¦ Talot ajan saatossa ¦ A házak az idők során
+Un village, une maison : qui y a vécu, de quand à quand, génération après génération. ¦ Kylä, talo: kuka siellä asui, mistä mihin, sukupolvi toisensa jälkeen. ¦ Egy falu, egy ház: ki lakott ott, mettől meddig, nemzedékről nemzedékre.
+{n} personnes sur {y} ans ¦ {n} henkilöä {y} vuoden aikana ¦ {n} személy {y} év alatt
+{place} : {y} ans de présence de la famille, sur {n} générations d’ancêtres ¦ {place}: suku asunut täällä {y} vuotta, {n} esivanhempien sukupolven ajan ¦ {place}: a család {y} éve van jelen, {n} felmenői nemzedéken át
+1 sou ¦ 1 sou ¦ 1 sou
+{n} membre de la famille en vie ¦ {n} elossa oleva suvun jäsen ¦ {n} élő családtag
+Pas d’autres nouvelles. ¦ Ei muita uutisia. ¦ Nincs más hír.
+Rien cette année. ¦ Ei mitään tänä vuonna. ¦ Idén semmi.
+1 franc ¦ 1 frangi ¦ 1 frank
+5 francs ¦ 5 frangia ¦ 5 frank
+Ce soir, on raconte {n} vie de la famille de {name}. ¦ Tänä iltana kerromme {n} elämän suvusta {name}. ¦ Ma este {n} életet mesélünk el {name} családjából.
+⏳ Ce partage a expiré. ¦ ⏳ Tämä jako on vanhentunut. ¦ ⏳ Ez a megosztás lejárt.
+Parents : ¦ Vanhemmat: ¦ Szülők:
+Enfants : ¦ Lapset: ¦ Gyermekek:
+Chercher un nom… ¦ Hae nimeä… ¦ Név keresése…
+🔒 Ce partage est protégé. ¦ 🔒 Tämä jako on suojattu. ¦ 🔒 Ez a megosztás védett.
+Partage valable jusqu’au {date}. Les personnes vivantes ne sont pas incluses. ¦ Jako on voimassa {date} asti. Eläviä henkilöitä ei ole mukana. ¦ A megosztás {date}-ig érvényes. Élő személyek nincsenek benne.
+l’arbre dit {what} ¦ sukupuun mukaan {what} ¦ a családfa szerint {what}
+concorde avec l’arbre ({what}) ¦ täsmää sukupuuhun ({what}) ¦ egyezik a családfával ({what})
+nouvelle lune ¦ uusikuu ¦ újhold
+(sous l’horizon) ¦ (horisontin alapuolella) ¦ (a horizont alatt)
+astre|Mars ¦ Mars ¦ Mars
+{list} brillaient ¦ {list} loistivat ¦ {list} fénylett
+dernier croissant ¦ vähenevä sirppi ¦ fogyó sarló
+lune gibbeuse décroissante ¦ vähenevä kuu ¦ fogyó hold
+Saturne ¦ Saturnus ¦ Szaturnusz
+dernier quartier ¦ viimeinen neljännes ¦ utolsó negyed
+{km} km depuis l’étape d’avant ¦ {km} km edellisestä pysähdyksestä ¦ {km} km az előző állomás óta
+🕯️ Garder la mémoire ¦ 🕯️ Muistojen vaaliminen ¦ 🕯️ Az emlékek megőrzése
+🔭 Découvrir ¦ 🔭 Tutustu ¦ 🔭 Felfedezés
+Trésor ¦ Aarre ¦ Kincs
+Récits ¦ Kertomukset ¦ Történetek
+Chasses au trésor ¦ Aarteenetsinnät ¦ Kincskeresések
+TRÉSORS ¦ AARTEET ¦ KINCSEK
+trésors ¦ aarteet ¦ kincsek
+Garde au moins un trésor affiché. ¦ Pidä vähintään yksi aarre näkyvissä. ¦ Legalább egy kincs maradjon látható.
+Dossier vide ¦ Tyhjä kansio ¦ Üres mappa
+Les trésors n’ont pas pu être lus. ¦ Aarteita ei voitu lukea. ¦ A kincseket nem sikerült beolvasni.
+Broderie — {title} ¦ Kirjonta — {title} ¦ Hímzés — {title}
+Aucun visage connu dans cette lignée ¦ Tässä sukulinjassa ei ole tunnettuja kasvoja ¦ Ebben a vérvonalban nincs ismert arc
+La Gazette {y} ¦ Lehti {y} ¦ Újság {y}
+Fond d’écran ¦ Taustakuva ¦ Háttérkép
+Pégase ¦ Pegasos ¦ Pegazus
+Andromède ¦ Andromeda ¦ Androméda
+Persée ¦ Perseus ¦ Perszeusz
+sous l’horizon ¦ horisontin alapuolella ¦ a horizont alatt
+date exacte inconnue ¦ tarkka päivämäärä tuntematon ¦ pontos dátum ismeretlen
+Les deux guerres ¦ Kaksi sotaa ¦ A két háború
+(aucun événement daté) ¦ (ei päivättyjä tapahtumia) ¦ (nincs dátummal ellátott esemény)
+Faire-part — {name} ¦ Ilmoitus — {name} ¦ Értesítő — {name}
+Faire-part ¦ Ilmoitus ¦ Értesítő
+L’arbre est vide ¦ Sukupuu on tyhjä ¦ A családfa üres
+{n} prénoms transmis par-dessus une génération ¦ {n} etunimeä siirtynyt sukupolven yli ¦ {n} keresztnév egy nemzedéket átugorva továbbadva
+{n} mots expliqués ¦ {n} sanaa selitetty ¦ {n} megmagyarázott szó
+{n} mot expliqué ¦ {n} sana selitetty ¦ {n} megmagyarázott szó
+Aucun vieux mot reconnu. ¦ Vanhoja sanoja ei tunnistettu. ¦ Nem találtunk régi szót.
+sous l’évier ¦ tiskialtaan alla ¦ a mosogató alatt
+Les chasses préparées ¦ Valmistellut etsinnät ¦ Előkészített kincskeresések
+{n} cachettes ¦ {n} kätköä ¦ {n} rejtekhely
+Donne au moins deux cachettes. ¦ Anna vähintään kaksi kätköä. ¦ Adj meg legalább két rejtekhelyet.
+Chasse au trésor ¦ Aarteenetsintä ¦ Kincskeresés
+La chasse sera effacée. ¦ Etsintä poistetaan. ¦ A kincskeresés törlődik.
+Carte {n} ¦ Kortti {n} ¦ {n}. kártya
+(à donner au départ) ¦ (annetaan alussa) ¦ (az elején kell odaadni)
+{answer} → cherchez {where} ¦ {answer} → etsi {where} ¦ {answer} → keresd itt: {where}
+Il faut quelques ancêtres avec une date, un lieu ou un métier ¦ Tarvitaan muutama esivanhempi, jolla on päivämäärä, paikka tai ammatti ¦ Néhány ős kell, akinek van dátuma, helye vagy foglalkozása
+🕵️ Un ancêtre mystère au hasard ¦ 🕵️ Satunnainen salaperäinen esivanhempi ¦ 🕵️ Egy véletlenszerű rejtélyes ős
+{n} parties ¦ {n} peliä ¦ {n} játszma
+{n} partie ¦ {n} peli ¦ {n} játszma
+🎉 Bravo ! ¦ 🎉 Hienoa! ¦ 🎉 Ügyes!
+😶 C’était… ¦ 😶 Se oli… ¦ 😶 Ez volt az…
+🎲 Un autre, au hasard ¦ 🎲 Toinen, satunnainen ¦ 🎲 Egy másik, véletlenszerűen
+{n} essais ratés ¦ {n} väärää arvausta ¦ {n} rossz tipp
+Choisis quelqu’un. ¦ Valitse joku. ¦ Válassz valakit.
+Une autre vie aurait été possible… mais c’est celle-là qui a mené jusqu’à toi. ¦ Toisenlainen elämä olisi ollut mahdollinen… mutta juuri tämä johti sinuun asti. ¦ Más élet is lehetett volna… de ez az, amelyik egészen hozzád vezetett.
+📖 Recommencer ¦ 📖 Aloita alusta ¦ 📖 Újrakezdés
+Tourner la page → ¦ Käännä sivua → ¦ Lapozz →
+Aucune coïncidence trouvée ¦ Sattumia ei löytynyt ¦ Nem találtunk egybeesést
+🦋 {n} vie n’aurait jamais existé ¦ 🦋 {n} elämää ei olisi koskaan ollut ¦ 🦋 {n} élet soha nem létezett volna
+la fenêtre d’impression n’est pas prête. ¦ tulostusikkuna ei ole valmis. ¦ a nyomtatási ablak nem áll készen.
+🃏 7 FAMILLES ¦ 🃏 7 PERHETTÄ ¦ 🃏 HÉT CSALÁD
+(visage repéré) ¦ (kasvot tunnistettu) ¦ (arc felismerve)
+Ajoute-en depuis sa fiche (Médias), puis reviens ici. ¦ Lisää niitä hänen kortiltaan (Media), ja palaa sitten tänne. ¦ Adj hozzá néhányat az adatlapjáról (Média), aztán gyere vissza ide.
+Jeu remis comme au départ. ¦ Peli palautettu alkutilaan. ¦ A játék visszaállítva a kezdetre.
+Donne au moins une équipe. ¦ Anna vähintään yksi joukkue. ¦ Adj meg legalább egy csapatot.
+Égalité ! ¦ Tasapeli! ¦ Döntetlen!
+{n} point ¦ {n} piste ¦ {n} pont
+Question {n} / {total} ¦ Kysymys {n} / {total} ¦ {n}. / {total} kérdés
+Question suivante ▶ ¦ Seuraava kysymys ▶ ¦ Következő kérdés ▶
+Vidéo prête. ¦ Video on valmis. ¦ A videó elkészült.
+Donne-lui un titre. ¦ Anna sille otsikko. ¦ Adj neki címet.
+SOUVENIR DES SENS ¦ AISTIMUISTO ¦ ÉRZÉKSZERVI EMLÉK
+Chaque samedi, elle cirait les marches… ¦ Joka lauantai hän vahasi portaat… ¦ Minden szombaton beeresztette a lépcsőt…
+La préparation ¦ Valmistus ¦ Elkészítés
+CHANSONS DE LA FAMILLE ¦ SUVUN LAULUT ¦ A CSALÁD DALAI
+Les paroles ¦ Sanat ¦ A dalszöveg
+Quand on la chantait ¦ Milloin sitä laulettiin ¦ Mikor énekelték
+Raconte-moi une journée ordinaire quand tu avais dix ans. ¦ Kerro minulle tavallisesta päivästä, kun olit kymmenvuotias. ¦ Mesélj nekem egy hétköznapról, amikor tízéves voltál.
+Qu’est-ce qu’on apprenait par cœur ? ¦ Mitä opeteltiin ulkoa? ¦ Mit kellett kívülről megtanulni?
+Y avait-il des histoires qu’on se racontait toujours dans la famille ? ¦ Oliko tarinoita, joita suvussa kerrottiin aina? ¦ Voltak olyan történetek, amelyeket a családban mindig elmeséltek?
+Quel outil ou quel geste te reste dans les mains ? ¦ Mikä työkalu tai liike on yhä käsissäsi? ¦ Melyik szerszám vagy mozdulat maradt meg a kezedben?
+Comment as-tu rencontré ton mari, ta femme, ton amour ? ¦ Miten tapasit miehesi, vaimosi, rakkaasi? ¦ Hogyan ismerted meg a férjed, a feleséged, a szerelmed?
+Où avez-vous habité au début ? ¦ Missä asuitte aluksi? ¦ Hol laktatok kezdetben?
+Où étais-tu pendant la guerre ? ¦ Missä olit sodan aikana? ¦ Hol voltál a háború alatt?
+Y a-t-il un jour que tu n’as jamais oublié ? ¦ Onko jokin päivä, jota et ole koskaan unohtanut? ¦ Van olyan nap, amelyet sosem felejtettél el?
+Comment se chauffait-on, comment s’éclairait-on ? ¦ Miten talo lämmitettiin, miten saatiin valoa? ¦ Hogyan fűtöttek, hogyan világítottak?
+Comment fêtait-on Noël ? ¦ Miten joulua vietettiin? ¦ Hogyan ünnepelték a karácsonyt?
+S’ouvre ¦ Avautuu ¦ Kinyílik
+L’anniversaire de ¦ Syntymäpäivä: ¦ Születésnapja:
+À ses ¦ Iässä ¦ Ennyi évesen:
+La lettre ¦ Kirje ¦ A levél
+Écris ici… ¦ Kirjoita tähän… ¦ Írj ide…
+LETTRE AUX DESCENDANTS ¦ KIRJE JÄLKELÄISILLE ¦ LEVÉL A LESZÁRMAZOTTAKNAK
+✉️ La lettre ¦ ✉️ Kirje ¦ ✉️ A levél
+✉️ Nouvelle lettre ¦ ✉️ Uusi kirje ¦ ✉️ Új levél
+🔒 Sceller la lettre ¦ 🔒 Sinetöi kirje ¦ 🔒 A levél lepecsételése
+Choisis une personne dont on connaît la naissance. ¦ Valitse henkilö, jonka syntymä tunnetaan. ¦ Válassz egy személyt, akinek ismert a születése.
+Écris quelque chose ou joins un son, une vidéo ou une photo. ¦ Kirjoita jotain tai liitä ääni, video tai valokuva. ¦ Írj valamit, vagy csatolj hangot, videót vagy fényképet.
+{n} scellées ¦ {n} sinetöityä ¦ {n} lepecsételt
+{n} ouvertes ¦ {n} avattua ¦ {n} kinyitott
+De {from} ¦ Lähettäjä: {from} ¦ Feladó: {from}
+écrite ¦ kirjoitettu ¦ írva
+Sommaire ¦ Sisällys ¦ Tartalom
+ça rappelle {who} ¦ se muistuttaa: {who} ¦ eszünkbe juttatja: {who}
+{n} recettes transmises ¦ {n} perittyä reseptiä ¦ {n} továbbadott recept
+{n} recette transmise ¦ {n} peritty resepti ¦ {n} továbbadott recept
+Chantée par {who} ¦ Laulaja: {who} ¦ Énekelte: {who}
+Sans enregistrement ¦ Ei äänitystä ¦ Felvétel nélkül
+(le son reste dans les médias) ¦ (ääni jää mediaan) ¦ (a hang a médiában marad)
+Entretien avec {name} ¦ Haastattelu: {name} ¦ Interjú: {name}
+Choisis au moins un thème. ¦ Valitse vähintään yksi teema. ¦ Válassz legalább egy témát.
+Question suivante → ¦ Seuraava kysymys → ¦ Következő kérdés →
+Passer ¦ Ohita ¦ Kihagyás
+🔊 Relire ¦ 🔊 Lue uudelleen ¦ 🔊 Újraolvasás
+J’enregistre l’entretien… ¦ Äänitän haastattelua… ¦ Az interjú rögzítése…
+Entretien gardé (sans son). ¦ Haastattelu säilytetty (ilman ääntä). ¦ Az interjú megmaradt (hang nélkül).
+{n} bougies allumées ¦ {n} kynttilää sytytetty ¦ {n} meggyújtott gyertya
+mélange ¦ sekoitus ¦ keverék
+UNE BOUGIE ¦ KYNTTILÄ ¦ EGY GYERTYA
+encore {n} j ¦ vielä {n} pv ¦ még {n} nap
+demain ¦ huomenna ¦ holnap
+allumée ¦ sytytetty ¦ meggyújtva
+par {name} ¦ sytyttäjä: {name} ¦ gyújtotta: {name}
+Bougie supprimée ¦ Kynttilä poistettu ¦ Gyertya törölve
+Bougie supprimée. ¦ Kynttilä poistettu. ¦ Gyertya törölve.
+Ambiance arrêtée (minuterie). ¦ Äänimaisema pysäytetty (ajastin). ¦ A hangulat leállítva (időzítő).
+Monte au moins une couche. ¦ Nosta vähintään yhtä kerrosta. ¦ Hangosíts fel legalább egy réteget.
+Garder ce mélange ¦ Säilytä tämä sekoitus ¦ A keverék megtartása
+Mélange gardé. ¦ Sekoitus säilytetty. ¦ A keverék megmaradt.
+« {name} » supprimé. ¦ ”{name}” poistettu. ¦ „{name}” törölve.
+Ce navigateur ne sait pas enregistrer. ¦ Tämä selain ei osaa äänittää. ¦ Ez a böngésző nem tud felvételt készíteni.
+Ambiance — {name} ¦ Äänimaisema — {name} ¦ Hangulat — {name}
+à ¦ – ¦ –
+Tous les indices s’accordent (vers {y}). ¦ Kaikki vihjeet täsmäävät (noin {y}). ¦ Minden támpont egyezik ({y} körül).
+Qui cela peut être ¦ Kuka se voisi olla ¦ Ki lehet az
+Avait {n} ans vers {y} ¦ Oli {n}-vuotias noin vuonna {y} ¦ {y} körül {n} éves volt
+Reprendre la branche {name} ¦ Jatka haaraa {name} ¦ A(z) {name} ág folytatása
+RAPPEL DE RECHERCHE ¦ TUTKIMUSMUISTUTUS ¦ KUTATÁSI EMLÉKEZTETŐ
+Pas touchée depuis {d} ¦ Koskematon {d} jälkeen ¦ {d} óta érintetlen
+modifiée ¦ muokattu ¦ módosítva
+Jamais modifiée ¦ Ei koskaan muokattu ¦ Soha nem módosítva
