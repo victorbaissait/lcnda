@@ -27,7 +27,7 @@ const SRC = path.join(DIR, 'src');
 const LANGS = ['en', 'es', 'de', 'it', 'pt', 'pl', 'nl'];  // traduites en entier (tests/test-i18n-faq.js)
 const NEW_LANGS = ['cs', 'sv', 'da', 'sk', 'nb'];          // en cours : une question absente reste en français
 const ALL_LANGS = [...LANGS, ...NEW_LANGS];
-const VERSION = 4; // monter avec FAQ_I18N_V dans heritage-more.js quand les .json changent
+const VERSION = 5; // monter avec FAQ_I18N_V dans heritage-more.js quand les .json changent
 
 /** la liste « const FAQ = [ … ]; » de heritage-more.js ; mac = true : les touches écrites pour un Mac */
 function readFaq({mac = false} = {}) {
