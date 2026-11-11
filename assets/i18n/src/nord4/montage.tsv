@@ -1,0 +1,48 @@
+fr ¦ fi ¦ hu
+# ═════ zone « montage » : finnois (fi) et hongrois (hu) ═════
+Boutons des pistes : petits ¦ Raitojen painikkeet: pienet ¦ Sávgombok: kicsik
+Boutons des pistes : grands ¦ Raitojen painikkeet: suuret ¦ Sávgombok: nagyok
+Les boutons des pistes ont déjà cette taille. ¦ Raitojen painikkeet ovat jo tämän kokoiset. ¦ A sávgombok már ekkorák.
+Petits ¦ Pienet ¦ Kicsik
+Moyens (départ) ¦ Keskikokoiset (oletus) ¦ Közepesek (alap)
+Grands ¦ Suuret ¦ Nagyok
+Ranger cette section : glisse la poignée, ou Alt + ↑ / ↓ ¦ Siirrä tätä osiota: vedä kahvasta tai Alt + ↑ / ↓ ¦ A szakasz áthelyezése: húzd a fogantyút, vagy Alt + ↑ / ↓
+Sections du panneau de droite : ↺ Remettre comme au départ ¦ Oikean paneelin osiot: ↺ Palauta alkuperäiseksi ¦ A jobb oldali panel szakaszai: ↺ Visszaállítás alapra
+Sections du panneau de droite remises comme au départ ¦ Oikean paneelin osiot palautettu alkuperäisiksi ¦ A jobb oldali panel szakaszai visszaállítva alapra
+Les sections du panneau de droite sont déjà comme au départ. ¦ Oikean paneelin osiot ovat jo alkuperäiset. ¦ A jobb oldali panel szakaszai már az eredeti állapotban vannak.
+Taille et place ¦ Koko ja paikka ¦ Méret és hely
+Durée, taille et place ¦ Kesto, koko ja paikka ¦ Időtartam, méret és hely
+Couleurs de cette vidéo ¦ Tämän videon värit ¦ A videó színei
+Rotation et fondus ¦ Kierto ja häivytykset ¦ Forgatás és áttűnések
+Volume et effets ¦ Äänenvoimakkuus ja tehosteet ¦ Hangerő és effektek
+Les couleurs et le vieux film de ce morceau reviennent comme au départ ¦ Tämän pätkän värit ja vanhan filmin tehoste palaavat alkuperäisiksi ¦ A klip színei és régi film hatása visszaáll az eredetire
+Les couleurs et le vieux film de tout le film reviennent comme au départ ¦ Koko elokuvan värit ja vanhan filmin tehoste palaavat alkuperäisiksi ¦ Az egész film színei és régi film hatása visszaáll az eredetire
+Couleurs remises comme au départ ¦ Värit palautettu alkuperäisiksi ¦ Színek visszaállítva alapra
+Le son de tout le film revient comme au départ (volume, effets) ¦ Koko elokuvan ääni palaa alkuperäiseksi (äänenvoimakkuus, tehosteet) ¦ Az egész film hangja visszaáll az eredetire (hangerő, effektek)
+Son du film remis comme au départ ¦ Elokuvan ääni palautettu alkuperäiseksi ¦ A film hangja visszaállítva alapra
+Texte remis comme au départ ¦ Teksti palautettu alkuperäiseksi ¦ Szöveg visszaállítva alapra
+Volume dans le temps ¦ Äänenvoimakkuus ajan mukaan ¦ Hangerő időben
+Poser des points sur le morceau ¦ Lisää pisteitä pätkään ¦ Pontok elhelyezése a klipen
+Point à la tête de lecture ¦ Piste toistokohtaan ¦ Pont a lejátszófejnél
+Effacer la courbe ¦ Tyhjennä käyrä ¦ Görbe törlése
+Courbe du volume effacée ¦ Äänenvoimakkuuden käyrä tyhjennetty ¦ Hangerőgörbe törölve
+Volume : {n} % ¦ Äänenvoimakkuus: {n} % ¦ Hangerő: {n} %
+Points sur la courbe : {n}. La ligne du milieu = le volume réglé plus haut ; en haut, jusqu’à deux fois plus fort. ¦ Pisteitä käyrällä: {n}. Keskiviiva = yllä asetettu äänenvoimakkuus; ylhäällä jopa kaksi kertaa voimakkaampi. ¦ Pontok a görbén: {n}. A középső vonal = a fent beállított hangerő; fent akár kétszer hangosabb.
+Pas encore de courbe : le volume reste le même du début à la fin (avec ses fondus). ¦ Ei vielä käyrää: äänenvoimakkuus pysyy samana alusta loppuun (häivytyksineen). ¦ Még nincs görbe: a hangerő az elejétől a végéig ugyanaz marad (az áttűnésekkel).
+Sur le morceau choisi, dans la frise : un clic pose un point, on glisse un point pour le déplacer (en haut : plus fort, en bas : moins fort), un double-clic l’enlève. ¦ Valitussa pätkässä, aikajanalla: napsautus lisää pisteen, pistettä vetämällä sitä siirretään (ylös: voimakkaampi, alas: hiljaisempi), kaksoisnapsautus poistaa sen. ¦ A kiválasztott klipen, az idővonalon: egy kattintás pontot tesz le, egy pontot húzva áthelyezed (fent: hangosabb, lent: halkabb), dupla kattintás eltávolítja.
+✎ Clique sur le morceau, dans la frise, pour poser un point ; glisse un point pour le déplacer ; double-clic pour l’enlever. ¦ ✎ Napsauta pätkää aikajanalla lisätäksesi pisteen; vedä pistettä siirtääksesi sitä; kaksoisnapsauta poistaaksesi sen. ¦ ✎ Kattints a klipre az idővonalon pont elhelyezéséhez; húzz egy pontot az áthelyezéséhez; dupla kattintással eltávolítod.
+Volume plus égal (les passages faibles remontent, les forts baissent) ¦ Tasaisempi äänenvoimakkuus (hiljaiset kohdat nousevat, kovat laskevat) ¦ Egyenletesebb hangerő (a halk részek felerősödnek, a hangosak halkulnak)
+Lieu de la réverbération ¦ Kaiun tila ¦ A visszhang helye
+Une grande salle ¦ Suuri sali ¦ Egy nagy terem
+Une église ¦ Kirkko ¦ Egy templom
+Une cave ¦ Kellari ¦ Egy pince
+Gauche ↔ droite ¦ Vasen ↔ oikea ¦ Bal ↔ jobb
+Police et couleur ¦ Fontti ja väri ¦ Betűtípus és szín
+italique ¦ kursiivi ¦ dőlt
+Contour et ombre ¦ Ääriviiva ja varjo ¦ Körvonal és árnyék
+autour des lettres ¦ kirjainten ympärillä ¦ a betűk körül
+Force de l’ombre ¦ Varjon voimakkuus ¦ Árnyék erőssége
+Allume « ombre » (Police et couleur) pour régler l’ombre. ¦ Kytke ”varjo” päälle (Fontti ja väri) säätääksesi varjoa. ¦ Kapcsold be az „árnyék” lehetőséget (Betűtípus és szín) az árnyék beállításához.
+Bandeau derrière le texte ¦ Palkki tekstin takana ¦ Sáv a szöveg mögött
+Opacité du bandeau ¦ Palkin peittävyys ¦ A sáv átlátszatlansága
+Allume « bandeau » (Police et couleur) : un fond de couleur derrière le texte, plus ou moins transparent, aux coins droits ou arrondis. ¦ Kytke ”palkki” päälle (Fontti ja väri): värillinen tausta tekstin takana, enemmän tai vähemmän läpinäkyvä, suorin tai pyöristetyin kulmin. ¦ Kapcsold be a „sáv” lehetőséget (Betűtípus és szín): színes háttér a szöveg mögött, többé-kevésbé átlátszó, szögletes vagy lekerekített sarkokkal.

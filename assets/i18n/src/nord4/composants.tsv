@@ -1,0 +1,422 @@
+fr ¦ fi ¦ hu
+# ═════ zone « composants » : finnois (fi) et hongrois (hu) — boutons, menus de choix, fenêtres communes ═════
+Enregistrer ¦ Tallenna ¦ Mentés
+Annuler ¦ Peruuta ¦ Mégse
+Fermer ¦ Sulje ¦ Bezárás
+Supprimer ¦ Poista ¦ Törlés
+Retirer ¦ Irrota ¦ Eltávolítás
+Modifier ¦ Muokkaa ¦ Szerkesztés
+Créer ¦ Luo ¦ Létrehozás
+Ajouter ¦ Lisää ¦ Hozzáadás
+Relier ¦ Yhdistä ¦ Összekapcsolás
+↺ Remettre comme au départ ¦ ↺ Palauta alkuperäiseksi ¦ ↺ Visszaállítás alapra
+Remettre comme au départ ¦ Palauta alkuperäiseksi ¦ Visszaállítás alapra
+↶ Annuler ¦ ↶ Kumoa ¦ ↶ Visszavonás
+↷ Rétablir ¦ ↷ Tee uudelleen ¦ ↷ Újra
+Rétablir ¦ Tee uudelleen ¦ Újra
+Continuer ¦ Jatka ¦ Folytatás
+Réessayer ¦ Yritä uudelleen ¦ Próbáld újra
+Ouvrir ¦ Avaa ¦ Megnyitás
+↗ Ouvrir ¦ ↗ Avaa ¦ ↗ Megnyitás
+Renommer ¦ Nimeä uudelleen ¦ Átnevezés
+Dupliquer ¦ Monista ¦ Másolat készítése
+Remplacer ¦ Korvaa ¦ Csere
+Choisir ¦ Valitse ¦ Kiválasztás
+Choisir… ¦ Valitse… ¦ Kiválasztás…
+Changer ¦ Vaihda ¦ Módosítás
+Exporter ¦ Vie ¦ Exportálás
+Importer ¦ Tuo ¦ Importálás
+Imprimer ¦ Tulosta ¦ Nyomtatás
+🖨 Imprimer ¦ 🖨 Tulosta ¦ 🖨 Nyomtatás
+💾 Enregistrer ¦ 💾 Tallenna ¦ 💾 Mentés
+⤒ Importer ¦ ⤒ Tuo ¦ ⤒ Importálás
+⤓ Exporter ▾ ¦ ⤓ Vie ▾ ¦ ⤓ Exportálás ▾
+📋 Copier ¦ 📋 Kopioi ¦ 📋 Másolás
+✓ Enregistré ¦ ✓ Tallennettu ¦ ✓ Mentve
+Enregistré ¦ Tallennettu ¦ Mentve
+Enregistrement… ¦ Tallennetaan… ¦ Mentés…
+⚠️ Pas enregistré ¦ ⚠️ Ei tallennettu ¦ ⚠️ Nincs mentve
+• modifié ¦ • muutettu ¦ • módosítva
+Plein écran ¦ Koko näyttö ¦ Teljes képernyő
+Plus d’actions ¦ Lisää toimintoja ¦ További műveletek
+Aide ¦ Ohje ¦ Súgó
+Aide : ¦ Ohje: ¦ Súgó:
+En savoir plus (FAQ) → ¦ Lue lisää (UKK) → ¦ Tudj meg többet (GYIK) →
+Clique pour lire la suite ¦ Napsauta lukeaksesi lisää ¦ Kattints a folytatásért
+Retour ¦ Takaisin ¦ Vissza
+← Retour ¦ ← Takaisin ¦ ← Vissza
+Oui ¦ Kyllä ¦ Igen
+Non ¦ Ei ¦ Nem
+Aucune ¦ Ei mitään ¦ Egyik sem
+Aucun ¦ Ei mitään ¦ Egyik sem
+Tous ¦ Kaikki ¦ Mind
+Toutes ¦ Kaikki ¦ Mind
+Tout ¦ Kaikki ¦ Mind
+Tout voir ¦ Näytä kaikki ¦ Összes megtekintése
+Voir tout ¦ Näytä kaikki ¦ Összes megtekintése
+Toutes ({n}) ¦ Kaikki ({n}) ¦ Mind ({n})
+Tout ({n}) ¦ Kaikki ({n}) ¦ Mind ({n})
+Rien pour l’instant ¦ Ei vielä mitään ¦ Egyelőre semmi
+Rien ¦ Ei mitään ¦ Semmi
+Sans titre ¦ Nimetön ¦ Névtelen
+Échap ¦ Esc ¦ Esc
+Entrée ¦ Enter ¦ Enter
+Début ¦ Home ¦ Home
+retour arrière ¦ askelpalautin ¦ backspace
+⚠️ ATTENTION ¦ ⚠️ HUOMIO ¦ ⚠️ FIGYELEM
+CONFIRMER ¦ VAHVISTA ¦ MEGERŐSÍTÉS
+Es-tu sûr ? ¦ Oletko varma? ¦ Biztos vagy benne?
+Confirmer ¦ Vahvista ¦ Megerősítés
+Impossible d’annuler : {err} ¦ Kumoaminen ei onnistu: {err} ¦ Nem sikerült visszavonni: {err}
+Impossible de rétablir : {err} ¦ Uudelleen tekeminen ei onnistu: {err} ¦ Nem sikerült újra végrehajtani: {err}
+Déjà remis : rien à annuler de plus. ¦ Jo palautettu: ei enempää kumottavaa. ¦ Már visszaállítva: nincs több visszavonható.
+↶ Annulé : {what} ¦ ↶ Kumottu: {what} ¦ ↶ Visszavonva: {what}
+↶ Annulé : « {what} » ¦ ↶ Kumottu: ”{what}” ¦ ↶ Visszavonva: „{what}”
+Pas de connexion avec LCNDA : rien n’est perdu, réessaie. ¦ Ei yhteyttä LCNDA:han: mitään ei menetetty, yritä uudelleen. ¦ Nincs kapcsolat az LCNDA-val: semmi sem veszett el, próbáld újra.
+Réponse illisible du serveur ¦ Palvelimen vastaus ei ole luettavissa ¦ Olvashatatlan válasz a szervertől
+Réponse illisible du serveur. ¦ Palvelimen vastaus ei ole luettavissa. ¦ Olvashatatlan válasz a szervertől.
+Erreur du serveur. ¦ Palvelinvirhe. ¦ Szerverhiba.
+Réglage changé ¦ Asetus muutettu ¦ Beállítás módosítva
+Réglage changé : « {what} » ¦ Asetus muutettu: ”{what}” ¦ Beállítás módosítva: „{what}”
+Réglages remis comme au départ ¦ Asetukset palautettu alkuperäisiksi ¦ Beállítások visszaállítva alapra
+Chargement… ¦ Ladataan… ¦ Betöltés…
+Chargement de la base… ¦ Ladataan tietokantaa… ¦ Az adatbázis betöltése…
+Ouverture de la généalogie… ¦ Avataan sukututkimusta… ¦ A családfa megnyitása…
+Chercher ¦ Hae ¦ Keresés
+Chercher… ¦ Hae… ¦ Keresés…
+Rechercher ¦ Etsi ¦ Keresés
+Vider la case (Échap) ¦ Tyhjennä kenttä (Esc) ¦ Mező ürítése (Esc)
+Vider la case ¦ Tyhjennä kenttä ¦ Mező ürítése
+Touche « / » : aller dans la case de recherche ¦ Näppäin ”/”: siirry hakukenttään ¦ „/” billentyű: ugrás a keresőmezőbe
+Filtrer ¦ Suodata ¦ Szűrés
+Filtrer ▾ ¦ Suodata ▾ ¦ Szűrés ▾
+Tout effacer ¦ Tyhjennä kaikki ¦ Összes törlése
+Retirer ce filtre ¦ Poista tämä suodatin ¦ Szűrő eltávolítása
+Trier ¦ Lajittele ¦ Rendezés
+Trier : ¦ Lajittele: ¦ Rendezés:
+Les plus récents ¦ Uusimmat ¦ A legújabbak
+Les plus anciens ¦ Vanhimmat ¦ A legrégebbiek
+Les plus récentes ¦ Uusimmat ¦ A legújabbak
+Les plus anciennes ¦ Vanhimmat ¦ A legrégebbiek
+Nom A → Z ¦ Nimi A → Ö ¦ Név A → Z
+Nom Z → A ¦ Nimi Ö → A ¦ Név Z → A
+Liste ¦ Luettelo ¦ Lista
+Fiches ¦ Kortit ¦ Adatlapok
+En liste : une ligne par élément (vignette, nom, détails, date) ¦ Luettelona: yksi rivi kohdetta kohden (pikkukuva, nimi, tiedot, päivämäärä) ¦ Listaként: elemenként egy sor (bélyegkép, név, részletek, dátum)
+En fiches : une carte par élément, avec une grande vignette ¦ Kortteina: yksi kortti kohdetta kohden, suurella pikkukuvalla ¦ Adatlapokként: elemenként egy kártya, nagy bélyegképpel
+Affichage des {what} ¦ Näkymä: {what} ¦ Megjelenítés: {what}
+Voir le suivant ↓ ¦ Näytä seuraava ↓ ¦ A következő ↓
+Voir la suivante ↓ ¦ Näytä seuraava ↓ ¦ A következő ↓
+Voir les {n} suivants ↓ ¦ Näytä seuraavat {n} ↓ ¦ A következő {n} ↓
+Voir les {n} suivantes ↓ ¦ Näytä seuraavat {n} ↓ ¦ A következő {n} ↓
+{n} éléments ¦ {n} kohdetta ¦ {n} elem
+=élément ¦ kohde|kohdetta ¦ elem|elem
+éléments ¦ kohteet ¦ elemek
+=personne ¦ henkilö|henkilöä ¦ személy|személy
+=animal ¦ eläin|eläintä ¦ állat|állat
+=fiche ¦ kortti|korttia ¦ adatlap|adatlap
+=lieu ¦ paikka|paikkaa ¦ hely|hely
+=commune ¦ kunta|kuntaa ¦ település|település
+=ville ¦ kaupunki|kaupunkia ¦ város|város
+=chose ¦ asia|asiaa ¦ dolog|dolog
+=caractère ¦ merkki|merkkiä ¦ karakter|karakter
+=page ¦ sivu|sivua ¦ oldal|oldal
+=document ¦ asiakirja|asiakirjaa ¦ dokumentum|dokumentum
+=média ¦ media|mediaa ¦ média|média
+=source ¦ lähde|lähdettä ¦ forrás|forrás
+=événement ¦ tapahtuma|tapahtumaa ¦ esemény|esemény
+=étiquette ¦ tunniste|tunnistetta ¦ címke|címke
+=enquête ¦ selvitys|selvitystä ¦ nyomozás|nyomozás
+=modification ¦ muutos|muutosta ¦ módosítás|módosítás
+=famille ¦ perhe|perhettä ¦ család|család
+=génération ¦ sukupolvi|sukupolvea ¦ nemzedék|nemzedék
+=réglage ¦ asetus|asetusta ¦ beállítás|beállítás
+=erreur captée ¦ tallennettu virhe|tallennettua virhettä ¦ rögzített hiba|rögzített hiba
+=jour ¦ päivä|päivää ¦ nap|nap
+=type ¦ tyyppi|tyyppiä ¦ típus|típus
+=branche ¦ haara|haaraa ¦ ág|ág
+=doublon possible ¦ mahdollinen kaksoiskappale|mahdollista kaksoiskappaletta ¦ lehetséges ismétlődés|lehetséges ismétlődés
+=chose à vérifier ¦ tarkistettava asia|tarkistettavaa asiaa ¦ ellenőrizendő dolog|ellenőrizendő dolog
+=album ¦ albumi|albumia ¦ album|album
+=chanson ¦ laulu|laulua ¦ dal|dal
+=titre ¦ kappale|kappaletta ¦ szám|szám
+Nom, prénom… (2 lettres suffisent) ¦ Sukunimi, etunimi… (2 kirjainta riittää) ¦ Név, utónév… (2 betű elég)
+Ville, village, paroisse… ¦ Kaupunki, kylä, seurakunta… ¦ Város, falu, egyházközség…
+＋ Ajouter une personne… ¦ ＋ Lisää henkilö… ¦ ＋ Személy hozzáadása…
+＋ Ajouter un lieu… ¦ ＋ Lisää paikka… ¦ ＋ Hely hozzáadása…
+＋ Ajouter une source… ¦ ＋ Lisää lähde… ¦ ＋ Forrás hozzáadása…
+＋ Ajouter un média… ¦ ＋ Lisää media… ¦ ＋ Média hozzáadása…
+＋ Ajouter une enquête… ¦ ＋ Lisää selvitys… ¦ ＋ Nyomozás hozzáadása…
+＋ Ajouter une étiquette… ¦ ＋ Lisää tunniste… ¦ ＋ Címke hozzáadása…
+＋ Ajouter un événement… ¦ ＋ Lisää tapahtuma… ¦ ＋ Esemény hozzáadása…
+＋ Ajouter un animal… ¦ ＋ Lisää eläin… ¦ ＋ Állat hozzáadása…
+＋ Ajouter… ¦ ＋ Lisää… ¦ ＋ Hozzáadás…
+↗ Fiche ¦ ↗ Kortti ¦ ↗ Adatlap
+↗ Lieu ¦ ↗ Paikka ¦ ↗ Hely
+Aucune fiche ¦ Ei korttia ¦ Nincs adatlap
+Aucun lieu ¦ Ei paikkaa ¦ Nincs hely
+Aucune source ¦ Ei lähdettä ¦ Nincs forrás
+Aucun média ¦ Ei mediaa ¦ Nincs média
+Aucune enquête ¦ Ei selvitystä ¦ Nincs nyomozás
+Aucune étiquette ¦ Ei tunnistetta ¦ Nincs címke
+Aucun événement ¦ Ei tapahtumaa ¦ Nincs esemény
+Aucun animal ¦ Ei eläintä ¦ Nincs állat
+Créer la fiche ¦ Luo kortti ¦ Adatlap létrehozása
+Créer le lieu ¦ Luo paikka ¦ Hely létrehozása
+Créer une fiche ¦ Luo kortti ¦ Adatlap létrehozása
+＋ Créer sa fiche ¦ ＋ Luo hänen korttinsa ¦ ＋ Adatlapjának létrehozása
+👤 Personnes ¦ 👤 Henkilöt ¦ 👤 Személyek
+📍 Lieux ¦ 📍 Paikat ¦ 📍 Helyek
+📚 Sources ¦ 📚 Lähteet ¦ 📚 Források
+🖼 Médias ¦ 🖼 Mediat ¦ 🖼 Média
+🔍 Enquêtes ¦ 🔍 Selvitykset ¦ 🔍 Nyomozások
+🏷 Étiquettes ¦ 🏷 Tunnisteet ¦ 🏷 Címkék
+📅 Événements ¦ 📅 Tapahtumat ¦ 📅 Események
+🐾 Animaux ¦ 🐾 Eläimet ¦ 🐾 Állatok
+✎ Garder le texte « {q} » sans fiche ¦ ✎ Säilytä teksti ”{q}” ilman korttia ¦ ✎ A(z) „{q}” szöveg megtartása adatlap nélkül
+🗺 Choisir sur la carte ¦ 🗺 Valitse kartalta ¦ 🗺 Kiválasztás a térképen
+{what} de ta base ¦ {what} tietokannastasi ¦ {what} az adatbázisodból
+{what} de France ¦ {what} Ranskasta ¦ {what} Franciaországból
+{what} du monde ¦ {what} maailmalta ¦ {what} a világból
+300 villes du monde et plus ¦ Yli 300 maailman kaupunkia ¦ Több mint 300 város a világból
+{what} trouvés ¦ {what} löytyi ¦ {what} találat
+{none} pour « {q} ». Vérifie l’orthographe ¦ {none} haulle ”{q}”. Tarkista oikeinkirjoitus ¦ {none} erre: „{q}”. Ellenőrizd a helyesírást
+{none} pour l’instant ¦ {none} vielä ¦ {none} egyelőre
+, ou : ¦ , tai: ¦ , vagy:
+↹ Tab passe d’un filtre à l’autre ¦ ↹ Tab siirtyy suodattimesta toiseen ¦ ↹ A Tab szűrőről szűrőre lép
+↑ ↓ Entrée ¦ ↑ ↓ Enter ¦ ↑ ↓ Enter
+… la liste défile ¦ … luettelo vierii ¦ … a lista görgethető
+⭐ Personne principale ¦ ⭐ Päähenkilö ¦ ⭐ Fő személy
+Autres personnes principales ¦ Muut päähenkilöt ¦ Többi fő személy
+Personnes principales ¦ Päähenkilöt ¦ Fő személyek
+Personnes secondaires ¦ Sivuhenkilöt ¦ Mellékszemélyek
+au cœur de la recherche ¦ tutkimuksen ytimessä ¦ a kutatás középpontjában
+témoins, voisins, parrains, pistes… ¦ todistajat, naapurit, kummit, johtolangat… ¦ tanúk, szomszédok, keresztszülők, nyomok…
+Choisir la personne principale… ¦ Valitse päähenkilö… ¦ Fő személy kiválasztása…
+＋ Ajouter une personne principale… ¦ ＋ Lisää päähenkilö… ¦ ＋ Fő személy hozzáadása…
+＋ Ajouter une personne secondaire… ¦ ＋ Lisää sivuhenkilö… ¦ ＋ Mellékszemély hozzáadása…
+Changer le rôle ¦ Vaihda rooli ¦ Szerep módosítása
+Donner un rôle (facultatif) ¦ Anna rooli (vapaaehtoinen) ¦ Szerep megadása (nem kötelező)
+rôle ▾ ¦ rooli ▾ ¦ szerep ▾
+Rôle libre ¦ Vapaa rooli ¦ Szabad szerep
+Retirer le rôle ¦ Poista rooli ¦ Szerep eltávolítása
+Passer en secondaire ¦ Siirrä sivuhenkilöksi ¦ Áthelyezés a mellékszemélyekhez
+Passer en principale ¦ Siirrä päähenkilöksi ¦ Áthelyezés a fő személyekhez
+Autre mot… (Entrée) ¦ Muu sana… (Enter) ¦ Más szó… (Enter)
+témoin ¦ todistaja ¦ tanú
+déclarant ¦ ilmoittaja ¦ bejelentő
+parrain ¦ kummisetä ¦ keresztapa
+marraine ¦ kummitäti ¦ keresztanya
+voisin ¦ naapuri ¦ szomszéd
+employeur ¦ työnantaja ¦ munkaadó
+officier ¦ virkamies ¦ tisztviselő
+épouse ¦ vaimo ¦ feleség
+époux ¦ aviomies ¦ férj
+sans fiche ¦ ilman korttia ¦ adatlap nélkül
+Personne sans fiche : clic pour créer sa fiche ¦ Henkilö ilman korttia: napsauta luodaksesi hänen korttinsa ¦ Adatlap nélküli személy: kattints az adatlapja létrehozásához
+Ouvrir la fiche ¦ Avaa kortti ¦ Adatlap megnyitása
+Voir sur la carte ¦ Näytä kartalla ¦ Megtekintés a térképen
+Aucune personne choisie ¦ Ei valittua henkilöä ¦ Nincs kiválasztott személy
+Choisir des personnes ¦ Valitse henkilöitä ¦ Személyek kiválasztása
+Choisir une personne ¦ Valitse henkilö ¦ Személy kiválasztása
+Choisir des lieux ¦ Valitse paikkoja ¦ Helyek kiválasztása
+Choisir un lieu ¦ Valitse paikka ¦ Hely kiválasztása
+Carte : clique l’endroit du lieu ¦ Kartta: napsauta paikan kohtaa ¦ Térkép: kattints a hely pontjára
+Clique l’endroit du lieu sur la carte (glisse pour te déplacer, molette pour zoomer). ¦ Napsauta paikan kohtaa kartalla (vedä liikkuaksesi, rullalla zoomaat). ¦ Kattints a hely pontjára a térképen (húzással mozogsz, görgővel nagyítasz).
+＋ Créer un lieu ici ¦ ＋ Luo paikka tähän ¦ ＋ Hely létrehozása itt
+Nom du lieu ¦ Paikan nimi ¦ A hely neve
+Lieux proches… ¦ Lähellä olevat paikat… ¦ Közeli helyek…
+Aucun lieu connu près d’ici : crée-le ci-dessous. ¦ Lähistöllä ei ole tunnettua paikkaa: luo se alla. ¦ Itt a közelben nincs ismert hely: hozd létre alább.
+Donne un nom au lieu. ¦ Anna paikalle nimi. ¦ Adj nevet a helynek.
+Dézoomer ¦ Loitonna ¦ Kicsinyítés
+Lieu impossible à ajouter ¦ Paikkaa ei voi lisätä ¦ A helyet nem lehet hozzáadni
+Crée d’abord la fiche dans Personnes, puis choisis-la ici. ¦ Luo ensin kortti Henkilöissä ja valitse se sitten täältä. ¦ Előbb hozd létre az adatlapot a Személyekben, aztán válaszd ki itt.
+Crée-la d’abord dans l’outil, puis choisis-la ici. ¦ Luo se ensin työkalussa ja valitse se sitten täältä. ¦ Előbb hozd létre az eszközben, aztán válaszd ki itt.
+Personne ¦ Henkilö ¦ Személy
+Lieu ¦ Paikka ¦ Hely
+À corriger. ¦ Korjattava. ¦ Javítandó.
+<b>{what} à corriger</b> avant d’enregistrer. ¦ <b>{what} korjattavana</b> ennen tallentamista. ¦ Mentés előtt <b>{what} javítandó</b>.
+Coche cette case pour continuer. ¦ Valitse tämä ruutu jatkaaksesi. ¦ Jelöld be ezt a négyzetet a folytatáshoz.
+Choisis une des possibilités. ¦ Valitse yksi vaihtoehdoista. ¦ Válassz egyet a lehetőségek közül.
+Choisis un fichier. ¦ Valitse tiedosto. ¦ Válassz egy fájlt.
+Choisis dans la liste. ¦ Valitse luettelosta. ¦ Válassz a listából.
+Ce champ est à remplir. ¦ Tämä kenttä on täytettävä. ¦ Ezt a mezőt ki kell tölteni.
+Écris un nombre (par exemple 12 ou 3,5). ¦ Kirjoita luku (esimerkiksi 12 tai 3,5). ¦ Írj be egy számot (például 12 vagy 3,5).
+Ce n’est pas compris : vérifie ce qui est écrit. ¦ Tätä ei ymmärretty: tarkista, mitä on kirjoitettu. ¦ Ez nem érthető: ellenőrizd, mi van beírva.
+Écris une adresse e-mail complète (nom@exemple.fr). ¦ Kirjoita täydellinen sähköpostiosoite (nimi@esimerkki.fi). ¦ Írj be egy teljes e-mail-címet (nev@pelda.hu).
+Écris une adresse web complète (https://…). ¦ Kirjoita täydellinen verkko-osoite (https://…). ¦ Írj be egy teljes webcímet (https://…).
+Ce n’est pas au bon format. ¦ Muoto ei ole oikea. ¦ Nem megfelelő a formátum.
+Au moins {x}. ¦ Vähintään {x}. ¦ Legalább {x}.
+Au plus {x}. ¦ Enintään {x}. ¦ Legfeljebb {x}.
+Au moins {x} (là : {y}). ¦ Vähintään {x} (nyt: {y}). ¦ Legalább {x} (most: {y}).
+Cette valeur n’est pas permise ici : prends un nombre rond. ¦ Tämä arvo ei ole sallittu tässä: käytä tasalukua. ¦ Ez az érték itt nem megengedett: adj meg egy kerek számot.
+Donne un nom à ces réglages. ¦ Anna näille asetuksille nimi. ¦ Adj nevet ezeknek a beállításoknak.
+Choisir une couleur ¦ Valitse väri ¦ Szín kiválasztása
+Couleurs de l’app ¦ Sovelluksen värit ¦ Az alkalmazás színei
+Récentes ¦ Viimeisimmät ¦ Legutóbbiak
+Choisir une autre couleur ¦ Valitse toinen väri ¦ Másik szín kiválasztása
+Prendre une couleur n’importe où dans la fenêtre ¦ Poimi väri mistä tahansa ikkunasta ¦ Szín felvétele bárhonnan az ablakból
+Code de la couleur ¦ Värikoodi ¦ Színkód
+Remettre la couleur d’avant ¦ Palauta edellinen väri ¦ Az előző szín visszaállítása
+Double-clic : revenir à la valeur de départ ¦ Kaksoisnapsautus: palaa alkuarvoon ¦ Dupla kattintás: vissza a kiinduló értékre
+Choisir une police ¦ Valitse fontti ¦ Betűtípus kiválasztása
+Chercher une police… ¦ Hae fonttia… ¦ Betűtípus keresése…
+Les polices de l’ordinateur… ¦ Tietokoneen fontit… ¦ A számítógép betűtípusai…
+Aucune police pour « {q} ». ¦ Ei fonttia haulle ”{q}”. ¦ Nincs betűtípus erre: „{q}”.
+Lecture des polices… ¦ Luetaan fontteja… ¦ Betűtípusok beolvasása…
+🔓 Voir toutes les polices de l’ordinateur ¦ 🔓 Näytä kaikki tietokoneen fontit ¦ 🔓 A számítógép összes betűtípusa
+Le navigateur te demandera la permission. ¦ Selain pyytää sinulta lupaa. ¦ A böngésző engedélyt fog kérni.
+CONSEILLÉE ¦ SUOSITELTU ¦ AJÁNLOTT
+RÉCENTE ¦ VIIMEISIN ¦ LEGUTÓBBI
+DE L’APP ¦ SOVELLUKSEN ¦ AZ ALKALMAZÁSÉ
+TAPÉE ¦ KIRJOITETTU ¦ BEGÉPELT
+Réglages enregistrés ¦ Tallennetut asetukset ¦ Mentett beállítások
+Nom de ces réglages ¦ Näiden asetusten nimi ¦ E beállítások neve
+Nom du réglage ¦ Asetuksen nimi ¦ A beállítás neve
+Aucun réglage enregistré pour l’instant. ¦ Ei vielä tallennettuja asetuksia. ¦ Még nincs mentett beállítás.
+＋ Enregistrer les réglages actuels ¦ ＋ Tallenna nykyiset asetukset ¦ ＋ A jelenlegi beállítások mentése
+Un réglage « {name} » existe déjà. ¦ Asetus ”{name}” on jo olemassa. ¦ Már létezik „{name}” nevű beállítás.
+Le remplacer ? ¦ Korvataanko se? ¦ Lecseréled?
+Réglages gardés sous « {name} ». ¦ Asetukset säilytetty nimellä ”{name}”. ¦ Beállítások megőrizve „{name}” néven.
+Remplacer par les réglages actuels ¦ Korvaa nykyisillä asetuksilla ¦ Csere a jelenlegi beállításokra
+Remplacer « {name} » par les réglages actuels ? ¦ Korvataanko ”{name}” nykyisillä asetuksilla? ¦ Lecseréled a(z) „{name}” beállítást a jelenlegiekre?
+Réglage mis à jour. ¦ Asetus päivitetty. ¦ Beállítás frissítve.
+Réglages « {name} » appliqués. ¦ Asetukset ”{name}” otettu käyttöön. ¦ „{name}” beállítások alkalmazva.
+Exporter (fichier .json) ¦ Vie (.json-tiedosto) ¦ Exportálás (.json fájl)
+Remplacer, renommer, dupliquer, exporter, supprimer ¦ Korvaa, nimeä uudelleen, monista, vie, poista ¦ Csere, átnevezés, másolat, exportálás, törlés
+Exporter (PDF, image, impression…) ¦ Vie (PDF, kuva, tulostus…) ¦ Exportálás (PDF, kép, nyomtatás…)
+⤓ Exporter en {fmt} ¦ ⤓ Vie muodossa {fmt} ¦ ⤓ Exportálás {fmt} formátumban
+Nom du fichier ¦ Tiedoston nimi ¦ Fájlnév
+Qualité ¦ Laatu ¦ Minőség
+Fond perdu et traits de coupe (imprimeur) ¦ Leikkuuvara ja leikkausmerkit (painotalo) ¦ Kifutó és vágójelek (nyomda)
+Ranger aussi une copie dans les médias ¦ Tallenna kopio myös mediaan ¦ Másolat elhelyezése a médiában is
+Aperçu ¦ Esikatselu ¦ Előnézet
+Aperçu… ¦ Esikatselu… ¦ Előnézet…
+Pas d’aperçu ¦ Ei esikatselua ¦ Nincs előnézet
+Format du papier ¦ Paperikoko ¦ Papírméret
+Ce qu’on imprime ¦ Mitä tulostetaan ¦ Mit nyomtatunk
+Pages à imprimer ¦ Tulostettavat sivut ¦ Nyomtatandó oldalak
+Celle affichée ¦ Näytetty sivu ¦ A megjelenített
+Page précédente ¦ Edellinen sivu ¦ Előző oldal
+Page suivante ¦ Seuraava sivu ¦ Következő oldal
+Aperçu de l’impression ¦ Tulostuksen esikatselu ¦ Nyomtatási előnézet
+Exemplaires ¦ Kopiot ¦ Példányok
+Portrait ¦ Pysty ¦ Álló
+Paysage ¦ Vaaka ¦ Fekvő
+L’écran affiché ¦ Näytetty näyttö ¦ A megjelenített képernyő
+Dans la fenêtre qui s’ouvre, choisis « Enregistrer au format PDF » comme imprimante. ¦ Valitse avautuvassa ikkunassa tulostimeksi ”Tallenna PDF-muodossa”. ¦ A megnyíló ablakban válaszd nyomtatóként a „Mentés PDF-ként” lehetőséget.
+Dans la fenêtre d’impression, choisis « Enregistrer au format PDF ». ¦ Valitse tulostusikkunassa ”Tallenna PDF-muodossa”. ¦ A nyomtatási ablakban válaszd a „Mentés PDF-ként” lehetőséget.
+IMPORTER · ÉTAPE 1 SUR 3 ¦ TUONTI · VAIHE 1/3 ¦ IMPORTÁLÁS · 1. LÉPÉS / 3
+IMPORTER · ÉTAPE {n} SUR 3 ¦ TUONTI · VAIHE {n}/3 ¦ IMPORTÁLÁS · {n}. LÉPÉS / 3
+📁 Glisse ici le fichier, colle-le (⌘V) ou choisis-le sur l’ordinateur ¦ 📁 Vedä tiedosto tähän, liitä se (⌘V) tai valitse se tietokoneelta ¦ 📁 Húzd ide a fájlt, illeszd be (⌘V), vagy válaszd ki a számítógépről
+📁 Glisse ici les fichiers, colle-les (⌘V) ou choisis-les sur l’ordinateur ¦ 📁 Vedä tiedostot tähän, liitä ne (⌘V) tai valitse ne tietokoneelta ¦ 📁 Húzd ide a fájlokat, illeszd be őket (⌘V), vagy válaszd ki őket a számítógépről
+Lecture du fichier… ¦ Luetaan tiedostoa… ¦ A fájl beolvasása…
+Ce fichier ne peut pas être importé : {err} ¦ Tätä tiedostoa ei voi tuoda: {err} ¦ Ezt a fájlt nem lehet importálni: {err}
+Voilà ce qui va entrer : {sum}. ¦ Tämä tulee sisään: {sum}. ¦ Ez kerül be: {sum}.
+⤒ Importer {what} ¦ ⤒ Tuo {what} ¦ ⤒ Importálás: {what}
+{what} importés. ¦ {what} tuotu. ¦ {what} importálva.
+Import terminé. ¦ Tuonti valmis. ¦ Az importálás kész.
+Impossible d’importer : {err} ¦ Tuonti ei onnistu: {err} ¦ Nem sikerült importálni: {err}
+Importer un fichier ¦ Tuo tiedosto ¦ Fájl importálása
+⤒ Importer un fichier… ¦ ⤒ Tuo tiedosto… ¦ ⤒ Fájl importálása…
+Ce type de fichier n’est pas accepté ici. ¦ Tämäntyyppistä tiedostoa ei hyväksytä tässä. ¦ Ez a fájltípus itt nem elfogadott.
+Il entre dans les médias de l’app et se place dans l’outil. ¦ Se tulee sovelluksen mediaan ja sijoittuu työkaluun. ¦ Bekerül az alkalmazás médiái közé, és elhelyezkedik az eszközben.
+📁 Choisir un fichier ¦ 📁 Valitse tiedosto ¦ 📁 Fájl kiválasztása
+Ce fichier .json est abîmé : il ne peut pas être lu. ¦ Tämä .json-tiedosto on vioittunut: sitä ei voi lukea. ¦ Ez a .json fájl sérült: nem olvasható.
+Ajuster à la fenêtre ¦ Sovita ikkunaan ¦ Igazítás az ablakhoz
+Zoom arrière ¦ Loitonna ¦ Kicsinyítés
+Zoom avant ¦ Lähennä ¦ Nagyítás
+Règles ¦ Viivaimet ¦ Vonalzók
+Règles : montrer ou cacher ¦ Viivaimet: näytä tai piilota ¦ Vonalzók: megjelenítés vagy elrejtés
+Aimanter : les objets se collent aux autres et à la grille (Alt pour s’en passer en glissant) ¦ Magneettikohdistus: objektit tarttuvat toisiinsa ja ruudukkoon (Alt ohittaa sen vetäessä) ¦ Mágneses igazítás: az objektumok a többihez és a rácshoz tapadnak (húzáskor Alt-tal kikapcsolható)
+Les autres façons d’enregistrer ¦ Muut tallennustavat ¦ További mentési módok
+Ranger, montrer ou cacher les boutons ¦ Järjestä, näytä tai piilota painikkeet ¦ A gombok rendezése, megjelenítése vagy elrejtése
+Compris ¦ Ymmärretty ¦ Értelmezve
+Choisir sur un calendrier ¦ Valitse kalenterista ¦ Kiválasztás naptárból
+Durée ¦ Kesto ¦ Időtartam
+aujourd’hui ¦ tänään ¦ ma
+aujourd’hui à {h} ¦ tänään klo {h} ¦ ma, {h}
+hier ¦ eilen ¦ tegnap
+hier à {h} ¦ eilen klo {h} ¦ tegnap, {h}
+{day} à {h} ¦ {day} klo {h} ¦ {day}, {h}
+Modifié ¦ Muokattu ¦ Módosítva
+Créé ¦ Luotu ¦ Létrehozva
+Ajouté ¦ Lisätty ¦ Hozzáadva
+Aucune battue ¦ Ei laajaa hakua ¦ Nincs átfésülés
+Aucune maison ¦ Ei taloa ¦ Nincs ház
+Aucune revue ¦ Ei lehteä ¦ Nincs folyóirat
+Aucun employeur ¦ Ei työnantajaa ¦ Nincs munkaadó
+Aucun recensement ¦ Ei henkikirjaa ¦ Nincs népszámlálás
+🎨 Œuvres ¦ 🎨 Teokset ¦ 🎨 Művek
+Chercher un graphique… (ex. naissances, camembert) ¦ Hae kaaviota… (esim. syntymät, piirakka) ¦ Grafikon keresése… (pl. születések, kördiagram)
+Aucun graphique ¦ Ei kaaviota ¦ Nincs grafikon
+Créer le graphique ¦ Luo kaavio ¦ Grafikon létrehozása
+Nouveau graphique ¦ Uusi kaavio ¦ Új grafikon
+Aucun projet ¦ Ei projektia ¦ Nincs projekt
+Aucun tableau ¦ Ei taulua ¦ Nincs tábla
+Aucune mise en page ¦ Ei taittoa ¦ Nincs tördelés
+📐 Mises en page ¦ 📐 Taitot ¦ 📐 Tördelések
+Aucun diagramme ¦ Ei diagrammia ¦ Nincs diagram
+Aucune carte ¦ Ei karttaa ¦ Nincs térkép
+Aucune transcription ¦ Ei litterointia ¦ Nincs átírás
+Aucune carte de photos ¦ Ei valokuvakarttaa ¦ Nincs fényképtérkép
+Aucun classeur ¦ Ei työkirjaa ¦ Nincs munkafüzet
+Aucun document ¦ Ei asiakirjaa ¦ Nincs dokumentum
+Aucune parcelle ¦ Ei palstaa ¦ Nincs telek
+Nom de l’objet, sorte… (2 lettres suffisent) ¦ Esineen nimi, laji… (2 kirjainta riittää) ¦ A tárgy neve, fajtája… (2 betű elég)
+Aucun objet de famille ¦ Ei perheen esinettä ¦ Nincs családi tárgy
+Nom du défunt, notaire, année… (2 lettres suffisent) ¦ Vainajan nimi, notaari, vuosi… (2 kirjainta riittää) ¦ Az elhunyt neve, közjegyző, év… (2 betű elég)
+Aucun inventaire après décès ¦ Ei perukirjaa ¦ Nincs hagyatéki leltár
+⚖️ Inventaires après décès ¦ ⚖️ Perukirjat ¦ ⚖️ Hagyatéki leltárak
+Nom, espèce, code de bague, puce… (2 lettres suffisent) ¦ Nimi, laji, renkaan koodi, siru… (2 kirjainta riittää) ¦ Név, faj, gyűrűkód, chip… (2 betű elég)
+Nom du site… (2 lettres suffisent) ¦ Kohteen nimi… (2 kirjainta riittää) ¦ A helyszín neve… (2 betű elég)
+Aucun site ¦ Ei kohdetta ¦ Nincs helyszín
+Nom du groupe, de la meute… (2 lettres suffisent) ¦ Ryhmän, lauman nimi… (2 kirjainta riittää) ¦ A csoport, a falka neve… (2 betű elég)
+Aucun groupe ¦ Ei ryhmää ¦ Nincs csoport
+👥 Groupes d’animaux ¦ 👥 Eläinryhmät ¦ 👥 Állatcsoportok
+Maladie, cause de décès… (2 lettres suffisent) ¦ Sairaus, kuolinsyy… (2 kirjainta riittää) ¦ Betegség, halálok… (2 betű elég)
+＋ Choisir une maladie… ¦ ＋ Valitse sairaus… ¦ ＋ Betegség kiválasztása…
+Aucune maladie notée ¦ Ei merkittyä sairautta ¦ Nincs feljegyzett betegség
+🩺 Santé ¦ 🩺 Terveys ¦ 🩺 Egészség
+Chercher une de mes cartes… ¦ Hae yhtä karttaani… ¦ Egy térképem keresése…
+＋ Choisir une carte… ¦ ＋ Valitse kartta… ¦ ＋ Térkép kiválasztása…
+Nom de la branche… ¦ Haaran nimi… ¦ Az ág neve…
+＋ Choisir une branche… ¦ ＋ Valitse haara… ¦ ＋ Ág kiválasztása…
+Aucune branche ¦ Ei haaraa ¦ Nincs ág
+Nom d’une de mes couches… ¦ Yhden kerrokseni nimi… ¦ Egy rétegem neve…
+＋ Choisir une couche… ¦ ＋ Valitse kerros… ¦ ＋ Réteg kiválasztása…
+Aucune couche dessinée ¦ Ei piirrettyä kerrosta ¦ Nincs rajzolt réteg
+Commune, cote, année… (2 lettres suffisent) ¦ Kunta, arkistotunnus, vuosi… (2 kirjainta riittää) ¦ Település, jelzet, év… (2 betű elég)
+🔗 Relier un dépouillement… ¦ 🔗 Yhdistä indeksointi… ¦ 🔗 Feldolgozás összekapcsolása…
+Aucun dépouillement ¦ Ei indeksointia ¦ Nincs feldolgozás
+Nom, prénom d’un contact… (2 lettres suffisent) ¦ Yhteyshenkilön sukunimi, etunimi… (2 kirjainta riittää) ¦ Egy kapcsolattartó neve, utóneve… (2 betű elég)
+Aucun contact ¦ Ei yhteyshenkilöä ¦ Nincs kapcsolattartó
+Chercher une de mes listes… ¦ Hae yhtä luetteloani… ¦ Egy listám keresése…
+Aucune liste ¦ Ei luetteloa ¦ Nincs lista
+Événement, personne, année… (2 lettres suffisent) ¦ Tapahtuma, henkilö, vuosi… (2 kirjainta riittää) ¦ Esemény, személy, év… (2 betű elég)
+Aucun service d’archives ¦ Ei arkistolaitosta ¦ Nincs levéltár
+Créer le service ¦ Luo arkistolaitos ¦ Levéltár létrehozása
+🏛 Services d’archives ¦ 🏛 Arkistolaitokset ¦ 🏛 Levéltárak
+Source, page, nom de la personne citée… ¦ Lähde, sivu, mainitun henkilön nimi… ¦ Forrás, oldal, az idézett személy neve…
+＋ Choisir une citation… ¦ ＋ Valitse viite… ¦ ＋ Hivatkozás kiválasztása…
+Aucune citation ¦ Ei viitettä ¦ Nincs hivatkozás
+— une seule ¦ — vain yksi ¦ — csak egy
+＋ Ajouter une maison… ¦ ＋ Lisää talo… ¦ ＋ Ház hozzáadása…
+＋ Ajouter une fiche… ¦ ＋ Lisää kortti… ¦ ＋ Adatlap hozzáadása…
+＋ Ajouter un document… ¦ ＋ Lisää asiakirja… ¦ ＋ Dokumentum hozzáadása…
+＋ Ajouter une carte… ¦ ＋ Lisää kartta… ¦ ＋ Térkép hozzáadása…
+＋ Ajouter un groupe… ¦ ＋ Lisää ryhmä… ¦ ＋ Csoport hozzáadása…
+＋ Ajouter un contact… ¦ ＋ Lisää yhteyshenkilö… ¦ ＋ Kapcsolattartó hozzáadása…
+＋ Ajouter une liste… ¦ ＋ Lisää luettelo… ¦ ＋ Lista hozzáadása…
+Ce réglage prend ce qui est à l’écran maintenant. ¦ Tämä asetus ottaa sen, mitä näytöllä on nyt. ¦ Ez a beállítás azt veszi át, ami most a képernyőn van.
+L’ancienne version de ce réglage ne sera plus gardée. ¦ Tämän asetuksen vanhaa versiota ei enää säilytetä. ¦ A beállítás régi változata nem marad meg.
+Le nom devient modifiable sur la ligne. ¦ Nimeä voi muokata rivillä. ¦ A név a sorban szerkeszthetővé válik.
+Une copie, à modifier sans toucher à l’original. ¦ Kopio, jota voi muokata koskematta alkuperäiseen. ¦ Egy másolat, amely az eredeti érintése nélkül módosítható.
+Pour le garder, ou l’ouvrir sur un autre ordinateur. ¦ Säilyttääksesi sen tai avataksesi sen toisella tietokoneella. ¦ Hogy megőrizd, vagy egy másik számítógépen megnyisd.
+On peut encore l’annuler juste après. ¦ Sen voi vielä kumota heti jälkeenpäin. ¦ Közvetlenül utána még visszavonható.
+Un fichier lcnda-reglage-….json exporté ici ou sur un autre ordinateur ¦ Tiedosto lcnda-reglage-….json, joka on viety täällä tai toisella tietokoneella ¦ Egy lcnda-reglage-….json fájl, amelyet itt vagy egy másik számítógépen exportáltak
+Ce navigateur ne donne pas la liste des polices : voici les polices courantes trouvées sur l’ordinateur. Pour une autre, tape son nom exact. ¦ Tämä selain ei anna fonttiluetteloa: tässä ovat tietokoneelta löytyneet yleiset fontit. Jos haluat toisen, kirjoita sen tarkka nimi. ¦ Ez a böngésző nem adja meg a betűtípusok listáját: itt vannak a számítógépen talált gyakori betűtípusok. Másikhoz írd be a pontos nevét.
+La liste des polices n’a pas pu être lue. Réessaie. ¦ Fonttiluetteloa ei voitu lukea. Yritä uudelleen. ¦ A betűtípusok listáját nem sikerült beolvasni. Próbáld újra.
+Un autre format de la liste, ou un format libre (gardé dans « Mes formats ») ¦ Luettelon toinen muoto tai vapaa muoto (säilytetään kohdassa ”Omat muodot”) ¦ A lista egy másik formátuma, vagy szabad formátum (a „Saját formátumaim” között marad)
+Un exemplaire au moins. ¦ Vähintään yksi kopio. ¦ Legalább egy példány.
+{n} exemplaires au plus. ¦ Enintään {n} kopiota. ¦ Legfeljebb {n} példány.

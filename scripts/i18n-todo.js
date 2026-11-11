@@ -7,15 +7,18 @@
  *   node scripts/i18n-todo.js sk,nb cadre       pour le slovaque et le norvégien : en plus, le tchèque (aide pour sk) et le danois
  *                                               (aide pour nb), langues très proches (clé ⇥ en ⇥ de ⇥ cs ⇥ da)
  *   node scripts/i18n-todo.js ro cadre          pour le roumain : en plus, l'italien (langue romane proche) en aide
+ *   node scripts/i18n-todo.js fi,hu cadre       pour le finnois et le hongrois : en plus, le suédois (aide pour fi) et l'allemand
+ *                                               (déjà là, aide pour hu)
  *   node scripts/i18n-todo.js cs all            le nombre de textes à traduire, zone par zone (les plus petites d'abord)
  *   options : --json (sortie JSON), --skeleton (lignes « clé ¦ ¦ ¦ » prêtes à remplir pour nord/<zone>.tsv),
  *             --limit N (les N premières seulement)
  *
  * Les traductions de cs, sv, da s'écrivent dans assets/i18n/src/nord/<zone>.tsv (1re ligne « fr ¦ cs ¦ sv ¦ da »), celles de
  * sk, nb dans assets/i18n/src/nord2/<zone>.tsv (1re ligne « fr ¦ sk ¦ nb »), celles de ro dans assets/i18n/src/nord3/<zone>.tsv
- * (1re ligne « fr ¦ ro »), avec la même clé que dans <zone>.tsv :
+ * (1re ligne « fr ¦ ro »), celles de fi, hu dans assets/i18n/src/nord4/<zone>.tsv (1re ligne « fr ¦ fi ¦ hu »), avec la même clé que dans <zone>.tsv :
  * « ctx|Texte » et « =mot » (pluriel) compris. Pluriels : cs et sk = 3 formes « 1 | 2 à 4 | 5 et plus » (osoba|osoby|osob),
- * sv, da, nb = 2 formes (person|personer), ro = 3 formes « 1 | 0 et 2 à 19 | 20 et plus » (persoană|persoane|de persoane). Puis :
+ * sv, da, nb = 2 formes (person|personer), ro = 3 formes « 1 | 0 et 2 à 19 | 20 et plus » (persoană|persoane|de persoane),
+ * fi = 2 formes (henkilö|henkilöä), hu = 2 formes souvent identiques (személy|személy : singulier après un nombre). Puis :
  *   node scripts/i18n-build.js && node scripts/i18n-check.js      (0 erreur ; les textes encore manquants sont comptés)
  * Une clé présente dans plusieurs zones n'est à traduire qu'une fois (elle compte comme faite partout).
  */
@@ -23,9 +26,9 @@
 const fs = require('fs');
 const path = require('path');
 const {readSources, dirOf, LANGS, NEW_LANGS, SRC} = require('./i18n-build.js');
-const NEAR = {sk: 'cs', nb: 'da', ro: 'it'}; // une langue très proche, déjà traduite : en aide à côté de l'anglais et de l'allemand
+const NEAR = {sk: 'cs', nb: 'da', ro: 'it', fi: 'sv', hu: 'de'}; // une langue très proche (ou voisine), déjà traduite : en aide à côté de l'anglais et de l'allemand (hu : l'allemand, déjà là)
 
-const near = list => [...new Set(list.map(c => NEAR[c]).filter(Boolean))];
+const near = list => [...new Set(list.map(c => NEAR[c]).filter(c => c && c !== 'en' && c !== 'de'))]; // l'anglais et l'allemand sont déjà là
 function todo(codes, zone) {
     const list = String(codes || '').split(',').map(s => s.trim()).filter(Boolean);
     const bad = list.filter(c => !LANGS.includes(c));

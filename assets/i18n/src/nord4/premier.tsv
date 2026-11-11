@@ -1,0 +1,111 @@
+fr ¦ fi ¦ hu
+# ═════ zone « premier » : finnois (fi) et hongrois (hu) — écran du premier lancement, visite guidée, signaler un problème ═════
+INSTALLATION ¦ ASENNUS ¦ TELEPÍTÉS
+La base généalogique doit être importée. ¦ Sukututkimustietokanta on tuotava. ¦ A családfa-adatbázist importálni kell.
+Choisis comment démarrer : importer un fichier existant, ou créer une première personne pour partir d'une base vide. ¦ Valitse, miten aloitat: tuo olemassa oleva tiedosto tai luo ensimmäinen henkilö aloittaaksesi tyhjästä tietokannasta. ¦ Válaszd ki, hogyan kezdesz: importálj egy meglévő fájlt, vagy hozz létre egy első személyt, és indulj üres adatbázisból.
+GEDCOM (.ged, aussi d’Ancestry, MyHeritage, Geneanet), Gramps (.gramps ou paquet .gpkg avec les photos), Hérédis (.hmw ou .heredis), MacFamilyTree (.mftpkg), base LCNDA (.db) ou sauvegarde complète LCNDA (.zip, base + médias). Les fichiers JSON et CSV sont analysés mais pas encore importés. ¦ GEDCOM (.ged, myös Ancestrystä, MyHeritagesta, Geneanetista), Gramps (.gramps tai .gpkg-paketti kuvineen), Hérédis (.hmw tai .heredis), MacFamilyTree (.mftpkg), LCNDA-tietokanta (.db) tai LCNDA:n täydellinen varmuuskopio (.zip, tietokanta + mediat). JSON- ja CSV-tiedostot analysoidaan, mutta niitä ei vielä tuoda. ¦ GEDCOM (.ged, az Ancestry, a MyHeritage és a Geneanet fájljai is), Gramps (.gramps vagy .gpkg csomag a fényképekkel), Hérédis (.hmw vagy .heredis), MacFamilyTree (.mftpkg), LCNDA-adatbázis (.db) vagy teljes LCNDA biztonsági mentés (.zip, adatbázis + média). A JSON- és CSV-fájlokat elemzi, de még nem importálja.
+Fichier ¦ Tiedosto ¦ Fájl
+Créer une première personne ¦ Luo ensimmäinen henkilö ¦ Első személy létrehozása
+Initialise une base vide avec une première fiche, à compléter ensuite. ¦ Alustaa tyhjän tietokannan ensimmäisellä kortilla, jota täydennät myöhemmin. ¦ Üres adatbázist hoz létre egy első adatlappal, amelyet később kiegészítesz.
+Prénom ¦ Etunimi ¦ Utónév
+Nom ¦ Sukunimi ¦ Családnév
+Créer et ouvrir la base ¦ Luo ja avaa tietokanta ¦ Adatbázis létrehozása és megnyitása
+Je veux faire autre chose ▾ ¦ Haluan tehdä jotain muuta ▾ ¦ Valami mást szeretnék ▾
+▴ Replier ¦ ▴ Kutista ¦ ▴ Összecsukás
+Qu’est-ce que tu veux faire avec l’app ? ¦ Mitä haluat tehdä sovelluksella? ¦ Mit szeretnél csinálni az alkalmazással?
+Choisis ce qui te ressemble : l’app s’ouvre avec les bons onglets et le bon premier écran. Tu pourras tout changer après. ¦ Valitse se, mikä sopii sinulle: sovellus avautuu oikeilla välilehdillä ja oikealla aloitusnäytöllä. Voit muuttaa kaiken myöhemmin. ¦ Válaszd azt, ami illik hozzád: az alkalmazás a megfelelő lapokkal és kezdőképernyővel nyílik meg. Később mindent megváltoztathatsz.
+Ta famille, tes ancêtres, leurs actes et leurs photos. ¦ Perheesi, esivanhempasi, heidän asiakirjansa ja valokuvansa. ¦ A családod, az őseid, az irataik és a fényképeik.
+Une lignée d’animaux ¦ Eläinten sukulinja ¦ Egy állatvonal
+Un élevage, le pedigree de tes chiens, chats, chevaux… ¦ Kasvattamo, koiriesi, kissojesi, hevostesi… sukutaulu ¦ Egy tenyészet, a kutyáid, macskáid, lovaid… származási lapja
+Recenser des animaux ¦ Eläinten laskenta ¦ Állatok számbavétele
+Suivre des animaux : baguage, puces, observations, trajets. ¦ Seuraa eläimiä: rengastus, sirut, havainnot, reitit. ¦ Állatok követése: gyűrűzés, chipek, megfigyelések, útvonalak.
+L’histoire d’une maison ou d’un village ¦ Talon tai kylän historia ¦ Egy ház vagy falu története
+Maison ou village ¦ Talo tai kylä ¦ Ház vagy falu
+Qui a vécu où, de génération en génération, pièce par pièce. ¦ Kuka asui missä, sukupolvesta toiseen, huone huoneelta. ¦ Ki hol élt, nemzedékről nemzedékre, szobáról szobára.
+Le catalogue d’un artiste ou d’une collection ¦ Taiteilijan tai kokoelman luettelo ¦ Egy művész vagy gyűjtemény katalógusa
+Artiste ou collection ¦ Taiteilija tai kokoelma ¦ Művész vagy gyűjtemény
+Ses œuvres, ses expositions, son catalogue raisonné. ¦ Teokset, näyttelyt, kriittinen teosluettelo. ¦ Művei, kiállításai, oeuvre-katalógusa.
+Un fonds d’archives ou un musée familial ¦ Arkisto tai perhemuseo ¦ Egy levéltári gyűjtemény vagy családi múzeum
+Archives ou musée ¦ Arkisto tai museo ¦ Levéltár vagy múzeum
+Des photos, des lettres, des objets à classer et à décrire. ¦ Valokuvia, kirjeitä ja esineitä luokiteltaviksi ja kuvailtaviksi. ¦ Fényképek, levelek, tárgyak, amelyeket rendezni és leírni kell.
+L’étude d’un nom de famille ¦ Sukunimen tutkimus ¦ Egy családnév kutatása
+Un nom de famille ¦ Sukunimi ¦ Egy családnév
+Tous les porteurs d’un nom, ses variantes, d’où ils viennent. ¦ Nimen kaikki kantajat, sen muunnelmat, mistä he tulevat. ¦ A név összes viselője, változatai, honnan származnak.
+L’histoire d’une entreprise ou d’une association ¦ Yrityksen tai yhdistyksen historia ¦ Egy cég vagy egyesület története
+Entreprise ou association ¦ Yritys tai yhdistys ¦ Cég vagy egyesület
+Ses lieux, ses dirigeants, ses salariés ou ses membres. ¦ Sen paikat, johtajat, työntekijät tai jäsenet. ¦ A helyszínei, vezetői, alkalmazottai vagy tagjai.
+Transmettre des souvenirs ¦ Muistojen välittäminen ¦ Emlékek továbbadása
+Des lettres à ouvrir plus tard, des recettes, des chansons, des souvenirs à laisser. ¦ Myöhemmin avattavia kirjeitä, reseptejä, lauluja, jälkeen jätettäviä muistoja. ¦ Később felbontandó levelek, receptek, dalok, hátrahagyandó emlékek.
+Ce qui change ¦ Mikä muuttuu ¦ Mi változik
+Commencer avec une base vide ¦ Aloita tyhjällä tietokannalla ¦ Kezdés üres adatbázissal
+🧪 Essayer avec une base d’exemple ¦ 🧪 Kokeile esimerkkitietokannalla ¦ 🧪 Kipróbálás egy minta-adatbázissal
+🧪 Base d’exemple ¦ 🧪 Esimerkkitietokanta ¦ 🧪 Minta-adatbázis
+Une famille imaginaire pour essayer l’app : ta généalogie n’est pas touchée. ¦ Kuvitteellinen perhe sovelluksen kokeilemiseen: sukututkimukseesi ei kosketa. ¦ Egy kitalált család az alkalmazás kipróbálásához: a családfádhoz nem nyúl.
+Revenir à ma généalogie ¦ Palaa omaan sukututkimukseeni ¦ Vissza a saját családfámhoz
+Repartir d’une base vide ¦ Aloita uudelleen tyhjästä tietokannasta ¦ Újrakezdés üres adatbázissal
+Ou bien : ¦ Tai: ¦ Vagy:
+🐾 Créer le premier animal ¦ 🐾 Luo ensimmäinen eläin ¦ 🐾 Első állat létrehozása
+Créer le premier animal ¦ Luo ensimmäinen eläin ¦ Első állat létrehozása
+Espèce ¦ Laji ¦ Faj
+Création de la base… ¦ Luodaan tietokantaa… ¦ Adatbázis létrehozása…
+Préparation de la base d’exemple… ¦ Valmistellaan esimerkkitietokantaa… ¦ A minta-adatbázis előkészítése…
+✓ Base créée ¦ ✓ Tietokanta luotu ¦ ✓ Adatbázis létrehozva
+ℹ️ Rien n’est figé : Réglages → Apparence → « 🧭 Usage de l’app ». ¦ ℹ️ Mikään ei ole lopullista: Asetukset → Ulkoasu → ”🧭 Sovelluksen käyttö”. ¦ ℹ️ Semmi sem végleges: Beállítások → Megjelenés → „🧭 Az alkalmazás használata”.
+🧭 Usage de l’app ¦ 🧭 Sovelluksen käyttö ¦ 🧭 Az alkalmazás használata
+🧭 Revoir le premier lancement ¦ 🧭 Katso ensimmäinen käynnistys uudelleen ¦ 🧭 Az első indítás újra
+Premier écran à l’ouverture ¦ Ensimmäinen näyttö avattaessa ¦ Első képernyő megnyitáskor
+Le dernier écran ouvert (comme avant) ¦ Viimeksi avattu näyttö (kuten ennen) ¦ Az utoljára megnyitott képernyő (mint korábban)
+Usage enregistré. ¦ Käyttö tallennettu. ¦ Használat mentve.
+(la page va se recharger) ¦ (sivu latautuu uudelleen) ¦ (az oldal újratöltődik)
+Langue · Language ¦ Kieli · Language ¦ Nyelv · Language
+Une petite visite ? ¦ Pieni esittely? ¦ Egy kis bemutató?
+En {n} étapes, l’app te montre où créer une fiche, ajouter un parent, une photo, un événement, faire une sauvegarde et trouver l’aide. Ça prend deux minutes. ¦ {n} vaiheessa sovellus näyttää, missä luot kortin, lisäät vanhemman, valokuvan tai tapahtuman, teet varmuuskopion ja löydät ohjeet. Se vie kaksi minuuttia. ¦ {n} lépésben az alkalmazás megmutatja, hol hozol létre adatlapot, adsz hozzá szülőt, fényképet, eseményt, hol készítesz biztonsági mentést és hol találod a súgót. Két percet vesz igénybe.
+▶ Commencer ¦ ▶ Aloita ¦ ▶ Kezdés
+Plus tard ¦ Myöhemmin ¦ Később
+Ne plus proposer ¦ Älä ehdota enää ¦ Ne ajánld fel többet
+Passer la visite ¦ Ohita esittely ¦ Bemutató kihagyása
+← Précédent ¦ ← Edellinen ¦ ← Előző
+Suivant → ¦ Seuraava → ¦ Következő →
+✓ Terminer ¦ ✓ Valmis ¦ ✓ Befejezés
+Étape {i} sur {n} ¦ Vaihe {i}/{n} ¦ {i}. lépés / {n}
+Visite guidée, étape {i} sur {n} : {what} ¦ Esittely, vaihe {i}/{n}: {what} ¦ Bemutató, {i}. lépés / {n}: {what}
+Tu peux cliquer le bouton entouré pour le faire pour de vrai, ou juste avancer. ¦ Voit napsauttaa ympäröityä painiketta ja tehdä sen oikeasti, tai vain jatkaa eteenpäin. ¦ Kattinthatsz a bekeretezett gombra, hogy tényleg megcsináld, vagy egyszerűen továbbléphetsz.
+Ajouter un parent ¦ Lisää vanhempi ¦ Szülő hozzáadása
+Ajouter une photo ¦ Lisää valokuva ¦ Fénykép hozzáadása
+Un événement et son lieu ¦ Tapahtuma ja sen paikka ¦ Egy esemény és a helye
+Faire une sauvegarde ¦ Tee varmuuskopio ¦ Biztonsági mentés készítése
+Les Réglages et l’aide ¦ Asetukset ja ohje ¦ A Beállítások és a súgó
+Chaque personne a sa fiche. Ce bouton en crée une : un prénom, un nom, et c’est parti. ¦ Jokaisella henkilöllä on oma kortti. Tämä painike luo sellaisen: etunimi, sukunimi, ja vauhtiin. ¦ Minden személynek saját adatlapja van. Ez a gomb létrehoz egyet: egy utónév, egy családnév, és indulhatsz.
+Sur une fiche, le « ＋ » de « Parents » relie un père ou une mère : choisis une fiche qui existe, ou crée-la. C’est comme ça que l’arbre se construit. ¦ Kortilla ”Vanhemmat”-kohdan ”＋” yhdistää isän tai äidin: valitse olemassa oleva kortti tai luo se. Näin puu rakentuu. ¦ Az adatlapon a „Szülők” „＋” jele összekapcsol egy apát vagy anyát: válassz egy meglévő adatlapot, vagy hozd létre. Így épül fel a fa.
+Ici, tu ajoutes des photos et des actes à la fiche : prends-les dans tes médias, ou glisse-les depuis l’ordinateur. ¦ Täällä lisäät kortille valokuvia ja asiakirjoja: ota ne mediastasi tai vedä ne tietokoneelta. ¦ Itt adhatsz fényképeket és iratokat az adatlaphoz: vedd őket a médiáid közül, vagy húzd be a számítógépről.
+Naissance, mariage, décès… Ajoute un événement avec sa date et son lieu : tape les premières lettres de la commune, l’app la trouve. ¦ Syntymä, avioliitto, kuolema… Lisää tapahtuma päivämäärineen ja paikkoineen: kirjoita kunnan ensimmäiset kirjaimet, sovellus löytää sen. ¦ Születés, házasság, halál… Adj hozzá egy eseményt a dátumával és a helyével: írd be a település első betűit, az alkalmazás megtalálja.
+De temps en temps, fais une sauvegarde : ce fichier garde toute ta généalogie et tes photos. Range-le sur une clé USB ou un autre disque. ¦ Tee aika ajoin varmuuskopio: tämä tiedosto säilyttää koko sukututkimuksesi ja valokuvasi. Tallenna se USB-tikulle tai toiselle levylle. ¦ Időnként készíts biztonsági mentést: ez a fájl a teljes családfádat és a fényképeidet megőrzi. Tedd el egy pendrive-ra vagy egy másik lemezre.
+Tout se règle ici : apparence, import, sauvegardes… Dans les Réglages, la page « FAQ / tuto » répond à tes questions ; tu peux aussi y relancer cette visite. ¦ Kaikki säädetään täällä: ulkoasu, tuonti, varmuuskopiot… Asetuksissa sivu ”UKK / ohje” vastaa kysymyksiisi; voit myös käynnistää tämän esittelyn sieltä uudelleen. ¦ Itt minden beállítható: megjelenés, importálás, biztonsági mentések… A Beállításokban a „GYIK / útmutató” oldal válaszol a kérdéseidre; ott ezt a bemutatót is újraindíthatod.
+✓ Visite terminée. Pour la revoir : Réglages → FAQ / tuto → « ▶ Relancer la visite guidée ». ¦ ✓ Esittely valmis. Katso se uudelleen: Asetukset → UKK / ohje → ”▶ Käynnistä esittely uudelleen”. ¦ ✓ A bemutató véget ért. Újra megnézheted: Beállítások → GYIK / útmutató → „▶ A bemutató újraindítása”.
+Visite guidée fermée. Tu la retrouves dans Réglages → FAQ / tuto. ¦ Esittely suljettu. Löydät sen kohdasta Asetukset → UKK / ohje. ¦ Bemutató bezárva. Megtalálod itt: Beállítások → GYIK / útmutató.
+Une petite visite guidée de l’app est proposée. Commencer, plus tard, ou ne plus proposer. ¦ Tarjolla on pieni esittely sovelluksesta. Aloita, myöhemmin tai älä ehdota enää. ¦ Egy kis bemutatót ajánlunk az alkalmazásról. Kezdés, később, vagy ne ajánld fel többet.
+Rien à montrer sur cet écran pour l’instant. ¦ Tällä näytöllä ei ole vielä mitään näytettävää. ¦ Ezen a képernyőn egyelőre nincs mit megmutatni.
+Pas de visite guidée en mode consultation. ¦ Ei esittelyä selaustilassa. ¦ Megtekintő módban nincs bemutató.
+La visite guidée n’est pas possible ici. ¦ Esittely ei ole mahdollinen täällä. ¦ A bemutató itt nem lehetséges.
+🐞 Signaler un problème ¦ 🐞 Ilmoita ongelmasta ¦ 🐞 Probléma bejelentése
+AIDE ¦ OHJE ¦ SÚGÓ
+Ce qui s’est passé ¦ Mitä tapahtui ¦ Mi történt
+Ce que j’attendais ¦ Mitä odotin ¦ Mire számítottam
+Écris avec tes mots. Évite les noms de ta famille si tu ne veux pas qu’ils soient lus. ¦ Kirjoita omin sanoin. Vältä sukusi nimiä, jos et halua niitä luettavan. ¦ Írd le a saját szavaiddal. Kerüld a családod neveit, ha nem szeretnéd, hogy elolvassák őket.
+Joindre le rapport technique ¦ Liitä tekninen raportti ¦ Technikai jelentés csatolása
+Joindre le rapport technique ({x}) ¦ Liitä tekninen raportti ({x}) ¦ Technikai jelentés csatolása ({x})
+aucune erreur captée ¦ virheitä ei tallentunut ¦ nem rögzült hiba
+Rapport technique ¦ Tekninen raportti ¦ Technikai jelentés
+🗑 Vider le journal ¦ 🗑 Tyhjennä loki ¦ 🗑 Napló ürítése
+Vider le journal des erreurs captées sur cet ordinateur ¦ Tyhjennä tällä tietokoneella tallentuneiden virheiden loki ¦ Az ezen a számítógépen rögzített hibák naplójának ürítése
+✉️ Écrire un e-mail ¦ ✉️ Kirjoita sähköposti ¦ ✉️ E-mail írása
+Ouvrir une demande sur GitHub ¦ Avaa pyyntö GitHubissa ¦ Bejelentés nyitása a GitHubon
+Journal des erreurs vidé ¦ Virheloki tyhjennetty ¦ Hibanapló kiürítve
+✓ Message copié : colle-le où tu veux (e-mail, forum, GitHub). ¦ ✓ Viesti kopioitu: liitä se minne haluat (sähköposti, foorumi, GitHub). ¦ ✓ Üzenet másolva: illeszd be, ahová szeretnéd (e-mail, fórum, GitHub).
+La copie n’a pas marché : sélectionne le texte et copie-le à la main. ¦ Kopiointi ei onnistunut: valitse teksti ja kopioi se käsin. ¦ A másolás nem sikerült: jelöld ki a szöveget, és másold ki kézzel.
+Dis en quelques mots ce qui s’est passé. ¦ Kerro muutamalla sanalla, mitä tapahtui. ¦ Mondd el néhány szóban, mi történt.
+Ex. : j’ai cliqué sur « Enregistrer » dans la fiche, et la fenêtre est restée grise. ¦ Esim.: napsautin ”Tallenna” kortilla, ja ikkuna jäi harmaaksi. ¦ Pl.: rákattintottam a „Mentés” gombra az adatlapon, és az ablak szürke maradt.
+Ex. : que la fiche soit enregistrée et que la fenêtre se ferme. ¦ Esim.: että kortti tallentuu ja ikkuna sulkeutuu. ¦ Pl.: hogy az adatlap elmentődjön, és az ablak bezáruljon.
+Pour écrire un e-mail plutôt qu’ouvrir une demande sur GitHub : règle une adresse dans Réglages → « 🔄 Mises à jour ». ¦ Jos haluat kirjoittaa sähköpostin GitHub-pyynnön sijaan: aseta osoite kohdassa Asetukset → ”🔄 Päivitykset”. ¦ Ha GitHub-bejelentés helyett e-mailt írnál: állíts be egy címet itt: Beállítások → „🔄 Frissítések”.
+La base d’exemple est une famille imaginaire (5 générations, des photos d’époque dessinées) rangée à part dans « Mes généalogies » : ta généalogie n’est jamais touchée. ¦ Esimerkkitietokanta on kuvitteellinen perhe (5 sukupolvea, piirrettyjä aikakauden valokuvia), joka säilytetään erikseen kohdassa ”Omat sukututkimukset”: sukututkimukseesi ei koskaan kosketa. ¦ A minta-adatbázis egy kitalált család (5 nemzedék, rajzolt korabeli fényképek), külön tárolva a „Családfáim” között: a saját családfádhoz soha nem nyúl.
+Aucun fichier choisi ¦ Ei valittua tiedostoa ¦ Nincs kiválasztott fájl

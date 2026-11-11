@@ -1,0 +1,238 @@
+fr ¦ fi ¦ hu
+# ═════ zone « reste4 » : finnois (fi) et hongrois (hu) — Calendrier / mesures, grille d’icônes ═════
+Mesures anciennes par région ¦ Vanhat mitat alueittain ¦ Régi mértékegységek régiónként
+Les mesures changeaient d’une province, parfois d’un village à l’autre. Choisis la région, la valeur et l’unité : l’app donne l’équivalent en mètres, ares ou litres, et dans les autres mesures du lieu. ¦ Mitat vaihtelivat maakunnasta toiseen, joskus kylästä toiseen. Valitse alue, arvo ja yksikkö: sovellus antaa vastineen metreinä, aareina tai litroina sekä paikan muina mittoina. ¦ A mértékegységek tartományonként, néha falunként változtak. Válaszd ki a régiót, az értéket és a mértékegységet: az alkalmazás megadja a megfelelőjét méterben, árban vagy literben, és a hely többi mértékegységében.
+Région / ville ¦ Alue / kaupunki ¦ Régió / város
+Entre une valeur. ¦ Syötä arvo. ¦ Adj meg egy értéket.
+Longueurs ¦ Pituudet ¦ Hosszúságok
+Grains (matières sèches) ¦ Jyvät (kuivat aineet) ¦ Gabona (száraz anyagok)
+Liquides (vin, cidre, huile) ¦ Nesteet (viini, siideri, öljy) ¦ Folyadékok (bor, almabor, olaj)
+kilomètre ¦ kilometri ¦ kilométer
+mètre carré ¦ neliömetri ¦ négyzetméter
+are ¦ aari ¦ ár
+hectare ¦ hehtaari ¦ hektár
+litre ¦ litra ¦ liter
+hectolitre ¦ hehtolitra ¦ hektoliter
+Paris, Île-de-France (mesures du roi) ¦ Pariisi, Île-de-France (kuninkaan mitat) ¦ Párizs, Île-de-France (királyi mértékek)
+Lyon, Lyonnais ¦ Lyon, Lyonnais ¦ Lyon, Lyonnais
+Bretagne (Rennes) ¦ Bretagne (Rennes) ¦ Bretagne (Rennes)
+Normandie (Rouen) ¦ Normandia (Rouen) ¦ Normandia (Rouen)
+Bourgogne (Dijon, Beaune) ¦ Burgundi (Dijon, Beaune) ¦ Burgundia (Dijon, Beaune)
+Provence (Marseille) ¦ Provence (Marseille) ¦ Provence (Marseille)
+Lorraine (Nancy) ¦ Lorraine (Nancy) ¦ Lotaringia (Nancy)
+Alsace (Strasbourg) ¦ Elsass (Strasbourg) ¦ Elzász (Strasbourg)
+Flandre (Lille) ¦ Flanderi (Lille) ¦ Flandria (Lille)
+très variable ¦ hyvin vaihteleva ¦ nagyon változó
+très variable d’une ville à l’autre ¦ vaihtelee paljon kaupungista toiseen ¦ városról városra nagyon változó
+très variable (de 1 500 à 3 000 m² selon le lieu) ¦ hyvin vaihteleva (1 500–3 000 m² paikasta riippuen) ¦ nagyon változó (helytől függően 1 500–3 000 m²)
+de 45 à 50 litres selon le lieu ¦ 45–50 litraa paikasta riippuen ¦ helytől függően 45–50 liter
+≈ : valeur approchée ou variable selon la ville. Sources : loi du 19 frimaire an VIII (pied du roi, toise) et « Tables de comparaison entre les mesures anciennes et celles qui les remplacent » publiées par département (an X – 1812). Pour une commune précise, cherche la table de ton département aux archives départementales. ¦ ≈ : likimääräinen tai kaupungin mukaan vaihteleva arvo. Lähteet: laki 19 frimaire vuonna VIII (kuninkaan jalka, toise) ja departementeittain julkaistut ”Vertailutaulukot vanhojen ja ne korvaavien mittojen välillä” (vuosi X – 1812). Tietyn kunnan osalta etsi departementtisi taulukko departementin arkistosta. ¦ ≈ : közelítő vagy városonként változó érték. Források: a VIII. év frimaire 19-i törvénye (királyi láb, toise) és a megyénként kiadott „Összehasonlító táblázatok a régi és az őket felváltó mértékek között” (X. év – 1812). Egy adott településhez keresd meg a megyéd táblázatát a megyei levéltárban.
+Âge ↔ date de naissance ¦ Ikä ↔ syntymäaika ¦ Életkor ↔ születési dátum
+Les actes donnent souvent l’âge plutôt que la date de naissance. « 32 ans au décès le 12/03/1790 » → né entre deux dates. Ou l’inverse : l’âge exact à une date. ¦ Asiakirjoissa annetaan usein ikä syntymäajan sijaan. « 32 ans au décès le 12/03/1790 » → syntynyt kahden päivämäärän välillä. Tai päinvastoin: tarkka ikä tiettynä päivänä. ¦ Az iratok gyakran az életkort adják meg a születési dátum helyett. « 32 ans au décès le 12/03/1790 » → két dátum között született. Vagy fordítva: a pontos életkor egy adott napon.
+exact (ans révolus) ¦ tarkka (täysiä vuosia) ¦ pontos (betöltött évek)
+« environ » (± 2 ans) ¦ ”noin” (± 2 vuotta) ¦ „körülbelül” (± 2 év)
+arrondi (± 5 ans) ¦ pyöristetty (± 5 vuotta) ¦ kerekített (± 5 év)
+très vague (± 10 ans) ¦ hyvin epämääräinen (± 10 vuotta) ¦ nagyon bizonytalan (± 10 év)
+À la date de ¦ Päivänä ¦ Ezen a napon
+Entre un âge et la date de l’acte. ¦ Syötä ikä ja asiakirjan päivämäärä. ¦ Adj meg egy életkort és az irat dátumát.
+Âge le ¦ Ikä päivänä ¦ Életkor ekkor
+Entre une date de naissance et une autre date. ¦ Syötä syntymäaika ja toinen päivämäärä. ¦ Adj meg egy születési dátumot és egy másik dátumot.
+Date non reconnue : écris par exemple 12/03/1790, 12 mars 1790, mars 1790 ou 1790. ¦ Päivämäärää ei tunnistettu: kirjoita esimerkiksi 12/03/1790, 12 mars 1790, mars 1790 tai 1790. ¦ Ismeretlen dátum: írd például így: 12/03/1790, 12 mars 1790, mars 1790 vagy 1790.
+Naissance entre le {from} et le {to} ¦ Syntymä välillä {from} – {to} ¦ Születés {from} és {to} között
+soit vers {when} (entre {lo} et {hi} révolus) ¦ eli noin {when} ({lo}–{hi} täyttä vuotta) ¦ azaz {when} körül ({lo}–{hi} betöltött év)
+soit vers {when} ¦ eli noin {when} ¦ azaz {when} körül
+Date non reconnue : écris par exemple 13/03/1757. ¦ Päivämäärää ei tunnistettu: kirjoita esimerkiksi 13/03/1757. ¦ Ismeretlen dátum: írd például így: 13/03/1757.
+La seconde date est avant la naissance. ¦ Toinen päivämäärä on ennen syntymää. ¦ A második dátum a születés előtti.
+soit {days} de vie ¦ eli {days} elämää ¦ azaz {days} élet
+Entre {min} et {max} ¦ Välillä {min} – {max} ¦ {min} és {max} között
+Une des dates est incomplète. ¦ Yksi päivämääristä on epätäydellinen. ¦ Az egyik dátum hiányos.
+Écart entre deux dates ¦ Kahden päivämäärän väli ¦ Két dátum közötti idő
+Combien de temps entre deux actes ? Années, mois, jours, nombre total de jours et de semaines. Une date incomplète (« mars 1790 », « 1802 ») donne un écart minimum et maximum. ¦ Kuinka paljon aikaa kahden asiakirjan välillä? Vuodet, kuukaudet, päivät, päivien ja viikkojen kokonaismäärä. Epätäydellinen päivämäärä (« mars 1790 », « 1802 ») antaa pienimmän ja suurimman välin. ¦ Mennyi idő telt el két irat között? Évek, hónapok, napok, a napok és hetek teljes száma. Egy hiányos dátum (« mars 1790 », « 1802 ») minimális és maximális különbséget ad.
+9 novembre 1799 ¦ 9 novembre 1799 ¦ 9 novembre 1799
+Entre deux dates. ¦ Syötä kaksi päivämäärää. ¦ Adj meg két dátumot.
+Date non reconnue : écris par exemple 14/07/1789, 14 juillet 1789, juillet 1789 ou 1789. ¦ Päivämäärää ei tunnistettu: kirjoita esimerkiksi 14/07/1789, 14 juillet 1789, juillet 1789 tai 1789. ¦ Ismeretlen dátum: írd például így: 14/07/1789, 14 juillet 1789, juillet 1789 vagy 1789.
+(la seconde date est la plus ancienne : écart compté à l’envers) ¦ (toinen päivämäärä on vanhempi: väli lasketaan takaperin) ¦ (a második dátum a régebbi: a különbséget visszafelé számolja)
+{weeks} et {days} ¦ {weeks} ja {days} ¦ {weeks} és {days}
+Du {a} au {b} : une date est incomplète. ¦ {a} – {b}: yksi päivämäärä on epätäydellinen. ¦ {a} – {b}: az egyik dátum hiányos.
+=semaine ¦ viikko|viikkoa ¦ hét|hét
+Jour de la semaine ¦ Viikonpäivä ¦ A hét napja
+Quel jour tombait une date ? Avant 1582, le calendrier julien s’applique : choisis l’usage. ¦ Minä viikonpäivänä päivämäärä oli? Ennen vuotta 1582 käytetään juliaanista kalenteria: valitse käytäntö. ¦ Milyen napra esett egy dátum? 1582 előtt a Julián-naptár érvényes: válaszd ki a szokást.
+France (julien jusqu’au 9 déc. 1582) ¦ Ranska (juliaaninen 9.12.1582 asti) ¦ Franciaország (Julián-naptár 1582. dec. 9-ig)
+Rome (julien jusqu’au 4 oct. 1582) ¦ Rooma (juliaaninen 4.10.1582 asti) ¦ Róma (Julián-naptár 1582. okt. 4-ig)
+Toujours grégorien ¦ Aina gregoriaaninen ¦ Mindig Gergely-naptár
+Toujours julien ¦ Aina juliaaninen ¦ Mindig Julián-naptár
+Indices pour la recherche (baptêmes, mariages…) ¦ Vihjeitä tutkimukseen (kasteet, vihkimiset…) ¦ Tippek a kutatáshoz (keresztelők, házasságkötések…)
+Entre une date complète. ¦ Syötä täydellinen päivämäärä. ¦ Adj meg egy teljes dátumot.
+Il faut une date complète : jour, mois et année (ex. 14/07/1789). ¦ Tarvitaan täydellinen päivämäärä: päivä, kuukausi ja vuosi (esim. 14/07/1789). ¦ Teljes dátum kell: nap, hónap és év (pl. 14/07/1789).
+Ce jour n’a pas existé en France : le 9 décembre 1582 a été suivi du 20 décembre. ¦ Tätä päivää ei ollut Ranskassa: 9. joulukuuta 1582 jälkeen tuli 20. joulukuuta. ¦ Ez a nap nem létezett Franciaországban: 1582. december 9-ét december 20. követte.
+Ce jour n’a pas existé à Rome : le 4 octobre 1582 a été suivi du 15 octobre. ¦ Tätä päivää ei ollut Roomassa: 4. lokakuuta 1582 jälkeen tuli 15. lokakuuta. ¦ Ez a nap nem létezett Rómában: 1582. október 4-ét október 15. követte.
+soit le {date} dans le calendrier grégorien ¦ eli {date} gregoriaanisessa kalenterissa ¦ azaz {date} a Gergely-naptár szerint
+soit le {date} dans le calendrier julien ¦ eli {date} juliaanisessa kalenterissa ¦ azaz {date} a Julián-naptár szerint
+C’était un {day} ¦ Se oli {day} ¦ Az a nap: {day}
+julien ¦ juliaaninen ¦ Julián
+Jour du Seigneur : beaucoup de baptêmes (souvent le jour même ou le lendemain de la naissance) ; mariages rares. ¦ Herran päivä: paljon kasteita (usein syntymäpäivänä tai sen jälkeisenä päivänä); vihkimiset harvinaisia. ¦ Az Úr napja: sok keresztelő (gyakran a születés napján vagy másnap); házasságkötés ritka.
+Jour courant des mariages à la campagne sous l’Ancien Régime. ¦ Vanhan hallintojärjestelmän aikaan maaseudulla tavallinen vihkipäivä. ¦ A régi rend idején falun szokásos esküvőnap.
+Jour préféré des mariages dans bien des paroisses sous l’Ancien Régime. ¦ Monissa seurakunnissa vanhan hallintojärjestelmän aikaan suosituin vihkipäivä. ¦ Sok egyházközségben a régi rend idején a legkedveltebb esküvőnap.
+Jour maigre dans certains diocèses : mariages moins fréquents. ¦ Paastopäivä joissakin hiippakunnissa: vihkimiset harvinaisempia. ¦ Böjti nap egyes egyházmegyékben: ritkább házasságkötések.
+Jour ordinaire ; fêtes de l’Ascension et de la Fête-Dieu. ¦ Tavallinen päivä; helatorstai ja Kristuksen ruumiin ja veren juhla. ¦ Hétköznap; áldozócsütörtök és úrnapja.
+Jour maigre (souvenir de la Passion) : on évitait de s’y marier. ¦ Paastopäivä (kärsimyksen muisto): sinä päivänä vältettiin menemästä naimisiin. ¦ Böjti nap (a szenvedés emléke): kerülték, hogy ekkor házasodjanak.
+Jour maigre jusqu’au XVIIIe siècle dans beaucoup de diocèses ; au XIXe, jour fréquent des mariages civils. ¦ Paastopäivä 1700-luvulle asti monissa hiippakunnissa; 1800-luvulla yleinen siviilivihkimisten päivä. ¦ Böjti nap a XVIII. századig sok egyházmegyében; a XIX. században gyakori polgári esküvőnap.
+Saint du jour et fêtes mobiles ¦ Päivän pyhimys ja liikkuvat juhlat ¦ A nap szentje és a mozgó ünnepek
+Les fêtes mobiles dépendent de Pâques. Le saint du jour aide à comprendre un prénom : on donnait souvent celui du saint de la naissance ou du baptême. ¦ Liikkuvat juhlat riippuvat pääsiäisestä. Päivän pyhimys auttaa ymmärtämään etunimeä: usein annettiin syntymä- tai kastepäivän pyhimyksen nimi. ¦ A mozgó ünnepek a húsvéttól függenek. A nap szentje segít megérteni egy utónevet: gyakran a születés vagy a keresztelő napjának szentjéről nevezték el a gyermeket.
+Comput ¦ Komputus ¦ Komputusz
+auto (julien avant 1583) ¦ auto (juliaaninen ennen 1583) ¦ auto (Julián 1583 előtt)
+date|Mois ¦ Kuukausi ¦ Hónap
+Entre une année entre 400 et 2400. ¦ Syötä vuosi väliltä 400–2400. ¦ Adj meg egy évet 400 és 2400 között.
+Dates dans le calendrier julien. ¦ Päivämäärät juliaanisessa kalenterissa. ¦ Dátumok a Julián-naptár szerint.
+Ce jour n’existe pas. ¦ Tätä päivää ei ole olemassa. ¦ Ez a nap nem létezik.
+Dans ta base, nés ou baptisés ce jour : ¦ Tietokannassasi tänä päivänä syntyneet tai kastetut: ¦ Az adatbázisodban ezen a napon születettek vagy kereszteltek:
+porte le prénom du saint du jour ¦ kantaa päivän pyhimyksen nimeä ¦ a nap szentjének nevét viseli
+Saint du jour indisponible. ¦ Päivän pyhimys ei ole saatavilla. ¦ A nap szentje nem érhető el.
+Saints : calendrier usuel des almanachs français (celui du widget « Prénom et saint du jour ») ; il a varié selon les époques et les diocèses. ¦ Pyhimykset: ranskalaisten almanakkojen tavallinen kalenteri (sama kuin widgetissä ”Päivän etunimi ja pyhimys”); se on vaihdellut aikakausien ja hiippakuntien mukaan. ¦ Szentek: a francia kalendáriumok szokásos naptára (ugyanaz, mint „A nap utóneve és szentje” widgeté); korszakonként és egyházmegyénként változott.
+dimanche, début du temps de la Septuagésime ¦ sunnuntai, Septuagesima-ajan alku ¦ vasárnap, a hetvened idejének kezdete
+dimanche ¦ sunnuntai ¦ vasárnap
+dimanche gras ¦ laskiaissunnuntai ¦ farsangvasárnap
+veille des Cendres, fin du carnaval ¦ tuhkakeskiviikon aatto, karnevaalin loppu ¦ hamvazószerda előestéje, a farsang vége
+début du Carême : plus de mariages jusqu’à Pâques ¦ paaston alku: ei vihkimisiä pääsiäiseen asti ¦ a nagyböjt kezdete: húsvétig nincs esküvő
+dimanche des Brandons ¦ paaston ensimmäinen sunnuntai (soihtujen sunnuntai) ¦ nagyböjt első vasárnapja (fáklyák vasárnapja)
+jeudi ¦ torstai ¦ csütörtök
+Pâques fleuries ¦ palmusunnuntai ¦ virágvasárnap
+baptêmes solennels ¦ juhlalliset kasteet ¦ ünnepélyes keresztelők
+dimanche, fin du temps pascal des mariages interdits ¦ sunnuntai, kiellettyjen vihkimisten pääsiäisajan loppu ¦ vasárnap, a tiltott esküvők húsvéti időszakának vége
+lundi, processions dans les champs ¦ maanantai, kulkueet pelloilla ¦ hétfő, körmenetek a földeken
+jeudi (fêtée le dimanche suivant après 1802) ¦ torstai (vietetään seuraavana sunnuntaina vuoden 1802 jälkeen) ¦ csütörtök (1802 után a következő vasárnap ünneplik)
+vendredi ¦ perjantai ¦ péntek
+Heures canoniques ¦ Kanoniset hetket ¦ Kánoni órák
+Les actes datent parfois à « l’heure de vêpres » ou « à l’issue de la grand-messe ». Les heures de l’Église suivaient le soleil : le jour était coupé en 12 heures, plus longues en été qu’en hiver. ¦ Asiakirjat ajoittavat joskus ”vesperin aikaan” tai ”suuren messun jälkeen”. Kirkon hetket seurasivat aurinkoa: päivä jaettiin 12 tuntiin, jotka olivat kesällä pidempiä kuin talvella. ¦ Az iratok néha „vesperás idején” vagy „a nagymise után” keltezettek. Az egyház órái a napot követték: a nappalt 12 órára osztották, amelyek nyáron hosszabbak voltak, mint télen.
+(équinoxe) ¦ (päiväntasaus) ¦ (napéjegyenlőség)
+(jours les plus longs) ¦ (pisimmät päivät) ¦ (leghosszabb napok)
+(jours les plus courts) ¦ (lyhyimmät päivät) ¦ (legrövidebb napok)
+vers {time} ¦ noin {time} ¦ {time} körül
+{winter} en hiver, {summer} en été ¦ {winter} talvella, {summer} kesällä ¦ télen {winter}, nyáron {summer}
+Écris la mention (« à l’heure de vêpres », « après complies »…) ou lis le tableau. ¦ Kirjoita maininta (« à l’heure de vêpres », « après complies »…) tai lue taulukko. ¦ Írd be a megjelölést (« à l’heure de vêpres », « après complies »…), vagy olvasd le a táblázatot.
+{hour} en {month} : {time} ¦ {hour}, {month}: {time} ¦ {hour}, {month}: {time}
+entre {dec} en décembre et {jun} en juin ¦ välillä {dec} joulukuussa ja {jun} kesäkuussa ¦ decemberben {dec}, júniusban {jun} között
+Heure non reconnue : matines, laudes, prime, tierce, sexte, none, vêpres, complies ou angélus. ¦ Hetkeä ei tunnistettu: matines, laudes, prime, tierce, sexte, none, vêpres, complies tai angélus. ¦ Ismeretlen óra: matines, laudes, prime, tierce, sexte, none, vêpres, complies vagy angélus.
+office de la nuit (dans les paroisses, souvent chanté la veille au soir ou au petit matin) ¦ yön rukoushetki (seurakunnissa usein laulettu edellisenä iltana tai varhain aamulla) ¦ éjszakai zsolozsma (az egyházközségekben gyakran előző este vagy kora reggel énekelték)
+à l’aube, avant le lever du soleil ¦ aamunkoitteessa, ennen auringonnousua ¦ hajnalban, napfelkelte előtt
+6e heure, midi ¦ 6. hetki, keskipäivä ¦ 6. óra, dél
+à la tombée du jour (le dimanche, à la paroisse, souvent dès le début de l’après-midi) ¦ iltahämärissä (sunnuntaisin seurakunnassa usein jo iltapäivän alussa) ¦ alkonyatkor (vasárnap az egyházközségben gyakran már kora délután)
+à la nuit, avant le coucher ¦ yöllä, ennen nukkumaanmenoa ¦ éjjel, lefekvés előtt
+cloche du matin, de midi et du soir ¦ aamun, keskipäivän ja illan kello ¦ reggeli, déli és esti harangszó
+Heure solaire (midi = soleil au plus haut), calculée pour le centre de la France ; l’heure légale n’existe qu’à partir de 1891. Les horaires réels variaient selon les paroisses et les couvents. ¦ Aurinkoaika (keskipäivä = aurinko korkeimmillaan), laskettu Ranskan keskiosalle; virallinen aika on olemassa vasta vuodesta 1891. Todelliset ajat vaihtelivat seurakunnittain ja luostareittain. ¦ Napidő (dél = a nap a legmagasabban), Franciaország közepére számítva; a hivatalos idő csak 1891-től létezik. A valódi időpontok egyházközségenként és kolostoronként változtak.
+Monnaies étrangères anciennes ¦ Vanhat ulkomaiset rahat ¦ Régi külföldi pénzek
+Dans les contrats et inventaires, on trouve des pistoles, ducats, florins ou piastres. Leur valeur en livres tournois, monnaie de compte du royaume, selon l’époque. ¦ Sopimuksissa ja perukirjoissa esiintyy pistoleja, dukaatteja, floriineja tai piastereita. Niiden arvo tournois-livreinä, valtakunnan laskentarahana, aikakauden mukaan. ¦ A szerződésekben és leltárakban pisztolok, dukátok, forintok vagy piaszterek fordulnak elő. Értékük tours-i livre-ben, a királyság számolópénzében, a kortól függően.
+Monnaie ¦ Raha ¦ Pénznem
+XVIIe siècle (1640-1700) ¦ 1600-luku (1640–1700) ¦ XVII. század (1640–1700)
+XVIIIe siècle (1726-1789) ¦ 1700-luku (1726–1789) ¦ XVIII. század (1726–1789)
+Toutes les monnaies à cette époque ¦ Kaikki rahat tuohon aikaan ¦ Az összes pénz abban a korban
+soit ≈ {n} livres ¦ eli ≈ {n} livreä ¦ azaz ≈ {n} livre
+Cette monnaie n’avait pas cours en France à cette époque. ¦ Tämä raha ei ollut käytössä Ranskassa tuohon aikaan. ¦ Ez a pénz abban a korban nem volt forgalomban Franciaországban.
+Louis d’or (France) ¦ Louis d’or (Ranska) ¦ Louis d’or (Franciaország)
+Écu d’or au soleil (France) ¦ Écu d’or au soleil (Ranska) ¦ Écu d’or au soleil (Franciaország)
+Écu blanc ou louis d’argent (France) ¦ Écu blanc tai louis d’argent (Ranska) ¦ Écu blanc vagy louis d’argent (Franciaország)
+Pistole (Espagne, Italie) ¦ Pistole (Espanja, Italia) ¦ Pisztol (Spanyolország, Itália)
+Ducat d’or (Venise, Hollande, Empire) ¦ Kultadukaatti (Venetsia, Hollanti, Keisarikunta) ¦ Aranydukát (Velence, Hollandia, Birodalom)
+Florin de Hollande (gulden) ¦ Hollannin floriini (gulden) ¦ Holland forint (gulden)
+Gulden ou florin du Rhin (Allemagne, Alsace, Suisse) ¦ Guldeni tai Reinin floriini (Saksa, Elsass, Sveitsi) ¦ Gulden vagy rajnai forint (Németország, Elzász, Svájc)
+Thaler, rixdale (Empire, Saxe, Prusse) ¦ Taaleri, riikintaaleri (Keisarikunta, Saksi, Preussi) ¦ Tallér, birodalmi tallér (Birodalom, Szászország, Poroszország)
+Piastre ou réal de huit (Espagne) ¦ Piasteri tai kahdeksan realin raha (Espanja) ¦ Piaszter vagy nyolcreálos (Spanyolország)
+Livre sterling (Angleterre) ¦ Englannin punta (Englanti) ¦ Font sterling (Anglia)
+Livre de Lorraine ¦ Lorrainen livre ¦ Lotaringiai livre
+créé en 1640 à 10 livres ; 24 livres de 1726 à la Révolution ¦ luotu 1640 arvoltaan 10 livreä; 24 livreä 1726:sta vallankumoukseen ¦ 1640-ben 10 livre értékben vezették be; 1726-tól a forradalomig 24 livre
+plus frappé après 1640 ¦ ei enää lyöty vuoden 1640 jälkeen ¦ 1640 után már nem verték
+3 livres en 1641 ; gros écu de 6 livres (et petit écu de 3 livres) au XVIIIe ¦ 3 livreä vuonna 1641; 6 livren suuri écu (ja 3 livren pieni écu) 1700-luvulla ¦ 1641-ben 3 livre; a XVIII. században 6 livre-es nagy écu (és 3 livre-es kis écu)
+souvent une monnaie de compte valant 10 livres ¦ usein 10 livren arvoinen laskentaraha ¦ gyakran 10 livre értékű számolópénz
+« piastre gourde » des colonies ¦ siirtomaiden ”piastre gourde” ¦ a gyarmatok „piastre gourde”-ja
+monnaie de compte, d’après le cours du change ¦ laskentaraha vaihtokurssin mukaan ¦ számolópénz, az árfolyam szerint
+15 sols 6 deniers tournois ¦ 15 sols 6 deniers tournois ¦ 15 sol 6 denier tournois
+Valeurs approchées (≈), d’après les ordonnances monétaires de Louis XIII à Louis XVI, le poids d’or ou d’argent fin des pièces et le cours du change à Paris (Savary, « Dictionnaire universel de commerce »). Les cours bougeaient souvent, surtout de 1689 à 1726 : c’est un ordre de grandeur. ¦ Likimääräiset arvot (≈) Ludvig XIII:n–Ludvig XVI:n rahasäädösten, kolikoiden puhtaan kullan tai hopean painon ja Pariisin vaihtokurssin mukaan (Savary, ”Dictionnaire universel de commerce”). Kurssit muuttuivat usein, etenkin 1689–1726: kyse on suuruusluokasta. ¦ Közelítő értékek (≈), XIII. Lajos és XVI. Lajos pénzügyi rendeletei, az érmék színarany- vagy színezüst-tartalma és a párizsi árfolyam alapján (Savary, „Dictionnaire universel de commerce”). Az árfolyamok gyakran változtak, főleg 1689 és 1726 között: ez nagyságrend.
+Calculateur de générations ¦ Sukupolvilaskin ¦ Nemzedékkalkulátor
+Combien de générations entre deux années ? En moyenne 25 à 33 ans par génération : environ 30 ans en lignée masculine, 27 ans en lignée féminine. ¦ Montako sukupolvea kahden vuoden välillä? Keskimäärin 25–33 vuotta sukupolvea kohden: noin 30 vuotta isälinjassa, 27 vuotta äitilinjassa. ¦ Hány nemzedék van két év között? Átlagosan 25–33 év nemzedékenként: apai ágon körülbelül 30 év, anyai ágon 27 év.
+Année (ta naissance) ¦ Vuosi (oma syntymäsi) ¦ Év (a születésed)
+Année (l’ancêtre) ¦ Vuosi (esivanhempi) ¦ Év (az ős)
+Entre deux années. ¦ Syötä kaksi vuotta. ¦ Adj meg két évet.
+Générations en arrière ¦ Sukupolvia taaksepäin ¦ Nemzedék visszafelé
+Depuis l’année ¦ Vuodesta ¦ Ettől az évtől
+Entre deux années différentes. ¦ Syötä kaksi eri vuotta. ¦ Adj meg két különböző évet.
+Environ {min} à {max} générations ¦ Noin {min}–{max} sukupolvea ¦ Körülbelül {min}–{max} nemzedék
+{years} : ≈ {male} générations en lignée masculine (30 ans), ≈ {female} en lignée féminine (27 ans) ¦ {years}: ≈ {male} sukupolvea isälinjassa (30 vuotta), ≈ {female} äitilinjassa (27 vuotta) ¦ {years}: ≈ {male} nemzedék apai ágon (30 év), ≈ {female} anyai ágon (27 év)
+Entre un nombre de générations (1 à 40) et une année. ¦ Syötä sukupolvien määrä (1–40) ja vuosi. ¦ Adj meg egy nemzedékszámot (1–40) és egy évet.
+ancêtres de la génération {n} ¦ sukupolven {n} esivanhemmat ¦ a(z) {n}. nemzedék ősei
+{gens} en arrière → nés vers {from}–{to} ¦ {gens} taaksepäin → syntyneet noin {from}–{to} ¦ {gens} visszafelé → születtek kb. {from}–{to}
+≈ {male} en lignée masculine, ≈ {female} en lignée féminine ¦ ≈ {male} isälinjassa, ≈ {female} äitilinjassa ¦ ≈ {male} apai ágon, ≈ {female} anyai ágon
+{at} {label} en théorie (Sosa {from} à {to}) ; {total} ancêtres en tout jusqu’à cette génération ¦ {at} {label} teoriassa (Sosa {from}–{to}); yhteensä {total} esivanhempaa tähän sukupolveen asti ¦ elméletben {at} {label} (Sosa {from}–{to}); összesen {total} ős eddig a nemzedékig
+Le nombre d’ancêtres double à chaque génération en théorie ; en pratique il y en a moins, car des cousins se sont mariés entre eux (l’implexe). ¦ Esivanhempien määrä kaksinkertaistuu teoriassa joka sukupolvessa; käytännössä heitä on vähemmän, koska serkut ovat menneet keskenään naimisiin (esivanhempien kato). ¦ Az ősök száma elméletben nemzedékenként megduplázódik; a gyakorlatban kevesebben vannak, mert unokatestvérek házasodtak egymással (ősveszteség).
+le jour de la Pentecôte 1754 ¦ le jour de la Pentecôte 1754 ¦ le jour de la Pentecôte 1754
+/Documents/Scans généalogie ¦ /Documents/Sukututkimus-skannaukset ¦ /Documents/Családfa szkennelések
+Saint-Martin de Brive ¦ Saint-Martin de Brive ¦ Saint-Martin de Brive
+Paroisse érigée en 1792 ; voir aussi la chapelle de… ¦ Seurakunta perustettu 1792; katso myös kappeli… ¦ 1792-ben alapított egyházközség; lásd még a … kápolnát
+Religion et noblesse ¦ Uskonto ja aatelisto ¦ Vallás és nemesség
+Travail et société ¦ Työ ja yhteiskunta ¦ Munka és társadalom
+Voyages et lieux ¦ Matkat ja paikat ¦ Utazások és helyek
+Temps et nature ¦ Aika ja luonto ¦ Idő és természet
+Formes et repères ¦ Muodot ja merkit ¦ Formák és jelek
+Artistique ¦ Taiteellinen ¦ Művészi
+Voyages ¦ Matkat ¦ Utazások
+Tous les emojis ¦ Kaikki emojit ¦ Az összes emoji
+Autres emojis ¦ Muut emojit ¦ Egyéb emojik
+Choisir un fond ¦ Valitse tausta ¦ Háttér kiválasztása
+Choisir un fond… ¦ Valitse tausta… ¦ Háttér kiválasztása…
+Choisir un fond de carte ¦ Valitse taustakartta ¦ Alaptérkép kiválasztása
+Choisir une icône… ¦ Valitse kuvake… ¦ Ikon kiválasztása…
+Aucune icône ¦ Ei kuvaketta ¦ Nincs ikon
+Aucun fond ¦ Ei taustaa ¦ Nincs háttér
+choisir ¦ valitse ¦ kiválasztás
+valider ¦ vahvista ¦ jóváhagyás
+fermer ¦ sulje ¦ bezárás
+Chercher une icône ¦ Hae kuvaketta ¦ Ikon keresése
+Chercher un fond ¦ Hae taustaa ¦ Háttér keresése
+Chercher un fond… (ex. Cassini, relief, 1850) ¦ Hae taustaa… (esim. Cassini, korkokuva, 1850) ¦ Háttér keresése… (pl. Cassini, domborzat, 1850)
+Chercher… (ex. coeur, bateau, chien) ¦ Hae… (esim. sydän, laiva, koira) ¦ Keresés… (pl. szív, hajó, kutya)
+Chercher… (ex. église, mariage, étoile) ¦ Hae… (esim. kirkko, häät, tähti) ¦ Keresés… (pl. templom, esküvő, csillag)
+Utiliser « {x} » ¦ Käytä ”{x}” ¦ „{x}” használata
+1 icône pour « {q} » ¦ 1 kuvake haulle ”{q}” ¦ 1 ikon erre: „{q}”
+{n} icônes pour « {q} » ¦ {n} kuvaketta haulle ”{q}” ¦ {n} ikon erre: „{q}”
+1 fond pour « {q} » ¦ 1 tausta haulle ”{q}” ¦ 1 háttér erre: „{q}”
+{n} fonds pour « {q} » ¦ {n} taustaa haulle ”{q}” ¦ {n} háttér erre: „{q}”
+Rien pour « {q} ». Vérifie l’orthographe, ou essaie un autre mot. ¦ Ei mitään haulle ”{q}”. Tarkista oikeinkirjoitus tai kokeile toista sanaa. ¦ Semmi erre: „{q}”. Ellenőrizd a helyesírást, vagy próbálj egy másik szót.
+Retirer l’icône ¦ Poista kuvake ¦ Ikon eltávolítása
+Retirer le fond ¦ Poista tausta ¦ Háttér eltávolítása
+Allemand et alsacien ¦ Saksa ja elsassi ¦ Német és elzászi
+Néerlandais / flamand ¦ Hollanti / flaami ¦ Holland / flamand
+Croate / serbe en lettres latines ¦ Kroatia / serbia latinalaisin kirjaimin ¦ Horvát / szerb latin betűkkel
+Slovène ¦ Sloveeni ¦ Szlovén
+Gaélique irlandais ¦ Iiri ¦ Ír
+Biélorusse ¦ Valkovenäjä ¦ Belarusz
+Serbe en cyrillique ¦ Serbia kyrillisin kirjaimin ¦ Szerb cirill betűkkel
+Hébreu ¦ Heprea ¦ Héber
+Dates du calendrier grégorien. Les âges des actes anciens sont souvent approximatifs : « environ 40 ans » peut cacher 35 ou 45 ans. ¦ Gregoriaanisen kalenterin päivämäärät. Vanhojen asiakirjojen iät ovat usein likimääräisiä: ”noin 40 vuotta” voi tarkoittaa 35 tai 45 vuotta. ¦ A Gergely-naptár dátumai. A régi iratokban szereplő életkorok gyakran csak közelítők: a „körülbelül 40 év” 35-öt vagy 45-öt is jelenthet.
+Changer dans l’onglet Personnes ¦ Muuta Henkilöt-välilehdellä ¦ Módosítás a Személyek lapon
+Mode de chronologie parallèle ¦ Rinnakkaisen aikajanan tila ¦ Párhuzamos idővonal módja
+Les événements sans année restent sur les fiches. ¦ Tapahtumat ilman vuotta jäävät korteille. ¦ Az évszám nélküli események az adatlapokon maradnak.
+Modifier la frise historique ¦ Muokkaa historiallista aikajanaa ¦ A történelmi idővonal szerkesztése
+Les grands événements livrés avec l’app, et les tiens (histoire locale) ¦ Sovelluksen mukana tulevat suuret tapahtumat ja omasi (paikallishistoria) ¦ Az alkalmazással érkező nagy események és a sajátjaid (helytörténet)
+Les médias et pièces d’archives de ta base, comme les personnes : la liste à gauche (A → Z ou en 📁 dossiers), la fiche à droite. ¦ Tietokantasi mediat ja arkistokappaleet, kuten henkilöt: luettelo vasemmalla (A → Ö tai 📁 kansioissa), kortti oikealla. ¦ Az adatbázisod médiái és levéltári darabjai, mint a személyek: a lista balra (A → Z vagy 📁 mappákban), az adatlap jobbra.
+Les dossiers des trésors (les renommer, en créer, en effacer, choisir ce qui va dedans), l’ordre, ce qui s’affiche (en ce moment : {n}) ¦ Aarteiden kansiot (nimeä uudelleen, luo, poista, valitse mitä niihin tulee), järjestys, mitä näytetään (tällä hetkellä: {n}) ¦ A kincsek mappái (átnevezés, létrehozás, törlés, mi kerüljön beléjük), a sorrend, ami megjelenik (jelenleg: {n})
+Les dossiers des trésors (les renommer, en créer, en effacer, choisir ce qui va dedans), l’ordre, ce qui s’affiche ¦ Aarteiden kansiot (nimeä uudelleen, luo, poista, valitse mitä niihin tulee), järjestys, mitä näytetään ¦ A kincsek mappái (átnevezés, létrehozás, törlés, mi kerüljön beléjük), a sorrend, ami megjelenik
+Me le rappeler (la veille, une semaine avant…) ¦ Muistuta minua (edellisenä päivänä, viikkoa ennen…) ¦ Emlékeztess (előző nap, egy héttel előtte…)
+choses à vérifier ¦ tarkistettavaa ¦ ellenőrizendő dolog
+Pour montrer l’arbre à quelqu’un qui n’est pas à l’aise avec l’ordinateur : de très gros boutons, seulement l’arbre, les photos et les fiches, et rien qu’on puisse modifier par erreur. ¦ Puun näyttämiseen jollekulle, joka ei ole tottunut tietokoneeseen: hyvin suuret painikkeet, vain puu, valokuvat ja kortit, eikä mitään, mitä voisi muuttaa vahingossa. ¦ A fa megmutatásához valakinek, aki nem jártas a számítógépben: nagyon nagy gombok, csak a fa, a fényképek és az adatlapok, és semmi, amit véletlenül meg lehetne változtatni.
+Aucune hypothèse : une question à trancher (« né à Naves ou à Tulle ? »), avec les preuves pour et contre. ¦ Ei hypoteeseja: ratkaistava kysymys (« né à Naves ou à Tulle ? ») puolesta ja vastaan puhuvine todisteineen. ¦ Nincs hipotézis: egy eldöntendő kérdés (« né à Naves ou à Tulle ? »), a mellette és ellene szóló bizonyítékokkal.
+Détaillée ¦ Yksityiskohtainen ¦ Részletes
+Ce qu’on inclut ¦ Mitä otetaan mukaan ¦ Mit tartalmazzon
+Texte de l’app ¦ Sovelluksen teksti ¦ Az alkalmazás szövege
+Regénérer ¦ Luo uudelleen ¦ Újragenerálás
+Une journée… ¦ Päivä… ¦ Egy nap…
+Réécrire le texte d’après la fiche et voir ce qui a changé ¦ Kirjoita teksti uudelleen kortin mukaan ja katso, mikä muuttui ¦ A szöveg újraírása az adatlap alapján, és a változások megtekintése
+Un petit récit d’un jour de sa vie : âge, famille, village, métier, calendrier, météo, contexte ¦ Pieni kertomus päivästä hänen elämässään: ikä, perhe, kylä, ammatti, kalenteri, sää, tausta ¦ Rövid történet élete egy napjáról: életkor, család, falu, foglalkozás, naptár, időjárás, háttér
+Ajouter un événement local ¦ Lisää paikallinen tapahtuma ¦ Helyi esemény hozzáadása
+Rien dans cette sorte pendant sa vie. ¦ Ei mitään tästä lajista hänen elinaikanaan. ¦ Ebből a fajtából semmi az élete során.
+Voir toute la liste et ses sources ¦ Näytä koko luettelo ja sen lähteet ¦ A teljes lista és forrásai
+Une fête, une inondation, un incendie au village… rattaché à une commune ¦ Juhla, tulva, tulipalo kylässä… liitetty kuntaan ¦ Egy ünnep, árvíz, tűzvész a faluban… egy településhez kötve
+Sortes d’événements ¦ Tapahtumien lajit ¦ Eseményfajták
+Un article, une interview à la radio, une émission de télé, un avis de naissance ou une nécrologie, une photo publiée… ¦ Artikkeli, radiohaastattelu, tv-ohjelma, syntymäilmoitus tai muistokirjoitus, julkaistu valokuva… ¦ Egy cikk, rádióinterjú, tévéműsor, születési hír vagy gyászjelentés, megjelent fénykép…
+Ajouter un passage ¦ Lisää kohta ¦ Szakasz hozzáadása
+La revue de presse de cette personne ¦ Tämän henkilön lehdistökatsaus ¦ A személy sajtószemléje
+Modifier l’identifiant Wikidata ¦ Muokkaa Wikidata-tunnistetta ¦ A Wikidata-azonosító szerkesztése
+Plus de détails ¦ Lisää tietoja ¦ További részletek

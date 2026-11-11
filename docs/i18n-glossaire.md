@@ -667,6 +667,85 @@ la 3e forme avec « de » (`persoană|persoane|de persoane` → « 1 persoană �
 | ordinateur | calculator |
 | Traduction faite par une IA | Traducere făcută de o IA |
 
+## Langues ajoutées ensuite : finnois (fi) et hongrois (hu)
+
+Fichiers à part : `assets/i18n/src/nord4/<zone>.tsv` (1re ligne `fr ¦ fi ¦ hu`, même clé que `<zone>.tsv`).
+On traduit **depuis le français** (`node scripts/i18n-todo.js fi,hu <zone>` montre l’anglais et l’allemand, plus le suédois
+en aide pour le finnois ; l’allemand déjà là sert d’aide pour le hongrois).
+Ton : on tutoie — finnois : 2e personne du singulier (*sinä*, sous-entendu : « Valitse », « Napsauta », « Kokeile » ; boutons à
+l’impératif : « Tallenna », « Poista ») ; hongrois : *te* (« Válaszd ki », « Kattints », « Próbáld újra » ; boutons courts :
+« Mentés », « Törlés », « Hozzáadás »). Guillemets : finnois ”…” (les deux fermants), hongrois „…”.
+Pluriels : `one|other` dans les deux langues (`henkilö|henkilöä` → « 1 henkilö », « 3 henkilöä ») ; en hongrois le nom reste
+**au singulier** après un nombre (`személy|személy` → « 1 személy », « 5 személy »), les deux formes sont donc souvent pareilles.
+Pas de « {n} … » qui casse les suffixes : en hongrois, une variable suivie d’un suffixe s’écrit avec un trait d’union
+(« {name}-hoz ») ou on tourne la phrase autrement. « Tekoäly » (fi) et « MI » (hu, *mesterséges intelligencia*) pour l’IA.
+Les exemples de dates restent en français (la lecture des dates C4 est française).
+
+| Français | Suomi | Magyar |
+|---|---|---|
+| Sosa (numéro Sosa) | Sosa-numero | Sosa-szám |
+| SOSA (liste) | SOSA | SOSA |
+| fiche (d’une personne) | kortti | adatlap |
+| 📒 Fiches (sujets) | 📒 Kortit | 📒 Adatlapok |
+| généalogie (la base de la personne) | sukututkimus | családfa |
+| acte | asiakirja (kirkonkirjamerkintä) | anyakönyvi bejegyzés (okirat) |
+| état civil / registre paroissial | väestörekisteri / kirkonkirja | anyakönyv / egyházi anyakönyv |
+| baptême / naissance | kaste / syntymä | keresztelő / születés |
+| mariage | avioliitto (vihkiminen) | házasság (házasságkötés) |
+| décès / sépulture | kuolema / hautaus | halál / temetés |
+| parrain / marraine | kummisetä / kummitäti | keresztapa / keresztanya |
+| témoin / déclarant | todistaja / ilmoittaja | tanú / bejelentő |
+| ascendants / descendants | esivanhemmat / jälkeläiset | felmenők / leszármazottak |
+| arbre des ascendants / descendants | esipolvitaulu / jälkipolvitaulu | felmenői fa / leszármazotti fa |
+| branche | haara | ág |
+| implexe | esivanhempien kato (implex) | ősveszteség (implexus) |
+| recensement | henkikirja (väestönlaskenta) | népszámlálás |
+| inventaire après décès | perukirja | hagyatéki leltár |
+| dépouillement | indeksointi | feldolgozás (indexelés) |
+| cote (d’archive) | arkistotunnus | jelzet |
+| mur de brique | umpikuja | holtpont |
+| cousinade | sukukokous | családi találkozó |
+| commune / ville / village | kunta / kaupunki / kylä | település / város / falu |
+| catalogue raisonné | kriittinen teosluettelo | oeuvre-katalógus |
+| Tableau de bord | Kojelauta | Irányítópult |
+| Personnes | Henkilöt | Személyek |
+| Graphiques / Diagrammes | Kaaviot / Diagrammit | Grafikonok / Diagramok |
+| Carte | Kartta | Térkép |
+| Listes | Luettelot | Listák |
+| Chronologie | Aikajana | Idővonal |
+| Recherche | Tutkimus | Kutatás |
+| Enquêtes | Selvitykset | Nyomozások |
+| Trésors | Aarteet | Kincsek |
+| Réglages | Asetukset | Beállítások |
+| Apparence | Ulkoasu | Megjelenés |
+| Médias | Media | Média |
+| Source | Lähde | Forrás |
+| Étiquette | Tunniste | Címke |
+| Battue | Laaja haku | Átfésülés |
+| Mode simple | Helppo tila | Egyszerű mód |
+| Mode consultation | Selaustila | Megtekintő mód |
+| Sauvegarde | Varmuuskopio | Biztonsági mentés |
+| Enregistrer / ✓ Enregistré | Tallenna / ✓ Tallennettu | Mentés / ✓ Mentve |
+| Annuler (bouton) | Peruuta | Mégse |
+| ↶ Annuler / ↷ Rétablir | ↶ Kumoa / ↷ Tee uudelleen | ↶ Visszavonás / ↷ Újra |
+| Fermer | Sulje | Bezárás |
+| Supprimer | Poista | Törlés |
+| Retirer (détacher) | Irrota | Eltávolítás |
+| Modifier | Muokkaa | Szerkesztés |
+| Créer / Ajouter | Luo / Lisää | Létrehozás / Hozzáadás |
+| Relier | Yhdistä | Összekapcsolás |
+| ↺ Remettre comme au départ | ↺ Palauta alkuperäiseksi | ↺ Visszaállítás alapra |
+| Réessayer | Yritä uudelleen | Próbáld újra |
+| ⤒ Importer / ⤓ Exporter | ⤒ Tuo / ⤓ Vie | ⤒ Importálás / ⤓ Exportálás |
+| 🖨 Imprimer | 🖨 Tulosta | 🖨 Nyomtatás |
+| Chercher / Filtrer ▾ / Trier : | Hae / Suodata ▾ / Lajittele: | Keresés / Szűrés ▾ / Rendezés: |
+| ✓ Compris : | ✓ Ymmärretty: | ✓ Értelmezve: |
+| Aimanter | Magneettikohdistus | Mágneses igazítás |
+| Liste \| Fiches (affichage) | Luettelo \| Kortit | Lista \| Adatlapok |
+| onglet | välilehti | lap |
+| ordinateur | tietokone | számítógép |
+| Traduction faite par une IA | Tekoälyn tekemä käännös | MI által készített fordítás |
+
 ## Zone « tresors-ui » (étiquettes et fenêtres des pages Trésors)
 
 | Français | English | Español | Deutsch | Italiano | Português | Polski | Nederlands |

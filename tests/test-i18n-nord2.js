@@ -1,7 +1,7 @@
 'use strict';
 /* 🌐 Les deux langues ajoutées après cs / sv / da : slovaque (sk) et norvégien bokmål (nb). Mode d'emploi : docs/I18N.md (« Ajouter une langue »).
  *     node tests/test-i18n-nord2.js           (I18N_SHOTS=dossier pour garder des captures, I18N_PORT=20740 par défaut)
- * 1. Node : les langues déclarées partout (14 avec le roumain : test-i18n-nord3.js) (app-i18n.js, lib/i18n.php, scripts, FAQ) ; fichiers assets/i18n/src/nord2/*.tsv
+ * 1. Node : les langues déclarées partout (16 avec le roumain, le finnois et le hongrois : test-i18n-nord3.js, test-i18n-nord4.js) (app-i18n.js, lib/i18n.php, scripts, FAQ) ; fichiers assets/i18n/src/nord2/*.tsv
  *    (« fr ¦ sk ¦ nb ») lus avec nord/ (tout sous-dossier de src/) ; une clé absente en sk / nb = avertissement compté, une variable
  *    ou un pluriel faux = erreur ; les zones de base (cadre, composants, colonnes, premier, touches, reglages, faq) traduites en
  *    entier ; i18n-todo.js donne le tchèque (pour sk) et le danois (pour nb) en aide ; pluriels slovaques (1 / 2 à 4 / 5 et plus) ;
@@ -29,8 +29,8 @@ const BASE_ZONES = ['cadre', 'composants', 'colonnes', 'premier', 'touches', 're
     const I = require('../assets/js/app-i18n.js');
     const B = require('../scripts/i18n-build.js');
     const F = require('../scripts/build-faq-i18n.js');
-    await t('14 langues déclarées partout : app-i18n.js, lib/i18n.php, scripts, FAQ', () => {
-        assert.deepEqual(I.CODES, ['fr', 'en', 'es', 'de', 'it', 'pt', 'pl', 'nl', 'cs', 'sv', 'da', 'sk', 'nb', 'ro']);
+    await t('16 langues déclarées partout : app-i18n.js, lib/i18n.php, scripts, FAQ', () => {
+        assert.deepEqual(I.CODES, ['fr', 'en', 'es', 'de', 'it', 'pt', 'pl', 'nl', 'cs', 'sv', 'da', 'sk', 'nb', 'ro', 'fi', 'hu']);
         assert.deepEqual(NEW.map(c => [I.info(c).name, I.info(c).flag, I.info(c).locale]), [['Slovenčina', '🇸🇰', 'sk-SK'], ['Norsk (bokmål)', '🇳🇴', 'nb-NO']]);
         assert.ok(/const I18N_LANGS = \[[^\]]*'da', 'sk', 'nb'(, '[a-z]{2}')*\];/.test(fs.readFileSync(path.join(root, 'lib/i18n.php'), 'utf8')));
         assert.deepEqual(B.NEW_LANGS.slice(3, 5), NEW); assert.deepEqual(B.LANGS, [...B.CORE, ...B.NEW_LANGS]);
@@ -198,10 +198,10 @@ require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding: 'utf8', e
     }, ZONES);
     try {
         await serve(tmpEmpty);
-        await t('premier lancement : le menu propose 14 langues (sk, nb avant ro) ; l’écran passe en slovaque tout de suite', async () => {
+        await t('premier lancement : le menu propose 16 langues (sk, nb avant ro, fi, hu) ; l’écran passe en slovaque tout de suite', async () => {
             const page = await open();
             const opts = await page.$$eval('#install-screen select[data-lc-lang-pick] option', o => o.map(x => x.value));
-            assert.deepEqual(opts.slice(11, 13), NEW); assert.equal(opts.length, 14);
+            assert.deepEqual(opts.slice(11, 13), NEW); assert.equal(opts.length, 16);
             await page.selectOption('#install-screen select[data-lc-lang-pick]', 'sk'); await page.waitForTimeout(600);
             const r = await page.evaluate(() => ({lang: document.documentElement.lang, txt: document.querySelector('#install-screen').innerText}));
             assert.equal(r.lang, 'sk'); assert.ok(/Je potrebné importovať genealogickú databázu/.test(r.txt) && /Vytvoriť prvú osobu/.test(r.txt), r.txt.slice(0, 300));
@@ -213,12 +213,12 @@ require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding: 'utf8', e
             await page.context().close();
         });
         await serve(tmp);
-        await t('Réglages → Apparence : 14 langues ; choisir le norvégien, puis ↶ Annuler remet le français', async () => {
+        await t('Réglages → Apparence : 16 langues ; choisir le norvégien, puis ↶ Annuler remet le français', async () => {
             const page = await open();
             await go(page, 'maint', 'look_theme'); await page.waitForTimeout(1200);
             const nav0 = await page.evaluate(() => document.querySelector('.main-nav').innerText);
             const opts = await page.$$eval('select[data-lc-lang] option', o => o.map(x => x.value + ':' + x.textContent));
-            assert.equal(opts.length, 14); assert.ok(opts.some(o => /^sk:.*Slovenčina/.test(o)) && opts.some(o => /^nb:.*Norsk \(bokmål\)/.test(o)), opts.join(' '));
+            assert.equal(opts.length, 16); assert.ok(opts.some(o => /^sk:.*Slovenčina/.test(o)) && opts.some(o => /^nb:.*Norsk \(bokmål\)/.test(o)), opts.join(' '));
             await page.selectOption('select[data-lc-lang]', 'nb'); await page.waitForTimeout(1200);
             const nb = await page.evaluate(() => ({lang: document.documentElement.lang, nav: document.querySelector('.main-nav').innerText, banner: document.getElementById('lc-i18n-banner')?.innerText || '', saved: localStorage.getItem('lcnda-langue'), toast: [...document.querySelectorAll('.toast')].map(x => x.innerText).join(' | ')}));
             assert.equal(nb.lang, 'nb'); assert.equal(nb.saved, 'nb');
