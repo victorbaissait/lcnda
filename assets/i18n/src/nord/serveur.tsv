@@ -759,3 +759,858 @@ Boucle dans le pedigree : un animal ne peut pas être son propre ancêtre. ¦ Sm
 Le père et la mère sont le même animal. ¦ Otec a matka jsou totéž zvíře. ¦ Fadern och modern är samma djur. ¦ Faderen og moderen er det samme dyr.
 Cet animal existe déjà. ¦ Toto zvíře už existuje. ¦ Djuret finns redan. ¦ Dyret findes allerede.
 Cette suppression est trop ancienne : elle ne contient pas de quoi rendre l’animal. ¦ Toto smazání je příliš staré: neobsahuje, co je potřeba k obnovení zvířete. ¦ Borttagningen är för gammal: den innehåller inte det som behövs för att återställa djuret. ¦ Sletningen er for gammel: den indeholder ikke det, der skal til for at gendanne dyret.
+Donne un titre à la demande. ¦ Dej žádosti název. ¦ Ge förfrågan en titel. ¦ Giv forespørgslen en titel.
+Choisis au moins une photo (une image JPEG, PNG, GIF ou WebP). ¦ Vyber aspoň jednu fotku (obrázek JPEG, PNG, GIF nebo WebP). ¦ Välj minst ett foto (en JPEG-, PNG-, GIF- eller WebP-bild). ¦ Vælg mindst ét foto (et JPEG-, PNG-, GIF- eller WebP-billede).
+Choisis au moins un visage à faire reconnaître (ou trace-le sur la photo). ¦ Vyber aspoň jeden obličej k rozpoznání (nebo ho na fotce obkresli). ¦ Välj minst ett ansikte att få identifierat (eller rita det på fotot). ¦ Vælg mindst ét ansigt, der skal genkendes (eller tegn det på fotoet).
+Fichier de réponses manquant. ¦ Chybí soubor odpovědí. ¦ Svarsfilen saknas. ¦ Svarfilen mangler.
+Ce fichier n’est pas un fichier de réponses (il est illisible). ¦ Tento soubor není soubor odpovědí (je nečitelný). ¦ Filen är inte en svarsfil (den är oläslig). ¦ Filen er ikke en svarfil (den er ulæselig).
+Ce fichier n’est pas un fichier de réponses de « Qui est sur cette photo ? ». ¦ Tento soubor není soubor odpovědí z „Kdo je na této fotce?“. ¦ Filen är inte en svarsfil från ”Vem är på fotot?”. ¦ Filen er ikke en svarfil fra »Hvem er på fotoet?«.
+Version de fichier de réponses inconnue. ¦ Neznámá verze souboru odpovědí. ¦ Okänd version av svarsfilen. ¦ Ukendt version af svarfilen.
+Fichier de réponses refusé : identifiant incorrect. ¦ Soubor odpovědí odmítnut: nesprávný identifikátor. ¦ Svarsfilen nekad: fel identifierare. ¦ Svarfilen afvist: forkert identifikator.
+Ce fichier répond à une demande qui n’est pas dans cette généalogie. ¦ Tento soubor odpovídá na žádost, která v tomto rodokmenu není. ¦ Filen besvarar en förfrågan som inte finns i det här släktträdet. ¦ Filen besvarer en forespørgsel, der ikke findes i dette slægtstræ.
+Fichier de réponses refusé : il ne correspond à aucune version envoyée de cette demande (somme de contrôle). ¦ Soubor odpovědí odmítnut: neodpovídá žádné odeslané verzi této žádosti (kontrolní součet). ¦ Svarsfilen nekad: den motsvarar ingen skickad version av förfrågan (kontrollsumma). ¦ Svarfilen afvist: den svarer ikke til nogen sendt version af forespørgslen (kontrolsum).
+Fichier de réponses refusé : la liste des réponses manque. ¦ Soubor odpovědí odmítnut: chybí seznam odpovědí. ¦ Svarsfilen nekad: listan över svar saknas. ¦ Svarfilen afvist: listen over svar mangler.
+Fichier de réponses refusé : plus de réponses que de visages. ¦ Soubor odpovědí odmítnut: víc odpovědí než obličejů. ¦ Svarsfilen nekad: fler svar än ansikten. ¦ Svarfilen afvist: flere svar end ansigter.
+Fichier de réponses refusé : une réponse est mal formée. ¦ Soubor odpovědí odmítnut: jedna odpověď má chybný tvar. ¦ Svarsfilen nekad: ett svar är felaktigt utformat. ¦ Svarfilen afvist: et svar er forkert udformet.
+Fichier de réponses refusé : une réponse contient des données inattendues. ¦ Soubor odpovědí odmítnut: jedna odpověď obsahuje nečekaná data. ¦ Svarsfilen nekad: ett svar innehåller oväntade data. ¦ Svarfilen afvist: et svar indeholder uventede data.
+Fichier de réponses refusé : visage inconnu. ¦ Soubor odpovědí odmítnut: neznámý obličej. ¦ Svarsfilen nekad: okänt ansikte. ¦ Svarfilen afvist: ukendt ansigt.
+Fichier de réponses refusé : deux réponses pour le même visage. ¦ Soubor odpovědí odmítnut: dvě odpovědi pro tentýž obličej. ¦ Svarsfilen nekad: två svar för samma ansikte. ¦ Svarfilen afvist: to svar til samme ansigt.
+Fichier de réponses refusé : nom proposé inconnu. ¦ Soubor odpovědí odmítnut: neznámé navržené jméno. ¦ Svarsfilen nekad: okänt föreslaget namn. ¦ Svarfilen afvist: ukendt foreslået navn.
+Ces réponses ont déjà été importées. ¦ Tyto odpovědi už byly importovány. ¦ Svaren har redan importerats. ¦ Svarene er allerede importeret.
+Aucune réponse à importer dans ce fichier. ¦ V tomto souboru nejsou žádné odpovědi k importu. ¦ Inga svar att importera i filen. ¦ Ingen svar at importere i filen.
+Rien à annuler. ¦ Není co vrátit. ¦ Inget att ångra. ¦ Intet at fortryde.
+Donnée incorrecte (« personnes ») : une liste est attendue. ¦ Nesprávný údaj („osoby“): očekává se seznam. ¦ Fel uppgift (”personer”): en lista förväntas. ¦ Forkert data (»personer«): en liste forventes.
+La base n’est pas encore à jour : relance l’app. ¦ Databáze ještě není aktuální: spusť aplikaci znovu. ¦ Databasen är inte uppdaterad än: starta om appen. ¦ Databasen er ikke opdateret endnu: genstart appen.
+Choisis deux photos de tes médias. ¦ Vyber dvě fotky ze svých médií. ¦ Välj två foton bland dina medier. ¦ Vælg to fotos fra dine medier.
+Choisis deux photos différentes. ¦ Vyber dvě různé fotky. ¦ Välj två olika foton. ¦ Vælg to forskellige fotos.
+Donne un nom à la comparaison. ¦ Pojmenuj porovnání. ¦ Ge jämförelsen ett namn. ¦ Giv sammenligningen et navn.
+Opération inconnue sur les comparaisons de photos. ¦ Neznámá operace s porovnáním fotek. ¦ Okänd åtgärd för fotojämförelser. ¦ Ukendt operation på fotosammenligninger.
+Action inconnue sur les comparaisons de photos. ¦ Neznámá akce s porovnáním fotek. ¦ Okänd åtgärd för fotojämförelser. ¦ Ukendt handling på fotosammenligninger.
+Enquête introuvable. ¦ Pátrání nenalezeno. ¦ Undersökningen hittades inte. ¦ Undersøgelsen blev ikke fundet.
+Carte de photos introuvable dans cette généalogie. ¦ Mapa fotek v tomto rodokmenu nenalezena. ¦ Fotokartan hittades inte i det här släktträdet. ¦ Fotokortet blev ikke fundet i dette slægtstræ.
+Période incomprise : écris par exemple « été 2023 » → « juillet 2023 », « 1950 », « entre 1950 et 1960 ». ¦ Nepochopené období: napiš například „juillet 2023“, „1950“, „entre 1950 et 1960“. ¦ Perioden förstods inte: skriv till exempel ”juillet 2023”, ”1950”, ”entre 1950 et 1960”. ¦ Perioden blev ikke forstået: skriv for eksempel »juillet 2023«, »1950«, »entre 1950 et 1960«.
+Photo introuvable sur cette carte (retirée entre-temps ?). ¦ Fotka na této mapě nenalezena (mezitím odebrána?). ¦ Fotot hittades inte på kartan (borttaget under tiden?). ¦ Fotoet blev ikke fundet på kortet (fjernet i mellemtiden?).
+Date incomprise : écris par exemple « 14 juillet 2023 », « vers 1950 », « entre 1880 et 1885 ». ¦ Nepochopené datum: napiš například „14 juillet 2023“, „vers 1950“, „entre 1880 et 1885“. ¦ Datumet förstods inte: skriv till exempel ”14 juillet 2023”, ”vers 1950”, ”entre 1880 et 1885”. ¦ Datoen blev ikke forstået: skriv for eksempel »14 juillet 2023«, »vers 1950«, »entre 1880 et 1885«.
+Fiche verrouillée : déverrouille-la avant d’y rattacher ou d’en détacher une photo. ¦ Karta je zamčená: odemkni ji, než k ní připojíš nebo od ní odpojíš fotku. ¦ Posten är låst: lås upp den innan du kopplar eller kopplar loss ett foto. ¦ Posten er låst: lås den op, før du forbinder eller løsner et foto.
+Cette photo n’a pas de position GPS d’origine. ¦ Tato fotka nemá původní polohu GPS. ¦ Fotot har ingen ursprunglig GPS-position. ¦ Fotoet har ingen oprindelig GPS-position.
+200 fichiers au plus à la fois. ¦ Nejvýše 200 souborů najednou. ¦ Högst 200 filer åt gången. ¦ Højst 200 filer ad gangen.
+Opération inconnue sur les cartes de photos. ¦ Neznámá operace s mapami fotek. ¦ Okänd åtgärd för fotokartor. ¦ Ukendt operation på fotokort.
+Action inconnue sur les cartes de photos. ¦ Neznámá akce s mapami fotek. ¦ Okänd åtgärd för fotokartor. ¦ Ukendt handling på fotokort.
+Carte de photos illisible. ¦ Mapa fotek je nečitelná. ¦ Fotokartan är oläslig. ¦ Fotokortet er ulæseligt.
+Ville introuvable dans la liste des villes du monde. ¦ Město nenalezeno v seznamu měst světa. ¦ Staden hittades inte i listan över världens städer. ¦ Byen blev ikke fundet på listen over verdens byer.
+La zone dessinée n’est pas lisible. ¦ Nakreslená oblast je nečitelná. ¦ Det ritade området är oläsligt. ¦ Det tegnede område er ulæseligt.
+Le cercle doit avoir un centre et un rayon entre 5 m et 50 km. ¦ Kruh musí mít střed a poloměr mezi 5 m a 50 km. ¦ Cirkeln måste ha en mittpunkt och en radie mellan 5 m och 50 km. ¦ Cirklen skal have et centrum og en radius mellem 5 m og 50 km.
+Un sommet de la zone n’est pas lisible. ¦ Jeden vrchol oblasti je nečitelný. ¦ Ett hörn i området är oläsligt. ¦ Et hjørne af området er ulæseligt.
+Un sommet de la zone n’a pas de coordonnées valides. ¦ Jeden vrchol oblasti nemá platné souřadnice. ¦ Ett hörn i området har inga giltiga koordinater. ¦ Et hjørne af området har ingen gyldige koordinater.
+Une zone a besoin d’au moins 3 points différents. ¦ Oblast potřebuje aspoň 3 různé body. ¦ Ett område behöver minst 3 olika punkter. ¦ Et område skal have mindst 3 forskellige punkter.
+La zone est toute plate : ses points sont alignés. ¦ Oblast je úplně plochá: její body leží na přímce. ¦ Området är helt platt: punkterna ligger på en linje. ¦ Området er helt fladt: punkterne ligger på en linje.
+Sorte de zone inconnue (cercle ou polygone). ¦ Neznámý druh oblasti (kruh nebo mnohoúhelník). ¦ Okänd typ av område (cirkel eller polygon). ¦ Ukendt områdetype (cirkel eller polygon).
+Ce média n’est pas une image. ¦ Toto médium není obrázek. ¦ Mediet är inte en bild. ¦ Mediet er ikke et billede.
+Cette image n’existe plus dans les Médias. ¦ Tento obrázek už v Médiích neexistuje. ¦ Bilden finns inte längre bland Medierna. ¦ Billedet findes ikke længere i Medier.
+Choisis une image (photo, carte postale, gravure, plan). ¦ Vyber obrázek (fotku, pohlednici, rytinu, plán). ¦ Välj en bild (foto, vykort, gravyr, plan). ¦ Vælg et billede (foto, postkort, stik, plan).
+La photo d’aujourd’hui doit être une autre image. ¦ Dnešní fotka musí být jiný obrázek. ¦ Dagens foto måste vara en annan bild. ¦ Dagens foto skal være et andet billede.
+Ce lieu n’existe plus dans la base. ¦ Toto místo už v databázi neexistuje. ¦ Orten finns inte längre i databasen. ¦ Stedet findes ikke længere i databasen.
+Le point précis a besoin de la latitude et de la longitude. ¦ Přesný bod potřebuje zeměpisnou šířku a délku. ¦ Den exakta punkten behöver latitud och longitud. ¦ Det præcise punkt kræver bredde- og længdegrad.
+Donne au moins un lieu, un point sur la carte ou une zone. ¦ Zadej aspoň místo, bod na mapě nebo oblast. ¦ Ange åtminstone en ort, en punkt på kartan eller ett område. ¦ Angiv mindst et sted, et punkt på kortet eller et område.
+Choisis où demander de l’aide (entraide ou petite annonce). ¦ Vyber, kde požádat o pomoc (vzájemná pomoc nebo inzerát). ¦ Välj var du vill be om hjälp (ömsesidig hjälp eller annons). ¦ Vælg, hvor du vil bede om hjælp (gensidig hjælp eller annonce).
+Qui a répondu ? Donne un nom ou un pseudo. ¦ Kdo odpověděl? Zadej jméno nebo přezdívku. ¦ Vem svarade? Ange ett namn eller ett smeknamn. ¦ Hvem svarede? Angiv et navn eller et kaldenavn.
+Opération inconnue sur les images de lieux. ¦ Neznámá operace s obrázky míst. ¦ Okänd åtgärd för ortbilder. ¦ Ukendt operation på stedbilleder.
+Action inconnue sur les images de lieux. ¦ Neznámá akce s obrázky míst. ¦ Okänd åtgärd för ortbilder. ¦ Ukendt handling på stedbilleder.
+Cette personne n’existe plus dans la base. ¦ Tato osoba už v databázi neexistuje. ¦ Personen finns inte längre i databasen. ¦ Personen findes ikke længere i databasen.
+Choisis l’image du recto. ¦ Vyber obrázek přední strany. ¦ Välj bilden av framsidan. ¦ Vælg billedet af forsiden.
+L’image du verso n’existe plus. ¦ Obrázek zadní strany už neexistuje. ¦ Bilden av baksidan finns inte längre. ¦ Billedet af bagsiden findes ikke længere.
+Le recto et le verso doivent être deux images différentes. ¦ Přední a zadní strana musí být dva různé obrázky. ¦ Framsidan och baksidan måste vara två olika bilder. ¦ Forsiden og bagsiden skal være to forskellige billeder.
+Cette image a déjà sa fiche de carte postale. ¦ Tento obrázek už má svou kartu pohlednice. ¦ Bilden har redan sin vykortspost. ¦ Billedet har allerede sin postkortpost.
+Le verso choisi appartient déjà à une autre carte postale. ¦ Vybraná zadní strana už patří jiné pohlednici. ¦ Den valda baksidan hör redan till ett annat vykort. ¦ Den valgte bagside hører allerede til et andet postkort.
+L’image du recto a été supprimée entre-temps : la carte ne peut pas revenir. ¦ Obrázek přední strany byl mezitím smazán: pohlednici nelze vrátit. ¦ Bilden av framsidan har raderats under tiden: kortet kan inte återställas. ¦ Billedet af forsiden er slettet i mellemtiden: kortet kan ikke komme tilbage.
+Opération inconnue sur les cartes postales. ¦ Neznámá operace s pohlednicemi. ¦ Okänd åtgärd för vykort. ¦ Ukendt operation på postkort.
+Action inconnue sur les cartes postales. ¦ Neznámá akce s pohlednicemi. ¦ Okänd åtgärd för vykort. ¦ Ukendt handling på postkort.
+Cette généalogie a déjà des données : rien n’a été changé. ¦ Tento rodokmen už obsahuje data: nic se nezměnilo. ¦ Släktträdet har redan data: inget har ändrats. ¦ Slægtstræet har allerede data: intet er ændret.
+Donne un nom à ton animal. ¦ Pojmenuj své zvíře. ¦ Ge ditt djur ett namn. ¦ Giv dit dyr et navn.
+La base d’exemple est déjà ouverte. ¦ Ukázková databáze je už otevřená. ¦ Exempeldatabasen är redan öppen. ¦ Eksempeldatabasen er allerede åben.
+Ce n’est pas la base d’exemple : rien n’a été fait. ¦ Není to ukázková databáze: nic se neudělalo. ¦ Det är inte exempeldatabasen: inget har gjorts. ¦ Det er ikke eksempeldatabasen: intet er gjort.
+Ce n’est pas la base d’exemple. ¦ Není to ukázková databáze. ¦ Det är inte exempeldatabasen. ¦ Det er ikke eksempeldatabasen.
+Numéro de fiche de mauvaise forme. ¦ Číslo karty má chybný tvar. ¦ Postnumret är felaktigt utformat. ¦ Postnummeret er forkert udformet.
+Cette fiche n’existe pas. ¦ Tato karta neexistuje. ¦ Posten finns inte. ¦ Posten findes ikke.
+La personne choisie n’existe pas. ¦ Vybraná osoba neexistuje. ¦ Den valda personen finns inte. ¦ Den valgte person findes ikke.
+Choisis une autre personne que l’enfant. ¦ Vyber jinou osobu než dítě. ¦ Välj en annan person än barnet. ¦ Vælg en anden person end barnet.
+Choisis la personne dont il tient son prénom. ¦ Vyber osobu, po které má své jméno. ¦ Välj personen som hen är uppkallad efter. ¦ Vælg den person, vedkommende er opkaldt efter.
+Les dossiers de preuve ne sont pas encore prêts : relance l’app. ¦ Složky důkazů ještě nejsou připravené: spusť aplikaci znovu. ¦ Bevismapparna är inte redo än: starta om appen. ¦ Bevismapperne er ikke klar endnu: genstart appen.
+Dossier de preuve introuvable. ¦ Složka důkazů nenalezena. ¦ Bevismappen hittades inte. ¦ Bevismappen blev ikke fundet.
+Choisis la personne du dossier. ¦ Vyber osobu složky. ¦ Välj personen för mappen. ¦ Vælg personen til mappen.
+Choisis une autre personne. ¦ Vyber jinou osobu. ¦ Välj en annan person. ¦ Vælg en anden person.
+Cet événement n’est pas sur la fiche de cette personne. ¦ Tato událost není na kartě této osoby. ¦ Händelsen finns inte i personens post. ¦ Begivenheden er ikke på personens post.
+Ce dossier est déjà supprimé. ¦ Tato složka je už smazaná. ¦ Mappen är redan raderad. ¦ Mappen er allerede slettet.
+Ligne du dossier introuvable. ¦ Řádek složky nenalezen. ¦ Mappens rad hittades inte. ¦ Mappens række blev ikke fundet.
+La source ou la citation choisie n’existe plus. ¦ Vybraný pramen nebo citace už neexistuje. ¦ Den valda källan eller hänvisningen finns inte längre. ¦ Den valgte kilde eller henvisning findes ikke længere.
+Ce lien parent-enfant n’existe pas. ¦ Toto propojení rodič–dítě neexistuje. ¦ Den här kopplingen förälder–barn finns inte. ¦ Denne forbindelse forælder–barn findes ikke.
+Donne un nom à ce profil. ¦ Pojmenuj tento profil. ¦ Ge profilen ett namn. ¦ Giv profilen et navn.
+Ce profil a trop de réglages. ¦ Tento profil má příliš mnoho nastavení. ¦ Profilen har för många inställningar. ¦ Profilen har for mange indstillinger.
+Partie de puzzle inconnue. ¦ Neznámá hra puzzle. ¦ Okänt pusselspel. ¦ Ukendt puslespil.
+Image du puzzle absente. ¦ Chybí obrázek puzzle. ¦ Pusselbilden saknas. ¦ Puslespillets billede mangler.
+Image du puzzle refusée. ¦ Obrázek puzzle odmítnut. ¦ Pusselbilden nekad. ¦ Puslespillets billede afvist.
+Taille d’image du puzzle invalide. ¦ Neplatná velikost obrázku puzzle. ¦ Ogiltig storlek på pusselbilden. ¦ Ugyldig størrelse på puslespillets billede.
+Partie de puzzle illisible. ¦ Hra puzzle je nečitelná. ¦ Pusselspelet är oläsligt. ¦ Puslespillet er ulæseligt.
+Nombre de pièces invalide (4 à 1000). ¦ Neplatný počet dílků (4 až 1000). ¦ Ogiltigt antal bitar (4 till 1000). ¦ Ugyldigt antal brikker (4 til 1000).
+On ne peut pas changer le nombre de pièces d’une partie commencée. ¦ U rozehrané hry nelze měnit počet dílků. ¦ Man kan inte ändra antalet bitar i ett påbörjat spel. ¦ Man kan ikke ændre antallet af brikker i et påbegyndt spil.
+Pièces du puzzle illisibles. ¦ Dílky puzzle jsou nečitelné. ¦ Pusselbitarna är oläsliga. ¦ Puslespilsbrikkerne er ulæselige.
+Pièces du puzzle abîmées (order). ¦ Dílky puzzle jsou poškozené (order). ¦ Pusselbitarna är skadade (order). ¦ Puslespilsbrikkerne er beskadigede (order).
+Partie de puzzle introuvable dans cette généalogie. ¦ Hra puzzle v tomto rodokmenu nenalezena. ¦ Pusselspelet hittades inte i det här släktträdet. ¦ Puslespillet blev ikke fundet i dette slægtstræ.
+Pièces du puzzle absentes. ¦ Chybí dílky puzzle. ¦ Pusselbitarna saknas. ¦ Puslespilsbrikkerne mangler.
+Partie trop grosse pour être enregistrée (2 Mo au plus). ¦ Hra je na uložení příliš velká (nejvýše 2 MB). ¦ Spelet är för stort för att sparas (högst 2 MB). ¦ Spillet er for stort til at blive gemt (højst 2 MB).
+Opération de puzzle inconnue. ¦ Neznámá operace s puzzle. ¦ Okänd pusselåtgärd. ¦ Ukendt puslespilsoperation.
+Action de puzzle inconnue. ¦ Neznámá akce s puzzle. ¦ Okänd pusselåtgärd. ¦ Ukendt puslespilshandling.
+Date incorrecte : écris-la comme le calendrier la propose. ¦ Nesprávné datum: napiš ho tak, jak ho nabízí kalendář. ¦ Fel datum: skriv det som kalendern föreslår. ¦ Forkert dato: skriv den, som kalenderen foreslår.
+Liste de questions incorrecte. ¦ Nesprávný seznam otázek. ¦ Fel lista med frågor. ¦ Forkert liste med spørgsmål.
+Donne un titre au questionnaire. ¦ Dej dotazníku název. ¦ Ge frågeformuläret en titel. ¦ Giv spørgeskemaet en titel.
+Ce contact n’est plus dans le Répertoire des vivants. ¦ Tento kontakt už není v Adresáři žijících. ¦ Kontakten finns inte längre i Adressboken över levande. ¦ Kontakten er ikke længere i Adressebogen over levende.
+État inconnu. ¦ Neznámý stav. ¦ Okänd status. ¦ Ukendt status.
+Réponse collée incorrecte. ¦ Vložená odpověď je nesprávná. ¦ Det inklistrade svaret är felaktigt. ¦ Det indsatte svar er forkert.
+Ce fichier n’est pas un fichier de réponses de « Questions aux proches ». ¦ Tento soubor není soubor odpovědí z „Otázek pro blízké“. ¦ Filen är inte en svarsfil från ”Frågor till anhöriga”. ¦ Filen er ikke en svarfil fra »Spørgsmål til de nærmeste«.
+Ce fichier répond à un questionnaire qui n’est pas dans cette généalogie. ¦ Tento soubor odpovídá na dotazník, který v tomto rodokmenu není. ¦ Filen besvarar ett frågeformulär som inte finns i det här släktträdet. ¦ Filen besvarer et spørgeskema, der ikke findes i dette slægtstræ.
+Fichier de réponses refusé : il ne correspond à aucune version envoyée de ce questionnaire (somme de contrôle). ¦ Soubor odpovědí odmítnut: neodpovídá žádné odeslané verzi tohoto dotazníku (kontrolní součet). ¦ Svarsfilen nekad: den motsvarar ingen skickad version av frågeformuläret (kontrollsumma). ¦ Svarfilen afvist: den svarer ikke til nogen sendt version af spørgeskemaet (kontrolsum).
+Trop de réponses dans ce fichier. ¦ V tomto souboru je příliš mnoho odpovědí. ¦ För många svar i filen. ¦ For mange svar i filen.
+Fichier de réponses refusé : numéro de question incorrect. ¦ Soubor odpovědí odmítnut: nesprávné číslo otázky. ¦ Svarsfilen nekad: fel frågenummer. ¦ Svarfilen afvist: forkert spørgsmålsnummer.
+Fichier de réponses refusé : une question doit être un texte. ¦ Soubor odpovědí odmítnut: otázka musí být text. ¦ Svarsfilen nekad: en fråga måste vara en text. ¦ Svarfilen afvist: et spørgsmål skal være en tekst.
+Écris la question. ¦ Napiš otázku. ¦ Skriv frågan. ¦ Skriv spørgsmålet.
+500 questions à toi au plus. ¦ Nejvýše 500 vlastních otázek. ¦ Högst 500 egna frågor. ¦ Højst 500 egne spørgsmål.
+Opération inconnue sur les questionnaires. ¦ Neznámá operace s dotazníky. ¦ Okänd åtgärd för frågeformulär. ¦ Ukendt operation på spørgeskemaer.
+Action inconnue sur les questionnaires. ¦ Neznámá akce s dotazníky. ¦ Okänd åtgärd för frågeformulär. ¦ Ukendt handling på spørgeskemaer.
+Donne un nom au recueil. ¦ Pojmenuj sbírku. ¦ Ge samlingen ett namn. ¦ Giv samlingen et navn.
+Choisis une image pour la couverture. ¦ Vyber obrázek na obálku. ¦ Välj en bild till omslaget. ¦ Vælg et billede til omslaget.
+Donne un nom à la version (ex. « Photos 2015 »). ¦ Pojmenuj verzi (např. „Fotky 2015“). ¦ Ge versionen ett namn (t.ex. ”Foton 2015”). ¦ Giv versionen et navn (f.eks. »Fotos 2015«).
+Un recueil garde au moins une version. ¦ Sbírka si ponechá aspoň jednu verzi. ¦ En samling behåller minst en version. ¦ En samling beholder mindst én version.
+Choisis la version où ranger ces photos. ¦ Vyber verzi, do které tyto fotky uložit. ¦ Välj versionen som fotona ska läggas i. ¦ Vælg den version, fotoene skal lægges i.
+Cette photo n’est pas sur cette page. ¦ Tato fotka není na této stránce. ¦ Fotot finns inte på sidan. ¦ Fotoet er ikke på denne side.
+Cette page est dans un autre recueil. ¦ Tato stránka je v jiné sbírce. ¦ Sidan finns i en annan samling. ¦ Siden er i en anden samling.
+Version du recueil introuvable. ¦ Verze sbírky nenalezena. ¦ Samlingens version hittades inte. ¦ Samlingens version blev ikke fundet.
+Le média n’existe plus. ¦ Médium už neexistuje. ¦ Mediet finns inte längre. ¦ Mediet findes ikke længere.
+Choisis à quoi rattacher le recueil. ¦ Vyber, k čemu sbírku připojit. ¦ Välj vad samlingen ska kopplas till. ¦ Vælg, hvad samlingen skal forbindes med.
+Page d’un autre recueil. ¦ Stránka z jiné sbírky. ¦ Sida från en annan samling. ¦ Side fra en anden samling.
+Recherche de battue introuvable. ¦ Hromadné pátrání nenalezeno. ¦ Sökinsatsen hittades inte. ¦ Eftersøgningen blev ikke fundet.
+Choisis où rattacher l’image. ¦ Vyber, k čemu obrázek připojit. ¦ Välj vart bilden ska kopplas. ¦ Vælg, hvor billedet skal forbindes.
+Pays inconnu du catalogue. ¦ Země není v katalogu. ¦ Landet finns inte i katalogen. ¦ Landet er ikke i kataloget.
+Dossier de téléchargement impossible à créer. ¦ Složku pro stahování nelze vytvořit. ¦ Nedladdningsmappen kan inte skapas. ¦ Mappen til hentninger kan ikke oprettes.
+Données de ce pays introuvables. ¦ Data této země nenalezena. ¦ Data för landet hittades inte. ¦ Data for dette land blev ikke fundet.
+La France ne peut pas être retirée. ¦ Francii nelze odebrat. ¦ Frankrike kan inte tas bort. ¦ Frankrig kan ikke fjernes.
+Des battues utilisent des communes de ce pays : retire-les d’abord de ces battues (rien n’a été supprimé). ¦ Hromadná pátrání používají obce této země: nejdřív je z nich odeber (nic nebylo smazáno). ¦ Sökinsatser använder orter i landet: ta först bort dem från insatserna (inget har raderats). ¦ Eftersøgninger bruger byer i dette land: fjern dem først fra eftersøgningerne (intet er slettet).
+Personne ou sens de la branche manquant. ¦ Chybí osoba nebo směr větve. ¦ Person eller grenens riktning saknas. ¦ Person eller grenens retning mangler.
+Feuille de mission introuvable. ¦ Pracovní list nenalezen. ¦ Arbetsbladet hittades inte. ¦ Arbejdsarket blev ikke fundet.
+Date de visite invalide. ¦ Neplatné datum návštěvy. ¦ Ogiltigt besöksdatum. ¦ Ugyldig besøgsdato.
+Cote de visite introuvable. ¦ Signatura návštěvy nenalezena. ¦ Besökets signum hittades inte. ¦ Besøgets signatur blev ikke fundet.
+La photo de départ n’est plus dans les médias. ¦ Výchozí fotka už není v médiích. ¦ Startfotot finns inte längre bland medierna. ¦ Udgangsfotoet er ikke længere i medierne.
+Masque illisible dans le projet. ¦ Nečitelná maska v projektu. ¦ Oläslig mask i projektet. ¦ Ulæselig maske i projektet.
+Projet trop lourd (40 Mo au plus) : retire des sélections ou des masques. ¦ Projekt je příliš těžký (nejvýše 40 MB): odeber některé výběry nebo masky. ¦ Projektet är för tungt (högst 40 MB): ta bort några markeringar eller masker. ¦ Projektet er for tungt (højst 40 MB): fjern nogle markeringer eller masker.
+Choisis d’abord la personne du centre. ¦ Nejdřív vyber osobu uprostřed. ¦ Välj först personen i mitten. ¦ Vælg først personen i midten.
+Personne introuvable : choisis d’abord à qui se rattache cette information. ¦ Osoba nenalezena: nejdřív vyber, ke komu tato informace patří. ¦ Personen hittades inte: välj först vem uppgiften hör till. ¦ Personen blev ikke fundet: vælg først, hvem oplysningen hører til.
+Fiche verrouillée. Déverrouille-la avant de la modifier. ¦ Karta je zamčená. Než ji upravíš, odemkni ji. ¦ Posten är låst. Lås upp den innan du redigerar den. ¦ Posten er låst. Lås den op, før du redigerer den.
+Cette information n’existe plus : elle a peut-être été supprimée. ¦ Tato informace už neexistuje: možná byla smazána. ¦ Uppgiften finns inte längre: den kan ha raderats. ¦ Oplysningen findes ikke længere: den er måske slettet.
+Trop de lignes de santé (50 000 au plus). ¦ Příliš mnoho řádků zdraví (nejvýše 50 000). ¦ För många hälsorader (högst 50 000). ¦ For mange sundhedsrækker (højst 50.000).
+Cette information a déjà été supprimée. ¦ Tato informace už byla smazána. ¦ Uppgiften har redan raderats. ¦ Oplysningen er allerede slettet.
+Impossible d’enregistrer les réglages de la sauvegarde. ¦ Nastavení zálohy nelze uložit. ¦ Kunde inte spara inställningarna för säkerhetskopiering. ¦ Kunne ikke gemme indstillingerne for sikkerhedskopiering.
+Écris le chemin complet du dossier (par exemple /Volumes/MaCle/LCNDA ou ~/Dropbox/LCNDA). ¦ Napiš úplnou cestu ke složce (například /Volumes/MujDisk/LCNDA nebo ~/Dropbox/LCNDA). ¦ Skriv mappens fullständiga sökväg (till exempel /Volumes/MittMinne/LCNDA eller ~/Dropbox/LCNDA). ¦ Skriv mappens fulde sti (for eksempel /Volumes/MinNoegle/LCNDA eller ~/Dropbox/LCNDA).
+impossible de nommer la copie ¦ kopii nelze pojmenovat ¦ kunde inte namnge kopian ¦ kunne ikke navngive kopien
+Une sauvegarde est déjà en cours. ¦ Záloha už probíhá. ¦ En säkerhetskopiering pågår redan. ¦ En sikkerhedskopiering er allerede i gang.
+Impossible de lire la copie. ¦ Kopii nelze přečíst. ¦ Kunde inte läsa kopian. ¦ Kunne ikke læse kopien.
+Impossible de créer le dossier des sauvegardes. ¦ Nelze vytvořit složku záloh. ¦ Kunde inte skapa mappen för säkerhetskopior. ¦ Kunne ikke oprette mappen til sikkerhedskopier.
+Impossible de remplacer la base (est-elle ouverte ailleurs ?). ¦ Databázi nelze nahradit (je otevřená jinde?). ¦ Kunde inte ersätta databasen (är den öppen någon annanstans?). ¦ Kunne ikke erstatte databasen (er den åben et andet sted?).
+Impossible de mettre la copie en place. ¦ Kopii nelze umístit. ¦ Kunde inte installera kopian. ¦ Kunne ikke sætte kopien på plads.
+Identifiant ORCID incorrect : 16 chiffres par groupes de 4 (ex. 0000-0002-1825-0097). ¦ Nesprávný identifikátor ORCID: 16 číslic ve skupinách po 4 (např. 0000-0002-1825-0097). ¦ Fel ORCID-identifierare: 16 siffror i grupper om 4 (t.ex. 0000-0002-1825-0097). ¦ Forkert ORCID-id: 16 cifre i grupper af 4 (f.eks. 0000-0002-1825-0097).
+Écris le nom de l’auteur (ex. Anne Martin) ou son identifiant HAL. ¦ Napiš jméno autora (např. Anne Martin) nebo jeho identifikátor HAL. ¦ Skriv författarens namn (t.ex. Anne Martin) eller dess HAL-identifierare. ¦ Skriv forfatterens navn (f.eks. Anne Martin) eller vedkommendes HAL-id.
+Les recensements SocFace ne sont pas installés. ¦ Sčítání SocFace nejsou nainstalována. ¦ SocFace-folkräkningarna är inte installerade. ¦ SocFace-folketællingerne er ikke installeret.
+Demande de remplissage de mauvaise forme. ¦ Požadavek na vyplnění má chybný tvar. ¦ Ifyllnadsbegäran är felaktigt utformad. ¦ Udfyldningsforespørgslen er forkert udformet.
+Demande de remplissage illisible. ¦ Požadavek na vyplnění je nečitelný. ¦ Ifyllnadsbegäran är oläslig. ¦ Udfyldningsforespørgslen er ulæselig.
+Liste de fiches de mauvaise forme. ¦ Seznam karet má chybný tvar. ¦ Listan över poster är felaktigt utformad. ¦ Listen over poster er forkert udformet.
+Je ne sais pas prendre cela dans la base. ¦ Tohle neumím z databáze vzít. ¦ Jag vet inte hur jag hämtar det ur databasen. ¦ Jeg ved ikke, hvordan jeg henter det fra databasen.
+Choisis un dépouillement. ¦ Vyber výpis. ¦ Välj ett register. ¦ Vælg en registrering.
+Ce dépouillement n’existe plus. ¦ Tento výpis už neexistuje. ¦ Registret finns inte längre. ¦ Registreringen findes ikke længere.
+Choisis une de tes listes. ¦ Vyber jeden ze svých seznamů. ¦ Välj en av dina listor. ¦ Vælg en af dine lister.
+Il n’y a pas de lignes à envoyer. ¦ Nejsou žádné řádky k odeslání. ¦ Det finns inga rader att skicka. ¦ Der er ingen rækker at sende.
+Donnée incorrecte dans une ligne. ¦ Nesprávný údaj na řádku. ¦ Fel uppgift på en rad. ¦ Forkert data i en række.
+Je ne sais pas envoyer cela vers la base. ¦ Tohle neumím poslat do databáze. ¦ Jag vet inte hur jag skickar det till databasen. ¦ Jeg ved ikke, hvordan jeg sender det til databasen.
+Donne l’année du recensement (par exemple 1836). ¦ Zadej rok sčítání (například 1836). ¦ Ange folkräkningens år (till exempel 1836). ¦ Angiv folketællingens år (for eksempel 1836).
+Rien à envoyer : toutes les lignes sont laissées de côté. ¦ Není co odeslat: všechny řádky jsou vynechané. ¦ Inget att skicka: alla rader är utelämnade. ¦ Intet at sende: alle rækker er udeladt.
+Jeton d’annulation de mauvaise forme. ¦ Token pro vrácení má chybný tvar. ¦ Ångra-token är felaktigt utformad. ¦ Fortryd-tokenet er forkert udformet.
+Cet envoi est introuvable. ¦ Toto odeslání nebylo nalezeno. ¦ Sändningen hittades inte. ¦ Afsendelsen blev ikke fundet.
+Cet envoi a déjà été annulé. ¦ Toto odeslání už bylo vráceno. ¦ Sändningen har redan ångrats. ¦ Afsendelsen er allerede fortrudt.
+La dernière modification a changé entre-temps : rien n’a été annulé. ¦ Poslední změna se mezitím změnila: nic nebylo vráceno. ¦ Den senaste ändringen har ändrats under tiden: inget har ångrats. ¦ Den seneste ændring er ændret i mellemtiden: intet er fortrudt.
+Rien à importer. ¦ Není co importovat. ¦ Inget att importera. ¦ Intet at importere.
+Trop de ménages d’un coup (400 au plus) : coupe le fichier. ¦ Příliš mnoho domácností najednou (nejvýše 400): rozděl soubor. ¦ För många hushåll på en gång (högst 400): dela upp filen. ¦ For mange husstande på én gang (højst 400): del filen op.
+Rien à importer : aucun ménage avec une année de recensement. ¦ Není co importovat: žádná domácnost s rokem sčítání. ¦ Inget att importera: inget hushåll med folkräkningsår. ¦ Intet at importere: ingen husstand med folketællingsår.
+Cet import est déjà annulé, ou introuvable. ¦ Tento import už byl vrácen, nebo nebyl nalezen. ¦ Importen har redan ångrats, eller hittades inte. ¦ Importen er allerede fortrudt eller blev ikke fundet.
+Ici, on range une image (JPG, PNG, WebP, GIF), un PDF ou un texte (.txt). ¦ Sem se ukládá obrázek (JPG, PNG, WebP, GIF), PDF nebo text (.txt). ¦ Här kan du lägga en bild (JPG, PNG, WebP, GIF), en PDF eller en text (.txt). ¦ Her gemmes et billede (JPG, PNG, WebP, GIF), en PDF eller en tekst (.txt).
+Choisis d’abord la fiche à qui ce document se rapporte. ¦ Nejdřív vyber kartu, které se tento dokument týká. ¦ Välj först posten som dokumentet gäller. ¦ Vælg først den post, dokumentet handler om.
+Il faut un fichier, un lien ou au moins le texte du document. ¦ Je potřeba soubor, odkaz nebo aspoň text dokumentu. ¦ Det behövs en fil, en länk eller åtminstone dokumentets text. ¦ Der skal være en fil, et link eller mindst dokumentets tekst.
+Données de l’import illisibles. ¦ Data importu jsou nečitelná. ¦ Importdata är oläsliga. ¦ Importdata er ulæselige.
+Cet ajout ne correspond pas à ce document. ¦ Tento doplněk neodpovídá tomuto dokumentu. ¦ Tillägget motsvarar inte dokumentet. ¦ Tilføjelsen svarer ikke til dette dokument.
+Il faut un fichier, un lien, le texte du document ou au moins une ligne à ajouter. ¦ Je potřeba soubor, odkaz, text dokumentu nebo aspoň jeden řádek k přidání. ¦ Det behövs en fil, en länk, dokumentets text eller minst en rad att lägga till. ¦ Der skal være en fil, et link, dokumentets tekst eller mindst én række at tilføje.
+Choisis d’abord la commune. ¦ Nejdřív vyber obec. ¦ Välj först orten. ¦ Vælg først byen.
+Choisis le lieu (ou la fiche) que ce document complète. ¦ Vyber místo (nebo kartu), které tento dokument doplňuje. ¦ Välj orten (eller posten) som dokumentet kompletterar. ¦ Vælg stedet (eller posten), som dokumentet supplerer.
+Impossible d’enregistrer l’image retouchée. ¦ Upravený obrázek nelze uložit. ¦ Kunde inte spara den retuscherade bilden. ¦ Kunne ikke gemme det redigerede billede.
+Seuls les images, les sons et les vidéos se modifient. ¦ Upravovat lze jen obrázky, zvuky a videa. ¦ Bara bilder, ljud och videor kan redigeras. ¦ Kun billeder, lyde og videoer kan redigeres.
+Le fichier de cette version n’est plus dans le dossier des médias. ¦ Soubor této verze už není ve složce médií. ¦ Den här versionens fil finns inte längre i mediemappen. ¦ Denne versions fil er ikke længere i mediemappen.
+Donne un nom à la version. ¦ Pojmenuj verzi. ¦ Ge versionen ett namn. ¦ Giv versionen et navn.
+L’original ne se supprime pas. ¦ Originál nelze smazat. ¦ Originalet kan inte raderas. ¦ Originalen kan ikke slettes.
+L’original n’est plus dans le dossier des médias : affiche d’abord une autre version. ¦ Originál už není ve složce médií: nejdřív zobraz jinou verzi. ¦ Originalet finns inte längre i mediemappen: visa först en annan version. ¦ Originalen er ikke længere i mediemappen: vis først en anden version.
+Acte introuvable (supprimé ?). ¦ Záznam nenalezen (smazán?). ¦ Handlingen hittades inte (raderad?). ¦ Dokumentet blev ikke fundet (slettet?).
+Sorte de bien inconnue. ¦ Neznámý druh majetku. ¦ Okänd typ av egendom. ¦ Ukendt ejendomstype.
+La valeur d’un bien est un nombre (ex. 1200). ¦ Hodnota majetku je číslo (např. 1200). ¦ Värdet på en egendom är ett tal (t.ex. 1200). ¦ En ejendoms værdi er et tal (f.eks. 1200).
+Donne au moins le défunt (ou le donateur), un héritier ou un bien. ¦ Zadej aspoň zesnulého (nebo dárce), dědice nebo majetek. ¦ Ange åtminstone den avlidne (eller givaren), en arvinge eller en egendom. ¦ Angiv mindst afdøde (eller giveren), en arving eller en ejendom.
+Acte introuvable (déjà supprimé ?). ¦ Záznam nenalezen (už smazán?). ¦ Handlingen hittades inte (redan raderad?). ¦ Dokumentet blev ikke fundet (allerede slettet?).
+Acte introuvable (rien à remettre). ¦ Záznam nenalezen (není co obnovit). ¦ Handlingen hittades inte (inget att återställa). ¦ Dokumentet blev ikke fundet (intet at gendanne).
+Mode consultation : pas de partage. ¦ Režim prohlížení: žádné sdílení. ¦ Visningsläge: ingen delning. ¦ Visningstilstand: ingen deling.
+Un numéro de puce n’a que des chiffres (15 en général). ¦ Číslo čipu obsahuje jen číslice (obvykle 15). ¦ Ett chipnummer har bara siffror (vanligen 15). ¦ Et chipnummer har kun cifre (som regel 15).
+Rien à supprimer. ¦ Není co smazat. ¦ Inget att radera. ¦ Intet at slette.
+Déjà supprimé. ¦ Už smazáno. ¦ Redan raderat. ¦ Allerede slettet.
+Trop de points d’un coup (5 000 au plus par envoi). ¦ Příliš mnoho bodů najednou (nejvýše 5 000 na odeslání). ¦ För många punkter på en gång (högst 5 000 per sändning). ¦ For mange punkter på én gang (højst 5.000 pr. upload).
+Trop d’animaux d’un coup (5 000 au plus). ¦ Příliš mnoho zvířat najednou (nejvýše 5 000). ¦ För många djur på en gång (högst 5 000). ¦ For mange dyr på én gang (højst 5.000).
+Fichier trop gros : trop de points GPS (500 000 au plus). ¦ Soubor je příliš velký: příliš mnoho bodů GPS (nejvýše 500 000). ¦ Filen är för stor: för många GPS-punkter (högst 500 000). ¦ Filen er for stor: for mange GPS-punkter (højst 500.000).
+Fichier trop gros : trop de lignes. ¦ Soubor je příliš velký: příliš mnoho řádků. ¦ Filen är för stor: för många rader. ¦ Filen er for stor: for mange linjer.
+Écris le chemin complet du dossier partagé (par exemple /Volumes/MaCle ou ~/Dropbox). ¦ Napiš úplnou cestu ke sdílené složce (například /Volumes/MujDisk nebo ~/Dropbox). ¦ Skriv den delade mappens fullständiga sökväg (till exempel /Volumes/MittMinne eller ~/Dropbox). ¦ Skriv den delte mappes fulde sti (for eksempel /Volumes/MinNoegle eller ~/Dropbox).
+Impossible de créer le rangement dans le dossier partagé. ¦ Úložiště ve sdílené složce nelze vytvořit. ¦ Kunde inte skapa lagringen i den delade mappen. ¦ Kunne ikke oprette lageret i den delte mappe.
+Impossible d’écrire la copie de départ. ¦ Výchozí kopii nelze zapsat. ¦ Kunde inte skriva startkopian. ¦ Kunne ikke skrive startkopien.
+Impossible d’écrire dans le dossier partagé. ¦ Do sdílené složky nelze zapisovat. ¦ Kunde inte skriva i den delade mappen. ¦ Kunne ikke skrive i den delte mappe.
+Choisis d’abord le dossier partagé. ¦ Nejdřív vyber sdílenou složku. ¦ Välj först den delade mappen. ¦ Vælg først den delte mappe.
+Aucun dossier partagé n’est choisi sur cet ordinateur. ¦ Na tomto počítači není vybraná žádná sdílená složka. ¦ Ingen delad mapp är vald på den här datorn. ¦ Ingen delt mappe er valgt på denne computer.
+Cette fusion est déjà annulée, ou introuvable. ¦ Toto sloučení už bylo vráceno, nebo nebylo nalezeno. ¦ Sammanslagningen har redan ångrats, eller hittades inte. ¦ Fletningen er allerede fortrudt eller blev ikke fundet.
+Paquet introuvable dans le dossier partagé. ¦ Balíček ve sdílené složce nenalezen. ¦ Paketet hittades inte i den delade mappen. ¦ Pakken blev ikke fundet i den delte mappe.
+Ce conflit est déjà réglé. ¦ Tento konflikt je už vyřešený. ¦ Konflikten är redan löst. ¦ Konflikten er allerede løst.
+« Garder les deux » marche pour une note. ¦ „Ponechat obojí“ funguje pro poznámku. ¦ ”Behåll båda” fungerar för en anteckning. ¦ »Behold begge« virker for en note.
+La fiche est verrouillée : déverrouille-la d’abord. ¦ Karta je zamčená: nejdřív ji odemkni. ¦ Posten är låst: lås upp den först. ¦ Posten er låst: lås den op først.
+Ce conflit n’est pas réglé. ¦ Tento konflikt není vyřešený. ¦ Konflikten är inte löst. ¦ Konflikten er ikke løst.
+Document trop lourd : partage-le en plusieurs documents. ¦ Dokument je příliš těžký: rozděl ho do několika dokumentů. ¦ Dokumentet är för tungt: dela upp det i flera dokument. ¦ Dokumentet er for tungt: del det op i flere dokumenter.
+Document trop lourd (plus de 30 Mo) : range les images dans les médias, ou partage-le en plusieurs documents. ¦ Dokument je příliš těžký (víc než 30 MB): ulož obrázky do médií, nebo ho rozděl do několika dokumentů. ¦ Dokumentet är för tungt (mer än 30 MB): spara bilderna bland medierna, eller dela upp det i flera dokument. ¦ Dokumentet er for tungt (over 30 MB): gem billederne i medierne, eller del det op i flere dokumenter.
+Ce document a été modifié ailleurs (autre onglet ou autre fenêtre) depuis que tu l’as ouvert. ¦ Tento dokument byl od jeho otevření změněn jinde (jiná karta nebo okno). ¦ Dokumentet har ändrats på annat håll (annan flik eller annat fönster) sedan du öppnade det. ¦ Dokumentet er ændret et andet sted (anden fane eller andet vindue), siden du åbnede det.
+Document introuvable : enregistre-le d’abord. ¦ Dokument nenalezen: nejdřív ho ulož. ¦ Dokumentet hittades inte: spara det först. ¦ Dokumentet blev ikke fundet: gem det først.
+Fichier manquant ou trop lourd (plus de 30 Mo). ¦ Soubor chybí nebo je příliš těžký (víc než 30 MB). ¦ Filen saknas eller är för tung (mer än 30 MB). ¦ Filen mangler eller er for tung (over 30 MB).
+Donne un titre à la fiche. ¦ Dej kartě název. ¦ Ge posten en titel. ¦ Giv posten en titel.
+Image de l’acte introuvable. ¦ Obrázek záznamu nenalezen. ¦ Handlingens bild hittades inte. ¦ Dokumentets billede blev ikke fundet.
+Zones ou personnes de l’acte illisibles : rien n’a été changé. ¦ Oblasti nebo osoby záznamu jsou nečitelné: nic se nezměnilo. ¦ Handlingens områden eller personer är oläsliga: inget har ändrats. ¦ Dokumentets områder eller personer er ulæselige: intet er ændret.
+Les Trésors ne sont pas encore prêts sur cette base. ¦ Poklady na této databázi ještě nejsou připravené. ¦ Skatterna är inte redo än i den här databasen. ¦ Skattene er ikke klar endnu i denne database.
+Média ou fiche introuvable. ¦ Médium nebo karta nenalezena. ¦ Mediet eller posten hittades inte. ¦ Mediet eller posten blev ikke fundet.
+Dessin trop lourd (plus de 8 Mo) : retire des images importées. ¦ Kresba je příliš těžká (víc než 8 MB): odeber importované obrázky. ¦ Teckningen är för tung (mer än 8 MB): ta bort importerade bilder. ¦ Tegningen er for tung (over 8 MB): fjern importerede billeder.
+Cadre de carte invalide. ¦ Neplatný rámeček mapy. ¦ Ogiltig kartram. ¦ Ugyldig kortramme.
+Réponse de Wikipédia illisible. ¦ Nečitelná odpověď Wikipedie. ¦ Oläsligt svar från Wikipedia. ¦ Ulæseligt svar fra Wikipedia.
+Une page est trop lourde (plus de 2 Mo) : range les images dans les médias, ou partage-la en deux pages. ¦ Stránka je příliš těžká (víc než 2 MB): ulož obrázky do médií, nebo ji rozděl na dvě stránky. ¦ En sida är för tung (mer än 2 MB): spara bilderna bland medierna, eller dela upp den i två sidor. ¦ En side er for tung (over 2 MB): gem billederne i medierne, eller del den op i to sider.
+Les fichiers en plus sont trop lourds (8 Mo en tout au plus). ¦ Další soubory jsou příliš těžké (celkem nejvýše 8 MB). ¦ De extra filerna är för tunga (högst 8 MB totalt). ¦ De ekstra filer er for tunge (højst 8 MB i alt).
+La feuille de styles ou le script est trop lourd (600 ko au plus). ¦ Šablona stylů nebo skript je příliš těžký (nejvýše 600 kB). ¦ Formatmallen eller skriptet är för tungt (högst 600 kB). ¦ Typografiarket eller scriptet er for tungt (højst 600 kB).
+Site trop lourd (plus de 20 Mo) : range les images dans les médias plutôt que dans les pages. ¦ Web je příliš těžký (víc než 20 MB): ulož obrázky do médií, ne do stránek. ¦ Webbplatsen är för tung (mer än 20 MB): spara bilderna bland medierna i stället för i sidorna. ¦ Webstedet er for tungt (over 20 MB): gem billederne i medierne i stedet for i siderne.
+Ce site a été modifié ailleurs (autre onglet ou autre fenêtre) depuis que tu l’as ouvert. ¦ Tento web byl od jeho otevření změněn jinde (jiná karta nebo okno). ¦ Webbplatsen har ändrats på annat håll (annan flik eller annat fönster) sedan du öppnade den. ¦ Webstedet er ændret et andet sted (anden fane eller andet vindue), siden du åbnede det.
+Site introuvable : enregistre-le d’abord. ¦ Web nenalezen: nejdřív ho ulož. ¦ Webbplatsen hittades inte: spara den först. ¦ Webstedet blev ikke fundet: gem det først.
+PHP est introuvable pour exécuter la page (indique son chemin dans la variable GENEALOGY_PHP). ¦ PHP pro spuštění stránky nebylo nalezeno (zadej jeho cestu v proměnné GENEALOGY_PHP). ¦ PHP hittades inte för att köra sidan (ange sökvägen i variabeln GENEALOGY_PHP). ¦ PHP blev ikke fundet til at køre siden (angiv stien i variablen GENEALOGY_PHP).
+Impossible de préparer le dossier d’exécution. ¦ Nelze připravit složku pro spuštění. ¦ Kunde inte förbereda körmappen. ¦ Kunne ikke forberede kørselsmappen.
+PHP n’a pas pu être lancé pour exécuter la page. ¦ PHP se pro spuštění stránky nepodařilo spustit. ¦ PHP kunde inte startas för att köra sidan. ¦ PHP kunne ikke startes til at køre siden.
+Impossible de garder l’aperçu en direct. ¦ Živý náhled nelze zachovat. ¦ Kunde inte behålla direktförhandsvisningen. ¦ Kunne ikke beholde liveforhåndsvisningen.
+Aperçu expiré. ¦ Náhled vypršel. ¦ Förhandsvisningen har gått ut. ¦ Forhåndsvisningen er udløbet.
+Impossible de garder les réglages de publication (dossier des données en lecture seule ?). ¦ Nastavení publikování nelze uložit (složka dat jen pro čtení?). ¦ Kunde inte behålla publiceringsinställningarna (datamappen skrivskyddad?). ¦ Kunne ikke beholde publiceringsindstillingerne (datamappen skrivebeskyttet?).
+Le service demande de patienter (trop de demandes) : réessaie dans une minute. ¦ Služba žádá o strpení (příliš mnoho požadavků): zkus to za minutu znovu. ¦ Tjänsten ber dig vänta (för många förfrågningar): försök igen om en minut. ¦ Tjenesten beder dig vente (for mange forespørgsler): prøv igen om et minut.
+Le nom du serveur FTP n’est pas bon (exemple : ftp.mon-hebergeur.fr). ¦ Název serveru FTP není správný (příklad: ftp.muj-hosting.cz). ¦ FTP-serverns namn är inte rätt (exempel: ftp.mitt-webbhotell.se). ¦ FTP-serverens navn er ikke rigtigt (eksempel: ftp.min-udbyder.dk).
+Dossier du site incorrect. ¦ Nesprávná složka webu. ¦ Fel webbplatsmapp. ¦ Forkert webstedsmappe.
+Donne le mot de passe FTP. ¦ Zadej heslo FTP. ¦ Ange FTP-lösenordet. ¦ Angiv FTP-adgangskoden.
+Trop de fichiers pour une publication. ¦ Příliš mnoho souborů na jedno publikování. ¦ För många filer för en publicering. ¦ For mange filer til én publicering.
+Le site est trop lourd pour être publié d’un coup (plus de 50 Mo). ¦ Web je na publikování najednou příliš těžký (víc než 50 MB). ¦ Webbplatsen är för tung för att publiceras på en gång (mer än 50 MB). ¦ Webstedet er for tungt til at blive publiceret på én gang (over 50 MB).
+Impossible de préparer le site. ¦ Web nelze připravit. ¦ Kunde inte förbereda webbplatsen. ¦ Kunne ikke forberede webstedet.
+Réponse de Netlify illisible. ¦ Nečitelná odpověď Netlify. ¦ Oläsligt svar från Netlify. ¦ Ulæseligt svar fra Netlify.
+Netlify n’a pas pu recevoir le site. ¦ Netlify web nepřijal. ¦ Netlify kunde inte ta emot webbplatsen. ¦ Netlify kunne ikke modtage webstedet.
+Réponse de GitHub illisible. ¦ Nečitelná odpověď GitHubu. ¦ Oläsligt svar från GitHub. ¦ Ulæseligt svar fra GitHub.
+Le dépôt GitHub doit s’écrire « nom » ou « compte/nom ». ¦ Repozitář GitHub se píše „název“ nebo „účet/název“. ¦ GitHub-förrådet skrivs ”namn” eller ”konto/namn”. ¦ GitHub-repositoriet skrives »navn« eller »konto/navn«.
+Le FTP sécurisé n’est pas disponible avec ce PHP (curl sans FTPS). ¦ Zabezpečené FTP s tímto PHP není k dispozici (curl bez FTPS). ¦ Säker FTP är inte tillgänglig med det här PHP (curl utan FTPS). ¦ Sikker FTP er ikke tilgængelig med denne PHP (curl uden FTPS).
+Donne d’abord le serveur, l’identifiant et le mot de passe FTP. ¦ Nejdřív zadej server, uživatelské jméno a heslo FTP. ¦ Ange först FTP-servern, användarnamnet och lösenordet. ¦ Angiv først FTP-serveren, brugernavnet og adgangskoden.
+Le serveur FTP ne répond pas : vérifie son nom et ta connexion. ¦ Server FTP neodpovídá: zkontroluj jeho název a své připojení. ¦ FTP-servern svarar inte: kontrollera dess namn och din anslutning. ¦ FTP-serveren svarer ikke: kontrollér dens navn og din forbindelse.
+Le serveur FTP refuse l’identifiant ou le mot de passe. ¦ Server FTP odmítá uživatelské jméno nebo heslo. ¦ FTP-servern nekar användarnamnet eller lösenordet. ¦ FTP-serveren afviser brugernavnet eller adgangskoden.
+Le serveur FTP n’a pas de connexion chiffrée valable (TLS) : par sûreté, rien n’est envoyé en clair. ¦ Server FTP nemá platné šifrované spojení (TLS): z bezpečnostních důvodů se nic neposílá nešifrovaně. ¦ FTP-servern har ingen giltig krypterad anslutning (TLS): av säkerhetsskäl skickas inget okrypterat. ¦ FTP-serveren har ingen gyldig krypteret forbindelse (TLS): af sikkerhedshensyn sendes intet ukrypteret.
+Un identifiant Wikidata commence par Q suivi de chiffres (« Q7186 »). ¦ Identifikátor Wikidata začíná Q a číslicemi („Q7186“). ¦ Ett Wikidata-id börjar med Q följt av siffror (”Q7186”). ¦ Et Wikidata-id begynder med Q efterfulgt af cifre (»Q7186«).
+Coche au moins une chose à ajouter. ¦ Zaškrtni aspoň jednu věc k přidání. ¦ Bocka för minst en sak att lägga till. ¦ Sæt flueben ved mindst én ting at tilføje.
+Classeur trop grand : plus de 2 millions de cellules. ¦ Sešit je příliš velký: víc než 2 miliony buněk. ¦ Arbetsboken är för stor: mer än 2 miljoner celler. ¦ Projektmappen er for stor: over 2 millioner celler.
+Classeur trop lourd (plus de 40 Mo) : partage-le en plusieurs classeurs. ¦ Sešit je příliš těžký (víc než 40 MB): rozděl ho do několika sešitů. ¦ Arbetsboken är för tung (mer än 40 MB): dela upp den i flera arbetsböcker. ¦ Projektmappen er for tung (over 40 MB): del den op i flere projektmapper.
+Ce classeur a été modifié dans une autre fenêtre depuis que tu l’as ouvert. ¦ Tento sešit byl od jeho otevření změněn v jiném okně. ¦ Arbetsboken har ändrats i ett annat fönster sedan du öppnade den. ¦ Projektmappen er ændret i et andet vindue, siden du åbnede den.
+Base SQLite introuvable ou non autorisée. ¦ Databáze SQLite nenalezena nebo není povolena. ¦ SQLite-databasen hittades inte eller är inte tillåten. ¦ SQLite-databasen blev ikke fundet eller er ikke tilladt.
+Impossible de créer le dossier de configuration. ¦ Nelze vytvořit složku konfigurace. ¦ Kunde inte skapa konfigurationsmappen. ¦ Kunne ikke oprette konfigurationsmappen.
+Impossible de supprimer la base active. ¦ Aktivní databázi nelze smazat. ¦ Kunde inte radera den aktiva databasen. ¦ Kunne ikke slette den aktive database.
+Réglages invalides. ¦ Neplatná nastavení. ¦ Ogiltiga inställningar. ¦ Ugyldige indstillinger.
+Un réglage est trop volumineux. ¦ Jedno nastavení je příliš velké. ¦ En inställning är för stor. ¦ En indstilling er for stor.
+Impossible d’enregistrer les défauts du site. ¦ Výchozí hodnoty webu nelze uložit. ¦ Kunde inte spara webbplatsens standardvärden. ¦ Kunne ikke gemme webstedets standardværdier.
+Import ZIP impossible : l'extension PHP ZipArchive n'est pas disponible. ¦ Import ZIP nelze provést: rozšíření PHP ZipArchive není k dispozici. ¦ ZIP-import omöjlig: PHP-tillägget ZipArchive är inte tillgängligt. ¦ ZIP-import umulig: PHP-udvidelsen ZipArchive er ikke tilgængelig.
+Aucun fichier .csv ou .txt trouvé dans le ZIP ¦ V ZIPu nebyl nalezen žádný soubor .csv ani .txt ¦ Ingen .csv- eller .txt-fil hittades i ZIP-filen ¦ Ingen .csv- eller .txt-fil fundet i ZIP-filen
+Lecture du fichier INSEE dans le ZIP impossible ¦ Soubor INSEE v ZIPu nelze přečíst ¦ Kunde inte läsa INSEE-filen i ZIP-filen ¦ Kunne ikke læse INSEE-filen i ZIP-filen
+Création du fichier temporaire impossible ¦ Dočasný soubor nelze vytvořit ¦ Kunde inte skapa den tillfälliga filen ¦ Kunne ikke oprette den midlertidige fil
+Écriture du fichier temporaire impossible ¦ Dočasný soubor nelze zapsat ¦ Kunde inte skriva den tillfälliga filen ¦ Kunne ikke skrive den midlertidige fil
+Lecture du fichier impossible ¦ Soubor nelze přečíst ¦ Kunde inte läsa filen ¦ Kunne ikke læse filen
+Colonnes non reconnues : ce fichier ne ressemble pas au fichier des personnes décédées de l'INSEE (colonnes attendues, avec ou sans en-tête : nom, prenom (ou nomprenom combiné), sexe, datenaiss, lieunaiss, commnaiss, paysnaiss, datedeces, lieudeces, commdeces, actedeces). ¦ Sloupce nerozpoznány: tento soubor nevypadá jako soubor zemřelých INSEE (očekávané sloupce, se záhlavím i bez: nom, prenom (nebo spojené nomprenom), sexe, datenaiss, lieunaiss, commnaiss, paysnaiss, datedeces, lieudeces, commdeces, actedeces). ¦ Kolumnerna kändes inte igen: filen liknar inte INSEE-filen över avlidna (förväntade kolumner, med eller utan rubrik: nom, prenom (eller sammanslaget nomprenom), sexe, datenaiss, lieunaiss, commnaiss, paysnaiss, datedeces, lieudeces, commdeces, actedeces). ¦ Kolonnerne blev ikke genkendt: filen ligner ikke INSEE-filen over afdøde (forventede kolonner, med eller uden overskrift: nom, prenom (eller samlet nomprenom), sexe, datenaiss, lieunaiss, commnaiss, paysnaiss, datedeces, lieudeces, commdeces, actedeces).
+Impossible d’enregistrer la liste des généalogies. ¦ Seznam rodokmenů nelze uložit. ¦ Kunde inte spara listan över släktträd. ¦ Kunne ikke gemme listen over slægtstræer.
+Donne un nom à la nouvelle généalogie. ¦ Pojmenuj nový rodokmen. ¦ Ge det nya släktträdet ett namn. ¦ Giv det nye slægtstræ et navn.
+Impossible de créer le dossier de la généalogie. ¦ Nelze vytvořit složku rodokmenu. ¦ Kunde inte skapa släktträdets mapp. ¦ Kunne ikke oprette slægtstræets mappe.
+Généalogie introuvable. ¦ Rodokmen nenalezen. ¦ Släktträdet hittades inte. ¦ Slægtstræet blev ikke fundet.
+Le nom ne peut pas être vide. ¦ Název nemůže být prázdný. ¦ Namnet får inte vara tomt. ¦ Navnet må ikke være tomt.
+La généalogie principale ne peut pas être mise de côté. ¦ Hlavní rodokmen nelze odložit. ¦ Det huvudsakliga släktträdet kan inte läggas åt sidan. ¦ Det primære slægtstræ kan ikke lægges til side.
+Ouvre d’abord une autre généalogie. ¦ Nejdřív otevři jiný rodokmen. ¦ Öppna först ett annat släktträd. ¦ Åbn først et andet slægtstræ.
+Impossible de créer le dossier des généalogies mises de côté. ¦ Nelze vytvořit složku odložených rodokmenů. ¦ Kunde inte skapa mappen för undanlagda släktträd. ¦ Kunne ikke oprette mappen til tilsidelagte slægtstræer.
+Impossible de déplacer le dossier de la généalogie. ¦ Složku rodokmenu nelze přesunout. ¦ Kunde inte flytta släktträdets mapp. ¦ Kunne ikke flytte slægtstræets mappe.
+Seules les quinze dernières suppressions sont restaurables. ¦ Obnovit lze jen posledních patnáct smazání. ¦ Bara de femton senaste borttagningarna kan återställas. ¦ Kun de sidste femten sletninger kan gendannes.
+Cette suppression ne peut pas être restaurée proprement. ¦ Toto smazání nelze čistě obnovit. ¦ Borttagningen kan inte återställas korrekt. ¦ Denne sletning kan ikke gendannes rent.
+Type de restauration non pris en charge. ¦ Tento typ obnovy není podporován. ¦ Återställningstypen stöds inte. ¦ Gendannelsestypen understøttes ikke.
+Événement introuvable dans le snapshot. ¦ Událost ve snímku nenalezena. ¦ Händelsen hittades inte i ögonblicksbilden. ¦ Begivenheden blev ikke fundet i øjebliksbilledet.
+Cet événement existe déjà. ¦ Tato událost už existuje. ¦ Händelsen finns redan. ¦ Begivenheden findes allerede.
+La personne liée à cet événement n’existe plus. ¦ Osoba propojená s touto událostí už neexistuje. ¦ Personen kopplad till händelsen finns inte längre. ¦ Personen forbundet med begivenheden findes ikke længere.
+La famille liée à cet événement n’existe plus. ¦ Rodina propojená s touto událostí už neexistuje. ¦ Familjen kopplad till händelsen finns inte längre. ¦ Familien forbundet med begivenheden findes ikke længere.
+Média introuvable dans le snapshot. ¦ Médium ve snímku nenalezeno. ¦ Mediet hittades inte i ögonblicksbilden. ¦ Mediet blev ikke fundet i øjebliksbilledet.
+Ce média existe déjà. ¦ Toto médium už existuje. ¦ Mediet finns redan. ¦ Mediet findes allerede.
+Un rattachement du média n’existe plus. ¦ Jedno propojení média už neexistuje. ¦ En koppling för mediet finns inte längre. ¦ En forbindelse for mediet findes ikke længere.
+Note introuvable dans le snapshot. ¦ Poznámka ve snímku nenalezena. ¦ Anteckningen hittades inte i ögonblicksbilden. ¦ Noten blev ikke fundet i øjebliksbilledet.
+Cette note existe déjà. ¦ Tato poznámka už existuje. ¦ Anteckningen finns redan. ¦ Noten findes allerede.
+Le rattachement de la note n’existe plus. ¦ Propojení poznámky už neexistuje. ¦ Anteckningens koppling finns inte längre. ¦ Notens forbindelse findes ikke længere.
+Source introuvable dans le snapshot. ¦ Pramen ve snímku nenalezen. ¦ Källan hittades inte i ögonblicksbilden. ¦ Kilden blev ikke fundet i øjebliksbilledet.
+Un rattachement de la source n’existe plus. ¦ Jedno propojení pramene už neexistuje. ¦ En koppling för källan finns inte längre. ¦ En forbindelse for kilden findes ikke længere.
+Cette source existe déjà. ¦ Tento pramen už existuje. ¦ Källan finns redan. ¦ Kilden findes allerede.
+La source liée à cette citation n’existe plus. ¦ Pramen propojený s touto citací už neexistuje. ¦ Källan kopplad till hänvisningen finns inte längre. ¦ Kilden forbundet med henvisningen findes ikke længere.
+Battue introuvable dans le snapshot. ¦ Hromadné pátrání ve snímku nenalezeno. ¦ Sökinsatsen hittades inte i ögonblicksbilden. ¦ Eftersøgningen blev ikke fundet i øjebliksbilledet.
+Cette battue existe déjà. ¦ Toto hromadné pátrání už existuje. ¦ Sökinsatsen finns redan. ¦ Eftersøgningen findes allerede.
+La commune de départ n’existe plus. ¦ Výchozí obec už neexistuje. ¦ Startorten finns inte längre. ¦ Startbyen findes ikke længere.
+Annotation de battue introuvable dans le snapshot. ¦ Poznámka k hromadnému pátrání ve snímku nenalezena. ¦ Sökinsatsens anteckning hittades inte i ögonblicksbilden. ¦ Eftersøgningens note blev ikke fundet i øjebliksbilledet.
+Cette annotation existe déjà. ¦ Tato poznámka už existuje. ¦ Anteckningen finns redan. ¦ Noten findes allerede.
+La battue liée à cette annotation n’existe plus. ¦ Hromadné pátrání propojené s touto poznámkou už neexistuje. ¦ Sökinsatsen kopplad till anteckningen finns inte längre. ¦ Eftersøgningen forbundet med noten findes ikke længere.
+Commune liée introuvable dans le snapshot. ¦ Propojená obec ve snímku nenalezena. ¦ Den kopplade orten hittades inte i ögonblicksbilden. ¦ Den forbundne by blev ikke fundet i øjebliksbilledet.
+Cette commune liée existe déjà. ¦ Tato propojená obec už existuje. ¦ Den kopplade orten finns redan. ¦ Den forbundne by findes allerede.
+La battue liée à cette commune n’existe plus. ¦ Hromadné pátrání propojené s touto obcí už neexistuje. ¦ Sökinsatsen kopplad till orten finns inte längre. ¦ Eftersøgningen forbundet med byen findes ikke længere.
+Enquête introuvable dans le snapshot. ¦ Pátrání ve snímku nenalezeno. ¦ Undersökningen hittades inte i ögonblicksbilden. ¦ Undersøgelsen blev ikke fundet i øjebliksbilledet.
+Cette enquête existe déjà. ¦ Toto pátrání už existuje. ¦ Undersökningen finns redan. ¦ Undersøgelsen findes allerede.
+La personne principale de l’enquête n’existe plus. ¦ Hlavní osoba pátrání už neexistuje. ¦ Undersökningens huvudperson finns inte längre. ¦ Undersøgelsens hovedperson findes ikke længere.
+Piste introuvable dans le snapshot. ¦ Stopa ve snímku nenalezena. ¦ Spåret hittades inte i ögonblicksbilden. ¦ Sporet blev ikke fundet i øjebliksbilledet.
+Cette piste existe déjà. ¦ Tato stopa už existuje. ¦ Spåret finns redan. ¦ Sporet findes allerede.
+L’enquête liée à cette piste n’existe plus. ¦ Pátrání propojené s touto stopou už neexistuje. ¦ Undersökningen kopplad till spåret finns inte längre. ¦ Undersøgelsen forbundet med sporet findes ikke længere.
+Média d’enquête introuvable dans le snapshot. ¦ Médium pátrání ve snímku nenalezeno. ¦ Undersökningens medium hittades inte i ögonblicksbilden. ¦ Undersøgelsens medie blev ikke fundet i øjebliksbilledet.
+Ce média d’enquête existe déjà. ¦ Toto médium pátrání už existuje. ¦ Undersökningens medium finns redan. ¦ Undersøgelsens medie findes allerede.
+L’enquête liée à ce média n’existe plus. ¦ Pátrání propojené s tímto médiem už neexistuje. ¦ Undersökningen kopplad till mediet finns inte längre. ¦ Undersøgelsen forbundet med mediet findes ikke længere.
+Le média lié n’existe plus. ¦ Propojené médium už neexistuje. ¦ Det kopplade mediet finns inte längre. ¦ Det forbundne medie findes ikke længere.
+Impossible de créer le fichier temporaire d’export. ¦ Dočasný soubor exportu nelze vytvořit. ¦ Kunde inte skapa den tillfälliga exportfilen. ¦ Kunne ikke oprette den midlertidige eksportfil.
+Fichier de base introuvable ¦ Soubor databáze nenalezen ¦ Databasfilen hittades inte ¦ Databasefilen blev ikke fundet
+Impossible de créer le dossier des bases de test. ¦ Nelze vytvořit složku testovacích databází. ¦ Kunde inte skapa mappen för testdatabaser. ¦ Kunne ikke oprette mappen til testdatabaser.
+Impossible de créer la copie temporaire de restauration. ¦ Nelze vytvořit dočasnou kopii pro obnovu. ¦ Kunde inte skapa den tillfälliga återställningskopian. ¦ Kunne ikke oprette den midlertidige gendannelseskopi.
+Média ou fichier manquant. ¦ Chybí médium nebo soubor. ¦ Medium eller fil saknas. ¦ Medie eller fil mangler.
+Le fichier choisi n’existe pas dans le dossier media. ¦ Vybraný soubor ve složce media neexistuje. ¦ Den valda filen finns inte i media-mappen. ¦ Den valgte fil findes ikke i media-mappen.
+Base ou sauvegarde de comparaison introuvable. ¦ Databáze nebo záloha k porovnání nenalezena. ¦ Databasen eller säkerhetskopian att jämföra hittades inte. ¦ Databasen eller sikkerhedskopien til sammenligning blev ikke fundet.
+Source de comparaison manquante. ¦ Chybí zdroj k porovnání. ¦ Jämförelsekällan saknas. ¦ Sammenligningskilden mangler.
+Impossible d'ouvrir le paquet .mftpkg (format inattendu) ¦ Balíček .mftpkg nelze otevřít (nečekaný formát) ¦ Kunde inte öppna .mftpkg-paketet (oväntat format) ¦ Kunne ikke åbne .mftpkg-pakken (uventet format)
+Format d'archive non reconnu : ni fichier GEDCOM (.ged), ni base MacFamilyTree ('database'), ni fichier Hérédis (.heredis) dans le paquet. ¦ Formát archivu nerozpoznán: v balíčku není soubor GEDCOM (.ged), databáze MacFamilyTree ('database') ani soubor Hérédis (.heredis). ¦ Arkivformatet kändes inte igen: ingen GEDCOM-fil (.ged), MacFamilyTree-databas (’database’) eller Hérédis-fil (.heredis) i paketet. ¦ Arkivformatet blev ikke genkendt: ingen GEDCOM-fil (.ged), MacFamilyTree-database (’database’) eller Hérédis-fil (.heredis) i pakken.
+Cette archive contient trop de fichiers : elle n’est pas ouverte. ¦ Tento archiv obsahuje příliš mnoho souborů: neotevře se. ¦ Arkivet innehåller för många filer: det öppnas inte. ¦ Arkivet indeholder for mange filer: det åbnes ikke.
+Cette archive est trop grosse une fois ouverte pour la place libre de l’ordinateur. ¦ Tento archiv je po otevření na volné místo počítače příliš velký. ¦ Arkivet är för stort för datorns lediga utrymme när det öppnas. ¦ Arkivet er for stort til computerens ledige plads, når det åbnes.
+Impossible de créer un dossier temporaire pour l'extraction ¦ Nelze vytvořit dočasnou složku pro rozbalení ¦ Kunde inte skapa en tillfällig mapp för uppackning ¦ Kunne ikke oprette en midlertidig mappe til udpakning
+Base MacFamilyTree introuvable dans le paquet (fichier 'database' absent). ¦ Databáze MacFamilyTree v balíčku nenalezena (chybí soubor 'database'). ¦ MacFamilyTree-databasen hittades inte i paketet (filen ’database’ saknas). ¦ MacFamilyTree-databasen blev ikke fundet i pakken (filen ’database’ mangler).
+Le nom du type est obligatoire ¦ Název typu je povinný ¦ Typens namn krävs ¦ Typens navn er påkrævet
+Événement manquant ¦ Chybí událost ¦ Händelse saknas ¦ Begivenhed mangler
+Événement introuvable ¦ Událost nenalezena ¦ Händelsen hittades inte ¦ Begivenheden blev ikke fundet
+Coordonnées manquantes ¦ Chybí souřadnice ¦ Koordinater saknas ¦ Koordinater mangler
+Enquête introuvable ¦ Pátrání nenalezeno ¦ Undersökningen hittades inte ¦ Undersøgelsen blev ikke fundet
+Indique le centre d’archives à visiter. ¦ Zadej archiv, který navštívíš. ¦ Ange arkivet som ska besökas. ¦ Angiv det arkiv, der skal besøges.
+URL générale du centre invalide. ¦ Neplatná obecná URL archivu. ¦ Ogiltig allmän URL för arkivet. ¦ Ugyldig generel URL for arkivet.
+URL d’information du centre invalide. ¦ Neplatná informační URL archivu. ¦ Ogiltig informations-URL för arkivet. ¦ Ugyldig informations-URL for arkivet.
+Dépouillement d’archive introuvable. ¦ Archivní výpis nenalezen. ¦ Arkivregistret hittades inte. ¦ Arkivregistreringen blev ikke fundet.
+Indique une cote à consulter. ¦ Zadej signaturu k nahlédnutí. ¦ Ange ett signum att granska. ¦ Angiv en signatur at se.
+Dépouillement introuvable ¦ Výpis nenalezen ¦ Registret hittades inte ¦ Registreringen blev ikke fundet
+Indique la lacune constatée. ¦ Zadej zjištěnou mezeru. ¦ Ange den konstaterade luckan. ¦ Angiv det konstaterede hul.
+Indique l’acte ou le document à consulter. ¦ Zadej záznam nebo dokument k nahlédnutí. ¦ Ange handlingen eller dokumentet att granska. ¦ Angiv det dokument, der skal ses.
+Ce média n’est pas lié au dépouillement. ¦ Toto médium není propojené s výpisem. ¦ Mediet är inte kopplat till registret. ¦ Mediet er ikke forbundet med registreringen.
+Indique le texte de la ligne. ¦ Zadej text řádku. ¦ Ange radens text. ¦ Angiv rækkens tekst.
+Ajoute au moins une ligne avant de créer une version. ¦ Před vytvořením verze přidej aspoň jeden řádek. ¦ Lägg till minst en rad innan du skapar en version. ¦ Tilføj mindst én række, før du opretter en version.
+Dépouillement manquant ¦ Chybí výpis ¦ Register saknas ¦ Registrering mangler
+Média ou dépouillement manquant ¦ Chybí médium nebo výpis ¦ Medium eller register saknas ¦ Medie eller registrering mangler
+Choisis une personne existante ¦ Vyber existující osobu ¦ Välj en befintlig person ¦ Vælg en eksisterende person
+Indique un prénom ou un nom pour créer la personne ¦ Pro vytvoření osoby zadej jméno nebo příjmení ¦ Ange ett förnamn eller ett efternamn för att skapa personen ¦ Angiv et fornavn eller et efternavn for at oprette personen
+Indique au moins un prénom ou un nom relevé ¦ Zadej aspoň jedno zapsané jméno nebo příjmení ¦ Ange minst ett noterat förnamn eller efternamn ¦ Angiv mindst ét noteret fornavn eller efternavn
+Personne relevée introuvable ¦ Zapsaná osoba nenalezena ¦ Den noterade personen hittades inte ¦ Den noterede person blev ikke fundet
+Action d’écriture inconnue ¦ Neznámá zapisovací akce ¦ Okänd skrivåtgärd ¦ Ukendt skrivehandling
+Nom d’étiquette obligatoire. ¦ Název štítku je povinný. ¦ Etikettens namn krävs. ¦ Etikettens navn er påkrævet.
+Étiquette introuvable. ¦ Štítek nenalezen. ¦ Etiketten hittades inte. ¦ Etiketten blev ikke fundet.
+Cible d’étiquette invalide. ¦ Neplatný cíl štítku. ¦ Ogiltigt mål för etiketten. ¦ Ugyldigt mål for etiketten.
+Portée non prise en charge ¦ Rozsah není podporován ¦ Omfånget stöds inte ¦ Omfanget understøttes ikke
+Relation incomplète ¦ Neúplný vztah ¦ Ofullständig relation ¦ Ufuldstændig relation
+Une personne ne peut pas être liée à elle-même ¦ Osoba nemůže být propojena sama se sebou ¦ En person kan inte kopplas till sig själv ¦ En person kan ikke forbindes med sig selv
+Impossible : une personne et un animal ne peuvent pas être parents ou conjoints l’un de l’autre. ¦ Nemožné: osoba a zvíře nemohou být navzájem rodiči ani partnery. ¦ Omöjligt: en person och ett djur kan inte vara varandras förälder eller partner. ¦ Umuligt: en person og et dyr kan ikke være hinandens forælder eller partner.
+Impossible : cette personne serait à la fois l’ancêtre et le descendant de l’autre. Vérifie le sens du lien (parent ou enfant). ¦ Nemožné: tato osoba by byla předkem i potomkem té druhé zároveň. Zkontroluj směr vazby (rodič nebo dítě). ¦ Omöjligt: personen skulle vara både anfader och ättling till den andra. Kontrollera kopplingens riktning (förälder eller barn). ¦ Umuligt: personen ville være både ane og efterkommer af den anden. Kontrollér forbindelsens retning (forælder eller barn).
+Événement lié introuvable pour cette personne. ¦ Propojená událost pro tuto osobu nenalezena. ¦ Den kopplade händelsen hittades inte för personen. ¦ Den forbundne begivenhed blev ikke fundet for personen.
+Hypothèse introuvable ¦ Hypotéza nenalezena ¦ Hypotesen hittades inte ¦ Hypotesen blev ikke fundet
+Année de recensement invalide ¦ Neplatný rok sčítání ¦ Ogiltigt folkräkningsår ¦ Ugyldigt folketællingsår
+Personne liée introuvable ¦ Propojená osoba nenalezena ¦ Den kopplade personen hittades inte ¦ Den forbundne person blev ikke fundet
+Nom du membre obligatoire ¦ Jméno člena je povinné ¦ Medlemmens namn krävs ¦ Medlemmets navn er påkrævet
+Cette personne est déjà le membre principal de ce foyer : modifie plutôt sa ligne. ¦ Tato osoba už je hlavním členem této domácnosti: uprav raději její řádek. ¦ Personen är redan huvudmedlem i hushållet: redigera hellre personens rad. ¦ Personen er allerede hovedmedlem af husstanden: redigér hellere personens række.
+Le membre principal se modifie depuis le recensement, il ne se retire pas ici. ¦ Hlavní člen se upravuje ze sčítání, tady se odebrat nedá. ¦ Huvudmedlemmen redigeras från folkräkningen; den kan inte tas bort här. ¦ Hovedmedlemmet redigeres fra folketællingen; det kan ikke fjernes her.
+Type de rattachement invalide ¦ Neplatný typ propojení ¦ Ogiltig kopplingstyp ¦ Ugyldig forbindelsestype
+Référence ou personne manquante ¦ Chybí odkaz nebo osoba ¦ Referens eller person saknas ¦ Reference eller person mangler
+Cet événement n’est pas lié à cette personne ¦ Tato událost není propojená s touto osobou ¦ Händelsen är inte kopplad till personen ¦ Begivenheden er ikke forbundet med personen
+Cette sépulture n’est pas liée à cette personne ¦ Tento hrob není propojený s touto osobou ¦ Graven är inte kopplad till personen ¦ Graven er ikke forbundet med personen
+Choisis au moins un média ¦ Vyber aspoň jedno médium ¦ Välj minst ett medium ¦ Vælg mindst ét medie
+Aucun nouveau média à lier ¦ Žádné nové médium k propojení ¦ Inget nytt medium att koppla ¦ Intet nyt medie at forbinde
+Ce recensement n’est pas lié à cette personne ¦ Toto sčítání není propojené s touto osobou ¦ Folkräkningen är inte kopplad till personen ¦ Folketællingen er ikke forbundet med personen
+Entrée introuvable ¦ Položka nenalezena ¦ Posten hittades inte ¦ Elementet blev ikke fundet
+Fusion impossible : on ne fusionne pas une personne avec un animal. ¦ Sloučení nelze provést: osoba se se zvířetem neslučuje. ¦ Sammanslagning omöjlig: en person slås inte ihop med ett djur. ¦ Fletning umulig: en person flettes ikke med et dyr.
+Type Décès introuvable ¦ Typ Úmrtí nenalezen ¦ Typen Död hittades inte ¦ Typen Død blev ikke fundet
+Personne et titre de l’enquête obligatoires ¦ Osoba a název pátrání jsou povinné ¦ Person och undersökningens titel krävs ¦ Person og undersøgelsens titel er påkrævet
+Enquête manquante ¦ Chybí pátrání ¦ Undersökning saknas ¦ Undersøgelse mangler
+Un suivi de registre choisi n’existe plus. ¦ Vybrané sledování matriky už neexistuje. ¦ En vald registeruppföljning finns inte längre. ¦ En valgt protokolopfølgning findes ikke længere.
+Lien de suivi invalide. ¦ Neplatný odkaz sledování. ¦ Ogiltig uppföljningslänk. ¦ Ugyldigt opfølgningslink.
+Enquête et intitulé obligatoires ¦ Pátrání a název jsou povinné ¦ Undersökning och titel krävs ¦ Undersøgelse og titel er påkrævet
+Cette piste n’a pas de rappel. ¦ Tato stopa nemá připomenutí. ¦ Spåret har ingen påminnelse. ¦ Sporet har ingen påmindelse.
+Date du rappel obligatoire. ¦ Datum připomenutí je povinné. ¦ Påminnelsens datum krävs. ¦ Påmindelsens dato er påkrævet.
+Titre du rappel obligatoire. ¦ Název připomenutí je povinný. ¦ Påminnelsens titel krävs. ¦ Påmindelsens titel er påkrævet.
+Titre de budget obligatoire. ¦ Název rozpočtu je povinný. ¦ Budgetens titel krävs. ¦ Budgettets titel er påkrævet.
+Ligne de budget introuvable. ¦ Řádek rozpočtu nenalezen. ¦ Budgetraden hittades inte. ¦ Budgetrækken blev ikke fundet.
+Ligne de budget manquante. ¦ Chybí řádek rozpočtu. ¦ Budgetrad saknas. ¦ Budgetrække mangler.
+Le destinataire (mairie, archives, greffe…) est obligatoire. ¦ Adresát (matriční úřad, archiv, soud…) je povinný. ¦ Mottagaren (kommun, arkiv, domstol…) krävs. ¦ Modtageren (kommune, arkiv, ret…) er påkrævet.
+L’objet du courrier est obligatoire. ¦ Předmět dopisu je povinný. ¦ Brevets ämne krävs. ¦ Brevets emne er påkrævet.
+La personne liée est introuvable. ¦ Propojená osoba nebyla nalezena. ¦ Den kopplade personen hittades inte. ¦ Den forbundne person blev ikke fundet.
+Titre et commune de départ obligatoires. ¦ Název a výchozí obec jsou povinné. ¦ Titel och startort krävs. ¦ Titel og startby er påkrævet.
+Commune de départ introuvable dans les contours. ¦ Výchozí obec nebyla v obrysech nalezena. ¦ Startorten hittades inte i konturerna. ¦ Startbyen blev ikke fundet i omridsene.
+Commune liée manquante. ¦ Chybí propojená obec. ¦ Kopplad ort saknas. ¦ Forbundet by mangler.
+Commune liée introuvable. ¦ Propojená obec nenalezena. ¦ Den kopplade orten hittades inte. ¦ Den forbundne by blev ikke fundet.
+Commune liée invalide. ¦ Neplatná propojená obec. ¦ Ogiltig kopplad ort. ¦ Ugyldig forbundet by.
+Dossier introuvable pour cette enquête. ¦ Složka pro toto pátrání nenalezena. ¦ Mappen hittades inte för undersökningen. ¦ Mappen blev ikke fundet for denne undersøgelse.
+Média évalué introuvable ¦ Hodnocené médium nenalezeno ¦ Det bedömda mediet hittades inte ¦ Det vurderede medie blev ikke fundet
+Média d’enquête manquant. ¦ Chybí médium pátrání. ¦ Undersökningens medium saknas. ¦ Undersøgelsens medie mangler.
+Média d’enquête introuvable. ¦ Médium pátrání nenalezeno. ¦ Undersökningens medium hittades inte. ¦ Undersøgelsens medie blev ikke fundet.
+Paramètres manquants ¦ Chybí parametry ¦ Parametrar saknas ¦ Parametre mangler
+Événement invalide. ¦ Neplatná událost. ¦ Ogiltig händelse. ¦ Ugyldig begivenhed.
+Donne un nom au dossier ¦ Pojmenuj složku ¦ Ge mappen ett namn ¦ Giv mappen et navn
+Choisis au moins un média à déplacer ¦ Vyber aspoň jedno médium k přesunutí ¦ Välj minst ett medium att flytta ¦ Vælg mindst ét medie at flytte
+Dossier de destination invalide ¦ Neplatná cílová složka ¦ Ogiltig målmapp ¦ Ugyldig målmappe
+Statut invalide : choisis Vivant, Décédé ou Inconnu. ¦ Neplatný stav: vyber Žijící, Zemřelý nebo Neznámý. ¦ Ogiltig status: välj Levande, Avliden eller Okänd. ¦ Ugyldig status: vælg Levende, Afdød eller Ukendt.
+Cette fiche a été modifiée dans une autre fenêtre depuis que tu l’as ouverte : recharge-la pour voir les changements (tes modifications ne sont pas perdues : elles restent dans cette fenêtre ; copie-les avant de recharger, ou choisis « Enregistrer quand même » pour remplacer l’autre version). ¦ Tato karta byla od jejího otevření změněna v jiném okně: načti ji znovu a uvidíš změny (tvoje úpravy se neztratí: zůstávají v tomto okně; zkopíruj je před načtením, nebo zvol „Přesto uložit“ a nahraď druhou verzi). ¦ Posten har ändrats i ett annat fönster sedan du öppnade den: läs in den igen för att se ändringarna (dina ändringar går inte förlorade: de finns kvar i det här fönstret; kopiera dem innan du läser in igen, eller välj ”Spara ändå” för att ersätta den andra versionen). ¦ Posten er ændret i et andet vindue, siden du åbnede den: genindlæs den for at se ændringerne (dine ændringer går ikke tabt: de bliver i dette vindue; kopiér dem, før du genindlæser, eller vælg »Gem alligevel« for at erstatte den anden version).
+Cette suppression est trop ancienne : elle ne contient pas de quoi restaurer la fiche. ¦ Toto smazání je příliš staré: neobsahuje, co je potřeba k obnovení karty. ¦ Borttagningen är för gammal: den innehåller inte det som behövs för att återställa posten. ¦ Sletningen er for gammel: den indeholder ikke det, der skal til for at gendanne posten.
+Cette fiche existe déjà. ¦ Tato karta už existuje. ¦ Posten finns redan. ¦ Posten findes allerede.
+Personne introuvable : la fiche a peut-être été supprimée. ¦ Osoba nenalezena: karta byla možná smazána. ¦ Personen hittades inte: posten kan ha raderats. ¦ Personen blev ikke fundet: posten er måske slettet.
+Cette image source n’est pas liée à la fiche. ¦ Tento zdrojový obrázek není propojený s kartou. ¦ Källbilden är inte kopplad till posten. ¦ Kildebilledet er ikke forbundet med posten.
+Média de preuve introuvable ¦ Důkazní médium nenalezeno ¦ Bevismediet hittades inte ¦ Bevismediet blev ikke fundet
+Famille ou type d’événement manquant ¦ Chybí rodina nebo typ události ¦ Familj eller händelsetyp saknas ¦ Familie eller begivenhedstype mangler
+Personne ou type d’événement manquant ¦ Chybí osoba nebo typ události ¦ Person eller händelsetyp saknas ¦ Person eller begivenhedstype mangler
+Type d’événement introuvable : choisis-en un dans la liste. ¦ Typ události nenalezen: vyber některý ze seznamu. ¦ Händelsetypen hittades inte: välj en i listan. ¦ Begivenhedstypen blev ikke fundet: vælg en på listen.
+Événement ou type manquant ¦ Chybí událost nebo typ ¦ Händelse eller typ saknas ¦ Begivenhed eller type mangler
+Personne ou nom de la fiche manquant ¦ Chybí osoba nebo název karty ¦ Person eller postens namn saknas ¦ Person eller postens navn mangler
+Choisis l’événement à sourcer ¦ Vyber událost, ke které přidáš pramen ¦ Välj händelsen som ska få en källa ¦ Vælg den begivenhed, der skal have en kilde
+Média manquant ¦ Chybí médium ¦ Medium saknas ¦ Medie mangler
+Rotation disponible uniquement pour les images. ¦ Otáčení je k dispozici jen pro obrázky. ¦ Rotation finns bara för bilder. ¦ Rotation er kun tilgængelig for billeder.
+Rotation impossible : l’extension PHP GD n’est pas disponible. ¦ Otočení nelze provést: rozšíření PHP GD není k dispozici. ¦ Rotation omöjlig: PHP-tillägget GD är inte tillgängligt. ¦ Rotation umulig: PHP-udvidelsen GD er ikke tilgængelig.
+Format image non pris en charge pour la rotation. ¦ Formát obrázku není pro otáčení podporován. ¦ Bildformatet stöds inte för rotation. ¦ Billedformatet understøttes ikke til rotation.
+Impossible de lire l’image. ¦ Obrázek nelze přečíst. ¦ Kunde inte läsa bilden. ¦ Kunne ikke læse billedet.
+Impossible d’enregistrer l’image tournée. ¦ Otočený obrázek nelze uložit. ¦ Kunde inte spara den roterade bilden. ¦ Kunne ikke gemme det roterede billede.
+Modèle HTR inconnu ¦ Neznámý model HTR ¦ Okänd HTR-modell ¦ Ukendt HTR-model
+La reconnaissance manuscrite est disponible uniquement sur les images. ¦ Rozpoznávání rukopisu je k dispozici jen na obrázcích. ¦ Handskriftsigenkänning finns bara för bilder. ¦ Håndskriftsgenkendelse er kun tilgængelig på billeder.
+Image améliorée : écriture impossible. ¦ Vylepšený obrázek: zápis nelze provést. ¦ Förbättrad bild: kunde inte skrivas. ¦ Forbedret billede: kunne ikke skrives.
+La reconnaissance d’écriture n’est pas encore installée : Réglages → Reconnaissance d’écriture (HTR) → « Installer » (une seule fois). ¦ Rozpoznávání písma ještě není nainstalováno: Nastavení → Rozpoznávání písma (HTR) → „Instalovat“ (jen jednou). ¦ Handskriftsigenkänning är inte installerad än: Inställningar → Handskriftsigenkänning (HTR) → ”Installera” (bara en gång). ¦ Håndskriftsgenkendelse er ikke installeret endnu: Indstillinger → Håndskriftsgenkendelse (HTR) → »Installér« (kun én gang).
+Impossible de lancer le service HTR local. ¦ Místní službu HTR nelze spustit. ¦ Kunde inte starta den lokala HTR-tjänsten. ¦ Kunne ikke starte den lokale HTR-tjeneste.
+Cette image n’est pas rattachée à la personne ¦ Tento obrázek není propojený s osobou ¦ Bilden är inte kopplad till personen ¦ Billedet er ikke forbundet med personen
+Ordre des médias manquant ¦ Chybí pořadí médií ¦ Mediernas ordning saknas ¦ Mediernes rækkefølge mangler
+Type de média invalide. ¦ Neplatný typ média. ¦ Ogiltig medietyp. ¦ Ugyldig medietype.
+Référence ou personne manquante. ¦ Chybí odkaz nebo osoba. ¦ Referens eller person saknas. ¦ Reference eller person mangler.
+Cet événement n’est pas lié à cette personne. ¦ Tato událost není propojená s touto osobou. ¦ Händelsen är inte kopplad till personen. ¦ Begivenheden er ikke forbundet med personen.
+Choisis au moins deux médias pour créer un document groupé. ¦ Pro vytvoření sdruženého dokumentu vyber aspoň dvě média. ¦ Välj minst två medier för att skapa ett grupperat dokument. ¦ Vælg mindst to medier for at oprette et grupperet dokument.
+Un des médias choisis n’est pas lié à cet élément. ¦ Jedno z vybraných médií není propojené s touto položkou. ¦ Ett av de valda medierna är inte kopplat till objektet. ¦ Et af de valgte medier er ikke forbundet med elementet.
+Document groupé manquant. ¦ Chybí sdružený dokument. ¦ Grupperat dokument saknas. ¦ Grupperet dokument mangler.
+Document groupé introuvable. ¦ Sdružený dokument nenalezen. ¦ Det grupperade dokumentet hittades inte. ¦ Det grupperede dokument blev ikke fundet.
+Ordre des médias manquant. ¦ Chybí pořadí médií. ¦ Mediernas ordning saknas. ¦ Mediernes rækkefølge mangler.
+Nom de branche obligatoire. ¦ Název větve je povinný. ¦ Grenens namn krävs. ¦ Grenens navn er påkrævet.
+Nom de vue obligatoire ¦ Název pohledu je povinný ¦ Vyns namn krävs ¦ Visningens navn er påkrævet
+Le terme est requis ¦ Výraz je povinný ¦ Termen krävs ¦ Termen er påkrævet
+Sépulture introuvable ¦ Hrob nenalezen ¦ Graven hittades inte ¦ Graven blev ikke fundet
+Cette personne est déjà rattachée à une sépulture ¦ Tato osoba už je propojená s hrobem ¦ Personen är redan kopplad till en grav ¦ Personen er allerede forbundet med en grav
+Sépulture manquante ¦ Chybí hrob ¦ Grav saknas ¦ Grav mangler
+Cette personne est déjà rattachée à une autre sépulture ¦ Tato osoba už je propojená s jiným hrobem ¦ Personen är redan kopplad till en annan grav ¦ Personen er allerede forbundet med en anden grav
+Cette personne est déjà associée à cette sépulture ¦ Tato osoba už je s tímto hrobem spojená ¦ Personen är redan kopplad till den här graven ¦ Personen er allerede forbundet med denne grav
+Référence manquante ¦ Chybí odkaz ¦ Referens saknas ¦ Reference mangler
+Cette personne n’est pas rattachée à cette sépulture ¦ Tato osoba není propojená s tímto hrobem ¦ Personen är inte kopplad till den här graven ¦ Personen er ikke forbundet med denne grav
+Impossible de retirer la dernière personne : supprime la sépulture si besoin ¦ Poslední osobu nelze odebrat: v případě potřeby smaž hrob ¦ Kan inte ta bort den sista personen: radera graven vid behov ¦ Kan ikke fjerne den sidste person: slet graven om nødvendigt
+Ce média n’est pas accessible depuis cette fiche ¦ Toto médium není z této karty dostupné ¦ Mediet kan inte nås från posten ¦ Mediet kan ikke nås fra denne post
+Ce rattachement existe déjà ¦ Toto propojení už existuje ¦ Kopplingen finns redan ¦ Forbindelsen findes allerede
+Données manquantes ¦ Chybí údaje ¦ Uppgifter saknas ¦ Data mangler
+Impossible de retirer le dernier rattachement — supprime le média si tu veux le retirer complètement ¦ Poslední propojení nelze odebrat — smaž médium, chceš-li ho úplně odstranit ¦ Kan inte ta bort den sista kopplingen — radera mediet om du vill ta bort det helt ¦ Kan ikke fjerne den sidste forbindelse — slet mediet, hvis du vil fjerne det helt
+Méthode refusée ¦ Metoda odmítnuta ¦ Metoden nekad ¦ Metoden afvist
+Personne, annotation de battue ou dépouillement manquant ¦ Chybí osoba, poznámka k hromadnému pátrání nebo výpis ¦ Person, sökinsatsanteckning eller register saknas ¦ Person, eftersøgningsnote eller registrering mangler
+Aucun fichier reçu ¦ Nebyl přijat žádný soubor ¦ Ingen fil togs emot ¦ Ingen fil modtaget
+Une carte postale recto/verso doit contenir exactement deux images : recto puis verso. ¦ Oboustranná pohlednice musí obsahovat přesně dva obrázky: přední, pak zadní stranu. ¦ Ett vykort med fram- och baksida måste innehålla exakt två bilder: framsida och sedan baksida. ¦ Et postkort med for- og bagside skal indeholde præcis to billeder: forside og så bagside.
+Dossier d’enquête introuvable. ¦ Složka pátrání nenalezena. ¦ Undersökningens mapp hittades inte. ¦ Undersøgelsens mappe blev ikke fundet.
+Annotation de battue introuvable. ¦ Poznámka k hromadnému pátrání nenalezena. ¦ Sökinsatsens anteckning hittades inte. ¦ Eftersøgningens note blev ikke fundet.
+Choisis le type de l’événement à créer. ¦ Vyber typ události k vytvoření. ¦ Välj typen av händelse som ska skapas. ¦ Vælg typen af den begivenhed, der skal oprettes.
+Ce recensement n’est pas rattaché à cette personne. ¦ Toto sčítání není propojené s touto osobou. ¦ Folkräkningen är inte kopplad till personen. ¦ Folketællingen er ikke forbundet med personen.
+Aucun fichier reçu : choisis-le à nouveau. ¦ Nebyl přijat žádný soubor: vyber ho znovu. ¦ Ingen fil togs emot: välj den igen. ¦ Ingen fil modtaget: vælg den igen.
+Une carte postale recto/verso doit contenir uniquement deux images. ¦ Oboustranná pohlednice smí obsahovat jen dva obrázky. ¦ Ett vykort med fram- och baksida får bara innehålla två bilder. ¦ Et postkort med for- og bagside må kun indeholde to billeder.
+Ce fichier semble déjà avoir été importé (« {file} » le {date}, {n} ligne(s)). Confirme si tu veux l'importer quand même. ¦ Tento soubor už byl zřejmě importován („{file}“ dne {date}, řádků: {n}). Potvrď, pokud ho chceš importovat přesto. ¦ Filen verkar redan ha importerats (”{file}” den {date}, {n} rad(er)). Bekräfta om du ändå vill importera den. ¦ Filen ser ud til allerede at være importeret (»{file}« den {date}, {n} række(r)). Bekræft, hvis du alligevel vil importere den.
+Fiche verrouillée ({name}). Déverrouille-la avant de modifier ce couple. ¦ Karta je zamčená ({name}). Než upravíš tento pár, odemkni ji. ¦ Posten är låst ({name}). Lås upp den innan du redigerar paret. ¦ Posten er låst ({name}). Lås den op, før du redigerer parret.
+Fusion impossible : {a} et {b} forment un couple. Deux conjoints ne sont pas la même personne. ¦ Sloučení nelze provést: {a} a {b} tvoří pár. Dva partneři nejsou tatáž osoba. ¦ Sammanslagning omöjlig: {a} och {b} är ett par. Två partner är inte samma person. ¦ Fletning umulig: {a} og {b} er et par. To partnere er ikke den samme person.
+Fusion impossible : {a} est un ancêtre de {b}. Un ancêtre et son descendant ne sont pas la même personne. ¦ Sloučení nelze provést: {a} je předkem {b}. Předek a jeho potomek nejsou tatáž osoba. ¦ Sammanslagning omöjlig: {a} är anfader till {b}. En anfader och dess ättling är inte samma person. ¦ Fletning umulig: {a} er ane til {b}. En ane og dens efterkommer er ikke den samme person.
+Cette parcelle est déjà dans ta liste (fiche n° {n}) : ouvre-la plutôt que d’en créer une deuxième. ¦ Tato parcela už je ve tvém seznamu (karta č. {n}): otevři ji raději, než vytvoříš druhou. ¦ Skiftet finns redan i din lista (post nr {n}): öppna det hellre än att skapa ett till. ¦ Matriklen er allerede på din liste (post nr. {n}): åbn den hellere end at oprette en til.
+Tu as déjà {n} cartes de photos : supprimes-en une pour en créer une autre. ¦ Máš už map fotek: {n}. Jednu smaž, než vytvoříš další. ¦ Du har redan {n} fotokartor: radera en för att skapa en ny. ¦ Du har allerede {n} fotokort: slet et for at oprette et nyt.
+Les {n} puzzles en cours sont gardés : termine ou supprime-en un pour en commencer un autre. ¦ Rozehraná puzzle ({n}) se uchovávají: jedno dokonči nebo smaž, než začneš další. ¦ De {n} pågående pusslen sparas: avsluta eller radera ett för att börja ett nytt. ¦ De {n} igangværende puslespil gemmes: afslut eller slet ét for at begynde et nyt.
+Les {n} graphiques et widgets sont gardés : supprime-en un pour en créer un autre. ¦ Grafy a widgety ({n}) se uchovávají: jeden smaž, než vytvoříš další. ¦ De {n} diagrammen och widgetarna sparas: radera en för att skapa en ny. ¦ De {n} diagrammer og widgets gemmes: slet én for at oprette en ny.
+Le champ « {label} » est obligatoire. ¦ Pole „{label}“ je povinné. ¦ Fältet ”{label}” krävs. ¦ Feltet »{label}« er påkrævet.
+Le champ « {label} » est à remplir. ¦ Pole „{label}“ je třeba vyplnit. ¦ Fältet ”{label}” måste fyllas i. ¦ Feltet »{label}« skal udfyldes.
+« {name} » est une femelle : elle ne peut pas être le père. ¦ „{name}“ je samice: nemůže být otcem. ¦ ”{name}” är en hona: hon kan inte vara fadern. ¦ »{name}« er en hun: hun kan ikke være faderen.
+« {name} » est un mâle : il ne peut pas être la mère. ¦ „{name}“ je samec: nemůže být matkou. ¦ ”{name}” är en hane: han kan inte vara modern. ¦ »{name}« er en han: han kan ikke være moderen.
+Dossier introuvable : {dir} (clé ou disque débranché ?). La sauvegarde se fera dès qu’il sera de retour. ¦ Složka nenalezena: {dir} (flash disk nebo disk odpojen?). Záloha proběhne, jakmile bude zpět. ¦ Mappen hittades inte: {dir} (USB-minne eller disk urkopplad?). Säkerhetskopieringen görs så snart den är tillbaka. ¦ Mappen blev ikke fundet: {dir} (USB-nøgle eller disk frakoblet?). Sikkerhedskopieringen sker, så snart den er tilbage.
+Dossier introuvable : {dir} (clé débranchée ?). ¦ Složka nenalezena: {dir} (flash disk odpojen?). ¦ Mappen hittades inte: {dir} (USB-minne urkopplat?). ¦ Mappen blev ikke fundet: {dir} (USB-nøgle frakoblet?).
+Dossier partagé introuvable : {dir} (clé débranchée ?). Rien n’est perdu : tes changements partiront la prochaine fois. ¦ Sdílená složka nenalezena: {dir} (flash disk odpojen?). Nic se neztratí: tvoje změny odejdou příště. ¦ Den delade mappen hittades inte: {dir} (USB-minne urkopplat?). Inget går förlorat: dina ändringar skickas nästa gång. ¦ Den delte mappe blev ikke fundet: {dir} (USB-nøgle frakoblet?). Intet går tabt: dine ændringer sendes næste gang.
+Cette généalogie est déjà ouverte sur l’ordinateur « {name} ». Ferme-la là-bas d’abord : deux ordinateurs qui écrivent dans le même fichier peuvent l’abîmer. ¦ Tento rodokmen je už otevřený na počítači „{name}“. Nejdřív ho tam zavři: dva počítače zapisující do stejného souboru ho mohou poškodit. ¦ Släktträdet är redan öppet på datorn ”{name}”. Stäng det där först: två datorer som skriver i samma fil kan skada den. ¦ Slægtstræet er allerede åbent på computeren »{name}«. Luk det der først: to computere, der skriver i den samme fil, kan beskadige den.
+Ce type de fichier ne se range pas dans les médias (.{ext}). ¦ Tento typ souboru se do médií neukládá (.{ext}). ¦ Den här filtypen kan inte sparas bland medierna (.{ext}). ¦ Denne filtype kan ikke gemmes i medierne (.{ext}).
+Ce type de fichier ne se range pas dans les médias (sans extension). ¦ Tento typ souboru se do médií neukládá (bez přípony). ¦ Den här filtypen kan inte sparas bland medierna (utan filändelse). ¦ Denne filtype kan ikke gemmes i medierne (uden filtypenavn).
+Le contenu du fichier ne correspond pas à son extension (.{ext}). ¦ Obsah souboru neodpovídá jeho příponě (.{ext}). ¦ Filens innehåll motsvarar inte filändelsen (.{ext}). ¦ Filens indhold svarer ikke til filtypenavnet (.{ext}).
+Pas assez de place sur le disque pour ouvrir cette sauvegarde (il faut environ {n} Mo libres). ¦ Na disku není dost místa pro otevření této zálohy (je potřeba asi {n} MB volného místa). ¦ Inte tillräckligt med diskutrymme för att öppna säkerhetskopian (cirka {n} MB ledigt behövs). ¦ Ikke nok diskplads til at åbne sikkerhedskopien (cirka {n} MB ledig plads kræves).
+Pas assez d’espace disque pour préparer la sauvegarde complète (il faut environ {n} Mo libres). ¦ Na disku není dost místa pro přípravu úplné zálohy (je potřeba asi {n} MB volného místa). ¦ Inte tillräckligt med diskutrymme för att förbereda den fullständiga säkerhetskopian (cirka {n} MB ledigt behövs). ¦ Ikke nok diskplads til at forberede den fulde sikkerhedskopi (cirka {n} MB ledig plads kræves).
+Ce dossier a déjà {n} lignes : ouvre-en un autre. ¦ Tato složka má už {n} řádků: otevři jinou. ¦ Mappen har redan {n} rader: öppna en annan. ¦ Mappen har allerede {n} rækker: åbn en anden.
+Choisis la fiche de la personne pour le visage {n} (ou « Plus tard »). ¦ Vyber kartu osoby pro obličej {n} (nebo „Později“). ¦ Välj personens post för ansikte {n} (eller ”Senare”). ¦ Vælg personens post for ansigt {n} (eller »Senere«).
+Choisis la personne concernée pour le témoignage « {q} ». ¦ Vyber dotčenou osobu pro svědectví „{q}“. ¦ Välj den berörda personen för vittnesmålet ”{q}”. ¦ Vælg den berørte person for vidnesbyrdet »{q}«.
+La page {n} existe déjà. ¦ Stránka {n} už existuje. ¦ Sidan {n} finns redan. ¦ Side {n} findes allerede.
+Cette date est avant sa naissance ({date}) ¦ Toto datum je před narozením ({date}) ¦ Datumet ligger före födelsen ({date}) ¦ Datoen ligger før fødslen ({date})
+Cette date est après son décès ({date}) ¦ Toto datum je po úmrtí ({date}) ¦ Datumet ligger efter döden ({date}) ¦ Datoen ligger efter døden ({date})
+La date de naissance exacte de {name} n’est pas connue. ¦ Přesné datum narození {name} není známo. ¦ Det exakta födelsedatumet för {name} är inte känt. ¦ Den præcise fødselsdato for {name} kendes ikke.
+Commune inconnue. ¦ Neznámá obec. ¦ Okänd ort. ¦ Ukendt by.
+Adresse inconnue. ¦ Neznámá adresa. ¦ Okänd adress. ¦ Ukendt adresse.
+Position impossible. ¦ Nemožná poloha. ¦ Omöjlig position. ¦ Umulig position.
+Service d’archives introuvable. ¦ Archivní služba nenalezena. ¦ Arkivtjänsten hittades inte. ¦ Arkivtjenesten blev ikke fundet.
+Adresse e-mail invalide. ¦ Neplatná e-mailová adresa. ¦ Ogiltig e-postadress. ¦ Ugyldig e-mailadresse.
+Cette fiche n’existe plus. ¦ Tato karta už neexistuje. ¦ Posten finns inte längre. ¦ Posten findes ikke længere.
+Fiche introuvable. ¦ Karta nenalezena. ¦ Posten hittades inte. ¦ Posten blev ikke fundet.
+Fiche introuvable ¦ Karta nenalezena ¦ Posten hittades inte ¦ Posten blev ikke fundet
+Profil inconnu. ¦ Neznámý profil. ¦ Okänd profil. ¦ Ukendt profil.
+Sorte inconnue. ¦ Neznámý druh. ¦ Okänd typ. ¦ Ukendt type.
+Sorte introuvable. ¦ Druh nenalezen. ¦ Typen hittades inte. ¦ Typen blev ikke fundet.
+Demande Discogs inconnue. ¦ Neznámý požadavek Discogs. ¦ Okänd Discogs-begäran. ¦ Ukendt Discogs-forespørgsel.
+Demande MusicBrainz inconnue. ¦ Neznámý požadavek MusicBrainz. ¦ Okänd MusicBrainz-begäran. ¦ Ukendt MusicBrainz-forespørgsel.
+Demande Open Library inconnue. ¦ Neznámý požadavek Open Library. ¦ Okänd Open Library-begäran. ¦ Ukendt Open Library-forespørgsel.
+Demande Wikidata inconnue. ¦ Neznámý požadavek Wikidata. ¦ Okänd Wikidata-begäran. ¦ Ukendt Wikidata-forespørgsel.
+Demande TMDb inconnue. ¦ Neznámý požadavek TMDb. ¦ Okänd TMDb-begäran. ¦ Ukendt TMDb-forespørgsel.
+Demande iTunes inconnue. ¦ Neznámý požadavek iTunes. ¦ Okänd iTunes-begäran. ¦ Ukendt iTunes-forespørgsel.
+Source d’import inconnue. ¦ Neznámý zdroj importu. ¦ Okänd importkälla. ¦ Ukendt importkilde.
+Impossible d’enregistrer l’image. ¦ Obrázek nelze uložit. ¦ Kunde inte spara bilden. ¦ Kunne ikke gemme billedet.
+Image illisible. ¦ Obrázek je nečitelný. ¦ Bilden är oläslig. ¦ Billedet er ulæseligt.
+Image trop lourde (15 Mo au plus). ¦ Obrázek je příliš těžký (nejvýše 15 MB). ¦ Bilden är för tung (högst 15 MB). ¦ Billedet er for tungt (højst 15 MB).
+Projet introuvable. ¦ Projekt nenalezen. ¦ Projektet hittades inte. ¦ Projektet blev ikke fundet.
+Dossier introuvable. ¦ Složka nenalezena. ¦ Mappen hittades inte. ¦ Mappen blev ikke fundet.
+Dossier introuvable ¦ Složka nenalezena ¦ Mappen hittades inte ¦ Mappen blev ikke fundet
+Fichier trop gros. ¦ Soubor je příliš velký. ¦ Filen är för stor. ¦ Filen er for stor.
+Fichier Zotero RDF illisible. ¦ Soubor Zotero RDF je nečitelný. ¦ Zotero RDF-filen är oläslig. ¦ Zotero RDF-filen er ulæselig.
+Fichier JSON illisible. ¦ Soubor JSON je nečitelný. ¦ JSON-filen är oläslig. ¦ JSON-filen er ulæselig.
+Fichier EndNote XML illisible. ¦ Soubor EndNote XML je nečitelný. ¦ EndNote XML-filen är oläslig. ¦ EndNote XML-filen er ulæselig.
+Son introuvable. ¦ Zvuk nenalezen. ¦ Ljudet hittades inte. ¦ Lyden blev ikke fundet.
+Zones illisibles. ¦ Oblasti jsou nečitelné. ¦ Regionerna är oläsliga. ¦ Områderne er ulæselige.
+Transcription illisible. ¦ Přepis je nečitelný. ¦ Transkriptionen är oläslig. ¦ Transskriptionen er ulæselig.
+Transcription trop longue (5 000 lignes au plus). ¦ Přepis je příliš dlouhý (nejvýše 5 000 řádků). ¦ Transkriptionen är för lång (högst 5 000 rader). ¦ Transskriptionen er for lang (højst 5.000 linjer).
+Cette base ne contient aucune personne. ¦ Tato databáze neobsahuje žádnou osobu. ¦ Databasen innehåller inga personer. ¦ Databasen indeholder ingen personer.
+Impossible d’ouvrir l’archive. ¦ Archiv nelze otevřít. ¦ Kunde inte öppna arkivet. ¦ Kunne ikke åbne arkivet.
+Aucune base (.db) dans cette archive. ¦ V tomto archivu není žádná databáze (.db). ¦ Ingen databas (.db) i arkivet. ¦ Ingen database (.db) i arkivet.
+Fichier introuvable ou illisible. ¦ Soubor nenalezen nebo je nečitelný. ¦ Filen hittades inte eller är oläslig. ¦ Filen blev ikke fundet eller er ulæselig.
+Fiche trop volumineuse. ¦ Karta je příliš velká. ¦ Posten är för stor. ¦ Posten er for stor.
+Tableau introuvable. ¦ Tabule nenalezena. ¦ Tavlan hittades inte. ¦ Tavlen blev ikke fundet.
+Tableau trop lourd : retire quelques dessins. ¦ Tabule je příliš těžká: odeber některé kresby. ¦ Tavlan är för tung: ta bort några teckningar. ¦ Tavlen er for tung: fjern nogle tegninger.
+Tableau parent introuvable. ¦ Nadřazená tabule nenalezena. ¦ Den överordnade tavlan hittades inte. ¦ Den overordnede tavle blev ikke fundet.
+Parcelle introuvable. ¦ Parcela nenalezena. ¦ Skiftet hittades inte. ¦ Matriklen blev ikke fundet.
+Lieu introuvable. ¦ Místo nenalezeno. ¦ Orten hittades inte. ¦ Stedet blev ikke fundet.
+Couche illisible. ¦ Vrstva je nečitelná. ¦ Lagret är oläsligt. ¦ Laget er ulæseligt.
+Couche trop lourde (8 Mo au plus). ¦ Vrstva je příliš těžká (nejvýše 8 MB). ¦ Lagret är för tungt (högst 8 MB). ¦ Laget er for tungt (højst 8 MB).
+Couche introuvable. ¦ Vrstva nenalezena. ¦ Lagret hittades inte. ¦ Laget blev ikke fundet.
+Carte illisible. ¦ Mapa je nečitelná. ¦ Kartan är oläslig. ¦ Kortet er ulæseligt.
+Fichier d’essai introuvable. ¦ Zkušební soubor nenalezen. ¦ Testfilen hittades inte. ¦ Testfilen blev ikke fundet.
+Copie impossible. ¦ Kopírování nelze provést. ¦ Kopiering omöjlig. ¦ Kopiering umulig.
+Fichier illisible. ¦ Soubor je nečitelný. ¦ Filen är oläslig. ¦ Filen er ulæselig.
+Citation introuvable. ¦ Citace nenalezena. ¦ Hänvisningen hittades inte. ¦ Henvisningen blev ikke fundet.
+Citation introuvable ¦ Citace nenalezena ¦ Hänvisningen hittades inte ¦ Henvisningen blev ikke fundet
+Objet introuvable ¦ Předmět nenalezen ¦ Föremålet hittades inte ¦ Genstanden blev ikke fundet
+Objet introuvable. ¦ Předmět nenalezen. ¦ Föremålet hittades inte. ¦ Genstanden blev ikke fundet.
+Souvenir introuvable ¦ Památka nenalezena ¦ Minnessaken hittades inte ¦ Mindegenstanden blev ikke fundet
+Type inconnu ¦ Neznámý typ ¦ Okänd typ ¦ Ukendt type
+Adresse invalide ¦ Neplatná adresa ¦ Ogiltig adress ¦ Ugyldig adresse
+Salon introuvable ¦ Veletrh nenalezen ¦ Mässan hittades inte ¦ Messen blev ikke fundet
+Alerte inconnue. ¦ Neznámé upozornění. ¦ Okänd varning. ¦ Ukendt advarsel.
+Texte illisible. ¦ Text je nečitelný. ¦ Texten är oläslig. ¦ Teksten er ulæselig.
+Date d’envoi incorrecte. ¦ Nesprávné datum odeslání. ¦ Fel sändningsdatum. ¦ Forkert afsendelsesdato.
+Courrier introuvable. ¦ Dopis nenalezen. ¦ Brevet hittades inte. ¦ Brevet blev ikke fundet.
+Cousinade introuvable. ¦ Rodinné setkání nenalezeno. ¦ Släktträffen hittades inte. ¦ Slægtsstævnet blev ikke fundet.
+Champ inconnu. ¦ Neznámé pole. ¦ Okänt fält. ¦ Ukendt felt.
+Champ inconnu ¦ Neznámé pole ¦ Okänt fält ¦ Ukendt felt
+Valeur hors limites. ¦ Hodnota mimo rozsah. ¦ Värdet utanför gränserna. ¦ Værdi uden for grænserne.
+Liste inconnue. ¦ Neznámý seznam. ¦ Okänd lista. ¦ Ukendt liste.
+Widget inconnu. ¦ Neznámý widget. ¦ Okänd widget. ¦ Ukendt widget.
+Ensemble inconnu. ¦ Neznámá množina. ¦ Okänd mängd. ¦ Ukendt mængde.
+Choisis au moins 2 ensembles. ¦ Vyber aspoň 2 množiny. ¦ Välj minst 2 mängder. ¦ Vælg mindst 2 mængder.
+Choisis au moins deux personnes. ¦ Vyber aspoň dvě osoby. ¦ Välj minst två personer. ¦ Vælg mindst to personer.
+Choisis deux personnes. ¦ Vyber dvě osoby. ¦ Välj två personer. ¦ Vælg to personer.
+Diagramme introuvable. ¦ Diagram nenalezen. ¦ Schemat hittades inte. ¦ Skemaet blev ikke fundet.
+Foyer inconnu. ¦ Neznámá domácnost. ¦ Okänt hushåll. ¦ Ukendt husstand.
+Test introuvable. ¦ Test nenalezen. ¦ Testet hittades inte. ¦ Testen blev ikke fundet.
+Correspondance introuvable. ¦ Shoda nenalezena. ¦ Matchningen hittades inte. ¦ Matchet blev ikke fundet.
+Groupe introuvable. ¦ Skupina nenalezena. ¦ Gruppen hittades inte. ¦ Gruppen blev ikke fundet.
+Format d’export inconnu. ¦ Neznámý formát exportu. ¦ Okänt exportformat. ¦ Ukendt eksportformat.
+Export impossible : l’extension PHP ZipArchive manque sur cet ordinateur. ¦ Export nelze provést: na tomto počítači chybí rozšíření PHP ZipArchive. ¦ Export omöjlig: PHP-tillägget ZipArchive saknas på den här datorn. ¦ Eksport umulig: PHP-udvidelsen ZipArchive mangler på denne computer.
+Fichier temporaire impossible. ¦ Dočasný soubor nelze vytvořit. ¦ Tillfällig fil omöjlig. ¦ Midlertidig fil umulig.
+Employeur sans nom. ¦ Zaměstnavatel bez jména. ¦ Arbetsgivare utan namn. ¦ Arbejdsgiver uden navn.
+Photo introuvable. ¦ Fotka nenalezena. ¦ Fotot hittades inte. ¦ Fotoet blev ikke fundet.
+Visage introuvable. ¦ Obličej nenalezen. ¦ Ansiktet hittades inte. ¦ Ansigtet blev ikke fundet.
+ePub impossible : l’extension PHP ZipArchive manque. ¦ ePub nelze vytvořit: chybí rozšíření PHP ZipArchive. ¦ ePub omöjlig: PHP-tillägget ZipArchive saknas. ¦ ePub umulig: PHP-udvidelsen ZipArchive mangler.
+Document impossible : l’extension PHP ZipArchive manque. ¦ Dokument nelze vytvořit: chybí rozšíření PHP ZipArchive. ¦ Dokument omöjligt: PHP-tillägget ZipArchive saknas. ¦ Dokument umuligt: PHP-udvidelsen ZipArchive mangler.
+Livret introuvable. ¦ Brožurka nenalezena. ¦ Häftet hittades inte. ¦ Hæftet blev ikke fundet.
+Graphique inconnu (identifiant invalide). ¦ Neznámý graf (neplatný identifikátor). ¦ Okänt diagram (ogiltig identifierare). ¦ Ukendt diagram (ugyldig identifikator).
+Graphique illisible. ¦ Graf je nečitelný. ¦ Diagrammet är oläsligt. ¦ Diagrammet er ulæseligt.
+Graphique illisible (champ inconnu). ¦ Graf je nečitelný (neznámé pole). ¦ Diagrammet är oläsligt (okänt fält). ¦ Diagrammet er ulæseligt (ukendt felt).
+Graphique illisible (parties). ¦ Graf je nečitelný (části). ¦ Diagrammet är oläsligt (delar). ¦ Diagrammet er ulæseligt (dele).
+Graphique introuvable. ¦ Graf nenalezen. ¦ Diagrammet hittades inte. ¦ Diagrammet blev ikke fundet.
+Lien impossible ¦ Propojení nelze vytvořit ¦ Koppling omöjlig ¦ Forbindelse umulig
+Voyage introuvable ¦ Cesta nenalezena ¦ Resan hittades inte ¦ Rejsen blev ikke fundet
+Placement introuvable ¦ Umístění nenalezeno ¦ Placeringen hittades inte ¦ Placeringen blev ikke fundet
+Armoiries introuvables ¦ Erb nenalezen ¦ Vapnet hittades inte ¦ Våbenskjoldet blev ikke fundet
+Circuit introuvable ¦ Okruh nenalezen ¦ Rundturen hittades inte ¦ Rundturen blev ikke fundet
+Ligne introuvable ¦ Řádek nenalezen ¦ Raden hittades inte ¦ Rækken blev ikke fundet
+Ligne introuvable. ¦ Řádek nenalezen. ¦ Raden hittades inte. ¦ Rækken blev ikke fundet.
+Circuit manquant ¦ Chybí okruh ¦ Rundtur saknas ¦ Rundtur mangler
+Aucun fichier CSV dans ce ZIP. ¦ V tomto ZIPu není žádný soubor CSV. ¦ Ingen CSV-fil i ZIP-filen. ¦ Ingen CSV-fil i denne ZIP.
+Aucune ligne utilisable dans ce fichier. ¦ V tomto souboru není žádný použitelný řádek. ¦ Ingen användbar rad i filen. ¦ Ingen brugbar række i filen.
+Acte ou document manquant ¦ Chybí záznam nebo dokument ¦ Handling eller dokument saknas ¦ Dokument mangler
+Chiffrement impossible. ¦ Šifrování nelze provést. ¦ Kryptering omöjlig. ¦ Kryptering umulig.
+Copie introuvable ¦ Kopie nenalezena ¦ Kopian hittades inte ¦ Kopien blev ikke fundet
+Copie introuvable. ¦ Kopie nenalezena. ¦ Kopian hittades inte. ¦ Kopien blev ikke fundet.
+Harmonisation introuvable. ¦ Sjednocení nenalezeno. ¦ Harmoniseringen hittades inte. ¦ Harmoniseringen blev ikke fundet.
+Bloc introuvable ¦ Blok nenalezen ¦ Blocket hittades inte ¦ Blokken blev ikke fundet
+Nom manquant. ¦ Chybí název. ¦ Namn saknas. ¦ Navn mangler.
+Enregistrement impossible. ¦ Uložení nelze provést. ¦ Kunde inte spara. ¦ Kunne ikke gemme.
+Source inconnue. ¦ Neznámý zdroj. ¦ Okänd källa. ¦ Ukendt kilde.
+Pack inconnu. ¦ Neznámý balíček. ¦ Okänt paket. ¦ Ukendt pakke.
+Pack trop gros (150 Mo au plus). ¦ Balíček je příliš velký (nejvýše 150 MB). ¦ Paketet är för stort (högst 150 MB). ¦ Pakken er for stor (højst 150 MB).
+GLB illisible. ¦ GLB je nečitelný. ¦ GLB-filen är oläslig. ¦ GLB-filen er ulæselig.
+OBJ illisible. ¦ OBJ je nečitelný. ¦ OBJ-filen är oläslig. ¦ OBJ-filen er ulæselig.
+Maison introuvable. ¦ Dům nenalezen. ¦ Huset hittades inte. ¦ Huset blev ikke fundet.
+Recensement introuvable. ¦ Sčítání nenalezeno. ¦ Folkräkningen hittades inte. ¦ Folketællingen blev ikke fundet.
+Recensement introuvable ¦ Sčítání nenalezeno ¦ Folkräkningen hittades inte ¦ Folketællingen blev ikke fundet
+Fichier 3D trop gros (30 Mo au plus). ¦ 3D soubor je příliš velký (nejvýše 30 MB). ¦ 3D-filen är för stor (högst 30 MB). ¦ 3D-filen er for stor (højst 30 MB).
+Programme d’installation introuvable (scripts/htr_install.php). ¦ Instalační program nenalezen (scripts/htr_install.php). ¦ Installationsprogrammet hittades inte (scripts/htr_install.php). ¦ Installationsprogrammet blev ikke fundet (scripts/htr_install.php).
+Demande d’installation inconnue. ¦ Neznámý požadavek na instalaci. ¦ Okänd installationsbegäran. ¦ Ukendt installationsforespørgsel.
+Lecture inconnue. ¦ Neznámé čtení. ¦ Okänd läsning. ¦ Ukendt læsning.
+Lecture inconnue (ou trop ancienne). ¦ Neznámé čtení (nebo příliš staré). ¦ Okänd läsning (eller för gammal). ¦ Ukendt læsning (eller for gammel).
+Preuve introuvable. ¦ Důkaz nenalezen. ¦ Beviset hittades inte. ¦ Beviset blev ikke fundet.
+Preuve introuvable ¦ Důkaz nenalezen ¦ Beviset hittades inte ¦ Beviset blev ikke fundet
+Empreinte d’image incorrecte. ¦ Nesprávný otisk obrázku. ¦ Fel bildfingeravtryck. ¦ Forkert billedfingeraftryk.
+Empreinte d’image incorrecte (couleurs). ¦ Nesprávný otisk obrázku (barvy). ¦ Fel bildfingeravtryck (färger). ¦ Forkert billedfingeraftryk (farver).
+Empreinte d’image incorrecte (points). ¦ Nesprávný otisk obrázku (body). ¦ Fel bildfingeravtryck (punkter). ¦ Forkert billedfingeraftryk (punkter).
+Fusion impossible ici. ¦ Sloučení tady nelze provést. ¦ Sammanslagning omöjlig här. ¦ Fletning umulig her.
+Fusion inconnue. ¦ Neznámé sloučení. ¦ Okänd sammanslagning. ¦ Ukendt fletning.
+Fusion introuvable. ¦ Sloučení nenalezeno. ¦ Sammanslagningen hittades inte. ¦ Fletningen blev ikke fundet.
+Fusion impossible ¦ Sloučení nelze provést ¦ Sammanslagning omöjlig ¦ Fletning umulig
+Annulation impossible ici. ¦ Vrácení tady nelze provést. ¦ Kan inte ångra här. ¦ Kan ikke fortryde her.
+Fichier RootsMagic introuvable. ¦ Soubor RootsMagic nenalezen. ¦ RootsMagic-filen hittades inte. ¦ RootsMagic-filen blev ikke fundet.
+Aucune personne dans ce fichier GEDCOM-X. ¦ V tomto souboru GEDCOM-X není žádná osoba. ¦ Inga personer i GEDCOM-X-filen. ¦ Ingen personer i GEDCOM-X-filen.
+Annulation impossible : import inconnu. ¦ Vrácení nelze provést: neznámý import. ¦ Kan inte ångra: okänd import. ¦ Kan ikke fortryde: ukendt import.
+Fichier trop gros (20 Mo au plus). ¦ Soubor je příliš velký (nejvýše 20 MB). ¦ Filen är för stor (högst 20 MB). ¦ Filen er for stor (højst 20 MB).
+Aucun point dans ce GeoJSON. ¦ V tomto GeoJSON není žádný bod. ¦ Inga punkter i GeoJSON-filen. ¦ Ingen punkter i GeoJSON-filen.
+Document introuvable. ¦ Dokument nenalezen. ¦ Dokumentet hittades inte. ¦ Dokumentet blev ikke fundet.
+Document illisible. ¦ Dokument je nečitelný. ¦ Dokumentet är oläsligt. ¦ Dokumentet er ulæseligt.
+Cette action s’envoie en POST. ¦ Tato akce se posílá jako POST. ¦ Åtgärden skickas som POST. ¦ Handlingen sendes som POST.
+Lot inconnu. ¦ Neznámá dávka. ¦ Okänd batch. ¦ Ukendt batch.
+Fichier vide. ¦ Prázdný soubor. ¦ Tom fil. ¦ Tom fil.
+Fichier vide ¦ Prázdný soubor ¦ Tom fil ¦ Tom fil
+Sortie inconnue. ¦ Neznámý výstup. ¦ Okänd utdata. ¦ Ukendt output.
+Analyse introuvable. ¦ Analýza nenalezena. ¦ Analysen hittades inte. ¦ Analysen blev ikke fundet.
+Altitude impossible : entre −450 et 8 900 m. ¦ Nemožná nadmořská výška: mezi −450 a 8 900 m. ¦ Omöjlig höjd: mellan −450 och 8 900 m. ¦ Umulig højde: mellem −450 og 8.900 m.
+Envoi inconnu. ¦ Neznámé odeslání. ¦ Okänd uppladdning. ¦ Ukendt upload.
+Projet illisible. ¦ Projekt je nečitelný. ¦ Projektet är oläsligt. ¦ Projektet er ulæseligt.
+Rush illisible. ¦ Záběr je nečitelný. ¦ Klippet är oläsligt. ¦ Klippet er ulæseligt.
+Projet trop lourd (4 Mo au plus). ¦ Projekt je příliš těžký (nejvýše 4 MB). ¦ Projektet är för tungt (högst 4 MB). ¦ Projektet er for tungt (højst 4 MB).
+Salle introuvable. ¦ Sál nenalezen. ¦ Salen hittades inte. ¦ Salen blev ikke fundet.
+Fichier trop lourd. ¦ Soubor je příliš těžký. ¦ Filen är för tung. ¦ Filen er for tung.
+Salle ou œuvre introuvable. ¦ Sál nebo dílo nenalezeno. ¦ Salen eller verket hittades inte. ¦ Salen eller værket blev ikke fundet.
+Import impossible : l’extension PHP zip manque. ¦ Import nelze provést: chybí rozšíření PHP zip. ¦ Import omöjlig: PHP-tillägget zip saknas. ¦ Import umulig: PHP-udvidelsen zip mangler.
+Liste introuvable. ¦ Seznam nenalezen. ¦ Listan hittades inte. ¦ Listen blev ikke fundet.
+Ligne invalide. ¦ Neplatný řádek. ¦ Ogiltig rad. ¦ Ugyldig række.
+Cette liste n’existe plus. ¦ Tento seznam už neexistuje. ¦ Listan finns inte längre. ¦ Listen findes ikke længere.
+Personne manquante. ¦ Chybí osoba. ¦ Person saknas. ¦ Person mangler.
+Personne manquante ¦ Chybí osoba ¦ Person saknas ¦ Person mangler
+Adresse Internet invalide ¦ Neplatná internetová adresa ¦ Ogiltig webbadress ¦ Ugyldig webadresse
+Adresse Internet invalide. ¦ Neplatná internetová adresa. ¦ Ogiltig webbadress. ¦ Ugyldig webadresse.
+Statut inconnu. ¦ Neznámý stav. ¦ Okänd status. ¦ Ukendt status.
+Revue introuvable. ¦ Časopis nenalezen. ¦ Tidskriften hittades inte. ¦ Tidsskriftet blev ikke fundet.
+Article introuvable. ¦ Článek nenalezen. ¦ Artikeln hittades inte. ¦ Artiklen blev ikke fundet.
+Quoi supprimer ? ¦ Co smazat? ¦ Radera vad? ¦ Slet hvad?
+Annonce introuvable. ¦ Inzerát nenalezen. ¦ Annonsen hittades inte. ¦ Annoncen blev ikke fundet.
+Animal introuvable. ¦ Zvíře nenalezeno. ¦ Djuret hittades inte. ¦ Dyret blev ikke fundet.
+Demande introuvable. ¦ Žádost nenalezena. ¦ Förfrågan hittades inte. ¦ Forespørgslen blev ikke fundet.
+Visage incorrect. ¦ Nesprávný obličej. ¦ Fel ansikte. ¦ Forkert ansigt.
+Choix incorrect. ¦ Nesprávná volba. ¦ Fel val. ¦ Forkert valg.
+Comparaison introuvable. ¦ Porovnání nenalezeno. ¦ Jämförelsen hittades inte. ¦ Sammenligningen blev ikke fundet.
+Image introuvable. ¦ Obrázek nenalezen. ¦ Bilden hittades inte. ¦ Billedet blev ikke fundet.
+Latitude entre -90 et 90, longitude entre -180 et 180. ¦ Zeměpisná šířka mezi -90 a 90, délka mezi -180 a 180. ¦ Latitud mellan -90 och 90, longitud mellan -180 och 180. ¦ Breddegrad mellem -90 og 90, længdegrad mellem -180 og 180.
+Cette demande d’entraide n’existe plus. ¦ Tato žádost o pomoc už neexistuje. ¦ Hjälpförfrågan finns inte längre. ¦ Hjælpeforespørgslen findes ikke længere.
+Cette annonce n’existe plus. ¦ Tento inzerát už neexistuje. ¦ Annonsen finns inte längre. ¦ Annoncen findes ikke længere.
+Carte postale introuvable. ¦ Pohlednice nenalezena. ¦ Vykortet hittades inte. ¦ Postkortet blev ikke fundet.
+Choix inconnu. ¦ Neznámá volba. ¦ Okänt val. ¦ Ukendt valg.
+Niveau inconnu. ¦ Neznámá úroveň. ¦ Okänd nivå. ¦ Ukendt niveau.
+Seuls tes propres profils se modifient ici. ¦ Upravovat tady lze jen vlastní profily. ¦ Bara dina egna profiler kan redigeras här. ¦ Kun dine egne profiler kan redigeres her.
+Seuls tes propres profils se suppriment. ¦ Smazat lze jen vlastní profily. ¦ Bara dina egna profiler kan raderas. ¦ Kun dine egne profiler kan slettes.
+Profil introuvable. ¦ Profil nenalezen. ¦ Profilen hittades inte. ¦ Profilen blev ikke fundet.
+Questionnaire introuvable. ¦ Dotazník nenalezen. ¦ Frågeformuläret hittades inte. ¦ Spørgeskemaet blev ikke fundet.
+Question incorrecte. ¦ Nesprávná otázka. ¦ Fel fråga. ¦ Forkert spørgsmål.
+Choix incorrects. ¦ Nesprávné volby. ¦ Fel val. ¦ Forkerte valg.
+Question introuvable. ¦ Otázka nenalezena. ¦ Frågan hittades inte. ¦ Spørgsmålet blev ikke fundet.
+Recueil introuvable. ¦ Sbírka nenalezena. ¦ Samlingen hittades inte. ¦ Samlingen blev ikke fundet.
+Aucune photo. ¦ Žádné fotky. ¦ Inga foton. ¦ Ingen fotos.
+Page introuvable. ¦ Stránka nenalezena. ¦ Sidan hittades inte. ¦ Siden blev ikke fundet.
+Rattachement inconnu. ¦ Neznámé propojení. ¦ Okänd koppling. ¦ Ukendt forbindelse.
+Bloc inconnu. ¦ Neznámý blok. ¦ Okänt block. ¦ Ukendt blok.
+Village introuvable. ¦ Vesnice nenalezena. ¦ Byn hittades inte. ¦ Landsbyen blev ikke fundet.
+Pays non disponible. ¦ Země není k dispozici. ¦ Landet är inte tillgängligt. ¦ Landet er ikke tilgængeligt.
+Branche introuvable ¦ Větev nenalezena ¦ Grenen hittades inte ¦ Grenen blev ikke fundet
+Branche introuvable. ¦ Větev nenalezena. ¦ Grenen hittades inte. ¦ Grenen blev ikke fundet.
+Import indisponible. ¦ Import není k dispozici. ¦ Import är inte tillgänglig. ¦ Import er ikke tilgængelig.
+Aucun DOI reconnu : il commence par « 10. » (ex. 10.1038/251123a0), ou colle l’adresse https://doi.org/… ¦ Žádné DOI nerozpoznáno: začíná „10.“ (např. 10.1038/251123a0), nebo vlož adresu https://doi.org/… ¦ Ingen DOI kändes igen: den börjar med ”10.” (t.ex. 10.1038/251123a0), eller klistra in adressen https://doi.org/… ¦ Ingen DOI genkendt: den begynder med »10.« (f.eks. 10.1038/251123a0), eller indsæt adressen https://doi.org/…
+Source inconnue (DOI, ORCID ou HAL). ¦ Neznámý zdroj (DOI, ORCID nebo HAL). ¦ Okänd källa (DOI, ORCID eller HAL). ¦ Ukendt kilde (DOI, ORCID eller HAL).
+Ligne inconnue. ¦ Neznámý řádek. ¦ Okänd rad. ¦ Ukendt række.
+Report inconnu. ¦ Neznámé odložení. ¦ Okänd uppskjutning. ¦ Ukendt udsættelse.
+Rappel introuvable. ¦ Připomenutí nenalezeno. ¦ Påminnelsen hittades inte. ¦ Påmindelsen blev ikke fundet.
+Piste introuvable. ¦ Stopa nenalezena. ¦ Spåret hittades inte. ¦ Sporet blev ikke fundet.
+Statistique inconnue. ¦ Neznámá statistika. ¦ Okänd statistik. ¦ Ukendt statistik.
+Ligne illisible. ¦ Řádek je nečitelný. ¦ Raden är oläslig. ¦ Rækken er ulæselig.
+Diaporama introuvable. ¦ Prezentace nenalezena. ¦ Bildspelet hittades inte. ¦ Diasshowet blev ikke fundet.
+Diaporama trop lourd. ¦ Prezentace je příliš těžká. ¦ Bildspelet är för tungt. ¦ Diasshowet er for tungt.
+Foyer SocFace introuvable. ¦ Domácnost SocFace nenalezena. ¦ SocFace-hushållet hittades inte. ¦ SocFace-husstanden blev ikke fundet.
+Ligne SocFace introuvable. ¦ Řádek SocFace nenalezen. ¦ SocFace-raden hittades inte. ¦ SocFace-rækken blev ikke fundet.
+Sorte d’import inconnue. ¦ Neznámý druh importu. ¦ Okänd importtyp. ¦ Ukendt importtype.
+Import inconnu. ¦ Neznámý import. ¦ Okänd import. ¦ Ukendt import.
+Ce lieu n’existe plus. ¦ Toto místo už neexistuje. ¦ Orten finns inte längre. ¦ Stedet findes ikke længere.
+L’original garde son nom. ¦ Originál si ponechá svůj název. ¦ Originalet behåller sitt namn. ¦ Originalen beholder sit navn.
+Bien inconnu. ¦ Neznámý majetek. ¦ Okänd egendom. ¦ Ukendt ejendom.
+Acte introuvable. ¦ Záznam nenalezen. ¦ Handlingen hittades inte. ¦ Dokumentet blev ikke fundet.
+Site introuvable. ¦ Web nenalezen. ¦ Webbplatsen hittades inte. ¦ Webstedet blev ikke fundet.
+Marque introuvable. ¦ Značka nenalezena. ¦ Märkningen hittades inte. ¦ Mærket blev ikke fundet.
+Observation introuvable. ¦ Pozorování nenalezeno. ¦ Observationen hittades inte. ¦ Observationen blev ikke fundet.
+Comptage introuvable. ¦ Sčítání nenalezeno. ¦ Räkningen hittades inte. ¦ Optællingen blev ikke fundet.
+Appartenance introuvable. ¦ Příslušnost nenalezena. ¦ Tillhörigheten hittades inte. ¦ Tilhørsforholdet blev ikke fundet.
+Import introuvable. ¦ Import nenalezen. ¦ Importen hittades inte. ¦ Importen blev ikke fundet.
+Import introuvable ¦ Import nenalezen ¦ Importen hittades inte ¦ Importen blev ikke fundet
+Fichier trop gros : trop d’observations. ¦ Soubor je příliš velký: příliš mnoho pozorování. ¦ Filen är för stor: för många observationer. ¦ Filen er for stor: for mange observationer.
+Conflit illisible. ¦ Konflikt je nečitelný. ¦ Konflikten är oläslig. ¦ Konflikten er ulæselig.
+Document illisible : il manque son texte. ¦ Dokument je nečitelný: chybí mu text. ¦ Dokumentet är oläsligt: texten saknas. ¦ Dokumentet er ulæseligt: teksten mangler.
+Partie illisible. ¦ Část je nečitelná. ¦ Delen är oläslig. ¦ Delen er ulæselig.
+Document trop lourd : partage ses onglets en plusieurs documents. ¦ Dokument je příliš těžký: rozděl jeho karty do několika dokumentů. ¦ Dokumentet är för tungt: dela upp dess flikar i flera dokument. ¦ Dokumentet er for tungt: del dets faner op i flere dokumenter.
+Version trop lourde. ¦ Verze je příliš těžká. ¦ Versionen är för tung. ¦ Versionen er for tung.
+Transcription introuvable. ¦ Přepis nenalezen. ¦ Transkriptionen hittades inte. ¦ Transskriptionen blev ikke fundet.
+Dessin introuvable. ¦ Kresba nenalezena. ¦ Teckningen hittades inte. ¦ Tegningen blev ikke fundet.
+Commune introuvable. ¦ Obec nenalezena. ¦ Orten hittades inte. ¦ Byen blev ikke fundet.
+Site illisible : il manque ses pages. ¦ Web je nečitelný: chybí mu stránky. ¦ Webbplatsen är oläslig: sidorna saknas. ¦ Webstedet er ulæseligt: siderne mangler.
+Page illisible. ¦ Stránka je nečitelná. ¦ Sidan är oläslig. ¦ Siden er ulæselig.
+Service inconnu. ¦ Neznámá služba. ¦ Okänd tjänst. ¦ Ukendt tjeneste.
+Adresse non permise. ¦ Adresa není povolena. ¦ Adressen är inte tillåten. ¦ Adressen er ikke tilladt.
+Publication impossible : l’extension PHP curl manque. ¦ Publikování nelze provést: chybí rozšíření PHP curl. ¦ Publicering omöjlig: PHP-tillägget curl saknas. ¦ Publicering umulig: PHP-udvidelsen curl mangler.
+Donne l’identifiant FTP. ¦ Zadej uživatelské jméno FTP. ¦ Ange FTP-användarnamnet. ¦ Angiv FTP-brugernavnet.
+Colle d’abord ton jeton Netlify. ¦ Nejdřív vlož svůj token Netlify. ¦ Klistra först in din Netlify-token. ¦ Indsæt først dit Netlify-token.
+Colle d’abord ton jeton GitHub. ¦ Nejdřív vlož svůj token GitHub. ¦ Klistra först in din GitHub-token. ¦ Indsæt først dit GitHub-token.
+Identifiant Wikidata incorrect. ¦ Nesprávný identifikátor Wikidata. ¦ Fel Wikidata-id. ¦ Forkert Wikidata-id.
+Classeur illisible : il manque ses feuilles. ¦ Sešit je nečitelný: chybí mu listy. ¦ Arbetsboken är oläslig: bladen saknas. ¦ Projektmappen er ulæselig: arkene mangler.
+Feuille illisible. ¦ List je nečitelný. ¦ Bladet är oläsligt. ¦ Arket er ulæseligt.
+Classeur introuvable. ¦ Sešit nenalezen. ¦ Arbetsboken hittades inte. ¦ Projektmappen blev ikke fundet.
+Import manquant ¦ Chybí import ¦ Import saknas ¦ Import mangler
+Archive ZIP illisible ¦ Archiv ZIP je nečitelný ¦ ZIP-arkivet är oläsligt ¦ ZIP-arkivet er ulæseligt
+Modification introuvable. ¦ Změna nenalezena. ¦ Ändringen hittades inte. ¦ Ændringen blev ikke fundet.
+Sauvegarde introuvable. ¦ Záloha nenalezena. ¦ Säkerhetskopian hittades inte. ¦ Sikkerhedskopien blev ikke fundet.
+Lecture impossible ¦ Čtení nelze provést ¦ Kunde inte läsa ¦ Kunne ikke læse
+JSON invalide ou non-objet ¦ Neplatný JSON nebo nejde o objekt ¦ Ogiltig JSON eller inte ett objekt ¦ Ugyldig JSON eller ikke et objekt
+Impossible d'ouvrir l'archive (format inattendu) ¦ Archiv nelze otevřít (nečekaný formát) ¦ Kunde inte öppna arkivet (oväntat format) ¦ Kunne ikke åbne arkivet (uventet format)
+Impossible d'ouvrir l'archive GedZip (format inattendu) ¦ Archiv GedZip nelze otevřít (nečekaný formát) ¦ Kunde inte öppna GedZip-arkivet (oväntat format) ¦ Kunne ikke åbne GedZip-arkivet (uventet format)
+Fichier GEDCOM (.ged) introuvable dans l'archive. ¦ Soubor GEDCOM (.ged) v archivu nenalezen. ¦ GEDCOM-filen (.ged) hittades inte i arkivet. ¦ GEDCOM-filen (.ged) blev ikke fundet i arkivet.
+Type introuvable ¦ Typ nenalezen ¦ Typen hittades inte ¦ Typen blev ikke fundet
+Identifiant manquant ¦ Chybí identifikátor ¦ Identifierare saknas ¦ Identifikator mangler
+Battue introuvable ¦ Hromadné pátrání nenalezeno ¦ Sökinsatsen hittades inte ¦ Eftersøgningen blev ikke fundet
+Battue introuvable. ¦ Hromadné pátrání nenalezeno. ¦ Sökinsatsen hittades inte. ¦ Eftersøgningen blev ikke fundet.
+Lacune introuvable. ¦ Mezera nenalezena. ¦ Luckan hittades inte. ¦ Hullet blev ikke fundet.
+Lien direct vers l’archive invalide. ¦ Neplatný přímý odkaz do archivu. ¦ Ogiltig direktlänk till arkivet. ¦ Ugyldigt direkte link til arkivet.
+Mention familiale invalide ¦ Neplatná rodinná zmínka ¦ Ogiltigt familjeomnämnande ¦ Ugyldig familieomtale
+Titre obligatoire ¦ Název je povinný ¦ Titel krävs ¦ Titel er påkrævet
+Recensement manquant ¦ Chybí sčítání ¦ Folkräkning saknas ¦ Folketælling mangler
+Membre manquant ¦ Chybí člen ¦ Medlem saknas ¦ Medlem mangler
+Membre introuvable ¦ Člen nenalezen ¦ Medlemmen hittades inte ¦ Medlemmet blev ikke fundet
+Dossier militaire invalide ¦ Neplatná vojenská složka ¦ Ogiltig militär akt ¦ Ugyldig militær sag
+Recensement ou personne manquante ¦ Chybí sčítání nebo osoba ¦ Folkräkning eller person saknas ¦ Folketælling eller person mangler
+Journal introuvable ¦ Deník nenalezen ¦ Loggen hittades inte ¦ Loggen blev ikke fundet
+Confirmation requise ¦ Vyžadováno potvrzení ¦ Bekräftelse krävs ¦ Bekræftelse påkrævet
+Piste manquante. ¦ Chybí stopa. ¦ Spår saknas. ¦ Spor mangler.
+Rappel manquant. ¦ Chybí připomenutí. ¦ Påminnelse saknas. ¦ Påmindelse mangler.
+Courrier manquant. ¦ Chybí dopis. ¦ Brev saknas. ¦ Brev mangler.
+Contact introuvable. ¦ Kontakt nenalezen. ¦ Kontakten hittades inte. ¦ Kontakten blev ikke fundet.
+Contact manquant. ¦ Chybí kontakt. ¦ Kontakt saknas. ¦ Kontakt mangler.
+Battue manquante. ¦ Chybí hromadné pátrání. ¦ Sökinsats saknas. ¦ Eftersøgning mangler.
+Battue, commune et nom obligatoires. ¦ Hromadné pátrání, obec a název jsou povinné. ¦ Sökinsats, ort och namn krävs. ¦ Eftersøgning, by og navn er påkrævet.
+Battue et commune obligatoires. ¦ Hromadné pátrání a obec jsou povinné. ¦ Sökinsats och ort krävs. ¦ Eftersøgning og by er påkrævet.
+Annotation manquante. ¦ Chybí poznámka. ¦ Anteckning saknas. ¦ Note mangler.
+Annotation introuvable. ¦ Poznámka nenalezena. ¦ Anteckningen hittades inte. ¦ Noten blev ikke fundet.
+Dossier parent invalide ¦ Neplatná nadřazená složka ¦ Ogiltig överordnad mapp ¦ Ugyldig overordnet mappe
+Dossier manquant ¦ Chybí složka ¦ Mapp saknas ¦ Mappe mangler
+Sexe invalide : choisis Homme, Femme, Non binaire ou Inconnu. ¦ Neplatné pohlaví: vyber Muž, Žena, Nebinární nebo Neznámé. ¦ Ogiltigt kön: välj Man, Kvinna, Icke-binär eller Okänt. ¦ Ugyldigt køn: vælg Mand, Kvinde, Nonbinær eller Ukendt.
+Variante manquante ¦ Chybí varianta ¦ Variant saknas ¦ Variant mangler
+Variante introuvable ¦ Varianta nenalezena ¦ Varianten hittades inte ¦ Varianten blev ikke fundet
+Famille introuvable ¦ Rodina nenalezena ¦ Familjen hittades inte ¦ Familien blev ikke fundet
+Fiche en ligne introuvable ¦ Online karta nenalezena ¦ Posten på nätet hittades inte ¦ Onlineposten blev ikke fundet
+Fiche en ligne manquante ¦ Chybí online karta ¦ Post på nätet saknas ¦ Onlinepost mangler
+Personne ou contenu manquant ¦ Chybí osoba nebo obsah ¦ Person eller innehåll saknas ¦ Person eller indhold mangler
+Note ou contenu manquant ¦ Chybí poznámka nebo obsah ¦ Anteckning eller innehåll saknas ¦ Note eller indhold mangler
+Note introuvable ¦ Poznámka nenalezena ¦ Anteckningen hittades inte ¦ Noten blev ikke fundet
+Note manquante ¦ Chybí poznámka ¦ Anteckning saknas ¦ Note mangler
+Personne et titre obligatoires ¦ Osoba a název jsou povinné ¦ Person och titel krävs ¦ Person og titel er påkrævet
+Source et titre obligatoires ¦ Pramen a název jsou povinné ¦ Källa och titel krävs ¦ Kilde og titel er påkrævet
+Source introuvable ¦ Pramen nenalezen ¦ Källan hittades inte ¦ Kilden blev ikke fundet
+Source manquante ¦ Chybí pramen ¦ Källa saknas ¦ Kilde mangler
+Rotation impossible. ¦ Otočení nelze provést. ¦ Rotation omöjlig. ¦ Rotation umulig.
+Script HTR local introuvable. ¦ Místní skript HTR nenalezen. ¦ Det lokala HTR-skriptet hittades inte. ¦ Det lokale HTR-script blev ikke fundet.
+Fiche individuelle invalide. ¦ Neplatná osobní karta. ¦ Ogiltig personpost. ¦ Ugyldig personpost.
+Alerte manquante ¦ Chybí upozornění ¦ Varning saknas ¦ Advarsel mangler
+Patronyme et groupe obligatoires ¦ Příjmení a skupina jsou povinné ¦ Efternamn och grupp krävs ¦ Efternavn og gruppe er påkrævet
+Personne racine introuvable. ¦ Kořenová osoba nenalezena. ¦ Rotpersonen hittades inte. ¦ Rodpersonen blev ikke fundet.
+Vue introuvable ¦ Pohled nenalezen ¦ Vyn hittades inte ¦ Visningen blev ikke fundet
+Cible manquante ¦ Chybí cíl ¦ Mål saknas ¦ Mål mangler
+Identification manquante ¦ Chybí identifikace ¦ Identifiering saknas ¦ Identifikation mangler
+Identification introuvable ¦ Identifikace nenalezena ¦ Identifieringen hittades inte ¦ Identifikationen blev ikke fundet
+Objet ou souvenir manquant ¦ Chybí předmět nebo památka ¦ Föremål eller minnessak saknas ¦ Genstand eller mindegenstand mangler
+À faire le {date} ¦ K vyřízení {date} ¦ Att göra den {date} ¦ Skal gøres den {date}
+Avant le {date} ¦ Před {date} ¦ Före {date} ¦ Før {date}
+Après le {date} ¦ Po {date} ¦ Efter {date} ¦ Efter {date}
+Rappel libre ¦ Volné připomenutí ¦ Fri påminnelse ¦ Fri påmindelse
+Enquête « {title} » ¦ Pátrání „{title}“ ¦ Undersökning ”{title}” ¦ Undersøgelse »{title}«
+Pas encore envoyé ¦ Ještě neodesláno ¦ Inte skickat än ¦ Ikke sendt endnu
+Envoyé aujourd’hui ¦ Odesláno dnes ¦ Skickat i dag ¦ Sendt i dag
+Réponse attendue depuis {n} jours ¦ Odpověď se čeká už {n} dní ¦ Svar väntat sedan {n} dagar ¦ Svar ventet i {n} dage
+Réponse attendue depuis {n} jour ¦ Odpověď se čeká už {n} den ¦ Svar väntat sedan {n} dag ¦ Svar ventet i {n} dag
+relance prévue le {date} : à relancer ¦ urgence naplánována na {date}: urgovat ¦ påminnelse planerad till {date}: skicka påminnelse ¦ rykker planlagt til {date}: send rykker
+relance le {date} ¦ urgence {date} ¦ påminnelse {date} ¦ rykker {date}
+Visite ¦ Návštěva ¦ Besök ¦ Besøg
+Prévue le {date} : note-la comme faite ¦ Naplánováno na {date}: označ jako hotové ¦ Planerat till {date}: markera som gjort ¦ Planlagt til {date}: markér som udført
+Le {date} ¦ Dne {date} ¦ Den {date} ¦ Den {date}
+{n} cotes à consulter ¦ Signatury k nahlédnutí: {n} ¦ {n} signum att granska ¦ {n} signaturer at se
+{n} cote à consulter ¦ Signatury k nahlédnutí: {n} ¦ {n} signum att granska ¦ {n} signatur at se
+Piste ¦ Stopa ¦ Spår ¦ Spor
+À explorer ¦ K prozkoumání ¦ Att utforska ¦ Skal udforskes
+Hypothèse : {title} ¦ Hypotéza: {title} ¦ Hypotes: {title} ¦ Hypotese: {title}
+Hypothèse : sans titre ¦ Hypotéza: bez názvu ¦ Hypotes: utan titel ¦ Hypotese: uden titel
+confiance faible ¦ nízká důvěra ¦ låg tillförlitlighet ¦ lav pålidelighed
+confiance moyenne ¦ střední důvěra ¦ medelhög tillförlitlighet ¦ middel pålidelighed
+confiance forte ¦ vysoká důvěra ¦ hög tillförlitlighet ¦ høj pålidelighed
+Vu ¦ Viděno ¦ Sett ¦ Set
+Recensement de {y} à {place} : chercher sur SocFace ¦ Sčítání lidu {y} v {place}: hledat na SocFace ¦ Folkräkning {y} i {place}: sök på SocFace ¦ Folketælling {y} i {place}: søg på SocFace
+Recensement de {y} : chercher sur SocFace ¦ Sčítání lidu {y}: hledat na SocFace ¦ Folkräkning {y}: sök på SocFace ¦ Folketælling {y}: søg på SocFace
+Cherché sur SocFace ¦ Hledáno na SocFace ¦ Sökt på SocFace ¦ Søgt på SocFace
+{act} : {name}, chercher à {place} ¦ {act}: {name}, hledat v {place} ¦ {act}: {name}, sök i {place} ¦ {act}: {name}, søg i {place}
+{act} : {name} ¦ {act}: {name} ¦ {act}: {name} ¦ {act}: {name}
+acte|Parents ¦ Rodiče ¦ Föräldrar ¦ Forældre
+acte|Contrat de mariage ¦ Svatební smlouva ¦ Äktenskapsförord ¦ Ægtepagt
+acte|Succession ¦ Pozůstalost ¦ Dödsbo ¦ Dødsbo
+acte|Registre matricule ¦ Vojenská kmenová kniha ¦ Rulla ¦ Lægdsrulle
+Foyer de {name} ¦ Domácnost {name} ¦ Hushållet {name} ¦ Husstanden {name}
+{n} personnes ¦ Osoby: {n} ¦ {n} personer ¦ {n} personer
+{n} personne ¦ {n} osoba ¦ {n} person ¦ {n} person
+Demande d’entraide ¦ Žádost o pomoc ¦ Hjälpförfrågan ¦ Hjælpeforespørgsel
+Une réponse t’attend ¦ Čeká na tebe odpověď ¦ Ett svar väntar på dig ¦ Et svar venter på dig
+Brouillon à publier ¦ Koncept k publikování ¦ Utkast att publicera ¦ Kladde til publicering
+Publiée il y a {n} jours ¦ Publikováno před {n} dny ¦ Publicerad för {n} dagar sedan ¦ Publiceret for {n} dage siden
+Publiée il y a {n} jour ¦ Publikováno před {n} dnem ¦ Publicerad för {n} dag sedan ¦ Publiceret for {n} dag siden
+Rappel fait ¦ Připomenutí vyřízeno ¦ Påminnelse klar ¦ Påmindelse udført
+Demande résolue ¦ Žádost vyřešena ¦ Förfrågan löst ¦ Forespørgsel løst
+Piste explorée ¦ Stopa prozkoumána ¦ Spåret utforskat ¦ Sporet udforsket
+Hypothèse revue ¦ Hypotéza prověřena ¦ Hypotesen granskad ¦ Hypotesen gennemgået
+Recherche faite ¦ Hledání hotovo ¦ Sökning klar ¦ Søgning udført
+Alerte revue ¦ Upozornění prověřeno ¦ Varningen granskad ¦ Advarslen gennemgået
+Piste du mur faite ¦ Stopa slepé uličky hotová ¦ Återvändsgrändens spår klart ¦ Blindgydens spor udført
+Lien vérifié ¦ Propojení ověřeno ¦ Kopplingen kontrollerad ¦ Forbindelsen kontrolleret
+🛡 Lien à consolider ¦ 🛡 Propojení k posílení ¦ 🛡 Koppling att stärka ¦ 🛡 Forbindelse, der skal styrkes
+Lien à consolider : {child}, le fils de {parent} ¦ Propojení k posílení: {child}, syn {parent} ¦ Koppling att stärka: {child}, son till {parent} ¦ Forbindelse, der skal styrkes: {child}, søn af {parent}
+Lien à consolider : {child}, la fille de {parent} ¦ Propojení k posílení: {child}, dcera {parent} ¦ Koppling att stärka: {child}, dotter till {parent} ¦ Forbindelse, der skal styrkes: {child}, datter af {parent}
+Lien à consolider : {child}, l’enfant de {parent} ¦ Propojení k posílení: {child}, dítě {parent} ¦ Koppling att stärka: {child}, barn till {parent} ¦ Forbindelse, der skal styrkes: {child}, barn af {parent}
+cherche l’acte de naissance ou de baptême qui le nomme ¦ hledej záznam o narození nebo křtu, který ho/ji jmenuje ¦ sök efter födelse- eller dophandlingen som nämner personen ¦ søg efter fødsels- eller dåbsattesten, der nævner personen
