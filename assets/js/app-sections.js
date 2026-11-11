@@ -45,7 +45,7 @@
     const PLACES = [['left', 'Gauche', 'collés à gauche'], ['center', 'Centre', 'au milieu de la fiche'], ['right', 'Droite', 'collés à droite'], ['full', 'Toute la largeur', 'ils se partagent la ligne'], ['avant', 'Comme avant', 'à gauche, « ▦ Tout voir » tout à droite']];
     const ALLS = [['left', 'À gauche'], ['right', 'À droite'], ['none', 'Caché']];
     const NUMW = [['1', '1, 2, 3'], ['I', 'I, II, III'], ['A', 'A, B, C']];
-    const OPT0 = {style: 'line', place: 'avant', all: 'right', fold: true, startFolded: false, nums: true, numW: '1', blockNums: 'seq', count: true, empty: 'grey', animalOwn: true, editor: 'avant', phoneFirst: true};
+    const OPT0 = {style: 'line', place: 'avant', all: 'right', fold: true, startFolded: false, nums: true, numW: '1', blockNums: 'seq', count: true, empty: 'grey', animalOwn: true, editor: 'avant', phoneFirst: true, solidite: 'all'};
     const WIDTHS = [['12', '1', '1'], ['6', '½', '1/2'], ['4', '⅓', '1/3'], ['3', '¼', '1/4'], ['8', '⅔', '2/3'], ['9', '¾', '3/4']];
     /** les sections de départ (personnes : Identité, Famille, Vie, Documents ; animaux : les six onglets de l'ancienne page) */
     const SEC0 = {
@@ -64,7 +64,7 @@
         const o = isObj(v) ? v : {}, one = (x, list, d) => (list.some(l => l[0] === x) ? x : d), bool = (x, d) => (typeof x === 'boolean' ? x : d);
         return {style: one(o.style, STYLES, OPT0.style), place: one(o.place, PLACES, OPT0.place), all: one(o.all, ALLS, OPT0.all), fold: bool(o.fold, OPT0.fold), startFolded: bool(o.startFolded, OPT0.startFolded),
             nums: bool(o.nums, OPT0.nums), numW: one(o.numW, NUMW, OPT0.numW), blockNums: o.blockNums === 'sec' ? 'sec' : 'seq', count: bool(o.count, OPT0.count), empty: o.empty === 'hide' ? 'hide' : 'grey',
-            animalOwn: bool(o.animalOwn, OPT0.animalOwn), editor: o.editor === 'new' ? 'new' : 'avant', phoneFirst: bool(o.phoneFirst, OPT0.phoneFirst)}; // un ancien « Espace entre sections » (gap) est ignoré sans erreur
+            animalOwn: bool(o.animalOwn, OPT0.animalOwn), editor: o.editor === 'new' ? 'new' : 'avant', phoneFirst: bool(o.phoneFirst, OPT0.phoneFirst), solidite: ['all', 'weak', 'none'].includes(o.solidite) ? o.solidite : 'all'}; // un ancien « Espace entre sections » (gap) est ignoré sans erreur
     }
     const opts = () => cleanOpts(lsGet(OPT_KEY, {}));
     const saveOpts = o => lsSet(OPT_KEY, cleanOpts(o));
@@ -555,7 +555,8 @@
                     ${opt('nums', 'Numéros des sections')}<div class="fsec-sub${o.nums ? '' : ' is-dim'}"><span>Écriture</span>${seg('numW', NUMW, o.numW)}</div>
                     <div class="fsec-sub"><span>Numéros des blocs</span>${seg('blockNums', [['seq', 'À la suite (01, 02…)'], ['sec', 'Par section (1.1, 1.2…)']], o.blockNums)}</div>
                     ${opt('count', 'Onglets : montrer le nombre entre parenthèses')}
-                    <div class="fsec-sub"><span>Sections vides</span>${seg('empty', [['grey', 'En gris'], ['hide', 'Cachées']], o.empty)}</div></div></div>
+                    <div class="fsec-sub"><span>Sections vides</span>${seg('empty', [['grey', 'En gris'], ['hide', 'Cachées']], o.empty)}</div>
+                    <div class="fsec-sub"><span>🛡 Solidité des liens à côté des parents</span>${seg('solidite', [['all', 'Toujours'], ['weak', 'Seulement Supposé et Réfuté'], ['none', 'Jamais']], o.solidite)}</div></div></div>
                 <div class="fsec-row is-top"><span class="fsec-lab">Aperçu</span>${liveHtml(kind)}</div>
                 <p class="muted fsec-note">L’espace entre deux sections vaut deux fois l’écart entre deux blocs : il suit A2 Densité. Le bandeau prend la couleur principale de l’Apparence, qui passe toujours devant.</p>
             </div></section>`;

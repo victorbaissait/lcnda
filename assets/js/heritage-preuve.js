@@ -304,10 +304,14 @@
     async function decorateFiche(pid, fresh = false) {
         let d; try { d = await get('person', {id: pid}); } catch (_) { return; }
         if (S().module !== 'personnes' || Number(S().currentPersonId) !== pid) return;
-        const groups = [...document.querySelectorAll('#workspace .relation-group')].filter(g => g.querySelector('.relation-heading span')?.textContent.trim() === 'Parents');
+        const groups = [...document.querySelectorAll('#workspace .relation-group')].filter(g => [i18n('Parents'), 'Parents'].includes(g.querySelector('.relation-heading span')?.textContent.trim()));
         groups.forEach(g => {
             if (fresh) g.querySelectorAll('[data-pv-sol]').forEach(x => x.remove());
+            // Réglages → Fiches personnes et animaux → « 🛡 Solidité des liens à côté des parents » : Toujours / Seulement Supposé et Réfuté / Jamais
+            const show = (() => { try { return JSON.parse(localStorage.getItem('genealogie-sheet-sections') || '{}').solidite || 'all'; } catch (_) { return 'all'; } })();
+            if (show === 'none') return;
             (d.parents || []).forEach(l => {
+                if (show === 'weak' && !['supposed', 'refuted'].includes(l.level)) return;
                 const chip = g.querySelector(`.relation-chip[data-open-person="${l.parent_id}"]`); if (!chip || chip.parentElement.querySelector('[data-pv-sol]')) return;
                 chip.insertAdjacentHTML('afterend', `<button type="button" class="pv-sol" data-pv-sol="${pid}:${l.parent_id}" title="${esc(i18n('🛡 Solidité du lien : {lvl} — {why}', {lvl: i18n(SOL[l.level][0]), why: l.why}))}" aria-label="${esc(i18n('Solidité du lien avec {nm} : {lvl}', {nm: nm(l.parent), lvl: i18n(SOL[l.level][0])}))}">${solBadge(l.level)}</button>`);
             });
