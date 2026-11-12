@@ -1,0 +1,3 @@
+# FAQ (sq) : une ligne par question « repère.empreinte ⇥ question ⇥ réponse » (docs/I18N.md, « La FAQ »).
+# Vide au départ : une question pas encore traduite s’affiche en français.
+# Paquets à traduire : node scripts/build-faq-i18n.js --todo <dossier> --lang sq

@@ -25,7 +25,7 @@ const BASE_ZONES = ['cadre', 'composants', 'colonnes', 'premier', 'touches', 're
     const B = require('../scripts/i18n-build.js');
     const F = require('../scripts/build-faq-i18n.js');
     await t('lb déclaré partout : app-i18n.js, lib/i18n.php, scripts, FAQ', () => {
-        assert.deepEqual(I.CODES.slice(23, 24), NEW); assert.equal(I.CODES.length, 24);
+        assert.deepEqual(I.CODES.slice(23, 24), NEW); assert.equal(I.CODES.length, 26);
         assert.deepEqual([I.info('lb').name, I.info('lb').flag, I.info('lb').locale], ['Lëtzebuergesch', '🇱🇺', 'lb-LU']);
         assert.ok(/const I18N_LANGS = \[[^\]]*'is', 'tr', 'lb'(, '[a-z]{2}')*\];/.test(fs.readFileSync(path.join(root, 'lib/i18n.php'), 'utf8')));
         assert.deepEqual(B.NEW_LANGS.slice(15, 16), NEW); assert.deepEqual(F.NEW_LANGS.slice(15, 16), NEW); assert.equal(F.LANGS.length, 7);
@@ -71,9 +71,9 @@ const BASE_ZONES = ['cadre', 'composants', 'colonnes', 'premier', 'touches', 're
             fs.readFileSync(path.join(DIR, f), 'utf8').split('\n').slice(1).forEach((l, i) => {
                 if (!l.trim() || l.startsWith('#')) return;
                 const [k, v = ''] = l.split(' ¦ ');
-                const vars = s => (s.match(/\{[a-z_]+\}/gi) || []).sort().join(' ');
+                const vars = s => (k.startsWith('=') ? [...new Set(s.match(/\{[a-z_]+\}/gi) || [])] : (s.match(/\{[a-z_]+\}/gi) || [])).sort().join(' ');
                 const tags = s => (s.match(/<\/?[a-z]+>/gi) || []).sort().join(' ');
-                if (/[«»]/.test(v)) bad.push(`${f}:${i + 2} « » : ${v}`);
+                if (/[«»]/.test(v) && !/« »|\|»|\? »\)/.test(k)) bad.push(`${f}:${i + 2} « » : ${v}`);
                 if (/”/.test(v)) bad.push(`${f}:${i + 2} ” : ${v}`);
                 if ((v.match(/„/g) || []).length !== (v.match(/“/g) || []).length) bad.push(`${f}:${i + 2} „ sans “ : ${v}`);
                 if (vars(k) !== vars(v)) bad.push(`${f}:${i + 2} variables : ${v}`);

@@ -1209,6 +1209,204 @@ Dates et nombres : `lb-LU` quand le navigateur le connaît, sinon `de-LU` puis `
 | FAQ | FAQ (Heefeg Froen) |
 | Traduction faite par une IA | Iwwersetzung vun enger KI |
 
+## Langue ajoutée ensuite : albanais (sq)
+
+Fichiers à part : `assets/i18n/src/nord10/<zone>.tsv` (1re ligne `fr ¦ sq ¦ mt`, même clé que `<zone>.tsv` ; la 2e colonne
+est l’albanais, la 3e le maltais). On traduit **depuis le français** (`node scripts/i18n-todo.js sq <zone>` montre l’anglais et
+l’allemand en aide ; pas de langue proche déjà traduite).
+Albanais standard (*gjuha standarde*, base tosque), avec **ë** et **ç** toujours écrits (la recherche de la FAQ les ramène à
+e, c). Ton : on tutoie (*ti*), phrases courtes et simples : impératif 2e personne du singulier (« Zgjidh », « Kliko »,
+« Shkruaj », « Provo përsëri », « Kontrollo drejtshkrimin ») ; boutons et entrées de menu à l’impératif aussi (« Ruaj »,
+« Fshi », « Shto », « Mbyll », « Anulo »). Possessifs du tutoiement : *jote / tënde / sate* (« gjenealogjia jote »,
+« në bazën tënde », « të kartelës sate »). Guillemets **«…»** sans espace à l’intérieur. Les mots cités des actes et les
+exemples de dates restent en français (« 12 mars 1790 », « à l’heure de vêpres »…), lisibles par la lecture C4.
+**Pluriels — ordre des formes dans les `.tsv`** : `one|other` (`FORMS.def`) : 1 → « one », tout le reste (0, 2, 21, 1,5…) →
+« other », comme `Intl.PluralRules('sq')` : `person|persona`, `ditë|ditë`, `javë|javë`, `kartelë|kartela`, `vend|vende`,
+`burim|burime`. Un adjectif s’accorde dans les deux formes (`dublikatë e mundshme|dublikata të mundshme`).
+Dates et nombres : `sq-AL` (virgule décimale), sinon `en` (`intlFallback`).
+
+| Français | Shqip |
+|---|---|
+| Sosa (numéro Sosa) | Sosa |
+| fiche (d’une personne) | kartelë (kartela e personit) |
+| 📒 Fiches (sujets) | 📒 Fletë shënimesh |
+| généalogie (la base de la personne) | gjenealogji (gjenealogjia jote) |
+| base (de données) | bazë (bazë të dhënash) |
+| acte | akt |
+| baptême / naissance | pagëzim / lindje |
+| mariage | martesë |
+| décès | vdekje |
+| parrain / marraine | kumbar / kumbarë |
+| témoin / déclarant | dëshmitar / deklarues |
+| ascendants / descendants | paraardhës / pasardhës |
+| ancêtre | paraardhës |
+| branche | degë |
+| génération | brez |
+| implexe | implekse |
+| recensement | regjistrim i popullsisë |
+| inventaire après décès | inventar pas vdekjes |
+| dépouillement | zbërthim |
+| cote (d’archive) | shenjë arkivi |
+| mur de brique | mur tullash |
+| cousinade | takim kushërinjsh |
+| commune / ville / village | komunë / qytet / fshat |
+| paroisse | famulli |
+| lieu | vend |
+| catalogue raisonné | katalog i arsyetuar |
+| Tableau de bord | Paneli |
+| widget | widget (widget-e) |
+| Personnes | Personat |
+| Graphiques / Diagrammes | Grafikët / Diagramet |
+| Carte | Harta |
+| Listes | Listat |
+| Chronologie | Kronologjia |
+| Recherche | Kërkime |
+| Enquêtes | Hetimet |
+| Trésors | Thesaret |
+| Réglages | Cilësimet |
+| Apparence | Pamja |
+| Médias | Media |
+| Source | Burim |
+| Étiquette | Etiketë |
+| Battue | Kërkim në terren |
+| Mode simple | Mënyra e thjeshtë |
+| Mode consultation | Mënyra e leximit |
+| Sauvegarde | Kopje rezervë |
+| Enregistrer / ✓ Enregistré | Ruaj / ✓ U ruajt |
+| Annuler (bouton) | Anulo |
+| ↶ Annuler / ↷ Rétablir | ↶ Zhbëj / ↷ Ribëj |
+| Fermer | Mbyll |
+| Supprimer | Fshi |
+| Retirer (détacher) | Hiq |
+| Modifier | Ndrysho |
+| Créer / Ajouter | Krijo / Shto |
+| Relier | Lidh |
+| ↺ Remettre comme au départ | ↺ Ktheje si në fillim |
+| Réessayer | Provo përsëri |
+| ⤒ Importer / ⤓ Exporter | ⤒ Importo / ⤓ Eksporto |
+| 🖨 Imprimer | 🖨 Printo |
+| Chercher / Filtrer ▾ / Trier : | Kërko / Filtro ▾ / Rendit: |
+| ✓ Compris : | ✓ Kuptova: |
+| Aimanter | Magnetizo |
+| Liste \| Fiches (affichage) | Listë \| Kartela |
+| onglet | skedë |
+| écran | ekran |
+| fichier / dossier | skedar / dosje |
+| bouton | buton |
+| Tableur / Traitement de texte | Fletë llogaritëse / Përpunues teksti |
+| Mise en page | Faqosje |
+| ordinateur | kompjuter |
+| app | aplikacion |
+| FAQ | FAQ (Pyetje të shpeshta) |
+| Traduction faite par une IA | Përkthim i bërë nga një IA |
+
+## Langue ajoutée ensuite : maltais (mt)
+
+Mêmes fichiers que l’albanais : `assets/i18n/src/nord10/<zone>.tsv`, 3e colonne. `node scripts/i18n-todo.js mt <zone>` montre
+l’anglais, l’allemand et **l’italien** (langue voisine : une bonne part du vocabulaire de l’app en vient, mais on garde le
+mot maltais courant quand il existe). Orthographe officielle : **ċ, ġ, għ, ħ, ie, ż** toujours écrits (la recherche de la
+FAQ les ramène à c, g, gh, h, ie, z). L’article se colle avec un trait d’union et s’assimile devant les « lettres du
+soleil » (ċ, d, n, r, s, t, x, ż, z) : « il-ktieb », « l-arblu », « ir-ritratt », « is-sors », « it-test », « id-data »,
+« iż-żjara », « ix-xogħol », « in-noti » ; après une voyelle : « fid-database », « mal-lista », « tal-app ».
+Ton : on tutoie (*int*), phrases courtes : impératif 2e personne du singulier (« Agħżel », « Ikklikkja », « Ikteb »,
+« Erġa’ pprova », « Iċċekkja l-ortografija ») ; boutons à l’impératif (« Issejvja », « Ħassar », « Żid », « Agħlaq »,
+« Ikkanċella », « Editja », « Fittex »). Possessif : *tiegħek* (« il-ġenealoġija tiegħek »). Guillemets **“…”**. Mots
+anglais courants à Malte gardés quand c’est le mot de tous les jours (*database*, *backup*, *folder*, *tab*, *widget*,
+*preview*, *shortcut*). Exemples de dates d’actes en français ; nombres avec le point décimal (`mt-MT` : « 3.5 »).
+**Pluriels — ordre des formes dans les `.tsv`** : **cinq formes** `one|two|few|many|other` (`FORMS.mt` dans
+`scripts/i18n-build.js`), selon CLDR 42 et plus :
+
+| Forme | Nombres | Exemple (`personne`) |
+|---|---|---|
+| one | 1 | 1 persuna |
+| two | 2 | 2 persuni |
+| few | 0, 3 à 10, 103 à 110, 203 à 210… | 3 persuni |
+| many | 11 à 19, 111 à 119… | 11 persuna |
+| other | 20 à 102, 120 à 202…, et tous les nombres à virgule (1,5) | 20 persuna |
+
+Après 11 et plus, le nom maltais **reste au singulier** (« għoxrin persuna ») : `many` et `other` prennent donc le singulier,
+`two` et `few` le pluriel (le duel — *jumejn*, *sentejn* — ne s’écrit pas après le chiffre {n} : « 2 ijiem »). Exemples :
+`persuna|persuni|persuni|persuna|persuna`, `jum|ijiem|ijiem|jum|jum`, `ġimgħa|ġimgħat|ġimgħat|ġimgħa|ġimgħa`,
+`skeda|skedi|skedi|skeda|skeda`. Dans Node 22 (ICU récent), `new Intl.PluralRules('mt').resolvedOptions().pluralCategories`
+donne `['few', 'many', 'one', 'two', 'other']` (ordre d’ICU, pas celui des `.tsv`). Un navigateur plus ancien (CLDR < 42,
+sans `two`) prend la règle écrite dans `app-i18n.js` (`OWN_RULES.mt`), la même que `i18n_plural_cat('mt')` côté serveur.
+Dates et nombres : `mt-MT`, sinon `en-MT` puis `en` (`intlFallback`).
+
+| Français | Malti |
+|---|---|
+| Sosa (numéro Sosa) | Sosa |
+| fiche (d’une personne) | skeda (l-iskeda tal-persuna) |
+| 📒 Fiches (sujets) | 📒 Noti |
+| généalogie (la base de la personne) | ġenealoġija (il-ġenealoġija tiegħek) |
+| base (de données) | database |
+| acte | att |
+| baptême / naissance | magħmudija / twelid |
+| mariage | żwieġ |
+| décès | mewt |
+| parrain / marraine | parrinu / parrina |
+| témoin / déclarant | xhud / dikjarant |
+| ascendants / descendants | antenati / dixxendenti |
+| ancêtre | antenat |
+| branche | fergħa |
+| génération | ġenerazzjoni |
+| implexe | impless |
+| recensement | ċensiment |
+| inventaire après décès | inventarju wara l-mewt |
+| dépouillement | indiċi tar-reġistri |
+| cote (d’archive) | numru tal-arkivju |
+| mur de brique | ħajt tal-briks |
+| cousinade | laqgħa tal-familja |
+| commune / ville / village | komun / belt / raħal |
+| paroisse | parroċċa |
+| lieu | post |
+| catalogue raisonné | katalgu raġunat |
+| Tableau de bord | Pannell |
+| widget | widget (widgets) |
+| Personnes | Persuni |
+| Graphiques / Diagrammes | Grafiċi / Dijagrammi |
+| Carte | Mappa |
+| Listes | Listi |
+| Chronologie | Kronoloġija |
+| Recherche | Riċerka |
+| Enquêtes | Investigazzjonijiet |
+| Trésors | Teżori |
+| Réglages | Issettjar |
+| Apparence | Dehra |
+| Médias | Midja |
+| Source | Sors |
+| Étiquette | Tikketta |
+| Battue | Tfittxija fuq il-post |
+| Mode simple | Modalità sempliċi |
+| Mode consultation | Modalità ta’ qari |
+| Sauvegarde | Backup |
+| Enregistrer / ✓ Enregistré | Issejvja / ✓ Issejvjat |
+| Annuler (bouton) | Ikkanċella |
+| ↶ Annuler / ↷ Rétablir | ↶ Erġa’ lura / ↷ Erġa’ agħmel |
+| Fermer | Agħlaq |
+| Supprimer | Ħassar |
+| Retirer (détacher) | Neħħi |
+| Modifier | Editja |
+| Créer / Ajouter | Oħloq / Żid |
+| Relier | Għaqqad |
+| ↺ Remettre comme au départ | ↺ Erġa’ poġġi kif kien |
+| Réessayer | Erġa’ pprova |
+| ⤒ Importer / ⤓ Exporter | ⤒ Importa / ⤓ Esporta |
+| 🖨 Imprimer | 🖨 Ipprintja |
+| Chercher / Filtrer ▾ / Trier : | Fittex / Iffiltra ▾ / Issortja: |
+| ✓ Compris : | ✓ Fhimt: |
+| Aimanter | Manjetizza |
+| Liste \| Fiches (affichage) | Lista \| Skedi |
+| onglet | tab |
+| écran | skrin |
+| fichier / dossier | fajl / folder |
+| bouton | buttuna |
+| Tableur / Traitement de texte | Folja elettronika / Proċessur tal-kliem |
+| Mise en page | Tqassim |
+| ordinateur | kompjuter |
+| app | app |
+| FAQ | FAQ (Mistoqsijiet frekwenti) |
+| Traduction faite par une IA | Traduzzjoni magħmula minn IA |
+
 ## Zone « tresors-ui » (étiquettes et fenêtres des pages Trésors)
 
 | Français | English | Español | Deutsch | Italiano | Português | Polski | Nederlands |

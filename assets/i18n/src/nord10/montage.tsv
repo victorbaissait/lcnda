@@ -1,0 +1,48 @@
+fr ¦ sq ¦ mt
+# ═════ zone « montage » : albanais (sq), maltais (mt) ═════
+Boutons des pistes : petits ¦ Butonat e pistave: të vegjël ¦ Buttuni tal-binarji: żgħar
+Boutons des pistes : grands ¦ Butonat e pistave: të mëdhenj ¦ Buttuni tal-binarji: kbar
+Les boutons des pistes ont déjà cette taille. ¦ Butonat e pistave e kanë tashmë këtë madhësi. ¦ Il-buttuni tal-binarji diġà għandhom dan id-daqs.
+Petits ¦ Të vegjël ¦ Żgħar
+Moyens (départ) ¦ Mesatarë (fillestar) ¦ Medji (tal-bidu)
+Grands ¦ Të mëdhenj ¦ Kbar
+Ranger cette section : glisse la poignée, ou Alt + ↑ / ↓ ¦ Rendit këtë seksion: tërhiq dorezën, ose Alt + ↑ / ↓ ¦ Irranġa din it-taqsima: kaxkar il-manku, jew Alt + ↑ / ↓
+Sections du panneau de droite : ↺ Remettre comme au départ ¦ Seksionet e panelit të djathtë: ↺ Ktheji si në fillim ¦ Taqsimiet tal-pannell tal-lemin: ↺ Erġa’ poġġihom kif kienu
+Sections du panneau de droite remises comme au départ ¦ Seksionet e panelit të djathtë u kthyen si në fillim ¦ It-taqsimiet tal-pannell tal-lemin reġgħu kif kienu fil-bidu
+Les sections du panneau de droite sont déjà comme au départ. ¦ Seksionet e panelit të djathtë janë tashmë si në fillim. ¦ It-taqsimiet tal-pannell tal-lemin diġà huma kif kienu fil-bidu.
+Taille et place ¦ Madhësia dhe vendi ¦ Daqs u post
+Durée, taille et place ¦ Kohëzgjatja, madhësia dhe vendi ¦ Tul, daqs u post
+Couleurs de cette vidéo ¦ Ngjyrat e kësaj videoje ¦ Il-kuluri ta’ dan il-vidjo
+Rotation et fondus ¦ Rrotullimi dhe zbehjet ¦ Dawran u fade
+Volume et effets ¦ Volumi dhe efektet ¦ Volum u effetti
+Les couleurs et le vieux film de ce morceau reviennent comme au départ ¦ Ngjyrat dhe filmi i vjetër i kësaj pjese kthehen si në fillim ¦ Il-kuluri u l-effett tal-film antik ta’ din il-biċċa jerġgħu kif kienu fil-bidu
+Les couleurs et le vieux film de tout le film reviennent comme au départ ¦ Ngjyrat dhe filmi i vjetër i gjithë filmit kthehen si në fillim ¦ Il-kuluri u l-effett tal-film antik tal-film kollu jerġgħu kif kienu fil-bidu
+Couleurs remises comme au départ ¦ Ngjyrat u kthyen si në fillim ¦ Il-kuluri reġgħu kif kienu fil-bidu
+Le son de tout le film revient comme au départ (volume, effets) ¦ Zëri i gjithë filmit kthehet si në fillim (volumi, efektet) ¦ Il-ħoss tal-film kollu jerġa’ kif kien fil-bidu (volum, effetti)
+Son du film remis comme au départ ¦ Zëri i filmit u kthye si në fillim ¦ Il-ħoss tal-film reġa’ kif kien fil-bidu
+Texte remis comme au départ ¦ Teksti u kthye si në fillim ¦ It-test reġa’ kif kien fil-bidu
+Volume dans le temps ¦ Volumi në kohë ¦ Volum maż-żmien
+Poser des points sur le morceau ¦ Vendos pika në pjesë ¦ Poġġi punti fuq il-biċċa
+Point à la tête de lecture ¦ Pikë te koka e leximit ¦ Punt fil-pożizzjoni tad-daqq
+Effacer la courbe ¦ Fshi lakoren ¦ Ħassar il-kurva
+Courbe du volume effacée ¦ Lakorja e volumit u fshi ¦ Il-kurva tal-volum tħassret
+Volume : {n} % ¦ Volumi: {n} % ¦ Volum: {n} %
+Points sur la courbe : {n}. La ligne du milieu = le volume réglé plus haut ; en haut, jusqu’à deux fois plus fort. ¦ Pika në lakore: {n}. Vija e mesit = volumi i caktuar më lart; lart, deri në dy herë më fort. ¦ Punti fuq il-kurva: {n}. Il-linja tan-nofs = il-volum issettjat aktar ’il fuq; fil-quċċata, sa darbtejn aktar qawwi.
+Pas encore de courbe : le volume reste le même du début à la fin (avec ses fondus). ¦ Ende pa lakore: volumi mbetet i njëjtë nga fillimi në fund (me zbehjet e tij). ¦ Għad m’hemmx kurva: il-volum jibqa’ l-istess mill-bidu sal-aħħar (bil-fade tiegħu).
+Sur le morceau choisi, dans la frise : un clic pose un point, on glisse un point pour le déplacer (en haut : plus fort, en bas : moins fort), un double-clic l’enlève. ¦ Në pjesën e zgjedhur, në shirit kohor: një klikim vendos një pikë, tërhiq një pikë për ta lëvizur (lart: më fort, poshtë: më butë), një klikim i dyfishtë e heq. ¦ Fuq il-biċċa magħżula, fil-linja taż-żmien: klikk wieħed ipoġġi punt, kaxkar punt biex iċċaqilqu (’il fuq: aktar qawwi, ’l isfel: aktar baxx), klikk doppju jneħħih.
+✎ Clique sur le morceau, dans la frise, pour poser un point ; glisse un point pour le déplacer ; double-clic pour l’enlever. ¦ ✎ Kliko pjesën në shiritin kohor për të vendosur një pikë; tërhiq një pikë për ta lëvizur; klikim i dyfishtë për ta hequr. ¦ ✎ Ikklikkja l-biċċa fil-linja taż-żmien biex tpoġġi punt; kaxkar punt biex iċċaqilqu; klikk doppju biex tneħħih.
+Volume plus égal (les passages faibles remontent, les forts baissent) ¦ Volum më i barabartë (pjesët e dobëta ngrihen, të fortat ulen) ¦ Volum aktar ugwali (il-partijiet baxxi jogħlew, dawk qawwija jinżlu)
+Lieu de la réverbération ¦ Vendi i jehonës ¦ Il-post tar-riverberazzjoni
+Une grande salle ¦ Një sallë e madhe ¦ Sala kbira
+Une église ¦ Një kishë ¦ Knisja
+Une cave ¦ Një bodrum ¦ Kantina
+Gauche ↔ droite ¦ Majtas ↔ djathtas ¦ Xellug ↔ lemin
+Police et couleur ¦ Shkronja dhe ngjyra ¦ Font u kulur
+italique ¦ kursiv ¦ korsiv
+Contour et ombre ¦ Kontur dhe hije ¦ Kontorn u dell
+autour des lettres ¦ rreth shkronjave ¦ madwar l-ittri
+Force de l’ombre ¦ Forca e hijes ¦ Saħħa tad-dell
+Allume « ombre » (Police et couleur) pour régler l’ombre. ¦ Ndiz «hije» (Shkronja dhe ngjyra) për të rregulluar hijen. ¦ Ixgħel “dell” (Font u kulur) biex tirranġa d-dell.
+Bandeau derrière le texte ¦ Shirit pas tekstit ¦ Strixxa wara t-test
+Opacité du bandeau ¦ Patejdukshmëria e shiritit ¦ Opaċità tal-istrixxa
+Allume « bandeau » (Police et couleur) : un fond de couleur derrière le texte, plus ou moins transparent, aux coins droits ou arrondis. ¦ Ndiz «shirit» (Shkronja dhe ngjyra): një sfond me ngjyrë pas tekstit, pak a shumë i tejdukshëm, me qoshe të drejta ose të rrumbullakëta. ¦ Ixgħel “strixxa” (Font u kulur): sfond ikkulurit wara t-test, ftit jew wisq trasparenti, b’kantunieri dritti jew tondi.

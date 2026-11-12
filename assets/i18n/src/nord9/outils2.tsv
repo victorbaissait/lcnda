@@ -122,7 +122,7 @@ Le signe « {v} » sépare les nombres d’une fonction, comme pgcd(12 ; 18). ¦
 Pour un nombre à virgule, colle la virgule aux chiffres : 2,5. ¦ Fir eng Kommazuel, schreif d’Komma direkt bei d’Zifferen: 2,5.
 Je ne comprends pas « {raw} » ici. ¦ Ech verstinn „{raw}“ hei net.
 Il manque un signe entre « {raw} » et « {raw2} ». ¦ Tëscht „{raw}“ an „{raw2}“ feelt en Zeechen.
-Par exemple « × » ou « + ». ¦ Zum Beispill „ד oder „+“.
+Par exemple « × » ou « + ». ¦ Zum Beispill „×“ oder „+“.
 Il manque une parenthèse fermante « ) » après {name}(…). ¦ No {name}(…) feelt eng zouen Klamer „)“.
 Ajoute « ) » à la fin. ¦ Setz „)“ um Enn derbäi.
 Je ne comprends pas « {raw} » dans {name}(…). ¦ Ech verstinn „{raw}“ an {name}(…) net.
