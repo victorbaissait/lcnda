@@ -24,7 +24,7 @@ const BASE_ZONES = ['cadre', 'composants', 'colonnes', 'premier', 'touches', 're
     const B = require('../scripts/i18n-build.js');
     const F = require('../scripts/build-faq-i18n.js');
     await t('lt, lv et et déclarés partout : app-i18n.js, lib/i18n.php, scripts, FAQ', () => {
-        assert.deepEqual(I.CODES.slice(18, 21), NEW); assert.equal(I.CODES.length, 26);
+        assert.deepEqual(I.CODES.slice(18, 21), NEW); assert.equal(I.CODES.length, 28);
         assert.deepEqual([I.info('lt').name, I.info('lt').flag, I.info('lt').locale], ['Lietuvių', '🇱🇹', 'lt-LT']);
         assert.deepEqual([I.info('lv').name, I.info('lv').flag, I.info('lv').locale], ['Latviešu', '🇱🇻', 'lv-LV']);
         assert.deepEqual([I.info('et').name, I.info('et').flag, I.info('et').locale], ['Eesti', '🇪🇪', 'et-EE']);

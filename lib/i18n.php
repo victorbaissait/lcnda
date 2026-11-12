@@ -4,13 +4,13 @@ declare(strict_types=1);
  * 🌐 Traduction côté serveur (même dictionnaire que assets/js/app-i18n.js ; mode d'emploi : docs/I18N.md).
  *
  *  - i18n_lang() : la langue de la page — en-tête « X-LCNDA-Lang » envoyé par app.js (api()), sinon le cookie lcnda_lang ;
- *    toujours une des 26 langues (fr par défaut).
+ *    toujours une des 28 langues (fr par défaut).
  *  - i18n_t('Texte français', ['n' => 3]) : le texte dans cette langue, sinon le français (variables {x} remplacées).
  *  - json_response() passe le message « error » par i18n_t() : un message d'erreur connu arrive traduit ; en français,
  *    rien ne change.
  */
 
-const I18N_LANGS = ['fr', 'en', 'es', 'de', 'it', 'pt', 'pl', 'nl', 'cs', 'sv', 'da', 'sk', 'nb', 'ro', 'fi', 'hu', 'hr', 'sl', 'lt', 'lv', 'et', 'is', 'tr', 'lb', 'sq', 'mt'];
+const I18N_LANGS = ['fr', 'en', 'es', 'de', 'it', 'pt', 'pl', 'nl', 'cs', 'sv', 'da', 'sk', 'nb', 'ro', 'fi', 'hu', 'hr', 'sl', 'lt', 'lv', 'et', 'is', 'tr', 'lb', 'sq', 'mt', 'vi', 'id'];
 
 function i18n_lang(): string
 {
@@ -46,8 +46,8 @@ function i18n_t(string $text, array $vars = [], string $ctx = ''): string
             $n = isset($vars['n']) && is_numeric($vars['n']) ? (float) $vars['n'] : 1.0;
             // roumain : 1 → one ; 0, 2 à 19 (et 101 à 119…) → few ; 20 et plus → other (« 20 de persoane »), comme Intl.PluralRules('ro')
             $few = i18n_lang() === 'ro' && $n != 1.0 && ($n == 0.0 || floor($n) != $n || (fmod($n, 100.0) >= 1 && fmod($n, 100.0) <= 19));
-            // finnois, hongrois, estonien, turc, luxembourgeois et albanais : 1 → one, sinon other (hongrois et turc : le nom reste au singulier après un nombre, « 5 személy », « 5 kişi »)
-            $cat = i18n_plural_cat(i18n_lang(), $n); // croate, slovène, lituanien, letton, islandais, maltais : leur propre règle (les autres langues ne changent pas)
+            // finnois, hongrois, estonien, turc, luxembourgeois et albanais : 1 → one, sinon other ; vietnamien et indonésien : toujours other (une seule forme) (hongrois et turc : le nom reste au singulier après un nombre, « 5 személy », « 5 kişi »)
+            $cat = i18n_plural_cat(i18n_lang(), $n); // croate, slovène, lituanien, letton, islandais, maltais, vietnamien, indonésien : leur propre règle (les autres langues ne changent pas)
             if ($cat !== null) { $v = $v[$cat] ?? $v['other'] ?? $v['one'] ?? null; }
             else { $v = ($few ? ($v['few'] ?? null) : null) ?? ($n == 1.0 ? ($v['one'] ?? null) : null) ?? $v['other'] ?? $v['many'] ?? $v['one'] ?? null; } // un mot au pluriel lu tout seul : la forme « un »
         }
@@ -67,10 +67,12 @@ function i18n_t(string $text, array $vars = [], string $ctx = ''): string
  *  islandais (is) : one (1, 21, 31, 101… sauf 11, 111… ; à virgule : 0,1, 1,1… quand la partie après la virgule finit par 1
  *  sauf 11) | other (0, 2–20, 111… et 1,5) ;
  *  maltais (mt, CLDR 42 et plus) : one (1) | two (2) | few (0, 3–10, 103–110…) | many (11–19, 111–119…) | other (20–102,
- *  120…, et les nombres à virgule) —
- *  comme Intl.PluralRules('hr' / 'sl' / 'lt' / 'lv' / 'is' / 'mt') ; null pour les autres langues (leur règle d'avant reste) */
+ *  120…, et les nombres à virgule) ;
+ *  vietnamien (vi) et indonésien (id) : une seule forme, other, pour tous les nombres (« 1 người », « 5 orang ») —
+ *  comme Intl.PluralRules('hr' / 'sl' / 'lt' / 'lv' / 'is' / 'mt' / 'vi' / 'id') ; null pour les autres langues (leur règle d'avant reste) */
 function i18n_plural_cat(string $lang, float $n): ?string
 {
+    if ($lang === 'vi' || $lang === 'id') { return 'other'; }
     if (!in_array($lang, ['hr', 'sl', 'lt', 'lv', 'is', 'mt'], true)) { return null; }
     $n = abs($n);
     if ($lang === 'mt') {

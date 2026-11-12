@@ -3,7 +3,7 @@
 À suivre pour toute traduction de LCNDA (mode d’emploi : `docs/I18N.md`). Un mot de l’app se traduit **toujours de la
 même façon** dans une langue. Ton : on tutoie partout (en : *you* ; es : *tú* ; de : *du* ; it : *tu* ; pt : *tu* ;
 pl : *ty* ; nl : *je* ; cs : *ty* ; sv : *du* ; da : *du*). Phrases courtes et simples, comme en français.
-Le tchèque, le suédois et le danois, puis le slovaque et le norvégien bokmål (et les langues suivantes, jusqu’au turc et au luxembourgeois) ont leur propre section à la fin (« Langues ajoutées ensuite »).
+Le tchèque, le suédois et le danois, puis le slovaque et le norvégien bokmål (et les langues suivantes, jusqu’au vietnamien et à l’indonésien) ont leur propre section à la fin (« Langues ajoutées ensuite »).
 
 ## Généalogie
 
@@ -1406,6 +1406,186 @@ Dates et nombres : `mt-MT`, sinon `en-MT` puis `en` (`intlFallback`).
 | app | app |
 | FAQ | FAQ (Mistoqsijiet frekwenti) |
 | Traduction faite par une IA | Traduzzjoni magħmula minn IA |
+
+## Langue ajoutée ensuite : vietnamien (vi)
+
+Fichiers : `assets/i18n/src/nord11/<zone>.tsv` (1re ligne `fr ¦ vi ¦ id`), 2e colonne. `node scripts/i18n-todo.js vi <zone>`
+montre l’anglais et l’allemand (pas de langue proche déjà traduite). Tiếng Việt standard, **toujours avec tous ses
+accents** (ă, â, đ, ê, ô, ơ, ư et les cinq tons : « người », « Lưu », « Xoá », « Đóng ») — la recherche de la FAQ les
+ramène à la lettre de base (« người » → nguoi, « đ » → d), on peut donc chercher avec ou sans accents.
+Ton : simple et chaleureux, on dit **bạn** (« Bạn có chắc không? », « gia phả của bạn ») ; consignes avec *Hãy* (« Hãy
+chọn… », « Hãy thử lại ») ; boutons courts, sans *Hãy* (« Lưu », « Xoá », « Thêm », « Đóng », « Hủy », « Sửa »).
+Guillemets **“…”**. Pas d’espace avant « : » ni « ? ». Exemples de dates d’actes en français (« 12 mars 1790 » : c’est ce
+que l’app comprend) ; nombres avec la virgule décimale (`vi-VN` : « 3,5 ») ; dates et nombres `vi-VN`, sinon `en`
+(`intlFallback`).
+**Pluriel : une seule forme** (`FORMS.vi = ['other']`) : le nom ne change pas après un nombre (« 1 người », « 5 người »,
+« 3 ngày ») ; dans les `.tsv`, une seule valeur **sans « | »** (`=personne ¦ người ¦ orang`) — `i18n-check` refuse
+« người|người ». Sans classificateur après {n} dans les compteurs (« {n} mục », « {n} người »).
+
+| Français | Tiếng Việt |
+|---|---|
+| Sosa (numéro Sosa) | Sosa |
+| fiche (d’une personne) | hồ sơ |
+| 📒 Fiches (sujets) | 📒 Phiếu ghi |
+| Liste \| Fiches (affichage) | Danh sách \| Thẻ |
+| généalogie (la base de la personne) | gia phả (gia phả của bạn) |
+| base (de données) | cơ sở dữ liệu (dữ liệu của bạn) |
+| acte | giấy tờ |
+| baptême / naissance | rửa tội / sinh |
+| mariage | kết hôn |
+| décès | mất |
+| parrain / marraine | cha đỡ đầu / mẹ đỡ đầu |
+| témoin / déclarant | người làm chứng / người khai báo |
+| ascendants / descendants | tổ tiên / con cháu |
+| ancêtre | tổ tiên |
+| branche | nhánh |
+| génération | thế hệ |
+| implexe | trùng lặp tổ tiên |
+| recensement | điều tra dân số |
+| inventaire après décès | kiểm kê tài sản sau khi mất |
+| dépouillement | bảng trích lục |
+| cote (d’archive) | ký hiệu lưu trữ |
+| mur de brique | ngõ cụt |
+| cousinade | họp mặt họ hàng |
+| commune / ville / village | xã / thành phố / làng |
+| paroisse | giáo xứ |
+| lieu | địa điểm |
+| catalogue raisonné | danh mục toàn tập |
+| Tableau de bord | Bảng điều khiển |
+| widget | tiện ích |
+| Personnes | Người |
+| Graphiques / Diagrammes | Biểu đồ / Sơ đồ |
+| Carte | Bản đồ |
+| Listes | Danh sách |
+| Chronologie | Dòng thời gian |
+| Recherche | Nghiên cứu |
+| Enquêtes | Tìm hiểu (une enquête : cuộc tìm hiểu) |
+| Trésors | Báu vật |
+| Réglages | Cài đặt |
+| Apparence | Giao diện |
+| Médias | Tư liệu |
+| Source | Nguồn |
+| Étiquette | Nhãn |
+| Battue | Cuộc tìm kiếm diện rộng |
+| Mode simple | Chế độ đơn giản |
+| Mode consultation | Chế độ chỉ xem |
+| Sauvegarde | Sao lưu |
+| Enregistrer / ✓ Enregistré | Lưu / ✓ Đã lưu |
+| Annuler (bouton) | Hủy |
+| ↶ Annuler / ↷ Rétablir | ↶ Hoàn tác / ↷ Làm lại |
+| Fermer | Đóng |
+| Supprimer | Xoá |
+| Retirer (détacher) | Gỡ ra (gỡ, bỏ) |
+| Modifier | Sửa |
+| Créer / Ajouter | Tạo / Thêm |
+| Relier | Liên kết |
+| ↺ Remettre comme au départ | ↺ Đặt lại như ban đầu |
+| Réessayer | Thử lại |
+| ⤒ Importer / ⤓ Exporter | ⤒ Nhập / ⤓ Xuất |
+| 🖨 Imprimer | 🖨 In |
+| Chercher / Filtrer ▾ / Trier : | Tìm / Lọc ▾ / Sắp xếp: |
+| ✓ Compris : | ✓ Đã hiểu: |
+| Aimanter | Bắt dính |
+| onglet | thẻ |
+| écran | màn hình |
+| fichier / dossier | tệp / thư mục |
+| bouton | nút |
+| Tableur / Traitement de texte | Bảng tính / Soạn thảo văn bản |
+| Mise en page | Dàn trang |
+| ordinateur | máy tính |
+| app | ứng dụng |
+| FAQ | FAQ (Câu hỏi thường gặp) |
+| Traduction faite par une IA | Bản dịch do AI thực hiện |
+
+## Langue ajoutée ensuite : indonésien (id)
+
+Mêmes fichiers que le vietnamien : `assets/i18n/src/nord11/<zone>.tsv`, 3e colonne. `node scripts/i18n-todo.js id <zone>`
+montre l’anglais et l’allemand. Bahasa Indonesia standard (EYD), ton simple et chaleureux : on dit **kamu**, jamais *Anda*
+(choisi pour toute l’app, comme le tutoiement français) ; possessif collé « -mu » (« silsilahmu », « fotomu ») ; consignes
+à l’impératif (« Pilih… », « Ketik… », « Coba lagi ») ; boutons à l’impératif (« Simpan », « Hapus », « Tambah », « Tutup »,
+« Batal », « Ubah »). Guillemets **“…”**. Pas d’espace avant « : » ni « ? ». Exemples de dates d’actes en français ;
+nombres avec la virgule décimale (`id-ID` : « 3,5 ») ; dates et nombres `id-ID`, sinon `en` (`intlFallback`).
+**Pluriel : une seule forme** (`FORMS.id = ['other']`) : après un nombre, le nom ne se redouble pas (« 1 orang », « 5 orang »,
+jamais « 5 orang-orang ») ; dans les `.tsv`, une seule valeur **sans « | »**. Le redoublement (« orang-orang », « berkas-berkas »)
+reste possible dans une phrase sans nombre.
+**Attention, `id`** : c’est aussi le nom d’une propriété dans tout le code (identifiant d’une fiche, d’un média…). Le code
+de langue n’apparaît que dans les tables de langues (`LANGS`, `I18N_LANGS`, `FORMS.id`, `NAMES.id`, `FAQ_STEM.id`…), jamais
+comme propriété d’un objet de données ; `tests/test-i18n-nord11.js` le vérifie.
+
+| Français | Bahasa Indonesia |
+|---|---|
+| Sosa (numéro Sosa) | Sosa |
+| fiche (d’une personne) | profil |
+| 📒 Fiches (sujets) | 📒 Kartu catatan |
+| Liste \| Fiches (affichage) | Daftar \| Kartu |
+| généalogie (la base de la personne) | silsilah (silsilahmu) |
+| base (de données) | basis data |
+| acte | akta |
+| baptême / naissance | baptis / kelahiran |
+| mariage | pernikahan |
+| décès | kematian |
+| parrain / marraine | ayah baptis / ibu baptis (wali baptis) |
+| témoin / déclarant | saksi / pelapor |
+| ascendants / descendants | leluhur / keturunan |
+| ancêtre | leluhur |
+| branche | cabang |
+| génération | generasi |
+| implexe | implex |
+| recensement | sensus |
+| inventaire après décès | inventaris harta sesudah kematian |
+| dépouillement | indeks catatan |
+| cote (d’archive) | nomor arsip |
+| mur de brique | jalan buntu |
+| cousinade | reuni keluarga |
+| commune / ville / village | kota / kota / desa |
+| paroisse | paroki |
+| lieu | tempat |
+| catalogue raisonné | katalog raisonné |
+| Tableau de bord | Dasbor |
+| widget | widget |
+| Personnes | Orang |
+| Graphiques / Diagrammes | Grafik / Diagram |
+| Carte | Peta |
+| Listes | Daftar |
+| Chronologie | Kronologi |
+| Recherche | Riset |
+| Enquêtes | Penelusuran |
+| Trésors | Harta |
+| Réglages | Pengaturan |
+| Apparence | Tampilan |
+| Médias | Media |
+| Source | Sumber |
+| Étiquette | Label |
+| Battue | Penyisiran |
+| Mode simple | Mode sederhana |
+| Mode consultation | Mode lihat saja |
+| Sauvegarde | Cadangan |
+| Enregistrer / ✓ Enregistré | Simpan / ✓ Tersimpan |
+| Annuler (bouton) | Batal |
+| ↶ Annuler / ↷ Rétablir | ↶ Urungkan / ↷ Ulangi |
+| Fermer | Tutup |
+| Supprimer | Hapus |
+| Retirer (détacher) | Lepas |
+| Modifier | Ubah |
+| Créer / Ajouter | Buat / Tambah |
+| Relier | Hubungkan |
+| ↺ Remettre comme au départ | ↺ Kembalikan seperti semula |
+| Réessayer | Coba lagi |
+| ⤒ Importer / ⤓ Exporter | ⤒ Impor / ⤓ Ekspor |
+| 🖨 Imprimer | 🖨 Cetak |
+| Chercher / Filtrer ▾ / Trier : | Cari / Saring ▾ / Urutkan: |
+| ✓ Compris : | ✓ Dipahami: |
+| Aimanter | Tempelkan |
+| onglet | tab |
+| écran | layar |
+| fichier / dossier | berkas / folder |
+| bouton | tombol |
+| Tableur / Traitement de texte | Spreadsheet / Pengolah kata |
+| Mise en page | Tata letak |
+| ordinateur | komputer |
+| app | aplikasi |
+| FAQ | FAQ (Pertanyaan umum) |
+| Traduction faite par une IA | Diterjemahkan oleh AI |
 
 ## Zone « tresors-ui » (étiquettes et fenêtres des pages Trésors)
 

@@ -1,0 +1,423 @@
+fr ¦ vi ¦ id
+# ═════ zone « composants » : vietnamien (vi), indonésien (id) ═════
+# pluriels : vi et id n’ont qu’une forme (« 1 người », « 5 người » ; « 1 orang », « 5 orang ») : une seule valeur, sans « | »
+Enregistrer ¦ Lưu ¦ Simpan
+Annuler ¦ Hủy ¦ Batal
+Fermer ¦ Đóng ¦ Tutup
+Supprimer ¦ Xoá ¦ Hapus
+Retirer ¦ Gỡ ra ¦ Lepas
+Modifier ¦ Sửa ¦ Ubah
+Créer ¦ Tạo ¦ Buat
+Ajouter ¦ Thêm ¦ Tambah
+Relier ¦ Liên kết ¦ Hubungkan
+↺ Remettre comme au départ ¦ ↺ Đặt lại như ban đầu ¦ ↺ Kembalikan seperti semula
+Remettre comme au départ ¦ Đặt lại như ban đầu ¦ Kembalikan seperti semula
+↶ Annuler ¦ ↶ Hoàn tác ¦ ↶ Urungkan
+↷ Rétablir ¦ ↷ Làm lại ¦ ↷ Ulangi
+Rétablir ¦ Làm lại ¦ Ulangi
+Continuer ¦ Tiếp tục ¦ Lanjutkan
+Réessayer ¦ Thử lại ¦ Coba lagi
+Ouvrir ¦ Mở ¦ Buka
+↗ Ouvrir ¦ ↗ Mở ¦ ↗ Buka
+Renommer ¦ Đổi tên ¦ Ganti nama
+Dupliquer ¦ Nhân bản ¦ Gandakan
+Remplacer ¦ Thay thế ¦ Ganti
+Choisir ¦ Chọn ¦ Pilih
+Choisir… ¦ Chọn… ¦ Pilih…
+Changer ¦ Đổi ¦ Ubah
+Exporter ¦ Xuất ¦ Ekspor
+Importer ¦ Nhập ¦ Impor
+Imprimer ¦ In ¦ Cetak
+🖨 Imprimer ¦ 🖨 In ¦ 🖨 Cetak
+💾 Enregistrer ¦ 💾 Lưu ¦ 💾 Simpan
+⤒ Importer ¦ ⤒ Nhập ¦ ⤒ Impor
+⤓ Exporter ▾ ¦ ⤓ Xuất ▾ ¦ ⤓ Ekspor ▾
+📋 Copier ¦ 📋 Sao chép ¦ 📋 Salin
+✓ Enregistré ¦ ✓ Đã lưu ¦ ✓ Tersimpan
+Enregistré ¦ Đã lưu ¦ Tersimpan
+Enregistrement… ¦ Đang lưu… ¦ Menyimpan…
+⚠️ Pas enregistré ¦ ⚠️ Chưa lưu ¦ ⚠️ Belum tersimpan
+• modifié ¦ • đã sửa ¦ • diubah
+Plein écran ¦ Toàn màn hình ¦ Layar penuh
+Plus d’actions ¦ Thao tác khác ¦ Tindakan lain
+Aide ¦ Trợ giúp ¦ Bantuan
+Aide : ¦ Trợ giúp: ¦ Bantuan:
+En savoir plus (FAQ) → ¦ Tìm hiểu thêm (FAQ) → ¦ Pelajari lebih lanjut (FAQ) →
+Clique pour lire la suite ¦ Nhấp để đọc tiếp ¦ Klik untuk membaca selanjutnya
+Retour ¦ Quay lại ¦ Kembali
+← Retour ¦ ← Quay lại ¦ ← Kembali
+Oui ¦ Có ¦ Ya
+Non ¦ Không ¦ Tidak
+Aucune ¦ Không có ¦ Tidak ada
+Aucun ¦ Không có ¦ Tidak ada
+Tous ¦ Tất cả ¦ Semua
+Toutes ¦ Tất cả ¦ Semua
+Tout ¦ Tất cả ¦ Semua
+Tout voir ¦ Xem tất cả ¦ Lihat semua
+Voir tout ¦ Xem tất cả ¦ Lihat semua
+Toutes ({n}) ¦ Tất cả ({n}) ¦ Semua ({n})
+Tout ({n}) ¦ Tất cả ({n}) ¦ Semua ({n})
+Rien pour l’instant ¦ Chưa có gì ¦ Belum ada apa-apa
+Rien ¦ Không có gì ¦ Tidak ada
+Sans titre ¦ Không tiêu đề ¦ Tanpa judul
+Échap ¦ Esc ¦ Esc
+Entrée ¦ Enter ¦ Enter
+Début ¦ Home ¦ Home
+retour arrière ¦ backspace ¦ backspace
+⚠️ ATTENTION ¦ ⚠️ CHÚ Ý ¦ ⚠️ PERHATIAN
+CONFIRMER ¦ XÁC NHẬN ¦ KONFIRMASI
+Es-tu sûr ? ¦ Bạn có chắc không? ¦ Kamu yakin?
+Confirmer ¦ Xác nhận ¦ Konfirmasi
+Impossible d’annuler : {err} ¦ Không thể hoàn tác: {err} ¦ Tidak bisa diurungkan: {err}
+Impossible de rétablir : {err} ¦ Không thể làm lại: {err} ¦ Tidak bisa diulangi: {err}
+Déjà remis : rien à annuler de plus. ¦ Đã khôi phục rồi: không còn gì để hoàn tác. ¦ Sudah dipulihkan: tidak ada lagi yang bisa diurungkan.
+↶ Annulé : {what} ¦ ↶ Đã hoàn tác: {what} ¦ ↶ Diurungkan: {what}
+↶ Annulé : « {what} » ¦ ↶ Đã hoàn tác: “{what}” ¦ ↶ Diurungkan: “{what}”
+Pas de connexion avec LCNDA : rien n’est perdu, réessaie. ¦ Không kết nối được với LCNDA: không mất gì cả, hãy thử lại. ¦ Tidak ada koneksi ke LCNDA: tidak ada yang hilang, coba lagi.
+Réponse illisible du serveur ¦ Phản hồi của máy chủ không đọc được ¦ Balasan server tidak terbaca
+Réponse illisible du serveur. ¦ Phản hồi của máy chủ không đọc được. ¦ Balasan server tidak terbaca.
+Erreur du serveur. ¦ Lỗi máy chủ. ¦ Kesalahan server.
+Réglage changé ¦ Đã đổi cài đặt ¦ Pengaturan diubah
+Réglage changé : « {what} » ¦ Đã đổi cài đặt: “{what}” ¦ Pengaturan diubah: “{what}”
+Réglages remis comme au départ ¦ Cài đặt đã được đặt lại như ban đầu ¦ Pengaturan dikembalikan seperti semula
+Chargement… ¦ Đang tải… ¦ Memuat…
+Chargement de la base… ¦ Đang tải cơ sở dữ liệu… ¦ Memuat basis data…
+Ouverture de la généalogie… ¦ Đang mở gia phả… ¦ Membuka silsilah…
+Chercher ¦ Tìm ¦ Cari
+Chercher… ¦ Tìm… ¦ Cari…
+Rechercher ¦ Tìm kiếm ¦ Cari
+Vider la case (Échap) ¦ Xoá ô (Esc) ¦ Kosongkan kotak (Esc)
+Vider la case ¦ Xoá ô ¦ Kosongkan kotak
+Touche « / » : aller dans la case de recherche ¦ Phím “/”: đến ô tìm kiếm ¦ Tombol “/”: ke kotak pencarian
+Filtrer ¦ Lọc ¦ Saring
+Filtrer ▾ ¦ Lọc ▾ ¦ Saring ▾
+Tout effacer ¦ Xoá hết ¦ Hapus semua
+Retirer ce filtre ¦ Bỏ bộ lọc này ¦ Lepas saringan ini
+Trier ¦ Sắp xếp ¦ Urutkan
+Trier : ¦ Sắp xếp: ¦ Urutkan:
+Les plus récents ¦ Mới nhất trước ¦ Terbaru dulu
+Les plus anciens ¦ Cũ nhất trước ¦ Terlama dulu
+Les plus récentes ¦ Mới nhất trước ¦ Terbaru dulu
+Les plus anciennes ¦ Cũ nhất trước ¦ Terlama dulu
+Nom A → Z ¦ Tên A → Z ¦ Nama A → Z
+Nom Z → A ¦ Tên Z → A ¦ Nama Z → A
+Liste ¦ Danh sách ¦ Daftar
+Fiches ¦ Thẻ ¦ Kartu
+En liste : une ligne par élément (vignette, nom, détails, date) ¦ Dạng danh sách: mỗi mục một dòng (ảnh nhỏ, tên, chi tiết, ngày) ¦ Sebagai daftar: satu baris per item (gambar kecil, nama, detail, tanggal)
+En fiches : une carte par élément, avec une grande vignette ¦ Dạng thẻ: mỗi mục một thẻ, với ảnh nhỏ cỡ lớn ¦ Sebagai kartu: satu kartu per item, dengan gambar kecil yang besar
+Affichage des {what} ¦ Cách hiển thị {what} ¦ Tampilan {what}
+Voir le suivant ↓ ¦ Xem mục tiếp theo ↓ ¦ Lihat berikutnya ↓
+Voir la suivante ↓ ¦ Xem mục tiếp theo ↓ ¦ Lihat berikutnya ↓
+Voir les {n} suivants ↓ ¦ Xem {n} mục tiếp theo ↓ ¦ Lihat {n} berikutnya ↓
+Voir les {n} suivantes ↓ ¦ Xem {n} mục tiếp theo ↓ ¦ Lihat {n} berikutnya ↓
+{n} éléments ¦ {n} mục ¦ {n} item
+=élément ¦ mục ¦ item
+éléments ¦ mục ¦ item
+=personne ¦ người ¦ orang
+=animal ¦ con vật ¦ hewan
+=fiche ¦ hồ sơ ¦ profil
+=lieu ¦ địa điểm ¦ tempat
+=commune ¦ xã ¦ kota
+=ville ¦ thành phố ¦ kota
+=chose ¦ điều ¦ hal
+=caractère ¦ ký tự ¦ karakter
+=page ¦ trang ¦ halaman
+=document ¦ tài liệu ¦ dokumen
+=média ¦ tư liệu ¦ berkas media
+=source ¦ nguồn ¦ sumber
+=événement ¦ sự kiện ¦ peristiwa
+=étiquette ¦ nhãn ¦ label
+=enquête ¦ cuộc tìm hiểu ¦ penelusuran
+=modification ¦ thay đổi ¦ perubahan
+=famille ¦ gia đình ¦ keluarga
+=génération ¦ thế hệ ¦ generasi
+=réglage ¦ cài đặt ¦ pengaturan
+=erreur captée ¦ lỗi ghi nhận ¦ kesalahan tertangkap
+=jour ¦ ngày ¦ hari
+=type ¦ loại ¦ jenis
+=branche ¦ nhánh ¦ cabang
+=doublon possible ¦ bản trùng có thể ¦ kemungkinan duplikat
+=chose à vérifier ¦ điều cần kiểm tra ¦ hal yang perlu dicek
+=album ¦ album ¦ album
+=chanson ¦ bài hát ¦ lagu
+=titre ¦ tựa đề ¦ judul
+Nom, prénom… (2 lettres suffisent) ¦ Họ, tên… (2 chữ cái là đủ) ¦ Nama keluarga, nama depan… (2 huruf sudah cukup)
+Ville, village, paroisse… ¦ Thành phố, làng, giáo xứ… ¦ Kota, desa, paroki…
+＋ Ajouter une personne… ¦ ＋ Thêm một người… ¦ ＋ Tambah orang…
+＋ Ajouter un lieu… ¦ ＋ Thêm một địa điểm… ¦ ＋ Tambah tempat…
+＋ Ajouter une source… ¦ ＋ Thêm một nguồn… ¦ ＋ Tambah sumber…
+＋ Ajouter un média… ¦ ＋ Thêm một tư liệu… ¦ ＋ Tambah media…
+＋ Ajouter une enquête… ¦ ＋ Thêm một cuộc tìm hiểu… ¦ ＋ Tambah penelusuran…
+＋ Ajouter une étiquette… ¦ ＋ Thêm một nhãn… ¦ ＋ Tambah label…
+＋ Ajouter un événement… ¦ ＋ Thêm một sự kiện… ¦ ＋ Tambah peristiwa…
+＋ Ajouter un animal… ¦ ＋ Thêm một con vật… ¦ ＋ Tambah hewan…
+＋ Ajouter… ¦ ＋ Thêm… ¦ ＋ Tambah…
+↗ Fiche ¦ ↗ Hồ sơ ¦ ↗ Profil
+↗ Lieu ¦ ↗ Địa điểm ¦ ↗ Tempat
+Aucune fiche ¦ Không có hồ sơ ¦ Tidak ada profil
+Aucun lieu ¦ Không có địa điểm ¦ Tidak ada tempat
+Aucune source ¦ Không có nguồn ¦ Tidak ada sumber
+Aucun média ¦ Không có tư liệu ¦ Tidak ada media
+Aucune enquête ¦ Không có cuộc tìm hiểu ¦ Tidak ada penelusuran
+Aucune étiquette ¦ Không có nhãn ¦ Tidak ada label
+Aucun événement ¦ Không có sự kiện ¦ Tidak ada peristiwa
+Aucun animal ¦ Không có con vật ¦ Tidak ada hewan
+Créer la fiche ¦ Tạo hồ sơ ¦ Buat profil
+Créer le lieu ¦ Tạo địa điểm ¦ Buat tempat
+Créer une fiche ¦ Tạo một hồ sơ ¦ Buat profil
+＋ Créer sa fiche ¦ ＋ Tạo hồ sơ cho người này ¦ ＋ Buat profilnya
+👤 Personnes ¦ 👤 Người ¦ 👤 Orang
+📍 Lieux ¦ 📍 Địa điểm ¦ 📍 Tempat
+📚 Sources ¦ 📚 Nguồn ¦ 📚 Sumber
+🖼 Médias ¦ 🖼 Tư liệu ¦ 🖼 Media
+🔍 Enquêtes ¦ 🔍 Tìm hiểu ¦ 🔍 Penelusuran
+🏷 Étiquettes ¦ 🏷 Nhãn ¦ 🏷 Label
+📅 Événements ¦ 📅 Sự kiện ¦ 📅 Peristiwa
+🐾 Animaux ¦ 🐾 Động vật ¦ 🐾 Hewan
+✎ Garder le texte « {q} » sans fiche ¦ ✎ Giữ chữ “{q}” mà không tạo hồ sơ ¦ ✎ Simpan teks “{q}” tanpa profil
+🗺 Choisir sur la carte ¦ 🗺 Chọn trên bản đồ ¦ 🗺 Pilih di peta
+{what} de ta base ¦ {what} trong dữ liệu của bạn ¦ {what} di basis datamu
+{what} de France ¦ {what} ở Pháp ¦ {what} di Prancis
+{what} du monde ¦ {what} trên thế giới ¦ {what} di dunia
+300 villes du monde et plus ¦ Hơn 300 thành phố trên thế giới ¦ Lebih dari 300 kota di dunia
+{what} trouvés ¦ Đã tìm thấy {what} ¦ {what} ditemukan
+{none} pour « {q} ». Vérifie l’orthographe ¦ {none} cho “{q}”. Hãy kiểm tra chính tả ¦ {none} untuk “{q}”. Periksa ejaannya
+{none} pour l’instant ¦ {none} vào lúc này ¦ {none} untuk saat ini
+, ou : ¦ , hoặc: ¦ , atau:
+↹ Tab passe d’un filtre à l’autre ¦ ↹ Tab chuyển từ bộ lọc này sang bộ lọc khác ¦ ↹ Tab berpindah dari satu saringan ke saringan berikutnya
+↑ ↓ Entrée ¦ ↑ ↓ Enter ¦ ↑ ↓ Enter
+… la liste défile ¦ … danh sách cuộn tiếp ¦ … daftar terus bergulir
+⭐ Personne principale ¦ ⭐ Người chính ¦ ⭐ Orang utama
+Autres personnes principales ¦ Những người chính khác ¦ Orang utama lainnya
+Personnes principales ¦ Những người chính ¦ Orang-orang utama
+Personnes secondaires ¦ Những người phụ ¦ Orang-orang sekunder
+au cœur de la recherche ¦ trọng tâm của cuộc nghiên cứu ¦ inti riset
+témoins, voisins, parrains, pistes… ¦ người làm chứng, hàng xóm, cha mẹ đỡ đầu, manh mối… ¦ saksi, tetangga, wali baptis, petunjuk…
+Choisir la personne principale… ¦ Chọn người chính… ¦ Pilih orang utama…
+＋ Ajouter une personne principale… ¦ ＋ Thêm một người chính… ¦ ＋ Tambah orang utama…
+＋ Ajouter une personne secondaire… ¦ ＋ Thêm một người phụ… ¦ ＋ Tambah orang sekunder…
+Changer le rôle ¦ Đổi vai trò ¦ Ubah peran
+Donner un rôle (facultatif) ¦ Gán vai trò (không bắt buộc) ¦ Beri peran (opsional)
+rôle ▾ ¦ vai trò ▾ ¦ peran ▾
+Rôle libre ¦ Vai trò tự do ¦ Peran bebas
+Retirer le rôle ¦ Bỏ vai trò ¦ Lepas peran
+Passer en secondaire ¦ Chuyển thành người phụ ¦ Jadikan sekunder
+Passer en principale ¦ Chuyển thành người chính ¦ Jadikan utama
+Autre mot… (Entrée) ¦ Từ khác… (Enter) ¦ Kata lain… (Enter)
+témoin ¦ người làm chứng ¦ saksi
+déclarant ¦ người khai báo ¦ pelapor
+parrain ¦ cha đỡ đầu ¦ ayah baptis
+marraine ¦ mẹ đỡ đầu ¦ ibu baptis
+voisin ¦ hàng xóm ¦ tetangga
+employeur ¦ chủ thuê ¦ pemberi kerja
+officier ¦ viên chức hộ tịch ¦ petugas catatan sipil
+épouse ¦ vợ ¦ istri
+époux ¦ chồng ¦ suami
+sans fiche ¦ chưa có hồ sơ ¦ tanpa profil
+Personne sans fiche : clic pour créer sa fiche ¦ Người chưa có hồ sơ: nhấp để tạo hồ sơ ¦ Orang tanpa profil: klik untuk membuat profilnya
+Ouvrir la fiche ¦ Mở hồ sơ ¦ Buka profil
+Voir sur la carte ¦ Xem trên bản đồ ¦ Lihat di peta
+Aucune personne choisie ¦ Chưa chọn người nào ¦ Belum ada orang yang dipilih
+Choisir des personnes ¦ Chọn người ¦ Pilih orang
+Choisir une personne ¦ Chọn một người ¦ Pilih seseorang
+Choisir des lieux ¦ Chọn địa điểm ¦ Pilih tempat
+Choisir un lieu ¦ Chọn một địa điểm ¦ Pilih sebuah tempat
+Carte : clique l’endroit du lieu ¦ Bản đồ: nhấp vào vị trí của địa điểm ¦ Peta: klik letak tempatnya
+Clique l’endroit du lieu sur la carte (glisse pour te déplacer, molette pour zoomer). ¦ Nhấp vào vị trí trên bản đồ (kéo để di chuyển, cuộn chuột để phóng to). ¦ Klik letaknya di peta (seret untuk bergeser, roda tetikus untuk memperbesar).
+＋ Créer un lieu ici ¦ ＋ Tạo địa điểm tại đây ¦ ＋ Buat tempat di sini
+Nom du lieu ¦ Tên địa điểm ¦ Nama tempat
+Lieux proches… ¦ Địa điểm gần đó… ¦ Tempat terdekat…
+Aucun lieu connu près d’ici : crée-le ci-dessous. ¦ Không có địa điểm nào đã biết gần đây: hãy tạo ở bên dưới. ¦ Tidak ada tempat yang dikenal di dekat sini: buat di bawah.
+Donne un nom au lieu. ¦ Hãy đặt tên cho địa điểm. ¦ Beri nama tempat itu.
+Dézoomer ¦ Thu nhỏ ¦ Perkecil
+Lieu impossible à ajouter ¦ Không thể thêm địa điểm này ¦ Tempat ini tidak bisa ditambahkan
+Crée d’abord la fiche dans Personnes, puis choisis-la ici. ¦ Hãy tạo hồ sơ trong Người trước, rồi chọn ở đây. ¦ Buat dulu profilnya di Orang, lalu pilih di sini.
+Crée-la d’abord dans l’outil, puis choisis-la ici. ¦ Hãy tạo trong công cụ trước, rồi chọn ở đây. ¦ Buat dulu di alatnya, lalu pilih di sini.
+Personne ¦ Người ¦ Orang
+Lieu ¦ Địa điểm ¦ Tempat
+À corriger. ¦ Cần sửa. ¦ Perlu diperbaiki.
+<b>{what} à corriger</b> avant d’enregistrer. ¦ <b>{what} cần sửa</b> trước khi lưu. ¦ <b>{what} perlu diperbaiki</b> sebelum menyimpan.
+Coche cette case pour continuer. ¦ Đánh dấu ô này để tiếp tục. ¦ Centang kotak ini untuk melanjutkan.
+Choisis une des possibilités. ¦ Hãy chọn một trong các lựa chọn. ¦ Pilih salah satu pilihan.
+Choisis un fichier. ¦ Hãy chọn một tệp. ¦ Pilih sebuah berkas.
+Choisis dans la liste. ¦ Hãy chọn trong danh sách. ¦ Pilih dari daftar.
+Ce champ est à remplir. ¦ Ô này cần được điền. ¦ Kolom ini wajib diisi.
+Écris un nombre (par exemple 12 ou 3,5). ¦ Hãy viết một số (ví dụ 12 hoặc 3,5). ¦ Tulis sebuah angka (misalnya 12 atau 3,5).
+Ce n’est pas compris : vérifie ce qui est écrit. ¦ Không hiểu được: hãy kiểm tra những gì đã viết. ¦ Tidak dipahami: periksa apa yang tertulis.
+Écris une adresse e-mail complète (nom@exemple.fr). ¦ Hãy viết địa chỉ e-mail đầy đủ (ten@vidu.com). ¦ Tulis alamat e-mail lengkap (nama@contoh.com).
+Écris une adresse web complète (https://…). ¦ Hãy viết địa chỉ web đầy đủ (https://…). ¦ Tulis alamat web lengkap (https://…).
+Ce n’est pas au bon format. ¦ Không đúng định dạng. ¦ Formatnya tidak tepat.
+Au moins {x}. ¦ Ít nhất {x}. ¦ Paling sedikit {x}.
+Au plus {x}. ¦ Nhiều nhất {x}. ¦ Paling banyak {x}.
+Au moins {x} (là : {y}). ¦ Ít nhất {x} (hiện: {y}). ¦ Paling sedikit {x} (sekarang: {y}).
+Cette valeur n’est pas permise ici : prends un nombre rond. ¦ Giá trị này không được phép ở đây: hãy dùng số tròn. ¦ Nilai ini tidak diizinkan di sini: pakai angka bulat.
+Donne un nom à ces réglages. ¦ Hãy đặt tên cho bộ cài đặt này. ¦ Beri nama untuk pengaturan ini.
+Choisir une couleur ¦ Chọn màu ¦ Pilih warna
+Couleurs de l’app ¦ Màu của ứng dụng ¦ Warna aplikasi
+Récentes ¦ Gần đây ¦ Terbaru
+Choisir une autre couleur ¦ Chọn màu khác ¦ Pilih warna lain
+Prendre une couleur n’importe où dans la fenêtre ¦ Lấy màu ở bất cứ đâu trong cửa sổ ¦ Ambil warna di mana saja di jendela
+Code de la couleur ¦ Mã màu ¦ Kode warna
+Remettre la couleur d’avant ¦ Trả lại màu trước đó ¦ Kembalikan warna sebelumnya
+Double-clic : revenir à la valeur de départ ¦ Nhấp đúp: trở về giá trị ban đầu ¦ Klik dua kali: kembali ke nilai awal
+Choisir une police ¦ Chọn phông chữ ¦ Pilih fon
+Chercher une police… ¦ Tìm phông chữ… ¦ Cari fon…
+Les polices de l’ordinateur… ¦ Phông chữ của máy tính… ¦ Fon komputer…
+Aucune police pour « {q} ». ¦ Không có phông chữ nào cho “{q}”. ¦ Tidak ada fon untuk “{q}”.
+Lecture des polices… ¦ Đang đọc phông chữ… ¦ Membaca fon…
+🔓 Voir toutes les polices de l’ordinateur ¦ 🔓 Xem tất cả phông chữ của máy tính ¦ 🔓 Lihat semua fon komputer
+Le navigateur te demandera la permission. ¦ Trình duyệt sẽ xin phép bạn. ¦ Peramban akan meminta izinmu.
+CONSEILLÉE ¦ NÊN DÙNG ¦ DISARANKAN
+RÉCENTE ¦ GẦN ĐÂY ¦ TERBARU
+DE L’APP ¦ CỦA ỨNG DỤNG ¦ DARI APLIKASI
+TAPÉE ¦ ĐÃ GÕ ¦ DIKETIK
+Réglages enregistrés ¦ Cài đặt đã lưu ¦ Pengaturan tersimpan
+Nom de ces réglages ¦ Tên bộ cài đặt này ¦ Nama pengaturan ini
+Nom du réglage ¦ Tên cài đặt ¦ Nama pengaturan
+Aucun réglage enregistré pour l’instant. ¦ Chưa có cài đặt nào được lưu. ¦ Belum ada pengaturan yang tersimpan.
+＋ Enregistrer les réglages actuels ¦ ＋ Lưu cài đặt hiện tại ¦ ＋ Simpan pengaturan saat ini
+Un réglage « {name} » existe déjà. ¦ Đã có một cài đặt tên “{name}”. ¦ Pengaturan “{name}” sudah ada.
+Le remplacer ? ¦ Thay thế nó? ¦ Ganti?
+Réglages gardés sous « {name} ». ¦ Cài đặt đã được lưu với tên “{name}”. ¦ Pengaturan disimpan sebagai “{name}”.
+Remplacer par les réglages actuels ¦ Thay bằng cài đặt hiện tại ¦ Ganti dengan pengaturan saat ini
+Remplacer « {name} » par les réglages actuels ? ¦ Thay “{name}” bằng cài đặt hiện tại? ¦ Ganti “{name}” dengan pengaturan saat ini?
+Réglage mis à jour. ¦ Đã cập nhật cài đặt. ¦ Pengaturan diperbarui.
+Réglages « {name} » appliqués. ¦ Đã áp dụng cài đặt “{name}”. ¦ Pengaturan “{name}” diterapkan.
+Exporter (fichier .json) ¦ Xuất (tệp .json) ¦ Ekspor (berkas .json)
+Remplacer, renommer, dupliquer, exporter, supprimer ¦ Thay thế, đổi tên, nhân bản, xuất, xoá ¦ Ganti, ganti nama, gandakan, ekspor, hapus
+Exporter (PDF, image, impression…) ¦ Xuất (PDF, ảnh, bản in…) ¦ Ekspor (PDF, gambar, cetak…)
+⤓ Exporter en {fmt} ¦ ⤓ Xuất dạng {fmt} ¦ ⤓ Ekspor sebagai {fmt}
+Nom du fichier ¦ Tên tệp ¦ Nama berkas
+Qualité ¦ Chất lượng ¦ Kualitas
+Fond perdu et traits de coupe (imprimeur) ¦ Tràn lề và dấu cắt (nhà in) ¦ Bleed dan tanda potong (percetakan)
+Ranger aussi une copie dans les médias ¦ Cất thêm một bản sao vào tư liệu ¦ Simpan juga salinan di media
+Aperçu ¦ Xem trước ¦ Pratinjau
+Aperçu… ¦ Xem trước… ¦ Pratinjau…
+Pas d’aperçu ¦ Không có bản xem trước ¦ Tidak ada pratinjau
+Format du papier ¦ Khổ giấy ¦ Ukuran kertas
+Ce qu’on imprime ¦ Những gì được in ¦ Yang dicetak
+Pages à imprimer ¦ Trang cần in ¦ Halaman yang dicetak
+Celle affichée ¦ Trang đang hiển thị ¦ Yang ditampilkan
+Page précédente ¦ Trang trước ¦ Halaman sebelumnya
+Page suivante ¦ Trang sau ¦ Halaman berikutnya
+Aperçu de l’impression ¦ Xem trước bản in ¦ Pratinjau cetak
+Exemplaires ¦ Số bản ¦ Salinan
+Portrait ¦ Dọc ¦ Potret
+Paysage ¦ Ngang ¦ Lanskap
+L’écran affiché ¦ Màn hình đang hiển thị ¦ Layar yang ditampilkan
+Dans la fenêtre qui s’ouvre, choisis « Enregistrer au format PDF » comme imprimante. ¦ Trong cửa sổ mở ra, chọn “Lưu dưới dạng PDF” làm máy in. ¦ Di jendela yang terbuka, pilih “Simpan sebagai PDF” sebagai printer.
+Dans la fenêtre d’impression, choisis « Enregistrer au format PDF ». ¦ Trong cửa sổ in, chọn “Lưu dưới dạng PDF”. ¦ Di jendela cetak, pilih “Simpan sebagai PDF”.
+IMPORTER · ÉTAPE 1 SUR 3 ¦ NHẬP · BƯỚC 1 / 3 ¦ IMPOR · LANGKAH 1 DARI 3
+IMPORTER · ÉTAPE {n} SUR 3 ¦ NHẬP · BƯỚC {n} / 3 ¦ IMPOR · LANGKAH {n} DARI 3
+📁 Glisse ici le fichier, colle-le (⌘V) ou choisis-le sur l’ordinateur ¦ 📁 Kéo tệp vào đây, dán (⌘V) hoặc chọn trên máy tính ¦ 📁 Seret berkas ke sini, tempel (⌘V), atau pilih di komputer
+📁 Glisse ici les fichiers, colle-les (⌘V) ou choisis-les sur l’ordinateur ¦ 📁 Kéo các tệp vào đây, dán (⌘V) hoặc chọn trên máy tính ¦ 📁 Seret berkas-berkas ke sini, tempel (⌘V), atau pilih di komputer
+Lecture du fichier… ¦ Đang đọc tệp… ¦ Membaca berkas…
+Ce fichier ne peut pas être importé : {err} ¦ Không thể nhập tệp này: {err} ¦ Berkas ini tidak bisa diimpor: {err}
+Voilà ce qui va entrer : {sum}. ¦ Đây là những gì sẽ được nhập: {sum}. ¦ Inilah yang akan masuk: {sum}.
+⤒ Importer {what} ¦ ⤒ Nhập {what} ¦ ⤒ Impor {what}
+{what} importés. ¦ Đã nhập {what}. ¦ {what} diimpor.
+Import terminé. ¦ Đã nhập xong. ¦ Impor selesai.
+Impossible d’importer : {err} ¦ Không thể nhập: {err} ¦ Tidak bisa mengimpor: {err}
+Importer un fichier ¦ Nhập một tệp ¦ Impor berkas
+⤒ Importer un fichier… ¦ ⤒ Nhập một tệp… ¦ ⤒ Impor berkas…
+Ce type de fichier n’est pas accepté ici. ¦ Loại tệp này không được chấp nhận ở đây. ¦ Jenis berkas ini tidak diterima di sini.
+Il entre dans les médias de l’app et se place dans l’outil. ¦ Tệp được đưa vào tư liệu của ứng dụng và đặt vào công cụ. ¦ Berkas masuk ke media aplikasi dan ditempatkan di alat.
+📁 Choisir un fichier ¦ 📁 Chọn một tệp ¦ 📁 Pilih berkas
+Ce fichier .json est abîmé : il ne peut pas être lu. ¦ Tệp .json này bị hỏng: không thể đọc được. ¦ Berkas .json ini rusak: tidak bisa dibaca.
+Ajuster à la fenêtre ¦ Vừa với cửa sổ ¦ Sesuaikan dengan jendela
+Zoom arrière ¦ Thu nhỏ ¦ Perkecil
+Zoom avant ¦ Phóng to ¦ Perbesar
+Règles ¦ Thước ¦ Penggaris
+Règles : montrer ou cacher ¦ Thước: hiện hoặc ẩn ¦ Penggaris: tampilkan atau sembunyikan
+Aimanter : les objets se collent aux autres et à la grille (Alt pour s’en passer en glissant) ¦ Bắt dính: các đối tượng dính vào nhau và vào lưới (giữ Alt khi kéo để bỏ qua) ¦ Tempelkan: objek menempel ke objek lain dan ke kisi (Alt untuk melewatinya saat menyeret)
+Les autres façons d’enregistrer ¦ Các cách lưu khác ¦ Cara lain untuk menyimpan
+Ranger, montrer ou cacher les boutons ¦ Sắp xếp, hiện hoặc ẩn các nút ¦ Atur, tampilkan, atau sembunyikan tombol
+Compris ¦ Đã hiểu ¦ Dipahami
+Choisir sur un calendrier ¦ Chọn trên lịch ¦ Pilih di kalender
+Durée ¦ Thời lượng ¦ Durasi
+aujourd’hui ¦ hôm nay ¦ hari ini
+aujourd’hui à {h} ¦ hôm nay lúc {h} ¦ hari ini pukul {h}
+hier ¦ hôm qua ¦ kemarin
+hier à {h} ¦ hôm qua lúc {h} ¦ kemarin pukul {h}
+{day} à {h} ¦ {day} lúc {h} ¦ {day} pukul {h}
+Modifié ¦ Đã sửa ¦ Diubah
+Créé ¦ Đã tạo ¦ Dibuat
+Ajouté ¦ Đã thêm ¦ Ditambahkan
+Aucune battue ¦ Không có cuộc tìm kiếm diện rộng ¦ Tidak ada penyisiran
+Aucune maison ¦ Không có ngôi nhà nào ¦ Tidak ada rumah
+Aucune revue ¦ Không có tạp chí ¦ Tidak ada majalah
+Aucun employeur ¦ Không có chủ thuê ¦ Tidak ada pemberi kerja
+Aucun recensement ¦ Không có điều tra dân số ¦ Tidak ada sensus
+🎨 Œuvres ¦ 🎨 Tác phẩm ¦ 🎨 Karya
+Chercher un graphique… (ex. naissances, camembert) ¦ Tìm biểu đồ… (vd. ngày sinh, biểu đồ tròn) ¦ Cari grafik… (mis. kelahiran, diagram lingkaran)
+Aucun graphique ¦ Không có biểu đồ ¦ Tidak ada grafik
+Créer le graphique ¦ Tạo biểu đồ ¦ Buat grafik
+Nouveau graphique ¦ Biểu đồ mới ¦ Grafik baru
+Aucun projet ¦ Không có dự án ¦ Tidak ada proyek
+Aucun tableau ¦ Không có bảng ¦ Tidak ada papan
+Aucune mise en page ¦ Không có bản dàn trang ¦ Tidak ada tata letak
+📐 Mises en page ¦ 📐 Dàn trang ¦ 📐 Tata letak
+Aucun diagramme ¦ Không có sơ đồ ¦ Tidak ada diagram
+Aucune carte ¦ Không có bản đồ ¦ Tidak ada peta
+Aucune transcription ¦ Không có bản chép ¦ Tidak ada transkripsi
+Aucune carte de photos ¦ Không có bản đồ ảnh ¦ Tidak ada peta foto
+Aucun classeur ¦ Không có sổ tính ¦ Tidak ada buku kerja
+Aucun document ¦ Không có tài liệu ¦ Tidak ada dokumen
+Aucune parcelle ¦ Không có thửa đất ¦ Tidak ada bidang tanah
+Nom de l’objet, sorte… (2 lettres suffisent) ¦ Tên đồ vật, loại… (2 chữ cái là đủ) ¦ Nama benda, jenis… (2 huruf sudah cukup)
+Aucun objet de famille ¦ Không có đồ vật gia truyền ¦ Tidak ada benda pusaka keluarga
+Nom du défunt, notaire, année… (2 lettres suffisent) ¦ Tên người đã mất, công chứng viên, năm… (2 chữ cái là đủ) ¦ Nama almarhum, notaris, tahun… (2 huruf sudah cukup)
+Aucun inventaire après décès ¦ Không có bản kiểm kê sau khi mất ¦ Tidak ada inventaris sesudah kematian
+⚖️ Inventaires après décès ¦ ⚖️ Kiểm kê tài sản sau khi mất ¦ ⚖️ Inventaris harta sesudah kematian
+Nom, espèce, code de bague, puce… (2 lettres suffisent) ¦ Tên, loài, mã vòng, chip… (2 chữ cái là đủ) ¦ Nama, spesies, kode cincin, cip… (2 huruf sudah cukup)
+Nom du site… (2 lettres suffisent) ¦ Tên điểm… (2 chữ cái là đủ) ¦ Nama lokasi… (2 huruf sudah cukup)
+Aucun site ¦ Không có điểm nào ¦ Tidak ada lokasi
+Nom du groupe, de la meute… (2 lettres suffisent) ¦ Tên nhóm, tên bầy… (2 chữ cái là đủ) ¦ Nama kelompok, kawanan… (2 huruf sudah cukup)
+Aucun groupe ¦ Không có nhóm ¦ Tidak ada kelompok
+👥 Groupes d’animaux ¦ 👥 Nhóm động vật ¦ 👥 Kelompok hewan
+Maladie, cause de décès… (2 lettres suffisent) ¦ Bệnh, nguyên nhân tử vong… (2 chữ cái là đủ) ¦ Penyakit, penyebab kematian… (2 huruf sudah cukup)
+＋ Choisir une maladie… ¦ ＋ Chọn một bệnh… ¦ ＋ Pilih penyakit…
+Aucune maladie notée ¦ Chưa ghi bệnh nào ¦ Belum ada penyakit yang dicatat
+🩺 Santé ¦ 🩺 Sức khỏe ¦ 🩺 Kesehatan
+Chercher une de mes cartes… ¦ Tìm một bản đồ của tôi… ¦ Cari salah satu peta saya…
+＋ Choisir une carte… ¦ ＋ Chọn một bản đồ… ¦ ＋ Pilih peta…
+Nom de la branche… ¦ Tên nhánh… ¦ Nama cabang…
+＋ Choisir une branche… ¦ ＋ Chọn một nhánh… ¦ ＋ Pilih cabang…
+Aucune branche ¦ Không có nhánh ¦ Tidak ada cabang
+Nom d’une de mes couches… ¦ Tên một lớp của tôi… ¦ Nama salah satu lapisan saya…
+＋ Choisir une couche… ¦ ＋ Chọn một lớp… ¦ ＋ Pilih lapisan…
+Aucune couche dessinée ¦ Chưa vẽ lớp nào ¦ Belum ada lapisan yang digambar
+Commune, cote, année… (2 lettres suffisent) ¦ Xã, ký hiệu lưu trữ, năm… (2 chữ cái là đủ) ¦ Kota, nomor arsip, tahun… (2 huruf sudah cukup)
+🔗 Relier un dépouillement… ¦ 🔗 Liên kết một bảng trích lục… ¦ 🔗 Hubungkan indeks catatan…
+Aucun dépouillement ¦ Không có bảng trích lục ¦ Tidak ada indeks catatan
+Nom, prénom d’un contact… (2 lettres suffisent) ¦ Họ, tên của một liên hệ… (2 chữ cái là đủ) ¦ Nama keluarga, nama depan kontak… (2 huruf sudah cukup)
+Aucun contact ¦ Không có liên hệ ¦ Tidak ada kontak
+Chercher une de mes listes… ¦ Tìm một danh sách của tôi… ¦ Cari salah satu daftar saya…
+Aucune liste ¦ Không có danh sách ¦ Tidak ada daftar
+Événement, personne, année… (2 lettres suffisent) ¦ Sự kiện, người, năm… (2 chữ cái là đủ) ¦ Peristiwa, orang, tahun… (2 huruf sudah cukup)
+Aucun service d’archives ¦ Không có cơ quan lưu trữ ¦ Tidak ada layanan arsip
+Créer le service ¦ Tạo cơ quan ¦ Buat layanan
+🏛 Services d’archives ¦ 🏛 Cơ quan lưu trữ ¦ 🏛 Layanan arsip
+Source, page, nom de la personne citée… ¦ Nguồn, trang, tên người được trích dẫn… ¦ Sumber, halaman, nama orang yang dikutip…
+＋ Choisir une citation… ¦ ＋ Chọn một trích dẫn… ¦ ＋ Pilih kutipan…
+Aucune citation ¦ Không có trích dẫn ¦ Tidak ada kutipan
+— une seule ¦ — chỉ một ¦ — hanya satu
+＋ Ajouter une maison… ¦ ＋ Thêm một ngôi nhà… ¦ ＋ Tambah rumah…
+＋ Ajouter une fiche… ¦ ＋ Thêm một hồ sơ… ¦ ＋ Tambah profil…
+＋ Ajouter un document… ¦ ＋ Thêm một tài liệu… ¦ ＋ Tambah dokumen…
+＋ Ajouter une carte… ¦ ＋ Thêm một bản đồ… ¦ ＋ Tambah peta…
+＋ Ajouter un groupe… ¦ ＋ Thêm một nhóm… ¦ ＋ Tambah kelompok…
+＋ Ajouter un contact… ¦ ＋ Thêm một liên hệ… ¦ ＋ Tambah kontak…
+＋ Ajouter une liste… ¦ ＋ Thêm một danh sách… ¦ ＋ Tambah daftar…
+Ce réglage prend ce qui est à l’écran maintenant. ¦ Cài đặt này lấy những gì đang có trên màn hình. ¦ Pengaturan ini mengambil apa yang ada di layar sekarang.
+L’ancienne version de ce réglage ne sera plus gardée. ¦ Phiên bản cũ của cài đặt này sẽ không được giữ nữa. ¦ Versi lama pengaturan ini tidak akan disimpan lagi.
+Le nom devient modifiable sur la ligne. ¦ Tên có thể sửa ngay trên dòng. ¦ Namanya bisa diubah langsung di baris.
+Une copie, à modifier sans toucher à l’original. ¦ Một bản sao, để sửa mà không động đến bản gốc. ¦ Sebuah salinan, untuk diubah tanpa menyentuh aslinya.
+Pour le garder, ou l’ouvrir sur un autre ordinateur. ¦ Để giữ lại, hoặc mở trên máy tính khác. ¦ Untuk menyimpannya, atau membukanya di komputer lain.
+On peut encore l’annuler juste après. ¦ Vẫn có thể hoàn tác ngay sau đó. ¦ Masih bisa diurungkan sesaat sesudahnya.
+Un fichier lcnda-reglage-….json exporté ici ou sur un autre ordinateur ¦ Một tệp lcnda-reglage-….json đã xuất ở đây hoặc trên máy tính khác ¦ Berkas lcnda-reglage-….json yang diekspor di sini atau di komputer lain
+Ce navigateur ne donne pas la liste des polices : voici les polices courantes trouvées sur l’ordinateur. Pour une autre, tape son nom exact. ¦ Trình duyệt này không cung cấp danh sách phông chữ: đây là các phông thông dụng tìm thấy trên máy tính. Với phông khác, hãy gõ đúng tên của nó. ¦ Peramban ini tidak memberi daftar fon: berikut fon umum yang ditemukan di komputer. Untuk fon lain, ketik namanya dengan tepat.
+La liste des polices n’a pas pu être lue. Réessaie. ¦ Không đọc được danh sách phông chữ. Hãy thử lại. ¦ Daftar fon tidak bisa dibaca. Coba lagi.
+Un autre format de la liste, ou un format libre (gardé dans « Mes formats ») ¦ Một khổ khác trong danh sách, hoặc một khổ tự do (được giữ trong “Khổ của tôi”) ¦ Ukuran lain dari daftar, atau ukuran bebas (disimpan di “Ukuran saya”)
+Un exemplaire au moins. ¦ Ít nhất một bản. ¦ Paling sedikit satu salinan.
+{n} exemplaires au plus. ¦ Nhiều nhất {n} bản. ¦ Paling banyak {n} salinan.

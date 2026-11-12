@@ -1,0 +1,48 @@
+fr ¦ vi ¦ id
+# ═════ zone « montage » : vietnamien (vi), indonésien (id) ═════
+Boutons des pistes : petits ¦ Nút của các rãnh: nhỏ ¦ Tombol trek: kecil
+Boutons des pistes : grands ¦ Nút của các rãnh: lớn ¦ Tombol trek: besar
+Les boutons des pistes ont déjà cette taille. ¦ Các nút của rãnh đã có kích cỡ này rồi. ¦ Tombol trek sudah berukuran ini.
+Petits ¦ Nhỏ ¦ Kecil
+Moyens (départ) ¦ Vừa (mặc định) ¦ Sedang (bawaan)
+Grands ¦ Lớn ¦ Besar
+Ranger cette section : glisse la poignée, ou Alt + ↑ / ↓ ¦ Sắp xếp mục này: kéo tay nắm, hoặc Alt + ↑ / ↓ ¦ Pindahkan bagian ini: seret pegangannya, atau Alt + ↑ / ↓
+Sections du panneau de droite : ↺ Remettre comme au départ ¦ Các mục của bảng bên phải: ↺ Đặt lại như ban đầu ¦ Bagian panel kanan: ↺ Kembalikan seperti semula
+Sections du panneau de droite remises comme au départ ¦ Các mục của bảng bên phải đã được đặt lại như ban đầu ¦ Bagian panel kanan dikembalikan seperti semula
+Les sections du panneau de droite sont déjà comme au départ. ¦ Các mục của bảng bên phải đã như ban đầu rồi. ¦ Bagian panel kanan sudah seperti semula.
+Taille et place ¦ Kích cỡ và vị trí ¦ Ukuran dan posisi
+Durée, taille et place ¦ Thời lượng, kích cỡ và vị trí ¦ Durasi, ukuran, dan posisi
+Couleurs de cette vidéo ¦ Màu của video này ¦ Warna video ini
+Rotation et fondus ¦ Xoay và chuyển mờ ¦ Rotasi dan pudar
+Volume et effets ¦ Âm lượng và hiệu ứng ¦ Volume dan efek
+Les couleurs et le vieux film de ce morceau reviennent comme au départ ¦ Màu và hiệu ứng phim cũ của đoạn này trở lại như ban đầu ¦ Warna dan efek film lama klip ini kembali seperti semula
+Les couleurs et le vieux film de tout le film reviennent comme au départ ¦ Màu và hiệu ứng phim cũ của cả bộ phim trở lại như ban đầu ¦ Warna dan efek film lama seluruh film kembali seperti semula
+Couleurs remises comme au départ ¦ Màu đã được đặt lại như ban đầu ¦ Warna dikembalikan seperti semula
+Le son de tout le film revient comme au départ (volume, effets) ¦ Âm thanh của cả bộ phim trở lại như ban đầu (âm lượng, hiệu ứng) ¦ Suara seluruh film kembali seperti semula (volume, efek)
+Son du film remis comme au départ ¦ Âm thanh phim đã được đặt lại như ban đầu ¦ Suara film dikembalikan seperti semula
+Texte remis comme au départ ¦ Chữ đã được đặt lại như ban đầu ¦ Teks dikembalikan seperti semula
+Volume dans le temps ¦ Âm lượng theo thời gian ¦ Volume dari waktu ke waktu
+Poser des points sur le morceau ¦ Đặt điểm trên đoạn ¦ Taruh titik pada klip
+Point à la tête de lecture ¦ Điểm tại đầu phát ¦ Titik di kepala putar
+Effacer la courbe ¦ Xoá đường cong ¦ Hapus kurva
+Courbe du volume effacée ¦ Đã xoá đường cong âm lượng ¦ Kurva volume dihapus
+Volume : {n} % ¦ Âm lượng: {n} % ¦ Volume: {n} %
+Points sur la courbe : {n}. La ligne du milieu = le volume réglé plus haut ; en haut, jusqu’à deux fois plus fort. ¦ Số điểm trên đường cong: {n}. Đường ở giữa = âm lượng đã chỉnh ở trên; phía trên cùng, to gấp đôi. ¦ Titik pada kurva: {n}. Garis tengah = volume yang diatur di atas; di bagian atas, sampai dua kali lebih keras.
+Pas encore de courbe : le volume reste le même du début à la fin (avec ses fondus). ¦ Chưa có đường cong: âm lượng giữ nguyên từ đầu đến cuối (kèm các đoạn chuyển mờ). ¦ Belum ada kurva: volume tetap sama dari awal sampai akhir (dengan efek pudarnya).
+Sur le morceau choisi, dans la frise : un clic pose un point, on glisse un point pour le déplacer (en haut : plus fort, en bas : moins fort), un double-clic l’enlève. ¦ Trên đoạn đã chọn, trong dòng thời gian: nhấp một lần để đặt điểm, kéo điểm để di chuyển (lên trên: to hơn, xuống dưới: nhỏ hơn), nhấp đúp để bỏ điểm. ¦ Pada klip yang dipilih, di linimasa: satu klik menaruh titik, seret titik untuk memindahkannya (ke atas: lebih keras, ke bawah: lebih pelan), klik dua kali untuk menghapusnya.
+✎ Clique sur le morceau, dans la frise, pour poser un point ; glisse un point pour le déplacer ; double-clic pour l’enlever. ¦ ✎ Nhấp vào đoạn trong dòng thời gian để đặt điểm; kéo điểm để di chuyển; nhấp đúp để bỏ điểm. ¦ ✎ Klik klip di linimasa untuk menaruh titik; seret titik untuk memindahkannya; klik dua kali untuk menghapusnya.
+Volume plus égal (les passages faibles remontent, les forts baissent) ¦ Âm lượng đều hơn (đoạn nhỏ được nâng lên, đoạn to được hạ xuống) ¦ Volume lebih rata (bagian pelan naik, bagian keras turun)
+Lieu de la réverbération ¦ Không gian vang ¦ Ruang gema
+Une grande salle ¦ Một hội trường lớn ¦ Aula besar
+Une église ¦ Một nhà thờ ¦ Gereja
+Une cave ¦ Một hầm rượu ¦ Ruang bawah tanah
+Gauche ↔ droite ¦ Trái ↔ phải ¦ Kiri ↔ kanan
+Police et couleur ¦ Phông chữ và màu ¦ Fon dan warna
+italique ¦ nghiêng ¦ miring
+Contour et ombre ¦ Viền và bóng ¦ Garis tepi dan bayangan
+autour des lettres ¦ quanh các chữ ¦ di sekitar huruf
+Force de l’ombre ¦ Độ đậm của bóng ¦ Kekuatan bayangan
+Allume « ombre » (Police et couleur) pour régler l’ombre. ¦ Bật “bóng” (Phông chữ và màu) để chỉnh bóng. ¦ Nyalakan “bayangan” (Fon dan warna) untuk mengatur bayangan.
+Bandeau derrière le texte ¦ Dải nền sau chữ ¦ Pita di belakang teks
+Opacité du bandeau ¦ Độ đục của dải nền ¦ Opasitas pita
+Allume « bandeau » (Police et couleur) : un fond de couleur derrière le texte, plus ou moins transparent, aux coins droits ou arrondis. ¦ Bật “dải nền” (Phông chữ và màu): một nền màu sau chữ, trong suốt nhiều hay ít, góc vuông hoặc bo tròn. ¦ Nyalakan “pita” (Fon dan warna): latar berwarna di belakang teks, lebih atau kurang transparan, dengan sudut siku atau membulat.

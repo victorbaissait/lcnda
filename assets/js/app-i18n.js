@@ -6,12 +6,13 @@
  *   t('Fiche', {ctx: 'onglet'})            → clé « onglet|Fiche » quand un même mot se traduit autrement (repli : « Fiche »)
  *   plural(3, 'personne')                  → « 3 personnes » / « 3 people » / « 3 osoby » (Intl.PluralRules, 0 et 1 au singulier en français)
  *   fmtNumber(1234.5), fmtDate(date, opts) → Intl selon la langue (jamais pour les dates généalogiques : elles suivent C4)
- * Fichiers de langue : assets/i18n/<code>.json (en, es, de, it, pt, pl, nl, cs, sv, da, sk, nb, ro, fi, hu, hr, sl, lt, lv, et, is, tr, lb, sq, mt), fabriqués par scripts/i18n-build.js depuis
+ * Fichiers de langue : assets/i18n/<code>.json (en, es, de, it, pt, pl, nl, cs, sv, da, sk, nb, ro, fi, hu, hr, sl, lt, lv, et, is, tr, lb, sq, mt, vi, id), fabriqués par scripts/i18n-build.js depuis
  * assets/i18n/src/*.tsv (et assets/i18n/src/nord/*.tsv pour cs, sv, da ; assets/i18n/src/nord2/*.tsv pour sk, nb ;
  * assets/i18n/src/nord3/*.tsv pour ro ; assets/i18n/src/nord4/*.tsv pour fi, hu ;
  * assets/i18n/src/nord5/*.tsv pour hr, sl ; assets/i18n/src/nord6/*.tsv pour lt, lv, et ;
  * assets/i18n/src/nord7/*.tsv pour is ; assets/i18n/src/nord8/*.tsv pour tr ;
- * assets/i18n/src/nord9/*.tsv pour lb ; assets/i18n/src/nord10/*.tsv pour sq, mt).
+ * assets/i18n/src/nord9/*.tsv pour lb ; assets/i18n/src/nord10/*.tsv pour sq, mt ;
+ * assets/i18n/src/nord11/*.tsv pour vi, id).
  * Valeur = texte, ou formes de pluriel {zero, one, two, few, many, other}.
  *
  * En français, RIEN ne change : t() rend le texte tel quel, plural() est celui d'avant, aucune page n'est retouchée.
@@ -55,10 +56,14 @@
         // albanais et maltais : même repli si le navigateur n’a pas leurs dates et leurs nombres (sq → anglais ; mt → anglais de Malte, puis anglais)
         {code: 'sq', name: 'Shqip', flag: '🇦🇱', locale: 'sq-AL', intlFallback: ['en']},
         {code: 'mt', name: 'Malti', flag: '🇲🇹', locale: 'mt-MT', intlFallback: ['en-MT', 'en']},
+        // vietnamien et indonésien : presque tous les navigateurs ont leurs dates et leurs nombres ; sinon, l’anglais
+        // (attention : « id » est aussi le nom de beaucoup de propriétés dans le code : un code de langue ne sert jamais de nom de propriété d’un objet de données)
+        {code: 'vi', name: 'Tiếng Việt', flag: '🇻🇳', locale: 'vi-VN', intlFallback: ['en']},
+        {code: 'id', name: 'Bahasa Indonesia', flag: '🇮🇩', locale: 'id-ID', intlFallback: ['en']},
     ]);
     const CODES = LANGS.map(l => l.code);
     const KEY = 'lcnda-langue', COOKIE = 'lcnda_lang', BANNER_KEY = 'lcnda-i18n-banner-closed';
-    const VERSION = 24; // monter avec ?v= de assets/i18n/*.json dans index.php
+    const VERSION = 25; // monter avec ?v= de assets/i18n/*.json dans index.php
     const hasDom = typeof document !== 'undefined' && typeof window !== 'undefined';
     const isCode = c => CODES.includes(String(c || ''));
 
@@ -135,8 +140,11 @@
     /* ═════ t() ═════ */
     const pluralRules = new Map();
     /** maltais (CLDR 42 et plus) : one (1) | two (2) | few (0, 3–10, 103–110…) | many (11–19, 111–119…) | other (le reste, et
-     *  les nombres à virgule) — la même règle que lib/i18n.php (i18n_plural_cat), pour un navigateur qui ne la connaît pas encore */
+     *  les nombres à virgule) — la même règle que lib/i18n.php (i18n_plural_cat), pour un navigateur qui ne la connaît pas encore ;
+     *  vietnamien et indonésien : une seule forme (other), quel que soit le nombre (« 1 người », « 5 người ») */
     const OWN_RULES = {
+        vi: () => 'other',
+        id: () => 'other',
         mt: n => { if (Math.floor(n) !== n) return 'other'; if (n === 1) return 'one'; if (n === 2) return 'two'; const m = n % 100; return (n === 0 || (m >= 3 && m <= 10)) ? 'few' : (m >= 11 && m <= 19) ? 'many' : 'other'; },
     };
     const OWN_NEEDS = {mt: ['one', 'two', 'few', 'many', 'other']};
@@ -390,7 +398,7 @@
     }
     function esc(v) { return String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c])); }
 
-    /** menu des 26 langues (nom dans sa langue + drapeau + code) */
+    /** menu des 28 langues (nom dans sa langue + drapeau + code) */
     function selectHtml(attrs = '') {
         return `<select ${attrs} data-i18n-off>${LANGS.map(l => `<option value="${l.code}" ${l.code === lang ? 'selected' : ''}>${l.flag} ${l.name} (${l.code.toUpperCase()})</option>`).join('')}</select>`;
     }

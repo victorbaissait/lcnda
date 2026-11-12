@@ -1,0 +1,111 @@
+fr ¦ vi ¦ id
+# ═════ zone « premier » : vietnamien (vi), indonésien (id) ═════
+INSTALLATION ¦ CÀI ĐẶT BAN ĐẦU ¦ PENYIAPAN
+La base généalogique doit être importée. ¦ Cần nhập cơ sở dữ liệu gia phả. ¦ Basis data silsilah perlu diimpor.
+Choisis comment démarrer : importer un fichier existant, ou créer une première personne pour partir d'une base vide. ¦ Chọn cách bắt đầu: nhập một tệp có sẵn, hoặc tạo người đầu tiên để bắt đầu từ một cơ sở dữ liệu trống. ¦ Pilih cara memulai: impor berkas yang sudah ada, atau buat orang pertama untuk mulai dari basis data kosong.
+GEDCOM (.ged, aussi d’Ancestry, MyHeritage, Geneanet), Gramps (.gramps ou paquet .gpkg avec les photos), Hérédis (.hmw ou .heredis), MacFamilyTree (.mftpkg), base LCNDA (.db) ou sauvegarde complète LCNDA (.zip, base + médias). Les fichiers JSON et CSV sont analysés mais pas encore importés. ¦ GEDCOM (.ged, cả từ Ancestry, MyHeritage, Geneanet), Gramps (.gramps hoặc gói .gpkg kèm ảnh), Hérédis (.hmw hoặc .heredis), MacFamilyTree (.mftpkg), cơ sở dữ liệu LCNDA (.db) hoặc bản sao lưu đầy đủ LCNDA (.zip, dữ liệu + tư liệu). Tệp JSON và CSV được phân tích nhưng chưa được nhập. ¦ GEDCOM (.ged, juga dari Ancestry, MyHeritage, Geneanet), Gramps (.gramps atau paket .gpkg beserta foto), Hérédis (.hmw atau .heredis), MacFamilyTree (.mftpkg), basis data LCNDA (.db) atau cadangan lengkap LCNDA (.zip, basis data + media). Berkas JSON dan CSV dianalisis tetapi belum diimpor.
+Fichier ¦ Tệp ¦ Berkas
+Créer une première personne ¦ Tạo người đầu tiên ¦ Buat orang pertama
+Initialise une base vide avec une première fiche, à compléter ensuite. ¦ Khởi tạo một cơ sở dữ liệu trống với hồ sơ đầu tiên, để bổ sung sau. ¦ Memulai basis data kosong dengan profil pertama, untuk dilengkapi nanti.
+Prénom ¦ Tên ¦ Nama depan
+Nom ¦ Họ ¦ Nama keluarga
+Créer et ouvrir la base ¦ Tạo và mở cơ sở dữ liệu ¦ Buat dan buka basis data
+Je veux faire autre chose ▾ ¦ Tôi muốn làm việc khác ▾ ¦ Saya mau melakukan hal lain ▾
+▴ Replier ¦ ▴ Thu gọn ¦ ▴ Ciutkan
+Qu’est-ce que tu veux faire avec l’app ? ¦ Bạn muốn làm gì với ứng dụng? ¦ Apa yang ingin kamu lakukan dengan aplikasi ini?
+Choisis ce qui te ressemble : l’app s’ouvre avec les bons onglets et le bon premier écran. Tu pourras tout changer après. ¦ Chọn điều hợp với bạn: ứng dụng sẽ mở với đúng các thẻ và đúng màn hình đầu tiên. Bạn có thể thay đổi mọi thứ sau. ¦ Pilih yang cocok untukmu: aplikasi terbuka dengan tab dan layar pertama yang sesuai. Kamu bisa mengubah semuanya nanti.
+Ta famille, tes ancêtres, leurs actes et leurs photos. ¦ Gia đình bạn, tổ tiên của bạn, giấy tờ và ảnh của họ. ¦ Keluargamu, leluhurmu, akta dan foto mereka.
+Une lignée d’animaux ¦ Một dòng giống vật nuôi ¦ Garis keturunan hewan
+Un élevage, le pedigree de tes chiens, chats, chevaux… ¦ Một trại nuôi, phả hệ chó, mèo, ngựa của bạn… ¦ Peternakan, silsilah anjing, kucing, kudamu…
+Recenser des animaux ¦ Theo dõi động vật ¦ Mendata hewan
+Suivre des animaux : baguage, puces, observations, trajets. ¦ Theo dõi động vật: đeo vòng, chip, quan sát, hành trình. ¦ Memantau hewan: cincin penanda, cip, pengamatan, rute.
+L’histoire d’une maison ou d’un village ¦ Lịch sử một ngôi nhà hoặc một làng ¦ Sejarah sebuah rumah atau desa
+Maison ou village ¦ Nhà hoặc làng ¦ Rumah atau desa
+Qui a vécu où, de génération en génération, pièce par pièce. ¦ Ai đã sống ở đâu, qua từng thế hệ, từng căn phòng. ¦ Siapa tinggal di mana, dari generasi ke generasi, ruang demi ruang.
+Le catalogue d’un artiste ou d’une collection ¦ Danh mục của một nghệ sĩ hoặc một bộ sưu tập ¦ Katalog seorang seniman atau sebuah koleksi
+Artiste ou collection ¦ Nghệ sĩ hoặc bộ sưu tập ¦ Seniman atau koleksi
+Ses œuvres, ses expositions, son catalogue raisonné. ¦ Các tác phẩm, các cuộc triển lãm, danh mục toàn tập. ¦ Karya, pameran, dan katalog raisonné-nya.
+Un fonds d’archives ou un musée familial ¦ Một kho lưu trữ hoặc một bảo tàng gia đình ¦ Koleksi arsip atau museum keluarga
+Archives ou musée ¦ Lưu trữ hoặc bảo tàng ¦ Arsip atau museum
+Des photos, des lettres, des objets à classer et à décrire. ¦ Ảnh, thư từ, đồ vật cần phân loại và mô tả. ¦ Foto, surat, benda untuk disusun dan dideskripsikan.
+L’étude d’un nom de famille ¦ Nghiên cứu một dòng họ ¦ Kajian sebuah nama keluarga
+Un nom de famille ¦ Một dòng họ ¦ Sebuah nama keluarga
+Tous les porteurs d’un nom, ses variantes, d’où ils viennent. ¦ Tất cả những người mang một họ, các biến thể, họ đến từ đâu. ¦ Semua pemilik sebuah nama, variasinya, dari mana mereka berasal.
+L’histoire d’une entreprise ou d’une association ¦ Lịch sử một doanh nghiệp hoặc một hội ¦ Sejarah sebuah perusahaan atau perkumpulan
+Entreprise ou association ¦ Doanh nghiệp hoặc hội ¦ Perusahaan atau perkumpulan
+Ses lieux, ses dirigeants, ses salariés ou ses membres. ¦ Các địa điểm, người lãnh đạo, nhân viên hoặc hội viên. ¦ Tempat, pemimpin, karyawan, atau anggotanya.
+Transmettre des souvenirs ¦ Truyền lại kỷ niệm ¦ Mewariskan kenangan
+Des lettres à ouvrir plus tard, des recettes, des chansons, des souvenirs à laisser. ¦ Thư để mở sau này, công thức nấu ăn, bài hát, kỷ niệm để lại. ¦ Surat untuk dibuka nanti, resep, lagu, kenangan untuk ditinggalkan.
+Ce qui change ¦ Những gì thay đổi ¦ Yang berubah
+Commencer avec une base vide ¦ Bắt đầu với cơ sở dữ liệu trống ¦ Mulai dengan basis data kosong
+🧪 Essayer avec une base d’exemple ¦ 🧪 Dùng thử với dữ liệu mẫu ¦ 🧪 Coba dengan basis data contoh
+🧪 Base d’exemple ¦ 🧪 Dữ liệu mẫu ¦ 🧪 Basis data contoh
+Une famille imaginaire pour essayer l’app : ta généalogie n’est pas touchée. ¦ Một gia đình tưởng tượng để dùng thử ứng dụng: gia phả của bạn không bị động đến. ¦ Keluarga khayalan untuk mencoba aplikasi: silsilahmu tidak disentuh.
+Revenir à ma généalogie ¦ Quay lại gia phả của tôi ¦ Kembali ke silsilah saya
+Repartir d’une base vide ¦ Bắt đầu lại từ cơ sở dữ liệu trống ¦ Mulai lagi dari basis data kosong
+Ou bien : ¦ Hoặc: ¦ Atau:
+🐾 Créer le premier animal ¦ 🐾 Tạo con vật đầu tiên ¦ 🐾 Buat hewan pertama
+Créer le premier animal ¦ Tạo con vật đầu tiên ¦ Buat hewan pertama
+Espèce ¦ Loài ¦ Spesies
+Création de la base… ¦ Đang tạo cơ sở dữ liệu… ¦ Membuat basis data…
+Préparation de la base d’exemple… ¦ Đang chuẩn bị dữ liệu mẫu… ¦ Menyiapkan basis data contoh…
+✓ Base créée ¦ ✓ Đã tạo cơ sở dữ liệu ¦ ✓ Basis data dibuat
+ℹ️ Rien n’est figé : Réglages → Apparence → « 🧭 Usage de l’app ». ¦ ℹ️ Không có gì cố định: Cài đặt → Giao diện → “🧭 Cách dùng ứng dụng”. ¦ ℹ️ Tidak ada yang permanen: Pengaturan → Tampilan → “🧭 Penggunaan aplikasi”.
+🧭 Usage de l’app ¦ 🧭 Cách dùng ứng dụng ¦ 🧭 Penggunaan aplikasi
+🧭 Revoir le premier lancement ¦ 🧭 Xem lại lần mở đầu tiên ¦ 🧭 Lihat lagi peluncuran pertama
+Premier écran à l’ouverture ¦ Màn hình đầu tiên khi mở ¦ Layar pertama saat dibuka
+Le dernier écran ouvert (comme avant) ¦ Màn hình mở gần nhất (như trước) ¦ Layar terakhir yang dibuka (seperti sebelumnya)
+Usage enregistré. ¦ Đã lưu cách dùng. ¦ Penggunaan disimpan.
+(la page va se recharger) ¦ (trang sẽ tải lại) ¦ (halaman akan dimuat ulang)
+Langue · Language ¦ Ngôn ngữ · Language ¦ Bahasa · Language
+Une petite visite ? ¦ Đi xem một vòng nhé? ¦ Mau tur singkat?
+En {n} étapes, l’app te montre où créer une fiche, ajouter un parent, une photo, un événement, faire une sauvegarde et trouver l’aide. Ça prend deux minutes. ¦ Trong {n} bước, ứng dụng chỉ cho bạn chỗ tạo hồ sơ, thêm cha mẹ, ảnh, sự kiện, sao lưu và tìm trợ giúp. Chỉ mất hai phút. ¦ Dalam {n} langkah, aplikasi menunjukkan di mana membuat profil, menambah orang tua, foto, peristiwa, membuat cadangan, dan mencari bantuan. Hanya dua menit.
+▶ Commencer ¦ ▶ Bắt đầu ¦ ▶ Mulai
+Plus tard ¦ Để sau ¦ Nanti saja
+Ne plus proposer ¦ Đừng đề nghị nữa ¦ Jangan tawarkan lagi
+Passer la visite ¦ Bỏ qua chuyến tham quan ¦ Lewati tur
+← Précédent ¦ ← Trước ¦ ← Sebelumnya
+Suivant → ¦ Tiếp → ¦ Berikutnya →
+✓ Terminer ¦ ✓ Hoàn tất ¦ ✓ Selesai
+Étape {i} sur {n} ¦ Bước {i} / {n} ¦ Langkah {i} dari {n}
+Visite guidée, étape {i} sur {n} : {what} ¦ Tham quan có hướng dẫn, bước {i} / {n}: {what} ¦ Tur terpandu, langkah {i} dari {n}: {what}
+Tu peux cliquer le bouton entouré pour le faire pour de vrai, ou juste avancer. ¦ Bạn có thể nhấp vào nút được khoanh để làm thật, hoặc chỉ cần đi tiếp. ¦ Kamu bisa mengeklik tombol yang dilingkari untuk melakukannya sungguhan, atau lanjut saja.
+Ajouter un parent ¦ Thêm cha hoặc mẹ ¦ Tambah orang tua
+Ajouter une photo ¦ Thêm ảnh ¦ Tambah foto
+Un événement et son lieu ¦ Một sự kiện và địa điểm của nó ¦ Peristiwa dan tempatnya
+Faire une sauvegarde ¦ Sao lưu ¦ Buat cadangan
+Les Réglages et l’aide ¦ Cài đặt và trợ giúp ¦ Pengaturan dan bantuan
+Chaque personne a sa fiche. Ce bouton en crée une : un prénom, un nom, et c’est parti. ¦ Mỗi người có một hồ sơ. Nút này tạo hồ sơ mới: một tên, một họ, thế là xong. ¦ Setiap orang punya profilnya. Tombol ini membuat profil baru: nama depan, nama keluarga, dan beres.
+Sur une fiche, le « ＋ » de « Parents » relie un père ou une mère : choisis une fiche qui existe, ou crée-la. C’est comme ça que l’arbre se construit. ¦ Trên một hồ sơ, nút “＋” ở “Cha mẹ” liên kết cha hoặc mẹ: chọn một hồ sơ đã có, hoặc tạo mới. Cây gia phả lớn dần như vậy. ¦ Di sebuah profil, “＋” pada “Orang tua” menghubungkan ayah atau ibu: pilih profil yang sudah ada, atau buat baru. Begitulah pohon tumbuh.
+Ici, tu ajoutes des photos et des actes à la fiche : prends-les dans tes médias, ou glisse-les depuis l’ordinateur. ¦ Ở đây, bạn thêm ảnh và giấy tờ vào hồ sơ: lấy từ tư liệu của bạn, hoặc kéo từ máy tính vào. ¦ Di sini kamu menambahkan foto dan akta ke profil: ambil dari mediamu, atau seret dari komputer.
+Naissance, mariage, décès… Ajoute un événement avec sa date et son lieu : tape les premières lettres de la commune, l’app la trouve. ¦ Sinh, kết hôn, mất… Thêm một sự kiện với ngày và địa điểm: gõ vài chữ đầu của tên xã, ứng dụng sẽ tìm ra. ¦ Kelahiran, pernikahan, kematian… Tambahkan peristiwa beserta tanggal dan tempatnya: ketik huruf-huruf pertama nama kota, aplikasi menemukannya.
+De temps en temps, fais une sauvegarde : ce fichier garde toute ta généalogie et tes photos. Range-le sur une clé USB ou un autre disque. ¦ Thỉnh thoảng hãy sao lưu: tệp này giữ toàn bộ gia phả và ảnh của bạn. Hãy cất nó vào USB hoặc một ổ đĩa khác. ¦ Sesekali, buatlah cadangan: berkas ini menyimpan seluruh silsilah dan fotomu. Simpan di flashdisk atau diska lain.
+Tout se règle ici : apparence, import, sauvegardes… Dans les Réglages, la page « FAQ / tuto » répond à tes questions ; tu peux aussi y relancer cette visite. ¦ Mọi thứ được chỉnh ở đây: giao diện, nhập, sao lưu… Trong Cài đặt, trang “FAQ / hướng dẫn” trả lời câu hỏi của bạn; bạn cũng có thể chạy lại chuyến tham quan này ở đó. ¦ Semuanya diatur di sini: tampilan, impor, cadangan… Di Pengaturan, halaman “FAQ / panduan” menjawab pertanyaanmu; kamu juga bisa mengulang tur ini di sana.
+✓ Visite terminée. Pour la revoir : Réglages → FAQ / tuto → « ▶ Relancer la visite guidée ». ¦ ✓ Đã xong chuyến tham quan. Để xem lại: Cài đặt → FAQ / hướng dẫn → “▶ Chạy lại chuyến tham quan”. ¦ ✓ Tur selesai. Untuk melihatnya lagi: Pengaturan → FAQ / panduan → “▶ Ulangi tur terpandu”.
+Visite guidée fermée. Tu la retrouves dans Réglages → FAQ / tuto. ¦ Đã đóng chuyến tham quan. Bạn có thể tìm lại trong Cài đặt → FAQ / hướng dẫn. ¦ Tur terpandu ditutup. Kamu bisa menemukannya di Pengaturan → FAQ / panduan.
+Une petite visite guidée de l’app est proposée. Commencer, plus tard, ou ne plus proposer. ¦ Có một chuyến tham quan ngắn về ứng dụng. Bắt đầu, để sau, hoặc đừng đề nghị nữa. ¦ Ada tur singkat aplikasi yang ditawarkan. Mulai, nanti saja, atau jangan tawarkan lagi.
+Rien à montrer sur cet écran pour l’instant. ¦ Hiện chưa có gì để hiển thị trên màn hình này. ¦ Belum ada yang bisa ditampilkan di layar ini.
+Pas de visite guidée en mode consultation. ¦ Không có chuyến tham quan ở chế độ chỉ xem. ¦ Tidak ada tur terpandu dalam mode lihat saja.
+La visite guidée n’est pas possible ici. ¦ Không thể tham quan có hướng dẫn ở đây. ¦ Tur terpandu tidak bisa dilakukan di sini.
+🐞 Signaler un problème ¦ 🐞 Báo một vấn đề ¦ 🐞 Laporkan masalah
+AIDE ¦ TRỢ GIÚP ¦ BANTUAN
+Ce qui s’est passé ¦ Chuyện gì đã xảy ra ¦ Apa yang terjadi
+Ce que j’attendais ¦ Điều tôi mong đợi ¦ Yang saya harapkan
+Écris avec tes mots. Évite les noms de ta famille si tu ne veux pas qu’ils soient lus. ¦ Hãy viết bằng lời của bạn. Tránh ghi tên người trong gia đình nếu bạn không muốn người khác đọc được. ¦ Tulis dengan kata-katamu sendiri. Hindari nama keluargamu jika kamu tidak ingin nama itu dibaca.
+Joindre le rapport technique ¦ Đính kèm báo cáo kỹ thuật ¦ Lampirkan laporan teknis
+Joindre le rapport technique ({x}) ¦ Đính kèm báo cáo kỹ thuật ({x}) ¦ Lampirkan laporan teknis ({x})
+aucune erreur captée ¦ không ghi nhận lỗi nào ¦ tidak ada kesalahan yang tertangkap
+Rapport technique ¦ Báo cáo kỹ thuật ¦ Laporan teknis
+🗑 Vider le journal ¦ 🗑 Xoá sạch nhật ký ¦ 🗑 Kosongkan log
+Vider le journal des erreurs captées sur cet ordinateur ¦ Xoá sạch nhật ký lỗi ghi nhận trên máy tính này ¦ Kosongkan log kesalahan yang tertangkap di komputer ini
+✉️ Écrire un e-mail ¦ ✉️ Viết e-mail ¦ ✉️ Tulis e-mail
+Ouvrir une demande sur GitHub ¦ Mở một yêu cầu trên GitHub ¦ Buka laporan di GitHub
+Journal des erreurs vidé ¦ Đã xoá sạch nhật ký lỗi ¦ Log kesalahan dikosongkan
+✓ Message copié : colle-le où tu veux (e-mail, forum, GitHub). ¦ ✓ Đã sao chép tin nhắn: dán vào bất cứ đâu bạn muốn (e-mail, diễn đàn, GitHub). ¦ ✓ Pesan disalin: tempelkan di mana saja (e-mail, forum, GitHub).
+La copie n’a pas marché : sélectionne le texte et copie-le à la main. ¦ Không sao chép được: hãy chọn đoạn chữ và sao chép bằng tay. ¦ Penyalinan tidak berhasil: pilih teksnya dan salin secara manual.
+Dis en quelques mots ce qui s’est passé. ¦ Hãy kể vài lời về chuyện đã xảy ra. ¦ Ceritakan dengan beberapa kata apa yang terjadi.
+Ex. : j’ai cliqué sur « Enregistrer » dans la fiche, et la fenêtre est restée grise. ¦ Ví dụ: tôi đã nhấp “Lưu” trong hồ sơ, và cửa sổ vẫn bị xám. ¦ Mis.: saya mengeklik “Simpan” di profil, dan jendelanya tetap abu-abu.
+Ex. : que la fiche soit enregistrée et que la fenêtre se ferme. ¦ Ví dụ: hồ sơ được lưu và cửa sổ đóng lại. ¦ Mis.: profil tersimpan dan jendela tertutup.
+Pour écrire un e-mail plutôt qu’ouvrir une demande sur GitHub : règle une adresse dans Réglages → « 🔄 Mises à jour ». ¦ Để viết e-mail thay vì mở yêu cầu trên GitHub: hãy đặt một địa chỉ trong Cài đặt → “🔄 Cập nhật”. ¦ Untuk menulis e-mail alih-alih membuka laporan di GitHub: atur alamat di Pengaturan → “🔄 Pembaruan”.
+La base d’exemple est une famille imaginaire (5 générations, des photos d’époque dessinées) rangée à part dans « Mes généalogies » : ta généalogie n’est jamais touchée. ¦ Dữ liệu mẫu là một gia đình tưởng tượng (5 thế hệ, ảnh xưa được vẽ lại) được cất riêng trong “Các gia phả của tôi”: gia phả của bạn không bao giờ bị động đến. ¦ Basis data contoh adalah keluarga khayalan (5 generasi, foto zaman dulu yang digambar) yang disimpan terpisah di “Silsilah saya”: silsilahmu tidak pernah disentuh.
+Aucun fichier choisi ¦ Chưa chọn tệp nào ¦ Belum ada berkas yang dipilih

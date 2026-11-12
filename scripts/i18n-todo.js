@@ -19,6 +19,8 @@
  *   node scripts/i18n-todo.js lb cadre          pour le luxembourgeois : l'allemand (langue proche, déjà là) en aide, à côté de l'anglais
  *   node scripts/i18n-todo.js sq,mt cadre       pour l'albanais et le maltais : l'italien en plus (aide pour le maltais, langue voisine ;
  *                                               pour l'albanais, l'anglais seulement, déjà là)
+ *   node scripts/i18n-todo.js vi,id cadre       pour le vietnamien et l'indonésien : pas de langue proche déjà traduite, l'anglais
+ *                                               (et l'allemand) seulement
  *   node scripts/i18n-todo.js cs all            le nombre de textes à traduire, zone par zone (les plus petites d'abord)
  *   options : --json (sortie JSON), --skeleton (lignes « clé ¦ ¦ ¦ » prêtes à remplir pour nord/<zone>.tsv),
  *             --limit N (les N premières seulement)
@@ -31,7 +33,8 @@
  * celle de is dans assets/i18n/src/nord7/<zone>.tsv (1re ligne « fr ¦ is »),
  * celle de tr dans assets/i18n/src/nord8/<zone>.tsv (1re ligne « fr ¦ tr »),
  * celle de lb dans assets/i18n/src/nord9/<zone>.tsv (1re ligne « fr ¦ lb »),
- * celles de sq, mt dans assets/i18n/src/nord10/<zone>.tsv (1re ligne « fr ¦ sq ¦ mt »), avec la même clé que dans <zone>.tsv :
+ * celles de sq, mt dans assets/i18n/src/nord10/<zone>.tsv (1re ligne « fr ¦ sq ¦ mt »),
+ * celles de vi, id dans assets/i18n/src/nord11/<zone>.tsv (1re ligne « fr ¦ vi ¦ id »), avec la même clé que dans <zone>.tsv :
  * « ctx|Texte » et « =mot » (pluriel) compris. Pluriels : cs et sk = 3 formes « 1 | 2 à 4 | 5 et plus » (osoba|osoby|osob),
  * sv, da, nb = 2 formes (person|personer), ro = 3 formes « 1 | 0 et 2 à 19 | 20 et plus » (persoană|persoane|de persoane),
  * fi = 2 formes (henkilö|henkilöä), hu = 2 formes souvent identiques (személy|személy : singulier après un nombre),
@@ -43,7 +46,8 @@
  * lb = 2 formes « 1 | le reste » (Persoun|Persounen, comme l’allemand),
  * sq = 2 formes « 1 | le reste » (person|persona),
  * mt = 5 formes dans cet ordre « 1 | 2 | 0, 3 à 10, 103 à 110… | 11 à 19, 111 à 119… | le reste (20 à 102…) »
- * (persuna|persuni|persuni|persuna|persuna). Puis :
+ * (persuna|persuni|persuni|persuna|persuna),
+ * vi, id = 1 seule forme, sans « | » (người ; orang). Puis :
  *   node scripts/i18n-build.js && node scripts/i18n-check.js      (0 erreur ; les textes encore manquants sont comptés)
  * Une clé présente dans plusieurs zones n'est à traduire qu'une fois (elle compte comme faite partout).
  */
@@ -51,7 +55,7 @@
 const fs = require('fs');
 const path = require('path');
 const {readSources, dirOf, LANGS, NEW_LANGS, SRC} = require('./i18n-build.js');
-const NEAR = {sk: 'cs', nb: 'da', ro: 'it', fi: 'sv', hu: 'de', hr: 'cs', sl: 'cs', lt: 'pl', lv: 'pl', et: 'fi', is: ['nb', 'da'], lb: 'de', sq: 'en', mt: 'it'}; // une langue très proche (ou voisine), déjà traduite : en aide à côté de l'anglais et de l'allemand (hu : l'allemand, déjà là ; is : deux colonnes, le norvégien puis le danois ; lb : l'allemand, déjà là ; sq : l'anglais, déjà là ; mt : l'italien)
+const NEAR = {sk: 'cs', nb: 'da', ro: 'it', fi: 'sv', hu: 'de', hr: 'cs', sl: 'cs', lt: 'pl', lv: 'pl', et: 'fi', is: ['nb', 'da'], lb: 'de', sq: 'en', mt: 'it', vi: 'en', id: 'en'}; // une langue très proche (ou voisine), déjà traduite : en aide à côté de l'anglais et de l'allemand (hu : l'allemand, déjà là ; is : deux colonnes, le norvégien puis le danois ; lb : l'allemand, déjà là ; sq : l'anglais, déjà là ; mt : l'italien ; vi, id : l'anglais, déjà là)
 
 const near = list => [...new Set(list.flatMap(c => [].concat(NEAR[c] || [])).filter(c => c && c !== 'en' && c !== 'de'))]; // l'anglais et l'allemand sont déjà là
 function todo(codes, zone) {
