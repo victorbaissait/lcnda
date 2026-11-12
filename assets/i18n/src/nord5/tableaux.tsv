@@ -1,0 +1,1201 @@
+fr ¦ hr ¦ sl
+piste|Confirmée ¦ Potvrđeno ¦ Potrjeno
+piste|Fausse ¦ Pogrešno ¦ Napačno
+Fiche #{id} ¦ Zapis #{id} ¦ Zapis #{id}
+Tableau verrouillé : 🔒 en haut pour le déverrouiller. ¦ Ploča je zaključana: 🔒 gore za otključavanje. ¦ Tabla je zaklenjena: 🔒 zgoraj za odklepanje.
+H ou Espace ¦ H ili razmaknica ¦ H ali preslednica
+Formes ¦ Oblici ¦ Oblike
+Dessin à main levée ¦ Prostoručni crtež ¦ Prostoročna risba
+Gomme ¦ Gumica ¦ Radirka
+{owner} : {name} ¦ {owner}: {name} ¦ {owner}: {name}
+Tableau libre ¦ Slobodna ploča ¦ Prosta tabla
+changer ¦ promijeni ¦ spremeni
+Police du thème ¦ Font teme ¦ Pisava teme
+PDF · double-clic pour l’ouvrir ¦ PDF · dvoklik za otvaranje ¦ PDF · dvoklik za odpiranje
+Dossier ¦ Mapa ¦ Mapa
+double-clic pour ouvrir ¦ dvoklik za otvaranje ¦ dvoklik za odpiranje
+Recueil ¦ Zbirka ¦ Zbirka
+Recueil · double-clic pour l’ouvrir ¦ Zbirka · dvoklik za otvaranje ¦ Zbirka · dvoklik za odpiranje
+Frise ¦ Vremenska crta ¦ Časovnica
+Chargement de la frise… ¦ Učitavanje vremenske crte… ¦ Nalaganje časovnice…
+Cadre ¦ Okvir ¦ Okvir
+Chargement du widget… ¦ Učitavanje widgeta… ¦ Nalaganje gradnika…
+Écran de l’app · double-clic pour l’ouvrir ¦ Zaslon aplikacije · dvoklik za otvaranje ¦ Zaslon aplikacije · dvoklik za odpiranje
+mort à {age} ¦ umro/umrla u dobi od {age} ¦ umrl/umrla pri {age}
+Choisis la personne à droite. ¦ Odaberi osobu desno. ¦ Izberi osebo na desni.
+Choisir ce groupe ¦ Odaberi ovu grupu ¦ Izberi to skupino
+Groupe {n} ¦ Grupa {n} ¦ Skupina {n}
+le tableau est fermé ¦ ploča je zatvorena ¦ tabla je zaprta
+d’autres changements ont suivi : utilise ↶ dans la barre du tableau ¦ uslijedile su druge promjene: koristi ↶ na traci ploče ¦ sledile so druge spremembe: uporabi ↶ v vrstici table
+Ce tableau ¦ Ova ploča ¦ Ta tabla
+Choisir le pinceau ¦ Odaberi kist ¦ Izberi čopič
+Dureté du bord : 100 % net, moins = flou ¦ Tvrdoća ruba: 100 % oštro, manje = mutno ¦ Trdota roba: 100 % ostro, manj = mehko
+Les gommes n’effacent que les dessins à main levée. ¦ Gumice brišu samo prostoručne crteže. ¦ Radirke brišejo samo prostoročne risbe.
+Clique où écrire. ¦ Klikni gdje želiš pisati. ¦ Klikni, kamor želiš pisati.
+Tire un trait ; posé sur un élément, il s’y accroche. ¦ Povuci crtu; spuštena na element, zakači se za njega. ¦ Potegni črto; spuščena na element se nanj pripne.
+Un lien tout prêt : légende, couleur et style ¦ Gotova veza: natpis, boja i stil ¦ Pripravljena povezava: napis, barva in slog
+lien|libre ¦ slobodno ¦ prosto
+Pointes ¦ Vrhovi strelica ¦ Konice puščic
+Pointes de la même couleur que le trait ¦ Vrhovi iste boje kao crta ¦ Konice iste barve kot črta
+Tire une flèche d’un élément à un autre : elle les suit. ¦ Povuci strelicu od jednog elementa do drugog: prati ih. ¦ Potegni puščico od enega elementa do drugega: sledi jima.
+Toutes les formes, et créer la sienne ¦ Svi oblici i stvaranje vlastitog ¦ Vse oblike in ustvarjanje svoje
+Toutes les formes ¦ Svi oblici ¦ Vse oblike
+Nom;Année;Lieu ¦ Ime;Godina;Mjesto ¦ Ime;Leto;Kraj
+Tableau repris du tableur. ¦ Tablica preuzeta iz proračunske tablice. ¦ Tabela prevzeta iz preglednice.
+{n}. Choisis un élément pour le régler. ¦ {n}. Odaberi element da ga podesiš. ¦ {n}. Izberi element, da ga nastaviš.
+Réglages de la légende ¦ Postavke natpisa ¦ Nastavitve napisa
+Cellule <strong>{a}</strong> à <strong>{b}</strong> ¦ Ćelija <strong>{a}</strong> do <strong>{b}</strong> ¦ Celica <strong>{a}</strong> do <strong>{b}</strong>
+Cellule <strong>{a}</strong> ¦ Ćelija <strong>{a}</strong> ¦ Celica <strong>{a}</strong>
+Clique une cellule pour la choisir ¦ Klikni ćeliju da je odabereš ¦ Klikni celico, da jo izbereš
+⇧ + clic : plusieurs · double-clic : écrire ¦ ⇧ + klik: više · dvoklik: piši ¦ ⇧ + klik: več · dvoklik: piši
+Simple note ¦ Obična bilješka ¦ Navadna opomba
+Lieux de… ¦ Mjesta osobe… ¦ Kraji osebe…
+Enlever ce repère ¦ Ukloni ovu oznaku ¦ Odstrani to oznako
+Enlever : {n} ¦ Ukloni: {n} ¦ Odstrani: {n}
+Aucune forme. ¦ Nema oblika. ¦ Ni oblik.
+🧩 À partir d’une forme ¦ 🧩 Iz oblika ¦ 🧩 Iz oblike
+Comment tracer avec la plume ¦ Kako crtati perom ¦ Kako risati s peresom
+<strong>Clic</strong> : un point d’angle (trait droit). ¦ <strong>Klik</strong>: kutna točka (ravna crta). ¦ <strong>Klik</strong>: kotna točka (ravna črta).
+<strong>Cliquer-glisser</strong> : un point arrondi ; tire pour régler la courbe. ¦ <strong>Klikni i povuci</strong>: zaobljena točka; povuci za podešavanje krivulje. ¦ <strong>Klikni in povleci</strong>: zaobljena točka; povleci za nastavitev krivulje.
+<strong>Clic sur le premier point</strong> (jaune) : la forme se ferme. ¦ <strong>Klik na prvu točku</strong> (žuta): oblik se zatvara. ¦ <strong>Klik na prvo točko</strong> (rumena): oblika se zapre.
+Glisser un point pour le <strong>déplacer</strong> ; glisser une poignée (rond rouge) pour <strong>courber</strong> ; avec <kbd>⌥</kbd> / <kbd>Alt</kbd>, les deux poignées deviennent indépendantes. ¦ Povuci točku da je <strong>pomakneš</strong>; povuci ručku (crveni krug) da <strong>savineš</strong>; s <kbd>⌥</kbd> / <kbd>Alt</kbd> dvije ručke postaju neovisne. ¦ Povleci točko, da jo <strong>premakneš</strong>; povleci ročaj (rdeč krog), da <strong>ukriviš</strong>; z <kbd>⌥</kbd> / <kbd>Alt</kbd> postaneta ročaja neodvisna.
+<kbd>⌥</kbd> / <kbd>Alt</kbd> + clic sur un point : angle ↔ arrondi ; <strong>double-clic</strong> : le supprimer. ¦ <kbd>⌥</kbd> / <kbd>Alt</kbd> + klik na točku: kut ↔ zaobljeno; <strong>dvoklik</strong>: izbriši je. ¦ <kbd>⌥</kbd> / <kbd>Alt</kbd> + klik na točko: kot ↔ zaobljeno; <strong>dvoklik</strong>: izbriši jo.
+Une forme fermée, puis un nouveau tracé à l’intérieur : un <strong>trou</strong>. ¦ Zatvoreni oblik, zatim nova putanja unutra: <strong>rupa</strong>. ¦ Zaprta oblika, nato nova pot znotraj: <strong>luknja</strong>.
+{n} sur le tableau : chaque trait devient une partie remplie de la forme. ¦ {n} na ploči: svaki potez postaje ispunjeni dio oblika. ¦ {n} na tabli: vsaka poteza postane zapolnjen del oblike.
+Choisis d’abord un ou plusieurs dessins à main levée sur le tableau (outil ✍︎), puis reviens ici. ¦ Najprije odaberi jedan ili više prostoručnih crteža na ploči (alat ✍︎), zatim se vrati ovamo. ¦ Najprej izberi eno ali več prostoročnih risb na tabli (orodje ✍︎), nato se vrni sem.
+Nom de la forme ¦ Naziv oblika ¦ Ime oblike
+Ce dessin est trop détaillé pour devenir une forme : prends un dessin plus simple (ou moins de traits). ¦ Ovaj je crtež previše detaljan da bi postao oblik: uzmi jednostavniji crtež (ili manje poteza). ¦ Ta risba je preveč podrobna, da bi postala oblika: vzemi preprostejšo risbo (ali manj potez).
+Forme « {name} » créée : elle est dans « Mes formes ». ¦ Oblik „{name}” stvoren: nalazi se u „Moji oblici”. ¦ Oblika »{name}« ustvarjena: najdeš jo v »Moje oblike«.
+Ce navigateur ne lit pas les polices de l’ordinateur : tape le nom de la police (ou fais des listes dans Réglages → Tableaux). ¦ Ovaj preglednik ne čita fontove računala: upiši naziv fonta (ili napravi popise u Postavke → Ploče). ¦ Ta brskalnik ne bere pisav računalnika: vpiši ime pisave (ali naredi sezname v Nastavitve → Table).
+{n} de l’ordinateur lues : leurs graisses exactes sont proposées (et « Aa Toutes les polices… » les montre toutes). ¦ {n} s računala pročitano: nude se njihove točne debljine (a „Aa Svi fontovi…” prikazuje sve). ¦ {n} z računalnika prebranih: na voljo so njihove točne debeline (»Aa Vse pisave…« jih prikaže vse).
+Lecture des polices refusée : {error} ¦ Čitanje fontova odbijeno: {error} ¦ Branje pisav zavrnjeno: {error}
+Ce fichier n’est pas un tableau exporté. ¦ Ova datoteka nije izvezena ploča. ¦ Ta datoteka ni izvožena tabla.
+Ce fichier n’est pas un tableau exporté de l’app. ¦ Ova datoteka nije ploča izvezena iz aplikacije. ¦ Ta datoteka ni tabla, izvožena iz aplikacije.
+Import : vérification des fiches et médias… ¦ Uvoz: provjera zapisa i medija… ¦ Uvoz: preverjanje zapisov in medijev…
+Média absent ici : {name} ¦ Medij ovdje nedostaje: {name} ¦ Medij tukaj manjka: {name}
+{name} (fiche absente ici) ¦ {name} (zapis ovdje nedostaje) ¦ {name} (zapis tukaj manjka)
+{name} (absent ici) ¦ {name} (ovdje nedostaje) ¦ {name} (tukaj manjka)
+{name} (dossier non importé) ¦ {name} (mapa nije uvezena) ¦ {name} (mapa ni uvožena)
+Tableau importé ¦ Uvezena ploča ¦ Uvožena tabla
+Associations reprises. ¦ Veze zadržane. ¦ Povezave ohranjene.
+{n} sur {total} reprises (les autres visent une autre base). ¦ Zadržano {n} od {total} (ostale upućuju na drugu bazu). ¦ Ohranjenih {n} od {total} (druge kažejo na drugo bazo).
+Les associations visent une autre base : non reprises. ¦ Veze upućuju na drugu bazu: nisu zadržane. ¦ Povezave kažejo na drugo bazo: niso ohranjene.
+Import des photos : {n} / {total}… ¦ Uvoz fotografija: {n} / {total}… ¦ Uvoz fotografij: {n} / {total}…
+Média non importé : {name} ¦ Medij nije uvezen: {name} ¦ Medij ni uvožen: {name}
+Tableau importé. {n} (fiche, média, recueil ou dossier) devenus des notes. ¦ Ploča uvezena. {n} (zapis, medij, zbirka ili mapa) postalo je bilješkama. ¦ Tabla uvožena. {n} (zapis, medij, zbirka ali mapa) je postalo opomb.
+Une adresse qui commence par https:// ¦ Adresa koja počinje s https:// ¦ Naslov, ki se začne s https://
+Choisis un écran (pour une fiche ou une commune, passe par « Une fiche » ou l’Éditeur de widgets). ¦ Odaberi zaslon (za zapis ili općinu koristi „Jedan zapis” ili Uređivač widgeta). ¦ Izberi zaslon (za zapis ali občino uporabi »En zapis« ali Urejevalnik gradnikov).
+Ne plus associer ¦ Prekini vezu ¦ Prekini povezavo
+Le tableau garde son rangement ({where}) ; il apparaît en plus là où tu l’associes (sur la fiche de la personne, dans l’enquête…). ¦ Ploča zadržava svoje mjesto ({where}); pojavljuje se i tamo gdje je povežeš (na zapisu osobe, u istrazi…). ¦ Tabla ohrani svoje mesto ({where}); prikaže se tudi tam, kjer jo povežeš (na zapisu osebe, v preiskavi…).
+rangement|libre ¦ slobodno ¦ prosto
+(aucun pour l’instant) ¦ (još nijedan) ¦ (še nobenega)
+Choisis à quoi associer le tableau. ¦ Odaberi s čim povezati ploču. ¦ Izberi, s čim povezati tablo.
+Déjà associé. ¦ Već povezano. ¦ Že povezano.
+Tableau associé. ¦ Ploča povezana. ¦ Tabla povezana.
+le tableau à l’écran ¦ ploča na zaslonu ¦ tabla na zaslonu
+Pas d’image pour cet instantané. ¦ Nema slike za ovu snimku stanja. ¦ Za ta posnetek stanja ni slike.
+📸 Prendre un instantané ¦ 📸 Snimi stanje ¦ 📸 Posnemi stanje
+Un nom (facultatif) : ¦ Naziv (neobavezno): ¦ Ime (neobvezno):
+avant la visite aux archives ¦ prije posjeta arhivu ¦ pred obiskom arhiva
+Instantané pris. ¦ Snimka stanja napravljena. ¦ Posnetek stanja narejen.
+↺ Revenir à cet état ¦ ↺ Vrati se na ovo stanje ¦ ↺ Vrni se na to stanje
+⧉ En faire un tableau ¦ ⧉ Napravi od nje ploču ¦ ⧉ Naredi iz njega tablo
+Aucun instantané pour l’instant ¦ Još nema snimki stanja ¦ Še ni posnetkov stanja
+Versions automatiques ({n}) ¦ Automatske verzije ({n}) ¦ Samodejne različice ({n})
+une par jour de travail au plus, les 30 dernières gardées ¦ najviše jedna po radnom danu, čuva se zadnjih 30 ¦ največ ena na delovni dan, ohrani se zadnjih 30
+Nom du nouveau tableau ¦ Naziv nove ploče ¦ Ime nove table
+même rangement ({where}) et mêmes associations ¦ isto mjesto ({where}) i iste veze ¦ isto mesto ({where}) in iste povezave
+Le contenu de l’instantané est recopié dans un tableau à part ; l’original ne change pas. Les dossiers posés dedans restent ceux de l’original. ¦ Sadržaj snimke stanja kopira se u zasebnu ploču; izvornik se ne mijenja. Mape postavljene u nju ostaju one iz izvornika. ¦ Vsebina posnetka stanja se skopira v ločeno tablo; izvirnik se ne spremeni. Mape v njej ostanejo tiste iz izvirnika.
+Tout le contenu actuel est recopié dans un tableau à part ; l’original ne change pas. Les dossiers posés dedans restent ceux de l’original. ¦ Sav trenutni sadržaj kopira se u zasebnu ploču; izvornik se ne mijenja. Mape postavljene u nju ostaju one iz izvornika. ¦ Vsa trenutna vsebina se skopira v ločeno tablo; izvirnik se ne spremeni. Mape v njej ostanejo tiste iz izvirnika.
+Nouveau tableau créé. ¦ Nova ploča stvorena. ¦ Nova tabla ustvarjena.
+État du tableau changé. ¦ Stanje ploče promijenjeno. ¦ Stanje table spremenjeno.
+(avec photos) ¦ (s fotografijama) ¦ (s fotografijami)
+(sélection) ¦ (odabir) ¦ (izbor)
+Fichier du tableau enregistré ({size}) : « ＋ Ajouter → Importer un tableau » le rouvre. ¦ Datoteka ploče spremljena ({size}): „＋ Dodaj → Uvezi ploču” ponovno je otvara. ¦ Datoteka table shranjena ({size}): »＋ Dodaj → Uvozi tablo« jo znova odpre.
+{n} Mo ¦ {n} MB ¦ {n} MB
+{n} ko ¦ {n} kB ¦ {n} kB
+Préparation… ¦ Priprema… ¦ Priprava…
+image impossible (une image d’un autre site l’empêche, ou le tableau est trop grand) ¦ slika nije moguća (sprječava je slika s drugog web-mjesta ili je ploča prevelika) ¦ slika ni mogoča (preprečuje jo slika z drugega spletnega mesta ali pa je tabla prevelika)
+Une copie de l’image est rangée dans les médias. ¦ Kopija slike spremljena je u medije. ¦ Kopija slike je shranjena med medije.
+Copie dans les médias impossible : {error} ¦ Kopiranje u medije nije moguće: {error} ¦ Kopiranje med medije ni mogoče: {error}
+💾 Fichier léger ¦ 💾 Lagana datoteka ¦ 💾 Lahka datoteka
+sans les photos : petit, pour garder une copie ¦ bez fotografija: mala, za čuvanje kopije ¦ brez fotografij: majhna, za hrambo kopije
+💾 Fichier complet ¦ 💾 Potpuna datoteka ¦ 💾 Celotna datoteka
+avec {n} : pour une autre base ¦ s {n}: za drugu bazu ¦ z {n}: za drugo bazo
+pareil : pas de photo de l’app ¦ isto: nema fotografija iz aplikacije ¦ enako: ni fotografij iz aplikacije
+⤓ Exporter le tableau… (PDF, image, impression, fichier) ¦ ⤓ Izvezi ploču… (PDF, slika, ispis, datoteka) ¦ ⤓ Izvozi tablo… (PDF, slika, tisk, datoteka)
+⤓ Exporter la sélection en image… ¦ ⤓ Izvezi odabir kao sliku… ¦ ⤓ Izvozi izbor kot sliko…
+⭐ En faire un modèle (pour les nouveaux tableaux) ¦ ⭐ Napravi od nje predložak (za nove ploče) ¦ ⭐ Naredi iz nje predlogo (za nove table)
+Ajuster à la sélection ¦ Prilagodi odabiru ¦ Prilagodi izboru
+Adapter le contenu à la fenêtre ¦ Prilagodi sadržaj prozoru ¦ Prilagodi vsebino oknu
+Pour répartir, choisis au moins trois éléments. ¦ Za raspoređivanje odaberi barem tri elementa. ¦ Za razporeditev izberi vsaj tri elemente.
+{todo} à vérifier · {ok} · {no} — clic : aller à la suivante à vérifier ¦ {todo} za provjeru · {ok} · {no} — klik: idi na sljedeću za provjeru ¦ {todo} za preverjanje · {ok} · {no} — klik: pojdi na naslednjo za preverjanje
+Plus rien à vérifier : bravo ! ¦ Ništa više za provjeru: bravo! ¦ Nič več za preverjanje: bravo!
+Question ¦ Pitanje ¦ Vprašanje
+Idée ¦ Ideja ¦ Zamisel
+Source ? ¦ Izvor? ¦ Vir?
+Important ¦ Važno ¦ Pomembno
+Réglé ¦ Riješeno ¦ Rešeno
+Pas encore de commentaire sur cet élément. ¦ Još nema komentara na ovom elementu. ¦ Na tem elementu še ni komentarja.
+(sans mot) ¦ (bez riječi) ¦ (brez besede)
+＋ un autre mot… ¦ ＋ druga riječ… ¦ ＋ druga beseda…
+Retirer ce mot ¦ Ukloni ovu riječ ¦ Odstrani to besedo
+Écris un commentaire ou choisis un mot. ¦ Napiši komentar ili odaberi riječ. ¦ Napiši komentar ali izberi besedo.
+La personne de la frise ¦ Osoba vremenske crte ¦ Oseba časovnice
+Les lieux de… ¦ Mjesta osobe… ¦ Kraji osebe…
+Repère « {name} » posé. ¦ Oznaka „{name}” postavljena. ¦ Oznaka »{name}« postavljena.
+Cette enquête ne porte pas sur une personne : choisis-en une autre. ¦ Ova se istraga ne odnosi na osobu: odaberi drugu. ¦ Ta preiskava se ne nanaša na osebo: izberi drugo.
+Aucun lieu avec ses coordonnées. ¦ Nema mjesta s koordinatama. ¦ Ni kraja s koordinatami.
+Enquête n° {n} ¦ Istraga br. {n} ¦ Preiskava št. {n}
+Choisis la personne (ou « seulement mes repères »). ¦ Odaberi osobu (ili „samo moje oznake”). ¦ Izberi osebo (ali »samo moje oznake«).
+Les lieux de {name} ¦ Mjesta – {name} ¦ Kraji – {name}
+Arbre : lecture des fiches… ¦ Stablo: čitanje zapisa… ¦ Drevo: branje zapisov…
+Arbre posé : {n}. Chaque carte reste liée à sa fiche (double-clic pour l’ouvrir). ¦ Stablo postavljeno: {n}. Svaka kartica ostaje povezana sa svojim zapisom (dvoklik za otvaranje). ¦ Drevo postavljeno: {n}. Vsaka kartica ostane povezana s svojim zapisom (dvoklik za odpiranje).
+Arbre posé : {n} (limite atteinte). Chaque carte reste liée à sa fiche (double-clic pour l’ouvrir). ¦ Stablo postavljeno: {n} (dosegnuto ograničenje). Svaka kartica ostaje povezana sa svojim zapisom (dvoklik za otvaranje). ¦ Drevo postavljeno: {n} (dosežena omejitev). Vsaka kartica ostane povezana s svojim zapisom (dvoklik za odpiranje).
+Pas de micro disponible ici. ¦ Ovdje nema dostupnog mikrofona. ¦ Tukaj ni na voljo mikrofona.
+Titre du mémo ¦ Naslov podsjetnika ¦ Naslov beležke
+Mémo du {date} ¦ Podsjetnik od {date} ¦ Beležka z dne {date}
+Le son est rangé avec ce tableau (et dans les médias de l’app). ¦ Zvuk je spremljen uz ovu ploču (i u medije aplikacije). ¦ Zvok je shranjen s to tablo (in med medije aplikacije).
+Micro refusé : autorise-le dans les réglages de l’ordinateur. ¦ Mikrofon odbijen: dopusti ga u postavkama računala. ¦ Mikrofon zavrnjen: dovoli ga v nastavitvah računalnika.
+Arrête d’abord l’enregistrement. ¦ Najprije zaustavi snimanje. ¦ Najprej ustavi snemanje.
+Enregistre d’abord ton mémo. ¦ Najprije snimi svoj podsjetnik. ¦ Najprej posnemi svojo beležko.
+Mémo vocal ¦ Glasovni podsjetnik ¦ Glasovna beležka
+{n}, en colonnes (un bout de tableur). ¦ {n}, u stupcima (komad proračunske tablice). ¦ {n}, v stolpcih (košček preglednice).
+Mon modèle ¦ Moj predložak ¦ Moja predloga
+Modèle trop lourd pour être gardé (des formes faites d’une image ?). ¦ Predložak je pretežak za čuvanje (oblici napravljeni od slike?). ¦ Predloga je pretežka za shranjevanje (oblike iz slike?).
+Modèle « {name} » enregistré : il est dans « Nouveau tableau ». ¦ Predložak „{name}” spremljen: nalazi se u „Nova ploča”. ¦ Predloga »{name}« shranjena: najdeš jo v »Nova tabla«.
+Calque « {name} » supprimé (ses éléments restent sur le calque principal) ¦ Sloj „{name}” izbrisan (njegovi elementi ostaju na glavnom sloju) ¦ Plast »{name}« izbrisana (njeni elementi ostanejo na glavni plasti)
+Calque supprimé (ses éléments restent sur le calque principal) ¦ Sloj izbrisan (njegovi elementi ostaju na glavnom sloju) ¦ Plast izbrisana (njeni elementi ostanejo na glavni plasti)
+▶ Lancer la présentation ({n}) ¦ ▶ Pokreni prezentaciju ({n}) ¦ ▶ Zaženi predstavitev ({n})
+▶ Lancer la présentation ¦ ▶ Pokreni prezentaciju ¦ ▶ Zaženi predstavitev
+＋ La vue actuelle comme étape ¦ ＋ Trenutni prikaz kao korak ¦ ＋ Trenutni pogled kot korak
+＋ La sélection comme étape ¦ ＋ Odabir kao korak ¦ ＋ Izbor kot korak
+＋ Une étape par cadre ¦ ＋ Jedan korak po okviru ¦ ＋ En korak na okvir
+☰ Les étapes (renommer, ordre…) ¦ ☰ Koraci (preimenuj, redoslijed…) ¦ ☰ Koraki (preimenuj, vrstni red…)
+▶ Les étapes de la présentation ¦ ▶ Koraci prezentacije ¦ ▶ Koraki predstavitve
+Étape {n} ¦ Korak {n} ¦ Korak {n}
+{n} dans la présentation. ¦ {n} u prezentaciji. ¦ {n} v predstavitvi.
+Aucune étape. ¦ Nema koraka. ¦ Ni korakov.
+Étape remplacée par la vue actuelle. ¦ Korak zamijenjen trenutnim prikazom. ¦ Korak zamenjan s trenutnim pogledom.
+Ajoute d’abord des étapes (▶ Présenter → ＋ La vue actuelle comme étape) ou des cadres. ¦ Najprije dodaj korake (▶ Predstavi → ＋ Trenutni prikaz kao korak) ili okvire. ¦ Najprej dodaj korake (▶ Predstavi → ＋ Trenutni pogled kot korak) ali okvirje.
+Étape d’avant ¦ Prethodni korak ¦ Prejšnji korak
+Étape suivante ¦ Sljedeći korak ¦ Naslednji korak
+→ ou Espace ¦ → ili razmaknica ¦ → ali preslednica
+Quitter ¦ Izađi ¦ Izhod
+Remplacer par la vue actuelle ¦ Zamijeni trenutnim prikazom ¦ Zamenjaj s trenutnim pogledom
+Supprimer le tableau « {name} » et tous ses dossiers ? Les photos, sons et fiches posés dessus restent dans l’app. ¦ Izbrisati ploču „{name}” i sve njezine mape? Fotografije, zvukovi i zapisi postavljeni na nju ostaju u aplikaciji. ¦ Izbrišem tablo »{name}« in vse njene mape? Fotografije, zvoki in zapisi na njej ostanejo v aplikaciji.
+sans titre ¦ bez naslova ¦ brez naslova
+Tableau et dossiers supprimés. ¦ Ploča i mape izbrisane. ¦ Tabla in mape izbrisane.
+Tableau supprimé. ¦ Ploča izbrisana. ¦ Tabla izbrisana.
+Ce qu’on sait ¦ Što znamo ¦ Kaj vemo
+Sources à voir ¦ Izvori za pregled ¦ Viri za pregled
+Idée centrale ¦ Središnja ideja ¦ Osrednja zamisel
+Branche {n} ¦ Grana {n} ¦ Veja {n}
+Date {n} ¦ Datum {n} ¦ Datum {n}
+Arbre à la main ¦ Ručno nacrtano stablo ¦ Ročno narisano drevo
+Enfant ¦ Dijete ¦ Otrok
+Une toile libre. ¦ Slobodno platno. ¦ Prosto platno.
+Mur d’indices ¦ Zid tragova ¦ Stena sledi
+Fond de liège, une question au centre, des notes autour. ¦ Pluta u pozadini, pitanje u sredini, bilješke okolo. ¦ Pluta v ozadju, vprašanje na sredini, opombe okoli.
+Carte mentale ¦ Mentalna mapa ¦ Miselni vzorec
+Une idée au centre, des branches. ¦ Ideja u sredini, grane. ¦ Zamisel na sredini, veje.
+Une flèche du temps et des repères. ¦ Strelica vremena i oznake. ¦ Puščica časa in oznake.
+Des cases pour une famille, à relier. ¦ Okviri za obitelj, za povezivanje. ¦ Okvirji za družino, za povezovanje.
+Nouveau tableau ¦ Nova ploča ¦ Nova tabla
+Qui est le père de Marie ? ¦ Tko je Marijin otac? ¦ Kdo je Marijin oče?
+Piste 1, les témoins… ¦ Trag 1, svjedoci… ¦ Sled 1, priče…
+Pour commencer ¦ Za početak ¦ Za začetek
+Pour faire tes propres modèles : dans un tableau, ⤓ Exporter → ⭐ En faire un modèle. ¦ Za izradu vlastitih predložaka: na ploči ⤓ Izvezi → ⭐ Napravi od nje predložak. ¦ Za lastne predloge: na tabli ⤓ Izvozi → ⭐ Naredi iz nje predlogo.
+Supprimer ce modèle ¦ Izbriši ovaj predložak ¦ Izbriši to predlogo
+Modèle « {name} » supprimé ¦ Predložak „{name}” izbrisan ¦ Predloga »{name}« izbrisana
+Tableau sans titre ¦ Ploča bez naslova ¦ Tabla brez naslova
+Modèle introuvable. ¦ Predložak nije pronađen. ¦ Predloge ni mogoče najti.
+Libre ¦ Slobodno ¦ Prosto
+Supprimer ce tableau ¦ Izbriši ovu ploču ¦ Izbriši to tablo
+Chercher… (titre, partie) ¦ Traži… (naslov, dio) ¦ Išči… (naslov, del)
+Rechercher un tableau ¦ Traži ploču ¦ Išči tablo
+({n} prometteuses) ¦ (obećavajućih: {n}) ¦ (obetavnih: {n})
+{what} : {value} ¦ {what}: {value} ¦ {what}: {value}
+{col} : les plus récents ¦ {col}: najnovije ¦ {col}: najnovejše
+{col} : les plus anciens ¦ {col}: najstarije ¦ {col}: najstarejše
+{col} : du plus grand au plus petit ¦ {col}: od najvećeg do najmanjeg ¦ {col}: od največjega do najmanjšega
+{col} : du plus petit au plus grand ¦ {col}: od najmanjeg do najvećeg ¦ {col}: od najmanjšega do največjega
+{help} Un clic sur un titre l’ouvre ; un clic sur une colonne trie. ¦ {help} Klik na naslov ga otvara; klik na stupac razvrstava. ¦ {help} Klik na naslov ga odpre; klik na stolpec razvrsti.
+Un clic sur un titre l’ouvre ; un clic sur une colonne trie. ¦ Klik na naslov ga otvara; klik na stupac razvrstava. ¦ Klik na naslov ga odpre; klik na stolpec razvrsti.
+Rien ne correspond à ta recherche ¦ Ništa ne odgovara tvojoj pretrazi ¦ Nič ne ustreza tvojemu iskanju
+Les tableaux se créent dans Enquêtes → Tableaux. ¦ Ploče se stvaraju u Istrage → Ploče. ¦ Table se ustvarjajo v Preiskave → Table.
+Partie ¦ Dio ¦ Del
+Communes faites ¦ Obrađene općine ¦ Obdelane občine
+Archivé ¦ Arhivirano ¦ Arhivirano
+Tous les tableaux : ceux des enquêtes, des battues, des projets, et les tableaux libres. ¦ Sve ploče: one iz istraga, sustavnih pretraga, projekata i slobodne ploče. ¦ Vse table: tiste iz preiskav, sistematičnih iskanj, projektov in proste table.
+Les projets de l’Atelier de recherche, avec leur état et leur échéance. ¦ Projekti istraživačke Radionice, s njihovim stanjem i rokom. ¦ Projekti raziskovalne Delavnice z njihovim stanjem in rokom.
+Toutes les enquêtes, avec leurs pistes et leurs tableaux. ¦ Sve istrage, s njihovim tragovima i pločama. ¦ Vse preiskave z njihovimi sledmi in tablami.
+Toutes les battues, commune par commune. ¦ Sve sustavne pretrage, općinu po općinu. ¦ Vsa sistematična iskanja, občino za občino.
+Chercher un tableau… (titre, enquête, battue) ¦ Traži ploču… (naslov, istraga, sustavna pretraga) ¦ Išči tablo… (naslov, preiskava, sistematično iskanje)
+Chercher une battue… (titre, commune, personne) ¦ Traži sustavnu pretragu… (naslov, općina, osoba) ¦ Išči sistematično iskanje… (naslov, občina, oseba)
+Chercher un projet… (titre, sorte) ¦ Traži projekt… (naslov, vrsta) ¦ Išči projekt… (naslov, vrsta)
+Chercher une enquête… (titre, personne) ¦ Traži istragu… (naslov, osoba) ¦ Išči preiskavo… (naslov, oseba)
+Une toile libre, comme un grand tableau de liège : on y pose des notes, des formes, des flèches, des dessins, des photos, des sons, des PDF, des fiches, des écrans de l’app… Chaque tableau peut être libre ou rangé dans une enquête, une battue ou un projet de l’Atelier. ¦ Slobodno platno, kao velika ploča od pluta: stavljaš bilješke, oblike, strelice, crteže, fotografije, zvukove, PDF-ove, zapise, zaslone aplikacije… Svaka ploča može biti slobodna ili spremljena u istragu, sustavnu pretragu ili projekt Radionice. ¦ Prosto platno, kot velika plutovinasta tabla: nanjo postaviš opombe, oblike, puščice, risbe, fotografije, zvoke, PDF-je, zapise, zaslone aplikacije… Vsaka tabla je lahko prosta ali shranjena v preiskavi, sistematičnem iskanju ali projektu Delavnice.
+Aucun tableau ici. ¦ Ovdje nema ploča. ¦ Tukaj ni tabel.
+Aucun tableau pour l’instant ¦ Još nema ploča ¦ Še ni tabel
+Vide, mur d’indices, carte mentale, frise… ¦ Prazna, zid tragova, mentalna mapa, vremenska crta… ¦ Prazna, stena sledi, miselni vzorec, časovnica…
+Des toiles libres pour chercher, relier, montrer : notes, flèches, photos, sons, fiches… ¦ Slobodna platna za istraživanje, povezivanje, prikazivanje: bilješke, strelice, fotografije, zvukovi, zapisi… ¦ Prosta platna za iskanje, povezovanje, prikazovanje: opombe, puščice, fotografije, zvoki, zapisi…
+Dans une enquête ¦ U istrazi ¦ V preiskavi
+Dans l’Atelier ¦ U Radionici ¦ V Delavnici
+＋ Nouveau tableau ici ¦ ＋ Nova ploča ovdje ¦ ＋ Nova tabla tukaj
+Un tableau libre pour cette recherche : notes, flèches, photos, fiches… Tu peux en faire plusieurs (une « partie » chacun). ¦ Slobodna ploča za ovo istraživanje: bilješke, strelice, fotografije, zapisi… Možeš ih napraviti više (svaka je jedan „dio”). ¦ Prosta tabla za to raziskovanje: opombe, puščice, fotografije, zapisi… Narediš jih lahko več (vsaka je en »del«).
+enquêtes ¦ istrage ¦ preiskave
+TABLEAU ¦ PLOČA ¦ TABLA
+TABLEAUX ¦ PLOČE ¦ TABLE
+Ranger le tableau ¦ Smjesti ploču ¦ Umesti tablo
+Ranger ¦ Smjesti ¦ Umesti
+Laquelle ¦ Koja ¦ Katera
+(facultatif : pour avoir plusieurs tableaux, « Piste 1 », « Les témoins »…) ¦ (neobavezno: za više ploča, „Trag 1”, „Svjedoci”…) ¦ (neobvezno: za več tabel, »Sled 1«, »Priče«…)
+(facultatif : piste 1, les témoins, la branche paternelle…) ¦ (neobavezno: trag 1, svjedoci, očeva grana…) ¦ (neobvezno: sled 1, priče, očetova veja…)
+(aucune) ¦ (nijedna) ¦ (nobena)
+▭ Rectangle ¦ ▭ Pravokutnik ¦ ▭ Pravokotnik
+▢ Arrondi ¦ ▢ Zaobljeni ¦ ▢ Zaobljen
+◯ Ovale ¦ ◯ Oval ¦ ◯ Oval
+△ Triangle ¦ △ Trokut ¦ △ Trikotnik
+☆ Étoile ¦ ☆ Zvijezda ¦ ☆ Zvezda
+⬡ Hexagone ¦ ⬡ Šesterokut ¦ ⬡ Šestkotnik
+💬 Bulle ¦ 💬 Oblačić ¦ 💬 Oblaček
+☁ Nuage ¦ ☁ Oblak ¦ ☁ Oblak
+pinceau|Stylo ¦ Kemijska olovka ¦ Pisalo
+pinceau|Monoligne ¦ Monolinija ¦ Enakomerna črta
+pinceau|Marqueur ¦ Flomaster ¦ Flomaster
+pinceau|Crayon ¦ Olovka ¦ Svinčnik
+pinceau|Pastel ¦ Pastel ¦ Pastel
+pinceau|Stylo-plume ¦ Nalivpero ¦ Nalivno pero
+pinceau|Calame ¦ Trstika ¦ Trstično pero
+pinceau|Pinceau ¦ Kist ¦ Čopič
+pinceau|Aquarelle ¦ Akvarel ¦ Akvarel
+pinceau|Remplissage ¦ Ispuna ¦ Polnilo
+pinceau|Surligneur ¦ Marker ¦ Označevalnik
+pinceau|Craie ¦ Kreda ¦ Kreda
+pinceau|Néon ¦ Neon ¦ Neon
+pinceau|Aérographe ¦ Zračni kist ¦ Zračni čopič
+pinceau|Pointillé ¦ Točkasto ¦ Pikčasto
+Néon ¦ Neon ¦ Neon
+Pointillé ¦ Točkasto ¦ Pikčasto
+trait|— droit ¦ — ravna ¦ — ravna
+trait|⌒ courbe ¦ ⌒ zakrivljena ¦ ⌒ ukrivljena
+trait|⌐ coudé ¦ ⌐ lomljena ¦ ⌐ lomljena
+trait|∿ vague ¦ ∿ valovita ¦ ∿ valovita
+trait|⩘ zigzag ¦ ⩘ cik-cak ¦ ⩘ cikcak
+trait|⤳ contourne les éléments ¦ ⤳ zaobilazi elemente ¦ ⤳ obide elemente
+⌐ coudé ¦ ⌐ lomljena ¦ ⌐ lomljena
+⤳ contourne les éléments ¦ ⤳ zaobilazi elemente ¦ ⤳ obide elemente
+fond|Fond à points ¦ Točkasta pozadina ¦ Pikčasto ozadje
+fond|Quadrillé ¦ Kvadratna mreža ¦ Mreža
+fond|Lignes ¦ Crte ¦ Črte
+fond|Uni ¦ Jednolična ¦ Enobarvno
+fond|Papier ¦ Papir ¦ Papir
+fond|Liège ¦ Pluto ¦ Pluta
+fond|Sombre ¦ Tamna ¦ Temno
+fond|Couleur à choisir… ¦ Boja po izboru… ¦ Barva po izbiri…
+Fond à points ¦ Točkasta pozadina ¦ Pikčasto ozadje
+Liège ¦ Pluto ¦ Pluta
+Couleur à choisir… ¦ Boja po izboru… ¦ Barva po izbiri…
+Motif sur la couleur ¦ Uzorak na boji ¦ Vzorec na barvi
+motif|sans motif ¦ bez uzorka ¦ brez vzorca
+motif|points ¦ točke ¦ pike
+motif|quadrillé ¦ kvadratna mreža ¦ mreža
+motif|lignes ¦ crte ¦ črte
+quadrillé ¦ kvadratna mreža ¦ mreža
+Instantanés : figer l’état du tableau, y revenir, en faire un nouveau tableau ¦ Snimke stanja: zamrzni stanje ploče, vrati mu se, napravi od njega novu ploču ¦ Posnetki stanja: zamrzni stanje table, vrni se nanj, naredi iz njega novo tablo
+📸 Instantanés ¦ 📸 Snimke stanja ¦ 📸 Posnetki stanja
+Créer un nouveau tableau à partir de celui-ci ¦ Stvori novu ploču od ove ¦ Ustvari novo tablo iz te
+PDF, image PNG ou JPG, impression, fichier du tableau, modèle ¦ PDF, slika PNG ili JPG, ispis, datoteka ploče, predložak ¦ PDF, slika PNG ali JPG, tisk, datoteka table, predloga
+Les pistes à vérifier : clic pour aller à la suivante ¦ Tragovi za provjeru: klik za prelazak na sljedeći ¦ Sledi za preverjanje: klik za naslednjo
+Chercher dans le tableau ¦ Traži na ploči ¦ Išči na tabli
+Grille aimantée et guides d’alignement ¦ Privlačna mreža i vodilice za poravnanje ¦ Pripenjalna mreža in vodila za poravnavo
+Mini-carte du tableau (montrer ou cacher) ¦ Mini-karta ploče (prikaži ili sakrij) ¦ Mini zemljevid table (prikaži ali skrij)
+Présenter : un parcours d’étapes ¦ Predstavi: niz koraka ¦ Predstavi: pot korakov
+▶ Présenter ¦ ▶ Predstavi ¦ ▶ Predstavi
+Réglages des tableaux : disposition, ordre des outils, boutons montrés ou cachés ¦ Postavke ploča: raspored, redoslijed alata, prikazani ili skriveni gumbi ¦ Nastavitve tabel: postavitev, vrstni red orodij, prikazani ali skriti gumbi
+Verrouiller ou déverrouiller tout le tableau ¦ Zaključaj ili otključaj cijelu ploču ¦ Zakleni ali odkleni celo tablo
+Supprimer ce tableau (et ses dossiers) ¦ Izbriši ovu ploču (i njezine mape) ¦ Izbriši to tablo (in njene mape)
+Revenir aux tableaux ¦ Natrag na ploče ¦ Nazaj na table
+Titre du tableau ¦ Naslov ploče ¦ Naslov table
+État du tableau ¦ Stanje ploče ¦ Stanje table
+● En cours ¦ ● U tijeku ¦ ● V teku
+⏸ En pause ¦ ⏸ Pauzirano ¦ ⏸ Na premoru
+✓ Terminé ¦ ✓ Završeno ¦ ✓ Končano
+Enregistrer maintenant (le tableau s’enregistre aussi tout seul) ¦ Spremi sada (ploča se sprema i sama) ¦ Shrani zdaj (tabla se shranjuje tudi sama)
+Ajouter un fichier, un média, une fiche, un écran de l’app… ¦ Dodaj datoteku, medij, zapis, zaslon aplikacije… ¦ Dodaj datoteko, medij, zapis, zaslon aplikacije…
+Zoom : ajuster à la sélection, adapter à la fenêtre… ¦ Zum: prilagodi odabiru, prilagodi prozoru… ¦ Povečava: prilagodi izboru, prilagodi oknu…
+Montrer ce qui est groupé ¦ Prikaži što je grupirano ¦ Prikaži, kaj je združeno
+Lâche ici : images, sons, vidéos, PDF… ¦ Pusti ovdje: slike, zvukove, videozapise, PDF-ove… ¦ Spusti sem: slike, zvoke, videe, PDF-je…
+Un tableau vide. ¦ Prazna ploča. ¦ Prazna tabla.
+Choisis un outil à gauche, ou glisse ici des photos, des sons, des PDF… « ＋ Ajouter » pose une fiche, un écran de l’app, un widget, un recueil, une étiquette ou un dossier. Double-clic pour écrire. ¦ Odaberi alat lijevo ili povuci ovamo fotografije, zvukove, PDF-ove… „＋ Dodaj” postavlja zapis, zaslon aplikacije, widget, zbirku, oznaku ili mapu. Dvoklik za pisanje. ¦ Izberi orodje na levi ali povleci sem fotografije, zvoke, PDF-je… »＋ Dodaj« postavi zapis, zaslon aplikacije, gradnik, zbirko, oznako ali mapo. Dvoklik za pisanje.
+Revenir à la police du thème ¦ Natrag na font teme ¦ Nazaj na pisavo teme
+Aimanter : grille aimantée et guides d’alignement ¦ Privlačenje: privlačna mreža i vodilice za poravnanje ¦ Pripenjanje: pripenjalna mreža in vodila za poravnavo
+Choisis à droite une personne, une famille ou une enquête, ou pose des repères. ¦ Odaberi desno osobu, obitelj ili istragu ili postavi oznake. ¦ Na desni izberi osebo, družino ali preiskavo ali postavi oznake.
+Glisser pour plier · double-clic pour enlever ce coude ¦ Povuci za savijanje · dvoklik za uklanjanje ovog loma ¦ Povleci za upogib · dvoklik za odstranitev tega pregiba
+Glisser pour ajouter un coude ¦ Povuci za dodavanje loma ¦ Povleci za dodajanje pregiba
+Modifié… ¦ Izmijenjeno… ¦ Spremenjeno…
+Enregistré ✓ ¦ Spremljeno ✓ ¦ Shranjeno ✓
+⚠ Modifié dans une autre fenêtre ¦ ⚠ Izmijenjeno u drugom prozoru ¦ ⚠ Spremenjeno v drugem oknu
+Envoi des fichiers… ¦ Slanje datoteka… ¦ Pošiljanje datotek…
+efface seulement ce que tu touches ¦ briše samo ono što dodirneš ¦ izbriše samo tisto, česar se dotakneš
+🩹 Gomme fine ¦ 🩹 Fina gumica ¦ 🩹 Fina radirka
+🧽 Gomme à traits ¦ 🧽 Gumica za poteze ¦ 🧽 Radirka za poteze
+enlève le trait entier ¦ uklanja cijeli potez ¦ odstrani celo potezo
+Autre couleur pour les notes ¦ Druga boja za bilješke ¦ Druga barva za opombe
+Tire une flèche d’un élément à un autre : elle les suit quand on les déplace. ¦ Povuci strelicu od jednog elementa do drugog: prati ih kad ih pomičeš. ¦ Potegni puščico od enega elementa do drugega: sledi jima, ko ju premikaš.
+Clique où poser le tableur. ¦ Klikni gdje želiš postaviti proračunsku tablicu. ¦ Klikni, kam želiš postaviti preglednico.
+Glisse pour te déplacer ; molette ou deux doigts aussi ; ⌘ + molette pour zoomer. ¦ Povuci za kretanje; kotačić ili dva prsta također; ⌘ + kotačić za zumiranje. ¦ Povleci za premikanje; tudi kolesce ali dva prsta; ⌘ + kolesce za povečavo.
+Clic : choisir · ⇧ + clic : en ajouter · ⌥ / Alt + glisser : dupliquer · glisser dans le vide : en choisir plusieurs · double-clic : écrire ou ouvrir. ¦ Klik: odaberi · ⇧ + klik: dodaj · ⌥ / Alt + povlačenje: dupliciraj · povlačenje po praznom: odaberi više · dvoklik: piši ili otvori. ¦ Klik: izberi · ⇧ + klik: dodaj · ⌥ / Alt + vlečenje: podvoji · vlečenje po praznem: izberi več · dvoklik: piši ali odpri.
+Les groupes sont montrés. ¦ Grupe su prikazane. ¦ Skupine so prikazane.
+Groupes cachés. ¦ Grupe skrivene. ¦ Skupine skrite.
+Fond du cadre ¦ Pozadina okvira ¦ Ozadje okvirja
+Bord du cadre ¦ Rub okvira ¦ Rob okvirja
+Épaisseur du bord ¦ Debljina ruba ¦ Debelina roba
+Marge dans le cadre ¦ Unutarnja margina okvira ¦ Notranji rob okvirja
+Arrondi du cadre ¦ Zaobljenost okvira ¦ Zaobljenost okvirja
+Position le long du trait ¦ Položaj duž crte ¦ Položaj vzdolž črte
+sur le trait ¦ na crti ¦ na črti
+au-dessus ¦ iznad ¦ nad
+en dessous ¦ ispod ¦ pod
+Écart avec le trait ¦ Razmak od crte ¦ Razmik od črte
+suivre l’angle du trait ¦ prati kut crte ¦ sledi kotu črte
+Fond du tableau ¦ Pozadina ploče ¦ Ozadje table
+⌘Z annuler · ⌘D dupliquer · ⌘G grouper (⇧ pour dégrouper) · ⌘L verrouiller · ] [ devant / derrière · flèches pour pousser · espace pour se déplacer · ⌘ + molette pour zoomer · coller une image ou une adresse web. ¦ ⌘Z poništi · ⌘D dupliciraj · ⌘G grupiraj (⇧ za razgrupiranje) · ⌘L zaključaj · ] [ naprijed / natrag · strelice za pomicanje · razmaknica za kretanje · ⌘ + kotačić za zumiranje · zalijepi sliku ili web-adresu. ¦ ⌘Z razveljavi · ⌘D podvoji · ⌘G združi (⇧ za razdružitev) · ⌘L zakleni · ] [ spredaj / zadaj · puščice za premik · preslednica za premikanje · ⌘ + kolesce za povečavo · prilepi sliko ali spletni naslov.
+Couleurs, formes, polices, tailles, ordre des menus : Réglages → Tableaux. ¦ Boje, oblici, fontovi, veličine, redoslijed izbornika: Postavke → Ploče. ¦ Barve, oblike, pisave, velikosti, vrstni red menijev: Nastavitve → Table.
+Puces et numéros ¦ Grafičke oznake i brojevi ¦ Oznake in številčenje
+• Puce ¦ • Grafička oznaka ¦ • Oznaka
+1. Nombres ¦ 1. Brojevi ¦ 1. Številke
+I. Chiffres romains ¦ I. Rimski brojevi ¦ I. Rimske številke
+a. Lettres ¦ a. Slova ¦ a. Črke
+A. Lettres capitales ¦ A. Velika slova ¦ A. Velike črke
+– Tiret ¦ – Crtica ¦ – Pomišljaj
+☐ Cases à cocher ¦ ☐ Potvrdni okviri ¦ ☐ Potrditvena polja
+Les graisses exactes de la police : 🖥 ci-dessous (polices de l’ordinateur). ¦ Točne debljine fonta: 🖥 ispod (fontovi računala). ¦ Točne debeline pisave: 🖥 spodaj (pisave računalnika).
+Lire les graisses exactes des polices de l’ordinateur ¦ Pročitaj točne debljine fontova računala ¦ Preberi točne debeline pisav računalnika
+Couleur des pointes ¦ Boja vrhova ¦ Barva konic
+même couleur que le trait ¦ ista boja kao crta ¦ ista barva kot črta
+(comme le trait) ¦ (kao crta) ¦ (kot črta)
+Pointe au début ¦ Vrh na početku ¦ Konica na začetku
+Pointe à la fin ¦ Vrh na kraju ¦ Konica na koncu
+Taille des pointes ¦ Veličina vrhova ¦ Velikost konic
+Forme du trait ¦ Oblik crte ¦ Oblika črte
+frère de, a écrit à… ¦ brat od, pisao je… ¦ brat od, pisal je…
+＋ ligne ¦ ＋ redak ¦ ＋ vrstica
+＋ colonne ¦ ＋ stupac ¦ ＋ stolpec
+− ligne ¦ − redak ¦ − vrstica
+− colonne ¦ − stupac ¦ − stolpec
+Ajouter une ligne dessous ¦ Dodaj redak ispod ¦ Dodaj vrstico spodaj
+Enlever la ligne ¦ Ukloni redak ¦ Odstrani vrstico
+Ajouter une colonne à droite ¦ Dodaj stupac desno ¦ Dodaj stolpec desno
+Enlever la colonne ¦ Ukloni stupac ¦ Odstrani stolpec
+Fusionner les cellules choisies ¦ Spoji odabrane ćelije ¦ Spoji izbrane celice
+⊞ Fusionner ¦ ⊞ Spoji ¦ ⊞ Spoji
+Séparer les cellules ¦ Razdvoji ćelije ¦ Razdeli celice
+⊟ Séparer ¦ ⊟ Razdvoji ¦ ⊟ Razdeli
+Colonne plus étroite ¦ Uži stupac ¦ Ožji stolpec
+Colonne plus large ¦ Širi stupac ¦ Širši stolpec
+Vider la cellule ¦ Isprazni ćeliju ¦ Izprazni celico
+⌫ vider ¦ ⌫ isprazni ¦ ⌫ izprazni
+Le tableur en grand : plus de fonctions, tri, filtres, Excel… puis « ✓ Enregistrer et revenir » ¦ Proračunska tablica u velikom: više funkcija, razvrstavanje, filtri, Excel… zatim „✓ Spremi i vrati se” ¦ Preglednica v velikem: več funkcij, razvrščanje, filtri, Excel… nato »✓ Shrani in se vrni«
+Télécharger en CSV (Excel, Numbers…) ¦ Preuzmi kao CSV (Excel, Numbers…) ¦ Prenesi kot CSV (Excel, Numbers…)
+première ligne en titre ¦ prvi redak kao naslov ¦ prva vrstica kot naslov
+première colonne en titre ¦ prvi stupac kao naslov ¦ prvi stolpec kot naslov
+une ligne sur deux teintée ¦ svaki drugi redak obojen ¦ vsaka druga vrstica obarvana
+Fond des titres ¦ Pozadina naslova ¦ Ozadje naslovov
+Fond de la cellule (les cellules choisies) ¦ Pozadina ćelije (odabrane ćelije) ¦ Ozadje celice (izbrane celice)
+Fond de la cellule ¦ Pozadina ćelije ¦ Ozadje celice
+aperçu vivant dans le tableau ¦ živi pregled na ploči ¦ živi predogled na tabli
+La fiche montre ¦ Zapis prikazuje ¦ Zapis prikazuje
+Lu dans la fiche à chaque ouverture du tableau : si la fiche change, la carte suit. ¦ Čita se iz zapisa pri svakom otvaranju ploče: ako se zapis promijeni, kartica ga prati. ¦ Prebere se iz zapisa ob vsakem odprtju table: če se zapis spremeni, kartica sledi.
+de la personne, son couple et ses enfants ¦ osobe, njezina para i djece ¦ osebe, njenega para in otrok
+👤 Changer de personne ¦ 👤 Promijeni osobu ¦ 👤 Zamenjaj osebo
+aucune fiche (seulement mes repères) ¦ nijedan zapis (samo moje oznake) ¦ noben zapis (samo moje oznake)
+une personne et sa famille ¦ osoba i njezina obitelj ¦ oseba in njena družina
+la personne d’une enquête ¦ osoba iz istrage ¦ oseba iz preiskave
+👤 Choisir la personne ¦ 👤 Odaberi osobu ¦ 👤 Izberi osebo
+Une commune, un lieu… ¦ Općina, mjesto… ¦ Občina, kraj…
+relier les lieux dans l’ordre (le parcours) ¦ poveži mjesta redom (ruta) ¦ poveži kraje po vrsti (pot)
+Poser un repère ¦ Postavi oznaku ¦ Postavi oznako
+Lien tout prêt ¦ Gotova veza ¦ Pripravljena povezava
+Glisse un « ＋ » sur le trait pour le plier en plusieurs segments. ¦ Povuci „＋” na crti da je saviješ u više segmenata. ¦ Povleci »＋« na črti, da jo upogneš v več odsekov.
+Aligner ¦ Poravnaj ¦ Poravnaj
+Centrés (de gauche à droite) ¦ Centrirano (slijeva nadesno) ¦ Na sredini (od leve proti desni)
+Centrés (de haut en bas) ¦ Centrirano (odozgo prema dolje) ¦ Na sredini (od zgoraj navzdol)
+Même écart de gauche à droite ¦ Isti razmak slijeva nadesno ¦ Enak razmik od leve proti desni
+Même écart de haut en bas ¦ Isti razmak odozgo prema dolje ¦ Enak razmik od zgoraj navzdol
+Même largeur que le premier choisi ¦ Ista širina kao prvi odabrani ¦ Enaka širina kot prvi izbrani
+Même hauteur que le premier choisi ¦ Ista visina kao prvi odabrani ¦ Enaka višina kot prvi izbrani
+Répartir ¦ Rasporedi ¦ Razporedi
+⇹ en largeur ¦ ⇹ vodoravno ¦ ⇹ vodoravno
+⇳ en hauteur ¦ ⇳ okomito ¦ ⇳ navpično
+═ même largeur ¦ ═ ista širina ¦ ═ enaka širina
+‖ même hauteur ¦ ‖ ista visina ¦ ‖ enaka višina
+🔓 Déverrouiller ¦ 🔓 Otključaj ¦ 🔓 Odkleni
+🔒 Verrouiller ¦ 🔒 Zaključaj ¦ 🔒 Zakleni
+⧉ Grouper ¦ ⧉ Grupiraj ¦ ⧉ Združi
+Dégrouper ¦ Razgrupiraj ¦ Razdruži
+Faire de ce dessin une forme à toi (réutilisable) ¦ Napravi od ovog crteža vlastiti oblik (za ponovnu upotrebu) ¦ Naredi iz te risbe svojo obliko (za ponovno uporabo)
+✏️ En faire une forme ¦ ✏️ Napravi od njega oblik ¦ ✏️ Naredi iz nje obliko
+Devant ¦ Naprijed ¦ Spredaj
+Derrière ¦ Natrag ¦ Zadaj
+Image du web ¦ Slika s weba ¦ Slika s spleta
+Lien web ¦ Web-poveznica ¦ Spletna povezava
+Frise vivante ¦ Živa vremenska crta ¦ Živa časovnica
+Rechercher une forme ¦ Traži oblik ¦ Išči obliko
+Créer une forme à partir d’une autre (retourner, tourner, étirer, ajouter, percer) ¦ Stvori oblik od drugog (okreni, zakreni, rastegni, dodaj, probuši) ¦ Ustvari obliko iz druge (obrni, zasukaj, raztegni, dodaj, preluknjaj)
+＋ Créer une forme ¦ ＋ Stvori oblik ¦ ＋ Ustvari obliko
+✒️ Plume (tracé) ¦ ✒️ Pero (putanja) ¦ ✒️ Pero (pot)
+✍︎ À partir de mon dessin ¦ ✍︎ Iz mog crteža ¦ ✍︎ Iz moje risbe
+🖼 À partir d’une image ¦ 🖼 Iz slike ¦ 🖼 Iz slike
+Fermer le tracé en cours ¦ Zatvori trenutnu putanju ¦ Zapri trenutno pot
+Commencer un autre tracé (un trou s’il est dans la forme) ¦ Započni drugu putanju (rupa ako je unutar oblika) ¦ Začni drugo pot (luknja, če je znotraj oblike)
+Supprimer le point choisi ¦ Izbriši odabranu točku ¦ Izbriši izbrano točko
+Annuler le dernier point ¦ Poništi zadnju točku ¦ Razveljavi zadnjo točko
+◯ Fermer ¦ ◯ Zatvori ¦ ◯ Zapri
+＋ Nouveau tracé ¦ ＋ Nova putanja ¦ ＋ Nova pot
+✕ Point ¦ ✕ Točka ¦ ✕ Točka
+Une image PNG avec un fond transparent donne sa silhouette. Sinon, coche : ce qui est sombre devient la forme. ¦ Slika PNG s prozirnom pozadinom daje svoju siluetu. Inače označi: ono što je tamno postaje oblik. ¦ Slika PNG s prosojnim ozadjem da svojo silhueto. Sicer označi: kar je temno, postane oblika.
+le sombre devient la forme (images sans transparence) ¦ tamno postaje oblik (slike bez prozirnosti) ¦ temno postane oblika (slike brez prosojnosti)
+Choisis d’abord un dessin sur le tableau. ¦ Najprije odaberi crtež na ploči. ¦ Najprej izberi risbo na tabli.
+Ferme la forme : au moins trois points, puis clic sur le premier (ou « ◯ Fermer »). ¦ Zatvori oblik: najmanje tri točke, zatim klik na prvu (ili „◯ Zatvori”). ¦ Zapri obliko: vsaj tri točke, nato klik na prvo (ali »◯ Zapri«).
+Ajouter au tableau ¦ Dodaj na ploču ¦ Dodaj na tablo
+📎 Des fichiers ¦ 📎 Datoteke ¦ 📎 Datoteke
+📁 Choisir des fichiers ¦ 📁 Odaberi datoteke ¦ 📁 Izberi datoteke
+Images, GIF, sons, vidéos, PDF (ou glisse-les sur le tableau, ou colle une image). ¦ Slike, GIF-ovi, zvukovi, videozapisi, PDF-ovi (ili ih povuci na ploču ili zalijepi sliku). ¦ Slike, GIF-i, zvoki, videi, PDF-ji (ali jih povleci na tablo ali prilepi sliko).
+🖼 Un média de l’app ¦ 🖼 Medij iz aplikacije ¦ 🖼 Medij iz aplikacije
+Un média de l’app ¦ Medij iz aplikacije ¦ Medij iz aplikacije
+Poser sur le tableau ¦ Postavi na ploču ¦ Postavi na tablo
+Choisir une image, un son, une vidéo… ¦ Odaberi sliku, zvuk, videozapis… ¦ Izberi sliko, zvok, video…
+🌐 D’ailleurs ¦ 🌐 Odnekud drugdje ¦ 🌐 Od drugod
+Adresse d’une image ou d’un site ¦ Adresa slike ili web-mjesta ¦ Naslov slike ali spletnega mesta
+👤 Une fiche ¦ 👤 Zapis ¦ 👤 Zapis
+Poser la fiche ¦ Postavi zapis ¦ Postavi zapis
+📺 Un écran de l’app ¦ 📺 Zaslon aplikacije ¦ 📺 Zaslon aplikacije
+Une liste, un diagramme, une statistique, la carte, un village, une de tes listes… ¦ Popis, dijagram, statistika, karta, selo, jedan od tvojih popisa… ¦ Seznam, diagram, statistika, zemljevid, vas, eden od tvojih seznamov…
+avec l’aperçu vivant ¦ sa živim pregledom ¦ z živim predogledom
+Poser l’écran ¦ Postavi zaslon ¦ Postavi zaslon
+✨ Un de mes widgets ¦ ✨ Jedan od mojih widgeta ¦ ✨ Eden od mojih gradnikov
+Poser le widget ¦ Postavi widget ¦ Postavi gradnik
+Crée d’abord un widget (Réglages → Éditeur de widgets). ¦ Najprije stvori widget (Postavke → Uređivač widgeta). ¦ Najprej ustvari gradnik (Nastavitve → Urejevalnik gradnikov).
+Titre du recueil ¦ Naslov zbirke ¦ Naslov zbirke
+📚 Un recueil ¦ 📚 Zbirka ¦ 📚 Zbirka
+🏷 Une étiquette ¦ 🏷 Oznaka ¦ 🏷 Oznaka
+ou un mot à toi ¦ ili tvoja riječ ¦ ali tvoja beseda
+Nom du dossier ¦ Naziv mape ¦ Ime mape
+Poser ce mot ¦ Postavi ovu riječ ¦ Postavi to besedo
+▦ Un tableur ¦ ▦ Proračunska tablica ¦ ▦ Preglednica
+Une grille à remplir, avec des formules (=SOMME…) ; on peut y coller un bout d’Excel ou de Numbers. ¦ Mreža za ispunjavanje, s formulama (=SOMME…); možeš zalijepiti komad Excela ili Numbersa. ¦ Mreža za izpolnjevanje, s formulami (=SOMME…); vanjo lahko prilepiš košček Excela ali Numbers.
+Poser un tableur ¦ Postavi proračunsku tablicu ¦ Postavi preglednico
+📁 Un dossier ¦ 📁 Mapa ¦ 📁 Mapa
+Un tableau dans le tableau : double-clic pour y entrer. ¦ Ploča u ploči: dvoklik za ulazak. ¦ Tabla v tabli: dvoklik za vstop.
+Créer le dossier ¦ Stvori mapu ¦ Ustvari mapo
+🌳 Un arbre automatique ¦ 🌳 Automatsko stablo ¦ 🌳 Samodejno drevo
+Une personne, et ses parents, grands-parents ou enfants posés en fiches reliées par des flèches. ¦ Osoba i njezini roditelji, djedovi i bake ili djeca postavljeni kao zapisi povezani strelicama. ¦ Oseba in njeni starši, stari starši ali otroci, postavljeni kot zapisi, povezani s puščicami.
+ses ancêtres ¦ njezini preci ¦ njeni predniki
+ses descendants ¦ njezini potomci ¦ njeni potomci
+sa famille proche ¦ njezina uža obitelj ¦ njena ožja družina
+avec les conjoints ¦ s bračnim drugovima ¦ z zakoncema
+flèches (sinon des traits) ¦ strelice (inače crte) ¦ puščice (sicer črte)
+Poser l’arbre ¦ Postavi stablo ¦ Postavi drevo
+🗓 Une frise vivante ¦ 🗓 Živa vremenska crta ¦ 🗓 Živa časovnica
+Les événements d’une personne (ou de sa famille) placés tout seuls sur une ligne du temps ; elle suit la fiche. ¦ Događaji osobe (ili njezine obitelji) sami postavljeni na vremensku crtu; prati zapis. ¦ Dogodki osebe (ali njene družine), samodejno postavljeni na časovnico; sledi zapisu.
+Poser la frise ¦ Postavi vremensku crtu ¦ Postavi časovnico
+🗺 Une carte ¦ 🗺 Karta ¦ 🗺 Zemljevid
+Les lieux d’une personne, de sa famille ou d’une enquête ; tu peux y poser tes repères. ¦ Mjesta osobe, njezine obitelji ili istrage; možeš dodati vlastite oznake. ¦ Kraji osebe, njene družine ali preiskave; dodaš lahko svoje oznake.
+Nom de la personne (facultatif) ¦ Ime osobe (neobavezno) ¦ Ime osebe (neobvezno)
+la personne et sa famille ¦ osoba i njezina obitelj ¦ oseba in njena družina
+personne : seulement mes repères ¦ nitko: samo moje oznake ¦ nihče: samo moje oznake
+Poser la carte ¦ Postavi kartu ¦ Postavi zemljevid
+▭ Un cadre ¦ ▭ Okvir ¦ ▭ Okvir
+Une zone nommée (« Branche paternelle », « Sources à voir ») : ce qui est dedans bouge avec elle ; on peut la replier. ¦ Imenovano područje („Očeva grana”, „Izvori za pregled”): ono što je unutra pomiče se s njim; može se sklopiti. ¦ Poimenovano območje (»Očetova veja«, »Viri za pregled«): kar je v njem, se premika z njim; lahko se strne.
+Nom du cadre ¦ Naziv okvira ¦ Ime okvirja
+Poser le cadre ¦ Postavi okvir ¦ Postavi okvir
+🎙 Un mémo vocal ¦ 🎙 Glasovni podsjetnik ¦ 🎙 Glasovna beležka
+Enregistre ta voix ici : le son est rangé avec le tableau et posé dessus. ¦ Snimi svoj glas ovdje: zvuk se sprema uz ploču i postavlja na nju. ¦ Posnemi svoj glas tukaj: zvok se shrani s tablo in postavi nanjo.
+🎙 Enregistrer ¦ 🎙 Snimi ¦ 🎙 Posnemi
+🎙 Mémo vocal ¦ 🎙 Glasovni podsjetnik ¦ 🎙 Glasovna beležka
+Un fichier « .lcnda-tableau.json » (⤓ Exporter → Fichier léger ou complet) : il devient un nouveau tableau. ¦ Datoteka „.lcnda-tableau.json” (⤓ Izvezi → Lagana ili potpuna datoteka): postaje nova ploča. ¦ Datoteka ».lcnda-tableau.json« (⤓ Izvozi → Lahka ali celotna datoteka): postane nova tabla.
+Tableau verrouillé : clic pour le déverrouiller ¦ Ploča zaključana: klikni da je otključaš ¦ Tabla zaklenjena: klikni, da jo odkleneš
+Verrouiller tout le tableau ¦ Zaključaj cijelu ploču ¦ Zakleni celo tablo
+Tableau verrouillé : on peut le regarder et ouvrir ce qu’il contient, rien ne bouge. ¦ Ploča zaključana: možeš je gledati i otvarati ono što sadrži, ništa se ne pomiče. ¦ Tabla zaklenjena: lahko jo gledaš in odpiraš, kar vsebuje, nič se ne premakne.
+Tableau déverrouillé. ¦ Ploča otključana. ¦ Tabla odklenjena.
+Un projet de l’Atelier ¦ Projekt Radionice ¦ Projekt Delavnice
+Un lieu (sa commune) ¦ Mjesto (njegova općina) ¦ Kraj (njegova občina)
+Un média (photo, acte, son…) ¦ Medij (fotografija, matični zapis, zvuk…) ¦ Medij (fotografija, matični vpis, zvok…)
+Une famille (un couple) ¦ Obitelj (par) ¦ Družina (par)
+Un événement ¦ Događaj ¦ Dogodek
+Un animal ¦ Životinja ¦ Žival
+Un autre tableau ¦ Druga ploča ¦ Druga tabla
+Relier ce tableau à une personne, une enquête (ou une de ses parties), une battue… ¦ Poveži ovu ploču s osobom, istragom (ili jednim njezinim dijelom), sustavnom pretragom… ¦ Poveži to tablo z osebo, preiskavo (ali enim njenim delom), sistematičnim iskanjem…
+🔗 Relier… ¦ 🔗 Poveži… ¦ 🔗 Poveži…
+Relier ce tableau ¦ Poveži ovu ploču ¦ Poveži to tablo
+À quoi ¦ S čim ¦ S čim
+Nouveau tableau depuis un instantané ¦ Nova ploča iz snimke stanja ¦ Nova tabla iz posnetka stanja
+Nouveau tableau à partir de celui-ci ¦ Nova ploča od ove ¦ Nova tabla iz te
+Grille aimantée : les éléments s’alignent sur la grille et sur les autres (⌥ / Alt en glissant pour s’en passer). ¦ Privlačna mreža: elementi se poravnavaju s mrežom i međusobno (⌥ / Alt pri povlačenju da to izbjegneš). ¦ Pripenjalna mreža: elementi se poravnajo z mrežo in med seboj (⌥ / Alt med vlečenjem, da se temu izogneš).
+Grille aimantée enlevée. ¦ Privlačna mreža uklonjena. ¦ Pripenjalna mreža odstranjena.
+frère de ¦ brat od ¦ brat od
+sœur de ¦ sestra od ¦ sestra od
+époux de ¦ suprug od ¦ mož od
+épouse de ¦ supruga od ¦ žena od
+père de ¦ otac od ¦ oče od
+mère de ¦ majka od ¦ mati od
+fils de ¦ sin od ¦ sin od
+fille de ¦ kći od ¦ hči od
+cousin de ¦ bratić od ¦ bratranec od
+cousine de ¦ sestrična od ¦ sestrična od
+parrain de ¦ kum od ¦ boter od
+marraine de ¦ kuma od ¦ botra od
+témoin de ¦ svjedok od ¦ priča od
+voisin de ¦ susjed od ¦ sosed od
+a travaillé pour ¦ radio je za ¦ delal je za
+a écrit à ¦ pisao je ¦ pisal je
+même personne ? ¦ ista osoba? ¦ ista oseba?
+💬 Commentaires ¦ 💬 Komentari ¦ 💬 Komentarji
+Ton mot (ex. « Piste », « Archives ») ¦ Tvoja riječ (npr. „Trag”, „Arhivi”) ¦ Tvoja beseda (npr. »Sled«, »Arhivi«)
+Les mots proposés pour les bulles (tu en ajoutes avec « ＋ un autre mot… »). ¦ Riječi ponuđene za oblačiće (dodaješ ih s „＋ druga riječ…”). ¦ Besede, ponujene za oblačke (dodaš jih z »＋ druga beseda…«).
+Les lignes et les colonnes gardées, avec les formules possibles. ¦ Retci i stupci zadržani, s mogućim formulama. ¦ Vrstice in stolpci ohranjeni, z možnimi formulami.
+🗒 Une note par ligne ¦ 🗒 Jedna bilješka po retku ¦ 🗒 Ena opomba na vrstico
+Chaque ligne devient une note, rangées en grille. ¦ Svaki redak postaje bilješka, raspoređene u mrežu. ¦ Vsaka vrstica postane opomba, razporejene v mrežo.
+🗂 Une note par ligne du tableur ¦ 🗂 Jedna bilješka po retku proračunske tablice ¦ 🗂 Ena opomba na vrstico preglednice
+Les colonnes d’une ligne dans la même note. ¦ Stupci jednog retka u istoj bilješci. ¦ Stolpci ene vrstice v isti opombi.
+T Un seul texte ¦ T Jedan tekst ¦ T Eno besedilo
+Tout le texte collé, d’un bloc. ¦ Sav zalijepljeni tekst, u jednom bloku. ¦ Vse prilepljeno besedilo v enem bloku.
+grouper ce qui est posé ¦ grupiraj ono što je postavljeno ¦ združi postavljeno
+⭐ En faire un modèle ¦ ⭐ Napravi od nje predložak ¦ ⭐ Naredi iz nje predlogo
+Enregistrer le modèle ¦ Spremi predložak ¦ Shrani predlogo
+Nom du modèle ¦ Naziv predloška ¦ Ime predloge
+Pour une enquête sur un enfant trouvé… ¦ Za istragu o nahočetu… ¦ Za preiskavo o najdenčku…
+Décris-le ¦ Opiši ga ¦ Opiši jo
+seulement la sélection ¦ samo odabir ¦ samo izbor
+sans les textes (garder les cases vides, les titres des cadres restent) ¦ bez tekstova (zadrži prazne okvire, naslovi okvira ostaju) ¦ brez besedil (ohrani prazna polja, naslovi okvirjev ostanejo)
+Il apparaît dans « Nouveau tableau », avec les modèles de l’app. Les fiches, photos et sons posés sont gardés tels quels (ils pointent vers ta base). ¦ Pojavljuje se u „Nova ploča”, s predlošcima aplikacije. Postavljeni zapisi, fotografije i zvukovi čuvaju se kakvi jesu (upućuju na tvoju bazu). ¦ Prikaže se v »Nova tabla«, s predlogami aplikacije. Postavljeni zapisi, fotografije in zvoki se ohranijo takšni, kot so (kažejo na tvojo bazo).
+Calque principal ¦ Glavni sloj ¦ Glavna plast
+Les nouveaux éléments vont sur ce calque ¦ Novi elementi idu na ovaj sloj ¦ Novi elementi gredo na to plast
+Choisir ce qu’il contient ¦ Odaberi što sadrži ¦ Izberi, kaj vsebuje
+Supprimer le calque (ses éléments vont sur le calque principal) ¦ Izbriši sloj (njegovi elementi idu na glavni sloj) ¦ Izbriši plast (njeni elementi gredo na glavno plast)
+Mettre la sélection sur le calque choisi ¦ Stavi odabir na odabrani sloj ¦ Postavi izbor na izbrano plast
+Un calque caché ne s’affiche pas (ni dans les images exportées) ; verrouillé, on ne peut plus le choisir ni le bouger. ¦ Skriveni sloj se ne prikazuje (ni na izvezenim slikama); zaključan se više ne može odabrati ni pomaknuti. ¦ Skrita plast se ne prikaže (tudi ne na izvoženih slikah); zaklenjene ni več mogoče izbrati ali premakniti.
+Y aller ¦ Idi tamo ¦ Pojdi tja
+⟳ vue ¦ ⟳ prikaz ¦ ⟳ pogled
+Chercher un mot, un nom… ¦ Traži riječ, ime… ¦ Išči besedo, ime…
+Mini-carte ¦ Mini-karta ¦ Mini zemljevid
+Glisser pour déplacer la mini-carte ¦ Povuci za pomicanje mini-karte ¦ Povleci za premik mini zemljevida
+Cacher la mini-carte ¦ Sakrij mini-kartu ¦ Skrij mini zemljevid
+Pour tous les jours ¦ Za svaki dan ¦ Za vsak dan
+Écritures anciennes ¦ Stari rukopisi ¦ Stare pisave
+Trop lourd pour être gardé (retire des formes faites d’une image). ¦ Preteško za čuvanje (ukloni oblike napravljene od slike). ¦ Pretežko za shranjevanje (odstrani oblike iz slike).
+Réglages trop lourds pour être gardés (retire des formes faites d’une image). ¦ Postavke su preteške za čuvanje (ukloni oblike napravljene od slike). ¦ Nastavitve so pretežke za shranjevanje (odstrani oblike iz slike).
+Choisis une forme de départ. ¦ Odaberi početni oblik. ¦ Izberi začetno obliko.
+Forme trop détaillée : retire des formes ajoutées. ¦ Oblik je previše detaljan: ukloni neke dodane oblike. ¦ Oblika je preveč podrobna: odstrani nekaj dodanih oblik.
+Choisis une forme ou trace la pointe. ¦ Odaberi oblik ili nacrtaj vrh. ¦ Izberi obliko ali nariši konico.
+Cette forme est trop détaillée pour une pointe. ¦ Ovaj je oblik previše detaljan za vrh strelice. ¦ Ta oblika je preveč podrobna za konico.
+les réglages des tableaux sont fermés ¦ postavke ploča su zatvorene ¦ nastavitve tabel so zaprte
+Montrer / cacher ¦ Prikaži / sakrij ¦ Prikaži / skrij
+Déjà dans l’accès rapide ¦ Već u brzom pristupu ¦ Že v hitrem dostopu
+Ajouter à l’accès rapide ¦ Dodaj u brzi pristup ¦ Dodaj v hitri dostop
+La reprendre dans le dessin vectoriel (plume, points, Pathfinder…) ¦ Preradi ga u vektorskom crtanju (pero, točke, Pathfinder…) ¦ Predelaj jo v vektorskem risanju (pero, točke, Pathfinder…)
+Supprimer cette forme ¦ Izbriši ovaj oblik ¦ Izbriši to obliko
+Aucune pour l’instant : dans un tableau, outil Formes → « ＋ Créer une forme ». ¦ Još nijedan: na ploči, alat Oblici → „＋ Stvori oblik”. ¦ Še nobene: na tabli orodje Oblike → »＋ Ustvari obliko«.
+Supprimer la liste ¦ Izbriši popis ¦ Izbriši seznam
+Pas encore de pinceau à toi. ¦ Još nemaš vlastiti kist. ¦ Še nimaš svojega čopiča.
+tous les réglages des tableaux (couleurs, pointes, formes, polices, tailles, tableur, pinceaux, menus) ¦ sve postavke ploča (boje, vrhovi strelica, oblici, fontovi, veličine, proračunska tablica, kistovi, izbornici) ¦ vse nastavitve tabel (barve, konice, oblike, pisave, velikosti, preglednica, čopiči, meniji)
+Reprendre les réglages « {name} » ? Les réglages actuels sont remplacés (enregistre-les d’abord sous un nom si tu veux les garder). ¦ Preuzeti postavke „{name}”? Trenutne postavke bit će zamijenjene (najprije ih spremi pod imenom ako ih želiš zadržati). ¦ Prevzamem nastavitve »{name}«? Trenutne nastavitve bodo zamenjane (najprej jih shrani pod imenom, če jih želiš obdržati).
+Reprendre ces réglages ¦ Preuzmi ove postavke ¦ Prevzemi te nastavitve
+Reprendre les réglages ¦ Preuzmi postavke ¦ Prevzemi nastavitve
+Réglages enregistrés sous « {name} » (et utilisés dès maintenant). ¦ Postavke spremljene kao „{name}” (i koriste se od sada). ¦ Nastavitve shranjene kot »{name}« (in v uporabi od zdaj).
+Réglages « {name} » importés : « Appliquer » pour t’en servir. ¦ Postavke „{name}” uvezene: „Primijeni” da ih koristiš. ¦ Nastavitve »{name}« uvožene: »Uporabi«, da jih uporabiš.
+Palette « {name} » retirée ¦ Paleta „{name}” uklonjena ¦ Paleta »{name}« odstranjena
+Pointe « {name} » créée : elle est dans la liste. ¦ Vrh „{name}” stvoren: nalazi se na popisu. ¦ Konica »{name}« ustvarjena: je na seznamu.
+Pointe retirée (les traits qui l’utilisent prennent un triangle) ¦ Vrh uklonjen (crte koje ga koriste dobivaju trokut) ¦ Konica odstranjena (črte, ki jo uporabljajo, dobijo trikotnik)
+⚡ « {name} » est déjà dans l’accès rapide (en haut de cet onglet ; ✕ sur elle pour l’en retirer). ¦ ⚡ „{name}” već je u brzom pristupu (na vrhu ove kartice; ✕ na njemu za uklanjanje). ¦ ⚡ »{name}« je že v hitrem dostopu (na vrhu tega zavihka; ✕ na njej za odstranitev).
+⚡ « {name} » ajoutée à l’accès rapide : elle est en haut de cet onglet, et dans la barre de l’outil Formes. N’oublie pas « Enregistrer ». ¦ ⚡ „{name}” dodano u brzi pristup: nalazi se na vrhu ove kartice i na traci alata Oblici. Ne zaboravi „Spremi”. ¦ ⚡ »{name}« dodana v hitri dostop: je na vrhu tega zavihka in v vrstici orodja Oblike. Ne pozabi »Shrani«.
+Chargement des formes… ¦ Učitavanje oblika… ¦ Nalaganje oblik…
+📚 Réessayer de charger les formes ¦ 📚 Pokušaj ponovno učitati oblike ¦ 📚 Poskusi znova naložiti oblike
+Les formes n’ont pas pu être chargées. Réessaie. ¦ Oblici se nisu mogli učitati. Pokušaj ponovno. ¦ Oblik ni bilo mogoče naložiti. Poskusi znova.
+Forme retirée (les tableaux qui l’utilisent la gardent) ¦ Oblik uklonjen (ploče koje ga koriste zadržavaju ga) ¦ Oblika odstranjena (table, ki jo uporabljajo, jo obdržijo)
+Ma liste ¦ Moj popis ¦ Moj seznam
+Liste de polices retirée ¦ Popis fontova uklonjen ¦ Seznam pisav odstranjen
+Ajouter une police à la liste ¦ Dodaj font na popis ¦ Dodaj pisavo na seznam
+« {font} » ajoutée à « {list} ». ¦ „{font}” dodan na „{list}”. ¦ »{font}« dodana na »{list}«.
+Toutes les polices ¦ Svi fontovi ¦ Vse pisave
+Élémentaire ¦ Osnovno ¦ Osnovno
+Géométrie ¦ Geometrija ¦ Geometrija
+Bulles ¦ Oblačići ¦ Oblački
+Étoiles et badges ¦ Zvijezde i značke ¦ Zvezde in značke
+Croyances et mémoire ¦ Vjerovanja i sjećanje ¦ Verovanja in spomin
+Écrits et documents ¦ Spisi i dokumenti ¦ Spisi in dokumenti
+Lieux et bâtiments ¦ Mjesta i zgrade ¦ Kraji in stavbe
+Maison et objets ¦ Kuća i predmeti ¦ Dom in predmeti
+Vêtements et parures ¦ Odjeća i nakit ¦ Oblačila in okrasje
+Métiers et outils ¦ Zanimanja i alati ¦ Poklici in orodja
+Transports et voyages ¦ Prijevoz i putovanja ¦ Prevoz in potovanja
+Nature ¦ Priroda ¦ Narava
+Météo et ciel ¦ Vrijeme i nebo ¦ Vreme in nebo
+Cuisine et repas ¦ Kuhanje i obroci ¦ Kuhanje in obroki
+Musique, jeux et sport ¦ Glazba, igre i sport ¦ Glasba, igre in šport
+Santé et corps ¦ Zdravlje i tijelo ¦ Zdravje in telo
+Objets ¦ Predmeti ¦ Predmeti
+Mes formes ¦ Moji oblici ¦ Moje oblike
+Lettres et chiffres ¦ Slova i brojke ¦ Črke in številke
+Armoiries et héraldique ¦ Grbovi i heraldika ¦ Grbi in heraldika
+Cadres et bordures ¦ Okviri i obrubi ¦ Okvirji in obrobe
+Émotions ¦ Emocije ¦ Čustva
+Drapeaux ¦ Zastave ¦ Zastave
+Écrans et appareils ¦ Zasloni i uređaji ¦ Zasloni in naprave
+Argent et commerce ¦ Novac i trgovina ¦ Denar in trgovina
+Fond des formes, étiquettes, dossiers ¦ Ispuna oblika, oznaka, mapa ¦ Polnilo oblik, oznak, map
+Bord des formes et contour des médias ¦ Rub oblika i obris medija ¦ Rob oblik in obroba medijev
+Couleur du texte, des traits et flèches ¦ Boja teksta, crta i strelica ¦ Barva besedila, črt in puščic
+Légendes des traits : texte ¦ Natpisi crta: tekst ¦ Napisi črt: besedilo
+Légendes des traits : fond du cadre ¦ Natpisi crta: pozadina okvira ¦ Napisi črt: ozadje okvirja
+Légendes des traits : bord du cadre ¦ Natpisi crta: rub okvira ¦ Napisi črt: rob okvirja
+⤓ Exporter / imprimer ¦ ⤓ Izvezi / ispiši ¦ ⤓ Izvozi / natisni
+⛶ Plein écran ¦ ⛶ Cijeli zaslon ¦ ⛶ Celozaslonsko
+❓ Pistes à vérifier (compteur) ¦ ❓ Tragovi za provjeru (brojač) ¦ ❓ Sledi za preverjanje (števec)
+🔍 Chercher dans le tableau ¦ 🔍 Traži na ploči ¦ 🔍 Išči na tabli
+🧲 Grille aimantée ¦ 🧲 Privlačna mreža ¦ 🧲 Pripenjalna mreža
+🗺 Mini-carte ¦ 🗺 Mini-karta ¦ 🗺 Mini zemljevid
+⚙️ Réglages des tableaux ¦ ⚙️ Postavke ploča ¦ ⚙️ Nastavitve tabel
+🗑 Supprimer ¦ 🗑 Izbriši ¦ 🗑 Izbriši
+✕ Fermer ¦ ✕ Zatvori ¦ ✕ Zapri
+Bord / contour ¦ Rub / obris ¦ Rob / obroba
+Couleur du texte ou du trait ¦ Boja teksta ili crte ¦ Barva besedila ali črte
+Épaisseur et style du trait ¦ Debljina i stil crte ¦ Debelina in slog črte
+Arrondi ¦ Zaobljenost ¦ Zaobljenost
+Taille et style du texte ¦ Veličina i stil teksta ¦ Velikost in slog besedila
+Pointes des flèches ¦ Vrhovi strelica ¦ Konice puščic
+Forme du trait et légende ¦ Oblik crte i natpis ¦ Oblika črte in napis
+Pinceau ¦ Kist ¦ Čopič
+Titre, étiquette, adresse ¦ Naslov, oznaka, adresa ¦ Naslov, oznaka, naslov URL
+Fiche : ce qu’elle montre ¦ Zapis: što prikazuje ¦ Zapis: kaj prikazuje
+Piste : à vérifier, confirmée, fausse ¦ Trag: za provjeru, potvrđen, pogrešan ¦ Sled: za preverjanje, potrjena, napačna
+Carte et repères ¦ Karta i oznake ¦ Zemljevid in oznake
+Liens tout prêts (frère de…) ¦ Gotove veze (brat od…) ¦ Pripravljene povezave (brat od…)
+Boutons (dupliquer, verrouiller…) ¦ Gumbi (dupliciraj, zaključaj…) ¦ Gumbi (podvoji, zakleni…)
+Des fichiers ¦ Datoteke ¦ Datoteke
+D’ailleurs (web) ¦ Odnekud drugdje (web) ¦ Od drugod (splet)
+Une fiche ¦ Zapis ¦ Zapis
+Un écran de l’app ¦ Zaslon aplikacije ¦ Zaslon aplikacije
+Un de mes widgets ¦ Jedan od mojih widgeta ¦ Eden od mojih gradnikov
+Un tableur ¦ Proračunska tablica ¦ Preglednica
+Un dossier ¦ Mapa ¦ Mapa
+Un arbre automatique ¦ Automatsko stablo ¦ Samodejno drevo
+Une frise vivante ¦ Živa vremenska crta ¦ Živa časovnica
+Une carte ¦ Karta ¦ Zemljevid
+Un cadre (section) ¦ Okvir (odjeljak) ¦ Okvir (razdelek)
+Un mémo vocal ¦ Glasovni podsjetnik ¦ Glasovna beležka
+Importer un tableau ¦ Uvezi ploču ¦ Uvozi tablo
+Gras, italique ¦ Podebljano, kurziv ¦ Krepko, ležeče
+Suivre l’angle du trait ¦ Prati kut crte ¦ Sledi kotu črte
+pointe|aucune ¦ nijedan ¦ brez
+pointe|▶ triangle ¦ ▶ trokut ¦ ▶ trikotnik
+pointe|➤ flèche fine ¦ ➤ tanka strelica ¦ ➤ tanka puščica
+pointe|› ouverte ¦ › otvorena ¦ › odprta
+pointe|⏩ double ¦ ⏩ dvostruka ¦ ⏩ dvojna
+pointe|◣ demi-flèche ¦ ◣ polustrelica ¦ ◣ polpuščica
+pointe|● rond ¦ ● krug ¦ ● krog
+pointe|○ rond vide ¦ ○ prazni krug ¦ ○ prazen krog
+pointe|• point ¦ • točka ¦ • pika
+pointe|■ carré ¦ ■ kvadrat ¦ ■ kvadrat
+pointe|□ carré vide ¦ □ prazni kvadrat ¦ □ prazen kvadrat
+pointe|◆ losange ¦ ◆ romb ¦ ◆ romb
+pointe|◇ losange vide ¦ ◇ prazni romb ¦ ◇ prazen romb
+pointe|| barre ¦ | crtica ¦ | črtica
+pointe|⋔ patte d’oie ¦ ⋔ vranja noga ¦ ⋔ vranja noga
+pointe|» plumes ¦ » perje ¦ » perje
+pointe|▷ triangle vide ¦ ▷ prazni trokut ¦ ▷ prazen trikotnik
+pointe|⟶ flèche longue ¦ ⟶ duga strelica ¦ ⟶ dolga puščica
+pointe|» double chevron ¦ » dvostruki ševron ¦ » dvojni ševron
+pointe|✕ croix ¦ ✕ križić ¦ ✕ križec
+pointe|＋ plus ¦ ＋ plus ¦ ＋ plus
+pointe|★ étoile ¦ ★ zvijezda ¦ ★ zvezda
+pointe|♥ cœur ¦ ♥ srce ¦ ♥ srce
+pointe|‖ un (deux barres) ¦ ‖ jedan (dvije crtice) ¦ ‖ ena (dve črtici)
+pointe|⋲ plusieurs (pied de corbeau) ¦ ⋲ više (vranja noga) ¦ ⋲ več (vranja noga)
+pointe|◗ demi-rond ¦ ◗ polukrug ¦ ◗ polkrog
+Chercher une forme (cœur, maison, chien…) ¦ Traži oblik (srce, kuća, pas…) ¦ Išči obliko (srce, hiša, pes…)
+＋ ajouter (réunir) ¦ ＋ dodaj (spoji) ¦ ＋ dodaj (združi)
+⭕ percer (trou) ¦ ⭕ probuši (rupa) ¦ ⭕ preluknjaj (luknja)
+miroir ¦ zrcalo ¦ zrcalo
+Créer une forme à partir d’une autre ¦ Stvori oblik od drugog ¦ Ustvari obliko iz druge
+1. La forme de départ ¦ 1. Početni oblik ¦ 1. Začetna oblika
+2. La transformer ¦ 2. Preoblikuj ga ¦ 2. Preoblikuj jo
+3. Lui ajouter d’autres formes, ou y percer un trou ¦ 3. Dodaj mu druge oblike ili u njemu probuši rupu ¦ 3. Dodaj ji druge oblike ali vanjo preluknjaj luknjo
+＋ Ajouter une forme ¦ ＋ Dodaj oblik ¦ ＋ Dodaj obliko
+Nom de la nouvelle forme ¦ Naziv novog oblika ¦ Ime nove oblike
+Elle ira dans « Mes formes », et dans l’accès rapide. ¦ Ići će u „Moji oblici” i u brzi pristup. ¦ Šla bo v »Moje oblike« in v hitri dostop.
+Fermer la forme ¦ Zatvori oblik ¦ Zapri obliko
+Point ¦ Točka ¦ Točka
+RÉGLAGES DES TABLEAUX ¦ POSTAVKE PLOČA ¦ NASTAVITVE TABEL
+FORMES ¦ OBLICI ¦ OBLIKE
+Créer une pointe ¦ Stvori vrh strelice ¦ Ustvari konico
+Créer la pointe ¦ Stvori vrh ¦ Ustvari konico
+Chercher une forme (flèche, cœur, étoile…) ¦ Traži oblik (strelica, srce, zvijezda…) ¦ Išči obliko (puščica, srce, zvezda…)
+⬠ À partir d’une forme ¦ ⬠ Iz oblika ¦ ⬠ Iz oblike
+✒️ Tracée à la plume ¦ ✒️ Nacrtan perom ¦ ✒️ Narisana s peresom
+Trace la pointe tournée vers la droite (→) : clic pour un angle, cliquer-glisser pour un arrondi, clic sur le premier point pour fermer. ¦ Nacrtaj vrh okrenut udesno (→): klik za kut, klikni i povuci za zaobljenje, klik na prvu točku za zatvaranje. ¦ Nariši konico, obrnjeno v desno (→): klik za kot, klikni in povleci za zaobljenje, klik na prvo točko za zaprtje.
+Accrochée ¦ Zakačen ¦ Pripeta
+par la pointe (au bout du trait) ¦ za vrh (na kraju crte) ¦ za konico (na koncu črte)
+presque au bout ¦ gotovo na kraju ¦ skoraj na koncu
+par le milieu ¦ za sredinu ¦ za sredino
+par l’arrière ¦ za stražnji dio ¦ za zadnji del
+Trace la pointe (au moins trois points, puis ferme-la). ¦ Nacrtaj vrh (najmanje tri točke, zatim ga zatvori). ¦ Nariši konico (vsaj tri točke, nato jo zapri).
+Choisis une forme. ¦ Odaberi oblik. ¦ Izberi obliko.
+＋ cette couleur ¦ ＋ ova boja ¦ ＋ ta barva
+＋ transparent ¦ ＋ prozirno ¦ ＋ prosojno
+Sans couleur ¦ Bez boje ¦ Brez barve
+🎨 Couleurs ¦ 🎨 Boje ¦ 🎨 Barve
+➤ Pointes ¦ ➤ Vrhovi strelica ¦ ➤ Konice
+⬠ Formes ¦ ⬠ Oblici ¦ ⬠ Oblike
+🔤 Polices ¦ 🔤 Fontovi ¦ 🔤 Pisave
+📏 Tailles et arrondi ¦ 📏 Veličine i zaobljenost ¦ 📏 Velikosti in zaobljenost
+▦ Tableur ¦ ▦ Proračunska tablica ¦ ▦ Preglednica
+🖌 Pinceaux ¦ 🖌 Kistovi ¦ 🖌 Čopiči
+☰ Menus et options ¦ ☰ Izbornici i opcije ¦ ☰ Meniji in možnosti
+Les couleurs proposées dans les tableaux, catégorie par catégorie, dans l’ordre voulu (glisse une pastille, ou ‹ ›). Le sélecteur « autre couleur » reste toujours là. Tu peux avoir plusieurs palettes et choisir celle des tableaux. ¦ Boje ponuđene na pločama, kategoriju po kategoriju, željenim redoslijedom (povuci kružić ili ‹ ›). Birač „druga boja” uvijek je tu. Možeš imati više paleta i odabrati onu za ploče. ¦ Barve, ponujene na tablah, kategorijo za kategorijo, v želenem vrstnem redu (povleci krogec ali ‹ ›). Izbirnik »druga barva« je vedno na voljo. Imaš lahko več palet in izbereš tisto za table.
+Palette utilisée ¦ Paleta u upotrebi ¦ Paleta v uporabi
+Nom de la palette ¦ Naziv palete ¦ Ime palete
+＋ Nouvelle palette ¦ ＋ Nova paleta ¦ ＋ Nova paleta
+Partir d’un modèle… ¦ Kreni od predloška… ¦ Začni iz predloge…
+Supprimer la palette ¦ Izbriši paletu ¦ Izbriši paleto
+Les pointes proposées pour les traits et les flèches, dans l’ordre voulu ; décoche celles que tu ne veux pas voir. « ＋ Créer une pointe » : à partir d’une forme (n’importe laquelle des formes, ou une des tiennes) ou tracée à la plume. ¦ Vrhovi ponuđeni za crte i strelice, željenim redoslijedom; odznači one koje ne želiš vidjeti. „＋ Stvori vrh strelice”: iz oblika (bilo kojeg od oblika ili jednog od tvojih) ili nacrtan perom. ¦ Konice, ponujene za črte in puščice, v želenem vrstnem redu; odznači tiste, ki jih ne želiš videti. »＋ Ustvari konico«: iz oblike (katere koli ali ene od tvojih) ali narisana s peresom.
+Pointe au début, par défaut ¦ Vrh na početku, zadano ¦ Konica na začetku, privzeto
+Pointe à la fin, par défaut (outil Flèche) ¦ Vrh na kraju, zadano (alat Strelica) ¦ Konica na koncu, privzeto (orodje Puščica)
+＋ Créer une pointe ¦ ＋ Stvori vrh strelice ¦ ＋ Ustvari konico
+Supprimer cette pointe ¦ Izbriši ovaj vrh ¦ Izbriši to konico
+Les catégories de formes et leurs formes, dans l’ordre voulu ; décoche ce que tu ne veux pas voir. « Accès rapide » : les formes proposées directement dans la barre de l’outil Formes. ¦ Kategorije oblika i njihovi oblici, željenim redoslijedom; odznači ono što ne želiš vidjeti. „Brzi pristup”: oblici ponuđeni izravno na traci alata Oblici. ¦ Kategorije oblik in njihove oblike v želenem vrstnem redu; odznači, česar ne želiš videti. »Hitri dostop«: oblike, ponujene neposredno v vrstici orodja Oblike.
+✒️ Dessiner une nouvelle forme (dessin vectoriel) ¦ ✒️ Nacrtaj novi oblik (vektorsko crtanje) ¦ ✒️ Nariši novo obliko (vektorsko risanje)
+ou ✒️ sur une forme ci-dessous pour la reprendre : plume, points et poignées, Pathfinder, import SVG… ¦ ili ✒️ na obliku ispod da ga preradiš: pero, točke i ručke, Pathfinder, uvoz SVG-a… ¦ ali ✒️ na obliki spodaj, da jo predelaš: pero, točke in ročaji, Pathfinder, uvoz SVG…
+📚 Montrer aussi les 2 900 formes de la grande bibliothèque ¦ 📚 Prikaži i 2 900 oblika velike biblioteke ¦ 📚 Prikaži tudi 2 900 oblik velike knjižnice
+lettres et chiffres, armoiries, cadres, étiquettes, drapeaux, symboles… (elles sont toujours dans la bibliothèque des tableaux ; ici, pour les cacher, les ranger ou les mettre dans l’accès rapide) ¦ slova i brojke, grbovi, okviri, oznake, zastave, simboli… (uvijek su u biblioteci ploča; ovdje ih možeš sakriti, poredati ili staviti u brzi pristup) ¦ črke in številke, grbi, okvirji, oznake, zastave, simboli… (vedno so v knjižnici tabel; tukaj jih lahko skriješ, razvrstiš ali postaviš v hitri dostop)
+Accès rapide ¦ Brzi pristup ¦ Hitri dostop
+Glisse une forme (ou ‹ ›) pour changer l’ordre ; ⚡ sur une forme ci-dessous l’ajoute ici ; ✏️ crée une forme à partir d’elle. ¦ Povuci oblik (ili ‹ ›) za promjenu redoslijeda; ⚡ na obliku ispod dodaje ga ovdje; ✏️ stvara oblik od njega. ¦ Povleci obliko (ali ‹ ›) za spremembo vrstnega reda; ⚡ na obliki spodaj jo doda sem; ✏️ ustvari obliko iz nje.
+Des listes de polices à toi, proposées dans le choix de la police d’un texte. « Toutes les polices » ouvre la liste commune (polices de l’app et de l’ordinateur, chacune écrite dans sa police). ¦ Tvoji popisi fontova, ponuđeni pri odabiru fonta teksta. „Svi fontovi” otvara zajednički popis (fontovi aplikacije i računala, svaki napisan svojim fontom). ¦ Tvoji seznami pisav, ponujeni pri izbiri pisave besedila. »Vse pisave« odpre skupni seznam (pisave aplikacije in računalnika, vsaka zapisana v svoji pisavi).
+Aa Toutes les polices… ¦ Aa Svi fontovi… ¦ Aa Vse pisave…
+＋ Nouvelle liste ¦ ＋ Novi popis ¦ ＋ Nov seznam
+＋ Ajouter une police… ¦ ＋ Dodaj font… ¦ ＋ Dodaj pisavo…
+De quelle taille à quelle taille vont les curseurs (épaisseur des traits et des contours : de 0,5 à 500 px ; texte : jusqu’à 500 px). La case de saisie à côté du curseur accepte toujours toute la plage. ¦ Raspon klizača (debljina crta i obrisa: od 0,5 do 500 px; tekst: do 500 px). Polje za unos pokraj klizača uvijek prihvaća cijeli raspon. ¦ Obseg drsnikov (debelina črt in obrob: od 0,5 do 500 px; besedilo: do 500 px). Vnosno polje ob drsniku vedno sprejme celoten obseg.
+Épaisseur mini ¦ Najmanja debljina ¦ Najmanjša debelina
+Épaisseur maxi ¦ Najveća debljina ¦ Največja debelina
+Texte mini ¦ Najmanji tekst ¦ Najmanjše besedilo
+Texte maxi ¦ Najveći tekst ¦ Največje besedilo
+Arrondi par défaut ¦ Zadana zaobljenost ¦ Privzeta zaobljenost
+Comment est un tableur quand tu le poses dans un tableau. ¦ Kako izgleda proračunska tablica kad je postaviš na ploču. ¦ Kakšna je preglednica, ko jo postaviš na tablo.
+Titres des colonnes, séparés par ; ¦ Naslovi stupaca, odvojeni s ; ¦ Naslovi stolpcev, ločeni z ;
+Tes pinceaux à toi : un pinceau de départ, une épaisseur, une opacité, une <strong>dureté</strong> (100 % = bord net ; plus bas = bord flou, comme dans Photoshop), une couleur si tu veux. Ils apparaissent en tête du menu des pinceaux. ¦ Tvoji vlastiti kistovi: početni kist, debljina, neprozirnost, <strong>tvrdoća</strong> (100 % = oštar rub; niže = mutan rub, kao u Photoshopu), boja ako želiš. Pojavljuju se na vrhu izbornika kistova. ¦ Tvoji lastni čopiči: začetni čopič, debelina, prekrivnost, <strong>trdota</strong> (100 % = oster rob; nižje = mehak rob, kot v Photoshopu), barva, če želiš. Prikažejo se na vrhu menija čopičev.
+Mon pinceau ¦ Moj kist ¦ Moj čopič
+Imposer une couleur ¦ Nametni boju ¦ Vsili barvo
+plein ¦ puna ¦ polna
+tirets ¦ crtice ¦ črtice
+longs tirets ¦ duge crtice ¦ dolge črtice
+points ¦ točke ¦ pike
+tiret-point ¦ crta-točka ¦ črta-pika
+＋ Nouveau pinceau ¦ ＋ Novi kist ¦ ＋ Nov čopič
+La place de chaque partie, puis l’ordre de tout ce qu’on voit dans un tableau ; décoche pour cacher. Glisse les lignes, ou ↑ ↓. ¦ Mjesto svakog dijela, zatim redoslijed svega što se vidi na ploči; odznači da sakriješ. Povuci retke ili ↑ ↓. ¦ Mesto vsakega dela, nato vrstni red vsega, kar vidiš na tabli; odznači, da skriješ. Povleci vrstice ali ↑ ↓.
+🧭 Disposition du tableau ¦ 🧭 Raspored ploče ¦ 🧭 Postavitev table
+à gauche (en colonne) ¦ lijevo (u stupcu) ¦ levo (v stolpcu)
+à droite (en colonne) ¦ desno (u stupcu) ¦ desno (v stolpcu)
+Réglages (texte, forme, trait…) ¦ Postavke (tekst, oblik, crta…) ¦ Nastavitve (besedilo, oblika, črta…)
+cachés (plus de place) ¦ skriveno (više mjesta) ¦ skrito (več prostora)
+Taille des boutons ¦ Veličina gumba ¦ Velikost gumbov
+petits ¦ mali ¦ majhni
+normaux ¦ normalni ¦ običajni
+grands ¦ veliki ¦ veliki
+En-tête (titre, propriétaire, état) ¦ Zaglavlje (naslov, vlasnik, stanje) ¦ Glava (naslov, lastnik, stanje)
+complet ¦ potpuno ¦ polna
+compact (une ligne) ¦ kompaktno (jedan redak) ¦ strnjena (ena vrstica)
+Outils (barre du haut) ¦ Alati (gornja traka) ¦ Orodja (zgornja vrstica)
+Boutons de l’en-tête ¦ Gumbi zaglavlja ¦ Gumbi glave
+↶ ↷ restent à côté du nom ; ⚙️ Personnaliser, ⤓ Exporter, ⛶ et × restent à droite, dans cet ordre (comme dans tous les éditeurs) : ici, tu peux seulement les montrer ou les cacher. ¦ ↶ ↷ ostaju pokraj naziva; ⚙️ Prilagodi, ⤓ Izvezi, ⛶ i × ostaju desno, tim redom (kao u svim uređivačima): ovdje ih možeš samo prikazati ili sakriti. ¦ ↶ ↷ ostaneta ob imenu; ⚙️ Prilagodi, ⤓ Izvozi, ⛶ in × ostanejo desno, v tem vrstnem redu (kot v vseh urejevalnikih): tukaj jih lahko samo prikažeš ali skriješ.
+Réglages à droite (texte, forme, trait…) ¦ Postavke desno (tekst, oblik, crta…) ¦ Nastavitve desno (besedilo, oblika, črta…)
+Menu « ＋ Ajouter » ¦ Izbornik „＋ Dodaj” ¦ Meni »＋ Dodaj«
+Réglages d’une légende de trait ¦ Postavke natpisa crte ¦ Nastavitve napisa črte
+Dans « Réglages de la légende » (choisis un trait). Les couleurs proposées : onglet 🎨 Couleurs. ¦ U „Postavke natpisa” (odaberi crtu). Ponuđene boje: kartica 🎨 Boje. ¦ V »Nastavitve napisa« (izberi črto). Ponujene barve: zavihek 🎨 Barve.
+Ce que proposent les tableaux (Enquêtes → Tableaux) : couleurs, pointes, formes, polices, tailles, tableur, pinceaux, et l’ordre des menus. ¦ Što nude ploče (Istrage → Ploče): boje, vrhovi strelica, oblici, fontovi, veličine, proračunska tablica, kistovi i redoslijed izbornika. ¦ Kaj ponujajo table (Preiskave → Table): barve, konice, oblike, pisave, velikosti, preglednica, čopiči in vrstni red menijev.
+Bibliothèque de formes ¦ Biblioteka oblika ¦ Knjižnica oblik
+Chercher une forme… (arbre, croix, É, drapeau) ¦ Traži oblik… (stablo, križ, É, zastava) ¦ Išči obliko… (drevo, križ, É, zastava)
+Chercher une forme… ¦ Traži oblik… ¦ Išči obliko…
+Chargement de toutes les formes… ¦ Učitavanje svih oblika… ¦ Nalaganje vseh oblik…
+Les formes en plus n’ont pas pu être chargées. ¦ Dodatni oblici nisu se mogli učitati. ¦ Dodatnih oblik ni bilo mogoče naložiti.
+⛔ Les formes en plus n’ont pas pu être chargées. ¦ ⛔ Dodatni oblici nisu se mogli učitati. ¦ ⛔ Dodatnih oblik ni bilo mogoče naložiti.
+Aucune forme pour « {q} ». Essaie un autre mot (maison, croix, lettre, drapeau…). ¦ Nema oblika za „{q}”. Pokušaj drugu riječ (kuća, križ, slovo, zastava…). ¦ Ni oblike za »{q}«. Poskusi z drugo besedo (hiša, križ, črka, zastava…).
+Aucune forme dans cette catégorie. ¦ Nema oblika u ovoj kategoriji. ¦ V tej kategoriji ni oblik.
+{n} · ↑ ↓ ← → pour choisir, Entrée pour prendre, / pour chercher ¦ {n} · ↑ ↓ ← → za odabir, Enter za preuzimanje, / za traženje ¦ {n} · ↑ ↓ ← → za izbiro, Enter za prevzem, / za iskanje
+Formes (flèches pour choisir, Entrée pour prendre) ¦ Oblici (strelice za odabir, Enter za preuzimanje) ¦ Oblike (puščice za izbiro, Enter za prevzem)
+Large (16:9) ¦ Široko (16:9) ¦ Široko (16:9)
+Standard (4:3) ¦ Standardno (4:3) ¦ Standardno (4:3)
+Vertical (téléphone) ¦ Okomito (telefon) ¦ Pokončno (telefon)
+Sur mesure… ¦ Prilagođeno… ¦ Po meri…
+Comme l’application ¦ Kao aplikacija ¦ Kot aplikacija
+Ardoise ¦ Škriljevac ¦ Skrilavec
+Parchemin ¦ Pergament ¦ Pergament
+Aurore ¦ Zora ¦ Zarja
+Tableau noir ¦ Školska ploča ¦ Šolska tabla
+Titre et texte ¦ Naslov i tekst ¦ Naslov in besedilo
+Titre et photo ¦ Naslov i fotografija ¦ Naslov in fotografija
+Photo pleine page ¦ Fotografija preko cijele stranice ¦ Fotografija čez celo stran
+Photo et texte ¦ Fotografija i tekst ¦ Fotografija in besedilo
+Deux colonnes ¦ Dva stupca ¦ Dva stolpca
+Section ¦ Odjeljak ¦ Razdelek
+Chiffre clé ¦ Ključni broj ¦ Ključna številka
+Double-clique pour écrire ¦ Dvoklik za pisanje ¦ Dvoklik za pisanje
+Légende de la photo ¦ Opis fotografije ¦ Opis fotografije
+« Une phrase qui compte » ¦ „Rečenica koja je važna” ¦ »Stavek, ki šteje«
+Triangle rectangle ¦ Pravokutni trokut ¦ Pravokotni trikotnik
+Pentagone ¦ Peterokut ¦ Petkotnik
+Octogone ¦ Osmerokut ¦ Osemkotnik
+Double flèche ¦ Dvostruka strelica ¦ Dvojna puščica
+Chevron ¦ Ševron ¦ Ševron
+Ligne fléchée ¦ Crta sa strelicom ¦ Črta s puščico
+Aucun (rectangle) ¦ Bez (pravokutnik) ¦ Brez (pravokotnik)
+Coins arrondis ¦ Zaobljeni kutovi ¦ Zaobljeni vogali
+Cercle / ovale ¦ Krug / oval ¦ Krog / oval
+Arche (portrait ancien) ¦ Luk (stari portret) ¦ Lok (star portret)
+Dissoudre ¦ Rastapanje ¦ Raztapljanje
+Fondu par le noir ¦ Pretapanje kroz crno ¦ Pretapljanje skozi črno
+Glisser par-dessus ¦ Uvlačenje preko ¦ Vstop čez
+Révéler ¦ Otkrivanje ¦ Razkritje
+Balayage ¦ Brisanje ¦ Brisanje
+Échanger ¦ Zamjena ¦ Zamenjava
+Retourner ¦ Okretanje ¦ Obrat
+Cube ¦ Kocka ¦ Kocka
+Déplacement magique ¦ Čarobni pomak ¦ Čarobni premik
+Apparition ¦ Pojavljivanje ¦ Pojav
+Fondu ¦ Pretapanje ¦ Pretapljanje
+Arrivée (glisser) ¦ Dolazak (klizanje) ¦ Prihod (drsenje)
+Rebond ¦ Odskok ¦ Odboj
+Chute ¦ Pad ¦ Padec
+Machine à écrire (textes) ¦ Pisaći stroj (tekstovi) ¦ Pisalni stroj (besedila)
+Trajectoire (déplacement) ¦ Putanja (pomicanje) ¦ Pot gibanja (premik)
+depuis la gauche ¦ slijeva ¦ z leve
+depuis la droite ¦ zdesna ¦ z desne
+depuis le haut ¦ odozgo ¦ od zgoraj
+depuis le bas ¦ odozdo ¦ od spodaj
+Au clic ¦ Na klik ¦ Ob kliku
+Avec la précédente ¦ S prethodnom ¦ S prejšnjo
+Après la précédente ¦ Nakon prethodne ¦ Po prejšnji
+Liaison ¦ Spojnica ¦ Povezovalnik
+liaison|Droite ¦ Ravna ¦ Ravna
+liaison|En équerre ¦ Pod pravim kutom ¦ Pravokotna
+liaison|Courbe ¦ Zakrivljena ¦ Ukrivljena
+Flèche au bout ¦ Strelica na kraju ¦ Puščica na koncu
+Flèches aux deux bouts ¦ Strelice na oba kraja ¦ Puščici na obeh koncih
+Sans flèche ¦ Bez strelice ¦ Brez puščice
+Union (les deux réunies) ¦ Unija (obje spojene) ¦ Unija (obe združeni)
+Soustraire (la 1re moins la 2e) ¦ Oduzimanje (1. minus 2.) ¦ Odštevanje (1. minus 2.)
+Intersection (ce qu’elles ont en commun) ¦ Presjek (ono što im je zajedničko) ¦ Presek (kar imata skupnega)
+Choisis une personne (à droite, onglet Format) ¦ Odaberi osobu (desno, kartica Format) ¦ Izberi osebo (desno, zavihek Oblika)
+Aucun événement daté ¦ Nema datiranog događaja ¦ Ni datiranega dogodka
+Double-clique pour choisir une image ¦ Dvoklik za odabir slike ¦ Dvoklik za izbiro slike
+Aucune diapositive à montrer (toutes sont sautées ?). ¦ Nema slajdova za prikaz (jesu li svi preskočeni?). ¦ Ni diapozitivov za prikaz (so vsi preskočeni?).
+Touches ¦ Tipke ¦ Tipke
+<kbd>→</kbd> <kbd>espace</kbd> <kbd>clic</kbd> suivante · <kbd>←</kbd> précédente · <kbd>Début</kbd> <kbd>Fin</kbd> · un numéro puis <kbd>Entrée</kbd> : aller à la diapositive · <kbd>B</kbd> écran noir · <kbd>W</kbd> écran blanc · <kbd>L</kbd> pointeur laser · <kbd>P</kbd> présentateur · <kbd>Échap</kbd> quitter ¦ <kbd>→</kbd> <kbd>razmaknica</kbd> <kbd>klik</kbd> sljedeći · <kbd>←</kbd> prethodni · <kbd>Home</kbd> <kbd>End</kbd> · broj pa <kbd>Enter</kbd>: idi na slajd · <kbd>B</kbd> crni zaslon · <kbd>W</kbd> bijeli zaslon · <kbd>L</kbd> laserski pokazivač · <kbd>P</kbd> izlagač · <kbd>Esc</kbd> izlaz ¦ <kbd>→</kbd> <kbd>preslednica</kbd> <kbd>klik</kbd> naslednji · <kbd>←</kbd> prejšnji · <kbd>Home</kbd> <kbd>End</kbd> · številka in <kbd>Enter</kbd>: pojdi na diapozitiv · <kbd>B</kbd> črn zaslon · <kbd>W</kbd> bel zaslon · <kbd>L</kbd> laserski kazalnik · <kbd>P</kbd> predstavitelj · <kbd>Esc</kbd> izhod
+Précédente (←) ¦ Prethodni (←) ¦ Prejšnji (←)
+Suivante (→ ou espace) ¦ Sljedeći (→ ili razmaknica) ¦ Naslednji (→ ali preslednica)
+Fenêtre du présentateur : notes, suivante, chronomètre (P) ¦ Prozor izlagača: bilješke, sljedeći, štoperica (P) ¦ Okno predstavitelja: opombe, naslednji, štoparica (P)
+Pointeur laser (L) ¦ Laserski pokazivač (L) ¦ Laserski kazalnik (L)
+Les touches (?) ¦ Tipke (?) ¦ Tipke (?)
+Quitter (Échap) ¦ Izlaz (Esc) ¦ Izhod (Esc)
+Fin de la présentation — clic ou → pour quitter ¦ Kraj prezentacije — klik ili → za izlaz ¦ Konec predstavitve — klik ali → za izhod
+Encore {n} sur cette diapositive ¦ Još {n} na ovom slajdu ¦ Še {n} na tem diapozitivu
+présentation|Fin ¦ Kraj ¦ Konec
+Pas de notes pour cette diapositive (onglet 📝 Notes sous la diapositive). ¦ Nema bilješki za ovaj slajd (kartica 📝 Bilješke ispod slajda). ¦ Za ta diapozitiv ni opomb (zavihek 📝 Opombe pod diapozitivom).
+La fenêtre du présentateur a été bloquée : autorise les fenêtres surgissantes pour cette page. ¦ Prozor izlagača je blokiran: dopusti skočne prozore za ovu stranicu. ¦ Okno predstavitelja je bilo blokirano: dovoli pojavna okna za to stran.
+Présentateur ¦ Izlagač ¦ Predstavitelj
+Arrêter / reprendre le chronomètre ¦ Zaustavi / nastavi štopericu ¦ Ustavi / nadaljuj štoparico
+Remettre le chronomètre à zéro ¦ Vrati štopericu na nulu ¦ Ponastavi štoparico na nič
+Heure : ¦ Vrijeme: ¦ Ura:
+Ensuite ¦ Zatim ¦ Nato
+‹ Précédente ¦ ‹ Prethodni ¦ ‹ Prejšnji
+Suivante › ¦ Sljedeći › ¦ Naslednji ›
+Écran noir ¦ Crni zaslon ¦ Črn zaslon
+Écran blanc ¦ Bijeli zaslon ¦ Bel zaslon
+Touches : → ← espace, B, W, Échap ¦ Tipke: → ← razmaknica, B, W, Esc ¦ Tipke: → ← preslednica, B, W, Esc
+Terminer ¦ Završi ¦ Končaj
+Diapositive précédente ¦ Prethodni slajd ¦ Prejšnji diapozitiv
+Diapositive suivante ¦ Sljedeći slajd ¦ Naslednji diapozitiv
+Quitter la présentation ¦ Izađi iz prezentacije ¦ Zapusti predstavitev
+PRÉSENTATION ¦ PREZENTACIJA ¦ PREDSTAVITEV
+La personne affichée en ce moment, ou × pour en chercher une autre. ¦ Osoba koja se trenutno prikazuje ili × za traženje druge. ¦ Oseba, ki je trenutno prikazana, ali × za iskanje druge.
+Une vidéo ou un son ¦ Videozapis ili zvuk ¦ Video ali zvok
+La fenêtre des médias n’est pas encore prête. Réessaie dans un instant. ¦ Prozor medija još nije spreman. Pokušaj ponovno za trenutak. ¦ Okno medijev še ni pripravljeno. Poskusi znova čez trenutek.
+Police de l’ordinateur ¦ Font računala ¦ Pisava računalnika
+Ce navigateur ne sait pas lister les polices : tape le nom exact d’une police installée (ex. Garamond) : ¦ Ovaj preglednik ne zna izlistati fontove: upiši točan naziv instaliranog fonta (npr. Garamond): ¦ Ta brskalnik ne zna izpisati pisav: vpiši točno ime nameščene pisave (npr. Garamond):
+L’ordinateur n’a donné aucune police : tape son nom dans la fenêtre. ¦ Računalo nije dalo nijedan font: upiši njegov naziv u prozor. ¦ Računalnik ni dal nobene pisave: vpiši njeno ime v okno.
+Les polices de l’ordinateur ne sont pas lisibles ici : tape le nom d’une police dans la fenêtre. ¦ Fontovi računala ovdje nisu čitljivi: upiši naziv fonta u prozor. ¦ Pisave računalnika tukaj niso berljive: vpiši ime pisave v okno.
+🖥 Choisir une police ¦ 🖥 Odaberi font ¦ 🖥 Izberi pisavo
+Pour les titres ¦ Za naslove ¦ Za naslove
+Pour les textes ¦ Za tekstove ¦ Za besedila
+Pour le texte choisi ¦ Za odabrani tekst ¦ Za izbrano besedilo
+Chercher une police, ou taper son nom… ¦ Traži font ili upiši njegov naziv… ¦ Išči pisavo ali vpiši njeno ime…
+{n} de cet ordinateur, puis celles de l’app. Clique sur une police, puis dis où elle va. ¦ {n} s ovog računala, zatim fontovi aplikacije. Klikni na font, zatim reci kamo ide. ¦ {n} s tega računalnika, nato pisave aplikacije. Klikni na pisavo, nato povej, kam gre.
+Les polices de l’app ; une autre police installée : tape son nom exact puis Entrée. Clique sur une police, puis dis où elle va. ¦ Fontovi aplikacije; drugi instalirani font: upiši njegov točan naziv pa Enter. Klikni na font, zatim reci kamo ide. ¦ Pisave aplikacije; druga nameščena pisava: vpiši njeno točno ime in Enter. Klikni na pisavo, nato povej, kam gre.
+Aucune police « {q} » dans la liste : Entrée pour la prendre telle quelle. ¦ Nema fonta „{q}” na popisu: Enter da ga uzmeš takav kakav jest. ¦ Pisave »{q}« ni na seznamu: Enter, da jo vzameš takšno, kot je.
+Portez ce vieux whisky au juge blond qui fume ¦ Gojazni đačić s biciklom drži hmelj i finu vatu u džepu nošnje ¦ Hišničin bratec vzgaja polže pod fikusom
+Choisis une police ¦ Odaberi font ¦ Izberi pisavo
+Clique d’abord sur une police. ¦ Najprije klikni na font. ¦ Najprej klikni na pisavo.
+Ma présentation ¦ Moja prezentacija ¦ Moja predstavitev
+⤒ Importer (PowerPoint, OpenDocument, PDF, images, texte, JSON)… ¦ ⤒ Uvezi (PowerPoint, OpenDocument, PDF, slike, tekst, JSON)… ¦ ⤒ Uvozi (PowerPoint, OpenDocument, PDF, slike, besedilo, JSON)…
+🖨 PDF / imprimer (une diapositive par page) ¦ 🖨 PDF / ispis (jedan slajd po stranici) ¦ 🖨 PDF / tisk (en diapozitiv na stran)
+🖨 PDF avec les notes de l’orateur ¦ 🖨 PDF s bilješkama govornika ¦ 🖨 PDF z opombami govorca
+🖼️ Cette diapositive en PNG ¦ 🖼️ Ovaj slajd kao PNG ¦ 🖼️ Ta diapozitiv kot PNG
+🗂️ Toutes les diapositives en PNG (.zip) ¦ 🗂️ Svi slajdovi kao PNG (.zip) ¦ 🗂️ Vsi diapozitivi kot PNG (.zip)
+⏺ Vidéo (WebM) ¦ ⏺ Videozapis (WebM) ¦ ⏺ Video (WebM)
+⤓ Fichier de la présentation (.json) ¦ ⤓ Datoteka prezentacije (.json) ¦ ⤓ Datoteka predstavitve (.json)
+Nom de la présentation ¦ Naziv prezentacije ¦ Ime predstavitve
+Annuler / rétablir ¦ Poništi / ponovi ¦ Razveljavi / uveljavi
+↶ Annuler (⌘Z) ¦ ↶ Poništi (⌘Z) ¦ ↶ Razveljavi (⌘Z)
+↷ Rétablir (⇧⌘Z) ¦ ↷ Ponovi (⇧⌘Z) ¦ ↷ Uveljavi (⇧⌘Z)
+Insérer (barre du haut) ¦ Umetni (gornja traka) ¦ Vstavi (zgornja vrstica)
+Une zone de texte ¦ Tekstni okvir ¦ Polje z besedilom
+◆ Formes ¦ ◆ Oblici ¦ ◆ Oblike
+Une forme ¦ Oblik ¦ Oblika
+Une photo des médias ou de l’ordinateur ¦ Fotografija iz medija ili s računala ¦ Fotografija iz medijev ali z računalnika
+Un graphique (colonnes, camembert, courbe…) ¦ Grafikon (stupci, tortni, linijski…) ¦ Graf (stolpci, tortni, črtni…)
+👤 Généalogie (fiche, portrait, arbre, frise) ¦ 👤 Rodoslovlje (zapis, portret, stablo, vremenska crta) ¦ 👤 Rodoslovje (zapis, portret, drevo, časovnica)
+La généalogie : une personne de la base ¦ Rodoslovlje: osoba iz baze ¦ Rodoslovje: oseba iz baze
+🪪 Fiche d’une personne ¦ 🪪 Zapis osobe ¦ 🪪 Zapis osebe
+🖼️ Portrait d’une personne ¦ 🖼️ Portret osobe ¦ 🖼️ Portret osebe
+🌳 Petit arbre (parents, couple, enfants) ¦ 🌳 Malo stablo (roditelji, par, djeca) ¦ 🌳 Malo drevo (starši, par, otroci)
+🗓️ Frise de sa vie ¦ 🗓️ Vremenska crta njezina života ¦ 🗓️ Časovnica njenega življenja
+Vidéo / son ¦ Videozapis / zvuk ¦ Video / zvok
+Une vidéo ou un son des médias ¦ Videozapis ili zvuk iz medija ¦ Video ali zvok iz medijev
+Disposer (barre du haut) ¦ Rasporedi (gornja traka) ¦ Razporedi (zgornja vrstica)
+⇤⇥ Aligner et répartir ¦ ⇤⇥ Poravnaj i rasporedi ¦ ⇤⇥ Poravnaj in razporedi
+⇤ À gauche ¦ ⇤ Lijevo ¦ ⇤ Levo
+↔ Au centre ¦ ↔ U sredini ¦ ↔ Na sredini
+⇥ À droite ¦ ⇥ Desno ¦ ⇥ Desno
+⤒ En haut ¦ ⤒ Gore ¦ ⤒ Zgoraj
+↕ Au milieu ¦ ↕ U sredini ¦ ↕ Na sredini
+⤓ En bas ¦ ⤓ Dolje ¦ ⤓ Spodaj
+⟷ Répartir horizontalement ¦ ⟷ Rasporedi vodoravno ¦ ⟷ Razporedi vodoravno
+⟷ Répartir verticalement ¦ ⟷ Rasporedi okomito ¦ ⟷ Razporedi navpično
+⧉ Ordre (devant, derrière) ¦ ⧉ Redoslijed (naprijed, natrag) ¦ ⧉ Vrstni red (spredaj, zadaj)
+Devant, derrière ¦ Naprijed, natrag ¦ Spredaj, zadaj
+Tout devant (⇧⌘]) ¦ Sasvim naprijed (⇧⌘]) ¦ Čisto spredaj (⇧⌘])
+Avancer (⌘]) ¦ Pomakni naprijed (⌘]) ¦ Premakni naprej (⌘])
+Reculer (⌘[) ¦ Pomakni natrag (⌘[) ¦ Premakni nazaj (⌘[)
+Tout derrière (⇧⌘[) ¦ Sasvim natrag (⇧⌘[) ¦ Čisto zadaj (⇧⌘[)
+Grouper (⌘G) — ⇧⌘G pour dissocier ¦ Grupiraj (⌘G) — ⇧⌘G za razgrupiranje ¦ Združi (⌘G) — ⇧⌘G za razdružitev
+Dissocier ¦ Razgrupiraj ¦ Razdruži
+Dissocier (⇧⌘G) ¦ Razgrupiraj (⇧⌘G) ¦ Razdruži (⇧⌘G)
+Verrouiller / déverrouiller (⌘L) ¦ Zaključaj / otključaj (⌘L) ¦ Zakleni / odkleni (⌘L)
+Relier deux objets par un trait qui les suit (choisis-en deux) ¦ Poveži dva objekta crtom koja ih prati (odaberi dva) ¦ Poveži dva predmeta s črto, ki jima sledi (izberi dva)
+Fusionner deux formes : union, soustraction, intersection ¦ Spoji dva oblika: unija, oduzimanje, presjek ¦ Združi dve obliki: unija, odštevanje, presek
+Masque des diapositives : mettre les objets choisis sur toutes les diapositives, ou modifier le masque ¦ Matrica slajdova: stavi odabrane objekte na sve slajdove ili uredi matricu ¦ Matrica diapozitivov: postavi izbrane predmete na vse diapozitive ali uredi matrico
+Lire en plein écran depuis le début (⌥⌘↩) ¦ Prikaži preko cijelog zaslona od početka (⌥⌘↩) ¦ Predvajaj celozaslonsko od začetka (⌥⌘↩)
+D’ici ¦ Odavde ¦ Od tu
+Lire depuis cette diapositive (⌘↩) ¦ Prikaži od ovog slajda (⌘↩) ¦ Predvajaj od tega diapozitiva (⌘↩)
+Plein écran + fenêtre du présentateur (notes, suivante, chronomètre) ¦ Cijeli zaslon + prozor izlagača (bilješke, sljedeći, štoperica) ¦ Celozaslonsko + okno predstavitelja (opombe, naslednji, štoparica)
+PowerPoint, OpenDocument, PDF, images, Markdown, texte, JSON ¦ PowerPoint, OpenDocument, PDF, slike, Markdown, tekst, JSON ¦ PowerPoint, OpenDocument, PDF, slike, Markdown, besedilo, JSON
+Récit d’une vie : des diapositives toutes faites à partir de la fiche d’une personne ¦ Priča o životu: gotovi slajdovi iz zapisa osobe ¦ Življenjska zgodba: pripravljeni diapozitivi iz zapisa osebe
+PDF, impression, images, vidéo, fichier de la présentation ¦ PDF, ispis, slike, videozapis, datoteka prezentacije ¦ PDF, tisk, slike, video, datoteka predstavitve
+Une forme (les autres : menu ◆ Forme en haut) ¦ Oblik (ostali: izbornik ◆ Oblik gore) ¦ Oblika (druge: meni ◆ Oblika zgoraj)
+Une image (médias ou ordinateur) ¦ Slika (mediji ili računalo) ¦ Slika (mediji ali računalnik)
+La fiche d’une personne ¦ Zapis osobe ¦ Zapis osebe
+Présentateur : plein écran, notes, chronomètre ¦ Izlagač: cijeli zaslon, bilješke, štoperica ¦ Predstavitelj: celozaslonsko, opombe, štoparica
+Diapositives (au-dessus de la liste) ¦ Slajdovi (iznad popisa) ¦ Diapozitivi (nad seznamom)
+Nouvelle diapositive ¦ Novi slajd ¦ Nov diapozitiv
+＋ Diapositive ¦ ＋ Slajd ¦ ＋ Diapozitiv
+▾ Choisir la disposition ¦ ▾ Odaberi raspored ¦ ▾ Izberi postavitev
+Choisir la disposition ¦ Odaberi raspored ¦ Izberi postavitev
+Dupliquer la diapositive (pour un déplacement magique) ¦ Dupliciraj slajd (za čarobni pomak) ¦ Podvoji diapozitiv (za čarobni premik)
+Sauter / ne plus sauter à la lecture ¦ Preskoči / ne preskači pri prikazu ¦ Preskoči / ne preskakuj pri predvajanju
+Commencer une section (un groupe de diapositives) ici ¦ Započni odjeljak (grupu slajdova) ovdje ¦ Začni razdelek (skupino diapozitivov) tukaj
+Supprimer la diapositive ¦ Izbriši slajd ¦ Izbriši diapozitiv
+Diapositive précédente (Page précédente) ¦ Prethodni slajd (Page Up) ¦ Prejšnji diapozitiv (Page Up)
+Diapositive suivante (Page suivante) ¦ Sljedeći slajd (Page Down) ¦ Naslednji diapozitiv (Page Down)
+Ajuster ¦ Prilagodi ¦ Prilagodi
+Les objets se calent sur les bords, le centre et les autres objets (⌘ en glissant : sans aimant) ¦ Objekti se privlače na rubove, sredinu i druge objekte (⌘ pri povlačenju: bez privlačenja) ¦ Predmeti se pripnejo na robove, sredino in druge predmete (⌘ med vlečenjem: brez pripenjanja)
+Notes de l’orateur ¦ Bilješke govornika ¦ Opombe govorca
+📝 Notes ¦ 📝 Bilješke ¦ 📝 Opombe
+Notes de l’orateur : ce que tu veux dire sur cette diapositive (vues seulement dans la fenêtre du présentateur, et dans le PDF avec notes)… ¦ Bilješke govornika: što želiš reći o ovom slajdu (vidljive samo u prozoru izlagača i u PDF-u s bilješkama)… ¦ Opombe govorca: kaj želiš povedati o tem diapozitivu (vidne samo v oknu predstavitelja in v PDF z opombami)…
+Onglets de l’inspecteur (à droite) ¦ Kartice inspektora (desno) ¦ Zavihki inšpektorja (desno)
+Format de l’objet choisi ¦ Format odabranog objekta ¦ Oblika izbranega predmeta
+Animer ¦ Animiraj ¦ Animiraj
+Transition et animations ¦ Prijelaz i animacije ¦ Prehod in animacije
+Diapo ¦ Slajd ¦ Diapozitiv
+La diapositive : disposition, fond, durée, notes ¦ Slajd: raspored, pozadina, trajanje, bilješke ¦ Diapozitiv: postavitev, ozadje, trajanje, opombe
+Les objets de la diapositive (devant, derrière, cacher, verrouiller) ¦ Objekti slajda (naprijed, natrag, sakrij, zaključaj) ¦ Predmeti diapozitiva (spredaj, zadaj, skrij, zakleni)
+Thème, polices, format, musique ¦ Tema, fontovi, format, glazba ¦ Tema, pisave, format, glasba
+Clic : choisir un objet (⇧ : en plus) · double-clic : écrire dedans · glisser : déplacer · poignées : agrandir · rond : tourner ¦ Klik: odaberi objekt (⇧: još) · dvoklik: piši unutra · povlačenje: pomakni · ručke: promijeni veličinu · krug: zakreni ¦ Klik: izberi predmet (⇧: dodaj) · dvoklik: piši vanj · vlečenje: premakni · ročaji: spremeni velikost · krog: zasukaj
+Aimanter : les objets se calent sur les bords, le centre et les autres objets (⌘ en glissant : sans aimant) ¦ Privlačenje: objekti se privlače na rubove, sredinu i druge objekte (⌘ pri povlačenju: bez privlačenja) ¦ Pripenjanje: predmeti se pripnejo na robove, sredino in druge predmete (⌘ med vlečenjem: brez pripenjanja)
+Replier / déplier la section ¦ Sklopi / rasklopi odjeljak ¦ Strni / razširi razdelek
+Sautée à la lecture ¦ Preskočeno pri prikazu ¦ Preskočen pri predvajanju
+Animations ¦ Animacije ¦ Animacije
+Transition : {name} ¦ Prijelaz: {name} ¦ Prehod: {name}
+Tourner (⇧ : de 15° en 15°) ¦ Zakreni (⇧: po 15°) ¦ Zasukaj (⇧: po 15°)
+Choisis une zone de texte. ¦ Odaberi tekstni okvir. ¦ Izberi polje z besedilom.
+Le petit arbre de quelle personne ? ¦ Malo stablo koje osobe? ¦ Malo drevo katere osebe?
+La frise de la vie de qui ? ¦ Vremenska crta čijeg života? ¦ Časovnica čigavega življenja?
+Lecture de la fiche… ¦ Čitanje zapisa… ¦ Branje zapisa…
+Changer la vidéo ou le son ¦ Promijeni videozapis ili zvuk ¦ Zamenjaj video ali zvok
+Choisis un ou plusieurs objets. ¦ Odaberi jedan ili više objekata. ¦ Izberi enega ali več predmetov.
+Choisis au moins trois objets pour les répartir. ¦ Odaberi barem tri objekta za raspoređivanje. ¦ Izberi vsaj tri predmete za razporeditev.
+Choisis au moins deux objets à grouper. ¦ Odaberi barem dva objekta za grupiranje. ¦ Izberi vsaj dva predmeta za združitev.
+Choisis deux objets (⇧ clic) : un trait les reliera, et les suivra quand tu les déplaces. ¦ Odaberi dva objekta (⇧ klik): povezat će ih crta i pratiti ih kad ih pomičeš. ¦ Izberi dva predmeta (⇧ klik): povezala ju bo črta, ki jima bo sledila, ko ju premikaš.
+Choisis deux formes (⇧ clic) à fusionner. ¦ Odaberi dva oblika (⇧ klik) za spajanje. ¦ Izberi dve obliki (⇧ klik) za združitev.
+⊕ Fusionner deux formes ¦ ⊕ Spoji dva oblika ¦ ⊕ Združi dve obliki
+La 1re forme est celle du dessous. Les deux restent gardées dans la nouvelle forme. ¦ 1. oblik je onaj ispod. Oba se čuvaju u novom obliku. ¦ 1. oblika je spodnja. Obe se ohranita v novi obliki.
+Comment ¦ Kako ¦ Kako
+🗂 Sur toutes les diapositives (masque). Dans un texte, « {a} » donne le numéro de la diapositive et « {b} » leur nombre. 🗂 sans rien choisir : le modifier. ¦ 🗂 Na svim slajdovima (matrica). U tekstu „{a}” daje broj slajda, a „{b}” njihov ukupan broj. 🗂 bez odabira: uredi je. ¦ 🗂 Na vseh diapozitivih (matrica). V besedilu »{a}« da številko diapozitiva in »{b}« njihovo skupno število. 🗂 brez izbire: uredi jo.
+Le masque est vide : choisis des objets (logo, pied de page, numéro « {a} »…) puis 🗂 pour les mettre sur toutes les diapositives. ¦ Matrica je prazna: odaberi objekte (logotip, podnožje, broj „{a}”…) pa 🗂 da ih staviš na sve slajdove. ¦ Matrica je prazna: izberi predmete (logotip, noga, številka »{a}«…), nato 🗂, da jih postaviš na vse diapozitive.
+🗂 Masque des diapositives ¦ 🗂 Matrica slajdova ¦ 🗂 Matrica diapozitivov
+{n} sur toutes les diapositives. ¦ {n} na svim slajdovima. ¦ {n} na vseh diapozitivih.
+Que faire ¦ Što učiniti ¦ Kaj narediti
+Les ramener sur cette diapositive pour les modifier (puis 🗂 pour les remettre) ¦ Vrati ih na ovaj slajd da ih urediš (zatim 🗂 da ih vratiš) ¦ Vrni jih na ta diapozitiv, da jih urediš (nato 🗂, da jih vrneš)
+Remontrer le masque sur cette diapositive ¦ Ponovno prikaži matricu na ovom slajdu ¦ Znova prikaži matrico na tem diapozitivu
+Ne pas montrer le masque sur cette diapositive ¦ Ne prikazuj matricu na ovom slajdu ¦ Ne prikazuj matrice na tem diapozitivu
+Vider le masque ¦ Isprazni matricu ¦ Izprazni matrico
+Diapositive dupliquée : déplace les objets puis choisis la transition « Déplacement magique » (onglet ✨ Animer). ¦ Slajd dupliciran: pomakni objekte, zatim odaberi prijelaz „Čarobni pomak” (kartica ✨ Animiraj). ¦ Diapozitiv podvojen: premakni predmete, nato izberi prehod »Čarobni premik« (zavihek ✨ Animiraj).
+Aucune couleur ¦ Bez boje ¦ Brez barve
+Choisir la police (recherche, récentes, polices de l’ordinateur) ¦ Odaberi font (traženje, nedavni, fontovi računala) ¦ Izberi pisavo (iskanje, nedavne, pisave računalnika)
+{what} (sur la diapositive) ¦ {what} (na slajdu) ¦ {what} (na diapozitivu)
+Les réglages vont au texte sélectionné (sinon à tout le texte). ¦ Postavke se primjenjuju na odabrani tekst (inače na sav tekst). ¦ Nastavitve veljajo za izbrano besedilo (sicer za vse besedilo).
+Double-clic dans le texte pour l’écrire ; les réglages vont à tout le texte, ou au morceau sélectionné. ¦ Dvoklik u tekst za pisanje; postavke se primjenjuju na sav tekst ili na odabrani dio. ¦ Dvoklik v besedilo za pisanje; nastavitve veljajo za vse besedilo ali za izbrani del.
+Le trait suit les deux objets quand on les déplace. ¦ Crta prati oba objekta kad se pomiču. ¦ Črta sledi obema predmetoma, ko se premikata.
+Double-clic sur une case du tableau pour l’écrire directement. ¦ Dvoklik na ćeliju tablice za izravno pisanje. ¦ Dvoklik na celico tabele za neposredno pisanje.
+Ce qui est montré vient de la fiche (relue le {date}) : la présentation se lit même sans la base. « Relire la fiche » la met à jour. ¦ Ono što se prikazuje dolazi iz zapisa (ponovno pročitano {date}): prezentacija radi i bez baze. „Ponovno pročitaj zapis” ažurira je. ¦ Prikazano prihaja iz zapisa (prebrano {date}): predstavitev deluje tudi brez baze. »Znova preberi zapis« jo posodobi.
+(groupe) ¦ (grupa) ¦ (skupina)
+Choisis un objet sur la diapositive (clic) ou insère-en un (barre du haut). ⇧ clic : en choisir plusieurs ; glisser sur le fond : un rectangle de sélection ; double-clic : écrire dans un texte, changer une image ; ⌥ en glissant : copier. ¦ Odaberi objekt na slajdu (klik) ili ga umetni (gornja traka). ⇧ klik: odaberi više; povlačenje po pozadini: pravokutnik odabira; dvoklik: piši u tekst, promijeni sliku; ⌥ pri povlačenju: kopiraj. ¦ Izberi predmet na diapozitivu (klik) ali ga vstavi (zgornja vrstica). ⇧ klik: izberi več; vlečenje po ozadju: pravokotnik izbora; dvoklik: piši v besedilo, zamenjaj sliko; ⌥ med vlečenjem: kopiraj.
+Inspecteur : sections de « Format » ¦ Inspektor: odjeljci „Format” ¦ Inšpektor: razdelki »Oblika«
+Inspecteur : sections de « Animer » ¦ Inspektor: odjeljci „Animiraj” ¦ Inšpektor: razdelki »Animiraj«
+Inspecteur : sections de « Diapositive » ¦ Inspektor: odjeljci „Slajd” ¦ Inšpektor: razdelki »Diapozitiv«
+Inspecteur : « Objets » ¦ Inspektor: „Objekti” ¦ Inšpektor: »Predmeti«
+Inspecteur : sections de « Document » ¦ Inspektor: odjeljci „Dokument” ¦ Inšpektor: razdelki »Dokument«
+C’est la première diapositive : sa transition ne joue que si la lecture recommence en boucle. ¦ Ovo je prvi slajd: njegov se prijelaz prikazuje samo ako se prikaz ponavlja u petlji. ¦ To je prvi diapozitiv: njegov prehod se predvaja le, če se predvajanje ponavlja v zanki.
+✨ Les objets présents sur la diapositive d’avant et sur celle-ci (diapositive dupliquée avec ⧉, ou objets portant le même nom) glissent, grandissent et tournent d’une place à l’autre ; les autres apparaissent ou s’effacent. ¦ ✨ Objekti prisutni na prethodnom slajdu i na ovome (slajd dupliciran s ⧉ ili objekti istog naziva) klize, rastu i zakreću se s jednog mjesta na drugo; ostali se pojavljuju ili nestaju. ¦ ✨ Predmeti, ki so na prejšnjem diapozitivu in na tem (diapozitiv, podvojen s ⧉, ali predmeti z enakim imenom), drsijo, rastejo in se sukajo z enega mesta na drugo; drugi se pojavijo ali zbledijo.
+Aucune : il est là dès l’arrivée de la diapositive. ¦ Nijedna: tu je čim se slajd pojavi. ¦ Brez: je tam takoj, ko se diapozitiv pojavi.
+Choisis un objet sur la diapositive pour le faire apparaître (entrée) ou disparaître (sortie), au clic ou tout seul. ¦ Odaberi objekt na slajdu da se pojavi (ulaz) ili nestane (izlaz), na klik ili samostalno. ¦ Izberi predmet na diapozitivu, da se pojavi (vstop) ali izgine (izstop), ob kliku ali samodejno.
+Pas encore d’animation sur cette diapositive. ¦ Još nema animacija na ovom slajdu. ¦ Na tem diapozitivu še ni animacij.
+Changer de disposition replace les objets « titre », « texte », « photo » ; ce que tu as écrit est gardé. ¦ Promjena rasporeda premješta objekte „naslov”, „tekst”, „fotografija”; ono što si napisao/napisala ostaje. ¦ Sprememba postavitve premakne predmete »naslov«, »besedilo«, »fotografija«; kar si napisal/napisala, ostane.
+Ce que tu veux dire sur cette diapositive (vu dans la fenêtre du présentateur)… ¦ Što želiš reći o ovom slajdu (vidljivo u prozoru izlagača)… ¦ Kaj želiš povedati o tem diapozitivu (vidno v oknu predstavitelja)…
+Objets de la diapositive ¦ Objekti slajda ¦ Predmeti diapozitiva
+Objets (le premier est devant) ¦ Objekti (prvi je naprijed) ¦ Predmeti (prvi je spredaj)
+Dans un groupe ¦ U grupi ¦ V skupini
+Aucun objet sur cette diapositive pour l’instant ¦ Još nema objekata na ovom slajdu ¦ Na tem diapozitivu še ni predmetov
+Insère un texte, une image… avec la barre du haut. ¦ Umetni tekst, sliku… pomoću gornje trake. ¦ Vstavi besedilo, sliko… z zgornjo vrstico.
+Celle du thème ({font}) ¦ Font teme ({font}) ¦ Pisava teme ({font})
+{w} × {h} points. En changeant de format, les objets sont agrandis ou réduits ensemble. ¦ {w} × {h} točaka. Pri promjeni formata objekti se zajedno povećavaju ili smanjuju. ¦ {w} × {h} točk. Ob spremembi formata se predmeti skupaj povečajo ali pomanjšajo.
+{n} dont {skipped} · {time} en lecture toute seule (durées des diapositives). ¦ {n}, od toga {skipped} · {time} pri samostalnom prikazu (trajanja slajdova). ¦ {n}, od tega {skipped} · {time} pri samodejnem predvajanju (trajanja diapozitivov).
+{n} · {time} en lecture toute seule (durées des diapositives). ¦ {n} · {time} pri samostalnom prikazu (trajanja slajdova). ¦ {n} · {time} pri samodejnem predvajanju (trajanja diapozitivov).
+Il n’y a pas de diapositive avant celle-ci. ¦ Nema slajda prije ovoga. ¦ Pred tem ni diapozitiva.
+Choisis d’abord un effet de transition. ¦ Najprije odaberi efekt prijelaza. ¦ Najprej izberi učinek prehoda.
+Les dernières modifications de la présentation seront perdues. ¦ Posljednje izmjene prezentacije bit će izgubljene. ¦ Zadnje spremembe predstavitve bodo izgubljene.
+Fermer sans enregistrer la présentation ? ¦ Zatvoriti prezentaciju bez spremanja? ¦ Zaprem predstavitev brez shranjevanja?
+une diapositive par page (« Enregistrer en PDF ») ¦ jedan slajd po stranici („Spremi kao PDF”) ¦ en diapozitiv na stran (»Shrani kot PDF«)
+📝 PDF + notes ¦ 📝 PDF + bilješke ¦ 📝 PDF + opombe
+avec les notes de l’orateur ¦ s bilješkama govornika ¦ z opombami govorca
+🗂 Toutes en PNG ¦ 🗂 Svi kao PNG ¦ 🗂 Vsi kot PNG
+un fichier .zip ¦ datoteka .zip ¦ datoteka .zip
+WebM, avec la musique ¦ WebM, s glazbom ¦ WebM, z glasbo
+aperçu, pages, notes ¦ pregled, stranice, bilješke ¦ predogled, strani, opombe
+pour la rouvrir ou la partager ¦ za ponovno otvaranje ili dijeljenje ¦ za ponovno odpiranje ali deljenje
+Le diaporama n’est pas chargé. ¦ Dijaprojekcija nije učitana. ¦ Diaprojekcija ni naložena.
+Ajouter le récit ¦ Dodaj priču ¦ Dodaj zgodbo
+Rien à raconter pour cette personne. ¦ Nema se što ispričati o ovoj osobi. ¦ O tej osebi ni česa povedati.
+{n} : chaque texte vient de la fiche. Les cartes animées restent dans le diaporama. ¦ {n}: svaki tekst dolazi iz zapisa. Animirane karte ostaju u dijaprojekciji. ¦ {n}: vsako besedilo prihaja iz zapisa. Animirani zemljevidi ostanejo v diaprojekciji.
+Titre de la section qui commence à cette diapositive (vide : pas de section) : ¦ Naslov odjeljka koji počinje ovim slajdom (prazno: bez odjeljka): ¦ Naslov razdelka, ki se začne s tem diapozitivom (prazno: brez razdelka):
+Police « {font} » pour le texte choisi. ¦ Font „{font}” za odabrani tekst. ¦ Pisava »{font}« za izbrano besedilo.
+Police « {font} » pour les titres. ¦ Font „{font}” za naslove. ¦ Pisava »{font}« za naslove.
+Police « {font} » pour les textes. ¦ Font „{font}” za tekstove. ¦ Pisava »{font}« za besedila.
+L’image est maintenant le fond de la diapositive (onglet 🖼 Diapositive). ¦ Slika je sada pozadina slajda (kartica 🖼 Slajd). ¦ Slika je zdaj ozadje diapozitiva (zavihek 🖼 Diapozitiv).
+Cette transition va maintenant à toutes les diapositives. ¦ Ovaj se prijelaz sada primjenjuje na sve slajdove. ¦ Ta prehod zdaj velja za vse diapozitive.
+L’image du fond ¦ Slika pozadine ¦ Slika ozadja
+Ce fond va maintenant à toutes les diapositives. ¦ Ova se pozadina sada primjenjuje na sve slajdove. ¦ To ozadje zdaj velja za vse diapozitive.
+Une musique pendant la lecture ¦ Glazba tijekom prikaza ¦ Glasba med predvajanjem
+Choisis un son (MP3, M4A, WAV…). ¦ Odaberi zvuk (MP3, M4A, WAV…). ¦ Izberi zvok (MP3, M4A, WAV…).
+{name} : ni une image, ni une vidéo, ni un son. ¦ {name}: nije ni slika, ni videozapis, ni zvuk. ¦ {name}: ni ne slika ne video ne zvok.
+Diapositive copiée : ⌘V pour la coller. ¦ Slajd kopiran: ⌘V za lijepljenje. ¦ Diapozitiv kopiran: ⌘V za lepljenje.
+ce n’est pas un fichier zip valide (pptx, odp) ¦ ovo nije valjana zip datoteka (pptx, odp) ¦ to ni veljavna datoteka zip (pptx, odp)
+un élément du fichier est trop gros ¦ jedan je element datoteke prevelik ¦ en element datoteke je prevelik
+fichier refusé : il contient des déclarations XML (DOCTYPE ou ENTITY) ¦ datoteka odbijena: sadrži XML deklaracije (DOCTYPE ili ENTITY) ¦ datoteka zavrnjena: vsebuje deklaracije XML (DOCTYPE ali ENTITY)
+XML illisible dans le fichier ¦ nečitljiv XML u datoteci ¦ neberljiv XML v datoteki
+ce n’est pas une présentation PowerPoint (.pptx) ¦ ovo nije PowerPoint prezentacija (.pptx) ¦ to ni predstavitev PowerPoint (.pptx)
+aucune diapositive trouvée ¦ nije pronađen nijedan slajd ¦ ni najdenega diapozitiva
+{n} dans un format que le navigateur ne lit pas (EMF, WMF…) ont été laissées de côté. ¦ {n} u formatu koji preglednik ne čita (EMF, WMF…) izostavljeno. ¦ {n} v formatu, ki ga brskalnik ne bere (EMF, WMF…), izpuščenih.
+ce n’est pas un fichier OpenDocument (.odp) ¦ ovo nije OpenDocument datoteka (.odp) ¦ to ni datoteka OpenDocument (.odp)
+{n} de côté. ¦ Izostavljeno: {n}. ¦ Izpuščeno: {n}.
+ce n’est pas un PDF ¦ ovo nije PDF ¦ to ni PDF
+aucune image (scan, photo) n’a été trouvée dans ce PDF. Son texte et ses dessins ne peuvent pas être lus ici : exporte-le plutôt en images, ou en PowerPoint depuis le logiciel qui l’a fait ¦ u ovom PDF-u nije pronađena nijedna slika (sken, fotografija). Njegov tekst i crteži ne mogu se ovdje pročitati: radije ga izvezi kao slike ili kao PowerPoint iz programa u kojem je napravljen ¦ v tem PDF ni bila najdena nobena slika (optično prebrana, fotografija). Njegovega besedila in risb tukaj ni mogoče prebrati: raje ga izvozi kot slike ali kot PowerPoint iz programa, v katerem je bil narejen
+PDF : {n} ; le texte et les dessins du PDF ne sont pas lus. ¦ PDF: {n}; tekst i crteži PDF-a ne čitaju se. ¦ PDF: {n}; besedilo in risbe PDF se ne preberejo.
+Carte du diaporama : le trajet animé reste dans le diaporama. ¦ Karta dijaprojekcije: animirana ruta ostaje u dijaprojekciji. ¦ Zemljevid diaprojekcije: animirana pot ostane v diaprojekciji.
+ce n’est pas une présentation de l’app ¦ ovo nije prezentacija iz aplikacije ¦ to ni predstavitev iz aplikacije
+{name} : Keynote garde ses fichiers dans un format fermé. Dans Keynote : Fichier → Exporter vers → PowerPoint (ou PDF, ou Images), puis importe ce fichier ici. ¦ {name}: Keynote čuva svoje datoteke u zatvorenom formatu. U Keynoteu: Datoteka → Izvezi u → PowerPoint (ili PDF, ili Slike), zatim uvezi tu datoteku ovdje. ¦ {name}: Keynote hrani svoje datoteke v zaprtem formatu. V Keynotu: Datoteka → Izvozi v → PowerPoint (ali PDF ali Slike), nato uvozi to datoteko tukaj.
+{name} : l’ancien format PowerPoint (avant 2007) ne se lit pas ici ; ouvre-le et enregistre-le en .pptx. ¦ {name}: stari PowerPoint format (prije 2007.) ne čita se ovdje; otvori ga i spremi kao .pptx. ¦ {name}: starega formata PowerPoint (pred 2007) tukaj ni mogoče prebrati; odpri ga in shrani kot .pptx.
+fichier trop gros (400 Mo au plus) ¦ datoteka prevelika (najviše 400 MB) ¦ datoteka prevelika (največ 400 MB)
+{name} : format non reconnu. ¦ {name}: format nije prepoznat. ¦ {name}: format ni prepoznan.
+{name} : rien à importer. ¦ {name}: nema se što uvesti. ¦ {name}: ni česa uvoziti.
+IMPORT ¦ UVOZ ¦ UVOZ
+Rien n’a été importé ¦ Ništa nije uvezeno ¦ Nič ni bilo uvoženo
+Remplacer les diapositives actuelles (sinon : ajoutées après la diapositive affichée) ¦ Zamijeni trenutne slajdove (inače: dodaju se nakon prikazanog slajda) ¦ Zamenjaj trenutne diapozitive (sicer: dodani za prikazanim diapozitivom)
+<b>PowerPoint (.pptx)</b> et <b>OpenDocument / LibreOffice Impress (.odp)</b> : chaque diapositive avec ses textes (à leur place, taille, gras, couleur, listes), ses images, ses formes simples, ses tableaux, ses graphiques, ses notes et ses transitions. ¦ <b>PowerPoint (.pptx)</b> i <b>OpenDocument / LibreOffice Impress (.odp)</b>: svaki slajd sa svojim tekstovima (na mjestu, veličina, podebljano, boja, popisi), slikama, jednostavnim oblicima, tablicama, grafikonima, bilješkama i prijelazima. ¦ <b>PowerPoint (.pptx)</b> in <b>OpenDocument / LibreOffice Impress (.odp)</b>: vsak diapozitiv s svojimi besedili (na mestu, velikost, krepko, barva, seznami), slikami, preprostimi oblikami, tabelami, grafi, opombami in prehodi.
+<b>Keynote (.key)</b> : le format d’Apple est fermé. Dans Keynote : Fichier → Exporter vers → <b>PowerPoint</b> (ou PDF, ou Images), puis importe ce fichier ici. ¦ <b>Keynote (.key)</b>: Appleov format je zatvoren. U Keynoteu: Datoteka → Izvezi u → <b>PowerPoint</b> (ili PDF, ili Slike), zatim uvezi tu datoteku ovdje. ¦ <b>Keynote (.key)</b>: Applov format je zaprt. V Keynotu: Datoteka → Izvozi v → <b>PowerPoint</b> (ali PDF ali Slike), nato uvozi to datoteko tukaj.
+<b>PDF</b> : les images qu’il contient (scans, photos) deviennent des diapositives, une par image. Le texte et les dessins d’un PDF ne se lisent pas ici : pour une présentation, exporte-la plutôt en PowerPoint ou en images. ¦ <b>PDF</b>: slike koje sadrži (skenovi, fotografije) postaju slajdovi, jedan po slici. Tekst i crteži PDF-a ne čitaju se ovdje: za prezentaciju je radije izvezi kao PowerPoint ili slike. ¦ <b>PDF</b>: slike, ki jih vsebuje (optično prebrane, fotografije), postanejo diapozitivi, en na sliko. Besedila in risb PDF tukaj ni mogoče prebrati: predstavitev raje izvozi kot PowerPoint ali slike.
+<b>Images</b> (JPG, PNG, WEBP, GIF, BMP…), plusieurs à la fois : une diapositive « photo pleine page » par image. ¦ <b>Slike</b> (JPG, PNG, WEBP, GIF, BMP…), više odjednom: jedan slajd „fotografija preko cijele stranice” po slici. ¦ <b>Slike</b> (JPG, PNG, WEBP, GIF, BMP…), več naenkrat: en diapozitiv »fotografija čez celo stran« na sliko.
+<b>Markdown (.md) ou texte (.txt)</b> : « # Titre » commence une diapositive, « - » fait une puce, « --- » sépare deux diapositives, « > » une citation, « Notes: » les notes de l’orateur. Un texte simple : un paragraphe par diapositive. ¦ <b>Markdown (.md) ili tekst (.txt)</b>: „# Naslov” započinje slajd, „-” stvara grafičku oznaku, „---” odvaja dva slajda, „>” citat, „Notes:” bilješke govornika. Običan tekst: jedan odlomak po slajdu. ¦ <b>Markdown (.md) ali besedilo (.txt)</b>: »# Naslov« začne diapozitiv, »-« naredi oznako, »---« loči dva diapozitiva, »>« citat, »Notes:« opombe govorca. Navadno besedilo: en odstavek na diapozitiv.
+<b>JSON</b> : une présentation (ou un diaporama) exportée par l’app. ¦ <b>JSON</b>: prezentacija (ili dijaprojekcija) izvezena iz aplikacije. ¦ <b>JSON</b>: predstavitev (ali diaprojekcija), izvožena iz aplikacije.
+Aucune diapositive à imprimer. ¦ Nema slajdova za ispis. ¦ Ni diapozitivov za tisk.
+Diapositive ¦ Slajd ¦ Diapozitiv
+Pas de notes. ¦ Nema bilješki. ¦ Ni opomb.
+{name} — présentation ¦ {name} — prezentacija ¦ {name} — predstavitev
+Les diapositives ¦ Slajdovi ¦ Diapozitivi
+Les diapositives avec les notes du présentateur ¦ Slajdovi s bilješkama izlagača ¦ Diapozitivi z opombami predstavitelja
+Les notes seules (texte) ¦ Samo bilješke (tekst) ¦ Samo opombe (besedilo)
+Diapositives par page ¦ Slajdova po stranici ¦ Diapozitivov na stran
+Numéros des diapositives ¦ Brojevi slajdova ¦ Številke diapozitivov
+Les diapositives masquées aussi ¦ I skriveni slajdovi ¦ Tudi skriti diapozitivi
+aucune diapositive ¦ nema slajdova ¦ ni diapozitivov
+Préparation de {n} images… ¦ Priprema slika: {n}… ¦ Priprava slik: {n}…
+Préparation de l’image… ¦ Priprema slike… ¦ Priprava slike…
+ce navigateur ne sait pas enregistrer de vidéo ¦ ovaj preglednik ne zna snimati videozapis ¦ ta brskalnik ne zna snemati videa
+La vidéo rejoue la présentation en entier ({time}, durées de l’onglet 🖼 Diapositive) et l’enregistre. Laisse la fenêtre ouverte. ¦ Videozapis ponovno prikazuje cijelu prezentaciju ({time}, trajanja s kartice 🖼 Slajd) i snima je. Ostavi prozor otvoren. ¦ Video znova predvaja celotno predstavitev ({time}, trajanja z zavihka 🖼 Diapozitiv) in jo posname. Pusti okno odprto.
+Fabriquer la vidéo ? ¦ Izraditi videozapis? ¦ Izdelam video?
+Fabriquer la vidéo ¦ Izradi videozapis ¦ Izdelaj video
+Préparation : {n} / {total} ¦ Priprema: {n} / {total} ¦ Priprava: {n} / {total}
+Vidéo : {n} % ¦ Videozapis: {n} % ¦ Video: {n} %
+Vidéo arrêtée : la présentation a été fermée pendant l’enregistrement. ¦ Videozapis zaustavljen: prezentacija je zatvorena tijekom snimanja. ¦ Video ustavljen: predstavitev je bila med snemanjem zaprta.
+la vidéo est vide : l’enregistrement n’a pas pu se faire dans ce navigateur ¦ videozapis je prazan: snimanje nije uspjelo u ovom pregledniku ¦ video je prazen: snemanje v tem brskalniku ni uspelo
+La vidéo est vide : l’enregistrement n’a pas pu se faire dans ce navigateur. ¦ Videozapis je prazan: snimanje nije uspjelo u ovom pregledniku. ¦ Video je prazen: snemanje v tem brskalniku ni uspelo.
+Vidéo téléchargée et rangée dans les Médias. ¦ Videozapis preuzet i spremljen u Medije. ¦ Video prenesen in shranjen med Medije.
+Tu peux l’ajouter aux Médias de l’app, ou seulement la télécharger. ¦ Možeš ga dodati u Medije aplikacije ili ga samo preuzeti. ¦ Lahko ga dodaš med Medije aplikacije ali ga samo preneseš.
+Vidéo prête ¦ Videozapis spreman ¦ Video pripravljen
+Ajouter aux Médias ¦ Dodaj u Medije ¦ Dodaj med Medije
+Télécharger seulement ¦ Samo preuzmi ¦ Samo prenesi
+Vidéo ajoutée aux Médias. ¦ Videozapis dodan u Medije. ¦ Video dodan med Medije.
+Vidéo impossible : {error} ¦ Videozapis nije moguć: {error} ¦ Video ni mogoč: {error}
+NOUVELLE PRÉSENTATION ¦ NOVA PREZENTACIJA ¦ NOVA PREDSTAVITEV
+🎤 Choisis un thème ¦ 🎤 Odaberi temu ¦ 🎤 Izberi temo
+Créer la présentation ¦ Stvori prezentaciju ¦ Ustvari predstavitev
+Le thème, les couleurs, les polices et le format se changent ensuite (onglet ⚙️ Document). Pour partir d’un PowerPoint, d’un OpenDocument, d’un PDF ou de photos : « ⤒ Importer ». ¦ Tema, boje, fontovi i format mogu se kasnije promijeniti (kartica ⚙️ Dokument). Za početak od PowerPointa, OpenDocumenta, PDF-a ili fotografija: „⤒ Uvezi”. ¦ Temo, barve, pisave in format lahko pozneje spremeniš (zavihek ⚙️ Dokument). Za začetek iz PowerPointa, OpenDocumenta, PDF ali fotografij: »⤒ Uvozi«.
+⤒ Importer une présentation ¦ ⤒ Uvezi prezentaciju ¦ ⤒ Uvozi predstavitev
+Thème au départ ¦ Početna tema ¦ Začetna tema
+Format au départ ¦ Početni format ¦ Začetni format
+Transition des nouvelles diapositives ¦ Prijelaz novih slajdova ¦ Prehod novih diapozitivov
+Disposition de « ＋ Diapositive » ¦ Raspored za „＋ Slajd” ¦ Postavitev za »＋ Diapozitiv«
+Aimanter les objets (guides) ¦ Privlačenje objekata (vodilice) ¦ Pripenjanje predmetov (vodila)
+Couleur du pointeur laser ¦ Boja laserskog pokazivača ¦ Barva laserskega kazalnika
+↺ Réglages de départ ¦ ↺ Vrati na početno ¦ ↺ Ponastavi na začetno
+Réglages de départ. ¦ Početne postavke. ¦ Začetne nastavitve.
+Les boutons du haut, les onglets et les sections de l’inspecteur se rangent, se montrent ou se cachent dans « Boutons et options » (éditeur 🎤 Présentation), avec ses raccourcis clavier. ¦ Gornji gumbi, kartice i odjeljci inspektora raspoređuju se, prikazuju ili skrivaju u „Gumbi i opcije” (uređivač 🎤 Prezentacija), s njegovim tipkovnim prečacima. ¦ Zgornji gumbi, zavihki in razdelki inšpektorja se razporedijo, prikažejo ali skrijejo v »Gumbi in možnosti« (urejevalnik 🎤 Predstavitev), z njegovimi bližnjicami.
+{name} (présentation) ¦ {name} (prezentacija) ¦ {name} (predstavitev)
+Diaporama ¦ Dijaprojekcija ¦ Diaprojekcija
+Nom (pour le déplacement magique) ¦ Naziv (za čarobni pomak) ¦ Ime (za čarobni premik)
+⇋ Miroir ¦ ⇋ Zrcali ¦ ⇋ Zrcali
+⇵ Miroir ¦ ⇵ Zrcali ¦ ⇵ Zrcali
+Retourner de gauche à droite ¦ Okreni slijeva nadesno ¦ Obrni z leve na desno
+Retourner de haut en bas ¦ Okreni odozgo prema dolje ¦ Obrni od zgoraj navzdol
+⤢ Proportions de la photo ¦ ⤢ Omjeri fotografije ¦ ⤢ Razmerja fotografije
+Tout devant ¦ Sasvim naprijed ¦ Čisto spredaj
+Tout derrière ¦ Sasvim natrag ¦ Čisto zadaj
+Grouper (⌘G) ¦ Grupiraj (⌘G) ¦ Združi (⌘G)
+Déverrouiller (⌘L) ¦ Otključaj (⌘L) ¦ Odkleni (⌘L)
+Verrouiller (⌘L) ¦ Zaključaj (⌘L) ¦ Zakleni (⌘L)
+Dupliquer (⌘D) ¦ Dupliciraj (⌘D) ¦ Podvoji (⌘D)
+Supprimer (⌫) ¦ Izbriši (⌫) ¦ Izbriši (⌫)
+Selon le rôle ¦ Prema ulozi ¦ Glede na vlogo
+Légère ¦ Lagani ¦ Lahka
+Normale ¦ Normalni ¦ Običajna
+Demi-grasse ¦ Polupodebljani ¦ Polkrepka
