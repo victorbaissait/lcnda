@@ -3599,3 +3599,220 @@ forme|Deux croches ¦ Dvije osminke ¦ Dve osminki
 forme|Doubles croches ¦ Šesnaestinke ¦ Šestnajstinke
 forme|Dé un ¦ Kocka jedan ¦ Kocka ena
 forme|Dé deux ¦ Kocka dva ¦ Kocka dva
+forme|Dé trois ¦ Kocka tri ¦ Kocka tri
+forme|Dé quatre ¦ Kocka četiri ¦ Kocka štiri
+forme|Dé cinq ¦ Kocka pet ¦ Kocka pet
+forme|Dé six ¦ Kocka šest ¦ Kocka šest
+forme|Comète ¦ Komet ¦ Komet
+forme|Soleil à rayons ¦ Sunce sa zrakama ¦ Sonce z žarki
+forme|Flocon ciselé ¦ Ukrašena pahulja ¦ Okrašena snežinka
+forme|Flocon épais ¦ Debela pahulja ¦ Debela snežinka
+forme|Trèfle irlandais ¦ Irska djetelina ¦ Irska deteljica
+forme|Fleur à cinq pétales ¦ Cvijet s pet latica ¦ Cvet s petimi venčnimi listi
+forme|Fleur ornée ¦ Ukrašeni cvijet ¦ Okrašen cvet
+forme|Fleur étoilée ¦ Zvjezdasti cvijet ¦ Zvezdast cvet
+forme|Fleur à six pétales ¦ Cvijet sa šest latica ¦ Cvet s šestimi venčnimi listi
+forme|Fleur en goutte ¦ Cvijet u obliku kapi ¦ Cvet v obliki kapljice
+forme|Étoile pleine ¦ Puna zvijezda ¦ Polna zvezda
+forme|Étoile vide ¦ Prazna zvijezda ¦ Prazna zvezda
+forme|Étoile à quatre pointes ¦ Zvijezda s četiri kraka ¦ Štirikraka zvezda
+forme|Étoile à contour ¦ Obrubljena zvijezda ¦ Obrobljena zvezda
+forme|Étoile dans un rond ¦ Zvijezda u krugu ¦ Zvezda v krogu
+forme|Étoile à centre ouvert ¦ Zvijezda s otvorenim središtem ¦ Zvezda z odprtim središčem
+forme|Étoile à centre noir ¦ Zvijezda s crnim središtem ¦ Zvezda s črnim središčem
+forme|Étoile ombrée ¦ Zasjenjena zvijezda ¦ Senčena zvezda
+forme|Étoile en hélice ¦ Zvijezda u obliku propelera ¦ Zvezda v obliki propelerja
+forme|Étoile en relief ¦ Reljefna zvijezda ¦ Reliefna zvezda
+forme|Astérisque épais ¦ Debela zvjezdica ¦ Debela zvezdica
+forme|Astérisque à centre ouvert ¦ Zvjezdica s otvorenim središtem ¦ Zvezdica z odprtim središčem
+forme|Astérisque à huit branches ¦ Zvjezdica s osam krakova ¦ Osemkraka zvezdica
+forme|Étoile à huit branches ¦ Zvijezda s osam krakova ¦ Osemkraka zvezda
+forme|Étoile tourbillon ¦ Vrtložna zvijezda ¦ Vrtinčasta zvezda
+forme|Étoile à six branches ¦ Zvijezda sa šest krakova ¦ Šestkraka zvezda
+forme|Étoile à huit branches fine ¦ Tanka zvijezda s osam krakova ¦ Tanka osemkraka zvezda
+forme|Étoile à huit branches épaisse ¦ Debela zvijezda s osam krakova ¦ Debela osemkraka zvezda
+forme|Étoile à douze branches ¦ Zvijezda s dvanaest krakova ¦ Dvanajstkraka zvezda
+forme|Étoile à seize branches ¦ Zvijezda sa šesnaest krakova ¦ Šestnajstkraka zvezda
+forme|Astérisque en gouttes ¦ Zvjezdica od kapi ¦ Zvezdica iz kapljic
+forme|Soleil rond ¦ Okruglo sunce ¦ Okroglo sonce
+forme|Trois astérisques ¦ Tri zvjezdice ¦ Tri zvezdice
+forme|Main qui montre à droite ¦ Ruka koja pokazuje desno ¦ Roka, ki kaže desno
+forme|Main qui montre à gauche ¦ Ruka koja pokazuje lijevo ¦ Roka, ki kaže levo
+forme|Main qui montre en haut ¦ Ruka koja pokazuje gore ¦ Roka, ki kaže gor
+forme|Main qui montre en bas ¦ Ruka koja pokazuje dolje ¦ Roka, ki kaže dol
+forme|deux doigts ¦ dva prsta ¦ dva prsta
+forme|Sourire ¦ Osmijeh ¦ Nasmeh
+forme|Sourire plein ¦ Puni osmijeh ¦ Poln nasmeh
+forme|Tristesse ¦ Tuga ¦ Žalost
+forme|Cœur penché ¦ Nagnuto srce ¦ Nagnjeno srce
+forme|Haute tension ¦ Visoki napon ¦ Visoka napetost
+forme|Tasse fumante ¦ Šalica koja se puši ¦ Kadeča se skodelica
+forme|Source chaude ¦ Topli izvor ¦ Topli vrelec
+forme|Coche fine ¦ Tanka kvačica ¦ Tanka kljukica
+forme|Croix tracée ¦ Nacrtani križić ¦ Narisan križec
+forme|Croix tracée épaisse ¦ Debeli nacrtani križić ¦ Debel narisan križec
+forme|Losange à quatre pointes ¦ Romb s četiri vrha ¦ Romb s štirimi konicami
+forme|Marque de référence ¦ Referentna oznaka ¦ Referenčna oznaka
+forme|Marque ¦ Oznaka ¦ Oznaka
+forme|Plus dans un rond ¦ Plus u krugu ¦ Plus v krogu
+forme|Croix dans un rond ¦ Križić u krugu ¦ Križec v krogu
+forme|Point dans un rond ¦ Točka u krugu ¦ Pika v krogu
+forme|Rond dans un rond ¦ Krug u krugu ¦ Krog v krogu
+forme|Rond à moitié ¦ Napola ispunjen krug ¦ Napol zapolnjen krog
+forme|Rond au quart ¦ Krug ispunjen četvrtinom ¦ Krog, zapolnjen do četrtine
+forme|Rond aux trois quarts ¦ Krug ispunjen s tri četvrtine ¦ Krog, zapolnjen do treh četrtin
+forme|astronomie ¦ astronomija ¦ astronomija
+forme|Premier croissant ¦ Rastući srp ¦ Naraščajoči srp
+forme|Dernier croissant ¦ Opadajući srp ¦ Pojemajoči srp
+forme|Jupiter ¦ Jupiter ¦ Jupiter
+forme|Saturne ¦ Saturn ¦ Saturn
+forme|Mercure ¦ Merkur ¦ Merkur
+forme|Écu français ¦ Francuski štit ¦ Francoski ščit
+forme|Écu ancien ¦ Stari štit ¦ Star ščit
+forme|Écu espagnol ¦ Španjolski štit ¦ Španski ščit
+forme|Écu en losange ¦ Štit u obliku romba ¦ Ščit v obliki romba
+forme|dames ¦ dame ¦ dame
+forme|Écu ovale ¦ Ovalni štit ¦ Ovalen ščit
+forme|ecclésiastique ¦ crkveni ¦ cerkveni
+forme|Écu rond ¦ Okrugli štit ¦ Okrogel ščit
+forme|Bannière carrée ¦ Četvrtasti barjak ¦ Kvadraten prapor
+forme|coupé en deux debout ¦ okomito podijeljen na dva ¦ navpično razdeljen na dva dela
+forme|Écu coupé ¦ Vodoravno podijeljen štit ¦ Vodoravno deljen ščit
+forme|en deux couché ¦ vodoravno na dva ¦ vodoravno na dva dela
+forme|Écu tranché ¦ Desno koso podijeljen štit ¦ Desno poševno deljen ščit
+forme|en diagonale ¦ dijagonalno ¦ diagonalno
+forme|Écu taillé ¦ Lijevo koso podijeljen štit ¦ Levo poševno deljen ščit
+forme|en quatre ¦ na četiri ¦ na štiri dele
+forme|Écu écartelé en sautoir ¦ Štit razdijeljen kosim križem ¦ Ščit, razdeljen s poševnim križem
+forme|Écu tiercé en pal ¦ Štit okomito podijeljen na tri ¦ Ščit, navpično razdeljen na tri dele
+forme|trois bandes debout ¦ tri okomite pruge ¦ tri navpične proge
+forme|Écu tiercé en fasce ¦ Štit vodoravno podijeljen na tri ¦ Ščit, vodoravno razdeljen na tri dele
+forme|trois bandes couchées ¦ tri vodoravne pruge ¦ tri vodoravne proge
+forme|Écu chef ¦ Štit s glavom ¦ Ščit z glavo
+forme|bande en haut ¦ pruga na vrhu ¦ proga zgoraj
+forme|Écu champagne ¦ Štit s podnožjem ¦ Ščit z vznožjem
+forme|bande en bas ¦ pruga na dnu ¦ proga spodaj
+forme|Écu fasce ¦ Štit s gredom ¦ Ščit s prečko
+forme|Écu pal ¦ Štit sa stupom ¦ Ščit s stebrom
+forme|Écu bande ¦ Štit s desnom kosom gredom ¦ Ščit z desno poševno prečko
+forme|Écu barre ¦ Štit s lijevom kosom gredom ¦ Ščit z levo poševno prečko
+forme|Écu croix ¦ Štit s križem ¦ Ščit s križem
+forme|Écu sautoir ¦ Štit s andrijinim križem ¦ Ščit z andrejevim križem
+forme|croix de Saint-André ¦ andrijin križ ¦ andrejev križ
+forme|Écu chevron ¦ Štit s krovom ¦ Ščit s strešico
+forme|Écu franc-quartier ¦ Štit sa slobodnom četvrtinom ¦ Ščit s prosto četrtino
+forme|carré en haut à gauche ¦ kvadrat gore lijevo ¦ kvadrat zgoraj levo
+forme|Écu pairle ¦ Štit s vilicom ¦ Ščit z vilicami
+forme|en Y ¦ u obliku slova Y ¦ v obliki črke Y
+forme|Écu burelé ¦ Štit s mnogo greda ¦ Ščit z mnogo prečkami
+forme|bandes couchées ¦ vodoravne pruge ¦ vodoravne proge
+forme|Écu palé ¦ Štit s mnogo stupova ¦ Ščit z mnogo stebri
+forme|bandes debout ¦ okomite pruge ¦ navpične proge
+forme|Écu échiqueté ¦ Šahirani štit ¦ Šahiran ščit
+forme|damier ¦ šahovnica ¦ šahovnica
+forme|Écu losange ¦ Štit s rombom ¦ Ščit z rombom
+forme|en cœur ¦ u sredini ¦ na sredini
+forme|Écu bordure ¦ Štit s obrubom ¦ Ščit z obrobo
+forme|Couronne de comte ¦ Grofovska kruna ¦ Grofovska krona
+forme|perles ¦ biseri ¦ biseri
+forme|Couronne murale ¦ Bedemska kruna ¦ Obzidna krona
+forme|ville ¦ grad ¦ mesto
+forme|Heaume ¦ Kaciga ¦ Čelada
+forme|Lambrequins ¦ Plašt kacige ¦ Pokrivala
+forme|manteau ¦ plašt ¦ plašč
+forme|Listel ¦ Vrpca s geslom ¦ Trak z geslom
+forme|devise ¦ geslo ¦ geslo
+forme|Cadre double ¦ Dvostruki okvir ¦ Dvojni okvir
+forme|Cadre épais ¦ Debeli okvir ¦ Debel okvir
+forme|Cadre arrondi double ¦ Dvostruki zaobljeni okvir ¦ Dvojni zaobljen okvir
+forme|Médaillon double ¦ Dvostruki medaljon ¦ Dvojni medaljon
+forme|Cadre rond ¦ Okrugli okvir ¦ Okrogel okvir
+forme|Cadre rond double ¦ Dvostruki okrugli okvir ¦ Dvojni okrogel okvir
+forme|Cadre octogonal ¦ Osmerokutni okvir ¦ Osemkotni okvir
+forme|Cadre hexagonal ¦ Šesterokutni okvir ¦ Šestkotni okvir
+forme|Cadre en losange ¦ Okvir u obliku romba ¦ Okvir v obliki romba
+forme|Cadre en arche ¦ Lučni okvir ¦ Ločni okvir
+forme|Cadre en ogive ¦ Okvir u obliku šiljastog luka ¦ Okvir v obliki šilastega loka
+forme|Cartouche à coins rentrants ¦ Kartuša s udubljenim kutovima ¦ Kartuša z vbočenimi koti
+forme|Cadre à coins coupés ¦ Okvir s odrezanim kutovima ¦ Okvir s prirezanimi koti
+forme|Cadre ticket ¦ Okvir ulaznice ¦ Okvir vstopnice
+forme|Cadre en cœur ¦ Okvir u obliku srca ¦ Okvir v obliki srca
+forme|Cadre en écu ¦ Okvir u obliku štita ¦ Okvir v obliki ščita
+forme|Cadre festonné ¦ Valoviti okvir ¦ Valovit okvir
+forme|Cadre timbre-poste ¦ Okvir poštanske marke ¦ Okvir poštne znamke
+forme|Cadre perlé ¦ Okvir od perlica ¦ Okvir iz biserov
+forme|Cadre en étoile ¦ Zvjezdasti okvir ¦ Zvezdast okvir
+forme|Cadre sceau dentelé ¦ Okvir nazubljenog pečata ¦ Okvir nazobčanega pečata
+forme|Cadre rosace ¦ Okvir u obliku rozete ¦ Okvir v obliki rozete
+forme|Quatre coins ¦ Četiri kuta ¦ Štirje koti
+forme|Coins de photo ¦ Kutovi za fotografije ¦ Fotokotički
+forme|Coins arrondis ornés ¦ Ukrašeni zaobljeni kutovi ¦ Okrašeni zaobljeni koti
+forme|Filet ¦ Crta ¦ Črta
+forme|Double filet ¦ Dvostruka crta ¦ Dvojna črta
+forme|Ligne de points ¦ Točkasta crta ¦ Pikčasta črta
+forme|Frise en vagues ¦ Valoviti obrub ¦ Valovita obroba
+forme|Frise en zigzag ¦ Cik-cak obrub ¦ Cikcak obroba
+forme|Frise grecque ¦ Grčki meandar ¦ Grški meander
+forme|Séparateur orné ¦ Ukrašeni razdjelnik ¦ Okrašen ločilnik
+forme|Étiquette à trou ¦ Privjesak s rupicom ¦ Obesek z luknjico
+forme|Étiquette arrondie ¦ Zaobljena oznaka ¦ Zaobljena nalepka
+forme|Étiquette rectangle ¦ Pravokutna oznaka ¦ Pravokotna nalepka
+forme|Étiquette à encoches ¦ Oznaka sa zarezima ¦ Nalepka z zarezami
+forme|Étiquette flèche ¦ Oznaka u obliku strelice ¦ Nalepka v obliki puščice
+forme|Étiquette flèche gauche ¦ Oznaka u obliku strelice ulijevo ¦ Nalepka v obliki puščice v levo
+forme|Ruban à bouts pliés ¦ Vrpca sa savijenim krajevima ¦ Trak z zavihanimi konci
+forme|Ruban courbé ¦ Zakrivljena vrpca ¦ Ukrivljen trak
+forme|Signet ¦ Straničnik ¦ Kazalka
+forme|Fanion triangulaire ¦ Trokutasta zastavica ¦ Trikotna zastavica
+forme|Étiquette ovale ¦ Ovalna oznaka ¦ Ovalna nalepka
+forme|Étiquette ovale à bord ¦ Ovalna oznaka s obrubom ¦ Ovalna nalepka z obrobo
+forme|Étiquette à bord ¦ Oznaka s obrubom ¦ Nalepka z obrobo
+forme|Étiquette de prix ¦ Oznaka cijene ¦ Cenovna nalepka
+forme|Pastille festonnée ¦ Valovita značka ¦ Valovita značka
+forme|Pastille « nouveau » ¦ Značka „novo” ¦ Značka »novo«
+forme|Rosette à rubans ¦ Rozeta s vrpcama ¦ Rozeta s trakovi
+forme|Étiquette suspendue ¦ Viseća oznaka ¦ Viseča nalepka
+forme|Onglet ¦ Jezičak ¦ Jeziček
+forme|Cartouche ¦ Kartuša ¦ Kartuša
+forme|Cartouche à bord ¦ Kartuša s obrubom ¦ Kartuša z obrobo
+forme|Gommette ¦ Naljepnica ¦ Nalepka
+forme|Flamme verticale ¦ Okomiti plamenac ¦ Navpični plamenec
+forme|Étiquette double ¦ Dvostruka oznaka ¦ Dvojna nalepka
+forme|Drapeau uni ¦ Jednobojna zastava ¦ Enobarvna zastava
+forme|à colorier ¦ za bojanje ¦ za barvanje
+forme|Drapeau à trois bandes debout ¦ Zastava s tri okomite pruge ¦ Zastava s tremi navpičnimi progami
+forme|Drapeau à bande centrale debout ¦ Zastava s okomitom središnjom prugom ¦ Zastava z navpično sredinsko progo
+forme|Drapeau à trois bandes couchées ¦ Zastava s tri vodoravne pruge ¦ Zastava s tremi vodoravnimi progami
+forme|Drapeau à bande centrale couchée ¦ Zastava s vodoravnom središnjom prugom ¦ Zastava z vodoravno sredinsko progo
+forme|Drapeau à deux bandes couchées ¦ Zastava s dvije vodoravne pruge ¦ Zastava z dvema vodoravnima progama
+forme|Drapeau à deux bandes debout ¦ Zastava s dvije okomite pruge ¦ Zastava z dvema navpičnima progama
+forme|Drapeau à croix scandinave ¦ Zastava sa skandinavskim križem ¦ Zastava s skandinavskim križem
+forme|Drapeau à croix centrée ¦ Zastava sa središnjim križem ¦ Zastava s sredinskim križem
+forme|Drapeau à croix droite ¦ Zastava s ravnim križem ¦ Zastava z ravnim križem
+forme|Drapeau à croix en X ¦ Zastava s križem u obliku slova X ¦ Zastava s križem v obliki črke X
+forme|Drapeau à disque ¦ Zastava s krugom ¦ Zastava s krogom
+forme|Drapeau au croissant et à l’étoile ¦ Zastava s polumjesecom i zvijezdom ¦ Zastava s polmesecem in zvezdo
+forme|Drapeau à l’étoile ¦ Zastava sa zvijezdom ¦ Zastava z zvezdo
+forme|Drapeau étoilé à rayures ¦ Prugasta zastava sa zvijezdama ¦ Progasta zastava z zvezdami
+forme|Drapeau au triangle ¦ Zastava s trokutom ¦ Zastava s trikotnikom
+forme|Drapeau en diagonale ¦ Dijagonalno podijeljena zastava ¦ Diagonalno deljena zastava
+forme|Drapeau à canton ¦ Zastava s kantonom ¦ Zastava s kantonom
+forme|Drapeau à croix doubles ¦ Zastava s dvostrukim križevima ¦ Zastava z dvojnimi križi
+forme|Drapeau à bandes et canton ¦ Zastava s prugama i kantonom ¦ Zastava s progami in kantonom
+forme|Drapeau à queue d’aronde ¦ Zastava s lastavičjim repom ¦ Zastava z lastovičjim repom
+forme|Drapeau flottant ¦ Zastava koja se vijori ¦ Plapolajoča zastava
+forme|Drapeau sur mât ¦ Zastava na jarbolu ¦ Zastava na drogu
+forme|Drapeau tricolore sur mât ¦ Trobojnica na jarbolu ¦ Trobojnica na drogu
+forme|Lien parent → un enfant ¦ Veza roditelj → jedno dijete ¦ Povezava starš → en otrok
+forme|Lien parent → {x} enfants ¦ Veza roditelj → djeca ({x}) ¦ Povezava starš → otroci ({x})
+forme|Lien de couple ¦ Veza para ¦ Povezava para
+forme|Couple et enfants ¦ Par i djeca ¦ Par in otroci
+forme|Accolade ¦ Vitičasta zagrada ¦ Zaviti oklepaj
+forme|vers la droite ¦ udesno ¦ v desno
+forme|vers le bas ¦ prema dolje ¦ navzdol
+forme|Branches d’ascendance ¦ Grane predaka ¦ Veje prednikov
+forme|Case de personne ¦ Polje osobe ¦ Polje osebe
+forme|Médaillon de personne ¦ Medaljon osobe ¦ Medaljon osebe
+forme|Éventail généalogique ¦ Rodoslovna lepeza ¦ Rodoslovna pahljača
+forme|Deux alliances entrelacées ¦ Dva isprepletena vjenčana prstena ¦ Dva prepletena poročna prstana
+forme|Arbre et racines ¦ Stablo i korijenje ¦ Drevo in korenine
