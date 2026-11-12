@@ -79,8 +79,8 @@ Elle a eu {n} enfant. ¦ {n} çocuğu oldu.
 Il a eu {n} enfants. ¦ {n} çocuğu oldu.
 Elle a eu {n} enfants. ¦ {n} çocuğu oldu.
 On ne lui connaît pas d’enfant. ¦ Bilinen bir çocuğu yok.
-Né dans les années {y}. ¦ Doğum: {y}’li yıllar.
-Née dans les années {y}. ¦ Doğum: {y}’li yıllar.
+Né dans les années {y}. ¦ Doğum dönemi: {y} (on yıl).
+Née dans les années {y}. ¦ Doğum dönemi: {y} (on yıl).
 Sa femme s’appelait {name}. ¦ Karısının adı: {name}.
 Son mari s’appelait {name}. ¦ Kocasının adı: {name}.
 Un de ses enfants s’appelait {name}. ¦ Çocuklarından birinin adı: {name}.

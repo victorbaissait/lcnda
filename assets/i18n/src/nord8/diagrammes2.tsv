@@ -864,7 +864,7 @@ Couleur de la valeur ¦ Değerin rengi
 Couleur de l’objectif ¦ Hedefin rengi
 Couleur des zones ¦ Bölgelerin rengi
 Ajoute des périodes : le nombre d’enfants nés, ceux morts avant 1 an et avant 5 ans. ¦ Dönemler ekle: doğan çocuk sayısı, 1 yaşından önce ve 5 yaşından önce ölenler.
-En tout : {a} % des enfants morts avant 1 an, {b} % avant 5 ans ({n}). ¦ Toplam: çocukların %{a}’i 1 yaşından önce, %{b}’i 5 yaşından önce öldü ({n}).
+En tout : {a} % des enfants morts avant 1 an, {b} % avant 5 ans ({n}). ¦ Toplam: 1 yaşından önce ölen çocuklar: %{a}; 5 yaşından önce: %{b} ({n}).
 Mortalité des enfants ¦ Çocuk ölümleri
 Ajoute des couples : enfants nés, arrivés à l’âge adulte, morts jeunes. ¦ Çift ekle: doğan çocuklar, yetişkinliğe ulaşanlar, genç ölenler.
 {name} : {n} sans date de décès ¦ {name}: ölüm tarihi olmayan {n}
