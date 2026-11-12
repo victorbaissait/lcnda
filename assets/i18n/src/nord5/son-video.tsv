@@ -1,0 +1,1005 @@
+fr ¦ hr ¦ sl
+(l’original reste gardé : on peut y revenir) ¦ (izvornik se čuva: možeš mu se vratiti) ¦ (izvirnik ostane shranjen: lahko se vrneš k njemu)
+(voix, plus léger) ¦ (glas, lakše) ¦ (glas, manjša datoteka)
+1 rush ajouté : glisse-le sur la frise. ¦ Dodana 1 sirova snimka: povuci je na vremensku crtu. ¦ Dodan 1 surovi posnetek: povleci ga na časovnico.
+1 rush ajouté : glisse-le sur la frise. Il entre dans les Médias quand tu enregistres le projet. ¦ Dodana 1 sirova snimka: povuci je na vremensku crtu. Ulazi u Medije kad spremiš projekt. ¦ Dodan 1 surovi posnetek: povleci ga na časovnico. Med medije pride, ko shraniš projekt.
+: l’original ne change pas du tout ¦ : izvornik se uopće ne mijenja ¦ : izvirnik se sploh ne spremeni
+<b>Une copie à part</b> (un autre son, rattaché aux mêmes fiches) ¦ <b>Zasebna kopija</b> (drugi zvuk, povezan s istim zapisima) ¦ <b>Ločena kopija</b> (drug zvok, povezan z istimi zapisi)
+<b>Une copie à part</b> (une autre vidéo, rattachée aux mêmes fiches) ¦ <b>Zasebna kopija</b> (drugi videozapis, povezan s istim zapisima) ¦ <b>Ločena kopija</b> (drug videoposnetek, povezan z istimi zapisi)
+Au repère orange ({time}) ¦ Na narančastoj oznaci ({time}) ¦ Pri oranžni oznaki ({time})
+Boutons des pistes : {n} px ¦ Gumbi traka: {n} px ¦ Gumbi sledi: {n} px
+Boutons des pistes : {n} px (taille de départ) ¦ Gumbi traka: {n} px (početna veličina) ¦ Gumbi sledi: {n} px (začetna velikost)
+Ce fichier est un réglage pour {a}, pas pour {b} : importe-le à sa place. ¦ Ova je datoteka postavka za {a}, a ne za {b}: uvezi je na pravom mjestu. ¦ Ta datoteka je nastavitev za {a}, ne za {b}: uvozi jo na pravem mestu.
+Ce qu’il contient ({what}) remonte dans la racine. ¦ Ono što sadrži ({what}) premješta se u korijen. ¦ Kar vsebuje ({what}), se premakne v koren.
+Ce qu’il contient ({what}) remonte dans « {dir} ». ¦ Ono što sadrži ({what}) premješta se u „{dir}”. ¦ Kar vsebuje ({what}), se premakne v »{dir}«.
+Chapitre {n} ¦ Poglavlje {n} ¦ Poglavje {n}
+Clic sur la frise : se placer · clic sur un élément : le choisir · glisser : le déplacer · {play} : lire · {split} : couper ici · {del} : enlever ¦ Klik na vremensku crtu: postavi se · klik na element: odaberi ga · povlačenje: premjesti ga · {play}: reproduciraj · {split}: reži ovdje · {del}: ukloni ¦ Klik na časovnico: postavi se · klik na element: izberi ga · vlečenje: premakni ga · {play}: predvajaj · {split}: odreži tukaj · {del}: odstrani
+Enregistrement du son… {n} % ¦ Spremanje zvuka… {n} % ¦ Shranjevanje zvoka … {n} %
+Ensemble « {name} » appliqué. ¦ Skup „{name}” je primijenjen. ¦ Nabor »{name}« je uporabljen.
+Ensemble « {name} » supprimé ¦ Skup „{name}” je izbrisan ¦ Nabor »{name}« je izbrisan
+Envoi des rushes {k}/{n}… ¦ Slanje sirovih snimki {k}/{n}… ¦ Pošiljanje surovih posnetkov {k}/{n} …
+Espace ¦ Razmaknica ¦ Preslednica
+Fichier {fmt} téléchargé ({n} Mo). Rien n’a changé dans la base. ¦ Datoteka {fmt} je preuzeta ({n} MB). U bazi se ništa nije promijenilo. ¦ Datoteka {fmt} je prenesena ({n} MB). V bazi se ni nič spremenilo.
+Il est utilisé {n} fois sur la frise : ces passages seront retirés aussi. Le fichier reste dans les Médias s’il y est. ¦ Na vremenskoj crti koristi se puta: {n}; i ti će dijelovi biti uklonjeni. Datoteka ostaje u Medijima ako je ondje. ¦ Na časovnici je uporabljen {n}-krat: tudi ti deli bodo odstranjeni. Datoteka ostane med mediji, če je tam.
+Image clé {time} ¦ Ključni kadar {time} ¦ Ključna sličica {time}
+Le fichier importé est maintenant dans les Médias. ¦ Uvezena datoteka sada je u Medijima. ¦ Uvožena datoteka je zdaj med mediji.
+Le fichier reste dans les Médias s’il y est. ¦ Datoteka ostaje u Medijima ako je ondje. ¦ Datoteka ostane med mediji, če je tam.
+Le montage est rejoué pour être enregistré : cela prend <b>{time}</b> (sa durée). Laisse la fenêtre ouverte. ¦ Montaža se ponovno reproducira da bi se spremila: to traje <b>{time}</b> (njezino trajanje). Ostavi prozor otvoren. ¦ Montaža se znova predvaja, da se shrani: to traja <b>{time}</b> (njeno trajanje). Pusti okno odprto.
+Les boutons des pistes ont déjà leur taille de départ. ¦ Gumbi traka već imaju početnu veličinu. ¦ Gumbi sledi že imajo začetno velikost.
+Les boutons des pistes sont déjà au plus grand. ¦ Gumbi traka već su najveći. ¦ Gumbi sledi so že največji.
+Les boutons des pistes sont déjà au plus petit. ¦ Gumbi traka već su najmanji. ¦ Gumbi sledi so že najmanjši.
+Les {n} fichiers importés sont maintenant dans les Médias. ¦ Uvezene datoteke ({n}) sada su u Medijima. ¦ Uvožene datoteke ({n}) so zdaj med mediji.
+Mettre « {name} » dans… ¦ Stavi „{name}” u… ¦ Postavi »{name}« v …
+Montage fabriqué : {what}. Retouche ce que tu veux, puis ⤓ Exporter. ¦ Montaža je napravljena: {what}. Doradi što želiš, a zatim ⤓ Izvezi. ¦ Montaža je narejena: {what}. Dodelaj, kar želiš, nato ⤓ Izvozi.
+Nom du dossier (dans « {name} ») : ¦ Naziv mape (u „{name}”): ¦ Ime mape (v »{name}«):
+Nom du dossier : ¦ Naziv mape: ¦ Ime mape:
+Nouveau chapitre ¦ Novo poglavlje ¦ Novo poglavje
+Nouvelle version, <b>sans la montrer</b> pour l’instant ¦ Nova verzija, <b>zasad se ne prikazuje</b> ¦ Nova različica, <b>zaenkrat ni prikazana</b>
+Nouvelle version, montrée partout ¦ Nova verzija, prikazana posvuda ¦ Nova različica, prikazana povsod
+Ouvre une fois {what} : ses boutons apparaîtront ici. ¦ Otvori jednom {what}: njegovi će se gumbi pojaviti ovdje. ¦ Enkrat odpri {what}: njegovi gumbi se bodo prikazali tukaj.
+Où mettre « {name} » ? ¦ Kamo staviti „{name}”? ¦ Kam postavim »{name}«?
+Piste « {name} » ajoutée. ¦ Traka „{name}” je dodana. ¦ Sled »{name}« je dodana.
+Piste « {name} » supprimée ¦ Traka „{name}” je izbrisana ¦ Sled »{name}« je izbrisana
+Piste « {name} » supprimée (avec {what}) ¦ Traka „{name}” je izbrisana (s {what}) ¦ Sled »{name}« je izbrisana (z {what})
+Piste « {name} » vidée ¦ Traka „{name}” je ispražnjena ¦ Sled »{name}« je izpraznjena
+Ranger « {name} » dans… ¦ Spremi „{name}” u… ¦ Pospravi »{name}« v …
+Remplacer les réglages actuels par l’ensemble « {name} » ? ¦ Zamijeniti trenutne postavke skupom „{name}”? ¦ Zamenjam trenutne nastavitve z naborom »{name}«?
+Rush supprimé, avec ses {n} passages sur la frise. ¦ Sirova snimka je izbrisana, zajedno s njezinim dijelovima na vremenskoj crti ({n}). ¦ Surovi posnetek je izbrisan, skupaj z njegovimi deli na časovnici ({n}).
+Rush supprimé, avec son passage sur la frise. ¦ Sirova snimka je izbrisana, zajedno s njezinim dijelom na vremenskoj crti. ¦ Surovi posnetek je izbrisan, skupaj z njegovim delom na časovnici.
+Rush supprimé. ¦ Sirova snimka je izbrisana. ¦ Surovi posnetek je izbrisan.
+Réglage « {name} » importé : « Appliquer » pour l’utiliser. ¦ Postavka „{name}” je uvezena: „Primijeni” da je koristiš. ¦ Nastavitev »{name}« je uvožena: »Uporabi«, da jo uporabiš.
+Supprimer le dossier « {name} » ? ¦ Izbrisati mapu „{name}”? ¦ Izbrišem mapo »{name}«?
+Supprimer le rush ¦ Izbriši sirovu snimku ¦ Izbriši surovi posnetek
+Supprimer « {name} » du projet ? ¦ Izbrisati „{name}” iz projekta? ¦ Izbrišem »{name}« iz projekta?
+Titre de la vidéo ¦ Naslov videozapisa ¦ Naslov videoposnetka
+Titre du chapitre qui commence à {time} : ¦ Naslov poglavlja koje počinje u {time}: ¦ Naslov poglavja, ki se začne ob {time}:
+Titre du son ¦ Naslov zvuka ¦ Naslov zvoka
+Un réglage s’appelle déjà « {name} ». Quel nom pour celui-ci ? ¦ Postavka „{name}” već postoji. Koje ime dati ovoj? ¦ Nastavitev »{name}« že obstaja. Kako naj se imenuje ta?
+ce rush ¦ ova sirova snimka ¦ ta surovi posnetek
+comme l’original (mono) ¦ kao izvornik (mono) ¦ kot izvirnik (mono)
+comme l’original (stéréo) ¦ kao izvornik (stereo) ¦ kot izvirnik (stereo)
+comme l’original ({n} kHz) ¦ kao izvornik ({n} kHz) ¦ kot izvirnik ({n} kHz)
+la copie est rattachée aux mêmes fiches ¦ kopija je povezana s istim zapisima ¦ kopija je povezana z istimi zapisi
+la disposition du montage ¦ raspored montaže ¦ postavitev montaže
+le plus léger pour la voix · environ {n} Mo · QuickTime ne le lit pas ¦ najlakši za glas · oko {n} MB · QuickTime ga ne reproducira ¦ najmanjši za glas · približno {n} MB · QuickTime ga ne predvaja
+le plus léger · ~{n} Mo ¦ najlakši · ~{n} MB ¦ najmanjši · ~{n} MB
+les boutons de « {name} » ¦ gumbi za „{name}” ¦ gumbi za »{name}«
+lu absolument partout (téléphones, voitures, Mac, Windows) · environ {n} Mo en 128 kbit/s ¦ reproducira se apsolutno posvuda (telefoni, automobili, Mac, Windows) · oko {n} MB pri 128 kbit/s ¦ predvaja se res povsod (telefoni, avtomobili, Mac, Windows) · približno {n} MB pri 128 kbit/s
+lu partout · ~{n} Mo ¦ reproducira se posvuda · ~{n} MB ¦ predvaja se povsod · ~{n} MB
+l’original est toujours gardé · montrée : {name} ¦ izvornik se uvijek čuva · prikazano: {name} ¦ izvirnik je vedno shranjen · prikazano: {name}
+l’outil « {name} » ¦ alat „{name}” ¦ orodje »{name}«
+nouvelle version, copie (réglages) ¦ nova verzija, kopija (postavke) ¦ nova različica, kopija (nastavitve)
+rejoué en temps réel pour être enregistré (laisse la fenêtre ouverte) · taille, qualité, images par seconde et volume (📢 {n} LUFS) : Réglages → Montage ¦ reproducira se u stvarnom vremenu da bi se spremilo (ostavi prozor otvoren) · veličina, kvaliteta, sličice u sekundi i glasnoća (📢 {n} LUFS): Postavke → Montaža ¦ predvaja se v realnem času, da se shrani (pusti okno odprto) · velikost, kakovost, sličice na sekundo in glasnost (📢 {n} LUFS): Nastavitve → Montaža
+rejoué en temps réel pour être enregistré (laisse la fenêtre ouverte) · taille, qualité, images par seconde et volume standard : Réglages → Montage ¦ reproducira se u stvarnom vremenu da bi se spremilo (ostavi prozor otvoren) · veličina, kvaliteta, sličice u sekundi i standardna glasnoća: Postavke → Montaža ¦ predvaja se v realnem času, da se shrani (pusti okno odprto) · velikost, kakovost, sličice na sekundo in standardna glasnost: Nastavitve → Montaža
+sans perte et environ deux fois plus léger que le WAV · environ {n} Mo · lu par les navigateurs, VLC, Windows ; pas par QuickTime ¦ bez gubitaka i otprilike dvostruko lakši od WAV-a · oko {n} MB · reproduciraju ga preglednici, VLC, Windows; QuickTime ne ¦ brez izgub in približno pol manjši od WAV · približno {n} MB · predvajajo ga brskalniki, VLC, Windows; QuickTime ne
+sans perte · ~{n} Mo ¦ bez gubitaka · ~{n} MB ¦ brez izgub · ~{n} MB
+sans perte, lu partout (Mac, Windows, Audacity) · environ {n} Mo ¦ bez gubitaka, reproducira se posvuda (Mac, Windows, Audacity) · oko {n} MB ¦ brez izgub, predvaja se povsod (Mac, Windows, Audacity) · približno {n} MB
+sans perte, léger · ~{n} Mo ¦ bez gubitaka, lagan · ~{n} MB ¦ brez izgub, majhen · ~{n} MB
+sans perte, pour GarageBand, Logic, QuickTime · environ {n} Mo · à télécharger seulement (l’app ne le lit pas) ¦ bez gubitaka, za GarageBand, Logic, QuickTime · oko {n} MB · samo za preuzimanje (aplikacija ga ne reproducira) ¦ brez izgub, za GarageBand, Logic, QuickTime · približno {n} MB · samo za prenos (aplikacija ga ne predvaja)
+stéréo ¦ stereo ¦ stereo
+sur chaque temps ¦ na svakom udarcu ¦ na vsakem udarcu
+tourné de {n}° ¦ zakrenuto za {n}° ¦ zasukano za {n}°
+tous les {n} temps ¦ svakih {n} udaraca ¦ vsakih {n} udarcev
+{file} : ni vidéo, ni photo, ni son. ¦ {file}: nije ni videozapis, ni fotografija, ni zvuk. ¦ {file}: ni ne video, ne fotografija, ne zvok.
+{n} images/s ¦ {n} sličica/s ¦ {n} sličic/s
+{n} rushes ajoutés : glisse-les sur la frise. ¦ Dodane sirove snimke ({n}): povuci ih na vremensku crtu. ¦ Dodani surovi posnetki ({n}): povleci jih na časovnico.
+{n} rushes ajoutés : glisse-les sur la frise. Ils entrent dans les Médias quand tu enregistres le projet. ¦ Dodane sirove snimke ({n}): povuci ih na vremensku crtu. Ulaze u Medije kad spremiš projekt. ¦ Dodani surovi posnetki ({n}): povleci jih na časovnico. Med medije pridejo, ko shraniš projekt.
+{n} temps repérés · environ {bpm} battements par minute. ¦ Pronađeni udarci: {n} · oko {bpm} otkucaja u minuti. ¦ Najdeni udarci: {n} · približno {bpm} udarcev na minuto.
+{n} temps repérés. ¦ Pronađeni udarci: {n}. ¦ Najdeni udarci: {n}.
+{what} : choisis-en un puis « Appliquer ». ¦ {what}: odaberi jedan pa „Primijeni”. ¦ {what}: izberi enega in nato »Uporabi«.
+{what} sur la piste « Sous-titres ». ¦ {what} na traci „Podnaslovi”. ¦ {what} na sledi »Podnapisi«.
+« {name} » est revenu du Studio son, nettoyé. ¦ „{name}” se vratio iz Zvučnog studija, očišćen. ¦ »{name}« se je vrnil iz Zvočnega studia, očiščen.
+« {name} » rangé dans la racine. ¦ „{name}” je spremljen u korijen. ¦ »{name}« je pospravljen v koren.
+« {name} » rangé dans « {dir} ». ¦ „{name}” je spremljen u „{dir}”. ¦ »{name}« je pospravljen v »{dir}«.
+À la fin ¦ Na kraju ¦ Na koncu
+◇ image clé à {time} ¦ ◇ ključni kadar u {time} ¦ ◇ ključna sličica ob {time}
+🎥 {what} à la piste 1 (décalages : {offs}). ¦ 🎥 {what} na traci 1 (pomaci: {offs}). ¦ 🎥 {what} na sledi 1 (zamiki: {offs}).
+💾 Dans les médias… ¦ 💾 U medije… ¦ 💾 Med medije …
+📢 Mesure du volume… {n} % ¦ 📢 Mjerenje glasnoće… {n} % ¦ 📢 Merjenje glasnosti … {n} %
+📢 Volume mesuré : {a} LUFS → {b} LUFS (crêtes tenues par le limiteur). ¦ 📢 Izmjerena glasnoća: {a} LUFS → {b} LUFS (vršne vrijednosti drži limiter). ¦ 📢 Izmerjena glasnost: {a} LUFS → {b} LUFS (vrhove zadrži omejevalnik).
+📢 Volume mesuré : {a} LUFS → {b} LUFS. ¦ 📢 Izmjerena glasnoća: {a} LUFS → {b} LUFS. ¦ 📢 Izmerjena glasnost: {a} LUFS → {b} LUFS.
+🔒 Piste « {name} » verrouillée : ses éléments ne bougent plus. ¦ 🔒 Traka „{name}” je zaključana: njezini se elementi više ne pomiču. ¦ 🔒 Sled »{name}« je zaklenjena: njeni elementi se ne premikajo več.
+🔓 Piste « {name} » déverrouillée. ¦ 🔓 Traka „{name}” je otključana. ¦ 🔓 Sled »{name}« je odklenjena.
+🕘 Versions ({n})… ¦ 🕘 Verzije ({n})… ¦ 🕘 Različice ({n}) …
+🥁 {n} temps repérés (environ {bpm} par minute). ¦ 🥁 Pronađeni udarci: {n} (oko {bpm} u minuti). ¦ 🥁 Najdeni udarci: {n} (približno {bpm} na minuto).
+🥁 {n} temps repérés. ¦ 🥁 Pronađeni udarci: {n}. ¦ 🥁 Najdeni udarci: {n}.
+=rush ¦ sirova snimka|sirove snimke|sirovih snimki ¦ surovi posnetek|surova posnetka|surovi posnetki|surovih posnetkov
+=plan ajouté ¦ dodan kadar|dodana kadra|dodanih kadrova ¦ dodan kader|dodana kadra|dodani kadri|dodanih kadrov
+=sous-titre importé ¦ uvezen podnaslov|uvezena podnaslova|uvezenih podnaslova ¦ uvožen podnapis|uvožena podnapisa|uvoženi podnapisi|uvoženih podnapisov
+=ensemble importé ¦ uvezen skup|uvezena skupa|uvezenih skupova ¦ uvožen nabor|uvožena nabora|uvoženi nabori|uvoženih naborov
+=réglage du Studio reste appliqué ¦ postavka Studija ostaje primijenjena|postavke Studija ostaju primijenjene|postavki Studija ostaje primijenjeno ¦ nastavitev Studia ostane uporabljena|nastavitvi Studia ostaneta uporabljeni|nastavitve Studia ostanejo uporabljene|nastavitev Studia ostane uporabljenih
+=morceau ¦ skladba|skladbe|skladbi ¦ skladba|skladbi|skladbe|skladb
+(rien ne change dans la base) ¦ (u bazi se ništa ne mijenja) ¦ (v bazi se nič ne spremeni)
+(un autre son, rattaché aux mêmes fiches) ¦ (drugi zvuk, povezan s istim zapisima) ¦ (drug zvok, povezan z istimi zapisi)
+(une autre vidéo, rattachée aux mêmes fiches) ¦ (drugi videozapis, povezan s istim zapisima) ¦ (drug videoposnetek, povezan z istimi zapisi)
+300 dossiers au plus. ¦ Najviše 300 mapa. ¦ Največ 300 map.
+bandes floues plutôt que noires ¦ zamućene trake umjesto crnih ¦ zamegljeni pasovi namesto črnih
+Activer / couper ¦ Uključi / isključi ¦ Vklopi / izklopi
+Adaptation spatiale ¦ Prostorna prilagodba ¦ Prostorska prilagoditev
+Adapter (toute l’image, bandes noires) ¦ Prilagodi (cijela slika, crne trake) ¦ Prilagodi (cela slika, črni pasovi)
+Aide sous la frise ¦ Pomoć ispod vremenske crte ¦ Pomoč pod časovnico
+Aigus ¦ Visoki tonovi ¦ Visoki toni
+Aimant arrêté. ¦ Privlačenje je isključeno. ¦ Pripenjanje je izklopljeno.
+Aimanter : en glissant, un élément se colle à la tête de lecture, au début ou à la fin des autres, aux chapitres et aux temps de la musique (garder Alt / Option appuyé : sans aimant) ¦ Privlačenje: pri povlačenju element se lijepi uz glavu za reprodukciju, uz početak ili kraj drugih elemenata, uz poglavlja i udarce glazbe (drži Alt / Option: bez privlačenja) ¦ Pripenjanje: med vlečenjem se element pripne na predvajalno glavo, na začetek ali konec drugih elementov, na poglavja in udarce glasbe (drži Alt / Option: brez pripenjanja)
+Aimanter : un élément glissé se colle à la tête de lecture, aux autres éléments, aux chapitres et aux temps de la musique (Alt / Option : sans aimant) ¦ Privlačenje: povučeni element lijepi se uz glavu za reprodukciju, uz druge elemente, uz poglavlja i udarce glazbe (Alt / Option: bez privlačenja) ¦ Pripenjanje: povlečeni element se pripne na predvajalno glavo, na druge elemente, na poglavja in udarce glasbe (Alt / Option: brez pripenjanja)
+Ajouter une image clé ici (la valeur pourra changer au fil du temps) ¦ Dodaj ključni kadar ovdje (vrijednost se može mijenjati tijekom vremena) ¦ Dodaj ključno sličico tukaj (vrednost se lahko spreminja skozi čas)
+Aller à l'image clé précédente de l'élément choisi ¦ Idi na prethodni ključni kadar odabranog elementa ¦ Pojdi na prejšnjo ključno sličico izbranega elementa
+Aller à l'image clé suivante de l'élément choisi ¦ Idi na sljedeći ključni kadar odabranog elementa ¦ Pojdi na naslednjo ključno sličico izbranega elementa
+Le nom du projet (pour le retrouver dans 📂 Projets…) ¦ Naziv projekta (da ga pronađeš u 📂 Projekti…) ¦ Ime projekta (da ga najdeš v 📂 Projekti …)
+Le son du morceau passe sur une piste son, à part ¦ Zvuk skladbe ide na zasebnu zvučnu traku ¦ Zvok skladbe gre na ločeno zvočno sled
+Le son fini : nouvelle version (l’original est gardé), copie, nouveau son ou fichier téléchargé ¦ Gotov zvuk: nova verzija (izvornik se čuva), kopija, novi zvuk ili preuzeta datoteka ¦ Končan zvok: nova različica (izvirnik se ohrani), kopija, nov zvok ali prenesena datoteka
+Ancien film ¦ Stari film ¦ Star film
+Ancrage X ¦ Sidrište X ¦ Sidrišče X
+Ancrage Y ¦ Sidrište Y ¦ Sidrišče Y
+Au début ¦ Na početku ¦ Na začetku
+Aucun projet son pour l’instant ¦ Zasad nema zvučnih projekata ¦ Zaenkrat ni zvočnih projektov
+Aucun sous-titre reconnu (fichier .srt ou .vtt). ¦ Nije prepoznat nijedan podnaslov (datoteka .srt ili .vtt). ¦ Noben podnapis ni prepoznan (datoteka .srt ali .vtt).
+Aucune (taille d’origine) ¦ Nijedna (izvorna veličina) ¦ Brez (izvirna velikost)
+Aussi ⌘ + et ⌘ −, ⌘ 0 pour revenir ¦ Također ⌘ + i ⌘ −, ⌘ 0 za povratak ¦ Tudi ⌘ + in ⌘ −, ⌘ 0 za vrnitev
+Avancer le morceau dans la piste 1 ¦ Pomakni skladbu naprijed na traci 1 ¦ Premakni skladbo naprej na sledi 1
+← Avancer ¦ ← Naprijed ¦ ← Naprej
+Reculer → ¦ Natrag → ¦ Nazaj →
+Bord adouci ¦ Omekšani rub ¦ Omehčan rob
+Boutons remis comme au départ. ¦ Gumbi su vraćeni na početno. ¦ Gumbi so ponastavljeni na začetno.
+Cacher cette piste (ni vue ni entendue) ¦ Sakrij ovu traku (ni vidi se ni čuje) ¦ Skrij to sled (se ne vidi in ne sliši)
+Montrée ¦ Prikazana ¦ Prikazana
+Cachée ¦ Skrivena ¦ Skrita
+Ce fichier n’est pas une disposition du montage. ¦ Ova datoteka nije raspored montaže. ¦ Ta datoteka ni postavitev montaže.
+Ce réglage est vide ou abîmé. ¦ Ova postavka je prazna ili oštećena. ¦ Ta nastavitev je prazna ali poškodovana.
+Cette piste est déjà vide. ¦ Ova je traka već prazna. ¦ Ta sled je že prazna.
+Chapitres copiés. ¦ Poglavlja su kopirana. ¦ Poglavja so kopirana.
+Clique sur la frise pour te placer, sur un élément pour le choisir ; glisse un élément pour le déplacer dans le temps, ou sur une autre piste du même genre (vidéos et photos vont sur toutes les pistes vidéo, texte ↔ texte, son ↔ son). Espace = lire / pause · ⌫ ou Suppr = enlever · B = couper ici · ◇ = image clé · 🧲 un élément glissé se colle aux autres (Alt / Option : sans aimant) · 🔒 une piste verrouillée ne bouge plus. ¦ Klikni na vremensku crtu da se postaviš, na element da ga odabereš; povuci element da ga pomakneš u vremenu ili na drugu traku iste vrste (videozapisi i fotografije idu na sve video trake, tekst ↔ tekst, zvuk ↔ zvuk). Razmaknica = reprodukcija / pauza · ⌫ ili Delete = ukloni · B = reži ovdje · ◇ = ključni kadar · 🧲 povučeni element lijepi se uz druge (Alt / Option: bez privlačenja) · 🔒 zaključana traka više se ne pomiče. ¦ Klikni na časovnico, da se postaviš, na element, da ga izbereš; povleci element, da ga premakneš v času ali na drugo sled iste vrste (videi in fotografije gredo na vse video sledi, besedilo ↔ besedilo, zvok ↔ zvok). Preslednica = predvajaj / premor · ⌫ ali Delete = odstrani · B = odreži tukaj · ◇ = ključna sličica · 🧲 povlečeni element se pripne na druge (Alt / Option: brez pripenjanja) · 🔒 zaklenjena sled se ne premika več.
+Comme la 1re vidéo ¦ Kao 1. videozapis ¦ Kot 1. video
+Comme la vidéo ¦ Kao videozapis ¦ Kot video
+Composition ¦ Kompozicija ¦ Kompozicija
+Copie ce texte : ¦ Kopiraj ovaj tekst: ¦ Kopiraj to besedilo:
+Couleur du fondu ¦ Boja pretapanja ¦ Barva prehoda
+Couleurs vives ¦ Žive boje ¦ Žive barve
+Coupe franche ¦ Oštar rez ¦ Oster rez
+Coupe le morceau choisi à la tête de lecture ¦ Reže odabranu skladbu na glavi za reprodukciju ¦ Odreže izbrano skladbo pri predvajalni glavi
+Commence ici ¦ Počinje ovdje ¦ Začne se tukaj
+Finit ici ¦ Završava ovdje ¦ Konča se tukaj
+Le morceau choisi commence à la tête de lecture ¦ Odabrana skladba počinje na glavi za reprodukciju ¦ Izbrana skladba se začne pri predvajalni glavi
+Le morceau choisi finit à la tête de lecture ¦ Odabrana skladba završava na glavi za reprodukciju ¦ Izbrana skladba se konča pri predvajalni glavi
+Dans « Modifier le son », « 💾 Enregistrer le projet ». ¦ U „Uredi zvuk”, „💾 Spremi projekt”. ¦ V »Uredi zvok«, »💾 Shrani projekt«.
+Monter ce bloc ¦ Pomakni ovaj blok gore ¦ Premakni ta blok gor
+Descendre ce bloc ¦ Pomakni ovaj blok dolje ¦ Premakni ta blok dol
+Monter la piste ¦ Pomakni traku gore ¦ Premakni sled gor
+Descendre la piste ¦ Pomakni traku dolje ¦ Premakni sled dol
+Distorsion ¦ Izobličenje ¦ Popačenje
+Doux ¦ Blago ¦ Mehko
+Durée du film : ¦ Trajanje filma: ¦ Trajanje filma:
+Durée illisible ¦ Trajanje nije čitljivo ¦ Trajanja ni mogoče prebrati
+Durée par photo ¦ Trajanje po fotografiji ¦ Trajanje na fotografijo
+Durée à l’écran ¦ Trajanje na zaslonu ¦ Trajanje na zaslonu
+Défiler ¦ Pomicanje ¦ Drsenje
+Détacher le son ¦ Odvoji zvuk ¦ Loči zvok
+🔊 Détacher le son ¦ 🔊 Odvoji zvuk ¦ 🔊 Loči zvok
+Montrer cette piste ¦ Prikaži ovu traku ¦ Prikaži to sled
+Déverrouiller la piste ¦ Otključaj traku ¦ Odkleni sled
+Verrouiller la piste (ses éléments ne bougent plus, ne se coupent plus, ne s’enlèvent plus) ¦ Zaključaj traku (njezini se elementi više ne pomiču, ne režu i ne uklanjaju) ¦ Zakleni sled (njeni elementi se ne premikajo več, ne režejo in ne odstranjujejo)
+ENREGISTRER LE SON ¦ SPREMI ZVUK ¦ SHRANI ZVOK
+EXPORTER LA VIDÉO ¦ IZVEZI VIDEOZAPIS ¦ IZVOZI VIDEO
+Effacer les temps ¦ Obriši udarce ¦ Počisti udarce
+Repérer les temps ¦ Pronađi udarce ¦ Poišči udarce
+Repérer de nouveau ¦ Ponovno pronađi ¦ Poišči znova
+Effet Ken Burns ¦ Efekt Ken Burns ¦ Učinek Ken Burns
+Effet vieux film : grain, rayures, poussières, image qui scintille, coins assombris ¦ Efekt starog filma: zrno, ogrebotine, prašina, treperenje slike, zatamnjeni kutovi ¦ Učinek starega filma: zrno, praske, prah, utripajoča slika, zatemnjeni koti
+En couple ¦ U paru ¦ V paru
+Les parents ¦ Roditelji ¦ Starši
+Les enfants ¦ Djeca ¦ Otroci
+En incrustation, à la tête de lecture ¦ Kao umetak, na glavi za reprodukciju ¦ Kot vložek, pri predvajalni glavi
+Enlever cette image clé ¦ Ukloni ovaj ključni kadar ¦ Odstrani to ključno sličico
+Enlever l'élément choisi ¦ Ukloni odabrani element ¦ Odstrani izbrani element
+🗑 Enlever ¦ 🗑 Ukloni ¦ 🗑 Odstrani
+Enlever la stabilisation ¦ Ukloni stabilizaciju ¦ Odstrani stabilizacijo
+Enlever le reflet vert sur le sujet (cheveux, bords) ¦ Ukloni zeleni odsjaj na objektu (kosa, rubovi) ¦ Odstrani zeleni odsev na motivu (lasje, robovi)
+Enregistre ta voix au micro pendant que le film défile (casque conseillé) ¦ Snimi svoj glas mikrofonom dok film teče (preporučuju se slušalice) ¦ Posnemi svoj glas z mikrofonom, medtem ko film teče (priporočamo slušalke)
+Enregistrer le projet de montage, pour le rouvrir et continuer plus tard (⌘S) ¦ Spremi projekt montaže da ga kasnije ponovno otvoriš i nastaviš (⌘S) ¦ Shrani projekt montaže, da ga pozneje znova odpreš in nadaljuješ (⌘S)
+Enregistrer le projet son, pour y revenir plus tard (⌘S) ¦ Spremi zvučni projekt da mu se kasnije vratiš (⌘S) ¦ Shrani zvočni projekt, da se mu pozneje vrneš (⌘S)
+Entre deux images clés ¦ Između dva ključna kadra ¦ Med dvema ključnima sličicama
+en douceur ¦ glatko ¦ mehko
+régulier ¦ ravnomjerno ¦ enakomerno
+Exporter un fichier (et, si tu veux, une copie dans les médias) ¦ Izvezi datoteku (i, ako želiš, kopiju u medije) ¦ Izvozi datoteko (in po želji kopijo med medije)
+Fabrique le fichier vidéo (MP4 ou WebM, plusieurs formats d’image) et le range dans les médias : nouvelle version, copie ou nouvelle vidéo ¦ Izrađuje video datoteku (MP4 ili WebM, više formata slike) i sprema je u medije: nova verzija, kopija ili novi videozapis ¦ Izdela video datoteko (MP4 ali WebM, več razmerij slike) in jo shrani med medije: nova različica, kopija ali nov video
+Fermer sans enregistrer les modifications ? ¦ Zatvoriti bez spremanja izmjena? ¦ Zaprem brez shranjevanja sprememb?
+Fondu au blanc ¦ Pretapanje u bijelo ¦ Prehod v belo
+Fondu au noir ¦ Pretapanje u crno ¦ Prehod v črno
+Fondu d’entrée ¦ Postupno pojavljivanje ¦ Postopno pojavljanje
+Fondu de sortie ¦ Postupno nestajanje ¦ Postopno izginjanje
+↗ Fondu d’entrée ¦ ↗ Postupno pojavljivanje ¦ ↗ Postopno pojavljanje
+↘ Fondu de sortie ¦ ↘ Postupno nestajanje ¦ ↘ Postopno izginjanje
+Fondu en couleur (au choix) ¦ Pretapanje u boju (po izboru) ¦ Prehod v barvo (po izbiri)
+Fondu enchaîné ¦ Pretapanje ¦ Navzkrižni prehod
+Fondu flou ¦ Zamućeno pretapanje ¦ Zamegljen prehod
+Genre (vidéo, photo, son) ¦ Vrsta (videozapis, fotografija, zvuk) ¦ Vrsta (video, fotografija, zvok)
+Glisse depuis la droite ¦ Klizi zdesna ¦ Zdrsne z desne
+Glisse depuis la gauche ¦ Klizi slijeva ¦ Zdrsne z leve
+Glisse sur l’onde pour sélectionner · clic = se placer · Espace = écouter · molette = défiler, Ctrl + molette = zoom ¦ Povuci po valnom obliku za odabir · klik = postavi se · Razmaknica = slušaj · kotačić = pomicanje, Ctrl + kotačić = zum ¦ Povleci po valovni obliki za izbiro · klik = postavi se · Preslednica = poslušaj · kolešček = drsenje, Ctrl + kolešček = povečava
+Glisse-le sur une piste de la frise ¦ Povuci ga na traku vremenske crte ¦ Povleci ga na sled časovnice
+Glissement vers la droite ¦ Klizanje udesno ¦ Drsenje v desno
+Glissement vers la gauche (la suivante pousse) ¦ Klizanje ulijevo (sljedeća gura) ¦ Drsenje v levo (naslednja potisne)
+Glissement vers le bas ¦ Klizanje prema dolje ¦ Drsenje navzdol
+Glissement vers le haut ¦ Klizanje prema gore ¦ Drsenje navzgor
+Glisser pour élargir ou rétrécir le panneau (double-clic : largeur de départ) ¦ Povuci za proširivanje ili sužavanje ploče (dvoklik: početna širina) ¦ Povleci, da razširiš ali zožiš ploščo (dvoklik: začetna širina)
+Graves ¦ Duboki tonovi ¦ Nizki toni
+Tons moyens ¦ Srednji tonovi ¦ Srednji toni
+Hauteur des pistes ¦ Visina traka ¦ Višina sledi
+Taille des boutons des pistes ¦ Veličina gumba traka ¦ Velikost gumbov sledi
+Image et son ¦ Slika i zvuk ¦ Slika in zvok
+Images par seconde ¦ Sličica u sekundi ¦ Sličic na sekundo
+Importe tes vidéos et photos dans l’onglet 🎞️ Rush, puis glisse-les sur la frise (ou « ＋ Vidéo / photo à la suite »). ¦ Uvezi svoje videozapise i fotografije na kartici 🎞️ Sirove snimke, a zatim ih povuci na vremensku crtu (ili „＋ Videozapis / fotografija na kraj”). ¦ Uvozi svoje videe in fotografije v zavihek 🎞️ Surovi posnetki, nato jih povleci na časovnico (ali »＋ Video / fotografija na konec«).
+Inclinaison horizontale ¦ Vodoravni nagib ¦ Vodoravni nagib
+Inclinaison verticale ¦ Okomiti nagib ¦ Navpični nagib
+Indique un nombre, par exemple 6 ou -3. ¦ Upiši broj, na primjer 6 ili -3. ¦ Vpiši število, na primer 6 ali -3.
+＋ Incrustation ¦ ＋ Umetak ¦ ＋ Vložek
+＋ Incruster ¦ ＋ Umetni ¦ ＋ Vstavi kot vložek
+Une vidéo ou une photo dans un coin de l'image, à la tête de lecture ¦ Videozapis ili fotografija u kutu slike, na glavi za reprodukciju ¦ Video ali fotografija v kotu slike, pri predvajalni glavi
+Une vidéo ou une photo, à la suite dans la piste Vidéo 1 ¦ Videozapis ili fotografija, na kraj trake Video 1 ¦ Video ali fotografija, na konec sledi Video 1
+＋ Vidéo / photo à la suite ¦ ＋ Videozapis / fotografija na kraj ¦ ＋ Video / fotografija na konec
+Vidéo / photo à la suite ¦ Videozapis / fotografija na kraj ¦ Video / fotografija na konec
+Lecture ¦ Reprodukcija ¦ Predvajanje
+Les modifications du montage seront perdues. ¦ Izmjene montaže bit će izgubljene. ¦ Spremembe montaže bodo izgubljene.
+Les modifications du son seront perdues. ¦ Izmjene zvuka bit će izgubljene. ¦ Spremembe zvoka bodo izgubljene.
+Les photos arrivent… ¦ Fotografije stižu… ¦ Fotografije prihajajo …
+Les réglages s’appliquent à la sélection ; sans sélection, à tout le son. ¦ Postavke se primjenjuju na odabir; bez odabira, na cijeli zvuk. ¦ Nastavitve veljajo za izbor; brez izbora za ves zvok.
+Les vidéos, photos et sons du projet ¦ Videozapisi, fotografije i zvukovi projekta ¦ Videi, fotografije in zvoki projekta
+Lettres qui se resserrent ¦ Slova koja se skupljaju ¦ Črke, ki se zgoščajo
+Lettres qui s’écartent ¦ Slova koja se razmiču ¦ Črke, ki se razmikajo
+Lissage du mouvement ¦ Zaglađivanje pokreta ¦ Glajenje gibanja
+MODIFIER LE SON ¦ UREDI ZVUK ¦ UREDI ZVOK
+MODÈLE DE MONTAGE ¦ PREDLOŽAK MONTAŽE ¦ PREDLOGA MONTAŽE
+MONTAGE VIDÉO ¦ MONTAŽA VIDEOZAPISA ¦ VIDEO MONTAŽA
+🎬 MONTAGE VIDÉO ¦ 🎬 MONTAŽA VIDEOZAPISA ¦ 🎬 VIDEO MONTAŽA
+🎬 MONTAGE ¦ 🎬 MONTAŽA ¦ 🎬 MONTAŽA
+Mets la vidéo du fond vert au-dessus (incrustation, tout l’écran), et le décor (photo d’archive, autre vidéo) dessous, sur la piste 1. ¦ Stavi videozapis sa zelenom pozadinom iznad (umetak, cijeli zaslon), a pozadinu (arhivska fotografija, drugi videozapis) ispod, na traku 1. ¦ Video z zelenim ozadjem postavi zgoraj (vložek, cel zaslon), ozadje (arhivska fotografija, drug video) pa spodaj, na sled 1.
+Mettre ce dossier dans un autre ¦ Stavi ovu mapu u drugu ¦ Postavi to mapo v drugo
+Mode de fusion ¦ Način stapanja ¦ Način mešanja
+Mon son ¦ Moj zvuk ¦ Moj zvok
+Mot par mot ¦ Riječ po riječ ¦ Beseda za besedo
+Musique pendant la voix ¦ Glazba tijekom glasa ¦ Glasba med govorom
+Nom du fichier téléchargé ¦ Naziv preuzete datoteke ¦ Ime prenesene datoteke
+Non, nettoyer la sélection ¦ Ne, očisti odabir ¦ Ne, počisti izbor
+Oui, c’est du bruit seul ¦ Da, to je samo šum ¦ Da, to je samo šum
+Nouveau dossier dans le dossier ouvert ¦ Nova mapa u otvorenoj mapi ¦ Nova mapa v odprti mapi
+Nouveau montage ¦ Nova montaža ¦ Nova montaža
+Nouveau son enregistré, rattaché aux mêmes fiches. ¦ Novi zvuk je spremljen, povezan s istim zapisima. ¦ Nov zvok je shranjen, povezan z istimi zapisi.
+Nouveau ⚡ Son rapide ¦ Novi ⚡ Brzi zvuk ¦ Nov ⚡ Hitri zvok
+Nouvelle version montrée partout. L’original est gardé. ¦ Nova verzija prikazana posvuda. Izvornik se čuva. ¦ Nova različica prikazana povsod. Izvirnik je ohranjen.
+Nouvelle vidéo enregistrée, rattachée aux mêmes fiches. ¦ Novi videozapis je spremljen, povezan s istim zapisima. ¦ Nov video je shranjen, povezan z istimi zapisi.
+Version enregistrée (l’ancienne reste montrée). ¦ Verzija je spremljena (stara se i dalje prikazuje). ¦ Različica je shranjena (stara je še vedno prikazana).
+Ordre d’arrivée ¦ Redoslijed dolaska ¦ Vrstni red prihoda
+Trier les rushes ¦ Poredaj sirove snimke ¦ Razvrsti surove posnetke
+Outils du montage ¦ Alati montaže ¦ Orodja montaže
+Outils du son ¦ Alati zvuka ¦ Orodja zvoka
+Ouverture du son… ¦ Otvaranje zvuka… ¦ Odpiranje zvoka …
+Ouvrir ce dossier ¦ Otvori ovu mapu ¦ Odpri to mapo
+Renommer ce dossier ¦ Preimenuj ovu mapu ¦ Preimenuj to mapo
+Renommer ce rush ¦ Preimenuj ovu sirovu snimku ¦ Preimenuj ta surovi posnetek
+Ranger ce rush dans un dossier ¦ Spremi ovu sirovu snimku u mapu ¦ Pospravi ta surovi posnetek v mapo
+Ouvrir un autre projet sans enregistrer ce son ? ¦ Otvoriti drugi projekt bez spremanja ovog zvuka? ¦ Odprem drug projekt brez shranjevanja tega zvoka?
+Ouvrir un autre projet sans enregistrer celui-ci ? ¦ Otvoriti drugi projekt bez spremanja ovoga? ¦ Odprem drug projekt brez shranjevanja tega?
+Panneau des réglages ¦ Ploča postavki ¦ Plošča nastavitev
+Part vers la droite ¦ Odlazi udesno ¦ Odide v desno
+Part vers la gauche ¦ Odlazi ulijevo ¦ Odide v levo
+Pas d’image clé après. ¦ Nema ključnog kadra poslije. ¦ Za tem ni ključne sličice.
+Pas d’image clé avant. ¦ Nema ključnog kadra prije. ¦ Pred tem ni ključne sličice.
+Passer dans l’autre colonne ¦ Prebaci u drugi stupac ¦ Premakni v drugi stolpec
+Pistes ¦ Trake ¦ Sledi
+Plus chaud ¦ Toplije ¦ Toplejše
+Plus froid ¦ Hladnije ¦ Hladnejše
+Projets de montage ¦ Projekti montaže ¦ Projekti montaže
+Projets son ¦ Zvučni projekti ¦ Zvočni projekti
+Préparation du fichier… ¦ Priprema datoteke… ¦ Priprava datoteke …
+Qualité MP3 ¦ Kvaliteta MP3 ¦ Kakovost MP3
+Que fait chaque outil ? ¦ Što radi svaki alat? ¦ Kaj počne vsako orodje?
+Raccourcir les blancs ¦ Skrati tišine ¦ Skrajšaj tišine
+⏩ Raccourcir les longs blancs ¦ ⏩ Skrati duge tišine ¦ ⏩ Skrajšaj dolge tišine
+Rebondit puis disparaît ¦ Odskoči pa nestane ¦ Odskoči in izgine
+Reculer le morceau dans la piste 1 ¦ Pomakni skladbu natrag na traci 1 ¦ Premakni skladbo nazaj na sledi 1
+Rejoue ce texte depuis son début ¦ Ponovno reproducira ovaj tekst od početka ¦ Znova predvaja to besedilo od začetka
+Remplir (recadre pour remplir) ¦ Ispuni (obrezuje da ispuni) ¦ Zapolni (obreže, da zapolni)
+Rendre transparente la couleur du fond (fond vert ou bleu) : ce qui est dessous se voit ¦ Učini boju pozadine prozirnom (zelena ili plava pozadina): vidi se ono što je ispod ¦ Naredi barvo ozadja prosojno (zeleno ali modro ozadje): vidi se, kar je spodaj
+Roues de couleur ¦ Kotači boja ¦ Barvna kolesa
+Rouvrir un montage enregistré ¦ Ponovno otvori spremljenu montažu ¦ Znova odpri shranjeno montažo
+Rouvrir un son en cours de travail ¦ Ponovno otvori zvuk na kojem radiš ¦ Znova odpri zvok, na katerem delaš
+Son 1 ¦ Zvuk 1 ¦ Zvok 1
+Son 2 ¦ Zvuk 2 ¦ Zvok 2
+🎵 Son 1 ¦ 🎵 Zvuk 1 ¦ 🎵 Zvok 1
+Vidéo 1 ¦ Video 1 ¦ Video 1
+Vidéo 2 ¦ Video 2 ¦ Video 2
+Textes 1 ¦ Tekstovi 1 ¦ Besedila 1
+🔤 Textes 1 ¦ 🔤 Tekstovi 1 ¦ 🔤 Besedila 1
+Son ajouté (il est sélectionné). ¦ Zvuk je dodan (odabran je). ¦ Zvok je dodan (je izbran).
+Son illisible ¦ Zvuk nije čitljiv ¦ Zvoka ni mogoče prebrati
+Vidéo illisible ¦ Videozapis nije čitljiv ¦ Videa ni mogoče prebrati
+vidéo illisible ¦ videozapis nije čitljiv ¦ videa ni mogoče prebrati
+son introuvable ¦ zvuk nije pronađen ¦ zvoka ni mogoče najti
+Sort du flou ¦ Izlazi iz zamućenja ¦ Izstopi iz zameglitve
+Stabilisation annulée. ¦ Stabilizacija je poništena. ¦ Stabilizacija je preklicana.
+Superposition claire (écran) ¦ Svijetlo preklapanje (zaslon) ¦ Svetlo prekrivanje (zaslon)
+Supprimer cette piste ¦ Izbriši ovu traku ¦ Izbriši to sled
+Vider cette piste (elle reste, c’est la piste de base du film) ¦ Isprazni ovu traku (ostaje, to je osnovna traka filma) ¦ Izprazni to sled (ostane, to je osnovna sled filma)
+Supprimer le projet (les vidéos et photos restent dans les Médias) ¦ Izbriši projekt (videozapisi i fotografije ostaju u Medijima) ¦ Izbriši projekt (videi in fotografije ostanejo med mediji)
+Sur la frise ¦ Na vremenskoj crti ¦ Na časovnici
+Surgit avec un rebond ¦ Iskoči s odskokom ¦ Pojavi se z odskokom
+Tombe et rebondit ¦ Padne i odskoči ¦ Pade in odskoči
+S’ajoute aux réglages de chaque morceau (onglet 🎯 Élément → « 🔊 Son de ce morceau »). ¦ Dodaje se postavkama svake skladbe (kartica 🎯 Element → „🔊 Zvuk ove skladbe”). ¦ Doda se nastavitvam vsake skladbe (zavihek 🎯 Element → »🔊 Zvok te skladbe«).
+S’ajoutent aux couleurs de chaque morceau (onglet Élément). ¦ Dodaju se bojama svake skladbe (kartica Element). ¦ Dodajo se barvam vsake skladbe (zavihek Element).
+S’efface lettre par lettre ¦ Nestaje slovo po slovo ¦ Izgine črko za črko
+S’efface mot par mot ¦ Nestaje riječ po riječ ¦ Izgine besedo za besedo
+Température (froid ↔ chaud) ¦ Temperatura (hladno ↔ toplo) ¦ Temperatura (hladno ↔ toplo)
+Titre / texte ¦ Naslov / tekst ¦ Naslov / besedilo
+＋ Titre / texte ¦ ＋ Naslov / tekst ¦ ＋ Naslov / besedilo
+Son / musique ¦ Zvuk / glazba ¦ Zvok / glasba
+Tout reste modifiable ensuite. ¦ Sve se kasnije može mijenjati. ¦ Vse lahko pozneje spremeniš.
+Transformer ¦ Preoblikuj ¦ Preoblikuj
+Transition avant ¦ Prijelaz prije ¦ Prehod pred
+Type ¦ Vrsta ¦ Vrsta
+Un chapitre commence à la tête de lecture ¦ Poglavlje počinje na glavi za reprodukciju ¦ Poglavje se začne pri predvajalni glavi
+Chapitre ici ¦ Poglavlje ovdje ¦ Poglavje tukaj
+Un chapitre par grande étape ¦ Jedno poglavlje po velikoj etapi ¦ Eno poglavje na veliko obdobje
+Un sous-titre de 3 s à la tête de lecture, sur la piste « Sous-titres » ¦ Podnaslov od 3 s na glavi za reprodukciju, na traci „Podnaslovi” ¦ Podnapis dolžine 3 s pri predvajalni glavi, na sledi »Podnapisi«
+Sous-titre ici ¦ Podnaslov ovdje ¦ Podnapis tukaj
+Une petite vidéo dans un coin, réglable ¦ Mali videozapis u kutu, podesiv ¦ Majhen video v kotu, nastavljiv
+Une piste texte reçoit des titres (« ＋ Titre / texte »). ¦ Tekstna traka prima naslove („＋ Naslov / tekst”). ¦ Besedilna sled sprejme naslove (»＋ Naslov / besedilo«).
+Vidéos, photos ou sons de l’ordinateur (plusieurs à la fois), rangés dans le dossier ouvert ¦ Videozapisi, fotografije ili zvukovi s računala (više odjednom), spremljeni u otvorenu mapu ¦ Videi, fotografije ali zvoki z računalnika (več naenkrat), pospravljeni v odprto mapo
+Voix off ¦ Glas naratora ¦ Glas pripovedovalca
+🎙 Voix off ¦ 🎙 Glas naratora ¦ 🎙 Glas pripovedovalca
+⏹ Arrêter la voix off ¦ ⏹ Zaustavi glas naratora ¦ ⏹ Ustavi glas pripovedovalca
+Volet de droite à gauche ¦ Zavjesa zdesna nalijevo ¦ Zavesa z desne na levo
+Volet de gauche à droite ¦ Zavjesa slijeva nadesno ¦ Zavesa z leve na desno
+Volet en cercle (iris) ¦ Kružna zavjesa (iris) ¦ Krožna zavesa (iris)
+Volume général ¦ Ukupna glasnoća ¦ Skupna glasnost
+WebM — léger ¦ WebM — lagan ¦ WebM — majhen
+Zoom ¦ Zum ¦ Povečava
+Zoom arrière sur la frise ¦ Smanji vremensku crtu ¦ Pomanjšaj časovnico
+Zoom avant sur la frise ¦ Povećaj vremensku crtu ¦ Povečaj časovnico
+Zoom avant à travers ¦ Zum naprijed kroz ¦ Povečava skozi
+Zoom de la frise ¦ Zum vremenske crte ¦ Povečava časovnice
+Zoomer sur la sélection ¦ Zumiraj na odabir ¦ Povečaj na izbor
+bandes floues au lieu des bandes noires (la même image, floutée, derrière) ¦ zamućene trake umjesto crnih (ista slika, zamućena, iza) ¦ zamegljeni pasovi namesto črnih (ista slika, zamegljena, zadaj)
+centré ¦ centrirano ¦ na sredini
+ces boutons ¦ ovi gumbi ¦ ti gumbi
+cette disposition ¦ ovaj raspored ¦ ta postavitev
+commence par un fondu depuis le noir ¦ počinje pretapanjem iz crnog ¦ začne se s prehodom iz črnega
+finit par un fondu au noir ¦ završava pretapanjem u crno ¦ konča se s prehodom v črno
+effet Ken Burns sur toutes les photos (zoom et glissement lents, variés) ¦ efekt Ken Burns na svim fotografijama (spori, raznoliki zum i klizanje) ¦ učinek Ken Burns na vseh fotografijah (počasna, raznolika povečava in drsenje)
+la musique baisse toute seule pendant une voix ¦ glazba se sama stišava tijekom glasa ¦ glasba se med govorom sama utiša
+… et aussi pendant le son des vidéos de la piste 1 ¦ … i tijekom zvuka videozapisa na traci 1 ¦ … in tudi med zvokom videov na sledi 1
+le montage est vide ¦ montaža je prazna ¦ montaža je prazna
+l’image tremble un peu, comme dans un vieux projecteur ¦ slika malo podrhtava, kao na starom projektoru ¦ slika rahlo trepeta, kot na starem projektorju
+sépia (couleurs passées, brunes) ¦ sepija (izblijedjele, smeđe boje) ¦ sepija (zbledele, rjave barve)
+pas de sélection ¦ nema odabira ¦ ni izbora
+plusieurs formats, nouvelle version ¦ više formata, nova verzija ¦ več oblik, nova različica
+sans les blancs, voix plus nette… ¦ bez tišina, jasniji glas… ¦ brez tišin, jasnejši glas …
+« 🔖 Chapitre ici » pose un chapitre à la tête de lecture. ¦ „🔖 Poglavlje ovdje” postavlja poglavlje na glavu za reprodukciju. ¦ »🔖 Poglavje tukaj« postavi poglavje pri predvajalni glavi.
+· tire le point vers une couleur, double-clic pour revenir ¦ · povuci točku prema boji, dvoklik za povratak ¦ · povleci točko proti barvi, dvoklik za vrnitev
+À la suite dans Vidéo 1 ¦ Na kraj trake Video 1 ¦ Na konec sledi Video 1
+＋ À la suite ¦ ＋ Na kraj ¦ ＋ Na konec
+＋ Son seul ¦ ＋ Samo zvuk ¦ ＋ Samo zvok
+Échelle (tout) ¦ Mjerilo (sve) ¦ Merilo (vse)
+Échelle X ¦ Mjerilo X ¦ Merilo X
+Échelle Y ¦ Mjerilo Y ¦ Merilo Y
+Écouter, comparer, montrer partout, renommer, supprimer ¦ Slušaj, usporedi, prikaži posvuda, preimenuj, izbriši ¦ Poslušaj, primerjaj, prikaži povsod, preimenuj, izbriši
+↻ Refaire l’analyse ¦ ↻ Ponovi analizu ¦ ↻ Ponovi analizo
+⌨️ Raccourcis du montage ¦ ⌨️ Prečaci montaže ¦ ⌨️ Bližnjice montaže
+▣ Dans un coin ¦ ▣ U kutu ¦ ▣ V kotu
+⛶ Tout l’écran ¦ ⛶ Cijeli zaslon ¦ ⛶ Cel zaslon
+▶ Lire ¦ ▶ Reproduciraj ¦ ▶ Predvajaj
+▶ Lire / pause ¦ ▶ Reproduciraj / pauza ¦ ▶ Predvajaj / premor
+✂️ Modifier un son ouvre ¦ ✂️ Uredi zvuk otvara ¦ ✂️ Uredi zvok odpre
+⬅️ Glisse vers la gauche ¦ ⬅️ Klizi ulijevo ¦ ⬅️ Zdrsne v levo
+➡️ Glisse vers la droite ¦ ➡️ Klizi udesno ¦ ➡️ Zdrsne v desno
+⬆️ Monte ¦ ⬆️ Penje se ¦ ⬆️ Gre gor
+⬇️ Descend ¦ ⬇️ Spušta se ¦ ⬇️ Gre dol
+⤒ Importer des rushes (vidéos, photos, sons)… ¦ ⤒ Uvezi sirove snimke (videozapisi, fotografije, zvukovi)… ¦ ⤒ Uvozi surove posnetke (videi, fotografije, zvoki) …
+⤒ Importer des sous-titres (.srt, .vtt)… ¦ ⤒ Uvezi podnaslove (.srt, .vtt)… ¦ ⤒ Uvozi podnapise (.srt, .vtt) …
+⬚ Garder seulement la sélection ¦ ⬚ Zadrži samo odabir ¦ ⬚ Obdrži samo izbor
+〰️ Enlever le bourdonnement ¦ 〰️ Ukloni brujanje ¦ 〰️ Odstrani brnenje
+＋ Ajouter un son… ¦ ＋ Dodaj zvuk… ¦ ＋ Dodaj zvok …
+＋ Piste texte ¦ ＋ Tekstna traka ¦ ＋ Besedilna sled
+🎙 Musique et voix ¦ 🎙 Glazba i glas ¦ 🎙 Glasba in glas
+🎛️ Réglages de l’image ¦ 🎛️ Postavke slike ¦ 🎛️ Nastavitve slike
+🎞️ Film ¦ 🎞️ Film ¦ 🎞️ Film
+🎞️ Rush ¦ 🎞️ Sirova snimka ¦ 🎞️ Surovi posnetek
+🎞️ Rushes ¦ 🎞️ Sirove snimke ¦ 🎞️ Surovi posnetki
+🎯 Élément ¦ 🎯 Element ¦ 🎯 Element
+🎞️ Vieux film (ce morceau) ¦ 🎞️ Stari film (ova skladba) ¦ 🎞️ Star film (ta skladba)
+🎞️ Vieux film (tout le film) ¦ 🎞️ Stari film (cijeli film) ¦ 🎞️ Star film (cel film)
+🎧 Mono ¦ 🎧 Mono ¦ 🎧 Mono
+🎧 Mono (le même son des deux côtés) ¦ 🎧 Mono (isti zvuk s obje strane) ¦ 🎧 Mono (isti zvok na obeh straneh)
+🎧 SON ¦ 🎧 ZVUK ¦ 🎧 ZVOK
+🎨 Couleurs de ce morceau ¦ 🎨 Boje ove skladbe ¦ 🎨 Barve te skladbe
+🎨 Couleurs de tout le film ¦ 🎨 Boje cijelog filma ¦ 🎨 Barve celega filma
+🎬 Disposition du montage ¦ 🎬 Raspored montaže ¦ 🎬 Postavitev montaže
+🎯 Vectorscope et histogramme ¦ 🎯 Vektorskop i histogram ¦ 🎯 Vektorskop in histogram
+🎲 Automatique (varié) ¦ 🎲 Automatski (raznoliko) ¦ 🎲 Samodejno (raznoliko)
+💾 Garder dans les médias… ¦ 💾 Zadrži u medijima… ¦ 💾 Obdrži med mediji …
+📁＋ Dossier ¦ 📁＋ Mapa ¦ 📁＋ Mapa
+📏 Normaliser ¦ 📏 Normaliziraj ¦ 📏 Normaliziraj
+📐 Format de l’image ¦ 📐 Format slike ¦ 📐 Razmerje slike
+📢 Volume standard (LUFS)… ¦ 📢 Standardna glasnoća (LUFS)… ¦ 📢 Standardna glasnost (LUFS) …
+📱 Téléphone 9:16 (vertical) ¦ 📱 Telefon 9:16 (okomito) ¦ 📱 Telefon 9:16 (pokončno)
+📺 Ancien écran 4:3 ¦ 📺 Stari zaslon 4:3 ¦ 📺 Star zaslon 4:3
+🖥️ Écran 16:9 ¦ 🖥️ Zaslon 16:9 ¦ 🖥️ Zaslon 16:9
+🖼️ Portrait 4:5 (réseaux) ¦ 🖼️ Portret 4:5 (društvene mreže) ¦ 🖼️ Portret 4:5 (družbena omrežja)
+🖼️ Vidéos incrustées ¦ 🖼️ Umetnuti videozapisi ¦ 🖼️ Vstavljeni videi
+🔇 Sans le son ¦ 🔇 Bez zvuka ¦ 🔇 Brez zvoka
+🔇 Sans son ¦ 🔇 Bez zvuka ¦ 🔇 Brez zvoka
+🔇 Silence ¦ 🔇 Tišina ¦ 🔇 Tišina
+🔊 Volume… ¦ 🔊 Glasnoća… ¦ 🔊 Glasnost …
+🔖 Chapitres ¦ 🔖 Poglavlja ¦ 🔖 Poglavja
+🖼️ Photos ¦ 🖼️ Fotografije ¦ 🖼️ Fotografije
+🗂 De la base ¦ 🗂 Iz baze ¦ 🗂 Iz baze
+🗣️ Voix plus nette ¦ 🗣️ Jasniji glas ¦ 🗣️ Jasnejši glas
+🟩 Fond vert (incrustation) ¦ 🟩 Zelena pozadina (umetanje) ¦ 🟩 Zeleno ozadje (vstavljanje)
+🧲 Aimanter ¦ 🧲 Privlačenje ¦ 🧲 Pripenjanje
+Aimanter ¦ Privlačenje ¦ Pripenjanje
+🧹 Moins de souffle et de grondement ¦ 🧹 Manje šuma i tutnjave ¦ 🧹 Manj šuma in bobnenja
+🧹 Réduire le souffle ¦ 🧹 Smanji šum ¦ 🧹 Zmanjšaj šum
+🪄 « La vie de… » ¦ 🪄 „Život osobe…” ¦ 🪄 »Življenje osebe …«
+🪄 « Une famille » ¦ 🪄 „Jedna obitelj” ¦ 🪄 »Družina«
+{what}, et rangés dans les médias. ¦ {what}, i spremljeno u medije. ¦ {what}, in pospravljeno med medije.
+=fichier téléchargé ¦ preuzeta datoteka|preuzete datoteke|preuzetih datoteka ¦ prenesena datoteka|preneseni datoteki|prenesene datoteke|prenesenih datotek
+Fichier téléchargé, et une copie est rangée dans les médias. ¦ Datoteka je preuzeta, a kopija je spremljena u medije. ¦ Datoteka je prenesena, kopija pa je shranjena med mediji.
+{dur} · {ch} · {khz} kHz · sonie {lufs} LUFS · crête {pk} dB ¦ {dur} · {ch} · {khz} kHz · glasnoća {lufs} LUFS · vršna vrijednost {pk} dB ¦ {dur} · {ch} · {khz} kHz · glasnost {lufs} LUFS · vrh {pk} dB
+{dur} · {ch} · {khz} kHz · crête {pk} dB · sonie <span data-as-lufs>…</span> ¦ {dur} · {ch} · {khz} kHz · vršna vrijednost {pk} dB · glasnoća <span data-as-lufs>…</span> ¦ {dur} · {ch} · {khz} kHz · vrh {pk} dB · glasnost <span data-as-lufs>…</span>
+Chaque zone dans un fichier ({n}) ¦ Svako područje u zasebnoj datoteci ({n}) ¦ Vsako območje v svoji datoteki ({n})
+Chaque piste dans un fichier ({n}) ¦ Svaka traka u zasebnoj datoteci ({n}) ¦ Vsaka sled v svoji datoteki ({n})
+Comme l’original (stéréo) ¦ Kao izvornik (stereo) ¦ Kot izvirnik (stereo)
+Comme l’original (mono) ¦ Kao izvornik (mono) ¦ Kot izvirnik (mono)
+Comme l’original ({n} kHz) ¦ Kao izvornik ({n} kHz) ¦ Kot izvirnik ({n} kHz)
+Relier « {name} » à une personne… ¦ Poveži „{name}” s osobom… ¦ Poveži »{name}« z osebo …
+Relier « {name} » à une personne ¦ Poveži „{name}” s osobom ¦ Poveži »{name}« z osebo
+Relier « {name} » à un événement ¦ Poveži „{name}” s događajem ¦ Poveži »{name}« z dogodkom
+Relier « {name} » à {what} ¦ Poveži „{name}” s {what} ¦ Poveži »{name}« z {what}
+Relier « {name} » ¦ Poveži „{name}” ¦ Poveži »{name}«
+Insérer « {name} » ¦ Umetni „{name}” ¦ Vstavi »{name}«
+Enregistrement au micro ({time}) ¦ Snimanje mikrofonom ({time}) ¦ Snemanje z mikrofonom ({time})
+🎛️ Rack d’effets ¦ 🎛️ Stalak efekata ¦ 🎛️ Stojalo učinkov
+Rack d’effets ¦ Stalak efekata ¦ Stojalo učinkov
+=effet ¦ efekt|efekta|efekata ¦ učinek|učinka|učinki|učinkov
+Rallumer ¦ Ponovno uključi ¦ Znova vklopi
+Éteindre ¦ Isključi ¦ Izklopi
+Rallumer l’effet ¦ Ponovno uključi efekt ¦ Znova vklopi učinek
+Éteindre l’effet ¦ Isključi efekt ¦ Izklopi učinek
+Rallumer {what} ¦ Ponovno uključi {what} ¦ Znova vklopi {what}
+Éteindre {what} ¦ Isključi {what} ¦ Izklopi {what}
+Retirer {what} ¦ Ukloni {what} ¦ Odstrani {what}
+Effet « {name} » retiré ¦ Efekt „{name}” je uklonjen ¦ Učinek »{name}« je odstranjen
+Réglages « {name} » ¦ Postavke „{name}” ¦ Nastavitve »{name}«
+Égaliseur : {what} ¦ Ekvilizator: {what} ¦ Izenačevalnik: {what}
+à plat ¦ ravno ¦ ravno
+Empreinte : {a} → {b} ({n} s de bruit choisi). ¦ Otisak: {a} → {b} ({n} s odabranog šuma). ¦ Odtis: {a} → {b} ({n} s izbranega šuma).
+Empreinte : {a} → {b} ({n} s de bruit seul, trouvé tout seul). ¦ Otisak: {a} → {b} ({n} s čistog šuma, pronađeno samo). ¦ Odtis: {a} → {b} ({n} s samega šuma, najdeno samodejno).
+Réverbération : {what} ¦ Odjek: {what} ¦ Odmev: {what}
+{n} Hz (trouvé) ¦ {n} Hz (pronađeno) ¦ {n} Hz (najdeno)
+Trouver tout seul ¦ Pronađi samo ¦ Poišči samodejno
+Forme du fondu d’entrée ¦ Oblik postupnog pojavljivanja ¦ Oblika postopnega pojavljanja
+Forme du fondu de sortie ¦ Oblik postupnog nestajanja ¦ Oblika postopnega izginjanja
+Forme du fondu ¦ Oblik pretapanja ¦ Oblika prehoda
+{what} au pinceau. ¦ {what} kistom. ¦ {what} s čopičem.
+=zone réparée ¦ popravljeno područje|popravljena područja|popravljenih područja ¦ popravljeno območje|popravljeni območji|popravljena območja|popravljenih območij
+=réparation au pinceau ¦ popravak kistom|popravka kistom|popravaka kistom ¦ popravek s čopičem|popravka s čopičem|popravki s čopičem|popravkov s čopičem
+Seulement sur {a} → {b} ¦ Samo na {a} → {b} ¦ Samo na {a} → {b}
+Renommer « {name} » ¦ Preimenuj „{name}” ¦ Preimenuj »{name}«
+Écouter « {name} » ¦ Slušaj „{name}” ¦ Poslušaj »{name}«
+Fichier introuvable ¦ Datoteka nije pronađena ¦ Datoteke ni mogoče najti
+Prise micro du {date} ¦ Snimka mikrofonom od {date} ¦ Posnetek z mikrofonom z dne {date}
+Glisse = sélectionner · <kbd>Espace</kbd> écouter · <kbd>⌘</kbd> et molette : zoom · <kbd>M</kbd> marqueur · <kbd>A</kbd> maintenu : l’avant ¦ Povlačenje = odabir · <kbd>Razmaknica</kbd> slušaj · <kbd>⌘</kbd> i kotačić: zum · <kbd>M</kbd> oznaka · <kbd>A</kbd> pritisnuto: prije ¦ Vlečenje = izbira · <kbd>Preslednica</kbd> poslušaj · <kbd>⌘</kbd> in kolešček: povečava · <kbd>M</kbd> oznaka · <kbd>A</kbd> pridržano: prej
+Glisse sur l’onde pour sélectionner ; clic = se placer ; ⇧ ← → agrandit la sélection. ¦ Povuci po valnom obliku za odabir; klik = postavi se; ⇧ ← → povećava odabir. ¦ Povleci po valovni obliki za izbiro; klik = postavi se; ⇧ ← → razširi izbor.
+Peins sur la tache du spectre (toux, sonnerie), puis « 🩹 Réparer ». Taille : le curseur. ¦ Oboji mrlju na spektru (kašalj, zvonjava), pa „🩹 Popravi”. Veličina: klizač. ¦ Pobarvaj madež na spektru (kašelj, zvonjenje), nato »🩹 Popravi«. Velikost: drsnik.
+Entoure la tache sur le spectre, puis « 🩹 Réparer ». ¦ Zaokruži mrlju na spektru, pa „🩹 Popravi”. ¦ Obkroži madež na spektru, nato »🩹 Popravi«.
+Clic sur l’onde : un marqueur 🚩 à cet endroit. ¦ Klik na valni oblik: oznaka 🚩 na tom mjestu. ¦ Klik na valovno obliko: oznaka 🚩 na tem mestu.
+Multipiste : clic sur un morceau pour le couper en deux. Sur l’onde : supprime la sélection. ¦ Višetračno: klik na dio da ga prerežeš na dva. Na valnom obliku: briše odabir. ¦ Večsledno: klik na kos, da ga razrežeš na dva. Na valovni obliki: izbriše izbor.
+Garde <kbd>A</kbd> appuyée pour entendre l’avant, au même endroit. ¦ Drži <kbd>A</kbd> pritisnuto da čuješ prije, na istom mjestu. ¦ Drži <kbd>A</kbd>, da slišiš prej, na istem mestu.
+{name} — {what} (prêt) ¦ {name} — {what} (spremno) ¦ {name} — {what} (pripravljeno)
+{time} au début ¦ {time} na početku ¦ {time} na začetku
+{time} à la fin ¦ {time} na kraju ¦ {time} na koncu
+Les zones hachurées seront coupées ({what}). ¦ Šrafirana područja bit će odrezana ({what}). ¦ Šrafirana območja bodo odrezana ({what}).
+Glisse les poignées noires pour changer. ¦ Povuci crne ručice za promjenu. ¦ Povleci črne ročice za spremembo.
+le « mmm » du courant (trouvé tout seul : {n} Hz) ¦ „mmm” od struje (pronađeno samo: {n} Hz) ¦ »mmm« iz omrežja (najdeno samodejno: {n} Hz)
+le « mmm » du courant (aucun trouvé : 50 Hz par défaut) ¦ „mmm” od struje (ništa nije pronađeno: zadano 50 Hz) ¦ »mmm« iz omrežja (nič ni najdeno: privzeto 50 Hz)
+le « mmm » du courant ¦ „mmm” od struje ¦ »mmm« iz omrežja
+le « chhh » de la cassette ¦ „šššš” s kazete ¦ »ššš« s kasete
+plus de {n} s → 0,5 s ¦ više od {n} s → 0,5 s ¦ več kot {n} s → 0,5 s
+{name} (nettoyé) ¦ {name} (očišćeno) ¦ {name} (očiščeno)
+Couper la fin ({time}) ¦ Odreži kraj ({time}) ¦ Odreži konec ({time})
+Couper le début ({time}) ¦ Odreži početak ({time}) ¦ Odreži začetek ({time})
+Nettoyer « {name} » à la place ? ¦ Umjesto toga očistiti „{name}”? ¦ Namesto tega očistim »{name}«?
+Ouvrir ce son ¦ Otvori ovaj zvuk ¦ Odpri ta zvok
+Un ronflement du courant a été trouvé ({n} Hz) : il est enlevé, avec les clics. Écoute la différence. ¦ Pronađeno je brujanje struje ({n} Hz): uklanja se, zajedno s klikovima. Poslušaj razliku. ¦ Najdeno je brnenje omrežja ({n} Hz): odstranjeno je, skupaj s kliki. Poslušaj razliko.
+son|piste ¦ traka ¦ sled
+baisse|de ¦ za ¦ za
+retour en ¦ povratak za ¦ vrnitev v
+Piste de la voix ¦ Traka glasa ¦ Sled glasu
+Piste qui baisse ¦ Traka koja se stišava ¦ Sled, ki se utiša
+Baisse en dB ¦ Stišavanje u dB ¦ Utišanje v dB
+{name} : armée pour le micro ¦ {name}: spremna za mikrofon ¦ {name}: pripravljena za mikrofon
+{name} : désarmée ¦ {name}: nije spremna ¦ {name}: ni več pripravljena
+Renommer la piste « {name} » ¦ Preimenuj traku „{name}” ¦ Preimenuj sled »{name}«
+{name} : courbe du panoramique ¦ {name}: krivulja panorame ¦ {name}: krivulja panorame
+{name} : courbe du volume ¦ {name}: krivulja glasnoće ¦ {name}: krivulja glasnosti
+Couper « {name} » à {time} ¦ Odreži „{name}” u {time} ¦ Odreži »{name}« ob {time}
+Déplacer « {name} » ¦ Premjesti „{name}” ¦ Premakni »{name}«
+le morceau ¦ dio ¦ kos
+{name} : point ajouté à {time} ¦ {name}: točka dodana u {time} ¦ {name}: točka dodana ob {time}
+{name} : point retiré ¦ {name}: točka uklonjena ¦ {name}: točka odstranjena
+Ajouter « {name} » sur {track} ¦ Dodaj „{name}” na {track} ¦ Dodaj »{name}« na {track}
+Morceau « {name} » retiré ¦ Dio „{name}” je uklonjen ¦ Kos »{name}« je odstranjen
+son ¦ zvuk ¦ zvok
+(mélange) ¦ (miks) ¦ (mešanica)
+Le son ouvert ici ¦ Zvuk otvoren ovdje ¦ Zvok, odprt tukaj
+Le son tel qu’il est (garde la touche A appuyée) ¦ Zvuk kakav jest (drži tipku A pritisnutom) ¦ Zvok, kakršen je (drži tipko A)
+Appliquer le rack pour de bon ¦ Trajno primijeni stalak ¦ Trajno uporabi stojalo
+Arme d’abord une piste avec ● (dans ses boutons M S ●). ¦ Najprije pripremi traku s ● (u njezinim gumbima M S ●). ¦ Najprej pripravi sled z ● (med njenimi gumbi M S ●).
+Atténuer de ¦ Stišaj za ¦ Utišaj za
+Aucun effet ¦ Nema efekata ¦ Ni učinkov
+Aucun effet : « ＋ Ajouter un effet », ou le menu Effets. ¦ Nema efekata: „＋ Dodaj efekt” ili izbornik Efekti. ¦ Ni učinkov: »＋ Dodaj učinek« ali meni Učinki.
+Aucun marqueur ni zone : sélectionne un passage, puis « ＋ Nouvelle zone » (ou M). ¦ Nema oznaka ni područja: odaberi dio, a zatim „＋ Novo područje” (ili M). ¦ Ni oznak ne območij: izberi odsek, nato »＋ Novo območje« (ali M).
+Avant ou après ¦ Prije ili poslije ¦ Prej ali potem
+Baisser la musique sous la voix ¦ Stišaj glazbu ispod glasa ¦ Utišaj glasbo pod glasom
+Ne plus baisser la musique ¦ Više ne stišavaj glazbu ¦ Ne utišaj več glasbe
+Bientôt : un moteur de reconnaissance qui tourne dans l’ordinateur (rien n’est envoyé sur Internet) ¦ Uskoro: pokretač za prepoznavanje koji radi na računalu (ništa se ne šalje na internet) ¦ Kmalu: pogon za prepoznavanje, ki teče na računalniku (nič se ne pošlje na splet)
+Boucle ¦ Petlja ¦ Zanka
+Calcul des effets… ¦ Izračun efekata… ¦ Izračun učinkov …
+Ce fichier n’est pas un réglage du son. ¦ Ova datoteka nije postavka zvuka. ¦ Ta datoteka ni nastavitev zvoka.
+Ce navigateur ne donne pas accès au micro. ¦ Ovaj preglednik ne daje pristup mikrofonu. ¦ Ta brskalnik ne omogoča dostopa do mikrofona.
+Ce qui est dit ¦ Što je rečeno ¦ Kaj je rečeno
+Choisis d’abord une zone. ¦ Najprije odaberi područje. ¦ Najprej izberi območje.
+Choisis une zone (à gauche ou au-dessus de l’onde), ou crée-en une : « ＋ Nouvelle zone ». ¦ Odaberi područje (lijevo ili iznad valnog oblika) ili stvori novo: „＋ Novo područje”. ¦ Izberi območje (levo ali nad valovno obliko) ali ustvari novo: »＋ Novo območje«.
+Clics et craquements ¦ Klikovi i pucketanje ¦ Kliki in prasketanje
+Clique une étape pour y revenir ; les étapes grisées reviennent avec ↷. ¦ Klikni korak da mu se vratiš; zasivljeni koraci vraćaju se s ↷. ¦ Klikni korak, da se vrneš k njemu; posiveli koraki se vrnejo z ↷.
+Cliquer une heure fait écouter ce passage. Export en .txt, .srt, .vtt : ⤓ Exporter → 📝 Texte et repères. Le texte est cherchable dans la base. ¦ Klik na vrijeme pušta taj dio. Izvoz u .txt, .srt, .vtt: ⤓ Izvezi → 📝 Tekst i oznake. Tekst se može pretraživati u bazi. ¦ Klik na čas predvaja ta odsek. Izvoz v .txt, .srt, .vtt: ⤓ Izvozi → 📝 Besedilo in oznake. Besedilo je v bazi iskljivo.
+Copie nettoyée ajoutée aux mêmes fiches. ¦ Očišćena kopija dodana istim zapisima. ¦ Očiščena kopija je dodana istim zapisom.
+Copie séparée ajoutée aux mêmes fiches. ¦ Zasebna kopija dodana istim zapisima. ¦ Ločena kopija je dodana istim zapisom.
+Couper le début et la fin ¦ Odreži početak i kraj ¦ Odreži začetek in konec
+Couper un morceau en deux (multipiste) ; sur l’onde : supprimer la sélection ¦ Prereži dio na dva (višetračno); na valnom obliku: izbriši odabir ¦ Razreži kos na dva (večsledno); na valovni obliki: izbriši izbor
+Crête ¦ Vršna vrijednost ¦ Vrh
+Effacer le dessin ¦ Obriši crtež ¦ Počisti risbo
+× Effacer le dessin ¦ × Obriši crtež ¦ × Počisti risbo
+Empreinte du bruit ¦ Otisak šuma ¦ Odtis šuma
+En S ¦ U obliku slova S ¦ V obliki črke S
+Rapide ¦ Brzo ¦ Hitro
+Lente ¦ Sporo ¦ Počasi
+🏠 Pièce ¦ 🏠 Soba ¦ 🏠 Soba
+⛪ Église ¦ ⛪ Crkva ¦ ⛪ Cerkev
+🎭 Salle ¦ 🎭 Dvorana ¦ 🎭 Dvorana
+🧱 Cave ¦ 🧱 Podrum ¦ 🧱 Klet
+Enlever le bourdonnement ¦ Ukloni brujanje ¦ Odstrani brnenje
+Enregistrer au micro ¦ Snimi mikrofonom ¦ Snemaj z mikrofonom
+● Enregistrer au micro ¦ ● Snimi mikrofonom ¦ ● Snemaj z mikrofonom
+🎙️ Enregistrer au micro ¦ 🎙️ Snimi mikrofonom ¦ 🎙️ Snemaj z mikrofonom
+Enregistrer au micro (au repère orange ; en multipiste : sur la piste armée ●) ¦ Snimi mikrofonom (na narančastoj oznaci; višetračno: na pripremljenu traku ●) ¦ Snemaj z mikrofonom (pri oranžni oznaki; večsledno: na pripravljeno sled ●)
+Enregistrer dans les médias ¦ Spremi u medije ¦ Shrani med medije
+Enregistrer et afficher cette version (l’original est gardé) ¦ Spremi i prikaži ovu verziju (izvornik se čuva) ¦ Shrani in prikaži to različico (izvirnik se ohrani)
+Enregistrer le projet son (rack, zones, pistes), pour y revenir ¦ Spremi zvučni projekt (stalak, područja, trake) da mu se vratiš ¦ Shrani zvočni projekt (stojalo, območja, sledi), da se mu vrneš
+Enregistrer le projet sous… ¦ Spremi projekt kao… ¦ Shrani projekt kot …
+Exporter : MP3, M4A, WAV, FLAC, Ogg, AIFF, texte et repères ¦ Izvoz: MP3, M4A, WAV, FLAC, Ogg, AIFF, tekst i oznake ¦ Izvoz: MP3, M4A, WAV, FLAC, Ogg, AIFF, besedilo in oznake
+Exporter ce passage… ¦ Izvezi ovaj dio… ¦ Izvozi ta odsek …
+Exporter un fichier (MP3, WAV, FLAC…), et si tu veux une copie dans les médias ¦ Izvezi datoteku (MP3, WAV, FLAC…) i, ako želiš, kopiju u medije ¦ Izvozi datoteko (MP3, WAV, FLAC …) in po želji kopijo med medije
+Fichiers ¦ Datoteke ¦ Datoteke
+Fort ¦ Jako ¦ Močno
+Moyen ¦ Srednje ¦ Srednje
+Garde ¦ Zadrži ¦ Obdrži
+Garder seulement la sélection ¦ Zadrži samo odabir ¦ Obdrži samo izbor
+Gardée dans les versions, le son affiché ne change pas ¦ Sačuvano u verzijama, prikazani zvuk se ne mijenja ¦ Ohranjeno med različicami, prikazani zvok se ne spremeni
+Insérer un son… ¦ Umetni zvuk… ¦ Vstavi zvok …
+La fenêtre d’export n’est pas prête. ¦ Prozor za izvoz nije spreman. ¦ Okno za izvoz ni pripravljeno.
+L’export n’est pas encore prêt. ¦ Izvoz još nije spreman. ¦ Izvoz še ni pripravljen.
+La sélection ¦ Odabir ¦ Izbor
+Lasso de réparation ¦ Laso za popravak ¦ Laso za popravilo
+Lasso de réparation (sur le spectre) ¦ Laso za popravak (na spektru) ¦ Laso za popravilo (na spektru)
+➰ Lasso de réparation ¦ ➰ Laso za popravak ¦ ➰ Laso za popravilo
+Pinceau de réparation ¦ Kist za popravak ¦ Čopič za popravilo
+Pinceau de réparation (sur le spectre) ¦ Kist za popravak (na spektru) ¦ Čopič za popravilo (na spektru)
+🖌 Pinceau de réparation ¦ 🖌 Kist za popravak ¦ 🖌 Čopič za popravilo
+Les boutons ¦ Gumbi ¦ Gumbi
+Les réglages du son seront perdus. ¦ Postavke zvuka bit će izgubljene. ¦ Nastavitve zvoka bodo izgubljene.
+Lire la sélection en boucle ¦ Reproduciraj odabir u petlji ¦ Predvajaj izbor v zanki
+🔁 Lire en boucle ¦ 🔁 Reproduciraj u petlji ¦ 🔁 Predvajaj v zanki
+🐢 Lire à 75 % ¦ 🐢 Reproduciraj na 75 % ¦ 🐢 Predvajaj pri 75 %
+Marqueur ici ¦ Oznaka ovdje ¦ Oznaka tukaj
+🚩 Marqueur ici ¦ 🚩 Oznaka ovdje ¦ 🚩 Oznaka tukaj
+Marqueurs et zones ¦ Oznake i područja ¦ Oznake in območja
+Zones et marqueurs ¦ Područja i oznake ¦ Območja in oznake
+Mono ¦ Mono ¦ Mono
+Stéréo ¦ Stereo ¦ Stereo
+Nettoyer ¦ Očisti ¦ Očisti
+Nettoyer le souffle ¦ Očisti šum ¦ Očisti šum
+Nom du projet son ¦ Naziv zvučnog projekta ¦ Ime zvočnega projekta
+Nom du son ¦ Naziv zvuka ¦ Ime zvoka
+Nouvelle piste ¦ Nova traka ¦ Nova sled
+Nouvelle version affichée partout. L’original est gardé. ¦ Nova verzija prikazana posvuda. Izvornik se čuva. ¦ Nova različica prikazana povsod. Izvirnik je ohranjen.
+Version enregistrée (l’ancienne reste affichée). ¦ Verzija je spremljena (stara se i dalje prikazuje). ¦ Različica je shranjena (stara je še vedno prikazana).
+Nouvelle zone ¦ Novo područje ¦ Novo območje
+Ouverture ¦ Otvaranje ¦ Odpiranje
+Ouvrir un autre projet sans enregistrer ? ¦ Otvoriti drugi projekt bez spremanja? ¦ Odprem drug projekt brez shranjevanja?
+Pause quand j’écris ¦ Pauza dok pišem ¦ Premor, ko pišem
+Peins sur une tache (toux, sonnerie, porte), puis « 🩹 Réparer ». ¦ Oboji mrlju (kašalj, zvonjava, vrata), pa „🩹 Popravi”. ¦ Pobarvaj madež (kašelj, zvonjenje, vrata), nato »🩹 Popravi«.
+Poser des marqueurs (clic sur l’onde) ¦ Postavi oznake (klik na valni oblik) ¦ Postavi oznake (klik na valovno obliko)
+🚩 Poser des marqueurs ¦ 🚩 Postavi oznake ¦ 🚩 Postavi oznake
+Raccourcir ¦ Skrati ¦ Skrajšaj
+Rendre agréable ¦ Učini ugodnim ¦ Naredi prijetno
+Revenir au ⚡ Son rapide : ce qu’il sait montrer revient en boutons, le reste reste appliqué ¦ Vrati se na ⚡ Brzi zvuk: ono što zna prikazati vraća se u gumbe, ostalo ostaje primijenjeno ¦ Vrni se na ⚡ Hitri zvok: kar zna prikazati, se vrne v gumbe, ostalo ostane uporabljeno
+Réglages du Son rapide ¦ Postavke Brzog zvuka ¦ Nastavitve Hitrega zvoka
+Réglages repris ¦ Postavke preuzete ¦ Nastavitve prevzete
+Seulement sur la sélection ¦ Samo na odabiru ¦ Samo na izboru
+Silence ¦ Tišina ¦ Tišina
+Souffle, clics, bourdonnement, voix, volume et coupe du début et de la fin, d’un coup ¦ Šum, klikovi, brujanje, glas, glasnoća i rezanje početka i kraja, odjednom ¦ Šum, kliki, brnenje, glas, glasnost in rezanje začetka in konca, naenkrat
+✨ Tout nettoyer en une fois ¦ ✨ Očisti sve odjednom ¦ ✨ Očisti vse naenkrat
+Spectre ¦ Spektar ¦ Spekter
+Spectre : montrer / cacher ¦ Spektar: prikaži / sakrij ¦ Spekter: prikaži / skrij
+Sélection : glisser sur l’onde ¦ Odabir: povuci po valnom obliku ¦ Izbor: povleci po valovni obliki
+Tout le son : glisse le cadre pour te déplacer ¦ Cijeli zvuk: povuci okvir da se pomakneš ¦ Ves zvok: povleci okvir, da se premakneš
+Un autre son, rattaché aux mêmes fiches ¦ Drugi zvuk, povezan s istim zapisima ¦ Drug zvok, povezan z istimi zapisi
+Un ensemble prêt ne se supprime pas. ¦ Gotov skup ne može se izbrisati. ¦ Pripravljenega nabora ni mogoče izbrisati.
+VU-mètres ¦ VU-metri ¦ VU-metri
+Volume du morceau ¦ Glasnoća dijela ¦ Glasnost kosa
+Volume du morceau… ¦ Glasnoća dijela… ¦ Glasnost kosa …
+Zoom sur la sélection ¦ Zum na odabir ¦ Povečava na izbor
+Zoom vertical + ¦ Okomiti zum + ¦ Navpična povečava +
+Zoom vertical − ¦ Okomiti zum − ¦ Navpična povečava −
+ces réglages du son ¦ ove postavke zvuka ¦ te nastavitve zvoka
+disque, bande abîmée ¦ ploča, oštećena traka ¦ plošča, poškodovan trak
+les voix lointaines remontent, les cris baissent ¦ udaljeni glasovi postaju glasniji, vika se stišava ¦ oddaljeni glasovi se okrepijo, kriki se utišajo
+on comprend mieux les mots ¦ riječi se bolje razumiju ¦ besede se bolje razumejo
+nouvelle version, copie ¦ nova verzija, kopija ¦ nova različica, kopija
+trouvé tout seul, poignées sur l’onde ¦ pronađeno samo, ručice na valnom obliku ¦ najdeno samodejno, ročice na valovni obliki
+souffle, voix claire, volume égal ¦ šum, jasan glas, ujednačena glasnoća ¦ šum, jasen glas, enakomerna glasnost
+souffle fort, voix, coupe des blancs ¦ jak šum, glas, rezanje tišina ¦ močan šum, glas, rezanje tišin
+de-hum, égaliseur, limiteur ¦ de-hum, ekvilizator, limiter ¦ odprava brnenja, izenačevalnik, omejevalnik
+📼 Cassette des années 70 ¦ 📼 Kazeta iz 70-ih ¦ 📼 Kaseta iz 70. let
+🎙 Dictaphone ¦ 🎙 Diktafon ¦ 🎙 Diktafon
+💒 Vidéo de mariage 1987 ¦ 💒 Video s vjenčanja 1987. ¦ 💒 Poročni video iz leta 1987
+Écoute, puis « ⏱ Insérer l’heure » (⌘T) et tape ce qui est dit. ¦ Slušaj, pa „⏱ Umetni vrijeme” (⌘T) i upiši što je rečeno. ¦ Poslušaj, nato »⏱ Vstavi čas« (⌘T) in vpiši, kar je rečeno.
+⏱ Insérer l’heure ¦ ⏱ Umetni vrijeme ¦ ⏱ Vstavi čas
+Écouter ce passage ¦ Slušaj ovaj dio ¦ Poslušaj ta odsek
+Écouter seulement le passage peint ¦ Slušaj samo obojeni dio ¦ Poslušaj samo pobarvani odsek
+Écouter, comparer A / B, montrer partout, renommer, supprimer ¦ Slušaj, usporedi A / B, prikaži posvuda, preimenuj, izbriši ¦ Poslušaj, primerjaj A / B, prikaži povsod, preimenuj, izbriši
+ℹ️ Infos du son ¦ ℹ️ Podaci o zvuku ¦ ℹ️ Podatki o zvoku
+▶ Écouter / pause ¦ ▶ Slušaj / pauza ¦ ▶ Poslušaj / premor
+▶ Écouter 10 s du résultat ¦ ▶ Slušaj 10 s rezultata ¦ ▶ Poslušaj 10 s rezultata
+✂️ Couper (dans le presse-papiers) ¦ ✂️ Izreži (u međuspremnik) ¦ ✂️ Izreži (v odložišče)
+✂️ Couper un morceau (multipiste) ¦ ✂️ Prereži dio (višetračno) ¦ ✂️ Razreži kos (večsledno)
+〰️ Forme d’onde ¦ 〰️ Valni oblik ¦ 〰️ Valovna oblika
+＋ Ajouter un effet ▾ ¦ ＋ Dodaj efekt ▾ ¦ ＋ Dodaj učinek ▾
+🎛️ Multipiste ¦ 🎛️ Višetračno ¦ 🎛️ Večsledno
+🎬 Ouvrir dans le montage ¦ 🎬 Otvori u montaži ¦ 🎬 Odpri v montaži
+👂 Écoute d’abord ¦ 👂 Najprije slušaj ¦ 👂 Najprej poslušaj
+👂 Écouter la zone ¦ 👂 Slušaj područje ¦ 👂 Poslušaj območje
+📝 Transcription ¦ 📝 Prijepis ¦ 📝 Prepis
+🔗 Relier ce passage ¦ 🔗 Poveži ovaj dio ¦ 🔗 Poveži ta odsek
+🗣️ La voix ¦ 🗣️ Glas ¦ 🗣️ Glas
+🤖 Transcrire tout seul (bientôt) ¦ 🤖 Prepiši automatski (uskoro) ¦ 🤖 Samodejni prepis (kmalu)
+½ ton ¦ ½ tona ¦ ½ tona
+Volume ¦ Glasnoća ¦ Glasnost
+Normaliser ¦ Normaliziraj ¦ Normaliziraj
+Volume égal ¦ Ujednačena glasnoća ¦ Enakomerna glasnost
+Sonie visée ¦ Ciljana glasnoća ¦ Ciljna glasnost
+Niveleur ¦ Ujednačivač ¦ Izravnalnik
+Fondus ¦ Pretapanja ¦ Prehodi
+Égaliseur graphique ¦ Grafički ekvilizator ¦ Grafični izenačevalnik
+Égaliseur paramétrique ¦ Parametarski ekvilizator ¦ Parametrični izenačevalnik
+Égaliseurs ¦ Ekvilizatori ¦ Izenačevalniki
+Filtre passe-haut / passe-bas ¦ Visokopropusni / niskopropusni filtar ¦ Visokoprepustni / nizkoprepustni filter
+Passe-haut ¦ Visokopropusni ¦ Visokoprepustni
+Passe-bas ¦ Niskopropusni ¦ Nizkoprepustni
+Compresseur ¦ Kompresor ¦ Kompresor
+Dynamique ¦ Dinamika ¦ Dinamika
+Rapport ¦ Omjer ¦ Razmerje
+Attaque ¦ Napad ¦ Napad
+Relâche ¦ Otpuštanje ¦ Sprostitev
+Gain de sortie ¦ Izlazno pojačanje ¦ Izhodno ojačanje
+Limiteur ¦ Limiter ¦ Omejevalnik
+Placé en dernier dans le rack : plus jamais de son qui « crache ». ¦ Postavljen zadnji u stalku: više nikad zvuka koji „krči”. ¦ Postavljen zadnji v stojalu: nikoli več zvoka, ki »prasketa«.
+Plafond ¦ Strop ¦ Strop
+Réduction de bruit ¦ Smanjenje šuma ¦ Zmanjšanje šuma
+Réduction ¦ Smanjenje ¦ Zmanjšanje
+N’écouter que le bruit enlevé ¦ Slušaj samo uklonjeni šum ¦ Poslušaj samo odstranjeni šum
+De-clicker ¦ Uklanjanje klikova ¦ Odstranjevanje klikov
+Clics ¦ Klikovi ¦ Kliki
+De-hum ¦ Uklanjanje brujanja ¦ Odstranjevanje brnenja
+Harmoniques ¦ Harmonici ¦ Harmoniki
+De-esser ¦ De-esser ¦ Razsikalnik
+Sifflantes ¦ Sibilanti ¦ Sičniki
+Baisser jusqu’à ¦ Stišaj do ¦ Utišaj do
+Réparations au pinceau ¦ Popravci kistom ¦ Popravki s čopičem
+Voix plus claire ¦ Jasniji glas ¦ Jasnejši glas
+Égaliseur (moins de grondement, plus de présence) et compresseur. ¦ Ekvilizator (manje tutnjave, više prisutnosti) i kompresor. ¦ Izenačevalnik (manj bobnenja, več prisotnosti) in kompresor.
+Réverbération ¦ Odjek ¦ Odmev
+Ambiance ¦ Ambijent ¦ Ambient
+Vitesse et hauteur ¦ Brzina i visina tona ¦ Hitrost in višina tona
+Temps ¦ Tempo ¦ Tempo
+Pour une cassette lue trop vite (voix « de canard ») : 96 % la remet à sa vraie vitesse. ¦ Za kazetu reproduciranu prebrzo (glas „patke”): 96 % vraća je na pravu brzinu. ¦ Za kaseto, predvajano prehitro (glas »racmana«): 96 % jo vrne na pravo hitrost.
+Vitesse ¦ Brzina ¦ Hitrost
+Garder la hauteur de la voix ¦ Zadrži visinu glasa ¦ Ohrani višino glasu
+Blancs de plus de ¦ Tišine dulje od ¦ Tišine, daljše od
+Ramenés à ¦ Skraćene na ¦ Skrajšane na
+Fin ¦ Kraj ¦ Konec
+Diapositive {k} / {n} ¦ Slajd {k} / {n} ¦ Diapozitiv {k} / {n}
+Aucune diapositive ¦ Nema slajdova ¦ Ni diapozitivov
+Aucune diapositive. ¦ Nema slajdova. ¦ Ni diapozitivov.
+Aucune diapositive pour l’instant ¦ Zasad nema slajdova ¦ Zaenkrat ni diapozitivov
+{what} aux Médias (le son devient la musique). ¦ {what} u Medije (zvuk postaje glazba). ¦ {what} med medije (zvok postane glasba).
+{what} aux Médias. ¦ {what} u Medije. ¦ {what} med medije.
+=diapositive est prête ¦ slajd je spreman|slajda su spremna|slajdova je spremno ¦ diapozitiv je pripravljen|diapozitiva sta pripravljena|diapozitivi so pripravljeni|diapozitivov je pripravljenih
+{what}. Elles peuvent remplacer celles du diaporama ou venir à la suite. ¦ {what}. Mogu zamijeniti slajdove dijaprojekcije ili doći na kraj. ¦ {what}. Lahko zamenjajo diapozitive diaprojekcije ali pridejo na konec.
+Remplacer le diaporama par le récit ? ¦ Zamijeniti dijaprojekciju pričom? ¦ Zamenjam diaprojekcijo z zgodbo?
+Ajouter à la suite ¦ Dodaj na kraj ¦ Dodaj na konec
+Police du style ({name}) ¦ Font stila ({name}) ¦ Pisava sloga ({name})
+Avancer de {time} (réglable dans Réglages › Apparence) ¦ Napreduj za {time} (podesivo u Postavke › Izgled) ¦ Naprej za {time} (nastavljivo v Nastavitve › Videz)
+Suivi sur {n} positions. ¦ Praćeno na {n} položaja. ¦ Sledeno na {n} položajih.
+(importé) ¦ (uvezeno) ¦ (uvoženo)
+Durée souhaitée ¦ Željeno trajanje ¦ Želeno trajanje
+Mettre les sources dans les notes ¦ Stavi izvore u bilješke ¦ Postavi vire v opombe
+⇥ durée = voix ¦ ⇥ trajanje = glas ¦ ⇥ trajanje = glas
+Ajoute des photos, un titre, une carte, ou laisse « ✨ Récit d’une vie » tout préparer. Tu peux aussi glisser des photos ici. ¦ Dodaj fotografije, naslov, kartu ili pusti da „✨ Priča jednog života” sve pripremi. Možeš i povući fotografije ovamo. ¦ Dodaj fotografije, naslov, zemljevid ali pusti, da »✨ Zgodba življenja« vse pripravi. Fotografije lahko tudi povlečeš sem.
+Ce fichier n’est pas un diaporama exporté par LCNDA (⤓ Exporter → 💾 Fichier). ¦ Ova datoteka nije dijaprojekcija izvezena iz LCNDA (⤓ Izvezi → 💾 Datoteka). ¦ Ta datoteka ni diaprojekcija, izvožena iz LCNDA (⤓ Izvozi → 💾 Datoteka).
+Ce que raconte cette diapositive… ¦ Što pripovijeda ovaj slajd… ¦ Kaj pripoveduje ta diapozitiv …
+Changer la photo ¦ Promijeni fotografiju ¦ Zamenjaj fotografijo
+🖼️ Changer la photo ¦ 🖼️ Promijeni fotografiju ¦ 🖼️ Zamenjaj fotografijo
+Choisis d’abord une personne. ¦ Najprije odaberi osobu. ¦ Najprej izberi osebo.
+Couleur du trajet ¦ Boja puta ¦ Barva poti
+Glisse des photos ou un son. ¦ Povuci fotografije ili zvuk. ¦ Povleci fotografije ali zvok.
+Glisser vers la droite ¦ Klizanje udesno ¦ Drsenje v desno
+Glisser vers la gauche ¦ Klizanje ulijevo ¦ Drsenje v levo
+Zoom arrière lent ¦ Spori zum unatrag ¦ Počasna pomanjšava
+La fenêtre des médias n’est pas encore prête. ¦ Prozor medija još nije spreman. ¦ Okno medijev še ni pripravljeno.
+Les dernières modifications du diaporama seront perdues. ¦ Posljednje izmjene dijaprojekcije bit će izgubljene. ¦ Zadnje spremembe diaprojekcije bodo izgubljene.
+Les photos du récit ¦ Fotografije priče ¦ Fotografije zgodbe
+Légendes ¦ Opisi ¦ Napisi
+Personnes sous chaque photo ¦ Osobe ispod svake fotografije ¦ Osebe pod vsako fotografijo
+Place du texte ¦ Položaj teksta ¦ Položaj besedila
+Police des textes ¦ Font tekstova ¦ Pisava besedil
+Prendre ce son ¦ Uzmi ovaj zvuk ¦ Vzemi ta zvok
+RÉCIT D’UNE VIE ¦ PRIČA JEDNOG ŽIVOTA ¦ ZGODBA ŽIVLJENJA
+Récit d’une vie ¦ Priča jednog života ¦ Zgodba življenja
+✨ Récit d’une vie ¦ ✨ Priča jednog života ¦ ✨ Zgodba življenja
+✨ Récit d’une vie : un diaporama tout fait à partir de la fiche d’une personne ¦ ✨ Priča jednog života: gotova dijaprojekcija iz zapisa osobe ¦ ✨ Zgodba življenja: pripravljena diaprojekcija iz zapisa osebe
+Un diaporama tout fait à partir de la fiche d’une personne ¦ Gotova dijaprojekcija iz zapisa osobe ¦ Pripravljena diaprojekcija iz zapisa osebe
+Selon les textes ¦ Prema tekstovima ¦ Glede na besedila
+Une musique ¦ Glazba ¦ Glasba
+Une photo par page ¦ Jedna fotografija po stranici ¦ Ena fotografija na stran
+Une photo ronde au-dessus du titre ¦ Okrugla fotografija iznad naslova ¦ Okrogla fotografija nad naslovom
+Une photo ronde au-dessus du titre… ¦ Okrugla fotografija iznad naslova… ¦ Okrogla fotografija nad naslovom …
+Une présentation ou un diaporama ? ¦ Prezentacija ili dijaprojekcija? ¦ Predstavitev ali diaprojekcija?
+Une voix, un son ¦ Glas, zvuk ¦ Glas, zvok
+Vidéo téléchargée. ¦ Videozapis je preuzet. ¦ Video je prenesen.
+cette diapositive ¦ ovaj slajd ¦ ta diapozitiv
+retirer la voix ¦ ukloni glas ¦ odstrani glas
+✨ Préparation du récit… ¦ ✨ Priprema priče… ¦ ✨ Priprava zgodbe …
+🎙 Enregistrer ma voix ¦ 🎙 Snimi moj glas ¦ 🎙 Posnemi moj glas
+🎤 En faire une présentation… ¦ 🎤 Napravi od toga prezentaciju… ¦ 🎤 Naredi iz tega predstavitev …
+🖼 Choisir les photos… ¦ 🖼 Odaberi fotografije… ¦ 🖼 Izberi fotografije …
+Format de l’image (16:9 pour un écran, 9:16 pour un téléphone) ¦ Format slike (16:9 za zaslon, 9:16 za telefon) ¦ Razmerje slike (16:9 za zaslon, 9:16 za telefon)
+Exporter : vidéo, images, PDF, impression, fichier ¦ Izvoz: videozapis, slike, PDF, ispis, datoteka ¦ Izvoz: video, slike, PDF, tiskanje, datoteka
+Ajouter un titre ¦ Dodaj naslov ¦ Dodaj naslov
+Ajouter une carte (trajet) ¦ Dodaj kartu (put) ¦ Dodaj zemljevid (pot)
+Ajouter une carte ¦ Dodaj kartu ¦ Dodaj zemljevid
+＋ Carte (trajet) ¦ ＋ Karta (put) ¦ ＋ Zemljevid (pot)
+Regarder en plein écran (Échap pour revenir) ¦ Gledaj na cijelom zaslonu (Esc za povratak) ¦ Glej na celem zaslonu (Esc za vrnitev)
+Avancer dans le diaporama ¦ Napreduj u dijaprojekciji ¦ Naprej v diaprojekciji
+Choisis une diapositive (à gauche) pour régler sa durée, sa transition, son texte, sa voix. ¦ Odaberi slajd (lijevo) da podesiš njegovo trajanje, prijelaz, tekst, glas. ¦ Izberi diapozitiv (levo), da nastaviš njegovo trajanje, prehod, besedilo, glas.
+🎞️ Tout le diaporama ¦ 🎞️ Cijela dijaprojekcija ¦ 🎞️ Cela diaprojekcija
+La police de tous les titres et légendes. Sans choix, c’est celle du style (Classique, Album ancien…). ¦ Font svih naslova i opisa. Bez odabira, to je font stila (Klasično, Stari album…). ¦ Pisava vseh naslovov in napisov. Brez izbire je to pisava sloga (Klasično, Star album …).
+Une musique de fond, prise dans les sons des médias ¦ Pozadinska glazba, uzeta iz zvukova u medijima ¦ Glasba v ozadju, vzeta iz zvokov med mediji
+Une présentation façon Keynote faite de ces diapositives (textes, formes, animations, mode présentateur…) ; le diaporama reste tel quel ¦ Prezentacija u stilu Keynotea napravljena od ovih slajdova (tekstovi, oblici, animacije, način izlagača…); dijaprojekcija ostaje kakva jest ¦ Predstavitev v slogu Keynote iz teh diapozitivov (besedila, oblike, animacije, način predavatelja …); diaprojekcija ostane, kakršna je
+Clic sur une diapositive : la régler à droite · glisse-les pour les ranger · Espace : lire ¦ Klik na slajd: podesi ga desno · povuci ih da ih posložiš · Razmaknica: reproduciraj ¦ Klik na diapozitiv: nastavi ga desno · povleci jih, da jih urediš · Preslednica: predvajaj
+Album ancien ¦ Stari album ¦ Star album
+Clair ¦ Svijetlo ¦ Svetlo
+Lire / pause ¦ Reproduciraj / pauza ¦ Predvajaj / premor
+Lire ¦ Reproduciraj ¦ Predvajaj
+Regarder ¦ Gledaj ¦ Glej
+📺 Regarder ¦ 📺 Gledaj ¦ 📺 Glej
+Musique de fond ¦ Pozadinska glazba ¦ Glasba v ozadju
+🎵 Musique ¦ 🎵 Glazba ¦ 🎵 Glasba
+🎵 Musique de fond (facultatif) ¦ 🎵 Pozadinska glazba (neobavezno) ¦ 🎵 Glasba v ozadju (neobvezno)
+=diapositive ¦ slajd|slajda|slajdova ¦ diapozitiv|diapozitiva|diapozitivi|diapozitivov
+Choisis une personne : un diaporama se prépare tout seul avec sa fiche (naissance, baptême, mariage, enfants, métiers, recensements, déménagements, décès, sépulture), ses photos, ses lieux sur une carte. Une information absente ne donne pas de diapositive ; tout reste modifiable ensuite. ¦ Odaberi osobu: dijaprojekcija se sama priprema iz njezina zapisa (rođenje, krštenje, vjenčanje, djeca, zanimanja, popisi stanovništva, selidbe, smrt, pokop), njezinih fotografija i mjesta na karti. Podatak koji nedostaje ne daje slajd; sve se kasnije može mijenjati. ¦ Izberi osebo: diaprojekcija se sama pripravi iz njenega zapisa (rojstvo, krst, poroka, otroci, poklici, popisi prebivalstva, selitve, smrt, pokop), njenih fotografij in krajev na zemljevidu. Manjkajoči podatek ne da diapozitiva; vse lahko pozneje spremeniš.
+Le récit prend à peu près cette durée : chaque diapositive grandit ou rétrécit un peu. « Selon les textes » laisse le temps de lire. ¦ Priča traje otprilike toliko: svaki se slajd malo produlji ili skrati. „Prema tekstovima” ostavlja vremena za čitanje. ¦ Zgodba traja približno toliko: vsak diapozitiv se malo podaljša ali skrajša. »Glede na besedila« pusti čas za branje.
+Aucune photo : le récit sera fait de titres et de cartes. ¦ Nema fotografija: priča će se sastojati od naslova i karata. ¦ Ni fotografij: zgodba bo sestavljena iz naslovov in zemljevidov.
+Inclure les frères et sœurs ¦ Uključi braću i sestre ¦ Vključi brate in sestre
+Les sources de chaque événement (titre, page) sont écrites dans les notes de sa diapositive : on les voit en modifiant, pas pendant la lecture. ¦ Izvori svakog događaja (naslov, stranica) zapisani su u bilješkama njegova slajda: vide se pri uređivanju, ne tijekom reprodukcije. ¦ Viri vsakega dogodka (naslov, stran) so zapisani v opombah njegovega diapozitiva: vidni so pri urejanju, ne med predvajanjem.
+Ajouter les événements historiques de l’époque ¦ Dodaj povijesne događaje iz tog doba ¦ Dodaj zgodovinske dogodke iz tistega časa
+Les épidémies, guerres et grands hivers que l’app connaît (Listes → Épidémies, guerres, hivers) et qui ont eu lieu pendant sa vie. ¦ Epidemije, ratovi i velike zime koje aplikacija poznaje (Popisi → Epidemije, ratovi, zime) i koje su se dogodile tijekom njezina života. ¦ Epidemije, vojne in velike zime, ki jih aplikacija pozna (Seznami → Epidemije, vojne, zime) in so se zgodile v njenem življenju.
+Le texte du bloc « 📖 Biographie » de la fiche (ta version si tu l’as modifiée), en version courte, sur une diapositive. ¦ Tekst bloka „📖 Životopis” iz zapisa (tvoja verzija ako si je izmijenio/izmijenila), u kratkoj verziji, na jednom slajdu. ¦ Besedilo bloka »📖 Življenjepis« iz zapisa (tvoja različica, če si jo spremenil/spremenila), v kratki obliki, na enem diapozitivu.
+Créer le récit ¦ Stvori priču ¦ Ustvari zgodbo
+DIAPORAMA ¦ DIJAPROJEKCIJA ¦ DIAPROJEKCIJA
+Environ 1 minute ¦ Oko 1 minute ¦ Približno 1 minuta
+Environ 2 minutes ¦ Oko 2 minute ¦ Približno 2 minuti
+Environ 3 minutes ¦ Oko 3 minute ¦ Približno 3 minute
+Environ 5 minutes ¦ Oko 5 minuta ¦ Približno 5 minut
+Environ 8 minutes ¦ Oko 8 minuta ¦ Približno 8 minut
+Environ 10 minutes ¦ Oko 10 minuta ¦ Približno 10 minut
+Choisir un son… ¦ Odaberi zvuk… ¦ Izberi zvok …
+Ajouter sa biographie (📖) ¦ Dodaj njezin životopis (📖) ¦ Dodaj njen življenjepis (📖)
+🎯 Suivre ce qui bouge ¦ 🎯 Prati ono što se miče ¦ 🎯 Sledi temu, kar se premika
+✕ Ne plus suivre ¦ ✕ Prestani pratiti ¦ ✕ Ne sledi več
+🎥 Plusieurs caméras ¦ 🎥 Više kamera ¦ 🎥 Več kamer
+Synchroniser et monter ¦ Sinkroniziraj i montiraj ¦ Sinhroniziraj in zmontiraj
+quand quelqu’un parle plus près d’une autre caméra ¦ kad netko govori bliže drugoj kameri ¦ ko nekdo govori bliže drugi kameri
+Lecture des sons… ¦ Čitanje zvukova… ¦ Branje zvokov …
+dédié à {who} ¦ posvećeno: {who} ¦ posvečeno: {who}
+Pas encore de {what} pour ce soir ¦ Još nema: {what} za ovu večer ¦ Za ta večer še ni: {what}
+Note les titres dans l’ordre, avec les rappels, les reprises, les invités… ou copie la setlist d’un autre soir. ¦ Zapiši naslove redom, s bisovima, obradama, gostima… ili kopiraj setlistu druge večeri. ¦ Zapiši naslove po vrsti, z dodatki, priredbami, gosti … ali kopiraj setlisto drugega večera.
+La sorte de ce soir ¦ Vrsta ove večeri ¦ Vrsta tega večera
+En faire : {what} (la setlist s’adapte) ¦ Napravi od toga: {what} (setlista se prilagođava) ¦ Naredi iz tega: {what} (setlista se prilagodi)
+{n} prévues ¦ Predviđeno: {n} ¦ Predvideno: {n}
+d’après {what} ¦ prema {what} ¦ po {what}
+{what} à la setlist. ¦ {what} u setlistu. ¦ {what} v setlisto.
+{what} depuis « {name} ». ¦ {what} iz „{name}”. ¦ {what} iz »{name}«.
+=ligne ajoutée ¦ dodan redak|dodana retka|dodanih redaka ¦ dodana vrstica|dodani vrstici|dodane vrstice|dodanih vrstic
+=ligne copiée ¦ kopiran redak|kopirana retka|kopiranih redaka ¦ kopirana vrstica|kopirani vrstici|kopirane vrstice|kopiranih vrstic
+Setlist de « {name} » copiée ({what}) ¦ Setlista od „{name}” je kopirana ({what}) ¦ Setlista večera »{name}« je kopirana ({what})
+Ce soir devient : {what} ¦ Ova večer postaje: {what} ¦ Ta večer postane: {what}
+{n} enregistrements « en public » ajoutés aux morceaux ¦ Snimke „uživo” dodane skladbama: {n} ¦ Posnetki »v živo«, dodani skladbam: {n}
+1 enregistrement « en public » ajouté au morceau ¦ 1 snimka „uživo” dodana skladbi ¦ 1 posnetek »v živo« dodan skladbi
+{n} enregistrements « en public » déjà tirés de ce soir. ¦ Snimke „uživo” već izvučene iz ove večeri: {n}. ¦ Posnetki »v živo«, že izdelani iz tega večera: {n}.
+1 enregistrement « en public » déjà tiré de ce soir. ¦ 1 snimka „uživo” već je izvučena iz ove večeri. ¦ 1 posnetek »v živo« je že izdelan iz tega večera.
+→ En faire des enregistrements « en public » des morceaux ({n}) ¦ → Napravi od toga snimke „uživo” skladbi ({n}) ¦ → Naredi iz tega posnetke »v živo« skladb ({n})
+→ En faire un enregistrement « en public » du morceau ({n}) ¦ → Napravi od toga snimku „uživo” skladbe ({n}) ¦ → Naredi iz tega posnetek »v živo« skladbe ({n})
+« {name} » ajouté au catalogue ({what}). ¦ „{name}” dodano u katalog ({what}). ¦ »{name}« dodano v katalog ({what}).
+Aucun lieu de ta base pour ces soirs ({what} sans lieu choisi dans la base). ¦ Nema mjesta iz tvoje baze za ove večeri ({what} bez mjesta odabranog u bazi). ¦ Za te večere ni krajev iz tvoje baze ({what} brez kraja, izbranega v bazi).
+Aucun lieu de ta base pour ces soirs. ¦ Nema mjesta iz tvoje baze za ove večeri. ¦ Za te večere ni krajev iz tvoje baze.
+{what} sans coordonnées ¦ {what} bez koordinata ¦ {what} brez koordinat
+{what} sans lieu de ta base ¦ {what} bez mjesta iz tvoje baze ¦ {what} brez kraja iz tvoje baze
+=soir ¦ večer|večeri|večeri ¦ večer|večera|večeri|večerov
+🔝 {what} les plus joués ¦ 🔝 {what} najčešće izvođeni ¦ 🔝 {what} najpogosteje izvajani
+{what} par soir ¦ {what} po večeri ¦ {what} na večer
+{n} en moyenne ¦ Prosječno {n} ¦ Povprečno {n}
+{what} mais jamais sur scène, et {other} : ¦ {what}, ali nikad na pozornici, i {other}: ¦ {what}, a nikoli na odru, in {other}:
+{what} mais jamais sur scène : ¦ {what}, ali nikad na pozornici: ¦ {what}, a nikoli na odru:
+{what} jamais dans une setlist : ¦ {what} nikad u setlisti: ¦ {what} nikoli v setlisti:
+=morceau enregistré ¦ snimljena skladba|snimljene skladbe|snimljenih skladbi ¦ posneta skladba|posneti skladbi|posnete skladbe|posnetih skladb
+=autre fiche ¦ drugi zapis|druga zapisa|drugih zapisa ¦ drug zapis|druga zapisa|drugi zapisi|drugih zapisov
+… et {n} de plus ¦ … i još {n} ¦ … in še {n}
+✓ Profil « {name} » coché : ses sections sont sur sa page. ¦ ✓ Profil „{name}” je označen: njegovi su odjeljci na njegovoj stranici. ¦ ✓ Profil »{name}« je potrjen: njegovi razdelki so na njegovi strani.
+Aucun épisode n° {a} à {b} dans cette saison. ¦ U ovoj sezoni nema epizoda br. {a} do {b}. ¦ V tej sezoni ni epizod št. {a} do {b}.
+Aucun épisode n° {a} dans cette saison. ¦ U ovoj sezoni nema epizode br. {a}. ¦ V tej sezoni ni epizode št. {a}.
+＋ Nouveau concert ou représentation ¦ ＋ Novi koncert ili izvedba ¦ ＋ Nov koncert ali predstava
+Chercher… (ville, salle, morceau joué, tournée, personne) ¦ Traži… (grad, dvorana, izvedena skladba, turneja, osoba) ¦ Išči … (mesto, dvorana, izvedena skladba, turneja, oseba)
+Aucun concert ni spectacle pour l’instant ¦ Zasad nema koncerata ni predstava ¦ Zaenkrat ni koncertov ne predstav
+Un soir = une fiche : la date, le lieu, la setlist (titres, rappels, reprises, invités), qui était sur scène et dans la salle. ¦ Jedna večer = jedan zapis: datum, mjesto, setlista (naslovi, bisovi, obrade, gosti), tko je bio na pozornici i u dvorani. ¦ En večer = en zapis: datum, kraj, setlista (naslovi, dodatki, priredbe, gostje), kdo je bil na odru in v dvorani.
+Concert ou représentation ¦ Koncert ili izvedba ¦ Koncert ali predstava
+Concerts et représentations ¦ Koncerti i izvedbe ¦ Koncerti in predstave
+=concert ou représentation ¦ koncert ili izvedba|koncerta ili izvedbe|koncerata ili izvedbi ¦ koncert ali predstava|koncerta ali predstavi|koncerti ali predstave|koncertov ali predstav
+Spectacle d’humour ¦ Humoristična predstava ¦ Humoristična predstava
+Scènes jouées ¦ Odigrane scene ¦ Odigrani prizori
+Concert d’orchestre ¦ Orkestralni koncert ¦ Orkestrski koncert
+Début d’une partie ¦ Početak dijela ¦ Začetek dela
+Bande, intro enregistrée ¦ Traka, snimljeni uvod ¦ Trak, posnet uvod
+Dernière fois ¦ Posljednji put ¦ Zadnjič
+Reprise, invités, dédicace, 1re fois, durée… ¦ Obrada, gosti, posveta, 1. put, trajanje… ¦ Priredba, gostje, posvetilo, 1. izvedba, trajanje …
+＋ Un rappel ¦ ＋ Bis ¦ ＋ Dodatek
+📋 Coller une liste ¦ 📋 Zalijepi popis ¦ 📋 Prilepi seznam
+📋 Copier la setlist d’un autre soir ¦ 📋 Kopiraj setlistu druge večeri ¦ 📋 Kopiraj setlisto drugega večera
+Copier la setlist d’un autre soir ¦ Kopiraj setlistu druge večeri ¦ Kopiraj setlisto drugega večera
+inachevé ¦ nedovršeno ¦ nedokončano
+Nouvelle partie ¦ Novi dio ¦ Nov del
+critique positive ¦ pozitivna kritika ¦ pozitivna kritika
+critique négative ¦ negativna kritika ¦ negativna kritika
+neutre ¦ neutralno ¦ nevtralno
+Église, chapelle ¦ Crkva, kapelica ¦ Cerkev, kapela
+Bal, salle des fêtes ¦ Ples, društveni dom ¦ Ples, dvorana za prireditve
+Café, cabaret ¦ Kafić, kabare ¦ Kavarna, kabaret
+Soirée privée ¦ Privatna večer ¦ Zasebni večer
+Festival, fête ¦ Festival, slavlje ¦ Festival, praznovanje
+création du rôle ¦ prvo tumačenje uloge ¦ prva upodobitev vloge
+Création du rôle ¦ Prvo tumačenje uloge ¦ Prva upodobitev vloge
+chef d’orchestre ¦ dirigent ¦ dirigent
+Un ou une soliste ¦ Solist ili solistica ¦ Solist ali solistka
+Une personne dans la salle ¦ Osoba u dvorani ¦ Oseba v dvorani
+🎭 Ce soir-là, au théâtre ¦ 🎭 Te večeri, u kazalištu ¦ 🎭 Tisti večer v gledališču
+Rôles du soir ¦ Uloge te večeri ¦ Vloge večera
+Titulaire ou remplaçant ¦ Stalna podjela ili zamjena ¦ Stalna zasedba ali zamenjava
+La soirée ¦ Večer ¦ Večer
+Joué ¦ Izvedeno ¦ Izvedeno
+La tournée ¦ Turneja ¦ Turneja
+Dates prévues ¦ Predviđeni datumi ¦ Predvideni datumi
+Les dates ¦ Datumi ¦ Datumi
+📅 Les dates ¦ 📅 Datumi ¦ 📅 Datumi
+＋ Ajouter une date ¦ ＋ Dodaj datum ¦ ＋ Dodaj datum
+＋ Ajouter une représentation ¦ ＋ Dodaj izvedbu ¦ ＋ Dodaj predstavo
+Chanson parlée, poème dit ¦ Govorena pjesma, recitirana pjesma ¦ Govorjena pesem, recitirana pesem
+Sketch, numéro, scène ¦ Skeč, točka, scena ¦ Skeč, točka, prizor
+Sketches, numéros, scènes ¦ Skečevi, točke, scene ¦ Skeči, točke, prizori
+Écrit, créé ¦ Napisano, stvoreno ¦ Napisano, ustvarjeno
+Tiré de ¦ Prema ¦ Po
+Son ou vidéo ¦ Zvuk ili videozapis ¦ Zvok ali video
+Carte indisponible. ¦ Karta nije dostupna. ¦ Zemljevid ni na voljo.
+Avec une setlist ¦ Sa setlistom ¦ S setlisto
+Avec une captation ¦ Sa snimkom ¦ S posnetkom
+Avec une 1re fois ¦ S prvim izvođenjem ¦ S prvo izvedbo
+Avec un remplacement ¦ Sa zamjenom ¦ Z zamenjavo
+Avec ce titre joué ¦ S izvedenim ovim naslovom ¦ Z izvedeno to skladbo
+Joué ce soir-là ¦ Izvedeno te večeri ¦ Izvedeno tisti večer
+Carte des lieux… ¦ Karta mjesta… ¦ Zemljevid krajev …
+🗺 Carte des lieux ¦ 🗺 Karta mjesta ¦ 🗺 Zemljevid krajev
+hors tournée ¦ izvan turneje ¦ zunaj turneje
+Dernière ¦ Posljednja ¦ Zadnja
+Moins ↑ ¦ Manje ↑ ¦ Manj ↑
+Soirs par année ¦ Večeri po godini ¦ Večeri na leto
+📅 Soirs par année ¦ 📅 Večeri po godini ¦ 📅 Večeri na leto
+Durée moyenne ¦ Prosječno trajanje ¦ Povprečno trajanje
+Ville la plus visitée ¦ Najposjećeniji grad ¦ Najbolj obiskano mesto
+🚌 Setlist type d’une tournée ¦ 🚌 Tipična setlista turneje ¦ 🚌 Značilna setlista turneje
+Choisis une tournée. ¦ Odaberi turneju. ¦ Izberi turnejo.
+Choisis deux soirs différents. ¦ Odaberi dvije različite večeri. ¦ Izberi dva različna večera.
+Cinéma ¦ Kino ¦ Kino
+Au générique ¦ U odjavnoj špici ¦ V odjavni špici
+Pas au générique ¦ Nije u odjavnoj špici ¦ Ni v odjavni špici
+Tournage, période ¦ Snimanje, razdoblje ¦ Snemanje, obdobje
+🎭 Au théâtre ¦ 🎭 U kazalištu ¦ 🎭 V gledališču
+Théâtres, salles ¦ Kazališta, dvorane ¦ Gledališča, dvorane
+Un théâtre ¦ Kazalište ¦ Gledališče
+Théâtre, salle ¦ Kazalište, dvorana ¦ Gledališče, dvorana
+Un remplacement ¦ Zamjena ¦ Zamenjava
+📺 Télévision, radio ¦ 📺 Televizija, radio ¦ 📺 Televizija, radio
+Voix française de ¦ Francuski glas za ¦ Francoski glas za
+Un ou une partenaire ¦ Partner ili partnerica ¦ Partner ali partnerka
+Prix et nominations ¦ Nagrade i nominacije ¦ Nagrade in nominacije
+Œuvre A → Z ¦ Djelo A → Ž ¦ Delo A → Ž
+Fiches « Rôle » ¦ Zapisi „Uloga” ¦ Zapisi »Vloga«
+Films du catalogue ¦ Filmovi iz kataloga ¦ Filmi iz kataloga
+Cités dans d’autres catalogues ¦ Navedeni u drugim katalozima ¦ Navedeni v drugih katalogih
+Crédit ¦ Zasluga ¦ Zasluga
+RÔLE ¦ ULOGA ¦ VLOGA
+＋ En faire une fiche rôle détaillée ¦ ＋ Napravi od toga detaljan zapis uloge ¦ ＋ Naredi iz tega podroben zapis vloge
+D’où vient la ligne ¦ Odakle potječe redak ¦ Od kod izvira vrstica
+Chercher un rôle, un film, un partenaire… ¦ Traži ulogu, film, partnera… ¦ Išči vlogo, film, partnerja …
+Profil d’acteur ¦ Glumački profil ¦ Igralski profil
+Débuts ¦ Počeci ¦ Začetki
+Une école, un cours ¦ Škola, tečaj ¦ Šola, tečaj
+École, conservatoire, cours ¦ Škola, konzervatorij, tečaj ¦ Šola, konservatorij, tečaj
+Prix, diplôme ¦ Nagrada, diploma ¦ Nagrada, diploma
+Un agent ¦ Agent ¦ Agent
+Une troupe ¦ Trupa ¦ Skupina
+Troupe, théâtre ¦ Trupa, kazalište ¦ Skupina, gledališče
+Un casting ¦ Audicija ¦ Avdicija
+Rôle visé ¦ Željena uloga ¦ Želena vloga
+pas obtenu ¦ nije dobiveno ¦ ni dobljeno
+Compétences, physique, voix ¦ Vještine, izgled, glas ¦ Spretnosti, videz, glas
+Tout voir, trier ¦ Prikaži sve, poredaj ¦ Prikaži vse, razvrsti
+Aucune série, aucun téléfilm. ¦ Nema serija ni televizijskih filmova. ¦ Ni serij ne televizijskih filmov.
+Théâtrographie ¦ Kazališne uloge ¦ Gledališke vloge
+Aucun rôle au théâtre. ¦ Nema kazališnih uloga. ¦ Ni gledaliških vlog.
+Aucune voix. ¦ Nema glasovnih uloga. ¦ Ni glasovnih vlog.
+Publicité et mannequinat ¦ Reklame i manekenstvo ¦ Oglasi in manekenstvo
+Aucune publicité. ¦ Nema reklama. ¦ Ni oglasov.
+Aucun clip. ¦ Nema spotova. ¦ Ni videospotov.
+=casting noté ¦ zabilježena audicija|zabilježene audicije|zabilježenih audicija ¦ zabeležena avdicija|zabeleženi avdiciji|zabeležene avdicije|zabeleženih avdicij
+Aucun casting noté. ¦ Nema zabilježenih audicija. ¦ Ni zabeleženih avdicij.
+Les statistiques viennent des rôles notés. ¦ Statistike proizlaze iz zabilježenih uloga. ¦ Statistika izhaja iz zabeleženih vlog.
+Rôles par décennie ¦ Uloge po desetljećima ¦ Vloge po desetletjih
+Réalisateurs ¦ Redatelji ¦ Režiserji
+Aucun soir noté. ¦ Nema zabilježenih večeri. ¦ Ni zabeleženih večerov.
+Feuilleton télévisé ¦ Televizijska sapunica ¦ Televizijska nadaljevanka
+Websérie ¦ Web-serija ¦ Spletna serija
+Séries et émissions ¦ Serije i emisije ¦ Serije in oddaje
+La série ¦ Serija ¦ Serija
+Saisons et épisodes ¦ Sezone i epizode ¦ Sezone in epizode
+Durée d’un épisode ¦ Trajanje epizode ¦ Trajanje epizode
+Qui y a fait quoi ¦ Tko je što radio ¦ Kdo je kaj delal
+Épisodes prévus ¦ Predviđene epizode ¦ Predvidene epizode
+L’épisode ¦ Epizoda ¦ Epizoda
+N° dans la saison ¦ Br. u sezoni ¦ Št. v sezoni
+N° dans la série ¦ Br. u seriji ¦ Št. v seriji
+Un ou une scénariste ¦ Scenarist ili scenaristica ¦ Scenarist ali scenaristka
+Un invité ¦ Gost ¦ Gost
+Rôle ou métier ¦ Uloga ili zanimanje ¦ Vloga ali poklic
+toute la série ¦ cijela serija ¦ cela serija
+Chaîne, station, éditeur ¦ Kanal, postaja, izdavač ¦ Kanal, postaja, založnik
+Un créateur, une créatrice ¦ Autor, autorica ¦ Ustvarjalec, ustvarjalka
+Comment cette image se mélange avec celle de dessous : « Produit » assombrit, « Superposition claire » éclaircit, « Normal » la pose simplement dessus. ¦ Kako se ova slika stapa sa slikom ispod: „Množenje” zatamnjuje, „Svijetlo preklapanje” posvjetljuje, „Normalno” je jednostavno postavlja na vrh. ¦ Kako se ta slika meša s sliko pod njo: »Množenje« potemni, »Svetlo prekrivanje« posvetli, »Normalno« jo preprosto položi na vrh.
+Un lent mouvement de caméra sur la photo : elle s’approche, s’éloigne ou glisse doucement pendant qu’elle est à l’écran. ¦ Spori pokret kamere po fotografiji: približava se, udaljava ili lagano klizi dok je na zaslonu. ¦ Počasen premik kamere po fotografiji: se približa, oddalji ali nežno drsi, medtem ko je na zaslonu.
+Une image clé fixe un réglage (taille, place, rotation…) à un moment du film ; entre deux images clés, l’image passe de l’une à l’autre, en douceur ou à vitesse régulière. ¦ Ključni kadar fiksira postavku (veličinu, položaj, rotaciju…) u nekom trenutku filma; između dva ključna kadra slika prelazi iz jednog u drugi, glatko ili ravnomjernom brzinom. ¦ Ključna sličica določi nastavitev (velikost, položaj, zasuk …) v nekem trenutku filma; med dvema ključnima sličicama slika preide iz ene v drugo, mehko ali z enakomerno hitrostjo.
+« Réduire le souffle » : choisis d’abord un passage où l’on n’entend que le bruit, il sert d’exemple. « Voix plus nette » rend la parole plus claire. « Normaliser » monte le volume au plus fort sans saturer. ¦ „Smanji šum”: najprije odaberi dio u kojem se čuje samo šum, služi kao primjer. „Jasniji glas” čini govor jasnijim. „Normaliziraj” podiže glasnoću na najviše bez izobličenja. ¦ »Zmanjšaj šum«: najprej izberi odsek, v katerem se sliši le šum, služi kot primer. »Jasnejši glas« naredi govor jasnejši. »Normaliziraj« dvigne glasnost do največje brez nasičenja.
+Doux : on nettoie peu, la voix reste naturelle. Fort : on enlève plus de bruit, au risque d’un son un peu « métallique ». Écoute avec 👂 Avant / ✨ Après. ¦ Blago: malo se čisti, glas ostaje prirodan. Jako: uklanja se više šuma, uz rizik pomalo „metalnog” zvuka. Slušaj s 👂 Prije / ✨ Poslije. ¦ Mehko: malo očisti, glas ostane naraven. Močno: odstrani več šuma, z nevarnostjo nekoliko »kovinskega« zvoka. Poslušaj s 👂 Prej / ✨ Potem.
+Supprimer ce rush du projet (et ses {n} passages sur la frise) ¦ Izbriši ovu sirovu snimku iz projekta (i njezine dijelove na vremenskoj crti: {n}) ¦ Izbriši ta surovi posnetek iz projekta (in njegove dele na časovnici: {n})
+Supprimer ce rush du projet (et son passage sur la frise) ¦ Izbriši ovu sirovu snimku iz projekta (i njezin dio na vremenskoj crti) ¦ Izbriši ta surovi posnetek iz projekta (in njegov del na časovnici)
+Supprimer ce rush du projet ¦ Izbriši ovu sirovu snimku iz projekta ¦ Izbriši ta surovi posnetek iz projekta
+{time} à l’écran ¦ {time} na zaslonu ¦ {time} na zaslonu
+🖼️ Photo de la piste 1 ¦ 🖼️ Fotografija trake 1 ¦ 🖼️ Fotografija sledi 1
+🎬 Morceau de la piste 1 ¦ 🎬 Dio trake 1 ¦ 🎬 Kos sledi 1
