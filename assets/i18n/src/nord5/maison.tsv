@@ -919,3 +919,1203 @@ maison|Angles ¦ Kutovi ¦ Koti
 maison|Écurie ¦ Konjušnica ¦ Konjski hlev
 maison|Croix ¦ Križ ¦ Križ
 couleur|aucune ¦ nijedna ¦ brez
+Rez-de-chaussée ¦ Prizemlje ¦ Pritličje
+Cave ¦ Podrum ¦ Klet
+1er étage ¦ 1. kat ¦ 1. nadstropje
+{level}e étage ¦ {level}. kat ¦ {level}. nadstropje
+Maison de famille ¦ Obiteljska kuća ¦ Družinska hiša
+Époque sans nom ¦ Razdoblje bez naziva ¦ Obdobje brez imena
+Barre du haut ¦ Gornja traka ¦ Zgornja vrstica
+Barre de la vue 3D ¦ Traka 3D prikaza ¦ Vrstica 3D pogleda
+Vues dessus / face / côté ¦ Pogledi odozgo / sprijeda / sa strane ¦ Pogledi od zgoraj / od spredaj / s strani
+Revêtement sur {what} de mur ¦ Obloga na {what} zida ¦ Obloga na {what} stene
+=face ¦ strana|strane|strana ¦ stran|strani|strani|strani
+=mur ¦ zid|zida|zidova ¦ stena|steni|stene|sten
+=étage ¦ kat|kata|katova ¦ nadstropje|nadstropji|nadstropja|nadstropij
+=trait ¦ crta|crte|crta ¦ črta|črti|črte|črt
+=objet trouvé ¦ pronađeni predmet|pronađena predmeta|pronađenih predmeta ¦ najden predmet|najdena predmeta|najdeni predmeti|najdenih predmetov
+Aucune pièce tracée ¦ Nijedna prostorija nije nacrtana ¦ Noben prostor ni narisan
+Pièces et surfaces ¦ Prostorije i površine ¦ Prostori in površine
+Plan du ¦ Nacrt od ¦ Načrt z dne
+double hauteur (vide au-dessus) ¦ dvostruka visina (otvoreno iznad) ¦ dvojna višina (odprto zgoraj)
+trémie de l’escalier ¦ otvor stubišta ¦ odprtina stopnišča
+escalier (plancher fermé) ¦ stubište (zatvoreni pod) ¦ stopnišče (zaprt pod)
+VIDE ¦ PRAZNINA ¦ PRAZNINA
+vide sur {name} ¦ praznina iznad {name} ¦ praznina nad {name}
+maison|Vide ¦ Praznina ¦ Praznina
+sans plancher ¦ bez poda ¦ brez poda
+m² Carrez ¦ m² Carrez ¦ m² Carrez
+Moins de 1,80 m sous la pente du toit ¦ Manje od 1,80 m ispod kosine krova ¦ Manj kot 1,80 m pod strešno poševnino
+🕰 Fantôme : {name} ¦ 🕰 Duh: {name} ¦ 🕰 Duh: {name}
+⌒ {len} · flèche {arrow} ¦ ⌒ {len} · strelica {arrow} ¦ ⌒ {len} · puščica {arrow}
+{len} pour fermer en rectangle ¦ {len} za zatvaranje u pravokutnik ¦ {len} za zaprtje v pravokotnik
+départ (clic : fermer) ¦ početak (klik: zatvori) ¦ začetek (klik: zapri)
+maison|départ ¦ početak ¦ začetek
+Posé sous l’étage « {name} ». ¦ Postavljeno ispod kata „{name}”. ¦ Postavljeno pod nadstropje »{name}«.
+📐 {area} m² au sol ¦ 📐 {area} m² poda ¦ 📐 {area} m² tal
+{area} m² au sol ¦ {area} m² poda ¦ {area} m² tal
+{carrez} m² loi Carrez ¦ {carrez} m² po zakonu Carrez ¦ {carrez} m² po zakonu Carrez
+{area} m² loi Carrez (hauteur ≥ 1,80 m) ¦ {area} m² po zakonu Carrez (visina ≥ 1,80 m) ¦ {area} m² po zakonu Carrez (višina ≥ 1,80 m)
+(là où l’on tient debout : 1,80 m et plus, hachuré sur le plan) ¦ (gdje se može stajati: 1,80 m i više, šrafirano na nacrtu) ¦ (kjer lahko stojiš: 1,80 m in več, šrafirano na načrtu)
+Habitant : {role} — ouvrir la fiche ¦ Stanar: {role} — otvori zapis ¦ Stanovalec: {role} — odpri zapis
+Habitant — ouvrir la fiche ¦ Stanar — otvori zapis ¦ Stanovalec — odpri zapis
+Liée à la pièce « {room} » — ouvrir la fiche ¦ Povezano s prostorijom „{room}” — otvori zapis ¦ Povezano s prostorom »{room}« — odpri zapis
+{label} — époque : {era} — ouvrir la fiche où il est ¦ {label} — razdoblje: {era} — otvori zapis na kojem je ¦ {label} — obdobje: {era} — odpri zapis, na katerem je
+{label} — ouvrir la fiche où il est ¦ {label} — otvori zapis na kojem je ¦ {label} — odpri zapis, na katerem je
+🏷 Les souvenirs de la maison ¦ 🏷 Uspomene iz kuće ¦ 🏷 Spomini hiše
+Aller à « {where} » et voir le souvenir ¦ Idi na „{where}” i pogledaj uspomenu ¦ Pojdi na »{where}« in si oglej spomin
+Soleil calculé pour {place} ({lat}° N). ¦ Sunce izračunato za {place} ({lat}° S). ¦ Sonce izračunano za {place} ({lat}° S).
+le lieu de la maison ¦ mjesto kuće ¦ kraj hiše
+Le lieu de la maison n’a pas de coordonnées : soleil calculé pour le centre de la France. ¦ Mjesto kuće nema koordinate: sunce je izračunato za središte Francuske. ¦ Kraj hiše nima koordinat: sonce je izračunano za središče Francije.
+La nuit, les lampes posées s’allument (Vue 3D → ☀️ Lumière). ¦ Noću se postavljene svjetiljke pale (3D prikaz → ☀️ Svjetlo). ¦ Ponoči se postavljene svetilke prižgejo (3D pogled → ☀️ Svetloba).
+Pour commencer : ⬚ <b>glisse une pièce</b> (ses murs se font tout seuls), ou ▬ trace les murs un par un. ▨ Un <b>vide</b> (mezzanine, double hauteur) se dessine à l’étage du dessus. Puis 🚪 portes et 🪟 fenêtres (un clic sur un mur), et le <b>mobilier</b> (onglet à côté). ¦ Za početak: ⬚ <b>povuci prostoriju</b> (njezini zidovi nastaju sami) ili ▬ crtaj zidove jedan po jedan. ▨ <b>Praznina</b> (galerija, dvostruka visina) crta se na katu iznad. Zatim 🚪 vrata i 🪟 prozori (jedan klik na zid) te <b>namještaj</b> (susjedna kartica). ¦ Za začetek: ⬚ <b>povleci prostor</b> (njegove stene nastanejo same) ali ▬ riši stene eno za drugo. ▨ <b>Praznina</b> (galerija, dvojna višina) se nariše v nadstropju nad njim. Nato 🚪 vrata in 🪟 okna (en klik na steno) ter <b>pohištvo</b> (sosednji zavihek).
+{area} m² habitables ¦ {area} m² stambene površine ¦ {area} m² bivalne površine
+Face côté {rooms} ¦ Strana prema {rooms} ¦ Stran proti {rooms}
+Face extérieure (façade) ¦ Vanjska strana (pročelje) ¦ Zunanja stran (fasada)
+Les murs de « {name} » ¦ Zidovi prostorije „{name}” ¦ Stene prostora »{name}«
+la pièce ¦ prostorija ¦ prostor
+Les murs de toutes les pièces de cet étage ¦ Zidovi svih prostorija na ovom katu ¦ Stene vseh prostorov v tem nadstropju
+Toutes les façades de cet étage ¦ Sva pročelja ovog kata ¦ Vse fasade tega nadstropja
+Les murs de toutes les pièces de la maison (tous les étages) ¦ Zidovi svih prostorija u kući (svi katovi) ¦ Stene vseh prostorov v hiši (vsa nadstropja)
+Toutes les façades de la maison (tous les étages) ¦ Sva pročelja kuće (svi katovi) ¦ Vse fasade hiše (vsa nadstropja)
+Vide sur « {room} » ({floor}). ¦ Praznina iznad „{room}” ({floor}). ¦ Praznina nad »{room}« ({floor}).
+Vide sur l’étage « {floor} ». ¦ Praznina iznad kata „{floor}”. ¦ Praznina nad nadstropjem »{floor}«.
+⚠️ C’est l’étage le plus bas : ce vide n’ouvre sur rien. ¦ ⚠️ Ovo je najniži kat: ova praznina nema na što gledati. ¦ ⚠️ To je najnižje nadstropje: ta praznina se ne odpira nikamor.
+{w} × {d} hors tout · périmètre {p} ¦ {w} × {d} ukupno · opseg {p} ¦ {w} × {d} skupaj · obseg {p}
+La face de {walls} tournée vers la pièce. ¦ Strana od {walls} okrenuta prema prostoriji. ¦ Stran {walls}, obrnjena proti prostoru.
+Années de {name} ¦ Godine: {name} ¦ Leta: {name}
+Hauteur : celle de l’étage + le plancher ({h}) ¦ Visina: visina kata + strop ({h}) ¦ Višina: višina nadstropja + plošča ({h})
+={n} marches de {rise} cm, giron {going} cm · 2 h + g = {sum} cm ¦ {n} stuba od {rise} cm, gazište {going} cm · 2 h + g = {sum} cm|{n} stube od {rise} cm, gazište {going} cm · 2 h + g = {sum} cm|{n} stuba od {rise} cm, gazište {going} cm · 2 h + g = {sum} cm ¦ {n} stopnica po {rise} cm, nastopna ploskev {going} cm · 2 h + g = {sum} cm|{n} stopnici po {rise} cm, nastopna ploskev {going} cm · 2 h + g = {sum} cm|{n} stopnice po {rise} cm, nastopna ploskev {going} cm · 2 h + g = {sum} cm|{n} stopnic po {rise} cm, nastopna ploskev {going} cm · 2 h + g = {sum} cm
+Ouvrir le plancher au-dessus (« {name} ») ¦ Otvori pod iznad („{name}”) ¦ Odpri pod zgoraj (»{name}«)
+Ouvrir le plancher au-dessus ¦ Otvori pod iznad ¦ Odpri pod zgoraj
+posé sur « {name} » : il le suit ¦ postavljeno na „{name}”: prati ga ¦ postavljeno na »{name}«: mu sledi
+un objet ¦ predmet ¦ predmet
+Georgia (de départ) ¦ Georgia (početno) ¦ Georgia (privzeto)
+État d’origine ¦ Izvorno stanje ¦ Izvirno stanje
+Époque modifiée ¦ Razdoblje promijenjeno ¦ Obdobje spremenjeno
+Nouvelle époque : {name} ¦ Novo razdoblje: {name} ¦ Novo obdobje: {name}
+Époques retirées (le plan « {name} » reste, sans date) ¦ Razdoblja uklonjena (nacrt „{name}” ostaje, bez datuma) ¦ Obdobja odstranjena (načrt »{name}« ostane, brez datuma)
+Époque « {name} » supprimée avec son plan ¦ Razdoblje „{name}” izbrisano zajedno s nacrtom ¦ Obdobje »{name}« izbrisano skupaj z načrtom
+{name} est déjà rattaché. ¦ {name} je već povezan. ¦ {name} je že povezan.
+🏠 un habitant y est ¦ 🏠 ovdje je stanar ¦ 🏠 tu je stanovalec
+Posé sur « {name} » ¦ Postavljeno na „{name}” ¦ Postavljeno na »{name}«
+Posé au sol ¦ Postavljeno na pod ¦ Postavljeno na tla
+Pièce {n} ¦ Prostorija {n} ¦ Prostor {n}
+Pièce de {area} m² ¦ Prostorija od {area} m² ¦ Prostor s {area} m²
+Vide sur {name} ¦ Praznina iznad {name} ¦ Praznina nad {name}
+Mezzanine ¦ Galerija ¦ Galerija
+🏗 Mezzanine posée (étage « Mezzanine » ajouté) : vide sur {room}, garde-corps et escalier. ¦ 🏗 Galerija postavljena (dodan kat „Mezzanine”): praznina iznad {room}, ograda i stubište. ¦ 🏗 Galerija postavljena (dodano nadstropje »Mezzanine«): praznina nad {room}, ograja in stopnišče.
+🏗 Mezzanine posée à l’étage « {floor} » : vide sur {room}, garde-corps et escalier. ¦ 🏗 Galerija postavljena na kat „{floor}”: praznina iznad {room}, ograda i stubište. ¦ 🏗 Galerija postavljena v nadstropje »{floor}«: praznina nad {room}, ograja in stopnišče.
+{len} cm, c’est trop court : pour des mètres, écris « {typed} m ». ¦ {len} cm je prekratko: za metre upiši „{typed} m”. ¦ {len} cm je prekratko: za metre vpiši »{typed} m«.
+{name} posé ¦ {name} postavljeno ¦ {name} postavljeno
+{msg} — et maintenant le deuxième point. ¦ {msg} — a sada druga točka. ¦ {msg} — zdaj pa druga točka.
+À l’échelle : la longueur choisie mesure {len}. Puis « ✏️ Décalquer les murs » (onglet Étage). ¦ U mjerilu: odabrana duljina iznosi {len}. Zatim „✏️ Precrtaj zidove” (kartica Kat). ¦ V merilu: izbrana dolžina meri {len}. Nato »✏️ Precrtaj stene« (zavihek Nadstropje).
+Plan ancien redressé ({deg}°) ¦ Stari nacrt izravnan ({deg}°) ¦ Star načrt poravnan ({deg}°)
+Souvenir ¦ Uspomena ¦ Spomin
+🔗 Relier un souvenir à « {name} » ¦ 🔗 Poveži uspomenu s „{name}” ¦ 🔗 Poveži spomin z »{name}«
+Un souvenir pour « {name} » ¦ Uspomena za „{name}” ¦ Spomin za »{name}«
+✍ Un récit pour « {name} » ¦ ✍ Priča za „{name}” ¦ ✍ Zgodba za »{name}«
+👤 Une personne liée à « {name} » ¦ 👤 Osoba povezana s „{name}” ¦ 👤 Oseba, povezana z »{name}«
+Ce qui s’y est passé ¦ Što se ondje dogodilo ¦ Kaj se je tam zgodilo
+Réglage « {name} » appliqué ¦ Postavka „{name}” primijenjena ¦ Nastavitev »{name}« uporabljena
+Ce réglage est celui d’un autre outil (« {tool} ») : importe-le dans cet outil-là, pas dans la Maison. ¦ Ova postavka pripada drugom alatu („{tool}”): uvezi je u taj alat, a ne u Kuću. ¦ Ta nastavitev pripada drugemu orodju (»{tool}«): uvozi jo v tisto orodje, ne v Hišo.
+Un réglage s’appelle déjà « {name} ». Nom du réglage importé : ¦ Postavka već nosi naziv „{name}”. Naziv uvezene postavke: ¦ Nastavitev z imenom »{name}« že obstaja. Ime uvožene nastavitve:
+{lines} et {texts}. ¦ {lines} i {texts}. ¦ {lines} in {texts}.
+Chaque trait devient un mur ; un contour fermé sur un calque « pièce / room » devient une pièce, nommée par le texte posé dedans. ¦ Svaka crta postaje zid; zatvoreni obris na sloju „pièce / room” postaje prostorija, nazvana po tekstu postavljenom u nju. ¦ Vsaka črta postane stena; zaprt obris na sloju »pièce / room« postane prostor, poimenovan po besedilu v njem.
+Pas repris : {what}. ¦ Nije preuzeto: {what}. ¦ Ni prevzeto: {what}.
+Cet étage ({name}), en plus de ce qui y est ¦ Ovaj kat ({name}), uz ono što već postoji ¦ To nadstropje ({name}), poleg tistega, kar je že tam
+{walls}, {rooms} et {texts} importés. ¦ Uvezeno: {walls}, {rooms} i {texts}. ¦ Uvoženo: {walls}, {rooms} in {texts}.
+🔁 Répéter cette fenêtre ¦ 🔁 Ponovi ovaj prozor ¦ 🔁 Ponovi to okno
+🔁 Répéter cette porte ¦ 🔁 Ponovi ova vrata ¦ 🔁 Ponovi ta vrata
+Des copies le long du même mur, vers son autre bout (mur de {len}). ¦ Kopije duž istog zida, prema njegovom drugom kraju (zid od {len}). ¦ Kopije vzdolž iste stene, proti njenemu drugemu koncu (stena dolžine {len}).
+🔁 Répéter « {name} » ¦ 🔁 Ponovi „{name}” ¦ 🔁 Ponovi »{name}«
+{name} (à {len}) ¦ {name} (na {len}) ¦ {name} (na {len})
+{copies} de « {name} ». ¦ {copies} od „{name}”. ¦ {copies} od »{name}«.
+Vue 3D ¦ 3D prikaz ¦ 3D pogled
+Au-dessus : {name} ¦ Iznad: {name} ¦ Zgoraj: {name}
+En dessous : {name} (cave, sous-sol) ¦ Ispod: {name} (podrum, suteren) ¦ Spodaj: {name} (klet, pritlična klet)
+Reprendre les murs de « {name} » (et ses fenêtres) ¦ Preuzmi zidove od „{name}” (i njegove prozore) ¦ Prevzemi stene od »{name}« (in njegova okna)
+{name} ajouté ¦ {name} dodano ¦ {name} dodano
+Étages ¦ Katovi ¦ Nadstropja
+{name} (murs repris) ¦ {name} (zidovi preuzeti) ¦ {name} (stene prevzete)
+Étage « {name} » supprimé ¦ Kat „{name}” izbrisan ¦ Nadstropje »{name}« izbrisano
+Maison de {place} ¦ Kuća u mjestu {place} ¦ Hiša v kraju {place}
+✓ Toit retiré ¦ ✓ Krov uklonjen ¦ ✓ Streha odstranjena
+✓ Toit ajouté : il se voit depuis « {name} », l’étage du haut ¦ ✓ Krov dodan: vidi se s „{name}”, najvišeg kata ¦ ✓ Streha dodana: vidna je iz »{name}«, najvišjega nadstropja
+✓ Toit ajouté : il se pose sur les murs (aucun mur pour l’instant) ¦ ✓ Krov dodan: stoji na zidovima (zasad nema zidova) ¦ ✓ Streha dodana: stoji na stenah (zaenkrat ni sten)
+✓ Toit ajouté ¦ ✓ Krov dodan ¦ ✓ Streha dodana
+Arrêt {n} de la visite guidée ¦ Postaja {n} vođenog obilaska ¦ Postanek {n} vodenega ogleda
+{label} — ouvrir la fiche ¦ {label} — otvori zapis ¦ {label} — odpri zapis
+Habitant ¦ Stanar ¦ Stanovalec
+{label} — époque : {era} ¦ {label} — razdoblje: {era} ¦ {label} — obdobje: {era}
+{what} sur {total} ¦ {what} od {total} ¦ {what} od {total}
+Supprimer la maison « {name} » ? ¦ Izbrisati kuću „{name}”? ¦ Izbrišem hišo »{name}«?
+Supprimer la maison ¦ Izbriši kuću ¦ Izbriši hišo
+🕰 époque : {name} ¦ 🕰 razdoblje: {name} ¦ 🕰 obdobje: {name}
+aucune époque choisie ¦ nije odabrano razdoblje ¦ ni izbranega obdobja
+mètres ¦ metri ¦ metri
+centimètres ¦ centimetri ¦ centimetri
+millimètres ¦ milimetri ¦ milimetri
+pieds ¦ stope ¦ čevlji
+toises (1,949 m) ¦ toise (1,949 m) ¦ toise (1,949 m)
+pieds du roi (32,48 cm) ¦ kraljevske stope (32,48 cm) ¦ kraljevi čevlji (32,48 cm)
+aunes de Paris (1,188 m) ¦ pariški lakti (1,188 m) ¦ pariški vatli (1,188 m)
+perches de Paris (18 pieds, 5,847 m) ¦ pariške motke (18 stopa, 5,847 m) ¦ pariške palice (18 čevljev, 5,847 m)
+perches royales (22 pieds, 7,146 m) ¦ kraljevske motke (22 stope, 7,146 m) ¦ kraljeve palice (22 čevljev, 7,146 m)
+pas (environ 75 cm) ¦ koraci (oko 75 cm) ¦ koraki (približno 75 cm)
+Plâtre blanc ¦ Bijela žbuka ¦ Bel omet
+Enduit à la chaux ¦ Vapnena žbuka ¦ Apneni omet
+Pierre apparente ¦ Vidljivi kamen ¦ Vidni kamen
+Brique ¦ Opeka ¦ Opeka
+Colombage (pans de bois) ¦ Drvena skeletna gradnja ¦ Lesena predalčna gradnja
+Lambris de bois ¦ Drvena obloga ¦ Lesene obloge
+Papier peint ¦ Tapeta ¦ Tapeta
+Carrelage ¦ Pločice ¦ Ploščice
+Béton ¦ Beton ¦ Beton
+Torchis ¦ Pleter i blato ¦ Pleter in ilovica
+Enduit, crépi ¦ Žbuka, grubi nabačaj ¦ Omet, grobi omet
+Pierre de taille ¦ Klesani kamen ¦ Klesan kamen
+Papier peint à rayures ¦ Prugasta tapeta ¦ Črtasta tapeta
+Papier peint à fleurs ¦ Cvjetna tapeta ¦ Cvetlična tapeta
+Toile de Jouy ¦ Toile de Jouy ¦ Toile de Jouy
+Parquet ¦ Parket ¦ Parket
+Parquet à bâtons rompus ¦ Parket riblja kost ¦ Parket ribja kost
+Tomettes ¦ Terakota pločice ¦ Terakotne ploščice
+Carreaux de ciment ¦ Cementne pločice ¦ Cementne ploščice
+Damier noir et blanc ¦ Crno-bijela šahovnica ¦ Črno-bela šahovnica
+Dalles de pierre ¦ Kamene ploče ¦ Kamnite plošče
+Terre battue ¦ Nabijena zemlja ¦ Nabita zemlja
+Moquette, tapis ¦ Tepison, sag ¦ Tekstilna talna obloga, preproga
+Herbe (extérieur) ¦ Trava (vani) ¦ Trava (zunaj)
+Gravier, cour ¦ Šljunak, dvorište ¦ Prod, dvorišče
+Bois clair (hêtre, pin) ¦ Svijetlo drvo (bukva, bor) ¦ Svetel les (bukev, bor)
+Chêne ¦ Hrast ¦ Hrast
+Noyer ¦ Orah ¦ Oreh
+Merisier ¦ Trešnja ¦ Češnjev les
+Bois foncé (ébène, bois ciré) ¦ Tamno drvo (ebanovina, voskano drvo) ¦ Temen les (ebenovina, voskan les)
+Bois peint ¦ Bojeno drvo ¦ Barvan les
+Métal, acier ¦ Metal, čelik ¦ Kovina, jeklo
+Fonte, fer forgé ¦ Lijevano željezo, kovano željezo ¦ Lito železo, kovano železo
+Laiton, bronze, doré ¦ Mjed, bronca, pozlata ¦ Medenina, bron, pozlata
+Zinc, fer-blanc ¦ Cink, bijeli lim ¦ Cink, bela pločevina
+Pierre ¦ Kamen ¦ Kamen
+Marbre ¦ Mramor ¦ Marmor
+Grès, terre cuite ¦ Kamenina, terakota ¦ Kamenina, terakota
+Faïence, porcelaine, émail ¦ Fajansa, porculan, emajl ¦ Fajansa, porcelan, emajl
+Tissu ¦ Tkanina ¦ Blago
+Velours ¦ Baršun ¦ Žamet
+Cuir ¦ Koža ¦ Usnje
+Osier, rotin ¦ Pruće, ratan ¦ Šiba, ratan
+Paille ¦ Slama ¦ Slama
+Verre ¦ Staklo ¦ Steklo
+Sans pieds ¦ Bez nogu ¦ Brez nog
+Pieds droits ¦ Ravne noge ¦ Ravne noge
+Pieds tournés ¦ Tokarene noge ¦ Stružene noge
+Pieds boules (miches) ¦ Kuglaste noge ¦ Kroglaste noge
+Patins ¦ Klizači ¦ Drsniki
+Roulettes ¦ Kotačići ¦ Kolesca
+Barreaux de bois ¦ Drveni stupići ¦ Leseni stebrički
+Métal (barreaux fins) ¦ Metal (tanke šipke) ¦ Kovina (tanke palice)
+Muret plein ¦ Puni zidić ¦ Poln zidec
+Métiers, ferme ¦ Zanati, farma ¦ Obrti, kmetija
+Extérieur ¦ Vani ¦ Zunaj
+sa chambre ¦ njegova ili njezina soba ¦ njegova ali njena soba
+né ici ¦ rođen ovdje ¦ rojen tukaj
+née ici ¦ rođena ovdje ¦ rojena tukaj
+y a vécu ¦ živio/živjela ovdje ¦ živel/živela tukaj
+y est mort ¦ umro ovdje ¦ umrl tukaj
+y est morte ¦ umrla ovdje ¦ umrla tukaj
+les parents ¦ roditelji ¦ starši
+les enfants ¦ djeca ¦ otroci
+locataire ¦ podstanar ¦ najemnik
+fermier ¦ zakupnik ¦ zakupnik
+domestique ¦ sluga ¦ služabnik
+servante ¦ sluškinja ¦ služkinja
+valet ¦ sluga na imanju ¦ hlapec
+nourrice ¦ dojilja ¦ dojilja
+pensionnaire ¦ stanar na hrani ¦ podnajemnik na hrani
+atelier ¦ radionica ¦ delavnica
+boutique ¦ trgovina ¦ trgovina
+Nom de la maison ¦ Naziv kuće ¦ Ime hiše
+Réglages de l’aimant : grille, coins, angles, précision et 💾 réglages enregistrés ¦ Postavke privlačenja: mreža, kutovi, uglovi, preciznost i 💾 spremljene postavke ¦ Nastavitve pripenjanja: mreža, vogali, koti, natančnost in 💾 shranjene nastavitve
+Réglages de l’aimant ¦ Postavke privlačenja ¦ Nastavitve pripenjanja
+📐 Un plan ancien, un cadastre, à calquer… ¦ 📐 Stari nacrt, katastar, za precrtavanje… ¦ 📐 Star načrt, kataster, za precrtavanje…
+🖼️ Un objet en image (vue de dessus)… ¦ 🖼️ Predmet kao slika (pogled odozgo)… ¦ 🖼️ Predmet kot slika (pogled od zgoraj)…
+🧊 Un objet 3D (OBJ, STL, glTF, GLB)… ¦ 🧊 3D predmet (OBJ, STL, glTF, GLB)… ¦ 🧊 3D predmet (OBJ, STL, glTF, GLB)…
+🏠 Une maison (fichier .json)… ¦ 🏠 Kuća (datoteka .json)… ¦ 🏠 Hiša (datoteka .json)…
+📐 Un plan DXF (AutoCAD, LibreCAD, architecte, notaire)… ¦ 📐 DXF nacrt (AutoCAD, LibreCAD, arhitekt, javni bilježnik)… ¦ 📐 Načrt DXF (AutoCAD, LibreCAD, arhitekt, notar)…
+Le plan (PNG, JPG, PDF, SVG, impression), la vue 3D, le fichier de la maison ¦ Nacrt (PNG, JPG, PDF, SVG, ispis), 3D prikaz, datoteka kuće ¦ Načrt (PNG, JPG, PDF, SVG, tisk), 3D pogled, datoteka hiše
+Choisir, déplacer ¦ Odaberi, pomakni ¦ Izberi, premakni
+Déplacer la vue, ou barre d’espace ¦ Pomakni prikaz ili razmaknica ¦ Premakni pogled ali preslednica
+Pièce rectangulaire, murs compris : glisser ¦ Pravokutna prostorija sa zidovima: povuci ¦ Pravokoten prostor s stenami: povleci
+Vide, trémie, double hauteur : glisser, sans murs ¦ Praznina, otvor stubišta, dvostruka visina: povuci, bez zidova ¦ Praznina, odprtina stopnišča, dvojna višina: povleci, brez sten
+Mur : un clic par coin, double-clic ou Entrée pour finir ¦ Zid: jedan klik po kutu, dvostruki klik ili Enter za kraj ¦ Stena: en klik na vogal, dvoklik ali Enter za konec
+Pièce de forme libre, sans murs : un clic par coin ¦ Prostorija slobodnog oblika, bez zidova: jedan klik po kutu ¦ Prostor poljubne oblike, brez sten: en klik na vogal
+Porte : clic sur un mur ¦ Vrata: klik na zid ¦ Vrata: klik na steno
+Fenêtre : clic sur un mur ¦ Prozor: klik na zid ¦ Okno: klik na steno
+Cote, mesure : deux clics ¦ Kota, mjera: dva klika ¦ Kota, mera: dva klika
+Étiquette à flèche : un clic sur le point, un clic où écrire ¦ Oznaka sa strelicom: jedan klik na točku, jedan klik gdje pisati ¦ Oznaka s puščico: en klik na točko, en klik, kjer pišeš
+Une autre époque de la maison en fantôme (celle du calque 🕰, sinon l’époque d’avant) : murs très transparents, arêtes en pointillés ¦ Drugo razdoblje kuće kao duh (ono sa sloja 🕰, inače prethodno razdoblje): vrlo prozirni zidovi, isprekidani rubovi ¦ Drugo obdobje hiše kot duh (tisto s sloja 🕰, sicer prejšnje obdobje): zelo prosojne stene, črtkani robovi
+Deux clics sur la maison : la distance (et la hauteur entre les deux points) ¦ Dva klika na kuću: udaljenost (i visinska razlika između dviju točaka) ¦ Dva klika na hišo: razdalja (in višinska razlika med točkama)
+Tous les étages ¦ Svi katovi ¦ Vsa nadstropja
+Murs coupés (voir dedans) ¦ Presječeni zidovi (pogled unutra) ¦ Prerezane stene (pogled noter)
+Murs coupés ¦ Presječeni zidovi ¦ Prerezane stene
+🕰 Autre époque ¦ 🕰 Drugo razdoblje ¦ 🕰 Drugo obdobje
+Vue de dessus ¦ Pogled odozgo ¦ Pogled od zgoraj
+Vue de face ¦ Pogled sprijeda ¦ Pogled od spredaj
+Vue de côté ¦ Pogled sa strane ¦ Pogled s strani
+Dessus ¦ Odozgo ¦ Zgoraj
+Face ¦ Sprijeda ¦ Spredaj
+Le soleil selon l’heure, la date et le lieu ; la nuit, les lampes ¦ Sunce prema satu, datumu i mjestu; noću svjetiljke ¦ Sonce glede na uro, datum in kraj; ponoči svetilke
+Visiter la maison à hauteur d’yeux ¦ Obiđi kuću u visini očiju ¦ Oglej si hišo v višini oči
+☀️ Lumière ¦ ☀️ Svjetlo ¦ ☀️ Svetloba
+🚶 Visiter ¦ 🚶 Obiđi ¦ 🚶 Ogled
+📏 Mesurer ¦ 📏 Izmjeri ¦ 📏 Izmeri
+Plan 2D ¦ 2D nacrt ¦ 2D načrt
+Toit ¦ Krov ¦ Streha
+Cotes ¦ Kote ¦ Kote
+Mobilier ¦ Namještaj ¦ Pohištvo
+Propriétés de l’élément choisi ¦ Svojstva odabranog elementa ¦ Lastnosti izbranega elementa
+Mobilier : meubles, portes, fenêtres à poser ¦ Namještaj: komadi, vrata, prozori za postavljanje ¦ Pohištvo: kosi, vrata, okna za postavitev
+L’étage affiché : niveaux, hauteur, sol ¦ Prikazani kat: razine, visina, pod ¦ Prikazano nadstropje: ravni, višina, tla
+La maison : nom, époque, réglages généraux ¦ Kuća: naziv, razdoblje, opće postavke ¦ Hiša: ime, obdobje, splošne nastavitve
+la maison est fermée ¦ kuća je zatvorena ¦ hiša je zaprta
+d’autres changements ont suivi : utilise ↶ dans la barre du haut ¦ uslijedile su druge promjene: koristi ↶ u gornjoj traci ¦ sledile so druge spremembe: uporabi ↶ v zgornji vrstici
+Aimanter : grille, coins et milieux des murs, angles (Alt pour s’en passer) ¦ Privlačenje: mreža, kutovi i sredine zidova, uglovi (Alt za isključivanje) ¦ Pripenjanje: mreža, vogali in sredine sten, koti (Alt za izklop)
+{walls} ajouté depuis {when} ¦ {walls} dodano od {when} ¦ {walls} dodano od {when}
+{walls} ajoutés depuis {when} ¦ {walls} dodano od {when} ¦ {walls} dodano od {when}
+{walls} disparu depuis {when} ¦ {walls} nestalo od {when} ¦ {walls} izginilo od {when}
+{walls} disparus depuis {when} ¦ {walls} nestalo od {when} ¦ {walls} izginilo od {when}
+{walls} plus là en {when} ¦ {walls} više ne postoji u {when} ¦ {walls} ne obstaja več v {when}
+{walls} ajouté en {when} ¦ {walls} dodano u {when} ¦ {walls} dodano v {when}
+{walls} ajoutés en {when} ¦ {walls} dodano u {when} ¦ {walls} dodano v {when}
+={n} souvenir : clic pour voir ¦ {n} uspomena: klikni za prikaz|{n} uspomene: klikni za prikaz|{n} uspomena: klikni za prikaz ¦ {n} spomin: klikni za ogled|{n} spomina: klikni za ogled|{n} spomini: klikni za ogled|{n} spominov: klikni za ogled
+={n} souvenirs : clic pour voir ¦ {n} uspomena: klikni za prikaz|{n} uspomene: klikni za prikaz|{n} uspomena: klikni za prikaz ¦ {n} spomin: klikni za ogled|{n} spomina: klikni za ogled|{n} spomini: klikni za ogled|{n} spominov: klikni za ogled
+Glisser : la pointe de la flèche ¦ Povuci: vrh strelice ¦ Povleci: konica puščice
+Voir un autre étage, ou le même étage à une autre époque, en transparence ¦ Pogledaj drugi kat ili isti kat u drugom razdoblju, prozirno ¦ Oglej si drugo nadstropje ali isto nadstropje v drugem obdobju, prosojno
+Calque d’un autre étage ou d’une autre époque ¦ Sloj drugog kata ili drugog razdoblja ¦ Sloj drugega nadstropja ali drugega obdobja
+Calque d’un autre étage ou d’une époque ¦ Sloj drugog kata ili razdoblja ¦ Sloj drugega nadstropja ali obdobja
+👻 Calque : non ¦ 👻 Sloj: nema ¦ 👻 Sloj: brez
+👻 Dessous ¦ 👻 Ispod ¦ 👻 Spodaj
+👻 Dessus ¦ 👻 Iznad ¦ 👻 Zgoraj
+👻 Les deux ¦ 👻 Oboje ¦ 👻 Oboje
+🕰 Époque d’avant ¦ 🕰 Prethodno razdoblje ¦ 🕰 Prejšnje obdobje
+🕰 Époque d’après ¦ 🕰 Sljedeće razdoblje ¦ 🕰 Naslednje obdobje
+🕰 Choisir une époque… ¦ 🕰 Odaberi razdoblje… ¦ 🕰 Izberi obdobje…
+Ajouter un étage ou une cave ¦ Dodaj kat ili podrum ¦ Dodaj nadstropje ali klet
+Les étages : gérer, ajouter, dupliquer, supprimer ¦ Katovi: upravljaj, dodaj, udvostruči, izbriši ¦ Nadstropja: upravljaj, dodaj, podvoji, izbriši
+Plus d’actions sur les étages ¦ Više radnji s katovima ¦ Več dejanj z nadstropji
+Chercher : lit, poêle, rouet… ¦ Traži: krevet, peć, kolovrat… ¦ Išči: postelja, peč, kolovrat…
+Mes objets ¦ Moji predmeti ¦ Moji predmeti
+Aucun objet importé pour l’instant ¦ Zasad nema uvezenih predmeta ¦ Zaenkrat ni uvoženih predmetov
+« ⤒ Importer » (en haut) un fichier 3D (OBJ, STL, glTF, GLB) ou une image. ¦ „⤒ Uvezi” (gore) 3D datoteku (OBJ, STL, glTF, GLB) ili sliku. ¦ »⤒ Uvozi« (zgoraj) 3D datoteko (OBJ, STL, glTF, GLB) ali sliko.
+Clic sur un objet : il se pose au milieu de la vue ; glisse-le ensuite à sa place (R ou la poignée ronde pour tourner). ¦ Klikni na predmet: postavlja se u sredinu prikaza; zatim ga povuci na mjesto (R ili okrugla ručica za okretanje). ¦ Klikni predmet: postavi se na sredino pogleda; nato ga povleci na mesto (R ali okrogla ročica za vrtenje).
+Nom de l’étage ¦ Naziv kata ¦ Ime nadstropja
+Épaisseur des nouveaux murs ¦ Debljina novih zidova ¦ Debelina novih sten
+Épaisseur des planchers ¦ Debljina stropnih ploča ¦ Debelina medetažnih plošč
+Pas de la grille ¦ Korak mreže ¦ Korak mreže
+⧉ Dupliquer cet étage (murs) ¦ ⧉ Udvostruči ovaj kat (zidovi) ¦ ⧉ Podvoji to nadstropje (stene)
+Supprimer l’étage ¦ Izbriši kat ¦ Izbriši nadstropje
+Cotes des murs ¦ Kote zidova ¦ Kote sten
+Cotes d’ensemble ¦ Ukupne kote ¦ Skupne kote
+Tableau des pièces sur le plan ¦ Tablica prostorija na nacrtu ¦ Tabela prostorov na načrtu
+Cartouche (nom, lieu, époque, étage) ¦ Zaglavlje (naziv, mjesto, razdoblje, kat) ¦ Glava načrta (ime, kraj, obdobje, nadstropje)
+Affichage sombre (dessin technique) ¦ Tamni prikaz (tehnički crtež) ¦ Temen prikaz (tehnična risba)
+Plafond (visite 3D) ¦ Strop (3D obilazak) ¦ Strop (3D ogled)
+Aucun (ouvert) ¦ Nema (otvoreno) ¦ Brez (odprto)
+Plafond uni ¦ Jednobojni strop ¦ Enobarven strop
+Poutres apparentes ¦ Vidljive grede ¦ Vidni tramovi
+Couleur du plafond ¦ Boja stropa ¦ Barva stropa
+Légende : ― ajouté · ┄ disparu ¦ Legenda: ― dodano · ┄ nestalo ¦ Legenda: ― dodano · ┄ izginilo
+Transparence du calque ¦ Prozirnost sloja ¦ Prosojnost sloja
+📐 Plan ancien, cadastre ¦ 📐 Stari nacrt, katastar ¦ 📐 Star načrt, kataster
+Un cadastre napoléonien, un plan ancien, un croquis : pose-le en fond, mets-le à l’échelle, puis décalque les murs par-dessus. ¦ Napoleonski katastar, stari nacrt, skica: postavi ga u pozadinu, stavi u mjerilo, zatim precrtaj zidove preko njega. ¦ Napoleonski kataster, star načrt, skica: postavi ga v ozadje, nastavi merilo, nato čez njega precrtaj stene.
+🖼 Choisir l’image… ¦ 🖼 Odaberi sliku… ¦ 🖼 Izberi sliko…
+Le mettre sous cet étage ¦ Stavi ispod ovog kata ¦ Postavi pod to nadstropje
+Visible ¦ Vidljivo ¦ Vidno
+🔒 Verrouillé ¦ 🔒 Zaključano ¦ 🔒 Zaklenjeno
+📏 Mettre à l’échelle ¦ 📏 Postavi mjerilo ¦ 📏 Nastavi merilo
+Deux clics le long d’un mur de l’image : il devient droit (horizontal ou vertical) ¦ Dva klika duž zida na slici: postaje ravan (vodoravan ili okomit) ¦ Dva klika vzdolž stene na sliki: postane ravna (vodoravna ali navpična)
+✓ Fin du décalque ¦ ✓ Završi precrtavanje ¦ ✓ Končaj precrtavanje
+✏️ Décalquer les murs ¦ ✏️ Precrtaj zidove ¦ ✏️ Precrtaj stene
+🖼 Changer d’image… ¦ 🖼 Promijeni sliku… ¦ 🖼 Zamenjaj sliko…
+🏠 Combles (sous le toit) ¦ 🏠 Potkrovlje (pod krovom) ¦ 🏠 Podstrešje (pod streho)
+Pour l’étage le plus haut, sous un toit en pente (onglet Étage → 🏠 Toit) : le plafond suit alors la pente, et la hauteur sous plafond se lit partout sur le plan. ¦ Za najviši kat, ispod kosog krova (kartica Kat → 🏠 Krov): strop tada prati kosinu, a visina stropa očitava se svuda na nacrtu. ¦ Za najvišje nadstropje pod poševno streho (zavihek Nadstropje → 🏠 Streha): strop tedaj sledi naklonu, višina stropa pa se odčita povsod na načrtu.
+Combles : le plafond suit la pente du toit ¦ Potkrovlje: strop prati kosinu krova ¦ Podstrešje: strop sledi naklonu strehe
+Hauteur des murs sous le toit ¦ Visina zidova ispod krova ¦ Višina sten pod streho
+🏠 Toit (vue 3D) ¦ 🏠 Krov (3D prikaz) ¦ 🏠 Streha (3D pogled)
+Un toit sur l’étage le plus haut ¦ Krov na najvišem katu ¦ Streha na najvišjem nadstropju
+Deux pans (pignons) ¦ Dvostrešni (zabati) ¦ Dvokapnica (zatrepi)
+Quatre pans (croupes) ¦ Četverostrešni ¦ Štirikapnica
+Pavillon (pointe) ¦ Šatorasti (vrh) ¦ Šotorasta (konica)
+Un pan (appentis) ¦ Jednostrešni ¦ Enokapnica
+Mansardé ¦ Mansardni ¦ Mansardna
+Plat (toit-terrasse) ¦ Ravni (krovna terasa) ¦ Ravna (strešna terasa)
+Faîtage ¦ Sljeme ¦ Sleme
+Dans la longueur ¦ Po dužini ¦ Po dolžini
+Dans la largeur ¦ Po širini ¦ Po širini
+Est – ouest ¦ Istok – zapad ¦ Vzhod – zahod
+Nord – sud ¦ Sjever – jug ¦ Sever – jug
+Débord ¦ Prepust ¦ Napušč
+Couverture ¦ Pokrov ¦ Kritina
+Tuiles canal ¦ Kanalice ¦ Korita
+Tuiles plates ¦ Ravni crijep ¦ Bobrovci
+Tuiles vernissées ¦ Glazirani crijep ¦ Glazirana opeka
+Ardoises ¦ Škriljevac ¦ Skrilj
+Lauzes (pierre) ¦ Kamene ploče (lauze) ¦ Kamnite plošče (lauze)
+Chaume ¦ Slama ¦ Slama
+Zinc ¦ Cink ¦ Cink
+Bac acier ¦ Čelični lim ¦ Jeklena pločevina
+Pignons, acrotères ¦ Zabati, atike ¦ Zatrepi, atike
+Acrotère (toit plat) ¦ Atika (ravni krov) ¦ Atika (ravna streha)
+Une cheminée ¦ Dimnjak ¦ Dimnik
+Place de la cheminée ¦ Položaj dimnjaka ¦ Položaj dimnika
+Gouttières et descentes ¦ Oluci i odvodne cijevi ¦ Žlebovi in odtočne cevi
+Un toit par aile (maison en L, en T, en U) ¦ Jedan krov po krilu (kuća u obliku L, T, U) ¦ Ena streha na krilo (hiša v obliki L, T, U)
+Verrières, lanterneaux et édicules ¦ Stakleni krovovi, krovni svjetlarnici i krovne kućice ¦ Stekleni strehe, strešne svetlobe in strešni objekti
+Fenêtres de toit et lucarnes ¦ Krovni prozori i krovne kućice ¦ Strešna okna in frčade
+🪟 Verrière ¦ 🪟 Stakleni krov ¦ 🪟 Steklena streha
+🚪 Édicule (sortie sur le toit) ¦ 🚪 Krovna kućica (izlaz na krov) ¦ 🚪 Strešni objekt (izhod na streho)
+🔆 Lanterneau ¦ 🔆 Krovni svjetlarnik ¦ 🔆 Strešna svetloba
+🪟 Fenêtre de toit ¦ 🪟 Krovni prozor ¦ 🪟 Strešno okno
+🏠 Lucarne ¦ 🏠 Krovna kućica ¦ 🏠 Frčada
+🏚 Chien-assis ¦ 🏚 Ravna krovna kućica ¦ 🏚 Ravna frčada
+Lucarne ¦ Krovna kućica ¦ Frčada
+Aile ¦ Krilo ¦ Krilo
+Arrière ¦ Straga ¦ Zadaj
+En travers ¦ Poprijeko ¦ Prečno
+Vers l’égout ¦ Prema strehi ¦ Proti kapu
+Profondeur ¦ Dubina ¦ Globina
+＋ Verrière ¦ ＋ Stakleni krov ¦ ＋ Steklena streha
+＋ Édicule ¦ ＋ Krovna kućica (izlaz) ¦ ＋ Strešni objekt
+＋ Lanterneau ¦ ＋ Krovni svjetlarnik ¦ ＋ Strešna svetloba
+＋ Fenêtre de toit ¦ ＋ Krovni prozor ¦ ＋ Strešno okno
+＋ Lucarne ¦ ＋ Krovna kućica ¦ ＋ Frčada
+＋ Chien-assis ¦ ＋ Ravna krovna kućica ¦ ＋ Ravna frčada
+Rien pour l’instant : ajoute des habitants et des recensements (plus bas). ¦ Zasad ništa: dodaj stanare i popise stanovništva (niže). ¦ Zaenkrat nič: dodaj stanovalce in popise prebivalstva (spodaj).
+📍 Lieu et époque ¦ 📍 Mjesto i razdoblje ¦ 📍 Kraj in obdobje
+Époque (en quelques mots) ¦ Razdoblje (u nekoliko riječi) ¦ Obdobje (v nekaj besedah)
+Aucun souvenir posé pour l’instant ¦ Zasad nema postavljenih uspomena ¦ Zaenkrat ni postavljenih spominov
+Clic sur un meuble ou une pièce, puis « 🔗 Relier un souvenir » : une photo, un récit, une personne, un souvenir de famille. ¦ Klikni na komad namještaja ili prostoriju, zatim „🔗 Poveži uspomenu”: fotografija, priča, osoba, obiteljska uspomena. ¦ Klikni kos pohištva ali prostor, nato »🔗 Poveži spomin«: fotografija, zgodba, oseba, družinski spomin.
+☀️ Orientation et lumière ¦ ☀️ Orijentacija i svjetlo ¦ ☀️ Orientacija in svetloba
+Nord du plan ¦ Sjever nacrta ¦ Sever načrta
+Heure ¦ Sat ¦ Ura
+Jour ¦ Dan ¦ Dan
+Jour de l’année ¦ Dan u godini ¦ Dan v letu
+Hauteur des yeux pour la visite ¦ Visina očiju za obilazak ¦ Višina oči za ogled
+👥 Les habitants ¦ 👥 Stanari ¦ 👥 Stanovalci
+rôle, années (né ici, 1880–1920…) ¦ uloga, godine (rođen ovdje, 1880.–1920.…) ¦ vloga, leta (rojen tukaj, 1880–1920…)
+＋ Ajouter un habitant… ¦ ＋ Dodaj stanara… ¦ ＋ Dodaj stanovalca…
+📋 Les recensements ¦ 📋 Popisi stanovništva ¦ 📋 Popisi prebivalstva
+Ouvrir la fiche où est ce recensement ¦ Otvori zapis na kojem je ovaj popis ¦ Odpri zapis, na katerem je ta popis
+L’époque de la maison qui correspond à ce recensement ¦ Razdoblje kuće koje odgovara ovom popisu ¦ Obdobje hiše, ki ustreza temu popisu
+— époque — ¦ — razdoblje — ¦ — obdobje —
+Aucun recensement rattaché. ¦ Nijedan popis nije povezan. ¦ Noben popis ni povezan.
+＋ Ajouter un recensement… ¦ ＋ Dodaj popis stanovništva… ¦ ＋ Dodaj popis prebivalstva…
+🕰 Les époques ¦ 🕰 Razdoblja ¦ 🕰 Obdobja
+Montrer la maison à cette époque ¦ Prikaži kuću u tom razdoblju ¦ Prikaži hišo v tem obdobju
+Renommer, changer la date, rattacher à un recensement ¦ Preimenuj, promijeni datum, poveži s popisom ¦ Preimenuj, spremeni datum, poveži s popisom
+Supprimer cette époque ¦ Izbriši ovo razdoblje ¦ Izbriši to obdobje
+La maison a changé avec le temps ? Crée une époque par année ou par date (1850, 1900, 1936…), chacune avec son plan : tu la verras évoluer, et chacune peut être rattachée à un recensement. ¦ Je li se kuća mijenjala s vremenom? Stvori razdoblje po godini ili datumu (1850., 1900., 1936.…), svako sa svojim nacrtom: vidjet ćeš kako se mijenja, a svako se može povezati s popisom stanovništva. ¦ Se je hiša s časom spreminjala? Ustvari obdobje za vsako leto ali datum (1850, 1900, 1936…), vsako s svojim načrtom: videl/videla boš, kako se spreminja, vsako pa lahko povežeš s popisom prebivalstva.
+＋ Nouvelle époque (copie de celle-ci) ¦ ＋ Novo razdoblje (kopija ovoga) ¦ ＋ Novo obdobje (kopija tega)
+＋ Nouvelle époque (copie de celle-ci)… ¦ ＋ Novo razdoblje (kopija ovoga)… ¦ ＋ Novo obdobje (kopija tega)…
+▶ Voir évoluer ¦ ▶ Gledaj promjene ¦ ▶ Oglej si spreminjanje
+⏹ Arrêter ¦ ⏹ Zaustavi ¦ ⏹ Ustavi
+📖 Histoire de la maison ¦ 📖 Povijest kuće ¦ 📖 Zgodovina hiše
+Histoire de la maison ¦ Povijest kuće ¦ Zgodovina hiše
+Construite par…, agrandie en…, vendue en… ¦ Sagradio…, proširena…, prodana… ¦ Zgradil…, povečana…, prodana…
+Clic sur un mur, une pièce, un meuble : ses réglages viennent ici (matériau, couleur, taille, nom, souvenirs). Molette : zoomer ; barre d’espace : déplacer la vue ; Alt : sans aimant. ¦ Klikni na zid, prostoriju ili komad namještaja: njegove postavke pojavljuju se ovdje (materijal, boja, veličina, naziv, uspomene). Kotačić: zumiranje; razmaknica: pomicanje prikaza; Alt: bez privlačenja. ¦ Klikni steno, prostor ali kos pohištva: njegove nastavitve se prikažejo tukaj (material, barva, velikost, ime, spomini). Kolešček: povečava; preslednica: premik pogleda; Alt: brez pripenjanja.
+Cet étage ¦ Ovaj kat ¦ To nadstropje
+={n} pièce ¦ {n} prostorija|{n} prostorije|{n} prostorija ¦ {n} prostor|{n} prostora|{n} prostori|{n} prostorov
+={n} pièces ¦ {n} prostorija|{n} prostorije|{n} prostorija ¦ {n} prostor|{n} prostora|{n} prostori|{n} prostorov
+={n} étage ¦ {n} kat|{n} kata|{n} katova ¦ {n} nadstropje|{n} nadstropji|{n} nadstropja|{n} nadstropij
+={n} étages ¦ {n} kat|{n} kata|{n} katova ¦ {n} nadstropje|{n} nadstropji|{n} nadstropja|{n} nadstropij
+={n} habitant ¦ {n} stanar|{n} stanara|{n} stanara ¦ {n} stanovalec|{n} stanovalca|{n} stanovalci|{n} stanovalcev
+={n} habitants ¦ {n} stanar|{n} stanara|{n} stanara ¦ {n} stanovalec|{n} stanovalca|{n} stanovalci|{n} stanovalcev
+={n} époque ¦ {n} razdoblje|{n} razdoblja|{n} razdoblja ¦ {n} obdobje|{n} obdobji|{n} obdobja|{n} obdobij
+={n} époques ¦ {n} razdoblje|{n} razdoblja|{n} razdoblja ¦ {n} obdobje|{n} obdobji|{n} obdobja|{n} obdobij
+={n} arrêt ¦ {n} postaja|{n} postaje|{n} postaja ¦ {n} postanek|{n} postanka|{n} postanki|{n} postankov
+={n} arrêts ¦ {n} postaja|{n} postaje|{n} postaja ¦ {n} postanek|{n} postanka|{n} postanki|{n} postankov
+={n} modèle ¦ {n} model|{n} modela|{n} modela ¦ {n} model|{n} modela|{n} modeli|{n} modelov
+={n} modèles ¦ {n} model|{n} modela|{n} modela ¦ {n} model|{n} modela|{n} modeli|{n} modelov
+={n} recensement rattaché ¦ {n} povezani popis|{n} povezana popisa|{n} povezanih popisa ¦ {n} povezan popis|{n} povezana popisa|{n} povezani popisi|{n} povezanih popisov
+={n} recensements rattachés ¦ {n} povezani popis|{n} povezana popisa|{n} povezanih popisa ¦ {n} povezan popis|{n} povezana popisa|{n} povezani popisi|{n} povezanih popisov
+={n} habitant ajouté depuis le recensement. ¦ {n} stanar dodan iz popisa.|{n} stanara dodana iz popisa.|{n} stanara dodano iz popisa. ¦ {n} stanovalec dodan iz popisa.|{n} stanovalca dodana iz popisa.|{n} stanovalci dodani iz popisa.|{n} stanovalcev dodanih iz popisa.
+={n} habitants ajoutés depuis le recensement. ¦ {n} stanar dodan iz popisa.|{n} stanara dodana iz popisa.|{n} stanara dodano iz popisa. ¦ {n} stanovalec dodan iz popisa.|{n} stanovalca dodana iz popisa.|{n} stanovalci dodani iz popisa.|{n} stanovalcev dodanih iz popisa.
+={n} trémie ouverte ¦ {n} otvor stubišta otvoren|{n} otvora stubišta otvorena|{n} otvora stubišta otvoreno ¦ {n} odprtina stopnišča odprta|{n} odprtini stopnišča odprti|{n} odprtine stopnišča odprte|{n} odprtin stopnišča odprtih
+={n} trémies ouvertes ¦ {n} otvor stubišta otvoren|{n} otvora stubišta otvorena|{n} otvora stubišta otvoreno ¦ {n} odprtina stopnišča odprta|{n} odprtini stopnišča odprti|{n} odprtine stopnišča odprte|{n} odprtin stopnišča odprtih
+={n} étage supprimé ¦ {n} kat izbrisan|{n} kata izbrisana|{n} katova izbrisano ¦ {n} nadstropje izbrisano|{n} nadstropji izbrisani|{n} nadstropja izbrisana|{n} nadstropij izbrisanih
+={n} étages supprimés ¦ {n} kat izbrisan|{n} kata izbrisana|{n} katova izbrisano ¦ {n} nadstropje izbrisano|{n} nadstropji izbrisani|{n} nadstropja izbrisana|{n} nadstropij izbrisanih
+={n} copie seulement : le mur est trop court pour plus. ¦ Samo {n} kopija: zid je prekratak za više.|Samo {n} kopije: zid je prekratak za više.|Samo {n} kopija: zid je prekratak za više. ¦ Samo {n} kopija: stena je prekratka za več.|Samo {n} kopiji: stena je prekratka za več.|Samo {n} kopije: stena je prekratka za več.|Samo {n} kopij: stena je prekratka za več.
+={n} copies seulement : le mur est trop court pour plus. ¦ Samo {n} kopija: zid je prekratak za više.|Samo {n} kopije: zid je prekratak za više.|Samo {n} kopija: zid je prekratak za više. ¦ Samo {n} kopija: stena je prekratka za več.|Samo {n} kopiji: stena je prekratka za več.|Samo {n} kopije: stena je prekratka za več.|Samo {n} kopij: stena je prekratka za več.
+={n} lampe allumée ¦ {n} svjetiljka upaljena|{n} svjetiljke upaljene|{n} svjetiljki upaljeno ¦ {n} svetilka prižgana|{n} svetilki prižgani|{n} svetilke prižgane|{n} svetilk prižganih
+={n} lampes allumées ¦ {n} svjetiljka upaljena|{n} svjetiljke upaljene|{n} svjetiljki upaljeno ¦ {n} svetilka prižgana|{n} svetilki prižgani|{n} svetilke prižgane|{n} svetilk prižganih
+={n} refusé : {list} ¦ {n} odbijen: {list}|{n} odbijena: {list}|{n} odbijenih: {list} ¦ {n} zavrnjen: {list}|{n} zavrnjena: {list}|{n} zavrnjeni: {list}|{n} zavrnjenih: {list}
+={n} refusés : {list} ¦ {n} odbijen: {list}|{n} odbijena: {list}|{n} odbijenih: {list} ¦ {n} zavrnjen: {list}|{n} zavrnjena: {list}|{n} zavrnjeni: {list}|{n} zavrnjenih: {list}
+=✓ {n} image : à glisser dans le 🎬 Montage pour en faire un film (avec les textes en voix off). ¦ ✓ {n} slika: povuci je u 🎬 Montažu da napraviš film (s tekstovima kao glasom pripovjedača).|✓ {n} slike: povuci ih u 🎬 Montažu da napraviš film (s tekstovima kao glasom pripovjedača).|✓ {n} slika: povuci ih u 🎬 Montažu da napraviš film (s tekstovima kao glasom pripovjedača). ¦ ✓ {n} slika: povleci jo v 🎬 Montažo, da narediš film (z besedili kot glasom pripovedovalca).|✓ {n} sliki: povleci ju v 🎬 Montažo, da narediš film (z besedili kot glasom pripovedovalca).|✓ {n} slike: povleci jih v 🎬 Montažo, da narediš film (z besedili kot glasom pripovedovalca).|✓ {n} slik: povleci jih v 🎬 Montažo, da narediš film (z besedili kot glasom pripovedovalca).
+=✓ {n} images : à glisser dans le 🎬 Montage pour en faire un film (avec les textes en voix off). ¦ ✓ {n} slika: povuci je u 🎬 Montažu da napraviš film (s tekstovima kao glasom pripovjedača).|✓ {n} slike: povuci ih u 🎬 Montažu da napraviš film (s tekstovima kao glasom pripovjedača).|✓ {n} slika: povuci ih u 🎬 Montažu da napraviš film (s tekstovima kao glasom pripovjedača). ¦ ✓ {n} slika: povleci jo v 🎬 Montažo, da narediš film (z besedili kot glasom pripovedovalca).|✓ {n} sliki: povleci ju v 🎬 Montažo, da narediš film (z besedili kot glasom pripovedovalca).|✓ {n} slike: povleci jih v 🎬 Montažo, da narediš film (z besedili kot glasom pripovedovalca).|✓ {n} slik: povleci jih v 🎬 Montažo, da narediš film (z besedili kot glasom pripovedovalca).
+🔗 Relier un souvenir… ¦ 🔗 Poveži uspomenu… ¦ 🔗 Poveži spomin…
+Angle (°, 0 = vers la droite, 90 = vers le haut) ¦ Kut (°, 0 = udesno, 90 = prema gore) ¦ Kot (°, 0 = v desno, 90 = navzgor)
+Début X ¦ Početak X ¦ Začetek X
+Début Y ¦ Početak Y ¦ Začetek Y
+Fin X ¦ Kraj X ¦ Konec X
+Fin Y ¦ Kraj Y ¦ Konec Y
+Hauteur (cm, vide = celle de l’étage) ¦ Visina (cm, prazno = visina kata) ¦ Višina (cm, prazno = višina nadstropja)
+⌒ Courbure (flèche) ¦ ⌒ Zakrivljenost (strelica) ¦ ⌒ Ukrivljenost (puščica)
+✂ Couper en deux ¦ ✂ Prereži na dva dijela ¦ ✂ Prereži na dva dela
+Revêtement ¦ Obloga ¦ Obloga
+Pareil pour : ¦ Isto za: ¦ Enako za:
+tout l’étage ¦ cijeli kat ¦ celo nadstropje
+toute la maison ¦ cijelu kuću ¦ celo hišo
+Couleur et texture ¦ Boja i tekstura ¦ Barva in tekstura
+Taille du motif ¦ Veličina uzorka ¦ Velikost vzorca
+Allège (cm du sol) ¦ Parapet (cm od poda) ¦ Parapet (cm od tal)
+Position sur le mur ¦ Položaj na zidu ¦ Položaj na steni
+Du début du mur ¦ Od početka zida ¦ Od začetka stene
+Jusqu’à la fin ¦ Do kraja ¦ Do konca
+🚪 Genre et ouverture ¦ 🚪 Vrsta i otvaranje ¦ 🚪 Vrsta in odpiranje
+Porte ¦ Vrata ¦ Vrata
+Porte double ¦ Dvokrilna vrata ¦ Dvokrilna vrata
+Porte d’entrée ¦ Ulazna vrata ¦ Vhodna vrata
+Passage, arche ¦ Prolaz, luk ¦ Prehod, lok
+Porte de grange ¦ Vrata staje ¦ Vrata skednja
+Une rangée de fenêtres (ou de portes) le long du mur ¦ Niz prozora (ili vrata) duž zida ¦ Niz oken (ali vrat) vzdolž stene
+🔁 Répéter… ¦ 🔁 Ponovi… ¦ 🔁 Ponovi…
+↔ Sens d’ouverture ¦ ↔ Smjer otvaranja ¦ ↔ Smer odpiranja
+▨ Plancher : plein ou vide ¦ ▨ Pod: pun ili prazan ¦ ▨ Pod: poln ali odprt
+Pas de plancher : vide sur l’étage du dessous ¦ Bez poda: praznina prema katu ispod ¦ Brez poda: praznina proti nadstropju spodaj
+Garde-corps ¦ Ograda ¦ Ograja
+Garde-corps autour ¦ Ograda okolo ¦ Ograja okoli
+Ajoute l’étage du dessus s’il manque, une mezzanine sur une partie de cette pièce, le vide sur le reste, son garde-corps et l’escalier ¦ Dodaje kat iznad ako nedostaje, galeriju nad dijelom ove prostorije, prazninu nad ostatkom, njezinu ogradu i stubište ¦ Doda nadstropje zgoraj, če manjka, galerijo nad delom tega prostora, praznino nad preostankom, njeno ograjo in stopnišče
+🏗 Mezzanine ouverte sur cette pièce ¦ 🏗 Galerija otvorena prema ovoj prostoriji ¦ 🏗 Galerija, odprta proti temu prostoru
+Mezzanine ouverte ¦ Otvorena galerija ¦ Odprta galerija
+🔗 Les murs et les meubles suivent la pièce ¦ 🔗 Zidovi i namještaj prate prostoriju ¦ 🔗 Stene in pohištvo sledijo prostoru
+🧱 Murs de la pièce ¦ 🧱 Zidovi prostorije ¦ 🧱 Stene prostora
+Sol ¦ Pod ¦ Tla
+Salle commune ¦ Dnevna soba ¦ Skupni prostor
+Chambre des parents ¦ Spavaća soba roditelja ¦ Spalnica staršev
+Chambre des enfants ¦ Dječja soba ¦ Otroška soba
+Salle à manger ¦ Blagovaonica ¦ Jedilnica
+Grenier ¦ Tavan ¦ Podstrešje
+Cellier ¦ Ostava ¦ Shramba
+Étable ¦ Staja ¦ Hlev
+Grange ¦ Štagalj ¦ Skedenj
+Fournil ¦ Pekarnica ¦ Pekarna
+Boutique ¦ Trgovina ¦ Trgovina
+Couloir ¦ Hodnik ¦ Hodnik
+Cour ¦ Dvorište ¦ Dvorišče
+Jardin ¦ Vrt ¦ Vrt
+Potager ¦ Povrtnjak ¦ Zelenjavni vrt
+Basse-cour ¦ Peradarnik ¦ Perutninsko dvorišče
+🕯 Souvenirs de la pièce ¦ 🕯 Uspomene iz prostorije ¦ 🕯 Spomini prostora
+La chambre où est née Marie en 1890 ; la veillée… ¦ Soba u kojoj se Marie rodila 1890.; večernja okupljanja… ¦ Soba, v kateri se je leta 1890 rodila Marie; večerna srečanja…
+Les personnes de la pièce ¦ Osobe iz prostorije ¦ Osebe prostora
+Leurs années dans cette pièce ¦ Njihove godine u ovoj prostoriji ¦ Njihova leta v tem prostoru
+années : 1890 – 1925 ¦ godine: 1890. – 1925. ¦ leta: 1890 – 1925
+🪜 Escalier ¦ 🪜 Stubište ¦ 🪜 Stopnišče
+✓ confortable (60 à 66 cm) ¦ ✓ udobno (60 do 66 cm) ¦ ✓ udobno (60 do 66 cm)
+⚠️ un peu raide : allonge l’escalier ou choisis un escalier tournant ¦ ⚠️ malo strmo: produži stubište ili odaberi zavojito stubište ¦ ⚠️ nekoliko strmo: podaljšaj stopnišče ali izberi zavito stopnišče
+⚠️ marches très longues : raccourcis l’escalier ¦ ⚠️ vrlo duge stube: skrati stubište ¦ ⚠️ zelo dolge stopnice: skrajšaj stopnišče
+Quart tournant ¦ Četvrtinski zavoj ¦ Četrtinski zavoj
+Vers la gauche ¦ Ulijevo ¦ V levo
+Vers la droite ¦ Udesno ¦ V desno
+Le haut devient le bas ¦ Vrh postaje dno ¦ Vrh postane dno
+⇅ Inverser le sens de montée ¦ ⇅ Obrni smjer penjanja ¦ ⇅ Obrni smer vzpenjanja
+Pas d’étage au-dessus : ajoute-le avec ＋ en haut. ¦ Nema kata iznad: dodaj ga s ＋ gore. ¦ Ni nadstropja zgoraj: dodaj ga z ＋ zgoraj.
+Pour les maisons dessinées avant : chaque escalier perce le plancher de l’étage du dessus ¦ Za ranije nacrtane kuće: svako stubište probija pod kata iznad ¦ Za prej narisane hiše: vsako stopnišče prebije pod nadstropja zgoraj
+Ouvrir les trémies de tous les escaliers ¦ Otvori otvore svih stubišta ¦ Odpri odprtine vseh stopnišč
+Du sol ¦ Od poda ¦ Od tal
+Les prochains objets de ce modèle seront posés à cette taille ¦ Sljedeći predmeti ovog modela bit će postavljeni u ovoj veličini ¦ Naslednji predmeti tega modela bodo postavljeni v tej velikosti
+💾 Garder pour ce modèle ¦ 💾 Zadrži za ovaj model ¦ 💾 Ohrani za ta model
+Le poser sur le meuble qui est dessous (table, commode, cheminée…) ¦ Postavi ga na komad namještaja ispod (stol, komoda, kamin…) ¦ Postavi ga na pohištvo spodaj (miza, predalnik, kamin…)
+⬆ Sur l’objet dessous ¦ ⬆ Na predmet ispod ¦ ⬆ Na predmet spodaj
+⬇ Au sol ¦ ⬇ Na pod ¦ ⬇ Na tla
+Plusieurs copies d’un coup : en ligne, en grille, ou en cercle autour d’un objet (6 chaises autour d’une table) ¦ Više kopija odjednom: u nizu, u mreži ili u krugu oko predmeta (6 stolica oko stola) ¦ Več kopij hkrati: v vrsti, v mreži ali v krogu okoli predmeta (6 stolov okoli mize)
+Pieds ¦ Noge ¦ Noge
+Pieds, poignées, filets, ferrures ¦ Noge, ručke, ukrasne letvice, okovi ¦ Noge, ročaji, okrasne letve, okovje
+Sans deuxième couleur ¦ Bez druge boje ¦ Brez druge barve
+Époque, style ¦ Razdoblje, stil ¦ Obdobje, slog
+Effets : pieds et détails ¦ Efekti: noge i detalji ¦ Učinki: noge in podrobnosti
+🏷 Souvenirs de cet objet ¦ 🏷 Uspomene ovog predmeta ¦ 🏷 Spomini tega predmeta
+Son histoire (objet de famille) ¦ Njegova priča (obiteljski predmet) ¦ Njegova zgodba (družinski predmet)
+Flèche vers un point ¦ Strelica prema točki ¦ Puščica proti točki
+Couleur de la flèche ¦ Boja strelice ¦ Barva puščice
+Police de départ ¦ Početni font ¦ Privzeta pisava
+Des versions de la maison selon les années ou des dates : la voir évoluer, rattacher une époque à un recensement ¦ Verzije kuće po godinama ili datumima: gledaj kako se mijenja, poveži razdoblje s popisom stanovništva ¦ Različice hiše po letih ali datumih: glej, kako se spreminja, poveži obdobje s popisom prebivalstva
+🕰 Époques ¦ 🕰 Razdoblja ¦ 🕰 Obdobja
+L’époque d’avant ¦ Prethodno razdoblje ¦ Prejšnje obdobje
+L’époque montrée (plan 2D et vue 3D) ¦ Prikazano razdoblje (2D nacrt i 3D prikaz) ¦ Prikazano obdobje (2D načrt in 3D pogled)
+L’époque d’après ¦ Sljedeće razdoblje ¦ Naslednje obdobje
+⋯ Gérer les époques… ¦ ⋯ Upravljaj razdobljima… ¦ ⋯ Upravljaj obdobja…
+▶ Voir évoluer : les époques l’une après l’autre ¦ ▶ Gledaj promjene: razdoblja jedno za drugim ¦ ▶ Oglej si spreminjanje: obdobja eno za drugim
+MAISON · ÉPOQUES ¦ KUĆA · RAZDOBLJA ¦ HIŠA · OBDOBJA
+MAISON ¦ KUĆA ¦ HIŠA
+Créer l’époque ¦ Stvori razdoblje ¦ Ustvari obdobje
+La maison telle qu’elle est dessinée maintenant devient la première époque : donne-lui un nom et une date. La nouvelle époque part d’une copie, que tu changes ensuite (une pièce ajoutée, un mur abattu, d’autres meubles…). ¦ Kuća onakva kakva je sada nacrtana postaje prvo razdoblje: daj joj naziv i datum. Novo razdoblje počinje od kopije koju zatim mijenjaš (dodana prostorija, srušen zid, drugi namještaj…). ¦ Hiša, kakor je zdaj narisana, postane prvo obdobje: daj ji ime in datum. Novo obdobje se začne s kopijo, ki jo nato spremeniš (dodan prostor, porušena stena, drugo pohištvo…).
+La maison dessinée maintenant ¦ Kuća kakva je sada nacrtana ¦ Hiša, kot je zdaj narisana
+Année ou date ¦ Godina ili datum ¦ Leto ali datum
+La nouvelle époque ¦ Novo razdoblje ¦ Novo obdobje
+ex. Après l’agrandissement ¦ npr. Nakon proširenja ¦ npr. Po povečavi
+Rattachée au recensement ¦ Povezano s popisom stanovništva ¦ Povezano s popisom prebivalstva
+Pour la rattacher à un recensement : onglet Maison → « 📋 Les recensements » → ＋ Un recensement. ¦ Za povezivanje s popisom: kartica Kuća → „📋 Popisi stanovništva” → ＋ Popis stanovništva. ¦ Za povezavo s popisom: zavihek Hiša → »📋 Popisi prebivalstva« → ＋ Popis prebivalstva.
+Donne un nom ou une date à cette époque. ¦ Daj naziv ili datum ovom razdoblju. ¦ Daj temu obdobju ime ali datum.
+Nouvelle époque créée (copie) : change ce qui était différent. « ‹ › » en haut pour passer d’une époque à l’autre. ¦ Novo razdoblje stvoreno (kopija): promijeni ono što je bilo drukčije. „‹ ›” gore za prelazak s jednog razdoblja na drugo. ¦ Novo obdobje ustvarjeno (kopija): spremeni, kar je bilo drugače. »‹ ›« zgoraj za prehod med obdobji.
+Époque supprimée ¦ Razdoblje izbrisano ¦ Obdobje izbrisano
+Crée au moins deux époques (＋ Nouvelle époque) pour voir la maison évoluer. ¦ Stvori barem dva razdoblja (＋ Novo razdoblje) da vidiš kako se kuća mijenja. ¦ Ustvari vsaj dve obdobji (＋ Novo obdobje), da vidiš, kako se hiša spreminja.
+＋ Un recensement ¦ ＋ Popis stanovništva ¦ ＋ Popis prebivalstva
+Recensements à rattacher ¦ Popisi za povezivanje ¦ Popisi za povezavo
+Ajouter aussi les personnes du foyer comme habitants ¦ Dodaj i članove kućanstva kao stanare ¦ Dodaj tudi člane gospodinjstva kot stanovalce
+À l’époque ¦ U razdoblju ¦ V obdobju
+Choisis au moins un recensement. ¦ Odaberi barem jedan popis. ¦ Izberi vsaj en popis.
+Clique sur un mur. ¦ Klikni na zid. ¦ Klikni steno.
+Une étiquette à flèche ¦ Oznaka sa strelicom ¦ Oznaka s puščico
+La note (ex. « Double vitrage posé en 1978 », « Ici était le puits ») ¦ Bilješka (npr. „Dvostruko staklo ugrađeno 1978.”, „Ovdje je bio bunar”) ¦ Opomba (npr. »Dvojna zasteklitev vgrajena leta 1978«, »Tukaj je bil vodnjak«)
+Étiquette à flèche ¦ Oznaka sa strelicom ¦ Oznaka s puščico
+Un texte sur le plan ¦ Tekst na nacrtu ¦ Besedilo na načrtu
+Le texte à écrire (nom d’une pièce, d’un lieu, une remarque…) ¦ Tekst za upis (naziv prostorije, mjesta, napomena…) ¦ Besedilo za vpis (ime prostora, kraja, pripomba…)
+Mur modifié ¦ Zid izmijenjen ¦ Stena spremenjena
+Pièce modifiée ¦ Prostorija izmijenjena ¦ Prostor spremenjen
+Flèche déplacée ¦ Strelica pomaknuta ¦ Puščica premaknjena
+Objet tourné ¦ Predmet okrenut ¦ Predmet zasukan
+Plan ancien déplacé ¦ Stari nacrt pomaknut ¦ Star načrt premaknjen
+Une pièce d’au moins 50 cm de côté. ¦ Prostorija od barem 50 cm po stranici. ¦ Prostor z vsaj 50 cm na stranico.
+Un vide d’au moins 40 cm de côté. ¦ Praznina od barem 40 cm po stranici. ¦ Praznina z vsaj 40 cm na stranico.
+Ce vide est à l’étage le plus bas : il n’ouvre sur rien. Pour une mezzanine, dessine le vide à l’étage du dessus. ¦ Ova praznina je na najnižem katu: ne gleda ni na što. Za galeriju nacrtaj prazninu na katu iznad. ¦ Ta praznina je v najnižjem nadstropju: ne odpira se nikamor. Za galerijo nariši praznino v nadstropju zgoraj.
+Choisis d’abord la pièce (le séjour) sur le plan. ¦ Najprije odaberi prostoriju (dnevni boravak) na nacrtu. ¦ Najprej izberi prostor (dnevno sobo) na načrtu.
+La pièce est un peu petite pour une mezzanine (au moins 2,5 m × 4 m). ¦ Prostorija je malo premala za galeriju (najmanje 2,5 m × 4 m). ¦ Prostor je nekoliko premajhen za galerijo (vsaj 2,5 m × 4 m).
+Clic : choisir · glisser : déplacer · poignées : allonger un mur, déformer une pièce · ⌫ : supprimer ¦ Klik: odaberi · povuci: pomakni · ručice: produži zid, preoblikuj prostoriju · ⌫: izbriši ¦ Klik: izberi · povleci: premakni · ročice: podaljšaj steno, preoblikuj prostor · ⌫: izbriši
+Glisser pour déplacer la vue ¦ Povuci za pomicanje prikaza ¦ Povleci za premik pogleda
+Glisse en diagonale : une pièce rectangulaire avec ses quatre murs (la surface s’affiche) ¦ Povuci dijagonalno: pravokutna prostorija s četiri zida (prikazuje se površina) ¦ Povleci diagonalno: pravokoten prostor s štirimi stenami (prikaže se površina)
+Glisse en diagonale : un vide sans plancher (mezzanine, double hauteur, trémie) ; un garde-corps se pose tout seul le long des bords sans mur ¦ Povuci dijagonalno: praznina bez poda (galerija, dvostruka visina, otvor stubišta); ograda se sama postavlja duž rubova bez zida ¦ Povleci diagonalno: praznina brez poda (galerija, dvojna višina, odprtina stopnišča); ograja se sama postavi ob robovih brez stene
+Un clic par coin (aimant : grille, coins, angles droits ; Alt : libre) · double-clic ou Entrée : finir · clic sur le 1er point : fermer (et créer la pièce) ¦ Jedan klik po kutu (privlačenje: mreža, kutovi, pravi kutovi; Alt: slobodno) · dvostruki klik ili Enter: završi · klik na 1. točku: zatvori (i stvori prostoriju) ¦ En klik na vogal (pripenjanje: mreža, vogali, pravi koti; Alt: prosto) · dvoklik ali Enter: končaj · klik na 1. točko: zapri (in ustvari prostor)
+Une pièce de forme libre (sans murs) : un clic par coin, double-clic pour finir ¦ Prostorija slobodnog oblika (bez zidova): jedan klik po kutu, dvostruki klik za kraj ¦ Prostor poljubne oblike (brez sten): en klik na vogal, dvoklik za konec
+Clic sur un mur : une porte (glisse-la ensuite le long du mur) ¦ Klik na zid: vrata (zatim ih povuci duž zida) ¦ Klik na steno: vrata (nato jih povleci vzdolž stene)
+Clic sur un mur : une fenêtre ¦ Klik na zid: prozor ¦ Klik na steno: okno
+Deux clics : une cote (la distance s’affiche) ¦ Dva klika: kota (prikazuje se udaljenost) ¦ Dva klika: kota (prikaže se razdalja)
+Clic : écrire un texte sur le plan ¦ Klik: upiši tekst na nacrt ¦ Klik: napiši besedilo na načrt
+Clic sur le point à montrer (le puits, une fenêtre…), puis clic là où écrire la note ¦ Klikni na točku koju želiš pokazati (bunar, prozor…), zatim klikni gdje želiš upisati bilješku ¦ Klikni točko, ki jo želiš pokazati (vodnjak, okno…), nato klikni, kam želiš napisati opombo
+largeur x profondeur (ex. 420 x 350, 4,2 x 3,5 m) ↵ ¦ širina x dubina (npr. 420 x 350, 4,2 x 3,5 m) ↵ ¦ širina x globina (npr. 420 x 350, 4,2 x 3,5 m) ↵
+longueur (cm, ou 3,5 m) puis @angle ↵ ¦ duljina (cm ili 3,5 m), zatim @kut ↵ ¦ dolžina (cm ali 3,5 m), nato @kot ↵
+Écris largeur x profondeur : 420 x 350 (cm) ou 4,2 x 3,5 m (50 cm au moins). ¦ Upiši širinu x dubinu: 420 x 350 (cm) ili 4,2 x 3,5 m (najmanje 50 cm). ¦ Vpiši širino x globino: 420 x 350 (cm) ali 4,2 x 3,5 m (vsaj 50 cm).
+Clique d’abord le point de départ sur le plan, puis tape la longueur. ¦ Najprije klikni početnu točku na nacrtu, zatim upiši duljinu. ¦ Najprej klikni začetno točko na načrtu, nato vpiši dolžino.
+Longueur incomprise : 350, 3,5 m, ou 350 @ 90 pour l’angle. ¦ Duljina nije shvaćena: 350, 3,5 m ili 350 @ 90 za kut. ¦ Dolžina ni razumljena: 350, 3,5 m ali 350 @ 90 za kot.
+Angle incompris (en degrés : 0 à droite, 90 en haut). ¦ Kut nije shvaćen (u stupnjevima: 0 udesno, 90 prema gore). ¦ Kot ni razumljen (v stopinjah: 0 v desno, 90 navzgor).
+Grille ¦ Mreža ¦ Mreža
+Coins des murs et des pièces ¦ Kutovi zidova i prostorija ¦ Vogali sten in prostorov
+Milieu des murs ¦ Sredina zidova ¦ Sredine sten
+Le long des murs (au cm) ¦ Duž zidova (na cm) ¦ Vzdolž sten (na cm)
+Alignements (lignes de rappel) ¦ Poravnanja (pomoćne crte) ¦ Poravnave (pomožne črte)
+Pas des angles ¦ Korak kutova ¦ Korak kotov
+Alt : aucun aimant (au mm près) · ⇧ : angles à 45° · flèches : décaler ce qui est choisi de 1 cm (⇧ : d’un pas de grille) · en traçant, tape la longueur au clavier. ¦ Alt: bez privlačenja (na mm) · ⇧: kutovi od 45° · strelice: pomakni odabrano za 1 cm (⇧: za korak mreže) · tijekom crtanja upiši duljinu tipkovnicom. ¦ Alt: brez pripenjanja (na mm natančno) · ⇧: koti po 45° · puščice: premakni izbrano za 1 cm (⇧: za korak mreže) · med risanjem vpiši dolžino s tipkovnico.
+Décalé ¦ Pomaknuto ¦ Premaknjeno
+Il faut un fichier OBJ, STL, GLB ou glTF. ¦ Potrebna je datoteka OBJ, STL, GLB ili glTF. ¦ Potrebna je datoteka OBJ, STL, GLB ali glTF.
+Lecture du modèle… ¦ Čitanje modela… ¦ Branje modela…
+Objet importé ¦ Predmet uvezen ¦ Predmet uvožen
+Objet 3D importé : il est aussi dans Mobilier → « Mes objets », pour toutes les maisons. ¦ 3D predmet uvezen: nalazi se i u Namještaj → „Moji predmeti”, za sve kuće. ¦ 3D predmet uvožen: najdeš ga tudi v Pohištvo → »Moji predmeti«, za vse hiše.
+Objet posé (vue de dessus) : règle sa taille réelle dans Propriétés. ¦ Predmet postavljen (pogled odozgo): podesi njegovu stvarnu veličinu u Svojstvima. ¦ Predmet postavljen (pogled od zgoraj): nastavi njegovo resnično velikost v Lastnostih.
+Envoi de l’image dans les médias… ¦ Slanje slike u medije… ¦ Pošiljanje slike med medije…
+MAISON · PLAN ANCIEN ¦ KUĆA · STARI NACRT ¦ HIŠA · STAR NAČRT
+Le plan à calquer ¦ Nacrt za precrtavanje ¦ Načrt za precrtavanje
+Un cadastre napoléonien, un plan ancien, un croquis… « 📁 Importer » en prend un sur l’ordinateur (il entre dans les médias). ¦ Napoleonski katastar, stari nacrt, skica… „📁 Uvezi” uzima jedan s računala (ulazi u medije). ¦ Napoleonski kataster, star načrt, skica… »📁 Uvozi« vzame enega iz računalnika (gre med medije).
+Poser ce plan ¦ Postavi ovaj nacrt ¦ Postavi ta načrt
+Cette image ne peut pas servir de plan. ¦ Ova slika ne može poslužiti kao nacrt. ¦ Ta slika ne more služiti kot načrt.
+Plan ancien posé ¦ Stari nacrt postavljen ¦ Star načrt postavljen
+📏 Clique les deux bouts d’une longueur connue sur le plan ancien (un mur, l’échelle dessinée) ¦ 📏 Klikni oba kraja poznate duljine na starom nacrtu (zid, nacrtano mjerilo) ¦ 📏 Klikni oba konca znane dolžine na starem načrtu (stena, narisano merilo)
+Les deux points sont trop proches. ¦ Dvije su točke preblizu. ¦ Točki sta preblizu.
+📏 Mettre le plan à l’échelle ¦ 📏 Postavi mjerilo nacrta ¦ 📏 Nastavi merilo načrta
+Mettre à l’échelle ¦ Postavi mjerilo ¦ Nastavi merilo
+Quelle est la vraie longueur entre ces deux points ? ¦ Kolika je stvarna duljina između ovih dviju točaka? ¦ Kolikšna je resnična dolžina med točkama?
+Le cadastre napoléonien est souvent au 1/2500 ou au 1/1250 ; les plans anciens comptent en toises (6 pieds, 1,949 m) et en pieds du roi (32,48 cm) : écris le nombre, la conversion se fait toute seule. ¦ Napoleonski katastar često je u mjerilu 1/2500 ili 1/1250; stari nacrti računaju u toise (6 stopa, 1,949 m) i kraljevskim stopama (32,48 cm): upiši broj, pretvorba se radi sama. ¦ Napoleonski kataster je pogosto v merilu 1/2500 ali 1/1250; stari načrti računajo v toise (6 čevljev, 1,949 m) in kraljevih čevljih (32,48 cm): vpiši število, pretvorba se naredi sama.
+Écris une longueur, par exemple 12 ou 3,5. ¦ Upiši duljinu, na primjer 12 ili 3,5. ¦ Vpiši dolžino, na primer 12 ali 3,5.
+Plan ancien mis à l’échelle ¦ Stari nacrt stavljen u mjerilo ¦ Merilo starega načrta nastavljeno
+↻ Clique deux points le long d’un mur du plan ancien : il deviendra droit ¦ ↻ Klikni dvije točke duž zida starog nacrta: postat će ravan ¦ ↻ Klikni dve točki vzdolž stene starega načrta: postala bo ravna
+Ce mur est déjà droit. ¦ Ovaj je zid već ravan. ¦ Ta stena je že ravna.
+↻ Redresser ¦ ↻ Izravnaj ¦ ↻ Poravnaj
+✥ Déplacer ¦ ✥ Pomakni ¦ ✥ Premakni
+✏️ Décalque : un clic par coin de mur, en suivant le plan ancien · double-clic ou Entrée pour finir un mur · ⬚ pour une pièce entière ¦ ✏️ Precrtavanje: jedan klik po kutu zida, prateći stari nacrt · dvostruki klik ili Enter za kraj zida · ⬚ za cijelu prostoriju ¦ ✏️ Precrtavanje: en klik na vogal stene, po starem načrtu · dvoklik ali Enter za konec stene · ⬚ za cel prostor
+Photo, document ¦ Fotografija, dokument ¦ Fotografija, dokument
+Récit ¦ Priča ¦ Zgodba
+Souvenir de famille ¦ Obiteljska uspomena ¦ Družinski spomin
+Objet de famille ¦ Obiteljski predmet ¦ Družinski predmet
+Voir ce souvenir ¦ Pogledaj ovu uspomenu ¦ Oglej si ta spomin
+Retirer ce souvenir (sans le supprimer de la base) ¦ Ukloni ovu uspomenu (bez brisanja iz baze) ¦ Odstrani ta spomin (brez brisanja iz baze)
+Aucun souvenir rattaché : une photo, un récit, une personne… ¦ Nijedna uspomena nije povezana: fotografija, priča, osoba… ¦ Noben spomin ni povezan: fotografija, zgodba, oseba…
+Aucun souvenir ne correspond. ¦ Nijedna uspomena ne odgovara. ¦ Noben spomin se ne ujema.
+Aucun souvenir de famille pour l’instant ¦ Zasad nema obiteljskih uspomena ¦ Zaenkrat ni družinskih spominov
+Essaie un autre mot. ¦ Pokušaj drugu riječ. ¦ Poskusi z drugo besedo.
+Listes → Mémoire familiale (recettes, expressions, chansons…) ou Objets de famille. ¦ Popisi → Obiteljsko sjećanje (recepti, izrazi, pjesme…) ili Obiteljski predmeti. ¦ Seznami → Družinski spomin (recepti, izrazi, pesmi…) ali Družinski predmeti.
+MAISON · SOUVENIRS ¦ KUĆA · USPOMENE ¦ HIŠA · SPOMINI
+📜 Un souvenir de famille ¦ 📜 Obiteljska uspomena ¦ 📜 Družinski spomin
+Chercher… (recette, montre, surnom) ¦ Traži… (recept, sat, nadimak) ¦ Išči… (recept, ura, vzdevek)
+Chercher un souvenir ¦ Traži uspomenu ¦ Išči spomin
+Choisis d’abord un meuble, un objet ou une pièce. ¦ Najprije odaberi komad namještaja, predmet ili prostoriju. ¦ Najprej izberi kos pohištva, predmet ali prostor.
+🖼 Une photo, un document ¦ 🖼 Fotografija, dokument ¦ 🖼 Fotografija, dokument
+pris dans les médias (ou importé depuis l’ordinateur) ¦ uzeto iz medija (ili uvezeno s računala) ¦ vzeto iz medijev (ali uvoženo iz računalnika)
+✍ Un récit ¦ ✍ Priča ¦ ✍ Zgodba
+ce qui s’est passé ici, ce qu’on en raconte ¦ što se ovdje dogodilo, što se o tome priča ¦ kaj se je tu zgodilo, kaj se o tem pripoveduje
+👤 Une personne ¦ 👤 Osoba ¦ 👤 Oseba
+qui a vécu ici, qui s’en servait ¦ koja je ovdje živjela, koja se time služila ¦ ki je tu živela, ki je to uporabljala
+une recette, une expression, un objet de famille… ¦ recept, izraz, obiteljski predmet… ¦ recept, izraz, družinski predmet…
+ex. La veillée de Noël 1912 ¦ npr. Badnja večer 1912. ¦ npr. Sveti večer 1912
+Ce qui s’est passé ici, ce qu’on en raconte… ¦ Što se ovdje dogodilo, što se o tome priča… ¦ Kaj se je tu zgodilo, kaj se o tem pripoveduje…
+Le récit ¦ Priča ¦ Zgodba
+Écris un titre ou un récit. ¦ Upiši naslov ili priču. ¦ Napiši naslov ali zgodbo.
+Souvenir rattaché ¦ Uspomena povezana ¦ Spomin povezan
+Ce média n’existe plus. ¦ Ovaj medij više ne postoji. ¦ Ta medij ne obstaja več.
+La maison non enregistrée sera perdue (💾 d’abord). ¦ Nespremljena kuća bit će izgubljena (najprije 💾). ¦ Neshranjena hiša bo izgubljena (najprej 💾).
+Ouvrir la fiche ? ¦ Otvoriti zapis? ¦ Odprem zapis?
+les aimants, la grille, l’épaisseur des murs, la hauteur des yeux et la lumière ¦ privlačenje, mreža, debljina zidova, visina očiju i svjetlo ¦ pripenjanje, mreža, debelina sten, višina oči in svetloba
+Fichier prêt : il s’importe dans 🧲 Aimants → « ⤒ Importer ». ¦ Datoteka spremna: uvozi se u 🧲 Privlačenje → „⤒ Uvezi”. ¦ Datoteka pripravljena: uvozi se v 🧲 Pripenjanje → »⤒ Uvozi«.
+Ce fichier n’est pas lisible (il faut un fichier .json de réglage). ¦ Ova datoteka nije čitljiva (potrebna je .json datoteka postavki). ¦ Te datoteke ni mogoče prebrati (potrebna je datoteka nastavitev .json).
+Ce fichier n’est pas un réglage LCNDA (⤓ Exporter un réglage, dans un outil). ¦ Ova datoteka nije LCNDA postavka (⤓ Izvezi postavku, u alatu). ¦ Ta datoteka ni nastavitev LCNDA (⤓ Izvozi nastavitev, v orodju).
+Le plan de cet étage est vide. ¦ Nacrt ovog kata je prazan. ¦ Načrt tega nadstropja je prazen.
+le plan de l’étage ¦ nacrt kata ¦ načrt nadstropja
+le plan, plus léger ¦ nacrt, manja datoteka ¦ načrt, manjša datoteka
+le plan sur une page A4 ¦ nacrt na stranici A4 ¦ načrt na strani A4
+le plan, en dessin ¦ nacrt kao crtež ¦ načrt kot risba
+le plan, tout de suite ¦ nacrt, odmah ¦ načrt, takoj
+le plan de l’étage pour AutoCAD, LibreCAD… (calques, en cm) ¦ nacrt kata za AutoCAD, LibreCAD… (slojevi, u cm) ¦ načrt nadstropja za AutoCAD, LibreCAD… (sloji, v cm)
+image de la vue 3D ¦ slika 3D prikaza ¦ slika 3D pogleda
+🧊 Vue 3D ¦ 🧊 3D prikaz ¦ 🧊 3D pogled
+💾 Fichier de la maison ¦ 💾 Datoteka kuće ¦ 💾 Datoteka hiše
+à réimporter (⤒ Importer) ¦ za ponovni uvoz (⤒ Uvezi) ¦ za ponoven uvoz (⤒ Uvozi)
+Ce fichier DXF n’est pas lisible. ¦ Ova DXF datoteka nije čitljiva. ¦ Te datoteke DXF ni mogoče prebrati.
+Aucun trait trouvé dans ce DXF (un DXF « binaire » ne se lit pas : enregistre-le en DXF texte, ASCII). ¦ U ovom DXF-u nije pronađena nijedna crta („binarni” DXF ne može se čitati: spremi ga kao tekstualni DXF, ASCII). ¦ V tem DXF ni nobene črte (»binarnega« DXF ni mogoče prebrati: shrani ga kot besedilni DXF, ASCII).
+MAISON · IMPORT DXF ¦ KUĆA · UVOZ DXF ¦ HIŠA · UVOZ DXF
+Importer le plan ¦ Uvezi nacrt ¦ Uvozi načrt
+Unité du dessin ¦ Jedinica crteža ¦ Enota risbe
+Épaisseur des murs ¦ Debljina zidova ¦ Debelina sten
+Où le mettre ¦ Gdje ga staviti ¦ Kam ga postaviti
+Un nouvel étage ¦ Novi kat ¦ Novo nadstropje
+Calques à prendre ¦ Slojevi za preuzimanje ¦ Sloji za prevzem
+Un plan exporté d’ici : ses murs sont repris par leur axe (MURS_AXES). ¦ Nacrt izvezen odavde: njegovi se zidovi preuzimaju po osi (MURS_AXES). ¦ Načrt, izvožen od tu: njegove stene se prevzamejo po osi (MURS_AXES).
+Un plan d’architecte dessine souvent chaque mur avec deux traits : garde une petite épaisseur, ou décoche les calques de meubles, de cotes et de hachures. ¦ Arhitektonski nacrt često crta svaki zid s dvije crte: zadrži malu debljinu ili isključi slojeve namještaja, kota i šrafura. ¦ Arhitektov načrt pogosto nariše vsako steno z dvema črtama: ohrani majhno debelino ali odznači sloje pohištva, kot in šrafur.
+Coche au moins un calque. ¦ Označi barem jedan sloj. ¦ Označi vsaj en sloj.
+Rien à reprendre dans ces calques. ¦ Ništa za preuzeti u ovim slojevima. ¦ V teh slojih ni ničesar za prevzem.
+Plan importé ¦ Uvezeni nacrt ¦ Uvožen načrt
+Plan DXF importé ¦ DXF nacrt uvezen ¦ Načrt DXF uvožen
+Nombre en tout ¦ Ukupan broj ¦ Skupno število
+Espace entre deux ¦ Razmak između dva ¦ Razmik med dvema
+Pas la place sur ce mur : moins d’espace, ou déplace la première vers le début du mur. ¦ Nema mjesta na ovom zidu: manji razmak ili pomakni prvi prema početku zida. ¦ Na tej steni ni prostora: manjši razmik ali premakni prvega proti začetku stene.
+Répété ¦ Ponovljeno ¦ Ponovljeno
+Choisis d’abord un objet, une porte ou une fenêtre. ¦ Najprije odaberi predmet, vrata ili prozor. ¦ Najprej izberi predmet, vrata ali okno.
+En ligne ¦ U nizu ¦ V vrsti
+En grille (rangées) ¦ U mreži (redovi) ¦ V mreži (vrste)
+En cercle (autour d’un objet) ¦ U krugu (oko predmeta) ¦ V krogu (okoli predmeta)
+Sens (en ligne) ¦ Smjer (u nizu) ¦ Smer (v vrsti)
+→ vers la droite ¦ → udesno ¦ → v desno
+↓ vers le bas ¦ ↓ prema dolje ¦ ↓ navzdol
+← vers la gauche ¦ ← ulijevo ¦ ← v levo
+↑ vers le haut ¦ ↑ prema gore ¦ ↑ navzgor
+Par rangée (en grille) ¦ Po redu (u mreži) ¦ Na vrsto (v mreži)
+Autour de (en cercle) ¦ Oko (u krugu) ¦ Okoli (v krogu)
+Un point, au rayon ci-dessous ¦ Točka, s polumjerom ispod ¦ Točka, s polmerom spodaj
+Rayon (si autour d’un point) ¦ Polumjer (ako je oko točke) ¦ Polmer (če okoli točke)
+En cercle : place d’abord un seul objet (une chaise) à sa place autour de la table, choisis-le, puis répète : les copies tournent autour de la table et regardent vers elle, comme la première. ¦ U krugu: najprije postavi jedan predmet (stolicu) na njegovo mjesto oko stola, odaberi ga, zatim ponovi: kopije se okreću oko stola i gledaju prema njemu, kao i prva. ¦ V krogu: najprej postavi en predmet (stol) na njegovo mesto ob mizi, ga izberi, nato ponovi: kopije se razporedijo okoli mize in so obrnjene proti njej, kot prva.
+Ce fichier n’est pas lisible. ¦ Ova datoteka nije čitljiva. ¦ Te datoteke ni mogoče prebrati.
+Ce fichier n’est pas une maison LCNDA (⤓ Exporter → 💾 Fichier de la maison). ¦ Ova datoteka nije LCNDA kuća (⤓ Izvezi → 💾 Datoteka kuće). ¦ Ta datoteka ni hiša LCNDA (⤓ Izvozi → 💾 Datoteka hiše).
+Le plan dessiné ici sera remplacé par celui du fichier (↶ pour revenir en arrière). ¦ Nacrt nacrtan ovdje bit će zamijenjen onim iz datoteke (↶ za povratak). ¦ Tu narisani načrt bo zamenjan z načrtom iz datoteke (↶ za vrnitev).
+Remplacer le plan par celui du fichier ? ¦ Zamijeniti nacrt onim iz datoteke? ¦ Zamenjam načrt z načrtom iz datoteke?
+Remplacer le plan ¦ Zamijeni nacrt ¦ Zamenjaj načrt
+Maison importée ¦ Kuća uvezena ¦ Hiša uvožena
+Dépose une image, un objet 3D (OBJ, STL, glTF, GLB) ou un fichier de maison. ¦ Ispusti sliku, 3D predmet (OBJ, STL, glTF, GLB) ili datoteku kuće. ¦ Spusti sliko, 3D predmet (OBJ, STL, glTF, GLB) ali datoteko hiše.
+📁 Que faire de cette image ? ¦ 📁 Što učiniti s ovom slikom? ¦ 📁 Kaj narediti s to sliko?
+🖼 L’image de ce tableau, de ce cadre ¦ 🖼 Slika za ovu sliku, ovaj okvir ¦ 🖼 Slika za to sliko, ta okvir
+posée sur l’objet choisi, en 2D et en 3D ¦ postavljena na odabrani predmet, u 2D i 3D ¦ postavljena na izbrani predmet, v 2D in 3D
+📐 Un plan ancien, un cadastre, à calquer ¦ 📐 Stari nacrt, katastar, za precrtavanje ¦ 📐 Star načrt, kataster, za precrtavanje
+posé en fond, à mettre à l’échelle ¦ postavljen u pozadinu, za stavljanje u mjerilo ¦ postavljen v ozadje, za nastavitev merila
+🖼 Un objet vu de dessus ¦ 🖼 Predmet viđen odozgo ¦ 🖼 Predmet, viden od zgoraj
+posé sur le plan comme un meuble ¦ postavljen na nacrt kao komad namještaja ¦ postavljen na načrt kot pohištvo
+🏷 Un souvenir pour ce qui est choisi ¦ 🏷 Uspomena za odabrano ¦ 🏷 Spomin za izbrano
+rattaché au meuble ou à la pièce ¦ povezana s namještajem ili prostorijom ¦ povezan s pohištvom ali prostorom
+Construction de la maison en 3D… ¦ Izgradnja kuće u 3D… ¦ Gradnja hiše v 3D…
+Vue 3D indisponible. ¦ 3D prikaz nije dostupan. ¦ 3D pogled ni na voljo.
+Glisser : tourner · clic droit ou ⇧ glisser : déplacer · molette : approcher · ☀️ Lumière : l’heure et la saison · 🚶 Visiter : Z Q S D ou flèches · ✦ : un souvenir ¦ Povuci: okreni · desni klik ili ⇧ povuci: pomakni · kotačić: približi · ☀️ Svjetlo: sat i godišnje doba · 🚶 Obiđi: Z Q S D ili strelice · ✦: uspomena ¦ Povleci: zavrti · desni klik ali ⇧ povleci: premakni · kolešček: približaj · ☀️ Svetloba: ura in letni čas · 🚶 Ogled: Z Q S D ali puščice · ✦: spomin
+Les dernières modifications de la maison seront perdues. ¦ Posljednje izmjene kuće bit će izgubljene. ¦ Zadnje spremembe hiše bodo izgubljene.
+Fermer sans enregistrer la maison ? ¦ Zatvoriti bez spremanja kuće? ¦ Zaprem brez shranjevanja hiše?
+Supprimé ¦ Izbrisano ¦ Izbrisano
+Dupliqué ¦ Udvostručeno ¦ Podvojeno
+Sens de l’escalier ¦ Smjer stubišta ¦ Smer stopnišča
+Tous les escaliers ouvrent déjà le plancher. ¦ Sva stubišta već otvaraju pod. ¦ Vsa stopnišča že odpirajo pod.
+Verrière ajoutée ¦ Stakleni krov dodan ¦ Steklena streha dodana
+Édicule ajouté ¦ Krovna kućica (izlaz) dodana ¦ Strešni objekt dodan
+Lanterneau ajouté ¦ Krovni svjetlarnik dodan ¦ Strešna svetloba dodana
+Fenêtre de toit ajoutée ¦ Krovni prozor dodan ¦ Strešno okno dodano
+Lucarne ajoutée ¦ Krovna kućica dodana ¦ Frčada dodana
+Chien-assis ajouté ¦ Ravna krovna kućica dodana ¦ Ravna frčada dodana
+✓ Elle se voit dans la vue 3D, avec le toit. ¦ ✓ Vidi se u 3D prikazu, s krovom. ¦ ✓ Vidna je v 3D pogledu, s streho.
+Retiré du toit ¦ Uklonjeno s krova ¦ Odstranjeno s strehe
+Fenêtre de toit ou lucarne retirée ¦ Krovni prozor ili krovna kućica uklonjeni ¦ Strešno okno ali frčada odstranjena
+Rien sous cet objet : glisse-le d’abord au-dessus du meuble (une table, une commode…). ¦ Ništa ispod ovog predmeta: najprije ga povuci iznad komada namještaja (stol, komoda…). ¦ Pod tem predmetom ni ničesar: najprej ga povleci nad pohištvo (miza, predalnik…).
+Taille hors limites (de 1 cm à 50 m). ¦ Veličina izvan granica (od 1 cm do 50 m). ¦ Velikost zunaj meja (od 1 cm do 50 m).
+Agrandi ¦ Povećano ¦ Povečano
+Réduit ¦ Smanjeno ¦ Pomanjšano
+Taille gardée pour ce modèle : les prochains seront posés comme celui-ci. ¦ Veličina zadržana za ovaj model: sljedeći će se postaviti kao ovaj. ¦ Velikost ohranjena za ta model: naslednji bodo postavljeni kot ta.
+Sens d’ouverture ¦ Smjer otvaranja ¦ Smer odpiranja
+Côté d’ouverture ¦ Strana otvaranja ¦ Stran odpiranja
+Mur coupé ¦ Zid prerezan ¦ Stena razdeljena
+＋ Un étage ¦ ＋ Kat ¦ ＋ Nadstropje
+Hauteur sous plafond ¦ Visina stropa ¦ Višina stropa
+Gérer les étages… ¦ Upravljaj katovima… ¦ Upravljaj nadstropja…
+Renommer, hauteur sous plafond, supprimer ¦ Preimenuj, visina stropa, izbriši ¦ Preimenuj, višina stropa, izbriši
+Ajouter un étage… ¦ Dodaj kat… ¦ Dodaj nadstropje…
+Les étages ¦ Katovi ¦ Nadstropja
+Du plus haut au plus bas. Renomme, change la hauteur, ou supprime un étage (avec tout ce qu’il contient). ¦ Od najvišeg do najnižeg. Preimenuj, promijeni visinu ili izbriši kat (sa svime što sadrži). ¦ Od najvišjega do najnižjega. Preimenuj, spremeni višino ali izbriši nadstropje (z vsem, kar je na njem).
+Niveau ¦ Razina ¦ Raven
+Il faut au moins un étage. ¦ Potreban je barem jedan kat. ¦ Potrebno je vsaj eno nadstropje.
+{names} supprimés avec ce qu’ils contenaient ¦ {names} izbrisani sa sadržajem ¦ {names} izbrisana z vsebino
+{names} supprimé avec ce qu’il contenait ¦ {names} izbrisan sa sadržajem ¦ {names} izbrisano z vsebino
+Étage supprimé ¦ Kat izbrisan ¦ Nadstropje izbrisano
+Étage renommé ¦ Kat preimenovan ¦ Nadstropje preimenovano
+Renommer l’étage ¦ Preimenuj kat ¦ Preimenuj nadstropje
+✥ Glisse le plan ancien (sur un endroit vide du plan) ; reclique « ✥ Déplacer » pour finir. ¦ ✥ Povuci stari nacrt (na prazno mjesto nacrta); ponovno klikni „✥ Pomakni” za kraj. ¦ ✥ Povleci star načrt (na prazno mesto načrta); za konec znova klikni »✥ Premakni«.
+Plan ancien retiré ¦ Stari nacrt uklonjen ¦ Star načrt odstranjen
+Plan ancien retiré du fond (l’image reste dans les médias) ¦ Stari nacrt uklonjen iz pozadine (slika ostaje u medijima) ¦ Star načrt odstranjen iz ozadja (slika ostane med mediji)
+Plan ancien sous cet étage ¦ Stari nacrt ispod ovog kata ¦ Star načrt pod tem nadstropjem
+Plan ancien ¦ Stari nacrt ¦ Star načrt
+Plan ancien verrouillé ¦ Stari nacrt zaključan ¦ Star načrt zaklenjen
+Plan ancien déverrouillé ¦ Stari nacrt otključan ¦ Star načrt odklenjen
+Un habitant de la maison ¦ Stanar kuće ¦ Stanovalec hiše
+Habitant ajouté ¦ Stanar dodan ¦ Stanovalec dodan
+Habitant retiré ¦ Stanar uklonjen ¦ Stanovalec odstranjen
+Une personne liée à cette pièce ¦ Osoba povezana s ovom prostorijom ¦ Oseba, povezana s tem prostorom
+Personne liée à la pièce ¦ Osoba povezana s prostorijom ¦ Oseba, povezana s prostorom
+Le plan est vide. ¦ Nacrt je prazan. ¦ Načrt je prazen.
+Fenêtre bloquée. ¦ Prozor blokiran. ¦ Okno blokirano.
+Ce recensement n’est relié à aucune fiche. ¦ Ovaj popis nije povezan ni s jednim zapisom. ¦ Ta popis ni povezan z nobenim zapisom.
+Recensement retiré ¦ Popis uklonjen ¦ Popis odstranjen
+Personne retirée ¦ Osoba uklonjena ¦ Oseba odstranjena
+Souvenir retiré ¦ Uspomena uklonjena ¦ Spomin odstranjen
+Légende des époques ¦ Legenda razdoblja ¦ Legenda obdobij
+Personnes de la pièce ¦ Osobe iz prostorije ¦ Osebe prostora
+Flèche ajoutée ¦ Strelica dodana ¦ Puščica dodana
+Flèche retirée ¦ Strelica uklonjena ¦ Puščica odstranjena
+Lumière ¦ Svjetlo ¦ Svetloba
+Années de la personne ¦ Godine osobe ¦ Leta osebe
+Recensement rattaché à l’époque ¦ Popis povezan s razdobljem ¦ Popis povezan z obdobjem
+Revêtement du mur ¦ Obloga zida ¦ Obloga stene
+Murs de la pièce ¦ Zidovi prostorije ¦ Stene prostora
+Autre époque en 3D ¦ Drugo razdoblje u 3D ¦ Drugo obdobje v 3D
+📍 Un arrêt de la visite guidée ¦ 📍 Postaja vođenog obilaska ¦ 📍 Postanek vodenega ogleda
+Ce qu’on dit ici (lu à voix haute pendant la visite guidée) : ¦ Što se ovdje govori (čita se naglas tijekom vođenog obilaska): ¦ Kaj se pove tukaj (prebrano na glas med vodenim ogledom):
+Ici, la salle commune : on y veillait l’hiver… ¦ Ovdje je dnevna soba: zimi su se ovdje okupljali navečer… ¦ Tukaj je skupni prostor: pozimi so se tu zbirali zvečer…
+Ajouter l’arrêt ¦ Dodaj postaju ¦ Dodaj postanek
+MAISON · PHOTO D’ÉPOQUE ¦ KUĆA · STARA FOTOGRAFIJA ¦ HIŠA · STARA FOTOGRAFIJA
+La photo prise d’ici ¦ Fotografija snimljena odavde ¦ Fotografija, posneta od tu
+La photo ancienne prise à cet endroit, dans cette direction : tu pourras la comparer avec la maison (curseur Autrefois ⟷ Aujourd’hui). ¦ Stara fotografija snimljena na ovom mjestu, u ovom smjeru: moći ćeš je usporediti s kućom (klizač Nekad ⟷ Danas). ¦ Stara fotografija, posneta na tem mestu, v tej smeri: lahko jo primerjaš s hišo (drsnik Nekoč ⟷ Danes).
+Poser la photo ¦ Postavi fotografiju ¦ Postavi fotografijo
+Cette image ne peut pas servir ici. ¦ Ova slika ne može se ovdje koristiti. ¦ Te slike tukaj ni mogoče uporabiti.
+Photo d’époque ¦ Stara fotografija ¦ Stara fotografija
+Photo d’époque posée ¦ Stara fotografija postavljena ¦ Stara fotografija postavljena
+Le nord du plan : clic pour le régler (☀️ Orientation et lumière) ¦ Sjever nacrta: klikni za podešavanje (☀️ Orijentacija i svjetlo) ¦ Sever načrta: klikni za nastavitev (☀️ Orientacija in svetloba)
+Aucune maison ne correspond. ¦ Nijedna kuća ne odgovara. ¦ Nobena hiša se ne ujema.
+Époques ¦ Razdoblja ¦ Obdobja
+🏰 Notice Mérimée (patrimoine)… ¦ 🏰 Zapis Mérimée (baština)… ¦ 🏰 Zapis Mérimée (dediščina)…
+🏠 Maisons ¦ 🏠 Kuće ¦ 🏠 Hiše
+Les plans des maisons de la famille, en 2D et en 3D : leurs pièces, leurs meubles, leurs habitants, leurs recensements, leurs époques et leurs souvenirs. ¦ Nacrti obiteljskih kuća, u 2D i 3D: njihove prostorije, namještaj, stanari, popisi stanovništva, razdoblja i uspomene. ¦ Načrti družinskih hiš v 2D in 3D: njihovi prostori, pohištvo, stanovalci, popisi prebivalstva, obdobja in spomini.
+Renommer la maison ¦ Preimenuj kuću ¦ Preimenuj hišo
+Ouvrir la maison ¦ Otvori kuću ¦ Odpri hišo
+↗ Ouvrir la maison ¦ ↗ Otvori kuću ¦ ↗ Odpri hišo
+Cette maison est déjà rattachée. ¦ Ova je kuća već povezana. ¦ Ta hiša je že povezana.
+🏠 Maison ¦ 🏠 Kuća ¦ 🏠 Hiša
+Enregistre d’abord le recensement : tu pourras ensuite lui rattacher la maison où vivait le foyer (et l’époque de la maison). ¦ Najprije spremi popis: zatim ćeš moći povezati kuću u kojoj je živjelo kućanstvo (i razdoblje kuće). ¦ Najprej shrani popis: nato mu lahko povežeš hišo, v kateri je živelo gospodinjstvo (in obdobje hiše).
+Détacher la maison de ce recensement ¦ Odvoji kuću od ovog popisa ¦ Odstrani hišo s tega popisa
+Relier une maison : nom, lieu… ¦ Poveži kuću: naziv, mjesto… ¦ Poveži hišo: ime, kraj…
+Époque de la maison ¦ Razdoblje kuće ¦ Obdobje hiše
+Dessiner la maison de ce foyer ¦ Nacrtaj kuću ovog kućanstva ¦ Nariši hišo tega gospodinjstva
+Rattachée tout de suite (sans attendre « Enregistrer »). Dans la maison : onglet Maison → « 📋 Les recensements ». ¦ Povezano odmah (bez čekanja na „Spremi”). U kući: kartica Kuća → „📋 Popisi stanovništva”. ¦ Povezano takoj (brez čakanja na »Shrani«). V hiši: zavihek Hiša → »📋 Popisi prebivalstva«.
+— époque de la maison — ¦ — razdoblje kuće — ¦ — obdobje hiše —
+Le recensement a des changements non enregistrés. ¦ Popis ima nespremljene promjene. ¦ Popis ima neshranjene spremembe.
+Ouvrir la maison quand même ? ¦ Ipak otvoriti kuću? ¦ Vseeno odprem hišo?
+Maison détachée du recensement. ¦ Kuća odvojena od popisa. ¦ Hiša odstranjena s popisa.
+Choisis une maison. ¦ Odaberi kuću. ¦ Izberi hišo.
+Maison rattachée au recensement. ¦ Kuća povezana s popisom. ¦ Hiša povezana s popisom.
+La longueur et la largeur de tout l’étage, sous le plan et à sa gauche (en plus des cotes de chaque mur). ¦ Duljina i širina cijelog kata, ispod nacrta i lijevo od njega (uz kote svakog zida). ¦ Dolžina in širina celega nadstropja, pod načrtom in levo od njega (poleg kot vsake stene).
+Un tableau posé à droite du plan : chaque pièce et sa surface, et le total. Il se met à jour tout seul et part avec le plan (image, PDF, impression). ¦ Tablica desno od nacrta: svaka prostorija i njezina površina te ukupno. Sama se ažurira i ide s nacrtom (slika, PDF, ispis). ¦ Tabela desno od načrta: vsak prostor in njegova površina ter skupaj. Sama se posodablja in gre z načrtom (slika, PDF, tisk).
+Le cadre en bas à droite des vrais plans : le nom de la maison, le lieu, l’époque, l’étage et la date du jour. ¦ Okvir dolje desno na pravim nacrtima: naziv kuće, mjesto, razdoblje, kat i današnji datum. ¦ Okvir spodaj desno na pravih načrtih: ime hiše, kraj, obdobje, nadstropje in današnji datum.
+Le plan en clair sur fond sombre, comme dans un logiciel de dessin technique. Seulement à l’écran : les images, PDF et impressions restent sur fond blanc. ¦ Nacrt svijetlim crtama na tamnoj pozadini, kao u programu za tehničko crtanje. Samo na zaslonu: slike, PDF-ovi i ispisi ostaju na bijeloj pozadini. ¦ Načrt s svetlimi črtami na temnem ozadju, kot v programu za tehnično risanje. Samo na zaslonu: slike, PDF-ji in natisi ostanejo na belem ozadju.
+L’étage du dessous (ou du dessus) apparaît en transparence sous celui-ci : pratique pour poser les murs du 1er étage juste au-dessus de ceux du rez-de-chaussée. 🕰 Une autre époque : le même étage, tel qu’il était (ou sera), en sépia. ¦ Kat ispod (ili iznad) vidi se prozirno ispod ovoga: praktično za postavljanje zidova 1. kata točno iznad zidova prizemlja. 🕰 Drugo razdoblje: isti kat, kakav je bio (ili će biti), u sepiji. ¦ Nadstropje spodaj (ali zgoraj) je prosojno vidno pod tem: priročno za postavitev sten 1. nadstropja točno nad stenami pritličja. 🕰 Drugo obdobje: isto nadstropje, kakršno je bilo (ali bo), v sepiji.
+Clique les deux bouts d’une longueur connue sur l’image (un mur, l’échelle du plan), puis donne sa vraie longueur : en mètres, ou en toises et pieds anciens (convertis tout seuls). ¦ Klikni oba kraja poznate duljine na slici (zid, mjerilo nacrta), zatim upiši njezinu stvarnu duljinu: u metrima ili u starim toise i stopama (pretvaraju se sami). ¦ Klikni oba konca znane dolžine na sliki (stena, merilo načrta), nato vpiši resnično dolžino: v metrih ali v starih toise in čevljih (pretvorijo se sami).
+Le plafond suit la pente du toit (vue 3D, coupe, visite) ; la surface « loi Carrez » ne compte que là où la hauteur fait au moins 1,80 m. ¦ Strop prati kosinu krova (3D prikaz, presjek, obilazak); površina „po zakonu Carrez” računa se samo gdje je visina barem 1,80 m. ¦ Strop sledi naklonu strehe (3D pogled, prerez, ogled); površina »po zakonu Carrez« šteje le tam, kjer je višina vsaj 1,80 m.
+Le mur bas sous la pente (le « jambage ») : 0 si le toit part du plancher, 100 cm souvent. ¦ Niski zid ispod kosine (nadozid): 0 ako krov kreće od poda, često 100 cm. ¦ Nizka stena pod poševnino (kolenčni zid): 0, če se streha začne pri tleh, pogosto 100 cm.
+Pour une maison en L, en T ou en U : un toit par aile, à la même pente ; les noues (là où deux toits se rejoignent) se font toutes seules. Les ailes suivent les pièces de l’étage du haut. ¦ Za kuću u obliku L, T ili U: jedan krov po krilu, istog nagiba; uvale (gdje se dva krova spajaju) nastaju same. Krila prate prostorije najvišeg kata. ¦ Za hišo v obliki L, T ali U: ena streha na krilo, z enakim naklonom; žlote (kjer se strehi stikata) nastanejo same. Krila sledijo prostorom najvišjega nadstropja.
+Tourne le plan par rapport au nord : 0° = le haut du plan est au nord, 90° = le haut du plan regarde l’est. Le soleil et les ombres de la vue 3D suivent. ¦ Okreće nacrt u odnosu na sjever: 0° = vrh nacrta je na sjeveru, 90° = vrh nacrta gleda na istok. Sunce i sjene 3D prikaza prate. ¦ Zasuka načrt glede na sever: 0° = vrh načrta je na severu, 90° = vrh načrta gleda proti vzhodu. Sonce in sence 3D pogleda sledijo.
+La hauteur de tes yeux pendant la visite (🚶 Visiter, vue 3D) : 1,60 m pour un adulte, 1 m pour voir comme un enfant. ¦ Visina tvojih očiju tijekom obilaska (🚶 Obiđi, 3D prikaz): 1,60 m za odraslu osobu, 1 m da vidiš kao dijete. ¦ Višina tvojih oči med ogledom (🚶 Ogled, 3D pogled): 1,60 m za odraslega, 1 m, da vidiš kot otrok.
+La hauteur de tes yeux dans la maison : 1,60 m pour un adulte, 1 m pour voir comme un enfant. ¦ Visina tvojih očiju u kući: 1,60 m za odraslu osobu, 1 m da vidiš kao dijete. ¦ Višina tvojih oči v hiši: 1,60 m za odraslega, 1 m, da vidiš kot otrok.
+De combien le milieu du mur sort de la ligne droite : + d’un côté, − de l’autre ; 0 = un mur droit. Pour une tour ronde, une abside, un mur cintré. ¦ Koliko sredina zida izlazi iz ravne crte: + na jednu stranu, − na drugu; 0 = ravan zid. Za okruglu kulu, apsidu, zakrivljeni zid. ¦ Koliko sredina stene izstopa iz ravne črte: + na eno stran, − na drugo; 0 = ravna stena. Za okrogel stolp, apsido, ukrivljeno steno.
+Agrandit ou rapetisse le motif (briques, pierres, papier peint) sur ce mur : 100 % = taille réelle. ¦ Povećava ili smanjuje uzorak (opeke, kamenje, tapeta) na ovom zidu: 100 % = stvarna veličina. ¦ Poveča ali pomanjša vzorec (opeke, kamni, tapeta) na tej steni: 100 % = resnična velikost.
+La hauteur du bas de la fenêtre au-dessus du plancher (souvent 90 cm). ¦ Visina donjeg ruba prozora iznad poda (često 90 cm). ¦ Višina spodnjega roba okna nad tlemi (pogosto 90 cm).
+Une zone sans plancher : on voit l’étage du dessous (mezzanine, séjour en double hauteur, cage d’escalier). En 3D le plancher est percé, et pendant la visite on ne peut pas y marcher. ¦ Područje bez poda: vidi se kat ispod (galerija, dnevni boravak dvostruke visine, stubište). U 3D je pod probijen, a tijekom obilaska se tamo ne može hodati. ¦ Območje brez poda: vidi se nadstropje spodaj (galerija, dnevna soba z dvojno višino, stopnišče). V 3D je pod prebit, med ogledom pa tam ni mogoče hoditi.
+Posé tout seul le long des bords du vide qui ne touchent pas un mur (et laissé ouvert là où arrive un escalier). ¦ Postavlja se sama duž rubova praznine koji ne dodiruju zid (i ostaje otvorena gdje stiže stubište). ¦ Postavi se sama ob robovih praznine, ki se ne dotikajo stene (in ostane odprta, kjer prihaja stopnišče).
+En déplaçant la pièce, ses murs (portes et fenêtres comprises), ses meubles et ses textes suivent. ⇧ en glissant : la pièce seule. ¦ Pri pomicanju prostorije prate je njezini zidovi (uključujući vrata i prozore), namještaj i tekstovi. ⇧ pri povlačenju: samo prostorija. ¦ Ko premikaš prostor, mu sledijo stene (z vrati in okni vred), pohištvo in besedila. ⇧ med vlečenjem: samo prostor.
+La hauteur à monter : celle de l’étage plus l’épaisseur du plancher (réglée dans l’onglet Maison). Décoche pour la fixer à la main dans « Hauteur ». ¦ Visina za penjanje: visina kata plus debljina stropne ploče (podešava se u kartici Kuća). Isključi za ručni unos u „Visina”. ¦ Višina vzpona: višina nadstropja plus debelina plošče (nastavljena v zavihku Hiša). Odznači za ročno nastavitev v »Višina«.
+Perce le plancher de l’étage du dessus au-dessus de l’escalier (la trémie), avec un garde-corps autour sauf du côté de l’arrivée. ¦ Probija pod kata iznad stubišta (otvor), s ogradom okolo osim na strani dolaska. ¦ Prebije pod nadstropja nad stopniščem (odprtina), z ograjo okoli, razen na strani prihoda.
+La hauteur du dessous de l’objet au-dessus du plancher : 0 pour un meuble posé au sol, 140 pour une horloge accrochée au mur. ¦ Visina donjeg dijela predmeta iznad poda: 0 za namještaj na podu, 140 za sat obješen na zid. ¦ Višina spodnjega dela predmeta nad tlemi: 0 za pohištvo na tleh, 140 za uro, obešeno na steno.
+Agrandit ou réduit l’objet en gardant ses proportions : pratique pour un modèle importé arrivé trop petit ou trop grand. ¦ Povećava ili smanjuje predmet zadržavajući proporcije: praktično za uvezeni model koji je stigao premalen ili prevelik. ¦ Poveča ali pomanjša predmet z ohranjenimi razmerji: priročno za uvožen model, ki je prišel premajhen ali prevelik.
+Une flèche du texte vers un point du plan (le puits, une fenêtre, une cheminée…). Glisse la poignée rouge pour la pointer. ¦ Strelica od teksta prema točki na nacrtu (bunar, prozor, kamin…). Povuci crvenu ručicu da je usmjeriš. ¦ Puščica od besedila do točke na načrtu (vodnjak, okno, kamin…). Povleci rdečo ročico, da jo usmeriš.
+Quand l’aimant des angles est mis, un mur tracé se cale sur des angles de ce pas : 90° = seulement des angles droits, 45° = aussi les diagonales, 15° = plus fin. ¦ Kad je uključeno privlačenje kutova, nacrtani zid se poravnava na kutove ovog koraka: 90° = samo pravi kutovi, 45° = i dijagonale, 15° = finije. ¦ Ko je vklopljeno pripenjanje kotov, se narisana stena poravna na kote tega koraka: 90° = samo pravi koti, 45° = tudi diagonale, 15° = finejše.
+Glisse : la maison prend l’époque la plus proche de l’année (avant ou égale). ¦ Povuci: kuća uzima razdoblje najbliže godini (ranije ili jednako). ¦ Povleci: hiša prevzame obdobje, najbližje letu (prej ali enako).
+Tourne le plan par rapport au nord : 0° = le haut du plan est au nord, 90° = le haut du plan regarde l’est. Les ombres suivent. ¦ Okreće nacrt u odnosu na sjever: 0° = vrh nacrta je na sjeveru, 90° = vrh nacrta gleda na istok. Sjene prate. ¦ Zasuka načrt glede na sever: 0° = vrh načrta je na severu, 90° = vrh načrta gleda proti vzhodu. Sence sledijo.
+Licence : {x} ¦ Licenca: {x} ¦ Licenca: {x}
+Auteur : {x} ¦ Autor: {x} ¦ Avtor: {x}
+Source : {x} ¦ Izvor: {x} ¦ Vir: {x}
+🕰 ancien ¦ 🕰 staro ¦ 🕰 staro
+Forme « {name} » ¦ Oblik „{name}” ¦ Oblika »{name}«
+{w} × {d} cm, {h} cm de haut, à {elev} cm du sol ¦ {w} × {d} cm, visina {h} cm, {elev} cm od poda ¦ {w} × {d} cm, višina {h} cm, {elev} cm od tal
+{w} × {d} cm, {h} cm de haut ¦ {w} × {d} cm, visina {h} cm ¦ {w} × {d} cm, višina {h} cm
+{name} (à moi) ¦ {name} (moje) ¦ {name} (moje)
+Comme « {name} » ¦ Kao „{name}” ¦ Kot »{name}«
+Supprimer l’objet « {name} » de la bibliothèque ? ¦ Izbrisati predmet „{name}” iz knjižnice? ¦ Izbrišem predmet »{name}« iz knjižnice?
+« {name} » est dans « {cat} » : clique-le pour le poser. ¦ „{name}” je u „{cat}”: klikni ga da ga postaviš. ¦ »{name}« je v »{cat}«: klikni ga, da ga postaviš.
+Supprimer « {name} » de « Mes objets » ? ¦ Izbrisati „{name}” iz „Moji predmeti”? ¦ Izbrišem »{name}« iz »Moji predmeti«?
+Des modèles 3D <b>libres de droit</b> (CC0 : domaine public, utilisables sans condition) à poser dans tes maisons. Ils arrivent dans <b>Mobilier → « Mes objets »</b>, avec leur licence, leur auteur et leur source. ¦ 3D modeli <b>bez autorskih naknada</b> (CC0: javno dobro, upotrebljivi bez uvjeta) za postavljanje u tvoje kuće. Stižu u <b>Namještaj → „Moji predmeti”</b>, s licencom, autorom i izvorom. ¦ 3D modeli <b>brez avtorskih pravic</b> (CC0: javna last, uporabni brez pogojev) za postavitev v tvoje hiše. Pridejo v <b>Pohištvo → »Moji predmeti«</b>, z licenco, avtorjem in virom.
+Modèles fournis par {ph} (Powered by Poly Haven) — licence {cc0}. Le téléchargement passe par ton serveur (environ 1 à 10 Mo par modèle, textures comprises). ¦ Modele osigurava {ph} (Powered by Poly Haven) — licenca {cc0}. Preuzimanje ide preko tvog poslužitelja (otprilike 1 do 10 MB po modelu, uključujući teksture). ¦ Modele zagotavlja {ph} (Powered by Poly Haven) — licenca {cc0}. Prenos gre prek tvojega strežnika (približno 1 do 10 MB na model, s teksturami).
+Télécharge d’abord un pack <b>CC0</b> sur le site de son auteur (un fichier .zip), puis choisis-le ici : tu coches les modèles à garder (GLB, glTF, OBJ, STL). ¦ Najprije preuzmi <b>CC0</b> paket sa stranice njegova autora (datoteka .zip), zatim ga odaberi ovdje: označi modele koje želiš zadržati (GLB, glTF, OBJ, STL). ¦ Najprej prenesi paket <b>CC0</b> s strani njegovega avtorja (datoteka .zip), nato ga izberi tukaj: označi modele, ki jih želiš ohraniti (GLB, glTF, OBJ, STL).
+{models} (les {n} plus téléchargés sur {total}) ¦ {models} ({n} najpreuzimanijih od {total}) ¦ {models} ({n} najbolj prenašanih od {total})
+« {name} » est dans Mobilier → « Mes objets » (CC0, Poly Haven). ¦ „{name}” je u Namještaj → „Moji predmeti” (CC0, Poly Haven). ¦ »{name}« je v Pohištvo → »Moji predmeti« (CC0, Poly Haven).
+Licence trouvée dans le pack ¦ Licenca pronađena u paketu ¦ Licenca, najdena v paketu
+Mesure et vignettes… ¦ Mjerenje i sličice… ¦ Merjenje in sličice…
+{models} dans « Mes objets ». ¦ {models} u „Moji predmeti”. ¦ {models} v »Moji predmeti«.
+Renommer, ranger, voir la licence, supprimer ¦ Preimenuj, razvrstaj, pogledaj licencu, izbriši ¦ Preimenuj, razvrsti, oglej si licenco, izbriši
+Modifier ou supprimer cet objet ¦ Uredi ili izbriši ovaj predmet ¦ Uredi ali izbriši ta predmet
+Rien ne correspond. ＋ Crée l’objet, ou cherche-le dans la 📦 Bibliothèque en ligne. ¦ Ništa ne odgovara. ＋ Stvori predmet ili ga potraži u 📦 Mrežnoj knjižnici. ¦ Nič se ne ujema. ＋ Ustvari predmet ali ga poišči v 📦 Spletni knjižnici.
+Ici : les objets que tu crées (＋ Créer un objet), ceux téléchargés dans la 📦 Bibliothèque en ligne, et les fichiers 3D importés (⤒ Importer, en haut). ¦ Ovdje: predmeti koje stvoriš (＋ Stvori predmet), oni preuzeti iz 📦 Mrežne knjižnice i uvezene 3D datoteke (⤒ Uvezi, gore). ¦ Tukaj: predmeti, ki jih ustvariš (＋ Ustvari predmet), tisti, preneseni iz 📦 Spletne knjižnice, in uvožene 3D datoteke (⤒ Uvozi, zgoraj).
+Rien d’ancien dans cette catégorie (décoche « 🕰 Ancien seulement »). ¦ Ništa staro u ovoj kategoriji (isključi „🕰 Samo staro”). ¦ V tej kategoriji ni nič starega (odznači »🕰 Samo staro«).
+Aucun objet montré dans cette catégorie (⚙️ Ranger pour en remontrer). ¦ Nijedan predmet nije prikazan u ovoj kategoriji (⚙️ Razvrstaj za ponovni prikaz). ¦ V tej kategoriji ni prikazan noben predmet (⚙️ Razvrsti za ponoven prikaz).
+Chercher… lit, lampe, piano, vache, salon… ¦ Traži… krevet, svjetiljka, klavir, krava, dnevni boravak… ¦ Išči… postelja, svetilka, klavir, krava, dnevna soba…
+Chercher un objet ¦ Traži predmet ¦ Išči predmet
+Un objet à toi : nom, taille, couleur, forme, image ¦ Tvoj predmet: naziv, veličina, boja, oblik, slika ¦ Tvoj predmet: ime, velikost, barva, oblika, slika
+Des modèles 3D libres de droit (CC0) à télécharger ¦ 3D modeli bez autorskih naknada (CC0) za preuzimanje ¦ 3D modeli brez avtorskih pravic (CC0) za prenos
+Montrer, cacher, ranger les catégories et les objets ¦ Prikaži, sakrij, razvrstaj kategorije i predmete ¦ Prikaži, skrij, razvrsti kategorije in predmete
+Ne montrer que le mobilier et les objets d’autrefois ¦ Prikaži samo namještaj i predmete iz prošlosti ¦ Prikaži samo pohištvo in predmete iz preteklosti
+＋ Créer un objet ¦ ＋ Stvori predmet ¦ ＋ Ustvari predmet
+📦 Bibliothèque en ligne ¦ 📦 Mrežna knjižnica ¦ 📦 Spletna knjižnica
+⚙️ Ranger ¦ ⚙️ Razvrstaj ¦ ⚙️ Razvrsti
+🕰 Ancien seulement ¦ 🕰 Samo staro ¦ 🕰 Samo staro
+Ovale ¦ Ovalno ¦ Ovalno
+Triangle ¦ Trokut ¦ Trikotnik
+En L ¦ U obliku slova L ¦ V obliki črke L
+Lit simple ¦ Jednokrevetni krevet ¦ Enojna postelja
+Lit clos ¦ Zatvoreni krevet (ormar-krevet) ¦ Zaprta postelja (omara-postelja)
+Meuble à portes ¦ Ormarić s vratima ¦ Omarica z vrati
+Banc-coffre à dossier ¦ Klupa-škrinja s naslonom ¦ Klop-skrinja z naslonom
+Horloge ¦ Sat ¦ Ura
+Cheminée à manteau ¦ Kamin s okvirom ¦ Kamin z okvirjem
+Cheminée à manteau (hotte) ¦ Kamin s okvirom (napa) ¦ Kamin z okvirjem (napa)
+Poêle ¦ Peć ¦ Peč
+Cuisinière ¦ Štednjak ¦ Štedilnik
+Évier ¦ Sudoper ¦ Pomivalno korito
+Lavabo, toilette ¦ Umivaonik, umivaonik s ormarićem ¦ Umivalnik, umivalna mizica
+Maie, pétrin ¦ Naćve ¦ Mentrga
+Broc et cuvette ¦ Vrč i lavor ¦ Vrč in umivalna skleda
+Fontaine ¦ Fontana ¦ Vodnjak
+Baratte ¦ Bućkalica ¦ Pinja
+Lampe ¦ Svjetiljka ¦ Svetilka
+Bougeoir ¦ Svijećnjak ¦ Svečnik
+Chenets ¦ Kaminski nosači ¦ Kaminska stojala
+Fer à repasser ¦ Glačalo ¦ Likalnik
+Banc d’école ¦ Školska klupa ¦ Šolska klop
+Miroir, cadre au mur ¦ Zrcalo, okvir na zidu ¦ Ogledalo, okvir na steni
+Statue ¦ Kip ¦ Kip
+Animal ¦ Životinja ¦ Žival
+Cabane ¦ Koliba ¦ Koča
+Cône, tipi ¦ Stožac, tipi ¦ Stožec, tipi
+Bloc (boîte pleine) ¦ Blok (puna kutija) ¦ Blok (polna škatla)
+Cylindre ¦ Valjak ¦ Valj
+Bassine, baquet (ouvert) ¦ Lavor, kaca (otvoreno) ¦ Lavor, kad (odprto)
+Table (plateau et 4 pieds) ¦ Stol (ploča i 4 noge) ¦ Miza (plošča in 4 noge)
+Table ovale ¦ Ovalni stol ¦ Ovalna miza
+Caisson sur pieds ¦ Kutija na nogama ¦ Škatla na nogah
+Comptoir, plan de travail ¦ Pult, radna ploča ¦ Pult, delovna plošča
+Buffet deux-corps, vaisselier ¦ Dvodijelni kredenc ¦ Dvodelna kredenca
+Vitrine ¦ Vitrina ¦ Vitrina
+Armoire (corniche) ¦ Ormar (vijenac) ¦ Omara (venec)
+Commode à tiroirs ¦ Komoda s ladicama ¦ Predalnik
+Coffre à couvercle ¦ Škrinja s poklopcem ¦ Skrinja s pokrovom
+Étagère ouverte ¦ Otvorene police ¦ Odprte police
+Lit ¦ Krevet ¦ Postelja
+Poêle rond (Godin) ¦ Okrugla peć (Godin) ¦ Okrogla peč (Godin)
+Crémaillère et chaudron ¦ Kuka za kotao i kotao ¦ Kavelj in kotel
+Baignoire sur pieds ¦ Kada na nogama ¦ Kad na nogah
+Lavabo sur colonne ¦ Umivaonik na stupu ¦ Umivalnik na stebru
+Fontaine sur support ¦ Fontana na postolju ¦ Vodnjak na stojalu
+Baratte à piston ¦ Bućkalica s klipom ¦ Pinja z batom
+Lampe à pétrole ¦ Petrolejska svjetiljka ¦ Petrolejka
+Bougeoir, chandelier ¦ Svijećnjak, kandelabar ¦ Svečnik, kandelaber
+Poste TSF ¦ Radio aparat ¦ Radijski sprejemnik
+Phonographe ¦ Fonograf ¦ Fonograf
+Machine à coudre à pédale ¦ Šivaći stroj s pedalom ¦ Šivalni stroj na nožni pogon
+Banc d’école à pupitre ¦ Školska klupa s pultom ¦ Šolska klop s pultom
+Pressoir, presse ¦ Preša ¦ Stiskalnica
+Miroir ¦ Zrcalo ¦ Ogledalo
+Cadre au mur ¦ Okvir na zidu ¦ Okvir na steni
+Statue sur socle ¦ Kip na postolju ¦ Kip na podstavku
+Plante en pot ¦ Biljka u posudi ¦ Lončnica
+Boule ¦ Kugla ¦ Krogla
+Cône ¦ Stožac ¦ Stožec
+Cabane (toit) ¦ Koliba (krov) ¦ Koča (streha)
+À plat (tapis) ¦ Ravno (sag) ¦ Ravno (preproga)
+Plateau avec l’image dessus ¦ Ploča sa slikom odozgo ¦ Plošča s sliko na vrhu
+MAISON · MOBILIER ¦ KUĆA · NAMJEŠTAJ ¦ HIŠA · POHIŠTVO
+MAISON · MES OBJETS ¦ KUĆA · MOJI PREDMETI ¦ HIŠA · MOJI PREDMETI
+Créer l’objet ¦ Stvori predmet ¦ Ustvari predmet
+Partir d’un objet existant (facultatif) ¦ Kreni od postojećeg predmeta (neobavezno) ¦ Začni z obstoječim predmetom (neobvezno)
+— un objet vide — ¦ — prazan predmet — ¦ — prazen predmet —
+ex. Armoire de la grand-mère, pressoir du moulin… ¦ npr. Bakin ormar, mlinska preša… ¦ npr. Babičina omara, mlinska stiskalnica…
+Nouvelle catégorie… ¦ Nova kategorija… ¦ Nova kategorija…
+ex. Grenier ¦ npr. Tavan ¦ npr. Podstrešje
+Vu de dessus (2D) ¦ Pogled odozgo (2D) ¦ Pogled od zgoraj (2D)
+En volume (3D) ¦ U volumenu (3D) ¦ V prostoru (3D)
+2ᵉ couleur (pieds, poignées, filets) ¦ 2. boja (noge, ručke, letvice) ¦ 2. barva (noge, ročaji, letve)
+2ᵉ couleur ¦ 2. boja ¦ 2. barva
+Une deuxième couleur ¦ Druga boja ¦ Druga barva
+Posé au sol (0), sur une table (75), accroché au mur (140)… ¦ Na podu (0), na stolu (75), obješeno na zid (140)… ¦ Na tleh (0), na mizi (75), obešeno na steno (140)…
+Tourné de ¦ Okrenuto za ¦ Zasukano za
+Image vue de dessus (facultatif) ¦ Slika odozgo (neobavezno) ¦ Slika od zgoraj (neobvezno)
+🖼️ Une photo des médias… ¦ 🖼️ Fotografija iz medija… ¦ 🖼️ Fotografija iz medijev…
+Retirer l’image ¦ Ukloni sliku ¦ Odstrani sliko
+Note (souvenir, provenance) ¦ Bilješka (uspomena, podrijetlo) ¦ Opomba (spomin, izvor)
+Aperçu en 3D ¦ 3D pregled ¦ 3D predogled
+⏳ Mesure… ¦ ⏳ Mjerenje… ¦ ⏳ Merjenje…
+Une photo de l’objet (vue de dessus) ¦ Fotografija predmeta (pogled odozgo) ¦ Fotografija predmeta (pogled od zgoraj)
+L’image se pose sur le plan, à la taille de l’objet. ¦ Slika se postavlja na nacrt, u veličini predmeta. ¦ Slika se postavi na načrt v velikosti predmeta.
+Ceux déjà posés dans les maisons restent. ¦ Oni već postavljeni u kućama ostaju. ¦ Tisti, ki so že postavljeni v hišah, ostanejo.
+Donne un nom à la nouvelle catégorie. ¦ Daj naziv novoj kategoriji. ¦ Poimenuj novo kategorijo.
+Objet modifié (ceux déjà posés gardent leur ancienne forme). ¦ Predmet izmijenjen (već postavljeni zadržavaju stari oblik). ¦ Predmet spremenjen (že postavljeni ohranijo staro obliko).
+Montrer aussi dans la catégorie ¦ Prikaži i u kategoriji ¦ Prikaži tudi v kategoriji
+— seulement dans « Mes objets » — ¦ — samo u „Moji predmeti” — ¦ — samo v »Moji predmeti« —
+« Mes objets » seulement ¦ Samo „Moji predmeti” ¦ Samo »Moji predmeti«
+Licence ¦ Licenca ¦ Licenca
+non précisée (fichier importé) ¦ nije navedeno (uvezena datoteka) ¦ ni navedeno (uvožena datoteka)
+Le fichier 3D est supprimé : là où il est posé, il redevient une simple boîte. ¦ 3D datoteka je izbrisana: gdje je postavljena, ponovno postaje obična kutija. ¦ 3D datoteka je izbrisana: kjer je postavljena, spet postane navadna škatla.
+Aucun objet. ¦ Nema predmeta. ¦ Ni predmetov.
+⚙️ Ranger le mobilier ¦ ⚙️ Razvrstaj namještaj ¦ ⚙️ Razvrsti pohištvo
+Coche ce que tu veux voir et range avec ↑ ↓ : les catégories, puis les objets de chaque catégorie. ¦ Označi što želiš vidjeti i poredaj s ↑ ↓: kategorije, zatim predmete svake kategorije. ¦ Označi, kaj želiš videti, in razvrsti z ↑ ↓: kategorije, nato predmete vsake kategorije.
+Objets de ¦ Predmeti od ¦ Predmeti iz
+Mobilier remis comme au départ. ¦ Namještaj vraćen na početno. ¦ Pohištvo ponastavljeno na začetno.
+Garde au moins une catégorie. ¦ Zadrži barem jednu kategoriju. ¦ Ohrani vsaj eno kategorijo.
+Kenney — tous les packs 3D ¦ Kenney — svi 3D paketi ¦ Kenney — vsi 3D paketi
+OpenGameArt — filtre « CC0 » ¦ OpenGameArt — filtar „CC0” ¦ OpenGameArt — filter »CC0«
+📦 Bibliothèque en ligne (libre de droit) ¦ 📦 Mrežna knjižnica (bez autorskih naknada) ¦ 📦 Spletna knjižnica (brez avtorskih pravic)
+Chercher (en français ou en anglais) : chaise, tonneau, lampe, vase… ¦ Traži (na francuskom ili engleskom): chaise, tonneau, lamp, vase… ¦ Išči (v francoščini ali angleščini): chaise, tonneau, lamp, vase…
+🌐 Poly Haven (en ligne) ¦ 🌐 Poly Haven (na mreži) ¦ 🌐 Poly Haven (na spletu)
+🗜️ Un pack ZIP (Kenney, Quaternius…) ¦ 🗜️ ZIP paket (Kenney, Quaternius…) ¦ 🗜️ Paket ZIP (Kenney, Quaternius…)
+Ranger aussi dans ¦ Spremi i u ¦ Shrani tudi v
+Chargement de la liste… ¦ Učitavanje popisa… ¦ Nalaganje seznama…
+Recherche… ¦ Pretraživanje… ¦ Iskanje…
+🗜️ Choisir le fichier ZIP… ¦ 🗜️ Odaberi ZIP datoteku… ¦ 🗜️ Izberi datoteko ZIP…
+Voir sur Poly Haven ¦ Pogledaj na Poly Havenu ¦ Oglej si na Poly Haven
+Aucun modèle ne correspond. ¦ Nijedan model ne odgovara. ¦ Noben model se ne ujema.
+Sans internet, tu peux toujours importer un pack ZIP déjà téléchargé (onglet à côté), ou ＋ créer tes objets. ¦ Bez interneta i dalje možeš uvesti već preuzeti ZIP paket (susjedna kartica) ili ＋ stvoriti svoje predmete. ¦ Brez interneta lahko še vedno uvoziš že prenesen paket ZIP (sosednji zavihek) ali ＋ ustvariš svoje predmete.
+Un téléchargement est en cours… ¦ Preuzimanje je u tijeku… ¦ Prenos poteka…
+⏳ Téléchargement… ¦ ⏳ Preuzimanje… ¦ ⏳ Prenašanje…
+✓ Dans « Mes objets » ¦ ✓ U „Moji predmeti” ¦ ✓ V »Moji predmeti«
+Envoi et lecture du pack… ¦ Slanje i čitanje paketa… ¦ Pošiljanje in branje paketa…
+Envoi impossible (fichier trop gros pour le serveur ?). ¦ Slanje nije moguće (datoteka prevelika za poslužitelj?). ¦ Pošiljanje ni mogoče (datoteka prevelika za strežnik?).
+Envoi impossible. ¦ Slanje nije moguće. ¦ Pošiljanje ni mogoče.
+Image impossible. ¦ Slika nije moguća. ¦ Slika ni mogoča.
+Aucun fichier de licence dans le pack : vérifie sur le site de l’auteur qu’il est bien libre de droit. ¦ U paketu nema datoteke s licencom: provjeri na stranici autora je li zaista bez autorskih naknada. ¦ V paketu ni datoteke z licenco: na strani avtorja preveri, ali je res brez avtorskih pravic.
+Auteur, source ¦ Autor, izvor ¦ Avtor, vir
+Adresse du pack (facultatif) ¦ Adresa paketa (neobavezno) ¦ Naslov paketa (neobvezno)
+⤒ Importer les modèles cochés ¦ ⤒ Uvezi označene modele ¦ ⤒ Uvozi označene modele
+Coche au moins un modèle. ¦ Označi barem jedan model. ¦ Označi vsaj en model.
+Indique la licence du pack (par exemple CC0 1.0). ¦ Navedi licencu paketa (na primjer CC0 1.0). ¦ Navedi licenco paketa (na primer CC0 1.0).
+Surface (m²) ¦ Površina (m²) ¦ Površina (m²)
+Loi Carrez ≥ 1,80 m (m²) ¦ Zakon Carrez ≥ 1,80 m (m²) ¦ Zakon Carrez ≥ 1,80 m (m²)
+Hauteur mini (cm) ¦ Najmanja visina (cm) ¦ Najmanjša višina (cm)
+Hauteur maxi (cm) ¦ Najveća visina (cm) ¦ Največja višina (cm)
+Un mur de moins de 5 cm (un double-clic de trop ?) ¦ Zid kraći od 5 cm (dvostruki klik previše?) ¦ Stena, krajša od 5 cm (dvoklik preveč?)
+« {name} » n’a pas de porte ¦ „{name}” nema vrata ¦ »{name}« nima vrat
+=Escalier un peu raide : {n} marches de {rise} cm, giron {going} cm (2 h + g = {sum} cm) ¦ Stubište malo strmo: {n} stuba od {rise} cm, gazište {going} cm (2 h + g = {sum} cm)|Stubište malo strmo: {n} stube od {rise} cm, gazište {going} cm (2 h + g = {sum} cm)|Stubište malo strmo: {n} stuba od {rise} cm, gazište {going} cm (2 h + g = {sum} cm) ¦ Stopnišče je nekoliko strmo: {n} stopnica po {rise} cm, nastopna ploskev {going} cm (2 h + g = {sum} cm)|Stopnišče je nekoliko strmo: {n} stopnici po {rise} cm, nastopna ploskev {going} cm (2 h + g = {sum} cm)|Stopnišče je nekoliko strmo: {n} stopnice po {rise} cm, nastopna ploskev {going} cm (2 h + g = {sum} cm)|Stopnišče je nekoliko strmo: {n} stopnic po {rise} cm, nastopna ploskev {going} cm (2 h + g = {sum} cm)
+Un escalier sans étage au-dessus ¦ Stubište bez kata iznad ¦ Stopnišče brez nadstropja zgoraj
+L’escalier ne perce pas le plancher de « {name} » (Propriétés → « Ouvrir le plancher au-dessus ») ¦ Stubište ne probija pod kata „{name}” (Svojstva → „Otvori pod iznad”) ¦ Stopnišče ne prebije poda nadstropja »{name}« (Lastnosti → »Odpri pod zgoraj«)
+Un vide à l’étage le plus bas : il n’ouvre sur rien ¦ Praznina na najnižem katu: ne gleda ni na što ¦ Praznina v najnižjem nadstropju: ne odpira se nikamor
+Des pièces sans aucun mur ¦ Prostorije bez ijednog zida ¦ Prostori brez ene same stene
+maison|Mur ¦ Zid ¦ Stena
+maison|Ouverture ¦ Otvor ¦ Odprtina
+maison|Combles ¦ Potkrovlje ¦ Podstrešje
+maison|Pièce ¦ Prostorija ¦ Prostor
+maison|Escalier ¦ Stubište ¦ Stopnišče
+maison|Étage ¦ Kat ¦ Nadstropje
+Mur ¦ Zid ¦ Stena
+Escalier ¦ Stubište ¦ Stopnišče
+Combles ¦ Potkrovlje ¦ Podstrešje
+Plans ¦ Nacrti ¦ Načrti
+▶ Visite guidée ¦ ▶ Vođeni obilazak ¦ ▶ Voden ogled
+Visite en lecture seule, ouverte sans l’application. Souris ou doigt pour tourner, molette pour zoomer, « 🚶 Visiter » pour marcher (Z Q S D ou flèches). ¦ Obilazak samo za čitanje, otvoren bez aplikacije. Miš ili prst za okretanje, kotačić za zumiranje, „🚶 Obiđi” za hodanje (Z Q S D ili strelice). ¦ Ogled samo za branje, odprt brez aplikacije. Miška ali prst za vrtenje, kolešček za povečavo, »🚶 Ogled« za hojo (Z Q S D ali puščice).
+📐 Surfaces ¦ 📐 Površine ¦ 📐 Površine
+Surfaces ¦ Površine ¦ Površine
+⚠️ Vérifier le plan ¦ ⚠️ Provjeri nacrt ¦ ⚠️ Preveri načrt
+🗺 Visite guidée ¦ 🗺 Vođeni obilazak ¦ 🗺 Voden ogled
+aucun arrêt ¦ nema postaja ¦ ni postankov
+📷 Photos d’époque ¦ 📷 Stare fotografije ¦ 📷 Stare fotografije
+🏘 Le hameau ¦ 🏘 Zaselak ¦ 🏘 Zaselek
+cette maison seule ¦ samo ova kuća ¦ samo ta hiša
+foyer n° {n} ¦ kućanstvo br. {n} ¦ gospodinjstvo št. {n}
+{a} à {b} m ¦ {a} do {b} m ¦ {a} do {b} m
+un clic : aller à l’endroit ¦ jedan klik: idi na mjesto ¦ en klik: pojdi na mesto
+{name} — coupe ¦ {name} — presjek ¦ {name} — prerez
+Texte de l’arrêt {n} ¦ Tekst postaje {n} ¦ Besedilo postanka {n}
+Texte de l’arrêt ¦ Tekst postaje ¦ Besedilo postanka
+⤓ Exporter la vidéo en {fmt} ¦ ⤓ Izvezi video u {fmt} ¦ ⤓ Izvozi video v {fmt}
+{stops} : la caméra glisse de l’un à l’autre, et le texte de chaque arrêt s’affiche en sous-titre. La vidéo se fait en temps réel (environ {s} secondes) : laisse la fenêtre ouverte. ¦ {stops}: kamera klizi od jedne do druge, a tekst svake postaje prikazuje se kao podnaslov. Video se snima u stvarnom vremenu (otprilike {s} sekundi): ostavi prozor otvoren. ¦ {stops}: kamera drsi od enega do drugega, besedilo vsakega postanka pa se prikaže kot podnapis. Video nastaja v realnem času (približno {s} sekund): pusti okno odprto.
+Une fenêtre est posée sur un mur qui n’existe plus ¦ Prozor je postavljen na zid koji više ne postoji ¦ Okno je postavljeno na steno, ki ne obstaja več
+Une porte est posée sur un mur qui n’existe plus ¦ Vrata su postavljena na zid koji više ne postoji ¦ Vrata so postavljena na steno, ki ne obstaja več
+Une fenêtre est plus large que son mur ¦ Prozor je širi od svog zida ¦ Okno je širše od svoje stene
+Une porte est plus large que son mur ¦ Vrata su šira od svog zida ¦ Vrata so širša od svoje stene
+Une fenêtre dépasse le plafond ({top} cm pour {wall} cm de mur) : elle est coupée par le plancher ¦ Prozor prelazi strop ({top} cm za zid od {wall} cm): pod ga presijeca ¦ Okno sega čez strop ({top} cm pri steni {wall} cm): pod ga prereže
+Une porte dépasse le plafond ({top} cm pour {wall} cm de mur) : elle est coupée par le plancher ¦ Vrata prelaze strop ({top} cm za zid od {wall} cm): pod ih presijeca ¦ Vrata segajo čez strop ({top} cm pri steni {wall} cm): pod jih prereže
+Une fenêtre passe sous la pente du toit à cet endroit ¦ Prozor na ovom mjestu prolazi ispod kosine krova ¦ Okno na tem mestu sega pod strešno poševnino
+Une porte passe sous la pente du toit à cet endroit ¦ Vrata na ovom mjestu prolaze ispod kosine krova ¦ Vrata na tem mestu segajo pod strešno poševnino
+🧰 Outils de la maison ¦ 🧰 Alati za kuću ¦ 🧰 Orodja za hišo
+Le tableau des surfaces, ouvert dans le 🧾 Tableur ¦ Tablica površina, otvorena u 🧾 Proračunskoj tablici ¦ Tabela površin, odprta v 🧾 Preglednici
+Clique deux points sur le plan : la ligne de coupe ¦ Klikni dvije točke na nacrtu: linija presjeka ¦ Klikni dve točki na načrtu: črta prereza
+📐 Surfaces par pièce ¦ 📐 Površine po prostorijama ¦ 📐 Površine po prostorih
+✂ Tracer la ligne de coupe ¦ ✂ Nacrtaj liniju presjeka ¦ ✂ Nariši črto prereza
+✂ Voir la coupe ¦ ✂ Pogledaj presjek ¦ ✂ Oglej si prerez
+🕰 L’année ¦ 🕰 Godina ¦ 🕰 Leto
+Pendant que tu glisses l’année, l’époque d’avant reste visible en pointillés sépia ¦ Dok pomičeš godinu, prethodno razdoblje ostaje vidljivo isprekidanim sepija crtama ¦ Medtem ko premikaš leto, prejšnje obdobje ostane vidno s črtkanimi sepija črtami
+👻 Voir l’époque d’avant en fantôme ¦ 👻 Prikaži prethodno razdoblje kao duh ¦ 👻 Prikaži prejšnje obdobje kot duha
+La visite guidée en vidéo, toute faite : on glisse d’un arrêt à l’autre, le texte en sous-titre ¦ Vođeni obilazak kao gotov video: klizi se od postaje do postaje, s tekstom kao podnaslovom ¦ Voden ogled kot pripravljen video: drsenje od postanka do postanka, z besedilom kot podnapisom
+Une image par arrêt et les textes, dans un fichier .zip : à glisser dans le 🎬 Montage ¦ Jedna slika po postaji i tekstovi, u datoteci .zip: za povlačenje u 🎬 Montažu ¦ Ena slika na postanek in besedila v datoteki .zip: za vlečenje v 🎬 Montažo
+✎ Les arrêts ¦ ✎ Postaje ¦ ✎ Postanki
+🎬 Vidéo de la visite… ¦ 🎬 Video obilaska… ¦ 🎬 Video ogleda…
+⤓ Images de la visite ¦ ⤓ Slike obilaska ¦ ⤓ Slike ogleda
+Les arrêts et les photos se posent pendant la visite (🚶 Visiter, vue 3D) ¦ Postaje i fotografije postavljaju se tijekom obilaska (🚶 Obiđi, 3D prikaz) ¦ Postanki in fotografije se postavijo med ogledom (🚶 Ogled, 3D pogled)
+＋ Arrêt, 📷 photo… ¦ ＋ Postaja, 📷 fotografija… ¦ ＋ Postanek, 📷 fotografija…
+Un fichier .html à envoyer : la maison en 3D et ses plans, sans l’app, en lecture seule (sans personnes ni souvenirs) ¦ Datoteka .html za slanje: kuća u 3D i njezini nacrti, bez aplikacije, samo za čitanje (bez osoba i uspomena) ¦ Datoteka .html za pošiljanje: hiša v 3D in njeni načrti, brez aplikacije, samo za branje (brez oseb in spominov)
+🏘 Bâtiments du terrain… ¦ 🏘 Zgrade na zemljištu… ¦ 🏘 Stavbe na zemljišču…
+📤 Partager la visite ¦ 📤 Podijeli obilazak ¦ 📤 Deli ogled
+Aucune pièce dessinée. ¦ Nijedna prostorija nije nacrtana. ¦ Noben prostor ni narisan.
+Toute la maison ¦ Cijela kuća ¦ Cela hiša
+Loi Carrez ¦ Zakon Carrez ¦ Zakon Carrez
+Surface ¦ Površina ¦ Površina
+Loi Carrez : seules comptent les parties où l’on tient debout (hauteur sous plafond d’au moins 1,80 m, combles comprises). Les vides et les escaliers ne comptent pas. ¦ Zakon Carrez: računaju se samo dijelovi u kojima se može stajati (visina stropa najmanje 1,80 m, uključujući potkrovlje). Praznine i stubišta se ne računaju. ¦ Zakon Carrez: štejejo le deli, kjer lahko stojiš (višina stropa vsaj 1,80 m, s podstrešjem vred). Praznine in stopnišča se ne štejejo.
+Le Tableur n’est pas prêt. ¦ Proračunska tablica nije spremna. ¦ Preglednica ni pripravljena.
+Rien à signaler : portes, fenêtres, escaliers et pièces sont cohérents. ¦ Ništa za prijaviti: vrata, prozori, stubišta i prostorije su usklađeni. ¦ Nič za poročati: vrata, okna, stopnišča in prostori so skladni.
+✓ Rien à signaler. ¦ ✓ Ništa za prijaviti. ¦ ✓ Nič za poročati.
+✂ Clique les deux bouts de la ligne de coupe sur le plan ¦ ✂ Klikni oba kraja linije presjeka na nacrtu ¦ ✂ Klikni oba konca črte prereza na načrtu
+Ligne de coupe ¦ Linija presjeka ¦ Črta prereza
+Trace d’abord la ligne de coupe sur le plan. ¦ Najprije nacrtaj liniju presjeka na nacrtu. ¦ Najprej nariši črto prereza na načrtu.
+✂ Coupe de la maison ¦ ✂ Presjek kuće ¦ ✂ Prerez hiše
+⤓ Exporter en SVG ¦ ⤓ Izvezi u SVG ¦ ⤓ Izvozi v SVG
+⤓ Exporter en PNG ¦ ⤓ Izvezi u PNG ¦ ⤓ Izvozi v PNG
+Ouvre la vue 3D, puis « 🚶 Visiter » : en bas de la visite, « 📍 Arrêt ici » pose un arrêt (avec un texte lu à voix haute) et « 📷 Photo d’époque ici » pose une photo prise de cet endroit. ¦ Otvori 3D prikaz, zatim „🚶 Obiđi”: na dnu obilaska „📍 Postaja ovdje” postavlja postaju (s tekstom koji se čita naglas), a „📷 Stara fotografija ovdje” postavlja fotografiju snimljenu s tog mjesta. ¦ Odpri 3D pogled, nato »🚶 Ogled«: na dnu ogleda »📍 Postanek tukaj« postavi postanek (z besedilom, prebranim na glas), »📷 Stara fotografija tukaj« pa postavi fotografijo, posneto s tega mesta.
+🗺 Les arrêts de la visite guidée ¦ 🗺 Postaje vođenog obilaska ¦ 🗺 Postanki vodenega ogleda
+Arrêt retiré ¦ Postaja uklonjena ¦ Postanek odstranjen
+Arrêts rangés ¦ Postaje poredane ¦ Postanki razvrščeni
+Impossible de faire les images. ¦ Nije moguće napraviti slike. ¦ Slik ni bilo mogoče narediti.
+Une image par arrêt… ¦ Jedna slika po postaji… ¦ Ena slika na postanek…
+Pose d’abord des arrêts : vue 3D → 🚶 Visiter → 📍 Arrêt ici. ¦ Najprije postavi postaje: 3D prikaz → 🚶 Obiđi → 📍 Postaja ovdje. ¦ Najprej postavi postanke: 3D pogled → 🚶 Ogled → 📍 Postanek tukaj.
+🎬 La vidéo de la visite guidée ¦ 🎬 Video vođenog obilaska ¦ 🎬 Video vodenega ogleda
+Paysage 1280 × 720 (écran) ¦ Položeno 1280 × 720 (zaslon) ¦ Ležeče 1280 × 720 (zaslon)
+Carré 1080 × 1080 (messageries) ¦ Kvadrat 1080 × 1080 (aplikacije za poruke) ¦ Kvadrat 1080 × 1080 (sporočilne aplikacije)
+Titre au début ¦ Naslov na početku ¦ Naslov na začetku
+⛔ Ce navigateur ne sait pas enregistrer de vidéo : garde « ⤓ Images de la visite ». ¦ ⛔ Ovaj preglednik ne može snimati video: koristi „⤓ Slike obilaska”. ¦ ⛔ Ta brskalnik ne zna snemati videa: uporabi »⤓ Slike ogleda«.
+🔴 Enregistrement de la visite… ¦ 🔴 Snimanje obilaska… ¦ 🔴 Snemanje ogleda…
+fenêtre des médias indisponible ¦ prozor medija nije dostupan ¦ okno medijev ni na voljo
+✓ Vidéo exportée, et une copie rangée dans les médias. ¦ ✓ Video izvezen, a kopija je spremljena u medije. ¦ ✓ Video izvožen, kopija pa shranjena med medije.
+✓ Vidéo exportée. ¦ ✓ Video izvezen. ¦ ✓ Video izvožen.
+Photo retirée ¦ Fotografija uklonjena ¦ Fotografija odstranjena
+Fichier prêt : envoie-le, il s’ouvre d’un double-clic dans un navigateur, sans l’app. ¦ Datoteka spremna: pošalji je, otvara se dvostrukim klikom u pregledniku, bez aplikacije. ¦ Datoteka pripravljena: pošlji jo, odpre se z dvoklikom v brskalniku, brez aplikacije.
+Retirer du terrain ¦ Ukloni sa zemljišta ¦ Odstrani z zemljišča
+🏘 Le hameau : les bâtiments du terrain ¦ 🏘 Zaselak: zgrade na zemljištu ¦ 🏘 Zaselek: stavbe na zemljišču
+La ferme, la grange, le four, le puits, les maisons voisines : chacune est une maison de la liste « 🏠 Maisons de famille », posée ici à côté (en 3D et en pointillés sur le plan). ¦ Farma, štagalj, krušna peć, bunar, susjedne kuće: svaka je kuća s popisa „🏠 Obiteljske kuće”, postavljena ovdje pokraj (u 3D i isprekidano na nacrtu). ¦ Kmetija, skedenj, krušna peč, vodnjak, sosednje hiše: vsaka je hiša s seznama »🏠 Družinske hiše«, postavljena tukaj zraven (v 3D in črtkano na načrtu).
+＋ Ajouter un bâtiment ¦ ＋ Dodaj zgradu ¦ ＋ Dodaj stavbo
+N° de foyer au recensement (facultatif) ¦ Br. kućanstva u popisu (neobavezno) ¦ Št. gospodinjstva v popisu (neobvezno)
+Bâtiment ajouté ¦ Zgrada dodana ¦ Stavba dodana
+Bâtiment déplacé ¦ Zgrada pomaknuta ¦ Stavba premaknjena
+Bâtiment retiré ¦ Zgrada uklonjena ¦ Stavba odstranjena
+Soleil à {deg}° de haut, au {dir} ¦ Sunce na {deg}° visine, smjer: {dir} ¦ Sonce na {deg}° višine, smer: {dir}
+boussole|nord ¦ sjever ¦ sever
+boussole|nord-est ¦ sjeveroistok ¦ severovzhod
+boussole|est ¦ istok ¦ vzhod
+boussole|sud-est ¦ jugoistok ¦ jugovzhod
+boussole|sud ¦ jug ¦ jug
+boussole|sud-ouest ¦ jugozapad ¦ jugozahod
+boussole|ouest ¦ zapad ¦ zahod
+boussole|nord-ouest ¦ sjeverozapad ¦ severozahod
+🌙 Nuit ¦ 🌙 Noć ¦ 🌙 Noč
+Crépuscule ¦ Sumrak ¦ Mrak
+(pose une lampe pour éclairer) ¦ (postavi svjetiljku za osvjetljenje) ¦ (postavi svetilko za osvetlitev)
+nuit polaire ¦ polarna noć ¦ polarna noč
+soleil de minuit ¦ ponoćno sunce ¦ polnočno sonce
+lever {rise}, coucher {set} ¦ izlazak {rise}, zalazak {set} ¦ vzhod {rise}, zahod {set}
+France (lieu de la maison inconnu) ¦ Francuska (mjesto kuće nepoznato) ¦ Francija (kraj hiše neznan)
+au sol {len} ¦ na tlu {len} ¦ na tleh {len}
+🗺 Arrêt {n} sur {total} ¦ 🗺 Postaja {n} od {total} ¦ 🗺 Postanek {n} od {total}
+🪜 Un escalier : ¦ 🪜 Stubište: ¦ 🪜 Stopnišče:
+⬆ Monter (E) ¦ ⬆ Popni se (E) ¦ ⬆ Pojdi gor (E)
+⬇ Descendre (C) ¦ ⬇ Siđi (C) ¦ ⬇ Pojdi dol (C)
+Ce glTF utilise des fichiers à part : exporte-le plutôt en GLB (un seul fichier). ¦ Ovaj glTF koristi zasebne datoteke: radije ga izvezi u GLB (jedna datoteka). ¦ Ta glTF uporablja ločene datoteke: raje ga izvozi v GLB (ena datoteka).
+Format 3D inconnu. ¦ Nepoznat 3D format. ¦ Neznana oblika 3D.
+✦ Les souvenirs de la pièce ¦ ✦ Uspomene iz prostorije ¦ ✦ Spomini prostora
+☀️ Lumière du jour ¦ ☀️ Dnevno svjetlo ¦ ☀️ Dnevna svetloba
+Le soleil passe d’une heure à l’autre ¦ Sunce prelazi iz sata u sat ¦ Sonce se premika iz ure v uro
+À cette heure-ci, du 1er janvier au 31 décembre : les ombres s’allongent l’hiver ¦ U ovo doba dana, od 1. siječnja do 31. prosinca: sjene se zimi produljuju ¦ Ob tej uri, od 1. januarja do 31. decembra: pozimi se sence podaljšajo
+▶ Voir la journée ¦ ▶ Pogledaj dan ¦ ▶ Predvajaj dan
+▶ Voir l’année ¦ ▶ Pogledaj godinu ¦ ▶ Predvajaj leto
+❄️ Hiver ¦ ❄️ Zima ¦ ❄️ Zima
+🌱 Printemps ¦ 🌱 Proljeće ¦ 🌱 Pomlad
+☀️ Été ¦ ☀️ Ljeto ¦ ☀️ Poletje
+🍂 Automne ¦ 🍂 Jesen ¦ 🍂 Jesen
+📅 Aujourd’hui ¦ 📅 Danas ¦ 📅 Danes
+Ombres portées ¦ Bačene sjene ¦ Mečne sence
+🚶 Visite ¦ 🚶 Obilazak ¦ 🚶 Ogled
+Monter à l’étage du dessus (E ou Page ↑) ¦ Popni se na kat iznad (E ili Page ↑) ¦ Pojdi v nadstropje zgoraj (E ali Page ↑)
+Descendre à l’étage du dessous (C ou Page ↓) ¦ Siđi na kat ispod (C ili Page ↓) ¦ Pojdi v nadstropje spodaj (C ali Page ↓)
+Yeux à ¦ Oči na ¦ Oči na
+Un arrêt de la visite guidée, ici, regardant par là (avec un texte lu à voix haute) ¦ Postaja vođenog obilaska, ovdje, s pogledom onamo (s tekstom koji se čita naglas) ¦ Postanek vodenega ogleda, tukaj, s pogledom tja (z besedilom, prebranim na glas)
+Une photo ancienne prise de cet endroit, dans cette direction : on la compare avec la maison d’aujourd’hui ¦ Stara fotografija snimljena s ovog mjesta, u ovom smjeru: uspoređuje se s današnjom kućom ¦ Stara fotografija, posneta s tega mesta, v tej smeri: primerja se z današnjo hišo
+📍 Arrêt ici ¦ 📍 Postaja ovdje ¦ 📍 Postanek tukaj
+📷 Photo d’époque ici ¦ 📷 Stara fotografija ovdje ¦ 📷 Stara fotografija tukaj
+Petite carte : clic pour t’y rendre ¦ Mala karta: klikni za odlazak onamo ¦ Mali zemljevid: klikni, da greš tja
+Z Q S D, W A S D ou flèches : marcher · Maj : courir · la souris regarde · Échap : libérer la souris ¦ Z Q S D, W A S D ili strelice: hodanje · Shift: trčanje · miš gleda okolo · Esc: oslobodi miš ¦ Z Q S D, W A S D ali puščice: hoja · Shift: tek · miška gleda naokoli · Esc: sprosti miško
+Le rond en bas à gauche : marcher · glisser sur la vue : regarder · ✦ : toucher pour voir le souvenir ¦ Krug dolje lijevo: hodanje · povlačenje po prikazu: gledanje · ✦: dodirni za prikaz uspomene ¦ Krog spodaj levo: hoja · vlečenje po pogledu: gledanje · ✦: tapni za ogled spomina
+Z Q S D, W A S D ou flèches : marcher · clic sur la vue : regarder avec la souris · ✦ : clic pour voir le souvenir · Échap : sortir ¦ Z Q S D, W A S D ili strelice: hodanje · klik na prikaz: gledanje mišem · ✦: klikni za prikaz uspomene · Esc: izlaz ¦ Z Q S D, W A S D ali puščice: hoja · klik na pogled: gledanje z miško · ✦: klikni za ogled spomina · Esc: izhod
+✋ Arrêter la visite ¦ ✋ Zaustavi obilazak ¦ ✋ Ustavi ogled
+Autrefois ¦ Nekad ¦ Nekoč
+Autrefois ou aujourd’hui ¦ Nekad ili danas ¦ Nekoč ali danes
+Arrêt suivant ¦ Sljedeća postaja ¦ Naslednji postanek
+Arrêter la visite guidée ¦ Zaustavi vođeni obilazak ¦ Ustavi voden ogled
+Pose d’abord des arrêts (🚶 Visiter → 📍 Arrêt ici). ¦ Najprije postavi postaje (🚶 Obiđi → 📍 Postaja ovdje). ¦ Najprej postavi postanke (🚶 Ogled → 📍 Postanek tukaj).
+Ce navigateur ne sait pas enregistrer de vidéo. ¦ Ovaj preglednik ne može snimati video. ¦ Ta brskalnik ne zna snemati videa.
+Remettre la vue comme au départ ¦ Vrati prikaz na početno ¦ Ponastavi pogled na začetno
+L’image du média n° {n} est introuvable : une toile neutre la remplace. ¦ Slika medija br. {n} nije pronađena: zamjenjuje je neutralno platno. ¦ Slike medija št. {n} ni mogoče najti: nadomesti jo nevtralno platno.
+Cadre {n} : une image ¦ Okvir {n}: slika ¦ Okvir {n}: slika
+Cadre {n} : vide ¦ Okvir {n}: prazan ¦ Okvir {n}: prazen
+Image du cadre {n} ¦ Slika okvira {n} ¦ Slika okvirja {n}
+Prise dans les médias ¦ Uzeto iz medija ¦ Vzeto iz medijev
+L’image de « {name} » ¦ Slika za „{name}” ¦ Slika za »{name}«
+🖼 Déposer sur « {name} » (cadre {n}) ¦ 🖼 Ispusti na „{name}” (okvir {n}) ¦ 🖼 Spusti na »{name}« (okvir {n})
+🖼 Déposer sur « {name} » ¦ 🖼 Ispusti na „{name}” ¦ 🖼 Spusti na »{name}«
+Remplir (recadrer) ¦ Ispuni (izreži) ¦ Zapolni (obreži)
+Ajuster (toute l’image) ¦ Prilagodi (cijela slika) ¦ Prilagodi (cela slika)
+Centrer (taille réelle) ¦ Centriraj (stvarna veličina) ¦ Na sredino (resnična velikost)
+Pas d’image. ¦ Nema slike. ¦ Ni slike.
+Image introuvable ¦ Slika nije pronađena ¦ Slike ni mogoče najti
+Le cadre ¦ Okvir ¦ Okvir
+MAISON · IMAGE ¦ KUĆA · SLIKA ¦ HIŠA · SLIKA
+Poser cette image ¦ Postavi ovu sliku ¦ Postavi to sliko
+Ou un souvenir de cet objet : ¦ Ili uspomena ovog predmeta: ¦ Ali spomin tega predmeta:
+La rattacher aussi aux souvenirs de cet objet ¦ Poveži je i s uspomenama ovog predmeta ¦ Poveži jo tudi s spomini tega predmeta
+🏷 Garder aussi comme souvenir ¦ 🏷 Zadrži i kao uspomenu ¦ 🏷 Ohrani tudi kot spomin
+⚠️ Cette image est introuvable dans les médias : une toile neutre la remplace. Choisis-en une autre. ¦ ⚠️ Ova slika nije pronađena u medijima: zamjenjuje je neutralno platno. Odaberi drugu. ¦ ⚠️ Te slike ni mogoče najti med mediji: nadomesti jo nevtralno platno. Izberi drugo.
+Aperçu : glisse pour déplacer l’image, molette pour zoomer ¦ Pregled: povuci za pomicanje slike, kotačić za zumiranje ¦ Predogled: povleci za premik slike, kolešček za povečavo
+Glisse pour déplacer l’image · molette pour zoomer ¦ Povuci za pomicanje slike · kotačić za zumiranje ¦ Povleci za premik slike · kolešček za povečavo
+Dans le cadre ¦ U okviru ¦ V okvirju
+Remettre l’image au centre, sans zoom ¦ Vrati sliku u središte, bez zumiranja ¦ Postavi sliko nazaj na sredino, brez povečave
+↺ Recadrage de départ ¦ ↺ Početno izrezivanje ¦ ↺ Začetna obrezava
+Recadrage de départ ¦ Početno izrezivanje ¦ Začetna obrezava
+Sa couleur ¦ Njezina boja ¦ Njena barva
+Passe-partout ¦ Paspartu ¦ Paspartu
+🖼 Images des cadres ¦ 🖼 Slike okvira ¦ 🖼 Slike okvirjev
+🖼 Image ¦ 🖼 Slika ¦ 🖼 Slika
+📁 Tu peux aussi glisser une image de l’ordinateur sur l’objet, dans le plan ou dans la vue 3D : elle entre dans les médias. ¦ 📁 Možeš i povući sliku s računala na predmet, na nacrtu ili u 3D prikazu: ulazi u medije. ¦ 📁 Sliko lahko povlečeš tudi iz računalnika na predmet, na načrtu ali v 3D pogledu: gre med medije.
+Image posée ¦ Slika postavljena ¦ Slika postavljena
+Image retirée ¦ Slika uklonjena ¦ Slika odstranjena
+Import de l’image… ¦ Uvoz slike… ¦ Uvoz slike…
+Image déposée sur l’objet ¦ Slika ispuštena na predmet ¦ Slika spuščena na predmet
+✓ L’image est rangée dans les médias et posée sur l’objet. ¦ ✓ Slika je spremljena u medije i postavljena na predmet. ¦ ✓ Slika je shranjena med medije in postavljena na predmet.
+Image prise dans les souvenirs ¦ Slika uzeta iz uspomena ¦ Slika, vzeta iz spominov
+Image tournée ¦ Slika okrenuta ¦ Slika zasukana
