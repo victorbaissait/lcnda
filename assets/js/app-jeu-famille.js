@@ -18,6 +18,8 @@
     const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : s);
     const lab = def => i18n(def.label).replace(/^\S+\s/, ''); // le nom du jeu sans son icône, traduit
     const UP = s => s.toLocaleUpperCase(window.LCNDA_I18N?.locale?.() || 'fr-FR');
+    // un nom de personne garde les capitales françaises (en turc, « i » deviendrait « İ ») : seul le texte de l’app suit la langue
+    const UPN = sc => (sc?.kind === 'branch' && sc?.rootName ? UP(i18n('Les ancêtres de {name}', {name: '\u2063'})).replace('\u2063', String(sc.rootName).toLocaleUpperCase('fr-FR')) : UP(scopeLabel(sc)));
     const plural = (n, w, p) => (A()?.plural ? A().plural(n, w, p) : `${n} ${n > 1 ? (p || w + 's') : w}`);
     // les parties et les derniers réglages restent dans ce navigateur (« lcnda-… » : pas recopiés dans la base, comme le labyrinthe) ;
     // les 💾 réglages enregistrés suivent la base (« genealogie-… » : sauvegarde complète, autre ordinateur)
@@ -194,7 +196,7 @@
         const g = gameById(id), def = g && DEFS.get(g.kind); if (!def) return false;
         const ac = new AbortController(); let cleanup = null;
         stopper = () => { ac.abort(); try { cleanup?.(); } catch (_) {} };
-        ws.innerHTML = `<section class="goose-page jf-page jf-${def.key}"><header class="goose-head goose-game-head jf-gamehead"><div><span class="eyebrow">${esc(i18n('PARTIE EN COURS · {scope}', {scope: UP(lab(def))}))}${g.cfg?.scope && def.scope ? ` · ${esc(UP(scopeLabel(g.cfg.scope)))}` : ''}</span><h2>${def.icon} ${esc(g.name)}</h2><p data-jf-sub></p></div>
+        ws.innerHTML = `<section class="goose-page jf-page jf-${def.key}"><header class="goose-head goose-game-head jf-gamehead"><div><span class="eyebrow">${esc(i18n('PARTIE EN COURS · {scope}', {scope: UP(lab(def))}))}${g.cfg?.scope && def.scope ? ` · ${esc(UPN(g.cfg.scope))}` : ''}</span><h2>${def.icon} ${esc(g.name)}</h2><p data-jf-sub></p></div>
             <div class="page-actions"><button type="button" class="button small" data-jf-again title="${esc(i18n('Une nouvelle partie avec les mêmes réglages'))}">↻ ${esc(i18n('Rejouer'))}</button><button type="button" class="button small secondary" data-jf-new>＋ ${esc(i18n('Nouvelle partie', {ctx: 'jeu'}))}</button><button type="button" class="button small secondary" data-jf-del>🗑 ${esc(i18n('Supprimer'))}</button></div></header>
             <div class="jf-play" data-jf-play></div></section>`;
         const host = ws.querySelector('[data-jf-play]');

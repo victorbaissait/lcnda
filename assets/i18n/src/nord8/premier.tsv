@@ -1,0 +1,111 @@
+fr ¦ tr
+# ═════ zone « premier » : turc (tr) ═════
+INSTALLATION ¦ KURULUM
+La base généalogique doit être importée. ¦ Soy ağacı veritabanı içe aktarılmalı.
+Choisis comment démarrer : importer un fichier existant, ou créer une première personne pour partir d'une base vide. ¦ Nasıl başlayacağını seç: var olan bir dosyayı içe aktar ya da boş bir veritabanından başlamak için ilk kişiyi oluştur.
+GEDCOM (.ged, aussi d’Ancestry, MyHeritage, Geneanet), Gramps (.gramps ou paquet .gpkg avec les photos), Hérédis (.hmw ou .heredis), MacFamilyTree (.mftpkg), base LCNDA (.db) ou sauvegarde complète LCNDA (.zip, base + médias). Les fichiers JSON et CSV sont analysés mais pas encore importés. ¦ GEDCOM (.ged, Ancestry, MyHeritage, Geneanet’ten de), Gramps (.gramps ya da fotoğraflarla .gpkg paketi), Hérédis (.hmw ya da .heredis), MacFamilyTree (.mftpkg), LCNDA veritabanı (.db) ya da LCNDA tam yedeği (.zip, veritabanı + medya). JSON ve CSV dosyaları incelenir ama henüz içe aktarılmaz.
+Fichier ¦ Dosya
+Créer une première personne ¦ İlk kişiyi oluştur
+Initialise une base vide avec une première fiche, à compléter ensuite. ¦ Boş bir veritabanını, sonra tamamlanacak ilk kartla başlatır.
+Prénom ¦ Ad
+Nom ¦ Soyadı
+Créer et ouvrir la base ¦ Veritabanını oluştur ve aç
+Je veux faire autre chose ▾ ¦ Başka bir şey yapmak istiyorum ▾
+▴ Replier ¦ ▴ Daralt
+Qu’est-ce que tu veux faire avec l’app ? ¦ Uygulamayla ne yapmak istiyorsun?
+Choisis ce qui te ressemble : l’app s’ouvre avec les bons onglets et le bon premier écran. Tu pourras tout changer après. ¦ Sana uyanı seç: uygulama doğru sekmelerle ve doğru ilk ekranla açılır. Sonra her şeyi değiştirebilirsin.
+Ta famille, tes ancêtres, leurs actes et leurs photos. ¦ Ailen, ataların, belgeleri ve fotoğrafları.
+Une lignée d’animaux ¦ Bir hayvan soyu
+Un élevage, le pedigree de tes chiens, chats, chevaux… ¦ Bir yetiştirme, köpeklerinin, kedilerinin, atlarının soy kütüğü…
+Recenser des animaux ¦ Hayvanları kaydetmek
+Suivre des animaux : baguage, puces, observations, trajets. ¦ Hayvanları izle: halkalama, çipler, gözlemler, güzergâhlar.
+L’histoire d’une maison ou d’un village ¦ Bir evin ya da bir köyün tarihi
+Maison ou village ¦ Ev ya da köy
+Qui a vécu où, de génération en génération, pièce par pièce. ¦ Kim nerede yaşadı, kuşaktan kuşağa, oda oda.
+Le catalogue d’un artiste ou d’une collection ¦ Bir sanatçının ya da bir koleksiyonun kataloğu
+Artiste ou collection ¦ Sanatçı ya da koleksiyon
+Ses œuvres, ses expositions, son catalogue raisonné. ¦ Eserleri, sergileri, eser kataloğu (catalogue raisonné).
+Un fonds d’archives ou un musée familial ¦ Bir arşiv fonu ya da bir aile müzesi
+Archives ou musée ¦ Arşiv ya da müze
+Des photos, des lettres, des objets à classer et à décrire. ¦ Sınıflanacak ve tanımlanacak fotoğraflar, mektuplar, nesneler.
+L’étude d’un nom de famille ¦ Bir soyadının incelenmesi
+Un nom de famille ¦ Bir soyadı
+Tous les porteurs d’un nom, ses variantes, d’où ils viennent. ¦ Bir adı taşıyan herkes, değişik yazılışları, nereden geldikleri.
+L’histoire d’une entreprise ou d’une association ¦ Bir şirketin ya da bir derneğin tarihi
+Entreprise ou association ¦ Şirket ya da dernek
+Ses lieux, ses dirigeants, ses salariés ou ses membres. ¦ Yerleri, yöneticileri, çalışanları ya da üyeleri.
+Transmettre des souvenirs ¦ Anıları aktarmak
+Des lettres à ouvrir plus tard, des recettes, des chansons, des souvenirs à laisser. ¦ Sonra açılacak mektuplar, tarifler, şarkılar, bırakılacak anılar.
+Ce qui change ¦ Neler değişir
+Commencer avec une base vide ¦ Boş bir veritabanıyla başla
+🧪 Essayer avec une base d’exemple ¦ 🧪 Örnek bir veritabanıyla dene
+🧪 Base d’exemple ¦ 🧪 Örnek veritabanı
+Une famille imaginaire pour essayer l’app : ta généalogie n’est pas touchée. ¦ Uygulamayı denemek için hayalî bir aile: soy ağacına dokunulmaz.
+Revenir à ma généalogie ¦ Soy ağacıma dön
+Repartir d’une base vide ¦ Boş bir veritabanıyla yeniden başla
+Ou bien : ¦ Ya da:
+🐾 Créer le premier animal ¦ 🐾 İlk hayvanı oluştur
+Créer le premier animal ¦ İlk hayvanı oluştur
+Espèce ¦ Tür
+Création de la base… ¦ Veritabanı oluşturuluyor…
+Préparation de la base d’exemple… ¦ Örnek veritabanı hazırlanıyor…
+✓ Base créée ¦ ✓ Veritabanı oluşturuldu
+ℹ️ Rien n’est figé : Réglages → Apparence → « 🧭 Usage de l’app ». ¦ ℹ️ Hiçbir şey kesin değil: Ayarlar → Görünüm → “🧭 Uygulamanın kullanımı”.
+🧭 Usage de l’app ¦ 🧭 Uygulamanın kullanımı
+🧭 Revoir le premier lancement ¦ 🧭 İlk açılışı yeniden gör
+Premier écran à l’ouverture ¦ Açılışta ilk ekran
+Le dernier écran ouvert (comme avant) ¦ Son açılan ekran (eskisi gibi)
+Usage enregistré. ¦ Kullanım kaydedildi.
+(la page va se recharger) ¦ (sayfa yeniden yüklenecek)
+Langue · Language ¦ Dil · Language
+Une petite visite ? ¦ Kısa bir tur?
+En {n} étapes, l’app te montre où créer une fiche, ajouter un parent, une photo, un événement, faire une sauvegarde et trouver l’aide. Ça prend deux minutes. ¦ {n} adımda uygulama sana nerede kart oluşturacağını, nasıl ebeveyn, fotoğraf, olay ekleyeceğini, yedek alacağını ve yardımı nerede bulacağını gösterir. İki dakika sürer.
+▶ Commencer ¦ ▶ Başla
+Plus tard ¦ Sonra
+Ne plus proposer ¦ Bir daha önerme
+Passer la visite ¦ Turu geç
+← Précédent ¦ ← Önceki
+Suivant → ¦ Sonraki →
+✓ Terminer ¦ ✓ Bitir
+Étape {i} sur {n} ¦ Adım {i} / {n}
+Visite guidée, étape {i} sur {n} : {what} ¦ Rehberli tur, adım {i} / {n}: {what}
+Tu peux cliquer le bouton entouré pour le faire pour de vrai, ou juste avancer. ¦ Gerçekten yapmak için çevrelenmiş düğmeye tıklayabilir ya da sadece ilerleyebilirsin.
+Ajouter un parent ¦ Ebeveyn ekle
+Ajouter une photo ¦ Fotoğraf ekle
+Un événement et son lieu ¦ Bir olay ve yeri
+Faire une sauvegarde ¦ Yedek al
+Les Réglages et l’aide ¦ Ayarlar ve yardım
+Chaque personne a sa fiche. Ce bouton en crée une : un prénom, un nom, et c’est parti. ¦ Her kişinin bir kartı vardır. Bu düğme bir tane oluşturur: bir ad, bir soyadı, ve başlıyoruz.
+Sur une fiche, le « ＋ » de « Parents » relie un père ou une mère : choisis une fiche qui existe, ou crée-la. C’est comme ça que l’arbre se construit. ¦ Bir kartta “Ebeveynler”in “＋” düğmesi bir baba ya da anne bağlar: var olan bir kartı seç ya da oluştur. Ağaç böyle büyür.
+Ici, tu ajoutes des photos et des actes à la fiche : prends-les dans tes médias, ou glisse-les depuis l’ordinateur. ¦ Burada karta fotoğraflar ve belgeler eklersin: onları medyandan al ya da bilgisayardan sürükle.
+Naissance, mariage, décès… Ajoute un événement avec sa date et son lieu : tape les premières lettres de la commune, l’app la trouve. ¦ Doğum, evlilik, ölüm… Tarihi ve yeriyle bir olay ekle: yerleşim yerinin ilk harflerini yaz, uygulama onu bulur.
+De temps en temps, fais une sauvegarde : ce fichier garde toute ta généalogie et tes photos. Range-le sur une clé USB ou un autre disque. ¦ Arada bir yedek al: bu dosya tüm soy ağacını ve fotoğraflarını saklar. Onu bir USB belleğe ya da başka bir diske koy.
+Tout se règle ici : apparence, import, sauvegardes… Dans les Réglages, la page « FAQ / tuto » répond à tes questions ; tu peux aussi y relancer cette visite. ¦ Her şey burada ayarlanır: görünüm, içe aktarma, yedekler… Ayarlar’daki “SSS / rehber” sayfası sorularını cevaplar; bu turu orada yeniden de başlatabilirsin.
+✓ Visite terminée. Pour la revoir : Réglages → FAQ / tuto → « ▶ Relancer la visite guidée ». ¦ ✓ Tur bitti. Yeniden görmek için: Ayarlar → SSS / rehber → “▶ Rehberli turu yeniden başlat”.
+Visite guidée fermée. Tu la retrouves dans Réglages → FAQ / tuto. ¦ Rehberli tur kapatıldı. Onu Ayarlar → SSS / rehber içinde bulursun.
+Une petite visite guidée de l’app est proposée. Commencer, plus tard, ou ne plus proposer. ¦ Uygulamanın kısa bir rehberli turu öneriliyor. Başla, sonra ya da bir daha önerme.
+Rien à montrer sur cet écran pour l’instant. ¦ Şimdilik bu ekranda gösterilecek bir şey yok.
+Pas de visite guidée en mode consultation. ¦ Görüntüleme modunda rehberli tur yok.
+La visite guidée n’est pas possible ici. ¦ Rehberli tur burada mümkün değil.
+🐞 Signaler un problème ¦ 🐞 Bir sorun bildir
+AIDE ¦ YARDIM
+Ce qui s’est passé ¦ Ne oldu
+Ce que j’attendais ¦ Ne bekliyordum
+Écris avec tes mots. Évite les noms de ta famille si tu ne veux pas qu’ils soient lus. ¦ Kendi sözlerinle yaz. Okunmasını istemiyorsan ailenin adlarını yazma.
+Joindre le rapport technique ¦ Teknik raporu ekle
+Joindre le rapport technique ({x}) ¦ Teknik raporu ekle ({x})
+aucune erreur captée ¦ yakalanan hata yok
+Rapport technique ¦ Teknik rapor
+🗑 Vider le journal ¦ 🗑 Günlüğü boşalt
+Vider le journal des erreurs captées sur cet ordinateur ¦ Bu bilgisayarda yakalanan hataların günlüğünü boşalt
+✉️ Écrire un e-mail ¦ ✉️ E-posta yaz
+Ouvrir une demande sur GitHub ¦ GitHub’da bir istek aç
+Journal des erreurs vidé ¦ Hata günlüğü boşaltıldı
+✓ Message copié : colle-le où tu veux (e-mail, forum, GitHub). ¦ ✓ Mesaj kopyalandı: istediğin yere yapıştır (e-posta, forum, GitHub).
+La copie n’a pas marché : sélectionne le texte et copie-le à la main. ¦ Kopyalama çalışmadı: metni seç ve elle kopyala.
+Dis en quelques mots ce qui s’est passé. ¦ Ne olduğunu birkaç kelimeyle anlat.
+Ex. : j’ai cliqué sur « Enregistrer » dans la fiche, et la fenêtre est restée grise. ¦ Örn.: kartta “Kaydet”e tıkladım ve pencere gri kaldı.
+Ex. : que la fiche soit enregistrée et que la fenêtre se ferme. ¦ Örn.: kartın kaydedilmesi ve pencerenin kapanması.
+Pour écrire un e-mail plutôt qu’ouvrir une demande sur GitHub : règle une adresse dans Réglages → « 🔄 Mises à jour ». ¦ GitHub’da istek açmak yerine e-posta yazmak için: Ayarlar → “🔄 Güncellemeler” içinde bir adres ayarla.
+La base d’exemple est une famille imaginaire (5 générations, des photos d’époque dessinées) rangée à part dans « Mes généalogies » : ta généalogie n’est jamais touchée. ¦ Örnek veritabanı hayalî bir ailedir (5 kuşak, çizilmiş eski fotoğraflar) ve “Soy ağaçlarım” içinde ayrı tutulur: soy ağacına asla dokunulmaz.
+Aucun fichier choisi ¦ Dosya seçilmedi

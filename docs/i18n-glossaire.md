@@ -1017,6 +1017,101 @@ vêpres », « né », « décédée »…) restent en français, avec l’expli
 | FAQ | FAQ (Algengar spurningar) |
 | Traduction faite par une IA | Þýtt af gervigreind |
 
+## Langue ajoutée ensuite : turc (tr)
+
+Fichiers à part : `assets/i18n/src/nord8/<zone>.tsv` (1re ligne `fr ¦ tr`, même clé que `<zone>.tsv`).
+On traduit **depuis le français** (`node scripts/i18n-todo.js tr <zone>` montre l’anglais et l’allemand en aide ; aucune langue
+proche n’est encore traduite).
+Ton : on tutoie (*sen*), phrases courtes et simples : impératif 2e personne du singulier (« Seç », « Tıkla », « Sürükle »,
+« Yeniden dene », « Yazımı kontrol et ») ; boutons et entrées de menu à l’impératif aussi (« Kaydet », « Sil », « Ekle »,
+« Kapat »). Guillemets “…”. Lettres propres au turc (ç, ğ, ı, İ, ö, ş, ü) : toujours écrites ; la recherche de la FAQ les
+ramène à c, g, i, i, o, s, u. **i / İ et ı / I sont deux lettres différentes** : « İptal », « İçe aktar » (İ avec point),
+« Kapat », « Sınıf » (ı sans point) ; ne jamais mettre en capitales un texte turc avec `toUpperCase()` (« i » → « I » faux) ;
+les noms de personnes, eux, gardent toujours les capitales françaises (`toLocaleUpperCase('fr-FR')`).
+**Pluriels — ordre des formes dans les `.tsv`** : `one|other` (`FORMS.def` dans `scripts/i18n-build.js`) : 1 → « one »,
+tout le reste (0, 2, 21, 1,5…) → « other ». Après un nombre, le nom turc reste au singulier (« 1 kişi », « 5 kişi ») :
+les deux formes sont donc presque toujours les mêmes (`kişi|kişi`, `gün|gün`, `hafta|hafta`), comme en hongrois.
+**Suffixes après une variable** : le turc colle la fin du mot (génitif, locatif, accusatif…) et l’accorde au mot (harmonie
+vocalique, « {name}’in » / « {name}’ın » / « {name}’un »…) ; on ne peut pas la deviner pour un `{x}` inconnu. On tourne
+donc la phrase : la variable après deux-points (« Kişi: {name} », « Bilgi: {x} », « ⤒ İçe aktar: {what} »), ou devant
+un mot entier qui ne s’accorde pas (« {what} bulundu », « {what} içe aktarıldı », « “{q}” için … »).
+Années : « 1582’de » seulement pour un nombre écrit dans le texte, jamais après `{y}` (« {y} yılında ») ; siècles :
+« 18. yüzyıl ». Pourcentage : le signe devant (« %{n} »). Les exemples de dates d’actes restent en français, lisibles par la
+lecture C4 (« 12/03/1790 », « 12 mars 1790 », « 9 novembre 1799 »), jamais un mois turc. Les mots des actes cités (« à l’heure
+de vêpres », « né », « décédée »…) restent en français, avec l’explication autour.
+« Fiche » d’une personne : *kart* (« Kişi kartı » ; affichage « Liste | Fiches » : *Liste | Kartlar*) ; « 📒 Fiches » (notes de
+sujets) : *📒 Not kartları* ; « Personne » : *kişi* (« Personnes » : *Kişiler*).
+
+| Français | Türkçe |
+|---|---|
+| Sosa (numéro Sosa) | Sosa |
+| fiche (d’une personne) | kart (kişi kartı) |
+| 📒 Fiches (sujets) | 📒 Not kartları |
+| généalogie (la base de la personne) | soy ağacı (soy ağacın) |
+| base (de données) | veritabanı |
+| acte | belge (kayıt) |
+| baptême / naissance | vaftiz / doğum |
+| mariage | evlilik |
+| décès | ölüm |
+| parrain / marraine | vaftiz babası / vaftiz annesi |
+| témoin / déclarant | tanık / bildiren |
+| ascendants / descendants | atalar / torunlar |
+| branche | kol |
+| génération | kuşak |
+| implexe | implex (tekrarlanan atalar) |
+| recensement | nüfus sayımı |
+| inventaire après décès | ölüm sonrası envanter |
+| dépouillement | döküm |
+| cote (d’archive) | arşiv numarası |
+| mur de brique | tuğla duvar |
+| cousinade | aile buluşması |
+| commune / ville / village | yerleşim yeri / şehir / köy |
+| paroisse | kilise bölgesi |
+| catalogue raisonné | eser kataloğu |
+| Tableau de bord | Gösterge paneli |
+| widget | widget |
+| Personnes | Kişiler |
+| Graphiques / Diagrammes | Grafikler / Diyagramlar |
+| Carte | Harita |
+| Listes | Listeler |
+| Chronologie | Kronoloji |
+| Recherche | Araştırma |
+| Enquêtes | İncelemeler |
+| Trésors | Hazineler |
+| Réglages | Ayarlar |
+| Apparence | Görünüm |
+| Médias | Medya |
+| Source | Kaynak |
+| Étiquette | Etiket |
+| Battue | Tarama |
+| Mode simple | Basit mod |
+| Mode consultation | Görüntüleme modu |
+| Sauvegarde | Yedek (yedekleme) |
+| Enregistrer / ✓ Enregistré | Kaydet / ✓ Kaydedildi |
+| Annuler (bouton) | İptal |
+| ↶ Annuler / ↷ Rétablir | ↶ Geri al / ↷ Yinele |
+| Fermer | Kapat |
+| Supprimer | Sil |
+| Retirer (détacher) | Çıkar |
+| Modifier | Düzenle |
+| Créer / Ajouter | Oluştur / Ekle |
+| Relier | Bağla |
+| ↺ Remettre comme au départ | ↺ Başlangıçtaki gibi yap |
+| Réessayer | Yeniden dene |
+| ⤒ Importer / ⤓ Exporter | ⤒ İçe aktar / ⤓ Dışa aktar |
+| 🖨 Imprimer | 🖨 Yazdır |
+| Chercher / Filtrer ▾ / Trier : | Ara / Filtrele ▾ / Sırala: |
+| ✓ Compris : | ✓ Anlaşıldı: |
+| Aimanter | Mıknatısla |
+| Liste \| Fiches (affichage) | Liste \| Kartlar |
+| onglet | sekme |
+| Tableur / Traitement de texte | Tablo / Kelime işlemci |
+| Mise en page | Sayfa düzeni |
+| ordinateur | bilgisayar |
+| app | uygulama |
+| FAQ | SSS (Sık sorulan sorular) |
+| Traduction faite par une IA | Çeviriyi bir yapay zekâ yaptı |
+
 ## Zone « tresors-ui » (étiquettes et fenêtres des pages Trésors)
 
 | Français | English | Español | Deutsch | Italiano | Português | Polski | Nederlands |

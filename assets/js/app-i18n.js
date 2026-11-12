@@ -6,11 +6,11 @@
  *   t('Fiche', {ctx: 'onglet'})            → clé « onglet|Fiche » quand un même mot se traduit autrement (repli : « Fiche »)
  *   plural(3, 'personne')                  → « 3 personnes » / « 3 people » / « 3 osoby » (Intl.PluralRules, 0 et 1 au singulier en français)
  *   fmtNumber(1234.5), fmtDate(date, opts) → Intl selon la langue (jamais pour les dates généalogiques : elles suivent C4)
- * Fichiers de langue : assets/i18n/<code>.json (en, es, de, it, pt, pl, nl, cs, sv, da, sk, nb, ro, fi, hu, hr, sl, lt, lv, et, is), fabriqués par scripts/i18n-build.js depuis
+ * Fichiers de langue : assets/i18n/<code>.json (en, es, de, it, pt, pl, nl, cs, sv, da, sk, nb, ro, fi, hu, hr, sl, lt, lv, et, is, tr), fabriqués par scripts/i18n-build.js depuis
  * assets/i18n/src/*.tsv (et assets/i18n/src/nord/*.tsv pour cs, sv, da ; assets/i18n/src/nord2/*.tsv pour sk, nb ;
  * assets/i18n/src/nord3/*.tsv pour ro ; assets/i18n/src/nord4/*.tsv pour fi, hu ;
  * assets/i18n/src/nord5/*.tsv pour hr, sl ; assets/i18n/src/nord6/*.tsv pour lt, lv, et ;
- * assets/i18n/src/nord7/*.tsv pour is).
+ * assets/i18n/src/nord7/*.tsv pour is ; assets/i18n/src/nord8/*.tsv pour tr).
  * Valeur = texte, ou formes de pluriel {zero, one, two, few, many, other}.
  *
  * En français, RIEN ne change : t() rend le texte tel quel, plural() est celui d'avant, aucune page n'est retouchée.
@@ -48,10 +48,11 @@
         {code: 'lv', name: 'Latviešu', flag: '🇱🇻', locale: 'lv-LV'},
         {code: 'et', name: 'Eesti', flag: '🇪🇪', locale: 'et-EE'},
         {code: 'is', name: 'Íslenska', flag: '🇮🇸', locale: 'is-IS'},
+        {code: 'tr', name: 'Türkçe', flag: '🇹🇷', locale: 'tr-TR'},
     ]);
     const CODES = LANGS.map(l => l.code);
     const KEY = 'lcnda-langue', COOKIE = 'lcnda_lang', BANNER_KEY = 'lcnda-i18n-banner-closed';
-    const VERSION = 20; // monter avec ?v= de assets/i18n/*.json dans index.php
+    const VERSION = 21; // monter avec ?v= de assets/i18n/*.json dans index.php
     const hasDom = typeof document !== 'undefined' && typeof window !== 'undefined';
     const isCode = c => CODES.includes(String(c || ''));
 
@@ -353,7 +354,7 @@
     }
     function esc(v) { return String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c])); }
 
-    /** menu des 22 langues (nom dans sa langue + drapeau + code) */
+    /** menu des 23 langues (nom dans sa langue + drapeau + code) */
     function selectHtml(attrs = '') {
         return `<select ${attrs} data-i18n-off>${LANGS.map(l => `<option value="${l.code}" ${l.code === lang ? 'selected' : ''}>${l.flag} ${l.name} (${l.code.toUpperCase()})</option>`).join('')}</select>`;
     }

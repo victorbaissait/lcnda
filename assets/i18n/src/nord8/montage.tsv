@@ -1,0 +1,48 @@
+fr ¦ tr
+# ═════ zone « montage » : turc (tr) ═════
+Boutons des pistes : petits ¦ Parça düğmeleri: küçük
+Boutons des pistes : grands ¦ Parça düğmeleri: büyük
+Les boutons des pistes ont déjà cette taille. ¦ Parça düğmeleri zaten bu boyutta.
+Petits ¦ Küçük
+Moyens (départ) ¦ Orta (başlangıç)
+Grands ¦ Büyük
+Ranger cette section : glisse la poignée, ou Alt + ↑ / ↓ ¦ Bu bölümü taşı: tutamacı sürükle ya da Alt + ↑ / ↓
+Sections du panneau de droite : ↺ Remettre comme au départ ¦ Sağ panelin bölümleri: ↺ Başlangıçtaki gibi yap
+Sections du panneau de droite remises comme au départ ¦ Sağ panelin bölümleri başlangıçtaki gibi yapıldı
+Les sections du panneau de droite sont déjà comme au départ. ¦ Sağ panelin bölümleri zaten başlangıçtaki gibi.
+Taille et place ¦ Boyut ve konum
+Durée, taille et place ¦ Süre, boyut ve konum
+Couleurs de cette vidéo ¦ Bu videonun renkleri
+Rotation et fondus ¦ Döndürme ve geçişler
+Volume et effets ¦ Ses düzeyi ve efektler
+Les couleurs et le vieux film de ce morceau reviennent comme au départ ¦ Bu parçanın renkleri ve eski film efekti başlangıçtaki hâline döner
+Les couleurs et le vieux film de tout le film reviennent comme au départ ¦ Tüm filmin renkleri ve eski film efekti başlangıçtaki hâline döner
+Couleurs remises comme au départ ¦ Renkler başlangıçtaki gibi yapıldı
+Le son de tout le film revient comme au départ (volume, effets) ¦ Tüm filmin sesi başlangıçtaki hâline döner (ses düzeyi, efektler)
+Son du film remis comme au départ ¦ Filmin sesi başlangıçtaki gibi yapıldı
+Texte remis comme au départ ¦ Metin başlangıçtaki gibi yapıldı
+Volume dans le temps ¦ Zamana göre ses düzeyi
+Poser des points sur le morceau ¦ Parçaya noktalar koy
+Point à la tête de lecture ¦ Oynatma imlecinde nokta
+Effacer la courbe ¦ Eğriyi sil
+Courbe du volume effacée ¦ Ses düzeyi eğrisi silindi
+Volume : {n} % ¦ Ses düzeyi: %{n}
+Points sur la courbe : {n}. La ligne du milieu = le volume réglé plus haut ; en haut, jusqu’à deux fois plus fort. ¦ Eğrideki noktalar: {n}. Ortadaki çizgi = yukarıda ayarlanan ses düzeyi; en üstte iki katına kadar daha yüksek.
+Pas encore de courbe : le volume reste le même du début à la fin (avec ses fondus). ¦ Henüz eğri yok: ses düzeyi baştan sona aynı kalır (geçişleriyle birlikte).
+Sur le morceau choisi, dans la frise : un clic pose un point, on glisse un point pour le déplacer (en haut : plus fort, en bas : moins fort), un double-clic l’enlève. ¦ Zaman çizelgesinde seçili parçada: bir tıklama nokta koyar, bir noktayı taşımak için sürüklersin (yukarı: daha yüksek, aşağı: daha alçak), çift tıklama onu kaldırır.
+✎ Clique sur le morceau, dans la frise, pour poser un point ; glisse un point pour le déplacer ; double-clic pour l’enlever. ¦ ✎ Nokta koymak için zaman çizelgesinde parçaya tıkla; taşımak için noktayı sürükle; kaldırmak için çift tıkla.
+Volume plus égal (les passages faibles remontent, les forts baissent) ¦ Daha dengeli ses (zayıf yerler yükselir, güçlüler alçalır)
+Lieu de la réverbération ¦ Yankının mekânı
+Une grande salle ¦ Büyük bir salon
+Une église ¦ Bir kilise
+Une cave ¦ Bir mahzen
+Gauche ↔ droite ¦ Sol ↔ sağ
+Police et couleur ¦ Yazı tipi ve renk
+italique ¦ italik
+Contour et ombre ¦ Kontur ve gölge
+autour des lettres ¦ harflerin çevresinde
+Force de l’ombre ¦ Gölgenin gücü
+Allume « ombre » (Police et couleur) pour régler l’ombre. ¦ Gölgeyi ayarlamak için “gölge”yi aç (Yazı tipi ve renk).
+Bandeau derrière le texte ¦ Metnin arkasındaki şerit
+Opacité du bandeau ¦ Şeridin opaklığı
+Allume « bandeau » (Police et couleur) : un fond de couleur derrière le texte, plus ou moins transparent, aux coins droits ou arrondis. ¦ “Şerit”i aç (Yazı tipi ve renk): metnin arkasında, az ya da çok saydam, köşeleri düz ya da yuvarlak renkli bir zemin.
