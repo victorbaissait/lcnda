@@ -1630,7 +1630,7 @@ posé sur le plan comme un meuble ¦ postavljen na nacrt kao komad namještaja �
 rattaché au meuble ou à la pièce ¦ povezana s namještajem ili prostorijom ¦ povezan s pohištvom ali prostorom
 Construction de la maison en 3D… ¦ Izgradnja kuće u 3D… ¦ Gradnja hiše v 3D…
 Vue 3D indisponible. ¦ 3D prikaz nije dostupan. ¦ 3D pogled ni na voljo.
-Glisser : tourner · clic droit ou ⇧ glisser : déplacer · molette : approcher · ☀️ Lumière : l’heure et la saison · 🚶 Visiter : Z Q S D ou flèches · ✦ : un souvenir ¦ Povuci: okreni · desni klik ili ⇧ povuci: pomakni · kotačić: približi · ☀️ Svjetlo: sat i godišnje doba · 🚶 Obiđi: Z Q S D ili strelice · ✦: uspomena ¦ Povleci: zavrti · desni klik ali ⇧ povleci: premakni · kolešček: približaj · ☀️ Svetloba: ura in letni čas · 🚶 Ogled: Z Q S D ali puščice · ✦: spomin
+Glisser : tourner · clic droit ou ⇧ glisser : déplacer · molette : approcher · ☀️ Lumière : l’heure et la saison · 🚶 Visiter : Z Q S D ou flèches · ✦ : un souvenir ¦ Povuci: okreni · desni klik ili ⇧ povuci: pomakni · kotačić: približi · ☀️ Svjetlo: sat i godišnje doba · 🚶 Obiđi: W A S D ili strelice · ✦: uspomena ¦ Povleci: zavrti · desni klik ali ⇧ povleci: premakni · kolešček: približaj · ☀️ Svetloba: ura in letni čas · 🚶 Ogled: W A S D ali puščice · ✦: spomin
 Les dernières modifications de la maison seront perdues. ¦ Posljednje izmjene kuće bit će izgubljene. ¦ Zadnje spremembe hiše bodo izgubljene.
 Fermer sans enregistrer la maison ? ¦ Zatvoriti bez spremanja kuće? ¦ Zaprem brez shranjevanja hiše?
 Supprimé ¦ Izbrisano ¦ Izbrisano
@@ -1942,7 +1942,7 @@ Escalier ¦ Stubište ¦ Stopnišče
 Combles ¦ Potkrovlje ¦ Podstrešje
 Plans ¦ Nacrti ¦ Načrti
 ▶ Visite guidée ¦ ▶ Vođeni obilazak ¦ ▶ Voden ogled
-Visite en lecture seule, ouverte sans l’application. Souris ou doigt pour tourner, molette pour zoomer, « 🚶 Visiter » pour marcher (Z Q S D ou flèches). ¦ Obilazak samo za čitanje, otvoren bez aplikacije. Miš ili prst za okretanje, kotačić za zumiranje, „🚶 Obiđi” za hodanje (Z Q S D ili strelice). ¦ Ogled samo za branje, odprt brez aplikacije. Miška ali prst za vrtenje, kolešček za povečavo, »🚶 Ogled« za hojo (Z Q S D ali puščice).
+Visite en lecture seule, ouverte sans l’application. Souris ou doigt pour tourner, molette pour zoomer, « 🚶 Visiter » pour marcher (Z Q S D ou flèches). ¦ Obilazak samo za čitanje, otvoren bez aplikacije. Miš ili prst za okretanje, kotačić za zumiranje, „🚶 Obiđi” za hodanje (W A S D ili strelice). ¦ Ogled samo za branje, odprt brez aplikacije. Miška ali prst za vrtenje, kolešček za povečavo, »🚶 Ogled« za hojo (W A S D ali puščice).
 📐 Surfaces ¦ 📐 Površine ¦ 📐 Površine
 Surfaces ¦ Površine ¦ Površine
 ⚠️ Vérifier le plan ¦ ⚠️ Provjeri nacrt ¦ ⚠️ Preveri načrt
@@ -2070,9 +2070,9 @@ Une photo ancienne prise de cet endroit, dans cette direction : on la compare av
 📍 Arrêt ici ¦ 📍 Postaja ovdje ¦ 📍 Postanek tukaj
 📷 Photo d’époque ici ¦ 📷 Stara fotografija ovdje ¦ 📷 Stara fotografija tukaj
 Petite carte : clic pour t’y rendre ¦ Mala karta: klikni za odlazak onamo ¦ Mali zemljevid: klikni, da greš tja
-Z Q S D, W A S D ou flèches : marcher · Maj : courir · la souris regarde · Échap : libérer la souris ¦ Z Q S D, W A S D ili strelice: hodanje · Shift: trčanje · miš gleda okolo · Esc: oslobodi miš ¦ Z Q S D, W A S D ali puščice: hoja · Shift: tek · miška gleda naokoli · Esc: sprosti miško
+Z Q S D, W A S D ou flèches : marcher · Maj : courir · la souris regarde · Échap : libérer la souris ¦ W A S D ili strelice: hodanje · Shift: trčanje · miš gleda okolo · Esc: oslobodi miš ¦ W A S D ali puščice: hoja · Shift: tek · miška gleda naokoli · Esc: sprosti miško
 Le rond en bas à gauche : marcher · glisser sur la vue : regarder · ✦ : toucher pour voir le souvenir ¦ Krug dolje lijevo: hodanje · povlačenje po prikazu: gledanje · ✦: dodirni za prikaz uspomene ¦ Krog spodaj levo: hoja · vlečenje po pogledu: gledanje · ✦: tapni za ogled spomina
-Z Q S D, W A S D ou flèches : marcher · clic sur la vue : regarder avec la souris · ✦ : clic pour voir le souvenir · Échap : sortir ¦ Z Q S D, W A S D ili strelice: hodanje · klik na prikaz: gledanje mišem · ✦: klikni za prikaz uspomene · Esc: izlaz ¦ Z Q S D, W A S D ali puščice: hoja · klik na pogled: gledanje z miško · ✦: klikni za ogled spomina · Esc: izhod
+Z Q S D, W A S D ou flèches : marcher · clic sur la vue : regarder avec la souris · ✦ : clic pour voir le souvenir · Échap : sortir ¦ W A S D ili strelice: hodanje · klik na prikaz: gledanje mišem · ✦: klikni za prikaz uspomene · Esc: izlaz ¦ W A S D ali puščice: hoja · klik na pogled: gledanje z miško · ✦: klikni za ogled spomina · Esc: izhod
 ✋ Arrêter la visite ¦ ✋ Zaustavi obilazak ¦ ✋ Ustavi ogled
 Autrefois ¦ Nekad ¦ Nekoč
 Autrefois ou aujourd’hui ¦ Nekad ili danas ¦ Nekoč ali danes

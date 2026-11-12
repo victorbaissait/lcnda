@@ -1510,24 +1510,24 @@ Brouillard ¦ Þoka
 on ne voit qu’autour de son pion ¦ aðeins sést í kringum peðið
 Montrer les cases déjà parcourues ¦ Sýna reiti sem þegar hefur verið farið um
 Permettre les indices et la solution ¦ Leyfa vísbendingar og lausnina
-Flèches ou ZQSD pour avancer · glisse ton pion à la souris ou au doigt · Espace : pause. ¦ Örvar eða ZQSD til að fara áfram · dragðu peðið með músinni eða fingrinum · Bil: hlé.
+Flèches ou ZQSD pour avancer · glisse ton pion à la souris ou au doigt · Espace : pause. ¦ Örvar eða WASD til að fara áfram · dragðu peðið með músinni eða fingrinum · Bil: hlé.
 Aperçu du labyrinthe ¦ Forskoðun völundarhússins
 solution en {what} ¦ lausn í {what}
 grand ! ¦ stórt!
 Touches : {list} — ou glisse son pion. ¦ Lyklar: {list} — eða dragðu peðið.
-Flèches ou Z Q S D (ou glisse le pion). Chacun joue à son tour sur le même labyrinthe. ¦ Örvar eða Z Q S D (eða dragðu peðið). Hver spilar í sinni umferð á sama völundarhúsinu.
+Flèches ou Z Q S D (ou glisse le pion). Chacun joue à son tour sur le même labyrinthe. ¦ Örvar eða W A S D (eða dragðu peðið). Hver spilar í sinni umferð á sama völundarhúsinu.
 Ensemble « {name} » appliqué : tu peux tout retoucher. ¦ Safnið „{name}“ notað: þú getur lagfært allt.
 les réglages du labyrinthe (forme, aspect, étapes, joueurs) ¦ stillingar völundarhússins (lögun, útlit, áfangar, leikmenn)
 Labyrinthe {shape} du {date} ¦ Völundarhús {shape} frá {date}
 LABYRINTHE TERMINÉ ¦ VÖLUNDARHÚSI LOKIÐ
 LABYRINTHE EN COURS ¦ VÖLUNDARHÚS Í GANGI
 Graine <code>{seed}</code> : la même graine redonne ce labyrinthe. ¦ Fræ <code>{seed}</code>: sama fræ gefur þetta völundarhús aftur.
-Le labyrinthe : flèches ou Z Q S D pour avancer ¦ Völundarhúsið: örvar eða Z Q S D til að fara áfram
+Le labyrinthe : flèches ou Z Q S D pour avancer ¦ Völundarhúsið: örvar eða W A S D til að fara áfram
 Pause (Espace) ¦ Hlé (Bil)
 Montre quelques cases du bon chemin (H) ¦ Sýnir nokkra reiti á réttu leiðinni (H)
 🙈 Cacher la solution ¦ 🙈 Fela lausnina
 👁 Montrer la solution ¦ 👁 Sýna lausnina
-Flèches ou Z Q S D · glisse le pion · Espace : pause ¦ Örvar eða Z Q S D · dragðu peðið · Bil: hlé
+Flèches ou Z Q S D · glisse le pion · Espace : pause ¦ Örvar eða W A S D · dragðu peðið · Bil: hlé
 H : un indice ¦ H: vísbending
 Labyrinthe « {name} » ¦ Völundarhús „{name}“
 arrivé ¦ komst í mark

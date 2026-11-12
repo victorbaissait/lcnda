@@ -1510,24 +1510,24 @@ Brouillard ¦ Niwwel
 on ne voit qu’autour de son pion ¦ een gesäit just ronderëm seng Figur
 Montrer les cases déjà parcourues ¦ D’Felder weisen, wou een scho war
 Permettre les indices et la solution ¦ Hiweiser an d’Léisung erlaben
-Flèches ou ZQSD pour avancer · glisse ton pion à la souris ou au doigt · Espace : pause. ¦ Feiler oder ZQSD fir virunzekommen · zéi deng Figur mat der Maus oder dem Fanger · Espace: Paus.
+Flèches ou ZQSD pour avancer · glisse ton pion à la souris ou au doigt · Espace : pause. ¦ Feiler oder WASD fir virunzekommen · zéi deng Figur mat der Maus oder dem Fanger · Espace: Paus.
 Aperçu du labyrinthe ¦ Virschau vum Labyrinth
 solution en {what} ¦ Léisung a(n) {what}
 grand ! ¦ grouss!
 Touches : {list} — ou glisse son pion. ¦ Tasten: {list} — oder zéi seng Figur.
-Flèches ou Z Q S D (ou glisse le pion). Chacun joue à son tour sur le même labyrinthe. ¦ Feiler oder Z Q S D (oder zéi d’Figur). Jiddereen spillt no der Rei am selwechte Labyrinth.
+Flèches ou Z Q S D (ou glisse le pion). Chacun joue à son tour sur le même labyrinthe. ¦ Feiler oder W A S D (oder zéi d’Figur). Jiddereen spillt no der Rei am selwechte Labyrinth.
 Ensemble « {name} » appliqué : tu peux tout retoucher. ¦ Ensemble „{name}“ iwwerholl: du kanns alles nach änneren.
 les réglages du labyrinthe (forme, aspect, étapes, joueurs) ¦ d’Astellunge vum Labyrinth (Form, Ausgesinn, Etappen, Spiller)
 Labyrinthe {shape} du {date} ¦ Labyrinth {shape} vum {date}
 LABYRINTHE TERMINÉ ¦ LABYRINTH FÄERDEG
 LABYRINTHE EN COURS ¦ LABYRINTH AM GAANG
 Graine <code>{seed}</code> : la même graine redonne ce labyrinthe. ¦ Som <code>{seed}</code>: dee selwechte Som gëtt erëm dëse Labyrinth.
-Le labyrinthe : flèches ou Z Q S D pour avancer ¦ De Labyrinth: Feiler oder Z Q S D fir virunzekommen
+Le labyrinthe : flèches ou Z Q S D pour avancer ¦ De Labyrinth: Feiler oder W A S D fir virunzekommen
 Pause (Espace) ¦ Paus (Espace)
 Montre quelques cases du bon chemin (H) ¦ Weist e puer Felder vum richtege Wee (H)
 🙈 Cacher la solution ¦ 🙈 D’Léisung verstoppen
 👁 Montrer la solution ¦ 👁 D’Léisung weisen
-Flèches ou Z Q S D · glisse le pion · Espace : pause ¦ Feiler oder Z Q S D · zéi d’Figur · Espace: Paus
+Flèches ou Z Q S D · glisse le pion · Espace : pause ¦ Feiler oder W A S D · zéi d’Figur · Espace: Paus
 H : un indice ¦ H: en Hiweis
 Labyrinthe « {name} » ¦ Labyrinth „{name}“
 arrivé ¦ ukomm

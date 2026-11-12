@@ -1510,24 +1510,24 @@ Brouillard ¦ Sumu ¦ Köd
 on ne voit qu’autour de son pion ¦ näet vain nappulasi ympärille ¦ csak a bábud körül látsz
 Montrer les cases déjà parcourues ¦ Näytä jo kuljetut ruudut ¦ A már bejárt mezők mutatása
 Permettre les indices et la solution ¦ Salli vihjeet ja ratkaisu ¦ Tippek és megoldás engedélyezése
-Flèches ou ZQSD pour avancer · glisse ton pion à la souris ou au doigt · Espace : pause. ¦ Nuolet tai ZQSD liikkumiseen · vedä nappulaa hiirellä tai sormella · Välilyönti: tauko. ¦ Nyilak vagy ZQSD a haladáshoz · húzd a bábudat egérrel vagy ujjal · Szóköz: szünet.
+Flèches ou ZQSD pour avancer · glisse ton pion à la souris ou au doigt · Espace : pause. ¦ Nuolet tai WASD liikkumiseen · vedä nappulaa hiirellä tai sormella · Välilyönti: tauko. ¦ Nyilak vagy WASD a haladáshoz · húzd a bábudat egérrel vagy ujjal · Szóköz: szünet.
 Aperçu du labyrinthe ¦ Labyrintin esikatselu ¦ A labirintus előnézete
 solution en {what} ¦ ratkaisu: {what} ¦ megoldás: {what}
 grand ! ¦ iso! ¦ nagy!
 Touches : {list} — ou glisse son pion. ¦ Näppäimet: {list} — tai vedä nappulaa. ¦ Billentyűk: {list} — vagy húzd a bábut.
-Flèches ou Z Q S D (ou glisse le pion). Chacun joue à son tour sur le même labyrinthe. ¦ Nuolet tai Z Q S D (tai vedä nappulaa). Kukin pelaa vuorollaan samassa labyrintissa. ¦ Nyilak vagy Z Q S D (vagy húzd a bábut). Mindenki sorban játszik ugyanazon a labirintuson.
+Flèches ou Z Q S D (ou glisse le pion). Chacun joue à son tour sur le même labyrinthe. ¦ Nuolet tai W A S D (tai vedä nappulaa). Kukin pelaa vuorollaan samassa labyrintissa. ¦ Nyilak vagy W A S D (vagy húzd a bábut). Mindenki sorban játszik ugyanazon a labirintuson.
 Ensemble « {name} » appliqué : tu peux tout retoucher. ¦ Sarja ”{name}” otettu käyttöön: voit hienosäätää kaikkea. ¦ „{name}” készlet alkalmazva: mindent finomíthatsz.
 les réglages du labyrinthe (forme, aspect, étapes, joueurs) ¦ labyrintin asetukset (muoto, ulkonäkö, vaiheet, pelaajat) ¦ a labirintus beállításai (alak, kinézet, állomások, játékosok)
 Labyrinthe {shape} du {date} ¦ Labyrintti ({shape}), {date} ¦ Labirintus ({shape}), {date}
 LABYRINTHE TERMINÉ ¦ LABYRINTTI VALMIS ¦ LABIRINTUS KÉSZ
 LABYRINTHE EN COURS ¦ LABYRINTTI KESKEN ¦ LABIRINTUS FOLYAMATBAN
 Graine <code>{seed}</code> : la même graine redonne ce labyrinthe. ¦ Siemen <code>{seed}</code>: sama siemen antaa tämän labyrintin uudelleen. ¦ Mag: <code>{seed}</code> – ugyanaz a mag újra ezt a labirintust adja.
-Le labyrinthe : flèches ou Z Q S D pour avancer ¦ Labyrintti: nuolet tai Z Q S D liikkumiseen ¦ A labirintus: nyilak vagy Z Q S D a haladáshoz
+Le labyrinthe : flèches ou Z Q S D pour avancer ¦ Labyrintti: nuolet tai W A S D liikkumiseen ¦ A labirintus: nyilak vagy W A S D a haladáshoz
 Pause (Espace) ¦ Tauko (Välilyönti) ¦ Szünet (Szóköz)
 Montre quelques cases du bon chemin (H) ¦ Näyttää muutaman ruudun oikeaa reittiä (H) ¦ A helyes út néhány mezőjének mutatása (H)
 🙈 Cacher la solution ¦ 🙈 Piilota ratkaisu ¦ 🙈 Megoldás elrejtése
 👁 Montrer la solution ¦ 👁 Näytä ratkaisu ¦ 👁 Megoldás mutatása
-Flèches ou Z Q S D · glisse le pion · Espace : pause ¦ Nuolet tai Z Q S D · vedä nappulaa · Välilyönti: tauko ¦ Nyilak vagy Z Q S D · húzd a bábut · Szóköz: szünet
+Flèches ou Z Q S D · glisse le pion · Espace : pause ¦ Nuolet tai W A S D · vedä nappulaa · Välilyönti: tauko ¦ Nyilak vagy W A S D · húzd a bábut · Szóköz: szünet
 H : un indice ¦ H: vihje ¦ H: egy tipp
 Labyrinthe « {name} » ¦ Labyrintti ”{name}” ¦ „{name}” labirintus
 arrivé ¦ maalissa ¦ célba ért

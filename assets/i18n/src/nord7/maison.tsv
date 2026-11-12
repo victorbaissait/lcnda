@@ -710,7 +710,7 @@ posé sur le plan comme un meuble ¦ settur á teikninguna eins og húsmunur
 rattaché au meuble ou à la pièce ¦ tengd húsmuninum eða herberginu
 Construction de la maison en 3D… ¦ Byggi húsið í þrívídd…
 Vue 3D indisponible. ¦ Þrívíddarsýn ekki tiltæk.
-Glisser : tourner · clic droit ou ⇧ glisser : déplacer · molette : approcher · ☀️ Lumière : l’heure et la saison · 🚶 Visiter : Z Q S D ou flèches · ✦ : un souvenir ¦ Draga: snúa · hægrismella eða ⇧ draga: færa · skrunhjól: færa nær · ☀️ Ljós: tími og árstíð · 🚶 Skoða: Z Q S D eða örvar · ✦: minning
+Glisser : tourner · clic droit ou ⇧ glisser : déplacer · molette : approcher · ☀️ Lumière : l’heure et la saison · 🚶 Visiter : Z Q S D ou flèches · ✦ : un souvenir ¦ Draga: snúa · hægrismella eða ⇧ draga: færa · skrunhjól: færa nær · ☀️ Ljós: tími og árstíð · 🚶 Skoða: W A S D eða örvar · ✦: minning
 Les dernières modifications de la maison seront perdues. ¦ Síðustu breytingar á húsinu glatast.
 Fermer sans enregistrer la maison ? ¦ Loka án þess að vista húsið?
 Supprimé ¦ Eytt
@@ -1022,7 +1022,7 @@ Escalier ¦ Stigi
 Combles ¦ Ris
 Plans ¦ Teikningar
 ▶ Visite guidée ¦ ▶ Leiðsögn
-Visite en lecture seule, ouverte sans l’application. Souris ou doigt pour tourner, molette pour zoomer, « 🚶 Visiter » pour marcher (Z Q S D ou flèches). ¦ Skoðun eingöngu til lestrar, opnuð án appsins. Mús eða fingur til að snúa, skrunhjól til að þysja, „🚶 Skoða“ til að ganga (Z Q S D eða örvar).
+Visite en lecture seule, ouverte sans l’application. Souris ou doigt pour tourner, molette pour zoomer, « 🚶 Visiter » pour marcher (Z Q S D ou flèches). ¦ Skoðun eingöngu til lestrar, opnuð án appsins. Mús eða fingur til að snúa, skrunhjól til að þysja, „🚶 Skoða“ til að ganga (W A S D eða örvar).
 📐 Surfaces ¦ 📐 Flatarmál
 Surfaces ¦ Flatarmál
 ⚠️ Vérifier le plan ¦ ⚠️ Athuga teikninguna
@@ -1150,9 +1150,9 @@ Une photo ancienne prise de cet endroit, dans cette direction : on la compare av
 📍 Arrêt ici ¦ 📍 Viðkomustaður hér
 📷 Photo d’époque ici ¦ 📷 Gömul ljósmynd hér
 Petite carte : clic pour t’y rendre ¦ Smákort: smelltu til að fara þangað
-Z Q S D, W A S D ou flèches : marcher · Maj : courir · la souris regarde · Échap : libérer la souris ¦ Z Q S D, W A S D eða örvar: ganga · Shift: hlaupa · músin horfir í kring · Esc: sleppa músinni
+Z Q S D, W A S D ou flèches : marcher · Maj : courir · la souris regarde · Échap : libérer la souris ¦ W A S D eða örvar: ganga · Shift: hlaupa · músin horfir í kring · Esc: sleppa músinni
 Le rond en bas à gauche : marcher · glisser sur la vue : regarder · ✦ : toucher pour voir le souvenir ¦ Hringurinn neðst til vinstri: ganga · dragðu á sýninni: horfa · ✦: snertu til að sjá minninguna
-Z Q S D, W A S D ou flèches : marcher · clic sur la vue : regarder avec la souris · ✦ : clic pour voir le souvenir · Échap : sortir ¦ Z Q S D, W A S D eða örvar: ganga · smelltu á sýnina: horfa með músinni · ✦: smelltu til að sjá minninguna · Esc: hætta
+Z Q S D, W A S D ou flèches : marcher · clic sur la vue : regarder avec la souris · ✦ : clic pour voir le souvenir · Échap : sortir ¦ W A S D eða örvar: ganga · smelltu á sýnina: horfa með músinni · ✦: smelltu til að sjá minninguna · Esc: hætta
 ✋ Arrêter la visite ¦ ✋ Stöðva skoðunina
 Autrefois ¦ Áður
 Autrefois ou aujourd’hui ¦ Áður eða nú

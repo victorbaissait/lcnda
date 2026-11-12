@@ -1510,24 +1510,24 @@ Brouillard ¦ Ceață
 on ne voit qu’autour de son pion ¦ vezi doar în jurul pionului tău
 Montrer les cases déjà parcourues ¦ Arată căsuțele deja parcurse
 Permettre les indices et la solution ¦ Permite indiciile și soluția
-Flèches ou ZQSD pour avancer · glisse ton pion à la souris ou au doigt · Espace : pause. ¦ Săgețile sau ZQSD pentru a înainta · trage pionul cu mouse-ul sau cu degetul · Spațiu: pauză.
+Flèches ou ZQSD pour avancer · glisse ton pion à la souris ou au doigt · Espace : pause. ¦ Săgețile sau WASD pentru a înainta · trage pionul cu mouse-ul sau cu degetul · Spațiu: pauză.
 Aperçu du labyrinthe ¦ Previzualizarea labirintului
 solution en {what} ¦ soluție în {what}
 grand ! ¦ mare!
 Touches : {list} — ou glisse son pion. ¦ Taste: {list} — sau trage-ți pionul.
-Flèches ou Z Q S D (ou glisse le pion). Chacun joue à son tour sur le même labyrinthe. ¦ Săgețile sau Z Q S D (sau trage pionul). Fiecare joacă pe rând pe același labirint.
+Flèches ou Z Q S D (ou glisse le pion). Chacun joue à son tour sur le même labyrinthe. ¦ Săgețile sau W A S D (sau trage pionul). Fiecare joacă pe rând pe același labirint.
 Ensemble « {name} » appliqué : tu peux tout retoucher. ¦ Ansamblul „{name}” aplicat: poți retușa totul.
 les réglages du labyrinthe (forme, aspect, étapes, joueurs) ¦ setările labirintului (formă, aspect, etape, jucători)
 Labyrinthe {shape} du {date} ¦ Labirint {shape} din {date}
 LABYRINTHE TERMINÉ ¦ LABIRINT TERMINAT
 LABYRINTHE EN COURS ¦ LABIRINT ÎN CURS
 Graine <code>{seed}</code> : la même graine redonne ce labyrinthe. ¦ Sămânța <code>{seed}</code>: aceeași sămânță dă din nou acest labirint.
-Le labyrinthe : flèches ou Z Q S D pour avancer ¦ Labirintul: săgețile sau Z Q S D pentru a înainta
+Le labyrinthe : flèches ou Z Q S D pour avancer ¦ Labirintul: săgețile sau W A S D pentru a înainta
 Pause (Espace) ¦ Pauză (Spațiu)
 Montre quelques cases du bon chemin (H) ¦ Arată câteva căsuțe din drumul bun (H)
 🙈 Cacher la solution ¦ 🙈 Ascunde soluția
 👁 Montrer la solution ¦ 👁 Arată soluția
-Flèches ou Z Q S D · glisse le pion · Espace : pause ¦ Săgețile sau Z Q S D · trage pionul · Spațiu: pauză
+Flèches ou Z Q S D · glisse le pion · Espace : pause ¦ Săgețile sau W A S D · trage pionul · Spațiu: pauză
 H : un indice ¦ H: un indiciu
 Labyrinthe « {name} » ¦ Labirintul „{name}”
 arrivé ¦ a ajuns

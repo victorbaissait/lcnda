@@ -1510,24 +1510,24 @@ Brouillard ¦ Sis
 on ne voit qu’autour de son pion ¦ yalnızca piyonunun çevresi görünür
 Montrer les cases déjà parcourues ¦ Geçilmiş kareleri göster
 Permettre les indices et la solution ¦ İpuçlarına ve çözüme izin ver
-Flèches ou ZQSD pour avancer · glisse ton pion à la souris ou au doigt · Espace : pause. ¦ İlerlemek için oklar ya da ZQSD · piyonunu fareyle ya da parmağınla sürükle · Boşluk: duraklat.
+Flèches ou ZQSD pour avancer · glisse ton pion à la souris ou au doigt · Espace : pause. ¦ İlerlemek için oklar ya da WASD · piyonunu fareyle ya da parmağınla sürükle · Boşluk: duraklat.
 Aperçu du labyrinthe ¦ Labirentin önizlemesi
 solution en {what} ¦ çözüm: {what}
 grand ! ¦ büyük!
 Touches : {list} — ou glisse son pion. ¦ Tuşlar: {list} — ya da piyonunu sürükle.
-Flèches ou Z Q S D (ou glisse le pion). Chacun joue à son tour sur le même labyrinthe. ¦ Oklar ya da Z Q S D (ya da piyonu sürükle). Herkes aynı labirentte sırayla oynar.
+Flèches ou Z Q S D (ou glisse le pion). Chacun joue à son tour sur le même labyrinthe. ¦ Oklar ya da W A S D (ya da piyonu sürükle). Herkes aynı labirentte sırayla oynar.
 Ensemble « {name} » appliqué : tu peux tout retoucher. ¦ “{name}” takımı uygulandı: her şeyi düzeltebilirsin.
 les réglages du labyrinthe (forme, aspect, étapes, joueurs) ¦ labirentin ayarları (biçim, görünüş, aşamalar, oyuncular)
 Labyrinthe {shape} du {date} ¦ Labirent: {shape} · {date}
 LABYRINTHE TERMINÉ ¦ LABİRENT BİTTİ
 LABYRINTHE EN COURS ¦ LABİRENT DEVAM EDİYOR
 Graine <code>{seed}</code> : la même graine redonne ce labyrinthe. ¦ Tohum <code>{seed}</code>: aynı tohum bu labirenti yeniden verir.
-Le labyrinthe : flèches ou Z Q S D pour avancer ¦ Labirent: ilerlemek için oklar ya da Z Q S D
+Le labyrinthe : flèches ou Z Q S D pour avancer ¦ Labirent: ilerlemek için oklar ya da W A S D
 Pause (Espace) ¦ Duraklat (Boşluk)
 Montre quelques cases du bon chemin (H) ¦ Doğru yolun birkaç karesini gösterir (H)
 🙈 Cacher la solution ¦ 🙈 Çözümü gizle
 👁 Montrer la solution ¦ 👁 Çözümü göster
-Flèches ou Z Q S D · glisse le pion · Espace : pause ¦ Oklar ya da Z Q S D · piyonu sürükle · Boşluk: duraklat
+Flèches ou Z Q S D · glisse le pion · Espace : pause ¦ Oklar ya da W A S D · piyonu sürükle · Boşluk: duraklat
 H : un indice ¦ H: bir ipucu
 Labyrinthe « {name} » ¦ Labirent: “{name}”
 arrivé ¦ vardı
