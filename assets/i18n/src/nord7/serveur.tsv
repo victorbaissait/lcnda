@@ -1,0 +1,1616 @@
+fr ¦ is
+Action inconnue ¦ Óþekkt aðgerð
+Action inconnue. ¦ Óþekkt aðgerð.
+Demande inconnue. ¦ Óþekkt beiðni.
+Fichier non reçu. ¦ Skráin barst ekki.
+Personne introuvable ¦ Einstaklingur finnst ekki
+Personne introuvable. ¦ Einstaklingur finnst ekki.
+Source introuvable. ¦ Heimild finnst ekki.
+Version introuvable. ¦ Útgáfa finnst ekki.
+ID manquant ¦ Auðkenni vantar
+POST requis ¦ POST er krafist
+Refusé. ¦ Hafnað.
+Mot de passe incorrect. ¦ Rangt lykilorð.
+ZIP illisible. ¦ Ekki hægt að lesa ZIP-skrána.
+Export impossible : l’extension PHP zip manque. ¦ Ekki hægt að flytja út: PHP-viðbótina zip vantar.
+Une autre généalogie a été ouverte dans une autre fenêtre : recharge la page. ¦ Önnur ættfræði var opnuð í öðrum glugga: endurhlaðdu síðuna.
+Session expirée, ou une autre généalogie a été ouverte entre-temps (autre fenêtre) : recharge la page. ¦ Lotan er útrunnin, eða önnur ættfræði var opnuð á meðan (annar gluggi): endurhlaðdu síðuna.
+L’enregistrement n’a pas pu se faire (une donnée reçue n’a pas la forme attendue). Rien n’a été modifié. Réessaie ; si ça recommence, recharge la page et signale-le. ¦ Ekki tókst að vista (gögn sem bárust voru ekki á réttu formi). Engu var breytt. Reyndu aftur; ef þetta gerist aftur, endurhlaðdu síðuna og láttu vita.
+Mode consultation : pas de copie de la base vers un autre dossier. ¦ Skoðunarhamur: ekki er hægt að afrita gagnagrunninn í aðra möppu.
+{n} jour ¦ {n} dagur
+{n} jours ¦ {n} dagar
+{n} an ¦ {n} ár
+Date qui n’existe pas : « {date} » ¦ Dagsetning sem er ekki til: „{date}“
+{event} le « {date} » : ce jour n’existe pas dans le calendrier julien. ¦ {event} „{date}“: þessi dagur er ekki til í júlíanska tímatalinu.
+{event} le « {date} » : ce jour n’existe pas dans le calendrier grégorien. ¦ {event} „{date}“: þessi dagur er ekki til í gregoríska tímatalinu.
+Date trop longue ({n} signes) ¦ Of löng dagsetning ({n} stafir)
+{event} : « {text}… » — une note a sans doute été collée dans la case de la date. ¦ {event}: „{text}…“ — athugasemd hefur líklega verið límd í reitinn fyrir dagsetninguna.
+Dates à l’envers : « {date} » ¦ Dagsetning öfug: „{date}“
+{event} : la première année ({a}) vient après la seconde ({b}). Sans doute « entre {b} et {a} ». ¦ {event}: fyrra árið ({a}) kemur á eftir því seinna ({b}). Líklega „entre {b} et {a}“.
+Date « {date} » lue comme l’an {y} ¦ Dagsetningin „{date}“ lesin sem árið {y}
+{event} : un signe moins devant l’année. Pour une date avant Jésus-Christ, écris « 5 av. J.-C. »; sinon corrige l’année. ¦ {event}: mínusmerki fyrir framan árið. Fyrir dagsetningu fyrir Krist skaltu skrifa „5 av. J.-C.“; annars leiðréttu árið.
+Décès avant la naissance ¦ Andlát fyrir fæðingu
+Naissance {b} · décès {d} ¦ Fæðing {b} · andlát {d}
+Décès ({d}) avant sa naissance ({b}) ¦ Andlát ({d}) fyrir fæðingu ({b})
+inhumation ¦ greftrun
+baptême ¦ skírn
+Mort à {n} ans ¦ Lést {n} ára
+Morte à {n} ans ¦ Lést {n} ára
+Mort(e) à {n} ans ¦ Lést {n} ára
+Naissance {b} · décès {d} (seuil : {n} ans) ¦ Fæðing {b} · andlát {d} (mörk: {n} ár)
+Très peu de gens dépassent {a} ans ; au-delà de {b} ans, c’est presque toujours une erreur. ¦ Mjög fáir verða eldri en {a} ára; yfir {b} ára er það nánast alltaf villa.
+Naissance dans le futur ¦ Fæðing í framtíðinni
+Naissance {b} ¦ Fæðing {b}
+Dates de naissance contradictoires ¦ Fæðingardagsetningar stangast á
+Dates de décès contradictoires ¦ Dánardagsetningar stangast á
+Inhumation avant le décès ¦ Greftrun fyrir andlát
+Décès {d} · inhumation {i} ¦ Andlát {d} · greftrun {i}
+Inhumation {span} après le décès ¦ Greftrun {span} eftir andlát
+Décès {d} · inhumation {i} (seuil : {n} jours) ¦ Andlát {d} · greftrun {i} (mörk: {n} dagar)
+Baptême {span} après la naissance ¦ Skírn {span} eftir fæðingu
+Naissance {b} · baptême {t} (seuil : {n} jours) ¦ Fæðing {b} · skírn {t} (mörk: {n} dagar)
+{event} avant la naissance ¦ {event} fyrir fæðingu
+{event} {date} · naissance {b} ¦ {event} {date} · fæðing {b}
+{event} après le décès ¦ {event} eftir andlát
+{event} {date} · décès {d} ¦ {event} {date} · andlát {d}
+Marié après son décès ¦ Kvæntist eftir andlát sitt
+Mariée après son décès ¦ Giftist eftir andlát sitt
+Marié(e) après son décès ¦ Gekk í hjónaband eftir andlát sitt
+Mariage {m} · décès {d} ¦ Hjónaband {m} · andlát {d}
+Marié le {m}, après sa mort ¦ Kvæntist {m}, eftir dauða sinn
+Mariée le {m}, après sa mort ¦ Giftist {m}, eftir dauða sinn
+Marié(e) le {m}, après sa mort ¦ Gekk í hjónaband {m}, eftir dauða sinn
+Mariage avant la naissance ¦ Hjónaband fyrir fæðingu
+Mariage {m} · naissance {b} ¦ Hjónaband {m} · fæðing {b}
+Marié à {n} ans ¦ Kvæntist {n} ára
+Mariée à {n} ans ¦ Giftist {n} ára
+Marié(e) à {n} ans ¦ Gekk í hjónaband {n} ára
+Mariage {m} · naissance {b} (seuil : {n} ans) ¦ Hjónaband {m} · fæðing {b} (mörk: {n} ár)
+Avant {n} ans, un mariage est presque impossible. ¦ Undir {n} ára aldri er hjónaband nánast ómögulegt.
+Mère née après son enfant ¦ Móðir fædd á eftir barni sínu
+Père né après son enfant ¦ Faðir fæddur á eftir barni sínu
+Parent né après son enfant ¦ Foreldri fætt á eftir barni sínu
+Naissance de {child} {cb} · mère née {pb} ¦ Fæðing {child} {cb} · móðir fædd {pb}
+Naissance de {child} {cb} · père né {pb} ¦ Fæðing {child} {cb} · faðir fæddur {pb}
+Naissance de {child} {cb} · parent né {pb} ¦ Fæðing {child} {cb} · foreldri fætt {pb}
+Née après son enfant {child} ({cb}) ¦ Fædd á eftir barni sínu {child} ({cb})
+Né après son enfant {child} ({cb}) ¦ Fæddur á eftir barni sínu {child} ({cb})
+Sa mère est née après sa naissance ({pb}) ¦ Móðir hans/hennar fæddist eftir fæðingu hans/hennar ({pb})
+Son père est né après sa naissance ({pb}) ¦ Faðir hans/hennar fæddist eftir fæðingu hans/hennar ({pb})
+Son parent est né après sa naissance ({pb}) ¦ Foreldri hans/hennar fæddist eftir fæðingu hans/hennar ({pb})
+naiss. {name} ¦ fæð. {name}
+décès {name} ¦ andlát {name}
+Mère de {n} ans à la naissance ¦ Móðir {n} ára við fæðingu
+Père de {n} ans à la naissance ¦ Faðir {n} ára við fæðingu
+Parent de {n} ans à la naissance ¦ Foreldri {n} ára við fæðingu
+Mère de {n} an à la naissance ¦ Móðir {n} árs við fæðingu
+Père de {n} an à la naissance ¦ Faðir {n} árs við fæðingu
+Parent de {n} an à la naissance ¦ Foreldri {n} árs við fæðingu
+Naissance {cb} · mère née {pb} (seuil : {n} ans) ¦ Fæðing {cb} · móðir fædd {pb} (mörk: {n} ár)
+Naissance {cb} · père né {pb} (seuil : {n} ans) ¦ Fæðing {cb} · faðir fæddur {pb} (mörk: {n} ár)
+Naissance {cb} · parent né {pb} (seuil : {n} ans) ¦ Fæðing {cb} · foreldri fætt {pb} (mörk: {n} ár)
+Mère de {child} à {n} ans ¦ Móðir {child} {n} ára
+Père de {child} à {n} ans ¦ Faðir {child} {n} ára
+Parent de {child} à {n} ans ¦ Foreldri {child} {n} ára
+Sa mère n’avait que {n} ans à sa naissance ¦ Móðir hans/hennar var aðeins {n} ára við fæðingu hans/hennar
+Son père n’avait que {n} ans à sa naissance ¦ Faðir hans/hennar var aðeins {n} ára við fæðingu hans/hennar
+Son parent n’avait que {n} ans à sa naissance ¦ Foreldri hans/hennar var aðeins {n} ára við fæðingu hans/hennar
+Sa mère avait {n} ans à sa naissance ¦ Móðir hans/hennar var {n} ára við fæðingu hans/hennar
+Son père avait {n} ans à sa naissance ¦ Faðir hans/hennar var {n} ára við fæðingu hans/hennar
+Une naissance après {a} ans est presque impossible ; à partir de {b} ans, c’est à vérifier. ¦ Fæðing eftir {a} ára aldur er nánast ómöguleg; frá {b} ára aldri þarf að athuga hana.
+Naissance {cb} · décès de la mère {pd} ¦ Fæðing {cb} · andlát móður {pd}
+Naissance {cb} · décès du père {pd} (seuil : {n} jours) ¦ Fæðing {cb} · andlát föður {pd} (mörk: {n} dagar)
+Naissance {cb} · décès du parent {pd} (seuil : {n} jours) ¦ Fæðing {cb} · andlát foreldris {pd} (mörk: {n} dagar)
+Un enfant ne peut pas naître après la mort de sa mère. ¦ Barn getur ekki fæðst eftir dauða móður sinnar.
+Un enfant naît au plus 9 à 10 mois après la mort du père (seuil : {n} jours). ¦ Barn fæðist í mesta lagi 9 til 10 mánuðum eftir dauða föðurins (mörk: {n} dagar).
+Né {span} après la mort de sa mère ¦ Fæddur {span} eftir dauða móður sinnar
+Né {span} après la mort de son père ¦ Fæddur {span} eftir dauða föður síns
+Né {span} après la mort de son parent ¦ Fæddur {span} eftir dauða foreldris síns
+Née {span} après la mort de sa mère ¦ Fædd {span} eftir dauða móður sinnar
+Née {span} après la mort de son père ¦ Fædd {span} eftir dauða föður síns
+Née {span} après la mort de son parent ¦ Fædd {span} eftir dauða foreldris síns
+Né(e) {span} après la mort de sa mère ¦ Fædd(ur) {span} eftir dauða móður sinnar
+Né(e) {span} après la mort de son père ¦ Fædd(ur) {span} eftir dauða föður síns
+Né(e) {span} après la mort de son parent ¦ Fædd(ur) {span} eftir dauða foreldris síns
+Né après la mort de sa mère ¦ Fæddur eftir dauða móður sinnar
+Né après la mort de son père ¦ Fæddur eftir dauða föður síns
+Né après la mort de son parent ¦ Fæddur eftir dauða foreldris síns
+Née après la mort de sa mère ¦ Fædd eftir dauða móður sinnar
+Née après la mort de son père ¦ Fædd eftir dauða föður síns
+Née après la mort de son parent ¦ Fædd eftir dauða foreldris síns
+Né(e) après la mort de sa mère ¦ Fædd(ur) eftir dauða móður sinnar
+Né(e) après la mort de son père ¦ Fædd(ur) eftir dauða föður síns
+Né(e) après la mort de son parent ¦ Fædd(ur) eftir dauða foreldris síns
+Son fils {child} naît {span} après sa mort ¦ Sonur hans/hennar {child} fæðist {span} eftir dauða hans/hennar
+Son fils {child} naît après sa mort ¦ Sonur hans/hennar {child} fæðist eftir dauða hans/hennar
+Sa fille {child} naît {span} après sa mort ¦ Dóttir hans/hennar {child} fæðist {span} eftir dauða hans/hennar
+Sa fille {child} naît après sa mort ¦ Dóttir hans/hennar {child} fæðist eftir dauða hans/hennar
+Son enfant {child} naît {span} après sa mort ¦ Barn hans/hennar {child} fæðist {span} eftir dauða hans/hennar
+Son enfant {child} naît après sa mort ¦ Barn hans/hennar {child} fæðist eftir dauða hans/hennar
+Seulement {n} mois après son frère ¦ Aðeins {n} mánuðum á eftir bróður sínum
+Seulement {n} mois après sa sœur ¦ Aðeins {n} mánuðum á eftir systur sinni
+Seulement {n} mois après son aîné ¦ Aðeins {n} mánuðum á eftir eldra systkini sínu
+Naissances {a} et {b} (seuil : {n} mois) ¦ Fæðingar {a} og {b} (mörk: {n} mánuðir)
+Deux enfants de la même mère naissent au moins 8 à 9 mois l’un après l’autre (sauf jumeaux). ¦ Tvö börn sömu móður fæðast að minnsta kosti 8 til 9 mánuðum hvort á eftir öðru (nema tvíburar).
+Deux enfants la même année ¦ Tvö börn sama ár
+{a} et {b} : naissance en {y} (jumeaux, doublon ou date approximative ?) ¦ {a} og {b}: fædd árið {y} (tvíburar, tvítekning eða áætluð dagsetning?)
+Né bien avant le mariage des parents ¦ Fæddur löngu fyrir hjónaband foreldranna
+Née bien avant le mariage des parents ¦ Fædd löngu fyrir hjónaband foreldranna
+Né(e) bien avant le mariage des parents ¦ Fædd(ur) löngu fyrir hjónaband foreldranna
+Naissance {b} · mariage {m} ¦ Fæðing {b} · hjónaband {m}
+Fratrie étalée sur {n} ans ¦ Systkinahópur dreifður yfir {n} ár
+Aîné(e) {a} {ad}, cadet(te) {b} {bd} (seuil : {n} ans) : deux générations mélangées ? ¦ Elsta {a} {ad}, yngsta {b} {bd} (mörk: {n} ár): tvær kynslóðir blandaðar saman?
+Rattaché à {n} familles de parents ¦ Tengdur {n} foreldrafjölskyldum
+Rattachée à {n} familles de parents ¦ Tengd {n} foreldrafjölskyldum
+Cela peut être voulu (adoption, famille recomposée) ou être une erreur. ¦ Þetta getur verið viljandi (ættleiðing, samsett fjölskylda) eða villa.
+Famille n° {n} sans conjoint ¦ Fjölskylda nr. {n} án maka
+Enfants : {names} : il manque le père et la mère. ¦ Börn: {names}: föður og móður vantar.
+Un mariage, sans les époux : il manque le père et la mère. ¦ Hjónaband án hjóna: föður og móður vantar.
+Sosa {n} notée femme ¦ Sosa {n} skráð kona
+Sosa {n} noté homme ¦ Sosa {n} skráður karl
+Un Sosa pair est un père : le sexe de la fiche, ou sa place dans l’arbre, est à vérifier. ¦ Slétt Sosa-númer er faðir: athugaðu kyn spjaldsins eða stöðu þess í trénu.
+Un Sosa impair est une mère : le sexe de la fiche, ou sa place dans l’arbre, est à vérifier. ¦ Oddatölu Sosa-númer er móðir: athugaðu kyn spjaldsins eða stöðu þess í trénu.
+Sosa {s} : {n} ans pour {k} générations ¦ Sosa {s}: {n} ár fyrir {k} kynslóðir
+Né(e) {b}, son descendant Sosa {s} {d} : une génération en trop (homonyme pris pour son père) ? ¦ Fædd(ur) {b}, afkomandi hans/hennar Sosa {s} {d}: einni kynslóð of mikið (alnafni tekinn fyrir föður sinn)?
+Né(e) {b}, son descendant Sosa {s} {d} : une génération oubliée ? ¦ Fædd(ur) {b}, afkomandi hans/hennar Sosa {s} {d}: gleymd kynslóð?
+même nom ¦ sama eftirnafn
+même prénom ¦ sama fornafn
+prénom proche ¦ líkt fornafn
+même sexe ¦ sama kyn
+sexe ¦ kyn
+même naissance ¦ sama fæðing
+nés à {n} an près ¦ fædd með {n} ára millibili
+nés la même année ¦ fædd sama ár
+nés {a} / {b} ¦ fædd {a} / {b}
+même décès ¦ sama andlát
+morts {a} / {b} ¦ dáin {a} / {b}
+mêmes parents ¦ sömu foreldrar
+parents ¦ foreldrar
+même conjoint ¦ sami maki
+autres conjoints ¦ aðrir makar
+nés au même endroit ¦ fædd á sama stað
+nés à {n} km ¦ fædd með {n} km millibili
+né {b} / mort {d} ¦ f. {b} / d. {d}
+né {b} ¦ f. {b}
+né ? / mort {d} ¦ f. ? / d. {d}
+né ? ¦ f. ?
+Ressemble à la fiche n° {n} ({pct} %) ¦ Líkist spjaldi nr. {n} ({pct} %)
+kin|sa mère ¦ móðir hans/hennar
+kin|son père ¦ faðir hans/hennar
+kin|son parent ¦ foreldri hans/hennar
+kin|sa grand-mère ¦ amma hans/hennar
+kin|son grand-père ¦ afi hans/hennar
+kin|son grand-parent ¦ afi eða amma hans/hennar
+kin|son ancêtre ({n} générations) ¦ forfaðir hans/hennar ({n} kynslóðir)
+kin|sa fille ¦ dóttir hans/hennar
+kin|son fils ¦ sonur hans/hennar
+kin|son enfant ¦ barn hans/hennar
+kin|sa petite-fille ¦ sonardóttir eða dótturdóttir hans/hennar
+kin|son petit-fils ¦ sonarsonur eða dóttursonur hans/hennar
+kin|son petit-enfant ¦ barnabarn hans/hennar
+kin|son descendant ({n} générations) ¦ afkomandi hans/hennar ({n} kynslóðir)
+{name} marié à {kin} ¦ {name} kvæntur {kin}
+{name} mariée à {kin} ¦ {name} gift {kin}
+{name} marié(e) à {kin} ¦ {name} í hjónabandi með {kin}
+{name} est {kin} et aussi son conjoint (famille n° {n}) : une fiche rattachée à la mauvaise génération, ou deux homonymes confondus. ¦ {name} er {kin} og líka maki hans/hennar (fjölskylda nr. {n}): spjald tengt við ranga kynslóð, eða tveimur alnöfnum ruglað saman.
+Animal noté conjoint d’une personne : {name} ¦ Dýr skráð sem maki einstaklings: {name}
+Animal noté parent d’une personne : {name} ¦ Dýr skráð sem foreldri einstaklings: {name}
+Animal noté enfant d’une personne : {name} ¦ Dýr skráð sem barn einstaklings: {name}
+Famille n° {n} : {animals} avec {people}. Un animal se relie à son maître dans sa fiche (Propriétaire), pas comme parent ou conjoint. ¦ Fjölskylda nr. {n}: {animals} með {people}. Dýr er tengt eiganda sínum á spjaldi sínu (Eigandi), ekki sem foreldri eða maki.
+{n} événement à cet endroit ¦ {n} atburður á þessum stað
+{n} événements à cet endroit ¦ {n} atburðir á þessum stað
+À {km} km en {n} jours ¦ {km} km á {n} dögum
+À {km} km en {n} jour ¦ {km} km á {n} degi
+À {km} km en moins d’un jour ¦ {km} km á innan við einum degi
+{a} {ad} à {ap} · {b} {bd} à {bp} (au plus ≈ {n} km par jour à cette époque) ¦ {a} {ad} í {ap} · {b} {bd} í {bp} (í mesta lagi ≈ {n} km á dag á þeim tíma)
+Une même personne ne peut pas être à deux endroits aussi éloignés en si peu de temps : souvent deux homonymes confondus dans une seule fiche. ¦ Sami einstaklingur getur ekki verið á tveimur svo fjarlægum stöðum á svo stuttum tíma: oft er tveimur alnöfnum ruglað saman á einu spjaldi.
+Lieux de naissance contradictoires ¦ Fæðingarstaðir stangast á
+Lieux de décès contradictoires ¦ Dánarstaðir stangast á
+Baptême à {n} km du lieu de naissance ¦ Skírn {n} km frá fæðingarstað
+Naissance à {b} · baptême à {t} (seuil : {n} km). Souvent : une commune homonyme. ¦ Fæðing í {b} · skírn í {t} (mörk: {n} km). Oft: sveitarfélag með sama nafni.
+Coordonnées 0, 0 (en plein océan, au large de l’Afrique) ¦ Hnit 0, 0 (úti á miðju hafi, undan ströndum Afríku)
+Hors de {country} alors que le pays indiqué est {country} ¦ Utan {country} þótt tilgreint land sé {country}
+Latitude et longitude probablement inversées ¦ Breiddargráða og lengdargráða líklega víxlaðar
+Inverser latitude et longitude ¦ Víxla breiddargráðu og lengdargráðu
+Longitude probablement de mauvais signe (est / ouest) ¦ Lengdargráða líklega með röngu formerki (austur / vestur)
+Corriger le signe de la longitude ¦ Leiðrétta formerki lengdargráðunnar
+Une autre commune « {name} » est beaucoup plus près du reste de la famille ({a} km au lieu de {b} km) : département {dep} ¦ Annað sveitarfélag „{name}“ er miklu nær hinum í fjölskyldunni ({a} km í stað {b} km): sýsla {dep}
+Prendre la commune du département {dep} ¦ Velja sveitarfélagið í sýslu {dep}
+À {n} km du reste de la famille ¦ {n} km frá hinum í fjölskyldunni
+la commune ¦ sveitarfélagið
+Commence par les tables décennales (un index alphabétique par décennie), puis le registre de l’année trouvée. ¦ Byrjaðu á tíu ára skránum (stafrófsröðuð skrá fyrir hvern áratug), síðan kirkjubók þess árs sem fannst.
+Registres paroissiaux (BMS) ¦ Kirkjubækur (BMS)
+Les baptêmes de la paroisse de {commune} (collection communale, série E dépôt ou GG ; ou celle du greffe). Le baptême suit la naissance de 0 à 3 jours. ¦ Skírnir í sókninni {commune} (safn sveitarfélagsins, série E dépôt eða GG; eða afrit dómstólsins). Skírnin fylgir fæðingunni 0 til 3 dögum síðar.
+État civil — naissances ¦ Borgaraleg skráning — fæðingar
+Les registres de naissances de {commune}. {td} ¦ Fæðingabækur {commune}. {td}
+Mairie ¦ Ráðhús
+Un acte de naissance de moins de 75 ans n’est pas en ligne : copie intégrale à demander à la mairie (avec la preuve de ta filiation). ¦ Fæðingarvottorð yngra en 75 ára er ekki á netinu: biddu ráðhúsið um fullt afrit (með sönnun á ætterni þínu).
+Les mariages de la paroisse de {commune}, d’ordinaire celle de l’épouse ; regarde aussi les bans dans la paroisse de l’époux. ¦ Hjónavígslur í sókninni {commune}, venjulega sókn brúðarinnar; skoðaðu líka lýsingar í sókn brúðgumans.
+État civil — mariages ¦ Borgaraleg skráning — hjónavígslur
+Les registres de mariages de {commune} (commune de l’épouse le plus souvent). {td} Les publications de bans sont parfois dans un registre à part. ¦ Hjónavígslubækur {commune} (oftast sveitarfélag brúðarinnar). {td} Lýsingar eru stundum í sérstakri bók.
+Notaires (série E) et contrôle des actes (2 C) ¦ Lögbókendur (série E) og skráning skjala (2 C)
+Minutes notariales (série 3 E) ¦ Frumrit lögbókenda (série 3 E)
+Le contrat de mariage, signé chez un notaire quelques jours ou semaines avant ; depuis 1850 l’acte de mariage dit s’il y en a un, et chez quel notaire. Le registre du contrôle des actes (série 2 C) donne le notaire et la date. ¦ Kaupmálinn, undirritaður hjá lögbókanda nokkrum dögum eða vikum áður; frá 1850 segir hjónavígsluskjalið hvort hann sé til og hjá hvaða lögbókanda. Skrá skjalaeftirlitsins (série 2 C) gefur lögbókandann og dagsetninguna.
+Le contrat de mariage, signé chez un notaire quelques jours ou semaines avant ; depuis 1850 l’acte de mariage dit s’il y en a un, et chez quel notaire. Les registres de l’enregistrement (série 3 Q, actes civils publics) le retrouvent aussi. ¦ Kaupmálinn, undirritaður hjá lögbókanda nokkrum dögum eða vikum áður; frá 1850 segir hjónavígsluskjalið hvort hann sé til og hjá hvaða lögbókanda. Skrár skráningarskrifstofunnar (série 3 Q, opinber borgaraleg skjöl) finna hann líka.
+Un acte de mariage de moins de 75 ans n’est pas en ligne : copie à demander à la mairie. ¦ Hjónavígsluskjal yngra en 75 ára er ekki á netinu: biddu ráðhúsið um afrit.
+Les sépultures de la paroisse de {commune} (inhumation le lendemain du décès, en général). ¦ Greftranir í sókninni {commune} (greftrun yfirleitt daginn eftir andlát).
+État civil — décès ¦ Borgaraleg skráning — andlát
+Les décès de {commune}, mais aussi de la commune d’un enfant chez qui la personne a pu finir sa vie, ou de l’hospice voisin. {td} ¦ Andlát í {commune}, en líka í sveitarfélagi barns þar sem einstaklingurinn gæti hafa endað ævina, eða á nærliggjandi elliheimili. {td}
+Enregistrement (série 3 Q) ¦ Skráning (série 3 Q)
+Les tables des successions et absences du bureau de l’enregistrement du canton : la date et le lieu du décès, les héritiers, parfois les biens. ¦ Skrár um dánarbú og fjarvistir hjá skráningarskrifstofu kantónunnar: dagsetning og staður andláts, erfingjar, stundum eignir.
+Pour un homme mort entre 1914 et 1921 : la base des « morts pour la France » (ministère des Armées). ¦ Fyrir karl sem lést á árunum 1914 til 1921: gagnagrunnurinn „morts pour la France“ (franska varnarmálaráðuneytið).
+Son acte de mariage nomme ses parents (et dit s’ils sont vivants) ; à défaut, son acte de baptême. Avant 1792, les actes de mariage nomment souvent les parents, pas toujours. ¦ Hjónavígsluskjal hans/hennar nefnir foreldrana (og hvort þeir séu á lífi); annars skírnarskjalið. Fyrir 1792 nefna hjónavígsluskjöl oft foreldrana, en ekki alltaf.
+Son acte de mariage nomme ses parents (et dit s’ils sont vivants) ; à défaut, son acte de naissance. Avant 1792, les actes de mariage nomment souvent les parents, pas toujours. ¦ Hjónavígsluskjal hans/hennar nefnir foreldrana (og hvort þeir séu á lífi); annars fæðingarskjalið. Fyrir 1792 nefna hjónavígsluskjöl oft foreldrana, en ekki alltaf.
+Recensements (série 6 M), à partir de 1836 ¦ Manntöl (série 6 M), frá 1836
+La famille sous le même toit, avec les âges : pour trouver la commune et l’année de naissance. ¦ Fjölskyldan undir sama þaki, með aldri: til að finna sveitarfélagið og fæðingarárið.
+Recensements (série 6 M) ¦ Manntöl (série 6 M)
+Les listes nominatives de {commune}, tous les 5 ans de 1836 à 1936 (avec l’âge, le métier, toute la maisonnée) ; beaucoup sont en ligne. Dans une grande ville, il faut l’adresse (rue). ¦ Nafnalistar {commune}, á 5 ára fresti frá 1836 til 1936 (með aldri, starfi, öllu heimilisfólki); margir eru á netinu. Í stórborg þarf heimilisfangið (götu).
+Recrutement militaire (série 1 R) ¦ Herkvaðning (série 1 R)
+Le registre matricule de sa classe (année de naissance + 20), au bureau de recrutement du département où il habitait à 20 ans : signalement (taille, yeux, cheveux), adresses successives, campagnes, blessures. Index alphabétique par classe. ¦ Herskráning árgangs hans (fæðingarár + 20), hjá skráningarskrifstofu sýslunnar þar sem hann bjó tvítugur: lýsing (hæð, augu, hár), heimilisföng í röð, herferðir, sár. Stafrófsröðuð skrá eftir árgangi.
+Les tables des successions et absences puis les registres des mutations après décès, au bureau de l’enregistrement du canton du décès : héritiers, biens, valeur. Souvent dans les 6 mois après le décès. ¦ Skrár um dánarbú og fjarvistir, síðan skrár um eignaskipti eftir andlát, hjá skráningarskrifstofu kantónunnar þar sem andlátið varð: erfingjar, eignir, verðmæti. Oft innan 6 mánaða frá andláti.
+Le contrat de mariage chez le notaire du bourg ou du canton, peu avant le mariage : la dot, les témoins, la famille élargie. ¦ Kaupmálinn hjá lögbókanda þorpsins eða kantónunnar, skömmu fyrir hjónavígsluna: heimanmundurinn, vottarnir, stórfjölskyldan.
+Le contrat de mariage chez le notaire du bourg ou du canton, peu avant le mariage : la dot, les témoins, la famille élargie. L’acte de mariage (après 1850) dit s’il y a un contrat et chez quel notaire. ¦ Kaupmálinn hjá lögbókanda þorpsins eða kantónunnar, skömmu fyrir hjónavígsluna: heimanmundurinn, vottarnir, stórfjölskyldan. Hjónavígsluskjalið (eftir 1850) segir hvort kaupmáli sé til og hjá hvaða lögbókanda.
+Hors de France : les registres sont aux archives de la région ou de la paroisse ; FamilySearch en a numérisé beaucoup. ¦ Utan Frakklands: kirkjubækurnar eru í skjalasafni héraðsins eða sóknarinnar; FamilySearch hefur stafrænt afritað margar.
+Les Archives nationales d’outre-mer gardent les doubles des registres (état civil en ligne). ¦ Archives nationales d’outre-mer geyma afrit af kirkjubókunum (borgaraleg skráning á netinu).
+État civil reconstitué ¦ Endurgerð borgaraleg skráning
+L’état civil parisien d’avant 1860 a brûlé en 1871 : chercher dans les fichiers de l’état civil reconstitué (Archives de Paris). ¦ Borgaraleg skráning Parísar fyrir 1860 brann árið 1871: leitaðu í skrám endurgerðrar borgaralegrar skráningar (Archives de Paris).
+vivante aux recensements de {a} à {b} ({n}) ¦ á lífi í manntölum frá {a} til {b} ({n})
+vivant aux recensements de {a} à {b} ({n}) ¦ á lífi í manntölum frá {a} til {b} ({n})
+vivante aux recensements de {years} ¦ á lífi í manntölum {years}
+vivant aux recensements de {years} ¦ á lífi í manntölum {years}
+classe {c} (né en {y}) ¦ árgangur {c} (fæddur {y})
+décès en {y} ¦ andlát árið {y}
+mariage en {y} ¦ hjónaband árið {y}
+enfant né en {y} ¦ barn fætt árið {y}
+enfant né en {y} ; souvent dans la paroisse de l’épouse ¦ barn fætt árið {y}; oft í sókn eiginkonunnar
+dernière mention en {y} ¦ síðast getið árið {y}
+née vers {y} ¦ fædd um {y}
+né vers {y} ¦ fæddur um {y}
+son acte de mariage ({y}) nomme ses parents ¦ hjónavígsluskjal hans/hennar ({y}) nefnir foreldrana
+son acte de baptême ({y}) nomme ses parents ¦ skírnarskjal hans/hennar ({y}) nefnir foreldrana
+Même nom, née {n} ans avant à {place} : sa mère ? ¦ Sama nafn, fædd {n} árum áður í {place}: móðir hans/hennar?
+Même nom, né {n} ans avant à {place} : son père ? ¦ Sama nafn, fæddur {n} árum áður í {place}: faðir hans/hennar?
+Même nom, née {n} ans avant : sa mère ? ¦ Sama nafn, fædd {n} árum áður: móðir hans/hennar?
+Même nom, né {n} ans avant : son père ? ¦ Sama nafn, fæddur {n} árum áður: faðir hans/hennar?
+Même nom, née en {y} à {place} : un frère, une sœur, un cousin ? ¦ Sama nafn, fædd árið {y} í {place}: bróðir, systir, frændsystkini?
+Même nom, né en {y} à {place} : un frère, une sœur, un cousin ? ¦ Sama nafn, fæddur árið {y} í {place}: bróðir, systir, frændsystkini?
+Même nom, née en {y} : un frère, une sœur, un cousin ? ¦ Sama nafn, fædd árið {y}: bróðir, systir, frændsystkini?
+Même nom, né en {y} : un frère, une sœur, un cousin ? ¦ Sama nafn, fæddur árið {y}: bróðir, systir, frændsystkini?
+Même nom, même lieu (née en {y}) ¦ Sama nafn, sami staður (fædd árið {y})
+Même nom, même lieu (né en {y}) ¦ Sama nafn, sami staður (fæddur árið {y})
+Même nom, même lieu ¦ Sama nafn, sami staður
+{act} de {y} ¦ {act} frá {y}
+même nom : de la famille ? ¦ sama nafn: úr fjölskyldunni?
+souvent un proche ¦ oft náinn ættingi
+Quelqu’un ¦ Einhver
+Dans le même foyer en {y} à {place}{pos} : un parent âgé, un beau-parent ? ¦ Á sama heimili árið {y} í {place}{pos}: aldrað foreldri, tengdaforeldri?
+Dans le même foyer en {y}{pos} : un parent âgé, un beau-parent ? ¦ Á sama heimili árið {y}{pos}: aldrað foreldri, tengdaforeldri?
+Correspondance ADN{details} : son arbre a peut-être la suite ¦ DNA-samsvörun{details}: tréð hans/hennar gæti haft framhaldið
+🧩 Mur de la semaine ¦ 🧩 Blindgata vikunnar
+Mur de brique : {name} — chercher ses deux parents ¦ Blindgata: {name} — leita að báðum foreldrum
+Mur de brique : {name} — chercher son père ¦ Blindgata: {name} — leita að föðurnum
+Mur de brique : {name} — chercher sa mère ¦ Blindgata: {name} — leita að móðurinni
+Mur de brique : {name} — chercher ce qui manque ¦ Blindgata: {name} — leita að því sem vantar
+génération {n} ¦ kynslóð {n}
+🌍 Où chercher ? te propose les sites à consulter ¦ 🌍 Hvar á að leita? stingur upp á vefjum til að skoða
+Piste faite ¦ Vísbending afgreidd
+Commune inconnue : choisis la commune du dépouillement (avec son code INSEE) dans Recherche. ¦ Óþekkt sveitarfélag: veldu sveitarfélag skráningarinnar (með INSEE-kóða þess) í Rannsóknum.
+Département inconnu. ¦ Óþekkt sýsla.
+Téléchargement impossible : PHP n’a pas l’extension curl. ¦ Ekki hægt að sækja: PHP vantar curl-viðbótina.
+Le fichier des adresses du département n’est pas encore téléchargé. ¦ Heimilisfangaskrá sýslunnar hefur ekki enn verið sótt.
+Fichier des adresses illisible. ¦ Ekki hægt að lesa heimilisfangaskrána.
+Indique l’ancien nom de la rue. ¦ Tilgreindu gamla götuheitið.
+Les services d’archives ne sont pas encore prêts : relance l’app. ¦ Skjalasöfnin eru ekki enn tilbúin: ræstu appið aftur.
+Cette suppression n’a pas été trouvée dans le journal. ¦ Þessi eyðing fannst ekki í annálnum.
+Ce service existe déjà. ¦ Þessi þjónusta er þegar til.
+Artiste introuvable : cette fiche n’existe pas, ou plus (supprimée ?). ¦ Listamaður finnst ekki: þetta spjald er ekki til, eða ekki lengur (eytt?).
+Sorte de fiche inconnue. ¦ Óþekkt tegund spjalds.
+Cette fiche n’est pas cochée « Artiste » : coche « Artiste » sur la fiche (Modifier la fiche) avant d’y ranger un élément du catalogue. ¦ Þetta spjald er ekki merkt „Listamaður“: hakaðu við „Listamaður“ á spjaldinu (Breyta spjaldi) áður en þú setur atriði úr skránni á það.
+Élément trop volumineux. ¦ Atriðið er of stórt.
+Élément introuvable : il a peut-être été supprimé ou rangé chez un autre artiste. ¦ Atriði finnst ekki: því hefur kannski verið eytt eða það sett hjá öðrum listamanni.
+Élément introuvable : il a peut-être déjà été supprimé. ¦ Atriði finnst ekki: því hefur kannski þegar verið eytt.
+Rangement impossible : un des éléments n’existe plus (recharge le catalogue). ¦ Ekki hægt að raða: eitt atriðanna er ekki lengur til (endurhlaðdu skrána).
+Rien à remettre. ¦ Ekkert til að setja aftur.
+La fiche de la personne n’existe plus : impossible de remettre cet élément. ¦ Spjald einstaklingsins er ekki lengur til: ekki hægt að setja þetta atriði aftur.
+Donne un nom à cette sorte de fiche. ¦ Gefðu þessari tegund spjalds nafn.
+Cette sorte a trop de réglages. ¦ Þessi tegund hefur of margar stillingar.
+Des fiches de cette sorte existent encore : supprime-les d’abord. ¦ Spjöld af þessari tegund eru enn til: eyddu þeim fyrst.
+Réglage inconnu. ¦ Óþekkt stilling.
+Réglages trop volumineux. ¦ Stillingarnar eru of stórar.
+Import impossible : PHP n’a pas l’extension curl. ¦ Ekki hægt að flytja inn: PHP vantar curl-viðbótina.
+Le site demande de patienter (trop de demandes) : réessaie dans une minute. ¦ Vefurinn biður þig að bíða (of margar beiðnir): reyndu aftur eftir mínútu.
+Le site refuse la demande : une clé ou un jeton est nécessaire (ou il n’est pas bon). ¦ Vefurinn hafnar beiðninni: lykill eða tóki er nauðsynlegur (eða hann er ekki réttur).
+Rien trouvé à cette adresse (identifiant inconnu). ¦ Ekkert fannst á þessu vistfangi (óþekkt auðkenni).
+Réponse illisible du site. ¦ Ólæsilegt svar frá vefnum.
+La recherche par nom sur Discogs demande un jeton personnel (gratuit : discogs.com → Paramètres → Développeurs). Sans jeton, colle l’adresse d’un artiste, d’un album ou d’un disque. ¦ Nafnaleit á Discogs krefst persónulegs tóka (ókeypis: discogs.com → Stillingar → Forritarar). Án tóka skaltu líma vistfang listamanns, plötu eða útgáfu.
+Ce n’est pas une image (JPEG, PNG, WebP ou GIF). ¦ Þetta er ekki mynd (JPEG, PNG, WebP eða GIF).
+Image refusée : seules les images de Discogs, MusicBrainz/Cover Art Archive, Open Library, Wikimedia, TMDb et Apple sont rapatriées. ¦ Mynd hafnað: aðeins myndir frá Discogs, MusicBrainz/Cover Art Archive, Open Library, Wikimedia, TMDb og Apple eru sóttar.
+Trop de redirections. ¦ Of margar framsendingar.
+Donne un titre au projet. ¦ Gefðu verkefninu titil.
+Ce dossier n’est pas dans ce projet. ¦ Þessi mappa er ekki í þessu verkefni.
+Un dossier ne peut pas aller dans lui-même ni dans un de ses sous-dossiers. ¦ Mappa getur ekki farið í sjálfa sig né í eina af undirmöppum sínum.
+Donne un nom au dossier. ¦ Gefðu möppunni nafn.
+Élément introuvable. ¦ Atriði finnst ekki.
+Donne un titre à cet élément. ¦ Gefðu þessu atriði titil.
+Rien de reconnu : le fichier doit être un export Zotero RDF (.rdf), CSL JSON (.json), EndNote XML (.xml), BibTeX (.bib) ou RIS (.ris). ¦ Ekkert þekktist: skráin verður að vera útflutningur úr Zotero RDF (.rdf), CSL JSON (.json), EndNote XML (.xml), BibTeX (.bib) eða RIS (.ris).
+Fichier refusé : il contient des déclarations XML (DOCTYPE ou ENTITY) qu’un export de bibliographie n’utilise pas. ¦ Skrá hafnað: hún inniheldur XML-yfirlýsingar (DOCTYPE eða ENTITY) sem útflutningur heimildaskrár notar ekki.
+Donne un nom au projet. ¦ Gefðu verkefninu nafn.
+Projet trop gros (4 Mo au plus pour les réglages). ¦ Verkefnið er of stórt (í mesta lagi 4 MB fyrir stillingarnar).
+Réglages du projet illisibles. ¦ Ekki hægt að lesa stillingar verkefnisins.
+Ce média n’est pas un son. ¦ Þessi miðill er ekki hljóð.
+Ce fichier n’est pas une version de ce son. ¦ Þessi skrá er ekki útgáfa af þessu hljóði.
+Trop de zones (500 au plus). ¦ Of mörg svæði (í mesta lagi 500).
+Le mot de passe doit faire au moins 8 caractères. ¦ Lykilorðið verður að vera að minnsta kosti 8 stafir.
+Le chiffrement des sauvegardes n’est pas disponible sur cet ordinateur. ¦ Dulkóðun afrita er ekki í boði á þessari tölvu.
+Impossible de créer le dossier temporaire de la sauvegarde. ¦ Ekki hægt að búa til bráðabirgðamöppu fyrir afritið.
+Impossible de créer l’archive. ¦ Ekki hægt að búa til safnskrána.
+Écriture de l’archive impossible. ¦ Ekki hægt að skrifa safnskrána.
+Ce fichier n’est pas une base SQLite lisible. ¦ Þessi skrá er ekki læsilegur SQLite-gagnagrunnur.
+Cette base vient d’une version plus récente de l’application : mets LCNDA à jour pour l’ouvrir. ¦ Þessi gagnagrunnur kemur úr nýrri útgáfu forritsins: uppfærðu LCNDA til að opna hann.
+Une généalogie est déjà ouverte : elle ne sera pas remplacée. Ouvre ce fichier sur l’écran de démarrage d’une installation vide. ¦ Ættfræði er þegar opin: henni verður ekki skipt út. Opnaðu þessa skrá á upphafsskjá tómrar uppsetningar.
+Impossible de créer le dossier de la base. ¦ Ekki hægt að búa til möppu gagnagrunnsins.
+Lecture de la base impossible dans l’archive. ¦ Ekki hægt að lesa gagnagrunninn í safnskránni.
+Impossible d’enregistrer le fichier reçu. ¦ Ekki hægt að vista skrána sem barst.
+Impossible de créer le dossier des médias. ¦ Ekki hægt að búa til möppu miðlanna.
+Impossible de remplacer la base vide. ¦ Ekki hægt að skipta út tóma gagnagrunninum.
+Impossible de mettre la base en place. ¦ Ekki hægt að setja gagnagrunninn upp.
+Import par chemin réservé à l’application de bureau. ¦ Innflutningur eftir slóð er aðeins fyrir skjáborðsforritið.
+Ce dossier n’est ni un paquet MacFamilyTree (.mftpkg), ni un fichier Hérédis (.hmw). ¦ Þessi mappa er hvorki MacFamilyTree-pakki (.mftpkg) né Hérédis-skrá (.hmw).
+« Une journée dans la vie » est faite pour les personnes. ¦ „Einn dagur í lífinu“ er gert fyrir einstaklinga.
+Cette fiche n’est pas montrée en mode consultation. ¦ Þetta spjald er ekki sýnt í skoðunarham.
+Cet événement n’est pas dans la vie de cette personne. ¦ Þessi atburður er ekki í ævi þessa einstaklings.
+Cet événement n’a pas de date : choisis-en un autre, ou écris une date. ¦ Þessi atburður hefur enga dagsetningu: veldu annan, eða skrifaðu dagsetningu.
+Choisis un événement de sa vie, ou écris une date. ¦ Veldu atburð úr ævi hans/hennar, eða skrifaðu dagsetningu.
+Je ne comprends pas cette date (exemples : 7 mai 1925, vers 1784, 12 thermidor an II). ¦ Ég skil ekki þessa dagsetningu (dæmi: 7 mai 1925, vers 1784, 12 thermidor an II).
+Personne introuvable : choisis d’abord à qui se rattache cette fiche. ¦ Einstaklingur finnst ekki: veldu fyrst hverjum þetta spjald tengist.
+Fiche verrouillée. Déverrouille-la avant de modifier ou supprimer cette personne. ¦ Spjaldið er læst. Opnaðu lásinn áður en þú breytir eða eyðir þessum einstaklingi.
+Fiche introuvable : elle a peut-être été supprimée. ¦ Spjald finnst ekki: því hefur kannski verið eytt.
+Fiche introuvable : elle a peut-être déjà été supprimée. ¦ Spjald finnst ekki: því hefur kannski þegar verið eytt.
+Ce tableau a été modifié dans une autre fenêtre depuis que tu l’as ouvert. ¦ Þessari töflu hefur verið breytt í öðrum glugga síðan þú opnaðir hana.
+Instantané introuvable. ¦ Skyndimynd finnst ekki.
+Donne un nom à l’instantané. ¦ Gefðu skyndimyndinni nafn.
+La base locale n'a pas encore été importée. ¦ Staðbundni gagnagrunnurinn hefur ekki enn verið fluttur inn.
+Parcelle introuvable (supprimée ?). ¦ Landspilda finnst ekki (eytt?).
+Lien de sorte inconnue. ¦ Tengill af óþekktri tegund.
+La section s’écrit avec 1 ou 2 lettres ou chiffres (ex. « AB », « B », « 0A »). ¦ Hlutinn (section) er skrifaður með 1 eða 2 bókstöfum eða tölustöfum (t.d. „AB“, „B“, „0A“).
+Le numéro de parcelle est un nombre de 1 à 9999. ¦ Númer landspildunnar er tala frá 1 til 9999.
+Code de commune (INSEE) inconnu : 5 chiffres, ex. 19272. ¦ Óþekktur sveitarfélagskóði (INSEE): 5 tölustafir, t.d. 19272.
+Donne au moins la section et le numéro de la parcelle (ou un lieu-dit). ¦ Tilgreindu að minnsta kosti hluta og númer landspildunnar (eða örnefni).
+La surface est un nombre de mètres carrés. ¦ Flatarmálið er fjöldi fermetra.
+Parcelle introuvable (déjà supprimée ?). ¦ Landspilda finnst ekki (þegar eytt?).
+Cette fiche n’existe pas (supprimée ?). ¦ Þetta spjald er ekki til (eytt?).
+Beaucoup de demandes au cadastre en une minute : attends un petit moment et réessaie. ¦ Margar beiðnir til jarðaskrárinnar á einni mínútu: bíddu andartak og reyndu aftur.
+Le cadastre en ligne ne répond pas pour l’instant. ¦ Jarðaskráin á netinu svarar ekki í augnablikinu.
+Le cadastre en ligne ne répond pas (pas d’Internet ?). Tu peux remplir la parcelle à la main. ¦ Jarðaskráin á netinu svarar ekki (ekkert netsamband?). Þú getur fyllt út landspilduna handvirkt.
+Recherche impossible : PHP n’a pas l’extension curl. ¦ Ekki hægt að leita: PHP vantar curl-viðbótina.
+La réponse du service est trop grosse : précise la recherche (section et numéro). ¦ Svar þjónustunnar er of stórt: þrengdu leitina (hluti og númer).
+Choisis d’abord une commune de France (avec son code INSEE). ¦ Veldu fyrst sveitarfélag í Frakklandi (með INSEE-kóða þess).
+Point de la carte incompris. ¦ Punktur á kortinu skildist ekki.
+Écris la section (1 ou 2 lettres, ex. « AB » ou « B »). ¦ Skrifaðu hlutann (1 eða 2 bókstafir, t.d. „AB“ eða „B“).
+Il faut une parcelle avec sa commune, sa section et son numéro. ¦ Það þarf landspildu með sveitarfélagi, hluta og númeri.
+Les ventes (DVF) n’ont pas pu être lues : pas d’Internet, ou service indisponible. ¦ Ekki tókst að lesa sölurnar (DVF): ekkert netsamband, eða þjónustan er ekki tiltæk.
+Demande de carte inconnue. ¦ Óþekkt kortabeiðni.
+Opération de carte inconnue. ¦ Óþekkt kortaaðgerð.
+Action de carte inconnue. ¦ Óþekkt kortaaðgerð.
+Zone illisible : il faut un sud, un ouest, un nord et un est. ¦ Ólæsilegt svæði: það þarf suður, vestur, norður og austur.
+Carte trop longue à décrire. ¦ Of langt að lýsa kortinu.
+Adresse refusée. ¦ Vistfangi hafnað.
+Fichier impossible à écrire. ¦ Ekki hægt að skrifa skrána.
+Fichier trop gros : ce n’est pas celui attendu. ¦ Skráin er of stór: þetta er ekki skráin sem búist var við.
+Dossier des frontières impossible à créer. ¦ Ekki hægt að búa til möppu landamæranna.
+Aucune commune ancienne lue dans ces fichiers : rien n’a été installé. ¦ Ekkert fornt sveitarfélag lesið úr þessum skrám: engu var komið fyrir.
+Fichier impossible à ranger. ¦ Ekki hægt að ganga frá skránni.
+Choisis un nom de famille. ¦ Veldu eftirnafn.
+Rien à citer : choisis une source. ¦ Ekkert til að vitna í: veldu heimild.
+Donne un nom à l’objet (ex. « Horloge comtoise »). ¦ Gefðu hlutnum nafn (t.d. „Horloge comtoise“).
+Donne un titre (ex. « La tarte aux pommes de mémé »). ¦ Gefðu titil (t.d. „Eplakakan hennar ömmu“).
+Lieu introuvable (les adresses ont peut-être changé). ¦ Staður finnst ekki (vistföngin hafa kannski breyst).
+Donne un nom (ex. « Salon de généalogie de Paris »). ¦ Gefðu nafn (t.d. „Salon de généalogie de Paris“).
+Réglages illisibles. ¦ Ólæsilegar stillingar.
+Événement introuvable. ¦ Atburður finnst ekki.
+Donnée incorrecte : un texte est attendu. ¦ Röng gögn: búist var við texta.
+Opération inconnue. ¦ Óþekkt aðgerð.
+Choisis l’ancêtre (ou le couple) dont on réunit les descendants. ¦ Veldu forföðurinn (eða hjónin) sem afkomendurnir eru safnaðir saman um.
+Invité introuvable. ¦ Gestur finnst ekki.
+Réponse inconnue. ¦ Óþekkt svar.
+Le nombre de personnes va de 0 à 99. ¦ Fjöldi einstaklinga er frá 0 til 99.
+SocFace lit « née en {sf} », ta fiche dit {p} — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace les „née en {sf}“, spjaldið þitt segir {p} — gervigreindin gæti hafa lesið rangt: athugaðu á myndinni.
+SocFace lit « né en {sf} », ta fiche dit {p} — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace les „né en {sf}“, spjaldið þitt segir {p} — gervigreindin gæti hafa lesið rangt: athugaðu á myndinni.
+SocFace lit « née vers {sf} », ta fiche dit {p} — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace les „née vers {sf}“, spjaldið þitt segir {p} — gervigreindin gæti hafa lesið rangt: athugaðu á myndinni.
+SocFace lit « né vers {sf} », ta fiche dit {p} — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace les „né vers {sf}“, spjaldið þitt segir {p} — gervigreindin gæti hafa lesið rangt: athugaðu á myndinni.
+SocFace lit « née à {sf} », ta fiche dit {p} — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace les „née à {sf}“, spjaldið þitt segir {p} — gervigreindin gæti hafa lesið rangt: athugaðu á myndinni.
+SocFace lit « né à {sf} », ta fiche dit {p} — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace les „né à {sf}“, spjaldið þitt segir {p} — gervigreindin gæti hafa lesið rangt: athugaðu á myndinni.
+SocFace lit « femme », ta fiche dit homme — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace les „femme“ (kona), spjaldið þitt segir karl — gervigreindin gæti hafa lesið rangt: athugaðu á myndinni.
+SocFace lit « homme », ta fiche dit femme — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace les „homme“ (karl), spjaldið þitt segir kona — gervigreindin gæti hafa lesið rangt: athugaðu á myndinni.
+SocFace lit « {role} » du chef de ménage, ta fiche dit enfant — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace les „{role}“ heimilisföðurins, spjaldið þitt segir barn — gervigreindin gæti hafa lesið rangt: athugaðu á myndinni.
+SocFace lit « {role} » du chef de ménage, ta fiche dit conjoint — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace les „{role}“ heimilisföðurins, spjaldið þitt segir maki — gervigreindin gæti hafa lesið rangt: athugaðu á myndinni.
+SocFace lit « {role} » du chef de ménage, ta fiche dit parent — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace les „{role}“ heimilisföðurins, spjaldið þitt segir foreldri — gervigreindin gæti hafa lesið rangt: athugaðu á myndinni.
+SocFace lit « {role} » du chef de ménage, ta fiche ne les relie pas — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace les „{role}“ heimilisföðurins, spjaldið þitt tengir þau ekki — gervigreindin gæti hafa lesið rangt: athugaðu á myndinni.
+SocFace lit « {role} » du chef de ménage, ta fiche dit rien — l’IA a pu mal lire : vérifie sur l’image. ¦ SocFace les „{role}“ heimilisföðurins, spjaldið þitt segir ekkert — gervigreindin gæti hafa lesið rangt: athugaðu á myndinni.
+vivante en {y}, à {place} vers {y} d’après un événement de la même année ¦ á lífi árið {y}, í {place} um {y} samkvæmt atburði sama ár
+vivant en {y}, à {place} vers {y} d’après un événement de la même année ¦ á lífi árið {y}, í {place} um {y} samkvæmt atburði sama ár
+vivante en {y}, à {place} vers {y} d’après un événement proche ¦ á lífi árið {y}, í {place} um {y} samkvæmt atburði nálægt í tíma
+vivant en {y}, à {place} vers {y} d’après un événement proche ¦ á lífi árið {y}, í {place} um {y} samkvæmt atburði nálægt í tíma
+Recensement de {y} à {place} (SocFace) : {what} ¦ Manntal {y} í {place} (SocFace): {what}
+Recensement de {y} (SocFace) : {what} ¦ Manntal {y} (SocFace): {what}
+socface|année de naissance ¦ fæðingarár
+socface|lieu de naissance ¦ fæðingarstaður
+socface|genre ¦ kyn
+socface|lien de parenté ¦ skyldleiki
+{text} (foyer coché « Vérifié sur l’image ») ¦ {text} (heimili merkt „Athugað á myndinni“)
+Le numéro de table va de 1 à 500. ¦ Borðnúmerið er frá 1 til 500.
+Donne au moins un prénom ou un nom. ¦ Gefðu að minnsta kosti fornafn eða eftirnafn.
+Cette fiche est introuvable (ou confidentielle). ¦ Þetta spjald finnst ekki (eða er trúnaðarmál).
+Cette personne est déjà dans la liste des invités. ¦ Þessi einstaklingur er þegar á gestalistanum.
+Aucun invité. ¦ Enginn gestur.
+Aucune ligne à importer. ¦ Engin lína til að flytja inn.
+Réglage trop long. ¦ Stillingin er of löng.
+Mode consultation : les cousinades (adresses des vivants) ne se montrent pas. ¦ Skoðunarhamur: ættarmót (heimilisföng lifandi fólks) eru ekki sýnd.
+Choisis l’ancêtre. ¦ Veldu forföðurinn.
+Donnée inconnue. ¦ Óþekkt gögn.
+Données inconnues. ¦ Óþekkt gögn.
+Diagramme trop gros (plus de 1,5 Mo de données). ¦ Skýringarmyndin er of stór (meira en 1,5 MB af gögnum).
+Indique le numéro de la page (ou de la vue). ¦ Tilgreindu blaðsíðunúmerið (eða myndarinnar).
+Choisis la personne testée (ou donne un nom au test). ¦ Veldu einstaklinginn sem var prófaður (eða gefðu prófinu nafn).
+Choisis d’abord le test (kit) auquel rattacher les correspondances. ¦ Veldu fyrst prófið (kit) sem samsvaranirnar tengjast.
+Donne le nom de la correspondance. ¦ Gefðu nafn samsvörunarinnar.
+Ce fichier ressemble à un fichier ADN brut (des SNP « rs… ») : il n’est jamais importé, par prudence pour la vie privée et la loi française. Importe plutôt la liste des correspondances ou des segments. ¦ Þessi skrá líkist hrári DNA-skrá (SNP „rs…“): hún er aldrei flutt inn, af varúð vegna friðhelgi einkalífs og franskra laga. Fluttu frekar inn lista yfir samsvaranir eða búta.
+Coche au moins une sorte d’anniversaire. ¦ Hakaðu við að minnsta kosti eina tegund afmælis.
+Coche au moins une sorte de contacts. ¦ Hakaðu við að minnsta kosti eina tegund tengiliða.
+Aucun contact à exporter : ton répertoire, tes services d’archives et tes cousins ADN sont vides. ¦ Enginn tengiliður til að flytja út: nafnaskráin þín, skjalasöfnin þín og DNA-frændsystkinin þín eru tóm.
+Aucune personne n°1 (Sosa) : choisis-la d’abord (Réglages → Apparence). ¦ Enginn einstaklingur nr. 1 (Sosa): veldu hann fyrst (Stillingar → Útlit).
+Choisis la personne de la branche. ¦ Veldu einstakling greinarinnar.
+Aucune personne à exporter. ¦ Enginn einstaklingur til að flytja út.
+Création du fichier ZIP impossible. ¦ Ekki hægt að búa til ZIP-skrána.
+Donne un nom à l’employeur. ¦ Gefðu vinnuveitandanum nafn.
+La base d’exemple a déjà des fiches. ¦ Sýnigagnagrunnurinn hefur þegar spjöld.
+Dossier des médias impossible à créer. ¦ Ekki hægt að búa til möppu miðlanna.
+Copie d’une image d’exemple impossible. ¦ Ekki hægt að afrita sýnimynd.
+Les médias font plus de 4 Go : le paquet serait trop gros. Fais plutôt une branche (une personne et ses ancêtres), ou une sauvegarde complète. ¦ Miðlarnir eru yfir 4 GB: pakkinn yrði of stór. Gerðu frekar grein (einstakling og forfeður hans) eða fullt afrit.
+Pas assez de place libre sur l’ordinateur pour fabriquer ce paquet. ¦ Ekki nóg laust pláss á tölvunni til að búa til þennan pakka.
+Le paquet GedZip n’a pas pu être fabriqué. ¦ Ekki tókst að búa til GedZip-pakkann.
+Le paquet GedZip n’a pas pu être écrit. ¦ Ekki tókst að skrifa GedZip-pakkann.
+Le paquet Gramps n’a pas pu être fabriqué. ¦ Ekki tókst að búa til Gramps-pakkann.
+Contrôle : le nom d’une personne cachée restait dans la copie. Rien n’a été fabriqué. ¦ Athugun: nafn falins einstaklings var enn í afritinu. Ekkert var búið til.
+Contrôle : une personne vivante avait encore des renseignements. Rien n’a été fabriqué. ¦ Athugun: lifandi einstaklingur hafði enn upplýsingar. Ekkert var búið til.
+Une des personnes choisies pour les branches n’existe plus. ¦ Einn þeirra einstaklinga sem valdir voru fyrir greinarnar er ekki lengur til.
+Impossible de préparer le fichier. ¦ Ekki hægt að undirbúa skrána.
+Lecture du fichier GEDCOM impossible ¦ Ekki hægt að lesa GEDCOM-skrána
+Ce fichier n’est pas un GEDCOM : aucune personne ni en-tête « HEAD » trouvé. ¦ Þessi skrá er ekki GEDCOM: enginn einstaklingur né „HEAD“-haus fannst.
+Graphique illisible (trop de champs). ¦ Ólæsilegt graf (of margir reitir).
+Graphique illisible (trop imbriqué). ¦ Ólæsilegt graf (of djúpt hreiðrað).
+Sorte de graphique inconnue. ¦ Óþekkt tegund grafs.
+Graphique trop gros pour être enregistré (2 Mo au plus). ¦ Grafið er of stórt til að vista (í mesta lagi 2 MB).
+Liste de graphiques illisible. ¦ Ólæsilegur listi yfir gröf.
+Vignette refusée. ¦ Smámynd hafnað.
+Opération inconnue sur les graphiques. ¦ Óþekkt aðgerð á gröfum.
+Action inconnue sur les graphiques. ¦ Óþekkt aðgerð á gröfum.
+Fichier Hérédis introuvable. ¦ Hérédis-skrá finnst ekki.
+Aucun fichier .heredis dans ce dossier Hérédis. ¦ Engin .heredis-skrá í þessari Hérédis-möppu.
+Ce fichier n’est pas un fichier Hérédis lisible (Hérédis 2019 ou plus récent). ¦ Þessi skrá er ekki læsileg Hérédis-skrá (Hérédis 2019 eða nýrra).
+Média introuvable ¦ Miðill finnst ekki
+Donne un nom aux armoiries (ex. « Armes de la famille de Montferrand »). ¦ Gefðu skjaldarmerkinu nafn (t.d. „Armes de la famille de Montferrand“).
+Donne un nom au circuit (ex. « Sur les traces des Dupont en Corrèze »). ¦ Gefðu ferðinni nafn (t.d. „Í fótspor Dupont-fjölskyldunnar í Corrèze“).
+Étape introuvable ¦ Áfangi finnst ekki
+Choisis au moins une personne (ou une branche) pour préparer le circuit. ¦ Veldu að minnsta kosti einn einstakling (eða grein) til að undirbúa ferðina.
+Donne un titre au document (ex. « Livret de famille Dupont-Martin »). ¦ Gefðu skjalinu titil (t.d. „Livret de famille Dupont-Martin“).
+Donne un nom à la carte (ex. « Cadastre napoléonien de Saint-Yrieix, 1834 »). ¦ Gefðu kortinu nafn (t.d. „Cadastre napoléonien de Saint-Yrieix, 1834“).
+Indique au moins un critère. ¦ Tilgreindu að minnsta kosti eitt skilyrði.
+Donne un nom à la recherche (ex. « Les Dupont du Nord avant 1800 »). ¦ Gefðu leitinni nafn (t.d. „Dupont-fólkið í Nord fyrir 1800“).
+Décompresse d’abord le fichier ZIP, puis importe le fichier CSV. ¦ Afþjappaðu fyrst ZIP-skrána, fluttu svo inn CSV-skrána.
+dossier introuvable (disque ou clé débranché ?) ¦ mappa finnst ekki (diskur eða lykill aftengdur?)
+dossier non accessible en écriture ¦ ekki hægt að skrifa í möppuna
+impossible de créer le sous-dossier de cette généalogie ¦ ekki hægt að búa til undirmöppu þessarar ættfræði
+Aucun dossier hors de l’ordinateur n’est réglé. ¦ Engin mappa utan tölvunnar er stillt.
+Je n’ai pas compris la date ou l’âge de la question, alors je ne liste pas tout. Exemples : « Qui est né le 7 mai 1950 ? », « nés en 1924 », « nés en l’an II », « nés un 15 brumaire », « morts à 70 ans », « morts avant leur naissance ». ¦ Ég skildi ekki dagsetninguna eða aldurinn í spurningunni, svo ég lista ekki allt. Dæmi: „Hver fæddist 7 mai 1950?“, „fædd 1924“, „fædd an II“, „fædd 15 brumaire“, „dóu 70 ára“, „dóu fyrir fæðingu sína“.
+Je n’ai pas compris la question. Exemples : « Quels ancêtres étaient boulangers à Lille avant 1850 ? », « Qui est né le même jour que moi ? », « les Dupont mariés dans le Nord au XVIIIe siècle ». ¦ Ég skildi ekki spurninguna. Dæmi: „Hvaða forfeður voru bakarar í Lille fyrir 1850?“, „Hver fæddist sama dag og ég?“, „Dupont-fólkið sem giftist í Nord á 18. öld“.
+Indique la langue. ¦ Tilgreindu tungumálið.
+Acte introuvable (ou de plus de 100 ans : il est sans doute en ligne aux archives). ¦ Skjal finnst ekki (eða eldra en 100 ára: það er líklega á netinu í skjalasafninu).
+Cet acte est déjà ouvert au public. ¦ Þetta skjal er þegar opið almenningi.
+Cette copie demande Argon2id, que le PHP de cet ordinateur ne connaît pas : ouvre-la sur un Mac ou sous Linux. ¦ Þetta afrit krefst Argon2id, sem PHP á þessari tölvu þekkir ekki: opnaðu það á Mac eða í Linux.
+Copie chiffrée abîmée. ¦ Dulkóðað afrit er skemmt.
+Écriture impossible (disque plein ?) : la copie n’a pas été faite. ¦ Ekki hægt að skrifa (diskurinn fullur?): afritið var ekki gert.
+Fichier temporaire impossible à créer. ¦ Ekki hægt að búa til bráðabirgðaskrá.
+Lecture de la base impossible. ¦ Ekki hægt að lesa gagnagrunninn.
+Ce fichier n’est pas une copie chiffrée LCNDA. ¦ Þessi skrá er ekki dulkóðað LCNDA-afrit.
+Copie chiffrée incomplète. ¦ Dulkóðað afrit er ófullkomið.
+Mot de passe incorrect, ou fichier abîmé. ¦ Rangt lykilorð, eða skráin er skemmd.
+Fichier de sortie impossible à créer. ¦ Ekki hægt að búa til úttaksskrána.
+Choisis un mot de passe d’au moins 12 caractères, par exemple une phrase de quelques mots (à garder précieusement : sans lui, la copie est illisible, même pour toi). ¦ Veldu lykilorð sem er að minnsta kosti 12 stafir, til dæmis setningu úr nokkrum orðum (geymdu það vel: án þess er afritið ólæsilegt, líka fyrir þig).
+Ce fichier n’a pas la taille d’une copie chiffrée LCNDA. ¦ Þessi skrá hefur ekki stærð dulkóðaðs LCNDA-afrits.
+Impossible de ranger la copie. ¦ Ekki hægt að ganga frá afritinu.
+La copie déchiffrée n’est pas une base lisible. ¦ Afkóðaða afritið er ekki læsilegur gagnagrunnur.
+Rien à harmoniser. ¦ Ekkert til að samræma.
+Cette harmonisation ne peut pas être annulée. ¦ Ekki er hægt að afturkalla þessa samræmingu.
+Coordonnées invalides. ¦ Ógild hnit.
+Donne un nom au bloc. ¦ Gefðu blokkinni nafn.
+Ajoute au moins un champ. ¦ Bættu við að minnsta kosti einum reit.
+Ce fichier n’est pas un bloc LCNDA. ¦ Þessi skrá er ekki LCNDA-blokk.
+Cette fiche n’appartient pas à ce bloc. ¦ Þetta spjald tilheyrir ekki þessari blokk.
+Mode consultation : rien ne peut être modifié. Pour en sortir, clique sur « Quitter la consultation » et donne le mot de passe. ¦ Skoðunarhamur: engu er hægt að breyta. Til að hætta skaltu smella á „Hætta skoðun“ og slá inn lykilorðið.
+Choisis un mot de passe d’au moins 4 caractères. ¦ Veldu lykilorð sem er að minnsta kosti 4 stafir.
+Impossible d’activer le mode consultation (dossier des données en lecture seule ?). ¦ Ekki hægt að virkja skoðunarham (gagnamappan aðeins til lestrar?).
+Choisis le lieu (hameau, village) dans les suggestions. ¦ Veldu staðinn (smáþorp, þorp) úr tillögunum.
+Indique la paroisse (ex. « Saint-Martin de Brive »). ¦ Tilgreindu sóknina (t.d. „Saint-Martin de Brive“).
+Indique le nom. ¦ Tilgreindu nafnið.
+Indique ton prénom (il apparaît dans les paquets que tu envoies). ¦ Tilgreindu fornafn þitt (það birtist í pökkunum sem þú sendir).
+Le travail à deux n’est pas commencé sur cette base. ¦ Samvinna tveggja er ekki hafin á þessum gagnagrunni.
+Aucune modification depuis le dernier paquet. ¦ Engar breytingar síðan síðasti pakki.
+Paquet introuvable : recharge-le. ¦ Pakki finnst ekki: hlaðdu honum aftur.
+Paquet illisible : recharge-le. ¦ Ólæsilegur pakki: hlaðdu honum aftur.
+Cette demande doit être un envoi. ¦ Þessi beiðni verður að vera sending.
+Donne un nom à l’objet. ¦ Gefðu hlutnum nafn.
+Image refusée : une image PNG, JPEG ou WebP de moins de 300 Ko. ¦ Mynd hafnað: PNG-, JPEG- eða WebP-mynd undir 300 KB.
+Modèle trop gros (30 Mo au plus) ou vide. ¦ Líkanið er of stórt (í mesta lagi 30 MB) eða tómt.
+Adresse refusée (seules les adresses de la bibliothèque en ligne sont permises). ¦ Vistfangi hafnað (aðeins vistföng netbókasafnsins eru leyfð).
+Fichier trop gros pour être téléchargé. ¦ Skráin er of stór til að sækja.
+La bibliothèque en ligne ne répond pas : vérifie la connexion à internet (ou réessaie plus tard). ¦ Netbókasafnið svarar ekki: athugaðu nettenginguna (eða reyndu aftur síðar).
+La bibliothèque demande de patienter (trop de demandes) : réessaie dans une minute. ¦ Bókasafnið biður þig að bíða (of margar beiðnir): reyndu aftur eftir mínútu.
+Modèle introuvable dans la bibliothèque. ¦ Líkan finnst ekki í bókasafninu.
+Réponse illisible de la bibliothèque en ligne. ¦ Ólæsilegt svar frá netbókasafninu.
+Identifiant de modèle incorrect. ¦ Rangt auðkenni líkans.
+Ce n’est pas un modèle 3D. ¦ Þetta er ekki þrívíddarlíkan.
+Ce modèle n’existe pas en glTF. ¦ Þetta líkan er ekki til í glTF.
+Modèle trop lourd (plus de 40 Mo avec ses textures). ¦ Líkanið er of þungt (meira en 40 MB með áferðum).
+Modèle trop compliqué (trop de fichiers). ¦ Líkanið er of flókið (of margar skrár).
+Fichier abîmé pendant le téléchargement (empreinte différente) : réessaie. ¦ Skráin skemmdist við niðurhal (annað fingrafar): reyndu aftur.
+Modèle trop lourd. ¦ Líkanið er of þungt.
+Ce glTF est illisible. ¦ Þetta glTF er ólæsilegt.
+Données intégrées illisibles. ¦ Ólæsileg innfelld gögn.
+Chemin de fichier refusé dans le modèle. ¦ Skráarslóð hafnað í líkaninu.
+Une texture du modèle n’est pas une image PNG, JPEG ou WebP. ¦ Áferð í líkaninu er ekki PNG-, JPEG- eða WebP-mynd.
+Modèle trop gros (30 Mo au plus). ¦ Líkanið er of stórt (í mesta lagi 30 MB).
+Conversion du modèle impossible. ¦ Ekki hægt að umbreyta líkaninu.
+Le pack n’est plus là : renvoie le fichier ZIP. ¦ Pakkinn er ekki lengur til staðar: sendu ZIP-skrána aftur.
+PHP n’a pas l’extension zip : impossible d’ouvrir un pack. ¦ PHP vantar zip-viðbótina: ekki hægt að opna pakka.
+Aucun fichier ZIP reçu (ou trop gros pour le serveur). ¦ Engin ZIP-skrá barst (eða of stór fyrir þjóninn).
+Ce fichier n’est pas un ZIP. ¦ Þessi skrá er ekki ZIP.
+Aucun modèle 3D (GLB, glTF, OBJ, STL) dans ce ZIP. ¦ Ekkert þrívíddarlíkan (GLB, glTF, OBJ, STL) í þessari ZIP-skrá.
+Choisis au moins un modèle. ¦ Veldu að minnsta kosti eitt líkan.
+Indique la licence du pack (CC0, domaine public…). ¦ Tilgreindu leyfi pakkans (CC0, almenningseign…).
+Rien à rattacher. ¦ Ekkert til að tengja.
+Plan trop lourd (6 Mo au plus) : un plan scanné plus petit ? ¦ Teikningin er of þung (í mesta lagi 6 MB): minni skönnuð teikning?
+Le plan contient un contenu refusé. ¦ Teikningin inniheldur efni sem er hafnað.
+Aucun fichier reçu. ¦ Engin skrá barst.
+Formats 3D acceptés : OBJ, STL, GLB, glTF (et MTL pour les couleurs d’un OBJ). ¦ Leyfð þrívíddarsnið: OBJ, STL, GLB, glTF (og MTL fyrir liti OBJ-skrár).
+Fichier plus gros que prévu : refusé. ¦ Skráin er stærri en búist var við: hafnað.
+Écriture impossible dans le dossier des données. ¦ Ekki hægt að skrifa í gagnamöppuna.
+Téléchargement interrompu : réessaie. ¦ Niðurhal rofnaði: reyndu aftur.
+Dossier hors des données de la reconnaissance d’écriture : rien n’est effacé. ¦ Mappa utan gagna rithandarlestrarins: engu er eytt.
+Ce modèle ne se télécharge pas tout seul : ajoute son fichier à la main. ¦ Þetta líkan sækist ekki sjálfkrafa: bættu skránni við handvirkt.
+Une installation est en cours : attends qu’elle finisse. ¦ Uppsetning er í gangi: bíddu þar til henni lýkur.
+Nom de modèle refusé. ¦ Heiti líkans hafnað.
+Impossible de déplacer le modèle. ¦ Ekki hægt að færa líkanið.
+Il faut un fichier de modèle Kraken (.mlmodel). ¦ Það þarf Kraken-líkanskrá (.mlmodel).
+Ce fichier est trop petit pour être un modèle. ¦ Þessi skrá er of lítil til að vera líkan.
+Impossible de ranger le modèle. ¦ Ekki hægt að ganga frá líkaninu.
+Deux lectures sont déjà en cours : attends qu’une se termine. ¦ Tveir lestrar eru þegar í gangi: bíddu þar til annar lýkur.
+Choisis d’abord l’image de l’acte. ¦ Veldu fyrst mynd skjalsins.
+La lecture d’écriture marche seulement sur les images. ¦ Rithandarlestur virkar aðeins á myndum.
+La lecture d’écriture manuscrite n’est pas encore installée : Réglages → Reconnaissance d’écriture (HTR). ¦ Lestur handskriftar er ekki enn uppsettur: Stillingar → Rithandargreining (HTR).
+Modèle inconnu. ¦ Óþekkt líkan.
+Ce modèle d’écriture n’est pas installé : Réglages → Reconnaissance d’écriture (HTR), étape ②. ¦ Þetta skriftarlíkan er ekki uppsett: Stillingar → Rithandargreining (HTR), skref ②.
+Image améliorée trop lourde. ¦ Endurbætta myndin er of þung.
+Image améliorée illisible. ¦ Endurbætta myndin er ólæsileg.
+Image améliorée trop grande. ¦ Endurbætta myndin er of stór.
+Nom de fichier média invalide. ¦ Ógilt heiti miðlaskrár.
+Fichier média introuvable. ¦ Miðlaskrá finnst ekki.
+Cette image ne peut pas être lue (format). ¦ Ekki er hægt að lesa þessa mynd (snið).
+Copie de l’image impossible. ¦ Ekki hægt að afrita myndina.
+Hypothèse introuvable. ¦ Tilgáta finnst ekki.
+La comparaison des hypothèses n’est pas encore prête : relance l’app. ¦ Samanburður tilgátnanna er ekki enn tilbúinn: ræstu appið aftur.
+Réponse introuvable. ¦ Svar finnst ekki.
+Lieu introuvable : choisis-le dans la liste. ¦ Staður finnst ekki: veldu hann úr listanum.
+Donne un nom à cette réponse (ex. « Naves »). ¦ Gefðu þessu svari nafn (t.d. „Naves“).
+Huit réponses au plus : retires-en une avant d’en ajouter. ¦ Í mesta lagi átta svör: fjarlægðu eitt áður en þú bætir við.
+C’est la réponse retenue : reviens d’abord sur la conclusion (↶). ¦ Þetta er svarið sem var valið: dragðu fyrst niðurstöðuna til baka (↶).
+Choisis une source, un média ou un dépouillement, ou écris la preuve. ¦ Veldu heimild, miðil eða skráningu, eða skrifaðu sönnunina.
+Sorte de preuve inconnue. ¦ Óþekkt tegund sönnunar.
+Cet élément n’existe pas (ou plus) dans la base. ¦ Þetta atriði er ekki (eða ekki lengur) í gagnagrunninum.
+Soixante preuves au plus pour une hypothèse. ¦ Í mesta lagi sextíu sannanir fyrir hverja tilgátu.
+Cette preuve est déjà dans la colonne. ¦ Þessi sönnun er þegar í dálkinum.
+Cette réponse existe déjà. ¦ Þetta svar er þegar til.
+Cette preuve existe déjà. ¦ Þessi sönnun er þegar til.
+La réponse de cette preuve a été retirée. ¦ Svar þessarar sönnunar hefur verið fjarlægt.
+Choisis une des réponses de cette hypothèse. ¦ Veldu eitt af svörum þessarar tilgátu.
+Cette hypothèse est déjà conclue : reviens d’abord sur la conclusion (↶). ¦ Þessi tilgáta hefur þegar niðurstöðu: dragðu fyrst niðurstöðuna til baka (↶).
+Cette réponse n’a pas de lieu : choisis le lieu (📍) avant de la retenir. ¦ Þetta svar hefur engan stað: veldu staðinn (📍) áður en þú velur það.
+Cette réponse n’a pas de date : écris-la avant de la retenir. ¦ Þetta svar hefur enga dagsetningu: skrifaðu hana áður en þú velur það.
+Il n’y a pas de conclusion à défaire. ¦ Engin niðurstaða til að afturkalla.
+L’événement a été modifié depuis la conclusion : remets-le à la main si besoin. ¦ Atburðinum hefur verið breytt síðan niðurstaðan var fengin: lagaðu hann handvirkt ef þarf.
+Version des empreintes incorrecte. ¦ Röng útgáfa fingrafara.
+Donnée incorrecte (« items ») : une liste est attendue. ¦ Röng gögn („items“): búist var við lista.
+Trop d’empreintes envoyées d’un coup. ¦ Of mörg fingraför send í einu.
+Donnée incorrecte (« paires »). ¦ Röng gögn („paires“).
+Choisis ce qu’on fait des autres photos : corbeille ou versions. ¦ Veldu hvað verður um hinar myndirnar: ruslafata eða útgáfur.
+La photo à garder est introuvable. ¦ Myndin sem á að halda finnst ekki.
+Choisis au moins une photo à fusionner avec celle qu’on garde. ¦ Veldu að minnsta kosti eina mynd til að sameina þeirri sem haldið er.
+Trop de photos dans ce groupe : fusionne-les en plusieurs fois. ¦ Of margar myndir í þessum hópi: sameinaðu þær í nokkrum lotum.
+Une des photos du groupe est introuvable (déjà fusionnée ?). ¦ Ein myndanna í hópnum finnst ekki (þegar sameinuð?).
+Cette fusion est déjà annulée. ¦ Þessi sameining hefur þegar verið afturkölluð.
+La photo écartée n’a pas été trouvée dans le journal. ¦ Myndin sem var lögð til hliðar fannst ekki í annálnum.
+Action inconnue sur les images semblables. ¦ Óþekkt aðgerð á svipuðum myndum.
+C’est une sauvegarde de RootsMagic (.rmbackup) : ouvre-la dans RootsMagic (Fichier → Restaurer), puis importe ici le fichier .rmtree. ¦ Þetta er afrit úr RootsMagic (.rmbackup): opnaðu það í RootsMagic (File → Restore), fluttu svo inn .rmtree-skrána hér.
+C’est une base GeneWeb (.gwb), illisible hors de GeneWeb. Dans GeneWeb, fais « gwu » (ou exporte la base en .gw) puis importe ici le fichier .gw. ¦ Þetta er GeneWeb-gagnagrunnur (.gwb), ólæsilegur utan GeneWeb. Í GeneWeb skaltu keyra „gwu“ (eða flytja gagnagrunninn út sem .gw) og flytja svo inn .gw-skrána hér.
+Le paquet GEDCOM-X (.gedx) n’est pas encore lu : importe plutôt le fichier GEDCOM-X en JSON ou en XML (ou un GEDCOM). ¦ GEDCOM-X-pakkinn (.gedx) er ekki enn lesinn: fluttu frekar inn GEDCOM-X-skrána í JSON eða XML (eða GEDCOM).
+Ce fichier RootsMagic est trop gros (plus de 1 Go). ¦ Þessi RootsMagic-skrá er of stór (meira en 1 GB).
+Ce fichier n’est pas une base RootsMagic lisible (il est abîmé, ou ce n’est pas un .rmtree). ¦ Þessi skrá er ekki læsilegur RootsMagic-gagnagrunnur (hún er skemmd, eða þetta er ekki .rmtree).
+Ce fichier RootsMagic est abîmé : il ne s’ouvre pas. ¦ Þessi RootsMagic-skrá er skemmd: hún opnast ekki.
+Ce fichier RootsMagic est abîmé : une table ne se lit pas. ¦ Þessi RootsMagic-skrá er skemmd: tafla er ólæsileg.
+Ce fichier GEDCOM-X contient un « DOCTYPE » ou des « ENTITY » XML : il est refusé par prudence. ¦ Þessi GEDCOM-X-skrá inniheldur XML „DOCTYPE“ eða „ENTITY“: henni er hafnað af varúð.
+Le XML de ce fichier GEDCOM-X est abîmé (ou ce n’est pas du GEDCOM-X). ¦ XML-ið í þessari GEDCOM-X-skrá er skemmt (eða þetta er ekki GEDCOM-X).
+Ce fichier GEDCOM-X est trop gros (plus de 300 Mo). ¦ Þessi GEDCOM-X-skrá er of stór (meira en 300 MB).
+Le JSON de ce fichier GEDCOM-X est abîmé : il ne peut pas être lu. ¦ JSON-ið í þessari GEDCOM-X-skrá er skemmt: ekki er hægt að lesa það.
+Ce fichier n’est pas du GEDCOM-X. ¦ Þessi skrá er ekki GEDCOM-X.
+Ce fichier GeneWeb est trop gros (plus de 300 Mo). ¦ Þessi GeneWeb-skrá er of stór (meira en 300 MB).
+Ce fichier n’est pas un fichier texte GeneWeb (.gw) : il contient des données binaires. Une base GeneWeb (.gwb) ne se lit pas : dans GeneWeb, fais « gwu » (ou « Exporter en .gw ») puis importe ce fichier. ¦ Þessi skrá er ekki GeneWeb-textaskrá (.gw): hún inniheldur tvíundargögn. GeneWeb-gagnagrunnur (.gwb) er ekki lesinn: í GeneWeb skaltu keyra „gwu“ (eða „Exporter en .gw“) og flytja svo inn þá skrá.
+Ce fichier GeneWeb a trop de lignes. ¦ Þessi GeneWeb-skrá hefur of margar línur.
+Ce fichier n’est pas un fichier GeneWeb (.gw) : aucun bloc « fam », « pevt » ou « notes » trouvé. ¦ Þessi skrá er ekki GeneWeb-skrá (.gw): engin „fam“-, „pevt“- eða „notes“-blokk fannst.
+Lecture du fichier Gramps impossible. ¦ Ekki hægt að lesa Gramps-skrána.
+Ce fichier Gramps compressé est abîmé. ¦ Þessi þjappaða Gramps-skrá er skemmd.
+Ce fichier contient des « ENTITY » XML : il est refusé par prudence. ¦ Þessi skrá inniheldur XML „ENTITY“: henni er hafnað af varúð.
+Ce fichier contient un « DOCTYPE » XML inattendu : il est refusé par prudence. ¦ Þessi skrá inniheldur óvænt XML „DOCTYPE“: henni er hafnað af varúð.
+Ce fichier n’est pas un fichier Gramps (balise « database » absente). ¦ Þessi skrá er ekki Gramps-skrá („database“-merki vantar).
+Le XML de ce fichier Gramps est abîmé : il ne peut pas être lu. ¦ XML-ið í þessari Gramps-skrá er skemmt: ekki er hægt að lesa það.
+Impossible d’ouvrir le paquet Gramps (.gpkg). ¦ Ekki hægt að opna Gramps-pakkann (.gpkg).
+Ce paquet Gramps contient trop de fichiers : il n’est pas ouvert. ¦ Þessi Gramps-pakki inniheldur of margar skrár: hann er ekki opnaður.
+Ce paquet Gramps est trop gros une fois ouvert pour la place libre de l’ordinateur. ¦ Þessi Gramps-pakki er of stór, þegar hann hefur verið opnaður, fyrir laust pláss tölvunnar.
+Ce paquet Gramps est anormal (beaucoup trop gros une fois ouvert) : il n’est pas ouvert. ¦ Þessi Gramps-pakki er óeðlilegur (allt of stór þegar hann er opnaður): hann er ekki opnaður.
+Dossier temporaire impossible à créer. ¦ Ekki hægt að búa til bráðabirgðamöppu.
+Fichier temporaire impossible à écrire. ¦ Ekki hægt að skrifa bráðabirgðaskrá.
+Ce paquet Gramps est incomplet (fichier coupé). ¦ Þessi Gramps-pakki er ófullkominn (skráin er slitin).
+Aucun fichier « data.gramps » dans ce paquet : ce n’est pas un paquet Gramps. ¦ Engin „data.gramps“-skrá í þessum pakka: þetta er ekki Gramps-pakki.
+Ce format n’est pas un arbre : choisis un fichier GEDCOM (.ged), Gramps (.gramps, .gpkg), GedZip (.zip), Hérédis (.heredis) ou MacFamilyTree (.mftpkg). ¦ Þetta snið er ekki ættartré: veldu GEDCOM-skrá (.ged), Gramps (.gramps, .gpkg), GedZip (.zip), Hérédis (.heredis) eða MacFamilyTree (.mftpkg).
+C’est une sauvegarde complète de LCNDA : elle remplacerait toute ta base. Ouvre-la plutôt depuis Réglages → Sauvegarde. ¦ Þetta er fullt LCNDA-afrit: það myndi koma í stað alls gagnagrunnsins þíns. Opnaðu það frekar úr Stillingar → Afrit.
+Cette archive .zip est abîmée. ¦ Þessi .zip-safnskrá er skemmd.
+Ni fichier GEDCOM, ni Hérédis, ni MacFamilyTree dans cette archive. ¦ Hvorki GEDCOM-, Hérédis- né MacFamilyTree-skrá í þessari safnskrá.
+Le fichier n’a pas pu être gardé pour l’import. ¦ Ekki tókst að geyma skrána fyrir innflutninginn.
+Fichier à importer introuvable : recommence. ¦ Skráin sem á að flytja inn finnst ekki: byrjaðu aftur.
+Le fichier à importer a été oublié (plus d’un jour) : recommence. ¦ Skránni sem átti að flytja inn hefur verið gleymt (meira en sólarhringur): byrjaðu aftur.
+Annulation impossible : cet import a déjà été annulé ou oublié. ¦ Ekki hægt að afturkalla: þessi innflutningur hefur þegar verið afturkallaður eða gleymdur.
+Des fiches importées ont déjà été reliées à d’autres : l’import ne peut plus être annulé d’un coup. ¦ Innflutt spjöld hafa þegar verið tengd öðrum: ekki er lengur hægt að afturkalla innflutninginn í einu lagi.
+Aucun acte reçu. ¦ Ekkert skjal barst.
+Aucun acte lisible dans ce fichier : vérifie le choix des colonnes. ¦ Ekkert læsilegt skjal í þessari skrá: athugaðu val dálkanna.
+Annulation impossible : ce n’est pas un import de relevés. ¦ Ekki hægt að afturkalla: þetta er ekki innflutningur skráninga.
+Aucune personne dans ce tableau : choisis au moins la colonne du nom ou du prénom. ¦ Enginn einstaklingur í þessari töflu: veldu að minnsta kosti dálk eftirnafns eða fornafns.
+Aucune source à exporter. ¦ Engin heimild til að flytja út.
+Ce fichier n’est ni du RIS (.ris) ni du BibTeX (.bib). ¦ Þessi skrá er hvorki RIS (.ris) né BibTeX (.bib).
+Aucune référence reconnue dans ce fichier. ¦ Engin tilvísun þekktist í þessari skrá.
+Fichier GeoJSON abîmé : il ne peut pas être lu. ¦ GeoJSON-skráin er skemmd: ekki er hægt að lesa hana.
+Fichier refusé : il contient des déclarations XML (DOCTYPE ou ENTITY) qu’un fichier KML n’utilise pas. ¦ Skrá hafnað: hún inniheldur XML-yfirlýsingar (DOCTYPE eða ENTITY) sem KML-skrá notar ekki.
+Fichier KML abîmé : il ne peut pas être lu. ¦ KML-skráin er skemmd: ekki er hægt að lesa hana.
+Ce fichier XML n’est pas un KML (Google Earth). ¦ Þessi XML-skrá er ekki KML (Google Earth).
+Ce fichier n’est ni un KML (Google Earth) ni un GeoJSON. ¦ Þessi skrá er hvorki KML (Google Earth) né GeoJSON.
+Aucun lieu avec des coordonnées dans ce fichier. ¦ Enginn staður með hnitum í þessari skrá.
+Trop de lieux d’un coup. ¦ Of margir staðir í einu.
+Aucune ligne cochée : rien à faire. ¦ Engin lína hökuð: ekkert að gera.
+Adresse refusée : seuls les fichiers de data.gouv.fr sont téléchargés. ¦ Vistfangi hafnað: aðeins skrár frá data.gouv.fr eru sóttar.
+Création du fichier temporaire impossible. ¦ Ekki hægt að búa til bráðabirgðaskrá.
+Ce fichier n’est pas un fichier des décès de l’INSEE. ¦ Þessi skrá er ekki dánarskrá INSEE.
+Donne un nom au document. ¦ Gefðu skjalinu nafn.
+Trop de pages (2 000 au plus). ¦ Of margar síður (í mesta lagi 2 000).
+Document trop lourd (24 Mo au plus) : utilise des photos de la base plutôt que des photos importées, ou des photos plus petites. ¦ Skjalið er of þungt (í mesta lagi 24 MB): notaðu myndir úr gagnagrunninum frekar en innfluttar myndir, eða minni myndir.
+Ce document a été modifié dans une autre fenêtre depuis que tu l’as ouvert. ¦ Þessu skjali hefur verið breytt í öðrum glugga síðan þú opnaðir það.
+Impossible de créer le dossier des traitements par lot. ¦ Ekki hægt að búa til möppu fyrir runuvinnslu.
+Lot inconnu ou trop ancien : recommence le traitement. ¦ Óþekkt eða of gömul runa: byrjaðu vinnsluna aftur.
+Ce lot est trop grand. ¦ Þessi runa er of stór.
+Impossible de ranger le fichier dans les médias. ¦ Ekki hægt að setja skrána í miðlana.
+Média introuvable (il a peut-être été supprimé entre-temps). ¦ Miðill finnst ekki (honum hefur kannski verið eytt á meðan).
+Ce fichier n’est pas encore dans les médias. ¦ Þessi skrá er ekki enn í miðlunum.
+Fiche verrouillée : on n’y relie pas de nouveau média. Déverrouille-la d’abord. ¦ Spjaldið er læst: nýr miðill er ekki tengdur við það. Opnaðu lásinn fyrst.
+Nom du fichier manquant. ¦ Skráarheiti vantar.
+Ce lot a déjà été annulé, ou il est trop ancien. ¦ Þessi runa hefur þegar verið afturkölluð, eða hún er of gömul.
+Analyse expirée : envoie de nouveau le fichier. ¦ Greiningin er útrunnin: sendu skrána aftur.
+Choisis un fichier GEDCOM (.ged) ou Gramps (.gramps, .gpkg). ¦ Veldu GEDCOM-skrá (.ged) eða Gramps (.gramps, .gpkg).
+Impossible de créer le dossier de sauvegarde. ¦ Ekki hægt að búa til afritamöppuna.
+La base doit d’abord être mise à jour (structure n° 64). ¦ Fyrst þarf að uppfæra gagnagrunninn (uppbygging nr. 64).
+Coordonnées impossibles. ¦ Ómöguleg hnit.
+Dossier des données météo impossible à créer. ¦ Ekki hægt að búa til möppu veðurgagnanna.
+Ce fichier est trop petit pour être un pack météo. ¦ Þessi skrá er of lítil til að vera veðurpakki.
+Ce fichier est trop gros pour être un pack météo (16 Go au plus). ¦ Þessi skrá er of stór til að vera veðurpakki (í mesta lagi 16 GB).
+Envoi inconnu ou expiré : recommence l’import. ¦ Óþekkt eða útrunnin sending: byrjaðu innflutninginn aftur.
+Morceau du fichier hors de place : recommence l’import. ¦ Hluti skrárinnar á röngum stað: byrjaðu innflutninginn aftur.
+Le fichier envoyé dépasse la taille annoncée : recommence l’import. ¦ Skráin sem var send er stærri en uppgefin stærð: byrjaðu innflutninginn aftur.
+Ce n’est pas un pack météo de LCNDA (fichier .lcmeteo). ¦ Þetta er ekki LCNDA-veðurpakki (.lcmeteo-skrá).
+En-tête du pack abîmé. ¦ Haus pakkans er skemmdur.
+Le fichier est incomplet (téléchargement interrompu ?) : rien n’a été installé. ¦ Skráin er ófullkomin (niðurhal rofnaði?): engu var komið fyrir.
+Le fichier est abîmé (empreinte différente) : rien n’a été installé. ¦ Skráin er skemmd (annað fingrafar): engu var komið fyrir.
+Le pack ne peut pas être lu : rien n’a été installé. ¦ Ekki er hægt að lesa pakkann: engu var komið fyrir.
+Pack impossible à ranger. ¦ Ekki hægt að ganga frá pakkanum.
+Sorte de pack inconnue. ¦ Óþekkt tegund pakka.
+Ce pack n’est pas dans le dossier des données (le socle livré avec l’app ne se supprime pas). ¦ Þessi pakki er ekki í gagnamöppunni (grunnurinn sem fylgir appinu verður ekki fjarlægður).
+Pack impossible à retirer. ¦ Ekki hægt að fjarlægja pakkann.
+Un autre pack de cette sorte a été importé entre-temps. ¦ Annar pakki af þessari tegund var fluttur inn á meðan.
+Action météo inconnue. ¦ Óþekkt veðuraðgerð.
+Métier introuvable. ¦ Starf finnst ekki.
+la structure de la base ne se stabilise pas après 5 passages ¦ uppbygging gagnagrunnsins verður ekki stöðug eftir 5 umferðir
+Donne un titre à l’événement. ¦ Gefðu atburðinum titil.
+Donne l’année de l’événement (entre 1000 et 2100). ¦ Tilgreindu ár atburðarins (á milli 1000 og 2100).
+L’année de fin doit venir après celle du début. ¦ Lokaárið verður að koma á eftir upphafsárinu.
+Choisis la commune de l’événement. ¦ Veldu sveitarfélag atburðarins.
+L’adresse du lien doit commencer par http:// ou https://. ¦ Vistfang tengilsins verður að byrja á http:// eða https://.
+Trop de rushes dans le projet (500 au plus). ¦ Of mörg hrátökur í verkefninu (í mesta lagi 500).
+Un rush du projet n’est pas un média de la base. ¦ Hrátaka í verkefninu er ekki miðill úr gagnagrunninum.
+Impossible de créer le dossier du musée. ¦ Ekki hægt að búa til möppu safnsins.
+Musée introuvable. ¦ Safn finnst ekki.
+Un musée reçu ne se modifie pas. ¦ Safni sem hefur borist er ekki breytt.
+Ordre impossible : éléments de salles différentes. ¦ Ómöguleg röð: atriði úr ólíkum sölum.
+Impossible de ranger le fichier. ¦ Ekki hægt að ganga frá skránni.
+Ce musée n’a pas de livre d’or. ¦ Þetta safn hefur enga gestabók.
+Il faut un nom et un message. ¦ Það þarf nafn og skilaboð.
+Seul un musée reçu peut être supprimé ; le tien se vide salle par salle. ¦ Aðeins safni sem hefur borist er hægt að eyða; þitt eigið er tæmt sal fyrir sal.
+Ce fichier n’est pas un musée LCNDA (.lcnda-musee.zip). ¦ Þessi skrá er ekki LCNDA-safn (.lcnda-musee.zip).
+Ce fichier n’est pas un musée LCNDA. ¦ Þessi skrá er ekki LCNDA-safn.
+Donne un nom à la liste. ¦ Gefðu listanum nafn.
+Ajoute au moins une colonne à remplir. ¦ Bættu við að minnsta kosti einum dálki til að fylla út.
+Ajoute au moins un champ au formulaire. ¦ Bættu við að minnsta kosti einum reit í eyðublaðið.
+Ce fichier n’est pas une liste LCNDA. ¦ Þessi skrá er ekki LCNDA-listi.
+Cette fiche n’est pas dans cette liste. ¦ Þetta spjald er ekki á þessum lista.
+Document introuvable : il n’existe pas, ou plus. ¦ Skjal finnst ekki: það er ekki til, eða ekki lengur.
+Intitulé obligatoire. ¦ Heiti er nauðsynlegt.
+Donne le nom de la revue. ¦ Gefðu upp heiti tímaritsins.
+Revue, collection ou série introuvable. ¦ Tímarit, ritröð eða sería finnst ekki.
+Choisis la revue de ce numéro. ¦ Veldu tímarit þessa tölublaðs.
+Numéro introuvable. ¦ Tölublað finnst ekki.
+Donne un titre (quelques mots suffisent). ¦ Gefðu titil (nokkur orð duga).
+Donne un nom à ces règles (le journal, la rubrique). ¦ Gefðu þessum reglum nafn (blaðið, efnisflokkurinn).
+Règles introuvables. ¦ Reglur finnast ekki.
+Boucle dans le pedigree : un animal ne peut pas être son propre ancêtre. ¦ Hringur í ættbókinni: dýr getur ekki verið eigin forfaðir.
+Le père et la mère sont le même animal. ¦ Faðirinn og móðirin eru sama dýrið.
+Cet animal existe déjà. ¦ Þetta dýr er þegar til.
+Cette suppression est trop ancienne : elle ne contient pas de quoi rendre l’animal. ¦ Þessi eyðing er of gömul: hún inniheldur ekki það sem þarf til að endurheimta dýrið.
+Donne un titre à la demande. ¦ Gefðu beiðninni titil.
+Choisis au moins une photo (une image JPEG, PNG, GIF ou WebP). ¦ Veldu að minnsta kosti eina mynd (JPEG, PNG, GIF eða WebP).
+Choisis au moins un visage à faire reconnaître (ou trace-le sur la photo). ¦ Veldu að minnsta kosti eitt andlit til að láta bera kennsl á (eða teiknaðu það á myndina).
+Fichier de réponses manquant. ¦ Svarskrá vantar.
+Ce fichier n’est pas un fichier de réponses (il est illisible). ¦ Þessi skrá er ekki svarskrá (hún er ólæsileg).
+Ce fichier n’est pas un fichier de réponses de « Qui est sur cette photo ? ». ¦ Þessi skrá er ekki svarskrá úr „Hver er á þessari mynd?“.
+Version de fichier de réponses inconnue. ¦ Óþekkt útgáfa svarskrár.
+Fichier de réponses refusé : identifiant incorrect. ¦ Svarskrá hafnað: rangt auðkenni.
+Ce fichier répond à une demande qui n’est pas dans cette généalogie. ¦ Þessi skrá svarar beiðni sem er ekki í þessari ættfræði.
+Fichier de réponses refusé : il ne correspond à aucune version envoyée de cette demande (somme de contrôle). ¦ Svarskrá hafnað: hún samsvarar engri sendri útgáfu þessarar beiðni (gátsumma).
+Fichier de réponses refusé : la liste des réponses manque. ¦ Svarskrá hafnað: svaralistann vantar.
+Fichier de réponses refusé : plus de réponses que de visages. ¦ Svarskrá hafnað: fleiri svör en andlit.
+Fichier de réponses refusé : une réponse est mal formée. ¦ Svarskrá hafnað: svar er rangt sett upp.
+Fichier de réponses refusé : une réponse contient des données inattendues. ¦ Svarskrá hafnað: svar inniheldur óvænt gögn.
+Fichier de réponses refusé : visage inconnu. ¦ Svarskrá hafnað: óþekkt andlit.
+Fichier de réponses refusé : deux réponses pour le même visage. ¦ Svarskrá hafnað: tvö svör fyrir sama andlitið.
+Fichier de réponses refusé : nom proposé inconnu. ¦ Svarskrá hafnað: óþekkt tillaga að nafni.
+Ces réponses ont déjà été importées. ¦ Þessi svör hafa þegar verið flutt inn.
+Aucune réponse à importer dans ce fichier. ¦ Ekkert svar til að flytja inn í þessari skrá.
+Rien à annuler. ¦ Ekkert til að afturkalla.
+Donnée incorrecte (« personnes ») : une liste est attendue. ¦ Röng gögn („personnes“): búist var við lista.
+La base n’est pas encore à jour : relance l’app. ¦ Gagnagrunnurinn er ekki enn uppfærður: ræstu appið aftur.
+Choisis deux photos de tes médias. ¦ Veldu tvær myndir úr miðlunum þínum.
+Choisis deux photos différentes. ¦ Veldu tvær ólíkar myndir.
+Donne un nom à la comparaison. ¦ Gefðu samanburðinum nafn.
+Opération inconnue sur les comparaisons de photos. ¦ Óþekkt aðgerð á myndasamanburði.
+Action inconnue sur les comparaisons de photos. ¦ Óþekkt aðgerð á myndasamanburði.
+Enquête introuvable. ¦ Athugun finnst ekki.
+Carte de photos introuvable dans cette généalogie. ¦ Myndakort finnst ekki í þessari ættfræði.
+Période incomprise : écris par exemple « été 2023 » → « juillet 2023 », « 1950 », « entre 1950 et 1960 ». ¦ Tímabil skildist ekki: skrifaðu til dæmis „juillet 2023“, „1950“, „entre 1950 et 1960“.
+Photo introuvable sur cette carte (retirée entre-temps ?). ¦ Mynd finnst ekki á þessu korti (fjarlægð á meðan?).
+Date incomprise : écris par exemple « 14 juillet 2023 », « vers 1950 », « entre 1880 et 1885 ». ¦ Dagsetning skildist ekki: skrifaðu til dæmis „14 juillet 2023“, „vers 1950“, „entre 1880 et 1885“.
+Fiche verrouillée : déverrouille-la avant d’y rattacher ou d’en détacher une photo. ¦ Spjaldið er læst: opnaðu lásinn áður en þú tengir mynd við það eða fjarlægir hana.
+Cette photo n’a pas de position GPS d’origine. ¦ Þessi mynd hefur enga upprunalega GPS-staðsetningu.
+200 fichiers au plus à la fois. ¦ Í mesta lagi 200 skrár í einu.
+Opération inconnue sur les cartes de photos. ¦ Óþekkt aðgerð á myndakortum.
+Action inconnue sur les cartes de photos. ¦ Óþekkt aðgerð á myndakortum.
+Carte de photos illisible. ¦ Ólæsilegt myndakort.
+Ville introuvable dans la liste des villes du monde. ¦ Borg finnst ekki á lista yfir borgir heimsins.
+La zone dessinée n’est pas lisible. ¦ Teiknaða svæðið er ólæsilegt.
+Le cercle doit avoir un centre et un rayon entre 5 m et 50 km. ¦ Hringurinn verður að hafa miðju og radíus á milli 5 m og 50 km.
+Un sommet de la zone n’est pas lisible. ¦ Hornpunktur svæðisins er ólæsilegur.
+Un sommet de la zone n’a pas de coordonnées valides. ¦ Hornpunktur svæðisins hefur ekki gild hnit.
+Une zone a besoin d’au moins 3 points différents. ¦ Svæði þarf að minnsta kosti 3 ólíka punkta.
+La zone est toute plate : ses points sont alignés. ¦ Svæðið er alveg flatt: punktar þess eru í beinni línu.
+Sorte de zone inconnue (cercle ou polygone). ¦ Óþekkt tegund svæðis (hringur eða marghyrningur).
+Ce média n’est pas une image. ¦ Þessi miðill er ekki mynd.
+Cette image n’existe plus dans les Médias. ¦ Þessi mynd er ekki lengur til í Miðlum.
+Choisis une image (photo, carte postale, gravure, plan). ¦ Veldu mynd (ljósmynd, póstkort, koparstungu, uppdrátt).
+La photo d’aujourd’hui doit être une autre image. ¦ Myndin frá í dag verður að vera önnur mynd.
+Ce lieu n’existe plus dans la base. ¦ Þessi staður er ekki lengur til í gagnagrunninum.
+Le point précis a besoin de la latitude et de la longitude. ¦ Nákvæmur punktur þarf breiddargráðu og lengdargráðu.
+Donne au moins un lieu, un point sur la carte ou une zone. ¦ Tilgreindu að minnsta kosti stað, punkt á kortinu eða svæði.
+Choisis où demander de l’aide (entraide ou petite annonce). ¦ Veldu hvar á að biðja um hjálp (gagnkvæm aðstoð eða smáauglýsing).
+Qui a répondu ? Donne un nom ou un pseudo. ¦ Hver svaraði? Gefðu nafn eða gælunafn.
+Opération inconnue sur les images de lieux. ¦ Óþekkt aðgerð á myndum af stöðum.
+Action inconnue sur les images de lieux. ¦ Óþekkt aðgerð á myndum af stöðum.
+Cette personne n’existe plus dans la base. ¦ Þessi einstaklingur er ekki lengur til í gagnagrunninum.
+Choisis l’image du recto. ¦ Veldu myndina af framhliðinni.
+L’image du verso n’existe plus. ¦ Myndin af bakhliðinni er ekki lengur til.
+Le recto et le verso doivent être deux images différentes. ¦ Framhlið og bakhlið verða að vera tvær ólíkar myndir.
+Cette image a déjà sa fiche de carte postale. ¦ Þessi mynd hefur þegar sitt póstkortaspjald.
+Le verso choisi appartient déjà à une autre carte postale. ¦ Valda bakhliðin tilheyrir þegar öðru póstkorti.
+L’image du recto a été supprimée entre-temps : la carte ne peut pas revenir. ¦ Myndinni af framhliðinni var eytt á meðan: kortið getur ekki komið aftur.
+Opération inconnue sur les cartes postales. ¦ Óþekkt aðgerð á póstkortum.
+Action inconnue sur les cartes postales. ¦ Óþekkt aðgerð á póstkortum.
+Cette généalogie a déjà des données : rien n’a été changé. ¦ Þessi ættfræði hefur þegar gögn: engu var breytt.
+Donne un nom à ton animal. ¦ Gefðu dýrinu þínu nafn.
+La base d’exemple est déjà ouverte. ¦ Sýnigagnagrunnurinn er þegar opinn.
+Ce n’est pas la base d’exemple : rien n’a été fait. ¦ Þetta er ekki sýnigagnagrunnurinn: ekkert var gert.
+Ce n’est pas la base d’exemple. ¦ Þetta er ekki sýnigagnagrunnurinn.
+Numéro de fiche de mauvaise forme. ¦ Spjaldnúmer á röngu formi.
+Cette fiche n’existe pas. ¦ Þetta spjald er ekki til.
+La personne choisie n’existe pas. ¦ Valinn einstaklingur er ekki til.
+Choisis une autre personne que l’enfant. ¦ Veldu annan einstakling en barnið.
+Choisis la personne dont il tient son prénom. ¦ Veldu einstaklinginn sem barnið er nefnt eftir.
+Les dossiers de preuve ne sont pas encore prêts : relance l’app. ¦ Sönnunarmöppurnar eru ekki enn tilbúnar: ræstu appið aftur.
+Dossier de preuve introuvable. ¦ Sönnunarmappa finnst ekki.
+Choisis la personne du dossier. ¦ Veldu einstakling möppunnar.
+Choisis une autre personne. ¦ Veldu annan einstakling.
+Cet événement n’est pas sur la fiche de cette personne. ¦ Þessi atburður er ekki á spjaldi þessa einstaklings.
+Ce dossier est déjà supprimé. ¦ Þessari möppu hefur þegar verið eytt.
+Ligne du dossier introuvable. ¦ Lína í möppunni finnst ekki.
+La source ou la citation choisie n’existe plus. ¦ Valin heimild eða tilvitnun er ekki lengur til.
+Ce lien parent-enfant n’existe pas. ¦ Þessi tenging foreldris og barns er ekki til.
+Donne un nom à ce profil. ¦ Gefðu þessum prófíl nafn.
+Ce profil a trop de réglages. ¦ Þessi prófíll hefur of margar stillingar.
+Partie de puzzle inconnue. ¦ Óþekkt púsluspil.
+Image du puzzle absente. ¦ Mynd púsluspilsins vantar.
+Image du puzzle refusée. ¦ Mynd púsluspilsins hafnað.
+Taille d’image du puzzle invalide. ¦ Ógild stærð myndar púsluspilsins.
+Partie de puzzle illisible. ¦ Ólæsilegt púsluspil.
+Nombre de pièces invalide (4 à 1000). ¦ Ógildur fjöldi bita (4 til 1000).
+On ne peut pas changer le nombre de pièces d’une partie commencée. ¦ Ekki er hægt að breyta fjölda bita í púsluspili sem er hafið.
+Pièces du puzzle illisibles. ¦ Ólæsilegir bitar púsluspilsins.
+Pièces du puzzle abîmées (order). ¦ Bitar púsluspilsins eru skemmdir (order).
+Partie de puzzle introuvable dans cette généalogie. ¦ Púsluspil finnst ekki í þessari ættfræði.
+Pièces du puzzle absentes. ¦ Bita púsluspilsins vantar.
+Partie trop grosse pour être enregistrée (2 Mo au plus). ¦ Spilið er of stórt til að vista (í mesta lagi 2 MB).
+Opération de puzzle inconnue. ¦ Óþekkt aðgerð púsluspils.
+Action de puzzle inconnue. ¦ Óþekkt aðgerð púsluspils.
+Date incorrecte : écris-la comme le calendrier la propose. ¦ Röng dagsetning: skrifaðu hana eins og dagatalið stingur upp á.
+Liste de questions incorrecte. ¦ Rangur spurningalisti.
+Donne un titre au questionnaire. ¦ Gefðu spurningalistanum titil.
+Ce contact n’est plus dans le Répertoire des vivants. ¦ Þessi tengiliður er ekki lengur í Skrá yfir lifandi fólk.
+État inconnu. ¦ Óþekkt staða.
+Réponse collée incorrecte. ¦ Rangt límt svar.
+Ce fichier n’est pas un fichier de réponses de « Questions aux proches ». ¦ Þessi skrá er ekki svarskrá úr „Spurningar til ættingja“.
+Ce fichier répond à un questionnaire qui n’est pas dans cette généalogie. ¦ Þessi skrá svarar spurningalista sem er ekki í þessari ættfræði.
+Fichier de réponses refusé : il ne correspond à aucune version envoyée de ce questionnaire (somme de contrôle). ¦ Svarskrá hafnað: hún samsvarar engri sendri útgáfu þessa spurningalista (gátsumma).
+Trop de réponses dans ce fichier. ¦ Of mörg svör í þessari skrá.
+Fichier de réponses refusé : numéro de question incorrect. ¦ Svarskrá hafnað: rangt spurningarnúmer.
+Fichier de réponses refusé : une question doit être un texte. ¦ Svarskrá hafnað: spurning verður að vera texti.
+Écris la question. ¦ Skrifaðu spurninguna.
+500 questions à toi au plus. ¦ Í mesta lagi 500 eigin spurningar.
+Opération inconnue sur les questionnaires. ¦ Óþekkt aðgerð á spurningalistum.
+Action inconnue sur les questionnaires. ¦ Óþekkt aðgerð á spurningalistum.
+Donne un nom au recueil. ¦ Gefðu safnritinu nafn.
+Choisis une image pour la couverture. ¦ Veldu mynd á kápuna.
+Donne un nom à la version (ex. « Photos 2015 »). ¦ Gefðu útgáfunni nafn (t.d. „Myndir 2015“).
+Un recueil garde au moins une version. ¦ Safnrit heldur að minnsta kosti einni útgáfu.
+Choisis la version où ranger ces photos. ¦ Veldu útgáfuna sem þessar myndir eiga að fara í.
+Cette photo n’est pas sur cette page. ¦ Þessi mynd er ekki á þessari síðu.
+Cette page est dans un autre recueil. ¦ Þessi síða er í öðru safnriti.
+Version du recueil introuvable. ¦ Útgáfa safnritsins finnst ekki.
+Le média n’existe plus. ¦ Miðillinn er ekki lengur til.
+Choisis à quoi rattacher le recueil. ¦ Veldu við hvað á að tengja safnritið.
+Page d’un autre recueil. ¦ Síða úr öðru safnriti.
+Recherche de battue introuvable. ¦ Leit finnst ekki.
+Choisis où rattacher l’image. ¦ Veldu við hvað á að tengja myndina.
+Pays inconnu du catalogue. ¦ Land sem er ekki í skránni.
+Dossier de téléchargement impossible à créer. ¦ Ekki hægt að búa til niðurhalsmöppu.
+Données de ce pays introuvables. ¦ Gögn þessa lands finnast ekki.
+La France ne peut pas être retirée. ¦ Ekki er hægt að fjarlægja Frakkland.
+Des battues utilisent des communes de ce pays : retire-les d’abord de ces battues (rien n’a été supprimé). ¦ Leitir nota sveitarfélög í þessu landi: fjarlægðu þau fyrst úr þessum leitum (engu var eytt).
+Personne ou sens de la branche manquant. ¦ Einstakling eða stefnu greinarinnar vantar.
+Feuille de mission introuvable. ¦ Verkefnablað finnst ekki.
+Date de visite invalide. ¦ Ógild dagsetning heimsóknar.
+Cote de visite introuvable. ¦ Safnmark heimsóknar finnst ekki.
+La photo de départ n’est plus dans les médias. ¦ Upphafsmyndin er ekki lengur í miðlunum.
+Masque illisible dans le projet. ¦ Ólæsileg gríma í verkefninu.
+Projet trop lourd (40 Mo au plus) : retire des sélections ou des masques. ¦ Verkefnið er of þungt (í mesta lagi 40 MB): fjarlægðu val eða grímur.
+Choisis d’abord la personne du centre. ¦ Veldu fyrst einstaklinginn í miðjunni.
+Personne introuvable : choisis d’abord à qui se rattache cette information. ¦ Einstaklingur finnst ekki: veldu fyrst hverjum þessar upplýsingar tengjast.
+Fiche verrouillée. Déverrouille-la avant de la modifier. ¦ Spjaldið er læst. Opnaðu lásinn áður en þú breytir því.
+Cette information n’existe plus : elle a peut-être été supprimée. ¦ Þessar upplýsingar eru ekki lengur til: þeim hefur kannski verið eytt.
+Trop de lignes de santé (50 000 au plus). ¦ Of margar heilsufarslínur (í mesta lagi 50 000).
+Cette information a déjà été supprimée. ¦ Þessum upplýsingum hefur þegar verið eytt.
+Impossible d’enregistrer les réglages de la sauvegarde. ¦ Ekki hægt að vista stillingar afritunar.
+Écris le chemin complet du dossier (par exemple /Volumes/MaCle/LCNDA ou ~/Dropbox/LCNDA). ¦ Skrifaðu fulla slóð möppunnar (til dæmis /Volumes/MaCle/LCNDA eða ~/Dropbox/LCNDA).
+impossible de nommer la copie ¦ ekki hægt að nefna afritið
+Une sauvegarde est déjà en cours. ¦ Afritun er þegar í gangi.
+Impossible de lire la copie. ¦ Ekki hægt að lesa afritið.
+Impossible de créer le dossier des sauvegardes. ¦ Ekki hægt að búa til afritamöppuna.
+Impossible de remplacer la base (est-elle ouverte ailleurs ?). ¦ Ekki hægt að skipta út gagnagrunninum (er hann opinn annars staðar?).
+Impossible de mettre la copie en place. ¦ Ekki hægt að setja afritið upp.
+Identifiant ORCID incorrect : 16 chiffres par groupes de 4 (ex. 0000-0002-1825-0097). ¦ Rangt ORCID-auðkenni: 16 tölustafir í fjögurra stafa hópum (t.d. 0000-0002-1825-0097).
+Écris le nom de l’auteur (ex. Anne Martin) ou son identifiant HAL. ¦ Skrifaðu nafn höfundarins (t.d. Anne Martin) eða HAL-auðkenni hans.
+Les recensements SocFace ne sont pas installés. ¦ SocFace-manntölin eru ekki uppsett.
+Demande de remplissage de mauvaise forme. ¦ Áfyllingarbeiðni á röngu formi.
+Demande de remplissage illisible. ¦ Ólæsileg áfyllingarbeiðni.
+Liste de fiches de mauvaise forme. ¦ Spjaldalisti á röngu formi.
+Je ne sais pas prendre cela dans la base. ¦ Ég kann ekki að sækja þetta úr gagnagrunninum.
+Choisis un dépouillement. ¦ Veldu skráningu.
+Ce dépouillement n’existe plus. ¦ Þessi skráning er ekki lengur til.
+Choisis une de tes listes. ¦ Veldu einn af listunum þínum.
+Il n’y a pas de lignes à envoyer. ¦ Engar línur til að senda.
+Donnée incorrecte dans une ligne. ¦ Röng gögn í línu.
+Je ne sais pas envoyer cela vers la base. ¦ Ég kann ekki að senda þetta í gagnagrunninn.
+Donne l’année du recensement (par exemple 1836). ¦ Tilgreindu ár manntalsins (til dæmis 1836).
+Rien à envoyer : toutes les lignes sont laissées de côté. ¦ Ekkert til að senda: allar línurnar eru lagðar til hliðar.
+Jeton d’annulation de mauvaise forme. ¦ Afturköllunartóki á röngu formi.
+Cet envoi est introuvable. ¦ Þessi sending finnst ekki.
+Cet envoi a déjà été annulé. ¦ Þessi sending hefur þegar verið afturkölluð.
+La dernière modification a changé entre-temps : rien n’a été annulé. ¦ Síðasta breyting breyttist á meðan: ekkert var afturkallað.
+Rien à importer. ¦ Ekkert til að flytja inn.
+Trop de ménages d’un coup (400 au plus) : coupe le fichier. ¦ Of mörg heimili í einu (í mesta lagi 400): skiptu skránni.
+Rien à importer : aucun ménage avec une année de recensement. ¦ Ekkert til að flytja inn: ekkert heimili með manntalsári.
+Cet import est déjà annulé, ou introuvable. ¦ Þessi innflutningur hefur þegar verið afturkallaður, eða finnst ekki.
+Ici, on range une image (JPG, PNG, WebP, GIF), un PDF ou un texte (.txt). ¦ Hér geymirðu mynd (JPG, PNG, WebP, GIF), PDF eða texta (.txt).
+Choisis d’abord la fiche à qui ce document se rapporte. ¦ Veldu fyrst spjaldið sem þetta skjal varðar.
+Il faut un fichier, un lien ou au moins le texte du document. ¦ Það þarf skrá, tengil eða að minnsta kosti texta skjalsins.
+Données de l’import illisibles. ¦ Ólæsileg innflutningsgögn.
+Cet ajout ne correspond pas à ce document. ¦ Þessi viðbót samsvarar ekki þessu skjali.
+Il faut un fichier, un lien, le texte du document ou au moins une ligne à ajouter. ¦ Það þarf skrá, tengil, texta skjalsins eða að minnsta kosti eina línu til að bæta við.
+Choisis d’abord la commune. ¦ Veldu fyrst sveitarfélagið.
+Choisis le lieu (ou la fiche) que ce document complète. ¦ Veldu staðinn (eða spjaldið) sem þetta skjal bætir við.
+Impossible d’enregistrer l’image retouchée. ¦ Ekki hægt að vista lagfærðu myndina.
+Seuls les images, les sons et les vidéos se modifient. ¦ Aðeins myndum, hljóðum og myndböndum er hægt að breyta.
+Le fichier de cette version n’est plus dans le dossier des médias. ¦ Skrá þessarar útgáfu er ekki lengur í möppu miðlanna.
+Donne un nom à la version. ¦ Gefðu útgáfunni nafn.
+L’original ne se supprime pas. ¦ Frumritinu er ekki hægt að eyða.
+L’original n’est plus dans le dossier des médias : affiche d’abord une autre version. ¦ Frumritið er ekki lengur í möppu miðlanna: birtu fyrst aðra útgáfu.
+Acte introuvable (supprimé ?). ¦ Skjal finnst ekki (eytt?).
+Sorte de bien inconnue. ¦ Óþekkt tegund eignar.
+La valeur d’un bien est un nombre (ex. 1200). ¦ Verðmæti eignar er tala (t.d. 1200).
+Donne au moins le défunt (ou le donateur), un héritier ou un bien. ¦ Tilgreindu að minnsta kosti hinn látna (eða gefandann), erfingja eða eign.
+Acte introuvable (déjà supprimé ?). ¦ Skjal finnst ekki (þegar eytt?).
+Acte introuvable (rien à remettre). ¦ Skjal finnst ekki (ekkert til að setja aftur).
+Mode consultation : pas de partage. ¦ Skoðunarhamur: engin deiling.
+Un numéro de puce n’a que des chiffres (15 en général). ¦ Örmerkisnúmer inniheldur aðeins tölustafi (yfirleitt 15).
+Rien à supprimer. ¦ Ekkert til að eyða.
+Déjà supprimé. ¦ Þegar eytt.
+Trop de points d’un coup (5 000 au plus par envoi). ¦ Of margir punktar í einu (í mesta lagi 5 000 í hverri sendingu).
+Trop d’animaux d’un coup (5 000 au plus). ¦ Of mörg dýr í einu (í mesta lagi 5 000).
+Fichier trop gros : trop de points GPS (500 000 au plus). ¦ Skráin er of stór: of margir GPS-punktar (í mesta lagi 500 000).
+Fichier trop gros : trop de lignes. ¦ Skráin er of stór: of margar línur.
+Écris le chemin complet du dossier partagé (par exemple /Volumes/MaCle ou ~/Dropbox). ¦ Skrifaðu fulla slóð sameiginlegu möppunnar (til dæmis /Volumes/MaCle eða ~/Dropbox).
+Impossible de créer le rangement dans le dossier partagé. ¦ Ekki hægt að búa til geymslustað í sameiginlegu möppunni.
+Impossible d’écrire la copie de départ. ¦ Ekki hægt að skrifa upphafsafritið.
+Impossible d’écrire dans le dossier partagé. ¦ Ekki hægt að skrifa í sameiginlegu möppuna.
+Choisis d’abord le dossier partagé. ¦ Veldu fyrst sameiginlegu möppuna.
+Aucun dossier partagé n’est choisi sur cet ordinateur. ¦ Engin sameiginleg mappa er valin á þessari tölvu.
+Cette fusion est déjà annulée, ou introuvable. ¦ Þessi sameining hefur þegar verið afturkölluð, eða finnst ekki.
+Paquet introuvable dans le dossier partagé. ¦ Pakki finnst ekki í sameiginlegu möppunni.
+Ce conflit est déjà réglé. ¦ Þessi árekstur hefur þegar verið leystur.
+« Garder les deux » marche pour une note. ¦ „Halda báðum“ virkar fyrir athugasemd.
+La fiche est verrouillée : déverrouille-la d’abord. ¦ Spjaldið er læst: opnaðu lásinn fyrst.
+Ce conflit n’est pas réglé. ¦ Þessi árekstur er ekki leystur.
+Document trop lourd : partage-le en plusieurs documents. ¦ Skjalið er of þungt: skiptu því í nokkur skjöl.
+Document trop lourd (plus de 30 Mo) : range les images dans les médias, ou partage-le en plusieurs documents. ¦ Skjalið er of þungt (meira en 30 MB): settu myndirnar í miðlana, eða skiptu því í nokkur skjöl.
+Ce document a été modifié ailleurs (autre onglet ou autre fenêtre) depuis que tu l’as ouvert. ¦ Þessu skjali hefur verið breytt annars staðar (annar flipi eða annar gluggi) síðan þú opnaðir það.
+Document introuvable : enregistre-le d’abord. ¦ Skjal finnst ekki: vistaðu það fyrst.
+Fichier manquant ou trop lourd (plus de 30 Mo). ¦ Skrá vantar eða er of þung (meira en 30 MB).
+Donne un titre à la fiche. ¦ Gefðu spjaldinu titil.
+Image de l’acte introuvable. ¦ Mynd skjalsins finnst ekki.
+Zones ou personnes de l’acte illisibles : rien n’a été changé. ¦ Ólæsileg svæði eða einstaklingar skjalsins: engu var breytt.
+Les Trésors ne sont pas encore prêts sur cette base. ¦ Fjársjóðirnir eru ekki enn tilbúnir á þessum gagnagrunni.
+Média ou fiche introuvable. ¦ Miðill eða spjald finnst ekki.
+Dessin trop lourd (plus de 8 Mo) : retire des images importées. ¦ Teikningin er of þung (meira en 8 MB): fjarlægðu innfluttar myndir.
+Cadre de carte invalide. ¦ Ógildur kortarammi.
+Réponse de Wikipédia illisible. ¦ Ólæsilegt svar frá Wikipedia.
+Une page est trop lourde (plus de 2 Mo) : range les images dans les médias, ou partage-la en deux pages. ¦ Síða er of þung (meira en 2 MB): settu myndirnar í miðlana, eða skiptu henni í tvær síður.
+Les fichiers en plus sont trop lourds (8 Mo en tout au plus). ¦ Aukaskrárnar eru of þungar (í mesta lagi 8 MB samtals).
+La feuille de styles ou le script est trop lourd (600 ko au plus). ¦ Stílsniðið eða skriftan er of þung (í mesta lagi 600 KB).
+Site trop lourd (plus de 20 Mo) : range les images dans les médias plutôt que dans les pages. ¦ Vefurinn er of þungur (meira en 20 MB): settu myndirnar í miðlana frekar en á síðurnar.
+Ce site a été modifié ailleurs (autre onglet ou autre fenêtre) depuis que tu l’as ouvert. ¦ Þessum vef hefur verið breytt annars staðar (annar flipi eða annar gluggi) síðan þú opnaðir hann.
+Site introuvable : enregistre-le d’abord. ¦ Vefur finnst ekki: vistaðu hann fyrst.
+PHP est introuvable pour exécuter la page (indique son chemin dans la variable GENEALOGY_PHP). ¦ PHP finnst ekki til að keyra síðuna (tilgreindu slóð þess í breytunni GENEALOGY_PHP).
+Impossible de préparer le dossier d’exécution. ¦ Ekki hægt að undirbúa keyrslumöppuna.
+PHP n’a pas pu être lancé pour exécuter la page. ¦ Ekki tókst að ræsa PHP til að keyra síðuna.
+Impossible de garder l’aperçu en direct. ¦ Ekki hægt að halda beinni forskoðun.
+Aperçu expiré. ¦ Forskoðunin er útrunnin.
+Impossible de garder les réglages de publication (dossier des données en lecture seule ?). ¦ Ekki hægt að geyma birtingarstillingarnar (gagnamappan aðeins til lestrar?).
+Le service demande de patienter (trop de demandes) : réessaie dans une minute. ¦ Þjónustan biður þig að bíða (of margar beiðnir): reyndu aftur eftir mínútu.
+Le nom du serveur FTP n’est pas bon (exemple : ftp.mon-hebergeur.fr). ¦ Heiti FTP-þjónsins er ekki rétt (dæmi: ftp.mon-hebergeur.fr).
+Dossier du site incorrect. ¦ Röng mappa vefsins.
+Donne le mot de passe FTP. ¦ Gefðu upp FTP-lykilorðið.
+Trop de fichiers pour une publication. ¦ Of margar skrár fyrir eina birtingu.
+Le site est trop lourd pour être publié d’un coup (plus de 50 Mo). ¦ Vefurinn er of þungur til að birta í einu lagi (meira en 50 MB).
+Impossible de préparer le site. ¦ Ekki hægt að undirbúa vefinn.
+Réponse de Netlify illisible. ¦ Ólæsilegt svar frá Netlify.
+Netlify n’a pas pu recevoir le site. ¦ Netlify gat ekki tekið við vefnum.
+Réponse de GitHub illisible. ¦ Ólæsilegt svar frá GitHub.
+Le dépôt GitHub doit s’écrire « nom » ou « compte/nom ». ¦ GitHub-geymslan verður að skrifast „heiti“ eða „aðgangur/heiti“.
+Le FTP sécurisé n’est pas disponible avec ce PHP (curl sans FTPS). ¦ Öruggt FTP er ekki í boði með þessu PHP (curl án FTPS).
+Donne d’abord le serveur, l’identifiant et le mot de passe FTP. ¦ Gefðu fyrst upp FTP-þjóninn, notandanafnið og lykilorðið.
+Le serveur FTP ne répond pas : vérifie son nom et ta connexion. ¦ FTP-þjónninn svarar ekki: athugaðu heiti hans og tenginguna þína.
+Le serveur FTP refuse l’identifiant ou le mot de passe. ¦ FTP-þjónninn hafnar notandanafninu eða lykilorðinu.
+Le serveur FTP n’a pas de connexion chiffrée valable (TLS) : par sûreté, rien n’est envoyé en clair. ¦ FTP-þjónninn hefur ekki gilda dulkóðaða tengingu (TLS): af öryggisástæðum er ekkert sent ódulkóðað.
+Un identifiant Wikidata commence par Q suivi de chiffres (« Q7186 »). ¦ Wikidata-auðkenni byrjar á Q og síðan tölustöfum („Q7186“).
+Coche au moins une chose à ajouter. ¦ Hakaðu við að minnsta kosti eitt atriði til að bæta við.
+Classeur trop grand : plus de 2 millions de cellules. ¦ Vinnubókin er of stór: meira en 2 milljónir reita.
+Classeur trop lourd (plus de 40 Mo) : partage-le en plusieurs classeurs. ¦ Vinnubókin er of þung (meira en 40 MB): skiptu henni í nokkrar vinnubækur.
+Ce classeur a été modifié dans une autre fenêtre depuis que tu l’as ouvert. ¦ Þessari vinnubók hefur verið breytt í öðrum glugga síðan þú opnaðir hana.
+Base SQLite introuvable ou non autorisée. ¦ SQLite-gagnagrunnur finnst ekki eða er ekki leyfður.
+Impossible de créer le dossier de configuration. ¦ Ekki hægt að búa til stillingamöppuna.
+Impossible de supprimer la base active. ¦ Ekki hægt að eyða virka gagnagrunninum.
+Réglages invalides. ¦ Ógildar stillingar.
+Un réglage est trop volumineux. ¦ Stilling er of stór.
+Impossible d’enregistrer les défauts du site. ¦ Ekki hægt að vista sjálfgefin gildi vefsins.
+Import ZIP impossible : l'extension PHP ZipArchive n'est pas disponible. ¦ Ekki hægt að flytja inn ZIP: PHP-viðbótin ZipArchive er ekki í boði.
+Aucun fichier .csv ou .txt trouvé dans le ZIP ¦ Engin .csv- eða .txt-skrá fannst í ZIP-skránni
+Lecture du fichier INSEE dans le ZIP impossible ¦ Ekki hægt að lesa INSEE-skrána í ZIP-skránni
+Création du fichier temporaire impossible ¦ Ekki hægt að búa til bráðabirgðaskrá
+Écriture du fichier temporaire impossible ¦ Ekki hægt að skrifa bráðabirgðaskrá
+Lecture du fichier impossible ¦ Ekki hægt að lesa skrána
+Colonnes non reconnues : ce fichier ne ressemble pas au fichier des personnes décédées de l'INSEE (colonnes attendues, avec ou sans en-tête : nom, prenom (ou nomprenom combiné), sexe, datenaiss, lieunaiss, commnaiss, paysnaiss, datedeces, lieudeces, commdeces, actedeces). ¦ Dálkar þekkjast ekki: þessi skrá líkist ekki dánarskrá INSEE (dálkar sem búist er við, með eða án hauss: nom, prenom (eða sameinað nomprenom), sexe, datenaiss, lieunaiss, commnaiss, paysnaiss, datedeces, lieudeces, commdeces, actedeces).
+Impossible d’enregistrer la liste des généalogies. ¦ Ekki hægt að vista lista yfir ættfræðir.
+Donne un nom à la nouvelle généalogie. ¦ Gefðu nýju ættfræðinni nafn.
+Impossible de créer le dossier de la généalogie. ¦ Ekki hægt að búa til möppu ættfræðinnar.
+Généalogie introuvable. ¦ Ættfræði finnst ekki.
+Le nom ne peut pas être vide. ¦ Nafnið má ekki vera tómt.
+La généalogie principale ne peut pas être mise de côté. ¦ Ekki er hægt að leggja aðalættfræðina til hliðar.
+Ouvre d’abord une autre généalogie. ¦ Opnaðu fyrst aðra ættfræði.
+Impossible de créer le dossier des généalogies mises de côté. ¦ Ekki hægt að búa til möppu fyrir ættfræðir sem lagðar eru til hliðar.
+Impossible de déplacer le dossier de la généalogie. ¦ Ekki hægt að færa möppu ættfræðinnar.
+Seules les quinze dernières suppressions sont restaurables. ¦ Aðeins er hægt að endurheimta fimmtán síðustu eyðingarnar.
+Cette suppression ne peut pas être restaurée proprement. ¦ Ekki er hægt að endurheimta þessa eyðingu almennilega.
+Type de restauration non pris en charge. ¦ Þessi tegund endurheimtar er ekki studd.
+Événement introuvable dans le snapshot. ¦ Atburður finnst ekki í skyndimyndinni.
+Cet événement existe déjà. ¦ Þessi atburður er þegar til.
+La personne liée à cet événement n’existe plus. ¦ Einstaklingurinn sem tengist þessum atburði er ekki lengur til.
+La famille liée à cet événement n’existe plus. ¦ Fjölskyldan sem tengist þessum atburði er ekki lengur til.
+Média introuvable dans le snapshot. ¦ Miðill finnst ekki í skyndimyndinni.
+Ce média existe déjà. ¦ Þessi miðill er þegar til.
+Un rattachement du média n’existe plus. ¦ Tenging miðilsins er ekki lengur til.
+Note introuvable dans le snapshot. ¦ Athugasemd finnst ekki í skyndimyndinni.
+Cette note existe déjà. ¦ Þessi athugasemd er þegar til.
+Le rattachement de la note n’existe plus. ¦ Tenging athugasemdarinnar er ekki lengur til.
+Source introuvable dans le snapshot. ¦ Heimild finnst ekki í skyndimyndinni.
+Un rattachement de la source n’existe plus. ¦ Tenging heimildarinnar er ekki lengur til.
+Cette source existe déjà. ¦ Þessi heimild er þegar til.
+La source liée à cette citation n’existe plus. ¦ Heimildin sem tengist þessari tilvitnun er ekki lengur til.
+Battue introuvable dans le snapshot. ¦ Leit finnst ekki í skyndimyndinni.
+Cette battue existe déjà. ¦ Þessi leit er þegar til.
+La commune de départ n’existe plus. ¦ Upphafssveitarfélagið er ekki lengur til.
+Annotation de battue introuvable dans le snapshot. ¦ Athugasemd við leit finnst ekki í skyndimyndinni.
+Cette annotation existe déjà. ¦ Þessi athugasemd er þegar til.
+La battue liée à cette annotation n’existe plus. ¦ Leitin sem tengist þessari athugasemd er ekki lengur til.
+Commune liée introuvable dans le snapshot. ¦ Tengt sveitarfélag finnst ekki í skyndimyndinni.
+Cette commune liée existe déjà. ¦ Þetta tengda sveitarfélag er þegar til.
+La battue liée à cette commune n’existe plus. ¦ Leitin sem tengist þessu sveitarfélagi er ekki lengur til.
+Enquête introuvable dans le snapshot. ¦ Athugun finnst ekki í skyndimyndinni.
+Cette enquête existe déjà. ¦ Þessi athugun er þegar til.
+La personne principale de l’enquête n’existe plus. ¦ Aðaleinstaklingur athugunarinnar er ekki lengur til.
+Piste introuvable dans le snapshot. ¦ Vísbending finnst ekki í skyndimyndinni.
+Cette piste existe déjà. ¦ Þessi vísbending er þegar til.
+L’enquête liée à cette piste n’existe plus. ¦ Athugunin sem tengist þessari vísbendingu er ekki lengur til.
+Média d’enquête introuvable dans le snapshot. ¦ Miðill athugunar finnst ekki í skyndimyndinni.
+Ce média d’enquête existe déjà. ¦ Þessi miðill athugunar er þegar til.
+L’enquête liée à ce média n’existe plus. ¦ Athugunin sem tengist þessum miðli er ekki lengur til.
+Le média lié n’existe plus. ¦ Tengdi miðillinn er ekki lengur til.
+Impossible de créer le fichier temporaire d’export. ¦ Ekki hægt að búa til bráðabirgðaskrá fyrir útflutning.
+Fichier de base introuvable ¦ Gagnagrunnsskrá finnst ekki
+Impossible de créer le dossier des bases de test. ¦ Ekki hægt að búa til möppu prófunargagnagrunna.
+Impossible de créer la copie temporaire de restauration. ¦ Ekki hægt að búa til bráðabirgðaafrit fyrir endurheimt.
+Média ou fichier manquant. ¦ Miðil eða skrá vantar.
+Le fichier choisi n’existe pas dans le dossier media. ¦ Valin skrá er ekki til í media-möppunni.
+Base ou sauvegarde de comparaison introuvable. ¦ Gagnagrunnur eða afrit til samanburðar finnst ekki.
+Source de comparaison manquante. ¦ Uppruna samanburðar vantar.
+Impossible d'ouvrir le paquet .mftpkg (format inattendu) ¦ Ekki hægt að opna .mftpkg-pakkann (óvænt snið)
+Format d'archive non reconnu : ni fichier GEDCOM (.ged), ni base MacFamilyTree ('database'), ni fichier Hérédis (.heredis) dans le paquet. ¦ Snið safnskrár þekkist ekki: hvorki GEDCOM-skrá (.ged), MacFamilyTree-gagnagrunnur ('database') né Hérédis-skrá (.heredis) í pakkanum.
+Cette archive contient trop de fichiers : elle n’est pas ouverte. ¦ Þessi safnskrá inniheldur of margar skrár: hún er ekki opnuð.
+Cette archive est trop grosse une fois ouverte pour la place libre de l’ordinateur. ¦ Þessi safnskrá er of stór, þegar hún hefur verið opnuð, fyrir laust pláss tölvunnar.
+Impossible de créer un dossier temporaire pour l'extraction ¦ Ekki hægt að búa til bráðabirgðamöppu fyrir afþjöppun
+Base MacFamilyTree introuvable dans le paquet (fichier 'database' absent). ¦ MacFamilyTree-gagnagrunnur finnst ekki í pakkanum ('database'-skrá vantar).
+Le nom du type est obligatoire ¦ Heiti tegundarinnar er nauðsynlegt
+Événement manquant ¦ Atburð vantar
+Événement introuvable ¦ Atburður finnst ekki
+Coordonnées manquantes ¦ Hnit vantar
+Enquête introuvable ¦ Athugun finnst ekki
+Indique le centre d’archives à visiter. ¦ Tilgreindu skjalasafnið sem á að heimsækja.
+URL générale du centre invalide. ¦ Ógild almenn slóð safnsins.
+URL d’information du centre invalide. ¦ Ógild upplýsingaslóð safnsins.
+Dépouillement d’archive introuvable. ¦ Skráning skjala finnst ekki.
+Indique une cote à consulter. ¦ Tilgreindu safnmark til að skoða.
+Dépouillement introuvable ¦ Skráning finnst ekki
+Indique la lacune constatée. ¦ Tilgreindu eyðuna sem fannst.
+Indique l’acte ou le document à consulter. ¦ Tilgreindu skjalið sem á að skoða.
+Ce média n’est pas lié au dépouillement. ¦ Þessi miðill er ekki tengdur skráningunni.
+Indique le texte de la ligne. ¦ Tilgreindu texta línunnar.
+Ajoute au moins une ligne avant de créer une version. ¦ Bættu við að minnsta kosti einni línu áður en þú býrð til útgáfu.
+Dépouillement manquant ¦ Skráningu vantar
+Média ou dépouillement manquant ¦ Miðil eða skráningu vantar
+Choisis une personne existante ¦ Veldu einstakling sem er til
+Indique un prénom ou un nom pour créer la personne ¦ Tilgreindu fornafn eða eftirnafn til að búa til einstaklinginn
+Indique au moins un prénom ou un nom relevé ¦ Tilgreindu að minnsta kosti skráð fornafn eða eftirnafn
+Personne relevée introuvable ¦ Skráður einstaklingur finnst ekki
+Action d’écriture inconnue ¦ Óþekkt skrifaðgerð
+Nom d’étiquette obligatoire. ¦ Heiti merkis er nauðsynlegt.
+Étiquette introuvable. ¦ Merki finnst ekki.
+Cible d’étiquette invalide. ¦ Ógilt mark fyrir merki.
+Portée non prise en charge ¦ Umfang ekki stutt
+Relation incomplète ¦ Ófullkomin tengsl
+Une personne ne peut pas être liée à elle-même ¦ Ekki er hægt að tengja einstakling við sjálfan sig
+Impossible : une personne et un animal ne peuvent pas être parents ou conjoints l’un de l’autre. ¦ Ómögulegt: einstaklingur og dýr geta ekki verið foreldrar eða makar hvort annars.
+Impossible : cette personne serait à la fois l’ancêtre et le descendant de l’autre. Vérifie le sens du lien (parent ou enfant). ¦ Ómögulegt: þessi einstaklingur yrði bæði forfaðir og afkomandi hins. Athugaðu stefnu tengingarinnar (foreldri eða barn).
+Événement lié introuvable pour cette personne. ¦ Tengdur atburður finnst ekki fyrir þennan einstakling.
+Hypothèse introuvable ¦ Tilgáta finnst ekki
+Année de recensement invalide ¦ Ógilt manntalsár
+Personne liée introuvable ¦ Tengdur einstaklingur finnst ekki
+Nom du membre obligatoire ¦ Nafn heimilismanns er nauðsynlegt
+Cette personne est déjà le membre principal de ce foyer : modifie plutôt sa ligne. ¦ Þessi einstaklingur er þegar aðalmaður þessa heimilis: breyttu frekar línu hans.
+Le membre principal se modifie depuis le recensement, il ne se retire pas ici. ¦ Aðalmanninum er breytt úr manntalinu, hann er ekki fjarlægður hér.
+Type de rattachement invalide ¦ Ógild tegund tengingar
+Référence ou personne manquante ¦ Tilvísun eða einstakling vantar
+Cet événement n’est pas lié à cette personne ¦ Þessi atburður er ekki tengdur þessum einstaklingi
+Cette sépulture n’est pas liée à cette personne ¦ Þessi gröf er ekki tengd þessum einstaklingi
+Choisis au moins un média ¦ Veldu að minnsta kosti einn miðil
+Aucun nouveau média à lier ¦ Enginn nýr miðill til að tengja
+Ce recensement n’est pas lié à cette personne ¦ Þetta manntal er ekki tengt þessum einstaklingi
+Entrée introuvable ¦ Færsla finnst ekki
+Fusion impossible : on ne fusionne pas une personne avec un animal. ¦ Ekki hægt að sameina: einstaklingur er ekki sameinaður dýri.
+Type Décès introuvable ¦ Tegundin Andlát finnst ekki
+Personne et titre de l’enquête obligatoires ¦ Einstaklingur og titill athugunarinnar eru nauðsynleg
+Enquête manquante ¦ Athugun vantar
+Un suivi de registre choisi n’existe plus. ¦ Valin eftirfylgni kirkjubókar er ekki lengur til.
+Lien de suivi invalide. ¦ Ógildur eftirfylgnitengill.
+Enquête et intitulé obligatoires ¦ Athugun og heiti eru nauðsynleg
+Cette piste n’a pas de rappel. ¦ Þessi vísbending hefur enga áminningu.
+Date du rappel obligatoire. ¦ Dagsetning áminningar er nauðsynleg.
+Titre du rappel obligatoire. ¦ Titill áminningar er nauðsynlegur.
+Titre de budget obligatoire. ¦ Titill fjárhagsáætlunar er nauðsynlegur.
+Ligne de budget introuvable. ¦ Lína í fjárhagsáætlun finnst ekki.
+Ligne de budget manquante. ¦ Línu í fjárhagsáætlun vantar.
+Le destinataire (mairie, archives, greffe…) est obligatoire. ¦ Viðtakandinn (ráðhús, skjalasafn, dómstóll…) er nauðsynlegur.
+L’objet du courrier est obligatoire. ¦ Efni bréfsins er nauðsynlegt.
+La personne liée est introuvable. ¦ Tengdur einstaklingur finnst ekki.
+Titre et commune de départ obligatoires. ¦ Titill og upphafssveitarfélag eru nauðsynleg.
+Commune de départ introuvable dans les contours. ¦ Upphafssveitarfélag finnst ekki í útlínunum.
+Commune liée manquante. ¦ Tengt sveitarfélag vantar.
+Commune liée introuvable. ¦ Tengt sveitarfélag finnst ekki.
+Commune liée invalide. ¦ Ógilt tengt sveitarfélag.
+Dossier introuvable pour cette enquête. ¦ Mappa finnst ekki fyrir þessa athugun.
+Média évalué introuvable ¦ Metinn miðill finnst ekki
+Média d’enquête manquant. ¦ Miðil athugunar vantar.
+Média d’enquête introuvable. ¦ Miðill athugunar finnst ekki.
+Paramètres manquants ¦ Færibreytur vantar
+Événement invalide. ¦ Ógildur atburður.
+Donne un nom au dossier ¦ Gefðu möppunni nafn
+Choisis au moins un média à déplacer ¦ Veldu að minnsta kosti einn miðil til að færa
+Dossier de destination invalide ¦ Ógild ákvörðunarmappa
+Statut invalide : choisis Vivant, Décédé ou Inconnu. ¦ Ógild staða: veldu Á lífi, Látinn eða Óþekkt.
+Cette fiche a été modifiée dans une autre fenêtre depuis que tu l’as ouverte : recharge-la pour voir les changements (tes modifications ne sont pas perdues : elles restent dans cette fenêtre ; copie-les avant de recharger, ou choisis « Enregistrer quand même » pour remplacer l’autre version). ¦ Þessu spjaldi hefur verið breytt í öðrum glugga síðan þú opnaðir það: endurhlaðdu það til að sjá breytingarnar (breytingarnar þínar glatast ekki: þær eru áfram í þessum glugga; afritaðu þær áður en þú endurhleður, eða veldu „Vista samt“ til að skipta út hinni útgáfunni).
+Cette suppression est trop ancienne : elle ne contient pas de quoi restaurer la fiche. ¦ Þessi eyðing er of gömul: hún inniheldur ekki það sem þarf til að endurheimta spjaldið.
+Cette fiche existe déjà. ¦ Þetta spjald er þegar til.
+Personne introuvable : la fiche a peut-être été supprimée. ¦ Einstaklingur finnst ekki: spjaldinu hefur kannski verið eytt.
+Cette image source n’est pas liée à la fiche. ¦ Þessi upprunamynd er ekki tengd spjaldinu.
+Média de preuve introuvable ¦ Sönnunarmiðill finnst ekki
+Famille ou type d’événement manquant ¦ Fjölskyldu eða tegund atburðar vantar
+Personne ou type d’événement manquant ¦ Einstakling eða tegund atburðar vantar
+Type d’événement introuvable : choisis-en un dans la liste. ¦ Tegund atburðar finnst ekki: veldu eina af listanum.
+Événement ou type manquant ¦ Atburð eða tegund vantar
+Personne ou nom de la fiche manquant ¦ Einstakling eða heiti spjaldsins vantar
+Choisis l’événement à sourcer ¦ Veldu atburðinn sem á að fá heimild
+Média manquant ¦ Miðil vantar
+Rotation disponible uniquement pour les images. ¦ Snúningur er aðeins í boði fyrir myndir.
+Rotation impossible : l’extension PHP GD n’est pas disponible. ¦ Ekki hægt að snúa: PHP-viðbótin GD er ekki í boði.
+Format image non pris en charge pour la rotation. ¦ Myndsniðið er ekki stutt fyrir snúning.
+Impossible de lire l’image. ¦ Ekki hægt að lesa myndina.
+Impossible d’enregistrer l’image tournée. ¦ Ekki hægt að vista snúnu myndina.
+Modèle HTR inconnu ¦ Óþekkt HTR-líkan
+La reconnaissance manuscrite est disponible uniquement sur les images. ¦ Rithandargreining er aðeins í boði fyrir myndir.
+Image améliorée : écriture impossible. ¦ Endurbætt mynd: ekki hægt að skrifa.
+La reconnaissance d’écriture n’est pas encore installée : Réglages → Reconnaissance d’écriture (HTR) → « Installer » (une seule fois). ¦ Rithandargreining er ekki enn uppsett: Stillingar → Rithandargreining (HTR) → „Setja upp“ (aðeins einu sinni).
+Impossible de lancer le service HTR local. ¦ Ekki hægt að ræsa staðbundnu HTR-þjónustuna.
+Cette image n’est pas rattachée à la personne ¦ Þessi mynd er ekki tengd einstaklingnum
+Ordre des médias manquant ¦ Röð miðlanna vantar
+Type de média invalide. ¦ Ógild tegund miðils.
+Référence ou personne manquante. ¦ Tilvísun eða einstakling vantar.
+Cet événement n’est pas lié à cette personne. ¦ Þessi atburður er ekki tengdur þessum einstaklingi.
+Choisis au moins deux médias pour créer un document groupé. ¦ Veldu að minnsta kosti tvo miðla til að búa til samsett skjal.
+Un des médias choisis n’est pas lié à cet élément. ¦ Einn af völdu miðlunum er ekki tengdur þessu atriði.
+Document groupé manquant. ¦ Samsett skjal vantar.
+Document groupé introuvable. ¦ Samsett skjal fannst ekki.
+Ordre des médias manquant. ¦ Röð miðlanna vantar.
+Nom de branche obligatoire. ¦ Heiti greinar er nauðsynlegt.
+Nom de vue obligatoire ¦ Heiti yfirlits er nauðsynlegt
+Le terme est requis ¦ Hugtakið er nauðsynlegt
+Sépulture introuvable ¦ Gröf fannst ekki
+Cette personne est déjà rattachée à une sépulture ¦ Þessi einstaklingur er þegar tengdur gröf
+Sépulture manquante ¦ Gröf vantar
+Cette personne est déjà rattachée à une autre sépulture ¦ Þessi einstaklingur er þegar tengdur annarri gröf
+Cette personne est déjà associée à cette sépulture ¦ Þessi einstaklingur er þegar tengdur þessari gröf
+Référence manquante ¦ Tilvísun vantar
+Cette personne n’est pas rattachée à cette sépulture ¦ Þessi einstaklingur er ekki tengdur þessari gröf
+Impossible de retirer la dernière personne : supprime la sépulture si besoin ¦ Ekki hægt að fjarlægja síðasta einstaklinginn: eyddu gröfinni ef þörf krefur
+Ce média n’est pas accessible depuis cette fiche ¦ Þessi miðill er ekki aðgengilegur frá þessu spjaldi
+Ce rattachement existe déjà ¦ Þessi tenging er þegar til
+Données manquantes ¦ Gögn vantar
+Impossible de retirer le dernier rattachement — supprime le média si tu veux le retirer complètement ¦ Ekki hægt að fjarlægja síðustu tenginguna — eyddu miðlinum ef þú vilt fjarlægja hann alveg
+Méthode refusée ¦ Aðferð hafnað
+Personne, annotation de battue ou dépouillement manquant ¦ Einstakling, athugasemd leitar eða skráningu vantar
+Aucun fichier reçu ¦ Engin skrá móttekin
+Une carte postale recto/verso doit contenir exactement deux images : recto puis verso. ¦ Póstkort með fram- og bakhlið verður að innihalda nákvæmlega tvær myndir: framhlið og síðan bakhlið.
+Dossier d’enquête introuvable. ¦ Mappa athugunar fannst ekki.
+Annotation de battue introuvable. ¦ Athugasemd leitar fannst ekki.
+Choisis le type de l’événement à créer. ¦ Veldu tegund atburðarins sem á að búa til.
+Ce recensement n’est pas rattaché à cette personne. ¦ Þetta manntal er ekki tengt þessum einstaklingi.
+Aucun fichier reçu : choisis-le à nouveau. ¦ Engin skrá móttekin: veldu hana aftur.
+Une carte postale recto/verso doit contenir uniquement deux images. ¦ Póstkort með fram- og bakhlið má aðeins innihalda tvær myndir.
+Ce fichier semble déjà avoir été importé (« {file} » le {date}, {n} ligne(s)). Confirme si tu veux l'importer quand même. ¦ Svo virðist sem þessi skrá hafi þegar verið flutt inn („{file}“ {date}, línur: {n}). Staðfestu ef þú vilt samt flytja hana inn.
+Fiche verrouillée ({name}). Déverrouille-la avant de modifier ce couple. ¦ Spjaldið er læst ({name}). Opnaðu það áður en þú breytir þessum hjónum.
+Fusion impossible : {a} et {b} forment un couple. Deux conjoints ne sont pas la même personne. ¦ Ekki hægt að sameina: {a} og {b} eru hjón. Tveir makar eru ekki sami einstaklingurinn.
+Fusion impossible : {a} est un ancêtre de {b}. Un ancêtre et son descendant ne sont pas la même personne. ¦ Ekki hægt að sameina: {a} er forfaðir {b}. Forfaðir og afkomandi hans eru ekki sami einstaklingurinn.
+Cette parcelle est déjà dans ta liste (fiche n° {n}) : ouvre-la plutôt que d’en créer une deuxième. ¦ Þessi landspilda er þegar á listanum þínum (spjald nr. {n}): opnaðu hana frekar en að búa til aðra.
+Tu as déjà {n} cartes de photos : supprimes-en une pour en créer une autre. ¦ Myndakortin þín eru þegar {n}: eyddu einu til að búa til annað.
+Les {n} puzzles en cours sont gardés : termine ou supprime-en un pour en commencer un autre. ¦ Púsluspilin {n} sem eru í gangi eru geymd: kláraðu eða eyddu einu til að byrja á öðru.
+Les {n} graphiques et widgets sont gardés : supprime-en un pour en créer un autre. ¦ Gröfin og græjurnar {n} eru geymd: eyddu einu til að búa til annað.
+Le champ « {label} » est obligatoire. ¦ Reiturinn „{label}“ er nauðsynlegur.
+Le champ « {label} » est à remplir. ¦ Það þarf að fylla út reitinn „{label}“.
+« {name} » est une femelle : elle ne peut pas être le père. ¦ „{name}“ er kvendýr: hún getur ekki verið faðirinn.
+« {name} » est un mâle : il ne peut pas être la mère. ¦ „{name}“ er karldýr: hann getur ekki verið móðirin.
+Dossier introuvable : {dir} (clé ou disque débranché ?). La sauvegarde se fera dès qu’il sera de retour. ¦ Mappa fannst ekki: {dir} (lykill eða diskur aftengdur?). Afritið verður tekið um leið og hún er komin aftur.
+Dossier introuvable : {dir} (clé débranchée ?). ¦ Mappa fannst ekki: {dir} (lykill aftengdur?).
+Dossier partagé introuvable : {dir} (clé débranchée ?). Rien n’est perdu : tes changements partiront la prochaine fois. ¦ Sameiginleg mappa fannst ekki: {dir} (lykill aftengdur?). Ekkert tapast: breytingarnar þínar fara næst.
+Cette généalogie est déjà ouverte sur l’ordinateur « {name} ». Ferme-la là-bas d’abord : deux ordinateurs qui écrivent dans le même fichier peuvent l’abîmer. ¦ Þessi ættfræði er þegar opin í tölvunni „{name}“. Lokaðu henni þar fyrst: tvær tölvur sem skrifa í sömu skrána geta skemmt hana.
+Ce type de fichier ne se range pas dans les médias (.{ext}). ¦ Ekki er hægt að geyma þessa skráartegund í miðlunum (.{ext}).
+Ce type de fichier ne se range pas dans les médias (sans extension). ¦ Ekki er hægt að geyma þessa skráartegund í miðlunum (án endingar).
+Le contenu du fichier ne correspond pas à son extension (.{ext}). ¦ Innihald skrárinnar passar ekki við endingu hennar (.{ext}).
+Pas assez de place sur le disque pour ouvrir cette sauvegarde (il faut environ {n} Mo libres). ¦ Ekki nóg pláss á diskinum til að opna þetta afrit (um {n} MB þurfa að vera laus).
+Pas assez d’espace disque pour préparer la sauvegarde complète (il faut environ {n} Mo libres). ¦ Ekki nóg pláss á diskinum til að undirbúa heildarafritið (um {n} MB þurfa að vera laus).
+Ce dossier a déjà {n} lignes : ouvre-en un autre. ¦ Þessi mappa hefur þegar {n} línur: opnaðu aðra.
+Choisis la fiche de la personne pour le visage {n} (ou « Plus tard »). ¦ Veldu spjald einstaklingsins fyrir andlit {n} (eða „Seinna“).
+Choisis la personne concernée pour le témoignage « {q} ». ¦ Veldu einstaklinginn sem frásögnin „{q}“ varðar.
+La page {n} existe déjà. ¦ Síða {n} er þegar til.
+Cette date est avant sa naissance ({date}) ¦ Þessi dagsetning er á undan fæðingu hans ({date})
+Cette date est après son décès ({date}) ¦ Þessi dagsetning er á eftir andláti hans ({date})
+La date de naissance exacte de {name} n’est pas connue. ¦ Nákvæmur fæðingardagur {name} er ekki þekktur.
+Commune inconnue. ¦ Óþekkt sveitarfélag.
+Adresse inconnue. ¦ Óþekkt heimilisfang.
+Position impossible. ¦ Ómöguleg staðsetning.
+Service d’archives introuvable. ¦ Skjalasafn fannst ekki.
+Adresse e-mail invalide. ¦ Ógilt netfang.
+Cette fiche n’existe plus. ¦ Þetta spjald er ekki lengur til.
+Fiche introuvable. ¦ Spjald fannst ekki.
+Fiche introuvable ¦ Spjald fannst ekki
+Profil inconnu. ¦ Óþekktur prófíll.
+Sorte inconnue. ¦ Óþekkt tegund.
+Sorte introuvable. ¦ Tegund fannst ekki.
+Demande Discogs inconnue. ¦ Óþekkt Discogs-beiðni.
+Demande MusicBrainz inconnue. ¦ Óþekkt MusicBrainz-beiðni.
+Demande Open Library inconnue. ¦ Óþekkt Open Library-beiðni.
+Demande Wikidata inconnue. ¦ Óþekkt Wikidata-beiðni.
+Demande TMDb inconnue. ¦ Óþekkt TMDb-beiðni.
+Demande iTunes inconnue. ¦ Óþekkt iTunes-beiðni.
+Source d’import inconnue. ¦ Óþekktur innflutningsuppruni.
+Impossible d’enregistrer l’image. ¦ Ekki tókst að vista myndina.
+Image illisible. ¦ Ekki hægt að lesa myndina.
+Image trop lourde (15 Mo au plus). ¦ Myndin er of stór (15 MB að hámarki).
+Projet introuvable. ¦ Verkefni fannst ekki.
+Dossier introuvable. ¦ Mappa fannst ekki.
+Dossier introuvable ¦ Mappa fannst ekki
+Fichier trop gros. ¦ Skráin er of stór.
+Fichier Zotero RDF illisible. ¦ Ekki hægt að lesa Zotero RDF-skrána.
+Fichier JSON illisible. ¦ Ekki hægt að lesa JSON-skrána.
+Fichier EndNote XML illisible. ¦ Ekki hægt að lesa EndNote XML-skrána.
+Son introuvable. ¦ Hljóð fannst ekki.
+Zones illisibles. ¦ Ekki hægt að lesa svæðin.
+Transcription illisible. ¦ Ekki hægt að lesa uppskriftina.
+Transcription trop longue (5 000 lignes au plus). ¦ Uppskriftin er of löng (5 000 línur að hámarki).
+Cette base ne contient aucune personne. ¦ Þessi gagnagrunnur inniheldur enga einstaklinga.
+Impossible d’ouvrir l’archive. ¦ Ekki tókst að opna safnskrána.
+Aucune base (.db) dans cette archive. ¦ Enginn gagnagrunnur (.db) í þessari safnskrá.
+Fichier introuvable ou illisible. ¦ Skrá fannst ekki eða er ólæsileg.
+Fiche trop volumineuse. ¦ Spjaldið er of stórt.
+Tableau introuvable. ¦ Tafla fannst ekki.
+Tableau trop lourd : retire quelques dessins. ¦ Taflan er of stór: fjarlægðu nokkrar teikningar.
+Tableau parent introuvable. ¦ Yfirtafla fannst ekki.
+Parcelle introuvable. ¦ Landspilda fannst ekki.
+Lieu introuvable. ¦ Staður fannst ekki.
+Couche illisible. ¦ Ekki hægt að lesa lagið.
+Couche trop lourde (8 Mo au plus). ¦ Lagið er of stórt (8 MB að hámarki).
+Couche introuvable. ¦ Lag fannst ekki.
+Carte illisible. ¦ Ekki hægt að lesa kortið.
+Fichier d’essai introuvable. ¦ Prufuskrá fannst ekki.
+Copie impossible. ¦ Ekki hægt að afrita.
+Fichier illisible. ¦ Ekki hægt að lesa skrána.
+Citation introuvable. ¦ Tilvitnun fannst ekki.
+Citation introuvable ¦ Tilvitnun fannst ekki
+Objet introuvable ¦ Hlutur fannst ekki
+Objet introuvable. ¦ Hlutur fannst ekki.
+Souvenir introuvable ¦ Minjagripur fannst ekki
+Type inconnu ¦ Óþekkt tegund
+Adresse invalide ¦ Ógilt heimilisfang
+Salon introuvable ¦ Sýning fannst ekki
+Alerte inconnue. ¦ Óþekkt viðvörun.
+Texte illisible. ¦ Ekki hægt að lesa textann.
+Date d’envoi incorrecte. ¦ Röng sendingardagsetning.
+Courrier introuvable. ¦ Bréf fannst ekki.
+Cousinade introuvable. ¦ Ættarmót fannst ekki.
+Champ inconnu. ¦ Óþekktur reitur.
+Champ inconnu ¦ Óþekktur reitur
+Valeur hors limites. ¦ Gildið er utan marka.
+Liste inconnue. ¦ Óþekktur listi.
+Widget inconnu. ¦ Óþekkt græja.
+Ensemble inconnu. ¦ Óþekkt mengi.
+Choisis au moins 2 ensembles. ¦ Veldu að minnsta kosti 2 mengi.
+Choisis au moins deux personnes. ¦ Veldu að minnsta kosti tvo einstaklinga.
+Choisis deux personnes. ¦ Veldu tvo einstaklinga.
+Diagramme introuvable. ¦ Skýringarmynd fannst ekki.
+Foyer inconnu. ¦ Óþekkt heimili.
+Test introuvable. ¦ Próf fannst ekki.
+Correspondance introuvable. ¦ Samsvörun fannst ekki.
+Groupe introuvable. ¦ Hópur fannst ekki.
+Format d’export inconnu. ¦ Óþekkt útflutningssnið.
+Export impossible : l’extension PHP ZipArchive manque sur cet ordinateur. ¦ Ekki hægt að flytja út: PHP-viðbótina ZipArchive vantar í þessa tölvu.
+Fichier temporaire impossible. ¦ Ekki hægt að búa til bráðabirgðaskrá.
+Employeur sans nom. ¦ Vinnuveitandi án nafns.
+Photo introuvable. ¦ Mynd fannst ekki.
+Visage introuvable. ¦ Andlit fannst ekki.
+ePub impossible : l’extension PHP ZipArchive manque. ¦ Ekki hægt að búa til ePub: PHP-viðbótina ZipArchive vantar.
+Document impossible : l’extension PHP ZipArchive manque. ¦ Ekki hægt að búa til skjal: PHP-viðbótina ZipArchive vantar.
+Livret introuvable. ¦ Hefti fannst ekki.
+Graphique inconnu (identifiant invalide). ¦ Óþekkt graf (ógilt auðkenni).
+Graphique illisible. ¦ Ekki hægt að lesa grafið.
+Graphique illisible (champ inconnu). ¦ Ekki hægt að lesa grafið (óþekktur reitur).
+Graphique illisible (parties). ¦ Ekki hægt að lesa grafið (hlutar).
+Graphique introuvable. ¦ Graf fannst ekki.
+Lien impossible ¦ Ekki hægt að tengja
+Voyage introuvable ¦ Ferð fannst ekki
+Placement introuvable ¦ Vistun fannst ekki
+Armoiries introuvables ¦ Skjaldarmerki fannst ekki
+Circuit introuvable ¦ Hringferð fannst ekki
+Ligne introuvable ¦ Lína fannst ekki
+Ligne introuvable. ¦ Lína fannst ekki.
+Circuit manquant ¦ Hringferð vantar
+Aucun fichier CSV dans ce ZIP. ¦ Engin CSV-skrá í þessari ZIP-skrá.
+Aucune ligne utilisable dans ce fichier. ¦ Engin nothæf lína í þessari skrá.
+Acte ou document manquant ¦ Skjal vantar
+Chiffrement impossible. ¦ Ekki hægt að dulkóða.
+Copie introuvable ¦ Afrit fannst ekki
+Copie introuvable. ¦ Afrit fannst ekki.
+Harmonisation introuvable. ¦ Samræming fannst ekki.
+Bloc introuvable ¦ Bálkur fannst ekki
+Nom manquant. ¦ Nafn vantar.
+Enregistrement impossible. ¦ Ekki tókst að vista.
+Source inconnue. ¦ Óþekkt heimild.
+Pack inconnu. ¦ Óþekktur pakki.
+Pack trop gros (150 Mo au plus). ¦ Pakkinn er of stór (150 MB að hámarki).
+GLB illisible. ¦ Ekki hægt að lesa GLB-skrána.
+OBJ illisible. ¦ Ekki hægt að lesa OBJ-skrána.
+Maison introuvable. ¦ Hús fannst ekki.
+Recensement introuvable. ¦ Manntal fannst ekki.
+Recensement introuvable ¦ Manntal fannst ekki
+Fichier 3D trop gros (30 Mo au plus). ¦ 3D-skráin er of stór (30 MB að hámarki).
+Programme d’installation introuvable (scripts/htr_install.php). ¦ Uppsetningarforrit fannst ekki (scripts/htr_install.php).
+Demande d’installation inconnue. ¦ Óþekkt uppsetningarbeiðni.
+Lecture inconnue. ¦ Óþekktur lestur.
+Lecture inconnue (ou trop ancienne). ¦ Óþekktur lestur (eða of gamall).
+Preuve introuvable. ¦ Sönnunargagn fannst ekki.
+Preuve introuvable ¦ Sönnunargagn fannst ekki
+Empreinte d’image incorrecte. ¦ Rangt fingrafar myndar.
+Empreinte d’image incorrecte (couleurs). ¦ Rangt fingrafar myndar (litir).
+Empreinte d’image incorrecte (points). ¦ Rangt fingrafar myndar (punktar).
+Fusion impossible ici. ¦ Ekki hægt að sameina hér.
+Fusion inconnue. ¦ Óþekkt sameining.
+Fusion introuvable. ¦ Sameining fannst ekki.
+Fusion impossible ¦ Ekki hægt að sameina
+Annulation impossible ici. ¦ Ekki hægt að afturkalla hér.
+Fichier RootsMagic introuvable. ¦ RootsMagic-skrá fannst ekki.
+Aucune personne dans ce fichier GEDCOM-X. ¦ Engir einstaklingar í þessari GEDCOM-X-skrá.
+Annulation impossible : import inconnu. ¦ Ekki hægt að afturkalla: óþekktur innflutningur.
+Fichier trop gros (20 Mo au plus). ¦ Skráin er of stór (20 MB að hámarki).
+Aucun point dans ce GeoJSON. ¦ Engir punktar í þessari GeoJSON-skrá.
+Document introuvable. ¦ Skjal fannst ekki.
+Document illisible. ¦ Ekki hægt að lesa skjalið.
+Cette action s’envoie en POST. ¦ Þessi aðgerð er send sem POST.
+Lot inconnu. ¦ Óþekkt runa.
+Fichier vide. ¦ Tóm skrá.
+Fichier vide ¦ Tóm skrá
+Sortie inconnue. ¦ Óþekkt úttak.
+Analyse introuvable. ¦ Greining fannst ekki.
+Altitude impossible : entre −450 et 8 900 m. ¦ Ómöguleg hæð: milli −450 og 8 900 m.
+Envoi inconnu. ¦ Óþekkt sending.
+Projet illisible. ¦ Ekki hægt að lesa verkefnið.
+Rush illisible. ¦ Ekki hægt að lesa bútinn.
+Projet trop lourd (4 Mo au plus). ¦ Verkefnið er of stórt (4 MB að hámarki).
+Salle introuvable. ¦ Salur fannst ekki.
+Fichier trop lourd. ¦ Skráin er of stór.
+Salle ou œuvre introuvable. ¦ Salur eða verk fannst ekki.
+Import impossible : l’extension PHP zip manque. ¦ Ekki hægt að flytja inn: PHP-viðbótina zip vantar.
+Liste introuvable. ¦ Listi fannst ekki.
+Ligne invalide. ¦ Ógild lína.
+Cette liste n’existe plus. ¦ Þessi listi er ekki lengur til.
+Personne manquante. ¦ Einstakling vantar.
+Personne manquante ¦ Einstakling vantar
+Adresse Internet invalide ¦ Ógild vefslóð
+Adresse Internet invalide. ¦ Ógild vefslóð.
+Statut inconnu. ¦ Óþekkt staða.
+Revue introuvable. ¦ Tímarit fannst ekki.
+Article introuvable. ¦ Grein fannst ekki.
+Quoi supprimer ? ¦ Eyða hverju?
+Annonce introuvable. ¦ Auglýsing fannst ekki.
+Animal introuvable. ¦ Dýr fannst ekki.
+Demande introuvable. ¦ Beiðni fannst ekki.
+Visage incorrect. ¦ Rangt andlit.
+Choix incorrect. ¦ Rangt val.
+Comparaison introuvable. ¦ Samanburður fannst ekki.
+Image introuvable. ¦ Mynd fannst ekki.
+Latitude entre -90 et 90, longitude entre -180 et 180. ¦ Breiddargráða milli -90 og 90, lengdargráða milli -180 og 180.
+Cette demande d’entraide n’existe plus. ¦ Þessi hjálparbeiðni er ekki lengur til.
+Cette annonce n’existe plus. ¦ Þessi auglýsing er ekki lengur til.
+Carte postale introuvable. ¦ Póstkort fannst ekki.
+Choix inconnu. ¦ Óþekkt val.
+Niveau inconnu. ¦ Óþekkt stig.
+Seuls tes propres profils se modifient ici. ¦ Aðeins eigin prófílum er hægt að breyta hér.
+Seuls tes propres profils se suppriment. ¦ Aðeins eigin prófílum er hægt að eyða.
+Profil introuvable. ¦ Prófíll fannst ekki.
+Questionnaire introuvable. ¦ Spurningalisti fannst ekki.
+Question incorrecte. ¦ Röng spurning.
+Choix incorrects. ¦ Röng val.
+Question introuvable. ¦ Spurning fannst ekki.
+Recueil introuvable. ¦ Safnrit fannst ekki.
+Aucune photo. ¦ Engar myndir.
+Page introuvable. ¦ Síða fannst ekki.
+Rattachement inconnu. ¦ Óþekkt tenging.
+Bloc inconnu. ¦ Óþekktur bálkur.
+Village introuvable. ¦ Þorp fannst ekki.
+Pays non disponible. ¦ Land ekki tiltækt.
+Branche introuvable ¦ Grein fannst ekki
+Branche introuvable. ¦ Grein fannst ekki.
+Import indisponible. ¦ Innflutningur ekki tiltækur.
+Aucun DOI reconnu : il commence par « 10. » (ex. 10.1038/251123a0), ou colle l’adresse https://doi.org/… ¦ Ekkert DOI þekkt: það byrjar á „10.“ (t.d. 10.1038/251123a0), eða límdu inn slóðina https://doi.org/…
+Source inconnue (DOI, ORCID ou HAL). ¦ Óþekkt heimild (DOI, ORCID eða HAL).
+Ligne inconnue. ¦ Óþekkt lína.
+Report inconnu. ¦ Óþekkt frestun.
+Rappel introuvable. ¦ Áminning fannst ekki.
+Piste introuvable. ¦ Vísbending fannst ekki.
+Statistique inconnue. ¦ Óþekkt tölfræði.
+Ligne illisible. ¦ Ekki hægt að lesa línuna.
+Diaporama introuvable. ¦ Myndasýning fannst ekki.
+Diaporama trop lourd. ¦ Myndasýningin er of stór.
+Foyer SocFace introuvable. ¦ SocFace-heimili fannst ekki.
+Ligne SocFace introuvable. ¦ SocFace-lína fannst ekki.
+Sorte d’import inconnue. ¦ Óþekkt tegund innflutnings.
+Import inconnu. ¦ Óþekktur innflutningur.
+Ce lieu n’existe plus. ¦ Þessi staður er ekki lengur til.
+L’original garde son nom. ¦ Frumritið heldur nafni sínu.
+Bien inconnu. ¦ Óþekkt eign.
+Acte introuvable. ¦ Skjal fannst ekki.
+Site introuvable. ¦ Staður fannst ekki.
+Marque introuvable. ¦ Merking fannst ekki.
+Observation introuvable. ¦ Athugun fannst ekki.
+Comptage introuvable. ¦ Talning fannst ekki.
+Appartenance introuvable. ¦ Aðild fannst ekki.
+Import introuvable. ¦ Innflutningur fannst ekki.
+Import introuvable ¦ Innflutningur fannst ekki
+Fichier trop gros : trop d’observations. ¦ Skráin er of stór: of margar athuganir.
+Conflit illisible. ¦ Ekki hægt að lesa áreksturinn.
+Document illisible : il manque son texte. ¦ Ekki hægt að lesa skjalið: textann vantar.
+Partie illisible. ¦ Ekki hægt að lesa hlutann.
+Document trop lourd : partage ses onglets en plusieurs documents. ¦ Skjalið er of stórt: skiptu flipunum þess í fleiri skjöl.
+Version trop lourde. ¦ Útgáfan er of stór.
+Transcription introuvable. ¦ Uppskrift fannst ekki.
+Dessin introuvable. ¦ Teikning fannst ekki.
+Commune introuvable. ¦ Sveitarfélag fannst ekki.
+Site illisible : il manque ses pages. ¦ Ekki hægt að lesa vefinn: síðurnar vantar.
+Page illisible. ¦ Ekki hægt að lesa síðuna.
+Service inconnu. ¦ Óþekkt þjónusta.
+Adresse non permise. ¦ Slóðin er ekki leyfð.
+Publication impossible : l’extension PHP curl manque. ¦ Ekki hægt að birta: PHP-viðbótina curl vantar.
+Donne l’identifiant FTP. ¦ Gefðu upp FTP-notandanafnið.
+Colle d’abord ton jeton Netlify. ¦ Límdu fyrst inn Netlify-lykilinn þinn.
+Colle d’abord ton jeton GitHub. ¦ Límdu fyrst inn GitHub-lykilinn þinn.
+Identifiant Wikidata incorrect. ¦ Rangt Wikidata-auðkenni.
+Classeur illisible : il manque ses feuilles. ¦ Ekki hægt að lesa vinnubókina: blöðin vantar.
+Feuille illisible. ¦ Ekki hægt að lesa blaðið.
+Classeur introuvable. ¦ Vinnubók fannst ekki.
+Import manquant ¦ Innflutning vantar
+Archive ZIP illisible ¦ Ekki hægt að lesa ZIP-safnskrána
+Modification introuvable. ¦ Breyting fannst ekki.
+Sauvegarde introuvable. ¦ Afrit fannst ekki.
+Lecture impossible ¦ Ekki tókst að lesa
+JSON invalide ou non-objet ¦ Ógilt JSON eða ekki hlutur
+Impossible d'ouvrir l'archive (format inattendu) ¦ Ekki tókst að opna safnskrána (óvænt snið)
+Impossible d'ouvrir l'archive GedZip (format inattendu) ¦ Ekki tókst að opna GedZip-safnskrána (óvænt snið)
+Fichier GEDCOM (.ged) introuvable dans l'archive. ¦ GEDCOM-skrá (.ged) fannst ekki í safnskránni.
+Type introuvable ¦ Tegund fannst ekki
+Identifiant manquant ¦ Auðkenni vantar
+Battue introuvable ¦ Leit fannst ekki
+Battue introuvable. ¦ Leit fannst ekki.
+Lacune introuvable. ¦ Gat fannst ekki.
+Lien direct vers l’archive invalide. ¦ Ógildur beinn tengill á skjalasafnið.
+Mention familiale invalide ¦ Ógild fjölskylduáritun
+Titre obligatoire ¦ Titill er nauðsynlegur
+Recensement manquant ¦ Manntal vantar
+Membre manquant ¦ Meðlim vantar
+Membre introuvable ¦ Meðlimur fannst ekki
+Dossier militaire invalide ¦ Ógild herþjónustuskrá
+Recensement ou personne manquante ¦ Manntal eða einstakling vantar
+Journal introuvable ¦ Dagbók fannst ekki
+Confirmation requise ¦ Staðfestingar er krafist
+Piste manquante. ¦ Vísbendingu vantar.
+Rappel manquant. ¦ Áminningu vantar.
+Courrier manquant. ¦ Bréf vantar.
+Contact introuvable. ¦ Tengiliður fannst ekki.
+Contact manquant. ¦ Tengilið vantar.
+Battue manquante. ¦ Leit vantar.
+Battue, commune et nom obligatoires. ¦ Leit, sveitarfélag og nafn eru nauðsynleg.
+Battue et commune obligatoires. ¦ Leit og sveitarfélag eru nauðsynleg.
+Annotation manquante. ¦ Athugasemd vantar.
+Annotation introuvable. ¦ Athugasemd fannst ekki.
+Dossier parent invalide ¦ Ógild yfirmappa
+Dossier manquant ¦ Möppu vantar
+Sexe invalide : choisis Homme, Femme, Non binaire ou Inconnu. ¦ Ógilt kyn: veldu Karl, Kona, Kynsegin eða Óþekkt.
+Variante manquante ¦ Afbrigði vantar
+Variante introuvable ¦ Afbrigði fannst ekki
+Famille introuvable ¦ Fjölskylda fannst ekki
+Fiche en ligne introuvable ¦ Spjald á netinu fannst ekki
+Fiche en ligne manquante ¦ Spjald á netinu vantar
+Personne ou contenu manquant ¦ Einstakling eða efni vantar
+Note ou contenu manquant ¦ Athugasemd eða efni vantar
+Note introuvable ¦ Athugasemd fannst ekki
+Note manquante ¦ Athugasemd vantar
+Personne et titre obligatoires ¦ Einstaklingur og titill eru nauðsynleg
+Source et titre obligatoires ¦ Heimild og titill eru nauðsynleg
+Source introuvable ¦ Heimild fannst ekki
+Source manquante ¦ Heimild vantar
+Rotation impossible. ¦ Ekki hægt að snúa.
+Script HTR local introuvable. ¦ Staðbundin HTR-skrifta fannst ekki.
+Fiche individuelle invalide. ¦ Ógilt einstaklingsspjald.
+Alerte manquante ¦ Viðvörun vantar
+Patronyme et groupe obligatoires ¦ Eftirnafn og hópur eru nauðsynleg
+Personne racine introuvable. ¦ Rótareinstaklingur fannst ekki.
+Vue introuvable ¦ Yfirlit fannst ekki
+Cible manquante ¦ Mark vantar
+Identification manquante ¦ Nafngreiningu vantar
+Identification introuvable ¦ Nafngreining fannst ekki
+Objet ou souvenir manquant ¦ Hlut eða minjagrip vantar
+À faire le {date} ¦ Á að gera {date}
+Avant le {date} ¦ Fyrir {date}
+Après le {date} ¦ Eftir {date}
+Rappel libre ¦ Frjáls áminning
+Enquête « {title} » ¦ Athugun „{title}“
+Pas encore envoyé ¦ Ekki sent enn
+Envoyé aujourd’hui ¦ Sent í dag
+Réponse attendue depuis {n} jours ¦ Svars beðið í {n} daga
+Réponse attendue depuis {n} jour ¦ Svars beðið í {n} dag
+relance prévue le {date} : à relancer ¦ ítrekun áætluð {date}: ítrekaðu
+relance le {date} ¦ ítrekun {date}
+Visite ¦ Heimsókn
+Prévue le {date} : note-la comme faite ¦ Áætluð {date}: merktu hana sem lokið
+Le {date} ¦ {date}
+{n} cotes à consulter ¦ Safnmörk til að skoða: {n}
+{n} cote à consulter ¦ {n} safnmark til að skoða
+Piste ¦ Vísbending
+À explorer ¦ Til að kanna
+Hypothèse : {title} ¦ Tilgáta: {title}
+Hypothèse : sans titre ¦ Tilgáta: án titils
+confiance faible ¦ lítið traust
+confiance moyenne ¦ miðlungs traust
+confiance forte ¦ mikið traust
+Vu ¦ Séð
+Recensement de {y} à {place} : chercher sur SocFace ¦ Manntal {y} í {place}: leita á SocFace
+Recensement de {y} : chercher sur SocFace ¦ Manntal {y}: leita á SocFace
+Cherché sur SocFace ¦ Leitað á SocFace
+{act} : {name}, chercher à {place} ¦ {act}: {name}, leita í {place}
+{act} : {name} ¦ {act}: {name}
+acte|Parents ¦ Foreldrar
+acte|Contrat de mariage ¦ Kaupmáli
+acte|Succession ¦ Dánarbú
+acte|Registre matricule ¦ Herskrá
+Foyer de {name} ¦ Heimili {name}
+{n} personnes ¦ Einstaklingar: {n}
+{n} personne ¦ {n} einstaklingur
+Demande d’entraide ¦ Hjálparbeiðni
+Une réponse t’attend ¦ Svar bíður þín
+Brouillon à publier ¦ Drög til að birta
+Publiée il y a {n} jours ¦ Birt fyrir {n} dögum
+Publiée il y a {n} jour ¦ Birt fyrir {n} degi
+Rappel fait ¦ Áminning afgreidd
+Demande résolue ¦ Beiðni leyst
+Piste explorée ¦ Vísbending könnuð
+Hypothèse revue ¦ Tilgáta yfirfarin
+Recherche faite ¦ Leit lokið
+Alerte revue ¦ Viðvörun yfirfarin
+Piste du mur faite ¦ Vísbending um blindgötu afgreidd
+Lien vérifié ¦ Tenging staðfest
+🛡 Lien à consolider ¦ 🛡 Tenging sem þarf að styrkja
+Lien à consolider : {child}, le fils de {parent} ¦ Tenging sem þarf að styrkja: {child}, sonur {parent}
+Lien à consolider : {child}, la fille de {parent} ¦ Tenging sem þarf að styrkja: {child}, dóttir {parent}
+Lien à consolider : {child}, l’enfant de {parent} ¦ Tenging sem þarf að styrkja: {child}, barn {parent}
+cherche l’acte de naissance ou de baptême qui le nomme ¦ leitaðu að fæðingar- eða skírnarskjalinu sem nefnir viðkomandi

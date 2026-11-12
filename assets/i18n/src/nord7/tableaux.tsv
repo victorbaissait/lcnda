@@ -1,0 +1,3818 @@
+fr ¦ is
+piste|Confirmée ¦ Staðfest
+piste|Fausse ¦ Röng
+Fiche #{id} ¦ Spjald #{id}
+Tableau verrouillé : 🔒 en haut pour le déverrouiller. ¦ Taflan er læst: 🔒 efst til að opna hana.
+H ou Espace ¦ H eða bilslá
+Formes ¦ Form
+Dessin à main levée ¦ Fríhendisteikning
+Gomme ¦ Strokleður
+{owner} : {name} ¦ {owner}: {name}
+Tableau libre ¦ Frjáls tafla
+changer ¦ breyta
+Police du thème ¦ Letur þemans
+PDF · double-clic pour l’ouvrir ¦ PDF · tvísmelltu til að opna
+Dossier ¦ Mappa
+double-clic pour ouvrir ¦ tvísmelltu til að opna
+Recueil ¦ Safnrit
+Recueil · double-clic pour l’ouvrir ¦ Safnrit · tvísmelltu til að opna
+Frise ¦ Tímalína
+Chargement de la frise… ¦ Hleð tímalínu…
+Cadre ¦ Rammi
+Chargement du widget… ¦ Hleð græju…
+Écran de l’app · double-clic pour l’ouvrir ¦ Skjár appsins · tvísmelltu til að opna
+mort à {age} ¦ dó {age}
+Choisis la personne à droite. ¦ Veldu einstaklinginn til hægri.
+Choisir ce groupe ¦ Velja þennan hóp
+Groupe {n} ¦ Hópur {n}
+le tableau est fermé ¦ taflan er lokuð
+d’autres changements ont suivi : utilise ↶ dans la barre du tableau ¦ aðrar breytingar fylgdu á eftir: notaðu ↶ í stiku töflunnar
+Ce tableau ¦ Þessi tafla
+Choisir le pinceau ¦ Velja pensilinn
+Dureté du bord : 100 % net, moins = flou ¦ Harka brúnar: 100 % skörp, minna = mjúk
+Les gommes n’effacent que les dessins à main levée. ¦ Strokleður þurrka aðeins út fríhendisteikningar.
+Clique où écrire. ¦ Smelltu þar sem á að skrifa.
+Tire un trait ; posé sur un élément, il s’y accroche. ¦ Dragðu línu; ef hún lendir á einingu festist hún við hana.
+Un lien tout prêt : légende, couleur et style ¦ Tilbúinn tengill: skýring, litur og stíll
+lien|libre ¦ frjáls
+Pointes ¦ Örvaroddar
+Pointes de la même couleur que le trait ¦ Örvaroddar í sama lit og línan
+Tire une flèche d’un élément à un autre : elle les suit. ¦ Dragðu ör frá einni einingu til annarrar: hún fylgir þeim.
+Toutes les formes, et créer la sienne ¦ Öll form, og búa til sitt eigið
+Toutes les formes ¦ Öll form
+Nom;Année;Lieu ¦ Nafn;Ár;Staður
+Tableau repris du tableur. ¦ Tafla sótt aftur úr töflureikninum.
+{n}. Choisis un élément pour le régler. ¦ {n}. Veldu einingu til að stilla hana.
+Réglages de la légende ¦ Stillingar skýringar
+Cellule <strong>{a}</strong> à <strong>{b}</strong> ¦ Reitur <strong>{a}</strong> til <strong>{b}</strong>
+Cellule <strong>{a}</strong> ¦ Reitur <strong>{a}</strong>
+Clique une cellule pour la choisir ¦ Smelltu á reit til að velja hann
+⇧ + clic : plusieurs · double-clic : écrire ¦ ⇧ + smellur: fleiri · tvísmellur: skrifa
+Simple note ¦ Einfaldur miði
+Lieux de… ¦ Staðir…
+Enlever ce repère ¦ Fjarlægja þetta merki
+Enlever : {n} ¦ Fjarlægja: {n}
+Aucune forme. ¦ Ekkert form.
+🧩 À partir d’une forme ¦ 🧩 Út frá formi
+Comment tracer avec la plume ¦ Hvernig á að teikna með pennanum
+<strong>Clic</strong> : un point d’angle (trait droit). ¦ <strong>Smellur</strong>: hornpunktur (bein lína).
+<strong>Cliquer-glisser</strong> : un point arrondi ; tire pour régler la courbe. ¦ <strong>Smella og draga</strong>: ávalur punktur; togaðu til að stilla bogann.
+<strong>Clic sur le premier point</strong> (jaune) : la forme se ferme. ¦ <strong>Smellur á fyrsta punktinn</strong> (gulan): formið lokast.
+Glisser un point pour le <strong>déplacer</strong> ; glisser une poignée (rond rouge) pour <strong>courber</strong> ; avec <kbd>⌥</kbd> / <kbd>Alt</kbd>, les deux poignées deviennent indépendantes. ¦ Dragðu punkt til að <strong>færa</strong> hann; dragðu handfang (rauðan hring) til að <strong>sveigja</strong>; með <kbd>⌥</kbd> / <kbd>Alt</kbd> verða handföngin tvö óháð hvort öðru.
+<kbd>⌥</kbd> / <kbd>Alt</kbd> + clic sur un point : angle ↔ arrondi ; <strong>double-clic</strong> : le supprimer. ¦ <kbd>⌥</kbd> / <kbd>Alt</kbd> + smellur á punkt: horn ↔ ávalt; <strong>tvísmellur</strong>: eyða honum.
+Une forme fermée, puis un nouveau tracé à l’intérieur : un <strong>trou</strong>. ¦ Lokað form, síðan nýr ferill inni í því: <strong>gat</strong>.
+{n} sur le tableau : chaque trait devient une partie remplie de la forme. ¦ {n} á töflunni: hver lína verður fylltur hluti formsins.
+Choisis d’abord un ou plusieurs dessins à main levée sur le tableau (outil ✍︎), puis reviens ici. ¦ Veldu fyrst eina eða fleiri fríhendisteikningar á töflunni (verkfærið ✍︎), komdu svo aftur hingað.
+Nom de la forme ¦ Nafn formsins
+Ce dessin est trop détaillé pour devenir une forme : prends un dessin plus simple (ou moins de traits). ¦ Þessi teikning er of nákvæm til að verða form: notaðu einfaldari teikningu (eða færri línur).
+Forme « {name} » créée : elle est dans « Mes formes ». ¦ Formið „{name}“ búið til: það er í „Formin mín“.
+Ce navigateur ne lit pas les polices de l’ordinateur : tape le nom de la police (ou fais des listes dans Réglages → Tableaux). ¦ Þessi vafri getur ekki lesið leturgerðir tölvunnar: sláðu inn nafn leturgerðarinnar (eða búðu til lista í Stillingar → Töflur).
+{n} de l’ordinateur lues : leurs graisses exactes sont proposées (et « Aa Toutes les polices… » les montre toutes). ¦ {n} lesnar úr tölvunni: nákvæmar þykktir þeirra eru í boði (og „Aa Allar leturgerðir…“ sýnir þær allar).
+Lecture des polices refusée : {error} ¦ Lestri leturgerða hafnað: {error}
+Ce fichier n’est pas un tableau exporté. ¦ Þessi skrá er ekki útflutt tafla.
+Ce fichier n’est pas un tableau exporté de l’app. ¦ Þessi skrá er ekki tafla sem var flutt út úr appinu.
+Import : vérification des fiches et médias… ¦ Innflutningur: athuga spjöld og miðla…
+Média absent ici : {name} ¦ Miðil vantar hér: {name}
+{name} (fiche absente ici) ¦ {name} (spjald vantar hér)
+{name} (absent ici) ¦ {name} (vantar hér)
+{name} (dossier non importé) ¦ {name} (mappa ekki flutt inn)
+Tableau importé ¦ Innflutt tafla
+Associations reprises. ¦ Tengingar haldast.
+{n} sur {total} reprises (les autres visent une autre base). ¦ {n} af {total} haldast (hinar vísa á annan gagnagrunn).
+Les associations visent une autre base : non reprises. ¦ Tengingarnar vísa á annan gagnagrunn: þær haldast ekki.
+Import des photos : {n} / {total}… ¦ Flyt inn myndir: {n} / {total}…
+Média non importé : {name} ¦ Miðill ekki fluttur inn: {name}
+Tableau importé. {n} (fiche, média, recueil ou dossier) devenus des notes. ¦ Tafla flutt inn. {n} (spjald, miðill, safnrit eða mappa) urðu að miðum.
+Une adresse qui commence par https:// ¦ Vefslóð sem byrjar á https://
+Choisis un écran (pour une fiche ou une commune, passe par « Une fiche » ou l’Éditeur de widgets). ¦ Veldu skjá (fyrir spjald eða sveitarfélag skaltu nota „Spjald“ eða Græjuritilinn).
+Ne plus associer ¦ Aftengja
+Le tableau garde son rangement ({where}) ; il apparaît en plus là où tu l’associes (sur la fiche de la personne, dans l’enquête…). ¦ Taflan heldur sínum stað ({where}); hún birtist líka þar sem þú tengir hana (á spjaldi einstaklingsins, í athuguninni…).
+rangement|libre ¦ frjáls
+(aucun pour l’instant) ¦ (ekkert enn)
+Choisis à quoi associer le tableau. ¦ Veldu hverju á að tengja töfluna við.
+Déjà associé. ¦ Þegar tengd.
+Tableau associé. ¦ Tafla tengd.
+le tableau à l’écran ¦ taflan á skjánum
+Pas d’image pour cet instantané. ¦ Engin mynd fyrir þessa skyndimynd.
+📸 Prendre un instantané ¦ 📸 Taka skyndimynd
+Un nom (facultatif) : ¦ Nafn (valfrjálst):
+avant la visite aux archives ¦ fyrir heimsóknina á skjalasafnið
+Instantané pris. ¦ Skyndimynd tekin.
+↺ Revenir à cet état ¦ ↺ Fara aftur í þessa stöðu
+⧉ En faire un tableau ¦ ⧉ Gera úr henni töflu
+Aucun instantané pour l’instant ¦ Engin skyndimynd enn
+Versions automatiques ({n}) ¦ Sjálfvirkar útgáfur ({n})
+une par jour de travail au plus, les 30 dernières gardées ¦ í mesta lagi ein á hvern vinnudag, síðustu 30 geymdar
+Nom du nouveau tableau ¦ Nafn nýju töflunnar
+même rangement ({where}) et mêmes associations ¦ sami staður ({where}) og sömu tengingar
+Le contenu de l’instantané est recopié dans un tableau à part ; l’original ne change pas. Les dossiers posés dedans restent ceux de l’original. ¦ Efni skyndimyndarinnar er afritað í sérstaka töflu; upprunalega taflan breytist ekki. Möppur sem settar eru í hana eru áfram þær upprunalegu.
+Tout le contenu actuel est recopié dans un tableau à part ; l’original ne change pas. Les dossiers posés dedans restent ceux de l’original. ¦ Allt núverandi efni er afritað í sérstaka töflu; upprunalega taflan breytist ekki. Möppur sem settar eru í hana eru áfram þær upprunalegu.
+Nouveau tableau créé. ¦ Ný tafla búin til.
+État du tableau changé. ¦ Staða töflunnar breytt.
+(avec photos) ¦ (með myndum)
+(sélection) ¦ (val)
+Fichier du tableau enregistré ({size}) : « ＋ Ajouter → Importer un tableau » le rouvre. ¦ Skrá töflunnar vistuð ({size}): „＋ Bæta við → Flytja inn töflu“ opnar hana aftur.
+{n} Mo ¦ {n} MB
+{n} ko ¦ {n} kB
+Préparation… ¦ Undirbý…
+image impossible (une image d’un autre site l’empêche, ou le tableau est trop grand) ¦ mynd ekki möguleg (mynd af öðrum vef kemur í veg fyrir það, eða taflan er of stór)
+Une copie de l’image est rangée dans les médias. ¦ Afrit af myndinni er geymt í miðlunum.
+Copie dans les médias impossible : {error} ¦ Ekki tókst að afrita í miðlana: {error}
+💾 Fichier léger ¦ 💾 Létt skrá
+sans les photos : petit, pour garder une copie ¦ án myndanna: lítil, til að eiga afrit
+💾 Fichier complet ¦ 💾 Heildarskrá
+avec {n} : pour une autre base ¦ með {n}: fyrir annan gagnagrunn
+pareil : pas de photo de l’app ¦ eins: engin mynd úr appinu
+⤓ Exporter le tableau… (PDF, image, impression, fichier) ¦ ⤓ Flytja út töfluna… (PDF, mynd, prentun, skrá)
+⤓ Exporter la sélection en image… ¦ ⤓ Flytja út valið sem mynd…
+⭐ En faire un modèle (pour les nouveaux tableaux) ¦ ⭐ Gera úr henni sniðmát (fyrir nýjar töflur)
+Ajuster à la sélection ¦ Laga að valinu
+Adapter le contenu à la fenêtre ¦ Laga efnið að glugganum
+Pour répartir, choisis au moins trois éléments. ¦ Til að dreifa skaltu velja að minnsta kosti þrjár einingar.
+{todo} à vérifier · {ok} · {no} — clic : aller à la suivante à vérifier ¦ {todo} til að athuga · {ok} · {no} — smellur: fara í næstu sem á að athuga
+Plus rien à vérifier : bravo ! ¦ Ekkert eftir til að athuga: vel gert!
+Question ¦ Spurning
+Idée ¦ Hugmynd
+Source ? ¦ Heimild?
+Important ¦ Mikilvægt
+Réglé ¦ Leyst
+Pas encore de commentaire sur cet élément. ¦ Engin athugasemd við þessa einingu enn.
+(sans mot) ¦ (ekkert orð)
+＋ un autre mot… ¦ ＋ annað orð…
+Retirer ce mot ¦ Fjarlægja þetta orð
+Écris un commentaire ou choisis un mot. ¦ Skrifaðu athugasemd eða veldu orð.
+La personne de la frise ¦ Einstaklingur tímalínunnar
+Les lieux de… ¦ Staðirnir…
+Repère « {name} » posé. ¦ Merkið „{name}“ sett.
+Cette enquête ne porte pas sur une personne : choisis-en une autre. ¦ Þessi athugun snýst ekki um einstakling: veldu aðra.
+Aucun lieu avec ses coordonnées. ¦ Enginn staður með hnitum.
+Enquête n° {n} ¦ Athugun nr. {n}
+Choisis la personne (ou « seulement mes repères »). ¦ Veldu einstaklinginn (eða „aðeins mín merki“).
+Les lieux de {name} ¦ Staðir {name}
+Arbre : lecture des fiches… ¦ Tré: les spjöld…
+Arbre posé : {n}. Chaque carte reste liée à sa fiche (double-clic pour l’ouvrir). ¦ Tré sett: {n}. Hvert kort helst tengt sínu spjaldi (tvísmelltu til að opna það).
+Arbre posé : {n} (limite atteinte). Chaque carte reste liée à sa fiche (double-clic pour l’ouvrir). ¦ Tré sett: {n} (hámarki náð). Hvert kort helst tengt sínu spjaldi (tvísmelltu til að opna það).
+Pas de micro disponible ici. ¦ Enginn hljóðnemi tiltækur hér.
+Titre du mémo ¦ Titill minnisins
+Mémo du {date} ¦ Minni frá {date}
+Le son est rangé avec ce tableau (et dans les médias de l’app). ¦ Hljóðið er geymt með þessari töflu (og í miðlum appsins).
+Micro refusé : autorise-le dans les réglages de l’ordinateur. ¦ Hljóðnema hafnað: leyfðu hann í stillingum tölvunnar.
+Arrête d’abord l’enregistrement. ¦ Stöðvaðu fyrst upptökuna.
+Enregistre d’abord ton mémo. ¦ Taktu fyrst upp minnið þitt.
+Mémo vocal ¦ Talað minni
+{n}, en colonnes (un bout de tableur). ¦ {n}, í dálkum (bútur úr töflureikni).
+Mon modèle ¦ Sniðmátið mitt
+Modèle trop lourd pour être gardé (des formes faites d’une image ?). ¦ Sniðmátið er of stórt til að geyma það (form gerð úr mynd?).
+Modèle « {name} » enregistré : il est dans « Nouveau tableau ». ¦ Sniðmátið „{name}“ vistað: það er í „Ný tafla“.
+Calque « {name} » supprimé (ses éléments restent sur le calque principal) ¦ Laginu „{name}“ eytt (einingar þess eru áfram á aðallaginu)
+Calque supprimé (ses éléments restent sur le calque principal) ¦ Laginu eytt (einingar þess eru áfram á aðallaginu)
+▶ Lancer la présentation ({n}) ¦ ▶ Hefja kynninguna ({n})
+▶ Lancer la présentation ¦ ▶ Hefja kynninguna
+＋ La vue actuelle comme étape ¦ ＋ Núverandi sýn sem skref
+＋ La sélection comme étape ¦ ＋ Valið sem skref
+＋ Une étape par cadre ¦ ＋ Eitt skref fyrir hvern ramma
+☰ Les étapes (renommer, ordre…) ¦ ☰ Skrefin (endurnefna, röð…)
+▶ Les étapes de la présentation ¦ ▶ Skref kynningarinnar
+Étape {n} ¦ Skref {n}
+{n} dans la présentation. ¦ {n} í kynningunni.
+Aucune étape. ¦ Ekkert skref.
+Étape remplacée par la vue actuelle. ¦ Skrefinu skipt út fyrir núverandi sýn.
+Ajoute d’abord des étapes (▶ Présenter → ＋ La vue actuelle comme étape) ou des cadres. ¦ Bættu fyrst við skrefum (▶ Kynna → ＋ Núverandi sýn sem skref) eða römmum.
+Étape d’avant ¦ Fyrra skref
+Étape suivante ¦ Næsta skref
+→ ou Espace ¦ → eða bilslá
+Quitter ¦ Hætta
+Remplacer par la vue actuelle ¦ Skipta út fyrir núverandi sýn
+Supprimer le tableau « {name} » et tous ses dossiers ? Les photos, sons et fiches posés dessus restent dans l’app. ¦ Eyða töflunni „{name}“ og öllum möppum hennar? Myndir, hljóð og spjöld sem sett eru á hana verða áfram í appinu.
+sans titre ¦ án titils
+Tableau et dossiers supprimés. ¦ Töflu og möppum eytt.
+Tableau supprimé. ¦ Töflu eytt.
+Ce qu’on sait ¦ Það sem við vitum
+Sources à voir ¦ Heimildir til að skoða
+Idée centrale ¦ Meginhugmynd
+Branche {n} ¦ Grein {n}
+Date {n} ¦ Dagsetning {n}
+Arbre à la main ¦ Handteiknað tré
+Enfant ¦ Barn
+Une toile libre. ¦ Frjáls strigi.
+Mur d’indices ¦ Vísbendingaveggur
+Fond de liège, une question au centre, des notes autour. ¦ Korkbakgrunnur, spurning í miðjunni, miðar í kring.
+Carte mentale ¦ Hugarkort
+Une idée au centre, des branches. ¦ Hugmynd í miðjunni, greinar.
+Une flèche du temps et des repères. ¦ Tímaör og kennileiti.
+Des cases pour une famille, à relier. ¦ Reitir fyrir fjölskyldu, til að tengja saman.
+Nouveau tableau ¦ Ný tafla
+Qui est le père de Marie ? ¦ Hver er faðir Marie?
+Piste 1, les témoins… ¦ Slóð 1, vottarnir…
+Pour commencer ¦ Til að byrja með
+Pour faire tes propres modèles : dans un tableau, ⤓ Exporter → ⭐ En faire un modèle. ¦ Til að búa til þín eigin sniðmát: í töflu, ⤓ Flytja út → ⭐ Gera úr henni sniðmát.
+Supprimer ce modèle ¦ Eyða þessu sniðmáti
+Modèle « {name} » supprimé ¦ Sniðmátinu „{name}“ eytt
+Tableau sans titre ¦ Tafla án titils
+Modèle introuvable. ¦ Sniðmát finnst ekki.
+Libre ¦ Frjáls
+Supprimer ce tableau ¦ Eyða þessari töflu
+Chercher… (titre, partie) ¦ Leita… (titill, hluti)
+Rechercher un tableau ¦ Leita að töflu
+({n} prometteuses) ¦ ({n} vænlegar)
+{what} : {value} ¦ {what}: {value}
+{col} : les plus récents ¦ {col}: nýjustu fyrst
+{col} : les plus anciens ¦ {col}: elstu fyrst
+{col} : du plus grand au plus petit ¦ {col}: frá stærsta til minnsta
+{col} : du plus petit au plus grand ¦ {col}: frá minnsta til stærsta
+{help} Un clic sur un titre l’ouvre ; un clic sur une colonne trie. ¦ {help} Smelltu á titil til að opna hann; smelltu á dálk til að raða.
+Un clic sur un titre l’ouvre ; un clic sur une colonne trie. ¦ Smelltu á titil til að opna hann; smelltu á dálk til að raða.
+Rien ne correspond à ta recherche ¦ Ekkert passar við leitina þína
+Les tableaux se créent dans Enquêtes → Tableaux. ¦ Töflur eru búnar til í Athuganir → Töflur.
+Partie ¦ Hluti
+Communes faites ¦ Sveitarfélög lokið
+Archivé ¦ Í geymslu
+Tous les tableaux : ceux des enquêtes, des battues, des projets, et les tableaux libres. ¦ Allar töflur: þær sem tilheyra athugunum, leitum, verkefnum, og frjálsar töflur.
+Les projets de l’Atelier de recherche, avec leur état et leur échéance. ¦ Verkefni Rannsóknarsmiðjunnar, með stöðu og skilafresti.
+Toutes les enquêtes, avec leurs pistes et leurs tableaux. ¦ Allar athuganir, með slóðum þeirra og töflum.
+Toutes les battues, commune par commune. ¦ Allar leitir, sveitarfélag fyrir sveitarfélag.
+Chercher un tableau… (titre, enquête, battue) ¦ Leita að töflu… (titill, athugun, leit)
+Chercher une battue… (titre, commune, personne) ¦ Leita að leit… (titill, sveitarfélag, einstaklingur)
+Chercher un projet… (titre, sorte) ¦ Leita að verkefni… (titill, tegund)
+Chercher une enquête… (titre, personne) ¦ Leita að athugun… (titill, einstaklingur)
+Une toile libre, comme un grand tableau de liège : on y pose des notes, des formes, des flèches, des dessins, des photos, des sons, des PDF, des fiches, des écrans de l’app… Chaque tableau peut être libre ou rangé dans une enquête, une battue ou un projet de l’Atelier. ¦ Frjáls strigi, eins og stór korktafla: þú setur á hana miða, form, örvar, teikningar, myndir, hljóð, PDF, spjöld, skjái appsins… Hver tafla getur verið frjáls eða geymd í athugun, leit eða verkefni Smiðjunnar.
+Aucun tableau ici. ¦ Engin tafla hér.
+Aucun tableau pour l’instant ¦ Engin tafla enn
+Vide, mur d’indices, carte mentale, frise… ¦ Auð, vísbendingaveggur, hugarkort, tímalína…
+Des toiles libres pour chercher, relier, montrer : notes, flèches, photos, sons, fiches… ¦ Frjálsir strigar til að leita, tengja, sýna: miðar, örvar, myndir, hljóð, spjöld…
+Dans une enquête ¦ Í athugun
+Dans l’Atelier ¦ Í Smiðjunni
+＋ Nouveau tableau ici ¦ ＋ Ný tafla hér
+Un tableau libre pour cette recherche : notes, flèches, photos, fiches… Tu peux en faire plusieurs (une « partie » chacun). ¦ Frjáls tafla fyrir þessa rannsókn: miðar, örvar, myndir, spjöld… Þú getur búið til nokkrar („hluta“ fyrir hverja).
+enquêtes ¦ athuganir
+TABLEAU ¦ TAFLA
+TABLEAUX ¦ TÖFLUR
+Ranger le tableau ¦ Geyma töfluna
+Ranger ¦ Geyma
+Laquelle ¦ Hver þeirra
+(facultatif : pour avoir plusieurs tableaux, « Piste 1 », « Les témoins »…) ¦ (valfrjálst: til að hafa nokkrar töflur, „Slóð 1“, „Vottarnir“…)
+(facultatif : piste 1, les témoins, la branche paternelle…) ¦ (valfrjálst: slóð 1, vottarnir, föðurgreinin…)
+(aucune) ¦ (engin)
+▭ Rectangle ¦ ▭ Rétthyrningur
+▢ Arrondi ¦ ▢ Ávalt
+◯ Ovale ¦ ◯ Sporbaugur
+△ Triangle ¦ △ Þríhyrningur
+☆ Étoile ¦ ☆ Stjarna
+⬡ Hexagone ¦ ⬡ Sexhyrningur
+💬 Bulle ¦ 💬 Talblaðra
+☁ Nuage ¦ ☁ Ský
+pinceau|Stylo ¦ Penni
+pinceau|Monoligne ¦ Einlína
+pinceau|Marqueur ¦ Merkipenni
+pinceau|Crayon ¦ Blýantur
+pinceau|Pastel ¦ Pastellitur
+pinceau|Stylo-plume ¦ Blekpenni
+pinceau|Calame ¦ Reyrpenni
+pinceau|Pinceau ¦ Pensill
+pinceau|Aquarelle ¦ Vatnslitur
+pinceau|Remplissage ¦ Fylling
+pinceau|Surligneur ¦ Áherslupenni
+pinceau|Craie ¦ Krít
+pinceau|Néon ¦ Neon
+pinceau|Aérographe ¦ Loftpensill
+pinceau|Pointillé ¦ Punktalína
+Néon ¦ Neon
+Pointillé ¦ Punktalína
+trait|— droit ¦ — bein
+trait|⌒ courbe ¦ ⌒ bogin
+trait|⌐ coudé ¦ ⌐ hornrétt
+trait|∿ vague ¦ ∿ bylgja
+trait|⩘ zigzag ¦ ⩘ sikksakk
+trait|⤳ contourne les éléments ¦ ⤳ fer í kringum einingar
+⌐ coudé ¦ ⌐ hornrétt
+⤳ contourne les éléments ¦ ⤳ fer í kringum einingar
+fond|Fond à points ¦ Punktabakgrunnur
+fond|Quadrillé ¦ Rúðustrikað
+fond|Lignes ¦ Línur
+fond|Uni ¦ Einlitt
+fond|Papier ¦ Pappír
+fond|Liège ¦ Korkur
+fond|Sombre ¦ Dökkt
+fond|Couleur à choisir… ¦ Litur að eigin vali…
+Fond à points ¦ Punktabakgrunnur
+Liège ¦ Korkur
+Couleur à choisir… ¦ Litur að eigin vali…
+Motif sur la couleur ¦ Mynstur á litnum
+motif|sans motif ¦ ekkert mynstur
+motif|points ¦ punktar
+motif|quadrillé ¦ rúðustrikað
+motif|lignes ¦ línur
+quadrillé ¦ rúðustrikað
+Instantanés : figer l’état du tableau, y revenir, en faire un nouveau tableau ¦ Skyndimyndir: frysta stöðu töflunnar, fara aftur í hana, gera úr henni nýja töflu
+📸 Instantanés ¦ 📸 Skyndimyndir
+Créer un nouveau tableau à partir de celui-ci ¦ Búa til nýja töflu út frá þessari
+PDF, image PNG ou JPG, impression, fichier du tableau, modèle ¦ PDF, PNG- eða JPG-mynd, prentun, skrá töflunnar, sniðmát
+Les pistes à vérifier : clic pour aller à la suivante ¦ Slóðir til að athuga: smelltu til að fara í þá næstu
+Chercher dans le tableau ¦ Leita í töflunni
+Grille aimantée et guides d’alignement ¦ Gripnet og jöfnunarlínur
+Mini-carte du tableau (montrer ou cacher) ¦ Smákort töflunnar (sýna eða fela)
+Présenter : un parcours d’étapes ¦ Kynna: leið í skrefum
+▶ Présenter ¦ ▶ Kynna
+Réglages des tableaux : disposition, ordre des outils, boutons montrés ou cachés ¦ Stillingar taflna: uppsetning, röð verkfæra, hnappar sýndir eða faldir
+Verrouiller ou déverrouiller tout le tableau ¦ Læsa eða opna alla töfluna
+Supprimer ce tableau (et ses dossiers) ¦ Eyða þessari töflu (og möppum hennar)
+Revenir aux tableaux ¦ Aftur í töflurnar
+Titre du tableau ¦ Titill töflunnar
+État du tableau ¦ Staða töflunnar
+● En cours ¦ ● Í vinnslu
+⏸ En pause ¦ ⏸ Í hléi
+✓ Terminé ¦ ✓ Lokið
+Enregistrer maintenant (le tableau s’enregistre aussi tout seul) ¦ Vista núna (taflan vistast líka sjálfkrafa)
+Ajouter un fichier, un média, une fiche, un écran de l’app… ¦ Bæta við skrá, miðli, spjaldi, skjá appsins…
+Zoom : ajuster à la sélection, adapter à la fenêtre… ¦ Aðdráttur: laga að valinu, laga að glugganum…
+Montrer ce qui est groupé ¦ Sýna það sem er flokkað saman
+Lâche ici : images, sons, vidéos, PDF… ¦ Slepptu hér: myndum, hljóðum, myndskeiðum, PDF…
+Un tableau vide. ¦ Auð tafla.
+Choisis un outil à gauche, ou glisse ici des photos, des sons, des PDF… « ＋ Ajouter » pose une fiche, un écran de l’app, un widget, un recueil, une étiquette ou un dossier. Double-clic pour écrire. ¦ Veldu verkfæri til vinstri, eða dragðu hingað myndir, hljóð, PDF… „＋ Bæta við“ setur inn spjald, skjá appsins, græju, safnrit, merki eða möppu. Tvísmelltu til að skrifa.
+Revenir à la police du thème ¦ Aftur í letur þemans
+Aimanter : grille aimantée et guides d’alignement ¦ Grípa: gripnet og jöfnunarlínur
+Choisis à droite une personne, une famille ou une enquête, ou pose des repères. ¦ Veldu einstakling, fjölskyldu eða athugun til hægri, eða settu merki.
+Glisser pour plier · double-clic pour enlever ce coude ¦ Dragðu til að beygja · tvísmelltu til að fjarlægja þessa beygju
+Glisser pour ajouter un coude ¦ Dragðu til að bæta við beygju
+Modifié… ¦ Breytt…
+Enregistré ✓ ¦ Vistað ✓
+⚠ Modifié dans une autre fenêtre ¦ ⚠ Breytt í öðrum glugga
+Envoi des fichiers… ¦ Sendi skrár…
+efface seulement ce que tu touches ¦ þurrkar aðeins út það sem þú snertir
+🩹 Gomme fine ¦ 🩹 Fínt strokleður
+🧽 Gomme à traits ¦ 🧽 Línustrokleður
+enlève le trait entier ¦ fjarlægir alla línuna
+Autre couleur pour les notes ¦ Annar litur fyrir miða
+Tire une flèche d’un élément à un autre : elle les suit quand on les déplace. ¦ Dragðu ör frá einni einingu til annarrar: hún fylgir þeim þegar þær eru færðar.
+Clique où poser le tableur. ¦ Smelltu þar sem töflureiknirinn á að fara.
+Glisse pour te déplacer ; molette ou deux doigts aussi ; ⌘ + molette pour zoomer. ¦ Dragðu til að færa þig; skrunhjól eða tveir fingur líka; ⌘ + skrunhjól til að þysja.
+Clic : choisir · ⇧ + clic : en ajouter · ⌥ / Alt + glisser : dupliquer · glisser dans le vide : en choisir plusieurs · double-clic : écrire ou ouvrir. ¦ Smellur: velja · ⇧ + smellur: bæta við · ⌥ / Alt + draga: tvöfalda · draga á auðu svæði: velja margar · tvísmellur: skrifa eða opna.
+Les groupes sont montrés. ¦ Hópar eru sýndir.
+Groupes cachés. ¦ Hópar faldir.
+Fond du cadre ¦ Bakgrunnur rammans
+Bord du cadre ¦ Brún rammans
+Épaisseur du bord ¦ Þykkt brúnar
+Marge dans le cadre ¦ Spássía í rammanum
+Arrondi du cadre ¦ Rúnnun rammans
+Position le long du trait ¦ Staða eftir línunni
+sur le trait ¦ á línunni
+au-dessus ¦ fyrir ofan
+en dessous ¦ fyrir neðan
+Écart avec le trait ¦ Bil frá línunni
+suivre l’angle du trait ¦ fylgja halla línunnar
+Fond du tableau ¦ Bakgrunnur töflunnar
+⌘Z annuler · ⌘D dupliquer · ⌘G grouper (⇧ pour dégrouper) · ⌘L verrouiller · ] [ devant / derrière · flèches pour pousser · espace pour se déplacer · ⌘ + molette pour zoomer · coller une image ou une adresse web. ¦ ⌘Z afturkalla · ⌘D tvöfalda · ⌘G flokka (⇧ til að leysa upp) · ⌘L læsa · ] [ fremst / aftast · örvar til að ýta · bilslá til að færa sig · ⌘ + skrunhjól til að þysja · líma mynd eða vefslóð.
+Couleurs, formes, polices, tailles, ordre des menus : Réglages → Tableaux. ¦ Litir, form, leturgerðir, stærðir, röð valmynda: Stillingar → Töflur.
+Puces et numéros ¦ Punktar og númer
+• Puce ¦ • Punktur
+1. Nombres ¦ 1. Tölur
+I. Chiffres romains ¦ I. Rómverskar tölur
+a. Lettres ¦ a. Stafir
+A. Lettres capitales ¦ A. Hástafir
+– Tiret ¦ – Strik
+☐ Cases à cocher ¦ ☐ Gátreitir
+Les graisses exactes de la police : 🖥 ci-dessous (polices de l’ordinateur). ¦ Nákvæmar þykktir leturgerðarinnar: 🖥 hér fyrir neðan (leturgerðir tölvunnar).
+Lire les graisses exactes des polices de l’ordinateur ¦ Lesa nákvæmar þykktir leturgerða tölvunnar
+Couleur des pointes ¦ Litur örvarodda
+même couleur que le trait ¦ sami litur og línan
+(comme le trait) ¦ (eins og línan)
+Pointe au début ¦ Örvaroddur í byrjun
+Pointe à la fin ¦ Örvaroddur í lokin
+Taille des pointes ¦ Stærð örvarodda
+Forme du trait ¦ Lögun línunnar
+frère de, a écrit à… ¦ bróðir, skrifaði til…
+＋ ligne ¦ ＋ röð
+＋ colonne ¦ ＋ dálkur
+− ligne ¦ − röð
+− colonne ¦ − dálkur
+Ajouter une ligne dessous ¦ Bæta við röð fyrir neðan
+Enlever la ligne ¦ Fjarlægja röðina
+Ajouter une colonne à droite ¦ Bæta við dálki til hægri
+Enlever la colonne ¦ Fjarlægja dálkinn
+Fusionner les cellules choisies ¦ Sameina valda reiti
+⊞ Fusionner ¦ ⊞ Sameina
+Séparer les cellules ¦ Skipta reitunum
+⊟ Séparer ¦ ⊟ Skipta
+Colonne plus étroite ¦ Mjórri dálkur
+Colonne plus large ¦ Breiðari dálkur
+Vider la cellule ¦ Tæma reitinn
+⌫ vider ¦ ⌫ tæma
+Le tableur en grand : plus de fonctions, tri, filtres, Excel… puis « ✓ Enregistrer et revenir » ¦ Töflureiknirinn í fullri stærð: fleiri föll, röðun, síur, Excel… svo „✓ Vista og fara til baka“
+Télécharger en CSV (Excel, Numbers…) ¦ Sækja sem CSV (Excel, Numbers…)
+première ligne en titre ¦ fyrsta röð sem fyrirsögn
+première colonne en titre ¦ fyrsti dálkur sem fyrirsögn
+une ligne sur deux teintée ¦ önnur hver röð lituð
+Fond des titres ¦ Bakgrunnur fyrirsagna
+Fond de la cellule (les cellules choisies) ¦ Bakgrunnur reits (valdir reitir)
+Fond de la cellule ¦ Bakgrunnur reits
+aperçu vivant dans le tableau ¦ lifandi forskoðun í töflunni
+La fiche montre ¦ Spjaldið sýnir
+Lu dans la fiche à chaque ouverture du tableau : si la fiche change, la carte suit. ¦ Lesið af spjaldinu í hvert sinn sem taflan opnast: ef spjaldið breytist fylgir kortið.
+de la personne, son couple et ses enfants ¦ einstaklingsins, makans og barnanna
+👤 Changer de personne ¦ 👤 Skipta um einstakling
+aucune fiche (seulement mes repères) ¦ ekkert spjald (aðeins mín merki)
+une personne et sa famille ¦ einstaklingur og fjölskylda hans
+la personne d’une enquête ¦ einstaklingur athugunar
+👤 Choisir la personne ¦ 👤 Velja einstaklinginn
+Une commune, un lieu… ¦ Sveitarfélag, staður…
+relier les lieux dans l’ordre (le parcours) ¦ tengja staðina í röð (leiðin)
+Poser un repère ¦ Setja merki
+Lien tout prêt ¦ Tilbúinn tengill
+Glisse un « ＋ » sur le trait pour le plier en plusieurs segments. ¦ Dragðu „＋“ á línuna til að beygja hana í nokkra búta.
+Aligner ¦ Jafna
+Centrés (de gauche à droite) ¦ Miðjað (frá vinstri til hægri)
+Centrés (de haut en bas) ¦ Miðjað (ofan frá og niður)
+Même écart de gauche à droite ¦ Sama bil frá vinstri til hægri
+Même écart de haut en bas ¦ Sama bil ofan frá og niður
+Même largeur que le premier choisi ¦ Sama breidd og sú fyrsta sem var valin
+Même hauteur que le premier choisi ¦ Sama hæð og sú fyrsta sem var valin
+Répartir ¦ Dreifa
+⇹ en largeur ¦ ⇹ lárétt
+⇳ en hauteur ¦ ⇳ lóðrétt
+═ même largeur ¦ ═ sama breidd
+‖ même hauteur ¦ ‖ sama hæð
+🔓 Déverrouiller ¦ 🔓 Opna lás
+🔒 Verrouiller ¦ 🔒 Læsa
+⧉ Grouper ¦ ⧉ Flokka saman
+Dégrouper ¦ Leysa upp hóp
+Faire de ce dessin une forme à toi (réutilisable) ¦ Gera úr þessari teikningu þitt eigið form (endurnýtanlegt)
+✏️ En faire une forme ¦ ✏️ Gera úr henni form
+Devant ¦ Fremst
+Derrière ¦ Aftast
+Image du web ¦ Mynd af vefnum
+Lien web ¦ Vefslóð
+Frise vivante ¦ Lifandi tímalína
+Rechercher une forme ¦ Leita að formi
+Créer une forme à partir d’une autre (retourner, tourner, étirer, ajouter, percer) ¦ Búa til form út frá öðru (spegla, snúa, teygja, bæta við, gata)
+＋ Créer une forme ¦ ＋ Búa til form
+✒️ Plume (tracé) ¦ ✒️ Penni (ferill)
+✍︎ À partir de mon dessin ¦ ✍︎ Út frá teikningunni minni
+🖼 À partir d’une image ¦ 🖼 Út frá mynd
+Fermer le tracé en cours ¦ Loka núverandi ferli
+Commencer un autre tracé (un trou s’il est dans la forme) ¦ Byrja annan feril (gat ef hann er inni í forminu)
+Supprimer le point choisi ¦ Eyða völdum punkti
+Annuler le dernier point ¦ Afturkalla síðasta punkt
+◯ Fermer ¦ ◯ Loka
+＋ Nouveau tracé ¦ ＋ Nýr ferill
+✕ Point ¦ ✕ Punktur
+Une image PNG avec un fond transparent donne sa silhouette. Sinon, coche : ce qui est sombre devient la forme. ¦ PNG-mynd með gegnsæjum bakgrunni gefur útlínur sínar. Annars skaltu haka við: það sem er dökkt verður formið.
+le sombre devient la forme (images sans transparence) ¦ það dökka verður formið (myndir án gegnsæis)
+Choisis d’abord un dessin sur le tableau. ¦ Veldu fyrst teikningu á töflunni.
+Ferme la forme : au moins trois points, puis clic sur le premier (ou « ◯ Fermer »). ¦ Lokaðu forminu: að minnsta kosti þrír punktar, smelltu svo á þann fyrsta (eða „◯ Loka“).
+Ajouter au tableau ¦ Bæta við töfluna
+📎 Des fichiers ¦ 📎 Skrár
+📁 Choisir des fichiers ¦ 📁 Velja skrár
+Images, GIF, sons, vidéos, PDF (ou glisse-les sur le tableau, ou colle une image). ¦ Myndir, GIF, hljóð, myndskeið, PDF (eða dragðu þau á töfluna, eða límdu mynd).
+🖼 Un média de l’app ¦ 🖼 Miðill úr appinu
+Un média de l’app ¦ Miðill úr appinu
+Poser sur le tableau ¦ Setja á töfluna
+Choisir une image, un son, une vidéo… ¦ Velja mynd, hljóð, myndskeið…
+🌐 D’ailleurs ¦ 🌐 Annars staðar frá
+Adresse d’une image ou d’un site ¦ Slóð myndar eða vefs
+👤 Une fiche ¦ 👤 Spjald
+Poser la fiche ¦ Setja spjaldið
+📺 Un écran de l’app ¦ 📺 Skjár úr appinu
+Une liste, un diagramme, une statistique, la carte, un village, une de tes listes… ¦ Listi, graf, tölfræði, kortið, þorp, einn af listunum þínum…
+avec l’aperçu vivant ¦ með lifandi forskoðun
+Poser l’écran ¦ Setja skjáinn
+✨ Un de mes widgets ¦ ✨ Ein af græjunum mínum
+Poser le widget ¦ Setja græjuna
+Crée d’abord un widget (Réglages → Éditeur de widgets). ¦ Búðu fyrst til græju (Stillingar → Græjuritill).
+Titre du recueil ¦ Titill safnritsins
+📚 Un recueil ¦ 📚 Safnrit
+🏷 Une étiquette ¦ 🏷 Merki
+ou un mot à toi ¦ eða þitt eigið orð
+Nom du dossier ¦ Nafn möppunnar
+Poser ce mot ¦ Setja þetta orð
+▦ Un tableur ¦ ▦ Töflureiknir
+Une grille à remplir, avec des formules (=SOMME…) ; on peut y coller un bout d’Excel ou de Numbers. ¦ Rúðunet til að fylla út, með formúlum (=SOMME…); þú getur límt í það bút úr Excel eða Numbers.
+Poser un tableur ¦ Setja töflureikni
+📁 Un dossier ¦ 📁 Mappa
+Un tableau dans le tableau : double-clic pour y entrer. ¦ Tafla inni í töflunni: tvísmelltu til að fara inn í hana.
+Créer le dossier ¦ Búa til möppuna
+🌳 Un arbre automatique ¦ 🌳 Sjálfvirkt tré
+Une personne, et ses parents, grands-parents ou enfants posés en fiches reliées par des flèches. ¦ Einstaklingur, og foreldrar hans, afar og ömmur eða börn sett upp sem spjöld tengd með örvum.
+ses ancêtres ¦ forfeður hans
+ses descendants ¦ afkomendur hans
+sa famille proche ¦ nánasta fjölskylda hans
+avec les conjoints ¦ með mökum
+flèches (sinon des traits) ¦ örvar (annars línur)
+Poser l’arbre ¦ Setja tréð
+🗓 Une frise vivante ¦ 🗓 Lifandi tímalína
+Les événements d’une personne (ou de sa famille) placés tout seuls sur une ligne du temps ; elle suit la fiche. ¦ Atburðir einstaklings (eða fjölskyldu hans) settir sjálfkrafa á tímalínu; hún fylgir spjaldinu.
+Poser la frise ¦ Setja tímalínuna
+🗺 Une carte ¦ 🗺 Kort
+Les lieux d’une personne, de sa famille ou d’une enquête ; tu peux y poser tes repères. ¦ Staðir einstaklings, fjölskyldu hans eða athugunar; þú getur sett þín eigin merki á það.
+Nom de la personne (facultatif) ¦ Nafn einstaklingsins (valfrjálst)
+la personne et sa famille ¦ einstaklingurinn og fjölskylda hans
+personne : seulement mes repères ¦ enginn einstaklingur: aðeins mín merki
+Poser la carte ¦ Setja kortið
+▭ Un cadre ¦ ▭ Rammi
+Une zone nommée (« Branche paternelle », « Sources à voir ») : ce qui est dedans bouge avec elle ; on peut la replier. ¦ Nefnt svæði („Föðurgrein“, „Heimildir til að skoða“): það sem er inni í því færist með því; það má leggja það saman.
+Nom du cadre ¦ Nafn rammans
+Poser le cadre ¦ Setja rammann
+🎙 Un mémo vocal ¦ 🎙 Talað minni
+Enregistre ta voix ici : le son est rangé avec le tableau et posé dessus. ¦ Taktu upp röddina þína hér: hljóðið er geymt með töflunni og sett á hana.
+🎙 Enregistrer ¦ 🎙 Taka upp
+🎙 Mémo vocal ¦ 🎙 Talað minni
+Un fichier « .lcnda-tableau.json » (⤓ Exporter → Fichier léger ou complet) : il devient un nouveau tableau. ¦ Skrá „.lcnda-tableau.json“ (⤓ Flytja út → Létt skrá eða heildarskrá): hún verður að nýrri töflu.
+Tableau verrouillé : clic pour le déverrouiller ¦ Taflan er læst: smelltu til að opna hana
+Verrouiller tout le tableau ¦ Læsa allri töflunni
+Tableau verrouillé : on peut le regarder et ouvrir ce qu’il contient, rien ne bouge. ¦ Taflan er læst: þú getur skoðað hana og opnað það sem hún inniheldur, ekkert hreyfist.
+Tableau déverrouillé. ¦ Tafla opnuð.
+Un projet de l’Atelier ¦ Verkefni Smiðjunnar
+Un lieu (sa commune) ¦ Staður (sveitarfélag hans)
+Un média (photo, acte, son…) ¦ Miðill (mynd, skjal, hljóð…)
+Une famille (un couple) ¦ Fjölskylda (hjón)
+Un événement ¦ Atburður
+Un animal ¦ Dýr
+Un autre tableau ¦ Önnur tafla
+Relier ce tableau à une personne, une enquête (ou une de ses parties), une battue… ¦ Tengja þessa töflu við einstakling, athugun (eða einn hluta hennar), leit…
+🔗 Relier… ¦ 🔗 Tengja…
+Relier ce tableau ¦ Tengja þessa töflu
+À quoi ¦ Við hvað
+Nouveau tableau depuis un instantané ¦ Ný tafla úr skyndimynd
+Nouveau tableau à partir de celui-ci ¦ Ný tafla út frá þessari
+Grille aimantée : les éléments s’alignent sur la grille et sur les autres (⌥ / Alt en glissant pour s’en passer). ¦ Gripnet: einingar raðast eftir netinu og hver eftir annarri (⌥ / Alt meðan þú dregur til að sleppa því).
+Grille aimantée enlevée. ¦ Gripnet fjarlægt.
+frère de ¦ bróðir
+sœur de ¦ systir
+époux de ¦ eiginmaður
+épouse de ¦ eiginkona
+père de ¦ faðir
+mère de ¦ móðir
+fils de ¦ sonur
+fille de ¦ dóttir
+cousin de ¦ frændi
+cousine de ¦ frænka
+parrain de ¦ guðfaðir
+marraine de ¦ guðmóðir
+témoin de ¦ vottur
+voisin de ¦ nágranni
+a travaillé pour ¦ vann fyrir
+a écrit à ¦ skrifaði til
+même personne ? ¦ sami einstaklingur?
+💬 Commentaires ¦ 💬 Athugasemdir
+Ton mot (ex. « Piste », « Archives ») ¦ Orðið þitt (t.d. „Slóð“, „Skjalasöfn“)
+Les mots proposés pour les bulles (tu en ajoutes avec « ＋ un autre mot… »). ¦ Orðin sem eru í boði fyrir bólurnar (þú bætir við með „＋ annað orð…“).
+Les lignes et les colonnes gardées, avec les formules possibles. ¦ Raðir og dálkar haldast, og formúlur eru mögulegar.
+🗒 Une note par ligne ¦ 🗒 Einn miði á hverja línu
+Chaque ligne devient une note, rangées en grille. ¦ Hver lína verður að miða, raðað í rúðunet.
+🗂 Une note par ligne du tableur ¦ 🗂 Einn miði á hverja röð töflureiknisins
+Les colonnes d’une ligne dans la même note. ¦ Dálkar raðar í sama miða.
+T Un seul texte ¦ T Einn texti
+Tout le texte collé, d’un bloc. ¦ Allur límdi textinn, í einni heild.
+grouper ce qui est posé ¦ flokka saman það sem er sett
+⭐ En faire un modèle ¦ ⭐ Gera úr henni sniðmát
+Enregistrer le modèle ¦ Vista sniðmátið
+Nom du modèle ¦ Nafn sniðmátsins
+Pour une enquête sur un enfant trouvé… ¦ Fyrir athugun á fundnu barni…
+Décris-le ¦ Lýstu því
+seulement la sélection ¦ aðeins valið
+sans les textes (garder les cases vides, les titres des cadres restent) ¦ án textanna (auðir reitir haldast, titlar ramma haldast)
+Il apparaît dans « Nouveau tableau », avec les modèles de l’app. Les fiches, photos et sons posés sont gardés tels quels (ils pointent vers ta base). ¦ Það birtist í „Ný tafla“, með sniðmátum appsins. Spjöld, myndir og hljóð sem sett eru haldast óbreytt (þau vísa á gagnagrunninn þinn).
+Calque principal ¦ Aðallag
+Les nouveaux éléments vont sur ce calque ¦ Nýjar einingar fara á þetta lag
+Choisir ce qu’il contient ¦ Velja það sem það inniheldur
+Supprimer le calque (ses éléments vont sur le calque principal) ¦ Eyða laginu (einingar þess fara á aðallagið)
+Mettre la sélection sur le calque choisi ¦ Setja valið á valið lag
+Un calque caché ne s’affiche pas (ni dans les images exportées) ; verrouillé, on ne peut plus le choisir ni le bouger. ¦ Falið lag birtist ekki (ekki heldur í útfluttum myndum); læst lag er ekki lengur hægt að velja eða færa.
+Y aller ¦ Fara þangað
+⟳ vue ¦ ⟳ sýn
+Chercher un mot, un nom… ¦ Leita að orði, nafni…
+Mini-carte ¦ Smákort
+Glisser pour déplacer la mini-carte ¦ Dragðu til að færa smákortið
+Cacher la mini-carte ¦ Fela smákortið
+Pour tous les jours ¦ Fyrir hvern dag
+Écritures anciennes ¦ Gömul rithönd
+Trop lourd pour être gardé (retire des formes faites d’une image). ¦ Of stórt til að geyma (fjarlægðu form gerð úr mynd).
+Réglages trop lourds pour être gardés (retire des formes faites d’une image). ¦ Stillingarnar eru of stórar til að geyma (fjarlægðu form gerð úr mynd).
+Choisis une forme de départ. ¦ Veldu upphafsform.
+Forme trop détaillée : retire des formes ajoutées. ¦ Formið er of nákvæmt: fjarlægðu einhver viðbætt form.
+Choisis une forme ou trace la pointe. ¦ Veldu form eða teiknaðu örvaroddinn.
+Cette forme est trop détaillée pour une pointe. ¦ Þetta form er of nákvæmt fyrir örvarodd.
+les réglages des tableaux sont fermés ¦ stillingar taflna eru lokaðar
+Montrer / cacher ¦ Sýna / fela
+Déjà dans l’accès rapide ¦ Þegar í flýtiaðgangi
+Ajouter à l’accès rapide ¦ Bæta í flýtiaðgang
+La reprendre dans le dessin vectoriel (plume, points, Pathfinder…) ¦ Vinna það áfram í vigurteikningu (penni, punktar, Pathfinder…)
+Supprimer cette forme ¦ Eyða þessu formi
+Aucune pour l’instant : dans un tableau, outil Formes → « ＋ Créer une forme ». ¦ Ekkert enn: í töflu, verkfærið Form → „＋ Búa til form“.
+Supprimer la liste ¦ Eyða listanum
+Pas encore de pinceau à toi. ¦ Enginn eigin pensill enn.
+tous les réglages des tableaux (couleurs, pointes, formes, polices, tailles, tableur, pinceaux, menus) ¦ allar stillingar taflna (litir, örvaroddar, form, leturgerðir, stærðir, töflureiknir, penslar, valmyndir)
+Reprendre les réglages « {name} » ? Les réglages actuels sont remplacés (enregistre-les d’abord sous un nom si tu veux les garder). ¦ Nota stillingarnar „{name}“? Núverandi stillingum er skipt út (vistaðu þær fyrst undir nafni ef þú vilt halda þeim).
+Reprendre ces réglages ¦ Nota þessar stillingar
+Reprendre les réglages ¦ Nota stillingarnar
+Réglages enregistrés sous « {name} » (et utilisés dès maintenant). ¦ Stillingar vistaðar sem „{name}“ (og notaðar héðan í frá).
+Réglages « {name} » importés : « Appliquer » pour t’en servir. ¦ Stillingarnar „{name}“ fluttar inn: „Nota“ til að nýta þær.
+Palette « {name} » retirée ¦ Litaspjaldið „{name}“ fjarlægt
+Pointe « {name} » créée : elle est dans la liste. ¦ Örvaroddurinn „{name}“ búinn til: hann er í listanum.
+Pointe retirée (les traits qui l’utilisent prennent un triangle) ¦ Örvaroddur fjarlægður (línur sem nota hann fá þríhyrning)
+⚡ « {name} » est déjà dans l’accès rapide (en haut de cet onglet ; ✕ sur elle pour l’en retirer). ¦ ⚡ „{name}“ er þegar í flýtiaðgangi (efst í þessum flipa; ✕ á því til að fjarlægja það).
+⚡ « {name} » ajoutée à l’accès rapide : elle est en haut de cet onglet, et dans la barre de l’outil Formes. N’oublie pas « Enregistrer ». ¦ ⚡ „{name}“ bætt í flýtiaðgang: það er efst í þessum flipa og í stiku Form-verkfærisins. Mundu að „Vista“.
+Chargement des formes… ¦ Hleð form…
+📚 Réessayer de charger les formes ¦ 📚 Reyna aftur að hlaða formin
+Les formes n’ont pas pu être chargées. Réessaie. ¦ Ekki tókst að hlaða formunum. Reyndu aftur.
+Forme retirée (les tableaux qui l’utilisent la gardent) ¦ Form fjarlægt (töflur sem nota það halda því)
+Ma liste ¦ Listinn minn
+Liste de polices retirée ¦ Leturlisti fjarlægður
+Ajouter une police à la liste ¦ Bæta leturgerð við listann
+« {font} » ajoutée à « {list} ». ¦ „{font}“ bætt við „{list}“.
+Toutes les polices ¦ Allar leturgerðir
+Élémentaire ¦ Grunnform
+Géométrie ¦ Rúmfræði
+Bulles ¦ Talblöðrur
+Étoiles et badges ¦ Stjörnur og merki
+Croyances et mémoire ¦ Trú og minning
+Écrits et documents ¦ Skrif og skjöl
+Lieux et bâtiments ¦ Staðir og byggingar
+Maison et objets ¦ Heimili og hlutir
+Vêtements et parures ¦ Fatnaður og skart
+Métiers et outils ¦ Starfsgreinar og verkfæri
+Transports et voyages ¦ Samgöngur og ferðalög
+Nature ¦ Náttúra
+Météo et ciel ¦ Veður og himinn
+Cuisine et repas ¦ Matargerð og máltíðir
+Musique, jeux et sport ¦ Tónlist, leikir og íþróttir
+Santé et corps ¦ Heilsa og líkami
+Objets ¦ Hlutir
+Mes formes ¦ Formin mín
+Lettres et chiffres ¦ Stafir og tölur
+Armoiries et héraldique ¦ Skjaldarmerki og skjaldarmerkjafræði
+Cadres et bordures ¦ Rammar og jaðrar
+Émotions ¦ Tilfinningar
+Drapeaux ¦ Fánar
+Écrans et appareils ¦ Skjáir og tæki
+Argent et commerce ¦ Peningar og verslun
+Fond des formes, étiquettes, dossiers ¦ Fylling forma, merkja, mappa
+Bord des formes et contour des médias ¦ Brún forma og útlína miðla
+Couleur du texte, des traits et flèches ¦ Litur texta, lína og örva
+Légendes des traits : texte ¦ Skýringar lína: texti
+Légendes des traits : fond du cadre ¦ Skýringar lína: bakgrunnur rammans
+Légendes des traits : bord du cadre ¦ Skýringar lína: brún rammans
+⤓ Exporter / imprimer ¦ ⤓ Flytja út / prenta
+⛶ Plein écran ¦ ⛶ Allur skjárinn
+❓ Pistes à vérifier (compteur) ¦ ❓ Slóðir til að athuga (teljari)
+🔍 Chercher dans le tableau ¦ 🔍 Leita í töflunni
+🧲 Grille aimantée ¦ 🧲 Gripnet
+🗺 Mini-carte ¦ 🗺 Smákort
+⚙️ Réglages des tableaux ¦ ⚙️ Stillingar taflna
+🗑 Supprimer ¦ 🗑 Eyða
+✕ Fermer ¦ ✕ Loka
+Bord / contour ¦ Brún / útlína
+Couleur du texte ou du trait ¦ Litur texta eða línu
+Épaisseur et style du trait ¦ Þykkt og stíll línu
+Arrondi ¦ Rúnnun
+Taille et style du texte ¦ Stærð og stíll texta
+Pointes des flèches ¦ Örvaroddar
+Forme du trait et légende ¦ Lögun línu og skýring
+Pinceau ¦ Pensill
+Titre, étiquette, adresse ¦ Titill, merki, slóð
+Fiche : ce qu’elle montre ¦ Spjald: það sem það sýnir
+Piste : à vérifier, confirmée, fausse ¦ Slóð: til að athuga, staðfest, röng
+Carte et repères ¦ Kort og merki
+Liens tout prêts (frère de…) ¦ Tilbúnir tenglar (bróðir…)
+Boutons (dupliquer, verrouiller…) ¦ Hnappar (tvöfalda, læsa…)
+Des fichiers ¦ Skrár
+D’ailleurs (web) ¦ Annars staðar frá (vefur)
+Une fiche ¦ Spjald
+Un écran de l’app ¦ Skjár úr appinu
+Un de mes widgets ¦ Ein af græjunum mínum
+Un tableur ¦ Töflureiknir
+Un dossier ¦ Mappa
+Un arbre automatique ¦ Sjálfvirkt tré
+Une frise vivante ¦ Lifandi tímalína
+Une carte ¦ Kort
+Un cadre (section) ¦ Rammi (hluti)
+Un mémo vocal ¦ Talað minni
+Importer un tableau ¦ Flytja inn töflu
+Gras, italique ¦ Feitletrað, skáletrað
+Suivre l’angle du trait ¦ Fylgja halla línunnar
+pointe|aucune ¦ enginn
+pointe|▶ triangle ¦ ▶ þríhyrningur
+pointe|➤ flèche fine ¦ ➤ mjó ör
+pointe|› ouverte ¦ › opin
+pointe|⏩ double ¦ ⏩ tvöföld
+pointe|◣ demi-flèche ¦ ◣ hálf ör
+pointe|● rond ¦ ● hringur
+pointe|○ rond vide ¦ ○ tómur hringur
+pointe|• point ¦ • punktur
+pointe|■ carré ¦ ■ ferningur
+pointe|□ carré vide ¦ □ tómur ferningur
+pointe|◆ losange ¦ ◆ tígull
+pointe|◇ losange vide ¦ ◇ tómur tígull
+pointe|| barre ¦ | strik
+pointe|⋔ patte d’oie ¦ ⋔ krákufótur
+pointe|» plumes ¦ » fjaðrir
+pointe|▷ triangle vide ¦ ▷ tómur þríhyrningur
+pointe|⟶ flèche longue ¦ ⟶ löng ör
+pointe|» double chevron ¦ » tvöfalt vinkilmerki
+pointe|✕ croix ¦ ✕ kross
+pointe|＋ plus ¦ ＋ plús
+pointe|★ étoile ¦ ★ stjarna
+pointe|♥ cœur ¦ ♥ hjarta
+pointe|‖ un (deux barres) ¦ ‖ einn (tvö strik)
+pointe|⋲ plusieurs (pied de corbeau) ¦ ⋲ margir (krákufótur)
+pointe|◗ demi-rond ¦ ◗ hálfhringur
+Chercher une forme (cœur, maison, chien…) ¦ Leita að formi (hjarta, hús, hundur…)
+＋ ajouter (réunir) ¦ ＋ bæta við (sameina)
+⭕ percer (trou) ¦ ⭕ gata (gat)
+miroir ¦ spegill
+Créer une forme à partir d’une autre ¦ Búa til form út frá öðru
+1. La forme de départ ¦ 1. Upphafsformið
+2. La transformer ¦ 2. Umbreyta því
+3. Lui ajouter d’autres formes, ou y percer un trou ¦ 3. Bæta við það öðrum formum, eða gata það
+＋ Ajouter une forme ¦ ＋ Bæta við formi
+Nom de la nouvelle forme ¦ Nafn nýja formsins
+Elle ira dans « Mes formes », et dans l’accès rapide. ¦ Það fer í „Formin mín“ og í flýtiaðgang.
+Fermer la forme ¦ Loka forminu
+Point ¦ Punktur
+RÉGLAGES DES TABLEAUX ¦ STILLINGAR TAFLNA
+FORMES ¦ FORM
+Créer une pointe ¦ Búa til örvarodd
+Créer la pointe ¦ Búa til örvaroddinn
+Chercher une forme (flèche, cœur, étoile…) ¦ Leita að formi (ör, hjarta, stjarna…)
+⬠ À partir d’une forme ¦ ⬠ Út frá formi
+✒️ Tracée à la plume ¦ ✒️ Teiknaður með pennanum
+Trace la pointe tournée vers la droite (→) : clic pour un angle, cliquer-glisser pour un arrondi, clic sur le premier point pour fermer. ¦ Teiknaðu örvaroddinn þannig að hann vísi til hægri (→): smelltu fyrir horn, smelltu og dragðu fyrir boga, smelltu á fyrsta punktinn til að loka.
+Accrochée ¦ Festur
+par la pointe (au bout du trait) ¦ á oddinum (við enda línunnar)
+presque au bout ¦ næstum við endann
+par le milieu ¦ á miðjunni
+par l’arrière ¦ að aftan
+Trace la pointe (au moins trois points, puis ferme-la). ¦ Teiknaðu örvaroddinn (að minnsta kosti þrír punktar, lokaðu honum svo).
+Choisis une forme. ¦ Veldu form.
+＋ cette couleur ¦ ＋ þennan lit
+＋ transparent ¦ ＋ gegnsætt
+Sans couleur ¦ Enginn litur
+🎨 Couleurs ¦ 🎨 Litir
+➤ Pointes ¦ ➤ Örvaroddar
+⬠ Formes ¦ ⬠ Form
+🔤 Polices ¦ 🔤 Leturgerðir
+📏 Tailles et arrondi ¦ 📏 Stærðir og rúnnun
+▦ Tableur ¦ ▦ Töflureiknir
+🖌 Pinceaux ¦ 🖌 Penslar
+☰ Menus et options ¦ ☰ Valmyndir og valkostir
+Les couleurs proposées dans les tableaux, catégorie par catégorie, dans l’ordre voulu (glisse une pastille, ou ‹ ›). Le sélecteur « autre couleur » reste toujours là. Tu peux avoir plusieurs palettes et choisir celle des tableaux. ¦ Litirnir sem eru í boði í töflum, flokk fyrir flokk, í þeirri röð sem þú vilt (dragðu litaplötu, eða ‹ ›). Valið „annar litur“ er alltaf til staðar. Þú getur haft mörg litaspjöld og valið það sem töflurnar nota.
+Palette utilisée ¦ Litaspjald í notkun
+Nom de la palette ¦ Nafn litaspjaldsins
+＋ Nouvelle palette ¦ ＋ Nýtt litaspjald
+Partir d’un modèle… ¦ Byrja út frá sniðmáti…
+Supprimer la palette ¦ Eyða litaspjaldinu
+Les pointes proposées pour les traits et les flèches, dans l’ordre voulu ; décoche celles que tu ne veux pas voir. « ＋ Créer une pointe » : à partir d’une forme (n’importe laquelle des formes, ou une des tiennes) ou tracée à la plume. ¦ Örvaroddarnir sem eru í boði fyrir línur og örvar, í þeirri röð sem þú vilt; taktu hakið af þeim sem þú vilt ekki sjá. „＋ Búa til örvarodd“: út frá formi (hvaða formi sem er, eða einu af þínum) eða teiknaður með pennanum.
+Pointe au début, par défaut ¦ Örvaroddur í byrjun, sjálfgefið
+Pointe à la fin, par défaut (outil Flèche) ¦ Örvaroddur í lokin, sjálfgefið (Ör-verkfærið)
+＋ Créer une pointe ¦ ＋ Búa til örvarodd
+Supprimer cette pointe ¦ Eyða þessum örvarodd
+Les catégories de formes et leurs formes, dans l’ordre voulu ; décoche ce que tu ne veux pas voir. « Accès rapide » : les formes proposées directement dans la barre de l’outil Formes. ¦ Flokkar forma og form þeirra, í þeirri röð sem þú vilt; taktu hakið af því sem þú vilt ekki sjá. „Flýtiaðgangur“: formin sem eru í boði beint í stiku Form-verkfærisins.
+✒️ Dessiner une nouvelle forme (dessin vectoriel) ¦ ✒️ Teikna nýtt form (vigurteikning)
+ou ✒️ sur une forme ci-dessous pour la reprendre : plume, points et poignées, Pathfinder, import SVG… ¦ eða ✒️ á formi hér fyrir neðan til að vinna það áfram: penni, punktar og handföng, Pathfinder, SVG-innflutningur…
+📚 Montrer aussi les 2 900 formes de la grande bibliothèque ¦ 📚 Sýna líka 2.900 form stóra safnsins
+lettres et chiffres, armoiries, cadres, étiquettes, drapeaux, symboles… (elles sont toujours dans la bibliothèque des tableaux ; ici, pour les cacher, les ranger ou les mettre dans l’accès rapide) ¦ stafir og tölur, skjaldarmerki, rammar, merki, fánar, tákn… (þau eru alltaf í safni taflnanna; hér til að fela þau, raða þeim eða setja þau í flýtiaðgang)
+Accès rapide ¦ Flýtiaðgangur
+Glisse une forme (ou ‹ ›) pour changer l’ordre ; ⚡ sur une forme ci-dessous l’ajoute ici ; ✏️ crée une forme à partir d’elle. ¦ Dragðu form (eða ‹ ›) til að breyta röðinni; ⚡ á formi hér fyrir neðan bætir því við hér; ✏️ býr til form út frá því.
+Des listes de polices à toi, proposées dans le choix de la police d’un texte. « Toutes les polices » ouvre la liste commune (polices de l’app et de l’ordinateur, chacune écrite dans sa police). ¦ Þínir eigin leturlistar, í boði þegar þú velur letur texta. „Allar leturgerðir“ opnar sameiginlega listann (leturgerðir appsins og tölvunnar, hver skrifuð í sínu letri).
+Aa Toutes les polices… ¦ Aa Allar leturgerðir…
+＋ Nouvelle liste ¦ ＋ Nýr listi
+＋ Ajouter une police… ¦ ＋ Bæta við leturgerð…
+De quelle taille à quelle taille vont les curseurs (épaisseur des traits et des contours : de 0,5 à 500 px ; texte : jusqu’à 500 px). La case de saisie à côté du curseur accepte toujours toute la plage. ¦ Frá hvaða stærð til hvaða stærðar sleðarnir ná (þykkt lína og útlína: frá 0,5 til 500 px; texti: allt að 500 px). Innsláttarreiturinn við hlið sleðans tekur alltaf við öllu sviðinu.
+Épaisseur mini ¦ Lágmarksþykkt
+Épaisseur maxi ¦ Hámarksþykkt
+Texte mini ¦ Lágmarksstærð texta
+Texte maxi ¦ Hámarksstærð texta
+Arrondi par défaut ¦ Sjálfgefin rúnnun
+Comment est un tableur quand tu le poses dans un tableau. ¦ Hvernig töflureiknir lítur út þegar þú setur hann á töflu.
+Titres des colonnes, séparés par ; ¦ Fyrirsagnir dálka, aðskildar með ;
+Tes pinceaux à toi : un pinceau de départ, une épaisseur, une opacité, une <strong>dureté</strong> (100 % = bord net ; plus bas = bord flou, comme dans Photoshop), une couleur si tu veux. Ils apparaissent en tête du menu des pinceaux. ¦ Þínir eigin penslar: upphafspensill, þykkt, ógegnsæi, <strong>harka</strong> (100 % = skörp brún; lægra = mjúk brún, eins og í Photoshop), litur ef þú vilt. Þeir birtast efst í valmynd penslanna.
+Mon pinceau ¦ Pensillinn minn
+Imposer une couleur ¦ Þvinga lit
+plein ¦ heil
+tirets ¦ strik
+longs tirets ¦ löng strik
+points ¦ punktar
+tiret-point ¦ strik-punktur
+＋ Nouveau pinceau ¦ ＋ Nýr pensill
+La place de chaque partie, puis l’ordre de tout ce qu’on voit dans un tableau ; décoche pour cacher. Glisse les lignes, ou ↑ ↓. ¦ Staðsetning hvers hluta, síðan röð alls þess sem sést í töflu; taktu hakið af til að fela. Dragðu línurnar, eða ↑ ↓.
+🧭 Disposition du tableau ¦ 🧭 Uppsetning töflunnar
+à gauche (en colonne) ¦ til vinstri (í dálki)
+à droite (en colonne) ¦ til hægri (í dálki)
+Réglages (texte, forme, trait…) ¦ Stillingar (texti, form, lína…)
+cachés (plus de place) ¦ faldar (meira pláss)
+Taille des boutons ¦ Stærð hnappa
+petits ¦ litlir
+normaux ¦ venjulegir
+grands ¦ stórir
+En-tête (titre, propriétaire, état) ¦ Haus (titill, eigandi, staða)
+complet ¦ fullur
+compact (une ligne) ¦ þéttur (ein lína)
+Outils (barre du haut) ¦ Verkfæri (efri stika)
+Boutons de l’en-tête ¦ Hnappar haussins
+↶ ↷ restent à côté du nom ; ⚙️ Personnaliser, ⤓ Exporter, ⛶ et × restent à droite, dans cet ordre (comme dans tous les éditeurs) : ici, tu peux seulement les montrer ou les cacher. ¦ ↶ ↷ eru áfram við hlið nafnsins; ⚙️ Sérsníða, ⤓ Flytja út, ⛶ og × eru áfram til hægri, í þessari röð (eins og í öllum ritlum): hér getur þú aðeins sýnt þá eða falið.
+Réglages à droite (texte, forme, trait…) ¦ Stillingar til hægri (texti, form, lína…)
+Menu « ＋ Ajouter » ¦ Valmyndin „＋ Bæta við“
+Réglages d’une légende de trait ¦ Stillingar línuskýringar
+Dans « Réglages de la légende » (choisis un trait). Les couleurs proposées : onglet 🎨 Couleurs. ¦ Í „Stillingar skýringar“ (veldu línu). Litirnir sem eru í boði: flipinn 🎨 Litir.
+Ce que proposent les tableaux (Enquêtes → Tableaux) : couleurs, pointes, formes, polices, tailles, tableur, pinceaux, et l’ordre des menus. ¦ Það sem töflurnar bjóða upp á (Athuganir → Töflur): litir, örvaroddar, form, leturgerðir, stærðir, töflureiknir, penslar og röð valmynda.
+Bibliothèque de formes ¦ Formasafn
+Chercher une forme… (arbre, croix, É, drapeau) ¦ Leita að formi… (tré, kross, É, fáni)
+Chercher une forme… ¦ Leita að formi…
+Chargement de toutes les formes… ¦ Hleð öll form…
+Les formes en plus n’ont pas pu être chargées. ¦ Ekki tókst að hlaða aukaformunum.
+⛔ Les formes en plus n’ont pas pu être chargées. ¦ ⛔ Ekki tókst að hlaða aukaformunum.
+Aucune forme pour « {q} ». Essaie un autre mot (maison, croix, lettre, drapeau…). ¦ Ekkert form fyrir „{q}“. Prófaðu annað orð (hús, kross, stafur, fáni…).
+Aucune forme dans cette catégorie. ¦ Ekkert form í þessum flokki.
+{n} · ↑ ↓ ← → pour choisir, Entrée pour prendre, / pour chercher ¦ {n} · ↑ ↓ ← → til að velja, Enter til að taka, / til að leita
+Formes (flèches pour choisir, Entrée pour prendre) ¦ Form (örvar til að velja, Enter til að taka)
+Large (16:9) ¦ Breitt (16:9)
+Standard (4:3) ¦ Hefðbundið (4:3)
+Vertical (téléphone) ¦ Lóðrétt (sími)
+Sur mesure… ¦ Sérsniðið…
+Comme l’application ¦ Eins og appið
+Ardoise ¦ Flís
+Parchemin ¦ Bókfell
+Aurore ¦ Dögun
+Tableau noir ¦ Krítartafla
+Titre et texte ¦ Titill og texti
+Titre et photo ¦ Titill og mynd
+Photo pleine page ¦ Heilsíðumynd
+Photo et texte ¦ Mynd og texti
+Deux colonnes ¦ Tveir dálkar
+Section ¦ Hluti
+Chiffre clé ¦ Lykiltala
+Double-clique pour écrire ¦ Tvísmelltu til að skrifa
+Légende de la photo ¦ Myndatexti
+« Une phrase qui compte » ¦ „Setning sem skiptir máli“
+Triangle rectangle ¦ Rétthyrndur þríhyrningur
+Pentagone ¦ Fimmhyrningur
+Octogone ¦ Átthyrningur
+Double flèche ¦ Tvöföld ör
+Chevron ¦ Vinkill
+Ligne fléchée ¦ Örvarlína
+Aucun (rectangle) ¦ Ekkert (rétthyrningur)
+Coins arrondis ¦ Ávöl horn
+Cercle / ovale ¦ Hringur / sporbaugur
+Arche (portrait ancien) ¦ Bogi (gömul andlitsmynd)
+Dissoudre ¦ Leysast upp
+Fondu par le noir ¦ Dofna í gegnum svart
+Glisser par-dessus ¦ Renna yfir
+Révéler ¦ Afhjúpa
+Balayage ¦ Strok
+Échanger ¦ Skipta
+Retourner ¦ Snúa við
+Cube ¦ Teningur
+Déplacement magique ¦ Töfrafærsla
+Apparition ¦ Birtast
+Fondu ¦ Dofna
+Arrivée (glisser) ¦ Koma inn (renna)
+Rebond ¦ Skoppa
+Chute ¦ Falla
+Machine à écrire (textes) ¦ Ritvél (textar)
+Trajectoire (déplacement) ¦ Hreyfiferill (færsla)
+depuis la gauche ¦ frá vinstri
+depuis la droite ¦ frá hægri
+depuis le haut ¦ að ofan
+depuis le bas ¦ að neðan
+Au clic ¦ Við smell
+Avec la précédente ¦ Með þeirri fyrri
+Après la précédente ¦ Á eftir þeirri fyrri
+Liaison ¦ Tenging
+liaison|Droite ¦ Bein
+liaison|En équerre ¦ Hornrétt
+liaison|Courbe ¦ Bogin
+Flèche au bout ¦ Ör í endann
+Flèches aux deux bouts ¦ Örvar í báðum endum
+Sans flèche ¦ Engin ör
+Union (les deux réunies) ¦ Sameining (bæði sameinuð)
+Soustraire (la 1re moins la 2e) ¦ Draga frá (1. mínus 2.)
+Intersection (ce qu’elles ont en commun) ¦ Skurðmengi (það sem þau eiga sameiginlegt)
+Choisis une personne (à droite, onglet Format) ¦ Veldu einstakling (til hægri, flipinn Snið)
+Aucun événement daté ¦ Enginn dagsettur atburður
+Double-clique pour choisir une image ¦ Tvísmelltu til að velja mynd
+Aucune diapositive à montrer (toutes sont sautées ?). ¦ Engin skyggna til að sýna (er þeim öllum sleppt?).
+Touches ¦ Lyklar
+<kbd>→</kbd> <kbd>espace</kbd> <kbd>clic</kbd> suivante · <kbd>←</kbd> précédente · <kbd>Début</kbd> <kbd>Fin</kbd> · un numéro puis <kbd>Entrée</kbd> : aller à la diapositive · <kbd>B</kbd> écran noir · <kbd>W</kbd> écran blanc · <kbd>L</kbd> pointeur laser · <kbd>P</kbd> présentateur · <kbd>Échap</kbd> quitter ¦ <kbd>→</kbd> <kbd>bilslá</kbd> <kbd>smellur</kbd> næsta · <kbd>←</kbd> fyrri · <kbd>Home</kbd> <kbd>End</kbd> · tala og svo <kbd>Enter</kbd>: fara á skyggnuna · <kbd>B</kbd> svartur skjár · <kbd>W</kbd> hvítur skjár · <kbd>L</kbd> leysibendill · <kbd>P</kbd> kynnir · <kbd>Esc</kbd> hætta
+Précédente (←) ¦ Fyrri (←)
+Suivante (→ ou espace) ¦ Næsta (→ eða bilslá)
+Fenêtre du présentateur : notes, suivante, chronomètre (P) ¦ Gluggi kynnis: minnispunktar, næsta, skeiðklukka (P)
+Pointeur laser (L) ¦ Leysibendill (L)
+Les touches (?) ¦ Lyklarnir (?)
+Quitter (Échap) ¦ Hætta (Esc)
+Fin de la présentation — clic ou → pour quitter ¦ Lok kynningarinnar — smelltu eða → til að hætta
+Encore {n} sur cette diapositive ¦ {n} í viðbót á þessari skyggnu
+présentation|Fin ¦ Lok
+Pas de notes pour cette diapositive (onglet 📝 Notes sous la diapositive). ¦ Engir minnispunktar fyrir þessa skyggnu (flipinn 📝 Minnispunktar undir skyggnunni).
+La fenêtre du présentateur a été bloquée : autorise les fenêtres surgissantes pour cette page. ¦ Gluggi kynnis var stöðvaður: leyfðu sprettiglugga fyrir þessa síðu.
+Présentateur ¦ Kynnir
+Arrêter / reprendre le chronomètre ¦ Stöðva / halda áfram með skeiðklukkuna
+Remettre le chronomètre à zéro ¦ Núllstilla skeiðklukkuna
+Heure : ¦ Klukkan:
+Ensuite ¦ Næst
+‹ Précédente ¦ ‹ Fyrri
+Suivante › ¦ Næsta ›
+Écran noir ¦ Svartur skjár
+Écran blanc ¦ Hvítur skjár
+Touches : → ← espace, B, W, Échap ¦ Lyklar: → ← bilslá, B, W, Esc
+Terminer ¦ Ljúka
+Diapositive précédente ¦ Fyrri skyggna
+Diapositive suivante ¦ Næsta skyggna
+Quitter la présentation ¦ Hætta kynningunni
+PRÉSENTATION ¦ KYNNING
+La personne affichée en ce moment, ou × pour en chercher une autre. ¦ Einstaklingurinn sem er sýndur núna, eða × til að leita að öðrum.
+Une vidéo ou un son ¦ Myndskeið eða hljóð
+La fenêtre des médias n’est pas encore prête. Réessaie dans un instant. ¦ Miðlaglugginn er ekki tilbúinn enn. Reyndu aftur eftir augnablik.
+Police de l’ordinateur ¦ Leturgerð tölvunnar
+Ce navigateur ne sait pas lister les polices : tape le nom exact d’une police installée (ex. Garamond) : ¦ Þessi vafri getur ekki birt lista yfir leturgerðir: sláðu inn nákvæmt nafn uppsettrar leturgerðar (t.d. Garamond):
+L’ordinateur n’a donné aucune police : tape son nom dans la fenêtre. ¦ Tölvan gaf enga leturgerð: sláðu inn nafn hennar í glugganum.
+Les polices de l’ordinateur ne sont pas lisibles ici : tape le nom d’une police dans la fenêtre. ¦ Ekki er hægt að lesa leturgerðir tölvunnar hér: sláðu inn nafn leturgerðar í glugganum.
+🖥 Choisir une police ¦ 🖥 Velja leturgerð
+Pour les titres ¦ Fyrir fyrirsagnir
+Pour les textes ¦ Fyrir texta
+Pour le texte choisi ¦ Fyrir valinn texta
+Chercher une police, ou taper son nom… ¦ Leita að leturgerð, eða sláðu inn nafn hennar…
+{n} de cet ordinateur, puis celles de l’app. Clique sur une police, puis dis où elle va. ¦ {n} úr þessari tölvu, svo þær úr appinu. Smelltu á leturgerð og segðu svo hvert hún á að fara.
+Les polices de l’app ; une autre police installée : tape son nom exact puis Entrée. Clique sur une police, puis dis où elle va. ¦ Leturgerðir appsins; önnur uppsett leturgerð: sláðu inn nákvæmt nafn hennar og svo Enter. Smelltu á leturgerð og segðu svo hvert hún á að fara.
+Aucune police « {q} » dans la liste : Entrée pour la prendre telle quelle. ¦ Engin leturgerð „{q}“ í listanum: Enter til að taka hana eins og hún er.
+Portez ce vieux whisky au juge blond qui fume ¦ Kæmi ný öxi hér, ykist þjófum nú bæði víl og ádrepa
+Choisis une police ¦ Veldu leturgerð
+Clique d’abord sur une police. ¦ Smelltu fyrst á leturgerð.
+Ma présentation ¦ Kynningin mín
+⤒ Importer (PowerPoint, OpenDocument, PDF, images, texte, JSON)… ¦ ⤒ Flytja inn (PowerPoint, OpenDocument, PDF, myndir, texti, JSON)…
+🖨 PDF / imprimer (une diapositive par page) ¦ 🖨 PDF / prenta (ein skyggna á síðu)
+🖨 PDF avec les notes de l’orateur ¦ 🖨 PDF með minnispunktum fyrirlesara
+🖼️ Cette diapositive en PNG ¦ 🖼️ Þessi skyggna sem PNG
+🗂️ Toutes les diapositives en PNG (.zip) ¦ 🗂️ Allar skyggnur sem PNG (.zip)
+⏺ Vidéo (WebM) ¦ ⏺ Myndskeið (WebM)
+⤓ Fichier de la présentation (.json) ¦ ⤓ Skrá kynningarinnar (.json)
+Nom de la présentation ¦ Nafn kynningarinnar
+Annuler / rétablir ¦ Afturkalla / endurgera
+↶ Annuler (⌘Z) ¦ ↶ Afturkalla (⌘Z)
+↷ Rétablir (⇧⌘Z) ¦ ↷ Endurgera (⇧⌘Z)
+Insérer (barre du haut) ¦ Setja inn (efri stika)
+Une zone de texte ¦ Textareitur
+◆ Formes ¦ ◆ Form
+Une forme ¦ Form
+Une photo des médias ou de l’ordinateur ¦ Mynd úr miðlunum eða tölvunni
+Un graphique (colonnes, camembert, courbe…) ¦ Graf (súlur, kaka, lína…)
+👤 Généalogie (fiche, portrait, arbre, frise) ¦ 👤 Ættfræði (spjald, andlitsmynd, tré, tímalína)
+La généalogie : une personne de la base ¦ Ættfræðin: einstaklingur úr gagnagrunninum
+🪪 Fiche d’une personne ¦ 🪪 Spjald einstaklings
+🖼️ Portrait d’une personne ¦ 🖼️ Andlitsmynd einstaklings
+🌳 Petit arbre (parents, couple, enfants) ¦ 🌳 Lítið tré (foreldrar, hjón, börn)
+🗓️ Frise de sa vie ¦ 🗓️ Tímalína ævinnar
+Vidéo / son ¦ Myndskeið / hljóð
+Une vidéo ou un son des médias ¦ Myndskeið eða hljóð úr miðlunum
+Disposer (barre du haut) ¦ Raða (efri stika)
+⇤⇥ Aligner et répartir ¦ ⇤⇥ Jafna og dreifa
+⇤ À gauche ¦ ⇤ Til vinstri
+↔ Au centre ¦ ↔ Í miðju
+⇥ À droite ¦ ⇥ Til hægri
+⤒ En haut ¦ ⤒ Efst
+↕ Au milieu ¦ ↕ Í miðjunni
+⤓ En bas ¦ ⤓ Neðst
+⟷ Répartir horizontalement ¦ ⟷ Dreifa lárétt
+⟷ Répartir verticalement ¦ ⟷ Dreifa lóðrétt
+⧉ Ordre (devant, derrière) ¦ ⧉ Röð (fremst, aftast)
+Devant, derrière ¦ Fremst, aftast
+Tout devant (⇧⌘]) ¦ Alveg fremst (⇧⌘])
+Avancer (⌘]) ¦ Færa framar (⌘])
+Reculer (⌘[) ¦ Færa aftar (⌘[)
+Tout derrière (⇧⌘[) ¦ Alveg aftast (⇧⌘[)
+Grouper (⌘G) — ⇧⌘G pour dissocier ¦ Flokka saman (⌘G) — ⇧⌘G til að leysa upp
+Dissocier ¦ Leysa upp hóp
+Dissocier (⇧⌘G) ¦ Leysa upp hóp (⇧⌘G)
+Verrouiller / déverrouiller (⌘L) ¦ Læsa / opna lás (⌘L)
+Relier deux objets par un trait qui les suit (choisis-en deux) ¦ Tengja tvo hluti með línu sem fylgir þeim (veldu tvo)
+Fusionner deux formes : union, soustraction, intersection ¦ Sameina tvö form: sameining, frádráttur, skurðmengi
+Masque des diapositives : mettre les objets choisis sur toutes les diapositives, ou modifier le masque ¦ Skyggnumát: setja valda hluti á allar skyggnur, eða breyta mátinu
+Lire en plein écran depuis le début (⌥⌘↩) ¦ Spila á öllum skjánum frá byrjun (⌥⌘↩)
+D’ici ¦ Héðan
+Lire depuis cette diapositive (⌘↩) ¦ Spila frá þessari skyggnu (⌘↩)
+Plein écran + fenêtre du présentateur (notes, suivante, chronomètre) ¦ Allur skjárinn + gluggi kynnis (minnispunktar, næsta, skeiðklukka)
+PowerPoint, OpenDocument, PDF, images, Markdown, texte, JSON ¦ PowerPoint, OpenDocument, PDF, myndir, Markdown, texti, JSON
+Récit d’une vie : des diapositives toutes faites à partir de la fiche d’une personne ¦ Ævisaga: tilbúnar skyggnur út frá spjaldi einstaklings
+PDF, impression, images, vidéo, fichier de la présentation ¦ PDF, prentun, myndir, myndskeið, skrá kynningarinnar
+Une forme (les autres : menu ◆ Forme en haut) ¦ Form (hin: valmyndin ◆ Form efst)
+Une image (médias ou ordinateur) ¦ Mynd (miðlar eða tölva)
+La fiche d’une personne ¦ Spjald einstaklings
+Présentateur : plein écran, notes, chronomètre ¦ Kynnir: allur skjárinn, minnispunktar, skeiðklukka
+Diapositives (au-dessus de la liste) ¦ Skyggnur (fyrir ofan listann)
+Nouvelle diapositive ¦ Ný skyggna
+＋ Diapositive ¦ ＋ Skyggna
+▾ Choisir la disposition ¦ ▾ Velja uppsetningu
+Choisir la disposition ¦ Velja uppsetningu
+Dupliquer la diapositive (pour un déplacement magique) ¦ Tvöfalda skyggnuna (fyrir töfrafærslu)
+Sauter / ne plus sauter à la lecture ¦ Sleppa / hætta að sleppa í spilun
+Commencer une section (un groupe de diapositives) ici ¦ Hefja hluta (hóp skyggna) hér
+Supprimer la diapositive ¦ Eyða skyggnunni
+Diapositive précédente (Page précédente) ¦ Fyrri skyggna (Page Up)
+Diapositive suivante (Page suivante) ¦ Næsta skyggna (Page Down)
+Ajuster ¦ Laga að
+Les objets se calent sur les bords, le centre et les autres objets (⌘ en glissant : sans aimant) ¦ Hlutir grípa í brúnir, miðju og aðra hluti (⌘ meðan þú dregur: án grips)
+Notes de l’orateur ¦ Minnispunktar fyrirlesara
+📝 Notes ¦ 📝 Minnispunktar
+Notes de l’orateur : ce que tu veux dire sur cette diapositive (vues seulement dans la fenêtre du présentateur, et dans le PDF avec notes)… ¦ Minnispunktar fyrirlesara: það sem þú vilt segja um þessa skyggnu (sést aðeins í glugga kynnis og í PDF með minnispunktum)…
+Onglets de l’inspecteur (à droite) ¦ Flipar eftirlitsins (til hægri)
+Format de l’objet choisi ¦ Snið valins hlutar
+Animer ¦ Hreyfa
+Transition et animations ¦ Skipting og hreyfingar
+Diapo ¦ Skyggna
+La diapositive : disposition, fond, durée, notes ¦ Skyggnan: uppsetning, bakgrunnur, tímalengd, minnispunktar
+Les objets de la diapositive (devant, derrière, cacher, verrouiller) ¦ Hlutir skyggnunnar (fremst, aftast, fela, læsa)
+Thème, polices, format, musique ¦ Þema, leturgerðir, snið, tónlist
+Clic : choisir un objet (⇧ : en plus) · double-clic : écrire dedans · glisser : déplacer · poignées : agrandir · rond : tourner ¦ Smellur: velja hlut (⇧: bæta við) · tvísmellur: skrifa í hann · draga: færa · handföng: breyta stærð · hringur: snúa
+Aimanter : les objets se calent sur les bords, le centre et les autres objets (⌘ en glissant : sans aimant) ¦ Grípa: hlutir grípa í brúnir, miðju og aðra hluti (⌘ meðan þú dregur: án grips)
+Replier / déplier la section ¦ Fella saman / fletta út hlutanum
+Sautée à la lecture ¦ Sleppt í spilun
+Animations ¦ Hreyfingar
+Transition : {name} ¦ Skipting: {name}
+Tourner (⇧ : de 15° en 15°) ¦ Snúa (⇧: um 15° í einu)
+Choisis une zone de texte. ¦ Veldu textareit.
+Le petit arbre de quelle personne ? ¦ Litla tréð fyrir hvaða einstakling?
+La frise de la vie de qui ? ¦ Tímalína ævi hvers?
+Lecture de la fiche… ¦ Les spjaldið…
+Changer la vidéo ou le son ¦ Skipta um myndskeið eða hljóð
+Choisis un ou plusieurs objets. ¦ Veldu einn eða fleiri hluti.
+Choisis au moins trois objets pour les répartir. ¦ Veldu að minnsta kosti þrjá hluti til að dreifa þeim.
+Choisis au moins deux objets à grouper. ¦ Veldu að minnsta kosti tvo hluti til að flokka saman.
+Choisis deux objets (⇧ clic) : un trait les reliera, et les suivra quand tu les déplaces. ¦ Veldu tvo hluti (⇧ smellur): lína mun tengja þá og fylgja þeim þegar þú færir þá.
+Choisis deux formes (⇧ clic) à fusionner. ¦ Veldu tvö form (⇧ smellur) til að sameina.
+⊕ Fusionner deux formes ¦ ⊕ Sameina tvö form
+La 1re forme est celle du dessous. Les deux restent gardées dans la nouvelle forme. ¦ Fyrsta formið er það sem er undir. Bæði haldast í nýja forminu.
+Comment ¦ Hvernig
+🗂 Sur toutes les diapositives (masque). Dans un texte, « {a} » donne le numéro de la diapositive et « {b} » leur nombre. 🗂 sans rien choisir : le modifier. ¦ 🗂 Á öllum skyggnum (mát). Í texta gefur „{a}“ númer skyggnunnar og „{b}“ fjölda þeirra. 🗂 þegar ekkert er valið: breyta því.
+Le masque est vide : choisis des objets (logo, pied de page, numéro « {a} »…) puis 🗂 pour les mettre sur toutes les diapositives. ¦ Mátið er autt: veldu hluti (merki, síðufót, númer „{a}“…) og svo 🗂 til að setja þá á allar skyggnur.
+🗂 Masque des diapositives ¦ 🗂 Skyggnumát
+{n} sur toutes les diapositives. ¦ {n} á öllum skyggnum.
+Que faire ¦ Hvað á að gera
+Les ramener sur cette diapositive pour les modifier (puis 🗂 pour les remettre) ¦ Færa þá aftur á þessa skyggnu til að breyta þeim (svo 🗂 til að setja þá aftur)
+Remontrer le masque sur cette diapositive ¦ Sýna mátið aftur á þessari skyggnu
+Ne pas montrer le masque sur cette diapositive ¦ Ekki sýna mátið á þessari skyggnu
+Vider le masque ¦ Tæma mátið
+Diapositive dupliquée : déplace les objets puis choisis la transition « Déplacement magique » (onglet ✨ Animer). ¦ Skyggna tvöfölduð: færðu hlutina og veldu svo skiptinguna „Töfrafærsla“ (flipinn ✨ Hreyfa).
+Aucune couleur ¦ Enginn litur
+Choisir la police (recherche, récentes, polices de l’ordinateur) ¦ Velja leturgerð (leit, nýlegar, leturgerðir tölvunnar)
+{what} (sur la diapositive) ¦ {what} (á skyggnunni)
+Les réglages vont au texte sélectionné (sinon à tout le texte). ¦ Stillingarnar gilda um valda textann (annars um allan textann).
+Double-clic dans le texte pour l’écrire ; les réglages vont à tout le texte, ou au morceau sélectionné. ¦ Tvísmelltu í textann til að skrifa hann; stillingarnar gilda um allan textann, eða um valda hlutann.
+Le trait suit les deux objets quand on les déplace. ¦ Línan fylgir báðum hlutunum þegar þeir eru færðir.
+Double-clic sur une case du tableau pour l’écrire directement. ¦ Tvísmelltu á reit í töflunni til að skrifa beint í hann.
+Ce qui est montré vient de la fiche (relue le {date}) : la présentation se lit même sans la base. « Relire la fiche » la met à jour. ¦ Það sem er sýnt kemur af spjaldinu (lesið {date}): kynningin virkar jafnvel án gagnagrunnsins. „Lesa spjaldið aftur“ uppfærir það.
+(groupe) ¦ (hópur)
+Choisis un objet sur la diapositive (clic) ou insère-en un (barre du haut). ⇧ clic : en choisir plusieurs ; glisser sur le fond : un rectangle de sélection ; double-clic : écrire dans un texte, changer une image ; ⌥ en glissant : copier. ¦ Veldu hlut á skyggnunni (smellur) eða settu inn hlut (efri stika). ⇧ smellur: velja marga; draga á bakgrunninum: valrétthyrningur; tvísmellur: skrifa í texta, skipta um mynd; ⌥ meðan þú dregur: afrita.
+Inspecteur : sections de « Format » ¦ Eftirlit: hlutar „Snið“
+Inspecteur : sections de « Animer » ¦ Eftirlit: hlutar „Hreyfa“
+Inspecteur : sections de « Diapositive » ¦ Eftirlit: hlutar „Skyggna“
+Inspecteur : « Objets » ¦ Eftirlit: „Hlutir“
+Inspecteur : sections de « Document » ¦ Eftirlit: hlutar „Skjal“
+C’est la première diapositive : sa transition ne joue que si la lecture recommence en boucle. ¦ Þetta er fyrsta skyggnan: skipting hennar spilast aðeins ef spilunin byrjar aftur í lykkju.
+✨ Les objets présents sur la diapositive d’avant et sur celle-ci (diapositive dupliquée avec ⧉, ou objets portant le même nom) glissent, grandissent et tournent d’une place à l’autre ; les autres apparaissent ou s’effacent. ¦ ✨ Hlutir sem eru á fyrri skyggnunni og á þessari (skyggna tvöfölduð með ⧉, eða hlutir með sama nafni) renna, stækka og snúast frá einum stað til annars; hinir birtast eða dofna.
+Aucune : il est là dès l’arrivée de la diapositive. ¦ Engin: hann er þar um leið og skyggnan birtist.
+Choisis un objet sur la diapositive pour le faire apparaître (entrée) ou disparaître (sortie), au clic ou tout seul. ¦ Veldu hlut á skyggnunni til að láta hann birtast (inngangur) eða hverfa (útgangur), við smell eða sjálfkrafa.
+Pas encore d’animation sur cette diapositive. ¦ Engin hreyfing á þessari skyggnu enn.
+Changer de disposition replace les objets « titre », « texte », « photo » ; ce que tu as écrit est gardé. ¦ Að skipta um uppsetningu færir hlutina „titill“, „texti“, „mynd“; það sem þú skrifaðir helst.
+Ce que tu veux dire sur cette diapositive (vu dans la fenêtre du présentateur)… ¦ Það sem þú vilt segja um þessa skyggnu (sést í glugga kynnis)…
+Objets de la diapositive ¦ Hlutir skyggnunnar
+Objets (le premier est devant) ¦ Hlutir (sá fyrsti er fremst)
+Dans un groupe ¦ Í hópi
+Aucun objet sur cette diapositive pour l’instant ¦ Enginn hlutur á þessari skyggnu enn
+Insère un texte, une image… avec la barre du haut. ¦ Settu inn texta, mynd… með efri stikunni.
+Celle du thème ({font}) ¦ Letur þemans ({font})
+{w} × {h} points. En changeant de format, les objets sont agrandis ou réduits ensemble. ¦ {w} × {h} punktar. Þegar sniðinu er breytt eru hlutirnir stækkaðir eða minnkaðir saman.
+{n} dont {skipped} · {time} en lecture toute seule (durées des diapositives). ¦ {n} þar af {skipped} · {time} í sjálfvirkri spilun (tímalengd skyggna).
+{n} · {time} en lecture toute seule (durées des diapositives). ¦ {n} · {time} í sjálfvirkri spilun (tímalengd skyggna).
+Il n’y a pas de diapositive avant celle-ci. ¦ Það er engin skyggna á undan þessari.
+Choisis d’abord un effet de transition. ¦ Veldu fyrst skiptingaráhrif.
+Les dernières modifications de la présentation seront perdues. ¦ Síðustu breytingar á kynningunni glatast.
+Fermer sans enregistrer la présentation ? ¦ Loka kynningunni án þess að vista?
+une diapositive par page (« Enregistrer en PDF ») ¦ ein skyggna á síðu („Vista sem PDF“)
+📝 PDF + notes ¦ 📝 PDF + minnispunktar
+avec les notes de l’orateur ¦ með minnispunktum fyrirlesara
+🗂 Toutes en PNG ¦ 🗂 Allar sem PNG
+un fichier .zip ¦ .zip-skrá
+WebM, avec la musique ¦ WebM, með tónlistinni
+aperçu, pages, notes ¦ forskoðun, síður, minnispunktar
+pour la rouvrir ou la partager ¦ til að opna hana aftur eða deila henni
+Le diaporama n’est pas chargé. ¦ Myndasýningin er ekki hlaðin.
+Ajouter le récit ¦ Bæta við frásögninni
+Rien à raconter pour cette personne. ¦ Ekkert að segja frá um þennan einstakling.
+{n} : chaque texte vient de la fiche. Les cartes animées restent dans le diaporama. ¦ {n}: hver texti kemur af spjaldinu. Hreyfikort verða áfram í myndasýningunni.
+Titre de la section qui commence à cette diapositive (vide : pas de section) : ¦ Titill hlutans sem byrjar á þessari skyggnu (autt: enginn hluti):
+Police « {font} » pour le texte choisi. ¦ Leturgerðin „{font}“ fyrir valinn texta.
+Police « {font} » pour les titres. ¦ Leturgerðin „{font}“ fyrir fyrirsagnir.
+Police « {font} » pour les textes. ¦ Leturgerðin „{font}“ fyrir texta.
+L’image est maintenant le fond de la diapositive (onglet 🖼 Diapositive). ¦ Myndin er nú bakgrunnur skyggnunnar (flipinn 🖼 Skyggna).
+Cette transition va maintenant à toutes les diapositives. ¦ Þessi skipting gildir nú um allar skyggnur.
+L’image du fond ¦ Bakgrunnsmyndin
+Ce fond va maintenant à toutes les diapositives. ¦ Þessi bakgrunnur gildir nú um allar skyggnur.
+Une musique pendant la lecture ¦ Tónlist meðan á spilun stendur
+Choisis un son (MP3, M4A, WAV…). ¦ Veldu hljóð (MP3, M4A, WAV…).
+{name} : ni une image, ni une vidéo, ni un son. ¦ {name}: hvorki mynd, myndskeið né hljóð.
+Diapositive copiée : ⌘V pour la coller. ¦ Skyggna afrituð: ⌘V til að líma hana.
+ce n’est pas un fichier zip valide (pptx, odp) ¦ þetta er ekki gild zip-skrá (pptx, odp)
+un élément du fichier est trop gros ¦ eining í skránni er of stór
+fichier refusé : il contient des déclarations XML (DOCTYPE ou ENTITY) ¦ skrá hafnað: hún inniheldur XML-yfirlýsingar (DOCTYPE eða ENTITY)
+XML illisible dans le fichier ¦ ólæsilegt XML í skránni
+ce n’est pas une présentation PowerPoint (.pptx) ¦ þetta er ekki PowerPoint-kynning (.pptx)
+aucune diapositive trouvée ¦ engin skyggna fannst
+{n} dans un format que le navigateur ne lit pas (EMF, WMF…) ont été laissées de côté. ¦ {n} á sniði sem vafrinn les ekki (EMF, WMF…) var sleppt.
+ce n’est pas un fichier OpenDocument (.odp) ¦ þetta er ekki OpenDocument-skrá (.odp)
+{n} de côté. ¦ {n} sleppt.
+ce n’est pas un PDF ¦ þetta er ekki PDF
+aucune image (scan, photo) n’a été trouvée dans ce PDF. Son texte et ses dessins ne peuvent pas être lus ici : exporte-le plutôt en images, ou en PowerPoint depuis le logiciel qui l’a fait ¦ engin mynd (skönnun, ljósmynd) fannst í þessari PDF-skrá. Texta hennar og teikningar er ekki hægt að lesa hér: fluttu hana frekar út sem myndir, eða sem PowerPoint úr forritinu sem bjó hana til
+PDF : {n} ; le texte et les dessins du PDF ne sont pas lus. ¦ PDF: {n}; texti og teikningar PDF-skrárinnar eru ekki lesin.
+Carte du diaporama : le trajet animé reste dans le diaporama. ¦ Kort myndasýningarinnar: hreyfða leiðin verður áfram í myndasýningunni.
+ce n’est pas une présentation de l’app ¦ þetta er ekki kynning úr appinu
+{name} : Keynote garde ses fichiers dans un format fermé. Dans Keynote : Fichier → Exporter vers → PowerPoint (ou PDF, ou Images), puis importe ce fichier ici. ¦ {name}: Keynote geymir skrár sínar á lokuðu sniði. Í Keynote: File → Export To → PowerPoint (eða PDF, eða Images), fluttu svo þá skrá inn hér.
+{name} : l’ancien format PowerPoint (avant 2007) ne se lit pas ici ; ouvre-le et enregistre-le en .pptx. ¦ {name}: gamla PowerPoint-sniðið (fyrir 2007) er ekki hægt að lesa hér; opnaðu skrána og vistaðu hana sem .pptx.
+fichier trop gros (400 Mo au plus) ¦ skráin er of stór (400 MB í mesta lagi)
+{name} : format non reconnu. ¦ {name}: snið þekkist ekki.
+{name} : rien à importer. ¦ {name}: ekkert að flytja inn.
+IMPORT ¦ INNFLUTNINGUR
+Rien n’a été importé ¦ Ekkert var flutt inn
+Remplacer les diapositives actuelles (sinon : ajoutées après la diapositive affichée) ¦ Skipta út núverandi skyggnum (annars: bætt við á eftir skyggnunni sem er sýnd)
+<b>PowerPoint (.pptx)</b> et <b>OpenDocument / LibreOffice Impress (.odp)</b> : chaque diapositive avec ses textes (à leur place, taille, gras, couleur, listes), ses images, ses formes simples, ses tableaux, ses graphiques, ses notes et ses transitions. ¦ <b>PowerPoint (.pptx)</b> og <b>OpenDocument / LibreOffice Impress (.odp)</b>: hver skyggna með textum sínum (á sínum stað, stærð, feitletrun, litur, listar), myndum, einföldum formum, töflum, gröfum, minnispunktum og skiptingum.
+<b>Keynote (.key)</b> : le format d’Apple est fermé. Dans Keynote : Fichier → Exporter vers → <b>PowerPoint</b> (ou PDF, ou Images), puis importe ce fichier ici. ¦ <b>Keynote (.key)</b>: snið Apple er lokað. Í Keynote: File → Export To → <b>PowerPoint</b> (eða PDF, eða Images), fluttu svo þá skrá inn hér.
+<b>PDF</b> : les images qu’il contient (scans, photos) deviennent des diapositives, une par image. Le texte et les dessins d’un PDF ne se lisent pas ici : pour une présentation, exporte-la plutôt en PowerPoint ou en images. ¦ <b>PDF</b>: myndirnar sem hún inniheldur (skannanir, ljósmyndir) verða að skyggnum, ein á hverja mynd. Texta og teikningar PDF-skrár er ekki hægt að lesa hér: fyrir kynningu skaltu frekar flytja hana út sem PowerPoint eða myndir.
+<b>Images</b> (JPG, PNG, WEBP, GIF, BMP…), plusieurs à la fois : une diapositive « photo pleine page » par image. ¦ <b>Myndir</b> (JPG, PNG, WEBP, GIF, BMP…), margar í einu: ein skyggna „heilsíðumynd“ á hverja mynd.
+<b>Markdown (.md) ou texte (.txt)</b> : « # Titre » commence une diapositive, « - » fait une puce, « --- » sépare deux diapositives, « > » une citation, « Notes: » les notes de l’orateur. Un texte simple : un paragraphe par diapositive. ¦ <b>Markdown (.md) eða texti (.txt)</b>: „# Titill“ byrjar skyggnu, „-“ býr til punkt, „---“ aðskilur tvær skyggnur, „>“ tilvitnun, „Notes:“ minnispunktar fyrirlesara. Einfaldur texti: ein málsgrein á hverja skyggnu.
+<b>JSON</b> : une présentation (ou un diaporama) exportée par l’app. ¦ <b>JSON</b>: kynning (eða myndasýning) sem appið flutti út.
+Aucune diapositive à imprimer. ¦ Engin skyggna til að prenta.
+Diapositive ¦ Skyggna
+Pas de notes. ¦ Engir minnispunktar.
+{name} — présentation ¦ {name} — kynning
+Les diapositives ¦ Skyggnurnar
+Les diapositives avec les notes du présentateur ¦ Skyggnurnar með minnispunktum kynnis
+Les notes seules (texte) ¦ Aðeins minnispunktarnir (texti)
+Diapositives par page ¦ Skyggnur á síðu
+Numéros des diapositives ¦ Númer skyggna
+Les diapositives masquées aussi ¦ Faldar skyggnur líka
+aucune diapositive ¦ engin skyggna
+Préparation de {n} images… ¦ Undirbý {n} myndir…
+Préparation de l’image… ¦ Undirbý myndina…
+ce navigateur ne sait pas enregistrer de vidéo ¦ þessi vafri getur ekki tekið upp myndskeið
+La vidéo rejoue la présentation en entier ({time}, durées de l’onglet 🖼 Diapositive) et l’enregistre. Laisse la fenêtre ouverte. ¦ Myndskeiðið spilar alla kynninguna aftur ({time}, tímalengd úr flipanum 🖼 Skyggna) og tekur hana upp. Hafðu gluggann opinn.
+Fabriquer la vidéo ? ¦ Búa til myndskeiðið?
+Fabriquer la vidéo ¦ Búa til myndskeiðið
+Préparation : {n} / {total} ¦ Undirbúningur: {n} / {total}
+Vidéo : {n} % ¦ Myndskeið: {n} %
+Vidéo arrêtée : la présentation a été fermée pendant l’enregistrement. ¦ Myndskeið stöðvað: kynningunni var lokað meðan á upptöku stóð.
+la vidéo est vide : l’enregistrement n’a pas pu se faire dans ce navigateur ¦ myndskeiðið er tómt: upptakan tókst ekki í þessum vafra
+La vidéo est vide : l’enregistrement n’a pas pu se faire dans ce navigateur. ¦ Myndskeiðið er tómt: upptakan tókst ekki í þessum vafra.
+Vidéo téléchargée et rangée dans les Médias. ¦ Myndskeið sótt og geymt í Miðlum.
+Tu peux l’ajouter aux Médias de l’app, ou seulement la télécharger. ¦ Þú getur bætt því við Miðla appsins, eða aðeins sótt það.
+Vidéo prête ¦ Myndskeiðið er tilbúið
+Ajouter aux Médias ¦ Bæta við Miðla
+Télécharger seulement ¦ Aðeins sækja
+Vidéo ajoutée aux Médias. ¦ Myndskeiði bætt við Miðla.
+Vidéo impossible : {error} ¦ Myndskeið ekki mögulegt: {error}
+NOUVELLE PRÉSENTATION ¦ NÝ KYNNING
+🎤 Choisis un thème ¦ 🎤 Veldu þema
+Créer la présentation ¦ Búa til kynninguna
+Le thème, les couleurs, les polices et le format se changent ensuite (onglet ⚙️ Document). Pour partir d’un PowerPoint, d’un OpenDocument, d’un PDF ou de photos : « ⤒ Importer ». ¦ Þema, litum, leturgerðum og sniði má breyta síðar (flipinn ⚙️ Skjal). Til að byrja út frá PowerPoint, OpenDocument, PDF eða myndum: „⤒ Flytja inn“.
+⤒ Importer une présentation ¦ ⤒ Flytja inn kynningu
+Thème au départ ¦ Upphafsþema
+Format au départ ¦ Upphafssnið
+Transition des nouvelles diapositives ¦ Skipting nýrra skyggna
+Disposition de « ＋ Diapositive » ¦ Uppsetning „＋ Skyggna“
+Aimanter les objets (guides) ¦ Grípa hluti (hjálparlínur)
+Couleur du pointeur laser ¦ Litur leysibendils
+↺ Réglages de départ ¦ ↺ Upphafsstillingar
+Réglages de départ. ¦ Upphafsstillingar.
+Les boutons du haut, les onglets et les sections de l’inspecteur se rangent, se montrent ou se cachent dans « Boutons et options » (éditeur 🎤 Présentation), avec ses raccourcis clavier. ¦ Efri hnöppunum, flipunum og hlutum eftirlitsins er raðað, þeir sýndir eða faldir í „Hnappar og valkostir“ (ritillinn 🎤 Kynning), ásamt flýtilyklum hans.
+{name} (présentation) ¦ {name} (kynning)
+Diaporama ¦ Myndasýning
+Nom (pour le déplacement magique) ¦ Nafn (fyrir töfrafærslu)
+⇋ Miroir ¦ ⇋ Spegla
+⇵ Miroir ¦ ⇵ Spegla
+Retourner de gauche à droite ¦ Spegla frá vinstri til hægri
+Retourner de haut en bas ¦ Spegla ofan frá og niður
+⤢ Proportions de la photo ¦ ⤢ Hlutföll myndarinnar
+Tout devant ¦ Alveg fremst
+Tout derrière ¦ Alveg aftast
+Grouper (⌘G) ¦ Flokka saman (⌘G)
+Déverrouiller (⌘L) ¦ Opna lás (⌘L)
+Verrouiller (⌘L) ¦ Læsa (⌘L)
+Dupliquer (⌘D) ¦ Tvöfalda (⌘D)
+Supprimer (⌫) ¦ Eyða (⌫)
+Selon le rôle ¦ Eftir hlutverki
+Légère ¦ Létt
+Normale ¦ Venjulegt
+Demi-grasse ¦ Hálffeitt
+Grasse ¦ Feitt
+Extra-grasse ¦ Extra feitt
+Noire ¦ Svart
+bouton|<b>G</b> ¦ <b>F</b>
+bouton|<i>I</i> ¦ <i>S</i>
+bouton|<u>S</u> ¦ <u>U</u>
+bouton|<s>B</s> ¦ <s>Y</s>
+Gras (⌘B) ¦ Feitletrað (⌘B)
+Italique (⌘I) ¦ Skáletrað (⌘I)
+Souligné (⌘U) ¦ Undirstrikað (⌘U)
+Exposant (1<sup>er</sup>) ¦ Brjóstletur (1<sup>.</sup>)
+Retrait (sous-liste) ¦ Inndráttur (undirlisti)
+Moins de retrait ¦ Minni inndráttur
+En haut de la zone ¦ Efst í svæðinu
+Au milieu de la zone ¦ Í miðju svæðinu
+En bas de la zone ¦ Neðst í svæðinu
+Couleur d’accent du thème ¦ Áherslulitur þemans
+Texte dans la forme ¦ Texti í forminu
+Couleur (fond et bordure) ¦ Litur (fylling og jaðar)
+Bordure ¦ Jaðar
+Points ¦ Punktar
+Coins ¦ Horn
+Forme sans fond. ¦ Form án fyllingar.
+Pas de fond (∅). ¦ Engin fylling (∅).
+Pas de bordure (∅). ¦ Enginn jaðar (∅).
+🖼️ Changer l’image… ¦ 🖼️ Skipta um mynd…
+🖼️ Choisir l’image… ¦ 🖼️ Velja mynd…
+🖼 En fond de diapositive ¦ 🖼 Sem bakgrunnur glæru
+Cadrage ¦ Skurður
+Remplir (rogner) ¦ Fylla (skera)
+Photo entière ¦ Öll myndin
+Étirer ¦ Teygja
+Masque (forme) ¦ Gríma (form)
+La photo est découpée dans cette forme : rond, arrondi, étoile, cœur… sans toucher à la photo d’origine. ¦ Myndin er skorin í þetta form: hringur, ávöl horn, stjarna, hjarta… án þess að snerta upprunalegu myndina.
+Zoom (rogner) ¦ Aðdráttur (skera)
+Agrandit la photo dans son cadre ; « Cadrer ↔ ↕ » choisit ensuite quelle partie on voit. ¦ Stækkar myndina innan rammans; „Hliðra ↔ ↕“ velur svo hvaða hluti sést.
+Cadrer ↔ ¦ Hliðra ↔
+Cadrer ↕ ¦ Hliðra ↕
+🎚️ Retouche ¦ 🎚️ Lagfæring
+Épaisseur du cadre ¦ Þykkt rammans
+Au bout ¦ Á endanum
+Aux deux bouts ¦ Á báðum endum
+Le tableur en grand : formules, tri, coller depuis Excel… puis « ✓ Enregistrer et revenir » ¦ Töflureiknirinn í fullri stærð: formúlur, röðun, líma úr Excel… og svo „✓ Vista og fara til baka“
+Le tableur en grand, préparé « Catégorie + séries » : formules, tri, coller depuis Excel… puis « ✓ Enregistrer et revenir » ¦ Töflureiknirinn í fullri stærð, undirbúinn sem „Flokkur + raðir“: formúlur, röðun, líma úr Excel… og svo „✓ Vista og fara til baka“
+＋ Ligne ¦ ＋ Lína
+− Ligne ¦ − Lína
+＋ Colonne ¦ ＋ Dálkur
+− Colonne ¦ − Dálkur
+Première ligne en en-tête ¦ Fyrsta lína sem fyrirsögn
+En-tête : fond ¦ Fyrirsögn: bakgrunnur
+En-tête : texte ¦ Fyrirsögn: texti
+Contenu (une ligne par rangée, cases séparées par « ; » ou une tabulation — se colle d’un tableur) ¦ Innihald (ein lína fyrir hverja röð, reitir aðskildir með „;“ eða dálkbili — má líma úr töflureikni)
+Ou ici, en secours (1re ligne : Catégorie ; Série 1 ; Série 2…) ¦ Eða hér, til vara (1. lína: Flokkur; Röð 1; Röð 2…)
+Les chiffres (1re ligne : Catégorie ; Série 1 ; Série 2…) ¦ Tölurnar (1. lína: Flokkur; Röð 1; Röð 2…)
+Vives ¦ Skærir
+Pastel ¦ Pastel
+Terre ¦ Jarðlitir
+Gris ¦ Grátt
+Selon la sorte ¦ Eftir tegund
+🪪 La fiche ¦ 🪪 Spjaldið
+🖼️ Le portrait ¦ 🖼️ Andlitsmyndin
+🌳 Petit arbre ¦ 🌳 Lítið tré
+🔄 Relire la fiche ¦ 🔄 Lesa spjaldið aftur
+🎬 Changer… ¦ 🎬 Skipta um…
+Lecture automatique ¦ Sjálfvirk spilun
+En boucle ¦ Endurtaka
+Sans le son ¦ Án hljóðs
+Boutons de lecture visibles ¦ Spilunarhnappar sýnilegir
+Commencer à ¦ Byrja við
+Effets (ombre et opacité) ¦ Áhrif (skuggi og ógegnsæi)
+Chemin ¦ Slóð
+Attendre ¦ Bíða
+× Retirer ¦ × Fjarlægja
+Transition ¦ Skipting
+Effet (en arrivant sur cette diapositive) ¦ Áhrif (þegar komið er á þessa glæru)
+L’effet joue en passant de la diapositive d’avant à celle-ci. « Déplacement magique » fait glisser les objets présents sur les deux. ¦ Áhrifin spilast þegar farið er af fyrri glæru yfir á þessa. „Töfrafærsla“ lætur hluti sem eru á báðum renna til.
+▶ Aperçu ¦ ▶ Forskoðun
+Pour toutes les diapositives ¦ Fyrir allar glærur
+Animations de l’objet choisi ¦ Hreyfingar valins hlutar
+＋ Entrée ¦ ＋ Innkoma
+＋ Sortie ¦ ＋ Útgangur
+Ordre des animations ¦ Röð hreyfinganna
+⬅ Sortie ¦ ⬅ Útgangur
+➡ Entrée ¦ ➡ Innkoma
+▶ Aperçu des animations ¦ ▶ Forskoða hreyfingarnar
+Disposition (place les titres, textes, photos) ¦ Uppsetning (raðar titlum, textum, myndum)
+Un plan tout fait (titre, titre et texte, photo pleine page…) : les textes déjà écrits sont gardés et changent de place. ¦ Tilbúið skipulag (titill, titill og texti, mynd á heila síðu…): textar sem þegar eru skrifaðir halda sér og færast til.
+Celui du thème ¦ Sá sem fylgir þemanu
+Dégradé rond ¦ Hringlaga litbrigði
+Couleur autour de l’image ¦ Litur í kringum myndina
+Entière ¦ Heil
+Ce fond pour toutes les diapositives ¦ Þessi bakgrunnur fyrir allar glærur
+Durée — lecture seule et vidéo ¦ Lengd — sjálfvirk spilun og myndskeið
+Le temps passé sur cette diapositive quand la présentation avance toute seule et dans la vidéo exportée. ¦ Tíminn sem varið er á þessari glæru þegar kynningin heldur sjálf áfram og í útfluttu myndskeiði.
+Passer toute seule à la suivante (après la durée) ¦ Fara sjálfkrafa á þá næstu (eftir lengdina)
+Sauter cette diapositive à la lecture ¦ Sleppa þessari glæru í spilun
+Titre de la section (un groupe de diapositives qui commence ici) ¦ Titill hluta (hópur glæra sem byrjar hér)
+ex. Les années de guerre ¦ t.d. Stríðsárin
+Vers le devant ¦ Framar
+Vers le fond ¦ Aftar
+Couleurs et polices ¦ Litir og letur
+Accent ¦ Áhersla
+Format des diapositives ¦ Snið glæranna
+Largeur (points) ¦ Breidd (punktar)
+Hauteur (points) ¦ Hæð (punktar)
+Changer… ¦ Skipta um…
+🎵 Une musique pendant la lecture… ¦ 🎵 Tónlist meðan á spilun stendur…
+Recommencer au début à la fin (borne, exposition) ¦ Byrja aftur frá upphafi í lokin (skjár, sýning)
+Remplissage et bordure ¦ Fylling og jaðar
+Ombre et opacité ¦ Skuggi og ógegnsæi
+T Une zone de texte ¦ T Textareitur
+🖼️ Une photo des médias ou de l’ordinateur ¦ 🖼️ Mynd úr miðlunum eða úr tölvunni
+📊 Un graphique (colonnes, camembert, courbe…) ¦ 📊 Graf (súlur, kaka, ferill…)
+🎬 Une vidéo ou un son des médias ¦ 🎬 Myndskeið eða hljóð úr miðlunum
+⊞ Grouper (⌘G) — ⇧⌘G pour dissocier ¦ ⊞ Hópa (⌘G) — ⇧⌘G til að leysa upp
+⊟ Dissocier (⇧⌘G) ¦ ⊟ Leysa upp hóp (⇧⌘G)
+🔒 Verrouiller / déverrouiller (⌘L) ¦ 🔒 Læsa / aflæsa (⌘L)
+▶ Lire en plein écran depuis le début (⌥⌘↩) ¦ ▶ Spila á öllum skjánum frá byrjun (⌥⌘↩)
+⏵ Lire depuis cette diapositive (⌘↩) ¦ ⏵ Spila frá þessari glæru (⌘↩)
+🎤 Plein écran + fenêtre du présentateur (notes, suivante, chronomètre) ¦ 🎤 Allur skjárinn + gluggi kynnis (athugasemdir, næsta, skeiðklukka)
+⤓ Exporter (PDF, PNG, vidéo, fichier) ¦ ⤓ Flytja út (PDF, PNG, myndskeið, skrá)
+⧉ Dupliquer la diapositive (pour un déplacement magique) ¦ ⧉ Tvöfalda glæruna (fyrir töfrafærslu)
+👁 Sauter / ne plus sauter à la lecture ¦ 👁 Sleppa / hætta að sleppa í spilun
+§ Commencer une section (un groupe de diapositives) ici ¦ § Byrja hluta (hóp glæra) hér
+🗑 Supprimer la diapositive ¦ 🗑 Eyða glærunni
+‹ Diapositive précédente (Page précédente) ¦ ‹ Fyrri glæra (Page Up)
+› Diapositive suivante (Page suivante) ¦ › Næsta glæra (Page Down)
+=élément copié ¦ atriði afritað|atriði afrituð
+=coude ¦ beygja|beygjur
+=dessin choisi ¦ teikning valin|teikningar valdar
+=association ¦ tenging|tengingar
+=élément absent ici ¦ atriði vantar hér|atriði vantar hér
+=confirmée ¦ staðfest|staðfestar
+=fausse ¦ röng|rangar
+=note posée ¦ athugasemd sett|athugasemdir settar
+=animation ¦ hreyfing|hreyfingar
+=sautée ¦ sleppt|sleppt
+=diapositive ajoutée ¦ glæru bætt við|glærum bætt við
+=image illisible laissée ¦ ólæsileg mynd skilin eftir|ólæsilegar myndir skildar eftir
+=image reprise ¦ mynd tekin|myndir teknar
+=diapositive importée ¦ glæra flutt inn|glærur fluttar inn
+Arrondi par défaut des éléments arrondis ¦ Sjálfgefin rúnnun ávalra atriða
+Formules ¦ Formúlur
+Commence par <code>=</code> : <code>=B2+B3</code>, <code>=SOMME(B2:B9)</code>, <code>=MOYENNE(B2:B9)</code>, <code>=MIN(…)</code>, <code>=MAX(…)</code>, <code>=NB(…)</code>, <code>=PRODUIT(…)</code>, <code>=ARRONDI(B2;1)</code>, <code>=2026-B2</code> (âge), <code>="texte"</code>. Colle un bout de tableur (Excel, Numbers) dans une cellule : il se range dans la grille. ¦ Byrjaðu á <code>=</code>: <code>=B2+B3</code>, <code>=SOMME(B2:B9)</code>, <code>=MOYENNE(B2:B9)</code>, <code>=MIN(…)</code>, <code>=MAX(…)</code>, <code>=NB(…)</code>, <code>=PRODUIT(…)</code>, <code>=ARRONDI(B2;1)</code>, <code>=2026-B2</code> (aldur), <code>="texti"</code>. Límdu bút úr töflureikni (Excel, Numbers) í reit: hann raðast í töfluna.
+⏺ Vidéo ¦ ⏺ Myndskeið
+Hexagone ¦ Sexhyrningur
+Bulle ¦ Talblaðra
+Cœur ¦ Hjarta
+⧉ Copie ¦ ⧉ Afrit
+forme|Rectangle ¦ Rétthyrningur
+forme|Rectangle arrondi ¦ Ávalur rétthyrningur
+forme|Ovale ¦ Sporbaugur
+forme|Triangle ¦ Þríhyrningur
+forme|Triangle rectangle ¦ Rétthyrndur þríhyrningur
+forme|Losange ¦ Tígull
+forme|Pentagone ¦ Fimmhyrningur
+forme|Hexagone ¦ Sexhyrningur
+forme|Étoile ¦ Stjarna
+forme|Bulle ¦ Talblaðra
+forme|Nuage ¦ Ský
+forme|Flèche ¦ Ör
+forme|Double flèche ¦ Tvíhliða ör
+forme|Étiquette ¦ Merkimiði
+forme|Parallélogramme ¦ Samsíðungur
+forme|Trapèze ¦ Trapisa
+forme|Losange plat ¦ Flatur tígull
+forme|Pilule ¦ Pilla
+forme|Cylindre ¦ Sívalningur
+forme|Cube ¦ Teningur
+forme|Pavé ¦ Kassi
+forme|Pyramide ¦ Píramídi
+forme|Cône ¦ Keila
+forme|Tétraèdre ¦ Fjórflötungur
+forme|Heptagone ¦ Sjöhyrningur
+forme|Octogone ¦ Átthyrningur
+forme|Décagone ¦ Tíhyrningur
+forme|Dodécagone ¦ Tólfhyrningur
+forme|Anneau ¦ Hringur
+forme|Demi-cercle ¦ Hálfhringur
+forme|Quart de cercle ¦ Fjórðungshringur
+forme|Cadre ¦ Rammi
+forme|Équerre ¦ Vinkill
+forme|Chevron ¦ Vinkilör
+forme|Sablier ¦ Stundaglas
+forme|forme ¦ form
+forme|Arche ¦ Bogi
+forme|Flèche à gauche ¦ Ör til vinstri
+forme|Flèche en haut ¦ Ör upp
+forme|Flèche en bas ¦ Ör niður
+forme|Double flèche verticale ¦ Lóðrétt tvíhliða ör
+forme|Quatre directions ¦ Fjórar áttir
+forme|Flèche à encoche ¦ Ör með skoru
+forme|Flèche courbe ¦ Bogin ör
+forme|Demi-tour ¦ U-beygja
+forme|Flèche fine ¦ Mjó ör
+forme|Pavé flèche ¦ Örvarkubbur
+forme|Flèche ronde ¦ Hringör
+forme|Bulle ronde ¦ Hringlaga blaðra
+forme|Encadré ¦ Skýringarreitur
+forme|Pensée ¦ Hugsanablaðra
+forme|Cri ¦ Hróp
+forme|gauche ¦ vinstri
+forme|Bulle carrée ¦ Ferhyrnd blaðra
+forme|Étoile à {x} branches ¦ Stjarna með {x} örmum
+forme|Éclat ¦ Sprenging
+forme|Sceau ¦ Innsigli
+forme|Rose des vents ¦ Áttavitarós
+forme|Ruban ¦ Borði
+forme|Médaille ¦ Orða
+forme|Écu ¦ Skjöldur
+forme|Bannière ¦ Fáni á stöng
+forme|Cocarde ¦ Kokarða
+forme|Cœur ¦ Hjarta
+forme|Coche ¦ Hak
+forme|Croix ¦ Kross
+forme|Plus ¦ Plús
+forme|Moins ¦ Mínus
+forme|Lune ¦ Tungl
+forme|Éclair ¦ Elding
+forme|Goutte ¦ Dropi
+forme|Repère ¦ Merki
+forme|Drapeau ¦ Fáni
+forme|Point d’interrogation ¦ Spurningarmerki
+forme|Point d’exclamation ¦ Upphrópunarmerki
+forme|Information ¦ Upplýsingar
+forme|Infini ¦ Óendanleiki
+forme|Soleil ¦ Sól
+forme|Signe ¦ Tákn
+forme|Arbre ¦ Tré
+forme|Chêne ¦ Eik
+forme|Alliances ¦ Giftingarhringar
+forme|Couronne ¦ Kóróna
+forme|Tombe ¦ Gröf
+forme|Berceau ¦ Vagga
+forme|Parchemin ¦ Bókfell
+forme|Plume ¦ Fjaðurpenni
+forme|Livre ¦ Bók
+forme|Lettre ¦ Bréf
+forme|Bougie ¦ Kerti
+forme|Cachet de cire ¦ Lakkinnsigli
+forme|Fleur de lys ¦ Liljumerki
+forme|Branche ¦ Grein
+forme|Personne ¦ Einstaklingur
+forme|Femme ¦ Kona
+forme|Couple ¦ Hjón
+forme|Famille ¦ Fjölskylda
+forme|Enfant ¦ Barn
+forme|Portrait ¦ Andlitsmynd
+forme|médaillon ¦ hálsmen
+forme|Soldat ¦ Hermaður
+forme|Maison ¦ Hús
+forme|Église ¦ Kirkja
+forme|Château ¦ Kastali
+forme|Mairie ¦ Ráðhús
+forme|Moulin ¦ Mylla
+forme|Bateau ¦ Bátur
+forme|Usine ¦ Verksmiðja
+forme|Montagne ¦ Fjall
+forme|Pont ¦ Brú
+forme|Clé ¦ Lykill
+forme|Lampe ¦ Lampi
+forme|Chaise ¦ Stóll
+forme|Horloge ¦ Klukka
+forme|Lunettes ¦ Gleraugu
+forme|Parapluie ¦ Regnhlíf
+forme|Ampoule ¦ Ljósapera
+forme|Loupe ¦ Stækkunargler
+forme|Cadeau ¦ Gjöf
+forme|Tasse ¦ Bolli
+forme|Appareil photo ¦ Myndavél
+forme|Téléphone ¦ Sími
+forme|Crayon ¦ Blýantur
+forme|Sac ¦ Taska
+forme|Valise ¦ Ferðataska
+forme|Chapeau ¦ Hattur
+forme|Cloche ¦ Bjalla
+forme|Ancre ¦ Akkeri
+forme|Feuille ¦ Laufblað
+forme|Fleur ¦ Blóm
+forme|Sapin ¦ Grenitré
+forme|Vague ¦ Alda
+forme|Poisson ¦ Fiskur
+forme|Oiseau ¦ Fugl
+forme|Flocon ¦ Snjókorn
+forme|Pomme ¦ Epli
+forme|Champignon ¦ Sveppur
+forme|Patte ¦ Loppa
+forme|Anneau fin ¦ Mjór hringur
+forme|Anneau épais ¦ Þykkur hringur
+forme|Deux anneaux ¦ Tveir hringir
+forme|Cadre fin ¦ Mjór rammi
+forme|Cadre arrondi ¦ Ávalur rammi
+forme|Médaillon ¦ Nisti
+forme|Ovale vertical ¦ Lóðréttur sporbaugur
+forme|Ovale horizontal ¦ Láréttur sporbaugur
+forme|Croissant fin ¦ Mjór hálfmáni
+forme|Goutte inversée ¦ Öfugur dropi
+forme|Deux cœurs ¦ Tvö hjörtu
+forme|Croix grecque ¦ Grískur kross
+forme|Croix de Malte ¦ Möltukross
+forme|Croix de Lorraine ¦ Lorraine-kross
+forme|Croix orthodoxe ¦ Rétttrúnaðarkross
+forme|Bannière ondulée ¦ Bylgjaður borði
+forme|Phylactère ¦ Textaborði
+forme|Étiquette ronde ¦ Kringlóttur miði
+forme|Bulle ovale ¦ Sporöskjulaga blaðra
+forme|droite ¦ hægri
+forme|Petite pensée ¦ Lítil hugsanablaðra
+forme|Quart de disque ¦ Fjórðungsskífa
+forme|Tiers de disque ¦ Þriðjungsskífa
+forme|Demi-disque ¦ Hálfskífa
+forme|Deux tiers de disque ¦ Tveir þriðju skífu
+forme|Trois quarts de disque ¦ Þrír fjórðu skífu
+forme|Camembert ¦ Kökurit
+forme|Polygone à {x} côtés ¦ Marghyrningur með {x} hliðum
+forme|Étoile fine à {x} branches ¦ Mjó stjarna með {x} örmum
+forme|Étoile ronde à {x} branches ¦ Ávöl stjarna með {x} örmum
+forme|Quart d’anneau ¦ Fjórðungshringur (baugur)
+forme|Demi-anneau ¦ Hálfur baugur
+forme|Trois quarts d’anneau ¦ Þrír fjórðu baugs
+forme|Arbre généalogique ¦ Ættartré
+forme|Arborescence ¦ Trjágerð
+forme|Organigramme ¦ Skipurit
+forme|Liens ¦ Tengsl
+forme|Groupe de personnes ¦ Hópur fólks
+forme|Homme et femme ¦ Karl og kona
+forme|Parents et enfant ¦ Foreldrar og barn
+forme|Deux femmes ¦ Tvær konur
+forme|Deux hommes ¦ Tveir karlar
+forme|Mère et fille ¦ Móðir og dóttir
+forme|Père et fils ¦ Faðir og sonur
+forme|Mère et fils ¦ Móðir og sonur
+forme|Père et fille ¦ Faðir og dóttir
+forme|Visage de bébé ¦ Barnsandlit
+forme|Bébé ¦ Ungbarn
+forme|Landau ¦ Barnavagn
+forme|Biberon ¦ Pela
+forme|Femme enceinte ¦ Barnshafandi kona
+forme|Bague ¦ Hringur
+forme|Cœurs ¦ Hjörtu
+forme|Foyer ¦ Heimili
+forme|Personne aimée ¦ Ástvinur
+forme|Main et cœur ¦ Hönd og hjarta
+forme|Symbole masculin ¦ Karltákn
+forme|Symbole féminin ¦ Kventákn
+forme|Symbole couple ¦ Hjónatákn
+forme|Pierre tombale ¦ Legsteinn
+forme|Cercueil ¦ Kista
+forme|Tulipe ¦ Túlípani
+forme|Coquelicot ¦ Valmúi
+forme|Croix latine ¦ Latneskur kross
+forme|Croix celtique ¦ Keltneskur kross
+forme|Bible ¦ Biblía
+forme|Certificat ¦ Vottorð
+forme|Parchemin écrit ¦ Áritað bókfell
+forme|Plume à encre ¦ Blekpenni
+forme|Tampon ¦ Stimpill
+forme|Passeport ¦ Vegabréf
+forme|Carte d’identité ¦ Persónuskilríki
+forme|Carte et loupe ¦ Kort og stækkunargler
+forme|Document cherché ¦ Skjal sem leitað er að
+forme|Frise du temps ¦ Tímalína
+forme|Histoire ¦ Saga
+forme|Diaphragme ¦ Ljósop
+forme|Cadre photo ¦ Myndarammi
+forme|Miroir ovale ¦ Sporöskjulaga spegill
+forme|Blason couronné ¦ Krýnt skjaldarmerki
+forme|Tour ¦ Turn
+forme|Père et enfant ¦ Faðir og barn
+forme|Deux mères et enfant ¦ Tvær mæður og barn
+forme|Deux pères et enfant ¦ Tveir feður og barn
+forme|Amour maternel ¦ Móðurást
+forme|Mère qui allaite ¦ Móðir með barn á brjósti
+forme|Poussette ¦ Kerra
+forme|Table à langer ¦ Skiptiborð
+forme|contour ¦ útlína
+forme|Adulte et enfant ¦ Fullorðinn og barn
+forme|rond ¦ kringlótt
+forme|Tuteur ¦ Forráðamaður
+forme|Deux personnes ¦ Tveir einstaklingar
+forme|Maison familiale ¦ Fjölskylduheimili
+forme|Registre de personnes ¦ Einstaklingaskrá
+forme|Date d’une personne ¦ Dagsetning einstaklings
+forme|Fiche individuelle ¦ Einstaklingsspjald
+forme|Dossier de personne ¦ Mappa einstaklings
+forme|Acte certifié ¦ Vottað skjal
+forme|Cœur dans un carré ¦ Hjarta í ferningi
+forme|Cœur rond ¦ Ávalt hjarta
+forme|Livre de famille ¦ Fjölskyldubók
+forme|variante ¦ afbrigði
+forme|Symbole non binaire ¦ Kynsegin tákn
+forme|Taille d’un homme ¦ Hæð karlmanns
+forme|Album photo ¦ Myndaalbúm
+forme|Photos ¦ Myndir
+forme|Photo instantanée ¦ Skyndimynd
+forme|Portrait photo ¦ Andlitsljósmynd
+forme|Dossier de photos ¦ Myndamappa
+forme|Frise ¦ Tímalína
+forme|Frise commentée ¦ Tímalína með skýringum
+forme|Diagramme chronologique ¦ Tímaröðunarrit
+forme|Arbre en blocs ¦ Tré úr kubbum
+forme|Relation un à plusieurs ¦ Einn-á-marga tengsl
+forme|Relation un à un ¦ Einn-á-einn tengsl
+forme|Couronne ronde ¦ Kringlótt kóróna
+forme|Blason à l’épée ¦ Skjaldarmerki með sverði
+forme|Blason à la croix ¦ Skjaldarmerki með krossi
+forme|Écu parti ¦ Klofinn skjöldur
+forme|Croix de Bolnissi ¦ Bolnisi-kross
+forme|Crâne ¦ Hauskúpa
+forme|Parchemin et clé ¦ Bókfell og lykill
+forme|Sceau rond ¦ Kringlótt innsigli
+forme|Coffre au trésor ¦ Fjársjóðskista
+forme|Coffre-fort ¦ Peningaskápur
+forme|Coffre-fort carré ¦ Ferhyrndur peningaskápur
+forme|Poignée de main ¦ Handaband
+forme|Miroir rectangulaire ¦ Rétthyrndur spegill
+forme|Homme ¦ Karl
+forme|Personne âgée ¦ Aldraður einstaklingur
+forme|Bras levés ¦ Lyftir handleggjum
+forme|Salut ¦ Kveðja
+forme|Fauteuil roulant ¦ Hjólastóll
+forme|Marcheur ¦ Göngumaður
+forme|Coureur ¦ Hlaupari
+forme|Instituteur ¦ Kennari
+forme|Silhouette ¦ Skuggamynd
+forme|Homme en cravate ¦ Karl með bindi
+forme|Cow-boy ¦ Kúreki
+forme|Ouvrier ¦ Verkamaður
+forme|Chapeau et cravate ¦ Hattur og bindi
+forme|Insigne de police ¦ Lögreglumerki
+forme|Visage d’homme ¦ Karlmannsandlit
+forme|Visage de femme ¦ Kvenmannsandlit
+forme|Profil d’homme ¦ Karl á vangamynd
+forme|Profil de femme ¦ Kona á vangamynd
+forme|Moustache ¦ Yfirvaraskegg
+forme|Main qui salue ¦ Veifandi hönd
+forme|Main ¦ Hönd
+forme|Mains jointes ¦ Spenntar greipar
+forme|Empreinte de pied ¦ Fótspor
+forme|File de personnes ¦ Biðröð fólks
+forme|Bras baissés ¦ Handleggir niðri
+forme|Danseuse ¦ Dansmær
+forme|Personne non binaire ¦ Kynsegin einstaklingur
+forme|Personne en trottinette ¦ Einstaklingur á hlaupahjóli
+forme|Personne au déambulateur ¦ Einstaklingur með göngugrind
+forme|Personne à canne blanche ¦ Einstaklingur með hvítan staf
+forme|Présentation au tableau ¦ Kynning við töflu
+forme|Foule ¦ Mannfjöldi
+forme|Groupe ¦ Hópur
+forme|Silhouette ronde ¦ Kringlótt skuggamynd
+forme|Silhouette encadrée ¦ Skuggamynd í ramma
+forme|Portraits ¦ Andlitsmyndir
+forme|Femme d’affaires ¦ Kaupsýslukona
+forme|Orateur ¦ Ræðumaður
+forme|Personne qui parle ¦ Einstaklingur sem talar
+forme|Écolier ¦ Skóladrengur
+forme|Personne blessée ¦ Slasaður einstaklingur
+forme|Personne remarquable ¦ Merkur einstaklingur
+forme|Personne inconnue ¦ Óþekktur einstaklingur
+forme|Recherche de personne ¦ Leit að einstaklingi
+forme|Ajouter une personne ¦ Bæta við einstaklingi
+forme|Musicien ¦ Tónlistarmaður
+forme|Départ d’une personne ¦ Einstaklingur fer
+forme|Arrivée d’une personne ¦ Einstaklingur kemur
+forme|Détails de la personne ¦ Upplýsingar um einstakling
+forme|Homme élégant ¦ Glæsilegur karl
+forme|Femme élégante ¦ Glæsileg kona
+forme|Masque de protection ¦ Andlitsgríma
+forme|Tête ¦ Höfuð
+forme|Pensée amoureuse ¦ Ástarhugsun
+forme|Idée en tête ¦ Hugmynd í kollinum
+forme|Question en tête ¦ Spurning í kollinum
+forme|Main gauche ¦ Vinstri hönd
+forme|Paume gauche ¦ Vinstri lófi
+forme|Paume droite ¦ Hægri lófi
+forme|Applaudissements ¦ Klapp
+forme|D’accord ¦ Í lagi
+forme|main ¦ hönd
+forme|Victoire ¦ Sigur
+forme|Index levé ¦ Vísifingur upp
+forme|Index vers la droite ¦ Vísifingur til hægri
+forme|Main tendue ¦ Útrétt hönd
+forme|Lavage des mains ¦ Handþvottur
+forme|Main et pièce ¦ Hönd og mynt
+forme|Biceps ¦ Upphandleggsvöðvi
+forme|Langue des signes ¦ Táknmál
+forme|Empreintes de pas ¦ Fótspor (slóð)
+forme|Méditation ¦ Hugleiðsla
+forme|Yoga ¦ Jóga
+forme|Promeneur au parc ¦ Gangandi í garði
+forme|Voleur ¦ Þjófur
+forme|Ninja ¦ Ninja
+forme|Incognito ¦ Huliðsstilling
+forme|Pirate ¦ Sjóræningi
+forme|Médecin ¦ Læknir
+forme|Chien ¦ Hundur
+forme|Chien de profil ¦ Hundur á hlið
+forme|Chien guide ¦ Leiðsöguhundur
+forme|Chat ¦ Köttur
+forme|Cheval ¦ Hestur
+forme|Cheval au galop ¦ Hestur á stökki
+forme|Cavalier ¦ Knapi
+forme|Fer à cheval ¦ Skeifa
+forme|Vache ¦ Kýr
+forme|Cochon ¦ Svín
+forme|Mouton ¦ Kind
+forme|Lapin ¦ Kanína
+forme|Rongeur ¦ Nagdýr
+forme|Éléphant ¦ Fíll
+forme|Kangourou ¦ Kengúra
+forme|Koala ¦ Kóalabjörn
+forme|Panda ¦ Pandabjörn
+forme|Manchot ¦ Mörgæs
+forme|Chouette ¦ Ugla
+forme|Canard ¦ Önd
+forme|Dinde ¦ Kalkúnn
+forme|Œuf ¦ Egg
+forme|Dauphin ¦ Höfrungur
+forme|Aileron de requin ¦ Hákarlsuggi
+forme|Méduse ¦ Marglytta
+forme|Escargot ¦ Snigill
+forme|Papillon ¦ Fiðrildi
+forme|Abeille ¦ Býfluga
+forme|Coccinelle ¦ Maríuhæna
+forme|Araignée ¦ Kónguló
+forme|Insecte ¦ Skordýr
+forme|Serpent ¦ Snákur
+forme|Tortue ¦ Sæskjaldbaka
+forme|Tortue terrestre ¦ Landskjaldbaka
+forme|Licorne ¦ Einhyrningur
+forme|Os ¦ Bein
+forme|Âne ¦ Asni
+forme|Chauve-souris ¦ Leðurblaka
+forme|Toile d’araignée ¦ Köngulóarvefur
+forme|Requin ¦ Hákarl
+forme|Abeille et fleur ¦ Býfluga og blóm
+forme|Apiculteur ¦ Býflugnabóndi
+forme|Bocal à poisson ¦ Fiskabúr
+forme|Araignée au fil ¦ Kónguló í þræði
+forme|Cheval rapide ¦ Hraður hestur
+forme|Chien interdit ¦ Hundar bannaðir
+forme|Os barré ¦ Yfirstrikað bein
+forme|Arbre feuillu ¦ Lauftré
+forme|Conifère ¦ Barrtré
+forme|Palmier ¦ Pálmatré
+forme|Cactus ¦ Kaktus
+forme|Pousse ¦ Sproti
+forme|Graine ¦ Fræ
+forme|Feuille d’érable ¦ Hlynlauf
+forme|Trèfle ¦ Smári
+forme|Fleur et pollen ¦ Blóm og frjókorn
+forme|Herbe ¦ Gras
+forme|Épi de blé ¦ Hveitiax
+forme|Maïs ¦ Maís
+forme|Cerises ¦ Kirsuber
+forme|Raisin ¦ Vínber
+forme|Poire ¦ Pera
+forme|Pastèque ¦ Vatnsmelóna
+forme|Carotte ¦ Gulrót
+forme|Relief ¦ Landslag
+forme|Montagnes ¦ Fjöll
+forme|Volcan ¦ Eldfjall
+forme|Île ¦ Eyja
+forme|Vagues ¦ Öldur
+forme|Eau ¦ Vatn
+forme|Feu ¦ Eldur
+forme|Terre ¦ Jörð
+forme|Globe ¦ Hnöttur
+forme|Boussole ¦ Áttaviti
+forme|Carte ¦ Kort
+forme|Hameau ¦ Smáþorp
+forme|Forêt ¦ Skógur
+forme|Bosquet ¦ Lundur
+forme|Ruche ¦ Býflugnabú
+forme|Incendie de forêt ¦ Skógareldur
+forme|Semis ¦ Sáning
+forme|Feuille ronde ¦ Kringlótt lauf
+forme|Ananas ¦ Ananas
+forme|Houblon ¦ Humall
+forme|Chanvre ¦ Hampur
+forme|Compost ¦ Moltugerð
+forme|Fleur de lotus ¦ Lótusblóm
+forme|Champs ¦ Akrar
+forme|Parcelles ¦ Landskikar
+forme|Parcelle ronde ¦ Kringlóttur skiki
+forme|Parcelle repérée ¦ Merktur skiki
+forme|Sillons horizontaux ¦ Láréttar plógrákir
+forme|Glissement de terrain ¦ Skriða
+forme|Cascade ¦ Foss
+forme|Raz-de-marée ¦ Flóðbylgja
+forme|Marée montante ¦ Aðfall
+forme|Humidité ¦ Raki
+forme|Puits ¦ Brunnur
+forme|Pompe à eau ¦ Vatnsdæla
+forme|Fleur stylisée ¦ Stílfært blóm
+forme|Légende de carte ¦ Skýringar korts
+forme|Lieu ¦ Staður
+forme|rayon ¦ radíus
+forme|Plusieurs lieux ¦ Margir staðir
+forme|Distance entre lieux ¦ Fjarlægð milli staða
+forme|Lieu d’une personne ¦ Staður einstaklings
+forme|Lieu important ¦ Mikilvægur staður
+forme|Lieu inconnu ¦ Óþekktur staður
+forme|Position GPS ¦ GPS-staðsetning
+forme|Viseur ¦ Krosssigti
+forme|Latitude ¦ Breiddargráða
+forme|Longitude ¦ Lengdargráða
+forme|Sommet ¦ Tindur
+forme|Montée ¦ Klifur
+forme|Pente montante ¦ Hækkandi brekka
+forme|Rivage ¦ Strönd
+forme|Plage ¦ Baðströnd
+forme|Tunnel de culture ¦ Ræktunargöng
+forme|Ferme et silo ¦ Bóndabær og síló
+forme|Silo ¦ Síló
+forme|Clôture électrique ¦ Rafmagnsgirðing
+forme|Arrosoir ¦ Garðkanna
+forme|Arroseur ¦ Úðari
+forme|Râteau ¦ Hrífa
+forme|Fourche à foin ¦ Heykvísl
+forme|Faucille ¦ Sigð
+forme|Tondeuse ¦ Sláttuvél
+forme|Nuit ¦ Nótt
+forme|Éclaircies ¦ Léttskýjað
+forme|Nuageux ¦ Skýjað
+forme|Pluie ¦ Rigning
+forme|Averse ¦ Skúr
+forme|Neige ¦ Snjór
+forme|Orage ¦ Þrumuveður
+forme|Vent ¦ Vindur
+forme|Brouillard ¦ Þoka
+forme|Grêle ¦ Hagl
+forme|Coucher de soleil ¦ Sólsetur
+forme|Thermomètre ¦ Hitamælir
+forme|Croissant de lune ¦ Hálfmáni
+forme|Pleine lune ¦ Fullt tungl
+forme|Étoile filante ¦ Stjörnuhrap
+forme|Scintillement ¦ Glitur
+forme|Ouragan ¦ Fellibylur
+forme|Tornade ¦ Skýstrókur
+forme|Tempête de sable ¦ Sandstormur
+forme|Brume ¦ Mistur
+forme|Orage pluvieux ¦ Þrumuveður með rigningu
+forme|Orage et éclaircies ¦ Þrumuveður og sólarglennur
+forme|Averses et éclaircies ¦ Skúrir og sólarglennur
+forme|Neige et éclaircies ¦ Snjór og sólarglennur
+forme|Pluie et neige ¦ Rigning og snjór
+forme|Fortes chutes de neige ¦ Mikil snjókoma
+forme|Neige mêlée de pluie ¦ Slydda
+forme|Nuit nuageuse ¦ Skýjuð nótt
+forme|Vent fort ¦ Hvassviðri
+forme|Lever du soleil ¦ Sólarupprás
+forme|Coucher du soleil ¦ Sólarlag
+forme|Coucher de lune ¦ Tunglsetur
+forme|Canicule ¦ Hitabylgja
+forme|Nuages ¦ Skýjabakkar
+forme|Vague de chaleur ¦ Hitabylgja (hiti)
+forme|Arc-en-ciel ¦ Regnbogi
+forme|Aurore boréale ¦ Norðurljós
+forme|Nouvelle lune ¦ Nýtt tungl
+forme|Premier quartier ¦ Fyrsta kvartil
+forme|Dernier quartier ¦ Síðasta kvartil
+forme|Lune décroissante ¦ Minnkandi tungl
+forme|Lune gibbeuse décroissante ¦ Minnkandi tungl eftir fullt
+forme|Lune gibbeuse croissante ¦ Vaxandi tungl fyrir fullt
+forme|Jour et nuit ¦ Dagur og nótt
+forme|Soleil radieux ¦ Skínandi sól
+forme|Heure solaire ¦ Sóltími
+forme|Soleil et flocon ¦ Sól og snjókorn
+forme|Chaleur ¦ Hiti
+forme|Dégel ¦ Þíða
+forme|Grand froid ¦ Mikill kuldi
+forme|Bonhomme de neige ¦ Snjókarl
+forme|Température élevée ¦ Hátt hitastig
+forme|Température basse ¦ Lágt hitastig
+forme|Degrés Celsius ¦ Gráður á Celsíus
+forme|Parasol ¦ Sólhlíf
+forme|Manche à air ¦ Vindpoki
+forme|Fumée ¦ Reykur
+forme|Inondation ¦ Flóð
+forme|Tranche de pain ¦ Brauðsneið
+forme|Baguette ¦ Snittubrauð
+forme|Croissant ¦ Smjördeigshorn
+forme|Fromage ¦ Ostur
+forme|Gâteau ¦ Kaka
+forme|Gâteau d’anniversaire ¦ Afmæliskaka
+forme|Petit gâteau ¦ Bollakaka
+forme|Biscuit ¦ Kex
+forme|Bonbon ¦ Sælgæti
+forme|Glace ¦ Ís
+forme|Pizza ¦ Pítsa
+forme|Cuisse de poulet ¦ Kjúklingalæri
+forme|Œuf au plat ¦ Spælt egg
+forme|Tasse de café ¦ Kaffibolli
+forme|Tasse de thé ¦ Tebolli
+forme|Bouilloire ¦ Ketill
+forme|Marmite ¦ Pottur
+forme|Couverts ¦ Hnífapör
+forme|Toque ¦ Kokkahúfa
+forme|Verre de vin ¦ Vínglas
+forme|Bouteille de vin ¦ Vínflaska
+forme|Chope ¦ Krús
+forme|Cocktail ¦ Kokteill
+forme|Bière ¦ Bjór
+forme|Gobelet ¦ Glas
+forme|Agrume ¦ Sítrusávöxtur
+forme|Cacahuète ¦ Jarðhneta
+forme|Nouilles ¦ Núðlur
+forme|Hamburger ¦ Hamborgari
+forme|Repas ¦ Máltíð
+forme|Pièce montée ¦ Brúðkaupsterta
+forme|Sucre d’orge ¦ Sælgætisstafur
+forme|Muffin ¦ Múffa
+forme|Bretzel ¦ Saltkringla
+forme|Frites ¦ Franskar
+forme|Hot-dog ¦ Pylsa í brauði
+forme|Steak ¦ Steik
+forme|Dinde rôtie ¦ Steiktur kalkúnn
+forme|Restauration ¦ Veitingar
+forme|Plat à emporter ¦ Matur til að taka með
+forme|Halal ¦ Halal
+forme|Casher ¦ Kosher
+forme|Taco ¦ Takó
+forme|Pâtes ¦ Pasta
+forme|Bol de riz ¦ Hrísgrjónaskál
+forme|Saucisse ¦ Bjúga
+forme|Poireau ¦ Blaðlaukur
+forme|Piment fort ¦ Sterkur pipar
+forme|Piment doux ¦ Paprika
+forme|Pop-corn ¦ Poppkorn
+forme|Glace à l’eau ¦ Íspinni
+forme|Nutrition ¦ Næring
+forme|Bol ¦ Skál
+forme|Saladier ¦ Salatskál
+forme|Casserole ¦ Skaftpottur
+forme|Casserole et cuillère ¦ Skaftpottur og skeið
+forme|Poêle ¦ Panna
+forme|Couverts croisés ¦ Krosslögð hnífapör
+forme|Fourchette ¦ Gaffall
+forme|Cuillère ¦ Skeið
+forme|Cuillère de sucre ¦ Sykurskeið
+forme|Salière ¦ Saltbaukur
+forme|Sauce soja ¦ Sojasósa
+forme|Café à emporter ¦ Kaffi til að taka með
+forme|Cafetière ¦ Kaffikanna
+forme|Bouilloire fumante ¦ Rjúkandi ketill
+forme|Verre d’eau ¦ Vatnsglas
+forme|Flûte à champagne ¦ Kampavínsglas
+forme|Verre tulipe ¦ Túlípanaglas
+forme|Pinte ¦ Hálfur lítri
+forme|Fragile ¦ Brothætt
+forme|Bouteille de soda ¦ Gosflaska
+forme|Flacon ¦ Flaska
+forme|Spiritueux ¦ Sterkt áfengi
+forme|Tonneau de bière ¦ Bjórtunna
+forme|Tonneau ¦ Tunna
+forme|Mixeur ¦ Blandari
+forme|Barbecue ¦ Grill
+forme|Œuf de Pâques ¦ Páskaegg
+forme|Maison et immeuble ¦ Hús og fjölbýlishús
+forme|Porte ¦ Hurð
+forme|Porte ouverte ¦ Opin hurð
+forme|Fenêtre ¦ Gluggi
+forme|Escalier ¦ Stigi
+forme|Cheminée ¦ Arinn
+forme|Canapé ¦ Sófi
+forme|Lit ¦ Rúm
+forme|Lit double ¦ Hjónarúm
+forme|Fauteuil ¦ Hægindastóll
+forme|Table ¦ Borð
+forme|Armoire ¦ Fataskápur
+forme|Lampe de bureau ¦ Skrifborðslampi
+forme|Lustre ¦ Ljósakróna
+forme|Clé ancienne ¦ Gamall lykill
+forme|Cadenas ¦ Hengilás
+forme|Cadenas ouvert ¦ Opinn hengilás
+forme|Pendule ¦ Arinhilluklukka
+forme|Réveil ¦ Vekjaraklukka
+forme|Ballon de fête ¦ Blaðra
+forme|Fête ¦ Veisla
+forme|Ours en peluche ¦ Bangsi
+forme|Brique de jeu ¦ Kubbur
+forme|Cintre ¦ Herðatré
+forme|Fer à repasser ¦ Straujárn
+forme|Machine à laver ¦ Þvottavél
+forme|Aiguille ¦ Nál
+forme|Balai ¦ Sópur
+forme|Seau ¦ Fata
+forme|Boîte aux lettres ¦ Póstkassi
+forme|Téléphone ancien ¦ Gamall sími
+forme|Radio ¦ Útvarp
+forme|Télévision ancienne ¦ Gamalt sjónvarp
+forme|Machine à écrire ¦ Ritvél
+forme|Projecteur ¦ Skjávarpi
+forme|Pellicule ¦ Filmurúlla
+forme|Film ¦ Kvikmynd
+forme|Cassette ¦ Snælda
+forme|Tourne-disque ¦ Plötuspilari
+forme|Disque ¦ Hljómplata
+forme|Maison ronde ¦ Kringlótt hús
+forme|Toit ¦ Þak
+forme|Maison éclairée ¦ Upplýst hús
+forme|Quitter la maison ¦ Farið að heiman
+forme|Entrer à la maison ¦ Komið heim
+forme|Changement de maison ¦ Flutningar
+forme|Adresse ¦ Heimilisfang
+forme|Porte fermée ¦ Lokuð hurð
+forme|Porte coulissante ¦ Rennihurð
+forme|Porte coulissante ouverte ¦ Opin rennihurð
+forme|Sonnette ¦ Dyrabjalla
+forme|Fenêtre ouverte ¦ Opinn gluggi
+forme|Fenêtre fermée ¦ Lokaður gluggi
+forme|Balcon ¦ Svalir
+forme|Store banne ¦ Sólskyggni
+forme|Escalier montant ¦ Stigi upp
+forme|Escalier descendant ¦ Stigi niður
+forme|Ascenseur ¦ Lyfta
+forme|Escalator ¦ Rúllustigi
+forme|Échelle ¦ Lausastigi
+forme|Garage ¦ Bílskúr
+forme|Garage ouvert ¦ Opinn bílskúr
+forme|Fauteuil club ¦ Leðurstóll
+forme|Grand lit ¦ Stórt rúm
+forme|Lit deux places ¦ Tveggja manna rúm
+forme|Lit simple ¦ Einbreitt rúm
+forme|Lits superposés ¦ Kojur
+forme|Chaise d’écolier ¦ Skólastóll
+forme|Bureau ¦ Skrifborð
+forme|Commode ¦ Kommóða
+forme|Buffet ¦ Skenkur
+forme|Plan de travail ¦ Borðplata
+forme|Portemanteau ¦ Fatahengi
+forme|Casier ¦ Skápur
+forme|Tabouret ¦ Kollur
+forme|Banc ¦ Bekkur
+forme|Banc à dossier ¦ Bekkur með baki
+forme|Tapis ¦ Gólfmotta
+forme|Lampadaire ¦ Gólflampi
+forme|Grand lustre ¦ Stór ljósakróna
+forme|Applique murale ¦ Veggljós
+forme|Lanterne murale ¦ Vegglukt
+forme|Réverbère ¦ Ljósastaur
+forme|Lampe à huile ¦ Olíulampi
+forme|Guirlande lumineuse ¦ Ljósasería
+forme|Idée ¦ Hugmynd
+forme|Chandelier ¦ Kertastjaki
+forme|Chandelier allumé ¦ Kertastjaki með logandi kerti
+forme|Radiateur ¦ Ofn
+forme|Cuisinière ¦ Eldavél
+forme|Four à micro-ondes ¦ Örbylgjuofn
+forme|Réfrigérateur ¦ Ísskápur
+forme|Lave-vaisselle ¦ Uppþvottavél
+forme|Aspirateur ¦ Ryksuga
+forme|Planche à repasser ¦ Strauborð
+forme|Robinet ¦ Krani
+forme|Douche ¦ Sturta
+forme|Baignoire ¦ Baðkar
+forme|Toilettes ¦ Salerni
+forme|Ventilateur ¦ Vifta
+forme|Trousseau de clés ¦ Lyklakippa
+forme|Cloche qui sonne ¦ Hringjandi bjalla
+forme|Midi ¦ Hádegi
+forme|Sablier vide ¦ Tómt stundaglas
+forme|Sablier plein ¦ Fullt stundaglas
+forme|Cadeau ouvert ¦ Opin gjöf
+forme|Boîte aux lettres ouverte ¦ Opinn póstkassi
+forme|Vaporisateur ¦ Úðabrúsi
+forme|Poubelle ¦ Ruslatunna
+forme|Panier ¦ Karfa
+forme|Colis ¦ Pakki
+forme|Diable ¦ Handvagn
+forme|Caméra ancienne ¦ Gömul myndavél
+forme|Radio FM ¦ FM-útvarp
+forme|Antenne radio ¦ Útvarpsloftnet
+forme|Radiocassette ¦ Ferðaútvarp með segulbandi
+forme|Cassette vidéo ¦ Myndbandsspóla
+forme|Disque compact ¦ Geisladiskur
+forme|Lecteur de disques ¦ Diskaspilari
+forme|Télécopieur ¦ Faxtæki
+forme|Télévision ¦ Sjónvarp
+forme|Ordinateur ancien ¦ Gömul tölva
+forme|Disquette ¦ Disklingur
+forme|Calculatrice ¦ Reiknivél
+forme|Boulier ¦ Talnagrind
+forme|Cheminée éteinte ¦ Slökktur arinn
+forme|Volet roulant ¦ Rúllugluggahleri
+forme|Volet roulant ouvert ¦ Opinn rúllugluggahleri
+forme|Ventilateur de plafond ¦ Loftvifta
+forme|Sèche-linge ¦ Þurrkari
+forme|Grille-pain ¦ Brauðrist
+forme|Bain à remous ¦ Heitur pottur
+forme|Chauffe-eau ¦ Vatnshitari
+forme|Climatiseur ¦ Loftkæling
+forme|Caméscope ¦ Upptökuvél
+forme|Bobine de film ¦ Filmuspóla
+forme|Écran de projection ¦ Sýningartjald
+forme|Talkie-walkie ¦ Talstöð
+forme|Téléphone de bureau ¦ Borðsími
+forme|Trois heures ¦ Klukkan þrjú
+forme|Six heures ¦ Klukkan sex
+forme|Neuf heures ¦ Klukkan níu
+forme|Sablier écoulé ¦ Útrunnið stundaglas
+forme|Lampes ¦ Lampar
+forme|Lampadaire torchère ¦ Gólflampi sem lýsir upp
+forme|Carton ouvert ¦ Opinn pappakassi
+forme|T-shirt ¦ Stuttermabolur
+forme|Chemise ¦ Skyrta
+forme|Chapeau feutre ¦ Flókahattur
+forme|Chapeau rond ¦ Kúluhattur
+forme|Cravate ¦ Bindi
+forme|Nœud papillon ¦ Slaufa
+forme|Chaussure de ville ¦ Spariskór
+forme|Escarpin ¦ Háhælaður skór
+forme|Basket ¦ Strigaskór
+forme|Chausson de danse ¦ Ballettskór
+forme|Lunettes de soleil ¦ Sólgleraugu
+forme|Diamant ¦ Demantur
+forme|Collier ¦ Hálsmen
+forme|Montre ¦ Armbandsúr
+forme|Sac à main ¦ Handtaska
+forme|Portefeuille ¦ Seðlaveski
+forme|Parapluie fermé ¦ Lokuð regnhlíf
+forme|Ciseaux ¦ Skæri
+forme|Rouge à lèvres ¦ Varalitur
+forme|Sac à dos ¦ Bakpoki
+forme|Mallette ¦ Skjalataska
+forme|Lingerie ¦ Undirföt
+forme|Sous-vêtement ¦ Nærbuxur
+forme|Couche ¦ Bleyja
+forme|Chapeau de magicien ¦ Töframannshattur
+forme|Chaussure à crampons ¦ Takkaskór
+forme|Chaussette de Noël ¦ Jólasokkur
+forme|Portefeuille plié ¦ Samanbrotið seðlaveski
+forme|Pochette de voyage ¦ Ferðaveski
+forme|Bagage cabine ¦ Handfarangur
+forme|Bagage en soute ¦ Innritaður farangur
+forme|Sac étiqueté ¦ Merkt taska
+forme|Mallette professionnelle ¦ Vinnutaska
+forme|Sèche-cheveux ¦ Hárblásari
+forme|Rasoir de sûreté ¦ Rakvél
+forme|Lame de rasoir ¦ Rakvélarblað
+forme|Lotion ¦ Húðkrem
+forme|Loup ¦ Augngríma
+forme|Masques de théâtre ¦ Leikhúsgrímur
+forme|Masque de Guy Fawkes ¦ Guy Fawkes-gríma
+forme|Voiture ¦ Bíll
+forme|Voiture de profil ¦ Bíll á hlið
+forme|Cabriolet ¦ Blæjubíll
+forme|Break ¦ Skutbíll
+forme|Camionnette ¦ Sendibíll
+forme|Camion ¦ Vörubíll
+forme|Fourgon ¦ Lokaður sendibíll
+forme|Autobus ¦ Strætisvagn
+forme|Autocar ¦ Rúta
+forme|Train ¦ Lest
+forme|Locomotive ¦ Eimreið
+forme|Tramway ¦ Sporvagn
+forme|Métro ¦ Neðanjarðarlest
+forme|Tracteur ¦ Dráttarvél
+forme|Vélo ¦ Reiðhjól
+forme|Moto ¦ Mótorhjól
+forme|Trottinette ¦ Hlaupahjól
+forme|Voilier ¦ Seglbátur
+forme|Paquebot ¦ Farþegaskip
+forme|Gouvernail ¦ Stýrishjól
+forme|Avion ¦ Flugvél
+forme|Décollage ¦ Flugtak
+forme|Montgolfière ¦ Loftbelgur
+forme|Fusée ¦ Eldflaug
+forme|Fusée au départ ¦ Eldflaugarskot
+forme|Caravane ¦ Hjólhýsi
+forme|Camping-car ¦ Húsbíll
+forme|Station-service ¦ Bensínstöð
+forme|Feu tricolore ¦ Umferðarljós
+forme|Panneau de direction ¦ Vegvísir
+forme|Route ¦ Vegur
+forme|Itinéraire ¦ Leið
+forme|Brouette ¦ Hjólbörur
+forme|Volant ¦ Stýri
+forme|Voiture de dos ¦ Bíll aftan frá
+forme|Voiture compacte ¦ Smábíll
+forme|Voiture de sport ¦ Sportbíll
+forme|Limousine ¦ Glæsivagn
+forme|Voiture électrique ¦ Rafbíll
+forme|Siège auto ¦ Bílstóll
+forme|Siège enfant ¦ Barnabílstóll
+forme|Lavage auto ¦ Bílaþvottur
+forme|Garagiste ¦ Bifvélavirki
+forme|Taxi ¦ Leigubíll
+forme|Jeepney ¦ Jeepney
+forme|Camion de livraison ¦ Sendiferðabíll
+forme|Livraison rapide ¦ Hraðsending
+forme|Semi-remorque ¦ Festivagn
+forme|Camion plateau ¦ Pallbíll
+forme|Camion-citerne ¦ Tankbíll
+forme|Dépanneuse ¦ Dráttarbíll
+forme|Benne ¦ Malarflutningabíll
+forme|Minibus ¦ Smárúta
+forme|Bus scolaire ¦ Skólabíll
+forme|Bus à impériale ¦ Tveggja hæða strætisvagn
+forme|Arrêt de bus ¦ Strætóstoppistöð
+forme|Train et voiture ¦ Lest og bíll
+forme|Train et bus ¦ Lest og strætó
+forme|Voiture de voyageurs ¦ Farþegavagn
+forme|Fourgon de queue ¦ Aftasti vagn
+forme|Tramway de profil ¦ Sporvagn á hlið
+forme|souterrain ¦ neðanjarðar
+forme|Télécabine ¦ Kláfur
+forme|Vélo à panier ¦ Reiðhjól með körfu
+forme|Vélo cargo ¦ Flutningahjól
+forme|Vélo électrique ¦ Rafhjól
+forme|Grand-bi ¦ Hábeinungur
+forme|Cyclomoteur ¦ Skellinaðra
+forme|Trottinette électrique ¦ Rafhlaupahjól
+forme|Pousse-pousse ¦ Léttivagn (rickshaw)
+forme|Monocycle ¦ Einhjól
+forme|Quad ¦ Fjórhjól
+forme|Motoneige ¦ Vélsleði
+forme|Chariot élévateur ¦ Lyftari
+forme|Pelleteuse ¦ Grafa
+forme|Bulldozer ¦ Jarðýta
+forme|Grue ¦ Krani
+forme|Portique ¦ Brúarkrani
+forme|Atterrissage ¦ Lending
+forme|Aéroport ¦ Flugvöllur
+forme|Hélicoptère ¦ Þyrla
+forme|Drone ¦ Dróni
+forme|Parachute ¦ Fallhlíf
+forme|Parapente ¦ Svifvængur
+forme|Soucoupe volante ¦ Fljúgandi diskur
+forme|Satellite ¦ Gervihnöttur
+forme|Station spatiale ¦ Geimstöð
+forme|Sous-marin ¦ Kafbátur
+forme|Naufrage ¦ Skipbrot
+forme|Bouée de sauvetage ¦ Bjarghringur
+forme|Rame ¦ Ár
+forme|Jetée ¦ Bryggja
+forme|Grue portuaire ¦ Hafnarkrani
+forme|Kayak ¦ Kajak
+forme|Aviron ¦ Róður
+forme|Avion et voiture ¦ Flugvél og bíll
+forme|Avion et train ¦ Flugvél og lest
+forme|Autoroute ¦ Hraðbraut
+forme|Route droite ¦ Beinn vegur
+forme|Itinéraires ¦ Leiðir
+forme|Tunnel ¦ Göng
+forme|Barrière ¦ Slá
+forme|Tourniquet ¦ Snúningshlið
+forme|Cône de signalisation ¦ Umferðarkeila
+forme|Panneau attention ¦ Viðvörunarmerki
+forme|Cédez le passage ¦ Biðskylda
+forme|Poteau indicateur ¦ Vegvísisstaur
+forme|Panneau à vendre ¦ Til sölu-skilti
+forme|Directions ¦ Áttir
+forme|Parking ¦ Bílastæði
+forme|Borne de recharge ¦ Hleðslustöð
+forme|Carburant ¦ Eldsneyti
+forme|Pneu ¦ Hjólbarði
+forme|Moteur ¦ Vél
+forme|Ceinture de sécurité ¦ Bílbelti
+forme|Compteur de vitesse ¦ Hraðamælir
+forme|Correspondance ¦ Tenging
+forme|Accessibilité ¦ Aðgengi
+forme|Maison moderne ¦ Nútímalegt hús
+forme|Immeuble ¦ Fjölbýlishús
+forme|Ville ¦ Borg
+forme|Bâtiment ¦ Bygging
+forme|Hôpital ¦ Sjúkrahús
+forme|École ¦ Skóli
+forme|toque ¦ húfa
+forme|Hôtel de ville ¦ Ráðhús
+forme|Banque ¦ Banki
+forme|Boutique ¦ Verslun
+forme|Commerce ¦ Búð
+forme|Entrepôt ¦ Vöruhús
+forme|Grange ¦ Hlaða
+forme|Serre ¦ Gróðurhús
+forme|Clôture ¦ Girðing
+forme|Portail ¦ Hlið
+forme|Tente ¦ Tjald
+forme|Phare ¦ Viti
+forme|Phare allumé ¦ Logandi viti
+forme|Mosquée ¦ Moska
+forme|Synagogue ¦ Bænahús gyðinga
+forme|Temple ¦ Hof
+forme|Pagode ¦ Pagóða
+forme|Stade ¦ Leikvangur
+forme|Théâtre ¦ Leikhús
+forme|Fontaine ¦ Gosbrunnur
+forme|Colonne ¦ Súla
+forme|Mur ¦ Veggur
+forme|Éolienne ¦ Vindmylla
+forme|Tour de guet ¦ Varðturn
+forme|Commissariat ¦ Lögreglustöð
+forme|Poste ¦ Pósthús
+forme|Drapeau à damier ¦ Köflóttur fáni
+forme|Immeuble repéré ¦ Merkt bygging
+forme|Changer de ville ¦ Skipta um borg
+forme|Changer de bâtiment ¦ Skipta um byggingu
+forme|Bibliothèque ¦ Bókasafn
+forme|bâtiment ¦ bygging
+forme|Rayonnages ¦ Hillur
+forme|Commerce ouvert {x} h ¦ Verslun opin {x} klst.
+forme|Hôpital repéré ¦ Merkt sjúkrahús
+forme|Panneau d’hôpital ¦ Sjúkrahússkilti
+forme|Terrain de football ¦ Fótboltavöllur
+forme|Terrain de base-ball ¦ Hafnaboltavöllur
+forme|Poste de secours ¦ Skyndihjálparstöð
+forme|Tour Eiffel ¦ Eiffelturninn
+forme|Grande roue ¦ Parísarhjól
+forme|Yourte ¦ Júrta
+forme|Chalet ¦ Fjallakofi
+forme|Feu de camp ¦ Varðeldur
+forme|Piscine ¦ Sundlaug
+forme|Caserne de pompiers ¦ Slökkvistöð
+forme|Panneau d’affichage ¦ Auglýsingaskilti
+forme|Panneau d’annonces ¦ Tilkynningatafla
+forme|Podium ¦ Verðlaunapallur
+forme|Mur en flammes ¦ Logandi veggur
+forme|Portail ouvert ¦ Opið hlið
+forme|Réservoir ¦ Tankur
+forme|Pylône électrique ¦ Rafmagnsmastur
+forme|Turbine ¦ Hverfill
+forme|Panneau solaire ¦ Sólarsella
+forme|Grand panneau solaire ¦ Stór sólarsella
+forme|Barrage ¦ Stífla
+forme|Explosion nucléaire ¦ Kjarnorkusprenging
+forme|Marteau ¦ Hamar
+forme|Outils ¦ Verkfæri
+forme|Clé à molette ¦ Skiptilykill
+forme|Tournevis ¦ Skrúfjárn
+forme|Lame de scie ¦ Sagarblað
+forme|Scie ¦ Sög
+forme|Hache ¦ Öxi
+forme|Pelle ¦ Skófla
+forme|Pioche ¦ Haki
+forme|Enclume ¦ Steðji
+forme|Clou ¦ Nagli
+forme|Boîte à outils ¦ Verkfærakassi
+forme|Règle ¦ Reglustika
+forme|Crayon et règle ¦ Blýantur og reglustika
+forme|Rouleau de peinture ¦ Málningarrúlla
+forme|Pinceau ¦ Pensill
+forme|Palette de peintre ¦ Litaspjald málara
+forme|Stéthoscope ¦ Hlustpípa
+forme|Trousse médicale ¦ Sjúkrataska
+forme|Balance ¦ Vog
+forme|Marteau de juge ¦ Dómarahamar
+forme|Billets ¦ Peningaseðlar
+forme|Euro ¦ Evra
+forme|Caisse ¦ Peningakassi
+forme|Microscope ¦ Smásjá
+forme|Fiole ¦ Glas (tilraunaglas)
+forme|Livre d’école ¦ Skólabók
+forme|Camion de pompiers ¦ Slökkvibíll
+forme|Imprimante ¦ Prentari
+forme|Casque de chantier ¦ Öryggishjálmur
+forme|Mine ¦ Náma
+forme|Bidon d’huile ¦ Olíubrúsi
+forme|Couteau ¦ Hnífur
+forme|Outils croisés ¦ Krosslögð verkfæri
+forme|Marteau et tournevis ¦ Hamar og skrúfjárn
+forme|Marteau et faucille ¦ Hamar og sigð
+forme|Clé à tube ¦ Toppalykill
+forme|Pince ¦ Töng
+forme|Scie circulaire ¦ Hjólsög
+forme|Cutter ¦ Dúkahnífur
+forme|Équerre et compas ¦ Vinkill og hringfari
+forme|Compas ¦ Hringfari
+forme|Mètre ruban ¦ Málband
+forme|Niveau à bulle ¦ Hallamál
+forme|Vis à tête plate ¦ Skrúfa með flötum haus
+forme|Vis à tête ronde ¦ Skrúfa með kúptum haus
+forme|Boulon ¦ Bolti
+forme|Écrou ¦ Ró
+forme|Rivet ¦ Hnoð
+forme|Fer à souder ¦ Lóðbolti
+forme|Bêche ¦ Stunguskófla
+forme|Hache de guerre ¦ Bardagaöxi
+forme|Crayon à papier ¦ Blýantur (grafít)
+forme|Bombe de peinture ¦ Úðamálningarbrúsi
+forme|Pot de peinture ¦ Málningardós
+forme|Pipette ¦ Dropateljari
+forme|Dessin ¦ Teikning
+forme|Plume de dessin ¦ Teiknipenni
+forme|Balance de cuisine ¦ Eldhúsvog
+forme|Balance déséquilibrée ¦ Vog í ójafnvægi
+forme|Pèse-personne ¦ Baðvog
+forme|Poids ¦ Lóð
+forme|Lingots d’or ¦ Gullstangir
+forme|Liasses de billets ¦ Seðlabúnt
+forme|Tirelire ¦ Sparigrís
+forme|Livre sterling ¦ Sterlingspund
+forme|Franc ¦ Franki
+forme|Yen ¦ Jen
+forme|Rouble ¦ Rúbla
+forme|Roupie indienne ¦ Indversk rúpía
+forme|Chéquier ¦ Ávísanahefti
+forme|Carte bancaire ¦ Bankakort
+forme|Chariot de courses ¦ Innkaupakerra
+forme|Sac de courses ¦ Innkaupapoki
+forme|Soldes ¦ Útsala
+forme|Reçu ¦ Kvittun
+forme|Télescope ¦ Stjörnusjónauki
+forme|Bécher ¦ Bikarglas
+forme|Ballon de chimie ¦ Efnafræðiflaska
+forme|Éprouvette ¦ Tilraunaglas
+forme|Atome ¦ Atóm
+forme|Molécule ¦ Sameind
+forme|Tableau périodique ¦ Lotukerfið
+forme|Lunettes de protection ¦ Hlífðargleraugu
+forme|Menottes ¦ Handjárn
+forme|Extincteur ¦ Slökkvitæki
+forme|Bouche d’incendie ¦ Brunahani
+forme|Pupitre ¦ Ræðupúlt
+forme|Présentation ¦ Kynning
+forme|Présentation projetée ¦ Kynning á tjaldi
+forme|Courrier ¦ Póstur
+forme|Musique ¦ Tónlist
+forme|Note de musique ¦ Nóta
+forme|Clé de sol ¦ G-lykill
+forme|Piano ¦ Píanó
+forme|Guitare ¦ Gítar
+forme|Violon ¦ Fiðla
+forme|Trompette ¦ Trompet
+forme|Saxophone ¦ Saxófónn
+forme|Clairon ¦ Lúður
+forme|Micro ancien ¦ Gamall hljóðnemi
+forme|Casque audio ¦ Heyrnartól
+forme|Roi ¦ Kóngur
+forme|échecs ¦ skák
+forme|Dame ¦ Drottning
+forme|Fou ¦ Biskup
+forme|Pion ¦ Peð
+forme|Cartes à jouer ¦ Spil
+forme|cartes ¦ spil
+forme|Pique ¦ Spaði
+forme|Carreau ¦ Tígull
+forme|Dé ¦ Teningur
+forme|Puzzle ¦ Púsluspil
+forme|Cerf-volant ¦ Flugdreki
+forme|Ballon de football ¦ Fótbolti
+forme|Ballon de basket ¦ Körfubolti
+forme|Tennis ¦ Tennis
+forme|Ballon de rugby ¦ Rúgbíbolti
+forme|Cycliste ¦ Hjólreiðamaður
+forme|Nageur ¦ Sundmaður
+forme|Skieur ¦ Skíðamaður
+forme|Coupe ¦ Bikar
+forme|Trophée ¦ Verðlaunagripur
+forme|Ticket ¦ Miði
+forme|Clap de cinéma ¦ Klappa (kvikmynd)
+forme|Nuancier ¦ Litaspjald
+forme|Livre ouvert ¦ Opin bók
+forme|Manette ¦ Leikjastýripinni
+forme|Guitare électrique ¦ Rafmagnsgítar
+forme|Médiator ¦ Gítarnögl
+forme|Ocarina ¦ Okarína
+forme|instrument ¦ hljóðfæri
+forme|Métronome ¦ Taktmælir
+forme|Microphone ¦ Hljóðnemi
+forme|Amplificateur ¦ Magnari
+forme|Enceinte ¦ Hátalari
+forme|Partition encadrée ¦ Nótnablað í ramma
+forme|Croche ¦ Áttundapartsnóta
+forme|Blanche ¦ Hálfnóta
+forme|Noire ¦ Fjórðapartsnóta
+forme|Double croche ¦ Sextándapartsnóta
+forme|Ronde ¦ Heilnóta
+forme|Clé de fa ¦ F-lykill
+forme|Clé d’ut ¦ C-lykill
+forme|Dièse ¦ Kross (♯)
+forme|musique ¦ tónlist
+forme|Bémol ¦ Bé (♭)
+forme|Bécarre ¦ Afturköllunarmerki (♮)
+forme|Pause ¦ Heilþögn
+forme|Demi-pause ¦ Hálfþögn
+forme|Soupir ¦ Fjórðapartsþögn
+forme|Demi-soupir ¦ Áttundapartsþögn
+forme|Recueil de chansons ¦ Söngbók
+forme|Écouteurs ¦ Eyrnatól
+forme|Danse de salon ¦ Samkvæmisdans
+forme|Billet ¦ Aðgöngumiði
+forme|Jeu de cartes ¦ Spilastokkur
+forme|Carte de cœur ¦ Hjartaspil
+forme|Carte de pique ¦ Spaðaspil
+forme|Carte de trèfle ¦ Laufaspil
+forme|Carte de carreau ¦ Tígulspil
+forme|Jeton de poker ¦ Pókerpeningur
+forme|Machine à sous ¦ Spilakassi
+forme|Dés ¦ Teningar
+forme|Dé à vingt faces ¦ Tuttuguhliða teningur
+forme|Damier ¦ Taflborð
+forme|Pièce de puzzle et cœur ¦ Púslubiti og hjarta
+forme|Tangram ¦ Tangram
+forme|Moulin à vent ¦ Vindmylla
+forme|jouet ¦ leikfang
+forme|Bascule ¦ Vegasalt
+forme|jeu ¦ leikur
+forme|Toboggan ¦ Rennibraut
+forme|Boule de cristal ¦ Kristalskúla
+forme|Baguette magique ¦ Töfrasproti
+forme|Feu d’artifice ¦ Flugeldar
+forme|Bowling ¦ Keila
+forme|Billard ¦ Billjard
+forme|Triangle de billard ¦ Billjardþríhyrningur
+forme|Golf ¦ Golf
+forme|Balle de base-ball ¦ Hafnabolti
+forme|Batte de base-ball ¦ Hafnaboltakylfa
+forme|Panier de basket ¦ Körfuboltakarfa
+forme|Ballon de volley ¦ Blakbolti
+forme|Ballon de football américain ¦ Amerískur fótbolti
+forme|Casque de football américain ¦ Hjálmur í amerískum fótbolta
+forme|Balle de tennis ¦ Tennisbolti
+forme|Badminton ¦ Badminton
+forme|Tennis de table ¦ Borðtennis
+forme|Crosses de hockey ¦ Íshokkíkylfur
+forme|Handball ¦ Handbolti
+forme|Polo ¦ Póló
+forme|Curling ¦ Krulla
+forme|Arc et flèche ¦ Bogi og ör
+forme|Flèche dans la cible ¦ Ör í skotmarki
+forme|Cible de tir ¦ Skotskífa
+forme|Escrime ¦ Skylmingar
+forme|Karaté ¦ Karate
+forme|Gant de boxe ¦ Boxhanski
+forme|Gymnastique ¦ Fimleikar
+forme|Haltérophile ¦ Lyftingamaður
+forme|Haltère ¦ Handlóð
+forme|Corde à sauter ¦ Sippuband
+forme|Sprinteur ¦ Spretthlaupari
+forme|Randonneur ¦ Göngumaður
+forme|Ski de fond ¦ Gönguskíði
+forme|Ski nautique ¦ Sjóskíði
+forme|Planche à neige ¦ Snjóbretti
+forme|Raquettes à neige ¦ Snjóþrúgur
+forme|Luge ¦ Sleði
+forme|Patin à glace ¦ Skauti
+forme|Patin à roulettes ¦ Hjólaskauti
+forme|Roller en ligne ¦ Línuskautar
+forme|Planche à roulettes ¦ Hjólabretti
+forme|Skateur ¦ Hjólabrettamaður
+forme|Surfeur ¦ Brimbrettamaður
+forme|Plongeur ¦ Dýfingamaður
+forme|Plongée sous-marine ¦ Köfun
+forme|Masque de plongée ¦ Köfunargríma
+forme|Tuba ¦ Öndunarpípa
+forme|Casque de course ¦ Kappaksturshjálmur
+forme|Sifflet ¦ Flauta
+forme|Tableau des scores ¦ Stigatafla
+forme|Médaille d’or ¦ Gullverðlaun
+forme|Trophée brisé ¦ Brotinn verðlaunagripur
+forme|Tournoi ¦ Mót
+forme|Flambeau ¦ Kyndill
+forme|Jumelles ¦ Sjónauki
+forme|Panorama ¦ Útsýni
+forme|un ¦ einn
+forme|deux ¦ tveir
+forme|trois ¦ þrír
+forme|quatre ¦ fjórir
+forme|six ¦ sex
+forme|cinéma ¦ kvikmyndir
+forme|Médaille d’argent ¦ Silfurverðlaun
+forme|Médaille de bronze ¦ Bronsverðlaun
+forme|Cricket ¦ Krikket
+forme|Liste de chansons ¦ Lagalisti
+forme|Étoile de David ¦ Davíðsstjarna
+forme|Ménorah ¦ Menóra
+forme|Croissant et étoile ¦ Hálfmáni og stjarna
+forme|Om ¦ Om
+forme|Roue du dharma ¦ Dharmahjól
+forme|Yin et yang ¦ Yin og yang
+forme|Paix ¦ Friður
+forme|Cœur brisé ¦ Brostið hjarta
+forme|Éternité ¦ Eilífð
+forme|Khanda ¦ Khanda
+forme|Ménorah allumée ¦ Logandi menóra
+forme|Hexagramme ¦ Sexstirni
+forme|Boule de Noël ¦ Jólakúla
+forme|Halloween ¦ Hrekkjavaka
+forme|Citrouille ¦ Grasker
+forme|Document ¦ Skjal
+forme|Documents ¦ Skjöl
+forme|Note écrite ¦ Skrifuð athugasemd
+forme|Livres ¦ Bækur
+forme|Carnet ¦ Minnisbók
+forme|Journal ¦ Dagbók
+forme|Gazette ¦ Fréttablað
+forme|Lettre {x} ¦ Bókstafur {x}
+forme|Timbre ¦ Frímerki
+forme|Archives ¦ Skjalasafn
+forme|Dossier ¦ Mappa
+forme|Dossier ouvert ¦ Opin mappa
+forme|Presse-papiers ¦ Klemmuspjald
+forme|Calendrier ¦ Dagatal
+forme|Date heureuse ¦ Gleðidagur
+forme|Date importante ¦ Mikilvæg dagsetning
+forme|Stylo ¦ Penni
+forme|Stylo-plume ¦ Blekpenni
+forme|Signature ¦ Undirskrift
+forme|Guillemet ¦ Gæsalöpp
+forme|Marque-page ¦ Bókamerki
+forme|Punaise ¦ Teiknibóla
+forme|Trombone ¦ Bréfaklemma
+forme|Post-it ¦ Gulur miði
+forme|Bulle de message ¦ Skilaboðablaðra
+forme|Discussion ¦ Samtal
+forme|Traduction ¦ Þýðing
+forme|Alphabet ¦ Stafróf
+forme|Document à modifier ¦ Skjal til að breyta
+forme|Document signé ¦ Undirritað skjal
+forme|Classeur à tiroirs ¦ Skjalaskápur
+forme|Document douteux ¦ Vafasamt skjal
+forme|Document daté ¦ Dagsett skjal
+forme|Document important ¦ Mikilvægt skjal
+forme|Document lié ¦ Tengt skjal
+forme|Partition ¦ Nótnablað
+forme|Dossiers ¦ Möppur
+forme|Dossier de la maison ¦ Mappa hússins
+forme|Dossier favori ¦ Uppáhaldsmappa
+forme|Dossier important ¦ Mikilvæg mappa
+forme|Dossier de textes ¦ Textamappa
+forme|Recherche de dossier ¦ Leit að möppu
+forme|Dossier daté ¦ Dagsett mappa
+forme|Dossier mystère ¦ Leyndardómsmappa
+forme|Recherche aux archives ¦ Leit í skjalasafni
+forme|Archive précieuse ¦ Dýrmætt skjal
+forme|Livre ouvert vierge ¦ Auð opin bók
+forme|pages ¦ síður
+forme|Abécédaire ¦ Stafrófskver
+forme|Recherche dans un livre ¦ Leit í bók
+forme|Livre daté ¦ Dagsett bók
+forme|Livre et repère ¦ Bók og bókamerki
+forme|Livre en écriture ¦ Bók í skrifum
+forme|Marque-pages ¦ Bókamerki
+forme|Carnets ¦ Minnisbækur
+forme|Lettres ¦ Bréf
+forme|Bulletin ¦ Fréttabréf
+forme|Presse-papiers vide ¦ Tómt klemmuspjald
+forme|Liste sur presse-papiers ¦ Listi á klemmuspjaldi
+forme|Fiche de personne ¦ Spjald einstaklings
+forme|Liste validée ¦ Samþykktur listi
+forme|Calendrier vierge ¦ Autt dagatal
+forme|Mois ¦ Mánuður
+forme|Aujourd’hui ¦ Í dag
+forme|Période ¦ Tímabil
+forme|Agenda ¦ Dagbók (skipuleggjari)
+forme|Date et heure ¦ Dagsetning og tími
+forme|Date inconnue ¦ Óþekkt dagsetning
+forme|Date incertaine ¦ Óviss dagsetning
+forme|Date confirmée ¦ Staðfest dagsetning
+forme|Date de début ¦ Upphafsdagsetning
+forme|Date de fin ¦ Lokadagsetning
+forme|Notes ¦ Athugasemdir
+forme|Écrire une note ¦ Skrifa athugasemd
+forme|Autocollant ¦ Límmiði
+forme|Notes écrites ¦ Skrifaðar athugasemdir
+forme|Pièce jointe ¦ Viðhengi
+forme|Étiquettes ¦ Merki
+forme|Étiquette écrite ¦ Skrifað merki
+forme|Étiquette favorite ¦ Uppáhaldsmerki
+forme|Message écrit ¦ Skrifuð skilaboð
+forme|Question ¦ Spurning
+forme|Conversation ¦ Samræður
+forme|Commentaire ¦ Ummæli
+forme|Commentaire écrit ¦ Skrifuð ummæli
+forme|Citation ¦ Tilvitnun
+forme|Commentaires ¦ Ummæli (mörg)
+forme|Témoignage ¦ Vitnisburður
+forme|Bulle de pensée ¦ Hugsanablaðra
+forme|Guillemet fermant ¦ Lokagæsalöpp
+forme|Alphabet latin ¦ Latneskt stafróf
+forme|Alphabet grec ¦ Grískt stafróf
+forme|Alphabet cyrillique ¦ Kýrillískt stafróf
+forme|Alphabet hébreu ¦ Hebreskt stafróf
+forme|Alphabet arabe ¦ Arabískt stafróf
+forme|Idéogramme ¦ Myndletur
+forme|Braille ¦ Blindraletur
+forme|stylo ¦ penni
+forme|Signature écrite ¦ Skrifuð undirskrift
+forme|Crayon encadré ¦ Blýantur í ramma
+forme|Gomme ¦ Strokleður
+forme|Carte de visite ¦ Nafnspjald
+forme|Carte nominative ¦ Nafnmiði
+forme|Répertoire ¦ Nafnaskrá
+forme|Fichier rotatif ¦ Spjaldskrá á snúningi
+forme|Passeport biométrique ¦ Lífkennavegabréf
+forme|Licence ¦ Leyfi
+forme|Bulletin de vote ¦ Kjörseðill
+forme|Vote ¦ Atkvæðagreiðsla
+forme|Liste à puces ¦ Punktalisti
+forme|Liste numérotée ¦ Númeraður listi
+forme|Tableau ¦ Tafla
+forme|Scanner ¦ Skanni
+forme|Copie ¦ Afrit
+forme|Semaine ¦ Vika
+forme|Fin de semaine ¦ Helgi
+forme|Enveloppe ¦ Umslag
+forme|Réponse ¦ Svar
+forme|Texte long ¦ Langur texti
+forme|Battement de cœur ¦ Hjartsláttur
+forme|Pansement ¦ Plástur
+forme|Croix médicale ¦ Læknakross
+forme|Ambulance ¦ Sjúkrabíll
+forme|Dent ¦ Tönn
+forme|Cerveau ¦ Heili
+forme|Poumons ¦ Lungu
+forme|Estomac ¦ Magi
+forme|Œil ¦ Auga
+forme|Oreille ¦ Eyra
+forme|Virus ¦ Veira
+forme|Bactérie ¦ Baktería
+forme|ADN ¦ DNA
+forme|Mortier ¦ Mortél
+forme|Tête de mort ¦ Hauskúpa
+forme|Défibrillateur ¦ Hjartastuðtæki
+forme|Pouls ¦ Púls
+forme|Pilules ¦ Pillur
+forme|Médicament ¦ Lyf
+forme|Ordonnance ¦ Lyfseðill
+forme|Perfusion ¦ Vökvagjöf í æð
+forme|Poche de sang ¦ Blóðpoki
+forme|Diabète ¦ Sykursýki
+forme|Allergie ¦ Ofnæmi
+forme|Radiographie ¦ Röntgenmynd
+forme|Scanner du crâne ¦ Sneiðmynd af höfuðkúpu
+forme|Brosse à dents ¦ Tannbursti
+forme|Brosse à dents et dentifrice ¦ Tannbursti og tannkrem
+forme|Surdité ¦ Heyrnarleysi
+forme|Œil fermé ¦ Lokað auga
+forme|Cécité ¦ Blinda
+forme|Dossier médical ¦ Sjúkraskrá
+forme|Reproduction ¦ Æxlun
+forme|Malade ¦ Sjúklingur
+forme|Fièvre ¦ Hiti
+forme|Mortier et pilon ¦ Mortél og stautur
+forme|Potion de soin ¦ Lækningadrykkur
+forme|Poison ¦ Eitur
+forme|Boucle auditive ¦ Tónmöskvi
+forme|Tache de liquide ¦ Vökvablettur
+forme|Cœur arrêté ¦ Hjarta sem hefur stöðvast
+forme|Véhicule sanitaire ¦ Sjúkraflutningabíll
+forme|Étoile ronde ¦ Kringlótt stjarna
+forme|Demi-cœur ¦ Hálft hjarta
+forme|Pouce levé ¦ Þumall upp
+forme|Pouce baissé ¦ Þumall niður
+forme|Validé ¦ Samþykkt
+forme|Refusé ¦ Hafnað
+forme|Plus rond ¦ Plús í hring
+forme|Moins rond ¦ Mínus í hring
+forme|Question ronde ¦ Spurning í hring
+forme|Attention ¦ Athugið
+forme|Alerte ¦ Viðvörun
+forme|Stop ¦ Stopp
+forme|Info ronde ¦ Upplýsingar í hring
+forme|Bouclier ¦ Skjöldur
+forme|Bouclier validé ¦ Samþykktur skjöldur
+forme|Recyclage ¦ Endurvinnsla
+forme|Copyright ¦ Höfundarréttur
+forme|Arobase ¦ Att-merki
+forme|Pourcentage ¦ Prósenta
+forme|Dollar ¦ Dollari
+forme|Pi ¦ Pí
+forme|Somme ¦ Summa
+forme|Danger biologique ¦ Lífhætta
+forme|Radioactif ¦ Geislavirkt
+forme|Content ¦ Glaður
+forme|Triste ¦ Leiður
+forme|Neutre ¦ Hlutlaus
+forme|Ravi ¦ Himinlifandi
+forme|Pleure ¦ Grætur
+forme|Fâché ¦ Reiður
+forme|Clin d’œil ¦ Blikk
+forme|Bisou ¦ Koss
+forme|Fantôme ¦ Draugur
+forme|Robot ¦ Vélmenni
+forme|Hexagones ¦ Sexhyrningar
+forme|Cible ¦ Skotmark
+forme|Mille ¦ Þúsund
+forme|Engrenage ¦ Tannhjól
+forme|Aimant ¦ Segull
+forme|Ondes ¦ Bylgjur
+forme|Bluetooth ¦ Bluetooth
+forme|Fanion ¦ Veifa
+forme|Récompense ¦ Verðlaun
+forme|Chiffre {x} ¦ Tölustafur {x}
+forme|Demi-étoile ¦ Hálf stjarna
+forme|Étoile souriante ¦ Brosandi stjarna
+forme|Étoile encadrée ¦ Stjarna í ramma
+forme|Décagramme ¦ Tíustjarna
+forme|Octogramme ¦ Áttastjarna
+forme|Sceau validé ¦ Samþykkt innsigli
+forme|Pour et contre ¦ Með og á móti
+forme|Coche épaisse ¦ Þykkt hak
+forme|Double coche ¦ Tvöfalt hak
+forme|Croix de refus ¦ Höfnunarkross
+forme|Croix épaisse ¦ Þykkur kross
+forme|Interdit octogonal ¦ Átthyrnt bannmerki
+forme|Plus épais ¦ Þykkur plús
+forme|Moins épais ¦ Þykkur mínus
+forme|Plus ou moins ¦ Plús eða mínus
+forme|Égal ¦ Jafnt og
+forme|Question en losange ¦ Spurning í tígli
+forme|Alerte en losange ¦ Viðvörun í tígli
+forme|Interdit ¦ Bannað
+forme|Sens interdit ¦ Innakstur bannaður
+forme|Demi-bouclier ¦ Hálfur skjöldur
+forme|Bouclier étoilé ¦ Stjörnuskjöldur
+forme|Esperluette ¦ Og-merki
+forme|Astérisque ¦ Stjörnumerki (*)
+forme|Oméga ¦ Ómega
+forme|Chiffre romain I ¦ Rómversk tala I
+forme|Chiffre romain II ¦ Rómversk tala II
+forme|Chiffre romain III ¦ Rómversk tala III
+forme|Chiffre romain IV ¦ Rómversk tala IV
+forme|Chiffre romain V ¦ Rómversk tala V
+forme|Chiffre romain VI ¦ Rómversk tala VI
+forme|Chiffre romain VII ¦ Rómversk tala VII
+forme|Chiffre romain VIII ¦ Rómversk tala VIII
+forme|Chiffre romain IX ¦ Rómversk tala IX
+forme|Chiffre romain X ¦ Rómversk tala X
+forme|Bâton ¦ Prik
+forme|Bâtons ¦ Prik (mörg)
+forme|cinq ¦ fimm
+forme|Bélier ¦ Hrútur
+forme|zodiaque ¦ dýrahringur
+forme|Taureau ¦ Naut
+forme|Gémeaux ¦ Tvíburar
+forme|Cancer ¦ Krabbi
+forme|Lion ¦ Ljón
+forme|Vierge ¦ Meyja
+forme|Scorpion ¦ Sporðdreki
+forme|Sagittaire ¦ Bogmaður
+forme|Capricorne ¦ Steingeit
+forme|Verseau ¦ Vatnsberi
+forme|Poissons ¦ Fiskar
+forme|Visage souriant ¦ Brosandi andlit
+forme|Visage décontracté ¦ Afslappað andlit
+forme|Perplexe ¦ Ráðvilltur
+forme|Visage évanoui ¦ Andlit sem fellur í yfirlið
+forme|Diablotin ¦ Púki
+forme|Mort de rire ¦ Grætur af hlátri
+forme|Extraterrestre ¦ Geimvera
+forme|Pentagramme ¦ Fimmstirni
+forme|Losange plein ¦ Fylltur tígull
+forme|Losange moyen ¦ Miðlungs tígull
+forme|Disque plein ¦ Fylltur hringflötur
+forme|Cercle ¦ Hringur
+forme|Moitié de disque ¦ Hálfur hringflötur
+forme|Petit disque ¦ Lítill hringflötur
+forme|Disques ¦ Hringfletir
+forme|Ellipse ¦ Sporbaugur
+forme|Carré ¦ Ferningur
+forme|Carré arrondi ¦ Rúnnaður ferningur
+forme|Petit carré ¦ Lítill ferningur
+forme|Triangle pointe en bas ¦ Þríhyrningur sem vísar niður
+forme|Sphère ¦ Kúla
+forme|Formes ¦ Form
+forme|Case pleine ¦ Fylltur reitur
+forme|Case vide ¦ Tómur reitur
+forme|Case cochée ¦ Hakaður reitur
+forme|Pastille ¦ Doppa
+forme|Pastille cochée ¦ Hökuð doppa
+forme|Points de suspension ¦ Úrfellingarpunktar
+forme|Points verticaux ¦ Lóðréttir punktar
+forme|Grille de points ¦ Punktanet
+forme|Trois points en triangle ¦ Þrír punktar í þríhyrningi
+forme|Quadrillage ¦ Rúðunet
+forme|Goutte bicolore ¦ Tvílitur dropi
+forme|Bombe ¦ Sprengja
+forme|Épée ¦ Sverð
+forme|Épées croisées ¦ Krosslögð sverð
+forme|Lance ¦ Spjót
+forme|Masse d’armes ¦ Gaddakylfa
+forme|Couteau de combat ¦ Bardagahnífur
+forme|Étoile de ninja ¦ Ninjastjarna
+forme|Boomerang ¦ Búmerang
+forme|Pistolet ¦ Skammbyssa
+forme|Munitions ¦ Skotfæri
+forme|Char d’assaut ¦ Skriðdreki
+forme|Lien ¦ Tengill
+forme|Maillon ¦ Hlekkur
+forme|Empreinte digitale ¦ Fingrafar
+forme|Drapeau à hampe ¦ Fáni á stöng
+forme|Marque déposée ¦ Skráð vörumerki
+forme|Marque commerciale ¦ Vörumerki
+forme|Supérieur à ¦ Stærra en
+forme|Inférieur à ¦ Minna en
+forme|Multiplication ¦ Margföldun
+forme|Division ¦ Deiling
+forme|Lien rompu ¦ Slitinn tengill
+forme|Sommeil ¦ Svefn
+forme|Flèche épaisse droite ¦ Þykk ör til hægri
+forme|Flèche épaisse gauche ¦ Þykk ör til vinstri
+forme|Flèche épaisse haut ¦ Þykk ör upp
+forme|Flèche épaisse bas ¦ Þykk ör niður
+forme|Flèche en coin ¦ Ör í horni
+forme|Flèche pleine ¦ Fyllt ör
+forme|Flèche dans un rond ¦ Ör í hring
+forme|Double flèche épaisse ¦ Þykk tvíör
+forme|Toutes directions ¦ Allar áttir
+forme|Agrandir ¦ Stækka
+forme|Rassembler ¦ Safna saman
+forme|Double chevron ¦ Tvöfalt vinkilmerki
+forme|Triple chevron ¦ Þrefalt vinkilmerki
+forme|Retour en U ¦ U-beygja til baka
+forme|Flèche montante ¦ Ör upp á við
+forme|Flèche descendante ¦ Ör niður á við
+forme|Retour en haut ¦ Aftur efst
+forme|Rotation ¦ Snúningur
+forme|Rotation inverse ¦ Öfugur snúningur
+forme|Revenir ¦ Fara til baka
+forme|Recharger ¦ Endurhlaða
+forme|Synchroniser ¦ Samstilla
+forme|Échange ¦ Skipti
+forme|Échange vertical ¦ Lóðrétt skipti
+forme|Séparation ¦ Aðskilnaður
+forme|Réunion ¦ Sameining
+forme|Embranchement ¦ Kvíslun
+forme|Fourche ¦ Gaffall
+forme|Bifurcation ¦ Vegamót
+forme|Décision ¦ Ákvörðun
+forme|Mélange ¦ Blöndun
+forme|Transfert ¦ Flutningur
+forme|Suivant ¦ Næsta
+forme|Lecture ¦ Spila
+forme|Avance rapide ¦ Hraðspólun áfram
+forme|Pointe à droite ¦ Oddur til hægri
+forme|Navigation ¦ Leiðsögn
+forme|Flèche haut ¦ Ör upp
+forme|Flèche bas ¦ Ör niður
+forme|Flèche gauche ¦ Ör til vinstri
+forme|Flèche droite ¦ Ör til hægri
+forme|Flèche haut gauche ¦ Ör upp til vinstri
+forme|Flèche haut droite ¦ Ör upp til hægri
+forme|Flèche bas gauche ¦ Ör niður til vinstri
+forme|Flèche bas droite ¦ Ör niður til hægri
+forme|Flèche pleine haut ¦ Fyllt ör upp
+forme|Flèche pleine bas ¦ Fyllt ör niður
+forme|Flèche pleine gauche ¦ Fyllt ör til vinstri
+forme|Flèche pleine haut gauche ¦ Fyllt ör upp til vinstri
+forme|Flèche pleine haut droite ¦ Fyllt ör upp til hægri
+forme|Flèche pleine bas gauche ¦ Fyllt ör niður til vinstri
+forme|Flèche pleine bas droite ¦ Fyllt ör niður til hægri
+forme|Flèche gauche dans un rond ¦ Ör til vinstri í hring
+forme|Flèche haut dans un rond ¦ Ör upp í hring
+forme|Flèche bas dans un rond ¦ Ör niður í hring
+forme|Double flèche verticale fine ¦ Grönn lóðrétt tvíör
+forme|Double flèche diagonale ¦ Ská tvíör
+forme|Double flèche diagonale inverse ¦ Öfug ská tvíör
+forme|Flèche coudée haut gauche ¦ Beygð ör upp til vinstri
+forme|Flèche coudée haut droite ¦ Beygð ör upp til hægri
+forme|Flèche coudée bas gauche ¦ Beygð ör niður til vinstri
+forme|Flèche coudée bas droite ¦ Beygð ör niður til hægri
+forme|Flèche coudée vers le bas ¦ Beygð ör niður
+forme|Demi-tour à gauche ¦ U-beygja til vinstri
+forme|Demi-tour à droite ¦ U-beygja til hægri
+forme|Réduire ¦ Minnka
+forme|Étendre ¦ Útvíkka
+forme|Rapprocher ¦ Færa saman
+forme|Écarter ¦ Færa í sundur
+forme|Va-et-vient ¦ Fram og til baka
+forme|Flèche d’archer ¦ Bogaör
+forme|Chevron haut ¦ Vinkilmerki upp
+forme|Chevron bas ¦ Vinkilmerki niður
+forme|Chevron gauche ¦ Vinkilmerki til vinstri
+forme|Chevron droite ¦ Vinkilmerki til hægri
+forme|Double chevron haut ¦ Tvöfalt vinkilmerki upp
+forme|Double chevron bas ¦ Tvöfalt vinkilmerki niður
+forme|Double chevron gauche ¦ Tvöfalt vinkilmerki til vinstri
+forme|Pointe en haut ¦ Oddur upp
+forme|Pointe en bas ¦ Oddur niður
+forme|Pointe à gauche ¦ Oddur til vinstri
+forme|Échange fin ¦ Grönn skipti
+forme|Échange vertical fin ¦ Grönn lóðrétt skipti
+forme|Hausse ¦ Hækkun
+forme|Baisse ¦ Lækkun
+forme|Stable ¦ Stöðugt
+forme|Annuler ¦ Afturkalla
+forme|Rétablir ¦ Endurgera
+forme|Répondre ¦ Svara
+forme|Partager ¦ Deila
+forme|Actualiser ¦ Uppfæra
+forme|Cycle ¦ Hringrás
+forme|Répéter ¦ Endurtaka
+forme|Rotation complète ¦ Heill snúningur
+forme|Orbite ¦ Sporbraut
+forme|Rotation à gauche ¦ Snúningur til vinstri
+forme|Rotation à droite ¦ Snúningur til hægri
+forme|Mélanger ¦ Stokka
+forme|Flèche sortante ¦ Ör út
+forme|Flèche entrante ¦ Ör inn
+forme|Sous-niveau à droite ¦ Undirstig til hægri
+forme|Sous-niveau à gauche ¦ Undirstig til vinstri
+forme|Fusion ¦ Samruni
+forme|Étape ¦ Áfangi
+forme|Fusionner ¦ Sameina
+forme|Segment ¦ Bútur
+forme|Détour ¦ Krókur
+forme|Connexion ¦ Tenging
+forme|Entrée ¦ Inngangur
+forme|Sortie ¦ Útgangur
+forme|Sortie de secours ¦ Neyðarútgangur
+forme|Précédent ¦ Fyrra
+forme|Lecture ronde ¦ Spila í hring
+forme|Position actuelle ¦ Núverandi staðsetning
+forme|Main pointeur ¦ Bendihönd
+forme|Plein écran ¦ Allur skjárinn
+forme|Flèche haut ronde ¦ Ör upp í hring
+forme|Flèche bas ronde ¦ Ör niður í hring
+forme|Flèche gauche ronde ¦ Ör til vinstri í hring
+forme|Flèche droite ronde ¦ Ör til hægri í hring
+forme|Chevron gauche rond ¦ Vinkilmerki til vinstri í hring
+forme|Chevron droite rond ¦ Vinkilmerki til hægri í hring
+forme|Rejouer ¦ Spila aftur
+forme|Renouvellement ¦ Endurnýjun
+forme|Télécharger ¦ Sækja
+forme|Envoyer ¦ Senda
+forme|Importer ¦ Flytja inn
+forme|Exporter ¦ Flytja út
+forme|Arrêt ¦ Stöðva
+forme|piste ¦ lag
+forme|Retour rapide ¦ Hraðspólun til baka
+forme|Enregistrement ¦ Upptaka
+forme|Gland ¦ Akarn
+forme|trait fin ¦ grannur dráttur
+forme|plein ¦ fyllt
+forme|Carnet d’adresses ¦ Heimilisfangabók
+forme|Répertoire à onglets ¦ Nafnaskrá með flipum
+forme|Tour de contrôle ¦ Flugturn
+forme|Avion en vol ¦ Flugvél á flugi
+forme|Avion qui atterrit ¦ Flugvél að lenda
+forme|Avion qui décolle ¦ Flugvél að taka á loft
+forme|Avion au sol ¦ Flugvél á jörðu
+forme|Avion penché ¦ Hallandi flugvél
+forme|Ancre simple ¦ Einfalt akkeri
+forme|Angle ¦ Horn
+forme|boîte ¦ kassi
+forme|Flèche en arc vers la gauche ¦ Bogaör til vinstri
+forme|Flèche en arc vers la droite ¦ Bogaör til hægri
+forme|Double flèche courbée ¦ Sveigð tvíör
+forme|haut ¦ upp
+forme|Flèche courbée ¦ Sveigð ör
+forme|bas ¦ niður
+forme|Flèche ronde vers le bas ¦ Hringör niður
+forme|Flèche ronde vers le bas à gauche ¦ Hringör niður til vinstri
+forme|Flèche ronde vers le bas à droite ¦ Hringör niður til hægri
+forme|Flèche ronde vers la gauche ¦ Hringör til vinstri
+forme|Flèche ronde vers la droite ¦ Hringör til hægri
+forme|Flèche ronde vers le haut ¦ Hringör upp
+forme|Flèche ronde vers le haut à gauche ¦ Hringör upp til vinstri
+forme|Flèche ronde vers le haut à droite ¦ Hringör upp til hægri
+forme|Flèche tournante ¦ Snúningsör
+forme|sens des aiguilles ¦ réttsælis
+forme|sens inverse ¦ rangsælis
+forme|Flèche vers le bas ¦ Ör niður
+forme|Flèche vers le bas à gauche ¦ Ör niður til vinstri
+forme|Flèche vers le bas à droite ¦ Ör niður til hægri
+forme|Flèche en équerre ¦ Vinkilör
+forme|Flèche en équerre vers la gauche ¦ Vinkilör til vinstri
+forme|Flèche en équerre vers la droite ¦ Vinkilör til hægri
+forme|Grosse flèche vers le bas ¦ Stór ör niður
+forme|Grosse flèche vers la gauche ¦ Stór ör til vinstri
+forme|Grosse flèche à un trait vers le bas ¦ Stór ör með einu striki niður
+forme|Grosse flèche à un trait vers la gauche ¦ Stór ör með einu striki til vinstri
+forme|Grosse flèche à un trait vers la droite ¦ Stór ör með einu striki til hægri
+forme|Grosse flèche à un trait vers le haut ¦ Stór ör með einu striki upp
+forme|Grosse flèche à traits vers le bas ¦ Stór ör með strikum niður
+forme|Grosse flèche à traits vers la gauche ¦ Stór ör með strikum til vinstri
+forme|Grosse flèche à traits vers la droite ¦ Stór ör með strikum til hægri
+forme|Grosse flèche à traits vers le haut ¦ Stór ör með strikum upp
+forme|Grosse flèche vers la droite ¦ Stór ör til hægri
+forme|Grosse flèche vers le haut ¦ Stór ör upp
+forme|Flèche vers la gauche ¦ Ör til vinstri
+forme|Flèche jusqu’au trait vers le bas ¦ Ör að striki niður
+forme|Flèche jusqu’au trait vers le bas à gauche ¦ Ör að striki niður til vinstri
+forme|Flèche jusqu’au trait vers le bas à droite ¦ Ör að striki niður til hægri
+forme|Flèche jusqu’au trait vers la gauche ¦ Ör að striki til vinstri
+forme|Flèche jusqu’au trait vers la droite ¦ Ör að striki til hægri
+forme|Flèche jusqu’au trait vers le haut ¦ Ör að striki upp
+forme|Flèche jusqu’au trait vers le haut à gauche ¦ Ör að striki upp til vinstri
+forme|Flèche jusqu’au trait vers le haut à droite ¦ Ör að striki upp til hægri
+forme|Flèche vers la droite ¦ Ör til hægri
+forme|Flèche carrée vers le bas ¦ Ferhyrnd ör niður
+forme|Flèche carrée vers le bas à gauche ¦ Ferhyrnd ör niður til vinstri
+forme|Flèche carrée vers le bas à droite ¦ Ferhyrnd ör niður til hægri
+forme|Flèche carrée vers la gauche ¦ Ferhyrnd ör til vinstri
+forme|Flèche carrée vers la droite ¦ Ferhyrnd ör til hægri
+forme|Flèche carrée vers le haut ¦ Ferhyrnd ör upp
+forme|Flèche carrée vers le haut à gauche ¦ Ferhyrnd ör upp til vinstri
+forme|Flèche carrée vers le haut à droite ¦ Ferhyrnd ör upp til hægri
+forme|Flèche en U ¦ U-ör
+forme|Flèche vers le haut ¦ Ör upp
+forme|Flèche vers le haut à gauche ¦ Ör upp til vinstri
+forme|Flèche vers le haut à droite ¦ Ör upp til hægri
+forme|Flèches tournantes ¦ Snúningsörvar
+forme|Flèches haut et bas ¦ Örvar upp og niður
+forme|Flèches gauche et droite ¦ Örvar til vinstri og hægri
+forme|écartées ¦ gleiðar
+forme|Flèches vers le centre ¦ Örvar inn að miðju
+forme|4 côtés ¦ 4 hliðar
+forme|Flèches vers un trait ¦ Örvar að striki
+forme|debout ¦ upprétt
+forme|couché ¦ liggjandi
+forme|Flèches qui se rejoignent ¦ Örvar sem mætast
+forme|Flèches vers l’extérieur ¦ Örvar út á við
+forme|Flèches qui s’écartent d’un trait ¦ Örvar sem fjarlægjast strik
+forme|Flèches qui se séparent ¦ Örvar sem skiljast
+forme|Article ¦ Grein
+forme|Article illustré ¦ Myndskreytt grein
+forme|Bâton d’Asclépios ¦ Asklepíosarstafur
+forme|Avocat ¦ Lárpera
+forme|fruit ¦ ávöxtur
+forme|Sac simple ¦ Einfaldur poki
+forme|Ballon de baudruche ¦ Blaðra
+forme|Pansements ¦ Plástrar
+forme|Code-barres ¦ Strikamerki
+forme|Barrière de chantier ¦ Vegatálmi
+forme|Casquette ¦ Derhúfa
+forme|Casque de base-ball ¦ Hafnaboltahjálmur
+forme|Pile chargée ¦ Hlaðin rafhlaða
+forme|Pile vide ¦ Tóm rafhlaða
+forme|Ballon de plage ¦ Strandbolti
+forme|Bonnet ¦ Húfa
+forme|Bouteille de bière ¦ Bjórflaska
+forme|Chope de bière ¦ Bjórkrús
+forme|Clochette ¦ Bjalla
+forme|Clochette qui sonne ¦ Hringjandi bjalla
+forme|Ceinture ¦ Belti
+forme|Plan d’architecte ¦ Arkitektateikning
+forme|Livre avec marque-page ¦ Bók með bókamerki
+forme|Livre ouvert écrit ¦ Opin skrifuð bók
+forme|Livre de la personne ¦ Bók einstaklingsins
+forme|Marque-page simple ¦ Einfalt bókamerki
+forme|Marque-pages simples ¦ Einföld bókamerki
+forme|Botte ¦ Stígvél
+forme|Boules ¦ Kúlur
+forme|pétanque ¦ pétanque
+forme|Bol de nourriture ¦ Matarskál
+forme|Bol fumant ¦ Rjúkandi skál
+forme|Boule de bowling ¦ Keilukúla
+forme|Verre de cognac ¦ Koníaksglas
+forme|Pain ¦ Brauð
+forme|Mallette en métal ¦ Málmskjalataska
+forme|Scarabée ¦ Bjalla (skordýr)
+forme|Immeuble d’appartements ¦ Fjölbýlishús
+forme|Bureaux ¦ Skrifstofur
+forme|Immeubles ¦ Byggingar
+forme|Téléphérique ¦ Kláfur
+forme|Calendrier coché ¦ Hakað dagatal
+forme|Calendrier avec un jour ¦ Dagatal með einum degi
+forme|Calendrier avec des jours ¦ Dagatal með dögum
+forme|Calendrier avec un cœur ¦ Dagatal með hjarta
+forme|Calendrier avec une étoile ¦ Dagatal með stjörnu
+forme|Calendrier barré ¦ Yfirstrikað dagatal
+forme|Sonnette de comptoir ¦ Afgreiðslubjalla
+forme|Appareil photo plus ¦ Myndavél plús
+forme|Appareil photo tourner ¦ Myndavél snúa
+forme|Appareil photo barré ¦ Yfirstrikuð myndavél
+forme|Batterie de voiture ¦ Bílarafgeymir
+forme|Voiture simple ¦ Einfaldur bíll
+forme|Porte-cartes ¦ Kortaveski
+forme|Cartes ¦ Spil
+forme|Trois cartes ¦ Þrjú spil
+forme|Double chevron rond vers le bas ¦ Tvöfalt vinkilmerki niður í hring
+forme|Double chevron rond vers la gauche ¦ Tvöfalt vinkilmerki til vinstri í hring
+forme|Double chevron rond vers la droite ¦ Tvöfalt vinkilmerki til hægri í hring
+forme|Double chevron rond vers le haut ¦ Tvöfalt vinkilmerki upp í hring
+forme|Chevron rond vers le bas ¦ Vinkilmerki niður í hring
+forme|Chevron rond vers la gauche ¦ Vinkilmerki til vinstri í hring
+forme|Chevron rond vers la droite ¦ Vinkilmerki til hægri í hring
+forme|Chevron rond vers le haut ¦ Vinkilmerki upp í hring
+forme|Chevrons haut et bas ¦ Vinkilmerki upp og niður
+forme|Double chevron vers le bas ¦ Tvöfalt vinkilmerki niður
+forme|Double chevron vers la gauche ¦ Tvöfalt vinkilmerki til vinstri
+forme|Double chevron vers la droite ¦ Tvöfalt vinkilmerki til hægri
+forme|Double chevron vers le haut ¦ Tvöfalt vinkilmerki upp
+forme|Chevron vers le bas ¦ Vinkilmerki niður
+forme|Chevron vers la gauche ¦ Vinkilmerki til vinstri
+forme|Chevron jusqu’au trait vers le bas ¦ Vinkilmerki að striki niður
+forme|Chevron jusqu’au trait vers la gauche ¦ Vinkilmerki að striki til vinstri
+forme|Chevron jusqu’au trait vers la droite ¦ Vinkilmerki að striki til hægri
+forme|Chevron jusqu’au trait vers le haut ¦ Vinkilmerki að striki upp
+forme|Chevron vers la droite ¦ Vinkilmerki til hægri
+forme|Chevron vers le haut ¦ Vinkilmerki upp
+forme|Caisse enregistreuse ¦ Peningakassi
+forme|Cassette audio ¦ Hljóðsnælda
+forme|Tour de château ¦ Kastalaturn
+forme|Diplôme ¦ Prófskírteini
+forme|Tableau noir ¦ Krítartafla
+forme|Tableau noir simple ¦ Einföld krítartafla
+forme|Instituteur au tableau ¦ Kennari við töfluna
+forme|Champagne ¦ Kampavín
+forme|Graphique en barres ¦ Súlurit
+forme|Courbe ¦ Ferill
+forme|Bulle centrée ¦ Miðjuð blaðra
+forme|points ¦ punktar
+forme|texte ¦ texti
+forme|Bulle goutte ¦ Dropablaðra
+forme|Deux bulles ¦ Tvær blöðrur
+forme|Coche ronde ¦ Hak í hring
+forme|Grosse coche ¦ Stórt hak
+forme|Case cochée débordante ¦ Hakaður reitur sem flæðir út fyrir
+forme|Trinquer ¦ Skála
+forme|Toque de cuisinier ¦ Kokkahúfa
+forme|Cercle en pointillés ¦ Punktalínuhringur
+forme|Demi-cercle plein ¦ Fylltur hálfhringur
+forme|Demi-cercle penché ¦ Hallandi hálfhringur
+forme|Cercle ouvert ¦ Opinn hringur
+forme|Quatre cercles ¦ Fjórir hringir
+forme|Trois cercles ¦ Þrír hringir
+forme|Trois cercles et un plus ¦ Þrír hringir og plús
+forme|Porte-bloc ¦ Skrifspjald
+forme|Porte-bloc écrit ¦ Skrifað skrifspjald
+forme|après-midi ¦ eftir hádegi
+forme|Horloge en avant ¦ Klukka fram
+forme|Compte à rebours ¦ Niðurtalning
+forme|Horloge en arrière ¦ Klukka aftur
+forme|Heure de la personne ¦ Tími einstaklingsins
+forme|Nuage flèche en bas ¦ Ský með ör niður
+forme|Nuage flèche en haut ¦ Ský með ör upp
+forme|Nuage coché ¦ Hakað ský
+forme|Éclaircie ¦ Uppstytta
+forme|Nuage attention ¦ Ský með viðvörun
+forme|Nuage barré ¦ Yfirstrikað ský
+forme|Trèfle à quatre feuilles ¦ Fjögurra laufa smári
+forme|Grain de café ¦ Kaffibaun
+forme|Pièce de monnaie ¦ Mynt
+forme|tranche ¦ hlið
+forme|Pièces de monnaie ¦ Myntir
+forme|Confettis ¦ Konfetti
+forme|Terrain de basket ¦ Körfuboltavöllur
+forme|Chapeau de cow-boy ¦ Kúrekahattur
+forme|oiseau ¦ fugl
+forme|Grue de chantier ¦ Byggingarkrani
+forme|Viseur simple ¦ Einfalt sigti
+forme|Couronne à la croix ¦ Kóróna með krossi
+forme|Couronne simple ¦ Einföld kóróna
+forme|meuble ¦ húsgagn
+forme|Ordinateur ¦ Tölva
+forme|Tablette ¦ Spjaldtölva
+forme|Quatre losanges ¦ Fjórir tíglar
+forme|Robe ¦ Kjóll
+forme|Goutte à moitié ¦ Hálfur dropi
+forme|Goutte simple ¦ Einfaldur dropi
+forme|Œuf fêlé ¦ Sprungið egg
+forme|Enveloppe ouverte ¦ Opið umslag
+forme|Enveloppe simple ¦ Einfalt umslag
+forme|Enveloppe simple ouverte ¦ Einfalt opið umslag
+forme|Escalier roulant ¦ Rúllustigi
+forme|descente ¦ niður
+forme|montée ¦ upp
+forme|Examen ¦ Próf
+forme|Deux yeux ¦ Tvö augu
+forme|Masque de soin ¦ Andlitsmaski
+forme|Ferme ¦ Bóndabær
+forme|Fichier ¦ Skrá
+forme|Fichier d’archives ¦ Safnskrá
+forme|Fichier son ¦ Hljóðskrá
+forme|Fichier image ¦ Myndskrá
+forme|Chercher dans un document ¦ Leita í skjali
+forme|Fichier PDF ¦ PDF-skrá
+forme|Document écrit ¦ Skrifað skjal
+forme|Fichier vidéo ¦ Myndbandsskrá
+forme|Fichier compressé ¦ Þjöppuð skrá
+forme|Fichiers ¦ Skrár
+forme|Scénario ¦ Handrit
+forme|Empreinte digitale simple ¦ Einfalt fingrafar
+forme|Flamme ¦ Logi
+forme|Croix de secours ¦ Skyndihjálparkross
+forme|Trousse de secours ¦ Sjúkrakassi
+forme|Poisson simple ¦ Einfaldur fiskur
+forme|Fanion plié ¦ Brotin veifa
+forme|drapeau ¦ fáni
+forme|Flamme vive ¦ Bjartur logi
+forme|Lampe de poche ¦ Vasaljós
+forme|dos ¦ bak
+forme|Flèche de parcours ¦ Leiðarör
+forme|Lotus ¦ Lótus
+forme|Dossier simple ¦ Einföld mappa
+forme|Dossier de la personne ¦ Mappa einstaklingsins
+forme|Dossier à l’étoile ¦ Mappa með stjörnu
+forme|Dossier personnel ¦ Persónuleg mappa
+forme|Fourchette et couteau ¦ Gaffall og hnífur
+forme|Coins de cadre ¦ Rammahorn
+forme|Bidon d’essence ¦ Bensínbrúsi
+forme|Pompe à essence ¦ Bensíndæla
+forme|Jauge ¦ Mælir
+forme|Engrenage fin ¦ Grannt tannhjól
+forme|Engrenage à six dents ¦ Sextennt tannhjól
+forme|Symbole femme ¦ Kventákn
+forme|Symbole intersexe ¦ Intersex-tákn
+forme|Symbole homme ¦ Karltákn
+forme|Symbole neutre ¦ Hlutlaust tákn
+forme|Symbole transgenre ¦ Trans-tákn
+forme|Europe ¦ Evrópa
+forme|Afrique ¦ Afríka
+forme|Amériques ¦ Ameríka
+forme|Globe simple ¦ Einfaldur hnöttur
+forme|Globe terrestre sur pied ¦ Jarðlíkan á fæti
+forme|Lunettes de natation ¦ Sundgleraugu
+forme|Toque de diplômé ¦ Útskriftarhúfa
+forme|Épis de blé ¦ Hveitiöx
+forme|Réseau de points ¦ Punktanet
+forme|Grille de quatre ¦ Fjögurra reita net
+forme|Grille de neuf ¦ Níu reita net
+forme|Main et pièces ¦ Hönd og myntir
+forme|Main et œil ¦ Hönd og auga
+forme|Poing ¦ Hnefi
+forme|Main qui attrape ¦ Grípandi hönd
+forme|Paume ¦ Lófi
+forme|Signe de paix ¦ Friðarmerki
+forme|Main qui montre ¦ Bendandi hönd
+forme|Savon liquide ¦ Fljótandi sápa
+forme|Sac à main simple ¦ Einföld handtaska
+forme|Phares ¦ Framljós
+forme|Casque micro ¦ Heyrnartól með hljóðnema
+forme|Cœur droit ¦ Upprétt hjarta
+forme|Cœur droit brisé ¦ Upprétt brostið hjarta
+forme|Surligneur ¦ Áherslupenni
+forme|Hockey ¦ Íshokkí
+forme|Sweat à capuche ¦ Hettupeysa
+forme|début ¦ upphaf
+forme|fin ¦ endir
+forme|milieu ¦ miðja
+forme|Sablier simple ¦ Einfalt stundaglas
+forme|Maison au trait ¦ Útlínuhús
+forme|Maison simple ¦ Einfalt hús
+forme|Badge ¦ Barmmerki
+forme|Image ¦ Mynd
+forme|Images ¦ Myndir
+forme|Facture ¦ Reikningur
+forme|Bocal ¦ Krukka
+forme|Bocal étiqueté ¦ Merkt krukka
+forme|Jeep ¦ Jeppi
+forme|Clavier ¦ Lyklaborð
+forme|Trou de serrure ¦ Skráargat
+forme|Échelle simple ¦ Einfaldur stigi
+forme|Suspension ¦ Ljósakróna
+forme|Ordinateur portable ¦ Fartölva
+forme|Bouée ¦ Bjarghringur
+forme|Ampoule à filament ¦ Glóðarpera
+forme|Liste ¦ Listi
+forme|Liste de favoris ¦ Uppáhaldslisti
+forme|Cadenas fermé ¦ Læstur hengilás
+forme|Cadenas à clé ¦ Hengilás með lykli
+forme|Casiers ¦ Skápar
+forme|Aimant droit ¦ Beinn segull
+forme|Repère sur la carte ¦ Staðarmerki á korti
+forme|Repère et zone ¦ Staðarmerki og svæði
+forme|Repère au sol ¦ Staðarmerki á jörðu
+forme|Carte dépliée ¦ Útbreitt kort
+forme|Masque joyeux ¦ Glöð gríma
+forme|Masque triste ¦ Sorgmædd gríma
+forme|Médaille militaire ¦ Heiðurspeningur hersins
+forme|Porte-voix ¦ Gjallarhorn
+forme|Porte-voix simple ¦ Einfalt gjallarhorn
+forme|Météore ¦ Loftsteinn
+forme|Micro ¦ Hljóðnemi
+forme|Micro de scène ¦ Sviðshljóðnemi
+forme|Moins carré ¦ Mínus í ferningi
+forme|Billet ondulé ¦ Bylgjóttur peningaseðill
+forme|Écran ¦ Skjár
+forme|Lune et étoiles ¦ Tungl og stjörnur
+forme|Mobylette ¦ Skellinaðra
+forme|de face ¦ að framan
+forme|Souris ¦ Mús
+forme|ordinateur ¦ tölva
+forme|Note simple ¦ Einföld nóta
+forme|Notes de musique ¦ Nótur
+forme|Notes moins ¦ Nótur mínus
+forme|Notes plus ¦ Nótur plús
+forme|Notes simples ¦ Einfaldar nótur
+forme|Flèche de navigation ¦ Leiðsöguör
+forme|Aiguille à coudre ¦ Saumnál
+forme|Coupure de presse ¦ Blaðaúrklippa
+forme|Note ¦ Minnismiði
+forme|Note vierge ¦ Auður minnismiði
+forme|Note et crayon ¦ Minnismiði og blýantur
+forme|Bloc-notes ¦ Skrifblokk
+forme|Fauteuil de bureau ¦ Skrifstofustóll
+forme|Onigiri ¦ Onigiri
+forme|Orange ¦ Appelsína
+forme|Tranche d’orange ¦ Appelsínusneið
+forme|Four ¦ Ofn
+forme|Brosse de peintre ¦ Málarapensill
+forme|Palette ¦ Litaspjald málara
+forme|Pantalon ¦ Buxur
+forme|Avion en papier ¦ Pappírsflugvél
+forme|Avion en papier penché ¦ Hallandi pappírsflugvél
+forme|Trombone couché ¦ Liggjandi bréfaklemma
+forme|Pied-de-mouche ¦ Málsgreinarmerki (¶)
+forme|Parc ¦ Garður
+forme|Chemin ¦ Stígur
+forme|Empreinte de patte ¦ Loppufar
+forme|Symbole de paix ¦ Friðartákn
+forme|Plume de stylo ¦ Pennaoddur
+forme|Crayon simple ¦ Einfaldur blýantur
+forme|Poivron ¦ Paprika
+forme|Personne bras ouverts ¦ Einstaklingur með opna arma
+forme|Personne simple ¦ Einfaldur einstaklingur
+forme|Personne dans un rond ¦ Einstaklingur í hring
+forme|Surfeur des neiges ¦ Snjóbrettamaður
+forme|Tai-chi ¦ Tai chi
+forme|Lanceur ¦ Kastari
+forme|Téléphone qui sonne ¦ Sími sem hringir
+forme|Clavier de piano ¦ Píanóhljómborð
+forme|Table de pique-nique ¦ Lautarferðarborð
+forme|Verre à bière ¦ Bjórglas
+forme|Pipe ¦ Pípa
+forme|Planète ¦ Reikistjarna
+forme|Lecture-pause ¦ Spila-hlé
+forme|Liste de lecture ¦ Spilunarlisti
+forme|Prise électrique ¦ Rafmagnsinnstunga
+forme|Fiches électriques ¦ Rafmagnsklær
+forme|Plus carré ¦ Plús í ferningi
+forme|Jeton de jeu ¦ Spilapeningur
+forme|Voiture de police ¦ Lögreglubíll
+forme|Polygone ¦ Marghyrningur
+forme|Plante en pot ¦ Pottaplanta
+forme|Marche-arrêt ¦ Kveikja-slökkva
+forme|Tableau de présentation ¦ Kynningartafla
+forme|Punaise simple ¦ Einföld teiknibóla
+forme|Pièce de puzzle ¦ Púslubiti
+forme|Guillemets ¦ Gæsalappir
+forme|Raquette ¦ Spaði (tennis)
+forme|Poste de radio ¦ Útvarpstæki
+forme|Arc-en-ciel et nuage ¦ Regnbogi og ský
+forme|Enregistrer ¦ Vista
+forme|Rectangle en pointillés ¦ Punktalínuferhyrningur
+forme|Fusée au décollage ¦ Eldflaug í flugtaki
+forme|Sceau dentelé ¦ Tennt innsigli
+forme|Siège ¦ Sæti
+forme|grosse flèche ¦ stór ör
+forme|Écu simple ¦ Einfaldur skjöldur
+forme|Écu coché ¦ Hakaður skjöldur
+forme|Écu écartelé ¦ Fjórskiptur skjöldur
+forme|Écu au chevron ¦ Skjöldur með sperru
+forme|Écu à la croix ¦ Skjöldur með krossi
+forme|Écu à la barre ¦ Skjöldur með skábandi
+forme|Écu à l’étoile ¦ Skjöldur með stjörnu
+forme|Écu au point d’exclamation ¦ Skjöldur með upphrópunarmerki
+forme|Conteneur ¦ Gámur
+forme|Chemise pliée ¦ Samanbrotin skyrta
+forme|Sac de courses ouvert ¦ Opinn innkaupapoki
+forme|Chariot simple ¦ Einföld innkaupakerra
+forme|Crevette ¦ Rækja
+forme|Sigma ¦ Sigma
+forme|Panneau indicateur ¦ Vegvísir
+forme|Gyrophare ¦ Blikkljós
+forme|Diaporama ¦ Myndasýning
+forme|Visage en colère ¦ Reitt andlit
+forme|Visage sans expression ¦ Svipbrigðalaust andlit
+forme|Visage blasé ¦ Leitt andlit
+forme|Visage qui fond ¦ Bráðnandi andlit
+forme|Visage nerveux ¦ Taugaóstyrkt andlit
+forme|Visage triste ¦ Sorgmætt andlit
+forme|Visage KO ¦ Rotað andlit
+forme|chaussure ¦ skór
+forme|Basket en marche ¦ Strigaskór á ferð
+forme|Flocon de neige ¦ Snjókorn
+forme|Ballon de foot ¦ Fótbolti
+forme|Chaussette ¦ Sokkur
+forme|Étincelle ¦ Neisti
+forme|Haut-parleur ¦ Hátalari
+forme|Spirale ¦ Spírall
+forme|Carré à moitié ¦ Hálfur ferningur
+forme|Quatre carrés ¦ Fjórir ferningar
+forme|Étoile à quatre branches ¦ Fjögurra arma stjarna
+forme|Marches ¦ Tröppur
+forme|carré ¦ ferningur
+forme|Stratégie ¦ Herkænska
+forme|Élève ¦ Nemandi
+forme|Valise à roulettes ¦ Ferðataska á hjólum
+forme|Valise simple ¦ Einföld ferðataska
+forme|Soleil voilé ¦ Hálfskýjað
+forme|Lever de soleil ¦ Sólarupprás
+forme|Seringue ¦ Sprauta
+forme|Tee-shirt ¦ Stuttermabolur
+forme|grille ¦ net
+forme|Étiquette en chevron ¦ Merki með vinkli
+forme|Étiquette simple ¦ Einfalt merki
+forme|Sachet de thé ¦ Tepoki
+forme|Thermomètre froid ¦ Hitamælir kalt
+forme|Thermomètre chaud ¦ Hitamælir heitt
+forme|Thermomètre simple ¦ Einfaldur hitamælir
+forme|Pouce en bas ¦ Þumall niður
+forme|Pouce en haut ¦ Þumall upp
+forme|Billet d’entrée ¦ Aðgöngumiði
+forme|Chronomètre ¦ Skeiðklukka
+forme|Pot à pourboires ¦ Þjórfékrukka
+forme|Tipi ¦ Tjald (tipi)
+forme|Cabas ¦ Innkaupataska
+forme|Cabas simple ¦ Einföld innkaupataska
+forme|Serviette ¦ Handklæði
+forme|Cône de chantier ¦ Umferðarkeila
+forme|Panneau routier ¦ Umferðarskilti
+forme|Train régional ¦ Svæðislest
+forme|Train simple ¦ Einföld lest
+forme|Traduire ¦ Þýða
+forme|Poubelle simple ¦ Einföld ruslafata
+forme|Plateau ¦ Bakki
+forme|Courbe qui baisse ¦ Lækkandi ferill
+forme|Courbe qui monte ¦ Hækkandi ferill
+forme|Triangle en pointillés ¦ Punktalínuþríhyrningur
+forme|chariot ¦ kerra
+forme|Chariot à bagages ¦ Farangurskerra
+forme|Parapluie simple ¦ Einföld regnhlíf
+forme|buste ¦ brjóstmynd
+forme|Personne vérifiée ¦ Staðfestur einstaklingur
+forme|Personne moins ¦ Einstaklingur mínus
+forme|Personne plus ¦ Einstaklingur plús
+forme|Liste de personnes ¦ Listi yfir einstaklinga
+forme|Personne dans un carré ¦ Einstaklingur í ferningi
+forme|Quatre personnes ¦ Fjórir einstaklingar
+forme|Trois personnes ¦ Þrír einstaklingar
+forme|Vidéo ¦ Myndband
+forme|Caméra ¦ Kvikmyndavél
+forme|Disque vinyle ¦ Vínylplata
+forme|Mur de briques ¦ Múrsteinsveggur
+forme|triangle ¦ þríhyrningur
+forme|losange ¦ tígull
+forme|octogone ¦ átthyrningur
+forme|Onde ¦ Bylgja
+forme|Son ¦ Hljóð
+forme|onde ¦ bylgja
+forme|Fauteuil roulant en mouvement ¦ Hjólastóll á ferð
+forme|Wi-Fi ¦ Wi-Fi
+forme|Clé plate ¦ Flatur skiptilykill
+forme|Pelote de laine ¦ Garnhnykill
+forme|seule ¦ ein
+forme|seul ¦ einn
+forme|Lettre {x} minuscule ¦ Lágstafur {x}
+forme|Point ¦ Punktur
+forme|Virgule ¦ Komma
+forme|Point-virgule ¦ Semíkomma
+forme|Deux-points ¦ Tvípunktur
+forme|Point d’exclamation renversé ¦ Öfugt upphrópunarmerki
+forme|Point d’interrogation renversé ¦ Öfugt spurningarmerki
+forme|Apostrophe ¦ Úrfellingarmerki
+forme|Guillemet droit ¦ Bein gæsalöpp
+forme|Guillemet ouvrant ¦ Upphafsgæsalöpp
+forme|Parenthèse ouvrante ¦ Upphafssvigi
+forme|Parenthèse fermante ¦ Lokasvigi
+forme|Crochet ouvrant ¦ Upphafshornklofi
+forme|Crochet fermant ¦ Lokahornklofi
+forme|Trait d’union ¦ Bandstrik
+forme|Tiret ¦ Þankastrik
+forme|et ¦ og
+forme|numéro ¦ númer
+forme|Pour cent ¦ Prósent
+forme|naissance ¦ fæðing
+forme|Barre oblique ¦ Skástrik
+forme|Paragraphe ¦ Málsgrein
+forme|Degré ¦ Gráða
+forme|naissance ° ¦ fæðing °
+forme|décès † ¦ andlát †
+forme|Double croix ¦ Tvöfaldur kross
+forme|Numéro ¦ Númer
+forme|Nombre {x} ¦ Tala {x}
+forme|Signe de naissance ¦ Fæðingartákn
+forme|Étoile de naissance ¦ Fæðingarstjarna
+forme|Croix de décès ¦ Dánarkross
+forme|Signe du mariage ¦ Hjónabandstákn
+forme|Signe du divorce ¦ Skilnaðartákn
+forme|Union libre ¦ Óvígð sambúð
+forme|mariage ¦ hjónaband
+forme|inhumation ¦ greftrun
+forme|Urne ¦ Duftker
+forme|crémation ¦ líkbrennsla
+forme|mort au combat ¦ féll í bardaga
+forme|Fleuron ¦ Blómskraut
+forme|vers la gauche ¦ til vinstri
+forme|Feuille de vigne ¦ Vínviðarlauf
+forme|ornement ¦ skraut
+forme|Croix ombrée ¦ Skyggður kross
+forme|Croix à contour ¦ Útlínukross
+forme|Chrisme ¦ Kristsfangamark
+forme|Croix de Jérusalem ¦ Jerúsalemkross
+forme|Ankh ¦ Ankh
+forme|croix ansée ¦ lykkjukross
+forme|Symbole de Farsi ¦ Farsi-tákn
+forme|Croix pattée à contour ¦ Útlínu-patté-kross
+forme|Croix grecque épaisse ¦ Þykkur grískur kross
+forme|Croix à centre ouvert ¦ Kross með opinni miðju
+forme|Croix à centre rond ¦ Kross með kringlóttri miðju
+forme|Reine ¦ Drottning
+forme|Marteau et pic ¦ Hamar og haki
+forme|justice ¦ réttlæti
+forme|Bâton d’Esculape ¦ Asklepíosarstafur
+forme|Alambic ¦ Eimingartæki
+forme|Roue dentée ¦ Tannhjól
+forme|Caducée d’Hermès ¦ Hermesarstafur
+forme|Caducée ¦ Hermesarstafur (caduceus)
+forme|Main qui écrit ¦ Skrifandi hönd
+forme|note ¦ nóta
+forme|Deux croches ¦ Tvær áttundapartsnótur
+forme|Doubles croches ¦ Sextándapartsnótur
+forme|Dé un ¦ Teningur einn
+forme|Dé deux ¦ Teningur tveir
+forme|Dé trois ¦ Teningur þrír
+forme|Dé quatre ¦ Teningur fjórir
+forme|Dé cinq ¦ Teningur fimm
+forme|Dé six ¦ Teningur sex
+forme|Comète ¦ Halastjarna
+forme|Soleil à rayons ¦ Sól með geislum
+forme|Flocon ciselé ¦ Meitlað snjókorn
+forme|Flocon épais ¦ Þykkt snjókorn
+forme|Trèfle irlandais ¦ Írskur smári
+forme|Fleur à cinq pétales ¦ Blóm með fimm krónublöðum
+forme|Fleur ornée ¦ Skreytt blóm
+forme|Fleur étoilée ¦ Stjörnublóm
+forme|Fleur à six pétales ¦ Blóm með sex krónublöðum
+forme|Fleur en goutte ¦ Dropablóm
+forme|Étoile pleine ¦ Fyllt stjarna
+forme|Étoile vide ¦ Tóm stjarna
+forme|Étoile à quatre pointes ¦ Fjögurra arma stjarna
+forme|Étoile à contour ¦ Stjarna með útlínu
+forme|Étoile dans un rond ¦ Stjarna í hring
+forme|Étoile à centre ouvert ¦ Stjarna með opna miðju
+forme|Étoile à centre noir ¦ Stjarna með svarta miðju
+forme|Étoile ombrée ¦ Skyggð stjarna
+forme|Étoile en hélice ¦ Skrúfustjarna
+forme|Étoile en relief ¦ Upphleypt stjarna
+forme|Astérisque épais ¦ Þykk stjarna (*)
+forme|Astérisque à centre ouvert ¦ Stjarna (*) með opna miðju
+forme|Astérisque à huit branches ¦ Átta arma stjarna (*)
+forme|Étoile à huit branches ¦ Átta arma stjarna
+forme|Étoile tourbillon ¦ Hvirfilstjarna
+forme|Étoile à six branches ¦ Sex arma stjarna
+forme|Étoile à huit branches fine ¦ Mjó átta arma stjarna
+forme|Étoile à huit branches épaisse ¦ Þykk átta arma stjarna
+forme|Étoile à douze branches ¦ Tólf arma stjarna
+forme|Étoile à seize branches ¦ Sextán arma stjarna
+forme|Astérisque en gouttes ¦ Dropastjarna (*)
+forme|Soleil rond ¦ Kringlótt sól
+forme|Trois astérisques ¦ Þrjár stjörnur (*)
+forme|Main qui montre à droite ¦ Hönd sem bendir til hægri
+forme|Main qui montre à gauche ¦ Hönd sem bendir til vinstri
+forme|Main qui montre en haut ¦ Hönd sem bendir upp
+forme|Main qui montre en bas ¦ Hönd sem bendir niður
+forme|deux doigts ¦ tveir fingur
+forme|Sourire ¦ Bros
+forme|Sourire plein ¦ Fyllt bros
+forme|Tristesse ¦ Sorg
+forme|Cœur penché ¦ Hallandi hjarta
+forme|Haute tension ¦ Háspenna
+forme|Tasse fumante ¦ Rjúkandi bolli
+forme|Source chaude ¦ Hver
+forme|Coche fine ¦ Mjótt hak
+forme|Croix tracée ¦ Dreginn kross
+forme|Croix tracée épaisse ¦ Þykkur dreginn kross
+forme|Losange à quatre pointes ¦ Tígull með fjórum oddum
+forme|Marque de référence ¦ Tilvísunarmerki
+forme|Marque ¦ Merki
+forme|Plus dans un rond ¦ Plús í hring
+forme|Croix dans un rond ¦ Kross í hring
+forme|Point dans un rond ¦ Punktur í hring
+forme|Rond dans un rond ¦ Hringur í hring
+forme|Rond à moitié ¦ Hálfur hringur
+forme|Rond au quart ¦ Fjórðungshringur
+forme|Rond aux trois quarts ¦ Þrír fjórðu hrings
+forme|astronomie ¦ stjörnufræði
+forme|Premier croissant ¦ Vaxandi máni
+forme|Dernier croissant ¦ Minnkandi máni
+forme|Jupiter ¦ Júpíter
+forme|Saturne ¦ Satúrnus
+forme|Mercure ¦ Merkúríus
+forme|Écu français ¦ Franskur skjöldur
+forme|Écu ancien ¦ Fornskjöldur
+forme|Écu espagnol ¦ Spænskur skjöldur
+forme|Écu en losange ¦ Tígulskjöldur
+forme|dames ¦ konur
+forme|Écu ovale ¦ Sporöskjulaga skjöldur
+forme|ecclésiastique ¦ kirkjulegur
+forme|Écu rond ¦ Kringlóttur skjöldur
+forme|Bannière carrée ¦ Ferhyrndur borði
+forme|coupé en deux debout ¦ skipt í tvennt lóðrétt
+forme|Écu coupé ¦ Þverskiptur skjöldur
+forme|en deux couché ¦ í tvennt, lárétt
+forme|Écu tranché ¦ Skáskiptur skjöldur
+forme|en diagonale ¦ á ská
+forme|Écu taillé ¦ Öfugt skáskiptur skjöldur
+forme|en quatre ¦ í fernt
+forme|Écu écartelé en sautoir ¦ Skjöldur skiptur í andreasarkross
+forme|Écu tiercé en pal ¦ Skjöldur þrískiptur lóðrétt
+forme|trois bandes debout ¦ þrjár lóðréttar rendur
+forme|Écu tiercé en fasce ¦ Skjöldur þrískiptur lárétt
+forme|trois bandes couchées ¦ þrjár láréttar rendur
+forme|Écu chef ¦ Skjöldur með höfði
+forme|bande en haut ¦ rönd efst
+forme|Écu champagne ¦ Skjöldur með fæti
+forme|bande en bas ¦ rönd neðst
+forme|Écu fasce ¦ Skjöldur með bjálka
+forme|Écu pal ¦ Skjöldur með staur
+forme|Écu bande ¦ Skjöldur með skábjálka
+forme|Écu barre ¦ Skjöldur með öfugum skábjálka
+forme|Écu croix ¦ Skjöldur með krossi
+forme|Écu sautoir ¦ Skjöldur með andreasarkrossi
+forme|croix de Saint-André ¦ andreasarkross
+forme|Écu chevron ¦ Skjöldur með sperru
+forme|Écu franc-quartier ¦ Skjöldur með horni
+forme|carré en haut à gauche ¦ ferningur efst til vinstri
+forme|Écu pairle ¦ Skjöldur með gaffli
+forme|en Y ¦ Y-laga
+forme|Écu burelé ¦ Skjöldur með þverröndum
+forme|bandes couchées ¦ láréttar rendur
+forme|Écu palé ¦ Skjöldur með langröndum
+forme|bandes debout ¦ lóðréttar rendur
+forme|Écu échiqueté ¦ Reitaður skjöldur
+forme|damier ¦ skákborð
+forme|Écu losange ¦ Skjöldur með tígli
+forme|en cœur ¦ í miðjunni
+forme|Écu bordure ¦ Skjöldur með jaðri
+forme|Couronne de comte ¦ Greifakóróna
+forme|perles ¦ perlur
+forme|Couronne murale ¦ Múrkóróna
+forme|ville ¦ borg
+forme|Heaume ¦ Hjálmur
+forme|Lambrequins ¦ Hjálmklæði
+forme|manteau ¦ möttull
+forme|Listel ¦ Borði
+forme|devise ¦ kjörorð
+forme|Cadre double ¦ Tvöfaldur rammi
+forme|Cadre épais ¦ Þykkur rammi
+forme|Cadre arrondi double ¦ Tvöfaldur ávalur rammi
+forme|Médaillon double ¦ Tvöföld medalía
+forme|Cadre rond ¦ Kringlóttur rammi
+forme|Cadre rond double ¦ Tvöfaldur kringlóttur rammi
+forme|Cadre octogonal ¦ Átthyrndur rammi
+forme|Cadre hexagonal ¦ Sexhyrndur rammi
+forme|Cadre en losange ¦ Tígullaga rammi
+forme|Cadre en arche ¦ Bogarammi
+forme|Cadre en ogive ¦ Oddbogarammi
+forme|Cartouche à coins rentrants ¦ Skrautskjöldur með inndregnum hornum
+forme|Cadre à coins coupés ¦ Rammi með skornum hornum
+forme|Cadre ticket ¦ Miðarammi
+forme|Cadre en cœur ¦ Hjartarammi
+forme|Cadre en écu ¦ Skjaldarrammi
+forme|Cadre festonné ¦ Bogabrúnarammi
+forme|Cadre timbre-poste ¦ Frímerkjarammi
+forme|Cadre perlé ¦ Perlurammi
+forme|Cadre en étoile ¦ Stjörnurammi
+forme|Cadre sceau dentelé ¦ Tenntur innsiglisrammi
+forme|Cadre rosace ¦ Rósettu-rammi
+forme|Quatre coins ¦ Fjögur horn
+forme|Coins de photo ¦ Myndahorn
+forme|Coins arrondis ornés ¦ Skreytt ávöl horn
+forme|Filet ¦ Lína
+forme|Double filet ¦ Tvöföld lína
+forme|Ligne de points ¦ Punktalína
+forme|Frise en vagues ¦ Bylgjubekkur
+forme|Frise en zigzag ¦ Sikksakkbekkur
+forme|Frise grecque ¦ Grískur bekkur
+forme|Séparateur orné ¦ Skreytt skil
+forme|Étiquette à trou ¦ Merkimiði með gati
+forme|Étiquette arrondie ¦ Ávalur miði
+forme|Étiquette rectangle ¦ Rétthyrndur miði
+forme|Étiquette à encoches ¦ Miði með skörðum
+forme|Étiquette flèche ¦ Örvarmiði
+forme|Étiquette flèche gauche ¦ Örvarmiði til vinstri
+forme|Ruban à bouts pliés ¦ Borði með brotnum endum
+forme|Ruban courbé ¦ Sveigður borði
+forme|Signet ¦ Bókamerki
+forme|Fanion triangulaire ¦ Þríhyrnd veifa
+forme|Étiquette ovale ¦ Sporöskjulaga miði
+forme|Étiquette ovale à bord ¦ Sporöskjulaga miði með jaðri
+forme|Étiquette à bord ¦ Miði með jaðri
+forme|Étiquette de prix ¦ Verðmiði
+forme|Pastille festonnée ¦ Bogabrúnamerki
+forme|Pastille « nouveau » ¦ „Nýtt“-merki
+forme|Rosette à rubans ¦ Rósetta með borðum
+forme|Étiquette suspendue ¦ Hangandi miði
+forme|Onglet ¦ Flipi
+forme|Cartouche ¦ Skrautskjöldur
+forme|Cartouche à bord ¦ Skrautskjöldur með jaðri
+forme|Gommette ¦ Límmiði
+forme|Flamme verticale ¦ Lóðrétt veifa
+forme|Étiquette double ¦ Tvöfaldur miði
+forme|Drapeau uni ¦ Einlitur fáni
+forme|à colorier ¦ til að lita
+forme|Drapeau à trois bandes debout ¦ Fáni með þremur lóðréttum röndum
+forme|Drapeau à bande centrale debout ¦ Fáni með lóðréttri miðrönd
+forme|Drapeau à trois bandes couchées ¦ Fáni með þremur láréttum röndum
+forme|Drapeau à bande centrale couchée ¦ Fáni með láréttri miðrönd
+forme|Drapeau à deux bandes couchées ¦ Fáni með tveimur láréttum röndum
+forme|Drapeau à deux bandes debout ¦ Fáni með tveimur lóðréttum röndum
+forme|Drapeau à croix scandinave ¦ Fáni með norrænum krossi
+forme|Drapeau à croix centrée ¦ Fáni með krossi í miðju
+forme|Drapeau à croix droite ¦ Fáni með beinum krossi
+forme|Drapeau à croix en X ¦ Fáni með X-krossi
+forme|Drapeau à disque ¦ Fáni með skífu
+forme|Drapeau au croissant et à l’étoile ¦ Fáni með hálfmána og stjörnu
+forme|Drapeau à l’étoile ¦ Fáni með stjörnu
+forme|Drapeau étoilé à rayures ¦ Stjörnu- og röndóttur fáni
+forme|Drapeau au triangle ¦ Fáni með þríhyrningi
+forme|Drapeau en diagonale ¦ Skáskiptur fáni
+forme|Drapeau à canton ¦ Fáni með reit í horni
+forme|Drapeau à croix doubles ¦ Fáni með tvöföldum krossum
+forme|Drapeau à bandes et canton ¦ Fáni með röndum og reit í horni
+forme|Drapeau à queue d’aronde ¦ Klofinn fáni
+forme|Drapeau flottant ¦ Blaktandi fáni
+forme|Drapeau sur mât ¦ Fáni á stöng
+forme|Drapeau tricolore sur mât ¦ Þrílitur fáni á stöng
+forme|Lien parent → un enfant ¦ Tengill foreldri → eitt barn
+forme|Lien parent → {x} enfants ¦ Tengill foreldri → {x} börn
+forme|Lien de couple ¦ Hjónatengill
+forme|Couple et enfants ¦ Hjón og börn
+forme|Accolade ¦ Slaufusvigi
+forme|vers la droite ¦ til hægri
+forme|vers le bas ¦ niður
+forme|Branches d’ascendance ¦ Forfeðragreinar
+forme|Case de personne ¦ Reitur einstaklings
+forme|Médaillon de personne ¦ Medalía einstaklings
+forme|Éventail généalogique ¦ Ættfræðiblævængur
+forme|Deux alliances entrelacées ¦ Tveir samtvinnaðir giftingarhringar
+forme|Arbre et racines ¦ Tré og rætur

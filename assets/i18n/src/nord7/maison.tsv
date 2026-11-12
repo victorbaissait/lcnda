@@ -1,0 +1,2121 @@
+fr ¦ is
+Rez-de-chaussée ¦ Jarðhæð
+Cave ¦ Kjallari
+1er étage ¦ 1. hæð
+{level}e étage ¦ {level}. hæð
+Maison de famille ¦ Fjölskylduhús
+Époque sans nom ¦ Ónefnt tímabil
+Barre du haut ¦ Efsta stika
+Barre de la vue 3D ¦ Stika þrívíddarsýnar
+Vues dessus / face / côté ¦ Sýn ofan frá / framan / frá hlið
+Revêtement sur {what} de mur ¦ Veggklæðning á {what} veggjar
+=face ¦ hlið|hliðar
+=mur ¦ veggur|veggir
+=étage ¦ hæð|hæðir
+=trait ¦ lína|línur
+=objet trouvé ¦ hlutur fannst|hlutir fundust
+Aucune pièce tracée ¦ Ekkert herbergi teiknað
+Pièces et surfaces ¦ Herbergi og flatarmál
+Plan du ¦ Teikning frá
+double hauteur (vide au-dessus) ¦ tvöföld lofthæð (opið upp)
+trémie de l’escalier ¦ stigaop
+escalier (plancher fermé) ¦ stigi (lokað gólf)
+VIDE ¦ OPIÐ
+vide sur {name} ¦ opið niður í {name}
+maison|Vide ¦ Opið rými
+sans plancher ¦ án gólfs
+m² Carrez ¦ m² Carrez
+Moins de 1,80 m sous la pente du toit ¦ Minna en 1,80 m undir þakhallanum
+🕰 Fantôme : {name} ¦ 🕰 Draugur: {name}
+⌒ {len} · flèche {arrow} ¦ ⌒ {len} · bogahæð {arrow}
+{len} pour fermer en rectangle ¦ {len} til að loka sem rétthyrningi
+départ (clic : fermer) ¦ upphaf (smella: loka)
+maison|départ ¦ upphaf
+Posé sous l’étage « {name} ». ¦ Sett undir hæðina „{name}“.
+📐 {area} m² au sol ¦ 📐 {area} m² gólfflötur
+{area} m² au sol ¦ {area} m² gólfflötur
+{carrez} m² loi Carrez ¦ {carrez} m² samkvæmt Carrez-lögum
+{area} m² loi Carrez (hauteur ≥ 1,80 m) ¦ {area} m² samkvæmt Carrez-lögum (lofthæð ≥ 1,80 m)
+(là où l’on tient debout : 1,80 m et plus, hachuré sur le plan) ¦ (þar sem hægt er að standa uppréttur: 1,80 m eða meira, skástrikað á teikningunni)
+Habitant : {role} — ouvrir la fiche ¦ Íbúi: {role} — opna spjaldið
+Habitant — ouvrir la fiche ¦ Íbúi — opna spjaldið
+Liée à la pièce « {room} » — ouvrir la fiche ¦ Tengd herberginu „{room}“ — opna spjaldið
+{label} — époque : {era} — ouvrir la fiche où il est ¦ {label} — tímabil: {era} — opna spjaldið þar sem það er
+{label} — ouvrir la fiche où il est ¦ {label} — opna spjaldið þar sem það er
+🏷 Les souvenirs de la maison ¦ 🏷 Minningar hússins
+Aller à « {where} » et voir le souvenir ¦ Fara í „{where}“ og sjá minninguna
+Soleil calculé pour {place} ({lat}° N). ¦ Sól reiknuð fyrir {place} ({lat}° N).
+le lieu de la maison ¦ staður hússins
+Le lieu de la maison n’a pas de coordonnées : soleil calculé pour le centre de la France. ¦ Staður hússins hefur engin hnit: sól reiknuð fyrir miðju Frakklands.
+La nuit, les lampes posées s’allument (Vue 3D → ☀️ Lumière). ¦ Á nóttunni kviknar á lömpunum sem þú settir (Þrívíddarsýn → ☀️ Ljós).
+Pour commencer : ⬚ <b>glisse une pièce</b> (ses murs se font tout seuls), ou ▬ trace les murs un par un. ▨ Un <b>vide</b> (mezzanine, double hauteur) se dessine à l’étage du dessus. Puis 🚪 portes et 🪟 fenêtres (un clic sur un mur), et le <b>mobilier</b> (onglet à côté). ¦ Til að byrja: ⬚ <b>dragðu herbergi</b> (veggirnir koma sjálfkrafa), eða ▬ teiknaðu veggina einn í einu. ▨ <b>Opið rými</b> (millihæð, tvöföld lofthæð) er teiknað á hæðinni fyrir ofan. Síðan 🚪 hurðir og 🪟 gluggar (einn smellur á vegg), og <b>húsgögnin</b> (flipinn við hliðina).
+{area} m² habitables ¦ {area} m² íbúðarrými
+Face côté {rooms} ¦ Hlið sem snýr að {rooms}
+Face extérieure (façade) ¦ Ytri hlið (framhlið)
+Les murs de « {name} » ¦ Veggir „{name}“
+la pièce ¦ herbergið
+Les murs de toutes les pièces de cet étage ¦ Veggir allra herbergja á þessari hæð
+Toutes les façades de cet étage ¦ Allar útihliðar þessarar hæðar
+Les murs de toutes les pièces de la maison (tous les étages) ¦ Veggir allra herbergja hússins (allar hæðir)
+Toutes les façades de la maison (tous les étages) ¦ Allar útihliðar hússins (allar hæðir)
+Vide sur « {room} » ({floor}). ¦ Opið niður í „{room}“ ({floor}).
+Vide sur l’étage « {floor} ». ¦ Opið niður á hæðina „{floor}“.
+⚠️ C’est l’étage le plus bas : ce vide n’ouvre sur rien. ¦ ⚠️ Þetta er neðsta hæðin: þetta opna rými opnast ekki niður á neitt.
+{w} × {d} hors tout · périmètre {p} ¦ {w} × {d} heildarmál · ummál {p}
+La face de {walls} tournée vers la pièce. ¦ Hlið {walls} sem snýr að herberginu.
+Années de {name} ¦ Ár {name}
+Hauteur : celle de l’étage + le plancher ({h}) ¦ Hæð: hæð hæðarinnar + gólfplatan ({h})
+={n} marches de {rise} cm, giron {going} cm · 2 h + g = {sum} cm ¦ {n} þrep, {rise} cm há, dýpt {going} cm · 2 h + g = {sum} cm|{n} þrep, {rise} cm há, dýpt {going} cm · 2 h + g = {sum} cm
+Ouvrir le plancher au-dessus (« {name} ») ¦ Opna gólfið fyrir ofan („{name}“)
+Ouvrir le plancher au-dessus ¦ Opna gólfið fyrir ofan
+posé sur « {name} » : il le suit ¦ sett á „{name}“: fylgir því
+un objet ¦ hlutur
+Georgia (de départ) ¦ Georgia (sjálfgefið)
+État d’origine ¦ Upprunalegt ástand
+Époque modifiée ¦ Tímabili breytt
+Nouvelle époque : {name} ¦ Nýtt tímabil: {name}
+Époques retirées (le plan « {name} » reste, sans date) ¦ Tímabil fjarlægð (teikningin „{name}“ helst, ódagsett)
+Époque « {name} » supprimée avec son plan ¦ Tímabilinu „{name}“ eytt ásamt teikningu þess
+{name} est déjà rattaché. ¦ {name} er þegar tengt.
+🏠 un habitant y est ¦ 🏠 íbúi er þar
+Posé sur « {name} » ¦ Sett á „{name}“
+Posé au sol ¦ Sett á gólfið
+Pièce {n} ¦ Herbergi {n}
+Pièce de {area} m² ¦ Herbergi, {area} m²
+Vide sur {name} ¦ Opið niður í {name}
+Mezzanine ¦ Millihæð
+🏗 Mezzanine posée (étage « Mezzanine » ajouté) : vide sur {room}, garde-corps et escalier. ¦ 🏗 Millihæð sett (hæðinni „Millihæð“ bætt við): opið niður í {room}, handrið og stigi.
+🏗 Mezzanine posée à l’étage « {floor} » : vide sur {room}, garde-corps et escalier. ¦ 🏗 Millihæð sett á hæðina „{floor}“: opið niður í {room}, handrið og stigi.
+{len} cm, c’est trop court : pour des mètres, écris « {typed} m ». ¦ {len} cm er of stutt: fyrir metra skaltu skrifa „{typed} m“.
+{name} posé ¦ {name} sett
+{msg} — et maintenant le deuxième point. ¦ {msg} — og nú seinni punkturinn.
+À l’échelle : la longueur choisie mesure {len}. Puis « ✏️ Décalquer les murs » (onglet Étage). ¦ Í kvarða: valin lengd mælist {len}. Síðan „✏️ Draga upp veggina“ (flipinn Hæð).
+Plan ancien redressé ({deg}°) ¦ Gamla teikningin rétt af ({deg}°)
+Souvenir ¦ Minning
+🔗 Relier un souvenir à « {name} » ¦ 🔗 Tengja minningu við „{name}“
+Un souvenir pour « {name} » ¦ Minning fyrir „{name}“
+✍ Un récit pour « {name} » ¦ ✍ Frásögn fyrir „{name}“
+👤 Une personne liée à « {name} » ¦ 👤 Einstaklingur tengdur „{name}“
+Ce qui s’y est passé ¦ Það sem gerðist þar
+Réglage « {name} » appliqué ¦ Stillingin „{name}“ notuð
+Ce réglage est celui d’un autre outil (« {tool} ») : importe-le dans cet outil-là, pas dans la Maison. ¦ Þessi stilling tilheyrir öðru tóli („{tool}“): fluttu hana inn í það tól, ekki í Húsið.
+Un réglage s’appelle déjà « {name} ». Nom du réglage importé : ¦ Stilling heitir þegar „{name}“. Heiti innfluttu stillingarinnar:
+{lines} et {texts}. ¦ {lines} og {texts}.
+Chaque trait devient un mur ; un contour fermé sur un calque « pièce / room » devient une pièce, nommée par le texte posé dedans. ¦ Hver lína verður að vegg; lokuð útlína á lagi „pièce / room“ verður að herbergi, nefnt eftir textanum sem er inni í henni.
+Pas repris : {what}. ¦ Ekki tekið með: {what}.
+Cet étage ({name}), en plus de ce qui y est ¦ Þessi hæð ({name}), til viðbótar við það sem er þar
+{walls}, {rooms} et {texts} importés. ¦ {walls}, {rooms} og {texts} flutt inn.
+🔁 Répéter cette fenêtre ¦ 🔁 Endurtaka þennan glugga
+🔁 Répéter cette porte ¦ 🔁 Endurtaka þessa hurð
+Des copies le long du même mur, vers son autre bout (mur de {len}). ¦ Afrit eftir sama vegg, í átt að hinum endanum (veggur {len}).
+🔁 Répéter « {name} » ¦ 🔁 Endurtaka „{name}“
+{name} (à {len}) ¦ {name} ({len} frá)
+{copies} de « {name} ». ¦ {copies} af „{name}“.
+Vue 3D ¦ Þrívíddarsýn
+Au-dessus : {name} ¦ Fyrir ofan: {name}
+En dessous : {name} (cave, sous-sol) ¦ Fyrir neðan: {name} (kjallari, undirhæð)
+Reprendre les murs de « {name} » (et ses fenêtres) ¦ Afrita veggi „{name}“ (og glugga hennar)
+{name} ajouté ¦ {name} bætt við
+Étages ¦ Hæðir
+{name} (murs repris) ¦ {name} (veggir afritaðir)
+Étage « {name} » supprimé ¦ Hæðinni „{name}“ eytt
+Maison de {place} ¦ Hús í {place}
+✓ Toit retiré ¦ ✓ Þak fjarlægt
+✓ Toit ajouté : il se voit depuis « {name} », l’étage du haut ¦ ✓ Þaki bætt við: það sést frá „{name}“, efstu hæðinni
+✓ Toit ajouté : il se pose sur les murs (aucun mur pour l’instant) ¦ ✓ Þaki bætt við: það situr á veggjunum (engir veggir enn)
+✓ Toit ajouté ¦ ✓ Þaki bætt við
+Arrêt {n} de la visite guidée ¦ Viðkomustaður {n} í leiðsögninni
+{label} — ouvrir la fiche ¦ {label} — opna spjaldið
+Habitant ¦ Íbúi
+{label} — époque : {era} ¦ {label} — tímabil: {era}
+{what} sur {total} ¦ {what} af {total}
+Supprimer la maison « {name} » ? ¦ Eyða húsinu „{name}“?
+Supprimer la maison ¦ Eyða húsinu
+🕰 époque : {name} ¦ 🕰 tímabil: {name}
+aucune époque choisie ¦ ekkert tímabil valið
+mètres ¦ metrar
+centimètres ¦ sentímetrar
+millimètres ¦ millímetrar
+pieds ¦ fet
+toises (1,949 m) ¦ toises (1,949 m)
+pieds du roi (32,48 cm) ¦ pieds du roi (32,48 cm)
+aunes de Paris (1,188 m) ¦ aunes de Paris (1,188 m)
+perches de Paris (18 pieds, 5,847 m) ¦ perches de Paris (18 fet, 5,847 m)
+perches royales (22 pieds, 7,146 m) ¦ perches royales (22 fet, 7,146 m)
+pas (environ 75 cm) ¦ skref (um 75 cm)
+Plâtre blanc ¦ Hvítt gifs
+Enduit à la chaux ¦ Kalkpússning
+Pierre apparente ¦ Óhulinn steinn
+Brique ¦ Múrsteinn
+Colombage (pans de bois) ¦ Bindingsverk
+Lambris de bois ¦ Viðarþiljur
+Papier peint ¦ Veggfóður
+Carrelage ¦ Flísar
+Béton ¦ Steinsteypa
+Torchis ¦ Leirveggur (torchis)
+Enduit, crépi ¦ Pússning, hraunun
+Pierre de taille ¦ Höggvinn steinn
+Papier peint à rayures ¦ Röndótt veggfóður
+Papier peint à fleurs ¦ Blómótt veggfóður
+Toile de Jouy ¦ Toile de Jouy
+Parquet ¦ Parket
+Parquet à bâtons rompus ¦ Fiskibeinaparket
+Tomettes ¦ Terrakottaflísar
+Carreaux de ciment ¦ Sementsflísar
+Damier noir et blanc ¦ Svartur og hvítur skákreitur
+Dalles de pierre ¦ Steinhellur
+Terre battue ¦ Troðið moldargólf
+Moquette, tapis ¦ Gólfteppi, motta
+Herbe (extérieur) ¦ Gras (úti)
+Gravier, cour ¦ Möl, garður
+Bois clair (hêtre, pin) ¦ Ljós viður (beyki, fura)
+Chêne ¦ Eik
+Noyer ¦ Valhnota
+Merisier ¦ Kirsuberjaviður
+Bois foncé (ébène, bois ciré) ¦ Dökkur viður (íbenholt, bónaður viður)
+Bois peint ¦ Málaður viður
+Métal, acier ¦ Málmur, stál
+Fonte, fer forgé ¦ Steypujárn, smíðajárn
+Laiton, bronze, doré ¦ Messing, brons, gyllt
+Zinc, fer-blanc ¦ Sink, blikk
+Pierre ¦ Steinn
+Marbre ¦ Marmari
+Grès, terre cuite ¦ Steinleir, terrakotta
+Faïence, porcelaine, émail ¦ Fajansi, postulín, glerungur
+Tissu ¦ Efni
+Velours ¦ Flauel
+Cuir ¦ Leður
+Osier, rotin ¦ Tágar, rotting
+Paille ¦ Hálmur
+Verre ¦ Gler
+Sans pieds ¦ Án fóta
+Pieds droits ¦ Beinir fætur
+Pieds tournés ¦ Renndir fætur
+Pieds boules (miches) ¦ Kúlufætur
+Patins ¦ Meiðar
+Roulettes ¦ Hjól
+Barreaux de bois ¦ Viðarrimlar
+Métal (barreaux fins) ¦ Málmur (grannir rimlar)
+Muret plein ¦ Heill lágveggur
+Métiers, ferme ¦ Iðnir, býli
+Extérieur ¦ Úti
+sa chambre ¦ svefnherbergi viðkomandi
+né ici ¦ fæddist hér
+née ici ¦ fæddist hér
+y a vécu ¦ bjó hér
+y est mort ¦ dó hér
+y est morte ¦ dó hér
+les parents ¦ foreldrarnir
+les enfants ¦ börnin
+locataire ¦ leigjandi
+fermier ¦ leiguliði
+domestique ¦ hjú
+servante ¦ vinnukona
+valet ¦ vinnumaður
+nourrice ¦ brjóstmóðir
+pensionnaire ¦ kostgangari
+atelier ¦ verkstæði
+boutique ¦ verslun
+Nom de la maison ¦ Heiti hússins
+Réglages de l’aimant : grille, coins, angles, précision et 💾 réglages enregistrés ¦ Stillingar grips: hnitanet, horn, horn í gráðum, nákvæmni og 💾 vistaðar stillingar
+Réglages de l’aimant ¦ Stillingar grips
+📐 Un plan ancien, un cadastre, à calquer… ¦ 📐 Gömul teikning, fasteignakort, til að draga upp…
+🖼️ Un objet en image (vue de dessus)… ¦ 🖼️ Hlutur sem mynd (séð ofan frá)…
+🧊 Un objet 3D (OBJ, STL, glTF, GLB)… ¦ 🧊 Þrívíddarhlutur (OBJ, STL, glTF, GLB)…
+🏠 Une maison (fichier .json)… ¦ 🏠 Hús (.json-skrá)…
+📐 Un plan DXF (AutoCAD, LibreCAD, architecte, notaire)… ¦ 📐 DXF-teikning (AutoCAD, LibreCAD, arkitekt, lögbókandi)…
+Le plan (PNG, JPG, PDF, SVG, impression), la vue 3D, le fichier de la maison ¦ Teikningin (PNG, JPG, PDF, SVG, prentun), þrívíddarsýnin, skrá hússins
+Choisir, déplacer ¦ Velja, færa
+Déplacer la vue, ou barre d’espace ¦ Færa sýnina, eða bilslá
+Pièce rectangulaire, murs compris : glisser ¦ Rétthyrnt herbergi, með veggjum: draga
+Vide, trémie, double hauteur : glisser, sans murs ¦ Opið rými, stigaop, tvöföld lofthæð: draga, án veggja
+Mur : un clic par coin, double-clic ou Entrée pour finir ¦ Veggur: einn smellur á hvert horn, tvísmella eða Enter til að ljúka
+Pièce de forme libre, sans murs : un clic par coin ¦ Herbergi með frjálsu formi, án veggja: einn smellur á hvert horn
+Porte : clic sur un mur ¦ Hurð: smella á vegg
+Fenêtre : clic sur un mur ¦ Gluggi: smella á vegg
+Cote, mesure : deux clics ¦ Mál, mæling: tveir smellir
+Étiquette à flèche : un clic sur le point, un clic où écrire ¦ Merki með ör: einn smellur á punktinn, einn smellur þar sem á að skrifa
+Une autre époque de la maison en fantôme (celle du calque 🕰, sinon l’époque d’avant) : murs très transparents, arêtes en pointillés ¦ Annað tímabil hússins sem draugur (tímabil 🕰-lagsins, annars tímabilið á undan): mjög gegnsæir veggir, punktalínur á brúnum
+Deux clics sur la maison : la distance (et la hauteur entre les deux points) ¦ Tveir smellir á húsið: fjarlægðin (og hæðarmunurinn milli punktanna tveggja)
+Tous les étages ¦ Allar hæðir
+Murs coupés (voir dedans) ¦ Skornir veggir (sjá inn)
+Murs coupés ¦ Skornir veggir
+🕰 Autre époque ¦ 🕰 Annað tímabil
+Vue de dessus ¦ Sýn ofan frá
+Vue de face ¦ Sýn að framan
+Vue de côté ¦ Sýn frá hlið
+Dessus ¦ Ofan frá
+Face ¦ Framan
+Le soleil selon l’heure, la date et le lieu ; la nuit, les lampes ¦ Sólin eftir tíma, dagsetningu og stað; á nóttunni lamparnir
+Visiter la maison à hauteur d’yeux ¦ Skoða húsið í augnhæð
+☀️ Lumière ¦ ☀️ Ljós
+🚶 Visiter ¦ 🚶 Skoða
+📏 Mesurer ¦ 📏 Mæla
+Plan 2D ¦ Tvívíð teikning
+Toit ¦ Þak
+Cotes ¦ Mál
+Mobilier ¦ Húsgögn
+Propriétés de l’élément choisi ¦ Eiginleikar valins atriðis
+Mobilier : meubles, portes, fenêtres à poser ¦ Húsgögn: húsmunir, hurðir, gluggar til að setja
+L’étage affiché : niveaux, hauteur, sol ¦ Hæðin sem sést: stig, hæð, gólfefni
+La maison : nom, époque, réglages généraux ¦ Húsið: heiti, tímabil, almennar stillingar
+la maison est fermée ¦ húsinu hefur verið lokað
+d’autres changements ont suivi : utilise ↶ dans la barre du haut ¦ aðrar breytingar fylgdu á eftir: notaðu ↶ í efstu stikunni
+Aimanter : grille, coins et milieux des murs, angles (Alt pour s’en passer) ¦ Grípa: hnitanet, horn og miðjur veggja, horn í gráðum (Alt til að sleppa því)
+{walls} ajouté depuis {when} ¦ {walls} bætt við síðan {when}
+{walls} ajoutés depuis {when} ¦ {walls} bætt við síðan {when}
+{walls} disparu depuis {when} ¦ {walls} horfinn síðan {when}
+{walls} disparus depuis {when} ¦ {walls} horfnir síðan {when}
+{walls} plus là en {when} ¦ {walls} ekki lengur til árið {when}
+{walls} ajouté en {when} ¦ {walls} bætt við árið {when}
+{walls} ajoutés en {when} ¦ {walls} bætt við árið {when}
+={n} souvenir : clic pour voir ¦ {n} minning: smelltu til að sjá|{n} minningar: smelltu til að sjá
+={n} souvenirs : clic pour voir ¦ {n} minning: smelltu til að sjá|{n} minningar: smelltu til að sjá
+Glisser : la pointe de la flèche ¦ Draga: oddur örvarinnar
+Voir un autre étage, ou le même étage à une autre époque, en transparence ¦ Sjá aðra hæð, eða sömu hæð á öðru tímabili, gegnsætt
+Calque d’un autre étage ou d’une autre époque ¦ Lag annarrar hæðar eða annars tímabils
+Calque d’un autre étage ou d’une époque ¦ Lag annarrar hæðar eða tímabils
+👻 Calque : non ¦ 👻 Lag: ekkert
+👻 Dessous ¦ 👻 Fyrir neðan
+👻 Dessus ¦ 👻 Fyrir ofan
+👻 Les deux ¦ 👻 Hvort tveggja
+🕰 Époque d’avant ¦ 🕰 Tímabilið á undan
+🕰 Époque d’après ¦ 🕰 Tímabilið á eftir
+🕰 Choisir une époque… ¦ 🕰 Velja tímabil…
+Ajouter un étage ou une cave ¦ Bæta við hæð eða kjallara
+Les étages : gérer, ajouter, dupliquer, supprimer ¦ Hæðirnar: stjórna, bæta við, tvítaka, eyða
+Plus d’actions sur les étages ¦ Fleiri aðgerðir fyrir hæðir
+Chercher : lit, poêle, rouet… ¦ Leita: rúm, ofn, rokkur…
+Mes objets ¦ Hlutirnir mínir
+Aucun objet importé pour l’instant ¦ Enginn innfluttur hlutur enn
+« ⤒ Importer » (en haut) un fichier 3D (OBJ, STL, glTF, GLB) ou une image. ¦ „⤒ Flytja inn“ (efst) þrívíddarskrá (OBJ, STL, glTF, GLB) eða mynd.
+Clic sur un objet : il se pose au milieu de la vue ; glisse-le ensuite à sa place (R ou la poignée ronde pour tourner). ¦ Smelltu á hlut: hann birtist í miðri sýninni; dragðu hann svo á sinn stað (R eða hringlaga haldfangið til að snúa).
+Nom de l’étage ¦ Heiti hæðarinnar
+Épaisseur des nouveaux murs ¦ Þykkt nýrra veggja
+Épaisseur des planchers ¦ Þykkt gólfplatna
+Pas de la grille ¦ Bil hnitanets
+⧉ Dupliquer cet étage (murs) ¦ ⧉ Tvítaka þessa hæð (veggi)
+Supprimer l’étage ¦ Eyða hæðinni
+Cotes des murs ¦ Mál veggja
+Cotes d’ensemble ¦ Heildarmál
+Tableau des pièces sur le plan ¦ Herbergjatafla á teikningunni
+Cartouche (nom, lieu, époque, étage) ¦ Titilreitur (heiti, staður, tímabil, hæð)
+Affichage sombre (dessin technique) ¦ Dökk birting (tækniteikning)
+Plafond (visite 3D) ¦ Loft (þrívíddarskoðun)
+Aucun (ouvert) ¦ Ekkert (opið)
+Plafond uni ¦ Slétt loft
+Poutres apparentes ¦ Sýnilegir bitar
+Couleur du plafond ¦ Litur lofts
+Légende : ― ajouté · ┄ disparu ¦ Skýringar: ― bætt við · ┄ horfið
+Transparence du calque ¦ Gegnsæi lagsins
+📐 Plan ancien, cadastre ¦ 📐 Gömul teikning, fasteignakort
+Un cadastre napoléonien, un plan ancien, un croquis : pose-le en fond, mets-le à l’échelle, puis décalque les murs par-dessus. ¦ Napóleonskt fasteignakort, gömul teikning, skissa: settu það í bakgrunninn, stilltu kvarðann og dragðu svo veggina upp ofan á.
+🖼 Choisir l’image… ¦ 🖼 Velja myndina…
+Le mettre sous cet étage ¦ Setja það undir þessa hæð
+Visible ¦ Sýnilegt
+🔒 Verrouillé ¦ 🔒 Læst
+📏 Mettre à l’échelle ¦ 📏 Stilla kvarða
+Deux clics le long d’un mur de l’image : il devient droit (horizontal ou vertical) ¦ Tveir smellir eftir vegg á myndinni: hann verður beinn (láréttur eða lóðréttur)
+✓ Fin du décalque ¦ ✓ Ljúka uppdrætti
+✏️ Décalquer les murs ¦ ✏️ Draga upp veggina
+🖼 Changer d’image… ¦ 🖼 Skipta um mynd…
+🏠 Combles (sous le toit) ¦ 🏠 Ris (undir þakinu)
+Pour l’étage le plus haut, sous un toit en pente (onglet Étage → 🏠 Toit) : le plafond suit alors la pente, et la hauteur sous plafond se lit partout sur le plan. ¦ Fyrir efstu hæðina, undir hallandi þaki (flipinn Hæð → 🏠 Þak): loftið fylgir þá hallanum og lofthæðina má lesa alls staðar á teikningunni.
+Combles : le plafond suit la pente du toit ¦ Ris: loftið fylgir halla þaksins
+Hauteur des murs sous le toit ¦ Hæð veggja undir þakinu
+🏠 Toit (vue 3D) ¦ 🏠 Þak (þrívíddarsýn)
+Un toit sur l’étage le plus haut ¦ Þak á efstu hæðinni
+Deux pans (pignons) ¦ Tveir fletir (gaflar)
+Quatre pans (croupes) ¦ Fjórir fletir (valmaþak)
+Pavillon (pointe) ¦ Pýramídaþak (toppur)
+Un pan (appentis) ¦ Einn flötur (skúrþak)
+Mansardé ¦ Mansardþak
+Plat (toit-terrasse) ¦ Flatt (þakverönd)
+Faîtage ¦ Mænir
+Dans la longueur ¦ Á lengdina
+Dans la largeur ¦ Á breiddina
+Est – ouest ¦ Austur – vestur
+Nord – sud ¦ Norður – suður
+Débord ¦ Þakskegg
+Couverture ¦ Þakklæðning
+Tuiles canal ¦ Kúpusteinn
+Tuiles plates ¦ Flatir þaksteinar
+Tuiles vernissées ¦ Gljáðir þaksteinar
+Ardoises ¦ Þakhellur (flögusteinn)
+Lauzes (pierre) ¦ Steinhellur (lauzes)
+Chaume ¦ Strá
+Zinc ¦ Sink
+Bac acier ¦ Stálklæðning
+Pignons, acrotères ¦ Gaflar, brjóstveggir
+Acrotère (toit plat) ¦ Brjóstveggur (flatt þak)
+Une cheminée ¦ Reykháfur
+Place de la cheminée ¦ Staðsetning reykháfs
+Gouttières et descentes ¦ Þakrennur og niðurföll
+Un toit par aile (maison en L, en T, en U) ¦ Eitt þak á hverja álmu (L-, T-, U-laga hús)
+Verrières, lanterneaux et édicules ¦ Glerþök, þakljóri og þakhús
+Fenêtres de toit et lucarnes ¦ Þakgluggar og kvistir
+🪟 Verrière ¦ 🪟 Glerþak
+🚪 Édicule (sortie sur le toit) ¦ 🚪 Þakhús (útgangur á þakið)
+🔆 Lanterneau ¦ 🔆 Þakljóri
+🪟 Fenêtre de toit ¦ 🪟 Þakgluggi
+🏠 Lucarne ¦ 🏠 Kvistur
+🏚 Chien-assis ¦ 🏚 Skúrkvistur
+Lucarne ¦ Kvistur
+Aile ¦ Álma
+Arrière ¦ Aftan
+En travers ¦ Þvert
+Vers l’égout ¦ Í átt að þakskeggi
+Profondeur ¦ Dýpt
+＋ Verrière ¦ ＋ Glerþak
+＋ Édicule ¦ ＋ Þakhús
+＋ Lanterneau ¦ ＋ Þakljóri
+＋ Fenêtre de toit ¦ ＋ Þakgluggi
+＋ Lucarne ¦ ＋ Kvistur
+＋ Chien-assis ¦ ＋ Skúrkvistur
+Rien pour l’instant : ajoute des habitants et des recensements (plus bas). ¦ Ekkert enn: bættu við íbúum og manntölum (hér fyrir neðan).
+📍 Lieu et époque ¦ 📍 Staður og tímabil
+Époque (en quelques mots) ¦ Tímabil (í fáum orðum)
+Aucun souvenir posé pour l’instant ¦ Engin minning sett enn
+Clic sur un meuble ou une pièce, puis « 🔗 Relier un souvenir » : une photo, un récit, une personne, un souvenir de famille. ¦ Smelltu á húsmun eða herbergi og svo á „🔗 Tengja minningu“: ljósmynd, frásögn, einstaklingur, fjölskylduminning.
+☀️ Orientation et lumière ¦ ☀️ Átt og birta
+Nord du plan ¦ Norður teikningarinnar
+Heure ¦ Tími
+Jour ¦ Dagur
+Jour de l’année ¦ Dagur ársins
+Hauteur des yeux pour la visite ¦ Augnhæð við skoðun
+👥 Les habitants ¦ 👥 Íbúarnir
+rôle, années (né ici, 1880–1920…) ¦ hlutverk, ár (fæddist hér, 1880–1920…)
+＋ Ajouter un habitant… ¦ ＋ Bæta við íbúa…
+📋 Les recensements ¦ 📋 Manntölin
+Ouvrir la fiche où est ce recensement ¦ Opna spjaldið þar sem þetta manntal er
+L’époque de la maison qui correspond à ce recensement ¦ Tímabil hússins sem samsvarar þessu manntali
+— époque — ¦ — tímabil —
+Aucun recensement rattaché. ¦ Ekkert manntal tengt.
+＋ Ajouter un recensement… ¦ ＋ Bæta við manntali…
+🕰 Les époques ¦ 🕰 Tímabilin
+Montrer la maison à cette époque ¦ Sýna húsið á þessu tímabili
+Renommer, changer la date, rattacher à un recensement ¦ Endurnefna, breyta dagsetningu, tengja við manntal
+Supprimer cette époque ¦ Eyða þessu tímabili
+La maison a changé avec le temps ? Crée une époque par année ou par date (1850, 1900, 1936…), chacune avec son plan : tu la verras évoluer, et chacune peut être rattachée à un recensement. ¦ Hefur húsið breyst með tímanum? Búðu til tímabil fyrir hvert ár eða dagsetningu (1850, 1900, 1936…), hvert með sinni teikningu: þú sérð það þróast og hvert tímabil má tengja við manntal.
+＋ Nouvelle époque (copie de celle-ci) ¦ ＋ Nýtt tímabil (afrit af þessu)
+＋ Nouvelle époque (copie de celle-ci)… ¦ ＋ Nýtt tímabil (afrit af þessu)…
+▶ Voir évoluer ¦ ▶ Sjá þróunina
+⏹ Arrêter ¦ ⏹ Stöðva
+📖 Histoire de la maison ¦ 📖 Saga hússins
+Histoire de la maison ¦ Saga hússins
+Construite par…, agrandie en…, vendue en… ¦ Byggt af…, stækkað árið…, selt árið…
+Clic sur un mur, une pièce, un meuble : ses réglages viennent ici (matériau, couleur, taille, nom, souvenirs). Molette : zoomer ; barre d’espace : déplacer la vue ; Alt : sans aimant. ¦ Smelltu á vegg, herbergi, húsmun: stillingar þess birtast hér (efni, litur, stærð, heiti, minningar). Skrunhjól: þysja; bilslá: færa sýnina; Alt: án grips.
+Cet étage ¦ Þessi hæð
+={n} pièce ¦ {n} herbergi|{n} herbergi
+={n} pièces ¦ {n} herbergi|{n} herbergi
+={n} étage ¦ {n} hæð|{n} hæðir
+={n} étages ¦ {n} hæð|{n} hæðir
+={n} habitant ¦ {n} íbúi|{n} íbúar
+={n} habitants ¦ {n} íbúi|{n} íbúar
+={n} époque ¦ {n} tímabil|{n} tímabil
+={n} époques ¦ {n} tímabil|{n} tímabil
+={n} arrêt ¦ {n} viðkomustaður|{n} viðkomustaðir
+={n} arrêts ¦ {n} viðkomustaður|{n} viðkomustaðir
+={n} modèle ¦ {n} líkan|{n} líkön
+={n} modèles ¦ {n} líkan|{n} líkön
+={n} recensement rattaché ¦ {n} manntal tengt|{n} manntöl tengd
+={n} recensements rattachés ¦ {n} manntal tengt|{n} manntöl tengd
+={n} habitant ajouté depuis le recensement. ¦ {n} íbúa bætt við úr manntalinu.|{n} íbúum bætt við úr manntalinu.
+={n} habitants ajoutés depuis le recensement. ¦ {n} íbúa bætt við úr manntalinu.|{n} íbúum bætt við úr manntalinu.
+={n} trémie ouverte ¦ {n} stigaop opnað|{n} stigaop opnuð
+={n} trémies ouvertes ¦ {n} stigaop opnað|{n} stigaop opnuð
+={n} étage supprimé ¦ {n} hæð eytt|{n} hæðum eytt
+={n} étages supprimés ¦ {n} hæð eytt|{n} hæðum eytt
+={n} copie seulement : le mur est trop court pour plus. ¦ Aðeins {n} afrit: veggurinn er of stuttur fyrir fleiri.|Aðeins {n} afrit: veggurinn er of stuttur fyrir fleiri.
+={n} copies seulement : le mur est trop court pour plus. ¦ Aðeins {n} afrit: veggurinn er of stuttur fyrir fleiri.|Aðeins {n} afrit: veggurinn er of stuttur fyrir fleiri.
+={n} lampe allumée ¦ Kveikt á {n} lampa|Kveikt á {n} lömpum
+={n} lampes allumées ¦ Kveikt á {n} lampa|Kveikt á {n} lömpum
+={n} refusé : {list} ¦ {n} hafnað: {list}|{n} hafnað: {list}
+={n} refusés : {list} ¦ {n} hafnað: {list}|{n} hafnað: {list}
+=✓ {n} image : à glisser dans le 🎬 Montage pour en faire un film (avec les textes en voix off). ¦ ✓ {n} mynd: dragðu hana í 🎬 Klippingu til að gera úr henni kvikmynd (með textunum sem talsetningu).|✓ {n} myndir: dragðu þær í 🎬 Klippingu til að gera úr þeim kvikmynd (með textunum sem talsetningu).
+=✓ {n} images : à glisser dans le 🎬 Montage pour en faire un film (avec les textes en voix off). ¦ ✓ {n} mynd: dragðu hana í 🎬 Klippingu til að gera úr henni kvikmynd (með textunum sem talsetningu).|✓ {n} myndir: dragðu þær í 🎬 Klippingu til að gera úr þeim kvikmynd (með textunum sem talsetningu).
+🔗 Relier un souvenir… ¦ 🔗 Tengja minningu…
+Angle (°, 0 = vers la droite, 90 = vers le haut) ¦ Horn (°, 0 = til hægri, 90 = upp)
+Début X ¦ Upphaf X
+Début Y ¦ Upphaf Y
+Fin X ¦ Endir X
+Fin Y ¦ Endir Y
+Hauteur (cm, vide = celle de l’étage) ¦ Hæð (cm, tómt = hæð hæðarinnar)
+⌒ Courbure (flèche) ¦ ⌒ Sveigja (bogahæð)
+✂ Couper en deux ¦ ✂ Skipta í tvennt
+Revêtement ¦ Klæðning
+Pareil pour : ¦ Eins fyrir:
+tout l’étage ¦ alla hæðina
+toute la maison ¦ allt húsið
+Couleur et texture ¦ Litur og áferð
+Taille du motif ¦ Stærð mynsturs
+Allège (cm du sol) ¦ Gluggakista (cm frá gólfi)
+Position sur le mur ¦ Staðsetning á veggnum
+Du début du mur ¦ Frá upphafi veggjarins
+Jusqu’à la fin ¦ Að endanum
+🚪 Genre et ouverture ¦ 🚪 Gerð og opnun
+Porte ¦ Hurð
+Porte double ¦ Tvöföld hurð
+Porte d’entrée ¦ Útidyr
+Passage, arche ¦ Gangur, bogi
+Porte de grange ¦ Hlöðudyr
+Une rangée de fenêtres (ou de portes) le long du mur ¦ Röð glugga (eða hurða) eftir veggnum
+🔁 Répéter… ¦ 🔁 Endurtaka…
+↔ Sens d’ouverture ¦ ↔ Opnunarátt
+▨ Plancher : plein ou vide ¦ ▨ Gólf: heilt eða opið
+Pas de plancher : vide sur l’étage du dessous ¦ Ekkert gólf: opið niður á hæðina fyrir neðan
+Garde-corps ¦ Handrið
+Garde-corps autour ¦ Handrið allan hringinn
+Ajoute l’étage du dessus s’il manque, une mezzanine sur une partie de cette pièce, le vide sur le reste, son garde-corps et l’escalier ¦ Bætir við hæðinni fyrir ofan ef hana vantar, millihæð yfir hluta þessa herbergis, opnu rými yfir afganginum, handriði þess og stiga
+🏗 Mezzanine ouverte sur cette pièce ¦ 🏗 Millihæð sem opnast niður í þetta herbergi
+Mezzanine ouverte ¦ Opin millihæð
+🔗 Les murs et les meubles suivent la pièce ¦ 🔗 Veggir og húsgögn fylgja herberginu
+🧱 Murs de la pièce ¦ 🧱 Veggir herbergisins
+Sol ¦ Gólf
+Salle commune ¦ Aðalstofa
+Chambre des parents ¦ Svefnherbergi foreldranna
+Chambre des enfants ¦ Barnaherbergi
+Salle à manger ¦ Borðstofa
+Grenier ¦ Háaloft
+Cellier ¦ Geymsla
+Étable ¦ Fjós
+Grange ¦ Hlaða
+Fournil ¦ Bakarí
+Boutique ¦ Verslun
+Couloir ¦ Gangur
+Cour ¦ Húsagarður
+Jardin ¦ Garður
+Potager ¦ Matjurtagarður
+Basse-cour ¦ Hænsnagarður
+🕯 Souvenirs de la pièce ¦ 🕯 Minningar herbergisins
+La chambre où est née Marie en 1890 ; la veillée… ¦ Herbergið þar sem Marie fæddist árið 1890; kvöldvökurnar…
+Les personnes de la pièce ¦ Fólkið í herberginu
+Leurs années dans cette pièce ¦ Ár þeirra í þessu herbergi
+années : 1890 – 1925 ¦ ár: 1890 – 1925
+🪜 Escalier ¦ 🪜 Stigi
+✓ confortable (60 à 66 cm) ¦ ✓ þægilegur (60 til 66 cm)
+⚠️ un peu raide : allonge l’escalier ou choisis un escalier tournant ¦ ⚠️ heldur brattur: lengdu stigann eða veldu snúningsstiga
+⚠️ marches très longues : raccourcis l’escalier ¦ ⚠️ mjög löng þrep: styttu stigann
+Quart tournant ¦ Fjórðungssnúningur
+Vers la gauche ¦ Til vinstri
+Vers la droite ¦ Til hægri
+Le haut devient le bas ¦ Efri endinn verður neðri endinn
+⇅ Inverser le sens de montée ¦ ⇅ Snúa við uppgöngustefnu
+Pas d’étage au-dessus : ajoute-le avec ＋ en haut. ¦ Engin hæð fyrir ofan: bættu henni við með ＋ efst.
+Pour les maisons dessinées avant : chaque escalier perce le plancher de l’étage du dessus ¦ Fyrir hús sem voru teiknuð áður: hver stigi opnar gólf hæðarinnar fyrir ofan
+Ouvrir les trémies de tous les escaliers ¦ Opna stigaop allra stiga
+Du sol ¦ Frá gólfi
+Les prochains objets de ce modèle seront posés à cette taille ¦ Næstu hlutir af þessu líkani verða settir í þessari stærð
+💾 Garder pour ce modèle ¦ 💾 Halda fyrir þetta líkan
+Le poser sur le meuble qui est dessous (table, commode, cheminée…) ¦ Setja það á húsmuninn sem er undir (borð, kommóða, arinn…)
+⬆ Sur l’objet dessous ¦ ⬆ Á hlutinn fyrir neðan
+⬇ Au sol ¦ ⬇ Á gólfið
+Plusieurs copies d’un coup : en ligne, en grille, ou en cercle autour d’un objet (6 chaises autour d’une table) ¦ Mörg afrit í einu: í röð, í hnitaneti eða í hring utan um hlut (6 stólar utan um borð)
+Pieds ¦ Fætur
+Pieds, poignées, filets, ferrures ¦ Fætur, höldur, listar, járnbúnaður
+Sans deuxième couleur ¦ Enginn annar litur
+Époque, style ¦ Tímabil, stíll
+Effets : pieds et détails ¦ Áhrif: fætur og smáatriði
+🏷 Souvenirs de cet objet ¦ 🏷 Minningar þessa hlutar
+Son histoire (objet de famille) ¦ Saga hans (ættargripur)
+Flèche vers un point ¦ Ör að punkti
+Couleur de la flèche ¦ Litur örvarinnar
+Police de départ ¦ Sjálfgefið letur
+Des versions de la maison selon les années ou des dates : la voir évoluer, rattacher une époque à un recensement ¦ Útgáfur hússins eftir árum eða dagsetningum: sjá það þróast, tengja tímabil við manntal
+🕰 Époques ¦ 🕰 Tímabil
+L’époque d’avant ¦ Tímabilið á undan
+L’époque montrée (plan 2D et vue 3D) ¦ Tímabilið sem sést (tvívíð teikning og þrívíddarsýn)
+L’époque d’après ¦ Tímabilið á eftir
+⋯ Gérer les époques… ¦ ⋯ Stjórna tímabilum…
+▶ Voir évoluer : les époques l’une après l’autre ¦ ▶ Sjá þróunina: tímabilin hvert á eftir öðru
+MAISON · ÉPOQUES ¦ HÚS · TÍMABIL
+MAISON ¦ HÚS
+Créer l’époque ¦ Búa til tímabilið
+La maison telle qu’elle est dessinée maintenant devient la première époque : donne-lui un nom et une date. La nouvelle époque part d’une copie, que tu changes ensuite (une pièce ajoutée, un mur abattu, d’autres meubles…). ¦ Húsið eins og það er teiknað núna verður fyrsta tímabilið: gefðu því heiti og dagsetningu. Nýja tímabilið byrjar sem afrit sem þú breytir síðan (herbergi bætt við, veggur rifinn, önnur húsgögn…).
+La maison dessinée maintenant ¦ Húsið eins og það er teiknað núna
+Année ou date ¦ Ár eða dagsetning
+La nouvelle époque ¦ Nýja tímabilið
+ex. Après l’agrandissement ¦ t.d. Eftir stækkunina
+Rattachée au recensement ¦ Tengt manntalinu
+Pour la rattacher à un recensement : onglet Maison → « 📋 Les recensements » → ＋ Un recensement. ¦ Til að tengja það við manntal: flipinn Hús → „📋 Manntölin“ → ＋ Manntal.
+Donne un nom ou une date à cette époque. ¦ Gefðu þessu tímabili heiti eða dagsetningu.
+Nouvelle époque créée (copie) : change ce qui était différent. « ‹ › » en haut pour passer d’une époque à l’autre. ¦ Nýtt tímabil búið til (afrit): breyttu því sem var öðruvísi. „‹ ›“ efst til að fara milli tímabila.
+Époque supprimée ¦ Tímabili eytt
+Crée au moins deux époques (＋ Nouvelle époque) pour voir la maison évoluer. ¦ Búðu til að minnsta kosti tvö tímabil (＋ Nýtt tímabil) til að sjá húsið þróast.
+＋ Un recensement ¦ ＋ Manntal
+Recensements à rattacher ¦ Manntöl til að tengja
+Ajouter aussi les personnes du foyer comme habitants ¦ Bæta líka heimilisfólkinu við sem íbúum
+À l’époque ¦ Á tímabilinu
+Choisis au moins un recensement. ¦ Veldu að minnsta kosti eitt manntal.
+Clique sur un mur. ¦ Smelltu á vegg.
+Une étiquette à flèche ¦ Merki með ör
+La note (ex. « Double vitrage posé en 1978 », « Ici était le puits ») ¦ Athugasemdin (t.d. „Tvöfalt gler sett árið 1978“, „Hér var brunnurinn“)
+Étiquette à flèche ¦ Merki með ör
+Un texte sur le plan ¦ Texti á teikningunni
+Le texte à écrire (nom d’une pièce, d’un lieu, une remarque…) ¦ Textinn sem á að skrifa (heiti herbergis, staðar, athugasemd…)
+Mur modifié ¦ Vegg breytt
+Pièce modifiée ¦ Herbergi breytt
+Flèche déplacée ¦ Ör færð
+Objet tourné ¦ Hlut snúið
+Plan ancien déplacé ¦ Gömul teikning færð
+Une pièce d’au moins 50 cm de côté. ¦ Herbergi minnst 50 cm á hvern veg.
+Un vide d’au moins 40 cm de côté. ¦ Opið rými minnst 40 cm á hvern veg.
+Ce vide est à l’étage le plus bas : il n’ouvre sur rien. Pour une mezzanine, dessine le vide à l’étage du dessus. ¦ Þetta opna rými er á neðstu hæðinni: það opnast ekki niður á neitt. Fyrir millihæð skaltu teikna opna rýmið á hæðinni fyrir ofan.
+Choisis d’abord la pièce (le séjour) sur le plan. ¦ Veldu fyrst herbergið (stofuna) á teikningunni.
+La pièce est un peu petite pour une mezzanine (au moins 2,5 m × 4 m). ¦ Herbergið er heldur lítið fyrir millihæð (minnst 2,5 m × 4 m).
+Clic : choisir · glisser : déplacer · poignées : allonger un mur, déformer une pièce · ⌫ : supprimer ¦ Smella: velja · draga: færa · haldföng: lengja vegg, breyta lögun herbergis · ⌫: eyða
+Glisser pour déplacer la vue ¦ Dragðu til að færa sýnina
+Glisse en diagonale : une pièce rectangulaire avec ses quatre murs (la surface s’affiche) ¦ Dragðu á ská: rétthyrnt herbergi með fjórum veggjum (flatarmálið birtist)
+Glisse en diagonale : un vide sans plancher (mezzanine, double hauteur, trémie) ; un garde-corps se pose tout seul le long des bords sans mur ¦ Dragðu á ská: opið rými án gólfs (millihæð, tvöföld lofthæð, stigaop); handrið er sett sjálfkrafa meðfram brúnum án veggja
+Un clic par coin (aimant : grille, coins, angles droits ; Alt : libre) · double-clic ou Entrée : finir · clic sur le 1er point : fermer (et créer la pièce) ¦ Einn smellur á hvert horn (grip: hnitanet, horn, rétt horn; Alt: frjálst) · tvísmella eða Enter: ljúka · smella á 1. punktinn: loka (og búa til herbergið)
+Une pièce de forme libre (sans murs) : un clic par coin, double-clic pour finir ¦ Herbergi með frjálsu formi (án veggja): einn smellur á hvert horn, tvísmelltu til að ljúka
+Clic sur un mur : une porte (glisse-la ensuite le long du mur) ¦ Smelltu á vegg: hurð (dragðu hana svo eftir veggnum)
+Clic sur un mur : une fenêtre ¦ Smelltu á vegg: gluggi
+Deux clics : une cote (la distance s’affiche) ¦ Tveir smellir: mál (fjarlægðin birtist)
+Clic : écrire un texte sur le plan ¦ Smella: skrifa texta á teikninguna
+Clic sur le point à montrer (le puits, une fenêtre…), puis clic là où écrire la note ¦ Smelltu á punktinn sem á að sýna (brunninn, glugga…) og svo þar sem á að skrifa athugasemdina
+largeur x profondeur (ex. 420 x 350, 4,2 x 3,5 m) ↵ ¦ breidd x dýpt (t.d. 420 x 350, 4,2 x 3,5 m) ↵
+longueur (cm, ou 3,5 m) puis @angle ↵ ¦ lengd (cm, eða 3,5 m) svo @horn ↵
+Écris largeur x profondeur : 420 x 350 (cm) ou 4,2 x 3,5 m (50 cm au moins). ¦ Skrifaðu breidd x dýpt: 420 x 350 (cm) eða 4,2 x 3,5 m (minnst 50 cm).
+Clique d’abord le point de départ sur le plan, puis tape la longueur. ¦ Smelltu fyrst á upphafspunktinn á teikningunni og skrifaðu svo lengdina.
+Longueur incomprise : 350, 3,5 m, ou 350 @ 90 pour l’angle. ¦ Lengd skildist ekki: 350, 3,5 m, eða 350 @ 90 fyrir hornið.
+Angle incompris (en degrés : 0 à droite, 90 en haut). ¦ Horn skildist ekki (í gráðum: 0 til hægri, 90 upp).
+Grille ¦ Hnitanet
+Coins des murs et des pièces ¦ Horn veggja og herbergja
+Milieu des murs ¦ Miðja veggja
+Le long des murs (au cm) ¦ Meðfram veggjum (upp á cm)
+Alignements (lignes de rappel) ¦ Jöfnun (hjálparlínur)
+Pas des angles ¦ Bil horna
+Alt : aucun aimant (au mm près) · ⇧ : angles à 45° · flèches : décaler ce qui est choisi de 1 cm (⇧ : d’un pas de grille) · en traçant, tape la longueur au clavier. ¦ Alt: ekkert grip (upp á mm) · ⇧: 45° horn · örvar: hnika vali um 1 cm (⇧: um eitt bil hnitanets) · meðan þú teiknar skaltu skrifa lengdina á lyklaborðið.
+Décalé ¦ Hnikað
+Il faut un fichier OBJ, STL, GLB ou glTF. ¦ Það þarf OBJ-, STL-, GLB- eða glTF-skrá.
+Lecture du modèle… ¦ Les líkanið…
+Objet importé ¦ Hlutur fluttur inn
+Objet 3D importé : il est aussi dans Mobilier → « Mes objets », pour toutes les maisons. ¦ Þrívíddarhlutur fluttur inn: hann er líka í Húsgögn → „Hlutirnir mínir“, fyrir öll hús.
+Objet posé (vue de dessus) : règle sa taille réelle dans Propriétés. ¦ Hlutur settur (séð ofan frá): stilltu raunstærð hans í Eiginleikum.
+Envoi de l’image dans les médias… ¦ Sendi myndina í miðlana…
+MAISON · PLAN ANCIEN ¦ HÚS · GÖMUL TEIKNING
+Le plan à calquer ¦ Teikningin sem á að draga upp
+Un cadastre napoléonien, un plan ancien, un croquis… « 📁 Importer » en prend un sur l’ordinateur (il entre dans les médias). ¦ Napóleonskt fasteignakort, gömul teikning, skissa… „📁 Flytja inn“ sækir eina úr tölvunni (hún fer í miðlana).
+Poser ce plan ¦ Setja þessa teikningu
+Cette image ne peut pas servir de plan. ¦ Þessa mynd er ekki hægt að nota sem teikningu.
+Plan ancien posé ¦ Gömul teikning sett
+📏 Clique les deux bouts d’une longueur connue sur le plan ancien (un mur, l’échelle dessinée) ¦ 📏 Smelltu á báða enda þekktrar lengdar á gömlu teikningunni (vegg, teiknaða kvarðann)
+Les deux points sont trop proches. ¦ Punktarnir tveir eru of nálægt hvor öðrum.
+📏 Mettre le plan à l’échelle ¦ 📏 Stilla kvarða teikningarinnar
+Mettre à l’échelle ¦ Stilla kvarða
+Quelle est la vraie longueur entre ces deux points ? ¦ Hver er raunveruleg lengd milli þessara tveggja punkta?
+Le cadastre napoléonien est souvent au 1/2500 ou au 1/1250 ; les plans anciens comptent en toises (6 pieds, 1,949 m) et en pieds du roi (32,48 cm) : écris le nombre, la conversion se fait toute seule. ¦ Napóleonska fasteignakortið er oft í 1:2500 eða 1:1250; gamlar teikningar mæla í toises (6 fet, 1,949 m) og pieds du roi (32,48 cm): skrifaðu töluna, umreikningurinn gerist sjálfkrafa.
+Écris une longueur, par exemple 12 ou 3,5. ¦ Skrifaðu lengd, til dæmis 12 eða 3,5.
+Plan ancien mis à l’échelle ¦ Kvarði gömlu teikningarinnar stilltur
+↻ Clique deux points le long d’un mur du plan ancien : il deviendra droit ¦ ↻ Smelltu á tvo punkta eftir vegg á gömlu teikningunni: hann verður beinn
+Ce mur est déjà droit. ¦ Þessi veggur er þegar beinn.
+↻ Redresser ¦ ↻ Rétta af
+✥ Déplacer ¦ ✥ Færa
+✏️ Décalque : un clic par coin de mur, en suivant le plan ancien · double-clic ou Entrée pour finir un mur · ⬚ pour une pièce entière ¦ ✏️ Uppdráttur: einn smellur á hvert veggjarhorn, eftir gömlu teikningunni · tvísmella eða Enter til að ljúka vegg · ⬚ fyrir heilt herbergi
+Photo, document ¦ Ljósmynd, skjal
+Récit ¦ Frásögn
+Souvenir de famille ¦ Fjölskylduminning
+Objet de famille ¦ Ættargripur
+Voir ce souvenir ¦ Sjá þessa minningu
+Retirer ce souvenir (sans le supprimer de la base) ¦ Fjarlægja þessa minningu (án þess að eyða henni úr gagnagrunninum)
+Aucun souvenir rattaché : une photo, un récit, une personne… ¦ Engin minning tengd: ljósmynd, frásögn, einstaklingur…
+Aucun souvenir ne correspond. ¦ Engin minning passar.
+Aucun souvenir de famille pour l’instant ¦ Engin fjölskylduminning enn
+Essaie un autre mot. ¦ Reyndu annað orð.
+Listes → Mémoire familiale (recettes, expressions, chansons…) ou Objets de famille. ¦ Listar → Fjölskylduminni (uppskriftir, orðatiltæki, söngvar…) eða Ættargripir.
+MAISON · SOUVENIRS ¦ HÚS · MINNINGAR
+📜 Un souvenir de famille ¦ 📜 Fjölskylduminning
+Chercher… (recette, montre, surnom) ¦ Leita… (uppskrift, úr, gælunafn)
+Chercher un souvenir ¦ Leita að minningu
+Choisis d’abord un meuble, un objet ou une pièce. ¦ Veldu fyrst húsmun, hlut eða herbergi.
+🖼 Une photo, un document ¦ 🖼 Ljósmynd, skjal
+pris dans les médias (ou importé depuis l’ordinateur) ¦ tekið úr miðlunum (eða flutt inn úr tölvunni)
+✍ Un récit ¦ ✍ Frásögn
+ce qui s’est passé ici, ce qu’on en raconte ¦ það sem gerðist hér, það sem sagt er um það
+👤 Une personne ¦ 👤 Einstaklingur
+qui a vécu ici, qui s’en servait ¦ sem bjó hér, sem notaði það
+une recette, une expression, un objet de famille… ¦ uppskrift, orðatiltæki, ættargripur…
+ex. La veillée de Noël 1912 ¦ t.d. Aðfangadagskvöld 1912
+Ce qui s’est passé ici, ce qu’on en raconte… ¦ Það sem gerðist hér, það sem sagt er um það…
+Le récit ¦ Frásögnin
+Écris un titre ou un récit. ¦ Skrifaðu titil eða frásögn.
+Souvenir rattaché ¦ Minning tengd
+Ce média n’existe plus. ¦ Þessi miðill er ekki lengur til.
+La maison non enregistrée sera perdue (💾 d’abord). ¦ Óvistaða húsið glatast (💾 fyrst).
+Ouvrir la fiche ? ¦ Opna spjaldið?
+les aimants, la grille, l’épaisseur des murs, la hauteur des yeux et la lumière ¦ gripið, hnitanetið, þykkt veggja, augnhæðina og ljósið
+Fichier prêt : il s’importe dans 🧲 Aimants → « ⤒ Importer ». ¦ Skráin er tilbúin: hún er flutt inn í 🧲 Grípa → „⤒ Flytja inn“.
+Ce fichier n’est pas lisible (il faut un fichier .json de réglage). ¦ Ekki hægt að lesa þessa skrá (það þarf .json-stillingaskrá).
+Ce fichier n’est pas un réglage LCNDA (⤓ Exporter un réglage, dans un outil). ¦ Þessi skrá er ekki LCNDA-stilling (⤓ Flytja út stillingu, í tóli).
+Le plan de cet étage est vide. ¦ Teikning þessarar hæðar er tóm.
+le plan de l’étage ¦ grunnteikning hæðarinnar
+le plan, plus léger ¦ teikningin, léttari
+le plan sur une page A4 ¦ teikningin á A4-síðu
+le plan, en dessin ¦ teikningin, sem vigurteikning
+le plan, tout de suite ¦ teikningin, strax
+le plan de l’étage pour AutoCAD, LibreCAD… (calques, en cm) ¦ grunnteikning hæðarinnar fyrir AutoCAD, LibreCAD… (lög, í cm)
+image de la vue 3D ¦ mynd af þrívíddarsýninni
+🧊 Vue 3D ¦ 🧊 Þrívíddarsýn
+💾 Fichier de la maison ¦ 💾 Skrá hússins
+à réimporter (⤒ Importer) ¦ til að flytja aftur inn (⤒ Flytja inn)
+Ce fichier DXF n’est pas lisible. ¦ Ekki hægt að lesa þessa DXF-skrá.
+Aucun trait trouvé dans ce DXF (un DXF « binaire » ne se lit pas : enregistre-le en DXF texte, ASCII). ¦ Engin lína fannst í þessari DXF-skrá („tvíundar“-DXF er ekki hægt að lesa: vistaðu hana sem texta-DXF, ASCII).
+MAISON · IMPORT DXF ¦ HÚS · DXF-INNFLUTNINGUR
+Importer le plan ¦ Flytja inn teikninguna
+Unité du dessin ¦ Eining teikningarinnar
+Épaisseur des murs ¦ Þykkt veggja
+Où le mettre ¦ Hvar á að setja hana
+Un nouvel étage ¦ Ný hæð
+Calques à prendre ¦ Lög sem á að taka
+Un plan exporté d’ici : ses murs sont repris par leur axe (MURS_AXES). ¦ Teikning flutt út héðan: veggir hennar eru teknir eftir miðlínu (MURS_AXES).
+Un plan d’architecte dessine souvent chaque mur avec deux traits : garde une petite épaisseur, ou décoche les calques de meubles, de cotes et de hachures. ¦ Teikning arkitekts sýnir oft hvern vegg með tveimur línum: haltu lítilli þykkt eða taktu hakið af lögum fyrir húsgögn, mál og skástrikun.
+Coche au moins un calque. ¦ Hakaðu við að minnsta kosti eitt lag.
+Rien à reprendre dans ces calques. ¦ Ekkert að taka úr þessum lögum.
+Plan importé ¦ Innflutt teikning
+Plan DXF importé ¦ DXF-teikning flutt inn
+Nombre en tout ¦ Fjöldi alls
+Espace entre deux ¦ Bil á milli
+Pas la place sur ce mur : moins d’espace, ou déplace la première vers le début du mur. ¦ Ekki pláss á þessum vegg: minna bil, eða færðu þann fyrsta í átt að upphafi veggjarins.
+Répété ¦ Endurtekið
+Choisis d’abord un objet, une porte ou une fenêtre. ¦ Veldu fyrst hlut, hurð eða glugga.
+En ligne ¦ Í röð
+En grille (rangées) ¦ Í hnitaneti (raðir)
+En cercle (autour d’un objet) ¦ Í hring (utan um hlut)
+Sens (en ligne) ¦ Stefna (í röð)
+→ vers la droite ¦ → til hægri
+↓ vers le bas ¦ ↓ niður
+← vers la gauche ¦ ← til vinstri
+↑ vers le haut ¦ ↑ upp
+Par rangée (en grille) ¦ Í hverri röð (hnitanet)
+Autour de (en cercle) ¦ Utan um (hringur)
+Un point, au rayon ci-dessous ¦ Punkt, í radíusnum hér fyrir neðan
+Rayon (si autour d’un point) ¦ Radíus (ef utan um punkt)
+En cercle : place d’abord un seul objet (une chaise) à sa place autour de la table, choisis-le, puis répète : les copies tournent autour de la table et regardent vers elle, comme la première. ¦ Í hring: settu fyrst einn hlut (stól) á sinn stað við borðið, veldu hann og endurtaktu svo: afritin fara hringinn í kringum borðið og snúa að því, eins og sá fyrsti.
+Ce fichier n’est pas lisible. ¦ Ekki hægt að lesa þessa skrá.
+Ce fichier n’est pas une maison LCNDA (⤓ Exporter → 💾 Fichier de la maison). ¦ Þessi skrá er ekki LCNDA-hús (⤓ Flytja út → 💾 Skrá hússins).
+Le plan dessiné ici sera remplacé par celui du fichier (↶ pour revenir en arrière). ¦ Teikningunni sem er teiknuð hér verður skipt út fyrir teikningu skrárinnar (↶ til að fara til baka).
+Remplacer le plan par celui du fichier ? ¦ Skipta teikningunni út fyrir teikningu skrárinnar?
+Remplacer le plan ¦ Skipta út teikningunni
+Maison importée ¦ Hús flutt inn
+Dépose une image, un objet 3D (OBJ, STL, glTF, GLB) ou un fichier de maison. ¦ Slepptu mynd, þrívíddarhlut (OBJ, STL, glTF, GLB) eða skrá húss.
+📁 Que faire de cette image ? ¦ 📁 Hvað á að gera við þessa mynd?
+🖼 L’image de ce tableau, de ce cadre ¦ 🖼 Myndin í þetta málverk, þennan ramma
+posée sur l’objet choisi, en 2D et en 3D ¦ sett á valda hlutinn, í tvívídd og þrívídd
+📐 Un plan ancien, un cadastre, à calquer ¦ 📐 Gömul teikning, fasteignakort, til að draga upp
+posé en fond, à mettre à l’échelle ¦ sett í bakgrunninn, til að stilla kvarða
+🖼 Un objet vu de dessus ¦ 🖼 Hlutur séður ofan frá
+posé sur le plan comme un meuble ¦ settur á teikninguna eins og húsmunur
+🏷 Un souvenir pour ce qui est choisi ¦ 🏷 Minning fyrir það sem er valið
+rattaché au meuble ou à la pièce ¦ tengd húsmuninum eða herberginu
+Construction de la maison en 3D… ¦ Byggi húsið í þrívídd…
+Vue 3D indisponible. ¦ Þrívíddarsýn ekki tiltæk.
+Glisser : tourner · clic droit ou ⇧ glisser : déplacer · molette : approcher · ☀️ Lumière : l’heure et la saison · 🚶 Visiter : Z Q S D ou flèches · ✦ : un souvenir ¦ Draga: snúa · hægrismella eða ⇧ draga: færa · skrunhjól: færa nær · ☀️ Ljós: tími og árstíð · 🚶 Skoða: Z Q S D eða örvar · ✦: minning
+Les dernières modifications de la maison seront perdues. ¦ Síðustu breytingar á húsinu glatast.
+Fermer sans enregistrer la maison ? ¦ Loka án þess að vista húsið?
+Supprimé ¦ Eytt
+Dupliqué ¦ Tvítekið
+Sens de l’escalier ¦ Stefna stigans
+Tous les escaliers ouvrent déjà le plancher. ¦ Allir stigar opna þegar gólfið.
+Verrière ajoutée ¦ Glerþaki bætt við
+Édicule ajouté ¦ Þakhúsi bætt við
+Lanterneau ajouté ¦ Þakljóra bætt við
+Fenêtre de toit ajoutée ¦ Þakglugga bætt við
+Lucarne ajoutée ¦ Kvisti bætt við
+Chien-assis ajouté ¦ Skúrkvisti bætt við
+✓ Elle se voit dans la vue 3D, avec le toit. ¦ ✓ Það sést í þrívíddarsýninni, með þakinu.
+Retiré du toit ¦ Fjarlægt af þakinu
+Fenêtre de toit ou lucarne retirée ¦ Þakgluggi eða kvistur fjarlægður
+Rien sous cet objet : glisse-le d’abord au-dessus du meuble (une table, une commode…). ¦ Ekkert undir þessum hlut: dragðu hann fyrst yfir húsmuninn (borð, kommóðu…).
+Taille hors limites (de 1 cm à 50 m). ¦ Stærð utan marka (frá 1 cm til 50 m).
+Agrandi ¦ Stækkað
+Réduit ¦ Minnkað
+Taille gardée pour ce modèle : les prochains seront posés comme celui-ci. ¦ Stærð geymd fyrir þetta líkan: næstu verða settir eins og þessi.
+Sens d’ouverture ¦ Opnunarátt
+Côté d’ouverture ¦ Opnunarhlið
+Mur coupé ¦ Veggur klofinn
+＋ Un étage ¦ ＋ Hæð
+Hauteur sous plafond ¦ Lofthæð
+Gérer les étages… ¦ Stjórna hæðum…
+Renommer, hauteur sous plafond, supprimer ¦ Endurnefna, lofthæð, eyða
+Ajouter un étage… ¦ Bæta við hæð…
+Les étages ¦ Hæðirnar
+Du plus haut au plus bas. Renomme, change la hauteur, ou supprime un étage (avec tout ce qu’il contient). ¦ Frá efstu til neðstu. Endurnefndu, breyttu hæðinni eða eyddu hæð (með öllu sem á henni er).
+Niveau ¦ Stig
+Il faut au moins un étage. ¦ Það þarf að minnsta kosti eina hæð.
+{names} supprimés avec ce qu’ils contenaient ¦ {names} eytt ásamt því sem á þeim var
+{names} supprimé avec ce qu’il contenait ¦ {names} eytt ásamt því sem á henni var
+Étage supprimé ¦ Hæð eytt
+Étage renommé ¦ Hæð endurnefnd
+Renommer l’étage ¦ Endurnefna hæðina
+✥ Glisse le plan ancien (sur un endroit vide du plan) ; reclique « ✥ Déplacer » pour finir. ¦ ✥ Dragðu gömlu teikninguna (á auðum stað á teikningunni); smelltu aftur á „✥ Færa“ til að ljúka.
+Plan ancien retiré ¦ Gömul teikning fjarlægð
+Plan ancien retiré du fond (l’image reste dans les médias) ¦ Gömul teikning fjarlægð úr bakgrunninum (myndin verður áfram í miðlunum)
+Plan ancien sous cet étage ¦ Gömul teikning undir þessari hæð
+Plan ancien ¦ Gömul teikning
+Plan ancien verrouillé ¦ Gömul teikning læst
+Plan ancien déverrouillé ¦ Gömul teikning aflæst
+Un habitant de la maison ¦ Íbúi hússins
+Habitant ajouté ¦ Íbúa bætt við
+Habitant retiré ¦ Íbúi fjarlægður
+Une personne liée à cette pièce ¦ Einstaklingur tengdur þessu herbergi
+Personne liée à la pièce ¦ Einstaklingur tengdur herberginu
+Le plan est vide. ¦ Teikningin er tóm.
+Fenêtre bloquée. ¦ Gluggi lokaður af vafranum.
+Ce recensement n’est relié à aucune fiche. ¦ Þetta manntal er ekki tengt neinu spjaldi.
+Recensement retiré ¦ Manntal fjarlægt
+Personne retirée ¦ Einstaklingur fjarlægður
+Souvenir retiré ¦ Minning fjarlægð
+Légende des époques ¦ Skýringar tímabila
+Personnes de la pièce ¦ Fólkið í herberginu
+Flèche ajoutée ¦ Ör bætt við
+Flèche retirée ¦ Ör fjarlægð
+Lumière ¦ Ljós
+Années de la personne ¦ Ár einstaklingsins
+Recensement rattaché à l’époque ¦ Manntal tengt tímabilinu
+Revêtement du mur ¦ Klæðning veggjar
+Murs de la pièce ¦ Veggir herbergisins
+Autre époque en 3D ¦ Annað tímabil í þrívídd
+📍 Un arrêt de la visite guidée ¦ 📍 Viðkomustaður í leiðsögninni
+Ce qu’on dit ici (lu à voix haute pendant la visite guidée) : ¦ Það sem sagt er hér (lesið upphátt í leiðsögninni):
+Ici, la salle commune : on y veillait l’hiver… ¦ Hér er aðalstofan: þar sat fólk á vetrarkvöldum…
+Ajouter l’arrêt ¦ Bæta við viðkomustaðnum
+MAISON · PHOTO D’ÉPOQUE ¦ HÚS · GÖMUL LJÓSMYND
+La photo prise d’ici ¦ Ljósmyndin tekin héðan
+La photo ancienne prise à cet endroit, dans cette direction : tu pourras la comparer avec la maison (curseur Autrefois ⟷ Aujourd’hui). ¦ Gamla ljósmyndin sem tekin var á þessum stað, í þessa átt: þú getur borið hana saman við húsið (sleðinn Áður ⟷ Nú).
+Poser la photo ¦ Setja ljósmyndina
+Cette image ne peut pas servir ici. ¦ Þessa mynd er ekki hægt að nota hér.
+Photo d’époque ¦ Gömul ljósmynd
+Photo d’époque posée ¦ Gömul ljósmynd sett
+Le nord du plan : clic pour le régler (☀️ Orientation et lumière) ¦ Norður teikningarinnar: smelltu til að stilla það (☀️ Átt og birta)
+Aucune maison ne correspond. ¦ Ekkert hús passar.
+Époques ¦ Tímabil
+🏰 Notice Mérimée (patrimoine)… ¦ 🏰 Mérimée-færsla (menningararfur)…
+🏠 Maisons ¦ 🏠 Hús
+Les plans des maisons de la famille, en 2D et en 3D : leurs pièces, leurs meubles, leurs habitants, leurs recensements, leurs époques et leurs souvenirs. ¦ Teikningar af húsum fjölskyldunnar, í tvívídd og þrívídd: herbergi þeirra, húsgögn, íbúar, manntöl, tímabil og minningar.
+Renommer la maison ¦ Endurnefna húsið
+Ouvrir la maison ¦ Opna húsið
+↗ Ouvrir la maison ¦ ↗ Opna húsið
+Cette maison est déjà rattachée. ¦ Þetta hús er þegar tengt.
+🏠 Maison ¦ 🏠 Hús
+Enregistre d’abord le recensement : tu pourras ensuite lui rattacher la maison où vivait le foyer (et l’époque de la maison). ¦ Vistaðu fyrst manntalið: síðan getur þú tengt við það húsið þar sem heimilisfólkið bjó (og tímabil hússins).
+Détacher la maison de ce recensement ¦ Losa húsið frá þessu manntali
+Relier une maison : nom, lieu… ¦ Tengja hús: heiti, staður…
+Époque de la maison ¦ Tímabil hússins
+Dessiner la maison de ce foyer ¦ Teikna hús þessa heimilis
+Rattachée tout de suite (sans attendre « Enregistrer »). Dans la maison : onglet Maison → « 📋 Les recensements ». ¦ Tengt strax (án þess að bíða eftir „Vista“). Í húsinu: flipinn Hús → „📋 Manntölin“.
+— époque de la maison — ¦ — tímabil hússins —
+Le recensement a des changements non enregistrés. ¦ Manntalið hefur óvistaðar breytingar.
+Ouvrir la maison quand même ? ¦ Opna húsið samt?
+Maison détachée du recensement. ¦ Hús losað frá manntalinu.
+Choisis une maison. ¦ Veldu hús.
+Maison rattachée au recensement. ¦ Hús tengt manntalinu.
+La longueur et la largeur de tout l’étage, sous le plan et à sa gauche (en plus des cotes de chaque mur). ¦ Lengd og breidd allrar hæðarinnar, undir teikningunni og vinstra megin við hana (auk mála hvers veggjar).
+Un tableau posé à droite du plan : chaque pièce et sa surface, et le total. Il se met à jour tout seul et part avec le plan (image, PDF, impression). ¦ Tafla hægra megin við teikninguna: hvert herbergi og flatarmál þess, og samtalan. Hún uppfærist sjálfkrafa og fylgir teikningunni (mynd, PDF, prentun).
+Le cadre en bas à droite des vrais plans : le nom de la maison, le lieu, l’époque, l’étage et la date du jour. ¦ Reiturinn neðst til hægri á alvöru teikningum: heiti hússins, staðurinn, tímabilið, hæðin og dagsetning dagsins.
+Le plan en clair sur fond sombre, comme dans un logiciel de dessin technique. Seulement à l’écran : les images, PDF et impressions restent sur fond blanc. ¦ Teikningin í ljósum línum á dökkum bakgrunni, eins og í tækniteikniforriti. Aðeins á skjánum: myndir, PDF og útprentanir eru áfram á hvítum bakgrunni.
+L’étage du dessous (ou du dessus) apparaît en transparence sous celui-ci : pratique pour poser les murs du 1er étage juste au-dessus de ceux du rez-de-chaussée. 🕰 Une autre époque : le même étage, tel qu’il était (ou sera), en sépia. ¦ Hæðin fyrir neðan (eða ofan) sést gegnsæ undir þessari: hentugt til að setja veggi 1. hæðar beint yfir veggi jarðhæðar. 🕰 Annað tímabil: sama hæðin eins og hún var (eða verður), í sepíu.
+Clique les deux bouts d’une longueur connue sur l’image (un mur, l’échelle du plan), puis donne sa vraie longueur : en mètres, ou en toises et pieds anciens (convertis tout seuls). ¦ Smelltu á báða enda þekktrar lengdar á myndinni (vegg, kvarða teikningarinnar) og gefðu svo upp raunlengd hennar: í metrum, eða í gömlum toises og fetum (umreiknað sjálfkrafa).
+Le plafond suit la pente du toit (vue 3D, coupe, visite) ; la surface « loi Carrez » ne compte que là où la hauteur fait au moins 1,80 m. ¦ Loftið fylgir halla þaksins (þrívíddarsýn, snið, skoðun); flatarmál „samkvæmt Carrez-lögum“ telst aðeins þar sem lofthæðin er að minnsta kosti 1,80 m.
+Le mur bas sous la pente (le « jambage ») : 0 si le toit part du plancher, 100 cm souvent. ¦ Lági veggurinn undir hallanum (hnéveggurinn): 0 ef þakið byrjar við gólf, oft 100 cm.
+Pour une maison en L, en T ou en U : un toit par aile, à la même pente ; les noues (là où deux toits se rejoignent) se font toutes seules. Les ailes suivent les pièces de l’étage du haut. ¦ Fyrir L-, T- eða U-laga hús: eitt þak á hverja álmu, með sama halla; kverkarnar (þar sem tvö þök mætast) verða til sjálfkrafa. Álmurnar fylgja herbergjum efstu hæðar.
+Tourne le plan par rapport au nord : 0° = le haut du plan est au nord, 90° = le haut du plan regarde l’est. Le soleil et les ombres de la vue 3D suivent. ¦ Snýr teikningunni miðað við norður: 0° = efri brún teikningarinnar snýr í norður, 90° = efri brún teikningarinnar snýr í austur. Sólin og skuggarnir í þrívíddarsýninni fylgja.
+La hauteur de tes yeux pendant la visite (🚶 Visiter, vue 3D) : 1,60 m pour un adulte, 1 m pour voir comme un enfant. ¦ Augnhæð þín meðan á skoðun stendur (🚶 Skoða, þrívíddarsýn): 1,60 m fyrir fullorðinn, 1 m til að sjá eins og barn.
+La hauteur de tes yeux dans la maison : 1,60 m pour un adulte, 1 m pour voir comme un enfant. ¦ Augnhæð þín í húsinu: 1,60 m fyrir fullorðinn, 1 m til að sjá eins og barn.
+De combien le milieu du mur sort de la ligne droite : + d’un côté, − de l’autre ; 0 = un mur droit. Pour une tour ronde, une abside, un mur cintré. ¦ Hve langt miðja veggjarins sveigist frá beinni línu: + í aðra áttina, − í hina; 0 = beinn veggur. Fyrir hringlaga turn, kórskál, bogadreginn vegg.
+Agrandit ou rapetisse le motif (briques, pierres, papier peint) sur ce mur : 100 % = taille réelle. ¦ Stækkar eða minnkar mynstrið (múrsteina, steina, veggfóður) á þessum vegg: 100 % = raunstærð.
+La hauteur du bas de la fenêtre au-dessus du plancher (souvent 90 cm). ¦ Hæð neðri brúnar gluggans yfir gólfinu (oft 90 cm).
+Une zone sans plancher : on voit l’étage du dessous (mezzanine, séjour en double hauteur, cage d’escalier). En 3D le plancher est percé, et pendant la visite on ne peut pas y marcher. ¦ Svæði án gólfs: hæðin fyrir neðan sést (millihæð, stofa með tvöfaldri lofthæð, stigagangur). Í þrívídd er gat á gólfinu og í skoðun er ekki hægt að ganga þar.
+Posé tout seul le long des bords du vide qui ne touchent pas un mur (et laissé ouvert là où arrive un escalier). ¦ Sett sjálfkrafa meðfram brúnum opna rýmisins sem snerta ekki vegg (og skilið eftir opið þar sem stigi kemur upp).
+En déplaçant la pièce, ses murs (portes et fenêtres comprises), ses meubles et ses textes suivent. ⇧ en glissant : la pièce seule. ¦ Þegar herbergið er fært fylgja veggir þess (hurðir og gluggar meðtaldir), húsgögn og textar. ⇧ meðan dregið er: herbergið eitt.
+La hauteur à monter : celle de l’étage plus l’épaisseur du plancher (réglée dans l’onglet Maison). Décoche pour la fixer à la main dans « Hauteur ». ¦ Hæðin sem á að ganga upp: hæð hæðarinnar auk þykktar gólfplötunnar (stillt í flipanum Hús). Taktu hakið af til að stilla hana handvirkt í „Hæð“.
+Perce le plancher de l’étage du dessus au-dessus de l’escalier (la trémie), avec un garde-corps autour sauf du côté de l’arrivée. ¦ Opnar gólf hæðarinnar fyrir ofan yfir stiganum (stigaopið), með handriði allan hringinn nema þar sem komið er upp.
+La hauteur du dessous de l’objet au-dessus du plancher : 0 pour un meuble posé au sol, 140 pour une horloge accrochée au mur. ¦ Hæð neðri brúnar hlutarins yfir gólfinu: 0 fyrir húsmun á gólfinu, 140 fyrir klukku sem hangir á vegg.
+Agrandit ou réduit l’objet en gardant ses proportions : pratique pour un modèle importé arrivé trop petit ou trop grand. ¦ Stækkar eða minnkar hlutinn og heldur hlutföllunum: hentugt fyrir innflutt líkan sem kom of lítið eða of stórt.
+Une flèche du texte vers un point du plan (le puits, une fenêtre, une cheminée…). Glisse la poignée rouge pour la pointer. ¦ Ör frá textanum að punkti á teikningunni (brunninum, glugga, arni…). Dragðu rauða haldfangið til að beina henni.
+Quand l’aimant des angles est mis, un mur tracé se cale sur des angles de ce pas : 90° = seulement des angles droits, 45° = aussi les diagonales, 15° = plus fin. ¦ Þegar horngrip er á festist teiknaður veggur við horn með þessu bili: 90° = aðeins rétt horn, 45° = líka skálínur, 15° = fínna.
+Glisse : la maison prend l’époque la plus proche de l’année (avant ou égale). ¦ Renndu: húsið tekur tímabilið sem er næst árinu (á undan eða jafnt).
+Tourne le plan par rapport au nord : 0° = le haut du plan est au nord, 90° = le haut du plan regarde l’est. Les ombres suivent. ¦ Snýr teikningunni miðað við norður: 0° = efri brún teikningarinnar snýr í norður, 90° = efri brúnin snýr í austur. Skuggarnir fylgja.
+Licence : {x} ¦ Leyfi: {x}
+Auteur : {x} ¦ Höfundur: {x}
+Source : {x} ¦ Heimild: {x}
+🕰 ancien ¦ 🕰 gamalt
+Forme « {name} » ¦ Lögun „{name}“
+{w} × {d} cm, {h} cm de haut, à {elev} cm du sol ¦ {w} × {d} cm, {h} cm á hæð, {elev} cm frá gólfi
+{w} × {d} cm, {h} cm de haut ¦ {w} × {d} cm, {h} cm á hæð
+{name} (à moi) ¦ {name} (mitt)
+Comme « {name} » ¦ Eins og „{name}“
+Supprimer l’objet « {name} » de la bibliothèque ? ¦ Eyða hlutnum „{name}“ úr safninu?
+« {name} » est dans « {cat} » : clique-le pour le poser. ¦ „{name}“ er í „{cat}“: smelltu á hann til að setja hann.
+Supprimer « {name} » de « Mes objets » ? ¦ Eyða „{name}“ úr „Hlutirnir mínir“?
+Des modèles 3D <b>libres de droit</b> (CC0 : domaine public, utilisables sans condition) à poser dans tes maisons. Ils arrivent dans <b>Mobilier → « Mes objets »</b>, avec leur licence, leur auteur et leur source. ¦ <b>Höfundarréttarfrjáls</b> þrívíddarlíkön (CC0: almenningseign, nota má án skilyrða) til að setja í húsin þín. Þau koma í <b>Húsgögn → „Hlutirnir mínir“</b>, með leyfi sínu, höfundi og heimild.
+Modèles fournis par {ph} (Powered by Poly Haven) — licence {cc0}. Le téléchargement passe par ton serveur (environ 1 à 10 Mo par modèle, textures comprises). ¦ Líkön frá {ph} (Powered by Poly Haven) — leyfi {cc0}. Niðurhalið fer í gegnum netþjóninn þinn (um 1 til 10 MB á hvert líkan, með áferðum).
+Télécharge d’abord un pack <b>CC0</b> sur le site de son auteur (un fichier .zip), puis choisis-le ici : tu coches les modèles à garder (GLB, glTF, OBJ, STL). ¦ Sæktu fyrst <b>CC0</b>-pakka á vef höfundarins (.zip-skrá) og veldu hann svo hér: þú hakar við líkönin sem á að halda (GLB, glTF, OBJ, STL).
+{models} (les {n} plus téléchargés sur {total}) ¦ {models} (þau {n} mest sóttu af {total})
+« {name} » est dans Mobilier → « Mes objets » (CC0, Poly Haven). ¦ „{name}“ er í Húsgögn → „Hlutirnir mínir“ (CC0, Poly Haven).
+Licence trouvée dans le pack ¦ Leyfi fannst í pakkanum
+Mesure et vignettes… ¦ Mæli og bý til smámyndir…
+{models} dans « Mes objets ». ¦ {models} í „Hlutirnir mínir“.
+Renommer, ranger, voir la licence, supprimer ¦ Endurnefna, flokka, sjá leyfið, eyða
+Modifier ou supprimer cet objet ¦ Breyta eða eyða þessum hlut
+Rien ne correspond. ＋ Crée l’objet, ou cherche-le dans la 📦 Bibliothèque en ligne. ¦ Ekkert passar. ＋ Búðu til hlutinn eða leitaðu að honum í 📦 Netsafninu.
+Ici : les objets que tu crées (＋ Créer un objet), ceux téléchargés dans la 📦 Bibliothèque en ligne, et les fichiers 3D importés (⤒ Importer, en haut). ¦ Hér: hlutirnir sem þú býrð til (＋ Búa til hlut), þeir sem sóttir eru úr 📦 Netsafninu og innfluttar þrívíddarskrár (⤒ Flytja inn, efst).
+Rien d’ancien dans cette catégorie (décoche « 🕰 Ancien seulement »). ¦ Ekkert gamalt í þessum flokki (taktu hakið af „🕰 Aðeins gamalt“).
+Aucun objet montré dans cette catégorie (⚙️ Ranger pour en remontrer). ¦ Enginn hlutur sýndur í þessum flokki (⚙️ Raða til að sýna þá aftur).
+Chercher… lit, lampe, piano, vache, salon… ¦ Leita… rúm, lampi, píanó, kýr, stofa…
+Chercher un objet ¦ Leita að hlut
+Un objet à toi : nom, taille, couleur, forme, image ¦ Þinn eigin hlutur: heiti, stærð, litur, lögun, mynd
+Des modèles 3D libres de droit (CC0) à télécharger ¦ Höfundarréttarfrjáls (CC0) þrívíddarlíkön til að sækja
+Montrer, cacher, ranger les catégories et les objets ¦ Sýna, fela, raða flokkum og hlutum
+Ne montrer que le mobilier et les objets d’autrefois ¦ Sýna aðeins húsgögn og hluti frá fyrri tíð
+＋ Créer un objet ¦ ＋ Búa til hlut
+📦 Bibliothèque en ligne ¦ 📦 Netsafn
+⚙️ Ranger ¦ ⚙️ Raða
+🕰 Ancien seulement ¦ 🕰 Aðeins gamalt
+Ovale ¦ Sporöskjulaga
+Triangle ¦ Þríhyrningur
+En L ¦ L-laga
+Lit simple ¦ Einbreitt rúm
+Lit clos ¦ Lokrekkja
+Meuble à portes ¦ Skápur með hurðum
+Banc-coffre à dossier ¦ Kistubekkur með baki
+Horloge ¦ Klukka
+Cheminée à manteau ¦ Arinn með hillu
+Cheminée à manteau (hotte) ¦ Arinn með hillu (háfur)
+Poêle ¦ Ofn
+Cuisinière ¦ Eldavél
+Évier ¦ Vaskur
+Lavabo, toilette ¦ Handlaug, þvottaborð
+Maie, pétrin ¦ Deigtrog
+Broc et cuvette ¦ Kanna og skál
+Fontaine ¦ Vatnsbrunnur
+Baratte ¦ Strokkur
+Lampe ¦ Lampi
+Bougeoir ¦ Kertastjaki
+Chenets ¦ Eldhundar
+Fer à repasser ¦ Straujárn
+Banc d’école ¦ Skólabekkur
+Miroir, cadre au mur ¦ Spegill, rammi á vegg
+Statue ¦ Stytta
+Animal ¦ Dýr
+Cabane ¦ Kofi
+Cône, tipi ¦ Keila, tjald (tipi)
+Bloc (boîte pleine) ¦ Kubbur (heill kassi)
+Cylindre ¦ Sívalningur
+Bassine, baquet (ouvert) ¦ Bali, balli (opinn)
+Table (plateau et 4 pieds) ¦ Borð (plata og 4 fætur)
+Table ovale ¦ Sporöskjulaga borð
+Caisson sur pieds ¦ Kassi á fótum
+Comptoir, plan de travail ¦ Afgreiðsluborð, vinnuborð
+Buffet deux-corps, vaisselier ¦ Tvískiptur skenkur, leirtausskápur
+Vitrine ¦ Glerskápur
+Armoire (corniche) ¦ Fataskápur (með þakbrún)
+Commode à tiroirs ¦ Kommóða með skúffum
+Coffre à couvercle ¦ Kista með loki
+Étagère ouverte ¦ Opnar hillur
+Lit ¦ Rúm
+Poêle rond (Godin) ¦ Hringlaga ofn (Godin)
+Crémaillère et chaudron ¦ Pottkrókur og ketill
+Baignoire sur pieds ¦ Baðkar á fótum
+Lavabo sur colonne ¦ Handlaug á súlu
+Fontaine sur support ¦ Vatnsbrunnur á standi
+Baratte à piston ¦ Bullustrokkur
+Lampe à pétrole ¦ Olíulampi
+Bougeoir, chandelier ¦ Kertastjaki, ljósastjaki
+Poste TSF ¦ Útvarpstæki
+Phonographe ¦ Grammófónn
+Machine à coudre à pédale ¦ Fótstigin saumavél
+Banc d’école à pupitre ¦ Skólabekkur með púlti
+Pressoir, presse ¦ Pressa
+Miroir ¦ Spegill
+Cadre au mur ¦ Rammi á vegg
+Statue sur socle ¦ Stytta á stalli
+Plante en pot ¦ Pottaplanta
+Boule ¦ Kúla
+Cône ¦ Keila
+Cabane (toit) ¦ Kofi (þak)
+À plat (tapis) ¦ Flatt (motta)
+Plateau avec l’image dessus ¦ Plata með myndinni ofan á
+MAISON · MOBILIER ¦ HÚS · HÚSGÖGN
+MAISON · MES OBJETS ¦ HÚS · HLUTIRNIR MÍNIR
+Créer l’objet ¦ Búa til hlutinn
+Partir d’un objet existant (facultatif) ¦ Byrja út frá hlut sem er til (valfrjálst)
+— un objet vide — ¦ — tómur hlutur —
+ex. Armoire de la grand-mère, pressoir du moulin… ¦ t.d. Fataskápur ömmu, pressa myllunnar…
+Nouvelle catégorie… ¦ Nýr flokkur…
+ex. Grenier ¦ t.d. Háaloft
+Vu de dessus (2D) ¦ Séð ofan frá (tvívídd)
+En volume (3D) ¦ Í rúmmáli (þrívídd)
+2ᵉ couleur (pieds, poignées, filets) ¦ 2. litur (fætur, höldur, listar)
+2ᵉ couleur ¦ 2. litur
+Une deuxième couleur ¦ Annar litur
+Posé au sol (0), sur une table (75), accroché au mur (140)… ¦ Á gólfinu (0), á borði (75), hangir á vegg (140)…
+Tourné de ¦ Snúið um
+Image vue de dessus (facultatif) ¦ Mynd séð ofan frá (valfrjálst)
+🖼️ Une photo des médias… ¦ 🖼️ Ljósmynd úr miðlunum…
+Retirer l’image ¦ Fjarlægja myndina
+Note (souvenir, provenance) ¦ Athugasemd (minning, uppruni)
+Aperçu en 3D ¦ Forskoðun í þrívídd
+⏳ Mesure… ¦ ⏳ Mæli…
+Une photo de l’objet (vue de dessus) ¦ Ljósmynd af hlutnum (séð ofan frá)
+L’image se pose sur le plan, à la taille de l’objet. ¦ Myndin er sett á teikninguna, í stærð hlutarins.
+Ceux déjà posés dans les maisons restent. ¦ Þeir sem þegar eru settir í hús haldast.
+Donne un nom à la nouvelle catégorie. ¦ Gefðu nýja flokknum heiti.
+Objet modifié (ceux déjà posés gardent leur ancienne forme). ¦ Hlut breytt (þeir sem þegar eru settir halda gömlu lögun sinni).
+Montrer aussi dans la catégorie ¦ Sýna líka í flokknum
+— seulement dans « Mes objets » — ¦ — aðeins í „Hlutirnir mínir“ —
+« Mes objets » seulement ¦ Aðeins „Hlutirnir mínir“
+Licence ¦ Leyfi
+non précisée (fichier importé) ¦ ekki tilgreint (innflutt skrá)
+Le fichier 3D est supprimé : là où il est posé, il redevient une simple boîte. ¦ Þrívíddarskránni er eytt: þar sem hún var sett verður hún aftur venjulegur kassi.
+Aucun objet. ¦ Enginn hlutur.
+⚙️ Ranger le mobilier ¦ ⚙️ Raða húsgögnunum
+Coche ce que tu veux voir et range avec ↑ ↓ : les catégories, puis les objets de chaque catégorie. ¦ Hakaðu við það sem þú vilt sjá og raðaðu með ↑ ↓: flokkunum og svo hlutum hvers flokks.
+Objets de ¦ Hlutir í
+Mobilier remis comme au départ. ¦ Húsgögn upphafsstillt.
+Garde au moins une catégorie. ¦ Haltu að minnsta kosti einum flokki.
+Kenney — tous les packs 3D ¦ Kenney — allir þrívíddarpakkar
+OpenGameArt — filtre « CC0 » ¦ OpenGameArt — sían „CC0“
+📦 Bibliothèque en ligne (libre de droit) ¦ 📦 Netsafn (höfundarréttarfrjálst)
+Chercher (en français ou en anglais) : chaise, tonneau, lampe, vase… ¦ Leita (á frönsku eða ensku): chaise, tonneau, lampe, vase…
+🌐 Poly Haven (en ligne) ¦ 🌐 Poly Haven (á netinu)
+🗜️ Un pack ZIP (Kenney, Quaternius…) ¦ 🗜️ ZIP-pakki (Kenney, Quaternius…)
+Ranger aussi dans ¦ Flokka líka undir
+Chargement de la liste… ¦ Hleð listanum…
+Recherche… ¦ Leita…
+🗜️ Choisir le fichier ZIP… ¦ 🗜️ Velja ZIP-skrána…
+Voir sur Poly Haven ¦ Sjá á Poly Haven
+Aucun modèle ne correspond. ¦ Ekkert líkan passar.
+Sans internet, tu peux toujours importer un pack ZIP déjà téléchargé (onglet à côté), ou ＋ créer tes objets. ¦ Án nets getur þú samt flutt inn ZIP-pakka sem þú hefur þegar sótt (flipinn við hliðina), eða ＋ búið til þína eigin hluti.
+Un téléchargement est en cours… ¦ Niðurhal er í gangi…
+⏳ Téléchargement… ¦ ⏳ Sæki…
+✓ Dans « Mes objets » ¦ ✓ Í „Hlutirnir mínir“
+Envoi et lecture du pack… ¦ Sendi og les pakkann…
+Envoi impossible (fichier trop gros pour le serveur ?). ¦ Ekki tókst að senda (of stór skrá fyrir netþjóninn?).
+Envoi impossible. ¦ Ekki tókst að senda.
+Image impossible. ¦ Mynd mistókst.
+Aucun fichier de licence dans le pack : vérifie sur le site de l’auteur qu’il est bien libre de droit. ¦ Engin leyfisskrá í pakkanum: athugaðu á vef höfundarins að hann sé í raun höfundarréttarfrjáls.
+Auteur, source ¦ Höfundur, heimild
+Adresse du pack (facultatif) ¦ Slóð pakkans (valfrjálst)
+⤒ Importer les modèles cochés ¦ ⤒ Flytja inn líkönin sem hakað er við
+Coche au moins un modèle. ¦ Hakaðu við að minnsta kosti eitt líkan.
+Indique la licence du pack (par exemple CC0 1.0). ¦ Tilgreindu leyfi pakkans (til dæmis CC0 1.0).
+Surface (m²) ¦ Flatarmál (m²)
+Loi Carrez ≥ 1,80 m (m²) ¦ Carrez-lög ≥ 1,80 m (m²)
+Hauteur mini (cm) ¦ Lágmarkshæð (cm)
+Hauteur maxi (cm) ¦ Hámarkshæð (cm)
+Un mur de moins de 5 cm (un double-clic de trop ?) ¦ Veggur styttri en 5 cm (einu tvísmelli of mikið?)
+« {name} » n’a pas de porte ¦ „{name}“ hefur enga hurð
+=Escalier un peu raide : {n} marches de {rise} cm, giron {going} cm (2 h + g = {sum} cm) ¦ Heldur brattur stigi: {n} þrep, {rise} cm há, dýpt {going} cm (2 h + g = {sum} cm)|Heldur brattur stigi: {n} þrep, {rise} cm há, dýpt {going} cm (2 h + g = {sum} cm)
+Un escalier sans étage au-dessus ¦ Stigi án hæðar fyrir ofan
+L’escalier ne perce pas le plancher de « {name} » (Propriétés → « Ouvrir le plancher au-dessus ») ¦ Stiginn opnar ekki gólf „{name}“ (Eiginleikar → „Opna gólfið fyrir ofan“)
+Un vide à l’étage le plus bas : il n’ouvre sur rien ¦ Opið rými á neðstu hæðinni: það opnast ekki niður á neitt
+Des pièces sans aucun mur ¦ Herbergi án nokkurs veggjar
+maison|Mur ¦ Veggur
+maison|Ouverture ¦ Op
+maison|Combles ¦ Ris
+maison|Pièce ¦ Herbergi
+maison|Escalier ¦ Stigi
+maison|Étage ¦ Hæð
+Mur ¦ Veggur
+Escalier ¦ Stigi
+Combles ¦ Ris
+Plans ¦ Teikningar
+▶ Visite guidée ¦ ▶ Leiðsögn
+Visite en lecture seule, ouverte sans l’application. Souris ou doigt pour tourner, molette pour zoomer, « 🚶 Visiter » pour marcher (Z Q S D ou flèches). ¦ Skoðun eingöngu til lestrar, opnuð án appsins. Mús eða fingur til að snúa, skrunhjól til að þysja, „🚶 Skoða“ til að ganga (Z Q S D eða örvar).
+📐 Surfaces ¦ 📐 Flatarmál
+Surfaces ¦ Flatarmál
+⚠️ Vérifier le plan ¦ ⚠️ Athuga teikninguna
+🗺 Visite guidée ¦ 🗺 Leiðsögn
+aucun arrêt ¦ enginn viðkomustaður
+📷 Photos d’époque ¦ 📷 Gamlar ljósmyndir
+🏘 Le hameau ¦ 🏘 Smáþorpið
+cette maison seule ¦ þetta hús eitt
+foyer n° {n} ¦ heimili nr. {n}
+{a} à {b} m ¦ {a} til {b} m
+un clic : aller à l’endroit ¦ einn smellur: fara á staðinn
+{name} — coupe ¦ {name} — snið
+Texte de l’arrêt {n} ¦ Texti viðkomustaðar {n}
+Texte de l’arrêt ¦ Texti viðkomustaðar
+⤓ Exporter la vidéo en {fmt} ¦ ⤓ Flytja myndbandið út sem {fmt}
+{stops} : la caméra glisse de l’un à l’autre, et le texte de chaque arrêt s’affiche en sous-titre. La vidéo se fait en temps réel (environ {s} secondes) : laisse la fenêtre ouverte. ¦ {stops}: myndavélin líður frá einum til annars og texti hvers viðkomustaðar birtist sem skjátexti. Myndbandið er gert í rauntíma (um {s} sekúndur): hafðu gluggann opinn.
+Une fenêtre est posée sur un mur qui n’existe plus ¦ Gluggi er á vegg sem er ekki lengur til
+Une porte est posée sur un mur qui n’existe plus ¦ Hurð er á vegg sem er ekki lengur til
+Une fenêtre est plus large que son mur ¦ Gluggi er breiðari en veggurinn hans
+Une porte est plus large que son mur ¦ Hurð er breiðari en veggurinn hennar
+Une fenêtre dépasse le plafond ({top} cm pour {wall} cm de mur) : elle est coupée par le plancher ¦ Gluggi nær upp fyrir loftið ({top} cm á {wall} cm vegg): gólfið sker hann
+Une porte dépasse le plafond ({top} cm pour {wall} cm de mur) : elle est coupée par le plancher ¦ Hurð nær upp fyrir loftið ({top} cm á {wall} cm vegg): gólfið sker hana
+Une fenêtre passe sous la pente du toit à cet endroit ¦ Gluggi lendir undir þakhallanum á þessum stað
+Une porte passe sous la pente du toit à cet endroit ¦ Hurð lendir undir þakhallanum á þessum stað
+🧰 Outils de la maison ¦ 🧰 Tól hússins
+Le tableau des surfaces, ouvert dans le 🧾 Tableur ¦ Flatarmálstaflan, opnuð í 🧾 Töflureikni
+Clique deux points sur le plan : la ligne de coupe ¦ Smelltu á tvo punkta á teikningunni: sniðlínan
+📐 Surfaces par pièce ¦ 📐 Flatarmál eftir herbergjum
+✂ Tracer la ligne de coupe ¦ ✂ Draga sniðlínuna
+✂ Voir la coupe ¦ ✂ Sjá sniðið
+🕰 L’année ¦ 🕰 Árið
+Pendant que tu glisses l’année, l’époque d’avant reste visible en pointillés sépia ¦ Meðan þú rennir árinu sést tímabilið á undan áfram með sepíulituðum punktalínum
+👻 Voir l’époque d’avant en fantôme ¦ 👻 Sýna tímabilið á undan sem draug
+La visite guidée en vidéo, toute faite : on glisse d’un arrêt à l’autre, le texte en sous-titre ¦ Leiðsögnin sem tilbúið myndband: líður frá einum viðkomustað til annars, með textanum sem skjátexta
+Une image par arrêt et les textes, dans un fichier .zip : à glisser dans le 🎬 Montage ¦ Ein mynd fyrir hvern viðkomustað og textarnir, í .zip-skrá: til að draga í 🎬 Klippingu
+✎ Les arrêts ¦ ✎ Viðkomustaðir
+🎬 Vidéo de la visite… ¦ 🎬 Myndband af skoðuninni…
+⤓ Images de la visite ¦ ⤓ Myndir úr skoðuninni
+Les arrêts et les photos se posent pendant la visite (🚶 Visiter, vue 3D) ¦ Viðkomustaðir og ljósmyndir eru settir meðan á skoðun stendur (🚶 Skoða, þrívíddarsýn)
+＋ Arrêt, 📷 photo… ¦ ＋ Viðkomustaður, 📷 ljósmynd…
+Un fichier .html à envoyer : la maison en 3D et ses plans, sans l’app, en lecture seule (sans personnes ni souvenirs) ¦ .html-skrá til að senda: húsið í þrívídd og teikningar þess, án appsins, eingöngu til lestrar (án fólks og minninga)
+🏘 Bâtiments du terrain… ¦ 🏘 Byggingar á lóðinni…
+📤 Partager la visite ¦ 📤 Deila skoðuninni
+Aucune pièce dessinée. ¦ Ekkert herbergi teiknað.
+Toute la maison ¦ Allt húsið
+Loi Carrez ¦ Carrez-lög
+Surface ¦ Flatarmál
+Loi Carrez : seules comptent les parties où l’on tient debout (hauteur sous plafond d’au moins 1,80 m, combles comprises). Les vides et les escaliers ne comptent pas. ¦ Carrez-lög: aðeins þeir hlutar teljast þar sem hægt er að standa uppréttur (lofthæð að minnsta kosti 1,80 m, ris meðtalið). Opin rými og stigar teljast ekki með.
+Le Tableur n’est pas prêt. ¦ Töflureiknirinn er ekki tilbúinn.
+Rien à signaler : portes, fenêtres, escaliers et pièces sont cohérents. ¦ Ekkert athugavert: hurðir, gluggar, stigar og herbergi eru samræmd.
+✓ Rien à signaler. ¦ ✓ Ekkert athugavert.
+✂ Clique les deux bouts de la ligne de coupe sur le plan ¦ ✂ Smelltu á báða enda sniðlínunnar á teikningunni
+Ligne de coupe ¦ Sniðlína
+Trace d’abord la ligne de coupe sur le plan. ¦ Dragðu fyrst sniðlínuna á teikninguna.
+✂ Coupe de la maison ¦ ✂ Snið af húsinu
+⤓ Exporter en SVG ¦ ⤓ Flytja út sem SVG
+⤓ Exporter en PNG ¦ ⤓ Flytja út sem PNG
+Ouvre la vue 3D, puis « 🚶 Visiter » : en bas de la visite, « 📍 Arrêt ici » pose un arrêt (avec un texte lu à voix haute) et « 📷 Photo d’époque ici » pose une photo prise de cet endroit. ¦ Opnaðu þrívíddarsýnina og svo „🚶 Skoða“: neðst í skoðuninni setur „📍 Viðkomustaður hér“ viðkomustað (með texta sem er lesinn upphátt) og „📷 Gömul ljósmynd hér“ setur ljósmynd sem tekin var frá þeim stað.
+🗺 Les arrêts de la visite guidée ¦ 🗺 Viðkomustaðir leiðsagnarinnar
+Arrêt retiré ¦ Viðkomustaður fjarlægður
+Arrêts rangés ¦ Viðkomustöðum raðað
+Impossible de faire les images. ¦ Ekki tókst að búa til myndirnar.
+Une image par arrêt… ¦ Ein mynd fyrir hvern viðkomustað…
+Pose d’abord des arrêts : vue 3D → 🚶 Visiter → 📍 Arrêt ici. ¦ Settu fyrst viðkomustaði: þrívíddarsýn → 🚶 Skoða → 📍 Viðkomustaður hér.
+🎬 La vidéo de la visite guidée ¦ 🎬 Myndband leiðsagnarinnar
+Paysage 1280 × 720 (écran) ¦ Lárétt 1280 × 720 (skjár)
+Carré 1080 × 1080 (messageries) ¦ Ferningur 1080 × 1080 (skilaboðaforrit)
+Titre au début ¦ Titill í byrjun
+⛔ Ce navigateur ne sait pas enregistrer de vidéo : garde « ⤓ Images de la visite ». ¦ ⛔ Þessi vafri getur ekki tekið upp myndband: notaðu „⤓ Myndir úr skoðuninni“.
+🔴 Enregistrement de la visite… ¦ 🔴 Tek upp skoðunina…
+fenêtre des médias indisponible ¦ gluggi miðla ekki tiltækur
+✓ Vidéo exportée, et une copie rangée dans les médias. ¦ ✓ Myndband flutt út og afrit geymt í miðlunum.
+✓ Vidéo exportée. ¦ ✓ Myndband flutt út.
+Photo retirée ¦ Ljósmynd fjarlægð
+Fichier prêt : envoie-le, il s’ouvre d’un double-clic dans un navigateur, sans l’app. ¦ Skráin er tilbúin: sendu hana, hún opnast með tvísmelli í vafra, án appsins.
+Retirer du terrain ¦ Fjarlægja af lóðinni
+🏘 Le hameau : les bâtiments du terrain ¦ 🏘 Smáþorpið: byggingarnar á lóðinni
+La ferme, la grange, le four, le puits, les maisons voisines : chacune est une maison de la liste « 🏠 Maisons de famille », posée ici à côté (en 3D et en pointillés sur le plan). ¦ Bærinn, hlaðan, bakaraofninn, brunnurinn, nágrannahúsin: hvert þeirra er hús af listanum „🏠 Fjölskylduhús“, sett hér við hliðina (í þrívídd og með punktalínum á teikningunni).
+＋ Ajouter un bâtiment ¦ ＋ Bæta við byggingu
+N° de foyer au recensement (facultatif) ¦ Nr. heimilis í manntalinu (valfrjálst)
+Bâtiment ajouté ¦ Byggingu bætt við
+Bâtiment déplacé ¦ Bygging færð
+Bâtiment retiré ¦ Bygging fjarlægð
+Soleil à {deg}° de haut, au {dir} ¦ Sól í {deg}° hæð, í {dir}
+boussole|nord ¦ norðri
+boussole|nord-est ¦ norðaustri
+boussole|est ¦ austri
+boussole|sud-est ¦ suðaustri
+boussole|sud ¦ suðri
+boussole|sud-ouest ¦ suðvestri
+boussole|ouest ¦ vestri
+boussole|nord-ouest ¦ norðvestri
+🌙 Nuit ¦ 🌙 Nótt
+Crépuscule ¦ Ljósaskipti
+(pose une lampe pour éclairer) ¦ (settu lampa til að lýsa)
+nuit polaire ¦ heimskautanótt
+soleil de minuit ¦ miðnætursól
+lever {rise}, coucher {set} ¦ sólarupprás {rise}, sólsetur {set}
+France (lieu de la maison inconnu) ¦ Frakkland (staðsetning hússins óþekkt)
+au sol {len} ¦ á jörðu {len}
+🗺 Arrêt {n} sur {total} ¦ 🗺 Viðkomustaður {n} af {total}
+🪜 Un escalier : ¦ 🪜 Stigi:
+⬆ Monter (E) ¦ ⬆ Fara upp (E)
+⬇ Descendre (C) ¦ ⬇ Fara niður (C)
+Ce glTF utilise des fichiers à part : exporte-le plutôt en GLB (un seul fichier). ¦ Þessi glTF notar sérstakar skrár: fluttu hana frekar út sem GLB (ein skrá).
+Format 3D inconnu. ¦ Óþekkt þrívíddarsnið.
+✦ Les souvenirs de la pièce ¦ ✦ Minningar herbergisins
+☀️ Lumière du jour ¦ ☀️ Dagsbirta
+Le soleil passe d’une heure à l’autre ¦ Sólin færist frá einni klukkustund til annarrar
+À cette heure-ci, du 1er janvier au 31 décembre : les ombres s’allongent l’hiver ¦ Á þessum tíma dags, frá 1. janúar til 31. desember: skuggarnir lengjast á veturna
+▶ Voir la journée ¦ ▶ Spila daginn
+▶ Voir l’année ¦ ▶ Spila árið
+❄️ Hiver ¦ ❄️ Vetur
+🌱 Printemps ¦ 🌱 Vor
+☀️ Été ¦ ☀️ Sumar
+🍂 Automne ¦ 🍂 Haust
+📅 Aujourd’hui ¦ 📅 Í dag
+Ombres portées ¦ Varpskuggar
+🚶 Visite ¦ 🚶 Skoðun
+Monter à l’étage du dessus (E ou Page ↑) ¦ Fara upp á hæðina fyrir ofan (E eða Page ↑)
+Descendre à l’étage du dessous (C ou Page ↓) ¦ Fara niður á hæðina fyrir neðan (C eða Page ↓)
+Yeux à ¦ Augu í
+Un arrêt de la visite guidée, ici, regardant par là (avec un texte lu à voix haute) ¦ Viðkomustaður leiðsagnarinnar, hér, horft í þessa átt (með texta sem er lesinn upphátt)
+Une photo ancienne prise de cet endroit, dans cette direction : on la compare avec la maison d’aujourd’hui ¦ Gömul ljósmynd tekin frá þessum stað, í þessa átt: borin saman við húsið eins og það er í dag
+📍 Arrêt ici ¦ 📍 Viðkomustaður hér
+📷 Photo d’époque ici ¦ 📷 Gömul ljósmynd hér
+Petite carte : clic pour t’y rendre ¦ Smákort: smelltu til að fara þangað
+Z Q S D, W A S D ou flèches : marcher · Maj : courir · la souris regarde · Échap : libérer la souris ¦ Z Q S D, W A S D eða örvar: ganga · Shift: hlaupa · músin horfir í kring · Esc: sleppa músinni
+Le rond en bas à gauche : marcher · glisser sur la vue : regarder · ✦ : toucher pour voir le souvenir ¦ Hringurinn neðst til vinstri: ganga · dragðu á sýninni: horfa · ✦: snertu til að sjá minninguna
+Z Q S D, W A S D ou flèches : marcher · clic sur la vue : regarder avec la souris · ✦ : clic pour voir le souvenir · Échap : sortir ¦ Z Q S D, W A S D eða örvar: ganga · smelltu á sýnina: horfa með músinni · ✦: smelltu til að sjá minninguna · Esc: hætta
+✋ Arrêter la visite ¦ ✋ Stöðva skoðunina
+Autrefois ¦ Áður
+Autrefois ou aujourd’hui ¦ Áður eða nú
+Arrêt suivant ¦ Næsti viðkomustaður
+Arrêter la visite guidée ¦ Stöðva leiðsögnina
+Pose d’abord des arrêts (🚶 Visiter → 📍 Arrêt ici). ¦ Settu fyrst viðkomustaði (🚶 Skoða → 📍 Viðkomustaður hér).
+Ce navigateur ne sait pas enregistrer de vidéo. ¦ Þessi vafri getur ekki tekið upp myndband.
+Remettre la vue comme au départ ¦ Upphafsstilla sýnina
+L’image du média n° {n} est introuvable : une toile neutre la remplace. ¦ Mynd miðils nr. {n} finnst ekki: hlutlaus strigi kemur í staðinn.
+Cadre {n} : une image ¦ Rammi {n}: mynd
+Cadre {n} : vide ¦ Rammi {n}: tómur
+Image du cadre {n} ¦ Mynd ramma {n}
+Prise dans les médias ¦ Tekin úr miðlunum
+L’image de « {name} » ¦ Myndin fyrir „{name}“
+🖼 Déposer sur « {name} » (cadre {n}) ¦ 🖼 Sleppa á „{name}“ (rammi {n})
+🖼 Déposer sur « {name} » ¦ 🖼 Sleppa á „{name}“
+Remplir (recadrer) ¦ Fylla (skera)
+Ajuster (toute l’image) ¦ Aðlaga (öll myndin)
+Centrer (taille réelle) ¦ Miðja (raunstærð)
+Pas d’image. ¦ Engin mynd.
+Image introuvable ¦ Mynd finnst ekki
+Le cadre ¦ Ramminn
+MAISON · IMAGE ¦ HÚS · MYND
+Poser cette image ¦ Setja þessa mynd
+Ou un souvenir de cet objet : ¦ Eða minning um þennan hlut:
+La rattacher aussi aux souvenirs de cet objet ¦ Tengja hana líka við minningar þessa hlutar
+🏷 Garder aussi comme souvenir ¦ 🏷 Halda líka sem minningu
+⚠️ Cette image est introuvable dans les médias : une toile neutre la remplace. Choisis-en une autre. ¦ ⚠️ Þessi mynd finnst ekki í miðlunum: hlutlaus strigi kemur í staðinn. Veldu aðra.
+Aperçu : glisse pour déplacer l’image, molette pour zoomer ¦ Forskoðun: dragðu til að færa myndina, skrunhjól til að þysja
+Glisse pour déplacer l’image · molette pour zoomer ¦ Dragðu til að færa myndina · skrunhjól til að þysja
+Dans le cadre ¦ Í rammanum
+Remettre l’image au centre, sans zoom ¦ Setja myndina aftur í miðjuna, án aðdráttar
+↺ Recadrage de départ ¦ ↺ Upphafleg innrömmun
+Recadrage de départ ¦ Upphafleg innrömmun
+Sa couleur ¦ Liturinn
+Passe-partout ¦ Karton
+🖼 Images des cadres ¦ 🖼 Myndir rammanna
+🖼 Image ¦ 🖼 Mynd
+📁 Tu peux aussi glisser une image de l’ordinateur sur l’objet, dans le plan ou dans la vue 3D : elle entre dans les médias. ¦ 📁 Þú getur líka dregið mynd úr tölvunni á hlutinn, á teikningunni eða í þrívíddarsýninni: hún fer í miðlana.
+Image posée ¦ Mynd sett
+Image retirée ¦ Mynd fjarlægð
+Import de l’image… ¦ Flyt inn myndina…
+Image déposée sur l’objet ¦ Mynd sleppt á hlutinn
+✓ L’image est rangée dans les médias et posée sur l’objet. ¦ ✓ Myndin er geymd í miðlunum og sett á hlutinn.
+Image prise dans les souvenirs ¦ Mynd tekin úr minningunum
+Image tournée ¦ Mynd snúið
+Image réglée ¦ Mynd stillt
+Image recadrée ¦ Mynd skorin til
+Image zoomée ¦ Mynd stækkuð
+Cote ¦ Málsetning
+Hauteur (cm) ¦ Hæð (cm)
+Contenu ¦ Innihald
+Tourne le plan par rapport au nord : 0° = le haut du plan est au nord, 90° = le haut du plan regarde l’est. Le soleil et les ombres suivent. ¦ Snýr teikningunni miðað við norður: 0° = efri brún teikningarinnar snýr í norður, 90° = efri brúnin snýr í austur. Sólin og skuggarnir fylgja.
+Lit d’une personne ¦ Einbreitt rúm
+Chambre ¦ Svefnherbergi
+Lit double ¦ Tvíbreitt rúm
+Lit clos (breton) ¦ Lokrekkja (bretónsk)
+Berceau ¦ Vagga
+Lit d’enfant ¦ Barnarúm
+Table de chevet ¦ Náttborð
+Commode ¦ Kommóða
+Coiffeuse ¦ Snyrtiborð
+Prie-Dieu ¦ Bænaskammel
+Religion, souvenirs ¦ Trú, minjagripir
+Table ¦ Borð
+Séjour ¦ Stofa
+Table ronde ¦ Hringborð
+Chaise ¦ Stóll
+Fauteuil ¦ Hægindastóll
+Canapé ¦ Sófi
+Banc ¦ Bekkur
+Buffet ¦ Skenkur
+Vaisselier ¦ Leirtausskápur
+Horloge comtoise ¦ Comtoise-klukka
+Piano droit ¦ Upprétt píanó
+Bibliothèque ¦ Bókaskápur
+Cheminée ¦ Arinn
+Poêle à bois ¦ Viðarofn
+Tapis ¦ Teppi
+Lampadaire ¦ Gólflampi
+Plante ¦ Planta
+Poste de radio (TSF) ¦ Útvarpstæki (gamalt)
+Cuisinière à bois ¦ Viðarkynnt eldavél
+Cuisine ¦ Eldhús
+Évier en pierre ¦ Steinvaskur
+Pétrin ¦ Deigtrog
+Garde-manger ¦ Matarskápur
+Réfrigérateur ¦ Ísskápur
+Plan de travail ¦ Vinnuborð
+Baignoire ¦ Baðkar
+Salle d’eau ¦ Baðherbergi
+Douche ¦ Sturta
+WC ¦ Salerni
+Lavabo ¦ Handlaug
+Table de toilette (broc et cuvette) ¦ Þvottaborð (kanna og skál)
+Armoire ¦ Fataskápur
+Rangement ¦ Geymsla
+Coffre ¦ Kista
+Étagère ¦ Hilla
+Rouet ¦ Rokkur
+Métiers, atelier ¦ Iðnir, verkstæði
+Métier à tisser ¦ Vefstóll
+Établi ¦ Vinnubekkur
+Tonneau ¦ Tunna
+Machine à coudre ¦ Saumavél
+Enclume ¦ Steðji
+Mangeoire, crèche ¦ Jata, fóðurtrog
+Ferme, animaux ¦ Bóndabær, dýr
+Charrette ¦ Kerra
+Puits ¦ Brunnur
+Jardin, extérieur ¦ Garður, utandyra
+Arbre ¦ Tré
+Voiture ¦ Bíll
+Banc de jardin ¦ Garðbekkur
+Escalier droit ¦ Beinn stigi
+Structure ¦ Burðarvirki
+Escalier tournant ¦ Snúinn stigi
+Poteau, pilier ¦ Staur, súla
+Placard ¦ Innbyggður skápur
+Lit bateau (Empire) ¦ Bátarúm (Empire)
+Lit Louis-Philippe ¦ Louis-Philippe rúm
+Lit à baldaquin ¦ Himnasæng
+Lit en fer forgé ¦ Smíðajárnsrúm
+Grand lit (160) ¦ Stórt rúm (160)
+Paillasse (lit de paille) ¦ Hálmdýna
+Armoire normande ¦ Normandískur fataskápur
+Armoire à glace ¦ Speglaskápur
+Chiffonnier, semainier ¦ Hár kommóðuskápur, vikuskápur
+Table de nuit à marbre ¦ Náttborð með marmaraplötu
+Lampe de chevet ¦ Náttlampi
+Pot de chambre ¦ Koppur
+Paravent ¦ Skilrúm
+Psyché (miroir sur pied) ¦ Standspegill
+Fauteuil Voltaire ¦ Voltaire-hægindastóll
+Banquette de pied de lit ¦ Bekkur við rúmgafl
+Descente de lit ¦ Rúmmotta
+Dressing ¦ Fataherbergi
+Chaise paillée ¦ Stóll með fléttaðri setu
+Coffre de mariage ¦ Brúðarkista
+Malle-cabine ¦ Skipskista
+Table de toilette à miroir ¦ Þvottaborð með spegli
+Chaufferette, bassinoire ¦ Fótahitari, rúmhitari
+Cheminée de chambre ¦ Arinn í svefnherbergi
+Table ovale à rallonges ¦ Sporöskjulaga stækkanlegt borð
+Table de ferme ¦ Sveitaborð
+Table basse ¦ Sófaborð
+Guéridon ¦ Lítið súluborð
+Bergère ¦ Bergère-hægindastóll
+Fauteuil à bascule ¦ Ruggustóll
+Canapé trois places ¦ Þriggja sæta sófi
+Méridienne ¦ Legubekkur
+Pouf ¦ Puff
+Pendule de cheminée ¦ Arinhilluklukka
+Grande cheminée à manteau ¦ Stór arinn með hillu
+Poêle en faïence ¦ Flísalagður ofn
+Meuble TV ¦ Sjónvarpsskápur
+Gramophone ¦ Grammófónn
+Harmonium ¦ Harmóníum
+Piano à queue ¦ Flygill
+Lustre ¦ Ljósakróna
+Tapis rond ¦ Kringlótt teppi
+Bibliothèque vitrée ¦ Glerjaður bókaskápur
+Chaise cannée ¦ Tágastóll
+Jardinière ¦ Blómastandur
+Cage à oiseaux ¦ Fuglabúr
+Aquarium ¦ Fiskabúr
+Console ¦ Veggborð
+Bonheur-du-jour ¦ Bonheur-du-jour skrifborð
+Canapé-lit, clic-clac ¦ Svefnsófi
+Potager (fourneau maçonné) ¦ Hlaðin eldavél
+Âtre avec crémaillère ¦ Eldstó með pottkróki
+Four encastrable ¦ Innbyggður ofn
+Plaques de cuisson ¦ Helluborð
+Lave-vaisselle ¦ Uppþvottavél
+Congélateur coffre ¦ Frystikista
+Glacière (armoire à glace) ¦ Íshólf (ísskápur)
+Évier double ¦ Tvöfaldur vaskur
+Îlot central ¦ Eldhúseyja
+Plan de travail en L ¦ L-laga vinnuborð
+Hotte ¦ Háfur
+Meuble haut ¦ Efri skápur
+Meuble bas ¦ Neðri skápur
+Tabouret ¦ Kollur
+Table de cuisine ¦ Eldhúsborð
+Panetière ¦ Brauðskápur
+Billot de boucher ¦ Kjötskurðarbretti
+Seau, cruche ¦ Fata, kanna
+Saloir, jarre ¦ Saltkar, krukka
+Micro-ondes ¦ Örbylgjuofn
+Cuisinière à gaz ¦ Gaseldavél
+Chaudron ¦ Ketill
+Moulin à café ¦ Kaffikvörn
+Réfrigérateur américain ¦ Amerískur ísskápur
+Égouttoir, vaisselier mural ¦ Diskagrind, vegghilla
+Baignoire sabot ¦ Setbaðkar
+Baignoire sur pieds (fonte) ¦ Baðkar á fótum (steypujárn)
+Cuvier, baquet ¦ Þvottabali
+Bidet ¦ Skolskál
+Double vasque ¦ Tvöföld handlaug
+Douche à l’italienne ¦ Gólfsturta
+Machine à laver ¦ Þvottavél
+Sèche-linge ¦ Þurrkari
+Chauffe-eau, ballon ¦ Vatnshitari
+Radiateur ¦ Ofn
+Sèche-serviettes ¦ Handklæðaofn
+Meuble vasque ¦ Handlaugarskápur
+Miroir de salle de bains ¦ Baðherbergisspegill
+WC à la turque ¦ Gólfsalerni
+Chaise percée ¦ Salernisstóll
+Lessiveuse ¦ Þvottapottur
+Étendoir à linge ¦ Þurrkgrind
+Panier à linge ¦ Þvottakarfa
+Colonne de rangement ¦ Hár geymsluskápur
+WC suspendu ¦ Upphengt salerni
+Bac à douche ¦ Sturtubotn
+Malle de voyage ¦ Ferðakista
+Bahut ¦ Lágur skenkur
+Buffet deux corps ¦ Tvískiptur skenkur
+Enfilade ¦ Langur skenkur
+Confiturier ¦ Sultuskápur
+Étagère métallique ¦ Málmhillur
+Penderie, portant ¦ Fataslá
+Portemanteau ¦ Fatahengi
+Meuble à cases ¦ Hólfahilla
+Placard mural ¦ Veggskápur
+Meuble à chaussures ¦ Skóskápur
+Casier à bouteilles ¦ Flöskurekki
+Pile de cartons ¦ Kassastafli
+Cantine militaire ¦ Herkista
+Armoire à linge ¦ Línskápur
+Porte-parapluies ¦ Regnhlífastandur
+Meuble d’entrée ¦ Forstofuskápur
+Vestiaire métallique ¦ Málmskápur
+Commode basse ¦ Lág kommóða
+Coffre à bois ¦ Eldiviðarkassi
+Secrétaire à abattant ¦ Skrifskápur með felliplötu
+Bureau plat (ministre) ¦ Flatt skrifborð
+Bureau à cylindre ¦ Rúllulokuskrifborð
+Fauteuil de bureau ¦ Skrifstofustóll
+Chaise de bureau en bois ¦ Skrifborðsstóll úr tré
+Cartonnier ¦ Skjalaskápur (öskjur)
+Classeur à tiroirs ¦ Skúffuskjalaskápur
+Ordinateur (écran) ¦ Tölva (skjár)
+Imprimante, scanner ¦ Prentari, skanni
+Globe terrestre ¦ Hnattlíkan
+Coffre-fort ¦ Peningaskápur
+Lampe de bureau ¦ Skrifborðslampi
+Bibliothèque murale ¦ Veggbókahilla
+Table à dessin ¦ Teikniborð
+Boîtes d’archives ¦ Skjalaöskjur
+Téléphone mural (ancien) ¦ Veggsími (gamall)
+Tableau noir, tableau blanc ¦ Krítartafla, tússtafla
+Bureau moderne ¦ Nútímalegt skrifborð
+Caisson à tiroirs ¦ Skúffueining
+Fauteuil club ¦ Klúbbstóll
+Berceau en osier ¦ Tágavagga
+Lit à barreaux ¦ Rimlarúm
+Lits superposés ¦ Kojur
+Table à langer ¦ Skiptiborð
+Coffre à jouets ¦ Leikfangakista
+Cheval à bascule ¦ Ruggihestur
+Parc ¦ Leikgrind
+Chaise haute ¦ Barnastóll
+Pupitre d’écolier ¦ Skólapúlt
+Landau ¦ Barnavagn
+Maison de poupée ¦ Dúkkuhús
+Tipi ¦ Tjaldkofi
+Petite table ¦ Lítið borð
+Petite chaise ¦ Lítill stóll
+Tapis de jeu ¦ Leikmotta
+Ours en peluche ¦ Bangsi
+Bibliothèque basse ¦ Lágur bókaskápur
+Trotteur, porteur ¦ Göngugrind, ýtibíll
+Crucifix ¦ Róðukross
+Bénitier ¦ Vígsluvatnsker
+Petit autel, oratoire ¦ Lítið altari, bænastúka
+Statue de la Vierge ¦ Maríulíkneski
+Chandelier, cierge ¦ Kertastjaki, altariskerti
+Portrait de famille ¦ Fjölskyldumynd
+Photo de mariage encadrée ¦ Innrömmuð brúðkaupsmynd
+Arbre généalogique encadré ¦ Innrammað ættartré
+Globe de mariée ¦ Brúðarkúpull
+Cadre de médailles ¦ Rammi með heiðursmerkjum
+Bible familiale sur lutrin ¦ Fjölskyldubiblía á lespúlti
+Coffret à souvenirs ¦ Minjagripaskrín
+Vitrine à souvenirs ¦ Minjagripaskápur
+Lampe à huile ¦ Olíulampi
+Buste sur colonne ¦ Brjóstmynd á súlu
+Icône, image pieuse ¦ Íkon, helgimynd
+Pile d’albums de famille ¦ Stafli af fjölskyldualbúmum
+Plaque commémorative ¦ Minningarskjöldur
+Malle aux souvenirs ¦ Minningakista
+Croix de bois au mur ¦ Trékross á vegg
+Retable, armoire d’église ¦ Altaristafla, kirkjuskápur
+Forge (foyer) ¦ Smiðja (afl)
+Soufflet de forge ¦ Smiðjubelgur
+Tour à bois ¦ Trérennibekkur
+Presse à imprimer ¦ Prentvél
+Meule à aiguiser ¦ Hverfisteinn
+Cuve de vigneron ¦ Vínker
+Pressoir à vin ¦ Vínpressa
+Alambic ¦ Eimingartæki
+Comptoir de boutique ¦ Búðarborð
+Balance à bascule ¦ Gólfvog
+Caisse enregistreuse ¦ Búðarkassi
+Étalage de magasin ¦ Búðarstandur
+Fauteuil de barbier ¦ Rakarastóll
+Établi de cordonnier ¦ Skósmiðsbekkur
+Chevalet de peintre ¦ Málaratrönur
+Carreau de dentellière ¦ Kniplpúði
+Four de boulanger ¦ Bakaraofn
+Barrique ¦ Vínámur
+Meule de moulin ¦ Kvarnarsteinn
+Chevalet de scieur ¦ Sagarbukkur
+Établi de menuisier ¦ Smíðabekkur
+Panneau à outils ¦ Verkfæratafla
+Vache ¦ Kýr
+Cheval ¦ Hestur
+Âne ¦ Asni
+Cochon ¦ Svín
+Mouton ¦ Kind
+Chèvre ¦ Geit
+Poule ¦ Hæna
+Chien ¦ Hundur
+Chat ¦ Köttur
+Clapier à lapins ¦ Kanínubúr
+Poulailler ¦ Hænsnakofi
+Niche ¦ Hundakofi
+Stalle, box d’écurie ¦ Bás, hesthússtía
+Abreuvoir ¦ Drykkjarker
+Râtelier à foin ¦ Heygrind
+Meule de foin ¦ Heysáta
+Botte de paille ¦ Hálmbaggi
+Charrue ¦ Plógur
+Herse ¦ Herfi
+Tracteur ancien ¦ Gömul dráttarvél
+Brouette ¦ Hjólbörur
+Baratte à beurre ¦ Strokkur
+Ruche ¦ Býflugnabú
+Coffre à grain ¦ Kornkista
+Bidon à lait ¦ Mjólkurbrúsi
+Tombereau ¦ Sturtukerra
+Arbre fruitier ¦ Ávaxtatré
+Sapin, conifère ¦ Greni, barrtré
+Haie ¦ Limgerði
+Buisson, arbuste ¦ Runni
+Massif de fleurs ¦ Blómabeð
+Potager (planches) ¦ Matjurtagarður (beð)
+Mare, bassin ¦ Tjörn, laug
+Lavoir ¦ Þvottahús (við læk)
+Four à pain ¦ Brauðofn
+Pompe à bras ¦ Handdæla
+Croix de chemin, calvaire ¦ Vegakross, krossfestingarmynd
+Pierre tombale ¦ Legsteinn
+Table de jardin ¦ Garðborð
+Chaise de jardin ¦ Garðstóll
+Transat, chaise longue ¦ Sólstóll, legubekkur
+Parasol ¦ Sólhlíf
+Barbecue ¦ Grill
+Balançoire ¦ Róla
+Toboggan ¦ Rennibraut
+Pergola, tonnelle ¦ Pergóla, laufskáli
+Clôture, barrière ¦ Girðing, hlið
+Portail ¦ Hlið
+Muret de pierre ¦ Lágur steinveggur
+Bicyclette ¦ Reiðhjól
+Cabane de jardin ¦ Garðskúr
+Serre ¦ Gróðurhús
+Tas de bois ¦ Viðarstafli
+Bouleau, arbre fin ¦ Birki, grannt tré
+Banc de pierre ¦ Steinbekkur
+Escalier en colimaçon ¦ Hringstigi
+Échelle de meunier ¦ Brattur stigi
+Colonne ronde ¦ Kringlótt súla
+Poutre apparente ¦ Sýnilegur bjálki
+Trappe de cave ¦ Kjallarahleri
+Marche, seuil ¦ Þrep, þröskuldur
+Garde-corps, rampe ¦ Handrið
+Conduit de cheminée ¦ Reykháfur
+Verrière, cloison vitrée ¦ Glerveggur
+Radiateur en fonte ¦ Steypujárnsofn
+Chaudière ¦ Hitaketill
+Pilier de pierre ¦ Steinsúla
+Estrade, palier ¦ Pallur, stigapallur
+Muret, demi-cloison ¦ Hálfveggur
+Niche, alcôve ¦ Veggskot, alkóvi
+Bonnetière (armoire à une porte) ¦ Einhurðarfataskápur
+Armoire de mariage (de dot) ¦ Brúðarskápur (heimanmundur)
+Lit clos à portes coulissantes ¦ Lokrekkja með rennihurðum
+Lit-armoire, lit clos d’angle ¦ Skáparúm, lokrekkja í horni
+Lit d’alcôve à rideaux ¦ Alkóvarúm með tjöldum
+Berceau ancien en bois (à bascule) ¦ Gömul ruggandi trévagga
+Berceau à capote en osier ¦ Tágavagga með skyggni
+Bassinoire en cuivre (à long manche) ¦ Koparrúmhitari (langt skaft)
+Table de toilette à marbre ¦ Þvottaborð með marmaraplötu
+Cuvette et broc en faïence ¦ Leirskál og kanna
+Commode galbée (Louis XV) ¦ Bogadregin kommóða (Louis XV)
+Bougeoir de chevet ¦ Náttborðskertastjaki
+Chaufferette à braises ¦ Glóðarfótahitari
+Malle en osier ¦ Tágakista
+Horloge comtoise à ventre (violonée) ¦ Comtoise-klukka með belg
+Horloge comtoise peinte ¦ Máluð Comtoise-klukka
+Horloge de parquet (régulateur) ¦ Gólfklukka (regúlator)
+Buffet bas à deux portes ¦ Lágur tveggja hurða skenkur
+Vaisselier breton ¦ Bretónskur leirtausskápur
+Vaisselier normand ¦ Normandískur leirtausskápur
+Banc-coffre à dossier (archebanc) ¦ Kistubekkur með baki (archebanc)
+Banc-coffre de lit clos ¦ Kistubekkur við lokrekkju
+Chaise paillée à barreaux ¦ Stóll með fléttaðri setu og rimlabaki
+Fauteuil paillé (de grand-mère) ¦ Hægindastóll með fléttaðri setu (ömmustóll)
+Table à volets ¦ Borð með fellivængjum
+Table de ferme en chêne (à tiroir) ¦ Eikarsveitaborð (með skúffu)
+Lampe tempête ¦ Stormlukt
+Chandelier, bougeoir ¦ Kertastjaki
+Suspension à pétrole ¦ Hangandi olíulampi
+Poste TSF à lampes ¦ Lampaútvarp
+Phonographe à pavillon ¦ Trektargrammófónn
+Poêle Godin (fonte émaillée) ¦ Godin-ofn (glerjað steypujárn)
+Poêle à bois en fonte (cloche) ¦ Steypujárnsviðarofn (bjöllulaga)
+Chenets (la paire) ¦ Eldhundar (par)
+Cheminée à manteau (à hotte) ¦ Arinn með hillu (og hettu)
+Cheminée de pierre à linteau de bois ¦ Steinarinn með trébita
+Cantou (coin du feu) ¦ Cantou (eldstæðiskrókur)
+Bergère Louis XVI ¦ Louis XVI bergère
+Fauteuil crapaud ¦ Froskstóll
+Sellette (porte-plante) ¦ Blómasúla
+Portrait des ancêtres (ovale) ¦ Mynd af forfeðrum (sporöskjulaga)
+Maie (pétrin sur pieds) ¦ Deigtrog á fótum
+Maie-coffre à couvercle ¦ Deigkista með loki
+Huche à pain ¦ Brauðkista
+Cuisinière à bois en fonte (à barre de laiton) ¦ Steypujárnsviðareldavél (með messingslá)
+Cuisinière émaillée bois et charbon ¦ Glerjuð eldavél fyrir við og kol
+Potager carrelé (fourneau à braises) ¦ Flísalögð glóðareldavél
+Évier taillé dans la pierre ¦ Vaskur höggvinn í stein
+Évier en grès émaillé ¦ Vaskur úr glerjuðum steinleir
+Fontaine en cuivre sur son support ¦ Koparvatnsker á standi
+Fontaine en grès ¦ Vatnsker úr steinleir
+Saloir en grès ¦ Saltkrukka úr steinleir
+Saloir en bois (coffre à sel) ¦ Saltkista úr tré
+Garde-manger grillagé (mural) ¦ Matarskápur með neti (á vegg)
+Buffet de cuisine (années 1930-1950) ¦ Eldhússkenkur (1930-1950)
+Moulin à café mural ¦ Kaffikvörn á vegg
+Fer à repasser en fonte ¦ Straujárn úr steypujárni
+Marmite en fonte ¦ Steypujárnspottur
+Cruche, pichet en grès ¦ Kanna, karafla úr steinleir
+Tue-mouches en verre (piège à mouches) ¦ Flugnagildra úr gleri
+Balance Roberval et ses poids ¦ Roberval-vog og lóð
+Glacière en bois doublée de zinc ¦ Íshólf úr tré fóðrað með sinki
+Tub (grand bassin en zinc) ¦ Sinkbali
+Baquet de lessive en bois ¦ Þvottabali úr tré
+Lessiveuse à champignon ¦ Sveppalaga þvottapottur
+Baignoire en zinc ¦ Sinkbaðkar
+Lave-mains en fonte émaillée ¦ Handlaug úr glerjuðu steypujárni
+Planche à laver ¦ Þvottabretti
+Buffet deux-corps vitré ¦ Glerjaður tvískiptur skenkur
+Buffet deux-corps normand ¦ Normandískur tvískiptur skenkur
+Armoire lorraine ¦ Fataskápur frá Lorraine
+Armoire bressane ¦ Fataskápur frá Bresse
+Coffre de mariage sculpté ¦ Útskorin brúðarkista
+Malle bombée de voyage ¦ Kúpt ferðakista
+Coffre à linge à pentures de fer ¦ Línkista með járnlömum
+Panetière provençale (murale) ¦ Brauðskápur frá Provence (á vegg)
+Étagère à cuivres ¦ Hilla fyrir koparmuni
+Bureau de pente (dos d’âne) ¦ Skrifpúlt með hallandi loki
+Scriban (pente et vitrine) ¦ Scriban (hallandi lok og glerskápur)
+Écritoire, encrier et plumier ¦ Skriffæri, blekbytta og pennastokkur
+Lampe bouillotte ¦ Bouillotte-lampi
+Banc d’école à pupitre (deux places) ¦ Skólabekkur með púlti (tveggja sæta)
+Pupitre d’écolier à abattant ¦ Skólapúlt með loki
+Ardoise d’écolier ¦ Griffiltafla
+Cheval de bois ¦ Tréhestur
+Poupée de porcelaine ¦ Postulínsdúkka
+Chaise d’enfant paillée ¦ Barnastóll með fléttaðri setu
+Trotteur d’enfant en bois ¦ Göngugrind úr tré
+Prie-Dieu sculpté ¦ Útskorið bænaskammel
+Bénitier de chambre en faïence ¦ Vígsluvatnsker úr leir í svefnherbergi
+Crucifix de chevet (Christ en bronze) ¦ Róðukross við rúm (Kristur úr bronsi)
+Globe de mariée sur son socle ¦ Brúðarkúpull á stalli
+Statuette de saint ¦ Dýrlingastytta
+Image de communion encadrée ¦ Innrammað fermingarkort
+Couronne de perles (mortuaire) ¦ Perlukrans (útfararkrans)
+Rouet flamand (à fuseau) ¦ Flæmskur rokkur (með snældu)
+Grand rouet à laine ¦ Stór ullarrokkur
+Métier à tisser à bras ¦ Handvefstóll
+Métier à tapisserie (vertical) ¦ Veggteppavefstóll (lóðréttur)
+Dévidoir à écheveaux ¦ Hespugrind
+Machine à coudre à pédale (Singer) ¦ Fótstigin saumavél (Singer)
+Machine à coudre à main ¦ Handsnúin saumavél
+Mannequin de couturière ¦ Saumagína
+Fourneau à fers de repasseuse ¦ Straujárnsofn þvottakonu
+Banc de sabotier ¦ Bekkur tréskósmiðs
+Presse à fromage ¦ Ostapressa
+Baratte à piston en bois ¦ Strokkur með bullu úr tré
+Baratte-tonneau à manivelle ¦ Tunnustrokkur með sveif
+Écrémeuse ¦ Skilvinda
+Joug de bœufs ¦ Uxaok
+Outils (fourche, faux, râteau) ¦ Verkfæri (heykvísl, ljár, hrífa)
+Pressoir à pommes (cidre) ¦ Eplapressa (síder)
+Charreton à bras ¦ Handkerra
+Ruche en paille (panier) ¦ Býkúpa úr hálmi
+Puits à margelle et petit toit ¦ Brunnur með brún og litlu þaki
+Pompe à eau en fonte et son auge ¦ Vatnsdæla úr steypujárni og trog
+Auge en pierre ¦ Steintrog
+Banc à laver (de lavoir) ¦ Þvottabekkur (við þvottalaug)
+Canapé moderne trois places ¦ Nútímalegur þriggja sæta sófi
+Canapé deux places ¦ Tveggja sæta sófi
+Canapé d’angle ¦ Hornsófi
+Canapé Chesterfield (capitonné) ¦ Chesterfield-sófi (hnepptur)
+Fauteuil scandinave ¦ Skandinavískur hægindastóll
+Fauteuil suspendu (œuf) ¦ Hangandi eggjastóll
+Pouf poire ¦ Baunapoki
+Pouf capitonné ¦ Hnepptur puff
+Repose-pieds ¦ Fótskemill
+Table basse en verre ¦ Glersófaborð
+Bout de canapé ¦ Hliðarborð
+Bibliothèque garnie de livres ¦ Bókaskápur fullur af bókum
+Meuble à disques vinyles ¦ Hljómplötuskápur
+Cheminée moderne à insert ¦ Nútímalegur arinn með innsetningu
+Poêle à granulés ¦ Kögglaofn
+Porte-revues ¦ Tímaritastandur
+Table d’échecs ¦ Skákborð
+Billard ¦ Billjarðborð
+Pare-feu de cheminée ¦ Neistahlíf
+Panier à bûches ¦ Eldiviðarkarfa
+Table de salle à manger (8 couverts) ¦ Borðstofuborð (8 manna)
+Table dressée pour un repas de famille ¦ Borð dekkað fyrir fjölskyldumáltíð
+Table ronde à pied central ¦ Kringlótt súluborð
+Table à rallonges ouverte ¦ Stækkanlegt borð, útdregið
+Chaise à barreaux (bistrot) ¦ Kaffihúsastóll
+Chaise rembourrée ¦ Bólstraður stóll
+Chaise scandinave ¦ Skandinavískur stóll
+Chaise médaillon (Louis XVI) ¦ Medalíustóll (Louis XVI)
+Buffet scandinave sur pieds ¦ Skandinavískur skenkur á fótum
+Vitrine à vaisselle ¦ Postulínsskápur
+Banc de table ¦ Borðbekkur
+Desserte, chariot de service ¦ Framreiðsluvagn
+Candélabre à cinq branches ¦ Fimmarma kertastjaki
+Coupe de fruits ¦ Ávaxtaskál
+Bouquet dans un vase ¦ Blómvöndur í vasa
+Piano de cuisson ¦ Stór eldavél
+Colonne de cuisine (four et micro-ondes) ¦ Hár eldhússkápur (ofn og örbylgjuofn)
+Évier timbre d’office (céramique) ¦ Keramikvaskur
+Suspension à casseroles ¦ Pottahengi
+Poubelle à pédale ¦ Ruslafata með fótstigi
+Étagère à épices et bocaux ¦ Hilla fyrir krydd og krukkur
+Desserte à roulettes de cuisine ¦ Eldhúsvagn á hjólum
+Mange-debout ¦ Barborð
+Tabouret de bar ¦ Barstóll
+Table en formica (années 60) ¦ Formica-borð (sjöundi áratugurinn)
+Chaise en formica (années 60) ¦ Formica-stóll (sjöundi áratugurinn)
+Pots d’herbes aromatiques ¦ Kryddjurtapottar
+Échelle à pain (suspendue) ¦ Hangandi brauðrekki
+Lit double moderne (140) ¦ Nútímalegt tvíbreitt rúm (140)
+Lit king size (180) ¦ King size rúm (180)
+Lit simple moderne (90) ¦ Nútímalegt einbreitt rúm (90)
+Lit mezzanine avec bureau ¦ Hárúm með skrifborði
+Futon, lit bas ¦ Fúton, lágt rúm
+Table de chevet moderne ¦ Nútímalegt náttborð
+Armoire à portes coulissantes (miroir) ¦ Fataskápur með rennihurðum (spegill)
+Coiffeuse moderne à miroir rond ¦ Nútímalegt snyrtiborð með kringlóttum spegli
+Valet de chambre ¦ Fatastandur
+Lit de fer à barreaux ¦ Járnrimlarúm
+Chaise de nourrice (basse) ¦ Lágur gjafastóll
+Baignoire d’angle ¦ Hornbaðkar
+Baignoire îlot (moderne) ¦ Frístandandi baðkar (nútímalegt)
+Cabine de douche ¦ Sturtuklefi
+Porte-serviettes sur pied ¦ Handklæðastandur
+Pèse-personne ¦ Baðvog
+Vasque à poser sur plan en bois ¦ Handlaug ofan á viðarplötu
+WC à réservoir ¦ Salerni með vatnskassa
+WC à chasse d’eau haute (à chaîne) ¦ Salerni með háum vatnskassa (með keðju)
+Armoire à pharmacie murale ¦ Lyfjaskápur á vegg
+Colonne lave-linge et sèche-linge ¦ Þvottavél og þurrkari í stafla
+Buanderie ¦ Þvottahús
+Planche à repasser et son fer ¦ Strauborð og straujárn
+Bac à laver (évier de buanderie) ¦ Skolvaskur
+Balai, seau et serpillière ¦ Kústur, fata og moppa
+Étagère à linge plié ¦ Hilla fyrir samanbrotið lín
+Corbeille à linge en osier ¦ Tágaþvottakarfa
+Séchoir à linge (accordéon) ¦ Samanbrjótanleg þurrkgrind
+Aspirateur traîneau ¦ Ryksuga á hjólum
+Aspirateur balai ¦ Skaftryksuga
+Essoreuse à rouleaux (ancienne) ¦ Vinda (gömul)
+Machine à laver à manivelle (ancienne) ¦ Handsnúin þvottavél (gömul)
+Patère murale et manteaux ¦ Snagar og yfirhafnir
+Vestiaire d’entrée à miroir (ancien) ¦ Forstofustandur með spegli (gamall)
+Banc à chaussures ¦ Skóbekkur
+Console et miroir d’entrée ¦ Forstofuborð og spegill
+Paillasson ¦ Dyramotta
+Boîte à clés murale ¦ Lyklakassi á vegg
+Boîte aux lettres sur pied ¦ Póstkassi á staur
+Ordinateur portable ¦ Fartölva
+Ordinateur de bureau (écran, tour, clavier) ¦ Borðtölva (skjár, turn, lyklaborð)
+Minitel ¦ Minitel
+Téléphone à cadran ¦ Skífusími
+Échelle de bibliothèque ¦ Bókasafnsstigi
+Tableau en liège (pense-bête) ¦ Korktafla (minnismiðar)
+Corbeille à papier ¦ Bréfakarfa
+Bureau assis-debout ¦ Hæðarstillanlegt skrifborð
+Rayonnage d’archives (généalogie) ¦ Skjalahillur (ættfræði)
+Circuit de train électrique ¦ Rafmagnslestarbraut
+Cubes empilés ¦ Kubbar í stafla
+Tricycle ¦ Þríhjól
+Cuisine pour enfant (dînette) ¦ Leikeldhús
+Théâtre de marionnettes (castelet) ¦ Brúðuleikhús
+Ballon ¦ Bolti
+Trottinette ¦ Hlaupahjól
+Baby-foot ¦ Fótboltaspil
+Luge en bois ¦ Sleði úr tré
+Lit de fer d’enfant ¦ Barnajárnrúm
+Lampadaire à abat-jour ¦ Gólflampi með skermi
+Luminaires ¦ Ljós
+Lampadaire arc ¦ Bogalampi
+Lampadaire trépied ¦ Þrífótarlampi
+Lampe de salon (pied boule) ¦ Borðlampi (kúlufótur)
+Lampe de banquier (verte) ¦ Bankamannslampi (grænn)
+Lampe d’architecte ¦ Arkitektalampi
+Suspension de cuisine ¦ Eldhúsljós
+Suspension à trois globes ¦ Hangandi ljós með þremur kúlum
+Lustre à pampilles ¦ Kristalsljósakróna
+Suspension boule en papier ¦ Pappírskúluljós
+Applique murale ¦ Veggljós
+Rail de spots ¦ Kastarabraut
+Lanterne ¦ Lukt
+Bougies (groupe) ¦ Kerti (hópur)
+Guirlande lumineuse ¦ Ljósasería
+Lampe Tiffany (vitrail) ¦ Tiffany-lampi (steint gler)
+Lampe à lave ¦ Hraunlampi
+Lampe champignon ¦ Sveppalampi
+Réverbère (lampadaire de jardin) ¦ Götuljós (garðljós)
+Lampe Pigeon ¦ Pigeon-lampi
+Mur de cadres photo ¦ Myndaveggur
+Cadre photo à poser ¦ Standandi myndarammi
+Tableau : paysage ¦ Málverk: landslag
+Tableau : marine ¦ Málverk: sjávarmynd
+Tableau abstrait ¦ Abstraktmálverk
+Tableau : nature morte ¦ Málverk: kyrralífsmynd
+Carte ancienne encadrée ¦ Innrammað gamalt kort
+Papillons encadrés ¦ Innrömmuð fiðrildi
+Miroir rond ¦ Kringlóttur spegill
+Miroir soleil ¦ Sólarspegill
+Grand miroir doré (trumeau) ¦ Stór gylltur spegill (trumeau)
+Tapis persan ¦ Persneskt teppi
+Tapis berbère ¦ Berbateppi
+Tapis kilim ¦ Kilim-teppi
+Tapis de couloir ¦ Gangmotta
+Tapis à poils longs ¦ Loðið teppi
+Rideaux sur tringle ¦ Gluggatjöld á stöng
+Ficus en pot ¦ Fíkus í potti
+Monstera (grandes feuilles) ¦ Monstera (stór blöð)
+Cactus en pot ¦ Kaktus í potti
+Palmier d’intérieur (kentia) ¦ Innipálmi (kentia)
+Bambou en bac ¦ Bambus í keri
+Orchidée ¦ Brönugras
+Fougère en pot ¦ Burkni í potti
+Grand vase de sol (branches) ¦ Stór gólfvasi (greinar)
+Horloge murale ¦ Veggklukka
+Horloge à coucou ¦ Gaukklukka
+Horloge œil-de-bœuf ¦ Nautsaugaklukka
+Sculpture moderne sur socle ¦ Nútímaleg höggmynd á stalli
+Maquette de voilier ¦ Líkan af seglskipi
+Coupe, trophée ¦ Bikar, verðlaunagripur
+Bocal à poisson rouge ¦ Gullfiskaskál
+Réfrigérateur rétro (années 50) ¦ Gamaldags ísskápur (sjötti áratugurinn)
+Électroménager ¦ Heimilistæki
+Réfrigérateur combiné moderne ¦ Nútímalegur ísskápur með frysti
+Congélateur armoire ¦ Frystiskápur
+Cave à vin réfrigérée ¦ Vínkælir
+Grille-pain ¦ Brauðrist
+Bouilloire ¦ Hraðsuðuketill
+Machine à café expresso ¦ Espressóvél
+Robot pâtissier ¦ Hrærivél
+Téléviseur des années 60 (à pieds) ¦ Sjónvarp frá sjöunda áratugnum (á fótum)
+Chaîne hi-fi et enceintes ¦ Hljómtæki og hátalarar
+Enceinte colonne ¦ Gólfhátalari
+Platine vinyle ¦ Plötuspilari
+Radiocassette (années 80) ¦ Útvarp með kassettutæki (níundi áratugurinn)
+Console de jeux et manettes ¦ Leikjatölva og fjarstýringar
+Ventilateur sur pied ¦ Standvifta
+Radiateur bain d’huile ¦ Olíufylltur ofn
+Poêle à pétrole ¦ Steinolíuofn
+Aspirateur robot ¦ Vélmennaryksuga
+Climatiseur mural ¦ Loftkæling á vegg
+Guitare sur son support ¦ Gítar á standi
+Musique ¦ Tónlist
+Guitare électrique et ampli ¦ Rafgítar og magnari
+Violon sur son support ¦ Fiðla á standi
+Violoncelle ¦ Selló
+Contrebasse ¦ Kontrabassi
+Harpe ¦ Harpa
+Batterie ¦ Trommusett
+Clavier électronique sur pied ¦ Hljómborð á standi
+Pupitre à musique ¦ Nótnastandur
+Tuba ¦ Túba
+Djembé ¦ Djembe-tromma
+Clavecin ¦ Semball
+Vielle à roue ¦ Snerilgígja
+Juke-box ¦ Glymskratti
+Orgue de Barbarie ¦ Lírukassi
+Moto ¦ Mótorhjól
+Garage ¦ Bílskúr
+Mobylette (cyclomoteur) ¦ Skellinaðra
+Servante d’atelier ¦ Verkfæravagn
+Établi et panneau à outils ¦ Vinnubekkur og verkfæratafla
+Rayonnage métallique et caisses ¦ Málmhillur og kassar
+Perceuse à colonne ¦ Súluborvél
+Scie sur table ¦ Borðsög
+Jerrican ¦ Bensínbrúsi
+Pile de pneus ¦ Dekkjastafli
+Escabeau ¦ Tröppur
+Remorque ¦ Kerra
+Kayak ¦ Kajak
+Table de ping-pong ¦ Borðtennisborð
+Tondeuse à gazon ¦ Sláttuvél
+Tracteur tondeuse ¦ Sláttutraktor
+Trampoline ¦ Trampólín
+Piscine hors-sol ¦ Laug ofanjarðar
+Piscine creusée ¦ Niðurgrafin sundlaug
+Spa (jacuzzi) ¦ Heitur pottur (nuddpottur)
+Hamac sur support ¦ Hengirúm á grind
+Balancelle de jardin ¦ Garðróla
+Kiosque, gloriette ¦ Garðskáli
+Salon de jardin bistrot ¦ Kaffihúsagarðsett
+Barbecue boule ¦ Kúlugrill
+Brasero ¦ Eldstæði
+Bac à sable ¦ Sandkassi
+Nichoir sur poteau ¦ Fuglahús á staur
+Composteur ¦ Moltukassi
+Récupérateur d’eau de pluie ¦ Regnvatnstunna
+Nain de jardin ¦ Garðdvergur
+Cadran solaire ¦ Sólúr
+Pots de fleurs ¦ Blómapottar
+Olivier en pot ¦ Ólífutré í potti
+Carré potager surélevé ¦ Upphækkað matjurtabeð
+Dévidoir à tuyau d’arrosage ¦ Slönguhjól
+Arrosoir ¦ Garðkanna
+Étendoir parapluie ¦ Snúrustaur
+Petit pont de jardin ¦ Lítil garðbrú
+Mât et drapeau ¦ Fánastöng og fáni
+Roue de charrette (décor) ¦ Kerruhjól (skraut)
+Tarare (vanneuse à grain) ¦ Kornvinsa
+Égrenoir à maïs ¦ Maískornari
+Hache-paille ¦ Hálmsöx
+Selle sur chevalet ¦ Hnakkur á standi
+Faucheuse à cheval ¦ Hestasláttuvél
+Rouleau agricole en pierre ¦ Steinvalti
+Palanche et ses deux seaux ¦ Herðaok með tveimur fötum
+Tonneaux sur leur chantier ¦ Tunnur á grind
+Tabouret de traite et seau ¦ Mjaltakollur og fata
+Sacs de grain ¦ Kornpokar
+Éolienne de pompage (ancienne) ¦ Vindknúin dæla (gömul)
+Pigeonnier ¦ Dúfnakofi
+Épouvantail ¦ Fuglahræða
+Encoignure (meuble d’angle) ¦ Hornskápur
+Placard à portes coulissantes ¦ Skápur með rennihurðum
+Étagère à chaussures ¦ Skóhilla
+Coin des icônes (« beau coin » orthodoxe) ¦ Íkonahorn („fagra hornið“ í rétttrúnaði)
+Veilleuse d’icône (lampada) ¦ Íkonaljós (lampada)
+Croix orthodoxe murale ¦ Rétttrúnaðarkross á vegg
+Croix murale sans Christ (protestante) ¦ Látlaus kross á vegg (mótmælenda)
+Grande Bible ouverte sur pupitre ¦ Stór opin biblía á lespúlti
+Image du Sacré-Cœur encadrée ¦ Innrömmuð mynd af Hjarta Jesú
+Ex-voto (plaque de remerciement) ¦ Ex-voto (þakkarskjöldur)
+Couronne de l’Avent ¦ Aðventukrans
+Crèche de Noël ¦ Jólajata
+Chapelet accroché (rosaire) ¦ Hangandi talnaband (rósakrans)
+Ménorah (chandelier à sept branches) ¦ Menóra (sjöarma ljósastjaki)
+Hanoukia (chandelier à neuf branches) ¦ Hanukkía (níuarma ljósastjaki)
+Chandeliers de shabbat (paire) ¦ Sabbatskertastjakar (par)
+Mézouza (au montant de la porte) ¦ Mesúsa (á dyrastaf)
+Étoile de David murale ¦ Davíðsstjarna á vegg
+Mizrah (plaque tournée vers Jérusalem) ¦ Mizrah (skjöldur sem snýr að Jerúsalem)
+Armoire de la Torah (aron, avec son rideau) ¦ Torah-skápur (aron, með tjaldi)
+Pupitre de lecture (bimah) ¦ Lespúlt (bimah)
+Coupe de kiddouch et plateau ¦ Kiddush-bikar og bakki
+Plat du séder (Pessah) ¦ Seder-diskur (páskar gyðinga)
+Châle de prière (talit) sur son cintre ¦ Bænasjal (tallit) á herðatré
+Tirelire de tsedaka ¦ Tzedakah-baukur
+Tapis de prière ¦ Bænamotta
+Porte-Coran pliant (rahle) ¦ Samanbrjótanlegur Kóranstandur (rahle)
+Croissant et étoile muraux ¦ Hálfmáni og stjarna á vegg
+Calligraphie encadrée (Bismillah) ¦ Innrömmuð skrautskrift (Bismillah)
+Chapelet (misbaha) sur sa coupelle ¦ Bænaperlur (misbaha) í lítilli skál
+Lanterne du ramadan (fanous) ¦ Ramadan-lukt (fanous)
+Niche de prière murale (mihrab décoratif) ¦ Bænaskot á vegg (skreyttur mihrab)
+Coran sur l’étagère du haut ¦ Kóraninn á efstu hillunni
+Brûleur d’encens (mabkhara) ¦ Reykelsisbrennari (mabkhara)
+Bouddha assis ¦ Sitjandi Búdda
+Grand Bouddha de jardin ¦ Stór garð-Búdda
+Autel bouddhique (butsudan) ¦ Búddískt altari (butsudan)
+Stupa miniature (chorten) ¦ Smágerð stúpa (chorten)
+Moulin à prières ¦ Bænahjól
+Drapeaux de prière (guirlande) ¦ Bænafánar (lengja)
+Thangka (peinture sur rouleau) ¦ Thangka (rollumálverk)
+Roue du dharma murale ¦ Dharma-hjól á vegg
+Bol chantant sur coussin ¦ Söngskál á púða
+Gong sur portique ¦ Gong á grind
+Coussin de méditation (zafu et zabuton) ¦ Hugleiðslupúði (zafu og zabuton)
+Brûle-parfum et bâtons d’encens ¦ Reykelsishaldari og reykelsisstangir
+Temple de maison (mandir) ¦ Heimilishelgidómur (mandir)
+Statue de Ganesh ¦ Ganesha-stytta
+Nataraja (Shiva dansant) ¦ Nataraja (dansandi Shiva)
+Om mural ¦ Om-tákn á vegg
+Lampe à huile (diya) ¦ Olíulampi (diya)
+Pot de tulsi (basilic sacré) ¦ Tulsi-pottur (heilög basilíka)
+Rangoli (motif coloré au sol) ¦ Rangoli (litríkt gólfmynstur)
+Cloche de puja ¦ Puja-bjalla
+Guirlande de fleurs (œillets d’Inde) ¦ Blómakrans (flauelsblóm)
+Khanda mural ¦ Khanda á vegg
+Palki Sahib (dais du Guru Granth Sahib) ¦ Palki Sahib (himinn yfir Guru Granth Sahib)
+Manji Sahib (petit lit du livre saint) ¦ Manji Sahib (litla rúm helgu bókarinnar)
+Kamidana (autel shinto mural) ¦ Kamidana (shinto-altari á vegg)
+Torii de jardin ¦ Garð-torii
+Lanterne de pierre (tōrō) ¦ Steinlukt (tōrō)
+Corde sacrée (shimenawa) ¦ Helgur kaðall (shimenawa)
+Autel des ancêtres ¦ Altari forfeðranna
+Tablettes des ancêtres ¦ Minningartöflur forfeðra
+Brûle-parfum tripode (bronze) ¦ Þrífættur reykelsisbrennari (brons)
+Yin et yang mural ¦ Yin og yang á vegg
+Lanterne rouge en papier ¦ Rauð pappírslukt
+Vase à feu sacré (afrinagan) ¦ Ker fyrir helgan eld (afrinagan)
+Coin mémoire (photo, bougie, fleurs) ¦ Minningarhorn (mynd, kerti, blóm)
+Urne funéraire ¦ Duftker
+Cadre de deuil (photo et ruban noir) ¦ Sorgarrammi (mynd og svartur borði)
+Bougie du souvenir ¦ Minningarkerti
+Boîte à lettres d’amour (correspondance) ¦ Ástarbréfaskrín (bréfaskipti)
+Vitrine à médailles et souvenirs militaires ¦ Sýningarskápur með heiðursmerkjum og hernaðarminjum
+Lave-linge à hublot ¦ Framhlaðin þvottavél
+Lave-linge à ouverture par le dessus ¦ Topphlaðin þvottavél
+Lave-vaisselle compact (à poser) ¦ Lítil uppþvottavél (á borð)
+Four à micro-ondes ¦ Örbylgjuofn
+Mini-four ¦ Lítill ofn
+Four encastrable sous le plan ¦ Innbyggður ofn undir borði
+Plaque à induction ¦ Spanhelluborð
+Table de cuisson au gaz (4 feux) ¦ Gashelluborð (4 hellur)
+Plancha électrique ¦ Rafmagnspanna (plancha)
+Appareil à raclette ¦ Raclette-grill
+Hotte aspirante murale ¦ Háfur á vegg
+Hotte îlot (suspendue) ¦ Eyjuháfur (hangandi)
+Cuiseur à riz ¦ Hrísgrjónapottur
+Mijoteuse ¦ Hægeldunarpottur
+Autocuiseur (cocotte-minute) ¦ Hraðsuðupottur
+Friteuse ¦ Djúpsteikingarpottur
+Friteuse sans huile ¦ Loftsteikingarpottur
+Machine à pain ¦ Brauðvél
+Gaufrier ¦ Vöfflujárn
+Blender ¦ Blandari
+Centrifugeuse (presse-fruits) ¦ Safapressa
+Robot multifonction ¦ Matvinnsluvél
+Cafetière à filtre ¦ Uppáhellingarvél
+Machine à café à capsules ¦ Hylkjakaffivél
+Bouilloire émaillée ¦ Glerjaður ketill
+Mini-réfrigérateur ¦ Lítill ísskápur
+Téléviseur écran plat sur pied ¦ Flatskjár á fæti
+Grand téléviseur au mur ¦ Stórt sjónvarp á vegg
+Écran de projection ¦ Sýningartjald
+Vidéoprojecteur ¦ Skjávarpi
+Barre de son ¦ Hljóðstöng
+Magnétoscope (VHS) ¦ Myndbandstæki (VHS)
+Lecteur DVD / Blu-ray ¦ DVD / Blu-ray spilari
+Box internet ¦ Netbeinir
+Poste de radio TSF ¦ Útvarpstæki (gamalt)
+Transistor ¦ Smáútvarp (transistor)
+Téléphone sans fil et sa base ¦ Þráðlaus sími og hleðslustöð
+Nettoyeur vapeur (balai) ¦ Gufumoppa
+Centrale vapeur ¦ Gufustraustöð
+Déshumidificateur ¦ Rakaeyðir
+Purificateur d’air ¦ Lofthreinsitæki
+Ventilateur colonne ¦ Turnvifta
+Chauffe-eau (ballon d’eau chaude) ¦ Hitavatnskútur
+Chaudière murale ¦ Hitaketill á vegg
+Radiateur électrique mural ¦ Rafmagnsofn á vegg
+Machine à coudre électrique ¦ Rafmagnssaumavél
+Fauteuil de bureau à roulettes ¦ Skrifstofustóll á hjólum
+Siège ergonomique (dossier filet) ¦ Vinnuvistvænn stóll (netbak)
+Fauteuil de direction en cuir ¦ Leðurforstjórastóll
+Bureau informatique ¦ Tölvuborð
+Grand bureau (plateau 180 cm) ¦ Stórt skrifborð (180 cm plata)
+Table à dessin inclinable ¦ Hallanlegt teikniborð
+Caisson à tiroirs à roulettes ¦ Skúffueining á hjólum
+Classeur métallique à tiroirs ¦ Skjalaskápur úr málmi
+Armoire à rideaux ¦ Skápur með rúllurennihurð
+Meuble à plans ¦ Teikningaskápur
+Fichier à fiches en bois ¦ Spjaldskrá úr tré
+Étagère de classeurs ¦ Möppuhilla
+Imprimante ¦ Prentari
+Imprimante multifonction (scanner) ¦ Fjölnotaprentari (skanni)
+Photocopieur ¦ Ljósritunarvél
+Scanner à plat ¦ Flatskanni
+Écran d’ordinateur ¦ Tölvuskjár
+Deux écrans côte à côte ¦ Tveir skjáir hlið við hlið
+Ordinateur tout-en-un ¦ Allt-í-einu tölva
+Globe sur pied ¦ Hnattlíkan á fæti
+Tableau blanc ¦ Tússtafla
+Destructeur de documents ¦ Pappírstætari
+Trieur à courrier ¦ Bréfabakki
+Plante de bureau ¦ Skrifstofuplanta
+Lampe de bureau LED ¦ LED-skrifborðslampi
+Repose-pieds de bureau ¦ Fótskemill við skrifborð
+Fontaine à eau ¦ Vatnsvél
+Voiture citadine ¦ Smábíll
+Voiture familiale (break) ¦ Skutbíll
+Camionnette ¦ Sendibíll
+2 CV ¦ 2 CV
+Renault 4 L ¦ Renault 4 L
+Traction avant ¦ Traction avant
+Caravane ¦ Hjólhýsi
+Vélo ¦ Reiðhjól
+Vélo électrique ¦ Rafhjól
+Vélo d’enfant ¦ Barnahjól
+Vélo ancien (de facteur) ¦ Gamalt reiðhjól (póstburðar)
+Râtelier à vélos ¦ Hjólagrind
+Scooter ¦ Vespa
+Panneau à outils mural ¦ Verkfæratafla á vegg
+Armoire métallique d’atelier ¦ Verkstæðisskápur úr málmi
+Étagère de garage en bois ¦ Bílskúrshillur úr tré
+Établi pliant ¦ Samanbrjótanlegur vinnubekkur
+Scie à onglet ¦ Geirungssög
+Poste à souder ¦ Suðuvél
+Nettoyeur haute pression ¦ Háþrýstidæla
+Groupe électrogène ¦ Rafstöð
+Aspirateur d’atelier ¦ Verkstæðisryksuga
+Cric rouleur ¦ Hjólatjakkur
+Borne de recharge (voiture électrique) ¦ Hleðslustöð (rafbíll)
+Échelle d’appui ¦ Hallastigi
+Réfrigérateur de garage ¦ Bílskúrsísskápur
+Congélateur coffre de garage ¦ Frystikista í bílskúr
+Poubelles de tri (conteneurs) ¦ Flokkunartunnur
+Canoë ¦ Kanó
+Planche de surf ¦ Brimbretti
+Réglette d’atelier ¦ Verkstæðisljós
+Plafonnier rond ¦ Kringlótt loftljós
+Plafonnier Art déco ¦ Art deco loftljós
+Dalle LED ¦ LED-panill
+Lustre à bras ¦ Ljósakróna með örmum
+Lustre en fer forgé (à bougies) ¦ Ljósakróna úr smíðajárni (með kertum)
+Lustre roue de charrette ¦ Kerruhjólsljósakróna
+Réglette lumineuse ¦ Ljósalisti
+Néon décoratif (enseigne) ¦ Skrautneon (skilti)
+Bandeau LED ¦ LED-borði
+Lampadaire vasque (halogène) ¦ Uppljós (halógen)
+Lampadaire vasque Art déco ¦ Art deco uppljós
+Lampadaire liseuse ¦ Leslampi á gólfi
+Lampe à abat-jour plissé ¦ Lampi með plíseruðum skermi
+Lampe globe en opaline ¦ Ópalkúlulampi
+Lampe de sel ¦ Saltlampi
+Veilleuse d’enfant ¦ Næturljós fyrir börn
+Lampe de lecture articulée ¦ Liðskiptur leslampi
+Lampe à carbure (de mineur) ¦ Karbíðlampi (námamanns)
+Bougeoir à main ¦ Handkertastjaki
+Applique double ¦ Tvöfalt veggljós
+Applique de salle de bain ¦ Baðherbergisveggljós
+Suspension industrielle ¦ Iðnaðarloftljós
+Ampoule nue (filament) ¦ Ber pera (glóþráður)
+Suspension en rotin ¦ Rottan-loftljós
+Boule à facettes ¦ Diskókúla
+Projecteur extérieur ¦ Útiflóðljós
+Borne lumineuse de jardin ¦ Garðpollaljós
+Balise solaire de jardin ¦ Sólarljós í garð
+maison|Genre ¦ Tegund
+maison|Avant ¦ Framhlið
+maison|Poser ¦ Setja
+maison|Angles ¦ Horn
+maison|Écurie ¦ Hesthús
+maison|Croix ¦ Kross
+couleur|aucune ¦ enginn

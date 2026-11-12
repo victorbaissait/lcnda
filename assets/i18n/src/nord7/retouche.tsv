@@ -1,0 +1,1565 @@
+fr ¦ is
+Espace de travail « {name} » appliqué. ¦ Vinnusvæðið „{name}“ sett á.
+Réglages « {name} » importés : « Appliquer » pour les utiliser. ¦ Stillingarnar „{name}“ fluttar inn: „Nota“ til að nota þær.
+{layer} (avant / après) ¦ {layer} (fyrir / eftir)
+Avant / après — {name} ¦ Fyrir / eftir — {name}
+Modèle des visages : {what} ¦ Andlitslíkan: {what}
+Portrait de {name} (photo d’identité) ¦ Andlitsmynd af {name} (passamynd)
+Portrait (photo d’identité) ¦ Andlitsmynd (passamynd)
+Fiche {num} ¦ Spjald {num}
+⚠️ visage non trouvé sur « {name} » : cadrage au centre, à vérifier (ou identifie le visage dans la visionneuse) ¦ ⚠️ ekkert andlit fannst á „{name}“: miðjuð afmörkun, þarf að athuga (eða auðkenndu andlitið í skoðaranum)
+={n} portraits prêts : décoche ceux qui ne vont pas, puis « Utiliser comme portraits ». ¦ {n} andlitsmynd tilbúin: taktu hakið af ef hún passar ekki, síðan „Nota sem andlitsmyndir“.|{n} andlitsmyndir tilbúnar: taktu hakið af þeim sem passa ekki, síðan „Nota sem andlitsmyndir“.
+={n} portrait prêt : décoche ceux qui ne vont pas, puis « Utiliser comme portraits ». ¦ {n} andlitsmynd tilbúin: taktu hakið af ef hún passar ekki, síðan „Nota sem andlitsmyndir“.|{n} andlitsmyndir tilbúnar: taktu hakið af þeim sem passa ekki, síðan „Nota sem andlitsmyndir“.
+Aucun visage trouvé tout seul. ¦ Ekkert andlit fannst sjálfkrafa.
+={n} autres sont cadrés au centre : coche-les seulement s’ils vont. ¦ {n} önnur er miðjuð: hakaðu aðeins við hana ef hún passar.|{n} aðrar eru miðjaðar: hakaðu aðeins við þær ef þær passa.
+={n} autre est cadré au centre : coche-le seulement s’il va. ¦ {n} önnur er miðjuð: hakaðu aðeins við hana ef hún passar.|{n} aðrar eru miðjaðar: hakaðu aðeins við þær ef þær passa.
+Calque {num} ¦ Lag {num}
+Groupe {num} ¦ Hópur {num}
+calque|Réglages ¦ Stillingar
+Masque d’écrêtage : ne touche que « {name} » juste dessous (⌥ Alt + clic entre deux calques dans Photoshop) ¦ Klippigríma: hefur aðeins áhrif á „{name}“ rétt fyrir neðan (⌥ Alt + smellur milli tveggja laga í Photoshop)
+Masque d’écrêtage : ne touche que l’élément juste dessous (⌥ Alt + clic entre deux calques dans Photoshop) ¦ Klippigríma: hefur aðeins áhrif á atriðið rétt fyrir neðan (⌥ Alt + smellur milli tveggja laga í Photoshop)
+seulement sur « {name} » ¦ aðeins á „{name}“
+seulement sur ce qui est juste dessous ¦ aðeins á það sem er rétt fyrir neðan
+touche tout ce qui est dessous dans « {name} » ¦ hefur áhrif á allt fyrir neðan í „{name}“
+réglages, {n} corrections ¦ stillingar, {n} leiðréttingar
+réglages, {n} correction ¦ stillingar, {n} leiðrétting
+« {name} » mis dans un groupe ¦ „{name}“ sett í hóp
+{layer} montré ¦ {layer} sýnt
+{layer} masqué ¦ {layer} falið
+Masque qui cache la sélection ajouté à {name} ¦ Gríma sem felur valið bætt við {name}
+Masque qui cache tout ajouté à {name} ¦ Gríma sem felur allt bætt við {name}
+Masque ajouté à {name} ¦ Grímu bætt við {name}
+Masque de {name} désactivé ¦ Gríma {name} óvirk
+Masque de {name} réactivé ¦ Gríma {name} virk aftur
+Masque de {name} inversé ¦ Gríma {name} viðsnúin
+Masque de {name} retiré ¦ Gríma {name} fjarlægð
+« {name} » à sa taille d’origine ¦ „{name}“ í upprunalegri stærð
+✨ Filtre sur « {name} » ¦ ✨ Sía á „{name}“
+« {name} » pixellisé ¦ „{name}“ rastað
+« {name} » pixellisé : figé à sa taille actuelle (l’agrandir le rendra flou) ¦ „{name}“ rastað: fast í núverandi stærð (stækkun gerir það óskýrt)
+Groupe « {name} » supprimé (son contenu reste) ¦ Hópnum „{name}“ eytt (innihaldið verður eftir)
+{layer} supprimé ¦ {layer} eytt
+« {name} » retiré des calques ¦ „{name}“ fjarlægt úr lögunum
+Calque « {name} » supprimé avec ce qui est dessus ¦ Laginu „{name}“ eytt með því sem er á því
+{layer} dupliquée ¦ {layer} tvöfölduð
+{layer} dupliqué ¦ {layer} tvöfaldað
+{layer} vidé ¦ {layer} tæmt
+{layer} déplacé ¦ {layer} fært
+Opacité de {name} : {n} % ¦ Ógegnsæi {name}: {n} %
+Fond de {name} : {n} % ¦ Fylling {name}: {n} %
+Renommé « {name} » ¦ Endurnefnt „{name}“
+Fusion de {name} : {what} ¦ Blöndunarhamur {name}: {what}
+« {name} » rangé dans « {group} » ¦ „{name}“ sett í „{group}“
+« {name} » sorti du groupe ¦ „{name}“ tekið úr hópnum
+« {name} » rangé tout en bas ¦ „{name}“ sett neðst
+« {name} » rangé au-dessus de « {other} » ¦ „{name}“ sett fyrir ofan „{other}“
+« {name} » rangé sous « {other} » ¦ „{name}“ sett fyrir neðan „{other}“
+🎚 Calque de réglage {name} ¦ 🎚 Stillingarlag {name}
+🖼 Réglages de <b>la photo</b> ¦ 🖼 Stillingar <b>myndarinnar</b>
+Sur le masque, le pinceau ⬜ montre (fait revenir ce qui était caché) — X pour changer ¦ Á grímunni sýnir pensillinn ⬜ (kallar fram það sem var falið) — X til að skipta
+Sur le masque, le pinceau ⬛ cache — X pour changer ¦ Á grímunni felur pensillinn ⬛ — X til að skipta
+Texte choisi : « {text} » ¦ Valinn texti: „{text}“
+Glyphe {what} ajouté ¦ Táknmynd {what} bætt við
+« {what} » copié : colle-le dans un texte (⌘V). ¦ „{what}“ afritað: límdu það í texta (⌘V).
+calque « {name} » (seulement l’élément dessous) ¦ lag „{name}“ (aðeins atriðið fyrir neðan)
+calque « {name} » ¦ lag „{name}“
+Gamme : {a}° / {b}° — {c}° \ {d}° (glisse les repères) ¦ Svið: {a}° / {b}° — {c}° \ {d}° (dragðu merkin)
+Propriétés de « {name} » ¦ Eiginleikar „{name}“
+🎨 Teinte/Saturation sur « {name} » ¦ 🎨 Litblær/Mettun á „{name}“
+Motif « {what} » : calque « {name} » ¦ Mynstur „{what}“: lag „{name}“
+Motif de « {name} » ¦ Mynstur „{name}“
+Motif « {what} » sur « {name} » ¦ Mynstur „{what}“ á „{name}“
+Motif « {what} » retiré de la bibliothèque (les calques qui l’utilisent le gardent) ¦ Mynstrið „{what}“ fjarlægt úr safninu (lög sem nota það halda því)
+le calque « {name} » ¦ lagið „{name}“
+🖌 {name} : peins sur un calque. ¦ 🖌 {name}: málaðu á lag.
+Dégradé : {what} ¦ Litstigull: {what}
+Dégradé {num} ¦ Litstigull {num}
+Calque « {name} » ¦ Lag „{name}“
+« {name} » · son masque (noir = caché, blanc = montré) : tout se voit tout de suite ¦ „{name}“ · gríma þess (svart = falið, hvítt = sýnt): þú sérð allt strax
+« {name} » : tout se voit tout de suite ¦ „{name}“: þú sérð allt strax
+le prochain dégradé que tu traceras ¦ næsti litstigull sem þú dregur
+Préréglage « {name} » gardé : il reste dans cette liste. ¦ Forstillingin „{name}“ geymd: hún helst í þessum lista.
+Dégradé modifié sur « {name} » ¦ Litstigli breytt á „{name}“
+Texte « {text} » ¦ Texti „{text}“
+Objet dynamique « {name} » : image remplacée ¦ Snjallhlutur „{name}“: mynd skipt út
+Image placée : « {name} » ¦ Mynd sett inn: „{name}“
+Image placée, mais pas rangée dans les médias : {err} ¦ Mynd sett inn, en ekki vistuð í miðlum: {err}
+Élément supprimé de « {name} » ¦ Atriði eytt úr „{name}“
+Image tournée sur « {name} » ¦ Mynd snúið á „{name}“
+Image agrandie / réduite sur « {name} » ¦ Mynd stækkuð / minnkuð á „{name}“
+Dégradé ajusté (masque) sur « {name} » ¦ Litstigull lagaður (gríma) á „{name}“
+Dégradé ajusté sur « {name} » ¦ Litstigull lagaður á „{name}“
+Élément déplacé sur « {name} » ¦ Atriði fært á „{name}“
+Masque en dégradé sur « {name} » ¦ Litstigulsgríma á „{name}“
+Dégradé {what} : « {name} » ¦ Litstigull {what}: „{name}“
+{what} sur « {name} » ¦ {what} á „{name}“
+Masque : caché au pinceau ¦ Gríma: falið með pensli
+Masque : montré au pinceau ¦ Gríma: sýnt með pensli
+Pli réparé ({n} touches) (calque ✨ Retouches) ¦ Brot lagfært ({n} strokur) (lagið ✨ Lagfæringar)
+Pli réparé (calque ✨ Retouches) ¦ Brot lagfært (lagið ✨ Lagfæringar)
+Recadrage enlevé ¦ Skurður fjarlægður
+Recadrage et redressement ({a}°) ¦ Skurður og rétting ({a}°)
+Recadrage ¦ Skurður
+Filtre « {what} » (refait) ¦ Sía „{what}“ (endurtekin)
+« {what} » refait sur un nouveau calque. ¦ „{what}“ endurtekið á nýju lagi.
+limité à la sélection ¦ takmarkað við valið
+Filtre « {what} » ¦ Sía „{what}“
+Filtre « {what} » ajouté au calque ¦ Síu „{what}“ bætt við lagið
+Filtre « {what} » réglé ¦ Sía „{what}“ stillt
+Action « {name} » ¦ Aðgerð „{name}“
+Action du {date} ¦ Aðgerð frá {date}
+Action « {name} » enregistrée. ¦ Aðgerðin „{name}“ vistuð.
+Action « {name} » importée : « Sur cette photo » ou « Sur plusieurs photos… ». ¦ Aðgerðin „{name}“ flutt inn: „Á þessa mynd“ eða „Á nokkrar myndir…“.
+Action « {name} » supprimée ¦ Aðgerðinni „{name}“ eytt
+« {name} » sur plusieurs photos ¦ „{name}“ á nokkrar myndir
+Terminé : {n} photos sur {total}, nouvelle version affichée. ¦ Lokið: {n} myndir af {total}, ný útgáfa sýnd.
+Terminé : {n} photo sur {total}, nouvelle version affichée. ¦ Lokið: {n} mynd af {total}, ný útgáfa sýnd.
+Terminé : {n} photos sur {total}. ¦ Lokið: {n} myndir af {total}.
+Terminé : {n} photo sur {total}. ¦ Lokið: {n} mynd af {total}.
+{layer} (retouchée) ¦ {layer} (lagfærð)
+« {name} » · comme le style de calque de Photoshop ¦ „{name}“ · eins og lagastíll Photoshop
+Effets de {layer} enlevés ¦ Áhrif {layer} fjarlægð
+Effets de {layer} ¦ Áhrif {layer}
+Les lignes fines, claires ou sombres, sont repérées en rouge (dans la sélection). Vérifie, puis « Réparer ces lignes ». ¦ Fínar línur, ljósar eða dökkar, eru merktar með rauðu (í valinu). Athugaðu, síðan „Lagfæra þessar línur“.
+Les lignes fines, claires ou sombres, sont repérées en rouge. Vérifie, puis « Réparer ces lignes ». ¦ Fínar línur, ljósar eða dökkar, eru merktar með rauðu. Athugaðu, síðan „Lagfæra þessar línur“.
+{what} (en rouge sur la photo). ¦ {what} (rautt á myndinni).
+Plis réparés ({what}) ¦ Brot lagfærð ({what})
+{what} : compare avec 👁 ou ◧ ; ↶ pour revenir. ¦ {what}: berðu saman með 👁 eða ◧; ↶ til að fara til baka.
+={n} lignes repérées puis comblées ¦ {n} lína fundin og fyllt|{n} línur fundnar og fylltar
+={n} ligne repérée puis comblée ¦ {n} lína fundin og fyllt|{n} línur fundnar og fylltar
+=pli|{n} lignes ¦ {n} lína|{n} línur
+=pli|{n} ligne ¦ {n} lína|{n} línur
+=retouche|{n} étapes ¦ {n} skref|{n} skref
+=retouche|{n} étape ¦ {n} skref|{n} skref
+=ligne repérée ¦ lína fundin|línur fundnar
+=ligne réparée ¦ lína lagfærð|línur lagfærðar
+=calque de réglage ¦ stillingarlag|stillingarlög
+=portrait mis à jour ¦ andlitsmynd uppfærð|andlitsmyndir uppfærðar
+✨ Restauration en une fois ({what}) ¦ ✨ Endurgerð í einu ({what})
+Restauration faite ({what}) : chaque étape est un calque « ✨ » (Calques) que tu peux cacher ou doser ; ↶ défait tout. ¦ Endurgerð lokið ({what}): hvert skref er lag „✨“ (Lög) sem þú getur falið eða dregið úr; ↶ afturkallar allt.
+Portrait de la fiche « {name} » mis à jour (la photo recadrée est dans ses médias). ¦ Andlitsmynd spjaldsins „{name}“ uppfærð (skorna myndin er í miðlum þess).
+Portrait de la fiche mis à jour (la photo recadrée est dans ses médias). ¦ Andlitsmynd spjaldsins uppfærð (skorna myndin er í miðlum þess).
+{w} × {h} px (recadrée) ¦ {w} × {h} px (skorin)
+Horizon redressé ({a}°) ¦ Sjóndeildarhringur réttur ({a}°)
+Redressée de {a}° : ajuste le cadre puis « ✓ Valider ». ¦ Rétt um {a}°: lagaðu rammann, síðan „✓ Staðfesta“.
+Photo redressée de {a}° (et recadrée pour ne pas voir les coins). ⌗ Recadrer pour ajuster. ¦ Mynd rétt um {a}° (og skorin svo hornin sjáist ekki). ⌗ Skera til að laga.
+Redressée automatiquement ({a}°) ¦ Rétt sjálfkrafa ({a}°)
+Reflets retirés sur un calque à part (seulement dans la sélection : fais d’abord une sélection de la vitre pour limiter) : règle la force et la taille, l’opacité dose, 🎭 limite, 👁 cache. La photo n’est pas touchée. ¦ Speglun fjarlægð á sérstöku lagi (aðeins í valinu: veldu fyrst glerið til að takmarka): stilltu styrk og stærð; ógegnsæi dregur úr, 🎭 takmarkar, 👁 felur. Myndin er ósnert.
+Reflets retirés sur un calque à part : règle la force et la taille, l’opacité dose, 🎭 limite, 👁 cache. La photo n’est pas touchée. ¦ Speglun fjarlægð á sérstöku lagi: stilltu styrk og stærð; ógegnsæi dregur úr, 🎭 takmarkar, 👁 felur. Myndin er ósnert.
+Colorisation dans un calque de réglage (limitée à la sélection) : choisis les couleurs et la force ; 🎭 pour la limiter, 👁 pour la cacher. La photo n’est pas touchée. ¦ Litun í stillingarlagi (takmörkuð við valið): veldu litina og styrkinn; 🎭 til að takmarka hana, 👁 til að fela hana. Myndin er ósnert.
+Colorisation dans un calque de réglage : choisis les couleurs et la force ; 🎭 pour la limiter, 👁 pour la cacher. La photo n’est pas touchée. ¦ Litun í stillingarlagi: veldu litina og styrkinn; 🎭 til að takmarka hana, 👁 til að fela hana. Myndin er ósnert.
+={n} taches enlevées, sur le calque « {layer} » (la photo n’est pas touchée) : cache-le ou baisse-le pour comparer ; ↶ si c’est trop. ¦ {n} blettur fjarlægður, á laginu „{layer}“ (myndin er ósnert): feldu það eða minnkaðu til að bera saman; ↶ ef það er of mikið.|{n} blettir fjarlægðir, á laginu „{layer}“ (myndin er ósnert): feldu það eða minnkaðu til að bera saman; ↶ ef það er of mikið.
+={n} tache enlevée, sur le calque « {layer} » (la photo n’est pas touchée) : cache-le ou baisse-le pour comparer ; ↶ si c’est trop. ¦ {n} blettur fjarlægður, á laginu „{layer}“ (myndin er ósnert): feldu það eða minnkaðu til að bera saman; ↶ ef það er of mikið.|{n} blettir fjarlægðir, á laginu „{layer}“ (myndin er ósnert): feldu það eða minnkaðu til að bera saman; ↶ ef það er of mikið.
+✨ Taches enlevées ¦ ✨ Blettir fjarlægðir
+Taches enlevées automatiquement ({n}) ¦ Blettir fjarlægðir sjálfkrafa ({n})
+Sélection remplie ({what}) ¦ Val fyllt ({what})
+Sélection effacée sur « {name} » ¦ Val hreinsað á „{name}“
+Masque d’après la sélection ({name}) ¦ Gríma út frá valinu ({name})
+Préréglage « {name} » retiré ¦ Forstillingin „{name}“ fjarlægð
+Préréglage « {name} » ¦ Forstilling „{name}“
+Projet « {name} » (📂 Fichier → Ouvrir un projet pour le retrouver) ¦ Verkefni „{name}“ (📂 Skrá → Opna verkefni til að finna það aftur)
+Versions de la photo ({n}) ¦ Útgáfur myndarinnar ({n})
+{w} × {h} cm à {dpi} ppp ¦ {w} × {h} cm við {dpi} pát
+≈ {size} Mo en mémoire ¦ ≈ {size} MB í minni
+Taille de l’image : {w} × {h} px ¦ Stærð myndar: {w} × {h} px
+Zone de travail : {w} × {h} px ¦ Vinnusvæði: {w} × {h} px
+Zone de travail de départ ¦ Upphaflegt vinnusvæði
+Cette image est très grande ({n} millions de points) : l’enregistrement peut être long, voire échouer. ¦ Þessi mynd er mjög stór ({n} milljónir punkta): vistun getur tekið langan tíma, eða jafnvel mistekist.
+Enregistrer quand même ? ¦ Vista samt?
+Projet « {name} » rouvert ¦ Verkefnið „{name}“ opnað aftur
+Projet en partie illisible : {err} ¦ Verkefnið að hluta ólæsilegt: {err}
+photo de départ introuvable ¦ upphafsmynd finnst ekki
+Supprimer le projet « {name} » ? ¦ Eyða verkefninu „{name}“?
+Quitter le plein écran ¦ Hætta í fullum skjá
+Plus de place pour enregistrer : supprime un espace de travail. ¦ Ekki meira pláss til að vista: eyddu vinnusvæði.
+Ranger, montrer ou cacher les boutons et les options ¦ Raða, sýna eða fela hnappa og valkosti
+⚙️ Boutons et options ¦ ⚙️ Hnappar og valkostir
+Coche ce qu’on montre, range avec ↑ ↓ (ou en glissant ⠿). Gardé pour la prochaine fois. Comme les espaces de travail de Photoshop : enregistre une disposition sous un nom (« Restauration », « Montage rapide »…) et passe de l’une à l’autre. ¦ Hakaðu við það sem á að sýna, raðaðu með ↑ ↓ (eða með því að draga ⠿). Geymt til næsta skiptis. Eins og vinnusvæði Photoshop: vistaðu uppröðun undir nafni („Endurgerð“, „Fljótleg vinnsla“…) og skiptu á milli.
+les boutons montrés, cachés et rangés ¦ hnapparnir sem eru sýndir, faldir og raðaðir
+Boutons remis comme au départ (rouvre la fenêtre pour retrouver l’ordre de départ). ¦ Hnappar upphafsstilltir (opnaðu gluggann aftur til að sjá upphaflegu röðina).
+Boutons rangés. ¦ Hnöppum raðað.
+Hautes lumières ¦ Ljósustu tónar
+Vibrance (couleurs ternes d’abord) ¦ Lífleiki (daufir litir fyrst)
+Teinte (tourner les couleurs) ¦ Litblær (snúa litunum)
+Noir d’entrée ¦ Svart inntaks
+Blanc d’entrée ¦ Hvítt inntaks
+Tons moyens (gamma ×100) ¦ Miðtónar (gamma ×100)
+Noir de sortie ¦ Svart úttaks
+Blanc de sortie ¦ Hvítt úttaks
+Naturelle : ciel, verdure, peau, habits (conseillé) ¦ Náttúruleg: himinn, gróður, húð, föt (ráðlagt)
+Sépia chaud ¦ Hlý sepia
+Autochrome (couleurs d’autrefois) ¦ Autochrome (litir fyrri tíma)
+Portrait (peau rosée) ¦ Andlitsmynd (rjóð húð)
+Paysage : ciel en haut, terre en bas ¦ Landslag: himinn efst, land neðst
+Saturation augmentée ¦ Aukin mettun
+Saturation plus forte ¦ Sterkari mettun
+Rouges plus saturés ¦ Mettaðri rauðir
+Jaune intensifié ¦ Sterkari gulur
+Ciel plus bleu ¦ Blárri himinn
+Peau plus douce ¦ Mýkri húð
+Désaturer ¦ Afmetta
+Verts d’automne ¦ Haustgrænir
+Reflets en moins (vitre, verre, vernis) ¦ Minni speglun (rúða, gler, lakk)
+Taille des reflets (0 = moyenne) ¦ Stærð speglunar (0 = miðlungs)
+Poussière et rayures (automatique) ¦ Ryk og rispur (sjálfvirkt)
+Réduire le bruit ¦ Draga úr suði
+Netteté ¦ Skerpa
+Clarté (contraste local) ¦ Skýrleiki (staðbundin birtuskil)
+Flou de surface (garde les contours) ¦ Yfirborðsmýking (heldur útlínum)
+Décentrement (maquette, tilt-shift) ¦ Halla-hliðrun (líkan, tilt-shift)
+Largeur de la bande ¦ Breidd bandsins
+Flou de l’objectif (bokeh) ¦ Linsumýking (bokeh)
+Ajouter du bruit ¦ Bæta við suði
+Poussière et rayures ¦ Ryk og rispur
+Passe-haut (pour accentuer en Incrustation) ¦ Hápassi (til að skerpa í Yfirlögn)
+Esthétiques ¦ Stílbrögð
+Garder les couleurs (0 / 1) ¦ Halda litunum (0 / 1)
+Tracé des contours ¦ Útlínuteikning
+Contours lumineux (néon) ¦ Glóandi útlínur (neon)
+Postérisation ¦ Tónþrep
+Seuil (noir et blanc pur) ¦ Þröskuldur (hreint svart og hvítt)
+Vers la droite (1) / gauche (0) ¦ Til hægri (1) / vinstri (0)
+Peinture à l’huile ¦ Olíumálverk
+Taille de la touche ¦ Stærð pensilstroku
+Taille des taches ¦ Stærð bletta
+Dessin au crayon ¦ Blýantsteikning
+En couleur (0 / 1) ¦ Í lit (0 / 1)
+Taille des carreaux ¦ Stærð flísa
+Demi-teinte (points d’imprimerie) ¦ Hálftónn (prentpunktar)
+Taille des cristaux ¦ Stærð kristalla
+Éclairage (projecteur) ¦ Lýsing (kastljós)
+Lumière X ¦ Ljós X
+Lumière Y ¦ Ljós Y
+Lumière ambiante ¦ Umhverfisljós
+Halo de lumière (flare) ¦ Linsuglampi (flare)
+À partir de (luminosité) ¦ Frá (birta)
+Déformation ¦ Aflögun
+Pincement / sphérisation ¦ Klípa / kúlun
+Force (− sphère, + pincement) ¦ Styrkur (− kúla, + klípa)
+Longueur d’onde ¦ Bylgjulengd
+Ondulation (ronds dans l’eau) ¦ Gárur (hringir í vatni)
+Écart des ronds ¦ Bil milli hringja
+Coordonnées polaires ¦ Pólhnit
+Rectangle → polaire (0) / l’inverse (1) ¦ Rétthyrnt → pól (0) / öfugt (1)
+Minimum (assombrit, épaissit le sombre) ¦ Lágmark (dekkir, þykkir það dökka)
+Maximum (éclaircit, épaissit le clair) ¦ Hámark (lýsir, þykkir það ljósa)
+Décalage (avec retour de l’autre côté) ¦ Hliðrun (kemur aftur hinum megin)
+Enlever les reflets (vitre) ¦ Fjarlægja speglun (rúða)
+Reflets en moins ¦ Minni speglun
+Vieille photo ravivée ¦ Gömul mynd lífguð við
+Négatif → positif ¦ Negatíf → pósitíf
+🖌 Forme du panneau Formes ¦ 🖌 Form úr Form-spjaldinu
+Avec empattement ¦ Með þverendum
+Sans empattement ¦ Án þverenda
+Manuscrite ¦ Handskrift
+Extra-fin ¦ Ofurgrannt
+Ultra-léger ¦ Mjög létt
+Léger ¦ Létt
+Médium ¦ Miðlungs
+Demi-gras ¦ Hálffeitt
+Extra-gras ¦ Mjög feitt
+Aligné à gauche ¦ Vinstrijafnað
+Aligné à droite ¦ Hægrijafnað
+Justifié, dernière ligne à gauche ¦ Jafnað, síðasta lína til vinstri
+Justifié, dernière ligne centrée ¦ Jafnað, síðasta lína miðjuð
+Justifié, dernière ligne à droite ¦ Jafnað, síðasta lína til hægri
+Tout justifié ¦ Allt jafnað
+Ligatures et formes ¦ Bönd og form
+Unicode : Latin étendu A ¦ Unicode: Latin Extended-A
+Unicode : Latin étendu B ¦ Unicode: Latin Extended-B
+Unicode : hébreu ¦ Unicode: hebreska
+Unicode : exposants et indices ¦ Unicode: hávísar og lágvísar
+Unicode : flèches ¦ Unicode: örvar
+Unicode : mathématiques ¦ Unicode: stærðfræði
+Unicode : formes géométriques ¦ Unicode: rúmfræðileg form
+Unicode : latin étendu D (abréviations anciennes) ¦ Unicode: Latin Extended-D (gamlar skammstafanir)
+espace fine ¦ grannt bil
+tiret conditionnel (césure) ¦ skilyrt bandstrik (orðskipting)
+mort au combat ¦ féll í bardaga
+et (abréviation ancienne) ¦ og (gömul skammstöfun)
+s long ¦ langt s
+Linéaire ¦ Línulegur
+Radial ¦ Geislalaga
+Angle (conique) ¦ Horn (keilulaga)
+Réfléchi ¦ Speglaður
+Losange ¦ Tígull
+Premier plan → arrière-plan ¦ Forgrunnur → bakgrunnur
+Hachures croisées ¦ Krossskygging
+Écailles ¦ Hreistur
+Brin d’herbe ¦ Grasstrá
+Éclaboussure ¦ Sletta
+Ma forme (d’après une sélection) ¦ Mitt form (út frá vali)
+Aérographe ¦ Loftpensill
+Carré net ¦ Skarpur ferningur
+Étoiles semées ¦ Dreifðar stjörnur
+Éclaboussures ¦ Slettur
+Superposition (Écran) ¦ Yfirlögn (Skjár)
+⌗ Cadrer et redresser ¦ ⌗ Afmarka og rétta
+Une photo scannée de travers, avec ses bords blancs ou abîmés : on la redresse, puis on garde ce qui compte. ¦ Mynd sem var skönnuð skökk, með hvítum eða skemmdum köntum: réttu hana, haltu síðan því sem skiptir máli.
+📐 Redresser tout seul ¦ 📐 Rétta sjálfkrafa
+⌗ Recadrer ¦ ⌗ Skera
+⧈ Photo prise de biais ¦ ⧈ Mynd tekin á ská
+🎨 Couleurs passées, photo jaunie ¦ 🎨 Upplitaðir litir, gulnuð mynd
+Le temps jaunit, pâlit ou rosit les photos. « Enlever le jaunissement » remet chaque couleur à sa place ; « Raviver » redonne du contraste. ¦ Tíminn gerir myndir gular, fölar eða bleikar. „Fjarlægja gulnun“ setur hvern lit á sinn stað; „Lífga við“ gefur aftur birtuskil.
+🟨 Enlever le jaunissement ¦ 🟨 Fjarlægja gulnun
+✨ Raviver une vieille photo ¦ ✨ Lífga við gamla mynd
+Réglage automatique ¦ Sjálfvirk stilling
+🧹 Poussières et petites taches ¦ 🧹 Ryk og litlir blettir
+Les points blancs ou noirs, les piqûres : l’app les cherche et les enlève une par une (avec le correcteur). Pour ne traiter qu’une partie, sélectionne-la d’abord. Ce qui reste : le correcteur 🩹 à la main. ¦ Hvítir eða svartir punktar, ryðblettir: appið finnur þá og fjarlægir einn í einu (með lagfæringartólinu). Til að vinna aðeins hluta skaltu velja hann fyrst. Það sem eftir er: lagfæringartólið 🩹 í höndunum.
+Sensibilité ¦ Næmi
+Taille maximale d’une tache ¦ Hámarksstærð bletts
+🔍 Repérer et enlever les taches ¦ 🔍 Finna og fjarlægja blettina
+🩹 Correcteur à la main ¦ 🩹 Lagfæring í höndunum
+Filtre poussière et rayures ¦ Ryk- og rispusía
+🩹 Déchirures, plis, rayures ¦ 🩹 Rifur, brot, rispur
+« Repérer les plis » trouve les lignes fines claires ou sombres et propose de les combler. À la main : le pinceau 🪡 Réparer — peins sur le pli, il est refait d’après ce qui l’entoure. Pour un morceau manquant (coin arraché), le tampon recopie une partie voisine. ¦ „Finna brot“ finnur fínar ljósar eða dökkar línur og býðst til að fylla þær. Í höndunum: pensillinn 🪡 Lagfæra — málaðu yfir brotið, það er endurgert út frá umhverfinu. Fyrir hluta sem vantar (rifið horn) afritar stimpillinn nálægan hluta.
+🔍 Repérer les plis et rayures ¦ 🔍 Finna brot og rispur
+🪡 Réparer au pinceau ¦ 🪡 Lagfæra með pensli
+➰ Entourer une zone… ¦ ➰ Afmarka svæði…
+🌫️ Grain et bruit ¦ 🌫️ Korn og suð
+Une photo granuleuse ou un tirage abîmé : on adoucit sans perdre les contours. ¦ Kornótt mynd eða skemmd útprentun: mýktu án þess að missa útlínurnar.
+🙂 Netteté des visages ¦ 🙂 Skarpari andlit
+Entoure un visage avec l’ellipse ◯, puis « Visage plus net » : il est débruité et accentué, seulement là (calque à part, que tu peux doser). ¦ Afmarkaðu andlit með sporbaugnum ◯, síðan „Skarpara andlit“: suð er fjarlægt og það skerpt, aðeins þar (sérstakt lag sem þú getur dregið úr).
+◯ Entourer le visage ¦ ◯ Afmarka andlitið
+✨ Visage plus net ¦ ✨ Skarpara andlit
+Visage plus net ¦ Skarpara andlit
+🎯 Sélectionner le sujet ¦ 🎯 Velja myndefnið
+🌈 Coloriser une photo en noir et blanc ¦ 🌈 Lita svarthvíta mynd
+Tout seul (un dégradé de couleurs d’époque), ou à la main : choisis une couleur ci-dessous et peins doucement, la lumière de la photo est gardée. ¦ Sjálfkrafa (litstigull með litum þess tíma), eða í höndunum: veldu lit hér fyrir neðan og málaðu varlega; birta myndarinnar helst.
+🎨 Coloriser tout seul ¦ 🎨 Lita sjálfkrafa
+🖌 Coloriser au pinceau ¦ 🖌 Lita með pensli
+✅ Comparer et enregistrer ¦ ✅ Bera saman og vista
+Garde appuyé « 👁 Avant / après » (sous la photo) pour comparer, ou « ◧ Rideau » pour glisser de l’un à l’autre. La photo restaurée devient une nouvelle version : l’original reste. ¦ Haltu niðri „👁 Fyrir / eftir“ (undir myndinni) til að bera saman, eða „◧ Tjald“ til að renna á milli. Endurgerða myndin verður ný útgáfa: frumritið helst.
+💾 Enregistrer et afficher ¦ 💾 Vista og sýna
+Garder le travail pour plus tard ¦ Geyma vinnuna til síðari tíma
+Impossible d’ouvrir cette image. ¦ Ekki hægt að opna þessa mynd.
+Chaque étape est facultative et se défait (↶). Rien n’abîme l’original : la photo restaurée devient une nouvelle version. ¦ Hvert skref er valfrjálst og má afturkalla (↶). Ekkert skemmir frumritið: endurgerða myndin verður ný útgáfa.
+Débruitage, poussières, plis, contraste, netteté et colorisation d’un coup : tu vois chaque étape et tu choisis ¦ Suðhreinsun, ryk, brot, birtuskil, skerpa og litun í einu: þú sérð hvert skref og velur
+✨ Restaurer en une fois ¦ ✨ Endurgera í einu
+ou étape par étape : ¦ eða skref fyrir skref:
+Réparer ¦ Lagfæra
+🪡 Réparer ¦ 🪡 Lagfæra
+Déplacer la vue ¦ Færa sýnina
+Réparer un pli ou une déchirure (R) : peins dessus, c’est refait d’après les alentours ¦ Lagfæra brot eða rifu (R): málaðu yfir, það er endurgert út frá umhverfinu
+Gomme (E) : efface le calque choisi ; sur la photo, elle la cache avec un masque (rien n’est perdu) ¦ Strokleður (E): strokar út valið lag; á myndinni felur það hana með grímu (ekkert tapast)
+Dégradé (G) : glisse pour le tracer ; sur un masque, il fond le calque ¦ Litstigull (G): dragðu til að teikna hann; á grímu dofnar lagið
+Déplacer un élément d’un calque (V) ¦ Færa atriði á lagi (V)
+Déplacer un élément d’un calque ¦ Færa atriði á lagi
+Sélection rectangle (M) ¦ Rétthyrningsval (M)
+Sélection rectangle ¦ Rétthyrningsval
+Sélection ellipse (⇧M) ¦ Sporbaugsval (⇧M)
+Sélection ellipse ¦ Sporbaugsval
+Lasso : entourer à main levée (L) ¦ Snara: afmarka fríhendis (L)
+Lasso : entourer à main levée ¦ Snara: afmarka fríhendis
+Plume : sélection point par point (P) — double-clic ou Entrée pour fermer ¦ Penni: val punkt fyrir punkt (P) — tvísmelltu eða Enter til að loka
+Plume : sélection point par point — double-clic ou Entrée pour fermer ¦ Penni: val punkt fyrir punkt — tvísmelltu eða Enter til að loka
+Sélection automatique (baguette magique) (W) ¦ Sjálfvirkt val (töfrasproti) (W)
+Sélection automatique (baguette magique) ¦ Sjálfvirkt val (töfrasproti)
+Recadrer et redresser (C) ¦ Skera og rétta (C)
+Recadrer et redresser ¦ Skera og rétta
+Correcteur de taches (J) ¦ Blettalagfæring (J)
+Correcteur de taches ¦ Blettalagfæring
+🩹 Correcteur de taches ¦ 🩹 Blettalagfæring
+Réparer un pli ou une déchirure : peins dessus, c’est refait d’après les alentours ¦ Lagfæra brot eða rifu: málaðu yfir, það er endurgert út frá umhverfinu
+Tampon : un endroit, ou une zone sélectionnée (S) ¦ Stimpill: einn staður, eða valið svæði (S)
+Tampon : un endroit, ou une zone sélectionnée ¦ Stimpill: einn staður, eða valið svæði
+Pinceau (B) ¦ Pensill (B)
+Gomme : efface le calque choisi ; sur la photo, elle la cache avec un masque (rien n’est perdu) ¦ Strokleður: strokar út valið lag; á myndinni felur það hana með grímu (ekkert tapast)
+Formes : rectangle, ellipse, ligne, flèche (U) ¦ Form: rétthyrningur, sporbaugur, lína, ör (U)
+Formes : rectangle, ellipse, ligne, flèche ¦ Form: rétthyrningur, sporbaugur, lína, ör
+Dégradé : glisse pour le tracer ; sur un masque, il fond le calque ¦ Litstigull: dragðu til að teikna hann; á grímu dofnar lagið
+Texte (T) ¦ Texti (T)
+Main, ou barre d’espace (H) ¦ Hönd, eða bilslá (H)
+Main, ou barre d’espace ¦ Hönd, eða bilslá
+Zoom (Z) — ⌥ pour reculer ¦ Aðdráttur (Z) — ⌥ til að minnka
+Zoom — ⌥ pour reculer ¦ Aðdráttur — ⌥ til að minnka
+💾 Enregistrer le projet (pour continuer plus tard) ¦ 💾 Vista verkefnið (til að halda áfram síðar)
+📂 Ouvrir un projet… ¦ 📂 Opna verkefni…
+Enregistrer et afficher cette version ¦ Vista og sýna þessa útgáfu
+Enregistrer sans l’afficher ¦ Vista án þess að sýna
+Copie séparée ¦ Sérstakt afrit
+ℹ️ Informations… ¦ ℹ️ Upplýsingar…
+⤓ Exporter l’image (PNG, JPG, imprimer)… ¦ ⤓ Flytja út myndina (PNG, JPG, prenta)…
+⤓ Exporter l’avant / après… ¦ ⤓ Flytja út fyrir / eftir…
+🗂 Exporter en PSD (avec les calques)… ¦ 🗂 Flytja út sem PSD (með lögum)…
+🗂 Importer les calques d’un PSD… ¦ 🗂 Flytja inn lög úr PSD…
+⚡ Actions : réglages enregistrés, à refaire sur plusieurs photos… ¦ ⚡ Aðgerðir: vistaðar stillingar, til að endurtaka á nokkrum myndum…
+⚡ Passer à la retouche rapide ¦ ⚡ Skipta yfir í fljótlega lagfæringu
+🕘 Historique ¦ 🕘 Ferill
+🎚 Réglages, niveaux et courbe ¦ 🎚 Stillingar, stig og ferill
+🎨 Teinte/Saturation… ¦ 🎨 Litblær/Mettun…
+⌗ Recadrer et redresser ¦ ⌗ Skera og rétta
+📐 Redresser automatiquement ¦ 📐 Rétta sjálfkrafa
+Annuler le recadrage ¦ Afturkalla skurðinn
+⧈ Redresser la perspective (photo prise de biais)… ¦ ⧈ Leiðrétta sjónarhorn (mynd tekin á ská)…
+Enlever la perspective ¦ Fjarlægja sjónarhornsleiðréttingu
+📏 Taille de l’image… ¦ 📏 Stærð myndar…
+⬚ Taille de la zone de travail… ¦ ⬚ Stærð vinnusvæðis…
+🔄 Rotation de l’image ¦ 🔄 Snúningur myndar
+↻ 90° horaire ¦ ↻ 90° réttsælis
+↺ 90° antihoraire ¦ ↺ 90° rangsælis
+Angle… ¦ Horn…
+📐 Redresser l’horizon (tracer une ligne)… ¦ 📐 Rétta sjóndeildarhringinn (draga línu)…
+⇆ Symétrie horizontale de l’image ¦ ⇆ Spegla mynd lárétt
+⇅ Symétrie verticale de l’image ¦ ⇅ Spegla mynd lóðrétt
+✨ Restaurer en une fois… ¦ ✨ Endurgera í einu…
+🧭 Restaurer une vieille photo (pas à pas) ¦ 🧭 Endurgera gamla mynd (skref fyrir skref)
+🔍 Repérer les plis et rayures… ¦ 🔍 Finna brot og rispur…
+🪡 Réparer au pinceau (plis, déchirures) ¦ 🪡 Lagfæra með pensli (brot, rifur)
+🧹 Poussière et rayures (Filtres) ¦ 🧹 Ryk og rispur (Síur)
+🪟 Enlever les reflets (vitre) : calque à part ¦ 🪟 Fjarlægja speglun (rúða): sérstakt lag
+🎨 Coloriser : calque de réglage (dégradé) ¦ 🎨 Lita: stillingarlag (litstigull)
+🖌 Coloriser au pinceau : calque « Couleur » ¦ 🖌 Lita með pensli: lag „Litur“
+🪪 Recadrer en photo d’identité… ¦ 🪪 Skera sem passamynd…
+🪪 Portraits de plusieurs fiches… ¦ 🪪 Andlitsmyndir margra spjalda…
+💧 Fluidité (déformer au pinceau)… ¦ 💧 Fljótun (aflaga með pensli)…
+🪄 Gomme magique (fond uni → transparent)… ¦ 🪄 Töfrastrokleður (einlitur bakgrunnur → gegnsær)…
+✨ Affiner le bord du masque (cheveux, contours)… ¦ ✨ Fínstilla jaðar grímunnar (hár, útlínur)…
+☁️ Remplacer le ciel… ¦ ☁️ Skipta um himin…
+✂️ Détourer une personne (fond transparent, flou, uni)… ¦ ✂️ Klippa út einstakling (gegnsær, óskýr eða einlitur bakgrunnur)…
+🔍 Agrandir ×2 / ×4… ¦ 🔍 Stækka ×2 / ×4…
+🧩 Panorama : assembler avec d’autres photos… ¦ 🧩 Víðmynd: setja saman með öðrum myndum…
+Calque ¦ Lag
+＋ Nouveau calque ¦ ＋ Nýtt lag
+📁 Nouveau groupe ¦ 📁 Nýr hópur
+Grouper le calque choisi ¦ Setja valið lag í hóp
+🎚 Nouveau calque de réglage ¦ 🎚 Nýtt stillingarlag
+🎨 Nouveau réglage Teinte/Saturation ¦ 🎨 Ný Litblær/Mettun-stilling
+Nouveau réglage Teinte/Saturation ¦ Ný Litblær/Mettun-stilling
+🖼️ Placer une image… ¦ 🖼️ Setja inn mynd…
+▦ Nouveau calque de dégradé… ¦ ▦ Nýtt litstigulslag…
+▩ Nouveau calque de motif… ¦ ▩ Nýtt mynsturlag…
+▩ Créer un motif… ¦ ▩ Búa til mynstur…
+▩ Créer un motif ¦ ▩ Búa til mynstur
+＋ Créer un motif… ¦ ＋ Búa til mynstur…
+Copier la sélection sur un calque ¦ Afrita valið á lag
+🎭 Ajouter un masque au calque choisi ¦ 🎭 Bæta grímu við valið lag
+🎭 Masque qui cache tout (⌥ + clic sur 🎭) ¦ 🎭 Gríma sem felur allt (⌥ + smellur á 🎭)
+Masque d’après la sélection ¦ Gríma út frá valinu
+Masque qui cache la sélection ¦ Gríma sem felur valið
+Inverser le masque ¦ Snúa grímunni við
+Retirer le masque ¦ Fjarlægja grímuna
+inverser le masque ¦ snúa grímunni við
+retirer le masque ¦ fjarlægja grímuna
+🗂 Calques ¦ 🗂 Lög
+🎯 Sélectionner le sujet (automatique) ¦ 🎯 Velja myndefnið (sjálfvirkt)
+✂️ Détourer une personne… ¦ ✂️ Klippa út einstakling…
+Désélectionner ¦ Afvelja
+Inverser ¦ Snúa við
+Contour progressif… ¦ Mjúkur jaðar…
+Contour progressif ¦ Mjúkur jaðar
+Agrandir… ¦ Stækka…
+Réduire… ¦ Minnka…
+Remplir avec la couleur ¦ Fylla með litnum
+Effacer (transparent) ¦ Hreinsa (gegnsætt)
+Recadrer sur la sélection ¦ Skera að valinu
+Filtre ¦ Sía
+↻ Refaire le dernier filtre ¦ ↻ Endurtaka síðustu síu
+✨ Filtres rapides et filtres du calque (panneau) ¦ ✨ Flýtisíur og síur lagsins (spjald)
+Enlever les filtres rapides ¦ Fjarlægja flýtisíurnar
+Replier / ouvrir le panneau de droite ¦ Fella saman / opna hægra spjaldið
+◧ Avant / après en rideau ¦ ◧ Fyrir / eftir sem tjald
+Toute l’image ¦ Öll myndin
+Nom du projet de retouche ¦ Heiti lagfæringarverkefnisins
+Le nom du projet de retouche (tape pour le changer) ¦ Heiti lagfæringarverkefnisins (skrifaðu til að breyta því)
+Passer à la retouche rapide (celle de la version 0.5.0) : réglages, courbe, taches, tampon — moins de boutons ¦ Skipta yfir í fljótlega lagfæringu (þá úr útgáfu 0.5.0): stillingar, ferill, blettir, stimpill — færri hnappar
+⚡ Rapide ¦ ⚡ Fljótlegt
+Exporter : l’image retouchée (PNG, JPG, imprimer) ou l’avant / après ¦ Flytja út: lagfærðu myndina (PNG, JPG, prenta) eða fyrir / eftir
+Enregistrer le projet : tout le travail (calques, masques, réglages…) pour le rouvrir et continuer ¦ Vista verkefnið: alla vinnuna (lög, grímur, stillingar…) til að opna það aftur og halda áfram
+🖼 L’image retouchée (PNG, JPG, imprimer)… ¦ 🖼 Lagfærða myndin (PNG, JPG, prenta)…
+◧ Avant / après (côte à côte ou rideau)… ¦ ◧ Fyrir / eftir (hlið við hlið eða tjald)…
+Dureté ¦ Harka
+Sorte de pinceau ¦ Tegund pensils
+Couleurs rapides ¦ Flýtilitir
+contour ¦ útlína
+Contour du texte ¦ Útlína texta
+Couleur du contour ¦ Litur útlínu
+Épaisseur du contour ¦ Þykkt útlínu
+épaisseur ¦ þykkt
+ombre ¦ skuggi
+Ombre du texte ¦ Skuggi texta
+Couleur de l’ombre ¦ Litur skugga
+Tampon : endroit à recopier, aligné ¦ Stimpill: staður til að afrita, samstilltur
+🎯 Choisir l’endroit à recopier ¦ 🎯 Velja staðinn til að afrita
+Coché : l’endroit recopié suit le pinceau d’un trait à l’autre. Décoché : chaque trait repart du même endroit. ¦ Hakað: afritaði staðurinn fylgir penslinum frá einni stroku til annarrar. Óhakað: hver stroka byrjar aftur frá sama stað.
+aligné ¦ samstillt
+Réparer : grain, repérer les plis ¦ Lagfæra: korn, finna brot
+Coché : un peu du grain de la photo autour est remis dans la zone réparée, pour qu’elle ne paraisse pas trop lisse. ¦ Hakað: smá af korni myndarinnar í kring er sett aftur í lagfærða svæðið, svo það virðist ekki of slétt.
+garder le grain ¦ halda korninu
+Trouver tout seul les lignes fines (plis, rayures) et proposer de les combler ¦ Finna fínar línur (brot, rispur) sjálfkrafa og bjóðast til að fylla þær
+🔍 Repérer les plis ¦ 🔍 Finna brot
+Texte gras ¦ Feitletraður texti
+Texte italique ¦ Skáletraður texti
+Forme (rectangle, ellipse, flèche…) ¦ Form (rétthyrningur, sporbaugur, ör…)
+Rectangle arrondi ¦ Rúnnaður rétthyrningur
+Forme remplie ¦ Fyllt form
+remplie ¦ fyllt
+Couleur de fond des formes ¦ Fyllilitur forma
+Baguette : tolérance ¦ Sproti: vikmörk
+Jusqu’où une couleur peut s’écarter de celle cliquée pour être prise : petit = la même teinte seulement, grand = des teintes voisines aussi. ¦ Hversu mikið litur má víkja frá þeim sem smellt var á og vera samt tekinn: lítið = aðeins sami litblær, mikið = nálægir litblæir líka.
+Tolérance ¦ Vikmörk
+Baguette : contiguë ¦ Sproti: samliggjandi
+contiguë ¦ samliggjandi
+Sélectionner le sujet ¦ Velja myndefnið
+Le fond est reconnu sur les bords de la photo ; la tolérance règle jusqu’où il va ¦ Bakgrunnurinn er greindur frá köntum myndarinnar; vikmörkin ráða hversu langt hann nær
+🎯 Sujet ¦ 🎯 Myndefni
+Actions de la sélection ¦ Aðgerðir á vali
+⇧ ajouter · ⌥ enlever ¦ ⇧ bæta við · ⌥ draga frá
+→ Calque ¦ → Lag
+Remplir ¦ Fylla
+Effacer ¦ Hreinsa
+Masque ¦ Gríma
+Recadrer ¦ Skera
+Recadrage : proportions, redresser ¦ Skurður: hlutföll, rétting
+Proportions ¦ Hlutföll
+Libres ¦ Frjáls
+Celles de la photo ¦ Hlutföll myndarinnar
+Carré 1:1 ¦ Ferningur 1:1
+A4 portrait ¦ A4 skammsnið
+Redresser ¦ Rétta
+Trouve l’angle des grandes lignes (horizon, murs, cadres) ¦ Finnur horn helstu lína (sjóndeildarhringur, veggir, rammar)
+📐 Auto ¦ 📐 Sjálfvirkt
+✓ Valider ¦ ✓ Staðfesta
+Perspective ¦ Sjónarhorn
+Place les 4 coins sur les coins de ce qui doit devenir rectangulaire (la photo, le document, la façade). ¦ Settu 4 hornin á horn þess sem á að verða rétthyrnt (myndin, skjalið, framhliðin).
+Coins aux bords ¦ Horn við kanta
+Dégradé : couleurs, forme, options ¦ Litstigull: litir, form, valkostir
+Modifier le dégradé : couleurs, transparence, préréglages ¦ Breyta litstiglinum: litir, gegnsæi, forstillingar
+Forme du dégradé ¦ Form litstiguls
+Inverser le dégradé ¦ Snúa litstiglinum við
+inverser ¦ snúa við
+Tramage ¦ Dreifing
+tramage ¦ dreifing
+Un très léger grain qui évite les « marches » visibles dans les dégradés doux. ¦ Mjög létt korn sem kemur í veg fyrir sýnileg „þrep“ í mjúkum litstiglum.
+Masque : cacher / montrer ¦ Gríma: fela / sýna
+⬛ cacher ¦ ⬛ fela
+⬜ montrer ¦ ⬜ sýna
+Aide de l’outil ¦ Hjálp tólsins
+Couleurs (premier plan et arrière-plan) ¦ Litir (forgrunnur og bakgrunnur)
+Noir et blanc (D) ¦ Svart og hvítt (D)
+Couleurs par défaut : noir et blanc ¦ Sjálfgefnir litir: svart og hvítt
+Intervertir les deux couleurs (X) ¦ Víxla litunum tveimur (X)
+Intervertir les couleurs ¦ Víxla litunum
+Couleur d’arrière-plan (fond des formes) : clic pour la changer ¦ Bakgrunnslitur (fylling forma): smelltu til að breyta honum
+Couleur de premier plan (pinceau, texte, formes) : clic pour la changer ¦ Forgrunnslitur (pensill, texti, form): smelltu til að breyta honum
+Replier le panneau (plus de place pour la photo) — Tab ¦ Fella spjaldið saman (meira pláss fyrir myndina) — Tab
+Glisser pour élargir ou rétrécir le panneau (double-clic : taille de départ) ¦ Dragðu til að breikka eða mjókka spjaldið (tvísmelltu: upphafsstærð)
+Onglets du panneau de droite ¦ Flipar hægra spjaldsins
+Propriétés : Teinte/Saturation, masque, position et taille du calque choisi ¦ Eiginleikar: Litblær/Mettun, gríma, staðsetning og stærð valins lags
+ⓘ Propriétés ¦ ⓘ Eiginleikar
+Caractère : police, variante (graisse), taille, interligne, approche… ¦ Stafur: letur, afbrigði (þykkt), stærð, línubil, stafabil…
+🔤 Caractère ¦ 🔤 Stafur
+Motifs : remplir d’un motif, créer les siens ¦ Mynstur: fylla með mynstri, búa til þín eigin
+▩ Motifs ¦ ▩ Mynstur
+Motifs ¦ Mynstur
+Formes de pinceau : préréglages, pas, angle, dispersion, forme d’après une sélection ¦ Pensilform: forstillingar, bil, horn, dreifing, form út frá vali
+🖌 Formes ¦ 🖌 Form
+Restaurer une vieille photo, pas à pas ¦ Endurgera gamla mynd, skref fyrir skref
+🧭 Restaurer ¦ 🧭 Endurgera
+Comme la saturation, mais les couleurs déjà vives bougent peu : les teintes ternes (peau, ciel pâle) se ravivent d’abord. ¦ Eins og mettun, en litir sem eru þegar skærir breytast lítið: daufir litblæir (húð, fölur himinn) lifna fyrst.
+Éclaircit ou assombrit les tons moyens sans toucher au noir ni au blanc : au-dessus de 100, plus clair ; en dessous, plus sombre. ¦ Lýsir eða dekkir miðtóna án þess að snerta svart eða hvítt: yfir 100, ljósara; undir, dekkra.
+Clic sur la courbe : ajouter un point · glisser : le déplacer · pour l’enlever : le choisir puis « Enlever le point » (ou ⌫), ou le glisser hors du cadre. ¦ Smelltu á ferilinn: bæta við punkti · draga: færa hann · til að fjarlægja hann: veldu hann og síðan „Fjarlægja punktinn“ (eða ⌫), eða dragðu hann út fyrir rammann.
+Enlever le point ¦ Fjarlægja punktinn
+🎨 Colorisation douce (photo en noir et blanc) ¦ 🎨 Mild litun (svarthvít mynd)
+Mieux dans un calque de réglage (Image → Coloriser) : on le dose, on le masque, on l’enlève. Pour colorier à la main : Image → Coloriser au pinceau. ¦ Betra í stillingarlagi (Mynd → Lita): þú getur dregið úr því, sett grímu á það, fjarlægt það. Til að lita í höndunum: Mynd → Lita með pensli.
+Filtres rapides, après les réglages : sur la photo, ou dans un calque de réglage (sur tout ce qui est dessous, ou seulement le calque juste dessous). Les mêmes sur l’image enregistrée en pleine taille. ¦ Flýtisíur, á eftir stillingunum: á myndinni, eða í stillingarlagi (á allt fyrir neðan, eða aðeins lagið rétt fyrir neðan). Þær sömu á myndinni sem er vistuð í fullri stærð.
+Renforce le contraste des détails moyens (rides, plis d’un tissu, écriture) sans changer le contraste général. ¦ Styrkir birtuskil miðlungsfínna smáatriða (hrukkur, fellingar í efni, skrift) án þess að breyta heildarbirtuskilum.
+Enlever les filtres ¦ Fjarlægja síurnar
+Variante : la graisse (Light, Regular, Bold, Black…) et l’italique ¦ Afbrigði: þykktin (Light, Regular, Bold, Black…) og skáletur
+Taille (en points de l’image) ¦ Stærð (í punktum myndarinnar)
+Interligne (vide = automatique, 120 % de la taille) ¦ Línubil (autt = sjálfvirkt, 120 % af stærðinni)
+Crénage : les paires de lettres rapprochées selon la police (Métrique) ou pas du tout (0) ¦ Stafaþjöppun: stafapör færð nær samkvæmt letrinu (Mælt) eða alls ekki (0)
+Approche : l’espace entre toutes les lettres, en millièmes de la taille ¦ Stafabil: bilið milli allra stafa, í þúsundustu hlutum stærðarinnar
+Échelle verticale ¦ Lóðréttur kvarði
+Échelle horizontale ¦ Láréttur kvarði
+Décalage vertical (au-dessus de la ligne de base si positif) ¦ Grunnlínuhliðrun (fyrir ofan grunnlínu ef jákvætt)
+Lissage des bords des lettres ¦ Jöfnun á köntum stafa
+Lissage ¦ Jöfnun
+Lissé ¦ Jafnað
+Aucun (bords nets, pixels) ¦ Engin (skarpir kantar, dílar)
+Alignement du paragraphe ¦ Jöfnun málsgreinar
+Pour les prochains textes. Choisis un texte avec ➤ pour le changer. ¦ Fyrir næstu texta. Veldu texta með ➤ til að breyta honum.
+Pour les prochains textes. Clique sur un texte (outil Texte ou ➤) pour le changer. ¦ Fyrir næstu texta. Smelltu á texta (Textatól eða ➤) til að breyta honum.
+✍️ Texte en cours d’écriture : chaque réglage s’y applique tout de suite. ¦ ✍️ Texti í skrifum: hver stilling gildir strax um hann.
+Métrique ¦ Mælt
+Les variantes viennent des polices de l’ordinateur (Mac, Windows, Linux) quand l’app peut les lire ; sinon les graisses habituelles. ¦ Afbrigðin koma úr letri tölvunnar (Mac, Windows, Linux) þegar appið getur lesið þau; annars venjulegar þykktir.
+Retrait de la première ligne (négatif : en saillie) ¦ Inndráttur fyrstu línu (neikvætt: útdráttur)
+Largeur du bloc de texte : les lignes se coupent toutes seules (vide = texte simple, une ligne par paragraphe) ¦ Breidd textablokkar: línur brotna sjálfkrafa (autt = einfaldur texti, ein lína á málsgrein)
+Espace avant chaque paragraphe ¦ Bil á undan hverri málsgrein
+Espace après chaque paragraphe ¦ Bil á eftir hverri málsgrein
+Couper les mots longs en fin de ligne, avec un tiret (règles simples du français ; un tiret conditionnel ⌥- dans un mot est pris en premier) ¦ Skipta löngum orðum í lok línu, með bandstriki (einfaldar franskar reglur; skilyrt bandstrik ⌥- í orði er notað fyrst)
+Ω Glyphes ¦ Ω Táknmyndir
+Police (famille) ¦ Letur (fjölskylda)
+(Auto) ¦ (Sjálfvirkt)
+⟸ gauche ¦ ⟸ vinstri
+≡ centre ¦ ≡ miðja
+droite ⟹ ¦ hægri ⟹
+Symboles ¦ Tákn
+Code (U+00E9) ou caractère ¦ Kóði (U+00E9) eða stafur
+Chercher un glyphe ¦ Leita að táknmynd
+Pour un bloc de texte, glisse un cadre avec l’outil Texte T au lieu de cliquer, ou donne sa largeur ici. La justification ne vaut que pour un bloc. ¦ Fyrir textablokk skaltu draga ramma með Textatólinu T í stað þess að smella, eða gefa breiddina hér. Jöfnun gildir aðeins um blokk.
+Clic : ajouté au texte en cours d’écriture (ou à la fin du texte choisi). Sans texte : copié. ¦ Smellur: bætt við textann sem er í skrifum (eða í lok valda textans). Án texta: afritað.
+Choisis d’abord un texte (outil T). ¦ Veldu fyrst texta (tólið T).
+Un autre média, rattaché aux mêmes fiches ¦ Annar miðill, tengdur sömu spjöldum
+Gardée dans les versions, la photo affichée ne change pas ¦ Geymd í útgáfunum; myndin sem sýnd er breytist ekki
+avec les annotations (calques visibles) ¦ með athugasemdunum (sýnileg lög)
+Avec les annotations (calques visibles) ¦ Með athugasemdunum (sýnileg lög)
+L’original n’est jamais modifié : chaque retouche est une version de la photo, et tu choisis celle qui s’affiche partout. ¦ Frumritinu er aldrei breytt: hver lagfæring er útgáfa myndarinnar, og þú velur þá sem birtist alls staðar.
+🖼 Enregistrer l’image dans les Médias ¦ 🖼 Vista myndina í Miðlum
+L’image (calques compris) remplace celle du média ; le projet, lui, garde tous les calques pour continuer ¦ Myndin (með lögum) kemur í stað myndar miðilsins; verkefnið heldur öllum lögunum svo þú getir haldið áfram
+Enregistrer le projet (calques, masques, réglages) ¦ Vista verkefnið (lög, grímur, stillingar)
+la retouche est fermée ¦ lagfæringunni er lokað
+Clique sur une étape pour revenir à ce moment-là ; les étapes suivantes restent (en gris) tant que tu ne fais rien d’autre. ¦ Smelltu á skref til að fara aftur til þess augnabliks; næstu skref haldast (grá) svo lengi sem þú gerir ekkert annað.
+Tu peins le masque (pinceau : ⬛ cacher / ⬜ montrer). Clic : revenir au calque ¦ Þú málar grímuna (pensill: ⬛ fela / ⬜ sýna). Smellur: aftur í lagið
+Masque : clic pour le peindre au pinceau ¦ Gríma: smelltu til að mála hana með pensli
+⇧ Maj + clic : désactiver / réactiver le masque ¦ ⇧ Shift + smellur: gera grímuna óvirka / virka
+⌥ Alt + clic : voir le masque seul ¦ ⌥ Alt + smellur: sjá grímuna eina
+touche \ : le masque en rouge par-dessus ¦ lykillinn \: gríman í rauðu ofan á
+Ajouter un masque (cacher une partie sans l’effacer) — ⌥ / Alt + clic : un masque qui cache tout (ou cache la sélection) ¦ Bæta við grímu (fela hluta án þess að eyða honum) — ⌥ / Alt + smellur: gríma sem felur allt (eða felur valið)
+masque ¦ gríma
+Ranger dans un groupe ¦ Setja í hóp
+(hors groupe) ¦ (utan hóps)
+Glisser pour ranger : au-dessus, en dessous, ou dans un groupe (lâcher au milieu d’un groupe) ¦ Dragðu til að raða: fyrir ofan, fyrir neðan, eða í hóp (slepptu í miðjum hóp)
+Calque de réglage ¦ Stillingarlag
+La photo (réglages, taches, tampon) ¦ Myndin (stillingar, blettir, stimpill)
+Supprimer le groupe (ce qu’il contient reste) ¦ Eyða hópnum (innihaldið verður eftir)
+Retirer la photo des calques (⌘Z pour la remettre) ¦ Fjarlægja myndina úr lögunum (⌘Z til að setja hana aftur)
+Mode de fusion : comment le calque se mélange à ce qui est dessous ¦ Blöndunarhamur: hvernig lagið blandast því sem er fyrir neðan
+Fond : dose seulement le contenu du calque, pas ses effets (ombre, lueur, contour). À 0 %, il ne reste que les effets. ¦ Fylling: dregur aðeins úr innihaldi lagsins, ekki áhrifum þess (skuggi, ljómi, útlína). Við 0 % eru aðeins áhrifin eftir.
+Effets du calque : ombre portée, lueur externe, contour, incrustation de couleur ¦ Áhrif lags: varpskuggi, ytri ljómi, útlína, litayfirlögn
+Objet dynamique : agrandir, réduire, tourner sans perte (l’image d’origine est gardée) ¦ Snjallhlutur: stækka, minnka, snúa án taps (upprunalega myndin er geymd)
+🧩 Objet dynamique ¦ 🧩 Snjallhlutur
+Une autre image à la même place, même taille, même rotation ¦ Önnur mynd á sama stað, sama stærð, sami snúningur
+Remplacer… ¦ Skipta út…
+Remettre l’image à sa taille d’origine (et droite) ¦ Setja myndina aftur í upprunalega stærð (og beina)
+Un calque de filtres juste au-dessus, qui ne touche que cette image : on peut le régler, le doser, le cacher ¦ Síulag rétt fyrir ofan, sem hefur aðeins áhrif á þessa mynd: þú getur stillt það, dregið úr því, falið það
+✨ Filtre dynamique ¦ ✨ Snjallsía
+Figer l’image en pixels, à la taille où elle est (plus d’agrandissement sans perte) ¦ Festa myndina í dílum, í núverandi stærð (ekki lengur stækkun án taps)
+Pixelliser ¦ Rasta
+Couleurs, transparence, forme, préréglages ¦ Litir, gegnsæi, form, forstillingar
+▦ Modifier le dégradé… ¦ ▦ Breyta litstiglinum…
+Motif, échelle, angle, décalage ¦ Mynstur, kvarði, horn, hliðrun
+▩ Modifier le motif… ¦ ▩ Breyta mynstrinu…
+Comme un masque d’écrêtage de Photoshop ¦ Eins og klippigríma í Photoshop
+régler… ¦ stilla…
+ne touche que l’élément juste dessous ¦ hefur aðeins áhrif á atriðið rétt fyrir neðan
+touche tout ce qui est dessous ¦ hefur áhrif á allt fyrir neðan
+(seulement l’élément dessous) ¦ (aðeins atriðið fyrir neðan)
+(tout ce qui est dessous) ¦ (allt fyrir neðan)
+régler la photo ¦ stilla myndina
+＋ dans un calque de réglage ¦ ＋ í stillingarlagi
+Réglages et filtres dans un calque à part, qu’on peut masquer, doser ou limiter à un calque ¦ Stillingar og síur í sérstöku lagi, sem þú getur sett grímu á, dregið úr eða takmarkað við eitt lag
+✨ Filtres : ¦ ✨ Síur:
+Changer les réglages de ce filtre ¦ Breyta stillingum þessarar síu
+vider ¦ tæma
+groupe vide : glisse un calque ici (⠿), ou range-le avec 📁 ¦ tómur hópur: dragðu lag hingað (⠿), eða settu það inn með 📁
+Le pinceau, les formes et le texte vont sur le calque choisi (en bleu). 📁 un groupe peut contenir des calques et d’autres groupes ; 🎚 un calque de réglage applique réglages et filtres à ce qui est dessous (ou seulement à l’élément juste dessous). 🎭 un masque cache sans effacer. ¦ Pensillinn, formin og textinn fara á valda lagið (blátt). 📁 hópur getur innihaldið lög og aðra hópa; 🎚 stillingarlag beitir stillingum og síum á það sem er fyrir neðan (eða aðeins á atriðið rétt fyrir neðan). 🎭 gríma felur án þess að eyða.
+＋ Calque ¦ ＋ Lag
+＋ Groupe ¦ ＋ Hópur
+＋ Réglage ¦ ＋ Stilling
+🖼️ Image ¦ 🖼️ Mynd
+Une image de la base ou de l’ordinateur, sur un nouveau calque, en objet dynamique (agrandir, réduire, tourner sans perte) ¦ Mynd úr gagnagrunninum eða tölvunni, á nýju lagi, sem snjallhlutur (stækka, minnka, snúa án taps)
+Un groupe vide au-dessus du calque choisi ¦ Tómur hópur fyrir ofan valda lagið
+Réglages et filtres dans un calque ¦ Stillingar og síur í lagi
+La photo a été retirée des calques : la remettre tout en bas ¦ Myndin var fjarlægð úr lögunum: setja hana aftur neðst
+↺ Remettre la photo ¦ ↺ Setja myndina aftur
+Met le calque choisi dans un nouveau groupe (⌘G) ¦ Setur valda lagið í nýjan hóp (⌘G)
+Grouper ¦ Setja í hóp
+Sélection → calque ¦ Val → lag
+Aucun calque. ¦ Engin lög.
+Choisis d’abord un calque. ¦ Veldu fyrst lag.
+Nouveau calque ¦ Nýtt lag
+Nouveau calque de réglage ¦ Nýtt stillingarlag
+Photo remise dans les calques ¦ Mynd sett aftur í lögin
+Masque ajouté : la sélection est cachée. ¦ Grímu bætt við: valið er falið.
+Masque ajouté : tout est caché ; peins en ⬜ pour montrer. ¦ Grímu bætt við: allt er falið; málaðu með ⬜ til að sýna.
+Masque ajouté : peins en ⬛ pour cacher, en ⬜ pour montrer. ¦ Grímu bætt við: málaðu með ⬛ til að fela, með ⬜ til að sýna.
+Masque seul : blanc = montré, noir = caché (⌥ + clic pour revenir) ¦ Gríman ein: hvítt = sýnt, svart = falið (⌥ + smellur til að fara til baka)
+Ce calque est verrouillé. ¦ Þetta lag er læst.
+Filtre dynamique : choisis un filtre (« ＋ Ajouter un filtre… ») ; il ne touche que cette image, et reste réglable. ¦ Snjallsía: veldu síu („＋ Bæta við síu…“); hún hefur aðeins áhrif á þessa mynd og er áfram stillanleg.
+verrouillé ¦ læst
+déverrouillé ¦ ólæst
+seulement sur l’élément dessous ¦ aðeins á atriðið fyrir neðan
+sur tout ce qui est dessous ¦ á allt fyrir neðan
+Ouvrir le panneau (Réglages, Calques…) — Tab ¦ Opna spjaldið (Stillingar, Lög…) — Tab
+Glisse pour te déplacer dans l’image zoomée (la barre d’espace fait pareil avec n’importe quel outil). ¦ Dragðu til að færa þig um stækkuðu myndina (bilsláin gerir það sama með hvaða tóli sem er).
+Clique sur un trait, une forme, un texte ou une zone copiée d’un calque, puis glisse-le. ⌫ le supprime, double-clic sur un texte pour le réécrire. ¦ Smelltu á stroku, form, texta eða afritað svæði á lagi, dragðu það síðan. ⌫ eyðir því; tvísmelltu á texta til að endurskrifa hann.
+Glisse pour sélectionner un rectangle (⇧ en plus : ajouter, ⌥ : enlever). Les réglages de la barre agissent ensuite sur la sélection. ¦ Dragðu til að velja rétthyrning (⇧ að auki: bæta við, ⌥: draga frá). Stillingar stikunnar virka síðan á valið.
+Glisse pour sélectionner un ovale (⇧ : ajouter, ⌥ : enlever). ¦ Dragðu til að velja sporöskju (⇧: bæta við, ⌥: draga frá).
+Entoure à main levée la zone à sélectionner (⇧ : ajouter, ⌥ : enlever). ¦ Afmarkaðu fríhendis svæðið sem á að velja (⇧: bæta við, ⌥: draga frá).
+Plume : clique point par point autour de la zone ; double-clic, Entrée ou clic sur le premier point pour fermer. Échap : abandonner. ¦ Penni: smelltu punkt fyrir punkt í kringum svæðið; tvísmelltu, Enter eða smelltu á fyrsta punktinn til að loka. Esc: hætta við.
+Clique sur une couleur : tous les points voisins de teinte proche sont sélectionnés (Tolérance). ⇧ : ajouter, ⌥ : enlever. ¦ Smelltu á lit: allir nálægir punktar með svipaðan litblæ eru valdir (Vikmörk). ⇧: bæta við, ⌥: draga frá.
+Glisse les poignées du cadre (ou trace un nouveau cadre), choisis des proportions, redresse avec le curseur, puis « ✓ Valider ». ¦ Dragðu handföng rammans (eða teiknaðu nýjan ramma), veldu hlutföll, réttu með sleðanum, síðan „✓ Staðfesta“.
+Clic : zoomer ici · ⌥ + clic : reculer · ou glisse pour zoomer sur une zone. ¦ Smellur: auka aðdrátt hér · ⌥ + smellur: minnka · eða dragðu til að þysja á svæði.
+Glisse les 4 coins sur les coins de la photo, du document ou de la façade prise de biais, puis « ✓ Valider » : elle est remise à plat. À faire de préférence avant les corrections de taches. ¦ Dragðu 4 hornin á horn myndarinnar, skjalsins eða framhliðarinnar sem tekin var á ská, síðan „✓ Staðfesta“: hún er gerð flöt. Best að gera það á undan blettaleiðréttingum.
+Glisse pour tracer la forme sur le calque choisi (⇧ : carré, cercle ou angle droit). ¦ Dragðu til að teikna formið á valda lagið (⇧: ferningur, hringur eða rétt horn).
+Glisse du début à la fin du dégradé (⇧ : tous les 45°) : il va sur un calque « Dégradé » (dans la sélection s’il y en a une ; sur le masque choisi, il fond le calque). Tire ensuite ses ronds pour l’ajuster ; clic sur la barre colorée pour changer ses couleurs. ¦ Dragðu frá upphafi til enda litstigulsins (⇧: á 45° fresti): hann fer á lag „Litstigull“ (í valinu ef það er til; á valinni grímu dofnar lagið). Togaðu síðan í hringina til að laga hann; smelltu á litaða stikuna til að breyta litunum.
+Clique sur une tache, une poussière ou une rayure : elle est remplacée par ce qui l’entoure. Pour une rayure, glisse le long. Zoome (⌘ + molette) pour être précis. ¦ Smelltu á blett, ryk eða rispu: það er skipt út fyrir það sem er í kring. Fyrir rispu skaltu draga eftir henni. Þysjaðu (⌘ + hjól) til að vera nákvæm(ur).
+« Choisir l’endroit à recopier » (ou ⌥ + clic), puis peins sur la zone à couvrir. « Aligné » : la source suit ton pinceau d’un trait à l’autre. Avec une sélection : glisse pour poser une copie de la zone ailleurs. ¦ „Velja staðinn til að afrita“ (eða ⌥ + smellur), málaðu síðan yfir svæðið sem á að hylja. „Samstillt“: uppsprettan fylgir penslinum frá einni stroku til annarrar. Með vali: dragðu til að setja afrit af svæðinu annars staðar.
+Peins sur le calque choisi (Calques) : annoter, entourer, flécher à la main. La gomme efface ce qui a été peint, jamais la photo. ¦ Málaðu á valda lagið (Lög): skrifa athugasemdir, hringa, teikna örvar í höndunum. Strokleðrið eyðir því sem var málað, aldrei myndinni.
+Tu peins le MASQUE du calque : ⬛ cacher, ⬜ montrer. Rien n’est effacé. Clique sur la vignette du masque (Calques) pour revenir au calque. ¦ Þú málar GRÍMU lagsins: ⬛ fela, ⬜ sýna. Engu er eytt. Smelltu á smámynd grímunnar (Lög) til að fara aftur í lagið.
+Clique dans l’image à l’endroit du texte, écris, puis Entrée (⇧ + Entrée pour aller à la ligne). ¦ Smelltu í myndina þar sem textinn á að vera, skrifaðu, síðan Enter (⇧ + Enter fyrir nýja línu).
+Peins sur le pli, la rayure ou la déchirure (en rouge pendant le geste) : au lâcher, la zone est refaite d’après ce qui l’entoure. Zoome pour être précis ; « 🔍 Repérer les plis » les trouve tout seul. ¦ Málaðu yfir brotið, rispuna eða rifuna (rautt meðan þú málar): þegar þú sleppir er svæðið endurgert út frá umhverfinu. Þysjaðu til að vera nákvæm(ur); „🔍 Finna brot“ finnur þau sjálfkrafa.
+Glisse les deux ronds sur les yeux si besoin : le cadre suit (yeux à l’horizontale, toujours à la même hauteur). Règle la marge dans le panneau, puis « ✓ Recadrer » ou « 👤 Utiliser comme portrait ». ¦ Dragðu hringina tvo á augun ef þarf: ramminn fylgir (augun lárétt, alltaf í sömu hæð). Stilltu spássíuna í spjaldinu, síðan „✓ Skera“ eða „👤 Nota sem andlitsmynd“.
+Calque « Annotations » créé ¦ Lagið „Athugasemdir“ búið til
+Annotations ¦ Athugasemdir
+Masque ajouté à la photo (gomme) ¦ Grímu bætt við myndina (strokleður)
+Gomme sur la photo : elle est cachée par un masque, rien n’est effacé. Pour la faire revenir : touche X (⬜ montrer), puis repasse dessus. ¦ Strokleður á myndinni: hún er falin með grímu, engu er eytt. Til að fá hana aftur: lykillinn X (⬜ sýna), farðu síðan aftur yfir.
+⬜ Montrer : le pinceau (ou la gomme) fait revenir ce qui était caché. X pour revenir à ⬛ cacher. ¦ ⬜ Sýna: pensillinn (eða strokleðrið) kallar fram það sem var falið. X til að fara aftur í ⬛ fela.
+⬛ Cacher : le pinceau (ou la gomme) cache. X pour ⬜ montrer. ¦ ⬛ Fela: pensillinn (eða strokleðrið) felur. X fyrir ⬜ sýna.
+Style du texte ¦ Stíll texta
+Caractère du texte ¦ Stafir texta
+🔎 Lire les variantes de l’ordinateur… ¦ 🔎 Lesa leturafbrigði tölvunnar…
+Réglage ciblé : appuie sur une couleur de la photo et glisse à droite (plus saturé) ou à gauche (moins) ; avec ⌘ / Ctrl, c’est la teinte qui change ¦ Markviss stilling: ýttu á lit í myndinni og dragðu til hægri (mettaðra) eða vinstri (minna); með ⌘ / Ctrl breytist litblærinn
+Réglage ciblé ¦ Markviss stilling
+Pipettes de la gamme ¦ Litaprufur sviðsins
+Pipette : la gamme se centre sur la couleur cliquée dans la photo ¦ Litaprufa: sviðið miðjast á litinn sem smellt er á í myndinni
+Ajouter à la gamme la couleur cliquée ¦ Bæta litnum sem smellt er á við sviðið
+Retirer de la gamme la couleur cliquée ¦ Fjarlægja litinn sem smellt er á úr sviðinu
+Bord intérieur : plein effet jusqu’ici ¦ Innri brún: full áhrif hingað
+Bord extérieur : l’effet s’éteint ici ¦ Ytri brún: áhrifin dofna hér
+Haut : les couleurs avant ; bas : après. ¦ Efst: litirnir fyrir; neðst: eftir.
+🎚 Autres réglages… ¦ 🎚 Aðrar stillingar…
+🖌 Peindre le masque ¦ 🖌 Mála grímuna
+Réactiver ¦ Gera virkt aftur
+Désactiver ¦ Gera óvirkt
+▦ Calque de dégradé ¦ ▦ Litstigulslag
+garder les proportions ¦ halda hlutföllum
+Un calque de réglage juste au-dessus, qui ne touche que ce calque ¦ Stillingarlag rétt fyrir ofan, sem hefur aðeins áhrif á þetta lag
+🎨 Teinte/Saturation sur ce calque ¦ 🎨 Litblær/Mettun á þessu lagi
+Choisis la photo ou un calque de réglage 🎚 (Calques) pour Teinte/Saturation. ¦ Veldu myndina eða stillingarlag 🎚 (Lög) fyrir Litblæ/Mettun.
+👆 Appuie sur une couleur de la photo et glisse à gauche ou à droite (⌘ / Ctrl : la teinte). ¦ 👆 Ýttu á lit í myndinni og dragðu til vinstri eða hægri (⌘ / Ctrl: litblærinn).
+💧 Clique sur une couleur de la photo. ¦ 💧 Smelltu á lit í myndinni.
+C’est un gris : il n’a pas de teinte. ¦ Þetta er grátt: það hefur engan litblæ.
+Gamme choisie à la pipette ¦ Svið valið með litaprufu
+Gamme élargie ¦ Svið breikkað
+Gamme réduite ¦ Svið þrengt
+Coloriser : oui ¦ Lita: já
+Coloriser : non ¦ Lita: nei
+Coloriser ¦ Lita
+Propriétés du masque ¦ Eiginleikar grímu
+Teinte/Saturation remise à zéro ¦ Litblær/Mettun núllstillt
+Masque inversé ¦ Grímu snúið við
+Masque désactivé ¦ Gríma óvirk
+Masque réactivé ¦ Gríma virk aftur
+Masque retiré ¦ Gríma fjarlægð
+Masque ajouté ¦ Grímu bætt við
+Ce calque a déjà un masque. ¦ Þetta lag er þegar með grímu.
+Teinte/Saturation sur un calque ¦ Litblær/Mettun á lagi
+Teinte/Saturation ¦ Litblær/Mettun
+Ancien style ¦ Gamall stíll
+Global ¦ Allt
+Rouges ¦ Rauðir
+Jaunes ¦ Gulir
+Verts ¦ Grænir
+Cyans ¦ Blágrænir
+Bleus ¦ Bláir
+Magentas ¦ Blárauðir
+Cyanotype ¦ Blákopía
+Supprimer ce motif ¦ Eyða þessu mynstri
+Calque de motif <b>« {name} »</b> : tout se règle ici, tout de suite. ¦ Mynsturlag <b>„{name}“</b>: allt er stillt hér, strax.
+Choisis un motif, puis « Remplir » : il va sur son propre calque (dans la sélection s’il y en a une). Les motifs de l’app prennent tes deux couleurs. ¦ Veldu mynstur, síðan „Fylla“: það fer á sitt eigið lag (í valinu ef það er til). Mynstur appsins taka tvo liti þína.
+fond transparent (motifs de l’app) ¦ gegnsær bakgrunnur (mynstur appsins)
+Décalage horizontal ¦ Lárétt hliðrun
+Décalage vertical ¦ Lóðrétt hliðrun
+▩ Remplir : nouveau calque de motif ¦ ▩ Fylla: nýtt mynsturlag
+Il rejoint la bibliothèque des motifs (gardée sur cet ordinateur). ¦ Það bætist í mynstursafnið (geymt í þessari tölvu).
+l’image visible ¦ sýnilega myndin
+Taille du carreau ¦ Stærð flísar
+raccord sans couture (les bords se fondent) ¦ samfellt (kantarnir renna saman)
+Garder et remplir ¦ Geyma og fylla
+Plus de place pour garder ce motif : supprime des motifs, ou fais-le plus petit. ¦ Ekki meira pláss til að geyma þetta mynstur: eyddu mynstrum, eða gerðu það minna.
+Motif gardé dans la bibliothèque ▩. ¦ Mynstur geymt í safninu ▩.
+Mon motif ¦ Mitt mynstur
+Clic sur une forme : le pinceau 🖌 la prend. La taille se règle en haut (ou [ et ]). ¦ Smelltu á form: pensillinn 🖌 tekur það. Stærðin er stillt efst (eða [ og ]).
+Forme de la pointe ¦ Form oddsins
+Pas (écart entre les empreintes) ¦ Bil (milli fara)
+Petit : un trait continu. Grand : des empreintes séparées (étoiles, feuilles). ¦ Lítið: samfelld stroka. Stórt: aðskilin för (stjörnur, laufblöð).
+À 100 % la forme est entière ; plus bas, elle est aplatie (plume, pinceau plat). ¦ Við 100 % er formið heilt; lægra er það flatt út (fjöðurpenni, flatur pensill).
+l’angle suit le trait ¦ hornið fylgir strokunni
+Dynamique et dispersion ¦ Breytileiki og dreifing
+Variation de taille ¦ Stærðarbreytileiki
+Variation d’angle ¦ Hornbreytileiki
+Dispersion ¦ Dreifing
+Nombre par empreinte ¦ Fjöldi í hverju fari
+Transfert et couleur ¦ Flutningur og litur
+Flux (chaque empreinte) ¦ Flæði (hvert far)
+Variation d’opacité ¦ Breytileiki ógegnsæis
+Variation de couleur ¦ Litabreytileiki
+Fais d’abord une sélection autour du dessin ¦ Veldu fyrst svæði í kringum teikninguna
+Fais d’abord une sélection autour du dessin. ¦ Veldu fyrst svæði í kringum teikninguna.
+＋ Forme d’après la sélection ¦ ＋ Form út frá valinu
+Garder comme préréglage ¦ Geyma sem forstillingu
+＋ Garder comme préréglage ¦ ＋ Geyma sem forstillingu
+Garder cette forme de pinceau ¦ Geyma þetta pensilform
+Nom du préréglage : ¦ Heiti forstillingar:
+Plus de place pour garder ce pinceau. ¦ Ekki meira pláss til að geyma þennan pensil.
+🖌 Ta forme est prête : peins avec ; « Garder comme préréglage » pour la retrouver. ¦ 🖌 Formið þitt er tilbúið: málaðu með því; „Geyma sem forstillingu“ til að finna það aftur.
+Rond net ¦ Harður hringur
+Rond doux ¦ Mjúkur hringur
+Surligneur ¦ Áherslupenni
+Crayon fin ¦ Fínn blýantur
+Craie (grain) ¦ Krít (korn)
+Craie ¦ Krít
+Fusain ¦ Viðarkol
+Dégradé inversé ¦ Litstigli snúið við
+Dégradé : tramage ¦ Litstigull: dreifing
+Dégradé : sans tramage ¦ Litstigull: án dreifingar
+▦ Dégradé ¦ ▦ Litstigull
+Clic : ajouter un arrêt de couleur à cet endroit ¦ Smellur: bæta við litastoppi hér
+Clic sur la barre : un arrêt de plus · glisse un arrêt pour le déplacer, vers le bas pour l’enlever ¦ Smelltu á stikuna: einu stoppi meira · dragðu stopp til að færa það, niður til að fjarlægja það
+Mélange ¦ Blöndun
+Classique (RVB) ¦ Hefðbundin (RGB)
+Perceptuel (plus doux) ¦ Skynjunarleg (mýkri)
+Par les teintes ¦ Gegnum litblæina
+Au-delà des bouts ¦ Handan endanna
+Couleur des bouts ¦ Litur endanna
+Répéter ¦ Endurtaka
+Répéter en miroir ¦ Endurtaka speglað
+Le début devient la fin ¦ Upphafið verður endirinn
+⇄ Retourner les arrêts ¦ ⇄ Snúa stoppunum við
+Espacer également ¦ Jafna bil
+Couleur de l’arrêt ¦ Litur stopps
+Arrêt choisi ¦ Valið stopp
+Milieu vers le suivant ¦ Miðpunktur að því næsta
+Où se trouve le mélange à moitié entre cet arrêt et le suivant (le petit losange de Photoshop). ¦ Hvar blandan er hálfnuð milli þessa stopps og þess næsta (litli tígullinn í Photoshop).
+✕ Enlever cet arrêt ¦ ✕ Fjarlægja þetta stopp
+Supprimer ce préréglage ¦ Eyða þessari forstillingu
+Garder ce dégradé ¦ Geyma þennan litstigul
+Mon dégradé ¦ Minn litstigull
+Premier plan → transparent ¦ Forgrunnur → gegnsætt
+Noir → blanc ¦ Svart → hvítt
+Blanc → transparent ¦ Hvítt → gegnsætt
+Vignette (bords sombres) ¦ Skygging (dökkir kantar)
+Arc-en-ciel ¦ Regnbogi
+Cuivre ¦ Kopar
+Chrome ¦ Króm
+Or ¦ Gull
+Vieux papier ¦ Gamall pappír
+Nuit ¦ Nótt
+Printemps ¦ Vor
+Mer ¦ Haf
+Coucher de soleil ¦ Sólsetur
+▭ Linéaire ¦ ▭ Línulegur
+◉ Radial ¦ ◉ Geislalaga
+◔ Angle (conique) ¦ ◔ Horn (keilulaga)
+⇋ Réfléchi ¦ ⇋ Speglaður
+◇ Losange ¦ ◇ Tígull
+Damier ¦ Skákborð
+Pois ¦ Doppur
+Rayures ¦ Rendur
+Hachures ¦ Skástrik
+Briques ¦ Múrsteinar
+Chevrons ¦ Vinklar
+Losanges ¦ Tíglar
+Vagues ¦ Bylgjur
+Toile ¦ Strigi
+Croix ¦ Krossar
+Fleurs de lys ¦ Liljur
+Clique maintenant à l’endroit à recopier. ¦ Smelltu nú á staðinn sem á að afrita.
+Ce calque est verrouillé : déverrouille-le dans Calques. ¦ Þetta lag er læst: aflæstu því í Lögum.
+Texte effacé ¦ Texti hreinsaður
+Sélection vide ¦ Tómt val
+Sélection ajoutée ¦ Vali bætt við
+Sélection retirée ¦ Val dregið frá
+Image remplacée : même place, même taille, même rotation. ¦ Mynd skipt út: sami staður, sama stærð, sami snúningur.
+Image placée : ➤ glisse-la, tire un coin pour la taille (⇧ : libre), la poignée ronde pour la tourner. ¦ Mynd sett inn: ➤ dragðu hana, togaðu í horn fyrir stærðina (⇧: frjálst), í hringlaga handfangið til að snúa henni.
+Ce fichier n’est pas une image. ¦ Þessi skrá er ekki mynd.
+Remplacer l’image de l’objet dynamique ¦ Skipta um mynd snjallhlutarins
+Remplacer par cette image ¦ Skipta út fyrir þessa mynd
+La nouvelle image prend la place, la taille et la rotation de l’ancienne. ¦ Nýja myndin tekur stað, stærð og snúning þeirrar gömlu.
+Elle arrive sur un nouveau calque, en objet dynamique 🧩 (agrandir, réduire, tourner sans perte). Tu peux aussi glisser un fichier sur la photo, ou coller une image copiée (⌘V). ¦ Hún kemur á nýtt lag, sem snjallhlutur 🧩 (stækka, minnka, snúa án taps). Þú getur líka dregið skrá á myndina, eða límt afritaða mynd (⌘V).
+Sélection automatique ¦ Sjálfvirkt val
+Ce calque est verrouillé : choisis-en un autre dans Calques. ¦ Þetta lag er læst: veldu annað í Lögum.
+Endroit à recopier choisi : peins maintenant sur la zone à couvrir. ¦ Staður til að afrita valinn: málaðu nú yfir svæðið sem á að hylja.
+Choisis d’abord l’endroit à recopier (bouton 🎯 ou ⌥ + clic). ¦ Veldu fyrst staðinn sem á að afrita (hnappurinn 🎯 eða ⌥ + smellur).
+La photo n’est plus dans les calques : « ↺ Remettre la photo » (onglet Calques). ¦ Myndin er ekki lengur í lögunum: „↺ Setja myndina aftur“ (flipinn Lög).
+La photo est verrouillée (🔒 dans Calques). ¦ Myndin er læst (🔒 í Lögum).
+Tampon : zone recopiée (calque ✨ Retouches) ¦ Stimpill: svæði afritað (lagið ✨ Lagfæringar)
+Fais d’abord une sélection (outils ⬚ ◯ ➰ ✒︎ 🪄). ¦ Veldu fyrst svæði (tólin ⬚ ◯ ➰ ✒︎ 🪄).
+Aucun filtre utilisé pour l’instant (menu Filtre). ¦ Engin sía notuð enn (valmyndin Sía).
+Opacité du calque (dosage) ¦ Ógegnsæi lags (styrkur)
+Valeurs de départ ¦ Upphafsgildi
+Rien n’est détruit : le filtre est sur son propre calque. Plus tard : Calques → le calque → onglet ✨ Filtres → « régler… ». ¦ Engu er eytt: sían er á sínu eigin lagi. Síðar: Lög → lagið → flipinn ✨ Síur → „stilla…“.
+Filtre enlevé du calque ¦ Sía fjarlægð úr laginu
+Ordre des filtres ¦ Röð sía
+Filtres enlevés ¦ Síur fjarlægðar
+Plus de place pour les actions : supprimes-en une. ¦ Ekki meira pláss fyrir aðgerðir: eyddu einni.
+⚡ Actions ¦ ⚡ Aðgerðir
+Nom de l’action (ex. « Photos de l’album 1930 ») ¦ Heiti aðgerðar (t.d. „Myndir úr albúminu 1930“)
+Une action garde les réglages de la photo (exposition, niveaux, courbe, teinte, filtres, poussière, colorisation…) et ses calques de réglage sans masque. On la remet sur une autre photo, ou sur plusieurs d’un coup : chacune reçoit une <b>nouvelle version</b>, l’original est gardé. ¦ Aðgerð geymir stillingar myndarinnar (lýsing, stig, ferill, litblær, síur, ryk, litun…) og stillingarlög hennar án grímu. Þú setur hana á aðra mynd, eða á nokkrar í einu: hver fær <b>nýja útgáfu</b>, frumritið er geymt.
+Enregistrer cette action dans un fichier, pour la garder ou la donner ¦ Vista þessa aðgerð í skrá, til að geyma hana eða gefa hana
+Sur cette photo ¦ Á þessa mynd
+Sur plusieurs photos… ¦ Á nokkrar myndir…
+Aucune action enregistrée pour l’instant ¦ Engin aðgerð vistuð enn
+« ＋ Enregistrer les réglages actuels » les garde pour les rejouer sur d’autres photos. ¦ „＋ Vista núverandi stillingar“ geymir þær til að endurtaka á öðrum myndum.
+Les photos à retoucher ¦ Myndirnar sem á að lagfæra
+Prendre ces photos ¦ Taka þessar myndir
+＋ Choisir des photos… ¦ ＋ Velja myndir…
+afficher la nouvelle version ¦ sýna nýju útgáfuna
+Aucune photo choisie. ¦ Engin mynd valin.
+refusé ¦ hafnað
+fx Effets du calque ¦ fx Áhrif lags
+Fond (le contenu seulement, pas les effets) ¦ Fylling (aðeins innihaldið, ekki áhrifin)
+Lueur externe ¦ Ytri ljómi
+Incrustation de couleur ¦ Litayfirlögn
+à l’extérieur ¦ að utan
+au milieu ¦ í miðju
+à l’intérieur ¦ að innan
+Tout enlever ¦ Fjarlægja allt
+🔍 Plis et rayures ¦ 🔍 Brot og rispur
+Recherche des plis… ¦ Leitað að brotum…
+garder le grain autour ¦ halda korninu í kring
+🪡 Plutôt à la main ¦ 🪡 Frekar í höndunum
+✓ Réparer ces lignes ¦ ✓ Lagfæra þessar línur
+Aucun pli trouvé : monte la sensibilité, ou répare à la main avec le pinceau 🪡. ¦ Ekkert brot fannst: auktu næmið, eða lagfærðu í höndunum með penslinum 🪡.
+Réparation… ¦ Lagfæri…
+✨ Plis et rayures comblés ¦ ✨ Brot og rispur fyllt
+🌫️ Débruitage ¦ 🌫️ Suðhreinsun
+adoucit le grain sans perdre les contours ¦ mýkir kornið án þess að missa útlínurnar
+🧹 Poussières et rayures ¦ 🧹 Ryk og rispur
+les petits points blancs ou noirs ¦ litlu hvítu eða svörtu punktarnir
+🩹 Plis et fines déchirures ¦ 🩹 Brot og fínar rifur
+lignes fines repérées puis comblées ¦ fínar línur fundnar og fylltar
+🎚 Contraste et niveaux automatiques ¦ 🎚 Sjálfvirk birtuskil og stig
+noirs bien noirs, blancs bien blancs ¦ svart verulega svart, hvítt verulega hvítt
+🔎 Netteté douce ¦ 🔎 Mild skerpa
+un peu plus de piqué ¦ aðeins meiri skerpa
+🌈 Colorisation ¦ 🌈 Litun
+couleurs d’époque (photo en noir et blanc) ¦ litir þess tíma (svarthvít mynd)
+la photo a déjà des couleurs : coche si tu veux quand même ¦ myndin er þegar í lit: hakaðu við ef þú vilt samt
+Coche les étapes à garder ; chacune devient un calque « ✨ » que tu peux ensuite cacher ou doser. ↶ défait tout d’un coup. ¦ Hakaðu við skrefin sem á að halda; hvert verður lag „✨“ sem þú getur síðan falið eða dregið úr. ↶ afturkallar allt í einu.
+Garder : {what} ¦ Halda: {what}
+détail au centre ¦ smáatriði í miðju
+Aperçus… ¦ Forskoðanir…
+aucun pli trouvé à cette intensité ¦ ekkert brot fannst við þennan styrk
+Coche au moins une étape. ¦ Hakaðu við að minnsta kosti eitt skref.
+✨ Plis et fines déchirures ¦ ✨ Brot og fínar rifur
+✨ Poussières et rayures ¦ ✨ Ryk og rispur
+✨ Débruitage ¦ ✨ Suðhreinsun
+✨ Contraste et niveaux ¦ ✨ Birtuskil og stig
+✨ Netteté douce ¦ ✨ Mild skerpa
+✨ Colorisation ¦ ✨ Litun
+Colorisation ¦ Litun
+Couleurs (pinceau) ¦ Litir (pensill)
+✨ Retouches (taches, plis, tampon) ¦ ✨ Lagfæringar (blettir, brot, stimpill)
+🪪 Photo d’identité ¦ 🪪 Passamynd
+Les yeux à l’horizontale, toujours à la même hauteur : tous les portraits faits ainsi ont le même format. ¦ Augun lárétt, alltaf í sömu hæð: allar andlitsmyndir sem gerðar eru svona hafa sama snið.
+✓ Yeux trouvés sur le visage. ¦ ✓ Augu fundust í andlitinu.
+✓ D’après l’identification de la photo : ajuste les ronds sur les yeux. ¦ ✓ Út frá auðkenningu myndarinnar: lagaðu hringina á augun.
+⚠️ Visage non trouvé : glisse les deux ronds sur les yeux. ¦ ⚠️ Andlit fannst ekki: dragðu hringina tvo á augun.
+Plusieurs fiches… ¦ Nokkur spjöld…
+✓ Recadrer ¦ ✓ Skera
+👤 Utiliser comme portrait… ¦ 👤 Nota sem andlitsmynd…
+Recadré en photo d’identité ¦ Skorið sem passamynd
+3:4 (portrait classique) ¦ 3:4 (hefðbundin andlitsmynd)
+35 × 45 mm (photo d’identité) ¦ 35 × 45 mm (passamynd)
+Marge autour du visage ¦ Spássía kringum andlitið
+Hauteur des yeux ¦ Hæð augna
+modèle absent ¦ líkan vantar
+Recherche du visage… ¦ Leitað að andliti…
+Photo non enregistrée. ¦ Mynd ekki vistuð.
+Utiliser comme portrait de quelle fiche ? ¦ Nota sem andlitsmynd hvaða spjalds?
+PHOTO D’IDENTITÉ ¦ PASSAMYND
+La photo recadrée est ajoutée aux médias de la fiche, puis devient son portrait (l’ancien portrait reste dans ses médias). ¦ Skorna myndin bætist við miðla spjaldsins og verður síðan andlitsmynd þess (gamla andlitsmyndin er áfram í miðlum þess).
+Choisis une personne dans la liste. ¦ Veldu einstakling af listanum.
+RETOUCHE · PHOTO D’IDENTITÉ ¦ LAGFÆRING · PASSAMYND
+🪪 Portraits de plusieurs fiches ¦ 🪪 Andlitsmyndir margra spjalda
+Choisis les fiches : pour chacune, l’app prend son portrait (ou sa première photo), trouve le visage et le cadre au même format que les autres (yeux à la même hauteur). Tu vérifies, puis « Utiliser comme portraits » : chaque photo recadrée entre dans les médias de sa fiche et devient son portrait (l’ancien reste). ¦ Veldu spjöldin: fyrir hvert tekur appið andlitsmyndina (eða fyrstu myndina), finnur andlitið og afmarkar það í sama sniði og hin (augun í sömu hæð). Þú athugar, síðan „Nota sem andlitsmyndir“: hver skorin mynd fer í miðla síns spjalds og verður andlitsmynd þess (sú gamla helst).
+🔍 Préparer les portraits ¦ 🔍 Undirbúa andlitsmyndirnar
+Aucune fiche choisie pour l’instant ¦ Ekkert spjald valið enn
+Choisis une ou plusieurs personnes ci-dessus, puis « 🔍 Préparer les portraits ». ¦ Veldu einn eða fleiri einstaklinga hér að ofan, síðan „🔍 Undirbúa andlitsmyndirnar“.
+Choisis d’abord une ou plusieurs fiches. ¦ Veldu fyrst eitt eða fleiri spjöld.
+aucune photo dans la fiche ¦ engin mynd á spjaldinu
+yeux trouvés ¦ augu fundust
+d’après l’identification ¦ út frá auðkenningunni
+✓ portrait mis à jour ¦ ✓ andlitsmynd uppfærð
+Utiliser comme portraits ¦ Nota sem andlitsmyndir
+La rotation n’est pas encore prête : réessaie dans un instant. ¦ Snúningurinn er ekki tilbúinn enn: reyndu aftur eftir augnablik.
+Rotation de l’image ¦ Snúningur myndar
+Rotation de l’image : 90° horaire ¦ Snúningur myndar: 90° réttsælis
+Rotation de l’image : 90° antihoraire ¦ Snúningur myndar: 90° rangsælis
+Rotation de l’image : 180° ¦ Snúningur myndar: 180°
+Rotation de l’image : {a}° horaire ¦ Snúningur myndar: {a}° réttsælis
+Rotation de l’image : {a}° antihoraire ¦ Snúningur myndar: {a}° rangsælis
+Symétrie horizontale de l’image ¦ Spegla mynd lárétt
+Symétrie verticale de l’image ¦ Spegla mynd lóðrétt
+Perspective figée ¦ Sjónarhorn fest
+Le recadrage d’avant a été retiré (il ne tenait plus droit) : refais-le si besoin, ou ↶ Annuler. ¦ Fyrri skurður var fjarlægður (hann var ekki lengur beinn): gerðu hann aftur ef þarf, eða ↶ Afturkalla.
+📐 Redresser l’horizon ¦ 📐 Rétta sjóndeildarhringinn
+L’angle mesuré sur ta ligne : la photo tourne de cet angle pour la remettre droite. ¦ Hornið sem mælt er á línunni þinni: myndin snýst um þetta horn til að rétta hana.
+Coins ajoutés autour ¦ Horn bætt við í kring
+Transparents (PNG) ¦ Gegnsæ (PNG)
+✂️ Recadrer pour enlever les coins vides ¦ ✂️ Skera til að fjarlægja tómu hornin
+Tous les calques, masques, textes et la sélection tournent avec la photo. ↶ Annuler (⌘Z) revient comme avant. ¦ Öll lög, grímur, textar og valið snúast með myndinni. ↶ Afturkalla (⌘Z) fer aftur eins og áður.
+Donne un angle entre 0,01 et 359,99°. ¦ Gefðu horn á milli 0,01 og 359,99°.
+Trace une ligne le long de l’horizon (ou d’un mur bien droit) : la photo tournera pour la remettre droite. Échap pour arrêter. ¦ Dragðu línu eftir sjóndeildarhringnum (eða beinum vegg): myndin snýst til að rétta hana. Esc til að hætta.
+Cette ligne est déjà droite : rien à tourner. ¦ Þessi lína er þegar bein: ekkert að snúa.
+Photo prise avec le téléphone tourné : elle est enregistrée couchée. ¦ Mynd tekin með símann snúinn: hún er vistuð á hliðinni.
+↻ Remettre droite ¦ ↻ Snúa uppréttri
+Photo remise droite (orientation du téléphone) ¦ Mynd snúið upprétt (stefna símans)
+Les retouches en cours seront perdues (💾 Enregistrer le projet les garde pour plus tard). ¦ Lagfæringar í vinnslu tapast (💾 Vista verkefnið geymir þær til síðari tíma).
+Passer à la retouche simple ? ¦ Skipta yfir í einfalda lagfæringu?
+Passer sans enregistrer ¦ Skipta án þess að vista
+Le PSD n’est pas encore prêt : réessaie dans un instant. ¦ PSD er ekki tilbúið enn: reyndu aftur eftir augnablik.
+L’assemblage de photos n’est pas encore prêt. ¦ Samsetning mynda er ekki tilbúin enn.
+Cet outil n’est pas encore prêt : réessaie dans un instant. ¦ Þetta tól er ekki tilbúið enn: reyndu aftur eftir augnablik.
+Recherche du sujet… ¦ Leitað að myndefni…
+Sujet introuvable : le fond touche tout le bord. Essaie avec moins de tolérance (🪄), ou le lasso. ¦ Myndefni fannst ekki: bakgrunnurinn snertir allan kantinn. Prófaðu með minni vikmörkum (🪄), eða snöruna.
+Sujet sélectionné : ⇧ + baguette ou lasso pour ajouter, ⌥ pour enlever ; « Masque » pour l’appliquer. Tolérance (🪄) : jusqu’où va le fond. ¦ Myndefni valið: ⇧ + sproti eða snara til að bæta við, ⌥ til að draga frá; „Gríma“ til að beita því. Vikmörk (🪄): hversu langt bakgrunnurinn nær.
+Sujet sélectionné ¦ Myndefni valið
+La photo semble déjà droite. ¦ Myndin virðist þegar bein.
+Des corrections (taches, tampon) sont déjà faites : elles vont bouger avec la remise à plat. ¦ Sumar leiðréttingar (blettir, stimpill) hafa þegar verið gerðar: þær færast til við flatninguna.
+Redresser la perspective ? ¦ Leiðrétta sjónarhorn?
+Perspective redressée ¦ Sjónarhorn leiðrétt
+Perspective enlevée ¦ Sjónarhornsleiðrétting fjarlægð
+Peins les couleurs (pinceau doux) : le calque est en fusion « Couleur », la lumière de la photo est gardée. 🧽 pour corriger, opacité du calque pour doser. ¦ Málaðu litina (mjúkur pensill): lagið er í blöndunarhamnum „Litur“, birta myndarinnar helst. 🧽 til að leiðrétta, ógegnsæi lagsins til að draga úr.
+Recherche des taches… ¦ Leitað að blettum…
+Aucune tache trouvée : augmente la sensibilité ou la taille. ¦ Enginn blettur fannst: auktu næmið eða stærðina.
+✨ Jaunissement enlevé ¦ ✨ Gulnun fjarlægð
+Jaunissement enlevé sur le calque de réglage « ✨ Jaunissement enlevé » : la photo n’est pas touchée. ¦ Gulnun fjarlægð á stillingarlaginu „✨ Gulnun fjarlægð“: myndin er ósnert.
+Jaunissement enlevé (calque de réglage) ¦ Gulnun fjarlægð (stillingarlag)
+Entoure d’abord le visage avec l’ellipse ◯ (glisse sur la photo), puis reclique « Visage plus net ». ¦ Afmarkaðu fyrst andlitið með sporbaugnum ◯ (dragðu á myndinni), smelltu síðan aftur á „Skarpara andlit“.
+Visage débruité et accentué sur un calque à part : son opacité dose l’effet. ¦ Suð fjarlægt úr andliti og það skerpt á sérstöku lagi: ógegnsæi þess stillir áhrifin.
+Correcteur prêt : glisse le long de la rayure ou du pli (zoome pour être précis). ¦ Lagfæringartólið tilbúið: dragðu eftir rispunni eða brotinu (þysjaðu til að vera nákvæm(ur)).
+✨ Vieille photo ravivée ¦ ✨ Gömul mynd lífguð við
+✨ Réglage automatique ¦ ✨ Sjálfvirk stilling
+Fais d’abord une sélection. ¦ Veldu fyrst svæði.
+Masque qui cache tout ¦ Gríma sem felur allt
+Ce calque n’a pas de masque (Calque → Ajouter un masque). ¦ Þetta lag hefur enga grímu (Lag → Bæta við grímu).
+Ce calque n’a pas de masque. ¦ Þetta lag hefur enga grímu.
+Sélection inversée ¦ Vali snúið við
+Agrandir la sélection ¦ Stækka valið
+Réduire la sélection ¦ Minnka valið
+De combien de points (de l’aperçu) ? ¦ Um hve marga díla (forskoðunarinnar)?
+Sélection agrandie ¦ Val stækkað
+Sélection réduite ¦ Val minnkað
+Contour progressif de la sélection ¦ Mjúkur jaðar á vali
+Copie de la sélection ¦ Afrit af valinu
+Sélection copiée sur un calque ¦ Val afritað á lag
+Remplissage ¦ Fylling
+Zone effacée de la photo : elle sera transparente (image enregistrée en PNG). ¦ Svæði hreinsað úr myndinni: það verður gegnsætt (mynd vistuð sem PNG).
+Sélection effacée ¦ Val hreinsað
+Recadré sur la sélection ¦ Skorið að valinu
+Filtres de ce calque ¦ Síur þessa lags
+Plus tôt ¦ Fyrr
+un filtre… ¦ sía…
+＋ Ajouter ¦ ＋ Bæta við
+✨ Menu <b>Filtre</b> : chaque filtre se pose sur son propre calque (rien n’est détruit) : on le règle, on le dose avec l’opacité du calque, on le limite avec un masque 🎭, on le cache 👁. ¦ ✨ Valmyndin <b>Sía</b>: hver sía fer á sitt eigið lag (engu er eytt): þú stillir hana, dregur úr henni með ógegnsæi lagsins, takmarkar hana með grímu 🎭, felur hana 👁.
+Réglages remis à zéro ¦ Stillingar núllstilltar
+Point de courbe enlevé ¦ Ferilpunktur fjarlægður
+Supprimer ce point ¦ Eyða þessum punkti
+Point de la courbe ¦ Punktur á ferli
+Masque en rouge : ce qui est caché (touche \ pour revenir) ¦ Gríma í rauðu: það sem er falið (lykillinn \ til að fara til baka)
+Pas encore enregistré comme projet : 💾 Enregistrer garde tout le travail pour continuer plus tard ¦ Ekki enn vistað sem verkefni: 💾 Vista geymir alla vinnuna til að halda áfram síðar
+Enregistrer le projet sous un autre nom ¦ Vista verkefnið undir öðru nafni
+Nom du nouveau projet (pour le retrouver dans « 📂 Projets… ») : ¦ Heiti nýja verkefnisins (til að finna það í „📂 Verkefni…“):
+Les retouches en cours seront perdues. ¦ Lagfæringar í vinnslu tapast.
+Ouvrir un autre projet sans enregistrer ce travail ? ¦ Opna annað verkefni án þess að vista þessa vinnu?
+Ouvrir sans enregistrer ¦ Opna án þess að vista
+affichée ¦ sýnd
+en cours de retouche ¦ í lagfæringu
+Voir, comparer, revenir, renommer, supprimer (L3) ¦ Skoða, bera saman, fara aftur, endurnefna, eyða (L3)
+Voir, comparer, revenir, renommer, supprimer ¦ Skoða, bera saman, fara aftur, endurnefna, eyða
+l’original est toujours gardé ¦ frumritið er alltaf geymt
+Original ¦ Frumrit
+Quitter cette retouche sans l’enregistrer ? ¦ Hætta í þessari lagfæringu án þess að vista hana?
+Pas de versions pour cette image. ¦ Engar útgáfur af þessari mynd.
+Bicubique, plus lisse (pour agrandir) ¦ Bicubic, mýkra (til að stækka)
+Bicubique, plus net (pour réduire) ¦ Bicubic, skarpara (til að minnka)
+Bilinéaire ¦ Bilinear
+Au plus proche (contours nets, pixels) ¦ Næsti nágranni (skarpir kantar, dílar)
+La taille de l’image enregistrée ou exportée (Image → Taille de l’image, Taille de la zone de travail) ¦ Stærð myndarinnar sem er vistuð eða flutt út (Mynd → Stærð myndar, Stærð vinnusvæðis)
+📏 Taille de l’image ¦ 📏 Stærð myndar
+pixels ¦ dílar
+pour cent ¦ prósent
+Ajuster à un format ¦ Laga að sniði
+— garder ces mesures — ¦ — halda þessum málum —
+🔗 Conserver les proportions ¦ 🔗 Halda hlutföllum
+Résolution ¦ Upplausn
+Rééchantillonner ¦ Endursýna
+Méthode ¦ Aðferð
+À l’impression ¦ Við prentun
+↺ Remettre la taille d’origine ¦ ↺ Setja aftur upprunalega stærð
+La photo reste en pleine qualité pendant la retouche : la taille choisie s’applique quand tu enregistres ou exportes l’image. ↶ Annuler (⌘Z) revient à la taille d’avant. ¦ Myndin helst í fullum gæðum meðan á lagfæringu stendur: valin stærð gildir þegar þú vistar eða flytur út myndina. ↶ Afturkalla (⌘Z) fer aftur í fyrri stærð.
+✓ Assez grande pour imprimer en A5 à 300 ppp. ¦ ✓ Nógu stór til að prenta í A5 við 300 pát.
+⚠️ Trop petite pour imprimer en A5 à 300 ppp (il faut 1748 × 2480 px). ¦ ⚠️ Of lítil til að prenta í A5 við 300 pát (þarf 1748 × 2480 px).
+Choisis une taille entre 1 et 30 000 pixels de côté (260 millions de pixels au plus). ¦ Veldu stærð á milli 1 og 30 000 díla á hlið (260 milljónir díla í mesta lagi).
+⬚ Taille de la zone de travail ¦ ⬚ Stærð vinnusvæðis
+Nouvelle taille ¦ Ný stærð
+Ancrage ¦ Akkeri
+Où reste l’image ¦ Hvar myndin helst
+Relative (ajouter à la taille actuelle) ¦ Hlutfallslegt (bæta við núverandi stærð)
+Au centre ¦ Í miðju
+L’image reste à cet endroit ; la toile s’agrandit (ou se coupe) autour. ¦ Myndin helst á þessum stað; striginn stækkar (eða er skorinn) í kring.
+Fond de la zone ajoutée ¦ Bakgrunnur viðbætta svæðisins
+Transparent (PNG) ¦ Gegnsær (PNG)
+↺ Remettre la zone de départ ¦ ↺ Setja aftur upprunalegt vinnusvæði
+↶ Annuler (⌘Z) revient à la zone d’avant. ¦ ↶ Afturkalla (⌘Z) fer aftur í fyrra vinnusvæði.
+Choisis une taille entre 1 et 30 000 pixels de côté. ¦ Veldu stærð á milli 1 og 30 000 díla á hlið.
+Informations de l’image ¦ Upplýsingar um mynd
+Ces informations sont écrites dans l’image enregistrée ou exportée (XMP, lisible par Photoshop, Lightroom, l’Explorateur…). ¦ Þessar upplýsingar eru skrifaðar í myndina sem er vistuð eða flutt út (XMP, læsilegt í Photoshop, Lightroom, Explorer…).
+Droits (copyright) ¦ Réttindi (höfundarréttur)
+Personnes reliées ¦ Tengdir einstaklingar
+Image trop grande pour être enregistrée par le navigateur. ¦ Myndin er of stór til að vafrinn geti vistað hana.
+Image trop grande pour le navigateur. ¦ Myndin er of stór fyrir vafrann.
+Copie retouchée ajoutée aux mêmes fiches. ¦ Lagfærðu afriti bætt við sömu spjöld.
+Image enregistrée dans les Médias. ¦ Mynd vistuð í Miðlum.
+Nouvelle version affichée. L’original est gardé dans les versions. ¦ Ný útgáfa sýnd. Frumritið er geymt í útgáfunum.
+Version enregistrée (non affichée). ¦ Útgáfa vistuð (ekki sýnd).
+Ouverture de la photo ¦ Opna myndina
+La photo de départ n’a plus la même taille : vérifie les calques. ¦ Upphafsmyndin er ekki lengur í sömu stærð: athugaðu lögin.
+Supprimer le projet (les photos et leurs versions restent) ¦ Eyða verkefninu (myndirnar og útgáfur þeirra haldast)
+Aucun projet de retouche pour l’instant ¦ Ekkert lagfæringarverkefni enn
+Dans la Retouche, « 💾 Enregistrer le projet ». ¦ Í Lagfæringu, „💾 Vista verkefnið“.
+Renommer le projet ¦ Endurnefna verkefnið
+La photo et ses versions restent. ¦ Myndin og útgáfur hennar haldast.
+Écran 16:9 — 1920 × 1080 ¦ Skjár 16:9 — 1920 × 1080
+Carré — 1080 × 1080 ¦ Ferningur — 1080 × 1080
+Carte postale — 1500 × 2100 ¦ Póstkort — 1500 × 2100
+A4 portrait (150 dpi) — 1240 × 1754 ¦ A4 skammsnið (150 dpi) — 1240 × 1754
+A4 paysage (150 dpi) — 1754 × 1240 ¦ A4 langsnið (150 dpi) — 1754 × 1240
+A4 portrait (300 dpi) — 2480 × 3508 ¦ A4 skammsnið (300 dpi) — 2480 × 3508
+Autre taille… ¦ Önnur stærð…
+⬜ Partir d’un canevas vide ¦ ⬜ Byrja á auðum striga
+⬜ Canevas vide ¦ ⬜ Auður strigi
+Créer et ouvrir ¦ Búa til og opna
+Une couleur… ¦ Litur…
+Le canevas est ajouté aux Médias ; on y met ensuite des calques, des groupes, du texte, des formes, des photos (Sélection → calque)… ¦ Striganum er bætt við Miðla; síðan setur þú á hann lög, hópa, texta, form, myndir (Val → lag)…
+Taille entre 16 et 8 000 pixels de côté. ¦ Stærð á milli 16 og 8 000 díla á hlið.
+Canevas trop grand pour le navigateur. ¦ Striginn er of stór fyrir vafrann.
+Création impossible. ¦ Ekki hægt að búa til.
+Canevas ¦ Strigi
+Restaurer cette photo ¦ Endurgera þessa mynd
+Retoucher cette photo ¦ Lagfæra þessa mynd
+Une photo importée est ajoutée aux Médias (sans être rattachée à une fiche) ; ses retouches sont gardées comme versions. ¦ Innflutt mynd bætist við Miðla (án þess að vera tengd spjaldi); lagfæringar hennar eru geymdar sem útgáfur.
+Rouvrir un travail de retouche enregistré ¦ Opna aftur vistaða lagfæringarvinnu
+📂 Projets… ¦ 📂 Verkefni…
+Une image vide, pour dessiner, écrire ou assembler des calques ¦ Auð mynd, til að teikna, skrifa eða setja saman lög
+Trop grande : {w} × {h} points. L’agrandissement est limité à {max} points de côté (et {mp} millions de points). ¦ Of stór: {w} × {h} dílar. Stækkun er takmörkuð við {max} díla á hlið (og {mp} milljónir díla).
+Ta sélection est prise comme ciel ¦ Valið þitt er notað sem himinn
+Ciel trouvé : {cov} de la photo ¦ Himinn fannst: {cov} af myndinni
+calques « Ciel » et « Harmonisation » ¦ lögin „Himinn“ og „Samræming“
+Ciel remplacé ({what}) ¦ Himni skipt út ({what})
+Personne détourée (dans ton rectangle) : choisis le fond ; « Retoucher le contour » pour corriger au pinceau. ¦ Einstaklingur klipptur út (í rétthyrningnum þínum): veldu bakgrunninn; „Lagfæra útlínuna“ til að leiðrétta með pensli.
+Personne détourée : choisis le fond ; « Retoucher le contour » pour corriger au pinceau. ¦ Einstaklingur klipptur út: veldu bakgrunninn; „Lagfæra útlínuna“ til að leiðrétta með pensli.
+{w} × {h} points aujourd’hui ¦ {w} × {h} dílar núna
+Cette image est déjà grande : l’agrandissement est limité à {max} points de côté. ¦ Þessi mynd er þegar stór: stækkun er takmörkuð við {max} díla á hlið.
+×4 donnerait plus de {max} points de côté : seulement ×2. ¦ ×4 myndi gefa meira en {max} díla á hlið: aðeins ×2.
+Image agrandie téléchargée ({w} × {h}). ¦ Stækkuð mynd sótt ({w} × {h}).
+Image agrandie ×{k} ({w} × {h}) rangée dans les médias. ¦ Mynd stækkuð ×{k} ({w} × {h}) vistuð í miðlum.
+Nouvelle version agrandie ×{k} ({w} × {h}) affichée ; l’original reste dans les versions. ¦ Ný útgáfa stækkuð ×{k} ({w} × {h}) sýnd; frumritið helst í útgáfunum.
+☀️ Bleu dégagé ¦ ☀️ Heiðblár
+⛅ Beaux nuages ¦ ⛅ Falleg ský
+🌅 Coucher de soleil ¦ 🌅 Sólsetur
+⛈️ Ciel orageux ¦ ⛈️ Óveðurshiminn
+🌫️ Ciel blanc d’hiver ¦ 🌫️ Hvítur vetrarhiminn
+Agrandissement arrêté. ¦ Stækkun stöðvuð.
+Fil de calcul en panne. ¦ Útreikningsþráður bilaði.
+Recherche du ciel… ¦ Leitað að himni…
+Je ne trouve pas de ciel : il doit toucher le haut de la photo et être assez uni. Sélectionne-le toi-même (🪄 baguette, ➰ lasso), puis recommence : ta sélection sera prise comme ciel. ¦ Ég finn engan himin: hann verður að snerta efri brún myndarinnar og vera nokkuð jafn. Veldu hann sjálf(ur) (🪄 sproti, ➰ snara), byrjaðu síðan aftur: valið þitt verður notað sem himinn.
+Harmonisation du premier plan ¦ Samræming forgrunns
+Ciel ¦ Himinn
+☁️ Remplacer le ciel ¦ ☁️ Skipta um himin
+Une photo de ciel : de la base, ou de l’ordinateur ¦ Mynd af himni: úr gagnagrunninum, eða úr tölvunni
+Une image… ¦ Mynd…
+Taille du nouveau ciel ¦ Stærð nýja himinsins
+Position verticale ¦ Lóðrétt staðsetning
+Position horizontale ¦ Lárétt staðsetning
+Avec une taille au-dessus de 100 % : quelle partie du ciel se voit (0 = le haut). ¦ Með stærð yfir 100 %: hvaða hluti himinsins sést (0 = efst).
+Fondu à l’horizon ¦ Blöndun við sjóndeildarhring
+Adoucit la limite entre le ciel et la terre (arbres, toits) : plus haut, plus fondu. ¦ Mýkir mörkin milli himins og lands (tré, þök): hærra þýðir meiri blöndun.
+Harmoniser le premier plan ¦ Samræma forgrunninn
+Le paysage prend un peu la couleur et la lumière du nouveau ciel, pour que tout aille ensemble. ¦ Landslagið fær aðeins lit og birtu nýja himinsins, svo allt passi saman.
+Opacité du ciel ¦ Ógegnsæi himins
+Peindre le masque du calque « Ciel » : ⬛ cacher (là où le ciel ne doit pas passer), ⬜ montrer ¦ Mála grímu lagsins „Himinn“: ⬛ fela (þar sem himinninn á ekki að sjást), ⬜ sýna
+🖌 Corriger le masque ¦ 🖌 Leiðrétta grímuna
+Rien n’est détruit : le ciel est un calque avec un masque. Si un bout de ciel manque ou déborde : « Corriger le masque », ou sélectionne le ciel toi-même (🪄, ➰) et relance. ¦ Engu er eytt: himinninn er lag með grímu. Ef bút af himni vantar eða hann flæðir yfir: „Leiðrétta grímuna“, eða veldu himininn sjálf(ur) (🪄, ➰) og byrjaðu aftur.
+Une photo de ciel ¦ Mynd af himni
+Prendre ce ciel ¦ Nota þennan himin
+Une photo de la base, ou une image de l’ordinateur (elle entre dans les médias). ¦ Mynd úr gagnagrunninum, eða mynd úr tölvunni (hún fer í miðlana).
+Tu peins le masque du ciel : ⬛ cacher là où le ciel déborde (feuillage, toits), ⬜ montrer là où il manque. Puis « ✓ OK ». ¦ Þú málar grímu himinsins: ⬛ feldu þar sem himinninn flæðir yfir (laufskrúð, þök), ⬜ sýndu þar sem hann vantar. Síðan „✓ Í lagi“.
+Ciel remplacé : calques « Ciel » et « Harmonisation du premier plan » (opacité, masque, 👁 pour comparer). ¦ Himni skipt út: lögin „Himinn“ og „Samræming forgrunns“ (ógegnsæi, gríma, 👁 til að bera saman).
+✂️ Détourer une personne ¦ ✂️ Klippa út einstakling
+Sans intelligence artificielle : tout se calcule ici ¦ Án gervigreindar: allt er reiknað hér
+1. Trace un rectangle autour de la personne (⬚), pas trop serré — ou laisse tout : la photo entière sert de cadre. ¦ 1. Dragðu rétthyrning í kringum einstaklinginn (⬚), ekki of þröngt — eða slepptu því: öll myndin verður ramminn.
+2. « Détourer » : l’app apprend les couleurs de la personne (dans le rectangle) et du fond (autour), puis suit les contours. ¦ 2. „Klippa út“: appið lærir liti einstaklingsins (í rétthyrningnum) og bakgrunnsins (í kring), fylgir síðan útlínunum.
+⬚ Tracer un rectangle ¦ ⬚ Draga rétthyrning
+✂️ Détourer ¦ ✂️ Klippa út
+Fond transparent (image en PNG) ¦ Gegnsær bakgrunnur (PNG-mynd)
+Fond flou ¦ Óskýr bakgrunnur
+Fond uni ¦ Einlitur bakgrunnur
+Garder la personne sur un calque à part ¦ Halda einstaklingnum á sérstöku lagi
+Flou du fond ¦ Óskýrleiki bakgrunns
+Peindre le masque : ⬛ cacher, ⬜ montrer ¦ Mála grímuna: ⬛ fela, ⬜ sýna
+🖌 Retoucher le contour ¦ 🖌 Lagfæra útlínuna
+Marche bien quand la personne se détache de son fond (couleurs différentes, fond assez simple). Cheveux fins, fond chargé ou vêtements de la couleur du fond : il faudra retoucher au pinceau (« Retoucher le contour »). ¦ Virkar vel þegar einstaklingurinn sker sig úr bakgrunninum (ólíkir litir, frekar einfaldur bakgrunnur). Fínt hár, flókinn bakgrunnur eða föt í lit bakgrunnsins: þú þarft að lagfæra með pensli („Lagfæra útlínuna“).
+Personne détourée ¦ Einstaklingur klipptur út
+Trace un rectangle autour de la personne (en laissant un peu de fond tout autour), puis « ✂️ Détourer ». ¦ Dragðu rétthyrning í kringum einstaklinginn (og skildu eftir smá bakgrunn allt í kring), síðan „✂️ Klippa út“.
+Détourage… ¦ Klippi út…
+Personne introuvable : trace le rectangle plus près d’elle, puis recommence. ¦ Einstaklingur fannst ekki: dragðu rétthyrninginn nær honum, byrjaðu síðan aftur.
+✂️ Détourer à nouveau ¦ ✂️ Klippa út aftur
+Tu peins le masque de la personne : ⬛ cacher (du fond resté), ⬜ montrer (un bout de la personne oublié). ¦ Þú málar maska einstaklingsins: ⬛ fela (bakgrunnur sem varð eftir), ⬜ sýna (bútur af einstaklingnum sem gleymdist).
+Tu peins le masque du fond : ⬛ cacher (là c’est la personne), ⬜ montrer (là c’est du fond). ¦ Þú málar maska bakgrunnsins: ⬛ fela (þar er einstaklingurinn), ⬜ sýna (þar er bakgrunnur).
+Détourage : fond transparent ¦ Útklipping: gegnsær bakgrunnur
+Détourage : fond flou ¦ Útklipping: óskýr bakgrunnur
+Détourage : fond uni ¦ Útklipping: einlitur bakgrunnur
+Détourage : personne sur un calque ¦ Útklipping: einstaklingurinn á lagi
+Fond rendu transparent (masque de la photo) : l’image sera enregistrée en PNG. ¦ Bakgrunnur gerður gegnsær (maski myndarinnar): myndin verður vistuð sem PNG.
+Détourage fait : tout est sur des calques, avec des masques à retoucher au besoin. ¦ Útklippingu lokið: allt er á lögum, með möskum sem þú getur lagfært eftir þörfum.
+Trace un rectangle autour de la personne (⬚), ou « ✂️ Détourer » directement pour toute la photo. ¦ Dragðu rétthyrning utan um einstaklinginn (⬚), eða „✂️ Klippa út“ beint fyrir alla myndina.
+Préparation de l’image en pleine taille… ¦ Undirbý myndina í fullri stærð…
+🔍 Agrandir l’image ¦ 🔍 Stækka myndina
+Netteté des contours ¦ Skerpa útlína
+Renforce les contours sans faire de halo ; les aplats (ciel, peau) restent doux. ¦ Styrkir útlínurnar án geislabaugs; sléttir fletir (himinn, húð) haldast mjúkir.
+Clique pour choisir l’endroit de l’aperçu ¦ Smelltu til að velja hvar forskoðunin er
+Lissage du grain ¦ Kornjöfnun
+Avant (agrandi simplement) ¦ Fyrir (aðeins stækkað)
+Après, à 100 % ¦ Eftir, í 100 %
+Une nouvelle version de la photo, affichée partout (l’original reste) ¦ Ný útgáfa af myndinni, sýnd alls staðar (frumritið helst)
+Agrandir → nouvelle version ¦ Stækka → ný útgáfa
+→ copie séparée ¦ → sérstakt afrit
+Agrandir → dans les médias ¦ Stækka → í miðla
+Agrandir ne retrouve pas les détails qui n’ont jamais été photographiés : l’image est plus grande et plus nette, pas plus précise. ¦ Stækkun endurheimtir ekki smáatriði sem voru aldrei ljósmynduð: myndin verður stærri og skarpari, ekki nákvæmari.
+Cette image est déjà trop grande pour être agrandie. ¦ Þessi mynd er þegar of stór til að stækka hana.
+Filtre : {what} ¦ Sía: {what}
+🎨 Teinte/Saturation {num} ¦ 🎨 Litblær/mettun {num}
+Motif {num} ¦ Mynstur {num}
+Bruit ¦ Suð
+Artistiques ¦ Listrænar
+Pixellisation ¦ Pixlun
+Rendu ¦ Myndgerð
+Autres ¦ Annað
+Flou gaussien ¦ Gauss-móða
+Flou de mouvement ¦ Hreyfimóða
+Flou radial (zoom) ¦ Geislamóða (aðdráttur)
+Flou rotatif ¦ Snúningsmóða
+Accentuation (masque flou) ¦ Skerping (móðumaski)
+Estampage (relief) ¦ Upphleyping (lágmynd)
+Solarisation ¦ Sólarvending
+Diffusion ¦ Dreifing
+Vent ¦ Vindur
+Aquarelle ¦ Vatnslitir
+Vieux film ¦ Gömul filma
+Cristallisation ¦ Kristöllun
+Pointillisme ¦ Punktamálun
+Nuages (texture) ¦ Ský (áferð)
+Lueur diffuse ¦ Dreifður bjarmi
+Tourbillon ¦ Hringiða
+Onde ¦ Bylgja
+Rayon ¦ Radíus
+Centre X ¦ Miðja X
+Centre Y ¦ Miðja Y
+Seuil ¦ Þröskuldur
+Bande nette, hauteur ¦ Skarpt belti, hæð
+Points lumineux ¦ Ljósir punktar
+Monochrome (0 / 1) ¦ Einlitt (0 / 1)
+Gain ¦ Magn
+Niveaux ¦ Stig
+Longueur ¦ Lengd
+Contours ¦ Útlínur
+Trait ¦ Strik
+Traits noirs ¦ Svört strik
+Usure ¦ Slit
+Position X ¦ Staðsetning X
+Position Y ¦ Staðsetning Y
+Amplitude ¦ Sveifluvídd
+Horizontale (0) / verticale (1) ¦ Lárétt (0) / lóðrétt (1)
+Horizontal ¦ Lárétt
+Contraste ¦ Birtuskil
+Ombres ¦ Skuggar
+Chaleur ¦ Hlýja
+Rouge ¦ Rauður
+Vert ¦ Grænn
+Bleu ¦ Blár
+RVB ¦ RGB
+Assombrir ¦ Dekkja
+Grain ¦ Korn
+Vignette ¦ Jaðarskygging
+Force ¦ Styrkur
+Couleurs ¦ Litir
+Auto ¦ Sjálfvirkt
+Document lisible ¦ Læsilegt skjal
+Niveaux : point noir, tons moyens, point blanc ¦ Stig: svartpunktur, millitónar, hvítpunktur
+Niveaux automatiques ¦ Sjálfvirk stig
+Monter la courbe éclaircit, la creuser assombrit, un « S » donne du contraste. Rouge, vert, bleu : corriger une dominante de couleur. ¦ Að lyfta ferlinum lýsir, að dýpka hann dekkir, „S“ gefur birtuskil. Rauður, grænn, blár: leiðréttu litablæ sem ríkir.
+✨ Menu ¦ ✨ Valmynd
+Déplacer : glisse la poignée, ou Alt + ↑ / ↓ ¦ Færa: dragðu handfangið, eða Alt + ↑ / ↓
+Auto : les points les plus sombres deviennent noirs et les plus clairs blancs ; cliquer une 2ᵉ fois revient à l’état d’avant. ¦ Sjálfvirkt: dekkstu punktarnir verða svartir og þeir ljósustu hvítir; ef smellt er í 2. sinn fer allt aftur eins og það var.
+Éclaircit seulement les parties sombres (ou les assombrit vers la gauche), sans toucher aux claires. ¦ Lýsir aðeins dökku hlutana (eða dekkir þá til vinstri), án þess að snerta þá ljósu.
+Cliquer à nouveau pour revenir à l’état d’avant ¦ Smelltu aftur til að fara aftur í fyrra horf
+Clic sur la courbe : ajouter un point · glisser : le déplacer · pour l’enlever : le choisir puis « Enlever le point » (ou la touche ⌫), ou le glisser hors du cadre. ¦ Smellur á ferilinn: bæta við punkti · draga: færa hann · til að fjarlægja hann: veldu hann og síðan „Fjarlægja punktinn“ (eða ⌫-takkann), eða dragðu hann út fyrir rammann.
+fx ¦ fx
+Normal italique ¦ Venjulegt skáletur
+Extra-fin italique ¦ Örþunnt skáletur
+Ultra-léger italique ¦ Ofurlétt skáletur
+Léger italique ¦ Létt skáletur
+Médium italique ¦ Miðlungs skáletur
+Demi-gras italique ¦ Hálffeitt skáletur
+Gras italique ¦ Feitt skáletur
+Extra-gras italique ¦ Aukafeitt skáletur
+Noir italique ¦ Svart skáletur
+Unicode : Latin-1 ¦ Unicode: Latin-1
+Unicode : grec ¦ Unicode: gríska
+Unicode : cyrillique ¦ Unicode: kyrillíska
+Unicode : ponctuation ¦ Unicode: greinarmerki
+Unicode : monnaies ¦ Unicode: gjaldmiðlar
+Unicode : symboles de lettres ¦ Unicode: bókstafstákn
+Unicode : nombres ¦ Unicode: tölur
+Unicode : traits de tableau ¦ Unicode: rammastrik
+Unicode : symboles divers ¦ Unicode: ýmis tákn
+Unicode : casseau (dingbats) ¦ Unicode: skrauttákn (dingbats)
+Unicode : ligatures ¦ Unicode: stafabönd
+Grain de papier ¦ Pappírskorn
+Rond ¦ Hringlaga
+Plume calligraphique ¦ Skrautskriftarpenni
+Crayon ¦ Blýantur
+Pinceau sec ¦ Þurr pensill
+Herbe ¦ Gras
+Peau claire ¦ Ljós húð
+Peau hâlée ¦ Sólbrún húð
+Peau mate ¦ Ólífulituð húð
+Joues, lèvres ¦ Kinnar, varir
+Cheveux bruns ¦ Brúnt hár
+Cheveux blonds ¦ Ljóst hár
+Cheveux gris ¦ Grátt hár
+Feuillage ¦ Lauf
+Uniforme, costume bleu ¦ Einkennisbúningur, blá föt
+Robe bordeaux ¦ Vínrauður kjóll
+Habit noir ¦ Svört föt
+Mur, pierre ¦ Veggur, steinn
+Brique, tuile ¦ Múrsteinn, þakflís
+Bois ¦ Viður
+🩹 Correcteur ¦ 🩹 Lagfæringartól
+🧬 Tampon (morceau manquant) ¦ 🧬 Afritunarstimpill (bútur sem vantar)
+Zoom : ajuster, 50 %, 100 %, 200 % ¦ Aðdráttur: aðlaga, 50 %, 100 %, 200 %
+photo|Restaurer ¦ Gera við
+menu|Sélection ¦ Val
+retouche|Courbe ¦ Ferill
+motif|D’après ¦ Út frá
+pinceau|Feuille ¦ Laufblað
+pinceau|Étoile ¦ Stjarna
+pinceau|Carré ¦ Ferningur
+Glisse pour comparer ¦ Dragðu til að bera saman
+Rideau avant / après ¦ Fyrir / eftir-tjald
+Image importée ¦ Innflutt mynd
+La fenêtre d’export n’est pas encore prête. ¦ Útflutningsglugginn er ekki tilbúinn enn.
+Image téléchargée ; une copie est rangée dans les médias. ¦ Mynd sótt; afrit er geymt í miðlum.
+Aperçu de l’avant / après ¦ Forskoðun á fyrir / eftir
+Rideau vertical (avant à gauche) ¦ Lóðrétt tjald (fyrir vinstra megin)
+Rideau horizontal (avant en haut) ¦ Lárétt tjald (fyrir efst)
+L’une sous l’autre ¦ Hvor undir annarri
+Position du rideau ¦ Staðsetning tjaldsins
+ex. Mariage de Jean et Marie, 1925 ¦ t.d. Brúðkaup Jean og Marie, 1925
+Écrire « Avant » et « Après » ¦ Skrifa „Fyrir“ og „Eftir“
+Avant / après téléchargé ; une copie est rangée dans les médias. ¦ Fyrir / eftir sótt; afrit er geymt í miðlum.
+Garder appuyé pour voir l’original ¦ Haltu inni til að sjá frumritið
+👁 Avant / après ¦ 👁 Fyrir / eftir
+◧ Rideau ¦ ◧ Tjald
+Comparer avec un rideau qu’on glisse sur la photo ¦ Bera saman með tjaldi sem þú dregur yfir myndina
+Rideau vertical ou horizontal ¦ Lóðrétt eða lárétt tjald
+Exporter l’avant / après en image (côte à côte ou rideau, avec légende) ¦ Flytja fyrir / eftir út sem mynd (hlið við hlið eða tjald, með myndatexta)
+Rideau horizontal ¦ Lárétt tjald
+Rideau vertical ¦ Lóðrétt tjald
+De combien le cadre dépasse autour du visage : petit = visage serré, grand = épaules et un peu de fond. ¦ Hve langt ramminn nær út fyrir andlitið: lítið = þétt um andlitið, mikið = axlir og smá bakgrunnur.
+La hauteur des yeux dans le cadre, depuis le haut : la même pour tous les portraits, ils s’alignent quand on les met côte à côte. ¦ Hæð augnanna í rammanum, ofan frá: sú sama fyrir allar andlitsmyndir, svo þær liggja í línu hlið við hlið.
+Faible : le bord du pinceau est doux et se fond ; forte : le bord est net. ¦ Lítill: brún pensilsins er mjúk og rennur saman; mikill: brúnin er skörp.
+Filtres ¦ Síur
+✨ Filtres ¦ ✨ Síur
+Classique : comme avant. Perceptuel : un passage plus égal à l’œil, sans zone grise ni trop sombre au milieu. Par les teintes : en passant par les couleurs de l’arc-en-ciel. ¦ Hefðbundið: eins og áður. Skynjunarlegt: jafnari umskipti fyrir augað, án grás eða of dökks svæðis í miðjunni. Um litblæina: farið í gegnum liti regnbogans.
+Plus haut : des lignes plus pâles ou plus courtes sont aussi prises. Trop haut, des détails de la photo (cheveux, écriture) peuvent l’être : regarde le rouge. ¦ Hærra: daufari eða styttri línur eru líka teknar. Of hátt geta smáatriði myndarinnar (hár, skrift) líka verið tekin: fylgstu með því rauða.
+La force de toutes les étapes d’un coup : bas = une restauration discrète, haut = plus marquée (mais attention au « trop lisse »). ¦ Styrkur allra skrefanna í einu: lágt = hófleg viðgerð, hátt = sterkari (en gættu þín á „of sléttu“).
+Sens ¦ Átt
+De combien ¦ Hve mikið
+↻ Horaire ¦ ↻ Réttsælis
+↺ Antihoraire ¦ ↺ Rangsælis
+↻ Faire pivoter ¦ ↻ Snúa
+Garde le plus grand rectangle droit dans la photo tournée : plus de coins vides. C’est un recadrage : « Annuler le recadrage » le retire. ¦ Heldur stærsta beina rétthyrningnum í snúnu myndinni: engin tóm horn lengur. Þetta er skurður: „Afturkalla skurðinn“ fjarlægir hann.
+Enlever ¦ Fjarlægja
+Coché : le nombre de pixels change (l’image est recalculée). Décoché : seuls la résolution et la taille à l’impression changent, les pixels restent les mêmes. ¦ Hakað: fjöldi díla breytist (myndin er reiknuð upp á nýtt). Óhakað: aðeins upplausnin og prentstærðin breytast, dílarnir haldast þeir sömu.
+Coché : tu écris ce qu’on ajoute (ou enlève, avec un nombre négatif) autour de l’image. ¦ Hakað: þú skrifar hvað er bætt við (eða tekið af, með neikvæðri tölu) í kringum myndina.
+Avant d’agrandir, adoucit le grain et le bruit (les contours restent) : utile pour une photo scannée granuleuse. ¦ Fyrir stækkun mýkir það korn og suð (útlínurnar haldast): gagnlegt fyrir kornótta skannaða mynd.
+Pour un négatif photographié ou scanné : les clairs et les sombres s’échangent. ¦ Fyrir ljósmyndaða eða skannaða filmu (negatífu): ljóst og dökkt skipta um stað.
+Nom de la photo retouchée ¦ Heiti lagfærðu myndarinnar
+Le nom de la copie et des fichiers exportés ¦ Heiti afritsins og útfluttu skránna
+La retouche complète : calques, sélections, masques, texte, formes, filtres, projets ¦ Full lagfæring: lög, val, maskar, texti, form, síur, verkefni
+Débruitage, poussières, plis, contraste, netteté et colorisation d’un coup (dans la retouche complète) ¦ Suðhreinsun, ryk, brot, birtuskil, skerpa og litun í einu (í fullri lagfæringu)
+🎛️ Retouche complète ¦ 🎛️ Full lagfæring
+Retouche complète ¦ Full lagfæring
+Exporter : la photo retouchée (PNG, JPG, imprimer) ou l’avant / après ¦ Flytja út: lagfærðu myndina (PNG, JPG, prenta) eða fyrir / eftir
+Enregistrer et afficher cette version de la photo (l’original est gardé) ¦ Vista og sýna þessa útgáfu myndarinnar (frumritið er geymt)
+🖼 La photo retouchée (PNG, JPG, imprimer)… ¦ 🖼 Lagfærða myndin (PNG, JPG, prenta)…
+Barre des outils ¦ Verkfærastika
+Réglages : couleur, lumière, courbe ¦ Stillingar: litur, birta, ferill
+Correcteur de taches : clique sur une tache, une poussière, une rayure ¦ Blettalagfæring: smelltu á blett, rykkorn, rispu
+Tampon de duplication : {key} + clic sur l’endroit à recopier, puis peins sur la zone à couvrir ¦ Afritunarstimpill: {key} + smelltu á staðinn sem á að afrita, málaðu svo yfir svæðið sem á að hylja
+{key} + clic pour choisir l’endroit à recopier, puis peins sur la zone à couvrir. ¦ {key} + smelltu til að velja staðinn sem á að afrita, málaðu svo yfir svæðið sem á að hylja.
+Faire pivoter de 90° vers la gauche (antihoraire) ¦ Snúa 90° til vinstri (rangsælis)
+Pivoter à gauche ¦ Snúa til vinstri
+Faire pivoter de 90° vers la droite (horaire) ¦ Snúa 90° til hægri (réttsælis)
+Pivoter à droite ¦ Snúa til hægri
+Retouche complète : calques, sélections, masques, texte, filtres ¦ Full lagfæring: lög, val, maskar, texti, síur
+Les corrections en cours seront perdues. ¦ Leiðréttingarnar sem eru í gangi glatast.
+Passer à la retouche complète ? ¦ Skipta yfir í fulla lagfæringu?
+Passer à la retouche complète ¦ Skipta yfir í fulla lagfæringu
+Règle la couleur et la lumière à droite · garde « 👁 Avant / après » appuyé pour comparer ¦ Stilltu lit og birtu hægra megin · haltu „👁 Fyrir / eftir“ inni til að bera saman
+Clique sur une tache, une poussière ou une rayure : elle est remplacée par ce qui l’entoure. Pour une rayure, glisse le long. ¦ Smelltu á blett, rykkorn eða rispu: því er skipt út fyrir það sem er í kring. Fyrir rispu dregurðu eftir henni.
+Choisis d’abord l’endroit à recopier : Alt + clic (⌥ + clic sur Mac). ¦ Veldu fyrst staðinn sem á að afrita: Alt + smellur (⌥ + smellur á Mac).
+Versions de la photo ¦ Útgáfur myndarinnar
+Enregistrer sans l’afficher (gardée dans les versions) ¦ Vista án þess að sýna hana (geymd í útgáfunum)
+Copie séparée (un autre média, relié aux mêmes fiches) ¦ Sérstakt afrit (annar miðill, tengdur sömu spjöldum)
+Exporter la photo retouchée (PNG, JPG, imprimer)… ¦ Flytja lagfærðu myndina út (PNG, JPG, prenta)…
+Exporter l’avant / après… ¦ Flytja fyrir / eftir út…
+Restaurer en une fois… ¦ Gera við í einu…
+Pivoter de 90° à droite (horaire) ¦ Snúa 90° til hægri (réttsælis)
+Pivoter de 90° à gauche (antihoraire) ¦ Snúa 90° til vinstri (rangsælis)
+Avant / après en rideau ¦ Fyrir / eftir sem tjald
+La photo est ajoutée aux médias (sans fiche). Les réglages en cours sur cette photo-ci sont abandonnés. ¦ Myndinni er bætt við miðla (án spjalds). Stillingunum sem eru í gangi á þessari mynd er sleppt.
+Retoucher « {name} » à la place ? ¦ Lagfæra „{name}“ í staðinn?
+💧 Fluidité ¦ 💧 Fljótandi
+Fluidité ¦ Fljótandi
+Peins sur la photo pour la déformer, comme une pâte souple ¦ Málaðu á myndina til að aflaga hana, eins og mjúkt deig
+L’image suit la main ¦ Myndin fylgir hendinni
+Agrandit sous le pinceau (garder appuyé) ¦ Stækkar undir penslinum (haltu inni)
+Rétrécit sous le pinceau (garder appuyé) ¦ Minnkar undir penslinum (haltu inni)
+Fait tourner dans le sens des aiguilles d’une montre ¦ Snýr réttsælis
+Fait tourner dans l’autre sens ¦ Snýr í hina áttina
+Ramène peu à peu l’image d’origine ¦ Færir upprunalegu myndina smám saman til baka
+➡ Pousser ¦ ➡ Ýta
+⊕ Gonfler ¦ ⊕ Blása út
+⊖ Dégonfler ¦ ⊖ Draga saman
+Dégonfler ¦ Draga saman
+Gonfler ¦ Blása út
+Pousser ¦ Ýta
+↻ Tourbillon ¦ ↻ Hringiða
+↺ Tourbillon inverse ¦ ↺ Öfug hringiða
+Tourbillon inverse ¦ Öfug hringiða
+↩ Reconstruire ¦ ↩ Endurbyggja
+Reconstruire ¦ Endurbyggja
+Image trop grande pour la Fluidité. ¦ Myndin er of stór fyrir Fljótandi.
+↶ Annuler le coup ¦ ↶ Afturkalla strokuna
+✓ Appliquer (calque « Fluidité ») ¦ ✓ Nota (lagið „Fljótandi“)
+Rien n’a été déformé. ¦ Ekkert var aflagað.
+💧 Fluidité appliquée sur le calque « Fluidité » (la photo reste dessous : 👁 pour comparer). ¦ 💧 Fljótandi notað á lagið „Fljótandi“ (myndin er undir: 👁 til að bera saman).
+🪄 Gomme magique ¦ 🪄 Töfrastrokleður
+Clique sur le fond à rendre transparent (plusieurs clics s’ajoutent) ¦ Smelltu á bakgrunninn sem á að verða gegnsær (fleiri smellir bætast við)
+Zone voisine seulement (sinon : cette couleur partout) ¦ Aðeins aðliggjandi svæði (annars: þessi litur alls staðar)
+↶ Annuler le clic ¦ ↶ Afturkalla smellinn
+✓ Appliquer (masque de la photo) ¦ ✓ Nota (maski myndarinnar)
+La photo a déjà un masque : la gomme magique le remplace. ¦ Myndin er þegar með maska: töfrastrokleðrið kemur í hans stað.
+Remplacer le masque de la photo ? ¦ Skipta út maska myndarinnar?
+🪄 Fond rendu transparent (masque de la photo, à retoucher au pinceau) : l’image s’enregistre en PNG. ¦ 🪄 Bakgrunnur gerður gegnsær (maski myndarinnar, má lagfæra með penslinum): myndin vistast sem PNG.
+Masque de « {name} » ¦ Maski „{name}“
+Il n’y a pas encore de masque : détoure (✂️), gomme le fond (🪄) ou ajoute un masque à un calque, puis affine son bord. ¦ Það er enginn maski enn: klipptu út (✂️), strokaðu út bakgrunninn (🪄) eða bættu maska við lag, fínstilltu svo brúnina.
+✨ Affiner le bord ¦ ✨ Fínstilla brúnina
+Décaler le bord ¦ Hliðra brúninni
+Voir le masque seul (blanc : gardé) ¦ Sjá aðeins maskann (hvítt: haldið)
+Bord du masque affiné ¦ Brún maskans fínstillt
+✨ Bord affiné (↶ pour revenir ; le pinceau corrige le reste). ¦ ✨ Brún fínstillt (↶ til að fara til baka; pensillinn lagar restina).
+Lissage du bord ¦ Jöfnun brúnar
+Contraste du bord ¦ Birtuskil brúnar
+Image trop grande ({w} × {h} points) : réduis la taille des photos. ¦ Myndin er of stór ({w} × {h} dílar): minnkaðu stærð myndanna.
+Recherche… ({i}/{total}) ¦ Leita… ({i}/{total})
+« {name} » : décalage {dx} × {dy} points, rotation {rot}°, ressemblance {pct} %. ¦ „{name}“: hliðrun {dx} × {dy} dílar, snúningur {rot}°, líkindi {pct} %.
+Pas de partie commune sûre pour {names} : place-la à la main (glisser, flèches ; « Mode différence » pour vérifier). ¦ Enginn öruggur sameiginlegur hluti fyrir {names}: settu hana á sinn stað í höndunum (draga, örvar; „Mismunarhamur“ til að athuga).
+Photos alignées : vérifie (glisser, flèches pour ajuster). « Fondre les raccords » adoucit la jonction à l’enregistrement. ¦ Myndir samstilltar: athugaðu (draga, örvar til að fínstilla). „Mýkja samskeytin“ mýkir samskeytin við vistun.
+Photo alignée : vérifie (glisser, flèches pour ajuster). « Fondre les raccords » adoucit la jonction à l’enregistrement. ¦ Mynd samstillt: athugaðu (draga, örvar til að fínstilla). „Mýkja samskeytin“ mýkir samskeytin við vistun.
+Image assemblée enregistrée, rattachée aux mêmes fiches que « {name} ». Les photos d’origine restent. ¦ Samsett mynd vistuð, tengd sömu spjöldum og „{name}“. Upprunalegu myndirnar haldast.
+Titre de l’image assemblée ¦ Titill samsettu myndarinnar
+Le titre de l’image assemblée (et le nom des fichiers exportés) ¦ Titill samsettu myndarinnar (og heiti útfluttu skránna)
+L’image assemblée : PNG, JPG ou imprimer ¦ Samsetta myndin: PNG, JPG eða prenta
+Enregistrer l’image assemblée dans les médias, rattachée aux mêmes fiches que la première photo de la base ¦ Vista samsettu myndina í miðlum, tengda sömu spjöldum og fyrsta myndin úr gagnagrunninum
+Clique une photo pour la choisir, glisse pour la déplacer · Maj + molette : taille · Alt + molette : rotation · molette : zoom · flèches : 1 px (Maj : 10 px) · glisse ici une photo de l’ordinateur pour l’ajouter ¦ Smelltu á mynd til að velja hana, dragðu til að færa hana · Shift + hjól: stærð · Alt + hjól: snúningur · hjól: aðdráttur · örvar: 1 px (Shift: 10 px) · dragðu mynd úr tölvunni hingað til að bæta henni við
+Fond blanc (sinon transparent en PNG) ¦ Hvítur bakgrunnur (annars gegnsær í PNG)
+Coché : le fond autour des photos est blanc. Décoché, il reste transparent (seulement en PNG ; le JPG met toujours du blanc). ¦ Hakað: bakgrunnurinn í kringum myndirnar er hvítur. Óhakað helst hann gegnsær (aðeins í PNG; JPG notar alltaf hvítt).
+Ce qui se superpose bien devient noir : idéal pour aligner deux photos du même endroit ¦ Það sem fellur vel saman verður svart: tilvalið til að samstilla tvær myndir af sama stað
+Les parties identiques des deux photos deviennent noires : quand l’écriture disparaît presque, elles sont parfaitement alignées. ¦ Eins hlutar myndanna tveggja verða svartir: þegar skriftin hverfur næstum eru þær fullkomlega samstilltar.
+Mode différence ¦ Mismunarhamur
+Boutons des photos ¦ Hnappar myndanna
+Panorama, page photographiée en deux fois : chaque photo est posée sur la précédente là où elles se recouvrent (décalage, petite rotation) ¦ Víðmynd, síða ljósmynduð í tvennu lagi: hver mynd er lögð á þá fyrri þar sem þær skarast (hliðrun, lítill snúningur)
+🪄 Aligner tout seul ¦ 🪄 Samstilla sjálfkrafa
+Image enregistrée ¦ Vistuð mynd
+JPEG (léger) ¦ JPEG (létt)
+PNG (sans perte) ¦ PNG (án taps)
+Fondre les raccords ¦ Mýkja samskeytin
+Là où deux photos se recouvrent, le bord de celle du dessus s’efface en douceur : pas de marche visible au raccord. ¦ Þar sem tvær myndir skarast dofnar brún efri myndarinnar mjúklega: enginn sýnilegur stallur við samskeytin.
+Largeur du fondu ¦ Breidd mýkingar
+Rogner aux parties couvertes (sans coins vides) ¦ Skera að þöktu hlutunum (án tómra horna)
+Garde le plus grand rectangle entièrement couvert par les photos : plus de coins blancs autour d’un panorama. ¦ Heldur stærsta rétthyrningnum sem myndirnar þekja alveg: engin hvít horn lengur í kringum víðmynd.
+L’assemblage non enregistré sera perdu. ¦ Samsetningin sem er ekki vistuð glatast.
+Fermer sans enregistrer l’assemblage ? ¦ Loka án þess að vista samsetninguna?
+Mettre devant ¦ Setja fremst
+Mettre derrière ¦ Setja aftast
+Aucune photo à assembler pour l’instant ¦ Engar myndir til að setja saman enn
+« ＋ Photos », ou glisse une photo de l’ordinateur sur le plan de travail. ¦ „＋ Myndir“, eða dragðu mynd úr tölvunni á vinnuflötinn.
+＋ Photos ¦ ＋ Myndir
+Clique une photo pour la régler. ¦ Smelltu á mynd til að stilla hana.
+La taille de la photo par rapport à ses vrais points : pour mettre deux photos à la même échelle. ¦ Stærð myndarinnar miðað við raunverulega díla hennar: til að setja tvær myndir í sama mælikvarða.
+À moitié transparente, la photo du dessus laisse voir celle du dessous : on aligne les écritures. ¦ Hálfgegnsæ sýnir efri myndin þá neðri í gegn: þú lætur skriftina falla saman.
+À moitié transparente ¦ Hálfgegnsæ
+Pour mettre deux photos à la même échelle : rends celle du dessus à moitié transparente (ou coche « Mode différence »), puis ajuste sa taille et sa rotation jusqu’à ce que les écritures se superposent. ¦ Til að setja tvær myndir í sama mælikvarða: gerðu þá efri hálfgegnsæja (eða hakaðu við „Mismunarhamur“), stilltu svo stærð hennar og snúning þar til skriftin fellur saman.
+Opaque ¦ Ógegnsæ
+Aucune photo visible. ¦ Engin sýnileg mynd.
+Ajoute au moins deux photos qui se recouvrent (« ＋ Photos »). ¦ Bættu við að minnsta kosti tveimur myndum sem skarast („＋ Myndir“).
+Le navigateur n’a pas pu créer l’image. ¦ Vafrinn gat ekki búið til myndina.
+Pour enregistrer dans la base, l’une des photos doit venir de la base (sinon : ⤓ Télécharger). ¦ Til að vista í gagnagrunninn verður ein myndanna að koma úr gagnagrunninum (annars: ⤓ Sækja).
+Création de l’image… ¦ Bý til myndina…
+ASSEMBLER ¦ SETJA SAMAN
+ce n’est pas un fichier PSD ¦ þetta er ekki PSD-skrá
+les très grands PSD (PSB) ne sont pas lus ¦ mjög stórar PSD-skrár (PSB) eru ekki lesnar
+version de PSD inconnue ¦ óþekkt PSD-útgáfa
+profondeur {n} bits non lue (seulement 8 bits) ¦ {n} bita dýpt ekki lesin (aðeins 8 bita)
+seuls les PSD en RVB ou en niveaux de gris sont lus ¦ aðeins PSD-skrár í RGB eða grátónum eru lesnar
+image trop grande ¦ mynd of stór
+compression ZIP non lue ¦ ZIP-þjöppun ekki lesin
+=🗂 PSD prêt : {n} calques, {w} × {h} px (les calques de réglage sont dans l’image aplatie). ¦ 🗂 PSD tilbúin: {n} lag, {w} × {h} px (stillingalögin eru í flötu myndinni).|🗂 PSD tilbúin: {n} lög, {w} × {h} px (stillingalögin eru í flötu myndinni).
+=🗂 PSD prêt : {n} calque, {w} × {h} px (les calques de réglage sont dans l’image aplatie). ¦ 🗂 PSD tilbúin: {n} lag, {w} × {h} px (stillingalögin eru í flötu myndinni).|🗂 PSD tilbúin: {n} lög, {w} × {h} px (stillingalögin eru í flötu myndinni).
+PSD illisible : {err}. ¦ Ólæsileg PSD: {err}.
+Calque PSD ¦ PSD-lag
+PSD importé : {file} ¦ PSD flutt inn: {file}
+=🗂 {n} calques importés de « {file} » (proportions différentes : ajusté à la photo). ¦ 🗂 {n} lag flutt inn úr „{file}“ (önnur hlutföll: aðlagað að myndinni).|🗂 {n} lög flutt inn úr „{file}“ (önnur hlutföll: aðlöguð að myndinni).
+=🗂 {n} calques importés de « {file} ». ¦ 🗂 {n} lag flutt inn úr „{file}“.|🗂 {n} lög flutt inn úr „{file}“.
+=🗂 {n} calque importé de « {file} » (proportions différentes : ajusté à la photo). ¦ 🗂 {n} lag flutt inn úr „{file}“ (önnur hlutföll: aðlagað að myndinni).|🗂 {n} lög flutt inn úr „{file}“ (önnur hlutföll: aðlöguð að myndinni).
+=🗂 {n} calque importé de « {file} ». ¦ 🗂 {n} lag flutt inn úr „{file}“.|🗂 {n} lög flutt inn úr „{file}“.
+Cocher pour comparer ¦ Hakaðu við til að bera saman
+Coche deux versions pour les comparer. ¦ Hakaðu við tvær útgáfur til að bera þær saman.
+Plus ancien ¦ Eldra
+léger ¦ létt
+Taille des vignettes ¦ Stærð smámynda
+Utiliser ces images ¦ Nota þessar myndir
+Chercher : titre, cote, personne, lieu, année ¦ Leita: titill, safnmark, einstaklingur, staður, ár
+Titre, cote, personne, lieu, année… ¦ Titill, safnmark, einstaklingur, staður, ár…
+↑ ↓ ← → · Espace : cocher · Entrée : valider ¦ ↑ ↓ ← → · Bil: haka við · Enter: staðfesta
+↑ ↓ ← → · Entrée : valider ¦ ↑ ↓ ← → · Enter: staðfesta
+Retouche ¦ Lagfæring
+RETOUCHE ¦ LAGFÆRING
+photo|Légende ¦ Myndatexti
+Propriétés ¦ Eiginleikar
+Préréglage ¦ Forstilling
+Aucun. ¦ Engin.
+trop petite pour imprimer en A5 ¦ of lítil til að prenta í A5
+assez grande pour imprimer en A5 ¦ nógu stór til að prenta í A5
+Écran 16:9 (1920 × 1080) ¦ Skjár 16:9 (1920 × 1080)
+Écran 4:3 (1600 × 1200) ¦ Skjár 4:3 (1600 × 1200)
+Carré 1:1 (1080 × 1080) ¦ Ferningur 1:1 (1080 × 1080)
+Vertical 9:16 (1080 × 1920) ¦ Lóðrétt 9:16 (1080 × 1920)
+photo|Exposition ¦ Lýsing
+photo|Luminosité ¦ Birtustig
+Colorisation : {what} ¦ Litun: {what}
+{what} oui ¦ {what} á
+{what} non ¦ {what} af
+Courbe {what} ¦ Ferill {what}
+{layer} verrouillé ¦ {layer} læst
+{layer} déverrouillé ¦ {layer} aflæst
+« {name} » seulement sur l’élément dessous ¦ „{name}“ aðeins á hlutnum fyrir neðan
+« {name} » sur tout ce qui est dessous ¦ „{name}“ á öllu fyrir neðan
+Teinte/Saturation : {what} ¦ Litblær/mettun: {what}
+{dpi} ppp ¦ {dpi} pát
+Envoi ({w} × {h} points, {size} Mo)… ¦ Sendi ({w} × {h} dílar, {size} MB)…
+Barre du haut (groupes) ¦ Efsta stika (hópar)
+Les outils ¦ Verkfærin
+Options des outils (pinceau, texte…) ¦ Valkostir verkfæra (pensill, texti…)
+Colonne d’outils ¦ Verkfæradálkur
+Panneau Réglages ¦ Stillingaspjald
+Préréglages ¦ Forstillingar
+Import des réglages indisponible. ¦ Innflutningur stillinga er ekki tiltækur.
