@@ -49,7 +49,7 @@ const BASE_ZONES = ['cadre', 'composants', 'colonnes', 'premier', 'touches', 're
         assert.ok(new RegExp(`app-i18n\\.js\\?v=${I.VERSION}"`).test(fs.readFileSync(path.join(root, 'index.php'), 'utf8')), '?v= de app-i18n.js = VERSION');
         const sel = I.selectHtml(); assert.ok(/🇸🇰 Slovenčina \(SK\)/.test(sel) && /🇳🇴 Norsk \(bokmål\) \(NB\)/.test(sel), sel);
         const faq = F.entries().find(e => e.q === 'Changer la langue de l’app');
-        assert.ok(/Treize langues : .*Dansk, Slovenčina, Norsk \(bokmål\) ;/.test(faq.a), 'FAQ française : « Treize langues »');
+        assert.ok(/Vingt-huit langues : .*Dansk, Slovenčina, Norsk \(bokmål\), .*Tiếng Việt, Bahasa Indonesia ;/.test(faq.a), 'FAQ française : « Vingt-huit langues »');
         const st = F.status();
         for (const c of [...F.LANGS, 'cs', 'sv', 'da']) assert.ok(!st[c].stale.includes(faq.id) && !st[c].missing.includes(faq.id), `${c} : la question « Changer la langue » est à jour`);
     });
