@@ -12,10 +12,13 @@
  *     one|few|other (ro : 1 | 0 et 2 à 19 | 20 et plus, « 20 de persoane ») ; one|other aussi pour fi et hu (hu : le nom reste
  *     au singulier après un nombre, « 5 személy », les deux formes sont donc souvent les mêmes) ; one|few|other (hr : 1, 21… |
  *     2 à 4, 22 à 24… | 0, 5 à 20…) ; one|two|few|other (sl : 1, 101… | 2, 102… | 3 et 4, 103, 104… | 0, 5 et plus) ;
+ *     one|few|other (lt : 1, 21… sauf 11 | 2 à 9, 22 à 29… sauf 12 à 19 | 0, 10 à 20, 30… ; les nombres à virgule prennent
+ *     la forme other) ; zero|one|other (lv : 0, 10 à 20, 30… | 1, 21… sauf 11 | le reste) ; one|other (et) ;
  *   - ligne vide ou commençant par « # » : ignorée. Variables {n}, {x} : les mêmes dans toutes les langues.
  * Les langues ajoutées ensuite ont leurs propres fichiers, un par zone, dans un sous-dossier de assets/i18n/src/ :
  * nord/<zone>.tsv (1re ligne « fr ¦ cs ¦ sv ¦ da »), nord2/<zone>.tsv (1re ligne « fr ¦ sk ¦ nb »), nord3/<zone>.tsv
- * (1re ligne « fr ¦ ro »), nord4/<zone>.tsv (1re ligne « fr ¦ fi ¦ hu ») et nord5/<zone>.tsv (1re ligne « fr ¦ hr ¦ sl »), mêmes clés
+ * (1re ligne « fr ¦ ro »), nord4/<zone>.tsv (1re ligne « fr ¦ fi ¦ hu ») , nord5/<zone>.tsv (1re ligne « fr ¦ hr ¦ sl ») et nord6/<zone>.tsv (1re ligne « fr ¦ lt ¦ lv ¦ et »),
+ * mêmes clés
  * (y compris « ctx|… » et « =mot ») que assets/i18n/src/<zone>.tsv : ainsi on les traduit sans toucher aux fichiers des
  * 7 premières langues. Tout sous-dossier de src/ est lu ; chaque fichier dit ses langues dans sa 1re ligne : toutes les
  * sortes de fichiers sont fusionnées, clé par clé.
@@ -29,10 +32,10 @@ const ROOT = path.join(__dirname, '..');
 const SRC = path.join(ROOT, 'assets/i18n/src');
 const NORD = path.join(SRC, 'nord');
 const CORE = ['en', 'es', 'de', 'it', 'pt', 'pl', 'nl'];  // traduites en entier : une clé absente est une erreur
-const NEW_LANGS = ['cs', 'sv', 'da', 'sk', 'nb', 'ro', 'fi', 'hu', 'hr', 'sl']; // en cours de traduction : une clé absente → repli sur le français
+const NEW_LANGS = ['cs', 'sv', 'da', 'sk', 'nb', 'ro', 'fi', 'hu', 'hr', 'sl', 'lt', 'lv', 'et']; // en cours de traduction : une clé absente → repli sur le français
 const LANGS = [...CORE, ...NEW_LANGS];
-const NAMES = {en: 'English', es: 'Español', de: 'Deutsch', it: 'Italiano', pt: 'Português', pl: 'Polski', nl: 'Nederlands', cs: 'Čeština', sv: 'Svenska', da: 'Dansk', sk: 'Slovenčina', nb: 'Norsk (bokmål)', ro: 'Română', fi: 'Suomi', hu: 'Magyar', hr: 'Hrvatski', sl: 'Slovenščina'};
-const FORMS = {pl: ['one', 'few', 'many'], cs: ['one', 'few', 'many'], sk: ['one', 'few', 'many'], ro: ['one', 'few', 'other'], hr: ['one', 'few', 'other'], sl: ['one', 'two', 'few', 'other'], def: ['one', 'other']};
+const NAMES = {en: 'English', es: 'Español', de: 'Deutsch', it: 'Italiano', pt: 'Português', pl: 'Polski', nl: 'Nederlands', cs: 'Čeština', sv: 'Svenska', da: 'Dansk', sk: 'Slovenčina', nb: 'Norsk (bokmål)', ro: 'Română', fi: 'Suomi', hu: 'Magyar', hr: 'Hrvatski', sl: 'Slovenščina', lt: 'Lietuvių', lv: 'Latviešu', et: 'Eesti'};
+const FORMS = {pl: ['one', 'few', 'many'], cs: ['one', 'few', 'many'], sk: ['one', 'few', 'many'], ro: ['one', 'few', 'other'], hr: ['one', 'few', 'other'], sl: ['one', 'two', 'few', 'other'], lt: ['one', 'few', 'other'], lv: ['zero', 'one', 'other'], def: ['one', 'other']};
 
 function readFile(file, label) {
     const out = [];
@@ -107,6 +110,7 @@ function forms(code, v) {
     names.forEach((n, i) => { o[n] = parts[i] || parts[parts.length - 1]; });
     if (code === 'pl') o.other = o.few;
     else if (code === 'cs' || code === 'sk') { o.other = o.many; o.many = o.few; } // Intl (cs, sk) : 5 et plus → « other », 1,5 → « many » (comme « 2 à 4 »)
+    else if (code === 'lt') o.many = o.other; // Intl (lt) : 1,5 → « many » : la forme other
     else if (!o.other) o.other = o.one;
     if (code === 'pt' || code === 'es' || code === 'it') o.many = o.other; // « 1 000 000 de… » : Intl donne « many »
     if (code === 'fr') o.many = o.other;

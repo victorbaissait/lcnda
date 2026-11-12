@@ -832,6 +832,101 @@ En croate, *kartica* = onglet : une fiche est donc un *zapis* (aussi en slovène
 | ordinateur | računalo | računalnik |
 | Traduction faite par une IA | Prijevod je napravila umjetna inteligencija | Prevod je naredila umetna inteligenca |
 
+## Langues ajoutées ensuite : lituanien (lt), letton (lv), estonien (et)
+
+Fichiers à part : `assets/i18n/src/nord6/<zone>.tsv` (1re ligne `fr ¦ lt ¦ lv ¦ et`, même clé que `<zone>.tsv`).
+On traduit **depuis le français** (`node scripts/i18n-todo.js lt,lv,et <zone>` montre l’anglais et l’allemand, plus le polonais
+en aide pour le lituanien et le letton, et le finnois, langue proche, pour l’estonien).
+Ton : on tutoie, phrases courtes et simples — lituanien (*tu*) : impératif 2e personne du singulier (« Pasirink », « Spustelėk »,
+« Bandyk dar kartą ») ; boutons à l’infinitif (« Išsaugoti », « Ištrinti », « Pridėti »). Letton (*tu*) : impératif 2e personne
+du singulier (« Izvēlies », « Noklikšķini », « Mēģini vēlreiz ») ; boutons à l’infinitif (« Saglabāt », « Dzēst », « Pievienot »).
+Estonien (*sina*) : impératif 2e personne du singulier, qui sert aussi pour les boutons (« Vali », « Klõpsa », « Salvesta »,
+« Kustuta », « Lisa »). Guillemets „…“ dans les trois langues.
+**Pluriels — ordre des formes dans les `.tsv` (celui de `FORMS` dans `scripts/i18n-build.js`)** :
+- lituanien `one|few|other` : `asmuo|asmenys|asmenų` → « 1 asmuo », « 21 asmuo », « 2 asmenys », « 9 asmenys », « 0 asmenų »,
+  « 10 asmenų », « 11 asmenų », « 20 asmenų ». Un nombre à virgule (Intl : « many ») prend la forme `other`.
+- letton `zero|one|other`, **dans cet ordre** : `personas|persona|personas` → « 0 personas », « 10 personas », « 1 persona »,
+  « 21 persona », « 2 personas ». La forme « zéro » (0, 10 à 20, 30…) est d’ordinaire la même que la forme « autres ».
+- estonien `one|other` : `isik|isikut` (partitif singulier après un nombre) → « 1 isik », « 2 isikut », « 21 isikut ».
+Un nombre dans une phrase sans pluriel (« {n} éléments ») s’écrit plutôt « Elementų: {n} » / « Elementi: {n} » / « Elemente: {n} »
+pour ne pas casser l’accord. Années : lt « 1582 m. », lv « 1582. gadā », et « aastal 1582 » ; siècles : lt « XVIII a. », lv
+« 18. gs. », et « 18. sajand ». Les exemples de dates d’actes restent en français, lisibles par la lecture C4 (« 12/03/1790 »,
+« 12 mars 1790 », « 9 novembre 1799 »), jamais un mois lituanien, letton ou estonien. Les mots des actes cités (« à l’heure de
+vêpres », « né », « décédée »…) restent en français, avec l’explication autour.
+« Fiche » d’une personne : lt *kortelė*, lv *kartīte*, et *kaart* (aussi pour l’affichage « Liste | Fiches ») ; l’onglet du menu
+se dit lt *kortelė* aussi (contexte), lv *cilne*, et *vahekaart*. « 📒 Fiches » (notes de sujets) : lt *Užrašai*, lv *Piezīmes*,
+et *Märkmed*.
+
+| Français | Lietuvių | Latviešu | Eesti |
+|---|---|---|---|
+| Sosa (numéro Sosa) | Sosa | Sosa | Sosa |
+| fiche (d’une personne) | kortelė | kartīte | kaart |
+| 📒 Fiches (sujets) | 📒 Užrašai | 📒 Piezīmes | 📒 Märkmed |
+| généalogie (la base de la personne) | genealogija | ģenealoģija | sugupuu |
+| base (de données) | bazė | datubāze | andmebaas |
+| acte | dokumentas (metrikų įrašas) | dokuments (metriku ieraksts) | dokument (meetrikakanne) |
+| baptême / naissance | krikštas / gimimas | kristības / dzimšana | ristimine / sünd |
+| mariage | santuoka (vestuvės) | laulība (kāzas) | abielu (pulm) |
+| décès | mirtis | nāve | surm |
+| parrain / marraine | krikštatėvis / krikštamotė | krusttēvs / krustmāte | ristiisa / ristiema |
+| témoin / déclarant | liudytojas / pranešėjas | liecinieks / ziņotājs | tunnistaja / teataja |
+| ascendants / descendants | protėviai / palikuonys | senči / pēcnācēji | esivanemad / järeltulijad |
+| branche | šaka | atzars | haru |
+| génération | karta | paaudze | põlvkond |
+| implexe | implexas | implekss | implex |
+| recensement | surašymas | tautas skaitīšana | rahvaloendus |
+| inventaire après décès | turto aprašas po mirties | mantas saraksts pēc nāves | pärandvara inventar |
+| dépouillement | įrašų rodyklė | ierakstu rādītājs | kirjete register |
+| cote (d’archive) | šifras | šifrs | säilikutähis |
+| mur de brique | aklavietė | strupceļš | ummik |
+| cousinade | giminės susitikimas | dzimtas salidojums | suguvõsa kokkutulek |
+| commune / ville / village | komuna / miestas / kaimas | komūna / pilsēta / ciems | kommuun / linn / küla |
+| paroisse | parapija | draudze | kihelkond |
+| catalogue raisonné | katalogas raisonné | catalogue raisonné | catalogue raisonné |
+| Tableau de bord | Prietaisų skydelis | Informācijas panelis | Töölaud |
+| widget | valdiklis | logrīks | vidin |
+| Personnes | Asmenys | Personas | Isikud |
+| Graphiques / Diagrammes | Diagramos / Schemos | Diagrammas / Shēmas | Graafikud / Diagrammid |
+| Carte | Žemėlapis | Karte | Kaart |
+| Listes | Sąrašai | Saraksti | Loendid |
+| Chronologie | Chronologija | Hronoloģija | Ajajoon |
+| Recherche | Tyrimai | Pētniecība | Uurimine |
+| Enquêtes | Tyrimai | Izpētes | Uurimused |
+| Trésors | Lobiai | Dārgumi | Aarded |
+| Réglages | Nustatymai | Iestatījumi | Seaded |
+| Apparence | Išvaizda | Izskats | Välimus |
+| Médias | Medija | Mediji | Meedia |
+| Source | Šaltinis | Avots | Allikas |
+| Étiquette | Žyma | Birka | Silt |
+| Battue | Šukavimas | Ķemmēšana | Läbikamm |
+| Mode simple | Paprastas režimas | Vienkāršais režīms | Lihtne režiim |
+| Mode consultation | Peržiūros režimas | Skatīšanās režīms | Vaatamisrežiim |
+| Sauvegarde | Atsarginė kopija | Rezerves kopija | Varukoopia |
+| Enregistrer / ✓ Enregistré | Išsaugoti / ✓ Išsaugota | Saglabāt / ✓ Saglabāts | Salvesta / ✓ Salvestatud |
+| Annuler (bouton) | Atšaukti | Atcelt | Tühista |
+| ↶ Annuler / ↷ Rétablir | ↶ Anuliuoti / ↷ Grąžinti | ↶ Atsaukt / ↷ Atcelt atsaukšanu | ↶ Võta tagasi / ↷ Tee uuesti |
+| Fermer | Uždaryti | Aizvērt | Sulge |
+| Supprimer | Ištrinti | Dzēst | Kustuta |
+| Retirer (détacher) | Pašalinti | Noņemt | Eemalda |
+| Modifier | Redaguoti | Rediģēt | Muuda |
+| Créer / Ajouter | Sukurti / Pridėti | Izveidot / Pievienot | Loo / Lisa |
+| Relier | Susieti | Sasaistīt | Seo |
+| ↺ Remettre comme au départ | ↺ Atkurti pradinius | ↺ Atjaunot sākotnējo | ↺ Taasta algne |
+| Réessayer | Bandyti dar kartą | Mēģināt vēlreiz | Proovi uuesti |
+| ⤒ Importer / ⤓ Exporter | ⤒ Importuoti / ⤓ Eksportuoti | ⤒ Importēt / ⤓ Eksportēt | ⤒ Impordi / ⤓ Ekspordi |
+| 🖨 Imprimer | 🖨 Spausdinti | 🖨 Drukāt | 🖨 Prindi |
+| Chercher / Filtrer ▾ / Trier : | Ieškoti / Filtruoti ▾ / Rūšiuoti: | Meklēt / Filtrēt ▾ / Kārtot: | Otsi / Filtreeri ▾ / Sorteeri: |
+| ✓ Compris : | ✓ Suprasta: | ✓ Saprasts: | ✓ Aru saadud: |
+| Aimanter | Pritraukti | Piesaistīt | Haaku |
+| Liste \| Fiches (affichage) | Sąrašas \| Kortelės | Saraksts \| Kartītes | Loend \| Kaardid |
+| onglet | kortelė | cilne | vahekaart |
+| Tableur / Traitement de texte | Skaičiuoklė / Teksto rengyklė | Izklājlapa / Teksta apstrāde | Tabelarvutus / Tekstitöötlus |
+| Mise en page | Maketavimas | Makets | Küljendus |
+| ordinateur | kompiuteris | dators | arvuti |
+| app | programėlė | lietotne | rakendus |
+| FAQ | DUK | BUJ | KKK |
+| Traduction faite par une IA | Išvertė DI | Tulkojis MI | Tõlkinud tehisintellekt |
+
 ## Zone « tresors-ui » (étiquettes et fenêtres des pages Trésors)
 
 | Français | English | Español | Deutsch | Italiano | Português | Polski | Nederlands |
